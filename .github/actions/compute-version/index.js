@@ -7,7 +7,7 @@ try {
 		switch (true) {
 			case tag.indexOf('alpha') !== -1:
 				return 'alpha';
-			case tag.indexOf(beta) !== -1:
+			case tag.indexOf('beta') !== -1:
 				return 'beta';
 			case tag.indexOf('canary') !== -1:
 				return 'canary';
