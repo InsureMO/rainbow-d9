@@ -2,8 +2,9 @@ const core = require('@actions/core');
 const fs = require('fs');
 
 try {
+	const moduleName = core.getInput('module-name');
 	const version = core.getInput('target-version');
-	const packageFile = `./package.json`;
+	const packageFile = `./${moduleName}/package.json`;
 	const content = fs.readFileSync(packageFile, 'utf8');
 	const packageJson = JSON.parse(content);
 	core.notice(`Version updated to ${version} from ${packageJson.version}.`);

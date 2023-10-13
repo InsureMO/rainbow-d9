@@ -2,6 +2,9 @@ name: Change Node Version
 description: Github actions for change version of nodejs project
 author: 'brad.wu <brad.wu@ebaotec.com>'
 inputs:
+  module-name:
+    description: Module Name
+    required: true
   target-version:
     description: Target Version
     required: true
