@@ -13,13 +13,12 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/InsureMO/rainbow-d9-n1.git"
+		"url": "git+https://github.com/InsureMO/rainbow-d9.git"
 	},
 	"license": "MIT",
 	"bugs": {
-		"url": "https://github.com/InsureMO/rainbow-d9-n1/issues"
+		"url": "https://github.com/InsureMO/rainbow-d9/issues"
 	},
-	"homepage": "https://github.com/InsureMO/rainbow-d9-n1#readme",
 	"author": "Rainbow Team",
 	"dependencies": {
 		"buffer": "^6.0.3",

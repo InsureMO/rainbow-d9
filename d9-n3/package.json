@@ -13,10 +13,13 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "https://oss.ebaotech.com/d9/d9-n3.git"
+		"url": "git+https://github.com/InsureMO/rainbow-d9.git"
 	},
-	"license": "UNLICENSED",
-	"private": true,
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/InsureMO/rainbow-d9/issues"
+	},
+	"author": "Rainbow Team",
 	"dependencies": {
 		"@d9/n1": "^0.1.0",
 		"mdast": "^3.0.0",
