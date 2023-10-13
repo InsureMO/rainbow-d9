@@ -87,6 +87,8 @@ export const DropdownStickSVG = styled.svg`
 `;
 
 export const DropdownStickCaret = () => {
+	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+	// @ts-ignore
 	return <DropdownStickSVG xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" data-w="d9-dropdown-caret">
 		<path
 			d="M137.4 374.6c12.5 12.5 32.8 12.5 45.3 0l128-128c9.2-9.2 11.9-22.9 6.9-34.9s-16.6-19.8-29.6-19.8L32 192c-12.9 0-24.6 7.8-29.6 19.8s-2.2 25.7 6.9 34.9l128 128z" />
@@ -94,6 +96,8 @@ export const DropdownStickCaret = () => {
 };
 
 export const DropdownStickClear = () => {
+	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+	// @ts-ignore
 	return <DropdownStickSVG xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" data-w="d9-dropdown-clear">
 		<path
 			d="M310.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 210.7 54.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L114.7 256 9.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L160 301.3 265.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L205.3 256 310.6 150.6z" />
@@ -143,10 +147,14 @@ export const DropdownStick = (props: {
 	};
 
 	if (valueAssigned && clearable) {
+		// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+		// @ts-ignore
 		return <DropdownStickContainer data-clear={true} data-disabled={disabled} onClick={onClearClicked}>
 			<DropdownStickClear />
 		</DropdownStickContainer>;
 	} else {
+		// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+		// @ts-ignore
 		return <DropdownStickContainer data-disabled={disabled}><DropdownStickCaret /></DropdownStickContainer>;
 	}
 };
@@ -210,6 +218,8 @@ export interface DropdownPopupProps extends DropdownPopupState {
 export const DropdownPopup = forwardRef((props: DropdownPopupProps, ref: ForwardedRef<HTMLDivElement>) => {
 	const {shown, vScroll, hScroll, children, ...state} = props;
 
+	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+	// @ts-ignore
 	return <DropdownPopupContainer shown={shown} vScroll={vScroll} hScroll={hScroll} {...state} ref={ref}>
 		{children}
 	</DropdownPopupContainer>;
