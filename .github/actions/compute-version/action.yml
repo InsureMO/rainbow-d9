@@ -1,0 +1,10 @@
+name: Change Node Version
+description: Github actions for change version of poetry project
+author: 'brad.wu <brad.wu@ebaotec.com>'
+inputs:
+  tag:
+    description: Tag name
+    required: true
+runs:
+  using: node16
+  main: index.js

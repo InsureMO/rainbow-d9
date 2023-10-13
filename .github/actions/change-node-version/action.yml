@@ -1,0 +1,10 @@
+name: Change Node Version
+description: Github actions for change version of nodejs project
+author: 'brad.wu <brad.wu@ebaotec.com>'
+inputs:
+  target-version:
+    description: Target Version
+    required: true
+runs:
+  using: node16
+  main: index.js

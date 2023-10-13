@@ -1,0 +1,56 @@
+# This workflow will run tests using node and then publish a package to GitHub Packages when a release is created
+# For more information see: https://docs.github.com/en/actions/publishing-packages/publishing-nodejs-packages
+
+name: Node.js Package
+
+on:
+  workflow_call:
+    secrets:
+      NPM_TOKEN:
+        description: NPM token
+        required: true
+    inputs:
+      branch:
+        description: Pre-release branch
+        required: true
+        type: string
+      version:
+        description: Target version
+        required: true
+        type: string
+      lane:
+        description: Tag Lane of NPM
+        required: false
+        type: string
+
+jobs:
+  publish-npm:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Echo inputs
+        run: |
+          echo "Pre-release branch: [${{ inputs.branch }}]"
+          echo "Target version: [${{ inputs.version }}]"
+          echo "Tag lane of NPM: [${{ inputs.lane }}]"
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+          registry-url: https://registry.npmjs.org/
+      - run: npm install -g yarn@1.22.10
+      - run: rm -rf node_modules
+      - run: yarn install
+      - run: yarn build-ci
+      - name: "check NPM_TOKEN exists"
+        env:
+          npm_token: ${{ secrets.NPM_TOKEN }}
+        if: ${{ env.npm_token != '' }}
+        run: echo "echo the secret \"NPM_TOKEN\" has been created."
+      - id: publish
+        uses: JS-DevTools/npm-publish@v2
+        with:
+          tag: ${{ inputs.lane }}
+          token: ${{ secrets.NPM_TOKEN }}
+          access: public
+      - run: |
+          echo "Package ${{ steps.publish.outputs.id }} published to lane [${{ steps.publish.outputs.tag }}]"

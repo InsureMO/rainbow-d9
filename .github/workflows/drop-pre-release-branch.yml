@@ -1,0 +1,32 @@
+name: Drop pre-release branch
+
+on:
+  workflow_call:
+    inputs:
+      branch:
+        description: Pre-release branch
+        required: true
+        type: string
+      version:
+        description: Target version
+        required: true
+        type: string
+
+jobs:
+  drop-pre-release:
+    name: Drop pre-release branch and tag
+    runs-on: ubuntu-latest
+    steps:
+      - name: Echo inputs
+        run: |
+          echo "Ref: [${{ inputs.ref }}]"
+          echo "Pre-release branch: [${{ inputs.branch }}]"
+          echo "Target version: [${{ inputs.version }}]"
+      - name: Check out the repo
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ inputs.branch }}
+      - name: Drop tag
+        run: git push origin :pre-release-${{ inputs.version }}
+      - name: Drop branch
+        run: git push origin :${{ inputs.branch }}

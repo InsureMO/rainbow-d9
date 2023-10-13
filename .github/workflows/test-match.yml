@@ -1,0 +1,40 @@
+name: Test Tag Match
+
+on:
+  push:
+    tags:
+      - r-[0-9]+.[0-9]+.[0-9]+-alpha
+      - r-[0-9]+.[0-9]+.[0-9]+-alpha.[0-9]+
+      - r-[0-9]+.[0-9]+.[0-9]+-beta
+      - r-[0-9]+.[0-9]+.[0-9]+-beta.[0-9]+
+      - r-[0-9]+.[0-9]+.[0-9]+-canary
+      - r-[0-9]+.[0-9]+.[0-9]+-canary.[0-9]+
+      - r-[0-9]+.[0-9]+.[0-9]+-nightly
+      - r-[0-9]+.[0-9]+.[0-9]+-nightly.[0-9]+
+      - r-[0-9]+.[0-9]+.[0-9]
+
+jobs:
+  compute-version:
+    name: Compute release version
+    runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.output-version.outputs.version }}
+      lane: ${{ steps.output-version.outputs.lane }}
+    steps:
+      - name: Echo inputs
+        run: |
+          echo "Ref: [${{ github.ref }}]"
+      - name: Check out the repo
+        uses: actions/checkout@v3
+      - name: Compute version
+        uses: ./.github/actions/compute-version
+        id: compute-version
+        with:
+          tag: ${{ github.ref_name }}
+      - name: Echo pre-release branch
+        id: output-version
+        run: |
+          echo "Target version: [$RELEASE_VERSION]"
+          echo "Target Lane: [$RELEASE_LANE]"
+          echo "version=$RELEASE_VERSION" >> $GITHUB_OUTPUT
+          echo "lane=$RELEASE_LANE" >> $GITHUB_OUTPUT

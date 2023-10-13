@@ -1,0 +1,46 @@
+name: Create release branch
+
+on:
+  workflow_call:
+    inputs:
+      branch:
+        description: Pre-release branch
+        required: true
+        type: string
+      version:
+        description: Target version
+        required: true
+        type: string
+      release:
+        description: Release branch
+        required: true
+        type: string
+
+# check out given pre-release branch
+# build and publish to Pypi
+# force push to release branch
+# add release tag
+jobs:
+  create-release-branch:
+    name: Package modules and publish
+    runs-on: ubuntu-latest
+    steps:
+      - name: Echo inputs
+        run: |
+          echo "Pre-release branch: [${{ inputs.branch }}]"
+          echo "Target version: [${{ inputs.version }}]"
+          echo "Release branch: [${{ inputs.release }}]"
+      - name: Check out the repo
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ inputs.branch }}
+      - name: Create release branch
+        run: git checkout -b ${{ inputs.release }}
+      - name: Initialize mandatory git config
+        run: |
+          git config user.name "brad.wu"
+          git config user.email brad.wu@ebaotech.com
+      - name: Push new branch
+        run: |
+          git tag ${{ inputs.version }}
+          git push --force origin ${{ inputs.release }} --tags

@@ -1,0 +1,51 @@
+name: Align version
+
+on:
+  workflow_call:
+    inputs:
+      ref:
+        description: The branch or tag name.
+        required: true
+        type: string
+      branch:
+        description: Pre-release branch
+        required: true
+        type: string
+      version:
+        description: Target version
+        required: true
+        type: string
+
+jobs:
+  align-version:
+    name: Align module versions
+    runs-on: ubuntu-latest
+    steps:
+      - name: Echo inputs
+        run: |
+          echo "Ref: [${{ inputs.ref }}]"
+          echo "Pre-release branch: [${{ inputs.branch }}]"
+          echo "Target version: [${{ inputs.version }}]"
+      - name: Check out the repo
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ inputs.ref }}
+      - name: Change Version
+        uses: ./.github/actions/change-node-version/
+        id: change-node-version
+        with:
+          target-version: ${{ inputs.version }}
+      - name: Create pre release branch
+        run: git checkout -b ${{ inputs.branch }}
+      - name: Initialize mandatory git config
+        run: |
+          git config user.name "brad.wu"
+          git config user.email brad.wu@ebaotech.com
+      - name: Commit config and manifest files
+        id: make-commit
+        run: |
+          git add .
+          git commit --message "Module version aligned to [${{ inputs.version }}]"
+          git tag pre-release-${{ inputs.version }}
+      - name: Push new branch
+        run: git push --force origin ${{ inputs.branch }} --tags

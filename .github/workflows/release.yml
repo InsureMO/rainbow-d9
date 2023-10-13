@@ -1,0 +1,123 @@
+name: Publish to NPM
+
+on:
+  push:
+    tags:
+      - r-[0-9]+.[0-9]+.[0-9]+-alpha
+      - r-[0-9]+.[0-9]+.[0-9]+-alpha.[0-9]+
+      - r-[0-9]+.[0-9]+.[0-9]+-beta
+      - r-[0-9]+.[0-9]+.[0-9]+-beta.[0-9]+
+      - r-[0-9]+.[0-9]+.[0-9]+-canary
+      - r-[0-9]+.[0-9]+.[0-9]+-canary.[0-9]+
+      - r-[0-9]+.[0-9]+.[0-9]+-nightly
+      - r-[0-9]+.[0-9]+.[0-9]+-nightly.[0-9]+
+      - r-[0-9]+.[0-9]+.[0-9]
+
+jobs:
+  compute-version:
+    name: Compute release version
+    runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.output-version.outputs.version }}
+      lane: ${{ steps.output-version.outputs.lane }}
+    steps:
+      - name: Echo inputs
+        run: |
+          echo "Ref: [${{ github.ref }}]"
+      - name: Check out the repo
+        uses: actions/checkout@v3
+      - name: Compute version
+        uses: ./.github/actions/compute-version
+        id: compute-version
+        with:
+          tag: ${{ github.ref_name }}
+      - name: Echo pre-release branch
+        id: output-version
+        run: |
+          echo "Target version: [$RELEASE_VERSION]"
+          echo "Target Lane: [$RELEASE_LANE]"
+          echo "version=$RELEASE_VERSION" >> $GITHUB_OUTPUT
+          echo "lane=$RELEASE_LANE" >> $GITHUB_OUTPUT
+  prepare:
+    needs: compute-version
+    name: Prepare jobs
+    runs-on: ubuntu-latest
+    outputs:
+      pre_release_branch_name: ${{ steps.output-pre-release-branch.outputs.pre_release_branch_name }}
+      release_branch_name: ${{ steps.output-release-branch.outputs.release_branch_name }}
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v3
+      - name: Compute pre-release branch
+        uses: ./.github/actions/compute-pre-release-branch
+        id: compute-pre-release-branch
+        with:
+          version: ${{ needs.compute-version.outputs.version }}
+          lane: ${{ needs.compute-version.outputs.lane }}
+      - name: Echo pre-release branch
+        id: output-pre-release-branch
+        run: |
+          echo "Target branch: [$PRE_RELEASE_BRANCH_NAME]"
+          echo "pre_release_branch_name=$PRE_RELEASE_BRANCH_NAME" >> $GITHUB_OUTPUT
+      - name: Compute release branch
+        uses: ./.github/actions/compute-release-branch
+        id: compute-release-branch
+        with:
+          version: ${{ needs.compute-version.outputs.version }}
+          lane: ${{ needs.compute-version.outputs.lane }}
+      - name: Echo release branch
+        id: output-release-branch
+        run: |
+          echo "Target branch: [$RELEASE_BRANCH_NAME]"
+          echo "release_branch_name=$RELEASE_BRANCH_NAME" >> $GITHUB_OUTPUT
+  # align all versions; change development dependencies to production dependencies.
+  align-module-version:
+    name: Align module version
+    needs: [ compute-version, prepare ]
+    uses: ./.github/workflows/version-align.yml
+    with:
+      ref: ${{ github.ref }}
+      branch: ${{ needs.prepare.outputs.pre_release_branch_name }}
+      version: ${{ needs.compute-version.outputs.version }}
+  # publish to npm
+  publish-npm:
+    needs: [ compute-version, prepare, align-module-version ]
+    uses: ./.github/workflows/npm-publish.yml
+    secrets:
+      NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+    with:
+      branch: ${{ needs.prepare.outputs.pre_release_branch_name }}
+      version: ${{ needs.compute-version.outputs.version }}
+      lane: ${{ needs.compute-version.outputs.lane }}
+  # create release branch, from pre-release branch. and add release tag.
+  create-release-branch:
+    needs: [ compute-version, prepare, publish-npm ]
+    uses: ./.github/workflows/create-release-branch.yml
+    with:
+      branch: ${{ needs.prepare.outputs.pre_release_branch_name }}
+      version: ${{ needs.compute-version.outputs.version }}
+      release: ${{ needs.prepare.outputs.release_branch_name }}
+  # drop pre-release branch and tag
+  drop-pre-release:
+    needs: [ compute-version, prepare, create-release-branch ]
+    uses: ./.github/workflows/drop-pre-release-branch.yml
+    with:
+      branch: ${{ needs.prepare.outputs.pre_release_branch_name }}
+      version: ${{ needs.compute-version.outputs.version }}
+  # create release, use given version (also is the release tag on release branch)
+  create-release:
+    needs: [ compute-version, create-release-branch ]
+    uses: ./.github/workflows/create-release.yml
+    with:
+      tag: ${{ needs.compute-version.outputs.version }}
+  drop-trigger-tag:
+    needs: align-module-version
+    name: Drop trigger tag
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ inputs.branch }}
+      - name: Drop tag
+        run: git push origin :${{ github.ref }}

@@ -1,0 +1,13 @@
+name: Change Node Version
+description: Github actions for change version of poetry project
+author: 'brad.wu <brad.wu@ebaotec.com>'
+inputs:
+  version:
+    description: Target Version
+    required: true
+  lane:
+    description: Tag Lane of NPM
+    required: false
+runs:
+  using: node16
+  main: index.js
