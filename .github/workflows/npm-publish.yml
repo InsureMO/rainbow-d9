@@ -40,12 +40,13 @@ jobs:
       - run: npm install -g yarn@1.22.10
       - run: yarn install
       - run: yarn build-all-ci
-      - name: "check NPM_TOKEN exists"
-        env:
-          npm_token: ${{ secrets.NPM_TOKEN }}
-        if: ${{ env.npm_token != '' }}
-        run: echo "echo the secret \"NPM_TOKEN\" has been created."
-      - id: publish-n1
+      #      - name: "check NPM_TOKEN exists"
+      #        env:
+      #          npm_token: ${{ secrets.NPM_TOKEN }}
+      #        if: ${{ env.npm_token != '' }}
+      #        run: echo "echo the secret \"NPM_TOKEN\" has been created."
+      - name: "Publish @d9/n1"
+        id: publish-n1
         uses: JS-DevTools/npm-publish@v2
         with:
           tag: ${{ inputs.lane }}
@@ -55,7 +56,8 @@ jobs:
           dry-run: true
       - run: |
           echo "Package ${{ steps.publish-n1.outputs.id }} published to lane [${{ steps.publish-n1.outputs.tag }}]"
-      - id: publish-n2
+      - name: "Publish @d9/n2"
+        id: publish-n2
         uses: JS-DevTools/npm-publish@v2
         with:
           tag: ${{ inputs.lane }}
@@ -65,7 +67,8 @@ jobs:
           dry-run: true
       - run: |
           echo "Package ${{ steps.publish-n2.outputs.id }} published to lane [${{ steps.publish-n2.outputs.tag }}]"
-      - id: publish-n3
+      - name: "Publish @d9/n3"
+        id: publish-n3
         uses: JS-DevTools/npm-publish@v2
         with:
           tag: ${{ inputs.lane }}

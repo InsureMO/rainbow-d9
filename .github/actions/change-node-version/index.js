@@ -7,7 +7,7 @@ try {
 	const packageFile = `./${moduleName}/package.json`;
 	const content = fs.readFileSync(packageFile, 'utf8');
 	const packageJson = JSON.parse(content);
-	core.notice(`Version updated to ${version} from ${packageJson.version}.`);
+	core.notice(`Version of module[${moduleName}] updated to ${version} from ${packageJson.version}.`);
 	packageJson.version = version;
 	const newContent = JSON.stringify(packageJson, null, 2);
 	fs.writeFileSync(packageFile, newContent, 'utf8');
