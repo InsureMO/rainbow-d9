@@ -1,4 +1,11 @@
-import {MUtils, NullPropValue, PrimitivePropValue, registerWidget, ValueChangeableNodeDef, WidgetProps} from '@d9/n1';
+import {
+	MUtils,
+	NullPropValue,
+	PrimitivePropValue,
+	registerWidget,
+	ValueChangeableNodeDef,
+	WidgetProps
+} from '@rainbow-d9/n1';
 import React from 'react';
 import styled from 'styled-components';
 import {CssVars} from './constants';

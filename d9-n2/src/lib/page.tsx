@@ -1,4 +1,4 @@
-import {ContainerDef, ContainerWidgetProps, registerWidget} from '@d9/n1';
+import {ContainerDef, ContainerWidgetProps, registerWidget} from '@rainbow-d9/n1';
 import React from 'react';
 import styled from 'styled-components';
 import {CssVars, DOM_KEY_WIDGET} from './constants';

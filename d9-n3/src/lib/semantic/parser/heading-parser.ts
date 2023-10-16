@@ -1,4 +1,4 @@
-import {NUtils, VUtils} from '@d9/n1';
+import {NUtils, VUtils} from '@rainbow-d9/n1';
 import {Heading} from 'mdast';
 import {PreparsedHeading} from '../../ast';
 import {ParsedNodeType} from '../../node-types';

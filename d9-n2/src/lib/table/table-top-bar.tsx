@@ -1,4 +1,4 @@
-import {BaseModel, EnhancedPropsForArray, getArrayElementKey, MUtils} from '@d9/n1';
+import {BaseModel, EnhancedPropsForArray, getArrayElementKey, MUtils} from '@rainbow-d9/n1';
 import React, {useEffect, useRef, useState} from 'react';
 import {CssVars} from '../constants';
 import {useTableEventBus} from './event/table-event-bus';

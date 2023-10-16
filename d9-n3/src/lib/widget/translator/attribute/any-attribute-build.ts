@@ -1,4 +1,4 @@
-import {VUtils} from '@d9/n1';
+import {VUtils} from '@rainbow-d9/n1';
 import {ParsedListItemAttributePair} from '../../../semantic';
 import {Nullable, Undefinable} from '../../../utility-types';
 import {AttributeValueBuild, WidgetPropertyName} from './types';

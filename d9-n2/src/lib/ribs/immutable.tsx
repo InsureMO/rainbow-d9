@@ -1,4 +1,4 @@
-import {registerWidget, WidgetRegistrationOptions} from '@d9/n1';
+import {registerWidget, WidgetRegistrationOptions} from '@rainbow-d9/n1';
 import React from 'react';
 import {RibNoData} from './rib-no-data';
 import {Ribs} from './ribs';

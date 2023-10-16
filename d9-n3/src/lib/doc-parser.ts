@@ -1,4 +1,4 @@
-import {VUtils} from '@d9/n1';
+import {VUtils} from '@rainbow-d9/n1';
 import {AstHelper, createOrGetAskHelperSingleton} from './ast';
 import {createOrGetSemanticHelperSingleton, ParsedHeading, SemanticHelper} from './semantic';
 import {MarkdownContent, ParsedNodeDef} from './types';

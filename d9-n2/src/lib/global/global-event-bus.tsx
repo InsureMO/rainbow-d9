@@ -1,4 +1,4 @@
-import {BaseModel, PropValue, useCreateEventBus} from '@d9/n1';
+import {BaseModel, PropValue, useCreateEventBus} from '@rainbow-d9/n1';
 import React, {createContext, CSSProperties, ReactNode, useContext} from 'react';
 
 export enum GlobalEventTypes {

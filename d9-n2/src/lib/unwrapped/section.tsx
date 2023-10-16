@@ -1,4 +1,4 @@
-import {MonitorNodeDef, NodeAttributeValues, VUtils} from '@d9/n1';
+import {MonitorNodeDef, NodeAttributeValues, VUtils} from '@rainbow-d9/n1';
 import React, {ForwardedRef, forwardRef, ReactNode} from 'react';
 import {Section, SectionProps} from '../section';
 

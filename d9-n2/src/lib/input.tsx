@@ -1,4 +1,4 @@
-import {MUtils, PPUtils, registerWidget, ValueChangeableNodeDef, VUtils, WidgetProps} from '@d9/n1';
+import {MUtils, PPUtils, registerWidget, ValueChangeableNodeDef, VUtils, WidgetProps} from '@rainbow-d9/n1';
 import React, {ChangeEvent, FocusEvent, ForwardedRef, forwardRef, useRef} from 'react';
 import styled from 'styled-components';
 import {CssVars, DOM_ID_WIDGET, DOM_KEY_WIDGET} from './constants';

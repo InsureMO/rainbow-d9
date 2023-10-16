@@ -1,4 +1,4 @@
-import {NodeUniqueKey, PropertyPath} from '@d9/n1';
+import {NodeUniqueKey, PropertyPath} from '@rainbow-d9/n1';
 import {Alternative, Association, Reference, Resource} from 'mdast';
 import {
 	PreparsedBlockquote,

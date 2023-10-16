@@ -1,4 +1,4 @@
-import {VUtils} from '@d9/n1';
+import {VUtils} from '@rainbow-d9/n1';
 import styled from 'styled-components';
 import {CssVars, DOM_ID_WIDGET, DOM_KEY_WIDGET} from '../constants';
 import {toCssSize} from '../utils';

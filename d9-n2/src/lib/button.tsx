@@ -1,4 +1,4 @@
-import {BaseModel, NodeDef, PPUtils, PropValue, registerWidget, ValidationFunctions, WidgetProps} from '@d9/n1';
+import {BaseModel, NodeDef, PPUtils, PropValue, registerWidget, ValidationFunctions, WidgetProps} from '@rainbow-d9/n1';
 import React, {ForwardedRef, forwardRef, MouseEvent, ReactNode} from 'react';
 import styled from 'styled-components';
 import {CssVars, DOM_ID_WIDGET, DOM_KEY_WIDGET} from './constants';

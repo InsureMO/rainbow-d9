@@ -1,4 +1,4 @@
-import {ArrayUsedDef, NodeDef} from '@d9/n1';
+import {ArrayUsedDef, NodeDef} from '@rainbow-d9/n1';
 import {WidgetType} from '../../semantic';
 import {Undefinable} from '../../utility-types';
 import {AttributeValueBuild, CustomAttributeName, WidgetPropertyName} from './attribute';

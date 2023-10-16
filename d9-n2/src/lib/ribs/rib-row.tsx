@@ -1,4 +1,4 @@
-import {EnhancedPropsForArrayElement, NUtils, Wrapper} from '@d9/n1';
+import {EnhancedPropsForArrayElement, NUtils, Wrapper} from '@rainbow-d9/n1';
 import React, {useState} from 'react';
 import {RibRowOperators} from './rib-row-operators';
 import {RibsProps} from './types';

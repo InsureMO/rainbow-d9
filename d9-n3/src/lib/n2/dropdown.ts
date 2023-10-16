@@ -1,5 +1,5 @@
-import {VUtils} from '@d9/n1';
-import {DropdownOptions, DropdownOptionSort} from '@d9/n2';
+import {VUtils} from '@rainbow-d9/n1';
+import {DropdownOptions, DropdownOptionSort} from '@rainbow-d9/n2';
 import {ParsedNodeType} from '../node-types';
 import {ParsedList, ParsedListItemAttributePair, SemanticUtils} from '../semantic';
 import {Undefinable} from '../utility-types';

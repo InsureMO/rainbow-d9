@@ -1,4 +1,4 @@
-import {NodeDef} from '@d9/n1';
+import {NodeDef} from '@rainbow-d9/n1';
 import {SpecificWidgetTranslator} from '../widget';
 import {N2WidgetType} from './types';
 

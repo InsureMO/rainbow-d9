@@ -1,4 +1,4 @@
-import {BaseModel, PropValue} from '@d9/n1';
+import {BaseModel, PropValue} from '@rainbow-d9/n1';
 import {CSSProperties, ReactNode, useState} from 'react';
 import {GlobalEventTypes, useGlobalEventBus} from './global-event-bus';
 

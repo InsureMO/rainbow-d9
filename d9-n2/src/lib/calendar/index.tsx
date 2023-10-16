@@ -1,4 +1,4 @@
-import {registerWidget} from '@d9/n1';
+import {registerWidget} from '@rainbow-d9/n1';
 import React from 'react';
 import {CalendarEventBusProvider} from './event/calendar-event-bus';
 import {Picker} from './picker';

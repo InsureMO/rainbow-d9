@@ -1,4 +1,4 @@
-import {EnhancedPropsForArray, NUtils} from '@d9/n1';
+import {EnhancedPropsForArray, NUtils} from '@rainbow-d9/n1';
 import React from 'react';
 import {toCssSize} from '../utils';
 import {TableProps} from './types';

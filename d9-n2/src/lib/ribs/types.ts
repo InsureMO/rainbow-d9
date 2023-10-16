@@ -1,4 +1,4 @@
-import {ArrayContainerDef, ArrayContainerWidgetProps, ArrayUsedDef, EnhancedPropsForArrayElement} from '@d9/n1';
+import {ArrayContainerDef, ArrayContainerWidgetProps, ArrayUsedDef, EnhancedPropsForArrayElement} from '@rainbow-d9/n1';
 import {CaptionDef} from '../caption';
 import {OmitHTMLProps, OmitNodeDef} from '../types';
 

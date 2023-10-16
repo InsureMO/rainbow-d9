@@ -1,4 +1,4 @@
-import {ExternalDefIndicator, PropertyPath, VUtils} from '@d9/n1';
+import {ExternalDefIndicator, PropertyPath, VUtils} from '@rainbow-d9/n1';
 import {PreparsedSubordinateOfHeadingNodes} from '../../ast';
 import {N3Logger} from '../../logger';
 import {ParsedNodeType} from '../../node-types';

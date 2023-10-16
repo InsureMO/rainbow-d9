@@ -1,4 +1,4 @@
-import {MUtils, PPUtils, VUtils} from '@d9/n1';
+import {MUtils, PPUtils, VUtils} from '@rainbow-d9/n1';
 import dayjs, {Dayjs} from 'dayjs';
 import React, {MouseEvent} from 'react';
 import {CssVars} from '../constants';

@@ -1,4 +1,4 @@
-import {BaseModel, EnhancedPropsForArray, MUtils, VUtils} from '@d9/n1';
+import {BaseModel, EnhancedPropsForArray, MUtils, VUtils} from '@rainbow-d9/n1';
 import {CssVars} from '../constants';
 import {toCssSize} from '../utils';
 import {TableHeaderDef, TableProps} from './types';

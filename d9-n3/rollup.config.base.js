@@ -21,7 +21,7 @@ export const buildConfig = (lint) => {
 			'mdast-util-gfm-table', 'mdast-util-gfm-task-list-item',
 			'micromark-extension-frontmatter', 'micromark-extension-gfm-footnote', 'micromark-extension-gfm-strikethrough',
 			'micromark-extension-gfm-table', 'micromark-extension-gfm-task-list-item',
-			'@d9/n1', '@d9/n2'
+			'@rainbow-d9/n1', '@rainbow-d9/n2'
 		]
 	};
 };

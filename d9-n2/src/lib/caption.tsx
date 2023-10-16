@@ -8,7 +8,7 @@ import {
 	ValidationFunctions,
 	VUtils,
 	WidgetProps
-} from '@d9/n1';
+} from '@rainbow-d9/n1';
 import dayjs from 'dayjs';
 import React, {ForwardedRef, forwardRef, MouseEvent, ReactNode} from 'react';
 import styled from 'styled-components';

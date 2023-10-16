@@ -15,6 +15,6 @@ export const buildConfig = (lint) => {
 			lint ? tslint({ exclude: ['../node_modules/**', 'node_modules/**'], include: 'src/**/*' }) : null,
 			typescript({ clean: true }), babel({ presets: ['@babel/preset-react'] })
 		].filter(x => x != null),
-		external: ['react', 'react-dom', 'styled-components', 'color', 'dayjs', '@d9/n1']
+		external: ['react', 'react-dom', 'styled-components', 'color', 'dayjs', '@rainbow-d9/n1']
 	};
 };

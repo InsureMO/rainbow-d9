@@ -1,4 +1,4 @@
-import {PPUtils} from '@d9/n1';
+import {PPUtils} from '@rainbow-d9/n1';
 import React from 'react';
 import {TableProps} from './types';
 import {ATable} from './widgets';

@@ -1,4 +1,4 @@
-import {VUtils} from '@d9/n1';
+import {VUtils} from '@rainbow-d9/n1';
 import {List} from 'mdast';
 import {PreparsedList, PreparsedListItem, PreparsedParagraph, PreparsedSubordinateOfListItemNodes} from '../../ast';
 import {N3Logger} from '../../logger';

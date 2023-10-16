@@ -1,4 +1,4 @@
-import {MonitorNodeDef, NodeAttributeValues, PropValue, VUtils} from '@d9/n1';
+import {MonitorNodeDef, NodeAttributeValues, PropValue, VUtils} from '@rainbow-d9/n1';
 import React from 'react';
 import {Calendar, CalendarProps} from '../calendar';
 

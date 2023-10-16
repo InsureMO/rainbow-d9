@@ -1,4 +1,4 @@
-import {useCreateEventBus} from '@d9/n1';
+import {useCreateEventBus} from '@rainbow-d9/n1';
 import React, {createContext, ReactNode, useContext} from 'react';
 import {CalendarEventBus} from './calendar-event-bus-types';
 

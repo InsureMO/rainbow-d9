@@ -1,4 +1,4 @@
-import {EnhancedPropsForArray} from '@d9/n1';
+import {EnhancedPropsForArray} from '@rainbow-d9/n1';
 import React, {useEffect, useRef} from 'react';
 import {useTableEventBus} from './event/table-event-bus';
 import {TableEventTypes} from './event/table-event-bus-types';

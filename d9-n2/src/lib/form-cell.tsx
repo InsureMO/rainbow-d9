@@ -1,4 +1,4 @@
-import {NodeDef, PPUtils, registerWidget, ValidationResult, VUtils, WidgetProps} from '@d9/n1';
+import {NodeDef, PPUtils, registerWidget, ValidationResult, VUtils, WidgetProps} from '@rainbow-d9/n1';
 import React, {ForwardedRef, forwardRef, ReactNode} from 'react';
 import styled from 'styled-components';
 import {Caption} from './caption';

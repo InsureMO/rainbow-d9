@@ -1,4 +1,4 @@
-import {useForceUpdate} from '@d9/n1';
+import {useForceUpdate} from '@rainbow-d9/n1';
 import React, {useEffect, useState} from 'react';
 import {N2Logger} from '../../utils';
 import {AlertLabel} from '../alert';

@@ -1,4 +1,4 @@
-import {EnhancedPropsForArray} from '@d9/n1';
+import {EnhancedPropsForArray} from '@rainbow-d9/n1';
 import React from 'react';
 import {Button, ButtonInk} from '../button';
 import {I18NVars} from '../constants';

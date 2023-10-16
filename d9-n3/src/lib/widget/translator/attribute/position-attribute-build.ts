@@ -1,4 +1,4 @@
-import {NodePosition, VUtils} from '@d9/n1';
+import {NodePosition, VUtils} from '@rainbow-d9/n1';
 import {Nullable, Undefinable} from '../../../utility-types';
 import {D9PropertyNames} from './attribute-name-util';
 import {AttributeValueBuild, WidgetPropertyName} from './types';

@@ -1,4 +1,4 @@
-import {ValueChangeableNodeDef, WidgetProps} from '@d9/n1';
+import {ValueChangeableNodeDef, WidgetProps} from '@rainbow-d9/n1';
 import {ReactNode} from 'react';
 import {OmitHTMLProps, OmitNodeDef} from '../types';
 

@@ -6,7 +6,7 @@ import {
 	PropValue,
 	ValidationResult,
 	VUtils
-} from '@d9/n1';
+} from '@rainbow-d9/n1';
 import {WidgetType} from '../../../semantic';
 import {Undefinable} from '../../../utility-types';
 import {AttributeMap} from '../types';

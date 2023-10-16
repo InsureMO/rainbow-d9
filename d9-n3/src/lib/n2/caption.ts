@@ -1,5 +1,5 @@
-import {BaseModel, MonitorNodeAttributes, NUtils, PropValue, ReactionMonitor, VUtils} from '@d9/n1';
-import {CaptionClick, CaptionClickOptions, CaptionDef, CaptionValueToLabel} from '@d9/n2';
+import {BaseModel, MonitorNodeAttributes, NUtils, PropValue, ReactionMonitor, VUtils} from '@rainbow-d9/n1';
+import {CaptionClick, CaptionClickOptions, CaptionDef, CaptionValueToLabel} from '@rainbow-d9/n2';
 import {ParsedListItemAttributePair} from '../semantic';
 import {Undefinable} from '../utility-types';
 import {

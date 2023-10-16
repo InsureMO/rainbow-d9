@@ -1,5 +1,5 @@
-import {VUtils} from '@d9/n1';
-import {CalendarFixedTimeAt} from '@d9/n2';
+import {VUtils} from '@rainbow-d9/n1';
+import {CalendarFixedTimeAt} from '@rainbow-d9/n2';
 import {Undefinable} from '../utility-types';
 import {AttributeValueBuild, SpecificWidgetTranslator, WidgetPropertyName} from '../widget';
 import {N2WidgetType} from './types';

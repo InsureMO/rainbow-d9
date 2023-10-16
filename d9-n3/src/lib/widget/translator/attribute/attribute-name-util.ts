@@ -1,4 +1,4 @@
-import {MonitorNodeAttributes} from '@d9/n1';
+import {MonitorNodeAttributes} from '@rainbow-d9/n1';
 import {WidgetType} from '../../../semantic';
 import {AnyAttributeName, WidgetPropertyName} from './types';
 

@@ -10,7 +10,7 @@ import {
 	VUtils,
 	WidgetProps,
 	WrapperEventTypes
-} from '@d9/n1';
+} from '@rainbow-d9/n1';
 import React, {ChangeEvent, KeyboardEvent, MouseEvent, ReactNode, useEffect, useRef, useState} from 'react';
 import styled from 'styled-components';
 import {CssVars} from './constants';

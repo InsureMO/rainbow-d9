@@ -1,4 +1,4 @@
-import {ContainerDef, NodeDef, PropertyPath} from '@d9/n1';
+import {ContainerDef, NodeDef, PropertyPath} from '@rainbow-d9/n1';
 import {ParsedNodeType} from '../../node-types';
 import {WidgetType} from '../../semantic';
 import {ParsedNodeDef} from '../../types';

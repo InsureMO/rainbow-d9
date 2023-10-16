@@ -1,4 +1,4 @@
-import {ArrayContainerDef, ArrayContainerWidgetProps, NodeDef} from '@d9/n1';
+import {ArrayContainerDef, ArrayContainerWidgetProps, NodeDef} from '@rainbow-d9/n1';
 import {ReactNode} from 'react';
 import {OmitHTMLProps, OmitNodeDef} from '../types';
 

@@ -1,5 +1,5 @@
-import {MonitorNodeAttributes, NodeDef, ReactionMonitor, VUtils} from '@d9/n1';
-import {CaptionDef} from '@d9/n2';
+import {MonitorNodeAttributes, NodeDef, ReactionMonitor, VUtils} from '@rainbow-d9/n1';
+import {CaptionDef} from '@rainbow-d9/n2';
 import {ParsedNodeType} from '../node-types';
 import {ParsedList, ParsedListItemAttributePair, SemanticUtils} from '../semantic';
 import {Undefinable} from '../utility-types';

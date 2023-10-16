@@ -1,5 +1,5 @@
-import {NodeDef, VUtils} from '@d9/n1';
-import {TableHeaderDef} from '@d9/n2';
+import {NodeDef, VUtils} from '@rainbow-d9/n1';
+import {TableHeaderDef} from '@rainbow-d9/n2';
 import {ParsedNodeType} from '../node-types';
 import {ParsedList, ParsedListItemAttributePair, SemanticUtils} from '../semantic';
 import {Undefinable} from '../utility-types';

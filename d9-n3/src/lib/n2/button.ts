@@ -1,5 +1,5 @@
-import {BaseModel, NodeValidationScope, PropValue, VUtils} from '@d9/n1';
-import {ButtonClick, ButtonClickOptions, CaptionClickOptions} from '@d9/n2';
+import {BaseModel, NodeValidationScope, PropValue, VUtils} from '@rainbow-d9/n1';
+import {ButtonClick, ButtonClickOptions, CaptionClickOptions} from '@rainbow-d9/n2';
 import {ParsedListItemAttributePair} from '../semantic';
 import {Undefinable} from '../utility-types';
 import {AttributeValueBuild, SpecificWidgetTranslator, WidgetPropertyName} from '../widget';

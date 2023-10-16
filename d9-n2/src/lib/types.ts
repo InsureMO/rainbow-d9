@@ -1,4 +1,4 @@
-import {NodeDef} from '@d9/n1';
+import {NodeDef} from '@rainbow-d9/n1';
 import {DetailedHTMLProps, InputHTMLAttributes} from 'react';
 
 export type OmitNodeDef<T extends NodeDef> = Omit<T, '$key' | '$wt'>;

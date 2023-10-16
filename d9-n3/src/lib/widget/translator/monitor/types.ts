@@ -1,4 +1,4 @@
-import {MonitorOthers, NodeAttributeValue, NodeAttributeValueHandle, PropertyPath} from '@d9/n1';
+import {MonitorOthers, NodeAttributeValue, NodeAttributeValueHandle, PropertyPath} from '@rainbow-d9/n1';
 import {WidgetType} from '../../../semantic';
 import {Nullable, Undefinable} from '../../../utility-types';
 import {AttributeMap} from '../types';

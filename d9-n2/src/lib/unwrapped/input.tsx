@@ -1,4 +1,4 @@
-import {MonitorNodeDef, NodeAttributeValues, PropValue, VUtils} from '@d9/n1';
+import {MonitorNodeDef, NodeAttributeValues, PropValue, VUtils} from '@rainbow-d9/n1';
 import React, {ForwardedRef, forwardRef} from 'react';
 import {Input, InputProps, NumberInput, NumberInputProps} from '../input';
 
