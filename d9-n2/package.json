@@ -1,6 +1,6 @@
 {
   "name": "@rainbow-d9/n2",
-  "version": "0.1.0-alpha.1",
+  "version": "0.1.0",
   "description": "d9 widgets",
   "main": "index.cjs.js",
   "module": "index.js",
