@@ -1,9 +1,11 @@
 # d9-n2
 
-## Prepare for development
+It is the No.2 project of group `d9`, which is created at 9th. Dec. 2022.  
+This project is widgets implementation for ui configuration, under `d9` widget standard.
 
-- In case of develop `d9-n2` only, follows the npm module standard,
-- In case of develop `d9` group, follows [yarn workspace](https://classic.yarnpkg.com/en/docs/workspaces/).
+# Idea
+
+[d9](https://github.com/InsureMO/rainbow-d9/blob/main/README.md)
 
 # Icons
 
