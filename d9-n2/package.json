@@ -1,5 +1,5 @@
 {
-	"name": "@d9/n2",
+	"name": "@rainbow-d9/n2",
 	"version": "0.1.0",
 	"description": "d9 widgets",
 	"main": "index.cjs.js",
@@ -21,7 +21,7 @@
 	},
 	"author": "Rainbow Team",
 	"dependencies": {
-		"@d9/n1": "^0.1.0",
+		"@rainbow-d9/n1": "^0.1.0",
 		"color": "^4.2.3",
 		"dayjs": "^1.11.7",
 		"react": "^18.2.0",
