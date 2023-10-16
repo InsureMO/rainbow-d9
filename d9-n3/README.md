@@ -1,6 +1,7 @@
 # d9-n3
 
-Markdown engine, parse to JSON configuration, which used to do rendering.
+It is the No.1 project of group `d9`, which is created at 9th. Dec. 2022.  
+This project is Markdown engine, parse to JSON configuration, which used to do rendering.
 
 # Idea
 
