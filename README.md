@@ -40,4 +40,4 @@ Currently, `d9` is divided into three submodules:
 | Develop library based on `d9` core                                             | `d9-n1`                     | `yarn add @rainbow-d9/n1`                |
 | Develop project based on `d9` widget, programmatically                         | `d9-n1` + `d9-n2`           | `yarn add @rainbow-d9/n2`                |
 | Develop project based on `d9` widget, markdown configured                      | `d9-n1` + `d9-n2` + `d9-n3` | `yarn add @rainbow-d9/n3 @rainbow-d9/n2` |
-| Develop project based on `d9` core, with your own widgets, markdown configured | `d9-n1` + `d9-n3`           | `yarn add @rainbow-d9/n3 @rainbow-d9/n2` |
+| Develop project based on `d9` core, with your own widgets, markdown configured | `d9-n1` + `d9-n3`           | `yarn add @rainbow-d9/n3`                |
