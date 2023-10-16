@@ -196,7 +196,7 @@ can be specified using the `$array` property, as shown in the declaration of `Ar
 > The specific usage of the above properties will be described in more detail in the subsequent chapters. Here, the purpose is to establish
 > a preliminary understanding of the behavior of array widget.
 
-# Event and Communication between Widgets
+## Event and Communication between Widgets
 
 Unlike the implementation of general component libraries (using functions to handle component events and triggering React refresh to achieve
 page refresh), 'd9' aims to minimize performance issues caused by global refresh. Therefore, 'd9' categorizes page changes into the
@@ -257,13 +257,13 @@ const def = {
 				$handle: ({model}) => {
 					const value = model.visibility;
 					if ((value || '').trim().length === 0) {
-						setVisibility('block');
+						return true;
 					} else {
 						const v = Nubmer(value);
 						if (isNaN(v)) {
-							setVisibility('none');
+							return false;
 						} else {
-							setVisibility('block');
+							return true;
 						}
 					}
 				},
@@ -282,5 +282,14 @@ const Page = () => {
 Let's take a look at how 'd9' works through the diagram below,
 
 ```mermaid
-
+sequenceDiagram
+    Input ->> Input: Value Changed(DOM)
+    Input ->> Input: Synchronize value to model
+    Input ->> Event Bus: Value changed event
+    Event Bus ->> Caption: Value Changed
+    Caption ->> Caption: Change Visibility
 ```
+
+As you can see, with the involvement of the Event Bus, the `Value Change` event is precisely transmitted to the "Caption" widget without
+affecting any other widgets. This helps to avoid the issue of global refresh.
+
