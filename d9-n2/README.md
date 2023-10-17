@@ -1,6 +1,6 @@
 # d9-n2
 
-It is the No.2 project of group `d9`, which is created at 9th. Dec. 2022.  
+It is the No.2 project of group `d9`.  
 This project is widgets implementation for ui configuration, under `d9` widget standard.
 
 # Idea
@@ -100,3 +100,7 @@ const onRemarksChange = (value: PropValue) => {
 
 To activate global hooks, you first need to use `GlobalEventBusProvider` in your program. The usage is identical to regular hooks, and you
 can access specific usage methods through `GlobalEventBus` and `useGlobalEventBus`.
+
+## Logger
+
+`d9-n2` provides a logging function called `N2Logger`, exactly same as `N1Logger`.

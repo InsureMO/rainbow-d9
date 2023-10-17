@@ -1,6 +1,6 @@
 # d9-n1
 
-It is the No.1 project of group `d9`, which is created at 9th. Dec. 2022.  
+It is the No.1 project of group `d9`.  
 This project is higher-order widgets for ui configuration, which describe the interfaces, behaviours of underlay widgets.
 
 # Idea
