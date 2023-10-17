@@ -7,3 +7,521 @@ This project is Markdown engine, parse to JSON configuration, which used to do r
 
 [d9](https://github.com/InsureMO/rainbow-d9)
 
+The purpose of `d9-n3` is to provide a Markdown-based approach that allows non-programmers to easily participate in the process of page
+design and creation to a great extent, without the assistance of programmers. Additionally, due to the easily storable and comparable
+structure of Markdown, this approach also brings convenience in terms of page management.
+
+# Parse
+
+Parsing Markdown involves three main steps: pre-parsing of Markdown content, syntax parsing, and creation and parsing of
+widget configurations.
+
+## Preparse
+
+The pre-parsing of Markdown content uses `mdast` for parsing. It mainly processes the text content into a structured format and
+builds the structure tree of the given document based on the hierarchy of headings. It is worth noting that according to the parsing result
+of `mdast`, all headings (if the syntax follows the normal writing conventions, as Markdown has loose syntax requirements) are placed under
+the root node and are not organized into a tree structure. Therefore, the pre-parsing process reorganizes the headings based on their
+hierarchy, with N-level headings appearing as child nodes under the nearest preceding N-1 level heading.
+
+## Semantic Parse
+
+Translation: The semantic parsing will parse headings and list items into components, following the following parsing rules:
+
+- Headings, in the format of `WidgetType[::Headline][::$Id]`.
+	- If no text definition is provided, it is considered a reserved heading,
+	- If the text ends with `::IGNORE` or `::EXPORT`, it is considered a reserved heading.,
+	- If no widget type is detected, it is considered a reserved heading.
+- List Items, content can be defined as a component or property definition.
+	- If the first child element of the list item in Markdown syntax is not text, it is considered a reserved item.
+	- If the first child element is not on the same line as the list item, it is considered a reserved item.
+	- If there is no text definition on the same line, it is considered a reserved item.
+	- If it starts with `REF.`, `Ref.`, or `ref.`, it is considered a reference to an external component.
+	- If the text format is `WidgetType::Label[::PropertyPath]`, it is considered a component.
+	- If it is in the format `x: y`, it is considered a property definition.
+	- Others are considered a property group definition, specifically used for defining boolean properties.
+
+> Reserved heading and list item currently not supported in the runtime.  
+> Reference list item currently not supported in the runtime.
+
+## Creation and Parsing of Widget Configurations
+
+After the pre-parsing and syntax parsing stages, we have obtained a complete syntax tree. The remaining task is to continue parsing and
+creating configuration data that can be used for rendering with the `d9` core.
+
+Before explaining the final step, an important concept must be clarified: the parsing of Markdown syntax has no direct physical
+relationship with the actual widget library selection. However, logically, all widget types parsed in the previous
+process must be supported in the final rendering process. In particular, the parsing of specific widget properties, due to the uniqueness
+of each individual widget (each widget may have its own unique properties and corresponding values), requires support from a
+corresponding widget parsing implementation if we are rendering based on a specific widget library. However, `d9-n3` already has
+standard support for standard properties, and if there are no specific properties that need support (which is highly unlikely in the real
+world), there is essentially no need for additional widget-level plugin support.
+
+All discussions below are based on the parsing support for the `d9-n2` widget library that comes with `d9-n3`. If you are using a
+different widget library or a mixed scenario, you can also customize and register your own widget parsing by understanding the
+following instructions and referring to the relevant source code of `d9-n3`.
+
+Referencing the implementation of `SemanticHelper#classifyParsedHeadings`, Markdown allows multiple top-level nodes. Currently, only nodes
+with a widget type of `Page` are considered renderable widgets. In the absence of any `Page` node definitions, only nodes defined as
+`Export` will be considered renderable widgets. In the final parsing process, only the first node considered renderable will be selected
+for further parsing and ultimately rendered.
+
+Let's take a look at a very simple example,
+
+```markdown
+# Page
+
+- Input::Name::name
+
+# Page
+
+[//]: # (something else)
+```
+
+In the above definition, only the first `Page` node will be considered for rendering, and the second one will be ignored. Therefore, in
+actual practice, we recommend defining one page per Markdown and not merging them together.
+
+> Regarding the inclusion of multiple widgets in a Markdown file, reserved headings, reserved list items, and related support, we will plan
+> for it in future versions. Currently, it can be understood as just a placeholder to support flexibility in definitions.
+
+After the initial demonstration, we have learned how to define a page using a Markdown file. Next, we will see a more complex example as
+follows:
+
+```markdown
+# Page::Policy Info
+
+## Section::Policy Info
+
+- Input::Company Code::companyCode
+	- length: 2;
+	- disabled
+- Input::Prefix::symbol
+	- length: 3;
+	- disabled
+- Input::Policy No.::policyNo
+	- disabled
+	- length: 6;
+- Input::Suffix::renewalRewriteVer
+	- length: 1..2;
+	- disabled
+- Dropdown::Country::countryCode
+	- options:
+		- 183: NZ
+- Input::Insured Name::insuredName
+	- length: 0..128;
+- Input::Insured Alias Name::insuredAliasName
+	- length: 0..40;
+- Input::Holder Contact Phone::holderContactPhone
+	- length: 0..15;
+- Input::Endorsement No.::endoNo
+	- length: 3;
+	- disabled
+- Input::Endorsement Cancel Ver::endoCancelVer
+	- length: 1..2;
+	- disabled
+- Input::Ccvb No.::ccvb
+	- disabled
+- Dropdown::Transaction Type::transactionType
+	- options:
+		- AP: New Business
+		- CP: Cancel Policy Pro-rata
+		- MP: Endorsement
+		- RENEW: Renew
+		- REIN: Reinstatement
+- Date::Trans Date::transDate
+- Date::Application Date::applicationDate
+- Dropdown::Status::status
+	- options:
+		- A: Active
+		- C: Cancelled
+- Input::Previous Status::previousStatus
+	- length: 1;
+- Date::Policy Effective Date::effectiveDate
+- Date::Policy Expiry Date::expiryDate
+- Input::Terms::terms
+	- length: 1..3;
+	- integer: Must be an integer.
+- Date::Origin Issue Date::originIssueDate
+- Date::Origin Effective Date::originEffectiveDate
+- Date::Endorsement Effective Date::endoEffectiveDate
+- Date::Cancel Date::cancelDate
+- Date::Cancel Process Date::cancelProcessDate
+- Input::Cancel Reason Code::cancelReasonCode
+	- length: 2;
+- Date::Reinstate Process Date::reinstateProcessDate
+- Dropdown::Reinstate Type::reinstateType
+	- options:
+		- P: P
+- Dropdown::Branch::branchCode
+	- options:
+		- 01: 01
+		- 02: 02
+- Input::Underwriter Code::underwriterCode
+	- length: 0..10;
+- Input::Underwriter Origin::underwriterOrigin
+	- length: 0..10;
+- Dropdown::Broker Company Code::agentCode
+	- options: @ext.codes.mdBrokerCompanyOptions
+	- sort: asc
+- Input::Broker Name Code::brokerCode
+	- length: 0..6;
+- Number::Commission Percentage::commissionPercentage
+	- notNegative: Must be not negative.
+	- numeric: Must be numeric.
+- Dropdown::Account Type Code::accountTypeCode
+	- options:
+		- A: A
+		- C: C
+		- B: B
+		- Y: Y
+- Input::Source Code::sourceCode
+	- length: 1..3;
+- Input::Production Source Code::productionSourceCode
+	- length: 1..3;
+- Dropdown::Coinsurance Indicator::coinsuranceIndicator
+	- options:
+		- N: N (Non-Coinsurance)
+		- L: L (Co-AIG as Leader)
+		- Y: Y (Co-AIG as Follower)
+- Dropdown::Renewal Flag::renewalFlag
+	- options:
+		- 0: N
+		- 1: Y
+- Dropdown::Renewal Code::renewalCode
+	- options:
+		- 00: 00
+		- 01: 01
+		- 02: 02
+		- 03: 03
+		- 04: 04
+		- 05: 05
+		- 06: 06
+		- 07: 07
+		- 08: 08
+		- 09: 09
+		- 10: 10
+- Dropdown::Renewal Indicator::renewalIndicator
+	- options:
+		- N: N
+		- Y: Y
+- Input::Assume Business Indicator::assumeBusinessIndicator
+	- length: 1;
+- Dropdown::Inward RI Company Code::inwardRICode
+	- options: @ext.codes.mdInwardRiCompanyOptions
+	- sort: asc
+- Dropdown::Assumed Type::agentSubproducerCode
+	- options:
+		- NRI: NRI
+		- IRI: IRI
+- Dropdown::Billing Code::billingCode
+	- Options:
+		- AC:AC
+		- DB:DB
+		- AR:AR
+- Input::Pay Plan Code::payPlanCode
+	- length:2
+- Dropdown::Currency Code::currencyCode
+	- options:
+		- 108: 108
+- Input::Quote Currency Code::quoteCurrencyCode
+	- length: 3;
+- Dropdown::Deductible Costs Flag::deductibleCostsFlag
+	- options:
+		- E: E
+		- I: I
+		- N: N
+- Dropdown::Rated Type::ratedType
+	- options:
+		- M: M
+		- A: A
+		- H: H
+		- P: P
+- Number::Short Rate Percentage::shortRatePercentage
+	- numeric: Must be numeric.
+	- notNegative: Must be not negative.
+- Date::Reinstatement Date::reinstatementDate
+- Input::Renewal Certificate Number::renewalCertificateNumber
+	- length: 8;
+- Dropdown::Audit Frequency::auditFrequency
+	- options:
+		- A: A
+		- S: S
+		- M: M
+- Dropdown::Personal Package Policy Status::personalPackagePolicyStatus
+	- options:
+		- A: A
+		- H: H
+		- B: B
+- Input::Stateside Collection Indicator::statesideCollectionIndicator
+	- length: 0..1;
+- Dropdown::MM Maker Type::mmMakerType
+	- options:
+		- MJ: MJ
+		- MM: MM
+		- M: M
+- Checkbox::eDit Flag::eDitFlag
+	- values: Y, N
+- Input::Request Revision No.::requestRevisionNo
+- Input::Lae Method Flag::laeMethodFlag
+	- length: 1;
+- Dropdown::Prefix Segment Code::prefixSegmentCode
+	- options:
+		- C: C
+		- S: S
+		- T: T
+		- A: A
+		- O: O
+		- N: N
+		- 0: 0
+- Dropdown::Waats Gds Reference No.::waatsGdsReferenceNo
+	- options:
+		- 0: 0
+		- NZD: NZD
+		- ANZ: ANZ
+		- FRA: FRA
+- Input::Document Note::documentNote
+	- disabled
+- Dropdown::Print Renewal Notice::printRenewalNotice
+	- options:
+		- Y: Y
+- Date::Error Date::errorDate
+- Input::Form Number::formNumber
+	- length: 0..5;
+- Dropdown::Region Field::regionField
+	- options:
+		- N: N
+- Input::Renewal Extract::renewalExtract
+	- length: 0..1;
+- Checkbox::Has End::hasEnd
+	- values: Y, N
+- Input::Filler Field::fillerField
+	- place: 12
+	- length: 0..65;
+- Input::Manual Modify::manualModify
+	- disabled
+```
+
+The above is a fairly comprehensive example used to render a page for inputting basic insurance information. We don't need to focus on the
+specific content here; we are interested in understanding how to define it quickly. Let’s select a representative section from it for a
+detailed observation.
+
+```markdown
+# Page::Policy Info
+
+## Section::Policy Info
+
+- Input::Company Code::companyCode
+	- length: 2;
+	- disabled
+- Dropdown::Country::countryCode
+	- options:
+		- 183: NZ
+- Checkbox::Has End::hasEnd
+	- values: Y, N
+- Input::Filler Field::fillerField
+	- place: 12
+	- length: 0..65;
+```
+
+- `# Page::Policy Info`: This represents a page,
+- `## Section::Policy Info`: This is a Section, and it is titled `Policy Info`,
+- `- Input::Company Code::companyCode`: This is an input, and it is titled `Company Code`, bind two-way with the model
+  property `companyCode`,
+- `    - length: 2;`: The length of `Company Code` must be 2 characters. Custom validation exception messages can be written after the
+  semicolon, but it is not specified in this case, so the standard message will be used,
+- `    - disabled`: `Company Code` cannot be edited or modified,
+- `- Dropdown::Country::countryCode`: This is a dropdown, and it is titled `Country`, bind two-way with the model property `countryCode`,
+- `    - options:`, `        - 183: NZ`: This dropdown only has one option, with a value of `183` and a label of `NZ`,
+- `- Checkbox::Has End::hasEnd`: This is a checkbox, and it is titled `Has End`, bind two-way with the model property `hasEnd`,
+- `    - values: Y, N`: The value of this checkbox is `Y` and `N`,
+- `- Input::Filler Field::fillerField`: This is an input, and it is titled `Filler Field`, bind two-way with the model
+  property `fillerField`,
+- `    - place: 12`: Occupying 12 columns, since the `Section` uses a 12-column layout, this input field actually spans the entire row,
+- `    - length: 0..65;`: Similar to the length limit mentioned above, here it is defined that 0 to 65 characters are all valid.
+
+Once the above Markdown is defined, simply invoke the `parseDoc` function to obtain the parsed configuration, which can then be used for
+rendering, as shown below:
+
+```typescript jsx
+// Assuming that content is a markdown text definition that satisfies the syntax requirements,
+const {node: def} = parseDoc(content);
+
+return <StandaloneRoot $root={model} {...def} />;
+```
+
+## Built-in `d9-n2` Widgets Parser
+
+All the built-in `d9-n2` widgets parsing support can be found in the `/src/lib/n2` directory. Before using the `d9-n2` widget parsing,
+need to call the `registerN2Widgets` method to register all the parsers. All parsers need to
+implement `SpecificWidgetTranslator`. If it is an array widget, please implement `SpecificArrayWidgetTranslator`. `d9-n3` already
+provides a variety of basic parsers for customizing new parsers, and you can observe the specific implementation through the source code.
+After writing your custom parsers, you also need to provide a function similar to `registerN2Widgets` to register your parser
+into the parser repository.
+
+# Syntax of Markdown
+
+When defining a page, the most important aspect is attribute definition. This section will focus on the attribute definition part and
+provide
+comprehensive documentation to facilitate quick learning for users.
+
+> Property or attribute have the same meaning in this chapter and are no longer distinguished.
+
+## Heading
+
+Syntax: `WidgetType[::Headline][::Id]`.
+
+Connect with `::`,
+
+- If there is no `::`, only the widget type is present,
+- If there are two parts, it includes widget type and headline,
+- If there are more than three parts, the last section represents the id, the first section represents the widget type. All the
+  middle sections are reconnected with `::` to represent the headline.
+
+Some examples:
+
+```markdown
+# Page
+
+## Section::Basic Info
+
+### Table::Order Items::orderItems
+
+- property: items
+```
+
+> It is important to note that the last section of the heading is not a property path, so an additional property path definition is
+> needed through the list item approach.
+
+> If heading ends with `::EXPORT`, means it is exported from this markdown configuration, the first one will be rendered if there is
+> no `Page` present.  
+> If heading ends with `::IGNORE`, means it is ignored in rendering, which can be used to annotate exclusions that are not meant to be
+> removed from the entire configuration.
+
+## List Item
+
+> If list item ends with `::IGNORE`, means it is ignored in rendering, which can be used to annotate exclusions that are not meant to be
+> removed from the entire configuration.
+
+### Widget
+
+Syntax: `WidgetType::Label[::PropertyPath]`.
+
+Connect with `::`,
+
+- If there is no `::`, it will not be recognized as a widget,
+- If there are two parts, it includes widget type and label (could be empty or blank),
+- If there are more than three parts, the last section represents the property path, the first section represents the widget type. All the
+  middle sections are reconnected with `::` to represent the headline.
+
+Some examples:
+
+```markdown
+- Input::Name::name
+- Dropdown::
+	- property: gender
+```
+
+> `- Dropdown::` will be parsed to two parts, which presents widget type and an empty label.
+
+### Reference Widget
+
+Syntax: `REF.Id` or `Ref.Id` or `ref.Id`.
+
+> Reserved, currently not supported in runtime.
+
+### Attribute
+
+Syntax: `X:y`.
+
+Single attribute definition. Additionally, this list item node can contain child lists, depending on the implementation of the parser.
+
+Some examples:
+
+```markdown
+- property: name
+- options: @ext.codes.hasEndOptions
+- options:
+	- A: A
+	- C: C
+```
+
+> In the examples above, all property definitions are written at the top level. However, in actual definitions, properties are always
+> associated with a component and therefore cannot be written at the top level.
+
+### Attributes
+
+Syntax: `a[, b[, !c]]`.
+
+To define multiple properties with boolean values, connected by commas. To represent a false value, simply prefix it with an exclamation
+mark.
+
+Some examples:
+
+```markdown
+- disabled
+- disabled, !visible
+```
+
+> In the examples above, all property definitions are written at the top level. However, in actual definitions, properties are always
+> associated with a component and therefore cannot be written at the top level.
+
+## Position
+
+Syntax:
+
+- `place`, `position`, and `$pos` can all be used as attribute names, and they have the same meaning,
+- `place: columns`,
+- `place: row, column`,
+- `place: row, column, columns`,
+- `place: row, column, columns, rows`,
+- `place: [c|$c|col|$col|column|$column: column][, r|$r|row|$row: row][, cols|$cols|columns|$columns: columns][, rows|$rows: rows]`.
+
+Some examples:
+
+```markdown
+- place: 12
+- position: 2, 4
+- $pos: 2, 4, 6
+- place: 2, 4, 6, 3
+- place: c: 4, r: 2, cols: 6, rows: 3
+- place: $c: 4, $r: 2, $cols: 6, $rows: 3
+```
+
+## Attribute Guard
+
+Any attributes that are not captured by a specific parser will be eventually parsed by the attribute guard. The attribute guard follows the
+following principles for parsing:
+
+- If the attribute value is empty, it is considered as an empty string.
+- If it is any of `True`, `true`, `T`, `t`, `Yes`, `yes`, `Y`, `y`, it is considered as true.
+- If it is any of `False`, `false`, `F`, `f`, `No`, `no`, `N`, `n`, it is considered as false.
+- Attempt to convert it to a numeric type, if successful, it is converted to a numeric value; if failed, the string value is retained.
+
+Therefore, if the value of a component attribute conforms to the above rules, there is no need to provide additional parsers.
+
+Some examples:
+
+```markdown
+- property: name
+- disabled: yes
+```
+
+## External Definition
+
+Any attribute value starting with `@ext.` will be translated as requiring an external definition.
+
+Some examples:
+
+```markdown
+- options: @ext.codes.hasEndOptions
+```
+
+> In the examples above, using `codes.hasEndOptions` to find external definitions, which passed to `StandardRoot`.
+
+## Form Cell
+
+`$fc` is a boolean attribute. When this attribute is defined (typically with a value of true), the current widget will have
+the `.FC` suffix added, indicating that it is included within the component represented by `FC`. Note that if a widget
+already has a label defined, it will by default have the `.FC` suffix added. Unless the widget parser declares that it should not be
+included, please refer to the `SpecificWidgetTranslator#shouldWrapByFormCell` implementation.
+

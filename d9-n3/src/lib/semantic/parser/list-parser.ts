@@ -122,11 +122,10 @@ export class ListParser extends AbstractSemanticNodeWidgetParser<'list'> {
 			return false;
 		}
 		const $ref = matches[2];
-		const $flag = (matches[3] || WidgetFlag.STANDARD) as WidgetFlag;
 		if (VUtils.isBlank($ref)) {
 			return false;
 		} else {
-			return {$ref, $flag};
+			return {$ref, $flag: WidgetFlag.IGNORE};
 		}
 	}
 

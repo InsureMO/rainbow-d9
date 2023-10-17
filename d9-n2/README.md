@@ -27,6 +27,8 @@ following widgets:
 - Page
 - Ribs, ImmutableRibs (also known as RibsView)
 - Table
+- FormCell (Non-independent widget, which used to include other widget and provide standard capabilities such as labeling and displaying
+  error messages.)
 
 We will not provide detailed descriptions for each widget here. You can refer to the corresponding definitions and source code for the
 individual properties standards of each widget. Instead, we will discuss some important features and principles of widget design here.

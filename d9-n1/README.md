@@ -120,6 +120,13 @@ Rendering and handling a piece of data, which must be an array, typically an obj
 widgets and should provide their own layout options. Additionally, each element in the array will be rendered according to the declared
 definition.
 
+#### Enhanced Widget
+
+Typical is a basic widget, but it is defined in a form that adds a suffix and includes any widget to achieve enhanced behavior.
+
+For example, `Input.FC`, `Input` presents an input, and `FC` presents form cell, which add a label at top and an error message label at
+bottom.
+
 ### Widget Registration
 
 Creating a new widget does not require inheritance from a base interface. Instead, it is done through a registration method.
@@ -436,6 +443,40 @@ return <StandaloneRoot {...def} $root={model} externalDefs={externalDefs} />;
   definition, see `ValueChangeableNodeDef` for more function declaration,
 
 > For other lower-level hooks, should refer to the source code.
+
+### Handle Root Event by Yourself
+
+In programming mode, due to the characteristics of React itself, and the properties exposed by `StandaloneRoot` such
+as `leading?: ReactNode; children?: ReactNode; tailing?: ReactNode;`, we can perform additional processing on `RootEventTypes`. However, it
+is important to note that this will not affect the built-in event handling logic of `d9`.
+
+Let's take a look at a simple example:
+
+```typescript jsx
+const ModelListener = (props: { model: BaseModel }) => {
+	const {model} = props;
+	const {on, off} = useRootEventBus();
+
+	useEffect(() => {
+		const onValueChanged = () => {
+			// ... handle value changed event here
+		};
+		on(RootEventTypes.VALUE_CHANGED, onValueChanged);
+		return () => {
+			off(RootEventTypes.VALUE_CHANGED, onValueChanged);
+		};
+	}, [on, off, fire, model]);
+	return <Fragment />;
+};
+
+const Page = () => {
+	// ...
+
+	return <StandaloneRoot $root={initModel} {...def} externalDefs={externalDefs}>
+		<ModelListener model={initModel} />
+	</StandaloneRoot>
+}
+```
 
 ## Utilities
 
