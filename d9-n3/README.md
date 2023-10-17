@@ -525,3 +525,39 @@ the `.FC` suffix added, indicating that it is included within the component repr
 already has a label defined, it will by default have the `.FC` suffix added. Unless the widget parser declares that it should not be
 included, please refer to the `SpecificWidgetTranslator#shouldWrapByFormCell` implementation.
 
+## Built-in Validation Properties
+
+- `required`: boolean,
+- `numeric`: boolean,
+- `integer`: boolean,
+- `positive`: boolean,
+- `notNegative`: boolean,
+- `length`: syntax as below,
+	- `length: number`: presents fix length,
+	- `length: number..`: presents minimum length,
+	- `length: ..number`: presents maximum length,
+	- `length: number..number`: presents both minimum and maximum length,
+	- all above syntax, connected by `,`,
+	- no negative value accepted.
+
+```markdown
+- required, numeric, positive
+- integer, notNegative
+- length: 5
+- length: 1..5
+- length: ..5
+- length: 3..
+- length: 8, 11
+- length: 5..8, 11..20
+```
+
+All built-in validation properties can use tailing `; message` to identify the customization message. For boolean attribute, string value
+should be treated as customization message.
+
+```markdown
+- required: Name is required.
+- length: 5; Name should be 5 characters.
+```
+
+> Built-in validation attribute must be declared in customized `SpecificWidgetTranslator`, otherwise it will not take effect.
+
