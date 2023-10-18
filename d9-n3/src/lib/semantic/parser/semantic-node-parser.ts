@@ -1,5 +1,6 @@
 import {N3Logger} from '../../logger';
 import {ParsedNodeType} from '../../node-types';
+import {Undefinable} from '../../utility-types';
 import {
 	ParsedEmphasis,
 	ParsedInlineCode,
@@ -32,12 +33,13 @@ export abstract class AbstractSemanticNodeParser<T extends keyof ParsedNodeMap> 
 	/**
 	 * parse native markdown ast node
 	 */
-	public parseNative(node: ParsedNodeMap[T]['preparsed']['content']): ParsedNodeMap[T] {
+	public parseNative(node: ParsedNodeMap[T]['preparsed']['content']): Undefinable<ParsedNodeMap[T]> {
 		const preparser = this.findPreparser(node.type);
 		if (preparser != null) {
 			return this.parsePreparsed(preparser.parse(node));
 		} else {
-			throw new Error(`Node[type=${node.type}] not supported yet.`);
+			N3Logger.error(`Node[type=${node.type}] not supported yet.`, AbstractSemanticNodeParser.name);
+			return (void 0);
 		}
 	}
 }

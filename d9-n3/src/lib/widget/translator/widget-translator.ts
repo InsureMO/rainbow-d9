@@ -1,4 +1,5 @@
 import {ContainerDef, NodeDef, PropertyPath} from '@rainbow-d9/n1';
+import {N3Logger} from '../../logger';
 import {ParsedNodeType} from '../../node-types';
 import {WidgetType} from '../../semantic';
 import {ParsedNodeDef} from '../../types';
@@ -76,7 +77,7 @@ export class WidgetTranslator extends AbstractTranslator<Decipherable> {
 		}
 
 		// never export
-		return {node: def};
+		return {node: def, success: true};
 	}
 
 	public translate(node: Decipherable): ParsedNodeDef {
@@ -89,7 +90,8 @@ export class WidgetTranslator extends AbstractTranslator<Decipherable> {
 		} else {
 			// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 			// @ts-ignore
-			throw new Error(`Given node type[${node.type}] is not supported.`);
+			N3Logger.error(`Given node type[${node.type}] is not supported.`, WidgetTranslator.name);
+			return {node: {$wt: ''}, success: false};
 		}
 	}
 }

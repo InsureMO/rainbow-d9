@@ -36,11 +36,13 @@ export const findWatches = (def: NodeDef): Array<MonitorWatchDef> => {
 			if (key !== MonitorNodeAttributes.VALID && ($watch == null || $watch.length === 0)) {
 				// if attribute is validation, no watch means watch myself only
 				N1Logger.error('Watch def: ', declared, 'FindWatches');
-				throw new Error(`At least one path needs to be declared on attribute[${key}] monitor.`);
+				N1Logger.error(`At least one path needs to be declared on attribute[${key}] monitor, ignored.`, 'FindWatches');
+				return null;
 			}
 			if ($handle == null) {
 				N1Logger.error('Watch def: ', declared, 'FindWatches');
-				throw new Error(`Monitor handler is missed on attribute[${key}] monitor.`);
+				N1Logger.error(`Monitor handler is missed on attribute[${key}] monitor, ignored.`, 'FindWatches');
+				return null;
 			}
 			return {$watch, $handle, $default, $attributeName: key} as MonitorWatchDef;
 		})

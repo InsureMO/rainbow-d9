@@ -1,4 +1,5 @@
 import {PropertyPath, PropValue} from '../types';
+import {N1Logger} from './logger';
 import {PPUtils} from './property-path-utils';
 import {VUtils} from './value-utils';
 
@@ -31,16 +32,21 @@ export const MUtils: ModelUtilsType = {
 			}
 			if (VUtils.isPrimitive(fromModel)) {
 				// cannot get property from primitive value, raise exception here
-				console.error('Root is ', model, ', direct parent is ', fromModel);
-				throw new Error(`Cannot retrieve value from model by path[${path}].`);
+				N1Logger.error('Root is ', model, ', direct parent is ', fromModel, 'MUtils');
+				N1Logger.error(`Cannot retrieve value from model by path[${path}].`, 'MUtils');
+				return null;
 			}
 
 			if (Array.isArray(fromModel)) {
 				// get values from every item and merge into one array
 				return fromModel.map(item => {
+					if (item == null) {
+						return null;
+					}
 					if (VUtils.isPrimitive(item)) {
-						console.error('Root is ', model, ', direct parent is ', item);
-						throw new Error(`Cannot retrieve value from model by path[${path}].`);
+						N1Logger.error('Root is ', model, ', direct parent is ', item, 'MUtils');
+						N1Logger.error(`Cannot retrieve value from model by path[${path}].`, 'MUtils');
+						return null;
 					}
 					return item[segment];
 				});
@@ -58,8 +64,12 @@ export const MUtils: ModelUtilsType = {
 		const valueIndex = count - 1;
 		segments.reduce((toModel, segment, index) => {
 			if (toModel == null || VUtils.isPrimitive(toModel)) {
-				console.error('Root is ', model, ', direct parent is ', toModel);
-				throw new Error(`Cannot set value into model by path[${path}].`);
+				// null or primitive value detected won't stop the reducing, output error log on last round only
+				if (index === valueIndex) {
+					N1Logger.error('Root is ', model, ', direct parent is ', toModel, 'MUtils');
+					N1Logger.error(`Cannot set value into model by path[${path}].`, 'MUtils');
+				}
+				return toModel;
 			}
 			if (index === valueIndex) {
 				toModel[segment] = value;
@@ -73,8 +83,8 @@ export const MUtils: ModelUtilsType = {
 					toModel[segment] = newOne;
 					return newOne;
 				} else if (VUtils.isPrimitive(toModel)) {
-					console.error('Root is ', model, ', direct parent is ', toModel);
-					throw new Error(`Cannot set value into model by path[${path}].`);
+					// reducing continue, and will be caught by first if check, and output error log
+					return toModel;
 				} else {
 					return value;
 				}
