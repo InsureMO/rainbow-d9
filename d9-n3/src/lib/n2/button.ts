@@ -42,7 +42,7 @@ export const N2ButtonClickBuild: AttributeValueBuild<ButtonClick> = {
 			value = value.trim().toLowerCase();
 			if (value === 'validate') {
 				return N2ButtonValidateMinimum;
-			} else if (value.startsWith('validate ')) {
+			} else if (value.startsWith('validate ') || value.startsWith('validate:')) {
 				value = value.substring('validate '.length).trim();
 				if (value === 'me') {
 					return N2ButtonValidateMinimum;

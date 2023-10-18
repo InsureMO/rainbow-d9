@@ -1,7 +1,13 @@
 import {VUtils} from '@rainbow-d9/n1';
 import {CalendarFixedTimeAt} from '@rainbow-d9/n2';
 import {Undefinable} from '../utility-types';
-import {AttributeValueBuild, SpecificWidgetTranslator, WidgetPropertyName} from '../widget';
+import {
+	AttributeValueBuild,
+	MonitorHandlerDetective,
+	SpecificWidgetTranslator,
+	ValidatorUtils,
+	WidgetPropertyName
+} from '../widget';
 import {N2WidgetType} from './types';
 
 export const N2CalendarFixedTimeAtBuild: AttributeValueBuild<CalendarFixedTimeAt> = {
@@ -51,6 +57,10 @@ export class N2DateTranslator extends SpecificWidgetTranslator<N2WidgetType.DATE
 	public getAttributeValueBuilders(): Array<AttributeValueBuild<any>> {
 		return [N2CalendarFixedTimeAtBuild];
 	}
+
+	public getValidationHandlerDetectives(): Array<MonitorHandlerDetective> {
+		return [ValidatorUtils.DETECT_REQUIRED];
+	}
 }
 
 export class N2DateTimeTranslator extends SpecificWidgetTranslator<N2WidgetType.DATETIME> {
@@ -62,6 +72,10 @@ export class N2DateTimeTranslator extends SpecificWidgetTranslator<N2WidgetType.
 	public getAttributeValueBuilders(): Array<AttributeValueBuild<any>> {
 		return [N2CalendarFixedTimeAtBuild];
 	}
+
+	public getValidationHandlerDetectives(): Array<MonitorHandlerDetective> {
+		return [ValidatorUtils.DETECT_REQUIRED];
+	}
 }
 
 export class N2CalendarTranslator extends SpecificWidgetTranslator<N2WidgetType.CALENDAR> {
@@ -72,5 +86,9 @@ export class N2CalendarTranslator extends SpecificWidgetTranslator<N2WidgetType.
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	public getAttributeValueBuilders(): Array<AttributeValueBuild<any>> {
 		return [N2CalendarFixedTimeAtBuild];
+	}
+
+	public getValidationHandlerDetectives(): Array<MonitorHandlerDetective> {
+		return [ValidatorUtils.DETECT_REQUIRED];
 	}
 }

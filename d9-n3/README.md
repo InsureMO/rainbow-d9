@@ -26,7 +26,7 @@ hierarchy, with N-level headings appearing as child nodes under the nearest prec
 
 ## Semantic Parse
 
-Translation: The semantic parsing will parse headings and list items into components, following the following parsing rules:
+The semantic parsing will parse headings and list items into components, following the following parsing rules:
 
 - Headings, in the format of `WidgetType[::Headline][::$Id]`.
 	- If no text definition is provided, it is considered a reserved heading,
@@ -569,7 +569,7 @@ Some examples:
 
 ## Name Mapping
 
-Translation: The names of certain attributes in actual configurations may start with a `$`, or they may be abbreviated or use shorthand
+The names of certain attributes in actual configurations may start with a `$`, or they may be abbreviated or use shorthand
 forms. These names can be confusing to read when configuring in Markdown. Therefore, `d9-n3` provides a mechanism for attribute name
 mapping, which consists of the following parts:
 
@@ -607,56 +607,59 @@ Built-in name mapping as below,
 
 # `d9-n2` Widgets Support
 
-# Common
+## Common
 
-| Attribute Name             | Type          | Need Declare by Widget Parser? | Description                                                                                  |
-|----------------------------|---------------|--------------------------------|----------------------------------------------------------------------------------------------|
-| property, $pp              | property path | No                             | `- property: name`<br/>`- property: customer.name`                                           |
-| disabled, $disabled        | boolean       | No                             | `- disabled`                                                                                 |
-| visible, $visible          | boolean       | No                             | `- visible: false`                                                                           |
-| validate, $valid           | various       | No                             | **Not supported yet**                                                                        |
-| watch, $reaction           | various       | No                             | **Not supported yet**                                                                        |
-| place, position, pos, $pos | various       | No                             | Refer to [Position](#position)                                                               |
-| $fc                        | boolean       | No                             | `- $fc`<br/>Force current widget wrapped by a form cell.                                     |
-| label                      | text          | No                             | `- Section::Customer`<br/>`- label: Customer`<br/>Works when widget is wrapped by form cell. |
-| holdPositionWhenInvisible  | boolean       | No                             | Hold position even widget is invisible, for form cell.                                       |
-| required                   | boolean       | Yes                            | `- required`<br/>`- required: This field is mandantory.`                                     |
-| numeric                    | boolean       | Yes                            | `- numeric`<br/>`- numeric: This field should be a number.`                                  |
-| integer                    | boolean       | Yes                            | `- integer`<br/>`- integer: This field should be an integer.`                                |
-| positive                   | boolean       | Yes                            | `- positive`<br/>`- positive: This field should be a positive number.`                       |
-| notNegative                | boolean       | Yes                            | `- notNegative`<br/>`- notNegative: This field should be a non-negative number.`             |
-| length                     | number range  | Yes                            | `- length: 5`<br/>`- length: 5..10`, etc.                                                    |
+| Attribute Name                    | Type          | Need Declare by Widget Parser? | Description                                                                                  |
+|-----------------------------------|---------------|--------------------------------|----------------------------------------------------------------------------------------------|
+| property, $pp                     | property path | No                             | `- property: name`<br/>`- property: customer.name`                                           |
+| disabled, $disabled               | boolean       | No                             | `- disabled`                                                                                 |
+| visible, $visible                 | boolean       | No                             | `- visible: false`                                                                           |
+| validate, $valid                  | various       | No                             | **Not supported yet**                                                                        |
+| validateScopes, $validationScopes | text          | No                             | `- validateScopes: s1, s2`<br/>Define the applicable validation scopes.                      |
+| watch, $reaction                  | various       | No                             | **Not supported yet**                                                                        |
+| place, position, pos, $pos        | various       | No                             | Refer to [Position](#position)                                                               |
+| $fc                               | boolean       | No                             | `- $fc`<br/>Force current widget wrapped by a form cell.                                     |
+| label                             | text          | No                             | `- Section::Customer`<br/>`- label: Customer`<br/>Works when widget is wrapped by form cell. |
+| holdPositionWhenInvisible         | boolean       | No                             | Hold position even widget is invisible, for form cell.                                       |
+| required                          | boolean       | Yes                            | `- required`<br/>`- required: This field is mandantory.`                                     |
+| numeric                           | boolean       | Yes                            | `- numeric`<br/>`- numeric: This field should be a number.`                                  |
+| integer                           | boolean       | Yes                            | `- integer`<br/>`- integer: This field should be an integer.`                                |
+| positive                          | boolean       | Yes                            | `- positive`<br/>`- positive: This field should be a positive number.`                       |
+| notNegative                       | boolean       | Yes                            | `- notNegative`<br/>`- notNegative: This field should be a non-negative number.`             |
+| length                            | number range  | Yes                            | `- length: 5`<br/>`- length: 5..10`, etc.                                                    |
 
-# Page
+## Page
 
 Strictly adhere to the heading parsing rules without any additional attribute definitions.
 
-# Section
+## Section
 
 - Default Wrapped by Form Cell: `false`,
-- Default Grid Column Span: 12
+- Default Grid Column Span: `12`.
 
 | Attribute Name | Type | Description                                   |
 |----------------|------|-----------------------------------------------|
 | label, title   | text | `- Section::Customer`<br/>`- title: Customer` |
 
-# Caption, Label
+## Caption, Label
 
 - Default Wrapped by Form Cell: `true`,
-- Default Grid Column Span: 3
+- Default Grid Column Span: `3`.
 
-| Attribute Name             | Type    | Description                                                                                               |
-|----------------------------|---------|-----------------------------------------------------------------------------------------------------------|
-| label                      | text    | `- Caption::Customer Name`<br/>`- label: Customer Name`                                                   |
-| labelOnValue, valueToLabel | snippet |                                                                                                           |
-| click                      | text    | `- click: alert message`<br/>`- click: alert:message`<br/>`- click: dialog key`<br/>`- click: dialog:key` |
+| Attribute Name | Type    | Description                                                                                               |
+|----------------|---------|-----------------------------------------------------------------------------------------------------------|
+| label          | text    | `- Caption::Customer Name`<br/>`- label: Customer Name`                                                   |
+| labelOnValue   | boolean | `- labelOnValue: true`                                                                                    |
+| valueToLabel   | various |                                                                                                           |
+| click          | text    | `- click: alert message`<br/>`- click: alert:message`<br/>`- click: dialog key`<br/>`- click: dialog:key` |
 
 `Caption` and `Label` have slight differences.
 
 - For `Caption`, the model value must be explicitly specified; otherwise, only the given `label` will be used,
+	- While defining `valueToLabel`, the parser will automatically set `labelOnValue` to `true`,
 - For `Label`, defaults to using the model value and ignores the `label` attribute.
 
-## Syntax of `labelOnValue` and `valueToLabel`:
+### Syntax of `valueToLabel`:
 
 - ``valueToLabel: `value` ``: If using `Caption` and specifying to use the model value, no additional decoration applied. If using `Label`,
   this can be ignored.
@@ -691,22 +694,28 @@ Some examples:
 > don't want it to be displayed twice, you should use `Caption::`. This way, the system no longer considers it enhanced by `Form Cell` and
 > it will not be displayed twice. This usage is common in `Table`, and we will discuss it in more detail later.
 
-## Syntax of `click`
+### Syntax of `click`
 
 `click` requires external support in order to respond to the defined event. For example:
 
 ```typescript jsx
+import {BaseModel, PropValue} from '@rainbow-d9/n1';
+import {PageDef} from '@rainbow-d9/n2';
+
 const markdown = `# Page
 - Label::Customer::name
 	- valueToLabel: value ?? ''
 	- click: dialog:customerDetails
 `;
+const DialogDefs: Record<string, PageDef> = {
+	// ...
+};
 const Dialogs = () => {
 	const {on, off} = useGlobalEventBus();
 	const {show: showDialog} = useDialog();
 	useEffect(() => {
 		const openDialog = async <R extends BaseModel, M extends PropValue>(
-			dialog: D9CommonTabDialog, models?: { root: R; model: M; }) => {
+			def: PageDef, models?: { root: R; model: M; }) => {
 			showDialog(<>
 				{title}
 				<DialogBody>
@@ -720,7 +729,7 @@ const Dialogs = () => {
 			if (key.startsWith('dialog ') || key.startsWith('dialog:')) {
 				const dialogKey = key.slice('dialog '.length).trim();
 				if (VUtils.isNotEmpty(dialogKey)) {
-					const def = map[dialogKey];
+					const def = DialogDefs[dialogKey];
 					if (def !== null) {
 						(async () => await openDialog(def, models))();
 					} else {
@@ -753,11 +762,11 @@ const Page = () => {
 };
 ```
 
-# Input, Number
+## Input, Number
 
 - Default Wrapped by Form Cell: `true`,
-- Default Grid Column Span: 3
-- Declared Built-in Validation: `required`, `numeric`, `integer`, `positive`, `notNegative`, `length`,
+- Default Grid Column Span: `3`,
+- Declared Built-in Validation: `required`, `numeric`, `integer`, `positive`, `notNegative`, `length`.
 
 Some examples:
 
@@ -771,4 +780,299 @@ Some examples:
 	- positive
 ```
 
-# Textarea
+## Textarea
+
+- Default Wrapped by Form Cell: `true`,
+- Default Grid Column Span: `3`,
+- Declared Built-in Validation: `required`, `length`.
+
+Some examples:
+
+```markdown
+- Textarea::Description::desc
+	- required
+	- length: 10..256
+```
+
+## Checkbox
+
+- Default Wrapped by Form Cell: `true`,
+- Default Grid Column Span: `3`,
+- Declared Built-in Validation: `required`.
+
+| Attribute Name | Type | Description                        |
+|----------------|------|------------------------------------|
+| values         | text | `- values: Y`<br/>`- values: Y, N` |
+
+### Syntax of `values`
+
+The default values for a checkbox are `true` and `false`, where any value other than `true` is considered as `false` in the display logic.
+However, if the actual model value is not of boolean type, such as `1` and `0`, `Y` and `N`, `T` and `F`, etc., it needs to be explicitly
+specified.
+
+> It is important to note that in JavaScript, the value `1` is considered as `true`.
+
+Some examples:
+
+```markdown
+- Checkbox::Agree::agreed
+	- required
+	- values: Y, N
+- Checkbox::Agree::agreed
+	- required
+	- values: Y
+- Checkbox::Agree::agreed
+	- required
+	- values: , N
+```
+
+> Typically, `values` appear in pairs, but in reality, having only one value is also allowed. However, we generally do not
+> recommend such loose data definition as it can lead to data confusion to some extent.
+
+## Dropdown
+
+- Default Wrapped by Form Cell: `true`,
+- Default Grid Column Span: `3`,
+- Declared Built-in Validation: `required`.
+
+| Attribute Name   | Type    | Description                                                     |
+|------------------|---------|-----------------------------------------------------------------|
+| sort, optionSort | text    | `- sort: asc`<br/>`- sort: desc`<br/>Value is case insensitive. |
+| options          | various |                                                                 |
+
+### Syntax of `options`
+
+- `options: value: label[; value: label[; value: label...]]`: Static options can be defined by separating each option with a semicolon and
+  separating the value and label with a colon,
+- Use sub-lists to define options, where each sublist item represents an option, and use a colon to separate the value and label,
+- `options: @ext.keys`: referencing external definitions is also possible.
+
+Some examples:
+
+```markdown
+- Dropdown::Agree::agreed
+	- required
+	- options: Y: Yes; N: No
+- Checkbox::Agree::agreed
+	- required
+	- options:
+		- Y: Yes
+		- N: No
+- Checkbox::Agree::agreed
+	- required
+	- options: @ext.codes.yesNoOptions
+```
+
+> `codes.yesNoOptions` depends on external definitions, it must follow signature `DropdownDef['options']`.
+
+## Calendar, DateTime, Date
+
+- Default Wrapped by Form Cell: `true`,
+- Default Grid Column Span: `3`,
+- Declared Built-in Validation: `required`.
+
+| Attribute Name | Type    | Description                                                                                       |
+|----------------|---------|---------------------------------------------------------------------------------------------------|
+| please         | text    | `- please: Please select...`                                                                      |
+| clearable      | boolean | `- !clearable`<br/>`- clearable: false`<br/>Allowed to clear the selected value or not.           |
+| dateFormat     | text    | `- dateFormat: YYYY/MM/DD`, follows `Dayjs`.                                                      |
+| time           | boolean | `- time: false`, only for `Calendar`                                                              |
+| timeFormat     | text    | `- timeFormat: HH:mm:ss`, follows `Dayjs`                                                         |
+| storeFormat    | text    | `- storeFormat: YYYY/MM/DD HH:mm:ss`, follows `Dayjs`                                             |
+| autoConfirm    | boolean | `- autoConfirm: true`<br/>Selected value should be applied to model automatically on blur or not. |
+| fixedTimeAt    | json    | For `Calendar`, works when time is false; and for `Date`.                                         | 
+
+### Formats
+
+All formats have default values, see below for more details,
+
+- `setCalendarDefaults`: to change default settings,
+- `getDefaultCalendarDateFormat`: default of date format,
+- `getDefaultCalendarTimeFormat`: default of time format,
+- `getDefaultCalendarDatetimeFormat`: default of store format.
+
+### Auto Confirm
+
+Auto confirm selected value on blur has default value, see below for more details,
+
+- `setCalendarDefaults`: to change default settings,
+- `isCalendarAutoConfirm`: default of autoConfirm.
+
+### Fixed Time At
+
+- `- fixedTimeAt: start` or `- fixedTimeAt: 0`: fix at `00:00:00.0`,
+- `- fixedTimeAt: end`: fix at `23:59:59.999`,
+- `- fixedTimeAt: 01:00:00`: fix at `01:00:00.0`. Any valid time not `23:59:59`, millisecond should be set as `0`,
+- `- fixedTimeAt: 23:59:59`: fix at `23:59:59.999`,
+- `- fixedTimeAt: 23:59:59.1`: fix at `23:59:59.001`,
+- `- fixedTimeAt: 23:59:59.12`: fix at `23:59:59.012`,
+- `- fixedTimeAt: 23:59:59.123`: fix at `23:59:59.123`.
+
+Some examples:
+
+```markdown
+- Calendar::Date of Birth::dob
+	- required, !time
+	- fixedTimeAt: start
+- Date::Date of Birth::dob
+	- required
+	- fixedTimeAt: 0
+- DateTime::Registration Time::registrationTime
+	- required, !clearable
+```
+
+## Button
+
+- Default Wrapped by Form Cell: `true`,
+- Default Grid Column Span: `3`.
+
+| Attribute Name | Type    | Description                                                                          |
+|----------------|---------|--------------------------------------------------------------------------------------|
+| head           | text    | `- head: **`<br/>Text before `text`.                                                 |
+| text           | text    | `- text: Click Me`                                                                   |
+| tail           | text    | `- tail: **`<br/>Text after `text`.                                                  |
+| ink            | text    | `- ink: primary`<br/>One of `primary`, `danger`, `warn`, `success`, `info`, `waive`. |
+| fill           | text    | `- fill: plain`<br/>One of `link`, `plain`, `fill`.                                  |
+| click          | various |                                                                                      |
+
+### Syntax of `click`
+
+#### Alert and Dialog
+
+Regarding Alert and Dialog, please refer to the description for `Caption` as it remains consistent.
+
+#### Validation
+
+- `click: validate`, `click: validate me`, `click: validate:me`: automatically detect the validation range and trigger validation. The
+  detection of the validation range is done in the following order:
+	- Whether the range is specified on the button,
+	- Whether it is within the range of array sub-elements,
+	- The closest container range among ancestors,
+	- The entire range starting from the root node.
+- `click: validate block`, `click: validate:block`: automatically detect the validation range and trigger validation. The detection of the
+  validation range is done in the following order:
+	- Whether it is within the range of array sub-elements,
+	- The closest container range among ancestors,
+	- The entire range starting from the root node.
+- `click: validate all`, `click: validate:all`: trigger validation, the entire range starting from the root node,
+- `click: validate scope1[, scope2[, scope3...]]`, `click: validate:scope1[; scope2[; scope3...]]`, `click: validate:scope1[ scope2[ scope3...]]`:
+  trigger validation, limited to the given scopes only. If multiple scopes are triggered simultaneously, use a comma or semicolon or blank
+  space as separators. All widgets that match at least one scope will trigger automatic validation.
+
+Some examples:
+
+```markdown
+- Button::
+	- ink: danger
+	- fill: link
+	- click: validate block
+```
+
+## Button Bar
+
+- Default Wrapped by Form Cell: `false`,
+- Default Grid Column Span: `12`.
+
+| Attribute Name | Type | Description                                               |
+|----------------|------|-----------------------------------------------------------|
+| alignment      | text | `- alignment: left`<br/>One of `left`, `center`, `right`. |
+
+Some examples:
+
+```markdown
+- ButtonBar::
+	- alignment: center
+```
+
+## Ribs, RibsView
+
+- Default Wrapped by Form Cell: `false`,
+- Default Grid Column Span: `12`.
+
+| Attribute Name        | Type     | Description                                                                           |
+|-----------------------|----------|---------------------------------------------------------------------------------------|
+| elementTitle, caption | various  | `- elementTitle: propertyPath`                                                        |
+| noElementReminder     | text     | `- noElementReminder: No Data`                                                        |
+| addable               | boolean  | `- !addable`<br/>Not available for `RibsView`.                                        |
+| addLabel              | text     | `- addLabel: Create New One`                                                          |
+| elementAdded          | function | From external definition only, starts with `@ext.`.<br/>Not available for `RibsView`. |
+| createElement         | function | From external definition only, starts with `@ext.`.<br/>Not available for `RibsView`. |
+| removable             | boolean  | `- !removable`.<br/>Not available for `RibsView`.                                     |
+| removeLabel           | text     | `- removeLabel: Remove This One`.<br/>Not available for `RibsView`.                   |
+| elementRemoved        | function | From external definition only, starts with `@ext.`.<br/>Not available for `RibsView`. |
+| couldRemoveElement    | function | From external definition only, starts with `@ext.`.<br/>Not available for `RibsView`. |
+| getElementKey         | function | From external definition only, starts with `@ext.`.                                   |
+
+### Syntax of `elementTitle` and `caption`
+
+In addition to directly defining an attribute with its value as the title of the element, this attribute also supports the same syntax as
+the `Caption`.
+
+Some examples:
+
+```markdown
+- Ribs::
+	- caption: name
+	- noElementReminder: No Data
+	- Input::Name::name
+	- Dropdown::Gender::gender
+		- options: F: Female; M: Male
+```
+
+> `Ribs` and `RibsView` are array widgets, and the layout of each element can be described using a sublist. It is important to note that the
+> sublist needs to be placed after the attributes list.
+
+## Table
+
+- Default Wrapped by Form Cell: `false`,
+- Default Grid Column Span: `12`.
+
+| Attribute Name               | Type           | Description                                                                           |
+|------------------------------|----------------|---------------------------------------------------------------------------------------|
+| headers                      | various        |                                                                                       |
+| headerHeight                 | number, string | `- headerHeight: 48`<br/>`- headerHeight: 2em`                                        |
+| expandable                   | boolean        | `- expandable`                                                                        |
+| hideClassicCellsOnExpandable | boolean        | `- hideClassicCellsOnExpandable`                                                      |
+| clickToExpand                | boolean        | `- clickToExpand`                                                                     |
+| maxBodyHeight                | number, string | `- maxBodyHeight: 300`<br/>`- maxBodyHeight: 80vh`                                    |
+| rowIndexStartsFrom           | number         | `- rowIndexStartsFrom: 21`                                                            |
+| noElementReminder            | text           | `- noElementReminder: No Data`                                                        |
+| addable                      | boolean        | `- !addable`<br/>Not available for `RibsView`.                                        |
+| addLabel                     | text           | `- addLabel: Create New One`                                                          |
+| elementAdded                 | function       | From external definition only, starts with `@ext.`.<br/>Not available for `RibsView`. |
+| createElement                | function       | From external definition only, starts with `@ext.`.<br/>Not available for `RibsView`. |
+| removable                    | boolean        | `- !removable`.<br/>Not available for `RibsView`.                                     |
+| removeLabel                  | text           | `- removeLabel: Remove This One`.<br/>Not available for `RibsView`.                   |
+| elementRemoved               | function       | From external definition only, starts with `@ext.`.<br/>Not available for `RibsView`. |
+| couldRemoveElement           | function       | From external definition only, starts with `@ext.`.<br/>Not available for `RibsView`. |
+| getElementKey                | function       | From external definition only, starts with `@ext.`.                                   |
+
+### Syntax of `headers`
+
+When defining a table, it is necessary to first define all the column headers. The widget will calculate whether a scrollbar is needed based
+on the number of column headers and the total width. It will also determine which child elements should be displayed in the classic table
+and which ones should be displayed after expanding the row.
+
+The definition of table column headers is very simple, just look at an example to understand the several supported ways currently.
+
+```markdown
+## Table::Students::students
+
+- $fc
+- expandable, clickToExpand, !addable, !removable, hideClassicCellsOnExpandable
+- headers:
+	- Name: 120
+	- column:
+		- label: Age
+		- width: 80
+- Caption::
+	- property: name
+- Caption::
+	- property: age
+- Input::Name::name
+	- required
+- Number::Age::age
+	- required
+	- positive
+	- integer
+```

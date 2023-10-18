@@ -3,9 +3,11 @@ import {Undefinable} from '../../../utility-types';
 import {AnyAttributeBuild} from './any-attribute-build';
 import {PositionAttributeBuild} from './position-attribute-build';
 import {AttributeValueBuild} from './types';
+import {ValidationScopesAttributeBuild} from './validation-scopes-attribute-build';
 
 export class AttributeUtils {
 	public static readonly POSITION_ATTRIBUTE_BUILDER = new PositionAttributeBuild();
+	public static readonly VALIDATION_SCOPES_ATTRIBUTE_BUILDER = new ValidationScopesAttributeBuild();
 	public static readonly ANY_ATTRIBUTE_BUILDER = new AnyAttributeBuild();
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	private static CUSTOMIZED_ATTRIBUTE_BUILDERS: Record<WidgetType, Array<AttributeValueBuild<any>>> = {};
@@ -31,6 +33,7 @@ export class AttributeUtils {
 		return [
 			...(AttributeUtils.CUSTOMIZED_ATTRIBUTE_BUILDERS[$wt] ?? []),
 			AttributeUtils.POSITION_ATTRIBUTE_BUILDER,
+			AttributeUtils.VALIDATION_SCOPES_ATTRIBUTE_BUILDER,
 			AttributeUtils.ANY_ATTRIBUTE_BUILDER
 		];
 	}

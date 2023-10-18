@@ -103,7 +103,7 @@ export const Checkbox = (props: CheckBoxProps) => {
 	};
 
 	const value = MUtils.getValue($model, $pp);
-	const checked = value == values[0];
+	const checked = (value ?? '') == (values[0] ?? '');
 
 	return <ACheckbox data-disabled={$disabled} data-visible={$visible} tabIndex={0}
 	                  data-checked={checked}
