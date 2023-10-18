@@ -2,7 +2,7 @@ import {VUtils} from './value-utils';
 
 export type LoggerLevel = 'debug' | 'trace' | 'log' | 'info' | 'warn' | 'error';
 export type LoggerName = `${string}.${LoggerLevel}`;
-export type LoggerEnablement = Record<LoggerName, true>;
+export type LoggerEnablement = Record<LoggerName, boolean>;
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type LoggerPrinter = (...data: Array<any>) => void;
 
@@ -44,18 +44,41 @@ export class EnhancedLogger {
 		}
 	}
 
-	public enable(name: LoggerName) {
-		this._enablement[name] = true;
+	public enable(name: LoggerName | string) {
+		if (['debug', 'trace', 'log', 'info', 'warn', 'error'].some(level => name.endsWith(`.${level}`))) {
+			this._enablement[name] = true;
+		} else {
+			['debug', 'trace', 'log', 'info', 'warn', 'error'].forEach(level => {
+				this._enablement[`${name}.${level}`] = true;
+			});
+		}
 	}
 
-	public disable(name: LoggerName) {
-		delete this._enablement[name];
+	public disable(name: LoggerName | string) {
+		if (['debug', 'trace', 'log', 'info', 'warn', 'error'].some(level => name.endsWith(`.${level}`))) {
+			this._enablement[name] = false;
+		} else {
+			['debug', 'trace', 'log', 'info', 'warn', 'error'].forEach(level => {
+				this._enablement[`${name}.${level}`] = false;
+			});
+		}
 	}
 
 	public isEnabled(name: LoggerName): boolean {
-		return this._enablement[name] === true
-			|| (this._enabledLevels[name] !== false
-				&& this._enabledLevels.some(level => name.endsWith(`.${level}`)));
+		if (this._enablement[name] === false) {
+			// indicated as disabled
+			return false;
+		} else if (this._enablement[name] === true) {
+			// indicated as enabled
+			return true;
+		} else { // noinspection RedundantIfStatementJS
+			if (this._enabledLevels.some(level => name.endsWith(`.${level}`))) {
+				// corresponded level is enabled
+				return true;
+			} else {
+				return false;
+			}
+		}
 	}
 
 	public takeover(to: Console): void {

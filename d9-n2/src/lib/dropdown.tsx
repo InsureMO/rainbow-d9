@@ -142,12 +142,13 @@ const Option = styled.span.attrs({'data-w': 'd9-dropdown-option'})`
 	}
 `;
 
+const NO_OPTIONS = [];
 const NO_MATCHED = '__no_matched__';
 const NO_AVAILABLE = '__no_available__';
 
 export const Dropdown = (props: DropdownProps) => {
 	const {
-		options = [], optionSort,
+		options = NO_OPTIONS, optionSort,
 		$pp, $wrapped: {$onValueChange, $root, $model, $p2r, $avs: {$disabled, $visible}},
 		please = '', noAvailable = 'No available options.', noMatched = 'No matched options.', clearable = true,
 		...rest
@@ -156,7 +157,7 @@ export const Dropdown = (props: DropdownProps) => {
 	const filterInputRef = useRef<HTMLInputElement>(null);
 	const {on: onWrapper, off: offWrapper} = useWrapperEventBus();
 	const [candidates, setCandidates] = useState<Candidates>((): Candidates => {
-		return {initialized: false, options: []};
+		return {initialized: false, options: NO_OPTIONS};
 	});
 	const [filter, setFilter] = useState('');
 	const forceUpdate = useForceUpdate();
@@ -167,7 +168,7 @@ export const Dropdown = (props: DropdownProps) => {
 					setCandidates({initialized: true, options: await options({root: $root, model: $model})});
 				})();
 			} else {
-				setCandidates({initialized: true, options: options ?? []});
+				setCandidates({initialized: true, options: options ?? NO_OPTIONS});
 			}
 		} else if (!VUtils.isFunction(options) && options !== candidates.options) {
 			setCandidates({initialized: true, options});
@@ -191,7 +192,7 @@ export const Dropdown = (props: DropdownProps) => {
 	}, [onWrapper, offWrapper]);
 
 	const askOptions = (): DropdownOptions => {
-		return candidates.initialized ? candidates.options : (VUtils.isFunction(options) ? [] : (options ?? []));
+		return candidates.initialized ? candidates.options : (VUtils.isFunction(options) ? NO_OPTIONS : (options ?? NO_OPTIONS));
 	};
 	const askDisplayOptions = () => {
 		const options = askOptions();

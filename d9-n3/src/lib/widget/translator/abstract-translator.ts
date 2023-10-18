@@ -179,6 +179,14 @@ export abstract class AbstractTranslator<N extends Decipherable> {
 		return this.combineMonitors({$wt, $pp: $pp || attributes[D9PropertyNames.PROPERTY], attributes});
 	}
 
+	protected ignoreFailureParsing(parsed: ParsedNodeDef): Nullable<ParsedNodeDef> {
+		if (parsed.success !== false) {
+			return parsed;
+		} else {
+			return null;
+		}
+	}
+
 	protected buildChildrenOnSubHeadings(options: {
 		widgets: Array<ParsedNode<PreparsedSubordinateOfHeadingNodes>>
 	}): Array<ParsedNodeDef> {
@@ -191,9 +199,11 @@ export abstract class AbstractTranslator<N extends Decipherable> {
 		return identifiedHeadings.map(item => {
 			const translator = this.repository.askTranslator(item.$wt);
 			if (translator == null) {
-				throw new Error(`Translator of heading node[type=${item.$wt}] is not found. All content ignored.`);
+				// TODO USE A STANDARD ERROR WIDGET, ON DESIGN TIME
+				N3Logger.error(`Translator of heading node[type=${item.$wt}] is not found. All content ignored.`, AbstractTranslator.name);
+				return null;
 			}
-			return translator.translate(item);
+			return this.ignoreFailureParsing(translator.translate(item));
 		}).filter(x => x != null) as Array<ParsedNodeDef>;
 	}
 
@@ -210,7 +220,7 @@ export abstract class AbstractTranslator<N extends Decipherable> {
 					N3Logger.error(`Parser of node[type=${item.$wt}, line=${item.preparsed.content.position.start.line}] is not found. All content ignored.`, AbstractTranslator.name);
 					return null;
 				} else {
-					return translator.translate(item);
+					return this.ignoreFailureParsing(translator.translate(item));
 				}
 			} else if (SemanticUtils.isRefWidgetListItem(item)) {
 				// TODO TO FIND REFERENCE WIDGET

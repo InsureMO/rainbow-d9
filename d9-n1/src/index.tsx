@@ -4,7 +4,7 @@ import {RootEventBusProvider} from './lib/events';
 import {ExternalDefsHandler} from './lib/external-defs-handler';
 import {EventHolder} from './lib/hooks';
 import {StandaloneRootProps} from './lib/types';
-import {MUtils, NUtils, PPUtils} from './lib/utils';
+import {MUtils, N1Logger, NUtils, PPUtils} from './lib/utils';
 import {Wrapper} from './lib/wrapper';
 
 window.Buffer = Buffer;
@@ -25,7 +25,8 @@ export const StandaloneRoot = (props: StandaloneRootProps) => {
 	} = props;
 
 	if ($root == null) {
-		throw new Error('Root data model cannot be null.');
+		N1Logger.error('Root data model cannot be null, nothing would be rendering now.', 'StandaloneRoot');
+		return null;
 	}
 	// get property path
 	const modelPath = PPUtils.legalize($pp);

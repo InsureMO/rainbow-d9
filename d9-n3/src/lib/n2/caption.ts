@@ -1,5 +1,6 @@
 import {BaseModel, MonitorNodeAttributes, NUtils, PropValue, ReactionMonitor, VUtils} from '@rainbow-d9/n1';
 import {CaptionClick, CaptionClickOptions, CaptionDef, CaptionValueToLabel} from '@rainbow-d9/n2';
+import {N3Logger} from '../logger';
 import {ParsedListItemAttributePair} from '../semantic';
 import {Undefinable} from '../utility-types';
 import {
@@ -30,7 +31,7 @@ export const N2CaptionValueToLabelBuild: AttributeValueBuild<Pick<CaptionDef, 'l
 			}`);
 			return {labelOnValue: true, valueToLabel: func};
 		} catch (e) {
-			console.error(e);
+			N3Logger.error(e, 'N2CaptionValueToLabelBuild');
 			return (void 0);
 		}
 	}

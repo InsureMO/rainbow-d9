@@ -22,6 +22,6 @@ export class PageTranslator extends AbstractTranslator<ParsedHeadingIdentified> 
 		};
 
 		// page has no headline, use it as export key
-		return {node: def, exportKey: node.headline};
+		return {node: def, exportKey: node.headline, success: true};
 	}
 }
