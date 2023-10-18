@@ -54,7 +54,9 @@ export const N2TableHeadersBuild: AttributeValueBuild<Array<TableHeaderDef>> = {
 						return {label: attributeName.trim(), width: value, index};
 					}
 				}
-			}).filter(x => x != null);
+			})
+			.filter(x => x != null)
+			.map((x, index) => ({...x, index}));
 
 		return headers.length === 0 ? (void 0) : headers;
 	}

@@ -6,4 +6,5 @@ export type NodeDefExportKey = string;
 export interface ParsedNodeDef {
 	node: NodeDef;
 	exportKey?: NodeDefExportKey;
+	success: boolean;
 }

@@ -97,7 +97,7 @@ export class ListParser extends AbstractSemanticNodeWidgetParser<'list'> {
 				default:
 					// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 					// @ts-ignore never occurs, all types are handled
-					N3Logger.error(`Child node[type=${phrasing.type}] of root not supported yet, ignored.`);
+					N3Logger.error(`Child node[type=${phrasing.type}] of root not supported yet, ignored.`, ListParser.name);
 			}
 			return parsed;
 		}, {title: [], content: [], paragraph} as ParsedListItemFirstNode);
@@ -122,11 +122,10 @@ export class ListParser extends AbstractSemanticNodeWidgetParser<'list'> {
 			return false;
 		}
 		const $ref = matches[2];
-		const $flag = (matches[3] || WidgetFlag.STANDARD) as WidgetFlag;
 		if (VUtils.isBlank($ref)) {
 			return false;
 		} else {
-			return {$ref, $flag};
+			return {$ref, $flag: WidgetFlag.IGNORE};
 		}
 	}
 
@@ -138,10 +137,16 @@ export class ListParser extends AbstractSemanticNodeWidgetParser<'list'> {
 			const $pp = segments[segments.length - 1].trim();
 			const $wt = segments[0].trim();
 			const label = segments.slice(1, segments.length - 1).join(this.getWidgetTitleSplitter()).trim();
+			if (VUtils.isBlank($wt)) {
+				return false;
+			}
 			return {$wt, label: VUtils.isBlank(label) ? (void 0) : label, $pp};
 		} else {
 			const $wt = segments[0].trim();
 			const label = segments[1].trim();
+			if (VUtils.isBlank($wt)) {
+				return false;
+			}
 			return {$wt, label: VUtils.isBlank(label) ? (void 0) : label.trim()};
 		}
 	}

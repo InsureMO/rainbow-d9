@@ -3,7 +3,7 @@ import {WidgetType} from '../../../semantic';
 import {AnyAttributeName, WidgetPropertyName} from './types';
 
 export enum D9PropertyNames {
-	PROPERTY = '$pp', POSITION = '$pos'
+	PROPERTY = '$pp', POSITION = '$pos', VALIDATION_SCOPES = '$validationScopes'
 }
 
 export enum AttributeNames {
@@ -15,7 +15,8 @@ export enum AttributeNames {
 	// position and alias
 	PLACE = 'place',
 	POSITION = 'position',
-	POS = 'pos'
+	POS = 'pos',
+	VALIDATION_SCOPES = 'validateScopes'
 }
 
 /**
@@ -34,7 +35,8 @@ export class AttributeNameUtils {
 		[AttributeNames.PROPERTY]: D9PropertyNames.PROPERTY,
 		[AttributeNames.PLACE]: D9PropertyNames.POSITION,
 		[AttributeNames.POSITION]: D9PropertyNames.POSITION,
-		[AttributeNames.POS]: D9PropertyNames.POSITION
+		[AttributeNames.POS]: D9PropertyNames.POSITION,
+		[AttributeNames.VALIDATION_SCOPES]: D9PropertyNames.VALIDATION_SCOPES
 	};
 
 	// noinspection JSUnusedLocalSymbols

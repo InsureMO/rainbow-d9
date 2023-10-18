@@ -3,6 +3,10 @@ import {RootEventBus, useRootEventBus} from './events';
 import {ExternalDefKeys, ExternalDefs, ExternalDefsHandlerOptions} from './types';
 import {MUtils, VUtils} from './utils';
 
+export interface PlainExternalDefIndicator {
+	$keys: ExternalDefKeys;
+}
+
 export class ExternalDefIndicator {
 	private readonly _keys: ExternalDefKeys;
 	constructor(keys: ExternalDefKeys) {
@@ -34,6 +38,20 @@ export const handleExternalDefs = (options: any, reb: RootEventBus, externalDefs
 	}
 	if (options instanceof ExternalDefIndicator) {
 		const key = (options.keys || '').trim();
+		let func = externalDefs[key];
+		if (func == null) {
+			func = MUtils.getValue(externalDefs, key);
+		}
+		if (func == null) {
+			return new ExternalDefMismatchIndicator(key);
+		}
+		if (func instanceof ExternalDefCreator) {
+			return func.create(reb);
+		} else {
+			return func;
+		}
+	} else if (typeof options === 'object' && VUtils.isNotBlank(options.$keys) && typeof options.$keys === 'string') {
+		const key = (options.$keys || '').trim();
 		let func = externalDefs[key];
 		if (func == null) {
 			func = MUtils.getValue(externalDefs, key);
