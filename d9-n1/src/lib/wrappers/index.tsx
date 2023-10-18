@@ -236,27 +236,32 @@ export const WrapperDelegate = (props: NodeDef & ModelHolder) => {
 	useValidationRegistration({props, attributeValues, setAttributeValues});
 
 	if (VUtils.isBlank($wt)) {
-		throw new Error(`Type must be declared, current is [${$wt}].`);
+		N1Logger.error(`Type must be declared, current is [${$wt}].`, 'WrapperDelegate');
+		return null;
 	}
 
 	if ($wt.includes('.')) {
 		// declared with cover widget, format is "InternalWidgetType.CoverWidgetType"
 		const coverType = $wt.substring($wt.indexOf('.') + 1);
 		if (VUtils.isBlank(coverType)) {
-			throw new Error(`Cover type must be declared, current is [${$wt}].`);
+			N1Logger.error(`Cover type must be declared, current is [${$wt}].`, 'WrapperDelegate');
+			return null;
 		}
 		const internalType = $wt.substring(0, $wt.indexOf('.'));
 		if (VUtils.isBlank(internalType)) {
-			throw new Error(`Internal type must be declared, current is [${$wt}].`);
+			N1Logger.error(`Internal type must be declared, current is [${$wt}].`, 'WrapperDelegate');
+			return null;
 		}
 
 		const internalWidget: RegisteredWidget<WidgetProps> = findWidget(internalType);
 		if (internalWidget == null) {
-			throw new Error(`Widget definition of [${internalType}] not found.`);
+			N1Logger.error(`Widget definition of [${internalType}] not found.`, 'WrapperDelegate');
+			return null;
 		}
 		const coverWidget: RegisteredWidget<WidgetProps> = findWidget(coverType);
 		if (coverWidget == null) {
-			throw new Error(`Widget definition of [${coverType}] not found.`);
+			N1Logger.error(`Widget definition of [${coverType}] not found.`, 'WrapperDelegate');
+			return null;
 		}
 
 		const child = (() => {
@@ -293,7 +298,8 @@ export const WrapperDelegate = (props: NodeDef & ModelHolder) => {
 		// no cover widget
 		const widget: RegisteredWidget<WidgetProps> = findWidget($wt);
 		if (widget == null) {
-			throw new Error(`Widget definition of [${$wt}] not found.`);
+			N1Logger.error(`Widget definition of [${$wt}] not found.`, 'WrapperDelegate');
+			return null;
 		}
 
 		if (widget.container && widget.array) {

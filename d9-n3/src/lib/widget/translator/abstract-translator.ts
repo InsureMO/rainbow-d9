@@ -191,7 +191,9 @@ export abstract class AbstractTranslator<N extends Decipherable> {
 		return identifiedHeadings.map(item => {
 			const translator = this.repository.askTranslator(item.$wt);
 			if (translator == null) {
-				throw new Error(`Translator of heading node[type=${item.$wt}] is not found. All content ignored.`);
+				// TODO USE A STANDARD ERROR WIDGET, ON DESIGN TIME
+				N3Logger.error(`Translator of heading node[type=${item.$wt}] is not found. All content ignored.`, AbstractTranslator.name);
+				return null;
 			}
 			return translator.translate(item);
 		}).filter(x => x != null) as Array<ParsedNodeDef>;
