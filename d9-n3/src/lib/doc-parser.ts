@@ -31,14 +31,14 @@ export class DocParser {
 
 	public parseDoc(def: MarkdownContent): ParsedNodeDef {
 		if (VUtils.isBlank(def)) {
-			N3Logger.error('No content determined in given markdown content.');
+			N3Logger.error('No content determined in given markdown content.', DocParser.name);
 			return {node: {$wt: 'Page'} as NodeDef, success: false};
 		}
 
 		// parse ast
 		const {headings: preparsedHeadings} = this._ast.askAsTree(def);
 		if (preparsedHeadings.length === 0) {
-			N3Logger.error('No available content determined, at least one heading in content. All content ignored.');
+			N3Logger.error('No available content determined, at least one heading in content. All content ignored.', DocParser.name);
 			return {node: {$wt: 'Page'} as NodeDef, success: false};
 		}
 		// parse ast nodes, find the exported and independent nodes
@@ -61,7 +61,7 @@ export class DocParser {
 		// 	const {$wt} = heading;
 		// 	const parse = findHeadingBlockParser($wt);
 		// 	if (parse == null) {
-		// 		N3Logger.error(`Parser of independent node[type=${$wt}] is not found. All content ignored.`);
+		// 		N3Logger.error(`Parser of independent node[type=${$wt}] is not found. All content ignored.`, DocParser.name);
 		// 	}
 		// 	return {heading, parse};
 		// });

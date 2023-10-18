@@ -97,7 +97,7 @@ export class ListParser extends AbstractSemanticNodeWidgetParser<'list'> {
 				default:
 					// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 					// @ts-ignore never occurs, all types are handled
-					N3Logger.error(`Child node[type=${phrasing.type}] of root not supported yet, ignored.`);
+					N3Logger.error(`Child node[type=${phrasing.type}] of root not supported yet, ignored.`, ListParser.name);
 			}
 			return parsed;
 		}, {title: [], content: [], paragraph} as ParsedListItemFirstNode);
