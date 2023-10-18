@@ -397,6 +397,8 @@ Some examples:
 > If heading ends with `::IGNORE`, means it is ignored in rendering, which can be used to annotate exclusions that are not meant to be
 > removed from the entire configuration.
 
+> Except for the root node, the content of the `headline` will be used as the `label` attribute.
+
 ## List Item
 
 > If list item ends with `::IGNORE`, means it is ignored in rendering, which can be used to annotate exclusions that are not meant to be
@@ -469,7 +471,7 @@ Some examples:
 
 Syntax:
 
-- `place`, `position`, and `$pos` can all be used as attribute names, and they have the same meaning,
+- `place`, `position`, `pos` and `$pos` can all be used as attribute names, and they have the same meaning,
 - `place: columns`,
 - `place: row, column`,
 - `place: row, column, columns`,
@@ -481,8 +483,8 @@ Some examples:
 ```markdown
 - place: 12
 - position: 2, 4
-- $pos: 2, 4, 6
-- place: 2, 4, 6, 3
+- pos: 2, 4, 6
+- $pos: 2, 4, 6, 3
 - place: c: 4, r: 2, cols: 6, rows: 3
 - place: $c: 4, $r: 2, $cols: 6, $rows: 3
 ```
@@ -540,6 +542,8 @@ included, please refer to the `SpecificWidgetTranslator#shouldWrapByFormCell` im
 	- all above syntax, connected by `,`,
 	- no negative value accepted.
 
+Some examples:
+
 ```markdown
 - required, numeric, positive
 - integer, notNegative
@@ -554,6 +558,8 @@ included, please refer to the `SpecificWidgetTranslator#shouldWrapByFormCell` im
 All built-in validation properties can use tailing `; message` to identify the customization message. For boolean attribute, string value
 should be treated as customization message.
 
+Some examples:
+
 ```markdown
 - required: Name is required.
 - length: 5; Name should be 5 characters.
@@ -561,3 +567,208 @@ should be treated as customization message.
 
 > Built-in validation attribute must be declared in customized `SpecificWidgetTranslator`, otherwise it will not take effect.
 
+## Name Mapping
+
+Translation: The names of certain attributes in actual configurations may start with a `$`, or they may be abbreviated or use shorthand
+forms. These names can be confusing to read when configuring in Markdown. Therefore, `d9-n3` provides a mechanism for attribute name
+mapping, which consists of the following parts:
+
+- Widget scoped: by `WidgetType.name` register,
+- Global: by `name` register,
+- Built-in.
+
+Some examples:
+
+```typescript
+export class N2DropdownTranslator extends SpecificWidgetTranslator<N2WidgetType.DROPDOWN> {
+	// declare sort is mapping to optionSort, for dropdown only
+	// in markdown, eg. - sort: asc
+	public getAttributeNamesMapping(): Undefinable<Record<CustomAttributeName, WidgetPropertyName>> {
+		return {'Dropdown.sort': 'optionSort'};
+	}
+}
+
+// declare sort is mapping to optionSort, for all widgets
+AttributeNameUtils.register({'sort': 'optionSort'});
+```
+
+Built-in name mapping as below,
+
+| Name in Markdown | Name in Definition |
+|------------------|--------------------|
+| disabled         | $disabled          |
+| visible          | $visible           |
+| validate         | $valid             |
+| watch            | $reaction          |
+| property         | $pp                |
+| place            | $pos               |
+| position         | $pos               |
+| pos              | $pos               |
+
+# `d9-n2` Widgets Support
+
+# Common
+
+| Attribute Name             | Type          | Need Declare by Widget Parser? | Description                                                                                  |
+|----------------------------|---------------|--------------------------------|----------------------------------------------------------------------------------------------|
+| property, $pp              | property path | No                             | `- property: name`<br/>`- property: customer.name`                                           |
+| disabled, $disabled        | boolean       | No                             | `- disabled`                                                                                 |
+| visible, $visible          | boolean       | No                             | `- visible: false`                                                                           |
+| validate, $valid           | various       | No                             | **Not supported yet**                                                                        |
+| watch, $reaction           | various       | No                             | **Not supported yet**                                                                        |
+| place, position, pos, $pos | various       | No                             | Refer to [Position](#position)                                                               |
+| $fc                        | boolean       | No                             | `- $fc`<br/>Force current widget wrapped by a form cell.                                     |
+| label                      | text          | No                             | `- Section::Customer`<br/>`- label: Customer`<br/>Works when widget is wrapped by form cell. |
+| holdPositionWhenInvisible  | boolean       | No                             | Hold position even widget is invisible, for form cell.                                       |
+| required                   | boolean       | Yes                            | `- required`<br/>`- required: This field is mandantory.`                                     |
+| numeric                    | boolean       | Yes                            | `- numeric`<br/>`- numeric: This field should be a number.`                                  |
+| integer                    | boolean       | Yes                            | `- integer`<br/>`- integer: This field should be an integer.`                                |
+| positive                   | boolean       | Yes                            | `- positive`<br/>`- positive: This field should be a positive number.`                       |
+| notNegative                | boolean       | Yes                            | `- notNegative`<br/>`- notNegative: This field should be a non-negative number.`             |
+| length                     | number range  | Yes                            | `- length: 5`<br/>`- length: 5..10`, etc.                                                    |
+
+# Page
+
+Strictly adhere to the heading parsing rules without any additional attribute definitions.
+
+# Section
+
+- Default Wrapped by Form Cell: `false`,
+- Default Grid Column Span: 12
+
+| Attribute Name | Type | Description                                   |
+|----------------|------|-----------------------------------------------|
+| label, title   | text | `- Section::Customer`<br/>`- title: Customer` |
+
+# Caption, Label
+
+- Default Wrapped by Form Cell: `true`,
+- Default Grid Column Span: 3
+
+| Attribute Name             | Type    | Description                                                                                               |
+|----------------------------|---------|-----------------------------------------------------------------------------------------------------------|
+| label                      | text    | `- Caption::Customer Name`<br/>`- label: Customer Name`                                                   |
+| labelOnValue, valueToLabel | snippet |                                                                                                           |
+| click                      | text    | `- click: alert message`<br/>`- click: alert:message`<br/>`- click: dialog key`<br/>`- click: dialog:key` |
+
+`Caption` and `Label` have slight differences.
+
+- For `Caption`, the model value must be explicitly specified; otherwise, only the given `label` will be used,
+- For `Label`, defaults to using the model value and ignores the `label` attribute.
+
+## Syntax of `labelOnValue` and `valueToLabel`:
+
+- ``valueToLabel: `value` ``: If using `Caption` and specifying to use the model value, no additional decoration applied. If using `Label`,
+  this can be ignored.
+- ``valueToLabel: `value ?? ''` ``: Use empty text instead when value is `null`,
+- ``valueToLabel: `$.nf0(value)` ``: Format the value, by `#0,000`,
+- ``valueToLabel: `$.nf1(value)` ``: Format the value, by `#0,000.0`,
+- ``valueToLabel: `$.nf2(value)` ``: Format the value, by `#0,000.00`,
+- ``valueToLabel: `$.nfx(value)` ``: Format the value, by `#0,000.000`, `x` could be `3` to `99`, identify the fraction digits,
+- ``valueToLabel: `$.nf(0, false)(value)` ``: Format with the given parameters, keep 0 fraction digits, and do not use thousands separator
+  in
+  the example.
+- ``valueToLabel: `$.df(value)` ``: Parse the value by default datetime format and format it to default date format.
+	- Default datetime format: `getDefaultCalendarDatetimeFormat`,
+	- Default date format: `getDefaultCalendarDateFormat`,
+	- Change default formats: `setCalendarDefaults`,
+- ``valueToLabel: `$.df(value, {from: 'YYYY/MM/DD', to: 'DD/MM/YYYY''})` ``: Parse the value by given `from format` and format it
+  to `to format`,
+	- `from` and `to` are optional, will use corresponding default format when ignored.
+
+Some examples:
+
+```markdown
+- Label::Name::name
+- Label::Middle Name::middleName
+	- valueToLabel: `value ?? ''`
+- Caption::Middle Name::middleName
+	- valueToLabel: `value ?? ''`
+```
+
+> Because `Caption` is also enhanced by `Form Cell` by default, the behavior of the `label` attribute on `Caption` may seem strange. When
+> not specifying using data from the model value, the same `label` will be displayed twice. Therefore, if you only want to use `Caption` but
+> don't want it to be displayed twice, you should use `Caption::`. This way, the system no longer considers it enhanced by `Form Cell` and
+> it will not be displayed twice. This usage is common in `Table`, and we will discuss it in more detail later.
+
+## Syntax of `click`
+
+`click` requires external support in order to respond to the defined event. For example:
+
+```typescript jsx
+const markdown = `# Page
+- Label::Customer::name
+	- valueToLabel: value ?? ''
+	- click: dialog:customerDetails
+`;
+const Dialogs = () => {
+	const {on, off} = useGlobalEventBus();
+	const {show: showDialog} = useDialog();
+	useEffect(() => {
+		const openDialog = async <R extends BaseModel, M extends PropValue>(
+			dialog: D9CommonTabDialog, models?: { root: R; model: M; }) => {
+			showDialog(<>
+				{title}
+				<DialogBody>
+					<StandaloneRoot {...someDialogDef} $root={model as BaseModel} />
+				</DialogBody>
+				{footer}
+			</>);
+		};
+		const onCustomEvent = <R extends BaseModel, M extends PropValue>(
+			key: string, models?: { root: R; model: M; }) => {
+			if (key.startsWith('dialog ') || key.startsWith('dialog:')) {
+				const dialogKey = key.slice('dialog '.length).trim();
+				if (VUtils.isNotEmpty(dialogKey)) {
+					const def = map[dialogKey];
+					if (def !== null) {
+						(async () => await openDialog(def, models))();
+					} else {
+						console.log(`Custom event[key=${key}] is ignored since no definition found by given dialog key[${dialogKey}].`);
+					}
+				} else {
+					console.log(`Custom event[key=${key}] is ignored since no dialog key detected.`);
+				}
+			} else {
+				console.log(`Custom event[key=${key}] is ignored.`);
+			}
+		};
+		on(GlobalEventTypes.CUSTOM_EVENT, onCustomEvent);
+		return () => {
+			off(GlobalEventTypes.CUSTOM_EVENT, onCustomEvent);
+		};
+	});
+}
+const Page = () => {
+	const def = parseDoc(markdown);
+
+	// alert handled by <Alert/>, so no additional supporte required
+	// dialog is using custom event, which needs to supported by <Dialogs />, and bridge to <Dialog />
+	return <GlobalEventBusProvider>
+		<Alert />
+		<Dialog />
+		<Dialogs />
+		<StandaloneRoot $root={model} {...def} />
+	</GlobalEventBusProvider>;
+};
+```
+
+# Input, Number
+
+- Default Wrapped by Form Cell: `true`,
+- Default Grid Column Span: 3
+- Declared Built-in Validation: `required`, `numeric`, `integer`, `positive`, `notNegative`, `length`,
+
+Some examples:
+
+```markdown
+- Input::Name::name
+	- required
+	- length: ..10; At most 10 characters for name.
+- Number::Age::age
+	- required
+	- integer
+	- positive
+```
+
+# Textarea

@@ -120,7 +120,7 @@ Rendering and handling a piece of data, which must be an array, typically an obj
 widgets and should provide their own layout options. Additionally, each element in the array will be rendered according to the declared
 definition.
 
-#### Enhanced Widget
+#### Enhancement Widget
 
 Typical is a basic widget, but it is defined in a form that adds a suffix and includes any widget to achieve enhanced behavior.
 
