@@ -1076,3 +1076,7 @@ The definition of table column headers is very simple, just look at an example t
 	- positive
 	- integer
 ```
+
+# Logger
+
+`d9-n3` provides a logging function called `N3Logger`, exactly same as `N1Logger`.
