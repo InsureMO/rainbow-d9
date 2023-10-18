@@ -31,7 +31,7 @@ In summary, the design principles of `d9` can be briefly summarized as follows:
 
 Currently, `d9` is divided into three submodules:
 
-- [d9-n1](https://github.com/InsureMO/rainbow-d9/blob/main/d9-n1/README.md): the underlying module, this one,
+- [d9-n1](https://github.com/InsureMO/rainbow-d9/blob/main/d9-n1/README.md): the underlying module,
 - [d9-n2](https://github.com/InsureMO/rainbow-d9/blob/main/d9-n2/README.md): the widget library,
 - [d9-n3](https://github.com/InsureMO/rainbow-d9/blob/main/d9-n3/README.md): the Markdown parsing library.
 
