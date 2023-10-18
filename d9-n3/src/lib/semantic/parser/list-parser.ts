@@ -137,10 +137,16 @@ export class ListParser extends AbstractSemanticNodeWidgetParser<'list'> {
 			const $pp = segments[segments.length - 1].trim();
 			const $wt = segments[0].trim();
 			const label = segments.slice(1, segments.length - 1).join(this.getWidgetTitleSplitter()).trim();
+			if (VUtils.isBlank($wt)) {
+				return false;
+			}
 			return {$wt, label: VUtils.isBlank(label) ? (void 0) : label, $pp};
 		} else {
 			const $wt = segments[0].trim();
 			const label = segments[1].trim();
+			if (VUtils.isBlank($wt)) {
+				return false;
+			}
 			return {$wt, label: VUtils.isBlank(label) ? (void 0) : label.trim()};
 		}
 	}
