@@ -1,3 +1,16 @@
+![Static Badge](https://img.shields.io/badge/InsureMO-777AF2.svg)
+
+![License](https://img.shields.io/github/license/InsureMO/rainbow-d9)
+![GitHub Release](https://img.shields.io/github/v/release/InsureMO/rainbow-d9)
+![GitHub Release Date](https://img.shields.io/github/release-date/InsureMO/rainbow-d9)
+![GitHub last commit (by committer)](https://img.shields.io/github/last-commit/InsureMO/rainbow-d9)
+
+![npm (scoped)](https://img.shields.io/npm/v/%40rainbow-d9/n3?logo=npm)
+![npm](https://img.shields.io/npm/dm/%40rainbow-d9/n3)
+
+![Module Formats](https://img.shields.io/badge/module%20formats-cjs%2C%20esm-green.svg)
+![Depends](https://img.shields.io/badge/depends-react%2C%20mdast%2C%20micromark-087EA4.svg)
+
 # d9-n3
 
 It is the No.3 project of group `d9`.  
@@ -10,6 +23,12 @@ This project is Markdown engine, parse to JSON configuration, which used to do r
 The purpose of `d9-n3` is to provide a Markdown-based approach that allows non-programmers to easily participate in the process of page
 design and creation to a great extent, without the assistance of programmers. Additionally, due to the easily storable and comparable
 structure of Markdown, this approach also brings convenience in terms of page management.
+
+# Add Into Your Project
+
+```bash
+yarn add @rainbow-d9/n3
+```
 
 # Parse
 
