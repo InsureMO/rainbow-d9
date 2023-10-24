@@ -1,51 +1,51 @@
 {
-  "name": "@rainbow-d9/n2",
-	"version": "0.1.2",
-  "description": "d9 widgets",
-  "main": "index.cjs.js",
-  "module": "index.js",
-  "types": "index.d.ts",
-  "type": "module",
-  "scripts": {
-    "build": "rollup -c",
-    "build-ci": "rollup -c rollup.config.ci.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/InsureMO/rainbow-d9.git"
-  },
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/InsureMO/rainbow-d9/issues"
-  },
-  "author": "Rainbow Team",
-  "dependencies": {
-		"@rainbow-d9/n1": "0.1.2",
-    "color": "^4.2.3",
-    "dayjs": "^1.11.7",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "styled-components": "^5.3.6"
-  },
-  "devDependencies": {
-    "@babel/core": "^7.20.5",
-    "@babel/preset-env": "^7.20.2",
-    "@babel/preset-react": "^7.18.6",
-    "@babel/preset-typescript": "^7.18.6",
-    "@rollup/plugin-eslint": "^9.0.3",
-    "@types/node": "^18.11.13",
+	"name": "@rainbow-d9/n2",
+	"version": "1.0.0",
+	"description": "d9 widgets",
+	"main": "index.cjs.js",
+	"module": "index.js",
+	"types": "index.d.ts",
+	"type": "module",
+	"scripts": {
+		"build": "rollup -c",
+		"build-ci": "rollup -c rollup.config.ci.js",
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/InsureMO/rainbow-d9.git"
+	},
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/InsureMO/rainbow-d9/issues"
+	},
+	"author": "Rainbow Team",
+	"dependencies": {
+		"@rainbow-d9/n1": "1.0.0",
+		"color": "^4.2.3",
+		"dayjs": "^1.11.7",
+		"react": "^18.2.0",
+		"react-dom": "^18.2.0",
+		"styled-components": "^5.3.6"
+	},
+	"devDependencies": {
+		"@babel/core": "^7.20.5",
+		"@babel/preset-env": "^7.20.2",
+		"@babel/preset-react": "^7.18.6",
+		"@babel/preset-typescript": "^7.18.6",
+		"@rollup/plugin-eslint": "^9.0.3",
+		"@types/node": "^18.11.13",
 		"@types/react": "18.0.28",
-    "@types/react-dom": "^18.0.9",
-    "@typescript-eslint/eslint-plugin": "^5.46.0",
-    "@typescript-eslint/parser": "^5.46.0",
-    "eslint": "^8.33.0",
-    "eslint-plugin-react-hooks": "^4.6.0",
-    "rollup": "^3.7.0",
-    "rollup-plugin-babel": "^4.4.0",
-    "rollup-plugin-tslint": "^0.2.2",
-    "rollup-plugin-typescript2": "^0.34.1",
-    "tslib": "^2.4.1",
-    "typescript": "^4.9.4"
-  }
+		"@types/react-dom": "^18.0.9",
+		"@typescript-eslint/eslint-plugin": "^5.46.0",
+		"@typescript-eslint/parser": "^5.46.0",
+		"eslint": "^8.33.0",
+		"eslint-plugin-react-hooks": "^4.6.0",
+		"rollup": "^3.7.0",
+		"rollup-plugin-babel": "^4.4.0",
+		"rollup-plugin-tslint": "^0.2.2",
+		"rollup-plugin-typescript2": "^0.34.1",
+		"tslib": "^2.4.1",
+		"typescript": "^4.9.4"
+	}
 }
