@@ -10,7 +10,7 @@ import {
 	WidgetProps
 } from '@rainbow-d9/n1';
 import dayjs from 'dayjs';
-import React, {ForwardedRef, forwardRef, MouseEvent, ReactNode} from 'react';
+import React, {ForwardedRef, forwardRef, isValidElement, MouseEvent, ReactNode} from 'react';
 import styled from 'styled-components';
 import {getDefaultCalendarDateFormat, getDefaultCalendarDatetimeFormat} from './calendar/utils';
 import {CssVars, DOM_ID_WIDGET, DOM_KEY_WIDGET} from './constants';
@@ -142,19 +142,25 @@ export const Caption = forwardRef((props: CaptionProps, ref: ForwardedRef<HTMLSp
 		: (void 0);
 
 	const children = (() => {
+		// eslint-disable-next-line @typescript-eslint/no-explicit-any
+		let value: any;
 		if (labelOnValue && valueToLabel == null) {
 			// eslint-disable-next-line @typescript-eslint/no-explicit-any
-			return (MUtils.getValue($model, $pp) as any) ?? '';
+			value = (MUtils.getValue($model, $pp) as any) ?? '';
 		} else if (labelOnValue && valueToLabel != null) {
 			// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 			// @ts-ignore
-			return valueToLabel(MUtils.getValue($model, $pp), formatter);
+			value = valueToLabel(MUtils.getValue($model, $pp), formatter);
 		} else if (label != null) {
-			return label;
+			value = label;
 		} else {
 			// empty caption
-			return '';
+			value = '';
 		}
+		if (typeof value === 'object' && !isValidElement(value)) {
+			value = JSON.stringify(value);
+		}
+		return value;
 	})();
 
 	return <ACaption {...rest} data-disabled={$disabled} data-visible={$visible}
@@ -171,7 +177,7 @@ export type LabelProps = OmitNodeDef<LabelDef> & WidgetProps;
 export const Label = forwardRef((props: LabelProps, ref: ForwardedRef<HTMLSpanElement>) => {
 	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 	// @ts-ignore
-	return <Caption {...props} labelOnValue={true} ref={ref} />;
+	return <Caption {...props} labelOnValue={true} ref={ref}/>;
 });
 
 registerWidget({key: 'Label', JSX: Label, container: false, array: false});
