@@ -160,8 +160,10 @@ export const Caption = forwardRef((props: CaptionProps, ref: ForwardedRef<HTMLSp
 		try {
 			if (Array.isArray(value)) {
 				value = value.map(item => {
-					if (typeof value === 'object' && !isValidElement(value)) {
+					if (typeof item === 'object' && !isValidElement(item)) {
 						return JSON.stringify(item);
+					} else {
+						return item;
 					}
 				});
 			} else if (typeof value === 'object' && !isValidElement(value)) {
