@@ -560,6 +560,12 @@ included, please refer to the `SpecificWidgetTranslator#shouldWrapByFormCell` im
 	- `length: number..number`: presents both minimum and maximum length,
 	- all above syntax, connected by `,`,
 	- no negative value accepted.
+- `numberRange`: : syntax as below,
+	- `numberRange: [min..max]`: presents a range,
+	- allow given minimum value by `[`, or ignore it. Or exclude given minimum value by `(`,
+	- allow given maximum value by `]`, or ignore it. Or exclude given maximum value by `)`,
+	- minimum/maximum value can be ignored, but at least one should be present,
+	- all above syntax, connected by `,`,
 
 Some examples:
 
@@ -738,7 +744,7 @@ const Dialogs = () => {
 			showDialog(<>
 				{title}
 				<DialogBody>
-					<StandaloneRoot {...someDialogDef} $root={model as BaseModel} />
+					<StandaloneRoot {...someDialogDef} $root={model as BaseModel}/>
 				</DialogBody>
 				{footer}
 			</>);
@@ -773,9 +779,9 @@ const Page = () => {
 	// alert handled by <Alert/>, so no additional supporte required
 	// dialog is using custom event, which needs to supported by <Dialogs />, and bridge to <Dialog />
 	return <GlobalEventBusProvider>
-		<Alert />
-		<Dialog />
-		<Dialogs />
+		<Alert/>
+		<Dialog/>
+		<Dialogs/>
 		<StandaloneRoot $root={model} {...def} />
 	</GlobalEventBusProvider>;
 };

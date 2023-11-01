@@ -118,6 +118,51 @@ const detectLength: MonitorHandlerDetective = (options: MonitorHandlerDetectOpti
 	}
 };
 
+const detectNumberRange: MonitorHandlerDetective = (options: MonitorHandlerDetectOptions): MonitorHandler => {
+	const {attributes} = options;
+	if (attributes.numberRange == null) {
+		return (void 0);
+	}
+	const match = `${attributes.numberRange}`.match(/^([^;]+);?(.*)$/);
+	if (match != null) {
+		const message = VUtils.isBlank(match[2]) ? `Value should be in range ${match[1]}.` : match[2].trim();
+		const rangeMatch = match[1].match(/([^,])+/g);
+		if (rangeMatch != null) {
+			const rules = rangeMatch.map(part => {
+				// eslint-disable-next-line no-useless-escape
+				const rangeMatch = part.match(/^([(\[]?)(-?\d+(\.\d+)?)?\.\.(-?\d+(\.\d+)?)?([)\]]?)$/);
+				if (rangeMatch != null) {
+					const minIncluded = rangeMatch[1] !== '(';
+					const min = VUtils.isBlank(rangeMatch[2]) ? -Infinity : Number(rangeMatch[2]);
+					const max = VUtils.isBlank(rangeMatch[4]) ? Infinity : Number(rangeMatch[4]);
+					const maxIncluded = rangeMatch[6] !== ')';
+					return (value: number) => {
+						return (minIncluded ? (value >= min) : (value > min))
+							&& (maxIncluded ? (value <= max) : (value < max));
+					};
+				}
+				return null;
+			}).filter(x => x != null);
+			if (rules.length !== 0) {
+				delete attributes.numberRange;
+				return (options: { value?: PropValue }): NodeAttributeValue => {
+					const {value} = options;
+					const testedValue = VUtils.isNumber(value);
+					if (!testedValue.test) {
+						// not a number, pass check
+						return {valid: true} as ValidationResult;
+					} else if (rules.some(rule => rule(testedValue.value))) {
+						// pass when at least one rule is passed
+						return {valid: true} as ValidationResult;
+					} else {
+						return {valid: false, failReason: message} as ValidationResult;
+					}
+				};
+			}
+		}
+	}
+};
+
 export class ValidatorUtils {
 	private static readonly DETECTIVES: Record<WidgetType, Array<MonitorHandlerDetective>> = {};
 	public static readonly DETECT_SIMPLE_CHECK = detectSimpleCheck;
@@ -127,6 +172,7 @@ export class ValidatorUtils {
 	public static readonly DETECT_NOT_POSITIVE = detectNotNegative;
 	public static readonly DETECT_INTEGER = detectInteger;
 	public static readonly DETECT_LENGTH = detectLength;
+	public static readonly DETECT_NUMBER_RANGE = detectNumberRange;
 
 	// noinspection JSUnusedLocalSymbols
 	private constructor() {

@@ -13,7 +13,8 @@ export class N2InputTranslator extends SpecificWidgetTranslator<N2WidgetType.INP
 			ValidatorUtils.DETECT_NUMERIC,
 			ValidatorUtils.DETECT_POSITIVE,
 			ValidatorUtils.DETECT_NOT_POSITIVE,
-			ValidatorUtils.DETECT_INTEGER
+			ValidatorUtils.DETECT_INTEGER,
+			ValidatorUtils.DETECT_NUMBER_RANGE
 		];
 	}
 }
