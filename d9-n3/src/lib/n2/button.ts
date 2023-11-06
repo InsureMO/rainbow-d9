@@ -1,5 +1,5 @@
 import {BaseModel, NodeValidationScope, PropValue, VUtils} from '@rainbow-d9/n1';
-import {ButtonClick, ButtonClickOptions, CaptionClickOptions} from '@rainbow-d9/n2';
+import {ButtonClick, ButtonClickOptions} from '@rainbow-d9/n2';
 import {ParsedListItemAttributePair} from '../semantic';
 import {Undefinable} from '../utility-types';
 import {AttributeValueBuild, SpecificWidgetTranslator, WidgetPropertyName} from '../widget';
@@ -57,13 +57,19 @@ export const N2ButtonClickBuild: AttributeValueBuild<ButtonClick> = {
 					}
 				}
 			} else if (value.startsWith('alert ') || value.startsWith('alert:')) {
-				return async (options: CaptionClickOptions<BaseModel, PropValue>): Promise<void> => {
+				return async (options: ButtonClickOptions<BaseModel, PropValue>): Promise<void> => {
 					const {global: {alert: {show}}} = options;
 					return await show(originalValue.slice('alert '.length).trim());
 				};
 			} else if (value.startsWith('dialog ') || value.startsWith('dialog:')) {
 				// dialog content cannot be analysis here, so fire a custom event
-				return async (options: CaptionClickOptions<BaseModel, PropValue>): Promise<void> => {
+				return async (options: ButtonClickOptions<BaseModel, PropValue>): Promise<void> => {
+					const {global: {custom}, root, model} = options;
+					return await custom(originalValue.trim(), {root, model});
+				};
+			} else if (value.startsWith('custom ') || value.startsWith('custom:')) {
+				// dialog content cannot be analysis here, so fire a custom event
+				return async (options: ButtonClickOptions<BaseModel, PropValue>): Promise<void> => {
 					const {global: {custom}, root, model} = options;
 					return await custom(originalValue.trim(), {root, model});
 				};

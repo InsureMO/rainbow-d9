@@ -55,6 +55,12 @@ export const N2CaptionClickBuild: AttributeValueBuild<CaptionClick> = {
 					const {global: {custom}, root, model} = options;
 					return await custom(originalValue.trim(), {root, model});
 				};
+			} else if (value.startsWith('custom ') || value.startsWith('custom:')) {
+				// dialog content cannot be analysis here, so fire a custom event
+				return async (options: CaptionClickOptions<BaseModel, PropValue>): Promise<void> => {
+					const {global: {custom}, root, model} = options;
+					return await custom(originalValue.trim(), {root, model});
+				};
 			} else {
 				return (void 0);
 			}
