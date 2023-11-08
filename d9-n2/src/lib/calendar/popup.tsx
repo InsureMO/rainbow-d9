@@ -10,7 +10,7 @@ import {useValueChange} from './use-value-change';
 import {PopupContainer} from './widgets';
 import {YearMonthPicker} from './year-month-picker';
 
-interface CalendarPopupProps extends Required<Pick<CalendarProps, 'dateFormat' | 'time' | 'timeFormat'>> {
+interface CalendarPopupProps extends Required<Pick<CalendarProps, 'dateFormat' | 'time' | 'timeFormat' | 'initTimeAt'>> {
 	initValue?: Dayjs | null;
 	popupRef: RefObject<HTMLDivElement>;
 	popupState: DropdownPopupState;
@@ -22,11 +22,25 @@ export const CalendarPopup = (props: CalendarPopupProps) => {
 	const {
 		initValue,
 		popupRef, popupState, popupShown,
-		dateFormat, time, timeFormat,
+		dateFormat, time, timeFormat, initTimeAt,
 		confirm
 	} = props;
 
-	const [value, setValue] = useState(() => initValue || dayjs());
+	const [value, setValue] = useState(() => {
+		if (initValue != null) {
+			return initValue;
+		} else {
+			let date = dayjs();
+			if (initTimeAt != null) {
+				date = date.hour(initTimeAt.hour)
+					.minute(initTimeAt.minute)
+					.second(initTimeAt.second)
+					.millisecond(initTimeAt.millisecond);
+			}
+			return date;
+		}
+
+	});
 	useValueChange(setValue);
 
 	return <DropdownPopup {...popupState}
@@ -36,10 +50,10 @@ export const CalendarPopup = (props: CalendarPopupProps) => {
 	                      shown={popupShown && popupState.active === DropdownPopupStateActive.ACTIVE} ref={popupRef}>
 		<PopupContainer>
 			<CalendarPopupHeader dateFormat={dateFormat} time={time} timeFormat={timeFormat}
-			                     value={value} confirm={confirm} />
-			<DatePicker value={value} />
-			{time ? <TimePicker value={value} /> : null}
-			<YearMonthPicker value={value} />
+			                     value={value} confirm={confirm}/>
+			<DatePicker value={value}/>
+			{time ? <TimePicker value={value}/> : null}
+			<YearMonthPicker value={value}/>
 		</PopupContainer>
 	</DropdownPopup>;
 };

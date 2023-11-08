@@ -906,6 +906,7 @@ Some examples:
 | storeFormat    | text    | `- storeFormat: YYYY/MM/DD HH:mm:ss`, follows `Dayjs`                                             |
 | autoConfirm    | boolean | `- autoConfirm: true`<br/>Selected value should be applied to model automatically on blur or not. |
 | fixedTimeAt    | json    | For `Calendar`, works when time is false; and for `Date`.                                         | 
+| initTimeAt     | json    | For `Calendar`, typically it is not need for date only.                                           | 
 
 ### Formats
 
@@ -923,7 +924,7 @@ Auto confirm selected value on blur has default value, see below for more detail
 - `setCalendarDefaults`: to change default settings,
 - `isCalendarAutoConfirm`: default of autoConfirm.
 
-### Fixed Time At
+### Fixed Time At, Initial Time At
 
 - `- fixedTimeAt: start` or `- fixedTimeAt: 0`: fix at `00:00:00.0`,
 - `- fixedTimeAt: end`: fix at `23:59:59.999`,

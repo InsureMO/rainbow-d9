@@ -42,6 +42,7 @@ export const Picker = (props: CalendarProps) => {
 		please = '', clearable = true,
 		dateFormat = getDefaultCalendarDateFormat(), time, timeFormat = getDefaultCalendarTimeFormat(),
 		storeFormat = getDefaultCalendarDatetimeFormat(), fixedTimeAt = FIX_TIME_AT_START_OF_DAY,
+		initTimeAt,
 		autoConfirm = isCalendarAutoConfirm(),
 		...rest
 	} = props;
@@ -159,15 +160,15 @@ export const Picker = (props: CalendarProps) => {
 	                          data-disabled={$disabled} data-visible={$visible}
 	                          onClick={onClicked} onBlur={onBlurred}
 	                          id={PPUtils.asId(PPUtils.absolute($p2r, props.$pp), props.id)}>
-		<CalendarValueHolder initValue={initValueForPopup} />
+		<CalendarValueHolder initValue={initValueForPopup}/>
 		<DropdownLabel data-please={!valueAssigned}>{label}</DropdownLabel>
 		<DropdownStick valueAssigned={valueAssigned} clearable={clearable} clear={onClearClicked}
-		               disabled={$disabled} />
+		               disabled={$disabled}/>
 		{isDropdownPopupActive(popupState.active)
 			? <CalendarPopup initValue={initValueForPopup}
 			                 popupRef={popupRef} popupState={popupState} popupShown={popupShown}
-			                 dateFormat={dateFormat} time={time} timeFormat={timeFormat}
-			                 confirm={onConfirm} />
+			                 dateFormat={dateFormat} time={time} timeFormat={timeFormat} initTimeAt={initTimeAt}
+			                 confirm={onConfirm}/>
 			: null}
 	</DropdownContainer>;
 };
