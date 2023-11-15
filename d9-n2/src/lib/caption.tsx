@@ -150,7 +150,7 @@ export const Caption = forwardRef((props: CaptionProps, ref: ForwardedRef<HTMLSp
 		} else if (labelOnValue && valueToLabel != null) {
 			// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 			// @ts-ignore
-			value = valueToLabel(MUtils.getValue($model, $pp), formatter);
+			value = valueToLabel(MUtils.getValue($model, $pp), formatter) ?? '';
 		} else if (label != null) {
 			value = label;
 		} else {
