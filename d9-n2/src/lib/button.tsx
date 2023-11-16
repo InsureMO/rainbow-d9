@@ -57,7 +57,7 @@ const AButton = styled.button.attrs(({id}) => {
 	justify-content  : center;
 	font-family      : ${CssVars.FONT_FAMILY};
 	font-size        : ${CssVars.FONT_SIZE};
-	font-variant     : petite-caps;
+	font-variant : ${CssVars.FONT_PETITE_CAPS};
 	height           : ${CssVars.INPUT_HEIGHT};
 	padding          : 0 ${CssVars.BUTTON_INDENT};
 	color            : ${CssVars.INVERT_COLOR};

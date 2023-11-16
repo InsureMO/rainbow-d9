@@ -13,7 +13,7 @@ export const YearMonthPickerContainer = styled.div`
 export const YearMonthPickerLabel = styled.div`
 	display      : flex;
 	align-items  : center;
-	font-variant : petite-caps;
+	font-variant : ${CssVars.FONT_PETITE_CAPS};
 	font-weight  : ${CssVars.FONT_BOLD};
 	&:nth-child(3) {
 		margin-left : calc(${CssVars.CALENDAR_GUTTER_SIZE} * 2);

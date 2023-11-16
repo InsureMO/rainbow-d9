@@ -43,13 +43,13 @@ export const PopupHeaderContainer = styled.div`
 export const PopupHeaderDateLabel = styled.span`
 	font-size    : 0.8em;
 	font-weight  : ${CssVars.FONT_BOLD};
-	font-variant : petite-caps;
+	font-variant : ${CssVars.FONT_PETITE_CAPS};
 	margin-right : 0.5em;
 `;
 export const PopupHeaderTimeLabel = styled.span`
 	font-size    : 0.8em;
 	font-weight  : ${CssVars.FONT_BOLD};
-	font-variant : petite-caps;
+	font-variant : ${CssVars.FONT_PETITE_CAPS};
 `;
 export const PopupHeaderPlaceholder = styled.span`
 	flex-grow : 1;
@@ -65,7 +65,7 @@ export const PopupHeaderTimeButton = styled.div`
 	max-height      : ${CssVars.INPUT_HEIGHT};
 	font-size       : 0.8em;
 	font-weight     : ${CssVars.FONT_BOLD};
-	font-variant    : petite-caps;
+	font-variant : ${CssVars.FONT_PETITE_CAPS};
 	border-radius   : ${CssVars.BORDER_RADIUS};
 	cursor          : pointer;
 	&:hover {
