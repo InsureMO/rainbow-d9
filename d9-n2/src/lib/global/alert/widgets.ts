@@ -56,6 +56,6 @@ export const AlertFooter = styled.div.attrs({'data-w': 'alert-footer'})`
 	justify-content : flex-end;
 `;
 export const AlertLabel = styled.span.attrs({'data-w': 'alert-label'})`
-	font-variant : ${CssVars.FONT_PETITE_CAPS};
+	font-variant : ${CssVars.FONT_VARIANT};
 	min-height   : ${CssVars.INPUT_HEIGHT};
 `;

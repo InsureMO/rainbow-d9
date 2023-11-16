@@ -33,7 +33,7 @@ export const CssVars = {
 	FONT_FAMILY: `var(--d9-font-family, ${CssConstants.FONT_FAMILY})`,
 	FONT_SIZE: `var(--d9-font-size, 14px)`,
 	FONT_BOLD: 'var(--d9-font-bold, 600)',
-	FONT_PETITE_CAPS: 'var(--d9-petite-caps, petite-caps)',
+	FONT_VARIANT: 'var(--d9-font-variant, petite-caps)',
 	LINE_HEIGHT: 'var(--d9-line-height, 24px)',
 
 	BACKGROUND_COLOR: `var(--d9-background-color, ${CssConstants.BG_COLOR})`,

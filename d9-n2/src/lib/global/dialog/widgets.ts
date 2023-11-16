@@ -65,7 +65,7 @@ export const DialogFooter = styled.div.attrs({'data-w': 'dialog-footer'})`
 	}
 `;
 export const DialogLabel = styled.span.attrs({'data-w': 'dialog-label'})`
-	font-variant : ${CssVars.FONT_PETITE_CAPS};
+	font-variant : ${CssVars.FONT_VARIANT};
 	line-height  : ${CssVars.LINE_HEIGHT};
 	min-height   : ${CssVars.LINE_HEIGHT};
 `;

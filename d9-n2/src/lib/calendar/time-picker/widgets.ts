@@ -13,7 +13,7 @@ export const TimePickerContainer = styled.div`
 export const TimePickerLabel = styled.div`
 	display      : flex;
 	align-items  : center;
-	font-variant : ${CssVars.FONT_PETITE_CAPS};
+	font-variant : ${CssVars.FONT_VARIANT};
 	font-weight  : ${CssVars.FONT_BOLD}
 `;
 export const TimePickerSelector = styled.div.attrs({'data-v-scroll': ''})`

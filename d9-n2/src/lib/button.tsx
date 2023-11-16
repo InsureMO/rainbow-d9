@@ -57,7 +57,7 @@ const AButton = styled.button.attrs(({id}) => {
 	justify-content  : center;
 	font-family      : ${CssVars.FONT_FAMILY};
 	font-size        : ${CssVars.FONT_SIZE};
-	font-variant : ${CssVars.FONT_PETITE_CAPS};
+	font-variant : ${CssVars.FONT_VARIANT};
 	height           : ${CssVars.INPUT_HEIGHT};
 	padding          : 0 ${CssVars.BUTTON_INDENT};
 	color            : ${CssVars.INVERT_COLOR};
@@ -78,8 +78,8 @@ const AButton = styled.button.attrs(({id}) => {
 		box-shadow : ${CssVars.PRIMARY_SHADOW};
 	}
 	${Object.values(ButtonInk).map(ink => {
-	const INK = ink.toUpperCase();
-	return `	&[data-ink=${ink}] {
+		const INK = ink.toUpperCase();
+		return `	&[data-ink=${ink}] {
 		border-color : ${CssVars[`${INK}_COLOR`]};
 		background-color : ${CssVars[`${INK}_COLOR`]};
 		&:hover {
@@ -89,7 +89,7 @@ const AButton = styled.button.attrs(({id}) => {
 			box-shadow : ${CssVars[`${INK}_SHADOW`]};
 		}
 	}`;
-})}
+	})}
 	&[data-ink=waive] {
 		color        : ${CssVars.FONT_COLOR};
 		border-color : ${CssVars.BORDER_COLOR};
@@ -108,10 +108,10 @@ const AButton = styled.button.attrs(({id}) => {
 			box-shadow : none;
 		}
 		${Object.values(ButtonInk).map(ink => {
-	return `		&[data-ink=${ink}] {
+			return `		&[data-ink=${ink}] {
 			color : ${CssVars[`${ink.toUpperCase()}_COLOR`]};
 		}`;
-})}
+		})}
 		&[data-ink=waive] {
 			color : ${CssVars.FONT_COLOR};
 			&:hover {
@@ -123,12 +123,12 @@ const AButton = styled.button.attrs(({id}) => {
 		background-color : transparent;
 		border-color     : ${CssVars.PRIMARY_COLOR};
 		${Object.values(ButtonInk).map(ink => {
-	const INK = ink.toUpperCase();
-	return `		&[data-ink=${ink}] {
+			const INK = ink.toUpperCase();
+			return `		&[data-ink=${ink}] {
 			color : ${CssVars[`${INK}_COLOR`]};
 			border-color : ${CssVars[`${INK}_COLOR`]};
 		}`;
-})}
+		})}
 		&[data-ink=waive] {
 			color        : ${CssVars.FONT_COLOR};
 			border-color : ${CssVars.BORDER_COLOR};

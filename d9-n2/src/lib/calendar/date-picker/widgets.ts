@@ -18,7 +18,7 @@ export const DatePickerShortcutButton = styled.span`
 	height       : ${CssVars.CALENDAR_DATE_CELL_SIZE};
 	padding      : 0 ${CssVars.CALENDAR_GUTTER_SIZE};
 	font-size    : 0.8em;
-	font-variant : ${CssVars.FONT_PETITE_CAPS};
+	font-variant : ${CssVars.FONT_VARIANT};
 	cursor       : pointer;
 	user-select  : none;
 	transition   : all ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION};
@@ -35,7 +35,7 @@ export const DatePickerHeader = styled.div`
 `;
 export const DatePickerHeaderYearMonth = styled.span`
 	font-weight  : ${CssVars.FONT_BOLD};
-	font-variant : ${CssVars.FONT_PETITE_CAPS};
+	font-variant : ${CssVars.FONT_VARIANT};
 `;
 export const DatePickerHeaderOperators = styled.div`
 	display     : flex;
@@ -58,7 +58,7 @@ export const DatePickerHeaderTodayButton = styled(DatePickerHeaderButton)`
 	transform        : scale(0.8);
 	transform-origin : right;
 	padding          : 2px 6px;
-	font-variant : ${CssVars.FONT_PETITE_CAPS};
+	font-variant : ${CssVars.FONT_VARIANT};
 `;
 export const DatePickerHeaderMonthChangeButton = styled(DatePickerHeaderButton)`
 	height : 20px;
