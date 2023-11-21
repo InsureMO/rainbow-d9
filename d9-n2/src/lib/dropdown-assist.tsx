@@ -122,6 +122,9 @@ export const DropdownStickContainer = styled.span.attrs({'data-w': 'd9-dropdown-
 			fill : ${CssVars.DANGER_COLOR};
 		}
 	}
+	&[data-disabled=true] {
+		display : none;
+	}
 	&:before {
 		content          : '';
 		display          : block;
