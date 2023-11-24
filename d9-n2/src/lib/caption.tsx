@@ -159,13 +159,15 @@ export const Caption = forwardRef((props: CaptionProps, ref: ForwardedRef<HTMLSp
 		}
 		try {
 			if (Array.isArray(value)) {
-				value = value.map(item => {
+				value = value.filter(item => item != null).map(item => {
 					if (typeof item === 'object' && !isValidElement(item)) {
 						return JSON.stringify(item);
 					} else {
 						return item;
 					}
 				});
+			} else if (value == null) {
+				return null;
 			} else if (typeof value === 'object' && !isValidElement(value)) {
 				value = JSON.stringify(value);
 			}
