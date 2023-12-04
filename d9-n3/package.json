@@ -7,8 +7,12 @@
 	"types": "index.d.ts",
 	"type": "module",
 	"scripts": {
-		"build": "rollup -c",
-		"build-ci": "rollup -c rollup.config.ci.js",
+		"build-tidy": "rollup -c rollup.config.tidy.js",
+		"build-tidy-ci": "rollup -c rollup.config.tidy.ci.js",
+		"build-standard": "rollup -c",
+		"build-standard-ci": "rollup -c rollup.config.ci.js",
+		"build": "yarn build-standard && yarn build-tidy",
+		"build-ci": "yarn build-standard-ci && yarn build-tidy-ci",
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
 	"repository": {
