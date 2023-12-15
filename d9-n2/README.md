@@ -39,6 +39,7 @@ following widgets:
 - Input, NumberInput
 - Textarea
 - Dropdown
+- Multiple Values Dropdown (MultiDropdown)
 - Checkbox
 - Calendar, DateCalendar, DateTimeCalendar
 - Button, ButtonBar

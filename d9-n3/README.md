@@ -854,7 +854,7 @@ Some examples:
 > Typically, `values` appear in pairs, but in reality, having only one value is also allowed. However, we generally do not
 > recommend such loose data definition as it can lead to data confusion to some extent.
 
-## Dropdown
+## Dropdown, MultiDropdown
 
 - Default Wrapped by Form Cell: `true`,
 - Default Grid Column Span: `3`,
