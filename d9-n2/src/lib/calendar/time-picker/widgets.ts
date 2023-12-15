@@ -28,7 +28,7 @@ export const TimePickerSelectorOption = styled.span`
 	display     : flex;
 	align-items : center;
 	min-height  : ${CssVars.INPUT_HEIGHT};
-	padding     : 0 calc(var(--margin) / 2);
+	padding     : 0 ${CssVars.CALENDAR_GUTTER_SIZE};
 	cursor      : pointer;
 	&:hover {
 		background-color : ${CssVars.HOVER_COLOR};

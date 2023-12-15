@@ -1,6 +1,7 @@
 import {BaseModel, EnhancedPropsForArray, getArrayElementKey, MUtils} from '@rainbow-d9/n1';
 import React, {useEffect, useRef, useState} from 'react';
 import {CssVars} from '../constants';
+import {Collapse, Expand, Remove} from '../icons';
 import {useTableEventBus} from './event/table-event-bus';
 import {TableEventTypes} from './event/table-event-bus-types';
 import {TableProps} from './types';
@@ -39,7 +40,7 @@ const TableBodyRowIndexCell = (props: { rowIndex: number; rowIndexStartsFrom?: n
 
 	if (rowIndex === -1) {
 		return <ATableBodyRowIndexCell cellHeight={height}>
-			<span />
+			<span/>
 		</ATableBodyRowIndexCell>;
 	}
 
@@ -51,28 +52,19 @@ const TableBodyRowIndexCell = (props: { rowIndex: number; rowIndexStartsFrom?: n
 const ExpandButton = (props: { onClick: () => void }) => {
 	const {onClick} = props;
 	return <ATableRowOperator onClick={onClick}>
-		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
-			<path
-				d="M32 32C14.3 32 0 46.3 0 64v96c0 17.7 14.3 32 32 32s32-14.3 32-32V96h64c17.7 0 32-14.3 32-32s-14.3-32-32-32H32zM64 352c0-17.7-14.3-32-32-32s-32 14.3-32 32v96c0 17.7 14.3 32 32 32h96c17.7 0 32-14.3 32-32s-14.3-32-32-32H64V352zM320 32c-17.7 0-32 14.3-32 32s14.3 32 32 32h64v64c0 17.7 14.3 32 32 32s32-14.3 32-32V64c0-17.7-14.3-32-32-32H320zM448 352c0-17.7-14.3-32-32-32s-32 14.3-32 32v64H320c-17.7 0-32 14.3-32 32s14.3 32 32 32h96c17.7 0 32-14.3 32-32V352z" />
-		</svg>
+		<Expand/>
 	</ATableRowOperator>;
 };
 const CollapseButton = (props: { onClick: () => void }) => {
 	const {onClick} = props;
 	return <ATableRowOperator onClick={onClick}>
-		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
-			<path
-				d="M160 64c0-17.7-14.3-32-32-32s-32 14.3-32 32v64H32c-17.7 0-32 14.3-32 32s14.3 32 32 32h96c17.7 0 32-14.3 32-32V64zM32 320c-17.7 0-32 14.3-32 32s14.3 32 32 32H96v64c0 17.7 14.3 32 32 32s32-14.3 32-32V352c0-17.7-14.3-32-32-32H32zM352 64c0-17.7-14.3-32-32-32s-32 14.3-32 32v96c0 17.7 14.3 32 32 32h96c17.7 0 32-14.3 32-32s-14.3-32-32-32H352V64zM320 320c-17.7 0-32 14.3-32 32v96c0 17.7 14.3 32 32 32s32-14.3 32-32V384h64c17.7 0 32-14.3 32-32s-14.3-32-32-32H320z" />
-		</svg>
+		<Collapse/>
 	</ATableRowOperator>;
 };
 const RemoveButton = (props: { onClick: () => void }) => {
 	const {onClick} = props;
 	return <ATableRowOperator onClick={onClick}>
-		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
-			<path
-				d="M135.2 17.7C140.6 6.8 151.7 0 163.8 0H284.2c12.1 0 23.2 6.8 28.6 17.7L320 32h96c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 96 0 81.7 0 64S14.3 32 32 32h96l7.2-14.3zM32 128H416V448c0 35.3-28.7 64-64 64H96c-35.3 0-64-28.7-64-64V128zm96 64c-8.8 0-16 7.2-16 16V432c0 8.8 7.2 16 16 16s16-7.2 16-16V208c0-8.8-7.2-16-16-16zm96 0c-8.8 0-16 7.2-16 16V432c0 8.8 7.2 16 16 16s16-7.2 16-16V208c0-8.8-7.2-16-16-16zm96 0c-8.8 0-16 7.2-16 16V432c0 8.8 7.2 16 16 16s16-7.2 16-16V208c0-8.8-7.2-16-16-16z" />
-		</svg>
+		<Remove/>
 	</ATableRowOperator>;
 };
 
@@ -104,7 +96,7 @@ const TableRowOperators = (props: { expandable?: boolean; removable?: boolean; r
 
 	if (rowIndex === -1) {
 		return <ATableRowOperators cellHeight={height} data-expanded={false}>
-			<span />
+			<span/>
 		</ATableRowOperators>;
 	}
 
@@ -122,9 +114,9 @@ const TableRowOperators = (props: { expandable?: boolean; removable?: boolean; r
 
 	return <ATableRowOperators cellHeight={height} data-expanded={expanded}>
 		<span>
-			{removable !== false ? <RemoveButton onClick={onRemoveElementClicked} /> : null}
-			{(expandable && !expanded) ? <ExpandButton onClick={onExpandClicked} /> : null}
-			{(expandable && expanded) ? <CollapseButton onClick={onCollapseClicked} /> : null}
+			{removable !== false ? <RemoveButton onClick={onRemoveElementClicked}/> : null}
+			{(expandable && !expanded) ? <ExpandButton onClick={onExpandClicked}/> : null}
+			{(expandable && expanded) ? <CollapseButton onClick={onCollapseClicked}/> : null}
 		</span>
 	</ATableRowOperators>;
 };
@@ -182,10 +174,10 @@ export const TableTopBar = (props: Omit<TableProps, '$array'> & { $array: Enhanc
 		<ATableRowIndexColumn columnWidth={rowIndexColumnWidth} columnHeight={computedColumnHeight}
 		                      headerHeight={computedHeaderHeight}
 		                      ref={rowIndexColumnRef}>
-			{elements.length === 0 ? <TableBodyRowIndexCell rowIndex={-1} rowIndexStartsFrom={0} /> : null}
+			{elements.length === 0 ? <TableBodyRowIndexCell rowIndex={-1} rowIndexStartsFrom={0}/> : null}
 			{elements.map((elementModel, index) => {
 				return <TableBodyRowIndexCell rowIndex={index} rowIndexStartsFrom={rowIndexStartsFrom}
-				                              key={getRowElementKey(elementModel)} />;
+				                              key={getRowElementKey(elementModel)}/>;
 			})}
 		</ATableRowIndexColumn>
 		<ATableRowOperatorsColumn columnWidth={rowOperatorsColumnWidth} columnHeight={computedColumnHeight}
@@ -193,10 +185,10 @@ export const TableTopBar = (props: Omit<TableProps, '$array'> & { $array: Enhanc
 		                          data-vertical-scrolled={scrolled.verticalScrolled}
 		                          ref={rowOperatorsColumnRef}>
 			{elements.length === 0
-				? <TableRowOperators expandable={false} removable={false} rowIndex={-1} /> : null}
+				? <TableRowOperators expandable={false} removable={false} rowIndex={-1}/> : null}
 			{elements.map((elementModel, index) => {
 				return <TableRowOperators expandable={expandable} removable={removable} rowIndex={index}
-				                          key={getRowElementKey(elementModel)} />;
+				                          key={getRowElementKey(elementModel)}/>;
 			})}
 		</ATableRowOperatorsColumn>
 	</>;

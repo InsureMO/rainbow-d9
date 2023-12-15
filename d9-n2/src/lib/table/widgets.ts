@@ -34,7 +34,7 @@ export const ATableRowIndexColumn = styled.div.attrs<{
 	position      : absolute;
 	left          : 0;
 	border-top    : ${CssVars.TABLE_HEADER_BORDER};
-	border-bottom : ${CssVars.TABLE_CELL_BORDER};
+    //border-bottom : $ {CssVars.TABLE_CELL_BORDER};
 	overflow      : hidden;
 	z-index       : 1;
 `;
@@ -88,7 +88,7 @@ export const ATableRowOperatorsColumn = styled.div.attrs<{
 	flex-direction : column;
 	right          : 0;
 	border-top     : ${CssVars.TABLE_HEADER_BORDER};
-	border-bottom  : ${CssVars.TABLE_CELL_BORDER};
+    //border-bottom  : $ {CssVars.TABLE_CELL_BORDER};
 	overflow       : hidden;
 	z-index        : 1;
 	&[data-vertical-scrolled=true] {

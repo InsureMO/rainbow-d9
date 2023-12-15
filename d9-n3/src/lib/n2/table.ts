@@ -3,7 +3,7 @@ import {TableHeaderDef} from '@rainbow-d9/n2';
 import {ParsedNodeType} from '../node-types';
 import {ParsedList, ParsedListItemAttributePair, SemanticUtils} from '../semantic';
 import {Undefinable} from '../utility-types';
-import {AttributeValueBuild, SpecificArrayWidgetTranslator, WidgetPropertyName} from '../widget';
+import {AttributeValueBuild, CustomAttributeName, SpecificArrayWidgetTranslator, WidgetPropertyName} from '../widget';
 import {N2WidgetType} from './types';
 
 export const N2TableHeadersBuild: AttributeValueBuild<Array<TableHeaderDef>> = {
@@ -73,6 +73,10 @@ export class N2TableTranslator extends SpecificArrayWidgetTranslator<N2WidgetTyp
 
 	public shouldWrapByFormCell(): boolean {
 		return false;
+	}
+
+	public getAttributeNamesMapping(): Undefinable<Record<CustomAttributeName, WidgetPropertyName>> {
+		return this.buildDefaultAttributeNamesMapping();
 	}
 
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
