@@ -9,15 +9,19 @@ import {
 	UnwrappedDateTimeCalendarProps
 } from './calendar';
 import {UnwrappedCaption, UnwrappedCaptionProps, UnwrappedLabel, UnwrappedLabelProps} from './caption';
+import {UnwrappedCheckbox, UnwrappedCheckboxProps} from './checkbox';
 import {UnwrappedDropdown, UnwrappedDropdownProps} from './dropdown';
 import {UnwrappedInput, UnwrappedInputProps, UnwrappedNumberInput, UnwrappedNumberInputProps} from './input';
+import {UnwrappedMultiDropdown, UnwrappedMultiDropdownProps} from './multi-dropdown';
 import {UnwrappedSection, UnwrappedSectionProps} from './section';
 
 export {
 	UnwrappedCaption, UnwrappedCaptionProps, UnwrappedLabel, UnwrappedLabelProps,
 
 	UnwrappedInput, UnwrappedInputProps, UnwrappedNumberInput, UnwrappedNumberInputProps,
+	UnwrappedCheckbox, UnwrappedCheckboxProps,
 	UnwrappedDropdown, UnwrappedDropdownProps,
+	UnwrappedMultiDropdown, UnwrappedMultiDropdownProps,
 	UnwrappedCalendar, UnwrappedCalendarProps,
 	UnwrappedDateCalendar, UnwrappedDateCalendarProps,
 	UnwrappedDateTimeCalendar, UnwrappedDateTimeCalendarProps,

@@ -19,7 +19,7 @@ export type CheckboxDef = ValueChangeableNodeDef & OmitHTMLProps<HTMLDivElement>
 	values?: CheckboxPossibleValues;
 };
 /** Input widget definition, with html attributes */
-export type CheckBoxProps = OmitNodeDef<CheckboxDef> & WidgetProps;
+export type CheckboxProps = OmitNodeDef<CheckboxDef> & WidgetProps;
 
 const ACheckbox = styled.div.attrs({'data-w': 'd9-checkbox'})`
     display: block;
@@ -98,7 +98,7 @@ const ACheckbox = styled.div.attrs({'data-w': 'd9-checkbox'})`
     }
 `;
 
-export const Checkbox = (props: CheckBoxProps) => {
+export const Checkbox = (props: CheckboxProps) => {
 	const {
 		values = [true, false],
 		$pp, $wrapped: {$onValueChange, $model, $avs: {$disabled, $visible}},
