@@ -6,6 +6,7 @@ export * from './lib/button';
 export * from './lib/button-bar';
 export * from './lib/caption';
 export * from './lib/dropdown';
+export * from './lib/multi-dropdown';
 export * from './lib/calendar';
 export * from './lib/form-cell';
 export * from './lib/input';

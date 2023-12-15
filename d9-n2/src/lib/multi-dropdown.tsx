@@ -15,6 +15,13 @@ import React, {ChangeEvent, KeyboardEvent, MouseEvent, ReactNode, useEffect, use
 import styled from 'styled-components';
 import {CssVars} from './constants';
 import {
+	DROPDOWN_NO_AVAILABLE,
+	DROPDOWN_NO_MATCHED,
+	DROPDOWN_NO_OPTIONS,
+	DropdownOptionSort,
+	REACTION_REFRESH_DROPDOWN_OPTIONS
+} from './dropdown';
+import {
 	DropdownContainer,
 	DropdownLabel,
 	DropdownPopup,
@@ -26,60 +33,114 @@ import {
 	isPopupAtBottom,
 	useDropdownControl
 } from './dropdown-assist';
+import {Check, Times} from './icons';
 import {OmitHTMLProps, OmitNodeDef} from './types';
 
-export type DropdownOptionValue = string | number | boolean;
+export type MultiDropdownOptionValue = string | number;
+export type MultiDropdownValue = MultiDropdownOptionValue | Array<MultiDropdownOptionValue>;
 
 /**
- * property "key" is optional, it is required when "value" is object or something else which cannot use as identity.
+ * property "stringify" is optional, it is required when "value" is object or something else which cannot use as identity.
  */
-export interface DropdownOption {
-	value: DropdownOptionValue;
+export interface MultiDropdownOption {
+	value: MultiDropdownOptionValue;
 	label: ReactNode;
-	stringify?: (option: DropdownOption) => string;
+	stringify?: (option: MultiDropdownOption) => string;
 }
 
-export type DropdownOptions = Array<DropdownOption>;
-
-export enum DropdownOptionSort {
-	ASC, DESC
-}
+export type MultiDropdownOptions = Array<MultiDropdownOption>;
 
 /** Input configuration definition */
-export type DropdownDef = ValueChangeableNodeDef & OmitHTMLProps<HTMLDivElement> & {
+export type MultiDropdownDef = ValueChangeableNodeDef & OmitHTMLProps<HTMLDivElement> & {
 	/**
 	 * Function will be invoked when it is changed, be careful!
 	 * Might lead endless rendering loop.
 	 */
-	options: DropdownOptions
-		| (<R extends BaseModel, M extends PropValue>(options: { root: R, model: M }) => Promise<DropdownOptions>);
+	options: MultiDropdownOptions
+		| (<R extends BaseModel, M extends PropValue>(options: { root: R, model: M }) => Promise<MultiDropdownOptions>);
 	optionSort?: DropdownOptionSort;
 	please?: ReactNode;
 	noAvailable?: ReactNode;
 	noMatched?: ReactNode;
 	clearable?: boolean;
 };
-export type OnDropdownValueChange = <NV extends PropValue>(newValue: NV, option?: DropdownOption) => void | Promise<void>;
+/**
+ * 1. new value should be an array or null
+ * 2. option is currently selected, or null if it is clearing. when option is given, use select to idendify that this option is add or remove value into model
+ */
+export type OnMultiDropdownValueChange = <NV extends PropValue>(newValue: NV, option: MultiDropdownOption | null, select: boolean) => void | Promise<void>;
 /** Input widget definition, with html attributes */
-export type DropdownProps = OmitNodeDef<DropdownDef> & Omit<WidgetProps, '$wrapped'> & {
+export type MultiDropdownProps = OmitNodeDef<MultiDropdownDef> & Omit<WidgetProps, '$wrapped'> & {
 	$wrapped: Omit<WidgetProps['$wrapped'], '$onValueChange'> & {
-		$onValueChange: OnDropdownValueChange;
+		$onValueChange: OnMultiDropdownValueChange;
 	}
 };
-/**
- * return this to refresh dropdown options, only works on options is a promise function.
- */
-export const REACTION_REFRESH_DROPDOWN_OPTIONS = 'reaction-refresh-dropdown-options';
 
 interface Candidates {
 	initialized: boolean;
-	options: DropdownOptions;
+	options: MultiDropdownOptions;
 }
+
+const MultiDropdownContainer = styled(DropdownContainer)`
+    flex-wrap: wrap;
+    height: unset;
+    min-height: ${CssVars.INPUT_HEIGHT};
+    padding-right: calc(${CssVars.INPUT_HEIGHT} - ${CssVars.INPUT_INDENT} + 4px);
+`;
+
+const MultiDropdownLabel = styled(DropdownLabel)`
+    flex-grow: unset;
+    border: ${CssVars.BORDER};
+    border-radius: ${CssVars.BORDER_RADIUS};
+    min-height: calc(${CssVars.INPUT_HEIGHT} - 6px);
+    padding: 0 calc(${CssVars.INPUT_INDENT} / 2);
+    margin: 2px 4px 2px 0;
+    white-space: normal;
+
+    > span:first-child {
+        display: flex;
+        position: relative;
+        flex-grow: 1;
+        align-items: center;
+    }
+
+    > span:last-child {
+        display: flex;
+        position: relative;
+        align-items: center;
+        justify-content: center;
+        height: calc(${CssVars.INPUT_HEIGHT} * 3 / 4);
+        width: calc(${CssVars.INPUT_HEIGHT} * 3 / 4);
+        opacity: 0.2;
+        transition: opacity ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION};
+
+        > svg {
+            height: calc(${CssVars.INPUT_HEIGHT} * 2 / 5);
+            fill: ${CssVars.DANGER_COLOR};
+        }
+
+    }
+
+    &:hover {
+        > span:last-child {
+            opacity: 0.6;
+
+            &:hover {
+                opacity: 1;
+            }
+        }
+    }
+`;
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const MultiDropdownStick = styled(DropdownStick as any)`
+    position: absolute;
+    right: ${CssVars.INPUT_INDENT};
+`;
 
 const OptionFilter = styled.div.attrs<Omit<DropdownPopupState, 'active'> & { active: boolean }>(
 	({active, atBottom, top, left, height}) => {
 		return {
-			'data-w': 'd9-dropdown-option-filter',
+			'data-w': 'd9-multi-dropdown-option-filter',
 			style: {
 				opacity: active ? 1 : 0,
 				top: atBottom ? (top + height - 10) : (void 0),
@@ -129,7 +190,7 @@ const OptionFilter = styled.div.attrs<Omit<DropdownPopupState, 'active'> & { act
         caret-shape: revert;
     }
 `;
-const Option = styled.span.attrs({'data-w': 'd9-dropdown-option'})`
+const MultiOption = styled.span.attrs({'data-w': 'd9-multi-dropdown-option'})`
     display: flex;
     align-items: center;
     padding: 0 ${CssVars.INPUT_INDENT};
@@ -137,6 +198,22 @@ const Option = styled.span.attrs({'data-w': 'd9-dropdown-option'})`
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
+
+    > span:first-child {
+        display: flex;
+        position: relative;
+        flex-grow: 1;
+        align-items: center;
+    }
+
+    > svg:last-child {
+        color: ${CssVars.PRIMARY_COLOR};
+        height: calc(${CssVars.INPUT_HEIGHT} * 3 / 4);
+        width: calc(${CssVars.INPUT_HEIGHT} * 3 / 4);
+        margin-left: 8px;
+        margin-right: calc(${CssVars.INPUT_INDENT} * -1 + 4px);
+        opacity: 0.7;
+    }
 
     &[data-can-click=false] {
         cursor: default;
@@ -147,11 +224,7 @@ const Option = styled.span.attrs({'data-w': 'd9-dropdown-option'})`
     }
 `;
 
-export const DROPDOWN_NO_OPTIONS = [];
-export const DROPDOWN_NO_MATCHED = '__no_matched__';
-export const DROPDOWN_NO_AVAILABLE = '__no_available__';
-
-export const Dropdown = (props: DropdownProps) => {
+export const MultiDropdown = (props: MultiDropdownProps) => {
 	const {
 		options = DROPDOWN_NO_OPTIONS, optionSort,
 		$pp, $wrapped: {$onValueChange, $root, $model, $p2r, $avs: {$disabled, $visible}},
@@ -196,7 +269,7 @@ export const Dropdown = (props: DropdownProps) => {
 		}
 	}, [onWrapper, offWrapper]);
 
-	const askOptions = (): DropdownOptions => {
+	const askOptions = (): MultiDropdownOptions => {
 		return candidates.initialized ? candidates.options : (VUtils.isFunction(options) ? DROPDOWN_NO_OPTIONS : (options ?? DROPDOWN_NO_OPTIONS));
 	};
 	const askDisplayOptions = () => {
@@ -246,8 +319,8 @@ export const Dropdown = (props: DropdownProps) => {
 		afterPopupHide: functions.afterPopupHide
 	});
 
-	const onClicked = () => {
-		if ($disabled || isDropdownPopupActive(popupState.active)) {
+	const repaintPopup = () => {
+		if ($disabled) {
 			return;
 		}
 		// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
@@ -259,6 +332,13 @@ export const Dropdown = (props: DropdownProps) => {
 			top, left, width, height,
 			minWidth: width, minHeight: popupHeight, maxHeight: popupHeight
 		}));
+
+	};
+	const onClicked = () => {
+		if ($disabled || isDropdownPopupActive(popupState.active)) {
+			return;
+		}
+		repaintPopup();
 	};
 	const onFocused = () => {
 		if ($disabled || isDropdownPopupActive(popupState.active)) {
@@ -281,18 +361,76 @@ export const Dropdown = (props: DropdownProps) => {
 		}
 		setFilter(event.target.value);
 	};
-	const onOptionClicked = (option: DropdownOption) => async (event: MouseEvent<HTMLSpanElement>) => {
+	const currentValuesToArray = (): Array<MultiDropdownOptionValue> => {
+		const values = MUtils.getValue($model, $pp) as MultiDropdownValue;
+		if (values == null) {
+			return [];
+		} else if (VUtils.isPrimitive(values)) {
+			return [values as MultiDropdownOptionValue];
+		} else {
+			return values as Array<MultiDropdownOptionValue>;
+		}
+	};
+	const hasValues = (values: Array<MultiDropdownOptionValue>): boolean => {
+		if (values == null) {
+			return false;
+		} else if (typeof values === 'string') {
+			return VUtils.isNotEmpty(values);
+		} else if (Array.isArray(values)) {
+			return values.length !== 0;
+		}
+		return true;
+	};
+	const hasValue = (value: MultiDropdownOptionValue, values: Array<MultiDropdownOptionValue>): boolean => {
+		if (value == null) {
+			return true;
+		} else if (values == null) {
+			return false;
+		} else {
+			return values.some(v => v == value);
+		}
+	};
+	const onOptionClicked = (option: MultiDropdownOption) => async (event: MouseEvent<HTMLSpanElement>) => {
 		if ($disabled) {
 			return;
 		}
 		event.preventDefault();
 		event.stopPropagation();
-		await $onValueChange(option.value, option);
-		setPopupShown(false);
+
+		const values = currentValuesToArray();
+		if (!hasValues(values)) {
+			// eslint-disable-next-line @typescript-eslint/no-explicit-any
+			await $onValueChange([option.value as any], option, true);
+		} else if (!hasValue(option.value, values)) {
+			// eslint-disable-next-line @typescript-eslint/no-explicit-any
+			await $onValueChange([...values, option.value as any], option, true);
+		} else {
+			return;
+		}
+		if (values.length === askOptions().length) {
+			setPopupShown(false);
+		} else {
+			repaintPopup();
+		}
 		if (filter !== '') {
 			setTimeout(() => setFilter(''), 100);
 		}
 		setTimeout(() => containerRef.current?.focus(), 100);
+	};
+	const onRemoveClicked = (value: MultiDropdownOptionValue) => async (event: MouseEvent<HTMLSpanElement>) => {
+		if ($disabled) {
+			return;
+		}
+		event.preventDefault();
+		event.stopPropagation();
+
+		const values = currentValuesToArray();
+		if (!hasValues(values)) {
+			return;
+		}
+		const option = askOptions().find(option => option.value == value);
+		await $onValueChange(values.filter(v => v != value) as unknown as PropValue, option ?? null, false);
+		repaintPopup();
 	};
 	const onClearClicked = async (event: MouseEvent<HTMLSpanElement>) => {
 		if ($disabled) {
@@ -300,9 +438,9 @@ export const Dropdown = (props: DropdownProps) => {
 		}
 		event.preventDefault();
 		event.stopPropagation();
-		const value = MUtils.getValue($model, $pp) as DropdownOptionValue;
-		if (value != null) {
-			await $onValueChange(null, null);
+		const values = currentValuesToArray();
+		if (values != null && values.length !== 0) {
+			await $onValueChange(null, null, true);
 		}
 		if (!isDropdownPopupActive(popupState.active)) {
 			// call click to show popup
@@ -310,22 +448,35 @@ export const Dropdown = (props: DropdownProps) => {
 		} else {
 			// simply force update
 			forceUpdate();
+			repaintPopup();
 		}
 	};
 
-	const value = MUtils.getValue($model, $pp) as DropdownOptionValue;
-	const selected = value != null;
-	const label = (value == null ? please : (askOptions().find(option => option.value == value)?.label ?? please)) || '';
+	const values = currentValuesToArray();
+	const selected = values != null;
+	// const label = (values == null ? please : (askOptions().find(option => option.value == values)?.label ?? please)) || '';
+	const optionsAsMap = askOptions().reduce((map, option) => {
+		map[`${option.value}`] = option;
+		return map;
+	}, {} as Record<string, MultiDropdownOption>);
 
-	return <DropdownContainer active={popupState.active} atBottom={popupState.atBottom}
-	                          ref={containerRef} role="input" tabIndex={0}
-	                          {...rest}
-	                          data-w="d9-dropdown"
-	                          data-disabled={$disabled} data-visible={$visible}
-	                          onFocus={onFocused} onClick={onClicked}
-	                          id={PPUtils.asId(PPUtils.absolute($p2r, $pp), props.id)}>
-		<DropdownLabel data-please={!selected}>{label}</DropdownLabel>
-		<DropdownStick valueAssigned={selected} clearable={clearable} clear={onClearClicked} disabled={$disabled}/>
+	return <MultiDropdownContainer active={popupState.active} atBottom={popupState.atBottom}
+	                               ref={containerRef} role="input" tabIndex={0}
+	                               {...rest}
+	                               data-w="d9-multi-dropdown"
+	                               data-disabled={$disabled} data-visible={$visible}
+	                               onFocus={onFocused} onClick={onClicked}
+	                               id={PPUtils.asId(PPUtils.absolute($p2r, $pp), props.id)}>
+		{values.map(value => {
+			const v = `${value}`;
+
+			return <MultiDropdownLabel data-please={false} key={v}>
+				<span>{optionsAsMap[v]?.label}</span>
+				{$disabled ? null : <span onClick={onRemoveClicked(value)}><Times/></span>}
+			</MultiDropdownLabel>;
+		})}
+		<DropdownLabel data-please={true}>{please}</DropdownLabel>
+		<MultiDropdownStick valueAssigned={selected} clearable={clearable} clear={onClearClicked} disabled={$disabled}/>
 		{isDropdownPopupActive(popupState.active)
 			? <DropdownPopup {...{...popupState, minHeight: popupHeight}}
 			                 shown={popupShown && popupState.active === DropdownPopupStateActive.ACTIVE}
@@ -338,16 +489,18 @@ export const Dropdown = (props: DropdownProps) => {
 				{displayOptions.map((option, index) => {
 					const {value, label} = option;
 					const canClick = ![DROPDOWN_NO_MATCHED, DROPDOWN_NO_AVAILABLE].includes(`${value}`);
-					return <Option key={`${value}-${index}`} data-can-click={canClick}
-					               onClick={canClick ? onOptionClicked(option) : (void 0)}>
-						{label}
-					</Option>;
+					const selected = values.includes(value);
+					return <MultiOption key={`${value}-${index}`} data-can-click={canClick}
+					                    onClick={canClick ? onOptionClicked(option) : (void 0)}>
+						<span>{label}</span>
+						{selected ? <Check/> : null}
+					</MultiOption>;
 				})}
 			</DropdownPopup>
 			: null}
-	</DropdownContainer>;
+	</MultiDropdownContainer>;
 };
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
-registerWidget({key: 'Dropdown', JSX: Dropdown, container: false, array: false});
+registerWidget({key: 'MultiDropdown', JSX: MultiDropdown, container: false, array: false});

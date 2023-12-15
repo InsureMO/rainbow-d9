@@ -23,7 +23,7 @@ export const N2DropdownOptionsByStrBuild = (value: string): DropdownOptions => {
 		.map(([value, label]) => ({value, label}));
 };
 
-const N2DropdownOptionsBuild: AttributeValueBuild<DropdownOptions> = {
+export const N2DropdownOptionsBuild: AttributeValueBuild<DropdownOptions> = {
 	accept: (key: WidgetPropertyName) => key === 'options',
 	build: (value: Undefinable<string>, list: ParsedListItemAttributePair): Undefinable<DropdownOptions> => {
 		if (VUtils.isNotBlank(value)) {
@@ -43,7 +43,7 @@ const N2DropdownOptionsBuild: AttributeValueBuild<DropdownOptions> = {
 	}
 };
 
-const N2DropdownSortBuild: AttributeValueBuild<DropdownOptionSort> = {
+export const N2DropdownSortBuild: AttributeValueBuild<DropdownOptionSort> = {
 	accept: (key: WidgetPropertyName) => key === 'optionSort',
 	build: (value: Undefinable<string>): Undefinable<DropdownOptionSort> => {
 		if (VUtils.isBlank(value)) {

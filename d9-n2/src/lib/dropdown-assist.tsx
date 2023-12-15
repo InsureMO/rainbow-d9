@@ -2,6 +2,7 @@ import React, {ForwardedRef, forwardRef, MouseEvent, ReactNode, useEffect, useRe
 import styled from 'styled-components';
 import {CssVars, DOM_ID_WIDGET} from './constants';
 import {useCollapseFixedThing} from './hooks';
+import {CaretDown, Times} from './icons';
 
 export enum DropdownPopupStateActive {
 	WILL_ACTIVE = 'will-active', ACTIVE = 'active', HIDDEN = 'hidden'
@@ -19,122 +20,128 @@ export const DropdownContainer = styled.div.attrs<{ active: DropdownPopupStateAc
 			'data-at-bottom': !!atBottom
 		};
 	})<{ active: DropdownPopupStateActive, atBottom: boolean }>`
-	display          : flex;
-	position         : relative;
-	align-items      : center;
-	padding          : 0 ${CssVars.INPUT_INDENT};
-	outline          : none;
-	appearance       : none;
-	border           : ${CssVars.BORDER};
-	border-radius    : ${CssVars.BORDER_RADIUS};
-	height           : ${CssVars.INPUT_HEIGHT};
-	background-color : transparent;
-	transition       : all ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION};
-	cursor           : pointer;
-	width            : 100%;
-	&[data-visible=false] {
-		display : none;
-	}
-	&[disabled], &[data-disabled=true] {
-		border-color     : ${CssVars.BORDER_COLOR};
-		background-color : ${CssVars.DISABLE_COLOR};
-		cursor           : default;
-		&:hover, &:focus-within {
-			border-color : ${CssVars.BORDER_COLOR};
-			box-shadow   : none;
-			> span[data-w=d9-dropdown-stick] {
-				opacity : 0;
-			}
-		}
-	}
-	&:hover {
-		box-shadow : ${CssVars.PRIMARY_HOVER_SHADOW};
-	}
-	&:focus-within {
-		box-shadow : ${CssVars.PRIMARY_SHADOW};
-	}
-	&:hover,
-	&:focus-within {
-		border-color : ${CssVars.PRIMARY_COLOR};
-		> span[data-w=d9-dropdown-stick] {
-			opacity : 0.8;
-			&[data-clear=true] {
-				> svg {
-					fill : ${CssVars.DANGER_COLOR};
-				}
-			}
-		}
-	}
+    display: flex;
+    position: relative;
+    align-items: center;
+    padding: 0 ${CssVars.INPUT_INDENT};
+    outline: none;
+    appearance: none;
+    border: ${CssVars.BORDER};
+    border-radius: ${CssVars.BORDER_RADIUS};
+    height: ${CssVars.INPUT_HEIGHT};
+    background-color: transparent;
+    transition: all ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION};
+    cursor: pointer;
+    width: 100%;
+
+    &[data-visible=false] {
+        display: none;
+    }
+
+    &[disabled], &[data-disabled=true] {
+        border-color: ${CssVars.BORDER_COLOR};
+        background-color: ${CssVars.DISABLE_COLOR};
+        cursor: default;
+
+        &:hover, &:focus-within {
+            border-color: ${CssVars.BORDER_COLOR};
+            box-shadow: none;
+
+            > span[data-w=d9-dropdown-stick] {
+                opacity: 0;
+            }
+        }
+    }
+
+    &:hover {
+        box-shadow: ${CssVars.PRIMARY_HOVER_SHADOW};
+    }
+
+    &:focus-within {
+        box-shadow: ${CssVars.PRIMARY_SHADOW};
+    }
+
+    &:hover,
+    &:focus-within {
+        border-color: ${CssVars.PRIMARY_COLOR};
+
+        > span[data-w=d9-dropdown-stick] {
+            opacity: 0.8;
+
+            &[data-clear=true] {
+                > svg {
+                    fill: ${CssVars.DANGER_COLOR};
+                }
+            }
+        }
+    }
 `;
 
 export const DropdownLabel = styled.span.attrs({'data-w': 'd9-dropdown-label'})`
-	flex-grow     : 1;
-	display       : flex;
-	align-items   : center;
-	height        : 100%;
-	white-space   : nowrap;
-	text-overflow : ellipsis;
-	overflow-x    : hidden;
-	&[data-please=true] {
-		opacity : 0.7;
-	}
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    height: 100%;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow-x: hidden;
+
+    &[data-please=true] {
+        opacity: 0.7;
+    }
+
+    &[data-please=false] ~ &[data-please=true] {
+        display: none;
+    }
 `;
 
-export const DropdownStickSVG = styled.svg`
-	height     : calc(${CssVars.INPUT_HEIGHT} * 2 / 5);
-	fill       : ${CssVars.FONT_COLOR};
-	transition : all ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION};
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const DropdownStickCaret = styled(CaretDown as any).attrs({'data-w': 'd9-dropdown-caret'})`
+    height: calc(${CssVars.INPUT_HEIGHT} * 2 / 5);
+    fill: ${CssVars.FONT_COLOR};
+    transition: all ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION};
 `;
-
-export const DropdownStickCaret = () => {
-	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-	// @ts-ignore
-	return <DropdownStickSVG xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" data-w="d9-dropdown-caret">
-		<path
-			d="M137.4 374.6c12.5 12.5 32.8 12.5 45.3 0l128-128c9.2-9.2 11.9-22.9 6.9-34.9s-16.6-19.8-29.6-19.8L32 192c-12.9 0-24.6 7.8-29.6 19.8s-2.2 25.7 6.9 34.9l128 128z" />
-	</DropdownStickSVG>;
-};
-
-export const DropdownStickClear = () => {
-	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-	// @ts-ignore
-	return <DropdownStickSVG xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" data-w="d9-dropdown-clear">
-		<path
-			d="M310.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 210.7 54.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L114.7 256 9.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L160 301.3 265.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L205.3 256 310.6 150.6z" />
-	</DropdownStickSVG>;
-};
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const DropdownStickClear = styled(Times as any).attrs({'data-w': 'd9-dropdown-clear'})`
+    height: calc(${CssVars.INPUT_HEIGHT} * 2 / 5);
+    fill: ${CssVars.FONT_COLOR};
+    transition: all ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION};
+`;
 
 export const DropdownStickContainer = styled.span.attrs({'data-w': 'd9-dropdown-stick'})`
-	display         : flex;
-	position        : relative;
-	align-items     : center;
-	justify-content : center;
-	height          : calc(${CssVars.INPUT_HEIGHT} * 3 / 4);
-	width           : calc(${CssVars.INPUT_HEIGHT} * 3 / 4);
-	border-radius   : calc(${CssVars.BORDER_RADIUS});
-	margin-left     : 8px;
-	margin-right    : calc(${CssVars.INPUT_INDENT} * -1 + 4px);
-	opacity         : 0;
-	transition      : opacity ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION}, color ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION};
-	overflow        : hidden;
-	&[data-clear=true] {
-		> svg {
-			fill : ${CssVars.DANGER_COLOR};
-		}
-	}
-	&[data-disabled=true] {
-		display : none;
-	}
-	&:before {
-		content          : '';
-		display          : block;
-		position         : absolute;
-		width            : 100%;
-		height           : 100%;
-		background-color : transparent;
-		z-index          : -1;
-		transition       : background-color ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION};
-	}
+    display: flex;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+    height: calc(${CssVars.INPUT_HEIGHT} * 3 / 4);
+    width: calc(${CssVars.INPUT_HEIGHT} * 3 / 4);
+    border-radius: calc(${CssVars.BORDER_RADIUS});
+    margin-left: 8px;
+    margin-right: calc(${CssVars.INPUT_INDENT} * -1 + 4px);
+    opacity: 0;
+    transition: opacity ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION}, color ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION};
+    overflow: hidden;
+
+    &[data-clear=true] {
+        > svg {
+            fill: ${CssVars.DANGER_COLOR};
+        }
+    }
+
+    &[data-disabled=true] {
+        display: none;
+    }
+
+    &:before {
+        content: '';
+        display: block;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background-color: transparent;
+        z-index: -1;
+        transition: background-color ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION};
+    }
 `;
 
 export const DropdownStick = (props: {
@@ -143,7 +150,7 @@ export const DropdownStick = (props: {
 	clear: (event: MouseEvent<HTMLSpanElement>) => void;
 	disabled: boolean;
 }) => {
-	const {valueAssigned, clearable, clear, disabled} = props;
+	const {valueAssigned, clearable, clear, disabled, ...rest} = props;
 
 	const onClearClicked = (event: MouseEvent<HTMLSpanElement>) => {
 		clear(event);
@@ -152,13 +159,15 @@ export const DropdownStick = (props: {
 	if (valueAssigned && clearable) {
 		// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 		// @ts-ignore
-		return <DropdownStickContainer data-clear={true} data-disabled={disabled} onClick={onClearClicked}>
-			<DropdownStickClear />
+		return <DropdownStickContainer data-clear={true} data-disabled={disabled} onClick={onClearClicked} {...rest}>
+			<DropdownStickClear/>
 		</DropdownStickContainer>;
 	} else {
 		// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 		// @ts-ignore
-		return <DropdownStickContainer data-disabled={disabled}><DropdownStickCaret /></DropdownStickContainer>;
+		return <DropdownStickContainer data-disabled={disabled} {...rest}>
+			<DropdownStickCaret/>
+		</DropdownStickContainer>;
 	}
 };
 
@@ -197,18 +206,18 @@ const DropdownPopupContainer = styled.div.attrs<Omit<DropdownPopupProps, 'childr
 			}
 		};
 	})<Omit<DropdownPopupProps, 'children'>>`
-	display          : block;
-	position         : fixed;
-	background-color : ${CssVars.BACKGROUND_COLOR};
-	border           : ${CssVars.BORDER};
-	border-color     : ${CssVars.PRIMARY_COLOR};
-	border-radius    : ${CssVars.BORDER_RADIUS};
-	box-shadow       : ${CssVars.PRIMARY_HOVER_SHADOW};
-	transition       : opacity ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION}, top ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION}, bottom ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION};
-	z-index          : ${CssVars.DROPDOWN_Z_INDEX};
-	overflow-y       : auto;
-	opacity          : 0;
-	pointer-events   : none;
+    display: block;
+    position: fixed;
+    background-color: ${CssVars.BACKGROUND_COLOR};
+    border: ${CssVars.BORDER};
+    border-color: ${CssVars.PRIMARY_COLOR};
+    border-radius: ${CssVars.BORDER_RADIUS};
+    box-shadow: ${CssVars.PRIMARY_HOVER_SHADOW};
+    transition: opacity ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION}, top ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION}, bottom ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION};
+    z-index: ${CssVars.DROPDOWN_Z_INDEX};
+    overflow-y: auto;
+    opacity: 0;
+    pointer-events: none;
 `;
 
 export interface DropdownPopupProps extends DropdownPopupState {

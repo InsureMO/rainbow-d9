@@ -10,6 +10,7 @@ export enum N2WidgetType {
 	CAPTION = 'Caption',
 	LABEL = 'Label',
 	DROPDOWN = 'Dropdown',
+	MULTI_DROPDOWN = 'MultiDropdown',
 	CALENDAR = 'Calendar',
 	DATE = 'Date',
 	DATETIME = 'DateTime',

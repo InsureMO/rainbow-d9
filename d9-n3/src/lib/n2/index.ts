@@ -5,6 +5,7 @@ export * from './number';
 export * from './textarea';
 export * from './checkbox';
 export * from './dropdown';
+export * from './multi-dropdown';
 export * from './calendar';
 
 export * from './button';

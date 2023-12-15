@@ -21,6 +21,10 @@ import {
 	UnwrappedNumberInput as NumberInput,
 	UnwrappedNumberInputProps as NumberInputProps
 } from './input';
+import {
+	UnwrappedMultiDropdown as MultiDropdown,
+	UnwrappedMultiDropdownProps as MultiDropdownProps
+} from './multi-dropdown';
 import {UnwrappedSection as Section, UnwrappedSectionProps as SectionProps} from './section';
 import {UnwrappedTextarea as Textarea, UnwrappedTextareaProps as TextareaProps} from './textarea';
 
@@ -29,7 +33,7 @@ export {
 
 	Input, InputProps, NumberInput, NumberInputProps,
 	Textarea, TextareaProps,
-	Dropdown, DropdownProps,
+	Dropdown, DropdownProps, MultiDropdown, MultiDropdownProps,
 	Calendar, CalendarProps,
 	DateCalendar, DateCalendarProps,
 	DateTimeCalendar, DateTimeCalendarProps,
