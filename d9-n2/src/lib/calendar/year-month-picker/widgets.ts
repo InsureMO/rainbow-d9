@@ -28,14 +28,22 @@ export const YearSelector = styled.div.attrs({'data-v-scroll': ''})`
 	overflow-y     : scroll;
 `;
 export const YearSelectorOption = styled.span`
-	display     : flex;
-	align-items : center;
-	min-height  : ${CssVars.INPUT_HEIGHT};
-	padding     : 0 ${CssVars.CALENDAR_GUTTER_SIZE};
-	cursor      : pointer;
-	&:hover {
-		background-color : ${CssVars.HOVER_COLOR};
-	}
+    display: flex;
+    align-items: center;
+    min-height: ${CssVars.INPUT_HEIGHT};
+    padding: 0 ${CssVars.CALENDAR_GUTTER_SIZE};
+    cursor: pointer;
+    transition: all ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION};
+
+    &[data-current=true] {
+        background-color: ${CssVars.PRIMARY_COLOR};
+        opacity: 0.5;
+    }
+
+    &[data-current=false]:hover {
+        background-color: ${CssVars.HOVER_COLOR};
+        opacity: 1;
+    }
 `;
 export const MonthSelector = styled.div`
 	display               : grid;
@@ -44,12 +52,20 @@ export const MonthSelector = styled.div`
 	grid-row-gap          : ${CssVars.CALENDAR_GUTTER_SIZE};
 `;
 export const MonthSelectorOption = styled.span`
-	display         : flex;
-	align-items     : center;
-	justify-content : center;
-	border-radius   : ${CssVars.BORDER_RADIUS};
-	cursor          : pointer;
-	&:hover {
-		background-color : ${CssVars.HOVER_COLOR};
-	}
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: ${CssVars.BORDER_RADIUS};
+    cursor: pointer;
+    transition: all ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION};
+
+    &[data-current=true] {
+        background-color: ${CssVars.PRIMARY_COLOR};
+        opacity: 0.5;
+    }
+
+    &[data-current=false]:hover {
+        background-color: ${CssVars.HOVER_COLOR};
+        opacity: 1;
+    }
 `;

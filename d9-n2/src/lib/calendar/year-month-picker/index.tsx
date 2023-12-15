@@ -1,5 +1,6 @@
 import {Dayjs} from 'dayjs';
 import React, {useEffect, useRef, useState} from 'react';
+import {I18NVars} from '../../constants';
 import {useCalendarEventBus} from '../event/calendar-event-bus';
 import {CalendarEventTypes} from '../event/calendar-event-bus-types';
 import {
@@ -34,8 +35,8 @@ export const YearMonthPicker = (props: { value: Dayjs }) => {
 		if (yearSelectorRef.current == null || !visible) {
 			return;
 		}
-		const nowYear = new Date().getFullYear();
-		yearSelectorRef.current.querySelector(`span[data-year="${nowYear}"]`)?.scrollIntoView();
+		yearSelectorRef.current.querySelector(`span[data-year="${value.year()}"]`)?.scrollIntoView();
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [visible]);
 
 	if (!visible) {
@@ -58,24 +59,49 @@ export const YearMonthPicker = (props: { value: Dayjs }) => {
 		<YearMonthPickerLabel>Month</YearMonthPickerLabel>
 		<YearSelector ref={yearSelectorRef}>
 			{new Array(200).fill(1).map((_, index) => maxYear - index).map(year => {
-				return <YearSelectorOption data-year={year} onClick={onYearChange(year)} key={year}>
+				return <YearSelectorOption data-year={year} data-current={year === value.year()}
+				                           onClick={onYearChange(year)} key={year}>
 					{year}
 				</YearSelectorOption>;
 			})}
 		</YearSelector>
 		<MonthSelector>
-			<MonthSelectorOption onClick={onMonthChange(0)}>Jan</MonthSelectorOption>
-			<MonthSelectorOption onClick={onMonthChange(1)}>Feb</MonthSelectorOption>
-			<MonthSelectorOption onClick={onMonthChange(2)}>Mar</MonthSelectorOption>
-			<MonthSelectorOption onClick={onMonthChange(3)}>Apr</MonthSelectorOption>
-			<MonthSelectorOption onClick={onMonthChange(4)}>May</MonthSelectorOption>
-			<MonthSelectorOption onClick={onMonthChange(5)}>Jun</MonthSelectorOption>
-			<MonthSelectorOption onClick={onMonthChange(6)}>Jul</MonthSelectorOption>
-			<MonthSelectorOption onClick={onMonthChange(7)}>Aug</MonthSelectorOption>
-			<MonthSelectorOption onClick={onMonthChange(8)}>Sep</MonthSelectorOption>
-			<MonthSelectorOption onClick={onMonthChange(9)}>Oct</MonthSelectorOption>
-			<MonthSelectorOption onClick={onMonthChange(10)}>Nov</MonthSelectorOption>
-			<MonthSelectorOption onClick={onMonthChange(11)}>Dec</MonthSelectorOption>
+			<MonthSelectorOption onClick={onMonthChange(0)} data-current={value.month() === 0}>
+				{I18NVars.CALENDAR.JAN}
+			</MonthSelectorOption>
+			<MonthSelectorOption onClick={onMonthChange(1)} data-current={value.month() === 1}>
+				{I18NVars.CALENDAR.FEB}
+			</MonthSelectorOption>
+			<MonthSelectorOption onClick={onMonthChange(2)} data-current={value.month() === 2}>
+				{I18NVars.CALENDAR.MAR}
+			</MonthSelectorOption>
+			<MonthSelectorOption onClick={onMonthChange(3)} data-current={value.month() === 3}>
+				{I18NVars.CALENDAR.APR}
+			</MonthSelectorOption>
+			<MonthSelectorOption onClick={onMonthChange(4)} data-current={value.month() === 4}>
+				{I18NVars.CALENDAR.MAY}
+			</MonthSelectorOption>
+			<MonthSelectorOption onClick={onMonthChange(5)} data-current={value.month() === 5}>
+				{I18NVars.CALENDAR.JUN}
+			</MonthSelectorOption>
+			<MonthSelectorOption onClick={onMonthChange(6)} data-current={value.month() === 6}>
+				{I18NVars.CALENDAR.JUL}
+			</MonthSelectorOption>
+			<MonthSelectorOption onClick={onMonthChange(7)} data-current={value.month() === 7}>
+				{I18NVars.CALENDAR.AUG}
+			</MonthSelectorOption>
+			<MonthSelectorOption onClick={onMonthChange(8)} data-current={value.month() === 8}>
+				{I18NVars.CALENDAR.SEP}
+			</MonthSelectorOption>
+			<MonthSelectorOption onClick={onMonthChange(9)} data-current={value.month() === 9}>
+				{I18NVars.CALENDAR.OCT}
+			</MonthSelectorOption>
+			<MonthSelectorOption onClick={onMonthChange(10)} data-current={value.month() === 10}>
+				{I18NVars.CALENDAR.NOV}
+			</MonthSelectorOption>
+			<MonthSelectorOption onClick={onMonthChange(11)} data-current={value.month() === 11}>
+				{I18NVars.CALENDAR.DEC}
+			</MonthSelectorOption>
 		</MonthSelector>
 	</YearMonthPickerContainer>;
 };

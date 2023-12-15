@@ -70,14 +70,31 @@ export const Picker = (props: CalendarProps) => {
 		showPopup();
 	};
 	const redressTimePart = (value: Dayjs | null): Dayjs => {
-		if (!time && fixedTimeAt != null && value != null) {
-			return value.hour(fixedTimeAt.hour)
-				.minute(fixedTimeAt.minute)
-				.second(fixedTimeAt.second)
-				.millisecond(fixedTimeAt.millisecond);
-		} else {
-			return value;
+		if (value == null) {
+			return null;
 		}
+		if (!time) {
+			// no time part, only redress time when fixedTimeAt is given
+			if (fixedTimeAt != null) {
+				return value.hour(fixedTimeAt.hour)
+					.minute(fixedTimeAt.minute)
+					.second(fixedTimeAt.second)
+					.millisecond(fixedTimeAt.millisecond);
+			}
+		} else if (!(timeFormat ?? '').includes('m')) {
+			// no minute and second, always redress minute/second/millisecond
+			return value.minute(fixedTimeAt?.minute ?? 0)
+				.second(fixedTimeAt?.second ?? 0)
+				.millisecond(fixedTimeAt?.millisecond ?? 0);
+		} else if (!(timeFormat ?? '').includes('s')) {
+			// no second, always redress second/millisecond
+			return value.second(fixedTimeAt?.second ?? 0)
+				.millisecond(fixedTimeAt?.millisecond ?? 0);
+		} else {
+			// time exists, always redress millisecond
+			return value.millisecond(fixedTimeAt?.millisecond ?? 0);
+		}
+		return value;
 	};
 	const onBlurred = async () => {
 		if (!autoConfirm) {

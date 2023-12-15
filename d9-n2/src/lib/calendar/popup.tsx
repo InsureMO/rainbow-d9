@@ -52,7 +52,7 @@ export const CalendarPopup = (props: CalendarPopupProps) => {
 			<CalendarPopupHeader dateFormat={dateFormat} time={time} timeFormat={timeFormat}
 			                     value={value} confirm={confirm}/>
 			<DatePicker value={value}/>
-			{time ? <TimePicker value={value}/> : null}
+			{time ? <TimePicker value={value} timeFormat={timeFormat}/> : null}
 			<YearMonthPicker value={value}/>
 		</PopupContainer>
 	</DropdownPopup>;
