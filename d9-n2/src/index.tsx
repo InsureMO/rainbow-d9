@@ -1,5 +1,6 @@
 export * from './lib/constants';
 
+export * as Icons from './lib/icons';
 export * from './lib/dropdown-assist';
 
 export * from './lib/button';

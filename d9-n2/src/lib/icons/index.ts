@@ -1,19 +1,25 @@
 // most icons come from fontawesome
 
-export * from './back';
-export * from './date';
-export * from './time';
+import {ArrowDown} from './arrow-down';
+import {Back} from './back';
+import {CaretDown} from './caret-down';
 
-export * from './check';
-export * from './times';
-export * from './remove';
-export * from './expand';
-export * from './collapse';
+import {CaretLeft} from './caret-left';
+import {CaretRight} from './caret-right';
 
-export * from './caret-left';
-export * from './caret-right';
-export * from './caret-down';
+import {Check} from './check';
+import {Collapse} from './collapse';
+import {Date} from './date';
+import {Expand} from './expand';
+import {Remove} from './remove';
 
-export * from './arrow-down';
+import {Spinner} from './spinner';
+import {Time} from './time';
+import {Times} from './times';
 
-export * from './spinner';
+export {
+	Back, Date, Time,
+	Check, Times, Remove, Expand, Collapse,
+	CaretLeft, CaretRight, CaretDown, ArrowDown,
+	Spinner
+};
