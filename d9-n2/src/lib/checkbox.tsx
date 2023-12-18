@@ -27,7 +27,7 @@ const ACheckbox = styled.div.attrs({'data-w': 'd9-checkbox'})`
     padding: calc((${CssVars.INPUT_HEIGHT}) / 6) 0;
     width: ${CssVars.INPUT_HEIGHT};
     height: ${CssVars.INPUT_HEIGHT};
-    color: ${CssVars.FONT_COLOR};
+    fill: ${CssVars.FONT_COLOR};
     cursor: pointer;
 
     &[data-checked=true] {
@@ -69,7 +69,7 @@ const ACheckbox = styled.div.attrs({'data-w': 'd9-checkbox'})`
 
     &:hover,
     &:focus-within {
-        color: ${CssVars.PRIMARY_COLOR};
+        fill: ${CssVars.PRIMARY_COLOR};
 
         &:before {
             border-color: ${CssVars.PRIMARY_COLOR};
@@ -90,10 +90,10 @@ const ACheckbox = styled.div.attrs({'data-w': 'd9-checkbox'})`
 
     > svg {
         position: relative;
-        width: calc((${CssVars.INPUT_HEIGHT}) / 6 * 5);
-        height: calc((${CssVars.INPUT_HEIGHT}) / 6 * 5);
-        top: calc((${CssVars.INPUT_HEIGHT}) / -12);
-        left: calc((${CssVars.INPUT_HEIGHT}) / -12);
+        width: calc((${CssVars.INPUT_HEIGHT}) / 3);
+        height: calc((${CssVars.INPUT_HEIGHT}) / 3);
+        margin-top: calc((${CssVars.INPUT_HEIGHT}) / 6);
+        margin-left: calc((${CssVars.INPUT_HEIGHT}) / 6);
         transition: opacity ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION};
     }
 `;

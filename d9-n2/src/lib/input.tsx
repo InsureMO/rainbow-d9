@@ -115,7 +115,7 @@ export type NumberInputProps = OmitNodeDef<NumberInputDef> & WidgetProps;
 export const NumberInput = forwardRef((props: NumberInputProps, ref: ForwardedRef<HTMLInputElement>) => {
 	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 	// @ts-ignore
-	return <Input {...props} valueToNumber={true} ref={ref} />;
+	return <Input {...props} data-number={true} valueToNumber={true} ref={ref}/>;
 });
 
 registerWidget({key: 'Number', JSX: NumberInput, container: false, array: false});

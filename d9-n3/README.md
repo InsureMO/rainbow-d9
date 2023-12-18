@@ -805,6 +805,19 @@ Some examples:
 	- positive
 ```
 
+### Decoration
+
+`Input` and `Number` can have decorations, including leadings and tailings. Both leadings and tailings support standard strings or built-in
+icons. If you want to use built-in icons, you need to use `$icons.` followed by the icon name, for example, `$icons.date`.
+
+```markdown
+- Input::Name::name
+	- leads: $icons.date
+	- tails: $icons.time
+```
+
+> Multiple decorators could be split by `;`.
+
 ## Textarea
 
 - Default Wrapped by Form Cell: `true`,

@@ -4,13 +4,7 @@ import styled from 'styled-components';
 import {CssVars, DOM_ID_WIDGET, DOM_KEY_WIDGET, ICON_PREFIX} from './constants';
 import {Registrar} from './icons';
 import {Input, InputDef, NumberInput} from './input';
-import {OmitNodeDef} from './types';
-
-export type DecorateElement = string | ReactNode;
-export type DecorateWrapperDef = {
-	leads?: Array<DecorateElement>;
-	tails?: Array<DecorateElement>;
-};
+import {DecorateElement, DecorateWrapperDef, OmitNodeDef} from './types';
 
 export type DecorateInputDef = InputDef & DecorateWrapperDef;
 export type DecorateInputProps = OmitNodeDef<DecorateInputDef> & DecorateWrapperDef & WidgetProps;
@@ -26,6 +20,7 @@ const DecorateInputContainer = styled.div.attrs(
     position: relative;
     align-items: center;
     width: 100%;
+    height: ${CssVars.INPUT_HEIGHT};
 
     > input[data-w=d9-input] {
         flex-grow: 1;
@@ -64,6 +59,10 @@ const Decorator = styled.span`
     &[data-w=d9-deco-lead]:not(:first-child),
     &[data-w=d9-deco-tail] {
         margin-left: calc(${CssVars.BORDER_WIDTH} * -1);
+    }
+
+    > svg {
+        height: calc((${CssVars.FONT_SIZE}) * 1.2);
     }
 `;
 const LeadDecorator = styled(Decorator).attrs({

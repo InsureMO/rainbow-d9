@@ -19,8 +19,8 @@ import {
 	DatePickerShortcutButton
 } from './widgets';
 
-export const DatePicker = (props: { value: Dayjs }) => {
-	const {value} = props;
+export const DatePicker = (props: { value: Dayjs, dateFormat: string }) => {
+	const {value, dateFormat} = props;
 
 	const {on, off, fire} = useCalendarEventBus();
 	const [visible, setVisible] = useState(true);
@@ -68,7 +68,14 @@ export const DatePicker = (props: { value: Dayjs }) => {
 	const currentYear = value.year();
 	const currentMonth = value.month();
 	const currentDate = value.date();
-	const currentDisplayMonth = value.format('MMM YYYY');
+	const currentDisplayMonth = (() => {
+		let format = 'MMM YYYY';
+		// Buddhist era
+		if (dateFormat.includes('B')) {
+			format = 'MMM BBBB';
+		}
+		return value.format(format);
+	})();
 	const firstDayOfDisplayMonth = value.clone().date(1);
 	const days = computeCalendarDays(firstDayOfDisplayMonth);
 
@@ -96,10 +103,10 @@ export const DatePicker = (props: { value: Dayjs }) => {
 				<DatePickerHeaderTodayButton
 					onClick={onTodayClicked}>{I18NVars.CALENDAR.TODAY}</DatePickerHeaderTodayButton>
 				<DatePickerHeaderMonthChangeButton onClick={onGotoPrevMonthClicked}>
-					<LeftCaret />
+					<LeftCaret/>
 				</DatePickerHeaderMonthChangeButton>
 				<DatePickerHeaderMonthChangeButton onClick={onGotoNextMonthClicked}>
-					<RightCaret />
+					<RightCaret/>
 				</DatePickerHeaderMonthChangeButton>
 			</DatePickerHeaderOperators>
 		</DatePickerHeader>

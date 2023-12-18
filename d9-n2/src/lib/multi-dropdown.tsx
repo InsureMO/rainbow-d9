@@ -92,6 +92,7 @@ const MultiDropdownLabel = styled(DropdownLabel)`
     flex-grow: unset;
     border: ${CssVars.BORDER};
     border-radius: ${CssVars.BORDER_RADIUS};
+    height: unset;
     min-height: calc(${CssVars.INPUT_HEIGHT} - 6px);
     padding: 0 calc(${CssVars.INPUT_INDENT} / 2);
     margin: 2px 4px 2px 0;
@@ -118,7 +119,6 @@ const MultiDropdownLabel = styled(DropdownLabel)`
             height: calc(${CssVars.INPUT_HEIGHT} * 2 / 5);
             fill: ${CssVars.DANGER_COLOR};
         }
-
     }
 
     &:hover {
@@ -207,11 +207,11 @@ const MultiOption = styled.span.attrs({'data-w': 'd9-multi-dropdown-option'})`
     }
 
     > svg:last-child {
-        color: ${CssVars.PRIMARY_COLOR};
-        height: calc(${CssVars.INPUT_HEIGHT} * 3 / 4);
-        width: calc(${CssVars.INPUT_HEIGHT} * 3 / 4);
+        fill: ${CssVars.PRIMARY_COLOR};
+        height: calc(${CssVars.INPUT_HEIGHT} / 3);
+        width: calc(${CssVars.INPUT_HEIGHT} / 3);
         margin-left: 8px;
-        margin-right: calc(${CssVars.INPUT_INDENT} * -1 + 4px);
+        margin-right: calc(${CssVars.INPUT_INDENT} * -1 + 12px);
         opacity: 0.7;
     }
 
@@ -469,7 +469,6 @@ export const MultiDropdown = (props: MultiDropdownProps) => {
 	                               id={PPUtils.asId(PPUtils.absolute($p2r, $pp), props.id)}>
 		{values.map(value => {
 			const v = `${value}`;
-
 			return <MultiDropdownLabel data-please={false} key={v}>
 				<span>{optionsAsMap[v]?.label}</span>
 				{$disabled ? null : <span onClick={onRemoveClicked(value)}><Times/></span>}

@@ -3,6 +3,8 @@ export enum N2WidgetType {
 
 	INPUT = 'Input',
 	NUMBER = 'Number',
+	DECORATE_INPUT = 'DecoInput',
+	DECORATE_NUMBER = 'DecoNumber',
 	TEXTAREA = 'Textarea',
 	CHECKBOX = 'Checkbox',
 	BUTTON = 'Button',

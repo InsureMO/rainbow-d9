@@ -1,10 +1,8 @@
 import React, {SVGProps} from 'react';
 
 export const ArrowDown = (props: Omit<SVGProps<SVGSVGElement>, 'xmlns' | 'viewBox'>) => {
-	return <svg {...props} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-		<path
-			d="M19.9201 8.9502L13.4001 15.4702C12.6301 16.2402 11.3701 16.2402 10.6001 15.4702L4.08008 8.9502"
-			stroke="currentColor" strokeWidth="1.5" strokeMiterlimit="10" strokeLinecap="round"
-			strokeLinejoin="round"/>
+	return <svg {...props} data-icon="arrow-down" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+		<path opacity="1"
+		      d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z"/>
 	</svg>;
 };

@@ -2,6 +2,8 @@ export * from './types';
 
 export * from './input';
 export * from './number';
+export * from './decorate-input';
+export * from './decorate-number';
 export * from './textarea';
 export * from './checkbox';
 export * from './dropdown';
