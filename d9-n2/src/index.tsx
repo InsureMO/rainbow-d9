@@ -11,6 +11,7 @@ export * from './lib/multi-dropdown';
 export * from './lib/calendar';
 export * from './lib/form-cell';
 export * from './lib/input';
+export * from './lib/decorate-input';
 export * from './lib/checkbox';
 export * from './lib/page';
 export * from './lib/ribs';

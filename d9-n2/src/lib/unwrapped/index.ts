@@ -15,6 +15,12 @@ import {
 	UnwrappedLabelProps as LabelProps
 } from './caption';
 import {UnwrappedCheckbox as Checkbox, UnwrappedCheckboxProps as CheckboxProps} from './checkbox';
+import {
+	UnwrappedDecorateInput as DecorateInput,
+	UnwrappedDecorateInputProps as DecorateInputProps,
+	UnwrappedDecorateNumberInput as DecorateNumberInput,
+	UnwrappedDecorateNumberInputProps as DecorateNumberInputProps
+} from './decorate-input';
 import {UnwrappedDropdown as Dropdown, UnwrappedDropdownProps as DropdownProps} from './dropdown';
 import {
 	UnwrappedInput as Input,
@@ -33,6 +39,7 @@ export {
 	Caption, CaptionProps, Label, LabelProps,
 
 	Input, InputProps, NumberInput, NumberInputProps,
+	DecorateInput, DecorateInputProps, DecorateNumberInput, DecorateNumberInputProps,
 	Checkbox, CheckboxProps,
 	Textarea, TextareaProps,
 	Dropdown, DropdownProps, MultiDropdown, MultiDropdownProps,

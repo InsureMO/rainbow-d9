@@ -74,18 +74,15 @@ const ASectionExpander = styled.div.attrs<{ expanded: boolean }>(
     }
 `;
 // eslint-disable-next-line  @typescript-eslint/no-explicit-any
-const ASectionExpanderSvg = styled(ArrowDown as any).attrs<{ expanded: boolean }>(({expanded}) => {
-	return {
-		[DOM_KEY_WIDGET]: 'd9-section-header-expander-svg',
-		style: {
-			transform: expanded ? 'rotateX(180deg)' : (void 0)
-		}
-	};
-})<{ expanded: boolean }>`
+const ASectionExpanderSvg = styled(ArrowDown as any).attrs({[DOM_KEY_WIDGET]: 'd9-section-header-expander-svg'})`
     height: 70%;
     color: ${CssVars.FONT_COLOR};
     opacity: 0.7;
     transition: color ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION}, transform ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION};
+
+    &[data-expanded=true] {
+        transform: rotateX(180deg);
+    }
 `;
 const ASectionBody = styled.div.attrs<{ expanded: boolean }>(({expanded}) => {
 	return {
@@ -120,7 +117,7 @@ export const Section = forwardRef((props: SectionProps, ref: ForwardedRef<HTMLDi
 				<ASectionTitle>{title}</ASectionTitle>
 				{collapsible
 					? <ASectionExpander expanded={expanded} onClick={onExpandClicked}>
-						<ASectionExpanderSvg expanded={expanded}/>
+						<ASectionExpanderSvg data-expanded={expanded}/>
 					</ASectionExpander>
 					: null}
 			</ASectionHeader>

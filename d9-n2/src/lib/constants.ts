@@ -2,6 +2,7 @@ import color from 'color';
 
 export const DOM_KEY_WIDGET = 'data-w';
 export const DOM_ID_WIDGET = 'data-wid';
+export const ICON_PREFIX = '$icons.';
 
 const CssConstants = {
 	FONT_FAMILY: 'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Tahoma", "Verdana", "Arial"',
