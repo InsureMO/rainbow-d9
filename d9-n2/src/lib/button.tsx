@@ -51,35 +51,38 @@ const AButton = styled.button.attrs(({id}) => {
 		[DOM_ID_WIDGET]: id
 	};
 })`
-	display          : flex;
-	position         : relative;
-	align-items      : center;
-	justify-content  : center;
-	font-family      : ${CssVars.FONT_FAMILY};
-	font-size        : ${CssVars.FONT_SIZE};
-	font-variant : ${CssVars.FONT_VARIANT};
-	height           : ${CssVars.INPUT_HEIGHT};
-	padding          : 0 ${CssVars.BUTTON_INDENT};
-	color            : ${CssVars.INVERT_COLOR};
-	border           : var(--border);
-	border-radius    : ${CssVars.BORDER_RADIUS};
-	outline          : none;
-	cursor           : pointer;
-	white-space      : nowrap;
-	transition       : all ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION};
-	// fill
-	// default
-	border-color     : ${CssVars.PRIMARY_COLOR};
-	background-color : ${CssVars.PRIMARY_COLOR};
-	&:hover {
-		box-shadow : ${CssVars.PRIMARY_HOVER_SHADOW};
-	}
-	&:focus, &:active {
-		box-shadow : ${CssVars.PRIMARY_SHADOW};
-	}
-	${Object.values(ButtonInk).map(ink => {
-		const INK = ink.toUpperCase();
-		return `	&[data-ink=${ink}] {
+    display: flex;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+    font-family: ${CssVars.FONT_FAMILY};
+    font-size: ${CssVars.FONT_SIZE};
+    font-variant: ${CssVars.FONT_VARIANT};
+    height: ${CssVars.INPUT_HEIGHT};
+    padding: 0 ${CssVars.BUTTON_INDENT};
+    color: ${CssVars.INVERT_COLOR};
+    border: ${CssVars.BORDER};
+    border-radius: ${CssVars.BORDER_RADIUS};
+    outline: none;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION};
+    // fill
+    // default
+    border-color: ${CssVars.PRIMARY_COLOR};
+    background-color: ${CssVars.PRIMARY_COLOR};
+
+    &:hover {
+        box-shadow: ${CssVars.PRIMARY_HOVER_SHADOW};
+    }
+
+    &:focus, &:active {
+        box-shadow: ${CssVars.PRIMARY_SHADOW};
+    }
+
+    ${Object.values(ButtonInk).map(ink => {
+        const INK = ink.toUpperCase();
+        return `	&[data-ink=${ink}] {
 		border-color : ${CssVars[`${INK}_COLOR`]};
 		background-color : ${CssVars[`${INK}_COLOR`]};
 		&:hover {
@@ -89,72 +92,85 @@ const AButton = styled.button.attrs(({id}) => {
 			box-shadow : ${CssVars[`${INK}_SHADOW`]};
 		}
 	}`;
-	})}
-	&[data-ink=waive] {
-		color        : ${CssVars.FONT_COLOR};
-		border-color : ${CssVars.BORDER_COLOR};
-	}
-	&[data-fill=link] {
-		color            : ${CssVars.FONT_COLOR};
-		background-color : transparent;
-		border-color     : transparent;
-		text-decoration  : underline;
-		box-shadow       : none;
-		&:hover {
-			color      : ${CssVars.PRIMARY_COLOR};
-			box-shadow : none;
-		}
-		&:focus, &:active {
-			box-shadow : none;
-		}
-		${Object.values(ButtonInk).map(ink => {
-			return `		&[data-ink=${ink}] {
+    })}
+    &[data-ink=waive] {
+        color: ${CssVars.FONT_COLOR};
+        border-color: ${CssVars.BORDER_COLOR};
+    }
+
+    &[data-fill=link] {
+        color: ${CssVars.FONT_COLOR};
+        background-color: transparent;
+        border-color: transparent;
+        text-decoration: underline;
+        box-shadow: none;
+
+        &:hover {
+            color: ${CssVars.PRIMARY_COLOR};
+            box-shadow: none;
+        }
+
+        &:focus, &:active {
+            box-shadow: none;
+        }
+
+        ${Object.values(ButtonInk).map(ink => {
+            return `		&[data-ink=${ink}] {
 			color : ${CssVars[`${ink.toUpperCase()}_COLOR`]};
 		}`;
-		})}
-		&[data-ink=waive] {
-			color : ${CssVars.FONT_COLOR};
-			&:hover {
-				color : ${CssVars.FONT_COLOR};
-			}
-		}
-	}
-	&[data-fill=plain] {
-		background-color : transparent;
-		border-color     : ${CssVars.PRIMARY_COLOR};
-		${Object.values(ButtonInk).map(ink => {
-			const INK = ink.toUpperCase();
-			return `		&[data-ink=${ink}] {
+        })}
+        &[data-ink=waive] {
+            color: ${CssVars.FONT_COLOR};
+
+            &:hover {
+                color: ${CssVars.FONT_COLOR};
+            }
+        }
+    }
+
+    &[data-fill=plain] {
+        background-color: transparent;
+        border-color: ${CssVars.PRIMARY_COLOR};
+
+        ${Object.values(ButtonInk).map(ink => {
+            const INK = ink.toUpperCase();
+            return `		&[data-ink=${ink}] {
 			color : ${CssVars[`${INK}_COLOR`]};
 			border-color : ${CssVars[`${INK}_COLOR`]};
 		}`;
-		})}
-		&[data-ink=waive] {
-			color        : ${CssVars.FONT_COLOR};
-			border-color : ${CssVars.BORDER_COLOR};
-		}
-	}
-	&[disabled], &[data-disabled=true] {
-		cursor           : default;
-		border-color     : ${CssVars.DISABLE_COLOR};
-		background-color : ${CssVars.DISABLE_COLOR};
-		&:hover, &:focus, &:active {
-			box-shadow : none;
-		}
-	}
-	&[data-visible=false] {
-		display : none;
-	}
-	> svg:first-child:not(:last-child) {
-		margin-right : ${CssVars.BUTTON_ICON_GAP};
-	}
-	> span[data-role=text] {
-		overflow      : hidden;
-		text-overflow : ellipsis;
-	}
-	> svg:last-child:not(:first-child) {
-		margin-left : ${CssVars.BUTTON_ICON_GAP};
-	}
+        })}
+        &[data-ink=waive] {
+            color: ${CssVars.FONT_COLOR};
+            border-color: ${CssVars.BORDER_COLOR};
+        }
+    }
+
+    &[disabled], &[data-disabled=true] {
+        cursor: default;
+        border-color: ${CssVars.DISABLE_COLOR};
+        background-color: ${CssVars.DISABLE_COLOR};
+
+        &:hover, &:focus, &:active {
+            box-shadow: none;
+        }
+    }
+
+    &[data-visible=false] {
+        display: none;
+    }
+
+    > svg:first-child:not(:last-child) {
+        margin-right: ${CssVars.BUTTON_ICON_GAP};
+    }
+
+    > span[data-role=text] {
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    > svg:last-child:not(:first-child) {
+        margin-left: ${CssVars.BUTTON_ICON_GAP};
+    }
 `;
 
 export const Button = forwardRef((props: ButtonProps, ref: ForwardedRef<HTMLButtonElement>) => {

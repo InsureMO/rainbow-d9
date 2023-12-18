@@ -2,43 +2,12 @@ import styled from 'styled-components';
 import {CssVars} from '../../constants';
 
 export const PopupHeaderContainer = styled.div`
-	display       : flex;
-	align-items   : center;
-	border-bottom : ${CssVars.BORDER};
-	height        : ${CssVars.CALENDAR_POPUP_HEADER_HEIGHT};
-	padding       : 0 ${CssVars.CALENDAR_GUTTER_SIZE};
-	cursor        : default;
-	> svg:first-child {
-		margin-right : ${CssVars.BUTTON_ICON_GAP}
-	}
-	> span:nth-child(5),
-	> span:nth-child(6) {
-		display          : flex;
-		position         : relative;
-		align-items      : center;
-		justify-content  : center;
-		padding          : 0 calc(var(--margin) / 3);
-		height           : calc(${CssVars.CALENDAR_POPUP_HEADER_HEIGHT} + 1px);
-		min-width        : 50px;
-		margin-top       : -1px;
-		background-color : ${CssVars.PRIMARY_COLOR};
-		color            : ${CssVars.INVERT_COLOR};
-		cursor           : pointer;
-	}
-	> span:nth-child(6) {
-		margin-right            : -1px;
-		border-top-right-radius : ${CssVars.BORDER_RADIUS};
-		&:before {
-			content          : '';
-			display          : block;
-			position         : absolute;
-			top              : 25%;
-			left             : 0;
-			width            : 1px;
-			height           : 50%;
-			background-color : ${CssVars.INVERT_COLOR};
-		}
-	}
+    display: flex;
+    align-items: center;
+    border-bottom: ${CssVars.BORDER};
+    height: ${CssVars.CALENDAR_POPUP_HEADER_HEIGHT};
+    padding: 0 ${CssVars.CALENDAR_GUTTER_SIZE};
+    cursor: default;
 `;
 export const PopupHeaderDateLabel = styled.span`
 	font-size    : 0.8em;
