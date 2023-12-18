@@ -8,7 +8,7 @@ import {
 	VUtils
 } from '@rainbow-d9/n1';
 import {WidgetType} from '../../../semantic';
-import {Undefinable} from '../../../utility-types';
+import {Nullable, Undefinable} from '../../../utility-types';
 import {AttributeMap} from '../types';
 import {AbstractMonitorBuild} from './monitor-build';
 import {MonitorHandler, MonitorHandlerDetective, MonitorHandlerDetectOptions} from './types';
@@ -60,6 +60,44 @@ const detectInteger: MonitorHandlerDetective = detectSimpleCheck({
 	attrName: 'integer', defaultInvalidMessage: 'Field value should be an integer.',
 	validate: (value) => `${value ?? ''}`.length === 0 || VUtils.isInteger(value).test
 });
+
+const detectRegex: MonitorHandlerDetective = (options: MonitorHandlerDetectOptions): MonitorHandler => {
+	const {attributes} = options;
+	const regex = attributes.regex || attributes.regexp;
+	if (VUtils.isBlank(regex)) {
+		return (void 0);
+	}
+
+	delete attributes.regex;
+	delete attributes.regexp;
+
+	const match = `${regex}`.match(/^([^;]+);?(.*)$/);
+	if (match != null) {
+		const patterns = match[1].split(',')
+			.map(pattern => pattern.trim())
+			.filter(pattern => pattern.length !== 0)
+			.map(pattern => {
+				const regex = ValidatorUtils.findRegex(pattern);
+				if (regex != null) {
+					return regex;
+				}
+				if (pattern.endsWith('/i')) {
+					return new RegExp(pattern.substring(0, pattern.length - 2), 'i');
+				} else {
+					return new RegExp(pattern);
+				}
+			});
+		const message = VUtils.isBlank(match[2]) ? `Field pattern should match regexp[${match[1]}].` : match[2].trim();
+		return (options: { value?: PropValue }): NodeAttributeValue => {
+			const {value} = options;
+			if (VUtils.isEmpty(value) || patterns.some(pattern => pattern.test(`${value}`))) {
+				return {valid: true} as ValidationResult;
+			} else {
+				return {valid: false, failReason: message} as ValidationResult;
+			}
+		};
+	}
+};
 
 const detectLength: MonitorHandlerDetective = (options: MonitorHandlerDetectOptions): MonitorHandler => {
 	const {attributes} = options;
@@ -171,12 +209,24 @@ export class ValidatorUtils {
 	public static readonly DETECT_POSITIVE = detectPositive;
 	public static readonly DETECT_NOT_POSITIVE = detectNotNegative;
 	public static readonly DETECT_INTEGER = detectInteger;
+	public static readonly DETECT_REGEX = detectRegex;
 	public static readonly DETECT_LENGTH = detectLength;
 	public static readonly DETECT_NUMBER_RANGE = detectNumberRange;
+	private static readonly _PREDEFINED_REGEXPS: Record<string, RegExp> = {};
 
 	// noinspection JSUnusedLocalSymbols
 	private constructor() {
 		// do nothing, avoid extend
+	}
+
+	public static registerRegexps(regexps: Record<string, RegExp>): void {
+		Object.keys(regexps ?? {}).forEach(key => {
+			ValidatorUtils._PREDEFINED_REGEXPS[key] = regexps[key];
+		});
+	}
+
+	public static findRegex(key: string): Nullable<RegExp> {
+		return ValidatorUtils._PREDEFINED_REGEXPS[key];
 	}
 
 	public static register($wt: WidgetType, detectives: Array<MonitorHandlerDetective>): Undefinable<Array<MonitorHandlerDetective>> {

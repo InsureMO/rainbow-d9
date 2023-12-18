@@ -129,7 +129,7 @@ export const CssVars = {
 	FORM_CELL_INVALID_MESSAGE_PADDING: 'var(--d9-form-cell-invalid-message-padding, 4px)',
 	FORM_CELL_INVALID_MESSAGE_FONT_SIZE: 'var(--d9-form-cell-invalid-message-font-size, 0.8em)',
 	FORM_CELL_INVALID_MESSAGE_FONT_WEIGHT: 'var(--d9-form-cell-invalid-message-font-weight, 600)',
-	FORM_CELL_INVALID_MESSAGE_COLOR: 'var(--d9-form-cell-invalid-message-color, ${CssConstants.DANGER_COLOR})',
+	FORM_CELL_INVALID_MESSAGE_COLOR: `var(--d9-form-cell-invalid-message-color, ${CssConstants.DANGER_COLOR})`,
 
 	TRANSITION_DURATION: 'var(--d9-transition-duration, 300ms)',
 	TRANSITION_TIMING_FUNCTION: 'var(--d9-transition-timing-function, ease-in-out)',

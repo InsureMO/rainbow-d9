@@ -791,7 +791,7 @@ const Page = () => {
 
 - Default Wrapped by Form Cell: `true`,
 - Default Grid Column Span: `3`,
-- Declared Built-in Validation: `required`, `numeric`, `integer`, `positive`, `notNegative`, `length`.
+- Declared Built-in Validation: `required`, `numeric`, `integer`, `positive`, `notNegative`, `length`, `regex`.
 
 Some examples:
 
@@ -804,6 +804,10 @@ Some examples:
 	- integer
 	- positive
 ```
+
+> The given regular expression will first match against the predefined expressions, and if no match is found, it will directly parse the
+> string as a regular expression. If the given string ends with `/i`, it is case-insensitive.  
+> Predefine regular expressions through `ValidatorUtils.registerRegexps`.
 
 ### Decoration
 
