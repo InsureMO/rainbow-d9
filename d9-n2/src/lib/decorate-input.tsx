@@ -1,4 +1,4 @@
-import {registerWidget, VUtils, WidgetProps} from '@rainbow-d9/n1';
+import {PPUtils, registerWidget, VUtils, WidgetProps} from '@rainbow-d9/n1';
 import React, {ReactNode} from 'react';
 import styled from 'styled-components';
 import {CssVars, DOM_ID_WIDGET, DOM_KEY_WIDGET, ICON_PREFIX} from './constants';
@@ -123,8 +123,9 @@ const Decorate = (props: DecorateProps) => {
 
 export const DecorateInput = (props: DecorateInputProps) => {
 	const {leads, tails, ...rest} = props;
+	const {$wrapped: {$p2r}} = rest;
 
-	return <Decorate leads={leads} tails={tails} id={props.id}>
+	return <Decorate leads={leads} tails={tails} id={PPUtils.asId(PPUtils.absolute($p2r, props.$pp), props.id)}>
 		<Input {...rest}/>
 	</Decorate>;
 };
