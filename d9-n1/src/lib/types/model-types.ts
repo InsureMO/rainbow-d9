@@ -6,7 +6,7 @@ export interface ObjectPropValue {
 }
 
 // TODO NO NESTED ARRAY ALLOWED
-export type ArrayPropValue = Array<ObjectPropValue>;
+export type ArrayPropValue = Array<PropValue>;
 
 export type PropValue = NullPropValue | PrimitivePropValue | ObjectPropValue | ArrayPropValue;
 export type BaseModel = ObjectPropValue;
