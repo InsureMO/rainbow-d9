@@ -1,7 +1,17 @@
-import {BaseModel, NodeDef, PPUtils, PropValue, registerWidget, ValidationFunctions, WidgetProps} from '@rainbow-d9/n1';
+import {
+	BaseModel,
+	NodeDef,
+	PPUtils,
+	PropValue,
+	registerWidget,
+	ValidationFunctions,
+	VUtils,
+	WidgetProps
+} from '@rainbow-d9/n1';
 import React, {ForwardedRef, forwardRef, MouseEvent, ReactNode} from 'react';
 import styled from 'styled-components';
 import {CssVars, DOM_ID_WIDGET, DOM_KEY_WIDGET} from './constants';
+import {DecorateWrapperDef, transformDecorators} from './decorate-assist';
 import {GlobalHandlers, useGlobalHandlers} from './global';
 import {OmitHTMLProps2, OmitNodeDef} from './types';
 
@@ -33,9 +43,11 @@ export type ButtonClick = <R extends BaseModel, M extends PropValue>(
 	options: ButtonClickOptions<R, M>, event: MouseEvent<HTMLButtonElement>) => void | Promise<void>;
 
 /** Button configuration definition */
-export type ButtonDef = NodeDef & OmitHTMLProps2<HTMLButtonElement, 'type' | 'onClick'> & {
+export type ButtonDef = NodeDef & DecorateWrapperDef & OmitHTMLProps2<HTMLButtonElement, 'type' | 'onClick'> & {
+	/** @deprecated use leads instead */
 	head?: ReactNode;
 	text?: ReactNode;
+	/** @deprecated use tails instead */
 	tail?: ReactNode;
 	ink?: ButtonInk;
 	fill?: ButtonFill;
@@ -180,6 +192,12 @@ const AButton = styled.button.attrs(({id}) => {
             &:hover {
                 color: ${CssVars.PRIMARY_COLOR};
             }
+
+            > span[data-w=d9-deco-lead],
+            > span[data-w=d9-deco-tail] {
+                color: ${CssVars.PRIMARY_COLOR};
+                fill: ${CssVars.PRIMARY_COLOR};
+            }
         }
 
         &[data-ink=danger] {
@@ -187,6 +205,12 @@ const AButton = styled.button.attrs(({id}) => {
 
             &:hover {
                 color: ${CssVars.DANGER_COLOR};
+            }
+
+            > span[data-w=d9-deco-lead],
+            > span[data-w=d9-deco-tail] {
+                color: ${CssVars.DANGER_COLOR};
+                fill: ${CssVars.DANGER_COLOR};
             }
         }
 
@@ -196,6 +220,12 @@ const AButton = styled.button.attrs(({id}) => {
             &:hover {
                 color: ${CssVars.SUCCESS_COLOR};
             }
+
+            > span[data-w=d9-deco-lead],
+            > span[data-w=d9-deco-tail] {
+                color: ${CssVars.SUCCESS_COLOR};
+                fill: ${CssVars.SUCCESS_COLOR};
+            }
         }
 
         &[data-ink=warn] {
@@ -203,6 +233,12 @@ const AButton = styled.button.attrs(({id}) => {
 
             &:hover {
                 color: ${CssVars.WARN_COLOR};
+            }
+
+            > span[data-w=d9-deco-lead],
+            > span[data-w=d9-deco-tail] {
+                color: ${CssVars.WARN_COLOR};
+                fill: ${CssVars.WARN_COLOR};
             }
         }
 
@@ -212,6 +248,12 @@ const AButton = styled.button.attrs(({id}) => {
             &:hover {
                 color: ${CssVars.INFO_COLOR};
             }
+
+            > span[data-w=d9-deco-lead],
+            > span[data-w=d9-deco-tail] {
+                color: ${CssVars.INFO_COLOR};
+                fill: ${CssVars.INFO_COLOR};
+            }
         }
 
         &[data-ink=waive] {
@@ -220,6 +262,18 @@ const AButton = styled.button.attrs(({id}) => {
             &:hover {
                 color: ${CssVars.WAIVE_COLOR};
             }
+
+            > span[data-w=d9-deco-lead],
+            > span[data-w=d9-deco-tail] {
+                color: ${CssVars.WAIVE_COLOR};
+                fill: ${CssVars.WAIVE_COLOR};
+            }
+        }
+
+        > span[data-w=d9-deco-lead],
+        > span[data-w=d9-deco-tail] {
+            color: ${CssVars.FONT_COLOR};
+            fill: ${CssVars.FONT_COLOR};
         }
     }
 
@@ -230,31 +284,67 @@ const AButton = styled.button.attrs(({id}) => {
         &[data-ink=primary] {
             color: ${CssVars.PRIMARY_COLOR};
             border-color: ${CssVars.PRIMARY_COLOR};
+
+            > span[data-w=d9-deco-lead],
+            > span[data-w=d9-deco-tail] {
+                color: ${CssVars.PRIMARY_COLOR};
+                fill: ${CssVars.PRIMARY_COLOR};
+            }
         }
 
         &[data-ink=danger] {
             color: ${CssVars.DANGER_COLOR};
             border-color: ${CssVars.DANGER_COLOR};
+
+            > span[data-w=d9-deco-lead],
+            > span[data-w=d9-deco-tail] {
+                color: ${CssVars.DANGER_COLOR};
+                fill: ${CssVars.DANGER_COLOR};
+            }
         }
 
         &[data-ink=success] {
             color: ${CssVars.SUCCESS_COLOR};
             border-color: ${CssVars.SUCCESS_COLOR};
+
+            > span[data-w=d9-deco-lead],
+            > span[data-w=d9-deco-tail] {
+                color: ${CssVars.SUCCESS_COLOR};
+                fill: ${CssVars.SUCCESS_COLOR};
+            }
         }
 
         &[data-ink=warn] {
             color: ${CssVars.WARN_COLOR};
             border-color: ${CssVars.WARN_COLOR};
+
+            > span[data-w=d9-deco-lead],
+            > span[data-w=d9-deco-tail] {
+                color: ${CssVars.WARN_COLOR};
+                fill: ${CssVars.WARN_COLOR};
+            }
         }
 
         &[data-ink=info] {
             color: ${CssVars.INFO_COLOR};
             border-color: ${CssVars.INFO_COLOR};
+
+            > span[data-w=d9-deco-lead],
+            > span[data-w=d9-deco-tail] {
+                color: ${CssVars.INFO_COLOR};
+                fill: ${CssVars.INFO_COLOR};
+            }
         }
 
         &[data-ink=waive] {
             color: ${CssVars.WAIVE_COLOR};
             border-color: ${CssVars.WAIVE_COLOR};
+
+            > span[data-w=d9-deco-lead],
+            > span[data-w=d9-deco-tail] {
+                color: ${CssVars.WAIVE_COLOR};
+                fill: ${CssVars.WAIVE_COLOR};
+            }
         }
     }
 
@@ -272,6 +362,12 @@ const AButton = styled.button.attrs(({id}) => {
         display: none;
     }
 
+    > span[data-w=d9-deco-lead],
+    > span[data-w=d9-deco-tail] {
+        color: ${CssVars.INVERT_COLOR};
+        fill: ${CssVars.INVERT_COLOR};
+    }
+
     > svg:first-child:not(:last-child) {
         margin-right: ${CssVars.BUTTON_ICON_GAP};
     }
@@ -286,9 +382,38 @@ const AButton = styled.button.attrs(({id}) => {
     }
 `;
 
+const Decorator = styled.span`
+    display: flex;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+    font-family: ${CssVars.FONT_FAMILY};
+    font-size: ${CssVars.FONT_SIZE};
+    height: ${CssVars.INPUT_HEIGHT};
+    min-width: ${CssVars.INPUT_HEIGHT};
+    padding: 0 ${CssVars.INPUT_INDENT};
+    background-color: transparent;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    > svg {
+        height: calc((${CssVars.FONT_SIZE}) * 1.2);
+    }
+`;
+const LeadDecorator = styled(Decorator).attrs({
+	[DOM_KEY_WIDGET]: 'd9-deco-lead'
+})`
+`;
+const TailDecorator = styled(Decorator).attrs({
+	[DOM_KEY_WIDGET]: 'd9-deco-tail'
+})`
+`;
+
 export const Button = forwardRef((props: ButtonProps, ref: ForwardedRef<HTMLButtonElement>) => {
 	const {
 		head, text, tail, ink = ButtonInk.PRIMARY, fill = ButtonFill.FILL, click,
+		leads, tails,
 		$wrapped: {$root, $model, $p2r, $avs: {$disabled, $visible}, $vfs}, ...rest
 	} = props;
 
@@ -309,9 +434,19 @@ export const Button = forwardRef((props: ButtonProps, ref: ForwardedRef<HTMLButt
 	                onClick={onClicked}
 	                id={PPUtils.asId(PPUtils.absolute($p2r, props.$pp), props.id)}
 	                ref={ref}>
+		{transformDecorators(leads).map(lead => {
+			return <LeadDecorator key={VUtils.generateUniqueId()}>
+				{lead}
+			</LeadDecorator>;
+		})}
 		{head}
 		<span data-role="text">{text}</span>
 		{tail}
+		{transformDecorators(tails).map(lead => {
+			return <TailDecorator key={VUtils.generateUniqueId()}>
+				{lead}
+			</TailDecorator>;
+		})}
 	</AButton>;
 });
 

@@ -1,10 +1,10 @@
 import {PPUtils, registerWidget, VUtils, WidgetProps} from '@rainbow-d9/n1';
 import React, {ReactNode} from 'react';
 import styled from 'styled-components';
-import {CssVars, DOM_ID_WIDGET, DOM_KEY_WIDGET, ICON_PREFIX} from './constants';
-import {Registrar} from './icons';
+import {CssVars, DOM_ID_WIDGET, DOM_KEY_WIDGET} from './constants';
+import {DecorateWrapperDef, transformDecorators} from './decorate-assist';
 import {Input, InputDef, NumberInput} from './input';
-import {DecorateElement, DecorateWrapperDef, OmitNodeDef} from './types';
+import {OmitNodeDef} from './types';
 
 export type DecorateInputDef = InputDef & DecorateWrapperDef;
 export type DecorateInputProps = OmitNodeDef<DecorateInputDef> & DecorateWrapperDef & WidgetProps;
@@ -92,28 +92,14 @@ interface DecorateProps {
 const Decorate = (props: DecorateProps) => {
 	const {id, leads, tails, children} = props;
 
-	const transformDecorator = (decorator: DecorateElement): ReactNode => {
-		if (typeof decorator === 'string') {
-			if (decorator.startsWith(ICON_PREFIX)) {
-				const Found = Registrar.find(decorator.substring(ICON_PREFIX.length), decorator);
-				if (typeof Found === 'function') {
-					return <Found/>;
-				}
-			}
-		}
-		return decorator;
-	};
-	const transformedLeads = (leads ?? []).filter(lead => lead != null).map(transformDecorator);
-	const transformedTails = (tails ?? []).filter(tail => tail != null).map(transformDecorator);
-
 	return <DecorateInputContainer id={VUtils.isBlank(id) ? (void 0) : `di-${id}`}>
-		{transformedLeads.map(lead => {
+		{transformDecorators(leads).map(lead => {
 			return <LeadDecorator key={VUtils.generateUniqueId()}>
 				{lead}
 			</LeadDecorator>;
 		})}
 		{children}
-		{transformedTails.map(tail => {
+		{transformDecorators(tails).map(tail => {
 			return <TailDecorator key={VUtils.generateUniqueId()}>
 				{tail}
 			</TailDecorator>;

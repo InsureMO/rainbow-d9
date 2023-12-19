@@ -204,17 +204,21 @@ export const ATableHeaderCell = styled.div.attrs<CellOptions>(
 			style: {width: cssWith}
 		};
 	})<CellOptions>`
-	display     : flex;
-	position    : relative;
-	grid-row    : 1;
-	align-items : center;
-	min-height  : ${CssVars.TABLE_HEADER_HEIGHT};
-	padding     : 0 ${CssVars.TABLE_CELL_PADDING};
-	font-family : ${CssVars.TABLE_HEADER_FONT_FAMILY};
-	font-size   : ${CssVars.TABLE_HEADER_FONT_SIZE};
-	font-weight : ${CssVars.TABLE_HEADER_FONT_WEIGHT};
-	overflow    : hidden;
-	white-space : nowrap;
+    display: flex;
+    position: relative;
+    grid-row: 1;
+    align-items: center;
+    min-height: ${CssVars.TABLE_HEADER_HEIGHT};
+    padding: 0 ${CssVars.TABLE_CELL_PADDING};
+    font-family: ${CssVars.TABLE_HEADER_FONT_FAMILY};
+    font-size: ${CssVars.TABLE_HEADER_FONT_SIZE};
+    font-weight: ${CssVars.TABLE_HEADER_FONT_WEIGHT};
+    overflow: hidden;
+    white-space: nowrap;
+
+    &:first-child {
+        padding-left: calc(${CssVars.TABLE_CELL_PADDING} + 4px);
+    }
 `;
 export const ATableNoDataRow = styled.div.attrs<RowOptions>(
 	({$options: {headers, rowIndexColumnWidth, rowOperatorsColumnWidth}}) => {

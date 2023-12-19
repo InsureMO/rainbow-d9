@@ -2,7 +2,13 @@ import {BaseModel, NodeValidationScope, PropValue, VUtils} from '@rainbow-d9/n1'
 import {ButtonClick, ButtonClickOptions} from '@rainbow-d9/n2';
 import {ParsedListItemAttributePair} from '../semantic';
 import {Undefinable} from '../utility-types';
-import {AttributeValueBuild, SpecificWidgetTranslator, WidgetPropertyName} from '../widget';
+import {
+	AttributeValueBuild,
+	DecorateLeadsBuild,
+	DecorateTailsBuild,
+	SpecificWidgetTranslator,
+	WidgetPropertyName
+} from '../widget';
 import {N2WidgetType} from './types';
 
 export const N2ButtonValidateMinimum = async (options: ButtonClickOptions<BaseModel, PropValue>): Promise<void> => {
@@ -90,6 +96,6 @@ export class N2ButtonTranslator extends SpecificWidgetTranslator<N2WidgetType.BU
 
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	public getAttributeValueBuilders(): Array<AttributeValueBuild<any>> {
-		return [N2ButtonClickBuild];
+		return [N2ButtonClickBuild, DecorateLeadsBuild, DecorateTailsBuild];
 	}
 }
