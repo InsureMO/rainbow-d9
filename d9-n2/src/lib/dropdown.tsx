@@ -91,6 +91,8 @@ const OptionFilter = styled.div.attrs<Omit<DropdownPopupState, 'active'> & { act
     display: flex;
     position: fixed;
     align-items: center;
+    font-family: ${CssVars.FONT_FAMILY};
+    font-size: calc(${CssVars.FONT_SIZE} - 2px);
     height: calc(${CssVars.INPUT_HEIGHT} / 5 * 4);
     padding: 0 ${CssVars.INPUT_INDENT};
     border-radius: ${CssVars.BORDER_RADIUS};
@@ -132,6 +134,8 @@ const OptionFilter = styled.div.attrs<Omit<DropdownPopupState, 'active'> & { act
 const Option = styled.span.attrs({'data-w': 'd9-dropdown-option'})`
     display: flex;
     align-items: center;
+    font-family: ${CssVars.FONT_FAMILY};
+    font-size: ${CssVars.FONT_SIZE};
     padding: 0 ${CssVars.INPUT_INDENT};
     height: ${CssVars.INPUT_HEIGHT};
     overflow: hidden;

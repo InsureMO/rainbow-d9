@@ -92,6 +92,9 @@ const MultiDropdownLabel = styled(DropdownLabel)`
     flex-grow: unset;
     border: ${CssVars.BORDER};
     border-radius: ${CssVars.BORDER_RADIUS};
+    color: ${CssVars.FONT_COLOR};
+    font-family: ${CssVars.FONT_FAMILY};
+    font-size: ${CssVars.FONT_SIZE};
     height: unset;
     min-height: calc(${CssVars.INPUT_HEIGHT} - 6px);
     padding: 0 calc(${CssVars.INPUT_INDENT} / 2);
@@ -152,6 +155,8 @@ const OptionFilter = styled.div.attrs<Omit<DropdownPopupState, 'active'> & { act
     display: flex;
     position: fixed;
     align-items: center;
+    font-family: ${CssVars.FONT_FAMILY};
+    font-size: calc(${CssVars.FONT_SIZE} - 2px);
     height: calc(${CssVars.INPUT_HEIGHT} / 5 * 4);
     padding: 0 ${CssVars.INPUT_INDENT};
     border-radius: ${CssVars.BORDER_RADIUS};
@@ -194,6 +199,8 @@ const MultiOption = styled.span.attrs({'data-w': 'd9-multi-dropdown-option'})`
     display: flex;
     align-items: center;
     padding: 0 ${CssVars.INPUT_INDENT};
+    font-family: ${CssVars.FONT_FAMILY};
+    font-size: ${CssVars.FONT_SIZE};
     height: ${CssVars.INPUT_HEIGHT};
     overflow: hidden;
     white-space: nowrap;
@@ -442,13 +449,13 @@ export const MultiDropdown = (props: MultiDropdownProps) => {
 		if (values != null && values.length !== 0) {
 			await $onValueChange(null, null, true);
 		}
+		// simply force update, since height might be changed
+		forceUpdate();
 		if (!isDropdownPopupActive(popupState.active)) {
 			// call click to show popup
-			onClicked();
+			setTimeout(() => onClicked(), 100);
 		} else {
-			// simply force update
-			forceUpdate();
-			repaintPopup();
+			setTimeout(() => repaintPopup(), 100);
 		}
 	};
 

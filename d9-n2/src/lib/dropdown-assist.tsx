@@ -81,6 +81,9 @@ export const DropdownLabel = styled.span.attrs({'data-w': 'd9-dropdown-label'})`
     flex-grow: 1;
     display: flex;
     align-items: center;
+    color: ${CssVars.FONT_COLOR};
+    font-family: ${CssVars.FONT_FAMILY};
+    font-size: ${CssVars.FONT_SIZE};
     height: 100%;
     white-space: nowrap;
     text-overflow: ellipsis;
@@ -208,6 +211,7 @@ const DropdownPopupContainer = styled.div.attrs<Omit<DropdownPopupProps, 'childr
 	})<Omit<DropdownPopupProps, 'children'>>`
     display: block;
     position: fixed;
+    color: ${CssVars.FONT_COLOR};
     background-color: ${CssVars.BACKGROUND_COLOR};
     border: ${CssVars.BORDER};
     border-color: ${CssVars.PRIMARY_COLOR};

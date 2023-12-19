@@ -80,22 +80,83 @@ const AButton = styled.button.attrs(({id}) => {
         box-shadow: ${CssVars.PRIMARY_SHADOW};
     }
 
-    ${Object.values(ButtonInk).map(ink => {
-        const INK = ink.toUpperCase();
-        return `	&[data-ink=${ink}] {
-		border-color : ${CssVars[`${INK}_COLOR`]};
-		background-color : ${CssVars[`${INK}_COLOR`]};
-		&:hover {
-			box-shadow : ${CssVars[`${INK}_HOVER_SHADOW`]};
-		}
-		&:focus, &:active {
-			box-shadow : ${CssVars[`${INK}_SHADOW`]};
-		}
-	}`;
-    })}
+    &[data-ink=primary] {
+        border-color: ${CssVars.PRIMARY_COLOR};
+        background-color: ${CssVars.PRIMARY_COLOR};
+
+        &:hover {
+            box-shadow: ${CssVars.PRIMARY_HOVER_SHADOW};
+        }
+
+        &:focus, &:active {
+            box-shadow: ${CssVars.PRIMARY_SHADOW};
+        }
+    }
+
+    &[data-ink=danger] {
+        border-color: ${CssVars.DANGER_COLOR};
+        background-color: ${CssVars.DANGER_COLOR};
+
+        &:hover {
+            box-shadow: ${CssVars.DANGER_HOVER_SHADOW};
+        }
+
+        &:focus, &:active {
+            box-shadow: ${CssVars.DANGER_SHADOW};
+        }
+    }
+
+    &[data-ink=success] {
+        border-color: ${CssVars.SUCCESS_COLOR};
+        background-color: ${CssVars.SUCCESS_COLOR};
+
+        &:hover {
+            box-shadow: ${CssVars.SUCCESS_HOVER_SHADOW};
+        }
+
+        &:focus, &:active {
+            box-shadow: ${CssVars.SUCCESS_SHADOW};
+        }
+    }
+
+    &[data-ink=warn] {
+        border-color: ${CssVars.WARN_COLOR};
+        background-color: ${CssVars.WARN_COLOR};
+
+        &:hover {
+            box-shadow: ${CssVars.WARN_HOVER_SHADOW};
+        }
+
+        &:focus, &:active {
+            box-shadow: ${CssVars.WARN_SHADOW};
+        }
+    }
+
+    &[data-ink=info] {
+        border-color: ${CssVars.INFO_COLOR};
+        background-color: ${CssVars.INFO_COLOR};
+
+        &:hover {
+            box-shadow: ${CssVars.INFO_HOVER_SHADOW};
+        }
+
+        &:focus, &:active {
+            box-shadow: ${CssVars.INFO_SHADOW};
+        }
+    }
+
     &[data-ink=waive] {
         color: ${CssVars.FONT_COLOR};
-        border-color: ${CssVars.BORDER_COLOR};
+        border-color: ${CssVars.WAIVE_COLOR};
+        background-color: ${CssVars.WAIVE_COLOR};
+
+        &:hover {
+            box-shadow: ${CssVars.WAIVE_HOVER_SHADOW};
+        }
+
+        &:focus, &:active {
+            box-shadow: ${CssVars.WAIVE_SHADOW};
+        }
     }
 
     &[data-fill=link] {
@@ -114,16 +175,51 @@ const AButton = styled.button.attrs(({id}) => {
             box-shadow: none;
         }
 
-        ${Object.values(ButtonInk).map(ink => {
-            return `		&[data-ink=${ink}] {
-			color : ${CssVars[`${ink.toUpperCase()}_COLOR`]};
-		}`;
-        })}
-        &[data-ink=waive] {
-            color: ${CssVars.FONT_COLOR};
+        &[data-ink=primary] {
+            color: ${CssVars.PRIMARY_COLOR};
 
             &:hover {
-                color: ${CssVars.FONT_COLOR};
+                color: ${CssVars.PRIMARY_COLOR};
+            }
+        }
+
+        &[data-ink=danger] {
+            color: ${CssVars.DANGER_COLOR};
+
+            &:hover {
+                color: ${CssVars.DANGER_COLOR};
+            }
+        }
+
+        &[data-ink=success] {
+            color: ${CssVars.SUCCESS_COLOR};
+
+            &:hover {
+                color: ${CssVars.SUCCESS_COLOR};
+            }
+        }
+
+        &[data-ink=warn] {
+            color: ${CssVars.WARN_COLOR};
+
+            &:hover {
+                color: ${CssVars.WARN_COLOR};
+            }
+        }
+
+        &[data-ink=info] {
+            color: ${CssVars.INFO_COLOR};
+
+            &:hover {
+                color: ${CssVars.INFO_COLOR};
+            }
+        }
+
+        &[data-ink=waive] {
+            color: ${CssVars.WAIVE_COLOR};
+
+            &:hover {
+                color: ${CssVars.WAIVE_COLOR};
             }
         }
     }
@@ -132,16 +228,34 @@ const AButton = styled.button.attrs(({id}) => {
         background-color: transparent;
         border-color: ${CssVars.PRIMARY_COLOR};
 
-        ${Object.values(ButtonInk).map(ink => {
-            const INK = ink.toUpperCase();
-            return `		&[data-ink=${ink}] {
-			color : ${CssVars[`${INK}_COLOR`]};
-			border-color : ${CssVars[`${INK}_COLOR`]};
-		}`;
-        })}
+        &[data-ink=primary] {
+            color: ${CssVars.PRIMARY_COLOR};
+            border-color: ${CssVars.PRIMARY_COLOR};
+        }
+
+        &[data-ink=danger] {
+            color: ${CssVars.DANGER_COLOR};
+            border-color: ${CssVars.DANGER_COLOR};
+        }
+
+        &[data-ink=success] {
+            color: ${CssVars.SUCCESS_COLOR};
+            border-color: ${CssVars.SUCCESS_COLOR};
+        }
+
+        &[data-ink=warn] {
+            color: ${CssVars.WARN_COLOR};
+            border-color: ${CssVars.WARN_COLOR};
+        }
+
+        &[data-ink=info] {
+            color: ${CssVars.INFO_COLOR};
+            border-color: ${CssVars.INFO_COLOR};
+        }
+
         &[data-ink=waive] {
-            color: ${CssVars.FONT_COLOR};
-            border-color: ${CssVars.BORDER_COLOR};
+            color: ${CssVars.WAIVE_COLOR};
+            border-color: ${CssVars.WAIVE_COLOR};
         }
     }
 

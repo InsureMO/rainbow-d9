@@ -13,7 +13,7 @@ const CssConstants = {
 	SUCCESS_COLOR: 'rgb(25,135,84)',
 	WARN_COLOR: 'rgb(255,193,7)',
 	INFO_COLOR: 'rgb(25,157,178)',
-	WAIVE_COLOR: 'rgb(224,224,229)',
+	WAIVE_COLOR: 'rgb(180,180,180)',
 	HOVER_COLOR: 'rgb(238,243,252)',
 	INVERT_COLOR: 'rgb(255,255,255)',
 	DISABLE_COLOR: 'rgb(235,235,235)',

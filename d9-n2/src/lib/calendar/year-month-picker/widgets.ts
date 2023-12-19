@@ -36,8 +36,20 @@ export const YearSelectorOption = styled.span`
     transition: all ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION};
 
     &[data-current=true] {
-        background-color: ${CssVars.PRIMARY_COLOR};
-        opacity: 0.5;
+        color: ${CssVars.INVERT_COLOR};
+
+        &:before {
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: ${CssVars.BORDER_RADIUS};
+            background-color: ${CssVars.PRIMARY_COLOR};
+            opacity: 0.5;
+            z-index: -1;
+        }
     }
 
     &[data-current=false]:hover {
@@ -60,8 +72,20 @@ export const MonthSelectorOption = styled.span`
     transition: all ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION};
 
     &[data-current=true] {
-        background-color: ${CssVars.PRIMARY_COLOR};
-        opacity: 0.5;
+        color: ${CssVars.INVERT_COLOR};
+
+        &:before {
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: ${CssVars.BORDER_RADIUS};
+            background-color: ${CssVars.PRIMARY_COLOR};
+            opacity: 0.5;
+            z-index: -1;
+        }
     }
 
     &[data-current=false]:hover {

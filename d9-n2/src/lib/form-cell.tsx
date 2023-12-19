@@ -39,14 +39,15 @@ const AFormCell = styled.div.attrs(({id}) => {
 	}
 `;
 const FormCellInvalidMessage = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-form-cell-invalid-msg'})`
-	display     : flex;
-	position    : relative;
-	align-items : center;
-	font-size   : ${CssVars.FORM_CELL_INVALID_MESSAGE_FONT_SIZE};
-	font-weight : ${CssVars.FORM_CELL_INVALID_MESSAGE_FONT_WEIGHT};
-	color       : ${CssVars.FORM_CELL_INVALID_MESSAGE_COLOR};
-	min-height  : ${CssVars.FORM_CELL_INVALID_MESSAGE_HEIGHT};
-	padding     : ${CssVars.FORM_CELL_INVALID_MESSAGE_PADDING};
+    display: flex;
+    position: relative;
+    align-items: center;
+    font-family: ${CssVars.FONT_FAMILY};
+    font-size: ${CssVars.FORM_CELL_INVALID_MESSAGE_FONT_SIZE};
+    font-weight: ${CssVars.FORM_CELL_INVALID_MESSAGE_FONT_WEIGHT};
+    color: ${CssVars.FORM_CELL_INVALID_MESSAGE_COLOR};
+    min-height: ${CssVars.FORM_CELL_INVALID_MESSAGE_HEIGHT};
+    padding: ${CssVars.FORM_CELL_INVALID_MESSAGE_PADDING};
 `;
 
 /**
