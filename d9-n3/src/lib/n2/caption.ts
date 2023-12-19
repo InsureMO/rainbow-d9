@@ -5,6 +5,8 @@ import {ParsedListItemAttributePair} from '../semantic';
 import {Undefinable} from '../utility-types';
 import {
 	AttributeValueBuild,
+	DecorateLeadsBuild,
+	DecorateTailsBuild,
 	MonitorHandlerDetective,
 	MonitorHandlerDetectOptions,
 	SpecificWidgetTranslator,
@@ -91,7 +93,7 @@ export class N2CaptionTranslator extends SpecificWidgetTranslator<N2WidgetType.C
 
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	public getAttributeValueBuilders(): Array<AttributeValueBuild<any>> {
-		return [N2CaptionValueToLabelBuild, N2CaptionClickBuild];
+		return [N2CaptionValueToLabelBuild, N2CaptionClickBuild, DecorateLeadsBuild, DecorateTailsBuild];
 	}
 
 	public getReactionHandlerDetectives(): Array<MonitorHandlerDetective> {
@@ -106,7 +108,7 @@ export class N2LabelTranslator extends SpecificWidgetTranslator<N2WidgetType.LAB
 
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	public getAttributeValueBuilders(): Array<AttributeValueBuild<any>> {
-		return [N2CaptionValueToLabelBuild, N2CaptionClickBuild];
+		return [N2CaptionValueToLabelBuild, N2CaptionClickBuild, DecorateLeadsBuild, DecorateTailsBuild];
 	}
 
 	public getReactionHandlerDetectives(): Array<MonitorHandlerDetective> {

@@ -442,9 +442,9 @@ export const Button = forwardRef((props: ButtonProps, ref: ForwardedRef<HTMLButt
 		{head}
 		<span data-role="text">{text}</span>
 		{tail}
-		{transformDecorators(tails).map(lead => {
+		{transformDecorators(tails).map(tail => {
 			return <TailDecorator key={VUtils.generateUniqueId()}>
-				{lead}
+				{tail}
 			</TailDecorator>;
 		})}
 	</AButton>;

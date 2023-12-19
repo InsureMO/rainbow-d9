@@ -14,6 +14,7 @@ import React, {ForwardedRef, forwardRef, isValidElement, MouseEvent, ReactNode} 
 import styled from 'styled-components';
 import {getDefaultCalendarDateFormat, getDefaultCalendarDatetimeFormat} from './calendar/utils';
 import {CssVars, DOM_ID_WIDGET, DOM_KEY_WIDGET} from './constants';
+import {DecorateWrapperDef, transformDecorators} from './decorate-assist';
 import {GlobalHandlers, useGlobalHandlers} from './global';
 import {OmitHTMLProps2, OmitNodeDef} from './types';
 
@@ -38,7 +39,7 @@ export type CaptionClick = <R extends BaseModel, M extends PropValue>(
 	options: CaptionClickOptions<R, M>, event: MouseEvent<HTMLSpanElement>) => void | Promise<void>;
 
 /** Caption configuration definition */
-export type CaptionDef = NodeDef & OmitHTMLProps2<HTMLSpanElement, 'onClick'> & {
+export type CaptionDef = NodeDef & DecorateWrapperDef & OmitHTMLProps2<HTMLSpanElement, 'onClick'> & {
 	labelOnValue?: boolean;
 	/** use label when it is given */
 	label?: ReactNode;
@@ -55,24 +56,26 @@ const ACaption = styled.span.attrs(({id}) => {
 		[DOM_ID_WIDGET]: id
 	};
 })`
-	display          : flex;
-	position         : relative;
-	align-items      : center;
-	font-family      : ${CssVars.CAPTION_FONT_FAMILY};
-	font-size        : ${CssVars.CAPTION_FONT_SIZE};
-	color            : ${CssVars.CAPTION_FONT_COLOR};
-	height           : ${CssVars.INPUT_HEIGHT};
-	background-color : transparent;
-	white-space      : nowrap;
-	overflow         : hidden;
-	text-overflow    : ellipsis;
-	&[data-visible=false] {
-		display : none;
-	}
-	&[data-clickable=true] {
-		cursor          : pointer;
-		text-decoration : underline;
-	}
+    display: flex;
+    position: relative;
+    align-items: center;
+    font-family: ${CssVars.CAPTION_FONT_FAMILY};
+    font-size: ${CssVars.CAPTION_FONT_SIZE};
+    color: ${CssVars.CAPTION_FONT_COLOR};
+    height: ${CssVars.INPUT_HEIGHT};
+    background-color: transparent;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    &[data-visible=false] {
+        display: none;
+    }
+
+    &[data-clickable=true] {
+        cursor: pointer;
+        text-decoration: underline;
+    }
 `;
 
 const nf = (fractionDigits: number, grouping?: boolean) => {
@@ -120,8 +123,44 @@ const formatter = new Proxy({nf, nf0, nf1, nf2, nf3, df}, {
 	}
 });
 
+const Decorator = styled.span`
+    display: flex;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+    font-family: ${CssVars.FONT_FAMILY};
+    font-size: ${CssVars.FONT_SIZE};
+    color: ${CssVars.FONT_COLOR};
+    height: ${CssVars.INPUT_HEIGHT};
+    min-width: ${CssVars.INPUT_HEIGHT};
+    padding: 0 ${CssVars.INPUT_INDENT};
+    background-color: transparent;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    > span[data-w=d9-deco-lead],
+    > span[data-w=d9-deco-tail] {
+        color: ${CssVars.FONT_COLOR};
+        fill: ${CssVars.FONT_COLOR};
+    }
+
+    > svg {
+        height: calc((${CssVars.FONT_SIZE}) * 1.2);
+    }
+`;
+const LeadDecorator = styled(Decorator).attrs({
+	[DOM_KEY_WIDGET]: 'd9-deco-lead'
+})`
+`;
+const TailDecorator = styled(Decorator).attrs({
+	[DOM_KEY_WIDGET]: 'd9-deco-tail'
+})`
+`;
+
 export const Caption = forwardRef((props: CaptionProps, ref: ForwardedRef<HTMLSpanElement>) => {
 	const {
+		leads, tails,
 		labelOnValue, label, valueToLabel, click,
 		$pp, $wrapped: {$root, $model, $p2r, $avs: {$disabled, $visible}, $vfs},
 		...rest
@@ -181,7 +220,17 @@ export const Caption = forwardRef((props: CaptionProps, ref: ForwardedRef<HTMLSp
 	                 id={PPUtils.asId(PPUtils.absolute($p2r, props.$pp), props.id)}
 	                 onClick={onClicked} data-clickable={onClicked != null}
 	                 ref={ref}>
+		{transformDecorators(leads).map(lead => {
+			return <LeadDecorator key={VUtils.generateUniqueId()}>
+				{lead}
+			</LeadDecorator>;
+		})}
 		{children}
+		{transformDecorators(tails).map(tail => {
+			return <TailDecorator key={VUtils.generateUniqueId()}>
+				{tail}
+			</TailDecorator>;
+		})}
 	</ACaption>;
 });
 
