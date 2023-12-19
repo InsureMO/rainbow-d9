@@ -1,4 +1,3 @@
-import {Nullable} from '@rainbow-d9/n3';
 import React, {ReactNode} from 'react';
 import {ICON_PREFIX} from './constants';
 import {Registrar} from './icons';
@@ -21,6 +20,6 @@ export const transformDecorator = (decorator: DecorateElement): ReactNode => {
 	return decorator;
 };
 
-export const transformDecorators = (decorators?: Nullable<Array<DecorateElement>>): Array<ReactNode> => {
+export const transformDecorators = (decorators?: Array<DecorateElement> | null): Array<ReactNode> => {
 	return (decorators ?? []).filter(decorator => decorator != null).map(transformDecorator);
 };
