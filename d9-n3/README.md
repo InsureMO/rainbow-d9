@@ -820,7 +820,8 @@ icons. If you want to use built-in icons, you need to use `$icons.` followed by 
 	- tails: $icons.time
 ```
 
-> Multiple decorators could be split by `;`.
+> Multiple decorators could be split by `;`.  
+> Decoration also supported for `Button`, `Caption`, `Label`.
 
 ## Textarea
 
