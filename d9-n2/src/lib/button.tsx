@@ -146,7 +146,6 @@ const AButton = styled.button.attrs(({id}) => {
     }
 
     &[data-ink=waive] {
-        color: ${CssVars.FONT_COLOR};
         border-color: ${CssVars.WAIVE_COLOR};
         background-color: ${CssVars.WAIVE_COLOR};
 
