@@ -18,4 +18,8 @@ export class N2SectionTranslator extends SpecificWidgetTranslator<N2WidgetType.S
 	public shouldWrapByFormCell(): boolean {
 		return false;
 	}
+
+	public getToWidgetAttributeNames(): Array<string> {
+		return [...super.getToWidgetAttributeNames(), 'title'];
+	}
 }

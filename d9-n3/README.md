@@ -387,14 +387,18 @@ comprehensive documentation to facilitate quick learning for users.
 
 ## Heading
 
-Syntax: `WidgetType[::Headline][::Id]`.
+Syntax: `WidgetType[::Headline][::PropertyPath][::Id]`.
 
 Connect with `::`,
 
 - If there is no `::`, only the widget type is present,
 - If there are two parts, it includes widget type and headline,
-- If there are more than three parts, the last section represents the id, the first section represents the widget type. All the
-  middle sections are reconnected with `::` to represent the headline.
+- If there are three parts, it includes widget type, headline and property path,
+- If there are more than three parts,
+	- The last section represents the id,
+	- The second to last section represents property path,
+	- The first section represents the widget type,
+	- Rest sections are reconnected with `::` to represent the headline.
 
 Some examples:
 
@@ -546,6 +550,35 @@ the `.FC` suffix added, indicating that it is included within the component repr
 already has a label defined, it will by default have the `.FC` suffix added. Unless the widget parser declares that it should not be
 included, please refer to the `SpecificWidgetTranslator#shouldWrapByFormCell` implementation.
 
+Form cell introduces the concept of `label`, which is generally a static string and can be defined using `- label: SomeText`. In complex
+cases, component combinations can be defined using the following approach, as an example, we will take the input box:
+
+- `label` in headline,
+  ```markdown
+  - Input::A Label::name
+  ```
+- `label` in attribute,
+  ```markdown
+  - Input::::name
+    - label: A Label
+  ```
+- Use a `Caption` as `label`, in this case, label is same as input text,
+  ```markdown
+  - Input::::name
+    - label:
+        - valueOnLabel
+        - property: name
+  ```
+- Use any widget as `label`,
+  ```markdown
+  - Input::::name
+    - label: Input
+        - property: name
+  ```
+
+Please be aware that `label` can be an attribute of widget itself, in this case,
+use `SpecificWidgetTranslator#shouldTranslateLabelAttribute` to avoid default parsing behavior.
+
 ## Built-in Validation Properties
 
 - `required`: boolean,
@@ -566,6 +599,9 @@ included, please refer to the `SpecificWidgetTranslator#shouldWrapByFormCell` im
 	- allow given maximum value by `]`, or ignore it. Or exclude given maximum value by `)`,
 	- minimum/maximum value can be ignored, but at least one should be present,
 	- all above syntax, connected by `,`,
+- `regex` or `regexp`: syntax as below,
+	- `regex: ^\d+$`: presents a regex pattern,
+	- multiple patterns connected by `;`.
 
 Some examples:
 
@@ -665,6 +701,8 @@ Strictly adhere to the heading parsing rules without any additional attribute de
 | Attribute Name | Type | Description                                   |
 |----------------|------|-----------------------------------------------|
 | label, title   | text | `- Section::Customer`<br/>`- title: Customer` |
+
+> `label` and `title` attribute follows the `label` default parsing behavior.
 
 ## Caption, Label
 
@@ -1051,6 +1089,8 @@ Some examples:
 
 In addition to directly defining an attribute with its value as the title of the element, this attribute also supports the same syntax as
 the `Caption`.
+
+> `elementTitle` and `caption` attribute follows the `label` default parsing behavior.
 
 Some examples:
 

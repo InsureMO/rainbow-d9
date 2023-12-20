@@ -1,4 +1,4 @@
-import {ContainerDef, NodeDef, PropertyPath} from '@rainbow-d9/n1';
+import {ContainerDef, NodeDef, PropertyPath, VUtils} from '@rainbow-d9/n1';
 import {PreparsedListItem} from '../../ast';
 import {N3Logger} from '../../logger';
 import {ParsedNodeType} from '../../node-types';
@@ -49,6 +49,8 @@ export class WidgetTranslator extends AbstractTranslator<Decipherable> {
 		const {$wt, label, attributes, translator} = options;
 		if (this.isForceWrappedByFormCell(attributes) || translator.shouldWrapByFormCell()) {
 			return this.tryToWrapByFormCell($wt, label);
+		} else if (label == null || (typeof label === 'string' && VUtils.isBlank(label))) {
+			return {$wt};
 		} else {
 			return {$wt, [translator.transformLabelAttributeName()]: label};
 		}
