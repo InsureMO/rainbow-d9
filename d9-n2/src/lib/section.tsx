@@ -1,13 +1,14 @@
-import {ContainerDef, ContainerWidgetProps, PPUtils, registerWidget} from '@rainbow-d9/n1';
+import {ContainerDef, ContainerWidgetProps, NodeDef, PPUtils, registerWidget} from '@rainbow-d9/n1';
 import React, {ForwardedRef, forwardRef, ReactNode, useState} from 'react';
 import styled from 'styled-components';
 import {CssVars, DOM_ID_WIDGET, DOM_KEY_WIDGET} from './constants';
 import {ArrowDown} from './icons';
+import {LabelLike} from './label-like';
 import {OmitHTMLProps2, OmitNodeDef} from './types';
 
 /** Section configuration definition */
 export type SectionDef = ContainerDef & OmitHTMLProps2<HTMLDivElement, 'title'> & {
-	title?: ReactNode;
+	title?: ReactNode | NodeDef;
 	collapsible?: boolean;
 };
 /** Section widget definition, with html attributes */
@@ -108,7 +109,8 @@ const ASectionBody = styled.div.attrs<{ expanded: boolean }>(({expanded}) => {
 
 export const Section = forwardRef((props: SectionProps, ref: ForwardedRef<HTMLDivElement>) => {
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
-	const {$wrapped: {$p2r, $avs: {$disabled, $visible}}, title, collapsible, children, ...rest} = props;
+	const {$wrapped, title, collapsible, children, ...rest} = props;
+	const {$p2r, $avs: {$disabled, $visible}} = $wrapped;
 
 	const [expanded, setExpanded] = useState(true);
 
@@ -121,7 +123,9 @@ export const Section = forwardRef((props: SectionProps, ref: ForwardedRef<HTMLDi
 	                 ref={ref}>
 		{title != null
 			? <ASectionHeader>
-				<ASectionTitle>{title}</ASectionTitle>
+				<ASectionTitle>
+					<LabelLike label={title} $wrapped={$wrapped} $validationScopes={props}/>
+				</ASectionTitle>
 				{collapsible
 					? <ASectionExpander expanded={expanded} onClick={onExpandClicked}>
 						<ASectionExpanderSvg data-expanded={expanded}/>

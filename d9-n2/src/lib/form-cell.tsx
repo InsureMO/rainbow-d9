@@ -1,12 +1,13 @@
 import {NodeDef, PPUtils, registerWidget, ValidationResult, VUtils, WidgetProps} from '@rainbow-d9/n1';
 import React, {ForwardedRef, forwardRef, ReactNode} from 'react';
 import styled from 'styled-components';
-import {Caption} from './caption';
+import {CaptionDef} from './caption';
 import {CssVars, DOM_ID_WIDGET, DOM_KEY_WIDGET} from './constants';
+import {LabelLike} from './label-like';
 import {OmitHTMLProps, OmitNodeDef} from './types';
 
 export interface FormCellAdditive {
-	label?: ReactNode;
+	label?: ReactNode | CaptionDef;
 	/**
 	 * default true. note since internal widgets are invisible, so only the grid can be hold.
 	 * cell height actually depends on grid css. default is true
@@ -30,13 +31,14 @@ const AFormCell = styled.div.attrs(({id}) => {
 		[DOM_ID_WIDGET]: id
 	};
 })`
-	display        : flex;
-	position       : relative;
-	flex-direction : column;
-	align-content  : start;
-	&[data-visible=false][data-hold-position-on-invisible=false] {
-		display : none;
-	}
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    align-content: start;
+
+    &[data-visible=false][data-hold-position-on-invisible=false] {
+        display: none;
+    }
 `;
 const FormCellInvalidMessage = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-form-cell-invalid-msg'})`
     display: flex;
@@ -90,7 +92,7 @@ export const FormCell = forwardRef((props: FormCellProps, ref: ForwardedRef<HTML
 	                  data-visible={$visible} data-hold-position-on-invisible={holdPositionWhenInvisible}
 	                  id={fcId}
 	                  ref={ref}>
-		<Caption label={label} $wrapped={$wrapped} data-r="d9-fc-caption" />
+		<LabelLike label={label} $wrapped={$wrapped} $validationScopes={props} wrapByCaption={true}/>
 		{children}
 		<FormCellInvalidMessage>
 			{validation?.valid === false ? validation.failReason : null}

@@ -1,12 +1,13 @@
 import {ContainerDef, NodeDef, PropertyPath} from '@rainbow-d9/n1';
+import {PreparsedListItem} from '../../ast';
 import {N3Logger} from '../../logger';
 import {ParsedNodeType} from '../../node-types';
-import {WidgetType} from '../../semantic';
+import {ParsedListItemAttributePair, ParsedListItemKind, SemanticUtils, WidgetFlag, WidgetType} from '../../semantic';
 import {ParsedNodeDef} from '../../types';
 import {Nullable, Undefinable} from '../../utility-types';
 import {AbstractTranslator, Decipherable} from './abstract-translator';
 import {SpecificWidgetTranslator} from './specific-translator';
-import {AttributeMap} from './types';
+import {AttributeMap, ClassifiedAttributesAndWidgets} from './types';
 
 export class WidgetTranslator extends AbstractTranslator<Decipherable> {
 	public static readonly FORM_CELL_SUFFIX = '.FC';
@@ -28,18 +29,20 @@ export class WidgetTranslator extends AbstractTranslator<Decipherable> {
 	/**
 	 * wrap by form cell when given label is not null
 	 */
-	protected tryToWrapByFormCell($wt: WidgetType, label?: Nullable<string>): Pick<NodeDef, '$wt'> & {
-		label?: string
+	protected tryToWrapByFormCell($wt: WidgetType, label: Nullable<string> | NodeDef): Pick<NodeDef, '$wt'> & {
+		label?: Nullable<string> | NodeDef
 	} {
 		if (label == null) {
 			return {$wt};
-		} else {
+		} else if (typeof label === 'string') {
 			return {$wt: `${$wt}${WidgetTranslator.FORM_CELL_SUFFIX}`, label: label.trim()};
+		} else {
+			return {$wt: `${$wt}${WidgetTranslator.FORM_CELL_SUFFIX}`, label: label};
 		}
 	}
 
 	protected attemptToFormCell(options: {
-		$wt: WidgetType; attributes: AttributeMap; label: string;
+		$wt: WidgetType; attributes: AttributeMap; label: Nullable<string> | NodeDef;
 		translator: SpecificWidgetTranslator<WidgetType>;
 	}) {
 		const {$wt, label, attributes, translator} = options;
@@ -50,10 +53,52 @@ export class WidgetTranslator extends AbstractTranslator<Decipherable> {
 		}
 	}
 
+	protected translateLabel(classified: ClassifiedAttributesAndWidgets, label: Nullable<string>, $pp: Undefinable<PropertyPath>): Nullable<string> | NodeDef {
+		let transformedLabel: Nullable<string> | NodeDef;
+		const {attributes} = classified;
+		const foundLabel = (attributes ?? [])
+			.filter(SemanticUtils.isAttributePairListItem)
+			.find(attr => attr.attributeName === 'label');
+		if (foundLabel == null) {
+			// do nothing
+			transformedLabel = label;
+		} else if (foundLabel.children == null || foundLabel.children.length === 0) {
+			transformedLabel = (foundLabel.attributeValue ?? '').trim() || label;
+		} else {
+			const def = foundLabel as ParsedListItemAttributePair;
+			// remove from attributes
+			classified.attributes = classified.attributes.filter(attr => attr !== foundLabel);
+			// to parse label, label is a basic property for all widgets, maybe used for form cell,
+			// or maybe built-in property for widget itself, such as Section, will be treated as title
+			const {node, success} = this.translate({
+				type: ParsedNodeType.LIST_ITEM, kind: ParsedListItemKind.WIDGET,
+				$wt: (def.attributeValue ?? '').trim() || 'Caption', $pp,
+				children: def.children,
+				$flag: WidgetFlag.STANDARD,
+				preparsed: {
+					type: ParsedNodeType.LIST_ITEM,
+					content: {type: 'listItem', children: (def.children ?? []).map(child => child.preparsed.content)},
+					// PreparsedSubordinateOfListItemNodes
+					children: (def.children ?? []).map(child => child.preparsed)
+				} as PreparsedListItem
+			});
+			if (success) {
+				transformedLabel = node;
+			} else {
+				// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+				// @ts-ignore
+				N3Logger.error(`Given node type[${node.type}] for label is not supported.`, WidgetTranslator.name);
+				transformedLabel = label;
+			}
+		}
+		return transformedLabel;
+	}
+
 	protected doTranslate(node: Decipherable, $pp: Undefinable<PropertyPath>, label: Nullable<string>, findChildren: () => Array<ParsedNodeDef>): ParsedNodeDef {
 		const {$wt} = node;
 
 		const classified = this.classifyAttributesAndSubWidgetsByList(node);
+		const transformedLabel = this.translateLabel(classified, label, $pp);
 		const attributes: AttributeMap = this.parseAndCombineAttributes({
 			$wt, items: classified.attributes, $pp
 		});
@@ -63,10 +108,10 @@ export class WidgetTranslator extends AbstractTranslator<Decipherable> {
 		if (translator != null) {
 			def = translator.beautifyProperties({
 				$pp, ...attributes,
-				...this.attemptToFormCell({$wt, attributes, label, translator})
+				...this.attemptToFormCell({$wt, attributes, label: transformedLabel, translator})
 			});
 		} else {
-			def = {...attributes, $pp, $wt};
+			def = {$pp, ...attributes, $wt};
 		}
 		const children = [
 			...this.buildChildrenOnList({widgets: classified.widgets}),
