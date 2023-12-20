@@ -1,5 +1,6 @@
-import {EnhancedPropsForArrayElement, NUtils, Wrapper} from '@rainbow-d9/n1';
+import {EnhancedPropsForArrayElement} from '@rainbow-d9/n1';
 import React, {useState} from 'react';
+import {LabelLike} from '../label-like';
 import {RibRowOperators} from './rib-row-operators';
 import {RibsProps} from './types';
 import {ARibRow, ARibRowBody, ARibRowHeader, ARibRowHeaderContent, ARibRowIndex} from './widgets';
@@ -7,7 +8,7 @@ import {ARibRow, ARibRowBody, ARibRowHeader, ARibRowHeaderContent, ARibRowIndex}
 export const RibRow = (props: Omit<RibsProps, '$array'> & { $array: EnhancedPropsForArrayElement }) => {
 	const {
 		caption,
-		$wrapped: {$root, $p2r, $model},
+		$wrapped,
 		$array: {elementIndex, removable, removeElement},
 		children
 	} = props;
@@ -20,18 +21,10 @@ export const RibRow = (props: Omit<RibsProps, '$array'> & { $array: EnhancedProp
 		<ARibRowHeader>
 			<ARibRowIndex># {elementIndex + 1}</ARibRowIndex>
 			<ARibRowHeaderContent>
-				{caption == null
-					? null
-					: (() => {
-						// eslint-disable-next-line @typescript-eslint/no-unused-vars
-						const {$key: keyOfChild, ...rest} = caption;
-						NUtils.getDefKey(caption);
-						NUtils.inheritValidationScopes(props, caption);
-						return <Wrapper $root={$root} $model={$model} $p2r={$p2r} {...rest} />;
-					})()}
+				<LabelLike label={caption} $wrapped={$wrapped} $validationScopes={props} wrapByCaption={true}/>
 			</ARibRowHeaderContent>
 			<RibRowOperators expanded={expanded} expand={expand} collapse={collapse}
-			                 removable={removable} removeElement={removeElement} />
+			                 removable={removable} removeElement={removeElement}/>
 		</ARibRowHeader>
 		<ARibRowBody expanded={expanded}>
 			{children}

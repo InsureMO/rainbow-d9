@@ -28,6 +28,13 @@ export abstract class SpecificWidgetTranslator<T extends WidgetType> {
 	}
 
 	/**
+	 * default true
+	 */
+	public shouldTranslateLabelAttribute(): boolean {
+		return true;
+	}
+
+	/**
 	 * default returns "label", override me if it needs to be transformed to other name
 	 */
 	public transformLabelAttributeName(): string {

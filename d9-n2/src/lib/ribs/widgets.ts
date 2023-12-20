@@ -103,18 +103,22 @@ export const ARibRowBody = styled.div.attrs<{ expanded: boolean }>(({expanded}) 
 	overflow              : hidden;
 `;
 export const ARibNoDataRow = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-rib-no-data-row'})`
-	display     : flex;
-	position    : relative;
-	align-items : center;
-	min-width   : 100%;
-	height      : ${CssVars.INPUT_HEIGHT};
-	> span {
-		display     : flex;
-		position    : relative;
-		align-items : center;
-		min-height  : ${CssVars.TABLE_CELL_HEIGHT};
-		padding     : 0 ${CssVars.TABLE_CELL_PADDING};
-	}
+    display: flex;
+    position: relative;
+    align-items: center;
+    font-family: ${CssVars.FONT_FAMILY};
+    font-size: ${CssVars.FONT_SIZE};
+    color: ${CssVars.FONT_COLOR};
+    min-width: 100%;
+    height: ${CssVars.INPUT_HEIGHT};
+
+    > span {
+        display: flex;
+        position: relative;
+        align-items: center;
+        min-height: ${CssVars.TABLE_CELL_HEIGHT};
+        padding: 0 ${CssVars.TABLE_CELL_PADDING};
+    }
 `;
 export const ARibBottomBar = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-rib-bottom-bar'})`
 	display         : flex;

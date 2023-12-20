@@ -91,6 +91,10 @@ export class N2CaptionTranslator extends SpecificWidgetTranslator<N2WidgetType.C
 		return N2WidgetType.CAPTION;
 	}
 
+	public shouldTranslateLabelAttribute(): boolean {
+		return false;
+	}
+
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	public getAttributeValueBuilders(): Array<AttributeValueBuild<any>> {
 		return [N2CaptionValueToLabelBuild, N2CaptionClickBuild, DecorateLeadsBuild, DecorateTailsBuild];
@@ -104,6 +108,10 @@ export class N2CaptionTranslator extends SpecificWidgetTranslator<N2WidgetType.C
 export class N2LabelTranslator extends SpecificWidgetTranslator<N2WidgetType.LABEL> {
 	public getSupportedType(): N2WidgetType.LABEL {
 		return N2WidgetType.LABEL;
+	}
+
+	public shouldTranslateLabelAttribute(): boolean {
+		return false;
 	}
 
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any

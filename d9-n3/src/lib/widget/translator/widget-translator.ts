@@ -53,17 +53,22 @@ export class WidgetTranslator extends AbstractTranslator<Decipherable> {
 		}
 	}
 
-	protected translateLabel(classified: ClassifiedAttributesAndWidgets, label: Nullable<string>, $pp: Undefinable<PropertyPath>): Nullable<string> | NodeDef {
-		let transformedLabel: Nullable<string> | NodeDef;
+	protected tryToTranslateAttributeToWidget<V>(options: {
+		classified: ClassifiedAttributesAndWidgets; attributeName: string;
+		given?: Nullable<V>; $pp: Undefinable<PropertyPath>;
+	}): Nullable<V> | NodeDef {
+		const {classified, attributeName, given, $pp} = options;
+
+		let transformedLabel: Nullable<V> | NodeDef;
 		const {attributes} = classified;
 		const foundLabel = (attributes ?? [])
 			.filter(SemanticUtils.isAttributePairListItem)
-			.find(attr => attr.attributeName === 'label');
+			.find(attr => attr.attributeName === attributeName);
 		if (foundLabel == null) {
 			// do nothing
-			transformedLabel = label;
+			transformedLabel = given;
 		} else if (foundLabel.children == null || foundLabel.children.length === 0) {
-			transformedLabel = (foundLabel.attributeValue ?? '').trim() || label;
+			transformedLabel = ((foundLabel.attributeValue ?? '').trim() || given) as V;
 		} else {
 			const def = foundLabel as ParsedListItemAttributePair;
 			// remove from attributes
@@ -88,7 +93,7 @@ export class WidgetTranslator extends AbstractTranslator<Decipherable> {
 				// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 				// @ts-ignore
 				N3Logger.error(`Given node type[${node.type}] for label is not supported.`, WidgetTranslator.name);
-				transformedLabel = label;
+				transformedLabel = given;
 			}
 		}
 		return transformedLabel;
@@ -98,13 +103,20 @@ export class WidgetTranslator extends AbstractTranslator<Decipherable> {
 		const {$wt} = node;
 
 		const classified = this.classifyAttributesAndSubWidgetsByList(node);
-		const transformedLabel = this.translateLabel(classified, label, $pp);
+		const translator = this.findSpecificTranslator($wt);
+		let transformedLabel: Nullable<string> | NodeDef;
+		if (translator?.shouldTranslateLabelAttribute() ?? true) {
+			transformedLabel = this.tryToTranslateAttributeToWidget({
+				classified, given: label, $pp, attributeName: 'label'
+			});
+		} else {
+			transformedLabel = label;
+		}
 		const attributes: AttributeMap = this.parseAndCombineAttributes({
 			$wt, items: classified.attributes, $pp
 		});
 
 		let def: ParsedNodeDef['node'];
-		const translator = this.findSpecificTranslator($wt);
 		if (translator != null) {
 			def = translator.beautifyProperties({
 				$pp, ...attributes,
@@ -127,7 +139,7 @@ export class WidgetTranslator extends AbstractTranslator<Decipherable> {
 
 	public translate(node: Decipherable): ParsedNodeDef {
 		if (node.type === ParsedNodeType.HEADING) {
-			return this.doTranslate(node, (void 0), node.headline, () => {
+			return this.doTranslate(node, node.$id, node.headline, () => {
 				return this.buildChildrenOnSubHeadings({widgets: node.children});
 			});
 		} else if (node.type === ParsedNodeType.LIST_ITEM) {
