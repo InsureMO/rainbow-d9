@@ -6,6 +6,7 @@ import {ParsedListItemAttributePair, ParsedListItemKind, SemanticUtils, WidgetFl
 import {ParsedNodeDef} from '../../types';
 import {Nullable, Undefinable} from '../../utility-types';
 import {AbstractTranslator, Decipherable} from './abstract-translator';
+import {AttributeNameUtils} from './attribute';
 import {SpecificWidgetTranslator} from './specific-translator';
 import {AttributeMap, ClassifiedAttributesAndWidgets} from './types';
 
@@ -54,25 +55,26 @@ export class WidgetTranslator extends AbstractTranslator<Decipherable> {
 	}
 
 	protected tryToTranslateAttributeToWidget<V>(options: {
+		$wt: WidgetType;
 		classified: ClassifiedAttributesAndWidgets; attributeName: string;
 		given?: Nullable<V>; $pp: Undefinable<PropertyPath>;
 	}): Nullable<V> | NodeDef {
-		const {classified, attributeName, given, $pp} = options;
+		const {$wt, classified, attributeName, given, $pp} = options;
 
-		let transformedLabel: Nullable<V> | NodeDef;
+		let transformed: Nullable<V> | NodeDef;
 		const {attributes} = classified;
-		const foundLabel = (attributes ?? [])
+		const found = (attributes ?? [])
 			.filter(SemanticUtils.isAttributePairListItem)
-			.find(attr => attr.attributeName === attributeName);
-		if (foundLabel == null) {
+			.find(attr => AttributeNameUtils.mapAttributeName($wt, attr.attributeName) === attributeName);
+		if (found == null) {
 			// do nothing
-			transformedLabel = given;
-		} else if (foundLabel.children == null || foundLabel.children.length === 0) {
-			transformedLabel = ((foundLabel.attributeValue ?? '').trim() || given) as V;
+			transformed = given;
+		} else if (found.children == null || found.children.length === 0) {
+			transformed = ((found.attributeValue ?? '').trim() || given) as V;
 		} else {
-			const def = foundLabel as ParsedListItemAttributePair;
+			const def = found as ParsedListItemAttributePair;
 			// remove from attributes
-			classified.attributes = classified.attributes.filter(attr => attr !== foundLabel);
+			classified.attributes = classified.attributes.filter(attr => attr !== found);
 			// to parse label, label is a basic property for all widgets, maybe used for form cell,
 			// or maybe built-in property for widget itself, such as Section, will be treated as title
 			const {node, success} = this.translate({
@@ -88,15 +90,15 @@ export class WidgetTranslator extends AbstractTranslator<Decipherable> {
 				} as PreparsedListItem
 			});
 			if (success) {
-				transformedLabel = node;
+				transformed = node;
 			} else {
 				// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 				// @ts-ignore
 				N3Logger.error(`Given node type[${node.type}] for label is not supported.`, WidgetTranslator.name);
-				transformedLabel = given;
+				transformed = given;
 			}
 		}
-		return transformedLabel;
+		return transformed;
 	}
 
 	protected doTranslate(node: Decipherable, $pp: Undefinable<PropertyPath>, label: Nullable<string>, findChildren: () => Array<ParsedNodeDef>): ParsedNodeDef {
@@ -104,17 +106,23 @@ export class WidgetTranslator extends AbstractTranslator<Decipherable> {
 
 		const classified = this.classifyAttributesAndSubWidgetsByList(node);
 		const translator = this.findSpecificTranslator($wt);
+
 		let transformedLabel: Nullable<string> | NodeDef;
 		if (translator?.shouldTranslateLabelAttribute() ?? true) {
 			transformedLabel = this.tryToTranslateAttributeToWidget({
-				classified, given: label, $pp, attributeName: 'label'
+				$wt, classified, given: label, $pp, attributeName: 'label'
 			});
 		} else {
 			transformedLabel = label;
 		}
+		const transformedWidgets = (translator?.getToWidgetAttributeNames() ?? []).reduce((map, name) => {
+			map[name] = this.tryToTranslateAttributeToWidget({$wt, classified, $pp, attributeName: name});
+			return map;
+		}, {});
 		const attributes: AttributeMap = this.parseAndCombineAttributes({
 			$wt, items: classified.attributes, $pp
 		});
+		Object.keys(transformedWidgets).forEach(name => attributes[name] = transformedWidgets[name]);
 
 		let def: ParsedNodeDef['node'];
 		if (translator != null) {
@@ -139,7 +147,7 @@ export class WidgetTranslator extends AbstractTranslator<Decipherable> {
 
 	public translate(node: Decipherable): ParsedNodeDef {
 		if (node.type === ParsedNodeType.HEADING) {
-			return this.doTranslate(node, node.$id, node.headline, () => {
+			return this.doTranslate(node, node.$pp, node.headline, () => {
 				return this.buildChildrenOnSubHeadings({widgets: node.children});
 			});
 		} else if (node.type === ParsedNodeType.LIST_ITEM) {

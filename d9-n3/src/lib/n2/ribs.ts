@@ -59,13 +59,12 @@ abstract class AbstractRibsTranslator<T extends N2WidgetType.RIBS | N2WidgetType
 		return false;
 	}
 
-	public getAttributeNamesMapping(): Undefinable<Record<CustomAttributeName, WidgetPropertyName>> {
-		return this.buildDefaultAttributeNamesMapping({[`${this.getSupportedType()}.elementTitle`]: 'caption'});
+	public getToWidgetAttributeNames(): Array<string> {
+		return [...super.getToWidgetAttributeNames(), 'caption'];
 	}
 
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	public getAttributeValueBuilders(): Array<AttributeValueBuild<any>> {
-		return [N2RibsCaptionBuild];
+	public getAttributeNamesMapping(): Undefinable<Record<CustomAttributeName, WidgetPropertyName>> {
+		return this.buildDefaultAttributeNamesMapping({[`${this.getSupportedType()}.elementTitle`]: 'caption'});
 	}
 }
 

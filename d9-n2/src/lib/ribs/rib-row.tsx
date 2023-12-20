@@ -21,7 +21,7 @@ export const RibRow = (props: Omit<RibsProps, '$array'> & { $array: EnhancedProp
 		<ARibRowHeader>
 			<ARibRowIndex># {elementIndex + 1}</ARibRowIndex>
 			<ARibRowHeaderContent>
-				<LabelLike label={caption} $wrapped={$wrapped} $validationScopes={props} wrapByCaption={true}/>
+				<LabelLike label={caption} $wrapped={$wrapped} $validationScopes={props}/>
 			</ARibRowHeaderContent>
 			<RibRowOperators expanded={expanded} expand={expand} collapse={collapse}
 			                 removable={removable} removeElement={removeElement}/>

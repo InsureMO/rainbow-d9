@@ -86,6 +86,7 @@ export interface ParsedHeadingIdentified extends ParsedHeading, ParsedWidgetNode
 	type: ParsedNodeType.HEADING;
 	kind: ParsedHeadingKind.IDENTIFIED;
 	$wt: WidgetType;
+	$pp?: PropertyPath;
 	$id: WidgetId;
 	$key: NodeUniqueKey;
 	headline?: string;

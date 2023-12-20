@@ -70,17 +70,23 @@ export class HeadingParser extends AbstractSemanticNodeWidgetParser<'heading'> {
 		}
 	}
 
-	protected matchWidget(title: string): Pick<ParsedHeadingIdentified, '$wt' | 'headline' | '$id' | '$key'> {
+	protected matchWidget(title: string): Pick<ParsedHeadingIdentified, '$wt' | 'headline' | '$pp' | '$id' | '$key'> {
 		const segments = title.split(this.getWidgetTitleSplitter());
 		const $key = NUtils.generateReactKey();
 		if (segments.length === 1) {
 			const $wt = segments[0].trim();
 			return {$wt, headline: '', $id: $key, $key};
-		} else if (segments.length >= 3) {
-			const $id = segments[segments.length - 1].trim();
+		} else if (segments.length === 3) {
+			const $pp = segments[segments.length - 1].trim();
 			const $wt = segments[0].trim();
 			const headline = segments.slice(1, segments.length - 1).join(this.getWidgetTitleSplitter()).trim();
-			return {$wt, headline: headline.trim(), $id, $key};
+			return {$wt, headline: headline.trim(), $pp, $id: $key, $key};
+		} else if (segments.length > 3) {
+			const $id = segments[segments.length - 1].trim();
+			const $pp = segments[segments.length - 2].trim();
+			const $wt = segments[0].trim();
+			const headline = segments.slice(1, segments.length - 2).join(this.getWidgetTitleSplitter()).trim();
+			return {$wt, headline: headline.trim(), $pp, $id, $key};
 		} else {
 			const $wt = segments[0].trim();
 			const headline = segments[1].trim();

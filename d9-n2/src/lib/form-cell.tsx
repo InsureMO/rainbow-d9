@@ -92,7 +92,8 @@ export const FormCell = forwardRef((props: FormCellProps, ref: ForwardedRef<HTML
 	                  data-visible={$visible} data-hold-position-on-invisible={holdPositionWhenInvisible}
 	                  id={fcId}
 	                  ref={ref}>
-		<LabelLike label={label} $wrapped={$wrapped} $validationScopes={props} wrapByCaption={true}/>
+		<LabelLike label={label} $wrapped={$wrapped} $validationScopes={props} wrapByCaption={true}
+		           data-r="d9-fc-caption"/>
 		{children}
 		<FormCellInvalidMessage>
 			{validation?.valid === false ? validation.failReason : null}

@@ -10,22 +10,23 @@ export interface LabelLikeProps {
 }
 
 export const LabelLike = (props: LabelLikeProps) => {
-	const {label, $wrapped, $validationScopes, wrapByCaption = false} = props;
+	const {
+		label,
+		$wrapped, $validationScopes,
+		wrapByCaption = false, ...rest
+	} = props;
 	if (label == null || React.isValidElement(label) || typeof label === 'string' || VUtils.isBlank((label as NodeDef).$wt)) {
 		if (wrapByCaption) {
-			return <Caption label={label as ReactNode} $wrapped={$wrapped} data-r="d9-fc-caption"/>;
+			return <Caption label={label as ReactNode} $wrapped={$wrapped} {...rest}/>;
 		} else {
 			return <>{label}</>;
 		}
 	} else {
 		const caption = label as NodeDef;
 		// eslint-disable-next-line @typescript-eslint/no-unused-vars
-		const {$key: keyOfChild, ...rest} = caption;
+		const {$key: keyOfChild, ...more} = caption;
 		NUtils.getDefKey(caption);
 		NUtils.inheritValidationScopes($validationScopes, caption);
-		if (wrapByCaption) {
-			rest['data-r'] = 'd9-fc-caption';
-		}
-		return <Wrapper $root={$wrapped.$root} $model={$wrapped.$model} $p2r={$wrapped.$p2r} {...rest} />;
+		return <Wrapper $root={$wrapped.$root} $model={$wrapped.$model} $p2r={$wrapped.$p2r} {...rest} {...more} />;
 	}
 };
