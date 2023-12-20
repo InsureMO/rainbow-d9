@@ -79,7 +79,7 @@ export const N2CaptionClickBuild: AttributeValueBuild<CaptionClick> = {
 export const N2CaptionReactionDetective: MonitorHandlerDetective = (options: MonitorHandlerDetectOptions): Undefinable<ReactionMonitor> => {
 	const {$pp, attributes} = options;
 	const reaction = (attributes[MonitorNodeAttributes.REACTION] ?? {}) as Partial<ReactionMonitor>;
-	const watches = (reaction.$watch ?? [$pp]).filter(path => VUtils.isNotBlank(path));
+	const watches = [...(reaction.$watch ?? []), $pp].filter(path => VUtils.isNotBlank(path));
 	if (attributes.labelOnValue !== true || watches.length === 0) {
 		return (void 0);
 	}

@@ -176,7 +176,8 @@ export abstract class AbstractTranslator<N extends Decipherable> {
 
 		// now all attributes are parsed, to detect if some of them need to be combined to one
 		// and note pass-in $pp might be null since property path might be declared in attribute list rather than in heading
-		return this.combineMonitors({$wt, $pp: $pp || attributes[D9PropertyNames.PROPERTY], attributes});
+		// when property is declared in attributes, replace given one
+		return this.combineMonitors({$wt, $pp: attributes[D9PropertyNames.PROPERTY] || $pp, attributes});
 	}
 
 	protected ignoreFailureParsing(parsed: ParsedNodeDef): Nullable<ParsedNodeDef> {

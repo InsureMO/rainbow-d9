@@ -1,54 +1,7 @@
-import {MonitorNodeAttributes, NodeDef, ReactionMonitor, VUtils} from '@rainbow-d9/n1';
-import {CaptionDef} from '@rainbow-d9/n2';
-import {ParsedNodeType} from '../node-types';
-import {ParsedList, ParsedListItemAttributePair, SemanticUtils} from '../semantic';
+import {NodeDef} from '@rainbow-d9/n1';
 import {Undefinable} from '../utility-types';
-import {
-	AttributeNameUtils,
-	AttributeUtils,
-	AttributeValueBuild,
-	CustomAttributeName,
-	SpecificArrayWidgetTranslator,
-	WidgetPropertyName
-} from '../widget';
-import {N2CaptionReactionDetective, N2CaptionValueToLabelBuild} from './caption';
+import {CustomAttributeName, SpecificArrayWidgetTranslator, WidgetPropertyName} from '../widget';
 import {N2WidgetType} from './types';
-
-const N2RibsCaptionBuild: AttributeValueBuild<CaptionDef> = {
-	accept: (key: WidgetPropertyName) => key === 'caption',
-	build: (value: Undefinable<string>, list: ParsedListItemAttributePair): Undefinable<CaptionDef> => {
-		const def: CaptionDef = {$wt: N2WidgetType.CAPTION, labelOnValue: true};
-		if (VUtils.isNotBlank(value)) {
-			// treat it as property path
-			def.$pp = value.trim();
-		}
-		if (list.children != null && list.children.length > 0 && list.children[0].type === ParsedNodeType.LIST) {
-			((list.children[0] as ParsedList).children ?? [])
-				.filter(SemanticUtils.isAttributePairListItem)
-				.forEach(pair => {
-					const key = AttributeNameUtils.mapAttributeName(N2WidgetType.CAPTION, pair.attributeName);
-					if (N2CaptionValueToLabelBuild.accept(key)) {
-						const built = N2CaptionValueToLabelBuild.build(pair.attributeValue, pair);
-						if (built != null) {
-							// function built, assign to def
-							def.valueToLabel = built.valueToLabel;
-						}
-					} else if (AttributeUtils.ANY_ATTRIBUTE_BUILDER.accept(key)) {
-						def[key] = AttributeUtils.ANY_ATTRIBUTE_BUILDER.build(pair.attributeValue, pair);
-					}
-				});
-		}
-		if (VUtils.isBlank(def.$pp)) {
-			return (void 0);
-		}
-		const reaction = N2CaptionReactionDetective({$wt: N2WidgetType.CAPTION, $pp: def.$pp, attributes: def});
-		if (reaction == null) {
-			return (void 0);
-		}
-		def[MonitorNodeAttributes.REACTION] = reaction as ReactionMonitor;
-		return def;
-	}
-};
 
 abstract class AbstractRibsTranslator<T extends N2WidgetType.RIBS | N2WidgetType.READONLY_RIBS> extends SpecificArrayWidgetTranslator<T> {
 	public beautifyProperties<Def extends NodeDef>(def: Partial<Def>): Def {
