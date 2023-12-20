@@ -711,7 +711,7 @@ Strictly adhere to the heading parsing rules without any additional attribute de
 
 | Attribute Name | Type    | Description                                                                                               |
 |----------------|---------|-----------------------------------------------------------------------------------------------------------|
-| label          | text    | `- Caption::Customer Name`<br/>`- label: Customer Name`                                                   |
+| label, text    | text    | `- Caption::Customer Name`<br/>`- label: Customer Name`                                                   |
 | labelOnValue   | boolean | `- labelOnValue: true`                                                                                    |
 | valueToLabel   | various |                                                                                                           |
 | click          | text    | `- click: alert message`<br/>`- click: alert:message`<br/>`- click: dialog key`<br/>`- click: dialog:key` |
@@ -720,7 +720,10 @@ Strictly adhere to the heading parsing rules without any additional attribute de
 
 - For `Caption`, the model value must be explicitly specified; otherwise, only the given `label` will be used,
 	- While defining `valueToLabel`, the parser will automatically set `labelOnValue` to `true`,
-- For `Label`, defaults to using the model value and ignores the `label` attribute.
+- For `Label`, defaults to using the model value and ignores the `label` attribute,
+- For both, while defining `text`, will ignore the `label` attribute.
+
+> `label` and `text` attribute follows the `label` default parsing behavior.
 
 ### Syntax of `valueToLabel`:
 

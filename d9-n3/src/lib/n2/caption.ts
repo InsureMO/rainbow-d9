@@ -92,10 +92,14 @@ export class N2CaptionTranslator extends SpecificWidgetTranslator<N2WidgetType.C
 	}
 
 	public shouldTranslateLabelAttribute(): boolean {
-		return false;
+		return true;
 	}
 
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	public getToWidgetAttributeNames(): Array<string> {
+		return [...super.getToWidgetAttributeNames(), 'text'];
+	}
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	public getAttributeValueBuilders(): Array<AttributeValueBuild<any>> {
 		return [N2CaptionValueToLabelBuild, N2CaptionClickBuild, DecorateLeadsBuild, DecorateTailsBuild];
 	}

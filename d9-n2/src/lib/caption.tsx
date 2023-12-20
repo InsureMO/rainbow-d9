@@ -16,6 +16,7 @@ import {getDefaultCalendarDateFormat, getDefaultCalendarDatetimeFormat} from './
 import {CssVars, DOM_ID_WIDGET, DOM_KEY_WIDGET} from './constants';
 import {DecorateWrapperDef, transformDecorators} from './decorate-assist';
 import {GlobalHandlers, useGlobalHandlers} from './global';
+import {LabelLike} from './label-like';
 import {OmitHTMLProps2, OmitNodeDef} from './types';
 
 export interface CaptionValueToLabelFormats {
@@ -43,6 +44,8 @@ export type CaptionDef = NodeDef & DecorateWrapperDef & OmitHTMLProps2<HTMLSpanE
 	labelOnValue?: boolean;
 	/** use label when it is given */
 	label?: ReactNode;
+	/** exactly same as label, but with higher priority */
+	text?: ReactNode;
 	/** use model value when it is true */
 	valueToLabel?: CaptionValueToLabel;
 	click?: CaptionClick
@@ -161,10 +164,12 @@ const TailDecorator = styled(Decorator).attrs({
 export const Caption = forwardRef((props: CaptionProps, ref: ForwardedRef<HTMLSpanElement>) => {
 	const {
 		leads, tails,
-		labelOnValue, label, valueToLabel, click,
-		$pp, $wrapped: {$root, $model, $p2r, $avs: {$disabled, $visible}, $vfs},
+		labelOnValue, valueToLabel, click,
+		$pp, $wrapped,
 		...rest
 	} = props;
+	const {$root, $model, $p2r, $avs: {$disabled, $visible}, $vfs} = $wrapped;
+	const label = props.text ?? props.label;
 
 	const globalHandlers = useGlobalHandlers();
 	const onClicked = click != null
@@ -191,7 +196,7 @@ export const Caption = forwardRef((props: CaptionProps, ref: ForwardedRef<HTMLSp
 			// @ts-ignore
 			value = valueToLabel(MUtils.getValue($model, $pp), formatter) ?? '';
 		} else if (label != null) {
-			value = label;
+			value = <LabelLike $wrapped={$wrapped} $validationScopes={props} label={label}/>;
 		} else {
 			// empty caption
 			value = '';
