@@ -50,6 +50,7 @@ import {
 
 class DepthFirstVisitor {
 	private readonly headings: Array<PreparsedHeading>;
+
 	constructor(private readonly tree: PreparsedTree) {
 		this.tree = tree;
 		this.headings = [];

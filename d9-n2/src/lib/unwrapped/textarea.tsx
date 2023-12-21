@@ -22,7 +22,7 @@ const UnwrappedTextarea = forwardRef((props: UnwrappedTextareaProps, ref: Forwar
 	return <Textarea {...rest} $wrapped={{$onValueChange, $avs, $root, $model: $root, $p2r: '.'}}
 	                 $pp="value"
 	                 id={rest.id ?? VUtils.generateUniqueId()}
-	                 ref={ref} />;
+	                 ref={ref}/>;
 });
 
 export {UnwrappedTextarea, UnwrappedTextareaProps};

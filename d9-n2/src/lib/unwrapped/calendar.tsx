@@ -21,19 +21,19 @@ const UnwrappedCalendar = (props: UnwrappedCalendarProps) => {
 
 	return <Calendar {...rest} $wrapped={{$onValueChange, $avs, $root, $model: $root, $p2r: '.'}}
 	                 $pp="value"
-	                 id={rest.id ?? VUtils.generateUniqueId()} />;
+	                 id={rest.id ?? VUtils.generateUniqueId()}/>;
 };
 
 type UnwrappedDateCalendarProps = Omit<UnwrappedCalendarProps, 'time' | 'timeFormat'>;
 
 const UnwrappedDateCalendar = (props: UnwrappedDateCalendarProps) => {
-	return <UnwrappedCalendar {...props} time={false} />;
+	return <UnwrappedCalendar {...props} time={false}/>;
 };
 
 type UnwrappedDateTimeCalendarProps = Omit<UnwrappedCalendarProps, 'time'>;
 
 const UnwrappedDateTimeCalendar = (props: UnwrappedDateTimeCalendarProps) => {
-	return <UnwrappedCalendar {...props} time={true} />;
+	return <UnwrappedCalendar {...props} time={true}/>;
 };
 
 export {

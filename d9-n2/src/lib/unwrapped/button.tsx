@@ -32,7 +32,7 @@ const UnwrappedButton = forwardRef((props: UnwrappedButtonProps, ref: ForwardedR
 	               text={children}
 	               click={click}
 	               id={rest.id ?? VUtils.generateUniqueId()}
-	               ref={ref} />;
+	               ref={ref}/>;
 });
 
 export {UnwrappedButton, UnwrappedButtonProps};

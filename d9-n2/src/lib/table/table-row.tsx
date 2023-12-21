@@ -80,7 +80,7 @@ export const TableRow = (props: Omit<TableProps, '$array'> & { $array: EnhancedP
 	                      onClick={onRowClicked}
 	                      ref={ref}>
 		{(hideClassicCellsOnExpandable && expanded) ? null : classicCells}
-		{(hideClassicCellsOnExpandable && expanded) ? null : <ATableBodyRowTailGrabber />}
+		{(hideClassicCellsOnExpandable && expanded) ? null : <ATableBodyRowTailGrabber/>}
 		{expandable
 			? <ATableBodyCellExpandArea $options={{columnCount: headers.length, expanded}}>
 				{expandCells}

@@ -11,10 +11,10 @@ export const Calendar = (props: CalendarProps) => {
 };
 
 export const DateCalendar = (props: Omit<CalendarProps, 'time' | 'timeFormat'>) => {
-	return <Calendar {...props} time={false} />;
+	return <Calendar {...props} time={false}/>;
 };
 export const DateTimeCalendar = (props: Omit<CalendarProps, 'time' | 'fixedTimeAt'>) => {
-	return <Calendar {...props} time={true} />;
+	return <Calendar {...props} time={true}/>;
 };
 
 export {CalendarProps, CalendarDef, CalendarFixedTimeAt};

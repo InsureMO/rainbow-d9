@@ -9,6 +9,7 @@ export class ValidationScopesAttributeBuild implements AttributeValueBuild<Array
 	public accept(key: WidgetPropertyName) {
 		return D9PropertyNames.VALIDATION_SCOPES === key;
 	}
+
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	public build(value: Undefinable<string>, _list: ParsedListItemAttributePair): Nullable<Array<NodeValidationScope>> {
 		value = (value || '').trim();

@@ -6,5 +6,6 @@ export type WidgetPropertyName = string;
 
 export interface AttributeValueBuild<Built> {
 	accept(key: WidgetPropertyName): boolean;
+
 	build(value: Undefinable<string>, list: ParsedListItemAttributePair): Nullable<Built>;
 }

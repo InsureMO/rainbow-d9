@@ -8,6 +8,7 @@ export class AnyAttributeBuild implements AttributeValueBuild<string | number | 
 	public accept(_key: WidgetPropertyName) {
 		return true;
 	}
+
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	public build(value: Undefinable<string>, _list: ParsedListItemAttributePair): Nullable<string | number | boolean> {
 		value = (value || '').trim();

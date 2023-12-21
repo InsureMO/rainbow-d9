@@ -18,18 +18,19 @@ export const RemoteRequestContainer = styled.div.attrs<{ visible: boolean }>(({v
 		}
 	};
 })<{ visible: boolean }>`
-	display        : flex;
-	position       : fixed;
-	right          : 16px;
-	bottom         : 16px;
-	user-select    : none;
-	pointer-events : none;
-	z-index        : ${CssVars.REMOTE_REQUEST_Z_INDEX};
-	transition     : opacity ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION};
-	> svg {
-		height    : 40px;
-		width     : 40px;
-		animation : 2s linear infinite ${SpinnerKeyFrames};
-		fill      : ${CssVars.REMOTE_REQUEST_COLOR};
-	}
+    display: flex;
+    position: fixed;
+    right: 16px;
+    bottom: 16px;
+    user-select: none;
+    pointer-events: none;
+    z-index: ${CssVars.REMOTE_REQUEST_Z_INDEX};
+    transition: opacity ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION};
+
+    > svg {
+        height: 40px;
+        width: 40px;
+        animation: 2s linear infinite ${SpinnerKeyFrames};
+        fill: ${CssVars.REMOTE_REQUEST_COLOR};
+    }
 `;

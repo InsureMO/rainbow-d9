@@ -79,6 +79,6 @@ export const RemoteRequest = (props: {
 	}, [on, off, fire, forceUpdate, clearAccount, doOn200, doOn401, doOn403, count]);
 
 	return <RemoteRequestContainer visible={count.value > 0}>
-		<Spinner />
+		<Spinner/>
 	</RemoteRequestContainer>;
 };

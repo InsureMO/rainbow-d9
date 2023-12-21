@@ -29,39 +29,44 @@ const ATextarea = styled.textarea.attrs<{ autoSelect: boolean }>(
 			}
 		};
 	})<{ autoSelect: boolean }>`
-	display          : block;
-	position         : relative;
-	font-family      : ${CssVars.FONT_FAMILY};
-	font-size        : ${CssVars.FONT_SIZE};
-	color            : ${CssVars.FONT_COLOR};
-	height           : calc(${CssVars.INPUT_HEIGHT} * 5);
-	padding          : calc((${CssVars.INPUT_HEIGHT} - ${CssVars.LINE_HEIGHT}) / 2 - ${CssVars.BORDER_WIDTH}) ${CssVars.INPUT_INDENT};
-	background-color : transparent;
-	border           : ${CssVars.BORDER};
-	border-radius    : ${CssVars.BORDER_RADIUS};
-	outline          : none;
-	overflow         : auto;
-	line-height      : ${CssVars.LINE_HEIGHT};
-	resize           : none;
-	transition       : all ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION};
-	&[data-visible=false] {
-		display : none;
-	}
-	&[data-disabled=true] {
-		background-color : ${CssVars.DISABLE_COLOR};
-		&:hover, &:focus {
-			border-color : ${CssVars.BORDER_COLOR};
-			box-shadow   : none;
-		}
-	}
-	&:hover {
-		border-color : ${CssVars.PRIMARY_COLOR};
-		box-shadow   : ${CssVars.PRIMARY_HOVER_SHADOW};
-	}
-	&:focus {
-		border-color : ${CssVars.PRIMARY_COLOR};
-		box-shadow   : ${CssVars.PRIMARY_SHADOW};
-	}
+    display: block;
+    position: relative;
+    font-family: ${CssVars.FONT_FAMILY};
+    font-size: ${CssVars.FONT_SIZE};
+    color: ${CssVars.FONT_COLOR};
+    height: calc(${CssVars.INPUT_HEIGHT} * 5);
+    padding: calc((${CssVars.INPUT_HEIGHT} - ${CssVars.LINE_HEIGHT}) / 2 - ${CssVars.BORDER_WIDTH}) ${CssVars.INPUT_INDENT};
+    background-color: transparent;
+    border: ${CssVars.BORDER};
+    border-radius: ${CssVars.BORDER_RADIUS};
+    outline: none;
+    overflow: auto;
+    line-height: ${CssVars.LINE_HEIGHT};
+    resize: none;
+    transition: all ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION};
+
+    &[data-visible=false] {
+        display: none;
+    }
+
+    &[data-disabled=true] {
+        background-color: ${CssVars.DISABLE_COLOR};
+
+        &:hover, &:focus {
+            border-color: ${CssVars.BORDER_COLOR};
+            box-shadow: none;
+        }
+    }
+
+    &:hover {
+        border-color: ${CssVars.PRIMARY_COLOR};
+        box-shadow: ${CssVars.PRIMARY_HOVER_SHADOW};
+    }
+
+    &:focus {
+        border-color: ${CssVars.PRIMARY_COLOR};
+        box-shadow: ${CssVars.PRIMARY_SHADOW};
+    }
 `;
 
 export const Textarea = forwardRef((props: TextareaProps, ref: ForwardedRef<HTMLTextAreaElement>) => {
@@ -80,7 +85,7 @@ export const Textarea = forwardRef((props: TextareaProps, ref: ForwardedRef<HTML
 		// eslint-disable-next-line @typescript-eslint/no-explicit-any
 		              value={(MUtils.getValue($model, $pp) as any) ?? ''} onChange={onChange}
 		              id={PPUtils.asId(PPUtils.absolute($p2r, $pp), props.id)}
-		              ref={ref} />;
+		              ref={ref}/>;
 });
 
 registerWidget({key: 'Textarea', JSX: Textarea, container: false, array: false});

@@ -15,7 +15,7 @@ export const TableBottomBar = (props: Omit<TableProps, '$array'> & { $array: Enh
 
 		return <ATableBottomBar>
 			<Button $wrapped={$wrapped} ink={ButtonInk.PRIMARY} text={addLabel ?? I18NVars.TABLE.CREATE_ITEM}
-			        click={onAddClicked} />
+			        click={onAddClicked}/>
 		</ATableBottomBar>;
 	}
 };

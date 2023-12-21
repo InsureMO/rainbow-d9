@@ -22,7 +22,7 @@ const UnwrappedInput = forwardRef((props: UnwrappedInputProps, ref: ForwardedRef
 	return <Input {...rest} $wrapped={{$onValueChange, $avs, $root, $model: $root, $p2r: '.'}}
 	              $pp="value"
 	              id={rest.id ?? VUtils.generateUniqueId()}
-	              ref={ref} />;
+	              ref={ref}/>;
 });
 
 type UnwrappedNumberInputProps =
@@ -44,7 +44,7 @@ const UnwrappedNumberInput = forwardRef((props: UnwrappedNumberInputProps, ref: 
 	return <NumberInput {...rest} $wrapped={{$onValueChange, $avs, $root, $model: $root, $p2r: '.'}}
 	                    $pp="value"
 	                    id={rest.id ?? VUtils.generateUniqueId()}
-	                    ref={ref} />;
+	                    ref={ref}/>;
 });
 
 export {UnwrappedInput, UnwrappedInputProps, UnwrappedNumberInput, UnwrappedNumberInputProps};

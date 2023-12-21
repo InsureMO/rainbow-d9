@@ -30,40 +30,45 @@ const AnInput = styled.input.attrs<{ autoSelect: boolean }>(
 			}
 		};
 	})<{ autoSelect: boolean }>`
-	display          : block;
-	position         : relative;
-	font-family      : ${CssVars.FONT_FAMILY};
-	font-size        : ${CssVars.FONT_SIZE};
-	color            : ${CssVars.FONT_COLOR};
-	height           : ${CssVars.INPUT_HEIGHT};
-	padding          : 0 ${CssVars.INPUT_INDENT};
-	background-color : transparent;
-	border           : ${CssVars.BORDER};
-	border-radius    : ${CssVars.BORDER_RADIUS};
-	outline          : none;
-	white-space      : nowrap;
-	overflow         : hidden;
-	text-overflow    : ellipsis;
-	transition       : all ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION};
-	&[data-visible=false] {
-		display : none;
-	}
-	&[data-disabled=true] {
-		text-overflow    : unset;
-		background-color : ${CssVars.DISABLE_COLOR};
-		&:hover, &:focus {
-			border-color : ${CssVars.BORDER_COLOR};
-			box-shadow   : none;
-		}
-	}
-	&:hover {
-		border-color : ${CssVars.PRIMARY_COLOR};
-		box-shadow   : ${CssVars.PRIMARY_HOVER_SHADOW};
-	}
-	&:focus {
-		border-color : ${CssVars.PRIMARY_COLOR};
-		box-shadow   : ${CssVars.PRIMARY_SHADOW};
-	}
+    display: block;
+    position: relative;
+    font-family: ${CssVars.FONT_FAMILY};
+    font-size: ${CssVars.FONT_SIZE};
+    color: ${CssVars.FONT_COLOR};
+    height: ${CssVars.INPUT_HEIGHT};
+    padding: 0 ${CssVars.INPUT_INDENT};
+    background-color: transparent;
+    border: ${CssVars.BORDER};
+    border-radius: ${CssVars.BORDER_RADIUS};
+    outline: none;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    transition: all ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION};
+
+    &[data-visible=false] {
+        display: none;
+    }
+
+    &[data-disabled=true] {
+        text-overflow: unset;
+        background-color: ${CssVars.DISABLE_COLOR};
+
+        &:hover, &:focus {
+            border-color: ${CssVars.BORDER_COLOR};
+            box-shadow: none;
+        }
+    }
+
+    &:hover {
+        border-color: ${CssVars.PRIMARY_COLOR};
+        box-shadow: ${CssVars.PRIMARY_HOVER_SHADOW};
+    }
+
+    &:focus {
+        border-color: ${CssVars.PRIMARY_COLOR};
+        box-shadow: ${CssVars.PRIMARY_SHADOW};
+    }
 `;
 
 export const Input = forwardRef((props: InputProps, ref: ForwardedRef<HTMLInputElement>) => {
@@ -106,7 +111,7 @@ export const Input = forwardRef((props: InputProps, ref: ForwardedRef<HTMLInputE
 		// eslint-disable-next-line @typescript-eslint/no-explicit-any
 		            value={(valueRef.current.value as any) ?? ''} onChange={onChange}
 		            id={PPUtils.asId(PPUtils.absolute($p2r, $pp), props.id)}
-		            ref={ref} />;
+		            ref={ref}/>;
 });
 
 export type NumberInputDef = Omit<InputDef, 'valueToNumber'>;

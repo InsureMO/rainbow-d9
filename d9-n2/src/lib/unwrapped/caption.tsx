@@ -24,7 +24,7 @@ const UnwrappedCaption = forwardRef((props: UnwrappedCaptionProps, ref: Forwarde
 	                $wrapped={{$onValueChange, $avs, $root, $model: $root, $p2r: '.'}}
 	                label={children}
 	                id={rest.id ?? VUtils.generateUniqueId()}
-	                ref={ref} />;
+	                ref={ref}/>;
 });
 
 type UnwrappedLabelProps =
@@ -48,7 +48,7 @@ const UnwrappedLabel = forwardRef((props: UnwrappedLabelProps, ref: ForwardedRef
 	              $wrapped={{$onValueChange, $avs, $root, $model: $root, $p2r: '.'}}
 	              label={children}
 	              id={rest.id ?? VUtils.generateUniqueId()}
-	              ref={ref} />;
+	              ref={ref}/>;
 });
 
 export {UnwrappedCaption, UnwrappedCaptionProps, UnwrappedLabel, UnwrappedLabelProps};

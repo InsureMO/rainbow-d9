@@ -14,35 +14,49 @@ export enum GlobalEventTypes {
 export interface GlobalEventBus {
 	// eslint-disable-next-line  @typescript-eslint/no-explicit-any
 	fire<R>(type: GlobalEventTypes.INVOKE_REMOTE_REQUEST, request: () => Promise<R>, success?: (data: R) => void, failure?: (error?: any) => void, disableAlert?: boolean): this;
+
 	// eslint-disable-next-line  @typescript-eslint/no-explicit-any
 	on(type: GlobalEventTypes.INVOKE_REMOTE_REQUEST, listener: (request: () => Promise<any>, success?: (data: any) => void, failure?: (error?: any) => void, disableAlert?: boolean) => void): this;
+
 	// eslint-disable-next-line  @typescript-eslint/no-explicit-any
 	off(type: GlobalEventTypes.INVOKE_REMOTE_REQUEST, listener: (request: () => Promise<any>, success?: (data: any) => void, failure?: (error?: any) => void, disableAlert?: boolean) => void): this;
 
 	fire(type: GlobalEventTypes.SHOW_ALERT, content?: ReactNode, onHide?: () => void): this;
+
 	on(type: GlobalEventTypes.SHOW_ALERT, listener: (content?: ReactNode, onHide?: () => void) => void): this;
+
 	off(type: GlobalEventTypes.SHOW_ALERT, listener: (content?: ReactNode, onHide?: () => void) => void): this;
 
 	fire(type: GlobalEventTypes.HIDE_ALERT): this;
+
 	on(type: GlobalEventTypes.HIDE_ALERT, listener: () => void): this;
+
 	off(type: GlobalEventTypes.HIDE_ALERT, listener: () => void): this;
 
 	fire(type: GlobalEventTypes.SHOW_DIALOG, content?: ReactNode, wrapperStyle?: CSSProperties): this;
+
 	on(type: GlobalEventTypes.SHOW_DIALOG, listener: (content?: ReactNode, wrapperStyle?: CSSProperties) => void): this;
+
 	off(type: GlobalEventTypes.SHOW_DIALOG, listener: (content?: ReactNode, wrapperStyle?: CSSProperties) => void): this;
 
 	fire(type: GlobalEventTypes.HIDE_DIALOG): this;
+
 	on(type: GlobalEventTypes.HIDE_DIALOG, listener: () => void): this;
+
 	off(type: GlobalEventTypes.HIDE_DIALOG, listener: () => void): this;
 
 	fire(type: GlobalEventTypes.SHOW_YES_NO_DIALOG, question: ReactNode, onYes: () => void, onNo: () => void): this;
+
 	on(type: GlobalEventTypes.SHOW_YES_NO_DIALOG, listener: (question: ReactNode, onYes: () => void, onNo: () => void) => void): this;
+
 	off(type: GlobalEventTypes.SHOW_YES_NO_DIALOG, listener: (question: ReactNode, onYes: () => void, onNo: () => void) => void): this;
 
 	fire<R extends BaseModel, M extends PropValue>(
 		type: GlobalEventTypes.CUSTOM_EVENT, key: string, models?: { root: R; model: M; }): this;
+
 	on<R extends BaseModel, M extends PropValue>(
 		type: GlobalEventTypes.CUSTOM_EVENT, listener: (key: string, models?: { root: R; model: M; }) => void): this;
+
 	off<R extends BaseModel, M extends PropValue>(
 		type: GlobalEventTypes.CUSTOM_EVENT, listener: (key: string, models?: { root: R; model: M; }) => void): this;
 }

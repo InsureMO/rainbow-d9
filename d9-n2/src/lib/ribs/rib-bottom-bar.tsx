@@ -15,7 +15,7 @@ export const RibBottomBar = (props: Omit<RibsProps, '$array'> & { $array: Enhanc
 
 		return <ARibBottomBar>
 			<Button $wrapped={$wrapped} ink={ButtonInk.PRIMARY} text={addLabel ?? I18NVars.RIBS.CREATE_ITEM}
-			        click={onAddClicked} />
+			        click={onAddClicked}/>
 		</ARibBottomBar>;
 	}
 };
