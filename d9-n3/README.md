@@ -878,7 +878,7 @@ Some examples:
 	- length: 10..256
 ```
 
-## Checkbox
+## Checkbox, Radio
 
 - Default Wrapped by Form Cell: `true`,
 - Default Grid Column Span: `3`,
@@ -895,6 +895,8 @@ However, if the actual model value is not of boolean type, such as `1` and `0`, 
 specified.
 
 > It is important to note that in JavaScript, the value `1` is considered as `true`.
+
+> Radio is a unidirectional form of Checkbox, which means that once selected, it cannot be unselected.
 
 Some examples:
 
@@ -949,6 +951,22 @@ Some examples:
 
 > `codes.yesNoOptions` depends on external definitions, it must follow signature `DropdownDef['options']`.
 
+## Checkboxes (Checks), Radios
+
+In fact, Checkboxes and Radios are just alternative representations of `MultiDropdown` and `Dropdown`, respectively. Therefore, all
+the parameters are the same.
+
+> When there are too many options (usually limited to 5 or 6), it is not recommended to use a combination of checkboxes and radios, but
+> rather to revert to a `MultiDropdown` or `Dropdown` form.
+
+
+Due to the differences in presentation, Checkboxes and Radios have additional rendering parameters:
+
+| Attribute Name | Type    | Description                                                                                                 |
+|----------------|---------|-------------------------------------------------------------------------------------------------------------|
+| columns        | number  | Number of columns in option arrangement.                                                                    |
+| compact        | boolean | When there are multiple options in a row, whether to display them continuously or in a table column format. |
+
 ## Calendar, DateTime, Date
 
 - Default Wrapped by Form Cell: `true`,
@@ -967,6 +985,9 @@ Some examples:
 | fixedTimeAt    | json    | For `Calendar`, works when time is false; and for `Date`.                                         | 
 | initTimeAt     | json    | For `Calendar`, typically it is not need for date only.                                           | 
 
+> Automatically detect the time format to determine whether to display minutes and seconds. When seconds are present in the time format,
+> minutes will always be displayed.
+
 ### Formats
 
 All formats have default values, see below for more details,
@@ -975,6 +996,16 @@ All formats have default values, see below for more details,
 - `getDefaultCalendarDateFormat`: default of date format,
 - `getDefaultCalendarTimeFormat`: default of time format,
 - `getDefaultCalendarDatetimeFormat`: default of store format.
+
+Introduce more `Dayjs` plugins to support additional date formats. For example, to support the Buddhist calendar:
+
+```typescript
+// in your entrypoint, make sure it runs before rendering
+import dayjs from 'dayjs';
+import BuddhistEra from 'dayjs/plugin/buddhistEra';
+
+dayjs.extend(BuddhistEra);
+```
 
 ### Auto Confirm
 

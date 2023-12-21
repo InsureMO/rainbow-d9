@@ -40,7 +40,8 @@ following widgets:
 - Textarea
 - Dropdown
 - Multiple Values Dropdown (MultiDropdown)
-- Checkbox
+- Checkbox, Checkboxes (Checks)
+- Radio, Radios
 - Calendar, DateCalendar, DateTimeCalendar
 - Button, ButtonBar
 - Caption, Label
