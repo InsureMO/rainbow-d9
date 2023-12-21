@@ -3,7 +3,7 @@ export * from './lib/constants';
 export * as Icons from './lib/icons';
 export * from './lib/decorate-assist';
 export * from './lib/dropdown-assist';
-export * from './lib/dropdown-options-assist';
+export * from './lib/option-items-assist';
 export * from './lib/label-like';
 
 export * from './lib/button';

@@ -9,25 +9,30 @@ import {
 	DropdownPopupState,
 	DropdownPopupStateActive,
 	DropdownStick,
-	isDropdownPopupActive
+	isDropdownPopupActive,
+	useFilterableDropdownOptions
 } from './dropdown-assist';
 import {
-	DROPDOWN_NO_AVAILABLE,
-	DROPDOWN_NO_MATCHED,
-	DropdownOption,
-	DropdownOptionsDef,
-	OnDropdownValueChange,
-	useFilterableDropdownOptions
-} from './dropdown-options-assist';
+	NO_AVAILABLE_OPTION_ITEM,
+	NO_MATCHED_OPTION_ITEM,
+	OnOptionValueChange,
+	OptionItem,
+	OptionItems,
+	OptionItemsDef,
+	OptionItemSort
+} from './option-items-assist';
 import {OmitHTMLProps, OmitNodeDef} from './types';
 
 export type DropdownOptionValue = string | number | boolean;
+export type DropdownOption = OptionItem<DropdownOptionValue>;
+export type DropdownOptions = OptionItems<DropdownOptionValue>;
+export {OptionItemSort as DropdownOptionSort};
 
 /** Input configuration definition */
 export type DropdownDef =
 	ValueChangeableNodeDef
 	& OmitHTMLProps<HTMLDivElement>
-	& DropdownOptionsDef<DropdownOptionValue>
+	& OptionItemsDef<DropdownOptionValue>
 	& {
 	please?: ReactNode;
 	clearable?: boolean;
@@ -35,7 +40,7 @@ export type DropdownDef =
 /** widget definition, with html attributes */
 export type DropdownProps = OmitNodeDef<DropdownDef> & Omit<WidgetProps, '$wrapped'> & {
 	$wrapped: Omit<WidgetProps['$wrapped'], '$onValueChange'> & {
-		$onValueChange: OnDropdownValueChange<DropdownOptionValue>;
+		$onValueChange: OnOptionValueChange<DropdownOptionValue>;
 	}
 };
 
@@ -133,7 +138,7 @@ export const Dropdown = (props: DropdownProps) => {
 	} = useFilterableDropdownOptions(props);
 	const forceUpdate = useForceUpdate();
 
-	const onOptionClicked = (option: DropdownOption<DropdownOptionValue>) => async (event: MouseEvent<HTMLSpanElement>) => {
+	const onOptionClicked = (option: OptionItem<DropdownOptionValue>) => async (event: MouseEvent<HTMLSpanElement>) => {
 		if ($disabled) {
 			return;
 		}
@@ -189,7 +194,7 @@ export const Dropdown = (props: DropdownProps) => {
 				</OptionFilter>
 				{displayOptions.map((option, index) => {
 					const {value, label} = option;
-					const canClick = ![DROPDOWN_NO_MATCHED, DROPDOWN_NO_AVAILABLE].includes(`${value}`);
+					const canClick = ![NO_MATCHED_OPTION_ITEM, NO_AVAILABLE_OPTION_ITEM].includes(`${value}`);
 					return <Option key={`${value}-${index}`} data-can-click={canClick}
 					               onClick={canClick ? onOptionClicked(option) : (void 0)}>
 						{label}

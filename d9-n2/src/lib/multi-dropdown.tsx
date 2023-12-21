@@ -18,16 +18,11 @@ import {
 	DropdownPopupState,
 	DropdownPopupStateActive,
 	DropdownStick,
-	isDropdownPopupActive
-} from './dropdown-assist';
-import {
-	DROPDOWN_NO_AVAILABLE,
-	DROPDOWN_NO_MATCHED,
-	DropdownOption,
-	DropdownOptionsDef,
+	isDropdownPopupActive,
 	useFilterableDropdownOptions
-} from './dropdown-options-assist';
+} from './dropdown-assist';
 import {Check, Times} from './icons';
+import {NO_AVAILABLE_OPTION_ITEM, NO_MATCHED_OPTION_ITEM, OptionItem, OptionItemsDef} from './option-items-assist';
 import {OmitHTMLProps, OmitNodeDef} from './types';
 
 export type MultiDropdownOptionValue = string | number;
@@ -37,7 +32,7 @@ export type MultiDropdownValue = MultiDropdownOptionValue | Array<MultiDropdownO
 export type MultiDropdownDef =
 	ValueChangeableNodeDef
 	& OmitHTMLProps<HTMLDivElement>
-	& DropdownOptionsDef<MultiDropdownOptionValue>
+	& OptionItemsDef<MultiDropdownOptionValue>
 	& {
 	please?: ReactNode;
 	clearable?: boolean;
@@ -46,7 +41,7 @@ export type MultiDropdownDef =
  * 1. new value should be an array or null
  * 2. option is currently selected, or null if it is clearing. when option is given, use select to identify that this option is add or remove value into model
  */
-export type OnMultiDropdownValueChange = <NV extends PropValue>(newValue: NV, option: DropdownOption<MultiDropdownOptionValue> | null, select: boolean) => void | Promise<void>;
+export type OnMultiDropdownValueChange = <NV extends PropValue>(newValue: NV, option: OptionItem<MultiDropdownOptionValue> | null, select: boolean) => void | Promise<void>;
 /** widget definition, with html attributes */
 export type MultiDropdownProps = OmitNodeDef<MultiDropdownDef> & Omit<WidgetProps, '$wrapped'> & {
 	$wrapped: Omit<WidgetProps['$wrapped'], '$onValueChange'> & {
@@ -253,7 +248,7 @@ export const MultiDropdown = (props: MultiDropdownProps) => {
 			return values.some(v => v == value);
 		}
 	};
-	const onOptionClicked = (option: DropdownOption<MultiDropdownOptionValue>) => async (event: MouseEvent<HTMLSpanElement>) => {
+	const onOptionClicked = (option: OptionItem<MultiDropdownOptionValue>) => async (event: MouseEvent<HTMLSpanElement>) => {
 		if ($disabled) {
 			return;
 		}
@@ -321,7 +316,7 @@ export const MultiDropdown = (props: MultiDropdownProps) => {
 	const optionsAsMap = askOptions().reduce((map, option) => {
 		map[`${option.value}`] = option;
 		return map;
-	}, {} as Record<string, DropdownOption<MultiDropdownOptionValue>>);
+	}, {} as Record<string, OptionItem<MultiDropdownOptionValue>>);
 
 	return <MultiDropdownContainer active={popupState.active} atBottom={popupState.atBottom}
 	                               ref={containerRef} role="input" tabIndex={0}
@@ -350,7 +345,7 @@ export const MultiDropdown = (props: MultiDropdownProps) => {
 				</OptionFilter>
 				{displayOptions.map((option, index) => {
 					const {value, label} = option;
-					const canClick = ![DROPDOWN_NO_MATCHED, DROPDOWN_NO_AVAILABLE].includes(`${value}`);
+					const canClick = ![NO_MATCHED_OPTION_ITEM, NO_AVAILABLE_OPTION_ITEM].includes(`${value}`);
 					const selected = values.includes(value);
 					return <MultiOption key={`${value}-${index}`} data-can-click={canClick}
 					                    onClick={canClick ? onOptionClicked(option) : (void 0)}>

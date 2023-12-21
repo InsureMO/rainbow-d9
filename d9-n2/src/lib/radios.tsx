@@ -2,7 +2,7 @@ import {MUtils, registerWidget, ValueChangeableNodeDef, WidgetProps} from '@rain
 import React, {ReactNode} from 'react';
 import styled from 'styled-components';
 import {CssVars, DOM_ID_WIDGET, DOM_KEY_WIDGET} from './constants';
-import {DropdownOption, DropdownOptionsDef, OnDropdownValueChange, useDropdownOptions} from './dropdown-options-assist';
+import {OnOptionValueChange, OptionItem, OptionItemsDef, useOptionItems} from './option-items-assist';
 import {Radio, RadioProps} from './radio';
 import {OmitHTMLProps, OmitNodeDef} from './types';
 
@@ -11,7 +11,7 @@ export type RadiosOptionValue = string | number;
 export type RadiosDef =
 	ValueChangeableNodeDef
 	& OmitHTMLProps<HTMLDivElement>
-	& DropdownOptionsDef<RadiosOptionValue>
+	& OptionItemsDef<RadiosOptionValue>
 	& {
 	noAvailable?: ReactNode;
 	columns?: number;
@@ -20,7 +20,7 @@ export type RadiosDef =
 /** widget definition, with html attributes */
 export type RadiosProps = OmitNodeDef<RadiosDef> & Omit<WidgetProps, '$wrapped'> & {
 	$wrapped: Omit<WidgetProps['$wrapped'], '$onValueChange'> & {
-		$onValueChange: OnDropdownValueChange<RadiosOptionValue>;
+		$onValueChange: OnOptionValueChange<RadiosOptionValue>;
 	}
 };
 
@@ -109,9 +109,9 @@ export const Radios = (props: RadiosProps) => {
 		...rest
 	} = props;
 
-	const {createAskDisplayOptions} = useDropdownOptions(props);
+	const {createAskDisplayOptions} = useOptionItems(props);
 
-	const onOptionClicked = (option: DropdownOption<RadiosOptionValue>) => async () => {
+	const onOptionClicked = (option: OptionItem<RadiosOptionValue>) => async () => {
 		if ($disabled) {
 			return;
 		}

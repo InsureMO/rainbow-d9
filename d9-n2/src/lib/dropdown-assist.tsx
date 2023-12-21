@@ -1,8 +1,26 @@
-import React, {ForwardedRef, forwardRef, MouseEvent, ReactNode, useEffect, useRef, useState} from 'react';
+import {VUtils} from '@rainbow-d9/n1';
+import React, {
+	ChangeEvent,
+	ForwardedRef,
+	forwardRef,
+	KeyboardEvent,
+	MouseEvent,
+	ReactNode,
+	useEffect,
+	useRef,
+	useState
+} from 'react';
 import styled from 'styled-components';
-import {CssVars, DOM_ID_WIDGET, DOM_KEY_WIDGET} from './constants';
+import {CssVars, DOM_ID_WIDGET, DOM_KEY_WIDGET, I18NVars} from './constants';
 import {useCollapseFixedThing} from './hooks';
 import {CaretDown, Times} from './icons';
+import {
+	NO_MATCHED_OPTION_ITEM,
+	OptionItems,
+	OptionItemsDef,
+	OptionItemSort,
+	useOptionItems
+} from './option-items-assist';
 
 export enum DropdownPopupStateActive {
 	WILL_ACTIVE = 'will-active', ACTIVE = 'active', HIDDEN = 'hidden'
@@ -302,5 +320,109 @@ export const useDropdownControl = (options: {
 	return {
 		containerRef, popupRef,
 		popupState, setPopupState, popupShown, setPopupShown
+	};
+};
+
+// eslint-disable-next-line @typescript-eslint/no-unnecessary-type-constraint, @typescript-eslint/no-explicit-any
+export const useFilterableDropdownOptions = <V extends any>(props: OptionItemsDef<V>) => {
+	const {
+		optionSort, noMatched = I18NVars.OPTIONS.NO_MATCHED,
+		$wrapped: {$avs: {$disabled}}
+	} = props;
+
+	const filterInputRef = useRef<HTMLInputElement>(null);
+	const [filter, setFilter] = useState('');
+	const [functions] = useState(() => {
+		return {
+			afterPopupShown: () => filterInputRef.current?.focus(),
+			afterPopupHide: () => setTimeout(() => setFilter(''), 100)
+		};
+	});
+	const {containerRef, popupRef, popupState, setPopupState, popupShown, setPopupShown} = useDropdownControl({
+		askPopupMaxHeight: () => 8 * CssVars.INPUT_HEIGHT_VALUE + 2,
+		afterPopupShown: functions.afterPopupShown,
+		afterPopupHide: functions.afterPopupHide
+	});
+
+	const {askOptions, createAskDisplayOptions} = useOptionItems(props);
+	const askDisplayOptions = createAskDisplayOptions(() => {
+		return VUtils.isNotBlank(filter) || optionSort != null;
+	}, (options: OptionItems<V>): OptionItems<V> => {
+		const transformed = options.map(option => {
+			let str = '';
+			if (option.stringify != null) {
+				str = option.stringify(option);
+			} else if (['string', 'number', 'boolean'].includes(typeof option.label)) {
+				str = `${option.label}`;
+			}
+			return {str: (str || '').toLowerCase(), option};
+		});
+		let remained = transformed;
+		if (VUtils.isNotBlank(filter)) {
+			const filterText = filter.trim().toLowerCase();
+			remained = transformed.filter(({str}) => str.includes(filterText));
+		}
+		if (optionSort == OptionItemSort.ASC) {
+			remained.sort((a, b) => a.str.localeCompare(b.str));
+		} else if (optionSort == OptionItemSort.DESC) {
+			remained.sort((a, b) => b.str.localeCompare(a.str));
+		}
+		return remained.length === 0
+			? [{value: NO_MATCHED_OPTION_ITEM, label: noMatched}] as OptionItems<V>
+			: remained.map(({option}) => option);
+	});
+	const displayOptions = askDisplayOptions();
+	const popupHeight = Math.min(displayOptions.length, 8) * CssVars.INPUT_HEIGHT_VALUE + 2;
+
+	const repaintPopup = () => {
+		if ($disabled) {
+			return;
+		}
+		// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+		const {top, left, width, height} = getDropdownPosition(containerRef.current!);
+		const bottom = isPopupAtBottom(top, height, () => popupHeight);
+		setPopupState(state => ({
+			...state,
+			active: DropdownPopupStateActive.WILL_ACTIVE, atBottom: bottom,
+			top, left, width, height,
+			minWidth: width, minHeight: popupHeight, maxHeight: popupHeight
+		}));
+	};
+
+	const onClicked = () => {
+		if ($disabled || isDropdownPopupActive(popupState.active)) {
+			return;
+		}
+		repaintPopup();
+	};
+	const onFocused = () => {
+		if ($disabled || isDropdownPopupActive(popupState.active)) {
+			return;
+		}
+		filterInputRef.current?.focus();
+	};
+	const onKeyUp = (event: KeyboardEvent<HTMLDivElement>) => {
+		if (!isDropdownPopupActive(popupState.active)) {
+			return;
+		}
+		const {key} = event;
+		if (key === 'Escape') {
+			setFilter('');
+		}
+	};
+	const onFilterChanged = (event: ChangeEvent<HTMLInputElement>) => {
+		if ($disabled) {
+			return;
+		}
+		setFilter(event.target.value);
+	};
+
+	return {
+		filterInputRef, filter, setFilter,
+		askOptions, askDisplayOptions, displayOptions,
+		containerRef, popupState, setPopupState, popupHeight,
+		popupRef, popupShown, setPopupShown,
+		repaintPopup,
+		onClicked, onFocused, onKeyUp, onFilterChanged
 	};
 };

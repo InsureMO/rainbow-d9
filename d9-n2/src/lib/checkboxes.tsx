@@ -3,7 +3,7 @@ import React, {ReactNode} from 'react';
 import styled from 'styled-components';
 import {Checkbox, CheckboxProps} from './checkbox';
 import {CssVars, DOM_ID_WIDGET, DOM_KEY_WIDGET} from './constants';
-import {DropdownOption, DropdownOptionsDef, useDropdownOptions} from './dropdown-options-assist';
+import {OptionItem, OptionItemsDef, useOptionItems} from './option-items-assist';
 import {OmitHTMLProps, OmitNodeDef} from './types';
 
 export type CheckboxesOptionValue = string | number;
@@ -11,7 +11,7 @@ export type CheckboxesOptionValue = string | number;
 export type CheckboxesDef =
 	ValueChangeableNodeDef
 	& OmitHTMLProps<HTMLDivElement>
-	& DropdownOptionsDef<CheckboxesOptionValue>
+	& OptionItemsDef<CheckboxesOptionValue>
 	& {
 	noAvailable?: ReactNode;
 	columns?: number;
@@ -21,7 +21,7 @@ export type CheckboxesDef =
  * 1. new value should be an array or null
  * 2. option is currently selected, or null if it is clearing. when option is given, use select to identify that this option is add or remove value into model
  */
-export type OnCheckboxesValueChange = <NV extends PropValue>(newValue: NV, option: DropdownOption<CheckboxesOptionValue> | null, select: boolean) => void | Promise<void>;
+export type OnCheckboxesValueChange = <NV extends PropValue>(newValue: NV, option: OptionItem<CheckboxesOptionValue> | null, select: boolean) => void | Promise<void>;
 
 /** widget definition, with html attributes */
 export type CheckboxesProps = OmitNodeDef<CheckboxesDef> & Omit<WidgetProps, '$wrapped'> & {
@@ -111,13 +111,13 @@ export const Checkboxes = (props: CheckboxesProps) => {
 		...rest
 	} = props;
 
-	const {createAskDisplayOptions} = useDropdownOptions(props);
+	const {createAskDisplayOptions} = useOptionItems(props);
 
 	const getValues = () => {
 		const modelValues: CheckboxesOptionValue | Array<CheckboxesOptionValue> = MUtils.getValue($model, $pp) as CheckboxesOptionValue;
 		return (modelValues == null ? [] : (Array.isArray(modelValues) ? modelValues : [modelValues]));
 	};
-	const onOptionClicked = (option: DropdownOption<CheckboxesOptionValue>) => async () => {
+	const onOptionClicked = (option: OptionItem<CheckboxesOptionValue>) => async () => {
 		if ($disabled) {
 			return;
 		}
