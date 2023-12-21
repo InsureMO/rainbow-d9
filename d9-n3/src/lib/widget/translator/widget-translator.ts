@@ -43,10 +43,11 @@ export class WidgetTranslator extends AbstractTranslator<Decipherable> {
 	}
 
 	protected attemptToFormCell(options: {
-		$wt: WidgetType; attributes: AttributeMap; label: Nullable<string> | NodeDef;
+		$wt: WidgetType; attributes: AttributeMap;
 		translator: SpecificWidgetTranslator<WidgetType>;
 	}) {
-		const {$wt, label, attributes, translator} = options;
+		const {$wt, attributes, translator} = options;
+		const {label} = attributes;
 		if (this.isForceWrappedByFormCell(attributes) || translator.shouldWrapByFormCell()) {
 			return this.tryToWrapByFormCell($wt, label);
 		} else if (label == null || (typeof label === 'string' && VUtils.isBlank(label))) {
@@ -128,9 +129,19 @@ export class WidgetTranslator extends AbstractTranslator<Decipherable> {
 
 		let def: ParsedNodeDef['node'];
 		if (translator != null) {
+			// for resolving the label ambiguity problem
+			// some widget has its own label properties, and it leads ambiguity.
+			// so call its own translator to eliminate ambiguity first
+			// for example, for caption/label, when
+			// 1. label is not no value,
+			// 2. not force wrapped by form cell
+			// 3. text not presents
+			// means label property is used to show its own static value
+			// in this case, the following attemptToFormCell call will let it be wrapped by form cell, which is not correct
+			// so, have to redress properties first
+			def = translator.redressProperties({...attributes, label: transformedLabel} as Partial<NodeDef>);
 			def = translator.beautifyProperties({
-				$pp, ...attributes,
-				...this.attemptToFormCell({$wt, attributes, label: transformedLabel, translator})
+				$pp, ...def, ...this.attemptToFormCell({$wt, attributes: def, translator})
 			});
 		} else {
 			def = {$pp, ...attributes, $wt};

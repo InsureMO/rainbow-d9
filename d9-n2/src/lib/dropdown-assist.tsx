@@ -1,6 +1,6 @@
 import React, {ForwardedRef, forwardRef, MouseEvent, ReactNode, useEffect, useRef, useState} from 'react';
 import styled from 'styled-components';
-import {CssVars, DOM_ID_WIDGET} from './constants';
+import {CssVars, DOM_ID_WIDGET, DOM_KEY_WIDGET} from './constants';
 import {useCollapseFixedThing} from './hooks';
 import {CaretDown, Times} from './icons';
 
@@ -77,7 +77,7 @@ export const DropdownContainer = styled.div.attrs<{ active: DropdownPopupStateAc
     }
 `;
 
-export const DropdownLabel = styled.span.attrs({'data-w': 'd9-dropdown-label'})`
+export const DropdownLabel = styled.span.attrs({[DOM_KEY_WIDGET]: 'd9-dropdown-label'})`
     flex-grow: 1;
     display: flex;
     align-items: center;
@@ -99,19 +99,19 @@ export const DropdownLabel = styled.span.attrs({'data-w': 'd9-dropdown-label'})`
 `;
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const DropdownStickCaret = styled(CaretDown as any).attrs({'data-w': 'd9-dropdown-caret'})`
+export const DropdownStickCaret = styled(CaretDown as any).attrs({[DOM_KEY_WIDGET]: 'd9-dropdown-caret'})`
     height: calc(${CssVars.INPUT_HEIGHT} * 2 / 5);
     fill: ${CssVars.FONT_COLOR};
     transition: all ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION};
 `;
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const DropdownStickClear = styled(Times as any).attrs({'data-w': 'd9-dropdown-clear'})`
+export const DropdownStickClear = styled(Times as any).attrs({[DOM_KEY_WIDGET]: 'd9-dropdown-clear'})`
     height: calc(${CssVars.INPUT_HEIGHT} * 2 / 5);
     fill: ${CssVars.FONT_COLOR};
     transition: all ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION};
 `;
 
-export const DropdownStickContainer = styled.span.attrs({'data-w': 'd9-dropdown-stick'})`
+export const DropdownStickContainer = styled.span.attrs({[DOM_KEY_WIDGET]: 'd9-dropdown-stick'})`
     display: flex;
     position: relative;
     align-items: center;
@@ -193,7 +193,7 @@ const DropdownPopupContainer = styled.div.attrs<Omit<DropdownPopupProps, 'childr
 		 top, left, height, minWidth, maxWidth, minHeight, maxHeight
 	 }) => {
 		return {
-			'data-w': 'd9-dropdown-popup',
+			[DOM_KEY_WIDGET]: 'd9-dropdown-popup',
 			'data-v-scroll': vScroll ? '' : (void 0),
 			'data-h-scroll': hScroll ? '' : (void 0),
 			'data-at-bottom': atBottom,

@@ -32,6 +32,8 @@ import {
 	UnwrappedMultiDropdown as MultiDropdown,
 	UnwrappedMultiDropdownProps as MultiDropdownProps
 } from './multi-dropdown';
+import {UnwrappedRadio as Radio, UnwrappedRadioProps as RadioProps} from './radio';
+import {UnwrappedRadios as Radios, UnwrappedRadiosProps as RadiosProps} from './radios';
 import {UnwrappedSection as Section, UnwrappedSectionProps as SectionProps} from './section';
 import {UnwrappedTextarea as Textarea, UnwrappedTextareaProps as TextareaProps} from './textarea';
 
@@ -41,6 +43,7 @@ export {
 	Input, InputProps, NumberInput, NumberInputProps,
 	DecorateInput, DecorateInputProps, DecorateNumberInput, DecorateNumberInputProps,
 	Checkbox, CheckboxProps,
+	Radio, RadioProps, Radios, RadiosProps,
 	Textarea, TextareaProps,
 	Dropdown, DropdownProps, MultiDropdown, MultiDropdownProps,
 	Calendar, CalendarProps,

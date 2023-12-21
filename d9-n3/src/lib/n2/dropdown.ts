@@ -1,5 +1,5 @@
 import {VUtils} from '@rainbow-d9/n1';
-import {DropdownOptions, DropdownOptionSort} from '@rainbow-d9/n2';
+import {DropdownOptions, DropdownOptionSort, DropdownOptionValue} from '@rainbow-d9/n2';
 import {ParsedNodeType} from '../node-types';
 import {ParsedList, ParsedListItemAttributePair, SemanticUtils} from '../semantic';
 import {Undefinable} from '../utility-types';
@@ -13,7 +13,7 @@ import {
 } from '../widget';
 import {N2WidgetType} from './types';
 
-export const N2DropdownOptionsByStrBuild = (value: string): DropdownOptions => {
+export const N2DropdownOptionsByStrBuild = (value: string): DropdownOptions<DropdownOptionValue> => {
 	return value.split(';')
 		.map(option => option.trim())
 		.filter(option => VUtils.isNotBlank(option))
@@ -23,9 +23,9 @@ export const N2DropdownOptionsByStrBuild = (value: string): DropdownOptions => {
 		.map(([value, label]) => ({value, label}));
 };
 
-export const N2DropdownOptionsBuild: AttributeValueBuild<DropdownOptions> = {
+export const N2DropdownOptionsBuild: AttributeValueBuild<DropdownOptions<DropdownOptionValue>> = {
 	accept: (key: WidgetPropertyName) => key === 'options',
-	build: (value: Undefinable<string>, list: ParsedListItemAttributePair): Undefinable<DropdownOptions> => {
+	build: (value: Undefinable<string>, list: ParsedListItemAttributePair): Undefinable<DropdownOptions<DropdownOptionValue>> => {
 		if (VUtils.isNotBlank(value)) {
 			return N2DropdownOptionsByStrBuild(value);
 		}

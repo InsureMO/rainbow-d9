@@ -8,19 +8,24 @@ import {
 } from '@rainbow-d9/n1';
 import React from 'react';
 import styled from 'styled-components';
-import {CssVars} from './constants';
+import {CssVars, DOM_ID_WIDGET, DOM_KEY_WIDGET} from './constants';
 import {OmitHTMLProps, OmitNodeDef} from './types';
 
 export type RadioPossibleValues = [NullPropValue | PrimitivePropValue, NullPropValue | PrimitivePropValue];
 
-/** Input configuration definition */
+/** radio configuration definition */
 export type RadioDef = ValueChangeableNodeDef & OmitHTMLProps<HTMLDivElement> & {
 	values?: RadioPossibleValues;
 };
-/** Input widget definition, with html attributes */
+/** radio widget definition, with html attributes */
 export type RadioProps = OmitNodeDef<RadioDef> & WidgetProps;
 
-const ARadio = styled.div.attrs({'data-w': 'd9-radio'})`
+const ARadio = styled.div.attrs(({id}) => {
+	return {
+		[DOM_KEY_WIDGET]: 'd9-radio',
+		[DOM_ID_WIDGET]: id
+	};
+})`
     display: block;
     position: relative;
     padding: calc((${CssVars.INPUT_HEIGHT}) / 6) 0;

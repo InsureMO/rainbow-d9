@@ -16,6 +16,13 @@ export abstract class SpecificWidgetTranslator<T extends WidgetType> {
 	/**
 	 * default do nothing, return given definition itself.
 	 */
+	public redressProperties<Def extends NodeDef>(def: Partial<Def>): Def {
+		return def as Def;
+	}
+
+	/**
+	 * default do nothing, return given definition itself.
+	 */
 	public beautifyProperties<Def extends NodeDef>(def: Partial<Def>): Def {
 		return def as Def;
 	}

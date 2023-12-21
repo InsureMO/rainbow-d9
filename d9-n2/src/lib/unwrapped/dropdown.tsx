@@ -1,13 +1,14 @@
 import {MonitorNodeDef, NodeAttributeValues, PropValue, VUtils} from '@rainbow-d9/n1';
 import React from 'react';
-import {Dropdown, DropdownProps, OnDropdownValueChange} from '../dropdown';
+import {Dropdown, DropdownOptionValue, DropdownProps} from '../dropdown';
+import {OnDropdownValueChange} from '../dropdown-options-assist';
 
 /** Dropdown configuration definition */
 type UnwrappedDropdownProps =
 	Omit<DropdownProps, 'value' | '$wrapped' | keyof MonitorNodeDef>
 	& {
 	value?: PropValue;
-	onValueChange: OnDropdownValueChange;
+	onValueChange: OnDropdownValueChange<DropdownOptionValue>;
 	disabled?: boolean;
 	visible?: boolean;
 };
@@ -21,7 +22,7 @@ const UnwrappedDropdown = (props: UnwrappedDropdownProps) => {
 
 	return <Dropdown {...rest} $wrapped={{$onValueChange, $avs, $root, $model: $root, $p2r: '.'}}
 	                 $pp="value"
-	                 id={rest.id ?? VUtils.generateUniqueId()} />;
+	                 id={rest.id ?? VUtils.generateUniqueId()}/>;
 };
 
 export {UnwrappedDropdown, UnwrappedDropdownProps};

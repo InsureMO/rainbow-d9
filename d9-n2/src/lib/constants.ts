@@ -203,6 +203,10 @@ export const I18NVars = {
 		FRIDAY: 'F',
 		SATURDAY: 'S'
 	},
+	OPTIONS: {
+		NO_AVAILABLE: 'No available options.',
+		NO_MATCHED: 'No matched options.'
+	},
 	RIBS: {
 		NO_ELEMENT: 'No data found.',
 		CREATE_ITEM: 'Create New Element',

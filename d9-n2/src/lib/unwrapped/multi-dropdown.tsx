@@ -1,13 +1,13 @@
 import {MonitorNodeDef, NodeAttributeValues, PropValue, VUtils} from '@rainbow-d9/n1';
 import React from 'react';
-import {MultiDropdown, MultiDropdownProps, OnMultiDropdownValueChange} from '../multi-dropdown';
+import {MultiDropdown, MultiDropdownProps} from '../multi-dropdown';
 
 /** Dropdown configuration definition */
 type UnwrappedMultiDropdownProps =
 	Omit<MultiDropdownProps, 'value' | '$wrapped' | keyof MonitorNodeDef>
 	& {
 	value?: PropValue;
-	onValueChange: OnMultiDropdownValueChange;
+	onValueChange: (value: PropValue) => void;
 	disabled?: boolean;
 	visible?: boolean;
 };

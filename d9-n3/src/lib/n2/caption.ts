@@ -1,4 +1,4 @@
-import {BaseModel, MonitorNodeAttributes, NUtils, PropValue, ReactionMonitor, VUtils} from '@rainbow-d9/n1';
+import {BaseModel, MonitorNodeAttributes, NodeDef, NUtils, PropValue, ReactionMonitor, VUtils} from '@rainbow-d9/n1';
 import {CaptionClick, CaptionClickOptions, CaptionDef, CaptionValueToLabel} from '@rainbow-d9/n2';
 import {N3Logger} from '../logger';
 import {ParsedListItemAttributePair} from '../semantic';
@@ -10,7 +10,8 @@ import {
 	MonitorHandlerDetective,
 	MonitorHandlerDetectOptions,
 	SpecificWidgetTranslator,
-	WidgetPropertyName
+	WidgetPropertyName,
+	WidgetTranslator
 } from '../widget';
 import {N2WidgetType} from './types';
 
@@ -86,6 +87,22 @@ export const N2CaptionReactionDetective: MonitorHandlerDetective = (options: Mon
 	return {$watch: watches, $handle: reaction.$handle ?? NUtils.reactWithRepaint};
 };
 
+export const N2CaptionRedressLabelAndText = <Def extends NodeDef>(def: Partial<Def>): Partial<Def> => {
+	const defs = def as Partial<CaptionDef>;
+	if (defs.labelOnValue === true || defs[WidgetTranslator.FORCE_WRAPPED_INTO_FORM_CELL] === true) {
+		// label on value, or force wrapped by form cell, do nothing
+		return defs as Def;
+	}
+	if (defs.text != null || (VUtils.isPrimitive(defs.text) && VUtils.isNotBlank(defs.text))) {
+		// text declared, do nothing
+		return defs as Def;
+	}
+	defs.text = defs.label;
+	delete defs.label;
+
+	return defs as Def;
+};
+
 export class N2CaptionTranslator extends SpecificWidgetTranslator<N2WidgetType.CAPTION> {
 	public getSupportedType(): N2WidgetType.CAPTION {
 		return N2WidgetType.CAPTION;
@@ -99,7 +116,11 @@ export class N2CaptionTranslator extends SpecificWidgetTranslator<N2WidgetType.C
 		return [...super.getToWidgetAttributeNames(), 'text'];
 	}
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	public redressProperties<Def extends NodeDef>(def: Partial<Def>): Def {
+		return super.redressProperties(N2CaptionRedressLabelAndText(def));
+	}
+
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	public getAttributeValueBuilders(): Array<AttributeValueBuild<any>> {
 		return [N2CaptionValueToLabelBuild, N2CaptionClickBuild, DecorateLeadsBuild, DecorateTailsBuild];
 	}
@@ -116,6 +137,12 @@ export class N2LabelTranslator extends SpecificWidgetTranslator<N2WidgetType.LAB
 
 	public shouldTranslateLabelAttribute(): boolean {
 		return false;
+	}
+
+	public redressProperties<Def extends NodeDef>(def: Partial<Def>): Def {
+		// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+		// @ts-ignore
+		return super.redressProperties(N2CaptionRedressLabelAndText({...def, labelOnValue: true}));
 	}
 
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any

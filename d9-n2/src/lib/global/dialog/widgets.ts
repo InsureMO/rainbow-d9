@@ -1,9 +1,9 @@
 import styled from 'styled-components';
-import {CssVars} from '../../constants';
+import {CssVars, DOM_KEY_WIDGET} from '../../constants';
 
 export const DialogContainer = styled.div.attrs<{ visible: boolean }>(({visible}) => {
 	return {
-		'data-w': 'dialog',
+		[DOM_KEY_WIDGET]: 'dialog',
 		style: {
 			opacity: visible ? 1 : (void 0),
 			pointerEvents: visible ? 'auto' : (void 0)
@@ -22,7 +22,7 @@ export const DialogContainer = styled.div.attrs<{ visible: boolean }>(({visible}
 	z-index          : ${CssVars.DIALOG_Z_INDEX};
 `;
 
-export const DialogWrapper = styled.div.attrs({'data-w': 'dialog-wrapper'})`
+export const DialogWrapper = styled.div.attrs({[DOM_KEY_WIDGET]: 'dialog-wrapper'})`
 	margin-top       : ${CssVars.DIALOG_MARGIN_TOP};
 	margin-left      : ${CssVars.DIALOG_MARGIN_LEFT};
 	width            : ${CssVars.DIALOG_WIDTH};
@@ -34,7 +34,7 @@ export const DialogWrapper = styled.div.attrs({'data-w': 'dialog-wrapper'})`
 	box-shadow       : ${CssVars.DIALOG_SHADOW};
 `;
 
-export const DialogHeader = styled.div.attrs({'data-w': 'dialog-header'})`
+export const DialogHeader = styled.div.attrs({[DOM_KEY_WIDGET]: 'dialog-header'})`
 	display     : flex;
 	position    : relative;
 	padding     : 0 ${CssVars.DIALOG_HEADER_PADDING};
@@ -43,18 +43,18 @@ export const DialogHeader = styled.div.attrs({'data-w': 'dialog-header'})`
 	align-items : center;
 `;
 
-export const DialogTitle = styled.div.attrs({'data-w': 'dialog-title'})`
+export const DialogTitle = styled.div.attrs({[DOM_KEY_WIDGET]: 'dialog-title'})`
 	font-family    : ${CssVars.DIALOG_HEADER_FONT_FAMILY};
 	font-size      : ${CssVars.DIALOG_HEADER_FONT_SIZE};
 	text-transform : uppercase;
 `;
 
-export const DialogBody = styled.div.attrs({'data-w': 'dialog-body'})`
+export const DialogBody = styled.div.attrs({[DOM_KEY_WIDGET]: 'dialog-body'})`
 	flex-grow  : 1;
 	min-height : ${CssVars.DIALOG_BODY_MIN_HEIGHT};
 `;
 
-export const DialogFooter = styled.div.attrs({'data-w': 'dialog-footer'})`
+export const DialogFooter = styled.div.attrs({[DOM_KEY_WIDGET]: 'dialog-footer'})`
 	display         : flex;
 	align-items     : center;
 	justify-content : flex-end;
@@ -64,7 +64,7 @@ export const DialogFooter = styled.div.attrs({'data-w': 'dialog-footer'})`
 		}
 	}
 `;
-export const DialogLabel = styled.span.attrs({'data-w': 'dialog-label'})`
+export const DialogLabel = styled.span.attrs({[DOM_KEY_WIDGET]: 'dialog-label'})`
 	font-variant : ${CssVars.FONT_VARIANT};
 	line-height  : ${CssVars.LINE_HEIGHT};
 	min-height   : ${CssVars.LINE_HEIGHT};

@@ -19,6 +19,8 @@ import {
 import {UnwrappedDropdown, UnwrappedDropdownProps} from './dropdown';
 import {UnwrappedInput, UnwrappedInputProps, UnwrappedNumberInput, UnwrappedNumberInputProps} from './input';
 import {UnwrappedMultiDropdown, UnwrappedMultiDropdownProps} from './multi-dropdown';
+import {UnwrappedRadio, UnwrappedRadioProps} from './radio';
+import {UnwrappedRadios, UnwrappedRadiosProps} from './radios';
 import {UnwrappedSection, UnwrappedSectionProps} from './section';
 
 export {
@@ -28,6 +30,7 @@ export {
 	UnwrappedDecorateInput, UnwrappedDecorateInputProps,
 	UnwrappedDecorateNumberInput, UnwrappedDecorateNumberInputProps,
 	UnwrappedCheckbox, UnwrappedCheckboxProps,
+	UnwrappedRadio, UnwrappedRadioProps, UnwrappedRadios, UnwrappedRadiosProps,
 	UnwrappedDropdown, UnwrappedDropdownProps,
 	UnwrappedMultiDropdown, UnwrappedMultiDropdownProps,
 	UnwrappedCalendar, UnwrappedCalendarProps,

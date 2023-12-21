@@ -8,20 +8,25 @@ import {
 } from '@rainbow-d9/n1';
 import React from 'react';
 import styled from 'styled-components';
-import {CssVars} from './constants';
+import {CssVars, DOM_ID_WIDGET, DOM_KEY_WIDGET} from './constants';
 import {Check} from './icons';
 import {OmitHTMLProps, OmitNodeDef} from './types';
 
 export type CheckboxPossibleValues = [NullPropValue | PrimitivePropValue, NullPropValue | PrimitivePropValue];
 
-/** Input configuration definition */
+/** checkbox configuration definition */
 export type CheckboxDef = ValueChangeableNodeDef & OmitHTMLProps<HTMLDivElement> & {
 	values?: CheckboxPossibleValues;
 };
-/** Input widget definition, with html attributes */
+/** checkbox widget definition, with html attributes */
 export type CheckboxProps = OmitNodeDef<CheckboxDef> & WidgetProps;
 
-const ACheckbox = styled.div.attrs({'data-w': 'd9-checkbox'})`
+const ACheckbox = styled.div.attrs(({id}) => {
+	return {
+		[DOM_KEY_WIDGET]: 'd9-checkbox',
+		[DOM_ID_WIDGET]: id
+	};
+})`
     display: block;
     position: relative;
     padding: calc((${CssVars.INPUT_HEIGHT}) / 6) 0;

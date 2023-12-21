@@ -1,5 +1,5 @@
 import styled, {keyframes} from 'styled-components';
-import {CssVars} from '../../constants';
+import {CssVars, DOM_KEY_WIDGET} from '../../constants';
 
 const SpinnerKeyFrames = keyframes`
 	0% {
@@ -12,7 +12,7 @@ const SpinnerKeyFrames = keyframes`
 
 export const RemoteRequestContainer = styled.div.attrs<{ visible: boolean }>(({visible}) => {
 	return {
-		'data-w': 'remote-request',
+		[DOM_KEY_WIDGET]: 'remote-request',
 		style: {
 			opacity: visible ? 0.5 : 0
 		}

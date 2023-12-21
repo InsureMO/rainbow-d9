@@ -1,26 +1,16 @@
 import {
-	BaseModel,
 	MUtils,
 	PPUtils,
 	PropValue,
 	registerWidget,
 	useForceUpdate,
-	useWrapperEventBus,
 	ValueChangeableNodeDef,
 	VUtils,
-	WidgetProps,
-	WrapperEventTypes
+	WidgetProps
 } from '@rainbow-d9/n1';
-import React, {ChangeEvent, KeyboardEvent, MouseEvent, ReactNode, useEffect, useRef, useState} from 'react';
+import React, {MouseEvent, ReactNode} from 'react';
 import styled from 'styled-components';
-import {CssVars} from './constants';
-import {
-	DROPDOWN_NO_AVAILABLE,
-	DROPDOWN_NO_MATCHED,
-	DROPDOWN_NO_OPTIONS,
-	DropdownOptionSort,
-	REACTION_REFRESH_DROPDOWN_OPTIONS
-} from './dropdown';
+import {CssVars, DOM_KEY_WIDGET} from './constants';
 import {
 	DropdownContainer,
 	DropdownLabel,
@@ -28,58 +18,41 @@ import {
 	DropdownPopupState,
 	DropdownPopupStateActive,
 	DropdownStick,
-	getDropdownPosition,
-	isDropdownPopupActive,
-	isPopupAtBottom,
-	useDropdownControl
+	isDropdownPopupActive
 } from './dropdown-assist';
+import {
+	DROPDOWN_NO_AVAILABLE,
+	DROPDOWN_NO_MATCHED,
+	DropdownOption,
+	DropdownOptionsDef,
+	useFilterableDropdownOptions
+} from './dropdown-options-assist';
 import {Check, Times} from './icons';
 import {OmitHTMLProps, OmitNodeDef} from './types';
 
 export type MultiDropdownOptionValue = string | number;
 export type MultiDropdownValue = MultiDropdownOptionValue | Array<MultiDropdownOptionValue>;
 
-/**
- * property "stringify" is optional, it is required when "value" is object or something else which cannot use as identity.
- */
-export interface MultiDropdownOption {
-	value: MultiDropdownOptionValue;
-	label: ReactNode;
-	stringify?: (option: MultiDropdownOption) => string;
-}
-
-export type MultiDropdownOptions = Array<MultiDropdownOption>;
-
 /** Input configuration definition */
-export type MultiDropdownDef = ValueChangeableNodeDef & OmitHTMLProps<HTMLDivElement> & {
-	/**
-	 * Function will be invoked when it is changed, be careful!
-	 * Might lead endless rendering loop.
-	 */
-	options: MultiDropdownOptions
-		| (<R extends BaseModel, M extends PropValue>(options: { root: R, model: M }) => Promise<MultiDropdownOptions>);
-	optionSort?: DropdownOptionSort;
+export type MultiDropdownDef =
+	ValueChangeableNodeDef
+	& OmitHTMLProps<HTMLDivElement>
+	& DropdownOptionsDef<MultiDropdownOptionValue>
+	& {
 	please?: ReactNode;
-	noAvailable?: ReactNode;
-	noMatched?: ReactNode;
 	clearable?: boolean;
 };
 /**
  * 1. new value should be an array or null
- * 2. option is currently selected, or null if it is clearing. when option is given, use select to idendify that this option is add or remove value into model
+ * 2. option is currently selected, or null if it is clearing. when option is given, use select to identify that this option is add or remove value into model
  */
-export type OnMultiDropdownValueChange = <NV extends PropValue>(newValue: NV, option: MultiDropdownOption | null, select: boolean) => void | Promise<void>;
+export type OnMultiDropdownValueChange = <NV extends PropValue>(newValue: NV, option: DropdownOption<MultiDropdownOptionValue> | null, select: boolean) => void | Promise<void>;
 /** Input widget definition, with html attributes */
 export type MultiDropdownProps = OmitNodeDef<MultiDropdownDef> & Omit<WidgetProps, '$wrapped'> & {
 	$wrapped: Omit<WidgetProps['$wrapped'], '$onValueChange'> & {
 		$onValueChange: OnMultiDropdownValueChange;
 	}
 };
-
-interface Candidates {
-	initialized: boolean;
-	options: MultiDropdownOptions;
-}
 
 const MultiDropdownContainer = styled(DropdownContainer)`
     flex-wrap: wrap;
@@ -143,7 +116,7 @@ const MultiDropdownStick = styled(DropdownStick as any)`
 const OptionFilter = styled.div.attrs<Omit<DropdownPopupState, 'active'> & { active: boolean }>(
 	({active, atBottom, top, left, height}) => {
 		return {
-			'data-w': 'd9-multi-dropdown-option-filter',
+			[DOM_KEY_WIDGET]: 'd9-multi-dropdown-option-filter',
 			style: {
 				opacity: active ? 1 : 0,
 				top: atBottom ? (top + height - 10) : (void 0),
@@ -195,7 +168,7 @@ const OptionFilter = styled.div.attrs<Omit<DropdownPopupState, 'active'> & { act
         caret-shape: revert;
     }
 `;
-const MultiOption = styled.span.attrs({'data-w': 'd9-multi-dropdown-option'})`
+const MultiOption = styled.span.attrs({[DOM_KEY_WIDGET]: 'd9-multi-dropdown-option'})`
     display: flex;
     align-items: center;
     padding: 0 ${CssVars.INPUT_INDENT};
@@ -233,141 +206,24 @@ const MultiOption = styled.span.attrs({'data-w': 'd9-multi-dropdown-option'})`
 
 export const MultiDropdown = (props: MultiDropdownProps) => {
 	const {
-		options = DROPDOWN_NO_OPTIONS, optionSort,
-		$pp, $wrapped: {$onValueChange, $root, $model, $p2r, $avs: {$disabled, $visible}},
-		please = '', noAvailable = 'No available options.', noMatched = 'No matched options.', clearable = true,
+		// eslint-disable-next-line  @typescript-eslint/no-unused-vars
+		options, optionSort, noAvailable, noMatched,
+		$pp, $wrapped: {$onValueChange, $model, $p2r, $avs: {$disabled, $visible}},
+		please = '', clearable = true,
 		...rest
 	} = props;
 
-	const filterInputRef = useRef<HTMLInputElement>(null);
-	const {on: onWrapper, off: offWrapper} = useWrapperEventBus();
-	const [candidates, setCandidates] = useState<Candidates>((): Candidates => {
-		return {initialized: false, options: DROPDOWN_NO_OPTIONS};
-	});
-	const [filter, setFilter] = useState('');
+	const {
+		askOptions, displayOptions,
+		filterInputRef, filter, setFilter,
+		containerRef,
+		popupState, popupHeight,
+		popupRef, popupShown, setPopupShown,
+		repaintPopup,
+		onClicked, onFocused, onKeyUp, onFilterChanged
+	} = useFilterableDropdownOptions(props);
 	const forceUpdate = useForceUpdate();
-	useEffect(() => {
-		if (!candidates.initialized) {
-			if (VUtils.isFunction(options)) {
-				(async () => {
-					setCandidates({initialized: true, options: await options({root: $root, model: $model})});
-				})();
-			} else {
-				setCandidates({initialized: true, options: options ?? DROPDOWN_NO_OPTIONS});
-			}
-		} else if (!VUtils.isFunction(options) && options !== candidates.options) {
-			setCandidates({initialized: true, options});
-		}
-	}, [candidates.initialized, candidates.options, options, $root, $model]);
-	useEffect(() => {
-		if (onWrapper != null && offWrapper != null) {
-			// only works when it is wrapped by n1
-			// eslint-disable-next-line  @typescript-eslint/no-explicit-any
-			const onUnhandledReactionOccurred = (command: any) => {
-				if (command !== REACTION_REFRESH_DROPDOWN_OPTIONS) {
-					return;
-				}
-				setCandidates(candidates => ({initialized: false, options: candidates.options}));
-			};
-			onWrapper(WrapperEventTypes.UNHANDLED_REACTION_OCCURRED, onUnhandledReactionOccurred);
-			return () => {
-				offWrapper(WrapperEventTypes.UNHANDLED_REACTION_OCCURRED, onUnhandledReactionOccurred);
-			};
-		}
-	}, [onWrapper, offWrapper]);
 
-	const askOptions = (): MultiDropdownOptions => {
-		return candidates.initialized ? candidates.options : (VUtils.isFunction(options) ? DROPDOWN_NO_OPTIONS : (options ?? DROPDOWN_NO_OPTIONS));
-	};
-	const askDisplayOptions = () => {
-		const options = askOptions();
-		if (options.length === 0) {
-			return [{value: DROPDOWN_NO_AVAILABLE, label: noAvailable}];
-		}
-		if (VUtils.isNotBlank(filter) || optionSort != null) {
-			const transformed = options.map(option => {
-				let str = '';
-				if (option.stringify != null) {
-					str = option.stringify(option);
-				} else if (['string', 'number', 'boolean'].includes(typeof option.label)) {
-					str = `${option.label}`;
-				}
-				return {str: (str || '').toLowerCase(), option};
-			});
-			let remained = transformed;
-			if (VUtils.isNotBlank(filter)) {
-				const filterText = filter.trim().toLowerCase();
-				remained = transformed.filter(({str}) => str.includes(filterText));
-			}
-			if (optionSort == DropdownOptionSort.ASC) {
-				remained.sort((a, b) => a.str.localeCompare(b.str));
-			} else if (optionSort == DropdownOptionSort.DESC) {
-				remained.sort((a, b) => b.str.localeCompare(a.str));
-			}
-			return remained.length === 0 ? [{
-				value: DROPDOWN_NO_MATCHED,
-				label: noMatched
-			}] : remained.map(({option}) => option);
-		} else {
-			return options;
-		}
-	};
-	const displayOptions = askDisplayOptions();
-	const [functions] = useState(() => {
-		return {
-			afterPopupShown: () => filterInputRef.current?.focus(),
-			afterPopupHide: () => setTimeout(() => setFilter(''), 100)
-		};
-	});
-	const popupHeight = Math.min(displayOptions.length, 8) * CssVars.INPUT_HEIGHT_VALUE + 2;
-	const {containerRef, popupRef, popupState, setPopupState, popupShown, setPopupShown} = useDropdownControl({
-		askPopupMaxHeight: () => 8 * CssVars.INPUT_HEIGHT_VALUE + 2,
-		afterPopupShown: functions.afterPopupShown,
-		afterPopupHide: functions.afterPopupHide
-	});
-
-	const repaintPopup = () => {
-		if ($disabled) {
-			return;
-		}
-		// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-		const {top, left, width, height} = getDropdownPosition(containerRef.current!);
-		const bottom = isPopupAtBottom(top, height, () => popupHeight);
-		setPopupState(state => ({
-			...state,
-			active: DropdownPopupStateActive.WILL_ACTIVE, atBottom: bottom,
-			top, left, width, height,
-			minWidth: width, minHeight: popupHeight, maxHeight: popupHeight
-		}));
-
-	};
-	const onClicked = () => {
-		if ($disabled || isDropdownPopupActive(popupState.active)) {
-			return;
-		}
-		repaintPopup();
-	};
-	const onFocused = () => {
-		if ($disabled || isDropdownPopupActive(popupState.active)) {
-			return;
-		}
-		filterInputRef.current?.focus();
-	};
-	const onKeyUp = (event: KeyboardEvent<HTMLDivElement>) => {
-		if (!isDropdownPopupActive(popupState.active)) {
-			return;
-		}
-		const {key} = event;
-		if (key === 'Escape') {
-			setFilter('');
-		}
-	};
-	const onFilterChanged = (event: ChangeEvent<HTMLInputElement>) => {
-		if ($disabled) {
-			return;
-		}
-		setFilter(event.target.value);
-	};
 	const currentValuesToArray = (): Array<MultiDropdownOptionValue> => {
 		const values = MUtils.getValue($model, $pp) as MultiDropdownValue;
 		if (values == null) {
@@ -397,7 +253,7 @@ export const MultiDropdown = (props: MultiDropdownProps) => {
 			return values.some(v => v == value);
 		}
 	};
-	const onOptionClicked = (option: MultiDropdownOption) => async (event: MouseEvent<HTMLSpanElement>) => {
+	const onOptionClicked = (option: DropdownOption<MultiDropdownOptionValue>) => async (event: MouseEvent<HTMLSpanElement>) => {
 		if ($disabled) {
 			return;
 		}
@@ -465,7 +321,7 @@ export const MultiDropdown = (props: MultiDropdownProps) => {
 	const optionsAsMap = askOptions().reduce((map, option) => {
 		map[`${option.value}`] = option;
 		return map;
-	}, {} as Record<string, MultiDropdownOption>);
+	}, {} as Record<string, DropdownOption<MultiDropdownOptionValue>>);
 
 	return <MultiDropdownContainer active={popupState.active} atBottom={popupState.atBottom}
 	                               ref={containerRef} role="input" tabIndex={0}
