@@ -2,7 +2,7 @@ import {MonitorNodeDef, NodeAttributeValues, PropValue, VUtils} from '@rainbow-d
 import React from 'react';
 import {MultiDropdown, MultiDropdownProps} from '../multi-dropdown';
 
-/** Dropdown configuration definition */
+/** configuration definition */
 type UnwrappedMultiDropdownProps =
 	Omit<MultiDropdownProps, 'value' | '$wrapped' | keyof MonitorNodeDef>
 	& {

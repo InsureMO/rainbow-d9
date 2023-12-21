@@ -10,6 +10,7 @@ import {
 } from './calendar';
 import {UnwrappedCaption, UnwrappedCaptionProps, UnwrappedLabel, UnwrappedLabelProps} from './caption';
 import {UnwrappedCheckbox, UnwrappedCheckboxProps} from './checkbox';
+import {UnwrappedCheckboxes, UnwrappedCheckboxesProps} from './checkboxes';
 import {
 	UnwrappedDecorateInput,
 	UnwrappedDecorateInputProps,
@@ -29,7 +30,7 @@ export {
 	UnwrappedInput, UnwrappedInputProps, UnwrappedNumberInput, UnwrappedNumberInputProps,
 	UnwrappedDecorateInput, UnwrappedDecorateInputProps,
 	UnwrappedDecorateNumberInput, UnwrappedDecorateNumberInputProps,
-	UnwrappedCheckbox, UnwrappedCheckboxProps,
+	UnwrappedCheckbox, UnwrappedCheckboxProps, UnwrappedCheckboxes, UnwrappedCheckboxesProps,
 	UnwrappedRadio, UnwrappedRadioProps, UnwrappedRadios, UnwrappedRadiosProps,
 	UnwrappedDropdown, UnwrappedDropdownProps,
 	UnwrappedMultiDropdown, UnwrappedMultiDropdownProps,

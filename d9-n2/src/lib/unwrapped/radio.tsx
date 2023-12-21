@@ -2,7 +2,7 @@ import {MonitorNodeDef, NodeAttributeValues, PropValue, VUtils} from '@rainbow-d
 import React from 'react';
 import {Radio, RadioProps} from '../radio';
 
-/** Dropdown configuration definition */
+/** configuration definition */
 type UnwrappedRadioProps =
 	Omit<RadioProps, 'value' | '$wrapped' | keyof MonitorNodeDef>
 	& {

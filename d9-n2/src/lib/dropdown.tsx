@@ -32,7 +32,7 @@ export type DropdownDef =
 	please?: ReactNode;
 	clearable?: boolean;
 };
-/** Input widget definition, with html attributes */
+/** widget definition, with html attributes */
 export type DropdownProps = OmitNodeDef<DropdownDef> & Omit<WidgetProps, '$wrapped'> & {
 	$wrapped: Omit<WidgetProps['$wrapped'], '$onValueChange'> & {
 		$onValueChange: OnDropdownValueChange<DropdownOptionValue>;

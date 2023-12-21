@@ -9,7 +9,7 @@ export type InputDef = ValueChangeableNodeDef & OmitHTMLProps2<HTMLInputElement,
 	autoSelect?: boolean;
 	valueToNumber?: boolean;
 };
-/** Input widget definition, with html attributes */
+/** widget definition, with html attributes */
 export type InputProps = OmitNodeDef<InputDef> & WidgetProps;
 
 const AnInput = styled.input.attrs<{ autoSelect: boolean }>(

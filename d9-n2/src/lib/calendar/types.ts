@@ -16,5 +16,5 @@ export type CalendarDef = ValueChangeableNodeDef & OmitHTMLProps<HTMLDivElement>
 	initTimeAt?: CalendarFixedTimeAt;
 	autoConfirm?: boolean;
 };
-/** Input widget definition, with html attributes */
+/** widget definition, with html attributes */
 export type CalendarProps = OmitNodeDef<CalendarDef> & WidgetProps;

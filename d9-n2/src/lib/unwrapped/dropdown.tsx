@@ -3,7 +3,7 @@ import React from 'react';
 import {Dropdown, DropdownOptionValue, DropdownProps} from '../dropdown';
 import {OnDropdownValueChange} from '../dropdown-options-assist';
 
-/** Dropdown configuration definition */
+/** configuration definition */
 type UnwrappedDropdownProps =
 	Omit<DropdownProps, 'value' | '$wrapped' | keyof MonitorNodeDef>
 	& {

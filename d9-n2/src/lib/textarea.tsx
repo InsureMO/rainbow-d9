@@ -8,7 +8,7 @@ import {OmitHTMLProps2, OmitNodeDef} from './types';
 export type TextareaDef = ValueChangeableNodeDef & OmitHTMLProps2<HTMLTextAreaElement, 'value' | 'onChange'> & {
 	autoSelect?: boolean;
 };
-/** Input widget definition, with html attributes */
+/** widget definition, with html attributes */
 export type TextareaProps = OmitNodeDef<TextareaDef> & WidgetProps;
 
 const ATextarea = styled.textarea.attrs<{ autoSelect: boolean }>(

@@ -47,7 +47,7 @@ export type MultiDropdownDef =
  * 2. option is currently selected, or null if it is clearing. when option is given, use select to identify that this option is add or remove value into model
  */
 export type OnMultiDropdownValueChange = <NV extends PropValue>(newValue: NV, option: DropdownOption<MultiDropdownOptionValue> | null, select: boolean) => void | Promise<void>;
-/** Input widget definition, with html attributes */
+/** widget definition, with html attributes */
 export type MultiDropdownProps = OmitNodeDef<MultiDropdownDef> & Omit<WidgetProps, '$wrapped'> & {
 	$wrapped: Omit<WidgetProps['$wrapped'], '$onValueChange'> & {
 		$onValueChange: OnMultiDropdownValueChange;
@@ -303,7 +303,7 @@ export const MultiDropdown = (props: MultiDropdownProps) => {
 		event.stopPropagation();
 		const values = currentValuesToArray();
 		if (values != null && values.length !== 0) {
-			await $onValueChange(null, null, true);
+			await $onValueChange(null, null, false);
 		}
 		// simply force update, since height might be changed
 		forceUpdate();

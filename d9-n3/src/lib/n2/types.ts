@@ -7,6 +7,8 @@ export enum N2WidgetType {
 	DECORATE_NUMBER = 'DecoNumber',
 	TEXTAREA = 'Textarea',
 	CHECKBOX = 'Checkbox',
+	CHECKBOXES = 'Checkboxes',
+	CHECKS = 'Checks',
 	RADIO = 'Radio',
 	RADIOS = 'Radios',
 	BUTTON = 'Button',

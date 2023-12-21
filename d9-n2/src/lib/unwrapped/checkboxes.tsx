@@ -1,10 +1,10 @@
 import {MonitorNodeDef, NodeAttributeValues, PropValue, VUtils} from '@rainbow-d9/n1';
 import React from 'react';
-import {Checkbox, CheckboxProps} from '../checkbox';
+import {Checkboxes, CheckboxesProps} from '../checkboxes';
 
 /** configuration definition */
-type UnwrappedCheckboxProps =
-	Omit<CheckboxProps, 'value' | '$wrapped' | keyof MonitorNodeDef>
+type UnwrappedCheckboxesProps =
+	Omit<CheckboxesProps, 'value' | '$wrapped' | keyof MonitorNodeDef>
 	& {
 	value?: PropValue;
 	onValueChange: (value: PropValue) => void;
@@ -12,16 +12,16 @@ type UnwrappedCheckboxProps =
 	visible?: boolean;
 };
 
-const UnwrappedCheckbox = (props: UnwrappedCheckboxProps) => {
+const UnwrappedCheckboxes = (props: UnwrappedCheckboxesProps) => {
 	const {value, onValueChange, disabled, visible, ...rest} = props;
 
 	const $onValueChange = onValueChange;
 	const $avs = {$disabled: disabled, $visible: visible} as NodeAttributeValues;
 	const $root = {value};
 
-	return <Checkbox {...rest} $wrapped={{$onValueChange, $avs, $root, $model: $root, $p2r: '.'}}
-	                 $pp="value"
-	                 id={rest.id ?? VUtils.generateUniqueId()}/>;
+	return <Checkboxes {...rest} $wrapped={{$onValueChange, $avs, $root, $model: $root, $p2r: '.'}}
+	                   $pp="value"
+	                   id={rest.id ?? VUtils.generateUniqueId()}/>;
 };
 
-export {UnwrappedCheckbox, UnwrappedCheckboxProps};
+export {UnwrappedCheckboxes, UnwrappedCheckboxesProps};

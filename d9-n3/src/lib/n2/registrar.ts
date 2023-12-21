@@ -4,6 +4,7 @@ import {N2ButtonBarTranslator} from './button-bar';
 import {N2CalendarTranslator, N2DateTimeTranslator, N2DateTranslator} from './calendar';
 import {N2CaptionTranslator, N2LabelTranslator} from './caption';
 import {N2CheckboxTranslator} from './checkbox';
+import {N2CheckboxesTranslator, N2ChecksTranslator} from './checkboxes';
 import {N2DecorateInputTranslator} from './decorate-input';
 import {N2DecorateNumberTranslator} from './decorate-number';
 import {N2DropdownTranslator} from './dropdown';
@@ -26,6 +27,8 @@ export const registerN2Widgets = (widgetHelper?: WidgetHelper) => {
 	repo.register(new N2DecorateNumberTranslator(repo));
 	repo.register(new N2TextareaTranslator(repo));
 	repo.register(new N2CheckboxTranslator(repo));
+	repo.register(new N2CheckboxesTranslator(repo));
+	repo.register(new N2ChecksTranslator(repo));
 	repo.register(new N2RadioTranslator(repo));
 	repo.register(new N2RadiosTranslator(repo));
 	repo.register(new N2DropdownTranslator(repo));
