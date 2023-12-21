@@ -6,7 +6,7 @@ import {
 	ValueChangeableNodeDef,
 	WidgetProps
 } from '@rainbow-d9/n1';
-import React from 'react';
+import React, {MouseEvent} from 'react';
 import styled from 'styled-components';
 import {CssVars, DOM_ID_WIDGET, DOM_KEY_WIDGET} from './constants';
 import {OmitHTMLProps, OmitNodeDef} from './types';
@@ -116,10 +116,13 @@ export const Radio = (props: RadioProps) => {
 		...rest
 	} = props;
 
-	const onClick = async () => {
+	const onClick = async (event: MouseEvent<HTMLDivElement>) => {
 		if ($disabled) {
 			return;
 		}
+
+		event.preventDefault();
+		event.stopPropagation();
 
 		const oldValue = MUtils.getValue($model, $pp);
 		if (oldValue == values[0]) {

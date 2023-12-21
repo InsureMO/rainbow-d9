@@ -1,5 +1,5 @@
 import {MUtils, registerWidget, ValueChangeableNodeDef, WidgetProps} from '@rainbow-d9/n1';
-import React, {MouseEvent, ReactNode} from 'react';
+import React, {ReactNode} from 'react';
 import styled from 'styled-components';
 import {CssVars, DOM_ID_WIDGET, DOM_KEY_WIDGET} from './constants';
 import {DropdownOptionValue} from './dropdown';
@@ -24,31 +24,34 @@ export type RadiosProps = OmitNodeDef<RadiosDef> & Omit<WidgetProps, '$wrapped'>
 	}
 };
 
-const ARadios = styled.div.attrs<{ columns: number, grid: boolean, compact: boolean }>(
-	({id, columns, grid, compact}) => {
+const ARadios = styled.div.attrs(({id}) => {
+	return {
+		[DOM_KEY_WIDGET]: 'd9-radios',
+		[DOM_ID_WIDGET]: id
+	};
+})`
+    display: flex;
+    position: relative;
+    flex-wrap: wrap;
+    color: ${CssVars.FONT_COLOR};
+`;
+const Option = styled.span.attrs<{ columns: number, compact: boolean }>(
+	({columns, compact}) => {
 		return {
-			[DOM_KEY_WIDGET]: 'd9-radios',
-			[DOM_ID_WIDGET]: id,
+			[DOM_KEY_WIDGET]: 'd9-radios-option',
 			style: {
-				display: grid ? 'grid' : 'flex',
-				// columns <= 0 means horizontal
-				flexWrap: (!grid && columns <= 0) ? 'wrap' : (void 0),
-				flexDirection: (grid || columns <= 0) ? (void 0) : 'column',
-				gridTemplateColumns: grid
-					? (compact ? `${new Array(columns - 1).fill('auto').join(' ')} 1fr` : `repeat(${columns}, 1fr)`)
-					: (void 0)
+				flexBasis: (columns > 0 && !compact) ? `${1 / columns * 100}%` : (void 0)
 			}
 		};
-	})<{ columns: number, grid: boolean, compact: boolean }>`
-    position: relative;
-`;
-const Option = styled.span.attrs({[DOM_KEY_WIDGET]: 'd9-radios-option'})`
+	})<{ columns: number, compact: boolean }>`
     display: flex;
     align-items: center;
     font-family: ${CssVars.FONT_FAMILY};
     font-size: ${CssVars.FONT_SIZE};
-    padding: 0 ${CssVars.INPUT_INDENT};
     height: ${CssVars.INPUT_HEIGHT};
+    padding: 0 ${CssVars.INPUT_INDENT};
+    margin-left: calc(${CssVars.INPUT_INDENT} * -1);
+    margin-right: ${CssVars.INPUT_INDENT};
     border-radius: ${CssVars.BORDER_RADIUS};
     overflow: hidden;
     white-space: nowrap;
@@ -75,13 +78,26 @@ const Option = styled.span.attrs({[DOM_KEY_WIDGET]: 'd9-radios-option'})`
     }
 
     > div[data-w=d9-radio] {
+        border-top-left-radius: ${CssVars.BORDER_RADIUS};
+        border-bottom-left-radius: ${CssVars.BORDER_RADIUS};
         min-width: ${CssVars.INPUT_HEIGHT};
     }
 
     > span {
+        display: flex;
+        position: relative;
+        align-items: center;
+        height: 100%;
         overflow: hidden;
+        white-space: nowrap;
         text-overflow: ellipsis;
     }
+`;
+const Separator = styled.span.attrs({[DOM_KEY_WIDGET]: 'd9-radios-option-separator'})`
+    display: block;
+    position: relative;
+    height: 0;
+    flex-basis: 100%;
 `;
 
 export const Radios = (props: RadiosProps) => {
@@ -95,24 +111,20 @@ export const Radios = (props: RadiosProps) => {
 
 	const {createAskDisplayOptions} = useDropdownOptions(props);
 
-	const onOptionClicked = (option: DropdownOption<DropdownOptionValue>) => async (event: MouseEvent<HTMLSpanElement>) => {
+	const onOptionClicked = (option: DropdownOption<DropdownOptionValue>) => async () => {
 		if ($disabled) {
 			return;
 		}
-		event.preventDefault();
-		event.stopPropagation();
 		await $onValueChange(option.value, option);
 	};
 
 	const askDisplayOptions = createAskDisplayOptions();
 	const displayOptions = askDisplayOptions();
-	const grid = columns > 1 && !compact;
 	const canClick = !$disabled;
 
 	const modelValue = MUtils.getValue($model, $pp) as DropdownOptionValue;
 
-	return <ARadios data-disabled={$disabled} data-visible={$visible}
-	                grid={grid} columns={columns} compact={compact} {...rest}>
+	return <ARadios data-disabled={$disabled} data-visible={$visible} {...rest}>
 		{displayOptions.map((option, index) => {
 			const {value, label} = option;
 			const valueKey = `${value}_${index + 1}`;
@@ -125,10 +137,18 @@ export const Radios = (props: RadiosProps) => {
 				$avs: {$disabled, $visible: true}
 			} as RadioProps['$wrapped'];
 
-			return <Option key={valueKey} data-can-click={canClick}>
+			const node = <Option key={valueKey} data-can-click={canClick}
+			                     columns={columns} compact={compact}
+			                     onClick={canClick ? onOptionClicked(option) : (void 0)}>
 				<Radio $pp={valueKey} $wrapped={$wrapped}/>
-				<span onClick={canClick ? onOptionClicked(option) : (void 0)}>{label}</span>
+				<span>{label}</span>
 			</Option>;
+
+			if (columns >= 1 && compact && (index + 1) % columns === 0) {
+				return <>{node}<Separator/></>;
+			} else {
+				return <>{node}</>;
+			}
 		})}
 	</ARadios>;
 };
