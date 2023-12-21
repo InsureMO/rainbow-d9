@@ -9,37 +9,30 @@ import {
 import React from 'react';
 import styled from 'styled-components';
 import {CssVars} from './constants';
-import {Check} from './icons';
 import {OmitHTMLProps, OmitNodeDef} from './types';
 
-export type CheckboxPossibleValues = [NullPropValue | PrimitivePropValue, NullPropValue | PrimitivePropValue];
+export type RadioPossibleValues = [NullPropValue | PrimitivePropValue, NullPropValue | PrimitivePropValue];
 
 /** Input configuration definition */
-export type CheckboxDef = ValueChangeableNodeDef & OmitHTMLProps<HTMLDivElement> & {
-	values?: CheckboxPossibleValues;
+export type RadioDef = ValueChangeableNodeDef & OmitHTMLProps<HTMLDivElement> & {
+	values?: RadioPossibleValues;
 };
 /** Input widget definition, with html attributes */
-export type CheckboxProps = OmitNodeDef<CheckboxDef> & WidgetProps;
+export type RadioProps = OmitNodeDef<RadioDef> & WidgetProps;
 
-const ACheckbox = styled.div.attrs({'data-w': 'd9-checkbox'})`
+const ARadio = styled.div.attrs({'data-w': 'd9-radio'})`
     display: block;
     position: relative;
     padding: calc((${CssVars.INPUT_HEIGHT}) / 6) 0;
     width: ${CssVars.INPUT_HEIGHT};
     height: ${CssVars.INPUT_HEIGHT};
-    fill: ${CssVars.FONT_COLOR};
     cursor: pointer;
 
-    &[data-checked=true] {
-        > svg {
-            opacity: 1;
-        }
-    }
-
-    &[data-checked=false] {
-        > svg {
-            opacity: 0;
-        }
+    &[data-checked=false]:after {
+        width: 0;
+        height: 0;
+        margin-top: calc((${CssVars.INPUT_HEIGHT}) / 3);
+        margin-left: calc((${CssVars.INPUT_HEIGHT}) / 3);
     }
 
     &[data-visible=false] {
@@ -54,11 +47,13 @@ const ACheckbox = styled.div.attrs({'data-w': 'd9-checkbox'})`
         }
 
         &:hover, &:focus-within {
-            fill: ${CssVars.FONT_COLOR};
-
             &:before {
                 border-color: ${CssVars.BORDER_COLOR};
                 box-shadow: none;
+            }
+
+            &:after {
+                background-color: ${CssVars.FONT_COLOR};
             }
         }
     }
@@ -73,10 +68,12 @@ const ACheckbox = styled.div.attrs({'data-w': 'd9-checkbox'})`
 
     &:hover,
     &:focus-within {
-        fill: ${CssVars.PRIMARY_COLOR};
-
         &:before {
             border-color: ${CssVars.PRIMARY_COLOR};
+        }
+
+        &:after {
+            background-color: ${CssVars.PRIMARY_COLOR};
         }
     }
 
@@ -87,22 +84,27 @@ const ACheckbox = styled.div.attrs({'data-w': 'd9-checkbox'})`
         width: calc((${CssVars.INPUT_HEIGHT}) / 3 * 2);
         height: calc((${CssVars.INPUT_HEIGHT}) / 3 * 2);
         border: ${CssVars.BORDER};
-        border-radius: ${CssVars.BORDER_RADIUS};
+        border-radius: 100%;
         transition: all ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION};
         z-index: 0;
     }
 
-    > svg {
-        position: relative;
+    &:after {
+        content: '';
+        display: block;
+        position: absolute;
         width: calc((${CssVars.INPUT_HEIGHT}) / 3);
         height: calc((${CssVars.INPUT_HEIGHT}) / 3);
         margin-top: calc((${CssVars.INPUT_HEIGHT}) / 6);
         margin-left: calc((${CssVars.INPUT_HEIGHT}) / 6);
-        transition: opacity ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION};
+        border-radius: 100%;
+        background-color: ${CssVars.FONT_COLOR};
+        transform-origin: center;
+        transition: all ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION};
     }
 `;
 
-export const Checkbox = (props: CheckboxProps) => {
+export const Radio = (props: RadioProps) => {
 	const {
 		values = [true, false],
 		$pp, $wrapped: {$onValueChange, $model, $avs: {$disabled, $visible}},
@@ -115,18 +117,20 @@ export const Checkbox = (props: CheckboxProps) => {
 		}
 
 		const oldValue = MUtils.getValue($model, $pp);
-		const newValue = oldValue == values[0] ? values[1] : values[0];
-		await $onValueChange(newValue);
+		if (oldValue == values[0]) {
+			// already checked, radio cannot back to uncheck
+		} else {
+			const newValue = oldValue == values[0] ? values[1] : values[0];
+			await $onValueChange(newValue);
+		}
 	};
 
 	const value = MUtils.getValue($model, $pp);
 	const checked = (value ?? '') == (values[0] ?? '');
 
-	return <ACheckbox data-disabled={$disabled} data-visible={$visible} tabIndex={0}
-	                  data-checked={checked}
-	                  onClick={onClick} {...rest}>
-		{<Check/>}
-	</ACheckbox>;
+	return <ARadio data-disabled={$disabled} data-visible={$visible} tabIndex={0}
+	               data-checked={checked}
+	               onClick={onClick} {...rest}/>;
 };
 
-registerWidget({key: 'Checkbox', JSX: Checkbox, container: false, array: false});
+registerWidget({key: 'Radio', JSX: Radio, container: false, array: false});

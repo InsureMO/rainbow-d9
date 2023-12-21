@@ -6,6 +6,7 @@ export * from './decorate-input';
 export * from './decorate-number';
 export * from './textarea';
 export * from './checkbox';
+export * from './radio';
 export * from './dropdown';
 export * from './multi-dropdown';
 export * from './calendar';

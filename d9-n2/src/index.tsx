@@ -15,6 +15,7 @@ export * from './lib/form-cell';
 export * from './lib/input';
 export * from './lib/decorate-input';
 export * from './lib/checkbox';
+export * from './lib/radio';
 export * from './lib/page';
 export * from './lib/ribs';
 export * from './lib/table';
