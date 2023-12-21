@@ -6,7 +6,7 @@ import {
 	ValueChangeableNodeDef,
 	WidgetProps
 } from '@rainbow-d9/n1';
-import React from 'react';
+import React, {KeyboardEvent, MouseEvent} from 'react';
 import styled from 'styled-components';
 import {CssVars, DOM_ID_WIDGET, DOM_KEY_WIDGET} from './constants';
 import {Check} from './icons';
@@ -114,14 +114,25 @@ export const Checkbox = (props: CheckboxProps) => {
 		...rest
 	} = props;
 
-	const onClick = async () => {
+	const onValueChange = async () => {
+		const oldValue = MUtils.getValue($model, $pp);
+		const newValue = oldValue == values[0] ? values[1] : values[0];
+		await $onValueChange(newValue);
+	};
+	const onClick = async (event: MouseEvent<HTMLDivElement>) => {
 		if ($disabled) {
 			return;
 		}
 
-		const oldValue = MUtils.getValue($model, $pp);
-		const newValue = oldValue == values[0] ? values[1] : values[0];
-		await $onValueChange(newValue);
+		event.preventDefault();
+		event.stopPropagation();
+		await onValueChange();
+	};
+	const onKeyUp = async (event: KeyboardEvent<HTMLDivElement>) => {
+		const {key} = event;
+		if (key === ' ') {
+			await onValueChange();
+		}
 	};
 
 	const value = MUtils.getValue($model, $pp);
@@ -129,7 +140,7 @@ export const Checkbox = (props: CheckboxProps) => {
 
 	return <ACheckbox data-disabled={$disabled} data-visible={$visible} tabIndex={0}
 	                  data-checked={checked}
-	                  onClick={onClick} {...rest}>
+	                  onClick={onClick} onKeyUp={onKeyUp} {...rest}>
 		{<Check/>}
 	</ACheckbox>;
 };

@@ -6,7 +6,7 @@ import {
 	ValueChangeableNodeDef,
 	WidgetProps
 } from '@rainbow-d9/n1';
-import React, {MouseEvent} from 'react';
+import React, {KeyboardEvent, MouseEvent} from 'react';
 import styled from 'styled-components';
 import {CssVars, DOM_ID_WIDGET, DOM_KEY_WIDGET} from './constants';
 import {OmitHTMLProps, OmitNodeDef} from './types';
@@ -116,14 +116,7 @@ export const Radio = (props: RadioProps) => {
 		...rest
 	} = props;
 
-	const onClick = async (event: MouseEvent<HTMLDivElement>) => {
-		if ($disabled) {
-			return;
-		}
-
-		event.preventDefault();
-		event.stopPropagation();
-
+	const onValueShouldChange = async () => {
 		const oldValue = MUtils.getValue($model, $pp);
 		if (oldValue == values[0]) {
 			// already checked, radio cannot back to uncheck
@@ -132,13 +125,28 @@ export const Radio = (props: RadioProps) => {
 			await $onValueChange(newValue);
 		}
 	};
+	const onClick = async (event: MouseEvent<HTMLDivElement>) => {
+		if ($disabled) {
+			return;
+		}
+
+		event.preventDefault();
+		event.stopPropagation();
+		await onValueShouldChange();
+	};
+	const onKeyUp = async (event: KeyboardEvent<HTMLDivElement>) => {
+		const {key} = event;
+		if (key === ' ') {
+			await onValueShouldChange();
+		}
+	};
 
 	const value = MUtils.getValue($model, $pp);
 	const checked = (value ?? '') == (values[0] ?? '');
 
 	return <ARadio data-disabled={$disabled} data-visible={$visible} tabIndex={0}
 	               data-checked={checked}
-	               onClick={onClick} {...rest}/>;
+	               onClick={onClick} onKeyUp={onKeyUp} {...rest}/>;
 };
 
 registerWidget({key: 'Radio', JSX: Radio, container: false, array: false});
