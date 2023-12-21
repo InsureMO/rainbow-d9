@@ -138,7 +138,7 @@ export const Dropdown = (props: DropdownProps) => {
 	} = useFilterableDropdownOptions(props);
 	const forceUpdate = useForceUpdate();
 
-	const onOptionClicked = (option: OptionItem<DropdownOptionValue>) => async (event: MouseEvent<HTMLSpanElement>) => {
+	const onOptionClicked = (option: DropdownOption) => async (event: MouseEvent<HTMLSpanElement>) => {
 		if ($disabled) {
 			return;
 		}
@@ -172,7 +172,10 @@ export const Dropdown = (props: DropdownProps) => {
 
 	const value = MUtils.getValue($model, $pp) as DropdownOptionValue;
 	const selected = value != null;
-	const label = (value == null ? please : (askOptions().find(option => option.value == value)?.label ?? please)) || '';
+	const label = (value == null
+			? please
+			: ((askOptions() as DropdownOptions).find(option => option.value == value)?.label ?? please))
+		|| '';
 
 	return <DropdownContainer active={popupState.active} atBottom={popupState.atBottom}
 	                          ref={containerRef} role="input" tabIndex={0}
