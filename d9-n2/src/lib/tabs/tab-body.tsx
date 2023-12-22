@@ -40,9 +40,10 @@ export const TabBody = (props: TabBodyProps) => {
 		return null;
 	}
 
+	// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+	const defs = defState.def!;
 	return <ATabBody data-visible={active}>
-		{/** eslint-disable-next-line @typescript-eslint/no-non-null-assertion */}
-		<WrapperDelegate {...defState.def!}
+		<WrapperDelegate {...defs}
 		                 $root={$root} $model={MUtils.getValue($model, $pp)} $p2r={PPUtils.concat($p2r, $pp)}/>
 	</ATabBody>;
 };

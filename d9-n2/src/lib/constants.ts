@@ -83,6 +83,7 @@ export const CssVars = {
 
 	TAB_TITLE_HEIGHT: 'var(--d9-tab-title-height, 44px)',
 	TAB_TITLE_OFFSET: 'var(--d9-tab-title-offset, calc(44px / 6))',
+	TAB_TITLE_ACTIVE_COLOR: `var(--d9-tab-title-active-color, ${color(CssConstants.PRIMARY_COLOR).alpha(0.1)})`,
 	TAB_TITLE_PADDING: 'var(--d9-tab-title-padding, 16px)',
 	TAB_TITLE_FONT_FAMILY: `var(--d9-tab-title-font-family, ${CssConstants.FONT_FAMILY})`,
 	TAB_TITLE_FONT_SIZE: `var(--d9-tab-title-font-size, 16px)`,
@@ -112,7 +113,7 @@ export const CssVars = {
 	RIB_BORDER_RADIUS: 'var(--d9-rib-border-radius, 4px)',
 	RIB_BUTTON_HEIGHT: 'var(--d9-rib-button-height, 26px)',
 	RIB_GAP_SIZE: 'var(--d9-rib-gap-size, 8px)',
-	RIB_HEADER_BACKGROUND_COLOR: `var(--d9-rib-header-background-color, ${color(CssConstants.BORDER_COLOR).opaquer(0.7)})`,
+	RIB_HEADER_BACKGROUND_COLOR: `var(--d9-rib-header-background-color, ${color(CssConstants.BG_COLOR).darken(0.1)})`,
 	RIB_FOOTER_HEIGHT: 'var(--d9-rib-footer-height, 44px)',
 
 	TABLE_BUTTON_HEIGHT: 'var(--d9-table-button-height, 26px)',

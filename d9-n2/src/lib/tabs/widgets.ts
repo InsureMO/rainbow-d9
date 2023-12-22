@@ -38,6 +38,12 @@ export const ATabTitle = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-tab-title'})`
     cursor: pointer;
     transition: all ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION};
 
+    &[data-active=true] {
+        background-color: ${CssVars.TAB_TITLE_ACTIVE_COLOR};
+        border-color: ${CssVars.TAB_TITLE_ACTIVE_COLOR};
+        z-index: 1;
+    }
+
     &[data-visible=false] {
         display: none;
     }
@@ -50,7 +56,7 @@ export const ATabTitle = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-tab-title'})`
     &:hover {
         border-color: ${CssVars.PRIMARY_COLOR};
         box-shadow: ${CssVars.PRIMARY_HOVER_SHADOW};
-        z-index: 1;
+        z-index: 2;
     }
 `;
 export const TabsBody = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-tabs-body'})`
