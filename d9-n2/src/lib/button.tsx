@@ -354,25 +354,22 @@ const AButton = styled.button.attrs<{ hasOneLeadOrTail: boolean }>(
 
     &[disabled], &[data-disabled=true] {
         cursor: default;
+        color: ${CssVars.WAIVE_COLOR};
+        border-color: ${CssVars.DISABLE_COLOR};
+        background-color: ${CssVars.DISABLE_COLOR};
 
-        &[data-fill=link], &[data-fill=plain] {
-            border-color: ${CssVars.DISABLE_COLOR};
-            background-color: ${CssVars.DISABLE_COLOR};
+        &[data-fill=plain], &[data-fill=plain][data-ink] {
+            border-color: ${CssVars.WAIVE_COLOR};
+        }
 
-            &[data-ink] {
-                border-color: ${CssVars.DISABLE_COLOR};
-                background-color: ${CssVars.DISABLE_COLOR};
+        &[data-fill=link], &[data-fill=link][data-ink] {
+            border-color: transparent;
+            background-color: transparent;
+        }
 
-                &:hover, &:focus, &:active {
-                    box-shadow: none;
-                }
-
-                > span[data-w=d9-deco-lead],
-                > span[data-w=d9-deco-tail] {
-                    color: ${CssVars.WAIVE_COLOR};
-                    fill: ${CssVars.WAIVE_COLOR};
-                }
-            }
+        &[data-fill=link], &[data-fill=link][data-ink],
+        &[data-fill=plain], &[data-fill=plain][data-ink] {
+            color: ${CssVars.WAIVE_COLOR};
 
             &:hover, &:focus, &:active {
                 box-shadow: none;
