@@ -60,9 +60,9 @@ export class WidgetTranslator extends AbstractTranslator<Decipherable> {
 	protected tryToTranslateAttributeToWidget<V>(options: {
 		$wt: WidgetType;
 		classified: ClassifiedAttributesAndWidgets; attributeName: string;
-		given?: Nullable<V>; $pp: Undefinable<PropertyPath>;
+		given?: Nullable<V>; $ppOfParent: Undefinable<PropertyPath>;
 	}): Nullable<V> | NodeDef {
-		const {$wt, classified, attributeName, given, $pp} = options;
+		const {$wt, classified, attributeName, given} = options;
 
 		let transformed: Nullable<V> | NodeDef;
 		const {attributes} = classified;
@@ -82,7 +82,7 @@ export class WidgetTranslator extends AbstractTranslator<Decipherable> {
 			// or maybe built-in property for widget itself, such as Section, will be treated as title
 			const {node, success} = this.translate({
 				type: ParsedNodeType.LIST_ITEM, kind: ParsedListItemKind.WIDGET,
-				$wt: (def.attributeValue ?? '').trim() || 'Caption', $pp,
+				$wt: (def.attributeValue ?? '').trim() || 'Caption',
 				children: def.children,
 				$flag: WidgetFlag.STANDARD,
 				preparsed: {
@@ -113,13 +113,13 @@ export class WidgetTranslator extends AbstractTranslator<Decipherable> {
 		let transformedLabel: Nullable<string> | NodeDef;
 		if (translator?.shouldTranslateLabelAttribute() ?? true) {
 			transformedLabel = this.tryToTranslateAttributeToWidget({
-				$wt, classified, given: label, $pp, attributeName: 'label'
+				$wt, classified, given: label, $ppOfParent: $pp, attributeName: 'label'
 			});
 		} else {
 			transformedLabel = label;
 		}
 		const transformedWidgets = (translator?.getToWidgetAttributeNames() ?? []).reduce((map, name) => {
-			map[name] = this.tryToTranslateAttributeToWidget({$wt, classified, $pp, attributeName: name});
+			map[name] = this.tryToTranslateAttributeToWidget({$wt, classified, $ppOfParent: $pp, attributeName: name});
 			return map;
 		}, {});
 		const attributes: AttributeMap = this.parseAndCombineAttributes({

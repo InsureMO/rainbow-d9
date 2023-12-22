@@ -22,11 +22,11 @@ export const LabelLike = (props: LabelLikeProps) => {
 			return <>{label}</>;
 		}
 	} else {
-		const caption = label as NodeDef;
+		const def = label as NodeDef;
 		// eslint-disable-next-line @typescript-eslint/no-unused-vars
-		const {$key: keyOfChild, ...more} = caption;
-		NUtils.getDefKey(caption);
-		NUtils.inheritValidationScopes($validationScopes, caption);
+		const {$key: keyOfChild, ...more} = def;
+		NUtils.getDefKey(def);
+		NUtils.inheritValidationScopes($validationScopes, def);
 		return <Wrapper $root={$wrapped.$root} $model={$wrapped.$model} $p2r={$wrapped.$p2r} {...rest} {...more} />;
 	}
 };

@@ -279,6 +279,8 @@ export const Caption = forwardRef((props: CaptionProps, ref: ForwardedRef<HTMLSp
 			// @ts-ignore
 			value = valueToLabel(MUtils.getValue($model, $pp), formatter) ?? '';
 		} else if (label != null) {
+			// wrap nested is not necessary, since caption do everything very well by itself.
+			// but still use label like here to make it more consistent.
 			value = <LabelLike $wrapped={$wrapped} $validationScopes={props} label={label}/>;
 		} else {
 			// empty caption
