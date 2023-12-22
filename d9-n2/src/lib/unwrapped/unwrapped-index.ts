@@ -23,6 +23,7 @@ import {UnwrappedMultiDropdown, UnwrappedMultiDropdownProps} from './multi-dropd
 import {UnwrappedRadio, UnwrappedRadioProps} from './radio';
 import {UnwrappedRadios, UnwrappedRadiosProps} from './radios';
 import {UnwrappedSection, UnwrappedSectionProps} from './section';
+import {UnwrappedTabs, UnwrappedTabsProps} from './tabs';
 
 export {
 	UnwrappedCaption, UnwrappedCaptionProps, UnwrappedLabel, UnwrappedLabelProps,
@@ -41,5 +42,6 @@ export {
 	UnwrappedButton, UnwrappedButtonProps,
 
 	UnwrappedSection, UnwrappedSectionProps,
+	UnwrappedTabs, UnwrappedTabsProps,
 	UnwrappedButtonBar, UnwrappedButtonBarProps
 };

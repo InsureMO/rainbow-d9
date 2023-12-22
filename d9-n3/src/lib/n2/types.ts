@@ -15,6 +15,7 @@ export enum N2WidgetType {
 	BUTTON_BAR = 'ButtonBar',
 	CAPTION = 'Caption',
 	LABEL = 'Label',
+	BADGE = 'Badge',
 	DROPDOWN = 'Dropdown',
 	MULTI_DROPDOWN = 'MultiDropdown',
 	CALENDAR = 'Calendar',
@@ -26,5 +27,7 @@ export enum N2WidgetType {
 
 	TABLE = 'Table',
 
-	SECTION = 'Section'
+	SECTION = 'Section',
+	TAB = 'Tab',
+	TABS = 'Tabs',
 }

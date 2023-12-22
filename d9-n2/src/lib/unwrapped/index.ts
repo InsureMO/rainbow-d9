@@ -36,6 +36,7 @@ import {
 import {UnwrappedRadio as Radio, UnwrappedRadioProps as RadioProps} from './radio';
 import {UnwrappedRadios as Radios, UnwrappedRadiosProps as RadiosProps} from './radios';
 import {UnwrappedSection as Section, UnwrappedSectionProps as SectionProps} from './section';
+import {UnwrappedTabs as Tabs, UnwrappedTabsProps as TabsProps} from './tabs';
 import {UnwrappedTextarea as Textarea, UnwrappedTextareaProps as TextareaProps} from './textarea';
 
 export {
@@ -54,5 +55,6 @@ export {
 	Button, ButtonProps,
 
 	Section, SectionProps,
+	Tabs, TabsProps,
 	ButtonBar, ButtonBarProps
 };

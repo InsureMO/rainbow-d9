@@ -94,6 +94,13 @@ export abstract class SpecificWidgetTranslator<T extends WidgetType> {
 	public getReactionHandlerDetectives(): Array<MonitorHandlerDetective> {
 		return [];
 	}
+
+	/**
+	 * default do nothing, return given definition itself.
+	 */
+	public postWork<Def extends NodeDef>(def: Partial<Def>): Def {
+		return def as Def;
+	}
 }
 
 export abstract class SpecificArrayWidgetTranslator<T extends WidgetType> extends SpecificWidgetTranslator<T> {

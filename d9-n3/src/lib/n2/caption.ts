@@ -154,3 +154,28 @@ export class N2LabelTranslator extends SpecificWidgetTranslator<N2WidgetType.LAB
 		return [N2CaptionReactionDetective];
 	}
 }
+
+export class N2BadgeTranslator extends SpecificWidgetTranslator<N2WidgetType.BADGE> {
+	public getSupportedType(): N2WidgetType.BADGE {
+		return N2WidgetType.BADGE;
+	}
+
+	public shouldTranslateLabelAttribute(): boolean {
+		return false;
+	}
+
+	public redressProperties<Def extends NodeDef>(def: Partial<Def>): Def {
+		// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+		// @ts-ignore
+		return super.redressProperties(N2CaptionRedressLabelAndText(def));
+	}
+
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	public getAttributeValueBuilders(): Array<AttributeValueBuild<any>> {
+		return [N2CaptionValueToLabelBuild, N2CaptionClickBuild, DecorateLeadsBuild, DecorateTailsBuild];
+	}
+
+	public getReactionHandlerDetectives(): Array<MonitorHandlerDetective> {
+		return [N2CaptionReactionDetective];
+	}
+}

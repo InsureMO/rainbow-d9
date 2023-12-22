@@ -21,6 +21,7 @@ export * from './lib/page';
 export * from './lib/ribs';
 export * from './lib/table';
 export * from './lib/section';
+export * from './lib/tabs';
 export * from './lib/textarea';
 
 export * from './lib/hooks';

@@ -1,5 +1,5 @@
 import {MUtils, registerWidget, ValueChangeableNodeDef, WidgetProps} from '@rainbow-d9/n1';
-import React, {ReactNode} from 'react';
+import React, {Fragment, ReactNode} from 'react';
 import styled from 'styled-components';
 import {CssVars, DOM_ID_WIDGET, DOM_KEY_WIDGET} from './constants';
 import {OnOptionValueChange, OptionItem, OptionItemsDef, useOptionItems} from './option-items-assist';
@@ -137,7 +137,7 @@ export const Radios = (props: RadiosProps) => {
 				$avs: {$disabled, $visible: true}
 			} as RadioProps['$wrapped'];
 
-			const node = <Option key={valueKey} data-can-click={canClick}
+			const node = <Option data-can-click={canClick}
 			                     columns={columns} compact={compact}
 			                     onClick={canClick ? onOptionClicked(option) : (void 0)}>
 				<Radio $pp={valueKey} $wrapped={$wrapped}/>
@@ -145,9 +145,9 @@ export const Radios = (props: RadiosProps) => {
 			</Option>;
 
 			if (columns >= 1 && compact && (index + 1) % columns === 0) {
-				return <>{node}<Separator/></>;
+				return <Fragment key={valueKey}>{node}<Separator/></Fragment>;
 			} else {
-				return <>{node}</>;
+				return <Fragment key={valueKey}>{node}</Fragment>;
 			}
 		})}
 	</ARadios>;

@@ -154,6 +154,8 @@ export class WidgetTranslator extends AbstractTranslator<Decipherable> {
 			(def as ContainerDef).$nodes = children;
 		}
 
+		def = translator?.postWork(def as NodeDef);
+
 		// never export
 		return {node: def, success: true};
 	}

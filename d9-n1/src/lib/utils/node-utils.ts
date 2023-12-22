@@ -34,7 +34,7 @@ export const NUtils: NodeUtilsType = {
 		}
 	},
 	inheritValidationScopes: (parentDef: Pick<NodeDef, '$validationScopes'>, def: Pick<NodeDef, '$validationScopes'>) => {
-		def.$validationScopes = (parentDef.$validationScopes || [])
+		def.$validationScopes = (parentDef?.$validationScopes || [])
 			.filter(scope => VUtils.isNotBlank(scope))
 			.map(scope => scope.trim()).reduce((all, scope) => {
 				if (all.map[scope] == null) {

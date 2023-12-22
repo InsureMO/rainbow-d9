@@ -2,7 +2,7 @@ import {createOrGetTranslateHelperSingleton, WidgetHelper} from '../widget';
 import {N2ButtonTranslator} from './button';
 import {N2ButtonBarTranslator} from './button-bar';
 import {N2CalendarTranslator, N2DateTimeTranslator, N2DateTranslator} from './calendar';
-import {N2CaptionTranslator, N2LabelTranslator} from './caption';
+import {N2BadgeTranslator, N2CaptionTranslator, N2LabelTranslator} from './caption';
 import {N2CheckboxTranslator} from './checkbox';
 import {N2CheckboxesTranslator, N2ChecksTranslator} from './checkboxes';
 import {N2DecorateInputTranslator} from './decorate-input';
@@ -16,6 +16,7 @@ import {N2RadiosTranslator} from './radios';
 import {N2RibsTranslator, N2RibsViewTranslator} from './ribs';
 import {N2SectionTranslator} from './section';
 import {N2TableTranslator} from './table';
+import {N2TabsTranslator, N2TabTranslator} from './tabs';
 import {N2TextareaTranslator} from './textarea';
 
 export const registerN2Widgets = (widgetHelper?: WidgetHelper) => {
@@ -42,9 +43,13 @@ export const registerN2Widgets = (widgetHelper?: WidgetHelper) => {
 
 	repo.register(new N2CaptionTranslator(repo));
 	repo.register(new N2LabelTranslator(repo));
+	repo.register(new N2BadgeTranslator(repo));
 
 	repo.register(new N2RibsTranslator(repo));
 	repo.register(new N2RibsViewTranslator(repo));
 	repo.register(new N2TableTranslator(repo));
 	repo.register(new N2SectionTranslator(repo));
+
+	repo.register(new N2TabTranslator(repo));
+	repo.register(new N2TabsTranslator(repo));
 };

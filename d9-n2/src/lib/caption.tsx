@@ -12,6 +12,7 @@ import {
 import dayjs from 'dayjs';
 import React, {ForwardedRef, forwardRef, isValidElement, MouseEvent, ReactNode} from 'react';
 import styled from 'styled-components';
+import {ButtonFill, ButtonInk} from './button';
 import {getDefaultCalendarDateFormat, getDefaultCalendarDatetimeFormat} from './calendar/utils';
 import {CssVars, DOM_ID_WIDGET, DOM_KEY_WIDGET} from './constants';
 import {DecorateWrapperDef, transformDecorators} from './decorate-assist';
@@ -53,9 +54,11 @@ export type CaptionDef = NodeDef & DecorateWrapperDef & OmitHTMLProps2<HTMLSpanE
 /** Caption widget definition, with html attributes */
 export type CaptionProps = OmitNodeDef<CaptionDef> & WidgetProps;
 
-const ACaption = styled.span.attrs(({id}) => {
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
+const ACaption = styled.span.attrs(({id, 'data-w': dataW}) => {
 	return {
-		[DOM_KEY_WIDGET]: 'd9-caption',
+		[DOM_KEY_WIDGET]: dataW ?? 'd9-caption',
 		[DOM_ID_WIDGET]: id
 	};
 })`
@@ -78,6 +81,86 @@ const ACaption = styled.span.attrs(({id}) => {
     &[data-clickable=true] {
         cursor: pointer;
         text-decoration: underline;
+    }
+
+    &[data-w=d9-badge] {
+        justify-content: center;
+        height: calc(${CssVars.INPUT_HEIGHT} / 4 * 3);
+        border-radius: calc(${CssVars.INPUT_HEIGHT} / 8 * 3);
+        padding: 0 ${CssVars.INPUT_INDENT};
+
+        &[data-fill=fill] {
+            background-color: ${CssVars.PRIMARY_COLOR};
+            color: ${CssVars.INVERT_COLOR};
+            fill: ${CssVars.INVERT_COLOR};
+
+            &[data-ink=primary] {
+                background-color: ${CssVars.PRIMARY_COLOR};
+            }
+
+            &[data-ink=danger] {
+                background-color: ${CssVars.DANGER_COLOR};
+            }
+
+            &[data-ink=success] {
+                background-color: ${CssVars.SUCCESS_COLOR};
+            }
+
+            &[data-ink=warn] {
+                background-color: ${CssVars.WARN_COLOR};
+            }
+
+            &[data-ink=info] {
+                background-color: ${CssVars.INFO_COLOR};
+            }
+
+            &[data-ink=waive] {
+                background-color: ${CssVars.WAIVE_COLOR};
+            }
+        }
+
+        &[data-fill=plain] {
+            color: ${CssVars.PRIMARY_COLOR};
+            fill: ${CssVars.PRIMARY_COLOR};
+            border: ${CssVars.BORDER};
+            border-color: ${CssVars.PRIMARY_COLOR};
+
+            &[data-ink=primary] {
+                color: ${CssVars.PRIMARY_COLOR};
+                fill: ${CssVars.PRIMARY_COLOR};
+                border-color: ${CssVars.PRIMARY_COLOR};
+            }
+
+            &[data-ink=danger] {
+                color: ${CssVars.DANGER_COLOR};
+                fill: ${CssVars.DANGER_COLOR};
+                border-color: ${CssVars.DANGER_COLOR};
+            }
+
+            &[data-ink=success] {
+                color: ${CssVars.SUCCESS_COLOR};
+                fill: ${CssVars.SUCCESS_COLOR};
+                border-color: ${CssVars.SUCCESS_COLOR};
+            }
+
+            &[data-ink=warn] {
+                color: ${CssVars.WARN_COLOR};
+                fill: ${CssVars.WARN_COLOR};
+                border-color: ${CssVars.WARN_COLOR};
+            }
+
+            &[data-ink=info] {
+                color: ${CssVars.INFO_COLOR};
+                fill: ${CssVars.INFO_COLOR};
+                border-color: ${CssVars.INFO_COLOR};
+            }
+
+            &[data-ink=waive] {
+                color: ${CssVars.WAIVE_COLOR};
+                fill: ${CssVars.WAIVE_COLOR};
+                border-color: ${CssVars.WAIVE_COLOR};
+            }
+        }
     }
 `;
 
@@ -248,5 +331,20 @@ export const Label = forwardRef((props: LabelProps, ref: ForwardedRef<HTMLSpanEl
 	return <Caption {...props} labelOnValue={true} ref={ref}/>;
 });
 
+export interface BadgeDef extends CaptionDef {
+	ink?: ButtonInk;
+	fill?: Exclude<ButtonFill, ButtonFill.LINK>;
+}
+
+export type BadgeProps = OmitNodeDef<BadgeDef> & WidgetProps;
+
+export const Badge = forwardRef((props: BadgeProps, ref: ForwardedRef<HTMLSpanElement>) => {
+	const {ink, fill = ButtonFill.FILL, ...rest} = props;
+	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+	// @ts-ignore
+	return <Caption {...rest} ref={ref} data-w="d9-badge" data-ink={ink} data-fill={fill}/>;
+});
+
+registerWidget({key: 'Badge', JSX: Badge, container: false, array: false});
 registerWidget({key: 'Label', JSX: Label, container: false, array: false});
 registerWidget({key: 'Caption', JSX: Caption, container: false, array: false});

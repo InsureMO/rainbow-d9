@@ -81,6 +81,13 @@ export const CssVars = {
 	SECTION_HEADER_FONT_WEIGHT: 'var(--d9-section-header-title-font-weight, 600)',
 	SECTION_BODY_PADDING: 'var(--d9-section-body-padding, 8px)',
 
+	TAB_TITLE_HEIGHT: 'var(--d9-tab-title-height, 44px)',
+	TAB_TITLE_OFFSET: 'var(--d9-tab-title-offset, calc(44px / 6))',
+	TAB_TITLE_PADDING: 'var(--d9-tab-title-padding, 16px)',
+	TAB_TITLE_FONT_FAMILY: `var(--d9-tab-title-font-family, ${CssConstants.FONT_FAMILY})`,
+	TAB_TITLE_FONT_SIZE: `var(--d9-tab-title-font-size, 16px)`,
+	TAB_TITLE_FONT_WEIGHT: `var(--d9-tab-title-font-weight, 600)`,
+
 	CAPTION_FONT_FAMILY: `var(--d9-caption-font-family, ${CssConstants.FONT_FAMILY})`,
 	CAPTION_FONT_SIZE: 'var(--d9-caption-font-size, 14px)',
 	CAPTION_FONT_COLOR: `var(--d9-caption-font-color, ${CssConstants.CAPTION_FONT_COLOR})`,

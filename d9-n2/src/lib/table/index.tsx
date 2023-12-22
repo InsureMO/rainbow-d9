@@ -19,15 +19,9 @@ export const Table = (props: TableProps) => {
 };
 
 registerWidget({
-	key: 'Table',
-	JSX: Table,
-	TOP: TableTopBar,
-	BODY: TableContent,
-	NO_ELEMENT: TableNoData,
-	ELEMENT: TableRow,
-	BOTTOM: TableBottomBar,
-	container: true,
-	array: true
+	key: 'Table', JSX: Table,
+	TOP: TableTopBar, BODY: TableContent, NO_ELEMENT: TableNoData, ELEMENT: TableRow, BOTTOM: TableBottomBar,
+	container: true, array: true
 } as WidgetRegistrationOptions);
 
 export {TableProps, TableDef, TableHeaderDef};
