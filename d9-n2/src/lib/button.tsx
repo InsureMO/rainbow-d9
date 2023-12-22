@@ -57,12 +57,16 @@ export type ButtonDef = NodeDef & DecorateWrapperDef & OmitHTMLProps2<HTMLButton
 /** Button widget definition, with html attributes */
 export type ButtonProps = OmitNodeDef<ButtonDef> & WidgetProps;
 
-const AButton = styled.button.attrs(({id}) => {
-	return {
-		[DOM_KEY_WIDGET]: 'd9-button',
-		[DOM_ID_WIDGET]: id
-	};
-})`
+const AButton = styled.button.attrs<{ hasOneLeadOrTail: boolean }>(
+	({id, hasOneLeadOrTail}) => {
+		return {
+			[DOM_KEY_WIDGET]: 'd9-button',
+			[DOM_ID_WIDGET]: id,
+			style: {
+				padding: hasOneLeadOrTail ? 0 : (void 0)
+			}
+		};
+	})<{ hasOneLeadOrTail: boolean }>`
     display: flex;
     position: relative;
     align-items: center;
@@ -350,11 +354,45 @@ const AButton = styled.button.attrs(({id}) => {
 
     &[disabled], &[data-disabled=true] {
         cursor: default;
-        border-color: ${CssVars.DISABLE_COLOR};
-        background-color: ${CssVars.DISABLE_COLOR};
+
+        &[data-fill=link], &[data-fill=plain] {
+            border-color: ${CssVars.DISABLE_COLOR};
+            background-color: ${CssVars.DISABLE_COLOR};
+
+            &[data-ink] {
+                border-color: ${CssVars.DISABLE_COLOR};
+                background-color: ${CssVars.DISABLE_COLOR};
+
+                &:hover, &:focus, &:active {
+                    box-shadow: none;
+                }
+
+                > span[data-w=d9-deco-lead],
+                > span[data-w=d9-deco-tail] {
+                    color: ${CssVars.WAIVE_COLOR};
+                    fill: ${CssVars.WAIVE_COLOR};
+                }
+            }
+
+            &:hover, &:focus, &:active {
+                box-shadow: none;
+            }
+
+            > span[data-w=d9-deco-lead],
+            > span[data-w=d9-deco-tail] {
+                color: ${CssVars.WAIVE_COLOR};
+                fill: ${CssVars.WAIVE_COLOR};
+            }
+        }
 
         &:hover, &:focus, &:active {
             box-shadow: none;
+        }
+
+        > span[data-w=d9-deco-lead],
+        > span[data-w=d9-deco-tail] {
+            color: ${CssVars.WAIVE_COLOR};
+            fill: ${CssVars.WAIVE_COLOR};
         }
     }
 
@@ -412,6 +450,7 @@ const TailDecorator = styled(Decorator).attrs({
 
 export const Button = forwardRef((props: ButtonProps, ref: ForwardedRef<HTMLButtonElement>) => {
 	const {
+		// noinspection JSDeprecatedSymbols
 		head, text, tail, ink = ButtonInk.PRIMARY, fill = ButtonFill.FILL, click,
 		leads, tails,
 		$wrapped: {$root, $model, $p2r, $avs: {$disabled, $visible}, $vfs}, ...rest
@@ -429,20 +468,33 @@ export const Button = forwardRef((props: ButtonProps, ref: ForwardedRef<HTMLButt
 		click && await click({root: $root, model: $model, validators: $vfs, global: globalHandlers}, event);
 	};
 
+	const transformedLeads = transformDecorators(leads);
+	const transformedTails = transformDecorators(tails);
+	const hasNoText = text == null || (VUtils.isPrimitive(text) && VUtils.isBlank(text));
+	// noinspection JSDeprecatedSymbols
+	const hasNoHead = head == null || (VUtils.isPrimitive(head) && VUtils.isBlank(head));
+	// noinspection JSDeprecatedSymbols
+	const hasNoTail = tail == null || (VUtils.isPrimitive(tail) && VUtils.isBlank(tail));
+	const hasOneLeadOrTail = hasNoText && hasNoHead && hasNoTail
+		&& [...transformedLeads, ...transformedTails].length === 1;
+
 	return <AButton {...rest} data-ink={ink} data-fill={fill}
 	                data-disabled={$disabled ?? false} data-visible={$visible}
+	                hasOneLeadOrTail={hasOneLeadOrTail}
 	                onClick={onClicked}
 	                id={PPUtils.asId(PPUtils.absolute($p2r, props.$pp), props.id)}
 	                ref={ref}>
-		{transformDecorators(leads).map(lead => {
+		{transformedLeads.map(lead => {
 			return <LeadDecorator key={VUtils.generateUniqueId()}>
 				{lead}
 			</LeadDecorator>;
 		})}
+		{/** noinspection JSDeprecatedSymbols */}
 		{head}
-		<span data-role="text">{text}</span>
+		{hasNoText ? null : <span data-role="text">{text}</span>}
+		{/** noinspection JSDeprecatedSymbols */}
 		{tail}
-		{transformDecorators(tails).map(tail => {
+		{transformedTails.map(tail => {
 			return <TailDecorator key={VUtils.generateUniqueId()}>
 				{tail}
 			</TailDecorator>;

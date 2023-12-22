@@ -17,8 +17,8 @@ import {CaretDown, Times} from './icons';
 import {
 	NO_MATCHED_OPTION_ITEM,
 	OptionItems,
-	OptionItemsDef,
 	OptionItemSort,
+	OptionItemsProps,
 	useOptionItems
 } from './option-items-assist';
 
@@ -324,7 +324,7 @@ export const useDropdownControl = (options: {
 };
 
 // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-constraint, @typescript-eslint/no-explicit-any
-export const useFilterableDropdownOptions = <V extends any>(props: OptionItemsDef<V>) => {
+export const useFilterableDropdownOptions = <V extends any>(props: OptionItemsProps<V>) => {
 	const {
 		optionSort, noMatched = I18NVars.OPTIONS.NO_MATCHED,
 		$wrapped: {$avs: {$disabled}}

@@ -27,6 +27,9 @@ export interface OptionItemsDef<V> {
 	optionSort?: OptionItemSort;
 	noAvailable?: ReactNode;
 	noMatched?: ReactNode;
+}
+
+export interface OptionItemsProps<V> extends OptionItemsDef<V> {
 	$wrapped: Omit<WidgetProps['$wrapped'], '$onValueChange'>;
 }
 
@@ -46,7 +49,7 @@ export interface OptionItemCandidates<V> {
 	options: OptionItems<V>;
 }
 
-export const useOptionItems = <V>(props: OptionItemsDef<V>) => {
+export const useOptionItems = <V>(props: OptionItemsProps<V>) => {
 	const {
 		options = NO_OPTION_ITEM, noAvailable = I18NVars.OPTIONS.NO_AVAILABLE,
 		$wrapped: {$root, $model}
