@@ -14,9 +14,11 @@ export type SectionDef = ContainerDef & OmitHTMLProps2<HTMLDivElement, 'title'> 
 /** Section widget definition, with html attributes */
 export type SectionProps = OmitNodeDef<SectionDef> & ContainerWidgetProps;
 
-const ASection = styled.div.attrs(({id}) => {
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
+const ASection = styled.div.attrs(({id, 'data-w': dataW}) => {
 	return {
-		[DOM_KEY_WIDGET]: 'd9-section',
+		[DOM_KEY_WIDGET]: dataW || 'd9-section',
 		[DOM_ID_WIDGET]: id
 	};
 })`

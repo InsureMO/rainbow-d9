@@ -1,5 +1,8 @@
 import {MUtils, PPUtils, registerWidget, VUtils} from '@rainbow-d9/n1';
-import React from 'react';
+import React, {useEffect, useState} from 'react';
+import {TabsEventBusProvider, useTabsEventBus} from './event/tabs-event-bus';
+import {TabsEventTypes} from './event/tabs-event-bus-types';
+import {TabBody} from './tab-body';
 import {TabTitle} from './tab-title';
 import {TabDef, TabsProps} from './types';
 import {ATabs, TabsBody, TabsHeader} from './widgets';
@@ -16,25 +19,54 @@ const redressTabMarker = (content: TabDef) => {
 	return content.marker;
 };
 
-export const Tabs = (props: TabsProps) => {
+const InternalTabs = (props: TabsProps) => {
 	const {$pp, $wrapped, contents, ...rest} = props;
 	const {$p2r, $avs: {$disabled, $visible}} = $wrapped;
+
+	const {on, off} = useTabsEventBus();
+	const [activeIndex, setActiveIndex] = useState(0);
+	useEffect(() => {
+		const onTabActive = (index: number) => {
+			if (index === activeIndex) {
+				return;
+			} else {
+				setActiveIndex(index);
+			}
+		};
+		on(TabsEventTypes.ACTIVE_TAB, onTabActive);
+		return () => {
+			off(TabsEventTypes.ACTIVE_TAB, onTabActive);
+		};
+	}, [on, off, activeIndex]);
 
 	return <ATabs {...rest} data-disabled={$disabled} data-visible={$visible}
 	              id={PPUtils.asId(PPUtils.absolute($p2r, $pp), props.id)}>
 		<TabsHeader>
-			{(contents ?? []).map(content => {
+			{(contents ?? []).map((content, index) => {
 				redressTabMarker(content);
 				const $model = MUtils.getValue($wrapped.$model, $pp);
 				return <TabTitle key={content.marker}
 				                 $root={$wrapped.$root} $model={$model} $p2r={PPUtils.concat($p2r, $pp)}
-				                 {...content}/>;
+				                 {...content}
+				                 active={index === activeIndex} tabIndex={index} marker={content.marker}/>;
 			})}
 		</TabsHeader>
 		<TabsBody>
-
+			{(contents ?? []).map((content, index) => {
+				const $model = MUtils.getValue($wrapped.$model, $pp);
+				// marker already redressed in headers rendering
+				return <TabBody key={content.marker} def={content.body} $pp={content.$pp}
+				                $root={$wrapped.$root} $model={$model} $p2r={PPUtils.concat($p2r, $pp)}
+				                active={index === activeIndex}/>;
+			})}
 		</TabsBody>
 	</ATabs>;
+};
+
+export const Tabs = (props: TabsProps) => {
+	return <TabsEventBusProvider>
+		<InternalTabs {...props}/>
+	</TabsEventBusProvider>;
 };
 
 registerWidget({key: 'Tabs', JSX: Tabs, container: false, array: false});

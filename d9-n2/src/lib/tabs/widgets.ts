@@ -36,6 +36,7 @@ export const ATabTitle = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-tab-title'})`
     padding: ${CssVars.TAB_TITLE_OFFSET} ${CssVars.TAB_TITLE_PADDING} 0;
     margin-right: -1px;
     cursor: pointer;
+    transition: all ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION};
 
     &[data-visible=false] {
         display: none;
@@ -45,8 +46,17 @@ export const ATabTitle = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-tab-title'})`
         cursor: default;
         background-color: ${CssVars.DISABLE_COLOR};
     }
+
+    &:hover {
+        border-color: ${CssVars.PRIMARY_COLOR};
+        box-shadow: ${CssVars.PRIMARY_HOVER_SHADOW};
+        z-index: 1;
+    }
 `;
 export const TabsBody = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-tabs-body'})`
     display: block;
     position: relative;
+    border-top: ${CssVars.BORDER};
+    padding: ${CssVars.SECTION_BODY_PADDING} 0;
+    margin-top: -1px;
 `;
