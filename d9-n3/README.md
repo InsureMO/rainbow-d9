@@ -688,6 +688,7 @@ Built-in name mapping as below,
 | positive                          | boolean       | Yes                            | `- positive`<br/>`- positive: This field should be a positive number.`                       |
 | notNegative                       | boolean       | Yes                            | `- notNegative`<br/>`- notNegative: This field should be a non-negative number.`             |
 | length                            | number range  | Yes                            | `- length: 5`<br/>`- length: 5..10`, etc.                                                    |
+| regex,regexp                      | regexp        | Yes                            | `- regex: ^\d{5}$`, etc.                                                                     |
 
 ## Page
 
@@ -703,6 +704,25 @@ Strictly adhere to the heading parsing rules without any additional attribute de
 | label, title   | text | `- Section::Customer`<br/>`- title: Customer` |
 
 > `label` and `title` attribute follows the `label` default parsing behavior.
+
+## Tabs
+
+- Default Wrapped by Form Cell: `false`,
+- Default Grid Column Span: `12`.
+
+### Tab
+
+| Attribute Name | Type | Description      |
+|----------------|------|------------------|
+| title          | text | Tab title.       |
+| badge          | text | Tab title badge. |
+
+> `title` and `badge` attribute follows the `label` default parsing behavior.
+
+The configuration of tab content is the same as `Section`.
+
+- No `title` attribute, which has already been used in tab title.
+- No `label` attribute.
 
 ## Caption, Label
 

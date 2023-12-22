@@ -46,6 +46,7 @@ following widgets:
 - Button, ButtonBar
 - Caption, Label
 - Section
+- Tabs
 - Page
 - Ribs, ImmutableRibs (also known as RibsView)
 - Table
