@@ -1,14 +1,7 @@
-import {
-	ModelHolder,
-	MonitorNodeAttributes,
-	MUtils,
-	NodeDef,
-	PPUtils,
-	PropertyPath,
-	WrapperDelegate
-} from '@rainbow-d9/n1';
+import {ModelHolder, MUtils, NodeDef, PPUtils, PropertyPath, WrapperDelegate} from '@rainbow-d9/n1';
 import React, {useEffect, useState} from 'react';
 import {TabDef} from './types';
+import {ATabBody} from './widgets';
 
 export interface TabBodyProps extends ModelHolder {
 	$pp?: PropertyPath;
@@ -47,13 +40,9 @@ export const TabBody = (props: TabBodyProps) => {
 		return null;
 	}
 
-	// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-	const defs = {...defState.def!};
-	if (!active) {
-		defs[MonitorNodeAttributes.VISIBLE] = false;
-	}
-
-	return <WrapperDelegate {...defs}
-	                        $root={$root} $model={MUtils.getValue($model, $pp)} $p2r={PPUtils.concat($p2r, $pp)}
-	                        data-w="d9-tab-body"/>;
+	return <ATabBody data-visible={active}>
+		{/** eslint-disable-next-line @typescript-eslint/no-non-null-assertion */}
+		<WrapperDelegate {...defState.def!}
+		                 $root={$root} $model={MUtils.getValue($model, $pp)} $p2r={PPUtils.concat($p2r, $pp)}/>
+	</ATabBody>;
 };

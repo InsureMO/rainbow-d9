@@ -60,3 +60,11 @@ export const TabsBody = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-tabs-body'})`
     padding: ${CssVars.SECTION_BODY_PADDING} 0;
     margin-top: -1px;
 `;
+export const ATabBody = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-tab-body'})`
+    display: block;
+    position: relative;
+
+    &[data-visible=false] {
+        display: none;
+    }
+`;
