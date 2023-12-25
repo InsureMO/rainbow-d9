@@ -21,7 +21,7 @@ export type TableDef = Omit<ArrayContainerDef, '$nodes'> & OmitHTMLProps<HTMLDiv
 	/** click to expand row or not, default false */
 	clickToExpand?: boolean;
 	maxBodyHeight?: number | string;
-	operatorsColumnWidth?: number;
+	operatorsColumnWidth?: number | string;
 	rowIndexStartsFrom?: number;
 };
 /** Table widget definition, with html attributes */

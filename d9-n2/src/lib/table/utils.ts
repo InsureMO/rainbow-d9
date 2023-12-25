@@ -1,4 +1,4 @@
-import {BaseModel, MUtils} from '@rainbow-d9/n1';
+import {BaseModel, MUtils, VUtils} from '@rainbow-d9/n1';
 import {CssVars} from '../constants';
 import {toCssSize} from '../utils';
 import {TableProps} from './types';
@@ -6,8 +6,8 @@ import {TableProps} from './types';
 export const computeRowIndexColumnWidth = (maxRowIndex: number): string => {
 	return `calc(${CssVars.TABLE_ROW_INDEX_COLUMN_WIDTH} + ${CssVars.TABLE_ROW_INDEX_COLUMN_CHAR_WIDTH} * ${Math.max(3, `${maxRowIndex}`.length)})`;
 };
-export const computeRowOperatorsColumnWidth = (operatorsColumnWidth: number, expandable: boolean, removable: boolean): string => {
-	if (operatorsColumnWidth != null && operatorsColumnWidth > 0) {
+export const computeRowOperatorsColumnWidth = (operatorsColumnWidth: number | string, expandable: boolean, removable: boolean): string => {
+	if (VUtils.isNotBlank(operatorsColumnWidth)) {
 		return toCssSize(operatorsColumnWidth);
 	}
 

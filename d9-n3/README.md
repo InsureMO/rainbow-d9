@@ -1170,9 +1170,12 @@ Some examples:
 | headers                      | various        |                                                                                       |
 | headerHeight                 | number, string | `- headerHeight: 48`<br/>`- headerHeight: 2em`                                        |
 | expandable                   | boolean        | `- expandable`                                                                        |
+| fixedLeadColumns             | number         | `- fixedLeadColumns: 2`                                                               |
+| fixedTailColumns             | number         | `- fixedTailColumns: 1`                                                               |
 | hideClassicCellsOnExpandable | boolean        | `- hideClassicCellsOnExpandable`                                                      |
 | clickToExpand                | boolean        | `- clickToExpand`                                                                     |
 | maxBodyHeight                | number, string | `- maxBodyHeight: 300`<br/>`- maxBodyHeight: 80vh`                                    |
+| operatorsColumnWidth         | number, string | `- operatorsColumnWidth: 200`                                                         |
 | rowIndexStartsFrom           | number         | `- rowIndexStartsFrom: 21`                                                            |
 | noElementReminder            | text           | `- noElementReminder: No Data`                                                        |
 | addable                      | boolean        | `- !addable`<br/>Not available for `RibsView`.                                        |
