@@ -130,7 +130,7 @@ export const CssVars = {
 	TABLE_HEADER_BORDER_SIZE: 'var(--d9-table-header-border-size, 2px)',
 	TABLE_HEADER_BACKGROUND_COLOR: `var(--d9-table-header-background-color, ${CssConstants.BG_COLOR})`,
 	TABLE_CELL_HEIGHT: 'var(--d9-table-cell-height, 32px)',
-	TABLE_CELL_PADDING: 'var(--d9-table-cell-padding, 10px)',
+	TABLE_CELL_PADDING: 'var(--d9-table-cell-padding, 14px)',
 	TABLE_CELL_BORDER: `var(--d9-table-cell-border, 1px solid var(--d9-border-color, ${CssConstants.BORDER_COLOR}))`,
 	TABLE_FOOTER_HEIGHT: 'var(--d9-table-footer-height, 44px)',
 	TABLE_ODD_ROW_BACKGROUND_COLOR: `var(--d9-table-odd-row-background-color, ${CssConstants.RIB_COLOR})`,

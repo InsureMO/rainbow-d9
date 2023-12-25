@@ -4,9 +4,6 @@ export enum TableEventTypes {
 	COLLAPSE_ROW = 'collapse-row',
 	ROW_COLLAPSED = 'row-collapsed',
 	REMOVE_ROW = 'remove-row',
-
-	CONTENT_RESIZED = 'content-resized',
-	CONTENT_SCROLLED = 'content-scrolled'
 }
 
 export interface TableEventBus {
@@ -39,16 +36,4 @@ export interface TableEventBus {
 	on(type: TableEventTypes.REMOVE_ROW, listener: (elementIndex: number) => void): this;
 
 	off(type: TableEventTypes.REMOVE_ROW, listener: (elementIndex: number) => void): this;
-
-	fire(type: TableEventTypes.CONTENT_RESIZED, verticalScrolled: boolean, horizontalScrolled: boolean): this;
-
-	on(type: TableEventTypes.CONTENT_RESIZED, listener: (verticalScrolled: boolean, horizontalScrolled: boolean) => void): this;
-
-	off(type: TableEventTypes.CONTENT_RESIZED, listener: (verticalScrolled: boolean, horizontalScrolled: boolean) => void): this;
-
-	fire(type: TableEventTypes.CONTENT_SCROLLED, scrollTop: number, scrollLeft: number): this;
-
-	on(type: TableEventTypes.CONTENT_SCROLLED, listener: (scrollTop: number, scrollLeft: number) => void): this;
-
-	off(type: TableEventTypes.CONTENT_SCROLLED, listener: (scrollTop: number, scrollLeft: number) => void): this;
 }

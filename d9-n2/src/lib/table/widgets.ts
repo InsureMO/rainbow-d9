@@ -18,18 +18,18 @@ export const ATable = styled.div.attrs(({id}) => {
         display: none;
     }
 `;
-export const ATableNoDataRow = styled.div.attrs<{ columnsCount: number; scrollLeft: number }>(
-	({columnsCount, scrollLeft}) => {
+export const ATableNoDataRow = styled.div.attrs<{ columnsCount: number }>(
+	({columnsCount}) => {
 		return {
 			[DOM_KEY_WIDGET]: 'd9-table-no-data-row',
 			style: {
-				gridColumn: `1 / span ${columnsCount}`,
-				paddingLeft: scrollLeft
+				gridColumn: `1 / span ${columnsCount}`
 			}
 		};
-	})<{ columnsCount: number; scrollLeft: number }>`
+	})<{ columnsCount: number }>`
     display: flex;
-    position: relative;
+    position: sticky;
+    left: 0;
     align-items: center;
     min-width: 100%;
     color: ${CssVars.FONT_COLOR};
@@ -79,16 +79,26 @@ export const ATableContent = styled.div.attrs<ATableContentOptions>(
     overflow-x: auto;
     overflow-y: auto;
 `;
-export const ATableHeaderCell = styled.div.attrs<{ headerHeight?: string | number; isGrabber?: true }>(
-	({headerHeight, isGrabber}) => {
+export const ATableHeaderCell = styled.div.attrs<{
+	headerHeight?: string | number; isGrabber?: true; stickyOffset: [boolean, string | undefined, string | undefined]
+}>(
+	({headerHeight, isGrabber, stickyOffset}) => {
 		return {
 			[DOM_KEY_WIDGET]: 'd9-table-header-cell',
 			style: {
 				height: toCssSize(headerHeight),
-				padding: isGrabber ? 0 : (void 0)
+				padding: isGrabber ? 0 : (void 0),
+				left: stickyOffset[1],
+				right: stickyOffset[2],
+				zIndex: VUtils.isNotBlank(stickyOffset[2])
+					? 6
+					: (VUtils.isNotBlank(stickyOffset[1]) ? 5 : (void 0))
 			}
 		};
-	})<{ headerHeight?: string | number; isGrabber?: true }>`
+	})<{
+	headerHeight?: string | number; isGrabber?: true;
+	stickyOffset: [boolean, string | undefined, string | undefined]
+}>`
     display: flex;
     position: sticky;
     top: 0;
@@ -102,6 +112,7 @@ export const ATableHeaderCell = styled.div.attrs<{ headerHeight?: string | numbe
     font-weight: ${CssVars.TABLE_HEADER_FONT_WEIGHT};
     overflow: hidden;
     white-space: nowrap;
+    z-index: 4;
 `;
 export const ATableBodyRowIndexCell = styled.div.attrs<{ rowIndex: number; rowSpan: number }>(
 	({rowIndex, rowSpan}) => {
@@ -114,12 +125,14 @@ export const ATableBodyRowIndexCell = styled.div.attrs<{ rowIndex: number; rowSp
 		};
 	})<{ rowIndex: number; rowSpan: number }>`
     display: flex;
-    position: relative;
+    position: sticky;
+    left: 0;
     align-self: stretch;
     align-items: start;
     min-height: ${CssVars.TABLE_CELL_HEIGHT};
     padding: 0 ${CssVars.TABLE_CELL_PADDING};
     color: ${CssVars.FONT_COLOR};
+    background-color: ${CssVars.INVERT_COLOR};
     font-family: ${CssVars.FONT_FAMILY};
     font-size: 0.8em;
     overflow: hidden;
@@ -135,34 +148,40 @@ export const ATableBodyRowIndexCell = styled.div.attrs<{ rowIndex: number; rowSp
         opacity: ${CssVars.TABLE_ROW_INDEX_OPACITY};
     }
 `;
-export const ATableBodyCell = styled.div.attrs<{ isGrabber?: true; rowIndex: number }>(
-	({isGrabber, rowIndex}) => {
+export const ATableBodyCell = styled.div.attrs<{
+	isGrabber?: true; rowIndex: number; stickyOffset: [boolean, string | undefined, string | undefined]
+}>(
+	({isGrabber, rowIndex, stickyOffset}) => {
 		return {
 			[DOM_KEY_WIDGET]: 'd9-table-row-cell',
 			style: {
 				padding: isGrabber ? 0 : (void 0),
-				backgroundColor: rowIndex % 2 === 1 ? CssVars.TABLE_ODD_ROW_BACKGROUND_COLOR : (void 0)
+				backgroundColor: rowIndex % 2 === 1 ? CssVars.TABLE_ODD_ROW_BACKGROUND_COLOR : (void 0),
+				position: stickyOffset[0] ? 'sticky' : (void 0),
+				left: stickyOffset[1],
+				right: stickyOffset[2],
+				zIndex: VUtils.isNotBlank(stickyOffset[2])
+					? 3
+					: (VUtils.isNotBlank(stickyOffset[1]) ? 2 : (void 0))
 			}
 		};
-	})<{ isGrabber?: true; rowIndex: number }>`
+	})<{ isGrabber?: true; rowIndex: number; stickyOffset: [boolean, string | undefined, string | undefined] }>`
     display: flex;
     position: relative;
     align-items: center;
     min-height: ${CssVars.TABLE_CELL_HEIGHT};
-    padding: 0 calc(${CssVars.TABLE_CELL_PADDING} + 4px);
-    overflow: hidden;
-    white-space: nowrap;
+    padding: 0 calc(${CssVars.TABLE_CELL_PADDING});
+    background-color: ${CssVars.INVERT_COLOR};
 
     > input[data-w=d9-input],
     > div[data-w=d9-dropdown],
     > div[data-w=d9-calendar] {
         flex-grow: 1;
         height: calc(${CssVars.TABLE_CELL_HEIGHT} - 6px);
-        margin: 0 calc(${CssVars.TABLE_CELL_PADDING} * -1);
-        border-color: transparent;
+        margin: 0 calc(${CssVars.INPUT_INDENT} * -1);
 
-        &:hover, &:focus, &:focus-within {
-            border-color: ${CssVars.BORDER_COLOR};
+        &:not(&:hover), &:not(&:focus), &:not(&:focus-within) {
+            border-color: transparent;
         }
     }
 `;
@@ -177,8 +196,10 @@ export const ATableRowOperators = styled.div.attrs<{ rowIndex: number; rowSpan: 
 		};
 	}) <{ rowIndex: number; rowSpan: number }>`
     display: flex;
-    position: relative;
+    position: sticky;
     align-items: start;
+    right: 0;
+    background-color: ${CssVars.INVERT_COLOR};
     z-index: 3;
 
     > span {
@@ -222,7 +243,9 @@ export const ATableRowOperator = styled.span.attrs({[DOM_KEY_WIDGET]: 'd9-table-
         transition: background-color ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION};
     }
 `;
-export const ATableBodyCellExpandArea = styled.div.attrs<{ columnsCount: number; expanded: boolean }>(
+export const ATableBodyCellExpandArea = styled.div.attrs<{
+	columnsCount: number; expanded: boolean;
+}>(
 	({columnsCount, expanded}) => {
 		return {
 			[DOM_KEY_WIDGET]: 'd9-table-row-expand-area',
@@ -238,6 +261,7 @@ export const ATableBodyCellExpandArea = styled.div.attrs<{ columnsCount: number;
     grid-column-gap: ${CssVars.GRID_COLUMN_GAP};
     grid-row-gap: ${CssVars.GRID_ROW_GAP};
     overflow: hidden;
+    z-index: 1;
 `;
 export const ATableBottomBar = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-table-bottom-bar'})`
     display: flex;
@@ -245,7 +269,6 @@ export const ATableBottomBar = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-table-bot
     align-items: center;
     justify-content: flex-end;
     height: ${CssVars.TABLE_FOOTER_HEIGHT};
-    z-index: 4;
 
     > button {
         max-height: ${CssVars.TABLE_BUTTON_HEIGHT};

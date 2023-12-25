@@ -47,6 +47,7 @@ export const TableRow = (props: Omit<TableProps, '$array'> & { $array: EnhancedP
 			fire(TableEventTypes.EXPAND_ROW, elementIndex);
 		}
 	};
+	const {tailGrabberAppended, stickyOffsets} = computeColumnsWidth(props);
 	const classicCellIndexes = headers.map(({index}) => index);
 	const childrenAsArray = Children.toArray(children);
 	const classicCells = childrenAsArray.map((cell, index) => {
@@ -55,13 +56,14 @@ export const TableRow = (props: Omit<TableProps, '$array'> & { $array: EnhancedP
 		}
 		const header = headers[index];
 		NUtils.getDefKey(header);
-		return <ATableBodyCell onClick={onRowClicked} rowIndex={elementIndex} key={header.$key}>
+		return <ATableBodyCell onClick={onRowClicked} rowIndex={elementIndex}
+		                       stickyOffset={stickyOffsets[index + 1]} key={header.$key}>
 			{cell}
 		</ATableBodyCell>;
 	}).filter(x => x != null);
-	const {tailGrabberAppended} = computeColumnsWidth(props);
 	if (tailGrabberAppended) {
 		classicCells.push(<ATableBodyCell isGrabber={true} rowIndex={elementIndex} onClick={onRowClicked}
+		                                  stickyOffset={stickyOffsets[stickyOffsets.length - 2]}
 		                                  data-table-row-grabber={true} key="grabber-cell"/>);
 	}
 	const expandCells = childrenAsArray.map((cell, index) => {
@@ -88,16 +90,14 @@ export const TableRow = (props: Omit<TableProps, '$array'> & { $array: EnhancedP
 			case hideClassicCellsOnExpandable:
 				// replace classic cells, grab all columns, except the index column and operators column
 				return [
-					<ATableBodyCellExpandArea columnsCount={expandedAreaColumnCount}
-					                          expanded={expanded}>
+					<ATableBodyCellExpandArea columnsCount={expandedAreaColumnCount} expanded={expanded}>
 						{expandCells}
 					</ATableBodyCellExpandArea>,
 					null, 1, 1];
 			case !hideClassicCellsOnExpandable:
 				return [
 					<>{classicCells}</>,
-					<ATableBodyCellExpandArea columnsCount={expandedAreaColumnCount + 1}
-					                          expanded={expanded}>
+					<ATableBodyCellExpandArea columnsCount={expandedAreaColumnCount + 1} expanded={expanded}>
 						{expandCells}
 					</ATableBodyCellExpandArea>, 2, 1];
 			default:

@@ -23,7 +23,7 @@ export const computeColumnsWidth = (props: Omit<TableProps, 'children'>) => {
 	const {
 		rowIndexStartsFrom = 1,
 		operatorsColumnWidth = -1, expandable = false,
-		headers,
+		headers, fixedLeadColumns = 0, fixedTailColumns = 0,
 		$wrapped: {$model}, $array: {removable = false}, $pp
 	} = props;
 
@@ -33,7 +33,8 @@ export const computeColumnsWidth = (props: Omit<TableProps, 'children'>) => {
 	const rowOperatorsColumnWidth = computeRowOperatorsColumnWidth(operatorsColumnWidth, expandable, removable);
 	const columnsWidth = (headers || []).map(({width}) => toCssSize(width));
 	let tailGrabberAppended = false;
-	if (columnsWidth.every((width) => !width.includes('fr'))) {
+	// if there is fixed tail column, no 1fr column is needed
+	if (fixedTailColumns <= 0 && columnsWidth.every((width) => !width.includes('fr'))) {
 		// append 1fr column to end, minus 1px to fix the horizontal scroll bar
 		columnsWidth.push('1fr');
 		tailGrabberAppended = true;
@@ -41,5 +42,24 @@ export const computeColumnsWidth = (props: Omit<TableProps, 'children'>) => {
 	columnsWidth.push(rowOperatorsColumnWidth);
 	columnsWidth.unshift(rowIndexColumnWidth);
 
-	return {maxRowIndex, rowIndexColumnWidth, columnsWidth, rowOperatorsColumnWidth, tailGrabberAppended};
+	const columnsCount = columnsWidth.length;
+	const stickyOffsets: Array<[boolean, string | undefined, string | undefined]> = columnsWidth.map((width, index) => {
+		if (index === 0) {
+			return [true, '0', (void 0)];
+		} else if (index === columnsCount - 1) {
+			return [true, (void 0), '0'];
+		} else if (index <= fixedLeadColumns) {
+			return [true, `calc(${columnsWidth.slice(0, index).join(' + ')})`, (void 0)];
+		} else if (index >= columnsCount - 1 - fixedTailColumns) {
+			return [true, (void 0), `calc(${columnsWidth.slice(index + 1).join(' + ')})`];
+		} else {
+			return [false, (void 0), (void 0)];
+		}
+	});
+
+	return {
+		maxRowIndex,
+		rowIndexColumnWidth, columnsWidth, rowOperatorsColumnWidth, tailGrabberAppended,
+		stickyOffsets
+	};
 };

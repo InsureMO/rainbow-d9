@@ -14,6 +14,8 @@ export type TableDef = Omit<ArrayContainerDef, '$nodes'> & OmitHTMLProps<HTMLDiv
 	headers: Array<TableHeaderDef>;
 	headerHeight?: number | string;
 	expandable?: boolean;
+	fixedLeadColumns?: number;
+	fixedTailColumns?: number;
 	/** cells which defined in headers should be hidden when expanded or not, default false */
 	hideClassicCellsOnExpandable?: boolean;
 	/** click to expand row or not, default false */
