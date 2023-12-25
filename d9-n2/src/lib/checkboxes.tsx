@@ -2,8 +2,8 @@ import {MUtils, PropValue, registerWidget, ValueChangeableNodeDef, WidgetProps} 
 import React, {Fragment, ReactNode} from 'react';
 import styled from 'styled-components';
 import {Checkbox, CheckboxProps} from './checkbox';
-import {CssVars, DOM_ID_WIDGET, DOM_KEY_WIDGET} from './constants';
-import {OptionItem, OptionItemsDef, useOptionItems} from './option-items-assist';
+import {CssVars, DOM_ID_WIDGET, DOM_KEY_WIDGET, I18NVars} from './constants';
+import {NO_AVAILABLE_OPTION_ITEM, OptionItem, OptionItemsDef, useOptionItems} from './option-items-assist';
 import {OmitHTMLProps, OmitNodeDef} from './types';
 
 export type CheckboxesOptionValue = string | number;
@@ -42,9 +42,11 @@ const ACheckboxes = styled.div.attrs(({id}) => {
     color: ${CssVars.FONT_COLOR};
 `;
 const Option = styled.span.attrs<{ columns: number, compact: boolean }>(
-	({columns, compact}) => {
+	// eslint-disable-next-line  @typescript-eslint/ban-ts-comment
+	// @ts-ignore
+	({columns, compact, 'data-w': dataW}) => {
 		return {
-			[DOM_KEY_WIDGET]: 'd9-checkboxes-option',
+			[DOM_KEY_WIDGET]: dataW ?? 'd9-checkboxes-option',
 			style: {
 				flexBasis: (columns > 0 && !compact) ? `${1 / columns * 100}%` : (void 0)
 			}
@@ -106,6 +108,7 @@ export const Checkboxes = (props: CheckboxesProps) => {
 	const {
 		// eslint-disable-next-line  @typescript-eslint/no-unused-vars
 		options, optionSort,
+		noAvailable = I18NVars.OPTIONS.NO_AVAILABLE,
 		columns = -1, compact = true,
 		$pp, $wrapped: {$onValueChange, $model, $avs: {$disabled, $visible}},
 		...rest
@@ -136,6 +139,13 @@ export const Checkboxes = (props: CheckboxesProps) => {
 	const displayOptions = askDisplayOptions();
 	const canClick = !$disabled;
 	const values = getValues();
+
+	if (displayOptions.length === 0 || displayOptions.length === 1 && displayOptions[0].value == NO_AVAILABLE_OPTION_ITEM) {
+		return <ACheckboxes data-disabled={$disabled} data-visible={$visible} {...rest}>
+			<Option data-can-click={false} columns={0} compact={true}
+			        data-w="d9-checkboxes-no-available">{noAvailable}</Option>
+		</ACheckboxes>;
+	}
 
 	return <ACheckboxes data-disabled={$disabled} data-visible={$visible} {...rest}>
 		{displayOptions.map((option, index) => {

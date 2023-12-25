@@ -1,8 +1,14 @@
 import {MUtils, registerWidget, ValueChangeableNodeDef, WidgetProps} from '@rainbow-d9/n1';
 import React, {Fragment, ReactNode} from 'react';
 import styled from 'styled-components';
-import {CssVars, DOM_ID_WIDGET, DOM_KEY_WIDGET} from './constants';
-import {OnOptionValueChange, OptionItem, OptionItemsDef, useOptionItems} from './option-items-assist';
+import {CssVars, DOM_ID_WIDGET, DOM_KEY_WIDGET, I18NVars} from './constants';
+import {
+	NO_AVAILABLE_OPTION_ITEM,
+	OnOptionValueChange,
+	OptionItem,
+	OptionItemsDef,
+	useOptionItems
+} from './option-items-assist';
 import {Radio, RadioProps} from './radio';
 import {OmitHTMLProps, OmitNodeDef} from './types';
 
@@ -36,9 +42,11 @@ const ARadios = styled.div.attrs(({id}) => {
     color: ${CssVars.FONT_COLOR};
 `;
 const Option = styled.span.attrs<{ columns: number, compact: boolean }>(
-	({columns, compact}) => {
+	// eslint-disable-next-line  @typescript-eslint/ban-ts-comment
+	// @ts-ignore
+	({columns, compact, 'data-w': dataW}) => {
 		return {
-			[DOM_KEY_WIDGET]: 'd9-radios-option',
+			[DOM_KEY_WIDGET]: dataW ?? 'd9-radios-option',
 			style: {
 				flexBasis: (columns > 0 && !compact) ? `${1 / columns * 100}%` : (void 0)
 			}
@@ -104,6 +112,7 @@ export const Radios = (props: RadiosProps) => {
 	const {
 		// eslint-disable-next-line  @typescript-eslint/no-unused-vars
 		options, optionSort,
+		noAvailable = I18NVars.OPTIONS.NO_AVAILABLE,
 		columns = -1, compact = true,
 		$pp, $wrapped: {$onValueChange, $model, $avs: {$disabled, $visible}},
 		...rest
@@ -121,6 +130,13 @@ export const Radios = (props: RadiosProps) => {
 	const askDisplayOptions = createAskDisplayOptions();
 	const displayOptions = askDisplayOptions();
 	const canClick = !$disabled;
+
+	if (displayOptions.length === 0 || displayOptions.length === 1 && displayOptions[0].value == NO_AVAILABLE_OPTION_ITEM) {
+		return <ARadios data-disabled={$disabled} data-visible={$visible} {...rest}>
+			<Option data-can-click={false} columns={0} compact={true}
+			        data-w="d9-radios-no-available">{noAvailable}</Option>
+		</ARadios>;
+	}
 
 	const modelValue = MUtils.getValue($model, $pp) as RadiosOptionValue;
 
