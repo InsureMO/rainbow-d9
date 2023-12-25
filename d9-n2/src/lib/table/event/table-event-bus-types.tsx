@@ -5,9 +5,8 @@ export enum TableEventTypes {
 	ROW_COLLAPSED = 'row-collapsed',
 	REMOVE_ROW = 'remove-row',
 
-	ROW_HEIGHT_CHANGED = 'row-height-changed',
 	CONTENT_RESIZED = 'content-resized',
-	CONTENT_SCROLL_TOP_CHANGED = 'content-scroll-top-changed'
+	CONTENT_SCROLLED = 'content-scrolled'
 }
 
 export interface TableEventBus {
@@ -41,21 +40,15 @@ export interface TableEventBus {
 
 	off(type: TableEventTypes.REMOVE_ROW, listener: (elementIndex: number) => void): this;
 
-	fire(type: TableEventTypes.ROW_HEIGHT_CHANGED, elementIndex: number, height: number): this;
-
-	on(type: TableEventTypes.ROW_HEIGHT_CHANGED, listener: (elementIndex: number, height: number) => void): this;
-
-	off(type: TableEventTypes.ROW_HEIGHT_CHANGED, listener: (elementIndex: number, height: number) => void): this;
-
 	fire(type: TableEventTypes.CONTENT_RESIZED, verticalScrolled: boolean, horizontalScrolled: boolean): this;
 
 	on(type: TableEventTypes.CONTENT_RESIZED, listener: (verticalScrolled: boolean, horizontalScrolled: boolean) => void): this;
 
 	off(type: TableEventTypes.CONTENT_RESIZED, listener: (verticalScrolled: boolean, horizontalScrolled: boolean) => void): this;
 
-	fire(type: TableEventTypes.CONTENT_SCROLL_TOP_CHANGED, scrollTop: number): this;
+	fire(type: TableEventTypes.CONTENT_SCROLLED, scrollTop: number, scrollLeft: number): this;
 
-	on(type: TableEventTypes.CONTENT_SCROLL_TOP_CHANGED, listener: (scrollTop: number) => void): this;
+	on(type: TableEventTypes.CONTENT_SCROLLED, listener: (scrollTop: number, scrollLeft: number) => void): this;
 
-	off(type: TableEventTypes.CONTENT_SCROLL_TOP_CHANGED, listener: (scrollTop: number) => void): this;
+	off(type: TableEventTypes.CONTENT_SCROLLED, listener: (scrollTop: number, scrollLeft: number) => void): this;
 }

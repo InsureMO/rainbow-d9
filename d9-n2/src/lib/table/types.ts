@@ -19,36 +19,9 @@ export type TableDef = Omit<ArrayContainerDef, '$nodes'> & OmitHTMLProps<HTMLDiv
 	/** click to expand row or not, default false */
 	clickToExpand?: boolean;
 	maxBodyHeight?: number | string;
+	operatorsColumnWidth?: number;
 	rowIndexStartsFrom?: number;
 };
 /** Table widget definition, with html attributes */
 export type TableProps = OmitNodeDef<TableDef> & ArrayContainerWidgetProps;
 
-export type CellWidth = { width?: number | string };
-
-export interface CellOptions {
-	$options: CellWidth;
-}
-
-export interface RowOptions {
-	$options: {
-		headers: Array<TableHeaderDef>;
-		headerHeight?: number | string;
-		rowIndexColumnWidth: string;
-		rowOperatorsColumnWidth: string;
-	};
-}
-
-export interface ContentOptions {
-	headerHeight?: number | string;
-	maxBodyHeight?: number | string;
-	rowIndexColumnWidth: string;
-	rowOperatorsColumnWidth: string;
-}
-
-export interface BodyCellExpandAreaOptions {
-	$options: {
-		columnCount: number;
-		expanded: boolean;
-	};
-}

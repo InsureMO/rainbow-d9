@@ -1,22 +1,26 @@
-import {EnhancedPropsForArray, NUtils} from '@rainbow-d9/n1';
+import {NUtils} from '@rainbow-d9/n1';
 import React from 'react';
-import {toCssSize} from '../utils';
 import {TableProps} from './types';
-import {computeWidthOfFixedColumns} from './utils';
-import {ATableHeader, ATableHeaderCell} from './widgets';
+import {ATableHeaderCell} from './widgets';
 
-export const TableHeader = (props: Omit<TableProps, 'children' | '$array'> & { $array: EnhancedPropsForArray }) => {
-	const {headers, headerHeight} = props;
+export interface TableHeaderProps {
+	headers: TableProps['headers'];
+	headerHeight: TableProps['headerHeight'];
+	tailGrabberAppended: boolean;
+}
 
-	const {rowIndexColumnWidth, rowOperatorsColumnWidth} = computeWidthOfFixedColumns(props);
-	const options = {headers, headerHeight: toCssSize(headerHeight), rowIndexColumnWidth, rowOperatorsColumnWidth};
+export const TableHeader = (props: TableHeaderProps) => {
+	const {headers, headerHeight, tailGrabberAppended} = props;
 
-	return <ATableHeader $options={options}>
+	return <>
+		<ATableHeaderCell headerHeight={headerHeight} isGrabber={true}/>
 		{headers.map(header => {
 			const key = NUtils.getDefKey(header);
-			return <ATableHeaderCell $options={{width: header.width}} key={key}>
+			return <ATableHeaderCell headerHeight={headerHeight} key={key}>
 				{header.label}
 			</ATableHeaderCell>;
 		})}
-	</ATableHeader>;
+		{tailGrabberAppended ? <ATableHeaderCell headerHeight={headerHeight} isGrabber={true}/> : null}
+		<ATableHeaderCell headerHeight={headerHeight} isGrabber={true}/>
+	</>;
 };

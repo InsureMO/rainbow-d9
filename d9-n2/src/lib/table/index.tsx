@@ -6,7 +6,6 @@ import {TableBottomBar} from './table-bottom-bar';
 import {TableContent} from './table-content';
 import {TableNoData} from './table-no-data';
 import {TableRow} from './table-row';
-import {TableTopBar} from './table-top-bar';
 import {TableDef, TableHeaderDef, TableProps} from './types';
 
 export const Table = (props: TableProps) => {
@@ -20,7 +19,7 @@ export const Table = (props: TableProps) => {
 
 registerWidget({
 	key: 'Table', JSX: Table,
-	TOP: TableTopBar, BODY: TableContent, NO_ELEMENT: TableNoData, ELEMENT: TableRow, BOTTOM: TableBottomBar,
+	TOP: null, BODY: TableContent, NO_ELEMENT: TableNoData, ELEMENT: TableRow, BOTTOM: TableBottomBar,
 	container: true, array: true
 } as WidgetRegistrationOptions);
 

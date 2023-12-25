@@ -4,11 +4,14 @@ import {useTableEventBus} from './event/table-event-bus';
 import {TableEventTypes} from './event/table-event-bus-types';
 import {TableHeader} from './table-header';
 import {TableProps} from './types';
-import {computeWidthOfFixedColumns} from './utils';
+import {computeColumnsWidth} from './utils';
 import {ATableContent} from './widgets';
 
 export const TableContent = (props: Omit<TableProps, '$array'> & { $array: EnhancedPropsForArray }) => {
-	const {children, ...rest} = props;
+	const {
+		headerHeight, maxBodyHeight,
+		children
+	} = props;
 
 	const ref = useRef<HTMLDivElement>(null);
 	const {fire} = useTableEventBus();
@@ -27,18 +30,16 @@ export const TableContent = (props: Omit<TableProps, '$array'> & { $array: Enhan
 		resizeObserver.observe(ref.current);
 		return () => resizeObserver.disconnect();
 	}, [fire]);
-	const {
-		headerHeight, maxBodyHeight, rowIndexColumnWidth, rowOperatorsColumnWidth
-	} = computeWidthOfFixedColumns(props);
+	const {columnsWidth, tailGrabberAppended} = computeColumnsWidth(props);
 
 	const onScroll = () => {
-		fire(TableEventTypes.CONTENT_SCROLL_TOP_CHANGED, ref.current.scrollTop);
+		fire(TableEventTypes.CONTENT_SCROLLED, ref.current.scrollTop, ref.current.scrollLeft);
 	};
 
-	return <ATableContent headerHeight={headerHeight} maxBodyHeight={maxBodyHeight}
-	                      rowIndexColumnWidth={rowIndexColumnWidth} rowOperatorsColumnWidth={rowOperatorsColumnWidth}
+	return <ATableContent headerHeight={headerHeight} maxBodyHeight={maxBodyHeight} columnsWidth={columnsWidth}
 	                      onScroll={onScroll} ref={ref}>
-		<TableHeader {...rest} />
+		<TableHeader headerHeight={headerHeight} headers={props.headers}
+		             tailGrabberAppended={tailGrabberAppended}/>
 		{children}
 	</ATableContent>;
 };

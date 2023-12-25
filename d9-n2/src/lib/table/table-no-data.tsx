@@ -1,21 +1,38 @@
 import {EnhancedPropsForArray} from '@rainbow-d9/n1';
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {I18NVars} from '../constants';
+import {useTableEventBus} from './event/table-event-bus';
+import {TableEventTypes} from './event/table-event-bus-types';
 import {TableProps} from './types';
-import {computeWidthOfFixedColumns} from './utils';
+import {computeColumnsWidth} from './utils';
 import {ATableNoDataRow} from './widgets';
 
 export const TableNoData = (props: Omit<TableProps, '$array'> & { $array: EnhancedPropsForArray }) => {
-	const {$array: {hasElement, noElementReminder}} = props;
+	const {
+		headers,
+		$array: {hasElement, noElementReminder = I18NVars.TABLE.NO_ELEMENT}
+	} = props;
+
+	const {on, off} = useTableEventBus();
+	const [scrollLeft, setScrollLeft] = useState(0);
+	useEffect(() => {
+		const onScroll = (scrollTop: number, scrollLeft: number) => {
+			setScrollLeft(scrollLeft);
+		};
+		on(TableEventTypes.CONTENT_SCROLLED, onScroll);
+		return () => {
+			off(TableEventTypes.CONTENT_SCROLLED, onScroll);
+		};
+	}, [on, off]);
 
 	if (hasElement) {
 		return null;
 	} else {
-		const {headers} = props;
-		const {rowIndexColumnWidth, rowOperatorsColumnWidth} = computeWidthOfFixedColumns(props);
+		const {tailGrabberAppended} = computeColumnsWidth(props);
+		const columnsCount = headers.length + 2 + (tailGrabberAppended ? 1 : 0);
 
-		return <ATableNoDataRow $options={{headers, rowIndexColumnWidth, rowOperatorsColumnWidth}}>
-			<span>{noElementReminder ?? I18NVars.TABLE.NO_ELEMENT}</span>
+		return <ATableNoDataRow columnsCount={columnsCount} scrollLeft={scrollLeft}>
+			<span>{noElementReminder}</span>
 		</ATableNoDataRow>;
 	}
 };

@@ -1,18 +1,19 @@
-import {EnhancedPropsForArrayElement} from '@rainbow-d9/n1';
-import React, {Children, useEffect, useRef, useState} from 'react';
+import {EnhancedPropsForArrayElement, NUtils} from '@rainbow-d9/n1';
+import React, {Children, useEffect, useState} from 'react';
 import {useTableEventBus} from './event/table-event-bus';
 import {TableEventTypes} from './event/table-event-bus-types';
+import {TableRowOperators} from './table-row-operators';
 import {TableProps} from './types';
-import {computeWidthOfFixedColumns} from './utils';
-import {ATableBodyCell, ATableBodyCellExpandArea, ATableBodyRow, ATableBodyRowTailGrabber} from './widgets';
+import {computeColumnsWidth} from './utils';
+import {ATableBodyCell, ATableBodyCellExpandArea, ATableBodyRowIndexCell} from './widgets';
 
 export const TableRow = (props: Omit<TableProps, '$array'> & { $array: EnhancedPropsForArrayElement }) => {
 	const {
-		headers, expandable, hideClassicCellsOnExpandable = false, clickToExpand = false,
-		$array: {elementIndex, removeElement}, children
+		headers, expandable = false, hideClassicCellsOnExpandable = false, clickToExpand = false,
+		rowIndexStartsFrom = 1,
+		$array: {removable, elementIndex, removeElement}, children
 	} = props;
 
-	const ref = useRef<HTMLDivElement>(null);
 	const {on, off, fire} = useTableEventBus();
 	const [expanded, setExpanded] = useState(false);
 	useEffect(() => {
@@ -40,20 +41,12 @@ export const TableRow = (props: Omit<TableProps, '$array'> & { $array: EnhancedP
 			off(TableEventTypes.REMOVE_ROW, onRemoveRow);
 		};
 	}, [on, off, fire, elementIndex, removeElement]);
-	useEffect(() => {
-		if (ref.current == null) {
-			return;
-		}
-		const {height} = ref.current.getBoundingClientRect();
-		fire(TableEventTypes.ROW_HEIGHT_CHANGED, elementIndex, height);
-	}, [fire, expanded, elementIndex]);
 
 	const onRowClicked = () => {
 		if (expandable && clickToExpand && !expanded) {
 			fire(TableEventTypes.EXPAND_ROW, elementIndex);
 		}
 	};
-
 	const classicCellIndexes = headers.map(({index}) => index);
 	const childrenAsArray = Children.toArray(children);
 	const classicCells = childrenAsArray.map((cell, index) => {
@@ -61,10 +54,16 @@ export const TableRow = (props: Omit<TableProps, '$array'> & { $array: EnhancedP
 			return null;
 		}
 		const header = headers[index];
-		return <ATableBodyCell $options={{width: header.width}} key={header.$key}>
+		NUtils.getDefKey(header);
+		return <ATableBodyCell onClick={onRowClicked} rowIndex={elementIndex} key={header.$key}>
 			{cell}
 		</ATableBodyCell>;
-	});
+	}).filter(x => x != null);
+	const {tailGrabberAppended} = computeColumnsWidth(props);
+	if (tailGrabberAppended) {
+		classicCells.push(<ATableBodyCell isGrabber={true} rowIndex={elementIndex} onClick={onRowClicked}
+		                                  data-table-row-grabber={true} key="grabber-cell"/>);
+	}
 	const expandCells = childrenAsArray.map((cell, index) => {
 		if (classicCellIndexes.includes(index)) {
 			return null;
@@ -73,18 +72,46 @@ export const TableRow = (props: Omit<TableProps, '$array'> & { $array: EnhancedP
 		}
 	});
 
-	const {rowIndexColumnWidth, rowOperatorsColumnWidth} = computeWidthOfFixedColumns(props);
+	const expandedAreaColumnCount = classicCells.length;
+	const [classic, expands, indexRowSpan, operatorsRowSpan] = (() => {
+		switch (true) {
+			case !expandable:
+				// no expand area
+				return [<>{classicCells}</>, null, 1, 1];
+			case !expanded:
+				// put after operators, grab all columns except the index column
+				return [
+					<>{classicCells}</>,
+					<ATableBodyCellExpandArea columnsCount={expandedAreaColumnCount + 1} expanded={expanded}>
+						{expandCells}
+					</ATableBodyCellExpandArea>, 1, 1];
+			case hideClassicCellsOnExpandable:
+				// replace classic cells, grab all columns, except the index column and operators column
+				return [
+					<ATableBodyCellExpandArea columnsCount={expandedAreaColumnCount}
+					                          expanded={expanded}>
+						{expandCells}
+					</ATableBodyCellExpandArea>,
+					null, 1, 1];
+			case !hideClassicCellsOnExpandable:
+				return [
+					<>{classicCells}</>,
+					<ATableBodyCellExpandArea columnsCount={expandedAreaColumnCount + 1}
+					                          expanded={expanded}>
+						{expandCells}
+					</ATableBodyCellExpandArea>, 2, 1];
+			default:
+				return [null, null, 1, 1];
+		}
+	})();
 
-	return <ATableBodyRow $options={{headers, rowIndexColumnWidth, rowOperatorsColumnWidth}}
-	                      data-click-to-expand={expandable && clickToExpand} data-expanded={expanded}
-	                      onClick={onRowClicked}
-	                      ref={ref}>
-		{(hideClassicCellsOnExpandable && expanded) ? null : classicCells}
-		{(hideClassicCellsOnExpandable && expanded) ? null : <ATableBodyRowTailGrabber/>}
-		{expandable
-			? <ATableBodyCellExpandArea $options={{columnCount: headers.length, expanded}}>
-				{expandCells}
-			</ATableBodyCellExpandArea>
-			: null}
-	</ATableBodyRow>;
+	return <>
+		<ATableBodyRowIndexCell rowIndex={elementIndex} rowSpan={indexRowSpan}>
+			<span>{elementIndex + rowIndexStartsFrom}</span>
+		</ATableBodyRowIndexCell>
+		{classic}
+		<TableRowOperators expandable={expandable} removable={removable} rowIndex={elementIndex}
+		                   rowSpan={operatorsRowSpan}/>
+		{expands}
+	</>;
 };

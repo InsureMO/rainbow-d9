@@ -118,9 +118,10 @@ export const CssVars = {
 	RIB_FOOTER_HEIGHT: 'var(--d9-rib-footer-height, 44px)',
 
 	TABLE_BUTTON_HEIGHT: 'var(--d9-table-button-height, 26px)',
-	TABLE_ROW_INDEX_COLUMN_WIDTH: 'var(--d9-table-row-index-column-width, 50px)',
+	TABLE_ROW_INDEX_COLUMN_CHAR_WIDTH: 'var(--d9-table-row-index-column-char-width, 8px)',
+	TABLE_ROW_INDEX_COLUMN_WIDTH: 'var(--d9-table-row-index-column-width, 20px)',
 	TABLE_ROW_INDEX_OPACITY: 'var(--d9-table-row-index-opacity, 0.7)',
-	TABLE_ROW_INDEX_BACKGROUND_COLOR: `var(--d9-table-row-index-background-color, ${CssConstants.BG_COLOR})`,
+	// TABLE_ROW_INDEX_BACKGROUND_COLOR: `var(--d9-table-row-index-background-color, ${CssConstants.BG_COLOR})`,
 	TABLE_HEADER_HEIGHT: 'var(--d9-table-header-height, 36px)',
 	TABLE_HEADER_FONT_FAMILY: `var(--d9-table-header-font-family, ${CssConstants.FONT_FAMILY})`,
 	TABLE_HEADER_FONT_SIZE: 'var(--d9-table-header-font-size, 1em)',
