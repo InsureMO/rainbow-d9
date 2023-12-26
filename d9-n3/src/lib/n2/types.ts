@@ -30,6 +30,7 @@ export enum N2WidgetType {
 	SECTION = 'Section',
 	TAB = 'Tab',
 	TABS = 'Tabs',
+	WIZARD_SHARED = 'WShared',
 	WIZARD_STEP = 'WStep',
 	WIZARD = 'Wizard',
 }

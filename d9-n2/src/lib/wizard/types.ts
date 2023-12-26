@@ -17,6 +17,11 @@ export interface WizardStepDef extends WizardStepTitleDef {
 	body: NodeDef | (() => Promise<NodeDef>);
 }
 
+export interface WizardSharedDef extends NodeDef {
+	lead?: boolean;
+	body: NodeDef | (() => Promise<NodeDef>);
+}
+
 /** Wizard configuration definition */
 export type WizardDef = NodeDef & OmitHTMLProps<HTMLDivElement> & {
 	balloon?: boolean;
@@ -25,6 +30,7 @@ export type WizardDef = NodeDef & OmitHTMLProps<HTMLDivElement> & {
 	/** match step marker first, if not matched, try to match step index */
 	reached?: string | number | (() => Promise<string | number>);
 	contents: Array<WizardStepDef>;
+	shared?: WizardSharedDef;
 };
 /** Wizard widget definition, with html attributes */
 export type WizardProps = OmitNodeDef<WizardDef> & WidgetProps;

@@ -1,4 +1,4 @@
-import {ModelHolder, MUtils, NodeDef, PPUtils, PropertyPath, WrapperDelegate} from '@rainbow-d9/n1';
+import {ModelHolder, MUtils, NodeDef, PPUtils, PropertyPath, VUtils, WrapperDelegate} from '@rainbow-d9/n1';
 import React, {useEffect, useState} from 'react';
 import {TabDef} from './types';
 import {ATabBody} from './widgets';
@@ -26,15 +26,19 @@ export const TabBody = (props: TabBodyProps) => {
 		if (defState.initialized) {
 			return;
 		}
-		if (typeof def === 'function') {
-			(async () => {
-				const loadedDef = await def();
-				setDefState({initialized: true, def: loadedDef});
-			})();
-		} else {
-			setDefState({initialized: true, def});
-		}
-	}, [defState.initialized, def]);
+		(async () => {
+			let foundDef: NodeDef | undefined;
+			if (typeof def === 'function') {
+				foundDef = await def();
+			} else {
+				foundDef = def;
+			}
+			if (foundDef != null && VUtils.isBlank(foundDef.$pp)) {
+				foundDef.$pp = $pp;
+			}
+			setDefState({initialized: true, def: foundDef});
+		})();
+	}, [defState.initialized, def, $pp]);
 
 	if (!defState.initialized) {
 		return null;

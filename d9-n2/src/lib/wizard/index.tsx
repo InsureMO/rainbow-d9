@@ -1,8 +1,8 @@
-import {MUtils, PPUtils, registerWidget, VUtils} from '@rainbow-d9/n1';
+import {MUtils, NodeDef, PPUtils, registerWidget, VUtils} from '@rainbow-d9/n1';
 import React, {useEffect, useState} from 'react';
 import {useWizardEventBus, WizardEventBusProvider} from './event/wizard-event-bus';
 import {WizardEventTypes} from './event/wizard-event-bus-types';
-import {WizardProps, WizardStepDef} from './types';
+import {WizardProps, WizardSharedDef, WizardStepDef} from './types';
 import {AWizard, WizardBody, WizardHeader} from './widgets';
 import {WizardStepBody} from './wizard-step-body';
 import {WizardStepTitle} from './wizard-step-title';
@@ -23,13 +23,16 @@ interface WizardState {
 	initialized: boolean;
 	activeIndex: number;
 	reachedIndex: number;
+	sharedDef?: NodeDef;
+	sharedAtLead?: boolean;
 }
 
 const InternalWizard = (props: WizardProps) => {
 	const {
 		$pp, $wrapped,
 		reached = 0, freeWalk = false,
-		balloon = true, emphasisActive = true, contents,
+		balloon = true, emphasisActive = true,
+		shared, contents,
 		...rest
 	} = props;
 	const {$p2r, $avs: {$disabled, $visible}} = $wrapped;
@@ -41,7 +44,7 @@ const InternalWizard = (props: WizardProps) => {
 			if (index === state.activeIndex) {
 				return;
 			} else {
-				setState(state => ({...state, activeIndex: index}));
+				setState(state => ({...state, activeIndex: index, reachedIndex: Math.max(index, state.reachedIndex)}));
 			}
 		};
 		on(WizardEventTypes.ACTIVE_STEP, onStepActive);
@@ -57,24 +60,49 @@ const InternalWizard = (props: WizardProps) => {
 			setState({initialized: true, activeIndex: 0, reachedIndex: 0});
 			return;
 		}
-		const find = (reached: string | number): number => {
-			let foundIndex = (contents ?? []).findIndex(content => content.marker === reached);
-			if (foundIndex === -1) {
-				foundIndex = (contents ?? []).findIndex((_, index) => index == reached);
-			}
-			return foundIndex === -1 ? 0 : foundIndex;
-		};
-		if (typeof reached === 'function') {
-			(async () => {
+
+		const findReachedIndex = async (): Promise<number> => {
+			const find = (reached: string | number): number => {
+				let foundIndex = (contents ?? []).findIndex(content => content.marker === reached);
+				if (foundIndex === -1) {
+					foundIndex = (contents ?? []).findIndex((_, index) => index == reached);
+				}
+				return foundIndex === -1 ? 0 : foundIndex;
+			};
+			if (typeof reached === 'function') {
 				const reachedMarkerOrIndex = await reached();
-				const index = find(reachedMarkerOrIndex);
-				setState({initialized: true, activeIndex: index, reachedIndex: index});
-			})();
-		} else {
-			const index = find(reached);
-			setState({initialized: true, activeIndex: index, reachedIndex: index});
-		}
-	}, [state.initialized, contents, reached]);
+				return find(reachedMarkerOrIndex);
+			} else {
+				return find(reached);
+			}
+		};
+		const findSharedDef = async (def?: WizardSharedDef): Promise<{ def?: NodeDef; lead?: boolean }> => {
+			if (def == null || def.body == null) {
+				return {def: (void 0), lead: (void 0)};
+			}
+			const {$pp, body} = def;
+			let foundDef: NodeDef | undefined;
+			if (typeof body === 'function') {
+				foundDef = await body();
+			} else {
+				foundDef = body;
+			}
+			if (foundDef != null && VUtils.isBlank(foundDef.$pp)) {
+				foundDef.$pp = $pp;
+			}
+			return {def: foundDef, lead: def.lead};
+		};
+
+		(async () => {
+			const reachedIndex = await findReachedIndex();
+			const {def: sharedDef, lead: sharedAtLead} = await findSharedDef(shared);
+			setState({
+				initialized: true,
+				activeIndex: reachedIndex, reachedIndex,
+				sharedDef, sharedAtLead
+			});
+		})();
+	}, [state.initialized, contents, reached, shared]);
 
 	if (!state.initialized) {
 		return null;
@@ -101,7 +129,8 @@ const InternalWizard = (props: WizardProps) => {
 				// marker already redressed in headers rendering
 				return <WizardStepBody key={content.marker} def={content.body} $pp={content.$pp}
 				                       $root={$wrapped.$root} $model={$model} $p2r={PPUtils.concat($p2r, $pp)}
-				                       active={index === state.activeIndex}/>;
+				                       active={index === state.activeIndex}
+				                       shared={state.sharedDef} sharedAtLead={state.sharedAtLead}/>;
 			})}
 		</WizardBody>
 	</AWizard>;

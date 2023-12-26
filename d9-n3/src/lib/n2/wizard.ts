@@ -1,7 +1,28 @@
 import {ContainerDef, NodeDef} from '@rainbow-d9/n1';
-import {SectionDef, WizardDef, WizardStepDef} from '@rainbow-d9/n2';
+import {SectionDef, WizardDef, WizardSharedDef, WizardStepDef} from '@rainbow-d9/n2';
 import {SpecificWidgetTranslator} from '../widget';
 import {N2WidgetType} from './types';
+
+export class N2WizardSharedTranslator extends SpecificWidgetTranslator<N2WidgetType.WIZARD_SHARED> {
+	public getSupportedType(): N2WidgetType.WIZARD_SHARED {
+		return N2WidgetType.WIZARD_SHARED;
+	}
+
+	public shouldWrapByFormCell(): boolean {
+		return false;
+	}
+
+	public postWork<Def extends NodeDef>(def: Partial<Def>): Def {
+		const defs = def as unknown as ContainerDef;
+		(defs as unknown as WizardSharedDef).body = {
+			$wt: N2WidgetType.SECTION,
+			$pos: {$cols: 3},
+			$nodes: defs.$nodes
+		} as SectionDef;
+		delete defs.$nodes;
+		return defs as unknown as Def;
+	}
+}
 
 export class N2WizardStepTranslator extends SpecificWidgetTranslator<N2WidgetType.WIZARD_STEP> {
 	public getSupportedType(): N2WidgetType.WIZARD_STEP {
@@ -20,10 +41,11 @@ export class N2WizardStepTranslator extends SpecificWidgetTranslator<N2WidgetTyp
 		return [...super.getToWidgetAttributeNames(), 'title'];
 	}
 
-	postWork<Def extends NodeDef>(def: Partial<Def>): Def {
+	public postWork<Def extends NodeDef>(def: Partial<Def>): Def {
 		const defs = def as unknown as ContainerDef;
 		(defs as unknown as WizardStepDef).body = {
 			$wt: N2WidgetType.SECTION,
+			$pos: {$cols: 12},
 			$nodes: defs.$nodes
 		} as SectionDef;
 		delete defs.$nodes;
@@ -44,9 +66,11 @@ export class N2WizardTranslator extends SpecificWidgetTranslator<N2WidgetType.WI
 		return false;
 	}
 
-	postWork<Def extends NodeDef>(def: Partial<Def>): Def {
+	public postWork<Def extends NodeDef>(def: Partial<Def>): Def {
 		const defs = def as unknown as ContainerDef;
-		(defs as unknown as WizardDef).contents = defs.$nodes as Array<WizardStepDef>;
+		const {$nodes} = defs;
+		(defs as unknown as WizardDef).shared = ($nodes ?? []).find(node => node.$wt === N2WidgetType.WIZARD_SHARED) as WizardSharedDef;
+		(defs as unknown as WizardDef).contents = ($nodes ?? []).filter(node => node.$wt === N2WidgetType.WIZARD_STEP) as Array<WizardStepDef>;
 		delete defs.$nodes;
 		return defs as unknown as Def;
 	}

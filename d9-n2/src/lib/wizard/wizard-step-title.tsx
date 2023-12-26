@@ -46,8 +46,13 @@ export const WizardStepTitle = (props: WizardStepTitleProps) => {
 	const {$disabled, $visible} = attributeValues;
 
 	const onTitleClicked = (event: MouseEvent<HTMLDivElement>) => {
-		if ($disabled || active || (!done && !freeWalk)) {
+		if ($disabled || active) {
 			return;
+		}
+		if (!freeWalk && !done) {
+			if (reachedIndex < stepIndex) {
+				return;
+			}
 		}
 
 		event.preventDefault();
@@ -57,7 +62,7 @@ export const WizardStepTitle = (props: WizardStepTitleProps) => {
 	};
 
 	return <AWizardStepTitle data-disabled={$disabled} data-visible={$visible}
-	                         data-done={done} data-active={active}
+	                         data-done={done || (!active && reachedIndex >= stepIndex)} data-active={active}
 	                         data-free-walk={freeWalk || reachedIndex >= stepIndex}
 	                         data-balloon={balloon} data-emphasis={emphasisActive && active}
 	                         onClick={balloon ? (void 0) : onTitleClicked} {...rest}>

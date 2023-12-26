@@ -18,7 +18,7 @@ import {N2SectionTranslator} from './section';
 import {N2TableTranslator} from './table';
 import {N2TabsTranslator, N2TabTranslator} from './tabs';
 import {N2TextareaTranslator} from './textarea';
-import {N2WizardStepTranslator, N2WizardTranslator} from './wizard';
+import {N2WizardSharedTranslator, N2WizardStepTranslator, N2WizardTranslator} from './wizard';
 
 export const registerN2Widgets = (widgetHelper?: WidgetHelper) => {
 	const {repository: repo} = widgetHelper ?? createOrGetTranslateHelperSingleton();
@@ -54,6 +54,7 @@ export const registerN2Widgets = (widgetHelper?: WidgetHelper) => {
 	repo.register(new N2TabTranslator(repo));
 	repo.register(new N2TabsTranslator(repo));
 
+	repo.register(new N2WizardSharedTranslator(repo));
 	repo.register(new N2WizardStepTranslator(repo));
 	repo.register(new N2WizardTranslator(repo));
 };
