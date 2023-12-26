@@ -3,122 +3,123 @@ import {Undefinable} from '../../utility-types';
 import {AbstractTranslator, Decipherable} from './abstract-translator';
 import {AttributeNameUtils, AttributeUtils, CustomAttributeName} from './attribute';
 import {
-    EnablementBuild,
-    EnablementUtils,
-    ReactorBuild,
-    ReactorUtils,
-    ValidatorBuild,
-    ValidatorUtils,
-    VisibilityBuild, VisibilityUtils
+	EnablementBuild,
+	EnablementUtils,
+	ReactorBuild,
+	ReactorUtils,
+	ValidatorBuild,
+	ValidatorUtils,
+	VisibilityBuild,
+	VisibilityUtils
 } from './monitor';
 import {PageTranslator} from './page-translator';
 import {SpecificWidgetTranslator} from './specific-translator';
 import {WidgetTranslator} from './widget-translator';
 
 export class WidgetTranslatorRepository {
-    private readonly _validatorBuild: ValidatorBuild;
-    private readonly _reactorBuild: ReactorBuild;
-    private readonly _enablementBuild: EnablementBuild;
-    private readonly _visibilityBuild: VisibilityBuild;
-    private readonly translators: Array<AbstractTranslator<Decipherable>>;
-    private readonly specificTranslators: Record<WidgetType, SpecificWidgetTranslator<WidgetType>> = {};
+	private readonly _validatorBuild: ValidatorBuild;
+	private readonly _reactorBuild: ReactorBuild;
+	private readonly _enablementBuild: EnablementBuild;
+	private readonly _visibilityBuild: VisibilityBuild;
+	private readonly translators: Array<AbstractTranslator<Decipherable>>;
+	private readonly specificTranslators: Record<WidgetType, SpecificWidgetTranslator<WidgetType>> = {};
 
-    public constructor() {
-        this._validatorBuild = this.createValidatorBuild();
-        this._reactorBuild = this.createReactorBuild();
-        this._enablementBuild = this.createEnablementBuild();
-        this._visibilityBuild = this.createVisibilityBuild();
-        this.translators = this.createDefaultTranslators();
-    }
+	public constructor() {
+		this._validatorBuild = this.createValidatorBuild();
+		this._reactorBuild = this.createReactorBuild();
+		this._enablementBuild = this.createEnablementBuild();
+		this._visibilityBuild = this.createVisibilityBuild();
+		this.translators = this.createDefaultTranslators();
+	}
 
-    protected createValidatorBuild() {
-        return new ValidatorBuild();
-    }
+	protected createValidatorBuild() {
+		return new ValidatorBuild();
+	}
 
-    protected createReactorBuild() {
-        return new ReactorBuild();
-    }
+	protected createReactorBuild() {
+		return new ReactorBuild();
+	}
 
-    protected createEnablementBuild() {
-        return new EnablementBuild();
-    }
+	protected createEnablementBuild() {
+		return new EnablementBuild();
+	}
 
-    protected createVisibilityBuild() {
-        return new VisibilityBuild();
-    }
+	protected createVisibilityBuild() {
+		return new VisibilityBuild();
+	}
 
-    protected createDefaultTranslators(): Array<AbstractTranslator<Decipherable>> {
-        return [new PageTranslator(this), new WidgetTranslator(this)];
-    }
+	protected createDefaultTranslators(): Array<AbstractTranslator<Decipherable>> {
+		return [new PageTranslator(this), new WidgetTranslator(this)];
+	}
 
-    get validatorBuild(): ValidatorBuild {
-        return this._validatorBuild;
-    }
+	get validatorBuild(): ValidatorBuild {
+		return this._validatorBuild;
+	}
 
-    get reactorBuild(): ReactorBuild {
-        return this._reactorBuild;
-    }
+	get reactorBuild(): ReactorBuild {
+		return this._reactorBuild;
+	}
 
-    get enablementBuild(): EnablementBuild {
-        return this._enablementBuild;
-    }
+	get enablementBuild(): EnablementBuild {
+		return this._enablementBuild;
+	}
 
-    get visibilityBuild(): VisibilityBuild {
-        return this._visibilityBuild;
-    }
+	get visibilityBuild(): VisibilityBuild {
+		return this._visibilityBuild;
+	}
 
-    public askTranslator<T extends Decipherable>($wt: WidgetType): Undefinable<AbstractTranslator<T>> {
-        return this.translators.find(translator => translator.isTypeSupported($wt));
-    }
+	public askTranslator<T extends Decipherable>($wt: WidgetType): Undefinable<AbstractTranslator<T>> {
+		return this.translators.find(translator => translator.isTypeSupported($wt));
+	}
 
-    public register<T extends WidgetType>(translator: SpecificWidgetTranslator<T>): Undefinable<SpecificWidgetTranslator<T>> {
-        const existing = this.specificTranslators[translator.getSupportedType()];
+	public register<T extends WidgetType>(translator: SpecificWidgetTranslator<T>): Undefinable<SpecificWidgetTranslator<T>> {
+		const existing = this.specificTranslators[translator.getSupportedType()];
 
-        const $wt = translator.getSupportedType();
-        this.specificTranslators[$wt] = translator;
-        const namesMapping = translator.getAttributeNamesMapping();
-        if (namesMapping != null) {
-            AttributeNameUtils.register(namesMapping);
-        }
-        AttributeUtils.register($wt, translator.getAttributeValueBuilders());
-        ValidatorUtils.register($wt, translator.getValidationHandlerDetectives());
-        ReactorUtils.register($wt, translator.getReactionHandlerDetectives());
-        EnablementUtils.register($wt, translator.getEnablementHandlerDetectives());
-        VisibilityUtils.register($wt, translator.getVisibilityHandlerDetectives());
-        return existing as Undefinable<SpecificWidgetTranslator<T>>;
-    }
+		const $wt = translator.getSupportedType();
+		this.specificTranslators[$wt] = translator;
+		const namesMapping = translator.getAttributeNamesMapping();
+		if (namesMapping != null) {
+			AttributeNameUtils.register(namesMapping);
+		}
+		AttributeUtils.register($wt, translator.getAttributeValueBuilders());
+		ValidatorUtils.register($wt, translator.getValidationHandlerDetectives());
+		ReactorUtils.register($wt, translator.getReactionHandlerDetectives());
+		EnablementUtils.register($wt, translator.getEnablementHandlerDetectives());
+		VisibilityUtils.register($wt, translator.getVisibilityHandlerDetectives());
+		return existing as Undefinable<SpecificWidgetTranslator<T>>;
+	}
 
-    public unregister<T extends WidgetType>(translator: SpecificWidgetTranslator<T>): Undefinable<SpecificWidgetTranslator<T>> {
-        const $wt = translator.getSupportedType();
-        const existing = this.specificTranslators[$wt];
+	public unregister<T extends WidgetType>(translator: SpecificWidgetTranslator<T>): Undefinable<SpecificWidgetTranslator<T>> {
+		const $wt = translator.getSupportedType();
+		const existing = this.specificTranslators[$wt];
 
-        const namesMapping = translator.getAttributeNamesMapping();
-        if (namesMapping != null) {
-            AttributeNameUtils.unregister(Object.keys(namesMapping) as Array<CustomAttributeName>);
-        }
-        ReactorUtils.unregister($wt);
-        ValidatorUtils.unregister($wt);
-        AttributeUtils.unregister($wt);
-        EnablementUtils.unregister($wt);
-        VisibilityUtils.unregister($wt);
-        delete this.specificTranslators[$wt];
+		const namesMapping = translator.getAttributeNamesMapping();
+		if (namesMapping != null) {
+			AttributeNameUtils.unregister(Object.keys(namesMapping) as Array<CustomAttributeName>);
+		}
+		ReactorUtils.unregister($wt);
+		ValidatorUtils.unregister($wt);
+		AttributeUtils.unregister($wt);
+		EnablementUtils.unregister($wt);
+		VisibilityUtils.unregister($wt);
+		delete this.specificTranslators[$wt];
 
-        return existing as Undefinable<SpecificWidgetTranslator<T>>;
-    }
+		return existing as Undefinable<SpecificWidgetTranslator<T>>;
+	}
 
-    public askSpecificTranslator<T extends WidgetType>($wt: T): Undefinable<SpecificWidgetTranslator<T>> {
-        return this.specificTranslators[$wt] as Undefinable<SpecificWidgetTranslator<T>>;
-    }
+	public askSpecificTranslator<T extends WidgetType>($wt: T): Undefinable<SpecificWidgetTranslator<T>> {
+		return this.specificTranslators[$wt] as Undefinable<SpecificWidgetTranslator<T>>;
+	}
 }
 
 const SINGLETON: {
-    repo: Undefinable<WidgetTranslatorRepository>
+	repo: Undefinable<WidgetTranslatorRepository>
 } = {repo: (void 0)};
 
 export const createOrGetTranslatorRepositorySingleton = (): WidgetTranslatorRepository => {
-    if (SINGLETON.repo == null) {
-        SINGLETON.repo = new WidgetTranslatorRepository();
-    }
+	if (SINGLETON.repo == null) {
+		SINGLETON.repo = new WidgetTranslatorRepository();
+	}
 
-    return SINGLETON.repo;
+	return SINGLETON.repo;
 };
