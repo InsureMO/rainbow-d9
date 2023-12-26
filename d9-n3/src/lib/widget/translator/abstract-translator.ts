@@ -161,15 +161,20 @@ export abstract class AbstractTranslator<N extends Decipherable> {
 			}
 		}).reduce((options, each) => {
 			Object.keys(each).forEach(key => {
-				key.split('.').reduce((parent, part, index, parts) => {
-					if (index == parts.length - 1) {
-						// last one
-						parent[part] = each[key];
-					} else if (parent[part] == null) {
-						parent[part] = {} as AttributeMap;
+				const parts = key.split('.');
+				const lastPart = parts[parts.length - 1];
+				let parent = options;
+				parts.slice(0, -1).forEach(part => {
+					// if the part does not exist in the parent, create it as an object
+					if (parent[part] === undefined) {
+						parent[part] = {};
 					}
-					return parent[part];
-				}, options);
+					parent = parent[part];
+				});
+				// 不是Object类型 或者 当前是Object 才会覆盖
+				if (typeof parent[lastPart] !== 'object' || typeof each[key] === 'object') {
+					parent[lastPart] = each[key];
+				}
 			});
 			return options;
 		}, {} as AttributeMap);
