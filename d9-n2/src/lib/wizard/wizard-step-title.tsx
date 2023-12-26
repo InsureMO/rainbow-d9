@@ -12,9 +12,11 @@ import {LabelLike} from '../label-like';
 import {useWizardEventBus} from './event/wizard-event-bus';
 import {WizardEventTypes} from './event/wizard-event-bus-types';
 import {WizardStepTitleDef} from './types';
-import {AWizardStepTitle} from './widgets';
+import {AWizardStepBalloon, AWizardStepTitle} from './widgets';
 
 export interface WizardStepTitleProps extends WizardStepTitleDef, ModelHolder {
+	balloon?: boolean;
+	emphasisActive?: boolean;
 	active?: boolean;
 	stepIndex: number;
 	marker: string;
@@ -24,7 +26,7 @@ export const WizardStepTitle = (props: WizardStepTitleProps) => {
 	const {
 		$pp, title,
 		$root, $model, $p2r,
-		active, stepIndex, marker,
+		balloon = true, emphasisActive = true, active, stepIndex, marker,
 		...rest
 	} = props;
 
@@ -51,8 +53,12 @@ export const WizardStepTitle = (props: WizardStepTitleProps) => {
 	};
 
 	return <AWizardStepTitle data-disabled={$disabled} data-visible={$visible} data-active={active}
-	                         {...rest}
-	                         onClick={onTitleClicked}>
+	                         data-balloon={balloon} data-emphasis={emphasisActive && active} {...rest}>
+		{balloon
+			? <AWizardStepBalloon>
+				<span onClick={onTitleClicked}>{stepIndex + 1}</span>
+			</AWizardStepBalloon>
+			: null}
 		<LabelLike $wrapped={$wrapped} label={title} wrapByCaption={true}/>
 	</AWizardStepTitle>;
 };

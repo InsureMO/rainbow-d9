@@ -98,6 +98,7 @@ export const CssVars = {
 	WIZARD_STEP_TITLE_FONT_FAMILY: `var(--d9-wizard-step-title-font-family, ${CssConstants.FONT_FAMILY})`,
 	WIZARD_STEP_TITLE_FONT_SIZE: `var(--d9-wizard-step-title-font-size, 16px)`,
 	WIZARD_STEP_TITLE_FONT_WEIGHT: `var(--d9-wizard-step-title-font-weight, 600)`,
+	WIZARD_STEP_BALLOON_HEIGHT: `var(--d9-wizard-step-balloon-height, 40px)`,
 
 	CAPTION_FONT_FAMILY: `var(--d9-caption-font-family, ${CssConstants.FONT_FAMILY})`,
 	CAPTION_FONT_SIZE: 'var(--d9-caption-font-size, 14px)',

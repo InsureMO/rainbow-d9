@@ -20,7 +20,11 @@ const redressStepMarker = (content: WizardStepDef) => {
 };
 
 const InternalWizard = (props: WizardProps) => {
-	const {$pp, $wrapped, contents, ...rest} = props;
+	const {
+		$pp, $wrapped,
+		balloon = true, emphasisActive = true, contents,
+		...rest
+	} = props;
 	const {$p2r, $avs: {$disabled, $visible}} = $wrapped;
 
 	const {on, off} = useWizardEventBus();
@@ -41,12 +45,13 @@ const InternalWizard = (props: WizardProps) => {
 
 	return <AWizard {...rest} data-disabled={$disabled} data-visible={$visible}
 	                id={PPUtils.asId(PPUtils.absolute($p2r, $pp), props.id)}>
-		<WizardHeader>
+		<WizardHeader data-balloon={balloon}>
 			{(contents ?? []).map((content, index) => {
 				redressStepMarker(content);
 				const $model = MUtils.getValue($wrapped.$model, $pp);
 				return <WizardStepTitle key={content.marker}
 				                        $root={$wrapped.$root} $model={$model} $p2r={PPUtils.concat($p2r, $pp)}
+				                        balloon={balloon} emphasisActive={emphasisActive}
 				                        {...content}
 				                        active={index === activeIndex} stepIndex={index} marker={content.marker}/>;
 			})}

@@ -19,6 +19,8 @@ export interface WizardStepDef extends WizardStepTitleDef {
 
 /** Wizard configuration definition */
 export type WizardDef = NodeDef & OmitHTMLProps<HTMLDivElement> & {
+	balloon?: boolean;
+	emphasisActive?: boolean;
 	contents: Array<WizardStepDef>;
 };
 /** Wizard widget definition, with html attributes */
