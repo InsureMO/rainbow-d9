@@ -27,6 +27,8 @@ export type WizardDef = NodeDef & OmitHTMLProps<HTMLDivElement> & {
 	balloon?: boolean;
 	emphasisActive?: boolean;
 	freeWalk?: boolean;
+	/** omit default walker operators to switching steps */
+	omitWalker?: boolean;
 	/** match step marker first, if not matched, try to match step index */
 	reached?: string | number | (() => Promise<string | number>);
 	contents: Array<WizardStepDef>;

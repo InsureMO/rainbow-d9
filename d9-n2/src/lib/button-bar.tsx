@@ -17,35 +17,42 @@ export type ButtonBarDef = ContainerDef & OmitHTMLProps<HTMLDivElement> & {
 /** Button bar widget definition, with html attributes */
 export type ButtonBarProps = OmitNodeDef<ButtonBarDef> & ContainerWidgetProps;
 
-const AButtonBar = styled.div.attrs(({id}) => {
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
+const AButtonBar = styled.div.attrs(({id, 'data-w': dataW}) => {
 	return {
-		[DOM_KEY_WIDGET]: 'd9-button-bar',
+		[DOM_KEY_WIDGET]: dataW ?? 'd9-button-bar',
 		[DOM_ID_WIDGET]: id
 	};
 })`
-	display         : flex;
-	position        : relative;
-	align-items     : center;
-	justify-content : end;
-	height          : calc(${CssVars.INPUT_HEIGHT} + 16px);
-	padding         : 8px 0;
-	border-radius   : ${CssVars.BORDER_RADIUS};
-	outline         : none;
-	&[data-alignment=left] {
-		justify-content : start;
-		> button:not(:first-child) {
-			margin-left : 8px;
-		}
-	}
-	&[data-alignment=center] {
-		justify-content : center;
-		> button:not(:first-child) {
-			margin-left : 8px;
-		}
-	}
-	> button:not(:last-child) {
-		margin-right : 8px;
-	}
+    display: flex;
+    position: relative;
+    align-items: center;
+    justify-content: end;
+    height: calc(${CssVars.INPUT_HEIGHT} + 16px);
+    padding: 8px 0;
+    border-radius: ${CssVars.BORDER_RADIUS};
+    outline: none;
+
+    &[data-alignment=left] {
+        justify-content: start;
+
+        > button:not(:first-child) {
+            margin-left: 8px;
+        }
+    }
+
+    &[data-alignment=center] {
+        justify-content: center;
+
+        > button:not(:first-child) {
+            margin-left: 8px;
+        }
+    }
+
+    > button:not(:last-child) {
+        margin-right: 8px;
+    }
 `;
 
 export const ButtonBar = forwardRef((props: ButtonBarProps, ref: ForwardedRef<HTMLDivElement>) => {

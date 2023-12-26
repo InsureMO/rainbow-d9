@@ -233,4 +233,17 @@ export const AWizardStepBody = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-wizard-st
     &[data-visible=false] {
         display: none;
     }
+
+    > div[data-w=d9-wizard-walker] {
+        grid-column: span 12;
+        justify-content: space-between;
+
+        &[data-grab-all=false] {
+            grid-column: 1 / span 9;
+
+            &[data-shared-at-lead=true] {
+                grid-column: 4 / span 9;
+            }
+        }
+    }
 `;

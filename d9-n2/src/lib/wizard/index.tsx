@@ -30,7 +30,7 @@ interface WizardState {
 const InternalWizard = (props: WizardProps) => {
 	const {
 		$pp, $wrapped,
-		reached = 0, freeWalk = false,
+		reached = 0, freeWalk = false, omitWalker = false,
 		balloon = true, emphasisActive = true,
 		shared, contents,
 		...rest
@@ -40,8 +40,15 @@ const InternalWizard = (props: WizardProps) => {
 	const {on, off} = useWizardEventBus();
 	const [state, setState] = useState<WizardState>({initialized: false, activeIndex: 0, reachedIndex: 0});
 	useEffect(() => {
-		const onStepActive = (index: number) => {
-			if (index === state.activeIndex) {
+		const onStepActive = (index: number, marker: string) => {
+			let foundIndex = (contents ?? []).findIndex(content => content.marker === marker);
+			if (foundIndex == null) {
+				foundIndex = (contents ?? []).findIndex((_, i) => i === index);
+			}
+			if (foundIndex === -1) {
+				return;
+			}
+			if (foundIndex === state.activeIndex) {
 				return;
 			} else {
 				setState(state => ({...state, activeIndex: index, reachedIndex: Math.max(index, state.reachedIndex)}));
@@ -51,7 +58,7 @@ const InternalWizard = (props: WizardProps) => {
 		return () => {
 			off(WizardEventTypes.ACTIVE_STEP, onStepActive);
 		};
-	}, [on, off, state.activeIndex]);
+	}, [on, off, state.activeIndex, contents]);
 	useEffect(() => {
 		if (state.initialized) {
 			return;
@@ -124,13 +131,17 @@ const InternalWizard = (props: WizardProps) => {
 			})}
 		</WizardHeader>
 		<WizardBody>
-			{(contents ?? []).map((content, index) => {
+			{(contents ?? []).map((content, index, all) => {
 				const $model = MUtils.getValue($wrapped.$model, $pp);
 				// marker already redressed in headers rendering
 				return <WizardStepBody key={content.marker} def={content.body} $pp={content.$pp}
 				                       $root={$wrapped.$root} $model={$model} $p2r={PPUtils.concat($p2r, $pp)}
-				                       active={index === state.activeIndex}
-				                       shared={state.sharedDef} sharedAtLead={state.sharedAtLead}/>;
+				                       active={index === state.activeIndex} omitWalker={omitWalker}
+				                       shared={state.sharedDef} sharedAtLead={state.sharedAtLead}
+				                       firstStep={index === 0} lastStep={index === all.length - 1}
+				                       previousMarker={index !== 0 ? all[index - 1].marker : (void 0)}
+				                       nextMarker={index !== all.length - 1 ? all[index + 1].marker : (void 0)}
+				                       stepIndex={index} marker={content.marker}/>;
 			})}
 		</WizardBody>
 	</AWizard>;

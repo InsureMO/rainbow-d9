@@ -238,5 +238,9 @@ export const I18NVars = {
 		NO_ELEMENT: 'No data found.',
 		CREATE_ITEM: 'Create New Element',
 		REMOVE_ITEM: 'Remove'
+	},
+	WIZARD: {
+		PREVIOUS: 'Previous',
+		NEXT: 'Next'
 	}
 };
