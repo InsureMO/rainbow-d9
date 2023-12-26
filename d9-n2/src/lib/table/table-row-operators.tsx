@@ -1,26 +1,39 @@
+import {VUtils, WrappedAttributes} from '@rainbow-d9/n1';
 import React, {useEffect, useState} from 'react';
-import {Collapse, Expand, Remove} from '../icons';
+import {Button, ButtonFill, ButtonInk} from '../button';
 import {useTableEventBus} from './event/table-event-bus';
 import {TableEventTypes} from './event/table-event-bus-types';
-import {ATableRowOperator, ATableRowOperators} from './widgets';
+import {ATableRowOperators} from './widgets';
 
 const ExpandButton = (props: { onClick: () => void }) => {
 	const {onClick} = props;
-	return <ATableRowOperator onClick={onClick}>
-		<Expand/>
-	</ATableRowOperator>;
+	const $wrapped: WrappedAttributes = {
+		$root: {}, $model: {}, $p2r: '.', $onValueChange: VUtils.noop,
+		$avs: {$disabled: false, $visible: true}
+	};
+	return <Button $wrapped={$wrapped} ink={ButtonInk.PRIMARY} fill={ButtonFill.PLAIN} leads={['$icons.expand']}
+	               click={onClick}
+	               data-w="d9-table-row-operator"/>;
 };
 const CollapseButton = (props: { onClick: () => void }) => {
 	const {onClick} = props;
-	return <ATableRowOperator onClick={onClick}>
-		<Collapse/>
-	</ATableRowOperator>;
+	const $wrapped: WrappedAttributes = {
+		$root: {}, $model: {}, $p2r: '.', $onValueChange: VUtils.noop,
+		$avs: {$disabled: false, $visible: true}
+	};
+	return <Button $wrapped={$wrapped} ink={ButtonInk.PRIMARY} fill={ButtonFill.PLAIN} leads={['$icons.collapse']}
+	               click={onClick}
+	               data-w="d9-table-row-operator"/>;
 };
 const RemoveButton = (props: { onClick: () => void }) => {
 	const {onClick} = props;
-	return <ATableRowOperator onClick={onClick}>
-		<Remove/>
-	</ATableRowOperator>;
+	const $wrapped: WrappedAttributes = {
+		$root: {}, $model: {}, $p2r: '.', $onValueChange: VUtils.noop,
+		$avs: {$disabled: false, $visible: true}
+	};
+	return <Button $wrapped={$wrapped} ink={ButtonInk.PRIMARY} fill={ButtonFill.PLAIN} leads={['$icons.remove']}
+	               click={onClick}
+	               data-w="d9-table-row-operator"/>;
 };
 
 export const TableRowOperators = (props: {
@@ -65,10 +78,8 @@ export const TableRowOperators = (props: {
 
 	return <ATableRowOperators data-expanded={expanded}
 	                           rowIndex={rowIndex} rowSpan={rowSpan}>
-		<span>
-			{removable !== false ? <RemoveButton onClick={onRemoveElementClicked}/> : null}
-			{(expandable && !expanded) ? <ExpandButton onClick={onExpandClicked}/> : null}
-			{(expandable && expanded) ? <CollapseButton onClick={onCollapseClicked}/> : null}
-		</span>
+		{removable !== false ? <RemoveButton onClick={onRemoveElementClicked}/> : null}
+		{(expandable && !expanded) ? <ExpandButton onClick={onExpandClicked}/> : null}
+		{(expandable && expanded) ? <CollapseButton onClick={onCollapseClicked}/> : null}
 	</ATableRowOperators>;
 };

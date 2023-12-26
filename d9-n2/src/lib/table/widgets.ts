@@ -197,50 +197,24 @@ export const ATableRowOperators = styled.div.attrs<{ rowIndex: number; rowSpan: 
 	}) <{ rowIndex: number; rowSpan: number }>`
     display: flex;
     position: sticky;
-    align-items: start;
+    align-items: center;
+    justify-content: flex-end;
     right: 0;
     background-color: ${CssVars.INVERT_COLOR};
+    padding: 0 calc(${CssVars.TABLE_CELL_PADDING} / 2);
     z-index: 3;
 
-    > span {
+    > button[data-w=d9-table-row-operator] {
         display: flex;
         position: relative;
         align-items: center;
-        min-height: ${CssVars.TABLE_CELL_HEIGHT};
-        padding: 0 ${CssVars.BUTTON_INDENT};
-    }
-`;
-export const ATableRowOperator = styled.span.attrs({[DOM_KEY_WIDGET]: 'd9-table-row-operator'})`
-    display: flex;
-    position: relative;
-    align-items: center;
-    justify-content: center;
-    width: calc(${CssVars.TABLE_CELL_HEIGHT} - 6px);
-    min-height: calc(${CssVars.TABLE_CELL_HEIGHT} - 6px);
-    border-radius: ${CssVars.BORDER_RADIUS};
-    border: ${CssVars.BORDER};
-    border-color: ${CssVars.PRIMARY_COLOR};
-    cursor: pointer;
-    overflow: hidden;
-    transition: all ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION};
+        height: ${CssVars.TABLE_BUTTON_HEIGHT};
+        width: ${CssVars.TABLE_BUTTON_HEIGHT};
+        padding: 0;
 
-    &:not(:first-child) {
-        margin-left: 8px;
-    }
-
-    &:hover {
-        box-shadow: ${CssVars.PRIMARY_SHADOW};
-        background-color: ${CssVars.PRIMARY_COLOR};
-
-        > svg {
-            fill: ${CssVars.INVERT_COLOR};
+        &:not(:first-child) {
+            margin-left: 4px;
         }
-    }
-
-    > svg {
-        fill: ${CssVars.PRIMARY_COLOR};
-        height: ${CssVars.FONT_SIZE};
-        transition: background-color ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION};
     }
 `;
 export const ATableBodyCellExpandArea = styled.div.attrs<{
@@ -269,8 +243,4 @@ export const ATableBottomBar = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-table-bot
     align-items: center;
     justify-content: flex-end;
     height: ${CssVars.TABLE_FOOTER_HEIGHT};
-
-    > button {
-        max-height: ${CssVars.TABLE_BUTTON_HEIGHT};
-    }
 `;

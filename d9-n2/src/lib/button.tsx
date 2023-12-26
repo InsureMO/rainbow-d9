@@ -58,9 +58,11 @@ export type ButtonDef = NodeDef & DecorateWrapperDef & OmitHTMLProps2<HTMLButton
 export type ButtonProps = OmitNodeDef<ButtonDef> & WidgetProps;
 
 const AButton = styled.button.attrs<{ hasOneLeadOrTail: boolean }>(
-	({id, hasOneLeadOrTail}) => {
+	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+	// @ts-ignore
+	({id, hasOneLeadOrTail, 'data-w': dataW}) => {
 		return {
-			[DOM_KEY_WIDGET]: 'd9-button',
+			[DOM_KEY_WIDGET]: dataW ?? 'd9-button',
 			[DOM_ID_WIDGET]: id,
 			style: {
 				padding: hasOneLeadOrTail ? 0 : (void 0)
@@ -82,6 +84,7 @@ const AButton = styled.button.attrs<{ hasOneLeadOrTail: boolean }>(
     outline: none;
     cursor: pointer;
     white-space: nowrap;
+    overflow: hidden;
     transition: all ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION};
     // fill
     // default

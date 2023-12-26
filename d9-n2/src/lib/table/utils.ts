@@ -8,12 +8,19 @@ export const computeRowIndexColumnWidth = (maxRowIndex: number): string => {
 };
 export const computeRowOperatorsColumnWidth = (operatorsColumnWidth: number | string, expandable: boolean, removable: boolean): string => {
 	if (VUtils.isNotBlank(operatorsColumnWidth)) {
-		return toCssSize(operatorsColumnWidth);
+		const result = VUtils.isNumber(operatorsColumnWidth);
+		if (result.test) {
+			if (result.value > 0) {
+				return toCssSize(operatorsColumnWidth);
+			}
+		} else {
+			return toCssSize(operatorsColumnWidth);
+		}
 	}
 
 	const buttonCount = (expandable ? 1 : 0) + (removable ? 1 : 0);
 	if (buttonCount > 0) {
-		return `calc(${buttonCount} * (${CssVars.TABLE_CELL_HEIGHT} - 6px) + ${buttonCount - 1} * 8px + ${CssVars.BUTTON_INDENT} * 2)`;
+		return `calc(${buttonCount} * ${CssVars.TABLE_BUTTON_HEIGHT} + ${buttonCount - 1} * 8px + ${CssVars.BUTTON_INDENT} * 2)`;
 	} else {
 		return '0px';
 	}

@@ -22,7 +22,7 @@ const CssConstants = {
 	WAIVE_SHADOW_COLOR: 'rgb(0,0,0)',
 	// for widgets
 	CAPTION_FONT_COLOR: 'rgb(126,126,126)',
-	TAB_ACTIVE_COLOR: 'rgb(238,241,245)',
+	TAB_ACTIVE_COLOR: 'rgb(13,110,253)',
 	RIB_COLOR: 'rgb(238,241,245)'
 };
 
@@ -82,8 +82,8 @@ export const CssVars = {
 	SECTION_HEADER_FONT_WEIGHT: 'var(--d9-section-header-title-font-weight, 600)',
 	SECTION_BODY_PADDING: 'var(--d9-section-body-padding, 8px)',
 
-	TAB_TITLE_HEIGHT: 'var(--d9-tab-title-height, 44px)',
-	TAB_TITLE_OFFSET: 'var(--d9-tab-title-offset, calc(44px / 6))',
+	TAB_TITLE_HEIGHT: 'var(--d9-tab-title-height, 40px)',
+	TAB_TITLE_OFFSET: 'var(--d9-tab-title-offset, 0)',
 	TAB_TITLE_ACTIVE_COLOR: `var(--d9-tab-title-active-color, ${CssConstants.TAB_ACTIVE_COLOR})`,
 	TAB_TITLE_PADDING: 'var(--d9-tab-title-padding, 16px)',
 	TAB_TITLE_FONT_FAMILY: `var(--d9-tab-title-font-family, ${CssConstants.FONT_FAMILY})`,
