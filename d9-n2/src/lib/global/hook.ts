@@ -104,6 +104,12 @@ export const useYesNoDialog = (): YesNoDialogHandlers => {
 	return functions;
 };
 
+export enum GlobalEventPrefix {
+	ALERT = 'alert', DIALOG = 'dialog',
+	WIZARD_STEP = 'w-step',
+	CUSTOM = 'custom'
+}
+
 export type CustomGlobalEventHandler = <R extends BaseModel, M extends PropValue>(
 	key: string, models?: { root: R; model: M; }) => Promise<void>;
 
