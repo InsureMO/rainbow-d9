@@ -19,29 +19,66 @@ const redressStepMarker = (content: WizardStepDef) => {
 	return content.marker;
 };
 
+interface WizardState {
+	initialized: boolean;
+	activeIndex: number;
+	reachedIndex: number;
+}
+
 const InternalWizard = (props: WizardProps) => {
 	const {
 		$pp, $wrapped,
+		reached = 0, freeWalk = false,
 		balloon = true, emphasisActive = true, contents,
 		...rest
 	} = props;
 	const {$p2r, $avs: {$disabled, $visible}} = $wrapped;
 
 	const {on, off} = useWizardEventBus();
-	const [activeIndex, setActiveIndex] = useState(0);
+	const [state, setState] = useState<WizardState>({initialized: false, activeIndex: 0, reachedIndex: 0});
 	useEffect(() => {
 		const onStepActive = (index: number) => {
-			if (index === activeIndex) {
+			if (index === state.activeIndex) {
 				return;
 			} else {
-				setActiveIndex(index);
+				setState(state => ({...state, activeIndex: index}));
 			}
 		};
 		on(WizardEventTypes.ACTIVE_STEP, onStepActive);
 		return () => {
 			off(WizardEventTypes.ACTIVE_STEP, onStepActive);
 		};
-	}, [on, off, activeIndex]);
+	}, [on, off, state.activeIndex]);
+	useEffect(() => {
+		if (state.initialized) {
+			return;
+		}
+		if (reached == null || VUtils.isBlank(reached)) {
+			setState({initialized: true, activeIndex: 0, reachedIndex: 0});
+			return;
+		}
+		const find = (reached: string | number): number => {
+			let foundIndex = (contents ?? []).findIndex(content => content.marker === reached);
+			if (foundIndex === -1) {
+				foundIndex = (contents ?? []).findIndex((_, index) => index == reached);
+			}
+			return foundIndex === -1 ? 0 : foundIndex;
+		};
+		if (typeof reached === 'function') {
+			(async () => {
+				const reachedMarkerOrIndex = await reached();
+				const index = find(reachedMarkerOrIndex);
+				setState({initialized: true, activeIndex: index, reachedIndex: index});
+			})();
+		} else {
+			const index = find(reached);
+			setState({initialized: true, activeIndex: index, reachedIndex: index});
+		}
+	}, [state.initialized, contents, reached]);
+
+	if (!state.initialized) {
+		return null;
+	}
 
 	return <AWizard {...rest} data-disabled={$disabled} data-visible={$visible}
 	                id={PPUtils.asId(PPUtils.absolute($p2r, $pp), props.id)}>
@@ -53,7 +90,9 @@ const InternalWizard = (props: WizardProps) => {
 				                        $root={$wrapped.$root} $model={$model} $p2r={PPUtils.concat($p2r, $pp)}
 				                        balloon={balloon} emphasisActive={emphasisActive}
 				                        {...content}
-				                        active={index === activeIndex} stepIndex={index} marker={content.marker}/>;
+				                        done={index < state.activeIndex} active={index === state.activeIndex}
+				                        freeWalk={freeWalk} reachedIndex={state.reachedIndex} stepIndex={index}
+				                        marker={content.marker}/>;
 			})}
 		</WizardHeader>
 		<WizardBody>
@@ -62,7 +101,7 @@ const InternalWizard = (props: WizardProps) => {
 				// marker already redressed in headers rendering
 				return <WizardStepBody key={content.marker} def={content.body} $pp={content.$pp}
 				                       $root={$wrapped.$root} $model={$model} $p2r={PPUtils.concat($p2r, $pp)}
-				                       active={index === activeIndex}/>;
+				                       active={index === state.activeIndex}/>;
 			})}
 		</WizardBody>
 	</AWizard>;

@@ -20,18 +20,18 @@ export const WizardHeader = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-wizard-heade
     display: flex;
     position: relative;
     flex-wrap: wrap;
-    column-gap: calc(${CssVars.WIZARD_STEP_TITLE_PADDING} / 2);
     row-gap: calc(${CssVars.WIZARD_STEP_TITLE_PADDING} / 2);
     padding: calc(${CssVars.WIZARD_STEP_TITLE_PADDING} / 2) 0;
     border-radius: calc(${CssVars.BORDER_RADIUS} * 2);
 
-    &[data-balloon=true] {
-        column-gap: 0;
+    &[data-balloon=false] {
+        column-gap: calc(${CssVars.WIZARD_STEP_TITLE_PADDING} / 2);
     }
 `;
 export const AWizardStepTitle = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-wizard-step-title'})`
     display: flex;
     position: relative;
+    flex-grow: 1;
     align-items: center;
     font-family: ${CssVars.WIZARD_STEP_TITLE_FONT_FAMILY};
     font-size: ${CssVars.WIZARD_STEP_TITLE_FONT_SIZE};
@@ -41,7 +41,6 @@ export const AWizardStepTitle = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-wizard-s
     border: ${CssVars.BORDER};
     border-radius: calc(${CssVars.BORDER_RADIUS} * 3);
     height: ${CssVars.WIZARD_STEP_TITLE_HEIGHT};
-    padding: ${CssVars.WIZARD_STEP_TITLE_OFFSET} ${CssVars.WIZARD_STEP_TITLE_PADDING} 0;
     margin-top: -1px;
     margin-right: -1px;
     cursor: pointer;
@@ -56,7 +55,39 @@ export const AWizardStepTitle = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-wizard-s
         background-color: ${CssVars.DISABLE_COLOR};
     }
 
+    &[data-emphasis=true] {
+        flex-grow: 4;
+    }
+
+    &[data-free-walk=false][data-done=false][data-active=false] {
+        cursor: default;
+
+        &[data-balloon=false] {
+            background-color: transparent;
+            border-color: ${CssVars.BORDER_COLOR};
+            box-shadow: none;
+        }
+
+        &[data-balloon=true] {
+            > div[data-w=d9-wizard-step-balloon] {
+                > span {
+                    cursor: default;
+
+                    &:hover {
+                        background-color: ${CssVars.INVERT_COLOR};
+                        border-color: ${CssVars.BORDER_COLOR};
+                        box-shadow: none;
+                    }
+                }
+            }
+        }
+    }
+
     &[data-balloon=false] {
+        padding: ${CssVars.WIZARD_STEP_TITLE_OFFSET} ${CssVars.WIZARD_STEP_TITLE_PADDING} 0;
+        border-top-right-radius: calc(${CssVars.WIZARD_STEP_TITLE_HEIGHT} / 2);
+        border-bottom-right-radius: calc(${CssVars.WIZARD_STEP_TITLE_HEIGHT} / 2);
+
         &[data-active=true] {
             background-color: ${CssVars.WIZARD_STEP_TITLE_ACTIVE_COLOR};
             border-color: ${CssVars.WIZARD_STEP_TITLE_ACTIVE_COLOR};
@@ -65,7 +96,7 @@ export const AWizardStepTitle = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-wizard-s
             &:hover {
                 background-color: ${CssVars.WIZARD_STEP_TITLE_ACTIVE_COLOR};
                 border-color: ${CssVars.WIZARD_STEP_TITLE_ACTIVE_COLOR};
-                box-shadow: ${CssVars.PRIMARY_HOVER_SHADOW};
+                box-shadow: ${CssVars.HOVER_SHADOW};
             }
 
             > span[data-w=d9-caption] {
@@ -79,6 +110,17 @@ export const AWizardStepTitle = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-wizard-s
             }
         }
 
+        &[data-done=true] {
+            background-color: ${CssVars.WIZARD_STEP_TITLE_DONE_COLOR};
+            border-color: ${CssVars.WIZARD_STEP_TITLE_DONE_COLOR};
+
+            &:hover {
+                background-color: ${CssVars.WIZARD_STEP_TITLE_DONE_COLOR};
+                border-color: ${CssVars.WIZARD_STEP_TITLE_DONE_COLOR};
+                box-shadow: ${CssVars.HOVER_SHADOW};
+            }
+        }
+
         &:hover {
             background-color: ${CssVars.HOVER_COLOR};
             border-color: ${CssVars.HOVER_COLOR};
@@ -86,26 +128,33 @@ export const AWizardStepTitle = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-wizard-s
         }
     }
 
-
     &[data-balloon=true] {
         flex-direction: column;
         height: unset;
         background-color: transparent;
         border-color: transparent;
-        flex-grow: 1;
         padding: 0;
         cursor: default;
-
-        &[data-emphasis=true] {
-            flex-grow: 4;
-        }
 
         &[data-active=true] {
             > div[data-w=d9-wizard-step-balloon] {
                 > span {
-                    border-color: ${CssVars.PRIMARY_COLOR};
-                    background-color: ${CssVars.PRIMARY_COLOR};
+                    border-color: ${CssVars.WIZARD_STEP_TITLE_ACTIVE_COLOR};
+                    background-color: ${CssVars.WIZARD_STEP_TITLE_ACTIVE_COLOR};
                     color: ${CssVars.INVERT_COLOR};
+
+                    &:hover {
+                        box-shadow: ${CssVars.PRIMARY_HOVER_SHADOW};
+                    }
+                }
+            }
+        }
+
+        &[data-done=true] {
+            > div[data-w=d9-wizard-step-balloon] {
+                > span {
+                    border-color: ${CssVars.WIZARD_STEP_TITLE_DONE_COLOR};
+                    background-color: ${CssVars.WIZARD_STEP_TITLE_DONE_COLOR};
 
                     &:hover {
                         box-shadow: ${CssVars.PRIMARY_HOVER_SHADOW};

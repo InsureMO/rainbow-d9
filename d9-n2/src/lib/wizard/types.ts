@@ -21,6 +21,9 @@ export interface WizardStepDef extends WizardStepTitleDef {
 export type WizardDef = NodeDef & OmitHTMLProps<HTMLDivElement> & {
 	balloon?: boolean;
 	emphasisActive?: boolean;
+	freeWalk?: boolean;
+	/** match step marker first, if not matched, try to match step index */
+	reached?: string | number | (() => Promise<string | number>);
 	contents: Array<WizardStepDef>;
 };
 /** Wizard widget definition, with html attributes */

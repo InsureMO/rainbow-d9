@@ -23,6 +23,7 @@ const CssConstants = {
 	// for widgets
 	CAPTION_FONT_COLOR: 'rgb(126,126,126)',
 	TAB_ACTIVE_COLOR: 'rgb(13,110,253)',
+	WIZARD_STEP_DONE_COLOR: 'rgb(223,230,245)',
 	WIZARD_STEP_ACTIVE_COLOR: 'rgb(13,110,253)',
 	RIB_COLOR: 'rgb(238,241,245)'
 };
@@ -93,6 +94,7 @@ export const CssVars = {
 
 	WIZARD_STEP_TITLE_HEIGHT: 'var(--d9-wizard-step-title-height, 40px)',
 	WIZARD_STEP_TITLE_OFFSET: 'var(--d9-wizard-step-title-offset, 0)',
+	WIZARD_STEP_TITLE_DONE_COLOR: `var(--d9-wizard-step-title-done-color, ${CssConstants.WIZARD_STEP_DONE_COLOR})`,
 	WIZARD_STEP_TITLE_ACTIVE_COLOR: `var(--d9-wizard-step-title-active-color, ${CssConstants.WIZARD_STEP_ACTIVE_COLOR})`,
 	WIZARD_STEP_TITLE_PADDING: 'var(--d9-wizard-step-title-padding, 16px)',
 	WIZARD_STEP_TITLE_FONT_FAMILY: `var(--d9-wizard-step-title-font-family, ${CssConstants.FONT_FAMILY})`,

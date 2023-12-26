@@ -17,7 +17,10 @@ import {AWizardStepBalloon, AWizardStepTitle} from './widgets';
 export interface WizardStepTitleProps extends WizardStepTitleDef, ModelHolder {
 	balloon?: boolean;
 	emphasisActive?: boolean;
-	active?: boolean;
+	done: boolean;
+	active: boolean;
+	freeWalk: boolean;
+	reachedIndex: number;
 	stepIndex: number;
 	marker: string;
 }
@@ -26,7 +29,8 @@ export const WizardStepTitle = (props: WizardStepTitleProps) => {
 	const {
 		$pp, title,
 		$root, $model, $p2r,
-		balloon = true, emphasisActive = true, active, stepIndex, marker,
+		balloon = true, emphasisActive = true,
+		done, active, freeWalk, reachedIndex, stepIndex, marker,
 		...rest
 	} = props;
 
@@ -42,7 +46,7 @@ export const WizardStepTitle = (props: WizardStepTitleProps) => {
 	const {$disabled, $visible} = attributeValues;
 
 	const onTitleClicked = (event: MouseEvent<HTMLDivElement>) => {
-		if ($disabled) {
+		if ($disabled || active || (!done && !freeWalk)) {
 			return;
 		}
 
@@ -52,8 +56,11 @@ export const WizardStepTitle = (props: WizardStepTitleProps) => {
 		fire(WizardEventTypes.ACTIVE_STEP, stepIndex, marker);
 	};
 
-	return <AWizardStepTitle data-disabled={$disabled} data-visible={$visible} data-active={active}
-	                         data-balloon={balloon} data-emphasis={emphasisActive && active} {...rest}>
+	return <AWizardStepTitle data-disabled={$disabled} data-visible={$visible}
+	                         data-done={done} data-active={active}
+	                         data-free-walk={freeWalk || reachedIndex >= stepIndex}
+	                         data-balloon={balloon} data-emphasis={emphasisActive && active}
+	                         onClick={balloon ? (void 0) : onTitleClicked} {...rest}>
 		{balloon
 			? <AWizardStepBalloon>
 				<span onClick={onTitleClicked}>{stepIndex + 1}</span>
