@@ -204,6 +204,10 @@ export const ATableRowOperators = styled.div.attrs<{ rowIndex: number; rowSpan: 
     padding: 0 calc(${CssVars.TABLE_CELL_PADDING} / 2);
     z-index: 3;
 
+    &:empty {
+        padding: 0;
+    }
+
     > button[data-w=d9-table-row-operator] {
         display: flex;
         position: relative;
