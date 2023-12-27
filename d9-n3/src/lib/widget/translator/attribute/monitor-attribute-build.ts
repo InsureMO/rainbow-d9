@@ -110,8 +110,8 @@ export abstract class MonitorableAttributeBuild<A extends ComplexMonitorableAttr
 			} else if (FALSE_VALUES.includes(value)) {
 				return false;
 			} else {
-				// cannot parse as boolean, ignored
-				return (void 0);
+				// should be a complex attribute value
+				// parse later
 			}
 		}
 		if (list == null || list.children == null || list.children.length === 0) {
