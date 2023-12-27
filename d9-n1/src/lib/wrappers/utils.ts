@@ -49,20 +49,25 @@ export const findWatches = (def: NodeDef): Array<MonitorWatchDef> => {
 		.filter(x => x != null) as Array<MonitorWatchDef>;
 };
 
-export const buildDefaultAttributeValues = (def: NodeDef & ModelHolder): NodeAttributeValues => {
+/**
+ * very tricky thing, it is async, and needs to be executed in component initializing.
+ * see {@link useDefaultAttributeValues}
+ */
+export const buildDefaultAttributeValues = async (def: NodeDef & ModelHolder): Promise<NodeAttributeValues> => {
 	const {$root, $model, $pp} = def;
-	const values = findWatches(def).reduce((attrs, declared) => {
-		const {$attributeName, $default} = declared;
+	const values = findWatches(def).reduce(async (values, declared) => {
+		const attrs = await values;
+		const {$attributeName, $default} = declared as MonitorWatchDef;
 		if (VUtils.isFunction($default)) {
 			const value = MUtils.getValue($model, $pp);
-			attrs[$attributeName.trim()] = $default({root: $root, model: $model, value});
+			attrs[$attributeName.trim()] = await $default({root: $root, model: $model, value});
 		} else if ($default == null) {
 			// do nothing
 		} else {
 			attrs[$attributeName.trim()] = $default;
 		}
 		return attrs;
-	}, {} as NodeAttributeValues);
+	}, Promise.resolve({} as NodeAttributeValues));
 	return Object.values(MonitorNodeAttributes)
 		.filter((key: MonitorNodeAttributes) => def[key] != null)
 		.reduce((attrs, key: MonitorNodeAttributes) => {

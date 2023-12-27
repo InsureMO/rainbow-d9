@@ -1,13 +1,13 @@
 import {
-	buildDefaultAttributeValues,
+	DefaultNodeAttributesState,
 	ModelHolder,
 	MUtils,
-	NodeAttributeValues,
 	PPUtils,
 	useAttributesWatch,
+	useDefaultAttributeValues,
 	VUtils
 } from '@rainbow-d9/n1';
-import React, {MouseEvent, useState} from 'react';
+import React, {MouseEvent} from 'react';
 import {LabelLike} from '../label-like';
 import {useTabsEventBus} from './event/tabs-event-bus';
 import {TabsEventTypes} from './event/tabs-event-bus-types';
@@ -20,17 +20,17 @@ export interface TabTitleProps extends TabTitleDef, ModelHolder {
 	marker: string;
 }
 
-export const TabTitle = (props: TabTitleProps) => {
+export const TabTitleWorker = (props: TabTitleProps & DefaultNodeAttributesState) => {
 	const {
 		$pp, title, badge,
 		$root, $model, $p2r,
 		active, tabIndex, marker,
+		$defaultAttributes: attributeValues, $defaultAttributesSet: setAttributeValues,
 		...rest
 	} = props;
 
 	const {fire} = useTabsEventBus();
 	// monitor myself, mostly for $disabled and $visible
-	const [attributeValues, setAttributeValues] = useState<NodeAttributeValues>(buildDefaultAttributeValues(props));
 	useAttributesWatch({props, attributeValues, setAttributeValues});
 
 	const $wrapped = {
@@ -56,4 +56,15 @@ export const TabTitle = (props: TabTitleProps) => {
 		<LabelLike $wrapped={$wrapped} label={title} wrapByCaption={true}/>
 		<LabelLike $wrapped={$wrapped} label={badge}/>
 	</ATabTitle>;
+};
+
+export const TabTitle = (props: TabTitleProps) => {
+	const {initialized, $defaultAttributes, $defaultAttributesSet} = useDefaultAttributeValues(props);
+	if (!initialized) {
+		return null;
+	}
+
+	return <TabTitleWorker {...props}
+	                       $defaultAttributes={$defaultAttributes}
+	                       $defaultAttributesSet={$defaultAttributesSet}/>;
 };

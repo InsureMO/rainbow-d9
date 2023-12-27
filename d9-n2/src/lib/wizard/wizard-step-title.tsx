@@ -1,13 +1,13 @@
 import {
-	buildDefaultAttributeValues,
+	DefaultNodeAttributesState,
 	ModelHolder,
 	MUtils,
-	NodeAttributeValues,
 	PPUtils,
 	useAttributesWatch,
+	useDefaultAttributeValues,
 	VUtils
 } from '@rainbow-d9/n1';
-import React, {MouseEvent, useState} from 'react';
+import React, {MouseEvent} from 'react';
 import {LabelLike} from '../label-like';
 import {useWizardEventBus} from './event/wizard-event-bus';
 import {WizardEventTypes} from './event/wizard-event-bus-types';
@@ -25,18 +25,18 @@ export interface WizardStepTitleProps extends WizardStepTitleDef, ModelHolder {
 	marker: string;
 }
 
-export const WizardStepTitle = (props: WizardStepTitleProps) => {
+export const WizardStepTitleWorker = (props: WizardStepTitleProps & DefaultNodeAttributesState) => {
 	const {
 		$pp, title,
 		$root, $model, $p2r,
 		balloon = true, emphasisActive = true,
 		done, active, freeWalk, reachedIndex, stepIndex, marker,
+		$defaultAttributes: attributeValues, $defaultAttributesSet: setAttributeValues,
 		...rest
 	} = props;
 
 	const {fire} = useWizardEventBus();
 	// monitor myself, mostly for $disabled and $visible
-	const [attributeValues, setAttributeValues] = useState<NodeAttributeValues>(buildDefaultAttributeValues(props));
 	useAttributesWatch({props, attributeValues, setAttributeValues});
 
 	const $wrapped = {
@@ -73,4 +73,15 @@ export const WizardStepTitle = (props: WizardStepTitleProps) => {
 			: null}
 		<LabelLike $wrapped={$wrapped} label={title} wrapByCaption={true}/>
 	</AWizardStepTitle>;
+};
+
+export const WizardStepTitle = (props: WizardStepTitleProps) => {
+	const {initialized, $defaultAttributes, $defaultAttributesSet} = useDefaultAttributeValues(props);
+	if (!initialized) {
+		return null;
+	}
+
+	return <WizardStepTitleWorker {...props}
+	                              $defaultAttributes={$defaultAttributes}
+	                              $defaultAttributesSet={$defaultAttributesSet}/>;
 };

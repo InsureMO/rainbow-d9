@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {Dispatch, SetStateAction, useEffect, useState} from 'react';
 import {ArrayElementEventBusProvider, ContainerEventBusProvider, WrapperEventBusProvider} from '../events';
 import {ArrayElementValidationEventHolder, ContainerValidationEventHolder, useSetValue} from '../hooks';
 import {
@@ -90,7 +90,7 @@ export const renderContainerChildren = (options: {
 		NUtils.inheritValidationScopes(def, restOfChild);
 		// share root and model between container parent and children
 		return <Wrapper $root={$root} $p2r={$p2r} $model={$model} $key={key} {...restOfChild}
-		                key={key} />;
+		                key={key}/>;
 	});
 };
 
@@ -118,7 +118,7 @@ export const ArrayElement = (props: {
 	const ElementContainer = widget.ELEMENT;
 
 	return <ArrayElementEventBusProvider>
-		<ArrayElementValidationEventHolder />
+		<ArrayElementValidationEventHolder/>
 		<ElementContainer $wrapped={{...$wrapped, $p2r, $model: elementModel}}
 		                  $array={enhancedForElement} {...rest}>
 			{renderContainerChildren({
@@ -154,15 +154,16 @@ export const ArrayWrapper = (props: ArrayContainerDef & ModelHolder & WrappedNod
 	const body = () => {
 		return [
 			NoData != null ?
-				<NoData $wrapped={$wrapped} $array={enhancedForArray} {...rest} key="$$no-data$$" /> : null,
-			...elements.map((elementModel, index) => {
+				<NoData $wrapped={$wrapped} $array={enhancedForArray} {...rest} key="$$no-data$$"/> : null,
+			// eslint-disable-next-line @typescript-eslint/no-explicit-any
+			...elements.map((elementModel: any, index: number) => {
 				const key = getElementKey(elementModel);
 				N1Logger.debug(`Array element[key=${key}, path=${$p2r}].`, elementModel, 'ArrayWrapper');
 				return <ArrayElement elementModel={elementModel} index={index}
 				                     $wrapped={$wrapped} $arrayP2r={$arrayP2r} $array={enhancedForArray}
 				                     createRemoveElementFunc={createRemoveElementFunc}
 				                     widget={widget} originalProps={props} {...rest}
-				                     key={key} />;
+				                     key={key}/>;
 			})];
 	};
 
@@ -223,13 +224,20 @@ export const LeafWrapper = (props: NodeDef & ModelHolder & WrappedNodeAttributes
 	// render container itself
 	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 	// @ts-ignore
-	return <C $wrapped={$wrapped} {...rest} style={style} />;
+	return <C $wrapped={$wrapped} {...rest} style={style}/>;
 };
 
-export const WrapperDelegate = (props: NodeDef & ModelHolder) => {
-	const {$wt} = props;
+export interface DefaultNodeAttributesState {
+	$defaultAttributes: NodeAttributeValues;
+	$defaultAttributesSet: Dispatch<SetStateAction<NodeAttributeValues>>;
+}
 
-	const [attributeValues, setAttributeValues] = useState<NodeAttributeValues>(buildDefaultAttributeValues(props));
+export const WrapperDelegateWorker = (workerProps: NodeDef & ModelHolder & DefaultNodeAttributesState) => {
+	const {
+		$wt, $defaultAttributes: attributeValues, $defaultAttributesSet: setAttributeValues,
+		...rest
+	} = workerProps;
+	const props: NodeDef & ModelHolder = {$wt, ...rest};
 	const validators = useValidationFunctions(props);
 	useAttributesWatch({props, attributeValues, setAttributeValues});
 	useValidate({props, attributeValues, setAttributeValues});
@@ -267,22 +275,22 @@ export const WrapperDelegate = (props: NodeDef & ModelHolder) => {
 		const child = (() => {
 			if (internalWidget.container && internalWidget.array) {
 				return <ContainerEventBusProvider>
-					<ContainerValidationEventHolder />
+					<ContainerValidationEventHolder/>
 					<ArrayWrapper {...(props as unknown as (ArrayContainerDef & ModelHolder))}
 					              $wt={internalType}
-					              $avs={attributeValues} $vfs={validators} />
+					              $avs={attributeValues} $vfs={validators}/>
 				</ContainerEventBusProvider>;
 			} else if (internalWidget.container) {
 				return <ContainerEventBusProvider>
-					<ContainerValidationEventHolder />
+					<ContainerValidationEventHolder/>
 					<ContainerWrapper {...(props as unknown as (ContainerDef & ModelHolder))}
 					                  $wt={internalType}
-					                  $avs={attributeValues} $vfs={validators} />
+					                  $avs={attributeValues} $vfs={validators}/>
 				</ContainerEventBusProvider>;
 			} else {
 				// ignore compute style when it is declared with a wrapper
 				return <LeafWrapper {...props} $wt={internalType} $avs={attributeValues} $vfs={validators}
-				                    useComputedStyle={false} />;
+				                    useComputedStyle={false}/>;
 			}
 		})();
 
@@ -304,20 +312,63 @@ export const WrapperDelegate = (props: NodeDef & ModelHolder) => {
 
 		if (widget.container && widget.array) {
 			return <ContainerEventBusProvider>
-				<ContainerValidationEventHolder />
+				<ContainerValidationEventHolder/>
 				<ArrayWrapper {...(props as unknown as (ArrayContainerDef & ModelHolder))}
-				              $avs={attributeValues} $vfs={validators} />
+				              $avs={attributeValues} $vfs={validators}/>
 			</ContainerEventBusProvider>;
 		} else if (widget.container) {
 			return <ContainerEventBusProvider>
-				<ContainerValidationEventHolder />
+				<ContainerValidationEventHolder/>
 				<ContainerWrapper {...(props as unknown as (ContainerDef & ModelHolder))}
-				                  $avs={attributeValues} $vfs={validators} />
+				                  $avs={attributeValues} $vfs={validators}/>
 			</ContainerEventBusProvider>;
 		} else {
-			return <LeafWrapper {...props} $avs={attributeValues} $vfs={validators} useComputedStyle={true} />;
+			return <LeafWrapper {...props} $avs={attributeValues} $vfs={validators} useComputedStyle={true}/>;
 		}
 	}
+};
+
+export interface DefaultAttributeValuesState extends NodeAttributeValues {
+	initialized: boolean;
+}
+
+export interface DefaultAttributeValuesHookOutcome extends Partial<DefaultNodeAttributesState> {
+	initialized: boolean;
+}
+
+export const useDefaultAttributeValues = (props: NodeDef & ModelHolder): DefaultAttributeValuesHookOutcome => {
+	const [state, setState] = useState<DefaultAttributeValuesState>({initialized: false});
+	useEffect(() => {
+		if (state.initialized) {
+			return;
+		}
+		(async () => {
+			// build default attribute values
+			const $defaultAttributes = await buildDefaultAttributeValues(props);
+			setState({...$defaultAttributes, initialized: true});
+		})();
+	}, [state.initialized, props]);
+
+	if (!state.initialized) {
+		return {initialized: false};
+	}
+
+	const {initialized, ...$defaultAttributes} = state;
+	const $defaultAttributesSet = (values: NodeAttributeValues) => {
+		setState({...(values ?? {}), initialized: true});
+	};
+	return {initialized, $defaultAttributes, $defaultAttributesSet};
+};
+
+export const WrapperDelegate = (props: NodeDef & ModelHolder) => {
+	const {initialized, $defaultAttributes, $defaultAttributesSet} = useDefaultAttributeValues(props);
+	if (!initialized) {
+		return null;
+	}
+
+	return <WrapperDelegateWorker {...props}
+	                              $defaultAttributes={$defaultAttributes}
+	                              $defaultAttributesSet={$defaultAttributesSet}/>;
 };
 
 export const Wrapper = (props: NodeDef & ModelHolder) => {

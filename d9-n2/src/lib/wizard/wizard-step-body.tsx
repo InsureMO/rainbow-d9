@@ -2,7 +2,8 @@ import {ModelHolder, NodeDef, PropertyPath, VUtils, WrapperDelegate} from '@rain
 import React, {useEffect, useState} from 'react';
 import {ButtonFill, ButtonInk} from '../button';
 import {I18NVars} from '../constants';
-import {Button, ButtonBar} from '../unwrapped';
+import {UnwrappedButton as Button} from '../unwrapped/button';
+import {UnwrappedButtonBar as ButtonBar} from '../unwrapped/button-bar';
 import {useWizardEventBus} from './event/wizard-event-bus';
 import {WizardEventTypes} from './event/wizard-event-bus-types';
 import {WizardStepDef} from './types';
