@@ -3,8 +3,8 @@ import {Undefinable} from '../../utility-types';
 import {AbstractTranslator, Decipherable} from './abstract-translator';
 import {AttributeNameUtils, AttributeUtils, CustomAttributeName} from './attribute';
 import {
-	EnablementBuild,
-	EnablementUtils,
+	DisablementBuild,
+	DisablementUtils,
 	ReactorBuild,
 	ReactorUtils,
 	ValidatorBuild,
@@ -19,7 +19,7 @@ import {WidgetTranslator} from './widget-translator';
 export class WidgetTranslatorRepository {
 	private readonly _validatorBuild: ValidatorBuild;
 	private readonly _reactorBuild: ReactorBuild;
-	private readonly _enablementBuild: EnablementBuild;
+	private readonly _disablementBuild: DisablementBuild;
 	private readonly _visibilityBuild: VisibilityBuild;
 	private readonly translators: Array<AbstractTranslator<Decipherable>>;
 	private readonly specificTranslators: Record<WidgetType, SpecificWidgetTranslator<WidgetType>> = {};
@@ -27,7 +27,7 @@ export class WidgetTranslatorRepository {
 	public constructor() {
 		this._validatorBuild = this.createValidatorBuild();
 		this._reactorBuild = this.createReactorBuild();
-		this._enablementBuild = this.createEnablementBuild();
+		this._disablementBuild = this.createDisablementBuild();
 		this._visibilityBuild = this.createVisibilityBuild();
 		this.translators = this.createDefaultTranslators();
 	}
@@ -40,8 +40,8 @@ export class WidgetTranslatorRepository {
 		return new ReactorBuild();
 	}
 
-	protected createEnablementBuild() {
-		return new EnablementBuild();
+	protected createDisablementBuild() {
+		return new DisablementBuild();
 	}
 
 	protected createVisibilityBuild() {
@@ -60,8 +60,8 @@ export class WidgetTranslatorRepository {
 		return this._reactorBuild;
 	}
 
-	get enablementBuild(): EnablementBuild {
-		return this._enablementBuild;
+	get disablementBuild(): DisablementBuild {
+		return this._disablementBuild;
 	}
 
 	get visibilityBuild(): VisibilityBuild {
@@ -84,7 +84,7 @@ export class WidgetTranslatorRepository {
 		AttributeUtils.register($wt, translator.getAttributeValueBuilders());
 		ValidatorUtils.register($wt, translator.getValidationHandlerDetectives());
 		ReactorUtils.register($wt, translator.getReactionHandlerDetectives());
-		EnablementUtils.register($wt, translator.getEnablementHandlerDetectives());
+		DisablementUtils.register($wt, translator.getEnablementHandlerDetectives());
 		VisibilityUtils.register($wt, translator.getVisibilityHandlerDetectives());
 		return existing as Undefinable<SpecificWidgetTranslator<T>>;
 	}
@@ -100,7 +100,7 @@ export class WidgetTranslatorRepository {
 		ReactorUtils.unregister($wt);
 		ValidatorUtils.unregister($wt);
 		AttributeUtils.unregister($wt);
-		EnablementUtils.unregister($wt);
+		DisablementUtils.unregister($wt);
 		VisibilityUtils.unregister($wt);
 		delete this.specificTranslators[$wt];
 

@@ -140,7 +140,7 @@ export abstract class AbstractTranslator<N extends Decipherable> {
 		return [
 			this.repository.validatorBuild,
 			this.repository.reactorBuild,
-			this.repository.enablementBuild,
+			this.repository.disablementBuild,
 			this.repository.visibilityBuild
 		].reduce((attrs, build) => build.combine({...options, attributes: attrs}), options.attributes);
 	}

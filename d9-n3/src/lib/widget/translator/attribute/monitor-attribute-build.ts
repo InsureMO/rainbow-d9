@@ -83,7 +83,7 @@ export abstract class MonitorableAttributeBuild<A extends ComplexMonitorableAttr
 				return '';
 			}
 		}
-		return concerned.map(node => {
+		const snippet = concerned.map(node => {
 			if (node.type === ParsedNodeType.CODE) {
 				return this.parseCodeBlock(node as ParsedCode);
 			} else if (node.type === ParsedNodeType.PARAGRAPH) {
@@ -92,6 +92,11 @@ export abstract class MonitorableAttributeBuild<A extends ComplexMonitorableAttr
 				return '';
 			}
 		}).join('\n');
+		if (VUtils.isNotBlank(attributeValue)) {
+			return `${attributeValue}\n${snippet}`;
+		} else {
+			return snippet;
+		}
 	}
 
 	/**

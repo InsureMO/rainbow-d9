@@ -13,7 +13,7 @@ import {AttributeMap} from '../types';
 import {AbstractMonitorBuild, createDefaultMonitorHandlerDetective} from './monitor-build';
 import {MonitorHandlerDetective} from './types';
 
-export class EnablementUtils {
+export class DisablementUtils {
 	private static readonly DETECTIVES: Record<WidgetType, Array<MonitorHandlerDetective>> = {};
 	public static readonly DETECT_DISABLED =
 		createDefaultMonitorHandlerDetective({
@@ -28,25 +28,25 @@ export class EnablementUtils {
 	}
 
 	public static register($wt: WidgetType, detectives: Array<MonitorHandlerDetective>): Undefinable<Array<MonitorHandlerDetective>> {
-		const existing = EnablementUtils.DETECTIVES[$wt];
-		EnablementUtils.DETECTIVES[$wt] = detectives.filter(b => b != null);
+		const existing = DisablementUtils.DETECTIVES[$wt];
+		DisablementUtils.DETECTIVES[$wt] = detectives.filter(b => b != null);
 		return existing;
 	}
 
 	public static unregister($wt: WidgetType): Undefinable<Array<MonitorHandlerDetective>> {
-		const existing = EnablementUtils.DETECTIVES[$wt];
-		delete EnablementUtils.DETECTIVES[$wt];
+		const existing = DisablementUtils.DETECTIVES[$wt];
+		delete DisablementUtils.DETECTIVES[$wt];
 		return existing;
 	}
 
 	public static getAllDetectives($wt: WidgetType): Array<MonitorHandlerDetective> {
-		return EnablementUtils.DETECTIVES[$wt] ?? [];
+		return DisablementUtils.DETECTIVES[$wt] ?? [];
 	}
 }
 
-export class EnablementBuild extends AbstractMonitorBuild {
+export class DisablementBuild extends AbstractMonitorBuild {
 	protected getAllDetectives(): ($wt: WidgetType) => Array<MonitorHandlerDetective> {
-		return EnablementUtils.getAllDetectives;
+		return DisablementUtils.getAllDetectives;
 	}
 
 	protected doCombine(

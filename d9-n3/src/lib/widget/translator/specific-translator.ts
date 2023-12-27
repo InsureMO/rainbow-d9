@@ -2,7 +2,7 @@ import {ArrayUsedDef, NodeDef} from '@rainbow-d9/n1';
 import {WidgetType} from '../../semantic';
 import {Undefinable} from '../../utility-types';
 import {AttributeValueBuild, CustomAttributeName, WidgetPropertyName} from './attribute';
-import {EnablementUtils, MonitorHandlerDetective, VisibilityUtils} from './monitor';
+import {DisablementUtils, MonitorHandlerDetective, VisibilityUtils} from './monitor';
 import {WidgetTranslatorRepository} from './translator-repository';
 
 export abstract class SpecificWidgetTranslator<T extends WidgetType> {
@@ -99,7 +99,7 @@ export abstract class SpecificWidgetTranslator<T extends WidgetType> {
 	 * default returns empty array, override me if there is any disablement handler detective needs to be added
 	 */
 	public getEnablementHandlerDetectives(): Array<MonitorHandlerDetective> {
-		return [EnablementUtils.DETECT_DISABLED];
+		return [DisablementUtils.DETECT_DISABLED];
 	}
 
 	/**
