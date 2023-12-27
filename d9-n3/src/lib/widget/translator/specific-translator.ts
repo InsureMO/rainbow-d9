@@ -96,19 +96,18 @@ export abstract class SpecificWidgetTranslator<T extends WidgetType> {
 	}
 
 	/**
-	 * default returns empty array, override me if there is any reaction handler detective needs to be added
+	 * default returns empty array, override me if there is any disablement handler detective needs to be added
 	 */
 	public getEnablementHandlerDetectives(): Array<MonitorHandlerDetective> {
 		return [EnablementUtils.DETECT_DISABLED];
 	}
 
 	/**
-	 * default returns empty array, override me if there is any reaction handler detective needs to be added
+	 * default returns empty array, override me if there is any visibility handler detective needs to be added
 	 */
 	public getVisibilityHandlerDetectives(): Array<MonitorHandlerDetective> {
 		return [VisibilityUtils.DETECT_VISIBILITY];
 	}
-
 
 	/**
 	 * default do nothing, return given definition itself.

@@ -9,3 +9,5 @@ export interface AttributeValueBuild<Built> {
 
 	build(value: Undefinable<string>, list: ParsedListItemAttributePair): Nullable<Built>;
 }
+
+export type ScriptSnippet = string;

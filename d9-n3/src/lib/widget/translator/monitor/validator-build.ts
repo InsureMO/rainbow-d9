@@ -1,6 +1,7 @@
 import {
 	BaseModel,
 	MonitorNodeAttributes,
+	MonitorOthers,
 	NodeAttributeValue,
 	NodeAttributeValueHandleOptions,
 	PropValue,
@@ -203,6 +204,7 @@ const detectNumberRange: MonitorHandlerDetective = (options: MonitorHandlerDetec
 
 export class ValidatorUtils {
 	private static readonly DETECTIVES: Record<WidgetType, Array<MonitorHandlerDetective>> = {};
+	// noinspection JSUnusedGlobalSymbols
 	public static readonly DETECT_SIMPLE_CHECK = detectSimpleCheck;
 	public static readonly DETECT_REQUIRED = detectRequired;
 	public static readonly DETECT_NUMERIC = detectNumeric;
@@ -247,34 +249,37 @@ export class ValidatorUtils {
 }
 
 export class ValidatorBuild extends AbstractMonitorBuild {
-	public combine(options: MonitorHandlerDetectOptions): AttributeMap {
-		const {
-			attributes: attrs, handlers
-		} = this.buildHandlersDetective(ValidatorUtils.getAllDetectives)(options);
-		if (handlers == null || handlers.length === 0) {
-			return attrs;
-		}
+	protected getAllDetectives(): ($wt: WidgetType) => Array<MonitorHandlerDetective> {
+		return ValidatorUtils.getAllDetectives;
+	}
 
-		const monitors = this.findMonitors(handlers);
-		if (monitors.length === 0) {
-			return attrs;
-		}
+	/**
+	 * validation allows no watch, which means only watch itself
+	 */
+	protected allowNoWatch(): boolean {
+		return true;
+	}
+
+	protected doCombine(
+		monitors: Array<Partial<MonitorOthers<NodeAttributeValue>>>, watches: Array<string>,
+		attributes: AttributeMap): AttributeMap {
 
 		// combine all handlers to one
-		attrs[MonitorNodeAttributes.VALID] = {
-			$watch: this.findWatches(monitors),
-			$handle: <R extends BaseModel, M extends PropValue, V extends PropValue, FV extends PropValue, TV extends PropValue>
-			(options: NodeAttributeValueHandleOptions<R, M, V, FV, TV>): ValidationResult => {
+		attributes[MonitorNodeAttributes.VALID] = {
+			$watch: watches.length === 0 ? (void 0) : watches,
+			$handle: async <R extends BaseModel, M extends PropValue, V extends PropValue, FV extends PropValue, TV extends PropValue>
+			(options: NodeAttributeValueHandleOptions<R, M, V, FV, TV>): Promise<ValidationResult> => {
 				// call each handle, no matter what it watches
-				return monitors.reduce((result, {$handle}) => {
-					if (!result.valid) {
-						return result;
+				return await monitors.reduce(async (result, {$handle}) => {
+					const ret = await result;
+					// once invalid detected, the result will be invalid
+					if (!ret.valid) {
+						return ret;
 					}
-					result = $handle(options) ?? result;
-					return result;
-				}, {valid: true} as ValidationResult);
+					return await $handle(options) ?? result;
+				}, Promise.resolve({valid: true} as ValidationResult));
 			}
 		};
-		return attrs;
+		return attributes;
 	}
 }
