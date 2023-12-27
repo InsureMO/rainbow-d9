@@ -1,14 +1,4 @@
-import {
-	BaseModel,
-	MUtils,
-	NodeDef,
-	PPUtils,
-	PropValue,
-	registerWidget,
-	ValidationFunctions,
-	VUtils,
-	WidgetProps
-} from '@rainbow-d9/n1';
+import {BaseModel, MUtils, NodeDef, PPUtils, PropValue, registerWidget, VUtils, WidgetProps} from '@rainbow-d9/n1';
 import dayjs from 'dayjs';
 import React, {ForwardedRef, forwardRef, isValidElement, MouseEvent, ReactNode} from 'react';
 import styled from 'styled-components';
@@ -16,9 +6,9 @@ import {ButtonFill, ButtonInk} from './button';
 import {getDefaultCalendarDateFormat, getDefaultCalendarDatetimeFormat} from './calendar/utils';
 import {CssVars, DOM_ID_WIDGET, DOM_KEY_WIDGET} from './constants';
 import {DecorateWrapperDef, transformDecorators} from './decorate-assist';
-import {GlobalHandlers, useGlobalHandlers} from './global';
+import {useGlobalHandlers} from './global';
 import {LabelLike} from './label-like';
-import {OmitHTMLProps2, OmitNodeDef} from './types';
+import {GlobalEventHandlers, ModelCarriedHandler, OmitHTMLProps2, OmitNodeDef, ValidationHandlers} from './types';
 
 export interface CaptionValueToLabelFormats {
 	nf: (fractionDigits: number, grouping?: boolean) => Intl.NumberFormat;
@@ -30,11 +20,8 @@ export interface CaptionValueToLabelFormats {
 
 export type CaptionValueToLabel = (value: PropValue | null | undefined, formats: CaptionValueToLabelFormats) => ReactNode;
 
-export interface CaptionClickOptions<R extends BaseModel, M extends PropValue> {
-	root: R;
-	model: M;
-	validators: ValidationFunctions;
-	global: GlobalHandlers;
+export interface CaptionClickOptions<R extends BaseModel, M extends PropValue>
+	extends ModelCarriedHandler<R, M>, ValidationHandlers, GlobalEventHandlers {
 }
 
 export type CaptionClick = <R extends BaseModel, M extends PropValue>(

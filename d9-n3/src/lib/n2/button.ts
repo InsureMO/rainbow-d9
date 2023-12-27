@@ -9,6 +9,7 @@ import {
 	SpecificWidgetTranslator,
 	WidgetPropertyName
 } from '../widget';
+import {buildClickHandler} from './event-handler';
 import {N2WidgetType} from './types';
 
 export const N2ButtonValidateMinimum = async (options: ButtonClickOptions<BaseModel, PropValue>): Promise<void> => {
@@ -62,26 +63,8 @@ export const N2ButtonClickBuild: AttributeValueBuild<ButtonClick> = {
 						return N2ButtonCreateScopesValidate(scopes);
 					}
 				}
-			} else if (value.startsWith('alert ') || value.startsWith('alert:')) {
-				return async (options: ButtonClickOptions<BaseModel, PropValue>): Promise<void> => {
-					const {global: {alert: {show}}} = options;
-					return await show(originalValue.slice('alert '.length).trim());
-				};
-			} else if (value.startsWith('dialog ') || value.startsWith('dialog:')) {
-				// dialog content cannot be analysis here, so fire a custom event
-				return async (options: ButtonClickOptions<BaseModel, PropValue>): Promise<void> => {
-					const {global: {custom}, root, model} = options;
-					return await custom(originalValue.trim(), {root, model});
-				};
-			} else if (value.startsWith('custom ') || value.startsWith('custom:')) {
-				// dialog content cannot be analysis here, so fire a custom event
-				return async (options: ButtonClickOptions<BaseModel, PropValue>): Promise<void> => {
-					const {global: {custom}, root, model} = options;
-					return await custom(originalValue.trim(), {root, model});
-				};
-			} else {
-				return (void 0);
 			}
+			return buildClickHandler(originalValue) as ButtonClick;
 		} else {
 			// TODO read list
 			return (void 0);

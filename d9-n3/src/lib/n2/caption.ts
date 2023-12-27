@@ -1,5 +1,5 @@
-import {BaseModel, MonitorNodeAttributes, NodeDef, NUtils, PropValue, ReactionMonitor, VUtils} from '@rainbow-d9/n1';
-import {CaptionClick, CaptionClickOptions, CaptionDef, CaptionValueToLabel} from '@rainbow-d9/n2';
+import {MonitorNodeAttributes, NodeDef, NUtils, ReactionMonitor, VUtils} from '@rainbow-d9/n1';
+import {CaptionClick, CaptionDef, CaptionValueToLabel} from '@rainbow-d9/n2';
 import {N3Logger} from '../logger';
 import {ParsedListItemAttributePair} from '../semantic';
 import {Undefinable} from '../utility-types';
@@ -13,6 +13,7 @@ import {
 	WidgetPropertyName,
 	WidgetTranslator
 } from '../widget';
+import {buildClickHandler} from './event-handler';
 import {N2WidgetType} from './types';
 
 export const N2CaptionValueToLabelBuild: AttributeValueBuild<Pick<CaptionDef, 'labelOnValue' | 'valueToLabel'>> = {
@@ -45,28 +46,7 @@ export const N2CaptionClickBuild: AttributeValueBuild<CaptionClick> = {
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	build: (value: Undefinable<string>, _list: ParsedListItemAttributePair): CaptionClick | undefined => {
 		if (VUtils.isNotBlank(value)) {
-			const originalValue = value;
-			value = value.trim().toLowerCase();
-			if (value.startsWith('alert ') || value.startsWith('alert:')) {
-				return async (options: CaptionClickOptions<BaseModel, PropValue>): Promise<void> => {
-					const {global: {alert: {show}}} = options;
-					return await show(originalValue.slice('alert '.length).trim());
-				};
-			} else if (value.startsWith('dialog ') || value.startsWith('dialog:')) {
-				// dialog content cannot be analysis here, so fire a custom event
-				return async (options: CaptionClickOptions<BaseModel, PropValue>): Promise<void> => {
-					const {global: {custom}, root, model} = options;
-					return await custom(originalValue.trim(), {root, model});
-				};
-			} else if (value.startsWith('custom ') || value.startsWith('custom:')) {
-				// dialog content cannot be analysis here, so fire a custom event
-				return async (options: CaptionClickOptions<BaseModel, PropValue>): Promise<void> => {
-					const {global: {custom}, root, model} = options;
-					return await custom(originalValue.trim(), {root, model});
-				};
-			} else {
-				return (void 0);
-			}
+			return buildClickHandler(value) as CaptionClick;
 		} else {
 			return (void 0);
 		}
