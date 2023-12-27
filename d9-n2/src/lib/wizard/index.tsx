@@ -1,5 +1,6 @@
 import {MUtils, NodeDef, PPUtils, registerWidget, VUtils} from '@rainbow-d9/n1';
 import React, {useEffect, useState} from 'react';
+import {GlobalEventPrefix, GlobalEventTypes, useGlobalEventBus} from '../global';
 import {useWizardEventBus, WizardEventBusProvider} from './event/wizard-event-bus';
 import {WizardEventTypes} from './event/wizard-event-bus-types';
 import {WizardProps, WizardSharedDef, WizardStepDef} from './types';
@@ -37,7 +38,8 @@ const InternalWizard = (props: WizardProps) => {
 	} = props;
 	const {$p2r, $avs: {$disabled, $visible}} = $wrapped;
 
-	const {on, off} = useWizardEventBus();
+	const {on: onGlobal, off: offGlobal} = useGlobalEventBus();
+	const {on, off, fire} = useWizardEventBus();
 	const [state, setState] = useState<WizardState>({initialized: false, activeIndex: 0, reachedIndex: 0});
 	useEffect(() => {
 		const onStepActive = (index: number, marker: string) => {
@@ -51,14 +53,38 @@ const InternalWizard = (props: WizardProps) => {
 			if (foundIndex === state.activeIndex) {
 				return;
 			} else {
-				setState(state => ({...state, activeIndex: index, reachedIndex: Math.max(index, state.reachedIndex)}));
+				setState(state => {
+					return {
+						...state,
+						activeIndex: foundIndex, reachedIndex: Math.max(foundIndex, state.reachedIndex)
+					};
+				});
 			}
 		};
 		on(WizardEventTypes.ACTIVE_STEP, onStepActive);
 		return () => {
 			off(WizardEventTypes.ACTIVE_STEP, onStepActive);
 		};
-	}, [on, off, state.activeIndex, contents]);
+	}, [on, off, state.activeIndex, state.reachedIndex, contents]);
+	useEffect(() => {
+		const onCustomEvent = (_: string, prefix: string, clipped: string) => {
+			if (prefix !== GlobalEventPrefix.WIZARD_STEP) {
+				return;
+			}
+			const test = VUtils.isInteger(clipped);
+			if (test.test) {
+				// only one wizard exists, otherwise leads confusion, since every wizard will repsond to this event
+				fire(WizardEventTypes.ACTIVE_STEP, test.value, '');
+			} else {
+				// make sure marker is global unique
+				fire(WizardEventTypes.ACTIVE_STEP, -1, (clipped ?? '').trim());
+			}
+		};
+		onGlobal(GlobalEventTypes.CUSTOM_EVENT, onCustomEvent);
+		return () => {
+			offGlobal(GlobalEventTypes.CUSTOM_EVENT, onCustomEvent);
+		};
+	}, [onGlobal, offGlobal, fire]);
 	useEffect(() => {
 		if (state.initialized) {
 			return;
