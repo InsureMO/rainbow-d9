@@ -161,20 +161,25 @@ export abstract class AbstractTranslator<N extends Decipherable> {
 			}
 		}).reduce((options, each) => {
 			Object.keys(each).forEach(key => {
-				const parts = key.split('.');
-				const lastPart = parts[parts.length - 1];
-				let parent = options;
-				parts.slice(0, -1).forEach(part => {
-					// if the part does not exist in the parent, create it as an object
-					if (parent[part] === undefined) {
-						parent[part] = {};
-					}
-					parent = parent[part];
-				});
-				// not an Object type or currently an Object to be overridden.
-				if (typeof parent[lastPart] !== 'object' || typeof each[key] === 'object') {
-					parent[lastPart] = each[key];
-				}
+				key.split('.')
+					.reduce((parent, part, index, parts) => {
+						if (index === parts.length - 1) {
+							// last part
+							// detect the original value and given value
+							const givenValue = each[key];
+							if (givenValue != null && VUtils.isNotBlank(givenValue)) {
+								const originalValue = parent[part];
+								// no original value, or last win when given value is not a primitive type
+								if (originalValue == null || VUtils.isBlank(originalValue) || !VUtils.isPrimitive(givenValue)) {
+									parent[part] = givenValue;
+								}
+							}
+						} else if (parent[part] == null) {
+							// if the part does not exist in the parent, create it as an object
+							parent[part] = {} as AttributeMap;
+						}
+						return parent[part];
+					}, options);
 			});
 			return options;
 		}, {} as AttributeMap);

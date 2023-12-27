@@ -712,16 +712,55 @@ Strictly adhere to the heading parsing rules without any additional attribute de
 
 ### Tab
 
-| Attribute Name | Type | Description      |
-|----------------|------|------------------|
-| title          | text | Tab title.       |
-| badge          | text | Tab title badge. |
+| Attribute Name | Type | Description                |
+|----------------|------|----------------------------|
+| title          | text | Tab title.                 |
+| marker         | text | Tab marker, global unique. |
+| badge          | text | Tab title badge.           |
 
 > `title` and `badge` attribute follows the `label` default parsing behavior.
 
-The configuration of tab content is the same as `Section`.
+The configuration of tab content is the same as `Section`, except follows,
 
-- No `title` attribute, which has already been used in tab title.
+- No `title` attribute, which has already been used in tab title,
+- No `label` attribute.
+
+## Wizard
+
+- Default Wrapped by Form Cell: `false`,
+- Default Grid Column Span: `12`.
+
+| Attribute Name | Type         | Description                                                                                                                            |
+|----------------|--------------|----------------------------------------------------------------------------------------------------------------------------------------|
+| balloon        | boolean      | Use ballon style or not, default true.                                                                                                 |
+| emphasisActive | boolean      | Enable active emphasis animation or not, default true.                                                                                 |
+| freeWalk       | boolean      | Freely switch between all the steps or not, default false.                                                                             |
+| omitWalker     | boolean      | Omit the default step switching buttons (forward/backward) or not, default false.                                                      |
+| reached        | number, text | Number represents step index (starts from 0), text represents step marker. All steps before the specified step can be switched freely. |
+
+### Wizard Step (WStep)
+
+| Attribute Name | Type | Description                |
+|----------------|------|----------------------------|
+| title          | text | Tab title.                 |
+| marker         | text | Tab marker, global unique. |
+
+> `title` attribute follows the `label` default parsing behavior.
+
+The configuration of tab content is the same as `Section`, except follows,
+
+- No `title` attribute, which has already been used in tab title,
+- No `label` attribute.
+
+### Wizard Shared Content (WShared)
+
+| Attribute Name | Type    | Description                                                                |
+|----------------|---------|----------------------------------------------------------------------------|
+| lead           | boolean | Shared content block comes before each step content or not, default false. |
+
+The configuration of tab content is the same as `Section`, except follows,
+
+- No `title` attribute,
 - No `label` attribute.
 
 ## Caption, Label
@@ -1165,28 +1204,28 @@ Some examples:
 - Default Wrapped by Form Cell: `false`,
 - Default Grid Column Span: `12`.
 
-| Attribute Name               | Type           | Description                                                                           |
-|------------------------------|----------------|---------------------------------------------------------------------------------------|
-| headers                      | various        |                                                                                       |
-| headerHeight                 | number, string | `- headerHeight: 48`<br/>`- headerHeight: 2em`                                        |
-| expandable                   | boolean        | `- expandable`                                                                        |
-| fixedLeadColumns             | number         | `- fixedLeadColumns: 2`                                                               |
-| fixedTailColumns             | number         | `- fixedTailColumns: 1`                                                               |
-| hideClassicCellsOnExpandable | boolean        | `- hideClassicCellsOnExpandable`                                                      |
-| clickToExpand                | boolean        | `- clickToExpand`                                                                     |
-| maxBodyHeight                | number, string | `- maxBodyHeight: 300`<br/>`- maxBodyHeight: 80vh`                                    |
-| operatorsColumnWidth         | number, string | `- operatorsColumnWidth: 200`                                                         |
-| rowIndexStartsFrom           | number         | `- rowIndexStartsFrom: 21`                                                            |
-| noElementReminder            | text           | `- noElementReminder: No Data`                                                        |
-| addable                      | boolean        | `- !addable`<br/>Not available for `RibsView`.                                        |
-| addLabel                     | text           | `- addLabel: Create New One`                                                          |
-| elementAdded                 | function       | From external definition only, starts with `@ext.`.<br/>Not available for `RibsView`. |
-| createElement                | function       | From external definition only, starts with `@ext.`.<br/>Not available for `RibsView`. |
-| removable                    | boolean        | `- !removable`.<br/>Not available for `RibsView`.                                     |
-| removeLabel                  | text           | `- removeLabel: Remove This One`.<br/>Not available for `RibsView`.                   |
-| elementRemoved               | function       | From external definition only, starts with `@ext.`.<br/>Not available for `RibsView`. |
-| couldRemoveElement           | function       | From external definition only, starts with `@ext.`.<br/>Not available for `RibsView`. |
-| getElementKey                | function       | From external definition only, starts with `@ext.`.                                   |
+| Attribute Name               | Type         | Description                                                                           |
+|------------------------------|--------------|---------------------------------------------------------------------------------------|
+| headers                      | various      |                                                                                       |
+| headerHeight                 | number, text | `- headerHeight: 48`<br/>`- headerHeight: 2em`                                        |
+| expandable                   | boolean      | `- expandable`                                                                        |
+| fixedLeadColumns             | number       | `- fixedLeadColumns: 2`                                                               |
+| fixedTailColumns             | number       | `- fixedTailColumns: 1`                                                               |
+| hideClassicCellsOnExpandable | boolean      | `- hideClassicCellsOnExpandable`                                                      |
+| clickToExpand                | boolean      | `- clickToExpand`                                                                     |
+| maxBodyHeight                | number, text | `- maxBodyHeight: 300`<br/>`- maxBodyHeight: 80vh`                                    |
+| operatorsColumnWidth         | number, text | `- operatorsColumnWidth: 200`                                                         |
+| rowIndexStartsFrom           | number       | `- rowIndexStartsFrom: 21`                                                            |
+| noElementReminder            | text         | `- noElementReminder: No Data`                                                        |
+| addable                      | boolean      | `- !addable`<br/>Not available for `RibsView`.                                        |
+| addLabel                     | text         | `- addLabel: Create New One`                                                          |
+| elementAdded                 | function     | From external definition only, starts with `@ext.`.<br/>Not available for `RibsView`. |
+| createElement                | function     | From external definition only, starts with `@ext.`.<br/>Not available for `RibsView`. |
+| removable                    | boolean      | `- !removable`.<br/>Not available for `RibsView`.                                     |
+| removeLabel                  | text         | `- removeLabel: Remove This One`.<br/>Not available for `RibsView`.                   |
+| elementRemoved               | function     | From external definition only, starts with `@ext.`.<br/>Not available for `RibsView`. |
+| couldRemoveElement           | function     | From external definition only, starts with `@ext.`.<br/>Not available for `RibsView`. |
+| getElementKey                | function     | From external definition only, starts with `@ext.`.                                   |
 
 ### Syntax of `headers`
 

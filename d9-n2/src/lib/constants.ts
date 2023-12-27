@@ -23,6 +23,8 @@ const CssConstants = {
 	// for widgets
 	CAPTION_FONT_COLOR: 'rgb(126,126,126)',
 	TAB_ACTIVE_COLOR: 'rgb(13,110,253)',
+	WIZARD_STEP_DONE_COLOR: 'rgb(223,230,245)',
+	WIZARD_STEP_ACTIVE_COLOR: 'rgb(13,110,253)',
 	RIB_COLOR: 'rgb(238,241,245)'
 };
 
@@ -89,6 +91,16 @@ export const CssVars = {
 	TAB_TITLE_FONT_FAMILY: `var(--d9-tab-title-font-family, ${CssConstants.FONT_FAMILY})`,
 	TAB_TITLE_FONT_SIZE: `var(--d9-tab-title-font-size, 16px)`,
 	TAB_TITLE_FONT_WEIGHT: `var(--d9-tab-title-font-weight, 600)`,
+
+	WIZARD_STEP_TITLE_HEIGHT: 'var(--d9-wizard-step-title-height, 40px)',
+	WIZARD_STEP_TITLE_OFFSET: 'var(--d9-wizard-step-title-offset, 0)',
+	WIZARD_STEP_TITLE_DONE_COLOR: `var(--d9-wizard-step-title-done-color, ${CssConstants.WIZARD_STEP_DONE_COLOR})`,
+	WIZARD_STEP_TITLE_ACTIVE_COLOR: `var(--d9-wizard-step-title-active-color, ${CssConstants.WIZARD_STEP_ACTIVE_COLOR})`,
+	WIZARD_STEP_TITLE_PADDING: 'var(--d9-wizard-step-title-padding, 16px)',
+	WIZARD_STEP_TITLE_FONT_FAMILY: `var(--d9-wizard-step-title-font-family, ${CssConstants.FONT_FAMILY})`,
+	WIZARD_STEP_TITLE_FONT_SIZE: `var(--d9-wizard-step-title-font-size, 16px)`,
+	WIZARD_STEP_TITLE_FONT_WEIGHT: `var(--d9-wizard-step-title-font-weight, 600)`,
+	WIZARD_STEP_BALLOON_HEIGHT: `var(--d9-wizard-step-balloon-height, 40px)`,
 
 	CAPTION_FONT_FAMILY: `var(--d9-caption-font-family, ${CssConstants.FONT_FAMILY})`,
 	CAPTION_FONT_SIZE: 'var(--d9-caption-font-size, 14px)',
@@ -226,5 +238,9 @@ export const I18NVars = {
 		NO_ELEMENT: 'No data found.',
 		CREATE_ITEM: 'Create New Element',
 		REMOVE_ITEM: 'Remove'
+	},
+	WIZARD: {
+		PREVIOUS: 'Previous',
+		NEXT: 'Next'
 	}
 };

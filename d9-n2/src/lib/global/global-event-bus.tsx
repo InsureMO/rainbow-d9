@@ -52,13 +52,16 @@ export interface GlobalEventBus {
 	off(type: GlobalEventTypes.SHOW_YES_NO_DIALOG, listener: (question: ReactNode, onYes: () => void, onNo: () => void) => void): this;
 
 	fire<R extends BaseModel, M extends PropValue>(
-		type: GlobalEventTypes.CUSTOM_EVENT, key: string, models?: { root: R; model: M; }): this;
+		type: GlobalEventTypes.CUSTOM_EVENT,
+		key: string, prefix: string, clipped: string, models?: { root: R; model: M; }): this;
 
 	on<R extends BaseModel, M extends PropValue>(
-		type: GlobalEventTypes.CUSTOM_EVENT, listener: (key: string, models?: { root: R; model: M; }) => void): this;
+		type: GlobalEventTypes.CUSTOM_EVENT,
+		listener: (key: string, prefix: string, clipped: string, models?: { root: R; model: M; }) => void): this;
 
 	off<R extends BaseModel, M extends PropValue>(
-		type: GlobalEventTypes.CUSTOM_EVENT, listener: (key: string, models?: { root: R; model: M; }) => void): this;
+		type: GlobalEventTypes.CUSTOM_EVENT,
+		listener: (key: string, prefix: string, clipped: string, models?: { root: R; model: M; }) => void): this;
 }
 
 const Context = createContext<GlobalEventBus>({} as GlobalEventBus);

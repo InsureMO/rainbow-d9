@@ -1,4 +1,6 @@
 import React from 'react';
+import {AngleLeft} from './angle-left';
+import {AngleRight} from './angle-right';
 import {ArrowDown} from './arrow-down';
 import {Back} from './back';
 import {CaretDown} from './caret-down';
@@ -45,6 +47,8 @@ IconsRegistrar.register({
 	caretRight: () => <CaretRight/>,
 	caretDown: () => <CaretDown/>,
 	arrowDown: () => <ArrowDown/>,
+	angleLeft: () => <AngleLeft/>,
+	angleRight: () => <AngleRight/>,
 	spinner: () => <Spinner/>
 });
 

@@ -104,16 +104,22 @@ export const useYesNoDialog = (): YesNoDialogHandlers => {
 	return functions;
 };
 
+export enum GlobalEventPrefix {
+	ALERT = 'alert', DIALOG = 'dialog',
+	WIZARD_STEP = 'wstep',
+	CUSTOM = 'custom'
+}
+
 export type CustomGlobalEventHandler = <R extends BaseModel, M extends PropValue>(
-	key: string, models?: { root: R; model: M; }) => Promise<void>;
+	key: string, prefix: string, clipped: string, models?: { root: R; model: M; }) => Promise<void>;
 
 export const useCustomGlobalEvent = (): CustomGlobalEventHandler => {
 	const {fire} = useGlobalEventBus();
 	const [func] = useState(() => {
 		return async <R extends BaseModel, M extends PropValue>(
-			key: string, models?: { root: R; model: M; }): Promise<void> => {
+			key: string, prefix: string, clipped: string, models?: { root: R; model: M; }): Promise<void> => {
 			return new Promise<void>(resolve => {
-				fire(GlobalEventTypes.CUSTOM_EVENT, key, models);
+				fire(GlobalEventTypes.CUSTOM_EVENT, key, prefix, clipped, models);
 				resolve();
 			});
 		};

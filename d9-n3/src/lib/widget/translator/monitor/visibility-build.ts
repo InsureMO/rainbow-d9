@@ -1,15 +1,15 @@
+import {
+	BaseModel,
+	MonitorNodeAttributes,
+	NodeAttributeValue,
+	NodeAttributeValueHandleOptions,
+	PropValue,
+	WidgetType
+} from '@rainbow-d9/n1';
+import {Undefinable} from '../../../utility-types';
 import {AttributeMap} from '../types';
 import {AbstractMonitorBuild} from './monitor-build';
 import {MonitorHandler, MonitorHandlerDetective, MonitorHandlerDetectOptions} from './types';
-import {
-    BaseModel,
-    MonitorNodeAttributes,
-    NodeAttributeValue,
-    NodeAttributeValueHandleOptions,
-    PropValue,
-    WidgetType
-} from "@rainbow-d9/n1";
-import {Undefinable} from "../../../../../lib";
 
 const defaultVisibility: MonitorHandlerDetective = (options: MonitorHandlerDetectOptions): MonitorHandler => {
     const {attributes} = options;
@@ -36,7 +36,6 @@ const defaultVisibility: MonitorHandlerDetective = (options: MonitorHandlerDetec
         }
     };
 };
-
 
 export class VisibilityUtils {
     private static readonly DETECTIVES: Record<WidgetType, Array<MonitorHandlerDetective>> = {};

@@ -1,6 +1,6 @@
+import {MonitorNodeAttributes} from '@rainbow-d9/n1';
 import {ParsedListItemAttributePair} from '../../../semantic';
 import {Nullable, Undefinable} from '../../../utility-types';
-import {D9PropertyNames} from './attribute-name-util';
 import {AttributeValueBuild, WidgetPropertyName} from './types';
 
 export class VisibilityAttributeBuild implements AttributeValueBuild<Array<{
@@ -9,7 +9,7 @@ export class VisibilityAttributeBuild implements AttributeValueBuild<Array<{
 }>> {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     public accept(key: WidgetPropertyName) {
-        return D9PropertyNames.VISIBILITY === key;
+        return MonitorNodeAttributes.VISIBLE === key;
     }
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars

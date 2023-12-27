@@ -3,7 +3,7 @@ import {WidgetType} from '../../../semantic';
 import {AnyAttributeName, WidgetPropertyName} from './types';
 
 export enum D9PropertyNames {
-	PROPERTY = '$pp', POSITION = '$pos', VALIDATION_SCOPES = '$validationScopes', ENABLEMENT = '$disabled', VISIBILITY = '$visible'
+	PROPERTY = '$pp', POSITION = '$pos', VALIDATION_SCOPES = '$validationScopes'
 }
 
 export enum AttributeNames {

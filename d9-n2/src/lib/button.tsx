@@ -1,19 +1,10 @@
-import {
-	BaseModel,
-	NodeDef,
-	PPUtils,
-	PropValue,
-	registerWidget,
-	ValidationFunctions,
-	VUtils,
-	WidgetProps
-} from '@rainbow-d9/n1';
+import {BaseModel, NodeDef, PPUtils, PropValue, registerWidget, VUtils, WidgetProps} from '@rainbow-d9/n1';
 import React, {ForwardedRef, forwardRef, MouseEvent, ReactNode} from 'react';
 import styled from 'styled-components';
 import {CssVars, DOM_ID_WIDGET, DOM_KEY_WIDGET} from './constants';
 import {DecorateWrapperDef, transformDecorators} from './decorate-assist';
-import {GlobalHandlers, useGlobalHandlers} from './global';
-import {OmitHTMLProps2, OmitNodeDef} from './types';
+import {useGlobalHandlers} from './global';
+import {GlobalEventHandlers, ModelCarriedHandler, OmitHTMLProps2, OmitNodeDef, ValidationHandlers} from './types';
 
 // noinspection JSUnusedGlobalSymbols
 export enum ButtonFill {
@@ -32,11 +23,8 @@ export enum ButtonInk {
 	INFO = 'info',
 }
 
-export interface ButtonClickOptions<R extends BaseModel, M extends PropValue> {
-	root: R;
-	model: M;
-	validators: ValidationFunctions;
-	global: GlobalHandlers;
+export interface ButtonClickOptions<R extends BaseModel, M extends PropValue>
+	extends ModelCarriedHandler<R, M>, ValidationHandlers, GlobalEventHandlers {
 }
 
 export type ButtonClick = <R extends BaseModel, M extends PropValue>(
