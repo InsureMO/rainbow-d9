@@ -171,7 +171,7 @@ export abstract class AbstractTranslator<N extends Decipherable> {
 					}
 					parent = parent[part];
 				});
-				// 不是Object类型 或者 当前是Object 才会覆盖
+				// not an Object type or currently an Object to be overridden.
 				if (typeof parent[lastPart] !== 'object' || typeof each[key] === 'object') {
 					parent[lastPart] = each[key];
 				}
