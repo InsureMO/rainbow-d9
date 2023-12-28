@@ -6,7 +6,7 @@ import {
 	ValueChangeableNodeDef,
 	WidgetProps
 } from '@rainbow-d9/n1';
-import React, {KeyboardEvent, MouseEvent} from 'react';
+import React, {ForwardedRef, forwardRef, KeyboardEvent, MouseEvent} from 'react';
 import styled from 'styled-components';
 import {CssVars, DOM_ID_WIDGET, DOM_KEY_WIDGET} from './constants';
 import {Check} from './icons';
@@ -107,7 +107,7 @@ const ACheckbox = styled.div.attrs(({id}) => {
     }
 `;
 
-export const Checkbox = (props: CheckboxProps) => {
+export const Checkbox = forwardRef((props: CheckboxProps, ref: ForwardedRef<HTMLDivElement>) => {
 	const {
 		values = [true, false],
 		$pp, $wrapped: {$onValueChange, $model, $avs: {$disabled, $visible}},
@@ -140,9 +140,9 @@ export const Checkbox = (props: CheckboxProps) => {
 
 	return <ACheckbox data-disabled={$disabled} data-visible={$visible} tabIndex={0}
 	                  data-checked={checked}
-	                  onClick={onClick} onKeyUp={onKeyUp} {...rest}>
+	                  onClick={onClick} onKeyUp={onKeyUp} {...rest} ref={ref}>
 		{<Check/>}
 	</ACheckbox>;
-};
+});
 
 registerWidget({key: 'Checkbox', JSX: Checkbox, container: false, array: false});

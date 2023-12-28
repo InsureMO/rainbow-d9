@@ -1,5 +1,5 @@
 import {MUtils, PropValue, registerWidget, ValueChangeableNodeDef, WidgetProps} from '@rainbow-d9/n1';
-import React, {Fragment, ReactNode} from 'react';
+import React, {ForwardedRef, forwardRef, Fragment, ReactNode} from 'react';
 import styled from 'styled-components';
 import {Checkbox, CheckboxProps} from './checkbox';
 import {CssVars, DOM_ID_WIDGET, DOM_KEY_WIDGET, I18NVars} from './constants';
@@ -104,7 +104,7 @@ const Separator = styled.span.attrs({[DOM_KEY_WIDGET]: 'd9-checkboxes-option-sep
     flex-basis: 100%;
 `;
 
-export const Checkboxes = (props: CheckboxesProps) => {
+export const Checkboxes = forwardRef((props: CheckboxesProps, ref: ForwardedRef<HTMLDivElement>) => {
 	const {
 		// eslint-disable-next-line  @typescript-eslint/no-unused-vars
 		options, optionSort,
@@ -147,7 +147,7 @@ export const Checkboxes = (props: CheckboxesProps) => {
 		</ACheckboxes>;
 	}
 
-	return <ACheckboxes data-disabled={$disabled} data-visible={$visible} {...rest}>
+	return <ACheckboxes data-disabled={$disabled} data-visible={$visible} {...rest} ref={ref}>
 		{displayOptions.map((option, index) => {
 			const {value, label} = option;
 			const valueKey = `${value}_${index + 1}`;
@@ -182,7 +182,7 @@ export const Checkboxes = (props: CheckboxesProps) => {
 			}
 		})}
 	</ACheckboxes>;
-};
+});
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore

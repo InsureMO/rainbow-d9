@@ -33,6 +33,7 @@ import {
 	UnwrappedMultiDropdown as MultiDropdown,
 	UnwrappedMultiDropdownProps as MultiDropdownProps
 } from './multi-dropdown';
+import {UnwrappedPagination as Pagination, UnwrappedPaginationProps as PaginationProps} from './pagination';
 import {UnwrappedRadio as Radio, UnwrappedRadioProps as RadioProps} from './radio';
 import {UnwrappedRadios as Radios, UnwrappedRadiosProps as RadiosProps} from './radios';
 import {UnwrappedSection as Section, UnwrappedSectionProps as SectionProps} from './section';
@@ -56,6 +57,7 @@ export {
 	Button, ButtonProps,
 
 	Section, SectionProps,
+	Pagination, PaginationProps,
 	Tabs, TabsProps,
 	Wizard, WizardProps,
 	ButtonBar, ButtonBarProps

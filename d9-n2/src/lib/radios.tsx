@@ -1,5 +1,5 @@
 import {MUtils, registerWidget, ValueChangeableNodeDef, WidgetProps} from '@rainbow-d9/n1';
-import React, {Fragment, ReactNode} from 'react';
+import React, {ForwardedRef, forwardRef, Fragment, ReactNode} from 'react';
 import styled from 'styled-components';
 import {CssVars, DOM_ID_WIDGET, DOM_KEY_WIDGET, I18NVars} from './constants';
 import {
@@ -108,7 +108,7 @@ const Separator = styled.span.attrs({[DOM_KEY_WIDGET]: 'd9-radios-option-separat
     flex-basis: 100%;
 `;
 
-export const Radios = (props: RadiosProps) => {
+export const Radios = forwardRef((props: RadiosProps, ref: ForwardedRef<HTMLDivElement>) => {
 	const {
 		// eslint-disable-next-line  @typescript-eslint/no-unused-vars
 		options, optionSort,
@@ -140,7 +140,7 @@ export const Radios = (props: RadiosProps) => {
 
 	const modelValue = MUtils.getValue($model, $pp) as RadiosOptionValue;
 
-	return <ARadios data-disabled={$disabled} data-visible={$visible} {...rest}>
+	return <ARadios data-disabled={$disabled} data-visible={$visible} {...rest} ref={ref}>
 		{displayOptions.map((option, index) => {
 			const {value, label} = option;
 			const valueKey = `${value}_${index + 1}`;
@@ -167,7 +167,7 @@ export const Radios = (props: RadiosProps) => {
 			}
 		})}
 	</ARadios>;
-};
+});
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
