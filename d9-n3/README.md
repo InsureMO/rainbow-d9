@@ -1204,28 +1204,30 @@ Some examples:
 - Default Wrapped by Form Cell: `false`,
 - Default Grid Column Span: `12`.
 
-| Attribute Name               | Type         | Description                                                                           |
-|------------------------------|--------------|---------------------------------------------------------------------------------------|
-| headers                      | various      |                                                                                       |
-| headerHeight                 | number, text | `- headerHeight: 48`<br/>`- headerHeight: 2em`                                        |
-| expandable                   | boolean      | `- expandable`                                                                        |
-| fixedLeadColumns             | number       | `- fixedLeadColumns: 2`                                                               |
-| fixedTailColumns             | number       | `- fixedTailColumns: 1`                                                               |
-| hideClassicCellsOnExpandable | boolean      | `- hideClassicCellsOnExpandable`                                                      |
-| clickToExpand                | boolean      | `- clickToExpand`                                                                     |
-| maxBodyHeight                | number, text | `- maxBodyHeight: 300`<br/>`- maxBodyHeight: 80vh`                                    |
-| operatorsColumnWidth         | number, text | `- operatorsColumnWidth: 200`                                                         |
-| rowIndexStartsFrom           | number       | `- rowIndexStartsFrom: 21`                                                            |
-| noElementReminder            | text         | `- noElementReminder: No Data`                                                        |
-| addable                      | boolean      | `- !addable`<br/>Not available for `RibsView`.                                        |
-| addLabel                     | text         | `- addLabel: Create New One`                                                          |
-| elementAdded                 | function     | From external definition only, starts with `@ext.`.<br/>Not available for `RibsView`. |
-| createElement                | function     | From external definition only, starts with `@ext.`.<br/>Not available for `RibsView`. |
-| removable                    | boolean      | `- !removable`.<br/>Not available for `RibsView`.                                     |
-| removeLabel                  | text         | `- removeLabel: Remove This One`.<br/>Not available for `RibsView`.                   |
-| elementRemoved               | function     | From external definition only, starts with `@ext.`.<br/>Not available for `RibsView`. |
-| couldRemoveElement           | function     | From external definition only, starts with `@ext.`.<br/>Not available for `RibsView`. |
-| getElementKey                | function     | From external definition only, starts with `@ext.`.                                   |
+| Attribute Name               | Type                      | Description                                                                                                                                                                                                          |
+|------------------------------|---------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| headers                      | various                   |                                                                                                                                                                                                                      |
+| headerHeight                 | number, text              | `- headerHeight: 48`<br/>`- headerHeight: 2em`                                                                                                                                                                       |
+| expandable                   | boolean                   | `- expandable`                                                                                                                                                                                                       |
+| fixedLeadColumns             | number                    | `- fixedLeadColumns: 2`                                                                                                                                                                                              |
+| fixedTailColumns             | number                    | `- fixedTailColumns: 1`                                                                                                                                                                                              |
+| hideClassicCellsOnExpandable | boolean                   | `- hideClassicCellsOnExpandable`                                                                                                                                                                                     |
+| clickToExpand                | boolean                   | `- clickToExpand`                                                                                                                                                                                                    |
+| maxBodyHeight                | number, text              | `- maxBodyHeight: 300`<br/>`- maxBodyHeight: 80vh`                                                                                                                                                                   |
+| operatorsColumnWidth         | number, text              | `- operatorsColumnWidth: 200`                                                                                                                                                                                        |
+| rowIndexStartsFrom           | number                    | `- rowIndexStartsFrom: 21`                                                                                                                                                                                           |
+| omitDefaultRowOperators      | boolean, `remove`, `fold` | `- omitDefaultRowOperators: true`: omit all default row operators,<br/>`- omitDefaultRowOperators: remove`: omit default remove row operator,<br/>`- omitDefaultRowOperators: fold`: omit default fold row operator. |
+| RowOperators                 | various                   |                                                                                                                                                                                                                      |
+| noElementReminder            | text                      | `- noElementReminder: No Data`                                                                                                                                                                                       |
+| addable                      | boolean                   | `- !addable`<br/>Not available for `RibsView`.                                                                                                                                                                       |
+| addLabel                     | text                      | `- addLabel: Create New One`                                                                                                                                                                                         |
+| elementAdded                 | function                  | From external definition only, starts with `@ext.`.<br/>Not available for `RibsView`.                                                                                                                                |
+| createElement                | function                  | From external definition only, starts with `@ext.`.<br/>Not available for `RibsView`.                                                                                                                                |
+| removable                    | boolean                   | `- !removable`.<br/>Not available for `RibsView`.                                                                                                                                                                    |
+| removeLabel                  | text                      | `- removeLabel: Remove This One`.<br/>Not available for `RibsView`.                                                                                                                                                  |
+| elementRemoved               | function                  | From external definition only, starts with `@ext.`.<br/>Not available for `RibsView`.                                                                                                                                |
+| couldRemoveElement           | function                  | From external definition only, starts with `@ext.`.<br/>Not available for `RibsView`.                                                                                                                                |
+| getElementKey                | function                  | From external definition only, starts with `@ext.`.                                                                                                                                                                  |
 
 ### Syntax of `headers`
 
@@ -1255,6 +1257,45 @@ The definition of table column headers is very simple, just look at an example t
 	- required
 	- positive
 	- integer
+```
+
+### Syntax of `omitDefaultRowOperators`, `RowOperators`
+
+Sometimes it is necessary to customize row operations or the style of row operations. You can use `omitDefaultRowOperators` to disable all
+default row operation buttons, or selectively disable some of them.
+
+If you want to add your own row operation buttons, you can use `RowOperators` for full customization. `RowOperators` is a collection of
+buttons, and you can use any buttons you want. Sometimes, for styling purposes, if you don't need the default row operations but still need
+the default behavior, you can use `prebuilt` to specify. Note that after specifying `prebuilt`, the `click` won't work.
+
+```markdown
+## Table::Students::students
+
+- RowOperators::
+	- Button::
+		- text: X
+		- fill: plain
+		- click: alert: X
+	- Button::
+		- fill: plain
+		- tails: $icons.view
+		- click: alert: View
+	- Button::
+		- fill: plain
+		- tails: $icons.edit
+		- click: alert: Edit
+	- Button::
+		- fill: plain
+		- tails: $icons.remove
+		- prebuilt: remove
+	- Button::
+		- fill: plain
+		- tails: $icons.expand
+		- prebuilt: expand
+	- Button::
+		- fill: plain
+		- tails: $icons.collapse
+		- prebuilt: collapse
 ```
 
 # Logger
