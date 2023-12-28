@@ -15,6 +15,7 @@ export const APagination = styled.div.attrs(({id, 'data-w': dataW}) => {
     align-items: center;
     font-family: ${CssVars.FONT_FAMILY};
     font-size: ${CssVars.FONT_SIZE};
+    color: ${CssVars.FONT_COLOR};
 
     &[data-visible=false] {
         display: none;
