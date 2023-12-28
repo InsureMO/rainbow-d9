@@ -1,8 +1,16 @@
-import {VUtils, WrappedAttributes} from '@rainbow-d9/n1';
-import React, {useEffect, useState} from 'react';
-import {Button, ButtonFill, ButtonInk} from '../button';
+import {
+	BaseModel,
+	Enhance$WrappedPropsForArrayElement,
+	NUtils,
+	PropValue,
+	VUtils,
+	WrappedAttributes
+} from '@rainbow-d9/n1';
+import React, {MouseEvent, useEffect, useState} from 'react';
+import {Button, ButtonClickOptions, ButtonFill, ButtonInk} from '../button';
 import {useTableEventBus} from './event/table-event-bus';
 import {TableEventTypes} from './event/table-event-bus-types';
+import {TableDef, TableProps, TableRowButtonDef} from './types';
 import {ATableRowOperators} from './widgets';
 
 const ExpandButton = (props: { onClick: () => void }) => {
@@ -35,12 +43,35 @@ const RemoveButton = (props: { onClick: () => void }) => {
 	               click={onClick}
 	               data-w="d9-table-row-operator"/>;
 };
+const CustomButton = (props: {
+	def: TableRowButtonDef;
+	$wrapped: Enhance$WrappedPropsForArrayElement<Omit<TableProps, '$array'>>['$wrapped']
+}) => {
+	const {
+		def: {click, ...rest},
+		$wrapped: {$root, $array, $model, $p2r}
+	} = props;
+
+	const onClick = (options: ButtonClickOptions<BaseModel, PropValue>, event: MouseEvent<HTMLButtonElement>) => {
+		click && click({...options, array: $array}, event);
+	};
+	const $wrapped: WrappedAttributes = {
+		$root, $model, $p2r, $onValueChange: VUtils.noop, $avs: {$disabled: false, $visible: true}
+	};
+	return <Button $wrapped={$wrapped} click={onClick} {...rest} data-w="d9-table-row-operator"/>;
+};
 
 export const TableRowOperators = (props: {
 	expandable?: boolean; removable?: boolean;
 	rowIndex: number; rowSpan: number;
+	$wrapped: Enhance$WrappedPropsForArrayElement<Omit<TableProps, '$array'>>['$wrapped'];
+	omitDefaultRowOperators?: boolean; rowOperators: TableDef['rowOperators'];
 }) => {
-	const {expandable = false, removable = false, rowIndex, rowSpan} = props;
+	const {
+		expandable = false, removable = false, rowIndex, rowSpan,
+		$wrapped,
+		omitDefaultRowOperators = false, rowOperators
+	} = props;
 
 	const {on, off, fire} = useTableEventBus();
 	const [expanded, setExpanded] = useState(false);
@@ -78,8 +109,16 @@ export const TableRowOperators = (props: {
 
 	return <ATableRowOperators data-expanded={expanded}
 	                           rowIndex={rowIndex} rowSpan={rowSpan}>
-		{removable !== false ? <RemoveButton onClick={onRemoveElementClicked}/> : null}
-		{(expandable && !expanded) ? <ExpandButton onClick={onExpandClicked}/> : null}
-		{(expandable && expanded) ? <CollapseButton onClick={onCollapseClicked}/> : null}
+		{(rowOperators == null || rowOperators.length === 0)
+			? null
+			: <>
+				{rowOperators.map(def => {
+					const key = NUtils.getDefKey(def);
+					return <CustomButton def={def} $wrapped={$wrapped} key={key}/>;
+				})}
+			</>}
+		{(!omitDefaultRowOperators && removable !== false) ? <RemoveButton onClick={onRemoveElementClicked}/> : null}
+		{(!omitDefaultRowOperators && expandable && !expanded) ? <ExpandButton onClick={onExpandClicked}/> : null}
+		{(!omitDefaultRowOperators && expandable && expanded) ? <CollapseButton onClick={onCollapseClicked}/> : null}
 	</ATableRowOperators>;
 };

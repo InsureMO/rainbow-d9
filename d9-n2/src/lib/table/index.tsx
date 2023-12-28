@@ -6,7 +6,7 @@ import {TableBottomBar} from './table-bottom-bar';
 import {TableContent} from './table-content';
 import {TableNoData} from './table-no-data';
 import {TableRow} from './table-row';
-import {TableDef, TableHeaderDef, TableProps} from './types';
+import {TableDef, TableHeaderDef, TableProps, TableRowButtonDef} from './types';
 
 export const Table = (props: TableProps) => {
 	const {children, ...rest} = props;
@@ -23,5 +23,5 @@ registerWidget({
 	container: true, array: true
 } as WidgetRegistrationOptions);
 
-export {TableProps, TableDef, TableHeaderDef};
+export {TableProps, TableDef, TableHeaderDef, TableRowButtonDef};
 export * as TableUtils from './utils';

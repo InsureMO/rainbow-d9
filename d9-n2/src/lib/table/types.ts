@@ -1,5 +1,6 @@
-import {ArrayContainerDef, ArrayContainerWidgetProps, NodeDef} from '@rainbow-d9/n1';
-import {ReactNode} from 'react';
+import {ArrayContainerDef, ArrayContainerWidgetProps, BaseModel, NodeDef, PropValue} from '@rainbow-d9/n1';
+import {MouseEvent, ReactNode} from 'react';
+import {ButtonClickOptions, ButtonDef} from '../button';
 import {OmitHTMLProps, OmitNodeDef} from '../types';
 
 export interface TableHeaderDef extends Pick<NodeDef, '$key'> {
@@ -9,21 +10,36 @@ export interface TableHeaderDef extends Pick<NodeDef, '$key'> {
 	index: number;
 }
 
+export type TableRowButtonDef = Omit<ButtonDef, 'click'> & {
+	click: <R extends BaseModel, M extends PropValue>(
+		options: ButtonClickOptions<R, M> & { array: Array<BaseModel> },
+		event: MouseEvent<HTMLButtonElement>) => void | Promise<void>;
+};
+
 /** Table configuration definition */
 export type TableDef = Omit<ArrayContainerDef, '$nodes'> & OmitHTMLProps<HTMLDivElement> & {
 	headers: Array<TableHeaderDef>;
 	headerHeight?: number | string;
 	expandable?: boolean;
+	/** width of fixed columns needs to be stable, for example, minmax, fr cannot be used */
 	fixedLeadColumns?: number;
+	/** width of fixed columns needs to be stable, for example, minmax, fr cannot be used */
 	fixedTailColumns?: number;
 	/** cells which defined in headers should be hidden when expanded or not, default false */
 	hideClassicCellsOnExpandable?: boolean;
 	/** click to expand row or not, default false */
 	clickToExpand?: boolean;
+	/** want vertical scrollable */
 	maxBodyHeight?: number | string;
+	/** set it when operators is customized */
 	operatorsColumnWidth?: number | string;
 	rowIndexStartsFrom?: number;
+	/** omit default row operators */
+	omitDefaultRowOperators?: boolean;
+	/** row operators */
+	rowOperators: Array<TableRowButtonDef>;
 };
+
 /** Table widget definition, with html attributes */
 export type TableProps = OmitNodeDef<TableDef> & ArrayContainerWidgetProps;
 

@@ -1,4 +1,4 @@
-import {EnhancedPropsForArrayElement, NUtils} from '@rainbow-d9/n1';
+import {Enhance$WrappedPropsForArrayElement, EnhancedPropsForArrayElement, NUtils} from '@rainbow-d9/n1';
 import React, {Children, useEffect, useState} from 'react';
 import {useTableEventBus} from './event/table-event-bus';
 import {TableEventTypes} from './event/table-event-bus-types';
@@ -7,11 +7,17 @@ import {TableProps} from './types';
 import {computeColumnsWidth} from './utils';
 import {ATableBodyCell, ATableBodyCellExpandArea, ATableBodyRowIndexCell} from './widgets';
 
-export const TableRow = (props: Omit<TableProps, '$array'> & { $array: EnhancedPropsForArrayElement }) => {
+export type TableRowProps = Enhance$WrappedPropsForArrayElement<Omit<TableProps, '$array'>> & {
+	$array: EnhancedPropsForArrayElement
+}
+
+export const TableRow = (props: TableRowProps) => {
 	const {
 		headers, expandable = false, hideClassicCellsOnExpandable = false, clickToExpand = false,
-		rowIndexStartsFrom = 1,
-		$array: {removable, elementIndex, removeElement}, children
+		rowIndexStartsFrom = 1, omitDefaultRowOperators, rowOperators,
+		$wrapped,
+		$array: {removable, elementIndex, removeElement},
+		children
 	} = props;
 
 	const {on, off, fire} = useTableEventBus();
@@ -114,7 +120,9 @@ export const TableRow = (props: Omit<TableProps, '$array'> & { $array: EnhancedP
 		</ATableBodyRowIndexCell>
 		{classic}
 		<TableRowOperators expandable={expandable} removable={removable} rowIndex={elementIndex}
-		                   rowSpan={operatorsRowSpan}/>
+		                   rowSpan={operatorsRowSpan}
+		                   $wrapped={$wrapped}
+		                   omitDefaultRowOperators={omitDefaultRowOperators} rowOperators={rowOperators}/>
 		{expands}
 	</>;
 };

@@ -9,11 +9,13 @@ import {CaretRight} from './caret-right';
 import {Check} from './check';
 import {Collapse} from './collapse';
 import {Date} from './date';
+import {Edit} from './edit';
 import {Expand} from './expand';
 import {Remove} from './remove';
 import {Spinner} from './spinner';
 import {Time} from './time';
 import {Times} from './times';
+import {View} from './view';
 
 class IconsRegistrar {
 	private static readonly _icons: Record<string, () => JSX.Element> = {};
@@ -43,6 +45,8 @@ IconsRegistrar.register({
 	remove: () => <Remove/>,
 	expand: () => <Expand/>,
 	collapse: () => <Collapse/>,
+	edit: () => <Edit/>,
+	view: () => <View/>,
 	caretLeft: () => <CaretLeft/>,
 	caretRight: () => <CaretRight/>,
 	caretDown: () => <CaretDown/>,
