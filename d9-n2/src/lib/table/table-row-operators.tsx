@@ -45,15 +45,41 @@ const RemoveButton = (props: { onClick: () => void }) => {
 };
 const CustomButton = (props: {
 	def: TableRowButtonDef;
-	$wrapped: Enhance$WrappedPropsForArrayElement<Omit<TableProps, '$array'>>['$wrapped']
+	$wrapped: Enhance$WrappedPropsForArrayElement<Omit<TableProps, '$array'>>['$wrapped'];
+	expandable: boolean; expanded: boolean;
+	prebuilt: { remove: () => void; expand: () => void; collapse: () => void }
 }) => {
 	const {
-		def: {click, ...rest},
-		$wrapped: {$root, $array, $model, $p2r}
+		def: {prebuilt, click, ...rest},
+		$wrapped: {$root, $array, $model, $p2r},
+		expandable, expanded, prebuilt: {remove, expand, collapse}
 	} = props;
 
-	const onClick = (options: ButtonClickOptions<BaseModel, PropValue>, event: MouseEvent<HTMLButtonElement>) => {
-		click && click({...options, array: $array}, event);
+	if (!expandable && (prebuilt === 'expand' || prebuilt === 'collapse')) {
+		return null;
+	}
+	if (expandable && expanded && prebuilt === 'expand') {
+		return null;
+	}
+	if (expandable && !expanded && prebuilt === 'collapse') {
+		return null;
+	}
+
+	const onClick = async (options: ButtonClickOptions<BaseModel, PropValue>, event: MouseEvent<HTMLButtonElement>) => {
+		switch (prebuilt) {
+			case 'remove':
+				remove();
+				break;
+			case 'expand':
+				expand();
+				break;
+			case 'collapse':
+				collapse();
+				break;
+			default:
+				click && await click({...options, array: $array}, event);
+				break;
+		}
 	};
 	const $wrapped: WrappedAttributes = {
 		$root, $model, $p2r, $onValueChange: VUtils.noop, $avs: {$disabled: false, $visible: true}
@@ -65,7 +91,7 @@ export const TableRowOperators = (props: {
 	expandable?: boolean; removable?: boolean;
 	rowIndex: number; rowSpan: number;
 	$wrapped: Enhance$WrappedPropsForArrayElement<Omit<TableProps, '$array'>>['$wrapped'];
-	omitDefaultRowOperators?: boolean; rowOperators: TableDef['rowOperators'];
+	omitDefaultRowOperators?: TableDef['omitDefaultRowOperators']; rowOperators: TableDef['rowOperators'];
 }) => {
 	const {
 		expandable = false, removable = false, rowIndex, rowSpan,
@@ -107,6 +133,9 @@ export const TableRowOperators = (props: {
 		fire(TableEventTypes.COLLAPSE_ROW, rowIndex);
 	};
 
+	const omitFold = omitDefaultRowOperators === true || omitDefaultRowOperators === 'fold';
+	const omitRemove = omitDefaultRowOperators === true || omitDefaultRowOperators === 'remove';
+
 	return <ATableRowOperators data-expanded={expanded}
 	                           rowIndex={rowIndex} rowSpan={rowSpan}>
 		{(rowOperators == null || rowOperators.length === 0)
@@ -114,11 +143,18 @@ export const TableRowOperators = (props: {
 			: <>
 				{rowOperators.map(def => {
 					const key = NUtils.getDefKey(def);
-					return <CustomButton def={def} $wrapped={$wrapped} key={key}/>;
+					return <CustomButton def={def} $wrapped={$wrapped}
+					                     expandable={expandable} expanded={expanded}
+					                     prebuilt={{
+						                     remove: onRemoveElementClicked,
+						                     expand: onExpandClicked,
+						                     collapse: onCollapseClicked
+					                     }}
+					                     key={key}/>;
 				})}
 			</>}
-		{(!omitDefaultRowOperators && removable !== false) ? <RemoveButton onClick={onRemoveElementClicked}/> : null}
-		{(!omitDefaultRowOperators && expandable && !expanded) ? <ExpandButton onClick={onExpandClicked}/> : null}
-		{(!omitDefaultRowOperators && expandable && expanded) ? <CollapseButton onClick={onCollapseClicked}/> : null}
+		{(!omitRemove && removable !== false) ? <RemoveButton onClick={onRemoveElementClicked}/> : null}
+		{(!omitFold && expandable && !expanded) ? <ExpandButton onClick={onExpandClicked}/> : null}
+		{(!omitFold && expandable && expanded) ? <CollapseButton onClick={onCollapseClicked}/> : null}
 	</ATableRowOperators>;
 };

@@ -11,7 +11,9 @@ export interface TableHeaderDef extends Pick<NodeDef, '$key'> {
 }
 
 export type TableRowButtonDef = Omit<ButtonDef, 'click'> & {
-	click: <R extends BaseModel, M extends PropValue>(
+	prebuilt?: 'expand' | 'collapse' | 'remove';
+	/** click is ignored when prebuilt is set */
+	click?: <R extends BaseModel, M extends PropValue>(
 		options: ButtonClickOptions<R, M> & { array: Array<BaseModel> },
 		event: MouseEvent<HTMLButtonElement>) => void | Promise<void>;
 };
@@ -35,7 +37,7 @@ export type TableDef = Omit<ArrayContainerDef, '$nodes'> & OmitHTMLProps<HTMLDiv
 	operatorsColumnWidth?: number | string;
 	rowIndexStartsFrom?: number;
 	/** omit default row operators */
-	omitDefaultRowOperators?: boolean;
+	omitDefaultRowOperators?: boolean | 'remove' | 'fold';
 	/** row operators */
 	rowOperators: Array<TableRowButtonDef>;
 };
