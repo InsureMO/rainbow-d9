@@ -126,6 +126,7 @@ export const CssVars = {
 	RIB_BORDER_RADIUS: 'var(--d9-rib-border-radius, 4px)',
 	RIB_BUTTON_HEIGHT: 'var(--d9-rib-button-height, 26px)',
 	RIB_GAP_SIZE: 'var(--d9-rib-gap-size, 8px)',
+	RIB_HEADER_PADDING: 'var(--d9-rib-header-padding, 4px 0 4px 16px)',
 	RIB_HEADER_BACKGROUND_COLOR: `var(--d9-rib-header-background-color, ${CssConstants.RIB_COLOR})`,
 	RIB_FOOTER_HEIGHT: 'var(--d9-rib-footer-height, 44px)',
 

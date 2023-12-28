@@ -173,6 +173,14 @@ export const ATableBodyCell = styled.div.attrs<{
     padding: 0 calc(${CssVars.TABLE_CELL_PADDING});
     background-color: ${CssVars.INVERT_COLOR};
 
+    &[data-click-to-expand=true] {
+        cursor: pointer;
+
+        &[data-expanded=true] {
+            cursor: default;
+        }
+    }
+
     > input[data-w=d9-input],
     > div[data-w=d9-dropdown],
     > div[data-w=d9-calendar] {

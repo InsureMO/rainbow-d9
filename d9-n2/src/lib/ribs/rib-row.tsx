@@ -16,9 +16,14 @@ export const RibRow = (props: Omit<RibsProps, '$array'> & { $array: EnhancedProp
 	const [expanded, setExpanded] = useState(false);
 	const expand = () => setExpanded(true);
 	const collapse = () => setExpanded(false);
+	const onRowClicked = () => {
+		if (!expanded) {
+			setExpanded(true);
+		}
+	};
 
 	return <ARibRow>
-		<ARibRowHeader>
+		<ARibRowHeader data-expanded={expanded} onClick={onRowClicked}>
 			<ARibRowIndex># {elementIndex + 1}</ARibRowIndex>
 			<ARibRowHeaderContent>
 				<LabelLike label={caption} $wrapped={$wrapped} $validationScopes={props}/>

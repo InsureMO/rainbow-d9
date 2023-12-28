@@ -34,10 +34,15 @@ export const ARibRowHeader = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-rib-row-hea
     grid-column-gap: ${CssVars.SECTION_BODY_PADDING};
     border-radius: ${CssVars.RIB_BORDER_RADIUS};
     background-color: ${CssVars.RIB_HEADER_BACKGROUND_COLOR};
-    padding: ${CssVars.SECTION_BODY_PADDING} 0 ${CssVars.SECTION_BODY_PADDING} calc(${CssVars.SECTION_BODY_PADDING} * 2);
+    padding: ${CssVars.RIB_HEADER_PADDING};
     font-family: ${CssVars.FONT_FAMILY};
     font-size: ${CssVars.FONT_SIZE};
     color: ${CssVars.FONT_COLOR};
+    cursor: pointer;
+
+    &[data-expanded=true] {
+        cursor: default;
+    }
 `;
 export const ARibRowIndex = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-rib-row-index'})`
     display: flex;
@@ -53,45 +58,19 @@ export const ARibRowOperators = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-rib-row-
     display: flex;
     position: relative;
     align-items: center;
+    padding: 0 ${CssVars.BUTTON_INDENT};
 
-    > span {
+    > button[data-w=d9-rib-row-operator] {
         display: flex;
         position: relative;
         align-items: center;
-        padding: 0 ${CssVars.BUTTON_INDENT};
-    }
-`;
-export const ARibRowOperator = styled.span.attrs({[DOM_KEY_WIDGET]: 'd9-rib-row-operator'})`
-    display: flex;
-    position: relative;
-    align-items: center;
-    justify-content: center;
-    width: ${CssVars.RIB_BUTTON_HEIGHT};
-    min-height: ${CssVars.RIB_BUTTON_HEIGHT};
-    border-radius: ${CssVars.BORDER_RADIUS};
-    border: ${CssVars.BORDER};
-    border-color: ${CssVars.PRIMARY_COLOR};
-    cursor: pointer;
-    overflow: hidden;
-    transition: all ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION};
+        height: ${CssVars.RIB_BUTTON_HEIGHT};
+        width: ${CssVars.RIB_BUTTON_HEIGHT};
+        padding: 0;
 
-    &:not(:first-child) {
-        margin-left: 8px;
-    }
-
-    &:hover {
-        box-shadow: ${CssVars.PRIMARY_SHADOW};
-        background-color: ${CssVars.PRIMARY_COLOR};
-
-        > svg {
-            fill: ${CssVars.INVERT_COLOR};
+        &:not(:first-child) {
+            margin-left: 4px;
         }
-    }
-
-    > svg {
-        fill: ${CssVars.PRIMARY_COLOR};
-        height: ${CssVars.FONT_SIZE};
-        transition: background-color ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION};
     }
 `;
 export const ARibRowBody = styled.div.attrs<{ expanded: boolean }>(({expanded}) => {
@@ -111,7 +90,6 @@ export const ARibRowBody = styled.div.attrs<{ expanded: boolean }>(({expanded}) 
     grid-column-gap: ${CssVars.GRID_COLUMN_GAP};
     grid-row-gap: ${CssVars.GRID_ROW_GAP};
     padding: ${CssVars.SECTION_BODY_PADDING} 0;
-    //overflow: hidden;
 `;
 export const ARibNoDataRow = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-rib-no-data-row'})`
     display: flex;
@@ -139,8 +117,4 @@ export const ARibBottomBar = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-rib-bottom-
     height: ${CssVars.RIB_FOOTER_HEIGHT};
     margin-top: 0;
     z-index: 4;
-
-    > button {
-        max-height: ${CssVars.RIB_BUTTON_HEIGHT};
-    }
 `;

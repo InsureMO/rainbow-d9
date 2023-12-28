@@ -57,13 +57,16 @@ export const TableRow = (props: Omit<TableProps, '$array'> & { $array: EnhancedP
 		const header = headers[index];
 		NUtils.getDefKey(header);
 		return <ATableBodyCell onClick={onRowClicked} rowIndex={elementIndex}
-		                       stickyOffset={stickyOffsets[index + 1]} key={header.$key}>
+		                       stickyOffset={stickyOffsets[index + 1]}
+		                       data-expanded={expanded} data-click-to-expand={clickToExpand}
+		                       key={header.$key}>
 			{cell}
 		</ATableBodyCell>;
 	}).filter(x => x != null);
 	if (tailGrabberAppended) {
 		classicCells.push(<ATableBodyCell isGrabber={true} rowIndex={elementIndex} onClick={onRowClicked}
 		                                  stickyOffset={stickyOffsets[stickyOffsets.length - 2]}
+		                                  data-expanded={expanded} data-click-to-expand={clickToExpand}
 		                                  data-table-row-grabber={true} key="grabber-cell"/>);
 	}
 	const expandCells = childrenAsArray.map((cell, index) => {

@@ -1,24 +1,37 @@
+import {VUtils, WrappedAttributes} from '@rainbow-d9/n1';
 import React from 'react';
-import {Collapse, Expand, Remove} from '../icons';
-import {ARibRowOperator, ARibRowOperators} from './widgets';
+import {Button, ButtonFill, ButtonInk} from '../button';
+import {ARibRowOperators} from './widgets';
 
 const ExpandButton = (props: { onClick: () => void }) => {
 	const {onClick} = props;
-	return <ARibRowOperator onClick={onClick}>
-		<Expand/>
-	</ARibRowOperator>;
+	const $wrapped: WrappedAttributes = {
+		$root: {}, $model: {}, $p2r: '.', $onValueChange: VUtils.noop,
+		$avs: {$disabled: false, $visible: true}
+	};
+	return <Button $wrapped={$wrapped} ink={ButtonInk.PRIMARY} fill={ButtonFill.PLAIN} leads={['$icons.expand']}
+	               click={onClick}
+	               data-w="d9-rib-row-operator"/>;
 };
 const CollapseButton = (props: { onClick: () => void }) => {
 	const {onClick} = props;
-	return <ARibRowOperator onClick={onClick}>
-		<Collapse/>
-	</ARibRowOperator>;
+	const $wrapped: WrappedAttributes = {
+		$root: {}, $model: {}, $p2r: '.', $onValueChange: VUtils.noop,
+		$avs: {$disabled: false, $visible: true}
+	};
+	return <Button $wrapped={$wrapped} ink={ButtonInk.PRIMARY} fill={ButtonFill.PLAIN} leads={['$icons.collapse']}
+	               click={onClick}
+	               data-w="d9-rib-row-operator"/>;
 };
 const RemoveButton = (props: { onClick: () => void }) => {
 	const {onClick} = props;
-	return <ARibRowOperator onClick={onClick}>
-		<Remove/>
-	</ARibRowOperator>;
+	const $wrapped: WrappedAttributes = {
+		$root: {}, $model: {}, $p2r: '.', $onValueChange: VUtils.noop,
+		$avs: {$disabled: false, $visible: true}
+	};
+	return <Button $wrapped={$wrapped} ink={ButtonInk.PRIMARY} fill={ButtonFill.PLAIN} leads={['$icons.remove']}
+	               click={onClick}
+	               data-w="d9-rib-row-operator"/>;
 };
 
 export const RibRowOperators = (props: {
@@ -30,10 +43,8 @@ export const RibRowOperators = (props: {
 	const onRemoveClicked = async () => await removeElement();
 
 	return <ARibRowOperators data-expanded={expanded}>
-		<span>
-			{removable ? <RemoveButton onClick={onRemoveClicked}/> : null}
-			{!expanded ? <ExpandButton onClick={expand}/> : null}
-			{expanded ? <CollapseButton onClick={collapse}/> : null}
-		</span>
+		{removable ? <RemoveButton onClick={onRemoveClicked}/> : null}
+		{!expanded ? <ExpandButton onClick={expand}/> : null}
+		{expanded ? <CollapseButton onClick={collapse}/> : null}
 	</ARibRowOperators>;
 };
