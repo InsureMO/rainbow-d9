@@ -22,7 +22,7 @@ export const useArrayFunctions = (options: {
 		? {$array: $model, absolutePathOfArray: $p2r}
 		: {$array: MUtils.getValue($model, rest.$pp), absolutePathOfArray: PPUtils.absolute($p2r, rest.$pp)};
 
-	let elements;
+	let elements: Array<BaseModel>;
 	if ($array != null && !Array.isArray($array)) {
 		N1Logger.error('Data model must be an array or null.', 'ArrayFunctionsHook');
 		elements = [] as Array<BaseModel>;

@@ -41,6 +41,16 @@ export interface EnhancedPropsForArrayElement extends Omit<EnhancedPropsForArray
 	removeElement: () => Promise<void>;
 }
 
+export type EnhancePropsForArray<T> = T & { $array: EnhancedPropsForArray };
+export type EnhancePropsForArrayBody<T extends Omit<ArrayContainerWidgetProps, '$array'>> = EnhancePropsForArray<Omit<T, '$array'>>;
+export type EnhancePropsForArrayNotBody<T extends Omit<ArrayContainerWidgetProps, '$array'>> = EnhancePropsForArray<Omit<T, 'children' | '$array'>>;
+export type Enhance$WrappedPropsForArrayElement<T extends WidgetProps> = Omit<T, '$wrapped'> & {
+	$wrapped: T['$wrapped'] & { $array: Array<BaseModel> }
+}
+export type EnhancePropsForArrayElement<T extends WidgetProps> = Enhance$WrappedPropsForArrayElement<T> & {
+	$array: EnhancedPropsForArrayElement
+};
+
 /**
  * Array widget
  */
@@ -49,11 +59,11 @@ export interface RegisteredArrayContainerWidget<P extends Omit<ArrayContainerWid
 	container: true;
 	/** always be true since it is for array */
 	array: true;
-	TOP?: (props: Omit<P, 'children' | '$array'> & { $array: EnhancedPropsForArray }) => JSX.Element;
-	BODY?: (props: Omit<P, '$array'> & { $array: EnhancedPropsForArray }) => JSX.Element;
-	NO_ELEMENT?: (props: Omit<P, 'children' | '$array'> & { $array: EnhancedPropsForArray }) => JSX.Element;
-	ELEMENT: (props: P & { $array: EnhancedPropsForArrayElement }) => JSX.Element;
-	BOTTOM?: (props: Omit<P, 'children' | '$array'> & { $array: EnhancedPropsForArray }) => JSX.Element;
+	TOP?: (props: EnhancePropsForArrayNotBody<P>) => JSX.Element;
+	BODY?: (props: EnhancePropsForArrayBody<P>) => JSX.Element;
+	NO_ELEMENT?: (props: EnhancePropsForArrayNotBody<P>) => JSX.Element;
+	ELEMENT: (props: EnhancePropsForArrayElement<P>) => JSX.Element;
+	BOTTOM?: (props: EnhancePropsForArrayNotBody<P>) => JSX.Element;
 }
 
 /**

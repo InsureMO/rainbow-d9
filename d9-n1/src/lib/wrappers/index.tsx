@@ -95,7 +95,7 @@ export const renderContainerChildren = (options: {
 };
 
 export const ArrayElement = (props: {
-	elementModel: BaseModel; index: number;
+	elements: Array<BaseModel> | null | undefined, elementModel: BaseModel; index: number;
 	$wrapped: WrappedAttributes; $arrayP2r: PropertyPath;
 	$array: EnhancedPropsForArray;
 	createRemoveElementFunc: (elementModel: BaseModel, index: number) => (() => Promise<void>);
@@ -103,7 +103,7 @@ export const ArrayElement = (props: {
 	originalProps: ArrayContainerDef & ModelHolder & WrappedNodeAttributes;
 }) => {
 	const {
-		elementModel, index,
+		elements, elementModel, index,
 		$wrapped, $arrayP2r, $array,
 		createRemoveElementFunc, widget, originalProps, ...rest
 	} = props;
@@ -119,10 +119,13 @@ export const ArrayElement = (props: {
 
 	return <ArrayElementEventBusProvider>
 		<ArrayElementValidationEventHolder/>
-		<ElementContainer $wrapped={{...$wrapped, $p2r, $model: elementModel}}
+		<ElementContainer $wrapped={{...$wrapped, $array: elements, $p2r, $model: elementModel}}
 		                  $array={enhancedForElement} {...rest}>
 			{renderContainerChildren({
-				def: originalProps, childrenDefs, keys, $wrapped: {...$wrapped, $p2r, $model: elementModel}
+				def: originalProps, childrenDefs, keys,
+				// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+				// @ts-ignore
+				$wrapped: {...$wrapped, $array: elements, $p2r, $model: elementModel}
 			})}
 		</ElementContainer>
 	</ArrayElementEventBusProvider>;
@@ -159,7 +162,7 @@ export const ArrayWrapper = (props: ArrayContainerDef & ModelHolder & WrappedNod
 			...elements.map((elementModel: any, index: number) => {
 				const key = getElementKey(elementModel);
 				N1Logger.debug(`Array element[key=${key}, path=${$p2r}].`, elementModel, 'ArrayWrapper');
-				return <ArrayElement elementModel={elementModel} index={index}
+				return <ArrayElement elements={elements} elementModel={elementModel} index={index}
 				                     $wrapped={$wrapped} $arrayP2r={$arrayP2r} $array={enhancedForArray}
 				                     createRemoveElementFunc={createRemoveElementFunc}
 				                     widget={widget} originalProps={props} {...rest}
