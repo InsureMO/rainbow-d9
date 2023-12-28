@@ -139,9 +139,9 @@ export const Section = forwardRef((props: SectionProps, ref: ForwardedRef<HTMLDi
 				setExpanded(false);
 			}
 		};
-		onGlobal(GlobalEventTypes.CUSTOM_EVENT, onCustomEvent);
+		onGlobal && onGlobal(GlobalEventTypes.CUSTOM_EVENT, onCustomEvent);
 		return () => {
-			offGlobal(GlobalEventTypes.CUSTOM_EVENT, onCustomEvent);
+			offGlobal && offGlobal(GlobalEventTypes.CUSTOM_EVENT, onCustomEvent);
 		};
 	}, [onGlobal, offGlobal, marker]);
 

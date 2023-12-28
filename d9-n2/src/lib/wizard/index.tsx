@@ -90,9 +90,9 @@ const InternalWizard = (props: WizardProps) => {
 				fire(WizardEventTypes.ACTIVE_STEP, -1, (clipped ?? '').trim());
 			}
 		};
-		onGlobal(GlobalEventTypes.CUSTOM_EVENT, onCustomEvent);
+		onGlobal && onGlobal(GlobalEventTypes.CUSTOM_EVENT, onCustomEvent);
 		return () => {
-			offGlobal(GlobalEventTypes.CUSTOM_EVENT, onCustomEvent);
+			offGlobal && offGlobal(GlobalEventTypes.CUSTOM_EVENT, onCustomEvent);
 		};
 	}, [onGlobal, offGlobal, fire]);
 	useEffect(() => {

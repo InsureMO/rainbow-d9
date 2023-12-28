@@ -26,8 +26,12 @@ export const useRemoteRequest = (): RemoteRequestHandlers => {
 	const [functions] = useState(() => {
 		const doRemoteRequest = async <R>(request: () => Promise<R>, disableAlert?: boolean): Promise<R> => {
 			return new Promise<R>((resolve, reject) => {
-				// success -> resolve; otherwise -> reject
-				fire(GlobalEventTypes.INVOKE_REMOTE_REQUEST, request, resolve, reject, disableAlert);
+				if (fire == null) {
+					reject();
+				} else {
+					// success -> resolve; otherwise -> reject
+					fire(GlobalEventTypes.INVOKE_REMOTE_REQUEST, request, resolve, reject, disableAlert);
+				}
 			});
 		};
 
@@ -57,9 +61,17 @@ export const useAlert = (): AlertHandlers => {
 	const [functions] = useState(() => {
 		return {
 			show: async (content: ReactNode): Promise<void> => {
-				return new Promise<void>(resolve => fire(GlobalEventTypes.SHOW_ALERT, content, resolve));
+				return new Promise<void>(resolve => {
+					if (fire == null) {
+						resolve();
+					} else {
+						fire(GlobalEventTypes.SHOW_ALERT, content, resolve);
+					}
+				});
 			},
-			hide: () => fire(GlobalEventTypes.HIDE_ALERT)
+			hide: () => {
+				fire && fire(GlobalEventTypes.HIDE_ALERT);
+			}
 		};
 	});
 
@@ -75,8 +87,12 @@ export const useDialog = (): DialogHandlers => {
 	const {fire} = useGlobalEventBus();
 	const [functions] = useState(() => {
 		return {
-			show: (content: ReactNode, wrapperStyle?: CSSProperties) => fire(GlobalEventTypes.SHOW_DIALOG, content, wrapperStyle),
-			hide: () => fire(GlobalEventTypes.HIDE_DIALOG)
+			show: (content: ReactNode, wrapperStyle?: CSSProperties) => {
+				fire && fire(GlobalEventTypes.SHOW_DIALOG, content, wrapperStyle);
+			},
+			hide: () => {
+				fire && fire(GlobalEventTypes.HIDE_DIALOG);
+			}
 		};
 	});
 
@@ -95,9 +111,17 @@ export const useYesNoDialog = (): YesNoDialogHandlers => {
 		return {
 			show: async (content: ReactNode): Promise<void> => {
 				// yes -> resolve, no -> reject
-				return new Promise<void>((resolve, reject) => fire(GlobalEventTypes.SHOW_YES_NO_DIALOG, content, resolve, reject));
+				return new Promise<void>((resolve, reject) => {
+					if (fire == null) {
+						reject();
+					} else {
+						fire(GlobalEventTypes.SHOW_YES_NO_DIALOG, content, resolve, reject);
+					}
+				});
 			},
-			hide: () => fire(GlobalEventTypes.HIDE_DIALOG)
+			hide: () => {
+				fire && fire(GlobalEventTypes.HIDE_DIALOG);
+			}
 		};
 	});
 
@@ -126,7 +150,7 @@ export const useCustomGlobalEvent = (): CustomGlobalEventHandler => {
 		return async <R extends BaseModel, M extends PropValue>(
 			key: string, prefix: string, clipped: string, models?: { root: R; model: M; }): Promise<void> => {
 			return new Promise<void>(resolve => {
-				fire(GlobalEventTypes.CUSTOM_EVENT, key, prefix, clipped, models);
+				fire && fire(GlobalEventTypes.CUSTOM_EVENT, key, prefix, clipped, models);
 				resolve();
 			});
 		};
