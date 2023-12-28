@@ -6,7 +6,7 @@ import {Button, ButtonFill, ButtonInk, ButtonProps} from '../button';
 type UnwrappedButtonProps =
 	Omit<ButtonProps, 'text' | '$wrapped' | keyof MonitorNodeDef>
 	& {
-	children: ReactNode;
+	children?: ReactNode;
 	onClick: (event: MouseEvent<HTMLButtonElement>) => void;
 	disabled?: boolean;
 	visible?: boolean;

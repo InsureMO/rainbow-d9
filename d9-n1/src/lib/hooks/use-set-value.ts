@@ -13,14 +13,17 @@ export const useSetValue = (
 		// eslint-disable-next-line @typescript-eslint/no-inferrable-types
 		onValueChange: async (newValue: PropValue, doForceUpdate: boolean = true) => {
 			const {$p2r, $model, $pp, valueChanged} = props;
+			// set to model immediately
 			const oldValue = MUtils.setValue($model, $pp, newValue);
 			if (doForceUpdate) {
 				forceUpdate();
 			}
 			const absolutePath = PPUtils.absolute($p2r, $pp);
 			if (valueChanged != null) {
+				// try to invoke external function
 				await valueChanged({absolutePath, oldValue, newValue});
 			}
+			// invoke internal functions and events
 			onValueChanged({absolutePath, oldValue, newValue});
 			N1Logger.debug(`Value set[old=${oldValue}, new=${newValue}, path=${$pp}, absolutePath=${absolutePath}].`, $model, 'SetValueHook');
 		},

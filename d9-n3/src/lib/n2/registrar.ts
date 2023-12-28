@@ -11,6 +11,7 @@ import {N2DropdownTranslator} from './dropdown';
 import {N2InputTranslator} from './input';
 import {N2MultiDropdownTranslator} from './multi-dropdown';
 import {N2NumberTranslator} from './number';
+import {N2PaginationTranslator} from './pagination';
 import {N2RadioTranslator} from './radio';
 import {N2RadiosTranslator} from './radios';
 import {N2RibsTranslator, N2RibsViewTranslator} from './ribs';
@@ -60,4 +61,5 @@ export const registerN2Widgets = (widgetHelper?: WidgetHelper) => {
 	repo.register(new N2WizardSharedTranslator(repo));
 	repo.register(new N2WizardStepTranslator(repo));
 	repo.register(new N2WizardTranslator(repo));
+	repo.register(new N2PaginationTranslator(repo));
 };

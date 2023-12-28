@@ -106,7 +106,7 @@ const Separator = styled.span.attrs({[DOM_KEY_WIDGET]: 'd9-checkboxes-option-sep
 
 export const Checkboxes = forwardRef((props: CheckboxesProps, ref: ForwardedRef<HTMLDivElement>) => {
 	const {
-		// eslint-disable-next-line  @typescript-eslint/no-unused-vars
+		// eslint-disable-next-line @typescript-eslint/no-unused-vars
 		options, optionSort,
 		noAvailable = I18NVars.OPTIONS.NO_AVAILABLE,
 		columns = -1, compact = true,

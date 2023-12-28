@@ -1,15 +1,11 @@
 import {MonitorNodeDef, NodeAttributeValues, VUtils} from '@rainbow-d9/n1';
-import React, {ForwardedRef, forwardRef, ReactNode} from 'react';
-import {Pagination} from '../pagination';
-import {PaginationProps} from '../pagination/types';
+import React, {ForwardedRef, forwardRef} from 'react';
+import {Pagination, PaginationProps} from '../pagination';
 
 /** Pagination configuration definition */
 type UnwrappedPaginationProps =
-	Omit<PaginationProps, 'disabled' | '$wrapped' | '$nodes' | keyof MonitorNodeDef>
-	& {
-	children?: ReactNode;
-	visible?: boolean;
-};
+	Omit<PaginationProps, 'disabled' | '$wrapped' | keyof MonitorNodeDef>
+	& { visible?: boolean };
 
 const UnwrappedPagination = forwardRef((props: UnwrappedPaginationProps, ref: ForwardedRef<HTMLDivElement>) => {
 	const {

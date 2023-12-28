@@ -3,6 +3,7 @@ import {AngleLeft} from './angle-left';
 import {AngleRight} from './angle-right';
 import {ArrowDown} from './arrow-down';
 import {Back} from './back';
+import {Backward} from './backward';
 import {CaretDown} from './caret-down';
 import {CaretLeft} from './caret-left';
 import {CaretRight} from './caret-right';
@@ -11,6 +12,7 @@ import {Collapse} from './collapse';
 import {Date} from './date';
 import {Edit} from './edit';
 import {Expand} from './expand';
+import {Forward} from './forward';
 import {Remove} from './remove';
 import {Spinner} from './spinner';
 import {Time} from './time';
@@ -47,6 +49,8 @@ IconsRegistrar.register({
 	collapse: () => <Collapse/>,
 	edit: () => <Edit/>,
 	view: () => <View/>,
+	forward: () => <Forward/>,
+	backward: () => <Backward/>,
 	caretLeft: () => <CaretLeft/>,
 	caretRight: () => <CaretRight/>,
 	caretDown: () => <CaretDown/>,

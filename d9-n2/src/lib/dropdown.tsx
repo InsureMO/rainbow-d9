@@ -121,7 +121,7 @@ const Option = styled.span.attrs({[DOM_KEY_WIDGET]: 'd9-dropdown-option'})`
 
 export const Dropdown = (props: DropdownProps) => {
 	const {
-		// eslint-disable-next-line  @typescript-eslint/no-unused-vars
+		// eslint-disable-next-line @typescript-eslint/no-unused-vars
 		options, optionSort, noAvailable, noMatched,
 		$pp, $wrapped: {$onValueChange, $model, $p2r, $avs: {$disabled, $visible}},
 		please = '', clearable = true,

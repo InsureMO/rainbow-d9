@@ -243,5 +243,13 @@ export const I18NVars = {
 	WIZARD: {
 		PREVIOUS: 'Previous',
 		NEXT: 'Next'
+	},
+	PAGINATION: {
+		PAGE: '',
+		OF: 'of',
+		PAGES: 'pages,',
+		AFTER_SIZE: 'items per page,',
+		TOTAL: 'total',
+		ITEMS: 'items.'
 	}
 };

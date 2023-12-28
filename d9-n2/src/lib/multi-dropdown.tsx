@@ -209,7 +209,7 @@ const MultiOption = styled.span.attrs({[DOM_KEY_WIDGET]: 'd9-multi-dropdown-opti
 
 export const MultiDropdown = (props: MultiDropdownProps) => {
 	const {
-		// eslint-disable-next-line  @typescript-eslint/no-unused-vars
+		// eslint-disable-next-line @typescript-eslint/no-unused-vars
 		options, optionSort, noAvailable, noMatched,
 		$pp, $wrapped: {$onValueChange, $model, $p2r, $avs: {$disabled, $visible}},
 		please = '', clearable = true,

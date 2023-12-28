@@ -23,5 +23,6 @@ export * from './table';
 export * from './section';
 export * from './tabs';
 export * from './wizard';
+export * from './pagination';
 
 export * from './registrar';
