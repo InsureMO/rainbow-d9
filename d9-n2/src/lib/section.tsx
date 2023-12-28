@@ -1,7 +1,8 @@
 import {ContainerDef, ContainerWidgetProps, NodeDef, PPUtils, registerWidget} from '@rainbow-d9/n1';
-import React, {ForwardedRef, forwardRef, ReactNode, useState} from 'react';
+import React, {ForwardedRef, forwardRef, ReactNode, useEffect, useState} from 'react';
 import styled from 'styled-components';
 import {CssVars, DOM_ID_WIDGET, DOM_KEY_WIDGET} from './constants';
+import {GlobalEventPrefix, GlobalEventTypes, useCustomGlobalEvent, useGlobalEventBus} from './global';
 import {ArrowDown} from './icons';
 import {LabelLike} from './label-like';
 import {OmitHTMLProps2, OmitNodeDef} from './types';
@@ -10,6 +11,8 @@ import {OmitHTMLProps2, OmitNodeDef} from './types';
 export type SectionDef = ContainerDef & OmitHTMLProps2<HTMLDivElement, 'title'> & {
 	title?: ReactNode | NodeDef;
 	collapsible?: boolean;
+	/** use on identify itself when event fired */
+	marker?: string;
 };
 /** Section widget definition, with html attributes */
 export type SectionProps = OmitNodeDef<SectionDef> & ContainerWidgetProps;
@@ -111,13 +114,43 @@ const ASectionBody = styled.div.attrs<{ expanded: boolean }>(({expanded}) => {
 
 export const Section = forwardRef((props: SectionProps, ref: ForwardedRef<HTMLDivElement>) => {
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
-	const {$wrapped, title, collapsible, children, ...rest} = props;
+	const {
+		$wrapped,
+		title, collapsible, marker,
+		children, ...rest
+	} = props;
 	const {$p2r, $avs: {$disabled, $visible}} = $wrapped;
 
+	const {on: onGlobal, off: offGlobal} = useGlobalEventBus();
 	const [expanded, setExpanded] = useState(true);
+	const fireCustomEvent = useCustomGlobalEvent();
+	useEffect(() => {
+		const onCustomEvent = (_: string, prefix: string, clipped: string) => {
+			if (prefix !== GlobalEventPrefix.EXPAND_SECTION
+				&& prefix !== GlobalEventPrefix.COLLAPSE_SECTION) {
+				return;
+			}
+			if (clipped !== marker) {
+				return;
+			}
+			if (prefix === GlobalEventPrefix.EXPAND_SECTION) {
+				setExpanded(true);
+			} else {
+				setExpanded(false);
+			}
+		};
+		onGlobal(GlobalEventTypes.CUSTOM_EVENT, onCustomEvent);
+		return () => {
+			offGlobal(GlobalEventTypes.CUSTOM_EVENT, onCustomEvent);
+		};
+	}, [onGlobal, offGlobal, marker]);
 
 	const onExpandClicked = () => {
 		setExpanded(!expanded);
+		const prefix = expanded ? GlobalEventPrefix.SECTION_COLLAPSED : GlobalEventPrefix.SECTION_EXPANDED;
+		const key = `${prefix}:${marker ?? ''}`;
+		// noinspection JSIgnoredPromiseFromCall
+		fireCustomEvent(key, prefix, marker ?? '', {root: $wrapped.$root, model: $wrapped.$model});
 	};
 
 	return <ASection {...rest} data-disabled={$disabled} data-visible={$visible}

@@ -1,6 +1,6 @@
 import {MUtils, NodeDef, PPUtils, registerWidget, VUtils} from '@rainbow-d9/n1';
 import React, {useEffect, useState} from 'react';
-import {GlobalEventPrefix, GlobalEventTypes, useGlobalEventBus} from '../global';
+import {GlobalEventPrefix, GlobalEventTypes, useCustomGlobalEvent, useGlobalEventBus} from '../global';
 import {useWizardEventBus, WizardEventBusProvider} from './event/wizard-event-bus';
 import {WizardEventTypes} from './event/wizard-event-bus-types';
 import {WizardProps, WizardSharedDef, WizardStepDef} from './types';
@@ -41,15 +41,17 @@ const InternalWizard = (props: WizardProps) => {
 	const {on: onGlobal, off: offGlobal} = useGlobalEventBus();
 	const {on, off, fire} = useWizardEventBus();
 	const [state, setState] = useState<WizardState>({initialized: false, activeIndex: 0, reachedIndex: 0});
+	const fireCustomEvent = useCustomGlobalEvent();
 	useEffect(() => {
 		const onStepActive = (index: number, marker: string) => {
-			let foundIndex = (contents ?? []).findIndex(content => content.marker === marker);
-			if (foundIndex == null) {
-				foundIndex = (contents ?? []).findIndex((_, i) => i === index);
+			let found = (contents ?? []).find(content => content.marker === marker);
+			if (found == null) {
+				found = (contents ?? []).find((_, i) => i === index);
 			}
-			if (foundIndex === -1) {
+			if (found == null) {
 				return;
 			}
+			const foundIndex = (contents ?? []).indexOf(found);
 			if (foundIndex === state.activeIndex) {
 				return;
 			} else {
@@ -59,22 +61,30 @@ const InternalWizard = (props: WizardProps) => {
 						activeIndex: foundIndex, reachedIndex: Math.max(foundIndex, state.reachedIndex)
 					};
 				});
+				const key = `${GlobalEventPrefix.WIZARD_STEP_CHANGED}:${found.marker ?? ''}`;
+				// noinspection JSIgnoredPromiseFromCall
+				fireCustomEvent(key, GlobalEventPrefix.WIZARD_STEP_CHANGED, found.marker ?? '', {
+					root: $wrapped.$root, model: $wrapped.$model
+				});
 			}
 		};
 		on(WizardEventTypes.ACTIVE_STEP, onStepActive);
 		return () => {
 			off(WizardEventTypes.ACTIVE_STEP, onStepActive);
 		};
-	}, [on, off, state.activeIndex, state.reachedIndex, contents]);
+	}, [on, off, fireCustomEvent,
+		state.activeIndex, state.reachedIndex,
+		contents, $wrapped.$root, $wrapped.$model
+	]);
 	useEffect(() => {
 		const onCustomEvent = (_: string, prefix: string, clipped: string) => {
 			if (prefix !== GlobalEventPrefix.WIZARD_STEP) {
 				return;
 			}
-			const test = VUtils.isInteger(clipped);
-			if (test.test) {
+			const check = VUtils.isInteger(clipped);
+			if (check.test) {
 				// only one wizard exists, otherwise leads confusion, since every wizard will repsond to this event
-				fire(WizardEventTypes.ACTIVE_STEP, test.value, '');
+				fire(WizardEventTypes.ACTIVE_STEP, check.value, '');
 			} else {
 				// make sure marker is global unique
 				fire(WizardEventTypes.ACTIVE_STEP, -1, (clipped ?? '').trim());

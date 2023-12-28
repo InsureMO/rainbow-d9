@@ -105,9 +105,16 @@ export const useYesNoDialog = (): YesNoDialogHandlers => {
 };
 
 export enum GlobalEventPrefix {
+	// action
 	ALERT = 'alert', DIALOG = 'dialog',
-	WIZARD_STEP = 'wstep',
-	CUSTOM = 'custom'
+	TAB = 'tab', WIZARD_STEP = 'wstep',
+	EXPAND_SECTION = 'expand-section', COLLAPSE_SECTION = 'collapse-section',
+	CUSTOM = 'custom',
+	// post action, after something happened
+	SECTION_EXPANDED = 'section-expanded',
+	SECTION_COLLAPSED = 'section-collapsed',
+	TAB_CHANGED = 'tab-changed',
+	WIZARD_STEP_CHANGED = 'wstep-changed'
 }
 
 export type CustomGlobalEventHandler = <R extends BaseModel, M extends PropValue>(

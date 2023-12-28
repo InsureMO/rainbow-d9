@@ -1,5 +1,6 @@
 import {MUtils, PPUtils, registerWidget, VUtils} from '@rainbow-d9/n1';
 import React, {useEffect, useState} from 'react';
+import {GlobalEventPrefix, GlobalEventTypes, useCustomGlobalEvent, useGlobalEventBus} from '../global';
 import {TabsEventBusProvider, useTabsEventBus} from './event/tabs-event-bus';
 import {TabsEventTypes} from './event/tabs-event-bus-types';
 import {TabBody} from './tab-body';
@@ -23,21 +24,58 @@ const InternalTabs = (props: TabsProps) => {
 	const {$pp, $wrapped, contents, ...rest} = props;
 	const {$p2r, $avs: {$disabled, $visible}} = $wrapped;
 
-	const {on, off} = useTabsEventBus();
+	const {on: onGlobal, off: offGlobal} = useGlobalEventBus();
+	const {on, off, fire} = useTabsEventBus();
 	const [activeIndex, setActiveIndex] = useState(0);
+	const fireCustomEvent = useCustomGlobalEvent();
 	useEffect(() => {
-		const onTabActive = (index: number) => {
-			if (index === activeIndex) {
+		const onTabActive = (index: number, marker: string) => {
+			let found = (contents ?? []).find(content => content.marker === marker);
+			if (found == null) {
+				found = (contents ?? []).find((_, i) => i === index);
+			}
+			if (found == null) {
+				return;
+			}
+			const foundIndex = (contents ?? []).indexOf(found);
+			if (foundIndex === activeIndex) {
 				return;
 			} else {
-				setActiveIndex(index);
+				setActiveIndex(foundIndex);
+				const key = `${GlobalEventPrefix.TAB_CHANGED}:${found.marker ?? ''}`;
+				// noinspection JSIgnoredPromiseFromCall
+				fireCustomEvent(key, GlobalEventPrefix.TAB_CHANGED, found.marker ?? '', {
+					root: $wrapped.$root, model: $wrapped.$model
+				});
 			}
 		};
 		on(TabsEventTypes.ACTIVE_TAB, onTabActive);
 		return () => {
 			off(TabsEventTypes.ACTIVE_TAB, onTabActive);
 		};
-	}, [on, off, activeIndex]);
+	}, [
+		on, off, fireCustomEvent, activeIndex,
+		contents, $wrapped.$root, $wrapped.$model
+	]);
+	useEffect(() => {
+		const onCustomEvent = (_: string, prefix: string, clipped: string) => {
+			if (prefix !== GlobalEventPrefix.TAB) {
+				return;
+			}
+			const check = VUtils.isInteger(clipped);
+			if (check.test) {
+				// only one wizard exists, otherwise leads confusion, since every wizard will repsond to this event
+				fire(TabsEventTypes.ACTIVE_TAB, check.value, '');
+			} else {
+				// make sure marker is global unique
+				fire(TabsEventTypes.ACTIVE_TAB, -1, (clipped ?? '').trim());
+			}
+		};
+		onGlobal(GlobalEventTypes.CUSTOM_EVENT, onCustomEvent);
+		return () => {
+			offGlobal(GlobalEventTypes.CUSTOM_EVENT, onCustomEvent);
+		};
+	}, [onGlobal, offGlobal, fire]);
 
 	return <ATabs {...rest} data-disabled={$disabled} data-visible={$visible}
 	              id={PPUtils.asId(PPUtils.absolute($p2r, $pp), props.id)}>
