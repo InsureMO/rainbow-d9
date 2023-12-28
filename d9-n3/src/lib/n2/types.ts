@@ -25,6 +25,7 @@ export enum N2WidgetType {
 	RIBS = 'Ribs',
 	READONLY_RIBS = 'RibsView',
 
+	TABLE_ROW_OPERATORS = 'RowOperators',
 	TABLE = 'Table',
 
 	SECTION = 'Section',

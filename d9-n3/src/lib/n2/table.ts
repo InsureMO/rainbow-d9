@@ -1,9 +1,15 @@
-import {NodeDef, VUtils} from '@rainbow-d9/n1';
-import {TableHeaderDef} from '@rainbow-d9/n2';
+import {ContainerDef, NodeDef, VUtils} from '@rainbow-d9/n1';
+import {TableDef, TableHeaderDef, TableRowButtonDef} from '@rainbow-d9/n2';
 import {ParsedNodeType} from '../node-types';
 import {ParsedList, ParsedListItemAttributePair, SemanticUtils} from '../semantic';
 import {Undefinable} from '../utility-types';
-import {AttributeValueBuild, CustomAttributeName, SpecificArrayWidgetTranslator, WidgetPropertyName} from '../widget';
+import {
+	AttributeValueBuild,
+	CustomAttributeName,
+	SpecificArrayWidgetTranslator,
+	SpecificWidgetTranslator,
+	WidgetPropertyName
+} from '../widget';
 import {N2WidgetType} from './types';
 
 export const N2TableHeadersBuild: AttributeValueBuild<Array<TableHeaderDef>> = {
@@ -62,6 +68,16 @@ export const N2TableHeadersBuild: AttributeValueBuild<Array<TableHeaderDef>> = {
 	}
 };
 
+export class N2TableRowOperatorsTranslator extends SpecificWidgetTranslator<N2WidgetType.TABLE_ROW_OPERATORS> {
+	public getSupportedType(): N2WidgetType.TABLE_ROW_OPERATORS {
+		return N2WidgetType.TABLE_ROW_OPERATORS;
+	}
+
+	public shouldWrapByFormCell(): boolean {
+		return false;
+	}
+}
+
 export class N2TableTranslator extends SpecificArrayWidgetTranslator<N2WidgetType.TABLE> {
 	public getSupportedType(): N2WidgetType.TABLE {
 		return N2WidgetType.TABLE;
@@ -82,5 +98,14 @@ export class N2TableTranslator extends SpecificArrayWidgetTranslator<N2WidgetTyp
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	getAttributeValueBuilders(): Array<AttributeValueBuild<any>> {
 		return [N2TableHeadersBuild];
+	}
+
+	public postWork<Def extends NodeDef>(def: Partial<Def>): Def {
+		const defs = def as unknown as ContainerDef;
+		const {$nodes} = defs;
+		(defs as unknown as TableDef).rowOperators = (($nodes ?? [])
+			.find(node => node.$wt === N2WidgetType.TABLE_ROW_OPERATORS) as ContainerDef)?.$nodes as Array<TableRowButtonDef>;
+		defs.$nodes = ($nodes ?? []).filter(node => node.$wt !== N2WidgetType.TABLE_ROW_OPERATORS);
+		return defs as unknown as Def;
 	}
 }

@@ -15,7 +15,7 @@ import {N2RadioTranslator} from './radio';
 import {N2RadiosTranslator} from './radios';
 import {N2RibsTranslator, N2RibsViewTranslator} from './ribs';
 import {N2SectionTranslator} from './section';
-import {N2TableTranslator} from './table';
+import {N2TableRowOperatorsTranslator, N2TableTranslator} from './table';
 import {N2TabsTranslator, N2TabTranslator} from './tabs';
 import {N2TextareaTranslator} from './textarea';
 import {N2WizardSharedTranslator, N2WizardStepTranslator, N2WizardTranslator} from './wizard';
@@ -48,7 +48,10 @@ export const registerN2Widgets = (widgetHelper?: WidgetHelper) => {
 
 	repo.register(new N2RibsTranslator(repo));
 	repo.register(new N2RibsViewTranslator(repo));
+
+	repo.register(new N2TableRowOperatorsTranslator(repo));
 	repo.register(new N2TableTranslator(repo));
+
 	repo.register(new N2SectionTranslator(repo));
 
 	repo.register(new N2TabTranslator(repo));
