@@ -6,13 +6,11 @@ import {toCssSize} from '../utils';
 export const ATable = styled.div.attrs(({id}) => {
 	return {
 		[DOM_KEY_WIDGET]: 'd9-table',
-		[DOM_ID_WIDGET]: id,
-		'data-v-scroll': ''
+		[DOM_ID_WIDGET]: id
 	};
 })`
     display: block;
     position: relative;
-    overflow: hidden;
 
     &[data-visible=false] {
         display: none;

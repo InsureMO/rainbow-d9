@@ -103,7 +103,7 @@ export const useAttributesWatch = (options: {
 								// clear value
 								const oldValue = MUtils.setValue(props.$model, props.$pp, null);
 								// fire value change event, validation is not necessary here since it is reaction
-								fire(RootEventTypes.VALUE_CHANGED, myAbsolutePath, oldValue, null);
+								fire && fire(RootEventTypes.VALUE_CHANGED, myAbsolutePath, oldValue, null);
 								// assign a unique id, leading repaint
 								ret = {name, value: VUtils.generateUniqueId()};
 							}
@@ -116,7 +116,7 @@ export const useAttributesWatch = (options: {
 							reactions.filter(reaction => ![Reaction.CLEAR_VALUE, Reaction.REPAINT].includes(reaction))
 								.forEach(reaction => {
 									// fire wrapped event
-									fireWrapper(WrapperEventTypes.UNHANDLED_REACTION_OCCURRED, reaction);
+									fireWrapper && fireWrapper(WrapperEventTypes.UNHANDLED_REACTION_OCCURRED, reaction);
 								});
 							return ret;
 						}

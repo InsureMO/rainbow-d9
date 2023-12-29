@@ -55,7 +55,7 @@ export const useValidate = (options: {
 					// validation result changed
 					setAttributeValues(attributes => ({...attributes, [MonitorNodeAttributes.VALID]: result}));
 				}
-				fire(RootEventTypes.VALIDATED, {
+				fire && fire(RootEventTypes.VALIDATED, {
 					root: props.$root, model: props.$model,
 					pathToRoot: props.$p2r, propertyPath: props.$pp, absolutePath, value: to,
 					...result
@@ -68,7 +68,7 @@ export const useValidate = (options: {
 					delete attrs[MonitorNodeAttributes.VALID];
 					return attrs;
 				});
-				fire(RootEventTypes.VALIDATED, {
+				fire && fire(RootEventTypes.VALIDATED, {
 					root: props.$root, model: props.$model,
 					pathToRoot: props.$p2r, propertyPath: props.$pp,
 					absolutePath: PPUtils.absolute(props.$p2r, props.$pp),
@@ -107,7 +107,7 @@ export const useValidationRegistration = (options: {
 		}
 		if (attributeValues[MonitorNodeAttributes.DISABLED] === true || attributeValues[MonitorNodeAttributes.VISIBLE] === false) {
 			// is disabled or not visible, validation is no longer relevant
-			fireRoot(RootEventTypes.UNREGISTER_VALIDATABLE, uniqueId);
+			fireRoot && fireRoot(RootEventTypes.UNREGISTER_VALIDATABLE, uniqueId);
 			fireContainer && fireContainer(ContainerEventTypes.UNREGISTER_VALIDATABLE, uniqueId);
 			fireArrayElement && fireArrayElement(ArrayElementEventTypes.UNREGISTER_VALIDATABLE, uniqueId);
 			return;
@@ -139,11 +139,11 @@ export const useValidationRegistration = (options: {
 				}
 			});
 		};
-		fireRoot(RootEventTypes.REGISTER_VALIDATABLE, uniqueId, scopes, validate);
+		fireRoot && fireRoot(RootEventTypes.REGISTER_VALIDATABLE, uniqueId, scopes, validate);
 		fireContainer && fireContainer(ContainerEventTypes.REGISTER_VALIDATABLE, uniqueId, validate);
 		fireArrayElement && fireArrayElement(ArrayElementEventTypes.REGISTER_VALIDATABLE, uniqueId, validate);
 		return () => {
-			fireRoot(RootEventTypes.UNREGISTER_VALIDATABLE, uniqueId);
+			fireRoot && fireRoot(RootEventTypes.UNREGISTER_VALIDATABLE, uniqueId);
 			fireContainer && fireContainer(ContainerEventTypes.UNREGISTER_VALIDATABLE, uniqueId);
 			fireArrayElement && fireArrayElement(ArrayElementEventTypes.UNREGISTER_VALIDATABLE, uniqueId);
 		};
@@ -161,7 +161,7 @@ export const useValidationFunctions = (def: NodeDef): ValidationFunctions => {
 
 	const validate = (scopes: Array<NodeValidationScope>): Promise<ValidatedSet> => {
 		return new Promise<ValidatedSet>(resolve => {
-			fireRoot(RootEventTypes.VALIDATE, scopes ?? [], resolve);
+			fireRoot && fireRoot(RootEventTypes.VALIDATE, scopes ?? [], resolve);
 		});
 	};
 

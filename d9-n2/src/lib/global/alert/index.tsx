@@ -42,7 +42,7 @@ export const Alert = () => {
 		};
 	}, [on, off, alert.content, alert.onHide, alert.visible]);
 
-	const onHideClicked = () => fire(GlobalEventTypes.HIDE_ALERT);
+	const onHideClicked = () => fire && fire(GlobalEventTypes.HIDE_ALERT);
 
 	return <AlertContainer visible={alert.visible}>
 		<AlertDialog visible={alert.visible}>

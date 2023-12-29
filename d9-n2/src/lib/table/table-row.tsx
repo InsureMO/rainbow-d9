@@ -1,4 +1,4 @@
-import {BaseModel, Enhance$WrappedPropsForArrayElement, EnhancedPropsForArrayElement, NUtils} from '@rainbow-d9/n1';
+import {Enhance$WrappedPropsForArrayElement, EnhancedPropsForArrayElement, NUtils} from '@rainbow-d9/n1';
 import React, {Children, useEffect, useRef, useState} from 'react';
 import {guardPaginationData} from '../pagination';
 import {useTableEventBus} from './event/table-event-bus';
@@ -143,10 +143,11 @@ export const TableRow = (props: TableRowProps) => {
 	})();
 
 	const computeRowIndexOffset = () => {
-		if (pageable == null) {
+		if (pageable?.valueChanged == null) {
+			// no pagination, or in-memory pagination
 			return rowIndexStartsFrom;
 		} else {
-			const data = guardPaginationData($wrapped.$model as BaseModel, pageable.$pp);
+			const data = guardPaginationData($wrapped.$arrayHolder, pageable.$pp);
 			return (data.pageNumber - 1) * data.pageSize + 1;
 		}
 	};

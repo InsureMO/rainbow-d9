@@ -19,18 +19,18 @@ export const RemoteRequest = (props: {
 	const forceUpdate = useForceUpdate();
 	useEffect(() => {
 		const on401 = () => {
-			fire(GlobalEventTypes.SHOW_ALERT, <AlertLabel>Unauthorized.</AlertLabel>, () => {
+			fire && fire(GlobalEventTypes.SHOW_ALERT, <AlertLabel>Unauthorized.</AlertLabel>, () => {
 				clearAccount();
 				doOn401();
 			});
 		};
 		const on403 = () => {
-			fire(GlobalEventTypes.SHOW_ALERT, <AlertLabel>Access denied.</AlertLabel>, () => {
+			fire && fire(GlobalEventTypes.SHOW_ALERT, <AlertLabel>Access denied.</AlertLabel>, () => {
 				doOn403();
 			});
 		};
 		const onOtherError = () => {
-			fire(GlobalEventTypes.SHOW_ALERT, <AlertLabel>
+			fire && fire(GlobalEventTypes.SHOW_ALERT, <AlertLabel>
 				Unpredicted error occurred, contact your administrator for more details.
 			</AlertLabel>);
 		};

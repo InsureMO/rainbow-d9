@@ -109,7 +109,7 @@ export const Pagination = forwardRef((props: PaginationProps, ref: ForwardedRef<
 		if (options.length === 1) {
 			return [];
 		} else {
-			return options;
+			return options.sort((a, b) => a.value - b.value);
 		}
 	})();
 	const onPageSizeChanged = async (pageSize: PropValue) => {

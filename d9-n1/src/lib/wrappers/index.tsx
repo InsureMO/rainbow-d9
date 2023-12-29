@@ -1,6 +1,12 @@
 import React, {Dispatch, SetStateAction, useEffect, useState} from 'react';
-import {ArrayElementEventBusProvider, ContainerEventBusProvider, WrapperEventBusProvider} from '../events';
-import {ArrayElementValidationEventHolder, ContainerValidationEventHolder, useSetValue} from '../hooks';
+import {
+	ArrayElementEventBusProvider,
+	ContainerEventBusProvider,
+	useWrapperEventBus,
+	WrapperEventBusProvider,
+	WrapperEventTypes
+} from '../events';
+import {ArrayElementValidationEventHolder, ContainerValidationEventHolder, useForceUpdate, useSetValue} from '../hooks';
 import {
 	ArrayContainerDef,
 	ArrayContainerWidgetProps,
@@ -119,13 +125,19 @@ export const ArrayElement = (props: {
 
 	return <ArrayElementEventBusProvider>
 		<ArrayElementValidationEventHolder/>
-		<ElementContainer $wrapped={{...$wrapped, $array: elements, $p2r, $model: elementModel}}
-		                  $array={enhancedForElement} {...rest}>
+		<ElementContainer
+			$wrapped={{
+				...$wrapped, $arrayHolder: $wrapped.$model as BaseModel, $array: elements, $p2r, $model: elementModel
+			}}
+			$array={enhancedForElement} {...rest}>
 			{renderContainerChildren({
 				def: originalProps, childrenDefs, keys,
-				// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-				// @ts-ignore
-				$wrapped: {...$wrapped, $array: elements, $p2r, $model: elementModel}
+				$wrapped: {
+					// eslint-disable-next-line  @typescript-eslint/ban-ts-comment
+					// @ts-ignore
+					...$wrapped, $arrayHolder: $wrapped.$model as BaseModel, $array: elements,
+					$p2r, $model: elementModel
+				}
 			})}
 		</ElementContainer>
 	</ArrayElementEventBusProvider>;
@@ -241,10 +253,19 @@ export const WrapperDelegateWorker = (workerProps: NodeDef & ModelHolder & Defau
 		...rest
 	} = workerProps;
 	const props: NodeDef & ModelHolder = {$wt, ...rest};
+
+	const {on, off} = useWrapperEventBus();
 	const validators = useValidationFunctions(props);
 	useAttributesWatch({props, attributeValues, setAttributeValues});
 	useValidate({props, attributeValues, setAttributeValues});
 	useValidationRegistration({props, attributeValues, setAttributeValues});
+	const forceUpdate = useForceUpdate();
+	useEffect(() => {
+		on(WrapperEventTypes.REPAINT, forceUpdate);
+		return () => {
+			off(WrapperEventTypes.REPAINT, forceUpdate);
+		};
+	}, [on, off, forceUpdate]);
 
 	if (VUtils.isBlank($wt)) {
 		N1Logger.error(`Type must be declared, current is [${$wt}].`, 'WrapperDelegate');

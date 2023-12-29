@@ -30,7 +30,7 @@ export const useRemoteRequest = (): RemoteRequestHandlers => {
 					reject();
 				} else {
 					// success -> resolve; otherwise -> reject
-					fire(GlobalEventTypes.INVOKE_REMOTE_REQUEST, request, resolve, reject, disableAlert);
+					fire && fire(GlobalEventTypes.INVOKE_REMOTE_REQUEST, request, resolve, reject, disableAlert);
 				}
 			});
 		};
@@ -65,7 +65,7 @@ export const useAlert = (): AlertHandlers => {
 					if (fire == null) {
 						resolve();
 					} else {
-						fire(GlobalEventTypes.SHOW_ALERT, content, resolve);
+						fire && fire(GlobalEventTypes.SHOW_ALERT, content, resolve);
 					}
 				});
 			},
@@ -115,7 +115,7 @@ export const useYesNoDialog = (): YesNoDialogHandlers => {
 					if (fire == null) {
 						reject();
 					} else {
-						fire(GlobalEventTypes.SHOW_YES_NO_DIALOG, content, resolve, reject);
+						fire && fire(GlobalEventTypes.SHOW_YES_NO_DIALOG, content, resolve, reject);
 					}
 				});
 			},

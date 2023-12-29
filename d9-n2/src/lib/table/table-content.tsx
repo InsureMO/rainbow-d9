@@ -1,4 +1,13 @@
-import {BaseModel, EnhancedPropsForArray, MUtils, PPUtils, PropValue, useForceUpdate} from '@rainbow-d9/n1';
+import {
+	BaseModel,
+	EnhancedPropsForArray,
+	MUtils,
+	PPUtils,
+	PropValue,
+	useForceUpdate,
+	useWrapperEventBus,
+	WrapperEventTypes
+} from '@rainbow-d9/n1';
 import {Nullable} from '@rainbow-d9/n3';
 import React, {Children, useEffect} from 'react';
 import {guardPaginationData, PaginationData} from '../pagination';
@@ -16,6 +25,7 @@ export const TableContent = (props: Omit<TableProps, '$array'> & { $array: Enhan
 		children
 	} = props;
 
+	const {fire: fireWrapper} = useWrapperEventBus();
 	const {on, off, fire} = useTableEventBus();
 	const forceUpdate = useForceUpdate();
 	useEffect(() => {
@@ -24,24 +34,38 @@ export const TableContent = (props: Omit<TableProps, '$array'> & { $array: Enhan
 		}
 
 		const shouldCallExternal = pageable.valueChanged != null;
+		/**
+		 * return true represents did call external and notify wrapper to repaint.
+		 * return false represents it did nothing
+		 */
 		const callExternal = async (from: Nullable<PaginationData>, to: PaginationData) => {
 			if (shouldCallExternal) {
 				await pageable.valueChanged({
 					absolutePath: PPUtils.absolute($p2r, pageable.$pp),
 					oldValue: from as unknown as PropValue, newValue: to as unknown as PropValue
 				});
+				// data changed, and react nodes for rows are created in wrapper.
+				// which means refresh itself is helpless, therefore fire a repaint event to wrapper
+				fireWrapper && fireWrapper(WrapperEventTypes.REPAINT);
+				return true;
+			} else {
+				return false;
 			}
 		};
 		const onPageChanged = async (from: Nullable<PaginationData>, to: PaginationData) => {
 			// call external function to update data, and force update
-			await callExternal(from, to);
-			forceUpdate();
+			if (!(await callExternal(from, to))) {
+				// data not changed, force update to filter out items for this page
+				forceUpdate();
+			}
 		};
 		const onFilterChanged = async () => {
 			const data = MUtils.getValue($model, pageable.$pp) as unknown as PaginationData;
 			// call external function to update data, and force update
-			await callExternal(data, data);
-			fire(TableEventTypes.PAGE_CHANGED_BY_FILTER, data);
+			if (!(await callExternal(data, data))) {
+				forceUpdate();
+				fire(TableEventTypes.PAGE_CHANGED_BY_FILTER, data);
+			}
 		};
 		on(TableEventTypes.PAGE_CHANGED, onPageChanged);
 		on(TableEventTypes.FILTER_CHANGED, onFilterChanged);
@@ -49,7 +73,7 @@ export const TableContent = (props: Omit<TableProps, '$array'> & { $array: Enhan
 			off(TableEventTypes.PAGE_CHANGED, onPageChanged);
 			off(TableEventTypes.FILTER_CHANGED, onFilterChanged);
 		};
-	}, [on, off, fire, pageable, $model, $p2r, forceUpdate]);
+	}, [fireWrapper, on, off, fire, forceUpdate, pageable, $model, $p2r]);
 
 	const {columnsWidth, tailGrabberAppended, stickyOffsets} = computeColumnsWidth(props);
 

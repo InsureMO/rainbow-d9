@@ -45,7 +45,7 @@ export type EnhancePropsForArray<T> = T & { $array: EnhancedPropsForArray };
 export type EnhancePropsForArrayBody<T extends Omit<ArrayContainerWidgetProps, '$array'>> = EnhancePropsForArray<Omit<T, '$array'>>;
 export type EnhancePropsForArrayNotBody<T extends Omit<ArrayContainerWidgetProps, '$array'>> = EnhancePropsForArray<Omit<T, 'children' | '$array'>>;
 export type Enhance$WrappedPropsForArrayElement<T extends WidgetProps> = Omit<T, '$wrapped'> & {
-	$wrapped: T['$wrapped'] & { $array: Array<BaseModel> }
+	$wrapped: T['$wrapped'] & { $arrayHolder: BaseModel; $array: Array<BaseModel> }
 }
 export type EnhancePropsForArrayElement<T extends WidgetProps> = Enhance$WrappedPropsForArrayElement<T> & {
 	$array: EnhancedPropsForArrayElement

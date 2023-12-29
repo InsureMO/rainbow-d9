@@ -37,9 +37,9 @@ export const useValueChanged = (): OnValueChanged => {
 				// clear cached old value
 				delete values[absolutePath];
 				// notify value change first
-				fire(RootEventTypes.VALUE_CHANGED, absolutePath, oldValue, newValue);
+				fire && fire(RootEventTypes.VALUE_CHANGED, absolutePath, oldValue, newValue);
 				// do my validation
-				fireWrapper(WrapperEventTypes.VALIDATE, oldValue, newValue);
+				fireWrapper && fireWrapper(WrapperEventTypes.VALIDATE, oldValue, newValue);
 				resolve();
 			});
 		}, VALUE_CHANGED_OPTIONS.DELAY_MS);
