@@ -1,5 +1,4 @@
 import {EnhancedPropsForArray, useForceUpdate, Wrapper} from '@rainbow-d9/n1';
-import {Nullable} from '@rainbow-d9/n3';
 import React, {useEffect} from 'react';
 import {Button, ButtonInk} from '../button';
 import {I18NVars} from '../constants';
@@ -36,7 +35,7 @@ export const TableBottomBar = (props: Omit<TableProps, '$array'> & { $array: Enh
 		const onAddClicked = async () => await addElement();
 		// it will refresh the pagination first, model updated
 		const onPaginationChanged = async (options: {
-			oldValue: Nullable<PaginationData>; newValue: PaginationData;
+			oldValue?: PaginationData | null; newValue: PaginationData;
 		}) => {
 			fire(TableEventTypes.PAGE_CHANGED, options.oldValue, options.newValue);
 		};

@@ -1,2 +1,3 @@
-export type Nullable<T> = T | null | undefined;
-export type Undefinable<T> = T | undefined;
+import {Nullable, Undefinable} from '@rainbow-d9/n1';
+
+export {Nullable, Undefinable};

@@ -8,7 +8,6 @@ import {
 	useWrapperEventBus,
 	WrapperEventTypes
 } from '@rainbow-d9/n1';
-import {Nullable} from '@rainbow-d9/n3';
 import React, {Children, useEffect} from 'react';
 import {guardPaginationData, PaginationData} from '../pagination';
 import {useTableEventBus} from './event/table-event-bus';
@@ -38,7 +37,7 @@ export const TableContent = (props: Omit<TableProps, '$array'> & { $array: Enhan
 		 * return true represents did call external and notify wrapper to repaint.
 		 * return false represents it did nothing
 		 */
-		const callExternal = async (from: Nullable<PaginationData>, to: PaginationData) => {
+		const callExternal = async (from: PaginationData | null | undefined, to: PaginationData) => {
 			if (shouldCallExternal) {
 				await pageable.valueChanged({
 					absolutePath: PPUtils.absolute($p2r, pageable.$pp),
@@ -52,7 +51,7 @@ export const TableContent = (props: Omit<TableProps, '$array'> & { $array: Enhan
 				return false;
 			}
 		};
-		const onPageChanged = async (from: Nullable<PaginationData>, to: PaginationData) => {
+		const onPageChanged = async (from: PaginationData | null | undefined, to: PaginationData) => {
 			// call external function to update data, and force update
 			if (!(await callExternal(from, to))) {
 				// data not changed, force update to filter out items for this page
