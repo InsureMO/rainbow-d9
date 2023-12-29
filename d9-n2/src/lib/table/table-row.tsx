@@ -49,8 +49,26 @@ export const TableRow = (props: TableRowProps) => {
 		};
 	}, [on, off, fire, elementIndex, removeElement]);
 	useEffect(() => {
-		if (expanded) {
-			expandAreaRef.current?.scrollIntoView({behavior: 'smooth'});
+		if (expanded && expandAreaRef.current != null) {
+			const contentDiv: HTMLDivElement = expandAreaRef.current.closest('div[data-w=d9-table-content]');
+			const {top, height} = contentDiv.getBoundingClientRect();
+			const {height: headerHeight} = contentDiv.querySelector('div[data-w=d9-table-header-cell]:first-child').getBoundingClientRect();
+			const {top: expandAreaTop, height: expandedAreaHeight} = expandAreaRef.current.getBoundingClientRect();
+			if (top + height >= expandAreaTop + expandedAreaHeight) {
+				// no need to scroll
+				return;
+			}
+			const previousDiv = expandAreaRef.current.previousSibling as HTMLDivElement;
+			const {top: previousTop} = previousDiv.getBoundingClientRect();
+			const offset = expandAreaTop - previousTop;
+			// don't know why header height must count in, maybe impacted by headers are sticky position
+			if (expandedAreaHeight + offset > height - headerHeight) {
+				// cannot show whole expanded area, try to align this row to top
+				contentDiv.scrollTo({top: previousDiv.offsetTop - headerHeight});
+			} else {
+				// can show whole expanded area, try to align the expanded area to bottom
+				contentDiv.scrollTo({top: previousDiv.offsetTop + expandedAreaHeight + offset - contentDiv.clientHeight + 1});
+			}
 		}
 	}, [expanded]);
 
