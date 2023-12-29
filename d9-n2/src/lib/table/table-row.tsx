@@ -1,5 +1,6 @@
-import {Enhance$WrappedPropsForArrayElement, EnhancedPropsForArrayElement, NUtils} from '@rainbow-d9/n1';
+import {BaseModel, Enhance$WrappedPropsForArrayElement, EnhancedPropsForArrayElement, NUtils} from '@rainbow-d9/n1';
 import React, {Children, useEffect, useRef, useState} from 'react';
+import {guardPaginationData} from '../pagination';
 import {useTableEventBus} from './event/table-event-bus';
 import {TableEventTypes} from './event/table-event-bus-types';
 import {TableRowOperators} from './table-row-operators';
@@ -16,7 +17,7 @@ export const TableRow = (props: TableRowProps) => {
 		headers, expandable = false, hideClassicCellsOnExpandable = false, clickToExpand = false,
 		rowIndexStartsFrom = 1, omitDefaultRowOperators, rowOperators,
 		$wrapped,
-		$array: {removable, elementIndex, removeElement},
+		$array: {removable, elementIndex, removeElement}, pageable,
 		children
 	} = props;
 
@@ -141,9 +142,18 @@ export const TableRow = (props: TableRowProps) => {
 		}
 	})();
 
+	const computeRowIndexOffset = () => {
+		if (pageable == null) {
+			return rowIndexStartsFrom;
+		} else {
+			const data = guardPaginationData($wrapped.$model as BaseModel, pageable.$pp);
+			return (data.pageNumber - 1) * data.pageSize + 1;
+		}
+	};
+
 	return <>
 		<ATableBodyRowIndexCell rowIndex={elementIndex} rowSpan={indexRowSpan}>
-			<span>{elementIndex + rowIndexStartsFrom}</span>
+			<span>{elementIndex + computeRowIndexOffset()}</span>
 		</ATableBodyRowIndexCell>
 		{classic}
 		<TableRowOperators expandable={expandable} removable={removable} rowIndex={elementIndex}

@@ -32,16 +32,14 @@ export const TableContent = (props: Omit<TableProps, '$array'> & { $array: Enhan
 				});
 			}
 		};
-		// TODO IF THERE IS FILTER, PAGEABLE AND IN-MEMORY, HOW TO KEEP THE ORIGINAL PAGEABLE DATA?
 		const onPageChanged = async (from: Nullable<PaginationData>, to: PaginationData) => {
+			// call external function to update data, and force update
 			await callExternal(from, to);
 			forceUpdate();
 		};
 		const onFilterChanged = async () => {
-			//TODO
-			// 1. CALL EXTERNAL FUNCTION TO UPDATE DATA, AND FORCE UPDATE
-			// 2. OR FIND THE RENDERING ELEMENT INDEXES IF IT IS IN-MEMORY, IT MIGHT CHANGE THE PAGINATION DATA
 			const data = MUtils.getValue($model, pageable.$pp) as unknown as PaginationData;
+			// call external function to update data, and force update
 			await callExternal(data, data);
 			fire(TableEventTypes.PAGE_CHANGED_BY_FILTER, data);
 		};
@@ -61,7 +59,12 @@ export const TableContent = (props: Omit<TableProps, '$array'> & { $array: Enhan
 	const rows = (() => {
 		if (!hasPagination || isCallExternal) {
 			// no pagination or all data from external, only one page exists
-			return children;
+			if (shouldFilter) {
+				// TODO FILTER DATA, WILL NOT CHANGE PAGINATION DATA
+				return children;
+			} else {
+				return children;
+			}
 		}
 		const data = guardPaginationData($model as BaseModel, pageable.$pp);
 		const startIndex = (data.pageNumber - 1) * data.pageSize;
@@ -76,7 +79,7 @@ export const TableContent = (props: Omit<TableProps, '$array'> & { $array: Enhan
 				}
 			}).filter(child => child != null);
 		} else {
-			// TODO filter
+			//TODO FILTER DATA IN-MEMORY, HOW TO KEEP THE ORIGINAL PAGEABLE DATA?
 			return children;
 		}
 	})();
