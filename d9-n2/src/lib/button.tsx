@@ -1,4 +1,13 @@
-import {BaseModel, NodeDef, PPUtils, PropValue, registerWidget, VUtils, WidgetProps} from '@rainbow-d9/n1';
+import {
+	BaseModel,
+	Enhance$WrappedPropsForArrayElement,
+	NodeDef,
+	PPUtils,
+	PropValue,
+	registerWidget,
+	VUtils,
+	WidgetProps
+} from '@rainbow-d9/n1';
 import React, {ForwardedRef, forwardRef, MouseEvent, ReactNode} from 'react';
 import styled from 'styled-components';
 import {CssVars, DOM_ID_WIDGET, DOM_KEY_WIDGET} from './constants';
@@ -441,8 +450,9 @@ export const Button = forwardRef((props: ButtonProps, ref: ForwardedRef<HTMLButt
 		// noinspection JSDeprecatedSymbols
 		head, text, tail, ink = ButtonInk.PRIMARY, fill = ButtonFill.FILL, click,
 		leads, tails,
-		$wrapped: {$root, $model, $p2r, $avs: {$disabled, $visible}, $vfs}, ...rest
+		$wrapped, ...rest
 	} = props;
+	const {$root, $model, $p2r, $avs: {$disabled, $visible}, $vfs} = $wrapped;
 
 	const globalHandlers = useGlobalHandlers();
 	const onClicked = async (event: MouseEvent<HTMLButtonElement>) => {
@@ -453,7 +463,14 @@ export const Button = forwardRef((props: ButtonProps, ref: ForwardedRef<HTMLButt
 			return;
 		}
 
-		click && await click({root: $root, model: $model, validators: $vfs, global: globalHandlers}, event);
+		const $mightInArray$wrapped = $wrapped as unknown as Enhance$WrappedPropsForArrayElement<ButtonProps>['$wrapped'];
+		click && await click({
+			root: $root, model: $model,
+			// eslint-disable-next-line  @typescript-eslint/ban-ts-comment
+			// @ts-ignore
+			$arrayHolder: $mightInArray$wrapped.$arrayHolder, $array: $mightInArray$wrapped.$array,
+			validators: $vfs, global: globalHandlers
+		}, event);
 	};
 
 	const transformedLeads = transformDecorators(leads);

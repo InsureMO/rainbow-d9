@@ -1,4 +1,14 @@
-import {BaseModel, MUtils, NodeDef, PPUtils, PropValue, registerWidget, VUtils, WidgetProps} from '@rainbow-d9/n1';
+import {
+	BaseModel,
+	Enhance$WrappedPropsForArrayElement,
+	MUtils,
+	NodeDef,
+	PPUtils,
+	PropValue,
+	registerWidget,
+	VUtils,
+	WidgetProps
+} from '@rainbow-d9/n1';
 import dayjs from 'dayjs';
 import React, {ForwardedRef, forwardRef, isValidElement, MouseEvent, ReactNode} from 'react';
 import styled from 'styled-components';
@@ -251,7 +261,14 @@ export const Caption = forwardRef((props: CaptionProps, ref: ForwardedRef<HTMLSp
 				return;
 			}
 
-			click && await click({root: $root, model: $model, validators: $vfs, global: globalHandlers}, event);
+			const $mightInArray$wrapped = $wrapped as unknown as Enhance$WrappedPropsForArrayElement<CaptionProps>['$wrapped'];
+			click && await click({
+				root: $root, model: $model,
+				// eslint-disable-next-line  @typescript-eslint/ban-ts-comment
+				// @ts-ignore
+				$arrayHolder: $mightInArray$wrapped.$arrayHolder, $array: $mightInArray$wrapped.$array,
+				validators: $vfs, global: globalHandlers
+			}, event);
 		}
 		: (void 0);
 
