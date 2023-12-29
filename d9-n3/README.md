@@ -715,6 +715,35 @@ disabled.
 > It is important to note that for `disabled` and `visible`, the `handle` definition will also be called as a default value calculation.
 > Therefore, please note that within the `handle` function body, only the `root`, `model`, and `value` arguments are applicable.
 
+#### Validation
+
+In addition to the built-in validation rules, you can also customize validation rules in the same way as `Disablement` and `Visibility`.
+However, `Validation` can choose not to listen to any other property changes. If defined, it will be applied to all validation rules.
+
+> `Validation` can also be defined with only the listening properties without defining any rules.
+
+Here is a simple example:
+
+```markdown
+- Input::Property D::propD
+	- required
+	- validate:
+		- on: propA
+		- handle:
+		  ```javascript
+		  if (VUtils.isBlank(model.propA)) {
+		    return value === 'blank' ? {valid: true}: {valid:false, failReason: 'A is blank, D should be "blank".'};
+		  } else if (VUtils.isNumber(model.propA).test) {
+		    return value === 'number' ? {valid: true}: {valid:false, failReason: 'A is number, D should be "number".'};
+		  } else {
+		    return value === 'string' ? {valid: true}: {valid:false, failReason: 'A is string, D should be "string"'};
+		  }       
+		  ```
+```
+
+The above definition means that property `D` is required and its value must have a certain mapping relationship with the type of
+property `A`.
+
 ## Page
 
 Strictly adhere to the heading parsing rules without any additional attribute definitions.
@@ -1184,6 +1213,17 @@ Some examples:
 	- alignment: center
 ```
 
+## Pagination
+
+- Default Wrapped by Form Cell: `false`,
+- Default Grid Column Span: `12`.
+
+| Attribute Name       | Type         | Description                                             |
+|----------------------|--------------|---------------------------------------------------------|
+| freeWalk             | boolean      | `- freeWalk`, render a dropdown for choose page number. |
+| maxButtons           | number       | `- maxButtons: 5`, how many page number buttons.        |
+| sizes, possibleSizes | number array | `- sizes: 5;10`, split by `;`.                          |
+
 ## Ribs, RibsView
 
 - Default Wrapped by Form Cell: `false`,
@@ -1253,6 +1293,7 @@ Some examples:
 | elementRemoved               | function                  | From external definition only, starts with `@ext.`.<br/>Not available for `RibsView`.                                                                                                                                |
 | couldRemoveElement           | function                  | From external definition only, starts with `@ext.`.<br/>Not available for `RibsView`.                                                                                                                                |
 | getElementKey                | function                  | From external definition only, starts with `@ext.`.                                                                                                                                                                  |
+| Pagination                   | various                   |                                                                                                                                                                                                                      |
 
 ### Syntax of `headers`
 
@@ -1321,6 +1362,37 @@ the default behavior, you can use `prebuilt` to specify. Note that after specify
 		- fill: plain
 		- tails: $icons.collapse
 		- prebuilt: collapse
+```
+
+### Syntax of `Pagination`
+
+Just like the standard 'Pagination' definition, if the 'valueChanged' definition represents that the data source comes from outside, only
+retrieve the data for the current page when the pagination changes.
+
+```markdown
+### Table::
+
+- Pagination::::pageable
+	- freeWalk
+	- maxButtons: 3
+	- sizes: 5;10;15
+	- valueChanged: @ext.table2.onPageChanged
+```
+
+The `property` of `Pagination` is very important. It uses the model of `Table` and obtains a `Pagination` model from this model. If it fails
+to obtain one, it creates a default one and writes it back to the model of `Table`. The default model is as follows:
+
+```typescript
+export interface PaginationData {
+	// default 20
+	pageSize: number;
+	// default 1, starts from 1
+	pageNumber: number;
+	// default 1, event there is no data
+	pageCount: number;
+	// no value represents unknown
+	itemCount: number;
+}
 ```
 
 # Logger
