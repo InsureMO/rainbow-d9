@@ -1,9 +1,13 @@
+import {PaginationData} from '../../pagination';
+
 export enum TableEventTypes {
 	EXPAND_ROW = 'expand-row',
 	ROW_EXPANDED = 'row-expanded',
 	COLLAPSE_ROW = 'collapse-row',
 	ROW_COLLAPSED = 'row-collapsed',
 	REMOVE_ROW = 'remove-row',
+
+	PAGE_CHANGED = 'page-changed'
 }
 
 export interface TableEventBus {
@@ -36,4 +40,10 @@ export interface TableEventBus {
 	on(type: TableEventTypes.REMOVE_ROW, listener: (elementIndex: number) => void): this;
 
 	off(type: TableEventTypes.REMOVE_ROW, listener: (elementIndex: number) => void): this;
+
+	fire(type: TableEventTypes.PAGE_CHANGED, pageable: PaginationData): this;
+
+	on(type: TableEventTypes.PAGE_CHANGED, listener: (pageable: PaginationData) => void): this;
+
+	off(type: TableEventTypes.PAGE_CHANGED, listener: (pageable: PaginationData) => void): this;
 }

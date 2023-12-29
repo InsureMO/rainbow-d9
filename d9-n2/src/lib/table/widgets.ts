@@ -242,7 +242,7 @@ export const ATableBodyCellExpandArea = styled.div.attrs<{
 		};
 	}) <{ columnsCount: number; expanded: boolean }>`
     display: grid;
-    position: relative;
+    position: sticky;
     grid-template-columns: repeat(${CssVars.GRID_COLUMNS}, calc((100% - ${CssVars.GRID_COLUMN_GAP} * (${CssVars.GRID_COLUMNS} - 1)) / ${CssVars.GRID_COLUMNS}));
     grid-column-gap: ${CssVars.GRID_COLUMN_GAP};
     grid-row-gap: ${CssVars.GRID_ROW_GAP};
@@ -255,4 +255,15 @@ export const ATableBottomBar = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-table-bot
     align-items: center;
     justify-content: flex-end;
     height: ${CssVars.TABLE_FOOTER_HEIGHT};
+
+    > div[data-w=d9-pagination] {
+        flex-grow: 1;
+    }
+`;
+export const ATableBottomBarSeparator = styled.span.attrs({[DOM_KEY_WIDGET]: 'd9-table-bottom-bar-separator'})`
+    display: block;
+    position: relative;
+    margin: 0 12px;
+    border: ${CssVars.BORDER};
+    height: calc(${CssVars.INPUT_HEIGHT} * 0.6);
 `;

@@ -1,5 +1,5 @@
 import {ContainerDef, NodeDef, VUtils} from '@rainbow-d9/n1';
-import {TableDef, TableHeaderDef, TableRowButtonDef} from '@rainbow-d9/n2';
+import {PaginationDef, TableDef, TableHeaderDef, TableRowButtonDef} from '@rainbow-d9/n2';
 import {ParsedNodeType} from '../node-types';
 import {ParsedList, ParsedListItemAttributePair, SemanticUtils} from '../semantic';
 import {Undefinable} from '../utility-types';
@@ -105,7 +105,11 @@ export class N2TableTranslator extends SpecificArrayWidgetTranslator<N2WidgetTyp
 		const {$nodes} = defs;
 		(defs as unknown as TableDef).rowOperators = (($nodes ?? [])
 			.find(node => node.$wt === N2WidgetType.TABLE_ROW_OPERATORS) as ContainerDef)?.$nodes as Array<TableRowButtonDef>;
-		defs.$nodes = ($nodes ?? []).filter(node => node.$wt !== N2WidgetType.TABLE_ROW_OPERATORS);
+		(defs as unknown as TableDef).pageable = (($nodes ?? [])
+			.find(node => node.$wt === N2WidgetType.PAGINATION) as ContainerDef) as PaginationDef;
+		defs.$nodes = ($nodes ?? []).filter(node => {
+			return node.$wt !== N2WidgetType.TABLE_ROW_OPERATORS && node.$wt !== N2WidgetType.PAGINATION;
+		});
 		return defs as unknown as Def;
 	}
 }

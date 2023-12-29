@@ -13,14 +13,14 @@ type UnwrappedInputProps =
 };
 
 const UnwrappedInput = forwardRef((props: UnwrappedInputProps, ref: ForwardedRef<HTMLInputElement>) => {
-	const {value, onValueChange, disabled, visible, ...rest} = props;
+	const {$pp = 'value', value, onValueChange, disabled, visible, ...rest} = props;
 
 	const $onValueChange = onValueChange;
 	const $avs = {$disabled: disabled, $visible: visible} as NodeAttributeValues;
-	const $root = {value};
+	const $root = {[$pp]: value};
 
 	return <Input {...rest} $wrapped={{$onValueChange, $avs, $root, $model: $root, $p2r: '.'}}
-	              $pp="value"
+	              $pp={$pp}
 	              id={rest.id ?? VUtils.generateUniqueId()}
 	              ref={ref}/>;
 });
@@ -35,14 +35,14 @@ type UnwrappedNumberInputProps =
 };
 
 const UnwrappedNumberInput = forwardRef((props: UnwrappedNumberInputProps, ref: ForwardedRef<HTMLInputElement>) => {
-	const {value, onValueChange, disabled, visible, ...rest} = props;
+	const {$pp = 'value', value, onValueChange, disabled, visible, ...rest} = props;
 
 	const $onValueChange = onValueChange;
 	const $avs = {$disabled: disabled, $visible: visible} as NodeAttributeValues;
-	const $root = {value};
+	const $root = {[$pp]: value};
 
 	return <NumberInput {...rest} $wrapped={{$onValueChange, $avs, $root, $model: $root, $p2r: '.'}}
-	                    $pp="value"
+	                    $pp={$pp}
 	                    id={rest.id ?? VUtils.generateUniqueId()}
 	                    ref={ref}/>;
 });

@@ -1,6 +1,7 @@
 import {ArrayContainerDef, ArrayContainerWidgetProps, BaseModel, NodeDef, PropValue} from '@rainbow-d9/n1';
 import {MouseEvent, ReactNode} from 'react';
 import {ButtonClickOptions, ButtonDef} from '../button';
+import {PaginationDef} from '../pagination';
 import {OmitHTMLProps, OmitNodeDef} from '../types';
 
 export interface TableHeaderDef extends Pick<NodeDef, '$key'> {
@@ -40,6 +41,7 @@ export type TableDef = Omit<ArrayContainerDef, '$nodes'> & OmitHTMLProps<HTMLDiv
 	omitDefaultRowOperators?: boolean | 'remove' | 'fold';
 	/** row operators */
 	rowOperators: Array<TableRowButtonDef>;
+	pageable?: PaginationDef;
 };
 
 /** Table widget definition, with html attributes */

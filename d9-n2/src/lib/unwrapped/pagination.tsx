@@ -1,27 +1,32 @@
-import {MonitorNodeDef, NodeAttributeValues, VUtils} from '@rainbow-d9/n1';
+import {BaseModel, MonitorNodeDef, NodeAttributeValues, PropValue, VUtils} from '@rainbow-d9/n1';
 import React, {ForwardedRef, forwardRef} from 'react';
-import {Pagination, PaginationProps} from '../pagination';
+import {Pagination, PaginationData, PaginationProps} from '../pagination';
 
 /** Pagination configuration definition */
 type UnwrappedPaginationProps =
 	Omit<PaginationProps, 'disabled' | '$wrapped' | keyof MonitorNodeDef>
-	& { visible?: boolean };
+	& {
+	onValueChange?: (value: PaginationData) => void;
+	value?: PaginationData;
+	visible?: boolean
+};
 
 const UnwrappedPagination = forwardRef((props: UnwrappedPaginationProps, ref: ForwardedRef<HTMLDivElement>) => {
 	const {
-		title, children, visible, ...rest
+		$pp = 'value', value, onValueChange, visible, ...rest
 	} = props;
 
-	const $onValueChange = VUtils.noop;
+	const $onValueChange = (value: PropValue) => {
+		onValueChange && onValueChange(value as unknown as PaginationData);
+	};
 	const $avs = {$disabled: false, $visible: visible} as NodeAttributeValues;
-	const $root = {};
+	const $root: BaseModel = {[$pp]: value} as BaseModel;
 
-	return <Pagination {...rest} title={title}
+	return <Pagination {...rest}
+	                   $pp={$pp}
 	                   $wrapped={{$onValueChange, $avs, $root, $model: $root, $p2r: '.'}}
 	                   id={rest.id ?? VUtils.generateUniqueId()}
-	                   ref={ref}>
-		{children}
-	</Pagination>;
+	                   ref={ref}/>;
 });
 
 export {UnwrappedPagination, UnwrappedPaginationProps};

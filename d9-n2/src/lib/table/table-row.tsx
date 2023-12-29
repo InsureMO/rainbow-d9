@@ -1,5 +1,5 @@
 import {Enhance$WrappedPropsForArrayElement, EnhancedPropsForArrayElement, NUtils} from '@rainbow-d9/n1';
-import React, {Children, useEffect, useState} from 'react';
+import React, {Children, useEffect, useRef, useState} from 'react';
 import {useTableEventBus} from './event/table-event-bus';
 import {TableEventTypes} from './event/table-event-bus-types';
 import {TableRowOperators} from './table-row-operators';
@@ -20,6 +20,7 @@ export const TableRow = (props: TableRowProps) => {
 		children
 	} = props;
 
+	const expandAreaRef = useRef<HTMLDivElement>(null);
 	const {on, off, fire} = useTableEventBus();
 	const [expanded, setExpanded] = useState(false);
 	useEffect(() => {
@@ -47,6 +48,11 @@ export const TableRow = (props: TableRowProps) => {
 			off(TableEventTypes.REMOVE_ROW, onRemoveRow);
 		};
 	}, [on, off, fire, elementIndex, removeElement]);
+	useEffect(() => {
+		if (expanded) {
+			expandAreaRef.current?.scrollIntoView({behavior: 'smooth'});
+		}
+	}, [expanded]);
 
 	const onRowClicked = () => {
 		if (expandable && clickToExpand && !expanded) {
@@ -93,20 +99,23 @@ export const TableRow = (props: TableRowProps) => {
 				// put after operators, grab all columns except the index column
 				return [
 					<>{classicCells}</>,
-					<ATableBodyCellExpandArea columnsCount={expandedAreaColumnCount + 1} expanded={expanded}>
+					<ATableBodyCellExpandArea columnsCount={expandedAreaColumnCount + 1} expanded={expanded}
+					                          ref={expandAreaRef}>
 						{expandCells}
 					</ATableBodyCellExpandArea>, 1, 1];
 			case hideClassicCellsOnExpandable:
 				// replace classic cells, grab all columns, except the index column and operators column
 				return [
-					<ATableBodyCellExpandArea columnsCount={expandedAreaColumnCount} expanded={expanded}>
+					<ATableBodyCellExpandArea columnsCount={expandedAreaColumnCount} expanded={expanded}
+					                          ref={expandAreaRef}>
 						{expandCells}
 					</ATableBodyCellExpandArea>,
 					null, 1, 1];
 			case !hideClassicCellsOnExpandable:
 				return [
 					<>{classicCells}</>,
-					<ATableBodyCellExpandArea columnsCount={expandedAreaColumnCount + 1} expanded={expanded}>
+					<ATableBodyCellExpandArea columnsCount={expandedAreaColumnCount + 1} expanded={expanded}
+					                          ref={expandAreaRef}>
 						{expandCells}
 					</ATableBodyCellExpandArea>, 2, 1];
 			default:

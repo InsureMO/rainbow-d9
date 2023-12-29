@@ -1,5 +1,5 @@
 import {NodeDef, ValueChangeableNodeDef, WidgetProps} from '@rainbow-d9/n1';
-import {OmitNodeDef} from '../types';
+import {OmitHTMLProps, OmitNodeDef} from '../types';
 
 export interface PaginationData {
 	pageSize: number;
@@ -9,7 +9,7 @@ export interface PaginationData {
 }
 
 /** Pagination configuration definition */
-export type PaginationDef = ValueChangeableNodeDef & NodeDef & HTMLDivElement & {
+export type PaginationDef = ValueChangeableNodeDef & NodeDef & OmitHTMLProps<HTMLDivElement> & {
 	freeWalk?: boolean;
 	maxButtons?: number;
 	possibleSizes?: Array<number>;

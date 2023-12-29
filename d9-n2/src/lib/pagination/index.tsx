@@ -100,9 +100,14 @@ export const Pagination = forwardRef((props: PaginationProps, ref: ForwardedRef<
 		}
 	};
 	const possibleSizesOptions = ((): DropdownOptions => {
-		return [...new Set([...possibleSizes, data.pageSize])]
+		const options = [...new Set([...possibleSizes, data.pageSize])]
 			.sort()
 			.map(size => ({value: size, label: `${size}`}));
+		if (options.length === 1) {
+			return [];
+		} else {
+			return options;
+		}
 	})();
 	const onPageSizeChanged = async (pageSize: PropValue) => {
 		if (pageSize !== data.pageSize) {
@@ -119,8 +124,6 @@ export const Pagination = forwardRef((props: PaginationProps, ref: ForwardedRef<
 	const hasPrevious = pageNumbers[0] !== 1;
 	const hasNext = pageNumbers[pageNumbers.length - 1] !== data.pageCount;
 
-	// eslint-disable-next-line  @typescript-eslint/ban-ts-comment
-	// @ts-ignore
 	return <APagination {...rest} data-disabled={$disabled} data-visible={$visible}
 	                    id={PPUtils.asId(PPUtils.absolute($p2r, props.$pp), props.id)}
 	                    ref={ref}>

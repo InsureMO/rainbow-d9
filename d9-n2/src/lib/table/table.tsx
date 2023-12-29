@@ -4,8 +4,11 @@ import {TableProps} from './types';
 import {ATable} from './widgets';
 
 export const Table = (props: TableProps) => {
-	// eslint-disable-next-line @typescript-eslint/no-unused-vars
-	const {$wrapped, headers, children, ...rest} = props;
+	const {
+		// eslint-disable-next-line @typescript-eslint/no-unused-vars
+		$wrapped, headers, pageable,
+		children, ...rest
+	} = props;
 	const {$avs: {$disabled, $visible}} = $wrapped;
 
 	// render container itself
