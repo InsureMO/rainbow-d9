@@ -543,6 +543,11 @@ Some examples:
 
 > In the examples above, using `codes.hasEndOptions` to find external definitions, which passed to `StandardRoot`.
 
+> Unless otherwise specified, in markdown, the `@ext.` syntax is only allowed when declaring properties in the first level under a
+> component. Many properties of components are complex and require multi-level description. In such cases, the `@ext.` syntax is generally
+> not
+> supported.
+
 ## Form Cell
 
 `$fc` is a boolean attribute. When this attribute is defined (typically with a value of true), the current widget will have
@@ -689,6 +694,26 @@ Built-in name mapping as below,
 | notNegative                       | boolean       | Yes                            | `- notNegative`<br/>`- notNegative: This field should be a non-negative number.`             |
 | length                            | number range  | Yes                            | `- length: 5`<br/>`- length: 5..10`, etc.                                                    |
 | regex,regexp                      | regexp        | Yes                            | `- regex: ^\d{5}$`, etc.                                                                     |
+
+### Disablement and Visibility
+
+For components that support responsive availability and visibility, besides directly using boolean values, `$disabled` and `$visible`
+provide more complex definition approaches as follows:
+
+```markdown
+- Checkbox::Allowed to watch PG-13 rated films.::allowPG13
+	- disabled:
+		- on: name, age
+		- handle: `(model.name ?? '').trim().length === 0 || parseInt(model.age ?? 0) <= 12`
+```
+
+The above syntax indicates that if the `name` is not filled in or the `age` is less than or equal to 12, the current component will be
+disabled.
+
+> `handle` can be defined using a JavaScript block to enable syntax highlighting. It also supports the `@ext.` syntax.
+
+> It is important to note that for `disabled` and `visible`, the `handle` definition will also be called as a default value calculation.
+> Therefore, please note that within the `handle` function body, only the `root`, `model`, and `value` arguments are applicable.
 
 ## Page
 

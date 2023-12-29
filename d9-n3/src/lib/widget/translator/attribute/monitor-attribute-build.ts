@@ -1,4 +1,4 @@
-import {VUtils} from '@rainbow-d9/n1';
+import {ExternalDefIndicator, VUtils} from '@rainbow-d9/n1';
 import {ParsedNodeType} from '../../../node-types';
 import {
 	ParsedCode,
@@ -12,12 +12,13 @@ import {
 	SemanticUtils
 } from '../../../semantic';
 import {Nullable, Undefinable} from '../../../utility-types';
+import {AbstractTranslator} from '../abstract-translator';
 import {FALSE_VALUES, TRUE_VALUES} from './constants';
 import {AttributeValueBuild, ScriptSnippet, WidgetPropertyName} from './types';
 
 export interface ComplexMonitorableAttributeValue {
 	on: Array<string>;
-	snippet: ScriptSnippet;
+	snippet: ExternalDefIndicator | ScriptSnippet;
 }
 
 export type PossibleMonitorableAttributeValue<V extends ComplexMonitorableAttributeValue> = V | boolean;
@@ -72,13 +73,17 @@ export abstract class MonitorableAttributeBuild<A extends ComplexMonitorableAttr
 			}).join('');
 	}
 
-	protected parseHandle(attributeValue: string, item: ParsedListItemAttributePair): ScriptSnippet {
+	protected parseHandle(attributeValue: string, item: ParsedListItemAttributePair): ExternalDefIndicator | ScriptSnippet {
 		const {children} = item;
 		const concerned = (children ?? [])
 			.filter(child => child.type === ParsedNodeType.CODE || ParsedNodeType.PARAGRAPH);
 		if (concerned.length === 0) {
 			if (VUtils.isNotBlank(attributeValue)) {
-				return attributeValue;
+				if (attributeValue.trim().toLowerCase().startsWith(AbstractTranslator.EXTERNAL_DEF_PREFIX)) {
+					return new ExternalDefIndicator(attributeValue.trim().substring(AbstractTranslator.EXTERNAL_DEF_PREFIX.length));
+				} else {
+					return attributeValue;
+				}
 			} else {
 				return '';
 			}

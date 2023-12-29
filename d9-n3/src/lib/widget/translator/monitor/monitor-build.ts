@@ -1,4 +1,11 @@
-import {MonitorNodeAttributes, MonitorOthers, NodeAttributeValue, PropertyPath, VUtils} from '@rainbow-d9/n1';
+import {
+	ExternalDefIndicator,
+	MonitorNodeAttributes,
+	MonitorOthers,
+	NodeAttributeValue,
+	PropertyPath,
+	VUtils
+} from '@rainbow-d9/n1';
 import {WidgetType} from '../../../semantic';
 import {Nullable} from '../../../utility-types';
 import {AsyncFunction} from '../../../utils';
@@ -89,6 +96,10 @@ export const createDefaultMonitorHandlerDetective = <V, M extends MonitorOthers<
 		const {on, snippet} = value as ComplexMonitorableAttributeValue;
 		if (on == null || on.length === 0 || VUtils.isBlank(snippet)) {
 			return (void 0);
+		}
+		if (snippet instanceof ExternalDefIndicator) {
+			// def indicator will be replaced in rendering
+			return {$watch: on, $handle: snippet as any, $default: snippet};
 		}
 		let redressedSnippet: ScriptSnippet;
 		if (!snippet.includes('\n')) {
