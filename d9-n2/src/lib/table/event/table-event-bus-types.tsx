@@ -1,4 +1,3 @@
-import {Nullable} from '@rainbow-d9/n3';
 import {PaginationData} from '../../pagination';
 
 export enum TableEventTypes {
@@ -45,11 +44,11 @@ export interface TableEventBus {
 
 	off(type: TableEventTypes.REMOVE_ROW, listener: (elementIndex: number) => void): this;
 
-	fire(type: TableEventTypes.PAGE_CHANGED, from: Nullable<PaginationData>, to: PaginationData): this;
+	fire(type: TableEventTypes.PAGE_CHANGED, from: PaginationData | null | undefined, to: PaginationData): this;
 
-	on(type: TableEventTypes.PAGE_CHANGED, listener: (from: Nullable<PaginationData>, to: PaginationData) => void): this;
+	on(type: TableEventTypes.PAGE_CHANGED, listener: (from: PaginationData | null | undefined, to: PaginationData) => void): this;
 
-	off(type: TableEventTypes.PAGE_CHANGED, listener: (from: Nullable<PaginationData>, to: PaginationData) => void): this;
+	off(type: TableEventTypes.PAGE_CHANGED, listener: (from: PaginationData | null | undefined, to: PaginationData) => void): this;
 
 	fire(type: TableEventTypes.PAGE_CHANGED_BY_FILTER, pageable: PaginationData): this;
 
