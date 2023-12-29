@@ -357,8 +357,15 @@ export const useDefaultAttributeValues = (props: NodeDef & ModelHolder): Default
 	}
 
 	const {initialized, ...$defaultAttributes} = state;
-	const $defaultAttributesSet = (values: NodeAttributeValues) => {
-		setState({...(values ?? {}), initialized: true});
+	const $defaultAttributesSet = (values: NodeAttributeValues | ((values: NodeAttributeValues) => NodeAttributeValues)) => {
+		if (typeof values == 'function') {
+			// eslint-disable-next-line @typescript-eslint/no-unused-vars
+			setState(({initialized, ...attributes}) => {
+				return {...(values(attributes) ?? {}), initialized: true};
+			});
+		} else {
+			setState({...(values ?? {}), initialized: true});
+		}
 	};
 	return {initialized, $defaultAttributes, $defaultAttributesSet};
 };

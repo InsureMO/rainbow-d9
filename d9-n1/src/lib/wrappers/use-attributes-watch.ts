@@ -126,8 +126,8 @@ export const useAttributesWatch = (options: {
 					return values;
 				}, {} as Partial<NodeAttributeValues>);
 				if (handles[MonitorNodeAttributes.VALID] != null
-					&& !values[MonitorNodeAttributes.DISABLED]
-					&& values[MonitorNodeAttributes.VISIBLE]) {
+					&& (values[MonitorNodeAttributes.DISABLED] == null || values[MonitorNodeAttributes.DISABLED] !== true)
+					&& (values[MonitorNodeAttributes.VISIBLE] == null || values[MonitorNodeAttributes.VISIBLE] !== false)) {
 					// do validation only when
 					// 1. handle declared
 					// 2. is not disabled

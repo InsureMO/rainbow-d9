@@ -15,7 +15,8 @@ export class N2InputTranslator extends SpecificWidgetTranslator<N2WidgetType.INP
 			ValidatorUtils.DETECT_NOT_POSITIVE,
 			ValidatorUtils.DETECT_INTEGER,
 			ValidatorUtils.DETECT_NUMBER_RANGE,
-			ValidatorUtils.DETECT_REGEX
+			ValidatorUtils.DETECT_REGEX,
+			...super.getValidationHandlerDetectives()
 		];
 	}
 }

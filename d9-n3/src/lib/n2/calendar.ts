@@ -66,7 +66,10 @@ export class N2DateTranslator extends SpecificWidgetTranslator<N2WidgetType.DATE
 	}
 
 	public getValidationHandlerDetectives(): Array<MonitorHandlerDetective> {
-		return [ValidatorUtils.DETECT_REQUIRED];
+		return [
+			ValidatorUtils.DETECT_REQUIRED,
+			...super.getValidationHandlerDetectives()
+		];
 	}
 }
 
@@ -81,7 +84,10 @@ export class N2DateTimeTranslator extends SpecificWidgetTranslator<N2WidgetType.
 	}
 
 	public getValidationHandlerDetectives(): Array<MonitorHandlerDetective> {
-		return [ValidatorUtils.DETECT_REQUIRED];
+		return [
+			ValidatorUtils.DETECT_REQUIRED,
+			...super.getValidationHandlerDetectives()
+		];
 	}
 }
 
@@ -96,6 +102,9 @@ export class N2CalendarTranslator extends SpecificWidgetTranslator<N2WidgetType.
 	}
 
 	public getValidationHandlerDetectives(): Array<MonitorHandlerDetective> {
-		return [ValidatorUtils.DETECT_REQUIRED];
+		return [
+			ValidatorUtils.DETECT_REQUIRED,
+			...super.getValidationHandlerDetectives()
+		];
 	}
 }

@@ -18,10 +18,10 @@ import {AttributeValueBuild, ScriptSnippet, WidgetPropertyName} from './types';
 
 export interface ComplexMonitorableAttributeValue {
 	on: Array<string>;
-	snippet: ExternalDefIndicator | ScriptSnippet;
+	snippet?: ExternalDefIndicator | ScriptSnippet;
 }
 
-export type PossibleMonitorableAttributeValue<V extends ComplexMonitorableAttributeValue> = V | boolean;
+export type PossibleMonitorableAttributeValue<V extends ComplexMonitorableAttributeValue, O> = V | O;
 
 export interface PossibleParsedAttributeValue {
 	parsed: boolean;
@@ -30,7 +30,7 @@ export interface PossibleParsedAttributeValue {
 	value?: any;
 }
 
-export abstract class MonitorableAttributeBuild<A extends ComplexMonitorableAttributeValue> implements AttributeValueBuild<PossibleMonitorableAttributeValue<A>> {
+export abstract class MonitorableAttributeBuild<A extends ComplexMonitorableAttributeValue, O> implements AttributeValueBuild<PossibleMonitorableAttributeValue<A, O>> {
 	public abstract accept(key: WidgetPropertyName): boolean;
 
 	protected createComplexAttributeValue(): A {
@@ -112,17 +112,20 @@ export abstract class MonitorableAttributeBuild<A extends ComplexMonitorableAttr
 		return {parsed: false};
 	}
 
-	public build(value: Undefinable<string>, list: ParsedListItemAttributePair): Nullable<PossibleMonitorableAttributeValue<A>> {
+	protected abstract detectBooleanValues(): boolean;
+
+	public build(value: Undefinable<string>, list: ParsedListItemAttributePair): Nullable<PossibleMonitorableAttributeValue<A, O>> {
 		if (VUtils.isNotBlank(value)) {
 			value = (value || '').trim();
-			if (TRUE_VALUES.includes(value)) {
-				return true;
-			} else if (FALSE_VALUES.includes(value)) {
-				return false;
-			} else {
-				// should be a complex attribute value
-				// parse later
+			if (this.detectBooleanValues()) {
+				if (TRUE_VALUES.includes(value)) {
+					return true as O;
+				} else if (FALSE_VALUES.includes(value)) {
+					return false as O;
+				}
 			}
+			// should be a complex attribute value
+			// parse later
 		}
 		if (list == null || list.children == null || list.children.length === 0) {
 			// nothing else can be parsed, ignored
@@ -148,10 +151,6 @@ export abstract class MonitorableAttributeBuild<A extends ComplexMonitorableAttr
 					}
 				}
 			});
-		if (complex.on.length === 0 || VUtils.isBlank(complex.snippet)) {
-			// invalid complex attribute value, ignored
-			return (void 0);
-		}
 		return complex;
 	}
 }

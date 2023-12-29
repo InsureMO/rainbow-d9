@@ -25,7 +25,10 @@ export class N2CheckboxesTranslator extends SpecificWidgetTranslator<N2WidgetTyp
 	}
 
 	public getValidationHandlerDetectives(): Array<MonitorHandlerDetective> {
-		return [ValidatorUtils.DETECT_REQUIRED];
+		return [
+			ValidatorUtils.DETECT_REQUIRED,
+			...super.getValidationHandlerDetectives()
+		];
 	}
 }
 
@@ -44,6 +47,9 @@ export class N2ChecksTranslator extends SpecificWidgetTranslator<N2WidgetType.CH
 	}
 
 	public getValidationHandlerDetectives(): Array<MonitorHandlerDetective> {
-		return [ValidatorUtils.DETECT_REQUIRED];
+		return [
+			ValidatorUtils.DETECT_REQUIRED,
+			...super.getValidationHandlerDetectives()
+		];
 	}
 }

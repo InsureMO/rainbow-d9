@@ -25,6 +25,9 @@ export class N2RadiosTranslator extends SpecificWidgetTranslator<N2WidgetType.RA
 	}
 
 	public getValidationHandlerDetectives(): Array<MonitorHandlerDetective> {
-		return [ValidatorUtils.DETECT_REQUIRED];
+		return [
+			ValidatorUtils.DETECT_REQUIRED,
+			...super.getValidationHandlerDetectives()
+		];
 	}
 }

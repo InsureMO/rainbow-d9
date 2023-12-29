@@ -44,6 +44,9 @@ export class N2CheckboxTranslator extends SpecificWidgetTranslator<N2WidgetType.
 	}
 
 	public getValidationHandlerDetectives(): Array<MonitorHandlerDetective> {
-		return [ValidatorUtils.DETECT_REQUIRED];
+		return [
+			ValidatorUtils.DETECT_REQUIRED,
+			...super.getValidationHandlerDetectives()
+		];
 	}
 }

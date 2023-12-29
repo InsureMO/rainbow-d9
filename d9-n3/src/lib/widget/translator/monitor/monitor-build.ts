@@ -99,6 +99,7 @@ export const createDefaultMonitorHandlerDetective = <V, M extends MonitorOthers<
 		}
 		if (snippet instanceof ExternalDefIndicator) {
 			// def indicator will be replaced in rendering
+			// eslint-disable-next-line @typescript-eslint/no-explicit-any
 			return {$watch: on, $handle: snippet as any, $default: snippet};
 		}
 		let redressedSnippet: ScriptSnippet;

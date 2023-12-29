@@ -27,7 +27,8 @@ export class N2DecorateNumberTranslator extends SpecificWidgetTranslator<N2Widge
 			ValidatorUtils.DETECT_NOT_POSITIVE,
 			ValidatorUtils.DETECT_INTEGER,
 			ValidatorUtils.DETECT_NUMBER_RANGE,
-			ValidatorUtils.DETECT_REGEX
+			ValidatorUtils.DETECT_REGEX,
+			...super.getValidationHandlerDetectives()
 		];
 	}
 }

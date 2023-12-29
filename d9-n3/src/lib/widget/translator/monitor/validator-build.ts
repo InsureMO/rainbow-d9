@@ -11,7 +11,7 @@ import {
 import {WidgetType} from '../../../semantic';
 import {Nullable, Undefinable} from '../../../utility-types';
 import {AttributeMap} from '../types';
-import {AbstractMonitorBuild} from './monitor-build';
+import {AbstractMonitorBuild, createDefaultMonitorHandlerDetective} from './monitor-build';
 import {MonitorHandler, MonitorHandlerDetective, MonitorHandlerDetectOptions} from './types';
 
 const detectSimpleCheck = (options: {
@@ -204,6 +204,18 @@ const detectNumberRange: MonitorHandlerDetective = (options: MonitorHandlerDetec
 
 export class ValidatorUtils {
 	private static readonly DETECTIVES: Record<WidgetType, Array<MonitorHandlerDetective>> = {};
+	public static readonly DETECT_VALIDATION =
+		createDefaultMonitorHandlerDetective({
+			attributeName: MonitorNodeAttributes.VALID,
+			// only returns false means invisible
+			redressResult: (ret: Nullable<ValidationResult>): ValidationResult => {
+				if (ret == null) {
+					return {valid: true};
+				} else {
+					return ret;
+				}
+			}
+		});
 	// noinspection JSUnusedGlobalSymbols
 	public static readonly DETECT_SIMPLE_CHECK = detectSimpleCheck;
 	public static readonly DETECT_REQUIRED = detectRequired;
@@ -276,7 +288,11 @@ export class ValidatorBuild extends AbstractMonitorBuild {
 					if (!ret.valid) {
 						return ret;
 					}
-					return await $handle(options) ?? result;
+					if ($handle != null) {
+						return await $handle(options) ?? result;
+					} else {
+						return result;
+					}
 				}, Promise.resolve({valid: true} as ValidationResult));
 			}
 		};

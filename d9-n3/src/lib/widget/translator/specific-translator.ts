@@ -2,7 +2,7 @@ import {ArrayUsedDef, NodeDef} from '@rainbow-d9/n1';
 import {WidgetType} from '../../semantic';
 import {Undefinable} from '../../utility-types';
 import {AttributeValueBuild, CustomAttributeName, WidgetPropertyName} from './attribute';
-import {DisablementUtils, MonitorHandlerDetective, VisibilityUtils} from './monitor';
+import {DisablementUtils, MonitorHandlerDetective, ValidatorUtils, VisibilityUtils} from './monitor';
 import {WidgetTranslatorRepository} from './translator-repository';
 
 export abstract class SpecificWidgetTranslator<T extends WidgetType> {
@@ -85,7 +85,7 @@ export abstract class SpecificWidgetTranslator<T extends WidgetType> {
 	 * default returns empty array, override me if there is any validation handler detective needs to be added
 	 */
 	public getValidationHandlerDetectives(): Array<MonitorHandlerDetective> {
-		return [];
+		return [ValidatorUtils.DETECT_VALIDATION];
 	}
 
 	/**

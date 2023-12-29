@@ -8,23 +8,23 @@ import {
 } from './monitor-attribute-build';
 import {WidgetPropertyName} from './types';
 
-export type DisablementMonitorAttributeValue = ComplexMonitorableAttributeValue;
+export type ValidationMonitorAttributeValue = ComplexMonitorableAttributeValue;
 
-export class DisablementAttributeBuild extends MonitorableAttributeBuild<DisablementMonitorAttributeValue, boolean> {
+export class ValidationAttributeBuild extends MonitorableAttributeBuild<ValidationMonitorAttributeValue, never> {
 	public accept(key: WidgetPropertyName): boolean {
-		return MonitorNodeAttributes.DISABLED === key;
+		return MonitorNodeAttributes.VALID === key;
 	}
 
 	protected detectBooleanValues(): boolean {
-		return true;
+		return false;
 	}
 
-	public build(value: Undefinable<string>, list: ParsedListItemAttributePair): Nullable<PossibleMonitorableAttributeValue<DisablementMonitorAttributeValue, boolean>> {
+	public build(value: Undefinable<string>, list: ParsedListItemAttributePair): Nullable<PossibleMonitorableAttributeValue<ValidationMonitorAttributeValue, never>> {
 		const built = super.build(value, list);
-		if (built == null || typeof built === 'boolean') {
+		if (built == null) {
 			return built;
 		}
-		if (built.on.length === 0 || VUtils.isBlank(built.snippet)) {
+		if (built.on.length === 0 && VUtils.isBlank(built.snippet)) {
 			// invalid complex attribute value, ignored
 			return (void 0);
 		}

@@ -9,7 +9,8 @@ export class N2TextareaTranslator extends SpecificWidgetTranslator<N2WidgetType.
 	public getValidationHandlerDetectives(): Array<MonitorHandlerDetective> {
 		return [
 			ValidatorUtils.DETECT_REQUIRED,
-			ValidatorUtils.DETECT_LENGTH
+			ValidatorUtils.DETECT_LENGTH,
+			...super.getValidationHandlerDetectives()
 		];
 	}
 }

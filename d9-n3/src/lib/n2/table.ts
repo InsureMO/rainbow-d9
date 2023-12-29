@@ -96,7 +96,7 @@ export class N2TableTranslator extends SpecificArrayWidgetTranslator<N2WidgetTyp
 	}
 
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	getAttributeValueBuilders(): Array<AttributeValueBuild<any>> {
+	public getAttributeValueBuilders(): Array<AttributeValueBuild<any>> {
 		return [N2TableHeadersBuild];
 	}
 

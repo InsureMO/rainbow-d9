@@ -20,7 +20,7 @@ export class N2TabTranslator extends SpecificWidgetTranslator<N2WidgetType.TAB> 
 		return [...super.getToWidgetAttributeNames(), 'title', 'badge'];
 	}
 
-	postWork<Def extends NodeDef>(def: Partial<Def>): Def {
+	public postWork<Def extends NodeDef>(def: Partial<Def>): Def {
 		const defs = def as unknown as ContainerDef;
 		(defs as unknown as TabDef).body = {
 			$wt: N2WidgetType.SECTION,
@@ -44,7 +44,7 @@ export class N2TabsTranslator extends SpecificWidgetTranslator<N2WidgetType.TABS
 		return false;
 	}
 
-	postWork<Def extends NodeDef>(def: Partial<Def>): Def {
+	public postWork<Def extends NodeDef>(def: Partial<Def>): Def {
 		const defs = def as unknown as ContainerDef;
 		(defs as unknown as TabsDef).contents = defs.$nodes as Array<TabDef>;
 		delete defs.$nodes;
