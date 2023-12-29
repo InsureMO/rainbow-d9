@@ -1,6 +1,7 @@
 import {MonitorNodeAttributes, MonitorOthers, NodeAttributeValue, PropertyPath, VUtils} from '@rainbow-d9/n1';
 import {WidgetType} from '../../../semantic';
 import {Nullable} from '../../../utility-types';
+import {AsyncFunction} from '../../../utils';
 import {ScriptSnippet} from '../attribute';
 import {ComplexMonitorableAttributeValue} from '../attribute/monitor-attribute-build';
 import {AttributeMap} from '../types';
@@ -101,21 +102,22 @@ export const createDefaultMonitorHandlerDetective = <V, M extends MonitorOthers<
 			// multiple lines
 			redressedSnippet = snippet;
 		}
-		const handle = new Function(
+		// this is async function
+		const handle = new AsyncFunction(
 			'root', 'model', 'value', 'pathToRoot', 'propertyPath', 'absolutePath',
 			'changedOn', 'from', 'to',
 			redressedSnippet);
 		return {
 			$watch: on,
 			$handle: async (options): Promise<V> => {
-				const ret = handle(
+				const ret = await handle(
 					options.root, options.model, options.value, options.pathToRoot, options.propertyPath, options.absolutePath,
 					options.changedOn, options.from, options.to);
 				// only returns true represents disabled
 				return redressResult(ret);
 			},
 			$default: async (options): Promise<V> => {
-				const ret = handle(options.root, options.model, options.value);
+				const ret = await handle(options.root, options.model, options.value);
 				// only returns true represents disabled
 				return redressResult(ret);
 			}
