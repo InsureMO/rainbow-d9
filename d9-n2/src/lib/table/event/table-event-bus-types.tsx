@@ -1,3 +1,4 @@
+import {Nullable} from '@rainbow-d9/n3';
 import {PaginationData} from '../../pagination';
 
 export enum TableEventTypes {
@@ -7,7 +8,10 @@ export enum TableEventTypes {
 	ROW_COLLAPSED = 'row-collapsed',
 	REMOVE_ROW = 'remove-row',
 
-	PAGE_CHANGED = 'page-changed'
+	PAGE_CHANGED = 'page-changed',
+	PAGE_CHANGED_BY_FILTER = 'page-changed-by-filter',
+
+	FILTER_CHANGED = 'filter-changed'
 }
 
 export interface TableEventBus {
@@ -41,9 +45,21 @@ export interface TableEventBus {
 
 	off(type: TableEventTypes.REMOVE_ROW, listener: (elementIndex: number) => void): this;
 
-	fire(type: TableEventTypes.PAGE_CHANGED, pageable: PaginationData): this;
+	fire(type: TableEventTypes.PAGE_CHANGED, from: Nullable<PaginationData>, to: PaginationData): this;
 
-	on(type: TableEventTypes.PAGE_CHANGED, listener: (pageable: PaginationData) => void): this;
+	on(type: TableEventTypes.PAGE_CHANGED, listener: (from: Nullable<PaginationData>, to: PaginationData) => void): this;
 
-	off(type: TableEventTypes.PAGE_CHANGED, listener: (pageable: PaginationData) => void): this;
+	off(type: TableEventTypes.PAGE_CHANGED, listener: (from: Nullable<PaginationData>, to: PaginationData) => void): this;
+
+	fire(type: TableEventTypes.PAGE_CHANGED_BY_FILTER, pageable: PaginationData): this;
+
+	on(type: TableEventTypes.PAGE_CHANGED_BY_FILTER, listener: (pageable: PaginationData) => void): this;
+
+	off(type: TableEventTypes.PAGE_CHANGED_BY_FILTER, listener: (pageable: PaginationData) => void): this;
+
+	fire(type: TableEventTypes.FILTER_CHANGED): this;
+
+	on(type: TableEventTypes.FILTER_CHANGED, listener: () => void): this;
+
+	off(type: TableEventTypes.FILTER_CHANGED, listener: () => void): this;
 }

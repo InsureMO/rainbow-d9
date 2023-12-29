@@ -156,7 +156,7 @@ export const ArrayWrapper = (props: ArrayContainerDef & ModelHolder & WrappedNod
 
 	const body = () => {
 		return [
-			NoData != null ?
+			NoData != null && (elements == null || elements.length === 0) ?
 				<NoData $wrapped={$wrapped} $array={enhancedForArray} {...rest} key="$$no-data$$"/> : null,
 			// eslint-disable-next-line @typescript-eslint/no-explicit-any
 			...elements.map((elementModel: any, index: number) => {

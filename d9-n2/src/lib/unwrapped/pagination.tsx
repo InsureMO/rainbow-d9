@@ -4,23 +4,24 @@ import {Pagination, PaginationData, PaginationProps} from '../pagination';
 
 /** Pagination configuration definition */
 type UnwrappedPaginationProps =
-	Omit<PaginationProps, 'disabled' | '$wrapped' | keyof MonitorNodeDef>
+	Omit<PaginationProps, 'disabled' | 'value' | '$wrapped' | keyof MonitorNodeDef>
 	& {
-	onValueChange?: (value: PaginationData) => void;
+	onValueChange: (value: PaginationData) => void;
 	value?: PaginationData;
 	visible?: boolean
 };
 
 const UnwrappedPagination = forwardRef((props: UnwrappedPaginationProps, ref: ForwardedRef<HTMLDivElement>) => {
 	const {
-		$pp = 'value', value, onValueChange, visible, ...rest
+		$pp = 'value', value, onValueChange,
+		visible, ...rest
 	} = props;
 
 	const $onValueChange = (value: PropValue) => {
-		onValueChange && onValueChange(value as unknown as PaginationData);
+		onValueChange(value as unknown as PaginationData);
 	};
 	const $avs = {$disabled: false, $visible: visible} as NodeAttributeValues;
-	const $root: BaseModel = {[$pp]: value} as BaseModel;
+	const $root: BaseModel = {[$pp]: value} as unknown as BaseModel;
 
 	return <Pagination {...rest}
 	                   $pp={$pp}

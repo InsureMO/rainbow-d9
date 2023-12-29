@@ -36,8 +36,11 @@ export const guardPaginationData = ($model: BaseModel, $pp: string): PaginationD
 	const checkItemCount = VUtils.isPositive(data.itemCount);
 	if (checkItemCount.test) {
 		data.itemCount = Math.floor(data.itemCount);
+		const maxPageCount = Math.ceil(data.itemCount / data.pageSize);
+		data.pageCount = Math.min(data.pageCount, maxPageCount);
 	} else {
-		data.itemCount = 0;
+		// item count unknown
+		data.itemCount = -1;
 	}
 
 	if (data.pageNumber > data.pageCount) {
@@ -112,9 +115,13 @@ export const Pagination = forwardRef((props: PaginationProps, ref: ForwardedRef<
 	const onPageSizeChanged = async (pageSize: PropValue) => {
 		if (pageSize !== data.pageSize) {
 			const currentFirstItemIndex = (data.pageNumber - 1) * data.pageSize;
+			const itemCount = data.itemCount === -1
+				// use the max item count
+				? data.pageSize * data.pageCount
+				: data.itemCount;
 			data.pageSize = pageSize as number;
 			data.pageNumber = Math.floor(currentFirstItemIndex / data.pageSize) + 1;
-			data.pageCount = Math.ceil(data.itemCount / data.pageSize);
+			data.pageCount = Math.ceil(itemCount / data.pageSize);
 			await $onValueChange(data as unknown as PropValue);
 		}
 	};
@@ -123,6 +130,11 @@ export const Pagination = forwardRef((props: PaginationProps, ref: ForwardedRef<
 	// starts from 1
 	const hasPrevious = pageNumbers[0] !== 1;
 	const hasNext = pageNumbers[pageNumbers.length - 1] !== data.pageCount;
+	const format = new Intl.NumberFormat((void 0), {useGrouping: true, maximumFractionDigits: 0}).format;
+	const pageCount = format(data.pageCount);
+	const itemCount = data.itemCount === -1
+		? I18NVars.PAGINATION.UNKNOWN_ITEM_COUNT
+		: format(data.itemCount);
 
 	return <APagination {...rest} data-disabled={$disabled} data-visible={$visible}
 	                    id={PPUtils.asId(PPUtils.absolute($p2r, props.$pp), props.id)}
@@ -135,7 +147,7 @@ export const Pagination = forwardRef((props: PaginationProps, ref: ForwardedRef<
 				                     onValueChange={onFreeWalkChanged}/>
 				: <span>{data.pageNumber}</span>}
 			<span>{I18NVars.PAGINATION.OF}</span>
-			<span>{data.pageCount}</span>
+			<span>{pageCount}</span>
 			<span>{I18NVars.PAGINATION.PAGES}</span>
 			{possibleSizesOptions.length !== 0
 				? <UnwrappedDropdown value={data.pageSize} options={possibleSizesOptions}
@@ -144,7 +156,7 @@ export const Pagination = forwardRef((props: PaginationProps, ref: ForwardedRef<
 				: <span>{data.pageSize}</span>}
 			<span>{I18NVars.PAGINATION.AFTER_SIZE}</span>
 			<span>{I18NVars.PAGINATION.TOTAL}</span>
-			<span>{data.itemCount}</span>
+			<span>{itemCount}</span>
 			<span>{I18NVars.PAGINATION.ITEMS}</span>
 		</div>
 		<div data-page-buttons={true}>

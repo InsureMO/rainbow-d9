@@ -250,6 +250,7 @@ export const I18NVars = {
 		PAGES: 'pages,',
 		AFTER_SIZE: 'items per page,',
 		TOTAL: 'total',
+		UNKNOWN_ITEM_COUNT: '???',
 		ITEMS: 'items.'
 	}
 };
