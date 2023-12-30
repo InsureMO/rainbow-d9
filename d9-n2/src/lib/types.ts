@@ -19,3 +19,9 @@ export interface ValidationHandlers {
 export interface GlobalEventHandlers {
 	global: GlobalHandlers;
 }
+
+export interface $D9Window extends Window {
+	i18n: {
+		language: string;
+	};
+}

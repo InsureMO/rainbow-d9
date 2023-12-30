@@ -5,6 +5,7 @@ export * from './lib/decorate-assist';
 export * from './lib/dropdown-assist';
 export * from './lib/option-items-assist';
 export * from './lib/label-like';
+export * from './lib/intl-label';
 
 export * from './lib/button';
 export * from './lib/button-bar';

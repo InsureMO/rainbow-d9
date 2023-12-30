@@ -2,6 +2,7 @@ import {BaseModel, PropValue, useCreateEventBus} from '@rainbow-d9/n1';
 import React, {createContext, CSSProperties, ReactNode, useContext} from 'react';
 
 export enum GlobalEventTypes {
+	LANGUAGE_CHANGED = 'language-changed',
 	INVOKE_REMOTE_REQUEST = 'invoke-remote-request',
 	SHOW_ALERT = 'show-alert',
 	HIDE_ALERT = 'hide-alert',
@@ -12,6 +13,12 @@ export enum GlobalEventTypes {
 }
 
 export interface GlobalEventBus {
+	fire(type: GlobalEventTypes.LANGUAGE_CHANGED, language: string): this;
+
+	on(type: GlobalEventTypes.LANGUAGE_CHANGED, listener: (language: string) => void): this;
+
+	off(type: GlobalEventTypes.LANGUAGE_CHANGED, listener: (language: string) => void): this;
+
 	// eslint-disable-next-line  @typescript-eslint/no-explicit-any
 	fire<R>(type: GlobalEventTypes.INVOKE_REMOTE_REQUEST, request: () => Promise<R>, success?: (data: R) => void, failure?: (error?: any) => void, disableAlert?: boolean): this;
 
