@@ -715,7 +715,7 @@ disabled.
 > It is important to note that for `disabled` and `visible`, the `handle` definition will also be called as a default value calculation.
 > Therefore, please note that within the `handle` function body, only the `root`, `model`, and `value` arguments are applicable.
 
-#### Validation
+### Validation
 
 In addition to the built-in validation rules, you can also customize validation rules in the same way as `Disablement` and `Visibility`.
 However, `Validation` can choose not to listen to any other property changes. If defined, it will be applied to all validation rules.
@@ -743,6 +743,22 @@ Here is a simple example:
 
 The above definition means that property `D` is required and its value must have a certain mapping relationship with the type of
 property `A`.
+
+### Internationalization
+
+Use `$d9n2.intl.labels` to define the internationalization string package. For example, you can add `$d9n2.intl.labels.zh` to define a
+Chinese package. After the definition is completed, use the following command to notify the language switch:
+
+```typescript
+const {fire} = useGlobalEventBus();
+const onZhClicked = () => {
+	$d9n2.intl.language = 'zh';
+	fire(GlobalEventTypes.LANGUAGE_CHANGED, 'zh');
+};
+```
+
+> Please note that the language package `$d9n2.intl.labels['en-US']` already exists and can be overwritten to override the built-in string
+> package.
 
 ## Page
 
