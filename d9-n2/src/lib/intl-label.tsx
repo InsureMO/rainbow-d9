@@ -35,12 +35,12 @@ export const IntlLabel = (props: IntlLabelProps) => {
 	const language = $d9n2.intl.language;
 	let label = value;
 	if (keys != null && keys.length !== 0) {
-		const key = [language, ...keys].join('.');
-		const possible = $d9n2.intl.labels[key];
+		const key = [...keys].join('.');
+		const possible = $d9n2.intl.labels[language]?.[key];
 		if (possible != null && typeof possible == 'string') {
 			label = possible;
 		} else {
-			label = MUtils.getValue($d9n2.intl.labels, key) as string;
+			label = MUtils.getValue($d9n2.intl.labels, `${language}.${key}`) as string;
 		}
 		if (label == null || VUtils.isBlank(label)) {
 			label = value;

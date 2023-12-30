@@ -201,7 +201,7 @@ export const Dropdown = (props: DropdownProps) => {
 					const canClick = ![NO_MATCHED_OPTION_ITEM, NO_AVAILABLE_OPTION_ITEM].includes(`${value}`);
 					return <Option key={`${value}-${index}`} data-can-click={canClick}
 					               onClick={canClick ? onOptionClicked(option) : (void 0)}>
-						{label}
+						{toIntlLabel(label)}
 					</Option>;
 				})}
 			</DropdownPopup>

@@ -359,7 +359,7 @@ export const MultiDropdown = (props: MultiDropdownProps) => {
 					const selected = values.includes(value);
 					return <MultiOption key={`${value}-${index}`} data-can-click={canClick}
 					                    onClick={canClick ? onOptionClicked(option) : (void 0)}>
-						<span>{label}</span>
+						<span>{toIntlLabel(label)}</span>
 						{selected ? <Check/> : null}
 					</MultiOption>;
 				})}
