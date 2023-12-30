@@ -338,7 +338,7 @@ export const MultiDropdown = (props: MultiDropdownProps) => {
 		{values.map(value => {
 			const v = `${value}`;
 			return <MultiDropdownLabel data-please={false} key={v}>
-				<span>{optionsAsMap[v]?.label}</span>
+				<span>{toIntlLabel(optionsAsMap[v]?.label)}</span>
 				{$disabled ? null : <span onClick={onRemoveClicked(value)}><Times/></span>}
 			</MultiDropdownLabel>;
 		})}

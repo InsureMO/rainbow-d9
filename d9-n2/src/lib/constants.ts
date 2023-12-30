@@ -197,37 +197,35 @@ $d9.$d9n2 = $d9.$d9n2 ?? {
 		language: navigator.language || 'en-US',
 		labels: {
 			'en-US': {
-				builtIn: {
-					alert: {confirm: 'Ok'},
-					dialog: {confirm: 'Yes', discard: 'No'},
-					options: {noAvailable: 'No available options.', noMatched: 'No matched options.'},
-					calendar: {
-						confirm: 'Ok',
-						today: 'Today', hour: 'Hour', minute: 'Minute', second: 'Second',
-						yesterday: 'Yesterday',
-						thisWeekEnd: 'This Weekend', prevWeekend: 'Prev Weekend',
-						thisMonthEnd: 'This Month End', prevMonthEnd: 'Prev month End',
-						thisYearEnd: 'This Year End', prevYearEnd: 'Prev Year End',
-						jan: 'Jan', feb: 'Feb', mar: 'Mar', apr: 'Apr', may: 'May', jun: 'Jun',
-						jul: 'Jul', aug: 'Aug', sep: 'Sep', oct: 'Oct', nov: 'Nov', dec: 'Dec',
-						sunday: 'S', monday: 'M', tuesday: 'T', wednesday: 'W',
-						thursday: 'T', friday: 'F', saturday: 'S'
-					},
-					ribs: {
-						noElement: 'No data found.',
-						createItem: 'Create New Element',
-						removeItem: 'Remove'
-					},
-					table: {
-						noElement: 'No data found.',
-						createItem: 'Create New Element',
-						removeItem: 'Remove'
-					},
-					wizard: {previous: 'Previous', next: 'Next'},
-					pagination: {
-						page: '', of: 'of', pages: 'pages,', afterSize: 'items per page,',
-						total: 'total', unknownItemCount: '???', items: 'items.'
-					}
+				alert: {confirm: 'Ok'},
+				dialog: {confirm: 'Yes', discard: 'No'},
+				options: {noAvailable: 'No available options.', noMatched: 'No matched options.'},
+				calendar: {
+					confirm: 'Ok',
+					today: 'Today', hour: 'Hour', minute: 'Minute', second: 'Second',
+					yesterday: 'Yesterday',
+					thisWeekEnd: 'This Weekend', prevWeekend: 'Prev Weekend',
+					thisMonthEnd: 'This Month End', prevMonthEnd: 'Prev month End',
+					thisYearEnd: 'This Year End', prevYearEnd: 'Prev Year End',
+					jan: 'Jan', feb: 'Feb', mar: 'Mar', apr: 'Apr', may: 'May', jun: 'Jun',
+					jul: 'Jul', aug: 'Aug', sep: 'Sep', oct: 'Oct', nov: 'Nov', dec: 'Dec',
+					sunday: 'S', monday: 'M', tuesday: 'T', wednesday: 'W',
+					thursday: 'T', friday: 'F', saturday: 'S'
+				},
+				ribs: {
+					noElement: 'No data found.',
+					createItem: 'Create New Element',
+					removeItem: 'Remove'
+				},
+				table: {
+					noElement: 'No data found.',
+					createItem: 'Create New Element',
+					removeItem: 'Remove'
+				},
+				wizard: {previous: 'Previous', next: 'Next'},
+				pagination: {
+					page: '', of: 'of', pages: 'pages,', afterSize: 'items per page,',
+					total: 'total', unknownItemCount: '???', items: 'items.'
 				}
 			}
 		}

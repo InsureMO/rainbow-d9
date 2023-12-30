@@ -11,7 +11,7 @@ export interface IntlLabelProps {
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const toIntlLabel = (text: any) => {
 	if (typeof text === 'string') {
-		return <IntlLabel keys={[text]} value={text}/>;
+		return <IntlLabel keys={[`${text}`]} value={text}/>;
 	} else {
 		return text;
 	}
@@ -36,14 +36,18 @@ export const IntlLabel = (props: IntlLabelProps) => {
 	let label = value;
 	if (keys != null && keys.length !== 0) {
 		const key = [...keys].join('.');
-		const possible = $d9n2.intl.labels[language]?.[key];
-		if (possible != null && typeof possible == 'string') {
-			label = possible;
-		} else {
-			label = MUtils.getValue($d9n2.intl.labels, `${language}.${key}`) as string;
-		}
-		if (label == null || VUtils.isBlank(label)) {
+		if (VUtils.isBlank(key)) {
 			label = value;
+		} else {
+			const possible = $d9n2.intl.labels[language]?.[key];
+			if (possible != null && typeof possible == 'string') {
+				label = possible;
+			} else {
+				label = MUtils.getValue($d9n2.intl.labels, `${language}.${key}`) as string;
+			}
+			if (label == null || VUtils.isBlank(label)) {
+				label = value;
+			}
 		}
 	}
 

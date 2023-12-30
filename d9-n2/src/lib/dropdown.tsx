@@ -185,7 +185,7 @@ export const Dropdown = (props: DropdownProps) => {
 	                          data-disabled={$disabled} data-visible={$visible}
 	                          onFocus={onFocused} onClick={onClicked}
 	                          id={PPUtils.asId(PPUtils.absolute($p2r, $pp), props.id)}>
-		<DropdownLabel data-please={!selected}>{label}</DropdownLabel>
+		<DropdownLabel data-please={!selected}>{toIntlLabel(label)}</DropdownLabel>
 		<DropdownStick valueAssigned={selected} clearable={clearable} clear={onClearClicked} disabled={$disabled}/>
 		{isDropdownPopupActive(popupState.active)
 			? <DropdownPopup {...{...popupState, minHeight: popupHeight}}
