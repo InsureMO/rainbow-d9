@@ -3,6 +3,7 @@ import React, {ForwardedRef, forwardRef, ReactNode} from 'react';
 import styled from 'styled-components';
 import {CaptionDef} from './caption';
 import {CssVars, DOM_ID_WIDGET, DOM_KEY_WIDGET} from './constants';
+import {toIntlLabel} from './intl-label';
 import {LabelLike} from './label-like';
 import {OmitHTMLProps, OmitNodeDef} from './types';
 
@@ -96,7 +97,7 @@ export const FormCell = forwardRef((props: FormCellProps, ref: ForwardedRef<HTML
 		           data-r="d9-fc-caption"/>
 		{children}
 		<FormCellInvalidMessage>
-			{validation?.valid === false ? validation.failReason : null}
+			{validation?.valid === false ? toIntlLabel(validation.failReason) : null}
 		</FormCellInvalidMessage>
 	</AFormCell>;
 });

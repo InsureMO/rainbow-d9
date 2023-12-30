@@ -11,7 +11,7 @@ export interface IntlLabelProps {
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const toIntlLabel = (text: any) => {
 	if (typeof text === 'string') {
-		return <IntlLabel keys={text.split('.')} value={text}/>;
+		return <IntlLabel keys={[text]} value={text}/>;
 	} else {
 		return text;
 	}

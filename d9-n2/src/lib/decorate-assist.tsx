@@ -18,7 +18,7 @@ export const transformDecorator = (decorator: DecorateElement): ReactNode => {
 				return <Found/>;
 			}
 		} else {
-			return <IntlLabel keys={decorator.split('.')} value={decorator}/>;
+			return <IntlLabel keys={[decorator]} value={decorator}/>;
 		}
 	}
 	return decorator;
