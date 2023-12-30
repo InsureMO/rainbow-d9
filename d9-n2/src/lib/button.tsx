@@ -13,6 +13,7 @@ import styled from 'styled-components';
 import {CssVars, DOM_ID_WIDGET, DOM_KEY_WIDGET} from './constants';
 import {DecorateWrapperDef, transformDecorators} from './decorate-assist';
 import {useGlobalHandlers} from './global';
+import {toIntlLabel} from './intl-label';
 import {GlobalEventHandlers, ModelCarriedHandler, OmitHTMLProps2, OmitNodeDef, ValidationHandlers} from './types';
 
 // noinspection JSUnusedGlobalSymbols
@@ -496,7 +497,7 @@ export const Button = forwardRef((props: ButtonProps, ref: ForwardedRef<HTMLButt
 		})}
 		{/** noinspection JSDeprecatedSymbols */}
 		{head}
-		{hasNoText ? null : <span data-role="text">{text}</span>}
+		{hasNoText ? null : <span data-role="text">{toIntlLabel(text)}</span>}
 		{/** noinspection JSDeprecatedSymbols */}
 		{tail}
 		{transformedTails.map(tail => {

@@ -3,7 +3,7 @@ import React, {ForwardedRef, forwardRef, Fragment, ReactNode} from 'react';
 import styled from 'styled-components';
 import {Checkbox, CheckboxProps} from './checkbox';
 import {CssVars, DOM_ID_WIDGET, DOM_KEY_WIDGET} from './constants';
-import {IntlLabel} from './intl-label';
+import {IntlLabel, toIntlLabel} from './intl-label';
 import {NO_AVAILABLE_OPTION_ITEM, OptionItem, OptionItemsDef, useOptionItems} from './option-items-assist';
 import {OmitHTMLProps, OmitNodeDef} from './types';
 
@@ -174,7 +174,7 @@ export const Checkboxes = forwardRef((props: CheckboxesProps, ref: ForwardedRef<
 			                     columns={columns} compact={compact}
 			                     onClick={canClick ? onOptionClicked(option) : (void 0)}>
 				<Checkbox $pp={valueKey} $wrapped={$wrapped}/>
-				<span>{label}</span>
+				<span>{toIntlLabel(label)}</span>
 			</Option>;
 
 			if (columns >= 1 && compact && (index + 1) % columns === 0) {

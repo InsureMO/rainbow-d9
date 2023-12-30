@@ -8,6 +8,15 @@ export interface IntlLabelProps {
 	value?: string;
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const toIntlLabel = (text: any) => {
+	if (typeof text === 'string') {
+		return <IntlLabel keys={text.split('.')} value={text}/>;
+	} else {
+		return text;
+	}
+};
+
 export const IntlLabel = (props: IntlLabelProps) => {
 	const {keys, value} = props;
 
@@ -17,9 +26,9 @@ export const IntlLabel = (props: IntlLabelProps) => {
 		const onLanguageChanged = () => {
 			forceUpdate();
 		};
-		on(GlobalEventTypes.LANGUAGE_CHANGED, onLanguageChanged);
+		on && on(GlobalEventTypes.LANGUAGE_CHANGED, onLanguageChanged);
 		return () => {
-			off(GlobalEventTypes.LANGUAGE_CHANGED, onLanguageChanged);
+			off && off(GlobalEventTypes.LANGUAGE_CHANGED, onLanguageChanged);
 		};
 	}, [on, off, forceUpdate]);
 

@@ -1,6 +1,7 @@
 import {NodeDef, NUtils, VUtils, WrappedAttributes, Wrapper} from '@rainbow-d9/n1';
 import React, {ReactNode} from 'react';
 import {Caption} from './caption';
+import {toIntlLabel} from './intl-label';
 
 export interface LabelLikeProps {
 	label?: ReactNode | NodeDef;
@@ -17,9 +18,13 @@ export const LabelLike = (props: LabelLikeProps) => {
 	} = props;
 	if (label == null || React.isValidElement(label) || typeof label === 'string' || VUtils.isBlank((label as NodeDef).$wt)) {
 		if (wrapByCaption) {
-			return <Caption label={label as ReactNode} $wrapped={$wrapped} {...rest}/>;
+			if (typeof label === 'string') {
+				return <Caption label={toIntlLabel(label) as ReactNode} $wrapped={$wrapped} {...rest}/>;
+			} else {
+				return <Caption label={label as ReactNode} $wrapped={$wrapped} {...rest}/>;
+			}
 		} else {
-			return <>{label}</>;
+			return <>{toIntlLabel(label)}</>;
 		}
 	} else {
 		const def = label as NodeDef;

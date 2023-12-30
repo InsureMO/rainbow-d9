@@ -1,5 +1,6 @@
 import {NUtils, Undefinable} from '@rainbow-d9/n1';
 import React from 'react';
+import {toIntlLabel} from '../intl-label';
 import {TableProps} from './types';
 import {ATableHeaderCell} from './widgets';
 
@@ -21,7 +22,7 @@ export const TableHeader = (props: TableHeaderProps) => {
 		{headers.map((header, index) => {
 			const key = NUtils.getDefKey(header);
 			return <ATableHeaderCell headerHeight={headerHeight} stickyOffset={stickyOffsets[index + 1]} key={key}>
-				{header.label}
+				{toIntlLabel(header.label)}
 			</ATableHeaderCell>;
 		})}
 		{tailGrabberAppended

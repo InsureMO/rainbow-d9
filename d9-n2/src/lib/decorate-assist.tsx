@@ -2,6 +2,7 @@ import {Nullable} from '@rainbow-d9/n1';
 import React, {ReactNode} from 'react';
 import {ICON_PREFIX} from './constants';
 import {Registrar} from './icons';
+import {IntlLabel} from './intl-label';
 
 export type DecorateElement = string | ReactNode;
 export type DecorateWrapperDef = {
@@ -16,6 +17,8 @@ export const transformDecorator = (decorator: DecorateElement): ReactNode => {
 			if (typeof Found === 'function') {
 				return <Found/>;
 			}
+		} else {
+			return <IntlLabel keys={decorator.split('.')} value={decorator}/>;
 		}
 	}
 	return decorator;

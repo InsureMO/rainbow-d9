@@ -2,7 +2,7 @@ import {MUtils, registerWidget, ValueChangeableNodeDef, WidgetProps} from '@rain
 import React, {ForwardedRef, forwardRef, Fragment, ReactNode} from 'react';
 import styled from 'styled-components';
 import {CssVars, DOM_ID_WIDGET, DOM_KEY_WIDGET} from './constants';
-import {IntlLabel} from './intl-label';
+import {IntlLabel, toIntlLabel} from './intl-label';
 import {
 	NO_AVAILABLE_OPTION_ITEM,
 	OnOptionValueChange,
@@ -158,7 +158,7 @@ export const Radios = forwardRef((props: RadiosProps, ref: ForwardedRef<HTMLDivE
 			                     columns={columns} compact={compact}
 			                     onClick={canClick ? onOptionClicked(option) : (void 0)}>
 				<Radio $pp={valueKey} $wrapped={$wrapped}/>
-				<span>{label}</span>
+				<span>{toIntlLabel(label)}</span>
 			</Option>;
 
 			if (columns >= 1 && compact && (index + 1) % columns === 0) {

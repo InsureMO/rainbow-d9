@@ -23,6 +23,7 @@ import {
 	useFilterableDropdownOptions
 } from './dropdown-assist';
 import {Check, Times} from './icons';
+import {toIntlLabel} from './intl-label';
 import {
 	NO_AVAILABLE_OPTION_ITEM,
 	NO_MATCHED_OPTION_ITEM,
@@ -321,7 +322,6 @@ export const MultiDropdown = (props: MultiDropdownProps) => {
 
 	const values = currentValuesToArray();
 	const selected = values != null;
-	// const label = (values == null ? please : (askOptions().find(option => option.value == values)?.label ?? please)) || '';
 	const optionsAsMap = (askOptions() as MultiDropdownOptions)
 		.reduce((map, option) => {
 			map[`${option.value}`] = option;
@@ -342,7 +342,7 @@ export const MultiDropdown = (props: MultiDropdownProps) => {
 				{$disabled ? null : <span onClick={onRemoveClicked(value)}><Times/></span>}
 			</MultiDropdownLabel>;
 		})}
-		<DropdownLabel data-please={true}>{please}</DropdownLabel>
+		<DropdownLabel data-please={true}>{toIntlLabel(please)}</DropdownLabel>
 		<MultiDropdownStick valueAssigned={selected} clearable={clearable} clear={onClearClicked} disabled={$disabled}/>
 		{isDropdownPopupActive(popupState.active)
 			? <DropdownPopup {...{...popupState, minHeight: popupHeight}}

@@ -12,6 +12,7 @@ import {
 	isDropdownPopupActive,
 	useFilterableDropdownOptions
 } from './dropdown-assist';
+import {toIntlLabel} from './intl-label';
 import {
 	NO_AVAILABLE_OPTION_ITEM,
 	NO_MATCHED_OPTION_ITEM,
@@ -173,8 +174,8 @@ export const Dropdown = (props: DropdownProps) => {
 	const value = MUtils.getValue($model, $pp) as DropdownOptionValue;
 	const selected = value != null;
 	const label = (value == null
-			? please
-			: ((askOptions() as DropdownOptions).find(option => option.value == value)?.label ?? please))
+			? toIntlLabel(please)
+			: ((askOptions() as DropdownOptions).find(option => option.value == value)?.label ?? toIntlLabel(please)))
 		|| '';
 
 	return <DropdownContainer active={popupState.active} atBottom={popupState.atBottom}
