@@ -37,11 +37,8 @@ export const APagination = styled.div.attrs(({id, 'data-w': dataW}) => {
         > div[data-w=d9-dropdown] {
             height: calc(${CssVars.INPUT_HEIGHT} * 0.8);
             width: unset;
+            margin-left: 0.6em;
             margin-right: 0.3em;
-
-            &[data-possible-sizes=true] {
-                margin-left: 0.6em;
-            }
         }
     }
 
