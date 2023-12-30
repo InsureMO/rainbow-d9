@@ -1,6 +1,5 @@
-import {MonitorNodeAttributes, VUtils} from '@rainbow-d9/n1';
+import {MonitorNodeAttributes, Nullable, Undefinable, VUtils} from '@rainbow-d9/n1';
 import {ParsedListItemAttributePair} from '../../../semantic';
-import {Nullable, Undefinable} from '../../../utility-types';
 import {
 	ComplexMonitorableAttributeValue,
 	MonitorableAttributeBuild,

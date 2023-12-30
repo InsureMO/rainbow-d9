@@ -1,3 +1,4 @@
+import {Nullable} from '@rainbow-d9/n1';
 import {Dayjs} from 'dayjs';
 
 export enum CalendarEventTypes {
@@ -18,34 +19,50 @@ export enum CalendarEventTypes {
 
 export interface CalendarEventBus {
 	fire(type: CalendarEventTypes.OPEN_YEAR_MONTH_PICKER): this;
+
 	on(type: CalendarEventTypes.OPEN_YEAR_MONTH_PICKER, listener: () => void): this;
+
 	off(type: CalendarEventTypes.OPEN_YEAR_MONTH_PICKER, listener: () => void): this;
 
 	fire(type: CalendarEventTypes.CLOSE_YEAR_MONTH_PICKER): this;
+
 	on(type: CalendarEventTypes.CLOSE_YEAR_MONTH_PICKER, listener: () => void): this;
+
 	off(type: CalendarEventTypes.CLOSE_YEAR_MONTH_PICKER, listener: () => void): this;
 
 	fire(type: CalendarEventTypes.OPEN_TIME_PICKER): this;
+
 	on(type: CalendarEventTypes.OPEN_TIME_PICKER, listener: () => void): this;
+
 	off(type: CalendarEventTypes.OPEN_TIME_PICKER, listener: () => void): this;
 
 	fire(type: CalendarEventTypes.CLOSE_TIME_PICKER): this;
+
 	on(type: CalendarEventTypes.CLOSE_TIME_PICKER, listener: () => void): this;
+
 	off(type: CalendarEventTypes.CLOSE_TIME_PICKER, listener: () => void): this;
 
 	fire(type: CalendarEventTypes.INIT_POPUP_VALUE, value: Dayjs): this;
+
 	on(type: CalendarEventTypes.INIT_POPUP_VALUE, listener: (value: Dayjs) => void): this;
+
 	off(type: CalendarEventTypes.INIT_POPUP_VALUE, listener: (value: Dayjs) => void): this;
 
 	fire(type: CalendarEventTypes.VALUE_SELECTED, value: Dayjs): this;
+
 	on(type: CalendarEventTypes.VALUE_SELECTED, listener: (value: Dayjs) => void): this;
+
 	off(type: CalendarEventTypes.VALUE_SELECTED, listener: (value: Dayjs) => void): this;
 
 	fire(type: CalendarEventTypes.VALUE_CLEARED): this;
+
 	on(type: CalendarEventTypes.VALUE_CLEARED, listener: () => void): this;
+
 	off(type: CalendarEventTypes.VALUE_CLEARED, listener: () => void): this;
 
-	fire(type: CalendarEventTypes.ASK_VALUE, onData: (value: Dayjs | null) => void): this;
-	on(type: CalendarEventTypes.ASK_VALUE, listener: (onData: (value: Dayjs | null) => void) => void): this;
-	off(type: CalendarEventTypes.ASK_VALUE, listener: (onData: (value: Dayjs | null) => void) => void): this;
+	fire(type: CalendarEventTypes.ASK_VALUE, onData: (value: Nullable<Dayjs>) => void): this;
+
+	on(type: CalendarEventTypes.ASK_VALUE, listener: (onData: (value: Nullable<Dayjs>) => void) => void): this;
+
+	off(type: CalendarEventTypes.ASK_VALUE, listener: (onData: (value: Nullable<Dayjs>) => void) => void): this;
 }

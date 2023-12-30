@@ -1,6 +1,6 @@
 import {Dayjs} from 'dayjs';
 import React, {useEffect, useRef, useState} from 'react';
-import {I18NVars} from '../../constants';
+import {IntlLabel} from '../../intl-label';
 import {useCalendarEventBus} from '../event/calendar-event-bus';
 import {CalendarEventTypes} from '../event/calendar-event-bus-types';
 import {TimePickerContainer, TimePickerLabel, TimePickerSelector, TimePickerSelectorOption} from './widgets';
@@ -61,9 +61,19 @@ export const TimePicker = (props: { value: Dayjs, timeFormat: string }) => {
 	const columns = 3 - (!hasMinute ? 1 : 0) - (!hasSecond ? 1 : 0);
 
 	return <TimePickerContainer columns={columns}>
-		<TimePickerLabel>{I18NVars.CALENDAR.HOUR}</TimePickerLabel>
-		{hasMinute ? <TimePickerLabel>{I18NVars.CALENDAR.MINUTE}</TimePickerLabel> : null}
-		{hasSecond ? <TimePickerLabel>{I18NVars.CALENDAR.SECOND}</TimePickerLabel> : null}
+		<TimePickerLabel>
+			<IntlLabel keys={['calendar', 'hour']} value="Hour"/>
+		</TimePickerLabel>
+		{hasMinute
+			? <TimePickerLabel>
+				<IntlLabel keys={['calendar', 'minute']} value="Minute"/>
+			</TimePickerLabel>
+			: null}
+		{hasSecond
+			? <TimePickerLabel>
+				<IntlLabel keys={['calendar', 'second']} value="Second"/>
+			</TimePickerLabel>
+			: null}
 		<TimePickerSelector ref={hourSelectorRef}>
 			{new Array(24).fill(1).map((v, index) => {
 				return <TimePickerSelectorOption data-current={value.hour() === index} data-hour={index}

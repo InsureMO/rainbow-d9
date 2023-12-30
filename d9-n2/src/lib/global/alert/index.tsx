@@ -1,6 +1,6 @@
 import React, {ReactNode, useEffect, useState} from 'react';
 import {ButtonInk} from '../../button';
-import {I18NVars} from '../../constants';
+import {IntlLabel} from '../../intl-label';
 import {UnwrappedButton} from '../../unwrapped/button';
 import {GlobalEventTypes, useGlobalEventBus} from '../global-event-bus';
 import {AlertBody, AlertContainer, AlertDialog, AlertFooter} from './widgets';
@@ -51,7 +51,7 @@ export const Alert = () => {
 			</AlertBody>
 			<AlertFooter>
 				<UnwrappedButton ink={ButtonInk.PRIMARY} onClick={onHideClicked}>
-					{I18NVars.ALERT.CONFIRM}
+					<IntlLabel keys={['alert', 'confirm']} value="Ok"/>
 				</UnwrappedButton>
 			</AlertFooter>
 		</AlertDialog>

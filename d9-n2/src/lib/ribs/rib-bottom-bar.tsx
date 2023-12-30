@@ -1,7 +1,7 @@
 import {EnhancedPropsForArray} from '@rainbow-d9/n1';
 import React from 'react';
 import {Button, ButtonInk} from '../button';
-import {I18NVars} from '../constants';
+import {IntlLabel} from '../intl-label';
 import {RibsProps} from './types';
 import {ARibBottomBar} from './widgets';
 
@@ -14,7 +14,8 @@ export const RibBottomBar = (props: Omit<RibsProps, '$array'> & { $array: Enhanc
 		const onAddClicked = async () => await addElement();
 
 		return <ARibBottomBar>
-			<Button $wrapped={$wrapped} ink={ButtonInk.PRIMARY} text={addLabel ?? I18NVars.RIBS.CREATE_ITEM}
+			<Button $wrapped={$wrapped} ink={ButtonInk.PRIMARY}
+			        text={addLabel ?? <IntlLabel keys={['ribs', 'createItem']} value="Create New Element"/>}
 			        click={onAddClicked}/>
 		</ARibBottomBar>;
 	}

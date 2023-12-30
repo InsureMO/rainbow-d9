@@ -1,4 +1,4 @@
-import {MUtils, NodeDef, PPUtils, registerWidget, VUtils} from '@rainbow-d9/n1';
+import {MUtils, NodeDef, PPUtils, registerWidget, Undefinable, VUtils} from '@rainbow-d9/n1';
 import React, {useEffect, useState} from 'react';
 import {GlobalEventPrefix, GlobalEventTypes, useCustomGlobalEvent, useGlobalEventBus} from '../global';
 import {useWizardEventBus, WizardEventBusProvider} from './event/wizard-event-bus';
@@ -124,7 +124,7 @@ const InternalWizard = (props: WizardProps) => {
 				return {def: (void 0), lead: (void 0)};
 			}
 			const {$pp, body} = def;
-			let foundDef: NodeDef | undefined;
+			let foundDef: Undefinable<NodeDef>;
 			if (typeof body === 'function') {
 				foundDef = await body();
 			} else {

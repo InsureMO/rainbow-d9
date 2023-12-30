@@ -1,3 +1,4 @@
+import {Undefinable} from '@rainbow-d9/n1';
 import {Content, Root} from 'mdast';
 import {fromMarkdown} from 'mdast-util-from-markdown';
 import {frontmatterFromMarkdown} from 'mdast-util-frontmatter';
@@ -12,7 +13,6 @@ import {gfmTable} from 'micromark-extension-gfm-table';
 import {gfmTaskListItem} from 'micromark-extension-gfm-task-list-item';
 import {ParsedNodeType} from '../node-types';
 import {MarkdownContent} from '../types';
-import {Undefinable} from '../utility-types';
 import {
 	AbstractParentPreparser,
 	BlockquotePreparser,

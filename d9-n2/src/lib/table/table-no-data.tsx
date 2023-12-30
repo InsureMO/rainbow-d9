@@ -1,6 +1,6 @@
 import {EnhancedPropsForArray} from '@rainbow-d9/n1';
 import React from 'react';
-import {I18NVars} from '../constants';
+import {IntlLabel} from '../intl-label';
 import {TableProps} from './types';
 import {computeColumnsWidth} from './utils';
 import {ATableNoDataRow} from './widgets';
@@ -8,7 +8,7 @@ import {ATableNoDataRow} from './widgets';
 export const TableNoData = (props: Omit<TableProps, '$array'> & { $array: EnhancedPropsForArray }) => {
 	const {
 		headers,
-		$array: {hasElement, noElementReminder = I18NVars.TABLE.NO_ELEMENT}
+		$array: {hasElement, noElementReminder = <IntlLabel keys={['table', 'noElement']} value="No data found."/>}
 	} = props;
 
 	if (hasElement) {

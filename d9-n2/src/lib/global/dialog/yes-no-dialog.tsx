@@ -1,6 +1,6 @@
 import React, {Fragment, ReactNode, useEffect} from 'react';
 import {ButtonInk} from '../../button';
-import {I18NVars} from '../../constants';
+import {IntlLabel} from '../../intl-label';
 import {UnwrappedButton} from '../../unwrapped/button';
 import {GlobalEventTypes, useGlobalEventBus} from '../global-event-bus';
 import {DialogBody, DialogFooter, DialogLabel} from './widgets';
@@ -17,8 +17,12 @@ const YesNoContent = (props: {
 			<DialogLabel>{question}</DialogLabel>
 		</DialogBody>
 		<DialogFooter>
-			<UnwrappedButton ink={ButtonInk.PRIMARY} onClick={onYes}>{I18NVars.DIALOG.CONFIRM}</UnwrappedButton>
-			<UnwrappedButton ink={ButtonInk.WAIVE} onClick={onNo}>{I18NVars.DIALOG.DISCARD}</UnwrappedButton>
+			<UnwrappedButton ink={ButtonInk.PRIMARY} onClick={onYes}>
+				<IntlLabel keys={['dialog', 'confirm']} value="Yes"/>
+			</UnwrappedButton>
+			<UnwrappedButton ink={ButtonInk.WAIVE} onClick={onNo}>
+				<IntlLabel keys={['dialog', 'discard']} value="No"/>
+			</UnwrappedButton>
 		</DialogFooter>
 	</>;
 };

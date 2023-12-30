@@ -1,8 +1,7 @@
-import {ContainerDef, NodeDef, VUtils} from '@rainbow-d9/n1';
+import {ContainerDef, NodeDef, Undefinable, VUtils} from '@rainbow-d9/n1';
 import {PaginationDef, TableDef, TableHeaderDef, TableRowButtonDef} from '@rainbow-d9/n2';
 import {ParsedNodeType} from '../node-types';
 import {ParsedList, ParsedListItemAttributePair, SemanticUtils} from '../semantic';
-import {Undefinable} from '../utility-types';
 import {
 	AttributeValueBuild,
 	CustomAttributeName,

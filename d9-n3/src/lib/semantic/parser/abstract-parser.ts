@@ -1,7 +1,7 @@
+import {Undefinable} from '@rainbow-d9/n1';
 import {Content} from 'mdast';
 import {AbstractPreparser, PreparsedNodes} from '../../ast';
 import {N3Logger} from '../../logger';
-import {Undefinable} from '../../utility-types';
 import {ParsedNode, ParsedNodeMap} from '../types';
 import {SemanticNodeParserRepository} from './parser-repository';
 import {AbstractSemanticNodeParser} from './semantic-node-parser';

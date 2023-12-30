@@ -1,6 +1,6 @@
 import dayjs, {Dayjs} from 'dayjs';
 import React, {useEffect, useState} from 'react';
-import {I18NVars} from '../../constants';
+import {IntlLabel} from '../../intl-label';
 import {useCalendarEventBus} from '../event/calendar-event-bus';
 import {CalendarEventTypes} from '../event/calendar-event-bus-types';
 import {LeftCaret, RightCaret} from '../widgets';
@@ -81,27 +81,37 @@ export const DatePicker = (props: { value: Dayjs, dateFormat: string }) => {
 
 	return <DatePickerContainer>
 		<DatePickerShortcut>
-			<DatePickerShortcutButton onClick={onTodayClicked}>{I18NVars.CALENDAR.TODAY}</DatePickerShortcutButton>
-			<DatePickerShortcutButton
-				onClick={onYesterdayClicked}>{I18NVars.CALENDAR.YESTERDAY}</DatePickerShortcutButton>
-			<DatePickerShortcutButton
-				onClick={onWeekendClicked}>{I18NVars.CALENDAR.THIS_WEEKEND}</DatePickerShortcutButton>
-			<DatePickerShortcutButton
-				onClick={onPrevWeekendClicked}>{I18NVars.CALENDAR.PREV_WEEKEND}</DatePickerShortcutButton>
-			<DatePickerShortcutButton
-				onClick={onMonthEndClicked}>{I18NVars.CALENDAR.THIS_MONTH_END}</DatePickerShortcutButton>
-			<DatePickerShortcutButton
-				onClick={onPrevMonthEndClicked}>{I18NVars.CALENDAR.PREV_MONTH_END}</DatePickerShortcutButton>
-			<DatePickerShortcutButton
-				onClick={onYearEndClicked}>{I18NVars.CALENDAR.THIS_YEAR_END}</DatePickerShortcutButton>
-			<DatePickerShortcutButton
-				onClick={onPrevYearEndClicked}>{I18NVars.CALENDAR.PREV_YEAR_END}</DatePickerShortcutButton>
+			<DatePickerShortcutButton onClick={onTodayClicked}>
+				<IntlLabel keys={['calendar', 'today']} value="Today"/>
+			</DatePickerShortcutButton>
+			<DatePickerShortcutButton onClick={onYesterdayClicked}>
+				<IntlLabel keys={['calendar', 'yesterday']} value="Yesterday"/>
+			</DatePickerShortcutButton>
+			<DatePickerShortcutButton onClick={onWeekendClicked}>
+				<IntlLabel keys={['calendar', 'thisWeekEnd']} value="This Weekend"/>
+			</DatePickerShortcutButton>
+			<DatePickerShortcutButton onClick={onPrevWeekendClicked}>
+				<IntlLabel keys={['calendar', 'prevWeekend']} value="Prev Weekend"/>
+			</DatePickerShortcutButton>
+			<DatePickerShortcutButton onClick={onMonthEndClicked}>
+				<IntlLabel keys={['calendar', 'thisMonthEnd']} value="This Month End"/>
+			</DatePickerShortcutButton>
+			<DatePickerShortcutButton onClick={onPrevMonthEndClicked}>
+				<IntlLabel keys={['calendar', 'prevMonthEnd']} value="Prev month End"/>
+			</DatePickerShortcutButton>
+			<DatePickerShortcutButton onClick={onYearEndClicked}>
+				<IntlLabel keys={['calendar', 'thisYearEnd']} value="This Year End"/>
+			</DatePickerShortcutButton>
+			<DatePickerShortcutButton onClick={onPrevYearEndClicked}>
+				<IntlLabel keys={['calendar', 'prevYearEnd']} value="Prev Year End"/>
+			</DatePickerShortcutButton>
 		</DatePickerShortcut>
 		<DatePickerHeader>
 			<DatePickerHeaderYearMonth>{currentDisplayMonth}</DatePickerHeaderYearMonth>
 			<DatePickerHeaderOperators>
-				<DatePickerHeaderTodayButton
-					onClick={onTodayClicked}>{I18NVars.CALENDAR.TODAY}</DatePickerHeaderTodayButton>
+				<DatePickerHeaderTodayButton onClick={onTodayClicked}>
+					<IntlLabel keys={['calendar', 'today']} value="Today"/>
+				</DatePickerHeaderTodayButton>
 				<DatePickerHeaderMonthChangeButton onClick={onGotoPrevMonthClicked}>
 					<LeftCaret/>
 				</DatePickerHeaderMonthChangeButton>
@@ -111,13 +121,13 @@ export const DatePicker = (props: { value: Dayjs, dateFormat: string }) => {
 			</DatePickerHeaderOperators>
 		</DatePickerHeader>
 		<DatePickerBody>
-			<DatePickerBodyHeaderCell>{I18NVars.CALENDAR.SUNDAY}</DatePickerBodyHeaderCell>
-			<DatePickerBodyHeaderCell>{I18NVars.CALENDAR.MONDAY}</DatePickerBodyHeaderCell>
-			<DatePickerBodyHeaderCell>{I18NVars.CALENDAR.TUESDAY}</DatePickerBodyHeaderCell>
-			<DatePickerBodyHeaderCell>{I18NVars.CALENDAR.WEDNESDAY}</DatePickerBodyHeaderCell>
-			<DatePickerBodyHeaderCell>{I18NVars.CALENDAR.THURSDAY}</DatePickerBodyHeaderCell>
-			<DatePickerBodyHeaderCell>{I18NVars.CALENDAR.FRIDAY}</DatePickerBodyHeaderCell>
-			<DatePickerBodyHeaderCell>{I18NVars.CALENDAR.SATURDAY}</DatePickerBodyHeaderCell>
+			<DatePickerBodyHeaderCell><IntlLabel keys={['calendar', 'sunday']} value="S"/></DatePickerBodyHeaderCell>
+			<DatePickerBodyHeaderCell><IntlLabel keys={['calendar', 'monday']} value="M"/></DatePickerBodyHeaderCell>
+			<DatePickerBodyHeaderCell><IntlLabel keys={['calendar', 'tuesday']} value="T"/></DatePickerBodyHeaderCell>
+			<DatePickerBodyHeaderCell><IntlLabel keys={['calendar', 'wednesday']} value="W"/></DatePickerBodyHeaderCell>
+			<DatePickerBodyHeaderCell><IntlLabel keys={['calendar', 'thursday']} value="T"/></DatePickerBodyHeaderCell>
+			<DatePickerBodyHeaderCell><IntlLabel keys={['calendar', 'friday']} value="F"/></DatePickerBodyHeaderCell>
+			<DatePickerBodyHeaderCell><IntlLabel keys={['calendar', 'saturday']} value="S"/></DatePickerBodyHeaderCell>
 			{days.map(({year, month, date}) => {
 				return <DatePickerBodyDateCell key={`${year}/${month}/${date}`}
 				                               data-current-month={year === currentYear && month === currentMonth}

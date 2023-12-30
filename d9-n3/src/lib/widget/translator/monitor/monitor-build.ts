@@ -3,11 +3,11 @@ import {
 	MonitorNodeAttributes,
 	MonitorOthers,
 	NodeAttributeValue,
+	Nullable,
 	PropertyPath,
 	VUtils
 } from '@rainbow-d9/n1';
 import {WidgetType} from '../../../semantic';
-import {Nullable} from '../../../utility-types';
 import {AsyncFunction} from '../../../utils';
 import {ScriptSnippet} from '../attribute';
 import {ComplexMonitorableAttributeValue} from '../attribute/monitor-attribute-build';

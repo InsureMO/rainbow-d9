@@ -1,6 +1,6 @@
 import {Dayjs} from 'dayjs';
 import React, {useEffect, useRef, useState} from 'react';
-import {I18NVars} from '../../constants';
+import {IntlLabel} from '../../intl-label';
 import {useCalendarEventBus} from '../event/calendar-event-bus';
 import {CalendarEventTypes} from '../event/calendar-event-bus-types';
 import {
@@ -67,40 +67,40 @@ export const YearMonthPicker = (props: { value: Dayjs }) => {
 		</YearSelector>
 		<MonthSelector>
 			<MonthSelectorOption onClick={onMonthChange(0)} data-current={value.month() === 0}>
-				{I18NVars.CALENDAR.JAN}
+				<IntlLabel keys={['calendar', 'jan']} value="Jan"/>
 			</MonthSelectorOption>
 			<MonthSelectorOption onClick={onMonthChange(1)} data-current={value.month() === 1}>
-				{I18NVars.CALENDAR.FEB}
+				<IntlLabel keys={['calendar', 'feb']} value="Feb"/>
 			</MonthSelectorOption>
 			<MonthSelectorOption onClick={onMonthChange(2)} data-current={value.month() === 2}>
-				{I18NVars.CALENDAR.MAR}
+				<IntlLabel keys={['calendar', 'mar']} value="Mar"/>
 			</MonthSelectorOption>
 			<MonthSelectorOption onClick={onMonthChange(3)} data-current={value.month() === 3}>
-				{I18NVars.CALENDAR.APR}
+				<IntlLabel keys={['calendar', 'apr']} value="Apr"/>
 			</MonthSelectorOption>
 			<MonthSelectorOption onClick={onMonthChange(4)} data-current={value.month() === 4}>
-				{I18NVars.CALENDAR.MAY}
+				<IntlLabel keys={['calendar', 'may']} value="May"/>
 			</MonthSelectorOption>
 			<MonthSelectorOption onClick={onMonthChange(5)} data-current={value.month() === 5}>
-				{I18NVars.CALENDAR.JUN}
+				<IntlLabel keys={['calendar', 'jun']} value="Jun"/>
 			</MonthSelectorOption>
 			<MonthSelectorOption onClick={onMonthChange(6)} data-current={value.month() === 6}>
-				{I18NVars.CALENDAR.JUL}
+				<IntlLabel keys={['calendar', 'jul']} value="Jul"/>
 			</MonthSelectorOption>
 			<MonthSelectorOption onClick={onMonthChange(7)} data-current={value.month() === 7}>
-				{I18NVars.CALENDAR.AUG}
+				<IntlLabel keys={['calendar', 'aug']} value="Aug"/>
 			</MonthSelectorOption>
 			<MonthSelectorOption onClick={onMonthChange(8)} data-current={value.month() === 8}>
-				{I18NVars.CALENDAR.SEP}
+				<IntlLabel keys={['calendar', 'sep']} value="Sep"/>
 			</MonthSelectorOption>
 			<MonthSelectorOption onClick={onMonthChange(9)} data-current={value.month() === 9}>
-				{I18NVars.CALENDAR.OCT}
+				<IntlLabel keys={['calendar', 'oct']} value="Oct"/>
 			</MonthSelectorOption>
 			<MonthSelectorOption onClick={onMonthChange(10)} data-current={value.month() === 10}>
-				{I18NVars.CALENDAR.NOV}
+				<IntlLabel keys={['calendar', 'nov']} value="Nov"/>
 			</MonthSelectorOption>
 			<MonthSelectorOption onClick={onMonthChange(11)} data-current={value.month() === 11}>
-				{I18NVars.CALENDAR.DEC}
+				<IntlLabel keys={['calendar', 'dec']} value="Dec"/>
 			</MonthSelectorOption>
 		</MonthSelector>
 	</YearMonthPickerContainer>;

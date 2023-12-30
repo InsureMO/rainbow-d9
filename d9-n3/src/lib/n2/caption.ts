@@ -1,8 +1,7 @@
-import {MonitorNodeAttributes, NodeDef, NUtils, ReactionMonitor, VUtils} from '@rainbow-d9/n1';
+import {MonitorNodeAttributes, NodeDef, NUtils, ReactionMonitor, Undefinable, VUtils} from '@rainbow-d9/n1';
 import {CaptionClick, CaptionDef, CaptionValueToLabel} from '@rainbow-d9/n2';
 import {N3Logger} from '../logger';
 import {ParsedListItemAttributePair} from '../semantic';
-import {Undefinable} from '../utility-types';
 import {
 	AttributeValueBuild,
 	DecorateLeadsBuild,
@@ -18,7 +17,7 @@ import {N2WidgetType} from './types';
 
 export const N2CaptionValueToLabelBuild: AttributeValueBuild<Pick<CaptionDef, 'labelOnValue' | 'valueToLabel'>> = {
 	accept: (key: WidgetPropertyName) => key === 'valueToLabel',
-	build: (value: Undefinable<string>): Pick<CaptionDef, 'labelOnValue' | 'valueToLabel'> | undefined => {
+	build: (value: Undefinable<string>): Undefinable<Pick<CaptionDef, 'labelOnValue' | 'valueToLabel'>> => {
 		if (VUtils.isBlank(value)) {
 			// ignored
 			return (void 0);
@@ -45,7 +44,7 @@ export const N2CaptionValueToLabelBuild: AttributeValueBuild<Pick<CaptionDef, 'l
 export const N2CaptionClickBuild: AttributeValueBuild<CaptionClick> = {
 	accept: (key: WidgetPropertyName) => key === 'click',
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
-	build: (value: Undefinable<string>, _list: ParsedListItemAttributePair): CaptionClick | undefined => {
+	build: (value: Undefinable<string>, _list: ParsedListItemAttributePair): Undefinable<CaptionClick> => {
 		if (VUtils.isNotBlank(value)) {
 			return buildClickHandler(value) as CaptionClick;
 		} else {

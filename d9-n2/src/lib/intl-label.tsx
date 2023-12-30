@@ -1,7 +1,7 @@
 import {MUtils, useForceUpdate, VUtils} from '@rainbow-d9/n1';
 import React, {useEffect} from 'react';
+import {$d9n2} from './constants';
 import {GlobalEventTypes, useGlobalEventBus} from './global';
-import {$d9} from './utils';
 
 export interface IntlLabelProps {
 	keys: Array<string>;
@@ -23,10 +23,10 @@ export const IntlLabel = (props: IntlLabelProps) => {
 		};
 	}, [on, off, forceUpdate]);
 
-	const language = $d9.i18n.language;
+	const language = $d9n2.intl.language;
 	let label = value;
 	if (keys != null && keys.length !== 0) {
-		label = MUtils.getValue($d9.i18n, [language, ...keys].join('.')) as string;
+		label = MUtils.getValue($d9n2.intl.labels, [language, ...keys].join('.')) as string;
 		if (label == null || VUtils.isBlank(label)) {
 			label = value;
 		}

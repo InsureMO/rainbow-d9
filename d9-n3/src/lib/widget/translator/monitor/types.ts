@@ -1,6 +1,12 @@
-import {MonitorOthers, NodeAttributeValue, NodeAttributeValueHandle, PropertyPath} from '@rainbow-d9/n1';
+import {
+	MonitorOthers,
+	NodeAttributeValue,
+	NodeAttributeValueHandle,
+	Nullable,
+	PropertyPath,
+	Undefinable
+} from '@rainbow-d9/n1';
 import {WidgetType} from '../../../semantic';
-import {Nullable, Undefinable} from '../../../utility-types';
 import {AttributeMap} from '../types';
 
 export interface MonitorHandlerDetectOptions {

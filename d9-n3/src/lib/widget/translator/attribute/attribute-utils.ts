@@ -1,5 +1,5 @@
+import {Undefinable} from '@rainbow-d9/n1';
 import {WidgetType} from '../../../semantic';
-import {Undefinable} from '../../../utility-types';
 import {AnyAttributeBuild} from './any-attribute-build';
 import {DisablementAttributeBuild} from './disablement-attribute-build';
 import {PositionAttributeBuild} from './position-attribute-build';

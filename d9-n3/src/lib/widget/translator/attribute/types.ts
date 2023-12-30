@@ -1,5 +1,5 @@
+import {Nullable, Undefinable} from '@rainbow-d9/n1';
 import {ParsedListItemAttributePair} from '../../../semantic';
-import {Nullable, Undefinable} from '../../../utility-types';
 
 export type AnyAttributeName = string;
 export type WidgetPropertyName = string;

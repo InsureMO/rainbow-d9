@@ -1,4 +1,13 @@
-import {ModelHolder, MUtils, NodeDef, PPUtils, PropertyPath, VUtils, WrapperDelegate} from '@rainbow-d9/n1';
+import {
+	ModelHolder,
+	MUtils,
+	NodeDef,
+	PPUtils,
+	PropertyPath,
+	Undefinable,
+	VUtils,
+	WrapperDelegate
+} from '@rainbow-d9/n1';
 import React, {useEffect, useState} from 'react';
 import {TabDef} from './types';
 import {ATabBody} from './widgets';
@@ -27,7 +36,7 @@ export const TabBody = (props: TabBodyProps) => {
 			return;
 		}
 		(async () => {
-			let foundDef: NodeDef | undefined;
+			let foundDef: Undefinable<NodeDef>;
 			if (typeof def === 'function') {
 				foundDef = await def();
 			} else {

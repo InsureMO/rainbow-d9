@@ -1,4 +1,4 @@
-import {Undefinable} from '../utility-types';
+import {Undefinable} from '@rainbow-d9/n1';
 import {
 	AttributeValueBuild,
 	CustomAttributeName,

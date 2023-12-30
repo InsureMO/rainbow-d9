@@ -1,7 +1,6 @@
-import {BaseModel, NodeValidationScope, PropValue, VUtils} from '@rainbow-d9/n1';
+import {BaseModel, NodeValidationScope, PropValue, Undefinable, VUtils} from '@rainbow-d9/n1';
 import {ButtonClick, ButtonClickOptions} from '@rainbow-d9/n2';
 import {ParsedListItemAttributePair} from '../semantic';
-import {Undefinable} from '../utility-types';
 import {
 	AttributeValueBuild,
 	DecorateLeadsBuild,

@@ -1,6 +1,5 @@
-import {ArrayUsedDef, NodeDef} from '@rainbow-d9/n1';
+import {ArrayUsedDef, NodeDef, Undefinable} from '@rainbow-d9/n1';
 import {WidgetType} from '../../semantic';
-import {Undefinable} from '../../utility-types';
 import {AttributeValueBuild, CustomAttributeName, WidgetPropertyName} from './attribute';
 import {DisablementUtils, MonitorHandlerDetective, ValidatorUtils, VisibilityUtils} from './monitor';
 import {WidgetTranslatorRepository} from './translator-repository';

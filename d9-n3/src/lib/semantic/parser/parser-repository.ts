@@ -1,5 +1,5 @@
+import {Undefinable} from '@rainbow-d9/n1';
 import {AstNodePreparserRepository, createOrGetPreparserRepositorySingleton} from '../../ast';
-import {Undefinable} from '../../utility-types';
 import {ParsedNodeMap} from '../types';
 import {BlockquoteParser} from './blockquote-parser';
 import {BreakParser} from './break-parser';

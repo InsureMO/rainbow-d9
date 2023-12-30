@@ -3,6 +3,7 @@ import {
 	ArrayUsedDef,
 	BaseModel,
 	ContainerWidgetProps,
+	Nullable,
 	WidgetProps,
 	WidgetType
 } from './types';
@@ -84,7 +85,7 @@ export type WidgetRegistrationOptions = RegisteredWidget<WidgetProps> & { key: W
  * register given widget and return existing if there is
  * @param options
  */
-export const registerWidget = (options: WidgetRegistrationOptions): WidgetRegistrationOptions | null => {
+export const registerWidget = (options: WidgetRegistrationOptions): Nullable<WidgetRegistrationOptions> => {
 	const {key, ...widget} = options;
 	const existing = WidgetsRegistration[key] ?? null;
 	WidgetsRegistration[key] = widget;
@@ -96,7 +97,7 @@ export const registerWidget = (options: WidgetRegistrationOptions): WidgetRegist
 	return {key, ...existing};
 };
 
-export const findWidget = (key: WidgetType): WidgetRegistrationOptions | null => {
+export const findWidget = (key: WidgetType): Nullable<WidgetRegistrationOptions> => {
 	const widget = WidgetsRegistration[key];
 	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 	// @ts-ignore

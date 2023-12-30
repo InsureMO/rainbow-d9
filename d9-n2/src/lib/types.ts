@@ -20,8 +20,23 @@ export interface GlobalEventHandlers {
 	global: GlobalHandlers;
 }
 
-export interface $D9Window extends Window {
-	i18n: {
-		language: string;
-	};
+export interface $D9N2I18NLabels {
+	[key: string]: string | $D9N2I18NLabels;
+}
+
+export interface $D9N2LanguagePacks {
+	[key: string]: $D9N2I18NLabels;
+}
+
+export interface $D9N2IntlPack {
+	language: string;
+	labels: $D9N2LanguagePacks;
+}
+
+export interface $D9N2WindowExt {
+	intl: $D9N2IntlPack;
+}
+
+export interface $D9N2Window extends Window {
+	$d9n2: $D9N2WindowExt;
 }

@@ -1,5 +1,4 @@
-import {NodeDef} from '@rainbow-d9/n1';
-import {Undefinable} from '../utility-types';
+import {NodeDef, Undefinable} from '@rainbow-d9/n1';
 import {CustomAttributeName, SpecificArrayWidgetTranslator, WidgetPropertyName} from '../widget';
 import {N2WidgetType} from './types';
 

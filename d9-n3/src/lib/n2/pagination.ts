@@ -1,6 +1,5 @@
-import {NodeDef, VUtils} from '@rainbow-d9/n1';
+import {NodeDef, Undefinable, VUtils} from '@rainbow-d9/n1';
 import {ParsedListItemAttributePair} from '../semantic';
-import {Undefinable} from '../utility-types';
 import {AttributeValueBuild, CustomAttributeName, SpecificWidgetTranslator, WidgetPropertyName} from '../widget';
 import {N2WidgetType} from './types';
 

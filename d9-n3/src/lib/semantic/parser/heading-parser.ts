@@ -1,8 +1,7 @@
-import {NUtils, VUtils} from '@rainbow-d9/n1';
+import {NUtils, Undefinable, VUtils} from '@rainbow-d9/n1';
 import {Heading} from 'mdast';
 import {PreparsedHeading} from '../../ast';
 import {ParsedNodeType} from '../../node-types';
-import {Undefinable} from '../../utility-types';
 import {
 	ParsedHeading,
 	ParsedHeadingIdentified,
@@ -49,7 +48,7 @@ export class HeadingParser extends AbstractSemanticNodeWidgetParser<'heading'> {
 	}
 
 	protected findExportFlag(node: ParsedHeadingIdentified): boolean {
-		const paragraph: ParsedParagraph = (node.children ?? []).find(child => child.type === ParsedNodeType.PARAGRAPH) as ParsedParagraph | undefined;
+		const paragraph: ParsedParagraph = (node.children ?? []).find(child => child.type === ParsedNodeType.PARAGRAPH) as Undefinable<ParsedParagraph>;
 		if (paragraph == null) {
 			return false;
 		} else if (paragraph.children.length !== 1) {

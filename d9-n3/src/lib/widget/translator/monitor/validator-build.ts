@@ -4,12 +4,13 @@ import {
 	MonitorOthers,
 	NodeAttributeValue,
 	NodeAttributeValueHandleOptions,
+	Nullable,
 	PropValue,
+	Undefinable,
 	ValidationResult,
 	VUtils
 } from '@rainbow-d9/n1';
 import {WidgetType} from '../../../semantic';
-import {Nullable, Undefinable} from '../../../utility-types';
 import {AttributeMap} from '../types';
 import {AbstractMonitorBuild, createDefaultMonitorHandlerDetective} from './monitor-build';
 import {MonitorHandler, MonitorHandlerDetective, MonitorHandlerDetectOptions} from './types';

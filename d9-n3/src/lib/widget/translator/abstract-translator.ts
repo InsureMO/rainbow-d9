@@ -1,4 +1,4 @@
-import {ExternalDefIndicator, PropertyPath, VUtils} from '@rainbow-d9/n1';
+import {ExternalDefIndicator, Nullable, PropertyPath, Undefinable, VUtils} from '@rainbow-d9/n1';
 import {PreparsedSubordinateOfHeadingNodes} from '../../ast';
 import {N3Logger} from '../../logger';
 import {ParsedNodeType} from '../../node-types';
@@ -17,7 +17,6 @@ import {
 	WidgetType
 } from '../../semantic';
 import {ParsedNodeDef} from '../../types';
-import {Nullable, Undefinable} from '../../utility-types';
 import {AttributeNameUtils, AttributeUtils, D9PropertyNames} from './attribute';
 import {MonitorHandlerDetectOptions} from './monitor';
 import {SpecificWidgetTranslator} from './specific-translator';

@@ -1,4 +1,4 @@
-import {ExternalDefIndicator, VUtils} from '@rainbow-d9/n1';
+import {ExternalDefIndicator, Nullable, Undefinable, VUtils} from '@rainbow-d9/n1';
 import {ParsedNodeType} from '../../../node-types';
 import {
 	ParsedCode,
@@ -11,7 +11,6 @@ import {
 	ParsedText,
 	SemanticUtils
 } from '../../../semantic';
-import {Nullable, Undefinable} from '../../../utility-types';
 import {AbstractTranslator} from '../abstract-translator';
 import {FALSE_VALUES, TRUE_VALUES} from './constants';
 import {AttributeValueBuild, ScriptSnippet, WidgetPropertyName} from './types';

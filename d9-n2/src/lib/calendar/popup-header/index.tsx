@@ -1,8 +1,9 @@
 import {Dayjs} from 'dayjs';
 import React, {useState} from 'react';
 import styled from 'styled-components';
-import {CssVars, I18NVars} from '../../constants';
+import {CssVars} from '../../constants';
 import {Back, Date, Time} from '../../icons';
+import {IntlLabel} from '../../intl-label';
 import {useCalendarEventBus} from '../event/calendar-event-bus';
 import {CalendarEventTypes} from '../event/calendar-event-bus-types';
 import {CalendarProps} from '../types';
@@ -96,6 +97,8 @@ export const CalendarPopupHeader = (props: CalendarPopupHeaderProps) => {
 			: null}
 		{currentPicker !== CurrentPicker.DATE
 			? <PopupHeaderTimeButton onClick={onBackClicked}><BackIcon/></PopupHeaderTimeButton> : null}
-		<PopupHeaderTimeButton onClick={onConfirmClicked}>{I18NVars.CALENDAR.CONFIRM}</PopupHeaderTimeButton>
+		<PopupHeaderTimeButton onClick={onConfirmClicked}>
+			<IntlLabel keys={['calendar', 'confirm']} value="Ok"/>
+		</PopupHeaderTimeButton>
 	</PopupHeaderContainer>;
 };

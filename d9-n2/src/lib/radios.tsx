@@ -1,7 +1,8 @@
 import {MUtils, registerWidget, ValueChangeableNodeDef, WidgetProps} from '@rainbow-d9/n1';
 import React, {ForwardedRef, forwardRef, Fragment, ReactNode} from 'react';
 import styled from 'styled-components';
-import {CssVars, DOM_ID_WIDGET, DOM_KEY_WIDGET, I18NVars} from './constants';
+import {CssVars, DOM_ID_WIDGET, DOM_KEY_WIDGET} from './constants';
+import {IntlLabel} from './intl-label';
 import {
 	NO_AVAILABLE_OPTION_ITEM,
 	OnOptionValueChange,
@@ -112,13 +113,13 @@ export const Radios = forwardRef((props: RadiosProps, ref: ForwardedRef<HTMLDivE
 	const {
 		// eslint-disable-next-line @typescript-eslint/no-unused-vars
 		options, optionSort,
-		noAvailable = I18NVars.OPTIONS.NO_AVAILABLE,
+		noAvailable = <IntlLabel keys={['options', 'noAvailable']} value="No available options."/>,
 		columns = -1, compact = true,
 		$pp, $wrapped: {$onValueChange, $model, $avs: {$disabled, $visible}},
 		...rest
 	} = props;
 
-	const {createAskDisplayOptions} = useOptionItems(props);
+	const {createAskDisplayOptions} = useOptionItems({...props, noAvailable});
 
 	const onOptionClicked = (option: OptionItem<RadiosOptionValue>) => async () => {
 		if ($disabled) {

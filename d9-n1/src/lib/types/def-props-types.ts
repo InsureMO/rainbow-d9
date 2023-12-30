@@ -1,5 +1,5 @@
 import {ReactNode} from 'react';
-import {ArrayPropValue, BaseModel, PropertyPath, PropValue, WidgetType} from './model-types';
+import {ArrayPropValue, BaseModel, PropertyPath, PropValue, Undefinable, WidgetType} from './model-types';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type NodeAttributeValue = any;
@@ -56,7 +56,7 @@ export enum Reaction {
 	CLEAR_VALUE = 'clear-value'
 }
 
-export interface ReactionMonitor extends Omit<MonitorOthers<Array<Reaction> | Reaction | undefined>, '$default'> {
+export interface ReactionMonitor extends Omit<MonitorOthers<Undefinable<Array<Reaction> | Reaction>>, '$default'> {
 }
 
 export enum MonitorNodeAttributes {

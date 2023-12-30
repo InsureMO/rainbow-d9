@@ -1,6 +1,6 @@
+import {Undefinable} from '@rainbow-d9/n1';
 import {Content, Parent} from 'mdast';
 import {N3Logger} from '../../logger';
-import {Undefinable} from '../../utility-types';
 import {PreparsedNode, PreparsedNodeMap} from '../types';
 import {AbstractAstNodePreparser} from './ast-node-preparser';
 import {AstNodePreparserRepository} from './preparser-repository';

@@ -1,7 +1,6 @@
-import {VUtils} from '@rainbow-d9/n1';
+import {Undefinable, VUtils} from '@rainbow-d9/n1';
 import {RadioPossibleValues} from '@rainbow-d9/n2';
 import {ParsedListItemAttributePair} from '../semantic';
-import {Undefinable} from '../utility-types';
 import {
 	AttributeValueBuild,
 	MonitorHandlerDetective,

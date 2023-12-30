@@ -1,8 +1,8 @@
 import {BaseModel, MUtils, PPUtils, PropValue, registerWidget, VUtils} from '@rainbow-d9/n1';
 import React, {ForwardedRef, forwardRef} from 'react';
 import {ButtonFill, ButtonInk} from '../button';
-import {I18NVars} from '../constants';
 import {DropdownOptions} from '../dropdown';
+import {IntlLabel} from '../intl-label';
 import {UnwrappedButton} from '../unwrapped/button';
 import {UnwrappedDropdown} from '../unwrapped/dropdown';
 import {PaginationData, PaginationProps} from './types';
@@ -133,31 +133,31 @@ export const Pagination = forwardRef((props: PaginationProps, ref: ForwardedRef<
 	const format = new Intl.NumberFormat((void 0), {useGrouping: true, maximumFractionDigits: 0}).format;
 	const pageCount = format(data.pageCount);
 	const itemCount = data.itemCount === -1
-		? I18NVars.PAGINATION.UNKNOWN_ITEM_COUNT
+		? <IntlLabel keys={['pagination', 'unknownItemCount']} value="???"/>
 		: format(data.itemCount);
 
 	return <APagination {...rest} data-disabled={$disabled} data-visible={$visible}
 	                    id={PPUtils.asId(PPUtils.absolute($p2r, props.$pp), props.id)}
 	                    ref={ref}>
 		<div data-page-info={true}>
-			<span>{I18NVars.PAGINATION.PAGE}</span>
+			<span><IntlLabel keys={['pagination', 'page']} value=""/></span>
 			{freeWalk
 				? <UnwrappedDropdown value={data.pageNumber} options={buildFreeWalkOptions()}
 				                     clearable={false} data-free-walk={true}
 				                     onValueChange={onFreeWalkChanged}/>
 				: <span>{data.pageNumber}</span>}
-			<span>{I18NVars.PAGINATION.OF}</span>
+			<span><IntlLabel keys={['pagination', 'of']} value="of"/></span>
 			<span>{pageCount}</span>
-			<span>{I18NVars.PAGINATION.PAGES}</span>
+			<span><IntlLabel keys={['pagination', 'pages']} value="pages,"/></span>
 			{possibleSizesOptions.length !== 0
 				? <UnwrappedDropdown value={data.pageSize} options={possibleSizesOptions}
 				                     clearable={false} data-possible-sizes={true}
 				                     onValueChange={onPageSizeChanged}/>
 				: <span>{data.pageSize}</span>}
-			<span>{I18NVars.PAGINATION.AFTER_SIZE}</span>
-			<span>{I18NVars.PAGINATION.TOTAL}</span>
+			<span><IntlLabel keys={['pagination', 'afterSize']} value="items per page,"/></span>
+			<span><IntlLabel keys={['pagination', 'total']} value="total"/></span>
 			<span>{itemCount}</span>
-			<span>{I18NVars.PAGINATION.ITEMS}</span>
+			<span><IntlLabel keys={['pagination', 'items']} value="items."/></span>
 		</div>
 		<div data-page-buttons={true}>
 			{hasPrevious

@@ -1,11 +1,12 @@
+import {Nullable} from '@rainbow-d9/n1';
 import {RefObject, useEffect} from 'react';
 
-export const notInMe = (me: HTMLOrSVGElement, target: EventTarget | null): boolean => {
+export const notInMe = (me: HTMLOrSVGElement, target: Nullable<EventTarget>): boolean => {
 	const body = document.body;
 	if (target === window) {
 		return true;
 	}
-	let parent: HTMLElement | null | undefined = target as HTMLElement;
+	let parent: Nullable<HTMLElement> = target as HTMLElement;
 	while (parent != null) {
 		if (parent === me) {
 			return false;

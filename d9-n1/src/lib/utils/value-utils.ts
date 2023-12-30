@@ -1,4 +1,5 @@
 import {nanoid} from 'nanoid';
+import {Undefinable} from '../types';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type AnyValue = any;
@@ -31,7 +32,7 @@ export interface ValueUtilsType {
 	 */
 	readonly isPrimitive: (v?: AnyValue) => boolean;
 	readonly isNumber: (v?: AnyValue) => TestedNotNumericValue | TestedIsNumericValue;
-	readonly assertNumber: (v: AnyValue | undefined, assert: (v: number) => boolean) => TestedNotNumericValue | TestedIsNumericValue;
+	readonly assertNumber: (v: Undefinable<AnyValue>, assert: (v: number) => boolean) => TestedNotNumericValue | TestedIsNumericValue;
 	readonly isInteger: (v?: AnyValue) => TestedNotNumericValue | TestedIsNumericValue;
 	readonly isNotInteger: (v?: AnyValue) => TestedNotNumericValue | TestedIsNumericValue;
 	readonly isPositive: (v?: AnyValue) => TestedNotNumericValue | TestedIsNumericValue;
@@ -67,7 +68,7 @@ export const VUtils: ValueUtilsType = {
 				return {test: false};
 		}
 	},
-	assertNumber: (v: AnyValue | undefined, assert: (v: number) => boolean) => {
+	assertNumber: (v: Undefinable<AnyValue>, assert: (v: number) => boolean) => {
 		const result = VUtils.isNumber(v);
 		if (!result.test) {
 			return result;

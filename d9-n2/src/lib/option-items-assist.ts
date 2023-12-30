@@ -1,6 +1,5 @@
 import {BaseModel, PropValue, useWrapperEventBus, VUtils, WidgetProps, WrapperEventTypes} from '@rainbow-d9/n1';
 import {ReactNode, useEffect, useState} from 'react';
-import {I18NVars} from './constants';
 
 /**
  * property "key" is optional, it is required when "value" is object or something else which cannot use as identity.
@@ -51,7 +50,7 @@ export interface OptionItemCandidates<V> {
 
 export const useOptionItems = <V>(props: OptionItemsProps<V>) => {
 	const {
-		options = NO_OPTION_ITEM, noAvailable = I18NVars.OPTIONS.NO_AVAILABLE,
+		options = NO_OPTION_ITEM, noAvailable,
 		$wrapped: {$root, $model}
 	} = props;
 

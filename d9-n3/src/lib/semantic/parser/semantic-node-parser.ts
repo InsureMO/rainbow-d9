@@ -1,6 +1,6 @@
+import {Undefinable} from '@rainbow-d9/n1';
 import {N3Logger} from '../../logger';
 import {ParsedNodeType} from '../../node-types';
-import {Undefinable} from '../../utility-types';
 import {
 	ParsedEmphasis,
 	ParsedInlineCode,

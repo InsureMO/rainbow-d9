@@ -1,7 +1,7 @@
-import {EnhancedPropsForArray, useForceUpdate, Wrapper} from '@rainbow-d9/n1';
+import {EnhancedPropsForArray, Nullable, useForceUpdate, Wrapper} from '@rainbow-d9/n1';
 import React, {useEffect} from 'react';
 import {Button, ButtonInk} from '../button';
-import {I18NVars} from '../constants';
+import {IntlLabel} from '../intl-label';
 import {PaginationData} from '../pagination';
 import {useTableEventBus} from './event/table-event-bus';
 import {TableEventTypes} from './event/table-event-bus-types';
@@ -35,7 +35,7 @@ export const TableBottomBar = (props: Omit<TableProps, '$array'> & { $array: Enh
 		const onAddClicked = async () => await addElement();
 		// it will refresh the pagination first, model updated
 		const onPaginationChanged = async (options: {
-			oldValue?: PaginationData | null; newValue: PaginationData;
+			oldValue?: Nullable<PaginationData>; newValue: PaginationData;
 		}) => {
 			fire(TableEventTypes.PAGE_CHANGED, options.oldValue, options.newValue);
 		};
@@ -53,7 +53,8 @@ export const TableBottomBar = (props: Omit<TableProps, '$array'> & { $array: Enh
 				: null}
 			{(pageable != null && addable !== false) ? <ATableBottomBarSeparator/> : null}
 			{addable !== false
-				? <Button $wrapped={$wrapped} ink={ButtonInk.PRIMARY} text={addLabel ?? I18NVars.TABLE.CREATE_ITEM}
+				? <Button $wrapped={$wrapped} ink={ButtonInk.PRIMARY}
+				          text={addLabel ?? <IntlLabel keys={['table', 'createItem']} value="Create New Element"/>}
 				          click={onAddClicked}/>
 				: null}
 		</ATableBottomBar>;

@@ -1,6 +1,6 @@
 import {EnhancedPropsForArray} from '@rainbow-d9/n1';
 import React from 'react';
-import {I18NVars} from '../constants';
+import {IntlLabel} from '../intl-label';
 import {RibsProps} from './types';
 import {ARibNoDataRow} from './widgets';
 
@@ -10,6 +10,8 @@ export const RibNoData = (props: Omit<RibsProps, '$array'> & { $array: EnhancedP
 	if (hasElement) {
 		return null;
 	} else {
-		return <ARibNoDataRow>{noElementReminder ?? I18NVars.RIBS.NO_ELEMENT}</ARibNoDataRow>;
+		return <ARibNoDataRow>
+			{noElementReminder ?? <IntlLabel keys={['ribs', 'noElement']} value="No data found."/>}
+		</ARibNoDataRow>;
 	}
 };

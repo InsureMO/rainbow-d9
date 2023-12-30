@@ -1,4 +1,4 @@
-import {MUtils, PPUtils, VUtils} from '@rainbow-d9/n1';
+import {MUtils, Nullable, PPUtils, VUtils} from '@rainbow-d9/n1';
 import dayjs, {Dayjs} from 'dayjs';
 import React, {MouseEvent} from 'react';
 import {CssVars} from '../constants';
@@ -69,7 +69,7 @@ export const Picker = (props: CalendarProps) => {
 		}
 		showPopup();
 	};
-	const redressTimePart = (value: Dayjs | null): Dayjs => {
+	const redressTimePart = (value: Nullable<Dayjs>): Dayjs => {
 		if (value == null) {
 			return null;
 		}
@@ -105,7 +105,7 @@ export const Picker = (props: CalendarProps) => {
 			return;
 		}
 
-		fire(CalendarEventTypes.ASK_VALUE, async (newValue: Dayjs | null) => {
+		fire(CalendarEventTypes.ASK_VALUE, async (newValue: Nullable<Dayjs>) => {
 			newValue = redressTimePart(newValue);
 			if (VUtils.isBlank(value)) {
 				if (newValue != null) {
@@ -149,7 +149,7 @@ export const Picker = (props: CalendarProps) => {
 		setPopupShown(false);
 	};
 
-	const value = MUtils.getValue($model, $pp) as string | null | undefined;
+	const value = MUtils.getValue($model, $pp) as Nullable<string>;
 	const valueAssigned = VUtils.isNotBlank(value);
 	const label = (() => {
 		if (VUtils.isBlank(value)) {
@@ -162,7 +162,7 @@ export const Picker = (props: CalendarProps) => {
 		}
 	})();
 
-	const initValueForPopup = ((): Dayjs | null => {
+	const initValueForPopup = ((): Nullable<Dayjs> => {
 		if (VUtils.isBlank(value)) {
 			return null;
 		}

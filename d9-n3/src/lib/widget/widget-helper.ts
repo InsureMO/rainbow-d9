@@ -1,8 +1,7 @@
-import {NodeDef} from '@rainbow-d9/n1';
+import {NodeDef, Undefinable} from '@rainbow-d9/n1';
 import {N3Logger} from '../logger';
 import {ParsedHeadingIdentified} from '../semantic';
 import {ParsedNodeDef} from '../types';
-import {Undefinable} from '../utility-types';
 import {createOrGetTranslatorRepositorySingleton, WidgetTranslatorRepository} from './translator';
 
 export class WidgetHelper {

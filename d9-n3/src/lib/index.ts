@@ -1,6 +1,6 @@
 export * from './types';
 export * from './node-types';
-export * from './utility-types';
+export * from '@rainbow-d9/n1';
 export * from './node-types';
 export * from './logger';
 

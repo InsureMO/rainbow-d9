@@ -1,3 +1,4 @@
+import {Nullable} from '@rainbow-d9/n1';
 import {
 	ParsedListItem,
 	ParsedListItemAttributePair,
@@ -5,7 +6,6 @@ import {
 	ParsedListItemRefWidget,
 	ParsedListItemWidget
 } from '../../semantic';
-import {Nullable} from '../../utility-types';
 
 /**
  * classified list item, note might from different lists

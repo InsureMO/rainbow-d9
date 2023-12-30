@@ -4,11 +4,12 @@ import {
 	MonitorOthers,
 	NodeAttributeValueHandleOptions,
 	NodeAttributeValueInitializerOptions,
+	Nullable,
 	PropValue,
+	Undefinable,
 	WidgetType
 } from '@rainbow-d9/n1';
 import {N3Logger} from '../../../logger';
-import {Nullable, Undefinable} from '../../../utility-types';
 import {AttributeMap} from '../types';
 import {AbstractMonitorBuild, createDefaultMonitorHandlerDetective} from './monitor-build';
 import {MonitorHandlerDetective} from './types';

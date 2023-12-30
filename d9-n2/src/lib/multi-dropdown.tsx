@@ -1,5 +1,6 @@
 import {
 	MUtils,
+	Nullable,
 	PPUtils,
 	PropValue,
 	registerWidget,
@@ -49,7 +50,7 @@ export type MultiDropdownDef =
  * 1. new value should be an array or null
  * 2. option is currently selected, or null if it is clearing. when option is given, use select to identify that this option is add or remove value into model
  */
-export type OnMultiDropdownValueChange = <NV extends PropValue>(newValue: NV, option: MultiDropdownOption | null, select: boolean) => void | Promise<void>;
+export type OnMultiDropdownValueChange = <NV extends PropValue>(newValue: NV, option: Nullable<MultiDropdownOption>, select: boolean) => void | Promise<void>;
 /** widget definition, with html attributes */
 export type MultiDropdownProps = OmitNodeDef<MultiDropdownDef> & Omit<WidgetProps, '$wrapped'> & {
 	$wrapped: Omit<WidgetProps['$wrapped'], '$onValueChange'> & {

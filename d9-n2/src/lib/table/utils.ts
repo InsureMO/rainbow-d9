@@ -1,4 +1,4 @@
-import {BaseModel, MUtils, VUtils} from '@rainbow-d9/n1';
+import {BaseModel, MUtils, Undefinable, VUtils} from '@rainbow-d9/n1';
 import {CssVars} from '../constants';
 import {toCssSize} from '../utils';
 import {TableProps} from './types';
@@ -50,7 +50,7 @@ export const computeColumnsWidth = (props: Omit<TableProps, 'children'>) => {
 	columnsWidth.unshift(rowIndexColumnWidth);
 
 	const columnsCount = columnsWidth.length;
-	const stickyOffsets: Array<[boolean, string | undefined, string | undefined]> = columnsWidth.map((width, index) => {
+	const stickyOffsets: Array<[boolean, Undefinable<string>, Undefinable<string>]> = columnsWidth.map((width, index) => {
 		if (index === 0) {
 			return [true, '0', (void 0)];
 		} else if (index === columnsCount - 1) {

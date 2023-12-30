@@ -1,3 +1,4 @@
+import {Nullable} from '@rainbow-d9/n1';
 import dayjs, {Dayjs} from 'dayjs';
 import React, {RefObject, useState} from 'react';
 import {CssVars} from '../constants';
@@ -11,7 +12,7 @@ import {PopupContainer} from './widgets';
 import {YearMonthPicker} from './year-month-picker';
 
 interface CalendarPopupProps extends Required<Pick<CalendarProps, 'dateFormat' | 'time' | 'timeFormat' | 'initTimeAt'>> {
-	initValue?: Dayjs | null;
+	initValue?: Nullable<Dayjs>;
 	popupRef: RefObject<HTMLDivElement>;
 	popupState: DropdownPopupState;
 	popupShown: boolean;

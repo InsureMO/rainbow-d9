@@ -3,6 +3,7 @@ import {
 	Enhance$WrappedPropsForArrayElement,
 	MUtils,
 	NodeDef,
+	Nullable,
 	PPUtils,
 	PropValue,
 	registerWidget,
@@ -28,7 +29,7 @@ export interface CaptionValueToLabelFormats {
 	nf3: (value?: number) => string;
 }
 
-export type CaptionValueToLabel = (value: PropValue | null | undefined, formats: CaptionValueToLabelFormats) => ReactNode;
+export type CaptionValueToLabel = (value: Nullable<PropValue>, formats: CaptionValueToLabelFormats) => ReactNode;
 
 export interface CaptionClickOptions<R extends BaseModel, M extends PropValue>
 	extends ModelCarriedHandler<R, M>, ValidationHandlers, GlobalEventHandlers {

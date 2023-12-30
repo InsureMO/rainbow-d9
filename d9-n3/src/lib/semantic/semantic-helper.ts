@@ -1,4 +1,4 @@
-import {Undefinable} from '../utility-types';
+import {Undefinable} from '@rainbow-d9/n1';
 import {createOrGetParserRepositorySingleton, HeadingParser} from './parser';
 import {IdentifiedBlock, IdentifiedBlockType, ParsedHeading, ParsedHeadingIdentified, WidgetFlag} from './types';
 import {SemanticUtils} from './utils';

@@ -7,10 +7,10 @@ import {
 	PPUtils,
 	PropValue,
 	Reaction,
+	Undefinable,
 	VUtils
 } from '@rainbow-d9/n1';
 import {WidgetType} from '../../../semantic';
-import {Undefinable} from '../../../utility-types';
 import {AttributeMap} from '../types';
 import {AbstractMonitorBuild} from './monitor-build';
 import {MonitorHandlerDetective} from './types';

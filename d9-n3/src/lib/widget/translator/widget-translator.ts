@@ -1,10 +1,9 @@
-import {ContainerDef, NodeDef, PropertyPath, VUtils} from '@rainbow-d9/n1';
+import {ContainerDef, NodeDef, Nullable, PropertyPath, Undefinable, VUtils} from '@rainbow-d9/n1';
 import {PreparsedListItem} from '../../ast';
 import {N3Logger} from '../../logger';
 import {ParsedNodeType} from '../../node-types';
 import {ParsedListItemAttributePair, ParsedListItemKind, SemanticUtils, WidgetFlag, WidgetType} from '../../semantic';
 import {ParsedNodeDef} from '../../types';
-import {Nullable, Undefinable} from '../../utility-types';
 import {AbstractTranslator, Decipherable} from './abstract-translator';
 import {AttributeNameUtils} from './attribute';
 import {SpecificWidgetTranslator} from './specific-translator';

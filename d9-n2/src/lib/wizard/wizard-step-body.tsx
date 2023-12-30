@@ -1,7 +1,7 @@
-import {ModelHolder, NodeDef, PropertyPath, VUtils, WrapperDelegate} from '@rainbow-d9/n1';
+import {ModelHolder, NodeDef, PropertyPath, Undefinable, VUtils, WrapperDelegate} from '@rainbow-d9/n1';
 import React, {useEffect, useState} from 'react';
 import {ButtonFill, ButtonInk} from '../button';
-import {I18NVars} from '../constants';
+import {IntlLabel} from '../intl-label';
 import {UnwrappedButton as Button} from '../unwrapped/button';
 import {UnwrappedButtonBar as ButtonBar} from '../unwrapped/button-bar';
 import {useWizardEventBus} from './event/wizard-event-bus';
@@ -44,7 +44,7 @@ export const WizardStepBody = (props: WizardStepBodyProps) => {
 			return;
 		}
 		(async () => {
-			let foundDef: NodeDef | undefined;
+			let foundDef: Undefinable<NodeDef>;
 			if (typeof def === 'function') {
 				foundDef = await def();
 			} else {
@@ -103,14 +103,14 @@ export const WizardStepBody = (props: WizardStepBodyProps) => {
 					: <Button onClick={onToPreviousClicked}
 					          leads={['$icons.angleLeft']}
 					          ink={ButtonInk.WAIVE} fill={ButtonFill.FILL}>
-						{I18NVars.WIZARD.PREVIOUS}
+						<IntlLabel keys={['wizard', 'previous']} value="Previous"/>
 					</Button>}
 				{lastStep
 					? <span/>
 					: <Button onClick={onToNextClicked}
 					          tails={['$icons.angleRight']}
 					          ink={ButtonInk.PRIMARY} fill={ButtonFill.FILL}>
-						{I18NVars.WIZARD.NEXT}
+						<IntlLabel keys={['wizard', 'next']} value="Next"/>
 					</Button>}
 			</ButtonBar>}
 	</AWizardStepBody>;

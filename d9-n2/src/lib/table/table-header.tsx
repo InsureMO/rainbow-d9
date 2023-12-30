@@ -1,4 +1,4 @@
-import {NUtils} from '@rainbow-d9/n1';
+import {NUtils, Undefinable} from '@rainbow-d9/n1';
 import React from 'react';
 import {TableProps} from './types';
 import {ATableHeaderCell} from './widgets';
@@ -6,7 +6,7 @@ import {ATableHeaderCell} from './widgets';
 export interface TableHeaderProps {
 	headers: TableProps['headers'];
 	headerHeight: TableProps['headerHeight'];
-	stickyOffsets: Array<[boolean, string | undefined, string | undefined]>;
+	stickyOffsets: Array<[boolean, Undefinable<string>, Undefinable<string>]>;
 	tailGrabberAppended: boolean;
 }
 

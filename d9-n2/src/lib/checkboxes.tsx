@@ -1,8 +1,9 @@
-import {MUtils, PropValue, registerWidget, ValueChangeableNodeDef, WidgetProps} from '@rainbow-d9/n1';
+import {MUtils, Nullable, PropValue, registerWidget, ValueChangeableNodeDef, WidgetProps} from '@rainbow-d9/n1';
 import React, {ForwardedRef, forwardRef, Fragment, ReactNode} from 'react';
 import styled from 'styled-components';
 import {Checkbox, CheckboxProps} from './checkbox';
-import {CssVars, DOM_ID_WIDGET, DOM_KEY_WIDGET, I18NVars} from './constants';
+import {CssVars, DOM_ID_WIDGET, DOM_KEY_WIDGET} from './constants';
+import {IntlLabel} from './intl-label';
 import {NO_AVAILABLE_OPTION_ITEM, OptionItem, OptionItemsDef, useOptionItems} from './option-items-assist';
 import {OmitHTMLProps, OmitNodeDef} from './types';
 
@@ -21,7 +22,7 @@ export type CheckboxesDef =
  * 1. new value should be an array or null
  * 2. option is currently selected, or null if it is clearing. when option is given, use select to identify that this option is add or remove value into model
  */
-export type OnCheckboxesValueChange = <NV extends PropValue>(newValue: NV, option: OptionItem<CheckboxesOptionValue> | null, select: boolean) => void | Promise<void>;
+export type OnCheckboxesValueChange = <NV extends PropValue>(newValue: NV, option: Nullable<OptionItem<CheckboxesOptionValue>>, select: boolean) => void | Promise<void>;
 
 /** widget definition, with html attributes */
 export type CheckboxesProps = OmitNodeDef<CheckboxesDef> & Omit<WidgetProps, '$wrapped'> & {
@@ -108,13 +109,13 @@ export const Checkboxes = forwardRef((props: CheckboxesProps, ref: ForwardedRef<
 	const {
 		// eslint-disable-next-line @typescript-eslint/no-unused-vars
 		options, optionSort,
-		noAvailable = I18NVars.OPTIONS.NO_AVAILABLE,
+		noAvailable = <IntlLabel keys={['options', 'noAvailable']} value="No available options."/>,
 		columns = -1, compact = true,
 		$pp, $wrapped: {$onValueChange, $model, $avs: {$disabled, $visible}},
 		...rest
 	} = props;
 
-	const {createAskDisplayOptions} = useOptionItems(props);
+	const {createAskDisplayOptions} = useOptionItems({...props, noAvailable});
 
 	const getValues = () => {
 		const modelValues: CheckboxesOptionValue | Array<CheckboxesOptionValue> = MUtils.getValue($model, $pp) as CheckboxesOptionValue;
@@ -142,8 +143,9 @@ export const Checkboxes = forwardRef((props: CheckboxesProps, ref: ForwardedRef<
 
 	if (displayOptions.length === 0 || displayOptions.length === 1 && displayOptions[0].value == NO_AVAILABLE_OPTION_ITEM) {
 		return <ACheckboxes data-disabled={$disabled} data-visible={$visible} {...rest}>
-			<Option data-can-click={false} columns={0} compact={true}
-			        data-w="d9-checkboxes-no-available">{noAvailable}</Option>
+			<Option data-can-click={false} columns={0} compact={true} data-w="d9-checkboxes-no-available">
+				{noAvailable}
+			</Option>
 		</ACheckboxes>;
 	}
 

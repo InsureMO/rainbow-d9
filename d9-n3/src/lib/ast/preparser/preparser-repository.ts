@@ -1,4 +1,4 @@
-import {Undefinable} from '../../utility-types';
+import {Undefinable} from '@rainbow-d9/n1';
 import {PreparsedNodeMap} from '../types';
 import {AbstractAstNodePreparser} from './ast-node-preparser';
 import {BlockquotePreparser} from './blockquote-preparser';

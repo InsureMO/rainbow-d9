@@ -16,6 +16,7 @@ import {
 	ModelHolder,
 	NodeAttributeValues,
 	NodeDef,
+	Nullable,
 	OnValueChange,
 	PropertyPath,
 	WidgetProps,
@@ -101,7 +102,7 @@ export const renderContainerChildren = (options: {
 };
 
 export const ArrayElement = (props: {
-	elements: Array<BaseModel> | null | undefined, elementModel: BaseModel; index: number;
+	elements: Nullable<Array<BaseModel>>, elementModel: BaseModel; index: number;
 	$wrapped: WrappedAttributes; $arrayP2r: PropertyPath;
 	$array: EnhancedPropsForArray;
 	createRemoveElementFunc: (elementModel: BaseModel, index: number) => (() => Promise<void>);

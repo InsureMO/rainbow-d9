@@ -1,4 +1,4 @@
-import {VUtils} from '@rainbow-d9/n1';
+import {Nullable, VUtils} from '@rainbow-d9/n1';
 import {List} from 'mdast';
 import {PreparsedList, PreparsedListItem, PreparsedParagraph, PreparsedSubordinateOfListItemNodes} from '../../ast';
 import {N3Logger} from '../../logger';
@@ -159,7 +159,7 @@ export class ListParser extends AbstractSemanticNodeWidgetParser<'list'> {
 		return {attributeName: matches[1].trim(), attributeValue: matches[2].trim()};
 	}
 
-	protected regroupToParagraph(paragraph: ParsedParagraph, phrasings: Array<ParsedPhrasingNodes>): ParsedParagraph | null {
+	protected regroupToParagraph(paragraph: ParsedParagraph, phrasings: Array<ParsedPhrasingNodes>): Nullable<ParsedParagraph> {
 		if (phrasings.length == 0) {
 			return null;
 		} else {

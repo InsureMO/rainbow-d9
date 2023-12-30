@@ -1,4 +1,5 @@
 import color from 'color';
+import {$D9N2Window} from './types';
 
 export const DOM_KEY_WIDGET = 'data-w';
 export const DOM_ID_WIDGET = 'data-wid';
@@ -190,67 +191,47 @@ export type CssVarsType = typeof CssVars & {
 	CALENDAR_POPUP_WIDTH_VALUE: number;
 }
 
-export const I18NVars = {
-	ALERT: {CONFIRM: 'Ok'},
-	DIALOG: {CONFIRM: 'Yes', DISCARD: 'No'},
-	CALENDAR: {
-		CONFIRM: 'OK',
-		TODAY: 'Today',
-		HOUR: 'Hour',
-		MINUTE: 'Minute',
-		SECOND: 'Second',
-		YESTERDAY: 'YESTERDAY',
-		THIS_WEEKEND: 'THIS WEEKEND',
-		PREV_WEEKEND: 'PREV WEEKEND',
-		THIS_MONTH_END: 'THIS MONTH END',
-		PREV_MONTH_END: 'PREV MONTH END',
-		THIS_YEAR_END: 'THIS YEAR END',
-		PREV_YEAR_END: 'PREV YEAR END',
-		JAN: 'Jan',
-		FEB: 'Feb',
-		MAR: 'Mar',
-		APR: 'Apr',
-		MAY: 'May',
-		JUN: 'Jun',
-		JUL: 'Jul',
-		AUG: 'Aug',
-		SEP: 'Sep',
-		OCT: 'Oct',
-		NOV: 'Nov',
-		DEC: 'Dec',
-		SUNDAY: 'S',
-		MONDAY: 'M',
-		TUESDAY: 'T',
-		WEDNESDAY: 'W',
-		THURSDAY: 'T',
-		FRIDAY: 'F',
-		SATURDAY: 'S'
-	},
-	OPTIONS: {
-		NO_AVAILABLE: 'No available options.',
-		NO_MATCHED: 'No matched options.'
-	},
-	RIBS: {
-		NO_ELEMENT: 'No data found.',
-		CREATE_ITEM: 'Create New Element',
-		REMOVE_ITEM: 'Remove'
-	},
-	TABLE: {
-		NO_ELEMENT: 'No data found.',
-		CREATE_ITEM: 'Create New Element',
-		REMOVE_ITEM: 'Remove'
-	},
-	WIZARD: {
-		PREVIOUS: 'Previous',
-		NEXT: 'Next'
-	},
-	PAGINATION: {
-		PAGE: '',
-		OF: 'of',
-		PAGES: 'pages,',
-		AFTER_SIZE: 'items per page,',
-		TOTAL: 'total',
-		UNKNOWN_ITEM_COUNT: '???',
-		ITEMS: 'items.'
+const $d9: $D9N2Window = window as unknown as $D9N2Window;
+$d9.$d9n2 = $d9.$d9n2 ?? {
+	intl: {
+		language: navigator.language || 'en-US',
+		labels: {
+			'en-US': {
+				builtIn: {
+					alert: {confirm: 'Ok'},
+					dialog: {confirm: 'Yes', discard: 'No'},
+					options: {noAvailable: 'No available options.', noMatched: 'No matched options.'},
+					calendar: {
+						confirm: 'Ok',
+						today: 'Today', hour: 'Hour', minute: 'Minute', second: 'Second',
+						yesterday: 'Yesterday',
+						thisWeekEnd: 'This Weekend', prevWeekend: 'Prev Weekend',
+						thisMonthEnd: 'This Month End', prevMonthEnd: 'Prev month End',
+						thisYearEnd: 'This Year End', prevYearEnd: 'Prev Year End',
+						jan: 'Jan', feb: 'Feb', mar: 'Mar', apr: 'Apr', may: 'May', jun: 'Jun',
+						jul: 'Jul', aug: 'Aug', sep: 'Sep', oct: 'Oct', nov: 'Nov', dec: 'Dec',
+						sunday: 'S', monday: 'M', tuesday: 'T', wednesday: 'W',
+						thursday: 'T', friday: 'F', saturday: 'S'
+					},
+					ribs: {
+						noElement: 'No data found.',
+						createItem: 'Create New Element',
+						removeItem: 'Remove'
+					},
+					table: {
+						noElement: 'No data found.',
+						createItem: 'Create New Element',
+						removeItem: 'Remove'
+					},
+					wizard: {previous: 'Previous', next: 'Next'},
+					pagination: {
+						page: '', of: 'of', pages: 'pages,', afterSize: 'items per page,',
+						total: 'total', unknownItemCount: '???', items: 'items.'
+					}
+				}
+			}
+		}
 	}
 };
+
+export const $d9n2 = $d9.$d9n2;

@@ -11,9 +11,10 @@ import React, {
 	useState
 } from 'react';
 import styled from 'styled-components';
-import {CssVars, DOM_ID_WIDGET, DOM_KEY_WIDGET, I18NVars} from './constants';
+import {CssVars, DOM_ID_WIDGET, DOM_KEY_WIDGET} from './constants';
 import {useCollapseFixedThing} from './hooks';
 import {CaretDown, Times} from './icons';
+import {IntlLabel} from './intl-label';
 import {
 	NO_MATCHED_OPTION_ITEM,
 	OptionItems,
@@ -326,7 +327,9 @@ export const useDropdownControl = (options: {
 // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-constraint, @typescript-eslint/no-explicit-any
 export const useFilterableDropdownOptions = <V extends any>(props: OptionItemsProps<V>) => {
 	const {
-		optionSort, noMatched = I18NVars.OPTIONS.NO_MATCHED,
+		optionSort,
+		noAvailable = <IntlLabel keys={['options', 'noAvailable']} value="No available options."/>,
+		noMatched = <IntlLabel keys={['options', 'noMatched']} value="No matched options."/>,
 		$wrapped: {$avs: {$disabled}}
 	} = props;
 
@@ -344,7 +347,7 @@ export const useFilterableDropdownOptions = <V extends any>(props: OptionItemsPr
 		afterPopupHide: functions.afterPopupHide
 	});
 
-	const {askOptions, createAskDisplayOptions} = useOptionItems(props);
+	const {askOptions, createAskDisplayOptions} = useOptionItems({...props, noAvailable});
 	const askDisplayOptions = createAskDisplayOptions(() => {
 		return VUtils.isNotBlank(filter) || optionSort != null;
 	}, (options: OptionItems<V>): OptionItems<V> => {

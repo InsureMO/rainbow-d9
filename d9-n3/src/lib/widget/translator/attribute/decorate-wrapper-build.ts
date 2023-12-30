@@ -1,8 +1,7 @@
-import {VUtils} from '@rainbow-d9/n1';
+import {Undefinable, VUtils} from '@rainbow-d9/n1';
 import {DecorateElement} from '@rainbow-d9/n2';
 import {ParsedNodeType} from '../../../node-types';
 import {ParsedList, ParsedListItemAttributePair, SemanticUtils} from '../../../semantic';
-import {Undefinable} from '../../../utility-types';
 import {AttributeValueBuild, WidgetPropertyName} from './types';
 
 export const DecorateItemsByStrBuild = (value: string): Array<DecorateElement> => {

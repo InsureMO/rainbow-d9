@@ -1,9 +1,8 @@
-import {NodeDef, VUtils} from '@rainbow-d9/n1';
+import {NodeDef, Undefinable, VUtils} from '@rainbow-d9/n1';
 import {AstHelper, createOrGetAskHelperSingleton} from './ast';
 import {N3Logger} from './logger';
 import {createOrGetSemanticHelperSingleton, ParsedHeading, SemanticHelper} from './semantic';
 import {MarkdownContent, ParsedNodeDef} from './types';
-import {Undefinable} from './utility-types';
 import {createOrGetTranslateHelperSingleton, WidgetHelper} from './widget';
 
 export class DocParser {

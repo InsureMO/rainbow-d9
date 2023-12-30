@@ -1,5 +1,5 @@
 import {PROPERTY_PATH_JOINER, PROPERTY_PATH_ME, PROPERTY_PATH_ROOT} from '../constants';
-import {PropertyPath} from '../types';
+import {PropertyPath, Undefinable} from '../types';
 import {VUtils} from './value-utils';
 
 export interface PropertyPathUtilsType {
@@ -22,7 +22,7 @@ export interface PropertyPathUtilsType {
 	/**
 	 * generate property path to dom id string
 	 */
-	readonly asId: (path?: PropertyPath, id?: string) => string | undefined;
+	readonly asId: (path?: PropertyPath, id?: string) => Undefinable<string>;
 }
 
 export const PPUtils: PropertyPathUtilsType = {
@@ -91,7 +91,7 @@ export const PPUtils: PropertyPathUtilsType = {
 		}, [] as Array<string>).join('');
 		return tidy === expected;
 	},
-	asId: (path?: PropertyPath, id?: string): string | undefined => {
+	asId: (path?: PropertyPath, id?: string): Undefinable<string> => {
 		if (VUtils.isNotBlank(id)) {
 			return id;
 		}
