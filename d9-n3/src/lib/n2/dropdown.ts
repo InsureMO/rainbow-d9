@@ -84,7 +84,8 @@ export const N2DropdownReactionRefreshOptionsBuild = new N2DropdownReactionRefre
 export const N2DropdownReactionRefreshOptionsHandlerDetective = createDefaultMonitorHandlerDetective({
 	attributeName: 'refreshOptions',
 	// only returns false means invisible
-	redressResult: (ret: Nullable<Reaction | string>): Reaction | string => (ret == null || VUtils.isBlank(ret)) ? REACTION_REFRESH_OPTIONS : ret
+	redressResult: (ret: Nullable<Reaction | string>): Reaction | string => (ret == null || VUtils.isBlank(ret)) ? REACTION_REFRESH_OPTIONS : ret,
+	ignoreDefault: true, deleteAttribute: true
 });
 
 export class N2DropdownTranslator extends SpecificWidgetTranslator<N2WidgetType.DROPDOWN> {

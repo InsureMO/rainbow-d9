@@ -85,8 +85,12 @@ export const createDefaultMonitorHandlerDetective = <V, M extends MonitorOthers<
 	attributeName: MonitorNodeAttributes | ReactionTypes;
 	redressResult: (ret: Nullable<V>) => V;
 	ignoreDefault?: boolean;
+	deleteAttribute?: boolean;
 }): MonitorHandlerDetective => {
-	const {attributeName, redressResult, ignoreDefault = false} = options;
+	const {
+		attributeName, redressResult,
+		ignoreDefault = false, deleteAttribute = false
+	} = options;
 
 	return (options: MonitorHandlerDetectOptions): MonitorHandler => {
 		const {attributes} = options;
@@ -96,6 +100,9 @@ export const createDefaultMonitorHandlerDetective = <V, M extends MonitorOthers<
 			return (void 0);
 		}
 		const {on, snippet} = value as ComplexMonitorableAttributeValue;
+		if (deleteAttribute) {
+			delete attributes[attributeName];
+		}
 		if (on == null || on.length === 0 || VUtils.isBlank(snippet)) {
 			return (void 0);
 		}

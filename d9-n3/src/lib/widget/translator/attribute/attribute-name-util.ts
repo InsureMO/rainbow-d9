@@ -33,7 +33,6 @@ export class AttributeNameUtils {
 		[AttributeNames.DISABLED]: MonitorNodeAttributes.DISABLED,
 		[AttributeNames.VISIBLE]: MonitorNodeAttributes.VISIBLE,
 		[AttributeNames.VALID]: MonitorNodeAttributes.VALID,
-		[AttributeNames.REACTION_WATCH]: MonitorNodeAttributes.REACTION,
 		[AttributeNames.PROPERTY]: D9PropertyNames.PROPERTY,
 		[AttributeNames.PLACE]: D9PropertyNames.POSITION,
 		[AttributeNames.POSITION]: D9PropertyNames.POSITION,

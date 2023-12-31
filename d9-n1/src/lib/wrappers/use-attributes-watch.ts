@@ -77,7 +77,7 @@ export const useAttributesWatch = (options: {
 								root: props.$root, model: props.$model,
 								pathToRoot: props.$p2r, propertyPath: props.$pp, absolutePath: myAbsolutePath,
 								value: MUtils.getValue(props.$model, props.$pp),
-								changedOn: myAbsolutePath, from, to
+								changedOn: absolutePath, from, to
 							});
 							if (name !== MonitorNodeAttributes.REACTION) {
 								return {name, value};
