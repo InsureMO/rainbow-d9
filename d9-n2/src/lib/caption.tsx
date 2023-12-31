@@ -10,16 +10,15 @@ import {
 	VUtils,
 	WidgetProps
 } from '@rainbow-d9/n1';
-import dayjs from 'dayjs';
 import React, {ForwardedRef, forwardRef, isValidElement, MouseEvent, ReactNode} from 'react';
 import styled from 'styled-components';
 import {ButtonFill, ButtonInk} from './button';
-import {getDefaultCalendarDateFormat, getDefaultCalendarDatetimeFormat} from './calendar/utils';
 import {CssVars, DOM_ID_WIDGET, DOM_KEY_WIDGET} from './constants';
 import {DecorateWrapperDef, transformDecorators} from './decorate-assist';
 import {useGlobalHandlers} from './global';
 import {LabelLike} from './label-like';
 import {GlobalEventHandlers, ModelCarriedHandler, OmitHTMLProps2, OmitNodeDef, ValidationHandlers} from './types';
+import {df, locale, nf, nf0, nf1, nf2, nf3, nfWithLocale, nfXWithLocale, wrapNf} from './utils';
 
 export interface CaptionValueToLabelFormats {
 	nf: (fractionDigits: number, grouping?: boolean) => Intl.NumberFormat;
@@ -162,45 +161,28 @@ const ACaption = styled.span.attrs(({id, 'data-w': dataW}) => {
     }
 `;
 
-const nf = (fractionDigits: number, grouping?: boolean) => {
-	return new Intl.NumberFormat((void 0), {
-		useGrouping: grouping == null ? true : grouping,
-		minimumFractionDigits: fractionDigits || 0,
-		maximumFractionDigits: fractionDigits || 0
-	});
-};
-const wrap = (format: Intl.NumberFormat['format']) => {
-	return (value?: number) => value == null ? '' : format(value);
-};
-const nf0 = wrap(nf(0).format);
-const nf1 = wrap(nf(1).format);
-const nf2 = wrap(nf(2).format);
-const nf3 = wrap(nf(3).format);
-
-const df = (value: string, options?: { from?: string; to?: string; }): string => {
-	if (VUtils.isBlank(value)) {
-		return value;
-	}
-	const fromFormat = options?.from || getDefaultCalendarDatetimeFormat();
-	const toFormat = options?.to || getDefaultCalendarDateFormat();
-	const parsed = dayjs(value, fromFormat);
-	if (parsed.isValid()) {
-		return parsed.format(toFormat);
-	} else {
-		return value;
-	}
-};
-
-const formatter = new Proxy({nf, nf0, nf1, nf2, nf3, df}, {
+const formatter = new Proxy({nf, nf0, nf1, nf2, nf3}, {
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	get(target: any, p: string): any {
 		const func = target[p];
-		if (func != null) {
-			return func;
+		if (p === 'df') {
+			// date format's locale can be changed outside
+			return df;
+		}
+		const language = locale();
+		if (language === 'en' || language === 'en-US') {
+			if (func != null) {
+				return func;
+			} else if (/^nf\d{1,2}$/.test(p)) {
+				const f = wrapNf(nf(Number(p.slice(2))).format);
+				// cache the function
+				target[p] = f;
+				return f;
+			}
+		} else if (p === 'nf') {
+			return nfWithLocale(language);
 		} else if (/^nf\d{1,2}$/.test(p)) {
-			const f = wrap(nf(Number(p.slice(2))).format);
-			target[p] = f;
-			return f;
+			return nfXWithLocale(language, Number(p.slice(2)));
 		} else {
 			return null;
 		}

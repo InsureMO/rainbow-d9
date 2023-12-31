@@ -5,6 +5,7 @@ import {DropdownOptions} from '../dropdown';
 import {IntlLabel} from '../intl-label';
 import {UnwrappedButton} from '../unwrapped/button';
 import {UnwrappedDropdown} from '../unwrapped/dropdown';
+import {locale, nfXWithLocale} from '../utils';
 import {PaginationData, PaginationProps} from './types';
 import {APagination} from './widgets';
 
@@ -130,7 +131,7 @@ export const Pagination = forwardRef((props: PaginationProps, ref: ForwardedRef<
 	// starts from 1
 	const hasPrevious = pageNumbers[0] !== 1;
 	const hasNext = pageNumbers[pageNumbers.length - 1] !== data.pageCount;
-	const format = new Intl.NumberFormat((void 0), {useGrouping: true, maximumFractionDigits: 0}).format;
+	const format = nfXWithLocale(locale(), 0);
 	const pageCount = format(data.pageCount);
 	const itemCount = data.itemCount === -1
 		? <IntlLabel keys={['pagination', 'unknownItemCount']} value="???"/>
