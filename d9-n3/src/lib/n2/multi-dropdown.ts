@@ -7,7 +7,12 @@ import {
 	ValidatorUtils,
 	WidgetPropertyName
 } from '../widget';
-import {N2DropdownOptionsBuild, N2DropdownSortBuild} from './dropdown';
+import {
+	N2DropdownOptionsBuild,
+	N2DropdownReactionRefreshOptionsBuild,
+	N2DropdownReactionRefreshOptionsHandlerDetective,
+	N2DropdownSortBuild
+} from './dropdown';
 import {N2WidgetType} from './types';
 
 export class N2MultiDropdownTranslator extends SpecificWidgetTranslator<N2WidgetType.MULTI_DROPDOWN> {
@@ -21,13 +26,20 @@ export class N2MultiDropdownTranslator extends SpecificWidgetTranslator<N2Widget
 
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	public getAttributeValueBuilders(): Array<AttributeValueBuild<any>> {
-		return [N2DropdownOptionsBuild, N2DropdownSortBuild];
+		return [N2DropdownOptionsBuild, N2DropdownSortBuild, N2DropdownReactionRefreshOptionsBuild];
 	}
 
 	public getValidationHandlerDetectives(): Array<MonitorHandlerDetective> {
 		return [
 			ValidatorUtils.DETECT_REQUIRED,
 			...super.getValidationHandlerDetectives()
+		];
+	}
+
+	public getReactionHandlerDetectives(): Array<MonitorHandlerDetective> {
+		return [
+			...super.getReactionHandlerDetectives(),
+			N2DropdownReactionRefreshOptionsHandlerDetective
 		];
 	}
 }

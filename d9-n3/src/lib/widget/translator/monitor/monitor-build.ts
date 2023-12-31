@@ -11,6 +11,7 @@ import {WidgetType} from '../../../semantic';
 import {AsyncFunction} from '../../../utils';
 import {ScriptSnippet} from '../attribute';
 import {ComplexMonitorableAttributeValue} from '../attribute/monitor-attribute-build';
+import {ReactionTypes} from '../attribute/reaction-repaint-attribute-build';
 import {AttributeMap} from '../types';
 import {
 	MonitorHandler,
@@ -81,10 +82,11 @@ export abstract class AbstractMonitorBuild {
 }
 
 export const createDefaultMonitorHandlerDetective = <V, M extends MonitorOthers<V>>(options: {
-	attributeName: MonitorNodeAttributes;
+	attributeName: MonitorNodeAttributes | ReactionTypes;
 	redressResult: (ret: Nullable<V>) => V;
+	ignoreDefault?: boolean;
 }): MonitorHandlerDetective => {
-	const {attributeName, redressResult} = options;
+	const {attributeName, redressResult, ignoreDefault = false} = options;
 
 	return (options: MonitorHandlerDetectOptions): MonitorHandler => {
 		const {attributes} = options;
@@ -119,6 +121,7 @@ export const createDefaultMonitorHandlerDetective = <V, M extends MonitorOthers<
 			'root', 'model', 'value', 'pathToRoot', 'propertyPath', 'absolutePath',
 			'changedOn', 'from', 'to',
 			redressedSnippet);
+		handle.$snippet = redressedSnippet;
 		return {
 			$watch: on,
 			$handle: async (options): Promise<V> => {
@@ -128,7 +131,7 @@ export const createDefaultMonitorHandlerDetective = <V, M extends MonitorOthers<
 				// only returns true represents disabled
 				return redressResult(ret);
 			},
-			$default: async (options): Promise<V> => {
+			$default: ignoreDefault ? (void 0) : async (options): Promise<V> => {
 				const ret = await handle(options.root, options.model, options.value);
 				// only returns true represents disabled
 				return redressResult(ret);

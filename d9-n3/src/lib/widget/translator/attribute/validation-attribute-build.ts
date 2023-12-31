@@ -24,7 +24,8 @@ export class ValidationAttributeBuild extends MonitorableAttributeBuild<Validati
 			return built;
 		}
 		if (built.on.length === 0 && VUtils.isBlank(built.snippet)) {
-			// invalid complex attribute value, ignored
+			// at least one of watching list or snippet exists
+			// either not exists, treated as invalid attribute value, ignored
 			return (void 0);
 		}
 		return built;

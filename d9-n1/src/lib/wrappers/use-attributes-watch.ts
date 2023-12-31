@@ -67,64 +67,67 @@ export const useAttributesWatch = (options: {
 				N1Logger.debug(`Widget[${props.$wt}] catches change[on=${absolutePath}, from=${from}, to=${to}] based on watch[${watch}].`, 'AttributeWatchHook');
 				const handles = watches[watch];
 				const myAbsolutePath = PPUtils.absolute(props.$p2r, props.$pp);
-				// eslint-disable-next-line @typescript-eslint/no-explicit-any
-				const handledValuePairs = await Promise.all<{ name: string, value: any }>(Object.keys(handles)
-					// do validation after all done, filter it here
-					.filter(name => name !== MonitorNodeAttributes.VALID)
-					.map(async (name: MonitorNodeAttributes) => {
-						const value = await handles[name]({
-							root: props.$root, model: props.$model,
-							pathToRoot: props.$p2r, propertyPath: props.$pp, absolutePath: myAbsolutePath,
-							value: MUtils.getValue(props.$model, props.$pp),
-							changedOn: myAbsolutePath, from, to
-						});
-						if (name !== MonitorNodeAttributes.REACTION) {
-							return {name, value};
-						} else {
-							let reactions = [];
-							if (Array.isArray(value)) {
-								if (value.includes(Reaction.CLEAR_VALUE)) {
-									// includes clear value, drop repaint, since clear value leads repaint
-									reactions = value.filter(v => v != Reaction.REPAINT);
-								} else {
-									reactions = value;
-								}
-							} else if (VUtils.isBlank(value)) {
-								// do nothing
+				const handledValuePairs =
+					// eslint-disable-next-line @typescript-eslint/no-explicit-any
+					await Promise.all<{ name: string, value: any }>(Object.keys(handles)
+						// do validation after all done, filter it here
+						.filter(name => name !== MonitorNodeAttributes.VALID)
+						.map(async (name: MonitorNodeAttributes) => {
+							const value = await handles[name]({
+								root: props.$root, model: props.$model,
+								pathToRoot: props.$p2r, propertyPath: props.$pp, absolutePath: myAbsolutePath,
+								value: MUtils.getValue(props.$model, props.$pp),
+								changedOn: myAbsolutePath, from, to
+							});
+							if (name !== MonitorNodeAttributes.REACTION) {
+								return {name, value};
 							} else {
-								reactions = [value];
-							}
-							// distinct
-							reactions = reactions.filter(reaction => VUtils.isNotBlank(reaction));
-							reactions = [...new Set(reactions)];
+								let reactions = [];
+								if (Array.isArray(value)) {
+									if (value.includes(Reaction.CLEAR_VALUE)) {
+										// includes clear value, drop repaint, since clear value leads repaint
+										reactions = value.filter(v => v != Reaction.REPAINT);
+									} else {
+										reactions = value;
+									}
+								} else if (VUtils.isBlank(value)) {
+									// do nothing
+								} else {
+									reactions = [value];
+								}
+								// distinct
+								reactions = reactions.filter(reaction => VUtils.isNotBlank(reaction));
+								reactions = [...new Set(reactions)];
 
-							let ret = null;
-							if (reactions.includes(Reaction.CLEAR_VALUE)) {
-								// clear value
-								const oldValue = MUtils.setValue(props.$model, props.$pp, null);
-								// fire value change event, validation is not necessary here since it is reaction
-								fire && fire(RootEventTypes.VALUE_CHANGED, myAbsolutePath, oldValue, null);
-								// assign a unique id, leading repaint
-								ret = {name, value: VUtils.generateUniqueId()};
-							}
-							if (reactions.includes(Reaction.REPAINT)) {
-								// assign a unique id, leading repaint
-								if (ret == null) {
+								let ret = null;
+								if (reactions.includes(Reaction.CLEAR_VALUE)) {
+									// clear value
+									const oldValue = MUtils.setValue(props.$model, props.$pp, null);
+									// fire value change event, validation is not necessary here since it is reaction
+									fire && fire(RootEventTypes.VALUE_CHANGED, myAbsolutePath, oldValue, null);
+									// assign a unique id, leading repaint
 									ret = {name, value: VUtils.generateUniqueId()};
 								}
+								if (reactions.includes(Reaction.REPAINT)) {
+									// assign a unique id, leading repaint
+									if (ret == null) {
+										ret = {name, value: VUtils.generateUniqueId()};
+									}
+								}
+								reactions.filter(reaction => ![Reaction.CLEAR_VALUE, Reaction.REPAINT].includes(reaction))
+									.forEach(reaction => {
+										// fire wrapped event
+										fireWrapper && fireWrapper(WrapperEventTypes.UNHANDLED_REACTION_OCCURRED, reaction);
+									});
+								return ret;
 							}
-							reactions.filter(reaction => ![Reaction.CLEAR_VALUE, Reaction.REPAINT].includes(reaction))
-								.forEach(reaction => {
-									// fire wrapped event
-									fireWrapper && fireWrapper(WrapperEventTypes.UNHANDLED_REACTION_OCCURRED, reaction);
-								});
-							return ret;
-						}
-					}).filter(x => x != null));
-				const values = handledValuePairs.reduce((values, {name, value}) => {
-					values[name] = value;
-					return values;
-				}, {} as Partial<NodeAttributeValues>);
+						}));
+				const values = handledValuePairs
+					.filter(x => x != null)
+					.reduce((values, {name, value}) => {
+						values[name] = value;
+						return values;
+					}, {} as Partial<NodeAttributeValues>);
 				if (handles[MonitorNodeAttributes.VALID] != null
 					&& (values[MonitorNodeAttributes.DISABLED] == null || values[MonitorNodeAttributes.DISABLED] !== true)
 					&& (values[MonitorNodeAttributes.VISIBLE] == null || values[MonitorNodeAttributes.VISIBLE] !== false)) {

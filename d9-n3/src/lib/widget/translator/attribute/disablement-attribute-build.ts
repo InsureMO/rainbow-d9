@@ -24,7 +24,8 @@ export class DisablementAttributeBuild extends MonitorableAttributeBuild<Disable
 			return built;
 		}
 		if (built.on.length === 0 || VUtils.isBlank(built.snippet)) {
-			// invalid complex attribute value, ignored
+			// both of watching list and snippet are required
+			// otherwise treated as invalid attribute value, ignored
 			return (void 0);
 		}
 		return built;

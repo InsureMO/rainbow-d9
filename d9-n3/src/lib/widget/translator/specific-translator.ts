@@ -1,7 +1,7 @@
 import {ArrayUsedDef, NodeDef, Undefinable} from '@rainbow-d9/n1';
 import {WidgetType} from '../../semantic';
 import {AttributeValueBuild, CustomAttributeName, WidgetPropertyName} from './attribute';
-import {DisablementUtils, MonitorHandlerDetective, ValidatorUtils, VisibilityUtils} from './monitor';
+import {DisablementUtils, MonitorHandlerDetective, ReactionUtils, ValidatorUtils, VisibilityUtils} from './monitor';
 import {WidgetTranslatorRepository} from './translator-repository';
 
 export abstract class SpecificWidgetTranslator<T extends WidgetType> {
@@ -91,7 +91,11 @@ export abstract class SpecificWidgetTranslator<T extends WidgetType> {
 	 * default returns empty array, override me if there is any reaction handler detective needs to be added
 	 */
 	public getReactionHandlerDetectives(): Array<MonitorHandlerDetective> {
-		return [];
+		return [
+			ReactionUtils.DETECT_REACTION_REPAINT,
+			ReactionUtils.DETECT_REACTION_CLEAR_ME,
+			ReactionUtils.DETECT_REACTION_WATCH
+		];
 	}
 
 	/**

@@ -3,6 +3,11 @@ import {WidgetType} from '../../../semantic';
 import {AnyAttributeBuild} from './any-attribute-build';
 import {DisablementAttributeBuild} from './disablement-attribute-build';
 import {PositionAttributeBuild} from './position-attribute-build';
+import {
+	ReactionClearMeAttributeBuild,
+	ReactionRepaintAttributeBuild,
+	ReactionWatchAttributeBuild
+} from './reaction-repaint-attribute-build';
 import {AttributeValueBuild} from './types';
 import {ValidationAttributeBuild} from './validation-attribute-build';
 import {ValidationScopesAttributeBuild} from './validation-scopes-attribute-build';
@@ -14,6 +19,9 @@ export class AttributeUtils {
 	public static readonly VISIBILITY_ATTRIBUTE_BUILDER = new VisibilityAttributeBuild();
 	public static readonly VALIDATION_ATTRIBUTE_BUILDER = new ValidationAttributeBuild();
 	public static readonly VALIDATION_SCOPES_ATTRIBUTE_BUILDER = new ValidationScopesAttributeBuild();
+	public static readonly REACTION_REPAINT_ATTRIBUTE_BUILDER = new ReactionRepaintAttributeBuild();
+	public static readonly REACTION_CLEAR_ME_ATTRIBUTE_BUILDER = new ReactionClearMeAttributeBuild();
+	public static readonly REACTION_WATCH_ATTRIBUTE_BUILDER = new ReactionWatchAttributeBuild();
 	public static readonly ANY_ATTRIBUTE_BUILDER = new AnyAttributeBuild();
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	private static CUSTOMIZED_ATTRIBUTE_BUILDERS: Record<WidgetType, Array<AttributeValueBuild<any>>> = {};
@@ -43,6 +51,9 @@ export class AttributeUtils {
 			AttributeUtils.VISIBILITY_ATTRIBUTE_BUILDER,
 			AttributeUtils.VALIDATION_ATTRIBUTE_BUILDER,
 			AttributeUtils.VALIDATION_SCOPES_ATTRIBUTE_BUILDER,
+			AttributeUtils.REACTION_REPAINT_ATTRIBUTE_BUILDER,
+			AttributeUtils.REACTION_CLEAR_ME_ATTRIBUTE_BUILDER,
+			AttributeUtils.REACTION_WATCH_ATTRIBUTE_BUILDER,
 			AttributeUtils.ANY_ATTRIBUTE_BUILDER
 		];
 	}

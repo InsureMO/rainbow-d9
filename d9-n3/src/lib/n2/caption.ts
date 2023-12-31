@@ -1,4 +1,4 @@
-import {MonitorNodeAttributes, NodeDef, NUtils, ReactionMonitor, Undefinable, VUtils} from '@rainbow-d9/n1';
+import {NodeDef, NUtils, ReactionMonitor, Undefinable, VUtils} from '@rainbow-d9/n1';
 import {CaptionClick, CaptionDef, CaptionValueToLabel} from '@rainbow-d9/n2';
 import {N3Logger} from '../logger';
 import {ParsedListItemAttributePair} from '../semantic';
@@ -59,12 +59,12 @@ export const N2CaptionClickBuild: AttributeValueBuild<CaptionClick> = {
  */
 export const N2CaptionReactionDetective: MonitorHandlerDetective = (options: MonitorHandlerDetectOptions): Undefinable<ReactionMonitor> => {
 	const {$pp, attributes} = options;
-	const reaction = (attributes[MonitorNodeAttributes.REACTION] ?? {}) as Partial<ReactionMonitor>;
-	const watches = [...(reaction.$watch ?? []), $pp].filter(path => VUtils.isNotBlank(path));
-	if (attributes.labelOnValue !== true || watches.length === 0) {
+	// const reaction = (attributes[MonitorNodeAttributes.REACTION] ?? {}) as Partial<ReactionMonitor>;
+	if (attributes.labelOnValue !== true) {
 		return (void 0);
 	}
-	return {$watch: watches, $handle: reaction.$handle ?? NUtils.reactWithRepaint};
+	const watches = [$pp].filter(path => VUtils.isNotBlank(path));
+	return {$watch: watches, $handle: NUtils.reactWithRepaint};
 };
 
 export const N2CaptionRedressLabelAndText = <Def extends NodeDef>(def: Partial<Def>): Partial<Def> => {
@@ -106,7 +106,10 @@ export class N2CaptionTranslator extends SpecificWidgetTranslator<N2WidgetType.C
 	}
 
 	public getReactionHandlerDetectives(): Array<MonitorHandlerDetective> {
-		return [N2CaptionReactionDetective];
+		return [
+			N2CaptionReactionDetective,
+			...super.getReactionHandlerDetectives()
+		];
 	}
 }
 
@@ -131,7 +134,10 @@ export class N2LabelTranslator extends SpecificWidgetTranslator<N2WidgetType.LAB
 	}
 
 	public getReactionHandlerDetectives(): Array<MonitorHandlerDetective> {
-		return [N2CaptionReactionDetective];
+		return [
+			N2CaptionReactionDetective,
+			...super.getReactionHandlerDetectives()
+		];
 	}
 }
 
@@ -156,6 +162,9 @@ export class N2BadgeTranslator extends SpecificWidgetTranslator<N2WidgetType.BAD
 	}
 
 	public getReactionHandlerDetectives(): Array<MonitorHandlerDetective> {
-		return [N2CaptionReactionDetective];
+		return [
+			N2CaptionReactionDetective,
+			...super.getReactionHandlerDetectives()
+		];
 	}
 }

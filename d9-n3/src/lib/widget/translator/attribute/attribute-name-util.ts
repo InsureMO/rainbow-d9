@@ -10,7 +10,9 @@ export enum AttributeNames {
 	DISABLED = 'disabled',
 	VISIBLE = 'visible',
 	VALID = 'validate',
-	REACTION = 'watch',
+	REACTION_WATCH = 'watch',
+	REACTION_REPAINT = 'repaint',
+	REACTION_CLEAR_ME = 'clearMe',
 	PROPERTY = 'property',
 	// position and alias
 	PLACE = 'place',
@@ -27,11 +29,11 @@ export type CustomAttributeName = Uncapitalize<AnyAttributeName> | `${WidgetType
 
 export class AttributeNameUtils {
 	private static CUSTOMIZED_NAMES_MAPPING: Record<CustomAttributeName, WidgetPropertyName> = {};
-	private static MAPPED_ATTRIBUTE_NAMES: Readonly<Record<AttributeNames, MonitorNodeAttributes | D9PropertyNames>> = {
+	private static MAPPED_ATTRIBUTE_NAMES: Readonly<{ [key in AttributeNames]?: MonitorNodeAttributes | D9PropertyNames }> = {
 		[AttributeNames.DISABLED]: MonitorNodeAttributes.DISABLED,
 		[AttributeNames.VISIBLE]: MonitorNodeAttributes.VISIBLE,
 		[AttributeNames.VALID]: MonitorNodeAttributes.VALID,
-		[AttributeNames.REACTION]: MonitorNodeAttributes.REACTION,
+		[AttributeNames.REACTION_WATCH]: MonitorNodeAttributes.REACTION,
 		[AttributeNames.PROPERTY]: D9PropertyNames.PROPERTY,
 		[AttributeNames.PLACE]: D9PropertyNames.POSITION,
 		[AttributeNames.POSITION]: D9PropertyNames.POSITION,

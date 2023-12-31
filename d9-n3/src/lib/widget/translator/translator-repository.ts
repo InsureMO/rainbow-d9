@@ -5,8 +5,8 @@ import {AttributeNameUtils, AttributeUtils, CustomAttributeName} from './attribu
 import {
 	DisablementBuild,
 	DisablementUtils,
-	ReactorBuild,
-	ReactorUtils,
+	ReactionBuild,
+	ReactionUtils,
 	ValidatorBuild,
 	ValidatorUtils,
 	VisibilityBuild,
@@ -18,7 +18,7 @@ import {WidgetTranslator} from './widget-translator';
 
 export class WidgetTranslatorRepository {
 	private readonly _validatorBuild: ValidatorBuild;
-	private readonly _reactorBuild: ReactorBuild;
+	private readonly _reactorBuild: ReactionBuild;
 	private readonly _disablementBuild: DisablementBuild;
 	private readonly _visibilityBuild: VisibilityBuild;
 	private readonly translators: Array<AbstractTranslator<Decipherable>>;
@@ -37,7 +37,7 @@ export class WidgetTranslatorRepository {
 	}
 
 	protected createReactorBuild() {
-		return new ReactorBuild();
+		return new ReactionBuild();
 	}
 
 	protected createDisablementBuild() {
@@ -56,7 +56,7 @@ export class WidgetTranslatorRepository {
 		return this._validatorBuild;
 	}
 
-	get reactorBuild(): ReactorBuild {
+	get reactorBuild(): ReactionBuild {
 		return this._reactorBuild;
 	}
 
@@ -83,7 +83,7 @@ export class WidgetTranslatorRepository {
 		}
 		AttributeUtils.register($wt, translator.getAttributeValueBuilders());
 		ValidatorUtils.register($wt, translator.getValidationHandlerDetectives());
-		ReactorUtils.register($wt, translator.getReactionHandlerDetectives());
+		ReactionUtils.register($wt, translator.getReactionHandlerDetectives());
 		DisablementUtils.register($wt, translator.getEnablementHandlerDetectives());
 		VisibilityUtils.register($wt, translator.getVisibilityHandlerDetectives());
 		return existing as Undefinable<SpecificWidgetTranslator<T>>;
@@ -97,7 +97,7 @@ export class WidgetTranslatorRepository {
 		if (namesMapping != null) {
 			AttributeNameUtils.unregister(Object.keys(namesMapping) as Array<CustomAttributeName>);
 		}
-		ReactorUtils.unregister($wt);
+		ReactionUtils.unregister($wt);
 		ValidatorUtils.unregister($wt);
 		AttributeUtils.unregister($wt);
 		DisablementUtils.unregister($wt);
