@@ -7,7 +7,7 @@ import {
 	ReactionClearMeAttributeBuild,
 	ReactionRepaintAttributeBuild,
 	ReactionWatchAttributeBuild
-} from './reaction-repaint-attribute-build';
+} from './reaction-attribute-build';
 import {AttributeValueBuild} from './types';
 import {ValidationAttributeBuild} from './validation-attribute-build';
 import {ValidationScopesAttributeBuild} from './validation-scopes-attribute-build';

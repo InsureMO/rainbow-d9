@@ -15,7 +15,7 @@ import {
 	AbstractReactionAttributeBuild,
 	ReactionMonitorAttributeValue,
 	ReactionTypes
-} from '../widget/translator/attribute/reaction-repaint-attribute-build';
+} from '../widget/translator/attribute/reaction-attribute-build';
 import {N2WidgetType} from './types';
 
 export const N2DropdownOptionsByStrBuild = (value: string): DropdownOptions => {

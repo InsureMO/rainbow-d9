@@ -11,7 +11,7 @@ import {WidgetType} from '../../../semantic';
 import {AsyncFunction} from '../../../utils';
 import {ScriptSnippet} from '../attribute';
 import {ComplexMonitorableAttributeValue} from '../attribute/monitor-attribute-build';
-import {ReactionTypes} from '../attribute/reaction-repaint-attribute-build';
+import {ReactionTypes} from '../attribute/reaction-attribute-build';
 import {AttributeMap} from '../types';
 import {
 	MonitorHandler,
