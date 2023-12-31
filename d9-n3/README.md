@@ -744,6 +744,42 @@ Here is a simple example:
 The above definition means that property `D` is required and its value must have a certain mapping relationship with the type of
 property `A`.
 
+### Reaction
+
+Similar to the `Disablement`, `Visibility`, and `Validation` mentioned above, the `Reaction` can also be customized. All the syntax rules
+for `Reaction` are consistent with these three basic attributes. However, `Reaction` provides multiple writing styles, including the
+possibility of having special `Reaction` keywords for components. Here are several common `Reaction` keywords that all components have:
+
+- `repaint`: Refreshes itself when changes are detected.
+- `clearMe`: Clears its value when changes are detected and then refreshes itself.
+- `watch`: Performs custom operations when changes are detected.
+
+It is important to note that `watch` must have a defined handler, but it is
+not required to have a return value. By default, it uses `repaint` as the standard behavior. As for `repaint` and `clearMe`, since they
+already have standard behaviors, in most cases, it is only necessary to define the listeners without the need to define a `handle`.
+
+Here is a simple example:
+
+```markdown
+- Input::Property D::propD
+	- required
+	- repaint:
+		- on: propA
+- Input::Property E::propE
+	- required
+	- clearMe:
+		- on: propA
+- Input::Property F::propF
+	- required
+	- watch:
+		- on: propA
+		- handle:
+		  ```javascript
+		  model.propF = model.propA;
+		  return 'repaint';  
+		  ```
+```
+
 ### Internationalization
 
 Use `$d9n2.intl.labels` to define the internationalization string package. For example, you can add `$d9n2.intl.labels.zh` to define a
@@ -1080,6 +1116,13 @@ Some examples:
 
 > `codes.yesNoOptions` depends on external definitions, it must follow signature `DropdownDef['options']`.
 
+### Reaction to Refresh Options
+
+Use the `refreshOptions` attribute to respond to changes and refresh the available options. It is important to note that the options are
+still refreshed using the definition of `options`. Therefore, if the `options` definition is static, even if `refreshOptions` is defined,
+there will be no changes. In addition, since refreshing the options may result in the originally selected value becoming invalid, `clearMe`
+can be used in combination to handle this situation.
+
 ## Checkboxes (Checks), Radios
 
 In fact, Checkboxes and Radios are just alternative representations of `MultiDropdown` and `Dropdown`, respectively. Therefore, all
@@ -1095,6 +1138,10 @@ Due to the differences in presentation, Checkboxes and Radios have additional re
 |----------------|---------|-------------------------------------------------------------------------------------------------------------|
 | columns        | number  | Number of columns in option arrangement.                                                                    |
 | compact        | boolean | When there are multiple options in a row, whether to display them continuously or in a table column format. |
+
+### Reaction to Refresh Options
+
+It is completely consistent with the `Dropdown`, please refer to the previous section.
 
 ## Calendar, DateTime, Date
 
