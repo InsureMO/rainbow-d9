@@ -1,5 +1,5 @@
 import {ContainerDef, ContainerWidgetProps, NodeDef, PPUtils, registerWidget} from '@rainbow-d9/n1';
-import React, {ForwardedRef, forwardRef, ReactNode, useEffect, useState} from 'react';
+import React, {ForwardedRef, forwardRef, ReactNode, useEffect, useRef, useState} from 'react';
 import styled from 'styled-components';
 import {CssVars, DOM_ID_WIDGET, DOM_KEY_WIDGET} from './constants';
 import {GlobalEventPrefix, GlobalEventTypes, useCustomGlobalEvent, useGlobalEventBus} from './global';
@@ -122,6 +122,7 @@ export const Section = forwardRef((props: SectionProps, ref: ForwardedRef<HTMLDi
 	const {$p2r, $avs: {$disabled, $visible}} = $wrapped;
 
 	const {on: onGlobal, off: offGlobal} = useGlobalEventBus();
+	const firstRound = useRef(true);
 	const [expanded, setExpanded] = useState(true);
 	const fireCustomEvent = useCustomGlobalEvent();
 	useEffect(() => {
@@ -144,13 +145,19 @@ export const Section = forwardRef((props: SectionProps, ref: ForwardedRef<HTMLDi
 			offGlobal && offGlobal(GlobalEventTypes.CUSTOM_EVENT, onCustomEvent);
 		};
 	}, [onGlobal, offGlobal, marker]);
-
-	const onExpandClicked = () => {
-		setExpanded(!expanded);
-		const prefix = expanded ? GlobalEventPrefix.SECTION_COLLAPSED : GlobalEventPrefix.SECTION_EXPANDED;
+	useEffect(() => {
+		if (firstRound.current) {
+			firstRound.current = false;
+			return;
+		}
+		const prefix = expanded ? GlobalEventPrefix.SECTION_EXPANDED : GlobalEventPrefix.SECTION_COLLAPSED;
 		const key = `${prefix}:${marker ?? ''}`;
 		// noinspection JSIgnoredPromiseFromCall
 		fireCustomEvent(key, prefix, marker ?? '', {root: $wrapped.$root, model: $wrapped.$model});
+	}, [onGlobal, offGlobal, fireCustomEvent, expanded, marker, $wrapped.$root, $wrapped.$model]);
+
+	const onExpandClicked = () => {
+		setExpanded(!expanded);
 	};
 
 	return <ASection {...rest} data-disabled={$disabled} data-visible={$visible}

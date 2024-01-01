@@ -111,7 +111,7 @@ const onRemarksChange = (value: PropValue) => {
 	model.name = value;
 	forceUpdate();
 }
-<UnwrappedInput value={model.name} onValueChange={onValueChange} />
+<UnwrappedInput value={model.name} onValueChange={onValueChange}/>
 ```
 
 # Global Hooks
@@ -125,6 +125,37 @@ const onRemarksChange = (value: PropValue) => {
 
 To activate global hooks, you first need to use `GlobalEventBusProvider` in your program. The usage is identical to regular hooks, and you
 can access specific usage methods through `GlobalEventBus` and `useGlobalEventBus`.
+
+## Language Switch
+
+After setting `$d9n2.intl.language`, use `GlobalEventTypes.LANGUAGE_CHANGED` to switch languages.
+
+## Custom Event
+
+To use `GlobalEventTypes.CUSTOM_EVENT` to send a custom event globally, the custom event consists of four parts:
+
+- `key`: A string that represents the custom event itself, which is essentially a combination of `prefix` and `clipped`,
+- `prefix`: A string that indicates the type of the custom event,
+- `clipped`: A string that represents the content of the custom event,
+- `models`: The data models that send the event, including the `root` model and the current `model` properties.
+
+The following are the built-in types of custom events:
+
+- Global,
+	- `GlobalEventPrefix.ALERT`: open an alert. No default event handling, and it needs to be handled by yourself,
+	- `GlobalEventPrefix.DIALOG`: open a dialog. No default event handling, and it needs to be handled by yourself,
+	- `GlobalEventPrefix.CUSTOM`: fully custom event. No default event handling, and it needs to be handled by yourself,
+- Section,
+	- `GlobalEventPrefix.EXPAND_SECTION`: expand a section, `clipped` should be a section marker,
+	- `GlobalEventPrefix.COLLAPSE_SECTION`: collapse a section, `clipped` should be a section marker,
+	- `GlobalEventPrefix.SECTION_EXPANDED`: section expanded, `clipped` should be a section marker,
+	- `GlobalEventPrefix.SECTION_COLLAPSED`: section collapsed, `clipped` should be a section marker,
+- Tabs,
+	- `GlobalEventPrefix.TAB`: active a tab, `clipped` should be a tab marker,
+	- `GlobalEventPrefix.TAB_CHANGED`: tab changed, `clipped` should be a tab marker,
+- Wizard,
+	- `GlobalEventPrefix.WIZARD_STEP`: active a step, `clipped` should be a step marker,
+	- `GlobalEventPrefix.WIZARD_STEP_CHANGED`: step changed, `clipped` should be a step marker.
 
 # Logger
 
