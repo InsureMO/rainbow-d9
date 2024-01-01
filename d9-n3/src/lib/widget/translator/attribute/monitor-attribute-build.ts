@@ -1,18 +1,8 @@
 import {ExternalDefIndicator, Nullable, Undefinable, VUtils} from '@rainbow-d9/n1';
 import {ParsedNodeType} from '../../../node-types';
-import {
-	ParsedCode,
-	ParsedEmphasis,
-	ParsedInlineCode,
-	ParsedList,
-	ParsedListItemAttributePair,
-	ParsedParagraph,
-	ParsedStrong,
-	ParsedText,
-	SemanticUtils
-} from '../../../semantic';
-import {AbstractTranslator} from '../abstract-translator';
+import {ParsedList, ParsedListItemAttributePair, SemanticUtils} from '../../../semantic';
 import {FALSE_VALUES, TRUE_VALUES} from './constants';
+import {parseSnippet} from './snippet-attribute';
 import {AttributeValueBuild, ScriptSnippet, WidgetPropertyName} from './types';
 
 export interface ComplexMonitorableAttributeValue {
@@ -42,64 +32,6 @@ export abstract class MonitorableAttributeBuild<A extends ComplexMonitorableAttr
 			return value.split(',').map(item => item.trim()).filter(item => item.length !== 0);
 		} else {
 			return [];
-		}
-	}
-
-	protected parseCodeBlock(code: ParsedCode): ScriptSnippet {
-		return code.text;
-	}
-
-	protected parseParagraph(textCarrier: ParsedParagraph | ParsedEmphasis | ParsedStrong): ScriptSnippet {
-		return (textCarrier.children ?? [])
-			.filter(child => {
-				return [
-					ParsedNodeType.INLINE_CODE,
-					ParsedNodeType.TEXT, ParsedNodeType.EMPHASIS, ParsedNodeType.STRONG
-				].includes(child.type);
-			})
-			.map(child => {
-				if (child.type === ParsedNodeType.INLINE_CODE) {
-					return (child as ParsedInlineCode).text;
-				} else if (child.type === ParsedNodeType.TEXT) {
-					return (child as ParsedText).text;
-				} else if (child.type === ParsedNodeType.EMPHASIS) {
-					return this.parseParagraph(child as ParsedEmphasis);
-				} else if (child.type === ParsedNodeType.STRONG) {
-					return this.parseParagraph(child as ParsedStrong);
-				} else {
-					return '';
-				}
-			}).join('');
-	}
-
-	protected parseHandle(attributeValue: string, item: ParsedListItemAttributePair): ExternalDefIndicator | ScriptSnippet {
-		const {children} = item;
-		const concerned = (children ?? [])
-			.filter(child => child.type === ParsedNodeType.CODE || ParsedNodeType.PARAGRAPH);
-		if (concerned.length === 0) {
-			if (VUtils.isNotBlank(attributeValue)) {
-				if (attributeValue.trim().toLowerCase().startsWith(AbstractTranslator.EXTERNAL_DEF_PREFIX)) {
-					return new ExternalDefIndicator(attributeValue.trim().substring(AbstractTranslator.EXTERNAL_DEF_PREFIX.length));
-				} else {
-					return attributeValue;
-				}
-			} else {
-				return '';
-			}
-		}
-		const snippet = concerned.map(node => {
-			if (node.type === ParsedNodeType.CODE) {
-				return this.parseCodeBlock(node as ParsedCode);
-			} else if (node.type === ParsedNodeType.PARAGRAPH) {
-				return this.parseParagraph(node as ParsedParagraph);
-			} else {
-				return '';
-			}
-		}).join('\n');
-		if (VUtils.isNotBlank(attributeValue)) {
-			return `${attributeValue}\n${snippet}`;
-		} else {
-			return snippet;
 		}
 	}
 
@@ -142,7 +74,7 @@ export abstract class MonitorableAttributeBuild<A extends ComplexMonitorableAttr
 				if (attributeName === 'on') {
 					complex.on = this.parseOn(attributeValue, item);
 				} else if (attributeName === 'handle') {
-					complex.snippet = this.parseHandle(attributeValue, item);
+					complex.snippet = parseSnippet(attributeValue, item);
 				} else {
 					const {parsed, name, value} = this.parseAttribute(attributeName, attributeValue, item);
 					if (parsed) {
