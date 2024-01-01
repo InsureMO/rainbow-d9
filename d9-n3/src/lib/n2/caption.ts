@@ -8,8 +8,7 @@ import {
 	Undefinable,
 	VUtils
 } from '@rainbow-d9/n1';
-import {CaptionClick, CaptionDef, CaptionValueToLabel} from '@rainbow-d9/n2';
-import {CaptionClickOptions} from '@rainbow-d9/n2/src';
+import {CaptionClick, CaptionClickOptions, CaptionDef, CaptionValueToLabel} from '@rainbow-d9/n2';
 import {MouseEvent} from 'react';
 import {N3Logger} from '../logger';
 import {ParsedListItemAttributePair} from '../semantic';
