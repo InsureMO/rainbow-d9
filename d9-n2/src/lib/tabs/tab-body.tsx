@@ -1,13 +1,4 @@
-import {
-	ModelHolder,
-	MUtils,
-	NodeDef,
-	PPUtils,
-	PropertyPath,
-	Undefinable,
-	VUtils,
-	WrapperDelegate
-} from '@rainbow-d9/n1';
+import {ModelHolder, NodeDef, PropertyPath, Undefinable, VUtils, WrapperDelegate} from '@rainbow-d9/n1';
 import React, {useEffect, useState} from 'react';
 import {TabDef} from './types';
 import {ATabBody} from './widgets';
@@ -56,7 +47,6 @@ export const TabBody = (props: TabBodyProps) => {
 	// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 	const defs = defState.def!;
 	return <ATabBody data-visible={active}>
-		<WrapperDelegate {...defs}
-		                 $root={$root} $model={MUtils.getValue($model, $pp)} $p2r={PPUtils.concat($p2r, $pp)}/>
+		<WrapperDelegate {...defs} $root={$root} $model={$model} $p2r={$p2r}/>
 	</ATabBody>;
 };
