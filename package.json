@@ -14,5 +14,9 @@
 		"build-n2-ci": "cd ./d9-n2 && yarn build-ci",
 		"build-n3-ci": "cd ./d9-n3 && yarn build-ci",
 		"build-all-ci": "yarn build-n1-ci && yarn build-n2-ci && yarn build-n3-ci"
+	},
+	"volta": {
+		"node": "18.19.0",
+		"yarn": "1.22.21"
 	}
 }

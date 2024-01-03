@@ -46,5 +46,9 @@
 		"rollup-plugin-typescript2": "^0.34.1",
 		"tslib": "^2.4.1",
 		"typescript": "^4.9.4"
+	},
+	"volta": {
+		"node": "18.19.0",
+		"yarn": "1.22.21"
 	}
 }
