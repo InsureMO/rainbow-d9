@@ -78,7 +78,7 @@ export const ValidationEventHolder = () => {
 		};
 	}, [on, off, fire, validationEventState]);
 
-	return <Fragment />;
+	return <Fragment/>;
 };
 
 export type FixedScopeValidationEventState = Record<NodeUniqueKey, () => Promise<Validated>>;
@@ -123,7 +123,7 @@ export const ContainerValidationEventHolder = () => {
 		};
 	}, [on, off, state, onValidate, onRegisterValidatable, onUnregisterValidatable]);
 
-	return <Fragment />;
+	return <Fragment/>;
 };
 
 export const ArrayElementValidationEventHolder = () => {
@@ -141,5 +141,5 @@ export const ArrayElementValidationEventHolder = () => {
 		};
 	}, [on, off, state, onValidate, onRegisterValidatable, onUnregisterValidatable]);
 
-	return <Fragment />;
+	return <Fragment/>;
 };

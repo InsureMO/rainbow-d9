@@ -113,3 +113,17 @@ export const getArrayElementKey = (keys: Array<[BaseModel, string]>, getElementK
 		}
 	}
 };
+
+export const findContainerChildKey = (keys: Array<[NodeDef, string]>, find: NodeDef): string => {
+	const cached = keys.find(([def]) => {
+		// def === find && console.log(def, find);
+		return def === find;
+	});
+	if (cached == null) {
+		const key = NUtils.generateReactKey();
+		keys.push([find, key]);
+		return key;
+	} else {
+		return cached[1];
+	}
+};

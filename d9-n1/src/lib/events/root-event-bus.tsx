@@ -31,23 +31,33 @@ interface ValidatedOptions<R extends BaseModel, M extends PropValue, V extends P
 
 export interface RootEventBus {
 	fire(type: RootEventTypes.VALUE_CHANGED, absolutePath: PropertyPath, from: PropValue, to: PropValue): this;
+
 	on(type: RootEventTypes.VALUE_CHANGED, listener: (absolutePath: PropertyPath, from: PropValue, to: PropValue) => void): this;
+
 	off(type: RootEventTypes.VALUE_CHANGED, listener: (absolutePath: PropertyPath, from: PropValue, to: PropValue) => void): this;
 
 	fire(type: RootEventTypes.VALIDATE, scopes: Array<NodeValidationScope>, onValidated: (validated: ValidatedSet) => void): this;
+
 	on(type: RootEventTypes.VALIDATE, listener: (scopes: Array<NodeValidationScope>, onValidated: (validated: ValidatedSet) => void) => void): this;
+
 	off(type: RootEventTypes.VALIDATE, listener: (scopes: Array<NodeValidationScope>, onValidated: (validated: ValidatedSet) => void) => void): this;
 
 	fire<R extends BaseModel, M extends PropValue, V extends PropValue>(type: RootEventTypes.VALIDATED, options: ValidatedOptions<R, M, V>): this;
+
 	on(type: RootEventTypes.VALIDATED, listener: () => void): this;
+
 	off(type: RootEventTypes.VALIDATED, listener: () => void): this;
 
 	fire(type: RootEventTypes.REGISTER_VALIDATABLE, uniqueId: NodeUniqueKey, scopes: Array<NodeValidationScope>, validate: () => Promise<Validated>): this;
+
 	on(type: RootEventTypes.REGISTER_VALIDATABLE, listener: (uniqueId: NodeUniqueKey, scopes: Array<NodeValidationScope>, validate: () => Promise<Validated>) => void): this;
+
 	off(type: RootEventTypes.REGISTER_VALIDATABLE, listener: (uniqueId: NodeUniqueKey, scopes: Array<NodeValidationScope>, validate: () => Promise<Validated>) => void): this;
 
 	fire(type: RootEventTypes.UNREGISTER_VALIDATABLE, uniqueId: NodeUniqueKey): this;
+
 	on(type: RootEventTypes.UNREGISTER_VALIDATABLE, listener: (uniqueId: NodeUniqueKey) => void): this;
+
 	off(type: RootEventTypes.UNREGISTER_VALIDATABLE, listener: (uniqueId: NodeUniqueKey) => void): this;
 }
 

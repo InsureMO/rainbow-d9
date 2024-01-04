@@ -37,10 +37,10 @@ export const StandaloneRoot = (props: StandaloneRootProps) => {
 	NUtils.inheritValidationScopes({}, recompute);
 
 	return <RootEventBusProvider>
-		<ExternalDefsHandler options={rest} externalDefs={externalDefs} />
+		<ExternalDefsHandler options={rest} externalDefs={externalDefs}/>
 		{leading}
 		{children}
-		<EventHolder />
+		<EventHolder/>
 		<Wrapper $root={$root} $p2r={modelPath} $model={model} {...recompute} {...rest} />
 		{tailing}
 	</RootEventBusProvider>;
@@ -55,3 +55,14 @@ export * from './lib/wrapper';
 export * from './lib/wrappers';
 export * from './lib/widgets-registration';
 export * from './lib/events';
+export {DefaultAttributeValuesHookOutcome} from './lib/wrappers';
+export {DefaultAttributeValuesState} from './lib/wrappers';
+export {DefaultNodeAttributesState} from './lib/wrappers';
+export {WrapperDelegateWorker} from './lib/wrappers/wrapper-delegate-worker';
+export {LeafWrapper} from './lib/wrappers/leaf-wrapper';
+export {ContainerWrapper} from './lib/wrappers/container-wrapper';
+export {ArrayWrapper} from './lib/wrappers/array-wrapper';
+export {ArrayElement} from './lib/wrappers/array-element';
+export {useContainerChildren} from './lib/wrappers/use-container-children';
+export {renderContainerChildren} from './lib/wrappers/render-container-children';
+export {findContainerChildKey} from './lib/wrappers';

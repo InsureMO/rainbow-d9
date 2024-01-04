@@ -9,9 +9,11 @@ export interface PlainExternalDefIndicator {
 
 export class ExternalDefIndicator {
 	private readonly _keys: ExternalDefKeys;
+
 	constructor(keys: ExternalDefKeys) {
 		this._keys = keys;
 	}
+
 	get keys(): ExternalDefKeys {
 		return this._keys;
 	}
@@ -20,10 +22,12 @@ export class ExternalDefIndicator {
 export class ExternalDefCreator {
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	private readonly _create: (reb: RootEventBus) => any;
+
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	constructor(create: (reb: RootEventBus) => any) {
 		this._create = create;
 	}
+
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	get create(): ((reb: RootEventBus) => any) {
 		return this._create;
@@ -89,9 +93,11 @@ export const handleExternalDefs = (options: any, reb: RootEventBus, externalDefs
 
 export class ExternalDefMismatchIndicator {
 	private readonly _keys: ExternalDefKeys;
+
 	constructor(keys: ExternalDefKeys) {
 		this._keys = keys;
 	}
+
 	get keys(): ExternalDefKeys {
 		return this._keys;
 	}
@@ -117,5 +123,5 @@ export const ExternalDefsHandler = (props: {
 		externalDefs.onDetermined && externalDefs.onDetermined(options);
 	}
 
-	return <Fragment />;
+	return <Fragment/>;
 };

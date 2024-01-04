@@ -13,6 +13,7 @@ export type ExternalDefKeys = string | ExternalDefKey;
 
 export interface ExternalDefs {
 	onDetermined?: (options: ExternalDefsHandlerOptions) => void;
+
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	[key: ExternalDefKeys]: ExternalDefs | any;
 }

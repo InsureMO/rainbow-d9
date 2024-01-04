@@ -11,15 +11,21 @@ export enum ArrayElementEventTypes {
 
 export interface ArrayElementEventBus {
 	fire(type: ArrayElementEventTypes.VALIDATE, onValidate: (validated: ValidatedSet) => void): this;
+
 	on(type: ArrayElementEventTypes.VALIDATE, listener: (onValidate: (validated: ValidatedSet) => void) => void): this;
+
 	off(type: ArrayElementEventTypes.VALIDATE, listener: (onValidate: (validated: ValidatedSet) => void) => void): this;
 
 	fire(type: ArrayElementEventTypes.REGISTER_VALIDATABLE, uniqueId: NodeUniqueKey, validate: () => Promise<Validated>): this;
+
 	on(type: ArrayElementEventTypes.REGISTER_VALIDATABLE, listener: (uniqueId: NodeUniqueKey, validate: () => Promise<Validated>) => void): this;
+
 	off(type: ArrayElementEventTypes.REGISTER_VALIDATABLE, listener: (uniqueId: NodeUniqueKey, validate: () => Promise<Validated>) => void): this;
 
 	fire(type: ArrayElementEventTypes.UNREGISTER_VALIDATABLE, uniqueId: NodeUniqueKey): this;
+
 	on(type: ArrayElementEventTypes.UNREGISTER_VALIDATABLE, listener: (uniqueId: NodeUniqueKey) => void): this;
+
 	off(type: ArrayElementEventTypes.UNREGISTER_VALIDATABLE, listener: (uniqueId: NodeUniqueKey) => void): this;
 }
 

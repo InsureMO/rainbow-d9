@@ -11,6 +11,7 @@ export class EnhancedLogger {
 	private _enabledLevels: Array<LoggerLevel>;
 	private _enablement: LoggerEnablement = {};
 	private _printers: Partial<Record<LoggerLevel, LoggerPrinter>> = {};
+
 	constructor(private readonly to: Console) {
 		this._logger = to;
 		this._enabledLevels = ['warn', 'error'];

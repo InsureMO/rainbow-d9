@@ -11,15 +11,21 @@ export enum ContainerEventTypes {
 
 export interface ContainerEventBus {
 	fire(type: ContainerEventTypes.VALIDATE, onValidate: (validated: ValidatedSet) => void): this;
+
 	on(type: ContainerEventTypes.VALIDATE, listener: (onValidate: (validated: ValidatedSet) => void) => void): this;
+
 	off(type: ContainerEventTypes.VALIDATE, listener: (onValidate: (validated: ValidatedSet) => void) => void): this;
 
 	fire(type: ContainerEventTypes.REGISTER_VALIDATABLE, uniqueId: NodeUniqueKey, validate: () => Promise<Validated>): this;
+
 	on(type: ContainerEventTypes.REGISTER_VALIDATABLE, listener: (uniqueId: NodeUniqueKey, validate: () => Promise<Validated>) => void): this;
+
 	off(type: ContainerEventTypes.REGISTER_VALIDATABLE, listener: (uniqueId: NodeUniqueKey, validate: () => Promise<Validated>) => void): this;
 
 	fire(type: ContainerEventTypes.UNREGISTER_VALIDATABLE, uniqueId: NodeUniqueKey): this;
+
 	on(type: ContainerEventTypes.UNREGISTER_VALIDATABLE, listener: (uniqueId: NodeUniqueKey) => void): this;
+
 	off(type: ContainerEventTypes.UNREGISTER_VALIDATABLE, listener: (uniqueId: NodeUniqueKey) => void): this;
 }
 
