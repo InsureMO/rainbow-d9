@@ -6,19 +6,19 @@ import {TreeNodeDef, TreeNodeDetect, TreeProps} from './types';
 import {ATree} from './widgets';
 
 const buildDetective = (detective: TreeNodeDetect) => {
-	return detective ?? ((node) => {
-		if (node == null || node.value == null) {
+	return detective ?? ((parentNode) => {
+		if (parentNode == null || parentNode.value == null) {
 			return [];
 		}
 		// eslint-disable-next-line @typescript-eslint/no-explicit-any
 		let nodes: Array<any>;
-		let parentMarker = node.marker;
-		if (Array.isArray(node.value)) {
-			nodes = node.value;
+		let parentMarker = parentNode.marker;
+		if (Array.isArray(parentNode.value)) {
+			nodes = parentNode.value;
 		} else {
 			// eslint-disable-next-line @typescript-eslint/no-explicit-any
-			nodes = (node.value as any).children ?? [];
-			parentMarker = `${node.marker ?? ''}.children`;
+			nodes = (parentNode.value as any).children ?? [];
+			parentMarker = `${parentNode.marker ?? ''}.children`;
 		}
 		return nodes.map((item, index, items) => {
 			if (item == null) {
@@ -26,8 +26,8 @@ const buildDetective = (detective: TreeNodeDetect) => {
 			} else {
 				const path = `[${index}]`;
 				return {
-					value: item, $ip2r: PPUtils.concat(node.$ip2r, path), $ipp: path,
-					marker: VUtils.isBlank(node.marker) ? path : `${parentMarker}${path}`,
+					value: item, $ip2r: PPUtils.concat(parentNode.$ip2r, path), $ipp: path,
+					marker: VUtils.isBlank(parentNode.marker) ? path : `${parentMarker}${path}`,
 					// eslint-disable-next-line @typescript-eslint/no-explicit-any
 					label: VUtils.isPrimitive(item) ? `${item ?? ''}` : ((item as any).label ?? ''),
 					checkable: false,
