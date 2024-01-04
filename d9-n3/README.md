@@ -1458,6 +1458,51 @@ export interface PaginationData {
 }
 ```
 
+## Tree
+
+- Default Wrapped by Form Cell: `false`.
+
+| Attribute Name  | Type     | Description                                                       |
+|-----------------|----------|-------------------------------------------------------------------|
+| initExpandLevel | number   | `- initExpandLevel: 0`, initial expand node level, starts from 0. |
+| showIndex       | boolean  | `- showIndex`, show node index or not, default false.             |
+| height          | number   | `- height: 400`, tree height, default 300px.                      |
+| detective       | function | Give parent node and find child nodes.                            |
+
+```markdown
+- Tree::::tree
+	- detective:
+	  ```javascript
+	  // parentNode is function argument, it is a TreeNodeDef
+	  // compute my path to tree model
+	  const parent$ip2r = `${parentNode.$ip2r}.children`;
+	  return (parentNode.value.children || []).map((child, index, children) => {
+		// compute my path to parent
+		const $ip2p = `[${index}]`;
+		// compute my path to tree model
+		const $ip2r = PPUtils.concat(parent$ip2r, $ip2p);
+		let label;
+		if (VUtils.isPrimitive(child)) {
+		  // use child itself as label
+		  label = `${child ?? ''}`;
+		} else if (child.label == null) {
+		  // no label declared, assigned as unnamed
+		  label = 'Unnamed';
+		} else if (VUtils.isPrimitive(child.label)) {
+		  // label is primitive type, use it to renderer
+		  label = `${child.label ?? ''}`;
+		} else {
+		  // read text as renderer label
+		  label = {$wt: 'Label', $pp: 'label.text'};
+		}
+		return {
+		  value: child, $ip2r, $ip2p, label,
+		  checkable: false, addable: false, removable: false, leaf: index === items.length - 1
+		} as TreeNodeDef;
+	  });
+	  ```
+```
+
 # Logger
 
 `d9-n3` provides a logging function called `N3Logger`, exactly same as `N1Logger`.

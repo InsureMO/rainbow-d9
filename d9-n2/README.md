@@ -47,9 +47,12 @@ following widgets:
 - Caption, Label
 - Section
 - Tabs
+- Wizard
 - Page
 - Ribs, ImmutableRibs (also known as RibsView)
 - Table
+- Pagination
+- Tree
 - FormCell (Enhancement widget, which used to include other widget and provide standard capabilities such as labeling and displaying
   error messages.)
 
@@ -156,6 +159,9 @@ The following are the built-in types of custom events:
 - Wizard,
 	- `GlobalEventPrefix.WIZARD_STEP`: active a step, `clipped` should be a step marker,
 	- `GlobalEventPrefix.WIZARD_STEP_CHANGED`: step changed, `clipped` should be a step marker.
+- Tree,
+	- `GlobalEventPrefix.TREE_NODE_CLICKED`: click a tree node, `clipped` should be tree node marker, or path to root of this node model
+	  when node marker not declared.
 
 # Logger
 
