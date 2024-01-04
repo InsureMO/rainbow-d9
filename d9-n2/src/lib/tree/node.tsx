@@ -1,4 +1,4 @@
-import {useForceUpdate, VUtils} from '@rainbow-d9/n1';
+import {PPUtils, useForceUpdate, VUtils} from '@rainbow-d9/n1';
 import React, {MouseEvent, useRef} from 'react';
 import {GlobalEventPrefix, GlobalEventTypes, useGlobalEventBus} from '../global';
 import {AngleRight} from '../icons';
@@ -15,7 +15,7 @@ import {
 
 export interface TreeNodeProps {
 	halfChecked?: TreeDef['halfChecked'];
-	initExpandLevel?: TreeDef['initExpandLevel'];
+	initExpandLevel: TreeDef['initExpandLevel'];
 	showIndex?: TreeDef['showIndex'];
 	detective?: TreeDef['detective'];
 	$wrapped: TreeProps['$wrapped'];
@@ -29,21 +29,22 @@ export interface TreeNodeProps {
 
 export const TreeNode = (props: TreeNodeProps) => {
 	const {
-		halfChecked, showIndex, detective, $wrapped,
+		halfChecked, initExpandLevel, showIndex, detective, $wrapped,
 		node, lastOfParent, level,
 		displayIndex, expandParent
 	} = props;
 	const global = useGlobalEventBus();
-	const expanded = useRef(false);
+	const expanded = useRef(level <= initExpandLevel);
 	const forceUpdate = useForceUpdate();
 
 	const onEntityClicked = (event: MouseEvent<HTMLSpanElement>) => {
 		event.preventDefault();
 		event.stopPropagation();
 		const key = `${GlobalEventPrefix.TREE_NODE_CLICKED}:${node.marker ?? ''}`;
+		// eslint-disable-next-line  @typescript-eslint/ban-ts-comment
+		// @ts-ignore
 		global.fire(GlobalEventTypes.CUSTOM_EVENT, key, GlobalEventPrefix.TREE_NODE_CLICKED, node.marker ?? '', {
-			root: $wrapped.$root,
-			model: node.value
+			root: $wrapped.$root, model: $wrapped.$model, value: node.value
 		});
 	};
 	const onToggleClicked = (event: MouseEvent<HTMLSpanElement>) => {
@@ -64,9 +65,11 @@ export const TreeNode = (props: TreeNodeProps) => {
 	const children = canHasChild ? detective(node) : [];
 	const childrenCount = children.length;
 	const hasChild = canHasChild && childrenCount !== 0;
+	// const canCheck = canHasChild && (node.checkable ?? false);
 	const canAdd = canHasChild && (node.addable ?? false);
-	const canRemove = canHasChild && (node.removable ?? false);
+	// const canRemove = canHasChild && (node.removable ?? false);
 	const hasToggle = hasChild || canAdd;
+	const $p2r = PPUtils.concat($wrapped.$p2r, node.$ip2r);
 
 	return <TreeNodeWrapper data-last-of-parent={lastOfParent} level={level}>
 		<TreeNodeContainer data-expanded={expanded.current} data-last-of-parent={lastOfParent} level={level}
@@ -95,8 +98,8 @@ export const TreeNode = (props: TreeNodeProps) => {
 				// which means all children is not last of parent
 				const last = !canAdd && index === childrenCount - 1;
 				const myDisplayIndex = `${displayIndex}.${index + 1}`;
-				return <TreeNode halfChecked={halfChecked} showIndex={showIndex} detective={detective}
-				                 $wrapped={$wrapped}
+				return <TreeNode halfChecked={halfChecked} initExpandLevel={initExpandLevel} showIndex={showIndex}
+				                 detective={detective} $wrapped={{...$wrapped, $p2r}}
 				                 node={child}
 				                 displayIndex={myDisplayIndex} lastOfParent={last} level={level + 1}
 				                 expandParent={expandMe}

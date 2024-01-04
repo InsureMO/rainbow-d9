@@ -92,7 +92,6 @@ export const TreeNodeContent = styled.span.attrs({'data-w': 'd9-tree-node-conten
     font-family: ${CssVars.FONT_FAMILY};
     font-size: ${CssVars.FONT_SIZE};
     color: ${CssVars.FONT_COLOR};
-    font-variant: ${CssVars.FONT_VARIANT};
 
     &[data-operator=true] {
         text-decoration: underline;
@@ -135,7 +134,6 @@ export const TreeNodeLabel = styled.span.attrs({'data-w': 'd9-tree-node-label'})
     display: flex;
     position: relative;
     align-items: center;
-    margin-left: 10px;
 
     &:first-child {
         padding-left: 9px;

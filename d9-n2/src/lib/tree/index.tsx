@@ -44,7 +44,7 @@ export const InternalTree = forwardRef((props: TreeProps, ref: ForwardedRef<HTML
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	const {
 		$pp,
-		halfChecked, showIndex, detective,
+		halfChecked, initExpandLevel = -1, showIndex, detective,
 		height = 300,
 		$wrapped, ...rest
 	} = props;
@@ -69,8 +69,8 @@ export const InternalTree = forwardRef((props: TreeProps, ref: ForwardedRef<HTML
 			const canAdd = canHasChild && (child.addable ?? false);
 			const last = !canAdd && index === childrenCount - 1;
 			const myDisplayIndex = `${index + 1}`;
-			return <TreeNode halfChecked={halfChecked} showIndex={showIndex} detective={detect}
-			                 $wrapped={{...$wrapped, $p2r: node$p2r}}
+			return <TreeNode halfChecked={halfChecked} initExpandLevel={initExpandLevel} showIndex={showIndex}
+			                 detective={detect} $wrapped={{...$wrapped, $p2r: node$p2r}}
 			                 node={child}
 			                 displayIndex={myDisplayIndex} lastOfParent={last} level={0}
 			                 key={child.$ipp}/>;
