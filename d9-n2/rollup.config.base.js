@@ -4,6 +4,8 @@ import babel from 'rollup-plugin-babel';
 import typescript from 'rollup-plugin-typescript2';
 
 export const buildConfig = (lint) => {
+	let isCircularImportFound = false;
+
 	return {
 		input: './src/index.tsx',
 		output: [
@@ -15,6 +17,16 @@ export const buildConfig = (lint) => {
 			// lint ? tslint({ exclude: ['../node_modules/**', 'node_modules/**'], include: 'src/**/*' }) : null,
 			typescript({ clean: true }), babel({ presets: ['@babel/preset-react'] })
 		].filter(x => x != null),
+		onwarn(warning, defaultHandler) {
+			if (warning.code === 'CIRCULAR_DEPENDENCY') {
+				if (!isCircularImportFound) {
+					isCircularImportFound = true;
+					defaultHandler(`Warning: 1+ circular dependencies found.`);
+				}
+			} else {
+				defaultHandler(warning);
+			}
+		},
 		external: ['react', 'react-dom', 'styled-components', 'color', 'dayjs', '@rainbow-d9/n1']
 	};
 };
