@@ -40,10 +40,11 @@ export const TreeNode = (props: TreeNodeProps) => {
 	const onEntityClicked = (event: MouseEvent<HTMLSpanElement>) => {
 		event.preventDefault();
 		event.stopPropagation();
-		const key = `${GlobalEventPrefix.TREE_NODE_CLICKED}:${node.marker ?? ''}`;
+		const clipped = (node.marker ?? '').trim() || PPUtils.concat($wrapped.$p2r, node.$ip2r);
+		const key = `${GlobalEventPrefix.TREE_NODE_CLICKED}:${clipped}`;
 		// eslint-disable-next-line  @typescript-eslint/ban-ts-comment
 		// @ts-ignore
-		global.fire(GlobalEventTypes.CUSTOM_EVENT, key, GlobalEventPrefix.TREE_NODE_CLICKED, node.marker ?? '', {
+		global.fire(GlobalEventTypes.CUSTOM_EVENT, key, GlobalEventPrefix.TREE_NODE_CLICKED, clipped, {
 			root: $wrapped.$root, model: $wrapped.$model, value: node.value
 		});
 	};
@@ -82,12 +83,12 @@ export const TreeNode = (props: TreeNodeProps) => {
 					: null}
 				{(showIndex && VUtils.isNotBlank(displayIndex))
 					? <TreeNodeLabel>
-						<LabelLike $wrapped={{...$wrapped, $model: node.value}} label={node.label}/>
+						<LabelLike $wrapped={{...$wrapped, $model: node.value, $p2r}} label={node.label}/>
 					</TreeNodeLabel>
 					: <>
 						<TreeNodeIndex># {displayIndex}.</TreeNodeIndex>
 						<TreeNodeLabel>
-							<LabelLike $wrapped={{...$wrapped, $model: node.value}} label={node.label}/>
+							<LabelLike $wrapped={{...$wrapped, $model: node.value, $p2r}} label={node.label}/>
 						</TreeNodeLabel>
 					</>}
 			</TreeNodeContent>
@@ -99,11 +100,11 @@ export const TreeNode = (props: TreeNodeProps) => {
 				const last = !canAdd && index === childrenCount - 1;
 				const myDisplayIndex = `${displayIndex}.${index + 1}`;
 				return <TreeNode halfChecked={halfChecked} initExpandLevel={initExpandLevel} showIndex={showIndex}
-				                 detective={detective} $wrapped={{...$wrapped, $p2r}}
+				                 detective={detective} $wrapped={$wrapped}
 				                 node={child}
 				                 displayIndex={myDisplayIndex} lastOfParent={last} level={level + 1}
 				                 expandParent={expandMe}
-				                 key={child.$ipp}/>;
+				                 key={child.$ip2p}/>;
 			}).filter(x => x != null)
 			: null}
 	</TreeNodeWrapper>;

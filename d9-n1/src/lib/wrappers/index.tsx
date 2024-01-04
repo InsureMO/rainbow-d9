@@ -118,7 +118,7 @@ export const ArrayElement = (props: {
 	// cache keys for children of element
 	const {keys, defs: childrenDefs} = useContainerChildren({def: originalProps});
 
-	const $p2r = `${$arrayP2r}[${index}]`;
+	const $p2r = PPUtils.concat($arrayP2r, `[${index}]`);
 	const enhancedForElement = {
 		...$array, elementIndex: index, removeElement: createRemoveElementFunc(elementModel, index)
 	};

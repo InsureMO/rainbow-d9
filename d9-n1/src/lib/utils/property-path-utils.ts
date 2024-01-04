@@ -33,7 +33,18 @@ export const PPUtils: PropertyPathUtilsType = {
 		if (paths == null || paths.length === 0) {
 			return PROPERTY_PATH_ROOT;
 		} else {
-			const path = paths.map(p => PPUtils.legalize(p)).filter(p => p !== PROPERTY_PATH_ME).join(PROPERTY_PATH_JOINER);
+			const path = paths
+				.map(p => PPUtils.legalize(p))
+				.filter(p => p !== PROPERTY_PATH_ME)
+				.reduce((path, segment) => {
+					if (path === '') {
+						return segment;
+					} else if (segment.startsWith('[')) {
+						return `${path}${segment}`;
+					} else {
+						return `${path}${PROPERTY_PATH_JOINER}${segment}`;
+					}
+				}, '');
 			if (path.length === 0) {
 				return PROPERTY_PATH_ROOT;
 			} else {

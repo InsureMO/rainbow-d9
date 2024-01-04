@@ -9,10 +9,14 @@ export interface TreeNodeDef {
 	 * and this node must be a leaf node
 	 */
 	value: PropValue;
-	/** inside property path, relative to tree model */
+	/**
+	 * inside property path, relative to tree model.
+	 * 1. $ip2r contains $ip2p.
+	 * 2. concat $p2r and $ip2r, is absolute path of this node model (value above)
+	 */
 	$ip2r: PropertyPath;
 	/** inside property path, relative to parent */
-	$ipp: PropertyPath;
+	$ip2p: PropertyPath;
 	marker?: string;
 	label?: string | ReactNode | CaptionDef;
 	/** default false */

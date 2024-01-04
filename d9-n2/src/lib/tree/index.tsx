@@ -1,4 +1,4 @@
-import {MUtils, PPUtils, PROPERTY_PATH_ME, registerWidget, VUtils} from '@rainbow-d9/n1';
+import {MUtils, PPUtils, PROPERTY_PATH_ME, PropertyPath, registerWidget, VUtils} from '@rainbow-d9/n1';
 import React, {ForwardedRef, forwardRef} from 'react';
 import {TreeEventBusProvider} from './event/tree-event-bus';
 import {TreeNode} from './node';
@@ -12,27 +12,27 @@ const buildDetective = (detective: TreeNodeDetect) => {
 		}
 		// eslint-disable-next-line @typescript-eslint/no-explicit-any
 		let nodes: Array<any>;
-		let parentMarker = parentNode.marker;
+		let parent$ip2r: PropertyPath;
 		if (Array.isArray(parentNode.value)) {
 			nodes = parentNode.value;
+			parent$ip2r = parentNode.$ip2r;
 		} else {
 			// eslint-disable-next-line @typescript-eslint/no-explicit-any
 			nodes = (parentNode.value as any).children ?? [];
-			parentMarker = `${parentNode.marker ?? ''}.children`;
+			parent$ip2r = `${parentNode.$ip2r}.children`;
 		}
 		return nodes.map((item, index, items) => {
 			if (item == null) {
 				return null;
 			} else {
-				const path = `[${index}]`;
+				const $ip2p = `[${index}]`;
+				const $ip2r = PPUtils.concat(parent$ip2r, $ip2p);
 				return {
-					value: item, $ip2r: PPUtils.concat(parentNode.$ip2r, path), $ipp: path,
-					marker: VUtils.isBlank(parentNode.marker) ? path : `${parentMarker}${path}`,
+					// concat parent path to root node as my path to root node
+					value: item, $ip2r, $ip2p,
 					// eslint-disable-next-line @typescript-eslint/no-explicit-any
 					label: VUtils.isPrimitive(item) ? `${item ?? ''}` : ((item as any).label ?? ''),
-					checkable: false,
-					addable: false,
-					removable: false,
+					checkable: false, addable: false, removable: false,
 					leaf: index === items.length - 1
 				} as TreeNodeDef;
 			}
@@ -51,15 +51,18 @@ export const InternalTree = forwardRef((props: TreeProps, ref: ForwardedRef<HTML
 	const {$p2r, $avs: {$disabled, $visible}} = $wrapped;
 
 	const detect = buildDetective(detective);
-	const node$p2r = PPUtils.absolute($p2r, $pp);
+	// model of whole tree
 	const rootNodeValue = MUtils.getValue($wrapped.$model, $pp);
 	// root node never show, only for create top level nodes
 	const rootNodeDef: TreeNodeDef = {
-		value: rootNodeValue, $ip2r: PROPERTY_PATH_ME, $ipp: PROPERTY_PATH_ME,
+		// root node use model of whole tree as it value, so path to root and path are both stay itself
+		value: rootNodeValue, $ip2r: PROPERTY_PATH_ME, $ip2p: PROPERTY_PATH_ME,
 		label: '', checkable: false, addable: false, removable: false, leaf: false
 	};
 	const children = detect(rootNodeDef) ?? [];
 	const childrenCount = children.length;
+	// path to root of model of whole tree
+	const node$p2r = PPUtils.absolute($p2r, $pp);
 
 	return <ATree {...rest} data-disabled={$disabled} data-visible={$visible} height={height}
 	              id={PPUtils.asId(PPUtils.absolute($p2r, props.$pp), props.id)}
@@ -70,10 +73,12 @@ export const InternalTree = forwardRef((props: TreeProps, ref: ForwardedRef<HTML
 			const last = !canAdd && index === childrenCount - 1;
 			const myDisplayIndex = `${index + 1}`;
 			return <TreeNode halfChecked={halfChecked} initExpandLevel={initExpandLevel} showIndex={showIndex}
-			                 detective={detect} $wrapped={{...$wrapped, $p2r: node$p2r}}
-			                 node={child}
-			                 displayIndex={myDisplayIndex} lastOfParent={last} level={0}
-			                 key={child.$ipp}/>;
+				// change path to root as path to root of model of whole tree
+				// and keep this path to root for all tree nodes
+				             detective={detect} $wrapped={{...$wrapped, $p2r: node$p2r}}
+				             node={child}
+				             displayIndex={myDisplayIndex} lastOfParent={last} level={0}
+				             key={child.$ip2p}/>;
 		})}
 	</ATree>;
 });
