@@ -39,6 +39,7 @@ import {UnwrappedRadios as Radios, UnwrappedRadiosProps as RadiosProps} from './
 import {UnwrappedSection as Section, UnwrappedSectionProps as SectionProps} from './section';
 import {UnwrappedTabs as Tabs, UnwrappedTabsProps as TabsProps} from './tabs';
 import {UnwrappedTextarea as Textarea, UnwrappedTextareaProps as TextareaProps} from './textarea';
+import {UnwrappedTree as Tree, UnwrappedTreeProps as TreeProps} from './tree';
 import {UnwrappedWizard as Wizard, UnwrappedWizardProps as WizardProps} from './wizard';
 
 export {
@@ -60,5 +61,6 @@ export {
 	Pagination, PaginationProps,
 	Tabs, TabsProps,
 	Wizard, WizardProps,
-	ButtonBar, ButtonBarProps
+	ButtonBar, ButtonBarProps,
+	Tree, TreeProps
 };

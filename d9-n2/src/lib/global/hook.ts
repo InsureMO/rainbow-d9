@@ -138,7 +138,8 @@ export enum GlobalEventPrefix {
 	SECTION_EXPANDED = 'section-expanded',
 	SECTION_COLLAPSED = 'section-collapsed',
 	TAB_CHANGED = 'tab-changed',
-	WIZARD_STEP_CHANGED = 'wstep-changed'
+	WIZARD_STEP_CHANGED = 'wstep-changed',
+	TREE_NODE_CLICKED = 'tree-node-clicked',
 }
 
 export type CustomGlobalEventHandler = <R extends BaseModel, M extends PropValue>(

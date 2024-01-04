@@ -26,7 +26,8 @@ const CssConstants = {
 	TAB_ACTIVE_COLOR: 'rgb(13,110,253)',
 	WIZARD_STEP_DONE_COLOR: 'rgb(223,230,245)',
 	WIZARD_STEP_ACTIVE_COLOR: 'rgb(13,110,253)',
-	RIB_COLOR: 'rgb(238,241,245)'
+	RIB_COLOR: 'rgb(238,241,245)',
+	TREE_LINE_COLOR: 'rgb(206,212,218)'
 };
 
 export const CssVars = {
@@ -148,6 +149,8 @@ export const CssVars = {
 	TABLE_CELL_BORDER: `var(--d9-table-cell-border, 1px solid var(--d9-border-color, ${CssConstants.BORDER_COLOR}))`,
 	TABLE_FOOTER_HEIGHT: 'var(--d9-table-footer-height, 44px)',
 	TABLE_ODD_ROW_BACKGROUND_COLOR: `var(--d9-table-odd-row-background-color, ${CssConstants.RIB_COLOR})`,
+
+	TREE_LINE_COLOR: `var(--d9-tree-line-color, ${CssConstants.TREE_LINE_COLOR})`,
 
 	FORM_CELL_INVALID_MESSAGE_HEIGHT: 'var(--d9-form-cell-invalid-message-height, 22px)',
 	FORM_CELL_INVALID_MESSAGE_PADDING: 'var(--d9-form-cell-invalid-message-padding, 4px)',

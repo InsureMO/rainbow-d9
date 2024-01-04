@@ -26,6 +26,7 @@ export * from './lib/tabs';
 export * from './lib/wizard';
 export * from './lib/textarea';
 export * from './lib/pagination';
+export * from './lib/tree';
 
 export * from './lib/hooks';
 export * from './lib/types';

@@ -34,6 +34,7 @@ export enum N2WidgetType {
 	WIZARD_SHARED = 'WShared',
 	WIZARD_STEP = 'WStep',
 	WIZARD = 'Wizard',
+	TREE = 'Tree',
 
 	PAGINATION = 'Pagination'
 }
