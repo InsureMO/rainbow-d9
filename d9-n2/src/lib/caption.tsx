@@ -197,6 +197,7 @@ const Decorator = styled.span`
     font-family: ${CssVars.FONT_FAMILY};
     font-size: ${CssVars.FONT_SIZE};
     color: ${CssVars.FONT_COLOR};
+    fill: ${CssVars.FONT_COLOR};
     height: ${CssVars.INPUT_HEIGHT};
     min-width: ${CssVars.INPUT_HEIGHT};
     padding: 0 ${CssVars.INPUT_INDENT};

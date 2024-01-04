@@ -77,6 +77,7 @@ const AButton = styled.button.attrs<{ hasOneLeadOrTail: boolean }>(
     height: ${CssVars.INPUT_HEIGHT};
     padding: 0 ${CssVars.BUTTON_INDENT};
     color: ${CssVars.INVERT_COLOR};
+    fill: ${CssVars.INVERT_COLOR};
     border: ${CssVars.BORDER};
     border-radius: ${CssVars.BORDER_RADIUS};
     outline: none;
