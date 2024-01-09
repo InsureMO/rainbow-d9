@@ -856,10 +856,12 @@ The configuration of tab content is the same as `Section`, except follows,
 
 ### Wizard Step (WStep)
 
-| Attribute Name | Type | Description                |
-|----------------|------|----------------------------|
-| title          | text | Tab title.                 |
-| marker         | text | Tab marker, global unique. |
+| Attribute Name | Type     | Description                                         |
+|----------------|----------|-----------------------------------------------------|
+| title          | text     | Tab title.                                          |
+| marker         | text     | Tab marker, global unique.                          |
+| body           | function | From external definition only, starts with `@ext.`. |
+| data           | function | From external definition only, starts with `@ext.`. |
 
 > `title` attribute follows the `label` default parsing behavior.
 
@@ -867,6 +869,10 @@ The configuration of tab content is the same as `Section`, except follows,
 
 - No `title` attribute, which has already been used in tab title,
 - No `label` attribute.
+
+> Ignore all child node definitions when `body` presents.
+
+> `data` attribute is used to retrieve the data of the step content, simply set data into step model and widget will refresh automatically.
 
 ### Wizard Shared Content (WShared)
 

@@ -51,30 +51,15 @@ export const WizardStepSharedPart = (props: WizardStepSharedPartProps) => {
 	return <WrapperDelegate {...shared} $root={$root} $model={$model} $p2r={$p2r}/>;
 };
 
-export const WizardStepBodyContent = (props: WizardStepBodyProps) => {
+const computeSharedPosition = (options: {
+	shared?: NodeDef; omitWalker?: boolean; sharedAtLead?: boolean;
+	defs?: NodeDef;
+}) => {
 	const {
-		$pp, marker, def,
-		$root, $model, $p2r,
-		omitWalker = false, shared, sharedAtLead,
-		firstStep, lastStep, previousMarker, nextMarker, stepIndex
-	} = props;
+		shared, omitWalker, sharedAtLead,
+		defs = {$pos: {$col: 1, $cols: 1}}
+	} = options;
 
-	const {fire} = useWizardEventBus();
-	useWizardStepContentRefresh(stepIndex, marker);
-	const {initialized, def: bodyDef} = useTabBodyInit({$pp, marker, def});
-	if (!initialized) {
-		return null;
-	}
-
-	const onToPreviousClicked = async () => {
-		fire(WizardEventTypes.TRY_ACTIVE_STEP, stepIndex - 1, previousMarker);
-	};
-	const onToNextClicked = async () => {
-		fire(WizardEventTypes.TRY_ACTIVE_STEP, stepIndex + 1, nextMarker);
-	};
-
-	// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-	const defs = bodyDef!;
 	if (shared != null) {
 		shared.$pos = shared.$pos ?? {};
 		shared.$pos.$row = 1;
@@ -87,12 +72,43 @@ export const WizardStepBodyContent = (props: WizardStepBodyProps) => {
 		defs.$pos.$cols = 12 - $cols;
 		if (sharedAtLead === true) {
 			shared.$pos.$col = 1;
-			defs.$pos.$col = 4;
+			defs.$pos.$col = shared.$pos.$cols + 1;
 		} else {
-			shared.$pos.$col = 10;
+			shared.$pos.$col = defs.$pos.$cols + 1;
 			defs.$pos.$col = 1;
 		}
 	}
+};
+
+export const WizardStepBodyContent = (props: WizardStepBodyProps) => {
+	const {
+		$pp, marker, def,
+		$root, $model, $p2r,
+		omitWalker = false, shared, sharedAtLead,
+		firstStep, lastStep, previousMarker, nextMarker, stepIndex
+	} = props;
+
+	const {fire} = useWizardEventBus();
+	useWizardStepContentRefresh(stepIndex, marker);
+	const {initialized, def: bodyDef} = useTabBodyInit({$pp, marker, def});
+	if (!initialized) {
+		computeSharedPosition({shared, omitWalker, sharedAtLead});
+		return <AWizardStepBody>
+			<WizardStepSharedPart stepIndex={stepIndex} marker={marker} shared={shared}
+			                      $root={$root} $model={$model} $p2r={$p2r}/>
+		</AWizardStepBody>;
+	}
+
+	const onToPreviousClicked = async () => {
+		fire(WizardEventTypes.TRY_ACTIVE_STEP, stepIndex - 1, previousMarker);
+	};
+	const onToNextClicked = async () => {
+		fire(WizardEventTypes.TRY_ACTIVE_STEP, stepIndex + 1, nextMarker);
+	};
+
+	// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+	const defs = bodyDef!;
+	computeSharedPosition({shared, omitWalker, sharedAtLead, defs});
 
 	return <AWizardStepBody>
 		<WizardStepSharedPart stepIndex={stepIndex} marker={marker} shared={shared}
