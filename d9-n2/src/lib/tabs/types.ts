@@ -1,7 +1,7 @@
-import {NodeDef, WidgetProps} from '@rainbow-d9/n1';
+import {BaseModel, NodeDef, PropertyPath, PropValue, WidgetProps} from '@rainbow-d9/n1';
 import {ReactNode} from 'react';
 import {BadgeDef} from '../caption';
-import {OmitHTMLProps, OmitNodeDef} from '../types';
+import {GlobalEventHandlers, ModelCarriedHandler, OmitHTMLProps, OmitNodeDef} from '../types';
 
 export interface TabTitleDef extends NodeDef {
 	/** tab title */
@@ -15,10 +15,19 @@ export interface TabTitleDef extends NodeDef {
 	badge?: ReactNode | BadgeDef;
 }
 
+export interface TabDefDataRetrieverOptions<R extends BaseModel, M extends PropValue>
+	extends ModelCarriedHandler<R, M>, GlobalEventHandlers {
+	marker: string;
+	absolutePath: PropertyPath;
+	propertyPath: PropertyPath;
+	firstActive: boolean;
+}
+
 /**
  * single tab for tabs.
  */
 export interface TabDef extends TabTitleDef {
+	data?: <R extends BaseModel, M extends PropValue>(options: TabDefDataRetrieverOptions<R, M>) => Promise<void>;
 	body: NodeDef | ((marker?: string) => Promise<NodeDef>);
 }
 

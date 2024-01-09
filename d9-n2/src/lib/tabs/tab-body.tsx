@@ -3,6 +3,7 @@ import React from 'react';
 import {TabDef} from './types';
 import {useTabActive} from './use-tab-active';
 import {useTabBodyInit} from './use-tab-body-init';
+import {useTabContentRefresh} from './use-tab-content-refresh';
 import {ATabBody, ATabBodyVisibility} from './widgets';
 
 export interface TabBodyProps extends ModelHolder {
@@ -21,25 +22,27 @@ export const TabBodyVisibilityController = (props: TabBodyVisibilityControllerPr
 	return <ATabBodyVisibility data-visible={active}/>;
 };
 
-export const TabBody = (props: TabBodyProps) => {
+export const TabBodyContent = (props: TabBodyProps) => {
 	const {
 		$pp, marker, def, tabIndex,
 		$root, $model, $p2r
 	} = props;
 
+	useTabContentRefresh(tabIndex, marker);
 	const {initialized, def: bodyDef} = useTabBodyInit({$pp, marker, def});
 
 	if (!initialized) {
-		return <>
-			<TabBodyVisibilityController tabIndex={tabIndex} marker={marker}/>
-			<ATabBody/>
-		</>;
+		return <ATabBody/>;
 	}
+	return <ATabBody>
+		<WrapperDelegate {...bodyDef} $root={$root} $model={$model} $p2r={$p2r}/>
+	</ATabBody>;
+};
 
+export const TabBody = (props: TabBodyProps) => {
 	return <>
-		<TabBodyVisibilityController tabIndex={tabIndex} marker={marker}/>
-		<ATabBody>
-			<WrapperDelegate {...bodyDef} $root={$root} $model={$model} $p2r={$p2r}/>
-		</ATabBody>
+		<TabBodyVisibilityController tabIndex={props.tabIndex} marker={props.marker}/>
+		<TabBodyContent {...props}/>
 	</>;
 };
+

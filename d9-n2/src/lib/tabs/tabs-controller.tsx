@@ -1,21 +1,30 @@
-import {VUtils} from '@rainbow-d9/n1';
+import {MUtils, PPUtils, PropertyPath, VUtils} from '@rainbow-d9/n1';
 import React, {Fragment, useEffect, useState} from 'react';
-import {GlobalEventPrefix, GlobalEventTypes, useCustomGlobalEvent, useGlobalEventBus} from '../global';
+import {
+	GlobalEventPrefix,
+	GlobalEventTypes,
+	useCustomGlobalEvent,
+	useGlobalEventBus,
+	useGlobalHandlers
+} from '../global';
 import {useTabsEventBus} from './event/tabs-event-bus';
 import {TabsEventTypes} from './event/tabs-event-bus-types';
 import {TabDef, TabsProps} from './types';
 import {findActiveOne, findInitActiveOne} from './utils';
 
 interface TabsControllerProps {
+	// tabs property path, not for tab
+	$pp: PropertyPath;
 	$wrapped: TabsProps['$wrapped'];
 	initActive?: TabsProps['initActive'];
 	contents?: TabsProps['contents'];
 }
 
 export const TabsController = (props: TabsControllerProps) => {
-	const {$wrapped, initActive, contents} = props;
+	const {$pp, $wrapped, initActive, contents} = props;
 
 	const {on: onGlobal, off: offGlobal} = useGlobalEventBus();
+	const globalHandlers = useGlobalHandlers();
 	const {on, off, fire} = useTabsEventBus();
 	const [activeIndex, setActiveIndex] = useState(() => {
 		const [, initActiveIndex] = findInitActiveOne(contents, initActive);
@@ -23,18 +32,30 @@ export const TabsController = (props: TabsControllerProps) => {
 	});
 	const fireCustomEvent = useCustomGlobalEvent();
 	useEffect(() => {
-		const activeTab = (tabIndex: number, def?: TabDef) => {
+		const activeTab = async (options: { tabIndex: number; def?: TabDef; first: boolean }) => {
+			const {tabIndex, def, first} = options;
+
+			if (def.data != null) {
+				const model = MUtils.getValue($wrapped.$model, PPUtils.concat($pp, def.$pp));
+				await def.data({
+					root: $wrapped.$root, model,
+					absolutePath: PPUtils.absolute($wrapped.$p2r, PPUtils.concat($pp, def.$pp)), propertyPath: def.$pp,
+					marker: def.marker, firstActive: first,
+					global: globalHandlers
+				});
+				fire(TabsEventTypes.REFRESH_TAB_CONTENT, tabIndex, def?.marker);
+			}
 			setActiveIndex(tabIndex);
 			fire(TabsEventTypes.ACTIVE_TAB, tabIndex, def?.marker);
 			const key = `${GlobalEventPrefix.TAB_CHANGED}:${def?.marker ?? ''}`;
-			// noinspection JSIgnoredPromiseFromCall
+			// noinspection JSIgnoredPromiseFromCall,ES6MissingAwait
 			fireCustomEvent(key, GlobalEventPrefix.TAB_CHANGED, def?.marker ?? '', {
 				root: $wrapped.$root, model: $wrapped.$model
 			});
 		};
 		// deal with active tab event from inside
 		// and fire tab changed event when tab changed
-		const createOnTabActive = (first: boolean) => (index: number, marker: string) => {
+		const createOnTabActive = (first: boolean) => async (index: number, marker: string) => {
 			const activeOne = findActiveOne(contents, index, marker);
 			if (activeOne == null) {
 				// do nothing
@@ -44,10 +65,10 @@ export const TabsController = (props: TabsControllerProps) => {
 			if (foundIndex === activeIndex) {
 				if (first) {
 					// use force since state active index is same as given tab index
-					activeTab(foundIndex, found);
+					await activeTab({tabIndex: foundIndex, def: found, first: true});
 				}
 			} else {
-				activeTab(foundIndex, found);
+				await activeTab({tabIndex: foundIndex, def: found, first: false});
 			}
 		};
 		const onFirstTabActive = createOnTabActive(true);
@@ -58,7 +79,10 @@ export const TabsController = (props: TabsControllerProps) => {
 			off(TabsEventTypes.TRY_ACTIVE_FIRST_TAB, onFirstTabActive);
 			off(TabsEventTypes.TRY_ACTIVE_TAB, onTabActive);
 		};
-	}, [on, off, fire, fireCustomEvent, activeIndex, contents, $wrapped.$root, $wrapped.$model]);
+	}, [
+		on, off, fire, globalHandlers, fireCustomEvent, activeIndex, contents,
+		$pp, $wrapped.$root, $wrapped.$model, $wrapped.$p2r
+	]);
 	useEffect(() => {
 		// deal with active tab event from outside
 		const onCustomEvent = (_: string, prefix: string, clipped: string) => {

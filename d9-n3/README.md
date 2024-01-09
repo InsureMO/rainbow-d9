@@ -816,13 +816,19 @@ Strictly adhere to the heading parsing rules without any additional attribute de
 - Default Wrapped by Form Cell: `false`,
 - Default Grid Column Span: `12`.
 
+| Attribute Name | Type         | Description                                                              |
+|----------------|--------------|--------------------------------------------------------------------------|
+| initActive     | number, text | Number represents tab index (starts from 0), text represents tab marker. |
+
 ### Tab
 
-| Attribute Name | Type | Description                |
-|----------------|------|----------------------------|
-| title          | text | Tab title.                 |
-| marker         | text | Tab marker, global unique. |
-| badge          | text | Tab title badge.           |
+| Attribute Name | Type     | Description                                         |
+|----------------|----------|-----------------------------------------------------|
+| title          | text     | Tab title.                                          |
+| marker         | text     | Tab marker, global unique.                          |
+| badge          | text     | Tab title badge.                                    |
+| body           | function | From external definition only, starts with `@ext.`. |
+| data           | function | From external definition only, starts with `@ext.`. |
 
 > `title` and `badge` attribute follows the `label` default parsing behavior.
 
@@ -830,6 +836,10 @@ The configuration of tab content is the same as `Section`, except follows,
 
 - No `title` attribute, which has already been used in tab title,
 - No `label` attribute.
+
+> Ignore all child node definitions when `body` presents.
+
+> `data` attribute is used to retrieve the data of the tab content, simply set data into tab model and widget will refresh automatically.
 
 ## Wizard
 

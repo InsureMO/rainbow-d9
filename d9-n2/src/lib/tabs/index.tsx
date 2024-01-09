@@ -19,9 +19,11 @@ const InternalTabs = (props: TabsProps) => {
 		<TabsHeader>
 			{(contents ?? []).map((content, index) => {
 				const $model = MUtils.getValue($wrapped.$model, $pp);
+				// eslint-disable-next-line @typescript-eslint/no-unused-vars
+				const {data, ...rest} = content;
 				return <TabTitle key={content.marker}
 				                 $root={$wrapped.$root} $model={$model} $p2r={PPUtils.concat($p2r, $pp)}
-				                 {...content} tabIndex={index} marker={content.marker}/>;
+				                 {...rest} tabIndex={index} marker={content.marker}/>;
 			})}
 		</TabsHeader>
 		<TabsBody>
@@ -33,7 +35,7 @@ const InternalTabs = (props: TabsProps) => {
 				                tabIndex={index} marker={content.marker}/>;
 			})}
 		</TabsBody>
-		<TabsController $wrapped={$wrapped} initActive={initActive} contents={contents}/>
+		<TabsController $pp={$pp} $wrapped={$wrapped} initActive={initActive} contents={contents}/>
 	</ATabs>;
 };
 
