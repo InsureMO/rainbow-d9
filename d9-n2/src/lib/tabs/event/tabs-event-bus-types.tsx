@@ -1,16 +1,16 @@
 export enum TabsEventTypes {
-	TRY_ACTIVE_FIRST_TAB = 'try-active-first-tab',
+	FIRST_TRY_ACTIVE_TAB = 'first-try-active-tab',
 	TRY_ACTIVE_TAB = 'try-active-tab',
 	ACTIVE_TAB = 'active-tab',
 	REFRESH_TAB_CONTENT = 'refresh-tab-content'
 }
 
 export interface TabsEventBus {
-	fire(type: TabsEventTypes.TRY_ACTIVE_FIRST_TAB, tabIndex: number, marker: string): this;
+	fire(type: TabsEventTypes.FIRST_TRY_ACTIVE_TAB, tabIndex: number, marker: string): this;
 
-	on(type: TabsEventTypes.TRY_ACTIVE_FIRST_TAB, listener: (tabIndex: number, marker: string) => void): this;
+	on(type: TabsEventTypes.FIRST_TRY_ACTIVE_TAB, listener: (tabIndex: number, marker: string) => void): this;
 
-	off(type: TabsEventTypes.TRY_ACTIVE_FIRST_TAB, listener: (tabIndex: number, marker: string) => void): this;
+	off(type: TabsEventTypes.FIRST_TRY_ACTIVE_TAB, listener: (tabIndex: number, marker: string) => void): this;
 
 	fire(type: TabsEventTypes.TRY_ACTIVE_TAB, tabIndex: number, marker: string): this;
 

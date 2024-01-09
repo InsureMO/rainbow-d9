@@ -12,20 +12,25 @@ import {LabelLike} from '../label-like';
 import {useWizardEventBus} from './event/wizard-event-bus';
 import {WizardEventTypes} from './event/wizard-event-bus-types';
 import {WizardStepTitleDef} from './types';
+import {useWizardStepActive} from './use-wizard-step-active';
+import {useWizardStepContentRefresh} from './use-wizard-step-content-refresh';
 import {AWizardStepBalloon, AWizardStepTitle} from './widgets';
 
 export interface WizardStepTitleProps extends WizardStepTitleDef, ModelHolder {
 	balloon?: boolean;
 	emphasisActive?: boolean;
-	done: boolean;
-	active: boolean;
 	freeWalk: boolean;
-	reachedIndex: number;
 	stepIndex: number;
 	marker: string;
 }
 
-export const WizardStepTitleWorker = (props: WizardStepTitleProps & DefaultNodeAttributesState) => {
+interface WizardStepTitleWorkerProps extends WizardStepTitleProps, DefaultNodeAttributesState {
+	active: boolean;
+	done: boolean;
+	reachedIndex: number;
+}
+
+export const WizardStepTitleWorker = (props: WizardStepTitleWorkerProps) => {
 	const {
 		$pp, title,
 		$root, $model, $p2r,
@@ -58,7 +63,7 @@ export const WizardStepTitleWorker = (props: WizardStepTitleProps & DefaultNodeA
 		event.preventDefault();
 		event.stopPropagation();
 
-		fire(WizardEventTypes.ACTIVE_STEP, stepIndex, marker);
+		fire(WizardEventTypes.TRY_ACTIVE_STEP, stepIndex, marker);
 	};
 
 	return <AWizardStepTitle data-disabled={$disabled} data-visible={$visible}
@@ -76,12 +81,17 @@ export const WizardStepTitleWorker = (props: WizardStepTitleProps & DefaultNodeA
 };
 
 export const WizardStepTitle = (props: WizardStepTitleProps) => {
+	// active hook must put here, since tab title is rendered before wizard controller
+	// and since the attribute initializer is async, the step title worker is not ensured to be rendered before wizard controller
+	// which leads to miss the active step event from inside
+	const {active, done, reachedIndex} = useWizardStepActive(props.stepIndex, props.marker);
+	useWizardStepContentRefresh(props.stepIndex, props.marker);
 	const {initialized, $defaultAttributes, $defaultAttributesSet} = useDefaultAttributeValues(props);
 	if (!initialized) {
 		return null;
 	}
 
-	return <WizardStepTitleWorker {...props}
+	return <WizardStepTitleWorker {...props} active={active} done={done} reachedIndex={reachedIndex}
 	                              $defaultAttributes={$defaultAttributes}
 	                              $defaultAttributesSet={$defaultAttributesSet}/>;
 };

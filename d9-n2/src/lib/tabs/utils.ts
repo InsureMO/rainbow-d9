@@ -33,6 +33,7 @@ export const findInitActiveOne = (contents: TabsProps['contents'], initActive?: 
 };
 
 export const findActiveOne = (contents: TabsProps['contents'], index: number, marker: string): Undefinable<[TabDef, number]> => {
+	// noinspection DuplicatedCode
 	let found = (contents ?? []).find(content => content.marker === marker);
 	if (found == null) {
 		found = (contents ?? []).find((_, i) => i === index);

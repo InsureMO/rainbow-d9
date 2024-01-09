@@ -226,16 +226,19 @@ export const WizardBody = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-wizard-body'})
     padding: ${CssVars.SECTION_BODY_PADDING} 0;
     margin-top: -1px;
 `;
+export const AWizardStepBodyVisibility = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-tab-body-visibility'})`
+    display: none;
+
+    &[data-visible=false] + div[data-w=d9-wizard-step-body] {
+        display: none;
+    }
+`;
 export const AWizardStepBody = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-wizard-step-body'})`
     display: grid;
     position: relative;
     grid-template-columns: repeat(${CssVars.GRID_COLUMNS}, calc((100% - ${CssVars.GRID_COLUMN_GAP} * (${CssVars.GRID_COLUMNS} - 1)) / ${CssVars.GRID_COLUMNS}));
     grid-column-gap: ${CssVars.GRID_COLUMN_GAP};
     grid-row-gap: ${CssVars.GRID_ROW_GAP};
-
-    &[data-visible=false] {
-        display: none;
-    }
 
     > div[data-w=d9-wizard-walker] {
         grid-column: span 12;

@@ -13,6 +13,7 @@ import {useTabsEventBus} from './event/tabs-event-bus';
 import {TabsEventTypes} from './event/tabs-event-bus-types';
 import {TabTitleDef} from './types';
 import {useTabActive} from './use-tab-active';
+import {useTabContentRefresh} from './use-tab-content-refresh';
 import {ATabTitle} from './widgets';
 
 export interface TabTitleProps extends TabTitleDef, ModelHolder {
@@ -65,6 +66,7 @@ export const TabTitle = (props: TabTitleProps) => {
 	// and since the attribute initializer is async, the tab title worker is not ensured to be rendered before tab controller
 	// which leads to miss the active tab event from inside
 	const active = useTabActive(tabIndex, marker);
+	useTabContentRefresh(tabIndex, marker);
 	const {initialized, $defaultAttributes, $defaultAttributesSet} = useDefaultAttributeValues(props);
 	if (!initialized) {
 		return null;

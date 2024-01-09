@@ -1,18 +1,20 @@
-import {ModelHolder, NodeDef, PropertyPath, Undefinable, VUtils, WrapperDelegate} from '@rainbow-d9/n1';
-import React, {useEffect, useState} from 'react';
+import {ModelHolder, NodeDef, PropertyPath, WrapperDelegate} from '@rainbow-d9/n1';
+import React from 'react';
 import {ButtonFill, ButtonInk} from '../button';
 import {IntlLabel} from '../intl-label';
+import {useTabBodyInit} from '../tabs/use-tab-body-init';
 import {UnwrappedButton as Button} from '../unwrapped/button';
 import {UnwrappedButtonBar as ButtonBar} from '../unwrapped/button-bar';
 import {useWizardEventBus} from './event/wizard-event-bus';
 import {WizardEventTypes} from './event/wizard-event-bus-types';
 import {WizardStepDef} from './types';
-import {AWizardStepBody} from './widgets';
+import {useWizardStepActive} from './use-wizard-step-active';
+import {useWizardStepContentRefresh} from './use-wizard-step-content-refresh';
+import {AWizardStepBody, AWizardStepBodyVisibility} from './widgets';
 
 export interface WizardStepBodyProps extends ModelHolder {
 	$pp?: PropertyPath;
 	def: WizardStepDef['body'];
-	active?: boolean;
 	omitWalker?: boolean;
 	shared?: NodeDef;
 	sharedAtLead?: boolean;
@@ -24,52 +26,55 @@ export interface WizardStepBodyProps extends ModelHolder {
 	marker: string;
 }
 
-interface WizardStepBodyDefState {
-	initialized: boolean;
-	def?: NodeDef;
-}
+export type WizardStepBodyVisibilityControllerProps = Pick<WizardStepBodyProps, 'stepIndex' | 'marker'>;
 
-export const WizardStepBody = (props: WizardStepBodyProps) => {
+export const WizardStepBodyVisibilityController = (props: WizardStepBodyVisibilityControllerProps) => {
+	const {stepIndex, marker} = props;
+	const {active} = useWizardStepActive(stepIndex, marker);
+
+	return <AWizardStepBodyVisibility data-visible={active}/>;
+};
+
+export type WizardStepSharedPartProps = Pick<WizardStepBodyProps, 'stepIndex' | 'marker' | 'shared' | '$root' | '$model' | '$p2r'>;
+
+export const WizardStepSharedPart = (props: WizardStepSharedPartProps) => {
+	const {
+		stepIndex, marker, shared,
+		$root, $model, $p2r
+	} = props;
+	const {active} = useWizardStepActive(stepIndex, marker);
+
+	if (shared == null || !active) {
+		return null;
+	}
+
+	return <WrapperDelegate {...shared} $root={$root} $model={$model} $p2r={$p2r}/>;
+};
+
+export const WizardStepBodyContent = (props: WizardStepBodyProps) => {
 	const {
 		$pp, marker, def,
 		$root, $model, $p2r,
-		active = false, omitWalker = false, shared, sharedAtLead,
+		omitWalker = false, shared, sharedAtLead,
 		firstStep, lastStep, previousMarker, nextMarker, stepIndex
 	} = props;
 
 	const {fire} = useWizardEventBus();
-	const [defState, setDefState] = useState<WizardStepBodyDefState>({initialized: false});
-	useEffect(() => {
-		if (defState.initialized) {
-			return;
-		}
-		(async () => {
-			let foundDef: Undefinable<NodeDef>;
-			if (typeof def === 'function') {
-				foundDef = await def(marker);
-			} else {
-				foundDef = def;
-			}
-			if (foundDef != null && VUtils.isBlank(foundDef.$pp)) {
-				foundDef.$pp = $pp;
-			}
-			setDefState({initialized: true, def: foundDef});
-		})();
-	}, [defState.initialized, def, marker, $pp]);
-
-	if (!defState.initialized) {
+	useWizardStepContentRefresh(stepIndex, marker);
+	const {initialized, def: bodyDef} = useTabBodyInit({$pp, marker, def});
+	if (!initialized) {
 		return null;
 	}
 
 	const onToPreviousClicked = async () => {
-		fire(WizardEventTypes.ACTIVE_STEP, stepIndex - 1, previousMarker);
+		fire(WizardEventTypes.TRY_ACTIVE_STEP, stepIndex - 1, previousMarker);
 	};
 	const onToNextClicked = async () => {
-		fire(WizardEventTypes.ACTIVE_STEP, stepIndex + 1, nextMarker);
+		fire(WizardEventTypes.TRY_ACTIVE_STEP, stepIndex + 1, nextMarker);
 	};
 
 	// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-	const defs = defState.def!;
+	const defs = bodyDef!;
 	if (shared != null) {
 		shared.$pos = shared.$pos ?? {};
 		shared.$pos.$row = 1;
@@ -89,10 +94,9 @@ export const WizardStepBody = (props: WizardStepBodyProps) => {
 		}
 	}
 
-	return <AWizardStepBody data-visible={active}>
-		{shared != null && active
-			? <WrapperDelegate {...shared} $root={$root} $model={$model} $p2r={$p2r}/>
-			: null}
+	return <AWizardStepBody>
+		<WizardStepSharedPart stepIndex={stepIndex} marker={marker} shared={shared}
+		                      $root={$root} $model={$model} $p2r={$p2r}/>
 		<WrapperDelegate {...defs} $root={$root} $model={$model} $p2r={$p2r}/>
 		{omitWalker
 			? null
@@ -114,4 +118,11 @@ export const WizardStepBody = (props: WizardStepBodyProps) => {
 					</Button>}
 			</ButtonBar>}
 	</AWizardStepBody>;
+};
+
+export const WizardStepBody = (props: WizardStepBodyProps) => {
+	return <>
+		<WizardStepBodyVisibilityController stepIndex={props.stepIndex} marker={props.marker}/>
+		<WizardStepBodyContent {...props}/>
+	</>;
 };

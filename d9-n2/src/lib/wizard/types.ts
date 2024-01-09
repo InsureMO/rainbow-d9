@@ -1,5 +1,6 @@
-import {NodeDef, WidgetProps} from '@rainbow-d9/n1';
+import {BaseModel, NodeDef, PropValue, WidgetProps} from '@rainbow-d9/n1';
 import {ReactNode} from 'react';
+import {TabDefDataRetrieverOptions} from '../tabs';
 import {OmitHTMLProps, OmitNodeDef} from '../types';
 
 export interface WizardStepTitleDef extends NodeDef {
@@ -14,6 +15,7 @@ export interface WizardStepTitleDef extends NodeDef {
 }
 
 export interface WizardStepDef extends WizardStepTitleDef {
+	data?: <R extends BaseModel, M extends PropValue>(options: TabDefDataRetrieverOptions<R, M>) => Promise<void>;
 	body: NodeDef | ((marker?: string) => Promise<NodeDef>);
 }
 

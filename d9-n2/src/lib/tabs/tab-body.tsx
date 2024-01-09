@@ -45,4 +45,3 @@ export const TabBody = (props: TabBodyProps) => {
 		<TabBodyContent {...props}/>
 	</>;
 };
-

@@ -1,22 +1,22 @@
 import {NodeDef, PropertyPath, Undefinable, VUtils} from '@rainbow-d9/n1';
 import {useEffect, useState} from 'react';
-import {TabDef} from './types';
+import {WizardStepDef} from './types';
 
-export interface TabBodyInitState {
+export interface WizardStepBodyInitState {
 	initialized: boolean;
 	def?: NodeDef;
 }
 
-export interface TabBodyInitOptions {
+export interface WizardStepBodyInitOptions {
 	$pp?: PropertyPath;
 	marker?: string;
-	def?: TabDef['body'];
+	def?: WizardStepDef['body'];
 }
 
-export const useTabBodyInit = (options: TabBodyInitOptions) => {
+export const useWizardStepBodyInit = (options: WizardStepBodyInitOptions) => {
 	const {$pp, marker, def} = options;
 
-	const [defState, setDefState] = useState<TabBodyInitState>({initialized: false});
+	const [defState, setDefState] = useState<WizardStepBodyInitState>({initialized: false});
 	// noinspection DuplicatedCode
 	useEffect(() => {
 		if (defState.initialized) {

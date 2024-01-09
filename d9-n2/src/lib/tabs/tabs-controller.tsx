@@ -73,10 +73,10 @@ export const TabsController = (props: TabsControllerProps) => {
 		};
 		const onFirstTabActive = createOnTabActive(true);
 		const onTabActive = createOnTabActive(false);
-		on(TabsEventTypes.TRY_ACTIVE_FIRST_TAB, onFirstTabActive);
+		on(TabsEventTypes.FIRST_TRY_ACTIVE_TAB, onFirstTabActive);
 		on(TabsEventTypes.TRY_ACTIVE_TAB, onTabActive);
 		return () => {
-			off(TabsEventTypes.TRY_ACTIVE_FIRST_TAB, onFirstTabActive);
+			off(TabsEventTypes.FIRST_TRY_ACTIVE_TAB, onFirstTabActive);
 			off(TabsEventTypes.TRY_ACTIVE_TAB, onTabActive);
 		};
 	}, [
@@ -105,7 +105,7 @@ export const TabsController = (props: TabsControllerProps) => {
 	}, [onGlobal, offGlobal, fire]);
 	useEffect(() => {
 		// fire only once to active tab
-		fire(TabsEventTypes.TRY_ACTIVE_FIRST_TAB, activeIndex, '');
+		fire(TabsEventTypes.FIRST_TRY_ACTIVE_TAB, activeIndex, '');
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 

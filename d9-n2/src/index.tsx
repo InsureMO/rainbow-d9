@@ -38,3 +38,4 @@ export * from './lib/global/global-index';
 export * as Global from './lib/global';
 
 export {N2Logger} from './lib/utils';
+export {redressStepMarker} from './lib/wizard/utils';
