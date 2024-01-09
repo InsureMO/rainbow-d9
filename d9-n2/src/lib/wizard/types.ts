@@ -14,7 +14,7 @@ export interface WizardStepTitleDef extends NodeDef {
 }
 
 export interface WizardStepDef extends WizardStepTitleDef {
-	body: NodeDef | (() => Promise<NodeDef>);
+	body: NodeDef | ((marker?: string) => Promise<NodeDef>);
 }
 
 export interface WizardSharedDef extends NodeDef {

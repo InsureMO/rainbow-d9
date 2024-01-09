@@ -5,6 +5,7 @@ import {ATabBody} from './widgets';
 
 export interface TabBodyProps extends ModelHolder {
 	$pp?: PropertyPath;
+	marker: string;
 	def: TabDef['body'];
 	active?: boolean;
 }
@@ -16,7 +17,7 @@ interface TabBodyDefState {
 
 export const TabBody = (props: TabBodyProps) => {
 	const {
-		$pp, def,
+		$pp, marker, def,
 		$root, $model, $p2r,
 		active = false
 	} = props;
@@ -29,7 +30,7 @@ export const TabBody = (props: TabBodyProps) => {
 		(async () => {
 			let foundDef: Undefinable<NodeDef>;
 			if (typeof def === 'function') {
-				foundDef = await def();
+				foundDef = await def(marker);
 			} else {
 				foundDef = def;
 			}
@@ -38,7 +39,7 @@ export const TabBody = (props: TabBodyProps) => {
 			}
 			setDefState({initialized: true, def: foundDef});
 		})();
-	}, [defState.initialized, def, $pp]);
+	}, [defState.initialized, def, $pp, marker]);
 
 	if (!defState.initialized) {
 		return null;

@@ -93,7 +93,7 @@ const InternalTabs = (props: TabsProps) => {
 			{(contents ?? []).map((content, index) => {
 				const $model = MUtils.getValue($wrapped.$model, $pp);
 				// marker already redressed in headers rendering
-				return <TabBody key={content.marker} def={content.body} $pp={content.$pp}
+				return <TabBody key={content.marker} marker={content.marker} def={content.body} $pp={content.$pp}
 				                $root={$wrapped.$root} $model={$model} $p2r={PPUtils.concat($p2r, $pp)}
 				                active={index === activeIndex}/>;
 			})}

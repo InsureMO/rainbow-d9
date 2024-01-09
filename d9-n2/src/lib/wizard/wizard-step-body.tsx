@@ -31,7 +31,7 @@ interface WizardStepBodyDefState {
 
 export const WizardStepBody = (props: WizardStepBodyProps) => {
 	const {
-		$pp, def,
+		$pp, marker, def,
 		$root, $model, $p2r,
 		active = false, omitWalker = false, shared, sharedAtLead,
 		firstStep, lastStep, previousMarker, nextMarker, stepIndex
@@ -46,7 +46,7 @@ export const WizardStepBody = (props: WizardStepBodyProps) => {
 		(async () => {
 			let foundDef: Undefinable<NodeDef>;
 			if (typeof def === 'function') {
-				foundDef = await def();
+				foundDef = await def(marker);
 			} else {
 				foundDef = def;
 			}
@@ -55,7 +55,7 @@ export const WizardStepBody = (props: WizardStepBodyProps) => {
 			}
 			setDefState({initialized: true, def: foundDef});
 		})();
-	}, [defState.initialized, def, $pp]);
+	}, [defState.initialized, def, marker, $pp]);
 
 	if (!defState.initialized) {
 		return null;

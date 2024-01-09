@@ -19,7 +19,7 @@ export interface TabTitleDef extends NodeDef {
  * single tab for tabs.
  */
 export interface TabDef extends TabTitleDef {
-	body: NodeDef | (() => Promise<NodeDef>);
+	body: NodeDef | ((marker?: string) => Promise<NodeDef>);
 }
 
 /** Tabs configuration definition */
