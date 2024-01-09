@@ -1,53 +1,45 @@
-import {ModelHolder, NodeDef, PropertyPath, Undefinable, VUtils, WrapperDelegate} from '@rainbow-d9/n1';
-import React, {useEffect, useState} from 'react';
+import {ModelHolder, PropertyPath, WrapperDelegate} from '@rainbow-d9/n1';
+import React from 'react';
 import {TabDef} from './types';
-import {ATabBody} from './widgets';
+import {useTabActive} from './use-tab-active';
+import {useTabBodyInit} from './use-tab-body-init';
+import {ATabBody, ATabBodyVisibility} from './widgets';
 
 export interface TabBodyProps extends ModelHolder {
 	$pp?: PropertyPath;
 	marker: string;
 	def: TabDef['body'];
-	active?: boolean;
+	tabIndex: number;
 }
 
-interface TabBodyDefState {
-	initialized: boolean;
-	def?: NodeDef;
-}
+export type TabBodyVisibilityControllerProps = Pick<TabBodyProps, 'tabIndex' | 'marker'>;
+
+export const TabBodyVisibilityController = (props: TabBodyVisibilityControllerProps) => {
+	const {tabIndex, marker} = props;
+	const active = useTabActive(tabIndex, marker);
+
+	return <ATabBodyVisibility data-visible={active}/>;
+};
 
 export const TabBody = (props: TabBodyProps) => {
 	const {
-		$pp, marker, def,
-		$root, $model, $p2r,
-		active = false
+		$pp, marker, def, tabIndex,
+		$root, $model, $p2r
 	} = props;
 
-	const [defState, setDefState] = useState<TabBodyDefState>({initialized: false});
-	useEffect(() => {
-		if (defState.initialized) {
-			return;
-		}
-		(async () => {
-			let foundDef: Undefinable<NodeDef>;
-			if (typeof def === 'function') {
-				foundDef = await def(marker);
-			} else {
-				foundDef = def;
-			}
-			if (foundDef != null && VUtils.isBlank(foundDef.$pp)) {
-				foundDef.$pp = $pp;
-			}
-			setDefState({initialized: true, def: foundDef});
-		})();
-	}, [defState.initialized, def, $pp, marker]);
+	const {initialized, def: bodyDef} = useTabBodyInit({$pp, marker, def});
 
-	if (!defState.initialized) {
-		return null;
+	if (!initialized) {
+		return <>
+			<TabBodyVisibilityController tabIndex={tabIndex} marker={marker}/>
+			<ATabBody/>
+		</>;
 	}
 
-	// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-	const defs = defState.def!;
-	return <ATabBody data-visible={active}>
-		<WrapperDelegate {...defs} $root={$root} $model={$model} $p2r={$p2r}/>
-	</ATabBody>;
+	return <>
+		<TabBodyVisibilityController tabIndex={tabIndex} marker={marker}/>
+		<ATabBody>
+			<WrapperDelegate {...bodyDef} $root={$root} $model={$model} $p2r={$p2r}/>
+		</ATabBody>
+	</>;
 };

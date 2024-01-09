@@ -12,19 +12,19 @@ import {LabelLike} from '../label-like';
 import {useTabsEventBus} from './event/tabs-event-bus';
 import {TabsEventTypes} from './event/tabs-event-bus-types';
 import {TabTitleDef} from './types';
+import {useTabActive} from './use-tab-active';
 import {ATabTitle} from './widgets';
 
 export interface TabTitleProps extends TabTitleDef, ModelHolder {
-	active?: boolean;
 	tabIndex: number;
 	marker: string;
 }
 
-export const TabTitleWorker = (props: TabTitleProps & DefaultNodeAttributesState) => {
+export const TabTitleWorker = (props: TabTitleProps & DefaultNodeAttributesState & { active: boolean }) => {
 	const {
 		$pp, title, badge,
 		$root, $model, $p2r,
-		active, tabIndex, marker,
+		tabIndex, marker, active,
 		$defaultAttributes: attributeValues, $defaultAttributesSet: setAttributeValues,
 		...rest
 	} = props;
@@ -47,7 +47,7 @@ export const TabTitleWorker = (props: TabTitleProps & DefaultNodeAttributesState
 		event.preventDefault();
 		event.stopPropagation();
 
-		fire(TabsEventTypes.ACTIVE_TAB, tabIndex, marker);
+		fire(TabsEventTypes.TRY_ACTIVE_TAB, tabIndex, marker);
 	};
 
 	return <ATabTitle data-disabled={$disabled} data-visible={$visible} data-active={active}
@@ -59,12 +59,18 @@ export const TabTitleWorker = (props: TabTitleProps & DefaultNodeAttributesState
 };
 
 export const TabTitle = (props: TabTitleProps) => {
+	const {tabIndex, marker} = props;
+
+	// active hook must put here, since tab title is rendered before tab controller
+	// and since the attribute initializer is async, the tab title worker is not ensured to be rendered before tab controller
+	// which leads to miss the active tab event from inside
+	const active = useTabActive(tabIndex, marker);
 	const {initialized, $defaultAttributes, $defaultAttributesSet} = useDefaultAttributeValues(props);
 	if (!initialized) {
 		return null;
 	}
 
-	return <TabTitleWorker {...props}
+	return <TabTitleWorker {...props} active={active}
 	                       $defaultAttributes={$defaultAttributes}
 	                       $defaultAttributesSet={$defaultAttributesSet}/>;
 };

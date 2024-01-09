@@ -25,6 +25,8 @@ export interface TabDef extends TabTitleDef {
 /** Tabs configuration definition */
 export type TabsDef = NodeDef & OmitHTMLProps<HTMLDivElement> & {
 	contents: Array<TabDef>;
+	// marker or index of initial active tab
+	initActive?: string | number;
 };
 /** Tabs widget definition, with html attributes */
 export type TabsProps = OmitNodeDef<TabsDef> & WidgetProps;
