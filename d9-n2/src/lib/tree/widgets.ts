@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import {CssVars, DOM_ID_WIDGET, DOM_KEY_WIDGET} from '../constants';
 import {toCssSize} from '../utils';
 
+// noinspection CssUnresolvedCustomProperty
 export const ATree = styled.div.attrs<{ height: number | string }>(
 	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 	// @ts-ignore
@@ -18,6 +19,8 @@ export const ATree = styled.div.attrs<{ height: number | string }>(
     position: relative;
     flex-direction: column;
     align-self: start;
+    grid-column: var(--grid-column);
+    grid-row: var(--grid-row);
     min-width: 100%;
     border: ${CssVars.BORDER};
     border-radius: ${CssVars.BORDER_RADIUS};

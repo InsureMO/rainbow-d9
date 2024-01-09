@@ -1,18 +1,22 @@
 import styled from 'styled-components';
 import {CssVars, DOM_ID_WIDGET, DOM_KEY_WIDGET} from '../constants';
 
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
-export const APagination = styled.div.attrs(({id, 'data-w': dataW}) => {
-	return {
-		[DOM_KEY_WIDGET]: dataW || 'd9-pagination',
-		[DOM_ID_WIDGET]: id
-	};
-})`
+// noinspection CssUnresolvedCustomProperty
+export const APagination = styled.div.attrs(
+	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+	// @ts-ignore
+	({id, 'data-w': dataW}) => {
+		return {
+			[DOM_KEY_WIDGET]: dataW || 'd9-pagination',
+			[DOM_ID_WIDGET]: id
+		};
+	})`
     display: flex;
     position: relative;
     justify-content: space-between;
     align-items: center;
+    grid-column: var(--grid-column);
+    grid-row: var(--grid-row);
     font-family: ${CssVars.FONT_FAMILY};
     font-size: ${CssVars.FONT_SIZE};
     color: ${CssVars.FONT_COLOR};

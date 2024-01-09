@@ -11,6 +11,7 @@ export type TextareaDef = ValueChangeableNodeDef & OmitHTMLProps2<HTMLTextAreaEl
 /** widget definition, with html attributes */
 export type TextareaProps = OmitNodeDef<TextareaDef> & WidgetProps;
 
+// noinspection CssUnresolvedCustomProperty
 const ATextarea = styled.textarea.attrs<{ autoSelect: boolean }>(
 	({id, autoSelect, onFocus}) => {
 		if (!autoSelect) {
@@ -31,6 +32,8 @@ const ATextarea = styled.textarea.attrs<{ autoSelect: boolean }>(
 	})<{ autoSelect: boolean }>`
     display: block;
     position: relative;
+    grid-column: var(--grid-column);
+    grid-row: var(--grid-row);
     font-family: ${CssVars.FONT_FAMILY};
     font-size: ${CssVars.FONT_SIZE};
     color: ${CssVars.FONT_COLOR};

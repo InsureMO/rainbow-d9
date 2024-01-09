@@ -31,6 +31,7 @@ export type RadiosProps = OmitNodeDef<RadiosDef> & Omit<WidgetProps, '$wrapped'>
 	}
 };
 
+// noinspection CssUnresolvedCustomProperty
 const ARadios = styled.div.attrs(({id}) => {
 	return {
 		[DOM_KEY_WIDGET]: 'd9-radios',
@@ -40,6 +41,8 @@ const ARadios = styled.div.attrs(({id}) => {
     display: flex;
     position: relative;
     flex-wrap: wrap;
+    grid-column: var(--grid-column);
+    grid-row: var(--grid-row);
     color: ${CssVars.FONT_COLOR};
 `;
 const Option = styled.span.attrs<{ columns: number, compact: boolean }>(

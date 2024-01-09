@@ -17,18 +17,22 @@ export type ButtonBarDef = ContainerDef & OmitHTMLProps<HTMLDivElement> & {
 /** Button bar widget definition, with html attributes */
 export type ButtonBarProps = OmitNodeDef<ButtonBarDef> & ContainerWidgetProps;
 
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
-const AButtonBar = styled.div.attrs(({id, 'data-w': dataW}) => {
-	return {
-		[DOM_KEY_WIDGET]: dataW ?? 'd9-button-bar',
-		[DOM_ID_WIDGET]: id
-	};
-})`
+// noinspection CssUnresolvedCustomProperty
+const AButtonBar = styled.div.attrs(
+	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+	// @ts-ignore
+	({id, 'data-w': dataW}) => {
+		return {
+			[DOM_KEY_WIDGET]: dataW ?? 'd9-button-bar',
+			[DOM_ID_WIDGET]: id
+		};
+	})`
     display: flex;
     position: relative;
     align-items: center;
     justify-content: end;
+    grid-column: var(--grid-column);
+    grid-row: var(--grid-row);
     height: calc(${CssVars.INPUT_HEIGHT} + 16px);
     padding: 8px 0;
     border-radius: ${CssVars.BORDER_RADIUS};

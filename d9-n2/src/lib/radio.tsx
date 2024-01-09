@@ -20,6 +20,7 @@ export type RadioDef = ValueChangeableNodeDef & OmitHTMLProps<HTMLDivElement> & 
 /** radio widget definition, with html attributes */
 export type RadioProps = OmitNodeDef<RadioDef> & WidgetProps;
 
+// noinspection CssUnresolvedCustomProperty
 const ARadio = styled.div.attrs(({id}) => {
 	return {
 		[DOM_KEY_WIDGET]: 'd9-radio',
@@ -28,6 +29,8 @@ const ARadio = styled.div.attrs(({id}) => {
 })`
     display: block;
     position: relative;
+    grid-column: var(--grid-column);
+    grid-row: var(--grid-row);
     padding: calc((${CssVars.INPUT_HEIGHT}) / 6) 0;
     width: ${CssVars.INPUT_HEIGHT};
     height: ${CssVars.INPUT_HEIGHT};

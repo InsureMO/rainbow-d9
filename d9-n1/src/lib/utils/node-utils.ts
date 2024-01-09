@@ -95,6 +95,14 @@ export const NUtils: NodeUtilsType = {
 		const style = ((def as any).style as CSSProperties) ?? {};
 		style.gridRow = style.gridRow || pos.gridRow;
 		style.gridColumn = style.gridColumn || pos.gridColumn;
+		if (VUtils.isNotBlank(style.gridRow)) {
+			style['--grid-row'] = style.gridRow;
+			delete style.gridRow;
+		}
+		if (VUtils.isNotBlank(style.gridColumn)) {
+			style['--grid-column'] = style.gridColumn;
+			delete style.gridColumn;
+		}
 		return style;
 	}
 };

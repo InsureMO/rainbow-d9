@@ -26,6 +26,7 @@ export type FormCellProps = OmitNodeDef<FormCellDef> & WidgetProps;
 export type AsFormCell<T extends NodeDef> = T & FormCellAdditive;
 export type AsFC<T extends NodeDef> = AsFormCell<T>;
 
+// noinspection CssUnresolvedCustomProperty
 const AFormCell = styled.div.attrs(({id}) => {
 	return {
 		[DOM_KEY_WIDGET]: 'd9-form-cell',
@@ -36,6 +37,8 @@ const AFormCell = styled.div.attrs(({id}) => {
     position: relative;
     flex-direction: column;
     align-content: start;
+    grid-column: var(--grid-column);
+    grid-row: var(--grid-row);
 
     &[data-visible=false][data-hold-position-on-invisible=false] {
         display: none;
@@ -91,8 +94,7 @@ export const FormCell = forwardRef((props: FormCellProps, ref: ForwardedRef<HTML
 	}, {} as Record<string, any>);
 	return <AFormCell {...fcAttrs} data-disabled={$disabled}
 	                  data-visible={$visible} data-hold-position-on-invisible={holdPositionWhenInvisible}
-	                  id={fcId}
-	                  ref={ref}>
+	                  id={fcId} ref={ref}>
 		<LabelLike label={label} $wrapped={$wrapped} $validationScopes={props} wrapByCaption={true}
 		           data-r="d9-fc-caption"/>
 		{children}

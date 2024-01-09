@@ -55,6 +55,7 @@ export type ButtonDef = NodeDef & DecorateWrapperDef & OmitHTMLProps2<HTMLButton
 /** Button widget definition, with html attributes */
 export type ButtonProps = OmitNodeDef<ButtonDef> & WidgetProps;
 
+// noinspection CssUnresolvedCustomProperty
 const AButton = styled.button.attrs<{ hasOneLeadOrTail: boolean }>(
 	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 	// @ts-ignore
@@ -71,6 +72,8 @@ const AButton = styled.button.attrs<{ hasOneLeadOrTail: boolean }>(
     position: relative;
     align-items: center;
     justify-content: center;
+    grid-column: var(--grid-column);
+    grid-row: var(--grid-row);
     font-family: ${CssVars.FONT_FAMILY};
     font-size: ${CssVars.FONT_SIZE};
     font-variant: ${CssVars.FONT_VARIANT};

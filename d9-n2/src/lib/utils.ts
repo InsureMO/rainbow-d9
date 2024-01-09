@@ -1,9 +1,34 @@
-import {createLogger, VUtils} from '@rainbow-d9/n1';
+import {createLogger, Undefinable, VUtils} from '@rainbow-d9/n1';
 import dayjs from 'dayjs';
+import {CSSProperties} from 'react';
 import {getDefaultCalendarDateFormat, getDefaultCalendarDatetimeFormat} from './calendar/utils';
 import {$d9n2} from './constants';
 
 export const toCssSize = (size?: number | string): string => typeof size === 'number' ? `${size}px` : `${size ?? ''}`;
+export const omitGridCellStyle = (style?: Partial<CSSProperties>): Partial<CSSProperties> => {
+	const {
+		// eslint-disable-next-line @typescript-eslint/no-unused-vars
+		gridColumn, gridRow, gridArea,
+		...rest
+	} = style || {};
+	return rest;
+};
+export const computeGridCellStyle = (style?: Partial<CSSProperties>): Undefinable<string> => {
+	if (style == null) {
+		return (void 0);
+	}
+	const gridCellStyles = [];
+	if (VUtils.isNotBlank(style.gridColumn)) {
+		gridCellStyles.push(`grid-column: ${style.gridColumn};`);
+	}
+	if (VUtils.isNotBlank(style.gridRow)) {
+		gridCellStyles.push(`grid-row: ${style.gridRow};`);
+	}
+	if (VUtils.isNotBlank(style.gridArea)) {
+		gridCellStyles.push(`grid-area: ${style.gridArea};`);
+	}
+	return gridCellStyles.join('');
+};
 export const locale = () => $d9n2.intl.language ?? navigator?.language ?? 'en-US';
 export type NumberFormatter = (fractionDigits: number, grouping?: boolean) => Intl.NumberFormat;
 export type NumberFormat = (value?: number) => string;

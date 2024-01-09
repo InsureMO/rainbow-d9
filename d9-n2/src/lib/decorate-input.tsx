@@ -1,5 +1,5 @@
 import {PPUtils, registerWidget, VUtils, WidgetProps} from '@rainbow-d9/n1';
-import React, {ReactNode} from 'react';
+import React, {CSSProperties, ReactNode} from 'react';
 import styled from 'styled-components';
 import {CssVars, DOM_ID_WIDGET, DOM_KEY_WIDGET} from './constants';
 import {DecorateWrapperDef, transformDecorators} from './decorate-assist';
@@ -9,6 +9,7 @@ import {OmitNodeDef} from './types';
 export type DecorateInputDef = InputDef & DecorateWrapperDef;
 export type DecorateInputProps = OmitNodeDef<DecorateInputDef> & DecorateWrapperDef & WidgetProps;
 
+// noinspection CssUnresolvedCustomProperty
 const DecorateInputContainer = styled.div.attrs(
 	({id}) => {
 		return {
@@ -19,6 +20,8 @@ const DecorateInputContainer = styled.div.attrs(
     display: flex;
     position: relative;
     align-items: center;
+    grid-column: var(--grid-column);
+    grid-row: var(--grid-row);
     width: 100%;
     height: ${CssVars.INPUT_HEIGHT};
 
@@ -86,6 +89,8 @@ interface DecorateProps {
 	id?: HTMLElement['id'];
 	leads?: DecorateWrapperDef['leads'];
 	tails?: DecorateWrapperDef['tails'];
+	className?: string;
+	style?: CSSProperties;
 	children: ReactNode;
 }
 
@@ -108,10 +113,11 @@ const Decorate = (props: DecorateProps) => {
 };
 
 export const DecorateInput = (props: DecorateInputProps) => {
-	const {leads, tails, ...rest} = props;
+	const {leads, tails, className, style, ...rest} = props;
 	const {$wrapped: {$p2r}} = rest;
 
-	return <Decorate leads={leads} tails={tails} id={PPUtils.asId(PPUtils.absolute($p2r, props.$pp), props.id)}>
+	return <Decorate leads={leads} tails={tails} className={className} style={style}
+	                 id={PPUtils.asId(PPUtils.absolute($p2r, props.$pp), props.id)}>
 		<Input {...rest}/>
 	</Decorate>;
 };
@@ -120,9 +126,11 @@ export type DecorateNumberInputDef = Omit<DecorateInputDef, 'valueToNumber'>;
 export type DecorateNumberInputProps = OmitNodeDef<DecorateNumberInputDef> & WidgetProps;
 
 export const DecorateNumberInput = (props: DecorateNumberInputProps) => {
-	const {leads, tails, ...rest} = props;
+	const {leads, tails, className, style, ...rest} = props;
+	const {$wrapped: {$p2r}} = rest;
 
-	return <Decorate leads={leads} tails={tails} id={props.id}>
+	return <Decorate leads={leads} tails={tails} className={className} style={style}
+	                 id={PPUtils.asId(PPUtils.absolute($p2r, props.$pp), props.id)}>
 		<NumberInput {...rest}/>
 	</Decorate>;
 };

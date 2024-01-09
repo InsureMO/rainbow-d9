@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import {CssVars, DOM_ID_WIDGET, DOM_KEY_WIDGET} from '../constants';
 import {toCssSize} from '../utils';
 
+// noinspection CssUnresolvedCustomProperty
 export const ATable = styled.div.attrs(({id}) => {
 	return {
 		[DOM_KEY_WIDGET]: 'd9-table',
@@ -11,6 +12,8 @@ export const ATable = styled.div.attrs(({id}) => {
 })`
     display: block;
     position: relative;
+    grid-column: var(--grid-column);
+    grid-row: var(--grid-row);
 
     &[data-visible=false] {
         display: none;

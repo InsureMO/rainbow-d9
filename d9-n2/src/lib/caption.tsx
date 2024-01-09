@@ -51,9 +51,11 @@ export type CaptionDef = NodeDef & DecorateWrapperDef & OmitHTMLProps2<HTMLSpanE
 /** Caption widget definition, with html attributes */
 export type CaptionProps = OmitNodeDef<CaptionDef> & WidgetProps;
 
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
-const ACaption = styled.span.attrs(({id, 'data-w': dataW}) => {
+// noinspection CssUnresolvedCustomProperty
+const ACaption = styled.span.attrs(
+	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+	// @ts-ignore
+	({id, 'data-w': dataW}) => {
 	return {
 		[DOM_KEY_WIDGET]: dataW ?? 'd9-caption',
 		[DOM_ID_WIDGET]: id
@@ -62,6 +64,8 @@ const ACaption = styled.span.attrs(({id, 'data-w': dataW}) => {
     display: flex;
     position: relative;
     align-items: center;
+    grid-column: var(--grid-column);
+    grid-row: var(--grid-row);
     font-family: ${CssVars.CAPTION_FONT_FAMILY};
     font-size: ${CssVars.CAPTION_FONT_SIZE};
     color: ${CssVars.CAPTION_FONT_COLOR};

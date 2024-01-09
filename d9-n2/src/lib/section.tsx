@@ -17,17 +17,21 @@ export type SectionDef = ContainerDef & OmitHTMLProps2<HTMLDivElement, 'title'> 
 /** Section widget definition, with html attributes */
 export type SectionProps = OmitNodeDef<SectionDef> & ContainerWidgetProps;
 
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
-const ASection = styled.div.attrs(({id, 'data-w': dataW}) => {
-	return {
-		[DOM_KEY_WIDGET]: dataW || 'd9-section',
-		[DOM_ID_WIDGET]: id
-	};
-})`
+// noinspection CssUnresolvedCustomProperty
+const ASection = styled.div.attrs(
+	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+	// @ts-ignore
+	({id, 'data-w': dataW}) => {
+		return {
+			[DOM_KEY_WIDGET]: dataW || 'd9-section',
+			[DOM_ID_WIDGET]: id
+		};
+	})`
     display: flex;
     position: relative;
     flex-direction: column;
+    grid-column: var(--grid-column);
+    grid-row: var(--grid-row);
 
     &[data-visible=false] {
         display: none;

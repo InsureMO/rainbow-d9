@@ -12,6 +12,7 @@ export type InputDef = ValueChangeableNodeDef & OmitHTMLProps2<HTMLInputElement,
 /** widget definition, with html attributes */
 export type InputProps = OmitNodeDef<InputDef> & WidgetProps;
 
+// noinspection CssUnresolvedCustomProperty
 const AnInput = styled.input.attrs<{ autoSelect: boolean }>(
 	({id, autoSelect, onFocus}) => {
 		if (!autoSelect) {
@@ -32,6 +33,8 @@ const AnInput = styled.input.attrs<{ autoSelect: boolean }>(
 	})<{ autoSelect: boolean }>`
     display: block;
     position: relative;
+    grid-column: var(--grid-column);
+    grid-row: var(--grid-row);
     font-family: ${CssVars.FONT_FAMILY};
     font-size: ${CssVars.FONT_SIZE};
     color: ${CssVars.FONT_COLOR};

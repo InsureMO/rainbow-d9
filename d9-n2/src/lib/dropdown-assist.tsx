@@ -31,6 +31,7 @@ export const isDropdownPopupActive = (active: DropdownPopupStateActive) => {
 	return [DropdownPopupStateActive.ACTIVE, DropdownPopupStateActive.WILL_ACTIVE].includes(active);
 };
 
+// noinspection CssUnresolvedCustomProperty
 export const DropdownContainer = styled.div.attrs<{ active: DropdownPopupStateActive, atBottom: boolean }>(
 	({id, active, atBottom}) => {
 		return {
@@ -42,6 +43,8 @@ export const DropdownContainer = styled.div.attrs<{ active: DropdownPopupStateAc
     display: flex;
     position: relative;
     align-items: center;
+    grid-column: var(--grid-column);
+    grid-row: var(--grid-row);
     padding: 0 ${CssVars.INPUT_INDENT};
     outline: none;
     appearance: none;

@@ -9,9 +9,12 @@ export type PageDef = ContainerDef & OmitHTMLProps<HTMLDivElement>;
 /** Page widget definition, with html attributes */
 export type PageProps = OmitNodeDef<PageDef> & ContainerWidgetProps;
 
+// noinspection CssUnresolvedCustomProperty
 const APage = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-page'})`
     display: grid;
     position: relative;
+    grid-column: var(--grid-column);
+    grid-row: var(--grid-row);
     grid-template-columns: repeat(${CssVars.GRID_COLUMNS}, calc((100% - ${CssVars.GRID_COLUMN_GAP} * (${CssVars.GRID_COLUMNS} - 1)) / ${CssVars.GRID_COLUMNS}));
     grid-column-gap: ${CssVars.GRID_COLUMN_GAP};
     grid-row-gap: ${CssVars.GRID_ROW_GAP};

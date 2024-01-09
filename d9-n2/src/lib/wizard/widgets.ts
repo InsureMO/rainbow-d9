@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import {CssVars, DOM_ID_WIDGET, DOM_KEY_WIDGET} from '../constants';
 
+// noinspection CssUnresolvedCustomProperty
 export const AWizard = styled.div.attrs(({id}) => {
 	return {
 		[DOM_KEY_WIDGET]: 'd9-wizard',
@@ -10,6 +11,8 @@ export const AWizard = styled.div.attrs(({id}) => {
     display: flex;
     position: relative;
     flex-direction: column;
+    grid-column: var(--grid-column);
+    grid-row: var(--grid-row);
 
     &[data-visible=false] {
         display: none;
