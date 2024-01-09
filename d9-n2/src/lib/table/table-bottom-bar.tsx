@@ -42,7 +42,7 @@ export const TableBottomBar = (props: Omit<TableProps, '$array'> & { $array: Enh
 
 		// valueChanged is used in table content, as external function call
 		// eslint-disable-next-line @typescript-eslint/no-unused-vars
-		const {valueChanged, ...pageableDef} = pageable;
+		const {valueChanged, ...pageableDef} = pageable ?? {};
 
 		return <ATableBottomBar>
 			{pageable != null

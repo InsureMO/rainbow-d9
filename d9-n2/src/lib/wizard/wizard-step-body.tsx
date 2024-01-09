@@ -1,4 +1,4 @@
-import {ModelHolder, NodeDef, PropertyPath, WrapperDelegate} from '@rainbow-d9/n1';
+import {ModelHolder, NodeDef, PropertyPath, Wrapper} from '@rainbow-d9/n1';
 import React from 'react';
 import {ButtonFill, ButtonInk} from '../button';
 import {IntlLabel} from '../intl-label';
@@ -48,7 +48,7 @@ export const WizardStepSharedPart = (props: WizardStepSharedPartProps) => {
 		return null;
 	}
 
-	return <WrapperDelegate {...shared} $root={$root} $model={$model} $p2r={$p2r}/>;
+	return <Wrapper {...shared} $root={$root} $model={$model} $p2r={$p2r}/>;
 };
 
 const computeSharedPosition = (options: {
@@ -113,7 +113,7 @@ export const WizardStepBodyContent = (props: WizardStepBodyProps) => {
 	return <AWizardStepBody>
 		<WizardStepSharedPart stepIndex={stepIndex} marker={marker} shared={shared}
 		                      $root={$root} $model={$model} $p2r={$p2r}/>
-		<WrapperDelegate {...defs} $root={$root} $model={$model} $p2r={$p2r}/>
+		<Wrapper {...defs} $root={$root} $model={$model} $p2r={$p2r}/>
 		{omitWalker
 			? null
 			: <ButtonBar data-w="d9-wizard-walker" data-grab-all={shared == null}

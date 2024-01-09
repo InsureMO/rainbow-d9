@@ -1,4 +1,4 @@
-import {ModelHolder, PropertyPath, WrapperDelegate} from '@rainbow-d9/n1';
+import {ModelHolder, PropertyPath, Wrapper} from '@rainbow-d9/n1';
 import React from 'react';
 import {TabDef} from './types';
 import {useTabActive} from './use-tab-active';
@@ -35,7 +35,7 @@ export const TabBodyContent = (props: TabBodyProps) => {
 		return <ATabBody/>;
 	}
 	return <ATabBody>
-		<WrapperDelegate {...bodyDef} $root={$root} $model={$model} $p2r={$p2r}/>
+		<Wrapper {...bodyDef} $root={$root} $model={$model} $p2r={$p2r}/>
 	</ATabBody>;
 };
 
