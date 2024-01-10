@@ -14,11 +14,11 @@ jobs:
     steps:
       - name: Generate Release Note
         id: generate-note
-        uses: yuk1ty/conventional-release-note@v1
+        uses: mikepenz/release-changelog-builder-action@v4.1.0
         with:
-          kind: default
-          current-tag: ${{ inputs.tag }}
+          toTag: ${{ github.event.inputs.current-tag }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Echo pre-release branch
         id: output-version
-        run: |
-          echo "Note: [$summary]"
+        run: echo ${{steps.generate-note.outputs.changelog}}
