@@ -14,7 +14,7 @@ jobs:
     steps:
       - name: Generate Release Note
         id: generate-note
-        uses: conventional-release-note@v1
+        uses: yuk1ty/conventional-release-note@v1
         with:
           kind: default
           current-tag: ${{ inputs.tag }}
