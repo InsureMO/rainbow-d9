@@ -1,0 +1,24 @@
+name: Test Generate Release Note
+
+on:
+  workflow_dispatch:
+    inputs:
+      current-tag:
+        description: 'Current Tag'
+        required: true
+
+jobs:
+  compute-version:
+    name: Generate Release Note
+    runs-on: ubuntu-latest
+    steps:
+      - name: Generate Release Note
+        id: generate-note
+        uses: conventional-release-note@v1
+        with:
+          kind: default
+          current-tag: ${{ inputs.tag }}
+      - name: Echo pre-release branch
+        id: output-version
+        run: |
+          echo "Note: [$summary]"
