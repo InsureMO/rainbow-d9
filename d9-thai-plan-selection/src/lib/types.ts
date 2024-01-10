@@ -1,7 +1,7 @@
-// plan definition part
 import {ValueChangeableNodeDef, WidgetProps} from '@rainbow-d9/n1';
-import {OmitHTMLProps, OmitNodeDef} from '@rainbow-d9/n2/src';
+import {OmitHTMLProps, OmitNodeDef} from '@rainbow-d9/n2';
 
+// plan definition part
 export type PlanElementCode = string;
 
 export enum PlanElementType {

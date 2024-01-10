@@ -27,6 +27,9 @@ export const buildConfig = (lint) => {
 				defaultHandler(warning);
 			}
 		},
-		external: ['@rainbow-d9/n2']
+		external: [
+			'react', 'styled-components',
+			'@rainbow-d9/n1', '@rainbow-d9/n2', '@rainbow-d9/n3'
+		]
 	};
 };

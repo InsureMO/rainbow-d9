@@ -1,8 +1,8 @@
 import {NodeDef, registerWidget, VUtils} from '@rainbow-d9/n1';
-import {SpecificWidgetTranslator} from '@rainbow-d9/n3/src/lib/widget';
+import {Widget} from '@rainbow-d9/n3';
 import {PlanSelection} from './plan-selection';
 
-export abstract class AbstractPlanSelectionTranslator extends SpecificWidgetTranslator<string> {
+export abstract class AbstractPlanSelectionTranslator extends Widget.SpecificWidgetTranslator<string> {
 	public beautifyProperties<Def extends NodeDef>(def: Partial<Def>): Def {
 		return super.beautifyProperties(this.beautifyColumnSpan(def, 12));
 	}
@@ -12,7 +12,7 @@ export abstract class AbstractPlanSelectionTranslator extends SpecificWidgetTran
 	}
 }
 
-export const registerPlanSelect = (widgetType?: string) => {
+export const registerPlanSelect = (widgetHelper: Widget.WidgetHelper, widgetType?: string) => {
 	widgetType = VUtils.isBlank(widgetType) ? 'PlanSelect' : widgetType;
 	registerWidget({key: widgetType, JSX: PlanSelection, container: false, array: false});
 	// n3 translator
@@ -21,4 +21,6 @@ export const registerPlanSelect = (widgetType?: string) => {
 			return widgetType;
 		}
 	};
+	const repo = widgetHelper.repository;
+	repo.register(new TranslatorClass(repo));
 };
