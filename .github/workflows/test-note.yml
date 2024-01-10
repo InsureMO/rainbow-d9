@@ -21,4 +21,4 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Echo pre-release branch
         id: output-version
-        run: echo ${{steps.generate-note.outputs.changelog}}
+        run: echo "${{steps.generate-note.outputs.changelog}}"
