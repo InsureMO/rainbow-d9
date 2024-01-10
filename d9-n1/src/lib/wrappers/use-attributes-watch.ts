@@ -149,9 +149,14 @@ export const useAttributesWatch = (options: {
 				}
 			}
 		};
-		on(RootEventTypes.VALUE_CHANGED, onValueChanged);
+		const shouldWatch = watches != null && Object.keys(watches).length !== 0;
+		if (shouldWatch) {
+			on(RootEventTypes.VALUE_CHANGED, onValueChanged);
+		}
 		return () => {
-			off(RootEventTypes.VALUE_CHANGED, onValueChanged);
+			if (shouldWatch) {
+				off(RootEventTypes.VALUE_CHANGED, onValueChanged);
+			}
 		};
 	}, [
 		on, off, fire, fireWrapper,
