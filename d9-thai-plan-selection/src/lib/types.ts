@@ -188,8 +188,21 @@ export type SelectedPlans = Array<SelectedPlan>;
 
 /** configuration definition */
 export type PlanSelectionDef = ValueChangeableNodeDef & OmitHTMLProps<HTMLDivElement> & {
+	/**
+	 * max plans count in one page, default is 3
+	 */
 	columns?: number;
+	/**
+	 * plan column width,
+	 * default 20%, which means lineHeaderWidth is 40% when columns is 3
+	 */
+	columnWidth?: number | string;
+	/** first column width, default use columns to compute */
 	lineHeaderWidth?: number | string;
+	/** max body height, plan header and footer are not included */
+	maxBodyHeight?: number | string;
+	/** plan candidate definitions */
+	defs: PlanDefs | (() => Promise<PlanDefs>);
 };
 /** widget definition, with html attributes */
 export type PlanSelectionProps = OmitNodeDef<PlanSelectionDef> & WidgetProps;
