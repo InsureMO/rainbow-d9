@@ -110,6 +110,11 @@ jobs:
     uses: ./.github/workflows/create-release.yml
     with:
       tag: ${{ needs.compute-version.outputs.version }}
+  deploy-gh-pages:
+    needs: [ create-release ]
+    uses: ./.github/workflows/create-sample-pages.yml
+    with:
+      tag: ${{ needs.compute-version.outputs.version }}
   drop-trigger-tag:
     needs: align-module-version
     name: Drop trigger tag
