@@ -27,6 +27,7 @@ jobs:
           cache: 'npm'
       - run: npm install -g yarn@1.22.21
       - run: yarn install
+      - run: yarn build-all
       - run: yarn build-sample-cra
       - name: Deploy Github Pages
         uses: peaceiris/actions-gh-pages@v3
