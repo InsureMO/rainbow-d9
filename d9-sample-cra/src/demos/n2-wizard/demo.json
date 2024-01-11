@@ -1,0 +1,18 @@
+{
+	"wizard1": {
+		"step1": {
+			"step1Input1": "hello world"
+		},
+		"step2": {
+			"step2check1": true
+		},
+		"shared": {
+			"value": 3456
+		}
+	},
+	"wizard2": {
+		"step1": {
+			"step1Input1": "abcde"
+		}
+	}
+}

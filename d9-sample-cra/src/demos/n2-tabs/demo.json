@@ -1,0 +1,14 @@
+{
+	"tabs": {
+		"tab1": {
+			"tab1Input1": "hello"
+		},
+		"tab2": {
+			"count": 147,
+			"tab2check1": true
+		},
+		"tab4": {
+			"tab4Input": "Tab4 world."
+		}
+	}
+}

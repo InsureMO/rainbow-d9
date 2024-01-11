@@ -1,0 +1,118 @@
+{
+	"tree": [
+		{
+			"label": "Top #1",
+			"children": [
+				{
+					"label": "2nd #1.1",
+					"children": [
+						{
+							"label": "3rd #1.1.1"
+						},
+						{
+							"label": "3rd #1.1.2"
+						}
+					]
+				},
+				{
+					"label": "2nd #1.2",
+					"children": [
+						{
+							"label": "3rd #1.2.1"
+						},
+						{
+							"label": "3rd #1.2.2"
+						}
+					]
+				}
+			]
+		},
+		"Top #2",
+		{
+			"label": "Top #3",
+			"children": [
+				{
+					"label": "2nd #3.1",
+					"children": [
+						{
+							"label": "3rd #3.1.1"
+						},
+						{
+							"label": "3rd #3.1.2"
+						}
+					]
+				},
+				{
+					"label": "2nd #3.2",
+					"children": [
+						{
+							"label": "3rd #3.2.1"
+						},
+						{
+							"label": "3rd #3.2.2"
+						}
+					]
+				}
+			]
+		}
+	],
+	"tree2": [
+		{
+			"label": "Top #1",
+			"nodes": [
+				{
+					"label": "2nd #1.1",
+					"nodes": [
+						{
+							"label": "3rd #1.1.1"
+						},
+						{
+							"label": "3rd #1.1.2"
+						}
+					]
+				},
+				{
+					"label": "2nd #1.2",
+					"nodes": [
+						{
+							"label": "3rd #1.2.1"
+						},
+						{
+							"label": "3rd #1.2.2"
+						}
+					]
+				}
+			]
+		},
+		"Top #2",
+		{
+			"label": "Top #3",
+			"nodes": [
+				{
+					"label": "2nd #3.1",
+					"nodes": [
+						{
+							"label": "3rd #3.1.1"
+						},
+						{
+							"label": "3rd #3.1.2"
+						}
+					]
+				},
+				{
+					"label": "2nd #3.2",
+					"nodes": [
+						{
+							"label": "3rd #3.2.1"
+						},
+						{
+							"label": {
+								"text": "3rd #3.2.2"
+							}
+						}
+					]
+				}
+			]
+		}
+	]
+}

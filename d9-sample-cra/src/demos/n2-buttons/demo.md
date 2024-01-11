@@ -1,0 +1,128 @@
+# Page::Demo Tab
+
+## Section::
+
+- title:
+	- labelOnValue
+	- property: section1Title
+- ButtonBar::::
+	- alignment: left
+	- Button::::
+		- click: dialog:demo-dialog
+		- leads: $icons.remove
+		- disabled
+	- Button::::
+		- fill: plain
+		- click: dialog:demo-dialog
+		- leads: $icons.check
+	- Button::::
+		- click: dialog:demo-dialog
+		- leads: $icons.times
+		- ink: danger
+	- Button::::
+		- click: dialog:demo-dialog
+		- leads: $icons.back
+		- fill: plain
+		- ink: danger
+	- Button::::
+		- click: dialog:demo-dialog
+		- leads: $icons.arrowDown
+		- ink: success
+	- Button::::
+		- click: dialog:demo-dialog
+		- leads: $icons.caretDown
+		- fill: plain
+		- ink: success
+	- Button::::
+		- click: dialog:demo-dialog
+		- leads: $icons.caretLeft
+		- ink: warn
+	- Button::::
+		- click: dialog:demo-dialog
+		- leads: $icons.caretRight
+		- fill: plain
+		- ink: warn
+	- Button::::
+		- click: dialog:demo-dialog
+		- leads: $icons.collapse
+		- ink: info
+	- Button::::
+		- click: dialog:demo-dialog
+		- leads: $icons.expand
+		- fill: plain
+		- ink: info
+	- Button::::
+		- click: dialog:demo-dialog
+		- leads: $icons.spinner
+		- ink: waive
+	- Button::::
+		- click: dialog:demo-dialog
+		- leads: $icons.time
+		- fill: plain
+		- ink: waive
+	- Button::::
+		- click: dialog:demo-dialog
+		- leads: $icons.date
+		- fill: plain
+		- ink: primary
+		- disabled
+- ButtonBar::::
+	- alignment: left
+	- Button::::
+		- text: Open Demo Dialog
+		- click: dialog:demo-dialog
+		- leads: [
+		- tails: ]
+	- Button::::
+		- text: Open Demo Dialog
+		- click: dialog:demo-dialog
+		- fill: fill
+		- ink: success
+		- leads: $icons.check;$
+		- disabled
+	- Button::::
+		- text: Open Demo Alert
+		- click: alert: Hello, this is a demo alert.
+		- ink: waive
+		- leads: $icons.check;$
+- ButtonBar::::
+	- alignment: left
+	- Button::::
+		- text: Open Demo Dialog
+		- click: dialog:demo-dialog
+		- fill: plain
+		- ink: danger
+		- leads: $icons.check;$
+		- tails: %;$icons.caretLeft
+		- disabled
+	- Button::::
+		- text: Print in Console
+		- click:
+		  ```javascript
+		  console.log(options);
+		  ```
+		- fill: plain
+		- ink: info
+		- leads: $icons.check;$
+- ButtonBar::::
+	- alignment: left
+	- Button::::
+		- text: Open Demo Dialog
+		- click: dialog:demo-dialog
+		- fill: link
+		- ink: warn
+		- leads: $icons.check;$
+		- disabled
+	- Button::::
+		- text: Open Native Alert
+		- click: custom:custom-alert
+		- fill: link
+		- ink: waive
+		- leads: $icons.check;$
+
+## Section::# 2.2. Last Section, Bottom Bar
+
+- ButtonBar::::
+	- alignment: right
+	- Button::::
+		- text: Exit

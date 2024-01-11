@@ -1,0 +1,12 @@
+{
+	"ribs": [
+		{
+			"propA": "Property A 1 @ribs",
+			"propB": "Property B 1 @ribs"
+		},
+		{
+			"propA": "Property A 2 @ribs",
+			"propB": "Property B 2 @ribs"
+		}
+	]
+}
