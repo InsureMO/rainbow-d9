@@ -1,4 +1,4 @@
-import {useForceUpdate, VUtils} from '@rainbow-d9/n1';
+import {VUtils} from '@rainbow-d9/n1';
 import {ButtonFill, ButtonInk, CssVars, UnwrappedButton, UnwrappedSection} from '@rainbow-d9/n2';
 import {Fragment, useState} from 'react';
 import Markdown from 'react-markdown';
@@ -197,21 +197,12 @@ const MarkdownContainer = (props: {
 	</>;
 };
 export const DemoIndex = () => {
-	const forceUpdate = useForceUpdate();
-	const {pathname} = window.location;
+	const [pathname, setPathname] = useState('/n2-basic-widgets');
 
 	const [activeSource, setActiveSource] = useState<ActiveSource>(ActiveSource.NONE);
 
-	// console.log(host, protocol, pathname);
-	if (pathname === '/') {
-		window.location.pathname = '/n2-basic-widgets';
-		forceUpdate();
-		return null;
-	}
-
 	const onMenuClicked = (pathname: string) => () => {
-		window.location.pathname = pathname;
-		forceUpdate();
+		setPathname(pathname);
 	};
 	const onHideAllClicked = () => setActiveSource(ActiveSource.NONE);
 	const onMarkdownClicked = () => setActiveSource(ActiveSource.MARKDOWN);

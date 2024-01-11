@@ -1,0 +1,35 @@
+name: Create Sample Pages
+
+on:
+  workflow_call:
+    inputs:
+      tag:
+        description: Tag name
+        required: true
+        type: string
+
+jobs:
+  create-sample-pages:
+    name: Create Sample Pages
+    runs-on: ubuntu-latest
+    steps:
+      - name: Echo inputs
+        run: |
+          echo "Release tag: [${{ inputs.tag }}]"
+      - name: Check out the repo
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ inputs.tag }}
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18.x
+          cache: 'npm'
+      - run: npm install -g yarn@1.22.21
+      - run: yarn install
+      - run: yarn build-sample-cra
+      - name: Deploy Github Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./d9-sample-cra/build
