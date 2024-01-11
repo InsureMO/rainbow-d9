@@ -1,7 +1,7 @@
 {
 	"title": "Hello, I am a demo dialog.",
 	"propA": "Property A @root",
-	"decorateInput": "abc",
+	"decorateInput": "123",
 	"caption": "Some Caption",
 	"nested": {
 		"propA": "Property A @nested"

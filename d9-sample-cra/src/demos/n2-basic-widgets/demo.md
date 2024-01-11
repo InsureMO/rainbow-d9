@@ -12,6 +12,7 @@
 	- leads: Hello
 	- tails: World
 	- regex: abc$,^def; must be abc or def.
+	- validateScopes: s1
 - DecoNumber::Decorate Number Input::decorateNumberInput
 	- label:
 		- valueToLabel: `'Hello world, again.'`
@@ -68,3 +69,7 @@
 		- 5: A very very very very very very very very very very very very very very very very very very long Option #5
 	- place: 6
 	- columns: 4
+- Button::
+	- text: Validate Inputs
+	- click: validate s1
+
