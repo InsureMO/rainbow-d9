@@ -2506,51 +2506,6 @@
     schema-utils "^3.0.0"
     source-map "^0.7.3"
 
-"@rainbow-d9/n1@1.0.30":
-  version "1.0.30"
-  resolved "https://registry.yarnpkg.com/@rainbow-d9/n1/-/n1-1.0.30.tgz#3b9338675813d379138cc7467c4f69582f1d310a"
-  integrity sha512-w0+VuQpalzcwXDCCXlOEjOSh8ETZnqF2rLX5uX6CHH0o2ubGrSvzpNDUc0OTkpWyKCXTJYYEXy9Ghx1aE2ITSw==
-  dependencies:
-    buffer "^6.0.3"
-    events "^3.3.0"
-    nanoid "^4.0.0"
-    react "^18.2.0"
-    react-dom "^18.2.0"
-
-"@rainbow-d9/n2@1.0.30":
-  version "1.0.30"
-  resolved "https://registry.yarnpkg.com/@rainbow-d9/n2/-/n2-1.0.30.tgz#1db8f9fd2141a6bde4bc9f05ad76b04c4eed3b1a"
-  integrity sha512-6X6DG3s7z7NWUwyIuItqBt9oK3zFGnpG090w4J6FdXMghgTeNDsN+Ao0RbUXfR4EIklhaz3dxQWyNYjFGIp/mw==
-  dependencies:
-    "@rainbow-d9/n1" "1.0.30"
-    color "^4.2.3"
-    dayjs "^1.11.7"
-    react "^18.2.0"
-    react-dom "^18.2.0"
-    styled-components "5.3.11"
-
-"@rainbow-d9/n3@1.0.30":
-  version "1.0.30"
-  resolved "https://registry.yarnpkg.com/@rainbow-d9/n3/-/n3-1.0.30.tgz#4ee7c2a3521bc652abf5e42541a8119666127bd3"
-  integrity sha512-rVuHWfgSUP9yNJ7y4rqf8JjO2NN/H4y8cARETOK+j+1ubmUAUxxLIPelAS0kQjH63iT7autmumNriFV9qg5lRA==
-  dependencies:
-    "@rainbow-d9/n1" "1.0.30"
-    mdast "^3.0.0"
-    mdast-util-from-markdown "^1.3.0"
-    mdast-util-frontmatter "^1.0.1"
-    mdast-util-gfm "^2.0.2"
-    mdast-util-gfm-footnote "^1.0.2"
-    mdast-util-gfm-strikethrough "^1.0.3"
-    mdast-util-gfm-table "^1.0.7"
-    mdast-util-gfm-task-list-item "^1.0.2"
-    micromark-extension-frontmatter "^1.0.1"
-    micromark-extension-gfm-footnote "^1.0.4"
-    micromark-extension-gfm-strikethrough "^1.0.4"
-    micromark-extension-gfm-table "^1.0.5"
-    micromark-extension-gfm-task-list-item "^1.0.3"
-    react "^18.2.0"
-    react-dom "^18.2.0"
-
 "@rollup/plugin-babel@^5.2.0":
   version "5.3.1"
   resolved "https://registry.yarnpkg.com/@rollup/plugin-babel/-/plugin-babel-5.3.1.tgz#04bc0608f4aa4b2e4b1aebf284344d0f68fda283"
@@ -2882,6 +2837,25 @@
   integrity sha512-z9fJ5Im06zvUL548KvYNecEVlA7cVDkGUi6kZusb04mpyEFKCIZJvloCcmpmLaIahDpOQGHaHmG6imtPMmPXGQ==
   dependencies:
     "@types/node" "*"
+
+"@types/color-convert@*":
+  version "2.0.3"
+  resolved "https://registry.yarnpkg.com/@types/color-convert/-/color-convert-2.0.3.tgz#e93f5c991eda87a945058b47044f5f0008b0dce9"
+  integrity sha512-2Q6wzrNiuEvYxVQqhh7sXM2mhIhvZR/Paq4FdsQkOMgWsCIkKvSGj8Le1/XalulrmgOzPMqNa0ix+ePY4hTrfg==
+  dependencies:
+    "@types/color-name" "*"
+
+"@types/color-name@*":
+  version "1.1.3"
+  resolved "https://registry.yarnpkg.com/@types/color-name/-/color-name-1.1.3.tgz#c488ac2e519c9795faa0d54e8156d54e66adc4e6"
+  integrity sha512-87W6MJCKZYDhLAx/J1ikW8niMvmGRyY+rpUxWpL1cO7F8Uu5CHuQoFv+R0/L5pgNdW4jTyda42kv60uwVIPjLw==
+
+"@types/color@^3.0.6":
+  version "3.0.6"
+  resolved "https://registry.yarnpkg.com/@types/color/-/color-3.0.6.tgz#29c27a99d4de2975e1676712679a0bd7f646a3fb"
+  integrity sha512-NMiNcZFRUAiUUCCf7zkAelY8eV3aKqfbzyFQlXpPIEeoNDbsEHGpb854V3gzTsGKYj830I5zPuOwU/TP5/cW6A==
+  dependencies:
+    "@types/color-convert" "*"
 
 "@types/connect-history-api-fallback@^1.3.5":
   version "1.5.4"

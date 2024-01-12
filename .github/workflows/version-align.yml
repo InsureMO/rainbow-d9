@@ -48,6 +48,18 @@ jobs:
         with:
           module-name: d9-n3
           target-version: ${{ inputs.version }}
+      - name: Change Version of d9-sample-cra
+        uses: ./.github/actions/change-node-version/
+        id: change-node-version-d9-sample-cra
+        with:
+          module-name: d9-sample-cra
+          target-version: ${{ inputs.version }}
+      - name: Change Version of d9-thai-plan-selection
+        uses: ./.github/actions/change-node-version/
+        id: change-node-version-d9-thai-plan-selection
+        with:
+          module-name: d9-thai-plan-selection
+          target-version: ${{ inputs.version }}
       - name: Create pre release branch
         run: git checkout -b ${{ inputs.branch }}
       - name: Initialize mandatory git config

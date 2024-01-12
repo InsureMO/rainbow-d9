@@ -1,5 +1,6 @@
-import {ValueChangeableNodeDef, WidgetProps} from '@rainbow-d9/n1';
+import {NodeDef, ValueChangeableNodeDef, WidgetProps} from '@rainbow-d9/n1';
 import {OmitHTMLProps, OmitNodeDef} from '@rainbow-d9/n2';
+import {ReactNode} from 'react';
 
 // plan definition part
 export type PlanElementCode = string;
@@ -18,6 +19,8 @@ export interface PlanElementDef {
 	description?: string;
 	type: PlanElementType;
 	children?: Array<PlanElementDef>;
+	/** display order, default 0 */
+	displayOrder?: number;
 }
 
 export interface PlanCategoryDef extends PlanElementDef {
@@ -178,10 +181,12 @@ export interface SelectedPlanElement {
 }
 
 export interface SelectedPlan {
-	code?: PlanCode;
+	code: PlanCode;
 	/** hierarchy exactly same as definition */
 	elements: Array<SelectedPlanElement>;
 	premium?: Premium;
+	/** default false */
+	selected?: boolean;
 }
 
 export type SelectedPlans = Array<SelectedPlan>;
@@ -200,9 +205,14 @@ export type PlanSelectionDef = ValueChangeableNodeDef & OmitHTMLProps<HTMLDivEle
 	/** first column width, default use columns to compute */
 	lineHeaderWidth?: number | string;
 	/** max body height, plan header and footer are not included */
-	maxBodyHeight?: number | string;
+	maxHeight?: number | string;
 	/** plan candidate definitions */
 	defs: PlanDefs | (() => Promise<PlanDefs>);
+	currencySymbol?: string | ReactNode;
+	/** plan header title */
+	planTitle?: Array<NodeDef>;
+	/** plan header subtitle */
+	planSubTitle?: Array<NodeDef>;
 };
 /** widget definition, with html attributes */
 export type PlanSelectionProps = OmitNodeDef<PlanSelectionDef> & WidgetProps;

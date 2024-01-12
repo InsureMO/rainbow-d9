@@ -16,6 +16,7 @@ import {N2Tabs, N2TabsData, N2TabsMarkdown} from './n2-tabs';
 import {N2Tree, N2TreeData, N2TreeMarkdown} from './n2-tree';
 import {N2Wizard, N2WizardData, N2WizardMarkdown} from './n2-wizard';
 import 'github-markdown-css/github-markdown.css';
+import {ThaiPlanSelection, ThaiPlanSelectionData, ThaiPlanSelectionMarkdown} from './thai-plan-selection';
 
 const DemoContainer = styled.div`
     display: grid;
@@ -197,11 +198,12 @@ const MarkdownContainer = (props: {
 	</>;
 };
 export const DemoIndex = () => {
-	const [pathname, setPathname] = useState('/n2-basic-widgets');
+	const [pathname, setPathname] = useState(localStorage.getItem('PATH') || '/n2-basic-widgets');
 
 	const [activeSource, setActiveSource] = useState<ActiveSource>(ActiveSource.NONE);
 
 	const onMenuClicked = (pathname: string) => () => {
+		localStorage.setItem('PATH', pathname);
 		setPathname(pathname);
 	};
 	const onHideAllClicked = () => setActiveSource(ActiveSource.NONE);
@@ -228,7 +230,11 @@ export const DemoIndex = () => {
 			C: N2Monitors, data: N2MonitorsData, markdown: N2MonitorsMarkdown
 		},
 		{path: '/n2-intl', label: '8. N2 Internationalization', C: N2Intl, data: N2IntlData, markdown: N2IntlMarkdown},
-		{path: '/n2-tree', label: '9. N2 Tree', C: N2Tree, data: N2TreeData, markdown: N2TreeMarkdown}
+		{path: '/n2-tree', label: '9. N2 Tree', C: N2Tree, data: N2TreeData, markdown: N2TreeMarkdown},
+		{
+			path: '/thai-plan-selection', label: '100. ThaiCloud Plan Selection',
+			C: ThaiPlanSelection, data: ThaiPlanSelectionData, markdown: ThaiPlanSelectionMarkdown
+		}
 	];
 
 	const C = demos.find(demo => demo.path === pathname)?.C ?? Fragment;

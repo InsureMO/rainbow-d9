@@ -1,0 +1,10 @@
+{
+	"plans": [
+		{
+			"code": "standard-1",
+			"premium": {
+				"due": 123456
+			}
+		}
+	]
+}
