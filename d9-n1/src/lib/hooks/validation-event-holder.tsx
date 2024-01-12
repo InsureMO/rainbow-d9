@@ -32,7 +32,7 @@ export const ValidationEventHolder = () => {
 			} else {
 				// validate given scopes
 				const validated: Array<Validated> = await Promise.all<Validated>(
-					scopes.map(scope => Object.keys(validationEventState[scope]))
+					scopes.map(scope => Object.keys(validationEventState.byScopes[scope] ?? []))
 						.flat()
 						.reduce((ids, id) => {
 							if (ids.map[id] == null) {

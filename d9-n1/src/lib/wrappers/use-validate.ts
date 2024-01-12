@@ -121,21 +121,23 @@ export const useValidationRegistration = (options: {
 				if ($handle == null) {
 					resolve({path: absolutePath, valid: true});
 				} else {
-					const {$root, $model} = props;
-					const value = MUtils.getValue($model, props.$pp);
-					// handle directly function call, normally programmatic invoked.
-					// there is no value change, always use current value to do validation
-					const result = $handle({
-						root: $root, model: $model,
-						pathToRoot: props.$p2r, propertyPath: props.$pp, absolutePath, value,
-						changedOn: absolutePath, to: value
-					});
-					const current = (attributeValues[MonitorNodeAttributes.VALID] ?? {valid: true});
-					if (result.valid !== current.valid || result.failReason != current.failReason) {
-						// validation result changed
-						setAttributeValues(attributes => ({...attributes, [MonitorNodeAttributes.VALID]: result}));
-					}
-					resolve({path: absolutePath, ...result});
+					(async () => {
+						const {$root, $model} = props;
+						const value = MUtils.getValue($model, props.$pp);
+						// handle directly function call, normally programmatic invoked.
+						// there is no value change, always use current value to do validation
+						const result = await $handle({
+							root: $root, model: $model,
+							pathToRoot: props.$p2r, propertyPath: props.$pp, absolutePath, value,
+							changedOn: absolutePath, to: value
+						});
+						const current = (attributeValues[MonitorNodeAttributes.VALID] ?? {valid: true});
+						if (result.valid !== current.valid || result.failReason != current.failReason) {
+							// validation result changed
+							setAttributeValues(attributes => ({...attributes, [MonitorNodeAttributes.VALID]: result}));
+						}
+						resolve({path: absolutePath, ...result});
+					})();
 				}
 			});
 		};
