@@ -3,6 +3,7 @@ import {MUtils, N1Logger, PPUtils, VUtils} from '@rainbow-d9/n1';
 import '@rainbow-d9/n2';
 import {CalendarUtils, CssVars} from '@rainbow-d9/n2';
 import {registerN2Widgets, Widget} from '@rainbow-d9/n3';
+import {registerPlanSelect} from '@rainbow-d9/thai-plan-selection';
 import dayjs from 'dayjs';
 import ArraySupport from 'dayjs/plugin/arraySupport';
 import BuddhistEra from 'dayjs/plugin/buddhistEra';
@@ -36,6 +37,7 @@ dayjs.extend(BuddhistEra);
 	// register widgets to n3
 	const widgetsHelper = Widget.createOrGetTranslateHelperSingleton();
 	registerN2Widgets(widgetsHelper);
+	registerPlanSelect(widgetsHelper);
 	// set widgets parameters
 	// calendar
 	CalendarUtils.setCalendarDefaults({

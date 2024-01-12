@@ -5,7 +5,7 @@ export const DOM_KEY_WIDGET = 'data-w';
 export const DOM_ID_WIDGET = 'data-wid';
 export const ICON_PREFIX = '$icons.';
 
-const CssConstants = {
+export const CssConstants = {
 	FONT_FAMILY: 'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Tahoma", "Verdana", "Arial"',
 	FONT_COLOR: 'rgb(102,102,102)',
 	BG_COLOR: 'rgb(248,249,250)',
@@ -187,12 +187,6 @@ export const CssVars = {
 	REMOTE_REQUEST_COLOR: `var(--d9-remote-request-color, ${CssConstants.INFO_COLOR})`,
 	REMOTE_REQUEST_Z_INDEX: 99999
 };
-
-export type CssVarsType = typeof CssVars & {
-	INPUT_HEIGHT_VALUE: number;
-	CALENDAR_POPUP_HEIGHT_VALUE: number;
-	CALENDAR_POPUP_WIDTH_VALUE: number;
-}
 
 const $d9: $D9N2Window = window as unknown as $D9N2Window;
 $d9.$d9n2 = $d9.$d9n2 ?? {
