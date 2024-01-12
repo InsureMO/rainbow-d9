@@ -12,8 +12,7 @@ export const PlanSelection = (props: PlanSelectionProps) => {
 		$pp, $wrapped,
 		columns = 3, columnWidth, lineHeaderWidth, maxHeight,
 		defs,
-		currencySymbol,
-		planTitle = guardPlanTitle(), planSubTitle = guardPlanSubTitle(),
+		currencySymbol, planTitle, planSubTitle,
 		...rest
 	} = props;
 	const {$p2r, $avs: {$disabled, $visible}} = $wrapped;
