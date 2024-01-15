@@ -1,5 +1,5 @@
 import {NodeDef, VUtils} from '@rainbow-d9/n1';
-import {CaptionValueToLabelFormats, LabelDef, Utils} from '@rainbow-d9/n2';
+import {CaptionDef, CaptionValueToLabelFormats, LabelDef, Utils} from '@rainbow-d9/n2';
 import {ReactNode} from 'react';
 import {PlanCode, PlanSelectionProps, SelectedPlan, SelectedPlans} from './types';
 
@@ -40,10 +40,16 @@ export const findSelectedPlan = (code: PlanCode, plansModel: SelectedPlans): [Se
 		return [found, foundIndex];
 	}
 };
+
 export const guardPlanTitle = (def?: Array<NodeDef>): Array<NodeDef> => {
 	return def ?? [{$wt: 'Label', $pp: 'def.name'} as LabelDef];
 };
-export const guardPlanSubTitle = (def?: Array<NodeDef>, currencySymbol?: string | ReactNode): Array<NodeDef> => {
+
+export const guardPlanSubTitle = (options: {
+	def?: Array<NodeDef>; currencySymbol?: string | ReactNode; premiumDescription?: string | ReactNode;
+}): Array<NodeDef> => {
+	const {def, currencySymbol, premiumDescription} = options;
+
 	return def ?? [
 		{
 			$wt: 'Label', $pp: 'data.premium.due',
@@ -59,6 +65,9 @@ export const guardPlanSubTitle = (def?: Array<NodeDef>, currencySymbol?: string 
 				}
 			},
 			leads: [currencySymbol].filter(x => VUtils.isNotBlank(x))
-		} as LabelDef
+		} as LabelDef,
+		{
+			$wt: 'Caption', 'data-plan-premium-desc': true, text: premiumDescription
+		} as CaptionDef
 	];
 };

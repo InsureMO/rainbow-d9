@@ -12,7 +12,8 @@ export const PlanSelection = (props: PlanSelectionProps) => {
 		$pp, $wrapped,
 		columns = 3, columnWidth, lineHeaderWidth, maxHeight,
 		defs,
-		currencySymbol, planTitle, planSubTitle,
+		currencySymbol, premiumDescription,
+		planTitle, planSubTitle,
 		...rest
 	} = props;
 	const {$p2r, $avs: {$disabled, $visible}} = $wrapped;
@@ -58,7 +59,7 @@ export const PlanSelection = (props: PlanSelectionProps) => {
 					})}
 				</PlanHeaderTitle>
 				<PlanHeaderSubTitle>
-					{guardPlanSubTitle(planSubTitle, currencySymbol).map(label => {
+					{guardPlanSubTitle({def: planSubTitle, currencySymbol, premiumDescription}).map(label => {
 						return <LabelLike key={nanoid()} label={label} $wrapped={$myWrapped}/>;
 					})}
 				</PlanHeaderSubTitle>

@@ -8,10 +8,13 @@ export const PlanSelectionCssVars = {
 	HEADER_TITLE_COLOR: `var(--d9-plan-selection-header-title-color, ${CssVars.INVERT_COLOR})`,
 	HEADER_ODD_BACKGROUND_COLOR: `var(--d9-plan-selection-header-odd-background-color, rgb(56,74,90))`,
 	HEADER_EVEN_BACKGROUND_COLOR: `var(--d9-plan-selection-header-even-background-color, rgb(96,126,154))`,
-	HEADER_SUB_TITLE_PADDING: 'var(--d9-plan-selection-header-sub-title-padding, 12px 0)',
+	HEADER_SUB_TITLE_PADDING: 'var(--d9-plan-selection-header-sub-title-padding, 12px 0 4px)',
 	PREMIUM_FONT_SIZE: 'var(--d9-plan-selection-premium-font-size, 18px)',
 	PREMIUM_FONT_WEIGHT: `var(--d9-plan-selection-premium-font-weight, ${CssVars.FONT_BOLD})`,
 	PREMIUM_COLOR: 'var(--d9-plan-selection-premium-color, rgb(202,92,84))',
+	PREMIUM_DESCRIPTION_FONT_SIZE: 'var(--d9-plan-selection-premium-desc-font-size, 16px)',
+	PREMIUM_DESCRIPTION_FONT_WEIGHT: `var(--d9-plan-selection-premium-desc-font-weight, ${CssVars.FONT_BOLD})`,
+	PREMIUM_DESCRIPTION_COLOR: 'var(--d9-plan-selection-premium-desc-color, rgb(146,183,140))',
 	ODD_BACKGROUND_COLOR: `var(--d9-plan-selection-odd-background-color, rgb(245,245,245))`,
 	EVEN_BACKGROUND_COLOR: `var(--d9-plan-selection-even-background-color, ${CssVars.INVERT_COLOR})`
 };
@@ -96,22 +99,37 @@ export const PlanHeaderTitle = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-plan-sele
 export const PlanHeaderSubTitle = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-plan-selection-header-sub-title'})`
     display: flex;
     position: relative;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     padding: ${PlanSelectionCssVars.HEADER_SUB_TITLE_PADDING};
 
     > span[data-w=d9-caption] {
-        font-size: ${PlanSelectionCssVars.PREMIUM_FONT_SIZE};
-        font-weight: ${PlanSelectionCssVars.PREMIUM_FONT_WEIGHT};
         height: unset;
         min-height: ${CssVars.INPUT_HEIGHT};
 
         &[data-plan-premium=true] {
+            font-size: ${PlanSelectionCssVars.PREMIUM_FONT_SIZE};
+            font-weight: ${PlanSelectionCssVars.PREMIUM_FONT_WEIGHT};
             color: ${PlanSelectionCssVars.PREMIUM_COLOR};
 
             > span[data-w=d9-deco-lead], > span[data-w=d9-deco-tail] {
                 font-size: ${PlanSelectionCssVars.PREMIUM_FONT_SIZE};
                 color: ${PlanSelectionCssVars.PREMIUM_COLOR};
+                fill: ${PlanSelectionCssVars.PREMIUM_COLOR};
+            }
+        }
+
+        &[data-plan-premium-desc=true] {
+            font-size: ${PlanSelectionCssVars.PREMIUM_DESCRIPTION_FONT_SIZE};
+            font-weight: ${PlanSelectionCssVars.PREMIUM_DESCRIPTION_FONT_WEIGHT};
+            color: ${PlanSelectionCssVars.PREMIUM_DESCRIPTION_COLOR};
+            margin-top: -4px;
+
+            > span[data-w=d9-deco-lead], > span[data-w=d9-deco-tail] {
+                font-size: ${PlanSelectionCssVars.PREMIUM_DESCRIPTION_FONT_SIZE};
+                color: ${PlanSelectionCssVars.PREMIUM_DESCRIPTION_COLOR};
+                fill: ${PlanSelectionCssVars.PREMIUM_DESCRIPTION_COLOR};
             }
         }
     }

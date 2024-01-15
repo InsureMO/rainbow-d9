@@ -209,6 +209,7 @@ export type PlanSelectionDef = ValueChangeableNodeDef & OmitHTMLProps<HTMLDivEle
 	/** plan candidate definitions */
 	defs: PlanDefs | (() => Promise<PlanDefs>);
 	currencySymbol?: string | ReactNode;
+	premiumDescription?: string | ReactNode;
 	/** plan header title */
 	planTitle?: Array<NodeDef>;
 	/** plan header subtitle */

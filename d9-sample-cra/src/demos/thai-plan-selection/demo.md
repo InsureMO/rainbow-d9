@@ -5,3 +5,4 @@
 - PlanSelect::::plans
 	- defs: @ext.defs
 	- currencySymbol: ฿
+	- premiumDescription: After Tax
