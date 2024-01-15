@@ -2,9 +2,17 @@ import {BaseModel, MUtils, PPUtils, PropValue, VUtils, WrappedAttributes} from '
 import {LabelLike} from '@rainbow-d9/n2';
 import {nanoid} from 'nanoid';
 import React from 'react';
-import {PlanSelectionProps, SelectedPlans} from './types';
+import {PlanElement} from './plan-element';
+import {PlanCode, PlanSelectionProps, SelectedPlans} from './types';
 import {useDefs} from './use-defs';
-import {computeColumnWidth, findSelectedPlan, guardPlanSubTitle, guardPlanTitle} from './utils';
+import {
+	buildPlanOrElementDefCodesMap,
+	computeColumnWidth,
+	findSelectedPlan,
+	guardPlanSubTitle,
+	guardPlanTitle,
+	PlanDefCodesMap
+} from './utils';
 import {APlanSelection, PlanHeader, PlanHeaderSubTitle, PlanHeaderTitle, PlanSelectionTopLeftCorner} from './widgets';
 
 export const PlanSelection = (props: PlanSelectionProps) => {
@@ -13,12 +21,12 @@ export const PlanSelection = (props: PlanSelectionProps) => {
 		columns = 3, columnWidth, lineHeaderWidth, maxHeight,
 		defs,
 		currencySymbol, premiumDescription,
-		planTitle, planSubTitle,
+		planTitle, planSubTitle, elementTitle, elementFixedValue,
 		...rest
 	} = props;
 	const {$p2r, $avs: {$disabled, $visible}} = $wrapped;
 
-	const {initialized, defs: planDefs} = useDefs(defs);
+	const {initialized, defs: planDefs, orderedDefs} = useDefs(defs);
 	if (!initialized) {
 		return null;
 	}
@@ -28,11 +36,15 @@ export const PlanSelection = (props: PlanSelectionProps) => {
 
 	// TODO there might be pages
 	const displayPlanDefs = (planDefs ?? []).slice(0, computedColumnCount);
-	let plansModel = MUtils.getValue($wrapped.$model, $pp) as unknown as SelectedPlans;
-	if (plansModel == null) {
+	const displayPlanDefCodesMap = displayPlanDefs.reduce((map, def) => {
+		map[def.code] = buildPlanOrElementDefCodesMap(() => def.elements ?? []);
+		return map;
+	}, {} as Record<PlanCode, PlanDefCodesMap>);
+	let plansData = MUtils.getValue($wrapped.$model, $pp) as unknown as SelectedPlans;
+	if (plansData == null) {
 		// guard plans instance model
-		plansModel = [];
-		MUtils.setValue($wrapped.$model, $pp, plansModel as unknown as PropValue);
+		plansData = {};
+		MUtils.setValue($wrapped.$model, $pp, plansData as unknown as PropValue);
 	}
 
 	return <APlanSelection {...rest} data-disabled={$disabled} data-visible={$visible}
@@ -41,29 +53,38 @@ export const PlanSelection = (props: PlanSelectionProps) => {
 	                       maxHeight={maxHeight}
 	                       id={PPUtils.asId(PPUtils.absolute($p2r, $pp), props.id)}>
 		<PlanSelectionTopLeftCorner/>
-		{displayPlanDefs.map((planDef, index) => {
-			const [data] = findSelectedPlan(planDef.code, plansModel);
-			const model = {def: planDef, data};
-			// read from definition data
+		{displayPlanDefs.map((planDef, displayIndex) => {
+			const planData = findSelectedPlan(plansData, planDef.code);
+			// merge instance data and definition data
+			const model = {def: planDef, data: planData} as unknown as PropValue;
+			const root = {$plans: model} as unknown as BaseModel;
 			const $myWrapped: WrappedAttributes = {
-				$root: model as unknown as BaseModel, $model: model as unknown as PropValue, $p2r: '.',
+				$root: root, $model: model, $p2r: '$plans',
 				$onValueChange: VUtils.noop, $avs: {}
 			};
 			// index starts from 0
-			const odd = index % 2 === 0;
+			const odd = displayIndex % 2 === 0;
 
 			return <PlanHeader data-odd={odd} key={planDef.code}>
 				<PlanHeaderTitle>
-					{guardPlanTitle(planTitle).map(label => {
+					{guardPlanTitle({def: planTitle, planDef}).map(label => {
 						return <LabelLike key={nanoid()} label={label} $wrapped={$myWrapped}/>;
 					})}
 				</PlanHeaderTitle>
 				<PlanHeaderSubTitle>
-					{guardPlanSubTitle({def: planSubTitle, currencySymbol, premiumDescription}).map(label => {
+					{guardPlanSubTitle({def: planSubTitle, currencySymbol, premiumDescription, planDef}).map(label => {
 						return <LabelLike key={nanoid()} label={label} $wrapped={$myWrapped}/>;
 					})}
 				</PlanHeaderSubTitle>
 			</PlanHeader>;
+		})}
+		{(orderedDefs ?? []).map(orderedDef => {
+			return <PlanElement orderedDef={orderedDef}
+			                    displayPlanDefs={displayPlanDefs} displayPlanDefCodesMap={displayPlanDefCodesMap}
+			                    elementTitle={elementTitle} elementLevel={0}
+			                    plansModel={plansData}
+			                    elementFixedValue={elementFixedValue}
+			                    key={orderedDef.code}/>;
 		})}
 	</APlanSelection>;
 };

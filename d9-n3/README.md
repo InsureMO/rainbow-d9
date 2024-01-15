@@ -1065,9 +1065,12 @@ Some examples:
 - Default Grid Column Span: `3`,
 - Declared Built-in Validation: `required`.
 
-| Attribute Name | Type | Description                        |
-|----------------|------|------------------------------------|
-| values         | text | `- values: Y`<br/>`- values: Y, N` |
+| Attribute Name | Type    | Description                        |
+|----------------|---------|------------------------------------|
+| values         | text    | `- values: Y`<br/>`- values: Y, N` |
+| emptyWhenFalse | boolean | `- emptyWhenFalse`                 |
+
+> `emptyWhenFalse` is for `Checkbox` only.
 
 ### Syntax of `values`
 

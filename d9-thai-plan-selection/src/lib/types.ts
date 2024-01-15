@@ -39,7 +39,8 @@ export enum PlanElementValueEditType {
 	NUMBER = 'number',
 }
 
-export interface PlanElementValue {
+// noinspection DuplicatedCode
+export interface PlanElementValueDef {
 	code: PlanElementValueCode;
 	/** element value might be not required, which means default value is not required either */
 	defaultValue?: string | number;
@@ -50,7 +51,7 @@ export interface PlanElementValue {
 	editType: PlanElementValueEditType;
 }
 
-export interface PlanElementFixedValue extends PlanElementValue {
+export interface PlanElementFixedValueDef extends PlanElementValueDef {
 	editType: PlanElementValueEditType.FIXED;
 }
 
@@ -61,12 +62,12 @@ export interface PlanElementValueOption {
 
 export type PlanElementValueOptions = Array<PlanElementValueOption>;
 
-export interface PlanElementOptionsValue extends PlanElementValue {
+export interface PlanElementOptionsValueDef extends PlanElementValueDef {
 	editType: PlanElementValueEditType.OPTIONS;
 	options: PlanElementValueOptions;
 }
 
-export interface PlanElementNumberValue extends PlanElementValue {
+export interface PlanElementNumberValueDef extends PlanElementValueDef {
 	defaultValue?: number;
 	editType: PlanElementValueEditType.NUMBER;
 	min?: number;
@@ -86,7 +87,7 @@ export type PlanMutableElementType = Exclude<PlanElementType, PlanElementType.CA
 export interface PlanMutableElementDef extends PlanElementDef {
 	type: PlanMutableElementType;
 	/** element value might be not required */
-	values?: Array<PlanElementValue>;
+	values?: Array<PlanElementValueDef>;
 	/**
 	 * usually customized plan, which means element can be unpinned.
 	 * default true
@@ -94,14 +95,17 @@ export interface PlanMutableElementDef extends PlanElementDef {
 	pinned?: boolean;
 }
 
+// noinspection JSUnusedGlobalSymbols
 export interface PlanCoverageDef extends PlanMutableElementDef {
 	type: PlanElementType.COVERAGE;
 }
 
+// noinspection JSUnusedGlobalSymbols
 export interface PlanBenefitDef extends PlanMutableElementDef {
 	type: PlanElementType.BENEFIT;
 }
 
+// noinspection JSUnusedGlobalSymbols
 export interface PlanLimitDeductibleDef extends PlanMutableElementDef {
 	type: PlanElementType.LIMIT_DEDUCTIBLE;
 }
@@ -165,31 +169,28 @@ export interface Premium {
 	loadings?: Array<Loading>;
 }
 
-export interface SelectedPlanElementValue {
-	code: PlanElementValueCode;
-	value?: string | number;
-}
+export type SelectedPlanElementValue = string | number;
 
 export interface SelectedPlanElement {
 	code: PlanElementCode;
 	/** for unpinned element */
 	selected: boolean;
 	/** values are only for mutable plan element */
-	values?: Array<SelectedPlanElementValue>;
+	values?: Record<PlanElementValueCode, SelectedPlanElementValue>;
 	/** if there is premium details for plan element */
 	premium?: Premium;
+	children?: Record<PlanElementCode, SelectedPlanElement>;
 }
 
 export interface SelectedPlan {
 	code: PlanCode;
-	/** hierarchy exactly same as definition */
-	elements: Array<SelectedPlanElement>;
+	elements: Record<PlanElementCode, SelectedPlanElement>;
 	premium?: Premium;
 	/** default false */
 	selected?: boolean;
 }
 
-export type SelectedPlans = Array<SelectedPlan>;
+export type SelectedPlans = Record<PlanCode, SelectedPlan>;
 
 /** configuration definition */
 export type PlanSelectionDef = ValueChangeableNodeDef & OmitHTMLProps<HTMLDivElement> & {
@@ -211,9 +212,17 @@ export type PlanSelectionDef = ValueChangeableNodeDef & OmitHTMLProps<HTMLDivEle
 	currencySymbol?: string | ReactNode;
 	premiumDescription?: string | ReactNode;
 	/** plan header title */
-	planTitle?: Array<NodeDef>;
+	planTitle?: (def: PlanDef) => Array<NodeDef>;
 	/** plan header subtitle */
-	planSubTitle?: Array<NodeDef>;
+	planSubTitle?: (def: PlanDef, currencySymbol?: string | ReactNode, premiumDescription?: string | ReactNode) => Array<NodeDef>;
+	/** plan element title, level starts from 0 */
+	elementTitle?: (def: PlanElementDef, level: number) => Array<NodeDef>;
+	elementFixedValue?: (options: {
+		elementDef: PlanMutableElementDef; valueDef: PlanElementValueDef;
+		plan: SelectedPlan; element: SelectedPlanElement; values: SelectedPlanElement['values'];
+		/** path to root is values model to plan model */
+		elementCodes: Array<PlanElementCode>;
+	}) => Array<NodeDef>;
 };
 /** widget definition, with html attributes */
 export type PlanSelectionProps = OmitNodeDef<PlanSelectionDef> & WidgetProps;

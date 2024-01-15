@@ -8,6 +8,7 @@ export interface PlanElementDefOrdered {
 	description?: string;
 	displayOrder: number;
 	children?: Array<PlanElementDefOrdered>;
+	def: PlanElementDef;
 }
 
 export type PlanDefOrdered = Array<PlanElementDefOrdered>;
@@ -38,7 +39,7 @@ const orderDef = (
 			// let children be empty array now
 			ordered.push({
 				code: element.code, name: element.name, description: element.description,
-				displayOrder, children
+				displayOrder, children, def: element
 			});
 		}
 		orderDef(() => element.children ?? [], exists.ordered, exists.map);
@@ -47,19 +48,37 @@ const orderDef = (
 
 const orderPlanDefs = (defs: PlanDefs): Undefinable<PlanDefOrdered> => {
 	if (defs == null || defs.length === 0) {
-		return;
+		return (void 0);
 	}
 
 	const ordered: PlanDefOrdered = [];
 	const map: ExistsCodeMap = {};
 	defs.forEach((def) => orderDef(() => def.elements ?? [], ordered, map));
-	return ordered;
+	const sort = (ordered: Array<PlanElementDefOrdered>) => {
+		const original = [...ordered];
+		ordered = ordered.sort((a, b) => {
+			if (a.displayOrder < b.displayOrder) {
+				return -1;
+			} else if (a.displayOrder > b.displayOrder) {
+				return 1;
+			} else {
+				return original.indexOf(a) - original.indexOf(b);
+			}
+		});
+		ordered.forEach(({children}) => {
+			if (children != null && children.length !== 0) {
+				sort(children);
+			}
+		});
+		return ordered;
+	};
+	return sort(ordered);
 };
 
 export interface PlanDefsState {
 	initialized: boolean;
 	defs?: PlanDefs;
-	orderedCodesDef?: PlanDefOrdered;
+	orderedDefs?: PlanDefOrdered;
 }
 
 export const useDefs = (defs: PlanSelectionDef['defs']) => {
@@ -75,7 +94,7 @@ export const useDefs = (defs: PlanSelectionDef['defs']) => {
 			} else {
 				loadedDefs = defs;
 			}
-			setState({initialized: true, defs: loadedDefs, orderedCodesDef: orderPlanDefs(loadedDefs)});
+			setState({initialized: true, defs: loadedDefs, orderedDefs: orderPlanDefs(loadedDefs)});
 		})();
 	}, [state.initialized, defs]);
 

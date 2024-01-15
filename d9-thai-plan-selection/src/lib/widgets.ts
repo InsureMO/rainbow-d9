@@ -16,7 +16,13 @@ export const PlanSelectionCssVars = {
 	PREMIUM_DESCRIPTION_FONT_WEIGHT: `var(--d9-plan-selection-premium-desc-font-weight, ${CssVars.FONT_BOLD})`,
 	PREMIUM_DESCRIPTION_COLOR: 'var(--d9-plan-selection-premium-desc-color, rgb(146,183,140))',
 	ODD_BACKGROUND_COLOR: `var(--d9-plan-selection-odd-background-color, rgb(245,245,245))`,
-	EVEN_BACKGROUND_COLOR: `var(--d9-plan-selection-even-background-color, ${CssVars.INVERT_COLOR})`
+	EVEN_BACKGROUND_COLOR: `var(--d9-plan-selection-even-background-color, ${CssVars.INVERT_COLOR})`,
+	ELEMENT_MIN_HEIGHT: `var(--d9-plan-selection-element-min-height, 40px)`,
+	ELEMENT_INDENT: `var(--d9-plan-selection-element-indent, 16px)`,
+	ELEMENT_PADDING: `var(--d9-plan-selection-element-padding, 0 12px)`,
+	ELEMENT_VALUE_LABEL_COLOR: `var(--d9-plan-selection-element-value-label-color, #888)`,
+	ELEMENT_VALUE_UNIT_GAP: `var(--d9-plan-selection-element-value-unit-gap, 12px)`,
+	ELEMENT_UNIT_LABEL_COLOR: `var(--d9-plan-selection-element-unit-label-color, #888)`
 };
 
 // noinspection CssUnresolvedCustomProperty
@@ -130,6 +136,184 @@ export const PlanHeaderSubTitle = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-plan-s
                 font-size: ${PlanSelectionCssVars.PREMIUM_DESCRIPTION_FONT_SIZE};
                 color: ${PlanSelectionCssVars.PREMIUM_DESCRIPTION_COLOR};
                 fill: ${PlanSelectionCssVars.PREMIUM_DESCRIPTION_COLOR};
+            }
+        }
+    }
+`;
+
+export const PlanElementColumnHeader = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-plan-selection-element-header'})`
+    display: flex;
+    position: relative;
+    align-items: center;
+    min-height: ${PlanSelectionCssVars.ELEMENT_MIN_HEIGHT};
+    border-bottom: ${CssVars.BORDER};
+`;
+export const PlanElementColumnHeaderTitle = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-plan-selection-element-header-title'})`
+    display: flex;
+    position: relative;
+    align-items: center;
+    justify-content: flex-start;
+
+    > span[data-w=d9-caption] {
+        min-height: ${CssVars.INPUT_HEIGHT};
+
+        &[data-plan-element-level="0"] {
+            font-weight: ${CssVars.FONT_BOLD};
+        }
+
+        &[data-plan-element-level="1"] {
+            margin-left: ${PlanSelectionCssVars.ELEMENT_INDENT};
+        }
+
+        &[data-plan-element-level="2"] {
+            margin-left: calc(${PlanSelectionCssVars.ELEMENT_INDENT} * 2);
+        }
+
+        &[data-plan-element-level="3"] {
+            margin-left: calc(${PlanSelectionCssVars.ELEMENT_INDENT} * 3);
+        }
+    }
+`;
+export const PlanElementCell = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-plan-selection-element-cell'})`
+    display: flex;
+    position: relative;
+    align-items: center;
+    justify-content: flex-start;
+    border-bottom: ${CssVars.BORDER};
+    background-color: ${PlanSelectionCssVars.EVEN_BACKGROUND_COLOR};
+    padding: ${PlanSelectionCssVars.ELEMENT_PADDING};
+
+    &[data-odd=true] {
+        background-color: ${PlanSelectionCssVars.ODD_BACKGROUND_COLOR};
+    }
+
+    &[data-element-lack=true] { /** element no available for this plan */
+        justify-content: center;
+
+        > svg[data-icon=times] {
+            height: calc(${CssVars.INPUT_HEIGHT} / 5 * 3);
+            width: calc(${CssVars.INPUT_HEIGHT} / 5 * 3);
+            fill: ${CssVars.DANGER_COLOR};
+        }
+    }
+
+    &[data-element-cateogry=true] { /** category element */
+        justify-content: center;
+
+        > svg[data-icon=check] {
+            height: calc(${CssVars.INPUT_HEIGHT} / 5 * 3);
+            width: calc(${CssVars.INPUT_HEIGHT} / 5 * 3);
+            fill: ${CssVars.SUCCESS_COLOR};
+        }
+    }
+
+    > div[data-w=d9-checkbox] { /** no values available for this element */
+        padding: calc((${CssVars.INPUT_HEIGHT}) / 6);
+        border-color: transparent;
+        margin: auto;
+
+        &[data-element-pinned=true] { /** element is pinned */
+            fill: ${CssVars.SUCCESS_COLOR};
+
+            &[disabled], &[data-disabled=true] {
+                &:before {
+                    display: none;
+                }
+            }
+        }
+
+        &[data-element-pinned=false] { /** element is not pinned */
+
+            &[data-checked=true] { /** use success color */
+                fill: ${CssVars.SUCCESS_COLOR};
+
+                &:hover:before {
+                    box-shadow: ${CssVars.SUCCESS_HOVER_SHADOW};
+                }
+
+                &:focus-within:before {
+                    box-shadow: ${CssVars.SUCCESS_HOVER_SHADOW};
+                }
+
+                &:hover,
+                &:focus-within {
+                    fill: ${CssVars.SUCCESS_COLOR};
+
+                    &:before {
+                        border-color: ${CssVars.SUCCESS_COLOR};
+                    }
+                }
+
+                &:before {
+                    border-color: ${CssVars.SUCCESS_COLOR};
+                }
+            }
+
+            &[data-checked=false] { /** use danger color */
+                fill: ${CssVars.DANGER_COLOR};
+
+                &:hover:before {
+                    box-shadow: ${CssVars.DANGER_HOVER_SHADOW};
+                }
+
+                &:focus-within:before {
+                    box-shadow: ${CssVars.DANGER_HOVER_SHADOW};
+                }
+
+                &:hover,
+                &:focus-within {
+                    fill: ${CssVars.DANGER_COLOR};
+
+                    &:before {
+                        border-color: ${CssVars.DANGER_COLOR};
+                    }
+                }
+
+                &:before {
+                    border-color: ${CssVars.DANGER_COLOR};
+                }
+            }
+        }
+    }
+
+    > div[data-w=d9-form-cell] {
+        display: grid;
+        grid-template-columns: 35% 65%;
+        width: 100%;
+
+        &[data-plan-element-fix-value=true] { /** fixed value */
+
+            > span[data-w=d9-caption]:nth-child(2) {
+                > span[data-plan-element-fix-value=true] {
+                }
+
+                > span[data-plan-element-fix-value-unit=true]:not(:empty) { /** fixed value with unit */
+                    margin-left: ${PlanSelectionCssVars.ELEMENT_VALUE_UNIT_GAP};
+                    color: ${PlanSelectionCssVars.ELEMENT_UNIT_LABEL_COLOR};
+                }
+            }
+        }
+
+        > span[data-r=d9-fc-caption] { /** value label */
+            grid-row: 1;
+            grid-column: 1;
+            font-size: ${CssVars.FONT_SIZE};
+            font-weight: unset;
+            color: ${PlanSelectionCssVars.ELEMENT_VALUE_LABEL_COLOR};
+            white-space: normal;
+            overflow: unset;
+        }
+
+        > span[data-w=d9-caption]:nth-child(2) { /** value editor or renderer */
+            grid-row: 1;
+            grid-column: 2;
+        }
+
+        > div[data-w=d9-form-cell-invalid-msg] { /** invalid message */
+            grid-column: 2;
+
+            &:empty {
+                display: none;
             }
         }
     }

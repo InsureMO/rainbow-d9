@@ -9,7 +9,7 @@ import {
 import React, {ForwardedRef, forwardRef, KeyboardEvent, MouseEvent} from 'react';
 import styled from 'styled-components';
 import {CssVars, DOM_ID_WIDGET, DOM_KEY_WIDGET} from './constants';
-import {Check} from './icons';
+import {Check, Times} from './icons';
 import {OmitHTMLProps, OmitNodeDef} from './types';
 
 export type CheckboxPossibleValues = [NullPropValue | PrimitivePropValue, NullPropValue | PrimitivePropValue];
@@ -17,6 +17,7 @@ export type CheckboxPossibleValues = [NullPropValue | PrimitivePropValue, NullPr
 /** checkbox configuration definition */
 export type CheckboxDef = ValueChangeableNodeDef & OmitHTMLProps<HTMLDivElement> & {
 	values?: CheckboxPossibleValues;
+	emptyWhenFalse?: boolean;
 };
 /** checkbox widget definition, with html attributes */
 export type CheckboxProps = OmitNodeDef<CheckboxDef> & WidgetProps;
@@ -38,6 +39,10 @@ const ACheckbox = styled.div.attrs(({id}) => {
     fill: ${CssVars.FONT_COLOR};
     cursor: pointer;
 
+    &[data-visible=false] {
+        display: none;
+    }
+
     &[data-checked=true] {
         > svg {
             opacity: 1;
@@ -45,13 +50,11 @@ const ACheckbox = styled.div.attrs(({id}) => {
     }
 
     &[data-checked=false] {
-        > svg {
-            opacity: 0;
+        &[data-empty-when-false=true] {
+            > svg {
+                opacity: 0;
+            }
         }
-    }
-
-    &[data-visible=false] {
-        display: none;
     }
 
     &[disabled], &[data-disabled=true] {
@@ -112,7 +115,7 @@ const ACheckbox = styled.div.attrs(({id}) => {
 
 export const Checkbox = forwardRef((props: CheckboxProps, ref: ForwardedRef<HTMLDivElement>) => {
 	const {
-		values = [true, false],
+		values = [true, false], emptyWhenFalse = true,
 		$pp, $wrapped: {$onValueChange, $model, $avs: {$disabled, $visible}},
 		...rest
 	} = props;
@@ -142,9 +145,9 @@ export const Checkbox = forwardRef((props: CheckboxProps, ref: ForwardedRef<HTML
 	const checked = (value ?? '') == (values[0] ?? '');
 
 	return <ACheckbox data-disabled={$disabled} data-visible={$visible} tabIndex={0}
-	                  data-checked={checked}
+	                  data-checked={checked} data-empty-when-false={emptyWhenFalse}
 	                  onClick={onClick} onKeyUp={onKeyUp} {...rest} ref={ref}>
-		{<Check/>}
+		{checked ? <Check/> : (emptyWhenFalse ? <Check/> : <Times/>)}
 	</ACheckbox>;
 });
 
