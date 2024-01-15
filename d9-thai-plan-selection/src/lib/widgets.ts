@@ -2,6 +2,7 @@ import {CssVars, DOM_ID_WIDGET, DOM_KEY_WIDGET, Utils} from '@rainbow-d9/n2';
 import styled from 'styled-components';
 
 export const PlanSelectionCssVars = {
+	BACKGROUND_COLOR: `var(--d9-plan-selection-background-color, ${CssVars.BACKGROUND_COLOR})`,
 	HEADER_TITLE_PADDING: 'var(--d9-plan-selection-header-title-padding, 16px 0)',
 	HEADER_TITLE_FONT_SIZE: 'var(--d9-plan-selection-header-title-font-size, 2em)',
 	HEADER_TITLE_FONT_WEIGHT: `var(--d9-plan-selection-header-title-font-weight, ${CssVars.FONT_BOLD})`,
@@ -21,6 +22,7 @@ export const PlanSelectionCssVars = {
 	ELEMENT_INDENT: `var(--d9-plan-selection-element-indent, 16px)`,
 	ELEMENT_PADDING: `var(--d9-plan-selection-element-padding, 0 12px)`,
 	ELEMENT_VALUE_LABEL_COLOR: `var(--d9-plan-selection-element-value-label-color, #888)`,
+	ELEMENT_VALUE_COLOR: `var(--d9-plan-selection-element-value-color, rgb(118, 187, 175))`,
 	ELEMENT_VALUE_UNIT_GAP: `var(--d9-plan-selection-element-value-unit-gap, 12px)`,
 	ELEMENT_UNIT_LABEL_COLOR: `var(--d9-plan-selection-element-unit-label-color, #888)`
 };
@@ -36,6 +38,8 @@ export const APlanSelection = styled.div.attrs<{
 		return {
 			[DOM_KEY_WIDGET]: dataW || 'd9-plan-selection',
 			[DOM_ID_WIDGET]: id,
+			'data-v-scroll': '',
+			'data-h-scroll': '',
 			style: {
 				'--grid-template-columns': `${Utils.toCssSize(computedLineHeaderWidth)} repeat(${columnCount}, ${Utils.toCssSize(computedColumnWidth)})`,
 				'--max-height': Utils.toCssSize(maxHeight)
@@ -51,6 +55,7 @@ export const APlanSelection = styled.div.attrs<{
     grid-column: var(--grid-column);
     grid-row: var(--grid-row);
     max-height: var(--max-height);
+    background-color: ${PlanSelectionCssVars.BACKGROUND_COLOR};
     overflow: auto;
 
     &[data-visible=false] {
@@ -59,15 +64,22 @@ export const APlanSelection = styled.div.attrs<{
 `;
 export const PlanSelectionTopLeftCorner = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-plan-selection-top-left-corner'})`
     display: block;
-    position: relative;
+    position: sticky;
+    top: 0;
+    left: 0;
     border-bottom: ${CssVars.BORDER};
+    background-color: ${PlanSelectionCssVars.BACKGROUND_COLOR};
+    z-index: 1;
 `;
 // noinspection CssUnresolvedCustomProperty
 export const PlanHeader = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-plan-selection-header'})`
     display: flex;
-    position: relative;
+    position: sticky;
+    top: 0;
     flex-direction: column;
     border-bottom: ${CssVars.BORDER};
+    background-color: ${PlanSelectionCssVars.BACKGROUND_COLOR};
+    z-index: 1;
 
     > div[data-w=d9-plan-selection-header-title] {
         background-color: ${PlanSelectionCssVars.HEADER_EVEN_BACKGROUND_COLOR};
@@ -158,25 +170,27 @@ export const PlanElementColumnHeaderTitle = styled.div.attrs({[DOM_KEY_WIDGET]: 
         min-height: ${CssVars.INPUT_HEIGHT};
 
         &[data-plan-element-level="0"] {
+            margin-left: ${PlanSelectionCssVars.ELEMENT_INDENT};
             font-weight: ${CssVars.FONT_BOLD};
         }
 
         &[data-plan-element-level="1"] {
-            margin-left: ${PlanSelectionCssVars.ELEMENT_INDENT};
-        }
-
-        &[data-plan-element-level="2"] {
             margin-left: calc(${PlanSelectionCssVars.ELEMENT_INDENT} * 2);
         }
 
-        &[data-plan-element-level="3"] {
+        &[data-plan-element-level="2"] {
             margin-left: calc(${PlanSelectionCssVars.ELEMENT_INDENT} * 3);
+        }
+
+        &[data-plan-element-level="3"] {
+            margin-left: calc(${PlanSelectionCssVars.ELEMENT_INDENT} * 4);
         }
     }
 `;
 export const PlanElementCell = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-plan-selection-element-cell'})`
     display: flex;
     position: relative;
+    flex-direction: column;
     align-items: center;
     justify-content: flex-start;
     border-bottom: ${CssVars.BORDER};
@@ -285,6 +299,7 @@ export const PlanElementCell = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-plan-sele
 
             > span[data-w=d9-caption]:nth-child(2) {
                 > span[data-plan-element-fix-value=true] {
+                    color: ${PlanSelectionCssVars.ELEMENT_VALUE_COLOR};
                 }
 
                 > span[data-plan-element-fix-value-unit=true]:not(:empty) { /** fixed value with unit */
