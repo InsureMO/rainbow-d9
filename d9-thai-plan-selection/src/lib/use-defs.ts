@@ -13,17 +13,17 @@ export interface PlanElementDefOrdered {
 
 export type PlanDefOrdered = Array<PlanElementDefOrdered>;
 
-interface ExistsElement {
+export interface ExistsElement {
 	displayOrder: number;
 	map: ExistsCodeMap;
 	ordered: Array<PlanElementDefOrdered>;
 }
 
-interface ExistsCodeMap {
+export interface ExistsCodeMap {
 	[key: PlanElementCode]: ExistsElement;
 }
 
-const orderDef = (
+export const orderDef = (
 	children: () => Array<PlanElementDef>,
 	ordered: PlanDefOrdered, orderedCodeMap: ExistsCodeMap
 ) => {
