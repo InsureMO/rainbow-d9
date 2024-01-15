@@ -280,6 +280,7 @@ export const Caption = forwardRef((props: CaptionProps, ref: ForwardedRef<HTMLSp
 			value = '';
 		}
 		try {
+			// noinspection JSUnresolvedReference
 			if (Array.isArray(value)) {
 				value = value.filter(item => item != null).map(item => {
 					if (typeof item === 'object' && !isValidElement(item)) {

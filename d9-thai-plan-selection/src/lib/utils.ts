@@ -59,7 +59,7 @@ export const guardPlanTitle = (options: {
 	const {def, planDef} = options;
 	return def != null
 		? def(planDef)
-		: [{$wt: 'Label', $pp: 'def.name'} as LabelDef];
+		: [{$wt: 'Caption', text: planDef.name} as LabelDef];
 };
 
 export const guardPlanSubTitle = (options: {
@@ -119,7 +119,7 @@ export const guardElementTitle = (options: {
 	return def != null
 		? def(elementDef, elementLevel)
 		: [{
-			$wt: 'Label', $pp: 'def.name',
+			$wt: 'Caption', text: elementDef.name,
 			'data-plan-element-level': elementLevel, ...domElementAttr
 		} as LabelDef];
 };

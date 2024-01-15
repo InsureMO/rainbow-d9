@@ -18,7 +18,14 @@ import DemoData from './demo.json';
 import DemoContent from './demo.md';
 
 $d9n2.intl.labels['en-US'] = {
-	'After Tax': '税后'
+	'Standard Plan #1': '标准保障计划 #1',
+	'After Tax': '税后',
+	'Fire & Theft': '火灾和盗抢',
+	'Personal Accident - Death & Disability for Driver': '个人意外 - 驾驶员身故和残疾',
+	'Sum Insured': '保额',
+	'Limit': '限额',
+	'Per Accident': '每次事故',
+	'฿': '泰铢'
 };
 
 export const ThaiPlanSelection = () => {
