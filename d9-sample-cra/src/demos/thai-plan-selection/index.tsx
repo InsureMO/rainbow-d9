@@ -1,11 +1,21 @@
-import {StandaloneRoot, VUtils} from '@rainbow-d9/n1';
-import {$d9n2, Alert, Dialog, GlobalEventBusProvider, RemoteRequest, YesNoDialog} from '@rainbow-d9/n2';
+import {BaseModel, PropValue, StandaloneRoot, VUtils} from '@rainbow-d9/n1';
+import {
+	$d9n2,
+	Alert,
+	ButtonClickOptions,
+	Dialog,
+	GlobalEventBusProvider,
+	RemoteRequest,
+	YesNoDialog
+} from '@rainbow-d9/n2';
 import {
 	PlanCategoryDef,
 	PlanCoverageDef,
 	PlanDef,
 	PlanDefs,
 	PlanElementFixedValueDef,
+	PlanElementNumberValueDef,
+	PlanElementOptionsValueDef,
 	PlanElementType,
 	PlanElementValueEditType
 } from '@rainbow-d9/thai-plan-selection';
@@ -25,7 +35,8 @@ $d9n2.intl.labels['en-US'] = {
 	'Sum Insured': '保额',
 	'Limit': '限额',
 	'Per Accident': '每次事故',
-	'฿': '泰铢'
+	'฿': '泰铢',
+	'Buy': '购买'
 };
 
 export const ThaiPlanSelection = () => {
@@ -40,14 +51,50 @@ export const ThaiPlanSelection = () => {
 							code: 'V', name: 'Voluntary', type: PlanElementType.CATEGORY, children: [
 								{
 									code: 'ODFTD', name: 'Own Damage & Fire & Theft Deductible',
-									type: PlanElementType.COVERAGE
+									type: PlanElementType.COVERAGE,
+									values: [
+										{
+											code: 'si', label: 'Sum Insured', defaultValue: 950_000,
+											options: [{value: 900_000}, {value: 950_000}, {value: 1_000_000}],
+											editType: PlanElementValueEditType.OPTIONS
+										} as PlanElementOptionsValueDef,
+										{
+											code: 'limit', label: 'Limit',
+											options: [{value: 200_000}, {value: 300_000}, {value: 500_000}],
+											editType: PlanElementValueEditType.OPTIONS,
+											unit: 'Per Accident'
+										} as PlanElementOptionsValueDef
+									]
 								} as PlanCoverageDef,
 								{
-									code: 'FT', name: 'Fire & Theft', type: PlanElementType.COVERAGE
+									code: 'FT', name: 'Fire & Theft', type: PlanElementType.COVERAGE,
+									values: [
+										{
+											code: 'si', label: 'Sum Insured',
+											editType: PlanElementValueEditType.NUMBER,
+											min: 1000, max: 5000, step: 1000
+										} as PlanElementNumberValueDef
+									]
 								} as PlanCoverageDef,
 								{
 									code: 'TPLBI', name: 'Third Party Liability - Bodily Injury',
-									type: PlanElementType.COVERAGE
+									type: PlanElementType.COVERAGE,
+									values: [
+										{
+											code: 'si', label: 'Sum Insured', defaultValue: 50000,
+											editType: PlanElementValueEditType.NUMBER
+										} as PlanElementNumberValueDef,
+										{
+											code: 'limit1', label: 'Limit', defaultValue: 1000,
+											editType: PlanElementValueEditType.NUMBER,
+											max: 5000, unit: 'Per Accident'
+										} as PlanElementNumberValueDef,
+										{
+											code: 'limit2', label: 'Limit', defaultValue: 5000,
+											editType: PlanElementValueEditType.NUMBER,
+											min: 5000, step: 1000, unit: 'Per Person'
+										} as PlanElementNumberValueDef
+									]
 								} as PlanCoverageDef,
 								{
 									code: 'TPLPDD', name: 'Third Party Liability - Property Damage Deductible',
@@ -105,6 +152,27 @@ export const ThaiPlanSelection = () => {
 				{
 					code: 'plan2', name: 'Standard Plan #2', elements: [
 						{
+							code: 'V', name: 'Voluntary', type: PlanElementType.CATEGORY, children: [
+								{
+									code: 'ODFTD', name: 'Own Damage & Fire & Theft Deductible',
+									type: PlanElementType.COVERAGE,
+									values: [
+										{
+											code: 'si', label: 'Sum Insured', defaultValue: 850_000,
+											options: [{value: 800_000}, {value: 850_000}, {value: 900_000}],
+											editType: PlanElementValueEditType.OPTIONS
+										} as PlanElementOptionsValueDef,
+										{
+											code: 'limit', label: 'Limit',
+											options: [{value: 200_000}, {value: 300_000}, {value: 500_000}],
+											editType: PlanElementValueEditType.OPTIONS,
+											unit: 'Per Accident'
+										} as PlanElementOptionsValueDef
+									]
+								} as PlanCoverageDef
+							]
+						} as PlanCategoryDef,
+						{
 							code: 'SC',
 							name: 'Special Cews',
 							type: PlanElementType.CATEGORY,
@@ -118,6 +186,11 @@ export const ThaiPlanSelection = () => {
 					]
 				} as PlanDef
 			];
+		},
+		buy: (options: ButtonClickOptions<BaseModel, PropValue>) => {
+			console.log(options);
+			// @ts-ignore
+			console.log(options.model.$revoke());
 		}
 	};
 

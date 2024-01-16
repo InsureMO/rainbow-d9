@@ -1,22 +1,29 @@
-import {BaseModel, ModelHolder, MUtils, PropertyPath, VUtils, Wrapper} from '@rainbow-d9/n1';
-import {CaptionValueToLabelFormats, LabelDef, LabelLike} from '@rainbow-d9/n2';
+import {BaseModel, ModelHolder, PropertyPath, Wrapper} from '@rainbow-d9/n1';
+import {BoxDef, CaptionDef, CaptionValueToLabelFormats, LabelDef} from '@rainbow-d9/n2';
 import React from 'react';
+import {PlanElementUnit} from './plan-element-unit';
 import {
+	PlanDef,
 	PlanElementCode,
 	PlanElementFixedValueDef,
-	PlanElementValueDef,
 	PlanMutableElementDef,
 	PlanSelectionDef,
 	SelectedPlan,
-	SelectedPlanElement
+	SelectedPlanElement,
+	SelectedPlans
 } from './types';
+import {useElementDefaultValue} from './use-element-default-value';
 
 export interface PlanElementFixedValueProps {
+	planDef: PlanDef;
 	elementDef: PlanMutableElementDef;
-	valueDef: PlanElementValueDef;
+	valueDef: PlanElementFixedValueDef;
 	plan: SelectedPlan;
-	elementCodes: Array<PlanElementCode>;
+	plans: SelectedPlans;
+	$root: BaseModel;
+	/** $root + $p2r => values */
 	$p2r: PropertyPath;
+	elementCodes: Array<PlanElementCode>;
 	element: SelectedPlanElement;
 	values: SelectedPlanElement['values'];
 	elementFixedValue?: PlanSelectionDef['elementFixedValue'];
@@ -25,47 +32,45 @@ export interface PlanElementFixedValueProps {
 export const PlanElementFixedValue = (props: PlanElementFixedValueProps) => {
 	const {
 		elementDef: elementDef, valueDef: valueDef,
-		plan: planModel, elementCodes, $p2r, element: elementModel, values: valuesModel,
+		plan: planModel, elementCodes, $root, $p2r,
+		element: elementModel, values: valuesModel,
 		elementFixedValue
 	} = props;
-	const {code: $pp, label, defaultValue, unit} = valueDef as PlanElementFixedValueDef;
+	const {code: $pp, label, defaultValue} = valueDef;
+
+	useElementDefaultValue({model: valuesModel, $pp, defaultValues: [defaultValue]});
 
 	const root = planModel as unknown as BaseModel;
-	if (defaultValue != null) {
-		MUtils.setValue(valuesModel, $pp, defaultValue);
-	}
-
 	if (elementFixedValue == null) {
 		const def = {
-			$wt: 'Label.FC', $pp, $root: root, $model: valuesModel, $p2r, label,
-			'data-plan-element-fix-value': true,
-			valueToLabel: (value, formats: CaptionValueToLabelFormats) => {
-				const displayLabel = ((): string => {
-					try {
-						// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-						// @ts-ignore
-						return value == null ? '' : formats.nf0(value);
-					} catch (e) {
-						console.error(e);
-						return value == null ? '' : `${value}`;
+			$wt: 'Box.FC', $root, $model: valuesModel, $p2r, $pp: '.', label,
+			$nodes: [
+				{
+					$wt: 'Label', $pp,
+					'data-plan-element-fix-value': true,
+					valueToLabel: (value, formats: CaptionValueToLabelFormats) => {
+						try {
+							// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+							// @ts-ignore
+							return value == null ? '' : formats.nf0(value);
+						} catch (e) {
+							console.error(e);
+							return value == null ? '' : `${value}`;
+						}
 					}
-				})();
-				const unit$wrapped = {
-					$root: root, $model: valuesModel, $p2r, $onValueChange: VUtils.noop, $avs: {}
-				};
-				return <>
-					<span data-plan-element-fix-value={true}>{displayLabel}</span>
-					<span data-plan-element-fix-value-unit={true}><LabelLike label={unit}
-					                                                         $wrapped={unit$wrapped}/></span>
-				</>;
-			}
-		} as LabelDef & ModelHolder;
+				} as LabelDef,
+				{
+					$wt: 'Caption',
+					text: <PlanElementUnit valueDef={valueDef} $root={$root} $p2r={$p2r} values={valuesModel}/>
+				} as CaptionDef
+			]
+		} as BoxDef & ModelHolder;
 
 		return <Wrapper {...def} />;
 	} else {
 		return <>
 			{elementFixedValue({
-				elementDef, valueDef, plan: planModel, elementCodes, element: elementModel, values: valuesModel
+				elementDef, valueDef, plan: planModel, elementCodes, $p2r, element: elementModel, values: valuesModel
 			}).map(def => {
 				return <Wrapper {...def} $root={root} $model={valuesModel} $p2r={$p2r}/>;
 			})}

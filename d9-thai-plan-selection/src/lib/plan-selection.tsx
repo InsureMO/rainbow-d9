@@ -1,30 +1,28 @@
-import {BaseModel, MUtils, PPUtils, PropValue, VUtils, WrappedAttributes} from '@rainbow-d9/n1';
-import {LabelLike} from '@rainbow-d9/n2';
-import {nanoid} from 'nanoid';
+import {MUtils, PPUtils} from '@rainbow-d9/n1';
 import React from 'react';
-import {PlanElement} from './plan-element';
-import {PlanCode, PlanSelectionProps, SelectedPlans} from './types';
+import {PlanSelectionEventBusProvider} from './event/plan-selection-event-bus';
+import {PlanBodies} from './plan-bodies';
+import {PlanFooters} from './plan-footers';
+import {PlanHeaders} from './plan-headers';
+import {PlanSelectionValueHandler} from './plan-selection-value-handler';
+import {PlanSelectionProps, SelectedPlans} from './types';
 import {useDefs} from './use-defs';
-import {
-	buildPlanOrElementDefCodesMap,
-	computeColumnWidth,
-	findSelectedPlan,
-	guardPlanSubTitle,
-	guardPlanTitle,
-	PlanDefCodesMap
-} from './utils';
-import {APlanSelection, PlanHeader, PlanHeaderSubTitle, PlanHeaderTitle, PlanSelectionTopLeftCorner} from './widgets';
+import {computeColumnWidth} from './utils';
+import {APlanSelection} from './widgets';
 
 export const PlanSelection = (props: PlanSelectionProps) => {
 	const {
 		$pp, $wrapped,
 		columns = 3, columnWidth, lineHeaderWidth, maxHeight,
 		defs,
-		currencySymbol, premiumDescription,
-		planTitle, planSubTitle, elementTitle, elementFixedValue,
+		currencySymbol, premiumDescription, buyText, buy,
+		planTitle, planSubTitle, elementTitle,
+		elementOptionsValue, elementNumberValue, elementNumberValueValidator, elementFixedValue,
+		planOperators,
+		calculate, calculationDelay = 1,
 		...rest
 	} = props;
-	const {$p2r, $avs: {$disabled, $visible}} = $wrapped;
+	const {$root, $p2r, $avs: {$disabled, $visible}} = $wrapped;
 
 	const {initialized, defs: planDefs, orderedDefs} = useDefs(defs);
 	if (!initialized) {
@@ -36,55 +34,37 @@ export const PlanSelection = (props: PlanSelectionProps) => {
 
 	// TODO there might be pages
 	const displayPlanDefs = (planDefs ?? []).slice(0, computedColumnCount);
-	const displayPlanDefCodesMap = displayPlanDefs.reduce((map, def) => {
-		map[def.code] = buildPlanOrElementDefCodesMap(() => def.elements ?? []);
-		return map;
-	}, {} as Record<PlanCode, PlanDefCodesMap>);
 	let plansData = MUtils.getValue($wrapped.$model, $pp) as unknown as SelectedPlans;
 	if (plansData == null) {
 		// guard plans instance model
 		plansData = {};
-		MUtils.setValue($wrapped.$model, $pp, plansData as unknown as PropValue);
+		// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+		// @ts-ignore
+		MUtils.setValue($wrapped.$model, $pp, plansData);
 	}
+	const $p2rOfPlans = PPUtils.concat($p2r, $pp);
 
-	return <APlanSelection {...rest} data-disabled={$disabled} data-visible={$visible}
-	                       columnCount={computedColumnCount}
-	                       computedColumnWidth={computedColumnWidth} computedLineHeaderWidth={computedLineHeaderWidth}
-	                       maxHeight={maxHeight}
-	                       id={PPUtils.asId(PPUtils.absolute($p2r, $pp), props.id)}>
-		<PlanSelectionTopLeftCorner/>
-		{displayPlanDefs.map((planDef, displayIndex) => {
-			const planData = findSelectedPlan(plansData, planDef.code);
-			// merge instance data and definition data
-			const model = {def: planDef, data: planData} as unknown as PropValue;
-			const root = {$plans: model} as unknown as BaseModel;
-			const $myWrapped: WrappedAttributes = {
-				$root: root, $model: model, $p2r: '$plans',
-				$onValueChange: VUtils.noop, $avs: {}
-			};
-			// index starts from 0
-			const odd = displayIndex % 2 === 0;
-
-			return <PlanHeader data-odd={odd} key={planDef.code}>
-				<PlanHeaderTitle>
-					{guardPlanTitle({def: planTitle, planDef}).map(label => {
-						return <LabelLike key={nanoid()} label={label} $wrapped={$myWrapped}/>;
-					})}
-				</PlanHeaderTitle>
-				<PlanHeaderSubTitle>
-					{guardPlanSubTitle({def: planSubTitle, currencySymbol, premiumDescription, planDef}).map(label => {
-						return <LabelLike key={nanoid()} label={label} $wrapped={$myWrapped}/>;
-					})}
-				</PlanHeaderSubTitle>
-			</PlanHeader>;
-		})}
-		{(orderedDefs ?? []).map(orderedDef => {
-			return <PlanElement orderedDef={orderedDef}
-			                    displayPlanDefs={displayPlanDefs} displayPlanDefCodesMap={displayPlanDefCodesMap}
-			                    elementTitle={elementTitle} elementLevel={0}
-			                    plansModel={plansData}
-			                    elementFixedValue={elementFixedValue}
-			                    key={orderedDef.code}/>;
-		})}
-	</APlanSelection>;
+	return <PlanSelectionEventBusProvider>
+		<PlanSelectionValueHandler calculate={calculate} calculationDelay={calculationDelay}/>
+		<APlanSelection {...rest} data-disabled={$disabled} data-visible={$visible}
+		                columnCount={computedColumnCount}
+		                computedColumnWidth={computedColumnWidth} computedLineHeaderWidth={computedLineHeaderWidth}
+		                maxHeight={maxHeight}
+		                id={PPUtils.asId(PPUtils.absolute($p2r, $pp), props.id)}>
+			<PlanHeaders $root={$root} $p2r={$p2rOfPlans}
+			             displayPlanDefs={displayPlanDefs} plans={plansData}
+			             planTitle={planTitle} planSubTitle={planSubTitle}
+			             currencySymbol={currencySymbol} premiumDescription={premiumDescription}/>
+			<PlanBodies $root={$root} $p2r={$p2rOfPlans}
+			            displayPlanDefs={displayPlanDefs} orderedDefs={orderedDefs} plans={plansData}
+			            elementTitle={elementTitle}
+			            elementOptionsValue={elementOptionsValue}
+			            elementNumberValue={elementNumberValue}
+			            elementNumberValueValidator={elementNumberValueValidator}
+			            elementFixedValue={elementFixedValue}/>
+			<PlanFooters $root={$root} $p2r={$p2rOfPlans}
+			             displayPlanDefs={displayPlanDefs} plans={plansData}
+			             planOperators={planOperators} buyText={buyText} buy={buy}/>
+		</APlanSelection>
+	</PlanSelectionEventBusProvider>;
 };

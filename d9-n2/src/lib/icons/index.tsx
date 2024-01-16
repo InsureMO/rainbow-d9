@@ -7,6 +7,7 @@ import {Backward} from './backward';
 import {CaretDown} from './caret-down';
 import {CaretLeft} from './caret-left';
 import {CaretRight} from './caret-right';
+import {Cart} from './cart';
 import {Check} from './check';
 import {Collapse} from './collapse';
 import {Date} from './date';
@@ -26,6 +27,7 @@ export {
 	Check, Times, Remove, Expand, Collapse, Edit, View, Forward, Backward,
 	CaretLeft, CaretRight, CaretDown, ArrowDown, AngleLeft, AngleRight,
 	Spinner,
+	Cart,
 
 	Registrar
 };

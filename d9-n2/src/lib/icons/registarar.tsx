@@ -7,6 +7,7 @@ import {Backward} from './backward';
 import {CaretDown} from './caret-down';
 import {CaretLeft} from './caret-left';
 import {CaretRight} from './caret-right';
+import {Cart} from './cart';
 import {Check} from './check';
 import {Collapse} from './collapse';
 import {Date} from './date';
@@ -57,7 +58,8 @@ IconsRegistrar.register({
 	arrowDown: () => <ArrowDown/>,
 	angleLeft: () => <AngleLeft/>,
 	angleRight: () => <AngleRight/>,
-	spinner: () => <Spinner/>
+	spinner: () => <Spinner/>,
+	cart: () => <Cart/>
 });
 
 export {IconsRegistrar};

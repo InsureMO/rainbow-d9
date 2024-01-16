@@ -1,4 +1,5 @@
 import {CssVars, DOM_ID_WIDGET, DOM_KEY_WIDGET, Utils} from '@rainbow-d9/n2';
+import color from 'color';
 import styled from 'styled-components';
 
 export const PlanSelectionCssVars = {
@@ -20,11 +21,22 @@ export const PlanSelectionCssVars = {
 	EVEN_BACKGROUND_COLOR: `var(--d9-plan-selection-even-background-color, ${CssVars.INVERT_COLOR})`,
 	ELEMENT_MIN_HEIGHT: `var(--d9-plan-selection-element-min-height, 40px)`,
 	ELEMENT_INDENT: `var(--d9-plan-selection-element-indent, 16px)`,
-	ELEMENT_PADDING: `var(--d9-plan-selection-element-padding, 0 12px)`,
+	ELEMENT_PADDING: `var(--d9-plan-selection-element-padding, 4px 12px)`,
+	ELEMENT_VALUE_GAP: `var(--d9-plan-selection-element-value-gap, 4px)`,
 	ELEMENT_VALUE_LABEL_COLOR: `var(--d9-plan-selection-element-value-label-color, #888)`,
 	ELEMENT_VALUE_COLOR: `var(--d9-plan-selection-element-value-color, rgb(118, 187, 175))`,
 	ELEMENT_VALUE_UNIT_GAP: `var(--d9-plan-selection-element-value-unit-gap, 12px)`,
-	ELEMENT_UNIT_LABEL_COLOR: `var(--d9-plan-selection-element-unit-label-color, #888)`
+	ELEMENT_OPTIONS_VALUE_MIN_WIDTH: `var(--d9-plan-selection-element-options-value-min-width, 60px)`,
+	ELEMENT_UNIT_FONT_FAMILY: `var(--d9-plan-selection-element-unit-font-family, ${CssVars.FONT_FAMILY})`,
+	ELEMENT_UNIT_FONT_SIZE: `var(--d9-plan-selection-element-unit-font-size, ${CssVars.FONT_SIZE})`,
+	ELEMENT_UNIT_LABEL_COLOR: `var(--d9-plan-selection-element-unit-label-color, #888)`,
+	FOOTER_OPERATOR_PADDING: 'var(--d9-plan-selection-footer-operator-padding, 16px 0)',
+	FOOTER_OPERATOR_FONT_SIZE: 'var(--d9-plan-selection-footer-operator-font-size, 16px)',
+	FOOTER_OPERATOR_FONT_WEIGHT: `var(--d9-plan-selection-footer-operator-font-weight, ${CssVars.FONT_BOLD})`,
+	FOOTER_OPERATOR_COLOR: `var(--d9-plan-selection-footer-operator-color, ${CssVars.INVERT_COLOR})`,
+	FOOTER_OPERATOR_BACKGROUND_COLOR: `var(--d9-plan-selection-footer-operator-background-color, rgb(241,156,56))`,
+	FOOTER_OPERATOR_SHADOW: `var(--d9-plan-selection-footer-operator-background-shadow, 0 0 0 3px ${color('rgb(241,156,56)').alpha(0.4)})`,
+	FOOTER_OPERATOR_HOVER_SHADOW: `var(--d9-plan-selection-footer-operator-background-hover-shadow, 0 0 0 3px ${color('rgb(241,156,56)').alpha(0.2)})`
 };
 
 // noinspection CssUnresolvedCustomProperty
@@ -71,8 +83,7 @@ export const PlanSelectionTopLeftCorner = styled.div.attrs({[DOM_KEY_WIDGET]: 'd
     background-color: ${PlanSelectionCssVars.BACKGROUND_COLOR};
     z-index: 1;
 `;
-// noinspection CssUnresolvedCustomProperty
-export const PlanHeader = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-plan-selection-header'})`
+export const APlanHeader = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-plan-selection-header'})`
     display: flex;
     position: sticky;
     top: 0;
@@ -192,7 +203,8 @@ export const PlanElementCell = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-plan-sele
     position: relative;
     flex-direction: column;
     align-items: center;
-    justify-content: flex-start;
+    justify-content: center;
+    row-gap: ${PlanSelectionCssVars.ELEMENT_VALUE_GAP};
     border-bottom: ${CssVars.BORDER};
     background-color: ${PlanSelectionCssVars.EVEN_BACKGROUND_COLOR};
     padding: ${PlanSelectionCssVars.ELEMENT_PADDING};
@@ -205,8 +217,8 @@ export const PlanElementCell = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-plan-sele
         justify-content: center;
 
         > svg[data-icon=times] {
-            height: calc(${CssVars.INPUT_HEIGHT} / 5 * 3);
-            width: calc(${CssVars.INPUT_HEIGHT} / 5 * 3);
+            height: calc(${CssVars.INPUT_HEIGHT} / 5 * 2);
+            width: calc(${CssVars.INPUT_HEIGHT} / 5 * 2);
             fill: ${CssVars.DANGER_COLOR};
         }
     }
@@ -295,20 +307,6 @@ export const PlanElementCell = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-plan-sele
         grid-template-columns: 35% 65%;
         width: 100%;
 
-        &[data-plan-element-fix-value=true] { /** fixed value */
-
-            > span[data-w=d9-caption]:nth-child(2) {
-                > span[data-plan-element-fix-value=true] {
-                    color: ${PlanSelectionCssVars.ELEMENT_VALUE_COLOR};
-                }
-
-                > span[data-plan-element-fix-value-unit=true]:not(:empty) { /** fixed value with unit */
-                    margin-left: ${PlanSelectionCssVars.ELEMENT_VALUE_UNIT_GAP};
-                    color: ${PlanSelectionCssVars.ELEMENT_UNIT_LABEL_COLOR};
-                }
-            }
-        }
-
         > span[data-r=d9-fc-caption] { /** value label */
             grid-row: 1;
             grid-column: 1;
@@ -319,9 +317,23 @@ export const PlanElementCell = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-plan-sele
             overflow: unset;
         }
 
-        > span[data-w=d9-caption]:nth-child(2) { /** value editor or renderer */
+        > div[data-w=d9-box] { /** value editor or renderer */
             grid-row: 1;
             grid-column: 2;
+
+            > div[data-w=d9-dropdown][data-plan-element-options-value=true],
+            > div[data-w=d9-dropdown][data-plan-element-number-value=true],
+            > input[data-w=d9-input][data-plan-element-number-value=true] {
+                width: unset;
+                min-width: ${PlanSelectionCssVars.ELEMENT_OPTIONS_VALUE_MIN_WIDTH};
+            }
+
+            > div[data-w=d9-dropdown][data-plan-element-options-value=true] > span[data-w=d9-dropdown-label],
+            > div[data-w=d9-dropdown][data-plan-element-number-value=true] > span[data-w=d9-dropdown-label],
+            > input[data-w=d9-input][data-plan-element-number-value=true],
+            > span[data-w=d9-caption][data-plan-element-fix-value=true] {
+                color: ${PlanSelectionCssVars.ELEMENT_VALUE_COLOR};
+            }
         }
 
         > div[data-w=d9-form-cell-invalid-msg] { /** invalid message */
@@ -329,6 +341,83 @@ export const PlanElementCell = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-plan-sele
 
             &:empty {
                 display: none;
+            }
+        }
+    }
+`;
+export const PlanElementUnitLabel = styled.span.attrs({[DOM_KEY_WIDGET]: 'd9-plan-selection-element-unit'})`
+    display: flex;
+    position: relative;
+    align-items: center;
+    height: ${CssVars.INPUT_HEIGHT};
+    font-family: ${PlanSelectionCssVars.ELEMENT_UNIT_FONT_FAMILY};
+    font-size: ${PlanSelectionCssVars.ELEMENT_UNIT_FONT_SIZE};
+    color: ${PlanSelectionCssVars.ELEMENT_UNIT_LABEL_COLOR};
+
+    &:not(:empty) { /** fixed value with unit */
+        margin-left: ${PlanSelectionCssVars.ELEMENT_VALUE_UNIT_GAP};
+    }
+`;
+export const PlanSelectionBottomLeftCorner = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-plan-selection-bottom-left-corner'})`
+    display: block;
+    position: sticky;
+    bottom: 0;
+    left: 0;
+    border-top: ${CssVars.BORDER};
+    border-bottom: ${CssVars.BORDER};
+    margin-top: calc(${CssVars.BORDER_WIDTH} * -1);
+    background-color: ${PlanSelectionCssVars.BACKGROUND_COLOR};
+`;
+export const PlanFooter = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-plan-selection-footer'})`
+    display: flex;
+    position: sticky;
+    bottom: 0;
+    flex-direction: column;
+    border-top: ${CssVars.BORDER};
+    border-bottom: ${CssVars.BORDER};
+    margin-top: calc(${CssVars.BORDER_WIDTH} * -1);
+
+    > div[data-w=d9-plan-selection-footer-operator] {
+        background-color: ${PlanSelectionCssVars.EVEN_BACKGROUND_COLOR};
+    }
+
+    &[data-odd=true] {
+        > div[data-w=d9-plan-selection-footer-operator] {
+            background-color: ${PlanSelectionCssVars.ODD_BACKGROUND_COLOR};
+        }
+    }
+`;
+export const PlanFooterOperator = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-plan-selection-footer-operator'})`
+    display: flex;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+    padding: ${PlanSelectionCssVars.FOOTER_OPERATOR_PADDING};
+
+    > button[data-w=d9-button] {
+        font-size: ${PlanSelectionCssVars.FOOTER_OPERATOR_FONT_SIZE};
+        font-weight: ${PlanSelectionCssVars.FOOTER_OPERATOR_FONT_WEIGHT};
+        height: unset;
+        min-height: ${CssVars.INPUT_HEIGHT};
+
+        &[data-ink=primary][data-plan-buy=true] {
+            color: ${PlanSelectionCssVars.FOOTER_OPERATOR_COLOR};
+            border-color: ${PlanSelectionCssVars.FOOTER_OPERATOR_BACKGROUND_COLOR};
+            background-color: ${PlanSelectionCssVars.FOOTER_OPERATOR_BACKGROUND_COLOR};
+
+            &:hover {
+                box-shadow: ${PlanSelectionCssVars.FOOTER_OPERATOR_HOVER_SHADOW};
+            }
+
+            &:focus, &:active {
+                box-shadow: ${PlanSelectionCssVars.FOOTER_OPERATOR_SHADOW};
+            }
+
+            > span[data-w=d9-deco-lead] {
+                > svg[data-icon=cart] {
+                    height: calc(${CssVars.FONT_SIZE} * 0.8);
+                    margin-top: 2px;
+                }
             }
         }
     }

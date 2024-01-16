@@ -1,13 +1,21 @@
 import {NodeDef, Undefinable, VUtils} from '@rainbow-d9/n1';
-import {CaptionDef, CaptionValueToLabelFormats, LabelDef, Utils} from '@rainbow-d9/n2';
+import {ButtonClick, ButtonDef, CaptionDef, CaptionValueToLabelFormats, LabelDef, Utils} from '@rainbow-d9/n2';
 import {ReactNode} from 'react';
 import {
+	PlanBenefitDef,
 	PlanCategoryDef,
 	PlanCode,
+	PlanCoverageDef,
 	PlanDef,
 	PlanElementCode,
 	PlanElementDef,
+	PlanElementFixedValueDef,
+	PlanElementNumberValueDef,
+	PlanElementOptionsValueDef,
 	PlanElementType,
+	PlanElementValueDef,
+	PlanElementValueEditType,
+	PlanLimitDeductibleDef,
 	PlanSelectionDef,
 	SelectedPlan,
 	SelectedPlans
@@ -16,6 +24,29 @@ import {PlanElementDefOrdered} from './use-defs';
 
 export const isCategoryPlanElementDef = (def: PlanElementDef): def is PlanCategoryDef => {
 	return def.type === PlanElementType.CATEGORY;
+};
+// noinspection JSUnusedGlobalSymbols
+export const isCoveragePlanElementDef = (def: PlanElementDef): def is PlanCoverageDef => {
+	return def.type === PlanElementType.COVERAGE;
+};
+// noinspection JSUnusedGlobalSymbols
+export const isBenefitPlanElementDef = (def: PlanElementDef): def is PlanBenefitDef => {
+	return def.type === PlanElementType.BENEFIT;
+};
+// noinspection JSUnusedGlobalSymbols
+export const isLimitDeductiblePlanElementDef = (def: PlanElementDef): def is PlanLimitDeductibleDef => {
+	return def.type === PlanElementType.LIMIT_DEDUCTIBLE;
+};
+
+export const isElementOptionsValueDef = (def: PlanElementValueDef): def is PlanElementOptionsValueDef => {
+	return def.editType == PlanElementValueEditType.OPTIONS;
+};
+export const isElementNumberValueDef = (def: PlanElementValueDef): def is PlanElementNumberValueDef => {
+	return def.editType == PlanElementValueEditType.NUMBER;
+};
+// noinspection JSUnusedGlobalSymbols
+export const isElementFixedValueDef = (def: PlanElementValueDef): def is PlanElementFixedValueDef => {
+	return def.editType == PlanElementValueEditType.FIXED;
 };
 
 export const computeColumnWidth = (
@@ -53,40 +84,62 @@ export const findSelectedPlan = (plans: SelectedPlans, code: PlanCode): Selected
 	return found;
 };
 
+export type ModelProxy<T extends object, D> = T & { $def: D };
+/**
+ * attach plan definition into selected plan model, by proxy
+ */
+export const createPlanModelProxy = <T extends object, D>(plan: T, def: D): ModelProxy<T, D> => {
+	return new Proxy(plan, {
+		get: (target, prop) => {
+			if (prop === '$def') {
+				return def;
+			} else if (prop === '$revoke') {
+				return () => plan;
+			}
+			return target[prop];
+		}
+	}) as ModelProxy<T, D>;
+};
+
 export const guardPlanTitle = (options: {
-	def?: PlanSelectionDef['planTitle']; planDef: PlanDef;
+	def?: PlanSelectionDef['planTitle']; planDef: PlanDef; elementValueChanged: boolean;
 }): Array<NodeDef> => {
-	const {def, planDef} = options;
+	const {def, planDef, elementValueChanged} = options;
 	return def != null
-		? def(planDef)
+		? def(planDef, elementValueChanged)
 		: [{$wt: 'Caption', text: planDef.name} as LabelDef];
 };
 
 export const guardPlanSubTitle = (options: {
 	def?: PlanSelectionDef['planSubTitle'];
 	currencySymbol?: string | ReactNode; premiumDescription?: string | ReactNode;
-	planDef: PlanDef;
+	planDef: PlanDef; elementValueChanged: boolean;
 }): Array<NodeDef> => {
-	const {def, currencySymbol, premiumDescription, planDef} = options;
+	const {def, currencySymbol, premiumDescription, planDef, elementValueChanged} = options;
 
 	return def != null
-		? def(planDef, currencySymbol, premiumDescription)
+		? def(planDef, elementValueChanged, currencySymbol, premiumDescription)
 		: [
-			{
-				$wt: 'Label', $pp: 'data.premium.due',
-				'data-plan-premium': true,
-				valueToLabel: (value, formats: CaptionValueToLabelFormats) => {
-					try {
-						// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-						// @ts-ignore
-						return value == null ? '' : formats.nf0(value);
-					} catch (e) {
-						console.error(e);
-						return value == null ? '' : value;
-					}
-				},
-				leads: [currencySymbol].filter(x => VUtils.isNotBlank(x))
-			} as LabelDef,
+			elementValueChanged
+				? {
+					$wt: 'Caption', 'data-plan-premium': true, text: '???',
+					leads: [currencySymbol].filter(x => VUtils.isNotBlank(x))
+				} as CaptionDef
+				: {
+					$wt: 'Label', $pp: 'premium.due',
+					'data-plan-premium': true,
+					valueToLabel: (value, formats: CaptionValueToLabelFormats) => {
+						try {
+							// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+							// @ts-ignore
+							return value == null ? '' : formats.nf0(value);
+						} catch (e) {
+							console.error(e);
+							return value == null ? '' : value;
+						}
+					},
+					leads: [currencySymbol].filter(x => VUtils.isNotBlank(x))
+				} as LabelDef,
 			{
 				$wt: 'Caption', 'data-plan-premium-desc': true, text: premiumDescription
 			} as CaptionDef
@@ -122,6 +175,19 @@ export const guardElementTitle = (options: {
 			$wt: 'Caption', text: elementDef.name,
 			'data-plan-element-level': elementLevel, ...domElementAttr
 		} as LabelDef];
+};
+
+export const guardPlanOperators = (options: {
+	def?: PlanSelectionDef['planOperators']; planDef: PlanDef; planModel: SelectedPlan;
+	text?: string | ReactNode; click: ButtonClick;
+}) => {
+	const {def, planDef, planModel, text, click} = options;
+	return def != null
+		? def(planDef, planModel)
+		: [{
+			$wt: 'Button', text: VUtils.isBlank(text) ? 'Buy' : text,
+			leads: ['$icons.cart'], 'data-plan-buy': true, click
+		} as ButtonDef];
 };
 
 export type PlanElementDefCodesMap = {

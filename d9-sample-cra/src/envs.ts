@@ -3,7 +3,7 @@ import {MUtils, N1Logger, PPUtils, VUtils} from '@rainbow-d9/n1';
 import '@rainbow-d9/n2';
 import {CalendarUtils, CssVars} from '@rainbow-d9/n2';
 import {registerN2Widgets, Widget} from '@rainbow-d9/n3';
-import {registerPlanSelect, PlanSelectionCssVars} from '@rainbow-d9/thai-plan-selection';
+import {PlanSelectionCssVars, registerPlanSelect} from '@rainbow-d9/thai-plan-selection';
 import dayjs from 'dayjs';
 import ArraySupport from 'dayjs/plugin/arraySupport';
 import BuddhistEra from 'dayjs/plugin/buddhistEra';
@@ -84,7 +84,7 @@ export const GlobalStyles: any = createGlobalStyle`
         --d9-font-family: Roboto;
         --d9-font-color: #555;
         --d9-font-size: 14px;
-        --d9-border-color: #eee;
+        --d9-border-color: #CED4DA;
         --d9-input-height: 32px;
         --d9-common-tabs-font-size: 20px;
         --d9-common-tabs-font-weight: 600;
