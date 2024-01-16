@@ -1,4 +1,4 @@
-import {BaseModel, PropValue, StandaloneRoot, VUtils} from '@rainbow-d9/n1';
+import {BaseModel, MUtils, PropValue, StandaloneRoot, VUtils} from '@rainbow-d9/n1';
 import {
 	$d9n2,
 	Alert,
@@ -9,6 +9,7 @@ import {
 	YesNoDialog
 } from '@rainbow-d9/n2';
 import {
+	CalculationEvent,
 	PlanCategoryDef,
 	PlanCoverageDef,
 	PlanDef,
@@ -191,6 +192,14 @@ export const ThaiPlanSelection = () => {
 			console.log(options);
 			// @ts-ignore
 			console.log(options.model.$revoke());
+		},
+		calculate: async (event: CalculationEvent) => {
+			const {changes} = event;
+			[...new Set(changes.map(change => change.planDef.code))].map(code => {
+				return {code, premium: Math.ceil(50000 + Math.random() * 10000)};
+			}).forEach(({code, premium}) => {
+				MUtils.setValue(DemoData.plans, `${code}.premium.due`, premium);
+			});
 		}
 	};
 

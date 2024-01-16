@@ -8,3 +8,5 @@
 	- currencySymbol: ฿
 	- premiumDescription: After Tax
 	- buy: @ext.buy
+	- calculationDelay: 3
+	- calculate: @ext.calculate

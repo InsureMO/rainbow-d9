@@ -46,7 +46,11 @@ export const PlanHeader = (props: PlanHeaderProps) => {
 			if (planDef !== options.planDef) {
 				return;
 			}
-			forceUpdate();
+			if (elementValueChanged) {
+				setElementValueChanged(false);
+			} else {
+				forceUpdate();
+			}
 		};
 		on(PlanSelectionEventTypes.ELEMENT_VALUE_CHANGED, onElementValueChanged);
 		on(PlanSelectionEventTypes.PREMIUM_CALCULATED, onPremiumCalculated);
@@ -54,7 +58,7 @@ export const PlanHeader = (props: PlanHeaderProps) => {
 			off(PlanSelectionEventTypes.ELEMENT_VALUE_CHANGED, onElementValueChanged);
 			off(PlanSelectionEventTypes.PREMIUM_CALCULATED, onPremiumCalculated);
 		};
-	}, [on, off, forceUpdate, planDef]);
+	}, [on, off, forceUpdate, planDef, elementValueChanged]);
 
 	const planData = findSelectedPlan(plans, planDef.code);
 	// merge instance data and definition data
