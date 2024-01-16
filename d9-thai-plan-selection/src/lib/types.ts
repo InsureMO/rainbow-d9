@@ -1,6 +1,15 @@
-import {NodeDef, ValueChangeableNodeDef, WidgetProps} from '@rainbow-d9/n1';
-import {OmitHTMLProps, OmitNodeDef} from '@rainbow-d9/n2';
+import {
+	BaseModel,
+	NodeDef,
+	PropertyPath,
+	PropValue,
+	ValidationMonitor,
+	ValueChangeableNodeDef,
+	WidgetProps
+} from '@rainbow-d9/n1';
+import {ButtonClick, ModelCarriedHandler, OmitHTMLProps, OmitNodeDef} from '@rainbow-d9/n2';
 import {ReactNode} from 'react';
+import {PlansChangedEventOptions} from './event/plan-selection-event-bus-types';
 
 // plan definition part
 export type PlanElementCode = string;
@@ -39,7 +48,8 @@ export enum PlanElementValueEditType {
 	NUMBER = 'number',
 }
 
-export interface PlanElementValue {
+// noinspection DuplicatedCode
+export interface PlanElementValueDef {
 	code: PlanElementValueCode;
 	/** element value might be not required, which means default value is not required either */
 	defaultValue?: string | number;
@@ -50,23 +60,25 @@ export interface PlanElementValue {
 	editType: PlanElementValueEditType;
 }
 
-export interface PlanElementFixedValue extends PlanElementValue {
+export interface PlanElementFixedValueDef extends PlanElementValueDef {
 	editType: PlanElementValueEditType.FIXED;
 }
 
 export interface PlanElementValueOption {
-	value: string;
-	label: string;
+	value: number | string;
+	label?: number | string | ReactNode;
+	/** if label is not a number or string, provide the stringify function to enable dropdown filter */
+	stringify?: (label: string | ReactNode) => string;
 }
 
 export type PlanElementValueOptions = Array<PlanElementValueOption>;
 
-export interface PlanElementOptionsValue extends PlanElementValue {
+export interface PlanElementOptionsValueDef extends PlanElementValueDef {
 	editType: PlanElementValueEditType.OPTIONS;
 	options: PlanElementValueOptions;
 }
 
-export interface PlanElementNumberValue extends PlanElementValue {
+export interface PlanElementNumberValueDef extends PlanElementValueDef {
 	defaultValue?: number;
 	editType: PlanElementValueEditType.NUMBER;
 	min?: number;
@@ -77,8 +89,6 @@ export interface PlanElementNumberValue extends PlanElementValue {
 	 * the render type should be an options list (dropdown).
 	 */
 	step?: number;
-	/** default 0 */
-	fractionDigits?: number;
 }
 
 export type PlanMutableElementType = Exclude<PlanElementType, PlanElementType.CATEGORY>;
@@ -86,7 +96,7 @@ export type PlanMutableElementType = Exclude<PlanElementType, PlanElementType.CA
 export interface PlanMutableElementDef extends PlanElementDef {
 	type: PlanMutableElementType;
 	/** element value might be not required */
-	values?: Array<PlanElementValue>;
+	values?: Array<PlanElementValueDef>;
 	/**
 	 * usually customized plan, which means element can be unpinned.
 	 * default true
@@ -165,31 +175,34 @@ export interface Premium {
 	loadings?: Array<Loading>;
 }
 
-export interface SelectedPlanElementValue {
-	code: PlanElementValueCode;
-	value?: string | number;
-}
+export type SelectedPlanElementValue = string | number;
 
 export interface SelectedPlanElement {
 	code: PlanElementCode;
 	/** for unpinned element */
 	selected: boolean;
 	/** values are only for mutable plan element */
-	values?: Array<SelectedPlanElementValue>;
+	values?: Record<PlanElementValueCode, SelectedPlanElementValue>;
 	/** if there is premium details for plan element */
 	premium?: Premium;
+	children?: Record<PlanElementCode, SelectedPlanElement>;
 }
 
 export interface SelectedPlan {
 	code: PlanCode;
-	/** hierarchy exactly same as definition */
-	elements: Array<SelectedPlanElement>;
+	elements: Record<PlanElementCode, SelectedPlanElement>;
 	premium?: Premium;
 	/** default false */
 	selected?: boolean;
 }
 
-export type SelectedPlans = Array<SelectedPlan>;
+export type SelectedPlans = Record<PlanCode, SelectedPlan>;
+export type PlanChange = Omit<PlansChangedEventOptions, 'root' | 'model'>;
+export type PlanChanges = Array<PlanChange>;
+
+export interface CalculationEvent extends ModelCarriedHandler<BaseModel, PropValue> {
+	changes: PlanChanges;
+}
 
 /** configuration definition */
 export type PlanSelectionDef = ValueChangeableNodeDef & OmitHTMLProps<HTMLDivElement> & {
@@ -209,10 +222,43 @@ export type PlanSelectionDef = ValueChangeableNodeDef & OmitHTMLProps<HTMLDivEle
 	/** plan candidate definitions */
 	defs: PlanDefs | (() => Promise<PlanDefs>);
 	currencySymbol?: string | ReactNode;
+	premiumDescription?: string | ReactNode;
+	buyText?: string | ReactNode;
+	buy?: ButtonClick
 	/** plan header title */
-	planTitle?: Array<NodeDef>;
+	planTitle?: (def: PlanDef, elementValueChanged: boolean) => Array<NodeDef>;
 	/** plan header subtitle */
-	planSubTitle?: Array<NodeDef>;
+	planSubTitle?: (def: PlanDef, elementValueChanged: boolean, currencySymbol?: string | ReactNode, premiumDescription?: string | ReactNode) => Array<NodeDef>;
+	/** plan element title, level starts from 0 */
+	elementTitle?: (def: PlanElementDef, level: number) => Array<NodeDef>;
+	elementFixedValue?: (options: {
+		elementDef: PlanMutableElementDef; valueDef: PlanElementFixedValueDef;
+		plan: SelectedPlan; $p2r: PropertyPath; element: SelectedPlanElement; values: SelectedPlanElement['values'];
+		/** path to root is values model to plan model */
+		elementCodes: Array<PlanElementCode>;
+	}) => Array<NodeDef>;
+	elementOptionsValue?: (options: {
+		elementDef: PlanMutableElementDef; valueDef: PlanElementOptionsValueDef;
+		plan: SelectedPlan; $p2r: PropertyPath; element: SelectedPlanElement; values: SelectedPlanElement['values'];
+		/** path to root is values model to plan model */
+		elementCodes: Array<PlanElementCode>;
+		onValueChanged: (value: string | number) => Promise<void>;
+	}) => Array<NodeDef>;
+	elementNumberValue?: (options: {
+		elementDef: PlanMutableElementDef; valueDef: PlanElementNumberValueDef;
+		plan: SelectedPlan; $p2r: PropertyPath; element: SelectedPlanElement; values: SelectedPlanElement['values'];
+		/** path to root is values model to plan model */
+		elementCodes: Array<PlanElementCode>;
+		onValueChanged: (value: string | number) => Promise<void>;
+	}) => Array<NodeDef>;
+	elementNumberValueValidator?: (options: {
+		elementDef: PlanMutableElementDef; valueDef: PlanElementNumberValueDef;
+	}) => ValidationMonitor['$handle'];
+	planOperators?: (def: PlanDef, plan: SelectedPlan) => Array<NodeDef>;
+	/** default 1s */
+	calculationDelay?: number;
+	/** do calculation */
+	calculate?: (event: CalculationEvent) => Promise<void>;
 };
 /** widget definition, with html attributes */
 export type PlanSelectionProps = OmitNodeDef<PlanSelectionDef> & WidgetProps;

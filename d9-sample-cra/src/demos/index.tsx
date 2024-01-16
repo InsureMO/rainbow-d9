@@ -28,7 +28,10 @@ const DemoContainer = styled.div`
         grid-template-rows: 50vh 50vh;
     }
 `;
-const DemoMenus = styled.div`
+const DemoMenus = styled.div.attrs({
+	'data-v-scroll': '',
+	'data-h-scroll': ''
+})`
     display: flex;
     position: sticky;
     grid-row: 1 / span 2;
@@ -49,9 +52,10 @@ const DemoMenuHeader = styled.div`
     font-weight: ${CssVars.FONT_BOLD};
     color: ${CssVars.INVERT_COLOR};
     background-color: ${CssVars.PRIMARY_COLOR};
-    height: calc(${CssVars.INPUT_HEIGHT} * 1.6);
+    min-height: calc(${CssVars.INPUT_HEIGHT} * 1.6);
     border-bottom: ${CssVars.BORDER};
     border-bottom-width: 2px;
+    z-index: 1;
 `;
 const DemoMenu = styled.div`
     display: flex;
@@ -61,10 +65,13 @@ const DemoMenu = styled.div`
     font-family: ${CssVars.FONT_FAMILY};
     font-size: calc(${CssVars.FONT_SIZE} * 1.2);
     color: ${CssVars.FONT_COLOR};
-    height: calc(${CssVars.INPUT_HEIGHT} * 1.4);
+    min-height: calc(${CssVars.INPUT_HEIGHT} * 1.4);
     border-bottom: ${CssVars.BORDER};
     transition: all ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION};
     cursor: pointer;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 
     &[data-active=true] {
         &:before {

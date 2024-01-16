@@ -1,12 +1,58 @@
-import {NodeDef, VUtils} from '@rainbow-d9/n1';
-import {CaptionValueToLabelFormats, LabelDef, Utils} from '@rainbow-d9/n2';
+import {NodeDef, Undefinable, VUtils} from '@rainbow-d9/n1';
+import {ButtonClick, ButtonDef, CaptionDef, CaptionValueToLabelFormats, LabelDef, Utils} from '@rainbow-d9/n2';
 import {ReactNode} from 'react';
-import {PlanCode, PlanSelectionProps, SelectedPlan, SelectedPlans} from './types';
+import {
+	PlanBenefitDef,
+	PlanCategoryDef,
+	PlanCode,
+	PlanCoverageDef,
+	PlanDef,
+	PlanElementCode,
+	PlanElementDef,
+	PlanElementFixedValueDef,
+	PlanElementNumberValueDef,
+	PlanElementOptionsValueDef,
+	PlanElementType,
+	PlanElementValueDef,
+	PlanElementValueEditType,
+	PlanLimitDeductibleDef,
+	PlanSelectionDef,
+	SelectedPlan,
+	SelectedPlans
+} from './types';
+import {PlanElementDefOrdered} from './use-defs';
+
+export const isCategoryPlanElementDef = (def: PlanElementDef): def is PlanCategoryDef => {
+	return def.type === PlanElementType.CATEGORY;
+};
+// noinspection JSUnusedGlobalSymbols
+export const isCoveragePlanElementDef = (def: PlanElementDef): def is PlanCoverageDef => {
+	return def.type === PlanElementType.COVERAGE;
+};
+// noinspection JSUnusedGlobalSymbols
+export const isBenefitPlanElementDef = (def: PlanElementDef): def is PlanBenefitDef => {
+	return def.type === PlanElementType.BENEFIT;
+};
+// noinspection JSUnusedGlobalSymbols
+export const isLimitDeductiblePlanElementDef = (def: PlanElementDef): def is PlanLimitDeductibleDef => {
+	return def.type === PlanElementType.LIMIT_DEDUCTIBLE;
+};
+
+export const isElementOptionsValueDef = (def: PlanElementValueDef): def is PlanElementOptionsValueDef => {
+	return def.editType == PlanElementValueEditType.OPTIONS;
+};
+export const isElementNumberValueDef = (def: PlanElementValueDef): def is PlanElementNumberValueDef => {
+	return def.editType == PlanElementValueEditType.NUMBER;
+};
+// noinspection JSUnusedGlobalSymbols
+export const isElementFixedValueDef = (def: PlanElementValueDef): def is PlanElementFixedValueDef => {
+	return def.editType == PlanElementValueEditType.FIXED;
+};
 
 export const computeColumnWidth = (
-	columns: PlanSelectionProps['columns'],
-	columnWidth?: PlanSelectionProps['columnWidth'],
-	lineHeaderWidth?: PlanSelectionProps['lineHeaderWidth']): [PlanSelectionProps['columnWidth'], PlanSelectionProps['lineHeaderWidth']] => {
+	columns: PlanSelectionDef['columns'],
+	columnWidth?: PlanSelectionDef['columnWidth'],
+	lineHeaderWidth?: PlanSelectionDef['lineHeaderWidth']): [PlanSelectionDef['columnWidth'], PlanSelectionDef['lineHeaderWidth']] => {
 	if (columnWidth != null && VUtils.isNotBlank(columnWidth)) {
 		if (lineHeaderWidth != null && VUtils.isNotBlank(lineHeaderWidth)) {
 			return [columnWidth, lineHeaderWidth];
@@ -28,37 +74,147 @@ export const computeColumnWidth = (
 			return ['1fr', '3fr'];
 	}
 };
-export const findSelectedPlan = (code: PlanCode, plansModel: SelectedPlans): [SelectedPlan, number] => {
-	const foundIndex = plansModel.findIndex(plan => plan.code === code);
-	if (foundIndex === -1) {
-		const created: SelectedPlan = {code, selected: false, elements: []};
-		plansModel.push(created);
-		return [created, plansModel.length - 1];
-	} else {
-		const found = plansModel[foundIndex];
-		found.elements = found.elements ?? [];
-		return [found, foundIndex];
+
+export const findSelectedPlan = (plans: SelectedPlans, code: PlanCode): SelectedPlan => {
+	let found = plans[code];
+	if (found == null) {
+		found = {code, selected: false, elements: {}};
+		plans[code] = found;
 	}
+	return found;
 };
-export const guardPlanTitle = (def?: Array<NodeDef>): Array<NodeDef> => {
-	return def ?? [{$wt: 'Label', $pp: 'def.name'} as LabelDef];
+
+export type ModelProxy<T extends object, D> = T & { $def: D };
+/**
+ * attach plan definition into selected plan model, by proxy
+ */
+export const createPlanModelProxy = <T extends object, D>(plan: T, def: D): ModelProxy<T, D> => {
+	return new Proxy(plan, {
+		get: (target, prop) => {
+			if (prop === '$def') {
+				return def;
+			} else if (prop === '$revoke') {
+				return () => plan;
+			}
+			return target[prop];
+		}
+	}) as ModelProxy<T, D>;
 };
-export const guardPlanSubTitle = (def?: Array<NodeDef>, currencySymbol?: string | ReactNode): Array<NodeDef> => {
-	return def ?? [
-		{
-			$wt: 'Label', $pp: 'data.premium.due',
-			'data-plan-premium': true,
-			valueToLabel: (value, formats: CaptionValueToLabelFormats) => {
-				try {
-					// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-					// @ts-ignore
-					return value == null ? '' : formats.nf0(value);
-				} catch (e) {
-					console.error(e);
-					return value == null ? '' : value;
-				}
-			},
-			leads: [currencySymbol].filter(x => VUtils.isNotBlank(x))
-		} as LabelDef
-	];
+
+export const guardPlanTitle = (options: {
+	def?: PlanSelectionDef['planTitle']; planDef: PlanDef; elementValueChanged: boolean;
+}): Array<NodeDef> => {
+	const {def, planDef, elementValueChanged} = options;
+	return def != null
+		? def(planDef, elementValueChanged)
+		: [{$wt: 'Caption', text: planDef.name} as LabelDef];
+};
+
+export const guardPlanSubTitle = (options: {
+	def?: PlanSelectionDef['planSubTitle'];
+	currencySymbol?: string | ReactNode; premiumDescription?: string | ReactNode;
+	planDef: PlanDef; elementValueChanged: boolean;
+}): Array<NodeDef> => {
+	const {def, currencySymbol, premiumDescription, planDef, elementValueChanged} = options;
+
+	return def != null
+		? def(planDef, elementValueChanged, currencySymbol, premiumDescription)
+		: [
+			elementValueChanged
+				? {
+					$wt: 'Caption', 'data-plan-premium': true, text: '???',
+					leads: [currencySymbol].filter(x => VUtils.isNotBlank(x))
+				} as CaptionDef
+				: {
+					$wt: 'Label', $pp: 'premium.due',
+					'data-plan-premium': true,
+					valueToLabel: (value, formats: CaptionValueToLabelFormats) => {
+						try {
+							// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+							// @ts-ignore
+							return value == null ? '' : formats.nf0(value);
+						} catch (e) {
+							console.error(e);
+							return value == null ? '' : value;
+						}
+					},
+					leads: [currencySymbol].filter(x => VUtils.isNotBlank(x))
+				} as LabelDef,
+			{
+				$wt: 'Caption', 'data-plan-premium-desc': true, text: premiumDescription
+			} as CaptionDef
+		];
+};
+
+export const guardElementTitle = (options: {
+	def?: PlanSelectionDef['elementTitle']; orderedDef: PlanElementDefOrdered; elementLevel: number;
+}): Array<NodeDef> => {
+	const {def, orderedDef, elementLevel} = options;
+	const {def: elementDef} = orderedDef;
+	const domElementAttr = {};
+	switch (elementDef.type) {
+		case PlanElementType.CATEGORY:
+			domElementAttr['data-plan-element-category'] = true;
+			break;
+		case PlanElementType.COVERAGE:
+			domElementAttr['data-plan-element-coverage'] = true;
+			break;
+		case PlanElementType.BENEFIT:
+			domElementAttr['data-plan-element-benefit'] = true;
+			break;
+		case PlanElementType.LIMIT_DEDUCTIBLE:
+			domElementAttr['data-plan-element-limit-deductible'] = true;
+			break;
+		default:
+			domElementAttr['data-plan-element-unknown'] = true;
+			break;
+	}
+	return def != null
+		? def(elementDef, elementLevel)
+		: [{
+			$wt: 'Caption', text: elementDef.name,
+			'data-plan-element-level': elementLevel, ...domElementAttr
+		} as LabelDef];
+};
+
+export const guardPlanOperators = (options: {
+	def?: PlanSelectionDef['planOperators']; planDef: PlanDef; planModel: SelectedPlan;
+	text?: string | ReactNode; click: ButtonClick;
+}) => {
+	const {def, planDef, planModel, text, click} = options;
+	return def != null
+		? def(planDef, planModel)
+		: [{
+			$wt: 'Button', text: VUtils.isBlank(text) ? 'Buy' : text,
+			leads: ['$icons.cart'], 'data-plan-buy': true, click
+		} as ButtonDef];
+};
+
+export type PlanElementDefCodesMap = {
+	def: PlanElementDef;
+	children?: Record<PlanElementCode, PlanElementDefCodesMap>
+};
+
+export type PlanDefCodesMap = Record<PlanElementCode, PlanElementDefCodesMap>;
+
+export const buildPlanOrElementDefCodesMap = (elements: () => Array<PlanElementDef>): PlanDefCodesMap => {
+	return elements().reduce((map, element) => {
+		map[element.code] = {
+			def: element,
+			children: (element.children == null || element.children.length === 0)
+				? (void 0)
+				: buildPlanOrElementDefCodesMap(() => element.children ?? [])
+		} as PlanElementDefCodesMap;
+		return map;
+	}, {} as Record<PlanElementCode, PlanElementDefCodesMap>);
+};
+
+export const findPlanElementDef = (map: PlanDefCodesMap, codes: Array<PlanElementCode>): Undefinable<PlanElementDef> => {
+	return codes.reduce((map, code, index) => {
+		if (index === 0) {
+			return map?.[code];
+		} else {
+			return map?.children?.[code];
+		}
+	}, map)?.def;
 };

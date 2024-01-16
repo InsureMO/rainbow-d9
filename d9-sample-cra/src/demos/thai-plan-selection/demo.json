@@ -1,10 +1,16 @@
 {
-	"plans": [
-		{
-			"code": "standard-1",
+	"plans": {
+		"plan1": {
+			"code": "plan1",
 			"premium": {
 				"due": 123456
 			}
+		},
+		"plan2": {
+			"code": "plan2",
+			"premium": {
+				"due": 654321
+			}
 		}
-	]
+	}
 }

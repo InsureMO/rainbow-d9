@@ -3,7 +3,7 @@ import {MUtils, N1Logger, PPUtils, VUtils} from '@rainbow-d9/n1';
 import '@rainbow-d9/n2';
 import {CalendarUtils, CssVars} from '@rainbow-d9/n2';
 import {registerN2Widgets, Widget} from '@rainbow-d9/n3';
-import {registerPlanSelect} from '@rainbow-d9/thai-plan-selection';
+import {PlanSelectionCssVars, registerPlanSelect} from '@rainbow-d9/thai-plan-selection';
 import dayjs from 'dayjs';
 import ArraySupport from 'dayjs/plugin/arraySupport';
 import BuddhistEra from 'dayjs/plugin/buddhistEra';
@@ -84,7 +84,7 @@ export const GlobalStyles: any = createGlobalStyle`
         --d9-font-family: Roboto;
         --d9-font-color: #555;
         --d9-font-size: 14px;
-        --d9-border-color: #eee;
+        --d9-border-color: #CED4DA;
         --d9-input-height: 32px;
         --d9-common-tabs-font-size: 20px;
         --d9-common-tabs-font-weight: 600;
@@ -155,11 +155,28 @@ export const GlobalStyles: any = createGlobalStyle`
             }
         }
 
-        div[data-w=d9-common-tabs-headers] {
-            position: sticky;
-            top: 0;
-            background-color: ${CssVars.INVERT_COLOR};
-            z-index: 1;
+        div[data-w=d9-plan-selection] {
+            --d9-plan-selection-background-color: ${CssVars.INVERT_COLOR};
+
+            div[data-w=d9-plan-selection-element-header-title] {
+                > span[data-w=d9-caption] {
+                    &[data-plan-element-level="0"] {
+                        margin-left: 0;
+                    }
+
+                    &[data-plan-element-level="1"] {
+                        margin-left: ${PlanSelectionCssVars.ELEMENT_INDENT};
+                    }
+
+                    &[data-plan-element-level="2"] {
+                        margin-left: calc(${PlanSelectionCssVars.ELEMENT_INDENT} * 2);
+                    }
+
+                    &[data-plan-element-level="3"] {
+                        margin-left: calc(${PlanSelectionCssVars.ELEMENT_INDENT} * 3);
+                    }
+                }
+            }
         }
     }
 `;

@@ -56,11 +56,11 @@ const ACaption = styled.span.attrs(
 	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 	// @ts-ignore
 	({id, 'data-w': dataW}) => {
-	return {
-		[DOM_KEY_WIDGET]: dataW ?? 'd9-caption',
-		[DOM_ID_WIDGET]: id
-	};
-})`
+		return {
+			[DOM_KEY_WIDGET]: dataW ?? 'd9-caption',
+			[DOM_ID_WIDGET]: id
+		};
+	})`
     display: flex;
     position: relative;
     align-items: center;
@@ -231,13 +231,14 @@ const TailDecorator = styled(Decorator).attrs({
 
 export const Caption = forwardRef((props: CaptionProps, ref: ForwardedRef<HTMLSpanElement>) => {
 	const {
+		label: _label, text: _text,
 		leads, tails,
 		labelOnValue, valueToLabel, click,
 		$pp, $wrapped,
 		...rest
 	} = props;
 	const {$root, $model, $p2r, $avs: {$disabled, $visible}, $vfs} = $wrapped;
-	const label = props.text ?? props.label;
+	const label = _text ?? _label;
 
 	const globalHandlers = useGlobalHandlers();
 	const onClicked = click != null
@@ -279,6 +280,7 @@ export const Caption = forwardRef((props: CaptionProps, ref: ForwardedRef<HTMLSp
 			value = '';
 		}
 		try {
+			// noinspection JSUnresolvedReference
 			if (Array.isArray(value)) {
 				value = value.filter(item => item != null).map(item => {
 					if (typeof item === 'object' && !isValidElement(item)) {
