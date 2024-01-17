@@ -4,7 +4,8 @@ import {PlanDef, PlanElementDef, PlanElementValueDef, SelectedPlan, SelectedPlan
 
 export enum PlanSelectionEventTypes {
 	ELEMENT_VALUE_CHANGED = 'element-value-changed',
-	PREMIUM_CALCULATED = 'premium-calculated'
+	PREMIUM_CALCULATED = 'premium-calculated',
+	SWITCH_PAGE = 'switch-page'
 }
 
 export interface PlanChangedEventOptions {
@@ -40,4 +41,10 @@ export interface PlanSelectionEventBus {
 	on(type: PlanSelectionEventTypes.PREMIUM_CALCULATED, listener: (options: PremiumCalculatedEventOptions) => void): this;
 
 	off(type: PlanSelectionEventTypes.PREMIUM_CALCULATED, listener: (options: PremiumCalculatedEventOptions) => void): this;
+
+	fire(type: PlanSelectionEventTypes.SWITCH_PAGE, pageNumber: number): this;
+
+	on(type: PlanSelectionEventTypes.SWITCH_PAGE, listener: (pageNumber: number) => void): this;
+
+	off(type: PlanSelectionEventTypes.SWITCH_PAGE, listener: (pageNumber: number) => void): this;
 }

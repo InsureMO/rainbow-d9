@@ -207,12 +207,12 @@ export interface CalculationEvent extends ModelCarriedHandler<BaseModel, PropVal
 /** configuration definition */
 export type PlanSelectionDef = ValueChangeableNodeDef & OmitHTMLProps<HTMLDivElement> & {
 	/**
-	 * max plans count in one page, default is 3
+	 * max plans count in one page, default is 3.
+	 * set tp <=0 value to represent no limit, which means show horizontal scrollbar and column width and line header width are in pixels (number).
 	 */
 	columns?: number;
 	/**
-	 * plan column width,
-	 * default 20%, which means lineHeaderWidth is 40% when columns is 3
+	 * plan column width
 	 */
 	columnWidth?: number | string;
 	/** first column width, default use columns to compute */

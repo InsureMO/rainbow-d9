@@ -121,7 +121,7 @@ export const TableRowOperators = (props: {
 		};
 	}, [on, off, rowIndex]);
 
-	if (rowIndex === -1 || (!removable && !expandable)) {
+	if (rowIndex === -1 || (!removable && !expandable && (rowOperators == null || rowOperators.length === 0))) {
 		return <ATableRowOperators data-expanded={false} rowIndex={0} rowSpan={rowSpan}/>;
 	}
 

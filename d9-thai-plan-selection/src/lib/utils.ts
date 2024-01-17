@@ -52,26 +52,32 @@ export const isElementFixedValueDef = (def: PlanElementValueDef): def is PlanEle
 export const computeColumnWidth = (
 	columns: PlanSelectionDef['columns'],
 	columnWidth?: PlanSelectionDef['columnWidth'],
-	lineHeaderWidth?: PlanSelectionDef['lineHeaderWidth']): [PlanSelectionDef['columnWidth'], PlanSelectionDef['lineHeaderWidth']] => {
-	if (columnWidth != null && VUtils.isNotBlank(columnWidth)) {
-		if (lineHeaderWidth != null && VUtils.isNotBlank(lineHeaderWidth)) {
+	lineHeaderWidth?: PlanSelectionDef['lineHeaderWidth']
+): [PlanSelectionDef['columnWidth'], PlanSelectionDef['lineHeaderWidth']] => {
+	if (VUtils.isNotBlank(columnWidth)) {
+		if (VUtils.isNotBlank(lineHeaderWidth)) {
 			return [columnWidth, lineHeaderWidth];
 		} else {
 			return [columnWidth, `calc(100% - (${Utils.toCssSize(columnWidth)} * ${columns}))`];
 		}
-	}
-	if (lineHeaderWidth != null && VUtils.isNotBlank(lineHeaderWidth)) {
+	} else if (VUtils.isNotBlank(lineHeaderWidth)) {
 		return [`calc((100% - ${Utils.toCssSize(lineHeaderWidth)}) / ${columns})`, lineHeaderWidth];
-	}
-	switch (columns) {
-		case 2:
-			return ['30%', '40%'];
-		case 3:
-			return ['20%', '40%'];
-		case 4:
-			return ['15%', '40%'];
-		default:
-			return ['1fr', '3fr'];
+	} else if (columns <= 0) {
+		// horizontal scrolling
+		return ['minmax(20%, 1fr)', 'minmax(40%, 1.5fr)'];
+	} else {
+		switch (columns) {
+			case 1:
+				return ['40%', '60%'];
+			case 2:
+				return ['30%', '40%'];
+			case 3:
+				return ['20%', '40%'];
+			case 4:
+				return ['15%', '40%'];
+			default:
+				return ['1fr', '3fr'];
+		}
 	}
 };
 

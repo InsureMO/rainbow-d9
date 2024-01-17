@@ -22,7 +22,7 @@ export const PlanElementPin = (props: PlanElementPinProps) => {
 		plan, planDef,
 		element, elementDef
 	} = props;
-	const {pinned} = elementDef;
+	const {pinned = true} = elementDef;
 
 	const {fire} = usePlanSelectionEventBus();
 

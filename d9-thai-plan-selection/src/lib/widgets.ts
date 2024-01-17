@@ -75,22 +75,43 @@ export const APlanSelection = styled.div.attrs<{
     }
 `;
 export const PlanSelectionTopLeftCorner = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-plan-selection-top-left-corner'})`
-    display: block;
+    display: flex;
     position: sticky;
+    flex-direction: column;
     top: 0;
     left: 0;
+    justify-content: flex-end;
     border-bottom: ${CssVars.BORDER};
     background-color: ${PlanSelectionCssVars.BACKGROUND_COLOR};
-    z-index: 1;
+    z-index: 3;
+`;
+export const PlanSelectionPagination = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-plan-selection-pagination'})`
+    display: flex;
+    position: relative;
+    align-items: center;
+    justify-content: flex-end;
+
+    > span {
+        display: flex;
+        position: relative;
+        column-gap: 0.5em;
+        font-family: ${CssVars.FONT_FAMILY};
+        font-size: ${CssVars.FONT_SIZE};
+        color: ${CssVars.FONT_COLOR};
+
+        &:last-child {
+            margin-right: 12px;
+        }
+    }
 `;
 export const APlanHeader = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-plan-selection-header'})`
     display: flex;
     position: sticky;
-    top: 0;
     flex-direction: column;
+    top: 0;
     border-bottom: ${CssVars.BORDER};
     background-color: ${PlanSelectionCssVars.BACKGROUND_COLOR};
-    z-index: 1;
+    z-index: 2;
 
     > div[data-w=d9-plan-selection-header-title] {
         background-color: ${PlanSelectionCssVars.HEADER_EVEN_BACKGROUND_COLOR};
@@ -166,10 +187,13 @@ export const PlanHeaderSubTitle = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-plan-s
 
 export const PlanElementColumnHeader = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-plan-selection-element-header'})`
     display: flex;
-    position: relative;
+    position: sticky;
+    left: 0;
     align-items: center;
     min-height: ${PlanSelectionCssVars.ELEMENT_MIN_HEIGHT};
     border-bottom: ${CssVars.BORDER};
+    background-color: ${PlanSelectionCssVars.BACKGROUND_COLOR};
+    z-index: 1;
 `;
 export const PlanElementColumnHeaderTitle = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-plan-selection-element-header-title'})`
     display: flex;
@@ -367,6 +391,7 @@ export const PlanSelectionBottomLeftCorner = styled.div.attrs({[DOM_KEY_WIDGET]:
     border-bottom: ${CssVars.BORDER};
     margin-top: calc(${CssVars.BORDER_WIDTH} * -1);
     background-color: ${PlanSelectionCssVars.BACKGROUND_COLOR};
+    z-index: 3;
 `;
 export const PlanFooter = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-plan-selection-footer'})`
     display: flex;
@@ -376,6 +401,7 @@ export const PlanFooter = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-plan-selection
     border-top: ${CssVars.BORDER};
     border-bottom: ${CssVars.BORDER};
     margin-top: calc(${CssVars.BORDER_WIDTH} * -1);
+    z-index: 2;
 
     > div[data-w=d9-plan-selection-footer-operator] {
         background-color: ${PlanSelectionCssVars.EVEN_BACKGROUND_COLOR};
