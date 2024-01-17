@@ -6,6 +6,7 @@ import {Prism as SyntaxHighlighter} from 'react-syntax-highlighter';
 import {materialDark} from 'react-syntax-highlighter/dist/esm/styles/prism';
 import remarkGfm from 'remark-gfm';
 import styled from 'styled-components';
+import {ECharts, EChartsData, EChartsMarkdown} from './echarts';
 import {N2ArrayPanel, N2ArrayPanelData, N2ArrayPanelMarkdown} from './n2-array-panel';
 import {N2BasicWidgets, N2BasicWidgetsData, N2BasicWidgetsMarkdown} from './n2-basic-widgets';
 import {N2Buttons, N2ButtonsData, N2ButtonsMarkdown} from './n2-buttons';
@@ -238,6 +239,7 @@ export const DemoIndex = () => {
 		},
 		{path: '/n2-intl', label: '8. N2 Internationalization', C: N2Intl, data: N2IntlData, markdown: N2IntlMarkdown},
 		{path: '/n2-tree', label: '9. N2 Tree', C: N2Tree, data: N2TreeData, markdown: N2TreeMarkdown},
+		{path: '/echarts', label: '10. ECharts', C: ECharts, data: EChartsData, markdown: EChartsMarkdown},
 		{
 			path: '/thai-plan-selection', label: '100. ThaiCloud Plan Selection',
 			C: ThaiPlanSelection, data: ThaiPlanSelectionData, markdown: ThaiPlanSelectionMarkdown

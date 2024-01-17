@@ -4,10 +4,10 @@ import {getInstanceByDom} from 'echarts';
 import {MutableRefObject, useEffect} from 'react';
 import {ChartGlobalEventPrefix, ChartProps} from './types';
 
-export const useDataMerge = (ref: MutableRefObject<HTMLDivElement>, domInitialized: boolean, props: ChartProps) => {
+export const useDataMerge = (ref: MutableRefObject<HTMLDivElement>, domInitialized: boolean, marker: string, props: ChartProps) => {
 	const {
 		$pp, $wrapped: {$model},
-		options, settings, marker, mergeData
+		options, settings, mergeData
 	} = props;
 
 	const {on, off} = useGlobalEventBus();

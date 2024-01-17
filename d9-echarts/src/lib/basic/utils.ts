@@ -5,6 +5,5 @@ export const redressChartMarker = (content: Pick<ChartDef, 'marker'>) => {
 	if (VUtils.isNotBlank(content.marker)) {
 		return content.marker;
 	}
-	content.marker = VUtils.generateUniqueId();
-	return content.marker;
+	return VUtils.generateUniqueId();
 };

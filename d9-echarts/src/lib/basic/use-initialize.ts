@@ -1,10 +1,12 @@
 import {MUtils} from '@rainbow-d9/n1';
-import {init} from 'echarts';
+import {getInstanceByDom, init} from 'echarts';
 import React, {Dispatch, SetStateAction, useEffect} from 'react';
 import {ChartProps} from './types';
+import {redressChartMarker} from './utils';
 
 export interface ChartState {
 	domInitialized: boolean;
+	marker: string;
 }
 
 export const useInitialize = (ref: React.MutableRefObject<HTMLDivElement>, props: ChartProps): [ChartState, Dispatch<SetStateAction<ChartState>>] => {
@@ -13,7 +15,9 @@ export const useInitialize = (ref: React.MutableRefObject<HTMLDivElement>, props
 		options, settings, mergeData, loading
 	} = props;
 
-	const [state, setState] = React.useState<ChartState>({domInitialized: false});
+	const [state, setState] = React.useState<ChartState>({
+		domInitialized: false, marker: redressChartMarker(props)
+	});
 	useEffect(() => {
 		if (state.domInitialized || ref.current == null) {
 			return;
@@ -35,12 +39,29 @@ export const useInitialize = (ref: React.MutableRefObject<HTMLDivElement>, props
 					chart.showLoading(loadingOptions);
 				}
 			}
-			setState({domInitialized: true});
+			setState(state => ({...state, domInitialized: true}));
 		})();
 
 		return () => {
-			chart.dispose();
+			// chart.dispose();
 		};
 	}, [state.domInitialized, ref, $pp, $model, options, settings, mergeData, loading]);
+	useEffect(() => {
+		if (!state.domInitialized) {
+			return;
+		}
+		const chartRef = ref.current;
+		return () => {
+			if (chartRef == null) {
+				return;
+			}
+			try {
+				const chart = getInstanceByDom(chartRef);
+				chart.dispose();
+			} catch {
+				// ignore
+			}
+		};
+	}, [state.domInitialized, ref]);
 	return [state, setState];
 };

@@ -6,10 +6,9 @@ import {ChartProps} from './types';
 import {useDataMerge} from './use-data-merge';
 import {useInitialize} from './use-initialize';
 import {useResize} from './use-resize';
-import {redressChartMarker} from './utils';
 
 // noinspection CssUnresolvedCustomProperty
-export const AChart = styled.span.attrs<{ chartHeight?: string | number }>(
+export const AChart = styled.div.attrs<{ chartHeight?: string | number }>(
 	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 	// @ts-ignore
 	({id, 'data-w': dataW, chartHeight}) => {
@@ -23,6 +22,8 @@ export const AChart = styled.span.attrs<{ chartHeight?: string | number }>(
 	})<{ chartHeight?: string | number }>`
     display: block;
     position: relative;
+    grid-column: var(--grid-column);
+    grid-row: var(--grid-row);
     width: 100%;
     height: var(--chart-height);
 `;
@@ -34,12 +35,11 @@ export const Chart = (props: ChartProps) => {
 		height,
 		...rest
 	} = props;
-	redressChartMarker(props);
 
 	const ref = useRef<HTMLDivElement>(null);
 	const [state] = useInitialize(ref, props);
 	useResize(ref, state.domInitialized);
-	useDataMerge(ref, state.domInitialized, props);
+	useDataMerge(ref, state.domInitialized, state.marker, props);
 
 	return <AChart {...rest} chartHeight={height} ref={ref}/>;
 };

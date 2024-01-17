@@ -1,3 +1,4 @@
+import {registerChart} from '@rainbow-d9/echarts';
 import {MUtils, N1Logger, PPUtils, VUtils} from '@rainbow-d9/n1';
 // import all n2 widgets
 import '@rainbow-d9/n2';
@@ -37,6 +38,7 @@ dayjs.extend(BuddhistEra);
 	// register widgets to n3
 	const widgetsHelper = Widget.createOrGetTranslateHelperSingleton();
 	registerN2Widgets(widgetsHelper);
+	registerChart(widgetsHelper);
 	registerPlanSelect(widgetsHelper);
 	// set widgets parameters
 	// calendar
