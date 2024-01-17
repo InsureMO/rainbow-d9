@@ -64,10 +64,13 @@ export const GlobalStyles: any = createGlobalStyle`
     }
 
     body {
+        --d9-font-family: -apple-system, Roboto;
+        --d9-font-color: #555;
+        --d9-font-size: 14px;
         margin: 0;
-        //font-family             : var(--font-family);
-        //font-size               : var(--font-size);
-        //color                   : var(--font-color);
+        font-family: var(--d9-font-family);
+        font-size: var(--d9-font-size);
+        color: var(--d9-font-color);
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
         position: relative;
@@ -81,9 +84,9 @@ export const GlobalStyles: any = createGlobalStyle`
     }
 
     div[data-w=d9-demo] {
-        --d9-font-family: Roboto;
-        --d9-font-color: #555;
-        --d9-font-size: 14px;
+        //--d9-font-family: Roboto;
+        //--d9-font-color: #555;
+        //--d9-font-size: 14px;
         --d9-border-color: #CED4DA;
         --d9-input-height: 32px;
         --d9-common-tabs-font-size: 20px;
