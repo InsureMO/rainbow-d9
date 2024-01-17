@@ -3,19 +3,17 @@ import {DropdownOptions, DropdownOptionSort, REACTION_REFRESH_OPTIONS} from '@ra
 import {ParsedNodeType} from '../node-types';
 import {ParsedList, ParsedListItemAttributePair, SemanticUtils} from '../semantic';
 import {
+	AbstractReactionAttributeBuild,
 	AttributeValueBuild,
 	createDefaultMonitorHandlerDetective,
 	CustomAttributeName,
 	MonitorHandlerDetective,
+	ReactionMonitorAttributeValue,
+	ReactionTypes,
 	SpecificWidgetTranslator,
 	ValidatorUtils,
 	WidgetPropertyName
 } from '../widget';
-import {
-	AbstractReactionAttributeBuild,
-	ReactionMonitorAttributeValue,
-	ReactionTypes
-} from '../widget/translator/attribute/reaction-attribute-build';
 import {N2WidgetType} from './types';
 
 export const N2DropdownOptionsByStrBuild = (value: string): DropdownOptions => {

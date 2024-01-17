@@ -19,11 +19,11 @@ import {
 	DecorateTailsBuild,
 	MonitorHandlerDetective,
 	MonitorHandlerDetectOptions,
+	parseSnippet,
 	SpecificWidgetTranslator,
 	WidgetPropertyName,
 	WidgetTranslator
 } from '../widget';
-import {parseSnippet} from '../widget/translator/attribute/snippet-attribute';
 import {buildClickHandler} from './event-handler';
 import {N2WidgetType} from './types';
 

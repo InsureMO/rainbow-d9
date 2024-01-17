@@ -1,8 +1,7 @@
 import {ExternalDefIndicator, Undefinable, VUtils} from '@rainbow-d9/n1';
 import {TreeNodeDef, TreeNodeDetect} from '@rainbow-d9/n2';
 import {ParsedListItemAttributePair} from '../semantic';
-import {AttributeValueBuild, SpecificWidgetTranslator, WidgetPropertyName} from '../widget';
-import {parseSnippet} from '../widget/translator/attribute/snippet-attribute';
+import {AttributeValueBuild, parseSnippet, SpecificWidgetTranslator, WidgetPropertyName} from '../widget';
 import {N2WidgetType} from './types';
 
 export const N2TreeChildNodesBuild: AttributeValueBuild<TreeNodeDetect | ExternalDefIndicator> = {

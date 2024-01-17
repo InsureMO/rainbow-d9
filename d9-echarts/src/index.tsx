@@ -1,3 +1,1 @@
-export * from './lib/chart';
-
-export * from './lib/register';
+export * from './lib/basic';

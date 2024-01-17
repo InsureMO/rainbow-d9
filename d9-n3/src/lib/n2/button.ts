@@ -7,10 +7,10 @@ import {
 	AttributeValueBuild,
 	DecorateLeadsBuild,
 	DecorateTailsBuild,
+	parseSnippet,
 	SpecificWidgetTranslator,
 	WidgetPropertyName
 } from '../widget';
-import {parseSnippet} from '../widget/translator/attribute/snippet-attribute';
 import {buildClickHandler} from './event-handler';
 import {N2WidgetType} from './types';
 
