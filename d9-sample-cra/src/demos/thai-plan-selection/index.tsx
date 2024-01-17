@@ -185,6 +185,21 @@ export const ThaiPlanSelection = () => {
 							]
 						} as PlanCategoryDef
 					]
+				} as PlanDef,
+				{
+					code: 'plan3', name: 'Standard Plan #3', elements: []
+				} as PlanDef,
+				{
+					code: 'plan4', name: 'Standard Plan #4', elements: []
+				} as PlanDef,
+				{
+					code: 'plan5', name: 'Standard Plan #5', elements: []
+				} as PlanDef,
+				{
+					code: 'plan6', name: 'Standard Plan #6', elements: []
+				} as PlanDef,
+				{
+					code: 'plan7', name: 'Standard Plan #7', elements: []
 				} as PlanDef
 			];
 		},

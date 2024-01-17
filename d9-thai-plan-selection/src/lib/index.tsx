@@ -6,6 +6,7 @@ export * from './event/plan-selection-event-bus';
 
 export * from './utils';
 export * from './use-defs';
+export * from './use-layout';
 export * from './use-element-default-value';
 
 export * from './plan-selection-value-handler';

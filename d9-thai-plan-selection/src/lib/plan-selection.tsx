@@ -7,10 +7,10 @@ import {PlanHeaders} from './plan-headers';
 import {PlanSelectionValueHandler} from './plan-selection-value-handler';
 import {PlanSelectionProps, SelectedPlans} from './types';
 import {useDefs} from './use-defs';
-import {computeColumnWidth} from './utils';
+import {useLayout} from './use-layout';
 import {APlanSelection} from './widgets';
 
-export const PlanSelection = (props: PlanSelectionProps) => {
+export const InternalPlanSelection = (props: PlanSelectionProps) => {
 	const {
 		$pp, $wrapped,
 		columns = 3, columnWidth, lineHeaderWidth, maxHeight,
@@ -24,16 +24,12 @@ export const PlanSelection = (props: PlanSelectionProps) => {
 	} = props;
 	const {$root, $p2r, $avs: {$disabled, $visible}} = $wrapped;
 
-	const {initialized, defs: planDefs, orderedDefs} = useDefs(defs);
-	if (!initialized) {
+	const {initialized: planDefsInitialized, defs: planDefs, orderedDefs} = useDefs(defs);
+	const layout = useLayout(planDefsInitialized, planDefs, columns, columnWidth, lineHeaderWidth);
+	if (!layout.initialized) {
 		return null;
 	}
 
-	const computedColumnCount = Math.min((planDefs ?? []).length, columns);
-	const [computedColumnWidth, computedLineHeaderWidth] = computeColumnWidth(computedColumnCount, columnWidth, lineHeaderWidth);
-
-	// TODO there might be pages
-	const displayPlanDefs = (planDefs ?? []).slice(0, computedColumnCount);
 	let plansData = MUtils.getValue($wrapped.$model, $pp) as unknown as SelectedPlans;
 	if (plansData == null) {
 		// guard plans instance model
@@ -44,27 +40,35 @@ export const PlanSelection = (props: PlanSelectionProps) => {
 	}
 	const $p2rOfPlans = PPUtils.concat($p2r, $pp);
 
-	return <PlanSelectionEventBusProvider>
+	return <>
 		<PlanSelectionValueHandler calculate={calculate} calculationDelay={calculationDelay}/>
 		<APlanSelection {...rest} data-disabled={$disabled} data-visible={$visible}
-		                columnCount={computedColumnCount}
-		                computedColumnWidth={computedColumnWidth} computedLineHeaderWidth={computedLineHeaderWidth}
+		                columnCount={layout.computedColumnCount}
+		                computedColumnWidth={layout.computedColumnWidth}
+		                computedLineHeaderWidth={layout.computedLineHeaderWidth}
 		                maxHeight={maxHeight}
 		                id={PPUtils.asId(PPUtils.absolute($p2r, $pp), props.id)}>
 			<PlanHeaders $root={$root} $p2r={$p2rOfPlans}
-			             displayPlanDefs={displayPlanDefs} plans={plansData}
+			             displayPlanDefs={layout.displayPlanDefs} plans={plansData}
 			             planTitle={planTitle} planSubTitle={planSubTitle}
-			             currencySymbol={currencySymbol} premiumDescription={premiumDescription}/>
+			             currencySymbol={currencySymbol} premiumDescription={premiumDescription}
+			             pageCount={layout.pageCount} pageNumber={layout.pageNumber}/>
 			<PlanBodies $root={$root} $p2r={$p2rOfPlans}
-			            displayPlanDefs={displayPlanDefs} orderedDefs={orderedDefs} plans={plansData}
+			            displayPlanDefs={layout.displayPlanDefs} orderedDefs={orderedDefs} plans={plansData}
 			            elementTitle={elementTitle}
 			            elementOptionsValue={elementOptionsValue}
 			            elementNumberValue={elementNumberValue}
 			            elementNumberValueValidator={elementNumberValueValidator}
 			            elementFixedValue={elementFixedValue}/>
 			<PlanFooters $root={$root} $p2r={$p2rOfPlans}
-			             displayPlanDefs={displayPlanDefs} plans={plansData}
+			             displayPlanDefs={layout.displayPlanDefs} plans={plansData}
 			             planOperators={planOperators} buyText={buyText} buy={buy}/>
 		</APlanSelection>
+	</>;
+};
+
+export const PlanSelection = (props: PlanSelectionProps) => {
+	return <PlanSelectionEventBusProvider>
+		<InternalPlanSelection {...props}/>
 	</PlanSelectionEventBusProvider>;
 };
