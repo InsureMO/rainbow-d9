@@ -1,4 +1,3 @@
-import {registerWidget} from '@rainbow-d9/n1';
 import {DOM_ID_WIDGET, DOM_KEY_WIDGET} from '@rainbow-d9/n2';
 import React, {useRef} from 'react';
 import styled from 'styled-components';
@@ -43,5 +42,3 @@ export const Chart = (props: ChartProps) => {
 
 	return <AChart {...rest} chartHeight={height} ref={ref}/>;
 };
-
-registerWidget({key: 'Chart', JSX: Chart, container: false, array: false});

@@ -176,5 +176,8 @@ export const useGlobalHandlers = (): GlobalHandlers => {
 	const yesNoDialog = useYesNoDialog();
 	const remoteRequest = useRemoteRequest();
 	const customEvent = useCustomGlobalEvent();
-	return {alert, dialog, yesNoDialog, remoteRequest, custom: customEvent};
+	const [handlers] = useState<GlobalHandlers>({
+		alert, dialog, yesNoDialog, remoteRequest, custom: customEvent
+	});
+	return handlers;
 };
