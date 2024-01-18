@@ -127,33 +127,22 @@ export interface ArrayUsedDef {
 	addLabel?: ReactNode;
 	/** create element before it is added into array. index is position of new one */
 	createElement?: <R extends BaseModel, M extends ArrayPropValue, E extends BaseModel>(options: {
-		root: R,
-		model: M,
-		index: number
+		root: R, model: M, index: number
 	}) => E | Promise<E>;
 	/** element added, before any event fired. index is position of added one in array */
 	elementAdded?: <R extends BaseModel, M extends ArrayPropValue, E extends BaseModel>(options: {
-		root: R,
-		model: M,
-		element: E,
-		index: number
+		root: R, model: M, element: E, index: number
 	}) => void | Promise<void>;
 	/** default is false */
 	removable?: boolean;
 	removeLabel?: ReactNode;
 	/** a chance to check the element could be removed or not */
 	couldRemoveElement?: <R extends BaseModel, M extends ArrayPropValue, E extends BaseModel>(options: {
-		root: R,
-		model: M,
-		element: E,
-		index: number
+		root: R, model: M, element: E, index: number
 	}) => Promise<boolean>;
 	/** element removed, before any event fired. index is original position of removed one in array */
 	elementRemoved?: <R extends BaseModel, M extends ArrayPropValue, E extends BaseModel>(options: {
-		root: R,
-		model: M,
-		element: E,
-		index: number
+		root: R, model: M, element: E, index: number
 	}) => void | Promise<void>;
 	/**
 	 * return key of element, make sure it is stable and not impacted by element data.

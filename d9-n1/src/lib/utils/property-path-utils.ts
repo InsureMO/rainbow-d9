@@ -18,6 +18,10 @@ export interface PropertyPathUtilsType {
 	 */
 	readonly absolute: (relativeToRoot: PropertyPath, current: PropertyPath) => PropertyPath;
 	readonly relative: (path: PropertyPath) => PropertyPath;
+	/**
+	 * exactly same, or wildcard same
+	 * wildcard: * means any character, ** means any character or dot
+	 */
 	readonly matches: (expected: PropertyPath, actual: PropertyPath) => boolean;
 	/**
 	 * generate property path to dom id string
@@ -100,7 +104,16 @@ export const PPUtils: PropertyPathUtilsType = {
 			}
 			return chars;
 		}, [] as Array<string>).join('');
-		return tidy === expected;
+		expected = expected ?? '';
+		if (expected.includes('*')) {
+			// wildcard
+			expected = expected.replace(/\*{2}/g, '[\\w|\\.]{0,}')
+				.replace(/\*{1}/g, '[\\w]{0,}')
+				.replace(/\./g, '\\.');
+			return new RegExp(`^${expected}$`).test(tidy);
+		} else {
+			return tidy === expected;
+		}
 	},
 	asId: (path?: PropertyPath, id?: string): Undefinable<string> => {
 		if (VUtils.isNotBlank(id)) {

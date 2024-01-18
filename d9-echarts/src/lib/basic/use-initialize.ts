@@ -2,7 +2,7 @@ import {MUtils} from '@rainbow-d9/n1';
 import {getInstanceByDom, init} from 'echarts';
 import React, {Dispatch, SetStateAction, useEffect} from 'react';
 import {ChartProps} from '../types';
-import {askOptions, askSettings, redressChartMarker} from '../utils';
+import {askInitOptions, askOptions, askSettings, redressChartMarker} from '../utils';
 
 export interface ChartState {
 	domInitialized: boolean;
@@ -12,7 +12,7 @@ export interface ChartState {
 export const useInitialize = (ref: React.MutableRefObject<HTMLDivElement>, props: ChartProps): [ChartState, Dispatch<SetStateAction<ChartState>>] => {
 	const {
 		$pp, $wrapped: {$model},
-		options, settings, mergeData, loading
+		initOptions, options, settings, mergeData, loading
 	} = props;
 
 	const [state, setState] = React.useState<ChartState>({
@@ -23,7 +23,7 @@ export const useInitialize = (ref: React.MutableRefObject<HTMLDivElement>, props
 			return;
 		}
 
-		const chart = init(ref.current);
+		const chart = init(ref.current, null, askInitOptions(initOptions));
 		(async () => {
 			const data = MUtils.getValue($model, $pp);
 			if (data != null) {
@@ -45,7 +45,7 @@ export const useInitialize = (ref: React.MutableRefObject<HTMLDivElement>, props
 		return () => {
 			// chart.dispose();
 		};
-	}, [state.domInitialized, ref, $pp, $model, options, settings, mergeData, loading]);
+	}, [state.domInitialized, ref, $pp, $model, initOptions, options, settings, mergeData, loading]);
 	useEffect(() => {
 		if (!state.domInitialized) {
 			return;

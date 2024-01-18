@@ -14,7 +14,7 @@ import {LabelLayout, UniversalTransition} from 'echarts/features';
 
 // Import the Canvas renderer
 // Note that including the CanvasRenderer or SVGRenderer is a required step
-import {CanvasRenderer} from 'echarts/renderers';
+import {CanvasRenderer, SVGRenderer} from 'echarts/renderers';
 
 echarts.use([
 	BarChart,
@@ -22,5 +22,5 @@ echarts.use([
 
 	LabelLayout, UniversalTransition,
 
-	CanvasRenderer
+	CanvasRenderer, SVGRenderer
 ]);

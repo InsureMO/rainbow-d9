@@ -1,8 +1,10 @@
 import {registerWidget, Undefinable, VUtils} from '@rainbow-d9/n1';
 import {Widget} from '@rainbow-d9/n3';
-import {AutonomousChartDef} from '../types';
+import {AutonomousChartDef, ChartDef} from '../types';
 import {AutonomousChart} from './chart';
 
+export const AutonomousChartInitOptionsBuild = Widget.createSnippetBuild<ChartDef, 'initOptions', ChartDef['initOptions']>(
+	'initOptions', (parsed: string) => new Function(parsed) as ChartDef['initOptions']);
 export const AutonomousChartOptionsBuild = Widget.createSnippetBuild<AutonomousChartDef, 'options', AutonomousChartDef['options']>(
 	'options', (parsed: string) => new Function(parsed) as AutonomousChartDef['options']);
 export const AutonomousChartSettingsBuild = Widget.createSnippetBuild<AutonomousChartDef, 'settings', AutonomousChartDef['settings']>(
@@ -20,7 +22,7 @@ export abstract class AbstractAutonomousChartTranslator extends Widget.SpecificW
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	public getAttributeValueBuilders(): Array<Widget.AttributeValueBuild<any>> {
 		return [
-			AutonomousChartOptionsBuild, AutonomousChartSettingsBuild,
+			AutonomousChartInitOptionsBuild, AutonomousChartOptionsBuild, AutonomousChartSettingsBuild,
 			AutonomousChartMergeDataBuild, AutonomousChartFetchDataBuild
 		];
 	}

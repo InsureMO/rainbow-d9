@@ -3,6 +3,8 @@ import {Widget} from '@rainbow-d9/n3';
 import {ChartDef} from '../types';
 import {Chart} from './chart';
 
+export const ChartInitOptionsBuild = Widget.createSnippetBuild<ChartDef, 'initOptions', ChartDef['initOptions']>(
+	'initOptions', (parsed: string) => new Function(parsed) as ChartDef['initOptions']);
 export const ChartOptionsBuild = Widget.createSnippetBuild<ChartDef, 'options', ChartDef['options']>(
 	'options', (parsed: string) => new Function(parsed) as ChartDef['options']);
 export const ChartSettingsBuild = Widget.createSnippetBuild<ChartDef, 'settings', ChartDef['settings']>(
@@ -17,7 +19,7 @@ export abstract class AbstractChartTranslator extends Widget.SpecificWidgetTrans
 
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	public getAttributeValueBuilders(): Array<Widget.AttributeValueBuild<any>> {
-		return [ChartOptionsBuild, ChartSettingsBuild, ChartMergeDataBuild];
+		return [ChartInitOptionsBuild, ChartOptionsBuild, ChartSettingsBuild, ChartMergeDataBuild];
 	}
 }
 

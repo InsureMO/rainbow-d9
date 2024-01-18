@@ -183,6 +183,10 @@ export const GlobalStyles: any = createGlobalStyle`
                 }
             }
         }
+
+        div[data-w=d9-section][data-rows-auto-1fr=true] > div[data-w=d9-section-body] {
+            grid-template-rows: auto 1fr;
+        }
     }
 `;
 

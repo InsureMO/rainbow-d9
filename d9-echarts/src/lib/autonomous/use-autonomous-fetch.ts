@@ -7,7 +7,7 @@ import {askOptions, askSettings} from '../utils';
 
 export const useAutonomousFetch = (ref: MutableRefObject<HTMLDivElement>, domInitialized: boolean, marker: string, props: AutonomousChartProps) => {
 	const {
-		$pp, $wrapped: {$model},
+		$pp, $wrapped: {$root, $model},
 		options, settings, mergeData,
 		fetchData, fetchInterval = 10
 	} = props;
@@ -24,7 +24,7 @@ export const useAutonomousFetch = (ref: MutableRefObject<HTMLDivElement>, domIni
 			}
 			const chart = getInstanceByDom(ref.current);
 
-			const data = await fetchData({global: globalHandlers, marker});
+			const data = await fetchData({global: globalHandlers, marker, root: $root, model: $model});
 			if (data != null) {
 				MUtils.setValue($model, $pp, data);
 				const optionsWithData = await mergeData(askOptions(options), data);
@@ -32,7 +32,6 @@ export const useAutonomousFetch = (ref: MutableRefObject<HTMLDivElement>, domIni
 				// no matter the loading is shown or not, hide it
 				chart.hideLoading();
 			}
-
 		};
 		const data = MUtils.getValue($model, $pp);
 		if (data == null) {
@@ -59,5 +58,9 @@ export const useAutonomousFetch = (ref: MutableRefObject<HTMLDivElement>, domIni
 				// ignore
 			}
 		};
-	}, [globalHandlers, domInitialized, ref, $pp, $model, options, settings, mergeData, marker, fetchData, fetchInterval]);
+	}, [
+		globalHandlers, domInitialized, ref,
+		$pp, $root, $model,
+		options, settings, mergeData, marker, fetchData, fetchInterval
+	]);
 };

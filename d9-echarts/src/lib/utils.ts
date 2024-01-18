@@ -8,6 +8,13 @@ export const redressChartMarker = (content: Pick<ChartDef, 'marker'>) => {
 	return VUtils.generateUniqueId();
 };
 
+export const askInitOptions = (options: ChartDef['initOptions']) => {
+	if (typeof options === 'function') {
+		return options();
+	}
+	return options;
+};
+
 export const askOptions = (options: ChartDef['options']) => {
 	if (typeof options === 'function') {
 		return options();

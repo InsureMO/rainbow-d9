@@ -37,5 +37,41 @@
 			"value": 22,
 			"name": "Sun"
 		}
-	]
+	],
+	"third": {
+		"criteria": {
+			"weekOfYear": 2,
+			"gender": "F"
+		},
+		"data": [
+			{
+				"value": 40,
+				"name": "Mon"
+			},
+			{
+				"value": 38,
+				"name": "Tue"
+			},
+			{
+				"value": 32,
+				"name": "Wed"
+			},
+			{
+				"value": 30,
+				"name": "Thu"
+			},
+			{
+				"value": 28,
+				"name": "Fri"
+			},
+			{
+				"value": 26,
+				"name": "Sat"
+			},
+			{
+				"value": 22,
+				"name": "Sun"
+			}
+		]
+	}
 }

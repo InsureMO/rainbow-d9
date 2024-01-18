@@ -1,8 +1,10 @@
-import {registerWidget, Undefinable, VUtils} from '@rainbow-d9/n1';
+import {Nullable, Reaction, registerWidget, Undefinable, VUtils} from '@rainbow-d9/n1';
 import {Widget} from '@rainbow-d9/n3';
-import {ReliantChartDef} from '../types';
+import {ChartDef, REACTION_REFRESH_CHART, ReliantChartDef} from '../types';
 import {ReliantChart} from './chart';
 
+export const ReliantChartInitOptionsBuild = Widget.createSnippetBuild<ChartDef, 'initOptions', ChartDef['initOptions']>(
+	'initOptions', (parsed: string) => new Function(parsed) as ChartDef['initOptions']);
 export const ReliantChartOptionsBuild = Widget.createSnippetBuild<ReliantChartDef, 'options', ReliantChartDef['options']>(
 	'options', (parsed: string) => new Function(parsed) as ReliantChartDef['options']);
 export const ReliantChartSettingsBuild = Widget.createSnippetBuild<ReliantChartDef, 'settings', ReliantChartDef['settings']>(
@@ -12,6 +14,29 @@ export const ReliantChartMergeDataBuild = Widget.createSnippetBuild<ReliantChart
 export const ReliantChartFetchDataBuild = Widget.createSnippetBuild<ReliantChartDef, 'fetchData', ReliantChartDef['fetchData']>(
 	'fetchData', (parsed: string) => new Function('options', 'data', parsed) as ReliantChartDef['fetchData']);
 
+export interface ReliantChartReactionCriteriaMonitorAttributeValue extends Widget.ReactionMonitorAttributeValue {
+	type: 'criteria';
+}
+
+export class ReliantChartReactionCriteriaAttributeBuild extends Widget.AbstractReactionAttributeBuild<ReliantChartReactionCriteriaMonitorAttributeValue> {
+	protected getReactionType(): Widget.ReactionTypes {
+		return 'criteria';
+	}
+
+	protected getReturnReaction(): Reaction | string {
+		return REACTION_REFRESH_CHART;
+	}
+}
+
+export const ReliantChartReactionCriteriaBuild = new ReliantChartReactionCriteriaAttributeBuild();
+
+export const ReliantChartReactionCriteriaHandlerDetective = Widget.createDefaultMonitorHandlerDetective({
+	attributeName: 'criteria',
+	// only returns false means invisible
+	redressResult: (ret: Nullable<Reaction | string>): Reaction | string => (ret == null || VUtils.isBlank(ret)) ? REACTION_REFRESH_CHART : ret,
+	ignoreDefault: true, deleteAttribute: true
+});
+
 export abstract class AbstractReliantChartTranslator extends Widget.SpecificWidgetTranslator<string> {
 	public shouldWrapByFormCell(): boolean {
 		return false;
@@ -20,8 +45,16 @@ export abstract class AbstractReliantChartTranslator extends Widget.SpecificWidg
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	public getAttributeValueBuilders(): Array<Widget.AttributeValueBuild<any>> {
 		return [
-			ReliantChartOptionsBuild, ReliantChartSettingsBuild,
-			ReliantChartMergeDataBuild, ReliantChartFetchDataBuild
+			ReliantChartInitOptionsBuild, ReliantChartOptionsBuild, ReliantChartSettingsBuild,
+			ReliantChartMergeDataBuild, ReliantChartFetchDataBuild,
+			ReliantChartReactionCriteriaBuild
+		];
+	}
+
+	public getReactionHandlerDetectives(): Array<Widget.MonitorHandlerDetective> {
+		return [
+			...super.getReactionHandlerDetectives(),
+			ReliantChartReactionCriteriaHandlerDetective
 		];
 	}
 }

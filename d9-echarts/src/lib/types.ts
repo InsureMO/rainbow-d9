@@ -1,9 +1,31 @@
-import {NodeDef, WidgetProps} from '@rainbow-d9/n1';
-import {GlobalHandlers, OmitHTMLProps, OmitNodeDef} from '@rainbow-d9/n2';
+import {BaseModel, NodeDef, PropValue, WidgetProps} from '@rainbow-d9/n1';
+import {GlobalHandlers, ModelCarriedHandler, OmitHTMLProps, OmitNodeDef} from '@rainbow-d9/n2';
 import {EChartsOption, SetOptionOpts} from 'echarts';
+
+/** LocaleOption from echarts/types/src/core/locale */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export type ChartLocaleOption = any;
+
+/**
+ * EChartsInitOpts, don't know why cannot import from echarts,
+ * therefore, define an interface here.
+ */
+export interface ChartInitOptions {
+	locale?: string | ChartLocaleOption;
+	/** RendererType from echarts/types/src/util/types */
+	renderer?: 'canvas' | 'svg';
+	devicePixelRatio?: number;
+	useDirtyRect?: boolean;
+	useCoarsePointer?: boolean;
+	pointerSize?: number;
+	ssr?: boolean;
+	width?: number | string;
+	height?: number | string;
+}
 
 /** Chart configuration definition */
 export type ChartDef = NodeDef & OmitHTMLProps<HTMLDivElement> & {
+	initOptions: ChartInitOptions | (() => ChartInitOptions)
 	/** the initial options, might carry the data, or might not */
 	options: EChartsOption | (() => EChartsOption);
 	settings?: SetOptionOpts | (() => SetOptionOpts);
@@ -20,11 +42,16 @@ export type ChartDef = NodeDef & OmitHTMLProps<HTMLDivElement> & {
 /** Chart widget definition, with html attributes */
 export type ChartProps = OmitNodeDef<ChartDef> & WidgetProps;
 
+/**
+ * return this to refresh chart
+ */
+export const REACTION_REFRESH_CHART = 'reaction-refresh-chart';
+
 export enum ChartGlobalEventPrefix {
 	DATA_CHANGED = 'chart-data-changed',
 }
 
-export interface FetchDataOptions {
+export interface FetchDataOptions extends ModelCarriedHandler<BaseModel, PropValue> {
 	marker: string;
 	global: GlobalHandlers;
 }
