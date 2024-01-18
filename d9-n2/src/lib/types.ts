@@ -7,6 +7,11 @@ export type OmitHTMLProps<T extends HTMLElement> = Omit<DetailedHTMLProps<InputH
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type OmitHTMLProps2<T extends HTMLElement, K extends keyof any> = Pick<OmitHTMLProps<T>, Exclude<keyof OmitHTMLProps<T>, K>>;
 
+export interface ModelCarrier<R extends BaseModel, M extends PropValue> {
+	root: R;
+	model: M;
+}
+
 export interface ModelCarriedHandler<R extends BaseModel, M extends PropValue> {
 	root: R;
 	model: M;

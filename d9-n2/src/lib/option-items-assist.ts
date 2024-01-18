@@ -1,5 +1,7 @@
 import {BaseModel, PropValue, useWrapperEventBus, VUtils, WidgetProps, WrapperEventTypes} from '@rainbow-d9/n1';
 import {ReactNode, useEffect, useState} from 'react';
+import {useGlobalHandlers} from './global';
+import {GlobalEventHandlers, ModelCarrier} from './types';
 
 /**
  * property "key" is optional, it is required when "value" is object or something else which cannot use as identity.
@@ -22,7 +24,7 @@ export interface OptionItemsDef<V> {
 	 * Might lead endless rendering loop.
 	 */
 	options: OptionItems<V>
-		| (<R extends BaseModel, M extends PropValue>(options: { root: R, model: M }) => Promise<OptionItems<V>>);
+		| (<R extends BaseModel, M extends PropValue>(options: ModelCarrier<R, M> & GlobalEventHandlers) => Promise<OptionItems<V>>);
 	optionSort?: OptionItemSort;
 	noAvailable?: ReactNode;
 	noMatched?: ReactNode;
@@ -54,6 +56,7 @@ export const useOptionItems = <V>(props: OptionItemsProps<V>) => {
 		$wrapped: {$root, $model}
 	} = props;
 
+	const globalHandlers = useGlobalHandlers();
 	const {on, off} = useWrapperEventBus();
 	const [candidates, setCandidates] = useState<OptionItemCandidates<V>>((): OptionItemCandidates<V> => {
 		return {initialized: false, options: NO_OPTION_ITEM};
@@ -62,7 +65,10 @@ export const useOptionItems = <V>(props: OptionItemsProps<V>) => {
 		if (!candidates.initialized) {
 			if (VUtils.isFunction(options)) {
 				(async () => {
-					setCandidates({initialized: true, options: await options({root: $root, model: $model})});
+					setCandidates({
+						initialized: true,
+						options: await options({root: $root, model: $model, global: globalHandlers})
+					});
 				})();
 			} else {
 				setCandidates({initialized: true, options: options ?? NO_OPTION_ITEM});
@@ -70,7 +76,7 @@ export const useOptionItems = <V>(props: OptionItemsProps<V>) => {
 		} else if (!VUtils.isFunction(options) && options !== candidates.options) {
 			setCandidates({initialized: true, options});
 		}
-	}, [candidates.initialized, candidates.options, options, $root, $model]);
+	}, [globalHandlers, candidates.initialized, candidates.options, options, $root, $model]);
 	useEffect(() => {
 		if (on != null && off != null) {
 			// only works when it is wrapped by n1
