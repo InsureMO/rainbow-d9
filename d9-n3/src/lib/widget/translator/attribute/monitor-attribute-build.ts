@@ -2,7 +2,7 @@ import {ExternalDefIndicator, Nullable, Undefinable, VUtils} from '@rainbow-d9/n
 import {ParsedNodeType} from '../../../node-types';
 import {ParsedList, ParsedListItemAttributePair, SemanticUtils} from '../../../semantic';
 import {FALSE_VALUES, TRUE_VALUES} from './constants';
-import {parseSnippet} from './snippet-attribute';
+import {parseSnippet} from './snippet-attribute-build';
 import {AttributeValueBuild, ScriptSnippet, WidgetPropertyName} from './types';
 
 export interface ComplexMonitorableAttributeValue {

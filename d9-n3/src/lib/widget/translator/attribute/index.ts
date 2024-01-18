@@ -9,8 +9,8 @@ export * from './monitor-attribute-build';
 export * from './reaction-attribute-build';
 export * from './validation-attribute-build';
 export * from './visibility-attribute-build';
+export * from './snippet-attribute-build';
 export * from './any-attribute-build';
 
-export * from './snippet-attribute';
 export * from './attribute-utils';
 export * from './attribute-name-util';

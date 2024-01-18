@@ -3,6 +3,7 @@ import {GlobalEventTypes, useGlobalEventBus} from '@rainbow-d9/n2';
 import {getInstanceByDom} from 'echarts';
 import {MutableRefObject, useEffect} from 'react';
 import {ChartGlobalEventPrefix, ChartProps} from './types';
+import {askOptions, askSettings} from './utils';
 
 export const useDataMerge = (ref: MutableRefObject<HTMLDivElement>, domInitialized: boolean, marker: string, props: ChartProps) => {
 	const {
@@ -26,8 +27,8 @@ export const useDataMerge = (ref: MutableRefObject<HTMLDivElement>, domInitializ
 			const data = MUtils.getValue($model, $pp);
 			(async () => {
 				if (data != null) {
-					const optionsWithData = await mergeData(options, data);
-					chart.setOption(optionsWithData, settings);
+					const optionsWithData = await mergeData(askOptions(options), data);
+					chart.setOption(optionsWithData, askSettings(settings));
 					// no matter the loading is shown or not, hide it
 					chart.hideLoading();
 				}

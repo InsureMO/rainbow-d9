@@ -1,4 +1,4 @@
-import {ExternalDefIndicator, VUtils} from '@rainbow-d9/n1';
+import {ExternalDefIndicator, NodeDef, Undefinable, VUtils} from '@rainbow-d9/n1';
 import {ParsedNodeType} from '../../../node-types';
 import {
 	ParsedCode,
@@ -10,7 +10,7 @@ import {
 	ParsedText
 } from '../../../semantic';
 import {AbstractTranslator} from '../abstract-translator';
-import {ScriptSnippet} from './types';
+import {AttributeValueBuild, ScriptSnippet, WidgetPropertyName} from './types';
 
 const parseCodeBlock = (code: ParsedCode): ScriptSnippet => {
 	return code.text;
@@ -68,4 +68,25 @@ export const parseSnippet = (attributeValue: string, item: ParsedListItemAttribu
 	} else {
 		return snippet;
 	}
+};
+
+export const createSnippetBuild = <D extends NodeDef, P extends keyof D, F = D[P]>(
+	attrName: P, createFunc: (parsed: string) => F
+): AttributeValueBuild<F | ExternalDefIndicator> => {
+	return {
+		accept: (key: WidgetPropertyName) => key === attrName,
+		// eslint-disable-next-line @typescript-eslint/no-unused-vars
+		build: (value: Undefinable<string>, list: ParsedListItemAttributePair): Undefinable<F | ExternalDefIndicator> => {
+			const parsed = parseSnippet(value, list);
+			if (parsed instanceof ExternalDefIndicator) {
+				// in fact, external def indicator is already intercepted by caller,
+				// see AbstractTranslator.buildAttributeValue for more details
+				return parsed;
+			} else if (VUtils.isBlank(parsed)) {
+				return (void 0);
+			} else {
+				return createFunc(parsed);
+			}
+		}
+	};
 };

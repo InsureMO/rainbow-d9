@@ -5,15 +5,16 @@ import {EChartsOption, SetOptionOpts} from 'echarts';
 /** Chart configuration definition */
 export type ChartDef = NodeDef & OmitHTMLProps<HTMLDivElement> & {
 	/** the initial options, might carry the data, or might not */
-	options: EChartsOption;
-	settings?: SetOptionOpts;
+	options: EChartsOption | (() => EChartsOption);
+	settings?: SetOptionOpts | (() => SetOptionOpts);
 	/** use to merge data into chart, it is not mandatory if the data is already in the options */
 	marker?: string;
 	/** merge data into chart, note the data format depends on which chart is used */
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	mergeData: (option: EChartsOption, data: any) => Promise<EChartsOption>;
+	mergeData: (options: EChartsOption, data: any) => Promise<EChartsOption>;
 	/** according to echarts docs, return default loading options, or return type and loading options for appointed type */
 	loading?: () => object | [string, object];
+	/** default 300px */
 	height?: string | number;
 };
 /** Chart widget definition, with html attributes */

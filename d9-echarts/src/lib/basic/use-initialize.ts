@@ -2,7 +2,7 @@ import {MUtils} from '@rainbow-d9/n1';
 import {getInstanceByDom, init} from 'echarts';
 import React, {Dispatch, SetStateAction, useEffect} from 'react';
 import {ChartProps} from './types';
-import {redressChartMarker} from './utils';
+import {askOptions, askSettings, redressChartMarker} from './utils';
 
 export interface ChartState {
 	domInitialized: boolean;
@@ -27,11 +27,11 @@ export const useInitialize = (ref: React.MutableRefObject<HTMLDivElement>, props
 		(async () => {
 			const data = MUtils.getValue($model, $pp);
 			if (data != null) {
-				const optionsWithData = await mergeData(options, data);
-				chart.setOption(optionsWithData, settings);
+				const optionsWithData = await mergeData(askOptions(options), data);
+				chart.setOption(optionsWithData, askSettings(settings));
 			} else {
 				// no data, show loading
-				chart.setOption(options, settings);
+				chart.setOption(askOptions(options), askSettings(settings));
 				const loadingOptions = loading?.();
 				if (Array.isArray(loadingOptions)) {
 					chart.showLoading(loadingOptions[0], loadingOptions[1]);
