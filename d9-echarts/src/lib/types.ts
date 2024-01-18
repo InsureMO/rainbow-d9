@@ -71,6 +71,8 @@ export type AutonomousChartProps = OmitNodeDef<AutonomousChartDef> & WidgetProps
 export interface ReliantChartDef extends ChartDef {
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	fetchData: (options: FetchDataOptions) => Promise<any>;
+	/** default 1 second */
+	fetchDefer?: number;
 }
 
 /** Chart widget definition, with html attributes */

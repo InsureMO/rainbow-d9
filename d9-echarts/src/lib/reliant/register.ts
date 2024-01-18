@@ -71,7 +71,8 @@ export const registerReliantChart = (widgetHelper: Widget.WidgetHelper, widgetTy
 		public getAttributeNamesMapping(): Undefinable<Record<Widget.CustomAttributeName, Widget.WidgetPropertyName>> {
 			return {
 				[`${widgetType}.merge`]: 'mergeData',
-				[`${widgetType}.fetch`]: 'fetchData'
+				[`${widgetType}.fetch`]: 'fetchData',
+				[`${widgetType}.defer`]: 'fetchDefer'
 			};
 		}
 	};
