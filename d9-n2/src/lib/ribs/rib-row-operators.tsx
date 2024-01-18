@@ -37,6 +37,7 @@ const RemoveButton = (props: { onClick: () => void }) => {
 
 export const RibRowOperators = (props: {
 	expanded: boolean; expand: () => void; collapse: () => void;
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	removable?: boolean; removeElement: (...args: Array<any>) => Promise<void>;
 }) => {
 	const {expanded, expand, collapse, removable = false, removeElement} = props;

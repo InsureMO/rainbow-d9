@@ -50,7 +50,7 @@ export const TableRow = (props: TableRowProps) => {
 			off(TableEventTypes.COLLAPSE_ROW, onCollapseRow);
 			off(TableEventTypes.REMOVE_ROW, onRemoveRow);
 		};
-	}, [on, off, fire, elementIndex, removeElement]);
+	}, [globalHandlers, on, off, fire, elementIndex, removeElement]);
 	useEffect(() => {
 		if (expanded && expandAreaRef.current != null) {
 			const contentDiv: HTMLDivElement = expandAreaRef.current.closest('div[data-w=d9-table-content]');
