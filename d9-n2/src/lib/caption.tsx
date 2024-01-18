@@ -28,7 +28,7 @@ export interface CaptionValueToLabelFormats {
 	nf3: (value?: number) => string;
 }
 
-export type CaptionValueToLabel = (value: Nullable<PropValue>, formats: CaptionValueToLabelFormats) => ReactNode;
+export type CaptionValueToLabel = (value: Nullable<PropValue>, formats: CaptionValueToLabelFormats, options: GlobalEventHandlers) => ReactNode;
 
 export interface CaptionClickOptions<R extends BaseModel, M extends PropValue>
 	extends ModelCarriedHandler<R, M>, ValidationHandlers, GlobalEventHandlers {
@@ -270,7 +270,7 @@ export const Caption = forwardRef((props: CaptionProps, ref: ForwardedRef<HTMLSp
 		} else if (labelOnValue && valueToLabel != null) {
 			// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 			// @ts-ignore
-			value = valueToLabel(MUtils.getValue($model, $pp), formatter) ?? '';
+			value = valueToLabel(MUtils.getValue($model, $pp), formatter, {global: globalHandlers}) ?? '';
 		} else if (label != null) {
 			// wrap nested is not necessary, since caption do everything very well by itself.
 			// but still use label like here to make it more consistent.
