@@ -47,6 +47,6 @@ export const useReliantWatch = (ref: MutableRefObject<HTMLDivElement>, domInitia
 	}, [
 		globalHandlers, on, off, replace, clear, domInitialized, ref,
 		$pp, $root, $model,
-		options, settings, marker, mergeData, fetchData
+		options, settings, marker, mergeData, fetchData, fetchDefer
 	]);
 };
