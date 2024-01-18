@@ -1,5 +1,5 @@
 import {NodeDef, WidgetProps} from '@rainbow-d9/n1';
-import {OmitHTMLProps, OmitNodeDef} from '@rainbow-d9/n2';
+import {GlobalHandlers, OmitHTMLProps, OmitNodeDef} from '@rainbow-d9/n2';
 import {EChartsOption, SetOptionOpts} from 'echarts';
 
 /** Chart configuration definition */
@@ -23,3 +23,28 @@ export type ChartProps = OmitNodeDef<ChartDef> & WidgetProps;
 export enum ChartGlobalEventPrefix {
 	DATA_CHANGED = 'chart-data-changed',
 }
+
+export interface FetchDataOptions {
+	marker: string;
+	global: GlobalHandlers;
+}
+
+/** Chart configuration definition */
+export interface AutonomousChartDef extends ChartDef {
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	fetchData: (options: FetchDataOptions) => Promise<any>;
+	/** default 10 seconds */
+	fetchInterval?: number;
+}
+
+/** Chart widget definition, with html attributes */
+export type AutonomousChartProps = OmitNodeDef<AutonomousChartDef> & WidgetProps;
+
+/** Chart configuration definition */
+export interface ReliantChartDef extends ChartDef {
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	fetchData: (options: FetchDataOptions) => Promise<any>;
+}
+
+/** Chart widget definition, with html attributes */
+export type ReliantChartProps = OmitNodeDef<ReliantChartDef> & WidgetProps;

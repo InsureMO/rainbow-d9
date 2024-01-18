@@ -1,15 +1,14 @@
 import React, {useRef} from 'react';
 import {AChart, useDataMerge, useInitialize, useResize} from '../basic';
-import {AutonomousChartProps} from '../types';
-import {useAutonomousFetch} from './use-autonomous-fetch';
+import {ReliantChartProps} from '../types';
 
-export const AutonomousChart = (props: AutonomousChartProps) => {
+export const ReliantChart = (props: ReliantChartProps) => {
 	const {
 		// eslint-disable-next-line @typescript-eslint/no-unused-vars
 		options, settings, marker, mergeData, loading,
-		// eslint-disable-next-line @typescript-eslint/no-unused-vars
-		fetchData, fetchInterval,
 		$wrapped: {$avs: {$disabled, $visible}},
+		// eslint-disable-next-line @typescript-eslint/no-unused-vars
+		fetchData,
 		height,
 		...rest
 	} = props;
@@ -18,9 +17,8 @@ export const AutonomousChart = (props: AutonomousChartProps) => {
 	const [state] = useInitialize(ref, props);
 	useResize(ref, state.domInitialized);
 	useDataMerge(ref, state.domInitialized, state.marker, props);
-	useAutonomousFetch(ref, state.domInitialized, state.marker, props);
 
-	return <AChart {...rest} data-w="d9-aut-chart"
+	return <AChart {...rest} data-w="d9-rel-chart"
 	               data-disabled={$disabled} data-visible={$visible}
 	               chartHeight={height} ref={ref}/>;
 };

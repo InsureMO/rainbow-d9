@@ -1,7 +1,7 @@
 import {registerWidget, Undefinable, VUtils} from '@rainbow-d9/n1';
 import {Widget} from '@rainbow-d9/n3';
+import {AutonomousChartDef} from '../types';
 import {AutonomousChart} from './chart';
-import {AutonomousChartDef} from './types';
 
 export const AutonomousChartOptionsBuild = Widget.createSnippetBuild<AutonomousChartDef, 'options', AutonomousChartDef['options']>(
 	'options', (parsed: string) => new Function(parsed) as AutonomousChartDef['options']);

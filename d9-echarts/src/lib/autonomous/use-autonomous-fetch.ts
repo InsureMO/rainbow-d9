@@ -2,8 +2,8 @@ import {MUtils} from '@rainbow-d9/n1';
 import {useGlobalHandlers} from '@rainbow-d9/n2';
 import {getInstanceByDom} from 'echarts';
 import {MutableRefObject, useEffect} from 'react';
-import {askOptions, askSettings} from '../basic';
-import {AutonomousChartProps} from './types';
+import {AutonomousChartProps} from '../types';
+import {askOptions, askSettings} from '../utils';
 
 export const useAutonomousFetch = (ref: MutableRefObject<HTMLDivElement>, domInitialized: boolean, marker: string, props: AutonomousChartProps) => {
 	const {

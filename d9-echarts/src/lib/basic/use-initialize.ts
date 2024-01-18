@@ -1,8 +1,8 @@
 import {MUtils} from '@rainbow-d9/n1';
 import {getInstanceByDom, init} from 'echarts';
 import React, {Dispatch, SetStateAction, useEffect} from 'react';
-import {ChartProps} from './types';
-import {askOptions, askSettings, redressChartMarker} from './utils';
+import {ChartProps} from '../types';
+import {askOptions, askSettings, redressChartMarker} from '../utils';
 
 export interface ChartState {
 	domInitialized: boolean;

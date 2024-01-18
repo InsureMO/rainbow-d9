@@ -2,8 +2,8 @@ import {MUtils} from '@rainbow-d9/n1';
 import {GlobalEventTypes, useGlobalEventBus} from '@rainbow-d9/n2';
 import {getInstanceByDom} from 'echarts';
 import {MutableRefObject, useEffect} from 'react';
-import {ChartGlobalEventPrefix, ChartProps} from './types';
-import {askOptions, askSettings} from './utils';
+import {ChartGlobalEventPrefix, ChartProps} from '../types';
+import {askOptions, askSettings} from '../utils';
 
 export const useDataMerge = (ref: MutableRefObject<HTMLDivElement>, domInitialized: boolean, marker: string, props: ChartProps) => {
 	const {

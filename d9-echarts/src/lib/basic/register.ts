@@ -1,7 +1,7 @@
 import {registerWidget, Undefinable, VUtils} from '@rainbow-d9/n1';
 import {Widget} from '@rainbow-d9/n3';
+import {ChartDef} from '../types';
 import {Chart} from './chart';
-import {ChartDef} from './types';
 
 export const ChartOptionsBuild = Widget.createSnippetBuild<ChartDef, 'options', ChartDef['options']>(
 	'options', (parsed: string) => new Function(parsed) as ChartDef['options']);

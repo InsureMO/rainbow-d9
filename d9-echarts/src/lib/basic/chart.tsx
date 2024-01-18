@@ -1,7 +1,7 @@
 import {DOM_ID_WIDGET, DOM_KEY_WIDGET} from '@rainbow-d9/n2';
 import React, {useRef} from 'react';
 import styled from 'styled-components';
-import {ChartProps} from './types';
+import {ChartProps} from '../types';
 import {useDataMerge} from './use-data-merge';
 import {useInitialize} from './use-initialize';
 import {useResize} from './use-resize';
@@ -31,6 +31,7 @@ export const Chart = (props: ChartProps) => {
 	const {
 		// eslint-disable-next-line @typescript-eslint/no-unused-vars
 		options, settings, marker, mergeData, loading,
+		$wrapped: {$avs: {$disabled, $visible}},
 		height,
 		...rest
 	} = props;
@@ -40,5 +41,7 @@ export const Chart = (props: ChartProps) => {
 	useResize(ref, state.domInitialized);
 	useDataMerge(ref, state.domInitialized, state.marker, props);
 
-	return <AChart {...rest} chartHeight={height} ref={ref}/>;
+	return <AChart {...rest}
+	               data-disabled={$disabled} data-visible={$visible}
+	               chartHeight={height} ref={ref}/>;
 };
