@@ -31,15 +31,19 @@ export interface RegisteredContainerWidget<P extends ContainerWidgetProps> exten
 }
 
 export interface EnhancedPropsForArray extends ArrayUsedDef {
-	removeElement: (element: BaseModel, index: number) => Promise<void>;
-	addElement: () => Promise<void>;
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	removeElement: (element: BaseModel, index: number, ...args: Array<any>) => Promise<void>;
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	addElement: (...args: Array<any>) => Promise<void>;
 	hasElement: boolean;
-	clearElement: () => Promise<void>;
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	clearElement: (...args: Array<any>) => Promise<void>;
 }
 
 export interface EnhancedPropsForArrayElement extends Omit<EnhancedPropsForArray, 'removeElement'> {
 	elementIndex: number;
-	removeElement: () => Promise<void>;
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	removeElement: (...args: Array<any>) => Promise<void>;
 }
 
 export type EnhancePropsForArray<T> = T & { $array: EnhancedPropsForArray };

@@ -21,7 +21,8 @@ export const ArrayElement = (props: {
 	elements: Nullable<Array<BaseModel>>, elementModel: BaseModel; index: number;
 	$wrapped: WrappedAttributes; $arrayP2r: PropertyPath;
 	$array: EnhancedPropsForArray;
-	createRemoveElementFunc: (elementModel: BaseModel, index: number) => (() => Promise<void>);
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	createRemoveElementFunc: (elementModel: BaseModel, index: number) => ((...args: Array<any>) => Promise<void>);
 	widget: RegisteredArrayContainerWidget<ArrayContainerWidgetProps>;
 	originalProps: ArrayContainerDef & ModelHolder & WrappedNodeAttributes;
 }) => {

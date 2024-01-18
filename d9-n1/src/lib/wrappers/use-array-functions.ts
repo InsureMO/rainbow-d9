@@ -30,16 +30,18 @@ export const useArrayFunctions = (options: {
 		elements = ($array || []) as Array<BaseModel>;
 	}
 
-	const shouldRemoveElement = async (elementModel: BaseModel, index: number) => {
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	const shouldRemoveElement = async (elementModel: BaseModel, index: number, ...args: Array<any>) => {
 		if (couldRemoveElement == null) {
 			return Promise.resolve(true);
 		}
 		return couldRemoveElement({
 			root: $root, model: $array as ArrayPropValue, element: elementModel, index
-		});
+		}, ...args);
 	};
-	const removeElement = async (elementModel: BaseModel, index: number) => {
-		const shouldRemove = await shouldRemoveElement(elementModel, index);
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	const removeElement = async (elementModel: BaseModel, index: number, ...args: Array<any>) => {
+		const shouldRemove = await shouldRemoveElement(elementModel, index, ...args);
 		if (!shouldRemove) {
 			return;
 		}
@@ -55,14 +57,18 @@ export const useArrayFunctions = (options: {
 		// call removed function if there is
 		elementRemoved && await elementRemoved({
 			root: $root, model: $array as ArrayPropValue, element: elementModel, index
-		});
+		}, ...args);
 		// force update myself
 		forceUpdate();
 		// notify value changed
 		await onValueChanged({absolutePath: absolutePathOfArray, oldValue: oldElements, newValue: elements});
 	};
-	const createRemoveElementFunc = (elementModel: BaseModel, index: number) => async () => await removeElement(elementModel, index);
-	const clearElement = async () => {
+	const createRemoveElementFunc = (elementModel: BaseModel, index: number) => {
+		// eslint-disable-next-line @typescript-eslint/no-explicit-any
+		return async (...args: Array<any>) => await removeElement(elementModel, index, ...args);
+	};
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	const clearElement = async (...args: Array<any>) => {
 		// copy to old elements
 		const oldElements = $array == null ? null : [...($array as Array<BaseModel>)];
 		// remove all from elements
@@ -73,26 +79,27 @@ export const useArrayFunctions = (options: {
 		elementRemoved && await Promise.all((oldElements || []).map(async elementModel => {
 			return await elementRemoved({
 				root: $root, model: $array as ArrayPropValue, element: elementModel, index: elements.length
-			});
+			}, ...args);
 		}));
 		// force update myself
 		forceUpdate();
 		// notify value changed
 		await onValueChanged({absolutePath: absolutePathOfArray, oldValue: oldElements, newValue: elements});
 	};
-	const addElement = async () => {
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	const addElement = async (...args: Array<any>) => {
 		// copy to old elements
 		const oldElements = $array == null ? null : [...($array as Array<BaseModel>)];
 		// create new element
 		const newElement = createElement != null
-			? await createElement({root: $root, model: $array as ArrayPropValue, index: elements.length})
+			? await createElement({root: $root, model: $array as ArrayPropValue, index: elements.length}, ...args)
 			: {};
 		// push into elements
 		elements.push(newElement);
 		// call added function if there is
 		elementAdded && await elementAdded({
 			root: $root, model: $array as ArrayPropValue, element: newElement, index: elements.length - 1
-		});
+		}, ...args);
 		// if new element is the only one in elements, then elements might be created in rendering
 		// set into model anyway
 		if (elements.length === 1) {

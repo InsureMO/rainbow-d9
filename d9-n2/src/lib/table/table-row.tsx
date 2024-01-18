@@ -1,5 +1,6 @@
 import {Enhance$WrappedPropsForArrayElement, EnhancedPropsForArrayElement, NUtils} from '@rainbow-d9/n1';
 import React, {Children, useEffect, useRef, useState} from 'react';
+import {useGlobalHandlers} from '../global';
 import {guardPaginationData} from '../pagination';
 import {useTableEventBus} from './event/table-event-bus';
 import {TableEventTypes} from './event/table-event-bus-types';
@@ -22,6 +23,7 @@ export const TableRow = (props: TableRowProps) => {
 	} = props;
 
 	const expandAreaRef = useRef<HTMLDivElement>(null);
+	const globalHandlers = useGlobalHandlers();
 	const {on, off, fire} = useTableEventBus();
 	const [expanded, setExpanded] = useState(false);
 	useEffect(() => {
@@ -39,7 +41,7 @@ export const TableRow = (props: TableRowProps) => {
 			setExpanded(false);
 			fire(TableEventTypes.ROW_COLLAPSED, elementIndex);
 		});
-		const onRemoveRow = handleEvent(async () => await removeElement());
+		const onRemoveRow = handleEvent(async () => await removeElement({global: globalHandlers}));
 		on(TableEventTypes.EXPAND_ROW, onExpandRow);
 		on(TableEventTypes.COLLAPSE_ROW, onCollapseRow);
 		on(TableEventTypes.REMOVE_ROW, onRemoveRow);

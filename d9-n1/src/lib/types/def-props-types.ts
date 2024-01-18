@@ -120,6 +120,9 @@ export interface ContainerDef extends NodeDef {
 	$nodes: Array<NodeDef>;
 }
 
+/**
+ * the tailing args depends on widgets passed in.
+ */
 export interface ArrayUsedDef {
 	noElementReminder?: ReactNode;
 	/** default is false */
@@ -128,22 +131,26 @@ export interface ArrayUsedDef {
 	/** create element before it is added into array. index is position of new one */
 	createElement?: <R extends BaseModel, M extends ArrayPropValue, E extends BaseModel>(options: {
 		root: R, model: M, index: number
-	}) => E | Promise<E>;
+		// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	}, ...args: Array<any>) => E | Promise<E>;
 	/** element added, before any event fired. index is position of added one in array */
 	elementAdded?: <R extends BaseModel, M extends ArrayPropValue, E extends BaseModel>(options: {
 		root: R, model: M, element: E, index: number
-	}) => void | Promise<void>;
+		// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	}, ...args: Array<any>) => void | Promise<void>;
 	/** default is false */
 	removable?: boolean;
 	removeLabel?: ReactNode;
 	/** a chance to check the element could be removed or not */
 	couldRemoveElement?: <R extends BaseModel, M extends ArrayPropValue, E extends BaseModel>(options: {
 		root: R, model: M, element: E, index: number
-	}) => Promise<boolean>;
+		// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	}, ...args: Array<any>) => Promise<boolean>;
 	/** element removed, before any event fired. index is original position of removed one in array */
 	elementRemoved?: <R extends BaseModel, M extends ArrayPropValue, E extends BaseModel>(options: {
 		root: R, model: M, element: E, index: number
-	}) => void | Promise<void>;
+		// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	}, ...args: Array<any>) => void | Promise<void>;
 	/**
 	 * return key of element, make sure it is stable and not impacted by element data.
 	 * change leads unpredicted ui behavior.

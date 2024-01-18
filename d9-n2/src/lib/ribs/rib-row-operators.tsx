@@ -1,6 +1,7 @@
 import {VUtils, WrappedAttributes} from '@rainbow-d9/n1';
 import React from 'react';
 import {Button, ButtonFill, ButtonInk} from '../button';
+import {useGlobalHandlers} from '../global';
 import {ARibRowOperators} from './widgets';
 
 const ExpandButton = (props: { onClick: () => void }) => {
@@ -36,11 +37,12 @@ const RemoveButton = (props: { onClick: () => void }) => {
 
 export const RibRowOperators = (props: {
 	expanded: boolean; expand: () => void; collapse: () => void;
-	removable?: boolean; removeElement: () => Promise<void>;
+	removable?: boolean; removeElement: (...args: Array<any>) => Promise<void>;
 }) => {
 	const {expanded, expand, collapse, removable = false, removeElement} = props;
 
-	const onRemoveClicked = async () => await removeElement();
+	const globalHandlers = useGlobalHandlers();
+	const onRemoveClicked = async () => await removeElement(globalHandlers);
 
 	return <ARibRowOperators data-expanded={expanded}>
 		{removable ? <RemoveButton onClick={onRemoveClicked}/> : null}

@@ -1,6 +1,7 @@
 import {EnhancedPropsForArray, Nullable, useForceUpdate, Wrapper} from '@rainbow-d9/n1';
 import React, {useEffect} from 'react';
 import {Button, ButtonInk} from '../button';
+import {useGlobalHandlers} from '../global';
 import {IntlLabel} from '../intl-label';
 import {PaginationData} from '../pagination';
 import {useTableEventBus} from './event/table-event-bus';
@@ -14,6 +15,7 @@ export const TableBottomBar = (props: Omit<TableProps, '$array'> & { $array: Enh
 		$array: {addable = false, addLabel, addElement}
 	} = props;
 
+	const globalHandlers = useGlobalHandlers();
 	const {on, off, fire} = useTableEventBus();
 	const forceUpdate = useForceUpdate();
 	useEffect(() => {
@@ -32,7 +34,7 @@ export const TableBottomBar = (props: Omit<TableProps, '$array'> & { $array: Enh
 	if (addable === false && pageable == null) {
 		return null;
 	} else {
-		const onAddClicked = async () => await addElement();
+		const onAddClicked = async () => await addElement({global: globalHandlers});
 		// it will refresh the pagination first, model updated
 		const onPaginationChanged = async (options: {
 			oldValue?: Nullable<PaginationData>; newValue: PaginationData;
