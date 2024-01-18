@@ -20,7 +20,7 @@ export enum RootEventTypes {
 	UNREGISTER_VALIDATABLE = 'unregister-validatable'
 }
 
-interface ValidatedOptions<R extends BaseModel, M extends PropValue, V extends PropValue> extends ValidationResult {
+export interface ValidatedOptions<R extends BaseModel, M extends PropValue, V extends PropValue> extends ValidationResult {
 	root: R;
 	model: M;
 	pathToRoot: PropertyPath;
@@ -44,9 +44,9 @@ export interface RootEventBus {
 
 	fire<R extends BaseModel, M extends PropValue, V extends PropValue>(type: RootEventTypes.VALIDATED, options: ValidatedOptions<R, M, V>): this;
 
-	on(type: RootEventTypes.VALIDATED, listener: () => void): this;
+	on<R extends BaseModel, M extends PropValue, V extends PropValue>(type: RootEventTypes.VALIDATED, listener: (options: ValidatedOptions<R, M, V>) => void): this;
 
-	off(type: RootEventTypes.VALIDATED, listener: () => void): this;
+	off<R extends BaseModel, M extends PropValue, V extends PropValue>(type: RootEventTypes.VALIDATED, listener: (options: ValidatedOptions<R, M, V>) => void): this;
 
 	fire(type: RootEventTypes.REGISTER_VALIDATABLE, uniqueId: NodeUniqueKey, scopes: Array<NodeValidationScope>, validate: () => Promise<Validated>): this;
 
