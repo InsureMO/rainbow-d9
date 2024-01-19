@@ -13,6 +13,7 @@
 	"wizard2": {
 		"step1": {
 			"step1Input1": "abcde"
-		}
+		},
+		"step2": {}
 	}
 }

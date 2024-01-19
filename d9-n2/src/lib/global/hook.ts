@@ -1,5 +1,6 @@
-import {BaseModel, PropValue} from '@rainbow-d9/n1';
+import {BaseModel, PropValue, RootEventBus, useRootEventBus} from '@rainbow-d9/n1';
 import {CSSProperties, ReactNode, useState} from 'react';
+import {ModelCarrier} from '../types';
 import {GlobalEventTypes, useGlobalEventBus} from './global-event-bus';
 
 export interface RemoteRequestNeverFailResponse {
@@ -143,7 +144,7 @@ export enum GlobalEventPrefix {
 }
 
 export type CustomGlobalEventHandler = <R extends BaseModel, M extends PropValue>(
-	key: string, prefix: string, clipped: string, models?: { root: R; model: M; }) => Promise<void>;
+	key: string, prefix: string, clipped: string, models?: ModelCarrier<R, M>) => Promise<void>;
 
 export const useCustomGlobalEvent = (): CustomGlobalEventHandler => {
 	const {fire} = useGlobalEventBus();
@@ -165,6 +166,10 @@ export interface GlobalHandlers {
 	yesNoDialog: YesNoDialogHandlers;
 	remoteRequest: RemoteRequestHandlers;
 	custom: CustomGlobalEventHandler;
+	/**
+	 * be careful, root event bus could be an empty object if hook is called outside RootEventBusProvider
+	 */
+	root: RootEventBus;
 }
 
 /**
@@ -176,8 +181,9 @@ export const useGlobalHandlers = (): GlobalHandlers => {
 	const yesNoDialog = useYesNoDialog();
 	const remoteRequest = useRemoteRequest();
 	const customEvent = useCustomGlobalEvent();
+	const rootHandlers = useRootEventBus();
 	const [handlers] = useState<GlobalHandlers>({
-		alert, dialog, yesNoDialog, remoteRequest, custom: customEvent
+		alert, dialog, yesNoDialog, remoteRequest, custom: customEvent, root: rootHandlers
 	});
 	return handlers;
 };
