@@ -6,3 +6,4 @@ export * from './use-value-changed';
 
 export * from './validation-event-holder';
 export * from './root-to-bridge-undercover';
+export * from './device-detective';

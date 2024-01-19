@@ -3,7 +3,14 @@ export interface MobileUtilsType {
 	 * get value by given property path from given model
 	 */
 	readonly detect: () => boolean;
+	readonly createDeviceTags: () => void;
+	readonly isMobile: () => boolean;
+	readonly isTouchable: () => boolean;
 }
+
+const DeviceTags = {
+	touchable: false
+};
 
 export const MBUtils: MobileUtilsType = {
 	detect: () => {
@@ -31,5 +38,16 @@ export const MBUtils: MobileUtilsType = {
 			}
 		}
 		return hasTouchScreen;
-	}
+	},
+	createDeviceTags: () => {
+		if (MBUtils.detect()) {
+			DeviceTags.touchable = true;
+			document.documentElement.setAttribute('data-touchable', 'true');
+		} else {
+			DeviceTags.touchable = false;
+			document.documentElement.removeAttribute('data-touchable');
+		}
+	},
+	isMobile: () => DeviceTags.touchable,
+	isTouchable: () => DeviceTags.touchable
 };

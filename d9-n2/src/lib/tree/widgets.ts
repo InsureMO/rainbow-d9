@@ -21,7 +21,6 @@ export const ATree = styled.div.attrs<{ height: number | string }>(
     align-self: start;
     grid-column: var(--grid-column);
     grid-row: var(--grid-row);
-    min-width: 100%;
     border: ${CssVars.BORDER};
     border-radius: ${CssVars.BORDER_RADIUS};
     overflow: auto;
