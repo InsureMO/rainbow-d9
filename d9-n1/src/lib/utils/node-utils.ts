@@ -96,12 +96,18 @@ export const NUtils: NodeUtilsType = {
 		style.gridRow = style.gridRow || pos.gridRow;
 		style.gridColumn = style.gridColumn || pos.gridColumn;
 		if (VUtils.isNotBlank(style.gridRow)) {
-			style['--grid-row'] = style.gridRow;
+			// use "-" to break the css, otherwise it will read ancestor's variable, which leads to wrong layout
+			style['--grid-row'] = style.gridRow ?? '-';
 			delete style.gridRow;
+		} else {
+			style['--grid-row'] = '-';
 		}
 		if (VUtils.isNotBlank(style.gridColumn)) {
-			style['--grid-column'] = style.gridColumn;
+			// use "-" to break the css, otherwise it will read ancestor's variable, which leads to wrong layout
+			style['--grid-column'] = style.gridColumn ?? '-';
 			delete style.gridColumn;
+		} else {
+			style['--grid-row'] = '-';
 		}
 		return style;
 	}
