@@ -6,12 +6,14 @@ import {AlertLabel} from '../alert';
 import {GlobalEventTypes, useGlobalEventBus} from '../global-event-bus';
 import {RemoteRequestContainer} from './widgets';
 
-export const RemoteRequest = (props: {
+export interface RemoteRequestProps {
 	clearAccount: () => void;
 	on200?: () => void;
 	on401: () => void;
 	on403: () => void;
-}) => {
+}
+
+export const RemoteRequest = (props: RemoteRequestProps) => {
 	const {clearAccount, on200: doOn200, on401: doOn401, on403: doOn403} = props;
 
 	const {on, off, fire} = useGlobalEventBus();

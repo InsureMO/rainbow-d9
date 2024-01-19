@@ -1,13 +1,5 @@
-import {BaseModel, MUtils, PropValue, StandaloneRoot, VUtils} from '@rainbow-d9/n1';
-import {
-	$d9n2,
-	Alert,
-	ButtonClickOptions,
-	Dialog,
-	GlobalEventBusProvider,
-	RemoteRequest,
-	YesNoDialog
-} from '@rainbow-d9/n2';
+import {BaseModel, MUtils, PropValue, StandaloneRoot} from '@rainbow-d9/n1';
+import {$d9n2, ButtonClickOptions, GlobalRoot} from '@rainbow-d9/n2';
 import {
 	CalculationEvent,
 	PlanCategoryDef,
@@ -218,16 +210,12 @@ export const ThaiPlanSelection = () => {
 		}
 	};
 
-	return <GlobalEventBusProvider>
-		<Alert/>
-		<Dialog/>
-		<YesNoDialog/>
-		<RemoteRequest clearAccount={VUtils.noop} on401={VUtils.noop} on403={VUtils.noop}/>
+	return <GlobalRoot>
 		<CustomEventHandler/>
 		<N2DemoDialogHandler/>
 		{/** @ts-ignore */}
 		<StandaloneRoot {...def} $root={DemoData} externalDefs={externalDefs}/>
-	</GlobalEventBusProvider>;
+	</GlobalRoot>;
 };
 
 export const ThaiPlanSelectionData = DemoData;

@@ -1,5 +1,5 @@
-import {StandaloneRoot, VUtils} from '@rainbow-d9/n1';
-import {Alert, Dialog, GlobalEventBusProvider, RemoteRequest, YesNoDialog} from '@rainbow-d9/n2';
+import {StandaloneRoot} from '@rainbow-d9/n1';
+import {GlobalRoot} from '@rainbow-d9/n2';
 import {EChartsOption} from 'echarts';
 import React from 'react';
 import {CustomEventHandler} from '../custom-event-handler';
@@ -27,16 +27,11 @@ export const ECharts = () => {
 		}
 	};
 
-	return <GlobalEventBusProvider>
-		<Alert/>
-		<Dialog/>
-		<YesNoDialog/>
-		<RemoteRequest clearAccount={VUtils.noop} on401={VUtils.noop} on403={VUtils.noop}/>
+	return <GlobalRoot>
 		<CustomEventHandler/>
 		<N2DemoDialogHandler/>
-		{/** @ts-ignore */}
 		<StandaloneRoot {...def} $root={DemoData} externalDefs={externalDefs}/>
-	</GlobalEventBusProvider>;
+	</GlobalRoot>;
 };
 
 export const EChartsData = DemoData;

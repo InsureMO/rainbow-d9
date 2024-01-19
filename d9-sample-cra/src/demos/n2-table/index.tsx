@@ -3,10 +3,9 @@ import {
 	BridgeToRootEventTypes,
 	StandaloneRoot,
 	useBridgeEventBus,
-	ValueChangedNotification,
-	VUtils
+	ValueChangedNotification
 } from '@rainbow-d9/n1';
-import {Alert, Dialog, GlobalEventBusProvider, PaginationData, RemoteRequest, YesNoDialog} from '@rainbow-d9/n2';
+import {GlobalRoot, PaginationData} from '@rainbow-d9/n2';
 import {nanoid} from 'nanoid';
 import React from 'react';
 import {CustomEventHandler} from '../custom-event-handler';
@@ -53,16 +52,11 @@ const InternalN2Table = () => {
 		}
 	};
 
-	return <GlobalEventBusProvider>
-		<Alert/>
-		<Dialog/>
-		<YesNoDialog/>
-		<RemoteRequest clearAccount={VUtils.noop} on401={VUtils.noop} on403={VUtils.noop}/>
+	return <GlobalRoot>
 		<CustomEventHandler/>
 		<N2DemoDialogHandler/>
-		{/** @ts-ignore */}
 		<StandaloneRoot {...def} $root={DemoData} externalDefs={externalDefs}/>
-	</GlobalEventBusProvider>;
+	</GlobalRoot>;
 };
 
 export const N2Table = () => {

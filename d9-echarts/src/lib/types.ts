@@ -1,5 +1,6 @@
 import {BaseModel, NodeDef, PropValue, WidgetProps} from '@rainbow-d9/n1';
-import {GlobalHandlers, ModelCarriedHandler, OmitHTMLProps, OmitNodeDef} from '@rainbow-d9/n2';
+import {ModelCarriedHandler, OmitHTMLProps, OmitNodeDef} from '@rainbow-d9/n2';
+import {GlobalEventHandlers} from '@rainbow-d9/n2/src';
 import {EChartsOption, SetOptionOpts} from 'echarts';
 
 /** LocaleOption from echarts/types/src/core/locale */
@@ -51,9 +52,8 @@ export enum ChartGlobalEventPrefix {
 	DATA_CHANGED = 'chart-data-changed',
 }
 
-export interface FetchDataOptions extends ModelCarriedHandler<BaseModel, PropValue> {
+export interface FetchDataOptions extends ModelCarriedHandler<BaseModel, PropValue>, GlobalEventHandlers {
 	marker: string;
-	global: GlobalHandlers;
 }
 
 /** Chart configuration definition */

@@ -5,4 +5,4 @@ export * from './dialog';
 export * from './remote-request';
 
 export * from './hook';
-
+export * from './global-root';

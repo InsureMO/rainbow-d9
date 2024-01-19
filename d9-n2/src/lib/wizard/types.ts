@@ -1,7 +1,6 @@
-import {BaseModel, NodeDef, PropValue, WidgetProps} from '@rainbow-d9/n1';
+import {BaseModel, NodeDef, PropertyPath, PropValue, WidgetProps} from '@rainbow-d9/n1';
 import {ReactNode} from 'react';
-import {TabDefDataRetrieverOptions} from '../tabs';
-import {OmitHTMLProps, OmitNodeDef} from '../types';
+import {GlobalEventHandlers, ModelCarriedHandler, OmitHTMLProps, OmitNodeDef} from '../types';
 
 export interface WizardStepTitleDef extends NodeDef {
 	/** step title */
@@ -14,8 +13,16 @@ export interface WizardStepTitleDef extends NodeDef {
 	marker?: string;
 }
 
+export interface WizardDefDataRetrieverOptions<R extends BaseModel, M extends PropValue>
+	extends ModelCarriedHandler<R, M>, GlobalEventHandlers {
+	marker: string;
+	absolutePath: PropertyPath;
+	propertyPath: PropertyPath;
+	firstActive: boolean;
+}
+
 export interface WizardStepDef extends WizardStepTitleDef {
-	data?: <R extends BaseModel, M extends PropValue>(options: TabDefDataRetrieverOptions<R, M>) => Promise<void>;
+	data?: <R extends BaseModel, M extends PropValue>(options: WizardDefDataRetrieverOptions<R, M>) => Promise<void>;
 	body: NodeDef | ((marker?: string) => Promise<NodeDef>);
 }
 

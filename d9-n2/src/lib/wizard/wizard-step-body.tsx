@@ -2,13 +2,13 @@ import {ModelHolder, NodeDef, PropertyPath, Wrapper} from '@rainbow-d9/n1';
 import React from 'react';
 import {ButtonFill, ButtonInk} from '../button';
 import {IntlLabel} from '../intl-label';
-import {useTabBodyInit} from '../tabs/use-tab-body-init';
 import {UnwrappedButton as Button} from '../unwrapped/button';
 import {UnwrappedButtonBar as ButtonBar} from '../unwrapped/button-bar';
 import {useWizardEventBus} from './event/wizard-event-bus';
 import {WizardEventTypes} from './event/wizard-event-bus-types';
 import {WizardStepDef} from './types';
 import {useWizardStepActive} from './use-wizard-step-active';
+import {useWizardStepBodyInit} from './use-wizard-step-body-init';
 import {useWizardStepContentRefresh} from './use-wizard-step-content-refresh';
 import {AWizardStepBody, AWizardStepBodyVisibility} from './widgets';
 
@@ -90,7 +90,7 @@ export const WizardStepBodyContent = (props: WizardStepBodyProps) => {
 
 	const {fire} = useWizardEventBus();
 	useWizardStepContentRefresh(stepIndex, marker);
-	const {initialized, def: bodyDef} = useTabBodyInit({$pp, marker, def});
+	const {initialized, def: bodyDef} = useWizardStepBodyInit({$pp, marker, def});
 	if (!initialized) {
 		computeSharedPosition({shared, omitWalker, sharedAtLead});
 		return <AWizardStepBody>

@@ -1,5 +1,5 @@
-import {StandaloneRoot, VUtils} from '@rainbow-d9/n1';
-import {Alert, Dialog, GlobalEventBusProvider, RemoteRequest, YesNoDialog} from '@rainbow-d9/n2';
+import {StandaloneRoot} from '@rainbow-d9/n1';
+import {GlobalRoot} from '@rainbow-d9/n2';
 import React from 'react';
 import {CustomEventHandler} from '../custom-event-handler';
 import {N2DemoDialogHandler} from '../n2-dialog-handler';
@@ -11,16 +11,11 @@ import DemoContent from './demo.md';
 export const N2ArrayPanel = () => {
 	const def = useDemoMarkdown(DemoContent);
 
-	return <GlobalEventBusProvider>
-		<Alert/>
-		<Dialog/>
-		<YesNoDialog/>
-		<RemoteRequest clearAccount={VUtils.noop} on401={VUtils.noop} on403={VUtils.noop}/>
+	return <GlobalRoot>
 		<CustomEventHandler/>
 		<N2DemoDialogHandler/>
-		{/** @ts-ignore */}
 		<StandaloneRoot {...def} $root={DemoData}/>
-	</GlobalEventBusProvider>;
+	</GlobalRoot>;
 };
 
 export const N2ArrayPanelData = DemoData;
