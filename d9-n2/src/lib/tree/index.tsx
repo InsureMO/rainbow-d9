@@ -1,12 +1,14 @@
 import {MUtils, PPUtils, PROPERTY_PATH_ME, PropertyPath, registerWidget, VUtils} from '@rainbow-d9/n1';
 import React, {ForwardedRef, forwardRef} from 'react';
+import {useGlobalHandlers} from '../global';
 import {TreeEventBusProvider} from './event/tree-event-bus';
 import {TreeNode} from './node';
 import {TreeNodeDef, TreeNodeDetect, TreeProps} from './types';
 import {ATree} from './widgets';
 
-const buildDetective = (detective: TreeNodeDetect) => {
-	return detective ?? ((parentNode) => {
+const buildDetective = (detective: TreeNodeDetect): TreeNodeDetect => {
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
+	return detective ?? ((parentNode, _options) => {
 		if (parentNode == null || parentNode.value == null) {
 			return [];
 		}
@@ -50,6 +52,7 @@ export const InternalTree = forwardRef((props: TreeProps, ref: ForwardedRef<HTML
 	} = props;
 	const {$p2r, $avs: {$disabled, $visible}} = $wrapped;
 
+	const globalHandlers = useGlobalHandlers();
 	const detect = buildDetective(detective);
 	// model of whole tree
 	const rootNodeValue = MUtils.getValue($wrapped.$model, $pp);
@@ -59,7 +62,7 @@ export const InternalTree = forwardRef((props: TreeProps, ref: ForwardedRef<HTML
 		value: rootNodeValue, $ip2r: PROPERTY_PATH_ME, $ip2p: PROPERTY_PATH_ME,
 		label: '', checkable: false, addable: false, removable: false, leaf: false
 	};
-	const children = detect(rootNodeDef) ?? [];
+	const children = detect(rootNodeDef, {global: globalHandlers}) ?? [];
 	const childrenCount = children.length;
 	// path to root of model of whole tree
 	const node$p2r = PPUtils.absolute($p2r, $pp);

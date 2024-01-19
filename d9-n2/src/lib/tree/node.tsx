@@ -1,6 +1,6 @@
 import {PPUtils, useForceUpdate, VUtils} from '@rainbow-d9/n1';
 import React, {Fragment, MouseEvent, useEffect, useRef} from 'react';
-import {GlobalEventPrefix, GlobalEventTypes, useGlobalEventBus} from '../global';
+import {GlobalEventPrefix, GlobalEventTypes, useGlobalEventBus, useGlobalHandlers} from '../global';
 import {AngleRight} from '../icons';
 import {LabelLike} from '../label-like';
 import {TreeNodeEventBusProvider, useTreeNodeEventBus} from './event/tree-node-event-bus';
@@ -145,6 +145,7 @@ export const TreeNode = (props: TreeNodeProps) => {
 		node, displayIndex, lastOfParent, level
 	} = props;
 
+	const globalHandlers = useGlobalHandlers();
 	const {fire} = useTreeNodeEventBus();
 
 	// if it is top level node, then will not be wrapped by tree node event bus provider
@@ -153,7 +154,7 @@ export const TreeNode = (props: TreeNodeProps) => {
 	const expandParent = () => fire && fire(TreeNodeEventTypes.EXPANDED, node.$ip2r);
 
 	const canHasChild = !VUtils.isPrimitive(node.value);
-	const children = canHasChild ? detective(node) : [];
+	const children = canHasChild ? detective(node, {global: globalHandlers}) : [];
 	const childrenCount = children.length;
 	const hasChild = canHasChild && childrenCount !== 0;
 	const canCheck = canHasChild && (node.checkable ?? false);

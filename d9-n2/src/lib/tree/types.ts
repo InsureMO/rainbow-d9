@@ -1,7 +1,7 @@
-import {ContainerDef, PropertyPath, PropValue, WidgetProps} from '@rainbow-d9/n1';
+import {ContainerDef, PropertyPath, PropValue, Undefinable, WidgetProps} from '@rainbow-d9/n1';
 import {ReactNode} from 'react';
 import {CaptionDef} from '../caption';
-import {OmitHTMLProps2, OmitNodeDef} from '../types';
+import {GlobalEventHandlers, OmitHTMLProps2, OmitNodeDef} from '../types';
 
 export interface TreeNodeDef {
 	/**
@@ -30,7 +30,7 @@ export interface TreeNodeDef {
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export type TreeNodeDetect = (parentNode?: TreeNodeDef) => Array<TreeNodeDef>;
+export type TreeNodeDetect = (parentNode: Undefinable<TreeNodeDef>, options: GlobalEventHandlers) => Array<TreeNodeDef>;
 
 /** Tree configuration definition */
 export type TreeDef = ContainerDef & OmitHTMLProps2<HTMLDivElement, 'title' | 'height'> & {
