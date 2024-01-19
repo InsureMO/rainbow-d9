@@ -5,4 +5,4 @@ export * from './use-throttler';
 export * from './use-value-changed';
 
 export * from './validation-event-holder';
-export * from './event-holder';
+export * from './root-to-bridge-undercover';

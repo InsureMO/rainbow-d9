@@ -1,7 +1,6 @@
 import {
 	BridgeEventBusProvider,
 	BridgeToRootEventTypes,
-	RootEventToBridgeUndercover,
 	StandaloneRoot,
 	useBridgeEventBus,
 	ValueChangedNotification,
@@ -46,6 +45,7 @@ const InternalN2Table = () => {
 				} else {
 					carrier.table3.push({columnA: nanoid()});
 				}
+				// send event to internal, notify that value changed
 				fire<ValueChangedNotification>(BridgeToRootEventTypes.NOTIFY_VALUE_CHANGED, {
 					absolutePath: '/sectionForTable3.table3', from: carrier.table3, to: carrier.table3
 				});
@@ -61,10 +61,7 @@ const InternalN2Table = () => {
 		<CustomEventHandler/>
 		<N2DemoDialogHandler/>
 		{/** @ts-ignore */}
-		<StandaloneRoot {...def} $root={DemoData} externalDefs={externalDefs}>
-			{/** create root event bridge */}
-			<RootEventToBridgeUndercover/>
-		</StandaloneRoot>
+		<StandaloneRoot {...def} $root={DemoData} externalDefs={externalDefs}/>
 	</GlobalEventBusProvider>;
 };
 

@@ -2,7 +2,7 @@ import {Buffer} from 'buffer';
 import React from 'react';
 import {RootEventBusProvider} from './lib/events';
 import {ExternalDefsHandler} from './lib/external-defs-handler';
-import {EventHolder} from './lib/hooks';
+import {RootToBridgeUndercover, ValidationEventHolder} from './lib/hooks';
 import {StandaloneRootProps} from './lib/types';
 import {MUtils, N1Logger, NUtils, PPUtils} from './lib/utils';
 import {Wrapper} from './lib/wrapper';
@@ -38,9 +38,10 @@ export const StandaloneRoot = (props: StandaloneRootProps) => {
 
 	return <RootEventBusProvider>
 		<ExternalDefsHandler options={rest} externalDefs={externalDefs}/>
+		<RootToBridgeUndercover/>
+		<ValidationEventHolder/>
 		{leading}
 		{children}
-		<EventHolder/>
 		<Wrapper $root={$root} $p2r={modelPath} $model={model} {...recompute} {...rest} />
 		{tailing}
 	</RootEventBusProvider>;
