@@ -43,6 +43,11 @@ const AFormCell = styled.div.attrs(({id}) => {
     &[data-visible=false][data-hold-position-on-invisible=false] {
         display: none;
     }
+
+    &[data-visible=false][data-hold-position-on-invisible=true] {
+        opacity: 0;
+        pointer-events: none;
+    }
 `;
 const FormCellInvalidMessage = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-form-cell-invalid-msg'})`
     display: flex;
