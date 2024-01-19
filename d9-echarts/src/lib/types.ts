@@ -1,6 +1,5 @@
 import {BaseModel, NodeDef, PropValue, WidgetProps} from '@rainbow-d9/n1';
-import {ModelCarriedHandler, OmitHTMLProps, OmitNodeDef} from '@rainbow-d9/n2';
-import {GlobalEventHandlers} from '@rainbow-d9/n2/src';
+import {GlobalEventHandlers, ModelCarriedHandler, OmitHTMLProps, OmitNodeDef} from '@rainbow-d9/n2';
 import {EChartsOption, SetOptionOpts} from 'echarts';
 
 /** LocaleOption from echarts/types/src/core/locale */

@@ -49,7 +49,7 @@ export const N2DemoDialogHandler = () => {
 		return () => {
 			off(GlobalEventTypes.CUSTOM_EVENT, onCustomEvent);
 		};
-	}, [on, off, showAlert, showDialog, hideDialog]);
+	}, [on, off, showAlert, showDialog, hideDialog, def]);
 
 	return <Fragment/>;
 };
