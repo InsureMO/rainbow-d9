@@ -11,15 +11,14 @@ import {
 	useDialog,
 	useGlobalEventBus
 } from '@rainbow-d9/n2';
-import {parseDoc} from '@rainbow-d9/n3';
 import React, {CSSProperties, Fragment, useEffect} from 'react';
+import {useDemoMarkdown} from '../use-demo-markdown';
 // @ts-ignore
 import DemoDialogContent from './demo-dialog.md';
 
-const dialogDef = parseDoc(DemoDialogContent).node;
-
 const DEFAULT_STYLES: CSSProperties = {width: '80vw', height: '80vh', margin: '10vh auto'};
 export const N2DemoDialogHandler = () => {
+	const def = useDemoMarkdown(DemoDialogContent);
 	const {on, off} = useGlobalEventBus();
 	const {show: showAlert} = useAlert();
 	const {show: showDialog, hide: hideDialog} = useDialog();
@@ -32,7 +31,7 @@ export const N2DemoDialogHandler = () => {
 					showDialog(<>
 						<DialogHeader><DialogTitle>This is a demo dialog.</DialogTitle></DialogHeader>
 						<DialogBody>
-							<StandaloneRoot {...dialogDef} $root={models?.root}/>
+							<StandaloneRoot {...def} $root={models?.root}/>
 						</DialogBody>
 						<DialogFooter>
 							{/** @ts-ignore */}
