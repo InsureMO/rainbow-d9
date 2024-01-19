@@ -43,9 +43,15 @@ export const MBUtils: MobileUtilsType = {
 		if (MBUtils.detect()) {
 			DeviceTags.touchable = true;
 			document.documentElement.setAttribute('data-touchable', 'true');
+			// document.querySelectorAll('[data-w]').forEach(element => {
+			// 	element.setAttribute('data-touchable', 'true');
+			// });
 		} else {
 			DeviceTags.touchable = false;
 			document.documentElement.removeAttribute('data-touchable');
+			// document.querySelectorAll('[data-w]').forEach(element => {
+			// 	element.removeAttribute('data-touchable');
+			// });
 		}
 	},
 	isMobile: () => DeviceTags.touchable,

@@ -38,7 +38,7 @@ export const GlobalStyles: any = createGlobalStyle`
         box-sizing: border-box;
     }
 
-    div[data-w=d9-demo] {
+    div[data-w=d9-demo-container] {
         //--d9-font-family: Roboto;
         //--d9-font-color: #555;
         //--d9-font-size: 14px;
@@ -139,6 +139,30 @@ export const GlobalStyles: any = createGlobalStyle`
 
         div[data-w=d9-section][data-rows-auto-1fr=true] > div[data-w=d9-section-body] {
             grid-template-rows: auto 1fr;
+        }
+    }
+
+    html[data-touchable=true] {
+        div[data-w=d9-demo-container] {
+            grid-template-columns: 1fr;
+
+            > div[data-w=d9-demo-menus] {
+                position: fixed;
+                width: 100vw;
+                background-color: ${CssVars.INVERT_COLOR};
+                border-right: 0;
+                z-index: 100;
+
+                &[data-menu-expanded=false] {
+                    height: calc(${CssVars.INPUT_HEIGHT} * 1.6);
+                    overflow: hidden;
+                }
+            }
+
+            > div[data-w=d9-demo-playground] {
+                margin-top: calc(${CssVars.INPUT_HEIGHT} * 1.6);
+                padding-bottom: calc(${CssVars.INPUT_HEIGHT} * 1.6);
+            }
         }
     }
 `;

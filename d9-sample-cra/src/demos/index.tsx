@@ -3,9 +3,6 @@ import {ButtonFill, ButtonInk, UnwrappedButton} from '@rainbow-d9/n2';
 import {Fragment, useState} from 'react';
 import {
 	DemoContainer,
-	DemoMenu,
-	DemoMenuHeader,
-	DemoMenus,
 	DemoPlayground,
 	Demos,
 	DemoSource,
@@ -14,6 +11,7 @@ import {
 	MarkdownContainer
 } from './demo-layout';
 import 'github-markdown-css/github-markdown.css';
+import {DemoLayoutMenus} from './demo-layout/menus';
 
 enum ActiveSource {
 	NONE = 'none',
@@ -40,16 +38,9 @@ export const DemoIndex = () => {
 	const markdown = Demos.find(demo => demo.path === pathname)?.markdown ?? '';
 	const json = Demos.find(demo => demo.path === pathname)?.data ?? {};
 
-	return <DemoContainer data-w="d9-demo" data-active-source={activeSource}>
+	return <DemoContainer data-active-source={activeSource}>
 		<DeviceDetective/>
-		<DemoMenus>
-			<DemoMenuHeader>Demo List</DemoMenuHeader>
-			{Demos.map(demo => {
-				return <DemoMenu key={demo.path} data-active={route[demo.path]} onClick={onMenuClicked(demo.path)}>
-					{demo.label}
-				</DemoMenu>;
-			})}
-		</DemoMenus>
+		<DemoLayoutMenus route={route} onMenuClicked={onMenuClicked}/>
 		<DemoPlayground data-v-scroll="" data-h-scroll="">
 			<C/>
 		</DemoPlayground>

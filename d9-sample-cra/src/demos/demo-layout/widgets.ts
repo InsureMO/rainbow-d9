@@ -1,7 +1,7 @@
 import {CssVars} from '@rainbow-d9/n2';
 import styled from 'styled-components';
 
-export const DemoContainer = styled.div`
+export const DemoContainer = styled.div.attrs({'data-w': 'd9-demo-container'})`
     display: grid;
     position: relative;
     grid-template-columns: 300px 1fr;
@@ -12,6 +12,7 @@ export const DemoContainer = styled.div`
     }
 `;
 export const DemoMenus = styled.div.attrs({
+	'data-w': 'd9-demo-menus',
 	'data-v-scroll': '',
 	'data-h-scroll': ''
 })`
@@ -82,21 +83,24 @@ export const DemoMenu = styled.div`
         text-decoration: underline;
     }
 `;
-export const DemoPlayground = styled.div`
+export const DemoPlayground = styled.div.attrs({'data-w': 'd9-demo-playground'})`
     display: block;
     position: relative;
     overflow: auto;
     padding: 0 calc(${CssVars.SECTION_BODY_PADDING} * 2);
     min-height: 50vh;
 `;
-export const DemoSource = styled.div`
+export const DemoSource = styled.div.attrs({'data-w': 'd9-demo-source'})`
     display: flex;
     position: relative;
     flex-direction: column;
+    max-width: 100%;
+    background-color: ${CssVars.INVERT_COLOR};
     border-top: ${CssVars.BORDER};
     border-top-width: 2px;
+    overflow: hidden;
 `;
-export const DemoSourceHeader = styled.div`
+export const DemoSourceHeader = styled.div.attrs({'data-w': 'd9-demo-source-header'})`
     display: flex;
     position: relative;
     align-items: center;
@@ -108,7 +112,7 @@ export const DemoSourceHeader = styled.div`
         margin-left: 8px;
     }
 `;
-export const DemoSourceBody = styled.div`
+export const DemoSourceBody = styled.div.attrs({'data-w': 'd9-demo-source-body'})`
     display: flex;
     position: relative;
     flex-direction: column;
