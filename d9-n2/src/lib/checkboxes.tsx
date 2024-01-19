@@ -1,8 +1,9 @@
-import {MUtils, Nullable, PropValue, registerWidget, ValueChangeableNodeDef, WidgetProps} from '@rainbow-d9/n1';
+import {MUtils, registerWidget, ValueChangeableNodeDef, WidgetProps} from '@rainbow-d9/n1';
 import React, {ForwardedRef, forwardRef, Fragment, ReactNode} from 'react';
 import styled from 'styled-components';
 import {Checkbox, CheckboxProps} from './checkbox';
 import {CssVars, DOM_ID_WIDGET, DOM_KEY_WIDGET} from './constants';
+import {useGlobalHandlers} from './global';
 import {IntlLabel, toIntlLabel} from './intl-label';
 import {NO_AVAILABLE_OPTION_ITEM, OptionItem, OptionItemsDef, useOptionItems} from './option-items-assist';
 import {OmitHTMLProps, OmitNodeDef} from './types';
@@ -18,18 +19,9 @@ export type CheckboxesDef =
 	columns?: number;
 	compact?: boolean;
 };
-/**
- * 1. new value should be an array or null
- * 2. option is currently selected, or null if it is clearing. when option is given, use select to identify that this option is add or remove value into model
- */
-export type OnCheckboxesValueChange = <NV extends PropValue>(newValue: NV, option: Nullable<OptionItem<CheckboxesOptionValue>>, select: boolean) => void | Promise<void>;
 
 /** widget definition, with html attributes */
-export type CheckboxesProps = OmitNodeDef<CheckboxesDef> & Omit<WidgetProps, '$wrapped'> & {
-	$wrapped: Omit<WidgetProps['$wrapped'], '$onValueChange'> & {
-		$onValueChange: OnCheckboxesValueChange;
-	}
-};
+export type CheckboxesProps = OmitNodeDef<CheckboxesDef> & WidgetProps;
 
 // noinspection CssUnresolvedCustomProperty
 const ACheckboxes = styled.div.attrs(({id}) => {
@@ -118,6 +110,7 @@ export const Checkboxes = forwardRef((props: CheckboxesProps, ref: ForwardedRef<
 		...rest
 	} = props;
 
+	const globalHandlers = useGlobalHandlers();
 	const {createAskDisplayOptions} = useOptionItems({...props, noAvailable});
 
 	const getValues = () => {
@@ -132,10 +125,10 @@ export const Checkboxes = forwardRef((props: CheckboxesProps, ref: ForwardedRef<
 		const values = getValues();
 		if (values.some(v => v == option.value)) {
 			// remove
-			await $onValueChange(values.filter(v => v != option.value), option, false);
+			await $onValueChange(values.filter(v => v != option.value), true, {global: globalHandlers});
 		} else {
 			// add
-			await $onValueChange([...values, option.value], option, true);
+			await $onValueChange([...values, option.value], true, {global: globalHandlers});
 		}
 	};
 
@@ -162,10 +155,10 @@ export const Checkboxes = forwardRef((props: CheckboxesProps, ref: ForwardedRef<
 					if (values.some(v => v == value)) {
 						// do nothing
 					} else {
-						await $onValueChange([...values, value], option, true);
+						await $onValueChange([...values, value], true, {global: globalHandlers});
 					}
 				} else {
-					await $onValueChange(values.filter(v => v != value), option, false);
+					await $onValueChange(values.filter(v => v != value), true, {global: globalHandlers});
 				}
 			};
 			const $wrapped = {

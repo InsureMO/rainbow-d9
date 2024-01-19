@@ -41,8 +41,10 @@ export interface WrappedNodeAttributes {
 
 export type OnValueChanged = <NV extends PropValue>(options: {
 	absolutePath: PropertyPath; oldValue: NV; newValue: NV;
-}) => void | Promise<void>;
-export type OnValueChange = <NV extends PropValue>(newValue: NV, doForceUpdate?: boolean) => void | Promise<void>;
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+}, ...args: Array<any>) => void | Promise<void>;
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export type OnValueChange = <NV extends PropValue>(newValue: NV, doForceUpdate: boolean, ...args: Array<any>) => void | Promise<void>;
 
 export interface WrappedAttributes extends ModelHolder, WrappedNodeAttributes {
 	/**

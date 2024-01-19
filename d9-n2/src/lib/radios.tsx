@@ -2,14 +2,9 @@ import {MUtils, registerWidget, ValueChangeableNodeDef, WidgetProps} from '@rain
 import React, {ForwardedRef, forwardRef, Fragment, ReactNode} from 'react';
 import styled from 'styled-components';
 import {CssVars, DOM_ID_WIDGET, DOM_KEY_WIDGET} from './constants';
+import {useGlobalHandlers} from './global';
 import {IntlLabel, toIntlLabel} from './intl-label';
-import {
-	NO_AVAILABLE_OPTION_ITEM,
-	OnOptionValueChange,
-	OptionItem,
-	OptionItemsDef,
-	useOptionItems
-} from './option-items-assist';
+import {NO_AVAILABLE_OPTION_ITEM, OptionItem, OptionItemsDef, useOptionItems} from './option-items-assist';
 import {Radio, RadioProps} from './radio';
 import {OmitHTMLProps, OmitNodeDef} from './types';
 
@@ -25,11 +20,7 @@ export type RadiosDef =
 	compact?: boolean;
 };
 /** widget definition, with html attributes */
-export type RadiosProps = OmitNodeDef<RadiosDef> & Omit<WidgetProps, '$wrapped'> & {
-	$wrapped: Omit<WidgetProps['$wrapped'], '$onValueChange'> & {
-		$onValueChange: OnOptionValueChange<RadiosOptionValue>;
-	}
-};
+export type RadiosProps = OmitNodeDef<RadiosDef> & WidgetProps;
 
 // noinspection CssUnresolvedCustomProperty
 const ARadios = styled.div.attrs(({id}) => {
@@ -122,13 +113,14 @@ export const Radios = forwardRef((props: RadiosProps, ref: ForwardedRef<HTMLDivE
 		...rest
 	} = props;
 
+	const globalHandlers = useGlobalHandlers();
 	const {createAskDisplayOptions} = useOptionItems({...props, noAvailable});
 
 	const onOptionClicked = (option: OptionItem<RadiosOptionValue>) => async () => {
 		if ($disabled) {
 			return;
 		}
-		await $onValueChange(option.value, option);
+		await $onValueChange(option.value, true, {global: globalHandlers});
 	};
 
 	const askDisplayOptions = createAskDisplayOptions();
@@ -150,7 +142,7 @@ export const Radios = forwardRef((props: RadiosProps, ref: ForwardedRef<HTMLDivE
 			const valueKey = `${value}_${index + 1}`;
 			const model = {[valueKey]: modelValue == value};
 			const onValueChange = async () => {
-				await $onValueChange(value, option);
+				await $onValueChange(value, true, {global: globalHandlers});
 			};
 			const $wrapped = {
 				$root: model, $model: model, $p2r: '.', $onValueChange: onValueChange,

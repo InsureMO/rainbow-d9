@@ -10,6 +10,7 @@ import {
 	WrapperEventTypes
 } from '@rainbow-d9/n1';
 import React, {Children, useEffect} from 'react';
+import {useGlobalHandlers} from '../global';
 import {guardPaginationData, PaginationData} from '../pagination';
 import {useTableEventBus} from './event/table-event-bus';
 import {TableEventTypes} from './event/table-event-bus-types';
@@ -25,6 +26,7 @@ export const TableContent = (props: Omit<TableProps, '$array'> & { $array: Enhan
 		children
 	} = props;
 
+	const globalHandlers = useGlobalHandlers();
 	const {fire: fireWrapper} = useWrapperEventBus();
 	const {on, off, fire} = useTableEventBus();
 	const forceUpdate = useForceUpdate();
@@ -43,7 +45,7 @@ export const TableContent = (props: Omit<TableProps, '$array'> & { $array: Enhan
 				await pageable.valueChanged({
 					absolutePath: PPUtils.absolute($p2r, pageable.$pp),
 					oldValue: from as unknown as PropValue, newValue: to as unknown as PropValue
-				});
+				}, {global: globalHandlers});
 				// data changed, and react nodes for rows are created in wrapper.
 				// which means refresh itself is helpless, therefore fire a repaint event to wrapper
 				fireWrapper && fireWrapper(WrapperEventTypes.REPAINT);
@@ -73,7 +75,7 @@ export const TableContent = (props: Omit<TableProps, '$array'> & { $array: Enhan
 			off(TableEventTypes.PAGE_CHANGED, onPageChanged);
 			off(TableEventTypes.FILTER_CHANGED, onFilterChanged);
 		};
-	}, [fireWrapper, on, off, fire, forceUpdate, pageable, $model, $p2r]);
+	}, [globalHandlers, fireWrapper, on, off, fire, forceUpdate, pageable, $model, $p2r]);
 
 	const {columnsWidth, tailGrabberAppended, stickyOffsets} = computeColumnsWidth(props);
 

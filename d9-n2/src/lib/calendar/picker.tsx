@@ -13,6 +13,7 @@ import {
 	isPopupAtBottom,
 	useDropdownControl
 } from '../dropdown-assist';
+import {useGlobalHandlers} from '../global';
 import {useCalendarEventBus} from './event/calendar-event-bus';
 import {CalendarEventTypes} from './event/calendar-event-bus-types';
 import {CalendarPopup} from './popup';
@@ -47,6 +48,7 @@ export const Picker = (props: CalendarProps) => {
 		...rest
 	} = props;
 
+	const globalHandlers = useGlobalHandlers();
 	const {fire} = useCalendarEventBus();
 	const {containerRef, popupRef, popupState, setPopupState, popupShown, setPopupShown} = useDropdownControl({
 		askPopupMaxHeight: () => CssVars.CALENDAR_POPUP_HEIGHT_VALUE
@@ -110,14 +112,14 @@ export const Picker = (props: CalendarProps) => {
 			if (VUtils.isBlank(value)) {
 				if (newValue != null) {
 					// no value assigned in model, use new value
-					await $onValueChange(newValue.format(storeFormat));
+					await $onValueChange(newValue.format(storeFormat), true, {global: globalHandlers});
 				}
 				setPopupState(state => ({...state, active: DropdownPopupStateActive.HIDDEN}));
 			} else {
 				const originalValue = dayjs(value as string, storeFormat);
 				if (!originalValue.isSame(newValue)) {
 					// old value is not same as new value, use new value
-					await $onValueChange(newValue.format(storeFormat));
+					await $onValueChange(newValue.format(storeFormat), true, {global: globalHandlers});
 					setPopupState(state => ({...state, active: DropdownPopupStateActive.HIDDEN}));
 				} else {
 					// close popup
@@ -135,7 +137,7 @@ export const Picker = (props: CalendarProps) => {
 		event.stopPropagation();
 		const value = MUtils.getValue($model, $pp) as DropdownOptionValue;
 		if (value != null) {
-			await $onValueChange(null);
+			await $onValueChange(null, true, {global: globalHandlers});
 			fire(CalendarEventTypes.VALUE_CLEARED);
 		}
 		showPopup();
@@ -145,7 +147,7 @@ export const Picker = (props: CalendarProps) => {
 			return;
 		}
 
-		await $onValueChange(redressTimePart(value).format(storeFormat));
+		await $onValueChange(redressTimePart(value).format(storeFormat), true, {global: globalHandlers});
 		setPopupShown(false);
 	};
 

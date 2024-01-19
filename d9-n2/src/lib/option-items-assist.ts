@@ -38,8 +38,6 @@ export const NO_OPTION_ITEM = [];
 export const NO_MATCHED_OPTION_ITEM = '__no_matched__';
 export const NO_AVAILABLE_OPTION_ITEM = '__no_available__';
 
-export type OnOptionValueChange<V> = <NV extends PropValue>(newValue: NV, option?: OptionItem<V>) => void | Promise<void>;
-
 /**
  * return this to refresh dropdown options, only works on options is a promise function.
  */

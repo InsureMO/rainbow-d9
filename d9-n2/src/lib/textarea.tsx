@@ -2,6 +2,7 @@ import {MUtils, PPUtils, registerWidget, ValueChangeableNodeDef, WidgetProps} fr
 import React, {ChangeEvent, FocusEvent, ForwardedRef, forwardRef} from 'react';
 import styled from 'styled-components';
 import {CssVars, DOM_ID_WIDGET, DOM_KEY_WIDGET} from './constants';
+import {useGlobalHandlers} from './global';
 import {OmitHTMLProps2, OmitNodeDef} from './types';
 
 /** Textarea configuration definition */
@@ -78,9 +79,11 @@ export const Textarea = forwardRef((props: TextareaProps, ref: ForwardedRef<HTML
 		...rest
 	} = props;
 
+	const globalHandlers = useGlobalHandlers();
+
 	const onChange = async (event: ChangeEvent<HTMLTextAreaElement>) => {
 		const value = event.target.value;
-		await $onValueChange(value);
+		await $onValueChange(value, true, {global: globalHandlers});
 	};
 
 	return <ATextarea {...rest} autoSelect={autoSelect}

@@ -12,11 +12,11 @@ import {
 	isDropdownPopupActive,
 	useFilterableDropdownOptions
 } from './dropdown-assist';
+import {useGlobalHandlers} from './global';
 import {toIntlLabel} from './intl-label';
 import {
 	NO_AVAILABLE_OPTION_ITEM,
 	NO_MATCHED_OPTION_ITEM,
-	OnOptionValueChange,
 	OptionItem,
 	OptionItems,
 	OptionItemsDef,
@@ -39,11 +39,7 @@ export type DropdownDef =
 	clearable?: boolean;
 };
 /** widget definition, with html attributes */
-export type DropdownProps = OmitNodeDef<DropdownDef> & Omit<WidgetProps, '$wrapped'> & {
-	$wrapped: Omit<WidgetProps['$wrapped'], '$onValueChange'> & {
-		$onValueChange: OnOptionValueChange<DropdownOptionValue>;
-	}
-};
+export type DropdownProps = OmitNodeDef<DropdownDef> & WidgetProps;
 
 const OptionFilter = styled.div.attrs<Omit<DropdownPopupState, 'active'> & { active: boolean }>(
 	({active, atBottom, top, left, height}) => {
@@ -129,6 +125,7 @@ export const Dropdown = (props: DropdownProps) => {
 		...rest
 	} = props;
 
+	const globalHandlers = useGlobalHandlers();
 	const {
 		askOptions, displayOptions,
 		filterInputRef, filter, setFilter,
@@ -145,7 +142,7 @@ export const Dropdown = (props: DropdownProps) => {
 		}
 		event.preventDefault();
 		event.stopPropagation();
-		await $onValueChange(option.value, option);
+		await $onValueChange(option.value, true, {global: globalHandlers});
 		setPopupShown(false);
 		if (filter !== '') {
 			setTimeout(() => setFilter(''), 100);
@@ -160,7 +157,7 @@ export const Dropdown = (props: DropdownProps) => {
 		event.stopPropagation();
 		const value = MUtils.getValue($model, $pp) as DropdownOptionValue;
 		if (value != null) {
-			await $onValueChange(null, null);
+			await $onValueChange(null, true, {global: globalHandlers});
 		}
 		if (!isDropdownPopupActive(popupState.active)) {
 			// call click to show popup

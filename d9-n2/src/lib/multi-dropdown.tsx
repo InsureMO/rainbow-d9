@@ -1,6 +1,5 @@
 import {
 	MUtils,
-	Nullable,
 	PPUtils,
 	PropValue,
 	registerWidget,
@@ -22,6 +21,7 @@ import {
 	isDropdownPopupActive,
 	useFilterableDropdownOptions
 } from './dropdown-assist';
+import {useGlobalHandlers} from './global';
 import {Check, Times} from './icons';
 import {toIntlLabel} from './intl-label';
 import {
@@ -47,17 +47,8 @@ export type MultiDropdownDef =
 	please?: ReactNode;
 	clearable?: boolean;
 };
-/**
- * 1. new value should be an array or null
- * 2. option is currently selected, or null if it is clearing. when option is given, use select to identify that this option is add or remove value into model
- */
-export type OnMultiDropdownValueChange = <NV extends PropValue>(newValue: NV, option: Nullable<MultiDropdownOption>, select: boolean) => void | Promise<void>;
 /** widget definition, with html attributes */
-export type MultiDropdownProps = OmitNodeDef<MultiDropdownDef> & Omit<WidgetProps, '$wrapped'> & {
-	$wrapped: Omit<WidgetProps['$wrapped'], '$onValueChange'> & {
-		$onValueChange: OnMultiDropdownValueChange;
-	}
-};
+export type MultiDropdownProps = OmitNodeDef<MultiDropdownDef> & WidgetProps;
 
 const MultiDropdownContainer = styled(DropdownContainer)`
     flex-wrap: wrap;
@@ -218,6 +209,7 @@ export const MultiDropdown = (props: MultiDropdownProps) => {
 		...rest
 	} = props;
 
+	const globalHandlers = useGlobalHandlers();
 	const {
 		askOptions, displayOptions,
 		filterInputRef, filter, setFilter,
@@ -268,10 +260,10 @@ export const MultiDropdown = (props: MultiDropdownProps) => {
 		const values = currentValuesToArray();
 		if (!hasValues(values)) {
 			// eslint-disable-next-line @typescript-eslint/no-explicit-any
-			await $onValueChange([option.value as any], option, true);
+			await $onValueChange([option.value as any], true, {global: globalHandlers});
 		} else if (!hasValue(option.value, values)) {
 			// eslint-disable-next-line @typescript-eslint/no-explicit-any
-			await $onValueChange([...values, option.value as any], option, true);
+			await $onValueChange([...values, option.value as any], true, {global: globalHandlers});
 		} else {
 			return;
 		}
@@ -296,8 +288,7 @@ export const MultiDropdown = (props: MultiDropdownProps) => {
 		if (!hasValues(values)) {
 			return;
 		}
-		const option = askOptions().find(option => option.value == value);
-		await $onValueChange(values.filter(v => v != value) as unknown as PropValue, option ?? null, false);
+		await $onValueChange(values.filter(v => v != value) as unknown as PropValue, true, {global: globalHandlers});
 		repaintPopup();
 	};
 	const onClearClicked = async (event: MouseEvent<HTMLSpanElement>) => {
@@ -308,7 +299,7 @@ export const MultiDropdown = (props: MultiDropdownProps) => {
 		event.stopPropagation();
 		const values = currentValuesToArray();
 		if (values != null && values.length !== 0) {
-			await $onValueChange(null, null, false);
+			await $onValueChange(null, true, {global: globalHandlers});
 		}
 		// simply force update, since height might be changed
 		forceUpdate();

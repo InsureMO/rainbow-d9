@@ -9,6 +9,7 @@ import {
 import React, {ForwardedRef, forwardRef, KeyboardEvent, MouseEvent} from 'react';
 import styled from 'styled-components';
 import {CssVars, DOM_ID_WIDGET, DOM_KEY_WIDGET} from './constants';
+import {useGlobalHandlers} from './global';
 import {Check, Times} from './icons';
 import {OmitHTMLProps, OmitNodeDef} from './types';
 
@@ -120,10 +121,11 @@ export const Checkbox = forwardRef((props: CheckboxProps, ref: ForwardedRef<HTML
 		...rest
 	} = props;
 
+	const globalHandlers = useGlobalHandlers();
 	const onValueChange = async () => {
 		const oldValue = MUtils.getValue($model, $pp);
 		const newValue = oldValue == values[0] ? values[1] : values[0];
-		await $onValueChange(newValue);
+		await $onValueChange(newValue, true, {global: globalHandlers});
 	};
 	const onClick = async (event: MouseEvent<HTMLDivElement>) => {
 		if ($disabled) {

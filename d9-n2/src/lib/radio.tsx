@@ -9,6 +9,7 @@ import {
 import React, {ForwardedRef, forwardRef, KeyboardEvent, MouseEvent} from 'react';
 import styled from 'styled-components';
 import {CssVars, DOM_ID_WIDGET, DOM_KEY_WIDGET} from './constants';
+import {useGlobalHandlers} from './global';
 import {OmitHTMLProps, OmitNodeDef} from './types';
 
 export type RadioPossibleValues = [NullPropValue | PrimitivePropValue, NullPropValue | PrimitivePropValue];
@@ -119,13 +120,15 @@ export const Radio = forwardRef((props: RadioProps, ref: ForwardedRef<HTMLDivEle
 		...rest
 	} = props;
 
+	const globalHandlers = useGlobalHandlers();
+
 	const onValueShouldChange = async () => {
 		const oldValue = MUtils.getValue($model, $pp);
 		if (oldValue == values[0]) {
 			// already checked, radio cannot back to uncheck
 		} else {
 			const newValue = oldValue == values[0] ? values[1] : values[0];
-			await $onValueChange(newValue);
+			await $onValueChange(newValue, true, {global: globalHandlers});
 		}
 	};
 	const onClick = async (event: MouseEvent<HTMLDivElement>) => {

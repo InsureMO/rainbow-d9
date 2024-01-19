@@ -2,6 +2,7 @@ import {MUtils, PPUtils, registerWidget, ValueChangeableNodeDef, VUtils, WidgetP
 import React, {ChangeEvent, FocusEvent, ForwardedRef, forwardRef, useRef} from 'react';
 import styled from 'styled-components';
 import {CssVars, DOM_ID_WIDGET, DOM_KEY_WIDGET} from './constants';
+import {useGlobalHandlers} from './global';
 import {OmitHTMLProps2, OmitNodeDef} from './types';
 
 /** Input configuration definition */
@@ -82,6 +83,7 @@ export const Input = forwardRef((props: InputProps, ref: ForwardedRef<HTMLInputE
 	} = props;
 
 	const valueRef = useRef({value: MUtils.getValue($model, $pp)});
+	const globalHandlers = useGlobalHandlers();
 
 	const onChange = async (event: ChangeEvent<HTMLInputElement>) => {
 		const value = event.target.value;
@@ -92,13 +94,13 @@ export const Input = forwardRef((props: InputProps, ref: ForwardedRef<HTMLInputE
 			const tested = VUtils.isNumber(value);
 			if (tested.test) {
 				// use the numeric value
-				await $onValueChange(tested.value);
+				await $onValueChange(tested.value, true, {global: globalHandlers});
 			} else {
 				// still use original value from text
-				await $onValueChange(value);
+				await $onValueChange(value, true, {global: globalHandlers});
 			}
 		} else {
-			await $onValueChange(value);
+			await $onValueChange(value, true, {global: globalHandlers});
 		}
 	};
 

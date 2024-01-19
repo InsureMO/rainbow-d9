@@ -61,7 +61,7 @@ export const useArrayFunctions = (options: {
 		// force update myself
 		forceUpdate();
 		// notify value changed
-		await onValueChanged({absolutePath: absolutePathOfArray, oldValue: oldElements, newValue: elements});
+		await onValueChanged({absolutePath: absolutePathOfArray, oldValue: oldElements, newValue: elements}, ...args);
 	};
 	const createRemoveElementFunc = (elementModel: BaseModel, index: number) => {
 		// eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -84,7 +84,7 @@ export const useArrayFunctions = (options: {
 		// force update myself
 		forceUpdate();
 		// notify value changed
-		await onValueChanged({absolutePath: absolutePathOfArray, oldValue: oldElements, newValue: elements});
+		await onValueChanged({absolutePath: absolutePathOfArray, oldValue: oldElements, newValue: elements}, ...args);
 	};
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	const addElement = async (...args: Array<any>) => {
@@ -108,7 +108,7 @@ export const useArrayFunctions = (options: {
 		// force update myself
 		forceUpdate();
 		// notify value changed
-		await onValueChanged({absolutePath: absolutePathOfArray, oldValue: oldElements, newValue: elements});
+		await onValueChanged({absolutePath: absolutePathOfArray, oldValue: oldElements, newValue: elements}, ...args);
 	};
 
 	const getRowElementKey = getArrayElementKey(keys, getElementKey);

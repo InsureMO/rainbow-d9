@@ -2,6 +2,7 @@ import {BaseModel, MUtils, PPUtils, PropValue, registerWidget, VUtils} from '@ra
 import React, {ForwardedRef, forwardRef} from 'react';
 import {ButtonFill, ButtonInk} from '../button';
 import {DropdownOptions} from '../dropdown';
+import {useGlobalHandlers} from '../global';
 import {IntlLabel} from '../intl-label';
 import {UnwrappedButton} from '../unwrapped/button';
 import {UnwrappedDropdown} from '../unwrapped/dropdown';
@@ -84,12 +85,13 @@ export const Pagination = forwardRef((props: PaginationProps, ref: ForwardedRef<
 		$avs: {$disabled, $visible}
 	} = $wrapped;
 
+	const globalHandlers = useGlobalHandlers();
 	const data = guardPaginationData($model as BaseModel, $pp);
 
 	const onPageClicked = (pageNumber: number) => async () => {
 		if (pageNumber !== data.pageNumber) {
 			data.pageNumber = pageNumber;
-			await $onValueChange(data as unknown as PropValue);
+			await $onValueChange(data as unknown as PropValue, true, {global: globalHandlers});
 		}
 	};
 	const buildFreeWalkOptions = (): DropdownOptions => {
@@ -100,7 +102,7 @@ export const Pagination = forwardRef((props: PaginationProps, ref: ForwardedRef<
 	const onFreeWalkChanged = async (pageNumber: PropValue) => {
 		if (pageNumber !== data.pageNumber) {
 			data.pageNumber = pageNumber as number;
-			await $onValueChange(data as unknown as PropValue);
+			await $onValueChange(data as unknown as PropValue, true, {global: globalHandlers});
 		}
 	};
 	const possibleSizesOptions = ((): DropdownOptions => {
@@ -123,7 +125,7 @@ export const Pagination = forwardRef((props: PaginationProps, ref: ForwardedRef<
 			data.pageSize = pageSize as number;
 			data.pageNumber = Math.floor(currentFirstItemIndex / data.pageSize) + 1;
 			data.pageCount = Math.ceil(itemCount / data.pageSize);
-			await $onValueChange(data as unknown as PropValue);
+			await $onValueChange(data as unknown as PropValue, true, {global: globalHandlers});
 		}
 	};
 

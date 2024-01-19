@@ -113,7 +113,8 @@ export interface ValueChangeableNodeDef extends NodeDef {
 	/** value changed, before any event fired */
 	valueChanged?: <NV extends PropValue>(options: {
 		absolutePath: PropertyPath; oldValue: NV; newValue: NV;
-	}) => void | Promise<void>;
+		// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	}, ...args: Array<any>) => void | Promise<void>;
 }
 
 export interface ContainerDef extends NodeDef {
