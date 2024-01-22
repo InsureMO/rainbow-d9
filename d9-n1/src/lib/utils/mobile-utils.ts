@@ -30,6 +30,7 @@ export interface MobileUtilsType {
 	readonly isTablet: () => boolean;
 	readonly isDesktop: () => boolean;
 	readonly isTouchable: () => boolean;
+	readonly pickDeviceTags: (props: object) => DeviceTags;
 }
 
 const REGISTERED: { detective: Undefinable<AccurateDetective> } = {
@@ -108,5 +109,12 @@ export const MBUtils: MobileUtilsType = {
 	isMobile: () => DETECTED_DEVICE.touchable && DETECTED_DEVICE.mobile,
 	isTablet: () => DETECTED_DEVICE.touchable && DETECTED_DEVICE.tablet,
 	isDesktop: () => DETECTED_DEVICE.desktop,
-	isTouchable: () => DETECTED_DEVICE.touchable
+	isTouchable: () => DETECTED_DEVICE.touchable,
+	pickDeviceTags: (props: object) => {
+		return Object.keys(DETECTED_DEVICE).reduce((tags, key) => {
+			const dataKey = `data-${key}`;
+			tags[dataKey] = props[dataKey];
+			return tags;
+		}, {} as DeviceTags);
+	}
 };

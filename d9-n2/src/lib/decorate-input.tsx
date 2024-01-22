@@ -95,9 +95,9 @@ interface DecorateProps {
 }
 
 const Decorate = (props: DecorateProps) => {
-	const {id, leads, tails, children} = props;
+	const {id, leads, tails, children, ...rest} = props;
 
-	return <DecorateInputContainer id={VUtils.isBlank(id) ? (void 0) : `di-${id}`}>
+	return <DecorateInputContainer id={VUtils.isBlank(id) ? (void 0) : `di-${id}`} {...rest}>
 		{transformDecorators(leads).map(lead => {
 			return <LeadDecorator key={VUtils.generateUniqueId()}>
 				{lead}
@@ -115,7 +115,7 @@ const Decorate = (props: DecorateProps) => {
 export const DecorateInput = (props: DecorateInputProps) => {
 	const {leads, tails, className, style, ...rest} = props;
 	const {$wrapped: {$p2r}} = rest;
-	const deviceTags = MBUtils.computeDeviceTags();
+	const deviceTags = MBUtils.pickDeviceTags(props);
 
 	return <Decorate {...deviceTags} leads={leads} tails={tails} className={className} style={style}
 	                 id={PPUtils.asId(PPUtils.absolute($p2r, props.$pp), props.id)}>
@@ -129,7 +129,7 @@ export type DecorateNumberInputProps = OmitNodeDef<DecorateNumberInputDef> & Wid
 export const DecorateNumberInput = (props: DecorateNumberInputProps) => {
 	const {leads, tails, className, style, ...rest} = props;
 	const {$wrapped: {$p2r}} = rest;
-	const deviceTags = MBUtils.computeDeviceTags();
+	const deviceTags = MBUtils.pickDeviceTags(props);
 
 	return <Decorate {...deviceTags} leads={leads} tails={tails} className={className} style={style}
 	                 id={PPUtils.asId(PPUtils.absolute($p2r, props.$pp), props.id)}>
