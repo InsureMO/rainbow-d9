@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 import {ContainerEventBusProvider, useWrapperEventBus, WrapperEventTypes} from '../events';
-import {ContainerValidationEventHolder, useForceUpdate} from '../hooks';
+import {ContainerValidationEventHolder, useDeviceTags, useForceUpdate} from '../hooks';
 import {ArrayContainerDef, ContainerDef, ModelHolder, NodeDef, WidgetProps} from '../types';
 import {N1Logger, VUtils} from '../utils';
 import {findWidget, RegisteredWidget} from '../widgets-registration';
@@ -19,6 +19,7 @@ export const WrapperDelegateWorker = (workerProps: NodeDef & ModelHolder & Defau
 	const props: NodeDef & ModelHolder = {$wt, ...rest};
 
 	const {on, off} = useWrapperEventBus();
+	const deviceTags = useDeviceTags();
 	const validators = useValidationFunctions(props);
 	useAttributesWatch({props, attributeValues, setAttributeValues});
 	useValidate({props, attributeValues, setAttributeValues});
@@ -64,20 +65,23 @@ export const WrapperDelegateWorker = (workerProps: NodeDef & ModelHolder & Defau
 			if (internalWidget.container && internalWidget.array) {
 				return <ContainerEventBusProvider>
 					<ContainerValidationEventHolder/>
-					<ArrayWrapper {...(props as unknown as (ArrayContainerDef & ModelHolder))}
+					<ArrayWrapper {...deviceTags}
+					              {...(props as unknown as (ArrayContainerDef & ModelHolder))}
 					              $wt={internalType}
 					              $avs={attributeValues} $vfs={validators}/>
 				</ContainerEventBusProvider>;
 			} else if (internalWidget.container) {
 				return <ContainerEventBusProvider>
 					<ContainerValidationEventHolder/>
-					<ContainerWrapper {...(props as unknown as (ContainerDef & ModelHolder))}
+					<ContainerWrapper {...deviceTags}
+					                  {...(props as unknown as (ContainerDef & ModelHolder))}
 					                  $wt={internalType}
 					                  $avs={attributeValues} $vfs={validators}/>
 				</ContainerEventBusProvider>;
 			} else {
 				// ignore compute style when it is declared with a wrapper
-				return <LeafWrapper {...props} $wt={internalType} $avs={attributeValues} $vfs={validators}
+				return <LeafWrapper {...deviceTags} {...props}
+				                    $wt={internalType} $avs={attributeValues} $vfs={validators}
 				                    useComputedStyle={false}/>;
 			}
 		})();
@@ -86,7 +90,8 @@ export const WrapperDelegateWorker = (workerProps: NodeDef & ModelHolder & Defau
 		// cover widget CANNOT be container widget, and attribute "nodes" is ignored even through it has been declared.
 		// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 		// @ts-ignore
-		return <LeafWrapper {...props} $wt={coverType} $avs={attributeValues} $vfs={validators}
+		return <LeafWrapper {...deviceTags} {...props}
+		                    $wt={coverType} $avs={attributeValues} $vfs={validators}
 		                    useComputedStyle={true}>
 			{child}
 		</LeafWrapper>;
@@ -101,17 +106,20 @@ export const WrapperDelegateWorker = (workerProps: NodeDef & ModelHolder & Defau
 		if (widget.container && widget.array) {
 			return <ContainerEventBusProvider>
 				<ContainerValidationEventHolder/>
-				<ArrayWrapper {...(props as unknown as (ArrayContainerDef & ModelHolder))}
+				<ArrayWrapper {...deviceTags}
+				              {...(props as unknown as (ArrayContainerDef & ModelHolder))}
 				              $avs={attributeValues} $vfs={validators}/>
 			</ContainerEventBusProvider>;
 		} else if (widget.container) {
 			return <ContainerEventBusProvider>
 				<ContainerValidationEventHolder/>
-				<ContainerWrapper {...(props as unknown as (ContainerDef & ModelHolder))}
+				<ContainerWrapper {...deviceTags}
+				                  {...(props as unknown as (ContainerDef & ModelHolder))}
 				                  $avs={attributeValues} $vfs={validators}/>
 			</ContainerEventBusProvider>;
 		} else {
-			return <LeafWrapper {...props} $avs={attributeValues} $vfs={validators} useComputedStyle={true}/>;
+			return <LeafWrapper {...deviceTags} {...props}
+			                    $avs={attributeValues} $vfs={validators} useComputedStyle={true}/>;
 		}
 	}
 };

@@ -11,13 +11,15 @@ import {
 	ValidatedSet,
 	ValidationResult
 } from '../types';
+import {DeviceTags} from '../utils';
 
 export enum RootEventTypes {
 	VALUE_CHANGED = 'value-changed',
 	VALIDATE = 'validate',
 	VALIDATED = 'validated',
 	REGISTER_VALIDATABLE = 'register-validatable',
-	UNREGISTER_VALIDATABLE = 'unregister-validatable'
+	UNREGISTER_VALIDATABLE = 'unregister-validatable',
+	DEVICE_CHANGED = 'device-changed',
 }
 
 export interface ValidatedOptions<R extends BaseModel, M extends PropValue, V extends PropValue> extends ValidationResult {
@@ -59,6 +61,12 @@ export interface RootEventBus {
 	on(type: RootEventTypes.UNREGISTER_VALIDATABLE, listener: (uniqueId: NodeUniqueKey) => void): this;
 
 	off(type: RootEventTypes.UNREGISTER_VALIDATABLE, listener: (uniqueId: NodeUniqueKey) => void): this;
+
+	fire(type: RootEventTypes.DEVICE_CHANGED, tags: DeviceTags): this;
+
+	on(type: RootEventTypes.DEVICE_CHANGED, listener: (tags: DeviceTags) => void): this;
+
+	off(type: RootEventTypes.DEVICE_CHANGED, listener: (tags: DeviceTags) => void): this;
 }
 
 const Context = createContext<RootEventBus>({} as RootEventBus);

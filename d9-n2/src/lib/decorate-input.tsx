@@ -1,4 +1,4 @@
-import {PPUtils, registerWidget, VUtils, WidgetProps} from '@rainbow-d9/n1';
+import {MBUtils, PPUtils, registerWidget, VUtils, WidgetProps} from '@rainbow-d9/n1';
 import React, {CSSProperties, ReactNode} from 'react';
 import styled from 'styled-components';
 import {CssVars, DOM_ID_WIDGET, DOM_KEY_WIDGET} from './constants';
@@ -115,8 +115,9 @@ const Decorate = (props: DecorateProps) => {
 export const DecorateInput = (props: DecorateInputProps) => {
 	const {leads, tails, className, style, ...rest} = props;
 	const {$wrapped: {$p2r}} = rest;
+	const deviceTags = MBUtils.computeDeviceTags();
 
-	return <Decorate leads={leads} tails={tails} className={className} style={style}
+	return <Decorate {...deviceTags} leads={leads} tails={tails} className={className} style={style}
 	                 id={PPUtils.asId(PPUtils.absolute($p2r, props.$pp), props.id)}>
 		<Input {...rest}/>
 	</Decorate>;
@@ -128,8 +129,9 @@ export type DecorateNumberInputProps = OmitNodeDef<DecorateNumberInputDef> & Wid
 export const DecorateNumberInput = (props: DecorateNumberInputProps) => {
 	const {leads, tails, className, style, ...rest} = props;
 	const {$wrapped: {$p2r}} = rest;
+	const deviceTags = MBUtils.computeDeviceTags();
 
-	return <Decorate leads={leads} tails={tails} className={className} style={style}
+	return <Decorate {...deviceTags} leads={leads} tails={tails} className={className} style={style}
 	                 id={PPUtils.asId(PPUtils.absolute($p2r, props.$pp), props.id)}>
 		<NumberInput {...rest}/>
 	</Decorate>;

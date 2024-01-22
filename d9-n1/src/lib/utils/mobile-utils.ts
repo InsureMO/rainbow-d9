@@ -1,59 +1,112 @@
+import {Undefinable} from '../types';
+
+export interface DeviceType {
+	touchable: boolean;
+	mobile: boolean;
+	tablet: boolean;
+	desktop: boolean;
+}
+
+export type AccurateDetective = (device: DeviceType) => DeviceType;
+
+export type DeviceTag = `data-${keyof DeviceType}`
+export type DeviceTags = Record<DeviceTag, boolean>;
+
 export interface MobileUtilsType {
+	readonly registerAccurateDetective: (detective: AccurateDetective) => void;
 	/**
-	 * get value by given property path from given model
+	 * detect device type
 	 */
-	readonly detect: () => boolean;
-	readonly createDeviceTags: () => void;
+	readonly detect: () => DeviceType;
+	/**
+	 * won't detect again, just return the cached result, but use new object
+	 */
+	readonly computeDeviceTags: () => DeviceTags;
+	/**
+	 * use given tags or compute new tags and set them on html tag
+	 */
+	readonly createDeviceTagsOnHTMLTag: (tags?: DeviceTags) => void;
 	readonly isMobile: () => boolean;
+	readonly isTablet: () => boolean;
+	readonly isDesktop: () => boolean;
 	readonly isTouchable: () => boolean;
 }
 
-const DeviceTags = {
-	touchable: false
+const REGISTERED: { detective: Undefinable<AccurateDetective> } = {
+	detective: (void 0)
+};
+
+const DETECTED_DEVICE = {
+	touchable: false,
+	mobile: false,
+	tablet: false,
+	desktop: true
 };
 
 export const MBUtils: MobileUtilsType = {
+	registerAccurateDetective: detective => REGISTERED.detective = detective,
 	detect: () => {
-		let hasTouchScreen = false;
+		let touchable = false;
 		if ('maxTouchPoints' in navigator) {
-			hasTouchScreen = navigator.maxTouchPoints > 0;
+			touchable = navigator.maxTouchPoints > 0;
 		} else if ('msMaxTouchPoints' in navigator) {
 			// eslint-disable-next-line  @typescript-eslint/ban-ts-comment
 			// @ts-ignore
-			hasTouchScreen = navigator.msMaxTouchPoints > 0;
+			touchable = navigator.msMaxTouchPoints > 0;
 		} else {
 			const mobile = matchMedia?.('(any-pointer:coarse)').matches;
 			if (mobile) {
-				hasTouchScreen = true;
+				touchable = true;
 			} else if ('orientation' in window) {
-				hasTouchScreen = true; // deprecated, but good fallback
+				touchable = true; // deprecated, but good fallback
 			} else {
 				// Only as a last resort, fall back to user agent sniffing
 				// eslint-disable-next-line  @typescript-eslint/ban-ts-comment
 				// @ts-ignore
 				const UA = navigator.userAgent;
-				hasTouchScreen =
+				touchable =
 					/\b(BlackBerry|webOS|iPhone|IEMobile)\b/i.test(UA) ||
 					/\b(Android|Windows Phone|iPad|iPod)\b/i.test(UA);
 			}
 		}
-		return hasTouchScreen;
-	},
-	createDeviceTags: () => {
-		if (MBUtils.detect()) {
-			DeviceTags.touchable = true;
-			document.documentElement.setAttribute('data-touchable', 'true');
-			// document.querySelectorAll('[data-w]').forEach(element => {
-			// 	element.setAttribute('data-touchable', 'true');
-			// });
+		DETECTED_DEVICE.touchable = touchable;
+		if (touchable) {
+			const {innerWidth, innerHeight} = window;
+			if (innerWidth <= 499 || innerHeight <= 499) {
+				DETECTED_DEVICE.mobile = true;
+				DETECTED_DEVICE.tablet = false;
+				DETECTED_DEVICE.desktop = false;
+			} else {
+				DETECTED_DEVICE.mobile = false;
+				DETECTED_DEVICE.tablet = true;
+				DETECTED_DEVICE.desktop = false;
+			}
 		} else {
-			DeviceTags.touchable = false;
-			document.documentElement.removeAttribute('data-touchable');
-			// document.querySelectorAll('[data-w]').forEach(element => {
-			// 	element.removeAttribute('data-touchable');
-			// });
+			// only desktop is not touchable
+			DETECTED_DEVICE.mobile = false;
+			DETECTED_DEVICE.tablet = false;
+			DETECTED_DEVICE.desktop = true;
 		}
+
+		return REGISTERED.detective == null ? DETECTED_DEVICE : REGISTERED.detective(DETECTED_DEVICE);
 	},
-	isMobile: () => DeviceTags.touchable,
-	isTouchable: () => DeviceTags.touchable
+	computeDeviceTags: (): DeviceTags => {
+		return Object.keys(DETECTED_DEVICE).reduce((tags, key) => {
+			tags[`data-${key}`] = DETECTED_DEVICE[key];
+			return tags;
+		}, {} as DeviceTags);
+	},
+	createDeviceTagsOnHTMLTag: (tags?: DeviceTags) => {
+		if (tags == null) {
+			MBUtils.detect();
+			tags = MBUtils.computeDeviceTags();
+		}
+		Object.keys(tags).forEach(tag => {
+			document.documentElement.setAttribute(tag, tags[tag]);
+		});
+	},
+	isMobile: () => DETECTED_DEVICE.touchable && DETECTED_DEVICE.mobile,
+	isTablet: () => DETECTED_DEVICE.touchable && DETECTED_DEVICE.tablet,
+	isDesktop: () => DETECTED_DEVICE.desktop,
+	isTouchable: () => DETECTED_DEVICE.touchable
 };
