@@ -5,6 +5,7 @@ import {ModelHolder} from './model-types';
 export * from './widget-props-types';
 export * from './model-types';
 export * from './def-props-types';
+export * from './device-type';
 
 /** string has no dot */
 export type ExternalDefKey = string;

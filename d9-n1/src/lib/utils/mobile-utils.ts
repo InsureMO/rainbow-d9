@@ -1,16 +1,6 @@
-import {Undefinable} from '../types';
-
-export interface DeviceType {
-	touchable: boolean;
-	mobile: boolean;
-	tablet: boolean;
-	desktop: boolean;
-}
+import {DeviceTags, DeviceType, Undefinable} from '../types';
 
 export type AccurateDetective = (device: DeviceType) => DeviceType;
-
-export type DeviceTag = `data-${keyof DeviceType}`
-export type DeviceTags = Record<DeviceTag, boolean>;
 
 export interface MobileUtilsType {
 	readonly registerAccurateDetective: (detective: AccurateDetective) => void;

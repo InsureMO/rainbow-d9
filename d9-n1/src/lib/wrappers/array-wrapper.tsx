@@ -12,8 +12,15 @@ import {findWidget, RegisteredArrayContainerWidget} from '../widgets-registratio
 import {ArrayElement} from './array-element';
 import {useArrayFunctions} from './use-array-functions';
 
-export const ArrayWrapper = (props: ArrayContainerDef & ModelHolder & WrappedNodeAttributes) => {
-	const {$root, $p2r, $model, $wt, $avs, $vfs, $array, ...rest} = props;
+export interface ArrayWrapperProps extends ArrayContainerDef, ModelHolder, WrappedNodeAttributes {
+}
+
+export const ArrayWrapper = (props: ArrayWrapperProps) => {
+	const {
+		$root, $p2r, $model, $wt,
+		$avs, $vfs, $array,
+		...rest
+	} = props;
 
 	const {onValueChange: $onValueChange, onValueChanged} = useSetValue(props);
 	const $wrapped: WrappedAttributes = {$root, $p2r, $model, $onValueChange, $avs, $vfs};

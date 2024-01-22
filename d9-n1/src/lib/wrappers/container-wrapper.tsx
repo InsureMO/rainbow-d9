@@ -14,8 +14,15 @@ import {findWidget, RegisteredContainerWidget} from '../widgets-registration';
 import {renderContainerChildren} from './render-container-children';
 import {useContainerChildren} from './use-container-children';
 
-export const ContainerWrapper = (props: ContainerDef & ModelHolder & WrappedNodeAttributes) => {
-	const {$root, $p2r, $model, $wt, $avs, $vfs, ...rest} = props;
+export interface ContainerWrapperProps extends ContainerDef, ModelHolder, WrappedNodeAttributes {
+}
+
+export const ContainerWrapper = (props: ContainerWrapperProps) => {
+	const {
+		$root, $p2r, $model, $wt,
+		$avs, $vfs,
+		...rest
+	} = props;
 
 	// cache keys for children of element
 	const {keys, defs: childrenDefs} = useContainerChildren({def: props});

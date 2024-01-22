@@ -1,7 +1,9 @@
 import {nanoid} from 'nanoid';
 import {CSSProperties} from 'react';
-import {ContainerDef, NodeDef, NodeUniqueKey, NodeValidationScope, Reaction} from '../types';
+import {ContainerDef, DeviceTags, NodeDef, NodeUniqueKey, NodeValidationScope, Reaction} from '../types';
 import {VUtils} from './value-utils';
+
+export type StyledNodeDef = Pick<NodeDef, '$pos'> & Pick<HTMLElement, 'style'> & Partial<DeviceTags>;
 
 export interface NodeUtilsType {
 	/**
@@ -13,8 +15,8 @@ export interface NodeUtilsType {
 	readonly inheritValidationScopes: (parentDef: Pick<NodeDef, '$validationScopes'>, def: Pick<NodeDef, '$validationScopes'>) => void;
 	readonly reactWithRepaint: () => Reaction.REPAINT;
 	readonly reactWithClear: () => Reaction.CLEAR_VALUE;
-	asGridPos: (def: NodeDef) => Partial<Pick<CSSProperties, 'gridColumn' | 'gridRow'>>;
-	readonly computeStyle: (def: NodeDef) => Partial<CSSProperties>;
+	asGridPos: (def: Pick<NodeDef, '$pos'>) => Partial<Pick<CSSProperties, 'gridColumn' | 'gridRow'>>;
+	readonly computeStyle: (def: StyledNodeDef) => Partial<CSSProperties>;
 }
 
 export const NUtils: NodeUtilsType = {
@@ -54,7 +56,7 @@ export const NUtils: NodeUtilsType = {
 	},
 	reactWithRepaint: () => Reaction.REPAINT,
 	reactWithClear: () => Reaction.CLEAR_VALUE,
-	asGridPos: (def: NodeDef) => {
+	asGridPos: (def: Pick<NodeDef, '$pos'>) => {
 		if (def.$pos == null) {
 			return {gridColumn: 'span 3'};
 		}
@@ -89,7 +91,7 @@ export const NUtils: NodeUtilsType = {
 		}
 		return pos;
 	},
-	computeStyle: (def: NodeDef) => {
+	computeStyle: (def: StyledNodeDef) => {
 		const pos = NUtils.asGridPos(def);
 		// eslint-disable-next-line @typescript-eslint/no-explicit-any
 		const style = ((def as any).style as CSSProperties) ?? {};

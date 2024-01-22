@@ -1,6 +1,7 @@
 import React, {Fragment, useEffect, useState} from 'react';
 import {RootEventTypes, useRootEventBus} from '../events';
-import {DeviceTags, MBUtils} from '../utils';
+import {DeviceTags} from '../types';
+import {MBUtils} from '../utils';
 
 // first run
 MBUtils.createDeviceTagsOnHTMLTag();

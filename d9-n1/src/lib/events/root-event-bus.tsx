@@ -3,6 +3,7 @@ import React, {createContext, ReactNode, useContext} from 'react';
 import {useCreateEventBus} from '../hooks/use-create-event-bus';
 import {
 	BaseModel,
+	DeviceTags,
 	NodeUniqueKey,
 	NodeValidationScope,
 	PropertyPath,
@@ -11,7 +12,6 @@ import {
 	ValidatedSet,
 	ValidationResult
 } from '../types';
-import {DeviceTags} from '../utils';
 
 export enum RootEventTypes {
 	VALUE_CHANGED = 'value-changed',
