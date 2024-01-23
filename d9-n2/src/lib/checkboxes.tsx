@@ -49,10 +49,11 @@ const Option = styled.span.attrs<{ columns: number, compact: boolean }>(
 		};
 	})<{ columns: number, compact: boolean }>`
     display: flex;
+    position: relative;
     align-items: center;
     font-family: ${CssVars.FONT_FAMILY};
     font-size: ${CssVars.FONT_SIZE};
-    height: ${CssVars.INPUT_HEIGHT};
+    min-height: ${CssVars.INPUT_HEIGHT};
     padding: calc(${CssVars.INPUT_HEIGHT} / 8) ${CssVars.INPUT_INDENT};
     margin-left: calc(${CssVars.INPUT_INDENT} * -1);
     margin-right: ${CssVars.INPUT_INDENT};
@@ -80,7 +81,11 @@ const Option = styled.span.attrs<{ columns: number, compact: boolean }>(
     }
 
     > div[data-w=d9-checkbox] {
+        display: flex;
+        align-items: center;
         min-width: ${CssVars.INPUT_HEIGHT};
+        height: calc(${CssVars.INPUT_HEIGHT} / 4 * 3);
+        padding: 0;
     }
 
     > span {
