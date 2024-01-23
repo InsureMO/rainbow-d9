@@ -86,6 +86,10 @@ const Option = styled.span.attrs<{ columns: number, compact: boolean }>(
         min-width: ${CssVars.INPUT_HEIGHT};
         height: calc(${CssVars.INPUT_HEIGHT} / 4 * 3);
         padding: 0;
+
+        > svg {
+            margin-top: 0;
+        }
     }
 
     > span {
