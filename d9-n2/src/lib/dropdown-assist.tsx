@@ -447,7 +447,7 @@ export const useFilterableDropdownOptions = <V extends any>(props: OptionItemsPr
 			...state,
 			active: DropdownPopupStateActive.WILL_ACTIVE, atBottom: bottom,
 			top, left, width, height,
-			minWidth: width, minHeight: popupHeight, maxHeight: popupHeight
+			minWidth: width, minHeight: popupHeight
 		}));
 	};
 
