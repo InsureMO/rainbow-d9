@@ -56,7 +56,7 @@ const fireCustomEvent = useSimpleCustomGlobalEvent();
 // marker is required, it is used to identify the plan selection widget even there is only one exists.
 // should be same as the marker declared in PlanSelectionDef.
 const marker = 'plan-unique-marker';
-// root and model is based on where to fire this event, for model of plan selection.
+// model is based on where to fire this event, not model of plan selection.
 fireCustomEvent(PlanSelectionGlobalEventPrefix.RELOAD_DEFS, marker, {root, model});
 ```
 
