@@ -53,13 +53,13 @@ const Option = styled.span.attrs<{ columns: number, compact: boolean }>(
     font-family: ${CssVars.FONT_FAMILY};
     font-size: ${CssVars.FONT_SIZE};
     height: ${CssVars.INPUT_HEIGHT};
-    padding: 0 ${CssVars.INPUT_INDENT};
+    padding: calc(${CssVars.INPUT_HEIGHT} / 8) ${CssVars.INPUT_INDENT};
     margin-left: calc(${CssVars.INPUT_INDENT} * -1);
     margin-right: ${CssVars.INPUT_INDENT};
     border-radius: ${CssVars.BORDER_RADIUS};
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
+    //overflow: hidden;
+    //white-space: nowrap;
+    //text-overflow: ellipsis;
     cursor: pointer;
 
     &[data-can-click=false] {
@@ -87,10 +87,10 @@ const Option = styled.span.attrs<{ columns: number, compact: boolean }>(
         display: flex;
         position: relative;
         align-items: center;
-        height: 100%;
-        overflow: hidden;
-        white-space: nowrap;
-        text-overflow: ellipsis;
+        //height: 100%;
+        //overflow: hidden;
+        //white-space: nowrap;
+        //text-overflow: ellipsis;
     }
 `;
 const Separator = styled.span.attrs({[DOM_KEY_WIDGET]: 'd9-checkboxes-option-separator'})`
