@@ -316,7 +316,20 @@ export const useDropdownControl = (options: {
 			const {left, width} = popupRef.current.getBoundingClientRect();
 			if (left + width + 2 > window.innerWidth) {
 				const {left: pl, width: pw} = popupRef.current.parentElement.getBoundingClientRect();
-				setPopupState(state => ({...state, active: DropdownPopupStateActive.ACTIVE, left: pl + pw - width}));
+				// try to move left
+				let left = pl + pw - width;
+				let maxWidth = width;
+				// out of left side
+				if (left <= 2) {
+					// try to move based on window, and absorb on the right of window
+					left = window.innerWidth - width - 2;
+				}
+				if (left <= 2) {
+					// still out of left side, make popup use the max width
+					left = 2;
+					maxWidth = window.innerWidth - 4;
+				}
+				setPopupState(state => ({...state, active: DropdownPopupStateActive.ACTIVE, left, maxWidth}));
 			} else {
 				setPopupState(state => ({...state, active: DropdownPopupStateActive.ACTIVE}));
 			}

@@ -167,11 +167,12 @@ const OptionFilter = styled.div.attrs<Omit<DropdownPopupState, 'active'> & { act
 `;
 const MultiOption = styled.span.attrs({[DOM_KEY_WIDGET]: 'd9-multi-dropdown-option'})`
     display: flex;
+    position: relative;
     align-items: center;
-    padding: 0 ${CssVars.INPUT_INDENT};
+    padding: calc(${CssVars.INPUT_HEIGHT} / 8) ${CssVars.INPUT_INDENT};
     font-family: ${CssVars.FONT_FAMILY};
     font-size: ${CssVars.FONT_SIZE};
-    height: ${CssVars.INPUT_HEIGHT};
+    min-height: ${CssVars.INPUT_HEIGHT};
     //overflow: hidden;
     //white-space: nowrap;
     //text-overflow: ellipsis;
