@@ -1,4 +1,4 @@
-import {VUtils} from '@rainbow-d9/n1';
+import {DeviceTags, VUtils} from '@rainbow-d9/n1';
 import React, {
 	ChangeEvent,
 	ForwardedRef,
@@ -257,19 +257,9 @@ const DropdownPopupContainer = styled.div.attrs<Omit<DropdownPopupProps, 'childr
     overflow-y: var(--overflow-y);
     opacity: var(--opacity);
     pointer-events: var(--pointer-events);
-
-    &[data-mobile=true] {
-        //top: 10vh;
-        left: 10vw;
-        bottom: unset;
-        //min-height: 80vh;
-        max-height: 80vh;
-        min-width: 80vw;
-        max-width: 80vw;
-    }
 `;
 
-export interface DropdownPopupProps extends DropdownPopupState {
+export interface DropdownPopupProps extends DropdownPopupState, Partial<DeviceTags> {
 	shown: boolean;
 	vScroll?: boolean;
 	hScroll?: boolean;
@@ -370,7 +360,11 @@ export const useFilterableDropdownOptions = <V extends any>(props: OptionItemsPr
 			afterPopupHide: () => setTimeout(() => setFilter(''), 100)
 		};
 	});
-	const {containerRef, popupRef, popupState, setPopupState, popupShown, setPopupShown} = useDropdownControl({
+	const {
+		containerRef, popupRef,
+		popupState, setPopupState,
+		popupShown, setPopupShown
+	} = useDropdownControl({
 		askPopupMaxHeight: () => 8 * CssVars.INPUT_HEIGHT_VALUE + 2,
 		afterPopupShown: functions.afterPopupShown,
 		afterPopupHide: functions.afterPopupHide
@@ -453,7 +447,7 @@ export const useFilterableDropdownOptions = <V extends any>(props: OptionItemsPr
 		filterInputRef, filter, setFilter,
 		askOptions, askDisplayOptions, displayOptions,
 		containerRef, popupState, setPopupState, popupHeight,
-		popupRef, popupShown, setPopupShown,
+		popupRef, popupShown, setPopupShown, afterPopupStateChanged: functions,
 		repaintPopup,
 		onClicked, onFocused, onKeyUp, onFilterChanged
 	};

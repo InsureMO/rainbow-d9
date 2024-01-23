@@ -172,9 +172,9 @@ const MultiOption = styled.span.attrs({[DOM_KEY_WIDGET]: 'd9-multi-dropdown-opti
     font-family: ${CssVars.FONT_FAMILY};
     font-size: ${CssVars.FONT_SIZE};
     height: ${CssVars.INPUT_HEIGHT};
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
+    //overflow: hidden;
+    //white-space: nowrap;
+    //text-overflow: ellipsis;
 
     > span:first-child {
         display: flex;
@@ -186,7 +186,7 @@ const MultiOption = styled.span.attrs({[DOM_KEY_WIDGET]: 'd9-multi-dropdown-opti
     > svg:last-child {
         fill: ${CssVars.PRIMARY_COLOR};
         height: calc(${CssVars.INPUT_HEIGHT} / 3);
-        width: calc(${CssVars.INPUT_HEIGHT} / 3);
+        min-width: calc(${CssVars.INPUT_HEIGHT} / 3);
         margin-left: 8px;
         margin-right: calc(${CssVars.INPUT_INDENT} * -1 + 12px);
         opacity: 0.7;

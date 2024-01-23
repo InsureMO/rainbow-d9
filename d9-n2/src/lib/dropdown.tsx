@@ -111,9 +111,9 @@ const Option = styled.span.attrs({[DOM_KEY_WIDGET]: 'd9-dropdown-option'})`
     font-size: ${CssVars.FONT_SIZE};
     padding: 0 ${CssVars.INPUT_INDENT};
     height: ${CssVars.INPUT_HEIGHT};
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
+    //overflow: hidden;
+    //white-space: nowrap;
+    //text-overflow: ellipsis;
 
     &[data-can-click=false] {
         cursor: default;
@@ -136,10 +136,10 @@ export const Dropdown = (props: DropdownProps) => {
 	const globalHandlers = useGlobalHandlers();
 	const {
 		askOptions, displayOptions,
-		filterInputRef, filter, setFilter,
+		filterInputRef, filter,
 		containerRef,
 		popupState, popupHeight,
-		popupRef, popupShown, setPopupShown,
+		popupRef, popupShown, setPopupShown, afterPopupStateChanged,
 		onClicked, onFocused, onKeyUp, onFilterChanged
 	} = useFilterableDropdownOptions(props);
 	const forceUpdate = useForceUpdate();
@@ -153,7 +153,7 @@ export const Dropdown = (props: DropdownProps) => {
 		await $onValueChange(option.value, true, {global: globalHandlers});
 		setPopupShown(false);
 		if (filter !== '') {
-			setTimeout(() => setFilter(''), 100);
+			afterPopupStateChanged.afterPopupHide();
 		}
 		setTimeout(() => containerRef.current?.focus(), 100);
 	};
