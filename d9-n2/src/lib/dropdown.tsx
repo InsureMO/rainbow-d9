@@ -45,6 +45,7 @@ export type DropdownDef =
 	& {
 	please?: ReactNode;
 	clearable?: boolean;
+	maxWidth?: number;
 };
 /** widget definition, with html attributes */
 export type DropdownProps = OmitNodeDef<DropdownDef> & WidgetProps;

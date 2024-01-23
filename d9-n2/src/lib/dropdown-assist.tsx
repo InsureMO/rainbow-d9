@@ -1,4 +1,4 @@
-import {DeviceTags, VUtils} from '@rainbow-d9/n1';
+import {DeviceTags, Undefinable, VUtils} from '@rainbow-d9/n1';
 import React, {
 	ChangeEvent,
 	ForwardedRef,
@@ -296,12 +296,15 @@ export const isPopupAtBottom = (top: number, height: number, askPopupHeight: () 
 	}
 };
 
+const MAX_WIDTH_MARGIN = 8;
 export const useDropdownControl = (options: {
 	askPopupMaxHeight: () => number;
+	askPopupMaxWidth: () => Undefinable<number>;
 	afterPopupShown?: () => void;
 	afterPopupHide?: () => void;
+	fixWidth?: boolean;
 }) => {
-	const {askPopupMaxHeight, afterPopupShown, afterPopupHide} = options;
+	const {askPopupMaxHeight, askPopupMaxWidth, afterPopupShown, afterPopupHide, fixWidth = false} = options;
 
 	const containerRef = useRef<HTMLDivElement>(null);
 	const popupRef = useRef<HTMLDivElement>(null);
@@ -310,32 +313,51 @@ export const useDropdownControl = (options: {
 		top: 0, left: 0, width: 0, height: 0, minWidth: 0, maxHeight: askPopupMaxHeight()
 	});
 	const [popupShown, setPopupShown] = useState(false);
+	const expectMaxWidth = askPopupMaxWidth() ?? window.innerWidth - MAX_WIDTH_MARGIN * 2;
 	useEffect(() => {
 		if (isDropdownPopupActive(popupState.active)) {
 			setPopupShown(true);
 			const {left, width} = popupRef.current.getBoundingClientRect();
-			if (left + width + 2 > window.innerWidth) {
-				const {left: pl, width: pw} = popupRef.current.parentElement.getBoundingClientRect();
-				// try to move left
-				let left = pl + pw - width;
-				let maxWidth = width;
+			let toBeWidth = width;
+			if (!fixWidth) {
+				// if there is scrollbar, try to expand width, binary expanding
+				while (popupRef.current.scrollHeight != popupRef.current.clientHeight) {
+					if (toBeWidth < expectMaxWidth) {
+						// min step is 10px
+						toBeWidth = Math.max((expectMaxWidth - toBeWidth) / 2, 10) + toBeWidth;
+						popupRef.current.style.minWidth = `${toBeWidth}px`;
+					} else {
+						// break the given expect max width, let to be as expect max width
+						toBeWidth = expectMaxWidth;
+						break;
+					}
+				}
+				// remove this temporary min width, it will be set after state changed
+				popupRef.current.style.minWidth = '';
+			}
+			if (left + toBeWidth + MAX_WIDTH_MARGIN > window.innerWidth) {
+				// popup is out of right side, try to move left
+				const {left: parentLeft, width: parentWidth} = popupRef.current.parentElement.getBoundingClientRect();
+				// use the container right side as right
+				let left = parentLeft + parentWidth - toBeWidth;
 				// out of left side
-				if (left <= 2) {
+				if (left <= MAX_WIDTH_MARGIN) {
 					// try to move based on window, and absorb on the right of window
-					left = window.innerWidth - width - 2;
+					left = window.innerWidth - toBeWidth - MAX_WIDTH_MARGIN;
+					if (left > MAX_WIDTH_MARGIN) {
+						left = MAX_WIDTH_MARGIN;
+					}
 				}
-				if (left <= 2) {
-					// still out of left side, make popup use the max width
-					left = 2;
-					maxWidth = window.innerWidth - 4;
-				}
-				setPopupState(state => ({...state, active: DropdownPopupStateActive.ACTIVE, left, maxWidth}));
+				setPopupState(state => ({
+					...state, active: DropdownPopupStateActive.ACTIVE,
+					left, minWidth: toBeWidth, maxWidth: toBeWidth
+				}));
 			} else {
 				setPopupState(state => ({...state, active: DropdownPopupStateActive.ACTIVE}));
 			}
 			afterPopupShown && afterPopupShown();
 		}
-	}, [popupState.active, afterPopupShown]);
+	}, [popupState.active, afterPopupShown, expectMaxWidth, fixWidth]);
 	useEffect(() => {
 		if (!popupShown) {
 			setPopupState(state => ({...state, active: DropdownPopupStateActive.HIDDEN}));
@@ -359,7 +381,7 @@ export const useDropdownControl = (options: {
 // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-constraint, @typescript-eslint/no-explicit-any
 export const useFilterableDropdownOptions = <V extends any>(props: OptionItemsProps<V>) => {
 	const {
-		optionSort,
+		optionSort, maxWidth,
 		noAvailable = <IntlLabel keys={['options', 'noAvailable']} value="No available options."/>,
 		noMatched = <IntlLabel keys={['options', 'noMatched']} value="No matched options."/>,
 		$wrapped: {$avs: {$disabled}}
@@ -379,6 +401,7 @@ export const useFilterableDropdownOptions = <V extends any>(props: OptionItemsPr
 		popupShown, setPopupShown
 	} = useDropdownControl({
 		askPopupMaxHeight: () => 8 * CssVars.INPUT_HEIGHT_VALUE + 2,
+		askPopupMaxWidth: () => maxWidth,
 		afterPopupShown: functions.afterPopupShown,
 		afterPopupHide: functions.afterPopupHide
 	});

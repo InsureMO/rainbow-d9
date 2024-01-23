@@ -47,6 +47,7 @@ export type MultiDropdownDef =
 	& {
 	please?: ReactNode;
 	clearable?: boolean;
+	maxWidth?: number;
 };
 /** widget definition, with html attributes */
 export type MultiDropdownProps = OmitNodeDef<MultiDropdownDef> & WidgetProps;

@@ -50,8 +50,14 @@ export const Picker = (props: CalendarProps) => {
 
 	const globalHandlers = useGlobalHandlers();
 	const {fire} = useCalendarEventBus();
-	const {containerRef, popupRef, popupState, setPopupState, popupShown, setPopupShown} = useDropdownControl({
-		askPopupMaxHeight: () => CssVars.CALENDAR_POPUP_HEIGHT_VALUE
+	const {
+		containerRef, popupRef,
+		popupState, setPopupState,
+		popupShown, setPopupShown
+	} = useDropdownControl({
+		askPopupMaxHeight: () => CssVars.CALENDAR_POPUP_HEIGHT_VALUE,
+		askPopupMaxWidth: () => CssVars.CALENDAR_POPUP_WIDTH_VALUE,
+		fixWidth: true
 	});
 
 	const showPopup = () => {

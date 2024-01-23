@@ -32,6 +32,7 @@ export interface OptionItemsDef<V> {
 
 export interface OptionItemsProps<V> extends OptionItemsDef<V> {
 	$wrapped: Omit<WidgetProps['$wrapped'], '$onValueChange'>;
+	maxWidth?: number;
 }
 
 export const NO_OPTION_ITEM = [];
