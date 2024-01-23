@@ -14,17 +14,17 @@ export const InternalPlanSelection = (props: PlanSelectionProps) => {
 	const {
 		$pp, $wrapped,
 		columns = 3, columnWidth, lineHeaderWidth, maxHeight,
-		defs,
 		currencySymbol, premiumDescription, buyText, buy,
 		planTitle, planSubTitle, elementTitle,
-		elementOptionsValue, elementNumberValue, elementNumberValueValidator, elementFixedValue,
+		elementFixedValue, elementOptionsValue,
+		elementNumberValue, elementNumberValueValidator,
 		planOperators,
 		calculate, calculationDelay = 1,
 		...rest
 	} = props;
 	const {$root, $p2r, $avs: {$disabled, $visible}} = $wrapped;
 
-	const {initialized: planDefsInitialized, defs: planDefs, orderedDefs} = useDefs(defs);
+	const {initialized: planDefsInitialized, defs: planDefs, orderedDefs} = useDefs(props);
 	const layout = useLayout(planDefsInitialized, planDefs, columns, columnWidth, lineHeaderWidth);
 	if (!layout.initialized) {
 		return null;

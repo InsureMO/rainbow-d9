@@ -4,7 +4,11 @@ import {PlanSelection} from './plan-selection';
 import {PlanSelectionDef} from './types';
 
 export const PlanSelectionDefsBuild = Widget.createSnippetBuild<PlanSelectionDef, 'defs', PlanSelectionDef['defs']>(
-	'defs', (parsed: string) => new Function(parsed) as PlanSelectionDef['defs']);
+	'defs', (parsed: string) => new Function('options', parsed) as PlanSelectionDef['defs']);
+export const PlanSelectionValuesInitBuild = Widget.createSnippetBuild<PlanSelectionDef, 'valuesInit', PlanSelectionDef['valuesInit']>(
+	'valuesInit', (parsed: string) => new Function('options', parsed) as PlanSelectionDef['valuesInit']);
+export const PlanSelectionValuesClearBuild = Widget.createSnippetBuild<PlanSelectionDef, 'valuesClear', PlanSelectionDef['valuesClear']>(
+	'valuesClear', (parsed: string) => new Function('options', parsed) as PlanSelectionDef['valuesClear']);
 export const PlanSelectionTitleBuild = Widget.createSnippetBuild<PlanSelectionDef, 'planTitle', PlanSelectionDef['planTitle']>(
 	'planTitle', (parsed: string) => new Function('def', 'elementValueChanged', parsed) as PlanSelectionDef['planTitle']);
 export const PlanSelectionSubTitleBuild = Widget.createSnippetBuild<PlanSelectionDef, 'planSubTitle', PlanSelectionDef['planSubTitle']>(
@@ -36,7 +40,7 @@ export abstract class AbstractPlanSelectionTranslator extends Widget.SpecificWid
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	public getAttributeValueBuilders(): Array<Widget.AttributeValueBuild<any>> {
 		return [
-			PlanSelectionDefsBuild,
+			PlanSelectionDefsBuild, PlanSelectionValuesInitBuild, PlanSelectionValuesClearBuild,
 			PlanSelectionTitleBuild, PlanSelectionSubTitleBuild, PlanSelectionElementTitleBuild,
 			PlanSelectionElementFixedValueBuild, PlanSelectionElementOptionsValueBuild,
 			PlanSelectionElementNumberValueBuild, PlanSelectionElementNumberValueValidatorBuild,

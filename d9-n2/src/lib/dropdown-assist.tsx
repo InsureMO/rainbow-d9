@@ -22,6 +22,7 @@ import {
 	OptionItemsProps,
 	useOptionItems
 } from './option-items-assist';
+import {toCssSize} from './utils';
 
 export enum DropdownPopupStateActive {
 	WILL_ACTIVE = 'will-active', ACTIVE = 'active', HIDDEN = 'hidden'
@@ -209,6 +210,7 @@ export interface DropdownPopupState {
 	maxHeight?: number | string;
 }
 
+// noinspection CssUnresolvedCustomProperty
 const DropdownPopupContainer = styled.div.attrs<Omit<DropdownPopupProps, 'children'>>(
 	({
 		 atBottom, shown, vScroll, hScroll,
@@ -220,19 +222,29 @@ const DropdownPopupContainer = styled.div.attrs<Omit<DropdownPopupProps, 'childr
 			'data-h-scroll': hScroll ? '' : (void 0),
 			'data-at-bottom': atBottom,
 			style: {
-				opacity: shown ? 1 : (void 0),
-				pointerEvents: shown ? 'auto' : (void 0),
-				top: atBottom ? (shown ? (top + height + 3) : (top + height + 29)) : (void 0),
-				bottom: atBottom ? (void 0) : (shown ? `calc(100vh - ${top}px + 3px)` : `calc(100vh - ${top}px + 29px)`),
-				left,
-				minWidth, maxWidth, minHeight, maxHeight,
-				overflowY: vScroll ? 'auto' : 'hidden',
-				overflowX: hScroll ? 'auto' : 'hidden'
+				'--opacity': shown ? 1 : 0,
+				'--pointer-events': shown ? 'auto' : 'none',
+				'--top': atBottom ? toCssSize(shown ? (top + height + 3) : (top + height + 29)) : 'unset',
+				'--bottom': atBottom ? 'unset' : toCssSize(shown ? `calc(100vh - ${top}px + 3px)` : `calc(100vh - ${top}px + 29px)`),
+				'--left': toCssSize(left),
+				'--min-width': toCssSize(minWidth),
+				'--max-width': toCssSize(maxWidth),
+				'--min-height': toCssSize(minHeight),
+				'--max-height': toCssSize(maxHeight),
+				'--overflow-y': vScroll ? 'auto' : 'hidden',
+				'--overflow-x': hScroll ? 'auto' : 'hidden'
 			}
 		};
 	})<Omit<DropdownPopupProps, 'children'>>`
     display: block;
     position: fixed;
+    top: var(--top);
+    left: var(--left);
+    bottom: var(--bottom);
+    min-width: var(--min-width);
+    max-width: var(--max-width);
+    min-height: var(--min-height);
+    max-height: var(--max-height);
     color: ${CssVars.FONT_COLOR};
     background-color: ${CssVars.BACKGROUND_COLOR};
     border: ${CssVars.BORDER};
@@ -241,9 +253,20 @@ const DropdownPopupContainer = styled.div.attrs<Omit<DropdownPopupProps, 'childr
     box-shadow: ${CssVars.PRIMARY_HOVER_SHADOW};
     transition: opacity ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION}, top ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION}, bottom ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION};
     z-index: ${CssVars.DROPDOWN_Z_INDEX};
-    overflow-y: auto;
-    opacity: 0;
-    pointer-events: none;
+    overflow-x: var(--overflow-x);
+    overflow-y: var(--overflow-y);
+    opacity: var(--opacity);
+    pointer-events: var(--pointer-events);
+
+    &[data-mobile=true] {
+        //top: 10vh;
+        left: 10vw;
+        bottom: unset;
+        //min-height: 80vh;
+        max-height: 80vh;
+        min-width: 80vw;
+        max-width: 80vw;
+    }
 `;
 
 export interface DropdownPopupProps extends DropdownPopupState {
@@ -254,7 +277,10 @@ export interface DropdownPopupProps extends DropdownPopupState {
 }
 
 export const DropdownPopup = forwardRef((props: DropdownPopupProps, ref: ForwardedRef<HTMLDivElement>) => {
-	const {shown, vScroll, hScroll, children, ...state} = props;
+	const {
+		shown, vScroll, hScroll, children,
+		...state
+	} = props;
 
 	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 	// @ts-ignore

@@ -22,6 +22,13 @@ import {
 } from './types';
 import {PlanElementDefOrdered} from './use-defs';
 
+export const redressPlanMarker = (content: Pick<PlanSelectionDef, 'marker'>) => {
+	if (VUtils.isNotBlank(content.marker)) {
+		return content.marker;
+	}
+	return VUtils.generateUniqueId();
+};
+
 export const isCategoryPlanElementDef = (def: PlanElementDef): def is PlanCategoryDef => {
 	return def.type === PlanElementType.CATEGORY;
 };

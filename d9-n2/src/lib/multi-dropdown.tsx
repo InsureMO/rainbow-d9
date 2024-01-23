@@ -1,4 +1,5 @@
 import {
+	MBUtils,
 	MUtils,
 	PPUtils,
 	PropValue,
@@ -318,6 +319,7 @@ export const MultiDropdown = (props: MultiDropdownProps) => {
 			map[`${option.value}`] = option;
 			return map;
 		}, {} as Record<string, MultiDropdownOption>);
+	const deviceTags = MBUtils.pickDeviceTags(props);
 
 	return <MultiDropdownContainer active={popupState.active} atBottom={popupState.atBottom}
 	                               ref={containerRef} role="input" tabIndex={0}
@@ -338,6 +340,7 @@ export const MultiDropdown = (props: MultiDropdownProps) => {
 		{isDropdownPopupActive(popupState.active)
 			? <DropdownPopup {...{...popupState, minHeight: popupHeight}}
 			                 shown={popupShown && popupState.active === DropdownPopupStateActive.ACTIVE}
+			                 {...deviceTags}
 			                 vScroll={true} ref={popupRef}>
 				<OptionFilter {...{...popupState, active: !!filter}}>
 					<span>?:</span>

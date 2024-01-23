@@ -1,4 +1,12 @@
-import {MUtils, PPUtils, registerWidget, useForceUpdate, ValueChangeableNodeDef, WidgetProps} from '@rainbow-d9/n1';
+import {
+	MBUtils,
+	MUtils,
+	PPUtils,
+	registerWidget,
+	useForceUpdate,
+	ValueChangeableNodeDef,
+	WidgetProps
+} from '@rainbow-d9/n1';
 import React, {MouseEvent, ReactNode} from 'react';
 import styled from 'styled-components';
 import {CssVars, DOM_KEY_WIDGET} from './constants';
@@ -174,6 +182,7 @@ export const Dropdown = (props: DropdownProps) => {
 			? toIntlLabel(please)
 			: ((askOptions() as DropdownOptions).find(option => option.value == value)?.label ?? toIntlLabel(please)))
 		|| '';
+	const deviceTags = MBUtils.pickDeviceTags(props);
 
 	return <DropdownContainer active={popupState.active} atBottom={popupState.atBottom}
 	                          ref={containerRef} role="input" tabIndex={0}
@@ -187,6 +196,7 @@ export const Dropdown = (props: DropdownProps) => {
 		{isDropdownPopupActive(popupState.active)
 			? <DropdownPopup {...{...popupState, minHeight: popupHeight}}
 			                 shown={popupShown && popupState.active === DropdownPopupStateActive.ACTIVE}
+			                 {...deviceTags}
 			                 vScroll={true} ref={popupRef}>
 				<OptionFilter {...{...popupState, active: !!filter}}>
 					<span>?:</span>

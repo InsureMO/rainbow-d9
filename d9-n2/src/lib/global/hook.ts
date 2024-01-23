@@ -150,9 +150,26 @@ export const useCustomGlobalEvent = (): CustomGlobalEventHandler => {
 	const {fire} = useGlobalEventBus();
 	const [func] = useState(() => {
 		return async <R extends BaseModel, M extends PropValue>(
-			key: string, prefix: string, clipped: string, models?: { root: R; model: M; }): Promise<void> => {
+			key: string, prefix: string, clipped?: string, models?: { root: R; model: M; }): Promise<void> => {
 			return new Promise<void>(resolve => {
 				fire && fire(GlobalEventTypes.CUSTOM_EVENT, key, prefix, clipped, models);
+				resolve();
+			});
+		};
+	});
+	return func;
+};
+
+export type SimpleCustomGlobalEventHandler = <R extends BaseModel, M extends PropValue>(
+	prefix: string, clipped: string, models?: ModelCarrier<R, M>) => Promise<void>;
+
+export const useSimpleCustomGlobalEvent = (): SimpleCustomGlobalEventHandler => {
+	const {fire} = useGlobalEventBus();
+	const [func] = useState(() => {
+		return async <R extends BaseModel, M extends PropValue>(
+			prefix: string, clipped?: string, models?: { root: R; model: M; }): Promise<void> => {
+			return new Promise<void>(resolve => {
+				fire && fire(GlobalEventTypes.CUSTOM_EVENT, `${prefix}:${clipped ?? ''}`, prefix, clipped, models);
 				resolve();
 			});
 		};
@@ -166,6 +183,7 @@ export interface GlobalHandlers {
 	yesNoDialog: YesNoDialogHandlers;
 	remoteRequest: RemoteRequestHandlers;
 	custom: CustomGlobalEventHandler;
+	sc: SimpleCustomGlobalEventHandler;
 	/**
 	 * be careful, root event bus could be an empty object if hook is called outside RootEventBusProvider
 	 */
@@ -181,9 +199,10 @@ export const useGlobalHandlers = (): GlobalHandlers => {
 	const yesNoDialog = useYesNoDialog();
 	const remoteRequest = useRemoteRequest();
 	const customEvent = useCustomGlobalEvent();
+	const scEvent = useSimpleCustomGlobalEvent();
 	const rootHandlers = useRootEventBus();
 	const [handlers] = useState<GlobalHandlers>({
-		alert, dialog, yesNoDialog, remoteRequest, custom: customEvent, root: rootHandlers
+		alert, dialog, yesNoDialog, remoteRequest, custom: customEvent, sc: scEvent, root: rootHandlers
 	});
 	return handlers;
 };
