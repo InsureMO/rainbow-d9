@@ -43,7 +43,6 @@ export const TableContent = (props: Omit<TableProps, '$array'> & { $array: Enhan
 		const callExternal = async (from: Nullable<PaginationData>, to: PaginationData) => {
 			if (shouldCallExternal) {
 				await pageable.valueChanged({
-					// @ts-ignore
 					root: $root, model: $model, $p2r, $pp,
 					absolutePath: PPUtils.absolute($p2r, pageable.$pp),
 					oldValue: from as unknown as PropValue, newValue: to as unknown as PropValue
@@ -77,7 +76,7 @@ export const TableContent = (props: Omit<TableProps, '$array'> & { $array: Enhan
 			off(TableEventTypes.PAGE_CHANGED, onPageChanged);
 			off(TableEventTypes.FILTER_CHANGED, onFilterChanged);
 		};
-	}, [globalHandlers, fireWrapper, on, off, fire, forceUpdate, pageable, $model, $p2r]);
+	}, [globalHandlers, fireWrapper, on, off, fire, forceUpdate, pageable, $root, $model, $p2r, $pp]);
 
 	const {columnsWidth, tailGrabberAppended, stickyOffsets} = computeColumnsWidth(props);
 

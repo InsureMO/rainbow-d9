@@ -1,8 +1,16 @@
-import {ArrayContainerDef, ArrayContainerWidgetProps, BaseModel, NodeDef, PropValue} from '@rainbow-d9/n1';
+import {
+	ArrayContainerDef,
+	ArrayContainerWidgetProps,
+	BaseModel,
+	NodeDef,
+	PropertyPath,
+	PropValue,
+	ValueChangedOptions
+} from '@rainbow-d9/n1';
 import {MouseEvent, ReactNode} from 'react';
 import {ButtonClickOptions, ButtonDef} from '../button';
 import {PaginationDef} from '../pagination';
-import {OmitHTMLProps, OmitNodeDef} from '../types';
+import {ModelCarrier, OmitHTMLProps, OmitNodeDef} from '../types';
 
 export interface TableHeaderDef extends Pick<NodeDef, '$key'> {
 	label: ReactNode;
@@ -18,6 +26,17 @@ export type TableRowButtonDef = Omit<ButtonDef, 'click'> & {
 		options: ButtonClickOptions<R, M> & { array: Array<BaseModel> },
 		event: MouseEvent<HTMLButtonElement>) => void | Promise<void>;
 };
+
+export interface TablePaginationValueChangedOptions<R extends BaseModel, M extends PropValue, V extends PropValue>
+	extends ValueChangedOptions<V>, ModelCarrier<R, M> {
+	$p2r: PropertyPath;
+	$pp: PropertyPath;
+}
+
+export type TablePaginationDef = Omit<PaginationDef, 'valueChanged'> & {
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	valueChanged?: <NV extends PropValue>(options: TablePaginationValueChangedOptions<BaseModel, PropValue, NV>, ...args: Array<any>) => void | Promise<void>;
+}
 
 /** Table configuration definition */
 export type TableDef = Omit<ArrayContainerDef, '$nodes'> & OmitHTMLProps<HTMLDivElement> & {
@@ -41,7 +60,7 @@ export type TableDef = Omit<ArrayContainerDef, '$nodes'> & OmitHTMLProps<HTMLDiv
 	omitDefaultRowOperators?: boolean | 'remove' | 'fold';
 	/** row operators */
 	rowOperators: Array<TableRowButtonDef>;
-	pageable?: PaginationDef;
+	pageable?: TablePaginationDef;
 };
 
 /** Table widget definition, with html attributes */

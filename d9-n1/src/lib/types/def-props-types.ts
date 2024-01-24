@@ -111,12 +111,16 @@ export interface NodeDef extends MonitorNodeDef {
 	$validationScopes?: Array<NodeValidationScope>;
 }
 
+export interface ValueChangedOptions<NV extends PropValue> {
+	absolutePath: PropertyPath;
+	oldValue: NV;
+	newValue: NV;
+}
+
 export interface ValueChangeableNodeDef extends NodeDef {
 	/** value changed, before any event fired */
-	valueChanged?: <NV extends PropValue>(options: {
-		absolutePath: PropertyPath; oldValue: NV; newValue: NV;
-		// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	}, ...args: Array<any>) => void | Promise<void>;
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	valueChanged?: <NV extends PropValue>(options: ValueChangedOptions<NV>, ...args: Array<any>) => void | Promise<void>;
 }
 
 export interface ContainerDef extends NodeDef {

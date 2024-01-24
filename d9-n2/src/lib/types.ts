@@ -12,10 +12,7 @@ export interface ModelCarrier<R extends BaseModel, M extends PropValue> {
 	model: M;
 }
 
-export interface ModelCarriedHandler<R extends BaseModel, M extends PropValue> {
-	root: R;
-	model: M;
-}
+export type ModelCarriedHandler<R extends BaseModel, M extends PropValue> = ModelCarrier<R, M>;
 
 export interface ValidationHandlers {
 	validators: ValidationFunctions;
