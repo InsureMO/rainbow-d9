@@ -59,7 +59,7 @@ const App = () => {
 	}, []);
 
 	if (!state.loaded) {
-		return <Fragment />;
+		return <Fragment/>;
 	}
 
 	return <StandaloneRoot $root={state.data!} {...def} />;
@@ -191,6 +191,15 @@ rather by the implementation of the container itself. However, we recommend that
 widgets follow the grid layout approach. To fully adapt to this layout, the position definition information of the widgets includes
 four attributes: row, column, rowSpan, and colSpan. You can refer to `NodePosition` for details.
 
+Additionally, `d9` also supports mobile layout simultaneously, and it can coexist with the standard layout. When `d9` detects that the
+current environment is mobile, it will automatically adapt to the designated mobile layout. If no specific mobile layout is specified, `d9`
+will adapt to the mobile layout by calculating the number of columns occupied by the standard layout components multiplied by 4. At this
+time, the other three attributes - rows, columns, and the number of occupied rows - will be ignored.
+
+It is important to note that when using `d9`, the grid system of the container may not necessarily be 12 columns due to custom widgets or
+the overriding of CSS stylesheets. Therefore, when such a situation occurs, it is necessary to explicitly specify the mobile layout
+parameters.
+
 ### Children of Container
 
 The child widgets of a container widget are specified through the `$nodes` property, which is an array. Therefore, in theory, a
@@ -251,7 +260,7 @@ const Page = () => {
 	}
 
 	return <div>
-		<input type="text" onChange={onValueChange} />
+		<input type="text" onChange={onValueChange}/>
 		<span style={{display: visiblility}}>Hello World.</span>
 	</div>
 }
@@ -437,7 +446,7 @@ const def = {
 	]
 };
 
-return <StandaloneRoot {...def} $root={model} externalDefs={externalDefs} />;
+return <StandaloneRoot {...def} $root={model} externalDefs={externalDefs}/>;
 ```
 
 ## Hooks
@@ -479,14 +488,14 @@ const ModelListener = (props: { model: BaseModel }) => {
 			off(RootEventTypes.VALUE_CHANGED, onValueChanged);
 		};
 	}, [on, off, fire, model]);
-	return <Fragment />;
+	return <Fragment/>;
 };
 
 const Page = () => {
 	// ...
 
 	return <StandaloneRoot $root={initModel} {...def} externalDefs={externalDefs}>
-		<ModelListener model={initModel} />
+		<ModelListener model={initModel}/>
 	</StandaloneRoot>
 }
 ```

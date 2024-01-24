@@ -510,7 +510,11 @@ Some examples:
 - $pos: 2, 4, 6, 3
 - place: c: 4, r: 2, cols: 6, rows: 3
 - place: $c: 4, $r: 2, $cols: 6, $rows: 3
+- $mpos: 2, 4, 6, 3
+- mpos: 2, 4, 6, 3
 ```
+
+> `$mpos`, `mpos` is position for mobile only.
 
 ## Attribute Guard
 
