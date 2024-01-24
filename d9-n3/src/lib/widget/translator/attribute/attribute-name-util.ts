@@ -3,7 +3,9 @@ import {WidgetType} from '../../../semantic';
 import {AnyAttributeName, WidgetPropertyName} from './types';
 
 export enum D9PropertyNames {
-	PROPERTY = '$pp', POSITION = '$pos', VALIDATION_SCOPES = '$validationScopes'
+	PROPERTY = '$pp',
+	POSITION = '$pos', MOBILE_POSITION = '$mpos',
+	VALIDATION_SCOPES = '$validationScopes'
 }
 
 export enum AttributeNames {
@@ -18,6 +20,7 @@ export enum AttributeNames {
 	PLACE = 'place',
 	POSITION = 'position',
 	POS = 'pos',
+	MPOS = 'mpos',
 	VALIDATION_SCOPES = 'validateScopes'
 }
 
@@ -37,6 +40,7 @@ export class AttributeNameUtils {
 		[AttributeNames.PLACE]: D9PropertyNames.POSITION,
 		[AttributeNames.POSITION]: D9PropertyNames.POSITION,
 		[AttributeNames.POS]: D9PropertyNames.POSITION,
+		[AttributeNames.MPOS]: D9PropertyNames.MOBILE_POSITION,
 		[AttributeNames.VALIDATION_SCOPES]: D9PropertyNames.VALIDATION_SCOPES
 	};
 

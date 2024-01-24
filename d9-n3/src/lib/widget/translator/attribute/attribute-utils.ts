@@ -2,7 +2,7 @@ import {Undefinable} from '@rainbow-d9/n1';
 import {WidgetType} from '../../../semantic';
 import {AnyAttributeBuild} from './any-attribute-build';
 import {DisablementAttributeBuild} from './disablement-attribute-build';
-import {PositionAttributeBuild} from './position-attribute-build';
+import {MobilePositionAttributeBuild, PositionAttributeBuild} from './position-attribute-build';
 import {
 	ReactionClearMeAttributeBuild,
 	ReactionRepaintAttributeBuild,
@@ -15,6 +15,7 @@ import {VisibilityAttributeBuild} from './visibility-attribute-build';
 
 export class AttributeUtils {
 	public static readonly POSITION_ATTRIBUTE_BUILDER = new PositionAttributeBuild();
+	public static readonly MOBILE_POSITION_ATTRIBUTE_BUILDER = new MobilePositionAttributeBuild();
 	public static readonly ENABLEMENT_ATTRIBUTE_BUILDER = new DisablementAttributeBuild();
 	public static readonly VISIBILITY_ATTRIBUTE_BUILDER = new VisibilityAttributeBuild();
 	public static readonly VALIDATION_ATTRIBUTE_BUILDER = new ValidationAttributeBuild();
@@ -47,6 +48,7 @@ export class AttributeUtils {
 		return [
 			...(AttributeUtils.CUSTOMIZED_ATTRIBUTE_BUILDERS[$wt] ?? []),
 			AttributeUtils.POSITION_ATTRIBUTE_BUILDER,
+			AttributeUtils.MOBILE_POSITION_ATTRIBUTE_BUILDER,
 			AttributeUtils.ENABLEMENT_ATTRIBUTE_BUILDER,
 			AttributeUtils.VISIBILITY_ATTRIBUTE_BUILDER,
 			AttributeUtils.VALIDATION_ATTRIBUTE_BUILDER,

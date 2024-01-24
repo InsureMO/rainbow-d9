@@ -2,12 +2,14 @@ import {NodePosition, Nullable, Undefinable, VUtils} from '@rainbow-d9/n1';
 import {D9PropertyNames} from './attribute-name-util';
 import {AttributeValueBuild, WidgetPropertyName} from './types';
 
-export class PositionAttributeBuild implements AttributeValueBuild<NodePosition> {
-	public accept(key: WidgetPropertyName) {
-		return D9PropertyNames.POSITION === key;
+export abstract class AbstractPositionAttributeBuild implements AttributeValueBuild<NodePosition> {
+	/** default returns false, overwrite me to match some property */
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
+	public accept(key: WidgetPropertyName): boolean {
+		return false;
 	}
 
-	public static buildPosition(value: Nullable<string>): NodePosition {
+	public buildPosition(value: Nullable<string>): NodePosition {
 		value = (value ?? '').trim();
 		if (value.includes(':')) {
 			const keyMap = {
@@ -74,7 +76,19 @@ export class PositionAttributeBuild implements AttributeValueBuild<NodePosition>
 		if (VUtils.isBlank(value)) {
 			return (void 0);
 		} else {
-			return PositionAttributeBuild.buildPosition(value);
+			return this.buildPosition(value);
 		}
+	}
+}
+
+export class PositionAttributeBuild extends AbstractPositionAttributeBuild {
+	public accept(key: WidgetPropertyName) {
+		return D9PropertyNames.POSITION === key;
+	}
+}
+
+export class MobilePositionAttributeBuild extends AbstractPositionAttributeBuild {
+	public accept(key: WidgetPropertyName) {
+		return D9PropertyNames.MOBILE_POSITION === key;
 	}
 }

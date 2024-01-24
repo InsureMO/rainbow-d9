@@ -1,9 +1,10 @@
 import {nanoid} from 'nanoid';
 import {CSSProperties} from 'react';
-import {ContainerDef, DeviceTags, NodeDef, NodeUniqueKey, NodeValidationScope, Reaction} from '../types';
+import {ContainerDef, DeviceTags, NodeDef, NodePosition, NodeUniqueKey, NodeValidationScope, Reaction} from '../types';
 import {VUtils} from './value-utils';
 
-export type StyledNodeDef = Pick<NodeDef, '$pos'> & Pick<HTMLElement, 'style'> & Partial<DeviceTags>;
+export type StyledNodeDef = Pick<NodeDef, '$pos' | '$mpos'> & Pick<HTMLElement, 'style'> & Partial<DeviceTags>;
+export type NodeGridPos = Partial<Pick<CSSProperties, 'gridColumn' | 'gridRow'>>;
 
 export interface NodeUtilsType {
 	/**
@@ -15,7 +16,20 @@ export interface NodeUtilsType {
 	readonly inheritValidationScopes: (parentDef: Pick<NodeDef, '$validationScopes'>, def: Pick<NodeDef, '$validationScopes'>) => void;
 	readonly reactWithRepaint: () => Reaction.REPAINT;
 	readonly reactWithClear: () => Reaction.CLEAR_VALUE;
-	readonly asGridPos: (def: StyledNodeDef) => Partial<Pick<CSSProperties, 'gridColumn' | 'gridRow'>>;
+	readonly asGridPosByDefault: ($pos: NodePosition, defaultCols: number) => NodeGridPos;
+	/**
+	 * mobile assumes the grid system of parent is in 12 columns,
+	 * and default grab all columns for each widget when $mpos is declared, not matter it is partial or not.
+	 * when $mpos is not declared, take the $cols as 4 times of original $cols value, but max is 12.
+	 * and other properties from $pos will be ignored.
+	 */
+	readonly asGridPosForMobile: (def: StyledNodeDef) => NodeGridPos;
+	/**
+	 * non-mobile assumes the grid system of parent is in 12 columns,
+	 * and default grab 3 columns for each widget when $pos.$cols is not declared.
+	 */
+	readonly asGridPosForNonMobile: (def: StyledNodeDef) => NodeGridPos;
+	readonly asGridPos: (def: StyledNodeDef) => NodeGridPos;
 	readonly computeStyle: (def: StyledNodeDef) => Partial<CSSProperties>;
 }
 
@@ -56,15 +70,15 @@ export const NUtils: NodeUtilsType = {
 	},
 	reactWithRepaint: () => Reaction.REPAINT,
 	reactWithClear: () => Reaction.CLEAR_VALUE,
-	asGridPos: (def: StyledNodeDef) => {
-		if (def.$pos == null) {
-			return {gridColumn: 'span 3'};
+	asGridPosByDefault: ($pos: NodePosition, defaultCols: number): NodeGridPos => {
+		if ($pos == null) {
+			return {gridColumn: `span ${defaultCols}`};
 		}
-		const {$col, $cols, $row, $rows} = def.$pos;
-		const pos: Partial<Pick<CSSProperties, 'gridColumn' | 'gridRow'>> = {};
+		const {$col, $cols, $row, $rows} = $pos;
+		const pos: NodeGridPos = {};
 		switch (true) {
 			case $col == null && $cols == null:
-				pos.gridColumn = 'span 3';
+				pos.gridColumn = `span ${defaultCols}`;
 				break;
 			case $col == null && $cols != null:
 				pos.gridColumn = `span ${$cols}`;
@@ -90,6 +104,28 @@ export const NUtils: NodeUtilsType = {
 				break;
 		}
 		return pos;
+	},
+	asGridPosForMobile: (def: StyledNodeDef): NodeGridPos => {
+		if (def.$mpos != null) {
+			// specify the grid position for mobile
+			return NUtils.asGridPosByDefault(def.$mpos, 12);
+		} else if (def.$pos != null) {
+			const {$cols} = def.$pos;
+			return {gridColumn: `span ${Math.min(12, $cols * 4)}`};
+		} else {
+			return {gridColumn: 'span 12'};
+		}
+	},
+	asGridPosForNonMobile: (def: StyledNodeDef): NodeGridPos => {
+		return NUtils.asGridPosByDefault(def.$pos, 3);
+	},
+	asGridPos: (def: StyledNodeDef): NodeGridPos => {
+		const {'data-mobile': mobile} = def;
+		if (mobile) {
+			return NUtils.asGridPosForMobile(def);
+		} else {
+			return NUtils.asGridPosForNonMobile(def);
+		}
 	},
 	computeStyle: (def: StyledNodeDef) => {
 		const pos = NUtils.asGridPos(def);
