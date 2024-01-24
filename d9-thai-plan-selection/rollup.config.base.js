@@ -1,5 +1,5 @@
+import babel from '@rollup/plugin-babel';
 import eslint from '@rollup/plugin-eslint';
-import babel from 'rollup-plugin-babel';
 // import tslint from 'rollup-plugin-tslint';
 import typescript from 'rollup-plugin-typescript2';
 
@@ -15,7 +15,7 @@ export const buildConfig = (lint) => {
 		plugins: [
 			lint ? eslint({exclude: ['../node_modules/**', 'node_modules/**']}) : null,
 			// lint ? tslint({ exclude: ['../node_modules/**', 'node_modules/**'], include: 'src/**/*' }) : null,
-			typescript({clean: true}), babel({presets: ['@babel/preset-react']})
+			typescript({clean: true}), babel({babelHelpers: 'bundled', presets: ['@babel/preset-react']})
 		].filter(x => x != null),
 		onwarn(warning, defaultHandler) {
 			if (warning.code === 'CIRCULAR_DEPENDENCY') {

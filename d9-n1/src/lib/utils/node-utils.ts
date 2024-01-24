@@ -9,13 +9,13 @@ export interface NodeUtilsType {
 	/**
 	 * generate unique react key which used to identify react node in loop
 	 */
-	generateReactKey: () => NodeUniqueKey;
+	readonly generateReactKey: () => NodeUniqueKey;
 	readonly getDefKey: (def: Pick<NodeDef, '$key'>) => NodeUniqueKey;
 	readonly getChildNodes: (def: ContainerDef, from?: string) => Array<NodeDef>;
 	readonly inheritValidationScopes: (parentDef: Pick<NodeDef, '$validationScopes'>, def: Pick<NodeDef, '$validationScopes'>) => void;
 	readonly reactWithRepaint: () => Reaction.REPAINT;
 	readonly reactWithClear: () => Reaction.CLEAR_VALUE;
-	asGridPos: (def: Pick<NodeDef, '$pos'>) => Partial<Pick<CSSProperties, 'gridColumn' | 'gridRow'>>;
+	readonly asGridPos: (def: StyledNodeDef) => Partial<Pick<CSSProperties, 'gridColumn' | 'gridRow'>>;
 	readonly computeStyle: (def: StyledNodeDef) => Partial<CSSProperties>;
 }
 
@@ -56,7 +56,7 @@ export const NUtils: NodeUtilsType = {
 	},
 	reactWithRepaint: () => Reaction.REPAINT,
 	reactWithClear: () => Reaction.CLEAR_VALUE,
-	asGridPos: (def: Pick<NodeDef, '$pos'>) => {
+	asGridPos: (def: StyledNodeDef) => {
 		if (def.$pos == null) {
 			return {gridColumn: 'span 3'};
 		}
@@ -94,7 +94,7 @@ export const NUtils: NodeUtilsType = {
 	computeStyle: (def: StyledNodeDef) => {
 		const pos = NUtils.asGridPos(def);
 		// eslint-disable-next-line @typescript-eslint/no-explicit-any
-		const style = ((def as any).style as CSSProperties) ?? {};
+		const style = (def.style ?? {}) as CSSProperties;
 		style.gridRow = style.gridRow || pos.gridRow;
 		style.gridColumn = style.gridColumn || pos.gridColumn;
 		if (VUtils.isNotBlank(style.gridRow)) {

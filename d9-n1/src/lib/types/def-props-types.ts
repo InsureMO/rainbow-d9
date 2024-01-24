@@ -105,6 +105,8 @@ export interface NodeDef extends MonitorNodeDef {
 	$pp?: PropertyPath;
 	/** use grid system */
 	$pos?: NodePosition;
+	/** mobile position, also use grid system */
+	$mpos?: NodePosition;
 	/** validation scopes, only response to self-change and validation-all when value missed */
 	$validationScopes?: Array<NodeValidationScope>;
 }
