@@ -21,7 +21,7 @@ import {ATableContent} from './widgets';
 
 export const TableContent = (props: Omit<TableProps, '$array'> & { $array: EnhancedPropsForArray }) => {
 	const {
-		pageable, $wrapped: {$model, $p2r},
+		$pp, pageable, $wrapped: {$root, $model, $p2r},
 		headerHeight, maxBodyHeight,
 		children
 	} = props;
@@ -43,6 +43,8 @@ export const TableContent = (props: Omit<TableProps, '$array'> & { $array: Enhan
 		const callExternal = async (from: Nullable<PaginationData>, to: PaginationData) => {
 			if (shouldCallExternal) {
 				await pageable.valueChanged({
+					// @ts-ignore
+					root: $root, model: $model, $p2r, $pp,
 					absolutePath: PPUtils.absolute($p2r, pageable.$pp),
 					oldValue: from as unknown as PropValue, newValue: to as unknown as PropValue
 				}, {global: globalHandlers});
