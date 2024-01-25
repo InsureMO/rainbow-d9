@@ -1,4 +1,4 @@
-# Enviroments
+# Environments
 
 Assume the following envs are ready, otherwise contact the tech guy.
 

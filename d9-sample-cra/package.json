@@ -39,6 +39,15 @@
 		"predeploy": "npm run build",
 		"deploy": "gh-pages -d build"
 	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/InsureMO/rainbow-d9.git"
+	},
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/InsureMO/rainbow-d9/issues"
+	},
+	"author": "Rainbow Team",
 	"eslintConfig": {
 		"extends": [
 			"react-app",

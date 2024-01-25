@@ -8,8 +8,10 @@
 ![npm (scoped)](https://img.shields.io/npm/v/%40rainbow-d9/n3?logo=npm)
 ![npm](https://img.shields.io/npm/dm/%40rainbow-d9/n3)
 
+![Depends](https://img.shields.io/badge/React-white.svg?logo=react)
+![Depends](https://img.shields.io/badge/mdast-white.svg?logo=remark&logoColor=000000)
+
 ![Module Formats](https://img.shields.io/badge/module%20formats-cjs%2C%20esm-green.svg)
-![Depends](https://img.shields.io/badge/depends-react%2C%20mdast%2C%20micromark-087EA4.svg)
 
 # d9-n3
 

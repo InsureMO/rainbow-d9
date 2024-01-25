@@ -8,9 +8,11 @@
 ![npm (scoped)](https://img.shields.io/npm/v/%40rainbow-d9/n2?logo=npm)
 ![npm](https://img.shields.io/npm/dm/%40rainbow-d9/n2)
 
+![Depends](https://img.shields.io/badge/React-white.svg?logo=react)
+![Depends](https://img.shields.io/badge/Styled--Components-white.svg?logo=styledcomponents&logoColor=DB7093)
+![Depends](https://img.shields.io/badge/Font--Awesome-white.svg?logo=fontawesome&logoColor=528DD7)
+
 ![Module Formats](https://img.shields.io/badge/module%20formats-cjs%2C%20esm-green.svg)
-![Depends](https://img.shields.io/badge/depends-react%2C%20styled--components-087EA4.svg)
-![Icons](https://img.shields.io/badge/icons-font--awesome-087EA4.svg)
 
 # d9-n2
 

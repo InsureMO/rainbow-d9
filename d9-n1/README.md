@@ -8,8 +8,9 @@
 ![npm (scoped)](https://img.shields.io/npm/v/%40rainbow-d9/n1?logo=npm)
 ![npm](https://img.shields.io/npm/dm/%40rainbow-d9/n1)
 
+![Depends](https://img.shields.io/badge/React-white.svg?logo=react)
+
 ![Module Formats](https://img.shields.io/badge/module%20formats-cjs%2C%20esm-green.svg)
-![Depends](https://img.shields.io/badge/depends-react-087EA4.svg)
 
 # d9-n1
 

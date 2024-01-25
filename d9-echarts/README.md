@@ -5,12 +5,14 @@
 ![GitHub Release Date](https://img.shields.io/github/release-date/InsureMO/rainbow-d9)
 ![GitHub last commit (by committer)](https://img.shields.io/github/last-commit/InsureMO/rainbow-d9)
 
-![npm (scoped)](https://img.shields.io/npm/v/%40rainbow-d9/n2?logo=npm)
-![npm](https://img.shields.io/npm/dm/%40rainbow-d9/n2)
+![npm (scoped)](https://img.shields.io/npm/v/%40rainbow-d9/echarts?logo=npm)
+![npm](https://img.shields.io/npm/dm/%40rainbow-d9/echarts)
+
+![Depends](https://img.shields.io/badge/React-white.svg?logo=react)
+![Depends](https://img.shields.io/badge/Styled--Components-white.svg?logo=styledcomponents&logoColor=DB7093)
+![Depends](https://img.shields.io/badge/ECharts-white.svg?logo=apacheecharts&logoColor=AA344D)
 
 ![Module Formats](https://img.shields.io/badge/module%20formats-cjs%2C%20esm-green.svg)
-![Depends](https://img.shields.io/badge/depends-react%2C%20styled--components-087EA4.svg)
-![Icons](https://img.shields.io/badge/icons-font--awesome-087EA4.svg)
 
 # d9-echarts
 

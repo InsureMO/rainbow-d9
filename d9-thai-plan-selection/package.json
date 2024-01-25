@@ -19,7 +19,7 @@
 	"bugs": {
 		"url": "https://github.com/InsureMO/rainbow-d9/issues"
 	},
-	"author": "ThaiCloud",
+	"author": "Rainbow Team",
 	"dependencies": {
 		"@rainbow-d9/n2": "1.0.45",
 		"@rainbow-d9/n3": "1.0.45"
