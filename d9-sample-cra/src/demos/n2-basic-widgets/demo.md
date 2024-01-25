@@ -31,6 +31,9 @@
 	- options:
 		- 1: Option #1
 		- 2: Option #2
+- Dropdown::::dropdown2
+	- label: Dropdown #2
+	- options: @ext.dropdown2
 - MultiDropdown::Multiple Dropdown::multiDropdown
 	- options:
 		- 1: Option #1
