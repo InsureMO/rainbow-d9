@@ -160,6 +160,7 @@ export const Radios = forwardRef((props: RadiosProps, ref: ForwardedRef<HTMLDivE
 
 			const node = <Option data-can-click={canClick}
 			                     columns={columns} compact={compact}
+			                     data-checked={model[valueKey]}
 			                     onClick={canClick ? onOptionClicked(option) : (void 0)}>
 				<Radio $pp={valueKey} $wrapped={$wrapped}/>
 				<span>{toIntlLabel(label)}</span>

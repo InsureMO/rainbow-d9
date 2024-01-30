@@ -177,6 +177,7 @@ export const Checkboxes = forwardRef((props: CheckboxesProps, ref: ForwardedRef<
 
 			const node = <Option data-can-click={canClick}
 			                     columns={columns} compact={compact}
+			                     data-checked={model[valueKey]}
 			                     onClick={canClick ? onOptionClicked(option) : (void 0)}>
 				<Checkbox $pp={valueKey} $wrapped={$wrapped}/>
 				<span>{toIntlLabel(label)}</span>
