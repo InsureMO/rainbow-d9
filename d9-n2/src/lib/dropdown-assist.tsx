@@ -1,4 +1,4 @@
-import {DeviceTags, Undefinable, VUtils} from '@rainbow-d9/n1';
+import {DeviceTags, MBUtils, Undefinable, VUtils} from '@rainbow-d9/n1';
 import React, {
 	ChangeEvent,
 	ForwardedRef,
@@ -313,23 +313,71 @@ export const useDropdownControl = (options: {
 		top: 0, left: 0, width: 0, height: 0, minWidth: 0, maxHeight: askPopupMaxHeight()
 	});
 	const [popupShown, setPopupShown] = useState(false);
-	const expectMaxWidth = askPopupMaxWidth() ?? window.innerWidth - MAX_WIDTH_MARGIN * 2;
+	const expectMaxWidth = askPopupMaxWidth();
 	useEffect(() => {
 		if (isDropdownPopupActive(popupState.active)) {
 			setPopupShown(true);
+			// in chrome, when the popup appears, its left is the same as the container’s left.
+			// the width of the popup has two scenarios:
+			// 1. if it is wide enough, it tries to avoid showing a vertical scrollbar but will not exceed the right side of the window.
+			// 2. if it is unavoidable to show a vertical scrollbar, it will go up to the right side of the window at most.
 			const {left, width} = popupRef.current.getBoundingClientRect();
 			let toBeWidth = width;
 			if (!fixWidth) {
-				// if there is scrollbar, try to expand width, binary expanding
-				while (popupRef.current.scrollHeight != popupRef.current.clientHeight) {
-					if (toBeWidth < expectMaxWidth) {
-						// min step is 10px
-						toBeWidth = Math.max((expectMaxWidth - toBeWidth) / 2, 10) + toBeWidth;
-						popupRef.current.style.minWidth = `${toBeWidth}px`;
+				// use the max of popup width and container width
+				const {width: containerWidth} = containerRef.current.getBoundingClientRect();
+				// let popup at least use same width with container
+				toBeWidth = Math.max(width, containerWidth);
+				// first use tobe width to test
+				popupRef.current.style.minWidth = `${toBeWidth}px`;
+				const shouldAdjustWidth = (allowWordWrap: boolean) => {
+					if (popupRef.current.scrollHeight === popupRef.current.clientHeight) {
+						return false;
+					}
+					const children = popupRef.current.children;
+					if (children.length <= 2) {
+						return false;
+					}
+					const height = children.item(1).clientHeight;
+					for (let index = 2, count = children.length; index < count; index++) {
+						const child = children.item(index);
+						if (child.clientHeight !== height) {
+							// has word wrap, returns true represents need to be adjusted when not allow word wrap
+							return !allowWordWrap;
+						}
+					}
+					// no word wrap, returns true represents need to be adjusted when allow word wrap
+					return allowWordWrap;
+				};
+				if (shouldAdjustWidth(false)) {
+					// use the max of container width and expect max width
+					// if expect max width is not given, use half of window width when in desktop, or use window width when in mobile
+					const maxWidth = Math.max(containerWidth, expectMaxWidth ?? (MBUtils.isMobile() ? (window.innerWidth - MAX_WIDTH_MARGIN * 2) : (window.innerWidth / 2)));
+					// vertical scrollbar exists, use max width as width
+					popupRef.current.style.minWidth = `${maxWidth}px`;
+					if (shouldAdjustWidth(true)) {
+						// has word wrap, use max width
+						toBeWidth = maxWidth;
 					} else {
-						// break the given expect max width, let to be as expect max width
-						toBeWidth = expectMaxWidth;
-						break;
+						// no word wrap, try to shrink width
+						const widthDiff = maxWidth - toBeWidth;
+						let ratio = 0.5;
+						let offset = 0.5;
+						let computedWidth = toBeWidth + widthDiff * ratio;
+						while ((maxWidth - computedWidth > 10) && (computedWidth - toBeWidth > 10)) {
+							popupRef.current.style.minWidth = `${computedWidth}px`;
+							// after expand or shrink width, if there is word wrap, try to expand, otherwise try to shrink
+							if (shouldAdjustWidth(false)) {
+								// vertical scrollbar exist, expand ratio
+								ratio = ratio + offset / 2;
+							} else {
+								// vertical scrollbar not exists, shrink ratio
+								ratio = ratio - offset / 2;
+							}
+							offset = offset / 2;
+							computedWidth = toBeWidth + widthDiff * ratio;
+						}
+						toBeWidth = computedWidth;
 					}
 				}
 				// remove this temporary min width, it will be set after state changed

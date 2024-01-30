@@ -8,7 +8,7 @@ export const ICON_PREFIX = '$icons.';
 export const CssConstants = {
 	FONT_FAMILY: 'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Tahoma", "Verdana", "Arial"',
 	FONT_COLOR: 'rgb(102,102,102)',
-	BG_COLOR: 'rgb(248,249,250)',
+	BG_COLOR: 'rgb(255,255,255)',
 	PRIMARY_COLOR: 'rgb(13,110,253)',
 	DANGER_COLOR: 'rgb(220,53,89)',
 	SUCCESS_COLOR: 'rgb(25,135,84)',

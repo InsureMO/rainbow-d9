@@ -47,6 +47,7 @@ export type MultiDropdownDef =
 	& {
 	please?: ReactNode;
 	clearable?: boolean;
+	/** max popup width */
 	maxWidth?: number;
 };
 /** widget definition, with html attributes */
@@ -173,6 +174,7 @@ const MultiOption = styled.span.attrs({[DOM_KEY_WIDGET]: 'd9-multi-dropdown-opti
     padding: calc(${CssVars.INPUT_HEIGHT} / 8) ${CssVars.INPUT_INDENT};
     font-family: ${CssVars.FONT_FAMILY};
     font-size: ${CssVars.FONT_SIZE};
+    line-height: calc(${CssVars.FONT_SIZE} * 1.4);
     min-height: ${CssVars.INPUT_HEIGHT};
     //overflow: hidden;
     //white-space: nowrap;

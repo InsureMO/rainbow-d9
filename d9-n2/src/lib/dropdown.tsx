@@ -45,6 +45,7 @@ export type DropdownDef =
 	& {
 	please?: ReactNode;
 	clearable?: boolean;
+	/** max popup width */
 	maxWidth?: number;
 };
 /** widget definition, with html attributes */
@@ -111,6 +112,7 @@ const Option = styled.span.attrs({[DOM_KEY_WIDGET]: 'd9-dropdown-option'})`
     align-items: center;
     font-family: ${CssVars.FONT_FAMILY};
     font-size: ${CssVars.FONT_SIZE};
+    line-height: calc(${CssVars.FONT_SIZE} * 1.4);
     padding: calc(${CssVars.INPUT_HEIGHT} / 8) ${CssVars.INPUT_INDENT};
     min-height: ${CssVars.INPUT_HEIGHT};
     //overflow: hidden;

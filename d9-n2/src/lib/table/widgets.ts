@@ -133,7 +133,7 @@ export const ATableBodyRowIndexCell = styled.div.attrs<{ rowIndex: number; rowSp
     min-height: ${CssVars.TABLE_CELL_HEIGHT};
     padding: 0 ${CssVars.TABLE_CELL_PADDING};
     color: ${CssVars.FONT_COLOR};
-    background-color: ${CssVars.INVERT_COLOR};
+    background-color: ${CssVars.BACKGROUND_COLOR};
     font-family: ${CssVars.FONT_FAMILY};
     font-size: 0.8em;
     overflow: hidden;
@@ -172,7 +172,7 @@ export const ATableBodyCell = styled.div.attrs<{
     align-items: center;
     min-height: ${CssVars.TABLE_CELL_HEIGHT};
     padding: 0 calc(${CssVars.TABLE_CELL_PADDING});
-    background-color: ${CssVars.INVERT_COLOR};
+    background-color: ${CssVars.BACKGROUND_COLOR};
 
     &[data-click-to-expand=true] {
         cursor: pointer;
@@ -209,7 +209,7 @@ export const ATableRowOperators = styled.div.attrs<{ rowIndex: number; rowSpan: 
     align-items: center;
     justify-content: flex-end;
     right: 0;
-    background-color: ${CssVars.INVERT_COLOR};
+    background-color: ${CssVars.BACKGROUND_COLOR};
     padding: 0 calc(${CssVars.TABLE_CELL_PADDING} / 2);
     z-index: 3;
 
