@@ -13,8 +13,7 @@ import {
 } from '@rainbow-d9/n2';
 import React, {CSSProperties, Fragment, useEffect} from 'react';
 import {useDemoMarkdown} from '../use-demo-markdown';
-// @ts-ignore
-import DemoDialogContent from './demo-dialog.md';
+import {markdown as DemoDialogContent} from './demo-dialog.md';
 
 const DEFAULT_STYLES: CSSProperties = {width: '80vw', height: '80vh', margin: '10vh auto'};
 export const N2DemoDialogHandler = () => {

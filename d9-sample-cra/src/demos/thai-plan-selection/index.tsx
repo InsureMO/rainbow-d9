@@ -12,13 +12,11 @@ import {
 	PlanElementType,
 	PlanElementValueEditType
 } from '@rainbow-d9/thai-plan-selection';
-import React from 'react';
 import {CustomEventHandler} from '../custom-event-handler';
 import {N2DemoDialogHandler} from '../n2-dialog-handler';
 import {useDemoMarkdown} from '../use-demo-markdown';
 import DemoData from './demo.json';
-// @ts-ignore
-import DemoContent from './demo.md';
+import {markdown as DemoContent} from './demo.md';
 
 $d9n2.intl.labels['en-US'] = {
 	'Standard Plan #1': '标准保障计划 #1',

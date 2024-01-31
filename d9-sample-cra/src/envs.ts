@@ -31,7 +31,7 @@ dayjs.extend(BuddhistEra);
 
 (() => {
 	// d9 logger
-	if (process.env.REACT_APP_ENABLE_D9_LOGGER === 'true') {
+	if (process.env.VITE_ENABLE_D9_LOGGER === 'true') {
 		N1Logger.enableLevel('debug');
 	}
 	// register widgets to n3

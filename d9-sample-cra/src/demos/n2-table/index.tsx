@@ -7,13 +7,11 @@ import {
 } from '@rainbow-d9/n1';
 import {GlobalRoot, PaginationData} from '@rainbow-d9/n2';
 import {nanoid} from 'nanoid';
-import React from 'react';
 import {CustomEventHandler} from '../custom-event-handler';
 import {N2DemoDialogHandler} from '../n2-dialog-handler';
 import {useDemoMarkdown} from '../use-demo-markdown';
 import DemoData from './demo.json';
-// @ts-ignore
-import DemoContent from './demo.md';
+import {markdown as DemoContent} from './demo.md';
 
 // prepare data
 // @ts-ignore
