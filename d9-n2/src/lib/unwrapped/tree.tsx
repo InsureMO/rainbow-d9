@@ -5,16 +5,17 @@ import {Tree, TreeProps} from '../tree';
 /** Tree configuration definition */
 type UnwrappedTreeProps =
 	Omit<TreeProps, 'disabled' | '$wrapped' | keyof MonitorNodeDef>
-	& { visible?: boolean; };
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	& { data: any; visible?: boolean; };
 
 const UnwrappedTree = forwardRef((props: UnwrappedTreeProps, ref: ForwardedRef<HTMLDivElement>) => {
 	const {
-		visible, ...rest
+		$pp = 'value', data, visible, ...rest
 	} = props;
 
 	const $onValueChange = VUtils.noop;
 	const $avs = {$disabled: false, $visible: visible} as NodeAttributeValues;
-	const $root = {};
+	const $root = {[$pp]: data};
 
 	return <Tree {...rest}
 	             $wrapped={{$onValueChange, $avs, $root, $model: $root, $p2r: '.'}}

@@ -1,4 +1,4 @@
-import {ContainerDef, PropertyPath, PropValue, Undefinable, WidgetProps} from '@rainbow-d9/n1';
+import {NodeDef, PropertyPath, PropValue, Undefinable, WidgetProps} from '@rainbow-d9/n1';
 import {ReactNode} from 'react';
 import {CaptionDef} from '../caption';
 import {GlobalEventHandlers, OmitHTMLProps2, OmitNodeDef} from '../types';
@@ -33,7 +33,7 @@ export interface TreeNodeDef {
 export type TreeNodeDetect = (parentNode: Undefinable<TreeNodeDef>, options: GlobalEventHandlers) => Array<TreeNodeDef>;
 
 /** Tree configuration definition */
-export type TreeDef = ContainerDef & OmitHTMLProps2<HTMLDivElement, 'title' | 'height'> & {
+export type TreeDef = NodeDef & OmitHTMLProps2<HTMLDivElement, 'title' | 'height'> & {
 	/** show half checked when not all sub nodes but at least one is checked, default true */
 	halfChecked?: boolean;
 	/** initial expanded level, default 0. -1 means all collapsed */
