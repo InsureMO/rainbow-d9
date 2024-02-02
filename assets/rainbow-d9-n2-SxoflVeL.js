@@ -7,7 +7,7 @@ var __publicField = (obj, key, value) => {
 import { a as color } from "./vendor-bTA5rkJY.js";
 import { R as React, r as reactExports } from "./react-2UUL7v68.js";
 import { V as VUtils, P as PPUtils, r as registerWidget, c as createLogger, b as useRootEventBus, d as useForceUpdate, M as MUtils, N as NUtils, e as Wrapper, a as useWrapperEventBus, W as WrapperEventTypes, f as useCreateEventBus, g as PROPERTY_PATH_ME, h as MBUtils, i as useDefaultAttributeValues, j as useAttributesWatch } from "./rainbow-d9-n1-qa9_kkrn.js";
-import { q as qe, W as We } from "./styled-components-5uC8i2kS.js";
+import { q as qe, W as We } from "./styled-components-kwAO0OJo.js";
 import { d as dayjs } from "./dayjs-9Z7dW0Q-.js";
 const DOM_KEY_WIDGET = "data-w";
 const DOM_ID_WIDGET = "data-wid";
@@ -7593,10 +7593,10 @@ const UnwrappedSection = reactExports.forwardRef((props, ref) => {
   return React.createElement(Section, { ...rest, title, "$nodes": [], "$wrapped": { $onValueChange, $avs, $root, $model: $root, $p2r: "." }, id: rest.id ?? VUtils.generateUniqueId(), ref }, children);
 });
 reactExports.forwardRef((props, ref) => {
-  const { visible, ...rest } = props;
+  const { $pp = "value", data, visible, ...rest } = props;
   const $onValueChange = VUtils.noop;
   const $avs = { $disabled: false, $visible: visible };
-  const $root = {};
+  const $root = { [$pp]: data };
   return React.createElement(Tree, { ...rest, "$wrapped": { $onValueChange, $avs, $root, $model: $root, $p2r: "." }, id: rest.id ?? VUtils.generateUniqueId(), ref });
 });
 reactExports.forwardRef((props, ref) => {
