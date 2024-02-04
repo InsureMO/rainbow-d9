@@ -1321,8 +1321,10 @@ Some examples:
 |-----------------------|----------|---------------------------------------------------------------------------------------|
 | elementTitle, caption | various  | `- elementTitle: propertyPath`                                                        |
 | noElementReminder     | text     | `- noElementReminder: No Data`                                                        |
-| addable               | boolean  | `- !addable`<br/>Not available for `RibsView`.                                        |
-| addLabel              | text     | `- addLabel: Create New One`                                                          |
+| addable               | boolean  | `- !addable`.<br/>Not available for `RibsView`.                                       |
+| addLabel              | text     | `- addLabel: Create New One`.<br/>Not available for `RibsView`.                       |
+| couldAddElement       | function | From external definition only, starts with `@ext.`.<br/>Not available for `RibsView`. |
+| disableOnCannotAdd    | boolean  | `- disableOnCannotAdd`.<br/>Not available for `RibsView`.                             |
 | elementAdded          | function | From external definition only, starts with `@ext.`.<br/>Not available for `RibsView`. |
 | createElement         | function | From external definition only, starts with `@ext.`.<br/>Not available for `RibsView`. |
 | removable             | boolean  | `- !removable`.<br/>Not available for `RibsView`.                                     |

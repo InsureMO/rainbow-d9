@@ -124,7 +124,7 @@ export abstract class SpecificArrayWidgetTranslator<T extends WidgetType> extend
 	protected buildDefaultAttributeNamesMapping(additional?: Record<CustomAttributeName, WidgetPropertyName>): Record<CustomAttributeName, WidgetPropertyName> {
 		const keys: Array<keyof ArrayUsedDef> = [
 			'noElementReminder',
-			'addable', 'addLabel', 'elementAdded', 'createElement',
+			'addable', 'addLabel', 'elementAdded', 'createElement', 'couldAddElement', 'disableOnCannotAdd',
 			'removable', 'removeLabel', 'elementRemoved', 'couldRemoveElement',
 			'getElementKey'
 		];

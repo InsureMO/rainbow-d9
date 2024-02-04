@@ -11,7 +11,7 @@ export const useArrayFunctions = (options: {
 	const {props, onValueChanged} = options;
 	const {
 		$root, $p2r, $model,
-		$array: {createElement, elementAdded, couldRemoveElement, elementRemoved, getElementKey} = {},
+		$array: {couldAddElement, createElement, elementAdded, couldRemoveElement, elementRemoved, getElementKey} = {},
 		...rest
 	} = props;
 
@@ -35,7 +35,7 @@ export const useArrayFunctions = (options: {
 		if (couldRemoveElement == null) {
 			return Promise.resolve(true);
 		}
-		return couldRemoveElement({
+		return await couldRemoveElement({
 			root: $root, model: $array as ArrayPropValue, element: elementModel, index
 		}, ...args);
 	};
@@ -87,7 +87,18 @@ export const useArrayFunctions = (options: {
 		await onValueChanged({absolutePath: absolutePathOfArray, oldValue: oldElements, newValue: elements}, ...args);
 	};
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	const shouldAddElement = async (...args: Array<any>) => {
+		if (couldAddElement == null) {
+			return Promise.resolve(true);
+		}
+		return await couldAddElement({root: $root, model: $array as ArrayPropValue}, ...args);
+	};
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	const addElement = async (...args: Array<any>) => {
+		const shouldRemove = await shouldAddElement(...args);
+		if (!shouldRemove) {
+			return;
+		}
 		// copy to old elements
 		const oldElements = $array == null ? null : [...($array as Array<BaseModel>)];
 		// create new element

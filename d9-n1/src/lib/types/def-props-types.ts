@@ -135,6 +135,12 @@ export interface ArrayUsedDef {
 	/** default is false */
 	addable?: boolean;
 	addLabel?: ReactNode;
+	couldAddElement?: <R extends BaseModel, M extends ArrayPropValue>(options: {
+		root: R, model: M
+		// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	}, ...args: Array<any>) => Promise<boolean>;
+	/** when on addable and cannot add, to disable the add button or not. default is true */
+	disableOnCannotAdd?: boolean;
 	/** create element before it is added into array. index is position of new one */
 	createElement?: <R extends BaseModel, M extends ArrayPropValue, E extends BaseModel>(options: {
 		root: R, model: M, index: number

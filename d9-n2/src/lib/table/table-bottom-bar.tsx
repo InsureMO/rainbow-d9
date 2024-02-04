@@ -1,5 +1,6 @@
 import {EnhancedPropsForArray, Nullable, useForceUpdate, Wrapper} from '@rainbow-d9/n1';
 import React, {useEffect} from 'react';
+import {useArrayCouldAddElement} from '../array-container-assist';
 import {Button, ButtonInk} from '../button';
 import {useGlobalHandlers} from '../global';
 import {IntlLabel} from '../intl-label';
@@ -9,13 +10,26 @@ import {TableEventTypes} from './event/table-event-bus-types';
 import {TableProps} from './types';
 import {ATableBottomBar, ATableBottomBarSeparator} from './widgets';
 
-export const TableBottomBar = (props: Omit<TableProps, '$array'> & { $array: EnhancedPropsForArray }) => {
-	const {
-		$wrapped, pageable,
-		$array: {addable = false, addLabel, addElement}
-	} = props;
+export const TableBottomBarButton = (props: Omit<TableProps, 'children'> & { $array: EnhancedPropsForArray }) => {
+	const {$wrapped, $array: {addLabel, addElement}} = props;
 
 	const globalHandlers = useGlobalHandlers();
+	const [disabled] = useArrayCouldAddElement(props);
+	const onAddClicked = async () => await addElement({global: globalHandlers});
+
+	const button$wrapped = {
+		...$wrapped,
+		$avs: {...$wrapped.$avs ?? {}, $disabled: disabled === true ? disabled : $wrapped.$avs?.$disabled}
+	};
+
+	return <Button $wrapped={button$wrapped} ink={ButtonInk.PRIMARY}
+	               text={addLabel ?? <IntlLabel keys={['table', 'createItem']} value="Create New Element"/>}
+	               click={onAddClicked}/>;
+};
+
+export const TableBottomBar = (props: Omit<TableProps, '$array'> & { $array: EnhancedPropsForArray }) => {
+	const {$wrapped, pageable, $array: {addable = false}} = props;
+
 	const {on, off, fire} = useTableEventBus();
 	const forceUpdate = useForceUpdate();
 	useEffect(() => {
@@ -34,7 +48,6 @@ export const TableBottomBar = (props: Omit<TableProps, '$array'> & { $array: Enh
 	if (addable === false && pageable == null) {
 		return null;
 	} else {
-		const onAddClicked = async () => await addElement({global: globalHandlers});
 		// it will refresh the pagination first, model updated
 		const onPaginationChanged = async (options: {
 			oldValue?: Nullable<PaginationData>; newValue: PaginationData;
@@ -54,11 +67,7 @@ export const TableBottomBar = (props: Omit<TableProps, '$array'> & { $array: Enh
 				           $root={$wrapped.$root} $model={$wrapped.$model} $p2r={$wrapped.$p2r}/>
 				: null}
 			{(pageable != null && addable !== false) ? <ATableBottomBarSeparator/> : null}
-			{addable !== false
-				? <Button $wrapped={$wrapped} ink={ButtonInk.PRIMARY}
-				          text={addLabel ?? <IntlLabel keys={['table', 'createItem']} value="Create New Element"/>}
-				          click={onAddClicked}/>
-				: null}
+			{addable !== false ? <TableBottomBarButton {...props}/> : null}
 		</ATableBottomBar>;
 	}
 };

@@ -1,5 +1,5 @@
 import {GlobalEventPrefix, GlobalEventTypes, useGlobalEventBus} from '@rainbow-d9/n2';
-import React, {Fragment, useEffect} from 'react';
+import {Fragment, useEffect} from 'react';
 
 export const CustomEventHandler = () => {
 	const {on, off} = useGlobalEventBus();

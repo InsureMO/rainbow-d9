@@ -4,9 +4,10 @@
 
 ### Ribs::::ribs
 
-- removable, addable
+- removable, addable, disableOnCannotAdd
 - elementTitle:
 	- labelOnValue
 	- property: propA
+- couldAddElement: @ext.couldAddElement
 - Input::Property A::propA
 - Input::Property B::propB

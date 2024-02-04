@@ -11,7 +11,7 @@ import {
 	useDialog,
 	useGlobalEventBus
 } from '@rainbow-d9/n2';
-import React, {CSSProperties, Fragment, useEffect} from 'react';
+import {CSSProperties, Fragment, useEffect} from 'react';
 import {useDemoMarkdown} from '../use-demo-markdown';
 import {markdown as DemoDialogContent} from './demo-dialog.md';
 

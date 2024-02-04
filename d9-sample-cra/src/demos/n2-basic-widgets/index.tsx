@@ -1,6 +1,6 @@
 import {BaseModel, PropValue, StandaloneRoot} from '@rainbow-d9/n1';
 import {GlobalEventHandlers, GlobalRoot, ModelCarrier, OptionItems} from '@rainbow-d9/n2';
-import React, {KeyboardEvent} from 'react';
+import {KeyboardEvent} from 'react';
 import {CustomEventHandler} from '../custom-event-handler';
 import {N2DemoDialogHandler} from '../n2-dialog-handler';
 import {useDemoMarkdown} from '../use-demo-markdown';
@@ -19,7 +19,7 @@ export const N2BasicWidgets = () => {
 				}
 			}
 		},
-		dropdown2: async (options: ModelCarrier<BaseModel, PropValue> & GlobalEventHandlers): Promise<OptionItems<string>> => {
+		dropdown2: async (_options: ModelCarrier<BaseModel, PropValue> & GlobalEventHandlers): Promise<OptionItems<string>> => {
 			console.log('abc');
 			return [
 				{value: '1', label: 'Option #1'},

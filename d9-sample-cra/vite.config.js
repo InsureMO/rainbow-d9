@@ -8,7 +8,7 @@ export default ({mode}) => {
 			'process.env': {...process.env, ...loadEnv(mode, process.cwd())}
 		},
 		plugins: [react(), mdPlugin({mode: [Mode.MARKDOWN]})],
-		server: {host: true, port: 3000, strictPort: true},
+		server: {host: true, port: 3000, strictPort: true, open: '/'},
 		base: '/rainbow-d9/',
 		build: {
 			minify: false,
