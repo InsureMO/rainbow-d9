@@ -4,8 +4,8 @@ var __publicField = (obj, key, value) => {
   __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
   return value;
 };
-import { c as createLogger, k as MonitorNodeAttributes, V as VUtils, R as Reaction, E as ExternalDefIndicator, P as PPUtils, N as NUtils } from "./rainbow-d9-n1-qa9_kkrn.js";
-import { O as OptionItemSort, R as REACTION_REFRESH_OPTIONS, c as GlobalEventPrefix } from "./rainbow-d9-n2-SxoflVeL.js";
+import { c as createLogger, k as MonitorNodeAttributes, V as VUtils, l as Reaction, E as ExternalDefIndicator, P as PPUtils, N as NUtils } from "./rainbow-d9-n1-jTcDTd2r.js";
+import { O as OptionItemSort, R as REACTION_REFRESH_OPTIONS, c as GlobalEventPrefix } from "./rainbow-d9-n2-xBIHUtXP.js";
 import { f as fromMarkdown, g as gfmTableFromMarkdown, a as gfmStrikethroughFromMarkdown, b as gfmFootnoteFromMarkdown, c as gfmTaskListItemFromMarkdown, d as frontmatterFromMarkdown } from "./mdast-oJPWLT_x.js";
 import { g as gfmTable, h as gfmStrikethrough, i as gfmFootnote, j as gfmTaskListItem, k as frontmatter } from "./micromark-OWpbvtzI.js";
 var ParsedNodeType;
@@ -2847,6 +2847,8 @@ class SpecificArrayWidgetTranslator extends SpecificWidgetTranslator {
       "addLabel",
       "elementAdded",
       "createElement",
+      "couldAddElement",
+      "disableOnCannotAdd",
       "removable",
       "removeLabel",
       "elementRemoved",

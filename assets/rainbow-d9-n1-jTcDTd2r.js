@@ -1385,7 +1385,7 @@ const useAttributesWatch = (options) => {
 };
 const useArrayFunctions = (options) => {
   const { props, onValueChanged } = options;
-  const { $root, $p2r, $model, $array: { createElement, elementAdded, couldRemoveElement, elementRemoved, getElementKey } = {}, ...rest } = props;
+  const { $root, $p2r, $model, $array: { couldAddElement, createElement, elementAdded, couldRemoveElement, elementRemoved, getElementKey } = {}, ...rest } = props;
   const [keys] = reactExports.useState([]);
   const forceUpdate = useForceUpdate();
   const { $array, absolutePathOfArray } = PPUtils.isLevelStayed(rest.$pp) ? { $array: $model, absolutePathOfArray: $p2r } : { $array: MUtils.getValue($model, rest.$pp), absolutePathOfArray: PPUtils.absolute($p2r, rest.$pp) };
@@ -1400,7 +1400,7 @@ const useArrayFunctions = (options) => {
     if (couldRemoveElement == null) {
       return Promise.resolve(true);
     }
-    return couldRemoveElement({
+    return await couldRemoveElement({
       root: $root,
       model: $array,
       element: elementModel,
@@ -1445,7 +1445,17 @@ const useArrayFunctions = (options) => {
     forceUpdate();
     await onValueChanged({ absolutePath: absolutePathOfArray, oldValue: oldElements, newValue: elements }, ...args);
   };
+  const shouldAddElement = async (...args) => {
+    if (couldAddElement == null) {
+      return Promise.resolve(true);
+    }
+    return await couldAddElement({ root: $root, model: $array }, ...args);
+  };
   const addElement = async (...args) => {
+    const shouldRemove = await shouldAddElement(...args);
+    if (!shouldRemove) {
+      return;
+    }
     const oldElements = $array == null ? null : [...$array];
     const newElement = createElement != null ? await createElement({ root: $root, model: $array, index: elements.length }, ...args) : {};
     elements.push(newElement);
@@ -1769,7 +1779,7 @@ export {
   MUtils as M,
   NUtils as N,
   PPUtils as P,
-  Reaction as R,
+  RootEventTypes as R,
   StandaloneRoot as S,
   VUtils as V,
   WrapperEventTypes as W,
@@ -1784,9 +1794,10 @@ export {
   useDefaultAttributeValues as i,
   useAttributesWatch as j,
   MonitorNodeAttributes as k,
-  N1Logger as l,
-  useBridgeEventBus as m,
-  BridgeToRootEventTypes as n,
+  Reaction as l,
+  N1Logger as m,
+  useBridgeEventBus as n,
+  BridgeToRootEventTypes as o,
   registerWidget as r,
   useThrottler as u
 };

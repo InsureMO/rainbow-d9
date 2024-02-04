@@ -6,8 +6,8 @@ var __publicField = (obj, key, value) => {
 };
 import { a as color } from "./vendor-bTA5rkJY.js";
 import { R as React, r as reactExports } from "./react-2UUL7v68.js";
-import { V as VUtils, P as PPUtils, r as registerWidget, c as createLogger, b as useRootEventBus, d as useForceUpdate, M as MUtils, N as NUtils, e as Wrapper, a as useWrapperEventBus, W as WrapperEventTypes, f as useCreateEventBus, g as PROPERTY_PATH_ME, h as MBUtils, i as useDefaultAttributeValues, j as useAttributesWatch } from "./rainbow-d9-n1-qa9_kkrn.js";
-import { q as qe, W as We } from "./styled-components-kwAO0OJo.js";
+import { V as VUtils, P as PPUtils, r as registerWidget, c as createLogger, b as useRootEventBus, d as useForceUpdate, M as MUtils, N as NUtils, e as Wrapper, a as useWrapperEventBus, W as WrapperEventTypes, f as useCreateEventBus, g as PROPERTY_PATH_ME, h as MBUtils, R as RootEventTypes, i as useDefaultAttributeValues, j as useAttributesWatch } from "./rainbow-d9-n1-jTcDTd2r.js";
+import { q as qe, W as We } from "./styled-components-5-wX-M_G.js";
 import { d as dayjs } from "./dayjs-9Z7dW0Q-.js";
 const DOM_KEY_WIDGET = "data-w";
 const DOM_ID_WIDGET = "data-wid";
@@ -4439,6 +4439,50 @@ const Page = reactExports.forwardRef((props, ref) => {
   return React.createElement(APage, { ...rest, "data-disabled": $disabled, ref }, children);
 });
 registerWidget({ key: "Page", JSX: Page, container: true, array: false });
+const useArrayCouldAddElement = (props) => {
+  const { $pp, $wrapped, $array: { couldAddElement, disableOnCannotAdd = true } } = props;
+  const { on, off } = useRootEventBus();
+  const globalHandlers = useGlobalHandlers();
+  const [disabled, setDisabled] = reactExports.useState(false);
+  reactExports.useEffect(() => {
+    if (disableOnCannotAdd === false || couldAddElement == null) {
+      return;
+    }
+    const { $array, absolutePathOfArray } = PPUtils.isLevelStayed($pp) ? { $array: $wrapped.$model, absolutePathOfArray: $wrapped.$p2r } : {
+      $array: MUtils.getValue($wrapped.$model, $pp),
+      absolutePathOfArray: PPUtils.absolute($wrapped.$p2r, $pp)
+    };
+    const computeEnablement = async () => {
+      const could = await couldAddElement({
+        root: $wrapped.$root,
+        model: $array
+      }, { global: globalHandlers });
+      setDisabled(!could);
+    };
+    computeEnablement();
+    const onValueChanged = async (absolutePath) => {
+      if (!PPUtils.matches(absolutePathOfArray, absolutePath)) {
+        return;
+      }
+      await computeEnablement();
+    };
+    on && on(RootEventTypes.VALUE_CHANGED, onValueChanged);
+    return () => {
+      off && off(RootEventTypes.VALUE_CHANGED, onValueChanged);
+    };
+  }, [
+    globalHandlers,
+    on,
+    off,
+    couldAddElement,
+    disableOnCannotAdd,
+    $pp,
+    $wrapped.$p2r,
+    $wrapped.$root,
+    $wrapped.$model
+  ]);
+  return [disabled, setDisabled];
+};
 const ARibs = qe.div.attrs(({ id }) => {
   return {
     [DOM_KEY_WIDGET]: "d9-ribs",
@@ -4558,17 +4602,27 @@ const ARibBottomBar = qe.div.attrs({ [DOM_KEY_WIDGET]: "d9-rib-bottom-bar" })`
     margin-top: 0;
     z-index: 4;
 `;
-const RibBottomBar = (props) => {
-  const { $wrapped, $array: { addable = false, addLabel, addElement } } = props;
+const RibBottomBarButton = (props) => {
+  var _a;
+  const { $wrapped, $array: { addLabel, addElement } } = props;
   const globalHandlers = useGlobalHandlers();
+  const [disabled] = useArrayCouldAddElement(props);
+  const onAddClicked = async () => await addElement({ global: globalHandlers });
+  const button$wrapped = {
+    ...$wrapped,
+    $avs: { ...$wrapped.$avs ?? {}, $disabled: disabled === true ? disabled : (_a = $wrapped.$avs) == null ? void 0 : _a.$disabled }
+  };
+  return React.createElement(Button, { "$wrapped": button$wrapped, ink: ButtonInk.PRIMARY, text: addLabel ?? React.createElement(IntlLabel, { keys: ["ribs", "createItem"], value: "Create New Element" }), click: onAddClicked });
+};
+const RibBottomBar = (props) => {
+  const { $array: { addable = false } } = props;
   if (addable === false) {
     return null;
   } else {
-    const onAddClicked = async () => await addElement({ global: globalHandlers });
     return React.createElement(
       ARibBottomBar,
       null,
-      React.createElement(Button, { "$wrapped": $wrapped, ink: ButtonInk.PRIMARY, text: addLabel ?? React.createElement(IntlLabel, { keys: ["ribs", "createItem"], value: "Create New Element" }), click: onAddClicked })
+      React.createElement(RibBottomBarButton, { ...props })
     );
   }
 };
@@ -4949,9 +5003,20 @@ var TableEventTypes;
   TableEventTypes2["PAGE_CHANGED_BY_FILTER"] = "page-changed-by-filter";
   TableEventTypes2["FILTER_CHANGED"] = "filter-changed";
 })(TableEventTypes || (TableEventTypes = {}));
-const TableBottomBar = (props) => {
-  const { $wrapped, pageable, $array: { addable = false, addLabel, addElement } } = props;
+const TableBottomBarButton = (props) => {
+  var _a;
+  const { $wrapped, $array: { addLabel, addElement } } = props;
   const globalHandlers = useGlobalHandlers();
+  const [disabled] = useArrayCouldAddElement(props);
+  const onAddClicked = async () => await addElement({ global: globalHandlers });
+  const button$wrapped = {
+    ...$wrapped,
+    $avs: { ...$wrapped.$avs ?? {}, $disabled: disabled === true ? disabled : (_a = $wrapped.$avs) == null ? void 0 : _a.$disabled }
+  };
+  return React.createElement(Button, { "$wrapped": button$wrapped, ink: ButtonInk.PRIMARY, text: addLabel ?? React.createElement(IntlLabel, { keys: ["table", "createItem"], value: "Create New Element" }), click: onAddClicked });
+};
+const TableBottomBar = (props) => {
+  const { $wrapped, pageable, $array: { addable = false } } = props;
   const { on, off, fire } = useTableEventBus();
   const forceUpdate = useForceUpdate();
   reactExports.useEffect(() => {
@@ -4969,7 +5034,6 @@ const TableBottomBar = (props) => {
   if (addable === false && pageable == null) {
     return null;
   } else {
-    const onAddClicked = async () => await addElement({ global: globalHandlers });
     const onPaginationChanged = async (options) => {
       fire(TableEventTypes.PAGE_CHANGED, options.oldValue, options.newValue);
     };
@@ -4979,7 +5043,7 @@ const TableBottomBar = (props) => {
       null,
       pageable != null ? React.createElement(Wrapper, { ...pageableDef, valueChanged: onPaginationChanged, "$root": $wrapped.$root, "$model": $wrapped.$model, "$p2r": $wrapped.$p2r }) : null,
       pageable != null && addable !== false ? React.createElement(ATableBottomBarSeparator, null) : null,
-      addable !== false ? React.createElement(Button, { "$wrapped": $wrapped, ink: ButtonInk.PRIMARY, text: addLabel ?? React.createElement(IntlLabel, { keys: ["table", "createItem"], value: "Create New Element" }), click: onAddClicked }) : null
+      addable !== false ? React.createElement(TableBottomBarButton, { ...props }) : null
     );
   }
 };
