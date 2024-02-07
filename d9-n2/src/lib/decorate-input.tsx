@@ -116,8 +116,15 @@ export const DecorateInput = (props: DecorateInputProps) => {
 	const {leads, tails, className, style, ...rest} = props;
 	const {$wrapped: {$p2r}} = rest;
 	const deviceTags = MBUtils.pickDeviceTags(props);
+	const decorateAttrs = Object.keys(rest).reduce((attrs, key) => {
+		if (key.startsWith('data-di-')) {
+			attrs[key] = rest[key];
+			delete rest[key];
+		}
+		return attrs;
+	}, {});
 
-	return <Decorate {...deviceTags} leads={leads} tails={tails} className={className} style={style}
+	return <Decorate {...deviceTags} {...decorateAttrs} leads={leads} tails={tails} className={className} style={style}
 	                 id={PPUtils.asId(PPUtils.absolute($p2r, props.$pp), props.id)}>
 		<Input {...rest}/>
 	</Decorate>;
@@ -130,8 +137,15 @@ export const DecorateNumberInput = (props: DecorateNumberInputProps) => {
 	const {leads, tails, className, style, ...rest} = props;
 	const {$wrapped: {$p2r}} = rest;
 	const deviceTags = MBUtils.pickDeviceTags(props);
+	const decorateAttrs = Object.keys(rest).reduce((attrs, key) => {
+		if (key.startsWith('data-di-')) {
+			attrs[key] = rest[key];
+			delete rest[key];
+		}
+		return attrs;
+	}, {});
 
-	return <Decorate {...deviceTags} leads={leads} tails={tails} className={className} style={style}
+	return <Decorate {...deviceTags} {...decorateAttrs} leads={leads} tails={tails} className={className} style={style}
 	                 id={PPUtils.asId(PPUtils.absolute($p2r, props.$pp), props.id)}>
 		<NumberInput {...rest}/>
 	</Decorate>;
