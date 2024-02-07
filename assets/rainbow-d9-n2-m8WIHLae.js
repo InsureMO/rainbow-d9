@@ -7,7 +7,7 @@ var __publicField = (obj, key, value) => {
 import { a as color } from "./vendor-bTA5rkJY.js";
 import { R as React, r as reactExports } from "./react-2UUL7v68.js";
 import { V as VUtils, P as PPUtils, r as registerWidget, c as createLogger, b as useRootEventBus, d as useForceUpdate, M as MUtils, N as NUtils, e as Wrapper, a as useWrapperEventBus, W as WrapperEventTypes, f as useCreateEventBus, g as PROPERTY_PATH_ME, h as MBUtils, R as RootEventTypes, i as useDefaultAttributeValues, j as useAttributesWatch } from "./rainbow-d9-n1-jTcDTd2r.js";
-import { q as qe, W as We } from "./styled-components-5-wX-M_G.js";
+import { q as qe, W as We } from "./styled-components-TzX9hoPn.js";
 import { d as dayjs } from "./dayjs-9Z7dW0Q-.js";
 const DOM_KEY_WIDGET = "data-w";
 const DOM_ID_WIDGET = "data-wid";
@@ -4170,9 +4170,16 @@ const DecorateInput = (props) => {
   const { leads, tails, className, style, ...rest } = props;
   const { $wrapped: { $p2r } } = rest;
   const deviceTags = MBUtils.pickDeviceTags(props);
+  const decorateAttrs = Object.keys(rest).reduce((attrs, key) => {
+    if (key.startsWith("data-di-")) {
+      attrs[key] = rest[key];
+      delete rest[key];
+    }
+    return attrs;
+  }, {});
   return React.createElement(
     Decorate,
-    { ...deviceTags, leads, tails, className, style, id: PPUtils.asId(PPUtils.absolute($p2r, props.$pp), props.id) },
+    { ...deviceTags, ...decorateAttrs, leads, tails, className, style, id: PPUtils.asId(PPUtils.absolute($p2r, props.$pp), props.id) },
     React.createElement(Input, { ...rest })
   );
 };
@@ -4180,9 +4187,16 @@ const DecorateNumberInput = (props) => {
   const { leads, tails, className, style, ...rest } = props;
   const { $wrapped: { $p2r } } = rest;
   const deviceTags = MBUtils.pickDeviceTags(props);
+  const decorateAttrs = Object.keys(rest).reduce((attrs, key) => {
+    if (key.startsWith("data-di-")) {
+      attrs[key] = rest[key];
+      delete rest[key];
+    }
+    return attrs;
+  }, {});
   return React.createElement(
     Decorate,
-    { ...deviceTags, leads, tails, className, style, id: PPUtils.asId(PPUtils.absolute($p2r, props.$pp), props.id) },
+    { ...deviceTags, ...decorateAttrs, leads, tails, className, style, id: PPUtils.asId(PPUtils.absolute($p2r, props.$pp), props.id) },
     React.createElement(NumberInput, { ...rest })
   );
 };
