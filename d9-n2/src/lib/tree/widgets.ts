@@ -12,7 +12,7 @@ export const ATree = styled.div.attrs<{ height: number | string }>(
 			[DOM_ID_WIDGET]: id,
 			'data-v-scroll': '',
 			'data-h-scroll': '',
-			style: {height: toCssSize(height)}
+			style: {'--height': toCssSize(height)}
 		};
 	})<{ height: number | string }>`
     display: flex;
@@ -21,6 +21,7 @@ export const ATree = styled.div.attrs<{ height: number | string }>(
     align-self: start;
     grid-column: var(--grid-column);
     grid-row: var(--grid-row);
+    height: var(--height);
     border: ${CssVars.BORDER};
     border-radius: ${CssVars.BORDER_RADIUS};
     overflow: auto;
