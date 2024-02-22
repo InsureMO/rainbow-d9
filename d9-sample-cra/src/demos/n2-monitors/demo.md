@@ -11,7 +11,7 @@
 	- disabled
 	- clearMe:
 		- on: a
-- Input::Last 3 Chars of Property A::last2Chars
+- Input::Last 2 Chars of Property A::last2Chars
 	- disabled
 	- watch:
 		- on: a
