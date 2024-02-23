@@ -1043,13 +1043,15 @@ Some examples:
 icons. If you want to use built-in icons, you need to use `$icons.` followed by the icon name, for example, `$icons.date`.
 
 ```markdown
-- Input::Name::name
+- DecoInput::Name::name
 	- leads: $icons.date
 	- tails: $icons.time
 ```
 
 > Multiple decorators could be split by `;`.  
 > Decoration also supported for `Button`, `Caption`, `Label`.
+
+> `DecoNumber` also available for decorating `Number`.
 
 ## Textarea
 
