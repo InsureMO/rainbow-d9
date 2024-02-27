@@ -29,6 +29,7 @@ export enum N2WidgetType {
 	TABLE = 'Table',
 
 	SECTION = 'Section',
+	BOX = 'Box',
 	TAB = 'Tab',
 	TABS = 'Tabs',
 	WIZARD_SHARED = 'WShared',

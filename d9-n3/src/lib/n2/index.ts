@@ -21,6 +21,7 @@ export * from './caption';
 export * from './ribs';
 export * from './table';
 export * from './section';
+export * from './box';
 export * from './tabs';
 export * from './wizard';
 export * from './tree';

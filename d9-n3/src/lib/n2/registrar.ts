@@ -1,4 +1,5 @@
 import {createOrGetTranslateHelperSingleton, WidgetHelper} from '../widget';
+import {N2BoxTranslator} from './box';
 import {N2ButtonTranslator} from './button';
 import {N2ButtonBarTranslator} from './button-bar';
 import {N2CalendarTranslator, N2DateTimeTranslator, N2DateTranslator} from './calendar';
@@ -55,6 +56,7 @@ export const registerN2Widgets = (widgetHelper?: WidgetHelper) => {
 	repo.register(new N2TableTranslator(repo));
 
 	repo.register(new N2SectionTranslator(repo));
+	repo.register(new N2BoxTranslator(repo));
 
 	repo.register(new N2TabTranslator(repo));
 	repo.register(new N2TabsTranslator(repo));
