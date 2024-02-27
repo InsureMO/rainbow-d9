@@ -817,6 +817,10 @@ Strictly adhere to the heading parsing rules without any additional attribute de
 
 > `label` and `title` attribute follows the `label` default parsing behavior.
 
+## Box
+
+A container, default use flex layout.
+
 ## Tabs
 
 - Default Wrapped by Form Cell: `false`,
