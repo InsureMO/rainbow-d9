@@ -1,7 +1,8 @@
 import {MUtils, Nullable, PPUtils, VUtils} from '@rainbow-d9/n1';
 import dayjs, {Dayjs} from 'dayjs';
 import React, {MouseEvent} from 'react';
-import {CssVars} from '../constants';
+import styled from 'styled-components';
+import {CssVars, DOM_KEY_WIDGET} from '../constants';
 import {DropdownOptionValue} from '../dropdown';
 import {
 	DropdownContainer,
@@ -14,6 +15,7 @@ import {
 	useDropdownControl
 } from '../dropdown-assist';
 import {useGlobalHandlers} from '../global';
+import {Date} from '../icons';
 import {useCalendarEventBus} from './event/calendar-event-bus';
 import {CalendarEventTypes} from './event/calendar-event-bus-types';
 import {CalendarPopup} from './popup';
@@ -23,7 +25,8 @@ import {
 	getDefaultCalendarDateFormat,
 	getDefaultCalendarDatetimeFormat,
 	getDefaultCalendarTimeFormat,
-	isCalendarAutoConfirm
+	isCalendarAutoConfirm,
+	useCalendarStickIcon
 } from './utils';
 import {CalendarValueHolder} from './value-holder';
 
@@ -37,6 +40,14 @@ const computeFormat = (options: { date?: string, time?: string }): string => {
 		return `${date} ${time}`;
 	}
 };
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const DropdownStickCalendar = styled(Date as any).attrs({[DOM_KEY_WIDGET]: 'd9-dropdown-caret'})`
+    height: calc(${CssVars.INPUT_HEIGHT} * 2 / 5);
+    fill: ${CssVars.FONT_COLOR};
+    transition: all ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION};
+`;
+
 export const Picker = (props: CalendarProps) => {
 	const {
 		$pp, $wrapped: {$onValueChange, $model, $p2r, $avs: {$disabled, $visible}},
@@ -44,7 +55,7 @@ export const Picker = (props: CalendarProps) => {
 		dateFormat = getDefaultCalendarDateFormat(), time, timeFormat = getDefaultCalendarTimeFormat(),
 		storeFormat = getDefaultCalendarDatetimeFormat(), fixedTimeAt = FIX_TIME_AT_START_OF_DAY,
 		initTimeAt,
-		autoConfirm = isCalendarAutoConfirm(),
+		autoConfirm = isCalendarAutoConfirm(), useCalendarIcon = useCalendarStickIcon(),
 		...rest
 	} = props;
 
@@ -188,7 +199,7 @@ export const Picker = (props: CalendarProps) => {
 		<CalendarValueHolder initValue={initValueForPopup}/>
 		<DropdownLabel data-please={!valueAssigned}>{label}</DropdownLabel>
 		<DropdownStick valueAssigned={valueAssigned} clearable={clearable} clear={onClearClicked}
-		               disabled={$disabled}/>
+		               disabled={$disabled} icon={useCalendarIcon ? <DropdownStickCalendar/> : (void 0)}/>
 		{isDropdownPopupActive(popupState.active)
 			? <CalendarPopup initValue={initValueForPopup}
 			                 popupRef={popupRef} popupState={popupState} popupShown={popupShown}

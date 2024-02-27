@@ -175,8 +175,9 @@ export const DropdownStick = (props: {
 	clearable: boolean;
 	clear: (event: MouseEvent<HTMLSpanElement>) => void;
 	disabled: boolean;
+	icon?: ReactNode;
 }) => {
-	const {valueAssigned, clearable, clear, disabled, ...rest} = props;
+	const {valueAssigned, clearable, clear, disabled, icon, ...rest} = props;
 
 	const onClearClicked = (event: MouseEvent<HTMLSpanElement>) => {
 		clear(event);
@@ -192,7 +193,7 @@ export const DropdownStick = (props: {
 		// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 		// @ts-ignore
 		return <DropdownStickContainer data-disabled={disabled} {...rest}>
-			<DropdownStickCaret/>
+			{icon == null ? <DropdownStickCaret/> : icon}
 		</DropdownStickContainer>;
 	}
 };

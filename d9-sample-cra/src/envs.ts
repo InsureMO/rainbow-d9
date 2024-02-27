@@ -42,9 +42,10 @@ dayjs.extend(BuddhistEra);
 	// set widgets parameters
 	// calendar
 	CalendarUtils.setCalendarDefaults({
-		dateFormat: 'DD/MM/YYYY'
+		dateFormat: 'DD/MM/YYYY',
 		// timeFormat: askDisplayTimeFormat(),
-		// datetimeFormat: askDateTimeFormat()
+		// datetimeFormat: askDateTimeFormat(),
+		useCalendarIcon: true
 	});
 })();
 

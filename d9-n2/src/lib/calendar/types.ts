@@ -15,6 +15,7 @@ export type CalendarDef = ValueChangeableNodeDef & OmitHTMLProps<HTMLDivElement>
 	/** the initial time when value is null */
 	initTimeAt?: CalendarFixedTimeAt;
 	autoConfirm?: boolean;
+	useCalendarIcon?: boolean;
 };
 /** widget definition, with html attributes */
 export type CalendarProps = OmitNodeDef<CalendarDef> & WidgetProps;
