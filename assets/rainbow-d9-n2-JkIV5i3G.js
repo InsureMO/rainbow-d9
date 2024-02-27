@@ -7,7 +7,7 @@ var __publicField = (obj, key, value) => {
 import { a as color } from "./vendor-bTA5rkJY.js";
 import { R as React, r as reactExports } from "./react-2UUL7v68.js";
 import { V as VUtils, P as PPUtils, r as registerWidget, c as createLogger, b as useRootEventBus, d as useForceUpdate, M as MUtils, N as NUtils, e as Wrapper, a as useWrapperEventBus, W as WrapperEventTypes, f as useCreateEventBus, g as PROPERTY_PATH_ME, h as MBUtils, R as RootEventTypes, i as useDefaultAttributeValues, j as useAttributesWatch } from "./rainbow-d9-n1-jTcDTd2r.js";
-import { q as qe, W as We } from "./styled-components-GAn0NrOl.js";
+import { q as qe, W as We } from "./styled-components-8HqcKbCP.js";
 import { d as dayjs } from "./dayjs-9Z7dW0Q-.js";
 const DOM_KEY_WIDGET = "data-w";
 const DOM_ID_WIDGET = "data-wid";
@@ -1176,18 +1176,21 @@ const DEFAULTS = {
   DATE_FORMAT: CALENDAR_DATE_FORMAT,
   TIME_FORMAT: CALENDAR_TIME_FORMAT,
   DATETIME_FORMAT: CALENDAR_DATETIME_FORMAT,
-  AUTO_CONFIRM: true
+  AUTO_CONFIRM: true,
+  USE_CALENDAR_ICON: false
 };
 const setCalendarDefaults = (defaults) => {
   DEFAULTS.DATE_FORMAT = defaults.dateFormat ?? DEFAULTS.DATE_FORMAT;
   DEFAULTS.TIME_FORMAT = defaults.timeFormat ?? DEFAULTS.TIME_FORMAT;
   DEFAULTS.DATETIME_FORMAT = defaults.datetimeFormat ?? DEFAULTS.DATETIME_FORMAT;
   DEFAULTS.AUTO_CONFIRM = defaults.autoConfirm ?? DEFAULTS.AUTO_CONFIRM;
+  DEFAULTS.USE_CALENDAR_ICON = defaults.useCalendarIcon ?? DEFAULTS.USE_CALENDAR_ICON;
 };
 const getDefaultCalendarDateFormat = () => DEFAULTS.DATE_FORMAT;
 const getDefaultCalendarTimeFormat = () => DEFAULTS.TIME_FORMAT;
 const getDefaultCalendarDatetimeFormat = () => DEFAULTS.DATETIME_FORMAT;
 const isCalendarAutoConfirm = () => DEFAULTS.AUTO_CONFIRM;
+const isStickIconUseCalendar = () => DEFAULTS.USE_CALENDAR_ICON;
 const FIX_TIME_AT_START_OF_DAY = { hour: 0, minute: 0, second: 0, millisecond: 0 };
 const FIX_TIME_AT_END_OF_DAY = { hour: 23, minute: 59, second: 59, millisecond: 59 };
 const toStartOfDay = (datetime) => {
@@ -1204,6 +1207,7 @@ var utils$2 = /* @__PURE__ */ Object.freeze({
   getDefaultCalendarDatetimeFormat,
   getDefaultCalendarTimeFormat,
   isCalendarAutoConfirm,
+  isStickIconUseCalendar,
   setCalendarDefaults,
   toEndOfDay,
   toStartOfDay
@@ -1828,7 +1832,7 @@ const DropdownStickContainer = qe.span.attrs({ [DOM_KEY_WIDGET]: "d9-dropdown-st
     }
 `;
 const DropdownStick = (props) => {
-  const { valueAssigned, clearable, clear, disabled, ...rest } = props;
+  const { valueAssigned, clearable, clear, disabled, icon, ...rest } = props;
   const onClearClicked = (event) => {
     clear(event);
   };
@@ -1839,11 +1843,7 @@ const DropdownStick = (props) => {
       React.createElement(DropdownStickClear, null)
     );
   } else {
-    return React.createElement(
-      DropdownStickContainer,
-      { "data-disabled": disabled, ...rest },
-      React.createElement(DropdownStickCaret, null)
-    );
+    return React.createElement(DropdownStickContainer, { "data-disabled": disabled, ...rest }, icon == null ? React.createElement(DropdownStickCaret, null) : icon);
   }
 };
 const DropdownPopupContainer = qe.div.attrs(({ atBottom, shown, vScroll, hScroll, top, left, height, minWidth, maxWidth, minHeight, maxHeight }) => {
@@ -3796,8 +3796,13 @@ const computeFormat = (options) => {
     return `${date} ${time}`;
   }
 };
+const DropdownStickCalendar = qe(Date$1).attrs({ [DOM_KEY_WIDGET]: "d9-dropdown-caret" })`
+    height: calc(${CssVars.INPUT_HEIGHT} * 2 / 5);
+    fill: ${CssVars.FONT_COLOR};
+    transition: all ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION};
+`;
 const Picker = (props) => {
-  const { $pp, $wrapped: { $onValueChange, $model, $p2r, $avs: { $disabled, $visible } }, please = "", clearable = true, dateFormat = getDefaultCalendarDateFormat(), time, timeFormat = getDefaultCalendarTimeFormat(), storeFormat = getDefaultCalendarDatetimeFormat(), fixedTimeAt = FIX_TIME_AT_START_OF_DAY, initTimeAt, autoConfirm = isCalendarAutoConfirm(), ...rest } = props;
+  const { $pp, $wrapped: { $onValueChange, $model, $p2r, $avs: { $disabled, $visible } }, please = "", clearable = true, dateFormat = getDefaultCalendarDateFormat(), time, timeFormat = getDefaultCalendarTimeFormat(), storeFormat = getDefaultCalendarDatetimeFormat(), fixedTimeAt = FIX_TIME_AT_START_OF_DAY, initTimeAt, autoConfirm = isCalendarAutoConfirm(), useCalendarIcon = isStickIconUseCalendar(), ...rest } = props;
   const globalHandlers = useGlobalHandlers();
   const { fire } = useCalendarEventBus();
   const { containerRef, popupRef, popupState, setPopupState, popupShown, setPopupShown } = useDropdownControl({
@@ -3912,7 +3917,7 @@ const Picker = (props) => {
     { active: popupState.active, atBottom: popupState.atBottom, ref: containerRef, role: "input", tabIndex: 0, ...rest, "data-w": "d9-calendar", "data-disabled": $disabled, "data-visible": $visible, onClick: onClicked, onBlur: onBlurred, id: PPUtils.asId(PPUtils.absolute($p2r, props.$pp), props.id) },
     React.createElement(CalendarValueHolder, { initValue: initValueForPopup }),
     React.createElement(DropdownLabel, { "data-please": !valueAssigned }, label),
-    React.createElement(DropdownStick, { valueAssigned, clearable, clear: onClearClicked, disabled: $disabled }),
+    React.createElement(DropdownStick, { valueAssigned, clearable, clear: onClearClicked, disabled: $disabled, icon: useCalendarIcon ? React.createElement(DropdownStickCalendar, null) : void 0 }),
     isDropdownPopupActive(popupState.active) ? React.createElement(CalendarPopup, { initValue: initValueForPopup, popupRef, popupState, popupShown, dateFormat, time, timeFormat, initTimeAt, confirm: onConfirm }) : null
   );
 };
