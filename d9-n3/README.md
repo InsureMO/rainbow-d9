@@ -1224,7 +1224,7 @@ The stick icon default uses the dropdown style, which is the caret down icon. Yo
 see below for more details,
 
 - `setCalendarDefaults`: to change default settings,
-- `useCalendarStickIcon`: default of stick icon.
+- `isStickIconUseCalendar`: default of stick icon.
 
 ### Fixed Time At, Initial Time At
 

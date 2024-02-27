@@ -26,7 +26,7 @@ import {
 	getDefaultCalendarDatetimeFormat,
 	getDefaultCalendarTimeFormat,
 	isCalendarAutoConfirm,
-	useCalendarStickIcon
+	isStickIconUseCalendar
 } from './utils';
 import {CalendarValueHolder} from './value-holder';
 
@@ -55,7 +55,7 @@ export const Picker = (props: CalendarProps) => {
 		dateFormat = getDefaultCalendarDateFormat(), time, timeFormat = getDefaultCalendarTimeFormat(),
 		storeFormat = getDefaultCalendarDatetimeFormat(), fixedTimeAt = FIX_TIME_AT_START_OF_DAY,
 		initTimeAt,
-		autoConfirm = isCalendarAutoConfirm(), useCalendarIcon = useCalendarStickIcon(),
+		autoConfirm = isCalendarAutoConfirm(), useCalendarIcon = isStickIconUseCalendar(),
 		...rest
 	} = props;
 

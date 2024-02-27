@@ -15,7 +15,7 @@ export const getDefaultCalendarTimeFormat = (): string => DEFAULTS.TIME_FORMAT;
 export const getDefaultCalendarDatetimeFormat = (): string => DEFAULTS.DATETIME_FORMAT;
 
 export const isCalendarAutoConfirm = (): boolean => DEFAULTS.AUTO_CONFIRM;
-export const useCalendarStickIcon = (): boolean => DEFAULTS.USE_CALENDAR_ICON;
+export const isStickIconUseCalendar = (): boolean => DEFAULTS.USE_CALENDAR_ICON;
 
 export const FIX_TIME_AT_START_OF_DAY = {hour: 0, minute: 0, second: 0, millisecond: 0};
 export const FIX_TIME_AT_END_OF_DAY = {hour: 23, minute: 59, second: 59, millisecond: 59};
