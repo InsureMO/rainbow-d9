@@ -5,7 +5,7 @@ var __publicField = (obj, key, value) => {
   return value;
 };
 import { c as createLogger, k as MonitorNodeAttributes, V as VUtils, l as Reaction, E as ExternalDefIndicator, P as PPUtils, N as NUtils } from "./rainbow-d9-n1-jTcDTd2r.js";
-import { O as OptionItemSort, R as REACTION_REFRESH_OPTIONS, c as GlobalEventPrefix } from "./rainbow-d9-n2-JkIV5i3G.js";
+import { O as OptionItemSort, R as REACTION_REFRESH_OPTIONS, c as GlobalEventPrefix } from "./rainbow-d9-n2-NYe4mbxu.js";
 import { f as fromMarkdown, g as gfmTableFromMarkdown, a as gfmStrikethroughFromMarkdown, b as gfmFootnoteFromMarkdown, c as gfmTaskListItemFromMarkdown, d as frontmatterFromMarkdown } from "./mdast-oJPWLT_x.js";
 import { g as gfmTable, h as gfmStrikethrough, i as gfmFootnote, j as gfmTaskListItem, k as frontmatter } from "./micromark-OWpbvtzI.js";
 var ParsedNodeType;
@@ -3050,6 +3050,7 @@ var N2WidgetType;
   N2WidgetType2["TABLE_ROW_OPERATORS"] = "RowOperators";
   N2WidgetType2["TABLE"] = "Table";
   N2WidgetType2["SECTION"] = "Section";
+  N2WidgetType2["BOX"] = "Box";
   N2WidgetType2["TAB"] = "Tab";
   N2WidgetType2["TABS"] = "Tabs";
   N2WidgetType2["WIZARD_SHARED"] = "WShared";
@@ -3850,6 +3851,11 @@ class N2SectionTranslator extends SpecificWidgetTranslator {
     return [...super.getToWidgetAttributeNames(), "title"];
   }
 }
+class N2BoxTranslator extends SpecificWidgetTranslator {
+  getSupportedType() {
+    return N2WidgetType.BOX;
+  }
+}
 class N2TabTranslator extends SpecificWidgetTranslator {
   getSupportedType() {
     return N2WidgetType.TAB;
@@ -4045,6 +4051,7 @@ const registerN2Widgets$1 = (widgetHelper) => {
   repo.register(new N2TableRowOperatorsTranslator(repo));
   repo.register(new N2TableTranslator(repo));
   repo.register(new N2SectionTranslator(repo));
+  repo.register(new N2BoxTranslator(repo));
   repo.register(new N2TabTranslator(repo));
   repo.register(new N2TabsTranslator(repo));
   repo.register(new N2WizardSharedTranslator(repo));
