@@ -22,7 +22,8 @@
 
 #### Tab::::tab3
 
-- title: Tab #3
+- title: Box
+	- Caption::Tab #3
 
 #### Tab::::tab4
 
