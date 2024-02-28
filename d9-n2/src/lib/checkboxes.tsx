@@ -117,7 +117,7 @@ export const Checkboxes = forwardRef((props: CheckboxesProps, ref: ForwardedRef<
 		// eslint-disable-next-line @typescript-eslint/no-unused-vars
 		options, optionSort,
 		noAvailable = <IntlLabel keys={['options', 'noAvailable']} value="No available options."/>,
-		columns = -1, compact = true, single = false, boolOnSingle = true,
+		columns = -1, compact = true, single = false, boolOnSingle = false,
 		$pp, $wrapped: {$onValueChange, $model, $avs: {$disabled, $visible}},
 		...rest
 	} = props;

@@ -1169,7 +1169,7 @@ Due to the differences in presentation, Checkboxes and Radios have additional re
 | columns        | number  | Number of columns in option arrangement.                                                                                                  |
 | compact        | boolean | When there are multiple options in a row, whether to display them continuously or in a table column format.                               |
 | single         | boolean | Only one choice available, **only for checks**, default false. Should use a primitive value instead of an array when `single` is enabled. |
-| boolOnSingle   | boolean | Only one choice available, **only for checks**, default true. And if want to put an `undefined` as value, set as false.                   |
+| boolOnSingle   | boolean | Only one choice available, **only for checks**, default false. And if want to put a `false` as value, set as true.                        |
 
 ### Reaction to Refresh Options
 
