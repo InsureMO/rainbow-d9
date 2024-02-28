@@ -8,7 +8,8 @@ import {IntlLabel, toIntlLabel} from './intl-label';
 import {NO_AVAILABLE_OPTION_ITEM, OptionItem, OptionItemsDef, useOptionItems} from './option-items-assist';
 import {OmitHTMLProps, OmitNodeDef} from './types';
 
-export type CheckboxesOptionValue = string | number;
+/** boolean is for single choice scenario usually */
+export type CheckboxesOptionValue = string | number | boolean;
 /** checkbox configuration definition, checkboxes (checkbox group) is kind of dropdown */
 export type CheckboxesDef =
 	ValueChangeableNodeDef
@@ -18,6 +19,8 @@ export type CheckboxesDef =
 	noAvailable?: ReactNode;
 	columns?: number;
 	compact?: boolean;
+	single?: boolean;
+	boolOnSingle?: boolean;
 };
 
 /** widget definition, with html attributes */
@@ -114,7 +117,7 @@ export const Checkboxes = forwardRef((props: CheckboxesProps, ref: ForwardedRef<
 		// eslint-disable-next-line @typescript-eslint/no-unused-vars
 		options, optionSort,
 		noAvailable = <IntlLabel keys={['options', 'noAvailable']} value="No available options."/>,
-		columns = -1, compact = true,
+		columns = -1, compact = true, single = false, boolOnSingle = true,
 		$pp, $wrapped: {$onValueChange, $model, $avs: {$disabled, $visible}},
 		...rest
 	} = props;
@@ -134,10 +137,20 @@ export const Checkboxes = forwardRef((props: CheckboxesProps, ref: ForwardedRef<
 		const values = getValues();
 		if (values.some(v => v == option.value)) {
 			// remove
-			await $onValueChange(values.filter(v => v != option.value), true, {global: globalHandlers});
+			if (single) {
+				await $onValueChange(boolOnSingle ? false : (void 0), true, {global: globalHandlers});
+			} else {
+				await $onValueChange(values.filter(v => v != option.value), true, {global: globalHandlers});
+			}
 		} else {
-			// add
-			await $onValueChange([...values, option.value], true, {global: globalHandlers});
+
+			if (single) {
+				// replace
+				await $onValueChange(option.value, true, {global: globalHandlers});
+			} else {
+				// add
+				await $onValueChange([...values, option.value], true, {global: globalHandlers});
+			}
 		}
 	};
 

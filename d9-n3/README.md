@@ -1162,13 +1162,14 @@ the parameters are the same.
 > When there are too many options (usually limited to 5 or 6), it is not recommended to use a combination of checkboxes and radios, but
 > rather to revert to a `MultiDropdown` or `Dropdown` form.
 
-
 Due to the differences in presentation, Checkboxes and Radios have additional rendering parameters:
 
-| Attribute Name | Type    | Description                                                                                                 |
-|----------------|---------|-------------------------------------------------------------------------------------------------------------|
-| columns        | number  | Number of columns in option arrangement.                                                                    |
-| compact        | boolean | When there are multiple options in a row, whether to display them continuously or in a table column format. |
+| Attribute Name | Type    | Description                                                                                                                               |
+|----------------|---------|-------------------------------------------------------------------------------------------------------------------------------------------|
+| columns        | number  | Number of columns in option arrangement.                                                                                                  |
+| compact        | boolean | When there are multiple options in a row, whether to display them continuously or in a table column format.                               |
+| single         | boolean | Only one choice available, **only for checks**, default false. Should use a primitive value instead of an array when `single` is enabled. |
+| boolOnSingle   | boolean | Only one choice available, **only for checks**, default true. And if want to put an `undefined` as value, set as false.                   |
 
 ### Reaction to Refresh Options
 
