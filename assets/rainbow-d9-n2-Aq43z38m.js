@@ -7,7 +7,7 @@ var __publicField = (obj, key, value) => {
 import { a as color } from "./vendor-bTA5rkJY.js";
 import { R as React, r as reactExports } from "./react-2UUL7v68.js";
 import { V as VUtils, P as PPUtils, r as registerWidget, c as createLogger, b as useRootEventBus, d as useForceUpdate, M as MUtils, N as NUtils, e as Wrapper, a as useWrapperEventBus, W as WrapperEventTypes, f as useCreateEventBus, g as PROPERTY_PATH_ME, h as MBUtils, R as RootEventTypes, i as useDefaultAttributeValues, j as useAttributesWatch } from "./rainbow-d9-n1-jTcDTd2r.js";
-import { q as qe, W as We } from "./styled-components-LRZtjZG_.js";
+import { q as qe, W as We } from "./styled-components-Bm5o1tII.js";
 import { d as dayjs } from "./dayjs-9Z7dW0Q-.js";
 const DOM_KEY_WIDGET = "data-w";
 const DOM_ID_WIDGET = "data-wid";
@@ -7436,7 +7436,7 @@ const Separator$1 = qe.span.attrs({ [DOM_KEY_WIDGET]: "d9-checkboxes-option-sepa
     flex-basis: 100%;
 `;
 const Checkboxes = reactExports.forwardRef((props, ref) => {
-  const { options, optionSort, noAvailable = React.createElement(IntlLabel, { keys: ["options", "noAvailable"], value: "No available options." }), columns = -1, compact = true, $pp, $wrapped: { $onValueChange, $model, $avs: { $disabled, $visible } }, ...rest } = props;
+  const { options, optionSort, noAvailable = React.createElement(IntlLabel, { keys: ["options", "noAvailable"], value: "No available options." }), columns = -1, compact = true, single = false, boolOnSingle = false, $pp, $wrapped: { $onValueChange, $model, $avs: { $disabled, $visible } }, ...rest } = props;
   const globalHandlers = useGlobalHandlers();
   const { createAskDisplayOptions } = useOptionItems({ ...props, noAvailable });
   const getValues = () => {
@@ -7449,9 +7449,17 @@ const Checkboxes = reactExports.forwardRef((props, ref) => {
     }
     const values2 = getValues();
     if (values2.some((v) => v == option.value)) {
-      await $onValueChange(values2.filter((v) => v != option.value), true, { global: globalHandlers });
+      if (single) {
+        await $onValueChange(boolOnSingle ? false : void 0, true, { global: globalHandlers });
+      } else {
+        await $onValueChange(values2.filter((v) => v != option.value), true, { global: globalHandlers });
+      }
     } else {
-      await $onValueChange([...values2, option.value], true, { global: globalHandlers });
+      if (single) {
+        await $onValueChange(option.value, true, { global: globalHandlers });
+      } else {
+        await $onValueChange([...values2, option.value], true, { global: globalHandlers });
+      }
     }
   };
   const askDisplayOptions = createAskDisplayOptions();
@@ -7474,10 +7482,18 @@ const Checkboxes = reactExports.forwardRef((props, ref) => {
         if (values.some((v) => v == value))
           ;
         else {
-          await $onValueChange([...values, value], true, { global: globalHandlers });
+          if (single) {
+            await $onValueChange(option.value, true, { global: globalHandlers });
+          } else {
+            await $onValueChange([...values, value], true, { global: globalHandlers });
+          }
         }
       } else {
-        await $onValueChange(values.filter((v) => v != value), true, { global: globalHandlers });
+        if (single) {
+          await $onValueChange(boolOnSingle ? false : void 0, true, { global: globalHandlers });
+        } else {
+          await $onValueChange(values.filter((v) => v != value), true, { global: globalHandlers });
+        }
       }
     };
     const $wrapped = {
