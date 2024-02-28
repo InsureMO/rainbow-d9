@@ -72,6 +72,13 @@
 		- 5: A very very very very very very very very very very very very very very very very very very long Option #5
 	- place: 6
 	- columns: 4
+- Checks::Checkbox Group::checks2
+	- options:
+		- 1: Option #1
+		- 2: Option #2
+		- 3: Option #3
+		- 4: Option #4
+	- single
 - Button::
 	- text: Validate Inputs
 	- click: validate s1

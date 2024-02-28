@@ -143,7 +143,6 @@ export const Checkboxes = forwardRef((props: CheckboxesProps, ref: ForwardedRef<
 				await $onValueChange(values.filter(v => v != option.value), true, {global: globalHandlers});
 			}
 		} else {
-
 			if (single) {
 				// replace
 				await $onValueChange(option.value, true, {global: globalHandlers});
@@ -174,13 +173,25 @@ export const Checkboxes = forwardRef((props: CheckboxesProps, ref: ForwardedRef<
 			const model = {[valueKey]: values.some(v => v == value)};
 			const onValueChange = async (newValue: boolean) => {
 				if (newValue === true) {
+					// add
 					if (values.some(v => v == value)) {
 						// do nothing
 					} else {
-						await $onValueChange([...values, value], true, {global: globalHandlers});
+						if (single) {
+							// replace
+							await $onValueChange(option.value, true, {global: globalHandlers});
+						} else {
+							// add
+							await $onValueChange([...values, value], true, {global: globalHandlers});
+						}
 					}
 				} else {
-					await $onValueChange(values.filter(v => v != value), true, {global: globalHandlers});
+					// remove
+					if (single) {
+						await $onValueChange(boolOnSingle ? false : (void 0), true, {global: globalHandlers});
+					} else {
+						await $onValueChange(values.filter(v => v != value), true, {global: globalHandlers});
+					}
 				}
 			};
 			const $wrapped = {

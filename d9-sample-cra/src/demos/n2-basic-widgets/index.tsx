@@ -20,7 +20,6 @@ export const N2BasicWidgets = () => {
 			}
 		},
 		dropdown2: async (_options: ModelCarrier<BaseModel, PropValue> & GlobalEventHandlers): Promise<OptionItems<string>> => {
-			console.log('abc');
 			return [
 				{value: '1', label: 'Option #1'},
 				{value: '2', label: 'Option #2'}
