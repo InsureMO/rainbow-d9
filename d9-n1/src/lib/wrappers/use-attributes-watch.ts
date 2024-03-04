@@ -118,11 +118,15 @@ export const useAttributesWatch = (options: {
 									const pos = reactions.findIndex(reaction => reaction === Reaction.VALUE_CHANGED);
 									if (pos !== -1) {
 										let changed = [];
-										let next = reactions[pos + 1];
+										const changedDataIndex = pos + 1;
+										let next = reactions[changedDataIndex];
 										while (typeof next !== 'string') {
 											changed.push(next);
-											reactions.splice(pos + 1, 1);
-											next = reactions[pos + 1];
+											reactions.splice(changedDataIndex, 1);
+											if (changedDataIndex >= reactions.length) {
+												break;
+											}
+											next = reactions[changedDataIndex];
 										}
 										changed = changed.filter(changed => changed != null);
 										if (changed.length !== 0 && fire != null) {

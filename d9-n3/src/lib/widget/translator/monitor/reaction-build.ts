@@ -101,7 +101,7 @@ export class ReactionBuild extends AbstractMonitorBuild {
 				if (results.length === 0) {
 					return (void 0);
 				} else {
-					return results;
+					return results.flat(1);
 				}
 			}
 		};

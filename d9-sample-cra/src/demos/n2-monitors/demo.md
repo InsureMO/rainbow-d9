@@ -56,3 +56,19 @@
 		    return value === 'string' ? {valid: true}: {valid:false, failReason: 'A is string, D should be "string"'};
 		  }       
 		  ```
+- Input::Property X::x
+	- place: 5, 1
+	- watch:
+		- on: x
+		- handle:
+		  ```javascript
+		  const oldValue = model.y;
+		  model.y = `${model.x} and y`;
+		  console.log(`[${oldValue}]`, `[${model.y}]`)
+		  return ['value-changed', {path: '/y', from: oldValue, to: model.y}]
+		  ```
+- Input::Property Y::y
+	- place: 5, 4
+	- visible:
+		- on: y
+		- handle: `return (model.y ?? '').startsWith('123')`
