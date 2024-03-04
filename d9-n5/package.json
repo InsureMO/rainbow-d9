@@ -1,6 +1,6 @@
 {
 	"name": "@rainbow-d9/n5",
-	"version": "1.0.56-alpha.1",
+	"version": "1.0.56",
 	"description": "d9 wysiwyg editor",
 	"main": "index.cjs.js",
 	"module": "index.js",
@@ -22,9 +22,9 @@
 	"author": "Rainbow Team",
 	"dependencies": {
 		"@codemirror/lang-markdown": "^6.2.4",
-		"@rainbow-d9/n1": "1.0.56-alpha.1",
-		"@rainbow-d9/n2": "1.0.56-alpha.1",
-		"@rainbow-d9/n3": "1.0.56-alpha.1",
+		"@rainbow-d9/n1": "1.0.56",
+		"@rainbow-d9/n2": "1.0.56",
+		"@rainbow-d9/n3": "1.0.56",
 		"codemirror": "^6.0.1",
 		"nanoid": "^4.0.0",
 		"react": "^18.2.0",
