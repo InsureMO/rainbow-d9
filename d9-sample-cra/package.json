@@ -7,6 +7,7 @@
 		"@rainbow-d9/echarts": "1.0.55",
 		"@rainbow-d9/n2": "1.0.55",
 		"@rainbow-d9/n3": "1.0.55",
+		"@rainbow-d9/n5": "1.0.55",
 		"@rainbow-d9/thai-plan-selection": "1.0.55",
 		"@testing-library/jest-dom": "^5.17.0",
 		"@testing-library/react": "^13.4.0",

@@ -114,7 +114,29 @@ export const useAttributesWatch = (options: {
 										ret = {name, value: VUtils.generateUniqueId()};
 									}
 								}
-								reactions.filter(reaction => ![Reaction.CLEAR_VALUE, Reaction.REPAINT].includes(reaction))
+								if (reactions.includes(Reaction.VALUE_CHANGED)) {
+									const pos = reactions.findIndex(reaction => reaction === Reaction.VALUE_CHANGED);
+									if (pos !== -1) {
+										let changed = [];
+										let next = reactions[pos + 1];
+										while (typeof next !== 'string') {
+											changed.push(next);
+											reactions.splice(pos + 1, 1);
+											next = reactions[pos + 1];
+										}
+										changed = changed.filter(changed => changed != null);
+										if (changed.length !== 0 && fire != null) {
+											// noinspection ES6MissingAwait
+											changed.forEach(async (changed) => {
+												fire(RootEventTypes.VALUE_CHANGED, changed.path, changed.from, changed.to);
+											});
+										}
+									}
+								}
+								reactions
+									.filter(reaction => ![
+										Reaction.CLEAR_VALUE, Reaction.REPAINT, Reaction.VALUE_CHANGED
+									].includes(reaction))
 									.forEach(reaction => {
 										// fire wrapped event
 										fireWrapper && fireWrapper(WrapperEventTypes.UNHANDLED_REACTION_OCCURRED, reaction);

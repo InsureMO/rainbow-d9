@@ -53,7 +53,8 @@ export interface ValidationMonitor
 
 export enum Reaction {
 	REPAINT = 'repaint',
-	CLEAR_VALUE = 'clear-value'
+	CLEAR_VALUE = 'clear-value',
+	VALUE_CHANGED = 'value-changed'
 }
 
 export interface ReactionMonitor extends Omit<MonitorOthers<Undefinable<Array<Reaction> | Reaction>>, '$default'> {

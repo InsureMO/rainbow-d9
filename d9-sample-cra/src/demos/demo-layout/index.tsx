@@ -4,6 +4,7 @@ import {N2BasicWidgets, N2BasicWidgetsData, N2BasicWidgetsMarkdown} from '../n2-
 import {N2Buttons, N2ButtonsData, N2ButtonsMarkdown} from '../n2-buttons';
 import {N2Intl, N2IntlData, N2IntlMarkdown} from '../n2-intl';
 import {N2Monitors, N2MonitorsData, N2MonitorsMarkdown} from '../n2-monitors';
+import {N2Playground} from '../n2-playground';
 import {N2Table, N2TableData, N2TableMarkdown} from '../n2-table';
 import {N2Tabs, N2TabsData, N2TabsMarkdown} from '../n2-tabs';
 import {N2Tree, N2TreeData, N2TreeMarkdown} from '../n2-tree';
@@ -36,5 +37,9 @@ export const Demos = [
 	{
 		path: '/thai-plan-selection', label: '100. ThaiCloud Plan Selection',
 		C: ThaiPlanSelection, data: ThaiPlanSelectionData, markdown: ThaiPlanSelectionMarkdown
+	},
+	{
+		path: '/playground', label: '999. Playground',
+		C: N2Playground, data: {}, markdown: ''
 	}
 ];

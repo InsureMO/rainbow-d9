@@ -34,7 +34,7 @@ export const CssVars = {
 	// must be number value, used in javascript
 	INPUT_HEIGHT_VALUE: 32,
 	VERTICAL_SCROLLER_WIDTH: 4,
-	HORIZONTAL_SCROLLER_HEIGHT: 8,
+	HORIZONTAL_SCROLLER_HEIGHT: 6,
 
 	FONT_FAMILY: `var(--d9-font-family, ${CssConstants.FONT_FAMILY})`,
 	FONT_SIZE: `var(--d9-font-size, 14px)`,
@@ -77,6 +77,12 @@ export const CssVars = {
 	GRID_COLUMNS: 'var(--d9-grid-columns, 12)',
 	GRID_COLUMN_GAP: 'var(--d9-grid-column-gap, 16px)',
 	GRID_ROW_GAP: 'var(--d9-grid-row-gap, 0)',
+
+	SCROLL_TRACK_COLOR: 'var(--d9-scroll-track-color, rgba(229, 229, 229, 0.5))',
+	SCROLL_THUMB_COLOR: 'var(--d9-scroll-thumb-color, rgb(193, 193, 193))',
+	SCROLL_BORDER_RADIUS: 'var(--d9-scroll-border-radius, 2px)',
+	SCROLL_HEIGHT: 'var(--d9-scroll-height, 6px)',
+	SCROLL_WEIGHT: 'var(--di-scroll-weight, 4px)',
 
 	SECTION_HEADER_HEIGHT: 'var(--d9-section-header-height, 44px)',
 	SECTION_HEADER_OFFSET: 'var(--d9-section-header-offset, calc(44px / 3))',
