@@ -4,10 +4,10 @@ var __publicField = (obj, key, value) => {
   __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
   return value;
 };
-import { a as color } from "./vendor-bTA5rkJY.js";
-import { R as React, r as reactExports } from "./react-2UUL7v68.js";
-import { V as VUtils, P as PPUtils, r as registerWidget, c as createLogger, b as useRootEventBus, d as useForceUpdate, M as MUtils, N as NUtils, e as Wrapper, a as useWrapperEventBus, W as WrapperEventTypes, f as useCreateEventBus, g as PROPERTY_PATH_ME, h as MBUtils, R as RootEventTypes, i as useDefaultAttributeValues, j as useAttributesWatch } from "./rainbow-d9-n1-jTcDTd2r.js";
-import { q as qe, W as We } from "./styled-components-Bm5o1tII.js";
+import { a as color } from "./vendor-EJEFEpgY.js";
+import { R as React, r as reactExports } from "./react-o-VuPXsH.js";
+import { V as VUtils, P as PPUtils, r as registerWidget, c as createLogger, b as useRootEventBus, d as useForceUpdate, M as MUtils, N as NUtils, e as Wrapper, a as useWrapperEventBus, W as WrapperEventTypes, f as useCreateEventBus, g as PROPERTY_PATH_ME, h as MBUtils, R as RootEventTypes, i as useDefaultAttributeValues, j as useAttributesWatch } from "./rainbow-d9-n1-xf_6wIt7.js";
+import { q as qe, W as We } from "./styled-components-JktVtKbu.js";
 import { d as dayjs } from "./dayjs-9Z7dW0Q-.js";
 const DOM_KEY_WIDGET = "data-w";
 const DOM_ID_WIDGET = "data-wid";
@@ -38,7 +38,7 @@ const CssConstants = {
 const CssVars = {
   INPUT_HEIGHT_VALUE: 32,
   VERTICAL_SCROLLER_WIDTH: 4,
-  HORIZONTAL_SCROLLER_HEIGHT: 8,
+  HORIZONTAL_SCROLLER_HEIGHT: 6,
   FONT_FAMILY: `var(--d9-font-family, ${CssConstants.FONT_FAMILY})`,
   FONT_SIZE: `var(--d9-font-size, 14px)`,
   FONT_BOLD: "var(--d9-font-bold, 600)",
@@ -76,6 +76,11 @@ const CssVars = {
   GRID_COLUMNS: "var(--d9-grid-columns, 12)",
   GRID_COLUMN_GAP: "var(--d9-grid-column-gap, 16px)",
   GRID_ROW_GAP: "var(--d9-grid-row-gap, 0)",
+  SCROLL_TRACK_COLOR: "var(--d9-scroll-track-color, rgba(229, 229, 229, 0.5))",
+  SCROLL_THUMB_COLOR: "var(--d9-scroll-thumb-color, rgb(193, 193, 193))",
+  SCROLL_BORDER_RADIUS: "var(--d9-scroll-border-radius, 2px)",
+  SCROLL_HEIGHT: "var(--d9-scroll-height, 6px)",
+  SCROLL_WEIGHT: "var(--di-scroll-weight, 4px)",
   SECTION_HEADER_HEIGHT: "var(--d9-section-header-height, 44px)",
   SECTION_HEADER_OFFSET: "var(--d9-section-header-offset, calc(44px / 3))",
   SECTION_HEADER_BORDER: `var(--d9-section-header-border, 2px solid var(--d9-border-color, ${CssConstants.BORDER_COLOR}))`,

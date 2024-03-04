@@ -4,10 +4,10 @@ var __publicField = (obj, key, value) => {
   __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
   return value;
 };
-import { c as createLogger, k as MonitorNodeAttributes, V as VUtils, l as Reaction, E as ExternalDefIndicator, P as PPUtils, N as NUtils } from "./rainbow-d9-n1-jTcDTd2r.js";
-import { O as OptionItemSort, R as REACTION_REFRESH_OPTIONS, c as GlobalEventPrefix } from "./rainbow-d9-n2-Aq43z38m.js";
-import { f as fromMarkdown, g as gfmTableFromMarkdown, a as gfmStrikethroughFromMarkdown, b as gfmFootnoteFromMarkdown, c as gfmTaskListItemFromMarkdown, d as frontmatterFromMarkdown } from "./mdast-oJPWLT_x.js";
-import { g as gfmTable, h as gfmStrikethrough, i as gfmFootnote, j as gfmTaskListItem, k as frontmatter } from "./micromark-OWpbvtzI.js";
+import { c as createLogger, k as MonitorNodeAttributes, V as VUtils, l as Reaction, E as ExternalDefIndicator, P as PPUtils, N as NUtils } from "./rainbow-d9-n1-xf_6wIt7.js";
+import { O as OptionItemSort, R as REACTION_REFRESH_OPTIONS, c as GlobalEventPrefix } from "./rainbow-d9-n2-7ZnIJKq5.js";
+import { f as fromMarkdown, g as gfmTableFromMarkdown, a as gfmStrikethroughFromMarkdown, b as gfmFootnoteFromMarkdown, c as gfmTaskListItemFromMarkdown, d as frontmatterFromMarkdown } from "./mdast-STkxI2lM.js";
+import { g as gfmTable, h as gfmStrikethrough, i as gfmFootnote, j as gfmTaskListItem, k as frontmatter } from "./micromark-0B6Az_Rw.js";
 var ParsedNodeType;
 (function(ParsedNodeType2) {
   ParsedNodeType2[ParsedNodeType2["HEADING"] = 0] = "HEADING";
@@ -2515,7 +2515,7 @@ class ReactionBuild extends AbstractMonitorBuild {
         if (results.length === 0) {
           return void 0;
         } else {
-          return results;
+          return results.flat(1);
         }
       }
     };

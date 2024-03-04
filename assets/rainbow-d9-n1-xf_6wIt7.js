@@ -4,8 +4,8 @@ var __publicField = (obj, key, value) => {
   __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
   return value;
 };
-import { b as buffer, n as nanoid, E as EventEmitter } from "./vendor-bTA5rkJY.js";
-import { r as reactExports, R as React } from "./react-2UUL7v68.js";
+import { b as buffer, n as nanoid, E as EventEmitter } from "./vendor-EJEFEpgY.js";
+import { r as reactExports, R as React } from "./react-o-VuPXsH.js";
 const VUtils = {
   isEmpty: (v) => v == null || typeof v === "string" && v.length === 0,
   isNotEmpty: (v) => (v ?? "") !== "",
@@ -324,6 +324,7 @@ var Reaction;
 (function(Reaction2) {
   Reaction2["REPAINT"] = "repaint";
   Reaction2["CLEAR_VALUE"] = "clear-value";
+  Reaction2["VALUE_CHANGED"] = "value-changed";
 })(Reaction || (Reaction = {}));
 var MonitorNodeAttributes;
 (function(MonitorNodeAttributes2) {
@@ -1331,7 +1332,33 @@ const useAttributesWatch = (options) => {
                 ret = { name, value: VUtils.generateUniqueId() };
               }
             }
-            reactions.filter((reaction) => ![Reaction.CLEAR_VALUE, Reaction.REPAINT].includes(reaction)).forEach((reaction) => {
+            if (reactions.includes(Reaction.VALUE_CHANGED)) {
+              const pos = reactions.findIndex((reaction) => reaction === Reaction.VALUE_CHANGED);
+              if (pos !== -1) {
+                let changed = [];
+                const changedDataIndex = pos + 1;
+                let next = reactions[changedDataIndex];
+                while (typeof next !== "string") {
+                  changed.push(next);
+                  reactions.splice(changedDataIndex, 1);
+                  if (changedDataIndex >= reactions.length) {
+                    break;
+                  }
+                  next = reactions[changedDataIndex];
+                }
+                changed = changed.filter((changed2) => changed2 != null);
+                if (changed.length !== 0 && fire != null) {
+                  changed.forEach(async (changed2) => {
+                    fire(RootEventTypes.VALUE_CHANGED, changed2.path, changed2.from, changed2.to);
+                  });
+                }
+              }
+            }
+            reactions.filter((reaction) => ![
+              Reaction.CLEAR_VALUE,
+              Reaction.REPAINT,
+              Reaction.VALUE_CHANGED
+            ].includes(reaction)).forEach((reaction) => {
               fireWrapper && fireWrapper(WrapperEventTypes.UNHANDLED_REACTION_OCCURRED, reaction);
             });
             return ret;
@@ -1796,8 +1823,9 @@ export {
   MonitorNodeAttributes as k,
   Reaction as l,
   N1Logger as m,
-  useBridgeEventBus as n,
-  BridgeToRootEventTypes as o,
+  ExternalDefMismatchIndicator as n,
+  useBridgeEventBus as o,
+  BridgeToRootEventTypes as p,
   registerWidget as r,
   useThrottler as u
 };
