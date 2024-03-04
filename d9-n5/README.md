@@ -15,7 +15,7 @@
 # d9-n5
 
 It is the No.5 project of group `d9`.  
-This project is higher-order widgets for ui configuration, which describe the interfaces, behaviours of underlay widgets.
+This project is WYSIWYG playground.
 
 # Idea
 
