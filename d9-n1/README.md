@@ -377,11 +377,14 @@ complex response behaviors to data changes. Therefore, any response behavior bey
 Data Response (Reaction) does not have a `$default` property because it responds to data changes. In the initial state, there is no data
 change, so a `$default` is not needed.
 
-`d9-n1` defines two standard data response behaviors, referring to `Reaction`. The built-in functions have already made reasonable responses
-to standard response indicators:
+`d9-n1` defines several standard data response behaviors, referring to `Reaction`. The built-in functions have already made reasonable
+responses to standard response indicators:
 
 - `Reaction.REPAINT`: Forces the component to refresh.
 - `Reaction.CLEAR_VALUE`: Clears the property values defined in the component and refreshes the component.
+- `Reaction.VALUE_CHANGED`: Data changes occurred in the reaction, and data change broadcast is needed. If there is a data change flag, the
+  subsequent elements following this flag indicate the changed data in the format `{path: string; from: any; to: any}`. Please note that
+  the `path` here refers to the absolute path.
 
 However, based on the actual widget requirements, there may still be other response indicators. In such cases, the widget
 should be responsible for implementing the corresponding response behaviors by receiving the `WrapperEventTypes.UNHANDLED_REACTION_OCCURRED`
