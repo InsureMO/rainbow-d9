@@ -41,6 +41,9 @@ export const D9EditorPanel = styled.div.attrs({'data-w': 'd9-playground-editor-p
         }
 
         > div.cm-scroller {
+            overflow-x: auto;
+            overflow-y: scroll;
+
             &::-webkit-scrollbar {
                 background-color: transparent;
                 height: ${CssVars.SCROLL_HEIGHT};

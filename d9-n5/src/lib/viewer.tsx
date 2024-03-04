@@ -73,6 +73,12 @@ export const D9Viewer = (props: D9ViewerProps) => {
 		};
 	}, [on, off, replace]);
 
+	if (VUtils.isBlank(content)) {
+		return <D9ViewerWrapper>
+			<ParseError>No configuration.</ParseError>
+		</D9ViewerWrapper>;
+	}
+
 	try {
 		const {node: def} = parseDoc(content);
 		// noinspection JSUnusedGlobalSymbols
