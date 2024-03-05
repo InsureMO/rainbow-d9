@@ -3,7 +3,7 @@ import {ButtonFill, ButtonInk, CssVars, DOM_KEY_WIDGET, UnwrappedButton} from '@
 import React, {MouseEvent, ReactNode, useEffect, useState} from 'react';
 import styled from 'styled-components';
 import {PlaygroundIcons} from './icons';
-import {PlaygroundEventTypes, usePlaygroundEventBus} from './playground-event-bus';
+import {PlaygroundEventTypes, usePlaygroundEventBus, WidgetGroup} from './playground-event-bus';
 import {PlaygroundCssVars} from './widgets';
 
 // noinspection CssUnresolvedCustomProperty
@@ -168,15 +168,24 @@ export const ToolbarButton = (props: { icon: PlaygroundIcons; tooltip?: ReactNod
 	</UnwrappedButton>;
 };
 
-export enum WidgetGroup {
-	CONTAINERS = 'container-group', INPUTS = 'input-group'
-}
-
 export interface PrimaryBarState {
 	zen: boolean;
 	maximized: boolean;
 	group: WidgetGroup;
 }
+
+export interface WidgetButtonGroup {
+	icon: PlaygroundIcons;
+	tooltip: string;
+	group: WidgetGroup;
+}
+
+export const WidgetButtonGroups: Array<WidgetButtonGroup> = [
+	{icon: PlaygroundIcons.CONTAINER_GROUP, tooltip: 'Container', group: WidgetGroup.CONTAINERS},
+	{icon: PlaygroundIcons.INPUT_GROUP, tooltip: 'Input', group: WidgetGroup.INPUTS},
+	{icon: PlaygroundIcons.OPTIONS_GROUP, tooltip: 'Choices', group: WidgetGroup.OPTIONS},
+	{icon: PlaygroundIcons.DISPLAY_GROUP, tooltip: 'Label & Chart', group: WidgetGroup.DISPLAY}
+];
 
 export const PrimaryBar = () => {
 	const {fire} = usePlaygroundEventBus();
@@ -197,6 +206,7 @@ export const PrimaryBar = () => {
 
 	const onGroupClicked = (group: WidgetGroup) => () => {
 		setState(state => ({...state, group}));
+		fire(PlaygroundEventTypes.WIDGET_GROUP_CHANGE, group);
 	};
 	const onMaxClicked = () => {
 		fire(PlaygroundEventTypes.MAXIMIZE);
@@ -216,12 +226,11 @@ export const PrimaryBar = () => {
 	};
 
 	return <PrimaryToolbar>
-		<ToolbarButton icon={PlaygroundIcons.CONTAINER_GROUP} tooltip="Containers"
-		               click={onGroupClicked(WidgetGroup.CONTAINERS)}
-		               data-active={state.group === WidgetGroup.CONTAINERS}/>
-		<ToolbarButton icon={PlaygroundIcons.INPUT_GROUP} tooltip="Inputs"
-		               click={onGroupClicked(WidgetGroup.INPUTS)}
-		               data-active={state.group === WidgetGroup.INPUTS}/>
+		{WidgetButtonGroups.map(({icon, tooltip, group}) => {
+			return <ToolbarButton icon={icon} tooltip={tooltip}
+			                      click={onGroupClicked(group)}
+			                      data-active={state.group === group} key={group}/>;
+		})}
 		<ToolbarSeparator/>
 		{!state.zen && state.maximized
 			? <ToolbarButton icon={PlaygroundIcons.MINIMIZE} tooltip="Quit Maximization" click={onMinClicked}/>
@@ -235,11 +244,80 @@ export const PrimaryBar = () => {
 	</PrimaryToolbar>;
 };
 
+export interface SecondaryBarState {
+	group: WidgetGroup;
+}
+
+export interface WidgetButton {
+	key: string;
+	icon: PlaygroundIcons;
+	tooltip: string;
+}
+
+export const WidgetButtons: Record<WidgetGroup, Array<WidgetButton>> = {
+	[WidgetGroup.CONTAINERS]: [
+		{key: 'Section', icon: PlaygroundIcons.SECTION, tooltip: 'Section'},
+		{key: 'Box', icon: PlaygroundIcons.BOX, tooltip: 'Box'},
+		{key: 'Table', icon: PlaygroundIcons.TABLE, tooltip: 'Table'},
+		{key: 'Tabs', icon: PlaygroundIcons.TABS, tooltip: 'Tabs'},
+		{key: 'Wizard', icon: PlaygroundIcons.WIZARD, tooltip: 'Wizard'},
+		{key: 'Tree', icon: PlaygroundIcons.TREE, tooltip: 'Tree'},
+		{key: 'ButtonBar', icon: PlaygroundIcons.BUTTON_BAR, tooltip: 'Button Bar'}
+	],
+	[WidgetGroup.INPUTS]: [
+		{key: 'Button', icon: PlaygroundIcons.BUTTON, tooltip: 'Button'},
+		{key: 'Link', icon: PlaygroundIcons.LINK, tooltip: 'Hyperlink'},
+		{key: 'Input', icon: PlaygroundIcons.INPUT, tooltip: 'Input'},
+		{key: 'NumberInput', icon: PlaygroundIcons.NUMBER_INPUT, tooltip: 'Number Input'},
+		{key: 'Password', icon: PlaygroundIcons.PASSWORD, tooltip: 'Password'},
+		{key: 'DecoInput', icon: PlaygroundIcons.DECO_INPUT, tooltip: 'Decorable Input'},
+		{key: 'DecoNumber', icon: PlaygroundIcons.DECO_NUMBER, tooltip: 'Decorable Number Input'},
+		{key: 'TextArea', icon: PlaygroundIcons.TEXTAREA, tooltip: 'Textarea'},
+		{key: 'Date', icon: PlaygroundIcons.DATE, tooltip: 'Date Picker'},
+		{key: 'Datetime', icon: PlaygroundIcons.DATETIME, tooltip: 'DateTime Picker'}
+	],
+	[WidgetGroup.OPTIONS]: [
+		{key: 'Dropdown', icon: PlaygroundIcons.DROPDOWN, tooltip: 'Dropdown'},
+		{key: 'MultiDropdown', icon: PlaygroundIcons.MULTI_DROPDOWN, tooltip: 'Multiple Choices'},
+		{key: 'Checkbox', icon: PlaygroundIcons.CHECKBOX, tooltip: 'Checkbox'},
+		{key: 'Checks', icon: PlaygroundIcons.CHECKS, tooltip: 'Checkbox Group'},
+		{key: 'Radio', icon: PlaygroundIcons.RADIO, tooltip: 'Radio Button'},
+		{key: 'Radios', icon: PlaygroundIcons.RADIOS, tooltip: 'Radio Button Group'}
+	],
+	[WidgetGroup.DISPLAY]: [
+		{key: 'Caption', icon: PlaygroundIcons.CAPTION, tooltip: 'Caption'},
+		{key: 'Label', icon: PlaygroundIcons.LABEL, tooltip: 'Label'},
+		{key: 'ChartPie', icon: PlaygroundIcons.CHART_PIE, tooltip: 'Pie Chart'},
+		{key: 'ChartBar', icon: PlaygroundIcons.CHART_BAR, tooltip: 'Bar Chart'},
+		{key: 'ChartLine', icon: PlaygroundIcons.CHART_LINE, tooltip: 'Line Chart'}
+	]
+};
+
+export const SecondaryBar = () => {
+	const {on, off} = usePlaygroundEventBus();
+	const [state, setState] = useState<SecondaryBarState>({
+		group: WidgetGroup.INPUTS
+	});
+	useEffect(() => {
+		const onWidgetGroupChange = (group: WidgetGroup) => {
+			setState(state => ({...state, group}));
+		};
+		on(PlaygroundEventTypes.WIDGET_GROUP_CHANGE, onWidgetGroupChange);
+		return () => {
+			off(PlaygroundEventTypes.WIDGET_GROUP_CHANGE, onWidgetGroupChange);
+		};
+	}, [on, off]);
+
+	return <SecondaryToolbar>
+		{WidgetButtons[state.group].map(({key, icon, tooltip}) => {
+			return <ToolbarButton icon={icon} tooltip={tooltip} click={VUtils.noop} key={key}/>;
+		})}
+	</SecondaryToolbar>;
+};
+
 export const Toolbar = () => {
 	return <ToolbarWrapper>
 		<PrimaryBar/>
-		<SecondaryToolbar>
-
-		</SecondaryToolbar>
+		<SecondaryBar/>
 	</ToolbarWrapper>;
 };

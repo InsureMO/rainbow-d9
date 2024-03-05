@@ -1,11 +1,20 @@
 import {useCreateEventBus} from '@rainbow-d9/n1';
 import React, {createContext, ReactNode, useContext} from 'react';
 
+export enum WidgetGroup {
+	CONTAINERS = 'container-group',
+	INPUTS = 'input-group',
+	OPTIONS = 'options-group',
+	DISPLAY = 'display-group'
+}
+
 export enum PlaygroundEventTypes {
 	MAXIMIZE = 'maximize',
 	QUIT_MAXIMIZE = 'quit-maximize',
 	ZEN = 'zen',
 	QUIT_ZEN = 'quit-zen',
+	WIDGET_GROUP_CHANGE = 'widget-group-change',
+
 	CONTENT_INITIALIZED = 'content-initialized',
 	CONTENT_CHANGED = 'content-changed',
 }
@@ -34,6 +43,12 @@ export interface PlaygroundEventBus {
 	on(type: PlaygroundEventTypes.QUIT_ZEN, listener: () => void): this;
 
 	off(type: PlaygroundEventTypes.QUIT_ZEN, listener: () => void): this;
+
+	fire(type: PlaygroundEventTypes.WIDGET_GROUP_CHANGE, group: WidgetGroup): this;
+
+	on(type: PlaygroundEventTypes.WIDGET_GROUP_CHANGE, listener: (group: WidgetGroup) => void): this;
+
+	off(type: PlaygroundEventTypes.WIDGET_GROUP_CHANGE, listener: (group: WidgetGroup) => void): this;
 
 	fire(type: PlaygroundEventTypes.CONTENT_INITIALIZED, content?: string): this;
 
