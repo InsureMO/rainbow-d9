@@ -1,10 +1,11 @@
+import {DOM_KEY_WIDGET} from '@rainbow-d9/n2';
 import React from 'react';
 import styled from 'styled-components';
 
 // noinspection CssUnresolvedCustomProperty
-export const D9HelpWrapper = styled.div.attrs(() => {
+export const HelpWrapper = styled.div.attrs(() => {
 	return {
-		'data-w': 'd9-playground-help',
+		[DOM_KEY_WIDGET]: 'd9-playground-help',
 		style: {}
 	};
 })`
@@ -16,5 +17,5 @@ export const D9HelpWrapper = styled.div.attrs(() => {
 `;
 
 export const Help = () => {
-	return <D9HelpWrapper/>;
+	return <HelpWrapper/>;
 };

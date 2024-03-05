@@ -5,16 +5,17 @@ import {
 	useThrottler,
 	VUtils
 } from '@rainbow-d9/n1';
+import {DOM_KEY_WIDGET} from '@rainbow-d9/n2';
 import {parseDoc} from '@rainbow-d9/n3';
 import React, {useEffect, useState} from 'react';
 import styled from 'styled-components';
 import {PlaygroundEventTypes, usePlaygroundEventBus} from './playground-event-bus';
-import {D9ViewerProps} from './types';
+import {ViewerProps} from './types';
 
 // noinspection CssUnresolvedCustomProperty
-export const D9ViewerWrapper = styled.div.attrs(() => {
+export const ViewerWrapper = styled.div.attrs(() => {
 	return {
-		'data-w': 'd9-playground-viewer',
+		[DOM_KEY_WIDGET]: 'd9-playground-viewer',
 		style: {}
 	};
 })`
@@ -29,7 +30,7 @@ export const D9ViewerWrapper = styled.div.attrs(() => {
         margin: 16px;
     }
 `;
-export const ParseError = styled.div.attrs({'data-w': 'd9-playground-viewer-error'})`
+export const ParseError = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-playground-viewer-error'})`
     display: flex;
     position: relative;
     align-items: center;
@@ -54,7 +55,7 @@ const clearExternalDefs = (opts: any) => {
 	}
 };
 
-export const D9Viewer = (props: D9ViewerProps) => {
+export const Viewer = (props: ViewerProps) => {
 	const {mockData, externalDefs} = props;
 
 	const {on, off} = usePlaygroundEventBus();
@@ -76,9 +77,9 @@ export const D9Viewer = (props: D9ViewerProps) => {
 	}, [on, off, replace]);
 
 	if (VUtils.isBlank(content)) {
-		return <D9ViewerWrapper>
+		return <ViewerWrapper>
 			<ParseError>No configuration.</ParseError>
-		</D9ViewerWrapper>;
+		</ViewerWrapper>;
 	}
 
 	try {
@@ -90,12 +91,12 @@ export const D9Viewer = (props: D9ViewerProps) => {
 			},
 			...(externalDefs ?? {})
 		};
-		return <D9ViewerWrapper>
+		return <ViewerWrapper>
 			<StandaloneRoot {...def} $root={mockData} externalDefs={enhancedExternalDefs}/>
-		</D9ViewerWrapper>;
+		</ViewerWrapper>;
 	} catch (error) {
-		return <D9ViewerWrapper>
+		return <ViewerWrapper>
 			<ParseError>{(error as Error).message || 'Parse error occurred.'}</ParseError>
-		</D9ViewerWrapper>;
+		</ViewerWrapper>;
 	}
 };

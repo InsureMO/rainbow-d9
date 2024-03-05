@@ -2,11 +2,39 @@ import {useCreateEventBus} from '@rainbow-d9/n1';
 import React, {createContext, ReactNode, useContext} from 'react';
 
 export enum PlaygroundEventTypes {
+	MAXIMIZE = 'maximize',
+	QUIT_MAXIMIZE = 'quit-maximize',
+	ZEN = 'zen',
+	QUIT_ZEN = 'quit-zen',
 	CONTENT_INITIALIZED = 'content-initialized',
 	CONTENT_CHANGED = 'content-changed',
 }
 
 export interface PlaygroundEventBus {
+	fire(type: PlaygroundEventTypes.MAXIMIZE): this;
+
+	on(type: PlaygroundEventTypes.MAXIMIZE, listener: () => void): this;
+
+	off(type: PlaygroundEventTypes.MAXIMIZE, listener: () => void): this;
+
+	fire(type: PlaygroundEventTypes.QUIT_MAXIMIZE): this;
+
+	on(type: PlaygroundEventTypes.QUIT_MAXIMIZE, listener: () => void): this;
+
+	off(type: PlaygroundEventTypes.QUIT_MAXIMIZE, listener: () => void): this;
+
+	fire(type: PlaygroundEventTypes.ZEN): this;
+
+	on(type: PlaygroundEventTypes.ZEN, listener: () => void): this;
+
+	off(type: PlaygroundEventTypes.ZEN, listener: () => void): this;
+
+	fire(type: PlaygroundEventTypes.QUIT_ZEN): this;
+
+	on(type: PlaygroundEventTypes.QUIT_ZEN, listener: () => void): this;
+
+	off(type: PlaygroundEventTypes.QUIT_ZEN, listener: () => void): this;
+
 	fire(type: PlaygroundEventTypes.CONTENT_INITIALIZED, content?: string): this;
 
 	on(type: PlaygroundEventTypes.CONTENT_INITIALIZED, listener: (content?: string) => void): this;

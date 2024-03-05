@@ -612,7 +612,7 @@ use `SpecificWidgetTranslator#shouldTranslateLabelAttribute` to avoid default pa
 	- all above syntax, connected by `,`,
 - `regex` or `regexp`: syntax as below,
 	- `regex: ^\d+$`: presents a regex pattern,
-	- multiple patterns connected by `;`.
+	- multiple patterns connected by `,`.
 
 Some examples:
 

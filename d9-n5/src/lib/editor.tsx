@@ -1,21 +1,21 @@
 import {markdown} from '@codemirror/lang-markdown';
 import {defaultHighlightStyle, syntaxHighlighting} from '@codemirror/language';
-import {EditorState} from '@codemirror/state';
+import {EditorState as CodeMirrorState} from '@codemirror/state';
 import {EditorView, lineNumbers, ViewUpdate} from '@codemirror/view';
-import {CssVars} from '@rainbow-d9/n2';
+import {CssVars, DOM_KEY_WIDGET} from '@rainbow-d9/n2';
 import React, {useEffect, useRef, useState} from 'react';
 import styled from 'styled-components';
 import {PlaygroundEventTypes, usePlaygroundEventBus} from './playground-event-bus';
-import {D9EditorProps} from './types';
+import {EditorProps} from './types';
 
-export interface D9EditorState {
+export interface EditorState {
 	editor?: EditorView;
 }
 
 // noinspection CssUnresolvedCustomProperty
-export const D9EditorWrapper = styled.div.attrs(() => {
+export const EditorWrapper = styled.div.attrs(() => {
 	return {
-		'data-w': 'd9-playground-editor',
+		[DOM_KEY_WIDGET]: 'd9-playground-editor',
 		style: {}
 	};
 })`
@@ -27,7 +27,7 @@ export const D9EditorWrapper = styled.div.attrs(() => {
     overflow: hidden;
 `;
 
-export const D9EditorPanel = styled.div.attrs({'data-w': 'd9-playground-editor-panel'})`
+export const EditorPanel = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-playground-editor-panel'})`
     display: block;
     position: relative;
     width: 100%;
@@ -64,7 +64,7 @@ export const D9EditorPanel = styled.div.attrs({'data-w': 'd9-playground-editor-p
     }
 `;
 
-export const D9Editor = (props: D9EditorProps) => {
+export const Editor = (props: EditorProps) => {
 	const {
 		content,
 		// eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -75,14 +75,14 @@ export const D9Editor = (props: D9EditorProps) => {
 	const ref = useRef<HTMLDivElement>(null);
 	const contentRef = useRef<string>(content ?? '');
 	const {fire} = usePlaygroundEventBus();
-	const [state, setState] = useState<D9EditorState>({});
+	const [state, setState] = useState<EditorState>({});
 	useEffect(() => {
 		if (ref.current == null) {
 			return;
 		}
 
 		const editor = new EditorView({
-			state: EditorState.create({
+			state: CodeMirrorState.create({
 				doc: '',
 				extensions: [
 					lineNumbers({}),
@@ -117,7 +117,7 @@ export const D9Editor = (props: D9EditorProps) => {
 		fire(PlaygroundEventTypes.CONTENT_INITIALIZED, contentRef.current);
 	}, [fire, state.editor]);
 
-	return <D9EditorWrapper {...rest}>
-		<D9EditorPanel ref={ref}/>
-	</D9EditorWrapper>;
+	return <EditorWrapper {...rest}>
+		<EditorPanel ref={ref}/>
+	</EditorWrapper>;
 };

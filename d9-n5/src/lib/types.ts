@@ -25,7 +25,7 @@ export interface ExternalDefsTypes {
 }
 
 /** configuration definition */
-export type D9PlaygroundDef = ValueChangeableNodeDef & OmitHTMLProps<HTMLDivElement> & {
+export type PlaygroundDef = ValueChangeableNodeDef & OmitHTMLProps<HTMLDivElement> & {
 	mockData?: BaseModel | (() => Promise<BaseModel>);
 	externalDefs?: ExternalDefs | (() => Promise<ExternalDefs>);
 	/** in case of external defs has proxy property */
@@ -33,21 +33,21 @@ export type D9PlaygroundDef = ValueChangeableNodeDef & OmitHTMLProps<HTMLDivElem
 };
 
 /** widget definition, with html attributes */
-export type D9PlaygroundProps = OmitNodeDef<D9PlaygroundDef> & WidgetProps;
+export type PlaygroundProps = OmitNodeDef<PlaygroundDef> & WidgetProps;
 
-export interface D9EditorProps {
+export interface EditorProps {
 	content?: string;
 	externalDefsTypes?: ExternalDefsTypes;
 }
 
-export interface D9ViewerProps {
+export interface ViewerProps {
 	mockData: BaseModel;
 	externalDefs?: ExternalDefs;
 }
 
 /** Section configuration definition */
 export type UnwrappedPlaygroundProps =
-	Omit<D9PlaygroundProps, 'valueChanged' | '$wrapped' | keyof MonitorNodeDef>
+	Omit<PlaygroundProps, 'valueChanged' | '$wrapped' | keyof MonitorNodeDef>
 	& {
 	onValueChange?: (value?: string) => void;
 	visible?: boolean;

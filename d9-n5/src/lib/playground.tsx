@@ -1,19 +1,20 @@
 import {BaseModel, ExternalDefs, MUtils, NodeAttributeValues, PPUtils, PropValue, VUtils} from '@rainbow-d9/n1';
-import {CssVars, useGlobalHandlers} from '@rainbow-d9/n2';
-import React, {ForwardedRef, forwardRef, useEffect, useRef, useState} from 'react';
+import {CssVars, DOM_KEY_WIDGET, useGlobalHandlers} from '@rainbow-d9/n2';
+import React, {useEffect, useRef, useState} from 'react';
 import styled from 'styled-components';
-import {D9Editor} from './editor';
+import {Editor} from './editor';
 import {Help} from './help';
 import {PlaygroundBridge} from './playground-bridge';
-import {PlaygroundEventBusProvider} from './playground-event-bus';
-import {D9Toolbar} from './toolbar';
-import {D9PlaygroundProps, ExternalDefsTypes, UnwrappedPlaygroundProps} from './types';
-import {D9Viewer} from './viewer';
+import {PlaygroundEventBusProvider, PlaygroundEventTypes, usePlaygroundEventBus} from './playground-event-bus';
+import {Toolbar} from './toolbar';
+import {ExternalDefsTypes, PlaygroundProps, UnwrappedPlaygroundProps} from './types';
+import {Viewer} from './viewer';
+import {PlaygroundCssVars} from './widgets';
 
 // noinspection CssUnresolvedCustomProperty
-export const D9PlaygroundWrapper = styled.div.attrs(() => {
+export const PlaygroundWrapper = styled.div.attrs(() => {
 	return {
-		'data-w': 'd9-playground',
+		[DOM_KEY_WIDGET]: 'd9-playground',
 		style: {
 			'--height': '500px',
 			'--grid-columns': 'auto min(400px, 40%) 1fr',
@@ -33,6 +34,18 @@ export const D9PlaygroundWrapper = styled.div.attrs(() => {
     border-radius: ${CssVars.BORDER_RADIUS};
     overflow: hidden;
 
+    &[data-maximized=true]:not([data-visible=false]) {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background-color: ${CssVars.BACKGROUND_COLOR};
+        border: 0;
+        border-radius: 0;
+        z-index: ${PlaygroundCssVars.Z_INDEX};
+    }
+
     &[data-visible=false] {
         display: none;
     }
@@ -40,9 +53,10 @@ export const D9PlaygroundWrapper = styled.div.attrs(() => {
 
 export interface PlaygroundState {
 	initialized: boolean;
+	maximized: boolean;
 }
 
-export const PlaygroundDelegate = forwardRef((props: D9PlaygroundProps, ref: ForwardedRef<HTMLDivElement>) => {
+export const PlaygroundDelegate = (props: PlaygroundProps) => {
 	const {
 		$pp, $wrapped,
 		mockData,
@@ -51,11 +65,15 @@ export const PlaygroundDelegate = forwardRef((props: D9PlaygroundProps, ref: For
 	} = props;
 	const {$p2r, $onValueChange, $avs: {$disabled, $visible}} = $wrapped;
 
+	const {on, off} = usePlaygroundEventBus();
+	const ref = useRef<HTMLDivElement>(null);
 	const mockDataRef = useRef<BaseModel>(null);
 	const externalDefRef = useRef<ExternalDefs>(null);
 	const externalDefsTypesRef = useRef<ExternalDefsTypes>(null);
 	const globalHandlers = useGlobalHandlers();
-	const [state, setState] = useState<PlaygroundState>({initialized: false});
+	const [state, setState] = useState<PlaygroundState>({
+		initialized: false, maximized: false
+	});
 	useEffect(() => {
 		if (state.initialized) {
 			return;
@@ -80,9 +98,38 @@ export const PlaygroundDelegate = forwardRef((props: D9PlaygroundProps, ref: For
 			mockDataRef.current = mock;
 			externalDefRef.current = defs;
 			externalDefsTypesRef.current = types;
-			setState({initialized: true});
+			setState(state => ({...state, initialized: true}));
 		})();
 	}, [state.initialized, mockData, externalDefs, externalDefsTypes]);
+	useEffect(() => {
+		const onMaximize = () => setState(state => ({...state, maximized: true}));
+		const onQuitMaximize = () => setState(state => ({...state, maximized: false}));
+		const onZen = () => {
+			document.documentElement.requestFullscreen && document.documentElement.requestFullscreen({navigationUI: 'hide'});
+			onMaximize();
+		};
+		const onQuitZen = () => {
+			onQuitMaximize();
+			document.exitFullscreen && document.exitFullscreen();
+		};
+		const onFullScreenChanged = () => {
+			if (document.fullscreenElement == null) {
+				onQuitMaximize();
+			}
+		};
+		window.addEventListener('fullscreenchange', onFullScreenChanged);
+		on(PlaygroundEventTypes.MAXIMIZE, onMaximize);
+		on(PlaygroundEventTypes.QUIT_MAXIMIZE, onQuitMaximize);
+		on(PlaygroundEventTypes.ZEN, onZen);
+		on(PlaygroundEventTypes.QUIT_ZEN, onQuitZen);
+		return () => {
+			window.removeEventListener('fullscreenchange', onFullScreenChanged);
+			off(PlaygroundEventTypes.MAXIMIZE, onMaximize);
+			off(PlaygroundEventTypes.QUIT_MAXIMIZE, onQuitMaximize);
+			off(PlaygroundEventTypes.ZEN, onZen);
+			off(PlaygroundEventTypes.QUIT_ZEN, onQuitZen);
+		};
+	}, [on, off]);
 
 	if (!state.initialized) {
 		return null;
@@ -93,24 +140,25 @@ export const PlaygroundDelegate = forwardRef((props: D9PlaygroundProps, ref: For
 	};
 	const content = MUtils.getValue($wrapped.$model, $pp) as unknown as string;
 
-	return <D9PlaygroundWrapper {...rest} data-disabled={$disabled} data-visible={$visible}
-	                            id={PPUtils.asId(PPUtils.absolute($p2r, $pp), props.id)}
-	                            ref={ref}>
+	return <PlaygroundWrapper {...rest} data-disabled={$disabled} data-visible={$visible}
+	                          data-maximized={state.maximized}
+	                          id={PPUtils.asId(PPUtils.absolute($p2r, $pp), props.id)}
+	                          ref={ref}>
 		<PlaygroundBridge onContentChanged={onContentChanged}/>
-		<D9Toolbar/>
-		<D9Editor content={content} externalDefsTypes={externalDefsTypesRef.current}/>
+		<Toolbar/>
+		<Editor content={content} externalDefsTypes={externalDefsTypesRef.current}/>
 		<Help/>
-		<D9Viewer mockData={mockDataRef.current!} externalDefs={externalDefRef.current}/>
-	</D9PlaygroundWrapper>;
-});
+		<Viewer mockData={mockDataRef.current!} externalDefs={externalDefRef.current}/>
+	</PlaygroundWrapper>;
+};
 
-export const D9Playground = forwardRef((props: D9PlaygroundProps, ref: ForwardedRef<HTMLDivElement>) => {
+export const Playground = (props: PlaygroundProps) => {
 	return <PlaygroundEventBusProvider>
-		<PlaygroundDelegate {...props} ref={ref}/>
+		<PlaygroundDelegate {...props}/>
 	</PlaygroundEventBusProvider>;
-});
+};
 
-export const UnwrappedD9Playground = forwardRef((props: UnwrappedPlaygroundProps, ref: ForwardedRef<HTMLDivElement>) => {
+export const UnwrappedPlayground = (props: UnwrappedPlaygroundProps) => {
 	const {disabled, visible, onValueChange, ...rest} = props;
 
 	const $onValueChange = (content?: PropValue) => {
@@ -119,8 +167,7 @@ export const UnwrappedD9Playground = forwardRef((props: UnwrappedPlaygroundProps
 	const $avs = {$disabled: disabled, $visible: visible} as NodeAttributeValues;
 	const $root = {};
 
-	return <D9Playground {...rest}
-	                     $wrapped={{$onValueChange, $avs, $root, $model: $root, $p2r: '.'}}
-	                     id={rest.id ?? VUtils.generateUniqueId()}
-	                     ref={ref}/>;
-});
+	return <Playground {...rest}
+	                   $wrapped={{$onValueChange, $avs, $root, $model: $root, $p2r: '.'}}
+	                   id={rest.id ?? VUtils.generateUniqueId()}/>;
+};
