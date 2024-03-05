@@ -1,9 +1,9 @@
 import React, {Fragment, useEffect} from 'react';
 import {PlaygroundEventTypes, usePlaygroundEventBus} from './playground-event-bus';
-import {D9PlaygroundProps} from './types';
+import {OnContentChanged} from './types';
 
-export interface PlaygroundBridgeProps extends Pick<D9PlaygroundProps, 'onContentChanged'> {
-
+export interface PlaygroundBridgeProps {
+	onContentChanged: OnContentChanged;
 }
 
 export const PlaygroundBridge = (props: PlaygroundBridgeProps) => {

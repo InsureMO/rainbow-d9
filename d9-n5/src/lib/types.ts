@@ -1,4 +1,13 @@
-import {BaseModel, ExternalDefKey, ExternalDefs, WidgetType} from '@rainbow-d9/n1';
+import {
+	BaseModel,
+	ExternalDefKey,
+	ExternalDefs,
+	MonitorNodeDef,
+	ValueChangeableNodeDef,
+	WidgetProps,
+	WidgetType
+} from '@rainbow-d9/n1';
+import {OmitHTMLProps, OmitNodeDef} from '@rainbow-d9/n2';
 
 export type OnContentChanged = (content?: string) => Promise<void>;
 
@@ -15,21 +24,32 @@ export interface ExternalDefsTypes {
 	[key: ExternalDefKey]: ExternalDefType | Array<ExternalDefType> | ExternalDefsTypes;
 }
 
-export interface D9PlaygroundProps {
-	content?: string;
-	/** in case of markdown need to be handled externally */
-	onContentChanged?: OnContentChanged;
-	/** mock data */
-	model?: BaseModel;
-	externalDefs?: ExternalDefs;
+/** configuration definition */
+export type D9PlaygroundDef = ValueChangeableNodeDef & OmitHTMLProps<HTMLDivElement> & {
+	mockData?: BaseModel | (() => Promise<BaseModel>);
+	externalDefs?: ExternalDefs | (() => Promise<ExternalDefs>);
 	/** in case of external defs has proxy property */
+	externalDefsTypes?: ExternalDefsTypes | (() => Promise<ExternalDefsTypes>);
+};
+
+/** widget definition, with html attributes */
+export type D9PlaygroundProps = OmitNodeDef<D9PlaygroundDef> & WidgetProps;
+
+export interface D9EditorProps {
+	content?: string;
 	externalDefsTypes?: ExternalDefsTypes;
 }
 
-export interface D9EditorProps extends Pick<D9PlaygroundProps, 'content' | 'externalDefsTypes'> {
+export interface D9ViewerProps {
+	mockData: BaseModel;
+	externalDefs?: ExternalDefs;
 }
 
-export interface D9ViewerProps extends Pick<D9PlaygroundProps, 'externalDefs'> {
-	/** mock data */
-	model: BaseModel;
-}
+/** Section configuration definition */
+export type UnwrappedPlaygroundProps =
+	Omit<D9PlaygroundProps, 'valueChanged' | '$wrapped' | keyof MonitorNodeDef>
+	& {
+	onValueChange?: (value?: string) => void;
+	visible?: boolean;
+	disabled?: boolean;
+};

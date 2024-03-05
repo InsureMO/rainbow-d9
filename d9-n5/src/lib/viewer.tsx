@@ -21,6 +21,8 @@ export const D9ViewerWrapper = styled.div.attrs(() => {
     display: block;
     position: relative;
     align-self: stretch;
+    grid-column: 3;
+    grid-row: 1 / span 2;
     overflow: auto;
 
     > div[data-w=d9-page] {
@@ -53,7 +55,7 @@ const clearExternalDefs = (opts: any) => {
 };
 
 export const D9Viewer = (props: D9ViewerProps) => {
-	const {model, externalDefs} = props;
+	const {mockData, externalDefs} = props;
 
 	const {on, off} = usePlaygroundEventBus();
 	const {replace} = useThrottler();
@@ -89,7 +91,7 @@ export const D9Viewer = (props: D9ViewerProps) => {
 			...(externalDefs ?? {})
 		};
 		return <D9ViewerWrapper>
-			<StandaloneRoot {...def} $root={model} externalDefs={enhancedExternalDefs}/>
+			<StandaloneRoot {...def} $root={mockData} externalDefs={enhancedExternalDefs}/>
 		</D9ViewerWrapper>;
 	} catch (error) {
 		return <D9ViewerWrapper>

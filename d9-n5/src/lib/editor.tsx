@@ -21,8 +21,9 @@ export const D9EditorWrapper = styled.div.attrs(() => {
 })`
     display: grid;
     position: relative;
-    grid-template-columns: 1fr;
     align-self: stretch;
+    grid-column: 2;
+    grid-template-columns: 1fr;
     overflow: hidden;
 `;
 

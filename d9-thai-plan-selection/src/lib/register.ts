@@ -1,14 +1,14 @@
 import {NodeDef, registerWidget, VUtils} from '@rainbow-d9/n1';
-import {Widget} from '@rainbow-d9/n3';
+import {AsyncFunction, Widget} from '@rainbow-d9/n3';
 import {PlanSelection} from './plan-selection';
 import {PlanSelectionDef} from './types';
 
 export const PlanSelectionDefsBuild = Widget.createSnippetBuild<PlanSelectionDef, 'defs', PlanSelectionDef['defs']>(
-	'defs', (parsed: string) => new Function('options', parsed) as PlanSelectionDef['defs']);
+	'defs', (parsed: string) => new AsyncFunction('options', parsed) as PlanSelectionDef['defs']);
 export const PlanSelectionValuesInitBuild = Widget.createSnippetBuild<PlanSelectionDef, 'valuesInit', PlanSelectionDef['valuesInit']>(
-	'valuesInit', (parsed: string) => new Function('options', parsed) as PlanSelectionDef['valuesInit']);
+	'valuesInit', (parsed: string) => new AsyncFunction('options', parsed) as PlanSelectionDef['valuesInit']);
 export const PlanSelectionValuesClearBuild = Widget.createSnippetBuild<PlanSelectionDef, 'valuesClear', PlanSelectionDef['valuesClear']>(
-	'valuesClear', (parsed: string) => new Function('options', parsed) as PlanSelectionDef['valuesClear']);
+	'valuesClear', (parsed: string) => new AsyncFunction('options', parsed) as PlanSelectionDef['valuesClear']);
 export const PlanSelectionTitleBuild = Widget.createSnippetBuild<PlanSelectionDef, 'planTitle', PlanSelectionDef['planTitle']>(
 	'planTitle', (parsed: string) => new Function('def', 'elementValueChanged', parsed) as PlanSelectionDef['planTitle']);
 export const PlanSelectionSubTitleBuild = Widget.createSnippetBuild<PlanSelectionDef, 'planSubTitle', PlanSelectionDef['planSubTitle']>(
@@ -26,7 +26,7 @@ export const PlanSelectionElementNumberValueValidatorBuild = Widget.createSnippe
 export const PlanSelectionPlanOperatorsBuild = Widget.createSnippetBuild<PlanSelectionDef, 'planOperators', PlanSelectionDef['planOperators']>(
 	'planOperators', (parsed: string) => new Function('def', 'plan', parsed) as PlanSelectionDef['planOperators']);
 export const PlanSelectionCalculateBuild = Widget.createSnippetBuild<PlanSelectionDef, 'calculate', PlanSelectionDef['calculate']>(
-	'calculate', (parsed: string) => new Function('event', parsed) as PlanSelectionDef['calculate']);
+	'calculate', (parsed: string) => new AsyncFunction('event', parsed) as PlanSelectionDef['calculate']);
 
 export abstract class AbstractPlanSelectionTranslator extends Widget.SpecificWidgetTranslator<string> {
 	public beautifyProperties<Def extends NodeDef>(def: Partial<Def>): Def {

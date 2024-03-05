@@ -1,4 +1,5 @@
 export * from './types';
+export * from './utils';
 export * from './node-types';
 export * from '@rainbow-d9/n1';
 export * from './node-types';
