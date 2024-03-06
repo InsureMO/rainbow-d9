@@ -2,9 +2,9 @@ import {VUtils} from '@rainbow-d9/n1';
 import {ButtonFill, ButtonInk, CssVars, DOM_KEY_WIDGET, UnwrappedButton} from '@rainbow-d9/n2';
 import React, {MouseEvent, ReactNode, useEffect, useState} from 'react';
 import styled from 'styled-components';
-import {PlaygroundIcons} from './icons';
-import {PlaygroundEventTypes, usePlaygroundEventBus, WidgetGroup} from './playground-event-bus';
-import {PlaygroundCssVars} from './widgets';
+import {PlaygroundIcons} from '../icons';
+import {PlaygroundEventTypes, usePlaygroundEventBus, WidgetGroup} from '../playground-event-bus';
+import {PlaygroundCssVars} from '../widgets';
 
 // noinspection CssUnresolvedCustomProperty
 export const ToolbarWrapper = styled.div.attrs(() => {

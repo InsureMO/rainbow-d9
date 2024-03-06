@@ -9,8 +9,8 @@ import {DOM_KEY_WIDGET} from '@rainbow-d9/n2';
 import {parseDoc} from '@rainbow-d9/n3';
 import React, {useEffect, useState} from 'react';
 import styled from 'styled-components';
-import {PlaygroundEventTypes, usePlaygroundEventBus} from './playground-event-bus';
-import {ViewerProps} from './types';
+import {PlaygroundEventTypes, usePlaygroundEventBus} from '../playground-event-bus';
+import {ViewerProps} from '../types';
 
 // noinspection CssUnresolvedCustomProperty
 export const ViewerWrapper = styled.div.attrs(() => {

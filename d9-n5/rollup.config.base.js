@@ -29,7 +29,7 @@ export const buildConfig = (lint) => {
 		external: [
 			'react', 'react-dom', 'styled-components',
 			'nanoid',
-			'@codemirror/view', '@codemirror/state',
+			'codemirror', '@codemirror/view', '@codemirror/state', '@codemirror/commands',
 			'@codemirror/language', '@codemirror/lang-markdown',
 			'@rainbow-d9/n1', '@rainbow-d9/n2', '@rainbow-d9/n3'
 		]
