@@ -32,7 +32,7 @@ export interface ParsedListItemTitle {
 }
 
 export class ListParser extends AbstractSemanticNodeWidgetParser<'list'> {
-	public static readonly WIDGET_TITLE_FLAG_MATCHER = /^(.*?)(::IGNORE)?$/;
+	public static readonly WIDGET_TITLE_FLAG_MATCHERS = [ListParser.TAILING_IGNORE_FLAG];
 	public static readonly REF_WIDGET_MATCHER = /^(REF|Ref|ref)\.(.*)$/;
 	public static readonly ATTRIBUTE_MATCHER = /^([^:]+):(.*)$/;
 	public static readonly TYPE: List['type'] = 'list';
@@ -103,16 +103,18 @@ export class ListParser extends AbstractSemanticNodeWidgetParser<'list'> {
 		}, {title: [], content: [], paragraph} as ParsedListItemFirstNode);
 	}
 
-	protected getTitleFlagMatcher(): RegExp {
-		return ListParser.WIDGET_TITLE_FLAG_MATCHER;
+	protected getTitleFlagMatchers(): Array<string> {
+		return ListParser.WIDGET_TITLE_FLAG_MATCHERS;
 	}
 
 	protected parseTitle(title: string): ParsedListItemTitle {
-		const match = title.match(this.getTitleFlagMatcher());
-		if (match == null) {
+		const str = (title ?? '').trim();
+		const matches = this.getTitleFlagMatchers().find(matcher => str.endsWith(matcher));
+		if (matches == null) {
 			return {title, $flag: WidgetFlag.STANDARD};
 		} else {
-			return {title: match[1], $flag: this.asWidgetFlag(match[2])};
+			const index = title.indexOf(matches);
+			return {title: title.substring(0, index), $flag: this.asWidgetFlag(matches)};
 		}
 	}
 

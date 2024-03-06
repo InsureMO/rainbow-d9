@@ -18,7 +18,7 @@ export type ParsedHeadingTitle = {
 };
 
 export class HeadingParser extends AbstractSemanticNodeWidgetParser<'heading'> {
-	public static readonly WIDGET_TITLE_FLAG_MATCHER = /^(.*?)(::IGNORE|::EXPORT)?$/;
+	public static readonly WIDGET_TITLE_FLAG_MATCHERS = [HeadingParser.TAILING_IGNORE_FLAG, HeadingParser.TAILING_EXPORT_FLAG];
 	public static readonly TYPE: Heading['type'] = 'heading';
 
 	public getSupportedType(): 'heading' {
@@ -30,8 +30,8 @@ export class HeadingParser extends AbstractSemanticNodeWidgetParser<'heading'> {
 		return heading as ParsedHeadingReserved;
 	}
 
-	protected getTitleFlagMatcher(): RegExp {
-		return HeadingParser.WIDGET_TITLE_FLAG_MATCHER;
+	protected getTitleFlagMatchers(): Array<string> {
+		return HeadingParser.WIDGET_TITLE_FLAG_MATCHERS;
 	}
 
 	protected findIgnoreFlag(node: ParsedHeadingIdentified): boolean {
@@ -61,11 +61,13 @@ export class HeadingParser extends AbstractSemanticNodeWidgetParser<'heading'> {
 	}
 
 	protected parseTitle(title: string): ParsedHeadingTitle {
-		const match = title.match(this.getTitleFlagMatcher());
-		if (match == null) {
+		const str = (title ?? '').trim();
+		const matches = this.getTitleFlagMatchers().find(matcher => str.endsWith(matcher));
+		if (matches == null) {
 			return {title, $flag: WidgetFlag.STANDARD};
 		} else {
-			return {title: match[1], $flag: this.asWidgetFlag(match[2])};
+			const index = title.indexOf(matches);
+			return {title: title.substring(0, index), $flag: this.asWidgetFlag(matches)};
 		}
 	}
 
