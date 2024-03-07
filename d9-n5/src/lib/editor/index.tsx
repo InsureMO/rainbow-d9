@@ -1,10 +1,12 @@
 import {indentWithTab} from '@codemirror/commands';
+import {markdown, markdownLanguage} from '@codemirror/lang-markdown';
 import {EditorState as CodeMirrorState} from '@codemirror/state';
 import {EditorView, keymap, ViewUpdate} from '@codemirror/view';
 import {basicSetup} from 'codemirror';
 import React, {useEffect, useRef, useState} from 'react';
 import {PlaygroundEventTypes, usePlaygroundEventBus} from '../playground-event-bus';
 import {EditorProps} from '../types';
+import {d9mlExtensions, d9mlHighlightStyle} from './widget-declaration';
 import {EditorPanel, EditorWrapper} from './widgets';
 
 export interface EditorState {
@@ -37,8 +39,10 @@ export const Editor = (props: EditorProps) => {
 					// EditorView.lineWrapping,
 					// CodeMirrorState.tabSize.of(2),
 					keymap.of([indentWithTab]),
-					// syntaxHighlighting(defaultHighlightStyle, {fallback: true}),
-					// markdown({addKeymap: false}), // markdown support
+					d9mlHighlightStyle,
+					markdown({
+						base: markdownLanguage, extensions: [d9mlExtensions]
+					}),
 					// WidgetDeclarations,
 					// oneDark,
 					EditorView.updateListener.of((view: ViewUpdate) => {

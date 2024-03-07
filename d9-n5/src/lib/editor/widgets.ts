@@ -1,6 +1,5 @@
 import {CssVars, DOM_KEY_WIDGET} from '@rainbow-d9/n2';
 import styled from 'styled-components';
-import {PlaygroundCssVars} from '../widgets';
 
 export const EditorWrapper = styled.div.attrs(() => {
 	return {
@@ -15,6 +14,7 @@ export const EditorWrapper = styled.div.attrs(() => {
     grid-template-columns: 1fr;
     overflow: hidden;
 `;
+// noinspection CssUnusedSymbol
 export const EditorPanel = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-playground-editor-panel'})`
     display: block;
     position: relative;
@@ -51,65 +51,76 @@ export const EditorPanel = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-playground-ed
         }
 
         div.cm-line {
-            span.cm-widget-declaration {
-                > span.cm-widget-declaration-symbol {
-                    font-size: ${PlaygroundCssVars.WIDGET_DECLARATION_FONT_SIZE_H6};
+            > span.d9-playground-editor-heading:first-child {
+                color: rgb(134, 54, 153);
+                font-weight: 900;
+                font-size: 20px;
+            }
 
-                    &.cm-widget-declaration-symbol-1 {
-                        font-size: ${PlaygroundCssVars.WIDGET_DECLARATION_FONT_SIZE_H1};
+            > span.d9-playground-editor-list:first-child {
+                color: rgb(134, 54, 153);
+                font-weight: 600;
+                font-size: 18px;
+            }
 
-                        & ~ span.cm-widget-declaration-type {
-                            font-size: ${PlaygroundCssVars.WIDGET_DECLARATION_TYPE_FONT_SIZE_H1};
-                        }
-                    }
+            span.d9-playground-editor-heading:not(:first-child),
+            span.d9-playground-editor-list:not(:first-child) {
+                &:after {
+                    display: inline-flex;
+                    position: relative;
+                    align-items: center;
+                    justify-content: center;
+                    margin-left: 2px;
+                    font-weight: 600;
+                    font-variant: petite-caps;
+                    color: white;
+                    border-radius: 4px;
+                    height: 16px;
+                    padding: 0 3px;
+                }
 
-                    &.cm-widget-declaration-symbol-2 {
-                        font-size: ${PlaygroundCssVars.WIDGET_DECLARATION_FONT_SIZE_H2};
+                &.d9-playground-editor-widget-declaration-type {
+                    color: rgb(134, 54, 153);
 
-                        & ~ span.cm-widget-declaration-type {
-                            font-size: ${PlaygroundCssVars.WIDGET_DECLARATION_TYPE_FONT_SIZE_H2};
-                        }
-                    }
-
-                    &.cm-widget-declaration-symbol-3 {
-                        font-size: ${PlaygroundCssVars.WIDGET_DECLARATION_FONT_SIZE_H3};
-
-                        & ~ span.cm-widget-declaration-type {
-                            font-size: ${PlaygroundCssVars.WIDGET_DECLARATION_TYPE_FONT_SIZE_H3};
-                        }
-                    }
-
-                    &.cm-widget-declaration-symbol-4 {
-                        font-size: ${PlaygroundCssVars.WIDGET_DECLARATION_FONT_SIZE_H4};
-
-                        & ~ span.cm-widget-declaration-type {
-                            font-size: ${PlaygroundCssVars.WIDGET_DECLARATION_TYPE_FONT_SIZE_H4};
-                        }
-                    }
-
-                    &.cm-widget-declaration-symbol-5 {
-                        font-size: ${PlaygroundCssVars.WIDGET_DECLARATION_FONT_SIZE_H5};
-
-                        & ~ span.cm-widget-declaration-type {
-                            font-size: ${PlaygroundCssVars.WIDGET_DECLARATION_TYPE_FONT_SIZE_H5};
-                        }
-                    }
-
-                    & ~ span.cm-widget-declaration-type {
-                        font-size: ${PlaygroundCssVars.WIDGET_DECLARATION_TYPE_FONT_SIZE_H6};
+                    &:after {
+                        content: 'w';
+                        background-color: rgb(134, 54, 153);
                     }
                 }
 
-                > span.cm-widget-declaration-type {
-                    font-family: ${PlaygroundCssVars.WIDGET_DECLARATION_TYPE_FONT_FAMILY};
-                    font-weight: ${PlaygroundCssVars.WIDGET_DECLARATION_TYPE_FONT_WEIGHT};
-                    color: ${PlaygroundCssVars.WIDGET_DECLARATION_TYPE_COLOR};
-                    background-color: ${PlaygroundCssVars.WIDGET_DECLARATION_TYPE_BACKGROUND_COLOR};
-                    padding: ${PlaygroundCssVars.WIDGET_DECLARATION_TYPE_PADDING};
-                    border: ${PlaygroundCssVars.WIDGET_DECLARATION_TYPE_BORDER};
-                    border-radius: ${PlaygroundCssVars.WIDGET_DECLARATION_TYPE_BORDER_RADIUS};
+                &.d9-playground-editor-widget-declaration-headline {
+                    color: rgb(55, 122, 41);
 
-                    &:not(:empty) {
+                    &:after {
+                        content: 'l';
+                        background-color: rgb(55, 122, 41);
+                    }
+                }
+
+                &.d9-playground-editor-widget-declaration-property {
+                    color: rgb(10, 56, 172);
+
+                    &:after {
+                        content: 'p';
+                        background-color: rgb(10, 56, 172);
+                    }
+                }
+
+                &.d9-playground-editor-widget-declaration-id {
+                    color: rgb(70, 141, 142);
+
+                    &:after {
+                        content: 'id';
+                        background-color: rgb(70, 141, 142);
+                    }
+                }
+
+                &.d9-playground-editor-widget-declaration-flag {
+                    color: rgb(114, 113, 64);
+
+                    &:after {
+                        content: 'f';
+                        background-color: rgb(114, 113, 64);
                     }
                 }
             }

@@ -29,8 +29,10 @@ export const buildConfig = (lint) => {
 		external: [
 			'react', 'react-dom', 'styled-components',
 			'nanoid',
-			'codemirror', '@codemirror/view', '@codemirror/state', '@codemirror/commands',
-			'@codemirror/language', '@codemirror/lang-markdown',
+			'codemirror', '@codemirror/view', '@codemirror/state',
+			'@codemirror/commands', '@codemirror/autocomplete',
+			'@codemirror/language', '@codemirror/lang-markdown', '@codemirror/lang-html',
+			'@lezer/markdown', '@lezer/common', '@lezer/highlight',
 			'@rainbow-d9/n1', '@rainbow-d9/n2', '@rainbow-d9/n3'
 		]
 	};

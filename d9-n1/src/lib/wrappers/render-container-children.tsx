@@ -12,7 +12,7 @@ export const renderContainerChildren = (options: {
 }) => {
 	const {def, childrenDefs, keys, $wrapped: {$root, $p2r, $model}} = options;
 
-	return (childrenDefs).map(childProps => {
+	return (childrenDefs).filter(x => x != null).map(childProps => {
 		// remove $key, and re-assign one to make sure it is unique
 		// eslint-disable-next-line @typescript-eslint/no-unused-vars
 		const {$key: keyOfChild, ...restOfChild} = childProps;
