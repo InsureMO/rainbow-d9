@@ -79,6 +79,13 @@ export const EditorPanel = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-playground-ed
                     padding: 0 3px;
                 }
 
+                &.d9-playground-editor-widget-declaration-splitter {
+                    color: rgb(85, 85, 85, 0.7);
+                    margin: 0 4px;
+                    font-weight: 600;
+                    font-variant: all-small-caps;
+                }
+
                 &.d9-playground-editor-widget-declaration-type {
                     color: rgb(134, 54, 153);
 
