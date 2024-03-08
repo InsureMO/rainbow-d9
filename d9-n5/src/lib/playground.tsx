@@ -1,6 +1,6 @@
 import {BaseModel, ExternalDefs, MUtils, NodeAttributeValues, PPUtils, PropValue, VUtils} from '@rainbow-d9/n1';
-import {CssVars, DOM_KEY_WIDGET, useGlobalHandlers} from '@rainbow-d9/n2';
-import React, {useEffect, useRef, useState} from 'react';
+import {CssVars, DOM_KEY_WIDGET, useGlobalHandlers, Utils} from '@rainbow-d9/n2';
+import React, {MouseEvent, useEffect, useRef, useState} from 'react';
 import styled from 'styled-components';
 import {Editor} from './editor';
 import {Help} from './help';
@@ -12,24 +12,25 @@ import {Viewer} from './viewer';
 import {PlaygroundCssVars} from './widgets';
 
 // noinspection CssUnresolvedCustomProperty
-export const PlaygroundWrapper = styled.div.attrs(() => {
-	return {
-		[DOM_KEY_WIDGET]: 'd9-playground',
-		style: {
-			'--height': '500px',
-			'--grid-columns': 'auto min(400px, 40%) 1fr',
-			'--grid-rows': '1fr auto'
-		}
-	};
-})`
+export const PlaygroundWrapper = styled.div.attrs<{ editorSize?: number }>(
+	({editorSize}) => {
+		return {
+			[DOM_KEY_WIDGET]: 'd9-playground',
+			style: {
+				'--min-height': '500px',
+				'--grid-columns': `auto ${editorSize != null ? Utils.toCssSize(editorSize) : 'min(400px, 40%)'} 1fr`,
+				'--grid-rows': '1fr auto'
+			}
+		};
+	})<{ editorSize?: number }>`
     display: grid;
     position: relative;
     grid-column: var(--grid-column);
     grid-row: var(--grid-row);
     grid-template-columns: var(--grid-columns);
     grid-template-rows: var(--grid-rows);
-    min-height: var(--height);
-    height: var(--height);
+    min-height: var(--min-height);
+    height: var(--min-height);
     border: ${CssVars.BORDER};
     border-radius: ${CssVars.BORDER_RADIUS};
     overflow: hidden;
@@ -56,6 +57,94 @@ export interface PlaygroundState {
 	maximized: boolean;
 }
 
+export interface PlaygroundLayoutState {
+	editorSize?: number;
+}
+
+// noinspection CssUnresolvedCustomProperty
+export const SideSlider = styled.div.attrs<{ active: boolean; left: number }>(
+	({active, left}) => {
+		return {
+			[DOM_KEY_WIDGET]: 'd9-playground-side-slider',
+			style: {
+				left: active ? 0 : Utils.toCssSize(left),
+				width: active ? '100%' : (void 0),
+				'--handle-left': active ? Utils.toCssSize(left) : 0
+			}
+		};
+	})<{ active: boolean; left: number }>`
+    display: block;
+    position: absolute;
+    top: 0;
+    height: 100%;
+    cursor: ew-resize;
+    z-index: 1;
+
+    &:before {
+        content: '';
+        display: block;
+        position: absolute;
+        top: 0;
+        left: var(--handle-left);
+        width: 7px;
+        height: 100%;
+        transition: background-color 300ms ease-in-out;
+    }
+
+    &:hover {
+        &:before {
+            background-color: ${PlaygroundCssVars.SLIDER_BACKGROUND_COLOR};
+        }
+    }
+`;
+
+export interface PlaygroundSliderState {
+	active: boolean;
+	left?: number;
+	startX?: number;
+}
+
+export const Slider = (props: { resizeTo: (width: number) => void }) => {
+	const {resizeTo} = props;
+
+	const ref = useRef<HTMLDivElement>(null);
+	const [state, setState] = useState<PlaygroundSliderState>({active: false});
+	useEffect(() => {
+		if (ref.current == null) {
+			return;
+		}
+		const {
+			width: editorWidth
+		} = ref.current.parentElement.querySelector('div[data-w=d9-playground-editor]').getBoundingClientRect();
+		setState(state => ({...state, left: editorWidth + 81}));
+	}, []);
+
+	const onMouseDown = (event: MouseEvent<HTMLDivElement>) => {
+		if (event.button === 0) {
+			// respond to primary button only
+			const {screenX: startX} = event;
+			setState(state => ({...state, active: true, startX}));
+		}
+	};
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
+	const onMouseUp = (_event: MouseEvent<HTMLDivElement>) => {
+		setState(state => ({...state, active: false}));
+	};
+	const onMouseMove = (event: MouseEvent<HTMLDivElement>) => {
+		if (!state.active) {
+			return;
+		}
+		const {screenX} = event;
+		const newWidth = Math.min(800, Math.max(200, state.left - 81 - state.startX + screenX));
+		resizeTo(newWidth);
+		setState(state => ({...state, startX: screenX, left: newWidth + 81}));
+	};
+
+	return <SideSlider active={state.active} left={state.left ?? 0}
+	                   onMouseDown={onMouseDown} onMouseUp={onMouseUp} onMouseMove={onMouseMove}
+	                   ref={ref}/>;
+};
+
 export const PlaygroundDelegate = (props: PlaygroundProps) => {
 	const {
 		$pp, $wrapped,
@@ -74,6 +163,15 @@ export const PlaygroundDelegate = (props: PlaygroundProps) => {
 	const [state, setState] = useState<PlaygroundState>({
 		initialized: false, maximized: false
 	});
+	const [layout, setLayout] = useState<PlaygroundLayoutState>({});
+	useEffect(() => {
+		if (!state.initialized || ref.current == null) {
+			return;
+		}
+		const editor = ref.current!.querySelector('div[data-w=d9-playground-editor]');
+		const {width} = editor!.getBoundingClientRect();
+		setLayout({editorSize: width});
+	}, [state.initialized]);
 	useEffect(() => {
 		if (state.initialized) {
 			return;
@@ -139,9 +237,10 @@ export const PlaygroundDelegate = (props: PlaygroundProps) => {
 		await $onValueChange(content, false, {global: globalHandlers});
 	};
 	const content = MUtils.getValue($wrapped.$model, $pp) as unknown as string;
+	const resizeTo = (width: number) => setLayout({editorSize: width});
 
 	return <PlaygroundWrapper {...rest} data-disabled={$disabled} data-visible={$visible}
-	                          data-maximized={state.maximized}
+	                          data-maximized={state.maximized} editorSize={layout.editorSize}
 	                          id={PPUtils.asId(PPUtils.absolute($p2r, $pp), props.id)}
 	                          ref={ref}>
 		<PlaygroundBridge onContentChanged={onContentChanged}/>
@@ -149,6 +248,7 @@ export const PlaygroundDelegate = (props: PlaygroundProps) => {
 		<Editor content={content} externalDefsTypes={externalDefsTypesRef.current}/>
 		<Help/>
 		<Viewer mockData={mockDataRef.current!} externalDefs={externalDefRef.current}/>
+		<Slider resizeTo={resizeTo}/>
 	</PlaygroundWrapper>;
 };
 
