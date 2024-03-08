@@ -6,7 +6,7 @@ import {basicSetup} from 'codemirror';
 import React, {useEffect, useRef, useState} from 'react';
 import {PlaygroundEventTypes, usePlaygroundEventBus} from '../playground-event-bus';
 import {EditorProps} from '../types';
-import {d9mlExtensions, d9mlHighlightStyle} from './widget-declaration';
+import {d9mlExtensions, d9mlHighlightStyle, WidgetDeclarationIconPlugin} from './widget-declaration';
 import {EditorPanel, EditorWrapper} from './widgets';
 
 export interface EditorState {
@@ -35,16 +35,12 @@ export const Editor = (props: EditorProps) => {
 				doc: '',
 				extensions: [
 					basicSetup,
-					// lineNumbers({}),
-					// EditorView.lineWrapping,
-					// CodeMirrorState.tabSize.of(2),
 					keymap.of([indentWithTab]),
 					d9mlHighlightStyle,
 					markdown({
 						base: markdownLanguage, extensions: [d9mlExtensions]
 					}),
-					// WidgetDeclarations,
-					// oneDark,
+					WidgetDeclarationIconPlugin,
 					EditorView.updateListener.of((view: ViewUpdate) => {
 						if (view.docChanged) {
 							const doc = view.state.doc;
