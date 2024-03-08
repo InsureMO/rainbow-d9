@@ -8,7 +8,7 @@ import {PlaygroundWidget} from '../../types';
 export const createCompleteD9ml = (widgets: Array<PlaygroundWidget>) => {
 	const WidgetTypeOptions: Array<Completion> = widgets
 		.filter(({$wt}) => $wt != N2.N2WidgetType.PAGE)
-		.map(({$wt, label, description}) => ({label: $wt, detail: label, info: description, type: 'keyword'}));
+		.map(({$wt, label, description}) => ({label: $wt, detail: label, info: description, type: 'class'}));
 
 	return (context: CompletionContext): CompletionResult | null => {
 		const tree = syntaxTree(context.state);
