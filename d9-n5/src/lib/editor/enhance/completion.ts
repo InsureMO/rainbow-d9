@@ -4,7 +4,12 @@ import {syntaxTree} from '@codemirror/language';
 import {N2} from '@rainbow-d9/n3';
 import {PlaygroundWidget} from '../../types';
 
-// ATXHeading1
+//TODO:
+// 1. completion: attribute name, attributes list names, $icons, $ext
+// 2. $icons, $ext syntax highlight
+// 3. Widget Type Linting, $icons linting
+// 4. Click toolbar icons, and check editor caret, should be first column. otherwise copy to clipboard.
+// 5. javascript code block
 export const createCompleteD9ml = (widgets: Array<PlaygroundWidget>) => {
 	const WidgetTypeOptions: Array<Completion> = widgets
 		.filter(({$wt}) => $wt != N2.N2WidgetType.PAGE)
