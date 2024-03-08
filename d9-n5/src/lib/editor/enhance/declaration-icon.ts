@@ -24,7 +24,6 @@ export class WidgetDeclarationIcon extends WidgetType {
 	}
 }
 
-// TODO CANNOT PRESENT SELECTION BACKGROUND CORRECTLY WHEN ICON ADDED, DO NOT KNOW WHY
 export const decorateWidgetDeclarationIcon = (view: EditorView) => {
 	const widgets = [];
 	const createDecorator = (ch: string, classSuffix: string, rangeDecoration: (decoration: Decoration) => Range<Decoration>) => {

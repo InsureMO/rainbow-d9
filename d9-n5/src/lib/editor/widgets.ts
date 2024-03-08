@@ -1,5 +1,6 @@
 import {CssVars, DOM_KEY_WIDGET} from '@rainbow-d9/n2';
 import styled from 'styled-components';
+import {PlaygroundCssVars} from '../widgets';
 
 export const EditorWrapper = styled.div.attrs(() => {
 	return {
@@ -58,19 +59,29 @@ export const EditorPanel = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-playground-ed
             > span.d9-playground-editor-heading4.d9-playground-editor-processing-instruction,
             > span.d9-playground-editor-heading5.d9-playground-editor-processing-instruction,
             > span.d9-playground-editor-heading6.d9-playground-editor-processing-instruction {
-                color: rgb(134, 54, 153);
+                color: ${PlaygroundCssVars.WIDGET_DECLARATION_INSTRUCTION_COLOR};
                 font-weight: 900;
                 font-size: 20px;
             }
 
             > span.d9-playground-editor-list.d9-playground-editor-processing-instruction {
-                color: rgb(134, 54, 153);
+                color: ${PlaygroundCssVars.WIDGET_DECLARATION_INSTRUCTION_COLOR};
                 font-weight: 600;
                 font-size: 18px;
             }
 
             span.d9-playground-editor-widget-declaration-icon {
-                display: none;
+                /** 
+				 * cannot use display:none, it leads the problem as below,
+				 * 1. select the word before this declaration, 
+				 * 2. selection background cannot be calculated correctly.
+				 * not sure reason of this problem, and use width: 0 to fix this
+				 * and since inline element prevents width from having an effort (which span default is),
+				 * change to inline-flex to make sure the width is applied.
+				 */
+                display: inline-flex;
+                width: 0;
+                overflow: hidden;
             }
 
             span.d9-playground-editor-heading.d9-playground-editor-processing-instruction ~ span.d9-playground-editor-heading,
@@ -83,34 +94,34 @@ export const EditorPanel = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-playground-ed
             span.d9-playground-editor-list.d9-playground-editor-processing-instruction ~ span.d9-playground-editor-list {
                 &.d9-playground-editor-widget-declaration-splitter,
                 &.d9-playground-editor-widget-declaration-attr-splitter {
-                    color: rgb(85, 85, 85, 0.7);
+                    color: ${PlaygroundCssVars.WIDGET_DECLARATION_SPLITTER_COLOR};
                     margin: 0 4px;
                     font-weight: 600;
                     font-variant: all-small-caps;
                 }
 
                 &.d9-playground-editor-widget-declaration-type {
-                    color: rgb(134, 54, 153);
+                    color: ${PlaygroundCssVars.WIDGET_DECLARATION_TYPE_COLOR};
                 }
 
                 &.d9-playground-editor-widget-declaration-headline {
-                    color: rgb(55, 122, 41);
+                    color: ${PlaygroundCssVars.WIDGET_DECLARATION_HEADLINE_COLOR};
                 }
 
                 &.d9-playground-editor-widget-declaration-property {
-                    color: rgb(10, 56, 172);
+                    color: ${PlaygroundCssVars.WIDGET_DECLARATION_PROPERTY_COLOR};
                 }
 
                 &.d9-playground-editor-widget-declaration-id {
-                    color: rgb(70, 141, 142);
+                    color: ${PlaygroundCssVars.WIDGET_DECLARATION_ID_COLOR};
                 }
 
                 &.d9-playground-editor-widget-declaration-flag {
-                    color: rgb(114, 113, 64);
+                    color: ${PlaygroundCssVars.WIDGET_DECLARATION_FLAG_COLOR};
                 }
 
                 &.d9-playground-editor-widget-declaration-attr-name {
-                    color: rgb(79, 148, 149);
+                    color: ${PlaygroundCssVars.WIDGET_DECLARATION_ATTR_NAME_COLOR};
                 }
 
                 & ~ span.d9-playground-editor-widget-declaration-icon {
@@ -123,31 +134,32 @@ export const EditorPanel = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-playground-ed
                     font-variant: petite-caps;
                     color: white;
                     border-radius: 4px;
+                    width: unset;
                     height: 16px;
                     padding: 0 3px;
 
                     &.d9-playground-editor-widget-declaration-type-icon {
-                        background-color: rgb(134, 54, 153);
+                        background-color: ${PlaygroundCssVars.WIDGET_DECLARATION_TYPE_COLOR};
                     }
 
                     &.d9-playground-editor-widget-declaration-headline-icon {
-                        background-color: rgb(55, 122, 41);
+                        background-color: ${PlaygroundCssVars.WIDGET_DECLARATION_HEADLINE_COLOR};
                     }
 
                     &.d9-playground-editor-widget-declaration-property-icon {
-                        background-color: rgb(10, 56, 172);
+                        background-color: ${PlaygroundCssVars.WIDGET_DECLARATION_PROPERTY_COLOR};
                     }
 
                     &.d9-playground-editor-widget-declaration-id-icon {
-                        background-color: rgb(70, 141, 142);
+                        background-color: ${PlaygroundCssVars.WIDGET_DECLARATION_ID_COLOR};
                     }
 
                     &.d9-playground-editor-widget-declaration-flag-icon {
-                        background-color: rgb(114, 113, 64);
+                        background-color: ${PlaygroundCssVars.WIDGET_DECLARATION_FLAG_COLOR};
                     }
 
                     &.d9-playground-editor-widget-declaration-attr-name-icon {
-                        background-color: rgb(79, 148, 149);
+                        background-color: ${PlaygroundCssVars.WIDGET_DECLARATION_ATTR_NAME_COLOR};
                     }
                 }
             }
