@@ -24,12 +24,20 @@ export interface ExternalDefsTypes {
 	[key: ExternalDefKey]: ExternalDefType | Array<ExternalDefType> | ExternalDefsTypes;
 }
 
+export interface PlaygroundWidget {
+	$wt: string;
+	label?: string;
+	description?: string;
+}
+
 /** configuration definition */
 export type PlaygroundDef = ValueChangeableNodeDef & OmitHTMLProps<HTMLDivElement> & {
 	mockData?: BaseModel | (() => Promise<BaseModel>);
 	externalDefs?: ExternalDefs | (() => Promise<ExternalDefs>);
 	/** in case of external defs has proxy property */
 	externalDefsTypes?: ExternalDefsTypes | (() => Promise<ExternalDefsTypes>);
+	widgets?: Array<PlaygroundWidget>;
+	useN2?: boolean;
 };
 
 /** widget definition, with html attributes */
@@ -38,6 +46,7 @@ export type PlaygroundProps = OmitNodeDef<PlaygroundDef> & WidgetProps;
 export interface EditorProps {
 	content?: string;
 	externalDefsTypes?: ExternalDefsTypes;
+	widgets: Array<PlaygroundWidget>;
 }
 
 export interface ViewerProps {

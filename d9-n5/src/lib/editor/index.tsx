@@ -6,7 +6,7 @@ import {basicSetup} from 'codemirror';
 import React, {useEffect, useRef, useState} from 'react';
 import {PlaygroundEventTypes, usePlaygroundEventBus} from '../playground-event-bus';
 import {EditorProps} from '../types';
-import {d9mlExtensions, d9mlHighlightStyle, WidgetDeclarationIconPlugin} from './widget-declaration';
+import {createD9mlCompletions, d9mlExtensions, d9mlHighlightStyle, WidgetDeclarationIconPlugin} from './enhance';
 import {EditorPanel, EditorWrapper} from './widgets';
 
 export interface EditorState {
@@ -17,7 +17,7 @@ export const Editor = (props: EditorProps) => {
 	const {
 		content,
 		// eslint-disable-next-line @typescript-eslint/no-unused-vars
-		externalDefsTypes,
+		externalDefsTypes, widgets,
 		...rest
 	} = props;
 
@@ -37,6 +37,7 @@ export const Editor = (props: EditorProps) => {
 					basicSetup,
 					keymap.of([indentWithTab]),
 					d9mlHighlightStyle,
+					createD9mlCompletions(widgets),
 					markdown({
 						base: markdownLanguage, extensions: [d9mlExtensions]
 					}),
@@ -57,7 +58,7 @@ export const Editor = (props: EditorProps) => {
 		return () => {
 			editor.destroy();
 		};
-	}, [fire]);
+	}, [fire, widgets]);
 	useEffect(() => {
 		if (state.editor == null) {
 			return;

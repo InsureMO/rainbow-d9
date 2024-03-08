@@ -1,15 +1,16 @@
 import {BaseModel, ExternalDefs, MUtils, NodeAttributeValues, PPUtils, PropValue, VUtils} from '@rainbow-d9/n1';
 import {CssVars, DOM_KEY_WIDGET, useGlobalHandlers, Utils} from '@rainbow-d9/n2';
-import React, {MouseEvent, useEffect, useRef, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import styled from 'styled-components';
 import {Editor} from './editor';
 import {Help} from './help';
 import {PlaygroundBridge} from './playground-bridge';
 import {PlaygroundEventBusProvider, PlaygroundEventTypes, usePlaygroundEventBus} from './playground-event-bus';
+import {Slider} from './slider';
 import {Toolbar} from './toolbar';
-import {ExternalDefsTypes, PlaygroundProps, UnwrappedPlaygroundProps} from './types';
+import {ExternalDefsTypes, PlaygroundProps, PlaygroundWidget, UnwrappedPlaygroundProps} from './types';
 import {Viewer} from './viewer';
-import {PlaygroundCssVars} from './widgets';
+import {computeWidgets, PlaygroundCssVars} from './widgets';
 
 // noinspection CssUnresolvedCustomProperty
 export const PlaygroundWrapper = styled.div.attrs<{ editorSize?: number }>(
@@ -61,95 +62,12 @@ export interface PlaygroundLayoutState {
 	editorSize?: number;
 }
 
-// noinspection CssUnresolvedCustomProperty
-export const SideSlider = styled.div.attrs<{ active: boolean; left: number }>(
-	({active, left}) => {
-		return {
-			[DOM_KEY_WIDGET]: 'd9-playground-side-slider',
-			style: {
-				left: active ? 0 : Utils.toCssSize(left),
-				width: active ? '100%' : (void 0),
-				'--handle-left': active ? Utils.toCssSize(left) : 0
-			}
-		};
-	})<{ active: boolean; left: number }>`
-    display: block;
-    position: absolute;
-    top: 0;
-    height: 100%;
-    cursor: ew-resize;
-    z-index: 1;
-
-    &:before {
-        content: '';
-        display: block;
-        position: absolute;
-        top: 0;
-        left: var(--handle-left);
-        width: 7px;
-        height: 100%;
-        transition: background-color 300ms ease-in-out;
-    }
-
-    &:hover {
-        &:before {
-            background-color: ${PlaygroundCssVars.SLIDER_BACKGROUND_COLOR};
-        }
-    }
-`;
-
-export interface PlaygroundSliderState {
-	active: boolean;
-	left?: number;
-	startX?: number;
-}
-
-export const Slider = (props: { resizeTo: (width: number) => void }) => {
-	const {resizeTo} = props;
-
-	const ref = useRef<HTMLDivElement>(null);
-	const [state, setState] = useState<PlaygroundSliderState>({active: false});
-	useEffect(() => {
-		if (ref.current == null) {
-			return;
-		}
-		const {
-			width: editorWidth
-		} = ref.current.parentElement.querySelector('div[data-w=d9-playground-editor]').getBoundingClientRect();
-		setState(state => ({...state, left: editorWidth + 81}));
-	}, []);
-
-	const onMouseDown = (event: MouseEvent<HTMLDivElement>) => {
-		if (event.button === 0) {
-			// respond to primary button only
-			const {screenX: startX} = event;
-			setState(state => ({...state, active: true, startX}));
-		}
-	};
-	// eslint-disable-next-line @typescript-eslint/no-unused-vars
-	const onMouseUp = (_event: MouseEvent<HTMLDivElement>) => {
-		setState(state => ({...state, active: false}));
-	};
-	const onMouseMove = (event: MouseEvent<HTMLDivElement>) => {
-		if (!state.active) {
-			return;
-		}
-		const {screenX} = event;
-		const newWidth = Math.min(800, Math.max(200, state.left - 81 - state.startX + screenX));
-		resizeTo(newWidth);
-		setState(state => ({...state, startX: screenX, left: newWidth + 81}));
-	};
-
-	return <SideSlider active={state.active} left={state.left ?? 0}
-	                   onMouseDown={onMouseDown} onMouseUp={onMouseUp} onMouseMove={onMouseMove}
-	                   ref={ref}/>;
-};
-
 export const PlaygroundDelegate = (props: PlaygroundProps) => {
 	const {
 		$pp, $wrapped,
 		mockData,
 		externalDefs, externalDefsTypes,
+		widgets, useN2 = true,
 		...rest
 	} = props;
 	const {$p2r, $onValueChange, $avs: {$disabled, $visible}} = $wrapped;
@@ -164,6 +82,7 @@ export const PlaygroundDelegate = (props: PlaygroundProps) => {
 		initialized: false, maximized: false
 	});
 	const [layout, setLayout] = useState<PlaygroundLayoutState>({});
+	const [availableWidgets, setAvailableWidgets] = useState<Array<PlaygroundWidget>>(computeWidgets(widgets ?? [], useN2));
 	useEffect(() => {
 		if (!state.initialized || ref.current == null) {
 			return;
@@ -172,6 +91,9 @@ export const PlaygroundDelegate = (props: PlaygroundProps) => {
 		const {width} = editor!.getBoundingClientRect();
 		setLayout({editorSize: width});
 	}, [state.initialized]);
+	useEffect(() => {
+		setAvailableWidgets(computeWidgets(widgets ?? [], useN2));
+	}, [widgets, useN2]);
 	useEffect(() => {
 		if (state.initialized) {
 			return;
@@ -233,11 +155,11 @@ export const PlaygroundDelegate = (props: PlaygroundProps) => {
 		return null;
 	}
 
+	const resizeTo = (width: number) => setLayout({editorSize: width});
 	const onContentChanged = async (content?: string) => {
 		await $onValueChange(content, false, {global: globalHandlers});
 	};
 	const content = MUtils.getValue($wrapped.$model, $pp) as unknown as string;
-	const resizeTo = (width: number) => setLayout({editorSize: width});
 
 	return <PlaygroundWrapper {...rest} data-disabled={$disabled} data-visible={$visible}
 	                          data-maximized={state.maximized} editorSize={layout.editorSize}
@@ -245,7 +167,7 @@ export const PlaygroundDelegate = (props: PlaygroundProps) => {
 	                          ref={ref}>
 		<PlaygroundBridge onContentChanged={onContentChanged}/>
 		<Toolbar/>
-		<Editor content={content} externalDefsTypes={externalDefsTypesRef.current}/>
+		<Editor content={content} externalDefsTypes={externalDefsTypesRef.current} widgets={availableWidgets}/>
 		<Help/>
 		<Viewer mockData={mockDataRef.current!} externalDefs={externalDefRef.current}/>
 		<Slider resizeTo={resizeTo}/>

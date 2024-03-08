@@ -14,3 +14,6 @@ export * from './playground';
 export * from './register';
 export {EditorPanel} from './editor/widgets';
 export {EditorWrapper} from './editor/widgets';
+export {PlaygroundSliderState} from './slider';
+export {SideSlider} from './slider';
+export {Slider} from './slider';
