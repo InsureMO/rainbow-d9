@@ -10,7 +10,14 @@ import {Slider} from './slider';
 import {Toolbar} from './toolbar';
 import {ExternalDefsTypes, PlaygroundProps, PlaygroundWidgets, UnwrappedPlaygroundProps} from './types';
 import {Viewer} from './viewer';
-import {computeConstants, computeIcons, computeReferences, computeWidgets, PlaygroundCssVars} from './widgets';
+import {
+	computeConstants,
+	computeIcons,
+	computeReferences,
+	computeWidgetGroups,
+	computeWidgets,
+	PlaygroundCssVars
+} from './widgets';
 
 // noinspection CssUnresolvedCustomProperty
 export const PlaygroundWrapper = styled.div.attrs<{ editorSize?: number }>(
@@ -63,6 +70,7 @@ export interface PlaygroundLayoutState {
 }
 
 export interface PlaygroundWidgetsState {
+	groups: PlaygroundWidgets['groups'];
 	widgets: PlaygroundWidgets['widgets'];
 	icons: PlaygroundWidgets['icons'];
 	constants: PlaygroundWidgets['constants'];
@@ -91,6 +99,7 @@ export const PlaygroundDelegate = (props: PlaygroundProps) => {
 	const [layout, setLayout] = useState<PlaygroundLayoutState>({});
 	const [availableWidgets, setAvailableWidgets] = useState<PlaygroundWidgetsState>(() => {
 		return {
+			groups: computeWidgetGroups(widgets?.groups ?? [], useN2),
 			widgets: computeWidgets(widgets?.widgets ?? [], useN2),
 			icons: computeIcons(widgets?.icons ?? [], useN2),
 			constants: computeConstants(widgets?.constants ?? [], useN2),
@@ -107,6 +116,7 @@ export const PlaygroundDelegate = (props: PlaygroundProps) => {
 	}, [state.initialized]);
 	useEffect(() => {
 		setAvailableWidgets({
+			groups: computeWidgetGroups(widgets?.groups ?? [], useN2),
 			widgets: computeWidgets(widgets?.widgets ?? [], useN2),
 			icons: computeIcons(widgets?.icons ?? [], useN2),
 			constants: computeConstants(widgets?.constants ?? [], useN2),
@@ -185,7 +195,7 @@ export const PlaygroundDelegate = (props: PlaygroundProps) => {
 	                          id={PPUtils.asId(PPUtils.absolute($p2r, $pp), props.id)}
 	                          ref={ref}>
 		<PlaygroundBridge onContentChanged={onContentChanged}/>
-		<Toolbar/>
+		<Toolbar groups={availableWidgets.groups} widgets={availableWidgets.widgets}/>
 		<Editor content={content} externalDefsTypes={externalDefsTypesRef.current} widgets={availableWidgets}/>
 		<Help/>
 		<Viewer mockData={mockDataRef.current!} externalDefs={externalDefRef.current}/>

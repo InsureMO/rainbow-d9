@@ -1,11 +1,14 @@
 import {CssVars} from '@rainbow-d9/n2';
 import {N2} from '@rainbow-d9/n3';
 import {ATTRIBUTE_VALUE_EXT_SYMBOL, ATTRIBUTE_VALUE_ICON_SYMBOL} from './editor/enhance';
+import {PlaygroundIcons} from './icons';
 import {
 	PlaygroundConstant,
 	PlaygroundIcon,
 	PlaygroundReference,
 	PlaygroundWidget,
+	PlaygroundWidgetGroup,
+	PlaygroundWidgetGroupKey,
 	PlaygroundWidgetProperty
 } from './types';
 
@@ -42,9 +45,26 @@ const DecorateElements = (name: 'leads' | 'tails'): PlaygroundWidgetProperty => 
 };
 const LeadsDecorateElements = DecorateElements('leads');
 const TailsDecorateElements = DecorateElements('tails');
-export const N2Widgets: Array<PlaygroundWidget> = [
-	{$wt: N2.N2WidgetType.PAGE, description: 'Only one allowed, and always at the highest level.'},
 
+export const N2WidgetGroups: Array<PlaygroundWidgetGroup> = [
+	{icon: PlaygroundIcons.CONTAINER_GROUP, tooltip: 'Container', key: PlaygroundWidgetGroupKey.CONTAINERS},
+	{icon: PlaygroundIcons.INPUT_GROUP, tooltip: 'Input', key: PlaygroundWidgetGroupKey.INPUTS},
+	{icon: PlaygroundIcons.OPTIONS_GROUP, tooltip: 'Choices', key: PlaygroundWidgetGroupKey.OPTIONS},
+	{icon: PlaygroundIcons.DISPLAY_GROUP, tooltip: 'Label & Chart', key: PlaygroundWidgetGroupKey.DISPLAY}
+];
+// 	[PlaygroundWidgetGroup.INPUTS];
+// :
+// [
+// 	{key: 'Link', icon: PlaygroundIcons.LINK, tooltip: 'Hyperlink'},
+// 	{key: 'Password', icon: PlaygroundIcons.PASSWORD, tooltip: 'Password'},
+// ],
+export const N2Widgets: Array<PlaygroundWidget> = [
+	{
+		$wt: N2.N2WidgetType.PAGE, description: 'Only one allowed, and always at the highest level.',
+		icon: '', group: PlaygroundWidgetGroupKey.NOT_CARE, notInToolbar: true
+	},
+
+	// inputs
 	{
 		$wt: N2.N2WidgetType.INPUT, label: 'Input box.', properties: [
 			AutoSelect,
@@ -53,48 +73,153 @@ export const N2Widgets: Array<PlaygroundWidget> = [
 				label: 'Boolean. Treat as a number.',
 				description: 'Default false. Attempt to synchronize with the data model as a number.'
 			}
-		]
+		], icon: PlaygroundIcons.INPUT, group: PlaygroundWidgetGroupKey.INPUTS
 	},
 	{
-		$wt: N2.N2WidgetType.NUMBER, properties: [AutoSelect]
+		$wt: N2.N2WidgetType.NUMBER, properties: [AutoSelect],
+		icon: PlaygroundIcons.NUMBER_INPUT, group: PlaygroundWidgetGroupKey.INPUTS, tooltip: 'Number input'
 	},
-	{$wt: N2.N2WidgetType.DECORATE_INPUT, properties: [AutoSelect, LeadsDecorateElements, TailsDecorateElements]},
-	{$wt: N2.N2WidgetType.DECORATE_NUMBER, properties: [AutoSelect, LeadsDecorateElements, TailsDecorateElements]},
-	{$wt: N2.N2WidgetType.TEXTAREA, properties: [AutoSelect]},
-	{$wt: N2.N2WidgetType.CHECKBOX},
-	{$wt: N2.N2WidgetType.CHECKBOXES},
-	{$wt: N2.N2WidgetType.CHECKS},
-	{$wt: N2.N2WidgetType.RADIO},
-	{$wt: N2.N2WidgetType.RADIOS},
-	{$wt: N2.N2WidgetType.BUTTON, properties: [LeadsDecorateElements, TailsDecorateElements]},
-	{$wt: N2.N2WidgetType.BUTTON_BAR},
-	{$wt: N2.N2WidgetType.CAPTION, properties: [LeadsDecorateElements, TailsDecorateElements]},
-	{$wt: N2.N2WidgetType.LABEL, properties: [LeadsDecorateElements, TailsDecorateElements]},
-	{$wt: N2.N2WidgetType.BADGE},
-	{$wt: N2.N2WidgetType.DROPDOWN},
-	{$wt: N2.N2WidgetType.MULTI_DROPDOWN},
-	{$wt: N2.N2WidgetType.CALENDAR},
-	{$wt: N2.N2WidgetType.DATE},
-	{$wt: N2.N2WidgetType.DATETIME},
+	{
+		$wt: N2.N2WidgetType.DECORATE_INPUT, properties: [AutoSelect, LeadsDecorateElements, TailsDecorateElements],
+		icon: PlaygroundIcons.DECO_INPUT, group: PlaygroundWidgetGroupKey.INPUTS, tooltip: 'Decorable input'
+	},
+	{
+		$wt: N2.N2WidgetType.DECORATE_NUMBER, properties: [AutoSelect, LeadsDecorateElements, TailsDecorateElements],
+		icon: PlaygroundIcons.DECO_NUMBER, group: PlaygroundWidgetGroupKey.INPUTS, tooltip: 'Decorable Number Input'
+	},
+	{
+		$wt: N2.N2WidgetType.TEXTAREA, properties: [AutoSelect],
+		icon: PlaygroundIcons.TEXTAREA, group: PlaygroundWidgetGroupKey.INPUTS
+	},
+	{
+		$wt: N2.N2WidgetType.CALENDAR,
+		icon: PlaygroundIcons.DATE, group: PlaygroundWidgetGroupKey.INPUTS, tooltip: 'Date Picker',
+		notInToolbar: true
+	},
+	{
+		$wt: N2.N2WidgetType.DATE,
+		icon: PlaygroundIcons.DATE, group: PlaygroundWidgetGroupKey.INPUTS, tooltip: 'Date Picker'
+	},
+	{
+		$wt: N2.N2WidgetType.DATETIME,
+		icon: PlaygroundIcons.DATETIME, group: PlaygroundWidgetGroupKey.INPUTS, tooltip: 'DateTime Picker'
+	},
 
-	{$wt: N2.N2WidgetType.RIBS},
-	{$wt: N2.N2WidgetType.READONLY_RIBS},
+	// options
+	{
+		$wt: N2.N2WidgetType.CHECKBOX,
+		icon: PlaygroundIcons.CHECKBOX, group: PlaygroundWidgetGroupKey.OPTIONS
+	},
+	{
+		$wt: N2.N2WidgetType.CHECKBOXES,
+		icon: PlaygroundIcons.CHECKS, group: PlaygroundWidgetGroupKey.OPTIONS, tooltip: 'Checkbox Group',
+		notInToolbar: true
+	},
+	{
+		$wt: N2.N2WidgetType.CHECKS,
+		icon: PlaygroundIcons.CHECKS, group: PlaygroundWidgetGroupKey.OPTIONS, tooltip: 'Checkbox Group'
+	},
+	{
+		$wt: N2.N2WidgetType.RADIO,
+		icon: PlaygroundIcons.RADIO, group: PlaygroundWidgetGroupKey.OPTIONS, tooltip: 'Radio Button'
+	},
+	{
+		$wt: N2.N2WidgetType.RADIOS,
+		icon: PlaygroundIcons.RADIOS, group: PlaygroundWidgetGroupKey.OPTIONS, tooltip: 'Radio Button Group'
+	},
+	{
+		$wt: N2.N2WidgetType.DROPDOWN,
+		icon: PlaygroundIcons.DROPDOWN, group: PlaygroundWidgetGroupKey.OPTIONS
+	},
+	{
+		$wt: N2.N2WidgetType.MULTI_DROPDOWN,
+		icon: PlaygroundIcons.MULTI_DROPDOWN, group: PlaygroundWidgetGroupKey.OPTIONS, tooltip: 'Multiple Choices'
+	},
 
-	{$wt: N2.N2WidgetType.TABLE_ROW_OPERATORS},
-	{$wt: N2.N2WidgetType.TABLE},
+	// display
+	{
+		$wt: N2.N2WidgetType.CAPTION, properties: [LeadsDecorateElements, TailsDecorateElements],
+		icon: PlaygroundIcons.CAPTION, group: PlaygroundWidgetGroupKey.DISPLAY
+	},
+	{
+		$wt: N2.N2WidgetType.LABEL, properties: [LeadsDecorateElements, TailsDecorateElements],
+		icon: PlaygroundIcons.LABEL, group: PlaygroundWidgetGroupKey.DISPLAY
+	},
+	{
+		$wt: N2.N2WidgetType.BUTTON, properties: [LeadsDecorateElements, TailsDecorateElements],
+		icon: PlaygroundIcons.BUTTON, group: PlaygroundWidgetGroupKey.DISPLAY
+	},
+	// TODO CHART
 
-	{$wt: N2.N2WidgetType.SECTION},
-	{$wt: N2.N2WidgetType.BOX},
-	{$wt: N2.N2WidgetType.TAB},
-	{$wt: N2.N2WidgetType.TABS},
-	{$wt: N2.N2WidgetType.WIZARD_SHARED},
-	{$wt: N2.N2WidgetType.WIZARD_STEP},
-	{$wt: N2.N2WidgetType.WIZARD},
-	{$wt: N2.N2WidgetType.TREE},
+	// containers
+	{
+		$wt: N2.N2WidgetType.SECTION,
+		icon: PlaygroundIcons.SECTION, group: PlaygroundWidgetGroupKey.CONTAINERS
+	},
+	{
+		$wt: N2.N2WidgetType.BOX,
+		icon: PlaygroundIcons.BOX, group: PlaygroundWidgetGroupKey.CONTAINERS
+	},
+	{
+		$wt: N2.N2WidgetType.TABLE_ROW_OPERATORS,
+		icon: '', group: PlaygroundWidgetGroupKey.NOT_CARE, notInToolbar: true
+	},
+	{
+		$wt: N2.N2WidgetType.TABLE,
+		icon: PlaygroundIcons.TABLE, group: PlaygroundWidgetGroupKey.CONTAINERS
+	},
+	{
+		$wt: N2.N2WidgetType.RIBS,
+		icon: PlaygroundIcons.RIBS, group: PlaygroundWidgetGroupKey.CONTAINERS
+	},
+	{
+		$wt: N2.N2WidgetType.READONLY_RIBS,
+		icon: '', group: PlaygroundWidgetGroupKey.NOT_CARE, notInToolbar: true
+	},
+	{
+		$wt: N2.N2WidgetType.BUTTON_BAR,
+		icon: PlaygroundIcons.BUTTON_BAR, group: PlaygroundWidgetGroupKey.CONTAINERS, tooltip: 'Button Bar'
+	},
+	{
+		$wt: N2.N2WidgetType.BADGE,
+		icon: '', group: PlaygroundWidgetGroupKey.NOT_CARE, notInToolbar: true
+	},
+	{
+		$wt: N2.N2WidgetType.TAB,
+		icon: '', group: PlaygroundWidgetGroupKey.NOT_CARE, notInToolbar: true
+	},
+	{
+		$wt: N2.N2WidgetType.TABS,
+		icon: PlaygroundIcons.TABS, group: PlaygroundWidgetGroupKey.CONTAINERS
+	},
+	{
+		$wt: N2.N2WidgetType.WIZARD_SHARED,
+		icon: '', group: PlaygroundWidgetGroupKey.NOT_CARE, notInToolbar: true
+	},
+	{
+		$wt: N2.N2WidgetType.WIZARD_STEP,
+		icon: '', group: PlaygroundWidgetGroupKey.NOT_CARE, notInToolbar: true
+	},
+	{
+		$wt: N2.N2WidgetType.WIZARD,
+		icon: PlaygroundIcons.WIZARD, group: PlaygroundWidgetGroupKey.CONTAINERS
+	},
+	{
+		$wt: N2.N2WidgetType.TREE,
+		icon: PlaygroundIcons.TREE, group: PlaygroundWidgetGroupKey.CONTAINERS
+	},
 
-	{$wt: N2.N2WidgetType.PAGINATION}
+	{
+		$wt: N2.N2WidgetType.PAGINATION,
+		icon: '', group: PlaygroundWidgetGroupKey.NOT_CARE, notInToolbar: true
+	}
 ];
 
+export const computeWidgetGroups = (groups: Array<PlaygroundWidgetGroup>, useN2: boolean) => {
+	return [
+		...(useN2 ? N2WidgetGroups : []), ...groups
+	];
+};
 export const computeWidgets = (widgets: Array<PlaygroundWidget>, useN2: boolean) => {
 	return [...(useN2 ? N2Widgets : []), ...widgets];
 };

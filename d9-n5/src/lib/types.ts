@@ -32,11 +32,31 @@ export interface PlaygroundWidgetProperty {
 	description?: string;
 }
 
+export enum PlaygroundWidgetGroupKey {
+	CONTAINERS = 'container-group',
+	INPUTS = 'input-group',
+	OPTIONS = 'options-group',
+	DISPLAY = 'display-group',
+	NOT_CARE = 'not-care'
+}
+
+export interface PlaygroundWidgetGroup {
+	key: string;
+	icon: string;
+	tooltip: string;
+}
+
 export interface PlaygroundWidget {
 	$wt: string;
 	label?: string;
 	description?: string;
 	properties?: Array<PlaygroundWidgetProperty>;
+	group: PlaygroundWidgetGroupKey | string;
+	/** some widgets are used internally, therefore no need to display in toolbar */
+	notInToolbar?: boolean;
+	/** use empty string if widget is not in toolbar */
+	icon: string;
+	tooltip?: string;
 }
 
 export interface PlaygroundIcon {
@@ -58,6 +78,7 @@ export interface PlaygroundReference {
 }
 
 export interface PlaygroundWidgets {
+	groups?: Array<PlaygroundWidgetGroup>;
 	widgets?: Array<PlaygroundWidget>;
 	icons?: Array<PlaygroundIcon>;
 	constants?: Array<PlaygroundConstant>;

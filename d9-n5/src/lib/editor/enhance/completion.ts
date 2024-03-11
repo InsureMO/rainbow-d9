@@ -79,8 +79,14 @@ export const findWidgetType = (node: SyntaxNode, context: CompletionContext): st
 };
 
 //TODO:
-// 1. completion: attribute name, attributes list names, $icons, $ext
-// 2. $icons, $ext syntax highlight
+// 1. completion:
+// 1.1 attribute name, complete the declaration
+// 1.2 attributes list names,
+// 1.3 [x] $icons,
+// 1.4 [x] $ext
+// 2. syntax highlight:
+// 2.1 [x] $icons,
+// 2.2 [x] $ext
 // 3. Widget Type Linting, $icons linting
 // 4. Click toolbar icons, and check editor caret, should be first column. otherwise copy to clipboard.
 // 5. javascript code block
@@ -147,8 +153,7 @@ export const createCompleteD9ml = (options: {
 			const nodeBefore2 = tree.resolveInner(nodeBefore.from, -1);
 			if (nodeBefore2 == null) {
 				return null;
-			}
-			if (nodeBefore2.name === 'ListItem') {
+			} else if (nodeBefore2.name === 'ListItem') {
 				const textBefore = (context.state.sliceDoc(nodeBefore2.from, context.pos) ?? '').trim();
 				// bullet list
 				const tagBefore = /([-|*]\s+)\w*$/.exec(textBefore);
