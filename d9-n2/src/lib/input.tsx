@@ -1,4 +1,13 @@
-import {MUtils, PPUtils, registerWidget, ValueChangeableNodeDef, VUtils, WidgetProps} from '@rainbow-d9/n1';
+import {
+	MUtils,
+	PPUtils,
+	PropertyPath,
+	PropValue,
+	registerWidget,
+	ValueChangeableNodeDef,
+	VUtils,
+	WidgetProps
+} from '@rainbow-d9/n1';
 import React, {ChangeEvent, FocusEvent, ForwardedRef, forwardRef, useRef} from 'react';
 import styled from 'styled-components';
 import {CssVars, DOM_ID_WIDGET, DOM_KEY_WIDGET} from './constants';
@@ -75,6 +84,29 @@ const AnInput = styled.input.attrs<{ autoSelect: boolean }>(
     }
 `;
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const stringifyInputValue = (options: { $model: PropValue; $pp: PropertyPath; value?: any }): string => {
+	const {$model, $pp, value} = options;
+
+	if (value == null) {
+		return '';
+	}
+	switch (typeof value) {
+		case 'object':
+			console.error(`Value is an object, check your declaration and model please.`, $model, $pp);
+			return '';
+		case 'function':
+			console.error(`Value is a function, check your declaration and model please.`, $model, $pp);
+			return '';
+		case 'symbol':
+			console.error(`Value is a symbol, check your declaration and model please.`, $model, $pp);
+			return '';
+		default:
+			// number, boolean, bigint, string
+			return value.toString != null ? value.toString() : `${value}`;
+	}
+};
+
 export const Input = forwardRef((props: InputProps, ref: ForwardedRef<HTMLInputElement>) => {
 	const {
 		autoSelect = true, valueToNumber = false,
@@ -113,10 +145,10 @@ export const Input = forwardRef((props: InputProps, ref: ForwardedRef<HTMLInputE
 
 	return <AnInput {...rest} autoSelect={autoSelect}
 	                disabled={$disabled} data-disabled={$disabled} data-visible={$visible}
-		// eslint-disable-next-line @typescript-eslint/no-explicit-any
-		            value={(valueRef.current.value as any) ?? ''} onChange={onChange}
-		            id={PPUtils.asId(PPUtils.absolute($p2r, $pp), props.id)}
-		            ref={ref}/>;
+	                value={stringifyInputValue({$model, $pp, value: valueRef.current.value})}
+	                onChange={onChange}
+	                id={PPUtils.asId(PPUtils.absolute($p2r, $pp), props.id)}
+	                ref={ref}/>;
 });
 
 export type NumberInputDef = Omit<InputDef, 'valueToNumber'>;
