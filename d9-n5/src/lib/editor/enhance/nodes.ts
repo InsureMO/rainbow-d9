@@ -1,6 +1,10 @@
 import {
 	WidgetDeclarationAttrNameTag,
 	WidgetDeclarationAttrSplitterTag,
+	WidgetDeclarationAttrValueExtTag,
+	WidgetDeclarationAttrValueIconTag,
+	WidgetDeclarationAttrValueSplitterTag,
+	WidgetDeclarationAttrValueStrTag,
 	WidgetDeclarationAttrValueTag,
 	WidgetDeclarationFlagTag,
 	WidgetDeclarationHeadlineTag,
@@ -21,5 +25,9 @@ export const WidgetDeclarationNodes = [
 	{name: 'WidgetDeclarationFlag', style: WidgetDeclarationFlagTag},
 	{name: 'WidgetDeclarationAttrName', style: WidgetDeclarationAttrNameTag},
 	{name: 'WidgetDeclarationAttrSplitter', style: WidgetDeclarationAttrSplitterTag},
-	{name: 'WidgetDeclarationAttrValue', style: WidgetDeclarationAttrValueTag}
+	{name: 'WidgetDeclarationAttrValue', style: WidgetDeclarationAttrValueTag},
+	{name: 'WidgetDeclarationAttrValueSplitter', style: WidgetDeclarationAttrValueSplitterTag},
+	{name: 'WidgetDeclarationAttrValueIcon', style: WidgetDeclarationAttrValueIconTag},
+	{name: 'WidgetDeclarationAttrValueStr', style: WidgetDeclarationAttrValueStrTag},
+	{name: 'WidgetDeclarationAttrValueExt', style: WidgetDeclarationAttrValueExtTag}
 ];

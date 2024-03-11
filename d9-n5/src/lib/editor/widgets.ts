@@ -124,6 +124,18 @@ export const EditorPanel = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-playground-ed
                     color: ${PlaygroundCssVars.WIDGET_DECLARATION_ATTR_NAME_COLOR};
                 }
 
+                &.d9-playground-editor-widget-declaration-attr-value-icon {
+                    color: ${PlaygroundCssVars.WIDGET_DECLARATION_ATTR_VALUE_ICON_COLOR};
+                }
+
+                &.d9-playground-editor-widget-declaration-attr-value-str {
+                    color: ${PlaygroundCssVars.WIDGET_DECLARATION_ATTR_VALUE_STR_COLOR};
+                }
+
+                &.d9-playground-editor-widget-declaration-attr-value-ext {
+                    color: ${PlaygroundCssVars.WIDGET_DECLARATION_ATTR_VALUE_EXT_COLOR};
+                }
+
                 & ~ span.d9-playground-editor-widget-declaration-icon {
                     display: inline-flex;
                     position: relative;

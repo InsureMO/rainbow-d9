@@ -10,3 +10,7 @@ export const WidgetDeclarationFlagTag = Tag.define();
 export const WidgetDeclarationAttrNameTag = Tag.define();
 export const WidgetDeclarationAttrSplitterTag = Tag.define();
 export const WidgetDeclarationAttrValueTag = Tag.define();
+export const WidgetDeclarationAttrValueSplitterTag = Tag.define();
+export const WidgetDeclarationAttrValueIconTag = Tag.define();
+export const WidgetDeclarationAttrValueStrTag = Tag.define();
+export const WidgetDeclarationAttrValueExtTag = Tag.define();

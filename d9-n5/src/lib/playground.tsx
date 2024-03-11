@@ -8,9 +8,9 @@ import {PlaygroundBridge} from './playground-bridge';
 import {PlaygroundEventBusProvider, PlaygroundEventTypes, usePlaygroundEventBus} from './playground-event-bus';
 import {Slider} from './slider';
 import {Toolbar} from './toolbar';
-import {ExternalDefsTypes, PlaygroundProps, PlaygroundWidget, UnwrappedPlaygroundProps} from './types';
+import {ExternalDefsTypes, PlaygroundProps, PlaygroundWidgets, UnwrappedPlaygroundProps} from './types';
 import {Viewer} from './viewer';
-import {computeWidgets, PlaygroundCssVars} from './widgets';
+import {computeConstants, computeIcons, computeReferences, computeWidgets, PlaygroundCssVars} from './widgets';
 
 // noinspection CssUnresolvedCustomProperty
 export const PlaygroundWrapper = styled.div.attrs<{ editorSize?: number }>(
@@ -62,6 +62,13 @@ export interface PlaygroundLayoutState {
 	editorSize?: number;
 }
 
+export interface PlaygroundWidgetsState {
+	widgets: PlaygroundWidgets['widgets'];
+	icons: PlaygroundWidgets['icons'];
+	constants: PlaygroundWidgets['constants'];
+	extensions: PlaygroundWidgets['extensions'];
+}
+
 export const PlaygroundDelegate = (props: PlaygroundProps) => {
 	const {
 		$pp, $wrapped,
@@ -82,7 +89,14 @@ export const PlaygroundDelegate = (props: PlaygroundProps) => {
 		initialized: false, maximized: false
 	});
 	const [layout, setLayout] = useState<PlaygroundLayoutState>({});
-	const [availableWidgets, setAvailableWidgets] = useState<Array<PlaygroundWidget>>(computeWidgets(widgets ?? [], useN2));
+	const [availableWidgets, setAvailableWidgets] = useState<PlaygroundWidgetsState>(() => {
+		return {
+			widgets: computeWidgets(widgets?.widgets ?? [], useN2),
+			icons: computeIcons(widgets?.icons ?? [], useN2),
+			constants: computeConstants(widgets?.constants ?? [], useN2),
+			extensions: computeReferences(widgets?.extensions ?? [], useN2)
+		};
+	});
 	useEffect(() => {
 		if (!state.initialized || ref.current == null) {
 			return;
@@ -92,7 +106,12 @@ export const PlaygroundDelegate = (props: PlaygroundProps) => {
 		setLayout({editorSize: width});
 	}, [state.initialized]);
 	useEffect(() => {
-		setAvailableWidgets(computeWidgets(widgets ?? [], useN2));
+		setAvailableWidgets({
+			widgets: computeWidgets(widgets?.widgets ?? [], useN2),
+			icons: computeIcons(widgets?.icons ?? [], useN2),
+			constants: computeConstants(widgets?.constants ?? [], useN2),
+			extensions: computeReferences(widgets?.extensions ?? [], useN2)
+		});
 	}, [widgets, useN2]);
 	useEffect(() => {
 		if (state.initialized) {

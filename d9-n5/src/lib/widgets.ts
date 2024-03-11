@@ -1,6 +1,7 @@
 import {CssVars} from '@rainbow-d9/n2';
 import {N2} from '@rainbow-d9/n3';
-import {PlaygroundWidget} from './types';
+import {ATTRIBUTE_VALUE_EXT_SYMBOL, ATTRIBUTE_VALUE_ICON_SYMBOL} from './editor/enhance';
+import {PlaygroundConstant, PlaygroundIcon, PlaygroundReference, PlaygroundWidget} from './types';
 
 export const PlaygroundCssVars = {
 	Z_INDEX: 9999999,
@@ -18,7 +19,10 @@ export const PlaygroundCssVars = {
 	WIDGET_DECLARATION_PROPERTY_COLOR: 'var(--d9-playground-widget-declaration-property-color, rgb(70, 141, 142))',
 	WIDGET_DECLARATION_ID_COLOR: 'var(--d9-playground-widget-declaration-id-color, rgb(70, 141, 142))',
 	WIDGET_DECLARATION_FLAG_COLOR: 'var(--d9-playground-widget-declaration-flag-color, rgb(114, 113, 64))',
-	WIDGET_DECLARATION_ATTR_NAME_COLOR: 'var(--d9-playground-widget-declaration-attr-name-color, rgb(79, 148, 149))'
+	WIDGET_DECLARATION_ATTR_NAME_COLOR: 'var(--d9-playground-widget-declaration-attr-name-color, rgb(79, 148, 149))',
+	WIDGET_DECLARATION_ATTR_VALUE_ICON_COLOR: 'var(--d9-playground-widget-declaration-attr-name-color, rgb(55, 122, 41))',
+	WIDGET_DECLARATION_ATTR_VALUE_STR_COLOR: 'var(--d9-playground-widget-declaration-attr-name-color, rgb(55, 122, 41))',
+	WIDGET_DECLARATION_ATTR_VALUE_EXT_COLOR: 'var(--d9-playground-widget-declaration-attr-name-color, rgb(10, 56, 172))'
 };
 
 export const N2Widgets: Array<PlaygroundWidget> = [
@@ -64,4 +68,46 @@ export const N2Widgets: Array<PlaygroundWidget> = [
 ];
 export const computeWidgets = (widgets: Array<PlaygroundWidget>, useN2: boolean) => {
 	return [...(useN2 ? N2Widgets : []), ...widgets];
+};
+
+export const N2Icons: Array<PlaygroundIcon> = [
+	{$key: 'back'},
+	{$key: 'date'},
+	{$key: 'time'},
+	{$key: 'check'},
+	{$key: 'times'},
+	{$key: 'remove'},
+	{$key: 'expand'},
+	{$key: 'collapse'},
+	{$key: 'edit'},
+	{$key: 'view'},
+	{$key: 'forward'},
+	{$key: 'backward'},
+	{$key: 'caretLeft'},
+	{$key: 'caretRight'},
+	{$key: 'caretDown'},
+	{$key: 'arrowDown'},
+	{$key: 'angleLeft'},
+	{$key: 'angleRight'},
+	{$key: 'spinner'},
+	{$key: 'cart'}
+];
+
+export const computeIcons = (icons: Array<PlaygroundIcon>, useN2: boolean) => {
+	return [...(useN2 ? N2Icons : []), ...icons];
+};
+
+export const computeConstants = (constants: Array<PlaygroundConstant>, useN2: boolean): Array<PlaygroundConstant> => {
+	return [
+		...(useN2 ? [{$prefix: ATTRIBUTE_VALUE_ICON_SYMBOL, label: 'Pre-built icon constant.'}] : []),
+		...constants
+	];
+};
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+export const computeReferences = (references: Array<PlaygroundReference>, _useN2: boolean): Array<PlaygroundReference> => {
+	return [
+		{$prefix: ATTRIBUTE_VALUE_EXT_SYMBOL, label: 'Reference to pre-built function.'},
+		...references
+	];
 };

@@ -16,7 +16,6 @@ export interface EditorState {
 export const Editor = (props: EditorProps) => {
 	const {
 		content,
-		// eslint-disable-next-line @typescript-eslint/no-unused-vars
 		externalDefsTypes, widgets,
 		...rest
 	} = props;
@@ -37,7 +36,7 @@ export const Editor = (props: EditorProps) => {
 					basicSetup,
 					keymap.of([indentWithTab]),
 					d9mlHighlightStyle,
-					createD9mlCompletions(widgets),
+					createD9mlCompletions({widgets, externalDefsTypes: externalDefsTypes ?? {}}),
 					markdown({
 						base: markdownLanguage, extensions: [d9mlExtensions]
 					}),
@@ -58,7 +57,7 @@ export const Editor = (props: EditorProps) => {
 		return () => {
 			editor.destroy();
 		};
-	}, [fire, widgets]);
+	}, [fire, widgets, externalDefsTypes]);
 	useEffect(() => {
 		if (state.editor == null) {
 			return;

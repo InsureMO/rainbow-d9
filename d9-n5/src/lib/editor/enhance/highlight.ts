@@ -3,6 +3,10 @@ import {tags} from '@lezer/highlight';
 import {
 	WidgetDeclarationAttrNameTag,
 	WidgetDeclarationAttrSplitterTag,
+	WidgetDeclarationAttrValueExtTag,
+	WidgetDeclarationAttrValueIconTag,
+	WidgetDeclarationAttrValueSplitterTag,
+	WidgetDeclarationAttrValueStrTag,
 	WidgetDeclarationAttrValueTag,
 	WidgetDeclarationFlagTag,
 	WidgetDeclarationHeadlineTag,
@@ -37,7 +41,11 @@ const extendHighlightStyle = HighlightStyle.define([
 	{tag: WidgetDeclarationFlagTag, class: 'd9-playground-editor-widget-declaration-flag'},
 	{tag: WidgetDeclarationAttrNameTag, class: 'd9-playground-editor-widget-declaration-attr-name'},
 	{tag: WidgetDeclarationAttrSplitterTag, class: 'd9-playground-editor-widget-declaration-attr-splitter'},
-	{tag: WidgetDeclarationAttrValueTag, class: 'd9-playground-editor-widget-declaration-attr-value'}
+	{tag: WidgetDeclarationAttrValueTag, class: 'd9-playground-editor-widget-declaration-attr-value'},
+	{tag: WidgetDeclarationAttrValueSplitterTag, class: 'd9-playground-editor-widget-declaration-attr-value-splitter'},
+	{tag: WidgetDeclarationAttrValueIconTag, class: 'd9-playground-editor-widget-declaration-attr-value-icon'},
+	{tag: WidgetDeclarationAttrValueStrTag, class: 'd9-playground-editor-widget-declaration-attr-value-str'},
+	{tag: WidgetDeclarationAttrValueExtTag, class: 'd9-playground-editor-widget-declaration-attr-value-ext'}
 ]);
 
 export const d9mlHighlightStyle = syntaxHighlighting(extendHighlightStyle);

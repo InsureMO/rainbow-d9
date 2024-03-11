@@ -1,8 +1,14 @@
-import {InlineContext, InlineParser} from '@lezer/markdown';
+import {Element, InlineContext, InlineParser} from '@lezer/markdown';
 import {Semantic} from '@rainbow-d9/n3';
 
 export const WIDGET_DECLARATION_SPLITTER = Semantic.AbstractSemanticNodeWidgetParser.WIDGET_TITLE_SPLITTER;
 export const ATTRIBUTE_DECLARATION_SPLITTER = ':';
+export const ATTRIBUTE_VALUE_CONST_START = '$';
+export const ATTRIBUTE_VALUE_ICON_SYMBOL = '$icons';
+export const ATTRIBUTE_VALUE_ICON_PREFIX = `${ATTRIBUTE_VALUE_ICON_SYMBOL}.`;
+export const ATTRIBUTE_VALUE_REF_START = '@';
+export const ATTRIBUTE_VALUE_EXT_SYMBOL = '@ext';
+export const ATTRIBUTE_VALUE_EXT_PREFIX = `${ATTRIBUTE_VALUE_EXT_SYMBOL}.`;
 
 export interface ParsedWidgetDeclaration {
 	$wt?: string;
@@ -98,11 +104,36 @@ export const parseAttribute = (ctx: InlineContext, text: string, offset: number)
 	if (segments.length === 1) {
 		return -1;
 	}
+
 	const [attributeName, attributeValue] = segments;
+	let valueElements: Array<Element>;
+	if ((attributeValue ?? '').indexOf(ATTRIBUTE_VALUE_ICON_SYMBOL) != -1) {
+		const icons = attributeValue.split(';');
+		const computed = icons.reduce((computed, icon, index) => {
+			if (index !== 0) {
+				computed.children.push(ctx.elt('WidgetDeclarationAttrValueSplitter', offset + computed.used, offset + computed.used + 1));
+				computed.used = computed.used + 1;
+			}
+			if (icon.indexOf(ATTRIBUTE_VALUE_ICON_SYMBOL) != -1) {
+				computed.children.push(ctx.elt('WidgetDeclarationAttrValueIcon', offset + computed.used, offset + computed.used + icon.length));
+			} else {
+				computed.children.push(ctx.elt('WidgetDeclarationAttrValueStr', offset + computed.used, offset + computed.used + icon.length));
+			}
+			computed.used = computed.used + icon.length;
+			return computed;
+		}, {used: attributeName.length + 1, children: []} as { used: number; children: Array<Element> });
+		valueElements = computed.children;
+	} else if ((attributeValue ?? '').trim().startsWith(ATTRIBUTE_VALUE_EXT_SYMBOL)) {
+		valueElements = [ctx.elt('WidgetDeclarationAttrValueExt', offset + attributeName.length + 1, offset + attributeName.length + 1 + attributeValue.length)];
+	} else {
+		valueElements = attributeValue != null
+			? [ctx.elt('WidgetDeclarationAttrValue', offset + attributeName.length + 1, offset + attributeName.length + 1 + attributeValue.length)]
+			: [];
+	}
 	const children = [
 		attributeName != null ? ctx.elt('WidgetDeclarationAttrName', offset, offset + attributeName.length) : (void 0),
-		attributeValue != null ? ctx.elt('WidgetDeclarationAttrSplitter', offset + attributeName.length, offset + attributeName.length + 2) : (void 0),
-		attributeValue != null ? ctx.elt('WidgetDeclarationAttrValue', offset + attributeName.length + 2, offset + attributeName.length + 2 + attributeValue.length) : (void 0)
+		attributeValue != null ? ctx.elt('WidgetDeclarationAttrSplitter', offset + attributeName.length, offset + attributeName.length + 1) : (void 0),
+		...valueElements
 	].filter(x => x != null);
 	return ctx.addElement(ctx.elt('WidgetDeclaration', offset, ctx.end, children));
 };
