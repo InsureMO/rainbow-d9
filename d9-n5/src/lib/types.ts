@@ -26,10 +26,17 @@ export interface ExternalDefsTypes {
 	[key: ExternalDefKey]: ExternalDefType | Array<ExternalDefType> | ExternalDefsTypes | Array<ExternalDefsTypes>;
 }
 
+export interface PlaygroundWidgetProperty {
+	name: string;
+	label?: string;
+	description?: string;
+}
+
 export interface PlaygroundWidget {
 	$wt: string;
 	label?: string;
 	description?: string;
+	properties?: Array<PlaygroundWidgetProperty>;
 }
 
 export interface PlaygroundIcon {

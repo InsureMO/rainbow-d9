@@ -1,7 +1,13 @@
 import {CssVars} from '@rainbow-d9/n2';
 import {N2} from '@rainbow-d9/n3';
 import {ATTRIBUTE_VALUE_EXT_SYMBOL, ATTRIBUTE_VALUE_ICON_SYMBOL} from './editor/enhance';
-import {PlaygroundConstant, PlaygroundIcon, PlaygroundReference, PlaygroundWidget} from './types';
+import {
+	PlaygroundConstant,
+	PlaygroundIcon,
+	PlaygroundReference,
+	PlaygroundWidget,
+	PlaygroundWidgetProperty
+} from './types';
 
 export const PlaygroundCssVars = {
 	Z_INDEX: 9999999,
@@ -28,8 +34,21 @@ export const PlaygroundCssVars = {
 export const N2Widgets: Array<PlaygroundWidget> = [
 	{$wt: N2.N2WidgetType.PAGE, description: 'Only one allowed, and always at the highest level.'},
 
-	{$wt: N2.N2WidgetType.INPUT, label: 'Input box.'},
-	{$wt: N2.N2WidgetType.NUMBER},
+	{
+		$wt: N2.N2WidgetType.INPUT, label: 'Input box.', properties: [
+			{name: 'autoSelect', label: 'Boolean. Select all content automatically.', description: 'Default true.'},
+			{
+				name: 'valueToNumber',
+				label: 'Boolean. Attempt to synchronize with the data model using digital formatting.',
+				description: 'Default false.'
+			}
+		]
+	},
+	{
+		$wt: N2.N2WidgetType.NUMBER, properties: [
+			{name: 'autoSelect', label: 'Boolean. Select all content automatically.', description: 'Default true.'}
+		]
+	},
 	{$wt: N2.N2WidgetType.DECORATE_INPUT},
 	{$wt: N2.N2WidgetType.DECORATE_NUMBER},
 	{$wt: N2.N2WidgetType.TEXTAREA},
@@ -66,6 +85,7 @@ export const N2Widgets: Array<PlaygroundWidget> = [
 
 	{$wt: N2.N2WidgetType.PAGINATION}
 ];
+
 export const computeWidgets = (widgets: Array<PlaygroundWidget>, useN2: boolean) => {
 	return [...(useN2 ? N2Widgets : []), ...widgets];
 };
@@ -110,4 +130,32 @@ export const computeReferences = (references: Array<PlaygroundReference>, _useN2
 		{$prefix: ATTRIBUTE_VALUE_EXT_SYMBOL, label: 'Reference to pre-built function.'},
 		...references
 	];
+};
+
+export const CommonWidgetAttributes: Array<PlaygroundWidgetProperty> = [
+	{name: '$fc', label: 'Force wrap widget to form cell.'},
+	{name: 'holdPositionWhenInvisible', label: 'Hold position when widget is invisible, works when form cell wrapped.'},
+	{name: '$pp', label: 'Model property name.'},
+	{name: 'property', label: 'Alias of "$pp".'},
+	{name: '$pos', label: 'Position in grid.'},
+	{name: 'place', label: 'Alias of "$pos".'},
+	{name: 'pos', label: 'Alias of "$pos".'},
+	{name: 'position', label: 'Alias of "$pos".'},
+	{name: '$mpos', label: 'Position in grid, priority only takes effect in the mobile environment.'},
+	{name: '$mpos', label: 'Alias of "$mpos".'},
+	{name: '$disabled', label: 'Disablement.'},
+	{name: 'disabled', label: 'Alias of "$disabled".'},
+	{name: '$visible', label: 'Visibility.'},
+	{name: 'visible', label: 'Alias of "$visible".'},
+	{name: '$valid', label: 'Validation rules.'},
+	{name: 'validate', label: 'Alias of "$valid".'},
+	{name: '$validationScopes'},
+	{name: 'validateScopes', label: 'Alias of "$validationScopes".'},
+	{name: 'watch', label: 'Monitor other property changes.'},
+	{name: 'repaint', label: 'Monitor other property changes, and repaint myself.'},
+	{name: 'clearMe', label: 'Monitor other property changes, and clear my value.'}
+];
+
+export const getCommonWidgetAttributes = (): Array<PlaygroundWidgetProperty> => {
+	return CommonWidgetAttributes;
 };

@@ -32,7 +32,7 @@ export const buildConfig = (lint) => {
 			'codemirror', '@codemirror/view', '@codemirror/state',
 			'@codemirror/commands', '@codemirror/autocomplete',
 			'@codemirror/language', '@codemirror/lang-markdown', '@codemirror/lang-html',
-			'@lezer/markdown', '@lezer/common', '@lezer/highlight',
+			'@lezer/common', '@lezer/highlight', '@lezer/markdown',
 			'@rainbow-d9/n1', '@rainbow-d9/n2', '@rainbow-d9/n3'
 		]
 	};

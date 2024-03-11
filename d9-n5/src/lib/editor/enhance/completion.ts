@@ -1,14 +1,21 @@
 import {Completion, CompletionContext, CompletionResult} from '@codemirror/autocomplete';
 import {markdownLanguage} from '@codemirror/lang-markdown';
 import {syntaxTree} from '@codemirror/language';
+import {SyntaxNode} from '@lezer/common';
 import {N2, VUtils} from '@rainbow-d9/n3';
-import {ExternalDefsTypes, ExternalDefType, PlaygroundWidgets} from '../../types';
+import {ExternalDefsTypes, ExternalDefType, PlaygroundWidgetProperty, PlaygroundWidgets} from '../../types';
+import {getCommonWidgetAttributes} from '../../widgets';
 import {
 	ATTRIBUTE_VALUE_CONST_START,
 	ATTRIBUTE_VALUE_EXT_PREFIX,
 	ATTRIBUTE_VALUE_ICON_PREFIX,
 	ATTRIBUTE_VALUE_REF_START
 } from './widget-parse';
+
+export interface AttrNameCompletion extends Completion {
+	$wt: ExternalDefType['$wt'] | '$all';
+	name: PlaygroundWidgetProperty['name'];
+}
 
 export interface ExtCompletion extends Completion {
 	$wt: ExternalDefType['$wt'];
@@ -47,6 +54,30 @@ export const buildExtOptions = (externalDefsTypes: ExternalDefsTypes, parentKey?
 	}, []).filter(x => x != null);
 };
 
+export const findWidgetType = (node: SyntaxNode, context: CompletionContext): string | undefined => {
+	const bulletList = node.parent;
+	if (bulletList == null || bulletList.name !== 'BulletList') {
+		return (void 0);
+	}
+	const parent = bulletList.parent;
+	if (parent == null || parent.name !== 'ListItem') {
+		// TODO MIGHT BE HEADING
+		return (void 0);
+	}
+	// firstChild is ListMark, nextSibling is Paragraph, firstChild could be WidgetDeclaration
+	const declaration = parent.firstChild?.nextSibling?.firstChild;
+	if (declaration == null || declaration.name !== 'WidgetDeclaration') {
+		return (void 0);
+	}
+	const declarationType = declaration.firstChild;
+	if (declarationType == null || declarationType.name !== 'WidgetDeclarationType') {
+		// TODO SHOULD KEEP FINDING?
+		return (void 0);
+	}
+
+	return context.state.sliceDoc(declarationType.from, declarationType.to);
+};
+
 //TODO:
 // 1. completion: attribute name, attributes list names, $icons, $ext
 // 2. $icons, $ext syntax highlight
@@ -60,8 +91,22 @@ export const createCompleteD9ml = (options: {
 	const {widgets, externalDefsTypes} = options;
 
 	const WidgetTypeOptions: Array<Completion> = widgets.widgets
+		// page is special, only for heading1
 		.filter(({$wt}) => $wt != N2.N2WidgetType.PAGE)
 		.map(({$wt, label, description}) => ({label: $wt, detail: label, info: description, type: 'class'}));
+	const WidgetAttrNameOptions: Array<AttrNameCompletion> = [
+		...getCommonWidgetAttributes().map(({name, label, description}) => {
+			return {label: name, detail: label, info: description, $wt: '$all', name};
+		}),
+		...widgets.widgets
+			// page is special, no attribute needed
+			.filter(({$wt}) => $wt != N2.N2WidgetType.PAGE)
+			.map(({$wt, properties}) => {
+				return (properties ?? []).map(({name, label, description}) => {
+					return {label: name, detail: label, info: description, $wt, name};
+				});
+			}).flat()
+	];
 	const WidgetConstPrefixOptions: Array<Completion> = widgets.constants
 		.map(({$prefix, label, description}) => ({label: $prefix, detail: label, info: description, type: 'variable'}));
 	const WidgetIconOptions: Array<Completion> = widgets.icons
@@ -105,13 +150,21 @@ export const createCompleteD9ml = (options: {
 			}
 			if (nodeBefore2.name === 'ListItem') {
 				const textBefore = (context.state.sliceDoc(nodeBefore2.from, context.pos) ?? '').trim();
+				// bullet list
 				const tagBefore = /([-|*]\s+)\w*$/.exec(textBefore);
 				if (tagBefore == null) {
 					return null;
 				}
+				const widgetType = findWidgetType(nodeBefore2, context);
+				const attrOptions = WidgetAttrNameOptions.filter(option => {
+					return option.$wt === '$all' || option.$wt === widgetType;
+				});
 				return {
 					from: nodeBefore2.from + tagBefore[1].length,
-					options: WidgetTypeOptions
+					options: [
+						...WidgetTypeOptions,
+						...attrOptions
+					]
 					// validFor: /^#{1,6}\s+\w*$/
 				};
 			}
