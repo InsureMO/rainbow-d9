@@ -7,7 +7,7 @@ export class PageTranslator extends AbstractTranslator<ParsedHeadingIdentified> 
 		return $wt === SemanticHelper.PAGE;
 	}
 
-	public translate(node: ParsedHeadingIdentified): ParsedNodeDef {
+	protected doTranslate(node: ParsedHeadingIdentified): ParsedNodeDef {
 		const $wt = SemanticHelper.PAGE;
 
 		const classified = this.classifyAttributesAndSubWidgetsByList(node);

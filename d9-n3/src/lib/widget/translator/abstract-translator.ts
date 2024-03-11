@@ -1,4 +1,4 @@
-import {ExternalDefIndicator, Nullable, PropertyPath, Undefinable, VUtils} from '@rainbow-d9/n1';
+import {ExternalDefIndicator, MonitorNodeAttributes, Nullable, PropertyPath, Undefinable, VUtils} from '@rainbow-d9/n1';
 import {PreparsedSubordinateOfHeadingNodes} from '../../ast';
 import {N3Logger} from '../../logger';
 import {ParsedNodeType} from '../../node-types';
@@ -38,7 +38,34 @@ export abstract class AbstractTranslator<N extends Decipherable> {
 
 	public abstract isTypeSupported($wt: WidgetType): boolean;
 
-	public abstract translate(node: N): ParsedNodeDef;
+	public postTranslationCorrectionWork(def: ParsedNodeDef): ParsedNodeDef {
+		const {node} = def;
+		[
+			'$key', D9PropertyNames.PROPERTY, D9PropertyNames.POSITION, D9PropertyNames.MOBILE_POSITION,
+			D9PropertyNames.VALIDATION_SCOPES,
+			MonitorNodeAttributes.VALID, MonitorNodeAttributes.REACTION
+		].forEach(key => {
+			if (typeof node[key] === 'boolean') {
+				delete node[key];
+			}
+		});
+		if (typeof node.$pp === 'boolean') {
+			delete node.$pp;
+		}
+
+		return def;
+	}
+
+	protected abstract doTranslate(node: N): ParsedNodeDef;
+
+	public translate(node: N): ParsedNodeDef {
+		const def = this.doTranslate(node);
+		if (def == null) {
+			return def;
+		} else {
+			return this.postTranslationCorrectionWork(def);
+		}
+	}
 
 	protected classifyAttributesAndSubWidgetsByList(parent: N): ClassifiedAttributesAndWidgets {
 		const children = parent.children ?? [];

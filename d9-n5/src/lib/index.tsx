@@ -17,3 +17,5 @@ export {EditorWrapper} from './editor/widgets';
 export {PlaygroundSliderState} from './slider';
 export {SideSlider} from './slider';
 export {Slider} from './slider';
+export {ParseError} from './viewer/widgets';
+export {ViewerWrapper} from './viewer/widgets';

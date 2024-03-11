@@ -103,7 +103,7 @@ export class WidgetTranslator extends AbstractTranslator<Decipherable> {
 		return transformed;
 	}
 
-	protected doTranslate(node: Decipherable, $pp: Undefinable<PropertyPath>, label: Nullable<string>, findChildren: () => Array<ParsedNodeDef>): ParsedNodeDef {
+	protected doTranslateNode(node: Decipherable, $pp: Undefinable<PropertyPath>, label: Nullable<string>, findChildren: () => Array<ParsedNodeDef>): ParsedNodeDef {
 		const {$wt} = node;
 
 		const classified = this.classifyAttributesAndSubWidgetsByList(node);
@@ -159,13 +159,13 @@ export class WidgetTranslator extends AbstractTranslator<Decipherable> {
 		return {node: def, success: true};
 	}
 
-	public translate(node: Decipherable): ParsedNodeDef {
+	protected doTranslate(node: Decipherable): ParsedNodeDef {
 		if (node.type === ParsedNodeType.HEADING) {
-			return this.doTranslate(node, node.$pp, node.headline, () => {
+			return this.doTranslateNode(node, node.$pp, node.headline, () => {
 				return this.buildChildrenOnSubHeadings({widgets: node.children});
 			});
 		} else if (node.type === ParsedNodeType.LIST_ITEM) {
-			return this.doTranslate(node, node.$pp, node.label, () => []);
+			return this.doTranslateNode(node, node.$pp, node.label, () => []);
 		} else {
 			// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 			// @ts-ignore

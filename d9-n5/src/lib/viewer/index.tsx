@@ -5,37 +5,12 @@ import {
 	useThrottler,
 	VUtils
 } from '@rainbow-d9/n1';
-import {DOM_KEY_WIDGET} from '@rainbow-d9/n2';
 import {parseDoc} from '@rainbow-d9/n3';
 import React, {useEffect, useState} from 'react';
-import styled from 'styled-components';
 import {PlaygroundEventTypes, usePlaygroundEventBus} from '../playground-event-bus';
 import {ViewerProps} from '../types';
-
-// noinspection CssUnresolvedCustomProperty
-export const ViewerWrapper = styled.div.attrs(() => {
-	return {
-		[DOM_KEY_WIDGET]: 'd9-playground-viewer',
-		style: {}
-	};
-})`
-    display: block;
-    position: relative;
-    align-self: stretch;
-    grid-column: 3;
-    grid-row: 1 / span 2;
-    overflow: auto;
-
-    > div[data-w=d9-page] {
-        margin: 16px;
-    }
-`;
-export const ParseError = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-playground-viewer-error'})`
-    display: flex;
-    position: relative;
-    align-items: center;
-    padding: 16px 32px;
-`;
+import {ErrorBoundary} from './error-boundary';
+import {ParseError, ViewerWrapper} from './widgets';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const clearExternalDefs = (opts: any) => {
@@ -92,7 +67,12 @@ export const Viewer = (props: ViewerProps) => {
 			...(externalDefs ?? {})
 		};
 		return <ViewerWrapper>
-			<StandaloneRoot {...def} $root={mockData} externalDefs={enhancedExternalDefs}/>
+			{/**
+			 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+			 @ts-ignore */}
+			<ErrorBoundary content={content}>
+				<StandaloneRoot {...def} $root={mockData} externalDefs={enhancedExternalDefs}/>
+			</ErrorBoundary>
 		</ViewerWrapper>;
 	} catch (error) {
 		return <ViewerWrapper>

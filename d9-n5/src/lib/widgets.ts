@@ -31,36 +31,45 @@ export const PlaygroundCssVars = {
 	WIDGET_DECLARATION_ATTR_VALUE_EXT_COLOR: 'var(--d9-playground-widget-declaration-attr-name-color, rgb(10, 56, 172))'
 };
 
+const AutoSelect: PlaygroundWidgetProperty = {
+	name: 'autoSelect', label: 'Boolean. Select all content automatically.', description: 'Default true.'
+};
+const DecorateElements = (name: 'leads' | 'tails'): PlaygroundWidgetProperty => {
+	return {
+		name, label: 'Decorations.',
+		description: 'A string or a predefined icon. Icons need to start with “$icons.” Multiple decorations can be connected with “;”.'
+	};
+};
+const LeadsDecorateElements = DecorateElements('leads');
+const TailsDecorateElements = DecorateElements('tails');
 export const N2Widgets: Array<PlaygroundWidget> = [
 	{$wt: N2.N2WidgetType.PAGE, description: 'Only one allowed, and always at the highest level.'},
 
 	{
 		$wt: N2.N2WidgetType.INPUT, label: 'Input box.', properties: [
-			{name: 'autoSelect', label: 'Boolean. Select all content automatically.', description: 'Default true.'},
+			AutoSelect,
 			{
 				name: 'valueToNumber',
-				label: 'Boolean. Attempt to synchronize with the data model using digital formatting.',
-				description: 'Default false.'
+				label: 'Boolean. Treat as a number.',
+				description: 'Default false. Attempt to synchronize with the data model as a number.'
 			}
 		]
 	},
 	{
-		$wt: N2.N2WidgetType.NUMBER, properties: [
-			{name: 'autoSelect', label: 'Boolean. Select all content automatically.', description: 'Default true.'}
-		]
+		$wt: N2.N2WidgetType.NUMBER, properties: [AutoSelect]
 	},
-	{$wt: N2.N2WidgetType.DECORATE_INPUT},
-	{$wt: N2.N2WidgetType.DECORATE_NUMBER},
-	{$wt: N2.N2WidgetType.TEXTAREA},
+	{$wt: N2.N2WidgetType.DECORATE_INPUT, properties: [AutoSelect, LeadsDecorateElements, TailsDecorateElements]},
+	{$wt: N2.N2WidgetType.DECORATE_NUMBER, properties: [AutoSelect, LeadsDecorateElements, TailsDecorateElements]},
+	{$wt: N2.N2WidgetType.TEXTAREA, properties: [AutoSelect]},
 	{$wt: N2.N2WidgetType.CHECKBOX},
 	{$wt: N2.N2WidgetType.CHECKBOXES},
 	{$wt: N2.N2WidgetType.CHECKS},
 	{$wt: N2.N2WidgetType.RADIO},
 	{$wt: N2.N2WidgetType.RADIOS},
-	{$wt: N2.N2WidgetType.BUTTON},
+	{$wt: N2.N2WidgetType.BUTTON, properties: [LeadsDecorateElements, TailsDecorateElements]},
 	{$wt: N2.N2WidgetType.BUTTON_BAR},
-	{$wt: N2.N2WidgetType.CAPTION},
-	{$wt: N2.N2WidgetType.LABEL},
+	{$wt: N2.N2WidgetType.CAPTION, properties: [LeadsDecorateElements, TailsDecorateElements]},
+	{$wt: N2.N2WidgetType.LABEL, properties: [LeadsDecorateElements, TailsDecorateElements]},
 	{$wt: N2.N2WidgetType.BADGE},
 	{$wt: N2.N2WidgetType.DROPDOWN},
 	{$wt: N2.N2WidgetType.MULTI_DROPDOWN},
