@@ -35,8 +35,8 @@ export const guardPaginationData = ($model: BaseModel, $pp: string): PaginationD
 	} else {
 		data.pageCount = 1;
 	}
-	const checkItemCount = VUtils.isPositive(data.itemCount);
-	if (checkItemCount.test) {
+	const checkItemCount = VUtils.isNumber(data.itemCount);
+	if (checkItemCount.test && data.itemCount >= 0) {
 		data.itemCount = Math.floor(data.itemCount);
 		const maxPageCount = Math.ceil(data.itemCount / data.pageSize);
 		data.pageCount = Math.min(data.pageCount, maxPageCount);
