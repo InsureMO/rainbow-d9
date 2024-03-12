@@ -46,6 +46,118 @@ const DecorateElements = (name: 'leads' | 'tails'): PlaygroundWidgetProperty => 
 };
 const LeadsDecorateElements = DecorateElements('leads');
 const TailsDecorateElements = DecorateElements('tails');
+const Please: PlaygroundWidgetProperty = {name: 'please', label: 'Text. Placeholder.'};
+const Clearable: PlaygroundWidgetProperty = {name: 'clearable', label: 'Boolean.', description: 'Default true.'};
+const CalendarProperties: Array<PlaygroundWidgetProperty> = [
+	Please, Clearable,
+	{name: 'dateFormat', label: 'Text.', description: 'Default value depends on system settings.'},
+	{name: 'time', label: 'Boolean. Allow time part or not.', description: 'Default false.'},
+	{
+		name: 'timeFormat',
+		label: 'Text.',
+		description: 'Default value depends on system settings, works only when "time" is true.'
+	},
+	{name: 'storeFormat', label: 'Text.', description: 'Default value depends on system settings.'},
+	{
+		name: 'fixedTimeAt', label: 'Text.',
+		description: 'Default value depends on system settings, works only when "time" is false.\n"start", "0", "end", "HH:mm:ss", "HH:mm:ss.SSS".'
+	},
+	{
+		name: 'initTimeAt', label: 'Text.',
+		description: '"start", "0", "end", "HH:mm:ss", "HH:mm:ss.SSS".'
+	},
+	{name: 'autoConfirm', label: 'Boolean.', description: 'Confirm selection when blurred.'},
+	{name: 'useCalendarIcon', label: 'Boolean.', description: 'Use calendar icon instead of caret.'}
+];
+const OptionItemsProperties: Array<PlaygroundWidgetProperty> = [
+	{name: 'options', label: 'Text, Various.'},
+	{name: 'optionSort', label: 'Text.', description: '"asc", "desc".'},
+	{name: 'sort', label: 'Text. Shortcut of "optionSort".', description: '"asc", "desc".'},
+	{name: 'noAvailable', label: 'Text.', description: 'Reminder text when no available option item.'},
+	{name: 'noMatched', label: 'Text.', description: 'Reminder text when no matched option item.'}
+];
+const CheckboxesProperties: Array<PlaygroundWidgetProperty> = [
+	...OptionItemsProperties.filter(({name}) => name !== 'noMatched'),
+	{name: 'columns', label: 'Number.', description: 'Display columns when not on compact mode.'},
+	{name: 'compact', label: 'Boolean.', description: 'Default true. Try to fit as many as possible onto one line.'},
+	{
+		name: 'single', label: 'Boolean.',
+		description: 'Default false. Use primitive value of model instead of an array.'
+	},
+	{name: 'boolOnSingle', label: 'Boolean.', description: 'Default false. Use false when no option checked.'}
+];
+const DropdownProperties: Array<PlaygroundWidgetProperty> = [
+	...OptionItemsProperties,
+	Please, Clearable,
+	{name: 'maxWidth', label: 'Number.', description: 'Max popup width, in pixels.'}
+];
+const Click: PlaygroundWidgetProperty = {name: 'click', label: 'Snippet.', description: 'Handle click event.'};
+const CaptionProperties: Array<PlaygroundWidgetProperty> = [
+	{name: 'labelOnValue', label: 'Boolean.', description: 'Default false. Content read from model or not.'},
+	{name: 'label', label: 'Text.', description: 'Static content, ignored when "text" declared.'},
+	{name: 'text', label: 'Text.', description: 'Static content, works on "labelOnValue" is false.'},
+	{name: 'valueToLabel', label: 'Snippet.', description: 'Snippet to compute display label.'},
+	Click
+];
+const Ink: PlaygroundWidgetProperty = {
+	name: 'ink', label: 'Text.',
+	description: 'Ink mode. "primary", "success", "warn", "info", "danger", "waive".'
+};
+const Fill: PlaygroundWidgetProperty = {
+	name: 'fill', label: 'Text.', description: 'Fill mode. "link", "plain", "fill".'
+};
+const ButtonProperties: Array<PlaygroundWidgetProperty> = [
+	Ink, Fill, {name: 'text', label: 'Text.', description: 'Label.'}, Click
+];
+const NoElementReminder: PlaygroundWidgetProperty = {
+	name: 'noElementReminder', label: 'Text.', description: 'No item reminder text.'
+};
+const ArrayProperties: Array<PlaygroundWidgetProperty> = [
+	NoElementReminder,
+	{name: 'addable', label: 'Boolean.', description: 'Default false. Could add item or not.'},
+	{name: 'addLabel', label: 'Text.', description: 'Default add button label.'},
+	{
+		name: 'couldAddElement', label: 'Snippet.',
+		description: 'Check could add new item or not, runtime check before apply adding.'
+	},
+	{
+		name: 'disableOnCannotAdd', label: 'Boolean.',
+		description: 'Default false. Disable add button when adding new item is not allowed.'
+	},
+	{name: 'createElement', label: 'Snippet.', description: 'Default use empty object as new item.'},
+	{name: 'elementAdded', label: 'Snippet.', description: 'Handle item added event.'},
+	{name: 'removable', label: 'Boolean.', description: 'Default false. Could remove item or not.'},
+	// {name: 'removeLabel', label: 'Text.', description: 'Default remove button label.'},
+	{
+		name: 'couldRemoveElement', label: 'Snippet.',
+		description: 'Check could remove item or not, runtime check before apply removing.'
+	},
+	{name: 'elementRemoved', label: 'Snippet.', description: 'Handle item removed event.'}
+];
+const TableProperties: Array<PlaygroundWidgetProperty> = [
+	{
+		name: 'headers',
+		label: 'List',
+		description: 'Column headers. "- column:\n\t- label: Header label\n\twidth: 300", "- Header Label: 300"'
+	},
+	{name: 'headerHeight', label: 'Number.', description: 'In pixels.'},
+	{name: 'expandable', label: 'Boolean.', description: 'Default false. Row expandable.'},
+	{name: 'fixedLeadColumns', label: 'Number.', description: 'How many lead columns are fixed.'},
+	{name: 'fixedTailColumns', label: 'Number.', description: 'How many tail columns are fixed.'},
+	{name: 'hideClassicCellsOnExpandable', label: 'Boolean.', description: 'Default false.'},
+	{name: 'clickToExpand', label: 'Boolean.', description: 'Default false.'},
+	{name: 'maxBodyHeight', label: 'Number.', description: 'Maximum body height, in pixels.'},
+	{name: 'operatorsColumnWidth', label: 'Number.', description: 'Operators column width.'},
+	{name: 'rowIndexStartsFrom', label: 'Number.', description: 'Default 1.'},
+	{
+		name: 'omitDefaultRowOperators',
+		label: 'Boolean, Text.',
+		description: 'True to omit the remove, expand, collapse row operators.\nOr "remove" to omit remove only, "fold" to omit expand and collapse.'
+	}
+];
+const RibsProperties: Array<PlaygroundWidgetProperty> = [
+	{name: 'caption', label: 'Text, Various.', description: 'Caption for each item.'}
+];
 
 export const N2WidgetGroups: Array<PlaygroundWidgetGroup> = [
 	{icon: PlaygroundIcons.CONTAINER_GROUP, tooltip: 'Container', key: PlaygroundWidgetGroupKey.CONTAINERS},
@@ -53,12 +165,7 @@ export const N2WidgetGroups: Array<PlaygroundWidgetGroup> = [
 	{icon: PlaygroundIcons.OPTIONS_GROUP, tooltip: 'Choices', key: PlaygroundWidgetGroupKey.OPTIONS},
 	{icon: PlaygroundIcons.DISPLAY_GROUP, tooltip: 'Label & Chart', key: PlaygroundWidgetGroupKey.DISPLAY}
 ];
-// 	[PlaygroundWidgetGroup.INPUTS];
-// :
-// [
-// 	{key: 'Link', icon: PlaygroundIcons.LINK, tooltip: 'Hyperlink'},
-// 	{key: 'Password', icon: PlaygroundIcons.PASSWORD, tooltip: 'Password'},
-// ],
+
 export const N2Widgets: Array<PlaygroundWidget> = [
 	{
 		$wt: N2.N2WidgetType.PAGE, description: 'Only one allowed, and always at the highest level.',
@@ -104,73 +211,104 @@ export const N2Widgets: Array<PlaygroundWidget> = [
 	},
 	{
 		$wt: N2.N2WidgetType.CALENDAR, label: 'Date picker.',
+		properties: CalendarProperties,
 		icon: PlaygroundIcons.DATE, group: PlaygroundWidgetGroupKey.INPUTS, tooltip: 'Date picker',
 		notInToolbar: true
 	},
 	{
 		$wt: N2.N2WidgetType.DATE, label: 'Date picker. Shortcut of "Calendar"',
+		properties: CalendarProperties.filter(({name}) => name !== 'time' && name !== 'timeFormat'),
 		icon: PlaygroundIcons.DATE, group: PlaygroundWidgetGroupKey.INPUTS, tooltip: 'Date picker'
 	},
 	{
 		$wt: N2.N2WidgetType.DATETIME, label: 'Datetime picker.',
+		properties: CalendarProperties.filter(({name}) => name !== 'time' && name !== 'fixedTimeAt'),
 		icon: PlaygroundIcons.DATETIME, group: PlaygroundWidgetGroupKey.INPUTS, tooltip: 'Datetime picker'
 	},
 
 	// options
 	{
 		$wt: N2.N2WidgetType.CHECKBOX,
+		properties: [
+			{
+				name: 'values', label: 'Text.',
+				description: 'One or two values, connected by ",". First is true value, second is false value.'
+			},
+			{
+				name: 'emptyWhenFalse', label: 'Boolean.',
+				description: 'Default false. Use times icon when it is false.'
+			}
+		],
 		icon: PlaygroundIcons.CHECKBOX, group: PlaygroundWidgetGroupKey.OPTIONS
 	},
 	{
 		$wt: N2.N2WidgetType.CHECKBOXES, label: 'Checkbox group.',
+		properties: CheckboxesProperties,
 		icon: PlaygroundIcons.CHECKS, group: PlaygroundWidgetGroupKey.OPTIONS, tooltip: 'Checkbox group',
 		notInToolbar: true
 	},
 	{
 		$wt: N2.N2WidgetType.CHECKS, label: 'Checkbox group. Shortcut of "Checkboxes".',
+		properties: CheckboxesProperties,
 		icon: PlaygroundIcons.CHECKS, group: PlaygroundWidgetGroupKey.OPTIONS, tooltip: 'Checkbox group'
 	},
 	{
 		$wt: N2.N2WidgetType.RADIO, label: 'Radio button.',
+		properties: [
+			{
+				name: 'values', label: 'Text.',
+				description: 'One or two values, connected by ",". First is true value, second is false value.'
+			}
+		],
 		icon: PlaygroundIcons.RADIO, group: PlaygroundWidgetGroupKey.OPTIONS, tooltip: 'Radio button'
 	},
 	{
 		$wt: N2.N2WidgetType.RADIOS, label: 'Radio button group.',
+		properties: CheckboxesProperties.filter(({name}) => name !== 'single' && name !== 'boolOnSingle'),
 		icon: PlaygroundIcons.RADIOS, group: PlaygroundWidgetGroupKey.OPTIONS, tooltip: 'Radio button group'
 	},
 	{
 		$wt: N2.N2WidgetType.DROPDOWN, label: 'Dropdown.',
+		properties: DropdownProperties,
 		icon: PlaygroundIcons.DROPDOWN, group: PlaygroundWidgetGroupKey.OPTIONS
 	},
 	{
 		$wt: N2.N2WidgetType.MULTI_DROPDOWN, label: 'Dropdown allows multiple choices.',
+		properties: DropdownProperties,
 		icon: PlaygroundIcons.MULTI_DROPDOWN, group: PlaygroundWidgetGroupKey.OPTIONS, tooltip: 'Multiple choices'
 	},
 
 	// display
 	{
 		$wt: N2.N2WidgetType.CAPTION, label: 'Caption.',
-		properties: [LeadsDecorateElements, TailsDecorateElements],
+		properties: [...CaptionProperties, LeadsDecorateElements, TailsDecorateElements],
 		icon: PlaygroundIcons.CAPTION, group: PlaygroundWidgetGroupKey.DISPLAY
 	},
 	{
 		$wt: N2.N2WidgetType.LABEL,
 		label: 'Label. Shortcut of "Caption".', description: 'Read text from model.',
-		properties: [LeadsDecorateElements, TailsDecorateElements],
+		properties: [
+			...CaptionProperties.filter(({name}) => name !== 'labelOnValue'),
+			LeadsDecorateElements, TailsDecorateElements
+		],
 		icon: PlaygroundIcons.LABEL, group: PlaygroundWidgetGroupKey.DISPLAY
 	},
 	{
-		$wt: N2.N2WidgetType.BADGE, label: 'Badge. Shortcut of "Caption".',
+		$wt: N2.N2WidgetType.BADGE, label: 'Badge. Shortcut of "Caption".', description: 'With ink and fill mode.',
+		properties: [...CaptionProperties, Ink, Fill, LeadsDecorateElements, TailsDecorateElements],
 		icon: '', group: PlaygroundWidgetGroupKey.NOT_CARE, notInToolbar: true
 	},
 	{
 		$wt: N2.N2WidgetType.BUTTON, label: 'Button',
-		properties: [LeadsDecorateElements, TailsDecorateElements],
+		properties: [...ButtonProperties, LeadsDecorateElements, TailsDecorateElements],
 		icon: PlaygroundIcons.BUTTON, group: PlaygroundWidgetGroupKey.DISPLAY
 	},
 	{
 		$wt: N2.N2WidgetType.LINK, label: 'Link. Shortcut of "Button".', description: 'With link style.',
-		properties: [LeadsDecorateElements, TailsDecorateElements],
+		properties: [
+			...ButtonProperties.filter(({name}) => name !== 'fill'),
+			LeadsDecorateElements, TailsDecorateElements
+		],
 		icon: PlaygroundIcons.LINK, group: PlaygroundWidgetGroupKey.DISPLAY
 	},
 	{
@@ -202,8 +340,8 @@ export const N2Widgets: Array<PlaygroundWidget> = [
 		icon: PlaygroundIcons.SECTION, group: PlaygroundWidgetGroupKey.CONTAINERS,
 		properties: [
 			{name: 'title', label: 'Text.'},
-			{name: 'collapsible', label: 'Boolean. Section could be folded.'},
-			{name: 'marker', label: 'Text. Identify this section when global event fired.'}
+			{name: 'collapsible', label: 'Boolean.', description: 'Section could be folded.'},
+			{name: 'marker', label: 'Text.', description: 'Global identify this section when global event fired.'}
 		]
 	},
 	{
@@ -219,52 +357,94 @@ export const N2Widgets: Array<PlaygroundWidget> = [
 	},
 	{
 		$wt: N2.N2WidgetType.TABLE,
+		properties: [...TableProperties, ...ArrayProperties],
 		icon: PlaygroundIcons.TABLE, group: PlaygroundWidgetGroupKey.CONTAINERS
 	},
 	{
 		$wt: N2.N2WidgetType.RIBS,
+		properties: [...RibsProperties, ...ArrayProperties],
 		icon: PlaygroundIcons.RIBS, group: PlaygroundWidgetGroupKey.CONTAINERS
 	},
 	{
 		$wt: N2.N2WidgetType.READONLY_RIBS, label: 'Readonly Ribs.',
+		properties: [...RibsProperties, NoElementReminder],
 		icon: '', group: PlaygroundWidgetGroupKey.NOT_CARE, notInToolbar: true
 	},
 	{
 		$wt: N2.N2WidgetType.BUTTON_BAR, label: 'Button bar.',
+		properties: [{name: 'alignment', label: 'Text.', description: '"left", "center", "right".'}],
 		icon: PlaygroundIcons.BUTTON_BAR, group: PlaygroundWidgetGroupKey.CONTAINERS, tooltip: 'Button bar'
 	},
 	{
 		$wt: N2.N2WidgetType.TAB, description: 'Valid only within the confines of the "Tabs".',
+		properties: [
+			{name: 'title', label: 'Text, Various.'},
+			{name: 'marker', label: 'Text.', description: 'Global identify this tab when global event fired.'},
+			{name: 'badge', label: 'Badge.', description: 'Badge in tab title.'},
+			{name: 'data', label: 'Snippet.', description: 'Asynchronously retrieve tab data.'}
+		],
 		$parent: N2.N2WidgetType.TABS,
 		icon: '', group: PlaygroundWidgetGroupKey.NOT_CARE, notInToolbar: true
 	},
 	{
 		$wt: N2.N2WidgetType.TABS,
+		properties: [
+			{name: 'initActive', label: 'Text, Number.', description: 'Initial active tab, marker or index.'}
+		],
 		icon: PlaygroundIcons.TABS, group: PlaygroundWidgetGroupKey.CONTAINERS
 	},
 	{
 		$wt: N2.N2WidgetType.WIZARD_SHARED,
 		label: 'Shared part for all wizard steps.', description: 'Valid only within the confines of the "Wizard".',
+		properties: [
+			{name: 'lead', label: 'Boolean.', description: 'Default false. Put share part on lead or tail.'}
+		],
 		$parent: N2.N2WidgetType.WIZARD,
 		icon: '', group: PlaygroundWidgetGroupKey.NOT_CARE, notInToolbar: true
 	},
 	{
 		$wt: N2.N2WidgetType.WIZARD_STEP,
 		label: 'Wizard step.', description: 'Valid only within the confines of the "Wizard".',
+		properties: [
+			{name: 'title', label: 'Text, Various.'},
+			{name: 'marker', label: 'Text.', description: 'Global identify this tab when global event fired.'},
+			{name: 'data', label: 'Snippet.', description: 'Asynchronously retrieve tab data.'}
+		],
 		$parent: N2.N2WidgetType.WIZARD,
 		icon: '', group: PlaygroundWidgetGroupKey.NOT_CARE, notInToolbar: true
 	},
 	{
 		$wt: N2.N2WidgetType.WIZARD,
+		properties: [
+			{name: 'balloon', label: 'Boolean.', description: 'Default true. Steps in balloon style.'},
+			{name: 'emphasisActive', label: 'Boolean.', description: 'Default true. Emphasis active step title.'},
+			{name: 'freeWalk', label: 'Boolean.', description: 'Default false. Could free walk between steps.'},
+			{
+				name: 'omitWalker', label: 'Boolean.',
+				description: 'Default false. Omit default previous and next button in step body.'
+			},
+			{name: 'reached', label: 'Text, Number.', description: 'Step reached, marker or index.'}
+		],
 		icon: PlaygroundIcons.WIZARD, group: PlaygroundWidgetGroupKey.CONTAINERS
 	},
 	{
 		$wt: N2.N2WidgetType.TREE,
+		properties: [
+			{name: 'height', label: 'Number.', description: 'In pixels.'},
+			{name: 'initExpandLevel', label: 'Number.', description: 'Default -1. Starts from 0.'},
+			{name: 'showIndex', label: 'Boolean.', description: 'Default false. Show node index or not.'},
+			{name: 'detective', label: 'Snippet.', description: 'Tree nodes builder.'}
+		],
 		icon: PlaygroundIcons.TREE, group: PlaygroundWidgetGroupKey.CONTAINERS
 	},
 
 	{
 		$wt: N2.N2WidgetType.PAGINATION,
+		properties: [
+			{name: 'freeWalk', label: 'Boolean.', description: 'Default false. Show page free walker dropdown.'},
+			{name: 'maxButtons', label: 'Number.', description: 'Default 7. Maximum page buttons.'},
+			{name: 'possibleSizes', label: 'Text.', description: 'Possible page size. Show page size dropdown.'}
+		],
 		icon: '', group: PlaygroundWidgetGroupKey.NOT_CARE, notInToolbar: true
 	}
 ];
@@ -330,7 +510,7 @@ export const CommonWidgetAttributes: Array<PlaygroundWidgetProperty> = [
 	{name: 'pos', label: 'Alias of "$pos".'},
 	{name: 'position', label: 'Alias of "$pos".'},
 	{name: '$mpos', label: 'Position in grid, priority only takes effect in the mobile environment.'},
-	{name: '$mpos', label: 'Alias of "$mpos".'},
+	{name: 'mpos', label: 'Alias of "$mpos".'},
 	{name: '$disabled', label: 'Disablement.'},
 	{name: 'disabled', label: 'Alias of "$disabled".'},
 	{name: '$visible', label: 'Visibility.'},

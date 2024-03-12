@@ -1,5 +1,5 @@
 import {MUtils, registerWidget, ValueChangeableNodeDef, WidgetProps} from '@rainbow-d9/n1';
-import React, {ForwardedRef, forwardRef, Fragment, ReactNode} from 'react';
+import React, {ForwardedRef, forwardRef, Fragment} from 'react';
 import styled from 'styled-components';
 import {Checkbox, CheckboxProps} from './checkbox';
 import {CssVars, DOM_ID_WIDGET, DOM_KEY_WIDGET} from './constants';
@@ -14,9 +14,8 @@ export type CheckboxesOptionValue = string | number | boolean;
 export type CheckboxesDef =
 	ValueChangeableNodeDef
 	& OmitHTMLProps<HTMLDivElement>
-	& OptionItemsDef<CheckboxesOptionValue>
+	& Omit<OptionItemsDef<CheckboxesOptionValue>, 'noMatched'>
 	& {
-	noAvailable?: ReactNode;
 	columns?: number;
 	compact?: boolean;
 	single?: boolean;

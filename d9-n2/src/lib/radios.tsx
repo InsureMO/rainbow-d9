@@ -1,5 +1,5 @@
 import {MUtils, registerWidget, ValueChangeableNodeDef, WidgetProps} from '@rainbow-d9/n1';
-import React, {ForwardedRef, forwardRef, Fragment, ReactNode} from 'react';
+import React, {ForwardedRef, forwardRef, Fragment} from 'react';
 import styled from 'styled-components';
 import {CssVars, DOM_ID_WIDGET, DOM_KEY_WIDGET} from './constants';
 import {useGlobalHandlers} from './global';
@@ -13,9 +13,8 @@ export type RadiosOptionValue = string | number;
 export type RadiosDef =
 	ValueChangeableNodeDef
 	& OmitHTMLProps<HTMLDivElement>
-	& OptionItemsDef<RadiosOptionValue>
+	& Omit<OptionItemsDef<RadiosOptionValue>, 'noMatched'>
 	& {
-	noAvailable?: ReactNode;
 	columns?: number;
 	compact?: boolean;
 };
