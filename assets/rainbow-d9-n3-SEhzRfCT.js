@@ -4,10 +4,12 @@ var __publicField = (obj, key, value) => {
   __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
   return value;
 };
-import { c as createLogger, k as MonitorNodeAttributes, V as VUtils, l as Reaction, E as ExternalDefIndicator, P as PPUtils, N as NUtils } from "./rainbow-d9-n1-TP86ceVU.js";
-import { O as OptionItemSort, R as REACTION_REFRESH_OPTIONS, c as GlobalEventPrefix } from "./rainbow-d9-n2-CqBsI6x3.js";
-import { f as fromMarkdown, g as gfmTableFromMarkdown, a as gfmStrikethroughFromMarkdown, b as gfmFootnoteFromMarkdown, c as gfmTaskListItemFromMarkdown, d as frontmatterFromMarkdown } from "./mdast-J3AGQnMd.js";
-import { g as gfmTable, h as gfmStrikethrough, i as gfmFootnote, j as gfmTaskListItem, k as frontmatter } from "./micromark-kgD0HnAH.js";
+import { c as createLogger, N as NUtils, V as VUtils, k as MonitorNodeAttributes, l as Reaction, E as ExternalDefIndicator, P as PPUtils } from "./rainbow-d9-n1-DP1TjjMB.js";
+import { O as OptionItemSort, R as REACTION_REFRESH_OPTIONS, c as GlobalEventPrefix } from "./rainbow-d9-n2-E5HMxamP.js";
+import { f as fromMarkdown, g as gfmTableFromMarkdown, a as gfmStrikethroughFromMarkdown, b as gfmFootnoteFromMarkdown, c as gfmTaskListItemFromMarkdown, d as frontmatterFromMarkdown } from "./mdast-U0D_uffy.js";
+import { g as gfmTable, h as gfmStrikethrough, i as gfmFootnote, j as gfmTaskListItem, k as frontmatter } from "./micromark-Z1w53z3x.js";
+const AsyncFunction = Object.getPrototypeOf(async function() {
+}).constructor;
 var ParsedNodeType;
 (function(ParsedNodeType2) {
   ParsedNodeType2[ParsedNodeType2["HEADING"] = 0] = "HEADING";
@@ -509,11 +511,11 @@ class DepthFirstVisitor {
     } else if (node.type === ParsedNodeType.HEADING) {
       const heading = node;
       let found = false;
-      for (let index = this.headings.length - 1; index >= 0; index--) {
-        const mightBeParent = this.headings[index];
+      for (let index2 = this.headings.length - 1; index2 >= 0; index2--) {
+        const mightBeParent = this.headings[index2];
         if (mightBeParent.content.depth < heading.content.depth) {
           mightBeParent.children.push(heading);
-          this.headings.length = index + 1;
+          this.headings.length = index2 + 1;
           this.headings.push(heading);
           found = true;
           break;
@@ -912,8 +914,8 @@ const _HeadingParser = class _HeadingParser extends AbstractSemanticNodeWidgetPa
     heading.kind = ParsedHeadingKind.RESERVED;
     return heading;
   }
-  getTitleFlagMatcher() {
-    return _HeadingParser.WIDGET_TITLE_FLAG_MATCHER;
+  getTitleFlagMatchers() {
+    return _HeadingParser.WIDGET_TITLE_FLAG_MATCHERS;
   }
   findIgnoreFlag(node) {
     const paragraph = (node.children ?? []).find((child) => child.type === ParsedNodeType.PARAGRAPH);
@@ -940,11 +942,13 @@ const _HeadingParser = class _HeadingParser extends AbstractSemanticNodeWidgetPa
     }
   }
   parseTitle(title) {
-    const match = title.match(this.getTitleFlagMatcher());
-    if (match == null) {
+    const str = (title ?? "").trim();
+    const matches = this.getTitleFlagMatchers().find((matcher) => str.endsWith(matcher));
+    if (matches == null) {
       return { title, $flag: WidgetFlag.STANDARD };
     } else {
-      return { title: match[1], $flag: this.asWidgetFlag(match[2]) };
+      const index2 = title.indexOf(matches);
+      return { title: title.substring(0, index2), $flag: this.asWidgetFlag(matches) };
     }
   }
   matchWidget(title) {
@@ -991,7 +995,7 @@ const _HeadingParser = class _HeadingParser extends AbstractSemanticNodeWidgetPa
     };
   }
 };
-__publicField(_HeadingParser, "WIDGET_TITLE_FLAG_MATCHER", /^(.*?)(::IGNORE|::EXPORT)?$/);
+__publicField(_HeadingParser, "WIDGET_TITLE_FLAG_MATCHERS", [_HeadingParser.TAILING_IGNORE_FLAG, _HeadingParser.TAILING_EXPORT_FLAG]);
 __publicField(_HeadingParser, "TYPE", "heading");
 let HeadingParser = _HeadingParser;
 const _HtmlParser = class _HtmlParser extends AbstractSemanticNodeParser {
@@ -1144,15 +1148,17 @@ const _ListParser = class _ListParser extends AbstractSemanticNodeWidgetParser {
       return parsed;
     }, { title: [], content: [], paragraph });
   }
-  getTitleFlagMatcher() {
-    return _ListParser.WIDGET_TITLE_FLAG_MATCHER;
+  getTitleFlagMatchers() {
+    return _ListParser.WIDGET_TITLE_FLAG_MATCHERS;
   }
   parseTitle(title) {
-    const match = title.match(this.getTitleFlagMatcher());
-    if (match == null) {
+    const str = (title ?? "").trim();
+    const matches = this.getTitleFlagMatchers().find((matcher) => str.endsWith(matcher));
+    if (matches == null) {
       return { title, $flag: WidgetFlag.STANDARD };
     } else {
-      return { title: match[1], $flag: this.asWidgetFlag(match[2]) };
+      const index2 = title.indexOf(matches);
+      return { title: title.substring(0, index2), $flag: this.asWidgetFlag(matches) };
     }
   }
   matchRefWidget(title) {
@@ -1283,7 +1289,7 @@ const _ListParser = class _ListParser extends AbstractSemanticNodeWidgetParser {
     };
   }
 };
-__publicField(_ListParser, "WIDGET_TITLE_FLAG_MATCHER", /^(.*?)(::IGNORE)?$/);
+__publicField(_ListParser, "WIDGET_TITLE_FLAG_MATCHERS", [_ListParser.TAILING_IGNORE_FLAG]);
 __publicField(_ListParser, "REF_WIDGET_MATCHER", /^(REF|Ref|ref)\.(.*)$/);
 __publicField(_ListParser, "ATTRIBUTE_MATCHER", /^([^:]+):(.*)$/);
 __publicField(_ListParser, "TYPE", "list");
@@ -1489,6 +1495,55 @@ const createOrGetSemanticHelperSingleton = () => {
   }
   return SINGLETON$3.helper;
 };
+var index$2 = /* @__PURE__ */ Object.freeze({
+  __proto__: null,
+  AbstractParser,
+  AbstractSemanticNodeParser,
+  AbstractSemanticNodeWidgetParser,
+  BlockquoteParser,
+  BreakParser,
+  CodeParser,
+  DefinitionParser,
+  DeleteParser,
+  EmphasisParser,
+  FootnoteDefinitionParser,
+  FootnoteParser,
+  FootnoteReferenceParser,
+  HeadingParser,
+  HtmlParser,
+  get IdentifiedBlockType() {
+    return IdentifiedBlockType;
+  },
+  get IgnoredOnTransitToWidgetDefType() {
+    return IgnoredOnTransitToWidgetDefType;
+  },
+  ImageParser,
+  ImageReferenceParser,
+  InlineCodeParser,
+  LinkParser,
+  LinkReferenceParser,
+  ListParser,
+  ParagraphParser,
+  get ParsedHeadingKind() {
+    return ParsedHeadingKind;
+  },
+  get ParsedListItemKind() {
+    return ParsedListItemKind;
+  },
+  SemanticHelper,
+  SemanticNodeParserRepository,
+  SemanticUtils,
+  StrongParser,
+  TableParser,
+  TextParser,
+  ThematicBreakParser,
+  get WidgetFlag() {
+    return WidgetFlag;
+  },
+  YamlParser,
+  createOrGetParserRepositorySingleton,
+  createOrGetSemanticHelperSingleton
+});
 const TRUE_VALUES = ["True", "true", "T", "t", "Yes", "yes", "Y", "y"];
 const FALSE_VALUES = ["False", "false", "F", "f", "No", "no", "N", "n"];
 var D9PropertyNames;
@@ -1677,13 +1732,41 @@ const _AbstractTranslator = class _AbstractTranslator {
   findSpecificTranslator($wt) {
     return this.repository.askSpecificTranslator($wt);
   }
+  postTranslationCorrectionWork(def) {
+    const { node } = def;
+    [
+      "$key",
+      D9PropertyNames.PROPERTY,
+      D9PropertyNames.POSITION,
+      D9PropertyNames.MOBILE_POSITION,
+      D9PropertyNames.VALIDATION_SCOPES,
+      MonitorNodeAttributes.VALID,
+      MonitorNodeAttributes.REACTION
+    ].forEach((key) => {
+      if (typeof node[key] === "boolean") {
+        delete node[key];
+      }
+    });
+    if (typeof node.$pp === "boolean") {
+      delete node.$pp;
+    }
+    return def;
+  }
+  translate(node) {
+    const def = this.doTranslate(node);
+    if (def == null) {
+      return def;
+    } else {
+      return this.postTranslationCorrectionWork(def);
+    }
+  }
   classifyAttributesAndSubWidgetsByList(parent) {
     const children = parent.children ?? [];
     const [first, ...rest] = children.filter((child) => child.type === ParsedNodeType.LIST);
     if (first == null) {
       return { attributes: [], widgets: [], ignored: [] };
     }
-    return [first, ...rest].reduce((classified, child, index) => {
+    return [first, ...rest].reduce((classified, child, index2) => {
       child.children.forEach((item) => {
         if (SemanticUtils.isAnyWidgetListItem(item) && item.$flag === WidgetFlag.IGNORE) {
           item.ignoredOnTransitToWidget = { type: IgnoredOnTransitToWidgetDefType.DECLARE_AS_IGNORED };
@@ -1692,7 +1775,7 @@ const _AbstractTranslator = class _AbstractTranslator {
           item.ignoredOnTransitToWidget = { type: IgnoredOnTransitToWidgetDefType.DETECT_AS_RESERVED };
           classified.ignored.push(item);
         } else if (SemanticUtils.isAnyAttributeListItem(item)) {
-          if (index === 0 && classified.widgets.length === 0) {
+          if (index2 === 0 && classified.widgets.length === 0) {
             classified.attributes.push(item);
           } else {
             item.ignoredOnTransitToWidget = { type: IgnoredOnTransitToWidgetDefType.INCORRECT_INDEX_ATTR_AFTER_WIDGET };
@@ -1766,8 +1849,8 @@ const _AbstractTranslator = class _AbstractTranslator {
       }
     }).reduce((options2, each) => {
       Object.keys(each).forEach((key) => {
-        key.split(".").reduce((parent, part, index, parts) => {
-          if (index === parts.length - 1) {
+        key.split(".").reduce((parent, part, index2, parts) => {
+          if (index2 === parts.length - 1) {
             const givenValue = each[key];
             if (givenValue != null && VUtils.isNotBlank(givenValue)) {
               const originalValue = parent[part];
@@ -2122,8 +2205,6 @@ __publicField(_AttributeUtils, "REACTION_WATCH_ATTRIBUTE_BUILDER", new ReactionW
 __publicField(_AttributeUtils, "ANY_ATTRIBUTE_BUILDER", new AnyAttributeBuild());
 __publicField(_AttributeUtils, "CUSTOMIZED_ATTRIBUTE_BUILDERS", {});
 let AttributeUtils = _AttributeUtils;
-const AsyncFunction = Object.getPrototypeOf(async function() {
-}).constructor;
 class AbstractMonitorBuild {
   buildHandlersDetective(find) {
     return (options) => {
@@ -2640,7 +2721,7 @@ class PageTranslator extends AbstractTranslator {
   isTypeSupported($wt) {
     return $wt === SemanticHelper.PAGE;
   }
-  translate(node) {
+  doTranslate(node) {
     const $wt = SemanticHelper.PAGE;
     const classified = this.classifyAttributesAndSubWidgetsByList(node);
     const attributes = this.parseAndCombineAttributes({ $wt, items: classified.attributes });
@@ -2715,7 +2796,7 @@ const _WidgetTranslator = class _WidgetTranslator extends AbstractTranslator {
     }
     return transformed;
   }
-  doTranslate(node, $pp, label, findChildren) {
+  doTranslateNode(node, $pp, label, findChildren) {
     const { $wt } = node;
     const classified = this.classifyAttributesAndSubWidgetsByList(node);
     const translator = this.findSpecificTranslator($wt);
@@ -2762,13 +2843,13 @@ const _WidgetTranslator = class _WidgetTranslator extends AbstractTranslator {
     def = translator == null ? void 0 : translator.postWork(def);
     return { node: def, success: true };
   }
-  translate(node) {
+  doTranslate(node) {
     if (node.type === ParsedNodeType.HEADING) {
-      return this.doTranslate(node, node.$pp, node.headline, () => {
+      return this.doTranslateNode(node, node.$pp, node.headline, () => {
         return this.buildChildrenOnSubHeadings({ widgets: node.children });
       });
     } else if (node.type === ParsedNodeType.LIST_ITEM) {
-      return this.doTranslate(node, node.$pp, node.label, () => []);
+      return this.doTranslateNode(node, node.$pp, node.label, () => []);
     } else {
       N3Logger.error(`Given node type[${node.type}] is not supported.`, _WidgetTranslator.name);
       return { node: { $wt: "" }, success: false };
@@ -3027,8 +3108,10 @@ var N2WidgetType;
   N2WidgetType2["PAGE"] = "Page";
   N2WidgetType2["INPUT"] = "Input";
   N2WidgetType2["NUMBER"] = "Number";
+  N2WidgetType2["PASSWORD"] = "Pwd";
   N2WidgetType2["DECORATE_INPUT"] = "DecoInput";
   N2WidgetType2["DECORATE_NUMBER"] = "DecoNumber";
+  N2WidgetType2["DECORATE_PASSWORD"] = "DecoPwd";
   N2WidgetType2["TEXTAREA"] = "Textarea";
   N2WidgetType2["CHECKBOX"] = "Checkbox";
   N2WidgetType2["CHECKBOXES"] = "Checkboxes";
@@ -3036,6 +3119,7 @@ var N2WidgetType;
   N2WidgetType2["RADIO"] = "Radio";
   N2WidgetType2["RADIOS"] = "Radios";
   N2WidgetType2["BUTTON"] = "Button";
+  N2WidgetType2["LINK"] = "Link";
   N2WidgetType2["BUTTON_BAR"] = "ButtonBar";
   N2WidgetType2["CAPTION"] = "Caption";
   N2WidgetType2["LABEL"] = "Label";
@@ -3095,6 +3179,19 @@ class N2NumberTranslator extends SpecificWidgetTranslator {
     ];
   }
 }
+class N2PasswordTranslator extends SpecificWidgetTranslator {
+  getSupportedType() {
+    return N2WidgetType.PASSWORD;
+  }
+  getValidationHandlerDetectives() {
+    return [
+      ValidatorUtils.DETECT_REQUIRED,
+      ValidatorUtils.DETECT_LENGTH,
+      ValidatorUtils.DETECT_REGEX,
+      ...super.getValidationHandlerDetectives()
+    ];
+  }
+}
 class N2DecorateInputTranslator extends SpecificWidgetTranslator {
   getSupportedType() {
     return N2WidgetType.DECORATE_INPUT;
@@ -3137,6 +3234,22 @@ class N2DecorateNumberTranslator extends SpecificWidgetTranslator {
     ];
   }
 }
+class N2DecoratePasswordTranslator extends SpecificWidgetTranslator {
+  getSupportedType() {
+    return N2WidgetType.DECORATE_PASSWORD;
+  }
+  getAttributeValueBuilders() {
+    return [DecorateLeadsBuild, DecorateTailsBuild];
+  }
+  getValidationHandlerDetectives() {
+    return [
+      ValidatorUtils.DETECT_REQUIRED,
+      ValidatorUtils.DETECT_LENGTH,
+      ValidatorUtils.DETECT_REGEX,
+      ...super.getValidationHandlerDetectives()
+    ];
+  }
+}
 class N2TextareaTranslator extends SpecificWidgetTranslator {
   getSupportedType() {
     return N2WidgetType.TEXTAREA;
@@ -3155,7 +3268,7 @@ const N2CheckboxValuesBuild = {
     if (VUtils.isBlank(value)) {
       return void 0;
     }
-    const values = value.split(",").map((v) => v.trim()).filter((_, index) => index <= 1).map((v) => VUtils.isBlank(v) ? null : v);
+    const values = value.split(",").map((v) => v.trim()).filter((_, index2) => index2 <= 1).map((v) => VUtils.isBlank(v) ? null : v);
     if (values.length === 0) {
       return void 0;
     } else if (values.length === 1) {
@@ -3298,7 +3411,7 @@ const N2RadioValuesBuild = {
     if (VUtils.isBlank(value)) {
       return void 0;
     }
-    const values = value.split(",").map((v) => v.trim()).filter((_, index) => index <= 1).map((v) => VUtils.isBlank(v) ? null : v);
+    const values = value.split(",").map((v) => v.trim()).filter((_, index2) => index2 <= 1).map((v) => VUtils.isBlank(v) ? null : v);
     if (values.length === 0) {
       return void 0;
     } else if (values.length === 1) {
@@ -3592,6 +3705,14 @@ class N2ButtonTranslator extends SpecificWidgetTranslator {
     return [N2ButtonClickBuild, DecorateLeadsBuild, DecorateTailsBuild];
   }
 }
+class N2LinkTranslator extends SpecificWidgetTranslator {
+  getSupportedType() {
+    return N2WidgetType.LINK;
+  }
+  getAttributeValueBuilders() {
+    return [N2ButtonClickBuild, DecorateLeadsBuild, DecorateTailsBuild];
+  }
+}
 class N2ButtonBarTranslator extends SpecificWidgetTranslator {
   getSupportedType() {
     return N2WidgetType.BUTTON_BAR;
@@ -3757,7 +3878,7 @@ const N2TableHeadersBuild = {
     if (list.children == null || list.children.length === 0 || list.children[0].type !== ParsedNodeType.LIST) {
       return void 0;
     }
-    const headers = (list.children[0].children ?? []).filter(SemanticUtils.isAttributePairListItem).map((pair, index) => {
+    const headers = (list.children[0].children ?? []).filter(SemanticUtils.isAttributePairListItem).map((pair, index2) => {
       const { attributeName, attributeValue } = pair;
       if (VUtils.isBlank(attributeName)) {
         return null;
@@ -3781,7 +3902,7 @@ const N2TableHeadersBuild = {
           return attrs;
         }, {});
         if (VUtils.isNotBlank(parsed.label) && VUtils.isNotBlank(parsed.width)) {
-          return { ...parsed, index };
+          return { ...parsed, index: index2 };
         } else {
           return null;
         }
@@ -3789,12 +3910,12 @@ const N2TableHeadersBuild = {
         const value = attributeValue.trim();
         const positive = VUtils.isPositive(value);
         if (positive.test) {
-          return { label: attributeName.trim(), width: positive.value, index };
+          return { label: attributeName.trim(), width: positive.value, index: index2 };
         } else {
-          return { label: attributeName.trim(), width: value, index };
+          return { label: attributeName.trim(), width: value, index: index2 };
         }
       }
-    }).filter((x) => x != null).map((x, index) => ({ ...x, index }));
+    }).filter((x) => x != null).map((x, index2) => ({ ...x, index: index2 }));
     return headers.length === 0 ? void 0 : headers;
   }
 };
@@ -4028,8 +4149,10 @@ const registerN2Widgets$1 = (widgetHelper) => {
   const { repository: repo } = widgetHelper ?? createOrGetTranslateHelperSingleton();
   repo.register(new N2InputTranslator(repo));
   repo.register(new N2NumberTranslator(repo));
+  repo.register(new N2PasswordTranslator(repo));
   repo.register(new N2DecorateInputTranslator(repo));
   repo.register(new N2DecorateNumberTranslator(repo));
+  repo.register(new N2DecoratePasswordTranslator(repo));
   repo.register(new N2TextareaTranslator(repo));
   repo.register(new N2CheckboxTranslator(repo));
   repo.register(new N2CheckboxesTranslator(repo));
@@ -4042,6 +4165,7 @@ const registerN2Widgets$1 = (widgetHelper) => {
   repo.register(new N2DateTimeTranslator(repo));
   repo.register(new N2CalendarTranslator(repo));
   repo.register(new N2ButtonTranslator(repo));
+  repo.register(new N2LinkTranslator(repo));
   repo.register(new N2ButtonBarTranslator(repo));
   repo.register(new N2CaptionTranslator(repo));
   repo.register(new N2LabelTranslator(repo));
@@ -4060,6 +4184,72 @@ const registerN2Widgets$1 = (widgetHelper) => {
   repo.register(new N2TreeTranslator(repo));
   repo.register(new N2PaginationTranslator(repo));
 };
+var index = /* @__PURE__ */ Object.freeze({
+  __proto__: null,
+  N2BadgeTranslator,
+  N2BoxTranslator,
+  N2ButtonBarTranslator,
+  N2ButtonClickBuild,
+  N2ButtonCreateScopesValidate,
+  N2ButtonTranslator,
+  N2ButtonValidateAll,
+  N2ButtonValidateBlock,
+  N2ButtonValidateMinimum,
+  N2CalendarBuildFixedTimeAt,
+  N2CalendarFixedTimeAtBuild,
+  N2CalendarInitTimeAtBuild,
+  N2CalendarTranslator,
+  N2CaptionClickBuild,
+  N2CaptionReactionDetective,
+  N2CaptionRedressLabelAndText,
+  N2CaptionTranslator,
+  N2CaptionValueToLabelBuild,
+  N2CheckboxTranslator,
+  N2CheckboxValuesBuild,
+  N2CheckboxesTranslator,
+  N2ChecksTranslator,
+  N2DateTimeTranslator,
+  N2DateTranslator,
+  N2DecorateInputTranslator,
+  N2DecorateNumberTranslator,
+  N2DecoratePasswordTranslator,
+  N2DropdownOptionsBuild,
+  N2DropdownOptionsByStrBuild,
+  N2DropdownReactionRefreshOptionsAttributeBuild,
+  N2DropdownReactionRefreshOptionsBuild,
+  N2DropdownReactionRefreshOptionsHandlerDetective,
+  N2DropdownSortBuild,
+  N2DropdownTranslator,
+  N2InputTranslator,
+  N2LabelTranslator,
+  N2LinkTranslator,
+  N2MultiDropdownTranslator,
+  N2NumberTranslator,
+  N2PaginationPossibleSizesBuild,
+  N2PaginationTranslator,
+  N2PasswordTranslator,
+  N2RadioTranslator,
+  N2RadioValuesBuild,
+  N2RadiosTranslator,
+  N2RibsTranslator,
+  N2RibsViewTranslator,
+  N2SectionTranslator,
+  N2TabTranslator,
+  N2TableHeadersBuild,
+  N2TableRowOperatorsTranslator,
+  N2TableTranslator,
+  N2TabsTranslator,
+  N2TextareaTranslator,
+  N2TreeChildNodesBuild,
+  N2TreeTranslator,
+  get N2WidgetType() {
+    return N2WidgetType;
+  },
+  N2WizardSharedTranslator,
+  N2WizardStepTranslator,
+  N2WizardTranslator,
+  registerN2Widgets: registerN2Widgets$1
+});
 class DocParser {
   constructor(_ast, _semantic, _widget) {
     __publicField(this, "_ast");
@@ -4116,6 +4306,9 @@ const parseDoc = new Proxy(() => void 0, {
 });
 const registerN2Widgets = registerN2Widgets$1;
 export {
+  AsyncFunction as A,
+  index$2 as a,
+  index as b,
   index$1 as i,
   parseDoc as p,
   registerN2Widgets as r

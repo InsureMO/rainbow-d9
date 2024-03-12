@@ -4,8 +4,8 @@ var __publicField = (obj, key, value) => {
   __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
   return value;
 };
-import { b as buffer, n as nanoid, E as EventEmitter } from "./vendor-UJeTKixx.js";
-import { r as reactExports, R as React } from "./react-ikQobTEW.js";
+import { b as buffer, n as nanoid, E as EventEmitter } from "./vendor-UPFxZXlM.js";
+import { r as reactExports, R as React } from "./react-ekTsLPKd.js";
 const VUtils = {
   isEmpty: (v) => v == null || typeof v === "string" && v.length === 0,
   isNotEmpty: (v) => (v ?? "") !== "",
@@ -1766,7 +1766,7 @@ const Wrapper = (props) => {
 };
 const renderContainerChildren = (options) => {
   const { def, childrenDefs, keys, $wrapped: { $root, $p2r, $model } } = options;
-  return childrenDefs.map((childProps) => {
+  return childrenDefs.filter((x) => x != null).map((childProps) => {
     const { $key: keyOfChild, ...restOfChild } = childProps;
     const key = findContainerChildKey(keys, childProps);
     N1Logger.debug(`Container element[key=${key}, path=${PPUtils.concat($p2r, restOfChild.$pp)}].`, childProps, "RenderContainerChildren");
@@ -1822,8 +1822,8 @@ export {
   useAttributesWatch as j,
   MonitorNodeAttributes as k,
   Reaction as l,
-  N1Logger as m,
-  ExternalDefMismatchIndicator as n,
+  ExternalDefMismatchIndicator as m,
+  N1Logger as n,
   useBridgeEventBus as o,
   BridgeToRootEventTypes as p,
   registerWidget as r,

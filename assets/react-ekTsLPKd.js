@@ -1,5 +1,5 @@
 import { g as getDefaultExportFromCjs } from "./babel-AnpZxJH-.js";
-import { s as schedulerExports } from "./vendor-UJeTKixx.js";
+import { s as schedulerExports } from "./vendor-UPFxZXlM.js";
 var jsxRuntime = { exports: {} };
 var reactJsxRuntime_production_min = {};
 var react = { exports: {} };

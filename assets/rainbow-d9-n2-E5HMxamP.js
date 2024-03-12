@@ -4,10 +4,10 @@ var __publicField = (obj, key, value) => {
   __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
   return value;
 };
-import { a as color } from "./vendor-UJeTKixx.js";
-import { R as React, r as reactExports } from "./react-ikQobTEW.js";
-import { V as VUtils, P as PPUtils, r as registerWidget, c as createLogger, b as useRootEventBus, d as useForceUpdate, M as MUtils, N as NUtils, e as Wrapper, a as useWrapperEventBus, W as WrapperEventTypes, f as useCreateEventBus, g as PROPERTY_PATH_ME, h as MBUtils, R as RootEventTypes, i as useDefaultAttributeValues, j as useAttributesWatch } from "./rainbow-d9-n1-TP86ceVU.js";
-import { q as qe, W as We } from "./styled-components-rtz7lICC.js";
+import { a as color } from "./vendor-UPFxZXlM.js";
+import { R as React, r as reactExports } from "./react-ekTsLPKd.js";
+import { V as VUtils, P as PPUtils, r as registerWidget, c as createLogger, b as useRootEventBus, d as useForceUpdate, M as MUtils, N as NUtils, e as Wrapper, a as useWrapperEventBus, W as WrapperEventTypes, f as useCreateEventBus, g as PROPERTY_PATH_ME, h as MBUtils, R as RootEventTypes, i as useDefaultAttributeValues, j as useAttributesWatch } from "./rainbow-d9-n1-DP1TjjMB.js";
+import { q as qe, W as We } from "./styled-components-rAMN27L2.js";
 import { d as dayjs } from "./dayjs-9Z7dW0Q-.js";
 const DOM_KEY_WIDGET = "data-w";
 const DOM_ID_WIDGET = "data-wid";
@@ -909,7 +909,11 @@ const Button = reactExports.forwardRef((props, ref) => {
     })
   );
 });
+const Link = reactExports.forwardRef((props, ref) => {
+  return React.createElement(Button, { ...props, fill: ButtonFill.LINK, ref });
+});
 registerWidget({ key: "Button", JSX: Button, container: false, array: false });
+registerWidget({ key: "Link", JSX: Link, container: false, array: false });
 const UnwrappedButton = reactExports.forwardRef((props, ref) => {
   const { onClick, ink = ButtonInk.PRIMARY, fill = ButtonFill.FILL, children, disabled, visible, ...rest } = props;
   const $onValueChange = VUtils.noop;
@@ -921,6 +925,18 @@ const UnwrappedButton = reactExports.forwardRef((props, ref) => {
     }
   };
   return React.createElement(Button, { ...rest, ink, fill, "$wrapped": { $onValueChange, $avs, $root, $model: $root, $p2r: "." }, text: children, click, id: rest.id ?? VUtils.generateUniqueId(), ref });
+});
+reactExports.forwardRef((props, ref) => {
+  const { onClick, ink = ButtonInk.PRIMARY, children, disabled, visible, ...rest } = props;
+  const $onValueChange = VUtils.noop;
+  const $avs = { $disabled: disabled, $visible: visible };
+  const $root = {};
+  const click = (options, event) => {
+    if (onClick) {
+      onClick(event);
+    }
+  };
+  return React.createElement(Link, { ...rest, ink, "$wrapped": { $onValueChange, $avs, $root, $model: $root, $p2r: "." }, text: children, click, id: rest.id ?? VUtils.generateUniqueId(), ref });
 });
 const AlertContainer = qe.div.attrs(({ visible }) => {
   return {
@@ -4058,6 +4074,25 @@ const AnInput = qe.input.attrs(({ id, autoSelect, onFocus }) => {
         box-shadow: ${CssVars.PRIMARY_SHADOW};
     }
 `;
+const stringifyInputValue = (options) => {
+  const { $model, $pp, value } = options;
+  if (value == null) {
+    return "";
+  }
+  switch (typeof value) {
+    case "object":
+      console.error(`Value is an object, check your declaration and model please.`, $model, $pp);
+      return "";
+    case "function":
+      console.error(`Value is a function, check your declaration and model please.`, $model, $pp);
+      return "";
+    case "symbol":
+      console.error(`Value is a symbol, check your declaration and model please.`, $model, $pp);
+      return "";
+    default:
+      return value.toString != null ? value.toString() : `${value}`;
+  }
+};
 const Input = reactExports.forwardRef((props, ref) => {
   const { autoSelect = true, valueToNumber = false, $pp, $wrapped: { $onValueChange, $model, $p2r, $avs: { $disabled, $visible } }, ...rest } = props;
   const valueRef = reactExports.useRef({ value: MUtils.getValue($model, $pp) });
@@ -4082,13 +4117,17 @@ const Input = reactExports.forwardRef((props, ref) => {
   else {
     valueRef.current.value = valueFromModel;
   }
-  return React.createElement(AnInput, { ...rest, autoSelect, disabled: $disabled, "data-disabled": $disabled, "data-visible": $visible, value: valueRef.current.value ?? "", onChange, id: PPUtils.asId(PPUtils.absolute($p2r, $pp), props.id), ref });
+  return React.createElement(AnInput, { ...rest, autoSelect, disabled: $disabled, "data-disabled": $disabled, "data-visible": $visible, value: stringifyInputValue({ $model, $pp, value: valueRef.current.value }), onChange, id: PPUtils.asId(PPUtils.absolute($p2r, $pp), props.id), ref });
 });
 const NumberInput = reactExports.forwardRef((props, ref) => {
   return React.createElement(Input, { ...props, "data-number": true, valueToNumber: true, ref });
 });
+const PasswordInput = reactExports.forwardRef((props, ref) => {
+  return React.createElement(Input, { ...props, type: "password", valueToNumber: false, ref });
+});
 registerWidget({ key: "Number", JSX: NumberInput, container: false, array: false });
 registerWidget({ key: "Input", JSX: Input, container: false, array: false });
+registerWidget({ key: "Pwd", JSX: PasswordInput, container: false, array: false });
 const DecorateInputContainer = qe.div.attrs(({ id }) => {
   return {
     [DOM_KEY_WIDGET]: "d9-deco-input",
@@ -4176,9 +4215,7 @@ const Decorate = (props) => {
     })
   );
 };
-const DecorateInput = (props) => {
-  const { leads, tails, className, style, ...rest } = props;
-  const { $wrapped: { $p2r } } = rest;
+const askDecorateAttrs = (props, rest) => {
   const deviceTags = MBUtils.pickDeviceTags(props);
   const decorateAttrs = Object.keys(rest).reduce((attrs, key) => {
     if (key.startsWith("data-di-")) {
@@ -4187,6 +4224,12 @@ const DecorateInput = (props) => {
     }
     return attrs;
   }, {});
+  return { tags: deviceTags, attrs: decorateAttrs };
+};
+const DecorateInput = (props) => {
+  const { leads, tails, className, style, ...rest } = props;
+  const { $wrapped: { $p2r } } = rest;
+  const { tags: deviceTags, attrs: decorateAttrs } = askDecorateAttrs(props, rest);
   return React.createElement(
     Decorate,
     { ...deviceTags, ...decorateAttrs, leads, tails, className, style, id: PPUtils.asId(PPUtils.absolute($p2r, props.$pp), props.id) },
@@ -4196,22 +4239,26 @@ const DecorateInput = (props) => {
 const DecorateNumberInput = (props) => {
   const { leads, tails, className, style, ...rest } = props;
   const { $wrapped: { $p2r } } = rest;
-  const deviceTags = MBUtils.pickDeviceTags(props);
-  const decorateAttrs = Object.keys(rest).reduce((attrs, key) => {
-    if (key.startsWith("data-di-")) {
-      attrs[key] = rest[key];
-      delete rest[key];
-    }
-    return attrs;
-  }, {});
+  const { tags: deviceTags, attrs: decorateAttrs } = askDecorateAttrs(props, rest);
   return React.createElement(
     Decorate,
     { ...deviceTags, ...decorateAttrs, leads, tails, className, style, id: PPUtils.asId(PPUtils.absolute($p2r, props.$pp), props.id) },
     React.createElement(NumberInput, { ...rest })
   );
 };
+const DecoratePasswordInput = (props) => {
+  const { leads, tails, className, style, ...rest } = props;
+  const { $wrapped: { $p2r } } = rest;
+  const { tags: deviceTags, attrs: decorateAttrs } = askDecorateAttrs(props, rest);
+  return React.createElement(
+    Decorate,
+    { ...deviceTags, ...decorateAttrs, leads, tails, className, style, id: PPUtils.asId(PPUtils.absolute($p2r, props.$pp), props.id) },
+    React.createElement(PasswordInput, { ...rest })
+  );
+};
 registerWidget({ key: "DecoInput", JSX: DecorateInput, container: false, array: false });
 registerWidget({ key: "DecoNumber", JSX: DecorateNumberInput, container: false, array: false });
+registerWidget({ key: "DecoPwd", JSX: DecoratePasswordInput, container: false, array: false });
 const ACheckbox = qe.div.attrs(({ id }) => {
   return {
     [DOM_KEY_WIDGET]: "d9-checkbox",
@@ -5155,8 +5202,8 @@ const guardPaginationData = ($model, $pp) => {
   } else {
     data.pageCount = 1;
   }
-  const checkItemCount = VUtils.isPositive(data.itemCount);
-  if (checkItemCount.test) {
+  const checkItemCount = VUtils.isNumber(data.itemCount);
+  if (checkItemCount.test && data.itemCount >= 0) {
     data.itemCount = Math.floor(data.itemCount);
     const maxPageCount = Math.ceil(data.itemCount / data.pageSize);
     data.pageCount = Math.min(data.pageCount, maxPageCount);
@@ -7541,6 +7588,13 @@ reactExports.forwardRef((props, ref) => {
   const $avs = { $disabled: disabled, $visible: visible };
   const $root = { [$pp]: value };
   return React.createElement(NumberInput, { ...rest, "$wrapped": { $onValueChange, $avs, $root, $model: $root, $p2r: "." }, "$pp": $pp, id: rest.id ?? VUtils.generateUniqueId(), ref });
+});
+reactExports.forwardRef((props, ref) => {
+  const { $pp = "value", value, onValueChange, disabled, visible, ...rest } = props;
+  const $onValueChange = onValueChange;
+  const $avs = { $disabled: disabled, $visible: visible };
+  const $root = { [$pp]: value };
+  return React.createElement(PasswordInput, { ...rest, "$wrapped": { $onValueChange, $avs, $root, $model: $root, $p2r: "." }, "$pp": $pp, id: rest.id ?? VUtils.generateUniqueId(), ref });
 });
 reactExports.forwardRef((props, ref) => {
   const { $pp = "value", value, onValueChange, visible, ...rest } = props;
