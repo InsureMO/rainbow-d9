@@ -599,7 +599,8 @@ export const CommonWidgetAttributes: Array<PlaygroundWidgetProperty> = [
 	{name: 'validateScopes', label: 'Text.', description: 'Alias of "$validationScopes".'},
 	{name: 'watch', label: 'Various.', description: 'Monitor other property changes.'},
 	{name: 'repaint', label: 'Various.', description: 'Monitor other property changes, and repaint myself.'},
-	{name: 'clearMe', label: 'Various.', description: 'Monitor other property changes, and clear my value.'}
+	{name: 'clearMe', label: 'Various.', description: 'Monitor other property changes, and clear my value.'},
+	{name: 'label', label: 'Various.', description: 'Label for form cell.'}
 ];
 
 export const getCommonWidgetAttributes = (): Array<PlaygroundWidgetProperty> => {
