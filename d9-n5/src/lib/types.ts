@@ -48,14 +48,21 @@ export interface PlaygroundWidgetGroup {
 
 export interface PlaygroundWidget {
 	$wt: string;
+	/** sometimes same widget could be display in various ways, use to identity it */
+	$key?: string;
+	/** code completion short description */
 	label?: string;
+	/** code completion description */
 	description?: string;
+	/** available properties for this widget */
 	properties?: Array<PlaygroundWidgetProperty>;
+	/** toolbar bar button group */
 	group: PlaygroundWidgetGroupKey | string;
 	/** some widgets are used internally, therefore no need to display in toolbar */
 	notInToolbar?: boolean;
 	/** use empty string if widget is not in toolbar */
 	icon: string;
+	/** toolbar button tooltip */
 	tooltip?: string;
 }
 

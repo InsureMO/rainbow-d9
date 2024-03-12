@@ -238,5 +238,30 @@ export const EditorPanel = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-playground-ed
                 display: none;
             }
         }
+
+        div.cm-tooltip-autocomplete {
+            > ul {
+                &::-webkit-scrollbar {
+                    background-color: transparent;
+                    height: ${CssVars.SCROLL_HEIGHT};
+                    width: ${CssVars.SCROLL_WEIGHT};
+                }
+
+                &::-webkit-scrollbar-track {
+                    background-color: ${CssVars.SCROLL_TRACK_COLOR};
+                    border-radius: ${CssVars.SCROLL_BORDER_RADIUS};
+                }
+
+                &::-webkit-scrollbar-thumb {
+                    background-color: ${CssVars.SCROLL_THUMB_COLOR};
+                    border-radius: ${CssVars.SCROLL_BORDER_RADIUS};
+                }
+            }
+
+            span.cm-completionLabel {
+                font-weight: 600;
+                margin-right: 16px;
+            }
+        }
     }
 `;

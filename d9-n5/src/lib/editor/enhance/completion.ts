@@ -1,7 +1,7 @@
 import {Completion, CompletionContext, CompletionResult} from '@codemirror/autocomplete';
 import {markdownLanguage} from '@codemirror/lang-markdown';
 import {syntaxTree} from '@codemirror/language';
-import {SyntaxNode} from '@lezer/common';
+import {SyntaxNode, Tree} from '@lezer/common';
 import {N2, VUtils} from '@rainbow-d9/n3';
 import {ExternalDefsTypes, ExternalDefType, PlaygroundWidgetProperty, PlaygroundWidgets} from '../../types';
 import {getCommonWidgetAttributes} from '../../widgets';
@@ -54,16 +54,49 @@ export const buildExtOptions = (externalDefsTypes: ExternalDefsTypes, parentKey?
 	}, []).filter(x => x != null);
 };
 
+/**
+ * current is a ListItem, to find the widget type which leads this item.
+ */
 export const findWidgetType = (node: SyntaxNode, context: CompletionContext): string | undefined => {
 	const bulletList = node.parent;
 	if (bulletList == null || bulletList.name !== 'BulletList') {
 		return (void 0);
 	}
+	//TODO CONSIDERING THIS NODE IS NOT THE FIRST CHILD OF PARENT,
+	// IF PREVIOUS SIBLINGS CONTAINS WIDGET DECLARATION, WHICH MEANS THIS NODE CANNOT BE A PROPERTY DECLARATION
+	// HOWEVER, FOR NOW, LET'S IGNORE THIS SITUATION, AS IT MAY BE MANUALLY ADJUSTED TO ENSURE GRAMMATICAL CORRECTNESS.
+
+	// check the parent, it might be Document or ListItem or something else
 	const parent = bulletList.parent;
-	if (parent == null || parent.name !== 'ListItem') {
-		// TODO MIGHT BE HEADING
+	if (parent == null) {
 		return (void 0);
 	}
+	if (parent.name === 'Document') {
+		// find the closest heading, there still can be a ListItem which declares widget anyway,
+		// but since it may be manually adjusted to ensure the grammatical correctness,
+		// so for now, ignore the ListItem
+		let previous = parent.childBefore(node.from);
+		while (previous != null && !previous.name.startsWith('ATXHeading')) {
+			previous = parent.childBefore(previous.from);
+		}
+		if (previous == null) {
+			return (void 0);
+		}
+		// if the Heading is a widget declaration, check follows:
+		// firstChild is HeadMark, nextSibling is WidgetDeclaration
+		const declaration = previous.firstChild?.nextSibling;
+		if (declaration == null || declaration.name !== 'WidgetDeclaration') {
+			return (void 0);
+		}
+		const declarationType = declaration.firstChild;
+		if (declarationType == null || declarationType.name !== 'WidgetDeclarationType') {
+			return (void 0);
+		}
+		return context.state.sliceDoc(declarationType.from, declarationType.to);
+	} else if (parent.name !== 'ListItem') {
+		return (void 0);
+	}
+	// if the ListItem is a widget declaration, check follows:
 	// firstChild is ListMark, nextSibling is Paragraph, firstChild could be WidgetDeclaration
 	const declaration = parent.firstChild?.nextSibling?.firstChild;
 	if (declaration == null || declaration.name !== 'WidgetDeclaration') {
@@ -71,7 +104,8 @@ export const findWidgetType = (node: SyntaxNode, context: CompletionContext): st
 	}
 	const declarationType = declaration.firstChild;
 	if (declarationType == null || declarationType.name !== 'WidgetDeclarationType') {
-		// TODO SHOULD KEEP FINDING?
+		//TODO SOMETIMES, PROPERTY ALSO CAN USE THE LIST TO DESCRIBE MORE DETAILS
+		// BUT CURRENTLY, ONLY FIND THE WIDGET DECLARATION TYPE
 		return (void 0);
 	}
 
@@ -121,6 +155,96 @@ export const createCompleteD9ml = (options: {
 		.map(({$prefix, label, description}) => ({label: $prefix, detail: label, info: description, type: 'variable'}));
 	const WidgetExtOptions: Array<Completion> = buildExtOptions(externalDefsTypes);
 
+	const completeHeading = (context: CompletionContext, nodeBefore: SyntaxNode) => {
+		const textBefore = context.state.sliceDoc(nodeBefore.from, context.pos) ?? '';
+		const tagBefore = /(#{1,6})(\s+)\w*$/.exec(textBefore);
+		if (tagBefore == null) {
+			return null;
+		}
+		if (tagBefore[1].length === 1) {
+			return {
+				from: nodeBefore.from + tagBefore[1].length + tagBefore[2].length,
+				// no matter what, the top level is Page only
+				options: [{label: N2.N2WidgetType.PAGE}]
+			};
+		} else {
+			return {
+				from: nodeBefore.from + tagBefore[1].length + tagBefore[2].length,
+				options: WidgetTypeOptions
+				// validFor: /^#{1,6}\s+\w*$/
+			};
+		}
+	};
+	const completeListItem = (context: CompletionContext, nodeBefore: SyntaxNode) => {
+		const textBefore = context.state.sliceDoc(nodeBefore.from, context.pos) ?? '';
+		// bullet list
+		const tagBefore = /([-|*]\s+)\w*$/.exec(textBefore);
+		if (tagBefore == null) {
+			return null;
+		}
+		const widgetType = findWidgetType(nodeBefore, context);
+		const attrOptions = WidgetAttrNameOptions.filter(option => {
+			return option.$wt === '$all' || option.$wt === widgetType;
+		});
+		return {
+			from: nodeBefore.from + tagBefore[1].length,
+			options: [
+				...WidgetTypeOptions,
+				...attrOptions
+			]
+			// validFor: /^#{1,6}\s+\w*$/
+		};
+	};
+	const completeParagraph = (context: CompletionContext, nodeBefore: SyntaxNode, tree: Tree) => {
+		const nodeBefore2 = tree.resolveInner(nodeBefore.from, -1);
+		if (nodeBefore2 == null) {
+			return null;
+		} else if (nodeBefore2.name === 'ListItem') {
+			return completeListItem(context, nodeBefore2);
+		} else {
+			return null;
+		}
+	};
+	const completeIcon = (context: CompletionContext, nodeBefore: SyntaxNode) => {
+		const textBefore = context.state.sliceDoc(nodeBefore.from, context.pos) ?? '';
+		// console.log(textBefore);
+		if (textBefore.trim().startsWith(ATTRIBUTE_VALUE_ICON_PREFIX)) {
+			return {
+				from: nodeBefore.from + textBefore.indexOf(ATTRIBUTE_VALUE_ICON_PREFIX) + ATTRIBUTE_VALUE_ICON_PREFIX.length,
+				options: WidgetIconOptions
+			};
+		} else {
+			return null;
+		}
+	};
+	const completeExt = (context: CompletionContext, nodeBefore: SyntaxNode) => {
+		const textBefore = context.state.sliceDoc(nodeBefore.from, context.pos) ?? '';
+		if (textBefore.trim().startsWith(ATTRIBUTE_VALUE_EXT_PREFIX)) {
+			return {
+				from: nodeBefore.from + textBefore.indexOf(ATTRIBUTE_VALUE_EXT_PREFIX) + ATTRIBUTE_VALUE_EXT_PREFIX.length,
+				options: WidgetExtOptions
+			};
+		} else {
+			return null;
+		}
+	};
+	const completePrefix = (context: CompletionContext, nodeBefore: SyntaxNode) => {
+		const textBefore = context.state.sliceDoc(nodeBefore.from, context.pos) ?? '';
+		if (textBefore.trim().startsWith(ATTRIBUTE_VALUE_CONST_START)) {
+			return {
+				from: nodeBefore.from + textBefore.indexOf(ATTRIBUTE_VALUE_CONST_START),
+				options: WidgetConstPrefixOptions
+			};
+		} else if (textBefore.trim().startsWith(ATTRIBUTE_VALUE_REF_START)) {
+			return {
+				from: nodeBefore.from + textBefore.indexOf(ATTRIBUTE_VALUE_REF_START),
+				options: WidgetRefPrefixOptions
+			};
+		} else {
+			return null;
+		}
+	};
+
 	return (context: CompletionContext): CompletionResult | null => {
 		const tree = syntaxTree(context.state);
 		const nodeBefore = tree.resolveInner(context.pos, -1);
@@ -128,85 +252,22 @@ export const createCompleteD9ml = (options: {
 			return null;
 		}
 
-		// console.log(nodeBefore.name);
-		if (nodeBefore.name.startsWith('ATXHeading')) {
-			const textBefore = (context.state.sliceDoc(nodeBefore.from, context.pos) ?? '').trim();
-			const tagBefore = /(#{1,6})(\s+)\w*$/.exec(textBefore);
-			if (tagBefore == null) {
+		switch (true) {
+			case nodeBefore.name.startsWith('ATXHeading'):
+				return completeHeading(context, nodeBefore);
+			case nodeBefore.name === 'ListItem':
+				return completeListItem(context, nodeBefore);
+			case nodeBefore.name === 'Paragraph':
+				return completeParagraph(context, nodeBefore, tree);
+			case nodeBefore.name === 'WidgetDeclarationAttrValueIcon':
+				return completeIcon(context, nodeBefore);
+			case nodeBefore.name === 'WidgetDeclarationAttrValueExt':
+				return completeExt(context, nodeBefore);
+			case nodeBefore.name === 'WidgetDeclarationAttrValue':
+				return completePrefix(context, nodeBefore);
+			default:
 				return null;
-			}
-			if (tagBefore[1].length === 1) {
-				return {
-					from: nodeBefore.from + tagBefore[1].length + tagBefore[2].length,
-					// no matter what, the top level is Page only
-					options: [{label: N2.N2WidgetType.PAGE}]
-				};
-			} else {
-				return {
-					from: nodeBefore.from + tagBefore[1].length + tagBefore[2].length,
-					options: WidgetTypeOptions
-					// validFor: /^#{1,6}\s+\w*$/
-				};
-			}
-		} else if (nodeBefore.name === 'Paragraph') {
-			// console.log(context.state.sliceDoc(nodeBefore.from, nodeBefore.to));
-			const nodeBefore2 = tree.resolveInner(nodeBefore.from, -1);
-			if (nodeBefore2 == null) {
-				return null;
-			} else if (nodeBefore2.name === 'ListItem') {
-				const textBefore = (context.state.sliceDoc(nodeBefore2.from, context.pos) ?? '').trim();
-				// bullet list
-				const tagBefore = /([-|*]\s+)\w*$/.exec(textBefore);
-				if (tagBefore == null) {
-					return null;
-				}
-				const widgetType = findWidgetType(nodeBefore2, context);
-				const attrOptions = WidgetAttrNameOptions.filter(option => {
-					return option.$wt === '$all' || option.$wt === widgetType;
-				});
-				return {
-					from: nodeBefore2.from + tagBefore[1].length,
-					options: [
-						...WidgetTypeOptions,
-						...attrOptions
-					]
-					// validFor: /^#{1,6}\s+\w*$/
-				};
-			}
-		} else if (nodeBefore.name === 'WidgetDeclarationAttrValueIcon') {
-			const textBefore = context.state.sliceDoc(nodeBefore.from, context.pos) ?? '';
-			// console.log(textBefore);
-			if (textBefore.trim().startsWith(ATTRIBUTE_VALUE_ICON_PREFIX)) {
-				return {
-					from: nodeBefore.from + textBefore.indexOf(ATTRIBUTE_VALUE_ICON_PREFIX) + ATTRIBUTE_VALUE_ICON_PREFIX.length,
-					options: WidgetIconOptions
-				};
-			}
-		} else if (nodeBefore.name === 'WidgetDeclarationAttrValueExt') {
-			const textBefore = context.state.sliceDoc(nodeBefore.from, context.pos) ?? '';
-			if (textBefore.trim().startsWith(ATTRIBUTE_VALUE_EXT_PREFIX)) {
-				return {
-					from: nodeBefore.from + textBefore.indexOf(ATTRIBUTE_VALUE_EXT_PREFIX) + ATTRIBUTE_VALUE_EXT_PREFIX.length,
-					options: WidgetExtOptions
-				};
-			}
-		} else if (nodeBefore.name === 'WidgetDeclarationAttrValue') {
-			const textBefore = context.state.sliceDoc(nodeBefore.from, context.pos) ?? '';
-			if (textBefore.trim().startsWith(ATTRIBUTE_VALUE_CONST_START)) {
-				return {
-					from: nodeBefore.from + textBefore.indexOf(ATTRIBUTE_VALUE_CONST_START),
-					options: WidgetConstPrefixOptions
-				};
-			} else {
-				if (textBefore.trim().startsWith(ATTRIBUTE_VALUE_REF_START)) {
-					return {
-						from: nodeBefore.from + textBefore.indexOf(ATTRIBUTE_VALUE_REF_START),
-						options: WidgetRefPrefixOptions
-					};
-				}
-			}
 		}
-		return null;
 	};
 };
 

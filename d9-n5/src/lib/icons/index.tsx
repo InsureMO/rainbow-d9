@@ -4,9 +4,11 @@ import {BoxIcon} from './box';
 import {ButtonIcon} from './button';
 import {ButtonBarIcon} from './button-bar';
 import {CaptionIcon} from './caption';
+import {ChartAutonomousIcon} from './chart-autonomous';
 import {ChartBarIcon} from './chart-bar';
 import {ChartLineIcon} from './chart-line';
 import {ChartPieIcon} from './chart-pie';
+import {ChartReliantIcon} from './chart-reliant';
 import {CheckboxIcon} from './checkbox';
 import {ChecksIcon} from './checks';
 import {ContainerGroupIcon} from './container-group';
@@ -66,6 +68,8 @@ export enum PlaygroundIcons {
 	CHART_PIE = 'playground.chart-pie',
 	CHART_BAR = 'playground.chart-bar',
 	CHART_LINE = 'playground.chart-line',
+	CHART_RELIANT = 'playground.chart-reliant',
+	CHART_AUTONOMOUS = 'playground.chart-autonomous',
 
 	INPUT = 'playground.input',
 	NUMBER_INPUT = 'playground.number-input',
@@ -112,6 +116,8 @@ Icons.Registrar.register({
 	[PlaygroundIcons.CHART_PIE]: () => <ChartPieIcon/>,
 	[PlaygroundIcons.CHART_BAR]: () => <ChartBarIcon/>,
 	[PlaygroundIcons.CHART_LINE]: () => <ChartLineIcon/>,
+	[PlaygroundIcons.CHART_RELIANT]: () => <ChartReliantIcon/>,
+	[PlaygroundIcons.CHART_AUTONOMOUS]: () => <ChartAutonomousIcon/>,
 
 	[PlaygroundIcons.INPUT]: () => <InputIcon/>,
 	[PlaygroundIcons.NUMBER_INPUT]: () => <NumberInputIcon/>,
@@ -140,6 +146,9 @@ export {
 	SectionIcon, BoxIcon, RibsIcon, TabsIcon, TableIcon, TreeIcon, WizardIcon,
 
 	InputIcon, NumberInputIcon, PasswordIcon, TextAreaIcon,
+	DecoInputIcon, DecoNumberIcon, DecoPasswordIcon,
 	DropdownIcon, MultiDropdownIcon, DateIcon, DateTimeIcon,
-	CheckboxIcon, ChecksIcon, RadioIcon, RadiosIcon
+	CheckboxIcon, ChecksIcon, RadioIcon, RadiosIcon,
+
+	ChartPieIcon, ChartBarIcon, ChartLineIcon, ChartReliantIcon, ChartAutonomousIcon
 };

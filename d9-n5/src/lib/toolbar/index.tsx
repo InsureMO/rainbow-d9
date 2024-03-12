@@ -285,14 +285,14 @@ export const SecondaryBar = (props: SecondaryBarProps) => {
 export const Toolbar = (props: ToolbarProps) => {
 	const {groups, widgets} = props;
 	const buttons = widgets.reduce((buttons, widget) => {
-		const {$wt, icon, tooltip, group, notInToolbar} = widget;
+		const {$wt, $key, icon, tooltip, group, notInToolbar} = widget;
 		if (notInToolbar) {
 			// this widget will not show in toolbar, ignored
 		} else {
 			if (buttons[group] == null) {
 				buttons[group] = [];
 			}
-			buttons[group].push({key: $wt, icon, tooltip: VUtils.isBlank(tooltip) ? $wt : tooltip});
+			buttons[group].push({key: $key ?? $wt, icon, tooltip: VUtils.isBlank(tooltip) ? ($key ?? $wt) : tooltip});
 		}
 		return buttons;
 	}, {} as Record<PlaygroundWidgetGroupKey | string, Array<WidgetButton>>);
