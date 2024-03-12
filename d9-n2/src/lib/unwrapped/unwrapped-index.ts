@@ -1,4 +1,4 @@
-import {UnwrappedButton, UnwrappedButtonProps} from './button';
+import {UnwrappedButton, UnwrappedButtonProps, UnwrappedLink, UnwrappedLinkProps} from './button';
 import {UnwrappedButtonBar, UnwrappedButtonBarProps} from './button-bar';
 import {
 	UnwrappedCalendar,
@@ -15,10 +15,19 @@ import {
 	UnwrappedDecorateInput,
 	UnwrappedDecorateInputProps,
 	UnwrappedDecorateNumberInput,
-	UnwrappedDecorateNumberInputProps
+	UnwrappedDecorateNumberInputProps,
+	UnwrappedDecoratePasswordInput,
+	UnwrappedDecoratePasswordInputProps
 } from './decorate-input';
 import {UnwrappedDropdown, UnwrappedDropdownProps} from './dropdown';
-import {UnwrappedInput, UnwrappedInputProps, UnwrappedNumberInput, UnwrappedNumberInputProps} from './input';
+import {
+	UnwrappedInput,
+	UnwrappedInputProps,
+	UnwrappedNumberInput,
+	UnwrappedNumberInputProps,
+	UnwrappedPasswordInput,
+	UnwrappedPasswordInputProps
+} from './input';
 import {UnwrappedMultiDropdown, UnwrappedMultiDropdownProps} from './multi-dropdown';
 import {UnwrappedPagination, UnwrappedPaginationProps} from './pagination';
 import {UnwrappedRadio, UnwrappedRadioProps} from './radio';
@@ -31,9 +40,12 @@ import {UnwrappedWizard, UnwrappedWizardProps} from './wizard';
 export {
 	UnwrappedCaption, UnwrappedCaptionProps, UnwrappedLabel, UnwrappedLabelProps,
 
-	UnwrappedInput, UnwrappedInputProps, UnwrappedNumberInput, UnwrappedNumberInputProps,
+	UnwrappedInput, UnwrappedInputProps,
+	UnwrappedNumberInput, UnwrappedNumberInputProps,
+	UnwrappedPasswordInput, UnwrappedPasswordInputProps,
 	UnwrappedDecorateInput, UnwrappedDecorateInputProps,
 	UnwrappedDecorateNumberInput, UnwrappedDecorateNumberInputProps,
+	UnwrappedDecoratePasswordInput, UnwrappedDecoratePasswordInputProps,
 	UnwrappedCheckbox, UnwrappedCheckboxProps, UnwrappedCheckboxes, UnwrappedCheckboxesProps,
 	UnwrappedRadio, UnwrappedRadioProps, UnwrappedRadios, UnwrappedRadiosProps,
 	UnwrappedDropdown, UnwrappedDropdownProps,
@@ -42,7 +54,7 @@ export {
 	UnwrappedDateCalendar, UnwrappedDateCalendarProps,
 	UnwrappedDateTimeCalendar, UnwrappedDateTimeCalendarProps,
 
-	UnwrappedButton, UnwrappedButtonProps,
+	UnwrappedButton, UnwrappedButtonProps, UnwrappedLink, UnwrappedLinkProps,
 
 	UnwrappedSection, UnwrappedSectionProps,
 	UnwrappedPagination, UnwrappedPaginationProps,

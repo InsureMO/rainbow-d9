@@ -14,6 +14,7 @@ import {DateIcon} from './date';
 import {DateTimeIcon} from './datetime';
 import {DecoInputIcon} from './deco-input';
 import {DecoNumberIcon} from './deco-number';
+import {DecoPasswordIcon} from './deco-password';
 import {DisplayGroupIcon} from './display-group';
 import {DropdownIcon} from './dropdown';
 import {InputIcon} from './input';
@@ -71,6 +72,7 @@ export enum PlaygroundIcons {
 	PASSWORD = 'playground.password',
 	DECO_INPUT = 'playground.deco-input',
 	DECO_NUMBER = 'playground.deco-number',
+	DECO_PASSWORD = 'playground.deco-pwd',
 	TEXTAREA = 'playground.textarea',
 	DROPDOWN = 'playground.dropdown',
 	MULTI_DROPDOWN = 'playground.multi-dropdown',
@@ -116,6 +118,7 @@ Icons.Registrar.register({
 	[PlaygroundIcons.PASSWORD]: () => <PasswordIcon/>,
 	[PlaygroundIcons.DECO_INPUT]: () => <DecoInputIcon/>,
 	[PlaygroundIcons.DECO_NUMBER]: () => <DecoNumberIcon/>,
+	[PlaygroundIcons.DECO_PASSWORD]: () => <DecoPasswordIcon/>,
 	[PlaygroundIcons.TEXTAREA]: () => <TextAreaIcon/>,
 	[PlaygroundIcons.DATE]: () => <DateIcon/>,
 	[PlaygroundIcons.DATETIME]: () => <DateTimeIcon/>,

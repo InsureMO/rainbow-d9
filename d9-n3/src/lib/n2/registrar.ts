@@ -1,6 +1,6 @@
 import {createOrGetTranslateHelperSingleton, WidgetHelper} from '../widget';
 import {N2BoxTranslator} from './box';
-import {N2ButtonTranslator} from './button';
+import {N2ButtonTranslator, N2LinkTranslator} from './button';
 import {N2ButtonBarTranslator} from './button-bar';
 import {N2CalendarTranslator, N2DateTimeTranslator, N2DateTranslator} from './calendar';
 import {N2BadgeTranslator, N2CaptionTranslator, N2LabelTranslator} from './caption';
@@ -8,11 +8,13 @@ import {N2CheckboxTranslator} from './checkbox';
 import {N2CheckboxesTranslator, N2ChecksTranslator} from './checkboxes';
 import {N2DecorateInputTranslator} from './decorate-input';
 import {N2DecorateNumberTranslator} from './decorate-number';
+import {N2DecoratePasswordTranslator} from './decorate-password';
 import {N2DropdownTranslator} from './dropdown';
 import {N2InputTranslator} from './input';
 import {N2MultiDropdownTranslator} from './multi-dropdown';
 import {N2NumberTranslator} from './number';
 import {N2PaginationTranslator} from './pagination';
+import {N2PasswordTranslator} from './password';
 import {N2RadioTranslator} from './radio';
 import {N2RadiosTranslator} from './radios';
 import {N2RibsTranslator, N2RibsViewTranslator} from './ribs';
@@ -28,8 +30,10 @@ export const registerN2Widgets = (widgetHelper?: WidgetHelper) => {
 
 	repo.register(new N2InputTranslator(repo));
 	repo.register(new N2NumberTranslator(repo));
+	repo.register(new N2PasswordTranslator(repo));
 	repo.register(new N2DecorateInputTranslator(repo));
 	repo.register(new N2DecorateNumberTranslator(repo));
+	repo.register(new N2DecoratePasswordTranslator(repo));
 	repo.register(new N2TextareaTranslator(repo));
 	repo.register(new N2CheckboxTranslator(repo));
 	repo.register(new N2CheckboxesTranslator(repo));
@@ -43,6 +47,7 @@ export const registerN2Widgets = (widgetHelper?: WidgetHelper) => {
 	repo.register(new N2CalendarTranslator(repo));
 
 	repo.register(new N2ButtonTranslator(repo));
+	repo.register(new N2LinkTranslator(repo));
 	repo.register(new N2ButtonBarTranslator(repo));
 
 	repo.register(new N2CaptionTranslator(repo));

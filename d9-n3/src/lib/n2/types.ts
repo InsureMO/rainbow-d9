@@ -3,8 +3,10 @@ export enum N2WidgetType {
 
 	INPUT = 'Input',
 	NUMBER = 'Number',
+	PASSWORD = 'Pwd',
 	DECORATE_INPUT = 'DecoInput',
 	DECORATE_NUMBER = 'DecoNumber',
+	DECORATE_PASSWORD = 'DecoPwd',
 	TEXTAREA = 'Textarea',
 	CHECKBOX = 'Checkbox',
 	CHECKBOXES = 'Checkboxes',
@@ -12,6 +14,7 @@ export enum N2WidgetType {
 	RADIO = 'Radio',
 	RADIOS = 'Radios',
 	BUTTON = 'Button',
+	LINK = 'Link',
 	BUTTON_BAR = 'ButtonBar',
 	CAPTION = 'Caption',
 	LABEL = 'Label',

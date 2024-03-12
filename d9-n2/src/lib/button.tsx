@@ -512,4 +512,12 @@ export const Button = forwardRef((props: ButtonProps, ref: ForwardedRef<HTMLButt
 	</AButton>;
 });
 
+export type LinkDef = Omit<ButtonDef, 'fill'>;
+export type LinkProps = OmitNodeDef<LinkDef> & WidgetProps;
+
+export const Link = forwardRef((props: LinkProps, ref: ForwardedRef<HTMLButtonElement>) => {
+	return <Button {...props} fill={ButtonFill.LINK} ref={ref}/>;
+});
+
 registerWidget({key: 'Button', JSX: Button, container: false, array: false});
+registerWidget({key: 'Link', JSX: Link, container: false, array: false});

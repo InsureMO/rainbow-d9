@@ -160,5 +160,15 @@ export const NumberInput = forwardRef((props: NumberInputProps, ref: ForwardedRe
 	return <Input {...props} data-number={true} valueToNumber={true} ref={ref}/>;
 });
 
+export type PasswordInputDef = Omit<InputDef, 'valueToNumber'>;
+export type PasswordInputProps = OmitNodeDef<PasswordInputDef> & WidgetProps;
+
+export const PasswordInput = forwardRef((props: PasswordInputProps, ref: ForwardedRef<HTMLInputElement>) => {
+	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+	// @ts-ignore
+	return <Input {...props} type="password" valueToNumber={false} ref={ref}/>;
+});
+
 registerWidget({key: 'Number', JSX: NumberInput, container: false, array: false});
 registerWidget({key: 'Input', JSX: Input, container: false, array: false});
+registerWidget({key: 'Pwd', JSX: PasswordInput, container: false, array: false});

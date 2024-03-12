@@ -96,3 +96,15 @@ export class N2ButtonTranslator extends SpecificWidgetTranslator<N2WidgetType.BU
 		return [N2ButtonClickBuild, DecorateLeadsBuild, DecorateTailsBuild];
 	}
 }
+
+export class N2LinkTranslator extends SpecificWidgetTranslator<N2WidgetType.LINK> {
+	public getSupportedType(): N2WidgetType.LINK {
+		return N2WidgetType.LINK;
+	}
+
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	public getAttributeValueBuilders(): Array<AttributeValueBuild<any>> {
+		return [N2ButtonClickBuild, DecorateLeadsBuild, DecorateTailsBuild];
+	}
+}
+

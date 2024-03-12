@@ -80,12 +80,20 @@ export const N2Widgets: Array<PlaygroundWidget> = [
 		icon: PlaygroundIcons.NUMBER_INPUT, group: PlaygroundWidgetGroupKey.INPUTS, tooltip: 'Number input'
 	},
 	{
+		$wt: N2.N2WidgetType.PASSWORD, properties: [AutoSelect],
+		icon: PlaygroundIcons.PASSWORD, group: PlaygroundWidgetGroupKey.INPUTS, tooltip: 'Password input'
+	},
+	{
 		$wt: N2.N2WidgetType.DECORATE_INPUT, properties: [AutoSelect, LeadsDecorateElements, TailsDecorateElements],
 		icon: PlaygroundIcons.DECO_INPUT, group: PlaygroundWidgetGroupKey.INPUTS, tooltip: 'Decorable input'
 	},
 	{
 		$wt: N2.N2WidgetType.DECORATE_NUMBER, properties: [AutoSelect, LeadsDecorateElements, TailsDecorateElements],
-		icon: PlaygroundIcons.DECO_NUMBER, group: PlaygroundWidgetGroupKey.INPUTS, tooltip: 'Decorable Number Input'
+		icon: PlaygroundIcons.DECO_NUMBER, group: PlaygroundWidgetGroupKey.INPUTS, tooltip: 'Decorable number input'
+	},
+	{
+		$wt: N2.N2WidgetType.DECORATE_PASSWORD, properties: [AutoSelect, LeadsDecorateElements, TailsDecorateElements],
+		icon: PlaygroundIcons.DECO_PASSWORD, group: PlaygroundWidgetGroupKey.INPUTS, tooltip: 'Decorable password input'
 	},
 	{
 		$wt: N2.N2WidgetType.TEXTAREA, properties: [AutoSelect],
@@ -93,16 +101,16 @@ export const N2Widgets: Array<PlaygroundWidget> = [
 	},
 	{
 		$wt: N2.N2WidgetType.CALENDAR,
-		icon: PlaygroundIcons.DATE, group: PlaygroundWidgetGroupKey.INPUTS, tooltip: 'Date Picker',
+		icon: PlaygroundIcons.DATE, group: PlaygroundWidgetGroupKey.INPUTS, tooltip: 'Date picker',
 		notInToolbar: true
 	},
 	{
 		$wt: N2.N2WidgetType.DATE,
-		icon: PlaygroundIcons.DATE, group: PlaygroundWidgetGroupKey.INPUTS, tooltip: 'Date Picker'
+		icon: PlaygroundIcons.DATE, group: PlaygroundWidgetGroupKey.INPUTS, tooltip: 'Date picker'
 	},
 	{
 		$wt: N2.N2WidgetType.DATETIME,
-		icon: PlaygroundIcons.DATETIME, group: PlaygroundWidgetGroupKey.INPUTS, tooltip: 'DateTime Picker'
+		icon: PlaygroundIcons.DATETIME, group: PlaygroundWidgetGroupKey.INPUTS, tooltip: 'Datetime picker'
 	},
 
 	// options
@@ -112,20 +120,20 @@ export const N2Widgets: Array<PlaygroundWidget> = [
 	},
 	{
 		$wt: N2.N2WidgetType.CHECKBOXES,
-		icon: PlaygroundIcons.CHECKS, group: PlaygroundWidgetGroupKey.OPTIONS, tooltip: 'Checkbox Group',
+		icon: PlaygroundIcons.CHECKS, group: PlaygroundWidgetGroupKey.OPTIONS, tooltip: 'Checkbox group',
 		notInToolbar: true
 	},
 	{
 		$wt: N2.N2WidgetType.CHECKS,
-		icon: PlaygroundIcons.CHECKS, group: PlaygroundWidgetGroupKey.OPTIONS, tooltip: 'Checkbox Group'
+		icon: PlaygroundIcons.CHECKS, group: PlaygroundWidgetGroupKey.OPTIONS, tooltip: 'Checkbox group'
 	},
 	{
 		$wt: N2.N2WidgetType.RADIO,
-		icon: PlaygroundIcons.RADIO, group: PlaygroundWidgetGroupKey.OPTIONS, tooltip: 'Radio Button'
+		icon: PlaygroundIcons.RADIO, group: PlaygroundWidgetGroupKey.OPTIONS, tooltip: 'Radio button'
 	},
 	{
 		$wt: N2.N2WidgetType.RADIOS,
-		icon: PlaygroundIcons.RADIOS, group: PlaygroundWidgetGroupKey.OPTIONS, tooltip: 'Radio Button Group'
+		icon: PlaygroundIcons.RADIOS, group: PlaygroundWidgetGroupKey.OPTIONS, tooltip: 'Radio button group'
 	},
 	{
 		$wt: N2.N2WidgetType.DROPDOWN,
@@ -133,7 +141,7 @@ export const N2Widgets: Array<PlaygroundWidget> = [
 	},
 	{
 		$wt: N2.N2WidgetType.MULTI_DROPDOWN,
-		icon: PlaygroundIcons.MULTI_DROPDOWN, group: PlaygroundWidgetGroupKey.OPTIONS, tooltip: 'Multiple Choices'
+		icon: PlaygroundIcons.MULTI_DROPDOWN, group: PlaygroundWidgetGroupKey.OPTIONS, tooltip: 'Multiple choices'
 	},
 
 	// display
@@ -148,6 +156,10 @@ export const N2Widgets: Array<PlaygroundWidget> = [
 	{
 		$wt: N2.N2WidgetType.BUTTON, properties: [LeadsDecorateElements, TailsDecorateElements],
 		icon: PlaygroundIcons.BUTTON, group: PlaygroundWidgetGroupKey.DISPLAY
+	},
+	{
+		$wt: N2.N2WidgetType.LINK, properties: [LeadsDecorateElements, TailsDecorateElements],
+		icon: PlaygroundIcons.LINK, group: PlaygroundWidgetGroupKey.DISPLAY
 	},
 	// TODO CHART
 
@@ -178,7 +190,7 @@ export const N2Widgets: Array<PlaygroundWidget> = [
 	},
 	{
 		$wt: N2.N2WidgetType.BUTTON_BAR,
-		icon: PlaygroundIcons.BUTTON_BAR, group: PlaygroundWidgetGroupKey.CONTAINERS, tooltip: 'Button Bar'
+		icon: PlaygroundIcons.BUTTON_BAR, group: PlaygroundWidgetGroupKey.CONTAINERS, tooltip: 'Button bar'
 	},
 	{
 		$wt: N2.N2WidgetType.BADGE,

@@ -1,4 +1,9 @@
-import {UnwrappedButton as Button, UnwrappedButtonProps as ButtonProps} from './button';
+import {
+	UnwrappedButton as Button,
+	UnwrappedButtonProps as ButtonProps,
+	UnwrappedLink as Link,
+	UnwrappedLinkProps as LinkProps
+} from './button';
 import {UnwrappedButtonBar as ButtonBar, UnwrappedButtonBarProps as ButtonBarProps} from './button-bar';
 import {
 	UnwrappedCalendar as Calendar,
@@ -20,14 +25,18 @@ import {
 	UnwrappedDecorateInput as DecorateInput,
 	UnwrappedDecorateInputProps as DecorateInputProps,
 	UnwrappedDecorateNumberInput as DecorateNumberInput,
-	UnwrappedDecorateNumberInputProps as DecorateNumberInputProps
+	UnwrappedDecorateNumberInputProps as DecorateNumberInputProps,
+	UnwrappedDecoratePasswordInput as DecoratePasswordInput,
+	UnwrappedDecoratePasswordInputProps as DecoratePasswordInputProps
 } from './decorate-input';
 import {UnwrappedDropdown as Dropdown, UnwrappedDropdownProps as DropdownProps} from './dropdown';
 import {
 	UnwrappedInput as Input,
 	UnwrappedInputProps as InputProps,
 	UnwrappedNumberInput as NumberInput,
-	UnwrappedNumberInputProps as NumberInputProps
+	UnwrappedNumberInputProps as NumberInputProps,
+	UnwrappedPasswordInput as PasswordInput,
+	UnwrappedPasswordInputProps as PasswordInputProps
 } from './input';
 import {
 	UnwrappedMultiDropdown as MultiDropdown,
@@ -45,8 +54,9 @@ import {UnwrappedWizard as Wizard, UnwrappedWizardProps as WizardProps} from './
 export {
 	Caption, CaptionProps, Label, LabelProps,
 
-	Input, InputProps, NumberInput, NumberInputProps,
+	Input, InputProps, NumberInput, NumberInputProps, PasswordInput, PasswordInputProps,
 	DecorateInput, DecorateInputProps, DecorateNumberInput, DecorateNumberInputProps,
+	DecoratePasswordInput, DecoratePasswordInputProps,
 	Checkbox, CheckboxProps, Checkboxes, CheckboesProps,
 	Radio, RadioProps, Radios, RadiosProps,
 	Textarea, TextareaProps,
@@ -55,7 +65,7 @@ export {
 	DateCalendar, DateCalendarProps,
 	DateTimeCalendar, DateTimeCalendarProps,
 
-	Button, ButtonProps,
+	Button, ButtonProps, Link, LinkProps,
 
 	Section, SectionProps,
 	Pagination, PaginationProps,
