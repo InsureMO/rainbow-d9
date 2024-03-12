@@ -60,7 +60,7 @@ const CalendarProperties: Array<PlaygroundWidgetProperty> = [
 	{name: 'storeFormat', label: 'Text.', description: 'Default value depends on system settings.'},
 	{
 		name: 'fixedTimeAt', label: 'Text.',
-		description: 'Default value depends on system settings, works only when "time" is false.\n"start", "0", "end", "HH:mm:ss", "HH:mm:ss.SSS".'
+		description: 'Default value depends on system settings, works only when "time" is false. "start", "0", "end", "HH:mm:ss", "HH:mm:ss.SSS".'
 	},
 	{
 		name: 'initTimeAt', label: 'Text.',
@@ -136,9 +136,7 @@ const ArrayProperties: Array<PlaygroundWidgetProperty> = [
 ];
 const TableProperties: Array<PlaygroundWidgetProperty> = [
 	{
-		name: 'headers',
-		label: 'List',
-		description: 'Column headers. "- column:\n\t- label: Header label\n\twidth: 300", "- Header Label: 300"'
+		name: 'headers', label: 'Various.', description: 'Column headers.'
 	},
 	{name: 'headerHeight', label: 'Number.', description: 'In pixels.'},
 	{name: 'expandable', label: 'Boolean.', description: 'Default false. Row expandable.'},
@@ -152,12 +150,45 @@ const TableProperties: Array<PlaygroundWidgetProperty> = [
 	{
 		name: 'omitDefaultRowOperators',
 		label: 'Boolean, Text.',
-		description: 'True to omit the remove, expand, collapse row operators.\nOr "remove" to omit remove only, "fold" to omit expand and collapse.'
+		description: 'True to omit the remove, expand, collapse row operators. Or "remove" to omit remove only, "fold" to omit expand and collapse.'
 	}
 ];
 const RibsProperties: Array<PlaygroundWidgetProperty> = [
 	{name: 'caption', label: 'Text, Various.', description: 'Caption for each item.'}
 ];
+
+const ValidationRequired: PlaygroundWidgetProperty = {
+	name: 'required', label: 'Boolean, Various.', description: 'Required check. Customize message after ";".'
+};
+const ValidationLength: PlaygroundWidgetProperty = {
+	name: 'length',
+	label: 'Number, Various.',
+	description: 'Length check. Multiple rules connected by ",". Rule also can be "..x", "x..", "x..y". Customize message after ";".'
+};
+const ValidationNumeric: PlaygroundWidgetProperty = {
+	name: 'numeric', label: 'Boolean, Various.', description: 'Number check. Customize message after ";".'
+};
+const ValidationPositive: PlaygroundWidgetProperty = {
+	name: 'positive', label: 'Boolean, Various.', description: 'Positive number check. Customize message after ";".'
+};
+const ValidationNotNegative: PlaygroundWidgetProperty = {
+	name: 'notNegative', label: 'Boolean, Various.',
+	description: 'Not negative number check. Customize message after ";".'
+};
+const ValidationInteger: PlaygroundWidgetProperty = {
+	name: 'integer', label: 'Boolean, Various.', description: 'Integer check. Customize message after ";".'
+};
+const ValidationNumberRange: PlaygroundWidgetProperty = {
+	name: 'numberRange', label: 'Various.',
+	description: 'Number range check. Multiple rules connected by ",". Rule also can be "[..x]", "(x..)", "(x..y]". Customize message after ";".'
+};
+const ValidationRegex: PlaygroundWidgetProperty = {
+	name: 'regex', label: 'Boolean, Various.',
+	description: 'Regex check. Regex could be predefined. Customize message after ";".'
+};
+const ValidationRegexp: PlaygroundWidgetProperty = {
+	name: 'regexp', label: 'Boolean, Various.', description: 'Same as "regex".'
+};
 
 export const N2WidgetGroups: Array<PlaygroundWidgetGroup> = [
 	{icon: PlaygroundIcons.CONTAINER_GROUP, tooltip: 'Container', key: PlaygroundWidgetGroupKey.CONTAINERS},
@@ -174,55 +205,91 @@ export const N2Widgets: Array<PlaygroundWidget> = [
 
 	// inputs
 	{
-		$wt: N2.N2WidgetType.INPUT, label: 'Input box.', properties: [
+		$wt: N2.N2WidgetType.INPUT, label: 'Input box.',
+		properties: [
 			AutoSelect, InputPlaceholder,
 			{
 				name: 'valueToNumber', label: 'Boolean. Treat as a number.',
 				description: 'Default false. Attempt to synchronize with the data model as a number.'
-			}
-		], icon: PlaygroundIcons.INPUT, group: PlaygroundWidgetGroupKey.INPUTS
+			},
+			ValidationRequired, ValidationRegex, ValidationRegexp, ValidationLength,
+			ValidationNumeric, ValidationPositive, ValidationNotNegative, ValidationInteger, ValidationNumberRange
+		],
+		icon: PlaygroundIcons.INPUT, group: PlaygroundWidgetGroupKey.INPUTS
 	},
 	{
-		$wt: N2.N2WidgetType.NUMBER, label: 'Number input box.', properties: [AutoSelect, InputPlaceholder],
+		$wt: N2.N2WidgetType.NUMBER, label: 'Number input box.',
+		properties: [
+			AutoSelect, InputPlaceholder,
+			ValidationRequired, ValidationRegex, ValidationRegexp, ValidationLength,
+			ValidationNumeric, ValidationPositive, ValidationNotNegative, ValidationInteger, ValidationNumberRange
+		],
 		icon: PlaygroundIcons.NUMBER_INPUT, group: PlaygroundWidgetGroupKey.INPUTS, tooltip: 'Number input'
 	},
 	{
-		$wt: N2.N2WidgetType.PASSWORD, label: 'Password input box.', properties: [AutoSelect, InputPlaceholder],
+		$wt: N2.N2WidgetType.PASSWORD, label: 'Password input box.',
+		properties: [
+			AutoSelect, InputPlaceholder,
+			ValidationRequired, ValidationRegex, ValidationRegexp, ValidationLength
+		],
 		icon: PlaygroundIcons.PASSWORD, group: PlaygroundWidgetGroupKey.INPUTS, tooltip: 'Password input'
 	},
 	{
 		$wt: N2.N2WidgetType.DECORATE_INPUT, label: 'Decorable input box.',
-		properties: [AutoSelect, InputPlaceholder, LeadsDecorateElements, TailsDecorateElements],
+		properties: [
+			AutoSelect, InputPlaceholder,
+			LeadsDecorateElements, TailsDecorateElements,
+			ValidationRequired, ValidationRegex, ValidationRegexp, ValidationLength,
+			ValidationNumeric, ValidationPositive, ValidationNotNegative, ValidationInteger, ValidationNumberRange
+		],
 		icon: PlaygroundIcons.DECO_INPUT, group: PlaygroundWidgetGroupKey.INPUTS, tooltip: 'Decorable input'
 	},
 	{
 		$wt: N2.N2WidgetType.DECORATE_NUMBER, label: 'Decorable number input box.',
-		properties: [AutoSelect, InputPlaceholder, LeadsDecorateElements, TailsDecorateElements],
+		properties: [
+			AutoSelect, InputPlaceholder,
+			LeadsDecorateElements, TailsDecorateElements,
+			ValidationRequired, ValidationRegex, ValidationRegexp, ValidationLength,
+			ValidationNumeric, ValidationPositive, ValidationNotNegative, ValidationInteger, ValidationNumberRange
+		],
 		icon: PlaygroundIcons.DECO_NUMBER, group: PlaygroundWidgetGroupKey.INPUTS, tooltip: 'Decorable number input'
 	},
 	{
 		$wt: N2.N2WidgetType.DECORATE_PASSWORD, label: 'Decorable password input box.',
-		properties: [AutoSelect, InputPlaceholder, LeadsDecorateElements, TailsDecorateElements],
+		properties: [
+			AutoSelect, InputPlaceholder,
+			LeadsDecorateElements, TailsDecorateElements,
+			ValidationRequired, ValidationRegex, ValidationRegexp, ValidationLength
+		],
 		icon: PlaygroundIcons.DECO_PASSWORD, group: PlaygroundWidgetGroupKey.INPUTS, tooltip: 'Decorable password input'
 	},
 	{
-		$wt: N2.N2WidgetType.TEXTAREA, properties: [AutoSelect],
+		$wt: N2.N2WidgetType.TEXTAREA, properties: [
+			AutoSelect, InputPlaceholder,
+			ValidationRequired, ValidationLength
+		],
 		icon: PlaygroundIcons.TEXTAREA, group: PlaygroundWidgetGroupKey.INPUTS
 	},
 	{
 		$wt: N2.N2WidgetType.CALENDAR, label: 'Date picker.',
-		properties: CalendarProperties,
+		properties: [...CalendarProperties, ValidationRequired],
 		icon: PlaygroundIcons.DATE, group: PlaygroundWidgetGroupKey.INPUTS, tooltip: 'Date picker',
 		notInToolbar: true
 	},
 	{
 		$wt: N2.N2WidgetType.DATE, label: 'Date picker. Shortcut of "Calendar"',
-		properties: CalendarProperties.filter(({name}) => name !== 'time' && name !== 'timeFormat'),
+		properties: [
+			...CalendarProperties.filter(({name}) => name !== 'time' && name !== 'timeFormat'),
+			ValidationRequired
+		],
 		icon: PlaygroundIcons.DATE, group: PlaygroundWidgetGroupKey.INPUTS, tooltip: 'Date picker'
 	},
 	{
 		$wt: N2.N2WidgetType.DATETIME, label: 'Datetime picker.',
-		properties: CalendarProperties.filter(({name}) => name !== 'time' && name !== 'fixedTimeAt'),
+		properties: [
+			...CalendarProperties.filter(({name}) => name !== 'time' && name !== 'fixedTimeAt'),
+			ValidationRequired
+		],
 		icon: PlaygroundIcons.DATETIME, group: PlaygroundWidgetGroupKey.INPUTS, tooltip: 'Datetime picker'
 	},
 
@@ -237,19 +304,20 @@ export const N2Widgets: Array<PlaygroundWidget> = [
 			{
 				name: 'emptyWhenFalse', label: 'Boolean.',
 				description: 'Default false. Use times icon when it is false.'
-			}
+			},
+			ValidationRequired
 		],
 		icon: PlaygroundIcons.CHECKBOX, group: PlaygroundWidgetGroupKey.OPTIONS
 	},
 	{
 		$wt: N2.N2WidgetType.CHECKBOXES, label: 'Checkbox group.',
-		properties: CheckboxesProperties,
+		properties: [...CheckboxesProperties, ValidationRequired],
 		icon: PlaygroundIcons.CHECKS, group: PlaygroundWidgetGroupKey.OPTIONS, tooltip: 'Checkbox group',
 		notInToolbar: true
 	},
 	{
 		$wt: N2.N2WidgetType.CHECKS, label: 'Checkbox group. Shortcut of "Checkboxes".',
-		properties: CheckboxesProperties,
+		properties: [...CheckboxesProperties, ValidationRequired],
 		icon: PlaygroundIcons.CHECKS, group: PlaygroundWidgetGroupKey.OPTIONS, tooltip: 'Checkbox group'
 	},
 	{
@@ -258,23 +326,27 @@ export const N2Widgets: Array<PlaygroundWidget> = [
 			{
 				name: 'values', label: 'Text.',
 				description: 'One or two values, connected by ",". First is true value, second is false value.'
-			}
+			},
+			ValidationRequired
 		],
 		icon: PlaygroundIcons.RADIO, group: PlaygroundWidgetGroupKey.OPTIONS, tooltip: 'Radio button'
 	},
 	{
 		$wt: N2.N2WidgetType.RADIOS, label: 'Radio button group.',
-		properties: CheckboxesProperties.filter(({name}) => name !== 'single' && name !== 'boolOnSingle'),
+		properties: [
+			...CheckboxesProperties.filter(({name}) => name !== 'single' && name !== 'boolOnSingle'),
+			ValidationRequired
+		],
 		icon: PlaygroundIcons.RADIOS, group: PlaygroundWidgetGroupKey.OPTIONS, tooltip: 'Radio button group'
 	},
 	{
 		$wt: N2.N2WidgetType.DROPDOWN, label: 'Dropdown.',
-		properties: DropdownProperties,
+		properties: [...DropdownProperties, ValidationRequired],
 		icon: PlaygroundIcons.DROPDOWN, group: PlaygroundWidgetGroupKey.OPTIONS
 	},
 	{
 		$wt: N2.N2WidgetType.MULTI_DROPDOWN, label: 'Dropdown allows multiple choices.',
-		properties: DropdownProperties,
+		properties: [...DropdownProperties, ValidationRequired],
 		icon: PlaygroundIcons.MULTI_DROPDOWN, group: PlaygroundWidgetGroupKey.OPTIONS, tooltip: 'Multiple choices'
 	},
 
@@ -501,27 +573,33 @@ export const computeReferences = (references: Array<PlaygroundReference>, _useN2
 };
 
 export const CommonWidgetAttributes: Array<PlaygroundWidgetProperty> = [
-	{name: '$fc', label: 'Force wrap widget to form cell.'},
-	{name: 'holdPositionWhenInvisible', label: 'Hold position when widget is invisible, works when form cell wrapped.'},
-	{name: '$pp', label: 'Model property name.'},
-	{name: 'property', label: 'Alias of "$pp".'},
-	{name: '$pos', label: 'Position in grid.'},
-	{name: 'place', label: 'Alias of "$pos".'},
-	{name: 'pos', label: 'Alias of "$pos".'},
-	{name: 'position', label: 'Alias of "$pos".'},
-	{name: '$mpos', label: 'Position in grid, priority only takes effect in the mobile environment.'},
-	{name: 'mpos', label: 'Alias of "$mpos".'},
-	{name: '$disabled', label: 'Disablement.'},
-	{name: 'disabled', label: 'Alias of "$disabled".'},
-	{name: '$visible', label: 'Visibility.'},
-	{name: 'visible', label: 'Alias of "$visible".'},
-	{name: '$valid', label: 'Validation rules.'},
-	{name: 'validate', label: 'Alias of "$valid".'},
-	{name: '$validationScopes'},
-	{name: 'validateScopes', label: 'Alias of "$validationScopes".'},
-	{name: 'watch', label: 'Monitor other property changes.'},
-	{name: 'repaint', label: 'Monitor other property changes, and repaint myself.'},
-	{name: 'clearMe', label: 'Monitor other property changes, and clear my value.'}
+	{name: '$fc', label: 'Boolean.', description: 'Force wrap widget to form cell.'},
+	{
+		name: 'holdPositionWhenInvisible', label: 'Boolean.',
+		description: 'Hold position when widget is invisible, works when form cell wrapped.'
+	},
+	{name: '$pp', label: 'Text.', description: 'Model property name.'},
+	{name: 'property', label: 'Text.', description: 'Alias of "$pp".'},
+	{name: '$pos', label: 'Text.', description: 'Position in grid.'},
+	{name: 'place', label: 'Text.', description: 'Alias of "$pos".'},
+	{name: 'pos', label: 'Text.', description: 'Alias of "$pos".'},
+	{name: 'position', label: 'Text.', description: 'Alias of "$pos".'},
+	{
+		name: '$mpos', label: 'Text.',
+		description: 'Position in grid, priority only takes effect in the mobile environment.'
+	},
+	{name: 'mpos', label: 'Text.', description: 'Alias of "$mpos".'},
+	{name: '$disabled', label: 'Boolean, Various.', description: 'Disablement.'},
+	{name: 'disabled', label: 'Boolean, Various.', description: 'Alias of "$disabled".'},
+	{name: '$visible', label: 'Boolean, Various.', description: 'Visibility.'},
+	{name: 'visible', label: 'Boolean, Various.', description: 'Alias of "$visible".'},
+	{name: '$valid', label: 'Various.', description: 'Validation rules.'},
+	{name: 'validate', label: 'Various.', description: 'Alias of "$valid".'},
+	{name: '$validationScopes', label: 'Text.', description: 'Multiple scopes connected by "," or ";".'},
+	{name: 'validateScopes', label: 'Text.', description: 'Alias of "$validationScopes".'},
+	{name: 'watch', label: 'Various.', description: 'Monitor other property changes.'},
+	{name: 'repaint', label: 'Various.', description: 'Monitor other property changes, and repaint myself.'},
+	{name: 'clearMe', label: 'Various.', description: 'Monitor other property changes, and clear my value.'}
 ];
 
 export const getCommonWidgetAttributes = (): Array<PlaygroundWidgetProperty> => {

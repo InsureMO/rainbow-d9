@@ -118,14 +118,18 @@ export const findWidgetType = (node: SyntaxNode, context: CompletionContext): st
 
 //TODO:
 // 1. completion:
-// 1.1 attribute name, complete the declaration
+// 1.1 [x] attribute name, complete the declaration
 // 1.2 attributes list names,
 // 1.3 [x] $icons,
-// 1.4 [x] $ext
+// 1.4 [x] @ext
 // 2. syntax highlight:
 // 2.1 [x] $icons,
-// 2.2 [x] $ext
-// 3. Widget Type Linting, $icons linting
+// 2.2 [x] @ext
+// 3. Linting
+// 3.1 Widget Type,
+// 3.2 attribute name,
+// 3.3 $icons,
+// 3.4 @ext
 // 4. Click toolbar icons, and check editor caret, should be first column. otherwise copy to clipboard.
 // 5. javascript code block
 export const createCompleteD9ml = (options: {

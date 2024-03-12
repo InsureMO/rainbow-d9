@@ -222,7 +222,7 @@ export class ValidatorUtils {
 	public static readonly DETECT_REQUIRED = detectRequired;
 	public static readonly DETECT_NUMERIC = detectNumeric;
 	public static readonly DETECT_POSITIVE = detectPositive;
-	public static readonly DETECT_NOT_POSITIVE = detectNotNegative;
+	public static readonly DETECT_NOT_NEGATIVE = detectNotNegative;
 	public static readonly DETECT_INTEGER = detectInteger;
 	public static readonly DETECT_REGEX = detectRegex;
 	public static readonly DETECT_LENGTH = detectLength;

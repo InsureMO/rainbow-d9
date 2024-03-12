@@ -12,7 +12,7 @@ export class N2NumberTranslator extends SpecificWidgetTranslator<N2WidgetType.NU
 			ValidatorUtils.DETECT_LENGTH,
 			ValidatorUtils.DETECT_NUMERIC,
 			ValidatorUtils.DETECT_POSITIVE,
-			ValidatorUtils.DETECT_NOT_POSITIVE,
+			ValidatorUtils.DETECT_NOT_NEGATIVE,
 			ValidatorUtils.DETECT_INTEGER,
 			ValidatorUtils.DETECT_NUMBER_RANGE,
 			ValidatorUtils.DETECT_REGEX,
