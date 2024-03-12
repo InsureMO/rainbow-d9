@@ -47,7 +47,7 @@ export interface PlaygroundWidgetGroup {
 }
 
 export interface PlaygroundWidget {
-	$wt: string;
+	$wt: WidgetType;
 	/** sometimes same widget could be display in various ways, use to identity it */
 	$key?: string;
 	/** code completion short description */
@@ -56,6 +56,8 @@ export interface PlaygroundWidget {
 	description?: string;
 	/** available properties for this widget */
 	properties?: Array<PlaygroundWidgetProperty>;
+	/** if declared, this widget allows under these parents only */
+	$parent?: WidgetType | Array<WidgetType>;
 	/** toolbar bar button group */
 	group: PlaygroundWidgetGroupKey | string;
 	/** some widgets are used internally, therefore no need to display in toolbar */

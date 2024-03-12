@@ -2,7 +2,7 @@ import {Completion, CompletionContext, CompletionResult} from '@codemirror/autoc
 import {markdownLanguage} from '@codemirror/lang-markdown';
 import {syntaxTree} from '@codemirror/language';
 import {SyntaxNode, Tree} from '@lezer/common';
-import {N2, VUtils} from '@rainbow-d9/n3';
+import {N2, VUtils, WidgetType} from '@rainbow-d9/n3';
 import {ExternalDefsTypes, ExternalDefType, PlaygroundWidgetProperty, PlaygroundWidgets} from '../../types';
 import {getCommonWidgetAttributes} from '../../widgets';
 import {
@@ -12,13 +12,17 @@ import {
 	ATTRIBUTE_VALUE_REF_START
 } from './widget-parse';
 
+export interface WidgetTypeCompletion extends Completion {
+	$parent?: WidgetType | Array<WidgetType>;
+}
+
 export interface AttrNameCompletion extends Completion {
-	$wt: ExternalDefType['$wt'] | '$all';
+	$wt: WidgetType | '$all';
 	name: PlaygroundWidgetProperty['name'];
 }
 
 export interface ExtCompletion extends Completion {
-	$wt: ExternalDefType['$wt'];
+	$wt: WidgetType;
 	properties: ExternalDefType['properties'];
 }
 
@@ -130,10 +134,12 @@ export const createCompleteD9ml = (options: {
 }) => {
 	const {widgets, externalDefsTypes} = options;
 
-	const WidgetTypeOptions: Array<Completion> = widgets.widgets
+	const WidgetTypeOptions: Array<WidgetTypeCompletion> = widgets.widgets
 		// page is special, only for heading1
 		.filter(({$wt}) => $wt != N2.N2WidgetType.PAGE)
-		.map(({$wt, label, description}) => ({label: $wt, detail: label, info: description, type: 'class'}));
+		.map(({$wt, label, description, $parent}) => {
+			return {label: $wt, detail: label, info: description, type: 'class', $parent};
+		});
 	const WidgetAttrNameOptions: Array<AttrNameCompletion> = [
 		...getCommonWidgetAttributes().map(({name, label, description}) => {
 			return {label: name, detail: label, info: description, $wt: '$all', name};
@@ -183,15 +189,18 @@ export const createCompleteD9ml = (options: {
 			return null;
 		}
 		const widgetType = findWidgetType(nodeBefore, context);
+		let typeOptions = WidgetTypeOptions;
+		if (widgetType != null) {
+			typeOptions = typeOptions.filter(option => {
+				return option.$parent == null || option.$parent === widgetType || (Array.isArray(option.$parent) && option.$parent.includes(widgetType));
+			});
+		}
 		const attrOptions = WidgetAttrNameOptions.filter(option => {
 			return option.$wt === '$all' || option.$wt === widgetType;
 		});
 		return {
 			from: nodeBefore.from + tagBefore[1].length,
-			options: [
-				...WidgetTypeOptions,
-				...attrOptions
-			]
+			options: [...typeOptions, ...attrOptions]
 			// validFor: /^#{1,6}\s+\w*$/
 		};
 	};

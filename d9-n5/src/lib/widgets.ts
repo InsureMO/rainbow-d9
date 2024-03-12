@@ -213,6 +213,7 @@ export const N2Widgets: Array<PlaygroundWidget> = [
 	{
 		$wt: N2.N2WidgetType.TABLE_ROW_OPERATORS,
 		label: 'Table row operators', description: 'Valid only within the confines of the "Table".',
+		$parent: N2.N2WidgetType.TABLE,
 		icon: '', group: PlaygroundWidgetGroupKey.NOT_CARE,
 		notInToolbar: true
 	},
@@ -234,6 +235,7 @@ export const N2Widgets: Array<PlaygroundWidget> = [
 	},
 	{
 		$wt: N2.N2WidgetType.TAB, description: 'Valid only within the confines of the "Tabs".',
+		$parent: N2.N2WidgetType.TABS,
 		icon: '', group: PlaygroundWidgetGroupKey.NOT_CARE, notInToolbar: true
 	},
 	{
@@ -243,11 +245,13 @@ export const N2Widgets: Array<PlaygroundWidget> = [
 	{
 		$wt: N2.N2WidgetType.WIZARD_SHARED,
 		label: 'Shared part for all wizard steps.', description: 'Valid only within the confines of the "Wizard".',
+		$parent: N2.N2WidgetType.WIZARD,
 		icon: '', group: PlaygroundWidgetGroupKey.NOT_CARE, notInToolbar: true
 	},
 	{
 		$wt: N2.N2WidgetType.WIZARD_STEP,
 		label: 'Wizard step.', description: 'Valid only within the confines of the "Wizard".',
+		$parent: N2.N2WidgetType.WIZARD,
 		icon: '', group: PlaygroundWidgetGroupKey.NOT_CARE, notInToolbar: true
 	},
 	{
