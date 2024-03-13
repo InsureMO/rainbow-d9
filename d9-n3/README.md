@@ -58,7 +58,7 @@ The semantic parsing will parse headings and list items into components, followi
 	- If the first child element is not on the same line as the list item, it is considered a reserved item.
 	- If there is no text definition on the same line, it is considered a reserved item.
 	- If it starts with `REF.`, `Ref.`, or `ref.`, it is considered a reference to an external component.
-	- If the text format is `WidgetType::Label[::PropertyPath]`, it is considered a component.
+	- If the text format is `WidgetType::[Label[::PropertyPath]]`, it is considered a component.
 	- If it is in the format `x: y`, it is considered a property definition.
 	- Others are considered a property group definition, specifically used for defining boolean properties.
 
@@ -389,7 +389,7 @@ comprehensive documentation to facilitate quick learning for users.
 
 ## Heading
 
-Syntax: `WidgetType[::Headline][::PropertyPath][::Id]`.
+Syntax: `WidgetType[::Headline[::PropertyPath[::Id]]]`.
 
 Connect with `::`,
 
@@ -431,7 +431,7 @@ Some examples:
 
 ### Widget
 
-Syntax: `WidgetType::Label[::PropertyPath]`.
+Syntax: `WidgetType::[Label[::PropertyPath]]`.
 
 Connect with `::`,
 
@@ -1335,7 +1335,7 @@ Some examples:
 
 | Attribute Name        | Type     | Description                                                                           |
 |-----------------------|----------|---------------------------------------------------------------------------------------|
-| elementTitle, caption | various  | `- elementTitle: propertyPath`                                                        |
+| elementTitle, caption | various  | Ref to form cell `label` definition.                                                  |
 | noElementReminder     | text     | `- noElementReminder: No Data`                                                        |
 | addable               | boolean  | `- !addable`.<br/>Not available for `RibsView`.                                       |
 | addLabel              | text     | `- addLabel: Create New One`.<br/>Not available for `RibsView`.                       |
