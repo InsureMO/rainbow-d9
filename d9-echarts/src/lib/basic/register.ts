@@ -3,14 +3,10 @@ import {Widget} from '@rainbow-d9/n3';
 import {ChartDef} from '../types';
 import {Chart} from './chart';
 
-export const ChartInitOptionsBuild = Widget.createSnippetBuild<ChartDef, 'initOptions', ChartDef['initOptions']>(
-	'initOptions', (parsed: string) => new Function(parsed) as ChartDef['initOptions']);
-export const ChartOptionsBuild = Widget.createSnippetBuild<ChartDef, 'options', ChartDef['options']>(
-	'options', (parsed: string) => new Function(parsed) as ChartDef['options']);
-export const ChartSettingsBuild = Widget.createSnippetBuild<ChartDef, 'settings', ChartDef['settings']>(
-	'settings', (parsed: string) => new Function(parsed) as ChartDef['settings']);
-export const ChartMergeDataBuild = Widget.createSnippetBuild<ChartDef, 'mergeData', ChartDef['mergeData']>(
-	'mergeData', (parsed: string) => new Function('options', 'data', parsed) as ChartDef['mergeData']);
+export const ChartInitOptionsBuild = Widget.createSyncSnippetBuild<ChartDef, 'initOptions'>('initOptions', []);
+export const ChartOptionsBuild = Widget.createSyncSnippetBuild<ChartDef, 'options'>('options', []);
+export const ChartSettingsBuild = Widget.createSyncSnippetBuild<ChartDef, 'settings'>('settings', []);
+export const ChartMergeDataBuild = Widget.createAsyncSnippetBuild<ChartDef, 'mergeData'>('mergeData', ['options', 'data']);
 
 export abstract class AbstractChartTranslator extends Widget.SpecificWidgetTranslator<string> {
 	public shouldWrapByFormCell(): boolean {

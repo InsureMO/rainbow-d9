@@ -9,6 +9,7 @@ import {
 	ParsedStrong,
 	ParsedText
 } from '../../../semantic';
+import {AsyncFunction} from '../../../utils';
 import {AbstractTranslator} from '../abstract-translator';
 import {AttributeValueBuild, ScriptSnippet, WidgetPropertyName} from './types';
 
@@ -71,7 +72,7 @@ export const parseSnippet = (attributeValue: string, item: ParsedListItemAttribu
 };
 
 export const createSnippetBuild = <D extends NodeDef, P extends keyof D, F = D[P]>(
-	attrName: P, createFunc: (parsed: string) => F
+	attrName: P | string, createFunc: (parsed: string) => F
 ): AttributeValueBuild<F | ExternalDefIndicator> => {
 	return {
 		accept: (key: WidgetPropertyName) => key === attrName,
@@ -89,4 +90,30 @@ export const createSnippetBuild = <D extends NodeDef, P extends keyof D, F = D[P
 			}
 		}
 	};
+};
+
+export type SyncSnippetBuild<D extends NodeDef, P extends keyof D> = AttributeValueBuild<D[P] | ExternalDefIndicator>
+export const createSyncSnippetBuild = <D extends NodeDef, P extends keyof D>(
+	attrName: P | string, argNames: Array<string>
+): SyncSnippetBuild<D, P> => {
+	return createSnippetBuild<D, P, D[P]>(attrName, (parsed: string) => {
+		if (argNames == null || argNames.length === 0) {
+			return new Function(parsed) as D[P];
+		} else {
+			return new Function(...argNames, parsed) as D[P];
+		}
+	});
+};
+
+export type AsyncSnippetBuild<D extends NodeDef, P extends keyof D> = AttributeValueBuild<D[P] | ExternalDefIndicator>
+export const createAsyncSnippetBuild = <D extends NodeDef, P extends keyof D>(
+	attrName: P | string, argNames: Array<string>
+): AsyncSnippetBuild<D, P> => {
+	return createSnippetBuild<D, P, D[P]>(attrName, (parsed: string) => {
+		if (argNames == null || argNames.length === 0) {
+			return new AsyncFunction(parsed) as D[P];
+		} else {
+			return new AsyncFunction(...argNames, parsed) as D[P];
+		}
+	});
 };

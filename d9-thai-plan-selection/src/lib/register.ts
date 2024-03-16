@@ -1,32 +1,20 @@
 import {NodeDef, registerWidget, VUtils} from '@rainbow-d9/n1';
-import {AsyncFunction, Widget} from '@rainbow-d9/n3';
+import {Widget} from '@rainbow-d9/n3';
 import {PlanSelection} from './plan-selection';
 import {PlanSelectionDef} from './types';
 
-export const PlanSelectionDefsBuild = Widget.createSnippetBuild<PlanSelectionDef, 'defs', PlanSelectionDef['defs']>(
-	'defs', (parsed: string) => new AsyncFunction('options', parsed) as PlanSelectionDef['defs']);
-export const PlanSelectionValuesInitBuild = Widget.createSnippetBuild<PlanSelectionDef, 'valuesInit', PlanSelectionDef['valuesInit']>(
-	'valuesInit', (parsed: string) => new AsyncFunction('options', parsed) as PlanSelectionDef['valuesInit']);
-export const PlanSelectionValuesClearBuild = Widget.createSnippetBuild<PlanSelectionDef, 'valuesClear', PlanSelectionDef['valuesClear']>(
-	'valuesClear', (parsed: string) => new AsyncFunction('options', parsed) as PlanSelectionDef['valuesClear']);
-export const PlanSelectionTitleBuild = Widget.createSnippetBuild<PlanSelectionDef, 'planTitle', PlanSelectionDef['planTitle']>(
-	'planTitle', (parsed: string) => new Function('def', 'elementValueChanged', parsed) as PlanSelectionDef['planTitle']);
-export const PlanSelectionSubTitleBuild = Widget.createSnippetBuild<PlanSelectionDef, 'planSubTitle', PlanSelectionDef['planSubTitle']>(
-	'planSubTitle', (parsed: string) => new Function('def', 'elementValueChanged', 'currencySymbol', 'premiumDescription', parsed) as PlanSelectionDef['planSubTitle']);
-export const PlanSelectionElementTitleBuild = Widget.createSnippetBuild<PlanSelectionDef, 'elementTitle', PlanSelectionDef['elementTitle']>(
-	'elementTitle', (parsed: string) => new Function('def', 'level', parsed) as PlanSelectionDef['elementTitle']);
-export const PlanSelectionElementFixedValueBuild = Widget.createSnippetBuild<PlanSelectionDef, 'elementFixedValue', PlanSelectionDef['elementFixedValue']>(
-	'elementFixedValue', (parsed: string) => new Function('options', parsed) as PlanSelectionDef['elementFixedValue']);
-export const PlanSelectionElementOptionsValueBuild = Widget.createSnippetBuild<PlanSelectionDef, 'elementOptionsValue', PlanSelectionDef['elementOptionsValue']>(
-	'elementOptionsValue', (parsed: string) => new Function('options', parsed) as PlanSelectionDef['elementOptionsValue']);
-export const PlanSelectionElementNumberValueBuild = Widget.createSnippetBuild<PlanSelectionDef, 'elementNumberValue', PlanSelectionDef['elementNumberValue']>(
-	'elementNumberValue', (parsed: string) => new Function('options', parsed) as PlanSelectionDef['elementNumberValue']);
-export const PlanSelectionElementNumberValueValidatorBuild = Widget.createSnippetBuild<PlanSelectionDef, 'elementNumberValueValidator', PlanSelectionDef['elementNumberValueValidator']>(
-	'elementNumberValueValidator', (parsed: string) => new Function('options', parsed) as PlanSelectionDef['elementNumberValueValidator']);
-export const PlanSelectionPlanOperatorsBuild = Widget.createSnippetBuild<PlanSelectionDef, 'planOperators', PlanSelectionDef['planOperators']>(
-	'planOperators', (parsed: string) => new Function('def', 'plan', parsed) as PlanSelectionDef['planOperators']);
-export const PlanSelectionCalculateBuild = Widget.createSnippetBuild<PlanSelectionDef, 'calculate', PlanSelectionDef['calculate']>(
-	'calculate', (parsed: string) => new AsyncFunction('event', parsed) as PlanSelectionDef['calculate']);
+export const PlanSelectionDefsBuild = Widget.createAsyncSnippetBuild<PlanSelectionDef, 'defs'>('defs', ['options']);
+export const PlanSelectionValuesInitBuild = Widget.createAsyncSnippetBuild<PlanSelectionDef, 'valuesInit'>('valuesInit', ['options']);
+export const PlanSelectionValuesClearBuild = Widget.createAsyncSnippetBuild<PlanSelectionDef, 'valuesClear'>('valuesClear', ['options']);
+export const PlanSelectionTitleBuild = Widget.createSyncSnippetBuild<PlanSelectionDef, 'planTitle'>('planTitle', ['def', 'elementValueChanged']);
+export const PlanSelectionSubTitleBuild = Widget.createSyncSnippetBuild<PlanSelectionDef, 'planSubTitle'>('planSubTitle', ['def', 'elementValueChanged', 'currencySymbol', 'premiumDescription']);
+export const PlanSelectionElementTitleBuild = Widget.createSyncSnippetBuild<PlanSelectionDef, 'elementTitle'>('elementTitle', ['def', 'level']);
+export const PlanSelectionElementFixedValueBuild = Widget.createSyncSnippetBuild<PlanSelectionDef, 'elementFixedValue'>('elementFixedValue', ['options']);
+export const PlanSelectionElementOptionsValueBuild = Widget.createSyncSnippetBuild<PlanSelectionDef, 'elementOptionsValue'>('elementOptionsValue', ['options']);
+export const PlanSelectionElementNumberValueBuild = Widget.createSyncSnippetBuild<PlanSelectionDef, 'elementNumberValue'>('elementNumberValue', ['options']);
+export const PlanSelectionElementNumberValueValidatorBuild = Widget.createSyncSnippetBuild<PlanSelectionDef, 'elementNumberValueValidator'>('elementNumberValueValidator', ['options']);
+export const PlanSelectionPlanOperatorsBuild = Widget.createSyncSnippetBuild<PlanSelectionDef, 'planOperators'>('planOperators', ['def', 'plan']);
+export const PlanSelectionCalculateBuild = Widget.createAsyncSnippetBuild<PlanSelectionDef, 'calculate'>('calculate', ['event']);
 
 export abstract class AbstractPlanSelectionTranslator extends Widget.SpecificWidgetTranslator<string> {
 	public beautifyProperties<Def extends NodeDef>(def: Partial<Def>): Def {

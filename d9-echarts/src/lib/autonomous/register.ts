@@ -3,16 +3,11 @@ import {Widget} from '@rainbow-d9/n3';
 import {AutonomousChartDef, ChartDef} from '../types';
 import {AutonomousChart} from './chart';
 
-export const AutonomousChartInitOptionsBuild = Widget.createSnippetBuild<ChartDef, 'initOptions', ChartDef['initOptions']>(
-	'initOptions', (parsed: string) => new Function(parsed) as ChartDef['initOptions']);
-export const AutonomousChartOptionsBuild = Widget.createSnippetBuild<AutonomousChartDef, 'options', AutonomousChartDef['options']>(
-	'options', (parsed: string) => new Function(parsed) as AutonomousChartDef['options']);
-export const AutonomousChartSettingsBuild = Widget.createSnippetBuild<AutonomousChartDef, 'settings', AutonomousChartDef['settings']>(
-	'settings', (parsed: string) => new Function(parsed) as AutonomousChartDef['settings']);
-export const AutonomousChartMergeDataBuild = Widget.createSnippetBuild<AutonomousChartDef, 'mergeData', AutonomousChartDef['mergeData']>(
-	'mergeData', (parsed: string) => new Function('options', 'data', parsed) as AutonomousChartDef['mergeData']);
-export const AutonomousChartFetchDataBuild = Widget.createSnippetBuild<AutonomousChartDef, 'fetchData', AutonomousChartDef['fetchData']>(
-	'fetchData', (parsed: string) => new Function('options', 'data', parsed) as AutonomousChartDef['fetchData']);
+export const AutonomousChartInitOptionsBuild = Widget.createSyncSnippetBuild<ChartDef, 'initOptions'>('initOptions', []);
+export const AutonomousChartOptionsBuild = Widget.createSyncSnippetBuild<AutonomousChartDef, 'options'>('options', []);
+export const AutonomousChartSettingsBuild = Widget.createSyncSnippetBuild<AutonomousChartDef, 'settings'>('settings', []);
+export const AutonomousChartMergeDataBuild = Widget.createAsyncSnippetBuild<AutonomousChartDef, 'mergeData'>('mergeData', ['options', 'data']);
+export const AutonomousChartFetchDataBuild = Widget.createAsyncSnippetBuild<AutonomousChartDef, 'fetchData'>('fetchData', ['options']);
 
 export abstract class AbstractAutonomousChartTranslator extends Widget.SpecificWidgetTranslator<string> {
 	public shouldWrapByFormCell(): boolean {

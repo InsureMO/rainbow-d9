@@ -1,25 +1,14 @@
-import {
-	BaseModel,
-	ExternalDefIndicator,
-	NodeDef,
-	NUtils,
-	PropValue,
-	ReactionMonitor,
-	Undefinable,
-	VUtils
-} from '@rainbow-d9/n1';
-import {CaptionClick, CaptionClickOptions, CaptionDef, CaptionValueToLabel} from '@rainbow-d9/n2';
-import {MouseEvent} from 'react';
+import {ExternalDefIndicator, NodeDef, NUtils, ReactionMonitor, Undefinable, VUtils} from '@rainbow-d9/n1';
+import {CaptionClick, CaptionDef, CaptionValueToLabel} from '@rainbow-d9/n2';
 import {N3Logger} from '../logger';
 import {ParsedListItemAttributePair} from '../semantic';
-import {AsyncFunction} from '../utils';
 import {
 	AttributeValueBuild,
+	createAsyncSnippetBuild,
 	DecorateLeadsBuild,
 	DecorateTailsBuild,
 	MonitorHandlerDetective,
 	MonitorHandlerDetectOptions,
-	parseSnippet,
 	SpecificWidgetTranslator,
 	WidgetPropertyName,
 	WidgetTranslator
@@ -59,20 +48,7 @@ export const N2CaptionClickBuild: AttributeValueBuild<CaptionClick | ExternalDef
 		if (VUtils.isNotBlank(value)) {
 			return buildClickHandler(value) as CaptionClick;
 		} else {
-			const parsed = parseSnippet(value, list);
-			if (parsed instanceof ExternalDefIndicator) {
-				// in fact, external def indicator is already intercepted by caller,
-				// see AbstractTranslator.buildAttributeValue for more details
-				return parsed;
-			} else if (VUtils.isBlank(parsed)) {
-				return (void 0);
-			} else {
-				const func = new AsyncFunction('options', 'event', parsed);
-				return async <R extends BaseModel, M extends PropValue>(
-					options: CaptionClickOptions<R, M>, event: MouseEvent<HTMLSpanElement>) => {
-					await func(options, event);
-				};
-			}
+			return createAsyncSnippetBuild<CaptionDef, 'click'>('click', ['options', 'event']).build(value, list);
 		}
 	}
 };

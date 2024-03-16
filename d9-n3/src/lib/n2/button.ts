@@ -1,13 +1,11 @@
 import {BaseModel, ExternalDefIndicator, NodeValidationScope, PropValue, Undefinable, VUtils} from '@rainbow-d9/n1';
-import {ButtonClick, ButtonClickOptions} from '@rainbow-d9/n2';
-import {MouseEvent} from 'react';
+import {ButtonClick, ButtonClickOptions, ButtonDef} from '@rainbow-d9/n2';
 import {ParsedListItemAttributePair} from '../semantic';
-import {AsyncFunction} from '../utils';
 import {
 	AttributeValueBuild,
+	createAsyncSnippetBuild,
 	DecorateLeadsBuild,
 	DecorateTailsBuild,
-	parseSnippet,
 	SpecificWidgetTranslator,
 	WidgetPropertyName
 } from '../widget';
@@ -68,20 +66,7 @@ export const N2ButtonClickBuild: AttributeValueBuild<ButtonClick | ExternalDefIn
 			}
 			return buildClickHandler(originalValue) as ButtonClick;
 		} else {
-			const parsed = parseSnippet(value, list);
-			if (parsed instanceof ExternalDefIndicator) {
-				// in fact, external def indicator is already intercepted by caller,
-				// see AbstractTranslator.buildAttributeValue for more details
-				return parsed;
-			} else if (VUtils.isBlank(parsed)) {
-				return (void 0);
-			} else {
-				const func = new AsyncFunction('options', 'event', parsed);
-				return async <R extends BaseModel, M extends PropValue>(
-					options: ButtonClickOptions<R, M>, event: MouseEvent<HTMLButtonElement>) => {
-					await func(options, event);
-				};
-			}
+			return createAsyncSnippetBuild<ButtonDef, 'click'>('click', ['options', 'event']).build(value, list);
 		}
 	}
 };

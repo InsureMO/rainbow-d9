@@ -3,16 +3,11 @@ import {Widget} from '@rainbow-d9/n3';
 import {ChartDef, REACTION_REFRESH_CHART, ReliantChartDef} from '../types';
 import {ReliantChart} from './chart';
 
-export const ReliantChartInitOptionsBuild = Widget.createSnippetBuild<ChartDef, 'initOptions', ChartDef['initOptions']>(
-	'initOptions', (parsed: string) => new Function(parsed) as ChartDef['initOptions']);
-export const ReliantChartOptionsBuild = Widget.createSnippetBuild<ReliantChartDef, 'options', ReliantChartDef['options']>(
-	'options', (parsed: string) => new Function(parsed) as ReliantChartDef['options']);
-export const ReliantChartSettingsBuild = Widget.createSnippetBuild<ReliantChartDef, 'settings', ReliantChartDef['settings']>(
-	'settings', (parsed: string) => new Function(parsed) as ReliantChartDef['settings']);
-export const ReliantChartMergeDataBuild = Widget.createSnippetBuild<ReliantChartDef, 'mergeData', ReliantChartDef['mergeData']>(
-	'mergeData', (parsed: string) => new Function('options', 'data', parsed) as ReliantChartDef['mergeData']);
-export const ReliantChartFetchDataBuild = Widget.createSnippetBuild<ReliantChartDef, 'fetchData', ReliantChartDef['fetchData']>(
-	'fetchData', (parsed: string) => new Function('options', 'data', parsed) as ReliantChartDef['fetchData']);
+export const ReliantChartInitOptionsBuild = Widget.createSyncSnippetBuild<ChartDef, 'initOptions'>('initOptions', []);
+export const ReliantChartOptionsBuild = Widget.createSyncSnippetBuild<ReliantChartDef, 'options'>('options', []);
+export const ReliantChartSettingsBuild = Widget.createSyncSnippetBuild<ReliantChartDef, 'settings'>('settings', []);
+export const ReliantChartMergeDataBuild = Widget.createAsyncSnippetBuild<ReliantChartDef, 'mergeData'>('mergeData', ['options', 'data']);
+export const ReliantChartFetchDataBuild = Widget.createAsyncSnippetBuild<ReliantChartDef, 'fetchData'>('fetchData', ['options']);
 
 export interface ReliantChartReactionCriteriaMonitorAttributeValue extends Widget.ReactionMonitorAttributeValue {
 	type: 'criteria';

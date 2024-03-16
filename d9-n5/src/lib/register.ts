@@ -1,16 +1,13 @@
 import {NodeDef, registerWidget, VUtils} from '@rainbow-d9/n1';
-import {AsyncFunction, Widget} from '@rainbow-d9/n3';
+import {Widget} from '@rainbow-d9/n3';
 import {Playground} from './playground';
 import {PlaygroundDef} from './types';
 
 Widget.ValidatorUtils.registerRegexps({'abc': /^abc$/});
 
-export const PlaygroundMockDataBuild = Widget.createSnippetBuild<PlaygroundDef, 'mockData', PlaygroundDef['mockData']>(
-	'mockData', (parsed: string) => new AsyncFunction(parsed) as PlaygroundDef['mockData']);
-export const PlaygroundExternalDefsBuild = Widget.createSnippetBuild<PlaygroundDef, 'externalDefs', PlaygroundDef['externalDefs']>(
-	'externalDefs', (parsed: string) => new AsyncFunction(parsed) as PlaygroundDef['externalDefs']);
-export const PlaygroundExternalDefsTypesBuild = Widget.createSnippetBuild<PlaygroundDef, 'externalDefsTypes', PlaygroundDef['externalDefsTypes']>(
-	'externalDefsTypes', (parsed: string) => new AsyncFunction(parsed) as PlaygroundDef['externalDefsTypes']);
+export const PlaygroundMockDataBuild = Widget.createAsyncSnippetBuild<PlaygroundDef, 'mockData'>('mockData', []);
+export const PlaygroundExternalDefsBuild = Widget.createAsyncSnippetBuild<PlaygroundDef, 'externalDefs'>('externalDefs', []);
+export const PlaygroundExternalDefsTypesBuild = Widget.createAsyncSnippetBuild<PlaygroundDef, 'externalDefsTypes'>('externalDefsTypes', []);
 
 export abstract class AbstractPlaygroundTranslator extends Widget.SpecificWidgetTranslator<string> {
 	public beautifyProperties<Def extends NodeDef>(def: Partial<Def>): Def {
