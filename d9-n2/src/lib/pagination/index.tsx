@@ -195,8 +195,6 @@ export const Pagination = forwardRef((props: PaginationProps, ref: ForwardedRef<
 		;
 });
 
-registerWidget({
-	key: 'Pagination', JSX: Pagination, container: false, array: false
-});
+registerWidget({key: 'Pagination', JSX: Pagination, container: false, array: false});
 
 export * from './types';

@@ -5,6 +5,7 @@ import {
 	AttributeValueBuild,
 	MonitorHandlerDetective,
 	SpecificWidgetTranslator,
+	tryBoolOnAttrValue,
 	ValidatorUtils,
 	WidgetPropertyName
 } from '../widget';
@@ -25,9 +26,9 @@ export const N2RadioValuesBuild: AttributeValueBuild<RadioPossibleValues> = {
 		if (values.length === 0) {
 			return (void 0);
 		} else if (values.length === 1) {
-			return [values[0], null];
+			return [tryBoolOnAttrValue(values[0]), null];
 		} else {
-			return values as RadioPossibleValues;
+			return [tryBoolOnAttrValue(values[0]), tryBoolOnAttrValue(values[1])];
 		}
 	}
 };
