@@ -760,9 +760,9 @@ possibility of having special `Reaction` keywords for components. Here are sever
 - `clearMe`: Clears its value when changes are detected and then refreshes itself.
 - `watch`: Performs custom operations when changes are detected.
 
-It is important to note that `watch` must have a defined handler, but it is
-not required to have a return value. By default, it uses `repaint` as the standard behavior. As for `repaint` and `clearMe`, since they
-already have standard behaviors, in most cases, it is only necessary to define the listeners without the need to define a `handle`.
+It is important to note that `watch` must have a defined handler, but it is not required to have a return value. By default, it
+uses `repaint` as the standard behavior. As for `repaint` and `clearMe`, since they already have standard behaviors, in most cases, it is
+only necessary to define the listeners without the need to define a `handle`.
 
 Here is a simple example:
 
@@ -783,6 +783,25 @@ Here is a simple example:
 		  ```javascript
 		  model.propF = model.propA;
 		  return 'repaint';  
+		  ```
+```
+
+Additionally, if using `watch`, the return can also specify changes in attribute values, so that the component can actively initiate
+attribute value change events. This is typically used when it is necessary to notify other components after the response itself has made
+certain changes to the data model.
+
+Here is a simple example:
+
+```markdown
+- Input::Property G::propG
+	- watch:
+		- on: propG
+		- handle:
+		  ```javascript
+		  const oldValue = model.propH;
+		  model.propH = model.propG;
+		  // path must be absolute
+		  return ['value-changed', {path: '/propH', from: oldValue, to: model.propH}];  
 		  ```
 ```
 
