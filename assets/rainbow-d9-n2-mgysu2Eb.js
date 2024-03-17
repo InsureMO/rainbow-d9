@@ -4,10 +4,10 @@ var __publicField = (obj, key, value) => {
   __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
   return value;
 };
-import { a as color } from "./vendor-UPFxZXlM.js";
-import { R as React, r as reactExports } from "./react-ekTsLPKd.js";
-import { V as VUtils, P as PPUtils, r as registerWidget, c as createLogger, b as useRootEventBus, d as useForceUpdate, M as MUtils, N as NUtils, e as Wrapper, a as useWrapperEventBus, W as WrapperEventTypes, f as useCreateEventBus, g as PROPERTY_PATH_ME, h as MBUtils, R as RootEventTypes, i as useDefaultAttributeValues, j as useAttributesWatch } from "./rainbow-d9-n1-DP1TjjMB.js";
-import { q as qe, W as We } from "./styled-components-rAMN27L2.js";
+import { a as color } from "./vendor-imQJQEqk.js";
+import { R as React, r as reactExports } from "./react-lVPkXQtG.js";
+import { V as VUtils, P as PPUtils, r as registerWidget, c as createLogger, b as useRootEventBus, d as useForceUpdate, M as MUtils, N as NUtils, e as Wrapper, a as useWrapperEventBus, W as WrapperEventTypes, f as useCreateEventBus, g as PROPERTY_PATH_ME, h as MBUtils, R as RootEventTypes, i as useDefaultAttributeValues, j as useAttributesWatch } from "./rainbow-d9-n1-O85VQ--g.js";
+import { q as qe, W as We } from "./styled-components-ziGokluW.js";
 import { d as dayjs } from "./dayjs-9Z7dW0Q-.js";
 const DOM_KEY_WIDGET = "data-w";
 const DOM_ID_WIDGET = "data-wid";
@@ -5337,12 +5337,7 @@ const Pagination = reactExports.forwardRef((props, ref) => {
     )
   );
 });
-registerWidget({
-  key: "Pagination",
-  JSX: Pagination,
-  container: false,
-  array: false
-});
+registerWidget({ key: "Pagination", JSX: Pagination, container: false, array: false });
 const TableHeader = (props) => {
   const { headers, headerHeight, stickyOffsets, tailGrabberAppended } = props;
   return React.createElement(

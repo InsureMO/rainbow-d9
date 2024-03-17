@@ -4,10 +4,10 @@ var __publicField = (obj, key, value) => {
   __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
   return value;
 };
-import { c as createLogger, N as NUtils, V as VUtils, k as MonitorNodeAttributes, l as Reaction, E as ExternalDefIndicator, P as PPUtils } from "./rainbow-d9-n1-DP1TjjMB.js";
-import { O as OptionItemSort, R as REACTION_REFRESH_OPTIONS, c as GlobalEventPrefix } from "./rainbow-d9-n2-E5HMxamP.js";
-import { f as fromMarkdown, g as gfmTableFromMarkdown, a as gfmStrikethroughFromMarkdown, b as gfmFootnoteFromMarkdown, c as gfmTaskListItemFromMarkdown, d as frontmatterFromMarkdown } from "./mdast-U0D_uffy.js";
-import { g as gfmTable, h as gfmStrikethrough, i as gfmFootnote, j as gfmTaskListItem, k as frontmatter } from "./micromark-Z1w53z3x.js";
+import { c as createLogger, N as NUtils, V as VUtils, k as MonitorNodeAttributes, l as Reaction, E as ExternalDefIndicator, P as PPUtils } from "./rainbow-d9-n1-O85VQ--g.js";
+import { O as OptionItemSort, R as REACTION_REFRESH_OPTIONS, c as GlobalEventPrefix } from "./rainbow-d9-n2-mgysu2Eb.js";
+import { f as fromMarkdown, g as gfmTableFromMarkdown, a as gfmStrikethroughFromMarkdown, b as gfmFootnoteFromMarkdown, c as gfmTaskListItemFromMarkdown, d as frontmatterFromMarkdown } from "./mdast-bIX7UtAU.js";
+import { g as gfmTable, h as gfmStrikethrough, i as gfmFootnote, j as gfmTaskListItem, k as frontmatter } from "./micromark-9C3b9oUH.js";
 const AsyncFunction = Object.getPrototypeOf(async function() {
 }).constructor;
 var ParsedNodeType;
@@ -1977,6 +1977,24 @@ const createSnippetBuild = (attrName, createFunc) => {
     }
   };
 };
+const createSyncSnippetBuild = (attrName, argNames) => {
+  return createSnippetBuild(attrName, (parsed) => {
+    if (argNames == null || argNames.length === 0) {
+      return new Function(parsed);
+    } else {
+      return new Function(...argNames, parsed);
+    }
+  });
+};
+const createAsyncSnippetBuild = (attrName, argNames) => {
+  return createSnippetBuild(attrName, (parsed) => {
+    if (argNames == null || argNames.length === 0) {
+      return new AsyncFunction(parsed);
+    } else {
+      return new AsyncFunction(...argNames, parsed);
+    }
+  });
+};
 class MonitorableAttributeBuild {
   createComplexAttributeValue() {
     return { on: [], snippet: "" };
@@ -2138,30 +2156,49 @@ class VisibilityAttributeBuild extends MonitorableAttributeBuild {
     return built;
   }
 }
+const tryBoolOnAttrValue = (value) => {
+  value = (value || "").trim();
+  if (VUtils.isBlank(value)) {
+    return value;
+  } else if (TRUE_VALUES.includes(value)) {
+    return true;
+  } else if (FALSE_VALUES.includes(value)) {
+    return false;
+  } else {
+    return value;
+  }
+};
+const tryNumOnAttrValue = (value) => {
+  value = (value || "").trim();
+  if (VUtils.isBlank(value)) {
+    return value;
+  } else {
+    try {
+      const v = Number(value);
+      if (isNaN(v)) {
+        return value;
+      } else {
+        return v;
+      }
+    } catch {
+      return value;
+    }
+  }
+};
+const tryBoolAndNumOnAttrValue = (value) => {
+  const bool = tryBoolOnAttrValue(value);
+  if (bool !== value) {
+    return bool;
+  } else {
+    return tryNumOnAttrValue(value);
+  }
+};
 class AnyAttributeBuild {
   accept(_key) {
     return true;
   }
   build(value, _list) {
-    value = (value || "").trim();
-    if (VUtils.isBlank(value)) {
-      return value;
-    } else if (TRUE_VALUES.includes(value)) {
-      return true;
-    } else if (FALSE_VALUES.includes(value)) {
-      return false;
-    } else {
-      try {
-        const v = Number(value);
-        if (isNaN(v)) {
-          return value;
-        } else {
-          return v;
-        }
-      } catch {
-        return value;
-      }
-    }
+    return tryBoolAndNumOnAttrValue(value);
   }
 }
 const _AttributeUtils = class _AttributeUtils {
@@ -2502,7 +2539,7 @@ __publicField(_ValidatorUtils, "DETECT_SIMPLE_CHECK", detectSimpleCheck);
 __publicField(_ValidatorUtils, "DETECT_REQUIRED", detectRequired);
 __publicField(_ValidatorUtils, "DETECT_NUMERIC", detectNumeric);
 __publicField(_ValidatorUtils, "DETECT_POSITIVE", detectPositive);
-__publicField(_ValidatorUtils, "DETECT_NOT_POSITIVE", detectNotNegative);
+__publicField(_ValidatorUtils, "DETECT_NOT_NEGATIVE", detectNotNegative);
 __publicField(_ValidatorUtils, "DETECT_INTEGER", detectInteger);
 __publicField(_ValidatorUtils, "DETECT_REGEX", detectRegex);
 __publicField(_ValidatorUtils, "DETECT_LENGTH", detectLength);
@@ -3097,11 +3134,16 @@ var index$1 = /* @__PURE__ */ Object.freeze({
   WidgetHelper,
   WidgetTranslator,
   WidgetTranslatorRepository,
+  createAsyncSnippetBuild,
   createDefaultMonitorHandlerDetective,
   createOrGetTranslateHelperSingleton,
   createOrGetTranslatorRepositorySingleton,
   createSnippetBuild,
-  parseSnippet
+  createSyncSnippetBuild,
+  parseSnippet,
+  tryBoolAndNumOnAttrValue,
+  tryBoolOnAttrValue,
+  tryNumOnAttrValue
 });
 var N2WidgetType;
 (function(N2WidgetType2) {
@@ -3153,7 +3195,7 @@ class N2InputTranslator extends SpecificWidgetTranslator {
       ValidatorUtils.DETECT_LENGTH,
       ValidatorUtils.DETECT_NUMERIC,
       ValidatorUtils.DETECT_POSITIVE,
-      ValidatorUtils.DETECT_NOT_POSITIVE,
+      ValidatorUtils.DETECT_NOT_NEGATIVE,
       ValidatorUtils.DETECT_INTEGER,
       ValidatorUtils.DETECT_NUMBER_RANGE,
       ValidatorUtils.DETECT_REGEX,
@@ -3171,7 +3213,7 @@ class N2NumberTranslator extends SpecificWidgetTranslator {
       ValidatorUtils.DETECT_LENGTH,
       ValidatorUtils.DETECT_NUMERIC,
       ValidatorUtils.DETECT_POSITIVE,
-      ValidatorUtils.DETECT_NOT_POSITIVE,
+      ValidatorUtils.DETECT_NOT_NEGATIVE,
       ValidatorUtils.DETECT_INTEGER,
       ValidatorUtils.DETECT_NUMBER_RANGE,
       ValidatorUtils.DETECT_REGEX,
@@ -3205,7 +3247,7 @@ class N2DecorateInputTranslator extends SpecificWidgetTranslator {
       ValidatorUtils.DETECT_LENGTH,
       ValidatorUtils.DETECT_NUMERIC,
       ValidatorUtils.DETECT_POSITIVE,
-      ValidatorUtils.DETECT_NOT_POSITIVE,
+      ValidatorUtils.DETECT_NOT_NEGATIVE,
       ValidatorUtils.DETECT_INTEGER,
       ValidatorUtils.DETECT_NUMBER_RANGE,
       ValidatorUtils.DETECT_REGEX,
@@ -3226,7 +3268,7 @@ class N2DecorateNumberTranslator extends SpecificWidgetTranslator {
       ValidatorUtils.DETECT_LENGTH,
       ValidatorUtils.DETECT_NUMERIC,
       ValidatorUtils.DETECT_POSITIVE,
-      ValidatorUtils.DETECT_NOT_POSITIVE,
+      ValidatorUtils.DETECT_NOT_NEGATIVE,
       ValidatorUtils.DETECT_INTEGER,
       ValidatorUtils.DETECT_NUMBER_RANGE,
       ValidatorUtils.DETECT_REGEX,
@@ -3272,9 +3314,9 @@ const N2CheckboxValuesBuild = {
     if (values.length === 0) {
       return void 0;
     } else if (values.length === 1) {
-      return [values[0], null];
+      return [tryBoolOnAttrValue(values[0]), null];
     } else {
-      return values;
+      return [tryBoolOnAttrValue(values[0]), tryBoolOnAttrValue(values[1])];
     }
   }
 };
@@ -3415,9 +3457,9 @@ const N2RadioValuesBuild = {
     if (values.length === 0) {
       return void 0;
     } else if (values.length === 1) {
-      return [values[0], null];
+      return [tryBoolOnAttrValue(values[0]), null];
     } else {
-      return values;
+      return [tryBoolOnAttrValue(values[0]), tryBoolOnAttrValue(values[1])];
     }
   }
 };
@@ -3683,17 +3725,7 @@ const N2ButtonClickBuild = {
       }
       return buildClickHandler(originalValue);
     } else {
-      const parsed = parseSnippet(value, list);
-      if (parsed instanceof ExternalDefIndicator) {
-        return parsed;
-      } else if (VUtils.isBlank(parsed)) {
-        return void 0;
-      } else {
-        const func = new AsyncFunction("options", "event", parsed);
-        return async (options, event) => {
-          await func(options, event);
-        };
-      }
+      return createAsyncSnippetBuild("click", ["options", "event"]).build(value, list);
     }
   }
 };
@@ -3751,17 +3783,7 @@ const N2CaptionClickBuild = {
     if (VUtils.isNotBlank(value)) {
       return buildClickHandler(value);
     } else {
-      const parsed = parseSnippet(value, list);
-      if (parsed instanceof ExternalDefIndicator) {
-        return parsed;
-      } else if (VUtils.isBlank(parsed)) {
-        return void 0;
-      } else {
-        const func = new AsyncFunction("options", "event", parsed);
-        return async (options, event) => {
-          await func(options, event);
-        };
-      }
+      return createAsyncSnippetBuild("click", ["options", "event"]).build(value, list);
     }
   }
 };
@@ -4087,20 +4109,7 @@ class N2WizardTranslator extends SpecificWidgetTranslator {
     return defs;
   }
 }
-const N2TreeChildNodesBuild = {
-  accept: (key) => key === "detective",
-  build: (value, list) => {
-    const parsed = parseSnippet(value, list);
-    if (parsed instanceof ExternalDefIndicator) {
-      return parsed;
-    } else if (VUtils.isBlank(parsed)) {
-      return void 0;
-    } else {
-      const func = new Function("parentNode", parsed);
-      return (parentNode) => func(parentNode);
-    }
-  }
-};
+const N2TreeChildNodesBuild = createSyncSnippetBuild("detective", ["parentNode", "options"]);
 class N2TreeTranslator extends SpecificWidgetTranslator {
   getSupportedType() {
     return N2WidgetType.TREE;
@@ -4306,7 +4315,6 @@ const parseDoc = new Proxy(() => void 0, {
 });
 const registerN2Widgets = registerN2Widgets$1;
 export {
-  AsyncFunction as A,
   index$2 as a,
   index as b,
   index$1 as i,

@@ -1,9 +1,9 @@
-import { V as VUtils, r as registerWidget, M as MUtils, u as useThrottler, a as useWrapperEventBus, W as WrapperEventTypes } from "./rainbow-d9-n1-DP1TjjMB.js";
+import { V as VUtils, r as registerWidget, M as MUtils, u as useThrottler, a as useWrapperEventBus, W as WrapperEventTypes } from "./rainbow-d9-n1-O85VQ--g.js";
 import { i as init, g as getInstanceByDom } from "./echarts-v5L9gyiQ.js";
-import { r as reactExports, R as React } from "./react-ekTsLPKd.js";
-import { D as DOM_KEY_WIDGET, a as DOM_ID_WIDGET, u as useGlobalEventBus, G as GlobalEventTypes, b as useGlobalHandlers } from "./rainbow-d9-n2-E5HMxamP.js";
-import { q as qe } from "./styled-components-rAMN27L2.js";
-import { i as index$1 } from "./rainbow-d9-n3-SEhzRfCT.js";
+import { r as reactExports, R as React } from "./react-lVPkXQtG.js";
+import { D as DOM_KEY_WIDGET, a as DOM_ID_WIDGET, u as useGlobalEventBus, G as GlobalEventTypes, b as useGlobalHandlers } from "./rainbow-d9-n2-mgysu2Eb.js";
+import { q as qe } from "./styled-components-ziGokluW.js";
+import { i as index$1 } from "./rainbow-d9-n3-qhI7dE1K.js";
 const REACTION_REFRESH_CHART = "reaction-refresh-chart";
 var ChartGlobalEventPrefix;
 (function(ChartGlobalEventPrefix2) {
@@ -150,10 +150,10 @@ const Chart = (props) => {
   useDataMerge(ref, state.domInitialized, state.marker, props);
   return React.createElement(AChart, { ...rest, "data-disabled": $disabled, "data-visible": $visible, chartHeight: height, ref });
 };
-const ChartInitOptionsBuild = index$1.createSnippetBuild("initOptions", (parsed) => new Function(parsed));
-const ChartOptionsBuild = index$1.createSnippetBuild("options", (parsed) => new Function(parsed));
-const ChartSettingsBuild = index$1.createSnippetBuild("settings", (parsed) => new Function(parsed));
-const ChartMergeDataBuild = index$1.createSnippetBuild("mergeData", (parsed) => new Function("options", "data", parsed));
+const ChartInitOptionsBuild = index$1.createSyncSnippetBuild("initOptions", []);
+const ChartOptionsBuild = index$1.createSyncSnippetBuild("options", []);
+const ChartSettingsBuild = index$1.createSyncSnippetBuild("settings", []);
+const ChartMergeDataBuild = index$1.createAsyncSnippetBuild("mergeData", ["options", "data"]);
 class AbstractChartTranslator extends index$1.SpecificWidgetTranslator {
   shouldWrapByFormCell() {
     return false;
@@ -240,11 +240,11 @@ const AutonomousChart = (props) => {
   useAutonomousFetch(ref, state.domInitialized, state.marker, props);
   return React.createElement(AChart, { ...rest, "data-w": "d9-aut-chart", "data-disabled": $disabled, "data-visible": $visible, chartHeight: height, ref });
 };
-const AutonomousChartInitOptionsBuild = index$1.createSnippetBuild("initOptions", (parsed) => new Function(parsed));
-const AutonomousChartOptionsBuild = index$1.createSnippetBuild("options", (parsed) => new Function(parsed));
-const AutonomousChartSettingsBuild = index$1.createSnippetBuild("settings", (parsed) => new Function(parsed));
-const AutonomousChartMergeDataBuild = index$1.createSnippetBuild("mergeData", (parsed) => new Function("options", "data", parsed));
-const AutonomousChartFetchDataBuild = index$1.createSnippetBuild("fetchData", (parsed) => new Function("options", "data", parsed));
+const AutonomousChartInitOptionsBuild = index$1.createSyncSnippetBuild("initOptions", []);
+const AutonomousChartOptionsBuild = index$1.createSyncSnippetBuild("options", []);
+const AutonomousChartSettingsBuild = index$1.createSyncSnippetBuild("settings", []);
+const AutonomousChartMergeDataBuild = index$1.createAsyncSnippetBuild("mergeData", ["options", "data"]);
+const AutonomousChartFetchDataBuild = index$1.createAsyncSnippetBuild("fetchData", ["options"]);
 class AbstractAutonomousChartTranslator extends index$1.SpecificWidgetTranslator {
   shouldWrapByFormCell() {
     return false;
@@ -335,11 +335,11 @@ const ReliantChart = (props) => {
   useReliantWatch(ref, state.domInitialized, state.marker, props);
   return React.createElement(AChart, { ...rest, "data-w": "d9-rel-chart", "data-disabled": $disabled, "data-visible": $visible, chartHeight: height, ref });
 };
-const ReliantChartInitOptionsBuild = index$1.createSnippetBuild("initOptions", (parsed) => new Function(parsed));
-const ReliantChartOptionsBuild = index$1.createSnippetBuild("options", (parsed) => new Function(parsed));
-const ReliantChartSettingsBuild = index$1.createSnippetBuild("settings", (parsed) => new Function(parsed));
-const ReliantChartMergeDataBuild = index$1.createSnippetBuild("mergeData", (parsed) => new Function("options", "data", parsed));
-const ReliantChartFetchDataBuild = index$1.createSnippetBuild("fetchData", (parsed) => new Function("options", "data", parsed));
+const ReliantChartInitOptionsBuild = index$1.createSyncSnippetBuild("initOptions", []);
+const ReliantChartOptionsBuild = index$1.createSyncSnippetBuild("options", []);
+const ReliantChartSettingsBuild = index$1.createSyncSnippetBuild("settings", []);
+const ReliantChartMergeDataBuild = index$1.createAsyncSnippetBuild("mergeData", ["options", "data"]);
+const ReliantChartFetchDataBuild = index$1.createAsyncSnippetBuild("fetchData", ["options"]);
 class ReliantChartReactionCriteriaAttributeBuild extends index$1.AbstractReactionAttributeBuild {
   getReactionType() {
     return "criteria";

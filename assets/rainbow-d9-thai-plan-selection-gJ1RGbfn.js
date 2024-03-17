@@ -1,9 +1,9 @@
-import { r as reactExports, R as React, j as jsxRuntimeExports } from "./react-ekTsLPKd.js";
-import { V as VUtils, r as registerWidget, f as useCreateEventBus, M as MUtils, P as PPUtils, u as useThrottler, d as useForceUpdate, e as Wrapper, S as StandaloneRoot } from "./rainbow-d9-n1-DP1TjjMB.js";
-import { C as CssVars, D as DOM_KEY_WIDGET, a as DOM_ID_WIDGET, d as utils$1, $ as $d9n2, u as useGlobalEventBus, b as useGlobalHandlers, G as GlobalEventTypes, U as UnwrappedButton, B as ButtonInk, e as ButtonFill, I as IntlLabel, L as LabelLike, i as index$2, c as GlobalEventPrefix, f as useAlert, g as useDialog, h as DialogHeader, j as DialogTitle, k as DialogBody, l as DialogFooter, m as GlobalRoot } from "./rainbow-d9-n2-E5HMxamP.js";
-import { a as color, n as nanoid } from "./vendor-UPFxZXlM.js";
-import { q as qe } from "./styled-components-rAMN27L2.js";
-import { i as index$1, A as AsyncFunction, p as parseDoc } from "./rainbow-d9-n3-SEhzRfCT.js";
+import { r as reactExports, R as React, j as jsxRuntimeExports } from "./react-lVPkXQtG.js";
+import { V as VUtils, r as registerWidget, f as useCreateEventBus, M as MUtils, P as PPUtils, u as useThrottler, d as useForceUpdate, e as Wrapper, S as StandaloneRoot } from "./rainbow-d9-n1-O85VQ--g.js";
+import { C as CssVars, D as DOM_KEY_WIDGET, a as DOM_ID_WIDGET, d as utils$1, $ as $d9n2, u as useGlobalEventBus, b as useGlobalHandlers, G as GlobalEventTypes, U as UnwrappedButton, B as ButtonInk, e as ButtonFill, I as IntlLabel, L as LabelLike, i as index$2, c as GlobalEventPrefix, f as useAlert, g as useDialog, h as DialogHeader, j as DialogTitle, k as DialogBody, l as DialogFooter, m as GlobalRoot } from "./rainbow-d9-n2-mgysu2Eb.js";
+import { a as color, n as nanoid } from "./vendor-imQJQEqk.js";
+import { q as qe } from "./styled-components-ziGokluW.js";
+import { i as index$1, p as parseDoc } from "./rainbow-d9-n3-qhI7dE1K.js";
 var PlanElementType;
 (function(PlanElementType2) {
   PlanElementType2["CATEGORY"] = "PolicyElementCategory";
@@ -1445,18 +1445,18 @@ const PlanSelection = (props) => {
     React.createElement(InternalPlanSelection, { ...props })
   );
 };
-const PlanSelectionDefsBuild = index$1.createSnippetBuild("defs", (parsed) => new AsyncFunction("options", parsed));
-const PlanSelectionValuesInitBuild = index$1.createSnippetBuild("valuesInit", (parsed) => new AsyncFunction("options", parsed));
-const PlanSelectionValuesClearBuild = index$1.createSnippetBuild("valuesClear", (parsed) => new AsyncFunction("options", parsed));
-const PlanSelectionTitleBuild = index$1.createSnippetBuild("planTitle", (parsed) => new Function("def", "elementValueChanged", parsed));
-const PlanSelectionSubTitleBuild = index$1.createSnippetBuild("planSubTitle", (parsed) => new Function("def", "elementValueChanged", "currencySymbol", "premiumDescription", parsed));
-const PlanSelectionElementTitleBuild = index$1.createSnippetBuild("elementTitle", (parsed) => new Function("def", "level", parsed));
-const PlanSelectionElementFixedValueBuild = index$1.createSnippetBuild("elementFixedValue", (parsed) => new Function("options", parsed));
-const PlanSelectionElementOptionsValueBuild = index$1.createSnippetBuild("elementOptionsValue", (parsed) => new Function("options", parsed));
-const PlanSelectionElementNumberValueBuild = index$1.createSnippetBuild("elementNumberValue", (parsed) => new Function("options", parsed));
-const PlanSelectionElementNumberValueValidatorBuild = index$1.createSnippetBuild("elementNumberValueValidator", (parsed) => new Function("options", parsed));
-const PlanSelectionPlanOperatorsBuild = index$1.createSnippetBuild("planOperators", (parsed) => new Function("def", "plan", parsed));
-const PlanSelectionCalculateBuild = index$1.createSnippetBuild("calculate", (parsed) => new AsyncFunction("event", parsed));
+const PlanSelectionDefsBuild = index$1.createAsyncSnippetBuild("defs", ["options"]);
+const PlanSelectionValuesInitBuild = index$1.createAsyncSnippetBuild("valuesInit", ["options"]);
+const PlanSelectionValuesClearBuild = index$1.createAsyncSnippetBuild("valuesClear", ["options"]);
+const PlanSelectionTitleBuild = index$1.createSyncSnippetBuild("planTitle", ["def", "elementValueChanged"]);
+const PlanSelectionSubTitleBuild = index$1.createSyncSnippetBuild("planSubTitle", ["def", "elementValueChanged", "currencySymbol", "premiumDescription"]);
+const PlanSelectionElementTitleBuild = index$1.createSyncSnippetBuild("elementTitle", ["def", "level"]);
+const PlanSelectionElementFixedValueBuild = index$1.createSyncSnippetBuild("elementFixedValue", ["options"]);
+const PlanSelectionElementOptionsValueBuild = index$1.createSyncSnippetBuild("elementOptionsValue", ["options"]);
+const PlanSelectionElementNumberValueBuild = index$1.createSyncSnippetBuild("elementNumberValue", ["options"]);
+const PlanSelectionElementNumberValueValidatorBuild = index$1.createSyncSnippetBuild("elementNumberValueValidator", ["options"]);
+const PlanSelectionPlanOperatorsBuild = index$1.createSyncSnippetBuild("planOperators", ["def", "plan"]);
+const PlanSelectionCalculateBuild = index$1.createAsyncSnippetBuild("calculate", ["event"]);
 class AbstractPlanSelectionTranslator extends index$1.SpecificWidgetTranslator {
   beautifyProperties(def) {
     return super.beautifyProperties(this.beautifyColumnSpan(def, 12));
