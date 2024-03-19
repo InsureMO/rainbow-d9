@@ -40,6 +40,9 @@ export abstract class AbstractTranslator<N extends Decipherable> {
 
 	public postTranslationCorrectionWork(def: ParsedNodeDef): ParsedNodeDef {
 		const {node} = def;
+		if (node == null) {
+			return def;
+		}
 		[
 			'$key', D9PropertyNames.PROPERTY, D9PropertyNames.POSITION, D9PropertyNames.MOBILE_POSITION,
 			D9PropertyNames.VALIDATION_SCOPES,
