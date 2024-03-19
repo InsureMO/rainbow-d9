@@ -116,7 +116,7 @@ export const createPlanModelProxy = <T extends object, D>(plan: T, def: D): Mode
 
 export const guardPlanTitle = (options: {
 	def?: PlanSelectionDef['planTitle']; planDef: PlanDef; elementValueChanged: boolean;
-}): Array<NodeDef> => {
+}): Array<NodeDef | ReactNode> => {
 	const {def, planDef, elementValueChanged} = options;
 	return def != null
 		? def(planDef, elementValueChanged)
@@ -127,7 +127,7 @@ export const guardPlanSubTitle = (options: {
 	def?: PlanSelectionDef['planSubTitle'];
 	currencySymbol?: string | ReactNode; premiumDescription?: string | ReactNode;
 	planDef: PlanDef; elementValueChanged: boolean;
-}): Array<NodeDef> => {
+}): Array<NodeDef | ReactNode> => {
 	const {def, currencySymbol, premiumDescription, planDef, elementValueChanged} = options;
 
 	return def != null
@@ -161,7 +161,7 @@ export const guardPlanSubTitle = (options: {
 
 export const guardElementTitle = (options: {
 	def?: PlanSelectionDef['elementTitle']; orderedDef: PlanElementDefOrdered; elementLevel: number;
-}): Array<NodeDef> => {
+}): Array<NodeDef | ReactNode> => {
 	const {def, orderedDef, elementLevel} = options;
 	const {def: elementDef} = orderedDef;
 	const domElementAttr = {};

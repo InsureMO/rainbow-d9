@@ -223,9 +223,9 @@ export interface PlanValuesClearOptions
 }
 
 export type PlanValuesClearFunc = (options: PlanValuesClearOptions) => Promise<void>;
-export type PlanTitleFunc = (def: PlanDef, elementValueChanged: boolean) => Array<NodeDef>;
-export type PlanSubTitleFunc = (def: PlanDef, elementValueChanged: boolean, currencySymbol?: string | ReactNode, premiumDescription?: string | ReactNode) => Array<NodeDef>;
-export type PlanElementTitleFunc = (def: PlanElementDef, level: number) => Array<NodeDef>;
+export type PlanTitleFunc = (def: PlanDef, elementValueChanged: boolean) => Array<NodeDef | ReactNode>;
+export type PlanSubTitleFunc = (def: PlanDef, elementValueChanged: boolean, currencySymbol?: string | ReactNode, premiumDescription?: string | ReactNode) => Array<NodeDef | ReactNode>;
+export type PlanElementTitleFunc = (def: PlanElementDef, level: number) => Array<NodeDef | ReactNode>;
 
 export interface PlanElementFixedValueOptions {
 	elementDef: PlanMutableElementDef;
@@ -274,7 +274,7 @@ export interface PlanElementNumberValueValidatorOptions {
 }
 
 export type PlanElementNumberValueValidatorFunc = (options: PlanElementNumberValueValidatorOptions) => ValidationMonitor['$handle'];
-export type PlanOperatorsFunc = (def: PlanDef, plan: SelectedPlan) => Array<NodeDef>;
+export type PlanOperatorsFunc = (def: PlanDef, plan: SelectedPlan) => Array<NodeDef | ReactNode>;
 export type PlanCalculateFunc = (event: CalculationEvent) => Promise<void>;
 
 /** configuration definition */
