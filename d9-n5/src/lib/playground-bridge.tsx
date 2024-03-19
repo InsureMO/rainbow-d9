@@ -3,22 +3,27 @@ import {PlaygroundEventTypes, usePlaygroundEventBus} from './playground-event-bu
 import {OnContentChanged} from './types';
 
 export interface PlaygroundBridgeProps {
+	content?: string;
 	onContentChanged: OnContentChanged;
 }
 
 export const PlaygroundBridge = (props: PlaygroundBridgeProps) => {
-	const {onContentChanged} = props;
+	const {content, onContentChanged} = props;
 
 	const {on, off} = usePlaygroundEventBus();
 	useEffect(() => {
-		const onChanged = (content?: string) => {
-			(async () => await onContentChanged(content))();
+		const onChanged = (changed?: string) => {
+			if ((content ?? '') === (changed ?? '')) {
+				return;
+			}
+			console.log('changed');
+			(async () => await onContentChanged(changed))();
 		};
 		on(PlaygroundEventTypes.CONTENT_CHANGED, onChanged);
 		return () => {
 			off(PlaygroundEventTypes.CONTENT_CHANGED, onChanged);
 		};
-	}, [on, off, onContentChanged]);
+	}, [on, off, content, onContentChanged]);
 
 	return <Fragment/>;
 };

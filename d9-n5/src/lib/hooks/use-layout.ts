@@ -13,7 +13,7 @@ export const useLayout = (initialized: boolean, ref: MutableRefObject<HTMLDivEle
 		const editor = ref.current!.querySelector('div[data-w=d9-playground-editor]');
 		const {width} = editor!.getBoundingClientRect();
 		setLayout({editorSize: width});
-	}, [initialized]);
+	}, [initialized, ref]);
 
 	return {...layout, resizeTo: (width: number) => setLayout({editorSize: width})};
 };

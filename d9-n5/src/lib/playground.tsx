@@ -88,7 +88,7 @@ export const PlaygroundDelegate = (props: PlaygroundProps) => {
 	                          data-zen={zen} data-maximized={maximized} editorSize={editorSize}
 	                          id={PPUtils.asId(PPUtils.absolute($p2r, $pp), props.id)}
 	                          ref={ref}>
-		<PlaygroundBridge onContentChanged={onContentChanged}/>
+		<PlaygroundBridge content={content} onContentChanged={onContentChanged}/>
 		<Toolbar groups={availableWidgets.groups} widgets={availableWidgets.widgets}/>
 		<Editor content={content} externalDefsTypes={initializedExternalDefsTypes} widgets={availableWidgets}/>
 		<Help/>
