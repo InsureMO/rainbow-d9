@@ -1,10 +1,10 @@
 import {MarkdownExtension} from '@lezer/markdown';
 import {WidgetDeclarationNodes} from './nodes';
-import {WidgetParse} from './widget-parse';
+import {HeadingParser, ListItemParser} from './widget-parse';
 
 export const d9mlExtensions: MarkdownExtension = [{
 	defineNodes: WidgetDeclarationNodes,
-	parseInline: [WidgetParse]
+	parseBlock: [HeadingParser, ListItemParser]
 }];
 
 export * from './tags';

@@ -1,4 +1,15 @@
-import {Element, InlineContext, InlineParser} from '@lezer/markdown';
+import {Tree} from '@lezer/common';
+import {
+	BlockContext,
+	BlockParser,
+	Element,
+	InlineContext,
+	InlineParser,
+	LeafBlock,
+	LeafBlockParser,
+	Line,
+	MarkdownParser
+} from '@lezer/markdown';
 import {Semantic} from '@rainbow-d9/n3';
 import {
 	ATTRIBUTE_DECLARATION_SPLITTER,
@@ -93,7 +104,7 @@ export const parseWidget = (ctx: InlineContext, text: string, offset: number): n
 		parsed.$flag != null ? ctx.elt('WidgetDeclarationSplitter', offset + parsed.$flagOffset, offset + parsed.$flagOffset + 2) : (void 0),
 		parsed.$flag != null ? ctx.elt('WidgetDeclarationFlag', offset + parsed.$flagOffset + 2, offset + parsed.$flagOffset + 2 + parsed.$flag.length) : (void 0)
 	].filter(x => x != null);
-	return ctx.addElement(ctx.elt('WidgetDeclaration', offset, ctx.end, children));
+	return ctx.addElement(ctx.elt('WidgetDeclaration', offset, offset + text.length, children));
 };
 
 export const parseAttribute = (ctx: InlineContext, text: string, offset: number): number => {
@@ -132,7 +143,7 @@ export const parseAttribute = (ctx: InlineContext, text: string, offset: number)
 		attributeValue != null ? ctx.elt('WidgetDeclarationAttrSplitter', offset + attributeName.length, offset + attributeName.length + 1) : (void 0),
 		...valueElements
 	].filter(x => x != null);
-	return ctx.addElement(ctx.elt('WidgetDeclaration', offset, ctx.end, children));
+	return ctx.addElement(ctx.elt('WidgetDeclaration', offset, offset + text.length, children));
 };
 
 // export const parseAttributes = (ctx: InlineContext, text: string, offset: number): number => {
@@ -141,8 +152,13 @@ export const parseAttribute = (ctx: InlineContext, text: string, offset: number)
 
 export const WidgetParse: InlineParser = {
 	name: 'WidgetDeclaration',
-	parse: (ctx, next, pos) => {
+	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+	// @ts-ignore
+	parse: (ctx: InlineContext, _next: number, pos: number, leader: string) => {
 		// console.log(ctx.text, next, start, ctx.offset, ctx.parts);
+		if (leader == null) {
+			return -1;
+		}
 		if (ctx.offset !== pos) {
 			return -1;
 		}
@@ -150,12 +166,17 @@ export const WidgetParse: InlineParser = {
 		if (text.length === 0) {
 			return -1;
 		}
+		// only first line needed
 		const linkBreakIndex = text.indexOf('\n');
 		if (linkBreakIndex !== -1) {
 			text = text.substring(0, linkBreakIndex);
 		}
+		const parsers = [
+			parseWidget,
+			...(leader === 'ListItem' ? [parseAttribute] : [])
+		].filter(x => x != null);
 
-		return [parseWidget, parseAttribute].reduce((result, parse) => {
+		return parsers.reduce((result, parse) => {
 			if (result !== -1) {
 				return result;
 			}
@@ -163,3 +184,144 @@ export const WidgetParse: InlineParser = {
 		}, -1);
 	}
 };
+
+// block parser to make sure the inline parser only applies to headings and list items
+const parseInline = (type: 'Heading' | 'ListItem') => {
+	return (parser: MarkdownParser, text: string, offset: number) => {
+		// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+		// @ts-ignore
+		const ctx = new InlineContext(parser, text, offset);
+		// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+		// @ts-ignore
+		const asWidget = WidgetParse.parse(ctx, ctx.char(offset), offset, type);
+		offset = asWidget !== -1 ? asWidget : offset;
+		outer: for (let pos = offset; pos < ctx.end;) {
+			const next = ctx.char(pos);
+			// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+			// @ts-ignore
+			for (const token of parser.inlineParsers) {
+				if (token != null) {
+					const result = token(ctx, next, pos, type);
+					if (result >= 0) {
+						pos = result;
+						continue outer;
+					}
+				}
+			}
+			pos++;
+		}
+		// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+		// @ts-ignore
+		return ctx.resolveMarkers(0);
+	};
+};
+export const ListItemParser: BlockParser = (() => {
+	const parseInlineOnListItem = parseInline('ListItem');
+	return {
+		name: 'WidgetOnListItem',
+		// eslint-disable-next-line @typescript-eslint/no-unused-vars
+		leaf(ctx: BlockContext, _leaf: LeafBlock): LeafBlockParser | null {
+			if (ctx.parentType().name !== 'ListItem') {
+				return null;
+			} else {
+
+				return {
+					// eslint-disable-next-line @typescript-eslint/no-unused-vars
+					nextLine(_ctx: BlockContext, _line: Line, _leaf: LeafBlock): boolean {
+						return true;
+					},
+					finish(ctx: BlockContext, leaf: LeafBlock): boolean {
+						ctx.addLeafElement(leaf, ctx.elt('MightBeWidgetDeclaration', leaf.start, leaf.start + leaf.content.length, [
+							...parseInlineOnListItem(ctx.parser, leaf.content, leaf.start)
+						]));
+						return true;
+					}
+				};
+			}
+		},
+		after: 'SetextHeading'
+	};
+})();
+
+/**
+ * copy from @lezer/markdown, to make sure that inline parsers can get the leader.
+ */
+export const HeadingParser: BlockParser = (() => {
+	const isAtxHeading = (line: Line) => {
+		if (line.next != 35 /* '#' */) {
+			return -1;
+		}
+		let pos = line.pos + 1;
+		while (pos < line.text.length && line.text.charCodeAt(pos) == 35) {
+			pos++;
+		}
+		if (pos < line.text.length && line.text.charCodeAt(pos) != 32) {
+			return -1;
+		}
+		const size = pos - line.pos;
+		return size > 6 ? -1 : size;
+	};
+
+	const skipSpaceBack = (line: string, i: number, to: number) => {
+		while (i > to && space(line.charCodeAt(i - 1))) {
+			i--;
+		}
+		return i;
+	};
+
+	const space = (ch: number) => {
+		return ch == 32 || ch == 9 || ch == 10 || ch == 13;
+	};
+
+	enum Type {
+		HeaderMark = 34, ATXHeading1 = 9
+	}
+
+	interface BlockContextBuffer {
+		write(type: Type, from: number, to: number, children ?: number): this;
+
+		writeElements(elements: readonly (Element)[], offset?: number): this;
+
+		finish(type: Type, length: number): Tree;
+	}
+
+	interface BlockContextWithBuffer extends BlockContext {
+		buffer: BlockContextBuffer;
+	}
+
+	interface BlockContextCouldAddNode extends BlockContext {
+		addNode(block: Type | Tree, from: number, to?: number): void;
+	}
+
+	const parseInlineOnHeading = parseInline('Heading');
+
+	return {
+		name: 'ATXHeading',
+		parse(ctx: BlockContext, line: Line) {
+			const size = isAtxHeading(line);
+			if (size < 0) {
+				return false;
+			}
+			const offset = line.pos;
+			const from = ctx.lineStart + offset;
+			const endOfSpace = skipSpaceBack(line.text, line.text.length, offset);
+			let after = endOfSpace;
+			while (after > offset && line.text.charCodeAt(after - 1) == line.next) {
+				after--;
+			}
+			if (after == endOfSpace || after == offset || !space(line.text.charCodeAt(after - 1))) {
+				after = line.text.length;
+			}
+			const buf = (ctx as BlockContextWithBuffer).buffer
+				.write(Type.HeaderMark, 0, size)
+				.writeElements(parseInlineOnHeading(ctx.parser, line.text.slice(offset + size + 1, after), from + size + 1), -from);
+			if (after < line.text.length) {
+				buf.write(Type.HeaderMark, after - offset, endOfSpace - offset);
+			}
+			const node = buf.finish(Type.ATXHeading1 - 1 + size, line.text.length - offset);
+			ctx.nextLine();
+			(ctx as BlockContextCouldAddNode).addNode(node, from);
+			return true;
+		}
+	};
+})();

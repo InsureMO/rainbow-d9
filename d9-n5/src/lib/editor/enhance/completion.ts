@@ -208,7 +208,7 @@ export const createCompleteD9ml = (options: {
 			// validFor: /^#{1,6}\s+\w*$/
 		};
 	};
-	const completeParagraph = (context: CompletionContext, nodeBefore: SyntaxNode, tree: Tree) => {
+	const completeMightBeWidgetDeclaration = (context: CompletionContext, nodeBefore: SyntaxNode, tree: Tree) => {
 		const nodeBefore2 = tree.resolveInner(nodeBefore.from, -1);
 		if (nodeBefore2 == null) {
 			return null;
@@ -270,8 +270,8 @@ export const createCompleteD9ml = (options: {
 				return completeHeading(context, nodeBefore);
 			case nodeBefore.name === 'ListItem':
 				return completeListItem(context, nodeBefore);
-			case nodeBefore.name === 'Paragraph':
-				return completeParagraph(context, nodeBefore, tree);
+			case nodeBefore.name === 'MightBeWidgetDeclaration':
+				return completeMightBeWidgetDeclaration(context, nodeBefore, tree);
 			case nodeBefore.name === 'WidgetDeclarationAttrValueIcon':
 				return completeIcon(context, nodeBefore);
 			case nodeBefore.name === 'WidgetDeclarationAttrValueExt':

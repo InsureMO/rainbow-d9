@@ -1,4 +1,5 @@
 import {
+	MightBeWidgetDeclarationTag,
 	WidgetDeclarationAttrNameTag,
 	WidgetDeclarationAttrSplitterTag,
 	WidgetDeclarationAttrValueExtTag,
@@ -16,6 +17,7 @@ import {
 } from './tags';
 
 export const WidgetDeclarationNodes = [
+	{name: 'MightBeWidgetDeclaration', style: MightBeWidgetDeclarationTag},
 	{name: 'WidgetDeclaration', style: WidgetDeclarationTag},
 	{name: 'WidgetDeclarationSplitter', style: WidgetDeclarationSplitterTag},
 	{name: 'WidgetDeclarationType', style: WidgetDeclarationTypeTag},
