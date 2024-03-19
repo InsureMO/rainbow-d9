@@ -16,7 +16,7 @@ export const PlaygroundBridge = (props: PlaygroundBridgeProps) => {
 			if ((content ?? '') === (changed ?? '')) {
 				return;
 			}
-			console.log('changed');
+			// console.log('changed');
 			(async () => await onContentChanged(changed))();
 		};
 		on(PlaygroundEventTypes.CONTENT_CHANGED, onChanged);

@@ -36,9 +36,7 @@ export const Editor = (props: EditorProps) => {
 					keymap.of([indentWithTab]),
 					d9mlHighlightStyle,
 					createD9mlCompletions({widgets, externalDefsTypes: externalDefsTypes ?? {}}),
-					markdown({
-						base: markdownLanguage, extensions: [d9mlExtensions]
-					}),
+					markdown({base: markdownLanguage, extensions: d9mlExtensions}),
 					WidgetDeclarationIconPlugin,
 					EditorView.updateListener.of((view: ViewUpdate) => {
 						if (view.docChanged) {

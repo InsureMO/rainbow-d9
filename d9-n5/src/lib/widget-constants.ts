@@ -12,6 +12,7 @@ import {
 
 export const WIDGET_DECLARATION_SPLITTER = Semantic.AbstractSemanticNodeWidgetParser.WIDGET_TITLE_SPLITTER;
 export const ATTRIBUTE_DECLARATION_SPLITTER = ':';
+export const ATTRIBUTE_DECLARATION_JOINT = ',';
 export const ATTRIBUTE_VALUE_CONST_START = '$';
 export const ATTRIBUTE_VALUE_ICON_SYMBOL = '$icons';
 export const ATTRIBUTE_VALUE_ICON_PREFIX = `${ATTRIBUTE_VALUE_ICON_SYMBOL}.`;

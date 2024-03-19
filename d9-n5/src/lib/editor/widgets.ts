@@ -80,7 +80,17 @@ export const EditorPanel = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-playground-ed
 				 * change to inline-flex to make sure the width is applied.
 				 */
                 display: inline-flex;
+                position: relative;
+                align-items: center;
+                justify-content: center;
+                margin-left: 2px;
+                font-weight: 600;
+                font-variant: petite-caps;
+                color: white;
+                border-radius: 4px;
                 width: 0;
+                height: 16px;
+                padding: 0;
                 overflow: hidden;
             }
 
@@ -92,8 +102,7 @@ export const EditorPanel = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-playground-ed
             span.d9-playground-editor-heading5.d9-playground-editor-processing-instruction ~ span.d9-playground-editor-heading5,
             span.d9-playground-editor-heading6.d9-playground-editor-processing-instruction ~ span.d9-playground-editor-heading6,
             span.d9-playground-editor-list.d9-playground-editor-processing-instruction ~ span.d9-playground-editor-list {
-                &.d9-playground-editor-widget-declaration-splitter,
-                &.d9-playground-editor-widget-declaration-attr-splitter {
+                &.d9-playground-editor-widget-declaration-splitter {
                     color: ${PlaygroundCssVars.WIDGET_DECLARATION_SPLITTER_COLOR};
                     margin: 0 4px;
                     font-weight: 600;
@@ -120,34 +129,8 @@ export const EditorPanel = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-playground-ed
                     color: ${PlaygroundCssVars.WIDGET_DECLARATION_FLAG_COLOR};
                 }
 
-                &.d9-playground-editor-widget-declaration-attr-name {
-                    color: ${PlaygroundCssVars.WIDGET_DECLARATION_ATTR_NAME_COLOR};
-                }
-
-                &.d9-playground-editor-widget-declaration-attr-value-icon {
-                    color: ${PlaygroundCssVars.WIDGET_DECLARATION_ATTR_VALUE_ICON_COLOR};
-                }
-
-                &.d9-playground-editor-widget-declaration-attr-value-str {
-                    color: ${PlaygroundCssVars.WIDGET_DECLARATION_ATTR_VALUE_STR_COLOR};
-                }
-
-                &.d9-playground-editor-widget-declaration-attr-value-ext {
-                    color: ${PlaygroundCssVars.WIDGET_DECLARATION_ATTR_VALUE_EXT_COLOR};
-                }
-
                 & ~ span.d9-playground-editor-widget-declaration-icon {
-                    display: inline-flex;
-                    position: relative;
-                    align-items: center;
-                    justify-content: center;
-                    margin-left: 2px;
-                    font-weight: 600;
-                    font-variant: petite-caps;
-                    color: white;
-                    border-radius: 4px;
                     width: unset;
-                    height: 16px;
                     padding: 0 3px;
 
                     &.d9-playground-editor-widget-declaration-type-icon {
@@ -170,7 +153,48 @@ export const EditorPanel = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-playground-ed
                         background-color: ${PlaygroundCssVars.WIDGET_DECLARATION_FLAG_COLOR};
                     }
 
+                    /** disable icons for list */
+
                     &.d9-playground-editor-widget-declaration-attr-name-icon {
+                        width: 0;
+                        padding: 0;
+                    }
+                }
+            }
+
+
+            span.d9-playground-editor-list.d9-playground-editor-processing-instruction ~ span.d9-playground-editor-list {
+                /** attribute available only in list */
+
+                &.d9-playground-editor-widget-declaration-attr-splitter {
+                    color: ${PlaygroundCssVars.WIDGET_DECLARATION_SPLITTER_COLOR};
+                    margin: 0 4px;
+                    font-weight: 600;
+                    font-variant: all-small-caps;
+                }
+
+                &.d9-playground-editor-widget-declaration-attr-name {
+                    color: ${PlaygroundCssVars.WIDGET_DECLARATION_ATTR_NAME_COLOR};
+                }
+
+                &.d9-playground-editor-widget-declaration-attr-value-icon {
+                    color: ${PlaygroundCssVars.WIDGET_DECLARATION_ATTR_VALUE_ICON_COLOR};
+                }
+
+                &.d9-playground-editor-widget-declaration-attr-value-str {
+                    color: ${PlaygroundCssVars.WIDGET_DECLARATION_ATTR_VALUE_STR_COLOR};
+                }
+
+                &.d9-playground-editor-widget-declaration-attr-value-ext {
+                    color: ${PlaygroundCssVars.WIDGET_DECLARATION_ATTR_VALUE_EXT_COLOR};
+                }
+
+                & ~ span.d9-playground-editor-widget-declaration-icon {
+                    /** enable icons for list */
+
+                    &.d9-playground-editor-widget-declaration-attr-name-icon {
+                        width: unset;
+                        padding: 0 3px;
                         background-color: ${PlaygroundCssVars.WIDGET_DECLARATION_ATTR_NAME_COLOR};
                     }
                 }

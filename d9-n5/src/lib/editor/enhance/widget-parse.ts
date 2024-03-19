@@ -135,6 +135,10 @@ export const parseAttribute = (ctx: InlineContext, text: string, offset: number)
 	return ctx.addElement(ctx.elt('WidgetDeclaration', offset, ctx.end, children));
 };
 
+// export const parseAttributes = (ctx: InlineContext, text: string, offset: number): number => {
+// 	const segments = text.split(ATTRIBUTE_DECLARATION_JOINT);
+// };
+
 export const WidgetParse: InlineParser = {
 	name: 'WidgetDeclaration',
 	parse: (ctx, next, pos) => {
@@ -159,4 +163,3 @@ export const WidgetParse: InlineParser = {
 		}, -1);
 	}
 };
-
