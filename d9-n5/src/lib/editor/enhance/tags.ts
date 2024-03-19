@@ -1,5 +1,8 @@
 import {Tag, tags as t} from '@lezer/highlight';
 
+export const HeadingMarkTag = Tag.define();
+export const ListMarkTag = Tag.define();
+
 export const MightBeWidgetDeclarationTag = Tag.define(t.content);
 export const WidgetDeclarationTag = Tag.define(t.content);
 export const WidgetDeclarationSplitterTag = Tag.define();

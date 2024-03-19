@@ -1,6 +1,8 @@
 import {defaultHighlightStyle, HighlightStyle, syntaxHighlighting} from '@codemirror/language';
 import {tags} from '@lezer/highlight';
 import {
+	HeadingMarkTag,
+	ListMarkTag,
 	WidgetDeclarationAttrNameTag,
 	WidgetDeclarationAttrSplitterTag,
 	WidgetDeclarationAttrValueExtTag,
@@ -23,6 +25,8 @@ const extendHighlightStyle = HighlightStyle.define([
 	// 	added.push({tag: tags[key], class: `d9-playground-editor-${key}`});
 	// 	return added;
 	// }, []),
+	{tag: HeadingMarkTag, class: 'd9-playground-editor-heading-mark'},
+	{tag: ListMarkTag, class: 'd9-playground-editor-list-mark'},
 	{tag: tags.processingInstruction, class: 'd9-playground-editor-processing-instruction'},
 	{tag: tags.heading, class: 'd9-playground-editor-heading'},
 	{tag: tags.heading1, class: 'd9-playground-editor-heading1'},

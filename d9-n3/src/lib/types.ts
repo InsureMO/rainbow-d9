@@ -7,4 +7,5 @@ export interface ParsedNodeDef {
 	node: NodeDef;
 	exportKey?: NodeDefExportKey;
 	success: boolean;
+	error?: string | Error;
 }

@@ -31,54 +31,75 @@ export class DocParser {
 	public parseDoc(def: MarkdownContent): ParsedNodeDef {
 		if (VUtils.isBlank(def)) {
 			N3Logger.error('No content determined in given markdown content.', DocParser.name);
-			return {node: {$wt: 'Page'} as NodeDef, success: false};
+			return {
+				node: {$wt: 'Page'} as NodeDef,
+				success: false,
+				error: 'No content determined in given markdown content.'
+			};
 		}
 
 		// parse ast
 		const {headings: preparsedHeadings} = this._ast.askAsTree(def);
 		if (preparsedHeadings.length === 0) {
 			N3Logger.error('No available content determined, at least one heading in content. All content ignored.', DocParser.name);
-			return {node: {$wt: 'Page'} as NodeDef, success: false};
+			return {
+				node: {$wt: 'Page'} as NodeDef,
+				success: false,
+				error: 'No available content determined, at least one heading in content. All content ignored.'
+			};
 		}
 		// parse ast nodes, find the exported and independent nodes
 		const headings = preparsedHeadings.map(heading => this._semantic.parsePreparsed(heading)) as Array<ParsedHeading>;
 		// eslint-disable-next-line @typescript-eslint/no-unused-vars
 		const {exported, independent} = this._semantic.classifyParsedHeadings(headings);
 		if (exported.length === 0) {
-			N3Logger.error(`Heading not found, must follow format[Type[[::Headline]::Id]]. All content ignored.`, DocParser.name);
-			return {node: {$wt: 'Page'} as NodeDef, success: false};
+			N3Logger.error('Heading not found, must follow format[Type[[::Headline]::Id]]. All content ignored.', DocParser.name);
+			return {
+				node: {$wt: 'Page'} as NodeDef,
+				success: false,
+				error: 'Heading not found, must follow format[Type[[::Headline]::Id]]. All content ignored.'
+			};
 		} else if (exported.length > 1) {
-			N3Logger.error(`Multiple roots does not support yet. All content ignored.`, DocParser.name);
-			return {node: {$wt: 'Page'} as NodeDef, success: false};
+			N3Logger.error('Multiple roots does not support yet. All content ignored.', DocParser.name);
+			return {
+				node: {$wt: 'Page'} as NodeDef,
+				success: false,
+				error: 'Multiple roots does not support yet. All content ignored.'
+			};
 		}
-		const root = exported[0];
-		// TODO PARSE INDEPENDENT BLOCKS
-		// const independentParses = independent.map<{
-		// 	heading: ParsedHeadingIdentified,
-		// 	parse: ParseWidgetOnHeading
-		// }>(heading => {
-		// 	const {$wt} = heading;
-		// 	const parse = findHeadingBlockParser($wt);
-		// 	if (parse == null) {
-		// 		N3Logger.error(`Parser of independent node[type=${$wt}] is not found. All content ignored.`, DocParser.name);
-		// 	}
-		// 	return {heading, parse};
-		// });
-		// parse root
-		// noinspection UnnecessaryLocalVariableJS
-		const parsedRoot = this.widget.translate(root);
+		try {
+			const root = exported[0];
+			// TODO PARSE INDEPENDENT BLOCKS
+			// const independentParses = independent.map<{
+			// 	heading: ParsedHeadingIdentified,
+			// 	parse: ParseWidgetOnHeading
+			// }>(heading => {
+			// 	const {$wt} = heading;
+			// 	const parse = findHeadingBlockParser($wt);
+			// 	if (parse == null) {
+			// 		N3Logger.error(`Parser of independent node[type=${$wt}] is not found. All content ignored.`, DocParser.name);
+			// 	}
+			// 	return {heading, parse};
+			// });
+			// parse root
+			// noinspection UnnecessaryLocalVariableJS
+			const parsedRoot = this.widget.translate(root);
 
-		// TODO PARSE INDEPENDENT BLOCKS
-		// const parsedIndependent = independentParses.reduce((map, {heading, parse}) => {
-		// 	const parsed = parse(heading);
-		// 	map[parsed.exportKey] = parsed.node;
-		// 	return map;
-		// }, {} as Record<NodeDefExportKey, NodeDef>);
+			// TODO PARSE INDEPENDENT BLOCKS
+			// const parsedIndependent = independentParses.reduce((map, {heading, parse}) => {
+			// 	const parsed = parse(heading);
+			// 	map[parsed.exportKey] = parsed.node;
+			// 	return map;
+			// }, {} as Record<NodeDefExportKey, NodeDef>);
 
-		// TODO REFILL THE LACK PARTS OF PARSED INDEPENDENT NODES
-		// TODO REFILL THE LACK PARTS OF PARSED ROOT NODE
+			// TODO REFILL THE LACK PARTS OF PARSED INDEPENDENT NODES
+			// TODO REFILL THE LACK PARTS OF PARSED ROOT NODE
 
-		return parsedRoot;
+			return parsedRoot;
+		} catch (error) {
+			N3Logger.error(error, DocParser.name);
+			return {node: {$wt: 'Page'} as NodeDef, success: false, error};
+		}
 	}
 }
 

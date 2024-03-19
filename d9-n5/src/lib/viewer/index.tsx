@@ -53,7 +53,11 @@ export const Viewer = (props: ViewerProps) => {
 	}
 
 	try {
-		const {node: def} = parseDoc(content);
+		const {node: def, success, error} = parseDoc(content);
+		if (!success) {
+			// noinspection ExceptionCaughtLocallyJS
+			throw typeof error === 'string' ? new Error(error) : (error ?? new Error('Unpredicted parse error occurred.'));
+		}
 		// noinspection JSUnusedGlobalSymbols
 		const enhancedExternalDefs = {
 			onDetermined: (options: ExternalDefsHandlerOptions) => {
