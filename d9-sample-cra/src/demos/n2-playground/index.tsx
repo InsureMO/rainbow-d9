@@ -1,6 +1,6 @@
-import {ExternalDefs, StandaloneRoot} from '@rainbow-d9/n1';
-import {GlobalRoot} from '@rainbow-d9/n2';
-import {DropdownOption} from '@rainbow-d9/n2/src';
+import {ContainerDef, ExternalDefIndicator, ExternalDefs, StandaloneRoot} from '@rainbow-d9/n1';
+import {DropdownOption, GlobalRoot} from '@rainbow-d9/n2';
+import {PlaygroundDef} from '@rainbow-d9/n5';
 import {useDemoMarkdown} from '../use-demo-markdown';
 import DemoData from './demo.json';
 import {markdown as DemoContent} from './demo.md';
@@ -24,6 +24,11 @@ export const N2Playground = () => {
 					]
 				}
 			},
+			mockData: async () => {
+				return {
+					test: 'test 6'
+				};
+			},
 			externalDefsTypes: {
 				codes: {$wt: 'Dropdown', properties: ['options'], label: 'Retrieve available options from remote.'},
 				staticCodes: {
@@ -32,6 +37,11 @@ export const N2Playground = () => {
 			}
 		}
 	};
+
+	DemoData.markdown = '# Page::Page 2\n\n- Input::Test::test';
+	// manual set as external def indicator to make it will be retrieved from given external defs in every refresh.
+	// @ts-ignore
+	(((def as ContainerDef).$nodes[0] as ContainerDef).$nodes[0] as PlaygroundDef).mockData = new ExternalDefIndicator('playground.mockData');
 
 	return <GlobalRoot>
 		<StandaloneRoot {...def} $root={DemoData} externalDefs={externalDefs}/>

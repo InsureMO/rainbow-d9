@@ -1,14 +1,11 @@
 import {Element, InlineContext, InlineParser} from '@lezer/markdown';
 import {Semantic} from '@rainbow-d9/n3';
-
-export const WIDGET_DECLARATION_SPLITTER = Semantic.AbstractSemanticNodeWidgetParser.WIDGET_TITLE_SPLITTER;
-export const ATTRIBUTE_DECLARATION_SPLITTER = ':';
-export const ATTRIBUTE_VALUE_CONST_START = '$';
-export const ATTRIBUTE_VALUE_ICON_SYMBOL = '$icons';
-export const ATTRIBUTE_VALUE_ICON_PREFIX = `${ATTRIBUTE_VALUE_ICON_SYMBOL}.`;
-export const ATTRIBUTE_VALUE_REF_START = '@';
-export const ATTRIBUTE_VALUE_EXT_SYMBOL = '@ext';
-export const ATTRIBUTE_VALUE_EXT_PREFIX = `${ATTRIBUTE_VALUE_EXT_SYMBOL}.`;
+import {
+	ATTRIBUTE_DECLARATION_SPLITTER,
+	ATTRIBUTE_VALUE_EXT_SYMBOL,
+	ATTRIBUTE_VALUE_ICON_SYMBOL,
+	WIDGET_DECLARATION_SPLITTER
+} from '../../widget-constants';
 
 export interface ParsedWidgetDeclaration {
 	$wt?: string;

@@ -1,23 +1,17 @@
-import {BaseModel, ExternalDefs, MUtils, NodeAttributeValues, PPUtils, PropValue, VUtils} from '@rainbow-d9/n1';
+import {MUtils, NodeAttributeValues, PPUtils, PropValue, VUtils} from '@rainbow-d9/n1';
 import {CssVars, DOM_KEY_WIDGET, useGlobalHandlers, Utils} from '@rainbow-d9/n2';
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useRef} from 'react';
 import styled from 'styled-components';
 import {Editor} from './editor';
 import {Help} from './help';
+import {useAvailableWidgets, useInitialize, useLayout, useViewMode} from './hooks';
 import {PlaygroundBridge} from './playground-bridge';
-import {PlaygroundEventBusProvider, PlaygroundEventTypes, usePlaygroundEventBus} from './playground-event-bus';
+import {PlaygroundEventBusProvider} from './playground-event-bus';
 import {Slider} from './slider';
 import {Toolbar} from './toolbar';
-import {ExternalDefsTypes, PlaygroundProps, PlaygroundWidgets, UnwrappedPlaygroundProps} from './types';
+import {PlaygroundProps, UnwrappedPlaygroundProps} from './types';
 import {Viewer} from './viewer';
-import {
-	computeConstants,
-	computeIcons,
-	computeReferences,
-	computeWidgetGroups,
-	computeWidgets,
-	PlaygroundCssVars
-} from './widgets';
+import {PlaygroundCssVars} from './widgets';
 
 // noinspection CssUnresolvedCustomProperty
 export const PlaygroundWrapper = styled.div.attrs<{ editorSize?: number }>(
@@ -60,23 +54,6 @@ export const PlaygroundWrapper = styled.div.attrs<{ editorSize?: number }>(
     }
 `;
 
-export interface PlaygroundState {
-	initialized: boolean;
-	maximized: boolean;
-}
-
-export interface PlaygroundLayoutState {
-	editorSize?: number;
-}
-
-export interface PlaygroundWidgetsState {
-	groups: PlaygroundWidgets['groups'];
-	widgets: PlaygroundWidgets['widgets'];
-	icons: PlaygroundWidgets['icons'];
-	constants: PlaygroundWidgets['constants'];
-	extensions: PlaygroundWidgets['extensions'];
-}
-
 export const PlaygroundDelegate = (props: PlaygroundProps) => {
 	const {
 		$pp, $wrapped,
@@ -87,118 +64,35 @@ export const PlaygroundDelegate = (props: PlaygroundProps) => {
 	} = props;
 	const {$p2r, $onValueChange, $avs: {$disabled, $visible}} = $wrapped;
 
-	const {on, off} = usePlaygroundEventBus();
 	const ref = useRef<HTMLDivElement>(null);
-	const mockDataRef = useRef<BaseModel>(null);
-	const externalDefRef = useRef<ExternalDefs>(null);
-	const externalDefsTypesRef = useRef<ExternalDefsTypes>(null);
 	const globalHandlers = useGlobalHandlers();
-	const [state, setState] = useState<PlaygroundState>({
-		initialized: false, maximized: false
-	});
-	const [layout, setLayout] = useState<PlaygroundLayoutState>({});
-	const [availableWidgets, setAvailableWidgets] = useState<PlaygroundWidgetsState>(() => {
-		return {
-			groups: computeWidgetGroups(widgets?.groups ?? [], useN2),
-			widgets: computeWidgets(widgets?.widgets ?? [], useN2),
-			icons: computeIcons(widgets?.icons ?? [], useN2),
-			constants: computeConstants(widgets?.constants ?? [], useN2),
-			extensions: computeReferences(widgets?.extensions ?? [], useN2)
-		};
-	});
-	useEffect(() => {
-		if (!state.initialized || ref.current == null) {
-			return;
-		}
-		const editor = ref.current!.querySelector('div[data-w=d9-playground-editor]');
-		const {width} = editor!.getBoundingClientRect();
-		setLayout({editorSize: width});
-	}, [state.initialized]);
-	useEffect(() => {
-		setAvailableWidgets({
-			groups: computeWidgetGroups(widgets?.groups ?? [], useN2),
-			widgets: computeWidgets(widgets?.widgets ?? [], useN2),
-			icons: computeIcons(widgets?.icons ?? [], useN2),
-			constants: computeConstants(widgets?.constants ?? [], useN2),
-			extensions: computeReferences(widgets?.extensions ?? [], useN2)
-		});
-	}, [widgets, useN2]);
-	useEffect(() => {
-		if (state.initialized) {
-			return;
-		}
+	const {
+		initialized,
+		mockData: initializedMockData,
+		externalDefs: initializedExternalDefs, externalDefsTypes: initializedExternalDefsTypes
+	} = useInitialize({mockData, externalDefs, externalDefsTypes});
+	const {editorSize, resizeTo} = useLayout(initialized, ref);
+	const availableWidgets = useAvailableWidgets(widgets, useN2);
+	const {zen, maximized} = useViewMode();
 
-		(async () => {
-			// eslint-disable-next-line @typescript-eslint/no-explicit-any
-			const ask = <T = any>(given: T | (() => Promise<T>), defaultValue?: T) => async (): Promise<T | undefined> => {
-				let ret: T;
-				if (typeof given === 'function') {
-					// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-					// @ts-ignore
-					ret = await given();
-				} else {
-					ret = given;
-				}
-				return ret ?? defaultValue;
-			};
-			const [mock, defs, types] = await Promise.all([
-				ask(mockData, {})(), ask(externalDefs)(), ask(externalDefsTypes)()
-			]);
-			mockDataRef.current = mock;
-			externalDefRef.current = defs;
-			externalDefsTypesRef.current = types;
-			setState(state => ({...state, initialized: true}));
-		})();
-	}, [state.initialized, mockData, externalDefs, externalDefsTypes]);
-	useEffect(() => {
-		const onMaximize = () => setState(state => ({...state, maximized: true}));
-		const onQuitMaximize = () => setState(state => ({...state, maximized: false}));
-		const onZen = () => {
-			document.documentElement.requestFullscreen && document.documentElement.requestFullscreen({navigationUI: 'hide'});
-			onMaximize();
-		};
-		const onQuitZen = () => {
-			onQuitMaximize();
-			document.exitFullscreen && document.exitFullscreen();
-		};
-		const onFullScreenChanged = () => {
-			if (document.fullscreenElement == null) {
-				onQuitMaximize();
-			}
-		};
-		window.addEventListener('fullscreenchange', onFullScreenChanged);
-		on(PlaygroundEventTypes.MAXIMIZE, onMaximize);
-		on(PlaygroundEventTypes.QUIT_MAXIMIZE, onQuitMaximize);
-		on(PlaygroundEventTypes.ZEN, onZen);
-		on(PlaygroundEventTypes.QUIT_ZEN, onQuitZen);
-		return () => {
-			window.removeEventListener('fullscreenchange', onFullScreenChanged);
-			off(PlaygroundEventTypes.MAXIMIZE, onMaximize);
-			off(PlaygroundEventTypes.QUIT_MAXIMIZE, onQuitMaximize);
-			off(PlaygroundEventTypes.ZEN, onZen);
-			off(PlaygroundEventTypes.QUIT_ZEN, onQuitZen);
-		};
-	}, [on, off]);
-
-	if (!state.initialized) {
+	if (!initialized) {
 		return null;
 	}
 
-	const resizeTo = (width: number) => setLayout({editorSize: width});
 	const onContentChanged = async (content?: string) => {
 		await $onValueChange(content, false, {global: globalHandlers});
 	};
 	const content = MUtils.getValue($wrapped.$model, $pp) as unknown as string;
 
 	return <PlaygroundWrapper {...rest} data-disabled={$disabled} data-visible={$visible}
-	                          data-maximized={state.maximized} editorSize={layout.editorSize}
+	                          data-zen={zen} data-maximized={maximized} editorSize={editorSize}
 	                          id={PPUtils.asId(PPUtils.absolute($p2r, $pp), props.id)}
 	                          ref={ref}>
 		<PlaygroundBridge onContentChanged={onContentChanged}/>
 		<Toolbar groups={availableWidgets.groups} widgets={availableWidgets.widgets}/>
-		<Editor content={content} externalDefsTypes={externalDefsTypesRef.current} widgets={availableWidgets}/>
+		<Editor content={content} externalDefsTypes={initializedExternalDefsTypes} widgets={availableWidgets}/>
 		<Help/>
-		<Viewer mockData={mockDataRef.current!} externalDefs={externalDefRef.current}/>
+		<Viewer mockData={initializedMockData!} externalDefs={initializedExternalDefs}/>
 		<Slider resizeTo={resizeTo}/>
 	</PlaygroundWrapper>;
 };

@@ -21,7 +21,6 @@ export const Editor = (props: EditorProps) => {
 	} = props;
 
 	const ref = useRef<HTMLDivElement>(null);
-	const contentRef = useRef<string>(content ?? '');
 	const {fire} = usePlaygroundEventBus();
 	const [state, setState] = useState<EditorState>({});
 	useEffect(() => {
@@ -45,7 +44,6 @@ export const Editor = (props: EditorProps) => {
 						if (view.docChanged) {
 							const doc = view.state.doc;
 							const value = doc.toString();
-							contentRef.current = value;
 							fire(PlaygroundEventTypes.CONTENT_CHANGED, value);
 						}
 					})
@@ -62,9 +60,12 @@ export const Editor = (props: EditorProps) => {
 		if (state.editor == null) {
 			return;
 		}
-		state.editor.dispatch({changes: {from: 0, insert: contentRef.current}});
-		fire(PlaygroundEventTypes.CONTENT_INITIALIZED, contentRef.current);
-	}, [fire, state.editor]);
+		const doc = state.editor.state.doc;
+		const value = doc.toString();
+		if (value !== (content ?? '')) {
+			state.editor.dispatch({changes: {from: 0, to: doc.length, insert: content ?? ''}});
+		}
+	}, [fire, state.editor, content]);
 
 	return <EditorWrapper {...rest}>
 		<EditorPanel ref={ref}/>

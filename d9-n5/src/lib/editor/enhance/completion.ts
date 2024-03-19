@@ -4,13 +4,13 @@ import {syntaxTree} from '@codemirror/language';
 import {SyntaxNode, Tree} from '@lezer/common';
 import {N2, VUtils, WidgetType} from '@rainbow-d9/n3';
 import {ExternalDefsTypes, ExternalDefType, PlaygroundWidgetProperty, PlaygroundWidgets} from '../../types';
-import {getCommonWidgetAttributes} from '../../widgets';
 import {
 	ATTRIBUTE_VALUE_CONST_START,
 	ATTRIBUTE_VALUE_EXT_PREFIX,
 	ATTRIBUTE_VALUE_ICON_PREFIX,
-	ATTRIBUTE_VALUE_REF_START
-} from './widget-parse';
+	ATTRIBUTE_VALUE_REF_START,
+	getCommonWidgetAttributes
+} from '../../widget-constants';
 
 export interface WidgetTypeCompletion extends Completion {
 	$parent?: WidgetType | Array<WidgetType>;

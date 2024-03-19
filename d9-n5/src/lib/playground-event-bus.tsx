@@ -9,7 +9,6 @@ export enum PlaygroundEventTypes {
 	QUIT_ZEN = 'quit-zen',
 	WIDGET_GROUP_CHANGE = 'widget-group-change',
 
-	CONTENT_INITIALIZED = 'content-initialized',
 	CONTENT_CHANGED = 'content-changed',
 }
 
@@ -43,12 +42,6 @@ export interface PlaygroundEventBus {
 	on(type: PlaygroundEventTypes.WIDGET_GROUP_CHANGE, listener: (group: PlaygroundWidgetGroupKey | string) => void): this;
 
 	off(type: PlaygroundEventTypes.WIDGET_GROUP_CHANGE, listener: (group: PlaygroundWidgetGroupKey | string) => void): this;
-
-	fire(type: PlaygroundEventTypes.CONTENT_INITIALIZED, content?: string): this;
-
-	on(type: PlaygroundEventTypes.CONTENT_INITIALIZED, listener: (content?: string) => void): this;
-
-	off(type: PlaygroundEventTypes.CONTENT_INITIALIZED, listener: (content?: string) => void): this;
 
 	fire(type: PlaygroundEventTypes.CONTENT_CHANGED, content?: string): this;
 

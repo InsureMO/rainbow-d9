@@ -37,16 +37,11 @@ export const Viewer = (props: ViewerProps) => {
 	const {replace} = useThrottler();
 	const [content, setContent] = useState('');
 	useEffect(() => {
-		const onContentInitialized = (content?: string) => {
-			setContent(content ?? '');
-		};
 		const onContentChanged = (content?: string) => {
 			replace(() => setContent(content ?? ''), 500);
 		};
-		on(PlaygroundEventTypes.CONTENT_INITIALIZED, onContentInitialized);
 		on(PlaygroundEventTypes.CONTENT_CHANGED, onContentChanged);
 		return () => {
-			off(PlaygroundEventTypes.CONTENT_INITIALIZED, onContentInitialized);
 			off(PlaygroundEventTypes.CONTENT_CHANGED, onContentChanged);
 		};
 	}, [on, off, replace]);
