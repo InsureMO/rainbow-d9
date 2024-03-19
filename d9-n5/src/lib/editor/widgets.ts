@@ -64,10 +64,30 @@ export const EditorPanel = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-playground-ed
                 font-size: 20px;
             }
 
-            > span.d9-playground-editor-list.d9-playground-editor-processing-instruction {
+            > span.d9-playground-editor-list.d9-playground-editor-processing-instruction:first-child {
                 color: ${PlaygroundCssVars.WIDGET_DECLARATION_INSTRUCTION_COLOR};
                 font-weight: 600;
                 font-size: 18px;
+            }
+
+            > span.cm-selectionMatch {
+                > span.d9-playground-editor-heading.d9-playground-editor-processing-instruction,
+                > span.d9-playground-editor-heading1.d9-playground-editor-processing-instruction,
+                > span.d9-playground-editor-heading2.d9-playground-editor-processing-instruction,
+                > span.d9-playground-editor-heading3.d9-playground-editor-processing-instruction,
+                > span.d9-playground-editor-heading4.d9-playground-editor-processing-instruction,
+                > span.d9-playground-editor-heading5.d9-playground-editor-processing-instruction,
+                > span.d9-playground-editor-heading6.d9-playground-editor-processing-instruction {
+                    color: ${PlaygroundCssVars.WIDGET_DECLARATION_INSTRUCTION_COLOR};
+                    font-weight: 900;
+                    font-size: 20px;
+                }
+
+                > span.d9-playground-editor-list.d9-playground-editor-processing-instruction:first-child {
+                    color: ${PlaygroundCssVars.WIDGET_DECLARATION_INSTRUCTION_COLOR};
+                    font-weight: 600;
+                    font-size: 18px;
+                }
             }
 
             span.d9-playground-editor-widget-declaration-icon {
@@ -94,14 +114,14 @@ export const EditorPanel = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-playground-ed
                 overflow: hidden;
             }
 
-            span.d9-playground-editor-heading.d9-playground-editor-processing-instruction ~ span.d9-playground-editor-heading,
-            span.d9-playground-editor-heading1.d9-playground-editor-processing-instruction ~ span.d9-playground-editor-heading1,
-            span.d9-playground-editor-heading2.d9-playground-editor-processing-instruction ~ span.d9-playground-editor-heading2,
-            span.d9-playground-editor-heading3.d9-playground-editor-processing-instruction ~ span.d9-playground-editor-heading3,
-            span.d9-playground-editor-heading4.d9-playground-editor-processing-instruction ~ span.d9-playground-editor-heading4,
-            span.d9-playground-editor-heading5.d9-playground-editor-processing-instruction ~ span.d9-playground-editor-heading5,
-            span.d9-playground-editor-heading6.d9-playground-editor-processing-instruction ~ span.d9-playground-editor-heading6,
-            span.d9-playground-editor-list.d9-playground-editor-processing-instruction ~ span.d9-playground-editor-list {
+            span.d9-playground-editor-heading,
+            span.d9-playground-editor-heading1,
+            span.d9-playground-editor-heading2,
+            span.d9-playground-editor-heading3,
+            span.d9-playground-editor-heading4,
+            span.d9-playground-editor-heading5,
+            span.d9-playground-editor-heading6,
+            span.d9-playground-editor-list {
                 &.d9-playground-editor-widget-declaration-splitter {
                     color: ${PlaygroundCssVars.WIDGET_DECLARATION_SPLITTER_COLOR};
                     margin: 0 4px;
@@ -162,8 +182,7 @@ export const EditorPanel = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-playground-ed
                 }
             }
 
-
-            span.d9-playground-editor-list.d9-playground-editor-processing-instruction ~ span.d9-playground-editor-list {
+            span.d9-playground-editor-list {
                 /** attribute available only in list */
 
                 &.d9-playground-editor-widget-declaration-attr-splitter {
