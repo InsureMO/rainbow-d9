@@ -102,6 +102,7 @@ export type PlaygroundDef = ValueChangeableNodeDef & OmitHTMLProps<HTMLDivElemen
 	externalDefsTypes?: ExternalDefsTypes | (() => Promise<ExternalDefsTypes>);
 	widgets?: PlaygroundWidgets;
 	useN2?: boolean;
+	minViewerWidth?: number;
 };
 
 /** widget definition, with html attributes */
@@ -116,6 +117,7 @@ export interface EditorProps {
 export interface ViewerProps {
 	mockData: BaseModel;
 	externalDefs?: ExternalDefs;
+	minViewerWidth?: number;
 }
 
 /** Section configuration definition */

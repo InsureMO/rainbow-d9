@@ -1,12 +1,12 @@
 import {MUtils, NodeAttributeValues, PPUtils, PropValue, VUtils} from '@rainbow-d9/n1';
-import {CssVars, DOM_KEY_WIDGET, useGlobalHandlers, Utils} from '@rainbow-d9/n2';
+import {CssVars, DOM_KEY_WIDGET, useGlobalHandlers} from '@rainbow-d9/n2';
 import React, {useRef} from 'react';
 import styled from 'styled-components';
 import {Editor} from './editor';
 import {Help} from './help';
-import {useAvailableWidgets, useInitialize, useLayout, useViewMode} from './hooks';
+import {useAvailableWidgets, useInitialize, useViewMode} from './hooks';
 import {PlaygroundBridge} from './playground-bridge';
-import {PlaygroundEventBusProvider} from './playground-event-bus';
+import {PlaygroundEventBusProvider, PlaygroundEventTypes, usePlaygroundEventBus} from './playground-event-bus';
 import {Slider} from './slider';
 import {Toolbar} from './toolbar';
 import {PlaygroundProps, UnwrappedPlaygroundProps} from './types';
@@ -14,17 +14,17 @@ import {Viewer} from './viewer';
 import {PlaygroundCssVars} from './widgets';
 
 // noinspection CssUnresolvedCustomProperty
-export const PlaygroundWrapper = styled.div.attrs<{ editorSize?: number }>(
-	({editorSize}) => {
+export const PlaygroundWrapper = styled.div.attrs(
+	() => {
 		return {
 			[DOM_KEY_WIDGET]: 'd9-playground',
 			style: {
 				'--min-height': '500px',
-				'--grid-columns': `auto ${editorSize != null ? Utils.toCssSize(editorSize) : 'min(400px, 40%)'} 1fr`,
+				'--grid-columns': `auto auto 1fr`,
 				'--grid-rows': '1fr auto'
 			}
 		};
-	})<{ editorSize?: number }>`
+	})`
     display: grid;
     position: relative;
     grid-column: var(--grid-column);
@@ -60,18 +60,19 @@ export const PlaygroundDelegate = (props: PlaygroundProps) => {
 		mockData,
 		externalDefs, externalDefsTypes,
 		widgets, useN2 = true,
+		minViewerWidth,
 		...rest
 	} = props;
 	const {$p2r, $onValueChange, $avs: {$disabled, $visible}} = $wrapped;
 
 	const ref = useRef<HTMLDivElement>(null);
 	const globalHandlers = useGlobalHandlers();
+	const {fire} = usePlaygroundEventBus();
 	const {
 		initialized,
 		mockData: initializedMockData,
 		externalDefs: initializedExternalDefs, externalDefsTypes: initializedExternalDefsTypes
 	} = useInitialize({mockData, externalDefs, externalDefsTypes});
-	const {editorSize, resizeTo} = useLayout(initialized, ref);
 	const availableWidgets = useAvailableWidgets(widgets, useN2);
 	const {zen, maximized} = useViewMode();
 
@@ -82,17 +83,22 @@ export const PlaygroundDelegate = (props: PlaygroundProps) => {
 	const onContentChanged = async (content?: string) => {
 		await $onValueChange(content, false, {global: globalHandlers});
 	};
+	const resizeTo = (width: number) => {
+		fire(PlaygroundEventTypes.RESIZE_EDITOR, width);
+	};
 	const content = MUtils.getValue($wrapped.$model, $pp) as unknown as string;
 
 	return <PlaygroundWrapper {...rest} data-disabled={$disabled} data-visible={$visible}
-	                          data-zen={zen} data-maximized={maximized} editorSize={editorSize}
+	                          data-zen={zen} data-maximized={maximized}
 	                          id={PPUtils.asId(PPUtils.absolute($p2r, $pp), props.id)}
 	                          ref={ref}>
 		<PlaygroundBridge content={content} onContentChanged={onContentChanged}/>
 		<Toolbar groups={availableWidgets.groups} widgets={availableWidgets.widgets}/>
-		<Editor content={content} externalDefsTypes={initializedExternalDefsTypes} widgets={availableWidgets}/>
+		<Editor content={content}
+		        externalDefsTypes={initializedExternalDefsTypes} widgets={availableWidgets}/>
 		<Help/>
-		<Viewer mockData={initializedMockData!} externalDefs={initializedExternalDefs}/>
+		<Viewer mockData={initializedMockData!} externalDefs={initializedExternalDefs}
+		        minViewerWidth={minViewerWidth}/>
 		<Slider resizeTo={resizeTo}/>
 	</PlaygroundWrapper>;
 };

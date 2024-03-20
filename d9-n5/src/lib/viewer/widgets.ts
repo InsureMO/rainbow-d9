@@ -1,14 +1,19 @@
-import {DOM_KEY_WIDGET} from '@rainbow-d9/n2';
+import {DOM_KEY_WIDGET, Utils} from '@rainbow-d9/n2';
 import styled from 'styled-components';
 import {PlaygroundCssVars} from '../widgets';
 
 // noinspection CssUnresolvedCustomProperty
-export const ViewerWrapper = styled.div.attrs(() => {
-	return {
-		[DOM_KEY_WIDGET]: 'd9-playground-viewer',
-		style: {}
-	};
-})`
+export const ViewerWrapper = styled.div.attrs<{ minViewerWidth?: number }>(
+	({minViewerWidth}) => {
+		return {
+			[DOM_KEY_WIDGET]: 'd9-playground-viewer',
+			'data-v-scroll': '',
+			'data-h-scroll': '',
+			style: {
+				'--min-viewer-width': minViewerWidth == null ? '600px' : Utils.toCssSize(minViewerWidth)
+			}
+		};
+	})<{ minViewerWidth?: number }>`
     display: block;
     position: relative;
     align-self: stretch;
@@ -18,6 +23,7 @@ export const ViewerWrapper = styled.div.attrs(() => {
 
     > div[data-w=d9-page] {
         margin: 16px;
+        min-width: var(--min-viewer-width);
     }
 `;
 

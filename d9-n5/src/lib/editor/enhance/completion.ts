@@ -133,7 +133,7 @@ export const findWidgetType = (node: SyntaxNode, context: CompletionContext): st
 // 3.3 $icons,
 // 3.4 @ext
 // 4. Click toolbar icons, and check editor caret, should be first column. otherwise copy to clipboard.
-// 5. javascript code block
+// 5. [x] javascript code block
 export const createCompleteD9ml = (options: {
 	widgets: Required<PlaygroundWidgets>;
 	externalDefsTypes: ExternalDefsTypes;

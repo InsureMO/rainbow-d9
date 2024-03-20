@@ -31,7 +31,7 @@ const clearExternalDefs = (opts: any) => {
 };
 
 export const Viewer = (props: ViewerProps) => {
-	const {mockData, externalDefs} = props;
+	const {mockData, externalDefs, minViewerWidth} = props;
 
 	const {on, off} = usePlaygroundEventBus();
 	const {replace} = useThrottler();
@@ -47,7 +47,7 @@ export const Viewer = (props: ViewerProps) => {
 	}, [on, off, replace]);
 
 	if (VUtils.isBlank(content)) {
-		return <ViewerWrapper>
+		return <ViewerWrapper minViewerWidth={minViewerWidth}>
 			<ParseError>No configuration.</ParseError>
 		</ViewerWrapper>;
 	}
@@ -65,7 +65,7 @@ export const Viewer = (props: ViewerProps) => {
 			},
 			...(externalDefs ?? {})
 		};
-		return <ViewerWrapper>
+		return <ViewerWrapper minViewerWidth={minViewerWidth}>
 			{/**
 			 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 			 @ts-ignore */}
@@ -74,7 +74,7 @@ export const Viewer = (props: ViewerProps) => {
 			</ErrorBoundary>
 		</ViewerWrapper>;
 	} catch (error) {
-		return <ViewerWrapper>
+		return <ViewerWrapper minViewerWidth={minViewerWidth}>
 			<ParseError>{(error as Error).message || 'Parse error occurred.'}</ParseError>
 		</ViewerWrapper>;
 	}

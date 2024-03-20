@@ -1,13 +1,16 @@
-import {CssVars, DOM_KEY_WIDGET} from '@rainbow-d9/n2';
+import {CssVars, DOM_KEY_WIDGET, Utils} from '@rainbow-d9/n2';
 import styled from 'styled-components';
 import {PlaygroundCssVars} from '../widgets';
 
-export const EditorWrapper = styled.div.attrs(() => {
-	return {
-		[DOM_KEY_WIDGET]: 'd9-playground-editor',
-		style: {}
-	};
-})`
+export const EditorWrapper = styled.div.attrs<{ editorSize?: number }>(
+	({editorSize}) => {
+		return {
+			[DOM_KEY_WIDGET]: 'd9-playground-editor',
+			style: {
+				width: editorSize == null ? 'min(400px, 40vw)' : Utils.toCssSize(editorSize)
+			}
+		};
+	})<{ editorSize?: number }>`
     display: grid;
     position: relative;
     align-self: stretch;

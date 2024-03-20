@@ -31,7 +31,7 @@ export const buildConfig = (lint) => {
 			'nanoid',
 			'codemirror', '@codemirror/view', '@codemirror/state',
 			'@codemirror/commands', '@codemirror/autocomplete',
-			'@codemirror/language', '@codemirror/lang-markdown', '@codemirror/lang-html',
+			'@codemirror/language', '@codemirror/lang-markdown', '@codemirror/lang-javascript',
 			'@lezer/common', '@lezer/highlight', '@lezer/markdown',
 			'@rainbow-d9/n1', '@rainbow-d9/n2', '@rainbow-d9/n3'
 		]

@@ -8,6 +8,7 @@ export enum PlaygroundEventTypes {
 	ZEN = 'zen',
 	QUIT_ZEN = 'quit-zen',
 	WIDGET_GROUP_CHANGE = 'widget-group-change',
+	RESIZE_EDITOR = 'resize-editor',
 
 	CONTENT_CHANGED = 'content-changed',
 }
@@ -42,6 +43,12 @@ export interface PlaygroundEventBus {
 	on(type: PlaygroundEventTypes.WIDGET_GROUP_CHANGE, listener: (group: PlaygroundWidgetGroupKey | string) => void): this;
 
 	off(type: PlaygroundEventTypes.WIDGET_GROUP_CHANGE, listener: (group: PlaygroundWidgetGroupKey | string) => void): this;
+
+	fire(type: PlaygroundEventTypes.RESIZE_EDITOR, width: number): this;
+
+	on(type: PlaygroundEventTypes.RESIZE_EDITOR, listener: (width: number) => void): this;
+
+	off(type: PlaygroundEventTypes.RESIZE_EDITOR, listener: (width: number) => void): this;
 
 	fire(type: PlaygroundEventTypes.CONTENT_CHANGED, content?: string): this;
 

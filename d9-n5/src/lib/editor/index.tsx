@@ -1,4 +1,5 @@
 import {indentWithTab} from '@codemirror/commands';
+import {javascript} from '@codemirror/lang-javascript';
 import {markdown, markdownLanguage} from '@codemirror/lang-markdown';
 import {EditorState as CodeMirrorState} from '@codemirror/state';
 import {EditorView, keymap, ViewUpdate} from '@codemirror/view';
@@ -10,6 +11,7 @@ import {createD9mlCompletions, d9mlExtensions, d9mlHighlightStyle, WidgetDeclara
 import {EditorPanel, EditorWrapper} from './widgets';
 
 export interface EditorState {
+	size?: number;
 	editor?: EditorView;
 }
 
@@ -21,7 +23,7 @@ export const Editor = (props: EditorProps) => {
 	} = props;
 
 	const ref = useRef<HTMLDivElement>(null);
-	const {fire} = usePlaygroundEventBus();
+	const {on, off, fire} = usePlaygroundEventBus();
 	const [state, setState] = useState<EditorState>({});
 	useEffect(() => {
 		if (ref.current == null) {
@@ -36,7 +38,10 @@ export const Editor = (props: EditorProps) => {
 					keymap.of([indentWithTab]),
 					d9mlHighlightStyle,
 					createD9mlCompletions({widgets, externalDefsTypes: externalDefsTypes ?? {}}),
-					markdown({base: markdownLanguage, extensions: d9mlExtensions}),
+					markdown({
+						defaultCodeLanguage: javascript({jsx: false, typescript: false}),
+						base: markdownLanguage, extensions: d9mlExtensions
+					}),
 					WidgetDeclarationIconPlugin,
 					EditorView.updateListener.of((view: ViewUpdate) => {
 						if (view.docChanged) {
@@ -64,8 +69,17 @@ export const Editor = (props: EditorProps) => {
 			state.editor.dispatch({changes: {from: 0, to: doc.length, insert: content ?? ''}});
 		}
 	}, [fire, state.editor, content]);
+	useEffect(() => {
+		const onResizeEditor = (width: number) => {
+			setState(state => ({...state, size: width}));
+		};
+		on(PlaygroundEventTypes.RESIZE_EDITOR, onResizeEditor);
+		return () => {
+			off(PlaygroundEventTypes.RESIZE_EDITOR, onResizeEditor);
+		};
+	}, [on, off]);
 
-	return <EditorWrapper {...rest}>
+	return <EditorWrapper editorSize={state.size} {...rest}>
 		<EditorPanel ref={ref}/>
 	</EditorWrapper>;
 };
