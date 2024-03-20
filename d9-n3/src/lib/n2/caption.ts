@@ -118,8 +118,8 @@ export class N2LabelTranslator extends SpecificWidgetTranslator<N2WidgetType.LAB
 		return N2WidgetType.LABEL;
 	}
 
-	public shouldTranslateLabelAttribute(): boolean {
-		return false;
+	public getToWidgetAttributeNames(): Array<string> {
+		return [...super.getToWidgetAttributeNames(), 'text'];
 	}
 
 	public redressProperties<Def extends NodeDef>(def: Partial<Def>): Def {
@@ -146,8 +146,8 @@ export class N2BadgeTranslator extends SpecificWidgetTranslator<N2WidgetType.BAD
 		return N2WidgetType.BADGE;
 	}
 
-	public shouldTranslateLabelAttribute(): boolean {
-		return false;
+	public getToWidgetAttributeNames(): Array<string> {
+		return [...super.getToWidgetAttributeNames(), 'text'];
 	}
 
 	public redressProperties<Def extends NodeDef>(def: Partial<Def>): Def {

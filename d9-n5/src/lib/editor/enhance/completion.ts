@@ -5,6 +5,8 @@ import {SyntaxNode, Tree} from '@lezer/common';
 import {N2, VUtils, WidgetType} from '@rainbow-d9/n3';
 import {ExternalDefsTypes, ExternalDefType, PlaygroundWidgetProperty, PlaygroundWidgets} from '../../types';
 import {
+	ATTRIBUTE_DECLARATION_EXCLAMATION_MARK,
+	ATTRIBUTE_DECLARATION_JOINT,
 	ATTRIBUTE_VALUE_CONST_START,
 	ATTRIBUTE_VALUE_EXT_PREFIX,
 	ATTRIBUTE_VALUE_ICON_PREFIX,
@@ -206,7 +208,7 @@ export const createCompleteD9ml = (options: {
 				return option.$wt === '$all' || option.$wt === widgetType;
 			});
 		const lastJointIndex = attributes
-			? Math.max(textBefore.lastIndexOf(','), textBefore.lastIndexOf(' '))
+			? Math.max(textBefore.lastIndexOf(ATTRIBUTE_DECLARATION_JOINT), textBefore.lastIndexOf(' '), textBefore.lastIndexOf(ATTRIBUTE_DECLARATION_EXCLAMATION_MARK))
 			: -1;
 		if (lastJointIndex !== -1) {
 			return {

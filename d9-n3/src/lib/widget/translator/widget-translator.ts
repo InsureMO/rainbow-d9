@@ -47,7 +47,9 @@ export class WidgetTranslator extends AbstractTranslator<Decipherable> {
 	}) {
 		const {$wt, attributes, translator} = options;
 		const {label} = attributes;
-		if (this.isForceWrappedByFormCell(attributes) || translator.shouldWrapByFormCell()) {
+		if (this.isForceWrappedByFormCell(attributes)) {
+			return this.tryToWrapByFormCell($wt, label ?? '');
+		} else if (translator.shouldWrapByFormCell()) {
 			return this.tryToWrapByFormCell($wt, label);
 		} else if (label == null || (typeof label === 'string' && VUtils.isBlank(label))) {
 			return {$wt};

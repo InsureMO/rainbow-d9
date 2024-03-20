@@ -38,7 +38,21 @@ export const N2Playground = () => {
 		}
 	};
 
-	DemoData.markdown = '# Page::Page 2\n\n- Input::Test::test';
+	DemoData.markdown = `# Page::Page 2
+
+- Input::Test Input::testInput
+  - disabled
+- Dropdown::Test Dropdown::testDropdown
+  - options: @ext.codes
+- Button::
+  - $fc
+  - $pos: r:2
+  - text: Test Button
+  - click:
+    \`\`\`
+    options.global.alert.show('Hello World');
+    \`\`\`
+`;
 	// manual set as external def indicator to make it will be retrieved from given external defs in every refresh.
 	// @ts-ignore
 	(((def as ContainerDef).$nodes[0] as ContainerDef).$nodes[0] as PlaygroundDef).mockData = new ExternalDefIndicator('playground.mockData');
