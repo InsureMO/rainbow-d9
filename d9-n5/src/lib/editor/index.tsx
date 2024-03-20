@@ -7,7 +7,13 @@ import {basicSetup} from 'codemirror';
 import React, {useEffect, useRef, useState} from 'react';
 import {PlaygroundEventTypes, usePlaygroundEventBus} from '../playground-event-bus';
 import {EditorProps} from '../types';
-import {createD9mlCompletions, d9mlExtensions, d9mlHighlightStyle, WidgetDeclarationIconPlugin} from './enhance';
+import {
+	createD9mlCompletions,
+	createWidgetLinter,
+	d9mlExtensions,
+	d9mlHighlightStyle,
+	WidgetDeclarationIconPlugin
+} from './enhance';
 import {EditorPanel, EditorWrapper} from './widgets';
 
 export interface EditorState {
@@ -42,6 +48,7 @@ export const Editor = (props: EditorProps) => {
 						defaultCodeLanguage: javascript({jsx: false, typescript: false}),
 						base: markdownLanguage, extensions: d9mlExtensions
 					}),
+					...createWidgetLinter({widgets, externalDefsTypes: externalDefsTypes ?? {}}),
 					WidgetDeclarationIconPlugin,
 					EditorView.updateListener.of((view: ViewUpdate) => {
 						if (view.docChanged) {

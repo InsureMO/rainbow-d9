@@ -30,7 +30,7 @@ export const buildConfig = (lint) => {
 			'react', 'react-dom', 'styled-components',
 			'nanoid',
 			'codemirror', '@codemirror/view', '@codemirror/state',
-			'@codemirror/commands', '@codemirror/autocomplete',
+			'@codemirror/commands', '@codemirror/autocomplete', '@codemirror/lint',
 			'@codemirror/language', '@codemirror/lang-markdown', '@codemirror/lang-javascript',
 			'@lezer/common', '@lezer/highlight', '@lezer/markdown',
 			'@rainbow-d9/n1', '@rainbow-d9/n2', '@rainbow-d9/n3'

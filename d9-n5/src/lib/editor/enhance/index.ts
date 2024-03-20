@@ -18,3 +18,5 @@ export * from './highlight';
 export * from './completion';
 
 export * from './widget-parse';
+
+export * from './linter';

@@ -52,6 +52,8 @@ export const N2Playground = () => {
     \`\`\`
     options.global.alert.show('Hello World');
     \`\`\`
+
+## Section1::
 `;
 	// manual set as external def indicator to make it will be retrieved from given external defs in every refresh.
 	// @ts-ignore
