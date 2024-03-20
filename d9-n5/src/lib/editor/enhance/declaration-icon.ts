@@ -27,7 +27,7 @@ export class WidgetDeclarationIcon extends WidgetType {
 export const decorateWidgetDeclarationIcon = (view: EditorView) => {
 	const widgets = [];
 	const createDecorator = (ch: string, classSuffix: string, rangeDecoration: (decoration: Decoration) => Range<Decoration>) => {
-		widgets.push(rangeDecoration(Decoration.widget({widget: new WidgetDeclarationIcon(ch, classSuffix), side: 0})));
+		widgets.push(rangeDecoration(Decoration.widget({widget: new WidgetDeclarationIcon(ch, classSuffix), side: 1})));
 	};
 	for (const {from, to} of view.visibleRanges) {
 		syntaxTree(view.state).iterate({

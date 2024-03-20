@@ -1,5 +1,7 @@
 import {
 	MightBeWidgetDeclarationTag,
+	WidgetDeclarationAttrNameButBlankTag,
+	WidgetDeclarationAttrNameJointTag,
 	WidgetDeclarationAttrNameTag,
 	WidgetDeclarationAttrSplitterTag,
 	WidgetDeclarationAttrValueExtTag,
@@ -26,6 +28,8 @@ export const WidgetDeclarationNodes = [
 	{name: 'WidgetDeclarationId', style: WidgetDeclarationIdTag},
 	{name: 'WidgetDeclarationFlag', style: WidgetDeclarationFlagTag},
 	{name: 'WidgetDeclarationAttrName', style: WidgetDeclarationAttrNameTag},
+	{name: 'WidgetDeclarationAttrNameButBlank', style: WidgetDeclarationAttrNameButBlankTag},
+	{name: 'WidgetDeclarationAttrNameJoint', style: WidgetDeclarationAttrNameJointTag},
 	{name: 'WidgetDeclarationAttrSplitter', style: WidgetDeclarationAttrSplitterTag},
 	{name: 'WidgetDeclarationAttrValue', style: WidgetDeclarationAttrValueTag},
 	{name: 'WidgetDeclarationAttrValueSplitter', style: WidgetDeclarationAttrValueSplitterTag},

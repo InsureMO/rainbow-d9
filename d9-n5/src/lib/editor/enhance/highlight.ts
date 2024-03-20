@@ -3,6 +3,8 @@ import {tags} from '@lezer/highlight';
 import {
 	HeadingMarkTag,
 	ListMarkTag,
+	WidgetDeclarationAttrNameButBlankTag,
+	WidgetDeclarationAttrNameJointTag,
 	WidgetDeclarationAttrNameTag,
 	WidgetDeclarationAttrSplitterTag,
 	WidgetDeclarationAttrValueExtTag,
@@ -44,6 +46,8 @@ const extendHighlightStyle = HighlightStyle.define([
 	{tag: WidgetDeclarationIdTag, class: 'd9-playground-editor-widget-declaration-id'},
 	{tag: WidgetDeclarationFlagTag, class: 'd9-playground-editor-widget-declaration-flag'},
 	{tag: WidgetDeclarationAttrNameTag, class: 'd9-playground-editor-widget-declaration-attr-name'},
+	{tag: WidgetDeclarationAttrNameButBlankTag, class: 'd9-playground-editor-widget-declaration-attr-name-but-blank'},
+	{tag: WidgetDeclarationAttrNameJointTag, class: 'd9-playground-editor-widget-declaration-attr-name-joint'},
 	{tag: WidgetDeclarationAttrSplitterTag, class: 'd9-playground-editor-widget-declaration-attr-splitter'},
 	{tag: WidgetDeclarationAttrValueTag, class: 'd9-playground-editor-widget-declaration-attr-value'},
 	{tag: WidgetDeclarationAttrValueSplitterTag, class: 'd9-playground-editor-widget-declaration-attr-value-splitter'},

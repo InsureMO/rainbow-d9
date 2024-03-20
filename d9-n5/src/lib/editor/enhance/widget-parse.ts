@@ -10,8 +10,9 @@ import {
 	Line,
 	MarkdownParser
 } from '@lezer/markdown';
-import {Semantic} from '@rainbow-d9/n3';
+import {Semantic, VUtils} from '@rainbow-d9/n3';
 import {
+	ATTRIBUTE_DECLARATION_JOINT,
 	ATTRIBUTE_DECLARATION_SPLITTER,
 	ATTRIBUTE_VALUE_EXT_SYMBOL,
 	ATTRIBUTE_VALUE_ICON_SYMBOL,
@@ -146,9 +147,28 @@ export const parseAttribute = (ctx: InlineContext, text: string, offset: number)
 	return ctx.addElement(ctx.elt('WidgetDeclaration', offset, offset + text.length, children));
 };
 
-// export const parseAttributes = (ctx: InlineContext, text: string, offset: number): number => {
-// 	const segments = text.split(ATTRIBUTE_DECLARATION_JOINT);
-// };
+export const parseAttributes = (ctx: InlineContext, text: string, offset: number): number => {
+	const segments = text.split(ATTRIBUTE_DECLARATION_JOINT).map(x => {
+		return {checked: VUtils.isNotBlank(x), text: x};
+	});
+	if (segments.length === 0 || segments.every(x => !x.checked)) {
+		return -1;
+	}
+	const lastIndex = segments.length - 1;
+	const children = segments.reduce((parsed, {checked, text}, index) => {
+		if (checked) {
+			parsed.elements.push(ctx.elt('WidgetDeclarationAttrName', parsed.offset, parsed.offset + text.length));
+		} else if (text.length !== 0) {
+			parsed.elements.push(ctx.elt('WidgetDeclarationAttrNameButBlank', parsed.offset, parsed.offset + text.length));
+		}
+		if (index !== lastIndex) {
+			parsed.elements.push(ctx.elt('WidgetDeclarationAttrNameJoint', parsed.offset + text.length, parsed.offset + text.length + 1));
+		}
+		parsed.offset = parsed.offset + 1 + text.length;
+		return parsed;
+	}, {offset, elements: []});
+	return ctx.addElement(ctx.elt('WidgetDeclaration', offset, offset + text.length, children.elements));
+};
 
 export const WidgetParse: InlineParser = {
 	name: 'WidgetDeclaration',
@@ -173,7 +193,7 @@ export const WidgetParse: InlineParser = {
 		}
 		const parsers = [
 			parseWidget,
-			...(leader === 'ListItem' ? [parseAttribute] : [])
+			...(leader === 'ListItem' ? [parseAttribute, parseAttributes] : [])
 		].filter(x => x != null);
 
 		return parsers.reduce((result, parse) => {

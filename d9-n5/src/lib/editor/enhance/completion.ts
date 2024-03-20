@@ -119,7 +119,7 @@ export const findWidgetType = (node: SyntaxNode, context: CompletionContext): st
 //TODO:
 // 1. completion:
 // 1.1 [x] attribute name, complete the declaration
-// 1.2 attributes list names,
+// 1.2 [x] attributes list names,
 // 1.3 [x] $icons,
 // 1.4 [x] @ext
 // 2. syntax highlight:
@@ -185,10 +185,10 @@ export const createCompleteD9ml = (options: {
 			};
 		}
 	};
-	const completeListItem = (context: CompletionContext, nodeBefore: SyntaxNode) => {
+	const completeListItem = (context: CompletionContext, nodeBefore: SyntaxNode, attributes: boolean) => {
 		const textBefore = context.state.sliceDoc(nodeBefore.from, context.pos) ?? '';
 		// bullet list
-		const tagBefore = /([-|*]\s+)\w*$/.exec(textBefore);
+		const tagBefore = /([-|*]\s+)(.*)$/.exec(textBefore);
 		if (tagBefore == null) {
 			return null;
 		}
@@ -199,21 +199,61 @@ export const createCompleteD9ml = (options: {
 				return option.$parent == null || option.$parent === widgetType || (Array.isArray(option.$parent) && option.$parent.includes(widgetType));
 			});
 		}
-		const attrOptions = WidgetAttrNameOptions.filter(option => {
-			return option.$wt === '$all' || option.$wt === widgetType;
-		});
-		return {
-			from: nodeBefore.from + tagBefore[1].length,
-			options: [...typeOptions, ...attrOptions]
-			// validFor: /^#{1,6}\s+\w*$/
-		};
+		// widget type not found, or it's a page, no attribute needed
+		const attrOptions = (widgetType == null || widgetType === N2.N2WidgetType.PAGE)
+			? []
+			: WidgetAttrNameOptions.filter(option => {
+				return option.$wt === '$all' || option.$wt === widgetType;
+			});
+		const lastJointIndex = attributes
+			? Math.max(textBefore.lastIndexOf(','), textBefore.lastIndexOf(' '))
+			: -1;
+		if (lastJointIndex !== -1) {
+			return {
+				from: nodeBefore.from + lastJointIndex + 1,
+				options: [...typeOptions, ...attrOptions]
+			};
+		} else {
+			return {
+				from: nodeBefore.from + tagBefore[1].length,
+				options: [...typeOptions, ...attrOptions]
+				// validFor: /^#{1,6}\s+\w*$/
+			};
+		}
 	};
-	const completeMightBeWidgetDeclaration = (context: CompletionContext, nodeBefore: SyntaxNode, tree: Tree) => {
+	const completeMightBeWidgetDeclaration = (context: CompletionContext, nodeBefore: SyntaxNode, tree: Tree, attributes: boolean) => {
 		const nodeBefore2 = tree.resolveInner(nodeBefore.from, -1);
 		if (nodeBefore2 == null) {
 			return null;
 		} else if (nodeBefore2.name === 'ListItem') {
-			return completeListItem(context, nodeBefore2);
+			return completeListItem(context, nodeBefore2, attributes);
+		} else {
+			return null;
+		}
+	};
+	const completeWidgetDeclarationAttrName = (context: CompletionContext, nodeBefore: SyntaxNode, tree: Tree) => {
+		let nodeBefore2 = tree.resolveInner(nodeBefore.from, -1);
+		if (nodeBefore2 == null) {
+			return null;
+		} else if (nodeBefore2.name === 'ListItem') {
+			return completeListItem(context, nodeBefore2, true);
+		} else if (nodeBefore2.name === 'MightBeWidgetDeclaration') {
+			return completeMightBeWidgetDeclaration(context, nodeBefore2, tree, true);
+		} else if ([
+			'WidgetDeclarationAttrName', 'WidgetDeclarationAttrNameButBlank', 'WidgetDeclarationAttrNameJoint'
+		].includes(nodeBefore2.name)) {
+			// eslint-disable-next-line no-constant-condition
+			while (true) {
+				nodeBefore2 = tree.resolveInner(nodeBefore2.from, -1);
+				if (nodeBefore2.name === 'ListItem') {
+					return completeListItem(context, nodeBefore2, true);
+				} else if (nodeBefore2.name === 'MightBeWidgetDeclaration') {
+					return completeMightBeWidgetDeclaration(context, nodeBefore2, tree, true);
+				} else if (!nodeBefore2.name.startsWith('WidgetDeclaration')) {
+					break;
+				}
+			}
+			return null;
 		} else {
 			return null;
 		}
@@ -269,9 +309,13 @@ export const createCompleteD9ml = (options: {
 			case nodeBefore.name.startsWith('ATXHeading'):
 				return completeHeading(context, nodeBefore);
 			case nodeBefore.name === 'ListItem':
-				return completeListItem(context, nodeBefore);
+				return completeListItem(context, nodeBefore, false);
 			case nodeBefore.name === 'MightBeWidgetDeclaration':
-				return completeMightBeWidgetDeclaration(context, nodeBefore, tree);
+				return completeMightBeWidgetDeclaration(context, nodeBefore, tree, false);
+			case nodeBefore.name === 'WidgetDeclarationAttrName':
+			case nodeBefore.name === 'WidgetDeclarationAttrNameButBlank':
+			case nodeBefore.name === 'WidgetDeclarationAttrNameJoint':
+				return completeWidgetDeclarationAttrName(context, nodeBefore, tree);
 			case nodeBefore.name === 'WidgetDeclarationAttrValueIcon':
 				return completeIcon(context, nodeBefore);
 			case nodeBefore.name === 'WidgetDeclarationAttrValueExt':
