@@ -187,7 +187,7 @@ export interface GlobalHandlers {
 	/**
 	 * be careful, root event bus could be an empty object if hook is called outside RootEventBusProvider
 	 */
-	root: RootEventBus;
+	root?: Pick<RootEventBus, 'fire'>;
 }
 
 /**
@@ -200,9 +200,11 @@ export const useGlobalHandlers = (): GlobalHandlers => {
 	const remoteRequest = useRemoteRequest();
 	const customEvent = useCustomGlobalEvent();
 	const scEvent = useSimpleCustomGlobalEvent();
-	const rootHandlers = useRootEventBus();
+	const {fire} = useRootEventBus() ?? {};
 	const [handlers] = useState<GlobalHandlers>({
-		alert, dialog, yesNoDialog, remoteRequest, custom: customEvent, sc: scEvent, root: rootHandlers
+		alert, dialog, yesNoDialog, remoteRequest,
+		custom: customEvent, sc: scEvent,
+		root: fire == null ? (void 0) : {fire}
 	});
 	return handlers;
 };

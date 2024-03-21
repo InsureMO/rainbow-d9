@@ -3,6 +3,7 @@ import {Diagnostic, linter, lintGutter} from '@codemirror/lint';
 import {EditorView} from '@codemirror/view';
 import {SyntaxNodeRef, Tree} from '@lezer/common';
 import {ExternalDefKeys, VUtils} from '@rainbow-d9/n1';
+import {N2} from '@rainbow-d9/n3';
 import {
 	ExternalDefsTypes,
 	ExternalDefType,
@@ -11,8 +12,12 @@ import {
 	PlaygroundWidget,
 	PlaygroundWidgets
 } from '../../types';
-import {ATTRIBUTE_VALUE_EXT_PREFIX, ATTRIBUTE_VALUE_ICON_PREFIX} from '../../widget-constants';
-import {findWidgetTypeAndProperty} from './utils';
+import {
+	ATTRIBUTE_VALUE_EXT_PREFIX,
+	ATTRIBUTE_VALUE_ICON_PREFIX,
+	getCommonWidgetAttributes
+} from '../../widget-constants';
+import {findParentWidgetType, findWidgetTypeAndProperty} from './utils';
 
 type ExtMapByKey = Record<ExternalDefKeys, ExternalDefType>;
 /** key is [WidgetType.Property], value is widget type and property array */
@@ -85,24 +90,114 @@ export const createWidgetLinter = (options: {
 	};
 
 	// prepare context
-	const allWidgets = options.widgets.widgets.reduce((map, widget) => {
-		map[widget.$wt] = widget;
+	const allWidgets = options.widgets.widgets
+		.reduce((map, widget) => {
+			map[widget.$wt] = widget;
+			return map;
+		}, {} as Record<PlaygroundWidget['$wt'], PlaygroundWidget>);
+	const allIndependentWidgets = options.widgets.widgets
+		.filter(widget => {
+			if (VUtils.isBlank(widget.$parent)) {
+				return false;
+			} else if (Array.isArray(widget.$parent)) {
+				return widget.$parent.filter(p => VUtils.isNotBlank(p)).length !== 0;
+			} else {
+				return true;
+			}
+		})
+		.reduce((map, widget) => {
+			map[widget.$wt] = widget;
+			return map;
+		}, {} as Record<PlaygroundWidget['$wt'], PlaygroundWidget>);
+	const commonWidgetAttributes = getCommonWidgetAttributes().reduce((map, attr) => {
+		map[attr.name] = attr;
 		return map;
-	}, {} as Record<PlaygroundWidget['$wt'], PlaygroundWidget>);
+	}, {});
 	const extMap = buildExtMap({byKey: {}, byWidgetTypeAndProperty: {}}, options.externalDefsTypes);
 	const iconMap = buildIconsMap({byKey: {}, byWidgetTypeAndProperty: {}}, options.widgets.icons);
 
 	const lintWidgetType = (view: EditorView, node: SyntaxNodeRef, diagnostics: Array<Diagnostic>) => {
-		const type = view.state.sliceDoc(node.from, node.to);
-		if (allWidgets[(type ?? '').trim()] == null) {
+		const type = (view.state.sliceDoc(node.from, node.to) ?? '').trim();
+		if (allWidgets[type] == null) {
 			diagnostics.push({
 				from: node.from, to: node.to,
 				severity: 'error', message: `Widget[${type}] not declared.`
-				// actions: [{
-				// 	name: 'Remove', apply: (view, from, to) => {
-				// 		view.dispatch({changes: {from, to}});
-				// 	}
-				// }]
+			});
+		}
+		if (node.node.parent?.name === 'WidgetDeclaration') {
+			if (node.node.parent.parent?.name?.startsWith('ATXHeading')
+				&& node.node.parent.parent?.name !== 'ATXHeading1'
+				&& type === N2.N2WidgetType.PAGE) {
+				diagnostics.push({
+					from: node.from, to: node.to,
+					severity: 'error', message: 'Widget[Page] is only allowed  on heading level 1.'
+				});
+			} else {
+				let independentWidget = null;
+				let tryToFindParentWidgetType = null;
+				if (node.node.parent.parent?.name?.startsWith('ATXHeading')) {
+					independentWidget = allIndependentWidgets[type];
+					tryToFindParentWidgetType = () => findParentWidgetType(node.node.parent.parent, view.state);
+				} else if (node.node.parent.parent?.name === 'MightBeWidgetDeclaration'
+					&& node.node.parent.parent.parent?.name === 'ListItem') {
+					independentWidget = allIndependentWidgets[type];
+					tryToFindParentWidgetType = () => findParentWidgetType(node.node.parent.parent.parent, view.state);
+				}
+				if (independentWidget != null) {
+					const parents = () => {
+						const {$parent} = independentWidget;
+						if (Array.isArray($parent)) {
+							return $parent.filter(parent => VUtils.isNotBlank(parent));
+						} else {
+							return [$parent];
+						}
+					};
+					const {$wt} = tryToFindParentWidgetType!();
+					if ($wt == null) {
+						// parent widget not found
+						diagnostics.push({
+							from: node.from, to: node.to,
+							severity: 'error',
+							message: `Widget[${type}] is not allowed outside of [${parents().join(', ')}].`
+						});
+					} else {
+						const possibleParents = parents();
+						if (possibleParents.every(parent => parent !== $wt)) {
+							diagnostics.push({
+								from: node.from, to: node.to,
+								severity: 'error',
+								message: `Widget[${type}] is not allowed outside of [${possibleParents.join(', ')}].`
+							});
+						}
+					}
+				}
+			}
+		}
+	};
+	const lintWidgetAttrName = (view: EditorView, tree: Tree, node: SyntaxNodeRef, diagnostics: Array<Diagnostic>) => {
+		const {$wt, property, direct} = findWidgetTypeAndProperty(node.node, view.state, tree);
+		if ($wt == null && direct === true) {
+			diagnostics.push({
+				from: node.from, to: node.to,
+				severity: 'warning', message: `Cannot apply applicable check on property[${property}].`
+			});
+			return;
+		}
+		if (property.startsWith('data-') || commonWidgetAttributes[property] != null) {
+			return;
+		}
+		const widgetType = $wt.trim();
+		if (allWidgets[widgetType] == null) {
+			diagnostics.push({
+				from: node.from, to: node.to,
+				severity: 'error',
+				message: `Property[${property}] on widget[${$wt}] is not allowed.`
+			});
+		} else if ((allWidgets[widgetType].properties ?? []).every(({name}) => name !== (property).trim())) {
+			diagnostics.push({
+				from: node.from, to: node.to,
+				severity: 'error',
+				message: `Property[${property}] on widget[${$wt}] is not allowed.`
 			});
 		}
 	};
@@ -136,8 +231,10 @@ export const createWidgetLinter = (options: {
 		} else if (property != null) {
 			// widget type not found
 			diagnostics.push({
-				from: node.from, to: node.to,
-				severity: 'warning', message: `Cannot apply applicable check on external def on property[${property}].`
+				from: node.from,
+				to: node.to,
+				severity: 'warning',
+				message: `Cannot apply applicable check on external def on property[${property}].`
 			});
 		} else {
 			// neither widget type nor property found
@@ -179,8 +276,10 @@ export const createWidgetLinter = (options: {
 				// widget type matched
 				const properties = exists.map(([, property]) => property).sort().join(', ');
 				diagnostics.push({
-					from: node.from, to: node.to,
-					severity: 'warning', message: `Icon on widget[${$wt}] is allowed on property[${properties}] only.`
+					from: node.from,
+					to: node.to,
+					severity: 'warning',
+					message: `Icon on widget[${$wt}] is allowed on property[${properties}] only.`
 				});
 			}
 		} else if (property != null) {
@@ -219,6 +318,9 @@ export const createWidgetLinter = (options: {
 				switch (node.name) {
 					case 'WidgetDeclarationType':
 						lintWidgetType(view, node, diagnostics);
+						break;
+					case 'WidgetDeclarationAttrName':
+						lintWidgetAttrName(view, tree, node, diagnostics);
 						break;
 					case 'WidgetDeclarationAttrValueExt':
 						lintWidgetAttrValueExt(view, tree, node, diagnostics);

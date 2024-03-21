@@ -61,25 +61,6 @@ export const buildExtOptions = (externalDefsTypes: ExternalDefsTypes, parentKey?
 	}, []).filter(x => x != null);
 };
 
-//TODO:
-// 1. completion:
-// 1.1 [x] attribute name, complete the declaration
-// 1.2 [x] attributes list names,
-// 1.3 [x] $icons,
-// 1.4 [x] @ext
-// 2. syntax highlight:
-// 2.1 [x] $icons,
-// 2.2 [x] @ext
-// 3. Linting
-// 3.1 [x] Widget Type,
-// 3.1.1 Widget Type with Parent,
-// 3.2 attribute name,
-// 3.3 [x] $icons,
-// 3.3.1 [x] $icons with Widget Type and Property
-// 3.4 [x] @ext
-// 3.4.1 [x] @ext with Widget Type and Property
-// 4. Click toolbar icons, and check editor caret, should be first column. otherwise copy to clipboard.
-// 5. [x] javascript code block
 export const createCompleteD9ml = (options: {
 	widgets: Required<PlaygroundWidgets>;
 	externalDefsTypes: ExternalDefsTypes;
@@ -140,7 +121,7 @@ export const createCompleteD9ml = (options: {
 		if (tagBefore == null) {
 			return null;
 		}
-		const widgetType = findWidgetType(nodeBefore, context.state);
+		const {$wt: widgetType} = findWidgetType(nodeBefore, context.state);
 		let typeOptions = WidgetTypeOptions;
 		if (widgetType != null) {
 			typeOptions = typeOptions.filter(option => {

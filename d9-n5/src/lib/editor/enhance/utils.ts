@@ -14,15 +14,10 @@ const findPropertyNode = (node: SyntaxNode): SyntaxNode | undefined => {
 	return node;
 };
 
-export const findProperty = (node: SyntaxNode, state: EditorState): string | undefined => {
-	const propertyNode = findPropertyNode(node);
-	return propertyNode == null ? (void 0) : state.sliceDoc(node.from, node.to);
-};
-
 /**
  * current is a ListItem, to find the widget type which leads this item.
  */
-export const findWidgetType = (node: SyntaxNode, state: EditorState): string | undefined => {
+export const findWidgetType = (node: SyntaxNode, state: EditorState): { $wt?: string, direct?: boolean } => {
 	const bulletList = node.parent;
 	if (bulletList == null || bulletList.name !== 'BulletList') {
 		return (void 0);
@@ -34,8 +29,22 @@ export const findWidgetType = (node: SyntaxNode, state: EditorState): string | u
 	// check the parent, it might be Document or ListItem or something else
 	const parent = bulletList.parent;
 	if (parent == null) {
-		return (void 0);
+		return {};
 	}
+	const tryToFind = (declaration: SyntaxNode, heading: boolean): { $wt?: string, direct?: boolean } => {
+		if (declaration == null || declaration.name !== 'WidgetDeclaration') {
+			return {};
+		}
+		const declarationType = declaration.firstChild;
+		if (declarationType == null || declarationType.name !== 'WidgetDeclarationType') {
+			if (!heading) {
+				//TODO SOMETIMES, PROPERTY ALSO CAN USE SUB LIST TO DESCRIBE MORE DETAILS
+				// BUT CURRENTLY, ONLY FIND THE WIDGET DECLARATION TYPE
+			}
+			return {};
+		}
+		return {$wt: (state.sliceDoc(declarationType.from, declarationType.to) ?? '').trim(), direct: true};
+	};
 	if (parent.name === 'Document') {
 		// find the closest heading, there still can be a ListItem which declares widget anyway,
 		// but since it may be manually adjusted to ensure the grammatical correctness,
@@ -45,49 +54,62 @@ export const findWidgetType = (node: SyntaxNode, state: EditorState): string | u
 			previous = parent.childBefore(previous.from);
 		}
 		if (previous == null) {
-			return (void 0);
+			return {};
 		}
 		// if the Heading is a widget declaration, check follows:
 		// firstChild is HeadMark, nextSibling is WidgetDeclaration
-		const declaration = previous.firstChild?.nextSibling;
-		if (declaration == null || declaration.name !== 'WidgetDeclaration') {
-			return (void 0);
-		}
-		const declarationType = declaration.firstChild;
-		if (declarationType == null || declarationType.name !== 'WidgetDeclarationType') {
-			return (void 0);
-		}
-		return state.sliceDoc(declarationType.from, declarationType.to);
+		return tryToFind(previous.firstChild?.nextSibling, true);
 	} else if (parent.name !== 'ListItem') {
-		return (void 0);
+		return {};
+	} else {
+		// if the ListItem is a widget declaration, check follows:
+		// firstChild is ListMark, nextSibling is Paragraph or MightBeWidgetDeclaration, firstChild could be WidgetDeclaration
+		return tryToFind(parent.firstChild?.nextSibling?.firstChild, false);
 	}
-	// if the ListItem is a widget declaration, check follows:
-	// firstChild is ListMark, nextSibling is Paragraph, firstChild could be WidgetDeclaration
-	const declaration = parent.firstChild?.nextSibling?.firstChild;
-	if (declaration == null || declaration.name !== 'WidgetDeclaration') {
-		return (void 0);
-	}
-	const declarationType = declaration.firstChild;
-	if (declarationType == null || declarationType.name !== 'WidgetDeclarationType') {
-		//TODO SOMETIMES, PROPERTY ALSO CAN USE THE LIST TO DESCRIBE MORE DETAILS
-		// BUT CURRENTLY, ONLY FIND THE WIDGET DECLARATION TYPE
-		return (void 0);
-	}
+};
 
-	return state.sliceDoc(declarationType.from, declarationType.to);
+/**
+ * given node should be ListItem or ATXHeading1-6, otherwise return undefined.
+ */
+export const findParentWidgetType = (node: SyntaxNode, state: EditorState): string | undefined => {
+	if (node.name === 'ListItem') {
+		return findWidgetType(node, state).$wt;
+	} else if (node.name.startsWith('ATXHeading')) {
+		const level = Number(node.name.substring(10));
+		let previous = node.prevSibling;
+		while (previous != null) {
+			if (previous.name.startsWith('ATXHeading')) {
+				const previousLevel = Number(previous.name.substring(10));
+				if (previousLevel < level) {
+					const typeNode = previous.firstChild?.nextSibling?.firstChild;
+					// should be HeadMark, WidgetDeclaration, WidgetDeclarationType
+					if (typeNode?.name === 'WidgetDeclarationType') {
+						return (state.sliceDoc(typeNode.from, typeNode.to) ?? '').trim();
+					} else {
+						return (void 0);
+					}
+				}
+			}
+			previous = previous.prevSibling;
+		}
+		return (void 0);
+	} else {
+		return (void 0);
+	}
 };
 
 interface WidgetTypeAndProperty {
 	$wt?: string;
 	property?: string;
+	direct?: boolean;
 }
 
-export const findWidgetTypeAndProperty = (node: SyntaxNode, state: EditorState, tree: Tree) => {
+export const findWidgetTypeAndProperty = (node: SyntaxNode, state: EditorState, tree: Tree): WidgetTypeAndProperty => {
 	const propertyNode = findPropertyNode(node);
 	if (propertyNode == null) {
 		return {} as WidgetTypeAndProperty;
 	}
-	const property = state.sliceDoc(propertyNode.from, propertyNode.to);
+	const property = (state.sliceDoc(propertyNode.from, propertyNode.to) ?? '').trim();
 	let nodeBefore = tree.resolveInner(propertyNode.from, -1);
 	if (nodeBefore == null) {
 		return {property};
@@ -95,8 +117,10 @@ export const findWidgetTypeAndProperty = (node: SyntaxNode, state: EditorState, 
 		nodeBefore = tree.resolveInner(nodeBefore.from, -1);
 	}
 	if (nodeBefore.name === 'ListItem') {
-		const $wt = findWidgetType(nodeBefore, state);
-		return {$wt, property};
+		//TODO CURRENTLY ONLY ONE LEVEL UP, THEREFORE DIRECT ALWAYS BE TRUE
+		// DEPENDS ON THE LOGIC OF findWidgetType
+		const {$wt, direct} = findWidgetType(nodeBefore, state);
+		return {$wt, property, direct};
 	} else {
 		return {property};
 	}
