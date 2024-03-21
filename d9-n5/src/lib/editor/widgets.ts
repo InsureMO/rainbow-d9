@@ -2,6 +2,7 @@ import {CssVars, DOM_KEY_WIDGET, Utils} from '@rainbow-d9/n2';
 import styled from 'styled-components';
 import {PlaygroundCssVars} from '../widgets';
 
+// noinspection CssUnusedSymbol
 export const EditorWrapper = styled.div.attrs<{ editorSize?: number }>(
 	({editorSize}) => {
 		return {
@@ -17,6 +18,38 @@ export const EditorWrapper = styled.div.attrs<{ editorSize?: number }>(
     grid-column: 2;
     grid-template-columns: 1fr;
     overflow: hidden;
+
+    &[data-editor-badge=false] {
+        > div[data-w=d9-playground-editor-panel] {
+            > div.cm-editor div.cm-line {
+                span.d9-playground-editor-heading1,
+                span.d9-playground-editor-heading2,
+                span.d9-playground-editor-heading3,
+                span.d9-playground-editor-heading4,
+                span.d9-playground-editor-heading5,
+                span.d9-playground-editor-heading6,
+                span.d9-playground-editor-list {
+                    & ~ span.d9-playground-editor-widget-declaration-icon {
+                        &.d9-playground-editor-widget-declaration-type-icon,
+                        &.d9-playground-editor-widget-declaration-headline-icon,
+                        &.d9-playground-editor-widget-declaration-property-icon,
+                        &.d9-playground-editor-widget-declaration-id-icon,
+                        &.d9-playground-editor-widget-declaration-flag-icon,
+                        &.d9-playground-editor-widget-declaration-attr-name-icon {
+                            width: 0;
+                            padding: 0;
+                        }
+                    }
+                }
+
+                span.d9-playground-editor-list {
+                    & ~ span.d9-playground-editor-widget-declaration-icon.d9-playground-editor-widget-declaration-attr-name-icon {
+                        width: 0;
+                        padding: 0;
+                    }
+                }
+            }
+        }
 `;
 // noinspection CssUnusedSymbol
 export const EditorPanel = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-playground-editor-panel'})`

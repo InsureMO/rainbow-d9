@@ -19,6 +19,7 @@ import {EditorPanel, EditorWrapper} from './widgets';
 export interface EditorState {
 	size?: number;
 	editor?: EditorView;
+	editorBadge: boolean;
 }
 
 export const Editor = (props: EditorProps) => {
@@ -30,7 +31,7 @@ export const Editor = (props: EditorProps) => {
 
 	const ref = useRef<HTMLDivElement>(null);
 	const {on, off, fire} = usePlaygroundEventBus();
-	const [state, setState] = useState<EditorState>({});
+	const [state, setState] = useState<EditorState>({editorBadge: false});
 	useEffect(() => {
 		if (ref.current == null) {
 			return;
@@ -85,8 +86,17 @@ export const Editor = (props: EditorProps) => {
 			off(PlaygroundEventTypes.RESIZE_EDITOR, onResizeEditor);
 		};
 	}, [on, off]);
+	useEffect(() => {
+		const onSwitchEditorBadge = (visible: boolean) => {
+			setState(state => ({...state, editorBadge: visible}));
+		};
+		on(PlaygroundEventTypes.SWITCH_EDITOR_BADGE, onSwitchEditorBadge);
+		return () => {
+			off(PlaygroundEventTypes.SWITCH_EDITOR_BADGE, onSwitchEditorBadge);
+		};
+	}, [on, off]);
 
-	return <EditorWrapper editorSize={state.size} {...rest}>
+	return <EditorWrapper editorSize={state.size} {...rest} data-editor-badge={state.editorBadge}>
 		<EditorPanel ref={ref}/>
 	</EditorWrapper>;
 };

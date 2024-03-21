@@ -175,6 +175,7 @@ export const ToolbarButton = (props: { icon: PlaygroundIcons | string; tooltip?:
 };
 
 export interface PrimaryBarState {
+	editorBadge: boolean;
 	zen: boolean;
 	maximized: boolean;
 	group: PlaygroundWidgetGroupKey | string;
@@ -189,7 +190,7 @@ export const PrimaryBar = (props: PrimaryBarProps) => {
 
 	const {fire} = usePlaygroundEventBus();
 	const [state, setState] = useState<PrimaryBarState>({
-		zen: false, maximized: false, group: groups[0]?.key ?? ''
+		editorBadge: false, zen: false, maximized: false, group: groups[0]?.key ?? ''
 	});
 	useEffect(() => {
 		const onFullScreenChanged = () => {
@@ -206,6 +207,14 @@ export const PrimaryBar = (props: PrimaryBarProps) => {
 	const onGroupClicked = (group: PlaygroundWidgetGroupKey | string) => () => {
 		setState(state => ({...state, group}));
 		fire(PlaygroundEventTypes.WIDGET_GROUP_CHANGE, group);
+	};
+	const onShowBadgeClicked = () => {
+		fire(PlaygroundEventTypes.SWITCH_EDITOR_BADGE, true);
+		setState(state => ({...state, editorBadge: true}));
+	};
+	const onHideBadgeClicked = () => {
+		fire(PlaygroundEventTypes.SWITCH_EDITOR_BADGE, false);
+		setState(state => ({...state, editorBadge: false}));
 	};
 	const onMaxClicked = () => {
 		fire(PlaygroundEventTypes.MAXIMIZE);
@@ -230,6 +239,13 @@ export const PrimaryBar = (props: PrimaryBarProps) => {
 			                      click={onGroupClicked(group)}
 			                      data-active={state.group === group} key={group}/>;
 		})}
+		<ToolbarSeparator/>
+		{state.editorBadge
+			? <ToolbarButton icon={PlaygroundIcons.HIDE_EDITOR_BADGE} tooltip="Hide Editor Badge"
+			                 click={onHideBadgeClicked}/>
+			:
+			<ToolbarButton icon={PlaygroundIcons.SHOW_EDITOR_BADGE} tooltip="Show Editor Badge"
+			               click={onShowBadgeClicked}/>}
 		<ToolbarSeparator/>
 		{!state.zen && state.maximized
 			? <ToolbarButton icon={PlaygroundIcons.MINIMIZE} tooltip="Quit Maximization" click={onMinClicked}/>

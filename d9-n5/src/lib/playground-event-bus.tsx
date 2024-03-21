@@ -3,6 +3,7 @@ import React, {createContext, ReactNode, useContext} from 'react';
 import {PlaygroundWidgetGroupKey} from './types';
 
 export enum PlaygroundEventTypes {
+	SWITCH_EDITOR_BADGE = 'switch-editor-badge',
 	MAXIMIZE = 'maximize',
 	QUIT_MAXIMIZE = 'quit-maximize',
 	ZEN = 'zen',
@@ -14,6 +15,12 @@ export enum PlaygroundEventTypes {
 }
 
 export interface PlaygroundEventBus {
+	fire(type: PlaygroundEventTypes.SWITCH_EDITOR_BADGE, visible: boolean): this;
+
+	on(type: PlaygroundEventTypes.SWITCH_EDITOR_BADGE, listener: (visible: boolean) => void): this;
+
+	off(type: PlaygroundEventTypes.SWITCH_EDITOR_BADGE, listener: (visible: boolean) => void): this;
+
 	fire(type: PlaygroundEventTypes.MAXIMIZE): this;
 
 	on(type: PlaygroundEventTypes.MAXIMIZE, listener: () => void): this;

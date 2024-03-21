@@ -19,6 +19,7 @@ import {DecoNumberIcon} from './deco-number';
 import {DecoPasswordIcon} from './deco-password';
 import {DisplayGroupIcon} from './display-group';
 import {DropdownIcon} from './dropdown';
+import {HideEditorBadgeIcon} from './hide-editor-badge';
 import {InputIcon} from './input';
 import {InputGroupIcon} from './input-group';
 import {LabelIcon} from './label';
@@ -33,6 +34,7 @@ import {RadioIcon} from './radio';
 import {RadiosIcon} from './radios';
 import {RibsIcon} from './ribs';
 import {SectionIcon} from './section';
+import {ShowEditorBadgeIcon} from './show-editor-badge';
 import {TableIcon} from './table';
 import {TabsIcon} from './tabs';
 import {TextAreaIcon} from './textarea';
@@ -47,6 +49,8 @@ export enum PlaygroundIcons {
 	INPUT_GROUP = 'playground.input-group',
 	OPTIONS_GROUP = 'playground.options-group',
 	DISPLAY_GROUP = 'playground.display-group',
+	SHOW_EDITOR_BADGE = 'playground.show-editor-badge',
+	HIDE_EDITOR_BADGE = 'playground.hide-editor-badge',
 	MAXIMIZE = 'playground.max',
 	MINIMIZE = 'playground.min',
 	ZEN = 'playground.zen',
@@ -95,6 +99,8 @@ Icons.Registrar.register({
 	[PlaygroundIcons.OPTIONS_GROUP]: () => <OptionsGroupIcon/>,
 	[PlaygroundIcons.DISPLAY_GROUP]: () => <DisplayGroupIcon/>,
 
+	[PlaygroundIcons.SHOW_EDITOR_BADGE]: () => <ShowEditorBadgeIcon/>,
+	[PlaygroundIcons.HIDE_EDITOR_BADGE]: () => <HideEditorBadgeIcon/>,
 	[PlaygroundIcons.MAXIMIZE]: () => <MaxIcon/>,
 	[PlaygroundIcons.MINIMIZE]: () => <MinIcon/>,
 	[PlaygroundIcons.ZEN]: () => <ZenIcon/>,
@@ -141,6 +147,7 @@ Icons.Registrar.register({
 export {
 	ContainerGroupIcon, InputGroupIcon,
 
+	ShowEditorBadgeIcon, HideEditorBadgeIcon,
 	MaxIcon, MinIcon, ZenIcon, WindowIcon,
 
 	SectionIcon, BoxIcon, RibsIcon, TabsIcon, TableIcon, TreeIcon, WizardIcon,
