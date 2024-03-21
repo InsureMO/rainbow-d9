@@ -13,6 +13,7 @@ import {
 	ATTRIBUTE_VALUE_REF_START,
 	getCommonWidgetAttributes
 } from '../../widget-constants';
+import {findWidgetType} from './utils';
 
 export interface WidgetTypeCompletion extends Completion {
 	$parent?: WidgetType | Array<WidgetType>;
@@ -60,71 +61,12 @@ export const buildExtOptions = (externalDefsTypes: ExternalDefsTypes, parentKey?
 	}, []).filter(x => x != null);
 };
 
-/**
- * current is a ListItem, to find the widget type which leads this item.
- */
-export const findWidgetType = (node: SyntaxNode, context: CompletionContext): string | undefined => {
-	const bulletList = node.parent;
-	if (bulletList == null || bulletList.name !== 'BulletList') {
-		return (void 0);
-	}
-	//TODO CONSIDERING THIS NODE IS NOT THE FIRST CHILD OF PARENT,
-	// IF PREVIOUS SIBLINGS CONTAINS WIDGET DECLARATION, WHICH MEANS THIS NODE CANNOT BE A PROPERTY DECLARATION
-	// HOWEVER, FOR NOW, LET'S IGNORE THIS SITUATION, AS IT MAY BE MANUALLY ADJUSTED TO ENSURE GRAMMATICAL CORRECTNESS.
-
-	// check the parent, it might be Document or ListItem or something else
-	const parent = bulletList.parent;
-	if (parent == null) {
-		return (void 0);
-	}
-	if (parent.name === 'Document') {
-		// find the closest heading, there still can be a ListItem which declares widget anyway,
-		// but since it may be manually adjusted to ensure the grammatical correctness,
-		// so for now, ignore the ListItem
-		let previous = parent.childBefore(node.from);
-		while (previous != null && !previous.name.startsWith('ATXHeading')) {
-			previous = parent.childBefore(previous.from);
-		}
-		if (previous == null) {
-			return (void 0);
-		}
-		// if the Heading is a widget declaration, check follows:
-		// firstChild is HeadMark, nextSibling is WidgetDeclaration
-		const declaration = previous.firstChild?.nextSibling;
-		if (declaration == null || declaration.name !== 'WidgetDeclaration') {
-			return (void 0);
-		}
-		const declarationType = declaration.firstChild;
-		if (declarationType == null || declarationType.name !== 'WidgetDeclarationType') {
-			return (void 0);
-		}
-		return context.state.sliceDoc(declarationType.from, declarationType.to);
-	} else if (parent.name !== 'ListItem') {
-		return (void 0);
-	}
-	// if the ListItem is a widget declaration, check follows:
-	// firstChild is ListMark, nextSibling is Paragraph, firstChild could be WidgetDeclaration
-	const declaration = parent.firstChild?.nextSibling?.firstChild;
-	if (declaration == null || declaration.name !== 'WidgetDeclaration') {
-		return (void 0);
-	}
-	const declarationType = declaration.firstChild;
-	if (declarationType == null || declarationType.name !== 'WidgetDeclarationType') {
-		//TODO SOMETIMES, PROPERTY ALSO CAN USE THE LIST TO DESCRIBE MORE DETAILS
-		// BUT CURRENTLY, ONLY FIND THE WIDGET DECLARATION TYPE
-		return (void 0);
-	}
-
-	return context.state.sliceDoc(declarationType.from, declarationType.to);
-};
-
 //TODO:
 // 1. completion:
 // 1.1 [x] attribute name, complete the declaration
 // 1.2 [x] attributes list names,
 // 1.3 [x] $icons,
 // 1.4 [x] @ext
-// 1.4.1 $icons with Widget Type and Property
 // 2. syntax highlight:
 // 2.1 [x] $icons,
 // 2.2 [x] @ext
@@ -132,9 +74,10 @@ export const findWidgetType = (node: SyntaxNode, context: CompletionContext): st
 // 3.1 [x] Widget Type,
 // 3.1.1 Widget Type with Parent,
 // 3.2 attribute name,
-// 3.3 $icons,
+// 3.3 [x] $icons,
+// 3.3.1 [x] $icons with Widget Type and Property
 // 3.4 [x] @ext
-// 3.4.1 @ext with Widget Type and Property
+// 3.4.1 [x] @ext with Widget Type and Property
 // 4. Click toolbar icons, and check editor caret, should be first column. otherwise copy to clipboard.
 // 5. [x] javascript code block
 export const createCompleteD9ml = (options: {
@@ -164,7 +107,7 @@ export const createCompleteD9ml = (options: {
 	];
 	const WidgetConstPrefixOptions: Array<Completion> = widgets.constants
 		.map(({$prefix, label, description}) => ({label: $prefix, detail: label, info: description, type: 'variable'}));
-	const WidgetIconOptions: Array<Completion> = widgets.icons
+	const WidgetIconOptions: Array<Completion> = widgets.icons.icons
 		.map(({$key, label, description}) => ({label: $key, detail: label, info: description, type: 'variable'}));
 	const WidgetRefPrefixOptions: Array<Completion> = widgets.extensions
 		.map(({$prefix, label, description}) => ({label: $prefix, detail: label, info: description, type: 'variable'}));
@@ -197,7 +140,7 @@ export const createCompleteD9ml = (options: {
 		if (tagBefore == null) {
 			return null;
 		}
-		const widgetType = findWidgetType(nodeBefore, context);
+		const widgetType = findWidgetType(nodeBefore, context.state);
 		let typeOptions = WidgetTypeOptions;
 		if (widgetType != null) {
 			typeOptions = typeOptions.filter(option => {

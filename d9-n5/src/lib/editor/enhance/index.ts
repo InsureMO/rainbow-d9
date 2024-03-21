@@ -12,11 +12,9 @@ export const d9mlExtensions: MarkdownExtension = [{
 
 export * from './tags';
 export * from './nodes';
-
+export * from './utils';
 export * from './declaration-icon';
 export * from './highlight';
 export * from './completion';
-
 export * from './widget-parse';
-
 export * from './linter';

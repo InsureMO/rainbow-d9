@@ -3,6 +3,8 @@ import {PlaygroundIcons} from './icons';
 import {
 	PlaygroundConstant,
 	PlaygroundIcon,
+	PlaygroundIconApplicableTo,
+	PlaygroundIconsUsage,
 	PlaygroundReference,
 	PlaygroundWidget,
 	PlaygroundWidgetGroup,
@@ -540,8 +542,21 @@ export const N2Icons: Array<PlaygroundIcon> = [
 	{$key: 'cart'}
 ];
 
-export const computeIcons = (icons: Array<PlaygroundIcon>, useN2: boolean) => {
-	return [...(useN2 ? N2Icons : []), ...icons];
+export const N2IconsApplicableTo: Array<PlaygroundIconApplicableTo> = [
+	{$wt: 'Button', properties: ['leads', 'tails']},
+	{$wt: 'Label', properties: ['leads', 'tails']},
+	{$wt: 'Caption', properties: ['leads', 'tails']},
+	{$wt: 'Badge', properties: ['leads', 'tails']},
+	{$wt: 'DecoInput', properties: ['leads', 'tails']},
+	{$wt: 'DecoNumber', properties: ['leads', 'tails']},
+	{$wt: 'DecoPwd', properties: ['leads', 'tails']}
+];
+
+export const computeIcons = (icons: PlaygroundIconsUsage, useN2: boolean): PlaygroundIconsUsage => {
+	return {
+		icons: [...(useN2 ? N2Icons : []), ...icons.icons],
+		applicableTo: [...(useN2 ? N2IconsApplicableTo : []), ...icons.applicableTo]
+	};
 };
 
 export const computeConstants = (constants: Array<PlaygroundConstant>, useN2: boolean): Array<PlaygroundConstant> => {

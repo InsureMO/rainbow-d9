@@ -21,7 +21,9 @@ export const useAvailableWidgets = (widgets: PlaygroundWidgets, useN2: boolean) 
 		return {
 			groups: computeWidgetGroups(widgets?.groups ?? [], useN2),
 			widgets: computeWidgets(widgets?.widgets ?? [], useN2),
-			icons: computeIcons(widgets?.icons ?? [], useN2),
+			icons: computeIcons({
+				icons: widgets?.icons.icons ?? [], applicableTo: widgets?.icons.applicableTo ?? []
+			}, useN2),
 			constants: computeConstants(widgets?.constants ?? [], useN2),
 			extensions: computeReferences(widgets?.extensions ?? [], useN2)
 		};
@@ -30,7 +32,9 @@ export const useAvailableWidgets = (widgets: PlaygroundWidgets, useN2: boolean) 
 		setAvailableWidgets({
 			groups: computeWidgetGroups(widgets?.groups ?? [], useN2),
 			widgets: computeWidgets(widgets?.widgets ?? [], useN2),
-			icons: computeIcons(widgets?.icons ?? [], useN2),
+			icons: computeIcons({
+				icons: widgets?.icons.icons ?? [], applicableTo: widgets?.icons.applicableTo ?? []
+			}, useN2),
 			constants: computeConstants(widgets?.constants ?? [], useN2),
 			extensions: computeReferences(widgets?.extensions ?? [], useN2)
 		});

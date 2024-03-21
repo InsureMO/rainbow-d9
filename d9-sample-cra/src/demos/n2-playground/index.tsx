@@ -1,6 +1,6 @@
 import {ContainerDef, ExternalDefIndicator, ExternalDefs, StandaloneRoot} from '@rainbow-d9/n1';
 import {DropdownOption, GlobalRoot} from '@rainbow-d9/n2';
-import {PlaygroundDef} from '@rainbow-d9/n5';
+import {ExternalDefsTypes, PlaygroundDef} from '@rainbow-d9/n5';
 import {useDemoMarkdown} from '../use-demo-markdown';
 import DemoData from './demo.json';
 import {markdown as DemoContent} from './demo.md';
@@ -8,6 +8,7 @@ import {markdown as DemoContent} from './demo.md';
 export const N2Playground = () => {
 	const def = useDemoMarkdown(DemoContent);
 
+	const DropdownOptionsWidgets = ['Dropdown', 'MultiDropdown', 'Checkboxes', 'Checks', 'Radios'];
 	const externalDefs: ExternalDefs = {
 		playground: {
 			externalDefs: {
@@ -30,11 +31,15 @@ export const N2Playground = () => {
 				};
 			},
 			externalDefsTypes: {
-				codes: {$wt: 'Dropdown', properties: ['options'], label: 'Retrieve available options from remote.'},
+				codes: DropdownOptionsWidgets.map($wt => ({
+					$wt, properties: ['options'], label: 'Retrieve available options from remote.'
+				})),
 				staticCodes: {
-					gender: {$wt: 'Dropdown', properties: ['options'], label: 'Gender options.'}
+					gender: DropdownOptionsWidgets.map($wt => ({
+						$wt, properties: ['options'], label: 'Gender options.'
+					}))
 				}
-			}
+			} as ExternalDefsTypes
 		}
 	};
 
@@ -47,6 +52,7 @@ export const N2Playground = () => {
 - Button::
   - $fc
   - $pos: r:2
+  - leads: $icons.angleLeft; $icons.angleRight
   - text: Test Button
   - click:
     \`\`\`

@@ -1,25 +1,42 @@
 import {syntaxTree} from '@codemirror/language';
 import {Diagnostic, linter, lintGutter} from '@codemirror/lint';
 import {EditorView} from '@codemirror/view';
-import {SyntaxNodeRef} from '@lezer/common';
+import {SyntaxNodeRef, Tree} from '@lezer/common';
 import {ExternalDefKeys, VUtils} from '@rainbow-d9/n1';
-import {ExternalDefsTypes, ExternalDefType, PlaygroundWidget, PlaygroundWidgets} from '../../types';
-import {ATTRIBUTE_VALUE_EXT_PREFIX} from '../../widget-constants';
+import {
+	ExternalDefsTypes,
+	ExternalDefType,
+	PlaygroundIcon,
+	PlaygroundIconsUsage,
+	PlaygroundWidget,
+	PlaygroundWidgets
+} from '../../types';
+import {ATTRIBUTE_VALUE_EXT_PREFIX, ATTRIBUTE_VALUE_ICON_PREFIX} from '../../widget-constants';
+import {findWidgetTypeAndProperty} from './utils';
 
 type ExtMapByKey = Record<ExternalDefKeys, ExternalDefType>;
-/** key is [WidgetType.Property] or [WidgetType] */
-type ExtMapByWidgetTypeAndProperty = Record<string, ExtMapByKey>;
+/** key is [WidgetType.Property], value is widget type and property array */
+type ExtMapByWidgetTypeAndProperty = Record<string, Array<[string, string]>>;
 
 interface ExtMap {
 	byKey: ExtMapByKey;
 	byWidgetTypeAndProperty: ExtMapByWidgetTypeAndProperty;
 }
 
+type IconMapByKey = Record<string, PlaygroundIcon>
+/** key is [WidgetType.Property], value is widget type and property */
+type IconMapByWidgetTypeAndProperty = Record<string, [string, string]>;
+
+interface IconMap {
+	byKey: IconMapByKey;
+	byWidgetTypeAndProperty: IconMapByWidgetTypeAndProperty;
+}
+
 export const createWidgetLinter = (options: {
 	widgets: Required<PlaygroundWidgets>;
 	externalDefsTypes: ExternalDefsTypes;
 }) => {
-	const putIntoExtMap = (map: ExtMap, edt: ExternalDefType, key: string, parentKey?: string) => {
+	const putIntoExtMap = (map: ExtMap, edt: ExternalDefType, key: string, parentKey?: string): void => {
 		const id = parentKey == null ? key : `${parentKey}.${key}`;
 		map.byKey[id] = edt;
 		(edt.properties ?? [])
@@ -27,13 +44,13 @@ export const createWidgetLinter = (options: {
 			.map(property => {
 				const $wtAndPp = `${edt.$wt}.${property}`;
 				if (map.byWidgetTypeAndProperty[$wtAndPp] == null) {
-					map.byWidgetTypeAndProperty[$wtAndPp] = {[id]: edt};
+					map.byWidgetTypeAndProperty[$wtAndPp] = [[edt.$wt, property]];
 				} else {
-					map.byWidgetTypeAndProperty[$wtAndPp][id] = edt;
+					map.byWidgetTypeAndProperty[$wtAndPp].push([edt.$wt, property]);
 				}
 			});
 	};
-	const buildExtMap = (all: ExtMap, externalDefsTypes: ExternalDefsTypes, parentKey?: string) => {
+	const buildExtMap = (all: ExtMap, externalDefsTypes: ExternalDefsTypes, parentKey?: string): ExtMap => {
 		return Object.keys(externalDefsTypes).reduce((map, key) => {
 			const value = externalDefsTypes[key];
 			if (value == null) {
@@ -57,6 +74,15 @@ export const createWidgetLinter = (options: {
 			return map;
 		}, all);
 	};
+	const buildIconsMap = (all: IconMap, icons: PlaygroundIconsUsage): IconMap => {
+		icons.icons.forEach(icon => all.byKey[icon.$key] = icon);
+		icons.applicableTo.forEach(applicableTo => {
+			(applicableTo.properties ?? []).forEach(property => {
+				all.byWidgetTypeAndProperty[`${applicableTo.$wt}.${property}`] = [applicableTo.$wt, property];
+			});
+		});
+		return all;
+	};
 
 	// prepare context
 	const allWidgets = options.widgets.widgets.reduce((map, widget) => {
@@ -64,6 +90,7 @@ export const createWidgetLinter = (options: {
 		return map;
 	}, {} as Record<PlaygroundWidget['$wt'], PlaygroundWidget>);
 	const extMap = buildExtMap({byKey: {}, byWidgetTypeAndProperty: {}}, options.externalDefsTypes);
+	const iconMap = buildIconsMap({byKey: {}, byWidgetTypeAndProperty: {}}, options.widgets.icons);
 
 	const lintWidgetType = (view: EditorView, node: SyntaxNodeRef, diagnostics: Array<Diagnostic>) => {
 		const type = view.state.sliceDoc(node.from, node.to);
@@ -79,7 +106,7 @@ export const createWidgetLinter = (options: {
 			});
 		}
 	};
-	const lintWidgetAttrValueExt = (view: EditorView, node: SyntaxNodeRef, diagnostics: Array<Diagnostic>) => {
+	const lintWidgetAttrValueExt = (view: EditorView, tree: Tree, node: SyntaxNodeRef, diagnostics: Array<Diagnostic>) => {
 		const ext = view.state.sliceDoc(node.from, node.to);
 		const key = (ext ?? '').trim().substring(ATTRIBUTE_VALUE_EXT_PREFIX.length);
 		if (extMap.byKey[key] == null) {
@@ -87,27 +114,117 @@ export const createWidgetLinter = (options: {
 				from: node.from, to: node.to,
 				severity: 'error', message: `External def[${ext}] not declared.`
 			});
+			return;
+		}
+		const {$wt, property} = findWidgetTypeAndProperty(node.node, view.state, tree);
+		// @ext is allowed on every property
+		if ($wt != null && property != null) {
+			if (extMap.byWidgetTypeAndProperty[`${$wt}.${property}`] == null) {
+				// declaration not found
+				diagnostics.push({
+					from: node.from, to: node.to,
+					severity: 'warning',
+					message: `Cannot apply applicable check on external def on widget[${$wt}], property[${property}].`
+				});
+			}
+		} else if ($wt != null) {
+			// property not found
+			diagnostics.push({
+				from: node.from, to: node.to,
+				severity: 'warning', message: `Cannot apply applicable check on external def on widget[${$wt}].`
+			});
+		} else if (property != null) {
+			// widget type not found
+			diagnostics.push({
+				from: node.from, to: node.to,
+				severity: 'warning', message: `Cannot apply applicable check on external def on property[${property}].`
+			});
+		} else {
+			// neither widget type nor property found
+			diagnostics.push({
+				from: node.from, to: node.to,
+				severity: 'warning', message: `External def is allowed on widget property only.`
+			});
 		}
 	};
-	const lintWidgetAttrValueIcon = (view: EditorView, node: SyntaxNodeRef, diagnostics: Array<Diagnostic>) => {
-		const ext = view.state.sliceDoc(node.from, node.to);
-
+	const lintWidgetAttrValueIcon = (view: EditorView, tree: Tree, node: SyntaxNodeRef, diagnostics: Array<Diagnostic>) => {
+		const icon = view.state.sliceDoc(node.from, node.to);
+		const key = (icon ?? '').trim().substring(ATTRIBUTE_VALUE_ICON_PREFIX.length);
+		if (iconMap.byKey[key] == null) {
+			diagnostics.push({
+				from: node.from, to: node.to,
+				severity: 'error', message: `Icon[${icon}] not declared.`
+			});
+			return;
+		}
+		const {$wt, property} = findWidgetTypeAndProperty(node.node, view.state, tree);
+		if ($wt != null && property != null) {
+			if (iconMap.byWidgetTypeAndProperty[`${$wt}.${property}`] == null) {
+				// declaration not found, not allowed
+				diagnostics.push({
+					from: node.from, to: node.to,
+					severity: 'error', message: `Icon on widget[${$wt}], property[${property}] is not allowed.`
+				});
+			}
+		} else if ($wt != null) {
+			// property not found
+			const exists = Object.values(iconMap.byWidgetTypeAndProperty).filter(([widgetType]) => widgetType === $wt);
+			if (exists.length === 0) {
+				// widget type not matched, not allowed
+				diagnostics.push({
+					from: node.from, to: node.to,
+					severity: 'error', message: `Icon on widget[${$wt}] is not allowed.`
+				});
+			} else {
+				// widget type matched
+				const properties = exists.map(([, property]) => property).sort().join(', ');
+				diagnostics.push({
+					from: node.from, to: node.to,
+					severity: 'warning', message: `Icon on widget[${$wt}] is allowed on property[${properties}] only.`
+				});
+			}
+		} else if (property != null) {
+			// widget type not found
+			const exists = Object.values(iconMap.byWidgetTypeAndProperty).filter(([, p]) => p === property);
+			if (exists.length === 0) {
+				// property not matched, not allowed
+				diagnostics.push({
+					from: node.from, to: node.to,
+					severity: 'error', message: `Icon on property[${property}] is not allowed.`
+				});
+			} else {
+				// property matched
+				const widgetTypes = exists.map(([$wt]) => $wt).sort().join(', ');
+				diagnostics.push({
+					from: node.from, to: node.to,
+					severity: 'warning',
+					message: `Icon on property[${property}] is allowed on widget[${widgetTypes}] only.`
+				});
+			}
+		} else {
+			// neither widget type nor property found
+			diagnostics.push({
+				from: node.from, to: node.to,
+				severity: 'warning', message: `Icon is allowed on widget property only.`
+			});
+		}
 	};
 
 	return [
 		lintGutter(),
 		linter(view => {
 			const diagnostics: Array<Diagnostic> = [];
-			syntaxTree(view.state).cursor().iterate(node => {
+			const tree = syntaxTree(view.state);
+			tree.cursor().iterate(node => {
 				switch (node.name) {
 					case 'WidgetDeclarationType':
 						lintWidgetType(view, node, diagnostics);
 						break;
 					case 'WidgetDeclarationAttrValueExt':
-						lintWidgetAttrValueExt(view, node, diagnostics);
+						lintWidgetAttrValueExt(view, tree, node, diagnostics);
 						break;
 					case 'WidgetDeclarationAttrValueIcon':
-						lintWidgetAttrValueIcon(view, node, diagnostics);
+						lintWidgetAttrValueIcon(view, tree, node, diagnostics);
 						break;
 				}
 			});

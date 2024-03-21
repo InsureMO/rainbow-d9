@@ -182,6 +182,7 @@ export const EditorPanel = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-playground-ed
                 /** attribute available only in list */
 
                 &.d9-playground-editor-widget-declaration-attr-splitter,
+                &.d9-playground-editor-widget-declaration-attr-value-splitter,
                 &.d9-playground-editor-widget-declaration-attr-name-joint {
                     color: ${PlaygroundCssVars.WIDGET_DECLARATION_SPLITTER_COLOR};
                     margin: 0 4px;

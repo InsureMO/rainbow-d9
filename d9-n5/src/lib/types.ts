@@ -74,6 +74,16 @@ export interface PlaygroundIcon {
 	description?: string;
 }
 
+export interface PlaygroundIconApplicableTo {
+	$wt: WidgetType;
+	properties: Array<string>;
+}
+
+export interface PlaygroundIconsUsage {
+	icons: Array<PlaygroundIcon>;
+	applicableTo: Array<PlaygroundIconApplicableTo>;
+}
+
 export interface PlaygroundConstant {
 	$prefix: string;
 	label?: string;
@@ -89,7 +99,7 @@ export interface PlaygroundReference {
 export interface PlaygroundWidgets {
 	groups?: Array<PlaygroundWidgetGroup>;
 	widgets?: Array<PlaygroundWidget>;
-	icons?: Array<PlaygroundIcon>;
+	icons?: PlaygroundIconsUsage;
 	constants?: Array<PlaygroundConstant>;
 	extensions?: Array<PlaygroundReference>;
 }
