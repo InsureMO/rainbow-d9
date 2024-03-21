@@ -37,11 +37,7 @@ export class WidgetDeclarationWidget extends WidgetType {
 	}
 
 	protected matchWidget(title: string): {
-		$wt: string;
-		headline?: string;
-		$pp?: string;
-		$id?: string;
-		$joint: number
+		$wt: string; headline?: string; $pp?: string; $id?: string; $joint: number
 	} {
 		const segments = title.split(Semantic.HeadingParser.WIDGET_TITLE_SPLITTER);
 		if (segments.length === 1) {

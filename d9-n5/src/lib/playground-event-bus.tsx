@@ -12,6 +12,16 @@ export enum PlaygroundEventTypes {
 	RESIZE_EDITOR = 'resize-editor',
 
 	CONTENT_CHANGED = 'content-changed',
+
+	INSERT_WIDGET_TEMPLATE = 'insert-widget-template',
+}
+
+/** should be -1 if there is no cursor */
+export interface EditorCursor {
+	start: number;
+	end: number;
+	row: number;
+	column: number;
 }
 
 export interface PlaygroundEventBus {
@@ -62,6 +72,12 @@ export interface PlaygroundEventBus {
 	on(type: PlaygroundEventTypes.CONTENT_CHANGED, listener: (content?: string) => void): this;
 
 	off(type: PlaygroundEventTypes.CONTENT_CHANGED, listener: (content?: string) => void): this;
+
+	fire(type: PlaygroundEventTypes.INSERT_WIDGET_TEMPLATE, widgetType: string): this;
+
+	on(type: PlaygroundEventTypes.INSERT_WIDGET_TEMPLATE, listener: (widgetType: string) => void): this;
+
+	off(type: PlaygroundEventTypes.INSERT_WIDGET_TEMPLATE, listener: (widgetType: string) => void): this;
 }
 
 const Context = createContext<PlaygroundEventBus>({} as PlaygroundEventBus);

@@ -1,4 +1,4 @@
-import {VUtils} from '@rainbow-d9/n1';
+import {VUtils, WidgetType} from '@rainbow-d9/n1';
 import {ButtonFill, ButtonInk, CssVars, DOM_KEY_WIDGET, UnwrappedButton} from '@rainbow-d9/n2';
 import React, {MouseEvent, ReactNode, useEffect, useState} from 'react';
 import styled from 'styled-components';
@@ -265,6 +265,7 @@ export interface SecondaryBarState {
 
 export interface WidgetButton {
 	key: string;
+	$wt: WidgetType;
 	icon: PlaygroundIcons | string;
 	tooltip: string;
 }
@@ -277,7 +278,7 @@ export interface SecondaryBarProps {
 export const SecondaryBar = (props: SecondaryBarProps) => {
 	const {groups, buttons} = props;
 
-	const {on, off} = usePlaygroundEventBus();
+	const {on, off, fire} = usePlaygroundEventBus();
 	const [state, setState] = useState<SecondaryBarState>({
 		group: groups[0]?.key ?? ''
 	});
@@ -291,9 +292,14 @@ export const SecondaryBar = (props: SecondaryBarProps) => {
 		};
 	}, [on, off]);
 
+	const onAddWidget = ($wt: WidgetType) => () => {
+		fire(PlaygroundEventTypes.INSERT_WIDGET_TEMPLATE, $wt);
+	};
+
 	return <SecondaryToolbar>
-		{(buttons[state.group] ?? []).map(({key, icon, tooltip}) => {
-			return <ToolbarButton icon={icon} tooltip={tooltip} click={VUtils.noop} key={key}/>;
+		{(buttons[state.group] ?? []).map(button => {
+			const {key, $wt, icon, tooltip} = button;
+			return <ToolbarButton icon={icon} tooltip={tooltip} click={onAddWidget($wt)} key={key}/>;
 		})}
 	</SecondaryToolbar>;
 };
@@ -308,7 +314,9 @@ export const Toolbar = (props: ToolbarProps) => {
 			if (buttons[group] == null) {
 				buttons[group] = [];
 			}
-			buttons[group].push({key: $key ?? $wt, icon, tooltip: VUtils.isBlank(tooltip) ? ($key ?? $wt) : tooltip});
+			buttons[group].push({
+				key: $key ?? $wt, $wt, icon, tooltip: VUtils.isBlank(tooltip) ? ($key ?? $wt) : tooltip
+			});
 		}
 		return buttons;
 	}, {} as Record<PlaygroundWidgetGroupKey | string, Array<WidgetButton>>);

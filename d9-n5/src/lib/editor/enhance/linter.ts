@@ -2,7 +2,7 @@ import {syntaxTree} from '@codemirror/language';
 import {Diagnostic, linter, lintGutter} from '@codemirror/lint';
 import {EditorView} from '@codemirror/view';
 import {SyntaxNodeRef, Tree} from '@lezer/common';
-import {ExternalDefKeys, VUtils} from '@rainbow-d9/n1';
+import {ExternalDefKeys, VUtils, WidgetType} from '@rainbow-d9/n1';
 import {N2} from '@rainbow-d9/n3';
 import {
 	ExternalDefsTypes,
@@ -21,7 +21,7 @@ import {findParentWidgetType, findWidgetTypeAndProperty} from './utils';
 
 type ExtMapByKey = Record<ExternalDefKeys, ExternalDefType>;
 /** key is [WidgetType.Property], value is widget type and property array */
-type ExtMapByWidgetTypeAndProperty = Record<string, Array<[string, string]>>;
+type ExtMapByWidgetTypeAndProperty = Record<`${WidgetType}.string`, Array<[string, string]>>;
 
 interface ExtMap {
 	byKey: ExtMapByKey;
@@ -30,7 +30,7 @@ interface ExtMap {
 
 type IconMapByKey = Record<string, PlaygroundIcon>
 /** key is [WidgetType.Property], value is widget type and property */
-type IconMapByWidgetTypeAndProperty = Record<string, [string, string]>;
+type IconMapByWidgetTypeAndProperty = Record<`${WidgetType}.string`, [string, string]>;
 
 interface IconMap {
 	byKey: IconMapByKey;
@@ -134,7 +134,7 @@ export const createWidgetLinter = (options: {
 				});
 			} else {
 				let independentWidget = null;
-				let tryToFindParentWidgetType = null;
+				let tryToFindParentWidgetType = (): string => (void 0);
 				if (node.node.parent.parent?.name?.startsWith('ATXHeading')) {
 					independentWidget = allIndependentWidgets[type];
 					tryToFindParentWidgetType = () => findParentWidgetType(node.node.parent.parent, view.state);
@@ -152,7 +152,7 @@ export const createWidgetLinter = (options: {
 							return [$parent];
 						}
 					};
-					const {$wt} = tryToFindParentWidgetType!();
+					const $wt = tryToFindParentWidgetType!();
 					if ($wt == null) {
 						// parent widget not found
 						diagnostics.push({

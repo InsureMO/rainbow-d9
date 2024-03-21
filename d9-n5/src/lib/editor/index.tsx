@@ -1,8 +1,10 @@
 import {indentWithTab} from '@codemirror/commands';
 import {javascript} from '@codemirror/lang-javascript';
 import {markdown, markdownLanguage} from '@codemirror/lang-markdown';
+import {syntaxTree} from '@codemirror/language';
 import {EditorState as CodeMirrorState} from '@codemirror/state';
 import {EditorView, keymap, ViewUpdate} from '@codemirror/view';
+import {WidgetType} from '@rainbow-d9/n1';
 import {basicSetup} from 'codemirror';
 import React, {useEffect, useRef, useState} from 'react';
 import {PlaygroundEventTypes, usePlaygroundEventBus} from '../playground-event-bus';
@@ -95,6 +97,37 @@ export const Editor = (props: EditorProps) => {
 			off(PlaygroundEventTypes.SWITCH_EDITOR_BADGE, onSwitchEditorBadge);
 		};
 	}, [on, off]);
+	useEffect(() => {
+		if (state.editor == null) {
+			return;
+		}
+		const onInsertWidgetTemplate = ($wt: WidgetType) => {
+			const editorState = state.editor.state;
+			const {from, to} = editorState.selection.main;
+			if (from !== to) {
+				// TODO something selected (not blank check first), copy to clipboard and alert
+			} else if (from === 0) {
+				// TODO cursor at first line, copy to clipboard and alert
+			} else {
+				const {from: lineFrom, number: lineNumber, text} = editorState.doc.lineAt(from);
+				//TODO check text first
+				// 1. it is heading or list item,
+				// 1.1 no other content in this line
+				// 1.2 if it is a list item, not belongs to any widget
+				// 1.3 therefore means position is ready, insert template, considering the indent
+				// 2. empty line
+				// 2.1 check closest previous line,
+				// 2.1.1 it is heading, goto #1, if not ready, insert template using list item in this heading
+				// 2.1.2 it is list item, goto #1, if not ready, copy to clipboard and alert
+				const tree = syntaxTree(editorState);
+				const node = tree.resolveInner(from, 0);
+			}
+		};
+		on(PlaygroundEventTypes.INSERT_WIDGET_TEMPLATE, onInsertWidgetTemplate);
+		return () => {
+			off(PlaygroundEventTypes.INSERT_WIDGET_TEMPLATE, onInsertWidgetTemplate);
+		};
+	}, [on, off, state.editor]);
 
 	return <EditorWrapper editorSize={state.size} {...rest} data-editor-badge={state.editorBadge}>
 		<EditorPanel ref={ref}/>
