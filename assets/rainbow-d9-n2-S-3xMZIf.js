@@ -4,10 +4,10 @@ var __publicField = (obj, key, value) => {
   __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
   return value;
 };
-import { a as color } from "./vendor-imQJQEqk.js";
-import { R as React, r as reactExports } from "./react-lVPkXQtG.js";
-import { V as VUtils, P as PPUtils, r as registerWidget, c as createLogger, b as useRootEventBus, d as useForceUpdate, M as MUtils, N as NUtils, e as Wrapper, a as useWrapperEventBus, W as WrapperEventTypes, f as useCreateEventBus, g as PROPERTY_PATH_ME, h as MBUtils, R as RootEventTypes, i as useDefaultAttributeValues, j as useAttributesWatch } from "./rainbow-d9-n1-O85VQ--g.js";
-import { q as qe, W as We } from "./styled-components-ziGokluW.js";
+import { a as color } from "./vendor-zG0q0FlX.js";
+import { R as React, r as reactExports } from "./react-ZQbP97Ss.js";
+import { V as VUtils, P as PPUtils, r as registerWidget, c as createLogger, b as useRootEventBus, d as useForceUpdate, M as MUtils, N as NUtils, e as Wrapper, a as useWrapperEventBus, W as WrapperEventTypes, f as useCreateEventBus, g as PROPERTY_PATH_ME, h as MBUtils, R as RootEventTypes, i as useDefaultAttributeValues, j as useAttributesWatch } from "./rainbow-d9-n1-sGxuznDD.js";
+import { q as qe, W as We } from "./styled-components-_vLSNquC.js";
 import { d as dayjs } from "./dayjs-9Z7dW0Q-.js";
 const DOM_KEY_WIDGET = "data-w";
 const DOM_ID_WIDGET = "data-wid";
@@ -1530,7 +1530,7 @@ const useGlobalHandlers = () => {
   const remoteRequest = useRemoteRequest();
   const customEvent = useCustomGlobalEvent();
   const scEvent = useSimpleCustomGlobalEvent();
-  const rootHandlers = useRootEventBus();
+  const { fire } = useRootEventBus() ?? {};
   const [handlers] = reactExports.useState({
     alert,
     dialog,
@@ -1538,7 +1538,7 @@ const useGlobalHandlers = () => {
     remoteRequest,
     custom: customEvent,
     sc: scEvent,
-    root: rootHandlers
+    root: fire == null ? void 0 : { fire }
   });
   return handlers;
 };
@@ -7788,5 +7788,6 @@ export {
   UnwrappedButtonBar as o,
   ButtonBarAlignment as p,
   UnwrappedSection as q,
+  toIntlLabel as t,
   useGlobalEventBus as u
 };

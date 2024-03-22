@@ -4,10 +4,10 @@ var __publicField = (obj, key, value) => {
   __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
   return value;
 };
-import { c as createLogger, N as NUtils, V as VUtils, k as MonitorNodeAttributes, l as Reaction, E as ExternalDefIndicator, P as PPUtils } from "./rainbow-d9-n1-O85VQ--g.js";
-import { O as OptionItemSort, R as REACTION_REFRESH_OPTIONS, c as GlobalEventPrefix } from "./rainbow-d9-n2-mgysu2Eb.js";
-import { f as fromMarkdown, g as gfmTableFromMarkdown, a as gfmStrikethroughFromMarkdown, b as gfmFootnoteFromMarkdown, c as gfmTaskListItemFromMarkdown, d as frontmatterFromMarkdown } from "./mdast-bIX7UtAU.js";
-import { g as gfmTable, h as gfmStrikethrough, i as gfmFootnote, j as gfmTaskListItem, k as frontmatter } from "./micromark-9C3b9oUH.js";
+import { c as createLogger, N as NUtils, V as VUtils, k as MonitorNodeAttributes, l as Reaction, E as ExternalDefIndicator, P as PPUtils } from "./rainbow-d9-n1-sGxuznDD.js";
+import { O as OptionItemSort, R as REACTION_REFRESH_OPTIONS, c as GlobalEventPrefix } from "./rainbow-d9-n2-S-3xMZIf.js";
+import { f as fromMarkdown, g as gfmTableFromMarkdown, a as gfmStrikethroughFromMarkdown, b as gfmFootnoteFromMarkdown, c as gfmTaskListItemFromMarkdown, d as frontmatterFromMarkdown } from "./mdast-tVFtQbC4.js";
+import { g as gfmTable, h as gfmStrikethrough, i as gfmFootnote, j as gfmTaskListItem, k as frontmatter } from "./micromark-zmzywIFW.js";
 const AsyncFunction = Object.getPrototypeOf(async function() {
 }).constructor;
 var ParsedNodeType;
@@ -1184,7 +1184,7 @@ const _ListParser = class _ListParser extends AbstractSemanticNodeWidgetParser {
       if (VUtils.isBlank($wt)) {
         return false;
       }
-      return { $wt, label: VUtils.isBlank(label) ? void 0 : label, $pp };
+      return { $wt, label: VUtils.isBlank(label) ? void 0 : label.trim(), $pp };
     } else {
       const $wt = segments[0].trim();
       const label = segments[1].trim();
@@ -1734,6 +1734,9 @@ const _AbstractTranslator = class _AbstractTranslator {
   }
   postTranslationCorrectionWork(def) {
     const { node } = def;
+    if (node == null) {
+      return def;
+    }
     [
       "$key",
       D9PropertyNames.PROPERTY,
@@ -2792,7 +2795,9 @@ const _WidgetTranslator = class _WidgetTranslator extends AbstractTranslator {
   attemptToFormCell(options) {
     const { $wt, attributes, translator } = options;
     const { label } = attributes;
-    if (this.isForceWrappedByFormCell(attributes) || translator.shouldWrapByFormCell()) {
+    if (this.isForceWrappedByFormCell(attributes)) {
+      return this.tryToWrapByFormCell($wt, label ?? "");
+    } else if (translator.shouldWrapByFormCell()) {
       return this.tryToWrapByFormCell($wt, label);
     } else if (label == null || typeof label === "string" && VUtils.isBlank(label)) {
       return { $wt };
@@ -3834,8 +3839,8 @@ class N2LabelTranslator extends SpecificWidgetTranslator {
   getSupportedType() {
     return N2WidgetType.LABEL;
   }
-  shouldTranslateLabelAttribute() {
-    return false;
+  getToWidgetAttributeNames() {
+    return [...super.getToWidgetAttributeNames(), "text"];
   }
   redressProperties(def) {
     return super.redressProperties(N2CaptionRedressLabelAndText({ ...def, labelOnValue: true }));
@@ -3854,8 +3859,8 @@ class N2BadgeTranslator extends SpecificWidgetTranslator {
   getSupportedType() {
     return N2WidgetType.BADGE;
   }
-  shouldTranslateLabelAttribute() {
-    return false;
+  getToWidgetAttributeNames() {
+    return [...super.getToWidgetAttributeNames(), "text"];
   }
   redressProperties(def) {
     return super.redressProperties(N2CaptionRedressLabelAndText(def));
@@ -4283,25 +4288,46 @@ class DocParser {
   parseDoc(def) {
     if (VUtils.isBlank(def)) {
       N3Logger.error("No content determined in given markdown content.", DocParser.name);
-      return { node: { $wt: "Page" }, success: false };
+      return {
+        node: { $wt: "Page" },
+        success: false,
+        error: "No content determined in given markdown content."
+      };
     }
     const { headings: preparsedHeadings } = this._ast.askAsTree(def);
     if (preparsedHeadings.length === 0) {
       N3Logger.error("No available content determined, at least one heading in content. All content ignored.", DocParser.name);
-      return { node: { $wt: "Page" }, success: false };
+      return {
+        node: { $wt: "Page" },
+        success: false,
+        error: "No available content determined, at least one heading in content. All content ignored."
+      };
     }
     const headings = preparsedHeadings.map((heading) => this._semantic.parsePreparsed(heading));
     const { exported, independent } = this._semantic.classifyParsedHeadings(headings);
     if (exported.length === 0) {
-      N3Logger.error(`Heading not found, must follow format[Type[[::Headline]::Id]]. All content ignored.`, DocParser.name);
-      return { node: { $wt: "Page" }, success: false };
+      N3Logger.error("Heading not found, must follow format[Type[[::Headline]::Id]]. All content ignored.", DocParser.name);
+      return {
+        node: { $wt: "Page" },
+        success: false,
+        error: "Heading not found, must follow format[Type[[::Headline]::Id]]. All content ignored."
+      };
     } else if (exported.length > 1) {
-      N3Logger.error(`Multiple roots does not support yet. All content ignored.`, DocParser.name);
-      return { node: { $wt: "Page" }, success: false };
+      N3Logger.error("Multiple roots does not support yet. All content ignored.", DocParser.name);
+      return {
+        node: { $wt: "Page" },
+        success: false,
+        error: "Multiple roots does not support yet. All content ignored."
+      };
     }
-    const root = exported[0];
-    const parsedRoot = this.widget.translate(root);
-    return parsedRoot;
+    try {
+      const root = exported[0];
+      const parsedRoot = this.widget.translate(root);
+      return parsedRoot;
+    } catch (error) {
+      N3Logger.error(error, DocParser.name);
+      return { node: { $wt: "Page" }, success: false, error };
+    }
   }
 }
 const SINGLETON = { parser: void 0 };
