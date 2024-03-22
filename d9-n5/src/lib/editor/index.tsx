@@ -1,14 +1,13 @@
 import {indentWithTab} from '@codemirror/commands';
 import {javascript} from '@codemirror/lang-javascript';
 import {markdown, markdownLanguage} from '@codemirror/lang-markdown';
-import {syntaxTree} from '@codemirror/language';
 import {EditorState as CodeMirrorState} from '@codemirror/state';
 import {EditorView, keymap, ViewUpdate} from '@codemirror/view';
 import {WidgetType} from '@rainbow-d9/n1';
 import {basicSetup} from 'codemirror';
 import React, {useEffect, useRef, useState} from 'react';
 import {PlaygroundEventTypes, usePlaygroundEventBus} from '../playground-event-bus';
-import {EditorProps} from '../types';
+import {EditorProps, PlaygroundWidgetGroupKey} from '../types';
 import {
 	createD9mlCompletions,
 	createWidgetLinter,
@@ -16,6 +15,8 @@ import {
 	d9mlHighlightStyle,
 	WidgetDeclarationIconPlugin
 } from './enhance';
+import {WidgetTemplateDialog} from './template-dialog';
+import {beautifyTemplate} from './utils';
 import {EditorPanel, EditorWrapper} from './widgets';
 
 export interface EditorState {
@@ -101,35 +102,103 @@ export const Editor = (props: EditorProps) => {
 		if (state.editor == null) {
 			return;
 		}
+		const findDefaultPrefix = ($wt: WidgetType, level: number) => {
+			const group = widgets.widgets.find(widget => widget.$wt === $wt)?.group;
+			if (group === PlaygroundWidgetGroupKey.CONTAINERS) {
+				if (level < 6) {
+					return new Array(level).fill('#').join('');
+				}
+			}
+			return '-';
+		};
+		const findClosestPreviousHeadingLevel = (lineNumber: number, include: boolean): number => {
+			if (lineNumber === 1) {
+				return 2;
+			}
+			const editorState = state.editor.state;
+			for (let line = (include ? lineNumber : (lineNumber - 1)); line >= 1; line--) {
+				const {text} = editorState.doc.line(line);
+				if (text.startsWith('#')) {
+					const [, symbol] = text.match(/^(#{1,6})\s(.*)$/) ?? [];
+					if (symbol != null) {
+						return symbol.length;
+					}
+				}
+			}
+			return 2;
+		};
 		const onInsertWidgetTemplate = ($wt: WidgetType) => {
 			const editorState = state.editor.state;
 			const {from, to} = editorState.selection.main;
-			if (from !== to) {
-				// TODO something selected (not blank check first), copy to clipboard and alert
-			} else if (from === 0) {
-				// TODO cursor at first line, copy to clipboard and alert
-			} else {
-				const {from: lineFrom, number: lineNumber, text} = editorState.doc.lineAt(from);
-				//TODO check text first
-				// 1. it is heading or list item,
-				// 1.1 no other content in this line
-				// 1.2 if it is a list item, not belongs to any widget
-				// 1.3 therefore means position is ready, insert template, considering the indent
-				// 2. empty line
-				// 2.1 check closest previous line,
-				// 2.1.1 it is heading, goto #1, if not ready, insert template using list item in this heading
-				// 2.1.2 it is list item, goto #1, if not ready, copy to clipboard and alert
-				const tree = syntaxTree(editorState);
-				const node = tree.resolveInner(from, 0);
+			const {
+				from: fromLineFirstCharPos, number: fromLineNumber, text: fromLineText
+			} = editorState.doc.lineAt(from);
+			if (fromLineNumber === 1) {
+				// cursor at first line, copy to clipboard and alert
+				fire(PlaygroundEventTypes.SHOW_WIDGET_TEMPLATE_DIALOG, $wt, findDefaultPrefix($wt, 2),
+					'The cursor is at the beginning of the designer, so it cannot be directly inserted the widget template.');
+				return;
 			}
+			const text = editorState.sliceDoc(from, to) ?? '';
+			if (from !== to && text.trim().length !== 0) {
+				// something selected (not blank check first), copy to clipboard and alert
+				fire(PlaygroundEventTypes.SHOW_WIDGET_TEMPLATE_DIALOG, $wt,
+					findDefaultPrefix($wt, findClosestPreviousHeadingLevel(fromLineNumber, false)),
+					'The current selection in the designer already contains content, so it cannot be directly inserted the widget template.');
+				return;
+			}
+			const {number: toLineNumber} = editorState.doc.lineAt(to);
+			if (fromLineNumber !== toLineNumber) {
+				// selected multiple lines, copy to clipboard and alert
+				fire(PlaygroundEventTypes.SHOW_WIDGET_TEMPLATE_DIALOG, $wt,
+					findDefaultPrefix($wt, findClosestPreviousHeadingLevel(fromLineNumber, false)),
+					'The current selection contains multiple lines, so it cannot be directly inserted the widget template.');
+				return;
+			}
+			let indent = '';
+			let prefix = '';
+			if (fromLineText.trim().length !== 0) {
+				const [, spaces, symbol, content] = fromLineText.match(/^(\s*)(#{1,6}|-|\*)(.*)$/) ?? [];
+				if (symbol == null || (spaces.length !== 0 && symbol.includes('#'))) {
+					// not matched, or matched but there are spaces before symbol #
+					// not heading or list item, copy to clipboard and alert
+					fire(PlaygroundEventTypes.SHOW_WIDGET_TEMPLATE_DIALOG, $wt,
+						findDefaultPrefix($wt, findClosestPreviousHeadingLevel(fromLineNumber, false)),
+						'The selected line is neither a heading nor a bullet list, so it cannot be directly inserted into the widget template.');
+					return;
+				}
+				if (content.trim().length !== 0) {
+					// matched, but already has content, copy to clipboard and alert
+					fire(PlaygroundEventTypes.SHOW_WIDGET_TEMPLATE_DIALOG, $wt,
+						findDefaultPrefix($wt, findClosestPreviousHeadingLevel(fromLineNumber, false)),
+						'The selected line already contains content, so it cannot be directly inserted into the widget template.');
+					return;
+				}
+				indent = spaces;
+				prefix = symbol;
+			} else {
+				// blank line
+				prefix = findDefaultPrefix($wt, findClosestPreviousHeadingLevel(fromLineNumber, false));
+			}
+			let template = widgets.widgets.find(widget => widget.$wt === $wt)?.template ?? '';
+			template = beautifyTemplate(template, prefix, indent);
+			state.editor.dispatch({
+				changes: {
+					from: fromLineFirstCharPos, to: fromLineFirstCharPos + fromLineText.length,
+					insert: template
+				}
+			});
 		};
 		on(PlaygroundEventTypes.INSERT_WIDGET_TEMPLATE, onInsertWidgetTemplate);
 		return () => {
 			off(PlaygroundEventTypes.INSERT_WIDGET_TEMPLATE, onInsertWidgetTemplate);
 		};
-	}, [on, off, state.editor]);
+	}, [on, off, fire, state.editor, widgets.widgets]);
 
-	return <EditorWrapper editorSize={state.size} {...rest} data-editor-badge={state.editorBadge}>
-		<EditorPanel ref={ref}/>
-	</EditorWrapper>;
+	return <>
+		<WidgetTemplateDialog widgets={widgets}/>
+		<EditorWrapper editorSize={state.size} {...rest} data-editor-badge={state.editorBadge}>
+			<EditorPanel ref={ref}/>
+		</EditorWrapper>
+	</>;
 };

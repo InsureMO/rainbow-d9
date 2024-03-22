@@ -403,7 +403,11 @@ export const N2Widgets: Array<PlaygroundWidget> = [
 			{name: 'title', label: 'Text.'},
 			{name: 'collapsible', label: 'Boolean.', description: 'Section could be folded.'},
 			{name: 'marker', label: 'Text.', description: 'Global identify this section when global event fired.'}
-		]
+		],
+		template: `Section::[title][::property]
+- collapsible
+- marker: global-unique-marker
+`
 	},
 	{
 		$wt: N2.N2WidgetType.BOX, label: 'Box, for customized layout.',

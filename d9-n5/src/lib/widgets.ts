@@ -20,5 +20,11 @@ export const PlaygroundCssVars = {
 	WIDGET_DECLARATION_ATTR_VALUE_ICON_COLOR: 'var(--d9-playground-widget-declaration-attr-name-color, rgb(55, 122, 41))',
 	WIDGET_DECLARATION_ATTR_VALUE_STR_COLOR: 'var(--d9-playground-widget-declaration-attr-name-color, rgb(55, 122, 41))',
 	WIDGET_DECLARATION_ATTR_VALUE_EXT_COLOR: 'var(--d9-playground-widget-declaration-attr-name-color, rgb(10, 56, 172))',
-	VIEWER_ERROR_COLOR: `var(--d9-playground-viewer-error-color, ${CssVars.DANGER_COLOR})`
+	VIEWER_ERROR_COLOR: `var(--d9-playground-viewer-error-color, ${CssVars.DANGER_COLOR})`,
+	TEMPLATE_DIALOG_WIDTH: 'var(--d9-playground-template-dialog-width, 70vw)',
+	TEMPLATE_DIALOG_HEIGHT: 'var(--d9-playground-template-dialog-height, 60vh)',
+	TEMPLATE_DIALOG_MARGIN_TOP: 'var(--d9-playground-template-dialog-margin-top, min(10vh, calc(20vh - 60px)))',
+	TEMPLATE_DIALOG_MARGIN_LEFT: 'var(--d9-playground-template-dialog-margin-left, 15vw)',
+	TEMPLATE_DIALOG_PADDING: 'var(--d9-playground-template-dialog-padding, 32px 32px 16px)',
+	TEMPLATE_DIALOG_BODY_MARGIN_BOTTOM: 'var(--d9-playground-template-dialog-margin-bottom, 16px)'
 };

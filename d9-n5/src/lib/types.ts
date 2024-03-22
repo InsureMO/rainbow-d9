@@ -66,6 +66,8 @@ export interface PlaygroundWidget {
 	icon: string;
 	/** toolbar button tooltip */
 	tooltip?: string;
+	/** widget markdown template, required when notInToolbar is not true */
+	template?: string;
 }
 
 export interface PlaygroundIcon {
