@@ -153,7 +153,7 @@ export const WidgetTemplateDialog = (props: WidgetTemplateDialogProps) => {
 		};
 	}, []);
 	useEffect(() => {
-		const show = (widgetType: WidgetType, prefix: string, reason: ReactNode) => {
+		const show = (keyOrWidgetType: WidgetType, prefix: string, reason: ReactNode) => {
 			if (state.visible || state.editor == null) {
 				return;
 			}
@@ -163,10 +163,11 @@ export const WidgetTemplateDialog = (props: WidgetTemplateDialogProps) => {
 			}
 			document.body.style.overflowY = 'hidden';
 			const doc = state.editor.state.doc;
-			let template = widgets.widgets.find(widget => widget.$wt === widgetType)?.template ?? '';
+			let template = widgets.widgets.find(widget => widget.$key === keyOrWidgetType)?.template
+				?? widgets.widgets.find(widget => widget.$wt === keyOrWidgetType)?.template ?? '';
 			template = beautifyTemplate(template, prefix, '');
 			state.editor.dispatch({changes: {from: 0, to: doc.length, insert: template}});
-			setState(state => ({...state, visible: true, copied: false, widgetType, reason}));
+			setState(state => ({...state, visible: true, copied: false, widgetType: keyOrWidgetType, reason}));
 		};
 
 		on(PlaygroundEventTypes.SHOW_WIDGET_TEMPLATE_DIALOG, show);

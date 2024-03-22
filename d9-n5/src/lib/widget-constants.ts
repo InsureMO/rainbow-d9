@@ -204,7 +204,12 @@ export const N2Widgets: Array<PlaygroundWidget> = [
 			ValidationRequired, ValidationRegex, ValidationRegexp, ValidationLength,
 			ValidationNumeric, ValidationPositive, ValidationNotNegative, ValidationInteger, ValidationNumberRange
 		],
-		icon: PlaygroundIcons.INPUT, group: PlaygroundWidgetGroupKey.INPUTS
+		icon: PlaygroundIcons.INPUT, group: PlaygroundWidgetGroupKey.INPUTS,
+		template: `Input::[caption]::[property]
+- placeholder: a placeholder text
+- required: a reminder message
+- length: 5,10,15..20; Length should be 5, 10 or between 15 and 20.
+`
 	},
 	{
 		$wt: N2.N2WidgetType.NUMBER, label: 'Number input box.',
@@ -213,7 +218,12 @@ export const N2Widgets: Array<PlaygroundWidget> = [
 			ValidationRequired, ValidationRegex, ValidationRegexp, ValidationLength,
 			ValidationNumeric, ValidationPositive, ValidationNotNegative, ValidationInteger, ValidationNumberRange
 		],
-		icon: PlaygroundIcons.NUMBER_INPUT, group: PlaygroundWidgetGroupKey.INPUTS, tooltip: 'Number input'
+		icon: PlaygroundIcons.NUMBER_INPUT, group: PlaygroundWidgetGroupKey.INPUTS, tooltip: 'Number input',
+		template: `Number::[caption]::[property]
+- notNegative, integer
+- placeholder: a placeholder text
+- numberRange: ..100],(200..300],[400..; Value should <=100, or >200 and <=300, or >=400.
+`
 	},
 	{
 		$wt: N2.N2WidgetType.PASSWORD, label: 'Password input box.',
@@ -221,7 +231,12 @@ export const N2Widgets: Array<PlaygroundWidget> = [
 			AutoSelect, InputPlaceholder,
 			ValidationRequired, ValidationRegex, ValidationRegexp, ValidationLength
 		],
-		icon: PlaygroundIcons.PASSWORD, group: PlaygroundWidgetGroupKey.INPUTS, tooltip: 'Password input'
+		icon: PlaygroundIcons.PASSWORD, group: PlaygroundWidgetGroupKey.INPUTS, tooltip: 'Password input',
+		template: `Pwd::[caption]::[property]
+- placeholder: a placeholder text
+- length: 12..; Minimum length is 12.
+- regex: key-of-predefined-regex
+`
 	},
 	{
 		$wt: N2.N2WidgetType.DECORATE_INPUT, label: 'Decorable input box.',
@@ -231,7 +246,15 @@ export const N2Widgets: Array<PlaygroundWidget> = [
 			ValidationRequired, ValidationRegex, ValidationRegexp, ValidationLength,
 			ValidationNumeric, ValidationPositive, ValidationNotNegative, ValidationInteger, ValidationNumberRange
 		],
-		icon: PlaygroundIcons.DECO_INPUT, group: PlaygroundWidgetGroupKey.INPUTS, tooltip: 'Decorable input'
+		icon: PlaygroundIcons.DECO_INPUT, group: PlaygroundWidgetGroupKey.INPUTS, tooltip: 'Decorable input',
+		template: `DecoInput::[caption]::[property]
+- placeholder: a placeholder text
+- length: 5,10,15..20; Length should be 5, 10 or between 15 and 20.
+- leads: $icons.x; $icons.y
+- tails:
+  - first tail
+  - last tail
+`
 	},
 	{
 		$wt: N2.N2WidgetType.DECORATE_NUMBER, label: 'Decorable number input box.',
@@ -241,23 +264,47 @@ export const N2Widgets: Array<PlaygroundWidget> = [
 			ValidationRequired, ValidationRegex, ValidationRegexp, ValidationLength,
 			ValidationNumeric, ValidationPositive, ValidationNotNegative, ValidationInteger, ValidationNumberRange
 		],
-		icon: PlaygroundIcons.DECO_NUMBER, group: PlaygroundWidgetGroupKey.INPUTS, tooltip: 'Decorable number input'
+		icon: PlaygroundIcons.DECO_NUMBER, group: PlaygroundWidgetGroupKey.INPUTS, tooltip: 'Decorable number input',
+		template: `DecoNumber::[caption]::[property]
+- notNegative, integer
+- placeholder: a placeholder text
+- numberRange: ..100],(200..300],[400..; Value should <=100, or >200 and <=300, or >=400.
+- leads: $icons.x; $icons.y
+- tails:
+  - first tail
+  - last tail
+`
 	},
 	{
-		$wt: N2.N2WidgetType.DECORATE_PASSWORD, label: 'Decorable password input box.',
+		$wt: N2.N2WidgetType.DECORATE_PASSWORD,
+		label: 'Decorable password input box.',
 		properties: [
 			AutoSelect, InputPlaceholder,
 			LeadsDecorateElements, TailsDecorateElements,
 			ValidationRequired, ValidationRegex, ValidationRegexp, ValidationLength
 		],
-		icon: PlaygroundIcons.DECO_PASSWORD, group: PlaygroundWidgetGroupKey.INPUTS, tooltip: 'Decorable password input'
+		icon: PlaygroundIcons.DECO_PASSWORD, group: PlaygroundWidgetGroupKey.INPUTS,
+		tooltip: 'Decorable password input',
+		template: `DecoPwd::[caption]::[property]
+- placeholder: a placeholder text
+- length: 12..; Minimum length is 12.
+- regex: key-of-predefined-regex
+- leads: $icons.x; $icons.y
+- tails:
+  - first tail
+  - last tail
+`
 	},
 	{
 		$wt: N2.N2WidgetType.TEXTAREA, properties: [
 			AutoSelect, InputPlaceholder,
 			ValidationRequired, ValidationLength
 		],
-		icon: PlaygroundIcons.TEXTAREA, group: PlaygroundWidgetGroupKey.INPUTS
+		icon: PlaygroundIcons.TEXTAREA, group: PlaygroundWidgetGroupKey.INPUTS,
+		template: `Textarea::[caption]::[property]
+- placeholder: a placeholder text
+- length: 10..; Minimum length is 10.
+`
 	},
 	{
 		$wt: N2.N2WidgetType.CALENDAR, label: 'Date picker.',
@@ -271,7 +318,13 @@ export const N2Widgets: Array<PlaygroundWidget> = [
 			...CalendarProperties.filter(({name}) => name !== 'time' && name !== 'timeFormat'),
 			ValidationRequired
 		],
-		icon: PlaygroundIcons.DATE, group: PlaygroundWidgetGroupKey.INPUTS, tooltip: 'Date picker'
+		icon: PlaygroundIcons.DATE, group: PlaygroundWidgetGroupKey.INPUTS, tooltip: 'Date picker',
+		template: `Date::[caption]::[property]
+- dateFormat: YYYY/MM/DD
+- fixedTimeAt: start
+- initTimeAt: start
+- useCalendarIcon
+`
 	},
 	{
 		$wt: N2.N2WidgetType.DATETIME, label: 'Datetime picker.',
@@ -279,7 +332,10 @@ export const N2Widgets: Array<PlaygroundWidget> = [
 			...CalendarProperties.filter(({name}) => name !== 'time' && name !== 'fixedTimeAt'),
 			ValidationRequired
 		],
-		icon: PlaygroundIcons.DATETIME, group: PlaygroundWidgetGroupKey.INPUTS, tooltip: 'Datetime picker'
+		icon: PlaygroundIcons.DATETIME, group: PlaygroundWidgetGroupKey.INPUTS, tooltip: 'Datetime picker',
+		template: `DateTime::[caption]::[property]
+- initTimeAt: 12:30:00
+`
 	},
 
 	// options
@@ -296,7 +352,10 @@ export const N2Widgets: Array<PlaygroundWidget> = [
 			},
 			ValidationRequired
 		],
-		icon: PlaygroundIcons.CHECKBOX, group: PlaygroundWidgetGroupKey.OPTIONS
+		icon: PlaygroundIcons.CHECKBOX, group: PlaygroundWidgetGroupKey.OPTIONS,
+		template: `Checkbox::[caption]::[property]
+- values: 1, 0
+`
 	},
 	{
 		$wt: N2.N2WidgetType.CHECKBOXES, label: 'Checkbox group.',
@@ -307,7 +366,10 @@ export const N2Widgets: Array<PlaygroundWidget> = [
 	{
 		$wt: N2.N2WidgetType.CHECKS, label: 'Checkbox group. Shortcut of "Checkboxes".',
 		properties: [...CheckboxesProperties, ValidationRequired],
-		icon: PlaygroundIcons.CHECKS, group: PlaygroundWidgetGroupKey.OPTIONS, tooltip: 'Checkbox group'
+		icon: PlaygroundIcons.CHECKS, group: PlaygroundWidgetGroupKey.OPTIONS, tooltip: 'Checkbox group',
+		template: `Checks::[caption]::[property]
+- options: 1: Pizza; 2: Hamburger; 3: Noodle
+`
 	},
 	{
 		$wt: N2.N2WidgetType.RADIO, label: 'Radio button.',
@@ -318,7 +380,10 @@ export const N2Widgets: Array<PlaygroundWidget> = [
 			},
 			ValidationRequired
 		],
-		icon: PlaygroundIcons.RADIO, group: PlaygroundWidgetGroupKey.OPTIONS, tooltip: 'Radio button'
+		icon: PlaygroundIcons.RADIO, group: PlaygroundWidgetGroupKey.OPTIONS, tooltip: 'Radio button',
+		template: `Radio::[caption]::[property]
+- values: 1, 0
+`
 	},
 	{
 		$wt: N2.N2WidgetType.RADIOS, label: 'Radio button group.',
@@ -326,24 +391,51 @@ export const N2Widgets: Array<PlaygroundWidget> = [
 			...CheckboxesProperties.filter(({name}) => name !== 'single' && name !== 'boolOnSingle'),
 			ValidationRequired
 		],
-		icon: PlaygroundIcons.RADIOS, group: PlaygroundWidgetGroupKey.OPTIONS, tooltip: 'Radio button group'
+		icon: PlaygroundIcons.RADIOS, group: PlaygroundWidgetGroupKey.OPTIONS, tooltip: 'Radio button group',
+		template: `Radios::[caption]::[property]
+- options:
+  - Y: Yes
+  - N: No
+  - U: Unknown
+`
 	},
 	{
 		$wt: N2.N2WidgetType.DROPDOWN, label: 'Dropdown.',
 		properties: [...DropdownProperties, ValidationRequired],
-		icon: PlaygroundIcons.DROPDOWN, group: PlaygroundWidgetGroupKey.OPTIONS
+		icon: PlaygroundIcons.DROPDOWN, group: PlaygroundWidgetGroupKey.OPTIONS,
+		template: `Dropdown::[caption]::[property]
+- !clearable
+- please: a placeholder text
+- options:
+  - Y: Yes
+  - N: No
+  - U: Unknown
+`
 	},
 	{
 		$wt: N2.N2WidgetType.MULTI_DROPDOWN, label: 'Dropdown allows multiple choices.',
 		properties: [...DropdownProperties, ValidationRequired],
-		icon: PlaygroundIcons.MULTI_DROPDOWN, group: PlaygroundWidgetGroupKey.OPTIONS, tooltip: 'Multiple choices'
+		icon: PlaygroundIcons.MULTI_DROPDOWN, group: PlaygroundWidgetGroupKey.OPTIONS, tooltip: 'Multiple choices',
+		template: `MultiDropdown::[caption]::[property]
+- !clearable
+- please: a placeholder text
+- options: 1: Pizza; 2: Hamburger; 3: Noodle
+- sort: asc
+`
 	},
 
 	// display
 	{
 		$wt: N2.N2WidgetType.CAPTION, label: 'Caption.',
 		properties: [...CaptionProperties, LeadsDecorateElements, TailsDecorateElements],
-		icon: PlaygroundIcons.CAPTION, group: PlaygroundWidgetGroupKey.DISPLAY
+		icon: PlaygroundIcons.CAPTION, group: PlaygroundWidgetGroupKey.DISPLAY,
+		template: `Caption::[caption]
+- text: Hello world
+- leads: $icons.x; $icons.y
+- tails:
+  - first tail
+  - last tail
+`
 	},
 	{
 		$wt: N2.N2WidgetType.LABEL,
@@ -352,7 +444,14 @@ export const N2Widgets: Array<PlaygroundWidget> = [
 			...CaptionProperties.filter(({name}) => name !== 'labelOnValue'),
 			LeadsDecorateElements, TailsDecorateElements
 		],
-		icon: PlaygroundIcons.LABEL, group: PlaygroundWidgetGroupKey.DISPLAY
+		icon: PlaygroundIcons.LABEL, group: PlaygroundWidgetGroupKey.DISPLAY,
+		template: `Label::[caption]::[property]
+- valueToLabel: \`value ?? 'An empty value.'\`
+- leads: $icons.x; $icons.y
+- tails:
+  - first tail
+  - last tail
+`
 	},
 	{
 		$wt: N2.N2WidgetType.BADGE, label: 'Badge. Shortcut of "Caption".', description: 'With ink and fill mode.',
@@ -362,7 +461,17 @@ export const N2Widgets: Array<PlaygroundWidget> = [
 	{
 		$wt: N2.N2WidgetType.BUTTON, label: 'Button',
 		properties: [...ButtonProperties, LeadsDecorateElements, TailsDecorateElements],
-		icon: PlaygroundIcons.BUTTON, group: PlaygroundWidgetGroupKey.DISPLAY
+		icon: PlaygroundIcons.BUTTON, group: PlaygroundWidgetGroupKey.DISPLAY,
+		template: `Button::[caption]
+- ink: success
+- fill: plain
+- leads: $icons.x; $icons.y
+- tails:
+  - first tail
+  - last tail
+- click: validate me
+- validateScopes: scope1, scope2
+`
 	},
 	{
 		$wt: N2.N2WidgetType.LINK, label: 'Link. Shortcut of "Button".', description: 'With link style.',
@@ -370,29 +479,139 @@ export const N2Widgets: Array<PlaygroundWidget> = [
 			...ButtonProperties.filter(({name}) => name !== 'fill'),
 			LeadsDecorateElements, TailsDecorateElements
 		],
-		icon: PlaygroundIcons.LINK, group: PlaygroundWidgetGroupKey.DISPLAY
+		icon: PlaygroundIcons.LINK, group: PlaygroundWidgetGroupKey.DISPLAY,
+		template: `Link::[caption]
+- ink: warn
+- leads: $icons.x; $icons.y
+- tails:
+  - first tail
+  - last tail
+- click: validate me
+- validateScopes: scope1, scope2
+`
 	},
 	{
 		$wt: 'Chart', $key: 'ChartPie', label: 'Pie chart.',
-		icon: PlaygroundIcons.CHART_PIE, group: PlaygroundWidgetGroupKey.DISPLAY, tooltip: 'Pie Chart'
+		icon: PlaygroundIcons.CHART_PIE, group: PlaygroundWidgetGroupKey.DISPLAY, tooltip: 'Pie Chart',
+		template: `Chart::[caption]::[property]
+- options:
+  \`\`\`javascript
+  return {
+    xAxis: {type: 'category', data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']},
+    yAxis: {type: 'value'},
+    series: [{type: 'pie'}]
+  }
+  \`\`\`
+- merge:
+  \`\`\`javascript
+  // options.series[0].data = data;
+  options.series[0].data = [120, 200, 150, 80, 70, 110, 130];
+  return options;
+  \`\`\`
+`
 	},
 	{
 		$wt: 'Chart', $key: 'ChartBar', label: 'Bar chart.',
-		icon: PlaygroundIcons.CHART_BAR, group: PlaygroundWidgetGroupKey.DISPLAY, tooltip: 'Bar Chart'
+		icon: PlaygroundIcons.CHART_BAR, group: PlaygroundWidgetGroupKey.DISPLAY, tooltip: 'Bar Chart',
+		template: `Chart::[caption]::[property]
+- options:
+  \`\`\`javascript
+  return {
+    xAxis: {type: 'category', data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']},
+    yAxis: {type: 'value'},
+    series: [{type: 'bar'}]
+  }
+  \`\`\`
+- merge:
+  \`\`\`javascript
+  // options.series[0].data = data;
+  options.series[0].data = [120, 200, 150, 80, 70, 110, 130];
+  return options;
+  \`\`\`
+`
 	},
 	{
 		$wt: 'Chart', $key: 'ChartLine', label: 'Line chart.',
-		icon: PlaygroundIcons.CHART_LINE, group: PlaygroundWidgetGroupKey.DISPLAY, tooltip: 'Line Chart'
+		icon: PlaygroundIcons.CHART_LINE, group: PlaygroundWidgetGroupKey.DISPLAY, tooltip: 'Line Chart',
+		template: `Chart::[caption]::[property]
+- options:
+  \`\`\`javascript
+  return {
+    xAxis: {type: 'category', data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']},
+    yAxis: {type: 'value'},
+    series: [{type: 'line'}]
+  }
+  \`\`\`
+- merge:
+  \`\`\`javascript
+  // options.series[0].data = data;
+  options.series[0].data = [120, 200, 150, 80, 70, 110, 130];
+  return options;
+  \`\`\`
+`
 	},
 	{
 		$wt: 'RelChart', label: 'Chart. Refresh depends on others.',
 		icon: PlaygroundIcons.CHART_RELIANT, group: PlaygroundWidgetGroupKey.DISPLAY,
-		tooltip: 'Chart depends on data'
+		tooltip: 'Chart depends on data',
+		template: `RelChart::[caption]::[property]
+- options:
+  \`\`\`javascript
+  return {
+    legend: {top: 'bottom'},
+    series: [
+      {
+        name: 'Nightingale Chart', type: 'pie', radius: ['20%', '60%'], center: ['50%', '50%'], roseType: 'area',
+        itemStyle: { borderRadius: 8 }
+      }
+    ]
+  }
+  \`\`\`
+- merge:
+  \`\`\`javascript
+  options.series[0].data = data;
+  return options;
+  \`\`\`
+- fetch:
+  \`\`\`typescript
+  return ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'].map(name => {
+    return { value: Math.ceil(Math.random() * 30) + 20, name };
+  });
+  \`\`\`
+- criteria:
+  - on: /criteria.**
+`
 	},
 	{
 		$wt: 'AutChart', label: 'Chart. Refresh autonomously.',
 		icon: PlaygroundIcons.CHART_AUTONOMOUS, group: PlaygroundWidgetGroupKey.DISPLAY,
-		tooltip: 'Auto refresh chart'
+		tooltip: 'Auto refresh chart',
+		template: `AutChart::[caption]::[property]
+- options:
+  \`\`\`javascript
+  return {
+    legend: {top: 'bottom'},
+    series: [
+      {
+        name: 'Nightingale Chart', type: 'pie', radius: ['20%', '60%'], center: ['50%', '50%'], roseType: 'area',
+        itemStyle: { borderRadius: 8 }
+      }
+    ]
+  }
+  \`\`\`
+- merge:
+  \`\`\`javascript
+  options.series[0].data = data;
+  return options;
+  \`\`\`
+- fetch:
+  \`\`\`typescript
+  return ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'].map(name => {
+    return { value: Math.ceil(Math.random() * 30) + 20, name };
+  });
+  \`\`\`
+- interval: 1
+`
 	},
 
 	// containers
@@ -404,14 +623,16 @@ export const N2Widgets: Array<PlaygroundWidget> = [
 			{name: 'collapsible', label: 'Boolean.', description: 'Section could be folded.'},
 			{name: 'marker', label: 'Text.', description: 'Global identify this section when global event fired.'}
 		],
-		template: `Section::[title][::property]
+		template: `Section::[title]
 - collapsible
 - marker: global-unique-marker
 `
 	},
 	{
 		$wt: N2.N2WidgetType.BOX, label: 'Box, for customized layout.',
-		icon: PlaygroundIcons.BOX, group: PlaygroundWidgetGroupKey.CONTAINERS
+		icon: PlaygroundIcons.BOX, group: PlaygroundWidgetGroupKey.CONTAINERS,
+		template: `Box::[title]
+`
 	},
 	{
 		$wt: N2.N2WidgetType.TABLE_ROW_OPERATORS,
@@ -423,12 +644,81 @@ export const N2Widgets: Array<PlaygroundWidget> = [
 	{
 		$wt: N2.N2WidgetType.TABLE,
 		properties: [...TableProperties, ...ArrayProperties],
-		icon: PlaygroundIcons.TABLE, group: PlaygroundWidgetGroupKey.CONTAINERS
+		icon: PlaygroundIcons.TABLE, group: PlaygroundWidgetGroupKey.CONTAINERS,
+		template: `Table::
+- property: property
+- expandable, clickToExpand, addable, removable, !hideClassicCellsOnExpandable
+- omitDefaultRowOperators
+- addLabel: Add New One
+- maxBodyHeight: 400
+- fixedLeadColumns: 1
+- fixedTailColumns: 1
+- operatorsColumnWidth: 200
+- headers:
+  - Column A: 300
+  - Column B: 300
+  - Column C: 500
+  - Column D: 200
+  - Column E: 200
+  - Column F: 200
+  - Column G: 100
+- Label::::columnA
+- Caption::::
+  - label: Say Hello to World
+  - click: alert: Hello World!
+- Label::::columnC
+- Label::::columnD
+- Label::::columnE
+- Label::::columnF
+- Label::::columnG
+- Table::
+  - property: nested
+  - headers:
+    - Nest Column A: 300
+    - Nest Column B: 300
+  - Label::::columnNA
+  - Label::::columnNB
+- RowOperators::
+  - Button::
+    - text: X
+    - fill: plain
+    - click: alert: X
+  - Button::
+    - fill: plain
+    - tails: $icons.view
+    - click: alert: View
+  - Button::
+    - fill: plain
+    - tails: $icons.edit
+    - click: alert: Edit
+  - Button::
+    - fill: plain
+    - tails: $icons.remove
+    - prebuilt: remove
+  - Button::
+    - fill: plain
+    - tails: $icons.expand
+    - prebuilt: expand
+  - Button::
+    - fill: plain
+    - tails: $icons.collapse
+    - prebuilt: collapse
+- Pagination::::page
+  - maxButtons: 3
+`
 	},
 	{
 		$wt: N2.N2WidgetType.RIBS,
 		properties: [...RibsProperties, ...ArrayProperties],
-		icon: PlaygroundIcons.RIBS, group: PlaygroundWidgetGroupKey.CONTAINERS
+		icon: PlaygroundIcons.RIBS, group: PlaygroundWidgetGroupKey.CONTAINERS,
+		template: `Ribs::
+- removable, addable, disableOnCannotAdd
+- elementTitle:
+  - labelOnValue
+  - property: titleProperty
+- Input::Property A::propA
+- Input::Property B::propB
+`
 	},
 	{
 		$wt: N2.N2WidgetType.READONLY_RIBS, label: 'Readonly Ribs.',
@@ -438,7 +728,24 @@ export const N2Widgets: Array<PlaygroundWidget> = [
 	{
 		$wt: N2.N2WidgetType.BUTTON_BAR, label: 'Button bar.',
 		properties: [{name: 'alignment', label: 'Text.', description: '"left", "center", "right".'}],
-		icon: PlaygroundIcons.BUTTON_BAR, group: PlaygroundWidgetGroupKey.CONTAINERS, tooltip: 'Button bar'
+		icon: PlaygroundIcons.BUTTON_BAR, group: PlaygroundWidgetGroupKey.CONTAINERS, tooltip: 'Button bar',
+		template: `ButtonBar::
+- alignment: left
+- Button::::
+  - click:
+    \`\`\`
+    alert('Remove clicked');
+    \`\`\`
+  - leads: $icons.remove
+  - disabled
+- Button::::
+  - click:
+    \`\`\`
+    alert('Check clicked');
+    \`\`\`
+  - fill: plain
+  - leads: $icons.check
+`
 	},
 	{
 		$wt: N2.N2WidgetType.TAB, description: 'Valid only within the confines of the "Tabs".',
@@ -456,7 +763,19 @@ export const N2Widgets: Array<PlaygroundWidget> = [
 		properties: [
 			{name: 'initActive', label: 'Text, Number.', description: 'Initial active tab, marker or index.'}
 		],
-		icon: PlaygroundIcons.TABS, group: PlaygroundWidgetGroupKey.CONTAINERS
+		icon: PlaygroundIcons.TABS, group: PlaygroundWidgetGroupKey.CONTAINERS,
+		template: `Tabs::
+- Tab::[caption]::[property1]
+  - Input::[caption]::[property]
+- Tab::::[property2]
+  - title:
+    - valueToLabel: \`'Tab2 title'\`
+  - badge: Badge
+    - property: count
+    - labelOnValue
+    - ink: info
+  - Checkbox::[caption]::[property]
+`
 	},
 	{
 		$wt: N2.N2WidgetType.WIZARD_SHARED,
@@ -490,7 +809,19 @@ export const N2Widgets: Array<PlaygroundWidget> = [
 			},
 			{name: 'reached', label: 'Text, Number.', description: 'Step reached, marker or index.'}
 		],
-		icon: PlaygroundIcons.WIZARD, group: PlaygroundWidgetGroupKey.CONTAINERS
+		icon: PlaygroundIcons.WIZARD, group: PlaygroundWidgetGroupKey.CONTAINERS,
+		template: `Wizard::::[property]
+- balloon: false
+- reached: 1
+- WStep::[caption]::[property1]
+  - Input::[caption]::[property]
+- WStep::::[property2]
+  - title:
+    - valueToLabel: \`'Step #2'\`
+  - Checkbox::[caption]::[property2]
+- WStep::[caption]::[property3]
+- WStep::[caption]::[property4]
+`
 	},
 	{
 		$wt: N2.N2WidgetType.TREE,
@@ -500,7 +831,12 @@ export const N2Widgets: Array<PlaygroundWidget> = [
 			{name: 'showIndex', label: 'Boolean.', description: 'Default false. Show node index or not.'},
 			{name: 'detective', label: 'Snippet.', description: 'Tree nodes builder.'}
 		],
-		icon: PlaygroundIcons.TREE, group: PlaygroundWidgetGroupKey.CONTAINERS
+		icon: PlaygroundIcons.TREE, group: PlaygroundWidgetGroupKey.CONTAINERS,
+		template: `Tree::::tree
+- showIndex
+- initExpandLevel: 0
+- height: 400
+`
 	},
 
 	{

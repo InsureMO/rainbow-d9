@@ -102,8 +102,10 @@ export const Editor = (props: EditorProps) => {
 		if (state.editor == null) {
 			return;
 		}
-		const findDefaultPrefix = ($wt: WidgetType, level: number) => {
-			const group = widgets.widgets.find(widget => widget.$wt === $wt)?.group;
+		const findDefaultPrefix = (keyOrWidgetType: WidgetType, level: number) => {
+			// find by key, then by widget type
+			const group = widgets.widgets.find(widget => widget.$key === keyOrWidgetType)?.group
+				?? widgets.widgets.find(widget => widget.$wt === keyOrWidgetType)?.group;
 			if (group === PlaygroundWidgetGroupKey.CONTAINERS) {
 				if (level < 6) {
 					return new Array(level).fill('#').join('');
@@ -121,13 +123,13 @@ export const Editor = (props: EditorProps) => {
 				if (text.startsWith('#')) {
 					const [, symbol] = text.match(/^(#{1,6})\s(.*)$/) ?? [];
 					if (symbol != null) {
-						return symbol.length;
+						return Math.max(symbol.length, 2);
 					}
 				}
 			}
 			return 2;
 		};
-		const onInsertWidgetTemplate = ($wt: WidgetType) => {
+		const onInsertWidgetTemplate = (keyOrWidgetType: WidgetType) => {
 			const editorState = state.editor.state;
 			const {from, to} = editorState.selection.main;
 			const {
@@ -135,23 +137,23 @@ export const Editor = (props: EditorProps) => {
 			} = editorState.doc.lineAt(from);
 			if (fromLineNumber === 1) {
 				// cursor at first line, copy to clipboard and alert
-				fire(PlaygroundEventTypes.SHOW_WIDGET_TEMPLATE_DIALOG, $wt, findDefaultPrefix($wt, 2),
+				fire(PlaygroundEventTypes.SHOW_WIDGET_TEMPLATE_DIALOG, keyOrWidgetType, findDefaultPrefix(keyOrWidgetType, 2),
 					'The cursor is at the beginning of the designer, so it cannot be directly inserted the widget template.');
 				return;
 			}
 			const text = editorState.sliceDoc(from, to) ?? '';
 			if (from !== to && text.trim().length !== 0) {
 				// something selected (not blank check first), copy to clipboard and alert
-				fire(PlaygroundEventTypes.SHOW_WIDGET_TEMPLATE_DIALOG, $wt,
-					findDefaultPrefix($wt, findClosestPreviousHeadingLevel(fromLineNumber, false)),
+				fire(PlaygroundEventTypes.SHOW_WIDGET_TEMPLATE_DIALOG, keyOrWidgetType,
+					findDefaultPrefix(keyOrWidgetType, findClosestPreviousHeadingLevel(fromLineNumber, false)),
 					'The current selection in the designer already contains content, so it cannot be directly inserted the widget template.');
 				return;
 			}
 			const {number: toLineNumber} = editorState.doc.lineAt(to);
 			if (fromLineNumber !== toLineNumber) {
 				// selected multiple lines, copy to clipboard and alert
-				fire(PlaygroundEventTypes.SHOW_WIDGET_TEMPLATE_DIALOG, $wt,
-					findDefaultPrefix($wt, findClosestPreviousHeadingLevel(fromLineNumber, false)),
+				fire(PlaygroundEventTypes.SHOW_WIDGET_TEMPLATE_DIALOG, keyOrWidgetType,
+					findDefaultPrefix(keyOrWidgetType, findClosestPreviousHeadingLevel(fromLineNumber, false)),
 					'The current selection contains multiple lines, so it cannot be directly inserted the widget template.');
 				return;
 			}
@@ -162,15 +164,15 @@ export const Editor = (props: EditorProps) => {
 				if (symbol == null || (spaces.length !== 0 && symbol.includes('#'))) {
 					// not matched, or matched but there are spaces before symbol #
 					// not heading or list item, copy to clipboard and alert
-					fire(PlaygroundEventTypes.SHOW_WIDGET_TEMPLATE_DIALOG, $wt,
-						findDefaultPrefix($wt, findClosestPreviousHeadingLevel(fromLineNumber, false)),
+					fire(PlaygroundEventTypes.SHOW_WIDGET_TEMPLATE_DIALOG, keyOrWidgetType,
+						findDefaultPrefix(keyOrWidgetType, findClosestPreviousHeadingLevel(fromLineNumber, false)),
 						'The selected line is neither a heading nor a bullet list, so it cannot be directly inserted into the widget template.');
 					return;
 				}
 				if (content.trim().length !== 0) {
 					// matched, but already has content, copy to clipboard and alert
-					fire(PlaygroundEventTypes.SHOW_WIDGET_TEMPLATE_DIALOG, $wt,
-						findDefaultPrefix($wt, findClosestPreviousHeadingLevel(fromLineNumber, false)),
+					fire(PlaygroundEventTypes.SHOW_WIDGET_TEMPLATE_DIALOG, keyOrWidgetType,
+						findDefaultPrefix(keyOrWidgetType, findClosestPreviousHeadingLevel(fromLineNumber, false)),
 						'The selected line already contains content, so it cannot be directly inserted into the widget template.');
 					return;
 				}
@@ -178,9 +180,10 @@ export const Editor = (props: EditorProps) => {
 				prefix = symbol;
 			} else {
 				// blank line
-				prefix = findDefaultPrefix($wt, findClosestPreviousHeadingLevel(fromLineNumber, false));
+				prefix = findDefaultPrefix(keyOrWidgetType, findClosestPreviousHeadingLevel(fromLineNumber, false));
 			}
-			let template = widgets.widgets.find(widget => widget.$wt === $wt)?.template ?? '';
+			let template = widgets.widgets.find(widget => widget.$key === keyOrWidgetType)?.template
+				?? widgets.widgets.find(widget => widget.$wt === keyOrWidgetType)?.template ?? '';
 			template = beautifyTemplate(template, prefix, indent);
 			state.editor.dispatch({
 				changes: {

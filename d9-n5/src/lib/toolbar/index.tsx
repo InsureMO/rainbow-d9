@@ -265,7 +265,6 @@ export interface SecondaryBarState {
 
 export interface WidgetButton {
 	key: string;
-	$wt: WidgetType;
 	icon: PlaygroundIcons | string;
 	tooltip: string;
 }
@@ -292,14 +291,14 @@ export const SecondaryBar = (props: SecondaryBarProps) => {
 		};
 	}, [on, off]);
 
-	const onAddWidget = ($wt: WidgetType) => () => {
-		fire(PlaygroundEventTypes.INSERT_WIDGET_TEMPLATE, $wt);
+	const onAddWidget = (keyOrWidgetType: WidgetType | string) => () => {
+		fire(PlaygroundEventTypes.INSERT_WIDGET_TEMPLATE, keyOrWidgetType);
 	};
 
 	return <SecondaryToolbar>
 		{(buttons[state.group] ?? []).map(button => {
-			const {key, $wt, icon, tooltip} = button;
-			return <ToolbarButton icon={icon} tooltip={tooltip} click={onAddWidget($wt)} key={key}/>;
+			const {key, icon, tooltip} = button;
+			return <ToolbarButton icon={icon} tooltip={tooltip} click={onAddWidget(key)} key={key}/>;
 		})}
 	</SecondaryToolbar>;
 };
@@ -315,7 +314,7 @@ export const Toolbar = (props: ToolbarProps) => {
 				buttons[group] = [];
 			}
 			buttons[group].push({
-				key: $key ?? $wt, $wt, icon, tooltip: VUtils.isBlank(tooltip) ? ($key ?? $wt) : tooltip
+				key: $key ?? $wt, icon, tooltip: VUtils.isBlank(tooltip) ? ($key ?? $wt) : tooltip
 			});
 		}
 		return buttons;

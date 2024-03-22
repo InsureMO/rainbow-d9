@@ -24,7 +24,6 @@
 - Caption::::
 	- label: Say Hello to World
 	- click: alert: Hello World!
-	- fill: link
 - Label::::columnC
 - Label::::columnD
 - Label::::columnE

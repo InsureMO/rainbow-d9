@@ -6,6 +6,8 @@ export const beautifyTemplate = (template: string, prefix: string, indent: strin
 		} else if (line.trim().startsWith('#')) {
 			// force insert an empty line after heading
 			return `${indent}${line}\n`;
+		} else if (line === '') {
+			return line;
 		} else {
 			return `${indent}  ${line}`;
 		}

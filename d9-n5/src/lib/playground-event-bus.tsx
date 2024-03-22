@@ -1,4 +1,4 @@
-import {useCreateEventBus} from '@rainbow-d9/n1';
+import {useCreateEventBus, WidgetType} from '@rainbow-d9/n1';
 import React, {createContext, ReactNode, useContext} from 'react';
 import {PlaygroundWidgetGroupKey} from './types';
 
@@ -74,17 +74,17 @@ export interface PlaygroundEventBus {
 
 	off(type: PlaygroundEventTypes.CONTENT_CHANGED, listener: (content?: string) => void): this;
 
-	fire(type: PlaygroundEventTypes.INSERT_WIDGET_TEMPLATE, widgetType: string): this;
+	fire(type: PlaygroundEventTypes.INSERT_WIDGET_TEMPLATE, keyOrWidgetType: WidgetType | string): this;
 
-	on(type: PlaygroundEventTypes.INSERT_WIDGET_TEMPLATE, listener: (widgetType: string) => void): this;
+	on(type: PlaygroundEventTypes.INSERT_WIDGET_TEMPLATE, listener: (keyOrWidgetType: WidgetType | string) => void): this;
 
-	off(type: PlaygroundEventTypes.INSERT_WIDGET_TEMPLATE, listener: (widgetType: string) => void): this;
+	off(type: PlaygroundEventTypes.INSERT_WIDGET_TEMPLATE, listener: (keyOrWidgetType: WidgetType | string) => void): this;
 
-	fire(type: PlaygroundEventTypes.SHOW_WIDGET_TEMPLATE_DIALOG, widgetType: string, prefix: string, reason: ReactNode): this;
+	fire(type: PlaygroundEventTypes.SHOW_WIDGET_TEMPLATE_DIALOG, keyOrWidgetType: WidgetType | string, prefix: string, reason: ReactNode): this;
 
-	on(type: PlaygroundEventTypes.SHOW_WIDGET_TEMPLATE_DIALOG, listener: (widgetType: string, prefix: string, reason: ReactNode) => void): this;
+	on(type: PlaygroundEventTypes.SHOW_WIDGET_TEMPLATE_DIALOG, listener: (keyOrWidgetType: WidgetType | string, prefix: string, reason: ReactNode) => void): this;
 
-	off(type: PlaygroundEventTypes.SHOW_WIDGET_TEMPLATE_DIALOG, listener: (widgetType: string, prefix: string, reason: ReactNode) => void): this;
+	off(type: PlaygroundEventTypes.SHOW_WIDGET_TEMPLATE_DIALOG, listener: (keyOrWidgetType: WidgetType | string, prefix: string, reason: ReactNode) => void): this;
 }
 
 const Context = createContext<PlaygroundEventBus>({} as PlaygroundEventBus);

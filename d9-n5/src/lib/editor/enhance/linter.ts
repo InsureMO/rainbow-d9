@@ -175,7 +175,12 @@ export const createWidgetLinter = (options: {
 		}
 	};
 	const lintWidgetAttrName = (view: EditorView, tree: Tree, node: SyntaxNodeRef, diagnostics: Array<Diagnostic>) => {
-		const {$wt, property, direct} = findWidgetTypeAndProperty(node.node, view.state, tree);
+		const found = findWidgetTypeAndProperty(node.node, view.state, tree);
+		const {$wt, direct} = found;
+		let property = found.property ?? '';
+		if (property.startsWith('!')) {
+			property = property.substring(1).trim();
+		}
 		if ($wt == null && direct === true) {
 			diagnostics.push({
 				from: node.from, to: node.to,
@@ -186,6 +191,10 @@ export const createWidgetLinter = (options: {
 		if (property.startsWith('data-') || commonWidgetAttributes[property] != null) {
 			return;
 		}
+		if ($wt == null) {
+			// widget type not found, and is indirect attribute, ignored
+			return;
+		}
 		const widgetType = $wt.trim();
 		if (allWidgets[widgetType] == null) {
 			diagnostics.push({
@@ -194,6 +203,10 @@ export const createWidgetLinter = (options: {
 				message: `Property[${property}] on widget[${$wt}] is not allowed.`
 			});
 		} else if ((allWidgets[widgetType].properties ?? []).every(({name}) => name !== (property).trim())) {
+			// TODO SPECIAL CASES, SHOULD BE DEFINED SOMEWHERE
+			if (widgetType === 'Button' && property === 'prebuilt') {
+				return;
+			}
 			diagnostics.push({
 				from: node.from, to: node.to,
 				severity: 'error',
