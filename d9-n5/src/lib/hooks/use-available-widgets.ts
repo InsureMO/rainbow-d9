@@ -16,11 +16,13 @@ export interface AvailableWidgets {
 	extensions: PlaygroundWidgets['extensions'];
 }
 
-export const useAvailableWidgets = (widgets: PlaygroundWidgets, useN2: boolean) => {
+export const useAvailableWidgets = (widgets: PlaygroundWidgets, options: { useN2: boolean, useCharts: boolean }) => {
+	const {useN2, useCharts} = options;
+
 	const [availableWidgets, setAvailableWidgets] = useState<AvailableWidgets>(() => {
 		return {
 			groups: computeWidgetGroups(widgets?.groups ?? [], useN2),
-			widgets: computeWidgets(widgets?.widgets ?? [], useN2),
+			widgets: computeWidgets(widgets?.widgets ?? [], {useN2, useCharts}),
 			icons: computeIcons({
 				icons: widgets?.icons.icons ?? [], applicableTo: widgets?.icons.applicableTo ?? []
 			}, useN2),
@@ -31,14 +33,14 @@ export const useAvailableWidgets = (widgets: PlaygroundWidgets, useN2: boolean) 
 	useEffect(() => {
 		setAvailableWidgets({
 			groups: computeWidgetGroups(widgets?.groups ?? [], useN2),
-			widgets: computeWidgets(widgets?.widgets ?? [], useN2),
+			widgets: computeWidgets(widgets?.widgets ?? [], {useN2, useCharts}),
 			icons: computeIcons({
 				icons: widgets?.icons.icons ?? [], applicableTo: widgets?.icons.applicableTo ?? []
 			}, useN2),
 			constants: computeConstants(widgets?.constants ?? [], useN2),
 			extensions: computeReferences(widgets?.extensions ?? [], useN2)
 		});
-	}, [widgets, useN2]);
+	}, [widgets, useN2, useCharts]);
 
 	return availableWidgets;
 };

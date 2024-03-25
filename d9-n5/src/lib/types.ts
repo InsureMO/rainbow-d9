@@ -106,6 +106,11 @@ export interface PlaygroundWidgets {
 	extensions?: Array<PlaygroundReference>;
 }
 
+export interface PlaygroundWidgetUsage {
+	useN2?: boolean;
+	useCharts?: boolean;
+}
+
 /** configuration definition */
 export type PlaygroundDef = ValueChangeableNodeDef & OmitHTMLProps<HTMLDivElement> & {
 	mockData?: BaseModel | (() => Promise<BaseModel>);
@@ -113,7 +118,7 @@ export type PlaygroundDef = ValueChangeableNodeDef & OmitHTMLProps<HTMLDivElemen
 	/** in case of external defs has proxy property */
 	externalDefsTypes?: ExternalDefsTypes | (() => Promise<ExternalDefsTypes>);
 	widgets?: PlaygroundWidgets;
-	useN2?: boolean;
+	usage?: PlaygroundWidgetUsage;
 	minViewerWidth?: number;
 };
 

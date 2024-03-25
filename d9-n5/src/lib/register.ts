@@ -1,7 +1,7 @@
-import {NodeDef, registerWidget, VUtils} from '@rainbow-d9/n1';
+import {NodeDef, registerWidget, Undefinable, VUtils} from '@rainbow-d9/n1';
 import {Widget} from '@rainbow-d9/n3';
 import {Playground} from './playground';
-import {PlaygroundDef} from './types';
+import {PlaygroundDef, PlaygroundWidgetUsage} from './types';
 
 Widget.ValidatorUtils.registerRegexps({'abc': /^abc$/});
 
@@ -25,6 +25,14 @@ export abstract class AbstractPlaygroundTranslator extends Widget.SpecificWidget
 			PlaygroundExternalDefsBuild,
 			PlaygroundExternalDefsTypesBuild
 		];
+	}
+
+	public getAttributeNamesMapping(): Undefinable<Record<Widget.CustomAttributeName, Widget.WidgetPropertyName>> {
+		const keys: Array<keyof PlaygroundWidgetUsage> = ['useN2', 'useCharts'];
+		return keys.reduce((mapping, key) => {
+			mapping[`${this.getSupportedType()}.${key}`] = `usage.${key}`;
+			return mapping;
+		}, {});
 	}
 }
 

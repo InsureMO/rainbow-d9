@@ -145,6 +145,32 @@ const TableProperties: Array<PlaygroundWidgetProperty> = [
 const RibsProperties: Array<PlaygroundWidgetProperty> = [
 	{name: 'caption', label: 'Text, Various.', description: 'Caption for each item.'}
 ];
+const ChartProperties: Array<PlaygroundWidgetProperty> = [
+	{name: 'initOptions', label: 'Snippet.', description: 'Init options of echarts.'},
+	{name: 'options', label: 'Snippet.', description: 'Options of echarts.'},
+	{name: 'settings', label: 'Snippet.', description: 'Settings of echarts.'},
+	{name: 'marker', label: 'Text.', description: 'Global identify this section when global event fired.'},
+	{
+		name: 'mergeData', label: 'Snippet.',
+		description: 'Merge data into chart options, data format depends on chart type.'
+	},
+	{
+		name: 'merge', label: 'Snippet. Shortcut of "mergeData".',
+		description: 'Merge data into chart options, data format depends on chart type.'
+	},
+	{name: 'loading', label: 'Snippet.', description: 'Loading options of echarts.'},
+	{name: 'height', label: 'Text, Number.', description: 'Height of chart.'}
+];
+const ChartFetchProperties: Array<PlaygroundWidgetProperty> = [
+	{
+		name: 'fetchData', label: 'Snippet.',
+		description: 'Fetch data for chart. Data format depends on chart type.'
+	},
+	{
+		name: 'fetch', label: 'Snippet. Shortcut of "fetchData".',
+		description: 'Fetch data for chart. Data format depends on chart type.'
+	}
+];
 
 const ValidationRequired: PlaygroundWidgetProperty = {
 	name: 'required', label: 'Boolean, Various.', description: 'Required check. Customize message after ";".'
@@ -186,6 +212,149 @@ export const N2WidgetGroups: Array<PlaygroundWidgetGroup> = [
 	{icon: PlaygroundIcons.DISPLAY_GROUP, tooltip: 'Label & Chart', key: PlaygroundWidgetGroupKey.DISPLAY}
 ];
 
+export const EChartsWidgets: Array<PlaygroundWidget> = [
+	{
+		$wt: 'Chart', $key: 'ChartPie', label: 'Pie chart.',
+		properties: ChartProperties,
+		icon: PlaygroundIcons.CHART_PIE, group: PlaygroundWidgetGroupKey.DISPLAY, tooltip: 'Pie Chart',
+		template: `Chart::[caption]::[property]
+- options:
+  \`\`\`javascript
+  return {
+    xAxis: {type: 'category', data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']},
+    yAxis: {type: 'value'},
+    series: [{type: 'pie'}]
+  }
+  \`\`\`
+- merge:
+  \`\`\`javascript
+  // options.series[0].data = data;
+  options.series[0].data = [120, 200, 150, 80, 70, 110, 130];
+  return options;
+  \`\`\`
+`
+	},
+	{
+		$wt: 'Chart', $key: 'ChartBar', label: 'Bar chart.',
+		properties: ChartProperties,
+		icon: PlaygroundIcons.CHART_BAR, group: PlaygroundWidgetGroupKey.DISPLAY, tooltip: 'Bar Chart',
+		template: `Chart::[caption]::[property]
+- options:
+  \`\`\`javascript
+  return {
+    xAxis: {type: 'category', data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']},
+    yAxis: {type: 'value'},
+    series: [{type: 'bar'}]
+  }
+  \`\`\`
+- merge:
+  \`\`\`javascript
+  // options.series[0].data = data;
+  options.series[0].data = [120, 200, 150, 80, 70, 110, 130];
+  return options;
+  \`\`\`
+`
+	},
+	{
+		$wt: 'Chart', $key: 'ChartLine', label: 'Line chart.',
+		properties: ChartProperties,
+		icon: PlaygroundIcons.CHART_LINE, group: PlaygroundWidgetGroupKey.DISPLAY, tooltip: 'Line Chart',
+		template: `Chart::[caption]::[property]
+- options:
+  \`\`\`javascript
+  return {
+    xAxis: {type: 'category', data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']},
+    yAxis: {type: 'value'},
+    series: [{type: 'line'}]
+  }
+  \`\`\`
+- merge:
+  \`\`\`javascript
+  // options.series[0].data = data;
+  options.series[0].data = [120, 200, 150, 80, 70, 110, 130];
+  return options;
+  \`\`\`
+`
+	},
+	{
+		$wt: 'RelChart', label: 'Chart. Refresh depends on others.',
+		properties: [
+			...ChartProperties,
+			...ChartFetchProperties,
+			{name: 'fetchDefer', label: 'Number.', description: 'Defer time in seconds after criteria changed.'},
+			{
+				name: 'defer', label: 'Number. Shortcut of "fetchDefer".',
+				description: 'Defer time in seconds after criteria changed.'
+			}
+		],
+		icon: PlaygroundIcons.CHART_RELIANT, group: PlaygroundWidgetGroupKey.DISPLAY,
+		tooltip: 'Chart depends on data',
+		template: `RelChart::[caption]::[property]
+- options:
+  \`\`\`javascript
+  return {
+    legend: {top: 'bottom'},
+    series: [
+      {
+        name: 'Nightingale Chart', type: 'pie', radius: ['20%', '60%'], center: ['50%', '50%'], roseType: 'area',
+        itemStyle: { borderRadius: 8 }
+      }
+    ]
+  }
+  \`\`\`
+- merge:
+  \`\`\`javascript
+  options.series[0].data = data;
+  return options;
+  \`\`\`
+- fetch:
+  \`\`\`typescript
+  return ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'].map(name => {
+    return { value: Math.ceil(Math.random() * 30) + 20, name };
+  });
+  \`\`\`
+- criteria:
+  - on: /criteria.**
+`
+	},
+	{
+		$wt: 'AutChart', label: 'Chart. Refresh autonomously.',
+		properties: [
+			...ChartProperties,
+			...ChartFetchProperties,
+			{name: 'fetchInterval', label: 'Number.', description: 'Interval time in seconds.'},
+			{name: 'interval', label: 'Number. Shortcut of "fetchInterval".', description: 'Interval time in seconds.'}
+		],
+		icon: PlaygroundIcons.CHART_AUTONOMOUS, group: PlaygroundWidgetGroupKey.DISPLAY,
+		tooltip: 'Auto refresh chart',
+		template: `AutChart::[caption]::[property]
+- options:
+  \`\`\`javascript
+  return {
+    legend: {top: 'bottom'},
+    series: [
+      {
+        name: 'Nightingale Chart', type: 'pie', radius: ['20%', '60%'], center: ['50%', '50%'], roseType: 'area',
+        itemStyle: { borderRadius: 8 }
+      }
+    ]
+  }
+  \`\`\`
+- merge:
+  \`\`\`javascript
+  options.series[0].data = data;
+  return options;
+  \`\`\`
+- fetch:
+  \`\`\`typescript
+  return ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'].map(name => {
+    return { value: Math.ceil(Math.random() * 30) + 20, name };
+  });
+  \`\`\`
+- interval: 1
+`
+	}
+];
 export const N2Widgets: Array<PlaygroundWidget> = [
 	{
 		$wt: N2.N2WidgetType.PAGE, description: 'Only one allowed, and always at the highest level.',
@@ -490,129 +659,6 @@ export const N2Widgets: Array<PlaygroundWidget> = [
 - validateScopes: scope1, scope2
 `
 	},
-	{
-		$wt: 'Chart', $key: 'ChartPie', label: 'Pie chart.',
-		icon: PlaygroundIcons.CHART_PIE, group: PlaygroundWidgetGroupKey.DISPLAY, tooltip: 'Pie Chart',
-		template: `Chart::[caption]::[property]
-- options:
-  \`\`\`javascript
-  return {
-    xAxis: {type: 'category', data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']},
-    yAxis: {type: 'value'},
-    series: [{type: 'pie'}]
-  }
-  \`\`\`
-- merge:
-  \`\`\`javascript
-  // options.series[0].data = data;
-  options.series[0].data = [120, 200, 150, 80, 70, 110, 130];
-  return options;
-  \`\`\`
-`
-	},
-	{
-		$wt: 'Chart', $key: 'ChartBar', label: 'Bar chart.',
-		icon: PlaygroundIcons.CHART_BAR, group: PlaygroundWidgetGroupKey.DISPLAY, tooltip: 'Bar Chart',
-		template: `Chart::[caption]::[property]
-- options:
-  \`\`\`javascript
-  return {
-    xAxis: {type: 'category', data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']},
-    yAxis: {type: 'value'},
-    series: [{type: 'bar'}]
-  }
-  \`\`\`
-- merge:
-  \`\`\`javascript
-  // options.series[0].data = data;
-  options.series[0].data = [120, 200, 150, 80, 70, 110, 130];
-  return options;
-  \`\`\`
-`
-	},
-	{
-		$wt: 'Chart', $key: 'ChartLine', label: 'Line chart.',
-		icon: PlaygroundIcons.CHART_LINE, group: PlaygroundWidgetGroupKey.DISPLAY, tooltip: 'Line Chart',
-		template: `Chart::[caption]::[property]
-- options:
-  \`\`\`javascript
-  return {
-    xAxis: {type: 'category', data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']},
-    yAxis: {type: 'value'},
-    series: [{type: 'line'}]
-  }
-  \`\`\`
-- merge:
-  \`\`\`javascript
-  // options.series[0].data = data;
-  options.series[0].data = [120, 200, 150, 80, 70, 110, 130];
-  return options;
-  \`\`\`
-`
-	},
-	{
-		$wt: 'RelChart', label: 'Chart. Refresh depends on others.',
-		icon: PlaygroundIcons.CHART_RELIANT, group: PlaygroundWidgetGroupKey.DISPLAY,
-		tooltip: 'Chart depends on data',
-		template: `RelChart::[caption]::[property]
-- options:
-  \`\`\`javascript
-  return {
-    legend: {top: 'bottom'},
-    series: [
-      {
-        name: 'Nightingale Chart', type: 'pie', radius: ['20%', '60%'], center: ['50%', '50%'], roseType: 'area',
-        itemStyle: { borderRadius: 8 }
-      }
-    ]
-  }
-  \`\`\`
-- merge:
-  \`\`\`javascript
-  options.series[0].data = data;
-  return options;
-  \`\`\`
-- fetch:
-  \`\`\`typescript
-  return ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'].map(name => {
-    return { value: Math.ceil(Math.random() * 30) + 20, name };
-  });
-  \`\`\`
-- criteria:
-  - on: /criteria.**
-`
-	},
-	{
-		$wt: 'AutChart', label: 'Chart. Refresh autonomously.',
-		icon: PlaygroundIcons.CHART_AUTONOMOUS, group: PlaygroundWidgetGroupKey.DISPLAY,
-		tooltip: 'Auto refresh chart',
-		template: `AutChart::[caption]::[property]
-- options:
-  \`\`\`javascript
-  return {
-    legend: {top: 'bottom'},
-    series: [
-      {
-        name: 'Nightingale Chart', type: 'pie', radius: ['20%', '60%'], center: ['50%', '50%'], roseType: 'area',
-        itemStyle: { borderRadius: 8 }
-      }
-    ]
-  }
-  \`\`\`
-- merge:
-  \`\`\`javascript
-  options.series[0].data = data;
-  return options;
-  \`\`\`
-- fetch:
-  \`\`\`typescript
-  return ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'].map(name => {
-    return { value: Math.ceil(Math.random() * 30) + 20, name };
-  });
-  \`\`\`
-- interval: 1
-`
-	},
 
 	// containers
 	{
@@ -851,12 +897,14 @@ export const N2Widgets: Array<PlaygroundWidget> = [
 ];
 
 export const computeWidgetGroups = (groups: Array<PlaygroundWidgetGroup>, useN2: boolean) => {
-	return [
-		...(useN2 ? N2WidgetGroups : []), ...groups
-	];
+	return [...(useN2 ? N2WidgetGroups : []), ...groups];
 };
-export const computeWidgets = (widgets: Array<PlaygroundWidget>, useN2: boolean) => {
-	return [...(useN2 ? N2Widgets : []), ...widgets];
+export const computeWidgets = (widgets: Array<PlaygroundWidget>, options: { useN2: boolean, useCharts: boolean }) => {
+	return [
+		...(options.useN2 ? N2Widgets : []),
+		...(options.useCharts ? EChartsWidgets : []),
+		...widgets
+	];
 };
 
 export const N2Icons: Array<PlaygroundIcon> = [

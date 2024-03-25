@@ -9,7 +9,7 @@ import {PlaygroundBridge} from './playground-bridge';
 import {PlaygroundEventBusProvider, PlaygroundEventTypes, usePlaygroundEventBus} from './playground-event-bus';
 import {Slider} from './slider';
 import {Toolbar} from './toolbar';
-import {PlaygroundProps, UnwrappedPlaygroundProps} from './types';
+import {PlaygroundProps, PlaygroundWidgetUsage, UnwrappedPlaygroundProps} from './types';
 import {Viewer} from './viewer';
 import {PlaygroundCssVars} from './widgets';
 
@@ -59,7 +59,7 @@ export const PlaygroundDelegate = (props: PlaygroundProps) => {
 		$pp, $wrapped,
 		mockData,
 		externalDefs, externalDefsTypes,
-		widgets, useN2 = true,
+		widgets, usage: {useN2 = true, useCharts = false} = {} as PlaygroundWidgetUsage,
 		minViewerWidth,
 		...rest
 	} = props;
@@ -73,7 +73,7 @@ export const PlaygroundDelegate = (props: PlaygroundProps) => {
 		mockData: initializedMockData,
 		externalDefs: initializedExternalDefs, externalDefsTypes: initializedExternalDefsTypes
 	} = useInitialize({mockData, externalDefs, externalDefsTypes});
-	const availableWidgets = useAvailableWidgets(widgets, useN2);
+	const availableWidgets = useAvailableWidgets(widgets, {useN2, useCharts});
 	const {zen, maximized} = useViewMode();
 
 	if (!initialized) {
