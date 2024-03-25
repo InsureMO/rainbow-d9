@@ -4,28 +4,28 @@ var __publicField = (obj, key, value) => {
   __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
   return value;
 };
-import { R as React, r as reactExports, j as jsxRuntimeExports, c as client } from "./react-ZQbP97Ss.js";
-import { r as registerCharts } from "./rainbow-d9-echarts-tzhbbaUK.js";
-import { V as VUtils, r as registerWidget, f as useCreateEventBus, M as MUtils, P as PPUtils, u as useThrottler, S as StandaloneRoot, m as ExternalDefMismatchIndicator, n as N1Logger, E as ExternalDefIndicator, B as BridgeEventBusProvider, o as useBridgeEventBus, p as BridgeToRootEventTypes, h as MBUtils, D as DeviceDetective } from "./rainbow-d9-n1-sGxuznDD.js";
-import { i as index$2, D as DOM_KEY_WIDGET, C as CssVars, d as utils$1, b as useGlobalHandlers, t as toIntlLabel, U as UnwrappedButton, B as ButtonInk, I as IntlLabel, e as ButtonFill, n as utils$2, m as GlobalRoot, $ as $d9n2, u as useGlobalEventBus, o as UnwrappedButtonBar, p as ButtonBarAlignment, G as GlobalEventTypes, q as UnwrappedSection } from "./rainbow-d9-n2-S-3xMZIf.js";
-import { a as index$2$1, b as index, i as index$1, p as parseDoc, r as registerN2Widgets } from "./rainbow-d9-n3-50xrpI9O.js";
-import { q as qe, $ as $e } from "./styled-components-_vLSNquC.js";
-import { T as Tag, j as tags, k as ViewPlugin, l as syntaxTree, H as HighlightStyle, o as defaultHighlightStyle, q as syntaxHighlighting, r as styleTags, D as Decoration, I as InlineContext, W as WidgetType, v as EditorView, x as EditorState, y as basicSetup, z as keymap, A as indentWithTab, B as markdown$c, C as javascript, F as markdownLanguage, G as lintGutter, J as linter, n as nanoid } from "./vendor-zG0q0FlX.js";
-import { r as registerPlanSelect, u as useDemoMarkdown, C as CustomEventHandler, N as N2DemoDialogHandler, T as ThaiPlanSelection, a as ThaiPlanSelectionData, b as ThaiPlanSelectionMarkdown, P as PlanSelectionCssVars } from "./rainbow-d9-thai-plan-selection-vERYQG0e.js";
+import { R as React, r as reactExports, j as jsxRuntimeExports, c as client } from "./react-JlXBV7c-.js";
+import { r as registerCharts } from "./rainbow-d9-echarts-ZSOTh3IB.js";
+import { V as VUtils, r as registerWidget, f as useCreateEventBus, M as MUtils, P as PPUtils, u as useThrottler, S as StandaloneRoot, m as ExternalDefMismatchIndicator, n as N1Logger, E as ExternalDefIndicator, B as BridgeEventBusProvider, o as useBridgeEventBus, p as BridgeToRootEventTypes, h as MBUtils, D as DeviceDetective } from "./rainbow-d9-n1-ZgNI_n7p.js";
+import { i as index$2, D as DOM_KEY_WIDGET, C as CssVars, d as utils$1, b as useGlobalHandlers, t as toIntlLabel, U as UnwrappedButton, B as ButtonInk, I as IntlLabel, e as ButtonFill, n as utils$2, m as GlobalRoot, $ as $d9n2, u as useGlobalEventBus, o as UnwrappedButtonBar, p as ButtonBarAlignment, G as GlobalEventTypes, q as UnwrappedSection } from "./rainbow-d9-n2-qeAEFjAk.js";
+import { a as index$2$1, b as index, i as index$1, p as parseDoc, r as registerN2Widgets } from "./rainbow-d9-n3-Ib_riEAM.js";
+import { q as qe, $ as $e } from "./styled-components-CCSEkPWF.js";
+import { T as Tag, j as tags, k as ViewPlugin, l as syntaxTree, H as HighlightStyle, o as defaultHighlightStyle, q as syntaxHighlighting, r as styleTags, D as Decoration, I as InlineContext, W as WidgetType, v as EditorView, x as EditorState, y as basicSetup, z as keymap, A as indentWithTab, B as markdown$c, C as javascript, F as markdownLanguage, G as lintGutter, J as linter, n as nanoid } from "./vendor-KG5onvK6.js";
+import { r as registerPlanSelect, u as useDemoMarkdown, C as CustomEventHandler, N as N2DemoDialogHandler, T as ThaiPlanSelection, a as ThaiPlanSelectionData, b as ThaiPlanSelectionMarkdown, P as PlanSelectionCssVars } from "./rainbow-d9-thai-plan-selection-iudBYUwK.js";
 import { d as dayjs, W as WeekOfYear, Q as QuarterOfYear, D as Duration, I as IsToday, R as RelativeTime, A as ArraySupport, O as ObjectSupport, C as CustomParseFormat, U as UTC, B as BuddhistEra } from "./dayjs-9Z7dW0Q-.js";
 import { u as use, a as install, b as install$1, c as install$2, d as install$3, e as install$4, f as install$5, h as installLabelLayout, j as installUniversalTransition, k as install$6, l as install$7 } from "./echarts-v5L9gyiQ.js";
-import { b as remarkGfm } from "./remark-GSekeZRn.js";
-import { R as ReactMarkdown } from "./react-markdown--yLLM8Z6.js";
-import { S as SyntaxHighlighter, m as materialDark, _ as __vitePreload } from "./react-syntax-highlighter-GSB810lz.js";
+import { b as remarkGfm } from "./remark-47drf5d8.js";
+import { R as ReactMarkdown } from "./react-markdown-iGorNiHl.js";
+import { S as SyntaxHighlighter, m as materialDark, _ as __vitePreload } from "./react-syntax-highlighter-BS4gq4e8.js";
 import "./babel-AnpZxJH-.js";
-import "./mdast-tVFtQbC4.js";
-import "./micromark-zmzywIFW.js";
+import "./mdast-GaLbcCj0.js";
+import "./micromark-sNHsSe9I.js";
 import "./unist-5yxlKLF4.js";
 import "./emotion--D3psyId.js";
 import "./zrender-DEzoFf2M.js";
-import "./property-information-BlE6pgiF.js";
-import "./refractor-1B-Zhp7s.js";
-import "./hastscript-H0v4-Lfq.js";
+import "./property-information-HeW8nFhU.js";
+import "./refractor-qW72MO4J.js";
+import "./hastscript-eFcsYmyf.js";
 (function polyfill() {
   const relList = document.createElement("link").relList;
   if (relList && relList.supports && relList.supports("modulepreload")) {
@@ -1091,6 +1091,36 @@ const TableProperties = [
 const RibsProperties = [
   { name: "caption", label: "Text, Various.", description: "Caption for each item." }
 ];
+const ChartProperties = [
+  { name: "initOptions", label: "Snippet.", description: "Init options of echarts." },
+  { name: "options", label: "Snippet.", description: "Options of echarts." },
+  { name: "settings", label: "Snippet.", description: "Settings of echarts." },
+  { name: "marker", label: "Text.", description: "Global identify this section when global event fired." },
+  {
+    name: "mergeData",
+    label: "Snippet.",
+    description: "Merge data into chart options, data format depends on chart type."
+  },
+  {
+    name: "merge",
+    label: 'Snippet. Shortcut of "mergeData".',
+    description: "Merge data into chart options, data format depends on chart type."
+  },
+  { name: "loading", label: "Snippet.", description: "Loading options of echarts." },
+  { name: "height", label: "Text, Number.", description: "Height of chart." }
+];
+const ChartFetchProperties = [
+  {
+    name: "fetchData",
+    label: "Snippet.",
+    description: "Fetch data for chart. Data format depends on chart type."
+  },
+  {
+    name: "fetch",
+    label: 'Snippet. Shortcut of "fetchData".',
+    description: "Fetch data for chart. Data format depends on chart type."
+  }
+];
 const ValidationRequired = {
   name: "required",
   label: "Boolean, Various.",
@@ -1141,6 +1171,166 @@ const N2WidgetGroups = [
   { icon: PlaygroundIcons.INPUT_GROUP, tooltip: "Input", key: PlaygroundWidgetGroupKey.INPUTS },
   { icon: PlaygroundIcons.OPTIONS_GROUP, tooltip: "Choices", key: PlaygroundWidgetGroupKey.OPTIONS },
   { icon: PlaygroundIcons.DISPLAY_GROUP, tooltip: "Label & Chart", key: PlaygroundWidgetGroupKey.DISPLAY }
+];
+const EChartsWidgets = [
+  {
+    $wt: "Chart",
+    $key: "ChartPie",
+    label: "Pie chart.",
+    properties: ChartProperties,
+    icon: PlaygroundIcons.CHART_PIE,
+    group: PlaygroundWidgetGroupKey.DISPLAY,
+    tooltip: "Pie Chart",
+    template: `Chart::[caption]::[property]
+- options:
+  \`\`\`javascript
+  return {
+    xAxis: {type: 'category', data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']},
+    yAxis: {type: 'value'},
+    series: [{type: 'pie'}]
+  }
+  \`\`\`
+- merge:
+  \`\`\`javascript
+  // options.series[0].data = data;
+  options.series[0].data = [120, 200, 150, 80, 70, 110, 130];
+  return options;
+  \`\`\`
+`
+  },
+  {
+    $wt: "Chart",
+    $key: "ChartBar",
+    label: "Bar chart.",
+    properties: ChartProperties,
+    icon: PlaygroundIcons.CHART_BAR,
+    group: PlaygroundWidgetGroupKey.DISPLAY,
+    tooltip: "Bar Chart",
+    template: `Chart::[caption]::[property]
+- options:
+  \`\`\`javascript
+  return {
+    xAxis: {type: 'category', data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']},
+    yAxis: {type: 'value'},
+    series: [{type: 'bar'}]
+  }
+  \`\`\`
+- merge:
+  \`\`\`javascript
+  // options.series[0].data = data;
+  options.series[0].data = [120, 200, 150, 80, 70, 110, 130];
+  return options;
+  \`\`\`
+`
+  },
+  {
+    $wt: "Chart",
+    $key: "ChartLine",
+    label: "Line chart.",
+    properties: ChartProperties,
+    icon: PlaygroundIcons.CHART_LINE,
+    group: PlaygroundWidgetGroupKey.DISPLAY,
+    tooltip: "Line Chart",
+    template: `Chart::[caption]::[property]
+- options:
+  \`\`\`javascript
+  return {
+    xAxis: {type: 'category', data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']},
+    yAxis: {type: 'value'},
+    series: [{type: 'line'}]
+  }
+  \`\`\`
+- merge:
+  \`\`\`javascript
+  // options.series[0].data = data;
+  options.series[0].data = [120, 200, 150, 80, 70, 110, 130];
+  return options;
+  \`\`\`
+`
+  },
+  {
+    $wt: "RelChart",
+    label: "Chart. Refresh depends on others.",
+    properties: [
+      ...ChartProperties,
+      ...ChartFetchProperties,
+      { name: "fetchDefer", label: "Number.", description: "Defer time in seconds after criteria changed." },
+      {
+        name: "defer",
+        label: 'Number. Shortcut of "fetchDefer".',
+        description: "Defer time in seconds after criteria changed."
+      }
+    ],
+    icon: PlaygroundIcons.CHART_RELIANT,
+    group: PlaygroundWidgetGroupKey.DISPLAY,
+    tooltip: "Chart depends on data",
+    template: `RelChart::[caption]::[property]
+- options:
+  \`\`\`javascript
+  return {
+    legend: {top: 'bottom'},
+    series: [
+      {
+        name: 'Nightingale Chart', type: 'pie', radius: ['20%', '60%'], center: ['50%', '50%'], roseType: 'area',
+        itemStyle: { borderRadius: 8 }
+      }
+    ]
+  }
+  \`\`\`
+- merge:
+  \`\`\`javascript
+  options.series[0].data = data;
+  return options;
+  \`\`\`
+- fetch:
+  \`\`\`typescript
+  return ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'].map(name => {
+    return { value: Math.ceil(Math.random() * 30) + 20, name };
+  });
+  \`\`\`
+- criteria:
+  - on: /criteria.**
+`
+  },
+  {
+    $wt: "AutChart",
+    label: "Chart. Refresh autonomously.",
+    properties: [
+      ...ChartProperties,
+      ...ChartFetchProperties,
+      { name: "fetchInterval", label: "Number.", description: "Interval time in seconds." },
+      { name: "interval", label: 'Number. Shortcut of "fetchInterval".', description: "Interval time in seconds." }
+    ],
+    icon: PlaygroundIcons.CHART_AUTONOMOUS,
+    group: PlaygroundWidgetGroupKey.DISPLAY,
+    tooltip: "Auto refresh chart",
+    template: `AutChart::[caption]::[property]
+- options:
+  \`\`\`javascript
+  return {
+    legend: {top: 'bottom'},
+    series: [
+      {
+        name: 'Nightingale Chart', type: 'pie', radius: ['20%', '60%'], center: ['50%', '50%'], roseType: 'area',
+        itemStyle: { borderRadius: 8 }
+      }
+    ]
+  }
+  \`\`\`
+- merge:
+  \`\`\`javascript
+  options.series[0].data = data;
+  return options;
+  \`\`\`
+- fetch:
+  \`\`\`typescript
+  return ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'].map(name => {
+    return { value: Math.ceil(Math.random() * 30) + 20, name };
+  });
+  \`\`\`
+- interval: 1
+`
+  }
 ];
 const N2Widgets = [
   {
@@ -1552,145 +1742,6 @@ const N2Widgets = [
 `
   },
   {
-    $wt: "Chart",
-    $key: "ChartPie",
-    label: "Pie chart.",
-    icon: PlaygroundIcons.CHART_PIE,
-    group: PlaygroundWidgetGroupKey.DISPLAY,
-    tooltip: "Pie Chart",
-    template: `Chart::[caption]::[property]
-- options:
-  \`\`\`javascript
-  return {
-    xAxis: {type: 'category', data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']},
-    yAxis: {type: 'value'},
-    series: [{type: 'pie'}]
-  }
-  \`\`\`
-- merge:
-  \`\`\`javascript
-  // options.series[0].data = data;
-  options.series[0].data = [120, 200, 150, 80, 70, 110, 130];
-  return options;
-  \`\`\`
-`
-  },
-  {
-    $wt: "Chart",
-    $key: "ChartBar",
-    label: "Bar chart.",
-    icon: PlaygroundIcons.CHART_BAR,
-    group: PlaygroundWidgetGroupKey.DISPLAY,
-    tooltip: "Bar Chart",
-    template: `Chart::[caption]::[property]
-- options:
-  \`\`\`javascript
-  return {
-    xAxis: {type: 'category', data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']},
-    yAxis: {type: 'value'},
-    series: [{type: 'bar'}]
-  }
-  \`\`\`
-- merge:
-  \`\`\`javascript
-  // options.series[0].data = data;
-  options.series[0].data = [120, 200, 150, 80, 70, 110, 130];
-  return options;
-  \`\`\`
-`
-  },
-  {
-    $wt: "Chart",
-    $key: "ChartLine",
-    label: "Line chart.",
-    icon: PlaygroundIcons.CHART_LINE,
-    group: PlaygroundWidgetGroupKey.DISPLAY,
-    tooltip: "Line Chart",
-    template: `Chart::[caption]::[property]
-- options:
-  \`\`\`javascript
-  return {
-    xAxis: {type: 'category', data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']},
-    yAxis: {type: 'value'},
-    series: [{type: 'line'}]
-  }
-  \`\`\`
-- merge:
-  \`\`\`javascript
-  // options.series[0].data = data;
-  options.series[0].data = [120, 200, 150, 80, 70, 110, 130];
-  return options;
-  \`\`\`
-`
-  },
-  {
-    $wt: "RelChart",
-    label: "Chart. Refresh depends on others.",
-    icon: PlaygroundIcons.CHART_RELIANT,
-    group: PlaygroundWidgetGroupKey.DISPLAY,
-    tooltip: "Chart depends on data",
-    template: `RelChart::[caption]::[property]
-- options:
-  \`\`\`javascript
-  return {
-    legend: {top: 'bottom'},
-    series: [
-      {
-        name: 'Nightingale Chart', type: 'pie', radius: ['20%', '60%'], center: ['50%', '50%'], roseType: 'area',
-        itemStyle: { borderRadius: 8 }
-      }
-    ]
-  }
-  \`\`\`
-- merge:
-  \`\`\`javascript
-  options.series[0].data = data;
-  return options;
-  \`\`\`
-- fetch:
-  \`\`\`typescript
-  return ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'].map(name => {
-    return { value: Math.ceil(Math.random() * 30) + 20, name };
-  });
-  \`\`\`
-- criteria:
-  - on: /criteria.**
-`
-  },
-  {
-    $wt: "AutChart",
-    label: "Chart. Refresh autonomously.",
-    icon: PlaygroundIcons.CHART_AUTONOMOUS,
-    group: PlaygroundWidgetGroupKey.DISPLAY,
-    tooltip: "Auto refresh chart",
-    template: `AutChart::[caption]::[property]
-- options:
-  \`\`\`javascript
-  return {
-    legend: {top: 'bottom'},
-    series: [
-      {
-        name: 'Nightingale Chart', type: 'pie', radius: ['20%', '60%'], center: ['50%', '50%'], roseType: 'area',
-        itemStyle: { borderRadius: 8 }
-      }
-    ]
-  }
-  \`\`\`
-- merge:
-  \`\`\`javascript
-  options.series[0].data = data;
-  return options;
-  \`\`\`
-- fetch:
-  \`\`\`typescript
-  return ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'].map(name => {
-    return { value: Math.ceil(Math.random() * 30) + 20, name };
-  });
-  \`\`\`
-- interval: 1
-`
-  },
-  {
     $wt: index.N2WidgetType.SECTION,
     icon: PlaygroundIcons.SECTION,
     group: PlaygroundWidgetGroupKey.CONTAINERS,
@@ -1952,13 +2003,14 @@ const N2Widgets = [
   }
 ];
 const computeWidgetGroups = (groups, useN2) => {
-  return [
-    ...useN2 ? N2WidgetGroups : [],
-    ...groups
-  ];
+  return [...useN2 ? N2WidgetGroups : [], ...groups];
 };
-const computeWidgets = (widgets, useN2) => {
-  return [...useN2 ? N2Widgets : [], ...widgets];
+const computeWidgets = (widgets, options) => {
+  return [
+    ...options.useN2 ? N2Widgets : [],
+    ...options.useCharts ? EChartsWidgets : [],
+    ...widgets
+  ];
 };
 const N2Icons = [
   { $key: "back" },
@@ -3931,11 +3983,12 @@ const useViewMode = () => {
   }, [on, off]);
   return state;
 };
-const useAvailableWidgets = (widgets, useN2) => {
+const useAvailableWidgets = (widgets, options) => {
+  const { useN2, useCharts } = options;
   const [availableWidgets, setAvailableWidgets] = reactExports.useState(() => {
     return {
       groups: computeWidgetGroups((widgets == null ? void 0 : widgets.groups) ?? [], useN2),
-      widgets: computeWidgets((widgets == null ? void 0 : widgets.widgets) ?? [], useN2),
+      widgets: computeWidgets((widgets == null ? void 0 : widgets.widgets) ?? [], { useN2, useCharts }),
       icons: computeIcons({
         icons: (widgets == null ? void 0 : widgets.icons.icons) ?? [],
         applicableTo: (widgets == null ? void 0 : widgets.icons.applicableTo) ?? []
@@ -3947,7 +4000,7 @@ const useAvailableWidgets = (widgets, useN2) => {
   reactExports.useEffect(() => {
     setAvailableWidgets({
       groups: computeWidgetGroups((widgets == null ? void 0 : widgets.groups) ?? [], useN2),
-      widgets: computeWidgets((widgets == null ? void 0 : widgets.widgets) ?? [], useN2),
+      widgets: computeWidgets((widgets == null ? void 0 : widgets.widgets) ?? [], { useN2, useCharts }),
       icons: computeIcons({
         icons: (widgets == null ? void 0 : widgets.icons.icons) ?? [],
         applicableTo: (widgets == null ? void 0 : widgets.icons.applicableTo) ?? []
@@ -3955,7 +4008,7 @@ const useAvailableWidgets = (widgets, useN2) => {
       constants: computeConstants((widgets == null ? void 0 : widgets.constants) ?? [], useN2),
       extensions: computeReferences((widgets == null ? void 0 : widgets.extensions) ?? [])
     });
-  }, [widgets, useN2]);
+  }, [widgets, useN2, useCharts]);
   return availableWidgets;
 };
 const ask = (given, defaultValue) => async () => {
@@ -4099,13 +4152,13 @@ const PlaygroundWrapper = qe.div.attrs(() => {
     }
 `;
 const PlaygroundDelegate = (props) => {
-  const { $pp, $wrapped, mockData, externalDefs, externalDefsTypes, widgets, useN2 = true, minViewerWidth, ...rest } = props;
+  const { $pp, $wrapped, mockData, externalDefs, externalDefsTypes, widgets, usage: { useN2 = true, useCharts = false } = {}, minViewerWidth, ...rest } = props;
   const { $p2r, $onValueChange, $avs: { $disabled, $visible } } = $wrapped;
   const ref = reactExports.useRef(null);
   const globalHandlers = useGlobalHandlers();
   const { fire } = usePlaygroundEventBus();
   const { initialized, mockData: initializedMockData, externalDefs: initializedExternalDefs, externalDefsTypes: initializedExternalDefsTypes } = useInitialize({ mockData, externalDefs, externalDefsTypes });
-  const availableWidgets = useAvailableWidgets(widgets, useN2);
+  const availableWidgets = useAvailableWidgets(widgets, { useN2, useCharts });
   const { zen, maximized } = useViewMode();
   if (!initialized) {
     return null;
@@ -4153,6 +4206,13 @@ class AbstractPlaygroundTranslator extends index$1.SpecificWidgetTranslator {
       PlaygroundExternalDefsTypesBuild
     ];
   }
+  getAttributeNamesMapping() {
+    const keys = ["useN2", "useCharts"];
+    return keys.reduce((mapping, key) => {
+      mapping[`${this.getSupportedType()}.${key}`] = `usage.${key}`;
+      return mapping;
+    }, {});
+  }
 }
 const registerPlayground = (widgetHelper, widgetType) => {
   widgetType = VUtils.isBlank(widgetType) ? "Playground" : widgetType;
@@ -4165,7 +4225,7 @@ const registerPlayground = (widgetHelper, widgetType) => {
   const repo = widgetHelper.repository;
   repo.register(new TranslatorClass(repo));
 };
-var define_process_env_default = { GITHUB_STATE: "/home/runner/work/_temp/_runner_file_commands/save_state_317d6b5e-3050-4beb-9769-f5470cab57f8", npm_package_scripts_build_n5_ci: "cd ./d9-n5 && yarn build-ci", npm_package_scripts_build_sample_cra: "cd ./d9-sample-cra && yarn build", STATS_TRP: "true", DEPLOYMENT_BASEPATH: "/opt/runner", DOTNET_NOLOGO: "1", npm_package_dependencies__vitejs_plugin_react: "^4.2.1", USER: "runner", npm_config_version_commit_hooks: "true", npm_config_user_agent: "yarn/1.22.21 npm/? node/v18.19.1 linux x64", npm_package_dependencies__types_jest: "^29.5.4", CI: "true", npm_config_bin_links: "true", npm_package_bugs_url: "https://github.com/InsureMO/rainbow-d9/issues", npm_config_wrap_output: "", RUNNER_ENVIRONMENT: "github-hosted", GITHUB_ENV: "/home/runner/work/_temp/_runner_file_commands/set_env_317d6b5e-3050-4beb-9769-f5470cab57f8", PIPX_HOME: "/opt/pipx", npm_node_execpath: "/opt/hostedtoolcache/node/18.19.1/x64/bin/node", npm_package_scripts_build_thai_all_ci: "yarn build-thai-plan-selection-ci", npm_config_init_version: "1.0.0", npm_package_devDependencies_gh_pages: "^6.1.1", npm_package_dependencies__babel_plugin_proposal_private_property_in_object: "^7.21.11", JAVA_HOME_8_X64: "/usr/lib/jvm/temurin-8-jdk-amd64", SHLVL: "1", HOME: "/home/runner", OLDPWD: "/home/runner/work/rainbow-d9/rainbow-d9", npm_package_browserslist_production_0: ">0.2%", RUNNER_TEMP: "/home/runner/work/_temp", GITHUB_EVENT_PATH: "/home/runner/work/_temp/_github_workflow/event.json", npm_package_scripts_build_all: "yarn build-n123 && yarn build-n5 && yarn build-echarts && yarn build-thai-all", npm_package_browserslist_production_1: "not dead", npm_package_dependencies_react_syntax_highlighter: "^15.5.0", JAVA_HOME_11_X64: "/usr/lib/jvm/temurin-11-jdk-amd64", PIPX_BIN_DIR: "/opt/pipx_bin", GITHUB_REPOSITORY_OWNER: "InsureMO", npm_package_volta_node: "18.19.0", npm_config_init_license: "MIT", npm_package_browserslist_production_2: "not op_mini all", GRADLE_HOME: "/usr/share/gradle-8.6", ANDROID_NDK_LATEST_HOME: "/usr/local/lib/android/sdk/ndk/26.2.11394342", JAVA_HOME_21_X64: "/usr/lib/jvm/temurin-21-jdk-amd64", STATS_RDCL: "true", GITHUB_RETENTION_DAYS: "90", YARN_WRAP_OUTPUT: "false", npm_package_scripts_build_thai_plan_selection_ci: "cd ./d9-thai-plan-selection && yarn build-ci", npm_package_scripts_build_n1: "cd ./d9-n1 && yarn build", npm_config_version_tag_prefix: "v", npm_package_dependencies__rainbow_d9_n2: "1.0.58", GITHUB_REPOSITORY_OWNER_ID: "38915232", POWERSHELL_DISTRIBUTION_CHANNEL: "GitHub-Actions-ubuntu22", AZURE_EXTENSION_DIR: "/opt/az/azcliextensions", GITHUB_HEAD_REF: "", npm_package_scripts_build_n2: "cd ./d9-n2 && yarn build", npm_package_dependencies__types_styled_components: "^5.1.34", npm_package_dependencies__rainbow_d9_n3: "1.0.58", npm_package_dependencies__rainbow_d9_echarts: "1.0.58", SYSTEMD_EXEC_PID: "592", npm_package_scripts_build_echarts: "cd ./d9-echarts && yarn build", npm_package_scripts_build_n3: "cd ./d9-n3 && yarn build", GITHUB_GRAPHQL_URL: "https://api.github.com/graphql", npm_package_description: "Assume the following envs are ready, otherwise contact the tech guy.", npm_package_scripts_predeploy: "npm run build", npm_package_dependencies__rainbow_d9_n5: "1.0.58", GOROOT_1_20_X64: "/opt/hostedtoolcache/go/1.20.14/x64", NVM_DIR: "/home/runner/.nvm", npm_package_readmeFilename: "README.md", npm_package_scripts_build_n5: "cd ./d9-n5 && yarn build", npm_package_dependencies__types_react: "^18.2.21", npm_package_dependencies__testing_library_react: "^13.4.0", DOTNET_SKIP_FIRST_TIME_EXPERIENCE: "1", GOROOT_1_21_X64: "/opt/hostedtoolcache/go/1.21.8/x64", JAVA_HOME_17_X64: "/usr/lib/jvm/temurin-17-jdk-amd64", ImageVersion: "20240317.1.0", RUNNER_OS: "Linux", GITHUB_API_URL: "https://api.github.com", GOROOT_1_22_X64: "/opt/hostedtoolcache/go/1.22.1/x64", SWIFT_PATH: "/usr/share/swift/usr/bin", RUNNER_USER: "runner", STATS_V3PS: "true", CHROMEWEBDRIVER: "/usr/local/share/chromedriver-linux64", JOURNAL_STREAM: "8:16154", GITHUB_WORKFLOW: "Publish to NPM", _: "/opt/hostedtoolcache/node/18.19.1/x64/bin/yarn", npm_package_private: "true", npm_package_dependencies_remark_gfm: "3.0.1", npm_package_scripts_build_thai_all: "yarn build-thai-plan-selection", npm_config_registry: "https://registry.yarnpkg.com", ACTIONS_RUNNER_ACTION_ARCHIVE_CACHE: "/opt/actionarchivecache", STATS_D: "false", GITHUB_RUN_ID: "8389232096", npm_package_workspaces_0: "d9-n1", GITHUB_REF_TYPE: "tag", BOOTSTRAP_HASKELL_NONINTERACTIVE: "1", GITHUB_WORKFLOW_SHA: "5d3e7f2199f6a98133e652ce509cb0362985cfd8", GITHUB_BASE_REF: "", ImageOS: "ubuntu22", npm_package_scripts_build_n123_ci: "yarn build-n1-ci && yarn build-n2-ci && yarn build-n3-ci", npm_package_workspaces_1: "d9-n2", npm_config_ignore_scripts: "", npm_package_scripts_start: "vite", npm_package_dependencies_github_markdown_css: "^5.5.0", GITHUB_WORKFLOW_REF: "InsureMO/rainbow-d9/.github/workflows/release.yml@refs/tags/r-1.1.0", PERFLOG_LOCATION_SETTING: "RUNNER_PERFLOG", GITHUB_ACTION_REPOSITORY: "", npm_package_workspaces_2: "d9-n3", npm_package_browserslist_development_0: "last 1 chrome version", PATH: "/tmp/yarn--1711105344637-0.23218364207632236:/home/runner/work/rainbow-d9/rainbow-d9/d9-sample-cra/node_modules/.bin:/home/runner/.config/yarn/link/node_modules/.bin:/home/runner/work/rainbow-d9/rainbow-d9/node_modules/.bin:/opt/hostedtoolcache/node/18.19.1/x64/libexec/lib/node_modules/npm/bin/node-gyp-bin:/opt/hostedtoolcache/node/18.19.1/x64/lib/node_modules/npm/bin/node-gyp-bin:/opt/hostedtoolcache/node/18.19.1/x64/bin/node_modules/npm/bin/node-gyp-bin:/tmp/yarn--1711105344434-0.2490491609618135:/home/runner/work/rainbow-d9/rainbow-d9/node_modules/.bin:/home/runner/.config/yarn/link/node_modules/.bin:/home/runner/work/rainbow-d9/rainbow-d9/node_modules/.bin:/opt/hostedtoolcache/node/18.19.1/x64/libexec/lib/node_modules/npm/bin/node-gyp-bin:/opt/hostedtoolcache/node/18.19.1/x64/lib/node_modules/npm/bin/node-gyp-bin:/opt/hostedtoolcache/node/18.19.1/x64/bin/node_modules/npm/bin/node-gyp-bin:/opt/hostedtoolcache/node/18.19.1/x64/bin:/snap/bin:/home/runner/.local/bin:/opt/pipx_bin:/home/runner/.cargo/bin:/home/runner/.config/composer/vendor/bin:/usr/local/.ghcup/bin:/home/runner/.dotnet/tools:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin", NODE: "/opt/hostedtoolcache/node/18.19.1/x64/bin/node", ANT_HOME: "/usr/share/ant", DOTNET_MULTILEVEL_LOOKUP: "0", RUNNER_TRACKING_ID: "github_438bd3b3-ba35-4899-904b-f8763e87fac8", INVOCATION_ID: "587eb726a35b4deba151e04f2db3feac", RUNNER_TOOL_CACHE: "/opt/hostedtoolcache", npm_package_name: "@rainbow-d9/sample-cra", npm_package_workspaces_3: "d9-n5", npm_package_browserslist_development_1: "last 1 firefox version", npm_package_repository_type: "git", npm_package_dependencies__types_react_syntax_highlighter: "^15.5.11", npm_package_dependencies__rainbow_d9_thai_plan_selection: "1.0.58", GITHUB_ACTION: "__run_5", GITHUB_RUN_NUMBER: "82", GITHUB_TRIGGERING_ACTOR: "bradwoo8621", RUNNER_ARCH: "X64", XDG_RUNTIME_DIR: "/run/user/1001", AGENT_TOOLSDIRECTORY: "/opt/hostedtoolcache", npm_package_scripts_build_thai_plan_selection: "cd ./d9-thai-plan-selection && yarn build", npm_package_workspaces_4: "d9-echarts", npm_package_browserslist_development_2: "last 1 safari version", npm_package_workspaces_5: "d9-thai-plan-selection", LANG: "C.UTF-8", VCPKG_INSTALLATION_ROOT: "/usr/local/share/vcpkg", npm_package_workspaces_6: "d9-sample-cra", npm_package_dependencies_react_dom: "^18.2.0", CONDA: "/usr/share/miniconda", RUNNER_NAME: "GitHub Actions 13", XDG_CONFIG_HOME: "/home/runner/.config", STATS_VMD: "true", GITHUB_REF_NAME: "r-1.1.0", GITHUB_REPOSITORY: "InsureMO/rainbow-d9", npm_lifecycle_script: "vite build", npm_package_eslintConfig_extends_0: "react-app", npm_package_dependencies_vite_plugin_markdown: "^2.2.0", npm_package_dependencies_react_markdown: "8.0.7", npm_package_dependencies__types_node: "^20.5.3", STATS_UE: "true", ANDROID_NDK_ROOT: "/usr/local/lib/android/sdk/ndk/25.2.9519653", GITHUB_ACTION_REF: "", DEBIAN_FRONTEND: "noninteractive", npm_package_scripts_build_sample_cra_ci: "cd ./d9-sample-cra && yarn build", npm_config_version_git_message: "v%s", npm_package_eslintConfig_extends_1: "react-app/jest", GITHUB_REPOSITORY_ID: "704514093", GITHUB_ACTIONS: "true", npm_lifecycle_event: "build", npm_package_version: "1.0.58", npm_package_repository_url: "git+https://github.com/InsureMO/rainbow-d9.git", npm_package_dependencies__testing_library_jest_dom: "^5.17.0", GITHUB_REF_PROTECTED: "false", npm_config_argv: '{"remain":[],"cooked":["run","build-sample-cra"],"original":["build-sample-cra"]}', npm_package_volta_yarn: "1.22.21", npm_package_scripts_build: "vite build", npm_package_dependencies__testing_library_user_event: "^13.5.0", GITHUB_WORKSPACE: "/home/runner/work/rainbow-d9/rainbow-d9", ACCEPT_EULA: "Y", GITHUB_JOB: "create-sample-pages", RUNNER_PERFLOG: "/home/runner/perflog", npm_package_dependencies_vite: "^5.0.12", GITHUB_SHA: "5d3e7f2199f6a98133e652ce509cb0362985cfd8", GITHUB_RUN_ATTEMPT: "1", npm_config_version_git_tag: "true", npm_config_version_git_sign: "", GITHUB_REF: "refs/tags/r-1.1.0", GITHUB_ACTOR: "bradwoo8621", ANDROID_SDK_ROOT: "/usr/local/lib/android/sdk", npm_package_license: "MIT", npm_config_strict_ssl: "true", LEIN_HOME: "/usr/local/lib/lein", npm_package_scripts_build_n123: "yarn build-n1 && yarn build-n2 && yarn build-n3", GITHUB_PATH: "/home/runner/work/_temp/_runner_file_commands/add_path_317d6b5e-3050-4beb-9769-f5470cab57f8", JAVA_HOME: "/usr/lib/jvm/temurin-11-jdk-amd64", PWD: "/home/runner/work/rainbow-d9/rainbow-d9/d9-sample-cra", GITHUB_ACTOR_ID: "2330098", RUNNER_WORKSPACE: "/home/runner/work/rainbow-d9", npm_execpath: "/opt/hostedtoolcache/node/18.19.1/x64/lib/node_modules/yarn/bin/yarn.js", npm_package_scripts_build_all_ci: "yarn build-n123-ci && yarn build-n5-ci && yarn build-echarts-ci && yarn build-thai-all-ci", HOMEBREW_CLEANUP_PERIODIC_FULL_DAYS: "3650", STATS_TIS: "mining", GITHUB_EVENT_NAME: "push", HOMEBREW_NO_AUTO_UPDATE: "1", ANDROID_HOME: "/usr/local/lib/android/sdk", GITHUB_SERVER_URL: "https://github.com", GECKOWEBDRIVER: "/usr/local/share/gecko_driver", LEIN_JAR: "/usr/local/lib/lein/self-installs/leiningen-2.11.2-standalone.jar", GHCUP_INSTALL_BASE_PREFIX: "/usr/local", GITHUB_OUTPUT: "/home/runner/work/_temp/_runner_file_commands/set_output_317d6b5e-3050-4beb-9769-f5470cab57f8", npm_package_author_name: "Rainbow Team", EDGEWEBDRIVER: "/usr/local/share/edge_driver", STATS_EXT: "true", npm_package_scripts_build_n1_ci: "cd ./d9-n1 && yarn build-ci", npm_config_save_prefix: "^", npm_config_ignore_optional: "", ANDROID_NDK: "/usr/local/lib/android/sdk/ndk/25.2.9519653", SGX_AESM_ADDR: "1", CHROME_BIN: "/usr/bin/google-chrome", npm_package_scripts_build_n2_ci: "cd ./d9-n2 && yarn build-ci", npm_package_scripts_deploy: "gh-pages -d build", npm_package_scripts_preview: "vite preview", SELENIUM_JAR_PATH: "/usr/share/java/selenium-server.jar", STATS_EXTP: "https://provjobdsettingscdn.blob.core.windows.net/settings/provjobdsettings-0.5.154/provjobd.data", npm_package_scripts_build_echarts_ci: "cd ./d9-echarts && yarn build-ci", npm_package_scripts_build_n3_ci: "cd ./d9-n3 && yarn build-ci", npm_package_dependencies_web_vitals: "^2.1.4", npm_package_dependencies_typescript: "^5.1.6", INIT_CWD: "/home/runner/work/rainbow-d9/rainbow-d9", ANDROID_NDK_HOME: "/usr/local/lib/android/sdk/ndk/25.2.9519653", GITHUB_STEP_SUMMARY: "/home/runner/work/_temp/_runner_file_commands/step_summary_317d6b5e-3050-4beb-9769-f5470cab57f8", npm_package_dependencies_react: "^18.2.0", npm_package_dependencies__types_react_dom: "^18.2.7", NODE_ENV: "production" };
+var define_process_env_default = { GITHUB_STATE: "/home/runner/work/_temp/_runner_file_commands/save_state_7a97f068-0871-486f-8bb6-8de913436100", npm_package_scripts_build_n5_ci: "cd ./d9-n5 && yarn build-ci", npm_package_scripts_build_sample_cra: "cd ./d9-sample-cra && yarn build", STATS_TRP: "true", DEPLOYMENT_BASEPATH: "/opt/runner", DOTNET_NOLOGO: "1", npm_package_dependencies__vitejs_plugin_react: "^4.2.1", USER: "runner", npm_config_version_commit_hooks: "true", npm_config_user_agent: "yarn/1.22.21 npm/? node/v18.19.1 linux x64", npm_package_dependencies__types_jest: "^29.5.4", CI: "true", npm_config_bin_links: "true", npm_package_bugs_url: "https://github.com/InsureMO/rainbow-d9/issues", npm_config_wrap_output: "", RUNNER_ENVIRONMENT: "github-hosted", GITHUB_ENV: "/home/runner/work/_temp/_runner_file_commands/set_env_7a97f068-0871-486f-8bb6-8de913436100", PIPX_HOME: "/opt/pipx", npm_node_execpath: "/opt/hostedtoolcache/node/18.19.1/x64/bin/node", npm_package_scripts_build_thai_all_ci: "yarn build-thai-plan-selection-ci", npm_config_init_version: "1.0.0", npm_package_devDependencies_gh_pages: "^6.1.1", npm_package_dependencies__babel_plugin_proposal_private_property_in_object: "^7.21.11", JAVA_HOME_8_X64: "/usr/lib/jvm/temurin-8-jdk-amd64", SHLVL: "1", HOME: "/home/runner", OLDPWD: "/home/runner/work/rainbow-d9/rainbow-d9", npm_package_browserslist_production_0: ">0.2%", RUNNER_TEMP: "/home/runner/work/_temp", GITHUB_EVENT_PATH: "/home/runner/work/_temp/_github_workflow/event.json", npm_package_scripts_build_all: "yarn build-n123 && yarn build-n5 && yarn build-echarts && yarn build-thai-all", npm_package_browserslist_production_1: "not dead", npm_package_dependencies_react_syntax_highlighter: "^15.5.0", JAVA_HOME_11_X64: "/usr/lib/jvm/temurin-11-jdk-amd64", PIPX_BIN_DIR: "/opt/pipx_bin", GITHUB_REPOSITORY_OWNER: "InsureMO", npm_package_volta_node: "18.19.0", npm_config_init_license: "MIT", npm_package_browserslist_production_2: "not op_mini all", GRADLE_HOME: "/usr/share/gradle-8.6", ANDROID_NDK_LATEST_HOME: "/usr/local/lib/android/sdk/ndk/26.2.11394342", JAVA_HOME_21_X64: "/usr/lib/jvm/temurin-21-jdk-amd64", STATS_RDCL: "true", GITHUB_RETENTION_DAYS: "90", YARN_WRAP_OUTPUT: "false", npm_package_scripts_build_thai_plan_selection_ci: "cd ./d9-thai-plan-selection && yarn build-ci", npm_package_scripts_build_n1: "cd ./d9-n1 && yarn build", npm_config_version_tag_prefix: "v", npm_package_dependencies__rainbow_d9_n2: "1.1.0", GITHUB_REPOSITORY_OWNER_ID: "38915232", POWERSHELL_DISTRIBUTION_CHANNEL: "GitHub-Actions-ubuntu22", AZURE_EXTENSION_DIR: "/opt/az/azcliextensions", GITHUB_HEAD_REF: "", npm_package_scripts_build_n2: "cd ./d9-n2 && yarn build", npm_package_dependencies__types_styled_components: "^5.1.34", npm_package_dependencies__rainbow_d9_n3: "1.1.0", npm_package_dependencies__rainbow_d9_echarts: "1.1.0", SYSTEMD_EXEC_PID: "596", npm_package_scripts_build_echarts: "cd ./d9-echarts && yarn build", npm_package_scripts_build_n3: "cd ./d9-n3 && yarn build", GITHUB_GRAPHQL_URL: "https://api.github.com/graphql", npm_package_description: "Assume the following envs are ready, otherwise contact the tech guy.", npm_package_scripts_predeploy: "npm run build", npm_package_dependencies__rainbow_d9_n5: "1.1.0", GOROOT_1_20_X64: "/opt/hostedtoolcache/go/1.20.14/x64", NVM_DIR: "/home/runner/.nvm", npm_package_readmeFilename: "README.md", npm_package_scripts_build_n5: "cd ./d9-n5 && yarn build", npm_package_dependencies__types_react: "^18.2.21", npm_package_dependencies__testing_library_react: "^13.4.0", DOTNET_SKIP_FIRST_TIME_EXPERIENCE: "1", GOROOT_1_21_X64: "/opt/hostedtoolcache/go/1.21.8/x64", JAVA_HOME_17_X64: "/usr/lib/jvm/temurin-17-jdk-amd64", ImageVersion: "20240317.1.0", RUNNER_OS: "Linux", GITHUB_API_URL: "https://api.github.com", GOROOT_1_22_X64: "/opt/hostedtoolcache/go/1.22.1/x64", SWIFT_PATH: "/usr/share/swift/usr/bin", RUNNER_USER: "runner", STATS_V3PS: "true", CHROMEWEBDRIVER: "/usr/local/share/chromedriver-linux64", JOURNAL_STREAM: "8:20491", GITHUB_WORKFLOW: "Publish to NPM", _: "/opt/hostedtoolcache/node/18.19.1/x64/bin/yarn", npm_package_private: "true", npm_package_dependencies_remark_gfm: "3.0.1", npm_package_scripts_build_thai_all: "yarn build-thai-plan-selection", npm_config_registry: "https://registry.yarnpkg.com", ACTIONS_RUNNER_ACTION_ARCHIVE_CACHE: "/opt/actionarchivecache", STATS_D: "false", GITHUB_RUN_ID: "8414504233", npm_package_workspaces_0: "d9-n1", GITHUB_REF_TYPE: "tag", BOOTSTRAP_HASKELL_NONINTERACTIVE: "1", GITHUB_WORKFLOW_SHA: "d772243cf425eb27a6c12396a657c39c5c6485ff", GITHUB_BASE_REF: "", ImageOS: "ubuntu22", npm_package_scripts_build_n123_ci: "yarn build-n1-ci && yarn build-n2-ci && yarn build-n3-ci", npm_package_workspaces_1: "d9-n2", npm_config_ignore_scripts: "", npm_package_scripts_start: "vite", npm_package_dependencies_github_markdown_css: "^5.5.0", GITHUB_WORKFLOW_REF: "InsureMO/rainbow-d9/.github/workflows/release.yml@refs/tags/r-1.1.1", PERFLOG_LOCATION_SETTING: "RUNNER_PERFLOG", GITHUB_ACTION_REPOSITORY: "", npm_package_workspaces_2: "d9-n3", npm_package_browserslist_development_0: "last 1 chrome version", PATH: "/tmp/yarn--1711336281128-0.5690263674311338:/home/runner/work/rainbow-d9/rainbow-d9/d9-sample-cra/node_modules/.bin:/home/runner/.config/yarn/link/node_modules/.bin:/home/runner/work/rainbow-d9/rainbow-d9/node_modules/.bin:/opt/hostedtoolcache/node/18.19.1/x64/libexec/lib/node_modules/npm/bin/node-gyp-bin:/opt/hostedtoolcache/node/18.19.1/x64/lib/node_modules/npm/bin/node-gyp-bin:/opt/hostedtoolcache/node/18.19.1/x64/bin/node_modules/npm/bin/node-gyp-bin:/tmp/yarn--1711336280934-0.2863849096785047:/home/runner/work/rainbow-d9/rainbow-d9/node_modules/.bin:/home/runner/.config/yarn/link/node_modules/.bin:/home/runner/work/rainbow-d9/rainbow-d9/node_modules/.bin:/opt/hostedtoolcache/node/18.19.1/x64/libexec/lib/node_modules/npm/bin/node-gyp-bin:/opt/hostedtoolcache/node/18.19.1/x64/lib/node_modules/npm/bin/node-gyp-bin:/opt/hostedtoolcache/node/18.19.1/x64/bin/node_modules/npm/bin/node-gyp-bin:/opt/hostedtoolcache/node/18.19.1/x64/bin:/snap/bin:/home/runner/.local/bin:/opt/pipx_bin:/home/runner/.cargo/bin:/home/runner/.config/composer/vendor/bin:/usr/local/.ghcup/bin:/home/runner/.dotnet/tools:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin", NODE: "/opt/hostedtoolcache/node/18.19.1/x64/bin/node", ANT_HOME: "/usr/share/ant", DOTNET_MULTILEVEL_LOOKUP: "0", RUNNER_TRACKING_ID: "github_499ccdb5-49a9-44fa-9b47-6b714c9f2dbf", INVOCATION_ID: "20e8cc52918c4091bf325ebfc9ab4eb5", RUNNER_TOOL_CACHE: "/opt/hostedtoolcache", npm_package_name: "@rainbow-d9/sample-cra", npm_package_workspaces_3: "d9-n5", npm_package_browserslist_development_1: "last 1 firefox version", npm_package_repository_type: "git", npm_package_dependencies__types_react_syntax_highlighter: "^15.5.11", npm_package_dependencies__rainbow_d9_thai_plan_selection: "1.1.0", GITHUB_ACTION: "__run_5", GITHUB_RUN_NUMBER: "83", GITHUB_TRIGGERING_ACTOR: "bradwoo8621", RUNNER_ARCH: "X64", XDG_RUNTIME_DIR: "/run/user/1001", AGENT_TOOLSDIRECTORY: "/opt/hostedtoolcache", npm_package_scripts_build_thai_plan_selection: "cd ./d9-thai-plan-selection && yarn build", npm_package_workspaces_4: "d9-echarts", npm_package_browserslist_development_2: "last 1 safari version", npm_package_workspaces_5: "d9-thai-plan-selection", LANG: "C.UTF-8", VCPKG_INSTALLATION_ROOT: "/usr/local/share/vcpkg", npm_package_workspaces_6: "d9-sample-cra", npm_package_dependencies_react_dom: "^18.2.0", CONDA: "/usr/share/miniconda", RUNNER_NAME: "GitHub Actions 2", XDG_CONFIG_HOME: "/home/runner/.config", STATS_VMD: "true", GITHUB_REF_NAME: "r-1.1.1", GITHUB_REPOSITORY: "InsureMO/rainbow-d9", STATS_D_D: "true", npm_lifecycle_script: "vite build", npm_package_eslintConfig_extends_0: "react-app", npm_package_dependencies_vite_plugin_markdown: "^2.2.0", npm_package_dependencies_react_markdown: "8.0.7", npm_package_dependencies__types_node: "^20.5.3", STATS_UE: "true", ANDROID_NDK_ROOT: "/usr/local/lib/android/sdk/ndk/25.2.9519653", GITHUB_ACTION_REF: "", DEBIAN_FRONTEND: "noninteractive", npm_package_scripts_build_sample_cra_ci: "cd ./d9-sample-cra && yarn build", npm_config_version_git_message: "v%s", npm_package_eslintConfig_extends_1: "react-app/jest", GITHUB_REPOSITORY_ID: "704514093", GITHUB_ACTIONS: "true", npm_lifecycle_event: "build", npm_package_version: "1.1.0", npm_package_repository_url: "git+https://github.com/InsureMO/rainbow-d9.git", npm_package_dependencies__testing_library_jest_dom: "^5.17.0", GITHUB_REF_PROTECTED: "false", npm_config_argv: '{"remain":[],"cooked":["run","build-sample-cra"],"original":["build-sample-cra"]}', npm_package_volta_yarn: "1.22.21", npm_package_scripts_build: "vite build", npm_package_dependencies__testing_library_user_event: "^13.5.0", GITHUB_WORKSPACE: "/home/runner/work/rainbow-d9/rainbow-d9", ACCEPT_EULA: "Y", GITHUB_JOB: "create-sample-pages", RUNNER_PERFLOG: "/home/runner/perflog", npm_package_dependencies_vite: "^5.0.12", GITHUB_SHA: "d772243cf425eb27a6c12396a657c39c5c6485ff", GITHUB_RUN_ATTEMPT: "1", npm_config_version_git_tag: "true", npm_config_version_git_sign: "", GITHUB_REF: "refs/tags/r-1.1.1", GITHUB_ACTOR: "bradwoo8621", ANDROID_SDK_ROOT: "/usr/local/lib/android/sdk", npm_package_license: "MIT", npm_config_strict_ssl: "true", LEIN_HOME: "/usr/local/lib/lein", npm_package_scripts_build_n123: "yarn build-n1 && yarn build-n2 && yarn build-n3", GITHUB_PATH: "/home/runner/work/_temp/_runner_file_commands/add_path_7a97f068-0871-486f-8bb6-8de913436100", JAVA_HOME: "/usr/lib/jvm/temurin-11-jdk-amd64", PWD: "/home/runner/work/rainbow-d9/rainbow-d9/d9-sample-cra", GITHUB_ACTOR_ID: "2330098", RUNNER_WORKSPACE: "/home/runner/work/rainbow-d9", npm_execpath: "/opt/hostedtoolcache/node/18.19.1/x64/lib/node_modules/yarn/bin/yarn.js", npm_package_scripts_build_all_ci: "yarn build-n123-ci && yarn build-n5-ci && yarn build-echarts-ci && yarn build-thai-all-ci", HOMEBREW_CLEANUP_PERIODIC_FULL_DAYS: "3650", GITHUB_EVENT_NAME: "push", HOMEBREW_NO_AUTO_UPDATE: "1", ANDROID_HOME: "/usr/local/lib/android/sdk", GITHUB_SERVER_URL: "https://github.com", GECKOWEBDRIVER: "/usr/local/share/gecko_driver", LEIN_JAR: "/usr/local/lib/lein/self-installs/leiningen-2.11.2-standalone.jar", GHCUP_INSTALL_BASE_PREFIX: "/usr/local", GITHUB_OUTPUT: "/home/runner/work/_temp/_runner_file_commands/set_output_7a97f068-0871-486f-8bb6-8de913436100", npm_package_author_name: "Rainbow Team", EDGEWEBDRIVER: "/usr/local/share/edge_driver", STATS_EXT: "true", npm_package_scripts_build_n1_ci: "cd ./d9-n1 && yarn build-ci", npm_config_save_prefix: "^", npm_config_ignore_optional: "", ANDROID_NDK: "/usr/local/lib/android/sdk/ndk/25.2.9519653", SGX_AESM_ADDR: "1", CHROME_BIN: "/usr/bin/google-chrome", npm_package_scripts_build_n2_ci: "cd ./d9-n2 && yarn build-ci", npm_package_scripts_deploy: "gh-pages -d build", npm_package_scripts_preview: "vite preview", SELENIUM_JAR_PATH: "/usr/share/java/selenium-server.jar", STATS_EXTP: "https://provjobdsettingscdn.blob.core.windows.net/settings/provjobdsettings-0.5.154/provjobd.data", npm_package_scripts_build_echarts_ci: "cd ./d9-echarts && yarn build-ci", npm_package_scripts_build_n3_ci: "cd ./d9-n3 && yarn build-ci", npm_package_dependencies_web_vitals: "^2.1.4", npm_package_dependencies_typescript: "^5.1.6", INIT_CWD: "/home/runner/work/rainbow-d9/rainbow-d9", ANDROID_NDK_HOME: "/usr/local/lib/android/sdk/ndk/25.2.9519653", GITHUB_STEP_SUMMARY: "/home/runner/work/_temp/_runner_file_commands/step_summary_7a97f068-0871-486f-8bb6-8de913436100", npm_package_dependencies_react: "^18.2.0", npm_package_dependencies__types_react_dom: "^18.2.7", NODE_ENV: "production" };
 dayjs.extend(WeekOfYear);
 dayjs.extend(QuarterOfYear);
 dayjs.extend(Duration);
@@ -4474,7 +4534,7 @@ const markdown$5 = "# Page::Test Page\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 const DemoData$4 = {
   markdown: markdown$5
 };
-const markdown$4 = "# Page::Demo Tab\n\n## Section::# 999. D9 Playground\n\n- Playground::::markdown\n  - externalDefs: @ext.playground.externalDefs\n  - externalDefsTypes: @ext.playground.externalDefsTypes\n";
+const markdown$4 = "# Page::Demo Tab\n\n## Section::# 999. D9 Playground\n\n- Playground::::markdown\n  - useCharts\n  - externalDefs: @ext.playground.externalDefs\n  - externalDefsTypes: @ext.playground.externalDefsTypes\n";
 const N2Playground = () => {
   const def = useDemoMarkdown(markdown$4);
   const DropdownOptionsWidgets = ["Dropdown", "MultiDropdown", "Checkboxes", "Checks", "Radios"];
@@ -5466,7 +5526,7 @@ const App = () => {
 };
 const reportWebVitals = (onPerfEntry) => {
   if (onPerfEntry && onPerfEntry instanceof Function) {
-    __vitePreload(() => import("./vendor-zG0q0FlX.js").then((n) => n.K), true ? __vite__mapDeps([0,1,2,3]) : void 0).then(({ getCLS, getFID, getFCP, getLCP, getTTFB }) => {
+    __vitePreload(() => import("./vendor-KG5onvK6.js").then((n) => n.K), true ? __vite__mapDeps([0,1,2,3]) : void 0).then(({ getCLS, getFID, getFCP, getLCP, getTTFB }) => {
       getCLS(onPerfEntry);
       getFID(onPerfEntry);
       getFCP(onPerfEntry);
@@ -5484,7 +5544,7 @@ root.render(
 reportWebVitals();
 function __vite__mapDeps(indexes) {
   if (!__vite__mapDeps.viteFileDeps) {
-    __vite__mapDeps.viteFileDeps = ["assets/vendor-zG0q0FlX.js","assets/babel-AnpZxJH-.js","assets/unist-5yxlKLF4.js","assets/vendor-UDnasYXb.css"]
+    __vite__mapDeps.viteFileDeps = ["assets/vendor-KG5onvK6.js","assets/babel-AnpZxJH-.js","assets/unist-5yxlKLF4.js","assets/vendor-UDnasYXb.css"]
   }
   return indexes.map((i) => __vite__mapDeps.viteFileDeps[i])
 }
