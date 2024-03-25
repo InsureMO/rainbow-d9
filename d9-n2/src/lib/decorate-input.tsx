@@ -1,9 +1,10 @@
 import {MBUtils, PPUtils, registerWidget, VUtils, WidgetProps} from '@rainbow-d9/n1';
-import React, {CSSProperties, ReactNode} from 'react';
+import React, {CSSProperties, ReactNode, useEffect, useRef} from 'react';
 import styled from 'styled-components';
 import {CssVars, DOM_ID_WIDGET, DOM_KEY_WIDGET} from './constants';
 import {DecorateWrapperDef, transformDecorators} from './decorate-assist';
 import {Input, InputDef, NumberInput, PasswordInput} from './input';
+import {toIntlLabel} from './intl-label';
 import {OmitNodeDef} from './types';
 
 export type DecorateInputDef = InputDef & DecorateWrapperDef;
@@ -25,19 +26,34 @@ const DecorateInputContainer = styled.div.attrs(
     width: 100%;
     height: ${CssVars.INPUT_HEIGHT};
 
+    &[data-placeholder=true] {
+        > input[data-w=d9-input]:not(:nth-last-child(2)) {
+            border-top-right-radius: 0;
+            border-bottom-right-radius: 0;
+        }
+    }
+
+    &[data-placeholder=false] {
+        > input[data-w=d9-input]:not(:last-child) {
+            border-top-right-radius: 0;
+            border-bottom-right-radius: 0;
+        }
+    }
+
     > input[data-w=d9-input] {
         flex-grow: 1;
         z-index: 1;
+
+        &:not([value=""]) {
+            + span[data-w=d9-deco-input-placeholder] {
+                color: transparent;
+            }
+        }
 
         &:not(:first-child) {
             border-top-left-radius: 0;
             border-bottom-left-radius: 0;
             margin-left: calc(${CssVars.BORDER_WIDTH} * -1);
-        }
-
-        &:not(:last-child) {
-            border-top-right-radius: 0;
-            border-bottom-right-radius: 0;
         }
     }
 `;
@@ -84,9 +100,21 @@ const TailDecorator = styled(Decorator).attrs({
         border-bottom-right-radius: ${CssVars.BORDER_RADIUS};
     }
 `;
+const Placeholder = styled.span.attrs({[DOM_KEY_WIDGET]: 'd9-deco-input-placeholder'})`
+    display: flex;
+    position: absolute;
+    align-items: center;
+    color: ${CssVars.PLACEHOLDER_COLOR};
+    background-color: transparent;
+    padding: 0 ${CssVars.INPUT_INDENT};
+    pointer-events: none;
+    user-select: none;
+    z-index: 2;
+`;
 
 interface DecorateProps {
 	id?: HTMLElement['id'];
+	placeholder?: string;
 	leads?: DecorateWrapperDef['leads'];
 	tails?: DecorateWrapperDef['tails'];
 	className?: string;
@@ -95,15 +123,41 @@ interface DecorateProps {
 }
 
 const Decorate = (props: DecorateProps) => {
-	const {id, leads, tails, children, ...rest} = props;
+	const {id, placeholder, leads, tails, children, ...rest} = props;
 
-	return <DecorateInputContainer id={VUtils.isBlank(id) ? (void 0) : `di-${id}`} {...rest}>
+	const ref = useRef<HTMLDivElement>(null);
+	useEffect(() => {
+		if (ref.current == null) {
+			return null;
+		}
+		const node = ref.current.querySelector('span[data-w=d9-deco-input-placeholder]') as HTMLSpanElement;
+		if (node == null) {
+			return;
+		}
+
+		const {left: containerLeft} = ref.current.getBoundingClientRect();
+		const input = ref.current.querySelector('input');
+		const {left, width, height} = input.getBoundingClientRect();
+		const {
+			borderTopWidth, borderBottomWidth, borderLeftWidth, borderRightWidth
+		} = window.getComputedStyle(input);
+		node.style.top = `${Number((borderTopWidth ?? '0').replace('px', ''))}px`;
+		node.style.left = `${left - containerLeft + Number((borderLeftWidth ?? '0').replace('px', ''))}px`;
+		node.style.width = `${width - Number((borderLeftWidth ?? '0').replace('px', '')) - Number((borderRightWidth ?? '0').replace('px', ''))}px`;
+		node.style.height = `${height - Number((borderTopWidth ?? '0').replace('px', '')) - Number((borderBottomWidth ?? '0').replace('px', ''))}px`;
+	});
+
+	const hasPlaceholder = VUtils.isNotBlank(placeholder);
+
+	return <DecorateInputContainer id={VUtils.isBlank(id) ? (void 0) : `di-${id}`}
+	                               data-placeholder={hasPlaceholder} {...rest} ref={ref}>
 		{transformDecorators(leads).map(lead => {
 			return <LeadDecorator key={VUtils.generateUniqueId()}>
 				{lead}
 			</LeadDecorator>;
 		})}
 		{children}
+		{hasPlaceholder ? <Placeholder>{toIntlLabel((placeholder ?? '').trim())}</Placeholder> : null}
 		{transformDecorators(tails).map(tail => {
 			return <TailDecorator key={VUtils.generateUniqueId()}>
 				{tail}
@@ -126,11 +180,16 @@ export const askDecorateAttrs = (props: DecorateInputProps, rest: object) => {
 };
 
 export const DecorateInput = (props: DecorateInputProps) => {
-	const {leads, tails, className, style, ...rest} = props;
+	const {
+		placeholder,
+		leads, tails, className, style, ...rest
+	} = props;
 	const {$wrapped: {$p2r}} = rest;
 	const {tags: deviceTags, attrs: decorateAttrs} = askDecorateAttrs(props, rest);
 
-	return <Decorate {...deviceTags} {...decorateAttrs} leads={leads} tails={tails} className={className} style={style}
+	return <Decorate {...deviceTags} {...decorateAttrs}
+	                 placeholder={placeholder} leads={leads} tails={tails}
+	                 className={className} style={style}
 	                 id={PPUtils.asId(PPUtils.absolute($p2r, props.$pp), props.id)}>
 		<Input {...rest}/>
 	</Decorate>;
@@ -140,11 +199,16 @@ export type DecorateNumberInputDef = Omit<DecorateInputDef, 'valueToNumber'>;
 export type DecorateNumberInputProps = OmitNodeDef<DecorateNumberInputDef> & WidgetProps;
 
 export const DecorateNumberInput = (props: DecorateNumberInputProps) => {
-	const {leads, tails, className, style, ...rest} = props;
+	const {
+		placeholder,
+		leads, tails, className, style, ...rest
+	} = props;
 	const {$wrapped: {$p2r}} = rest;
 	const {tags: deviceTags, attrs: decorateAttrs} = askDecorateAttrs(props, rest);
 
-	return <Decorate {...deviceTags} {...decorateAttrs} leads={leads} tails={tails} className={className} style={style}
+	return <Decorate {...deviceTags} {...decorateAttrs}
+	                 placeholder={placeholder} leads={leads} tails={tails}
+	                 className={className} style={style}
 	                 id={PPUtils.asId(PPUtils.absolute($p2r, props.$pp), props.id)}>
 		<NumberInput {...rest}/>
 	</Decorate>;
@@ -154,11 +218,16 @@ export type DecoratePasswordInputDef = Omit<DecorateInputDef, 'valueToNumber'>;
 export type DecoratePasswordInputProps = OmitNodeDef<DecoratePasswordInputDef> & WidgetProps;
 
 export const DecoratePasswordInput = (props: DecoratePasswordInputProps) => {
-	const {leads, tails, className, style, ...rest} = props;
+	const {
+		placeholder,
+		leads, tails, className, style, ...rest
+	} = props;
 	const {$wrapped: {$p2r}} = rest;
 	const {tags: deviceTags, attrs: decorateAttrs} = askDecorateAttrs(props, rest);
 
-	return <Decorate {...deviceTags} {...decorateAttrs} leads={leads} tails={tails} className={className} style={style}
+	return <Decorate {...deviceTags} {...decorateAttrs}
+	                 placeholder={placeholder} leads={leads} tails={tails}
+	                 className={className} style={style}
 	                 id={PPUtils.asId(PPUtils.absolute($p2r, props.$pp), props.id)}>
 		<PasswordInput {...rest}/>
 	</Decorate>;

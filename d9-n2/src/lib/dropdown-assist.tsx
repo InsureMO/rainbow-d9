@@ -113,7 +113,7 @@ export const DropdownLabel = styled.span.attrs({[DOM_KEY_WIDGET]: 'd9-dropdown-l
     overflow-x: hidden;
 
     &[data-please=true] {
-        opacity: 0.7;
+        color: ${CssVars.PLACEHOLDER_COLOR};
     }
 
     &[data-please=false] ~ &[data-please=true] {

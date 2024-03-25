@@ -23,6 +23,9 @@ export const ATTRIBUTE_VALUE_REF_START = '@';
 export const ATTRIBUTE_VALUE_EXT_SYMBOL = '@ext';
 export const ATTRIBUTE_VALUE_EXT_PREFIX = `${ATTRIBUTE_VALUE_EXT_SYMBOL}.`;
 
+const ValueChanged: PlaygroundWidgetProperty = {
+	name: 'valueChanged', label: 'Snippet.', description: 'Handle value changed.'
+};
 const AutoSelect: PlaygroundWidgetProperty = {
 	name: 'autoSelect', label: 'Boolean. Select all content automatically.', description: 'Default true.'
 };
@@ -370,6 +373,7 @@ export const N2Widgets: Array<PlaygroundWidget> = [
 				name: 'valueToNumber', label: 'Boolean. Treat as a number.',
 				description: 'Default false. Attempt to synchronize with the data model as a number.'
 			},
+			ValueChanged,
 			ValidationRequired, ValidationRegex, ValidationRegexp, ValidationLength,
 			ValidationNumeric, ValidationPositive, ValidationNotNegative, ValidationInteger, ValidationNumberRange
 		],
@@ -383,7 +387,7 @@ export const N2Widgets: Array<PlaygroundWidget> = [
 	{
 		$wt: N2.N2WidgetType.NUMBER, label: 'Number input box.',
 		properties: [
-			AutoSelect, InputPlaceholder,
+			AutoSelect, InputPlaceholder, ValueChanged,
 			ValidationRequired, ValidationRegex, ValidationRegexp, ValidationLength,
 			ValidationNumeric, ValidationPositive, ValidationNotNegative, ValidationInteger, ValidationNumberRange
 		],
@@ -397,7 +401,7 @@ export const N2Widgets: Array<PlaygroundWidget> = [
 	{
 		$wt: N2.N2WidgetType.PASSWORD, label: 'Password input box.',
 		properties: [
-			AutoSelect, InputPlaceholder,
+			AutoSelect, InputPlaceholder, ValueChanged,
 			ValidationRequired, ValidationRegex, ValidationRegexp, ValidationLength
 		],
 		icon: PlaygroundIcons.PASSWORD, group: PlaygroundWidgetGroupKey.INPUTS, tooltip: 'Password input',
@@ -410,7 +414,7 @@ export const N2Widgets: Array<PlaygroundWidget> = [
 	{
 		$wt: N2.N2WidgetType.DECORATE_INPUT, label: 'Decorable input box.',
 		properties: [
-			AutoSelect, InputPlaceholder,
+			AutoSelect, InputPlaceholder, ValueChanged,
 			LeadsDecorateElements, TailsDecorateElements,
 			ValidationRequired, ValidationRegex, ValidationRegexp, ValidationLength,
 			ValidationNumeric, ValidationPositive, ValidationNotNegative, ValidationInteger, ValidationNumberRange
@@ -428,7 +432,7 @@ export const N2Widgets: Array<PlaygroundWidget> = [
 	{
 		$wt: N2.N2WidgetType.DECORATE_NUMBER, label: 'Decorable number input box.',
 		properties: [
-			AutoSelect, InputPlaceholder,
+			AutoSelect, InputPlaceholder, ValueChanged,
 			LeadsDecorateElements, TailsDecorateElements,
 			ValidationRequired, ValidationRegex, ValidationRegexp, ValidationLength,
 			ValidationNumeric, ValidationPositive, ValidationNotNegative, ValidationInteger, ValidationNumberRange
@@ -448,7 +452,7 @@ export const N2Widgets: Array<PlaygroundWidget> = [
 		$wt: N2.N2WidgetType.DECORATE_PASSWORD,
 		label: 'Decorable password input box.',
 		properties: [
-			AutoSelect, InputPlaceholder,
+			AutoSelect, InputPlaceholder, ValueChanged,
 			LeadsDecorateElements, TailsDecorateElements,
 			ValidationRequired, ValidationRegex, ValidationRegexp, ValidationLength
 		],
@@ -466,7 +470,7 @@ export const N2Widgets: Array<PlaygroundWidget> = [
 	},
 	{
 		$wt: N2.N2WidgetType.TEXTAREA, properties: [
-			AutoSelect, InputPlaceholder,
+			AutoSelect, InputPlaceholder, ValueChanged,
 			ValidationRequired, ValidationLength
 		],
 		icon: PlaygroundIcons.TEXTAREA, group: PlaygroundWidgetGroupKey.INPUTS,
@@ -477,7 +481,7 @@ export const N2Widgets: Array<PlaygroundWidget> = [
 	},
 	{
 		$wt: N2.N2WidgetType.CALENDAR, label: 'Date picker.',
-		properties: [...CalendarProperties, ValidationRequired],
+		properties: [...CalendarProperties, ValueChanged, ValidationRequired],
 		icon: PlaygroundIcons.DATE, group: PlaygroundWidgetGroupKey.INPUTS, tooltip: 'Date picker',
 		notInToolbar: true
 	},
@@ -485,6 +489,7 @@ export const N2Widgets: Array<PlaygroundWidget> = [
 		$wt: N2.N2WidgetType.DATE, label: 'Date picker. Shortcut of "Calendar"',
 		properties: [
 			...CalendarProperties.filter(({name}) => name !== 'time' && name !== 'timeFormat'),
+			ValueChanged,
 			ValidationRequired
 		],
 		icon: PlaygroundIcons.DATE, group: PlaygroundWidgetGroupKey.INPUTS, tooltip: 'Date picker',
@@ -499,6 +504,7 @@ export const N2Widgets: Array<PlaygroundWidget> = [
 		$wt: N2.N2WidgetType.DATETIME, label: 'Datetime picker.',
 		properties: [
 			...CalendarProperties.filter(({name}) => name !== 'time' && name !== 'fixedTimeAt'),
+			ValueChanged,
 			ValidationRequired
 		],
 		icon: PlaygroundIcons.DATETIME, group: PlaygroundWidgetGroupKey.INPUTS, tooltip: 'Datetime picker',
@@ -519,6 +525,7 @@ export const N2Widgets: Array<PlaygroundWidget> = [
 				name: 'emptyWhenFalse', label: 'Boolean.',
 				description: 'Default false. Use times icon when it is false.'
 			},
+			ValueChanged,
 			ValidationRequired
 		],
 		icon: PlaygroundIcons.CHECKBOX, group: PlaygroundWidgetGroupKey.OPTIONS,
@@ -528,13 +535,13 @@ export const N2Widgets: Array<PlaygroundWidget> = [
 	},
 	{
 		$wt: N2.N2WidgetType.CHECKBOXES, label: 'Checkbox group.',
-		properties: [...CheckboxesProperties, ValidationRequired],
+		properties: [...CheckboxesProperties, ValueChanged, ValidationRequired],
 		icon: PlaygroundIcons.CHECKS, group: PlaygroundWidgetGroupKey.OPTIONS, tooltip: 'Checkbox group',
 		notInToolbar: true
 	},
 	{
 		$wt: N2.N2WidgetType.CHECKS, label: 'Checkbox group. Shortcut of "Checkboxes".',
-		properties: [...CheckboxesProperties, ValidationRequired],
+		properties: [...CheckboxesProperties, ValueChanged, ValidationRequired],
 		icon: PlaygroundIcons.CHECKS, group: PlaygroundWidgetGroupKey.OPTIONS, tooltip: 'Checkbox group',
 		template: `Checks::[caption]::[property]
 - options: 1: Pizza; 2: Hamburger; 3: Noodle
@@ -547,6 +554,7 @@ export const N2Widgets: Array<PlaygroundWidget> = [
 				name: 'values', label: 'Text.',
 				description: 'One or two values, connected by ",". First is true value, second is false value.'
 			},
+			ValueChanged,
 			ValidationRequired
 		],
 		icon: PlaygroundIcons.RADIO, group: PlaygroundWidgetGroupKey.OPTIONS, tooltip: 'Radio button',
@@ -558,6 +566,7 @@ export const N2Widgets: Array<PlaygroundWidget> = [
 		$wt: N2.N2WidgetType.RADIOS, label: 'Radio button group.',
 		properties: [
 			...CheckboxesProperties.filter(({name}) => name !== 'single' && name !== 'boolOnSingle'),
+			ValueChanged,
 			ValidationRequired
 		],
 		icon: PlaygroundIcons.RADIOS, group: PlaygroundWidgetGroupKey.OPTIONS, tooltip: 'Radio button group',
@@ -570,7 +579,7 @@ export const N2Widgets: Array<PlaygroundWidget> = [
 	},
 	{
 		$wt: N2.N2WidgetType.DROPDOWN, label: 'Dropdown.',
-		properties: [...DropdownProperties, ValidationRequired],
+		properties: [...DropdownProperties, ValueChanged, ValidationRequired],
 		icon: PlaygroundIcons.DROPDOWN, group: PlaygroundWidgetGroupKey.OPTIONS,
 		template: `Dropdown::[caption]::[property]
 - !clearable
@@ -583,7 +592,7 @@ export const N2Widgets: Array<PlaygroundWidget> = [
 	},
 	{
 		$wt: N2.N2WidgetType.MULTI_DROPDOWN, label: 'Dropdown allows multiple choices.',
-		properties: [...DropdownProperties, ValidationRequired],
+		properties: [...DropdownProperties, ValueChanged, ValidationRequired],
 		icon: PlaygroundIcons.MULTI_DROPDOWN, group: PlaygroundWidgetGroupKey.OPTIONS, tooltip: 'Multiple choices',
 		template: `MultiDropdown::[caption]::[property]
 - !clearable
@@ -890,7 +899,8 @@ export const N2Widgets: Array<PlaygroundWidget> = [
 		properties: [
 			{name: 'freeWalk', label: 'Boolean.', description: 'Default false. Show page free walker dropdown.'},
 			{name: 'maxButtons', label: 'Number.', description: 'Default 7. Maximum page buttons.'},
-			{name: 'possibleSizes', label: 'Text.', description: 'Possible page size. Show page size dropdown.'}
+			{name: 'possibleSizes', label: 'Text.', description: 'Possible page size. Show page size dropdown.'},
+			ValueChanged
 		],
 		icon: '', group: PlaygroundWidgetGroupKey.NOT_CARE, notInToolbar: true
 	}

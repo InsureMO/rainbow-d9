@@ -18,6 +18,7 @@ export const CssConstants = {
 	HOVER_COLOR: 'rgb(238,243,252)',
 	INVERT_COLOR: 'rgb(255,255,255)',
 	DISABLE_COLOR: 'rgb(235,235,235)',
+	PLACEHOLDER_COLOR: 'rgb(179, 179, 179)',
 	BORDER_COLOR: 'rgb(206,212,218)',
 	SHADOW_COLOR: 'rgb(0,0,0)',
 	WAIVE_SHADOW_COLOR: 'rgb(0,0,0)',
@@ -53,6 +54,7 @@ export const CssVars = {
 	HOVER_COLOR: `var(--d9-hover-color, ${CssConstants.HOVER_COLOR})`,
 	INVERT_COLOR: `var(--d9-invert-color, ${CssConstants.INVERT_COLOR})`,
 	DISABLE_COLOR: `var(--d9-disable-color, ${CssConstants.DISABLE_COLOR})`,
+	PLACEHOLDER_COLOR: `var(--d9-placeholder-color, ${CssConstants.PLACEHOLDER_COLOR})`,
 
 	PLAIN_SHADOW: `var(--d9-plain-shadow, 0 0 0 3px ${color(CssConstants.SHADOW_COLOR).alpha(0.06)})`,
 	HOVER_SHADOW: `var(--d9-hover-shadow, 0 0 0 3px ${color(CssConstants.SHADOW_COLOR).alpha(0.1)})`,

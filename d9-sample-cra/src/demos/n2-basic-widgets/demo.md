@@ -19,6 +19,7 @@
 	- leads: $icons.check;$
 	- tails: %;$icons.caretLeft
 	- numeric
+	- placeholder: A placeholder
 - DecoNumber::0 - 9 are Legal Keys::decorateNumberInput2
 	- leads: $icons.check;$
 	- tails: %;$icons.caretLeft

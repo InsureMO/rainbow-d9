@@ -2,8 +2,9 @@
 
 ## Section::# 8. Internationalization
 
-- Input::Test1::test1
+- DecoInput::Test1::test1
 	- required
+	- placeholder: Test1
 - Dropdown::Test2::test2
 	- required: Test 2 is required.
 	- options:
