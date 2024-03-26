@@ -1,5 +1,5 @@
+import { s as schedulerExports, P as PropTypes, I as IMask } from "./vendor-rdXXhzE9.js";
 import { g as getDefaultExportFromCjs } from "./babel-AnpZxJH-.js";
-import { s as schedulerExports } from "./vendor-KG5onvK6.js";
 var jsxRuntime = { exports: {} };
 var reactJsxRuntime_production_min = {};
 var react = { exports: {} };
@@ -7464,6 +7464,305 @@ function hoistNonReactStatics(targetComponent, sourceComponent, blacklist) {
 }
 var hoistNonReactStatics_cjs = hoistNonReactStatics;
 const m$1 = /* @__PURE__ */ getDefaultExportFromCjs(hoistNonReactStatics_cjs);
+const MASK_PROPS = {
+  // common
+  mask: PropTypes.oneOfType([PropTypes.array, PropTypes.func, PropTypes.string, PropTypes.instanceOf(RegExp), PropTypes.oneOf([Date, Number, IMask.Masked]), PropTypes.instanceOf(IMask.Masked)]),
+  value: PropTypes.any,
+  unmask: PropTypes.oneOfType([PropTypes.bool, PropTypes.oneOf(["typed"])]),
+  prepare: PropTypes.func,
+  prepareChar: PropTypes.func,
+  validate: PropTypes.func,
+  commit: PropTypes.func,
+  overwrite: PropTypes.oneOfType([PropTypes.bool, PropTypes.oneOf(["shift"])]),
+  eager: PropTypes.oneOfType([PropTypes.bool, PropTypes.oneOf(["append", "remove"])]),
+  skipInvalid: PropTypes.bool,
+  // events
+  onAccept: PropTypes.func,
+  onComplete: PropTypes.func,
+  // pattern
+  placeholderChar: PropTypes.string,
+  displayChar: PropTypes.string,
+  lazy: PropTypes.bool,
+  definitions: PropTypes.object,
+  blocks: PropTypes.object,
+  // enum
+  enum: PropTypes.arrayOf(PropTypes.string),
+  // range
+  maxLength: PropTypes.number,
+  from: PropTypes.number,
+  to: PropTypes.number,
+  // date
+  pattern: PropTypes.string,
+  format: PropTypes.func,
+  parse: PropTypes.func,
+  autofix: PropTypes.oneOfType([PropTypes.bool, PropTypes.oneOf(["pad"])]),
+  // number
+  radix: PropTypes.string,
+  thousandsSeparator: PropTypes.string,
+  mapToRadix: PropTypes.arrayOf(PropTypes.string),
+  scale: PropTypes.number,
+  normalizeZeros: PropTypes.bool,
+  padFractionalZeros: PropTypes.bool,
+  min: PropTypes.oneOfType([PropTypes.number, PropTypes.instanceOf(Date)]),
+  max: PropTypes.oneOfType([PropTypes.number, PropTypes.instanceOf(Date)]),
+  // dynamic
+  dispatch: PropTypes.func,
+  // ref
+  inputRef: PropTypes.oneOfType([PropTypes.func, PropTypes.shape({
+    current: PropTypes.object
+  })])
+};
+const MASK_PROPS_NAMES = Object.keys(MASK_PROPS).filter((p2) => p2 !== "value");
+const NON_MASK_OPTIONS_NAMES = ["value", "unmask", "onAccept", "onComplete", "inputRef"];
+const MASK_OPTIONS_NAMES = MASK_PROPS_NAMES.filter((pName) => NON_MASK_OPTIONS_NAMES.indexOf(pName) < 0);
+function IMaskMixin(ComposedComponent) {
+  var _Class;
+  const MaskedComponent = (_Class = class MaskedComponent extends React.Component {
+    constructor(props) {
+      super(props);
+      this._inputRef = this._inputRef.bind(this);
+    }
+    componentDidMount() {
+      if (!this.props.mask)
+        return;
+      this.initMask();
+    }
+    componentDidUpdate() {
+      const props = this.props;
+      const maskOptions = this._extractMaskOptionsFromProps(props);
+      if (maskOptions.mask) {
+        if (this.maskRef) {
+          this.maskRef.updateOptions(maskOptions);
+          if ("value" in props && props.value !== void 0)
+            this.maskValue = props.value;
+        } else {
+          this.initMask(maskOptions);
+        }
+      } else {
+        this.destroyMask();
+        if ("value" in props && props.value !== void 0) {
+          var _this$element;
+          if ((_this$element = this.element) != null && _this$element.isContentEditable && this.element.tagName !== "INPUT" && this.element.tagName !== "TEXTAREA")
+            this.element.textContent = props.value;
+          else
+            this.element.value = props.value;
+        }
+      }
+    }
+    componentWillUnmount() {
+      this.destroyMask();
+    }
+    _inputRef(el2) {
+      this.element = el2;
+      if (this.props.inputRef) {
+        if (Object.prototype.hasOwnProperty.call(this.props.inputRef, "current"))
+          this.props.inputRef.current = el2;
+        else
+          this.props.inputRef(el2);
+      }
+    }
+    initMask(maskOptions) {
+      if (maskOptions === void 0) {
+        maskOptions = this._extractMaskOptionsFromProps(this.props);
+      }
+      this.maskRef = IMask(this.element, maskOptions).on("accept", this._onAccept.bind(this)).on("complete", this._onComplete.bind(this));
+      if ("value" in this.props && this.props.value !== void 0)
+        this.maskValue = this.props.value;
+    }
+    destroyMask() {
+      if (this.maskRef) {
+        this.maskRef.destroy();
+        delete this.maskRef;
+      }
+    }
+    _extractMaskOptionsFromProps(props) {
+      const {
+        ...cloneProps
+      } = props;
+      Object.keys(cloneProps).filter((prop) => MASK_OPTIONS_NAMES.indexOf(prop) < 0).forEach((nonMaskProp) => {
+        delete cloneProps[nonMaskProp];
+      });
+      return cloneProps;
+    }
+    _extractNonMaskProps(props) {
+      const {
+        ...cloneProps
+      } = props;
+      MASK_PROPS_NAMES.forEach((maskProp) => {
+        if (maskProp !== "maxLength")
+          delete cloneProps[maskProp];
+      });
+      if (!("defaultValue" in cloneProps))
+        cloneProps.defaultValue = props.mask ? "" : cloneProps.value;
+      delete cloneProps.value;
+      return cloneProps;
+    }
+    get maskValue() {
+      if (!this.maskRef)
+        return "";
+      if (this.props.unmask === "typed")
+        return this.maskRef.typedValue;
+      if (this.props.unmask)
+        return this.maskRef.unmaskedValue;
+      return this.maskRef.value;
+    }
+    set maskValue(value) {
+      if (!this.maskRef)
+        return;
+      value = value == null && this.props.unmask !== "typed" ? "" : value;
+      if (this.props.unmask === "typed")
+        this.maskRef.typedValue = value;
+      else if (this.props.unmask)
+        this.maskRef.unmaskedValue = value;
+      else
+        this.maskRef.value = value;
+    }
+    _onAccept(e2) {
+      if (this.props.onAccept && this.maskRef)
+        this.props.onAccept(this.maskValue, this.maskRef, e2);
+    }
+    _onComplete(e2) {
+      if (this.props.onComplete && this.maskRef)
+        this.props.onComplete(this.maskValue, this.maskRef, e2);
+    }
+    render() {
+      return React.createElement(ComposedComponent, {
+        ...this._extractNonMaskProps(this.props),
+        inputRef: this._inputRef
+      });
+    }
+  }, _Class.displayName = void 0, _Class.propTypes = void 0, _Class);
+  const nestedComponentName = ComposedComponent.displayName || ComposedComponent.name || "Component";
+  MaskedComponent.displayName = "IMask(" + nestedComponentName + ")";
+  MaskedComponent.propTypes = MASK_PROPS;
+  return React.forwardRef((props, ref) => React.createElement(MaskedComponent, {
+    ...props,
+    ref
+  }));
+}
+const IMaskInputClass = IMaskMixin((_ref) => {
+  let {
+    inputRef,
+    ...props
+  } = _ref;
+  return React.createElement("input", {
+    ...props,
+    ref: inputRef
+  });
+});
+const IMaskInputFn = (props, ref) => React.createElement(IMaskInputClass, {
+  ...props,
+  ref
+});
+React.forwardRef(IMaskInputFn);
+function useIMask(opts, _temp) {
+  let {
+    onAccept,
+    onComplete
+  } = _temp === void 0 ? {} : _temp;
+  const ref = reactExports.useRef(null);
+  const maskRef = reactExports.useRef(null);
+  const [initialized, setInitialized] = reactExports.useState(false);
+  const [lastAcceptState, setLastAcceptState] = reactExports.useState({});
+  const [value, setValue] = reactExports.useState("");
+  const [unmaskedValue, setUnmaskedValue] = reactExports.useState("");
+  const [typedValue, setTypedValue] = reactExports.useState();
+  const _destroyMask = reactExports.useCallback(() => {
+    var _maskRef$current;
+    if (!initialized)
+      return;
+    (_maskRef$current = maskRef.current) == null || _maskRef$current.destroy();
+    maskRef.current = null;
+  }, []);
+  const _onAccept = reactExports.useCallback((event) => {
+    const m2 = maskRef.current;
+    if (!m2)
+      return;
+    setLastAcceptState({
+      value: m2.value,
+      unmaskedValue: m2.unmaskedValue,
+      typedValue: m2.typedValue
+    });
+    setTypedValue(m2.typedValue);
+    setUnmaskedValue(m2.unmaskedValue);
+    setValue(m2.value);
+    onAccept == null || onAccept(m2.value, m2, event);
+  }, [onAccept]);
+  const _onComplete = reactExports.useCallback((event) => maskRef.current && (onComplete == null ? void 0 : onComplete(maskRef.current.value, maskRef.current, event)), [onComplete]);
+  reactExports.useEffect(() => {
+    const el2 = ref.current;
+    if (!el2 || !(opts != null && opts.mask))
+      return _destroyMask();
+    const mask = maskRef.current;
+    if (!mask) {
+      if (el2 && opts != null && opts.mask) {
+        maskRef.current = IMask(el2, opts);
+        _onAccept();
+      }
+    } else {
+      mask == null || mask.updateOptions(opts);
+    }
+    setInitialized(Boolean(maskRef.current));
+  }, [opts, _destroyMask, _onAccept]);
+  reactExports.useEffect(() => {
+    if (!maskRef.current)
+      return;
+    const mask = maskRef.current;
+    mask.on("accept", _onAccept);
+    mask.on("complete", _onComplete);
+    return () => {
+      mask.off("accept", _onAccept);
+      mask.off("complete", _onComplete);
+    };
+  }, [_onAccept, _onComplete]);
+  reactExports.useEffect(() => {
+    const {
+      value: lastAcceptValue,
+      ...state
+    } = lastAcceptState;
+    const mask = maskRef.current;
+    if (mask && initialized) {
+      if (lastAcceptValue !== value)
+        mask.value = value;
+      setLastAcceptState(state);
+    }
+  }, [value]);
+  reactExports.useEffect(() => {
+    const {
+      unmaskedValue: lastAcceptUnmaskedValue,
+      ...state
+    } = lastAcceptState;
+    const mask = maskRef.current;
+    if (mask && initialized) {
+      if (lastAcceptUnmaskedValue !== unmaskedValue)
+        mask.unmaskedValue = unmaskedValue;
+      setLastAcceptState(state);
+    }
+  }, [unmaskedValue]);
+  reactExports.useEffect(() => {
+    const {
+      typedValue: lastAcceptTypedValue,
+      ...state
+    } = lastAcceptState;
+    const mask = maskRef.current;
+    if (mask && initialized) {
+      if (lastAcceptTypedValue !== typedValue)
+        mask.typedValue = typedValue;
+      setLastAcceptState(state);
+    }
+  }, [typedValue]);
+  reactExports.useEffect(() => _destroyMask, [_destroyMask]);
+  return {
+    ref,
+    maskRef,
+    value,
+    setValue,
+    unmaskedValue,
+    setUnmaskedValue,
+    typedValue,
+    setTypedValue
+  };
+}
 var reactIs = { exports: {} };
 var reactIs_production_min = {};
 /**
@@ -7577,5 +7876,6 @@ export {
   client as c,
   jsxRuntimeExports as j,
   m$1 as m,
-  reactExports as r
+  reactExports as r,
+  useIMask as u
 };

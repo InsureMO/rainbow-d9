@@ -4,10 +4,10 @@ var __publicField = (obj, key, value) => {
   __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
   return value;
 };
-import { c as createLogger, N as NUtils, V as VUtils, k as MonitorNodeAttributes, l as Reaction, E as ExternalDefIndicator, P as PPUtils } from "./rainbow-d9-n1-ZgNI_n7p.js";
-import { O as OptionItemSort, R as REACTION_REFRESH_OPTIONS, c as GlobalEventPrefix } from "./rainbow-d9-n2-qeAEFjAk.js";
-import { f as fromMarkdown, g as gfmTableFromMarkdown, a as gfmStrikethroughFromMarkdown, b as gfmFootnoteFromMarkdown, c as gfmTaskListItemFromMarkdown, d as frontmatterFromMarkdown } from "./mdast-GaLbcCj0.js";
-import { g as gfmTable, h as gfmStrikethrough, i as gfmFootnote, j as gfmTaskListItem, k as frontmatter } from "./micromark-sNHsSe9I.js";
+import { c as createLogger, N as NUtils, V as VUtils, k as MonitorNodeAttributes, l as Reaction, E as ExternalDefIndicator, P as PPUtils } from "./rainbow-d9-n1-l6fMexck.js";
+import { O as OptionItemSort, R as REACTION_REFRESH_OPTIONS, c as GlobalEventPrefix } from "./rainbow-d9-n2-yPEBuvIM.js";
+import { f as fromMarkdown, g as gfmTableFromMarkdown, a as gfmStrikethroughFromMarkdown, b as gfmFootnoteFromMarkdown, c as gfmTaskListItemFromMarkdown, d as frontmatterFromMarkdown } from "./mdast-ntT2jxI9.js";
+import { g as gfmTable, h as gfmStrikethrough, i as gfmFootnote, j as gfmTaskListItem, k as frontmatter } from "./micromark-1LHDWxcx.js";
 const AsyncFunction = Object.getPrototypeOf(async function() {
 }).constructor;
 var ParsedNodeType;
@@ -1980,8 +1980,11 @@ const createSnippetBuild = (attrName, createFunc) => {
     }
   };
 };
-const createSyncSnippetBuild = (attrName, argNames) => {
+const createSyncSnippetBuild = (attrName, argNames, avoidFuncWhenSingleLine = false) => {
   return createSnippetBuild(attrName, (parsed) => {
+    if (parsed.indexOf("\n") === -1 && avoidFuncWhenSingleLine) {
+      return parsed;
+    }
     if (argNames == null || argNames.length === 0) {
       return new Function(parsed);
     } else {
@@ -1989,8 +1992,11 @@ const createSyncSnippetBuild = (attrName, argNames) => {
     }
   });
 };
-const createAsyncSnippetBuild = (attrName, argNames) => {
+const createAsyncSnippetBuild = (attrName, argNames, avoidFuncWhenSingleLine = false) => {
   return createSnippetBuild(attrName, (parsed) => {
+    if (parsed.indexOf("\n") === -1 && avoidFuncWhenSingleLine) {
+      return parsed;
+    }
     if (argNames == null || argNames.length === 0) {
       return new AsyncFunction(parsed);
     } else {
@@ -3190,20 +3196,32 @@ var N2WidgetType;
   N2WidgetType2["TREE"] = "Tree";
   N2WidgetType2["PAGINATION"] = "Pagination";
 })(N2WidgetType || (N2WidgetType = {}));
+const StandardInputValidators = [
+  ValidatorUtils.DETECT_REQUIRED,
+  ValidatorUtils.DETECT_LENGTH,
+  ValidatorUtils.DETECT_NUMERIC,
+  ValidatorUtils.DETECT_POSITIVE,
+  ValidatorUtils.DETECT_NOT_NEGATIVE,
+  ValidatorUtils.DETECT_INTEGER,
+  ValidatorUtils.DETECT_NUMBER_RANGE,
+  ValidatorUtils.DETECT_REGEX
+];
+const PasswordInputValidators = [
+  ValidatorUtils.DETECT_REQUIRED,
+  ValidatorUtils.DETECT_LENGTH,
+  ValidatorUtils.DETECT_REGEX
+];
+const InputMaskBuild = createSyncSnippetBuild("mask", [], true);
 class N2InputTranslator extends SpecificWidgetTranslator {
   getSupportedType() {
     return N2WidgetType.INPUT;
   }
+  getAttributeValueBuilders() {
+    return [InputMaskBuild];
+  }
   getValidationHandlerDetectives() {
     return [
-      ValidatorUtils.DETECT_REQUIRED,
-      ValidatorUtils.DETECT_LENGTH,
-      ValidatorUtils.DETECT_NUMERIC,
-      ValidatorUtils.DETECT_POSITIVE,
-      ValidatorUtils.DETECT_NOT_NEGATIVE,
-      ValidatorUtils.DETECT_INTEGER,
-      ValidatorUtils.DETECT_NUMBER_RANGE,
-      ValidatorUtils.DETECT_REGEX,
+      ...StandardInputValidators,
       ...super.getValidationHandlerDetectives()
     ];
   }
@@ -3214,14 +3232,7 @@ class N2NumberTranslator extends SpecificWidgetTranslator {
   }
   getValidationHandlerDetectives() {
     return [
-      ValidatorUtils.DETECT_REQUIRED,
-      ValidatorUtils.DETECT_LENGTH,
-      ValidatorUtils.DETECT_NUMERIC,
-      ValidatorUtils.DETECT_POSITIVE,
-      ValidatorUtils.DETECT_NOT_NEGATIVE,
-      ValidatorUtils.DETECT_INTEGER,
-      ValidatorUtils.DETECT_NUMBER_RANGE,
-      ValidatorUtils.DETECT_REGEX,
+      ...StandardInputValidators,
       ...super.getValidationHandlerDetectives()
     ];
   }
@@ -3232,9 +3243,7 @@ class N2PasswordTranslator extends SpecificWidgetTranslator {
   }
   getValidationHandlerDetectives() {
     return [
-      ValidatorUtils.DETECT_REQUIRED,
-      ValidatorUtils.DETECT_LENGTH,
-      ValidatorUtils.DETECT_REGEX,
+      ...PasswordInputValidators,
       ...super.getValidationHandlerDetectives()
     ];
   }
@@ -3244,18 +3253,11 @@ class N2DecorateInputTranslator extends SpecificWidgetTranslator {
     return N2WidgetType.DECORATE_INPUT;
   }
   getAttributeValueBuilders() {
-    return [DecorateLeadsBuild, DecorateTailsBuild];
+    return [InputMaskBuild, DecorateLeadsBuild, DecorateTailsBuild];
   }
   getValidationHandlerDetectives() {
     return [
-      ValidatorUtils.DETECT_REQUIRED,
-      ValidatorUtils.DETECT_LENGTH,
-      ValidatorUtils.DETECT_NUMERIC,
-      ValidatorUtils.DETECT_POSITIVE,
-      ValidatorUtils.DETECT_NOT_NEGATIVE,
-      ValidatorUtils.DETECT_INTEGER,
-      ValidatorUtils.DETECT_NUMBER_RANGE,
-      ValidatorUtils.DETECT_REGEX,
+      ...StandardInputValidators,
       ...super.getValidationHandlerDetectives()
     ];
   }
@@ -3269,14 +3271,7 @@ class N2DecorateNumberTranslator extends SpecificWidgetTranslator {
   }
   getValidationHandlerDetectives() {
     return [
-      ValidatorUtils.DETECT_REQUIRED,
-      ValidatorUtils.DETECT_LENGTH,
-      ValidatorUtils.DETECT_NUMERIC,
-      ValidatorUtils.DETECT_POSITIVE,
-      ValidatorUtils.DETECT_NOT_NEGATIVE,
-      ValidatorUtils.DETECT_INTEGER,
-      ValidatorUtils.DETECT_NUMBER_RANGE,
-      ValidatorUtils.DETECT_REGEX,
+      ...StandardInputValidators,
       ...super.getValidationHandlerDetectives()
     ];
   }
@@ -3290,9 +3285,7 @@ class N2DecoratePasswordTranslator extends SpecificWidgetTranslator {
   }
   getValidationHandlerDetectives() {
     return [
-      ValidatorUtils.DETECT_REQUIRED,
-      ValidatorUtils.DETECT_LENGTH,
-      ValidatorUtils.DETECT_REGEX,
+      ...PasswordInputValidators,
       ...super.getValidationHandlerDetectives()
     ];
   }
@@ -4200,6 +4193,7 @@ const registerN2Widgets$1 = (widgetHelper) => {
 };
 var index = /* @__PURE__ */ Object.freeze({
   __proto__: null,
+  InputMaskBuild,
   N2BadgeTranslator,
   N2BoxTranslator,
   N2ButtonBarTranslator,

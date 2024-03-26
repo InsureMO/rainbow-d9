@@ -4,28 +4,28 @@ var __publicField = (obj, key, value) => {
   __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
   return value;
 };
-import { R as React, r as reactExports, j as jsxRuntimeExports, c as client } from "./react-JlXBV7c-.js";
-import { r as registerCharts } from "./rainbow-d9-echarts-ZSOTh3IB.js";
-import { V as VUtils, r as registerWidget, f as useCreateEventBus, M as MUtils, P as PPUtils, u as useThrottler, S as StandaloneRoot, m as ExternalDefMismatchIndicator, n as N1Logger, E as ExternalDefIndicator, B as BridgeEventBusProvider, o as useBridgeEventBus, p as BridgeToRootEventTypes, h as MBUtils, D as DeviceDetective } from "./rainbow-d9-n1-ZgNI_n7p.js";
-import { i as index$2, D as DOM_KEY_WIDGET, C as CssVars, d as utils$1, b as useGlobalHandlers, t as toIntlLabel, U as UnwrappedButton, B as ButtonInk, I as IntlLabel, e as ButtonFill, n as utils$2, m as GlobalRoot, $ as $d9n2, u as useGlobalEventBus, o as UnwrappedButtonBar, p as ButtonBarAlignment, G as GlobalEventTypes, q as UnwrappedSection } from "./rainbow-d9-n2-qeAEFjAk.js";
-import { a as index$2$1, b as index, i as index$1, p as parseDoc, r as registerN2Widgets } from "./rainbow-d9-n3-Ib_riEAM.js";
-import { q as qe, $ as $e } from "./styled-components-CCSEkPWF.js";
-import { T as Tag, j as tags, k as ViewPlugin, l as syntaxTree, H as HighlightStyle, o as defaultHighlightStyle, q as syntaxHighlighting, r as styleTags, D as Decoration, I as InlineContext, W as WidgetType, v as EditorView, x as EditorState, y as basicSetup, z as keymap, A as indentWithTab, B as markdown$c, C as javascript, F as markdownLanguage, G as lintGutter, J as linter, n as nanoid } from "./vendor-KG5onvK6.js";
-import { r as registerPlanSelect, u as useDemoMarkdown, C as CustomEventHandler, N as N2DemoDialogHandler, T as ThaiPlanSelection, a as ThaiPlanSelectionData, b as ThaiPlanSelectionMarkdown, P as PlanSelectionCssVars } from "./rainbow-d9-thai-plan-selection-iudBYUwK.js";
+import { R as React, r as reactExports, j as jsxRuntimeExports, c as client } from "./react-1yTqe2DF.js";
+import { r as registerCharts } from "./rainbow-d9-echarts-ZuZ-3FYo.js";
+import { V as VUtils, r as registerWidget, f as useCreateEventBus, M as MUtils, P as PPUtils, u as useThrottler, S as StandaloneRoot, m as ExternalDefMismatchIndicator, n as N1Logger, E as ExternalDefIndicator, B as BridgeEventBusProvider, o as useBridgeEventBus, p as BridgeToRootEventTypes, h as MBUtils, D as DeviceDetective } from "./rainbow-d9-n1-l6fMexck.js";
+import { i as index$2, D as DOM_KEY_WIDGET, C as CssVars, d as utils$1, b as useGlobalHandlers, t as toIntlLabel, U as UnwrappedButton, B as ButtonInk, I as IntlLabel, e as ButtonFill, n as utils$2, m as GlobalRoot, $ as $d9n2, u as useGlobalEventBus, o as UnwrappedButtonBar, p as ButtonBarAlignment, G as GlobalEventTypes, q as UnwrappedSection } from "./rainbow-d9-n2-yPEBuvIM.js";
+import { a as index$2$1, b as index, i as index$1, p as parseDoc, r as registerN2Widgets } from "./rainbow-d9-n3-gJCDFssZ.js";
+import { q as qe, $ as $e } from "./styled-components-97otH9WP.js";
+import { T as Tag, v as tags, x as ViewPlugin, y as syntaxTree, H as HighlightStyle, z as defaultHighlightStyle, A as syntaxHighlighting, B as styleTags, D as Decoration, C as InlineContext, W as WidgetType, F as EditorView, G as EditorState, J as basicSetup, K as keymap, L as indentWithTab, N as markdown$c, O as javascript, Q as markdownLanguage, R as lintGutter, U as linter, n as nanoid } from "./vendor-rdXXhzE9.js";
+import { r as registerPlanSelect, u as useDemoMarkdown, C as CustomEventHandler, N as N2DemoDialogHandler, T as ThaiPlanSelection, a as ThaiPlanSelectionData, b as ThaiPlanSelectionMarkdown, P as PlanSelectionCssVars } from "./rainbow-d9-thai-plan-selection-zF6hHTBW.js";
 import { d as dayjs, W as WeekOfYear, Q as QuarterOfYear, D as Duration, I as IsToday, R as RelativeTime, A as ArraySupport, O as ObjectSupport, C as CustomParseFormat, U as UTC, B as BuddhistEra } from "./dayjs-9Z7dW0Q-.js";
 import { u as use, a as install, b as install$1, c as install$2, d as install$3, e as install$4, f as install$5, h as installLabelLayout, j as installUniversalTransition, k as install$6, l as install$7 } from "./echarts-v5L9gyiQ.js";
-import { b as remarkGfm } from "./remark-47drf5d8.js";
-import { R as ReactMarkdown } from "./react-markdown-iGorNiHl.js";
-import { S as SyntaxHighlighter, m as materialDark, _ as __vitePreload } from "./react-syntax-highlighter-BS4gq4e8.js";
+import { b as remarkGfm } from "./remark-UpRauaFr.js";
+import { R as ReactMarkdown } from "./react-markdown-q1E55NsP.js";
+import { S as SyntaxHighlighter, m as materialDark, _ as __vitePreload } from "./react-syntax-highlighter-qwmNbwG_.js";
 import "./babel-AnpZxJH-.js";
-import "./mdast-GaLbcCj0.js";
-import "./micromark-sNHsSe9I.js";
+import "./mdast-ntT2jxI9.js";
+import "./micromark-1LHDWxcx.js";
 import "./unist-5yxlKLF4.js";
 import "./emotion--D3psyId.js";
 import "./zrender-DEzoFf2M.js";
-import "./property-information-HeW8nFhU.js";
-import "./refractor-qW72MO4J.js";
-import "./hastscript-eFcsYmyf.js";
+import "./property-information-Ef7kb4d-.js";
+import "./refractor-nLHsqpXB.js";
+import "./hastscript-5n10lYdS.js";
 (function polyfill() {
   const relList = document.createElement("link").relList;
   if (relList && relList.supports && relList.supports("modulepreload")) {
@@ -949,6 +949,11 @@ const ATTRIBUTE_VALUE_ICON_PREFIX = `${ATTRIBUTE_VALUE_ICON_SYMBOL}.`;
 const ATTRIBUTE_VALUE_REF_START = "@";
 const ATTRIBUTE_VALUE_EXT_SYMBOL = "@ext";
 const ATTRIBUTE_VALUE_EXT_PREFIX = `${ATTRIBUTE_VALUE_EXT_SYMBOL}.`;
+const ValueChanged = {
+  name: "valueChanged",
+  label: "Snippet.",
+  description: "Handle value changed."
+};
 const AutoSelect = {
   name: "autoSelect",
   label: "Boolean. Select all content automatically.",
@@ -1351,6 +1356,7 @@ const N2Widgets = [
         label: "Boolean. Treat as a number.",
         description: "Default false. Attempt to synchronize with the data model as a number."
       },
+      ValueChanged,
       ValidationRequired,
       ValidationRegex,
       ValidationRegexp,
@@ -1375,6 +1381,7 @@ const N2Widgets = [
     properties: [
       AutoSelect,
       InputPlaceholder,
+      ValueChanged,
       ValidationRequired,
       ValidationRegex,
       ValidationRegexp,
@@ -1400,6 +1407,7 @@ const N2Widgets = [
     properties: [
       AutoSelect,
       InputPlaceholder,
+      ValueChanged,
       ValidationRequired,
       ValidationRegex,
       ValidationRegexp,
@@ -1420,6 +1428,7 @@ const N2Widgets = [
     properties: [
       AutoSelect,
       InputPlaceholder,
+      ValueChanged,
       LeadsDecorateElements,
       TailsDecorateElements,
       ValidationRequired,
@@ -1450,6 +1459,7 @@ const N2Widgets = [
     properties: [
       AutoSelect,
       InputPlaceholder,
+      ValueChanged,
       LeadsDecorateElements,
       TailsDecorateElements,
       ValidationRequired,
@@ -1481,6 +1491,7 @@ const N2Widgets = [
     properties: [
       AutoSelect,
       InputPlaceholder,
+      ValueChanged,
       LeadsDecorateElements,
       TailsDecorateElements,
       ValidationRequired,
@@ -1506,6 +1517,7 @@ const N2Widgets = [
     properties: [
       AutoSelect,
       InputPlaceholder,
+      ValueChanged,
       ValidationRequired,
       ValidationLength
     ],
@@ -1519,7 +1531,7 @@ const N2Widgets = [
   {
     $wt: index.N2WidgetType.CALENDAR,
     label: "Date picker.",
-    properties: [...CalendarProperties, ValidationRequired],
+    properties: [...CalendarProperties, ValueChanged, ValidationRequired],
     icon: PlaygroundIcons.DATE,
     group: PlaygroundWidgetGroupKey.INPUTS,
     tooltip: "Date picker",
@@ -1530,6 +1542,7 @@ const N2Widgets = [
     label: 'Date picker. Shortcut of "Calendar"',
     properties: [
       ...CalendarProperties.filter(({ name }) => name !== "time" && name !== "timeFormat"),
+      ValueChanged,
       ValidationRequired
     ],
     icon: PlaygroundIcons.DATE,
@@ -1547,6 +1560,7 @@ const N2Widgets = [
     label: "Datetime picker.",
     properties: [
       ...CalendarProperties.filter(({ name }) => name !== "time" && name !== "fixedTimeAt"),
+      ValueChanged,
       ValidationRequired
     ],
     icon: PlaygroundIcons.DATETIME,
@@ -1569,6 +1583,7 @@ const N2Widgets = [
         label: "Boolean.",
         description: "Default false. Use times icon when it is false."
       },
+      ValueChanged,
       ValidationRequired
     ],
     icon: PlaygroundIcons.CHECKBOX,
@@ -1580,7 +1595,7 @@ const N2Widgets = [
   {
     $wt: index.N2WidgetType.CHECKBOXES,
     label: "Checkbox group.",
-    properties: [...CheckboxesProperties, ValidationRequired],
+    properties: [...CheckboxesProperties, ValueChanged, ValidationRequired],
     icon: PlaygroundIcons.CHECKS,
     group: PlaygroundWidgetGroupKey.OPTIONS,
     tooltip: "Checkbox group",
@@ -1589,7 +1604,7 @@ const N2Widgets = [
   {
     $wt: index.N2WidgetType.CHECKS,
     label: 'Checkbox group. Shortcut of "Checkboxes".',
-    properties: [...CheckboxesProperties, ValidationRequired],
+    properties: [...CheckboxesProperties, ValueChanged, ValidationRequired],
     icon: PlaygroundIcons.CHECKS,
     group: PlaygroundWidgetGroupKey.OPTIONS,
     tooltip: "Checkbox group",
@@ -1606,6 +1621,7 @@ const N2Widgets = [
         label: "Text.",
         description: 'One or two values, connected by ",". First is true value, second is false value.'
       },
+      ValueChanged,
       ValidationRequired
     ],
     icon: PlaygroundIcons.RADIO,
@@ -1620,6 +1636,7 @@ const N2Widgets = [
     label: "Radio button group.",
     properties: [
       ...CheckboxesProperties.filter(({ name }) => name !== "single" && name !== "boolOnSingle"),
+      ValueChanged,
       ValidationRequired
     ],
     icon: PlaygroundIcons.RADIOS,
@@ -1635,7 +1652,7 @@ const N2Widgets = [
   {
     $wt: index.N2WidgetType.DROPDOWN,
     label: "Dropdown.",
-    properties: [...DropdownProperties, ValidationRequired],
+    properties: [...DropdownProperties, ValueChanged, ValidationRequired],
     icon: PlaygroundIcons.DROPDOWN,
     group: PlaygroundWidgetGroupKey.OPTIONS,
     template: `Dropdown::[caption]::[property]
@@ -1650,7 +1667,7 @@ const N2Widgets = [
   {
     $wt: index.N2WidgetType.MULTI_DROPDOWN,
     label: "Dropdown allows multiple choices.",
-    properties: [...DropdownProperties, ValidationRequired],
+    properties: [...DropdownProperties, ValueChanged, ValidationRequired],
     icon: PlaygroundIcons.MULTI_DROPDOWN,
     group: PlaygroundWidgetGroupKey.OPTIONS,
     tooltip: "Multiple choices",
@@ -1995,7 +2012,8 @@ const N2Widgets = [
     properties: [
       { name: "freeWalk", label: "Boolean.", description: "Default false. Show page free walker dropdown." },
       { name: "maxButtons", label: "Number.", description: "Default 7. Maximum page buttons." },
-      { name: "possibleSizes", label: "Text.", description: "Possible page size. Show page size dropdown." }
+      { name: "possibleSizes", label: "Text.", description: "Possible page size. Show page size dropdown." },
+      ValueChanged
     ],
     icon: "",
     group: PlaygroundWidgetGroupKey.NOT_CARE,
@@ -4225,7 +4243,7 @@ const registerPlayground = (widgetHelper, widgetType) => {
   const repo = widgetHelper.repository;
   repo.register(new TranslatorClass(repo));
 };
-var define_process_env_default = { GITHUB_STATE: "/home/runner/work/_temp/_runner_file_commands/save_state_7a97f068-0871-486f-8bb6-8de913436100", npm_package_scripts_build_n5_ci: "cd ./d9-n5 && yarn build-ci", npm_package_scripts_build_sample_cra: "cd ./d9-sample-cra && yarn build", STATS_TRP: "true", DEPLOYMENT_BASEPATH: "/opt/runner", DOTNET_NOLOGO: "1", npm_package_dependencies__vitejs_plugin_react: "^4.2.1", USER: "runner", npm_config_version_commit_hooks: "true", npm_config_user_agent: "yarn/1.22.21 npm/? node/v18.19.1 linux x64", npm_package_dependencies__types_jest: "^29.5.4", CI: "true", npm_config_bin_links: "true", npm_package_bugs_url: "https://github.com/InsureMO/rainbow-d9/issues", npm_config_wrap_output: "", RUNNER_ENVIRONMENT: "github-hosted", GITHUB_ENV: "/home/runner/work/_temp/_runner_file_commands/set_env_7a97f068-0871-486f-8bb6-8de913436100", PIPX_HOME: "/opt/pipx", npm_node_execpath: "/opt/hostedtoolcache/node/18.19.1/x64/bin/node", npm_package_scripts_build_thai_all_ci: "yarn build-thai-plan-selection-ci", npm_config_init_version: "1.0.0", npm_package_devDependencies_gh_pages: "^6.1.1", npm_package_dependencies__babel_plugin_proposal_private_property_in_object: "^7.21.11", JAVA_HOME_8_X64: "/usr/lib/jvm/temurin-8-jdk-amd64", SHLVL: "1", HOME: "/home/runner", OLDPWD: "/home/runner/work/rainbow-d9/rainbow-d9", npm_package_browserslist_production_0: ">0.2%", RUNNER_TEMP: "/home/runner/work/_temp", GITHUB_EVENT_PATH: "/home/runner/work/_temp/_github_workflow/event.json", npm_package_scripts_build_all: "yarn build-n123 && yarn build-n5 && yarn build-echarts && yarn build-thai-all", npm_package_browserslist_production_1: "not dead", npm_package_dependencies_react_syntax_highlighter: "^15.5.0", JAVA_HOME_11_X64: "/usr/lib/jvm/temurin-11-jdk-amd64", PIPX_BIN_DIR: "/opt/pipx_bin", GITHUB_REPOSITORY_OWNER: "InsureMO", npm_package_volta_node: "18.19.0", npm_config_init_license: "MIT", npm_package_browserslist_production_2: "not op_mini all", GRADLE_HOME: "/usr/share/gradle-8.6", ANDROID_NDK_LATEST_HOME: "/usr/local/lib/android/sdk/ndk/26.2.11394342", JAVA_HOME_21_X64: "/usr/lib/jvm/temurin-21-jdk-amd64", STATS_RDCL: "true", GITHUB_RETENTION_DAYS: "90", YARN_WRAP_OUTPUT: "false", npm_package_scripts_build_thai_plan_selection_ci: "cd ./d9-thai-plan-selection && yarn build-ci", npm_package_scripts_build_n1: "cd ./d9-n1 && yarn build", npm_config_version_tag_prefix: "v", npm_package_dependencies__rainbow_d9_n2: "1.1.0", GITHUB_REPOSITORY_OWNER_ID: "38915232", POWERSHELL_DISTRIBUTION_CHANNEL: "GitHub-Actions-ubuntu22", AZURE_EXTENSION_DIR: "/opt/az/azcliextensions", GITHUB_HEAD_REF: "", npm_package_scripts_build_n2: "cd ./d9-n2 && yarn build", npm_package_dependencies__types_styled_components: "^5.1.34", npm_package_dependencies__rainbow_d9_n3: "1.1.0", npm_package_dependencies__rainbow_d9_echarts: "1.1.0", SYSTEMD_EXEC_PID: "596", npm_package_scripts_build_echarts: "cd ./d9-echarts && yarn build", npm_package_scripts_build_n3: "cd ./d9-n3 && yarn build", GITHUB_GRAPHQL_URL: "https://api.github.com/graphql", npm_package_description: "Assume the following envs are ready, otherwise contact the tech guy.", npm_package_scripts_predeploy: "npm run build", npm_package_dependencies__rainbow_d9_n5: "1.1.0", GOROOT_1_20_X64: "/opt/hostedtoolcache/go/1.20.14/x64", NVM_DIR: "/home/runner/.nvm", npm_package_readmeFilename: "README.md", npm_package_scripts_build_n5: "cd ./d9-n5 && yarn build", npm_package_dependencies__types_react: "^18.2.21", npm_package_dependencies__testing_library_react: "^13.4.0", DOTNET_SKIP_FIRST_TIME_EXPERIENCE: "1", GOROOT_1_21_X64: "/opt/hostedtoolcache/go/1.21.8/x64", JAVA_HOME_17_X64: "/usr/lib/jvm/temurin-17-jdk-amd64", ImageVersion: "20240317.1.0", RUNNER_OS: "Linux", GITHUB_API_URL: "https://api.github.com", GOROOT_1_22_X64: "/opt/hostedtoolcache/go/1.22.1/x64", SWIFT_PATH: "/usr/share/swift/usr/bin", RUNNER_USER: "runner", STATS_V3PS: "true", CHROMEWEBDRIVER: "/usr/local/share/chromedriver-linux64", JOURNAL_STREAM: "8:20491", GITHUB_WORKFLOW: "Publish to NPM", _: "/opt/hostedtoolcache/node/18.19.1/x64/bin/yarn", npm_package_private: "true", npm_package_dependencies_remark_gfm: "3.0.1", npm_package_scripts_build_thai_all: "yarn build-thai-plan-selection", npm_config_registry: "https://registry.yarnpkg.com", ACTIONS_RUNNER_ACTION_ARCHIVE_CACHE: "/opt/actionarchivecache", STATS_D: "false", GITHUB_RUN_ID: "8414504233", npm_package_workspaces_0: "d9-n1", GITHUB_REF_TYPE: "tag", BOOTSTRAP_HASKELL_NONINTERACTIVE: "1", GITHUB_WORKFLOW_SHA: "d772243cf425eb27a6c12396a657c39c5c6485ff", GITHUB_BASE_REF: "", ImageOS: "ubuntu22", npm_package_scripts_build_n123_ci: "yarn build-n1-ci && yarn build-n2-ci && yarn build-n3-ci", npm_package_workspaces_1: "d9-n2", npm_config_ignore_scripts: "", npm_package_scripts_start: "vite", npm_package_dependencies_github_markdown_css: "^5.5.0", GITHUB_WORKFLOW_REF: "InsureMO/rainbow-d9/.github/workflows/release.yml@refs/tags/r-1.1.1", PERFLOG_LOCATION_SETTING: "RUNNER_PERFLOG", GITHUB_ACTION_REPOSITORY: "", npm_package_workspaces_2: "d9-n3", npm_package_browserslist_development_0: "last 1 chrome version", PATH: "/tmp/yarn--1711336281128-0.5690263674311338:/home/runner/work/rainbow-d9/rainbow-d9/d9-sample-cra/node_modules/.bin:/home/runner/.config/yarn/link/node_modules/.bin:/home/runner/work/rainbow-d9/rainbow-d9/node_modules/.bin:/opt/hostedtoolcache/node/18.19.1/x64/libexec/lib/node_modules/npm/bin/node-gyp-bin:/opt/hostedtoolcache/node/18.19.1/x64/lib/node_modules/npm/bin/node-gyp-bin:/opt/hostedtoolcache/node/18.19.1/x64/bin/node_modules/npm/bin/node-gyp-bin:/tmp/yarn--1711336280934-0.2863849096785047:/home/runner/work/rainbow-d9/rainbow-d9/node_modules/.bin:/home/runner/.config/yarn/link/node_modules/.bin:/home/runner/work/rainbow-d9/rainbow-d9/node_modules/.bin:/opt/hostedtoolcache/node/18.19.1/x64/libexec/lib/node_modules/npm/bin/node-gyp-bin:/opt/hostedtoolcache/node/18.19.1/x64/lib/node_modules/npm/bin/node-gyp-bin:/opt/hostedtoolcache/node/18.19.1/x64/bin/node_modules/npm/bin/node-gyp-bin:/opt/hostedtoolcache/node/18.19.1/x64/bin:/snap/bin:/home/runner/.local/bin:/opt/pipx_bin:/home/runner/.cargo/bin:/home/runner/.config/composer/vendor/bin:/usr/local/.ghcup/bin:/home/runner/.dotnet/tools:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin", NODE: "/opt/hostedtoolcache/node/18.19.1/x64/bin/node", ANT_HOME: "/usr/share/ant", DOTNET_MULTILEVEL_LOOKUP: "0", RUNNER_TRACKING_ID: "github_499ccdb5-49a9-44fa-9b47-6b714c9f2dbf", INVOCATION_ID: "20e8cc52918c4091bf325ebfc9ab4eb5", RUNNER_TOOL_CACHE: "/opt/hostedtoolcache", npm_package_name: "@rainbow-d9/sample-cra", npm_package_workspaces_3: "d9-n5", npm_package_browserslist_development_1: "last 1 firefox version", npm_package_repository_type: "git", npm_package_dependencies__types_react_syntax_highlighter: "^15.5.11", npm_package_dependencies__rainbow_d9_thai_plan_selection: "1.1.0", GITHUB_ACTION: "__run_5", GITHUB_RUN_NUMBER: "83", GITHUB_TRIGGERING_ACTOR: "bradwoo8621", RUNNER_ARCH: "X64", XDG_RUNTIME_DIR: "/run/user/1001", AGENT_TOOLSDIRECTORY: "/opt/hostedtoolcache", npm_package_scripts_build_thai_plan_selection: "cd ./d9-thai-plan-selection && yarn build", npm_package_workspaces_4: "d9-echarts", npm_package_browserslist_development_2: "last 1 safari version", npm_package_workspaces_5: "d9-thai-plan-selection", LANG: "C.UTF-8", VCPKG_INSTALLATION_ROOT: "/usr/local/share/vcpkg", npm_package_workspaces_6: "d9-sample-cra", npm_package_dependencies_react_dom: "^18.2.0", CONDA: "/usr/share/miniconda", RUNNER_NAME: "GitHub Actions 2", XDG_CONFIG_HOME: "/home/runner/.config", STATS_VMD: "true", GITHUB_REF_NAME: "r-1.1.1", GITHUB_REPOSITORY: "InsureMO/rainbow-d9", STATS_D_D: "true", npm_lifecycle_script: "vite build", npm_package_eslintConfig_extends_0: "react-app", npm_package_dependencies_vite_plugin_markdown: "^2.2.0", npm_package_dependencies_react_markdown: "8.0.7", npm_package_dependencies__types_node: "^20.5.3", STATS_UE: "true", ANDROID_NDK_ROOT: "/usr/local/lib/android/sdk/ndk/25.2.9519653", GITHUB_ACTION_REF: "", DEBIAN_FRONTEND: "noninteractive", npm_package_scripts_build_sample_cra_ci: "cd ./d9-sample-cra && yarn build", npm_config_version_git_message: "v%s", npm_package_eslintConfig_extends_1: "react-app/jest", GITHUB_REPOSITORY_ID: "704514093", GITHUB_ACTIONS: "true", npm_lifecycle_event: "build", npm_package_version: "1.1.0", npm_package_repository_url: "git+https://github.com/InsureMO/rainbow-d9.git", npm_package_dependencies__testing_library_jest_dom: "^5.17.0", GITHUB_REF_PROTECTED: "false", npm_config_argv: '{"remain":[],"cooked":["run","build-sample-cra"],"original":["build-sample-cra"]}', npm_package_volta_yarn: "1.22.21", npm_package_scripts_build: "vite build", npm_package_dependencies__testing_library_user_event: "^13.5.0", GITHUB_WORKSPACE: "/home/runner/work/rainbow-d9/rainbow-d9", ACCEPT_EULA: "Y", GITHUB_JOB: "create-sample-pages", RUNNER_PERFLOG: "/home/runner/perflog", npm_package_dependencies_vite: "^5.0.12", GITHUB_SHA: "d772243cf425eb27a6c12396a657c39c5c6485ff", GITHUB_RUN_ATTEMPT: "1", npm_config_version_git_tag: "true", npm_config_version_git_sign: "", GITHUB_REF: "refs/tags/r-1.1.1", GITHUB_ACTOR: "bradwoo8621", ANDROID_SDK_ROOT: "/usr/local/lib/android/sdk", npm_package_license: "MIT", npm_config_strict_ssl: "true", LEIN_HOME: "/usr/local/lib/lein", npm_package_scripts_build_n123: "yarn build-n1 && yarn build-n2 && yarn build-n3", GITHUB_PATH: "/home/runner/work/_temp/_runner_file_commands/add_path_7a97f068-0871-486f-8bb6-8de913436100", JAVA_HOME: "/usr/lib/jvm/temurin-11-jdk-amd64", PWD: "/home/runner/work/rainbow-d9/rainbow-d9/d9-sample-cra", GITHUB_ACTOR_ID: "2330098", RUNNER_WORKSPACE: "/home/runner/work/rainbow-d9", npm_execpath: "/opt/hostedtoolcache/node/18.19.1/x64/lib/node_modules/yarn/bin/yarn.js", npm_package_scripts_build_all_ci: "yarn build-n123-ci && yarn build-n5-ci && yarn build-echarts-ci && yarn build-thai-all-ci", HOMEBREW_CLEANUP_PERIODIC_FULL_DAYS: "3650", GITHUB_EVENT_NAME: "push", HOMEBREW_NO_AUTO_UPDATE: "1", ANDROID_HOME: "/usr/local/lib/android/sdk", GITHUB_SERVER_URL: "https://github.com", GECKOWEBDRIVER: "/usr/local/share/gecko_driver", LEIN_JAR: "/usr/local/lib/lein/self-installs/leiningen-2.11.2-standalone.jar", GHCUP_INSTALL_BASE_PREFIX: "/usr/local", GITHUB_OUTPUT: "/home/runner/work/_temp/_runner_file_commands/set_output_7a97f068-0871-486f-8bb6-8de913436100", npm_package_author_name: "Rainbow Team", EDGEWEBDRIVER: "/usr/local/share/edge_driver", STATS_EXT: "true", npm_package_scripts_build_n1_ci: "cd ./d9-n1 && yarn build-ci", npm_config_save_prefix: "^", npm_config_ignore_optional: "", ANDROID_NDK: "/usr/local/lib/android/sdk/ndk/25.2.9519653", SGX_AESM_ADDR: "1", CHROME_BIN: "/usr/bin/google-chrome", npm_package_scripts_build_n2_ci: "cd ./d9-n2 && yarn build-ci", npm_package_scripts_deploy: "gh-pages -d build", npm_package_scripts_preview: "vite preview", SELENIUM_JAR_PATH: "/usr/share/java/selenium-server.jar", STATS_EXTP: "https://provjobdsettingscdn.blob.core.windows.net/settings/provjobdsettings-0.5.154/provjobd.data", npm_package_scripts_build_echarts_ci: "cd ./d9-echarts && yarn build-ci", npm_package_scripts_build_n3_ci: "cd ./d9-n3 && yarn build-ci", npm_package_dependencies_web_vitals: "^2.1.4", npm_package_dependencies_typescript: "^5.1.6", INIT_CWD: "/home/runner/work/rainbow-d9/rainbow-d9", ANDROID_NDK_HOME: "/usr/local/lib/android/sdk/ndk/25.2.9519653", GITHUB_STEP_SUMMARY: "/home/runner/work/_temp/_runner_file_commands/step_summary_7a97f068-0871-486f-8bb6-8de913436100", npm_package_dependencies_react: "^18.2.0", npm_package_dependencies__types_react_dom: "^18.2.7", NODE_ENV: "production" };
+var define_process_env_default = { GITHUB_STATE: "/home/runner/work/_temp/_runner_file_commands/save_state_cbd265d6-d525-4b8f-85d0-178f8e912308", npm_package_scripts_build_n5_ci: "cd ./d9-n5 && yarn build-ci", npm_package_scripts_build_sample_cra: "cd ./d9-sample-cra && yarn build", STATS_TRP: "true", DEPLOYMENT_BASEPATH: "/opt/runner", DOTNET_NOLOGO: "1", npm_package_dependencies__vitejs_plugin_react: "^4.2.1", USER: "runner", npm_config_version_commit_hooks: "true", npm_config_user_agent: "yarn/1.22.21 npm/? node/v18.19.1 linux x64", npm_package_dependencies__types_jest: "^29.5.4", CI: "true", npm_config_bin_links: "true", npm_package_bugs_url: "https://github.com/InsureMO/rainbow-d9/issues", npm_config_wrap_output: "", RUNNER_ENVIRONMENT: "github-hosted", GITHUB_ENV: "/home/runner/work/_temp/_runner_file_commands/set_env_cbd265d6-d525-4b8f-85d0-178f8e912308", PIPX_HOME: "/opt/pipx", npm_node_execpath: "/opt/hostedtoolcache/node/18.19.1/x64/bin/node", npm_package_scripts_build_thai_all_ci: "yarn build-thai-plan-selection-ci", npm_config_init_version: "1.0.0", npm_package_devDependencies_gh_pages: "^6.1.1", npm_package_dependencies__babel_plugin_proposal_private_property_in_object: "^7.21.11", JAVA_HOME_8_X64: "/usr/lib/jvm/temurin-8-jdk-amd64", SHLVL: "1", HOME: "/home/runner", OLDPWD: "/home/runner/work/rainbow-d9/rainbow-d9", npm_package_browserslist_production_0: ">0.2%", RUNNER_TEMP: "/home/runner/work/_temp", GITHUB_EVENT_PATH: "/home/runner/work/_temp/_github_workflow/event.json", npm_package_scripts_build_all: "yarn build-n123 && yarn build-n5 && yarn build-echarts && yarn build-thai-all", npm_package_browserslist_production_1: "not dead", npm_package_dependencies_react_syntax_highlighter: "^15.5.0", JAVA_HOME_11_X64: "/usr/lib/jvm/temurin-11-jdk-amd64", PIPX_BIN_DIR: "/opt/pipx_bin", GITHUB_REPOSITORY_OWNER: "InsureMO", npm_package_volta_node: "18.19.0", npm_config_init_license: "MIT", npm_package_browserslist_production_2: "not op_mini all", GRADLE_HOME: "/usr/share/gradle-8.6", ANDROID_NDK_LATEST_HOME: "/usr/local/lib/android/sdk/ndk/26.2.11394342", JAVA_HOME_21_X64: "/usr/lib/jvm/temurin-21-jdk-amd64", STATS_RDCL: "true", GITHUB_RETENTION_DAYS: "90", YARN_WRAP_OUTPUT: "false", npm_package_scripts_build_thai_plan_selection_ci: "cd ./d9-thai-plan-selection && yarn build-ci", npm_package_scripts_build_n1: "cd ./d9-n1 && yarn build", npm_config_version_tag_prefix: "v", npm_package_dependencies__rainbow_d9_n2: "1.1.1", GITHUB_REPOSITORY_OWNER_ID: "38915232", POWERSHELL_DISTRIBUTION_CHANNEL: "GitHub-Actions-ubuntu22", AZURE_EXTENSION_DIR: "/opt/az/azcliextensions", GITHUB_HEAD_REF: "", npm_package_scripts_build_n2: "cd ./d9-n2 && yarn build", npm_package_dependencies__types_styled_components: "^5.1.34", npm_package_dependencies__rainbow_d9_n3: "1.1.1", npm_package_dependencies__rainbow_d9_echarts: "1.1.1", SYSTEMD_EXEC_PID: "597", npm_package_scripts_build_echarts: "cd ./d9-echarts && yarn build", npm_package_scripts_build_n3: "cd ./d9-n3 && yarn build", GITHUB_GRAPHQL_URL: "https://api.github.com/graphql", npm_package_description: "Assume the following envs are ready, otherwise contact the tech guy.", npm_package_scripts_predeploy: "npm run build", npm_package_dependencies__rainbow_d9_n5: "1.1.1", GOROOT_1_20_X64: "/opt/hostedtoolcache/go/1.20.14/x64", NVM_DIR: "/home/runner/.nvm", npm_package_readmeFilename: "README.md", npm_package_scripts_build_n5: "cd ./d9-n5 && yarn build", npm_package_dependencies__types_react: "^18.2.21", npm_package_dependencies__testing_library_react: "^13.4.0", DOTNET_SKIP_FIRST_TIME_EXPERIENCE: "1", GOROOT_1_21_X64: "/opt/hostedtoolcache/go/1.21.8/x64", JAVA_HOME_17_X64: "/usr/lib/jvm/temurin-17-jdk-amd64", ImageVersion: "20240317.1.0", RUNNER_OS: "Linux", GITHUB_API_URL: "https://api.github.com", GOROOT_1_22_X64: "/opt/hostedtoolcache/go/1.22.1/x64", SWIFT_PATH: "/usr/share/swift/usr/bin", RUNNER_USER: "runner", STATS_V3PS: "true", CHROMEWEBDRIVER: "/usr/local/share/chromedriver-linux64", JOURNAL_STREAM: "8:20537", GITHUB_WORKFLOW: "Publish to NPM", _: "/opt/hostedtoolcache/node/18.19.1/x64/bin/yarn", npm_package_private: "true", npm_package_dependencies_remark_gfm: "3.0.1", npm_package_scripts_build_thai_all: "yarn build-thai-plan-selection", npm_config_registry: "https://registry.yarnpkg.com", ACTIONS_RUNNER_ACTION_ARCHIVE_CACHE: "/opt/actionarchivecache", STATS_D: "false", GITHUB_RUN_ID: "8432732835", npm_package_workspaces_0: "d9-n1", GITHUB_REF_TYPE: "tag", BOOTSTRAP_HASKELL_NONINTERACTIVE: "1", GITHUB_WORKFLOW_SHA: "ac52f7f706d16d5b59afc2b4a8dfc6648bc5bdff", GITHUB_BASE_REF: "", ImageOS: "ubuntu22", npm_package_scripts_build_n123_ci: "yarn build-n1-ci && yarn build-n2-ci && yarn build-n3-ci", npm_package_workspaces_1: "d9-n2", npm_config_ignore_scripts: "", npm_package_scripts_start: "vite", npm_package_dependencies_github_markdown_css: "^5.5.0", GITHUB_WORKFLOW_REF: "InsureMO/rainbow-d9/.github/workflows/release.yml@refs/tags/r-1.1.2", PERFLOG_LOCATION_SETTING: "RUNNER_PERFLOG", GITHUB_ACTION_REPOSITORY: "", npm_package_workspaces_2: "d9-n3", npm_package_browserslist_development_0: "last 1 chrome version", PATH: "/tmp/yarn--1711441001284-0.3821745488372723:/home/runner/work/rainbow-d9/rainbow-d9/d9-sample-cra/node_modules/.bin:/home/runner/.config/yarn/link/node_modules/.bin:/home/runner/work/rainbow-d9/rainbow-d9/node_modules/.bin:/opt/hostedtoolcache/node/18.19.1/x64/libexec/lib/node_modules/npm/bin/node-gyp-bin:/opt/hostedtoolcache/node/18.19.1/x64/lib/node_modules/npm/bin/node-gyp-bin:/opt/hostedtoolcache/node/18.19.1/x64/bin/node_modules/npm/bin/node-gyp-bin:/tmp/yarn--1711441001077-0.6263133407397115:/home/runner/work/rainbow-d9/rainbow-d9/node_modules/.bin:/home/runner/.config/yarn/link/node_modules/.bin:/home/runner/work/rainbow-d9/rainbow-d9/node_modules/.bin:/opt/hostedtoolcache/node/18.19.1/x64/libexec/lib/node_modules/npm/bin/node-gyp-bin:/opt/hostedtoolcache/node/18.19.1/x64/lib/node_modules/npm/bin/node-gyp-bin:/opt/hostedtoolcache/node/18.19.1/x64/bin/node_modules/npm/bin/node-gyp-bin:/opt/hostedtoolcache/node/18.19.1/x64/bin:/snap/bin:/home/runner/.local/bin:/opt/pipx_bin:/home/runner/.cargo/bin:/home/runner/.config/composer/vendor/bin:/usr/local/.ghcup/bin:/home/runner/.dotnet/tools:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin", NODE: "/opt/hostedtoolcache/node/18.19.1/x64/bin/node", ANT_HOME: "/usr/share/ant", DOTNET_MULTILEVEL_LOOKUP: "0", RUNNER_TRACKING_ID: "github_dd8734b9-80f2-4c2a-a78f-69d18fe4c3c4", INVOCATION_ID: "6be1fe8c72ca42af9a25fa62c326cb6d", RUNNER_TOOL_CACHE: "/opt/hostedtoolcache", npm_package_name: "@rainbow-d9/sample-cra", npm_package_workspaces_3: "d9-n5", npm_package_browserslist_development_1: "last 1 firefox version", npm_package_repository_type: "git", npm_package_dependencies__types_react_syntax_highlighter: "^15.5.11", npm_package_dependencies__rainbow_d9_thai_plan_selection: "1.1.1", GITHUB_ACTION: "__run_5", GITHUB_RUN_NUMBER: "84", GITHUB_TRIGGERING_ACTOR: "bradwoo8621", RUNNER_ARCH: "X64", XDG_RUNTIME_DIR: "/run/user/1001", AGENT_TOOLSDIRECTORY: "/opt/hostedtoolcache", npm_package_scripts_build_thai_plan_selection: "cd ./d9-thai-plan-selection && yarn build", npm_package_workspaces_4: "d9-echarts", npm_package_browserslist_development_2: "last 1 safari version", npm_package_workspaces_5: "d9-thai-plan-selection", LANG: "C.UTF-8", VCPKG_INSTALLATION_ROOT: "/usr/local/share/vcpkg", npm_package_workspaces_6: "d9-sample-cra", npm_package_dependencies_react_dom: "^18.2.0", CONDA: "/usr/share/miniconda", RUNNER_NAME: "GitHub Actions 10", XDG_CONFIG_HOME: "/home/runner/.config", STATS_VMD: "true", GITHUB_REF_NAME: "r-1.1.2", GITHUB_REPOSITORY: "InsureMO/rainbow-d9", npm_lifecycle_script: "vite build", npm_package_eslintConfig_extends_0: "react-app", npm_package_dependencies_vite_plugin_markdown: "^2.2.0", npm_package_dependencies_react_markdown: "8.0.7", npm_package_dependencies__types_node: "^20.5.3", STATS_UE: "true", ANDROID_NDK_ROOT: "/usr/local/lib/android/sdk/ndk/25.2.9519653", GITHUB_ACTION_REF: "", DEBIAN_FRONTEND: "noninteractive", npm_package_scripts_build_sample_cra_ci: "cd ./d9-sample-cra && yarn build", npm_config_version_git_message: "v%s", npm_package_eslintConfig_extends_1: "react-app/jest", GITHUB_REPOSITORY_ID: "704514093", GITHUB_ACTIONS: "true", npm_lifecycle_event: "build", npm_package_version: "1.1.1", npm_package_repository_url: "git+https://github.com/InsureMO/rainbow-d9.git", npm_package_dependencies__testing_library_jest_dom: "^5.17.0", GITHUB_REF_PROTECTED: "false", npm_config_argv: '{"remain":[],"cooked":["run","build-sample-cra"],"original":["build-sample-cra"]}', npm_package_volta_yarn: "1.22.21", npm_package_scripts_build: "vite build", npm_package_dependencies__testing_library_user_event: "^13.5.0", GITHUB_WORKSPACE: "/home/runner/work/rainbow-d9/rainbow-d9", ACCEPT_EULA: "Y", GITHUB_JOB: "create-sample-pages", RUNNER_PERFLOG: "/home/runner/perflog", npm_package_dependencies_vite: "^5.0.12", GITHUB_SHA: "ac52f7f706d16d5b59afc2b4a8dfc6648bc5bdff", GITHUB_RUN_ATTEMPT: "1", npm_config_version_git_tag: "true", npm_config_version_git_sign: "", GITHUB_REF: "refs/tags/r-1.1.2", GITHUB_ACTOR: "bradwoo8621", ANDROID_SDK_ROOT: "/usr/local/lib/android/sdk", npm_package_license: "MIT", npm_config_strict_ssl: "true", LEIN_HOME: "/usr/local/lib/lein", npm_package_scripts_build_n123: "yarn build-n1 && yarn build-n2 && yarn build-n3", GITHUB_PATH: "/home/runner/work/_temp/_runner_file_commands/add_path_cbd265d6-d525-4b8f-85d0-178f8e912308", JAVA_HOME: "/usr/lib/jvm/temurin-11-jdk-amd64", PWD: "/home/runner/work/rainbow-d9/rainbow-d9/d9-sample-cra", GITHUB_ACTOR_ID: "2330098", RUNNER_WORKSPACE: "/home/runner/work/rainbow-d9", npm_execpath: "/opt/hostedtoolcache/node/18.19.1/x64/lib/node_modules/yarn/bin/yarn.js", npm_package_scripts_build_all_ci: "yarn build-n123-ci && yarn build-n5-ci && yarn build-echarts-ci && yarn build-thai-all-ci", HOMEBREW_CLEANUP_PERIODIC_FULL_DAYS: "3650", GITHUB_EVENT_NAME: "push", HOMEBREW_NO_AUTO_UPDATE: "1", ANDROID_HOME: "/usr/local/lib/android/sdk", GITHUB_SERVER_URL: "https://github.com", GECKOWEBDRIVER: "/usr/local/share/gecko_driver", LEIN_JAR: "/usr/local/lib/lein/self-installs/leiningen-2.11.2-standalone.jar", GHCUP_INSTALL_BASE_PREFIX: "/usr/local", GITHUB_OUTPUT: "/home/runner/work/_temp/_runner_file_commands/set_output_cbd265d6-d525-4b8f-85d0-178f8e912308", npm_package_author_name: "Rainbow Team", EDGEWEBDRIVER: "/usr/local/share/edge_driver", STATS_EXT: "true", npm_package_scripts_build_n1_ci: "cd ./d9-n1 && yarn build-ci", npm_config_save_prefix: "^", npm_config_ignore_optional: "", ANDROID_NDK: "/usr/local/lib/android/sdk/ndk/25.2.9519653", SGX_AESM_ADDR: "1", CHROME_BIN: "/usr/bin/google-chrome", npm_package_scripts_build_n2_ci: "cd ./d9-n2 && yarn build-ci", npm_package_scripts_deploy: "gh-pages -d build", npm_package_scripts_preview: "vite preview", SELENIUM_JAR_PATH: "/usr/share/java/selenium-server.jar", STATS_EXTP: "https://provjobdsettingscdn.blob.core.windows.net/settings/provjobdsettings-0.5.154/provjobd.data", npm_package_scripts_build_echarts_ci: "cd ./d9-echarts && yarn build-ci", npm_package_scripts_build_n3_ci: "cd ./d9-n3 && yarn build-ci", npm_package_dependencies_web_vitals: "^2.1.4", npm_package_dependencies_typescript: "^5.1.6", INIT_CWD: "/home/runner/work/rainbow-d9/rainbow-d9", ANDROID_NDK_HOME: "/usr/local/lib/android/sdk/ndk/25.2.9519653", GITHUB_STEP_SUMMARY: "/home/runner/work/_temp/_runner_file_commands/step_summary_cbd265d6-d525-4b8f-85d0-178f8e912308", npm_package_dependencies_react: "^18.2.0", npm_package_dependencies__types_react_dom: "^18.2.7", NODE_ENV: "production" };
 dayjs.extend(WeekOfYear);
 dayjs.extend(QuarterOfYear);
 dayjs.extend(Duration);
@@ -4414,7 +4432,7 @@ const DemoData$8 = {
   caption,
   nested
 };
-const markdown$9 = "# Page::Demo Tab\n\n## Section::# 1. Basic Widgets\n\n- collapsible\n- marker: basic-widgets\n- DecoInput::Decorate Input::decorateInput\n	- label:\n		- labelOnValue\n		- property: decorateInput\n		- leads: Yes:\n	- leads: Hello\n	- tails: World\n	- regex: abc$,^def; must be abc or def.\n	- validateScopes: s1\n- DecoNumber::Decorate Number Input::decorateNumberInput\n	- label:\n		- valueToLabel: `'Hello world, again.'`\n	- leads: $icons.check;$\n	- tails: %;$icons.caretLeft\n	- numeric\n- DecoNumber::0 - 9 are Legal Keys::decorateNumberInput2\n	- leads: $icons.check;$\n	- tails: %;$icons.caretLeft\n	- numeric\n	- onKeyDown: @ext.keydown.numeric\n- Checkbox::A Checkbox::aCheckbox\n- Radio::A Radio::aRadio\n- Dropdown::::dropdown\n	- label: Dropdown\n	- options:\n		- 1: Option #1\n		- 2: Option #2\n- Dropdown::::dropdown2\n	- label: Dropdown #2\n	- options: @ext.dropdown2\n- MultiDropdown::Multiple Dropdown::multiDropdown\n	- options:\n		- 1: Option #1\n		- 2: Option #2\n		- 3: A very very very very very very very very very very very very very very very very very very long Option #3\n		- 4: Option #4\n		- 5: Option #5\n- DateTime::Buddhist Era::buddhistEra\n	- dateFormat: BBBB/MM/DD\n	- timeFormat: HH\n- Label::A Label::label\n	- valueToLabel: `'Hello World'`\n	- leads: $icons.check;$\n	- tails: %;$icons.caretLeft\n- Caption::A Caption::caption\n	- $fc\n	- text: Hello World\n- Caption::A Caption::caption\n	- $fc\n	- valueToLabel: `'Caption is [' + value + ']'`\n- Radios::Radio Group::radios1\n	- options:\n		- 1: Option #1\n		- 2: Option #2\n		- 3: Option #3\n		- 4: Option #4\n		- 5: A very very very very very very very very very very very very very very very very very very long Option #5\n	- place: 6\n	- columns: 4\n- Checks::Checkbox Group::checks1\n	- options:\n		- 1: Option #1\n		- 2: Option #2\n		- 3: Option #3\n		- 4: Option #4\n		- 5: A very very very very very very very very very very very very very very very very very very long Option #5\n	- place: 6\n	- columns: 4\n- Checks::Checkbox Group::checks2\n	- options:\n		- 1: Option #1\n		- 2: Option #2\n		- 3: Option #3\n		- 4: Option #4\n	- single\n- Button::\n	- text: Validate Inputs\n	- click: validate s1\n\n";
+const markdown$9 = "# Page::Demo Tab\n\n## Section::# 1. Basic Widgets\n\n- collapsible\n- marker: basic-widgets\n- DecoInput::Decorate Input::decorateInput\n	- label:\n		- labelOnValue\n		- property: decorateInput\n		- leads: Yes:\n	- leads: Hello\n	- tails: World\n	- regex: abc$,^def; Starts with \"def\" or ends with \"abc\".\n	- validateScopes: s1\n	- mask:\n	  ```\n	  return {\n		mask: '**** **** ****',\n		lazy: false,\n		autofix: true\n	  }\n	  ```\n- DecoNumber::Decorate Number Input::decorateNumberInput\n	- label:\n		- valueToLabel: `'Hello world, again.'`\n	- leads: $icons.check;$\n	- tails: %;$icons.caretLeft\n	- numeric\n	- placeholder: A placeholder\n	- grouping\n- DecoNumber::0 - 9 are Legal Keys::decorateNumberInput2\n	- leads: $icons.check;$\n	- tails: %;$icons.caretLeft\n	- numeric\n	- onKeyDown: @ext.keydown.numeric\n- Checkbox::A Checkbox::aCheckbox\n- Radio::A Radio::aRadio\n- Dropdown::::dropdown\n	- label: Dropdown\n	- options:\n		- 1: Option #1\n		- 2: Option #2\n- Dropdown::::dropdown2\n	- label: Dropdown #2\n	- options: @ext.dropdown2\n- MultiDropdown::Multiple Dropdown::multiDropdown\n	- options:\n		- 1: Option #1\n		- 2: Option #2\n		- 3: A very very very very very very very very very very very very very very very very very very long Option #3\n		- 4: Option #4\n		- 5: Option #5\n- DateTime::Buddhist Era::buddhistEra\n	- dateFormat: BBBB/MM/DD\n	- timeFormat: HH\n- Label::A Label::label\n	- valueToLabel: `'Hello World'`\n	- leads: $icons.check;$\n	- tails: %;$icons.caretLeft\n- Caption::A Caption::caption\n	- $fc\n	- text: Hello World\n- Caption::A Caption::caption\n	- $fc\n	- valueToLabel: `'Caption is [' + value + ']'`\n- Radios::Radio Group::radios1\n	- options:\n		- 1: Option #1\n		- 2: Option #2\n		- 3: Option #3\n		- 4: Option #4\n		- 5: A very very very very very very very very very very very very very very very very very very long Option #5\n	- place: 6\n	- columns: 4\n- Checks::Checkbox Group::checks1\n	- options:\n		- 1: Option #1\n		- 2: Option #2\n		- 3: Option #3\n		- 4: Option #4\n		- 5: A very very very very very very very very very very very very very very very very very very long Option #5\n	- place: 6\n	- columns: 4\n- Checks::Checkbox Group::checks2\n	- options:\n		- 1: Option #1\n		- 2: Option #2\n		- 3: Option #3\n		- 4: Option #4\n	- single\n- Button::\n	- text: Validate Inputs\n	- click: validate s1\n\n";
 const N2BasicWidgets = () => {
   const def = useDemoMarkdown(markdown$9);
   const externalDefs = {
@@ -4466,7 +4484,7 @@ const pagination$1 = {
 const DemoData$6 = {
   pagination: pagination$1
 };
-const markdown$7 = "# Page::Demo Tab\n\n## Section::# 8. Internationalization\n\n- Input::Test1::test1\n	- required\n- Dropdown::Test2::test2\n	- required: Test 2 is required.\n	- options:\n		- F: Female\n		- M: Male\n- Pagination::::pagination\n	- freeWalk\n	- sizes: 10;20;30\n";
+const markdown$7 = "# Page::Demo Tab\n\n## Section::# 8. Internationalization\n\n- DecoInput::Test1::test1\n	- required\n	- placeholder: Test1\n- Dropdown::Test2::test2\n	- required: Test 2 is required.\n	- options:\n		- F: Female\n		- M: Male\n- Pagination::::pagination\n	- freeWalk\n	- sizes: 10;20;30\n";
 $d9n2.intl.labels["zh"] = {
   "# 8. Internationalization": "# 8. 国际化",
   Test1: "测试1",
@@ -5526,7 +5544,7 @@ const App = () => {
 };
 const reportWebVitals = (onPerfEntry) => {
   if (onPerfEntry && onPerfEntry instanceof Function) {
-    __vitePreload(() => import("./vendor-KG5onvK6.js").then((n) => n.K), true ? __vite__mapDeps([0,1,2,3]) : void 0).then(({ getCLS, getFID, getFCP, getLCP, getTTFB }) => {
+    __vitePreload(() => import("./vendor-rdXXhzE9.js").then((n) => n.X), true ? __vite__mapDeps([0,1,2,3]) : void 0).then(({ getCLS, getFID, getFCP, getLCP, getTTFB }) => {
       getCLS(onPerfEntry);
       getFID(onPerfEntry);
       getFCP(onPerfEntry);
@@ -5544,7 +5562,7 @@ root.render(
 reportWebVitals();
 function __vite__mapDeps(indexes) {
   if (!__vite__mapDeps.viteFileDeps) {
-    __vite__mapDeps.viteFileDeps = ["assets/vendor-KG5onvK6.js","assets/babel-AnpZxJH-.js","assets/unist-5yxlKLF4.js","assets/vendor-UDnasYXb.css"]
+    __vite__mapDeps.viteFileDeps = ["assets/vendor-rdXXhzE9.js","assets/babel-AnpZxJH-.js","assets/unist-5yxlKLF4.js","assets/vendor-UDnasYXb.css"]
   }
   return indexes.map((i) => __vite__mapDeps.viteFileDeps[i])
 }

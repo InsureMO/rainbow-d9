@@ -4,10 +4,10 @@ var __publicField = (obj, key, value) => {
   __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
   return value;
 };
-import { a as color } from "./vendor-KG5onvK6.js";
-import { R as React, r as reactExports } from "./react-JlXBV7c-.js";
-import { V as VUtils, P as PPUtils, r as registerWidget, c as createLogger, b as useRootEventBus, d as useForceUpdate, M as MUtils, N as NUtils, e as Wrapper, a as useWrapperEventBus, W as WrapperEventTypes, f as useCreateEventBus, g as PROPERTY_PATH_ME, h as MBUtils, R as RootEventTypes, i as useDefaultAttributeValues, j as useAttributesWatch } from "./rainbow-d9-n1-ZgNI_n7p.js";
-import { q as qe, W as We } from "./styled-components-CCSEkPWF.js";
+import { a as color, M as MaskedNumber, e as MaskedDate, g as MaskedFunction, j as MaskedPattern, k as MaskedRange, l as MaskedRegExp, o as MaskedDynamic } from "./vendor-rdXXhzE9.js";
+import { R as React, r as reactExports, u as useIMask } from "./react-1yTqe2DF.js";
+import { V as VUtils, P as PPUtils, r as registerWidget, c as createLogger, b as useRootEventBus, M as MUtils, N as NUtils, d as Wrapper, e as useForceUpdate, a as useWrapperEventBus, W as WrapperEventTypes, f as useCreateEventBus, g as PROPERTY_PATH_ME, h as MBUtils, R as RootEventTypes, i as useDefaultAttributeValues, j as useAttributesWatch } from "./rainbow-d9-n1-l6fMexck.js";
+import { q as qe, W as We } from "./styled-components-97otH9WP.js";
 import { d as dayjs } from "./dayjs-9Z7dW0Q-.js";
 const DOM_KEY_WIDGET = "data-w";
 const DOM_ID_WIDGET = "data-wid";
@@ -25,6 +25,7 @@ const CssConstants = {
   HOVER_COLOR: "rgb(238,243,252)",
   INVERT_COLOR: "rgb(255,255,255)",
   DISABLE_COLOR: "rgb(235,235,235)",
+  PLACEHOLDER_COLOR: "rgb(179, 179, 179)",
   BORDER_COLOR: "rgb(206,212,218)",
   SHADOW_COLOR: "rgb(0,0,0)",
   WAIVE_SHADOW_COLOR: "rgb(0,0,0)",
@@ -55,6 +56,7 @@ const CssVars = {
   HOVER_COLOR: `var(--d9-hover-color, ${CssConstants.HOVER_COLOR})`,
   INVERT_COLOR: `var(--d9-invert-color, ${CssConstants.INVERT_COLOR})`,
   DISABLE_COLOR: `var(--d9-disable-color, ${CssConstants.DISABLE_COLOR})`,
+  PLACEHOLDER_COLOR: `var(--d9-placeholder-color, ${CssConstants.PLACEHOLDER_COLOR})`,
   PLAIN_SHADOW: `var(--d9-plain-shadow, 0 0 0 3px ${color(CssConstants.SHADOW_COLOR).alpha(0.06)})`,
   HOVER_SHADOW: `var(--d9-hover-shadow, 0 0 0 3px ${color(CssConstants.SHADOW_COLOR).alpha(0.1)})`,
   PRIMARY_SHADOW: `var(--d9-primary-shadow, 0 0 0 3px ${color(CssConstants.PRIMARY_COLOR).alpha(0.4)})`,
@@ -1281,6 +1283,11 @@ const nfWithLocale = (locale2) => {
 const nfXWithLocale = (locale2, fractionDigits) => {
   return wrapNf(nfWithLocale(locale2)(fractionDigits).format);
 };
+const detectNumberFormat = (locale2) => {
+  const formatted = new Intl.NumberFormat(locale2 ?? void 0, { useGrouping: true }).format(12345678909876e-4);
+  const matched = formatted.match(/\D/g);
+  return [matched[0], matched[matched.length - 1]];
+};
 const df = (value, options) => {
   if (VUtils.isBlank(value)) {
     return value;
@@ -1294,11 +1301,22 @@ const df = (value, options) => {
     return value;
   }
 };
+const useDualRefs = (ref, forwardedRef) => {
+  return reactExports.useCallback((element) => {
+    ref.current = element;
+    if (typeof forwardedRef === "function") {
+      forwardedRef(element);
+    } else if (typeof forwardedRef === "object" && forwardedRef !== null) {
+      forwardedRef.current = element;
+    }
+  }, [ref, forwardedRef]);
+};
 const N2Logger = createLogger();
 var utils$1 = /* @__PURE__ */ Object.freeze({
   __proto__: null,
   N2Logger,
   computeGridCellStyle,
+  detectNumberFormat,
   df,
   locale,
   nf,
@@ -1310,6 +1328,7 @@ var utils$1 = /* @__PURE__ */ Object.freeze({
   nfXWithLocale,
   omitGridCellStyle,
   toCssSize,
+  useDualRefs,
   wrapNf
 });
 const SpinnerKeyFrames = We`
@@ -1561,9 +1580,7 @@ const toIntlLabel = (text) => {
     return text;
   }
 };
-const IntlLabel = (props) => {
-  var _a;
-  const { keys, value } = props;
+const useLanguage = () => {
   const { on, off } = useGlobalEventBus();
   const forceUpdate = useForceUpdate();
   reactExports.useEffect(() => {
@@ -1575,6 +1592,11 @@ const IntlLabel = (props) => {
       off && off(GlobalEventTypes.LANGUAGE_CHANGED, onLanguageChanged);
     };
   }, [on, off, forceUpdate]);
+};
+const IntlLabel = (props) => {
+  var _a;
+  const { keys, value } = props;
+  useLanguage();
   const language = $d9n2.intl.language;
   let label = value;
   if (keys != null && keys.length !== 0) {
@@ -1800,7 +1822,7 @@ const DropdownLabel = qe.span.attrs({ [DOM_KEY_WIDGET]: "d9-dropdown-label" })`
     overflow-x: hidden;
 
     &[data-please=true] {
-        opacity: 0.7;
+        color: ${CssVars.PLACEHOLDER_COLOR};
     }
 
     &[data-please=false] ~ &[data-please=true] {
@@ -4016,6 +4038,16 @@ const FormCell = reactExports.forwardRef((props, ref) => {
 });
 registerWidget({ key: "FC", JSX: FormCell, container: false, array: false });
 registerWidget({ key: "FormCell", JSX: FormCell, container: false, array: false });
+const InputMaskTypes = {
+  number: MaskedNumber,
+  date: MaskedDate,
+  func: MaskedFunction,
+  pattern: MaskedPattern,
+  range: MaskedRange,
+  regexp: MaskedRegExp,
+  enum: MaskedRange,
+  dynamic: MaskedDynamic
+};
 const AnInput = qe.input.attrs(({ id, autoSelect, onFocus }) => {
   if (!autoSelect) {
     return {
@@ -4064,6 +4096,10 @@ const AnInput = qe.input.attrs(({ id, autoSelect, onFocus }) => {
         }
     }
 
+    &::placeholder {
+        color: ${CssVars.PLACEHOLDER_COLOR};
+    }
+
     &:hover {
         border-color: ${CssVars.PRIMARY_COLOR};
         box-shadow: ${CssVars.PRIMARY_HOVER_SHADOW};
@@ -4094,22 +4130,46 @@ const stringifyInputValue = (options) => {
   }
 };
 const Input = reactExports.forwardRef((props, ref) => {
-  const { autoSelect = true, valueToNumber = false, $pp, $wrapped: { $onValueChange, $model, $p2r, $avs: { $disabled, $visible } }, ...rest } = props;
+  const { autoSelect = true, valueToNumber = false, mask, $pp, $wrapped: { $onValueChange, $model, $p2r, $avs: { $disabled, $visible } }, ...rest } = props;
   const valueRef = reactExports.useRef({ value: MUtils.getValue($model, $pp) });
   const globalHandlers = useGlobalHandlers();
-  const onChange = async (event) => {
-    const value = event.target.value;
-    valueRef.current.value = value;
-    if (valueToNumber && !value.includes(" ")) {
-      const tested = VUtils.isNumber(value);
-      if (tested.test) {
-        await $onValueChange(tested.value, true, { global: globalHandlers });
+  const onValueChanged = async (value) => {
+    if (`${valueRef.current.value ?? ""}` !== `${value ?? ""}`) {
+      valueRef.current.value = value;
+      if (valueToNumber && !value.includes(" ")) {
+        const tested = VUtils.isNumber(value);
+        if (tested.test) {
+          await $onValueChange(tested.value, true, { global: globalHandlers });
+        } else {
+          await $onValueChange(value, true, { global: globalHandlers });
+        }
       } else {
         await $onValueChange(value, true, { global: globalHandlers });
       }
-    } else {
-      await $onValueChange(value, true, { global: globalHandlers });
     }
+  };
+  const hasMask = VUtils.isNotBlank(mask);
+  const maskOptions = hasMask ? typeof mask === "function" ? mask(InputMaskTypes) : {
+    mask,
+    lazy: false
+  } : void 0;
+  const maskValueInitializedRef = reactExports.useRef(false);
+  const { ref: inputRef } = useIMask(maskOptions, {
+    onAccept: (_, mask2) => {
+      if (maskValueInitializedRef.current) {
+        onValueChanged(mask2.unmaskedValue);
+      } else {
+        mask2.unmaskedValue = `${valueRef.current.value ?? ""}`;
+        maskValueInitializedRef.current = true;
+      }
+    }
+  });
+  useDualRefs(inputRef, ref);
+  const onChange = async (event) => {
+    if (hasMask) {
+      return;
+    }
+    await onValueChanged(event.target.value);
   };
   const valueFromModel = MUtils.getValue($model, $pp);
   if (valueRef.current.value == valueFromModel || `${valueFromModel}.` == valueRef.current.value)
@@ -4117,10 +4177,26 @@ const Input = reactExports.forwardRef((props, ref) => {
   else {
     valueRef.current.value = valueFromModel;
   }
-  return React.createElement(AnInput, { ...rest, autoSelect, disabled: $disabled, "data-disabled": $disabled, "data-visible": $visible, value: stringifyInputValue({ $model, $pp, value: valueRef.current.value }), onChange, id: PPUtils.asId(PPUtils.absolute($p2r, $pp), props.id), ref });
+  const displayValue = hasMask ? void 0 : stringifyInputValue({ $model, $pp, value: valueRef.current.value });
+  return React.createElement(AnInput, { ...rest, autoSelect, disabled: $disabled, "data-disabled": $disabled, "data-visible": $visible, value: displayValue, onChange, id: PPUtils.asId(PPUtils.absolute($p2r, $pp), props.id), ref: inputRef });
 });
 const NumberInput = reactExports.forwardRef((props, ref) => {
-  return React.createElement(Input, { ...props, "data-number": true, valueToNumber: true, ref });
+  const { format, grouping = false, ...rest } = props;
+  useLanguage();
+  let mask = void 0;
+  if (VUtils.isNotBlank(format)) {
+    mask = () => {
+      if (typeof format === "function") {
+        return { ...MaskedNumber.DEFAULTS, ...format() };
+      } else {
+        return { ...MaskedNumber.DEFAULTS, ...format };
+      }
+    };
+  } else if (grouping) {
+    const [groupingSeparator, decimalSeparator] = detectNumberFormat(locale());
+    mask = () => ({ ...MaskedNumber.DEFAULTS, thousandsSeparator: groupingSeparator, radix: decimalSeparator });
+  }
+  return React.createElement(Input, { ...rest, mask, "data-number": true, valueToNumber: true, ref });
 });
 const PasswordInput = reactExports.forwardRef((props, ref) => {
   return React.createElement(Input, { ...props, type: "password", valueToNumber: false, ref });
@@ -4142,19 +4218,34 @@ const DecorateInputContainer = qe.div.attrs(({ id }) => {
     width: 100%;
     height: ${CssVars.INPUT_HEIGHT};
 
+    &[data-placeholder=true] {
+        > input[data-w=d9-input]:not(:nth-last-child(2)) {
+            border-top-right-radius: 0;
+            border-bottom-right-radius: 0;
+        }
+    }
+
+    &[data-placeholder=false] {
+        > input[data-w=d9-input]:not(:last-child) {
+            border-top-right-radius: 0;
+            border-bottom-right-radius: 0;
+        }
+    }
+
     > input[data-w=d9-input] {
         flex-grow: 1;
         z-index: 1;
+
+        &:not([value=""]) {
+            + span[data-w=d9-deco-input-placeholder] {
+                color: transparent;
+            }
+        }
 
         &:not(:first-child) {
             border-top-left-radius: 0;
             border-bottom-left-radius: 0;
             margin-left: calc(${CssVars.BORDER_WIDTH} * -1);
-        }
-
-        &:not(:last-child) {
-            border-top-right-radius: 0;
-            border-bottom-right-radius: 0;
         }
     }
 `;
@@ -4201,15 +4292,46 @@ const TailDecorator = qe(Decorator).attrs({
         border-bottom-right-radius: ${CssVars.BORDER_RADIUS};
     }
 `;
+const Placeholder = qe.span.attrs({ [DOM_KEY_WIDGET]: "d9-deco-input-placeholder" })`
+    display: flex;
+    position: absolute;
+    align-items: center;
+    color: ${CssVars.PLACEHOLDER_COLOR};
+    background-color: transparent;
+    padding: 0 ${CssVars.INPUT_INDENT};
+    pointer-events: none;
+    user-select: none;
+    z-index: 2;
+`;
 const Decorate = (props) => {
-  const { id, leads, tails, children, ...rest } = props;
+  const { id, placeholder, leads, tails, children, ...rest } = props;
+  const ref = reactExports.useRef(null);
+  reactExports.useEffect(() => {
+    if (ref.current == null) {
+      return null;
+    }
+    const node = ref.current.querySelector("span[data-w=d9-deco-input-placeholder]");
+    if (node == null) {
+      return;
+    }
+    const { left: containerLeft } = ref.current.getBoundingClientRect();
+    const input = ref.current.querySelector("input");
+    const { left, width, height } = input.getBoundingClientRect();
+    const { borderTopWidth, borderBottomWidth, borderLeftWidth, borderRightWidth } = window.getComputedStyle(input);
+    node.style.top = `${Number((borderTopWidth ?? "0").replace("px", ""))}px`;
+    node.style.left = `${left - containerLeft + Number((borderLeftWidth ?? "0").replace("px", ""))}px`;
+    node.style.width = `${width - Number((borderLeftWidth ?? "0").replace("px", "")) - Number((borderRightWidth ?? "0").replace("px", ""))}px`;
+    node.style.height = `${height - Number((borderTopWidth ?? "0").replace("px", "")) - Number((borderBottomWidth ?? "0").replace("px", ""))}px`;
+  });
+  const hasPlaceholder = VUtils.isNotBlank(placeholder);
   return React.createElement(
     DecorateInputContainer,
-    { id: VUtils.isBlank(id) ? void 0 : `di-${id}`, ...rest },
+    { id: VUtils.isBlank(id) ? void 0 : `di-${id}`, "data-placeholder": hasPlaceholder, ...rest, ref },
     transformDecorators(leads).map((lead) => {
       return React.createElement(LeadDecorator, { key: VUtils.generateUniqueId() }, lead);
     }),
     children,
+    hasPlaceholder ? React.createElement(Placeholder, null, toIntlLabel((placeholder ?? "").trim())) : null,
     transformDecorators(tails).map((tail) => {
       return React.createElement(TailDecorator, { key: VUtils.generateUniqueId() }, tail);
     })
@@ -4227,32 +4349,57 @@ const askDecorateAttrs = (props, rest) => {
   return { tags: deviceTags, attrs: decorateAttrs };
 };
 const DecorateInput = (props) => {
-  const { leads, tails, className, style, ...rest } = props;
+  const { placeholder, leads, tails, className, style, ...rest } = props;
   const { $wrapped: { $p2r } } = rest;
   const { tags: deviceTags, attrs: decorateAttrs } = askDecorateAttrs(props, rest);
+  const computePlaceholder = () => {
+    if (VUtils.isBlank(placeholder)) {
+      return void 0;
+    }
+    if (VUtils.isNotBlank(rest.mask)) {
+      return void 0;
+    }
+    return placeholder;
+  };
   return React.createElement(
     Decorate,
-    { ...deviceTags, ...decorateAttrs, leads, tails, className, style, id: PPUtils.asId(PPUtils.absolute($p2r, props.$pp), props.id) },
+    { ...deviceTags, ...decorateAttrs, placeholder: computePlaceholder(), leads, tails, className, style, id: PPUtils.asId(PPUtils.absolute($p2r, props.$pp), props.id) },
     React.createElement(Input, { ...rest })
   );
 };
 const DecorateNumberInput = (props) => {
-  const { leads, tails, className, style, ...rest } = props;
-  const { $wrapped: { $p2r } } = rest;
+  const { placeholder, leads, tails, className, style, ...rest } = props;
+  const { $pp, $wrapped: { $p2r, $model, $onValueChange } } = rest;
   const { tags: deviceTags, attrs: decorateAttrs } = askDecorateAttrs(props, rest);
+  const [omitPlaceholder, setOmitPlaceholder] = reactExports.useState(() => {
+    return VUtils.isNotEmpty(MUtils.getValue($model, $pp));
+  });
+  const computePlaceholder = () => {
+    if (VUtils.isBlank(placeholder)) {
+      return void 0;
+    }
+    if (omitPlaceholder) {
+      return void 0;
+    }
+    return placeholder;
+  };
+  rest.$wrapped.$onValueChange = async (newValue, doForceUpdate, ...args) => {
+    setOmitPlaceholder(VUtils.isNotEmpty(newValue));
+    $onValueChange(newValue, doForceUpdate, ...args);
+  };
   return React.createElement(
     Decorate,
-    { ...deviceTags, ...decorateAttrs, leads, tails, className, style, id: PPUtils.asId(PPUtils.absolute($p2r, props.$pp), props.id) },
+    { ...deviceTags, ...decorateAttrs, placeholder: computePlaceholder(), leads, tails, className, style, id: PPUtils.asId(PPUtils.absolute($p2r, props.$pp), props.id) },
     React.createElement(NumberInput, { ...rest })
   );
 };
 const DecoratePasswordInput = (props) => {
-  const { leads, tails, className, style, ...rest } = props;
+  const { placeholder, leads, tails, className, style, ...rest } = props;
   const { $wrapped: { $p2r } } = rest;
   const { tags: deviceTags, attrs: decorateAttrs } = askDecorateAttrs(props, rest);
   return React.createElement(
     Decorate,
-    { ...deviceTags, ...decorateAttrs, leads, tails, className, style, id: PPUtils.asId(PPUtils.absolute($p2r, props.$pp), props.id) },
+    { ...deviceTags, ...decorateAttrs, placeholder, leads, tails, className, style, id: PPUtils.asId(PPUtils.absolute($p2r, props.$pp), props.id) },
     React.createElement(PasswordInput, { ...rest })
   );
 };
