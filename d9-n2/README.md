@@ -165,6 +165,58 @@ The following are the built-in types of custom events:
 	- `GlobalEventPrefix.TREE_NODE_CLICKED`: click a tree node, `clipped` should be tree node marker, or path to root of this node model
 	  when node marker not declared.
 
+# Typical Layers
+
+```mermaid
+stateDiagram-v2
+    prn: Parent React Node
+    osrc1: Other Standard React Components
+    osrc2: Other Standard React Components
+    bebp1: BridgeEventBusProvider #1
+    gr1: GlobalRoot + GlobalEventBusProvider #1
+    gpw: Global Portal Widgets
+    sr1: StandaloneRoot + RootEventBusProvider #1
+    w1: Widget #1
+    w2: Widget #2
+    cw3: Container Widget #3
+    sw4: Sub Widget #4
+    sw5: Sub Widget #5
+    sr2n: StandaloneRoot + RootEventBusProvider #2 ... #n
+    gr2n: GlobalRoot + GlobalEventBusProvider #2 ... #n
+    bebp2n: BridgeEventBusProvider #2 ... #n
+
+    state prn {
+        [*] --> bebp1
+        [*] --> osrc1: Optional
+        [*] --> bebp2n: Optional
+        state bebp1 {
+            [*] --> gr1
+            [*] --> osrc2: Optional
+            [*] --> gr2n: Optional
+            state gr1 {
+                [*] --> sr1
+                [*] --> sr2n: Optional
+                [*] --> gpw: Carried by GlobalRoot, shared by all StandaloneRoot
+                state gpw {
+                    [*] --> Alert: Optional
+                    [*] --> Dialog: Optional
+                    [*] --> YesNoDialog: Optional
+                    [*] --> RemoteRequest: Optional
+                }
+                state sr1 {
+                    [*] --> w1
+                    [*] --> w2
+                    [*] --> cw3
+                    state cw3 {
+                        [*] --> sw4
+                        [*] --> sw5
+                    }
+                }
+            }
+        }
+    }
+```
+
 # Logger
 
 `d9-n2` provides a logging function called `N2Logger`, exactly same as `N1Logger`.
