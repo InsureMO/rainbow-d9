@@ -1,5 +1,5 @@
-import {MBUtils, PPUtils, registerWidget, VUtils, WidgetProps} from '@rainbow-d9/n1';
-import React, {CSSProperties, ReactNode, useEffect, useRef} from 'react';
+import {MBUtils, MUtils, PPUtils, PropValue, registerWidget, VUtils, WidgetProps} from '@rainbow-d9/n1';
+import React, {CSSProperties, ReactNode, useEffect, useRef, useState} from 'react';
 import styled from 'styled-components';
 import {CssVars, DOM_ID_WIDGET, DOM_KEY_WIDGET} from './constants';
 import {DecorateWrapperDef, transformDecorators} from './decorate-assist';
@@ -213,25 +213,33 @@ export const DecorateNumberInput = (props: DecorateNumberInputProps) => {
 		placeholder,
 		leads, tails, className, style, ...rest
 	} = props;
-	const {$wrapped: {$p2r}} = rest;
+	const {$pp, $wrapped: {$p2r, $model, $onValueChange}} = rest;
 	const {tags: deviceTags, attrs: decorateAttrs} = askDecorateAttrs(props, rest);
+
+	const [omitPlaceholder, setOmitPlaceholder] = useState(() => {
+		return VUtils.isNotEmpty(MUtils.getValue($model, $pp));
+	});
 
 	const computePlaceholder = () => {
 		if (VUtils.isBlank(placeholder)) {
 			return (void 0);
 		}
-		if (rest.grouping || VUtils.isNotBlank(rest.format)) {
-			// mask exists
+		if (omitPlaceholder) {
 			return (void 0);
 		}
 		return placeholder;
+	};
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	rest.$wrapped.$onValueChange = async <NV extends PropValue>(newValue: NV, doForceUpdate: boolean, ...args: Array<any>): Promise<void> => {
+		setOmitPlaceholder(VUtils.isNotEmpty(newValue));
+		$onValueChange(newValue, doForceUpdate, ...args);
 	};
 
 	return <Decorate {...deviceTags} {...decorateAttrs}
 	                 placeholder={computePlaceholder()} leads={leads} tails={tails}
 	                 className={className} style={style}
 	                 id={PPUtils.asId(PPUtils.absolute($p2r, props.$pp), props.id)}>
-		<NumberInput {...rest}/>
+		<NumberInput {...rest} />
 	</Decorate>;
 };
 
