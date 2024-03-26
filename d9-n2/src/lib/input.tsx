@@ -164,9 +164,7 @@ export const Input = forwardRef((props: InputProps, ref: ForwardedRef<HTMLInputE
 	const hasMask = VUtils.isNotBlank(mask);
 	const maskOptions = hasMask ? (typeof mask === 'function' ? mask(InputMaskTypes) : {mask, lazy: false}) : (void 0);
 	const maskValueInitializedRef = useRef(false);
-	const {
-		ref: inputRef, maskRef
-	} = useIMask<HTMLInputElement>(maskOptions, {
+	const {ref: inputRef} = useIMask<HTMLInputElement>(maskOptions, {
 		onAccept: (_, mask) => {
 			if (maskValueInitializedRef.current) {
 				// initialized, sync value from mask
