@@ -239,7 +239,7 @@ export const DecorateNumberInput = (props: DecorateNumberInputProps) => {
 	                 placeholder={computePlaceholder()} leads={leads} tails={tails}
 	                 className={className} style={style}
 	                 id={PPUtils.asId(PPUtils.absolute($p2r, props.$pp), props.id)}>
-		<NumberInput {...rest} />
+		<NumberInput {...rest}/>
 	</Decorate>;
 };
 
