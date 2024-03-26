@@ -4,10 +4,10 @@ var __publicField = (obj, key, value) => {
   __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
   return value;
 };
-import { a as color, M as MaskedNumber, e as MaskedDate, g as MaskedFunction, j as MaskedPattern, k as MaskedRange, l as MaskedRegExp, o as MaskedDynamic } from "./vendor-rdXXhzE9.js";
-import { R as React, r as reactExports, u as useIMask } from "./react-1yTqe2DF.js";
-import { V as VUtils, P as PPUtils, r as registerWidget, c as createLogger, b as useRootEventBus, M as MUtils, N as NUtils, d as Wrapper, e as useForceUpdate, a as useWrapperEventBus, W as WrapperEventTypes, f as useCreateEventBus, g as PROPERTY_PATH_ME, h as MBUtils, R as RootEventTypes, i as useDefaultAttributeValues, j as useAttributesWatch } from "./rainbow-d9-n1-l6fMexck.js";
-import { q as qe, W as We } from "./styled-components-97otH9WP.js";
+import { a as color, M as MaskedNumber, e as MaskedDate, g as MaskedFunction, j as MaskedPattern, k as MaskedRange, l as MaskedRegExp, o as MaskedDynamic } from "./vendor-O5rCRpDB.js";
+import { R as React, r as reactExports, u as useIMask } from "./react-1DZO3oyI.js";
+import { V as VUtils, P as PPUtils, r as registerWidget, c as createLogger, b as useRootEventBus, M as MUtils, N as NUtils, d as Wrapper, e as useForceUpdate, a as useWrapperEventBus, W as WrapperEventTypes, f as useCreateEventBus, g as PROPERTY_PATH_ME, h as MBUtils, R as RootEventTypes, i as useDefaultAttributeValues, j as useAttributesWatch } from "./rainbow-d9-n1-Pf2xiLLD.js";
+import { q as qe, W as We } from "./styled-components-kOHQ3kDj.js";
 import { d as dayjs } from "./dayjs-9Z7dW0Q-.js";
 const DOM_KEY_WIDGET = "data-w";
 const DOM_ID_WIDGET = "data-wid";
@@ -7534,7 +7534,7 @@ const Tree = reactExports.forwardRef((props, ref) => {
   );
 });
 registerWidget({ key: "Tree", JSX: Tree, container: false, array: false });
-reactExports.forwardRef((props, ref) => {
+const UnwrappedCaption = reactExports.forwardRef((props, ref) => {
   const { children, disabled, visible, ...rest } = props;
   const $onValueChange = VUtils.noop;
   const $avs = { $disabled: disabled, $visible: visible };
@@ -7934,7 +7934,8 @@ export {
   utils$2 as n,
   UnwrappedButtonBar as o,
   ButtonBarAlignment as p,
-  UnwrappedSection as q,
+  UnwrappedCaption as q,
+  UnwrappedSection as r,
   toIntlLabel as t,
   useGlobalEventBus as u
 };

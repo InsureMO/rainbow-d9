@@ -4,10 +4,10 @@ var __publicField = (obj, key, value) => {
   __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
   return value;
 };
-import { c as createLogger, N as NUtils, V as VUtils, k as MonitorNodeAttributes, l as Reaction, E as ExternalDefIndicator, P as PPUtils } from "./rainbow-d9-n1-l6fMexck.js";
-import { O as OptionItemSort, R as REACTION_REFRESH_OPTIONS, c as GlobalEventPrefix } from "./rainbow-d9-n2-yPEBuvIM.js";
-import { f as fromMarkdown, g as gfmTableFromMarkdown, a as gfmStrikethroughFromMarkdown, b as gfmFootnoteFromMarkdown, c as gfmTaskListItemFromMarkdown, d as frontmatterFromMarkdown } from "./mdast-ntT2jxI9.js";
-import { g as gfmTable, h as gfmStrikethrough, i as gfmFootnote, j as gfmTaskListItem, k as frontmatter } from "./micromark-1LHDWxcx.js";
+import { c as createLogger, N as NUtils, V as VUtils, k as MonitorNodeAttributes, l as Reaction, E as ExternalDefIndicator, P as PPUtils } from "./rainbow-d9-n1-Pf2xiLLD.js";
+import { O as OptionItemSort, R as REACTION_REFRESH_OPTIONS, c as GlobalEventPrefix } from "./rainbow-d9-n2-AKRwFRGh.js";
+import { f as fromMarkdown, g as gfmTableFromMarkdown, a as gfmStrikethroughFromMarkdown, b as gfmFootnoteFromMarkdown, c as gfmTaskListItemFromMarkdown, d as frontmatterFromMarkdown } from "./mdast-wt3i5bil.js";
+import { g as gfmTable, h as gfmStrikethrough, i as gfmFootnote, j as gfmTaskListItem, k as frontmatter } from "./micromark-ii0CMMYQ.js";
 const AsyncFunction = Object.getPrototypeOf(async function() {
 }).constructor;
 var ParsedNodeType;
@@ -2968,6 +2968,11 @@ class SpecificWidgetTranslator {
     return def;
   }
 }
+const ArrayElementAddedBuild = createAsyncSnippetBuild("elementAdded", ["options"]);
+const ArrayCreateElementBuild = createAsyncSnippetBuild("createElement", ["options"]);
+const ArrayCouldAddElementBuild = createAsyncSnippetBuild("couldAddElement", ["options"]);
+const ArrayElementRemovedBuild = createAsyncSnippetBuild("elementRemoved", ["options"]);
+const ArrayCouldRemoveElementBuild = createAsyncSnippetBuild("couldRemoveElement", ["options"]);
 class SpecificArrayWidgetTranslator extends SpecificWidgetTranslator {
   buildDefaultAttributeNamesMapping(additional) {
     const keys = [
@@ -2988,6 +2993,16 @@ class SpecificArrayWidgetTranslator extends SpecificWidgetTranslator {
       mapping[`${this.getSupportedType()}.${key}`] = `$array.${key}`;
       return mapping;
     }, additional ?? {});
+  }
+  getAttributeValueBuilders() {
+    return [
+      ArrayElementAddedBuild,
+      ArrayCreateElementBuild,
+      ArrayCouldAddElementBuild,
+      ArrayElementRemovedBuild,
+      ArrayCouldRemoveElementBuild,
+      ...super.getAttributeValueBuilders()
+    ];
   }
 }
 class WidgetTranslatorRepository {
@@ -3107,6 +3122,11 @@ var index$1 = /* @__PURE__ */ Object.freeze({
   AbstractReactionAttributeBuild,
   AbstractTranslator,
   AnyAttributeBuild,
+  ArrayCouldAddElementBuild,
+  ArrayCouldRemoveElementBuild,
+  ArrayCreateElementBuild,
+  ArrayElementAddedBuild,
+  ArrayElementRemovedBuild,
   AttributeNameUtils,
   get AttributeNames() {
     return AttributeNames;
@@ -3961,7 +3981,10 @@ class N2TableTranslator extends SpecificArrayWidgetTranslator {
     return this.buildDefaultAttributeNamesMapping();
   }
   getAttributeValueBuilders() {
-    return [N2TableHeadersBuild];
+    return [
+      ...super.getAttributeValueBuilders(),
+      N2TableHeadersBuild
+    ];
   }
   postWork(def) {
     var _a;
