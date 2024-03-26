@@ -1,6 +1,6 @@
 import {ArrayUsedDef, NodeDef, Undefinable} from '@rainbow-d9/n1';
 import {WidgetType} from '../../semantic';
-import {AttributeValueBuild, CustomAttributeName, WidgetPropertyName} from './attribute';
+import {AttributeValueBuild, createAsyncSnippetBuild, CustomAttributeName, WidgetPropertyName} from './attribute';
 import {DisablementUtils, MonitorHandlerDetective, ReactionUtils, ValidatorUtils, VisibilityUtils} from './monitor';
 import {WidgetTranslatorRepository} from './translator-repository';
 
@@ -120,6 +120,13 @@ export abstract class SpecificWidgetTranslator<T extends WidgetType> {
 	}
 }
 
+export const ArrayElementAddedBuild = createAsyncSnippetBuild<ArrayUsedDef, 'elementAdded'>('elementAdded', ['options']);
+export const ArrayCreateElementBuild = createAsyncSnippetBuild<ArrayUsedDef, 'createElement'>('createElement', ['options']);
+export const ArrayCouldAddElementBuild = createAsyncSnippetBuild<ArrayUsedDef, 'couldAddElement'>('couldAddElement', ['options']);
+export const ArrayElementRemovedBuild = createAsyncSnippetBuild<ArrayUsedDef, 'elementRemoved'>('elementRemoved', ['options']);
+export const ArrayCouldRemoveElementBuild = createAsyncSnippetBuild<ArrayUsedDef, 'couldRemoveElement'>('couldRemoveElement', ['options']);
+
+
 export abstract class SpecificArrayWidgetTranslator<T extends WidgetType> extends SpecificWidgetTranslator<T> {
 	protected buildDefaultAttributeNamesMapping(additional?: Record<CustomAttributeName, WidgetPropertyName>): Record<CustomAttributeName, WidgetPropertyName> {
 		const keys: Array<keyof ArrayUsedDef> = [
@@ -132,5 +139,17 @@ export abstract class SpecificArrayWidgetTranslator<T extends WidgetType> extend
 			mapping[`${this.getSupportedType()}.${key}`] = `$array.${key}`;
 			return mapping;
 		}, additional ?? {});
+	}
+
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	public getAttributeValueBuilders(): Array<AttributeValueBuild<any>> {
+		return [
+			ArrayElementAddedBuild,
+			ArrayCreateElementBuild,
+			ArrayCouldAddElementBuild,
+			ArrayElementRemovedBuild,
+			ArrayCouldRemoveElementBuild,
+			...super.getAttributeValueBuilders()
+		];
 	}
 }
