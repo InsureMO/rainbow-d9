@@ -8,16 +8,40 @@ import {
 	VUtils,
 	WidgetProps
 } from '@rainbow-d9/n1';
+import {
+	FactoryOpts,
+	MaskedDate,
+	MaskedDynamic,
+	MaskedFunction,
+	MaskedNumber,
+	MaskedPattern,
+	MaskedRange,
+	MaskedRegExp
+} from 'imask';
 import React, {ChangeEvent, FocusEvent, ForwardedRef, forwardRef, useRef} from 'react';
+import {useIMask} from 'react-imask';
 import styled from 'styled-components';
 import {CssVars, DOM_ID_WIDGET, DOM_KEY_WIDGET} from './constants';
 import {useGlobalHandlers} from './global';
 import {OmitHTMLProps2, OmitNodeDef} from './types';
+import {useDualRefs} from './utils';
+
+export const InputMaskTypes = {
+	number: MaskedNumber,
+	date: MaskedDate,
+	func: MaskedFunction,
+	pattern: MaskedPattern,
+	range: MaskedRange,
+	regexp: MaskedRegExp,
+	enum: MaskedRange,
+	dynamic: MaskedDynamic
+};
 
 /** Input configuration definition */
 export type InputDef = ValueChangeableNodeDef & OmitHTMLProps2<HTMLInputElement, 'value' | 'onChange'> & {
 	autoSelect?: boolean;
 	valueToNumber?: boolean;
+	mask?: string | ((types: typeof InputMaskTypes) => FactoryOpts);
 };
 /** widget definition, with html attributes */
 export type InputProps = OmitNodeDef<InputDef> & WidgetProps;
@@ -109,7 +133,7 @@ export const stringifyInputValue = (options: { $model: PropValue; $pp: PropertyP
 
 export const Input = forwardRef((props: InputProps, ref: ForwardedRef<HTMLInputElement>) => {
 	const {
-		autoSelect = true, valueToNumber = false,
+		autoSelect = true, valueToNumber = false, mask,
 		$pp, $wrapped: {$onValueChange, $model, $p2r, $avs: {$disabled, $visible}},
 		...rest
 	} = props;
@@ -117,23 +141,52 @@ export const Input = forwardRef((props: InputProps, ref: ForwardedRef<HTMLInputE
 	const valueRef = useRef({value: MUtils.getValue($model, $pp)});
 	const globalHandlers = useGlobalHandlers();
 
-	const onChange = async (event: ChangeEvent<HTMLInputElement>) => {
-		const value = event.target.value;
-		// fresh to ref
-		valueRef.current.value = value;
-		if (valueToNumber && !value.includes(' ')) {
-			// if value contains whitespace, treated as normal string
-			const tested = VUtils.isNumber(value);
-			if (tested.test) {
-				// use the numeric value
-				await $onValueChange(tested.value, true, {global: globalHandlers});
+	const onValueChanged = async (value?: string) => {
+		if (`${valueRef.current.value ?? ''}` !== `${value ?? ''}`) {
+			// fresh to ref
+			valueRef.current.value = value;
+			if (valueToNumber && !value.includes(' ')) {
+				// if value contains whitespace, treated as normal string
+				const tested = VUtils.isNumber(value);
+				if (tested.test) {
+					// use the numeric value
+					await $onValueChange(tested.value, true, {global: globalHandlers});
+				} else {
+					// still use original value from text
+					await $onValueChange(value, true, {global: globalHandlers});
+				}
 			} else {
-				// still use original value from text
 				await $onValueChange(value, true, {global: globalHandlers});
 			}
-		} else {
-			await $onValueChange(value, true, {global: globalHandlers});
 		}
+		// console.log(valueRef.current.value, MUtils.getValue($model, $pp));
+	};
+	const hasMask = VUtils.isNotBlank(mask);
+	const maskOptions = hasMask ? (typeof mask === 'function' ? mask(InputMaskTypes) : {mask, lazy: false}) : (void 0);
+	const maskValueInitializedRef = useRef(false);
+	const {
+		ref: inputRef, maskRef
+	} = useIMask<HTMLInputElement>(maskOptions, {
+		onAccept: (_, mask) => {
+			if (maskValueInitializedRef.current) {
+				// initialized, sync value from mask
+				// noinspection JSIgnoredPromiseFromCall
+				onValueChanged(mask.unmaskedValue);
+			} else {
+				// first round, sync value to mask
+				mask.unmaskedValue = `${valueRef.current.value ?? ''}`;
+				maskValueInitializedRef.current = true;
+			}
+		}
+	});
+	useDualRefs(inputRef, ref);
+
+	const onChange = async (event: ChangeEvent<HTMLInputElement>) => {
+		// handle change use mask event
+		if (hasMask) {
+			return;
+		}
+		await onValueChanged(event.target.value);
 	};
 
 	const valueFromModel = MUtils.getValue($model, $pp);
@@ -142,16 +195,17 @@ export const Input = forwardRef((props: InputProps, ref: ForwardedRef<HTMLInputE
 	} else {
 		valueRef.current.value = valueFromModel;
 	}
+	const displayValue = hasMask ? (void 0) : stringifyInputValue({$model, $pp, value: valueRef.current.value});
 
 	return <AnInput {...rest} autoSelect={autoSelect}
 	                disabled={$disabled} data-disabled={$disabled} data-visible={$visible}
-	                value={stringifyInputValue({$model, $pp, value: valueRef.current.value})}
+	                value={displayValue}
 	                onChange={onChange}
 	                id={PPUtils.asId(PPUtils.absolute($p2r, $pp), props.id)}
-	                ref={ref}/>;
+	                ref={inputRef}/>;
 });
 
-export type NumberInputDef = Omit<InputDef, 'valueToNumber'>;
+export type NumberInputDef = Omit<InputDef, 'valueToNumber' | 'mask'>;
 export type NumberInputProps = OmitNodeDef<NumberInputDef> & WidgetProps;
 
 export const NumberInput = forwardRef((props: NumberInputProps, ref: ForwardedRef<HTMLInputElement>) => {
@@ -160,7 +214,7 @@ export const NumberInput = forwardRef((props: NumberInputProps, ref: ForwardedRe
 	return <Input {...props} data-number={true} valueToNumber={true} ref={ref}/>;
 });
 
-export type PasswordInputDef = Omit<InputDef, 'valueToNumber'>;
+export type PasswordInputDef = Omit<InputDef, 'valueToNumber' | 'mask'>;
 export type PasswordInputProps = OmitNodeDef<PasswordInputDef> & WidgetProps;
 
 export const PasswordInput = forwardRef((props: PasswordInputProps, ref: ForwardedRef<HTMLInputElement>) => {

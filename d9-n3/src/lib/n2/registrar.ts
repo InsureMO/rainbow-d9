@@ -6,15 +6,17 @@ import {N2CalendarTranslator, N2DateTimeTranslator, N2DateTranslator} from './ca
 import {N2BadgeTranslator, N2CaptionTranslator, N2LabelTranslator} from './caption';
 import {N2CheckboxTranslator} from './checkbox';
 import {N2CheckboxesTranslator, N2ChecksTranslator} from './checkboxes';
-import {N2DecorateInputTranslator} from './decorate-input';
-import {N2DecorateNumberTranslator} from './decorate-number';
-import {N2DecoratePasswordTranslator} from './decorate-password';
 import {N2DropdownTranslator} from './dropdown';
-import {N2InputTranslator} from './input';
+import {
+	N2DecorateInputTranslator,
+	N2DecorateNumberTranslator,
+	N2DecoratePasswordTranslator,
+	N2InputTranslator,
+	N2NumberTranslator,
+	N2PasswordTranslator
+} from './input';
 import {N2MultiDropdownTranslator} from './multi-dropdown';
-import {N2NumberTranslator} from './number';
 import {N2PaginationTranslator} from './pagination';
-import {N2PasswordTranslator} from './password';
 import {N2RadioTranslator} from './radio';
 import {N2RadiosTranslator} from './radios';
 import {N2RibsTranslator, N2RibsViewTranslator} from './ribs';

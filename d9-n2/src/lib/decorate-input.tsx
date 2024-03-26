@@ -3,7 +3,7 @@ import React, {CSSProperties, ReactNode, useEffect, useRef} from 'react';
 import styled from 'styled-components';
 import {CssVars, DOM_ID_WIDGET, DOM_KEY_WIDGET} from './constants';
 import {DecorateWrapperDef, transformDecorators} from './decorate-assist';
-import {Input, InputDef, NumberInput, PasswordInput} from './input';
+import {Input, InputDef, NumberInput, NumberInputDef, PasswordInput, PasswordInputDef} from './input';
 import {toIntlLabel} from './intl-label';
 import {OmitNodeDef} from './types';
 
@@ -195,7 +195,7 @@ export const DecorateInput = (props: DecorateInputProps) => {
 	</Decorate>;
 };
 
-export type DecorateNumberInputDef = Omit<DecorateInputDef, 'valueToNumber'>;
+export type DecorateNumberInputDef = NumberInputDef & DecorateWrapperDef;
 export type DecorateNumberInputProps = OmitNodeDef<DecorateNumberInputDef> & WidgetProps;
 
 export const DecorateNumberInput = (props: DecorateNumberInputProps) => {
@@ -214,7 +214,7 @@ export const DecorateNumberInput = (props: DecorateNumberInputProps) => {
 	</Decorate>;
 };
 
-export type DecoratePasswordInputDef = Omit<DecorateInputDef, 'valueToNumber'>;
+export type DecoratePasswordInputDef = PasswordInputDef & DecorateWrapperDef;
 export type DecoratePasswordInputProps = OmitNodeDef<DecoratePasswordInputDef> & WidgetProps;
 
 export const DecoratePasswordInput = (props: DecoratePasswordInputProps) => {

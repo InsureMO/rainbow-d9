@@ -13,6 +13,7 @@
 	- tails: World
 	- regex: abc$,^def; must be abc or def.
 	- validateScopes: s1
+	- mask: **** **** ****
 - DecoNumber::Decorate Number Input::decorateNumberInput
 	- label:
 		- valueToLabel: `'Hello world, again.'`

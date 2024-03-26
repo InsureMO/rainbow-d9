@@ -71,7 +71,7 @@ export const parseSnippet = (attributeValue: string, item: ParsedListItemAttribu
 	}
 };
 
-export const createSnippetBuild = <D extends NodeDef, P extends keyof D, F = D[P]>(
+export const createSnippetBuild = <D extends NodeDef | object, P extends keyof D, F = D[P]>(
 	attrName: P | string, createFunc: (parsed: string) => F
 ): AttributeValueBuild<F | ExternalDefIndicator> => {
 	return {
@@ -92,11 +92,15 @@ export const createSnippetBuild = <D extends NodeDef, P extends keyof D, F = D[P
 	};
 };
 
-export type SyncSnippetBuild<D extends NodeDef, P extends keyof D> = AttributeValueBuild<D[P] | ExternalDefIndicator>
-export const createSyncSnippetBuild = <D extends NodeDef, P extends keyof D>(
-	attrName: P | string, argNames: Array<string>
+export type SyncSnippetBuild<D extends NodeDef | object, P extends keyof D> = AttributeValueBuild<D[P] | ExternalDefIndicator>
+export const createSyncSnippetBuild = <D extends NodeDef | object, P extends keyof D>(
+	// eslint-disable-next-line @typescript-eslint/no-inferrable-types
+	attrName: P | string, argNames: Array<string>, avoidFuncWhenSingleLine: boolean = false
 ): SyncSnippetBuild<D, P> => {
 	return createSnippetBuild<D, P, D[P]>(attrName, (parsed: string) => {
+		if (parsed.indexOf('\n') === -1 && avoidFuncWhenSingleLine) {
+			return parsed as D[P];
+		}
 		if (argNames == null || argNames.length === 0) {
 			return new Function(parsed) as D[P];
 		} else {
@@ -105,11 +109,15 @@ export const createSyncSnippetBuild = <D extends NodeDef, P extends keyof D>(
 	});
 };
 
-export type AsyncSnippetBuild<D extends NodeDef, P extends keyof D> = AttributeValueBuild<D[P] | ExternalDefIndicator>
-export const createAsyncSnippetBuild = <D extends NodeDef, P extends keyof D>(
-	attrName: P | string, argNames: Array<string>
+export type AsyncSnippetBuild<D extends NodeDef | object, P extends keyof D> = AttributeValueBuild<D[P] | ExternalDefIndicator>
+export const createAsyncSnippetBuild = <D extends NodeDef | object, P extends keyof D>(
+	// eslint-disable-next-line @typescript-eslint/no-inferrable-types
+	attrName: P | string, argNames: Array<string>, avoidFuncWhenSingleLine: boolean = false
 ): AsyncSnippetBuild<D, P> => {
 	return createSnippetBuild<D, P, D[P]>(attrName, (parsed: string) => {
+		if (parsed.indexOf('\n') === -1 && avoidFuncWhenSingleLine) {
+			return parsed as D[P];
+		}
 		if (argNames == null || argNames.length === 0) {
 			return new AsyncFunction(parsed) as D[P];
 		} else {

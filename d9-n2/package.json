@@ -24,8 +24,10 @@
 		"@rainbow-d9/n1": "1.1.1",
 		"color": "^4.2.3",
 		"dayjs": "^1.11.7",
+		"imask": "^7.5.0",
 		"react": "^18.2.0",
 		"react-dom": "^18.2.0",
+		"react-imask": "^7.5.0",
 		"styled-components": "5.3.11"
 	},
 	"devDependencies": {
@@ -33,6 +35,7 @@
 		"@babel/preset-env": "^7.20.2",
 		"@babel/preset-react": "^7.18.6",
 		"@babel/preset-typescript": "^7.18.6",
+		"@rollup/plugin-babel": "^6.0.4",
 		"@rollup/plugin-eslint": "^9.0.3",
 		"@types/color": "^3.0.6",
 		"@types/node": "^18.11.13",
@@ -44,7 +47,6 @@
 		"eslint": "^8.33.0",
 		"eslint-plugin-react-hooks": "^4.6.0",
 		"rollup": "^3.7.0",
-		"@rollup/plugin-babel": "^6.0.4",
 		"rollup-plugin-tslint": "^0.2.2",
 		"rollup-plugin-typescript2": "^0.34.1",
 		"tslib": "^2.4.1",
