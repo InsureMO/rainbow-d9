@@ -3,6 +3,8 @@
 ## Section::# 7. Monitors
 
 - Input::Property A::a
+	- repaint:
+		- on: a
 - Input::Shadow of Property A::a
 	- disabled
 	- repaint:
