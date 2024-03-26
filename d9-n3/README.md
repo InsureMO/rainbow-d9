@@ -1038,7 +1038,7 @@ const Page = () => {
 };
 ```
 
-## Input, Number
+## Input, Number, Pwd
 
 - Default Wrapped by Form Cell: `true`,
 - Default Grid Column Span: `3`,
@@ -1060,6 +1060,23 @@ Some examples:
 > string as a regular expression. If the given string ends with `/i`, it is case-insensitive.  
 > Predefine regular expressions through `ValidatorUtils.registerRegexps`.
 
+### Mask
+
+The mask prompts for input fields support integration from [imask](https://imask.js.org/), can be defined using
+relevant attributes:
+
+- `Input`:
+	- `mask`: A string ([pattern](https://imask.js.org/guide.html#masked-pattern)) or a function returning `FactoryOpts`, please refer to
+	  the [imask](https://imask.js.org/) definition.
+- `Number`:
+	- grouping: `true` to enable number format grouping. please note default fraction digits is 2.
+	- format: customized mask, a `NumberInputFormat` object or a function returning `NumberInputFormat`.
+
+> `type NumberInputFormat = Omit<typeof MaskedNumber.DEFAULTS, 'mask'>`.
+
+> If the mask definition for `Number` doesn't meet your requirements, please use `Input` for custom masking, while
+> declaring `- valueToNumber: true`.
+
 ### Decoration
 
 `Input` and `Number` can have decorations, including leadings and tailings. Both leadings and tailings support standard strings or built-in
@@ -1074,7 +1091,10 @@ icons. If you want to use built-in icons, you need to use `$icons.` followed by 
 > Multiple decorators could be split by `;`.  
 > Decoration also supported for `Button`, `Caption`, `Label`.
 
-> `DecoNumber` also available for decorating `Number`.
+> `DecoNumber` is available for decorating `Number`,  
+> `DecoPwd` is available for decorating `Pwd`.
+
+> `placeholder` for decorated input supports i18n, and will be disabled automatically when mask presents.
 
 ## Textarea
 

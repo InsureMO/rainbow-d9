@@ -17,9 +17,7 @@ export const toIntlLabel = (text: any) => {
 	}
 };
 
-export const IntlLabel = (props: IntlLabelProps) => {
-	const {keys, value} = props;
-
+export const useLanguage = () => {
 	const {on, off} = useGlobalEventBus();
 	const forceUpdate = useForceUpdate();
 	useEffect(() => {
@@ -31,6 +29,10 @@ export const IntlLabel = (props: IntlLabelProps) => {
 			off && off(GlobalEventTypes.LANGUAGE_CHANGED, onLanguageChanged);
 		};
 	}, [on, off, forceUpdate]);
+};
+export const IntlLabel = (props: IntlLabelProps) => {
+	const {keys, value} = props;
+	useLanguage();
 
 	const language = $d9n2.intl.language;
 	let label = value;

@@ -187,8 +187,18 @@ export const DecorateInput = (props: DecorateInputProps) => {
 	const {$wrapped: {$p2r}} = rest;
 	const {tags: deviceTags, attrs: decorateAttrs} = askDecorateAttrs(props, rest);
 
+	const computePlaceholder = () => {
+		if (VUtils.isBlank(placeholder)) {
+			return (void 0);
+		}
+		if (VUtils.isNotBlank(rest.mask)) {
+			// mask exists
+			return (void 0);
+		}
+		return placeholder;
+	};
 	return <Decorate {...deviceTags} {...decorateAttrs}
-	                 placeholder={placeholder} leads={leads} tails={tails}
+	                 placeholder={computePlaceholder()} leads={leads} tails={tails}
 	                 className={className} style={style}
 	                 id={PPUtils.asId(PPUtils.absolute($p2r, props.$pp), props.id)}>
 		<Input {...rest}/>
@@ -206,8 +216,19 @@ export const DecorateNumberInput = (props: DecorateNumberInputProps) => {
 	const {$wrapped: {$p2r}} = rest;
 	const {tags: deviceTags, attrs: decorateAttrs} = askDecorateAttrs(props, rest);
 
+	const computePlaceholder = () => {
+		if (VUtils.isBlank(placeholder)) {
+			return (void 0);
+		}
+		if (rest.grouping || VUtils.isNotBlank(rest.format)) {
+			// mask exists
+			return (void 0);
+		}
+		return placeholder;
+	};
+
 	return <Decorate {...deviceTags} {...decorateAttrs}
-	                 placeholder={placeholder} leads={leads} tails={tails}
+	                 placeholder={computePlaceholder()} leads={leads} tails={tails}
 	                 className={className} style={style}
 	                 id={PPUtils.asId(PPUtils.absolute($p2r, props.$pp), props.id)}>
 		<NumberInput {...rest}/>

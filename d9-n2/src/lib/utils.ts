@@ -60,6 +60,14 @@ export const nfWithLocale = (locale: string): NumberFormatter => {
 export const nfXWithLocale = (locale: string, fractionDigits: number): NumberFormat => {
 	return wrapNf(nfWithLocale(locale)(fractionDigits).format);
 };
+/**
+ * first: grouping separator, second: decimal separator
+ */
+export const detectNumberFormat = (locale?: string): [string, string] => {
+	const formatted = new Intl.NumberFormat(locale ?? (void 0), {useGrouping: true}).format(1234567890.9876);
+	const matched = formatted.match(/\D/g);
+	return [matched[0], matched[matched.length - 1]];
+};
 
 export const df = (value: string, options?: { from?: string; to?: string; }): string => {
 	if (VUtils.isBlank(value)) {

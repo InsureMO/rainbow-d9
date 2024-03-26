@@ -11,9 +11,16 @@
 		- leads: Yes:
 	- leads: Hello
 	- tails: World
-	- regex: abc$,^def; must be abc or def.
+	- regex: abc$,^def; Starts with "def" or ends with "abc".
 	- validateScopes: s1
-	- mask: **** **** ****
+	- mask:
+	  ```
+	  return {
+		mask: '**** **** ****',
+		lazy: false,
+		autofix: true
+	  }
+	  ```
 - DecoNumber::Decorate Number Input::decorateNumberInput
 	- label:
 		- valueToLabel: `'Hello world, again.'`
@@ -21,6 +28,7 @@
 	- tails: %;$icons.caretLeft
 	- numeric
 	- placeholder: A placeholder
+	- grouping
 - DecoNumber::0 - 9 are Legal Keys::decorateNumberInput2
 	- leads: $icons.check;$
 	- tails: %;$icons.caretLeft

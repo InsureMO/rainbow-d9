@@ -23,8 +23,9 @@ import {useIMask} from 'react-imask';
 import styled from 'styled-components';
 import {CssVars, DOM_ID_WIDGET, DOM_KEY_WIDGET} from './constants';
 import {useGlobalHandlers} from './global';
+import {useLanguage} from './intl-label';
 import {OmitHTMLProps2, OmitNodeDef} from './types';
-import {useDualRefs} from './utils';
+import {detectNumberFormat, locale, useDualRefs} from './utils';
 
 export const InputMaskTypes = {
 	number: MaskedNumber,
@@ -97,6 +98,10 @@ const AnInput = styled.input.attrs<{ autoSelect: boolean }>(
         }
     }
 
+    &::placeholder {
+        color: ${CssVars.PLACEHOLDER_COLOR};
+    }
+
     &:hover {
         border-color: ${CssVars.PRIMARY_COLOR};
         box-shadow: ${CssVars.PRIMARY_HOVER_SHADOW};
@@ -162,7 +167,9 @@ export const Input = forwardRef((props: InputProps, ref: ForwardedRef<HTMLInputE
 		// console.log(valueRef.current.value, MUtils.getValue($model, $pp));
 	};
 	const hasMask = VUtils.isNotBlank(mask);
-	const maskOptions = hasMask ? (typeof mask === 'function' ? mask(InputMaskTypes) : {mask, lazy: false}) : (void 0);
+	const maskOptions = hasMask ? (typeof mask === 'function' ? mask(InputMaskTypes) : {
+		mask, lazy: false
+	}) : (void 0);
 	const maskValueInitializedRef = useRef(false);
 	const {ref: inputRef} = useIMask<HTMLInputElement>(maskOptions, {
 		onAccept: (_, mask) => {
@@ -203,13 +210,36 @@ export const Input = forwardRef((props: InputProps, ref: ForwardedRef<HTMLInputE
 	                ref={inputRef}/>;
 });
 
-export type NumberInputDef = Omit<InputDef, 'valueToNumber' | 'mask'>;
+export type NumberInputFormat = Omit<typeof MaskedNumber.DEFAULTS, 'mask'>;
+
+export type NumberInputDef = Omit<InputDef, 'valueToNumber' | 'mask'> & {
+	format?: NumberInputFormat | (() => NumberInputFormat);
+	grouping?: boolean;
+};
+
 export type NumberInputProps = OmitNodeDef<NumberInputDef> & WidgetProps;
 
 export const NumberInput = forwardRef((props: NumberInputProps, ref: ForwardedRef<HTMLInputElement>) => {
+	const {format, grouping = false, ...rest} = props;
+
+	useLanguage();
+
+	let mask = (void 0);
+	if (VUtils.isNotBlank(format)) {
+		mask = () => {
+			if (typeof format === 'function') {
+				return {...MaskedNumber.DEFAULTS, ...format()};
+			} else {
+				return {...MaskedNumber.DEFAULTS, ...format};
+			}
+		};
+	} else if (grouping) {
+		const [groupingSeparator, decimalSeparator] = detectNumberFormat(locale());
+		mask = () => ({...MaskedNumber.DEFAULTS, thousandsSeparator: groupingSeparator, radix: decimalSeparator});
+	}
 	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 	// @ts-ignore
-	return <Input {...props} data-number={true} valueToNumber={true} ref={ref}/>;
+	return <Input {...rest} mask={mask} data-number={true} valueToNumber={true} ref={ref}/>;
 });
 
 export type PasswordInputDef = Omit<InputDef, 'valueToNumber' | 'mask'>;
