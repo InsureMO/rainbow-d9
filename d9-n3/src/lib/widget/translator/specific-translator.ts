@@ -126,7 +126,6 @@ export const ArrayCouldAddElementBuild = createAsyncSnippetBuild<ArrayUsedDef, '
 export const ArrayElementRemovedBuild = createAsyncSnippetBuild<ArrayUsedDef, 'elementRemoved'>('elementRemoved', ['options']);
 export const ArrayCouldRemoveElementBuild = createAsyncSnippetBuild<ArrayUsedDef, 'couldRemoveElement'>('couldRemoveElement', ['options']);
 
-
 export abstract class SpecificArrayWidgetTranslator<T extends WidgetType> extends SpecificWidgetTranslator<T> {
 	protected buildDefaultAttributeNamesMapping(additional?: Record<CustomAttributeName, WidgetPropertyName>): Record<CustomAttributeName, WidgetPropertyName> {
 		const keys: Array<keyof ArrayUsedDef> = [
