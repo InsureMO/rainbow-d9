@@ -1072,10 +1072,12 @@ relevant attributes:
 	- grouping: `true` to enable number format grouping. please note default fraction digits is 2.
 	- format: customized mask, a `NumberInputFormat` object or a function returning `NumberInputFormat`.
 
-> `type NumberInputFormat = Omit<typeof MaskedNumber.DEFAULTS, 'mask'>`.
-
 > If the mask definition for `Number` doesn't meet your requirements, please use `Input` for custom masking, while
 > declaring `- valueToNumber: true`.
+
+> Please note that here `Mask` refers to text formatting and placeholder display, not the same concept as masking sensitive information like
+> PII (Personally Identifiable Information). Content masking should be controlled through data handling models, not just a matter of
+> formatting display.
 
 ### Decoration
 
@@ -1094,7 +1096,8 @@ icons. If you want to use built-in icons, you need to use `$icons.` followed by 
 > `DecoNumber` is available for decorating `Number`,  
 > `DecoPwd` is available for decorating `Pwd`.
 
-> `placeholder` for decorated input supports i18n, and will be disabled automatically when mask presents.
+> `placeholder` for decorated input supports i18n, and will be disabled automatically when mask presents. However, the number mask typically
+> doesn't display the mask placeholder, so the placeholder will still take effect.
 
 ## Textarea
 
