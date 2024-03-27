@@ -3,28 +3,31 @@ import {ReactNode} from 'react';
 import {CaptionDef} from '../caption';
 import {GlobalEventHandlers, OmitHTMLProps2, OmitNodeDef} from '../types';
 
-export interface TreeNodeDef {
+export interface TreeNodeOperation {
+	/** checkable, default false */
+	checkable?: boolean;
+	/** addable, default false */
+	addable?: boolean;
+	/** removable, default false */
+	removable?: boolean;
+}
+
+export interface TreeNodeDef extends TreeNodeOperation {
 	/**
 	 * is value is primitive value, then addable/removable/checkable will be ignored.
 	 * and this node must be a leaf node
 	 */
 	value: PropValue;
 	/**
-	 * inside property path, relative to tree model.
+	 * inside property path to tree model root.
 	 * 1. $ip2r contains $ip2p.
 	 * 2. concat $p2r and $ip2r, is absolute path of this node model (value above)
 	 */
 	$ip2r: PropertyPath;
-	/** inside property path, relative to parent */
+	/** inside property path to parent. */
 	$ip2p: PropertyPath;
 	marker?: string;
 	label?: string | ReactNode | CaptionDef;
-	/** default false */
-	checkable?: boolean;
-	/** default false */
-	addable?: boolean;
-	/** default false */
-	removable?: boolean;
 	/** is leaf node or not, even it is leaf, addable still might be worked */
 	leaf?: boolean;
 }
@@ -42,6 +45,6 @@ export type TreeDef = NodeDef & OmitHTMLProps2<HTMLDivElement, 'title' | 'height
 	showIndex?: boolean;
 	detective?: TreeNodeDetect;
 	height?: number | string;
-};
+} & TreeNodeOperation;
 /** Tree widget definition, with html attributes */
 export type TreeProps = OmitNodeDef<TreeDef> & WidgetProps;

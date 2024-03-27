@@ -170,9 +170,7 @@ export const TreeNode = (props: TreeNodeProps) => {
 			                  canCheck={canCheck} canRemove={canRemove} hasToggle={hasToggle}/>
 			{hasChild
 				? children.map((child, index) => {
-					// when can add sub node, then the add operation always be the last one
-					// which means all children is not last of parent
-					const last = !canAdd && index === childrenCount - 1;
+					const last = index === childrenCount - 1;
 					const myDisplayIndex = `${displayIndex}.${index + 1}`;
 					return <TreeNode halfChecked={halfChecked} initExpandLevel={initExpandLevel} showIndex={showIndex}
 					                 detective={detective} $wrapped={$wrapped}
