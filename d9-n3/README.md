@@ -518,6 +518,13 @@ Some examples:
 
 > `$mpos`, `mpos` is position for mobile only.
 
+### Render On Specific Devices
+
+Specify specific widgets to render only on particular devices using `$renderOn` or `renderOn`. The valid values
+are `desktop`, `mobile`, `tablet`, and `touchable`. You can also specify multiple devices by connecting values with `,` or `;`. It's
+important to note that if no rendering device filter is applied, the component won't render at all, and thus, won't have any event
+listeners. If no device is specified, it will be assumed to render on all devices.
+
 ## Attribute Guard
 
 Any attributes that are not captured by a specific parser will be eventually parsed by the attribute guard. The attribute guard follows the
