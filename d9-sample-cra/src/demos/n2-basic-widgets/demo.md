@@ -56,6 +56,15 @@
 - DateTime::Buddhist Era::buddhistEra
 	- dateFormat: BBBB/MM/DD
 	- timeFormat: HH
+	- renderOn: desktop, mobile
+- Date::Only Visible on Desktop::mobileDesktop
+	- renderOn:
+	  ```
+      // this line canont be ignored, since renderOn attribute build will not treat single line as function body
+	  return ['desktop', 'mobile'];
+	  ```
+- Date::Only Visible on Mobile::mobileDate
+	- renderOn: mobile
 
 ## Section::# 1.4. Basic Widgets - Label
 
@@ -127,3 +136,14 @@
 	- text: Validate Inputs, Scope "S1"
 	- click: validate s1
 
+- Caption::
+	- text: Dropdown
+		- property: BizTransaction.PaymentMethod
+		- disabled, data-as-label
+		- please: Let you see me.
+		- options: F: Female
+	- click:
+	  ```
+	  const {global: {sc}, root, model} = options;
+	  await sc( 'dialog', 'direct-card', {root, model});
+	  ```

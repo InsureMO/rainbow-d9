@@ -5,7 +5,8 @@ import {AnyAttributeName, WidgetPropertyName} from './types';
 export enum D9PropertyNames {
 	PROPERTY = '$pp',
 	POSITION = '$pos', MOBILE_POSITION = '$mpos',
-	VALIDATION_SCOPES = '$validationScopes'
+	VALIDATION_SCOPES = '$validationScopes',
+	RENDER_ON = '$renderOn'
 }
 
 export enum AttributeNames {
@@ -16,12 +17,13 @@ export enum AttributeNames {
 	REACTION_REPAINT = 'repaint',
 	REACTION_CLEAR_ME = 'clearMe',
 	PROPERTY = 'property',
+	RENDER_ON = 'renderOn',
 	// position and alias
 	PLACE = 'place',
 	POSITION = 'position',
 	POS = 'pos',
 	MPOS = 'mpos',
-	VALIDATION_SCOPES = 'validateScopes'
+	VALIDATION_SCOPES = 'validateScopes',
 }
 
 /**
@@ -37,6 +39,7 @@ export class AttributeNameUtils {
 		[AttributeNames.VISIBLE]: MonitorNodeAttributes.VISIBLE,
 		[AttributeNames.VALID]: MonitorNodeAttributes.VALID,
 		[AttributeNames.PROPERTY]: D9PropertyNames.PROPERTY,
+		[AttributeNames.RENDER_ON]: D9PropertyNames.RENDER_ON,
 		[AttributeNames.PLACE]: D9PropertyNames.POSITION,
 		[AttributeNames.POSITION]: D9PropertyNames.POSITION,
 		[AttributeNames.POS]: D9PropertyNames.POSITION,

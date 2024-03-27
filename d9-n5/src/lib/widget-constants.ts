@@ -989,6 +989,11 @@ export const CommonWidgetAttributes: Array<PlaygroundWidgetProperty> = [
 		description: 'Position in grid, priority only takes effect in the mobile environment.'
 	},
 	{name: 'mpos', label: 'Text.', description: 'Alias of "$mpos".'},
+	{name: 'renderOn', label: 'Text, Snippet.', description: 'Alias of "$renderOn".'},
+	{
+		name: '$renderOn', label: 'Text, Snippet.',
+		description: 'Render on specific devices, could be one of "desktop", "mobile", "touchable" "tablet", or connected by "," or ";".'
+	},
 	{name: '$disabled', label: 'Boolean, Various.', description: 'Disablement.'},
 	{name: 'disabled', label: 'Boolean, Various.', description: 'Alias of "$disabled".'},
 	{name: '$visible', label: 'Boolean, Various.', description: 'Visibility.'},
@@ -1000,7 +1005,11 @@ export const CommonWidgetAttributes: Array<PlaygroundWidgetProperty> = [
 	{name: 'watch', label: 'Various.', description: 'Monitor other property changes.'},
 	{name: 'repaint', label: 'Various.', description: 'Monitor other property changes, and repaint myself.'},
 	{name: 'clearMe', label: 'Various.', description: 'Monitor other property changes, and clear my value.'},
-	{name: 'label', label: 'Various.', description: 'Label for form cell.'}
+	{name: 'label', label: 'Various.', description: 'Label for form cell.'},
+	{
+		name: 'style', label: 'Text.',
+		description: 'CSS style, could be [[[name: value]; name: value]...] or a JSON string.'
+	}
 ];
 
 export const getCommonWidgetAttributes = (): Array<PlaygroundWidgetProperty> => {

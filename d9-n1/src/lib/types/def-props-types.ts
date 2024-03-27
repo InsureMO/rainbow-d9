@@ -1,4 +1,5 @@
 import {ReactNode} from 'react';
+import {DeviceType} from './device-type';
 import {ArrayPropValue, BaseModel, PropertyPath, PropValue, Undefinable, WidgetType} from './model-types';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -110,6 +111,8 @@ export interface NodeDef extends MonitorNodeDef {
 	$mpos?: NodePosition;
 	/** validation scopes, only response to self-change and validation-all when value missed */
 	$validationScopes?: Array<NodeValidationScope>;
+	/** only render on given device types, multiple tags could use string with , or ; joined */
+	$renderOn?: string | (() => Array<keyof DeviceType>);
 }
 
 export interface ValueChangedOptions<NV extends PropValue> {

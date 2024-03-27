@@ -30,6 +30,7 @@ export interface NodeUtilsType {
 	 */
 	readonly asGridPosForNonMobile: (def: StyledNodeDef) => NodeGridPos;
 	readonly asGridPos: (def: StyledNodeDef) => NodeGridPos;
+	readonly beautifyStyle: (style: StyledNodeDef['style']) => Partial<CSSProperties>;
 	readonly computeStyle: (def: StyledNodeDef) => Partial<CSSProperties>;
 }
 
@@ -127,10 +128,34 @@ export const NUtils: NodeUtilsType = {
 			return NUtils.asGridPosForNonMobile(def);
 		}
 	},
+	beautifyStyle: (style?: StyledNodeDef['style'] | string): Partial<CSSProperties> => {
+		if (style == null) {
+			return {};
+		} else if (typeof style === 'string') {
+			style = style.trim();
+			if (style.startsWith('{')) {
+				try {
+					return JSON.parse(style);
+				} catch {
+					return {};
+				}
+			} else {
+				return style.split(';').reduce((style, pair) => {
+					const [key, value] = pair.split(':').map(part => part.trim());
+					if (VUtils.isNotBlank(key) && VUtils.isNotBlank(value)) {
+						style[key.trim()] = value.trim();
+					}
+					return style;
+				}, {});
+			}
+		} else {
+			return style as CSSProperties;
+		}
+	},
 	computeStyle: (def: StyledNodeDef) => {
 		const pos = NUtils.asGridPos(def);
 		// eslint-disable-next-line @typescript-eslint/no-explicit-any
-		const style = (def.style ?? {}) as CSSProperties;
+		const style = NUtils.beautifyStyle(def.style);
 		style.gridRow = style.gridRow || pos.gridRow;
 		style.gridColumn = style.gridColumn || pos.gridColumn;
 		if (VUtils.isNotBlank(style.gridRow)) {
