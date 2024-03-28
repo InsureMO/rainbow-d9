@@ -3,6 +3,7 @@ import {useSetValue} from '../hooks';
 import {
 	ContainerDef,
 	ContainerWidgetProps,
+	DeviceTags,
 	ModelHolder,
 	OnValueChange,
 	WrappedAttributes,
@@ -13,7 +14,7 @@ import {findWidget, RegisteredContainerWidget} from '../widgets-registration';
 import {renderContainerChildren} from './render-container-children';
 import {useContainerChildren} from './use-container-children';
 
-export interface ContainerWrapperProps extends ContainerDef, ModelHolder, WrappedNodeAttributes {
+export interface ContainerWrapperProps extends ContainerDef, ModelHolder, WrappedNodeAttributes, Partial<DeviceTags> {
 }
 
 export const ContainerWrapper = (props: ContainerWrapperProps) => {

@@ -30,6 +30,6 @@ export const Wrapper = (props: NodeDef & ModelHolder) => {
 	}
 
 	return <WrapperEventBusProvider>
-		<WrapperDelegate {...props} />
+		<WrapperDelegate {...props} {...deviceTags}/>
 	</WrapperEventBusProvider>;
 };

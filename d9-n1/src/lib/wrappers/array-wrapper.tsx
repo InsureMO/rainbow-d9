@@ -3,6 +3,7 @@ import {useSetValue} from '../hooks';
 import {
 	ArrayContainerDef,
 	ArrayContainerWidgetProps,
+	DeviceTags,
 	ModelHolder,
 	WrappedAttributes,
 	WrappedNodeAttributes
@@ -12,7 +13,7 @@ import {findWidget, RegisteredArrayContainerWidget} from '../widgets-registratio
 import {ArrayElement} from './array-element';
 import {useArrayFunctions} from './use-array-functions';
 
-export interface ArrayWrapperProps extends ArrayContainerDef, ModelHolder, WrappedNodeAttributes {
+export interface ArrayWrapperProps extends ArrayContainerDef, ModelHolder, WrappedNodeAttributes, Partial<DeviceTags> {
 }
 
 export const ArrayWrapper = (props: ArrayWrapperProps) => {
