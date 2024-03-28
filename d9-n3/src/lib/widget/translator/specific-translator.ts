@@ -120,11 +120,11 @@ export abstract class SpecificWidgetTranslator<T extends WidgetType> {
 	}
 }
 
-export const ArrayElementAddedBuild = createAsyncSnippetBuild<ArrayUsedDef, 'elementAdded'>('elementAdded', ['options']);
-export const ArrayCreateElementBuild = createAsyncSnippetBuild<ArrayUsedDef, 'createElement'>('createElement', ['options']);
-export const ArrayCouldAddElementBuild = createAsyncSnippetBuild<ArrayUsedDef, 'couldAddElement'>('couldAddElement', ['options']);
-export const ArrayElementRemovedBuild = createAsyncSnippetBuild<ArrayUsedDef, 'elementRemoved'>('elementRemoved', ['options']);
-export const ArrayCouldRemoveElementBuild = createAsyncSnippetBuild<ArrayUsedDef, 'couldRemoveElement'>('couldRemoveElement', ['options']);
+export const ArrayElementAddedBuild = createAsyncSnippetBuild<ArrayUsedDef, 'elementAdded'>('$array.elementAdded', ['options']);
+export const ArrayCreateElementBuild = createAsyncSnippetBuild<ArrayUsedDef, 'createElement'>('$array.createElement', ['options']);
+export const ArrayCouldAddElementBuild = createAsyncSnippetBuild<ArrayUsedDef, 'couldAddElement'>('$array.couldAddElement', ['options']);
+export const ArrayElementRemovedBuild = createAsyncSnippetBuild<ArrayUsedDef, 'elementRemoved'>('$array.elementRemoved', ['options']);
+export const ArrayCouldRemoveElementBuild = createAsyncSnippetBuild<ArrayUsedDef, 'couldRemoveElement'>('$array.couldRemoveElement', ['options']);
 
 export abstract class SpecificArrayWidgetTranslator<T extends WidgetType> extends SpecificWidgetTranslator<T> {
 	protected buildDefaultAttributeNamesMapping(additional?: Record<CustomAttributeName, WidgetPropertyName>): Record<CustomAttributeName, WidgetPropertyName> {
