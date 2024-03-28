@@ -35,89 +35,61 @@ export const WrapperDelegateWorker = (workerProps: WrapperDelegateWorkerProps) =
 	}, [on, off, forceUpdate]);
 
 	if (VUtils.isBlank($wt)) {
-		N1Logger.error(`Type must be declared, current is [${$wt}].`, 'WrapperDelegate');
+		N1Logger.error(`Widget type must be declared, current is [${$wt}].`, 'WrapperDelegate');
 		return null;
 	}
 
-	if ($wt.includes('.')) {
-		// declared with cover widget, format is "InternalWidgetType.CoverWidgetType"
-		const coverType = $wt.substring($wt.indexOf('.') + 1);
-		if (VUtils.isBlank(coverType)) {
-			N1Logger.error(`Cover type must be declared, current is [${$wt}].`, 'WrapperDelegate');
-			return null;
-		}
-		const internalType = $wt.substring(0, $wt.indexOf('.'));
-		if (VUtils.isBlank(internalType)) {
-			N1Logger.error(`Internal type must be declared, current is [${$wt}].`, 'WrapperDelegate');
-			return null;
-		}
-
-		const internalWidget: RegisteredWidget<WidgetProps> = findWidget(internalType);
-		if (internalWidget == null) {
-			N1Logger.error(`Widget definition of [${internalType}] not found.`, 'WrapperDelegate');
-			return null;
-		}
-		const coverWidget: RegisteredWidget<WidgetProps> = findWidget(coverType);
-		if (coverWidget == null) {
-			N1Logger.error(`Widget definition of [${coverType}] not found.`, 'WrapperDelegate');
-			return null;
-		}
-
-		const child = (() => {
-			if (internalWidget.container && internalWidget.array) {
-				return <ContainerEventBusProvider>
-					<ContainerValidationEventHolder/>
-					<ArrayWrapper {...(props as unknown as (ArrayContainerDef & ModelHolder))}
-					              $wt={internalType}
-					              $avs={attributeValues} $vfs={validators}/>
-				</ContainerEventBusProvider>;
-			} else if (internalWidget.container) {
-				return <ContainerEventBusProvider>
-					<ContainerValidationEventHolder/>
-					<ContainerWrapper {...(props as unknown as (ContainerDef & ModelHolder))}
-					                  $wt={internalType}
-					                  $avs={attributeValues} $vfs={validators}/>
-				</ContainerEventBusProvider>;
-			} else {
-				// ignore compute style when it is declared with a wrapper
-				return <LeafWrapper {...props}
-				                    $wt={internalType} $avs={attributeValues} $vfs={validators}
-				                    useComputedStyle={false}/>;
-			}
-		})();
-
-		// internal widget is the only child of cover widget, therefore, use leaf wrapper here, which means
-		// cover widget CANNOT be container widget, and attribute "nodes" is ignored even through it has been declared.
-		// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-		// @ts-ignore
-		return <LeafWrapper {...props}
-		                    $wt={coverType} $avs={attributeValues} $vfs={validators}
-		                    useComputedStyle={true}>
-			{child}
-		</LeafWrapper>;
-	} else {
-		// no cover widget
-		const widget: RegisteredWidget<WidgetProps> = findWidget($wt);
+	const widgetTypes = $wt.split('.').map($wt => $wt.trim());
+	if (widgetTypes.some($wt => $wt.length === 0)) {
+		N1Logger.error(`Incorrect widget type[${$wt}].`, 'WrapperDelegate');
+		return null;
+	}
+	const hasCover = widgetTypes.length > 1;
+	const [widgetType, ...coverTypes] = widgetTypes;
+	const kernel = (() => {
+		const widget: RegisteredWidget<WidgetProps> = findWidget(widgetType);
 		if (widget == null) {
-			N1Logger.error(`Widget definition of [${$wt}] not found.`, 'WrapperDelegate');
+			N1Logger.error(`Widget definition of [${widgetType}] in [${$wt}] not found.`, 'WrapperDelegate');
 			return null;
 		}
-
 		if (widget.container && widget.array) {
 			return <ContainerEventBusProvider>
 				<ContainerValidationEventHolder/>
 				<ArrayWrapper {...(props as unknown as (ArrayContainerDef & ModelHolder))}
-				              $avs={attributeValues} $vfs={validators}/>
+				              $wt={widgetType} $avs={attributeValues} $vfs={validators}/>
 			</ContainerEventBusProvider>;
 		} else if (widget.container) {
 			return <ContainerEventBusProvider>
 				<ContainerValidationEventHolder/>
 				<ContainerWrapper {...(props as unknown as (ContainerDef & ModelHolder))}
-				                  $avs={attributeValues} $vfs={validators}/>
+				                  $wt={widgetType} $avs={attributeValues} $vfs={validators}/>
 			</ContainerEventBusProvider>;
 		} else {
+			// ignore compute style when it is with covers
 			return <LeafWrapper {...props}
-			                    $avs={attributeValues} $vfs={validators} useComputedStyle={true}/>;
+			                    $wt={widgetType} $avs={attributeValues} $vfs={validators}
+			                    useComputedStyle={!hasCover}/>;
 		}
-	}
+	})();
+
+	return coverTypes.reduce((child, widgetType) => {
+		// ignore building when previous building failed
+		if (child == null) {
+			return null;
+		}
+		const widget: RegisteredWidget<WidgetProps> = findWidget(widgetType);
+		if (widget == null) {
+			N1Logger.error(`Widget definition of [${widgetType}] in [${$wt}] not found.`, 'WrapperDelegate');
+			return null;
+		}
+
+		// previous widget is the only child of cover widget, therefore, use leaf wrapper here, which means
+		// cover widget CANNOT be container widget, and attribute "nodes" is ignored even through it has been declared.
+		// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+		// @ts-ignore
+		return <LeafWrapper {...props}
+		                    $wt={widgetType} $avs={attributeValues} $vfs={validators} useComputedStyle={true}>
+			{child}
+		</LeafWrapper>;
+	}, kernel);
 };
