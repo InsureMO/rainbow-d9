@@ -61,7 +61,7 @@ export const ArrayWrapper = (props: ArrayWrapperProps) => {
 
 	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 	// @ts-ignore
-	return <C $wrapped={$wrapped} {...rest} style={NUtils.computeStyle(rest)}>
+	return <C $wrapped={$wrapped} {...rest} data-valid={$avs?.$valid?.valid ?? true} style={NUtils.computeStyle(rest)}>
 		{Top != null ? <Top $wrapped={$wrapped} $array={enhancedForArray} {...rest} /> : null}
 		{Body == null
 			? body()

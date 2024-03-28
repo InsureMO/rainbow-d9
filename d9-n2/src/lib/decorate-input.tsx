@@ -172,6 +172,8 @@ export const askDecorateAttrs = (props: DecorateInputProps, rest: object) => {
 		if (key.startsWith('data-di-')) {
 			attrs[key] = rest[key];
 			delete rest[key];
+		} else if (key === 'data-valid') {
+			attrs[key] = rest[key];
 		}
 		return attrs;
 	}, {});

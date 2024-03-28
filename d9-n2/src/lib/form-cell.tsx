@@ -99,6 +99,7 @@ export const FormCell = forwardRef((props: FormCellProps, ref: ForwardedRef<HTML
 	}, {} as Record<string, any>);
 	return <AFormCell {...fcAttrs} data-disabled={$disabled}
 	                  data-visible={$visible} data-hold-position-on-invisible={holdPositionWhenInvisible}
+	                  data-valid={validation?.valid ?? true}
 	                  id={fcId} ref={ref}>
 		<LabelLike label={label} $wrapped={$wrapped} $validationScopes={props} wrapByCaption={true}
 		           data-r="d9-fc-caption"/>
