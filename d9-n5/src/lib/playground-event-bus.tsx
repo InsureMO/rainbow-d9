@@ -1,4 +1,5 @@
-import {useCreateEventBus, WidgetType} from '@rainbow-d9/n1';
+import {NodeDef, useCreateEventBus, WidgetType} from '@rainbow-d9/n1';
+import {NodeDefExt} from '@rainbow-d9/n3';
 import React, {createContext, ReactNode, useContext} from 'react';
 import {PlaygroundWidgetGroupKey} from './types';
 
@@ -10,6 +11,7 @@ export enum PlaygroundEventTypes {
 	QUIT_ZEN = 'quit-zen',
 	WIDGET_GROUP_CHANGE = 'widget-group-change',
 	RESIZE_EDITOR = 'resize-editor',
+	ASK_NODE_DEF = 'ask-node-def',
 
 	CONTENT_CHANGED = 'content-changed',
 
@@ -67,6 +69,12 @@ export interface PlaygroundEventBus {
 	on(type: PlaygroundEventTypes.RESIZE_EDITOR, listener: (width: number) => void): this;
 
 	off(type: PlaygroundEventTypes.RESIZE_EDITOR, listener: (width: number) => void): this;
+
+	fire(type: PlaygroundEventTypes.ASK_NODE_DEF, $key: string, widgetType: string, callback: (def: NodeDef & NodeDefExt) => void): this;
+
+	on(type: PlaygroundEventTypes.ASK_NODE_DEF, listener: ($key: string, widgetType: string, callback: (def: NodeDef & NodeDefExt) => void) => void): this;
+
+	off(type: PlaygroundEventTypes.ASK_NODE_DEF, listener: ($key: string, widgetType: string, callback: (def: NodeDef & NodeDefExt) => void) => void): this;
 
 	fire(type: PlaygroundEventTypes.CONTENT_CHANGED, content?: string): this;
 

@@ -115,6 +115,6 @@ export const parseDoc: DocParser['parseDoc'] = new Proxy(() => (void 0), {
 				createOrGetSemanticHelperSingleton(),
 				createOrGetTranslateHelperSingleton());
 		}
-		return SINGLETON.parser.parseDoc(argArray[0] ?? '');
+		return SINGLETON.parser.parseDoc(argArray[0] ?? '', argArray[1]);
 	}
 });

@@ -1,4 +1,12 @@
-import {ExternalDefIndicator, MonitorNodeAttributes, Nullable, PropertyPath, Undefinable, VUtils} from '@rainbow-d9/n1';
+import {
+	ExternalDefIndicator,
+	MonitorNodeAttributes,
+	Nullable,
+	NUtils,
+	PropertyPath,
+	Undefinable,
+	VUtils
+} from '@rainbow-d9/n1';
 import {PreparsedSubordinateOfHeadingNodes} from '../../ast';
 import {N3Logger} from '../../logger';
 import {ParsedNodeType} from '../../node-types';
@@ -59,19 +67,21 @@ export abstract class AbstractTranslator<N extends Decipherable> {
 		return def;
 	}
 
-	protected abstract doTranslate(node: N): ParsedNodeDef;
+	protected abstract doTranslate(node: N, parseOptions?: DocParseOptions): ParsedNodeDef;
 
-	public translate(node: N, options?: DocParseOptions): ParsedNodeDef {
-		const def = this.doTranslate(node);
+	public translate(node: N, parseOptions?: DocParseOptions): ParsedNodeDef {
+		const def = this.doTranslate(node, parseOptions);
 		if (def == null) {
 			return def;
 		} else {
 			if (def.node != null) {
-				if (options?.keepMd === true) {
+				if (parseOptions?.keepMd === true) {
 					def.node.preparsed = node.preparsed;
 				}
-				if (VUtils.isNotBlank(options?.forPlayground)) {
-					def.node.$wt = `${def.node.$wt}.${options.forPlayground}`;
+				if (VUtils.isNotBlank(parseOptions?.forPlayground)) {
+					def.node.$wt = `${def.node.$wt ?? ''}.${parseOptions.forPlayground}`;
+					def.node['data-for-playground'] = parseOptions.forPlayground.trim();
+					def.node['data-for-playground-key'] = NUtils.generateReactKey();
 				}
 			}
 			return this.postTranslationCorrectionWork(def);
@@ -237,7 +247,7 @@ export abstract class AbstractTranslator<N extends Decipherable> {
 
 	protected buildChildrenOnSubHeadings(options: {
 		widgets: Array<ParsedNode<PreparsedSubordinateOfHeadingNodes>>
-	}): Array<ParsedNodeDef> {
+	}, parseOptions?: DocParseOptions): Array<ParsedNodeDef> {
 		const {widgets} = options;
 
 		// all other children are ignore but subheadings
@@ -251,13 +261,13 @@ export abstract class AbstractTranslator<N extends Decipherable> {
 				N3Logger.error(`Translator of heading node[type=${item.$wt}] is not found. All content ignored.`, AbstractTranslator.name);
 				return null;
 			}
-			return this.ignoreFailureParsing(translator.translate(item));
+			return this.ignoreFailureParsing(translator.translate(item, parseOptions));
 		}).filter(x => x != null) as Array<ParsedNodeDef>;
 	}
 
 	protected buildChildrenOnList(options: {
 		widgets: Array<ParsedListItemWidget | ParsedListItemRefWidget>
-	}): Array<ParsedNodeDef> {
+	}, parseOptions?: DocParseOptions): Array<ParsedNodeDef> {
 		const {widgets} = options;
 
 		return widgets.map(item => {
@@ -268,7 +278,7 @@ export abstract class AbstractTranslator<N extends Decipherable> {
 					N3Logger.error(`Parser of node[type=${item.$wt}, line=${item.preparsed.content.position.start.line}] is not found. All content ignored.`, AbstractTranslator.name);
 					return null;
 				} else {
-					return this.ignoreFailureParsing(translator.translate(item));
+					return this.ignoreFailureParsing(translator.translate(item, parseOptions));
 				}
 			} else if (SemanticUtils.isRefWidgetListItem(item)) {
 				// TODO TO FIND REFERENCE WIDGET

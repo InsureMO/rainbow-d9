@@ -46,7 +46,8 @@ export const ContainerWrapper = (props: ContainerWrapperProps) => {
 	// render container itself
 	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 	// @ts-ignore
-	return <C $wrapped={$wrapped} {...rest} data-valid={$avs?.$valid?.valid ?? true} style={NUtils.computeStyle(rest)}>
+	return <C $wrapped={$wrapped} {...rest} $wt={$wt} style={NUtils.computeStyle(rest)}
+	          data-valid={$avs?.$valid?.valid ?? true}>
 		{renderContainerChildren({
 			def: props, childrenDefs, keys, $wrapped: {...$wrapped, $p2r: $subP2r, $model: $subModel}
 		})}

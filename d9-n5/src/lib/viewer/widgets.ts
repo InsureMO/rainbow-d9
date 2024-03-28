@@ -35,5 +35,19 @@ export const ParseError = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-playground-vie
     color: ${PlaygroundCssVars.VIEWER_ERROR_COLOR};
     font-size: 1.5em;
     font-style: italic;
-    font-weight: 500p;
+    font-weight: 500;
+`;
+export const WidgetWrapper = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-playground-widget-wrapper'})`
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 0;
+    user-select: none;
+    pointer-events: none;
+    border-radius: ${PlaygroundCssVars.WIDGET_WRAPPER_BORDER_RADIUS};
+    box-shadow: ${PlaygroundCssVars.WIDGET_WRAPPER_SHADOW};
+    transition: top 0.2s, left 0.2s, width 0.2s, height 0.2s;
+    z-index: ${PlaygroundCssVars.WIDGET_WRAPPER_Z_INDEX};
 `;

@@ -32,5 +32,6 @@ export const LeafWrapper = (props: LeafWrapperProps) => {
 	// render container itself
 	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 	// @ts-ignore
-	return <C $wrapped={$wrapped} {...rest} data-valid={$avs?.$valid?.valid ?? true} style={style}/>;
+	return <C $wrapped={$wrapped} {...rest} $wt={$wt} style={style}
+	          data-valid={$avs?.$valid?.valid ?? true}/>;
 };

@@ -26,5 +26,8 @@ export const PlaygroundCssVars = {
 	TEMPLATE_DIALOG_MARGIN_TOP: 'var(--d9-playground-template-dialog-margin-top, min(10vh, calc(20vh - 60px)))',
 	TEMPLATE_DIALOG_MARGIN_LEFT: 'var(--d9-playground-template-dialog-margin-left, 15vw)',
 	TEMPLATE_DIALOG_PADDING: 'var(--d9-playground-template-dialog-padding, 32px 32px 16px)',
-	TEMPLATE_DIALOG_BODY_MARGIN_BOTTOM: 'var(--d9-playground-template-dialog-margin-bottom, 16px)'
+	TEMPLATE_DIALOG_BODY_MARGIN_BOTTOM: 'var(--d9-playground-template-dialog-margin-bottom, 16px)',
+	WIDGET_WRAPPER_Z_INDEX: Infinity,
+	WIDGET_WRAPPER_BORDER_RADIUS: 'var(--d9-playground-ww-border-radius, 4px)',
+	WIDGET_WRAPPER_SHADOW: 'var(--d9-playground-ww-shadow, 0 0 5px 2px rgba(250,0,0,0.2))'
 };

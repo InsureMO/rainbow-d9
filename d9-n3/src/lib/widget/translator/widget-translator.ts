@@ -3,7 +3,7 @@ import {PreparsedListItem} from '../../ast';
 import {N3Logger} from '../../logger';
 import {ParsedNodeType} from '../../node-types';
 import {ParsedListItemAttributePair, ParsedListItemKind, SemanticUtils, WidgetFlag, WidgetType} from '../../semantic';
-import {ParsedNodeDef} from '../../types';
+import {DocParseOptions, ParsedNodeDef} from '../../types';
 import {AbstractTranslator, Decipherable} from './abstract-translator';
 import {AttributeNameUtils} from './attribute';
 import {SpecificWidgetTranslator} from './specific-translator';
@@ -62,7 +62,7 @@ export class WidgetTranslator extends AbstractTranslator<Decipherable> {
 		$wt: WidgetType;
 		classified: ClassifiedAttributesAndWidgets; attributeName: string;
 		given?: Nullable<V>; $ppOfParent: Undefinable<PropertyPath>;
-	}): Nullable<V> | NodeDef {
+	}, parseOptions?: DocParseOptions): Nullable<V> | NodeDef {
 		const {$wt, classified, attributeName, given} = options;
 
 		let transformed: Nullable<V> | NodeDef;
@@ -92,7 +92,7 @@ export class WidgetTranslator extends AbstractTranslator<Decipherable> {
 					// PreparsedSubordinateOfListItemNodes
 					children: (def.children ?? []).map(child => child.preparsed)
 				} as PreparsedListItem
-			});
+			}, parseOptions);
 			if (success) {
 				transformed = node;
 			} else {
@@ -105,7 +105,11 @@ export class WidgetTranslator extends AbstractTranslator<Decipherable> {
 		return transformed;
 	}
 
-	protected doTranslateNode(node: Decipherable, $pp: Undefinable<PropertyPath>, label: Nullable<string>, findChildren: () => Array<ParsedNodeDef>): ParsedNodeDef {
+	protected doTranslateNode(
+		node: Decipherable, $pp: Undefinable<PropertyPath>, label: Nullable<string>,
+		findChildren: () => Array<ParsedNodeDef>,
+		parseOptions?: DocParseOptions
+	): ParsedNodeDef {
 		const {$wt} = node;
 
 		const classified = this.classifyAttributesAndSubWidgetsByList(node);
@@ -115,12 +119,14 @@ export class WidgetTranslator extends AbstractTranslator<Decipherable> {
 		if (translator?.shouldTranslateLabelAttribute() ?? true) {
 			transformedLabel = this.tryToTranslateAttributeToWidget({
 				$wt, classified, given: label, $ppOfParent: $pp, attributeName: 'label'
-			});
+			}, parseOptions);
 		} else {
 			transformedLabel = label;
 		}
 		const transformedWidgets = (translator?.getToWidgetAttributeNames() ?? []).reduce((map, name) => {
-			map[name] = this.tryToTranslateAttributeToWidget({$wt, classified, $ppOfParent: $pp, attributeName: name});
+			map[name] = this.tryToTranslateAttributeToWidget({
+				$wt, classified, $ppOfParent: $pp, attributeName: name
+			}, parseOptions);
 			return map;
 		}, {});
 		const attributes: AttributeMap = this.parseAndCombineAttributes({
@@ -148,7 +154,7 @@ export class WidgetTranslator extends AbstractTranslator<Decipherable> {
 			def = {$pp, ...attributes, $wt};
 		}
 		const children = [
-			...this.buildChildrenOnList({widgets: classified.widgets}),
+			...this.buildChildrenOnList({widgets: classified.widgets}, parseOptions),
 			...findChildren()
 		].map(parsed => parsed.node);
 		if (children != null && children.length !== 0) {
@@ -161,13 +167,13 @@ export class WidgetTranslator extends AbstractTranslator<Decipherable> {
 		return {node: def, success: true};
 	}
 
-	protected doTranslate(node: Decipherable): ParsedNodeDef {
+	protected doTranslate(node: Decipherable, parseOptions?: DocParseOptions): ParsedNodeDef {
 		if (node.type === ParsedNodeType.HEADING) {
 			return this.doTranslateNode(node, node.$pp, node.headline, () => {
-				return this.buildChildrenOnSubHeadings({widgets: node.children});
+				return this.buildChildrenOnSubHeadings({widgets: node.children}, parseOptions);
 			});
 		} else if (node.type === ParsedNodeType.LIST_ITEM) {
-			return this.doTranslateNode(node, node.$pp, node.label, () => []);
+			return this.doTranslateNode(node, node.$pp, node.label, () => [], parseOptions);
 		} else {
 			// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 			// @ts-ignore

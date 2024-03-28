@@ -13,13 +13,13 @@ export class WidgetHelper {
 		return this._repository;
 	}
 
-	public translate(heading: ParsedHeadingIdentified, options?: DocParseOptions): ParsedNodeDef {
+	public translate(heading: ParsedHeadingIdentified, parseOptions?: DocParseOptions): ParsedNodeDef {
 		const translator = this._repository.askTranslator(heading.$wt);
 		if (translator == null) {
 			N3Logger.error(`Translator of root node[type=${heading.$wt}] is not found. All content ignored.`, WidgetHelper.name);
 			return {node: {$wt: ''} as NodeDef, success: false};
 		}
-		return translator.translate(heading, options);
+		return translator.translate(heading, parseOptions);
 	}
 }
 

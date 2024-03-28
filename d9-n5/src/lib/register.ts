@@ -2,6 +2,7 @@ import {NodeDef, registerWidget, Undefinable, VUtils} from '@rainbow-d9/n1';
 import {Widget} from '@rainbow-d9/n3';
 import {Playground} from './playground';
 import {PlaygroundDef, PlaygroundWidgetUsage} from './types';
+import {PLAYGROUND_WIDGET_WRAPPER, PlaygroundWidgetWrapper} from './widget-wrapper';
 
 Widget.ValidatorUtils.registerRegexps({'abc': /^abc$/});
 
@@ -39,6 +40,7 @@ export abstract class AbstractPlaygroundTranslator extends Widget.SpecificWidget
 export const registerPlayground = (widgetHelper: Widget.WidgetHelper, widgetType?: string) => {
 	widgetType = VUtils.isBlank(widgetType) ? 'Playground' : widgetType;
 	registerWidget({key: widgetType, JSX: Playground, container: false, array: false});
+	registerWidget({key: PLAYGROUND_WIDGET_WRAPPER, JSX: PlaygroundWidgetWrapper, container: false, array: false});
 	// n3 translator
 	const TranslatorClass = class extends AbstractPlaygroundTranslator {
 		public getSupportedType(): string {

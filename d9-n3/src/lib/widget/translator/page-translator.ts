@@ -1,5 +1,5 @@
 import {ParsedHeadingIdentified, SemanticHelper, WidgetType} from '../../semantic';
-import {ParsedNodeDef} from '../../types';
+import {DocParseOptions, ParsedNodeDef} from '../../types';
 import {AbstractTranslator} from './abstract-translator';
 
 export class PageTranslator extends AbstractTranslator<ParsedHeadingIdentified> {
@@ -7,7 +7,7 @@ export class PageTranslator extends AbstractTranslator<ParsedHeadingIdentified> 
 		return $wt === SemanticHelper.PAGE;
 	}
 
-	protected doTranslate(node: ParsedHeadingIdentified): ParsedNodeDef {
+	protected doTranslate(node: ParsedHeadingIdentified, parseOptions?: DocParseOptions): ParsedNodeDef {
 		const $wt = SemanticHelper.PAGE;
 
 		const classified = this.classifyAttributesAndSubWidgetsByList(node);
@@ -16,8 +16,8 @@ export class PageTranslator extends AbstractTranslator<ParsedHeadingIdentified> 
 		const def = {
 			$wt, ...attributes,
 			$nodes: [
-				...this.buildChildrenOnList({widgets: classified.widgets}),
-				...this.buildChildrenOnSubHeadings({widgets: node.children})
+				...this.buildChildrenOnList({widgets: classified.widgets}, parseOptions),
+				...this.buildChildrenOnSubHeadings({widgets: node.children}, parseOptions)
 			].map(parsed => parsed.node)
 		};
 

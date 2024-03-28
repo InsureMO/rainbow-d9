@@ -10,6 +10,7 @@ export * from './viewer';
 export * from './playground-event-bus';
 export * from './playground-bridge';
 export * from './playground';
+export * from './widget-wrapper';
 
 export * from './register';
 export {EditorPanel} from './editor/widgets';
