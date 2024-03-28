@@ -1,7 +1,7 @@
 import {NodeDef, Undefinable} from '@rainbow-d9/n1';
 import {N3Logger} from '../logger';
 import {ParsedHeadingIdentified} from '../semantic';
-import {ParsedNodeDef} from '../types';
+import {DocParseOptions, ParsedNodeDef} from '../types';
 import {createOrGetTranslatorRepositorySingleton, WidgetTranslatorRepository} from './translator';
 
 export class WidgetHelper {
@@ -13,13 +13,13 @@ export class WidgetHelper {
 		return this._repository;
 	}
 
-	public translate(heading: ParsedHeadingIdentified): ParsedNodeDef {
+	public translate(heading: ParsedHeadingIdentified, options?: DocParseOptions): ParsedNodeDef {
 		const translator = this._repository.askTranslator(heading.$wt);
 		if (translator == null) {
 			N3Logger.error(`Translator of root node[type=${heading.$wt}] is not found. All content ignored.`, WidgetHelper.name);
 			return {node: {$wt: ''} as NodeDef, success: false};
 		}
-		return translator.translate(heading);
+		return translator.translate(heading, options);
 	}
 }
 

@@ -11,6 +11,7 @@
 	- tails: World
 	- regex: abc$,^def; Starts with "def" or ends with "abc".
 	- validateScopes: s1
+	- required
 	- mask:
 	  ```
 	  return {

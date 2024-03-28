@@ -16,7 +16,7 @@ import {
 	WidgetFlag,
 	WidgetType
 } from '../../semantic';
-import {ParsedNodeDef} from '../../types';
+import {DocParseOptions, ParsedNodeDef} from '../../types';
 import {AttributeNameUtils, AttributeUtils, D9PropertyNames} from './attribute';
 import {MonitorHandlerDetectOptions} from './monitor';
 import {SpecificWidgetTranslator} from './specific-translator';
@@ -61,11 +61,19 @@ export abstract class AbstractTranslator<N extends Decipherable> {
 
 	protected abstract doTranslate(node: N): ParsedNodeDef;
 
-	public translate(node: N): ParsedNodeDef {
+	public translate(node: N, options?: DocParseOptions): ParsedNodeDef {
 		const def = this.doTranslate(node);
 		if (def == null) {
 			return def;
 		} else {
+			if (def.node != null) {
+				if (options?.keepMd === true) {
+					def.node.preparsed = node.preparsed;
+				}
+				if (VUtils.isNotBlank(options?.forPlayground)) {
+					def.node.$wt = `${def.node.$wt}.${options.forPlayground}`;
+				}
+			}
 			return this.postTranslationCorrectionWork(def);
 		}
 	}

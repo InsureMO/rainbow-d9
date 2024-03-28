@@ -14,6 +14,7 @@ import {WidgetType} from '../../../semantic';
 import {AttributeMap} from '../types';
 import {AbstractMonitorBuild, createDefaultMonitorHandlerDetective} from './monitor-build';
 import {MonitorHandler, MonitorHandlerDetective, MonitorHandlerDetectOptions} from './types';
+import {wrapMonitorHandlerDetective} from './utils';
 
 const detectSimpleCheck = (options: {
 	attrName: string;
@@ -38,9 +39,11 @@ const detectSimpleCheck = (options: {
 	};
 };
 
-const detectRequired: MonitorHandlerDetective = detectSimpleCheck({
+const detectRequired: MonitorHandlerDetective = wrapMonitorHandlerDetective(detectSimpleCheck({
 	attrName: 'required', defaultInvalidMessage: 'Field is required.',
 	validate: (value) => VUtils.isNotBlank(value)
+}), (attributes) => {
+	attributes['data-required'] = true;
 });
 
 const detectNumeric: MonitorHandlerDetective = detectSimpleCheck({

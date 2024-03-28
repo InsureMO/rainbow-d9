@@ -2,7 +2,7 @@ import {NodeDef, Undefinable, VUtils} from '@rainbow-d9/n1';
 import {AstHelper, createOrGetAskHelperSingleton} from './ast';
 import {N3Logger} from './logger';
 import {createOrGetSemanticHelperSingleton, ParsedHeading, SemanticHelper} from './semantic';
-import {MarkdownContent, ParsedNodeDef} from './types';
+import {DocParseOptions, MarkdownContent, ParsedNodeDef} from './types';
 import {createOrGetTranslateHelperSingleton, WidgetHelper} from './widget';
 
 export class DocParser {
@@ -28,7 +28,7 @@ export class DocParser {
 		return this._widget;
 	}
 
-	public parseDoc(def: MarkdownContent): ParsedNodeDef {
+	public parseDoc(def: MarkdownContent, options?: DocParseOptions): ParsedNodeDef {
 		if (VUtils.isBlank(def)) {
 			N3Logger.error('No content determined in given markdown content.', DocParser.name);
 			return {
@@ -83,7 +83,7 @@ export class DocParser {
 			// });
 			// parse root
 			// noinspection UnnecessaryLocalVariableJS
-			const parsedRoot = this.widget.translate(root);
+			const parsedRoot = this.widget.translate(root, options);
 
 			// TODO PARSE INDEPENDENT BLOCKS
 			// const parsedIndependent = independentParses.reduce((map, {heading, parse}) => {

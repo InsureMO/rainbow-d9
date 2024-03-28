@@ -6,12 +6,12 @@ import {
 	DecorateTailsBuild,
 	MonitorHandlerDetective,
 	SpecificWidgetTranslator,
-	ValidatorUtils
+	ValidatorUtils,
+	wrapMonitorHandlerDetective
 } from '../widget';
 import {N2WidgetType} from './types';
 
 const StandardInputValidators = [
-	ValidatorUtils.DETECT_REQUIRED,
 	ValidatorUtils.DETECT_LENGTH,
 	ValidatorUtils.DETECT_NUMERIC,
 	ValidatorUtils.DETECT_POSITIVE,
@@ -21,10 +21,10 @@ const StandardInputValidators = [
 	ValidatorUtils.DETECT_REGEX
 ];
 const PasswordInputValidators = [
-	ValidatorUtils.DETECT_REQUIRED,
 	ValidatorUtils.DETECT_LENGTH,
 	ValidatorUtils.DETECT_REGEX
 ];
+const DecorateInputRequiredDetective = wrapMonitorHandlerDetective(ValidatorUtils.DETECT_REQUIRED, (attributes) => attributes['data-di-required'] = true);
 
 export const InputMaskBuild = createSyncSnippetBuild<InputDef, 'mask'>('mask', [], true);
 
@@ -40,6 +40,7 @@ export class N2InputTranslator extends SpecificWidgetTranslator<N2WidgetType.INP
 
 	public getValidationHandlerDetectives(): Array<MonitorHandlerDetective> {
 		return [
+			ValidatorUtils.DETECT_REQUIRED,
 			...StandardInputValidators,
 			...super.getValidationHandlerDetectives()
 		];
@@ -53,6 +54,7 @@ export class N2NumberTranslator extends SpecificWidgetTranslator<N2WidgetType.NU
 
 	public getValidationHandlerDetectives(): Array<MonitorHandlerDetective> {
 		return [
+			ValidatorUtils.DETECT_REQUIRED,
 			...StandardInputValidators,
 			...super.getValidationHandlerDetectives()
 		];
@@ -66,6 +68,7 @@ export class N2PasswordTranslator extends SpecificWidgetTranslator<N2WidgetType.
 
 	public getValidationHandlerDetectives(): Array<MonitorHandlerDetective> {
 		return [
+			ValidatorUtils.DETECT_REQUIRED,
 			...PasswordInputValidators,
 			...super.getValidationHandlerDetectives()
 		];
@@ -84,6 +87,7 @@ export class N2DecorateInputTranslator extends SpecificWidgetTranslator<N2Widget
 
 	public getValidationHandlerDetectives(): Array<MonitorHandlerDetective> {
 		return [
+			DecorateInputRequiredDetective,
 			...StandardInputValidators,
 			...super.getValidationHandlerDetectives()
 		];
@@ -102,6 +106,7 @@ export class N2DecorateNumberTranslator extends SpecificWidgetTranslator<N2Widge
 
 	public getValidationHandlerDetectives(): Array<MonitorHandlerDetective> {
 		return [
+			DecorateInputRequiredDetective,
 			...StandardInputValidators,
 			...super.getValidationHandlerDetectives()
 		];
@@ -120,6 +125,7 @@ export class N2DecoratePasswordTranslator extends SpecificWidgetTranslator<N2Wid
 
 	public getValidationHandlerDetectives(): Array<MonitorHandlerDetective> {
 		return [
+			DecorateInputRequiredDetective,
 			...PasswordInputValidators,
 			...super.getValidationHandlerDetectives()
 		];
