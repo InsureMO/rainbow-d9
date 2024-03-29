@@ -39,7 +39,7 @@ export const ParseError = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-playground-vie
 `;
 export const WidgetWrapper = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-playground-widget-wrapper'})`
     display: block;
-    position: fixed;
+    position: absolute;
     top: 0;
     left: 0;
     width: 0;

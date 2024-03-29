@@ -13,6 +13,7 @@ export enum PlaygroundEventTypes {
 	WIDGET_GROUP_CHANGE = 'widget-group-change',
 	RESIZE_EDITOR = 'resize-editor',
 	ASK_NODE_DEF = 'ask-node-def',
+	LOCATE_LINE = 'locate-line',
 
 	CONTENT_CHANGED = 'content-changed',
 
@@ -82,6 +83,12 @@ export interface PlaygroundEventBus {
 	on(type: PlaygroundEventTypes.ASK_NODE_DEF, listener: ($key: string, widgetType: string, callback: (def: NodeDef & NodeDefExt) => void) => void): this;
 
 	off(type: PlaygroundEventTypes.ASK_NODE_DEF, listener: ($key: string, widgetType: string, callback: (def: NodeDef & NodeDefExt) => void) => void): this;
+
+	fire(type: PlaygroundEventTypes.LOCATE_LINE, line: number): this;
+
+	on(type: PlaygroundEventTypes.LOCATE_LINE, listener: (line: number) => void): this;
+
+	off(type: PlaygroundEventTypes.LOCATE_LINE, listener: (line: number) => void): this;
 
 	fire(type: PlaygroundEventTypes.CONTENT_CHANGED, content?: string): this;
 

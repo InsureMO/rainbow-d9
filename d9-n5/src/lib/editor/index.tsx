@@ -102,6 +102,22 @@ export const Editor = (props: EditorProps) => {
 		if (state.editor == null) {
 			return;
 		}
+		const onLocateLine = (lineNumber: number) => {
+			const editor = state.editor;
+			const line = editor.state.doc.line(lineNumber);
+			const {top} = editor.coordsAtPos(line.from);
+			editor.scrollDOM.scrollTo({top, behavior: 'smooth'});
+			editor.dispatch({selection: {anchor: line.from}});
+		};
+		on(PlaygroundEventTypes.LOCATE_LINE, onLocateLine);
+		return () => {
+			off(PlaygroundEventTypes.LOCATE_LINE, onLocateLine);
+		};
+	}, [on, off, state.editor]);
+	useEffect(() => {
+		if (state.editor == null) {
+			return;
+		}
 		const findDefaultPrefix = (keyOrWidgetType: WidgetType, level: number) => {
 			// find by key, then by widget type
 			const group = widgets.widgets.find(widget => widget.$key === keyOrWidgetType)?.group

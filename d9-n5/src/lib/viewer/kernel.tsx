@@ -99,18 +99,19 @@ export const ViewerKernel = (props: ViewerProps & { content: string }) => {
 				if (widgetType === 'd9-page') {
 					clearLocator();
 				} else {
-					const elm = target.getBoundingClientRect();
+					const vwRect = vwRef.current.getBoundingClientRect();
+					const targetRect = target.getBoundingClientRect();
 
 					const ww = wwRef.current;
-					ww.style.top = `${elm.top - 2}px`;
-					ww.style.left = `${elm.left - 4}px`;
-					ww.style.width = `${elm.width + 8}px`;
-					ww.style.height = `${elm.height + 4}px`;
+					ww.style.top = `${targetRect.top - vwRect.top - 2}px`;
+					ww.style.left = `${targetRect.left - vwRect.left - 4}px`;
+					ww.style.width = `${targetRect.width + 8}px`;
+					ww.style.height = `${targetRect.height + 4}px`;
 					ww.style.opacity = '1';
 					replace(() => ww.setAttribute('data-view-anchor', 'true'), 300);
 					const wwt = wwtRef.current;
-					wwt.style.bottom = `${window.innerHeight - elm.top}px`;
-					wwt.style.left = `${elm.left - 4}px`;
+					wwt.style.bottom = `${window.innerHeight - targetRect.top}px`;
+					wwt.style.left = `${targetRect.left - 4}px`;
 
 					const $key = target.getAttribute('data-for-playground-key');
 					if (ww.getAttribute('data-current-for-playground-key') !== $key
@@ -138,7 +139,13 @@ export const ViewerKernel = (props: ViewerProps & { content: string }) => {
 			const $key = ww.getAttribute('data-current-for-playground-key');
 			const widgetType = ww.getAttribute('data-current-w');
 			fire(PlaygroundEventTypes.ASK_NODE_DEF, $key, widgetType, (def: NodeDef & NodeDefExt) => {
-				console.log(def);
+				const {preparsed} = def;
+				console.log(preparsed);
+				if (preparsed == null) {
+					return;
+				}
+				const {content: {position: {start: {line}}}} = preparsed;
+				fire(PlaygroundEventTypes.LOCATE_LINE, line);
 			});
 		};
 
