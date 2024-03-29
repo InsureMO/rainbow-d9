@@ -4,10 +4,10 @@ var __publicField = (obj, key, value) => {
   __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
   return value;
 };
-import { a as color, M as MaskedNumber, e as MaskedDate, g as MaskedFunction, j as MaskedPattern, k as MaskedRange, l as MaskedRegExp, o as MaskedDynamic } from "./vendor-H8JEDa3y.js";
-import { R as React, r as reactExports, u as useIMask } from "./react-kt_F9F_v.js";
-import { V as VUtils, P as PPUtils, r as registerWidget, c as createLogger, b as useRootEventBus, M as MUtils, N as NUtils, d as Wrapper, e as useForceUpdate, a as useWrapperEventBus, W as WrapperEventTypes, f as useCreateEventBus, g as PROPERTY_PATH_ME, h as MBUtils, R as RootEventTypes, i as useDefaultAttributeValues, j as useAttributesWatch } from "./rainbow-d9-n1-OpH3-sDy.js";
-import { q as qe, W as We } from "./styled-components-1OHEBhNw.js";
+import { a as color, M as MaskedNumber, e as MaskedDate, g as MaskedFunction, j as MaskedPattern, k as MaskedRange, l as MaskedRegExp, o as MaskedDynamic } from "./vendor-HGsit-Y9.js";
+import { R as React, r as reactExports, u as useIMask } from "./react-Tayht9qh.js";
+import { V as VUtils, P as PPUtils, r as registerWidget, c as createLogger, b as useRootEventBus, M as MUtils, N as NUtils, d as Wrapper, e as useForceUpdate, a as useWrapperEventBus, W as WrapperEventTypes, f as useCreateEventBus, g as PROPERTY_PATH_ME, h as MBUtils, R as RootEventTypes, i as useDefaultAttributeValues, j as useAttributesWatch } from "./rainbow-d9-n1-IvNgR7V6.js";
+import { q as qe, W as We } from "./styled-components-LE1OXe4S.js";
 import { d as dayjs } from "./dayjs-9Z7dW0Q-.js";
 const DOM_KEY_WIDGET = "data-w";
 const DOM_ID_WIDGET = "data-wid";
@@ -4658,7 +4658,7 @@ const Page = reactExports.forwardRef((props, ref) => {
   const { $wrapped: { $avs: { $disabled } }, children, ...rest } = props;
   return React.createElement(APage, { ...rest, "data-disabled": $disabled, ref }, children);
 });
-registerWidget({ key: "Page", JSX: Page, container: true, array: false });
+registerWidget({ key: "Page", JSX: Page, container: true, array: false, consumePosition: false });
 const useArrayCouldAddElement = (props) => {
   const { $pp, $wrapped, $array: { couldAddElement, disableOnCannotAdd = true } } = props;
   const { on, off } = useRootEventBus();
