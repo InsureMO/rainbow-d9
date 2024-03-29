@@ -4,10 +4,10 @@ var __publicField = (obj, key, value) => {
   __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
   return value;
 };
-import { a as color, M as MaskedNumber, e as MaskedDate, g as MaskedFunction, j as MaskedPattern, k as MaskedRange, l as MaskedRegExp, o as MaskedDynamic } from "./vendor-O5rCRpDB.js";
-import { R as React, r as reactExports, u as useIMask } from "./react-1DZO3oyI.js";
-import { V as VUtils, P as PPUtils, r as registerWidget, c as createLogger, b as useRootEventBus, M as MUtils, N as NUtils, d as Wrapper, e as useForceUpdate, a as useWrapperEventBus, W as WrapperEventTypes, f as useCreateEventBus, g as PROPERTY_PATH_ME, h as MBUtils, R as RootEventTypes, i as useDefaultAttributeValues, j as useAttributesWatch } from "./rainbow-d9-n1-Pf2xiLLD.js";
-import { q as qe, W as We } from "./styled-components-kOHQ3kDj.js";
+import { a as color, M as MaskedNumber, e as MaskedDate, g as MaskedFunction, j as MaskedPattern, k as MaskedRange, l as MaskedRegExp, o as MaskedDynamic } from "./vendor-H8JEDa3y.js";
+import { R as React, r as reactExports, u as useIMask } from "./react-kt_F9F_v.js";
+import { V as VUtils, P as PPUtils, r as registerWidget, c as createLogger, b as useRootEventBus, M as MUtils, N as NUtils, d as Wrapper, e as useForceUpdate, a as useWrapperEventBus, W as WrapperEventTypes, f as useCreateEventBus, g as PROPERTY_PATH_ME, h as MBUtils, R as RootEventTypes, i as useDefaultAttributeValues, j as useAttributesWatch } from "./rainbow-d9-n1-OpH3-sDy.js";
+import { q as qe, W as We } from "./styled-components-1OHEBhNw.js";
 import { d as dayjs } from "./dayjs-9Z7dW0Q-.js";
 const DOM_KEY_WIDGET = "data-w";
 const DOM_ID_WIDGET = "data-wid";
@@ -4030,7 +4030,7 @@ const FormCell = reactExports.forwardRef((props, ref) => {
   }, {});
   return React.createElement(
     AFormCell,
-    { ...fcAttrs, "data-disabled": $disabled, "data-visible": $visible, "data-hold-position-on-invisible": holdPositionWhenInvisible, id: fcId, ref },
+    { ...fcAttrs, "data-disabled": $disabled, "data-visible": $visible, "data-hold-position-on-invisible": holdPositionWhenInvisible, "data-valid": (validation == null ? void 0 : validation.valid) ?? true, id: fcId, ref },
     React.createElement(LabelLike, { label, "$wrapped": $wrapped, "$validationScopes": props, wrapByCaption: true, "data-r": "d9-fc-caption" }),
     children,
     React.createElement(FormCellInvalidMessage, null, (validation == null ? void 0 : validation.valid) === false ? toIntlLabel(validation.failReason) : null)
@@ -4343,6 +4343,8 @@ const askDecorateAttrs = (props, rest) => {
     if (key.startsWith("data-di-")) {
       attrs[key] = rest[key];
       delete rest[key];
+    } else if (key === "data-valid") {
+      attrs[key] = rest[key];
     }
     return attrs;
   }, {});
@@ -7458,52 +7460,63 @@ const TreeNode = (props) => {
       { "data-last-of-parent": lastOfParent, level },
       React.createElement(TreeNodeRenderer, { initExpandLevel, showIndex, "$wrapped": $wrapped, node, displayIndex, lastOfParent, level, canCheck, canRemove, hasToggle }),
       hasChild ? children.map((child, index) => {
-        const last = !canAdd && index === childrenCount - 1;
+        const last = index === childrenCount - 1;
         const myDisplayIndex = `${displayIndex}.${index + 1}`;
         return React.createElement(TreeNode, { halfChecked, initExpandLevel, showIndex, detective, "$wrapped": $wrapped, node: child, displayIndex: myDisplayIndex, lastOfParent: last, level: level + 1, key: child.$ip2p });
       }).filter((x) => x != null) : null
     )
   );
 };
-const buildDetective = (detective) => {
-  return detective ?? ((parentNode, _options) => {
-    if (parentNode == null || parentNode.value == null) {
-      return [];
-    }
-    let nodes;
-    let parent$ip2r;
-    if (Array.isArray(parentNode.value)) {
-      nodes = parentNode.value;
-      parent$ip2r = parentNode.$ip2r;
-    } else {
-      nodes = parentNode.value.children ?? [];
-      parent$ip2r = `${parentNode.$ip2r}.children`;
-    }
-    return nodes.map((item, index, items) => {
-      if (item == null) {
-        return null;
-      } else {
-        const $ip2p = `[${index}]`;
-        const $ip2r = PPUtils.concat(parent$ip2r, $ip2p);
-        return {
-          value: item,
-          $ip2r,
-          $ip2p,
-          label: VUtils.isPrimitive(item) ? `${item ?? ""}` : item.label ?? "",
-          checkable: false,
-          addable: false,
-          removable: false,
-          leaf: index === items.length - 1
-        };
-      }
-    }).filter((item) => item != null);
+const beautifyNodes = (nodes, options) => {
+  return (nodes ?? []).map((node) => {
+    node.checkable = node.checkable ?? options.checkable;
+    node.addable = node.addable ?? options.addable;
+    node.removable = node.removable ?? options.removable;
+    return node;
   });
 };
+const defaultDetective = (parentNode, _options) => {
+  if (parentNode == null || parentNode.value == null) {
+    return [];
+  }
+  let nodes;
+  let parent$ip2r;
+  if (Array.isArray(parentNode.value)) {
+    nodes = parentNode.value;
+    parent$ip2r = parentNode.$ip2r;
+  } else {
+    nodes = parentNode.value.children ?? [];
+    parent$ip2r = `${parentNode.$ip2r}.children`;
+  }
+  return nodes.map((item, index, items) => {
+    if (item == null) {
+      return null;
+    } else {
+      const $ip2p = `[${index}]`;
+      const $ip2r = PPUtils.concat(parent$ip2r, $ip2p);
+      return {
+        value: item,
+        $ip2r,
+        $ip2p,
+        label: VUtils.isPrimitive(item) ? `${item ?? ""}` : item.label ?? "",
+        checkable: false,
+        addable: false,
+        removable: false,
+        leaf: index === items.length - 1
+      };
+    }
+  }).filter((item) => item != null);
+};
+const buildDetective = (detective, options) => {
+  return (parentNode, _options) => {
+    return beautifyNodes((detective ?? defaultDetective)(parentNode, _options), options);
+  };
+};
 const InternalTree = reactExports.forwardRef((props, ref) => {
-  const { $pp, halfChecked, initExpandLevel = -1, showIndex, detective, height = 300, $wrapped, ...rest } = props;
+  const { $pp, halfChecked = true, checkable = false, addable = false, removable = false, initExpandLevel = -1, showIndex = false, detective, height = 300, $wrapped, ...rest } = props;
   const { $p2r, $avs: { $disabled, $visible } } = $wrapped;
   const globalHandlers = useGlobalHandlers();
-  const detect = buildDetective(detective);
+  const detect = buildDetective(detective, { checkable, addable, removable });
   const rootNodeValue = MUtils.getValue($wrapped.$model, $pp);
   const rootNodeDef = {
     value: rootNodeValue,
@@ -7511,16 +7524,15 @@ const InternalTree = reactExports.forwardRef((props, ref) => {
     $ip2p: PROPERTY_PATH_ME,
     label: "",
     checkable: false,
-    addable: false,
+    addable,
     removable: false,
     leaf: false
   };
   const children = detect(rootNodeDef, { global: globalHandlers }) ?? [];
   const childrenCount = children.length;
   const node$p2r = PPUtils.absolute($p2r, $pp);
+  const canAdd = rootNodeDef.addable ?? false;
   return React.createElement(ATree, { ...rest, "data-disabled": $disabled, "data-visible": $visible, height, id: PPUtils.asId(PPUtils.absolute($p2r, props.$pp), props.id), ref }, children.map((child, index) => {
-    const canHasChild = VUtils.isPrimitive(child.value);
-    const canAdd = canHasChild && (child.addable ?? false);
     const last = !canAdd && index === childrenCount - 1;
     const myDisplayIndex = `${index + 1}`;
     return React.createElement(TreeNode, { halfChecked, initExpandLevel, showIndex, detective: detect, "$wrapped": { ...$wrapped, $p2r: node$p2r }, node: child, displayIndex: myDisplayIndex, lastOfParent: last, level: 0, key: child.$ip2p });

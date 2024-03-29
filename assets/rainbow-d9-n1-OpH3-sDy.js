@@ -4,8 +4,8 @@ var __publicField = (obj, key, value) => {
   __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
   return value;
 };
-import { b as buffer, n as nanoid, E as EventEmitter } from "./vendor-O5rCRpDB.js";
-import { r as reactExports, R as React } from "./react-1DZO3oyI.js";
+import { b as buffer, n as nanoid, E as EventEmitter } from "./vendor-H8JEDa3y.js";
+import { r as reactExports, R as React } from "./react-kt_F9F_v.js";
 const VUtils = {
   isEmpty: (v) => v == null || typeof v === "string" && v.length === 0,
   isNotEmpty: (v) => (v ?? "") !== "",
@@ -421,9 +421,33 @@ const NUtils = {
       return NUtils.asGridPosForNonMobile(def);
     }
   },
+  beautifyStyle: (style) => {
+    if (style == null) {
+      return {};
+    } else if (typeof style === "string") {
+      style = style.trim();
+      if (style.startsWith("{")) {
+        try {
+          return JSON.parse(style);
+        } catch {
+          return {};
+        }
+      } else {
+        return style.split(";").reduce((style2, pair) => {
+          const [key, value] = pair.split(":").map((part) => part.trim());
+          if (VUtils.isNotBlank(key) && VUtils.isNotBlank(value)) {
+            style2[key.trim()] = value.trim();
+          }
+          return style2;
+        }, {});
+      }
+    } else {
+      return style;
+    }
+  },
   computeStyle: (def) => {
     const pos = NUtils.asGridPos(def);
-    const style = def.style ?? {};
+    const style = NUtils.beautifyStyle(def.style);
     style.gridRow = style.gridRow || pos.gridRow;
     style.gridColumn = style.gridColumn || pos.gridColumn;
     if (VUtils.isNotBlank(style.gridRow)) {
@@ -1604,6 +1628,7 @@ const ArrayElement = (props) => {
   );
 };
 const ArrayWrapper = (props) => {
+  var _a;
   const { $root, $p2r, $model, $wt, $avs, $vfs, $array, ...rest } = props;
   const { onValueChange: $onValueChange, onValueChanged } = useSetValue(props);
   const $wrapped = { $root, $p2r, $model, $onValueChange, $avs, $vfs };
@@ -1628,13 +1653,14 @@ const ArrayWrapper = (props) => {
   };
   return React.createElement(
     C,
-    { "$wrapped": $wrapped, ...rest, style: NUtils.computeStyle(rest) },
+    { "$wrapped": $wrapped, ...rest, "$wt": $wt, style: NUtils.computeStyle(rest), "data-valid": ((_a = $avs == null ? void 0 : $avs.$valid) == null ? void 0 : _a.valid) ?? true },
     Top != null ? React.createElement(Top, { "$wrapped": $wrapped, "$array": enhancedForArray, ...rest }) : null,
     Body == null ? body() : React.createElement(Body, { "$wrapped": $wrapped, "$array": enhancedForArray, ...rest }, body()),
     Bottom != null ? React.createElement(Bottom, { "$wrapped": $wrapped, "$array": enhancedForArray, ...rest }) : null
   );
 };
 const ContainerWrapper = (props) => {
+  var _a;
   const { $root, $p2r, $model, $wt, $avs, $vfs, ...rest } = props;
   const { keys, defs: childrenDefs } = useContainerChildren({ def: props });
   const { $subModel, $subP2r } = (() => {
@@ -1648,7 +1674,7 @@ const ContainerWrapper = (props) => {
   const $wrapped = { $root, $p2r, $model, $onValueChange, $avs, $vfs };
   const widget = findWidget($wt);
   const C = widget.JSX;
-  return React.createElement(C, { "$wrapped": $wrapped, ...rest, style: NUtils.computeStyle(rest) }, renderContainerChildren({
+  return React.createElement(C, { "$wrapped": $wrapped, ...rest, "$wt": $wt, style: NUtils.computeStyle(rest), "data-valid": ((_a = $avs == null ? void 0 : $avs.$valid) == null ? void 0 : _a.valid) ?? true }, renderContainerChildren({
     def: props,
     childrenDefs,
     keys,
@@ -1656,19 +1682,19 @@ const ContainerWrapper = (props) => {
   }));
 };
 const LeafWrapper = (props) => {
+  var _a;
   const { $root, $p2r, $model, $wt, $avs, $vfs, useComputedStyle, ...rest } = props;
   const $onValueChange = useSetValue(props).onValueChange;
   const $wrapped = { $root, $p2r, $model, $onValueChange, $avs, $vfs };
   const widget = findWidget($wt);
   const C = widget.JSX;
   const style = useComputedStyle ? NUtils.computeStyle(rest) : void 0;
-  return React.createElement(C, { "$wrapped": $wrapped, ...rest, style });
+  return React.createElement(C, { "$wrapped": $wrapped, ...rest, "$wt": $wt, style, "data-valid": ((_a = $avs == null ? void 0 : $avs.$valid) == null ? void 0 : _a.valid) ?? true });
 };
 const WrapperDelegateWorker = (workerProps) => {
   const { $wt, $defaultAttributes: attributeValues, $defaultAttributesSet: setAttributeValues, ...rest } = workerProps;
   const props = { $wt, ...rest };
   const { on, off } = useWrapperEventBus();
-  const deviceTags = useDeviceTags();
   const validators = useValidationFunctions(props);
   useAttributesWatch({ props, attributeValues, setAttributeValues });
   useValidate({ props, attributeValues, setAttributeValues });
@@ -1681,54 +1707,20 @@ const WrapperDelegateWorker = (workerProps) => {
     };
   }, [on, off, forceUpdate]);
   if (VUtils.isBlank($wt)) {
-    N1Logger.error(`Type must be declared, current is [${$wt}].`, "WrapperDelegate");
+    N1Logger.error(`Widget type must be declared, current is [${$wt}].`, "WrapperDelegate");
     return null;
   }
-  if ($wt.includes(".")) {
-    const coverType = $wt.substring($wt.indexOf(".") + 1);
-    if (VUtils.isBlank(coverType)) {
-      N1Logger.error(`Cover type must be declared, current is [${$wt}].`, "WrapperDelegate");
-      return null;
-    }
-    const internalType = $wt.substring(0, $wt.indexOf("."));
-    if (VUtils.isBlank(internalType)) {
-      N1Logger.error(`Internal type must be declared, current is [${$wt}].`, "WrapperDelegate");
-      return null;
-    }
-    const internalWidget = findWidget(internalType);
-    if (internalWidget == null) {
-      N1Logger.error(`Widget definition of [${internalType}] not found.`, "WrapperDelegate");
-      return null;
-    }
-    const coverWidget = findWidget(coverType);
-    if (coverWidget == null) {
-      N1Logger.error(`Widget definition of [${coverType}] not found.`, "WrapperDelegate");
-      return null;
-    }
-    const child = (() => {
-      if (internalWidget.container && internalWidget.array) {
-        return React.createElement(
-          ContainerEventBusProvider,
-          null,
-          React.createElement(ContainerValidationEventHolder, null),
-          React.createElement(ArrayWrapper, { ...deviceTags, ...props, "$wt": internalType, "$avs": attributeValues, "$vfs": validators })
-        );
-      } else if (internalWidget.container) {
-        return React.createElement(
-          ContainerEventBusProvider,
-          null,
-          React.createElement(ContainerValidationEventHolder, null),
-          React.createElement(ContainerWrapper, { ...deviceTags, ...props, "$wt": internalType, "$avs": attributeValues, "$vfs": validators })
-        );
-      } else {
-        return React.createElement(LeafWrapper, { ...deviceTags, ...props, "$wt": internalType, "$avs": attributeValues, "$vfs": validators, useComputedStyle: false });
-      }
-    })();
-    return React.createElement(LeafWrapper, { ...deviceTags, ...props, "$wt": coverType, "$avs": attributeValues, "$vfs": validators, useComputedStyle: true }, child);
-  } else {
-    const widget = findWidget($wt);
+  const widgetTypes = $wt.split(".").map(($wt2) => $wt2.trim());
+  if (widgetTypes.some(($wt2) => $wt2.length === 0)) {
+    N1Logger.error(`Incorrect widget type[${$wt}].`, "WrapperDelegate");
+    return null;
+  }
+  const hasCover = widgetTypes.length > 1;
+  const [widgetType, ...coverTypes] = widgetTypes;
+  const kernel = (() => {
+    const widget = findWidget(widgetType);
     if (widget == null) {
-      N1Logger.error(`Widget definition of [${$wt}] not found.`, "WrapperDelegate");
+      N1Logger.error(`Widget definition of [${widgetType}] in [${$wt}] not found.`, "WrapperDelegate");
       return null;
     }
     if (widget.container && widget.array) {
@@ -1736,19 +1728,30 @@ const WrapperDelegateWorker = (workerProps) => {
         ContainerEventBusProvider,
         null,
         React.createElement(ContainerValidationEventHolder, null),
-        React.createElement(ArrayWrapper, { ...deviceTags, ...props, "$avs": attributeValues, "$vfs": validators })
+        React.createElement(ArrayWrapper, { ...props, "$wt": widgetType, "$avs": attributeValues, "$vfs": validators })
       );
     } else if (widget.container) {
       return React.createElement(
         ContainerEventBusProvider,
         null,
         React.createElement(ContainerValidationEventHolder, null),
-        React.createElement(ContainerWrapper, { ...deviceTags, ...props, "$avs": attributeValues, "$vfs": validators })
+        React.createElement(ContainerWrapper, { ...props, "$wt": widgetType, "$avs": attributeValues, "$vfs": validators })
       );
     } else {
-      return React.createElement(LeafWrapper, { ...deviceTags, ...props, "$avs": attributeValues, "$vfs": validators, useComputedStyle: true });
+      return React.createElement(LeafWrapper, { ...props, "$wt": widgetType, "$avs": attributeValues, "$vfs": validators, useComputedStyle: !hasCover });
     }
-  }
+  })();
+  return coverTypes.reduce((child, widgetType2) => {
+    if (child == null) {
+      return null;
+    }
+    const widget = findWidget(widgetType2);
+    if (widget == null) {
+      N1Logger.error(`Widget definition of [${widgetType2}] in [${$wt}] not found.`, "WrapperDelegate");
+      return null;
+    }
+    return React.createElement(LeafWrapper, { ...props, "$wt": widgetType2, "$avs": attributeValues, "$vfs": validators, useComputedStyle: true }, child);
+  }, kernel);
 };
 const WrapperDelegate = (props) => {
   const { initialized, $defaultAttributes, $defaultAttributesSet } = useDefaultAttributeValues(props);
@@ -1757,11 +1760,30 @@ const WrapperDelegate = (props) => {
   }
   return React.createElement(WrapperDelegateWorker, { ...props, "$defaultAttributes": $defaultAttributes, "$defaultAttributesSet": $defaultAttributesSet });
 };
+const computeRenderOnTags = (renderOn) => {
+  if (renderOn == null) {
+    return [];
+  }
+  if (typeof renderOn === "string") {
+    if (VUtils.isNotBlank(renderOn)) {
+      return renderOn.split(/[,;]/).map((tag) => tag.trim()).filter((tag) => tag.length !== 0);
+    }
+  } else if (typeof renderOn === "function") {
+    return renderOn();
+  }
+  return [];
+};
 const Wrapper = (props) => {
+  const deviceTags = useDeviceTags();
+  const renderOnTags = computeRenderOnTags(props.$renderOn);
+  const render = renderOnTags.length === 0 || renderOnTags.some((tag) => deviceTags[`data-${tag}`]);
+  if (!render) {
+    return null;
+  }
   return React.createElement(
     WrapperEventBusProvider,
     null,
-    React.createElement(WrapperDelegate, { ...props })
+    React.createElement(WrapperDelegate, { ...props, ...deviceTags })
   );
 };
 const renderContainerChildren = (options) => {

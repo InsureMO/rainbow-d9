@@ -4,10 +4,10 @@ var __publicField = (obj, key, value) => {
   __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
   return value;
 };
-import { c as createLogger, N as NUtils, V as VUtils, k as MonitorNodeAttributes, l as Reaction, E as ExternalDefIndicator, P as PPUtils } from "./rainbow-d9-n1-Pf2xiLLD.js";
-import { O as OptionItemSort, R as REACTION_REFRESH_OPTIONS, c as GlobalEventPrefix } from "./rainbow-d9-n2-AKRwFRGh.js";
-import { f as fromMarkdown, g as gfmTableFromMarkdown, a as gfmStrikethroughFromMarkdown, b as gfmFootnoteFromMarkdown, c as gfmTaskListItemFromMarkdown, d as frontmatterFromMarkdown } from "./mdast-wt3i5bil.js";
-import { g as gfmTable, h as gfmStrikethrough, i as gfmFootnote, j as gfmTaskListItem, k as frontmatter } from "./micromark-ii0CMMYQ.js";
+import { c as createLogger, N as NUtils, V as VUtils, k as MonitorNodeAttributes, l as Reaction, E as ExternalDefIndicator, P as PPUtils } from "./rainbow-d9-n1-OpH3-sDy.js";
+import { O as OptionItemSort, R as REACTION_REFRESH_OPTIONS, c as GlobalEventPrefix } from "./rainbow-d9-n2-F4P-uYBJ.js";
+import { f as fromMarkdown, g as gfmTableFromMarkdown, a as gfmStrikethroughFromMarkdown, b as gfmFootnoteFromMarkdown, c as gfmTaskListItemFromMarkdown, d as frontmatterFromMarkdown } from "./mdast-mHmspfsj.js";
+import { g as gfmTable, h as gfmStrikethrough, i as gfmFootnote, j as gfmTaskListItem, k as frontmatter } from "./micromark-T3vJlbOY.js";
 const AsyncFunction = Object.getPrototypeOf(async function() {
 }).constructor;
 var ParsedNodeType;
@@ -1552,6 +1552,7 @@ var D9PropertyNames;
   D9PropertyNames2["POSITION"] = "$pos";
   D9PropertyNames2["MOBILE_POSITION"] = "$mpos";
   D9PropertyNames2["VALIDATION_SCOPES"] = "$validationScopes";
+  D9PropertyNames2["RENDER_ON"] = "$renderOn";
 })(D9PropertyNames || (D9PropertyNames = {}));
 var AttributeNames;
 (function(AttributeNames2) {
@@ -1562,6 +1563,7 @@ var AttributeNames;
   AttributeNames2["REACTION_REPAINT"] = "repaint";
   AttributeNames2["REACTION_CLEAR_ME"] = "clearMe";
   AttributeNames2["PROPERTY"] = "property";
+  AttributeNames2["RENDER_ON"] = "renderOn";
   AttributeNames2["PLACE"] = "place";
   AttributeNames2["POSITION"] = "position";
   AttributeNames2["POS"] = "pos";
@@ -1595,6 +1597,7 @@ __publicField(_AttributeNameUtils, "MAPPED_ATTRIBUTE_NAMES", {
   [AttributeNames.VISIBLE]: MonitorNodeAttributes.VISIBLE,
   [AttributeNames.VALID]: MonitorNodeAttributes.VALID,
   [AttributeNames.PROPERTY]: D9PropertyNames.PROPERTY,
+  [AttributeNames.RENDER_ON]: D9PropertyNames.RENDER_ON,
   [AttributeNames.PLACE]: D9PropertyNames.POSITION,
   [AttributeNames.POSITION]: D9PropertyNames.POSITION,
   [AttributeNames.POS]: D9PropertyNames.POSITION,
@@ -1755,11 +1758,21 @@ const _AbstractTranslator = class _AbstractTranslator {
     }
     return def;
   }
-  translate(node) {
-    const def = this.doTranslate(node);
+  translate(node, parseOptions) {
+    const def = this.doTranslate(node, parseOptions);
     if (def == null) {
       return def;
     } else {
+      if (def.node != null) {
+        if ((parseOptions == null ? void 0 : parseOptions.keepMd) === true) {
+          def.node.preparsed = node.preparsed;
+        }
+        if (VUtils.isNotBlank(parseOptions == null ? void 0 : parseOptions.forPlayground)) {
+          def.node.$wt = `${def.node.$wt ?? ""}.${parseOptions.forPlayground}`;
+          def.node["data-for-playground"] = parseOptions.forPlayground.trim();
+          def.node["data-for-playground-key"] = NUtils.generateReactKey();
+        }
+      }
       return this.postTranslationCorrectionWork(def);
     }
   }
@@ -1878,7 +1891,7 @@ const _AbstractTranslator = class _AbstractTranslator {
       return null;
     }
   }
-  buildChildrenOnSubHeadings(options) {
+  buildChildrenOnSubHeadings(options, parseOptions) {
     const { widgets } = options;
     const headings = widgets.filter((widget) => widget.type === ParsedNodeType.HEADING);
     const identifiedHeadings = headings.filter(SemanticUtils.isIdentifiedHeading);
@@ -1888,10 +1901,10 @@ const _AbstractTranslator = class _AbstractTranslator {
         N3Logger.error(`Translator of heading node[type=${item.$wt}] is not found. All content ignored.`, _AbstractTranslator.name);
         return null;
       }
-      return this.ignoreFailureParsing(translator.translate(item));
+      return this.ignoreFailureParsing(translator.translate(item, parseOptions));
     }).filter((x) => x != null);
   }
-  buildChildrenOnList(options) {
+  buildChildrenOnList(options, parseOptions) {
     const { widgets } = options;
     return widgets.map((item) => {
       if (SemanticUtils.isWidgetListItem(item)) {
@@ -1900,7 +1913,7 @@ const _AbstractTranslator = class _AbstractTranslator {
           N3Logger.error(`Parser of node[type=${item.$wt}, line=${item.preparsed.content.position.start.line}] is not found. All content ignored.`, _AbstractTranslator.name);
           return null;
         } else {
-          return this.ignoreFailureParsing(translator.translate(item));
+          return this.ignoreFailureParsing(translator.translate(item, parseOptions));
         }
       } else if (SemanticUtils.isRefWidgetListItem(item)) {
         return null;
@@ -2228,6 +2241,7 @@ const _AttributeUtils = class _AttributeUtils {
       ..._AttributeUtils.CUSTOMIZED_ATTRIBUTE_BUILDERS[$wt] ?? [],
       _AttributeUtils.POSITION_ATTRIBUTE_BUILDER,
       _AttributeUtils.MOBILE_POSITION_ATTRIBUTE_BUILDER,
+      _AttributeUtils.RENDER_ON_ATTRIBUTE_BUILDER,
       _AttributeUtils.ENABLEMENT_ATTRIBUTE_BUILDER,
       _AttributeUtils.VISIBILITY_ATTRIBUTE_BUILDER,
       _AttributeUtils.VALIDATION_ATTRIBUTE_BUILDER,
@@ -2241,6 +2255,7 @@ const _AttributeUtils = class _AttributeUtils {
 };
 __publicField(_AttributeUtils, "POSITION_ATTRIBUTE_BUILDER", new PositionAttributeBuild());
 __publicField(_AttributeUtils, "MOBILE_POSITION_ATTRIBUTE_BUILDER", new MobilePositionAttributeBuild());
+__publicField(_AttributeUtils, "RENDER_ON_ATTRIBUTE_BUILDER", createSyncSnippetBuild("$renderOn", [], true));
 __publicField(_AttributeUtils, "ENABLEMENT_ATTRIBUTE_BUILDER", new DisablementAttributeBuild());
 __publicField(_AttributeUtils, "VISIBILITY_ATTRIBUTE_BUILDER", new VisibilityAttributeBuild());
 __publicField(_AttributeUtils, "VALIDATION_ATTRIBUTE_BUILDER", new ValidationAttributeBuild());
@@ -2251,6 +2266,17 @@ __publicField(_AttributeUtils, "REACTION_WATCH_ATTRIBUTE_BUILDER", new ReactionW
 __publicField(_AttributeUtils, "ANY_ATTRIBUTE_BUILDER", new AnyAttributeBuild());
 __publicField(_AttributeUtils, "CUSTOMIZED_ATTRIBUTE_BUILDERS", {});
 let AttributeUtils = _AttributeUtils;
+const wrapMonitorHandlerDetective = (detective, more) => {
+  return (options) => {
+    const ret = detective(options);
+    if (ret == null) {
+      return void 0;
+    } else {
+      more(options.attributes);
+      return ret;
+    }
+  };
+};
 class AbstractMonitorBuild {
   buildHandlersDetective(find) {
     return (options) => {
@@ -2355,10 +2381,12 @@ const detectSimpleCheck = (options) => {
     };
   };
 };
-const detectRequired = detectSimpleCheck({
+const detectRequired = wrapMonitorHandlerDetective(detectSimpleCheck({
   attrName: "required",
   defaultInvalidMessage: "Field is required.",
   validate: (value) => VUtils.isNotBlank(value)
+}), (attributes) => {
+  attributes["data-required"] = true;
 });
 const detectNumeric = detectSimpleCheck({
   attrName: "numeric",
@@ -2767,7 +2795,7 @@ class PageTranslator extends AbstractTranslator {
   isTypeSupported($wt) {
     return $wt === SemanticHelper.PAGE;
   }
-  doTranslate(node) {
+  doTranslate(node, parseOptions) {
     const $wt = SemanticHelper.PAGE;
     const classified = this.classifyAttributesAndSubWidgetsByList(node);
     const attributes = this.parseAndCombineAttributes({ $wt, items: classified.attributes });
@@ -2775,8 +2803,8 @@ class PageTranslator extends AbstractTranslator {
       $wt,
       ...attributes,
       $nodes: [
-        ...this.buildChildrenOnList({ widgets: classified.widgets }),
-        ...this.buildChildrenOnSubHeadings({ widgets: node.children })
+        ...this.buildChildrenOnList({ widgets: classified.widgets }, parseOptions),
+        ...this.buildChildrenOnSubHeadings({ widgets: node.children }, parseOptions)
       ].map((parsed) => parsed.node)
     };
     return { node: def, exportKey: node.headline, success: true };
@@ -2811,7 +2839,7 @@ const _WidgetTranslator = class _WidgetTranslator extends AbstractTranslator {
       return { $wt, [translator.transformLabelAttributeName()]: label };
     }
   }
-  tryToTranslateAttributeToWidget(options) {
+  tryToTranslateAttributeToWidget(options, parseOptions) {
     const { $wt, classified, attributeName, given } = options;
     let transformed;
     const { attributes } = classified;
@@ -2834,7 +2862,7 @@ const _WidgetTranslator = class _WidgetTranslator extends AbstractTranslator {
           content: { type: "listItem", children: (def.children ?? []).map((child) => child.preparsed.content) },
           children: (def.children ?? []).map((child) => child.preparsed)
         }
-      });
+      }, parseOptions);
       if (success) {
         transformed = node;
       } else {
@@ -2844,7 +2872,7 @@ const _WidgetTranslator = class _WidgetTranslator extends AbstractTranslator {
     }
     return transformed;
   }
-  doTranslateNode(node, $pp, label, findChildren) {
+  doTranslateNode(node, $pp, label, findChildren, parseOptions) {
     const { $wt } = node;
     const classified = this.classifyAttributesAndSubWidgetsByList(node);
     const translator = this.findSpecificTranslator($wt);
@@ -2856,12 +2884,17 @@ const _WidgetTranslator = class _WidgetTranslator extends AbstractTranslator {
         given: label,
         $ppOfParent: $pp,
         attributeName: "label"
-      });
+      }, parseOptions);
     } else {
       transformedLabel = label;
     }
     const transformedWidgets = ((translator == null ? void 0 : translator.getToWidgetAttributeNames()) ?? []).reduce((map, name) => {
-      map[name] = this.tryToTranslateAttributeToWidget({ $wt, classified, $ppOfParent: $pp, attributeName: name });
+      map[name] = this.tryToTranslateAttributeToWidget({
+        $wt,
+        classified,
+        $ppOfParent: $pp,
+        attributeName: name
+      }, parseOptions);
       return map;
     }, {});
     const attributes = this.parseAndCombineAttributes({
@@ -2882,7 +2915,7 @@ const _WidgetTranslator = class _WidgetTranslator extends AbstractTranslator {
       def = { $pp, ...attributes, $wt };
     }
     const children = [
-      ...this.buildChildrenOnList({ widgets: classified.widgets }),
+      ...this.buildChildrenOnList({ widgets: classified.widgets }, parseOptions),
       ...findChildren()
     ].map((parsed) => parsed.node);
     if (children != null && children.length !== 0) {
@@ -2891,13 +2924,13 @@ const _WidgetTranslator = class _WidgetTranslator extends AbstractTranslator {
     def = translator == null ? void 0 : translator.postWork(def);
     return { node: def, success: true };
   }
-  doTranslate(node) {
+  doTranslate(node, parseOptions) {
     if (node.type === ParsedNodeType.HEADING) {
       return this.doTranslateNode(node, node.$pp, node.headline, () => {
-        return this.buildChildrenOnSubHeadings({ widgets: node.children });
-      });
+        return this.buildChildrenOnSubHeadings({ widgets: node.children }, parseOptions);
+      }, parseOptions);
     } else if (node.type === ParsedNodeType.LIST_ITEM) {
-      return this.doTranslateNode(node, node.$pp, node.label, () => []);
+      return this.doTranslateNode(node, node.$pp, node.label, () => [], parseOptions);
     } else {
       N3Logger.error(`Given node type[${node.type}] is not supported.`, _WidgetTranslator.name);
       return { node: { $wt: "" }, success: false };
@@ -2968,11 +3001,11 @@ class SpecificWidgetTranslator {
     return def;
   }
 }
-const ArrayElementAddedBuild = createAsyncSnippetBuild("elementAdded", ["options"]);
-const ArrayCreateElementBuild = createAsyncSnippetBuild("createElement", ["options"]);
-const ArrayCouldAddElementBuild = createAsyncSnippetBuild("couldAddElement", ["options"]);
-const ArrayElementRemovedBuild = createAsyncSnippetBuild("elementRemoved", ["options"]);
-const ArrayCouldRemoveElementBuild = createAsyncSnippetBuild("couldRemoveElement", ["options"]);
+const ArrayElementAddedBuild = createAsyncSnippetBuild("$array.elementAdded", ["options"]);
+const ArrayCreateElementBuild = createAsyncSnippetBuild("$array.createElement", ["options"]);
+const ArrayCouldAddElementBuild = createAsyncSnippetBuild("$array.couldAddElement", ["options"]);
+const ArrayElementRemovedBuild = createAsyncSnippetBuild("$array.elementRemoved", ["options"]);
+const ArrayCouldRemoveElementBuild = createAsyncSnippetBuild("$array.couldRemoveElement", ["options"]);
 class SpecificArrayWidgetTranslator extends SpecificWidgetTranslator {
   buildDefaultAttributeNamesMapping(additional) {
     const keys = [
@@ -3099,13 +3132,13 @@ class WidgetHelper {
   get repository() {
     return this._repository;
   }
-  translate(heading) {
+  translate(heading, parseOptions) {
     const translator = this._repository.askTranslator(heading.$wt);
     if (translator == null) {
       N3Logger.error(`Translator of root node[type=${heading.$wt}] is not found. All content ignored.`, WidgetHelper.name);
       return { node: { $wt: "" }, success: false };
     }
-    return translator.translate(heading);
+    return translator.translate(heading, parseOptions);
   }
 }
 const SINGLETON$1 = { helper: void 0 };
@@ -3174,7 +3207,8 @@ var index$1 = /* @__PURE__ */ Object.freeze({
   parseSnippet,
   tryBoolAndNumOnAttrValue,
   tryBoolOnAttrValue,
-  tryNumOnAttrValue
+  tryNumOnAttrValue,
+  wrapMonitorHandlerDetective
 });
 var N2WidgetType;
 (function(N2WidgetType2) {
@@ -3217,7 +3251,6 @@ var N2WidgetType;
   N2WidgetType2["PAGINATION"] = "Pagination";
 })(N2WidgetType || (N2WidgetType = {}));
 const StandardInputValidators = [
-  ValidatorUtils.DETECT_REQUIRED,
   ValidatorUtils.DETECT_LENGTH,
   ValidatorUtils.DETECT_NUMERIC,
   ValidatorUtils.DETECT_POSITIVE,
@@ -3227,10 +3260,10 @@ const StandardInputValidators = [
   ValidatorUtils.DETECT_REGEX
 ];
 const PasswordInputValidators = [
-  ValidatorUtils.DETECT_REQUIRED,
   ValidatorUtils.DETECT_LENGTH,
   ValidatorUtils.DETECT_REGEX
 ];
+const DecorateInputRequiredDetective = wrapMonitorHandlerDetective(ValidatorUtils.DETECT_REQUIRED, (attributes) => attributes["data-di-required"] = true);
 const InputMaskBuild = createSyncSnippetBuild("mask", [], true);
 class N2InputTranslator extends SpecificWidgetTranslator {
   getSupportedType() {
@@ -3241,6 +3274,7 @@ class N2InputTranslator extends SpecificWidgetTranslator {
   }
   getValidationHandlerDetectives() {
     return [
+      ValidatorUtils.DETECT_REQUIRED,
       ...StandardInputValidators,
       ...super.getValidationHandlerDetectives()
     ];
@@ -3252,6 +3286,7 @@ class N2NumberTranslator extends SpecificWidgetTranslator {
   }
   getValidationHandlerDetectives() {
     return [
+      ValidatorUtils.DETECT_REQUIRED,
       ...StandardInputValidators,
       ...super.getValidationHandlerDetectives()
     ];
@@ -3263,6 +3298,7 @@ class N2PasswordTranslator extends SpecificWidgetTranslator {
   }
   getValidationHandlerDetectives() {
     return [
+      ValidatorUtils.DETECT_REQUIRED,
       ...PasswordInputValidators,
       ...super.getValidationHandlerDetectives()
     ];
@@ -3277,6 +3313,7 @@ class N2DecorateInputTranslator extends SpecificWidgetTranslator {
   }
   getValidationHandlerDetectives() {
     return [
+      DecorateInputRequiredDetective,
       ...StandardInputValidators,
       ...super.getValidationHandlerDetectives()
     ];
@@ -3291,6 +3328,7 @@ class N2DecorateNumberTranslator extends SpecificWidgetTranslator {
   }
   getValidationHandlerDetectives() {
     return [
+      DecorateInputRequiredDetective,
       ...StandardInputValidators,
       ...super.getValidationHandlerDetectives()
     ];
@@ -3305,6 +3343,7 @@ class N2DecoratePasswordTranslator extends SpecificWidgetTranslator {
   }
   getValidationHandlerDetectives() {
     return [
+      DecorateInputRequiredDetective,
       ...PasswordInputValidators,
       ...super.getValidationHandlerDetectives()
     ];
@@ -4302,7 +4341,7 @@ class DocParser {
   get widget() {
     return this._widget;
   }
-  parseDoc(def) {
+  parseDoc(def, options) {
     if (VUtils.isBlank(def)) {
       N3Logger.error("No content determined in given markdown content.", DocParser.name);
       return {
@@ -4339,7 +4378,7 @@ class DocParser {
     }
     try {
       const root = exported[0];
-      const parsedRoot = this.widget.translate(root);
+      const parsedRoot = this.widget.translate(root, options);
       return parsedRoot;
     } catch (error) {
       N3Logger.error(error, DocParser.name);
@@ -4353,7 +4392,7 @@ const parseDoc = new Proxy(() => void 0, {
     if (SINGLETON.parser == null) {
       SINGLETON.parser = new DocParser(createOrGetAskHelperSingleton(), createOrGetSemanticHelperSingleton(), createOrGetTranslateHelperSingleton());
     }
-    return SINGLETON.parser.parseDoc(argArray[0] ?? "");
+    return SINGLETON.parser.parseDoc(argArray[0] ?? "", argArray[1]);
   }
 });
 const registerN2Widgets = registerN2Widgets$1;

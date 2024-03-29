@@ -4,28 +4,28 @@ var __publicField = (obj, key, value) => {
   __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
   return value;
 };
-import { R as React, r as reactExports, j as jsxRuntimeExports, c as client } from "./react-1DZO3oyI.js";
-import { r as registerCharts } from "./rainbow-d9-echarts-JsEKKEyM.js";
-import { V as VUtils, r as registerWidget, f as useCreateEventBus, M as MUtils, P as PPUtils, u as useThrottler, S as StandaloneRoot, m as ExternalDefMismatchIndicator, n as N1Logger, B as BridgeEventBusProvider, o as useBridgeEventBus, p as BridgeToRootEventTypes, E as ExternalDefIndicator, h as MBUtils, D as DeviceDetective } from "./rainbow-d9-n1-Pf2xiLLD.js";
-import { i as index$2, D as DOM_KEY_WIDGET, C as CssVars, d as utils$1, b as useGlobalHandlers, t as toIntlLabel, U as UnwrappedButton, B as ButtonInk, I as IntlLabel, e as ButtonFill, n as utils$2, m as GlobalRoot, $ as $d9n2, u as useGlobalEventBus, o as UnwrappedButtonBar, p as ButtonBarAlignment, G as GlobalEventTypes, q as UnwrappedCaption, r as UnwrappedSection } from "./rainbow-d9-n2-AKRwFRGh.js";
-import { a as index$2$1, b as index, i as index$1, p as parseDoc, r as registerN2Widgets } from "./rainbow-d9-n3-XSqd6Sdc.js";
-import { q as qe, $ as $e } from "./styled-components-kOHQ3kDj.js";
-import { T as Tag, v as tags, x as ViewPlugin, y as syntaxTree, H as HighlightStyle, z as defaultHighlightStyle, A as syntaxHighlighting, B as styleTags, D as Decoration, C as InlineContext, W as WidgetType, F as EditorView, G as EditorState, J as basicSetup, K as keymap, L as indentWithTab, N as markdown$c, O as javascript, Q as markdownLanguage, R as lintGutter, U as linter, n as nanoid } from "./vendor-O5rCRpDB.js";
-import { r as registerPlanSelect, u as useDemoMarkdown, C as CustomEventHandler, N as N2DemoDialogHandler, T as ThaiPlanSelection, a as ThaiPlanSelectionData, b as ThaiPlanSelectionMarkdown, P as PlanSelectionCssVars } from "./rainbow-d9-thai-plan-selection-tvNpv_Vg.js";
+import { R as React, r as reactExports, j as jsxRuntimeExports, c as client } from "./react-kt_F9F_v.js";
+import { r as registerCharts } from "./rainbow-d9-echarts-JdYfswqc.js";
+import { V as VUtils, r as registerWidget, f as useCreateEventBus, M as MUtils, P as PPUtils, u as useThrottler, e as useForceUpdate, S as StandaloneRoot, m as ExternalDefMismatchIndicator, n as N1Logger, B as BridgeEventBusProvider, o as useBridgeEventBus, p as BridgeToRootEventTypes, E as ExternalDefIndicator, h as MBUtils, D as DeviceDetective } from "./rainbow-d9-n1-OpH3-sDy.js";
+import { i as index$2, D as DOM_KEY_WIDGET, C as CssVars, d as utils$1, b as useGlobalHandlers, t as toIntlLabel, U as UnwrappedButton, B as ButtonInk, I as IntlLabel, e as ButtonFill, n as utils$2, m as GlobalRoot, $ as $d9n2, u as useGlobalEventBus, o as UnwrappedButtonBar, p as ButtonBarAlignment, G as GlobalEventTypes, q as UnwrappedCaption, r as UnwrappedSection } from "./rainbow-d9-n2-F4P-uYBJ.js";
+import { a as index$2$1, b as index, i as index$1, p as parseDoc, r as registerN2Widgets } from "./rainbow-d9-n3-1TtE8ReA.js";
+import { q as qe, $ as $e } from "./styled-components-1OHEBhNw.js";
+import { T as Tag, v as tags, x as ViewPlugin, y as syntaxTree, H as HighlightStyle, z as defaultHighlightStyle, A as syntaxHighlighting, B as styleTags, D as Decoration, C as InlineContext, W as WidgetType, F as EditorView, G as EditorState, J as basicSetup, K as keymap, L as indentWithTab, N as markdown$c, O as javascript, Q as markdownLanguage, R as lintGutter, U as linter, X as json, Y as jsonParseLinter, n as nanoid } from "./vendor-H8JEDa3y.js";
+import { r as registerPlanSelect, u as useDemoMarkdown, C as CustomEventHandler, N as N2DemoDialogHandler, T as ThaiPlanSelection, a as ThaiPlanSelectionData, b as ThaiPlanSelectionMarkdown, P as PlanSelectionCssVars } from "./rainbow-d9-thai-plan-selection-j6uBTO8G.js";
 import { d as dayjs, W as WeekOfYear, Q as QuarterOfYear, D as Duration, I as IsToday, R as RelativeTime, A as ArraySupport, O as ObjectSupport, C as CustomParseFormat, U as UTC, B as BuddhistEra } from "./dayjs-9Z7dW0Q-.js";
 import { u as use, a as install, b as install$1, c as install$2, d as install$3, e as install$4, f as install$5, h as installLabelLayout, j as installUniversalTransition, k as install$6, l as install$7 } from "./echarts-v5L9gyiQ.js";
-import { b as remarkGfm } from "./remark-VCTOzByw.js";
-import { R as ReactMarkdown } from "./react-markdown-Zb1Es4bG.js";
-import { S as SyntaxHighlighter, m as materialDark, _ as __vitePreload } from "./react-syntax-highlighter-mcimpFb2.js";
+import { b as remarkGfm } from "./remark-M22djNlw.js";
+import { R as ReactMarkdown } from "./react-markdown-IAjn2z2N.js";
+import { S as SyntaxHighlighter, m as materialDark, _ as __vitePreload } from "./react-syntax-highlighter-MWWTcflt.js";
 import "./babel-AnpZxJH-.js";
-import "./mdast-wt3i5bil.js";
-import "./micromark-ii0CMMYQ.js";
+import "./mdast-mHmspfsj.js";
+import "./micromark-T3vJlbOY.js";
 import "./unist-5yxlKLF4.js";
 import "./emotion--D3psyId.js";
 import "./zrender-DEzoFf2M.js";
-import "./property-information-5j6KXWI6.js";
-import "./refractor-nAPK3__7.js";
-import "./hastscript-ONLD3t93.js";
+import "./property-information-EiTEcDx2.js";
+import "./refractor-gcf2eGdn.js";
+import "./hastscript-q9rURcej.js";
 (function polyfill() {
   const relList = document.createElement("link").relList;
   if (relList && relList.supports && relList.supports("modulepreload")) {
@@ -101,7 +101,12 @@ const PlaygroundCssVars = {
   TEMPLATE_DIALOG_MARGIN_TOP: "var(--d9-playground-template-dialog-margin-top, min(10vh, calc(20vh - 60px)))",
   TEMPLATE_DIALOG_MARGIN_LEFT: "var(--d9-playground-template-dialog-margin-left, 15vw)",
   TEMPLATE_DIALOG_PADDING: "var(--d9-playground-template-dialog-padding, 32px 32px 16px)",
-  TEMPLATE_DIALOG_BODY_MARGIN_BOTTOM: "var(--d9-playground-template-dialog-margin-bottom, 16px)"
+  TEMPLATE_DIALOG_BODY_MARGIN_BOTTOM: "var(--d9-playground-template-dialog-margin-bottom, 16px)",
+  WIDGET_WRAPPER_Z_INDEX: 2e9,
+  WIDGET_WRAPPER_BORDER_RADIUS: "var(--d9-playground-ww-border-radius, 4px)",
+  WIDGET_WRAPPER_SHADOW: "var(--d9-playground-ww-shadow, 0 0 5px 2px rgba(0,0,0,0.2))",
+  WIDGET_WRAPPER_TOOLBAR_COLOR: "var(--d9-playground-ww-toolbar-color, rgba(0,0,0,0.4))",
+  WIDGET_WRAPPER_TOOLBAR_FILTER: "var(--d9-playground-ww-toolbar-filter, drop-shadow(2px 4px 6px black))"
 };
 const BoxIcon = (props) => {
   return React.createElement(
@@ -279,6 +284,14 @@ const HideEditorBadgeIcon = (props) => {
     React.createElement("path", { opacity: "0.4", d: "M8.5 22.0002C10.79 21.3502 13.21 21.3502 15.5 22.0002", stroke: "currentColor", strokeWidth: "1.5", strokeLinecap: "round", strokeLinejoin: "round" })
   );
 };
+const HideLocatorIcon = (props) => {
+  return React.createElement(
+    "svg",
+    { ...props, "data-icon": "playground-hide-locator", viewBox: "0 0 24 24", fill: "none", xmlns: "http://www.w3.org/2000/svg" },
+    React.createElement("path", { d: "M8.70906 13.2911C8.31854 12.9006 8.31854 12.2674 8.70906 11.8769L10.5859 10L8.70989 8.12401C8.31936 7.73348 8.31936 7.10032 8.70989 6.70979C9.10041 6.31927 9.73358 6.31927 10.1241 6.70979L12.0001 8.58582L13.8816 6.70434C14.2721 6.31381 14.9053 6.31381 15.2958 6.70434C15.6863 7.09486 15.6863 7.72803 15.2958 8.11855L13.4143 10L15.295 11.8806C15.6855 12.2712 15.6855 12.9043 15.295 13.2949C14.9044 13.6854 14.2713 13.6854 13.8807 13.2949L12.0001 11.4142L10.1233 13.2911C9.73275 13.6816 9.09959 13.6816 8.70906 13.2911Z", fill: "currentColor" }),
+    React.createElement("path", { fillRule: "evenodd", clipRule: "evenodd", d: "M12 0.00354004C18.0052 0.00354004 22.5649 5.78816 21.272 11.5818C20.2752 16.2816 16.2429 20.8464 13.8364 23.2269C12.8058 24.2463 11.1942 24.2463 10.1636 23.2269C7.7572 20.8465 3.72523 16.2821 2.72816 11.5825C1.43639 5.7961 5.99649 0.00354004 12 0.00354004ZM19.32 11.1462C20.3368 6.58981 16.7124 2.00354 12 2.00354C7.29012 2.00354 3.66438 6.59682 4.68011 11.1467C5.16886 13.3361 6.26419 15.3017 7.55009 17.1193C8.89379 19.0186 10.4171 20.6645 11.5701 21.805C11.8214 22.0536 12.1786 22.0536 12.4299 21.805C13.5829 20.6644 15.1064 19.0184 16.4501 17.119C17.7359 15.3015 18.8316 13.3355 19.32 11.1462Z", fill: "currentColor" })
+  );
+};
 const InputIcon = (props) => {
   return React.createElement(
     "svg",
@@ -292,6 +305,14 @@ const InputGroupIcon = (props) => {
     "svg",
     { ...props, "data-icon": "playground-input-group", viewBox: "0 0 24 24", fill: "none", xmlns: "http://www.w3.org/2000/svg" },
     React.createElement("path", { fillRule: "evenodd", clipRule: "evenodd", d: "M8 3C8 2.44772 8.44772 2 9 2L15 2C15.5523 2 16 2.44772 16 3C16 3.55229 15.5523 4 15 4L13 4L13 20H15C15.5523 20 16 20.4477 16 21C16 21.5523 15.5523 22 15 22H9C8.44772 22 8 21.5523 8 21C8 20.4477 8.44772 20 9 20H11L11 4H9C8.44772 4 8 3.55228 8 3ZM7.788 6L8 6C8.55229 6 9 6.44772 9 7C9 7.55228 8.55229 8 8 8H7.83C6.95898 8 6.36686 8.0008 5.90945 8.03879C5.46401 8.07578 5.23663 8.1428 5.07805 8.22517C4.71277 8.41492 4.41493 8.71276 4.22517 9.07805C4.1428 9.23663 4.07578 9.46401 4.03879 9.90945C4.0008 10.3669 4 10.959 4 11.83V12.17C4 13.041 4.0008 13.6331 4.03879 14.0905C4.07578 14.536 4.1428 14.7634 4.22517 14.9219C4.41493 15.2872 4.71277 15.5851 5.07805 15.7748C5.23663 15.8572 5.46402 15.9242 5.90945 15.9612C6.36686 15.9992 6.95898 16 7.83 16H8C8.55229 16 9 16.4477 9 17C9 17.5523 8.55229 18 8 18H7.78798C6.96946 18 6.29393 18 5.74393 17.9543C5.17258 17.9069 4.64774 17.805 4.1561 17.5497C3.42553 17.1702 2.82985 16.5745 2.45035 15.8439C2.19496 15.3523 2.0931 14.8274 2.04565 14.2561C1.99998 13.7061 1.99999 13.0305 2 12.212V11.788C1.99999 10.9695 1.99998 10.2939 2.04565 9.74393C2.0931 9.17258 2.19496 8.64774 2.45035 8.1561C2.82985 7.42553 3.42553 6.82985 4.1561 6.45035C4.64774 6.19496 5.17258 6.0931 5.74393 6.04565C6.29393 5.99998 6.96947 5.99999 7.788 6ZM18.0905 8.03879C17.6331 8.0008 17.041 8 16.17 8H16C15.4477 8 15 7.55228 15 7C15 6.44772 15.4477 6 16 6L16.212 6C17.0305 5.99999 17.7061 5.99998 18.2561 6.04565C18.8274 6.0931 19.3523 6.19496 19.8439 6.45035C20.5745 6.82985 21.1702 7.42553 21.5497 8.1561C21.805 8.64774 21.9069 9.17258 21.9543 9.74393C22 10.2939 22 10.9695 22 11.788V12.212C22 13.0305 22 13.7061 21.9543 14.2561C21.9069 14.8274 21.805 15.3523 21.5497 15.8439C21.1702 16.5745 20.5745 17.1702 19.8439 17.5497C19.3523 17.805 18.8274 17.9069 18.2561 17.9543C17.7061 18 17.0305 18 16.212 18H16C15.4477 18 15 17.5523 15 17C15 16.4477 15.4477 16 16 16H16.17C17.041 16 17.6331 15.9992 18.0905 15.9612C18.536 15.9242 18.7634 15.8572 18.9219 15.7748C19.2872 15.5851 19.5851 15.2872 19.7748 14.9219C19.8572 14.7634 19.9242 14.536 19.9612 14.0905C19.9992 13.6331 20 13.041 20 12.17V11.83C20 10.959 19.9992 10.3669 19.9612 9.90945C19.9242 9.46401 19.8572 9.23663 19.7748 9.07805C19.5851 8.71277 19.2872 8.41492 18.9219 8.22517C18.7634 8.1428 18.536 8.07578 18.0905 8.03879Z", fill: "currentColor" })
+  );
+};
+const JsonIcon = (props) => {
+  return React.createElement(
+    "svg",
+    { ...props, "data-icon": "playground-json", viewBox: "0 0 24 24", fill: "none", xmlns: "http://www.w3.org/2000/svg" },
+    React.createElement("path", { d: "M14 19H16C17.1046 19 18 18.1046 18 17V14.5616C18 13.6438 18.6246 12.8439 19.5149 12.6213L21.0299 12.2425C21.2823 12.1794 21.2823 11.8206 21.0299 11.7575L19.5149 11.3787C18.6246 11.1561 18 10.3562 18 9.43845V5H14", stroke: "currentColor", strokeWidth: "2" }),
+    React.createElement("path", { d: "M10 5H8C6.89543 5 6 5.89543 6 7V9.43845C6 10.3562 5.37541 11.1561 4.48507 11.3787L2.97014 11.7575C2.71765 11.8206 2.71765 12.1794 2.97014 12.2425L4.48507 12.6213C5.37541 12.8439 6 13.6438 6 14.5616V19H10", stroke: "currentColor", strokeWidth: "2" })
   );
 };
 const LabelIcon = (props) => {
@@ -309,6 +330,15 @@ const LinkIcon = (props) => {
     "svg",
     { ...props, "data-icon": "playground-link", viewBox: "0 0 24 24", fill: "none", xmlns: "http://www.w3.org/2000/svg" },
     React.createElement("path", { d: "M14 12C14 14.7614 11.7614 17 9 17H7C4.23858 17 2 14.7614 2 12C2 9.23858 4.23858 7 7 7H7.5M10 12C10 9.23858 12.2386 7 15 7H17C19.7614 7 22 9.23858 22 12C22 14.7614 19.7614 17 17 17H16.5", stroke: "currentColor", strokeWidth: "2", strokeLinecap: "round" })
+  );
+};
+const LocateIcon = (props) => {
+  return React.createElement(
+    "svg",
+    { ...props, "data-icon": "playground-locate", viewBox: "0 0 24 24", fill: "none", xmlns: "http://www.w3.org/2000/svg" },
+    React.createElement("path", { opacity: "0.5", d: "M5 8.51464C5 4.9167 8.13401 2 12 2C15.866 2 19 4.9167 19 8.51464C19 12.0844 16.7658 16.2499 13.2801 17.7396C12.4675 18.0868 11.5325 18.0868 10.7199 17.7396C7.23416 16.2499 5 12.0844 5 8.51464Z", stroke: "currentColor", strokeWidth: "1.5" }),
+    React.createElement("path", { d: "M14 9C14 10.1046 13.1046 11 12 11C10.8954 11 10 10.1046 10 9C10 7.89543 10.8954 7 12 7C13.1046 7 14 7.89543 14 9Z", stroke: "currentColor", strokeWidth: "1.5" }),
+    React.createElement("path", { d: "M20.9605 15.5C21.6259 16.1025 22 16.7816 22 17.5C22 19.9853 17.5228 22 12 22C6.47715 22 2 19.9853 2 17.5C2 16.7816 2.37412 16.1025 3.03947 15.5", stroke: "currentColor", strokeWidth: "1.5", strokeLinecap: "round" })
   );
 };
 const MaxIcon = (props) => {
@@ -428,6 +458,14 @@ const ShowEditorBadgeIcon = (props) => {
     React.createElement("path", { opacity: "0.4", d: "M8.5 22.0002C10.79 21.3502 13.21 21.3502 15.5 22.0002", stroke: "currentColor", strokeWidth: "1.5", strokeLinecap: "round", strokeLinejoin: "round" })
   );
 };
+const ShowLocatorIcon = (props) => {
+  return React.createElement(
+    "svg",
+    { ...props, "data-icon": "playground-show-locator", viewBox: "0 0 24 24", fill: "none", xmlns: "http://www.w3.org/2000/svg" },
+    React.createElement("path", { fillRule: "evenodd", clipRule: "evenodd", d: "M12.0036 14.0035C14.4889 14.0035 16.5036 11.9887 16.5036 9.50347C16.5036 7.01819 14.4889 5.00347 12.0036 5.00347C9.51831 5.00347 7.50359 7.01819 7.50359 9.50347C7.50359 11.9887 9.51831 14.0035 12.0036 14.0035ZM12.0036 12.0071C10.6209 12.0071 9.5 10.8862 9.5 9.50347C9.5 8.12077 10.6209 6.99988 12.0036 6.99988C13.3863 6.99988 14.5072 8.12077 14.5072 9.50347C14.5072 10.8862 13.3863 12.0071 12.0036 12.0071Z", fill: "currentColor" }),
+    React.createElement("path", { fillRule: "evenodd", clipRule: "evenodd", d: "M21.272 11.5818C22.5649 5.78816 18.0052 0.00354004 12 0.00354004C5.99649 0.00354004 1.43639 5.7961 2.72816 11.5825C3.72523 16.2821 7.7572 20.8465 10.1636 23.2269C11.1942 24.2463 12.8058 24.2463 13.8364 23.2269C16.2429 20.8464 20.2752 16.2816 21.272 11.5818ZM12 2.00354C16.7124 2.00354 20.3368 6.58981 19.32 11.1462C18.8316 13.3355 17.7359 15.3015 16.4501 17.119C15.1064 19.0184 13.5829 20.6644 12.4299 21.805C12.1786 22.0536 11.8214 22.0536 11.5701 21.805C10.4171 20.6645 8.89379 19.0186 7.55009 17.1193C6.26419 15.3017 5.16886 13.3361 4.68011 11.1467C3.66438 6.59682 7.29012 2.00354 12 2.00354Z", fill: "currentColor" })
+  );
+};
 const TableIcon = (props) => {
   return React.createElement(
     "svg",
@@ -532,10 +570,14 @@ var PlaygroundIcons;
   PlaygroundIcons2["DISPLAY_GROUP"] = "playground.display-group";
   PlaygroundIcons2["SHOW_EDITOR_BADGE"] = "playground.show-editor-badge";
   PlaygroundIcons2["HIDE_EDITOR_BADGE"] = "playground.hide-editor-badge";
+  PlaygroundIcons2["SHOW_LOCATOR"] = "playground.show-locator";
+  PlaygroundIcons2["HIDE_LOCATOR"] = "playground.hide-locator";
   PlaygroundIcons2["MAXIMIZE"] = "playground.max";
   PlaygroundIcons2["MINIMIZE"] = "playground.min";
   PlaygroundIcons2["ZEN"] = "playground.zen";
   PlaygroundIcons2["WINDOW"] = "playground.window";
+  PlaygroundIcons2["LOCATE"] = "playground.locate";
+  PlaygroundIcons2["JSON"] = "playground.json";
   PlaygroundIcons2["SECTION"] = "playground.section";
   PlaygroundIcons2["BOX"] = "playground.box";
   PlaygroundIcons2["RIBS"] = "playground.ribs";
@@ -577,10 +619,14 @@ index$2.Registrar.register({
   [PlaygroundIcons.DISPLAY_GROUP]: () => React.createElement(DisplayGroupIcon, null),
   [PlaygroundIcons.SHOW_EDITOR_BADGE]: () => React.createElement(ShowEditorBadgeIcon, null),
   [PlaygroundIcons.HIDE_EDITOR_BADGE]: () => React.createElement(HideEditorBadgeIcon, null),
+  [PlaygroundIcons.SHOW_LOCATOR]: () => React.createElement(ShowLocatorIcon, null),
+  [PlaygroundIcons.HIDE_LOCATOR]: () => React.createElement(HideLocatorIcon, null),
   [PlaygroundIcons.MAXIMIZE]: () => React.createElement(MaxIcon, null),
   [PlaygroundIcons.MINIMIZE]: () => React.createElement(MinIcon, null),
   [PlaygroundIcons.ZEN]: () => React.createElement(ZenIcon, null),
   [PlaygroundIcons.WINDOW]: () => React.createElement(WindowIcon, null),
+  [PlaygroundIcons.LOCATE]: () => React.createElement(LocateIcon, null),
+  [PlaygroundIcons.JSON]: () => React.createElement(JsonIcon, null),
   [PlaygroundIcons.SECTION]: () => React.createElement(SectionIcon, null),
   [PlaygroundIcons.BOX]: () => React.createElement(BoxIcon, null),
   [PlaygroundIcons.RIBS]: () => React.createElement(RibsIcon, null),
@@ -618,15 +664,20 @@ index$2.Registrar.register({
 var PlaygroundEventTypes;
 (function(PlaygroundEventTypes2) {
   PlaygroundEventTypes2["SWITCH_EDITOR_BADGE"] = "switch-editor-badge";
+  PlaygroundEventTypes2["SWITCH_VIEWER_WRAPPER"] = "switch-viewer-wrapper";
   PlaygroundEventTypes2["MAXIMIZE"] = "maximize";
   PlaygroundEventTypes2["QUIT_MAXIMIZE"] = "quit-maximize";
   PlaygroundEventTypes2["ZEN"] = "zen";
   PlaygroundEventTypes2["QUIT_ZEN"] = "quit-zen";
   PlaygroundEventTypes2["WIDGET_GROUP_CHANGE"] = "widget-group-change";
   PlaygroundEventTypes2["RESIZE_EDITOR"] = "resize-editor";
+  PlaygroundEventTypes2["ASK_NODE_DEF"] = "ask-node-def";
+  PlaygroundEventTypes2["LOCATE_LINE"] = "locate-line";
   PlaygroundEventTypes2["CONTENT_CHANGED"] = "content-changed";
   PlaygroundEventTypes2["INSERT_WIDGET_TEMPLATE"] = "insert-widget-template";
   PlaygroundEventTypes2["SHOW_WIDGET_TEMPLATE_DIALOG"] = "show-widget-template-dialog";
+  PlaygroundEventTypes2["EDIT_MOCK_JSON"] = "edit-mock-json";
+  PlaygroundEventTypes2["FORCE_UPDATE_VIEWER"] = "force-update-viewer";
 })(PlaygroundEventTypes || (PlaygroundEventTypes = {}));
 const Context = reactExports.createContext({});
 Context.displayName = "EventBus";
@@ -795,6 +846,7 @@ const PrimaryBar = (props) => {
   const { fire } = usePlaygroundEventBus();
   const [state, setState] = reactExports.useState({
     editorBadge: false,
+    locator: true,
     zen: false,
     maximized: false,
     group: ((_a = groups[0]) == null ? void 0 : _a.key) ?? ""
@@ -822,6 +874,17 @@ const PrimaryBar = (props) => {
     fire(PlaygroundEventTypes.SWITCH_EDITOR_BADGE, false);
     setState((state2) => ({ ...state2, editorBadge: false }));
   };
+  const onShowLocatorClicked = () => {
+    fire(PlaygroundEventTypes.SWITCH_VIEWER_WRAPPER, { locator: true });
+    setState((state2) => ({ ...state2, locator: true }));
+  };
+  const onHideLocatorClicked = () => {
+    fire(PlaygroundEventTypes.SWITCH_VIEWER_WRAPPER, { locator: false });
+    setState((state2) => ({ ...state2, locator: false }));
+  };
+  const onMockJsonClicked = () => {
+    fire(PlaygroundEventTypes.EDIT_MOCK_JSON);
+  };
   const onMaxClicked = () => {
     fire(PlaygroundEventTypes.MAXIMIZE);
     setState((state2) => ({ ...state2, maximized: true }));
@@ -846,6 +909,8 @@ const PrimaryBar = (props) => {
     }),
     React.createElement(ToolbarSeparator, null),
     state.editorBadge ? React.createElement(ToolbarButton, { icon: PlaygroundIcons.HIDE_EDITOR_BADGE, tooltip: "Hide Editor Badge", click: onHideBadgeClicked }) : React.createElement(ToolbarButton, { icon: PlaygroundIcons.SHOW_EDITOR_BADGE, tooltip: "Show Editor Badge", click: onShowBadgeClicked }),
+    state.locator ? React.createElement(ToolbarButton, { icon: PlaygroundIcons.HIDE_LOCATOR, tooltip: "Hide Widget Locator", click: onHideLocatorClicked }) : React.createElement(ToolbarButton, { icon: PlaygroundIcons.SHOW_LOCATOR, tooltip: "Show Widget Locator", click: onShowLocatorClicked }),
+    React.createElement(ToolbarButton, { icon: PlaygroundIcons.JSON, tooltip: "Mock JSON", click: onMockJsonClicked }),
     React.createElement(ToolbarSeparator, null),
     !state.zen && state.maximized ? React.createElement(ToolbarButton, { icon: PlaygroundIcons.MINIMIZE, tooltip: "Quit Maximization", click: onMinClicked }) : null,
     !state.zen && !state.maximized ? React.createElement(ToolbarButton, { icon: PlaygroundIcons.MAXIMIZE, tooltip: "Maximize", click: onMaxClicked }) : null,
@@ -2098,6 +2163,12 @@ const CommonWidgetAttributes = [
     description: "Position in grid, priority only takes effect in the mobile environment."
   },
   { name: "mpos", label: "Text.", description: 'Alias of "$mpos".' },
+  { name: "renderOn", label: "Text, Snippet.", description: 'Alias of "$renderOn".' },
+  {
+    name: "$renderOn",
+    label: "Text, Snippet.",
+    description: 'Render on specific devices, could be one of "desktop", "mobile", "touchable" "tablet", or connected by "," or ";".'
+  },
   { name: "$disabled", label: "Boolean, Various.", description: "Disablement." },
   { name: "disabled", label: "Boolean, Various.", description: 'Alias of "$disabled".' },
   { name: "$visible", label: "Boolean, Various.", description: "Visibility." },
@@ -2109,7 +2180,12 @@ const CommonWidgetAttributes = [
   { name: "watch", label: "Various.", description: "Monitor other property changes." },
   { name: "repaint", label: "Various.", description: "Monitor other property changes, and repaint myself." },
   { name: "clearMe", label: "Various.", description: "Monitor other property changes, and clear my value." },
-  { name: "label", label: "Various.", description: "Label for form cell." }
+  { name: "label", label: "Various.", description: "Label for form cell." },
+  {
+    name: "style",
+    label: "Text.",
+    description: "CSS style, could be [[[name: value]; name: value]...] or a JSON string."
+  }
 ];
 const getCommonWidgetAttributes = () => {
   return CommonWidgetAttributes;
@@ -3428,7 +3504,7 @@ const beautifyTemplate = (template, prefix, indent) => {
 };
 const WidgetTemplateDialogContainer = qe.div.attrs(({ visible }) => {
   return {
-    [DOM_KEY_WIDGET]: "d9-widget-template-dialog",
+    [DOM_KEY_WIDGET]: "d9-playground-widget-template-dialog",
     style: {
       opacity: visible ? 1 : void 0,
       pointerEvents: visible ? "auto" : void 0
@@ -3727,6 +3803,28 @@ const Editor = (props) => {
     if (state.editor == null) {
       return;
     }
+    const onLocateLine = (lineNumber) => {
+      const editor = state.editor;
+      const line = editor.state.doc.line(lineNumber);
+      const { top, left } = editor.coordsAtPos(line.from);
+      const { top: contentTop, left: contentLeft } = editor.contentDOM.getBoundingClientRect();
+      const scroller = editor.scrollDOM;
+      scroller.scrollTo({
+        top: top - contentTop,
+        left: left - contentLeft,
+        behavior: "smooth"
+      });
+      editor.dispatch({ selection: { anchor: line.from } });
+    };
+    on(PlaygroundEventTypes.LOCATE_LINE, onLocateLine);
+    return () => {
+      off(PlaygroundEventTypes.LOCATE_LINE, onLocateLine);
+    };
+  }, [on, off, state.editor]);
+  reactExports.useEffect(() => {
+    if (state.editor == null) {
+      return;
+    }
     const findDefaultPrefix = (keyOrWidgetType, level) => {
       var _a, _b;
       const group = ((_a = widgets.widgets.find((widget) => widget.$key === keyOrWidgetType)) == null ? void 0 : _a.group) ?? ((_b = widgets.widgets.find((widget) => widget.$wt === keyOrWidgetType)) == null ? void 0 : _b.group);
@@ -3830,6 +3928,32 @@ const HelpWrapper = qe.div.attrs(() => {
 const Help = () => {
   return React.createElement(HelpWrapper, null);
 };
+const PLAYGROUND_WIDGET_WRAPPER = "PWW";
+const WidgetWrapperAnchor = qe.span.attrs({ [DOM_KEY_WIDGET]: "d9-playground-widget-wrapper-anchor" })`
+    display: none;
+`;
+const PlaygroundWidgetWrapper = (props) => {
+  const ref = reactExports.useRef(null);
+  const { on, off } = usePlaygroundEventBus();
+  reactExports.useEffect(() => {
+    const onAskNodeDef = ($key, _widgetType, callback) => {
+      if ($key !== props["data-for-playground-key"]) {
+        return;
+      }
+      callback(props);
+    };
+    on(PlaygroundEventTypes.ASK_NODE_DEF, onAskNodeDef);
+    return () => {
+      off(PlaygroundEventTypes.ASK_NODE_DEF, onAskNodeDef);
+    };
+  }, [on, off, props]);
+  return React.createElement(
+    React.Fragment,
+    null,
+    React.createElement(WidgetWrapperAnchor, { ref }),
+    props.children
+  );
+};
 const ViewerWrapper = qe.div.attrs(({ minViewerWidth }) => {
   return {
     [DOM_KEY_WIDGET]: "d9-playground-viewer",
@@ -3860,7 +3984,65 @@ const ParseError = qe.div.attrs({ [DOM_KEY_WIDGET]: "d9-playground-viewer-error"
     color: ${PlaygroundCssVars.VIEWER_ERROR_COLOR};
     font-size: 1.5em;
     font-style: italic;
-    font-weight: 500p;
+    font-weight: 500;
+`;
+const WidgetWrapper = qe.div.attrs({ [DOM_KEY_WIDGET]: "d9-playground-widget-wrapper" })`
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 0;
+    user-select: none;
+    pointer-events: none;
+    border-radius: ${PlaygroundCssVars.WIDGET_WRAPPER_BORDER_RADIUS};
+    box-shadow: ${PlaygroundCssVars.WIDGET_WRAPPER_SHADOW};
+    transition: top 0.2s, left 0.2s, width 0.2s, height 0.2s;
+    z-index: ${PlaygroundCssVars.WIDGET_WRAPPER_Z_INDEX};
+
+    &[data-view-anchor] + div[data-w=d9-playground-widget-wrapper-toolbar] {
+        opacity: 1;
+        user-select: auto;
+        pointer-events: auto;
+    }
+`;
+const WidgetWrapperToolbar = qe.div.attrs({ [DOM_KEY_WIDGET]: "d9-playground-widget-wrapper-toolbar" })`
+    display: flex;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    border-top-left-radius: ${CssVars.BORDER_RADIUS};
+    border-top-right-radius: ${CssVars.BORDER_RADIUS};
+    opacity: 0;
+    transition: bottom 0.2s, left 0.2s, opacity 0.2s;
+    z-index: ${PlaygroundCssVars.WIDGET_WRAPPER_Z_INDEX + 1};
+    user-select: none;
+    pointer-events: none;
+
+    > button[data-ink=primary] {
+        border: 0;
+        border-radius: calc(${CssVars.BORDER_RADIUS} * 2);
+        width: ${CssVars.INPUT_HEIGHT};
+
+        &:hover, &:focus, &:active {
+            background-color: ${PlaygroundCssVars.WIDGET_WRAPPER_TOOLBAR_COLOR};
+            box-shadow: ${PlaygroundCssVars.WIDGET_WRAPPER_SHADOW};
+
+            > span > svg {
+                color: ${CssVars.INVERT_COLOR};
+            }
+        }
+
+        > span {
+            padding: 0;
+
+            > svg {
+                height: 20px;
+                color: ${PlaygroundCssVars.WIDGET_WRAPPER_TOOLBAR_COLOR};
+                filter: ${PlaygroundCssVars.WIDGET_WRAPPER_TOOLBAR_FILTER};
+            }
+        }
+    }
 `;
 class ErrorBoundary extends React.Component {
   constructor(props) {
@@ -3901,8 +4083,384 @@ const clearExternalDefs = (opts) => {
     });
   }
 };
+const ViewerToolbarButton = (props) => {
+  const { icon, click, ...rest } = props;
+  const onClicked = () => click();
+  return React.createElement(UnwrappedButton, { ink: ButtonInk.PRIMARY, fill: ButtonFill.PLAIN, onClick: onClicked, leads: [`$icons.${icon}`], ...rest });
+};
+const ViewerKernel = (props) => {
+  const { mockData, externalDefs, minViewerWidth, content } = props;
+  const vwRef = reactExports.useRef(null);
+  const wwRef = reactExports.useRef(null);
+  const wwtRef = reactExports.useRef(null);
+  const { replace, clear } = useThrottler();
+  const { on, off, fire } = usePlaygroundEventBus();
+  const forceUpdate = useForceUpdate();
+  const [state, setState] = reactExports.useState({ locator: true });
+  reactExports.useEffect(() => {
+    const onSwitchViewerWrapper = (wrapper) => setState((state2) => ({
+      ...state2,
+      locator: wrapper.locator
+    }));
+    on(PlaygroundEventTypes.SWITCH_VIEWER_WRAPPER, onSwitchViewerWrapper);
+    return () => {
+      off(PlaygroundEventTypes.SWITCH_VIEWER_WRAPPER, onSwitchViewerWrapper);
+    };
+  }, [on, off]);
+  reactExports.useEffect(() => {
+    const onForceUpdateViewer = () => {
+      forceUpdate();
+    };
+    on(PlaygroundEventTypes.FORCE_UPDATE_VIEWER, onForceUpdateViewer);
+    return () => {
+      off(PlaygroundEventTypes.FORCE_UPDATE_VIEWER, onForceUpdateViewer);
+    };
+  }, [on, off, forceUpdate]);
+  try {
+    const { node: def, success, error } = parseDoc(content, { keepMd: true, forPlayground: PLAYGROUND_WIDGET_WRAPPER });
+    if (!success) {
+      throw typeof error === "string" ? new Error(error) : error ?? new Error("Unpredicted parse error occurred.");
+    }
+    const clearLocator = () => {
+      const ww = wwRef.current;
+      ww.style.top = "";
+      ww.style.left = "";
+      ww.style.width = "";
+      ww.style.height = "";
+      ww.style.opacity = "0";
+      ww.removeAttribute("data-view-anchor");
+      clear(false);
+    };
+    const onMouseMove = (event) => {
+      if (!state.locator) {
+        return;
+      }
+      let target = event.target;
+      const forPlayground = target.getAttribute("data-for-playground");
+      if (forPlayground !== "true") {
+        target = target.closest("[data-for-playground]");
+      }
+      if (target != null) {
+        const widgetType = target.getAttribute("data-w");
+        if (widgetType === "d9-page") {
+          clearLocator();
+        } else {
+          const vwRect = vwRef.current.getBoundingClientRect();
+          const vwScrollTop = vwRef.current.scrollTop;
+          const vwScrollLeft = vwRef.current.scrollLeft;
+          const targetRect = target.getBoundingClientRect();
+          const ww = wwRef.current;
+          ww.style.top = `${targetRect.top - vwRect.top + vwScrollTop - 2}px`;
+          ww.style.left = `${targetRect.left - vwRect.left + vwScrollLeft - 4}px`;
+          ww.style.width = `${targetRect.width + 8}px`;
+          ww.style.height = `${targetRect.height + 4}px`;
+          ww.style.opacity = "1";
+          replace(() => ww.setAttribute("data-view-anchor", "true"), 300);
+          const wwt = wwtRef.current;
+          wwt.style.bottom = `${window.innerHeight - targetRect.top}px`;
+          wwt.style.left = `${targetRect.left - 4}px`;
+          const $key = target.getAttribute("data-for-playground-key");
+          if (ww.getAttribute("data-current-for-playground-key") !== $key || ww.getAttribute("data-current-w") !== widgetType) {
+            ww.setAttribute("data-current-for-playground-key", $key);
+            ww.setAttribute("data-current-w", widgetType);
+          }
+        }
+      } else {
+        clearLocator();
+      }
+    };
+    const onMouseLeave = () => {
+      if (!state.locator) {
+        return;
+      }
+      clearLocator();
+    };
+    const onScroll = () => {
+      if (!state.locator) {
+        return;
+      }
+      clearLocator();
+    };
+    const onToolbarMouseMove = (event) => {
+      event.stopPropagation();
+      event.preventDefault();
+    };
+    const onLocateClicked = () => {
+      const ww = wwRef.current;
+      const $key = ww.getAttribute("data-current-for-playground-key");
+      const widgetType = ww.getAttribute("data-current-w");
+      fire(PlaygroundEventTypes.ASK_NODE_DEF, $key, widgetType, (def2) => {
+        const { preparsed } = def2;
+        if (preparsed == null) {
+          return;
+        }
+        const { content: { position: { start: { line } } } } = preparsed;
+        fire(PlaygroundEventTypes.LOCATE_LINE, line);
+      });
+    };
+    const enhancedExternalDefs = {
+      onDetermined: (options) => {
+        clearExternalDefs(options);
+      },
+      ...externalDefs ?? {}
+    };
+    return React.createElement(
+      ViewerWrapper,
+      { minViewerWidth, onMouseMove, onMouseLeave, onScroll, ref: vwRef },
+      state.locator ? React.createElement(
+        React.Fragment,
+        null,
+        React.createElement(WidgetWrapper, { ref: wwRef }),
+        React.createElement(
+          WidgetWrapperToolbar,
+          { onMouseMove: onToolbarMouseMove, ref: wwtRef },
+          React.createElement(ViewerToolbarButton, { icon: PlaygroundIcons.LOCATE, click: onLocateClicked })
+        )
+      ) : null,
+      React.createElement(
+        ErrorBoundary,
+        { content },
+        React.createElement(StandaloneRoot, { ...def, "$root": mockData, externalDefs: enhancedExternalDefs })
+      )
+    );
+  } catch (error) {
+    return React.createElement(
+      ViewerWrapper,
+      { minViewerWidth },
+      React.createElement(ParseError, null, error.message || "Parse error occurred.")
+    );
+  }
+};
+const MockJsonDialogContainer = qe.div.attrs(({ visible }) => {
+  return {
+    [DOM_KEY_WIDGET]: "d9-playground-mock-json-dialog",
+    style: {
+      opacity: visible ? 1 : void 0,
+      pointerEvents: visible ? "auto" : void 0
+    }
+  };
+})`
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: transparent;
+    opacity: 0;
+    pointer-events: none;
+    transition: all ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION};
+    z-index: ${CssVars.DIALOG_Z_INDEX};
+`;
+const MockJsonDialogWrapper = qe.div.attrs(({ visible }) => {
+  return {
+    [DOM_KEY_WIDGET]: "d9-playground-mock-json-dialog-wrapper",
+    style: {
+      transform: visible ? "none" : void 0
+    }
+  };
+})`
+    display: flex;
+    flex-direction: column;
+    width: ${PlaygroundCssVars.TEMPLATE_DIALOG_WIDTH};
+    margin-top: ${PlaygroundCssVars.TEMPLATE_DIALOG_MARGIN_TOP};
+    margin-left: ${PlaygroundCssVars.TEMPLATE_DIALOG_MARGIN_LEFT};
+    padding: ${PlaygroundCssVars.TEMPLATE_DIALOG_PADDING};
+    background-color: ${CssVars.BACKGROUND_COLOR};
+    border-radius: ${CssVars.BORDER_RADIUS};
+    box-shadow: ${CssVars.DIALOG_SHADOW};
+    transform: scale(0.75);
+    transition: all ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION};
+`;
+const MockJsonDialogBody = qe.div.attrs({ [DOM_KEY_WIDGET]: "d9-playground-mock-json-dialog-body" })`
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    flex-grow: 1;
+    height: ${PlaygroundCssVars.TEMPLATE_DIALOG_HEIGHT};
+    margin-bottom: ${PlaygroundCssVars.TEMPLATE_DIALOG_BODY_MARGIN_BOTTOM};
+    font-family: ${CssVars.FONT_FAMILY};
+    font-size: ${CssVars.FONT_SIZE};
+    color: ${CssVars.CAPTION_FONT_COLOR};
+`;
+const MockJsonViewerWrapper = qe.div.attrs({ [DOM_KEY_WIDGET]: "d9-playground-mock-json-viewer-wrapper" })`
+    display: grid;
+    position: relative;
+    align-self: stretch;
+    flex-grow: 1;
+    grid-template-columns: 1fr;
+    border: ${CssVars.BORDER};
+    border-radius: ${CssVars.BORDER_RADIUS};
+    overflow: hidden;
+`;
+const MockJsonViewer = qe.div.attrs({ [DOM_KEY_WIDGET]: "d9-playground-mock-json-viewer" })`
+    display: block;
+    position: relative;
+    width: 100%;
+    align-self: stretch;
+    overflow: hidden;
+
+    > div.cm-editor {
+        height: 100%;
+    }
+`;
+const MockJsonReason = qe.div.attrs({ [DOM_KEY_WIDGET]: "d9-playground-mock-json-dialog-reason" })`
+    display: flex;
+    position: relative;
+    align-items: center;
+    font-size: 1.1em;
+    font-style: italic;
+    color: ${CssVars.DANGER_COLOR};
+
+    &:not(:empty) {
+        margin-top: 16px;
+    }
+`;
+const MockJsonDialogFooter = qe.div.attrs({ [DOM_KEY_WIDGET]: "d9-playground-mock-json-dialog-footer" })`
+    display: flex;
+    justify-content: flex-end;
+
+    > button:not(:last-child) {
+        margin-right: 8px;
+    }
+`;
+const MockJsonDialog = (props) => {
+  const { mockData } = props;
+  const ref = reactExports.useRef(null);
+  const { on, off, fire } = usePlaygroundEventBus();
+  const [state, setState] = reactExports.useState({ visible: false, copied: false });
+  reactExports.useEffect(() => {
+    if (ref.current == null) {
+      return;
+    }
+    const editor = new EditorView({
+      state: EditorState.create({
+        doc: "",
+        extensions: [
+          basicSetup,
+          keymap.of([indentWithTab]),
+          json(),
+          lintGutter(),
+          linter(jsonParseLinter())
+        ]
+      }),
+      parent: ref.current
+    });
+    setState((state2) => ({ ...state2, editor }));
+    return () => {
+      editor.destroy();
+    };
+  }, []);
+  reactExports.useEffect(() => {
+    const show = () => {
+      if (state.visible || state.editor == null) {
+        return;
+      }
+      const padding = window.innerWidth - document.body.clientWidth;
+      if (padding > 0) {
+        document.body.style.paddingRight = `${padding}px`;
+      }
+      document.body.style.overflowY = "hidden";
+      const doc = state.editor.state.doc;
+      const json2 = JSON.stringify(mockData, null, "  ");
+      state.editor.dispatch({ changes: { from: 0, to: doc.length, insert: json2 } });
+      setState((state2) => ({ ...state2, visible: true, copied: false, reason: void 0 }));
+    };
+    on(PlaygroundEventTypes.EDIT_MOCK_JSON, show);
+    return () => {
+      off(PlaygroundEventTypes.EDIT_MOCK_JSON, show);
+    };
+  }, [on, off, state.visible, state.editor, mockData]);
+  reactExports.useEffect(() => {
+    if (state.copied) {
+      setTimeout(() => {
+        setState((state2) => ({ ...state2, copied: false }));
+      }, 5e3);
+    }
+  }, [state.copied]);
+  const onCopyToClipboard = async () => {
+    const json2 = state.editor.state.doc.toString();
+    await navigator.clipboard.writeText(json2);
+    setState((state2) => ({ ...state2, copied: true }));
+  };
+  const onDownload = () => {
+    const json2 = state.editor.state.doc.toString();
+    const blob = new Blob([json2], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
+    const a2 = document.createElement("a");
+    a2.href = url;
+    a2.download = "mock-data.json";
+    a2.click();
+    URL.revokeObjectURL(url);
+  };
+  const onConfirm = () => {
+    const json2 = state.editor.state.doc.toString();
+    try {
+      const parsed = JSON.parse(json2);
+      Object.keys(mockData).forEach((key) => delete mockData[key]);
+      Object.keys(parsed).forEach((key) => mockData[key] = parsed[key]);
+      fire(PlaygroundEventTypes.FORCE_UPDATE_VIEWER);
+      onHide();
+    } catch {
+      setState((state2) => ({
+        ...state2,
+        reason: React.createElement(IntlLabel, { keys: ["playground", "mock", "json", "invalid"], value: "The JSON format is incorrect. Please check and modify before confirming." })
+      }));
+    }
+  };
+  const onHide = () => {
+    document.body.style.paddingRight = "";
+    document.body.style.overflowY = "";
+    setState((state2) => ({ ...state2, visible: false, reason: void 0 }));
+  };
+  return React.createElement(
+    MockJsonDialogContainer,
+    { visible: state.visible },
+    React.createElement(
+      MockJsonDialogWrapper,
+      { visible: state.visible },
+      React.createElement(
+        MockJsonDialogBody,
+        null,
+        React.createElement(
+          MockJsonViewerWrapper,
+          null,
+          React.createElement(MockJsonViewer, { ref })
+        ),
+        React.createElement(MockJsonReason, null, toIntlLabel(state.reason))
+      ),
+      React.createElement(
+        MockJsonDialogFooter,
+        null,
+        state.copied ? React.createElement(
+          UnwrappedButton,
+          { ink: ButtonInk.SUCCESS, onClick: onCopyToClipboard },
+          React.createElement(IntlLabel, { keys: ["playground", "mock", "json", "clipboard", "copied"], value: "Copied!" })
+        ) : React.createElement(
+          UnwrappedButton,
+          { ink: ButtonInk.PRIMARY, onClick: onCopyToClipboard },
+          React.createElement(IntlLabel, { keys: ["playground", "mock", "json", "clipboard"], value: "Copy to Clipboard" })
+        ),
+        React.createElement(
+          UnwrappedButton,
+          { ink: ButtonInk.PRIMARY, onClick: onDownload },
+          React.createElement(IntlLabel, { keys: ["playground", "mock", "json", "download"], value: "Download as File" })
+        ),
+        React.createElement(
+          UnwrappedButton,
+          { ink: ButtonInk.PRIMARY, onClick: onConfirm },
+          React.createElement(IntlLabel, { keys: ["playground", "mock", "json", "confirm"], value: "Confirm and Refresh" })
+        ),
+        React.createElement(
+          UnwrappedButton,
+          { ink: ButtonInk.WAIVE, onClick: onHide },
+          React.createElement(IntlLabel, { keys: ["playground", "mock", "json", "cancel"], value: "Cancel" })
+        )
+      )
+    )
+  );
+};
 const Viewer = (props) => {
-  const { mockData, externalDefs, minViewerWidth } = props;
+  const { minViewerWidth, mockData } = props;
   const { on, off } = usePlaygroundEventBus();
   const { replace } = useThrottler();
   const [content, setContent] = reactExports.useState("");
@@ -3919,36 +4477,16 @@ const Viewer = (props) => {
     return React.createElement(
       ViewerWrapper,
       { minViewerWidth },
+      React.createElement(MockJsonDialog, { mockData }),
       React.createElement(ParseError, null, "No configuration.")
     );
   }
-  try {
-    const { node: def, success, error } = parseDoc(content);
-    if (!success) {
-      throw typeof error === "string" ? new Error(error) : error ?? new Error("Unpredicted parse error occurred.");
-    }
-    const enhancedExternalDefs = {
-      onDetermined: (options) => {
-        clearExternalDefs(options);
-      },
-      ...externalDefs ?? {}
-    };
-    return React.createElement(
-      ViewerWrapper,
-      { minViewerWidth },
-      React.createElement(
-        ErrorBoundary,
-        { content },
-        React.createElement(StandaloneRoot, { ...def, "$root": mockData, externalDefs: enhancedExternalDefs })
-      )
-    );
-  } catch (error) {
-    return React.createElement(
-      ViewerWrapper,
-      { minViewerWidth },
-      React.createElement(ParseError, null, error.message || "Parse error occurred.")
-    );
-  }
+  return React.createElement(
+    React.Fragment,
+    null,
+    React.createElement(MockJsonDialog, { mockData }),
+    React.createElement(ViewerKernel, { ...props, content })
+  );
 };
 const PlaygroundBridge = (props) => {
   const { content, onContentChanged } = props;
@@ -4235,6 +4773,7 @@ class AbstractPlaygroundTranslator extends index$1.SpecificWidgetTranslator {
 const registerPlayground = (widgetHelper, widgetType) => {
   widgetType = VUtils.isBlank(widgetType) ? "Playground" : widgetType;
   registerWidget({ key: widgetType, JSX: Playground, container: false, array: false });
+  registerWidget({ key: PLAYGROUND_WIDGET_WRAPPER, JSX: PlaygroundWidgetWrapper, container: false, array: false });
   const TranslatorClass = class extends AbstractPlaygroundTranslator {
     getSupportedType() {
       return widgetType;
@@ -4243,7 +4782,7 @@ const registerPlayground = (widgetHelper, widgetType) => {
   const repo = widgetHelper.repository;
   repo.register(new TranslatorClass(repo));
 };
-var define_process_env_default = { GITHUB_STATE: "/home/runner/work/_temp/_runner_file_commands/save_state_b7d84844-8e32-4a92-946b-f3f58739a3f5", npm_package_scripts_build_n5_ci: "cd ./d9-n5 && yarn build-ci", npm_package_scripts_build_sample_cra: "cd ./d9-sample-cra && yarn build", STATS_TRP: "true", DEPLOYMENT_BASEPATH: "/opt/runner", DOTNET_NOLOGO: "1", npm_package_dependencies__vitejs_plugin_react: "^4.2.1", USER: "runner", npm_config_version_commit_hooks: "true", npm_config_user_agent: "yarn/1.22.21 npm/? node/v18.19.1 linux x64", npm_package_dependencies__types_jest: "^29.5.4", CI: "true", npm_config_bin_links: "true", npm_package_bugs_url: "https://github.com/InsureMO/rainbow-d9/issues", npm_config_wrap_output: "", RUNNER_ENVIRONMENT: "github-hosted", GITHUB_ENV: "/home/runner/work/_temp/_runner_file_commands/set_env_b7d84844-8e32-4a92-946b-f3f58739a3f5", PIPX_HOME: "/opt/pipx", npm_node_execpath: "/opt/hostedtoolcache/node/18.19.1/x64/bin/node", npm_package_scripts_build_thai_all_ci: "yarn build-thai-plan-selection-ci", npm_config_init_version: "1.0.0", npm_package_devDependencies_gh_pages: "^6.1.1", npm_package_dependencies__babel_plugin_proposal_private_property_in_object: "^7.21.11", JAVA_HOME_8_X64: "/usr/lib/jvm/temurin-8-jdk-amd64", SHLVL: "1", HOME: "/home/runner", OLDPWD: "/home/runner/work/rainbow-d9/rainbow-d9", npm_package_browserslist_production_0: ">0.2%", RUNNER_TEMP: "/home/runner/work/_temp", GITHUB_EVENT_PATH: "/home/runner/work/_temp/_github_workflow/event.json", npm_package_scripts_build_all: "yarn build-n123 && yarn build-n5 && yarn build-echarts && yarn build-thai-all", npm_package_browserslist_production_1: "not dead", npm_package_dependencies_react_syntax_highlighter: "^15.5.0", JAVA_HOME_11_X64: "/usr/lib/jvm/temurin-11-jdk-amd64", PIPX_BIN_DIR: "/opt/pipx_bin", GITHUB_REPOSITORY_OWNER: "InsureMO", npm_package_volta_node: "18.19.0", npm_config_init_license: "MIT", npm_package_browserslist_production_2: "not op_mini all", GRADLE_HOME: "/usr/share/gradle-8.6", ANDROID_NDK_LATEST_HOME: "/usr/local/lib/android/sdk/ndk/26.2.11394342", JAVA_HOME_21_X64: "/usr/lib/jvm/temurin-21-jdk-amd64", STATS_RDCL: "true", GITHUB_RETENTION_DAYS: "90", YARN_WRAP_OUTPUT: "false", npm_package_scripts_build_thai_plan_selection_ci: "cd ./d9-thai-plan-selection && yarn build-ci", npm_package_scripts_build_n1: "cd ./d9-n1 && yarn build", npm_config_version_tag_prefix: "v", npm_package_dependencies__rainbow_d9_n2: "1.1.2", GITHUB_REPOSITORY_OWNER_ID: "38915232", POWERSHELL_DISTRIBUTION_CHANNEL: "GitHub-Actions-ubuntu22", AZURE_EXTENSION_DIR: "/opt/az/azcliextensions", GITHUB_HEAD_REF: "", npm_package_scripts_build_n2: "cd ./d9-n2 && yarn build", npm_package_dependencies__types_styled_components: "^5.1.34", npm_package_dependencies__rainbow_d9_n3: "1.1.2", npm_package_dependencies__rainbow_d9_echarts: "1.1.2", SYSTEMD_EXEC_PID: "598", npm_package_scripts_build_echarts: "cd ./d9-echarts && yarn build", npm_package_scripts_build_n3: "cd ./d9-n3 && yarn build", GITHUB_GRAPHQL_URL: "https://api.github.com/graphql", npm_package_description: "Assume the following envs are ready, otherwise contact the tech guy.", npm_package_scripts_predeploy: "npm run build", npm_package_dependencies__rainbow_d9_n5: "1.1.2", GOROOT_1_20_X64: "/opt/hostedtoolcache/go/1.20.14/x64", NVM_DIR: "/home/runner/.nvm", npm_package_readmeFilename: "README.md", npm_package_scripts_build_n5: "cd ./d9-n5 && yarn build", npm_package_dependencies__types_react: "^18.2.21", npm_package_dependencies__testing_library_react: "^13.4.0", DOTNET_SKIP_FIRST_TIME_EXPERIENCE: "1", GOROOT_1_21_X64: "/opt/hostedtoolcache/go/1.21.8/x64", JAVA_HOME_17_X64: "/usr/lib/jvm/temurin-17-jdk-amd64", ImageVersion: "20240317.1.0", RUNNER_OS: "Linux", GITHUB_API_URL: "https://api.github.com", GOROOT_1_22_X64: "/opt/hostedtoolcache/go/1.22.1/x64", SWIFT_PATH: "/usr/share/swift/usr/bin", RUNNER_USER: "runner", STATS_V3PS: "true", CHROMEWEBDRIVER: "/usr/local/share/chromedriver-linux64", JOURNAL_STREAM: "8:18903", GITHUB_WORKFLOW: "Publish to NPM", _: "/opt/hostedtoolcache/node/18.19.1/x64/bin/yarn", npm_package_private: "true", npm_package_dependencies_remark_gfm: "3.0.1", npm_package_scripts_build_thai_all: "yarn build-thai-plan-selection", npm_config_registry: "https://registry.yarnpkg.com", ACTIONS_RUNNER_ACTION_ARCHIVE_CACHE: "/opt/actionarchivecache", STATS_D: "false", GITHUB_RUN_ID: "8435726605", npm_package_workspaces_0: "d9-n1", GITHUB_REF_TYPE: "tag", BOOTSTRAP_HASKELL_NONINTERACTIVE: "1", GITHUB_WORKFLOW_SHA: "a8f3cecdc5b1391f21b842645bdcca0d11580430", GITHUB_BASE_REF: "", ImageOS: "ubuntu22", npm_package_scripts_build_n123_ci: "yarn build-n1-ci && yarn build-n2-ci && yarn build-n3-ci", npm_package_workspaces_1: "d9-n2", npm_config_ignore_scripts: "", npm_package_scripts_start: "vite", npm_package_dependencies_github_markdown_css: "^5.5.0", GITHUB_WORKFLOW_REF: "InsureMO/rainbow-d9/.github/workflows/release.yml@refs/tags/r-1.1.3", PERFLOG_LOCATION_SETTING: "RUNNER_PERFLOG", GITHUB_ACTION_REPOSITORY: "", npm_package_workspaces_2: "d9-n3", npm_package_browserslist_development_0: "last 1 chrome version", PATH: "/tmp/yarn--1711455533582-0.2843809418518233:/home/runner/work/rainbow-d9/rainbow-d9/d9-sample-cra/node_modules/.bin:/home/runner/.config/yarn/link/node_modules/.bin:/home/runner/work/rainbow-d9/rainbow-d9/node_modules/.bin:/opt/hostedtoolcache/node/18.19.1/x64/libexec/lib/node_modules/npm/bin/node-gyp-bin:/opt/hostedtoolcache/node/18.19.1/x64/lib/node_modules/npm/bin/node-gyp-bin:/opt/hostedtoolcache/node/18.19.1/x64/bin/node_modules/npm/bin/node-gyp-bin:/tmp/yarn--1711455533395-0.7375373370589173:/home/runner/work/rainbow-d9/rainbow-d9/node_modules/.bin:/home/runner/.config/yarn/link/node_modules/.bin:/home/runner/work/rainbow-d9/rainbow-d9/node_modules/.bin:/opt/hostedtoolcache/node/18.19.1/x64/libexec/lib/node_modules/npm/bin/node-gyp-bin:/opt/hostedtoolcache/node/18.19.1/x64/lib/node_modules/npm/bin/node-gyp-bin:/opt/hostedtoolcache/node/18.19.1/x64/bin/node_modules/npm/bin/node-gyp-bin:/opt/hostedtoolcache/node/18.19.1/x64/bin:/snap/bin:/home/runner/.local/bin:/opt/pipx_bin:/home/runner/.cargo/bin:/home/runner/.config/composer/vendor/bin:/usr/local/.ghcup/bin:/home/runner/.dotnet/tools:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin", NODE: "/opt/hostedtoolcache/node/18.19.1/x64/bin/node", ANT_HOME: "/usr/share/ant", DOTNET_MULTILEVEL_LOOKUP: "0", RUNNER_TRACKING_ID: "github_c949936c-19b6-4274-a24d-081725852a8a", INVOCATION_ID: "4beb47074328405e9731c41a0c85c455", RUNNER_TOOL_CACHE: "/opt/hostedtoolcache", npm_package_name: "@rainbow-d9/sample-cra", npm_package_workspaces_3: "d9-n5", npm_package_browserslist_development_1: "last 1 firefox version", npm_package_repository_type: "git", npm_package_dependencies__types_react_syntax_highlighter: "^15.5.11", npm_package_dependencies__rainbow_d9_thai_plan_selection: "1.1.2", GITHUB_ACTION: "__run_5", GITHUB_RUN_NUMBER: "85", GITHUB_TRIGGERING_ACTOR: "bradwoo8621", RUNNER_ARCH: "X64", XDG_RUNTIME_DIR: "/run/user/1001", AGENT_TOOLSDIRECTORY: "/opt/hostedtoolcache", npm_package_scripts_build_thai_plan_selection: "cd ./d9-thai-plan-selection && yarn build", npm_package_workspaces_4: "d9-echarts", npm_package_browserslist_development_2: "last 1 safari version", npm_package_workspaces_5: "d9-thai-plan-selection", LANG: "C.UTF-8", VCPKG_INSTALLATION_ROOT: "/usr/local/share/vcpkg", npm_package_workspaces_6: "d9-sample-cra", npm_package_dependencies_react_dom: "^18.2.0", CONDA: "/usr/share/miniconda", RUNNER_NAME: "GitHub Actions 8", XDG_CONFIG_HOME: "/home/runner/.config", STATS_VMD: "true", GITHUB_REF_NAME: "r-1.1.3", GITHUB_REPOSITORY: "InsureMO/rainbow-d9", npm_lifecycle_script: "vite build", npm_package_eslintConfig_extends_0: "react-app", npm_package_dependencies_vite_plugin_markdown: "^2.2.0", npm_package_dependencies_react_markdown: "8.0.7", npm_package_dependencies__types_node: "^20.5.3", STATS_UE: "true", ANDROID_NDK_ROOT: "/usr/local/lib/android/sdk/ndk/25.2.9519653", GITHUB_ACTION_REF: "", DEBIAN_FRONTEND: "noninteractive", npm_package_scripts_build_sample_cra_ci: "cd ./d9-sample-cra && yarn build", npm_config_version_git_message: "v%s", npm_package_eslintConfig_extends_1: "react-app/jest", GITHUB_REPOSITORY_ID: "704514093", GITHUB_ACTIONS: "true", npm_lifecycle_event: "build", npm_package_version: "1.1.2", npm_package_repository_url: "git+https://github.com/InsureMO/rainbow-d9.git", npm_package_dependencies__testing_library_jest_dom: "^5.17.0", GITHUB_REF_PROTECTED: "false", npm_config_argv: '{"remain":[],"cooked":["run","build-sample-cra"],"original":["build-sample-cra"]}', npm_package_volta_yarn: "1.22.21", npm_package_scripts_build: "vite build", npm_package_dependencies__testing_library_user_event: "^13.5.0", GITHUB_WORKSPACE: "/home/runner/work/rainbow-d9/rainbow-d9", ACCEPT_EULA: "Y", GITHUB_JOB: "create-sample-pages", RUNNER_PERFLOG: "/home/runner/perflog", npm_package_dependencies_vite: "^5.0.12", GITHUB_SHA: "a8f3cecdc5b1391f21b842645bdcca0d11580430", GITHUB_RUN_ATTEMPT: "1", npm_config_version_git_tag: "true", npm_config_version_git_sign: "", GITHUB_REF: "refs/tags/r-1.1.3", GITHUB_ACTOR: "bradwoo8621", ANDROID_SDK_ROOT: "/usr/local/lib/android/sdk", npm_package_license: "MIT", npm_config_strict_ssl: "true", LEIN_HOME: "/usr/local/lib/lein", npm_package_scripts_build_n123: "yarn build-n1 && yarn build-n2 && yarn build-n3", GITHUB_PATH: "/home/runner/work/_temp/_runner_file_commands/add_path_b7d84844-8e32-4a92-946b-f3f58739a3f5", JAVA_HOME: "/usr/lib/jvm/temurin-11-jdk-amd64", PWD: "/home/runner/work/rainbow-d9/rainbow-d9/d9-sample-cra", GITHUB_ACTOR_ID: "2330098", RUNNER_WORKSPACE: "/home/runner/work/rainbow-d9", npm_execpath: "/opt/hostedtoolcache/node/18.19.1/x64/lib/node_modules/yarn/bin/yarn.js", npm_package_scripts_build_all_ci: "yarn build-n123-ci && yarn build-n5-ci && yarn build-echarts-ci && yarn build-thai-all-ci", HOMEBREW_CLEANUP_PERIODIC_FULL_DAYS: "3650", GITHUB_EVENT_NAME: "push", HOMEBREW_NO_AUTO_UPDATE: "1", ANDROID_HOME: "/usr/local/lib/android/sdk", GITHUB_SERVER_URL: "https://github.com", GECKOWEBDRIVER: "/usr/local/share/gecko_driver", LEIN_JAR: "/usr/local/lib/lein/self-installs/leiningen-2.11.2-standalone.jar", GHCUP_INSTALL_BASE_PREFIX: "/usr/local", GITHUB_OUTPUT: "/home/runner/work/_temp/_runner_file_commands/set_output_b7d84844-8e32-4a92-946b-f3f58739a3f5", npm_package_author_name: "Rainbow Team", EDGEWEBDRIVER: "/usr/local/share/edge_driver", STATS_EXT: "true", npm_package_scripts_build_n1_ci: "cd ./d9-n1 && yarn build-ci", npm_config_save_prefix: "^", npm_config_ignore_optional: "", ANDROID_NDK: "/usr/local/lib/android/sdk/ndk/25.2.9519653", SGX_AESM_ADDR: "1", CHROME_BIN: "/usr/bin/google-chrome", npm_package_scripts_build_n2_ci: "cd ./d9-n2 && yarn build-ci", npm_package_scripts_deploy: "gh-pages -d build", npm_package_scripts_preview: "vite preview", SELENIUM_JAR_PATH: "/usr/share/java/selenium-server.jar", STATS_EXTP: "https://provjobdsettingscdn.blob.core.windows.net/settings/provjobdsettings-0.5.154/provjobd.data", npm_package_scripts_build_echarts_ci: "cd ./d9-echarts && yarn build-ci", npm_package_scripts_build_n3_ci: "cd ./d9-n3 && yarn build-ci", npm_package_dependencies_web_vitals: "^2.1.4", npm_package_dependencies_typescript: "^5.1.6", INIT_CWD: "/home/runner/work/rainbow-d9/rainbow-d9", ANDROID_NDK_HOME: "/usr/local/lib/android/sdk/ndk/25.2.9519653", GITHUB_STEP_SUMMARY: "/home/runner/work/_temp/_runner_file_commands/step_summary_b7d84844-8e32-4a92-946b-f3f58739a3f5", npm_package_dependencies_react: "^18.2.0", npm_package_dependencies__types_react_dom: "^18.2.7", NODE_ENV: "production" };
+var define_process_env_default = { GITHUB_STATE: "/home/runner/work/_temp/_runner_file_commands/save_state_30cd29b8-1b4d-434b-a396-5ee027723d5d", npm_package_scripts_build_n5_ci: "cd ./d9-n5 && yarn build-ci", npm_package_scripts_build_sample_cra: "cd ./d9-sample-cra && yarn build", STATS_TRP: "true", DEPLOYMENT_BASEPATH: "/opt/runner", DOTNET_NOLOGO: "1", npm_package_dependencies__vitejs_plugin_react: "^4.2.1", USER: "runner", npm_config_version_commit_hooks: "true", npm_config_user_agent: "yarn/1.22.21 npm/? node/v18.19.1 linux x64", npm_package_dependencies__types_jest: "^29.5.4", CI: "true", npm_config_bin_links: "true", npm_package_bugs_url: "https://github.com/InsureMO/rainbow-d9/issues", npm_config_wrap_output: "", RUNNER_ENVIRONMENT: "github-hosted", GITHUB_ENV: "/home/runner/work/_temp/_runner_file_commands/set_env_30cd29b8-1b4d-434b-a396-5ee027723d5d", PIPX_HOME: "/opt/pipx", npm_node_execpath: "/opt/hostedtoolcache/node/18.19.1/x64/bin/node", npm_package_scripts_build_thai_all_ci: "yarn build-thai-plan-selection-ci", npm_config_init_version: "1.0.0", npm_package_devDependencies_gh_pages: "^6.1.1", npm_package_dependencies__babel_plugin_proposal_private_property_in_object: "^7.21.11", JAVA_HOME_8_X64: "/usr/lib/jvm/temurin-8-jdk-amd64", SHLVL: "1", HOME: "/home/runner", OLDPWD: "/home/runner/work/rainbow-d9/rainbow-d9", npm_package_browserslist_production_0: ">0.2%", RUNNER_TEMP: "/home/runner/work/_temp", GITHUB_EVENT_PATH: "/home/runner/work/_temp/_github_workflow/event.json", npm_package_scripts_build_all: "yarn build-n123 && yarn build-n5 && yarn build-echarts && yarn build-thai-all", npm_package_browserslist_production_1: "not dead", npm_package_dependencies_react_syntax_highlighter: "^15.5.0", JAVA_HOME_11_X64: "/usr/lib/jvm/temurin-11-jdk-amd64", PIPX_BIN_DIR: "/opt/pipx_bin", GITHUB_REPOSITORY_OWNER: "InsureMO", npm_package_volta_node: "18.19.0", npm_config_init_license: "MIT", npm_package_browserslist_production_2: "not op_mini all", GRADLE_HOME: "/usr/share/gradle-8.7", ANDROID_NDK_LATEST_HOME: "/usr/local/lib/android/sdk/ndk/26.2.11394342", JAVA_HOME_21_X64: "/usr/lib/jvm/temurin-21-jdk-amd64", STATS_RDCL: "true", GITHUB_RETENTION_DAYS: "90", YARN_WRAP_OUTPUT: "false", npm_package_scripts_build_thai_plan_selection_ci: "cd ./d9-thai-plan-selection && yarn build-ci", npm_package_scripts_build_n1: "cd ./d9-n1 && yarn build", npm_config_version_tag_prefix: "v", npm_package_dependencies__rainbow_d9_n2: "1.1.3", GITHUB_REPOSITORY_OWNER_ID: "38915232", POWERSHELL_DISTRIBUTION_CHANNEL: "GitHub-Actions-ubuntu22", AZURE_EXTENSION_DIR: "/opt/az/azcliextensions", GITHUB_HEAD_REF: "", npm_package_scripts_build_n2: "cd ./d9-n2 && yarn build", npm_package_dependencies__types_styled_components: "^5.1.34", npm_package_dependencies__rainbow_d9_n3: "1.1.3", npm_package_dependencies__rainbow_d9_echarts: "1.1.3", SYSTEMD_EXEC_PID: "600", npm_package_scripts_build_echarts: "cd ./d9-echarts && yarn build", npm_package_scripts_build_n3: "cd ./d9-n3 && yarn build", GITHUB_GRAPHQL_URL: "https://api.github.com/graphql", npm_package_description: "Assume the following envs are ready, otherwise contact the tech guy.", npm_package_scripts_predeploy: "npm run build", npm_package_dependencies__rainbow_d9_n5: "1.1.3", GOROOT_1_20_X64: "/opt/hostedtoolcache/go/1.20.14/x64", NVM_DIR: "/home/runner/.nvm", npm_package_readmeFilename: "README.md", npm_package_scripts_build_n5: "cd ./d9-n5 && yarn build", npm_package_dependencies__types_react: "^18.2.21", npm_package_dependencies__testing_library_react: "^13.4.0", DOTNET_SKIP_FIRST_TIME_EXPERIENCE: "1", GOROOT_1_21_X64: "/opt/hostedtoolcache/go/1.21.8/x64", JAVA_HOME_17_X64: "/usr/lib/jvm/temurin-17-jdk-amd64", ImageVersion: "20240324.2.0", RUNNER_OS: "Linux", GITHUB_API_URL: "https://api.github.com", GOROOT_1_22_X64: "/opt/hostedtoolcache/go/1.22.1/x64", SWIFT_PATH: "/usr/share/swift/usr/bin", RUNNER_USER: "runner", STATS_V3PS: "true", CHROMEWEBDRIVER: "/usr/local/share/chromedriver-linux64", JOURNAL_STREAM: "8:19539", GITHUB_WORKFLOW: "Publish to NPM", _: "/opt/hostedtoolcache/node/18.19.1/x64/bin/yarn", npm_package_private: "true", npm_package_dependencies_remark_gfm: "3.0.1", npm_package_scripts_build_thai_all: "yarn build-thai-plan-selection", npm_config_registry: "https://registry.yarnpkg.com", ACTIONS_RUNNER_ACTION_ARCHIVE_CACHE: "/opt/actionarchivecache", STATS_D: "true", GITHUB_RUN_ID: "8479024586", npm_package_workspaces_0: "d9-n1", GITHUB_REF_TYPE: "tag", BOOTSTRAP_HASKELL_NONINTERACTIVE: "1", GITHUB_WORKFLOW_SHA: "15df72468bf861199b40d4e456f8a012933a271e", GITHUB_BASE_REF: "", ImageOS: "ubuntu22", npm_package_scripts_build_n123_ci: "yarn build-n1-ci && yarn build-n2-ci && yarn build-n3-ci", npm_package_workspaces_1: "d9-n2", npm_config_ignore_scripts: "", npm_package_scripts_start: "vite", npm_package_dependencies_github_markdown_css: "^5.5.0", STATS_BLT: "true", GITHUB_WORKFLOW_REF: "InsureMO/rainbow-d9/.github/workflows/release.yml@refs/tags/r-1.1.4", PERFLOG_LOCATION_SETTING: "RUNNER_PERFLOG", GITHUB_ACTION_REPOSITORY: "", npm_package_workspaces_2: "d9-n3", npm_package_browserslist_development_0: "last 1 chrome version", PATH: "/tmp/yarn--1711701774251-0.7791926327648595:/home/runner/work/rainbow-d9/rainbow-d9/d9-sample-cra/node_modules/.bin:/home/runner/.config/yarn/link/node_modules/.bin:/home/runner/work/rainbow-d9/rainbow-d9/node_modules/.bin:/opt/hostedtoolcache/node/18.19.1/x64/libexec/lib/node_modules/npm/bin/node-gyp-bin:/opt/hostedtoolcache/node/18.19.1/x64/lib/node_modules/npm/bin/node-gyp-bin:/opt/hostedtoolcache/node/18.19.1/x64/bin/node_modules/npm/bin/node-gyp-bin:/tmp/yarn--1711701774059-0.9896102064127354:/home/runner/work/rainbow-d9/rainbow-d9/node_modules/.bin:/home/runner/.config/yarn/link/node_modules/.bin:/home/runner/work/rainbow-d9/rainbow-d9/node_modules/.bin:/opt/hostedtoolcache/node/18.19.1/x64/libexec/lib/node_modules/npm/bin/node-gyp-bin:/opt/hostedtoolcache/node/18.19.1/x64/lib/node_modules/npm/bin/node-gyp-bin:/opt/hostedtoolcache/node/18.19.1/x64/bin/node_modules/npm/bin/node-gyp-bin:/opt/hostedtoolcache/node/18.19.1/x64/bin:/snap/bin:/home/runner/.local/bin:/opt/pipx_bin:/home/runner/.cargo/bin:/home/runner/.config/composer/vendor/bin:/usr/local/.ghcup/bin:/home/runner/.dotnet/tools:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin", NODE: "/opt/hostedtoolcache/node/18.19.1/x64/bin/node", ANT_HOME: "/usr/share/ant", DOTNET_MULTILEVEL_LOOKUP: "0", RUNNER_TRACKING_ID: "github_52a328c7-f266-4383-929f-167ff09d7c3b", INVOCATION_ID: "9cd00552437c47589fc4cf593b1c4c14", RUNNER_TOOL_CACHE: "/opt/hostedtoolcache", npm_package_name: "@rainbow-d9/sample-cra", npm_package_workspaces_3: "d9-n5", npm_package_browserslist_development_1: "last 1 firefox version", npm_package_repository_type: "git", npm_package_dependencies__types_react_syntax_highlighter: "^15.5.11", npm_package_dependencies__rainbow_d9_thai_plan_selection: "1.1.3", GITHUB_ACTION: "__run_5", GITHUB_RUN_NUMBER: "86", GITHUB_TRIGGERING_ACTOR: "bradwoo8621", RUNNER_ARCH: "X64", XDG_RUNTIME_DIR: "/run/user/1001", AGENT_TOOLSDIRECTORY: "/opt/hostedtoolcache", npm_package_scripts_build_thai_plan_selection: "cd ./d9-thai-plan-selection && yarn build", npm_package_workspaces_4: "d9-echarts", npm_package_browserslist_development_2: "last 1 safari version", npm_package_workspaces_5: "d9-thai-plan-selection", LANG: "C.UTF-8", VCPKG_INSTALLATION_ROOT: "/usr/local/share/vcpkg", npm_package_workspaces_6: "d9-sample-cra", npm_package_dependencies_react_dom: "^18.2.0", CONDA: "/usr/share/miniconda", RUNNER_NAME: "GitHub Actions 20", XDG_CONFIG_HOME: "/home/runner/.config", STATS_VMD: "true", GITHUB_REF_NAME: "r-1.1.4", GITHUB_REPOSITORY: "InsureMO/rainbow-d9", STATS_D_D: "true", npm_lifecycle_script: "vite build", npm_package_eslintConfig_extends_0: "react-app", npm_package_dependencies_vite_plugin_markdown: "^2.2.0", npm_package_dependencies_react_markdown: "8.0.7", npm_package_dependencies__types_node: "^20.5.3", STATS_UE: "true", ANDROID_NDK_ROOT: "/usr/local/lib/android/sdk/ndk/25.2.9519653", GITHUB_ACTION_REF: "", DEBIAN_FRONTEND: "noninteractive", npm_package_scripts_build_sample_cra_ci: "cd ./d9-sample-cra && yarn build", npm_config_version_git_message: "v%s", npm_package_eslintConfig_extends_1: "react-app/jest", GITHUB_REPOSITORY_ID: "704514093", GITHUB_ACTIONS: "true", npm_lifecycle_event: "build", npm_package_version: "1.1.3", npm_package_repository_url: "git+https://github.com/InsureMO/rainbow-d9.git", npm_package_dependencies__testing_library_jest_dom: "^5.17.0", GITHUB_REF_PROTECTED: "false", npm_config_argv: '{"remain":[],"cooked":["run","build-sample-cra"],"original":["build-sample-cra"]}', npm_package_volta_yarn: "1.22.21", npm_package_scripts_build: "vite build", npm_package_dependencies__testing_library_user_event: "^13.5.0", GITHUB_WORKSPACE: "/home/runner/work/rainbow-d9/rainbow-d9", ACCEPT_EULA: "Y", GITHUB_JOB: "create-sample-pages", RUNNER_PERFLOG: "/home/runner/perflog", npm_package_dependencies_vite: "^5.0.12", GITHUB_SHA: "15df72468bf861199b40d4e456f8a012933a271e", GITHUB_RUN_ATTEMPT: "1", npm_config_version_git_tag: "true", npm_config_version_git_sign: "", GITHUB_REF: "refs/tags/r-1.1.4", GITHUB_ACTOR: "bradwoo8621", ANDROID_SDK_ROOT: "/usr/local/lib/android/sdk", npm_package_license: "MIT", npm_config_strict_ssl: "true", LEIN_HOME: "/usr/local/lib/lein", npm_package_scripts_build_n123: "yarn build-n1 && yarn build-n2 && yarn build-n3", GITHUB_PATH: "/home/runner/work/_temp/_runner_file_commands/add_path_30cd29b8-1b4d-434b-a396-5ee027723d5d", JAVA_HOME: "/usr/lib/jvm/temurin-11-jdk-amd64", PWD: "/home/runner/work/rainbow-d9/rainbow-d9/d9-sample-cra", GITHUB_ACTOR_ID: "2330098", RUNNER_WORKSPACE: "/home/runner/work/rainbow-d9", npm_execpath: "/opt/hostedtoolcache/node/18.19.1/x64/lib/node_modules/yarn/bin/yarn.js", npm_package_scripts_build_all_ci: "yarn build-n123-ci && yarn build-n5-ci && yarn build-echarts-ci && yarn build-thai-all-ci", HOMEBREW_CLEANUP_PERIODIC_FULL_DAYS: "3650", GITHUB_EVENT_NAME: "push", HOMEBREW_NO_AUTO_UPDATE: "1", ANDROID_HOME: "/usr/local/lib/android/sdk", GITHUB_SERVER_URL: "https://github.com", GECKOWEBDRIVER: "/usr/local/share/gecko_driver", LEIN_JAR: "/usr/local/lib/lein/self-installs/leiningen-2.11.2-standalone.jar", GHCUP_INSTALL_BASE_PREFIX: "/usr/local", GITHUB_OUTPUT: "/home/runner/work/_temp/_runner_file_commands/set_output_30cd29b8-1b4d-434b-a396-5ee027723d5d", npm_package_author_name: "Rainbow Team", EDGEWEBDRIVER: "/usr/local/share/edge_driver", STATS_EXT: "true", npm_package_scripts_build_n1_ci: "cd ./d9-n1 && yarn build-ci", npm_config_save_prefix: "^", npm_config_ignore_optional: "", ANDROID_NDK: "/usr/local/lib/android/sdk/ndk/25.2.9519653", SGX_AESM_ADDR: "1", CHROME_BIN: "/usr/bin/google-chrome", npm_package_scripts_build_n2_ci: "cd ./d9-n2 && yarn build-ci", npm_package_scripts_deploy: "gh-pages -d build", npm_package_scripts_preview: "vite preview", SELENIUM_JAR_PATH: "/usr/share/java/selenium-server.jar", STATS_EXTP: "https://provjobdsettingscdn.blob.core.windows.net/settings/provjobdsettings-0.5.169+2/provjobd.data", npm_package_scripts_build_echarts_ci: "cd ./d9-echarts && yarn build-ci", npm_package_scripts_build_n3_ci: "cd ./d9-n3 && yarn build-ci", npm_package_dependencies_web_vitals: "^2.1.4", npm_package_dependencies_typescript: "^5.1.6", INIT_CWD: "/home/runner/work/rainbow-d9/rainbow-d9", ANDROID_NDK_HOME: "/usr/local/lib/android/sdk/ndk/25.2.9519653", GITHUB_STEP_SUMMARY: "/home/runner/work/_temp/_runner_file_commands/step_summary_30cd29b8-1b4d-434b-a396-5ee027723d5d", npm_package_dependencies_react: "^18.2.0", npm_package_dependencies__types_react_dom: "^18.2.7", NODE_ENV: "production" };
 dayjs.extend(WeekOfYear);
 dayjs.extend(QuarterOfYear);
 dayjs.extend(Duration);
@@ -4432,14 +4971,84 @@ const DemoData$8 = {
   caption,
   nested
 };
-const markdown$9 = "# Page::Demo Tab\n\n## Section::# 1. Basic Widgets\n\n- collapsible\n- marker: basic-widgets\n- DecoInput::Decorate Input::decorateInput\n	- label:\n		- labelOnValue\n		- property: decorateInput\n		- leads: Yes:\n	- leads: Hello\n	- tails: World\n	- regex: abc$,^def; Starts with \"def\" or ends with \"abc\".\n	- validateScopes: s1\n	- mask:\n	  ```\n	  return {\n		mask: '**** **** ****',\n		lazy: false,\n		autofix: true\n	  }\n	  ```\n- DecoNumber::Decorate Number Input::decorateNumberInput\n	- label:\n		- valueToLabel: `'Hello world, again.'`\n	- leads: $icons.check;$\n	- tails: %;$icons.caretLeft\n	- numeric\n	- placeholder: A placeholder\n	- grouping\n- DecoNumber::0 - 9 are Legal Keys::decorateNumberInput2\n	- leads: $icons.check;$\n	- tails: %;$icons.caretLeft\n	- numeric\n	- onKeyDown: @ext.keydown.numeric\n- Checkbox::A Checkbox::aCheckbox\n- Radio::A Radio::aRadio\n- Dropdown::::dropdown\n	- label: Dropdown\n	- options:\n		- 1: Option #1\n		- 2: Option #2\n- Dropdown::::dropdown2\n	- label: Dropdown #2\n	- options: @ext.dropdown2\n- MultiDropdown::Multiple Dropdown::multiDropdown\n	- options:\n		- 1: Option #1\n		- 2: Option #2\n		- 3: A very very very very very very very very very very very very very very very very very very long Option #3\n		- 4: Option #4\n		- 5: Option #5\n- DateTime::Buddhist Era::buddhistEra\n	- dateFormat: BBBB/MM/DD\n	- timeFormat: HH\n- Label::A Label::label\n	- valueToLabel: `'Hello World'`\n	- leads: $icons.check;$\n	- tails: %;$icons.caretLeft\n- Caption::A Caption::caption\n	- $fc\n	- text: Hello World\n- Caption::A Caption::caption\n	- $fc\n	- valueToLabel: `'Caption is [' + value + ']'`\n- Radios::Radio Group::radios1\n	- options:\n		- 1: Option #1\n		- 2: Option #2\n		- 3: Option #3\n		- 4: Option #4\n		- 5: A very very very very very very very very very very very very very very very very very very long Option #5\n	- place: 6\n	- columns: 4\n- Checks::Checkbox Group::checks1\n	- options:\n		- 1: Option #1\n		- 2: Option #2\n		- 3: Option #3\n		- 4: Option #4\n		- 5: A very very very very very very very very very very very very very very very very very very long Option #5\n	- place: 6\n	- columns: 4\n- Checks::Checkbox Group::checks2\n	- options:\n		- 1: Option #1\n		- 2: Option #2\n		- 3: Option #3\n		- 4: Option #4\n	- single\n- Button::\n	- text: Validate Inputs\n	- click: validate s1\n\n";
+const markdown$9 = "# Page::Demo Tab\n\n## Section::# 1.1. Basic Widgets - Decorated Input\n\n- DecoInput::Decorate Input::decorateInput\n	- label:\n		- labelOnValue\n		- property: decorateInput\n		- leads: Masked:\n	- leads: Hello\n	- tails: World\n	- regex: abc$,^def; Starts with \"def\" or ends with \"abc\".\n	- validateScopes: s1\n	- required\n	- mask:\n	  ```\n	  return {\n		mask: '**** **** ****',\n		lazy: false,\n		autofix: true\n	  }\n	  ```\n- DecoNumber::Decorate Number Input::decorateNumberInput\n	- label:\n		- valueToLabel: `'Number, Grouping'`\n	- leads: $icons.check;$\n	- tails: %;$icons.caretLeft\n	- numeric\n	- placeholder: A placeholder\n	- grouping\n- DecoNumber::0 - 9 are Legal Keys::decorateNumberInput2\n	- leads: $icons.check;$\n	- tails: %;$icons.caretLeft\n	- numeric\n	- onKeyDown: @ext.keydown.numeric\n\n## Section::# 1.2. Basic Widgets - Dropdown\n\n- Dropdown::::dropdown\n	- label: Dropdown\n	- options:\n		- 1: Option #1\n		- 2: Option #2\n- Dropdown::::dropdown2\n	- label: Dropdown #2\n	- options: @ext.dropdown2\n- MultiDropdown::Multiple Dropdown::multiDropdown\n	- options:\n		- 1: Option #1\n		- 2: Option #2\n		- 3: A very very very very very very very very very very very very very very very very very very long Option #3\n		- 4: Option #4\n		- 5: Option #5\n\n## Section::# 1.3. Basic Widgets - Calendar\n\n- DateTime::Buddhist Era::buddhistEra\n	- dateFormat: BBBB/MM/DD\n	- timeFormat: HH\n	- renderOn: desktop, mobile\n- Date::Only Visible on Desktop::mobileDesktop\n	- renderOn:\n	  ```\n      // this line canont be ignored, since renderOn attribute build will not treat single line as function body\n	  return ['desktop', 'mobile'];\n	  ```\n- Date::Only Visible on Mobile::mobileDate\n	- renderOn: mobile\n\n## Section::# 1.4. Basic Widgets - Label\n\n- Label::A Label::label\n	- valueToLabel: `'Hello World'`\n	- leads: $icons.check;$\n	- tails: %;$icons.caretLeft\n- Caption::A Caption::caption\n	- $fc\n	- text: Hello World\n- Caption::A Caption::caption\n	- $fc\n	- valueToLabel: `'Caption is [' + value + ']'`\n\n## Section::# 1.4. Basic Widgets - Radio\n\n- Radio::A Radio::aRadio\n- Radios::Radio Group::radios1\n	- options:\n		- 1: Option #1\n		- 2: Option #2\n		- 3: Option #3\n		- 4: Option #4\n		- 5: A very very very very very very very very very very very very very very very very very very long Option #5\n	- place: 6\n	- columns: 4\n- Radios::Radio Group, Fake as Toggle Buttons::radios2\n	- data-as-toggle-button\n	- options:\n		- 1: Option #1\n		- 2: Option #2\n		- 3: Option #3\n		- 4: Option #4\n		- 5: Option #5\n	- place: 12\n\n## Section::# 1.5. Basic Widgets - Checkbox\n\n- Checkbox::A Checkbox::aCheckbox\n- Checks::Checkbox Group::checks1\n	- options:\n		- 1: Option #1\n		- 2: Option #2\n		- 3: Option #3\n		- 4: Option #4\n		- 5: A very very very very very very very very very very very very very very very very very very long Option #5\n	- place: 6\n	- columns: 4\n- Checks::Checkbox Group::checks2\n	- options:\n		- 1: Option #1\n		- 2: Option #2\n		- 3: Option #3\n		- 4: Option #4\n	- single\n- Checks::Checkbox Group, Fake as Toggle Buttons::checks3\n	- data-as-toggle-button\n	- options:\n		- 1: Option #1\n		- 2: Option #2\n		- 3: Option #3\n		- 4: Option #4\n		- 5: Option #5\n	- place: 12\n\n## Section::# 1.6. Basic Widgets - Button\n\n- Button::\n	- text: Validate Inputs, Scope \"S1\"\n	- click: validate s1\n\n- Caption::\n	- text: Dropdown\n		- property: BizTransaction.PaymentMethod\n		- disabled, data-as-label\n		- please: Let you see me.\n		- options: F: Female\n	- click:\n	  ```\n	  const {global: {sc}, root, model} = options;\n	  await sc( 'dialog', 'direct-card', {root, model});\n	  ```\n";
+const StyleController = qe.div.attrs({})`
+    + div[data-w=d9-page] {
+        div[data-w=d9-radios][data-as-toggle-button] {
+            > span[data-w=d9-radios-option] {
+                border: ${CssVars.BORDER};
+                border-radius: ${CssVars.BORDER_RADIUS};
+                margin-left: 0;
+                margin-right: 0;
+                transition: color 0.3s, border-color 0.3s, background-color 0.3s, box-shadow 0.3s;
+
+                &:not(:first-child) {
+                    border-top-left-radius: 0;
+                    border-bottom-left-radius: 0;
+                    margin-left: -1px;
+                }
+
+                &:not(:last-child) {
+                    border-top-right-radius: 0;
+                    border-bottom-right-radius: 0;
+                }
+
+                &:hover {
+                    box-shadow: ${CssVars.HOVER_SHADOW};
+                }
+
+                &[data-checked=true] {
+                    color: ${CssVars.INVERT_COLOR};
+                    border-color: ${CssVars.PRIMARY_COLOR};
+                    background-color: ${CssVars.PRIMARY_COLOR};
+
+                    &:hover {
+                        box-shadow: ${CssVars.PRIMARY_HOVER_SHADOW};
+                    }
+                }
+
+                > div[data-w=d9-radio] {
+                    display: none;
+                }
+            }
+        }
+
+        div[data-w=d9-checkboxes][data-as-toggle-button] {
+            > span[data-w=d9-checkboxes-option] {
+                border: ${CssVars.BORDER};
+                border-radius: ${CssVars.BORDER_RADIUS};
+                margin-left: 0;
+                margin-right: 8px;
+                transition: color 0.3s, border-color 0.3s, background-color 0.3s, box-shadow 0.3s;
+
+                &:hover {
+                    box-shadow: ${CssVars.HOVER_SHADOW};
+                }
+
+                &[data-checked=true] {
+                    color: ${CssVars.INVERT_COLOR};
+                    border-color: ${CssVars.PRIMARY_COLOR};
+                    background-color: ${CssVars.PRIMARY_COLOR};
+
+                    &:hover {
+                        box-shadow: ${CssVars.PRIMARY_HOVER_SHADOW};
+                    }
+                }
+
+                > div[data-w=d9-checkbox] {
+                    display: none;
+                }
+            }
+        }
+    }
+`;
 const N2BasicWidgets = () => {
   const def = useDemoMarkdown(markdown$9);
   const externalDefs = {
     keydown: {
       numeric: (event) => {
         console.log(`Key event[key=${event.key}, code=${event.code}] capture.`);
-        if (!["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"].includes(event.key)) {
+        if (event.key.length === 1 && !["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"].includes(event.key)) {
           event.preventDefault();
           return false;
         }
@@ -4455,6 +5064,7 @@ const N2BasicWidgets = () => {
   return /* @__PURE__ */ jsxRuntimeExports.jsxs(GlobalRoot, { children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx(CustomEventHandler, {}),
     /* @__PURE__ */ jsxRuntimeExports.jsx(N2DemoDialogHandler, {}),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(StyleController, {}),
     /* @__PURE__ */ jsxRuntimeExports.jsx(StandaloneRoot, { ...def, $root: DemoData$8, externalDefs })
   ] });
 };
@@ -4653,7 +5263,36 @@ const N2Playground = () => {
     options.global.alert.show('Hello World');
     \`\`\`
 
-## Section1::
+## Section::X
+
+- Input::Test Input::testInputX
+- Dropdown::Test Dropdown::testDropdownX
+  - options: @ext.codes
+- Button::
+  - $fc
+  - $pos: r:2
+  - leads: $icons.angleLeft; $icons.angleRight
+  - text: Test Button
+  - click:
+    \`\`\`
+    options.global.alert.show('Hello World');
+    \`\`\`
+
+## Section::Y
+
+- Input::Test Input::testInputY
+- Dropdown::Test Dropdown::testDropdownY
+  - options: @ext.codes
+- Button::
+  - $fc
+  - $pos: r:2
+  - leads: $icons.angleLeft; $icons.angleRight
+  - text: Test Button
+  - click:
+    \`\`\`
+    options.global.alert.show('Hello World');
+    \`\`\`
+
 `;
   def.$nodes[0].$nodes[0].mockData = new ExternalDefIndicator("playground.mockData");
   return /* @__PURE__ */ jsxRuntimeExports.jsx(GlobalRoot, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(StandaloneRoot, { ...def, $root: DemoData$4, externalDefs }) });
@@ -5375,7 +6014,7 @@ const DemoIndex = () => {
   const route = { [pathname]: true };
   const C = ((_a = Demos.find((demo) => demo.path === pathname)) == null ? void 0 : _a.C) ?? reactExports.Fragment;
   const markdown2 = ((_b = Demos.find((demo) => demo.path === pathname)) == null ? void 0 : _b.markdown) ?? "";
-  const json = ((_c = Demos.find((demo) => demo.path === pathname)) == null ? void 0 : _c.data) ?? {};
+  const json2 = ((_c = Demos.find((demo) => demo.path === pathname)) == null ? void 0 : _c.data) ?? {};
   return /* @__PURE__ */ jsxRuntimeExports.jsxs(DemoContainer, { "data-active-source": activeSource, children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx(DeviceDetective, {}),
     /* @__PURE__ */ jsxRuntimeExports.jsx(DemoLayoutMenus, { route, onMenuClicked }),
@@ -5412,7 +6051,7 @@ const DemoIndex = () => {
       ] }),
       activeSource === "none" ? null : /* @__PURE__ */ jsxRuntimeExports.jsxs(DemoSourceBody, { "data-v-scroll": "", "data-h-scroll": "", children: [
         activeSource === "markdown" ? /* @__PURE__ */ jsxRuntimeExports.jsx(MarkdownContainer, { contents: markdown2 }) : null,
-        activeSource === "json" ? /* @__PURE__ */ jsxRuntimeExports.jsx(MarkdownContainer, { contents: json }) : null
+        activeSource === "json" ? /* @__PURE__ */ jsxRuntimeExports.jsx(MarkdownContainer, { contents: json2 }) : null
       ] })
     ] })
   ] });
@@ -5588,7 +6227,7 @@ const App = () => {
 };
 const reportWebVitals = (onPerfEntry) => {
   if (onPerfEntry && onPerfEntry instanceof Function) {
-    __vitePreload(() => import("./vendor-O5rCRpDB.js").then((n) => n.X), true ? __vite__mapDeps([0,1,2,3]) : void 0).then(({ getCLS, getFID, getFCP, getLCP, getTTFB }) => {
+    __vitePreload(() => import("./vendor-H8JEDa3y.js").then((n) => n.Z), true ? __vite__mapDeps([0,1,2,3]) : void 0).then(({ getCLS, getFID, getFCP, getLCP, getTTFB }) => {
       getCLS(onPerfEntry);
       getFID(onPerfEntry);
       getFCP(onPerfEntry);
@@ -5606,7 +6245,7 @@ root.render(
 reportWebVitals();
 function __vite__mapDeps(indexes) {
   if (!__vite__mapDeps.viteFileDeps) {
-    __vite__mapDeps.viteFileDeps = ["assets/vendor-O5rCRpDB.js","assets/babel-AnpZxJH-.js","assets/unist-5yxlKLF4.js","assets/vendor-UDnasYXb.css"]
+    __vite__mapDeps.viteFileDeps = ["assets/vendor-H8JEDa3y.js","assets/babel-AnpZxJH-.js","assets/unist-5yxlKLF4.js","assets/vendor-UDnasYXb.css"]
   }
   return indexes.map((i) => __vite__mapDeps.viteFileDeps[i])
 }
