@@ -21,6 +21,7 @@
 	},
 	"author": "Rainbow Team",
 	"dependencies": {
+		"@codemirror/lang-json": "^6.0.1",
 		"@codemirror/lang-markdown": "^6.2.4",
 		"@rainbow-d9/n1": "1.1.3",
 		"@rainbow-d9/n2": "1.1.3",

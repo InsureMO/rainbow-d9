@@ -1,23 +1,19 @@
 import {indentWithTab} from '@codemirror/commands';
-import {javascript} from '@codemirror/lang-javascript';
-import {markdown, markdownLanguage} from '@codemirror/lang-markdown';
+import {json, jsonParseLinter} from '@codemirror/lang-json';
+import {linter, lintGutter} from '@codemirror/lint';
 import {EditorState as CodeMirrorState} from '@codemirror/state';
 import {EditorView, keymap} from '@codemirror/view';
-import {WidgetType} from '@rainbow-d9/n1';
+import {BaseModel} from '@rainbow-d9/n1';
 import {ButtonInk, CssVars, DOM_KEY_WIDGET, IntlLabel, toIntlLabel, UnwrappedButton} from '@rainbow-d9/n2';
 import {basicSetup} from 'codemirror';
 import React, {ReactNode, useEffect, useRef, useState} from 'react';
 import styled from 'styled-components';
 import {PlaygroundEventTypes, usePlaygroundEventBus} from '../playground-event-bus';
-import {PlaygroundWidgets} from '../types';
 import {PlaygroundCssVars} from '../widgets';
-import {createEditorStyles} from './code-mirror-styles';
-import {d9mlExtensions, d9mlHighlightStyle, WidgetDeclarationIconPlugin} from './enhance';
-import {beautifyTemplate} from './utils';
 
-export const WidgetTemplateDialogContainer = styled.div.attrs<{ visible: boolean }>(({visible}) => {
+export const MockJsonDialogContainer = styled.div.attrs<{ visible: boolean }>(({visible}) => {
 	return {
-		[DOM_KEY_WIDGET]: 'd9-playground-widget-template-dialog',
+		[DOM_KEY_WIDGET]: 'd9-playground-mock-json-dialog',
 		style: {
 			opacity: visible ? 1 : (void 0),
 			pointerEvents: visible ? 'auto' : (void 0)
@@ -35,10 +31,10 @@ export const WidgetTemplateDialogContainer = styled.div.attrs<{ visible: boolean
     transition: all ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION};
     z-index: ${CssVars.DIALOG_Z_INDEX};
 `;
-export const WidgetTemplateDialogWrapper = styled.div.attrs<{ visible: boolean }>(
+export const MockJsonDialogWrapper = styled.div.attrs<{ visible: boolean }>(
 	({visible}) => {
 		return {
-			[DOM_KEY_WIDGET]: 'd9-playground-widget-template-dialog-wrapper',
+			[DOM_KEY_WIDGET]: 'd9-playground-mock-json-dialog-wrapper',
 			style: {
 				transform: visible ? 'none' : (void 0)
 			}
@@ -56,7 +52,7 @@ export const WidgetTemplateDialogWrapper = styled.div.attrs<{ visible: boolean }
     transform: scale(0.75);
     transition: all ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION};
 `;
-export const WidgetTemplateDialogBody = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-playground-widget-template-dialog-body'})`
+export const MockJsonDialogBody = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-playground-mock-json-dialog-body'})`
     display: flex;
     position: relative;
     flex-direction: column;
@@ -67,7 +63,7 @@ export const WidgetTemplateDialogBody = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-
     font-size: ${CssVars.FONT_SIZE};
     color: ${CssVars.CAPTION_FONT_COLOR};
 `;
-export const WidgetTemplateViewerWrapper = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-playground-widget-template-viewer-wrapper'})`
+export const MockJsonViewerWrapper = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-playground-mock-json-viewer-wrapper'})`
     display: grid;
     position: relative;
     align-self: stretch;
@@ -78,16 +74,18 @@ export const WidgetTemplateViewerWrapper = styled.div.attrs({[DOM_KEY_WIDGET]: '
     overflow: hidden;
 `;
 // noinspection CssUnusedSymbol
-export const WidgetTemplateViewer = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-playground-widget-template-viewer'})`
+export const MockJsonViewer = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-playground-mock-json-viewer'})`
     display: block;
     position: relative;
     width: 100%;
     align-self: stretch;
     overflow: hidden;
 
-    ${createEditorStyles({badge: false})}
+    > div.cm-editor {
+        height: 100%;
+    }
 `;
-export const WidgetTemplateReason = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-playground-widget-template-dialog-reason'})`
+export const MockJsonReason = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-playground-mock-json-dialog-reason'})`
     display: flex;
     position: relative;
     align-items: center;
@@ -99,7 +97,7 @@ export const WidgetTemplateReason = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-play
         margin-top: 16px;
     }
 `;
-export const WidgetTemplateDialogFooter = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-playground-widget-template-dialog-footer'})`
+export const MockJsonDialogFooter = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-playground-mock-json-dialog-footer'})`
     display: flex;
     justify-content: flex-end;
 
@@ -108,24 +106,23 @@ export const WidgetTemplateDialogFooter = styled.div.attrs({[DOM_KEY_WIDGET]: 'd
     }
 `;
 
-export interface WidgetTemplateDialogProps {
-	widgets: Required<PlaygroundWidgets>;
+export interface MockJsonDialogProps {
+	mockData: BaseModel;
 }
 
-export interface WidgetTemplateDialogState {
+export interface MockJsonDialogState {
 	visible: boolean;
 	editor?: EditorView;
 	reason?: ReactNode;
-	widgetType?: WidgetType;
 	copied: boolean;
 }
 
-export const WidgetTemplateDialog = (props: WidgetTemplateDialogProps) => {
-	const {widgets} = props;
+export const MockJsonDialog = (props: MockJsonDialogProps) => {
+	const {mockData} = props;
 
 	const ref = useRef<HTMLDivElement>(null);
 	const {on, off} = usePlaygroundEventBus();
-	const [state, setState] = useState<WidgetTemplateDialogState>({visible: false, copied: false});
+	const [state, setState] = useState<MockJsonDialogState>({visible: false, copied: false});
 	useEffect(() => {
 		if (ref.current == null) {
 			return;
@@ -137,12 +134,9 @@ export const WidgetTemplateDialog = (props: WidgetTemplateDialogProps) => {
 				extensions: [
 					basicSetup,
 					keymap.of([indentWithTab]),
-					d9mlHighlightStyle,
-					markdown({
-						defaultCodeLanguage: javascript({jsx: false, typescript: false}),
-						base: markdownLanguage, extensions: d9mlExtensions
-					}),
-					WidgetDeclarationIconPlugin
+					json(),
+					lintGutter(),
+					linter(jsonParseLinter())
 				]
 			}),
 			parent: ref.current
@@ -153,7 +147,7 @@ export const WidgetTemplateDialog = (props: WidgetTemplateDialogProps) => {
 		};
 	}, []);
 	useEffect(() => {
-		const show = (keyOrWidgetType: WidgetType, prefix: string, reason: ReactNode) => {
+		const show = () => {
 			if (state.visible || state.editor == null) {
 				return;
 			}
@@ -163,18 +157,16 @@ export const WidgetTemplateDialog = (props: WidgetTemplateDialogProps) => {
 			}
 			document.body.style.overflowY = 'hidden';
 			const doc = state.editor.state.doc;
-			let template = widgets.widgets.find(widget => widget.$key === keyOrWidgetType)?.template
-				?? widgets.widgets.find(widget => widget.$wt === keyOrWidgetType)?.template ?? '';
-			template = beautifyTemplate(template, prefix, '');
-			state.editor.dispatch({changes: {from: 0, to: doc.length, insert: template}});
-			setState(state => ({...state, visible: true, copied: false, widgetType: keyOrWidgetType, reason}));
+			const json = JSON.stringify(mockData, null, '  ');
+			state.editor.dispatch({changes: {from: 0, to: doc.length, insert: json}});
+			setState(state => ({...state, visible: true, copied: false, reason: (void 0)}));
 		};
 
-		on(PlaygroundEventTypes.SHOW_WIDGET_TEMPLATE_DIALOG, show);
+		on(PlaygroundEventTypes.EDIT_MOCK_JSON, show);
 		return () => {
-			off(PlaygroundEventTypes.SHOW_WIDGET_TEMPLATE_DIALOG, show);
+			off(PlaygroundEventTypes.EDIT_MOCK_JSON, show);
 		};
-	}, [on, off, state.visible, state.editor, widgets.widgets]);
+	}, [on, off, state.visible, state.editor, mockData]);
 	useEffect(() => {
 		if (state.copied) {
 			setTimeout(() => {
@@ -184,40 +176,68 @@ export const WidgetTemplateDialog = (props: WidgetTemplateDialogProps) => {
 	}, [state.copied]);
 
 	const onCopyToClipboard = async () => {
-		const {widgetType} = state;
-		if (!widgetType) {
-			return;
-		}
-		const template = state.editor.state.doc.toString();
-		await navigator.clipboard.writeText(template);
+		const json = state.editor.state.doc.toString();
+		await navigator.clipboard.writeText(json);
 		setState(state => ({...state, copied: true}));
+	};
+	const onDownload = () => {
+		const json = state.editor.state.doc.toString();
+		const blob = new Blob([json], {type: 'application/json'});
+		const url = URL.createObjectURL(blob);
+		const a = document.createElement('a');
+		a.href = url;
+		a.download = 'mock-data.json';
+		a.click();
+		URL.revokeObjectURL(url);
+	};
+	const onConfirm = () => {
+		const json = state.editor.state.doc.toString();
+		try {
+			const parsed = JSON.parse(json);
+			Object.keys(mockData).forEach(key => delete mockData[key]);
+			Object.keys(parsed).forEach(key => mockData[key] = parsed[key]);
+			// TODO notify refresh
+			onHide();
+		} catch {
+			setState(state => ({
+				...state,
+				reason: <IntlLabel keys={['playground', 'mock', 'json', 'invalid']}
+				                   value="The JSON format is incorrect. Please check and modify before confirming."/>
+			}));
+		}
 	};
 	const onHide = () => {
 		document.body.style.paddingRight = '';
 		document.body.style.overflowY = '';
-		setState(state => ({...state, visible: false}));
+		setState(state => ({...state, visible: false, reason: (void 0)}));
 	};
 
-	return <WidgetTemplateDialogContainer visible={state.visible}>
-		<WidgetTemplateDialogWrapper visible={state.visible}>
-			<WidgetTemplateDialogBody>
-				<WidgetTemplateViewerWrapper>
-					<WidgetTemplateViewer ref={ref}/>
-				</WidgetTemplateViewerWrapper>
-				<WidgetTemplateReason>{toIntlLabel(state.reason)}</WidgetTemplateReason>
-			</WidgetTemplateDialogBody>
-			<WidgetTemplateDialogFooter>
+	return <MockJsonDialogContainer visible={state.visible}>
+		<MockJsonDialogWrapper visible={state.visible}>
+			<MockJsonDialogBody>
+				<MockJsonViewerWrapper>
+					<MockJsonViewer ref={ref}/>
+				</MockJsonViewerWrapper>
+				<MockJsonReason>{toIntlLabel(state.reason)}</MockJsonReason>
+			</MockJsonDialogBody>
+			<MockJsonDialogFooter>
 				{state.copied
 					? <UnwrappedButton ink={ButtonInk.SUCCESS} onClick={onCopyToClipboard}>
-						<IntlLabel keys={['playground', 'template', 'clipboard', 'copied']} value="Copied!"/>
+						<IntlLabel keys={['playground', 'mock', 'json', 'clipboard', 'copied']} value="Copied!"/>
 					</UnwrappedButton>
 					: <UnwrappedButton ink={ButtonInk.PRIMARY} onClick={onCopyToClipboard}>
-						<IntlLabel keys={['playground', 'template', 'clipboard']} value="Copy to Clipboard"/>
+						<IntlLabel keys={['playground', 'mock', 'json', 'clipboard']} value="Copy to Clipboard"/>
 					</UnwrappedButton>}
-				<UnwrappedButton ink={ButtonInk.WAIVE} onClick={onHide}>
-					<IntlLabel keys={['playground', 'template', 'close']} value="Close"/>
+				<UnwrappedButton ink={ButtonInk.PRIMARY} onClick={onDownload}>
+					<IntlLabel keys={['playground', 'mock', 'json', 'download']} value="Download as File"/>
 				</UnwrappedButton>
-			</WidgetTemplateDialogFooter>
-		</WidgetTemplateDialogWrapper>
-	</WidgetTemplateDialogContainer>;
+				<UnwrappedButton ink={ButtonInk.PRIMARY} onClick={onConfirm}>
+					<IntlLabel keys={['playground', 'mock', 'json', 'confirm']} value="Confirm and Refresh"/>
+				</UnwrappedButton>
+				<UnwrappedButton ink={ButtonInk.WAIVE} onClick={onHide}>
+					<IntlLabel keys={['playground', 'mock', 'json', 'cancel']} value="Cancel"/>
+				</UnwrappedButton>
+			</MockJsonDialogFooter>
+		</MockJsonDialogWrapper>
+	</MockJsonDialogContainer>;
 };

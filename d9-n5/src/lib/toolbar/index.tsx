@@ -169,8 +169,9 @@ export const ToolbarButton = (props: { icon: PlaygroundIcons | string; tooltip?:
 
 	return <UnwrappedButton ink={ButtonInk.PRIMARY} fill={ButtonFill.PLAIN}
 	                        onClick={onClicked} leads={[`$icons.${icon}`]} {...rest}>
-		{VUtils.isNotBlank(tooltip) ?
-			<ToolbarButtonTooltip onClick={onTooltipClicked}>{tooltip}</ToolbarButtonTooltip> : null}
+		{VUtils.isNotBlank(tooltip)
+			? <ToolbarButtonTooltip onClick={onTooltipClicked}>{tooltip}</ToolbarButtonTooltip>
+			: null}
 	</UnwrappedButton>;
 };
 
@@ -225,6 +226,9 @@ export const PrimaryBar = (props: PrimaryBarProps) => {
 		fire(PlaygroundEventTypes.SWITCH_VIEWER_WRAPPER, {locator: false});
 		setState(state => ({...state, locator: false}));
 	};
+	const onMockJsonClicked = () => {
+		fire(PlaygroundEventTypes.EDIT_MOCK_JSON);
+	};
 	const onMaxClicked = () => {
 		fire(PlaygroundEventTypes.MAXIMIZE);
 		setState(state => ({...state, maximized: true}));
@@ -252,15 +256,14 @@ export const PrimaryBar = (props: PrimaryBarProps) => {
 		{state.editorBadge
 			? <ToolbarButton icon={PlaygroundIcons.HIDE_EDITOR_BADGE} tooltip="Hide Editor Badge"
 			                 click={onHideBadgeClicked}/>
-			:
-			<ToolbarButton icon={PlaygroundIcons.SHOW_EDITOR_BADGE} tooltip="Show Editor Badge"
-			               click={onShowBadgeClicked}/>}
+			: <ToolbarButton icon={PlaygroundIcons.SHOW_EDITOR_BADGE} tooltip="Show Editor Badge"
+			                 click={onShowBadgeClicked}/>}
 		{state.locator
 			? <ToolbarButton icon={PlaygroundIcons.HIDE_LOCATOR} tooltip="Hide Widget Locator"
 			                 click={onHideLocatorClicked}/>
-			:
-			<ToolbarButton icon={PlaygroundIcons.SHOW_LOCATOR} tooltip="Show Widget Locator"
-			               click={onShowLocatorClicked}/>}
+			: <ToolbarButton icon={PlaygroundIcons.SHOW_LOCATOR} tooltip="Show Widget Locator"
+			                 click={onShowLocatorClicked}/>}
+		<ToolbarButton icon={PlaygroundIcons.JSON} tooltip="Mock JSON" click={onMockJsonClicked}/>
 		<ToolbarSeparator/>
 		{!state.zen && state.maximized
 			? <ToolbarButton icon={PlaygroundIcons.MINIMIZE} tooltip="Quit Maximization" click={onMinClicked}/>

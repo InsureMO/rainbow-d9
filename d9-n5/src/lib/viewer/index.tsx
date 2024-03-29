@@ -3,10 +3,11 @@ import React, {useEffect, useState} from 'react';
 import {PlaygroundEventTypes, usePlaygroundEventBus} from '../playground-event-bus';
 import {ViewerProps} from '../types';
 import {ViewerKernel} from './kernel';
+import {MockJsonDialog} from './mock-json-dialog';
 import {ParseError, ViewerWrapper} from './widgets';
 
 export const Viewer = (props: ViewerProps) => {
-	const {minViewerWidth} = props;
+	const {minViewerWidth, mockData} = props;
 
 	const {on, off} = usePlaygroundEventBus();
 	const {replace} = useThrottler();
@@ -23,9 +24,13 @@ export const Viewer = (props: ViewerProps) => {
 
 	if (VUtils.isBlank(content)) {
 		return <ViewerWrapper minViewerWidth={minViewerWidth}>
+			<MockJsonDialog mockData={mockData}/>
 			<ParseError>No configuration.</ParseError>
 		</ViewerWrapper>;
 	}
 
-	return <ViewerKernel {...props} content={content}/>;
+	return <>
+		<MockJsonDialog mockData={mockData}/>
+		<ViewerKernel {...props} content={content}/>
+	</>;
 };

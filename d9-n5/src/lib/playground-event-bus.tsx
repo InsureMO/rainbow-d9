@@ -18,7 +18,9 @@ export enum PlaygroundEventTypes {
 	CONTENT_CHANGED = 'content-changed',
 
 	INSERT_WIDGET_TEMPLATE = 'insert-widget-template',
-	SHOW_WIDGET_TEMPLATE_DIALOG = 'show-widget-template-dialog'
+	SHOW_WIDGET_TEMPLATE_DIALOG = 'show-widget-template-dialog',
+
+	EDIT_MOCK_JSON = 'edit-mock-json'
 }
 
 /** should be -1 if there is no cursor */
@@ -107,6 +109,12 @@ export interface PlaygroundEventBus {
 	on(type: PlaygroundEventTypes.SHOW_WIDGET_TEMPLATE_DIALOG, listener: (keyOrWidgetType: WidgetType | string, prefix: string, reason: ReactNode) => void): this;
 
 	off(type: PlaygroundEventTypes.SHOW_WIDGET_TEMPLATE_DIALOG, listener: (keyOrWidgetType: WidgetType | string, prefix: string, reason: ReactNode) => void): this;
+
+	fire(type: PlaygroundEventTypes.EDIT_MOCK_JSON): this;
+
+	on(type: PlaygroundEventTypes.EDIT_MOCK_JSON, listener: () => void): this;
+
+	off(type: PlaygroundEventTypes.EDIT_MOCK_JSON, listener: () => void): this;
 }
 
 const Context = createContext<PlaygroundEventBus>({} as PlaygroundEventBus);

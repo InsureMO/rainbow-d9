@@ -61,9 +61,8 @@ export const N2Playground = () => {
 
 ## Section::X
 
-- Input::Test Input::testInput
-  - disabled
-- Dropdown::Test Dropdown::testDropdown
+- Input::Test Input::testInputX
+- Dropdown::Test Dropdown::testDropdownX
   - options: @ext.codes
 - Button::
   - $fc
@@ -77,9 +76,8 @@ export const N2Playground = () => {
 
 ## Section::Y
 
-- Input::Test Input::testInput
-  - disabled
-- Dropdown::Test Dropdown::testDropdown
+- Input::Test Input::testInputY
+- Dropdown::Test Dropdown::testDropdownY
   - options: @ext.codes
 - Button::
   - $fc
