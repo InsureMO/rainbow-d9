@@ -13,13 +13,14 @@ export const PlaygroundWidgetWrapper = (props: NodeDef & NodeDefExt & WidgetProp
 	const ref = useRef<HTMLSpanElement>(null);
 	const {on, off} = usePlaygroundEventBus();
 	useEffect(() => {
-		const onAskNodeDef = ($key: string, widgetType: string, callback: (def: NodeDef & NodeDefExt) => void) => {
+		const onAskNodeDef = ($key: string, _widgetType: string, callback: (def: NodeDef & NodeDefExt) => void) => {
 			if ($key !== props['data-for-playground-key']) {
 				return;
 			}
-			if (ref.current.nextElementSibling.getAttribute('data-w') !== widgetType) {
-				return;
-			}
+			// if widget is wrapped by form cell, then form cell has the same $key with this widget
+			// and since widget wrapper is wrapped at outermost, which means the next sibling of widget wrapper is form cell
+			// otherwise, the next sibling of widget wrapper is the widget itself
+			// therefore in either way, call callback function directly since the props is same
 			callback(props);
 		};
 		on(PlaygroundEventTypes.ASK_NODE_DEF, onAskNodeDef);

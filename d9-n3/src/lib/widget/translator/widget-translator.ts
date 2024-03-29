@@ -171,7 +171,7 @@ export class WidgetTranslator extends AbstractTranslator<Decipherable> {
 		if (node.type === ParsedNodeType.HEADING) {
 			return this.doTranslateNode(node, node.$pp, node.headline, () => {
 				return this.buildChildrenOnSubHeadings({widgets: node.children}, parseOptions);
-			});
+			}, parseOptions);
 		} else if (node.type === ParsedNodeType.LIST_ITEM) {
 			return this.doTranslateNode(node, node.$pp, node.label, () => [], parseOptions);
 		} else {

@@ -100,11 +100,13 @@ export const ViewerKernel = (props: ViewerProps & { content: string }) => {
 					clearLocator();
 				} else {
 					const vwRect = vwRef.current.getBoundingClientRect();
+					const vwScrollTop = vwRef.current.scrollTop;
+					const vwScrollLeft = vwRef.current.scrollLeft;
 					const targetRect = target.getBoundingClientRect();
 
 					const ww = wwRef.current;
-					ww.style.top = `${targetRect.top - vwRect.top - 2}px`;
-					ww.style.left = `${targetRect.left - vwRect.left - 4}px`;
+					ww.style.top = `${targetRect.top - vwRect.top + vwScrollTop - 2}px`;
+					ww.style.left = `${targetRect.left - vwRect.left + vwScrollLeft - 4}px`;
 					ww.style.width = `${targetRect.width + 8}px`;
 					ww.style.height = `${targetRect.height + 4}px`;
 					ww.style.opacity = '1';
@@ -130,6 +132,12 @@ export const ViewerKernel = (props: ViewerProps & { content: string }) => {
 			}
 			clearLocator();
 		};
+		const onScroll = () => {
+			if (!state.locator) {
+				return;
+			}
+			clearLocator();
+		};
 		const onToolbarMouseMove = (event: MouseEvent<HTMLDivElement>) => {
 			event.stopPropagation();
 			event.preventDefault();
@@ -140,7 +148,6 @@ export const ViewerKernel = (props: ViewerProps & { content: string }) => {
 			const widgetType = ww.getAttribute('data-current-w');
 			fire(PlaygroundEventTypes.ASK_NODE_DEF, $key, widgetType, (def: NodeDef & NodeDefExt) => {
 				const {preparsed} = def;
-				console.log(preparsed);
 				if (preparsed == null) {
 					return;
 				}
@@ -159,6 +166,7 @@ export const ViewerKernel = (props: ViewerProps & { content: string }) => {
 
 		return <ViewerWrapper minViewerWidth={minViewerWidth}
 		                      onMouseMove={onMouseMove} onMouseLeave={onMouseLeave}
+		                      onScroll={onScroll}
 		                      ref={vwRef}>
 			{state.locator
 				? <>

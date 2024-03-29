@@ -59,7 +59,38 @@ export const N2Playground = () => {
     options.global.alert.show('Hello World');
     \`\`\`
 
-## Section1::
+## Section::X
+
+- Input::Test Input::testInput
+  - disabled
+- Dropdown::Test Dropdown::testDropdown
+  - options: @ext.codes
+- Button::
+  - $fc
+  - $pos: r:2
+  - leads: $icons.angleLeft; $icons.angleRight
+  - text: Test Button
+  - click:
+    \`\`\`
+    options.global.alert.show('Hello World');
+    \`\`\`
+
+## Section::Y
+
+- Input::Test Input::testInput
+  - disabled
+- Dropdown::Test Dropdown::testDropdown
+  - options: @ext.codes
+- Button::
+  - $fc
+  - $pos: r:2
+  - leads: $icons.angleLeft; $icons.angleRight
+  - text: Test Button
+  - click:
+    \`\`\`
+    options.global.alert.show('Hello World');
+    \`\`\`
+
 `;
 	// manual set as external def indicator to make it will be retrieved from given external defs in every refresh.
 	// @ts-ignore

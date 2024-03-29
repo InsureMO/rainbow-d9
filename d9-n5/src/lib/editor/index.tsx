@@ -105,8 +105,14 @@ export const Editor = (props: EditorProps) => {
 		const onLocateLine = (lineNumber: number) => {
 			const editor = state.editor;
 			const line = editor.state.doc.line(lineNumber);
-			const {top} = editor.coordsAtPos(line.from);
-			editor.scrollDOM.scrollTo({top, behavior: 'smooth'});
+			// top, left is relative to current window viewport
+			const {top, left} = editor.coordsAtPos(line.from);
+			const {top: contentTop, left: contentLeft} = editor.contentDOM.getBoundingClientRect();
+			const scroller = editor.scrollDOM;
+			// console.log(line.from, top, left, scroller.scrollTop, contentLeft);
+			scroller.scrollTo({
+				top: top - contentTop, left: left - contentLeft, behavior: 'smooth'
+			});
 			editor.dispatch({selection: {anchor: line.from}});
 		};
 		on(PlaygroundEventTypes.LOCATE_LINE, onLocateLine);
