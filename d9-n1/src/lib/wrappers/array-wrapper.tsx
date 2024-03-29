@@ -8,18 +8,19 @@ import {
 	WrappedAttributes,
 	WrappedNodeAttributes
 } from '../types';
-import {N1Logger, NUtils} from '../utils';
+import {N1Logger, NUtils, StyledNodeDef} from '../utils';
 import {findWidget, RegisteredArrayContainerWidget} from '../widgets-registration';
 import {ArrayElement} from './array-element';
 import {useArrayFunctions} from './use-array-functions';
 
 export interface ArrayWrapperProps extends ArrayContainerDef, ModelHolder, WrappedNodeAttributes, Partial<DeviceTags> {
+	useComputedStyle: boolean;
 }
 
 export const ArrayWrapper = (props: ArrayWrapperProps) => {
 	const {
 		$root, $p2r, $model, $wt,
-		$avs, $vfs, $array,
+		$avs, $vfs, $array, useComputedStyle,
 		...rest
 	} = props;
 
@@ -59,9 +60,10 @@ export const ArrayWrapper = (props: ArrayWrapperProps) => {
 			})];
 	};
 
+	const style = useComputedStyle ? NUtils.computeStyle(rest as unknown as StyledNodeDef) : (void 0);
 	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 	// @ts-ignore
-	return <C $wrapped={$wrapped} {...rest} $wt={$wt} style={NUtils.computeStyle(rest)}
+	return <C $wrapped={$wrapped} {...rest} $wt={$wt} style={style}
 	          data-valid={$avs?.$valid?.valid ?? true}>
 		{Top != null ? <Top $wrapped={$wrapped} $array={enhancedForArray} {...rest} /> : null}
 		{Body == null

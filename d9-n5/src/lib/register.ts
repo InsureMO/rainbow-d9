@@ -40,7 +40,13 @@ export abstract class AbstractPlaygroundTranslator extends Widget.SpecificWidget
 export const registerPlayground = (widgetHelper: Widget.WidgetHelper, widgetType?: string) => {
 	widgetType = VUtils.isBlank(widgetType) ? 'Playground' : widgetType;
 	registerWidget({key: widgetType, JSX: Playground, container: false, array: false});
-	registerWidget({key: PLAYGROUND_WIDGET_WRAPPER, JSX: PlaygroundWidgetWrapper, container: false, array: false});
+	registerWidget({
+		key: PLAYGROUND_WIDGET_WRAPPER,
+		JSX: PlaygroundWidgetWrapper,
+		container: false,
+		array: false,
+		consumePosition: false
+	});
 	// n3 translator
 	const TranslatorClass = class extends AbstractPlaygroundTranslator {
 		public getSupportedType(): string {

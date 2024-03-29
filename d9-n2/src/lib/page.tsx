@@ -29,4 +29,4 @@ export const Page = forwardRef((props: PageProps, ref: ForwardedRef<HTMLDivEleme
 	</APage>;
 });
 
-registerWidget({key: 'Page', JSX: Page, container: true, array: false});
+registerWidget({key: 'Page', JSX: Page, container: true, array: false, consumePosition: false});

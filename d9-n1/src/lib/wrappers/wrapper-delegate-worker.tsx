@@ -44,8 +44,22 @@ export const WrapperDelegateWorker = (workerProps: WrapperDelegateWorkerProps) =
 		N1Logger.error(`Incorrect widget type[${$wt}].`, 'WrapperDelegate');
 		return null;
 	}
-	const hasCover = widgetTypes.length > 1;
 	const [widgetType, ...coverTypes] = widgetTypes;
+	const coverWidgets: Array<[string, RegisteredWidget<WidgetProps> | null]> = coverTypes.map(coverType => {
+		const cover: RegisteredWidget<WidgetProps> = findWidget(coverType);
+		if (cover == null) {
+			N1Logger.error(`Widget definition of [${widgetType}] in [${$wt}] not found.`, 'WrapperDelegate');
+			return [coverType, null];
+		}
+		return [coverType, cover];
+	});
+	if (coverWidgets.some(([, cover]) => cover == null)) {
+		return null;
+	}
+
+	const hasCover = coverTypes.length > 0;
+	// at least one cover width consume the position
+	const coverConsumePosition = hasCover && coverWidgets.some(([, cover]) => cover.consumePosition !== false);
 	const kernel = (() => {
 		const widget: RegisteredWidget<WidgetProps> = findWidget(widgetType);
 		if (widget == null) {
@@ -56,30 +70,27 @@ export const WrapperDelegateWorker = (workerProps: WrapperDelegateWorkerProps) =
 			return <ContainerEventBusProvider>
 				<ContainerValidationEventHolder/>
 				<ArrayWrapper {...(props as unknown as (ArrayContainerDef & ModelHolder))}
-				              $wt={widgetType} $avs={attributeValues} $vfs={validators}/>
+				              $wt={widgetType} $avs={attributeValues} $vfs={validators}
+				              useComputedStyle={widget.consumePosition !== false}/>
 			</ContainerEventBusProvider>;
 		} else if (widget.container) {
 			return <ContainerEventBusProvider>
 				<ContainerValidationEventHolder/>
 				<ContainerWrapper {...(props as unknown as (ContainerDef & ModelHolder))}
-				                  $wt={widgetType} $avs={attributeValues} $vfs={validators}/>
+				                  $wt={widgetType} $avs={attributeValues} $vfs={validators}
+				                  useComputedStyle={widget.consumePosition !== false}/>
 			</ContainerEventBusProvider>;
 		} else {
 			// ignore compute style when it is with covers
 			return <LeafWrapper {...props}
 			                    $wt={widgetType} $avs={attributeValues} $vfs={validators}
-			                    useComputedStyle={!hasCover}/>;
+			                    useComputedStyle={!coverConsumePosition && widget.consumePosition !== false}/>;
 		}
 	})();
 
-	return coverTypes.reduce((child, widgetType) => {
+	return coverWidgets.reduce((child, [$wt, cover]) => {
 		// ignore building when previous building failed
 		if (child == null) {
-			return null;
-		}
-		const widget: RegisteredWidget<WidgetProps> = findWidget(widgetType);
-		if (widget == null) {
-			N1Logger.error(`Widget definition of [${widgetType}] in [${$wt}] not found.`, 'WrapperDelegate');
 			return null;
 		}
 
@@ -88,7 +99,8 @@ export const WrapperDelegateWorker = (workerProps: WrapperDelegateWorkerProps) =
 		// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 		// @ts-ignore
 		return <LeafWrapper {...props}
-		                    $wt={widgetType} $avs={attributeValues} $vfs={validators} useComputedStyle={true}>
+		                    $wt={$wt} $avs={attributeValues} $vfs={validators}
+		                    useComputedStyle={cover.consumePosition !== false}>
 			{child}
 		</LeafWrapper>;
 	}, kernel);

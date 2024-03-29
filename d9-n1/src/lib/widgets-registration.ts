@@ -18,6 +18,8 @@ export interface RegisteredWidget<P extends WidgetProps> {
 	container: boolean;
 	/** is array container or not */
 	array: boolean;
+	/** default true */
+	consumePosition?: boolean;
 }
 
 /**

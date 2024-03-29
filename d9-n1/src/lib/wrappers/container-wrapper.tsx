@@ -9,18 +9,19 @@ import {
 	WrappedAttributes,
 	WrappedNodeAttributes
 } from '../types';
-import {MUtils, NUtils, PPUtils} from '../utils';
+import {MUtils, NUtils, PPUtils, StyledNodeDef} from '../utils';
 import {findWidget, RegisteredContainerWidget} from '../widgets-registration';
 import {renderContainerChildren} from './render-container-children';
 import {useContainerChildren} from './use-container-children';
 
 export interface ContainerWrapperProps extends ContainerDef, ModelHolder, WrappedNodeAttributes, Partial<DeviceTags> {
+	useComputedStyle: boolean;
 }
 
 export const ContainerWrapper = (props: ContainerWrapperProps) => {
 	const {
 		$root, $p2r, $model, $wt,
-		$avs, $vfs,
+		$avs, $vfs, useComputedStyle,
 		...rest
 	} = props;
 
@@ -43,10 +44,11 @@ export const ContainerWrapper = (props: ContainerWrapperProps) => {
 	const widget: RegisteredContainerWidget<ContainerWidgetProps> = findWidget($wt);
 	const C = widget.JSX;
 
+	const style = useComputedStyle ? NUtils.computeStyle(rest as unknown as StyledNodeDef) : (void 0);
 	// render container itself
 	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 	// @ts-ignore
-	return <C $wrapped={$wrapped} {...rest} $wt={$wt} style={NUtils.computeStyle(rest)}
+	return <C $wrapped={$wrapped} {...rest} $wt={$wt} style={style}
 	          data-valid={$avs?.$valid?.valid ?? true}>
 		{renderContainerChildren({
 			def: props, childrenDefs, keys, $wrapped: {...$wrapped, $p2r: $subP2r, $model: $subModel}
