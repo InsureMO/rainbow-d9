@@ -20,3 +20,4 @@ export {SideSlider} from './slider';
 export {Slider} from './slider';
 export {ParseError} from './viewer/widgets';
 export {ViewerWrapper} from './viewer/widgets';
+export {ViewerKernel} from './viewer/kernel';

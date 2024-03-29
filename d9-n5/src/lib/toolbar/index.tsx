@@ -176,6 +176,7 @@ export const ToolbarButton = (props: { icon: PlaygroundIcons | string; tooltip?:
 
 export interface PrimaryBarState {
 	editorBadge: boolean;
+	locator: boolean;
 	zen: boolean;
 	maximized: boolean;
 	group: PlaygroundWidgetGroupKey | string;
@@ -190,7 +191,7 @@ export const PrimaryBar = (props: PrimaryBarProps) => {
 
 	const {fire} = usePlaygroundEventBus();
 	const [state, setState] = useState<PrimaryBarState>({
-		editorBadge: false, zen: false, maximized: false, group: groups[0]?.key ?? ''
+		editorBadge: false, locator: true, zen: false, maximized: false, group: groups[0]?.key ?? ''
 	});
 	useEffect(() => {
 		const onFullScreenChanged = () => {
@@ -215,6 +216,14 @@ export const PrimaryBar = (props: PrimaryBarProps) => {
 	const onHideBadgeClicked = () => {
 		fire(PlaygroundEventTypes.SWITCH_EDITOR_BADGE, false);
 		setState(state => ({...state, editorBadge: false}));
+	};
+	const onShowLocatorClicked = () => {
+		fire(PlaygroundEventTypes.SWITCH_VIEWER_WRAPPER, {locator: true});
+		setState(state => ({...state, locator: true}));
+	};
+	const onHideLocatorClicked = () => {
+		fire(PlaygroundEventTypes.SWITCH_VIEWER_WRAPPER, {locator: false});
+		setState(state => ({...state, locator: false}));
 	};
 	const onMaxClicked = () => {
 		fire(PlaygroundEventTypes.MAXIMIZE);
@@ -246,6 +255,12 @@ export const PrimaryBar = (props: PrimaryBarProps) => {
 			:
 			<ToolbarButton icon={PlaygroundIcons.SHOW_EDITOR_BADGE} tooltip="Show Editor Badge"
 			               click={onShowBadgeClicked}/>}
+		{state.locator
+			? <ToolbarButton icon={PlaygroundIcons.HIDE_LOCATOR} tooltip="Hide Widget Locator"
+			                 click={onHideLocatorClicked}/>
+			:
+			<ToolbarButton icon={PlaygroundIcons.SHOW_LOCATOR} tooltip="Show Widget Locator"
+			               click={onShowLocatorClicked}/>}
 		<ToolbarSeparator/>
 		{!state.zen && state.maximized
 			? <ToolbarButton icon={PlaygroundIcons.MINIMIZE} tooltip="Quit Maximization" click={onMinClicked}/>

@@ -27,7 +27,9 @@ export const PlaygroundCssVars = {
 	TEMPLATE_DIALOG_MARGIN_LEFT: 'var(--d9-playground-template-dialog-margin-left, 15vw)',
 	TEMPLATE_DIALOG_PADDING: 'var(--d9-playground-template-dialog-padding, 32px 32px 16px)',
 	TEMPLATE_DIALOG_BODY_MARGIN_BOTTOM: 'var(--d9-playground-template-dialog-margin-bottom, 16px)',
-	WIDGET_WRAPPER_Z_INDEX: Infinity,
+	WIDGET_WRAPPER_Z_INDEX: 2000000000,
 	WIDGET_WRAPPER_BORDER_RADIUS: 'var(--d9-playground-ww-border-radius, 4px)',
-	WIDGET_WRAPPER_SHADOW: 'var(--d9-playground-ww-shadow, 0 0 5px 2px rgba(250,0,0,0.2))'
+	WIDGET_WRAPPER_SHADOW: 'var(--d9-playground-ww-shadow, 0 0 5px 2px rgba(0,0,0,0.2))',
+	WIDGET_WRAPPER_TOOLBAR_COLOR: 'var(--d9-playground-ww-toolbar-color, rgba(0,0,0,0.4))',
+	WIDGET_WRAPPER_TOOLBAR_FILTER: 'var(--d9-playground-ww-toolbar-filter, drop-shadow(2px 4px 6px black))'
 };

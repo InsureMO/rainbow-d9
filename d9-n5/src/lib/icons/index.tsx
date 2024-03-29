@@ -20,10 +20,13 @@ import {DecoPasswordIcon} from './deco-password';
 import {DisplayGroupIcon} from './display-group';
 import {DropdownIcon} from './dropdown';
 import {HideEditorBadgeIcon} from './hide-editor-badge';
+import {HideLocatorIcon} from './hide-locator';
 import {InputIcon} from './input';
 import {InputGroupIcon} from './input-group';
+import {JsonIcon} from './json';
 import {LabelIcon} from './label';
 import {LinkIcon} from './link';
+import {LocateIcon} from './locate';
 import {MaxIcon} from './max';
 import {MinIcon} from './min';
 import {MultiDropdownIcon} from './multi-dropdown';
@@ -35,6 +38,7 @@ import {RadiosIcon} from './radios';
 import {RibsIcon} from './ribs';
 import {SectionIcon} from './section';
 import {ShowEditorBadgeIcon} from './show-editor-badge';
+import {ShowLocatorIcon} from './show-locator';
 import {TableIcon} from './table';
 import {TabsIcon} from './tabs';
 import {TextAreaIcon} from './textarea';
@@ -51,10 +55,14 @@ export enum PlaygroundIcons {
 	DISPLAY_GROUP = 'playground.display-group',
 	SHOW_EDITOR_BADGE = 'playground.show-editor-badge',
 	HIDE_EDITOR_BADGE = 'playground.hide-editor-badge',
+	SHOW_LOCATOR = 'playground.show-locator',
+	HIDE_LOCATOR = 'playground.hide-locator',
 	MAXIMIZE = 'playground.max',
 	MINIMIZE = 'playground.min',
 	ZEN = 'playground.zen',
 	WINDOW = 'playground.window',
+	LOCATE = 'playground.locate',
+	JSON = 'playground.json',
 
 	SECTION = 'playground.section',
 	BOX = 'playground.box',
@@ -101,10 +109,14 @@ Icons.Registrar.register({
 
 	[PlaygroundIcons.SHOW_EDITOR_BADGE]: () => <ShowEditorBadgeIcon/>,
 	[PlaygroundIcons.HIDE_EDITOR_BADGE]: () => <HideEditorBadgeIcon/>,
+	[PlaygroundIcons.SHOW_LOCATOR]: () => <ShowLocatorIcon/>,
+	[PlaygroundIcons.HIDE_LOCATOR]: () => <HideLocatorIcon/>,
 	[PlaygroundIcons.MAXIMIZE]: () => <MaxIcon/>,
 	[PlaygroundIcons.MINIMIZE]: () => <MinIcon/>,
 	[PlaygroundIcons.ZEN]: () => <ZenIcon/>,
 	[PlaygroundIcons.WINDOW]: () => <WindowIcon/>,
+	[PlaygroundIcons.LOCATE]: () => <LocateIcon/>,
+	[PlaygroundIcons.JSON]: () => <JsonIcon/>,
 
 	[PlaygroundIcons.SECTION]: () => <SectionIcon/>,
 	[PlaygroundIcons.BOX]: () => <BoxIcon/>,

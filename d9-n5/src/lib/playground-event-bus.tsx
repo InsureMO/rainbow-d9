@@ -5,6 +5,7 @@ import {PlaygroundWidgetGroupKey} from './types';
 
 export enum PlaygroundEventTypes {
 	SWITCH_EDITOR_BADGE = 'switch-editor-badge',
+	SWITCH_VIEWER_WRAPPER = 'switch-viewer-wrapper',
 	MAXIMIZE = 'maximize',
 	QUIT_MAXIMIZE = 'quit-maximize',
 	ZEN = 'zen',
@@ -33,6 +34,12 @@ export interface PlaygroundEventBus {
 	on(type: PlaygroundEventTypes.SWITCH_EDITOR_BADGE, listener: (visible: boolean) => void): this;
 
 	off(type: PlaygroundEventTypes.SWITCH_EDITOR_BADGE, listener: (visible: boolean) => void): this;
+
+	fire(type: PlaygroundEventTypes.SWITCH_VIEWER_WRAPPER, wrapper: { locator: boolean }): this;
+
+	on(type: PlaygroundEventTypes.SWITCH_VIEWER_WRAPPER, listener: (wrapper: { locator: boolean }) => void): this;
+
+	off(type: PlaygroundEventTypes.SWITCH_VIEWER_WRAPPER, listener: (wrapper: { locator: boolean }) => void): this;
 
 	fire(type: PlaygroundEventTypes.MAXIMIZE): this;
 
