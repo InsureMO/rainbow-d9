@@ -20,7 +20,8 @@ export enum PlaygroundEventTypes {
 	INSERT_WIDGET_TEMPLATE = 'insert-widget-template',
 	SHOW_WIDGET_TEMPLATE_DIALOG = 'show-widget-template-dialog',
 
-	EDIT_MOCK_JSON = 'edit-mock-json'
+	EDIT_MOCK_JSON = 'edit-mock-json',
+	FORCE_UPDATE_VIEWER = 'force-update-viewer',
 }
 
 /** should be -1 if there is no cursor */
@@ -115,6 +116,12 @@ export interface PlaygroundEventBus {
 	on(type: PlaygroundEventTypes.EDIT_MOCK_JSON, listener: () => void): this;
 
 	off(type: PlaygroundEventTypes.EDIT_MOCK_JSON, listener: () => void): this;
+
+	fire(type: PlaygroundEventTypes.FORCE_UPDATE_VIEWER): this;
+
+	on(type: PlaygroundEventTypes.FORCE_UPDATE_VIEWER, listener: () => void): this;
+
+	off(type: PlaygroundEventTypes.FORCE_UPDATE_VIEWER, listener: () => void): this;
 }
 
 const Context = createContext<PlaygroundEventBus>({} as PlaygroundEventBus);

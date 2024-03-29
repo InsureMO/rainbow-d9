@@ -154,6 +154,7 @@ export const WidgetTemplateDialog = (props: WidgetTemplateDialogProps) => {
 	}, []);
 	useEffect(() => {
 		const show = (keyOrWidgetType: WidgetType, prefix: string, reason: ReactNode) => {
+			// noinspection DuplicatedCode
 			if (state.visible || state.editor == null) {
 				return;
 			}

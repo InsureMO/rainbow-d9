@@ -3,6 +3,7 @@ import {
 	ExternalDefsHandlerOptions,
 	NodeDef,
 	StandaloneRoot,
+	useForceUpdate,
 	useThrottler,
 	VUtils
 } from '@rainbow-d9/n1';
@@ -55,6 +56,7 @@ export const ViewerKernel = (props: ViewerProps & { content: string }) => {
 	const wwtRef = useRef<HTMLDivElement>(null);
 	const {replace, clear} = useThrottler();
 	const {on, off, fire} = usePlaygroundEventBus();
+	const forceUpdate = useForceUpdate();
 	const [state, setState] = useState<ViewerKernelState>({locator: true});
 	useEffect(() => {
 		const onSwitchViewerWrapper = (wrapper: { locator: boolean }) => setState(state => ({
@@ -65,6 +67,15 @@ export const ViewerKernel = (props: ViewerProps & { content: string }) => {
 			off(PlaygroundEventTypes.SWITCH_VIEWER_WRAPPER, onSwitchViewerWrapper);
 		};
 	}, [on, off]);
+	useEffect(() => {
+		const onForceUpdateViewer = () => {
+			forceUpdate();
+		};
+		on(PlaygroundEventTypes.FORCE_UPDATE_VIEWER, onForceUpdateViewer);
+		return () => {
+			off(PlaygroundEventTypes.FORCE_UPDATE_VIEWER, onForceUpdateViewer);
+		};
+	}, [on, off, forceUpdate]);
 
 	try {
 		const {

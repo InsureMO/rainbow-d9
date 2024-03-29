@@ -121,7 +121,7 @@ export const MockJsonDialog = (props: MockJsonDialogProps) => {
 	const {mockData} = props;
 
 	const ref = useRef<HTMLDivElement>(null);
-	const {on, off} = usePlaygroundEventBus();
+	const {on, off, fire} = usePlaygroundEventBus();
 	const [state, setState] = useState<MockJsonDialogState>({visible: false, copied: false});
 	useEffect(() => {
 		if (ref.current == null) {
@@ -148,6 +148,7 @@ export const MockJsonDialog = (props: MockJsonDialogProps) => {
 	}, []);
 	useEffect(() => {
 		const show = () => {
+			// noinspection DuplicatedCode
 			if (state.visible || state.editor == null) {
 				return;
 			}
@@ -196,7 +197,7 @@ export const MockJsonDialog = (props: MockJsonDialogProps) => {
 			const parsed = JSON.parse(json);
 			Object.keys(mockData).forEach(key => delete mockData[key]);
 			Object.keys(parsed).forEach(key => mockData[key] = parsed[key]);
-			// TODO notify refresh
+			fire(PlaygroundEventTypes.FORCE_UPDATE_VIEWER);
 			onHide();
 		} catch {
 			setState(state => ({
