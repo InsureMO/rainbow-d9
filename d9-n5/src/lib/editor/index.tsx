@@ -106,14 +106,23 @@ export const Editor = (props: EditorProps) => {
 			const editor = state.editor;
 			const line = editor.state.doc.line(lineNumber);
 			// top, left is relative to current window viewport
-			const {top, left} = editor.coordsAtPos(line.from);
-			const {top: contentTop, left: contentLeft} = editor.contentDOM.getBoundingClientRect();
-			const scroller = editor.scrollDOM;
-			// console.log(line.from, top, left, scroller.scrollTop, contentLeft);
-			scroller.scrollTo({
-				top: top - contentTop, left: left - contentLeft, behavior: 'smooth'
-			});
-			editor.dispatch({selection: {anchor: line.from}});
+			editor.dispatch({selection: {anchor: line.from}, scrollIntoView: true});
+			// not sure that scrolling is sync or async,
+			// therefore delay 100ms to make compensatory moves, and try the exception
+			// the compensatory moves is necessary because the scrolling might let the line at bottom of editor viewport
+			setTimeout(() => {
+				try {
+					const {top, left} = editor.coordsAtPos(line.from);
+					const {top: contentTop, left: contentLeft} = editor.contentDOM.getBoundingClientRect();
+					const scroller = editor.scrollDOM;
+					// console.log(line.from, top, left, scroller.scrollTop, contentLeft);
+					scroller.scrollTo({
+						top: Math.max(0, top - contentTop - 20), left: left - contentLeft, behavior: 'smooth'
+					});
+				} catch {
+					// do nothing, simply ignore
+				}
+			}, 100);
 		};
 		on(PlaygroundEventTypes.LOCATE_LINE, onLocateLine);
 		return () => {
