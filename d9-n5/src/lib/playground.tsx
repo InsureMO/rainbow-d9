@@ -1,4 +1,4 @@
-import {MUtils, NodeAttributeValues, PPUtils, PropValue, VUtils} from '@rainbow-d9/n1';
+import {MUtils, NodeAttributeValues, ObjectPropValue, PPUtils, PropValue, VUtils} from '@rainbow-d9/n1';
 import {CssVars, DOM_KEY_WIDGET, useGlobalHandlers} from '@rainbow-d9/n2';
 import React, {useRef} from 'react';
 import styled from 'styled-components';
@@ -110,15 +110,16 @@ export const Playground = (props: PlaygroundProps) => {
 };
 
 export const UnwrappedPlayground = (props: UnwrappedPlaygroundProps) => {
-	const {disabled, visible, onValueChange, ...rest} = props;
+	const {$pp = 'value', value = '', disabled, visible, onValueChange, ...rest} = props;
 
 	const $onValueChange = (content?: PropValue) => {
 		onValueChange && onValueChange(content as string);
 	};
 	const $avs = {$disabled: disabled, $visible: visible} as NodeAttributeValues;
-	const $root = {};
+	const $root: ObjectPropValue = {[$pp]: value as PropValue};
 
 	return <Playground {...rest}
 	                   $wrapped={{$onValueChange, $avs, $root, $model: $root, $p2r: '.'}}
+	                   $pp={$pp}
 	                   id={rest.id ?? VUtils.generateUniqueId()}/>;
 };
