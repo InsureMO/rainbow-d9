@@ -116,7 +116,7 @@ export const UnwrappedPlayground = (props: UnwrappedPlaygroundProps) => {
 		onValueChange && onValueChange(content as string);
 	};
 	const $avs = {$disabled: disabled, $visible: visible} as NodeAttributeValues;
-	const $root: ObjectPropValue = {[$pp]: value as PropValue};
+	const $root: ObjectPropValue = {[$pp]: value};
 
 	return <Playground {...rest}
 	                   $wrapped={{$onValueChange, $avs, $root, $model: $root, $p2r: '.'}}
