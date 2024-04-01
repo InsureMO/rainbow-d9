@@ -59,7 +59,7 @@ export type TableDef = Omit<ArrayContainerDef, '$nodes'> & OmitHTMLProps<HTMLDiv
 	/** omit default row operators */
 	omitDefaultRowOperators?: boolean | 'remove' | 'fold';
 	/** row operators */
-	rowOperators: Array<TableRowButtonDef>;
+	rowOperators?: Array<TableRowButtonDef>;
 	pageable?: TablePaginationDef;
 };
 
