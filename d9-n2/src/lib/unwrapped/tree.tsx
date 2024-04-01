@@ -19,6 +19,7 @@ const UnwrappedTree = forwardRef((props: UnwrappedTreeProps, ref: ForwardedRef<H
 
 	return <Tree {...rest}
 	             $wrapped={{$onValueChange, $avs, $root, $model: $root, $p2r: '.'}}
+	             $pp={$pp}
 	             id={rest.id ?? VUtils.generateUniqueId()}
 	             ref={ref}/>;
 });

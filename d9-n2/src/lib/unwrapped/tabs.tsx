@@ -4,8 +4,8 @@ import {Tabs, TabsProps} from '../tabs';
 
 /** Tabs configuration definition */
 type UnwrappedTabsProps =
-	Omit<TabsProps, 'disabled' | '$wrapped' | keyof MonitorNodeDef>
-	& { visible?: boolean };
+	Omit<TabsProps, 'disabled' | 'value' | '$wrapped' | keyof MonitorNodeDef>
+	& { value?: PropValue; visible?: boolean };
 
 const UnwrappedTabs = (props: UnwrappedTabsProps) => {
 	const {
@@ -15,7 +15,7 @@ const UnwrappedTabs = (props: UnwrappedTabsProps) => {
 
 	const $onValueChange = VUtils.noop;
 	const $avs = {$disabled: false, $visible: visible} as NodeAttributeValues;
-	const $root = {[$pp]: value as PropValue};
+	const $root = {[$pp]: value};
 
 	return <Tabs {...rest} title={title}
 	             $wrapped={{$onValueChange, $avs, $root, $model: $root, $p2r: '.'}}

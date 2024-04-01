@@ -139,9 +139,10 @@ export interface ViewerProps {
 
 /** Section configuration definition */
 export type UnwrappedPlaygroundProps =
-	Omit<PlaygroundProps, 'valueChanged' | '$wrapped' | keyof MonitorNodeDef>
+	Omit<PlaygroundProps, 'valueChanged' | 'value' | '$wrapped' | keyof MonitorNodeDef>
 	& {
 	onValueChange?: (value?: string) => void;
+	value?: string;
 	visible?: boolean;
 	disabled?: boolean;
 };

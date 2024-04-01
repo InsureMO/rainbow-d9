@@ -4,8 +4,8 @@ import {Wizard, WizardProps} from '../wizard';
 
 /** Wizard configuration definition */
 type UnwrappedWizardProps =
-	Omit<WizardProps, 'disabled' | '$wrapped' | keyof MonitorNodeDef>
-	& { visible?: boolean };
+	Omit<WizardProps, 'disabled' | 'value' | '$wrapped' | keyof MonitorNodeDef>
+	& { value?: PropValue; visible?: boolean };
 
 const UnwrappedWizard = (props: UnwrappedWizardProps) => {
 	const {
@@ -15,7 +15,7 @@ const UnwrappedWizard = (props: UnwrappedWizardProps) => {
 
 	const $onValueChange = VUtils.noop;
 	const $avs = {$disabled: false, $visible: visible} as NodeAttributeValues;
-	const $root = {[$pp]: value as PropValue};
+	const $root = {[$pp]: value};
 
 	return <Wizard {...rest} title={title}
 	               $wrapped={{$onValueChange, $avs, $root, $model: $root, $p2r: '.'}}
