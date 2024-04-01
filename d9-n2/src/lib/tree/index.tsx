@@ -4,7 +4,7 @@ import {useGlobalHandlers} from '../global';
 import {TreeEventBusProvider} from './event/tree-event-bus';
 import {TreeNode} from './node';
 import {TreeNodeDef, TreeProps} from './types';
-import {buildDetective} from './utils';
+import {buildTreeNodesDetective} from './utils';
 import {ATree} from './widgets';
 
 export const InternalTree = forwardRef((props: TreeProps, ref: ForwardedRef<HTMLDivElement>) => {
@@ -19,7 +19,7 @@ export const InternalTree = forwardRef((props: TreeProps, ref: ForwardedRef<HTML
 	const {$p2r, $avs: {$disabled, $visible}} = $wrapped;
 
 	const globalHandlers = useGlobalHandlers();
-	const detect = buildDetective(detective, {checkable, addable, removable});
+	const detect = buildTreeNodesDetective(detective, {checkable, addable, removable});
 	// model of whole tree
 	const rootNodeValue = MUtils.getValue($wrapped.$model, $pp);
 	// root node never show, only for create top level nodes
@@ -60,5 +60,13 @@ export const Tree = forwardRef((props: TreeProps, ref: ForwardedRef<HTMLDivEleme
 
 registerWidget({key: 'Tree', JSX: Tree, container: false, array: false});
 
+export * from './node';
+export * from './node-event-bridge';
+export * from './node-renderer';
+export * from './child-nodes';
 export * from './utils';
 export * from './types';
+export * from './event/tree-node-event-bus-types';
+export * from './event/tree-node-event-bus';
+export * from './event/tree-event-bus-types';
+export * from './event/tree-event-bus';

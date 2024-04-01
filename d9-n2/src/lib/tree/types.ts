@@ -11,7 +11,14 @@ export interface TreeNodeOperation {
 	removable?: boolean;
 }
 
-export interface TreeNodeDef extends TreeNodeOperation {
+export interface TreeNodeOperation2 extends TreeNodeOperation {
+	/** get checked, mandatory when checkable */
+	checked?: (node: TreeNodeDef) => boolean;
+	/** changed checked, mandatory when checkable */
+	check?: (node: TreeNodeDef, checked: boolean) => void;
+}
+
+export interface TreeNodeDef extends TreeNodeOperation2 {
 	/**
 	 * is value is primitive value, then addable/removable/checkable will be ignored.
 	 * and this node must be a leaf node

@@ -1,4 +1,4 @@
-import {PPUtils, PropertyPath, StandaloneRoot, VUtils} from '@rainbow-d9/n1';
+import {Nullable, PPUtils, PropertyPath, StandaloneRoot, VUtils} from '@rainbow-d9/n1';
 import {GlobalRoot, TreeNodeDef} from '@rainbow-d9/n2';
 import {CustomEventHandler} from '../custom-event-handler';
 import {N2DemoDialogHandler} from '../n2-dialog-handler';
@@ -34,27 +34,42 @@ const treeDetective = (parentNode?: TreeNodeDef): Array<TreeNodeDef> => {
 			// compute my path to tree model
 			const $ip2r = PPUtils.concat(parent$ip2r, $ip2p);
 			let label;
+			let checkable: boolean = false;
+			let checked: Nullable<TreeNodeDef['checked']> = (void 0);
+			let check: Nullable<TreeNodeDef['check']> = (void 0);
 			if (VUtils.isPrimitive(item)) {
 				// use item itself as label
 				label = `${item ?? ''}`;
-			} else if (item.label == null) {
-				// no label declared, assigned as unnamed
-				label = 'Unnamed';
-			} else if (VUtils.isPrimitive(item.label)) {
-				// label is primitive type, use it to renderer
-				label = `${item.label ?? ''}`;
 			} else {
-				// read text as renderer label
-				label = {
-					$wt: 'Label',
-					$pp: 'label.text',
-					leads: ['$icons.check'],
-					tails: ['$icons.remove']
+				if (item.label == null) {
+					// no label declared, assigned as unnamed
+					label = 'Unnamed';
+				} else if (VUtils.isPrimitive(item.label)) {
+					// label is primitive type, use it to renderer
+					label = `${item.label ?? ''}`;
+				} else {
+					// read text as renderer label
+					label = {
+						$wt: 'Label',
+						$pp: 'label.text',
+						leads: ['$icons.check'],
+						tails: ['$icons.remove']
+					};
+				}
+				checkable = true;
+				checked = () => item.checked ?? false;
+				check = (def, checked) => {
+					item.checked = checked;
+					(def.children ?? []).forEach(child => {
+						if (child.checkable) {
+							child.check!(child, checked);
+						}
+					});
 				};
 			}
 			return {
 				value: item, $ip2r, $ip2p, label,
-				checkable: false, addable: false, removable: false
+				checkable, checked, check, addable: false, removable: false
 			} as TreeNodeDef;
 		}
 	}).filter(item => item != null) as Array<TreeNodeDef>;

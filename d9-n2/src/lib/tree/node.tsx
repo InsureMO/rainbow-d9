@@ -1,7 +1,8 @@
 import React from 'react';
+import {ChildTreeNodes} from './child-nodes';
 import {TreeNodeEventBusProvider, useTreeNodeEventBus} from './event/tree-node-event-bus';
 import {TreeNodeEventTypes} from './event/tree-node-event-bus-types';
-import {NodeEventLadder} from './node-ladder';
+import {TreeNodeEventBridge} from './node-event-bridge';
 import {TreeNodeRenderer} from './node-renderer';
 import {TreeDef, TreeNodeDef, TreeProps} from './types';
 import {TreeNodeWrapper} from './widgets';
@@ -27,35 +28,22 @@ export const TreeNode = (props: TreeNodeProps) => {
 
 	const {fire} = useTreeNodeEventBus();
 
+	// bridge event to me
 	// if it is top level node, then will not be wrapped by tree node event bus provider
 	// then fire is undefined
 	// and in this case, there is no need to notify parent this event, simply ignore
-	const expandParent = (expanded: boolean) => fire && fire(TreeNodeEventTypes.SWITCH_EXPAND, node.$ip2r, expanded);
-
-	const children = node.children ?? [];
-	const childrenCount = children.length;
-	const hasChild = childrenCount !== 0;
-	const canCheck = node.checkable ?? false;
-	const canAdd = node.addable ?? false;
-	const canRemove = node.removable ?? false;
+	const expandParent = (expanded: boolean) => fire && fire(TreeNodeEventTypes.SWITCH_MY_EXPAND_FROM_CHILD, node.$ip2r, expanded);
+	const nodeCheckedChanged = (checked: boolean) => fire && fire(TreeNodeEventTypes.SWITCH_MY_CHECKED_FROM_CHILD, node.$ip2r, checked);
 
 	return <TreeNodeEventBusProvider>
-		<NodeEventLadder node={node} expandParent={expandParent}/>
+		<TreeNodeEventBridge node={node} expandParent={expandParent} nodeCheckedChanged={nodeCheckedChanged}/>
 		<TreeNodeWrapper data-last-of-parent={lastOfParent} level={level}>
 			<TreeNodeRenderer initExpandLevel={initExpandLevel} showIndex={showIndex} $wrapped={$wrapped}
-			                  node={node} displayIndex={displayIndex} lastOfParent={lastOfParent} level={level}
-			                  canCheck={canCheck} canAdd={canAdd} canRemove={canRemove}/>
-			{hasChild
-				? children.map((child, index) => {
-					const last = index === childrenCount - 1;
-					const myDisplayIndex = `${displayIndex}.${index + 1}`;
-					return <TreeNode halfChecked={halfChecked} initExpandLevel={initExpandLevel} showIndex={showIndex}
-					                 detective={detective} $wrapped={$wrapped}
-					                 node={child}
-					                 displayIndex={myDisplayIndex} lastOfParent={last} level={level + 1}
-					                 key={child.$ip2p}/>;
-				}).filter(x => x != null)
-				: null}
+			                  node={node} displayIndex={displayIndex} lastOfParent={lastOfParent} level={level}/>
+			<ChildTreeNodes node={node} halfChecked={halfChecked}
+			                initExpandLevel={initExpandLevel} level={level}
+			                showIndex={showIndex} displayIndex={displayIndex}
+			                $wrapped={$wrapped}/>
 		</TreeNodeWrapper>
 	</TreeNodeEventBusProvider>;
 };
