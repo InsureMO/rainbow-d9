@@ -52,14 +52,10 @@ const treeDetective = (parentNode?: TreeNodeDef): Array<TreeNodeDef> => {
 					tails: ['$icons.remove']
 				};
 			}
-			const def = {
+			return {
 				value: item, $ip2r, $ip2p, label,
 				checkable: false, addable: false, removable: false
 			} as TreeNodeDef;
-			if (!VUtils.isPrimitive(item)) {
-				def.children = treeDetective(def);
-			}
-			return def;
 		}
 	}).filter(item => item != null) as Array<TreeNodeDef>;
 };
