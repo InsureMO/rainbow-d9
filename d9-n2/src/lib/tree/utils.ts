@@ -26,20 +26,23 @@ export const defaultDetective: TreeNodeDetect = (parentNode, _options) => {
 		nodes = (parentNode.value as any).children ?? [];
 		parent$ip2r = `${parentNode.$ip2r}.children`;
 	}
-	return nodes.map((item, index, items) => {
+	return nodes.map((item, index) => {
 		if (item == null) {
 			return null;
 		} else {
 			const $ip2p = `[${index}]`;
 			const $ip2r = PPUtils.concat(parent$ip2r, $ip2p);
-			return {
+			const def = {
 				// concat parent path to root node as my path to root node
 				value: item, $ip2r, $ip2p,
 				// eslint-disable-next-line @typescript-eslint/no-explicit-any
 				label: VUtils.isPrimitive(item) ? `${item ?? ''}` : ((item as any).label ?? ''),
-				checkable: false, addable: false, removable: false,
-				leaf: index === items.length - 1
+				checkable: false, addable: false, removable: false
 			} as TreeNodeDef;
+			if (!VUtils.isPrimitive(item)) {
+				def.children = defaultDetective(def, _options);
+			}
+			return def;
 		}
 	}).filter(item => item != null);
 };

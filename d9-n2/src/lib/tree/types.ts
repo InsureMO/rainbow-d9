@@ -1,6 +1,5 @@
 import {NodeDef, PropertyPath, PropValue, Undefinable, WidgetProps} from '@rainbow-d9/n1';
 import {ReactNode} from 'react';
-import {CaptionDef} from '../caption';
 import {GlobalEventHandlers, OmitHTMLProps2, OmitNodeDef} from '../types';
 
 export interface TreeNodeOperation {
@@ -27,9 +26,8 @@ export interface TreeNodeDef extends TreeNodeOperation {
 	/** inside property path to parent. */
 	$ip2p: PropertyPath;
 	marker?: string;
-	label?: string | ReactNode | CaptionDef;
-	/** is leaf node or not, even it is leaf, addable still might be worked */
-	leaf?: boolean;
+	label?: string | ReactNode | NodeDef;
+	children?: Array<TreeNodeDef>;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
