@@ -30,7 +30,7 @@ export const TreeNode = (props: TreeNodeProps) => {
 	// if it is top level node, then will not be wrapped by tree node event bus provider
 	// then fire is undefined
 	// and in this case, there is no need to notify parent this event, simply ignore
-	const expandParent = () => fire && fire(TreeNodeEventTypes.EXPANDED, node.$ip2r);
+	const expandParent = (expanded: boolean) => fire && fire(TreeNodeEventTypes.SWITCH_EXPAND, node.$ip2r, expanded);
 
 	const children = node.children ?? [];
 	const childrenCount = children.length;
