@@ -228,6 +228,7 @@ $d9.$d9n2 = $d9.$d9n2 ?? {
 					removeItem: 'Remove'
 				},
 				wizard: {previous: 'Previous', next: 'Next'},
+				tree: {filter: {placeholder: 'Filter...'}},
 				pagination: {
 					page: '', of: 'of', pages: 'pages,', afterSize: 'items per page,',
 					total: 'total', unknownItemCount: '???', items: 'items.'

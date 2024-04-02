@@ -40,5 +40,6 @@ export const TreeSearchBox = () => {
 
 	return <UnwrappedDecorateInput visible={state.visible} value={state.value} onValueChange={onValueChange}
 	                               leads={['$icons.search']}
+	                               placeholder="tree.filter.placeholder"
 	                               ref={ref}/>;
 };

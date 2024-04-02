@@ -6,12 +6,14 @@ import {GlobalEventTypes, useGlobalEventBus} from './global';
 export interface IntlLabelProps {
 	keys: Array<string>;
 	value?: string;
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	replacements?: Array<any>;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const toIntlLabel = (text: any) => {
+export const toIntlLabel = (text: any, ...replacements: Array<any>) => {
 	if (typeof text === 'string') {
-		return <IntlLabel keys={[`${text}`]} value={text}/>;
+		return <IntlLabel keys={[`${text}`]} value={text} replacements={replacements}/>;
 	} else {
 		return text;
 	}
@@ -30,8 +32,18 @@ export const useLanguage = () => {
 		};
 	}, [on, off, forceUpdate]);
 };
+
+const replaceTemplate = (template: string, values?: Array<any>): string => {
+	values = values ?? [];
+	for (let index = 0; index < values.length; index++) {
+		// 使用正则表达式替换模板字符串中的 {i} 为对应的值
+		template = template.replace(new RegExp('\\{' + index + '\\}', 'g'), values[index] ?? '');
+	}
+	return template;
+};
+
 export const IntlLabel = (props: IntlLabelProps) => {
-	const {keys, value} = props;
+	const {keys, value, replacements} = props;
 	useLanguage();
 
 	const language = $d9n2.intl.language;
@@ -52,6 +64,7 @@ export const IntlLabel = (props: IntlLabelProps) => {
 			}
 		}
 	}
+	label = replaceTemplate(label ?? '', replacements);
 
 	return <>{label}</>;
 };

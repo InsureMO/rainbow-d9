@@ -19,6 +19,7 @@ import DemoData from './demo.json';
 import {markdown as DemoContent} from './demo.md';
 
 $d9n2.intl.labels['en-US'] = {
+	...($d9n2.intl.labels['en-US'] ?? {}),
 	'Standard Plan #1': '标准保障计划 #1',
 	'After Tax': '税后',
 	'Fire & Theft': '火灾和盗抢',
