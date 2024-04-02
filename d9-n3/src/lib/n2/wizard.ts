@@ -1,7 +1,9 @@
 import {ContainerDef, ExternalDefIndicator, NodeDef} from '@rainbow-d9/n1';
 import {SectionDef, WizardDef, WizardSharedDef, WizardStepDef} from '@rainbow-d9/n2';
-import {SpecificWidgetTranslator} from '../widget';
+import {AttributeValueBuild, createAsyncSnippetBuild, SpecificWidgetTranslator} from '../widget';
 import {N2WidgetType} from './types';
+
+export const N2WizardSharedBodyBuild = createAsyncSnippetBuild<WizardSharedDef, 'body'>('body', []);
 
 export class N2WizardSharedTranslator extends SpecificWidgetTranslator<N2WidgetType.WIZARD_SHARED> {
 	public getSupportedType(): N2WidgetType.WIZARD_SHARED {
@@ -10,6 +12,11 @@ export class N2WizardSharedTranslator extends SpecificWidgetTranslator<N2WidgetT
 
 	public shouldWrapByFormCell(): boolean {
 		return false;
+	}
+
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	public getAttributeValueBuilders(): Array<AttributeValueBuild<any>> {
+		return [N2WizardSharedBodyBuild];
 	}
 
 	public postWork<Def extends NodeDef>(def: Partial<Def>): Def {
@@ -27,11 +34,19 @@ export class N2WizardSharedTranslator extends SpecificWidgetTranslator<N2WidgetT
 	}
 }
 
+export const N2WizardStepBodyBuild = createAsyncSnippetBuild<WizardStepDef, 'body'>('body', ['marker']);
+export const N2WizardStepDataBuild = createAsyncSnippetBuild<WizardStepDef, 'data'>('data', ['options']);
+
 export class N2WizardStepTranslator extends SpecificWidgetTranslator<N2WidgetType.WIZARD_STEP> {
 	public getSupportedType(): N2WidgetType.WIZARD_STEP {
 		return N2WidgetType.WIZARD_STEP;
 	}
 
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	public getAttributeValueBuilders(): Array<AttributeValueBuild<any>> {
+		return [N2WizardStepDataBuild, N2WizardStepBodyBuild];
+	}
+	
 	public transformLabelAttributeName(): string {
 		return 'title';
 	}

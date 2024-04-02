@@ -8,6 +8,7 @@ import {
 	WidgetPropertyName
 } from '../widget';
 import {N2WidgetType} from './types';
+import {N2valueChangeBuild} from "../widget/translator/attribute/n2value-change-build";
 
 export const N2CalendarBuildFixedTimeAt = (value: Undefinable<string>): Undefinable<CalendarFixedTimeAt> => {
 	if (VUtils.isBlank(value)) {
@@ -97,7 +98,7 @@ export class N2CalendarTranslator extends SpecificWidgetTranslator<N2WidgetType.
 
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	public getAttributeValueBuilders(): Array<AttributeValueBuild<any>> {
-		return [N2CalendarFixedTimeAtBuild, N2CalendarInitTimeAtBuild];
+		return [N2CalendarFixedTimeAtBuild, N2CalendarInitTimeAtBuild, N2valueChangeBuild];
 	}
 
 	public getValidationHandlerDetectives(): Array<MonitorHandlerDetective> {

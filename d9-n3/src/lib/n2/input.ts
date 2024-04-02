@@ -9,6 +9,7 @@ import {
 	ValidatorUtils
 } from '../widget';
 import {N2WidgetType} from './types';
+import {N2valueChangeBuild} from "../widget/translator/attribute/n2value-change-build";
 
 const StandardInputValidators = [
 	ValidatorUtils.DETECT_REQUIRED,
@@ -35,7 +36,7 @@ export class N2InputTranslator extends SpecificWidgetTranslator<N2WidgetType.INP
 
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	public getAttributeValueBuilders(): Array<AttributeValueBuild<any>> {
-		return [InputMaskBuild];
+		return [InputMaskBuild, N2valueChangeBuild];
 	}
 
 	public getValidationHandlerDetectives(): Array<MonitorHandlerDetective> {

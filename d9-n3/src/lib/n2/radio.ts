@@ -10,6 +10,7 @@ import {
 	WidgetPropertyName
 } from '../widget';
 import {N2WidgetType} from './types';
+import {N2valueChangeBuild} from "../widget/translator/attribute/n2value-change-build";
 
 export const N2RadioValuesBuild: AttributeValueBuild<RadioPossibleValues> = {
 	accept: (key: WidgetPropertyName) => key === 'values',
@@ -40,7 +41,7 @@ export class N2RadioTranslator extends SpecificWidgetTranslator<N2WidgetType.RAD
 
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	public getAttributeValueBuilders(): Array<AttributeValueBuild<any>> {
-		return [N2RadioValuesBuild];
+		return [N2RadioValuesBuild, N2valueChangeBuild];
 	}
 
 	public getValidationHandlerDetectives(): Array<MonitorHandlerDetective> {

@@ -14,6 +14,7 @@ import {
 	N2DropdownSortBuild
 } from './dropdown';
 import {N2WidgetType} from './types';
+import {N2valueChangeBuild} from "../widget/translator/attribute/n2value-change-build";
 
 export class N2CheckboxesTranslator extends SpecificWidgetTranslator<N2WidgetType.CHECKBOXES> {
 	public getSupportedType(): N2WidgetType.CHECKBOXES {
@@ -48,7 +49,7 @@ export class N2ChecksTranslator extends SpecificWidgetTranslator<N2WidgetType.CH
 
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	public getAttributeValueBuilders(): Array<AttributeValueBuild<any>> {
-		return [N2DropdownOptionsBuild, N2DropdownSortBuild];
+		return [N2DropdownOptionsBuild, N2DropdownSortBuild, N2valueChangeBuild];
 	}
 
 	public getValidationHandlerDetectives(): Array<MonitorHandlerDetective> {

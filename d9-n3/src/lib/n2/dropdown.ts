@@ -15,6 +15,7 @@ import {
 	WidgetPropertyName
 } from '../widget';
 import {N2WidgetType} from './types';
+import {N2valueChangeBuild} from "../widget/translator/attribute/n2value-change-build";
 
 export const N2DropdownOptionsByStrBuild = (value: string): DropdownOptions => {
 	return value.split(';')
@@ -97,7 +98,7 @@ export class N2DropdownTranslator extends SpecificWidgetTranslator<N2WidgetType.
 
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	public getAttributeValueBuilders(): Array<AttributeValueBuild<any>> {
-		return [N2DropdownOptionsBuild, N2DropdownSortBuild, N2DropdownReactionRefreshOptionsBuild];
+		return [N2DropdownOptionsBuild, N2DropdownSortBuild, N2DropdownReactionRefreshOptionsBuild, N2valueChangeBuild];
 	}
 
 	public getValidationHandlerDetectives(): Array<MonitorHandlerDetective> {

@@ -1,9 +1,16 @@
 import {ContainerDef, ExternalDefIndicator, NodeDef} from '@rainbow-d9/n1';
 import {SectionDef, TabDef, TabsDef} from '@rainbow-d9/n2';
-import {SpecificWidgetTranslator} from '../widget';
+import {AttributeValueBuild, createAsyncSnippetBuild, SpecificWidgetTranslator} from '../widget';
 import {N2WidgetType} from './types';
 
+export const N2TabDataChangedBuild = createAsyncSnippetBuild<TabDef, 'data'>('data', ['options']);
+export const N2TabBodyChangedBuild = createAsyncSnippetBuild<TabDef, 'body'>('body', ['marker']);
+
 export class N2TabTranslator extends SpecificWidgetTranslator<N2WidgetType.TAB> {
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	public getAttributeValueBuilders(): Array<AttributeValueBuild<any>> {
+		return [N2TabDataChangedBuild, N2TabBodyChangedBuild];
+	}
 	public getSupportedType(): N2WidgetType.TAB {
 		return N2WidgetType.TAB;
 	}

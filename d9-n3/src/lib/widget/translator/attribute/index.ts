@@ -11,6 +11,7 @@ export * from './validation-attribute-build';
 export * from './visibility-attribute-build';
 export * from './snippet-attribute-build';
 export * from './any-attribute-build';
+export * from './n2value-change-build'
 
 export * from './attribute-utils';
 export * from './attribute-name-util';

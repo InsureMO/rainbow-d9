@@ -14,6 +14,7 @@ import {
 	N2DropdownSortBuild
 } from './dropdown';
 import {N2WidgetType} from './types';
+import {N2valueChangeBuild} from "../widget/translator/attribute/n2value-change-build";
 
 export class N2RadiosTranslator extends SpecificWidgetTranslator<N2WidgetType.RADIOS> {
 	public getSupportedType(): N2WidgetType.RADIOS {
@@ -26,7 +27,7 @@ export class N2RadiosTranslator extends SpecificWidgetTranslator<N2WidgetType.RA
 
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	public getAttributeValueBuilders(): Array<AttributeValueBuild<any>> {
-		return [N2DropdownOptionsBuild, N2DropdownSortBuild, N2DropdownReactionRefreshOptionsBuild];
+		return [N2DropdownOptionsBuild, N2DropdownSortBuild, N2DropdownReactionRefreshOptionsBuild, N2valueChangeBuild];
 	}
 
 	public getValidationHandlerDetectives(): Array<MonitorHandlerDetective> {
