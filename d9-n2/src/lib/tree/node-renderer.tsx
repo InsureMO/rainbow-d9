@@ -20,26 +20,71 @@ export interface TreeNodeRendererProps {
 	level: number;
 }
 
-const useTreeNodeExpand = (state: MutableRefObject<boolean>) => {
+const useTreeNodeExpand = (ref: MutableRefObject<HTMLDivElement>, state: MutableRefObject<boolean>) => {
 	const {on, off, fire} = useTreeNodeEventBus();
 	const forceUpdate = useForceUpdate();
 	useEffect(() => {
-		const onSwitchMyExpand = ($ip2r: string, expanded: boolean) => {
+		const onSwitchExpand = (fromMyself: boolean) => ($ip2r: string, expanded: boolean) => {
 			if (expanded != state.current) {
 				// trigger by myself
 				state.current = expanded;
 				forceUpdate();
 				// notify parent in case of the expanding is fired programmatically
 				fire && fire(TreeNodeEventTypes.SWITCH_PARENT_EXPAND, $ip2r, state.current);
+				// if from myself, try to scroll this node and descendants into view
+				if (fromMyself && expanded && ref.current != null) {
+					// the problem is, expand is async, so we need to wait for expanding of all ascendants to finish
+					const allExpanded = (element: HTMLDivElement): boolean => {
+						if (element.getAttribute('data-expanded') !== 'true') {
+							return false;
+						} else {
+							const wrapper = element.parentElement;
+							if (wrapper.parentElement.getAttribute('data-w') === 'd9-tree-content-container') {
+								// reach the root
+								return true;
+							} else {
+								return allExpanded(wrapper.parentElement.firstElementChild as HTMLDivElement);
+							}
+						}
+					};
+					const tryToScroll = () => {
+						setTimeout(() => {
+							if (!allExpanded(ref.current.closest('div[data-w=d9-tree-node-container]'))) {
+								tryToScroll();
+							} else {
+								const wrapper = ref.current.closest('div[data-w=d9-tree-node-wrapper]');
+								const {top, height} = wrapper.getBoundingClientRect();
+								const treeContainer = wrapper.closest('div[data-w=d9-tree-content-container]');
+								const {top: treeTop, height: treeHeight} = treeContainer.getBoundingClientRect();
+								if (top + height < treeTop + treeHeight) {
+									// already in view, do nothing
+								} else if (height > treeHeight) {
+									treeContainer.scrollTo({
+										top: treeContainer.scrollTop + top - treeTop,
+										behavior: 'smooth'
+									});
+								} else {
+									treeContainer.scrollTo({
+										top: treeContainer.scrollTop + top + height - treeTop - treeHeight,
+										behavior: 'smooth'
+									});
+								}
+							}
+						}, 100);
+					};
+					tryToScroll();
+				}
 			}
 		};
+		const onSwitchMyExpand = onSwitchExpand(true);
+		const onSwitchMyExpandFromChild = onSwitchExpand(false);
 		on && on(TreeNodeEventTypes.SWITCH_MY_EXPAND, onSwitchMyExpand);
-		on && on(TreeNodeEventTypes.SWITCH_MY_EXPAND_FROM_CHILD, onSwitchMyExpand);
+		on && on(TreeNodeEventTypes.SWITCH_MY_EXPAND_FROM_CHILD, onSwitchMyExpandFromChild);
 		return () => {
 			off && off(TreeNodeEventTypes.SWITCH_MY_EXPAND, onSwitchMyExpand);
-			off && off(TreeNodeEventTypes.SWITCH_MY_EXPAND_FROM_CHILD, onSwitchMyExpand);
+			off && off(TreeNodeEventTypes.SWITCH_MY_EXPAND_FROM_CHILD, onSwitchMyExpandFromChild);
 		};
-	}, [on, off, fire, forceUpdate, state]);
+	}, [on, off, fire, forceUpdate, ref, state]);
 };
 
 const useTreeNodeCheckedChanged = () => {
@@ -70,11 +115,12 @@ export const TreeNodeRenderer = (props: TreeNodeRendererProps) => {
 		node, displayIndex, lastOfParent, level
 	} = props;
 
+	const ref = useRef<HTMLDivElement>(null);
 	const expanded = useRef(level <= initExpandLevel);
 	const {fire: fireGlobal} = useGlobalEventBus();
 	const globalHandlers = useGlobalHandlers();
 	const {fire} = useTreeNodeEventBus();
-	useTreeNodeExpand(expanded);
+	useTreeNodeExpand(ref, expanded);
 	useTreeNodeCheckedChanged();
 
 	const onToggleClicked = (event: MouseEvent<HTMLSpanElement>) => {
@@ -120,7 +166,8 @@ export const TreeNodeRenderer = (props: TreeNodeRendererProps) => {
 	</TreeNodeLabel>;
 
 	return <TreeNodeContainer data-expanded={expanded.current} data-last-of-parent={lastOfParent} level={level}
-	                          onClick={onEntityClicked}>
+	                          onClick={onEntityClicked}
+	                          ref={ref}>
 		<TreeNodeContent>
 			{(node.$children ?? []).length !== 0
 				? <TreeNodeToggle data-expanded={expanded.current} onClick={onToggleClicked}>

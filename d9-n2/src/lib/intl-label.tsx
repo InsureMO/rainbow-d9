@@ -33,11 +33,12 @@ export const useLanguage = () => {
 	}, [on, off, forceUpdate]);
 };
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const replaceTemplate = (template: string, values?: Array<any>): string => {
 	values = values ?? [];
 	for (let index = 0; index < values.length; index++) {
 		// 使用正则表达式替换模板字符串中的 {i} 为对应的值
-		template = template.replace(new RegExp('\\{' + index + '\\}', 'g'), values[index] ?? '');
+		template = template.replace(new RegExp('\\{' + index + '\\}', 'g'), `${values[index] ?? ''}`);
 	}
 	return template;
 };
