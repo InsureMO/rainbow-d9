@@ -6,7 +6,7 @@ import {LabelLike} from '../label-like';
 import {UnwrappedCheckbox, UnwrappedCheckboxProps} from '../unwrapped/checkbox';
 import {useTreeNodeEventBus} from './event/tree-node-event-bus';
 import {TreeNodeEventTypes} from './event/tree-node-event-bus-types';
-import {TreeDef, TreeNodeDef, TreeProps} from './types';
+import {TreeDef, TreeNodeCheckedChangeFrom, TreeNodeDef, TreeProps} from './types';
 import {TreeNodeContainer, TreeNodeContent, TreeNodeIndex, TreeNodeLabel, TreeNodeToggle} from './widgets';
 
 export interface TreeNodeRendererProps {
@@ -108,7 +108,7 @@ export const TreeNodeRenderer = (props: TreeNodeRendererProps) => {
 		check = node.check;
 		onCheckValueChanged = async (value: PropValue) => {
 			// call function to set value, should include itself, descendants and ancestors
-			await check(node, value as boolean, {global: globalHandlers});
+			await check(node, value as boolean, TreeNodeCheckedChangeFrom.FROM_SELF, {global: globalHandlers});
 			fire && fire(TreeNodeEventTypes.SWITCH_MY_CHECKED, node.$ip2r, value as boolean);
 		};
 	}

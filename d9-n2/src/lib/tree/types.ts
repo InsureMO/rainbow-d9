@@ -11,11 +11,15 @@ export interface TreeNodeOperation {
 	removable?: boolean;
 }
 
+export enum TreeNodeCheckedChangeFrom {
+	FROM_CHILD = -1, FROM_SELF = 0, FROM_PARENT = 1
+}
+
 export interface TreeNodeOperation2 extends TreeNodeOperation {
 	/** get checked, mandatory when checkable */
 	checked?: (node: TreeNodeDef) => boolean;
 	/** changed checked, mandatory when checkable */
-	check?: (node: TreeNodeDef, checked: boolean, handlers: GlobalEventHandlers) => Promise<void>;
+	check?: (node: TreeNodeDef, checked: boolean, from: TreeNodeCheckedChangeFrom, handlers: GlobalEventHandlers) => Promise<void>;
 }
 
 export interface TreeNodeDef extends TreeNodeOperation2 {
