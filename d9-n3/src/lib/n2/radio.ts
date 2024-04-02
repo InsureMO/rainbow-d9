@@ -3,7 +3,7 @@ import {RadioPossibleValues} from '@rainbow-d9/n2';
 import {ParsedListItemAttributePair} from '../semantic';
 import {
 	AttributeValueBuild,
-	MonitorHandlerDetective,
+	MonitorHandlerDetective, N2ValueChangedBuild,
 	SpecificWidgetTranslator,
 	tryBoolOnAttrValue,
 	ValidatorUtils,
@@ -40,7 +40,8 @@ export class N2RadioTranslator extends SpecificWidgetTranslator<N2WidgetType.RAD
 
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	public getAttributeValueBuilders(): Array<AttributeValueBuild<any>> {
-		return [N2RadioValuesBuild];
+		// TODO ValueChangeableNodeDef
+		return [N2RadioValuesBuild,N2ValueChangedBuild];
 	}
 
 	public getValidationHandlerDetectives(): Array<MonitorHandlerDetective> {

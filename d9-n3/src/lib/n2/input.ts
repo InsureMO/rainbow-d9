@@ -4,7 +4,7 @@ import {
 	createSyncSnippetBuild,
 	DecorateLeadsBuild,
 	DecorateTailsBuild,
-	MonitorHandlerDetective,
+	MonitorHandlerDetective, N2ValueChangedBuild,
 	SpecificWidgetTranslator,
 	ValidatorUtils,
 	wrapMonitorHandlerDetective
@@ -35,7 +35,8 @@ export class N2InputTranslator extends SpecificWidgetTranslator<N2WidgetType.INP
 
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	public getAttributeValueBuilders(): Array<AttributeValueBuild<any>> {
-		return [InputMaskBuild];
+		// TODO ValueChangeableNodeDef
+		return [InputMaskBuild, N2ValueChangedBuild];
 	}
 
 	public getValidationHandlerDetectives(): Array<MonitorHandlerDetective> {

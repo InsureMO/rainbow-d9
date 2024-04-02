@@ -2,7 +2,7 @@ import {Undefinable} from '@rainbow-d9/n1';
 import {
 	AttributeValueBuild,
 	CustomAttributeName,
-	MonitorHandlerDetective,
+	MonitorHandlerDetective, N2ValueChangedBuild,
 	SpecificWidgetTranslator,
 	ValidatorUtils,
 	WidgetPropertyName
@@ -26,7 +26,8 @@ export class N2MultiDropdownTranslator extends SpecificWidgetTranslator<N2Widget
 
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	public getAttributeValueBuilders(): Array<AttributeValueBuild<any>> {
-		return [N2DropdownOptionsBuild, N2DropdownSortBuild, N2DropdownReactionRefreshOptionsBuild];
+		// TODO ValueChangeableNodeDef
+		return [N2DropdownOptionsBuild, N2DropdownSortBuild, N2DropdownReactionRefreshOptionsBuild, N2ValueChangedBuild];
 	}
 
 	public getValidationHandlerDetectives(): Array<MonitorHandlerDetective> {

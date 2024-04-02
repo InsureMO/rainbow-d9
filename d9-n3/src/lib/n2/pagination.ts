@@ -1,6 +1,12 @@
 import {NodeDef, Undefinable, VUtils} from '@rainbow-d9/n1';
 import {ParsedListItemAttributePair} from '../semantic';
-import {AttributeValueBuild, CustomAttributeName, SpecificWidgetTranslator, WidgetPropertyName} from '../widget';
+import {
+	AttributeValueBuild,
+	CustomAttributeName,
+	N2ValueChangedBuild,
+	SpecificWidgetTranslator,
+	WidgetPropertyName
+} from '../widget';
 import {N2WidgetType} from './types';
 
 export const N2PaginationPossibleSizesBuild: AttributeValueBuild<Array<number>> = {
@@ -45,6 +51,7 @@ export class N2PaginationTranslator extends SpecificWidgetTranslator<N2WidgetTyp
 
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	public getAttributeValueBuilders(): Array<AttributeValueBuild<any>> {
-		return [N2PaginationPossibleSizesBuild];
+		// TODO ValueChangeableNodeDef
+		return [N2PaginationPossibleSizesBuild,N2ValueChangedBuild];
 	}
 }
