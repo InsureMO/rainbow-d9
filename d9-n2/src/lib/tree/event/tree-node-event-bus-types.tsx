@@ -6,6 +6,7 @@ export enum TreeNodeEventTypes {
 	SWITCH_MY_CHECKED_FROM_CHILD = 'switch-my-checked-from-child',
 	SWITCH_CHILDREN_CHECKED = 'switch-children-checked',
 	SWITCH_PARENT_CHECKED = 'switch-parent-checked',
+	REFRESH_CHILD_NODES = 'refresh-child-nodes'
 }
 
 export interface TreeNodeEventBus {
@@ -50,4 +51,10 @@ export interface TreeNodeEventBus {
 	on(type: TreeNodeEventTypes.SWITCH_PARENT_CHECKED, listener: (pathToTreeRoot: string, checked: boolean) => void): this;
 
 	off(type: TreeNodeEventTypes.SWITCH_PARENT_CHECKED, listener: (pathToTreeRoot: string, checked: boolean) => void): this;
+
+	fire(type: TreeNodeEventTypes.REFRESH_CHILD_NODES, pathToTreeRoot: string): this;
+
+	on(type: TreeNodeEventTypes.REFRESH_CHILD_NODES, listener: (pathToTreeRoot: string) => void): this;
+
+	off(type: TreeNodeEventTypes.REFRESH_CHILD_NODES, listener: (pathToTreeRoot: string) => void): this;
 }

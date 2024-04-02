@@ -1,10 +1,13 @@
-import React from 'react';
+import {useForceUpdate} from '@rainbow-d9/n1';
+import React, {useEffect} from 'react';
+import {useGlobalHandlers} from '../global';
 import {ChildTreeNodes} from './child-nodes';
 import {TreeNodeEventBusProvider, useTreeNodeEventBus} from './event/tree-node-event-bus';
 import {TreeNodeEventTypes} from './event/tree-node-event-bus-types';
 import {TreeNodeEventBridge} from './node-event-bridge';
 import {TreeNodeRenderer} from './node-renderer';
 import {TreeDef, TreeNodeDef, TreeProps} from './types';
+import {useRefreshTreeNode} from './use-refresh-node';
 import {TreeNodeWrapper} from './widgets';
 
 export interface TreeNodeProps {
@@ -26,7 +29,21 @@ export const TreeNode = (props: TreeNodeProps) => {
 		node, displayIndex, lastOfParent, level
 	} = props;
 
-	const {fire} = useTreeNodeEventBus();
+	const {on, off, fire} = useTreeNodeEventBus();
+	const globalHandlers = useGlobalHandlers();
+	useRefreshTreeNode(node, $wrapped);
+	const forceUpdate = useForceUpdate();
+	useEffect(() => {
+		// eslint-disable-next-line @typescript-eslint/no-unused-vars
+		const onRefreshChildNodes = (_$ip2r: string) => {
+			node.$children = detective(node, {global: globalHandlers}) ?? [];
+			forceUpdate();
+		};
+		on && on(TreeNodeEventTypes.REFRESH_CHILD_NODES, onRefreshChildNodes);
+		return () => {
+			on && on(TreeNodeEventTypes.REFRESH_CHILD_NODES, onRefreshChildNodes);
+		};
+	}, [on, off, fire, forceUpdate, node, detective, globalHandlers]);
 
 	// bridge event to me
 	// if it is top level node, then will not be wrapped by tree node event bus provider
@@ -36,7 +53,8 @@ export const TreeNode = (props: TreeNodeProps) => {
 	const nodeCheckedChanged = (checked: boolean) => fire && fire(TreeNodeEventTypes.SWITCH_MY_CHECKED_FROM_CHILD, node.$ip2r, checked);
 
 	return <TreeNodeEventBusProvider>
-		<TreeNodeEventBridge node={node} expandParent={expandParent} nodeCheckedChanged={nodeCheckedChanged}/>
+		<TreeNodeEventBridge node={node}
+		                     expandParent={expandParent} nodeCheckedChanged={nodeCheckedChanged}/>
 		<TreeNodeWrapper data-last-of-parent={lastOfParent} level={level}>
 			<TreeNodeRenderer initExpandLevel={initExpandLevel} showIndex={showIndex} $wrapped={$wrapped}
 			                  node={node} displayIndex={displayIndex} lastOfParent={lastOfParent} level={level}/>

@@ -131,9 +131,26 @@ export const useYesNoDialog = (): YesNoDialogHandlers => {
 
 export enum GlobalEventPrefix {
 	// action
-	ALERT = 'alert', DIALOG = 'dialog',
-	TAB = 'tab', WIZARD_STEP = 'wstep',
-	EXPAND_SECTION = 'expand-section', COLLAPSE_SECTION = 'collapse-section',
+	/** show alert */
+	ALERT = 'alert',
+	/** show dialog */
+	DIALOG = 'dialog',
+	/** active tab */
+	TAB = 'tab',
+	/** active wizard step */
+	WIZARD_STEP = 'wstep',
+	/** expand section */
+	EXPAND_SECTION = 'expand-section',
+	/** collapse section */
+	COLLAPSE_SECTION = 'collapse-section',
+	/** refresh tree node and its descendants */
+	REFRESH_TREE = 'refresh-tree',
+	/** refresh child nodes of a tree node */
+	REFRESH_TREE_CHILD_NODES = 'refresh-tree-child-nodes',
+	/** expand tree node */
+	EXPAND_TREE_NODE = 'expand-tree-node',
+	/** collapse tree node */
+	COLLAPSE_TREE_NODE = 'collapse-tree-node',
 	CUSTOM = 'custom',
 	// post action, after something happened
 	SECTION_EXPANDED = 'section-expanded',

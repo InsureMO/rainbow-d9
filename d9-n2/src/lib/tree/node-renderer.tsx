@@ -7,6 +7,7 @@ import {UnwrappedCheckbox, UnwrappedCheckboxProps} from '../unwrapped/checkbox';
 import {useTreeNodeEventBus} from './event/tree-node-event-bus';
 import {TreeNodeEventTypes} from './event/tree-node-event-bus-types';
 import {TreeDef, TreeNodeCheckedChangeFrom, TreeNodeDef, TreeProps} from './types';
+import {computeTreeNodeMarker} from './utils';
 import {TreeNodeContainer, TreeNodeContent, TreeNodeIndex, TreeNodeLabel, TreeNodeToggle} from './widgets';
 
 export interface TreeNodeRendererProps {
@@ -18,10 +19,6 @@ export interface TreeNodeRendererProps {
 	lastOfParent: boolean;
 	level: number;
 }
-
-const computeTreeNodeMarker = (node: TreeNodeDef, $wrapped: TreeProps['$wrapped']) => {
-	return (node.marker ?? '').trim() || PPUtils.concat($wrapped.$p2r, node.$ip2r);
-};
 
 const useTreeNodeExpand = (state: MutableRefObject<boolean>) => {
 	const {on, off, fire} = useTreeNodeEventBus();

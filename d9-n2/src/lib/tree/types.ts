@@ -55,6 +55,7 @@ export type TreeDef = NodeDef & OmitHTMLProps2<HTMLDivElement, 'title' | 'height
 	showIndex?: boolean;
 	detective?: TreeNodeDetect;
 	height?: number | string;
+	marker?: string;
 } & TreeNodeOperation;
 /** Tree widget definition, with html attributes */
 export type TreeProps = OmitNodeDef<TreeDef> & WidgetProps;

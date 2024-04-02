@@ -1,6 +1,13 @@
 import {PPUtils, PropertyPath, VUtils} from '@rainbow-d9/n1';
 import {GlobalEventHandlers} from '../types';
-import {TreeNodeDef, TreeNodeDetect, TreeNodeOperation} from './types';
+import {TreeNodeDef, TreeNodeDetect, TreeNodeOperation, TreeProps} from './types';
+
+export const computeTreeNodeMarker = (node: TreeNodeDef, $wrapped: TreeProps['$wrapped']) => {
+	if (VUtils.isBlank(node.marker)) {
+		node.marker = PPUtils.concat($wrapped.$p2r, node.$ip2r);
+	}
+	return node.marker;
+};
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export const defaultTreeNodesDetective: TreeNodeDetect = (parentNode, _options) => {

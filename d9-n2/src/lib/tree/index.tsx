@@ -1,6 +1,6 @@
-import {MUtils, PPUtils, PROPERTY_PATH_ME, registerWidget} from '@rainbow-d9/n1';
-import React, {ForwardedRef, forwardRef} from 'react';
-import {useGlobalHandlers} from '../global';
+import {MUtils, PPUtils, PROPERTY_PATH_ME, registerWidget, useForceUpdate} from '@rainbow-d9/n1';
+import React, {ForwardedRef, forwardRef, useEffect} from 'react';
+import {GlobalEventPrefix, GlobalEventTypes, useGlobalEventBus, useGlobalHandlers} from '../global';
 import {TreeEventBusProvider} from './event/tree-event-bus';
 import {TreeNode} from './node';
 import {TreeNodeDef, TreeProps} from './types';
@@ -13,12 +13,26 @@ export const InternalTree = forwardRef((props: TreeProps, ref: ForwardedRef<HTML
 		$pp,
 		halfChecked = true, checkable = false, addable = false, removable = false,
 		initExpandLevel = -1, showIndex = false, detective,
-		height = 300,
+		height = 300, marker,
 		$wrapped, ...rest
 	} = props;
 	const {$p2r, $avs: {$disabled, $visible}} = $wrapped;
 
+	const {on, off} = useGlobalEventBus();
 	const globalHandlers = useGlobalHandlers();
+	const forceUpdate = useForceUpdate();
+	useEffect(() => {
+		const onCustomEvent = (_: string, prefix: string, clipped: string) => {
+			if (prefix !== GlobalEventPrefix.REFRESH_TREE || clipped !== marker) {
+				return;
+			}
+			forceUpdate();
+		};
+		on(GlobalEventTypes.CUSTOM_EVENT, onCustomEvent);
+		return () => {
+			off(GlobalEventTypes.CUSTOM_EVENT, onCustomEvent);
+		};
+	}, [on, off, forceUpdate, marker]);
 	const detect = buildTreeNodesDetective(detective, {checkable, addable, removable});
 	// model of whole tree
 	const rootNodeValue = MUtils.getValue($wrapped.$model, $pp);
@@ -28,9 +42,8 @@ export const InternalTree = forwardRef((props: TreeProps, ref: ForwardedRef<HTML
 		value: rootNodeValue, $ip2r: PROPERTY_PATH_ME, $ip2p: PROPERTY_PATH_ME,
 		label: '', checkable: false, addable, removable: false
 	};
-	const children = detect(rootNodeDef, {global: globalHandlers}) ?? [];
-	rootNodeDef.$children = children;
-	const childrenCount = children.length;
+	rootNodeDef.$children = detect(rootNodeDef, {global: globalHandlers}) ?? [];
+	const childrenCount = rootNodeDef.$children.length;
 	// path to root of model of whole tree
 	const node$p2r = PPUtils.absolute($p2r, $pp);
 	const canAdd = rootNodeDef.addable ?? false;
@@ -38,7 +51,7 @@ export const InternalTree = forwardRef((props: TreeProps, ref: ForwardedRef<HTML
 	return <ATree {...rest} data-disabled={$disabled} data-visible={$visible} height={height}
 	              id={PPUtils.asId(PPUtils.absolute($p2r, props.$pp), props.id)}
 	              ref={ref}>
-		{children.map((child, index) => {
+		{rootNodeDef.$children.map((child, index) => {
 			const last = !canAdd && index === childrenCount - 1;
 			const myDisplayIndex = `${index + 1}`;
 			return <TreeNode halfChecked={halfChecked} initExpandLevel={initExpandLevel} showIndex={showIndex}
@@ -60,13 +73,4 @@ export const Tree = forwardRef((props: TreeProps, ref: ForwardedRef<HTMLDivEleme
 
 registerWidget({key: 'Tree', JSX: Tree, container: false, array: false});
 
-export * from './node';
-export * from './node-event-bridge';
-export * from './node-renderer';
-export * from './child-nodes';
-export * from './utils';
 export * from './types';
-export * from './event/tree-node-event-bus-types';
-export * from './event/tree-node-event-bus';
-export * from './event/tree-event-bus-types';
-export * from './event/tree-event-bus';
