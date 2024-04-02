@@ -10,8 +10,6 @@ export const ATree = styled.div.attrs<{ height: number | string }>(
 		return {
 			[DOM_KEY_WIDGET]: dataW || 'd9-tree',
 			[DOM_ID_WIDGET]: id,
-			'data-v-scroll': '',
-			'data-h-scroll': '',
 			style: {'--height': toCssSize(height)}
 		};
 	})<{ height: number | string }>`
@@ -24,11 +22,65 @@ export const ATree = styled.div.attrs<{ height: number | string }>(
     height: var(--height);
     border: ${CssVars.BORDER};
     border-radius: ${CssVars.BORDER_RADIUS};
-    overflow: auto;
+    overflow: hidden;
 
     &[data-visible=false] {
         display: none;
     }
+
+    > div[data-w=d9-deco-input]:first-child {
+        min-height: ${CssVars.INPUT_HEIGHT};
+        border-top-left-radius: ${CssVars.BORDER_RADIUS};
+        border-top-right-radius: ${CssVars.BORDER_RADIUS};
+        border-bottom: ${CssVars.BORDER};
+        overflow: hidden;
+        transition: border-bottom-color ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION};
+
+        &[data-visible=false] {
+            height: 0;
+            min-height: 0;
+            border-bottom: 0;
+        }
+
+        &:focus-within {
+            border-bottom-color: ${CssVars.PRIMARY_COLOR};
+        }
+
+        > span[data-w=d9-deco-lead] {
+            border-top: 0;
+            border-left: 0;
+            border-bottom: 0;
+            border-bottom-left-radius: 0;
+
+            > svg {
+                opacity: 0.3;
+                height: calc(${CssVars.FONT_SIZE} * 0.9);
+            }
+        }
+
+        > input[data-w=d9-input] {
+            border: 0;
+            border-bottom-right-radius: 0;
+
+            &:hover, &:focus {
+                box-shadow: none;
+            }
+        }
+    }
+`;
+export const TreeContentContainer = styled.div.attrs({
+	'data-w': 'd9-tree-content-container',
+	'data-v-scroll': '',
+	'data-h-scroll': ''
+})`
+    display: flex;
+    position: relative;
+    flex-grow: 1;
+    flex-direction: column;
+    align-self: stretch;
+    border-bottom-left-radius: ${CssVars.BORDER_RADIUS};
+    border-bottom-right-radius: ${CssVars.BORDER_RADIUS};
+    overflow: auto;
 `;
 export const TreeNodeWrapper = styled.div.attrs<{ level: number }>(
 	{'data-w': 'd9-tree-node-wrapper'})<{ level: number }>`

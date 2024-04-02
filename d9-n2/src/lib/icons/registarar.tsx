@@ -15,6 +15,7 @@ import {Edit} from './edit';
 import {Expand} from './expand';
 import {Forward} from './forward';
 import {Remove} from './remove';
+import {Search} from './search';
 import {Spinner} from './spinner';
 import {Time} from './time';
 import {Times} from './times';
@@ -59,6 +60,7 @@ IconsRegistrar.register({
 	angleLeft: () => <AngleLeft/>,
 	angleRight: () => <AngleRight/>,
 	spinner: () => <Spinner/>,
+	search: () => <Search/>,
 	cart: () => <Cart/>
 });
 

@@ -38,6 +38,7 @@ export interface TreeNodeDef extends TreeNodeOperation2 {
 	$ip2p: PropertyPath;
 	marker?: string;
 	label?: string | ReactNode | NodeDef;
+	stringify?: (node: TreeNodeDef) => string;
 	$children?: Array<TreeNodeDef>;
 	$parent?: TreeNodeDef;
 }

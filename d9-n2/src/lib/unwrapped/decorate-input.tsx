@@ -1,5 +1,5 @@
 import {MonitorNodeDef, NodeAttributeValues, PropValue, VUtils} from '@rainbow-d9/n1';
-import React from 'react';
+import React, {ForwardedRef, forwardRef} from 'react';
 import {
 	DecorateInput,
 	DecorateInputProps,
@@ -18,7 +18,7 @@ type UnwrappedDecorateInputProps =
 	visible?: boolean;
 };
 
-const UnwrappedDecorateInput = (props: UnwrappedDecorateInputProps) => {
+const UnwrappedDecorateInput = forwardRef((props: UnwrappedDecorateInputProps, ref: ForwardedRef<HTMLDivElement>) => {
 	const {$pp = 'value', value, onValueChange, disabled, visible, ...rest} = props;
 
 	const $onValueChange = onValueChange;
@@ -27,8 +27,9 @@ const UnwrappedDecorateInput = (props: UnwrappedDecorateInputProps) => {
 
 	return <DecorateInput {...rest} $wrapped={{$onValueChange, $avs, $root, $model: $root, $p2r: '.'}}
 	                      $pp={$pp}
-	                      id={rest.id ?? VUtils.generateUniqueId()}/>;
-};
+	                      id={rest.id ?? VUtils.generateUniqueId()}
+	                      ref={ref}/>;
+});
 
 type UnwrappedDecorateNumberInputProps =
 	Omit<DecorateNumberInputProps, 'value' | '$wrapped' | keyof MonitorNodeDef>
@@ -39,7 +40,7 @@ type UnwrappedDecorateNumberInputProps =
 	visible?: boolean;
 };
 
-const UnwrappedDecorateNumberInput = (props: UnwrappedDecorateNumberInputProps) => {
+const UnwrappedDecorateNumberInput = forwardRef((props: UnwrappedDecorateNumberInputProps, ref: ForwardedRef<HTMLDivElement>) => {
 	const {$pp = 'value', value, onValueChange, disabled, visible, ...rest} = props;
 
 	const $onValueChange = onValueChange;
@@ -48,8 +49,9 @@ const UnwrappedDecorateNumberInput = (props: UnwrappedDecorateNumberInputProps) 
 
 	return <DecorateNumberInput {...rest} $wrapped={{$onValueChange, $avs, $root, $model: $root, $p2r: '.'}}
 	                            $pp={$pp}
-	                            id={rest.id ?? VUtils.generateUniqueId()}/>;
-};
+	                            id={rest.id ?? VUtils.generateUniqueId()}
+	                            ref={ref}/>;
+});
 
 type UnwrappedDecoratePasswordInputProps =
 	Omit<DecoratePasswordInputProps, 'value' | '$wrapped' | keyof MonitorNodeDef>
@@ -60,7 +62,7 @@ type UnwrappedDecoratePasswordInputProps =
 	visible?: boolean;
 };
 
-const UnwrappedDecoratePasswordInput = (props: UnwrappedDecoratePasswordInputProps) => {
+const UnwrappedDecoratePasswordInput = forwardRef((props: UnwrappedDecoratePasswordInputProps, ref: ForwardedRef<HTMLDivElement>) => {
 	const {$pp = 'value', value, onValueChange, disabled, visible, ...rest} = props;
 
 	const $onValueChange = onValueChange;
@@ -69,8 +71,9 @@ const UnwrappedDecoratePasswordInput = (props: UnwrappedDecoratePasswordInputPro
 
 	return <DecoratePasswordInput {...rest} $wrapped={{$onValueChange, $avs, $root, $model: $root, $p2r: '.'}}
 	                              $pp={$pp}
-	                              id={rest.id ?? VUtils.generateUniqueId()}/>;
-};
+	                              id={rest.id ?? VUtils.generateUniqueId()}
+	                              ref={ref}/>;
+});
 
 export {
 	UnwrappedDecorateInput, UnwrappedDecorateInputProps,

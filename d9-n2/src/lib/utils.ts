@@ -1,6 +1,6 @@
 import {createLogger, Undefinable, VUtils} from '@rainbow-d9/n1';
 import dayjs from 'dayjs';
-import {CSSProperties, ForwardedRef, MutableRefObject, useCallback} from 'react';
+import {CSSProperties, ForwardedRef, MutableRefObject, useEffect} from 'react';
 import {getDefaultCalendarDateFormat, getDefaultCalendarDatetimeFormat} from './calendar/utils';
 import {$d9n2} from './constants';
 
@@ -84,17 +84,13 @@ export const df = (value: string, options?: { from?: string; to?: string; }): st
 };
 
 export const useDualRefs = <T>(ref: MutableRefObject<T | null>, forwardedRef: ForwardedRef<T>) => {
-	return useCallback((element: T | null) => {
-			ref.current = element;
-
-			if (typeof forwardedRef === 'function') {
-				forwardedRef(element);
-			} else if (typeof forwardedRef === 'object' && forwardedRef !== null) {
-				forwardedRef.current = element;
-			}
-		},
-		[ref, forwardedRef]
-	);
+	useEffect(() => {
+		if (typeof forwardedRef === 'function') {
+			forwardedRef(ref.current);
+		} else if (typeof forwardedRef === 'object' && forwardedRef !== null) {
+			forwardedRef.current = ref.current;
+		}
+	}, [ref, forwardedRef]);
 };
 
 export const N2Logger = createLogger();

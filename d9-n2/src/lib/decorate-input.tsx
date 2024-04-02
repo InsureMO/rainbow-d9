@@ -1,11 +1,12 @@
 import {MBUtils, MUtils, PPUtils, PropValue, registerWidget, VUtils, WidgetProps} from '@rainbow-d9/n1';
-import React, {CSSProperties, ReactNode, useEffect, useRef, useState} from 'react';
+import React, {CSSProperties, ForwardedRef, forwardRef, ReactNode, useEffect, useRef, useState} from 'react';
 import styled from 'styled-components';
 import {CssVars, DOM_ID_WIDGET, DOM_KEY_WIDGET} from './constants';
 import {DecorateWrapperDef, transformDecorators} from './decorate-assist';
 import {Input, InputDef, NumberInput, NumberInputDef, PasswordInput, PasswordInputDef} from './input';
 import {toIntlLabel} from './intl-label';
 import {OmitNodeDef} from './types';
+import {useDualRefs} from './utils';
 
 export type DecorateInputDef = InputDef & DecorateWrapperDef;
 export type DecorateInputProps = OmitNodeDef<DecorateInputDef> & DecorateWrapperDef & WidgetProps;
@@ -15,7 +16,7 @@ const DecorateInputContainer = styled.div.attrs(
 	({id}) => {
 		return {
 			[DOM_KEY_WIDGET]: 'd9-deco-input',
-			[DOM_ID_WIDGET]: VUtils.isBlank(id) ? (void 0) : `di-${id}`
+			[DOM_ID_WIDGET]: VUtils.isBlank(id) ? (void 0) : id
 		};
 	})`
     display: flex;
@@ -38,6 +39,10 @@ const DecorateInputContainer = styled.div.attrs(
             border-top-right-radius: 0;
             border-bottom-right-radius: 0;
         }
+    }
+
+    &[data-visible=false] {
+        display: none;
     }
 
     > input[data-w=d9-input] {
@@ -122,10 +127,11 @@ interface DecorateProps {
 	children: ReactNode;
 }
 
-const Decorate = (props: DecorateProps) => {
+const Decorate = forwardRef((props: DecorateProps, forwardedRef: ForwardedRef<HTMLDivElement>) => {
 	const {id, placeholder, leads, tails, children, ...rest} = props;
 
 	const ref = useRef<HTMLDivElement>(null);
+	useDualRefs(ref, forwardedRef);
 	useEffect(() => {
 		if (ref.current == null) {
 			return null;
@@ -164,7 +170,7 @@ const Decorate = (props: DecorateProps) => {
 			</TailDecorator>;
 		})}
 	</DecorateInputContainer>;
-};
+});
 
 export const askDecorateAttrs = (props: DecorateInputProps, rest: object) => {
 	const deviceTags = MBUtils.pickDeviceTags(props);
@@ -172,8 +178,11 @@ export const askDecorateAttrs = (props: DecorateInputProps, rest: object) => {
 		if (key.startsWith('data-di-')) {
 			attrs[key] = rest[key];
 			delete rest[key];
-		} else if (key === 'data-valid') {
+		} else if (['data-valid', 'data-visible', 'data-disabled'].includes(key)) {
 			attrs[key] = rest[key];
+		} else if (key === '$wrapped') {
+			attrs['data-disabled'] = rest[key].$avs?.$disabled ?? false;
+			attrs['data-visible'] = rest[key].$avs?.$visible ?? true;
 		}
 		return attrs;
 	}, {});
@@ -181,7 +190,7 @@ export const askDecorateAttrs = (props: DecorateInputProps, rest: object) => {
 	return {tags: deviceTags, attrs: decorateAttrs};
 };
 
-export const DecorateInput = (props: DecorateInputProps) => {
+export const DecorateInput = forwardRef((props: DecorateInputProps, ref: ForwardedRef<HTMLDivElement>) => {
 	const {
 		placeholder,
 		leads, tails, className, style, ...rest
@@ -202,15 +211,16 @@ export const DecorateInput = (props: DecorateInputProps) => {
 	return <Decorate {...deviceTags} {...decorateAttrs}
 	                 placeholder={computePlaceholder()} leads={leads} tails={tails}
 	                 className={className} style={style}
-	                 id={PPUtils.asId(PPUtils.absolute($p2r, props.$pp), props.id)}>
+	                 id={PPUtils.asId(PPUtils.absolute($p2r, props.$pp), props.id)}
+	                 ref={ref}>
 		<Input {...rest}/>
 	</Decorate>;
-};
+});
 
 export type DecorateNumberInputDef = NumberInputDef & DecorateWrapperDef;
 export type DecorateNumberInputProps = OmitNodeDef<DecorateNumberInputDef> & WidgetProps;
 
-export const DecorateNumberInput = (props: DecorateNumberInputProps) => {
+export const DecorateNumberInput = forwardRef((props: DecorateNumberInputProps, ref: ForwardedRef<HTMLDivElement>) => {
 	const {
 		placeholder,
 		leads, tails, className, style, ...rest
@@ -240,15 +250,16 @@ export const DecorateNumberInput = (props: DecorateNumberInputProps) => {
 	return <Decorate {...deviceTags} {...decorateAttrs}
 	                 placeholder={computePlaceholder()} leads={leads} tails={tails}
 	                 className={className} style={style}
-	                 id={PPUtils.asId(PPUtils.absolute($p2r, props.$pp), props.id)}>
+	                 id={PPUtils.asId(PPUtils.absolute($p2r, props.$pp), props.id)}
+	                 ref={ref}>
 		<NumberInput {...rest}/>
 	</Decorate>;
-};
+});
 
 export type DecoratePasswordInputDef = PasswordInputDef & DecorateWrapperDef;
 export type DecoratePasswordInputProps = OmitNodeDef<DecoratePasswordInputDef> & WidgetProps;
 
-export const DecoratePasswordInput = (props: DecoratePasswordInputProps) => {
+export const DecoratePasswordInput = forwardRef((props: DecoratePasswordInputProps, ref: ForwardedRef<HTMLDivElement>) => {
 	const {
 		placeholder,
 		leads, tails, className, style, ...rest
@@ -259,10 +270,11 @@ export const DecoratePasswordInput = (props: DecoratePasswordInputProps) => {
 	return <Decorate {...deviceTags} {...decorateAttrs}
 	                 placeholder={placeholder} leads={leads} tails={tails}
 	                 className={className} style={style}
-	                 id={PPUtils.asId(PPUtils.absolute($p2r, props.$pp), props.id)}>
+	                 id={PPUtils.asId(PPUtils.absolute($p2r, props.$pp), props.id)}
+	                 ref={ref}>
 		<PasswordInput {...rest}/>
 	</Decorate>;
-};
+});
 
 registerWidget({key: 'DecoInput', JSX: DecorateInput, container: false, array: false});
 registerWidget({key: 'DecoNumber', JSX: DecorateNumberInput, container: false, array: false});

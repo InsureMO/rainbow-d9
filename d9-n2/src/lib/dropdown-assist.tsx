@@ -17,6 +17,7 @@ import {CaretDown, Times} from './icons';
 import {IntlLabel} from './intl-label';
 import {
 	NO_MATCHED_OPTION_ITEM,
+	OptionItem,
 	OptionItems,
 	OptionItemSort,
 	OptionItemsProps,
@@ -467,7 +468,7 @@ export const useFilterableDropdownOptions = <V extends any>(props: OptionItemsPr
 				str = `${option.label}`;
 			}
 			return {str: (str || '').toLowerCase(), option};
-		});
+		}) as Array<{ str: string, option: OptionItem<V> }>;
 		let remained = transformed;
 		if (VUtils.isNotBlank(filter)) {
 			const filterText = filter.trim().toLowerCase();

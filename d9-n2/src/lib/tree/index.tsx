@@ -1,8 +1,10 @@
 import {MUtils, PPUtils, PROPERTY_PATH_ME, registerWidget, useForceUpdate} from '@rainbow-d9/n1';
-import React, {ForwardedRef, forwardRef, useEffect} from 'react';
+import React, {ForwardedRef, forwardRef, KeyboardEvent, useEffect} from 'react';
 import {GlobalEventPrefix, GlobalEventTypes, useGlobalEventBus, useGlobalHandlers} from '../global';
-import {TreeEventBusProvider} from './event/tree-event-bus';
-import {TreeNode} from './node';
+import {TreeContent} from './content';
+import {TreeEventBusProvider, useTreeEventBus} from './event/tree-event-bus';
+import {TreeEventTypes} from './event/tree-event-bus-types';
+import {TreeSearchBox} from './search-box';
 import {TreeNodeDef, TreeProps} from './types';
 import {buildTreeNodesDetective} from './utils';
 import {ATree} from './widgets';
@@ -20,6 +22,7 @@ export const InternalTree = forwardRef((props: TreeProps, ref: ForwardedRef<HTML
 
 	const {on, off} = useGlobalEventBus();
 	const globalHandlers = useGlobalHandlers();
+	const {fire} = useTreeEventBus();
 	const forceUpdate = useForceUpdate();
 	useEffect(() => {
 		const onCustomEvent = (_: string, prefix: string, clipped: string) => {
@@ -33,6 +36,20 @@ export const InternalTree = forwardRef((props: TreeProps, ref: ForwardedRef<HTML
 			off(GlobalEventTypes.CUSTOM_EVENT, onCustomEvent);
 		};
 	}, [on, off, forceUpdate, marker]);
+
+	const onKeyDown = (event: KeyboardEvent<HTMLDivElement>) => {
+		// Check for Ctrl key on Windows/Linux or Command key on Mac
+		const isCtrlKey = event.ctrlKey || event.metaKey;
+		// Check if 'F' key is pressed
+		const isFKey = event.key === 'f';
+
+		// If Ctrl/Command + F is pressed
+		if (isCtrlKey && isFKey) {
+			event.preventDefault(); // Prevent default browser behavior
+			fire(TreeEventTypes.SWITCH_SEARCH_BOX);
+		}
+	};
+
 	const detect = buildTreeNodesDetective(detective, {checkable, addable, removable});
 	// model of whole tree
 	const rootNodeValue = MUtils.getValue($wrapped.$model, $pp);
@@ -43,25 +60,14 @@ export const InternalTree = forwardRef((props: TreeProps, ref: ForwardedRef<HTML
 		label: '', checkable: false, addable, removable: false
 	};
 	rootNodeDef.$children = detect(rootNodeDef, {global: globalHandlers}) ?? [];
-	const childrenCount = rootNodeDef.$children.length;
-	// path to root of model of whole tree
-	const node$p2r = PPUtils.absolute($p2r, $pp);
-	const canAdd = rootNodeDef.addable ?? false;
 
 	return <ATree {...rest} data-disabled={$disabled} data-visible={$visible} height={height}
 	              id={PPUtils.asId(PPUtils.absolute($p2r, props.$pp), props.id)}
+	              onKeyDown={onKeyDown} tabIndex={0}
 	              ref={ref}>
-		{rootNodeDef.$children.map((child, index) => {
-			const last = !canAdd && index === childrenCount - 1;
-			const myDisplayIndex = `${index + 1}`;
-			return <TreeNode halfChecked={halfChecked} initExpandLevel={initExpandLevel} showIndex={showIndex}
-				// change path to root as path to root of model of whole tree
-				// and keep this path to root for all tree nodes
-				             detective={detect} $wrapped={{...$wrapped, $p2r: node$p2r}}
-				             node={child}
-				             displayIndex={myDisplayIndex} lastOfParent={last} level={0}
-				             key={child.$ip2p}/>;
-		})}
+		<TreeSearchBox/>
+		<TreeContent root={rootNodeDef} halfChecked={halfChecked} initExpandLevel={initExpandLevel}
+		             showIndex={showIndex} detect={detect} $pp={$pp} $wrapped={$wrapped}/>
 	</ATree>;
 });
 

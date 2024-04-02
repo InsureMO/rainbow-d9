@@ -41,7 +41,7 @@ export const TreeNode = (props: TreeNodeProps) => {
 		};
 		on && on(TreeNodeEventTypes.REFRESH_CHILD_NODES, onRefreshChildNodes);
 		return () => {
-			on && on(TreeNodeEventTypes.REFRESH_CHILD_NODES, onRefreshChildNodes);
+			off && off(TreeNodeEventTypes.REFRESH_CHILD_NODES, onRefreshChildNodes);
 		};
 	}, [on, off, fire, forceUpdate, node, detective, globalHandlers]);
 

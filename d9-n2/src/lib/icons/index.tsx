@@ -16,6 +16,7 @@ import {Expand} from './expand';
 import {Forward} from './forward';
 import {IconsRegistrar as Registrar} from './registarar';
 import {Remove} from './remove';
+import {Search} from './search';
 import {Spinner} from './spinner';
 import {Time} from './time';
 import {Times} from './times';
@@ -26,7 +27,7 @@ export {
 	Back, Date, Time,
 	Check, Times, Remove, Expand, Collapse, Edit, View, Forward, Backward,
 	CaretLeft, CaretRight, CaretDown, ArrowDown, AngleLeft, AngleRight,
-	Spinner,
+	Spinner, Search,
 	Cart,
 
 	Registrar
