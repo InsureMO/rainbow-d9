@@ -4,10 +4,10 @@ var __publicField = (obj, key, value) => {
   __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
   return value;
 };
-import { c as createLogger, N as NUtils, V as VUtils, k as MonitorNodeAttributes, l as Reaction, E as ExternalDefIndicator, P as PPUtils } from "./rainbow-d9-n1-xWXGuIcv.js";
-import { O as OptionItemSort, R as REACTION_REFRESH_OPTIONS, c as GlobalEventPrefix } from "./rainbow-d9-n2-_5MPPHi3.js";
-import { f as fromMarkdown, g as gfmTableFromMarkdown, a as gfmStrikethroughFromMarkdown, b as gfmFootnoteFromMarkdown, c as gfmTaskListItemFromMarkdown, d as frontmatterFromMarkdown } from "./mdast-7kXOs7D6.js";
-import { g as gfmTable, h as gfmStrikethrough, i as gfmFootnote, j as gfmTaskListItem, k as frontmatter } from "./micromark-TtjNvBs0.js";
+import { c as createLogger, N as NUtils, V as VUtils, k as MonitorNodeAttributes, l as Reaction, E as ExternalDefIndicator, P as PPUtils } from "./rainbow-d9-n1-975WKMaL.js";
+import { O as OptionItemSort, R as REACTION_REFRESH_OPTIONS, c as GlobalEventPrefix } from "./rainbow-d9-n2-6pYCJQat.js";
+import { f as fromMarkdown, g as gfmTableFromMarkdown, a as gfmStrikethroughFromMarkdown, b as gfmFootnoteFromMarkdown, c as gfmTaskListItemFromMarkdown, d as frontmatterFromMarkdown } from "./mdast-9DsU38kh.js";
+import { g as gfmTable, h as gfmStrikethrough, i as gfmFootnote, j as gfmTaskListItem, k as frontmatter } from "./micromark-lHpxdhAf.js";
 const AsyncFunction = Object.getPrototypeOf(async function() {
 }).constructor;
 var ParsedNodeType;
@@ -1708,24 +1708,6 @@ const DecorateTailsBuild = {
   accept: (key) => key === "tails",
   build: DecorateWrapperBuild
 };
-class ValidationScopesAttributeBuild {
-  accept(key) {
-    return D9PropertyNames.VALIDATION_SCOPES === key;
-  }
-  build(value, _list) {
-    value = (value || "").trim();
-    if (VUtils.isBlank(value)) {
-      return void 0;
-    } else {
-      const scopes = value.split(/[,;\s]/).map((scope) => scope.trim()).filter((scope) => VUtils.isNotBlank(scope));
-      if (scopes.length === 0) {
-        return void 0;
-      } else {
-        return scopes;
-      }
-    }
-  }
-}
 const _AbstractTranslator = class _AbstractTranslator {
   constructor(repository) {
     __publicField(this, "repository");
@@ -2017,6 +1999,25 @@ const createAsyncSnippetBuild = (attrName, argNames, avoidFuncWhenSingleLine = f
     }
   });
 };
+const ValueChangedBuild = createAsyncSnippetBuild("valueChanged", ["options", "handlers"]);
+class ValidationScopesAttributeBuild {
+  accept(key) {
+    return D9PropertyNames.VALIDATION_SCOPES === key;
+  }
+  build(value, _list) {
+    value = (value || "").trim();
+    if (VUtils.isBlank(value)) {
+      return void 0;
+    } else {
+      const scopes = value.split(/[,;\s]/).map((scope) => scope.trim()).filter((scope) => VUtils.isNotBlank(scope));
+      if (scopes.length === 0) {
+        return void 0;
+      } else {
+        return scopes;
+      }
+    }
+  }
+}
 class MonitorableAttributeBuild {
   createComplexAttributeValue() {
     return { on: [], snippet: "" };
@@ -3192,6 +3193,7 @@ var index$1 = /* @__PURE__ */ Object.freeze({
   ValidationScopesAttributeBuild,
   ValidatorBuild,
   ValidatorUtils,
+  ValueChangedBuild,
   VisibilityAttributeBuild,
   VisibilityBuild,
   VisibilityUtils,
@@ -3270,7 +3272,7 @@ class N2InputTranslator extends SpecificWidgetTranslator {
     return N2WidgetType.INPUT;
   }
   getAttributeValueBuilders() {
-    return [InputMaskBuild];
+    return [InputMaskBuild, ValueChangedBuild];
   }
   getValidationHandlerDetectives() {
     return [
@@ -3284,6 +3286,9 @@ class N2NumberTranslator extends SpecificWidgetTranslator {
   getSupportedType() {
     return N2WidgetType.NUMBER;
   }
+  getAttributeValueBuilders() {
+    return [ValueChangedBuild];
+  }
   getValidationHandlerDetectives() {
     return [
       ValidatorUtils.DETECT_REQUIRED,
@@ -3295,6 +3300,9 @@ class N2NumberTranslator extends SpecificWidgetTranslator {
 class N2PasswordTranslator extends SpecificWidgetTranslator {
   getSupportedType() {
     return N2WidgetType.PASSWORD;
+  }
+  getAttributeValueBuilders() {
+    return [ValueChangedBuild];
   }
   getValidationHandlerDetectives() {
     return [
@@ -3309,7 +3317,7 @@ class N2DecorateInputTranslator extends SpecificWidgetTranslator {
     return N2WidgetType.DECORATE_INPUT;
   }
   getAttributeValueBuilders() {
-    return [InputMaskBuild, DecorateLeadsBuild, DecorateTailsBuild];
+    return [InputMaskBuild, DecorateLeadsBuild, DecorateTailsBuild, ValueChangedBuild];
   }
   getValidationHandlerDetectives() {
     return [
@@ -3324,7 +3332,7 @@ class N2DecorateNumberTranslator extends SpecificWidgetTranslator {
     return N2WidgetType.DECORATE_NUMBER;
   }
   getAttributeValueBuilders() {
-    return [DecorateLeadsBuild, DecorateTailsBuild];
+    return [DecorateLeadsBuild, DecorateTailsBuild, ValueChangedBuild];
   }
   getValidationHandlerDetectives() {
     return [
@@ -3339,7 +3347,7 @@ class N2DecoratePasswordTranslator extends SpecificWidgetTranslator {
     return N2WidgetType.DECORATE_PASSWORD;
   }
   getAttributeValueBuilders() {
-    return [DecorateLeadsBuild, DecorateTailsBuild];
+    return [DecorateLeadsBuild, DecorateTailsBuild, ValueChangedBuild];
   }
   getValidationHandlerDetectives() {
     return [
@@ -3352,6 +3360,9 @@ class N2DecoratePasswordTranslator extends SpecificWidgetTranslator {
 class N2TextareaTranslator extends SpecificWidgetTranslator {
   getSupportedType() {
     return N2WidgetType.TEXTAREA;
+  }
+  getAttributeValueBuilders() {
+    return [ValueChangedBuild];
   }
   getValidationHandlerDetectives() {
     return [
@@ -3382,7 +3393,7 @@ class N2CheckboxTranslator extends SpecificWidgetTranslator {
     return N2WidgetType.CHECKBOX;
   }
   getAttributeValueBuilders() {
-    return [N2CheckboxValuesBuild];
+    return [N2CheckboxValuesBuild, ValueChangedBuild];
   }
   getValidationHandlerDetectives() {
     return [
@@ -3449,7 +3460,7 @@ class N2DropdownTranslator extends SpecificWidgetTranslator {
     return { "Dropdown.sort": "optionSort" };
   }
   getAttributeValueBuilders() {
-    return [N2DropdownOptionsBuild, N2DropdownSortBuild, N2DropdownReactionRefreshOptionsBuild];
+    return [N2DropdownOptionsBuild, N2DropdownSortBuild, N2DropdownReactionRefreshOptionsBuild, ValueChangedBuild];
   }
   getValidationHandlerDetectives() {
     return [
@@ -3464,44 +3475,37 @@ class N2DropdownTranslator extends SpecificWidgetTranslator {
     ];
   }
 }
-class N2CheckboxesTranslator extends SpecificWidgetTranslator {
+class AbstractN2CheckboxesTranslator extends SpecificWidgetTranslator {
+  getAttributeValueBuilders() {
+    return [N2DropdownOptionsBuild, N2DropdownSortBuild, ValueChangedBuild, N2DropdownReactionRefreshOptionsBuild];
+  }
+  getValidationHandlerDetectives() {
+    return [
+      ValidatorUtils.DETECT_REQUIRED,
+      ...super.getValidationHandlerDetectives()
+    ];
+  }
+  getReactionHandlerDetectives() {
+    return [
+      ...super.getReactionHandlerDetectives(),
+      N2DropdownReactionRefreshOptionsHandlerDetective
+    ];
+  }
+}
+class N2CheckboxesTranslator extends AbstractN2CheckboxesTranslator {
   getSupportedType() {
     return N2WidgetType.CHECKBOXES;
   }
   getAttributeNamesMapping() {
     return { "Checkboxes.sort": "optionSort" };
   }
-  getAttributeValueBuilders() {
-    return [N2DropdownOptionsBuild, N2DropdownSortBuild, N2DropdownReactionRefreshOptionsBuild];
-  }
-  getValidationHandlerDetectives() {
-    return [
-      ValidatorUtils.DETECT_REQUIRED,
-      ...super.getValidationHandlerDetectives()
-    ];
-  }
 }
-class N2ChecksTranslator extends SpecificWidgetTranslator {
+class N2ChecksTranslator extends AbstractN2CheckboxesTranslator {
   getSupportedType() {
     return N2WidgetType.CHECKS;
   }
   getAttributeNamesMapping() {
     return { "Checks.sort": "optionSort" };
-  }
-  getAttributeValueBuilders() {
-    return [N2DropdownOptionsBuild, N2DropdownSortBuild];
-  }
-  getValidationHandlerDetectives() {
-    return [
-      ValidatorUtils.DETECT_REQUIRED,
-      ...super.getValidationHandlerDetectives()
-    ];
-  }
-  getReactionHandlerDetectives() {
-    return [
-      ...super.getReactionHandlerDetectives(),
-      N2DropdownReactionRefreshOptionsHandlerDetective
-    ];
   }
 }
 const N2RadioValuesBuild = {
@@ -3525,7 +3529,7 @@ class N2RadioTranslator extends SpecificWidgetTranslator {
     return N2WidgetType.RADIO;
   }
   getAttributeValueBuilders() {
-    return [N2RadioValuesBuild];
+    return [N2RadioValuesBuild, ValueChangedBuild];
   }
   getValidationHandlerDetectives() {
     return [
@@ -3542,7 +3546,7 @@ class N2RadiosTranslator extends SpecificWidgetTranslator {
     return { "Radios.sort": "optionSort" };
   }
   getAttributeValueBuilders() {
-    return [N2DropdownOptionsBuild, N2DropdownSortBuild, N2DropdownReactionRefreshOptionsBuild];
+    return [N2DropdownOptionsBuild, N2DropdownSortBuild, N2DropdownReactionRefreshOptionsBuild, ValueChangedBuild];
   }
   getValidationHandlerDetectives() {
     return [
@@ -3565,7 +3569,7 @@ class N2MultiDropdownTranslator extends SpecificWidgetTranslator {
     return { "MultiDropdown.sort": "optionSort" };
   }
   getAttributeValueBuilders() {
-    return [N2DropdownOptionsBuild, N2DropdownSortBuild, N2DropdownReactionRefreshOptionsBuild];
+    return [N2DropdownOptionsBuild, N2DropdownSortBuild, N2DropdownReactionRefreshOptionsBuild, ValueChangedBuild];
   }
   getValidationHandlerDetectives() {
     return [
@@ -3654,7 +3658,7 @@ class N2CalendarTranslator extends SpecificWidgetTranslator {
     return N2WidgetType.CALENDAR;
   }
   getAttributeValueBuilders() {
-    return [N2CalendarFixedTimeAtBuild, N2CalendarInitTimeAtBuild];
+    return [N2CalendarFixedTimeAtBuild, N2CalendarInitTimeAtBuild, ValueChangedBuild];
   }
   getValidationHandlerDetectives() {
     return [
@@ -4059,6 +4063,8 @@ class N2BoxTranslator extends SpecificWidgetTranslator {
     return N2WidgetType.BOX;
   }
 }
+const N2TabDataChangedBuild = createAsyncSnippetBuild("data", ["options"]);
+const N2TabBodyChangedBuild = createAsyncSnippetBuild("body", ["marker"]);
 class N2TabTranslator extends SpecificWidgetTranslator {
   getSupportedType() {
     return N2WidgetType.TAB;
@@ -4071,6 +4077,9 @@ class N2TabTranslator extends SpecificWidgetTranslator {
   }
   getToWidgetAttributeNames() {
     return [...super.getToWidgetAttributeNames(), "title", "badge"];
+  }
+  getAttributeValueBuilders() {
+    return [N2TabDataChangedBuild, N2TabBodyChangedBuild];
   }
   postWork(def) {
     const defs = def;
@@ -4102,12 +4111,16 @@ class N2TabsTranslator extends SpecificWidgetTranslator {
     return defs;
   }
 }
+const N2WizardSharedBodyChangedBuild = createAsyncSnippetBuild("body", []);
 class N2WizardSharedTranslator extends SpecificWidgetTranslator {
   getSupportedType() {
     return N2WidgetType.WIZARD_SHARED;
   }
   shouldWrapByFormCell() {
     return false;
+  }
+  getAttributeValueBuilders() {
+    return [N2WizardSharedBodyChangedBuild];
   }
   postWork(def) {
     const defs = def;
@@ -4123,6 +4136,8 @@ class N2WizardSharedTranslator extends SpecificWidgetTranslator {
     return defs;
   }
 }
+const N2WizardStepDataBuild = createAsyncSnippetBuild("data", ["options"]);
+const N2WizardStepBodyBuild = createAsyncSnippetBuild("body", ["marker"]);
 class N2WizardStepTranslator extends SpecificWidgetTranslator {
   getSupportedType() {
     return N2WidgetType.WIZARD_STEP;
@@ -4135,6 +4150,9 @@ class N2WizardStepTranslator extends SpecificWidgetTranslator {
   }
   getToWidgetAttributeNames() {
     return [...super.getToWidgetAttributeNames(), "title"];
+  }
+  getAttributeValueBuilders() {
+    return [N2WizardStepDataBuild, N2WizardStepBodyBuild];
   }
   postWork(def) {
     const defs = def;
@@ -4211,7 +4229,7 @@ class N2PaginationTranslator extends SpecificWidgetTranslator {
     return { "Pagination.sizes": "possibleSizes" };
   }
   getAttributeValueBuilders() {
-    return [N2PaginationPossibleSizesBuild];
+    return [N2PaginationPossibleSizesBuild, ValueChangedBuild];
   }
 }
 const registerN2Widgets$1 = (widgetHelper) => {
@@ -4255,6 +4273,7 @@ const registerN2Widgets$1 = (widgetHelper) => {
 };
 var index = /* @__PURE__ */ Object.freeze({
   __proto__: null,
+  AbstractN2CheckboxesTranslator,
   InputMaskBuild,
   N2BadgeTranslator,
   N2BoxTranslator,
@@ -4304,6 +4323,8 @@ var index = /* @__PURE__ */ Object.freeze({
   N2RibsTranslator,
   N2RibsViewTranslator,
   N2SectionTranslator,
+  N2TabBodyChangedBuild,
+  N2TabDataChangedBuild,
   N2TabTranslator,
   N2TableHeadersBuild,
   N2TableRowOperatorsTranslator,
@@ -4315,7 +4336,10 @@ var index = /* @__PURE__ */ Object.freeze({
   get N2WidgetType() {
     return N2WidgetType;
   },
+  N2WizardSharedBodyChangedBuild,
   N2WizardSharedTranslator,
+  N2WizardStepBodyBuild,
+  N2WizardStepDataBuild,
   N2WizardStepTranslator,
   N2WizardTranslator,
   registerN2Widgets: registerN2Widgets$1
