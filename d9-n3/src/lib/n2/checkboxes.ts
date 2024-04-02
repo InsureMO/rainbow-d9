@@ -2,7 +2,7 @@ import {Undefinable} from '@rainbow-d9/n1';
 import {
 	AttributeValueBuild,
 	CustomAttributeName,
-	MonitorHandlerDetective, N2ValueChangedBuild,
+	MonitorHandlerDetective,
 	SpecificWidgetTranslator,
 	ValidatorUtils,
 	WidgetPropertyName
@@ -14,7 +14,6 @@ import {
 	N2DropdownSortBuild
 } from './dropdown';
 import {N2WidgetType} from './types';
-
 
 export class N2CheckboxesTranslator extends SpecificWidgetTranslator<N2WidgetType.CHECKBOXES> {
 	public getSupportedType(): N2WidgetType.CHECKBOXES {
@@ -49,8 +48,7 @@ export class N2ChecksTranslator extends SpecificWidgetTranslator<N2WidgetType.CH
 
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	public getAttributeValueBuilders(): Array<AttributeValueBuild<any>> {
-		// TODO ValueChangeableNodeDef
-		return [N2DropdownOptionsBuild, N2DropdownSortBuild, N2ValueChangedBuild];
+		return [N2DropdownOptionsBuild, N2DropdownSortBuild];
 	}
 
 	public getValidationHandlerDetectives(): Array<MonitorHandlerDetective> {

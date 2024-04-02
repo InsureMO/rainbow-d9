@@ -7,7 +7,7 @@ import {
 	AttributeValueBuild,
 	createDefaultMonitorHandlerDetective,
 	CustomAttributeName,
-	MonitorHandlerDetective, N2ValueChangedBuild,
+	MonitorHandlerDetective,
 	ReactionMonitorAttributeValue,
 	ReactionTypes,
 	SpecificWidgetTranslator,
@@ -15,7 +15,6 @@ import {
 	WidgetPropertyName
 } from '../widget';
 import {N2WidgetType} from './types';
-
 
 export const N2DropdownOptionsByStrBuild = (value: string): DropdownOptions => {
 	return value.split(';')
@@ -98,8 +97,7 @@ export class N2DropdownTranslator extends SpecificWidgetTranslator<N2WidgetType.
 
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	public getAttributeValueBuilders(): Array<AttributeValueBuild<any>> {
-		// TODO ValueChangeableNodeDef
-		return [N2DropdownOptionsBuild, N2DropdownSortBuild, N2DropdownReactionRefreshOptionsBuild, N2ValueChangedBuild];
+		return [N2DropdownOptionsBuild, N2DropdownSortBuild, N2DropdownReactionRefreshOptionsBuild];
 	}
 
 	public getValidationHandlerDetectives(): Array<MonitorHandlerDetective> {
