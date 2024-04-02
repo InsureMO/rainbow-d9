@@ -124,7 +124,7 @@ export const TreeNodeRenderer = (props: TreeNodeRendererProps) => {
 	return <TreeNodeContainer data-expanded={expanded.current} data-last-of-parent={lastOfParent} level={level}
 	                          onClick={onEntityClicked}>
 		<TreeNodeContent>
-			{(node.children ?? []).length !== 0
+			{(node.$children ?? []).length !== 0
 				? <TreeNodeToggle data-expanded={expanded.current} onClick={onToggleClicked}>
 					<AngleRight/>
 				</TreeNodeToggle>

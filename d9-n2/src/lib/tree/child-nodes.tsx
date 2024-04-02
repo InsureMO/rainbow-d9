@@ -37,7 +37,7 @@ export const ChildTreeNodes = (props: ChildTreeNodesProps) => {
 		};
 	}, [on, off, forceUpdate, node]);
 
-	const children = node.children ?? [];
+	const children = node.$children ?? [];
 	const childrenCount = children.length;
 	const hasChild = childrenCount !== 0;
 

@@ -29,7 +29,7 @@ export const InternalTree = forwardRef((props: TreeProps, ref: ForwardedRef<HTML
 		label: '', checkable: false, addable, removable: false
 	};
 	const children = detect(rootNodeDef, {global: globalHandlers}) ?? [];
-	rootNodeDef.children = children;
+	rootNodeDef.$children = children;
 	const childrenCount = children.length;
 	// path to root of model of whole tree
 	const node$p2r = PPUtils.absolute($p2r, $pp);

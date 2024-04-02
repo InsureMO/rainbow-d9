@@ -2,18 +2,6 @@ import {PPUtils, PropertyPath, VUtils} from '@rainbow-d9/n1';
 import {GlobalEventHandlers} from '../types';
 import {TreeNodeDef, TreeNodeDetect, TreeNodeOperation} from './types';
 
-export const beautifyTreeNodes = (nodes: Array<TreeNodeDef>, options: Required<TreeNodeOperation>): Array<TreeNodeDef> => {
-	return (nodes ?? []).map(node => {
-		node.checkable = node.checkable ?? options.checkable;
-		node.addable = node.addable ?? options.addable;
-		node.removable = node.removable ?? options.removable;
-		if (node.children != null) {
-			beautifyTreeNodes(node.children, options);
-		}
-		return node;
-	});
-};
-
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export const defaultTreeNodesDetective: TreeNodeDetect = (parentNode, _options) => {
 	if (parentNode == null || parentNode.value == null) {
@@ -49,13 +37,27 @@ export const defaultTreeNodesDetective: TreeNodeDetect = (parentNode, _options) 
 
 export const buildTreeNodesDetective = (detective: TreeNodeDetect, options: Required<TreeNodeOperation>): TreeNodeDetect => {
 	const detect = detective ?? defaultTreeNodesDetective;
+	const beautifyTreeNodes = (nodes: Array<TreeNodeDef>, options: Required<TreeNodeOperation>): Array<TreeNodeDef> => {
+		return (nodes ?? []).map(node => {
+			node.checkable = node.checkable ?? options.checkable;
+			node.addable = node.addable ?? options.addable;
+			node.removable = node.removable ?? options.removable;
+			if (node.$children != null) {
+				beautifyTreeNodes(node.$children, options);
+			}
+			return node;
+		});
+	};
 	const detectChildren = (node: TreeNodeDef, _options: GlobalEventHandlers) => {
-		node.children = detect(node, _options);
-		if (node.children != null && node.children.length === 0) {
-			delete node.children;
+		node.$children = detect(node, _options);
+		if (node.$children != null && node.$children.length === 0) {
+			delete node.$children;
 		}
-		if (node.children != null) {
-			node.children.forEach(child => detectChildren(child, _options));
+		if (node.$children != null) {
+			node.$children.forEach(child => {
+				child.$parent = node;
+				detectChildren(child, _options);
+			});
 		}
 	};
 

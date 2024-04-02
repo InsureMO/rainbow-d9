@@ -34,7 +34,8 @@ export interface TreeNodeDef extends TreeNodeOperation2 {
 	$ip2p: PropertyPath;
 	marker?: string;
 	label?: string | ReactNode | NodeDef;
-	children?: Array<TreeNodeDef>;
+	$children?: Array<TreeNodeDef>;
+	$parent?: TreeNodeDef;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
