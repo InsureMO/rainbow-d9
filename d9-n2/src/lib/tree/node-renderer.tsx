@@ -1,6 +1,6 @@
 import {Nullable, NUtils, PPUtils, PropValue, useForceUpdate, VUtils} from '@rainbow-d9/n1';
 import React, {MouseEvent, MutableRefObject, useEffect, useRef} from 'react';
-import {GlobalEventPrefix, GlobalEventTypes, useGlobalEventBus} from '../global';
+import {GlobalEventPrefix, GlobalEventTypes, useGlobalEventBus, useGlobalHandlers} from '../global';
 import {AngleRight} from '../icons';
 import {LabelLike} from '../label-like';
 import {UnwrappedCheckbox, UnwrappedCheckboxProps} from '../unwrapped/checkbox';
@@ -75,6 +75,7 @@ export const TreeNodeRenderer = (props: TreeNodeRendererProps) => {
 
 	const expanded = useRef(level <= initExpandLevel);
 	const {fire: fireGlobal} = useGlobalEventBus();
+	const globalHandlers = useGlobalHandlers();
 	const {fire} = useTreeNodeEventBus();
 	useTreeNodeExpand(expanded);
 	useTreeNodeCheckedChanged();
@@ -105,9 +106,9 @@ export const TreeNodeRenderer = (props: TreeNodeRendererProps) => {
 	if (checkable) {
 		checked = node.checked(node);
 		check = node.check;
-		onCheckValueChanged = (value: PropValue) => {
+		onCheckValueChanged = async (value: PropValue) => {
 			// call function to set value, should include itself, descendants and ancestors
-			check(node, value as boolean);
+			await check(node, value as boolean, {global: globalHandlers});
 			fire && fire(TreeNodeEventTypes.SWITCH_MY_CHECKED, node.$ip2r, value as boolean);
 		};
 	}

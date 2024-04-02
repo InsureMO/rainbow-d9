@@ -15,7 +15,7 @@ export interface TreeNodeOperation2 extends TreeNodeOperation {
 	/** get checked, mandatory when checkable */
 	checked?: (node: TreeNodeDef) => boolean;
 	/** changed checked, mandatory when checkable */
-	check?: (node: TreeNodeDef, checked: boolean) => void;
+	check?: (node: TreeNodeDef, checked: boolean, handlers: GlobalEventHandlers) => Promise<void>;
 }
 
 export interface TreeNodeDef extends TreeNodeOperation2 {

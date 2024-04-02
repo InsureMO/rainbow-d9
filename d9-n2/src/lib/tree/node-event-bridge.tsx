@@ -26,11 +26,8 @@ export const TreeNodeEventBridge = (props: TreeNodeEventBridgeProps) => {
 				expandParent(expanded);
 			}
 		};
-		const onNodeCheckedChanged = ($ip2r: string, checked: boolean) => {
-			if (node.$ip2r !== $ip2r) {
-				// ignore expanded event from child nodes, only receive expanded event from myself
-				return;
-			}
+		// eslint-disable-next-line @typescript-eslint/no-unused-vars
+		const onNodeCheckedChanged = (_$ip2r: string, checked: boolean) => {
 			nodeCheckedChanged(checked);
 		};
 		on && on(TreeNodeEventTypes.SWITCH_PARENT_EXPAND, onExpandParent);

@@ -59,12 +59,24 @@ const treeDetective = (parentNode?: TreeNodeDef): Array<TreeNodeDef> => {
 				checkable = true;
 				checked = () => item.checked ?? false;
 				check = (def, checked) => {
+					if (def.checked!(def) === checked) {
+						return;
+					}
 					item.checked = checked;
-					(def.children ?? []).forEach(child => {
+					(def.$children ?? []).forEach(child => {
 						if (child.checkable) {
 							child.check!(child, checked);
 						}
 					});
+					let parent = def.$parent;
+					while (parent != null && parent.checkable) {
+						console.log(parent);
+						const allChildChecked = (parent.$children ?? [])
+							.filter(child => child.checkable)
+							.every(child => child.checked!(child));
+						parent.check!(parent, allChildChecked);
+						parent = parent.$parent;
+					}
 				};
 			}
 			return {
