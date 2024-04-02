@@ -3,7 +3,7 @@ import {CheckboxPossibleValues} from '@rainbow-d9/n2';
 import {ParsedListItemAttributePair} from '../semantic';
 import {
 	AttributeValueBuild,
-	MonitorHandlerDetective,
+	MonitorHandlerDetective, N2ValueChangedBuild,
 	SpecificWidgetTranslator,
 	tryBoolOnAttrValue,
 	ValidatorUtils,
@@ -40,7 +40,8 @@ export class N2CheckboxTranslator extends SpecificWidgetTranslator<N2WidgetType.
 
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	public getAttributeValueBuilders(): Array<AttributeValueBuild<any>> {
-		return [N2CheckboxValuesBuild];
+		// TODO ValueChangeableNodeDef
+		return [N2CheckboxValuesBuild, N2ValueChangedBuild];
 	}
 
 	public getValidationHandlerDetectives(): Array<MonitorHandlerDetective> {
