@@ -3,8 +3,8 @@ import {ParsedListItemAttributePair} from '../semantic';
 import {
 	AttributeValueBuild,
 	CustomAttributeName,
-	N2ValueChangedBuild,
 	SpecificWidgetTranslator,
+	ValueChangedBuild,
 	WidgetPropertyName
 } from '../widget';
 import {N2WidgetType} from './types';
@@ -51,7 +51,6 @@ export class N2PaginationTranslator extends SpecificWidgetTranslator<N2WidgetTyp
 
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	public getAttributeValueBuilders(): Array<AttributeValueBuild<any>> {
-		// TODO ValueChangeableNodeDef
-		return [N2PaginationPossibleSizesBuild,N2ValueChangedBuild];
+		return [N2PaginationPossibleSizesBuild, ValueChangedBuild];
 	}
 }

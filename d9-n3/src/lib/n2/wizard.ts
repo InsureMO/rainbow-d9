@@ -1,104 +1,99 @@
 import {ContainerDef, ExternalDefIndicator, NodeDef} from '@rainbow-d9/n1';
 import {SectionDef, WizardDef, WizardSharedDef, WizardStepDef} from '@rainbow-d9/n2';
-import {
-    AttributeValueBuild,
-    createAsyncSnippetBuild,
-    SpecificWidgetTranslator
-} from '../widget';
+import {AttributeValueBuild, createAsyncSnippetBuild, SpecificWidgetTranslator} from '../widget';
 import {N2WidgetType} from './types';
 
-
-export const N2WizardSharedBodyBuild = createAsyncSnippetBuild<WizardSharedDef, 'body'>('body', []);
+export const N2WizardSharedBodyChangedBuild = createAsyncSnippetBuild<WizardSharedDef, 'body'>('body', []);
 
 export class N2WizardSharedTranslator extends SpecificWidgetTranslator<N2WidgetType.WIZARD_SHARED> {
-    public getAttributeValueBuilders(): Array<AttributeValueBuild<any>> {
-        // TODO WizardSharedDef
-        return [N2WizardSharedBodyBuild];
-    }
+	public getSupportedType(): N2WidgetType.WIZARD_SHARED {
+		return N2WidgetType.WIZARD_SHARED;
+	}
 
-    public getSupportedType(): N2WidgetType.WIZARD_SHARED {
-        return N2WidgetType.WIZARD_SHARED;
-    }
+	public shouldWrapByFormCell(): boolean {
+		return false;
+	}
 
-    public shouldWrapByFormCell(): boolean {
-        return false;
-    }
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	public getAttributeValueBuilders(): Array<AttributeValueBuild<any>> {
+		return [N2WizardSharedBodyChangedBuild];
+	}
 
-    public postWork<Def extends NodeDef>(def: Partial<Def>): Def {
-        const defs = def as unknown as ContainerDef;
-        const shareDef = defs as unknown as WizardSharedDef;
-        if (shareDef.body == null || !(shareDef.body instanceof ExternalDefIndicator)) {
-            shareDef.body = {
-                $wt: N2WidgetType.SECTION,
-                $pos: {$cols: 3},
-                $nodes: defs.$nodes
-            } as SectionDef;
-            delete defs.$nodes;
-        }
-        return defs as unknown as Def;
-    }
+	public postWork<Def extends NodeDef>(def: Partial<Def>): Def {
+		const defs = def as unknown as ContainerDef;
+		const shareDef = defs as unknown as WizardSharedDef;
+		if (shareDef.body == null || !(shareDef.body instanceof ExternalDefIndicator)) {
+			shareDef.body = {
+				$wt: N2WidgetType.SECTION,
+				$pos: {$cols: 3},
+				$nodes: defs.$nodes
+			} as SectionDef;
+			delete defs.$nodes;
+		}
+		return defs as unknown as Def;
+	}
 }
 
-export const N2WizardStepBodyBuild = createAsyncSnippetBuild<WizardStepDef, 'body'>('body', ['marker']);
 export const N2WizardStepDataBuild = createAsyncSnippetBuild<WizardStepDef, 'data'>('data', ['options']);
+export const N2WizardStepBodyBuild = createAsyncSnippetBuild<WizardStepDef, 'body'>('body', ['marker']);
 
 export class N2WizardStepTranslator extends SpecificWidgetTranslator<N2WidgetType.WIZARD_STEP> {
-    public getAttributeValueBuilders(): Array<AttributeValueBuild<any>> {
-        // TODO WizardStepDef
-        return [N2WizardStepDataBuild, N2WizardStepBodyBuild];
-    }
+	public getSupportedType(): N2WidgetType.WIZARD_STEP {
+		return N2WidgetType.WIZARD_STEP;
+	}
 
-    public getSupportedType(): N2WidgetType.WIZARD_STEP {
-        return N2WidgetType.WIZARD_STEP;
-    }
+	public transformLabelAttributeName(): string {
+		return 'title';
+	}
 
-    public transformLabelAttributeName(): string {
-        return 'title';
-    }
+	public shouldWrapByFormCell(): boolean {
+		return false;
+	}
 
-    public shouldWrapByFormCell(): boolean {
-        return false;
-    }
+	public getToWidgetAttributeNames(): Array<string> {
+		return [...super.getToWidgetAttributeNames(), 'title'];
+	}
 
-    public getToWidgetAttributeNames(): Array<string> {
-        return [...super.getToWidgetAttributeNames(), 'title'];
-    }
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	public getAttributeValueBuilders(): Array<AttributeValueBuild<any>> {
+		return [N2WizardStepDataBuild, N2WizardStepBodyBuild];
+	}
 
-    public postWork<Def extends NodeDef>(def: Partial<Def>): Def {
-        const defs = def as unknown as ContainerDef;
-        const stepDef = defs as unknown as WizardStepDef;
-        if (stepDef.body == null || !(stepDef.body instanceof ExternalDefIndicator)) {
-            stepDef.body = {
-                $wt: N2WidgetType.SECTION,
-                $pos: {$cols: 12},
-                $nodes: defs.$nodes
-            } as SectionDef;
-            delete defs.$nodes;
-        }
-        return defs as unknown as Def;
-    }
+	public postWork<Def extends NodeDef>(def: Partial<Def>): Def {
+		const defs = def as unknown as ContainerDef;
+		const stepDef = defs as unknown as WizardStepDef;
+		if (stepDef.body == null || !(stepDef.body instanceof ExternalDefIndicator)) {
+			stepDef.body = {
+				$wt: N2WidgetType.SECTION,
+				$pos: {$cols: 12},
+				$nodes: defs.$nodes
+			} as SectionDef;
+			delete defs.$nodes;
+		}
+		return defs as unknown as Def;
+	}
 }
 
 export class N2WizardTranslator extends SpecificWidgetTranslator<N2WidgetType.WIZARD> {
 
-    public getSupportedType(): N2WidgetType.WIZARD {
-        return N2WidgetType.WIZARD;
-    }
+	public getSupportedType(): N2WidgetType.WIZARD {
+		return N2WidgetType.WIZARD;
+	}
 
-    public beautifyProperties<Def extends NodeDef>(def: Partial<Def>): Def {
-        return super.beautifyProperties(this.beautifyColumnSpan(def, 12));
-    }
+	public beautifyProperties<Def extends NodeDef>(def: Partial<Def>): Def {
+		return super.beautifyProperties(this.beautifyColumnSpan(def, 12));
+	}
 
-    public shouldWrapByFormCell(): boolean {
-        return false;
-    }
+	public shouldWrapByFormCell(): boolean {
+		return false;
+	}
 
-    public postWork<Def extends NodeDef>(def: Partial<Def>): Def {
-        const defs = def as unknown as ContainerDef;
-        const {$nodes} = defs;
-        (defs as unknown as WizardDef).shared = ($nodes ?? []).find(node => node.$wt === N2WidgetType.WIZARD_SHARED) as WizardSharedDef;
-        (defs as unknown as WizardDef).contents = ($nodes ?? []).filter(node => node.$wt === N2WidgetType.WIZARD_STEP) as Array<WizardStepDef>;
-        delete defs.$nodes;
-        return defs as unknown as Def;
-    }
+	public postWork<Def extends NodeDef>(def: Partial<Def>): Def {
+		const defs = def as unknown as ContainerDef;
+		const {$nodes} = defs;
+		(defs as unknown as WizardDef).shared = ($nodes ?? []).find(node => node.$wt === N2WidgetType.WIZARD_SHARED) as WizardSharedDef;
+		(defs as unknown as WizardDef).contents = ($nodes ?? []).filter(node => node.$wt === N2WidgetType.WIZARD_STEP) as Array<WizardStepDef>;
+		delete defs.$nodes;
+		return defs as unknown as Def;
+	}
 }

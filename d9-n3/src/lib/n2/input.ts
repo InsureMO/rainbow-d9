@@ -4,9 +4,10 @@ import {
 	createSyncSnippetBuild,
 	DecorateLeadsBuild,
 	DecorateTailsBuild,
-	MonitorHandlerDetective, N2ValueChangedBuild,
+	MonitorHandlerDetective,
 	SpecificWidgetTranslator,
 	ValidatorUtils,
+	ValueChangedBuild,
 	wrapMonitorHandlerDetective
 } from '../widget';
 import {N2WidgetType} from './types';
@@ -35,8 +36,7 @@ export class N2InputTranslator extends SpecificWidgetTranslator<N2WidgetType.INP
 
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	public getAttributeValueBuilders(): Array<AttributeValueBuild<any>> {
-		// TODO ValueChangeableNodeDef
-		return [InputMaskBuild, N2ValueChangedBuild];
+		return [InputMaskBuild, ValueChangedBuild];
 	}
 
 	public getValidationHandlerDetectives(): Array<MonitorHandlerDetective> {
@@ -53,6 +53,11 @@ export class N2NumberTranslator extends SpecificWidgetTranslator<N2WidgetType.NU
 		return N2WidgetType.NUMBER;
 	}
 
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	public getAttributeValueBuilders(): Array<AttributeValueBuild<any>> {
+		return [ValueChangedBuild];
+	}
+
 	public getValidationHandlerDetectives(): Array<MonitorHandlerDetective> {
 		return [
 			ValidatorUtils.DETECT_REQUIRED,
@@ -65,6 +70,11 @@ export class N2NumberTranslator extends SpecificWidgetTranslator<N2WidgetType.NU
 export class N2PasswordTranslator extends SpecificWidgetTranslator<N2WidgetType.PASSWORD> {
 	public getSupportedType(): N2WidgetType.PASSWORD {
 		return N2WidgetType.PASSWORD;
+	}
+
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	public getAttributeValueBuilders(): Array<AttributeValueBuild<any>> {
+		return [ValueChangedBuild];
 	}
 
 	public getValidationHandlerDetectives(): Array<MonitorHandlerDetective> {
@@ -83,7 +93,7 @@ export class N2DecorateInputTranslator extends SpecificWidgetTranslator<N2Widget
 
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	public getAttributeValueBuilders(): Array<AttributeValueBuild<any>> {
-		return [InputMaskBuild, DecorateLeadsBuild, DecorateTailsBuild];
+		return [InputMaskBuild, DecorateLeadsBuild, DecorateTailsBuild, ValueChangedBuild];
 	}
 
 	public getValidationHandlerDetectives(): Array<MonitorHandlerDetective> {
@@ -102,7 +112,7 @@ export class N2DecorateNumberTranslator extends SpecificWidgetTranslator<N2Widge
 
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	public getAttributeValueBuilders(): Array<AttributeValueBuild<any>> {
-		return [DecorateLeadsBuild, DecorateTailsBuild];
+		return [DecorateLeadsBuild, DecorateTailsBuild, ValueChangedBuild];
 	}
 
 	public getValidationHandlerDetectives(): Array<MonitorHandlerDetective> {
@@ -121,7 +131,7 @@ export class N2DecoratePasswordTranslator extends SpecificWidgetTranslator<N2Wid
 
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	public getAttributeValueBuilders(): Array<AttributeValueBuild<any>> {
-		return [DecorateLeadsBuild, DecorateTailsBuild];
+		return [DecorateLeadsBuild, DecorateTailsBuild, ValueChangedBuild];
 	}
 
 	public getValidationHandlerDetectives(): Array<MonitorHandlerDetective> {

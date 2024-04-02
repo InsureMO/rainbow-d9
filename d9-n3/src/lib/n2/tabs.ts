@@ -1,20 +1,12 @@
 import {ContainerDef, ExternalDefIndicator, NodeDef} from '@rainbow-d9/n1';
 import {SectionDef, TabDef, TabsDef} from '@rainbow-d9/n2';
-import {SpecificWidgetTranslator, AttributeValueBuild, createAsyncSnippetBuild} from '../widget';
+import {AttributeValueBuild, createAsyncSnippetBuild, SpecificWidgetTranslator} from '../widget';
 import {N2WidgetType} from './types';
-
 
 export const N2TabDataChangedBuild = createAsyncSnippetBuild<TabDef, 'data'>('data', ['options']);
 export const N2TabBodyChangedBuild = createAsyncSnippetBuild<TabDef, 'body'>('body', ['marker']);
 
 export class N2TabTranslator extends SpecificWidgetTranslator<N2WidgetType.TAB> {
-
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	public getAttributeValueBuilders(): Array<AttributeValueBuild<any>> {
-		// TODO TabDef Data&Body
-		return [N2TabDataChangedBuild, N2TabBodyChangedBuild];
-	}
-
 	public getSupportedType(): N2WidgetType.TAB {
 		return N2WidgetType.TAB;
 	}
@@ -29,6 +21,11 @@ export class N2TabTranslator extends SpecificWidgetTranslator<N2WidgetType.TAB> 
 
 	public getToWidgetAttributeNames(): Array<string> {
 		return [...super.getToWidgetAttributeNames(), 'title', 'badge'];
+	}
+
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	public getAttributeValueBuilders(): Array<AttributeValueBuild<any>> {
+		return [N2TabDataChangedBuild, N2TabBodyChangedBuild];
 	}
 
 	public postWork<Def extends NodeDef>(def: Partial<Def>): Def {
@@ -49,7 +46,6 @@ export class N2TabsTranslator extends SpecificWidgetTranslator<N2WidgetType.TABS
 	public getSupportedType(): N2WidgetType.TABS {
 		return N2WidgetType.TABS;
 	}
-
 
 	public beautifyProperties<Def extends NodeDef>(def: Partial<Def>): Def {
 		return super.beautifyProperties(this.beautifyColumnSpan(def, 12));

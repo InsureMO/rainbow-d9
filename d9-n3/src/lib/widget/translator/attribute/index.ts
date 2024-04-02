@@ -3,6 +3,7 @@ export * from './constants';
 
 export * from './position-attribute-build';
 export * from './decorate-wrapper-build';
+export * from './value-change-build';
 export * from './validation-scopes-attribute-build';
 export * from './disablement-attribute-build';
 export * from './monitor-attribute-build';
@@ -15,4 +16,3 @@ export * from './any-attribute-build';
 export * from './attribute-utils';
 export * from './attribute-name-util';
 
-export * from './n2value-change-build'
