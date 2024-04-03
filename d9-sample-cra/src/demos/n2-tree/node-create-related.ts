@@ -10,7 +10,8 @@ const createNewNode = (parent: TreeNodeDef, index: number): TreeNodeDef => {
 	return {
 		value: item, label,
 		$ip2r: `${parent.$ip2r}.nodes[${index}]`, $ip2p: `nodes[${index}]`,
-		checkable: true, checked: () => false, check: checkNode,
+		// @ts-ignore
+		checkable: true, checked: () => item.checked ?? false, check: checkNode,
 		addable: true, add: addNode,
 		removable: true, remove: removeNode
 	};

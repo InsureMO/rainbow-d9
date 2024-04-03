@@ -76,6 +76,7 @@ const treeDetective = (parentNode?: TreeNodeDef): Array<TreeNodeDef> => {
 		}
 	}).filter(item => item != null) as Array<TreeNodeDef>;
 };
+
 export const N2Tree = () => {
 	const def = useDemoMarkdown(DemoContent);
 
