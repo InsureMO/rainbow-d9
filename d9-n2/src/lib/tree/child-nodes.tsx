@@ -1,6 +1,8 @@
 import {useForceUpdate} from '@rainbow-d9/n1';
 import React, {useEffect} from 'react';
 import {useGlobalHandlers} from '../global';
+import {useTreeEventBus} from './event/tree-event-bus';
+import {TreeEventTypes} from './event/tree-event-bus-types';
 import {useTreeNodeEventBus} from './event/tree-node-event-bus';
 import {TreeNodeEventTypes} from './event/tree-node-event-bus-types';
 import {TreeNode} from './node';
@@ -24,7 +26,8 @@ export const ChildTreeNodes = (props: ChildTreeNodesProps) => {
 		detective, $wrapped
 	} = props;
 
-	const {on, off} = useTreeNodeEventBus();
+	const {fire: fireTree} = useTreeEventBus();
+	const {on, off, fire} = useTreeNodeEventBus();
 	const globalHandlers = useGlobalHandlers();
 	const forceUpdate = useForceUpdate();
 	useEffect(() => {
@@ -39,13 +42,25 @@ export const ChildTreeNodes = (props: ChildTreeNodesProps) => {
 		const onRefreshChildNodesOnRemoved = (_marker: string, _removedNode: TreeNodeDef) => {
 			forceUpdate();
 		};
-		// eslint-disable-next-line @typescript-eslint/no-unused-vars
-		const onChildAdded = (_marker: string, _addedNode?: TreeNodeDef, _placeholder?: boolean) => {
-			forceUpdate();
+		const fillMarker = () => {
+			fireTree(TreeEventTypes.ASK_MARKER_ADDER, (add: (node: TreeNodeDef) => void) => {
+				(node.$children).forEach(child => add(child));
+			});
+		};
+		const scrollToAdded = (childNode?: TreeNodeDef) => {
+			fire && fire(TreeNodeEventTypes.SWITCH_MY_EXPAND, node.marker, true, childNode?.marker);
 		};
 		// eslint-disable-next-line @typescript-eslint/no-unused-vars
-		const onChildPlaceholderReplaced = (_marker: string, _addedNode?: TreeNodeDef) => {
+		const onChildAdded = (_marker: string, addedNode?: TreeNodeDef, _placeholder?: boolean) => {
+			fillMarker();
 			forceUpdate();
+			scrollToAdded(addedNode);
+		};
+		// eslint-disable-next-line @typescript-eslint/no-unused-vars
+		const onChildPlaceholderReplaced = (_marker: string, addedNode?: TreeNodeDef) => {
+			fillMarker();
+			forceUpdate();
+			scrollToAdded(addedNode);
 		};
 		// eslint-disable-next-line @typescript-eslint/no-unused-vars
 		const onChildPlaceholderRemoved = (_marker: string, _placeholderNode: TreeNodeDef) => {
@@ -63,7 +78,7 @@ export const ChildTreeNodes = (props: ChildTreeNodesProps) => {
 			off && off(TreeNodeEventTypes.CHILD_PLACEHOLDER_REPLACED, onChildPlaceholderReplaced);
 			off && off(TreeNodeEventTypes.CHILD_PLACEHOLDER_REMOVED, onChildPlaceholderRemoved);
 		};
-	}, [on, off, forceUpdate, node, detective, globalHandlers]);
+	}, [on, off, fire, fireTree, forceUpdate, node, detective, globalHandlers]);
 	useEffect(() => {
 		// eslint-disable-next-line @typescript-eslint/no-unused-vars
 		const onNodeCheckedChanged = (_marker: string, _checked: boolean) => {

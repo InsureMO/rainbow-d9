@@ -1,5 +1,7 @@
 import {NUtils, VUtils} from '@rainbow-d9/n1';
-import {useRef, useState} from 'react';
+import {useEffect, useRef, useState} from 'react';
+import {useTreeEventBus} from './event/tree-event-bus';
+import {TreeEventTypes} from './event/tree-event-bus-types';
 import {TreeNodeDef} from './types';
 
 export interface Markers {
@@ -14,6 +16,7 @@ export interface MarkersFunctions {
 
 export const useMarker = (): MarkersFunctions => {
 	const markers = useRef<Markers>({});
+	const {on, off} = useTreeEventBus();
 	const [funcs] = useState<MarkersFunctions>((): MarkersFunctions => {
 		const generate = (node?: TreeNodeDef) => {
 			let marker = NUtils.generateReactKey();
@@ -41,6 +44,13 @@ export const useMarker = (): MarkersFunctions => {
 		};
 		return {generate, add, delete: deleteMarker};
 	});
+	useEffect(() => {
+		const onAskMarkerAdder = (callback: (add: MarkersFunctions['add']) => void) => callback(funcs.add);
+		on(TreeEventTypes.ASK_MARKER_ADDER, onAskMarkerAdder);
+		return () => {
+			off(TreeEventTypes.ASK_MARKER_ADDER, onAskMarkerAdder);
+		};
+	}, [on, off]);
 
 	return funcs;
 };

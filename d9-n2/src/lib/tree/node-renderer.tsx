@@ -6,6 +6,8 @@ import {AngleRight} from '../icons';
 import {LabelLike} from '../label-like';
 import {UnwrappedButton} from '../unwrapped/button';
 import {UnwrappedCheckbox, UnwrappedCheckboxProps} from '../unwrapped/checkbox';
+import {useTreeEventBus} from './event/tree-event-bus';
+import {TreeEventTypes} from './event/tree-event-bus-types';
 import {useTreeNodeEventBus} from './event/tree-node-event-bus';
 import {TreeNodeEventTypes} from './event/tree-node-event-bus-types';
 import {TreeDef, TreeNodeCheckedChangeFrom, TreeNodeDef, TreeProps} from './types';
@@ -29,10 +31,11 @@ export interface TreeNodeRendererProps {
 }
 
 const useTreeNodeExpand = (ref: MutableRefObject<HTMLDivElement>, state: MutableRefObject<boolean>) => {
+	const {fire: fireTree} = useTreeEventBus();
 	const {on, off, fire} = useTreeNodeEventBus();
 	const forceUpdate = useForceUpdate();
 	useEffect(() => {
-		const onSwitchExpand = (fromMyself: boolean) => (marker: string, expanded: boolean) => {
+		const onSwitchExpand = (fromMyself: boolean) => (marker: string, expanded: boolean, locateToMarker?: string) => {
 			if (expanded != state.current) {
 				// trigger by myself
 				state.current = expanded;
@@ -77,6 +80,9 @@ const useTreeNodeExpand = (ref: MutableRefObject<HTMLDivElement>, state: Mutable
 										behavior: 'smooth'
 									});
 								}
+								if (VUtils.isNotBlank(locateToMarker)) {
+									fireTree(TreeEventTypes.SCROLL_NODE_INTO_VIEW, locateToMarker);
+								}
 							}
 						}, 100);
 					};
@@ -92,7 +98,7 @@ const useTreeNodeExpand = (ref: MutableRefObject<HTMLDivElement>, state: Mutable
 			off && off(TreeNodeEventTypes.SWITCH_MY_EXPAND, onSwitchMyExpand);
 			off && off(TreeNodeEventTypes.SWITCH_MY_EXPAND_FROM_CHILD, onSwitchMyExpandFromChild);
 		};
-	}, [on, off, fire, forceUpdate, ref, state]);
+	}, [on, off, fire, fireTree, forceUpdate, ref, state]);
 };
 
 const useTreeNodeCheckedChanged = () => {
@@ -134,6 +140,7 @@ export const TreeNodeRenderer = (props: TreeNodeRendererProps) => {
 	const expanded = useRef(level <= initExpandLevel);
 	const {fire: fireGlobal} = useGlobalEventBus();
 	const globalHandlers = useGlobalHandlers();
+	const {on: onTree, off: offTree} = useTreeEventBus();
 	const {on, off, fire} = useTreeNodeEventBus();
 	const [operators, setOperators] = useState<TreeNodeOperatorsState>({visible: false, top: 0, right: 0});
 	useTreeNodeExpand(ref, expanded);
@@ -149,6 +156,18 @@ export const TreeNodeRenderer = (props: TreeNodeRendererProps) => {
 			off && off(TreeNodeEventTypes.REFRESH_CHILD_NODES, onRefreshNode);
 		};
 	}, [on, off, forceUpdate, node]);
+	useEffect(() => {
+		const onScrollNodeIntoView = (marker: string) => {
+			if (node.marker !== marker) {
+				return;
+			}
+			ref.current?.scrollIntoView({behavior: 'smooth'});
+		};
+		onTree(TreeEventTypes.SCROLL_NODE_INTO_VIEW, onScrollNodeIntoView);
+		return () => {
+			offTree(TreeEventTypes.SCROLL_NODE_INTO_VIEW, onScrollNodeIntoView);
+		};
+	}, [onTree, offTree, node, ref]);
 
 	const onToggleClicked = (event: MouseEvent<HTMLSpanElement>) => {
 		event.stopPropagation();
@@ -199,6 +218,7 @@ export const TreeNodeRenderer = (props: TreeNodeRendererProps) => {
 	const onAddClicked = async (event: MouseEvent<HTMLButtonElement>) => {
 		event.preventDefault();
 		event.stopPropagation();
+		setOperators(state => ({...state, visible: false}));
 
 		try {
 			const added = await node.add(node, {global: globalHandlers});
@@ -228,6 +248,7 @@ export const TreeNodeRenderer = (props: TreeNodeRendererProps) => {
 	const onRemoveClicked = async (event: MouseEvent<HTMLButtonElement>) => {
 		event.preventDefault();
 		event.stopPropagation();
+		setOperators(state => ({...state, visible: false}));
 
 		try {
 			await node.remove(node, {global: globalHandlers});

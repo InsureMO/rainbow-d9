@@ -9,12 +9,13 @@ const createNewNode = (parent: TreeNodeDef, index: number): TreeNodeDef => {
 	return {
 		value: item, label,
 		$ip2r: `${parent.$ip2r}.nodes[${index}]`, $ip2p: `nodes[${index}]`,
-		checkable: true, checked: () => false, check: checkNode
+		checkable: true, checked: () => false, check: checkNode,
+		addable: true, add: addNode
 	};
 };
 
 const createPlaceholder = (parent: TreeNodeDef, index: number): TreeNodeDef => {
-	const label = `Placeholder node ${newNodeIndex++}`;
+	const label = `Placeholder node ${newNodeIndex}`;
 	const item = {label};
 	return {
 		value: item, label,
@@ -63,6 +64,7 @@ const createNewNodeCreatorWithPlaceholderAndNoReturn = (childCount: number) => {
 				parent.value!.nodes[parent.value!.nodes.length - 1] = child.value;
 				// push to tree model
 				parent.$children![parent.$children!.length - 1] = child;
+				handlers.global.yesNoDialog.hide();
 				resolve();
 			} catch {
 				// remove placeholder data
@@ -94,6 +96,7 @@ const createNewNodeCreatorWithPlaceholderAndNodeDefReturn = (childCount: number)
 				parent.value!.nodes[parent.value!.nodes.length - 1] = child.value;
 				// push to tree model
 				parent.$children![parent.$children!.length - 1] = child;
+				handlers.global.yesNoDialog.hide();
 				resolve(child);
 			} catch {
 				// remove placeholder data
