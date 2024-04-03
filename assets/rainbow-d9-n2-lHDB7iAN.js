@@ -4,10 +4,10 @@ var __publicField = (obj, key, value) => {
   __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
   return value;
 };
-import { a as color, M as MaskedNumber, e as MaskedDate, g as MaskedFunction, j as MaskedPattern, k as MaskedRange, l as MaskedRegExp, o as MaskedDynamic } from "./vendor-7x0KSTS1.js";
-import { R as React, r as reactExports, u as useIMask } from "./react-u2R3zR7B.js";
-import { V as VUtils, P as PPUtils, r as registerWidget, c as createLogger, b as useRootEventBus, M as MUtils, N as NUtils, d as Wrapper, e as useForceUpdate, a as useWrapperEventBus, W as WrapperEventTypes, f as MBUtils, g as useCreateEventBus, h as PROPERTY_PATH_ME, R as RootEventTypes, i as useDefaultAttributeValues, j as useAttributesWatch } from "./rainbow-d9-n1-975WKMaL.js";
-import { q as qe, W as We } from "./styled-components-RRvobVFd.js";
+import { a as color, M as MaskedNumber, e as MaskedDate, g as MaskedFunction, j as MaskedPattern, k as MaskedRange, l as MaskedRegExp, o as MaskedDynamic } from "./vendor-rivyrZcp.js";
+import { R as React, r as reactExports, u as useIMask } from "./react-LaGzILSN.js";
+import { V as VUtils, P as PPUtils, r as registerWidget, c as createLogger, b as useRootEventBus, M as MUtils, N as NUtils, d as Wrapper, e as useForceUpdate, a as useWrapperEventBus, W as WrapperEventTypes, f as MBUtils, g as useCreateEventBus, h as PROPERTY_PATH_ME, R as RootEventTypes, i as useDefaultAttributeValues, j as useAttributesWatch } from "./rainbow-d9-n1-8J3kRsTf.js";
+import { q as qe, W as We } from "./styled-components-gKUigm2L.js";
 import { d as dayjs } from "./dayjs-9Z7dW0Q-.js";
 const DOM_KEY_WIDGET = "data-w";
 const DOM_ID_WIDGET = "data-wid";
@@ -153,7 +153,7 @@ const CssVars = {
   DIALOG_SHADOW: `var(--d9-dialog-shadow, 0 0 18px 6px ${color(CssConstants.SHADOW_COLOR).alpha(0.4)})`,
   DIALOG_WIDTH: "var(--d9-dialog-width, 600px)",
   DIALOG_MARGIN_TOP: "var(--d9-dialog-margin-top, 25vh)",
-  DIALOG_MARGIN_LEFT: "var(--d9-dialog-margin-left, calc(50vw - var(--d9-dialog-width) / 2))",
+  DIALOG_MARGIN_LEFT: "var(--d9-dialog-margin-left, calc(50vw - var(--d9-dialog-width, 600px) / 2))",
   DIALOG_PADDING: "var(--d9-dialog-padding, 32px 32px 16px)",
   DIALOG_HEADER_MARGIN: "var(--d9-dialog-header-margin, -32px -32px 0)",
   DIALOG_HEADER_PADDING: "var(--d9-dialog-header-padding, 16px)",
@@ -227,6 +227,7 @@ $d9.$d9n2 = $d9.$d9n2 ?? {
           removeItem: "Remove"
         },
         wizard: { previous: "Previous", next: "Next" },
+        tree: { filter: { placeholder: "Filter..." } },
         pagination: {
           page: "",
           of: "of",
@@ -346,6 +347,13 @@ const Forward = (props) => {
     React.createElement("path", { opacity: "1", d: "M52.5 440.6c-9.5 7.9-22.8 9.7-34.1 4.4S0 428.4 0 416V96C0 83.6 7.2 72.3 18.4 67s24.5-3.6 34.1 4.4l192 160L256 241V96c0-17.7 14.3-32 32-32s32 14.3 32 32V416c0 17.7-14.3 32-32 32s-32-14.3-32-32V271l-11.5 9.6-192 160z" })
   );
 };
+const Plus = (props) => {
+  return React.createElement(
+    "svg",
+    { ...props, "data-icon": "plus", xmlns: "http://www.w3.org/2000/svg", viewBox: "0 0 448 512" },
+    React.createElement("path", { d: "M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z" })
+  );
+};
 const Remove = (props) => {
   return React.createElement(
     "svg",
@@ -394,6 +402,13 @@ const View = (props) => {
     React.createElement("path", { d: "M23.56,17.29l-2.83-2.83a1.466,1.466,0,0,0-1.14-.43l-1.04-1.05A5.482,5.482,0,0,0,11.48,5h-2.6A.95.95,0,0,0,8,6a.947.947,0,0,0,.881,1h.465a5.451,5.451,0,0,0-.734,2.062A.988.988,0,0,0,8,10a.973.973,0,0,0,.655.946A5.46,5.46,0,0,0,9.554,13H8.881a1.008,1.008,0,0,0,0,2h3.3a5.492,5.492,0,0,0,4.945-.61l1.05,1.05a1.466,1.466,0,0,0,.43,1.14l2.83,2.83a1.509,1.509,0,0,0,2.12,0A1.491,1.491,0,0,0,23.56,17.29Zm-7.05-4.97a3.513,3.513,0,0,1-4.95,0,2.789,2.789,0,0,1-.28-.32h3.04A1.69,1.69,0,0,0,16,10.32V9.68A1.69,1.69,0,0,0,14.32,8H11.06a3.38,3.38,0,0,1,.5-.63,3.5,3.5,0,0,1,4.95,4.95Z" })
   );
 };
+const XMark = (props) => {
+  return React.createElement(
+    "svg",
+    { ...props, "data-icon": "xmark", xmlns: "http://www.w3.org/2000/svg", viewBox: "0 0 384 512" },
+    React.createElement("path", { d: "M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z" })
+  );
+};
 const _IconsRegistrar = class _IconsRegistrar {
   constructor() {
   }
@@ -430,6 +445,8 @@ IconsRegistrar.register({
   angleRight: () => React.createElement(AngleRight, null),
   spinner: () => React.createElement(Spinner, null),
   search: () => React.createElement(Search, null),
+  plus: () => React.createElement(Plus, null),
+  xmark: () => React.createElement(XMark, null),
   cart: () => React.createElement(Cart, null)
 });
 var index$2 = /* @__PURE__ */ Object.freeze({
@@ -449,13 +466,15 @@ var index$2 = /* @__PURE__ */ Object.freeze({
   Edit,
   Expand,
   Forward,
+  Plus,
   Registrar: IconsRegistrar,
   Remove,
   Search,
   Spinner,
   Time,
   Times,
-  View
+  View,
+  XMark
 });
 var GlobalEventTypes;
 (function(GlobalEventTypes2) {
@@ -1520,7 +1539,11 @@ var GlobalEventPrefix;
   GlobalEventPrefix2["EXPAND_SECTION"] = "expand-section";
   GlobalEventPrefix2["COLLAPSE_SECTION"] = "collapse-section";
   GlobalEventPrefix2["REFRESH_TREE"] = "refresh-tree";
+  GlobalEventPrefix2["REFRESH_TREE_NODE"] = "refresh-tree-node";
   GlobalEventPrefix2["REFRESH_TREE_CHILD_NODES"] = "refresh-tree-child-nodes";
+  GlobalEventPrefix2["RECALC_TREE_CHILD_NODES"] = "recalc-tree-child-nodes";
+  GlobalEventPrefix2["REFRESH_TREE_NODE_AND_CHILDREN"] = "refresh-tree-node-and-children";
+  GlobalEventPrefix2["RECALC_TREE_NODE_AND_CHILDREN"] = "recalc-tree-node-and-children";
   GlobalEventPrefix2["EXPAND_TREE_NODE"] = "expand-tree-node";
   GlobalEventPrefix2["COLLAPSE_TREE_NODE"] = "collapse-tree-node";
   GlobalEventPrefix2["CUSTOM"] = "custom";
@@ -1585,9 +1608,9 @@ const GlobalRoot = (props) => {
     children
   );
 };
-const toIntlLabel = (text) => {
+const toIntlLabel = (text, ...replacements) => {
   if (typeof text === "string") {
-    return React.createElement(IntlLabel, { keys: [`${text}`], value: text });
+    return React.createElement(IntlLabel, { keys: [`${text}`], value: text, replacements });
   } else {
     return text;
   }
@@ -1605,9 +1628,16 @@ const useLanguage = () => {
     };
   }, [on, off, forceUpdate]);
 };
+const replaceTemplate = (template, values) => {
+  values = values ?? [];
+  for (let index = 0; index < values.length; index++) {
+    template = template.replace(new RegExp("\\{" + index + "\\}", "g"), `${values[index] ?? ""}`);
+  }
+  return template;
+};
 const IntlLabel = (props) => {
   var _a;
-  const { keys, value } = props;
+  const { keys, value, replacements } = props;
   useLanguage();
   const language = $d9n2.intl.language;
   let label = value;
@@ -1627,6 +1657,7 @@ const IntlLabel = (props) => {
       }
     }
   }
+  label = replaceTemplate(label ?? "", replacements);
   return React.createElement(React.Fragment, null, label);
 };
 const transformDecorator = (decorator) => {
@@ -7223,6 +7254,8 @@ var TreeEventTypes;
   TreeEventTypes2["SWITCH_SEARCH_BOX"] = "switch-search-box";
   TreeEventTypes2["DISCARD_FILTER"] = "discard-filter";
   TreeEventTypes2["FILTER_CHANGED"] = "filter-changed";
+  TreeEventTypes2["ASK_MARKER_ADDER"] = "ask-marker-adder";
+  TreeEventTypes2["SCROLL_NODE_INTO_VIEW"] = "scroll-node-into-view";
 })(TreeEventTypes || (TreeEventTypes = {}));
 const Context = reactExports.createContext({});
 Context.displayName = "TreeNodeEventBus";
@@ -7241,14 +7274,78 @@ var TreeNodeEventTypes;
   TreeNodeEventTypes2["SWITCH_MY_CHECKED_FROM_CHILD"] = "switch-my-checked-from-child";
   TreeNodeEventTypes2["SWITCH_CHILDREN_CHECKED"] = "switch-children-checked";
   TreeNodeEventTypes2["SWITCH_PARENT_CHECKED"] = "switch-parent-checked";
+  TreeNodeEventTypes2["REFRESH_NODE"] = "refresh-node";
   TreeNodeEventTypes2["REFRESH_CHILD_NODES"] = "refresh-child-nodes";
+  TreeNodeEventTypes2["REFRESH_CHILD_NODES_ON_REMOVED"] = "refresh-child-nodes-on-removed";
+  TreeNodeEventTypes2["CHILD_ADDED"] = "child-added";
+  TreeNodeEventTypes2["CHILD_PLACEHOLDER_REPLACED"] = "child-placeholder-replaced";
+  TreeNodeEventTypes2["CHILD_PLACEHOLDER_REMOVED"] = "child-placeholder-removed";
+  TreeNodeEventTypes2["NODE_REMOVED"] = "node-removed";
 })(TreeNodeEventTypes || (TreeNodeEventTypes = {}));
 const ChildTreeNodes = (props) => {
-  const { node, halfChecked, initExpandLevel, level, showIndex, displayIndex, detective, $wrapped } = props;
-  const { on, off } = useTreeNodeEventBus();
+  const { node, initExpandLevel, level, showIndex, displayIndex, detective, $wrapped } = props;
+  const { fire: fireTree } = useTreeEventBus();
+  const { on, off, fire } = useTreeNodeEventBus();
+  const globalHandlers = useGlobalHandlers();
   const forceUpdate = useForceUpdate();
   reactExports.useEffect(() => {
-    const onNodeCheckedChanged = (_$ip2r, _checked) => {
+    const onRefreshChildNodes = (_marker, detect) => {
+      if (detect === true) {
+        node.$children = detective(node, { global: globalHandlers }) ?? [];
+      }
+      forceUpdate();
+    };
+    const refreshNodeContent = () => {
+      if (node.$children == null || node.$children.length === 0) {
+        fire && fire(TreeNodeEventTypes.SWITCH_MY_EXPAND, node.marker, false);
+      }
+    };
+    const onRefreshChildNodesOnRemoved = (_marker, _removedNode) => {
+      forceUpdate();
+      refreshNodeContent();
+    };
+    const fillMarkerAndBuildHierarchy = () => {
+      fireTree(TreeEventTypes.ASK_MARKER_ADDER, (add) => {
+        node.$children.forEach((child) => {
+          add(child);
+          if (child.$parent == null) {
+            child.$parent = node;
+          }
+        });
+      });
+    };
+    const scrollToAdded = (childNode) => {
+      fire && fire(TreeNodeEventTypes.SWITCH_MY_EXPAND, node.marker, true, childNode == null ? void 0 : childNode.marker);
+    };
+    const onChildAdded = (_marker, addedNode, _placeholder) => {
+      fillMarkerAndBuildHierarchy();
+      forceUpdate();
+      scrollToAdded(addedNode);
+    };
+    const onChildPlaceholderReplaced = (_marker, addedNode) => {
+      fillMarkerAndBuildHierarchy();
+      forceUpdate();
+      scrollToAdded(addedNode);
+    };
+    const onChildPlaceholderRemoved = (_marker, _placeholderNode) => {
+      forceUpdate();
+      refreshNodeContent();
+    };
+    on && on(TreeNodeEventTypes.REFRESH_CHILD_NODES, onRefreshChildNodes);
+    on && on(TreeNodeEventTypes.REFRESH_CHILD_NODES_ON_REMOVED, onRefreshChildNodesOnRemoved);
+    on && on(TreeNodeEventTypes.CHILD_ADDED, onChildAdded);
+    on && on(TreeNodeEventTypes.CHILD_PLACEHOLDER_REPLACED, onChildPlaceholderReplaced);
+    on && on(TreeNodeEventTypes.CHILD_PLACEHOLDER_REMOVED, onChildPlaceholderRemoved);
+    return () => {
+      off && off(TreeNodeEventTypes.REFRESH_CHILD_NODES, onRefreshChildNodes);
+      off && off(TreeNodeEventTypes.REFRESH_CHILD_NODES_ON_REMOVED, onRefreshChildNodesOnRemoved);
+      off && off(TreeNodeEventTypes.CHILD_ADDED, onChildAdded);
+      off && off(TreeNodeEventTypes.CHILD_PLACEHOLDER_REPLACED, onChildPlaceholderReplaced);
+      off && off(TreeNodeEventTypes.CHILD_PLACEHOLDER_REMOVED, onChildPlaceholderRemoved);
+    };
+  }, [on, off, fire, fireTree, forceUpdate, node, detective, globalHandlers]);
+  reactExports.useEffect(() => {
+    const onNodeCheckedChanged = (_marker, _checked) => {
       forceUpdate();
     };
     on(TreeNodeEventTypes.SWITCH_CHILDREN_CHECKED, onNodeCheckedChanged);
@@ -7265,28 +7362,33 @@ const ChildTreeNodes = (props) => {
   return React.createElement(React.Fragment, null, children.map((child, index) => {
     const last = index === childrenCount - 1;
     const myDisplayIndex = `${displayIndex}.${index + 1}`;
-    return React.createElement(TreeNode, { halfChecked, initExpandLevel, showIndex, detective, "$wrapped": $wrapped, node: child, displayIndex: myDisplayIndex, lastOfParent: last, level: level + 1, key: child.$ip2p });
+    return React.createElement(TreeNode, { initExpandLevel, showIndex, detective, "$wrapped": $wrapped, node: child, displayIndex: myDisplayIndex, lastOfParent: last, level: level + 1, key: child.$ip2p });
   }).filter((x) => x != null));
 };
 const TreeNodeEventBridge = (props) => {
-  const { node, expandParent, nodeCheckedChanged } = props;
+  const { node, expandParent, nodeCheckedChanged, nodeRemoved } = props;
   const { on, off } = useTreeNodeEventBus();
   reactExports.useEffect(() => {
-    const onExpandParent = (_$ip2r, expanded) => {
+    const onExpandParent = (_marker, expanded) => {
       if (expanded) {
         expandParent(expanded);
       }
     };
-    const onNodeCheckedChanged = (_$ip2r, checked) => {
+    const onNodeCheckedChanged = (_marker, checked) => {
       nodeCheckedChanged(checked);
+    };
+    const onNodeRemoved = (_marker, removedNode) => {
+      nodeRemoved(removedNode);
     };
     on && on(TreeNodeEventTypes.SWITCH_PARENT_EXPAND, onExpandParent);
     on && on(TreeNodeEventTypes.SWITCH_PARENT_CHECKED, onNodeCheckedChanged);
+    on && on(TreeNodeEventTypes.NODE_REMOVED, onNodeRemoved);
     return () => {
       off && off(TreeNodeEventTypes.SWITCH_PARENT_EXPAND, onExpandParent);
       off && off(TreeNodeEventTypes.SWITCH_PARENT_CHECKED, onNodeCheckedChanged);
+      off && off(TreeNodeEventTypes.NODE_REMOVED, onNodeRemoved);
     };
-  }, [on, off, node, expandParent, nodeCheckedChanged]);
+  }, [on, off, node, expandParent, nodeCheckedChanged, nodeRemoved]);
   return React.createElement(reactExports.Fragment, null);
 };
 const UnwrappedCheckbox = (props) => {
@@ -7302,74 +7404,6 @@ var TreeNodeCheckedChangeFrom;
   TreeNodeCheckedChangeFrom2[TreeNodeCheckedChangeFrom2["FROM_SELF"] = 0] = "FROM_SELF";
   TreeNodeCheckedChangeFrom2[TreeNodeCheckedChangeFrom2["FROM_PARENT"] = 1] = "FROM_PARENT";
 })(TreeNodeCheckedChangeFrom || (TreeNodeCheckedChangeFrom = {}));
-const computeTreeNodeMarker = (node, $wrapped) => {
-  if (VUtils.isBlank(node.marker)) {
-    node.marker = PPUtils.concat($wrapped.$p2r, node.$ip2r);
-  }
-  return node.marker;
-};
-const defaultTreeNodesDetective = (parentNode, _options) => {
-  if (parentNode == null || parentNode.value == null) {
-    return [];
-  }
-  let nodes;
-  let parent$ip2r;
-  if (Array.isArray(parentNode.value)) {
-    nodes = parentNode.value;
-    parent$ip2r = parentNode.$ip2r;
-  } else {
-    nodes = parentNode.value.children ?? [];
-    parent$ip2r = `${parentNode.$ip2r}.children`;
-  }
-  return nodes.map((item, index) => {
-    if (item == null) {
-      return null;
-    } else {
-      const $ip2p = `[${index}]`;
-      const $ip2r = PPUtils.concat(parent$ip2r, $ip2p);
-      return {
-        value: item,
-        $ip2r,
-        $ip2p,
-        label: VUtils.isPrimitive(item) ? `${item ?? ""}` : item.label ?? "",
-        checkable: false,
-        addable: false,
-        removable: false
-      };
-    }
-  }).filter((item) => item != null);
-};
-const buildTreeNodesDetective = (detective, options) => {
-  const detect = detective ?? defaultTreeNodesDetective;
-  const beautifyTreeNodes = (nodes, options2) => {
-    return (nodes ?? []).map((node) => {
-      node.checkable = node.checkable ?? options2.checkable;
-      node.addable = node.addable ?? options2.addable;
-      node.removable = node.removable ?? options2.removable;
-      if (node.$children != null) {
-        beautifyTreeNodes(node.$children, options2);
-      }
-      return node;
-    });
-  };
-  const detectChildren = (node, _options) => {
-    node.$children = detect(node, _options);
-    if (node.$children != null && node.$children.length === 0) {
-      delete node.$children;
-    }
-    if (node.$children != null) {
-      node.$children.forEach((child) => {
-        child.$parent = node;
-        detectChildren(child, _options);
-      });
-    }
-  };
-  return (parentNode, _options) => {
-    const nodes = detect(parentNode, _options);
-    (nodes || []).forEach((node) => detectChildren(node, _options));
-    return beautifyTreeNodes(nodes, options);
-  };
-};
 const ATree = qe.div.attrs(({ id, "data-w": dataW, height }) => {
   return {
     [DOM_KEY_WIDGET]: dataW || "d9-tree",
@@ -7498,8 +7532,92 @@ const TreeNodeContainer = qe(TreeNode$1).attrs({ "data-w": "d9-tree-node-contain
         }
     }
 
-    &[data-expanded=false] ~ * {
+    &[data-expanded=false] ~ *:not(div[data-w=d9-tree-node-operators]) {
         display: none;
+    }
+`;
+const TreeNodeOperators = qe.div.attrs(({ top, right }) => {
+  return {
+    "data-w": "d9-tree-node-operators",
+    style: {
+      "--top": `${top}px`,
+      "--right": `${right}px`
+    }
+  };
+})`
+    display: flex;
+    position: fixed;
+    top: var(--top);
+    right: var(--right);
+    margin-right: 8px;
+    align-items: center;
+    background-color: ${CssVars.BACKGROUND_COLOR};
+    border-radius: ${CssVars.BORDER_RADIUS};
+    opacity: 1;
+    z-index: ${CssVars.DROPDOWN_Z_INDEX};
+    transition: opacity ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION};
+
+    &[data-visible=false] {
+        opacity: 0;
+        pointer-events: none;
+        user-select: none;
+        transition: none;
+    }
+
+    &:hover > button {
+        opacity: 1;
+    }
+
+    > button {
+        height: calc(${CssVars.INPUT_HEIGHT} * 3 / 4);
+        opacity: 0.3;
+        transition: opacity ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION};
+
+        &:first-child {
+            border-top-left-radius: calc(${CssVars.INPUT_HEIGHT} * 3 / 8);
+            border-bottom-left-radius: calc(${CssVars.INPUT_HEIGHT} * 3 / 8);
+        }
+
+        &:last-child {
+            border-top-right-radius: calc(${CssVars.INPUT_HEIGHT} * 3 / 8);
+            border-bottom-right-radius: calc(${CssVars.INPUT_HEIGHT} * 3 / 8);
+        }
+
+        &:not(:last-child) {
+            border-top-right-radius: 0;
+            border-bottom-right-radius: 0;
+        }
+
+        &:not(:first-child) {
+            border-top-left-radius: 0;
+            border-bottom-left-radius: 0;
+            overflow: visible;
+
+            &:before {
+                content: '';
+                display: block;
+                position: absolute;
+                top: 20%;
+                left: -1px;
+                height: 60%;
+                width: 1px;
+                background-color: ${CssVars.INVERT_COLOR};
+            }
+        }
+
+        &:hover {
+            z-index: 1;
+        }
+
+        > span[data-w=d9-deco-lead] {
+            height: calc(${CssVars.INPUT_HEIGHT} * 3 / 4);
+            min-width: calc(${CssVars.INPUT_HEIGHT} * 3 / 4);
+            padding: 0;
+
+            > svg {
+                height: calc(${CssVars.FONT_SIZE} * 0.8);
+            }
+        }
     }
 `;
 const TreeNodeContent = qe.span.attrs({ "data-w": "d9-tree-node-content" })`
@@ -7557,37 +7675,83 @@ const TreeNodeLabel = qe.span.attrs({ "data-w": "d9-tree-node-label" })`
         padding-left: 9px;
     }
 `;
-const useTreeNodeExpand = (state) => {
+const useTreeNodeExpand = (ref, state) => {
+  const { fire: fireTree } = useTreeEventBus();
   const { on, off, fire } = useTreeNodeEventBus();
   const forceUpdate = useForceUpdate();
   reactExports.useEffect(() => {
-    const onSwitchMyExpand = ($ip2r, expanded) => {
+    const onSwitchExpand = (fromMyself) => (marker, expanded, locateToMarker) => {
       if (expanded != state.current) {
         state.current = expanded;
         forceUpdate();
-        fire && fire(TreeNodeEventTypes.SWITCH_PARENT_EXPAND, $ip2r, state.current);
+        fire && fire(TreeNodeEventTypes.SWITCH_PARENT_EXPAND, marker, state.current);
+        if (fromMyself && expanded && ref.current != null) {
+          const allExpanded = (element) => {
+            if (element.getAttribute("data-expanded") !== "true") {
+              return false;
+            } else {
+              const wrapper = element.parentElement;
+              if (wrapper.parentElement.getAttribute("data-w") === "d9-tree-content-container") {
+                return true;
+              } else {
+                return allExpanded(wrapper.parentElement.firstElementChild);
+              }
+            }
+          };
+          const tryToScroll = () => {
+            setTimeout(() => {
+              if (!allExpanded(ref.current.closest("div[data-w=d9-tree-node-container]"))) {
+                tryToScroll();
+              } else {
+                const wrapper = ref.current.closest("div[data-w=d9-tree-node-wrapper]");
+                const { top, height } = wrapper.getBoundingClientRect();
+                const treeContainer = wrapper.closest("div[data-w=d9-tree-content-container]");
+                const { top: treeTop, height: treeHeight } = treeContainer.getBoundingClientRect();
+                if (top + height < treeTop + treeHeight)
+                  ;
+                else if (height > treeHeight) {
+                  treeContainer.scrollTo({
+                    top: treeContainer.scrollTop + top - treeTop,
+                    behavior: "smooth"
+                  });
+                } else {
+                  treeContainer.scrollTo({
+                    top: treeContainer.scrollTop + top + height - treeTop - treeHeight,
+                    behavior: "smooth"
+                  });
+                }
+                if (VUtils.isNotBlank(locateToMarker)) {
+                  fireTree(TreeEventTypes.SCROLL_NODE_INTO_VIEW, locateToMarker);
+                }
+              }
+            }, 100);
+          };
+          tryToScroll();
+        }
       }
     };
+    const onSwitchMyExpand = onSwitchExpand(true);
+    const onSwitchMyExpandFromChild = onSwitchExpand(false);
     on && on(TreeNodeEventTypes.SWITCH_MY_EXPAND, onSwitchMyExpand);
-    on && on(TreeNodeEventTypes.SWITCH_MY_EXPAND_FROM_CHILD, onSwitchMyExpand);
+    on && on(TreeNodeEventTypes.SWITCH_MY_EXPAND_FROM_CHILD, onSwitchMyExpandFromChild);
     return () => {
       off && off(TreeNodeEventTypes.SWITCH_MY_EXPAND, onSwitchMyExpand);
-      off && off(TreeNodeEventTypes.SWITCH_MY_EXPAND_FROM_CHILD, onSwitchMyExpand);
+      off && off(TreeNodeEventTypes.SWITCH_MY_EXPAND_FROM_CHILD, onSwitchMyExpandFromChild);
     };
-  }, [on, off, fire, forceUpdate, state]);
+  }, [on, off, fire, fireTree, forceUpdate, ref, state]);
 };
 const useTreeNodeCheckedChanged = () => {
   const { on, off, fire } = useTreeNodeEventBus();
   const forceUpdate = useForceUpdate();
   reactExports.useEffect(() => {
-    const onSwitchMyChecked = ($ip2r, checked) => {
+    const onSwitchMyChecked = (marker, checked) => {
       forceUpdate();
-      fire && fire(TreeNodeEventTypes.SWITCH_CHILDREN_CHECKED, $ip2r, checked);
-      fire && fire(TreeNodeEventTypes.SWITCH_PARENT_CHECKED, $ip2r, checked);
+      fire && fire(TreeNodeEventTypes.SWITCH_CHILDREN_CHECKED, marker, checked);
+      fire && fire(TreeNodeEventTypes.SWITCH_PARENT_CHECKED, marker, checked);
     };
-    const onSwitchMyCheckedFromChild = ($ip2r, checked) => {
+    const onSwitchMyCheckedFromChild = (marker, checked) => {
       forceUpdate();
-      fire && fire(TreeNodeEventTypes.SWITCH_PARENT_CHECKED, $ip2r, checked);
+      fire && fire(TreeNodeEventTypes.SWITCH_PARENT_CHECKED, marker, checked);
     };
     on && on(TreeNodeEventTypes.SWITCH_MY_CHECKED, onSwitchMyChecked);
     on && on(TreeNodeEventTypes.SWITCH_MY_CHECKED_FROM_CHILD, onSwitchMyCheckedFromChild);
@@ -7599,21 +7763,49 @@ const useTreeNodeCheckedChanged = () => {
 };
 const TreeNodeRenderer = (props) => {
   const { initExpandLevel, showIndex, $wrapped, node, displayIndex, lastOfParent, level } = props;
+  const ref = reactExports.useRef(null);
+  const operatorsRef = reactExports.useRef(null);
   const expanded = reactExports.useRef(level <= initExpandLevel);
   const { fire: fireGlobal } = useGlobalEventBus();
   const globalHandlers = useGlobalHandlers();
-  const { fire } = useTreeNodeEventBus();
-  useTreeNodeExpand(expanded);
+  const { on: onTree, off: offTree } = useTreeEventBus();
+  const { on, off, fire } = useTreeNodeEventBus();
+  const [operators, setOperators] = reactExports.useState({ visible: false, top: 0, right: 0 });
+  useTreeNodeExpand(ref, expanded);
   useTreeNodeCheckedChanged();
+  const forceUpdate = useForceUpdate();
+  reactExports.useEffect(() => {
+    const onRefreshNode = (_marker) => {
+      forceUpdate();
+    };
+    on && on(TreeNodeEventTypes.REFRESH_NODE, onRefreshNode);
+    return () => {
+      off && off(TreeNodeEventTypes.REFRESH_CHILD_NODES, onRefreshNode);
+    };
+  }, [on, off, forceUpdate, node]);
+  reactExports.useEffect(() => {
+    const onScrollNodeIntoView = (marker) => {
+      var _a;
+      if (node.marker !== marker) {
+        return;
+      }
+      (_a = ref.current) == null ? void 0 : _a.scrollIntoView({ behavior: "smooth" });
+    };
+    onTree(TreeEventTypes.SCROLL_NODE_INTO_VIEW, onScrollNodeIntoView);
+    return () => {
+      offTree(TreeEventTypes.SCROLL_NODE_INTO_VIEW, onScrollNodeIntoView);
+    };
+  }, [onTree, offTree, node, ref]);
   const onToggleClicked = (event) => {
     event.stopPropagation();
     event.preventDefault();
-    fire && fire(TreeNodeEventTypes.SWITCH_MY_EXPAND, node.$ip2r, !expanded.current);
+    fire && fire(TreeNodeEventTypes.SWITCH_MY_EXPAND, node.marker, !expanded.current);
   };
   const onEntityClicked = (event) => {
     event.preventDefault();
     event.stopPropagation();
-    const clipped = computeTreeNodeMarker(node, $wrapped);
+    node.click && node.click(node, { global: globalHandlers });
+    const clipped = node.marker;
     const key = `${GlobalEventPrefix.TREE_NODE_CLICKED}:${clipped}`;
     fireGlobal(GlobalEventTypes.CUSTOM_EVENT, key, GlobalEventPrefix.TREE_NODE_CLICKED, clipped, {
       root: $wrapped.$root,
@@ -7621,8 +7813,64 @@ const TreeNodeRenderer = (props) => {
       value: node.value
     });
   };
+  const onMouseEnter = () => {
+    if (!hasOperators || operators.visible) {
+      return;
+    }
+    const { top, height } = ref.current.getBoundingClientRect();
+    const { top: treeTop, left: treeLeft, width: treeWidth } = ref.current.closest("div[data-w=d9-tree-content-container]").getBoundingClientRect();
+    const { height: operatorsHeight } = operatorsRef.current.getBoundingClientRect();
+    if (top - operatorsHeight < treeTop) {
+      setOperators({ visible: true, top: top + height, right: window.innerWidth - (treeLeft + treeWidth) });
+    } else {
+      setOperators({
+        visible: true,
+        top: top - operatorsHeight,
+        right: window.innerWidth - (treeLeft + treeWidth)
+      });
+    }
+  };
+  const onMouseLeave = () => {
+    if (!hasOperators) {
+      return;
+    }
+    setOperators((state) => ({ ...state, visible: false }));
+  };
+  const onAddClicked = async (event) => {
+    event.preventDefault();
+    event.stopPropagation();
+    setOperators((state) => ({ ...state, visible: false }));
+    try {
+      const added = await node.add(node, { global: globalHandlers });
+      if (added == null) {
+        fire(TreeNodeEventTypes.CHILD_ADDED, node.marker);
+      } else if (Array.isArray(added)) {
+        const [placeholder, promise] = added;
+        fire(TreeNodeEventTypes.CHILD_ADDED, node.marker, placeholder, true);
+        try {
+          const added2 = await promise;
+          fire(TreeNodeEventTypes.CHILD_PLACEHOLDER_REPLACED, node.marker, added2 ?? void 0);
+        } catch {
+          fire(TreeNodeEventTypes.CHILD_PLACEHOLDER_REMOVED, node.marker, placeholder);
+        }
+      } else {
+        fire(TreeNodeEventTypes.CHILD_ADDED, node.marker, added, false);
+      }
+    } catch {
+    }
+  };
+  const onRemoveClicked = async (event) => {
+    event.preventDefault();
+    event.stopPropagation();
+    setOperators((state) => ({ ...state, visible: false }));
+    try {
+      await node.remove(node, { global: globalHandlers });
+      fire(TreeNodeEventTypes.NODE_REMOVED, node.marker, node);
+    } catch {
+    }
+  };
   const $p2r = PPUtils.concat($wrapped.$p2r, node.$ip2r);
-  const checkable = node.checkable;
+  const checkable = (node.checkable ?? false) && node.checked != null && node.check != null;
   let checked = void 0;
   let check = void 0;
   let onCheckValueChanged = void 0;
@@ -7631,9 +7879,12 @@ const TreeNodeRenderer = (props) => {
     check = node.check;
     onCheckValueChanged = async (value) => {
       await check(node, value, TreeNodeCheckedChangeFrom.FROM_SELF, { global: globalHandlers });
-      fire && fire(TreeNodeEventTypes.SWITCH_MY_CHECKED, node.$ip2r, value);
+      fire && fire(TreeNodeEventTypes.SWITCH_MY_CHECKED, node.marker, value);
     };
   }
+  const addable = (node.addable ?? false) && node.add != null;
+  const removable = (node.removable ?? false) && node.remove != null;
+  const hasOperators = addable || removable;
   const label = React.createElement(
     TreeNodeLabel,
     null,
@@ -7642,7 +7893,13 @@ const TreeNodeRenderer = (props) => {
   );
   return React.createElement(
     TreeNodeContainer,
-    { "data-expanded": expanded.current, "data-last-of-parent": lastOfParent, level, onClick: onEntityClicked },
+    { "data-expanded": expanded.current, "data-last-of-parent": lastOfParent, level, onClick: onEntityClicked, onMouseEnter, onMouseLeave, ref },
+    hasOperators ? React.createElement(
+      TreeNodeOperators,
+      { "data-visible": operators.visible, top: operators.top, right: operators.right, ref: operatorsRef },
+      addable ? React.createElement(UnwrappedButton, { onClick: onAddClicked, leads: ["$icons.plus"], ink: ButtonInk.PRIMARY, fill: ButtonFill.FILL }) : null,
+      removable ? React.createElement(UnwrappedButton, { onClick: onRemoveClicked, leads: ["$icons.xmark"], ink: ButtonInk.PRIMARY, fill: ButtonFill.FILL }) : null
+    ) : null,
     React.createElement(
       TreeNodeContent,
       null,
@@ -7671,18 +7928,32 @@ const useRefreshTreeNode = (node, $wrapped) => {
   const { on: onGlobal, off: offGlobal } = useGlobalEventBus();
   reactExports.useEffect(() => {
     const onCustomEvent = (_, prefix, clipped) => {
-      if (clipped !== computeTreeNodeMarker(node, $wrapped)) {
+      if (clipped !== node.marker) {
         return;
       }
       switch (prefix) {
+        case GlobalEventPrefix.REFRESH_TREE_NODE:
+          fire(TreeNodeEventTypes.REFRESH_NODE, node.marker);
+          break;
         case GlobalEventPrefix.REFRESH_TREE_CHILD_NODES:
-          fire(TreeNodeEventTypes.REFRESH_CHILD_NODES, node.$ip2r);
+          fire(TreeNodeEventTypes.REFRESH_CHILD_NODES, node.marker, false);
+          break;
+        case GlobalEventPrefix.RECALC_TREE_CHILD_NODES:
+          fire(TreeNodeEventTypes.REFRESH_CHILD_NODES, node.marker, true);
+          break;
+        case GlobalEventPrefix.REFRESH_TREE_NODE_AND_CHILDREN:
+          fire(TreeNodeEventTypes.REFRESH_NODE, node.marker);
+          fire(TreeNodeEventTypes.REFRESH_CHILD_NODES, node.marker, false);
+          break;
+        case GlobalEventPrefix.RECALC_TREE_NODE_AND_CHILDREN:
+          fire(TreeNodeEventTypes.REFRESH_NODE, node.marker);
+          fire(TreeNodeEventTypes.REFRESH_CHILD_NODES, node.marker, true);
           break;
         case GlobalEventPrefix.EXPAND_TREE_NODE:
-          fire(TreeNodeEventTypes.SWITCH_MY_EXPAND, node.$ip2r, true);
+          fire(TreeNodeEventTypes.SWITCH_MY_EXPAND, node.marker, true);
           break;
         case GlobalEventPrefix.COLLAPSE_TREE_NODE:
-          fire(TreeNodeEventTypes.SWITCH_MY_EXPAND, node.$ip2r, false);
+          fire(TreeNodeEventTypes.SWITCH_MY_EXPAND, node.marker, false);
           break;
       }
     };
@@ -7693,37 +7964,26 @@ const useRefreshTreeNode = (node, $wrapped) => {
   }, [onGlobal, offGlobal, fire, node, $wrapped]);
 };
 const TreeNode = (props) => {
-  const { halfChecked, initExpandLevel, showIndex, detective, $wrapped, node, displayIndex, lastOfParent, level } = props;
-  const { on, off, fire } = useTreeNodeEventBus();
-  const globalHandlers = useGlobalHandlers();
+  const { initExpandLevel, showIndex, $wrapped, node, displayIndex, lastOfParent, level } = props;
   useRefreshTreeNode(node, $wrapped);
-  const forceUpdate = useForceUpdate();
-  reactExports.useEffect(() => {
-    const onRefreshChildNodes = (_$ip2r) => {
-      node.$children = detective(node, { global: globalHandlers }) ?? [];
-      forceUpdate();
-    };
-    on && on(TreeNodeEventTypes.REFRESH_CHILD_NODES, onRefreshChildNodes);
-    return () => {
-      off && off(TreeNodeEventTypes.REFRESH_CHILD_NODES, onRefreshChildNodes);
-    };
-  }, [on, off, fire, forceUpdate, node, detective, globalHandlers]);
-  const expandParent = (expanded) => fire && fire(TreeNodeEventTypes.SWITCH_MY_EXPAND_FROM_CHILD, node.$ip2r, expanded);
-  const nodeCheckedChanged = (checked) => fire && fire(TreeNodeEventTypes.SWITCH_MY_CHECKED_FROM_CHILD, node.$ip2r, checked);
+  const { fire } = useTreeNodeEventBus();
+  const expandParent = (expanded) => fire && fire(TreeNodeEventTypes.SWITCH_MY_EXPAND_FROM_CHILD, node.marker, expanded);
+  const nodeCheckedChanged = (checked) => fire && fire(TreeNodeEventTypes.SWITCH_MY_CHECKED_FROM_CHILD, node.marker, checked);
+  const nodeRemoved = (removedNode) => fire && fire(TreeNodeEventTypes.REFRESH_CHILD_NODES_ON_REMOVED, node.marker, removedNode);
   return React.createElement(
     TreeNodeEventBusProvider,
     null,
-    React.createElement(TreeNodeEventBridge, { node, expandParent, nodeCheckedChanged }),
+    React.createElement(TreeNodeEventBridge, { node, expandParent, nodeCheckedChanged, nodeRemoved }),
     React.createElement(
       TreeNodeWrapper,
       { "data-last-of-parent": lastOfParent, level },
       React.createElement(TreeNodeRenderer, { initExpandLevel, showIndex, "$wrapped": $wrapped, node, displayIndex, lastOfParent, level }),
-      React.createElement(ChildTreeNodes, { node, halfChecked, initExpandLevel, level, showIndex, displayIndex, "$wrapped": $wrapped })
+      React.createElement(ChildTreeNodes, { node, initExpandLevel, level, showIndex, displayIndex, "$wrapped": $wrapped })
     )
   );
 };
 const TreeContent = (props) => {
-  const { root, $pp, halfChecked, initExpandLevel, showIndex, detect, $wrapped } = props;
+  const { root, $pp, initExpandLevel, showIndex, detect, $wrapped } = props;
   const { $p2r } = $wrapped;
   const [filter, setFilter] = reactExports.useState("");
   const { on, off } = useTreeEventBus();
@@ -7781,7 +8041,7 @@ const TreeContent = (props) => {
   return React.createElement(TreeContentContainer, null, children().map((child, index) => {
     const last = !canAdd && index === childrenCount - 1;
     const myDisplayIndex = `${index + 1}`;
-    return React.createElement(TreeNode, { halfChecked, initExpandLevel, showIndex, detective: detect, "$wrapped": { ...$wrapped, $p2r: node$p2r }, node: child, displayIndex: myDisplayIndex, lastOfParent: last, level: 0, key: child.$ip2p });
+    return React.createElement(TreeNode, { initExpandLevel, showIndex, detective: detect, "$wrapped": { ...$wrapped, $p2r: node$p2r }, node: child, displayIndex: myDisplayIndex, lastOfParent: last, level: 0, key: child.$ip2p });
   }));
 };
 const UnwrappedDecorateInput = reactExports.forwardRef((props, ref) => {
@@ -7833,10 +8093,111 @@ const TreeSearchBox = () => {
     setState((state2) => ({ ...state2, value }));
     fire(TreeEventTypes.FILTER_CHANGED, value);
   };
-  return React.createElement(UnwrappedDecorateInput, { visible: state.visible, value: state.value, onValueChange, leads: ["$icons.search"], ref });
+  return React.createElement(UnwrappedDecorateInput, { visible: state.visible, value: state.value, onValueChange, leads: ["$icons.search"], placeholder: "tree.filter.placeholder", ref });
+};
+const useMarker = () => {
+  const markers = reactExports.useRef({});
+  const { on, off } = useTreeEventBus();
+  const [funcs] = reactExports.useState(() => {
+    const generate = (node) => {
+      let marker = NUtils.generateReactKey();
+      while (markers[marker] === true) {
+        marker = NUtils.generateReactKey();
+      }
+      markers[marker] = true;
+      if (node != null) {
+        node.marker = marker;
+      }
+      return marker;
+    };
+    const add = (node) => {
+      if (VUtils.isBlank(node.marker)) {
+        markers[generate(node)] = true;
+      } else {
+        markers[node.marker] = true;
+      }
+    };
+    const deleteMarker = (node) => {
+      if (VUtils.isNotBlank(node.marker)) {
+        delete markers[node.marker];
+      }
+    };
+    return { generate, add, delete: deleteMarker };
+  });
+  reactExports.useEffect(() => {
+    const onAskMarkerAdder = (callback) => callback(funcs.add);
+    on(TreeEventTypes.ASK_MARKER_ADDER, onAskMarkerAdder);
+    return () => {
+      off(TreeEventTypes.ASK_MARKER_ADDER, onAskMarkerAdder);
+    };
+  }, [on, off, funcs.add]);
+  return funcs;
+};
+const defaultTreeNodesDetective = (parentNode, _options) => {
+  if (parentNode == null || parentNode.value == null) {
+    return [];
+  }
+  let nodes;
+  let parent$ip2r;
+  if (Array.isArray(parentNode.value)) {
+    nodes = parentNode.value;
+    parent$ip2r = parentNode.$ip2r;
+  } else {
+    nodes = parentNode.value.children ?? [];
+    parent$ip2r = `${parentNode.$ip2r}.children`;
+  }
+  return nodes.map((item, index) => {
+    if (item == null) {
+      return null;
+    } else {
+      const $ip2p = `[${index}]`;
+      const $ip2r = PPUtils.concat(parent$ip2r, $ip2p);
+      return {
+        value: item,
+        $ip2r,
+        $ip2p,
+        label: VUtils.isPrimitive(item) ? `${item ?? ""}` : item.label ?? "",
+        checkable: false,
+        addable: false,
+        removable: false
+      };
+    }
+  }).filter((item) => item != null);
+};
+const buildTreeNodesDetective = (detective, markers) => {
+  const detect = detective ?? defaultTreeNodesDetective;
+  const beautifyTreeNodes = (nodes) => {
+    return (nodes ?? []).map((node) => {
+      node.checkable = node.checkable ?? false;
+      node.addable = node.addable ?? false;
+      node.removable = node.removable ?? false;
+      markers.add(node);
+      if (node.$children != null) {
+        beautifyTreeNodes(node.$children);
+      }
+      return node;
+    });
+  };
+  const detectChildren = (node, _options) => {
+    node.$children = detect(node, _options);
+    if (node.$children != null && node.$children.length === 0) {
+      delete node.$children;
+    }
+    if (node.$children != null) {
+      node.$children.forEach((child) => {
+        child.$parent = node;
+        detectChildren(child, _options);
+      });
+    }
+  };
+  return (parentNode, _options) => {
+    const nodes = detect(parentNode, _options);
+    (nodes || []).forEach((node) => detectChildren(node, _options));
+    return beautifyTreeNodes(nodes);
+  };
 };
 const InternalTree = reactExports.forwardRef((props, ref) => {
-  const { $pp, halfChecked = true, checkable = false, addable = false, removable = false, initExpandLevel = -1, showIndex = false, detective, height = 300, marker, $wrapped, ...rest } = props;
+  const { $pp, initExpandLevel = -1, showIndex = false, detective, height = 300, marker, $wrapped, ...rest } = props;
   const { $p2r, $avs: { $disabled, $visible } } = $wrapped;
   const { on, off } = useGlobalEventBus();
   const globalHandlers = useGlobalHandlers();
@@ -7854,6 +8215,7 @@ const InternalTree = reactExports.forwardRef((props, ref) => {
       off(GlobalEventTypes.CUSTOM_EVENT, onCustomEvent);
     };
   }, [on, off, forceUpdate, marker]);
+  const markers = useMarker();
   const onKeyDown = (event) => {
     const isCtrlKey = event.ctrlKey || event.metaKey;
     const isFKey = event.key === "f";
@@ -7862,7 +8224,7 @@ const InternalTree = reactExports.forwardRef((props, ref) => {
       fire(TreeEventTypes.SWITCH_SEARCH_BOX);
     }
   };
-  const detect = buildTreeNodesDetective(detective, { checkable, addable, removable });
+  const detect = buildTreeNodesDetective(detective, markers);
   const rootNodeValue = MUtils.getValue($wrapped.$model, $pp);
   const rootNodeDef = {
     value: rootNodeValue,
@@ -7870,7 +8232,7 @@ const InternalTree = reactExports.forwardRef((props, ref) => {
     $ip2p: PROPERTY_PATH_ME,
     label: "",
     checkable: false,
-    addable,
+    addable: false,
     removable: false
   };
   rootNodeDef.$children = detect(rootNodeDef, { global: globalHandlers }) ?? [];
@@ -7878,7 +8240,7 @@ const InternalTree = reactExports.forwardRef((props, ref) => {
     ATree,
     { ...rest, "data-disabled": $disabled, "data-visible": $visible, height, id: PPUtils.asId(PPUtils.absolute($p2r, props.$pp), props.id), onKeyDown, tabIndex: 0, ref },
     React.createElement(TreeSearchBox, null),
-    React.createElement(TreeContent, { root: rootNodeDef, halfChecked, initExpandLevel, showIndex, detect, "$pp": $pp, "$wrapped": $wrapped })
+    React.createElement(TreeContent, { root: rootNodeDef, initExpandLevel, showIndex, detect, "$pp": $pp, "$wrapped": $wrapped })
   );
 });
 const Tree = reactExports.forwardRef((props, ref) => {

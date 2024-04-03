@@ -1,9 +1,9 @@
-import { r as reactExports, R as React, j as jsxRuntimeExports } from "./react-u2R3zR7B.js";
-import { V as VUtils, r as registerWidget, g as useCreateEventBus, M as MUtils, P as PPUtils, u as useThrottler, e as useForceUpdate, d as Wrapper, S as StandaloneRoot } from "./rainbow-d9-n1-975WKMaL.js";
-import { C as CssVars, D as DOM_KEY_WIDGET, a as DOM_ID_WIDGET, d as utils$1, $ as $d9n2, u as useGlobalEventBus, b as useGlobalHandlers, G as GlobalEventTypes, U as UnwrappedButton, B as ButtonInk, e as ButtonFill, I as IntlLabel, L as LabelLike, i as index$2, c as GlobalEventPrefix, f as useAlert, g as useDialog, h as DialogHeader, j as DialogTitle, k as DialogBody, l as DialogFooter, m as GlobalRoot } from "./rainbow-d9-n2-6pYCJQat.js";
-import { a as color, n as nanoid } from "./vendor-7x0KSTS1.js";
-import { q as qe } from "./styled-components-RRvobVFd.js";
-import { i as index$1, p as parseDoc } from "./rainbow-d9-n3-MZFlkjze.js";
+import { r as reactExports, R as React, j as jsxRuntimeExports } from "./react-LaGzILSN.js";
+import { V as VUtils, r as registerWidget, g as useCreateEventBus, M as MUtils, P as PPUtils, u as useThrottler, e as useForceUpdate, d as Wrapper, S as StandaloneRoot } from "./rainbow-d9-n1-8J3kRsTf.js";
+import { C as CssVars, D as DOM_KEY_WIDGET, a as DOM_ID_WIDGET, d as utils$1, $ as $d9n2, u as useGlobalEventBus, b as useGlobalHandlers, G as GlobalEventTypes, U as UnwrappedButton, B as ButtonInk, e as ButtonFill, I as IntlLabel, L as LabelLike, i as index$2, c as GlobalEventPrefix, f as useAlert, g as useDialog, h as DialogHeader, j as DialogTitle, k as DialogBody, l as DialogFooter, m as GlobalRoot } from "./rainbow-d9-n2-lHDB7iAN.js";
+import { a as color, n as nanoid } from "./vendor-rivyrZcp.js";
+import { q as qe } from "./styled-components-gKUigm2L.js";
+import { i as index$1, p as parseDoc } from "./rainbow-d9-n3-9PkjDp5m.js";
 var PlanElementType;
 (function(PlanElementType2) {
   PlanElementType2["CATEGORY"] = "PolicyElementCategory";
@@ -1572,6 +1572,7 @@ const DemoData = {
 };
 const markdown = "# Page::Demo Tab\n\n## Section::# 100. ThaiCloud Plan Selection\n\n- PlanSelect::::plans\n	- maxHeight: 800\n	- columns: 3\n	- defs: @ext.defs\n	- currencySymbol: ฿\n	- premiumDescription: After Tax\n	- buy: @ext.buy\n	- calculationDelay: 3\n	- calculate: @ext.calculate\n";
 $d9n2.intl.labels["en-US"] = {
+  ...$d9n2.intl.labels["en-US"] ?? {},
   "Standard Plan #1": "标准保障计划 #1",
   "After Tax": "税后",
   "Fire & Theft": "火灾和盗抢",
@@ -1672,7 +1673,30 @@ const ThaiPlanSelection = () => {
             {
               code: "PADDD",
               name: "Personal Accident - Death & Disability for Driver",
-              type: PlanElementType.COVERAGE
+              type: PlanElementType.COVERAGE,
+              values: [
+                {
+                  code: "si",
+                  label: "Sum Insured",
+                  defaultValue: 5e4,
+                  editType: PlanElementValueEditType.NUMBER
+                }
+              ],
+              children: [
+                {
+                  code: "PADDD-1",
+                  name: "Personal Accident - Death & Disability for Driver #1",
+                  type: PlanElementType.BENEFIT,
+                  values: [
+                    {
+                      code: "si",
+                      label: "Sum Insured",
+                      defaultValue: 5e4,
+                      editType: PlanElementValueEditType.NUMBER
+                    }
+                  ]
+                }
+              ]
             },
             {
               code: "PADDP",
