@@ -7,6 +7,7 @@ import DemoData from './demo.json';
 import {markdown as DemoContent} from './demo.md';
 import {checkNode} from './node-check-related';
 import {addNode} from './node-create-related';
+import {removeNode} from './node-remove-related';
 
 const treeDetective = (parentNode?: TreeNodeDef): Array<TreeNodeDef> => {
 	// no child
@@ -70,10 +71,7 @@ const treeDetective = (parentNode?: TreeNodeDef): Array<TreeNodeDef> => {
 				value: item, $ip2r, $ip2p, label,
 				checkable, checked, check,
 				addable: addable, add: addable ? addNode : (void 0),
-				removable: removable, remove: removable ? async (node: TreeNodeDef) => {
-					console.log(node);
-					return Promise.reject((void 0));
-				} : (void 0)
+				removable: removable, remove: removable ? removeNode : (void 0)
 			} as TreeNodeDef;
 		}
 	}).filter(item => item != null) as Array<TreeNodeDef>;

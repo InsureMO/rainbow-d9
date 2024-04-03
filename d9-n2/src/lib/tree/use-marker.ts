@@ -50,7 +50,7 @@ export const useMarker = (): MarkersFunctions => {
 		return () => {
 			off(TreeEventTypes.ASK_MARKER_ADDER, onAskMarkerAdder);
 		};
-	}, [on, off]);
+	}, [on, off, funcs.add]);
 
 	return funcs;
 };

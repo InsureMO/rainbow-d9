@@ -42,9 +42,14 @@ export const ChildTreeNodes = (props: ChildTreeNodesProps) => {
 		const onRefreshChildNodesOnRemoved = (_marker: string, _removedNode: TreeNodeDef) => {
 			forceUpdate();
 		};
-		const fillMarker = () => {
+		const fillMarkerAndBuildHierarchy = () => {
 			fireTree(TreeEventTypes.ASK_MARKER_ADDER, (add: (node: TreeNodeDef) => void) => {
-				(node.$children).forEach(child => add(child));
+				(node.$children).forEach(child => {
+					add(child);
+					if (child.$parent == null) {
+						child.$parent = node;
+					}
+				});
 			});
 		};
 		const scrollToAdded = (childNode?: TreeNodeDef) => {
@@ -52,13 +57,13 @@ export const ChildTreeNodes = (props: ChildTreeNodesProps) => {
 		};
 		// eslint-disable-next-line @typescript-eslint/no-unused-vars
 		const onChildAdded = (_marker: string, addedNode?: TreeNodeDef, _placeholder?: boolean) => {
-			fillMarker();
+			fillMarkerAndBuildHierarchy();
 			forceUpdate();
 			scrollToAdded(addedNode);
 		};
 		// eslint-disable-next-line @typescript-eslint/no-unused-vars
 		const onChildPlaceholderReplaced = (_marker: string, addedNode?: TreeNodeDef) => {
-			fillMarker();
+			fillMarkerAndBuildHierarchy();
 			forceUpdate();
 			scrollToAdded(addedNode);
 		};
