@@ -1,5 +1,6 @@
 import {GlobalEventHandlers, TreeNodeDef} from '@rainbow-d9/n2';
 import {checkNode} from './node-check-related';
+import {removeNode} from './node-remove-related';
 
 let newNodeIndex = 1;
 
@@ -10,7 +11,8 @@ const createNewNode = (parent: TreeNodeDef, index: number): TreeNodeDef => {
 		value: item, label,
 		$ip2r: `${parent.$ip2r}.nodes[${index}]`, $ip2p: `nodes[${index}]`,
 		checkable: true, checked: () => false, check: checkNode,
-		addable: true, add: addNode
+		addable: true, add: addNode,
+		removable: true, remove: removeNode
 	};
 };
 

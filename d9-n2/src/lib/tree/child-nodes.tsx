@@ -70,6 +70,9 @@ export const ChildTreeNodes = (props: ChildTreeNodesProps) => {
 		// eslint-disable-next-line @typescript-eslint/no-unused-vars
 		const onChildPlaceholderRemoved = (_marker: string, _placeholderNode: TreeNodeDef) => {
 			forceUpdate();
+			if (node.$children == null || node.$children.length === 0) {
+				fire && fire(TreeNodeEventTypes.SWITCH_MY_EXPAND, node.marker, false);
+			}
 		};
 		on && on(TreeNodeEventTypes.REFRESH_CHILD_NODES, onRefreshChildNodes);
 		on && on(TreeNodeEventTypes.REFRESH_CHILD_NODES_ON_REMOVED, onRefreshChildNodesOnRemoved);
