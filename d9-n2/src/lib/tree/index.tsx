@@ -6,6 +6,7 @@ import {TreeEventBusProvider, useTreeEventBus} from './event/tree-event-bus';
 import {TreeEventTypes} from './event/tree-event-bus-types';
 import {TreeSearchBox} from './search-box';
 import {TreeNodeDef, TreeProps} from './types';
+import {useMarker} from './use-marker';
 import {buildTreeNodesDetective} from './utils';
 import {ATree} from './widgets';
 
@@ -13,7 +14,6 @@ export const InternalTree = forwardRef((props: TreeProps, ref: ForwardedRef<HTML
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	const {
 		$pp,
-		halfChecked = true, checkable = false, addable = false, removable = false,
 		initExpandLevel = -1, showIndex = false, detective,
 		height = 300, marker,
 		$wrapped, ...rest
@@ -36,6 +36,7 @@ export const InternalTree = forwardRef((props: TreeProps, ref: ForwardedRef<HTML
 			off(GlobalEventTypes.CUSTOM_EVENT, onCustomEvent);
 		};
 	}, [on, off, forceUpdate, marker]);
+	const markers = useMarker();
 
 	const onKeyDown = (event: KeyboardEvent<HTMLDivElement>) => {
 		// Check for Ctrl key on Windows/Linux or Command key on Mac
@@ -50,14 +51,14 @@ export const InternalTree = forwardRef((props: TreeProps, ref: ForwardedRef<HTML
 		}
 	};
 
-	const detect = buildTreeNodesDetective(detective, {checkable, addable, removable});
+	const detect = buildTreeNodesDetective(detective, markers);
 	// model of whole tree
 	const rootNodeValue = MUtils.getValue($wrapped.$model, $pp);
 	// root node never show, only for create top level nodes
 	const rootNodeDef: TreeNodeDef = {
 		// root node use model of whole tree as it value, so path to root and path are both stay itself
 		value: rootNodeValue, $ip2r: PROPERTY_PATH_ME, $ip2p: PROPERTY_PATH_ME,
-		label: '', checkable: false, addable, removable: false
+		label: '', checkable: false, addable: false, removable: false
 	};
 	rootNodeDef.$children = detect(rootNodeDef, {global: globalHandlers}) ?? [];
 
@@ -66,7 +67,7 @@ export const InternalTree = forwardRef((props: TreeProps, ref: ForwardedRef<HTML
 	              onKeyDown={onKeyDown} tabIndex={0}
 	              ref={ref}>
 		<TreeSearchBox/>
-		<TreeContent root={rootNodeDef} halfChecked={halfChecked} initExpandLevel={initExpandLevel}
+		<TreeContent root={rootNodeDef} initExpandLevel={initExpandLevel}
 		             showIndex={showIndex} detect={detect} $pp={$pp} $wrapped={$wrapped}/>
 	</ATree>;
 });

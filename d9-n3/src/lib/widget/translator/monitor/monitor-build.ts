@@ -9,9 +9,7 @@ import {
 } from '@rainbow-d9/n1';
 import {WidgetType} from '../../../semantic';
 import {AsyncFunction} from '../../../utils';
-import {ScriptSnippet} from '../attribute';
-import {ComplexMonitorableAttributeValue} from '../attribute/monitor-attribute-build';
-import {ReactionTypes} from '../attribute/reaction-attribute-build';
+import {ComplexMonitorableAttributeValue, ReactionTypes, ScriptSnippet} from '../attribute';
 import {AttributeMap} from '../types';
 import {
 	MonitorHandler,

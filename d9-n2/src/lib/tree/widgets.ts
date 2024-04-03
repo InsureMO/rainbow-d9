@@ -135,8 +135,93 @@ export const TreeNodeContainer = styled(TreeNode).attrs({'data-w': 'd9-tree-node
         }
     }
 
-    &[data-expanded=false] ~ * {
+    &[data-expanded=false] ~ *:not(div[data-w=d9-tree-node-operators]) {
         display: none;
+    }
+`;
+// noinspection CssUnresolvedCustomProperty
+export const TreeNodeOperators = styled.div.attrs<{ top: number; right: number }>(({top, right}) => {
+	return {
+		'data-w': 'd9-tree-node-operators',
+		style: {
+			'--top': `${top}px`,
+			'--right': `${right}px`
+		}
+	};
+})<{ top: number; right: number }>`
+    display: flex;
+    position: fixed;
+    top: var(--top);
+    right: var(--right);
+    margin-right: 8px;
+    align-items: center;
+    background-color: ${CssVars.BACKGROUND_COLOR};
+    border-radius: ${CssVars.BORDER_RADIUS};
+    opacity: 1;
+    z-index: ${CssVars.DROPDOWN_Z_INDEX};
+    transition: opacity ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION};
+
+    &[data-visible=false] {
+        opacity: 0;
+        pointer-events: none;
+        user-select: none;
+        transition: none;
+    }
+
+    &:hover > button {
+        opacity: 1;
+    }
+
+    > button {
+        height: calc(${CssVars.INPUT_HEIGHT} * 3 / 4);
+        opacity: 0.3;
+        transition: opacity ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION};
+
+        &:first-child {
+            border-top-left-radius: calc(${CssVars.INPUT_HEIGHT} * 3 / 8);
+            border-bottom-left-radius: calc(${CssVars.INPUT_HEIGHT} * 3 / 8);
+        }
+
+        &:last-child {
+            border-top-right-radius: calc(${CssVars.INPUT_HEIGHT} * 3 / 8);
+            border-bottom-right-radius: calc(${CssVars.INPUT_HEIGHT} * 3 / 8);
+        }
+
+        &:not(:last-child) {
+            border-top-right-radius: 0;
+            border-bottom-right-radius: 0;
+        }
+
+        &:not(:first-child) {
+            border-top-left-radius: 0;
+            border-bottom-left-radius: 0;
+            overflow: visible;
+
+            &:before {
+                content: '';
+                display: block;
+                position: absolute;
+                top: 20%;
+                left: -1px;
+                height: 60%;
+                width: 1px;
+                background-color: ${CssVars.INVERT_COLOR};
+            }
+        }
+
+        &:hover {
+            z-index: 1;
+        }
+
+        > span[data-w=d9-deco-lead] {
+            height: calc(${CssVars.INPUT_HEIGHT} * 3 / 4);
+            min-width: calc(${CssVars.INPUT_HEIGHT} * 3 / 4);
+            padding: 0;
+
+            > svg {
+                height: calc(${CssVars.FONT_SIZE} * 0.8);
+            }
+        }
     }
 `;
 export const TreeNodeContent = styled.span.attrs({'data-w': 'd9-tree-node-content'})`

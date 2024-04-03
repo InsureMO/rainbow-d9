@@ -101,7 +101,15 @@ const treeDetective = (parentNode?: TreeNodeDef): Array<TreeNodeDef> => {
 			}
 			return {
 				value: item, $ip2r, $ip2p, label,
-				checkable, checked, check, addable: false, removable: false
+				checkable, checked, check,
+				addable: true, add: async (parent: TreeNodeDef) => {
+					console.log(parent);
+					return Promise.reject((void 0));
+				},
+				removable: true, remove: async (node: TreeNodeDef) => {
+					console.log(node);
+					return Promise.reject((void 0));
+				}
 			} as TreeNodeDef;
 		}
 	}).filter(item => item != null) as Array<TreeNodeDef>;

@@ -20,6 +20,8 @@ export interface ModelHolder {
 	 * Root data model, use current if it is not declared.
 	 */
 	$root?: BaseModel;
+	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+	// @ts-ignore
 	/**
 	 * Path from root to current. Value will be ignored and force set to {@link PROPERTY_PATH_ME} when {@link #$root} is not declared.
 	 */

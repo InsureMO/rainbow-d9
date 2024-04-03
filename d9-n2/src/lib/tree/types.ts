@@ -16,10 +16,33 @@ export enum TreeNodeCheckedChangeFrom {
 }
 
 export interface TreeNodeOperation2 extends TreeNodeOperation {
+	click?: (node: TreeNodeDef, handlers: GlobalEventHandlers) => Promise<void>;
 	/** get checked, mandatory when checkable */
 	checked?: (node: TreeNodeDef) => boolean;
 	/** changed checked, mandatory when checkable */
 	check?: (node: TreeNodeDef, checked: boolean, from: TreeNodeCheckedChangeFrom, handlers: GlobalEventHandlers) => Promise<void>;
+	/**
+	 * add child node, mandatory when addable.
+	 * 1. returns void, means child node added, refresh children of given node
+	 * 2. returns child node def, means child node added, refresh children of given node, and scroll new node into view
+	 * 3. return an array, means child node def is a placeholder,
+	 * 3.1 refresh children of given node first, scroll placeholder node into view
+	 * 3.2 when promise resolved, refresh children of given node again
+	 * 3.3 when promise rejected, refresh children of given node again
+	 * it's important that memory structure between parent and added node, must be maintained in add function.
+	 * existing child nodes can be reached from node.$children.
+	 * never change given parent node, only change its children.
+	 */
+	add?: (parent: TreeNodeDef, handlers: GlobalEventHandlers) => Promise<void | TreeNodeDef | [TreeNodeDef, Promise<void | TreeNodeDef>]>;
+	/**
+	 * remove node from parent, mandatory when removable.
+	 * 1. when promise resolved, refresh parent's children of given node
+	 * 2. when promise rejected, do nothing
+	 * it's important that memory structure between parent and added node, must be maintained in add function.
+	 * parent can be reached from node.$parent.
+	 * never change parent node, only remove given node from its parent.
+	 */
+	remove?: (node: TreeNodeDef, handlers: GlobalEventHandlers) => Promise<void>;
 }
 
 export interface TreeNodeDef extends TreeNodeOperation2 {
@@ -48,8 +71,6 @@ export type TreeNodeDetect = (parentNode: Undefinable<TreeNodeDef>, options: Glo
 
 /** Tree configuration definition */
 export type TreeDef = NodeDef & OmitHTMLProps2<HTMLDivElement, 'title' | 'height'> & {
-	/** show half checked when not all sub nodes but at least one is checked, default true */
-	halfChecked?: boolean;
 	/** initial expanded level, default 0. -1 means all collapsed */
 	initExpandLevel?: number;
 	/** show node index, default false */
@@ -57,6 +78,6 @@ export type TreeDef = NodeDef & OmitHTMLProps2<HTMLDivElement, 'title' | 'height
 	detective?: TreeNodeDetect;
 	height?: number | string;
 	marker?: string;
-} & TreeNodeOperation;
+};
 /** Tree widget definition, with html attributes */
 export type TreeProps = OmitNodeDef<TreeDef> & WidgetProps;

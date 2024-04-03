@@ -6,7 +6,7 @@ import {
 	VUtils
 } from '@rainbow-d9/n1';
 import {GlobalRoot, UnwrappedButton, UnwrappedCaption} from '@rainbow-d9/n2';
-import {useEffect, useState} from 'react';
+import {Fragment, useEffect, useState} from 'react';
 import {CustomEventHandler} from '../custom-event-handler';
 import {N2DemoDialogHandler} from '../n2-dialog-handler';
 import {useDemoMarkdown} from '../use-demo-markdown';
@@ -39,9 +39,9 @@ const ALabel = () => {
 	// @ts-ignore
 	return <UnwrappedCaption style={{flexDirection: 'column', alignItems: 'start', margin: '16px 0', height: 'unset'}}>
 		{changes.map(change => {
-			return <>
+			return <Fragment key={change.index}>
 				<span style={{lineHeight: '20px'}}>{`${change.index}. ${change.message}`}</span>
-			</>;
+			</Fragment>;
 		})}
 	</UnwrappedCaption>;
 };
@@ -54,7 +54,9 @@ const AButton = (props: { data: typeof DemoData }) => {
 		const oldValue = data.a;
 		if (VUtils.isNotEmpty(oldValue)) {
 			data.a = '';
-			fire(BridgeToRootEventTypes.NOTIFY_VALUE_CHANGED, {absolutePath: '/a', from: oldValue, to: data.a});
+			fire(BridgeToRootEventTypes.NOTIFY_VALUE_CHANGED, {
+				absolutePath: '/a', from: oldValue, to: data.a
+			});
 		}
 	};
 	// @ts-ignore

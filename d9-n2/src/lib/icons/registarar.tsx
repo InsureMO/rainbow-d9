@@ -14,12 +14,14 @@ import {Date} from './date';
 import {Edit} from './edit';
 import {Expand} from './expand';
 import {Forward} from './forward';
+import {Plus} from './plus';
 import {Remove} from './remove';
 import {Search} from './search';
 import {Spinner} from './spinner';
 import {Time} from './time';
 import {Times} from './times';
 import {View} from './view';
+import {XMark} from './xmark';
 
 class IconsRegistrar {
 	private static readonly _icons: Record<string, () => JSX.Element> = {};
@@ -61,6 +63,8 @@ IconsRegistrar.register({
 	angleRight: () => <AngleRight/>,
 	spinner: () => <Spinner/>,
 	search: () => <Search/>,
+	plus: () => <Plus/>,
+	xmark: () => <XMark/>,
 	cart: () => <Cart/>
 });
 

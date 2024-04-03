@@ -22,7 +22,6 @@ export class ReactionUtils {
 	public static readonly DETECT_REACTION_REPAINT =
 		createDefaultMonitorHandlerDetective({
 			attributeName: AttributeNames.REACTION_REPAINT,
-			// only returns false means invisible
 			redressResult: (ret: Nullable<Reaction>): Reaction => (ret == null || VUtils.isBlank(ret)) ? Reaction.REPAINT : ret,
 			ignoreDefault: true,
 			deleteAttribute: true
@@ -30,7 +29,6 @@ export class ReactionUtils {
 	public static readonly DETECT_REACTION_CLEAR_ME =
 		createDefaultMonitorHandlerDetective({
 			attributeName: AttributeNames.REACTION_CLEAR_ME,
-			// only returns false means invisible
 			redressResult: (ret: Nullable<Reaction>): Reaction => (ret == null || VUtils.isBlank(ret)) ? Reaction.CLEAR_VALUE : ret,
 			ignoreDefault: true,
 			deleteAttribute: true
@@ -38,7 +36,6 @@ export class ReactionUtils {
 	public static readonly DETECT_REACTION_WATCH =
 		createDefaultMonitorHandlerDetective({
 			attributeName: AttributeNames.REACTION_WATCH,
-			// only returns false means invisible
 			redressResult: (ret: Nullable<Reaction>): Reaction => (ret == null || VUtils.isBlank(ret)) ? Reaction.REPAINT : ret,
 			ignoreDefault: true,
 			deleteAttribute: true

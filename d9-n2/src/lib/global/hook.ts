@@ -145,8 +145,15 @@ export enum GlobalEventPrefix {
 	COLLAPSE_SECTION = 'collapse-section',
 	/** refresh tree node and its descendants */
 	REFRESH_TREE = 'refresh-tree',
-	/** refresh child nodes of a tree node */
+	/** refresh tree node only */
+	REFRESH_TREE_NODE = 'refresh-tree-node',
+	/** refresh child nodes only  */
 	REFRESH_TREE_CHILD_NODES = 'refresh-tree-child-nodes',
+	/** recalculating child nodes, and refresh */
+	RECALC_TREE_CHILD_NODES = 'recalc-tree-child-nodes',
+	/** refresh node itself and all child nodes  */
+	REFRESH_TREE_NODE_AND_CHILDREN = 'refresh-tree-node-and-children',
+	RECALC_TREE_NODE_AND_CHILDREN = 'recalc-tree-node-and-children',
 	/** expand tree node */
 	EXPAND_TREE_NODE = 'expand-tree-node',
 	/** collapse tree node */

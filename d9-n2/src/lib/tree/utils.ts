@@ -1,13 +1,7 @@
 import {PPUtils, PropertyPath, VUtils} from '@rainbow-d9/n1';
 import {GlobalEventHandlers} from '../types';
-import {TreeNodeDef, TreeNodeDetect, TreeNodeOperation, TreeProps} from './types';
-
-export const computeTreeNodeMarker = (node: TreeNodeDef, $wrapped: TreeProps['$wrapped']) => {
-	if (VUtils.isBlank(node.marker)) {
-		node.marker = PPUtils.concat($wrapped.$p2r, node.$ip2r);
-	}
-	return node.marker;
-};
+import {TreeNodeDef, TreeNodeDetect} from './types';
+import {MarkersFunctions} from './use-marker';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export const defaultTreeNodesDetective: TreeNodeDetect = (parentNode, _options) => {
@@ -42,15 +36,16 @@ export const defaultTreeNodesDetective: TreeNodeDetect = (parentNode, _options) 
 	}).filter(item => item != null);
 };
 
-export const buildTreeNodesDetective = (detective: TreeNodeDetect, options: Required<TreeNodeOperation>): TreeNodeDetect => {
+export const buildTreeNodesDetective = (detective: TreeNodeDetect, markers: MarkersFunctions): TreeNodeDetect => {
 	const detect = detective ?? defaultTreeNodesDetective;
-	const beautifyTreeNodes = (nodes: Array<TreeNodeDef>, options: Required<TreeNodeOperation>): Array<TreeNodeDef> => {
+	const beautifyTreeNodes = (nodes: Array<TreeNodeDef>): Array<TreeNodeDef> => {
 		return (nodes ?? []).map(node => {
-			node.checkable = node.checkable ?? options.checkable;
-			node.addable = node.addable ?? options.addable;
-			node.removable = node.removable ?? options.removable;
+			node.checkable = node.checkable ?? false;
+			node.addable = node.addable ?? false;
+			node.removable = node.removable ?? false;
+			markers.add(node);
 			if (node.$children != null) {
-				beautifyTreeNodes(node.$children, options);
+				beautifyTreeNodes(node.$children);
 			}
 			return node;
 		});
@@ -71,6 +66,6 @@ export const buildTreeNodesDetective = (detective: TreeNodeDetect, options: Requ
 	return (parentNode, _options) => {
 		const nodes = detect(parentNode, _options);
 		(nodes || []).forEach(node => detectChildren(node, _options));
-		return beautifyTreeNodes(nodes, options);
+		return beautifyTreeNodes(nodes);
 	};
 };

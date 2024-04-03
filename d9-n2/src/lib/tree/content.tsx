@@ -8,7 +8,6 @@ import {TreeContentContainer} from './widgets';
 
 export interface TreeContentProps {
 	root: TreeNodeDef;
-	halfChecked: boolean;
 	initExpandLevel: number;
 	showIndex: boolean;
 	detect: TreeNodeDetect;
@@ -17,11 +16,7 @@ export interface TreeContentProps {
 }
 
 export const TreeContent = (props: TreeContentProps) => {
-	const {
-		root, $pp,
-		halfChecked, initExpandLevel, showIndex,
-		detect, $wrapped
-	} = props;
+	const {root, $pp, initExpandLevel, showIndex, detect, $wrapped} = props;
 	const {$p2r} = $wrapped;
 
 	const [filter, setFilter] = useState('');
@@ -89,7 +84,7 @@ export const TreeContent = (props: TreeContentProps) => {
 		{children().map((child, index) => {
 			const last = !canAdd && index === childrenCount - 1;
 			const myDisplayIndex = `${index + 1}`;
-			return <TreeNode halfChecked={halfChecked} initExpandLevel={initExpandLevel} showIndex={showIndex}
+			return <TreeNode initExpandLevel={initExpandLevel} showIndex={showIndex}
 				// change path to root as path to root of model of whole tree
 				// and keep this path to root for all tree nodes
 				             detective={detect} $wrapped={{...$wrapped, $p2r: node$p2r}}
