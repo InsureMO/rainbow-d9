@@ -2,6 +2,7 @@ import {BaseModel, MUtils, PropValue, StandaloneRoot} from '@rainbow-d9/n1';
 import {$d9n2, ButtonClickOptions, GlobalRoot} from '@rainbow-d9/n2';
 import {
 	CalculationEvent,
+	PlanBenefitDef,
 	PlanCategoryDef,
 	PlanCoverageDef,
 	PlanDef,
@@ -96,7 +97,25 @@ export const ThaiPlanSelection = () => {
 						} as PlanCategoryDef,
 						{
 							code: 'PADDD', name: 'Personal Accident - Death & Disability for Driver',
-							type: PlanElementType.COVERAGE
+							type: PlanElementType.COVERAGE,
+							values: [
+								{
+									code: 'si', label: 'Sum Insured', defaultValue: 50000,
+									editType: PlanElementValueEditType.NUMBER
+								} as PlanElementNumberValueDef
+							],
+							children: [
+								{
+									code: 'PADDD-1', name: 'Personal Accident - Death & Disability for Driver #1',
+									type: PlanElementType.BENEFIT,
+									values: [
+										{
+											code: 'si', label: 'Sum Insured', defaultValue: 50000,
+											editType: PlanElementValueEditType.NUMBER
+										} as PlanElementNumberValueDef
+									]
+								} as PlanBenefitDef
+							]
 						} as PlanCoverageDef,
 						{
 							code: 'PADDP',

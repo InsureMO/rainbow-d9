@@ -1,10 +1,12 @@
 import {Nullable, PPUtils, PropertyPath, StandaloneRoot, VUtils} from '@rainbow-d9/n1';
-import {GlobalEventHandlers, GlobalRoot, TreeNodeCheckedChangeFrom, TreeNodeDef} from '@rainbow-d9/n2';
+import {GlobalRoot, TreeNodeDef} from '@rainbow-d9/n2';
 import {CustomEventHandler} from '../custom-event-handler';
 import {N2DemoDialogHandler} from '../n2-dialog-handler';
 import {useDemoMarkdown} from '../use-demo-markdown';
 import DemoData from './demo.json';
 import {markdown as DemoContent} from './demo.md';
+import {checkNode} from './node-check-related';
+import {addNode} from './node-create-related';
 
 const treeDetective = (parentNode?: TreeNodeDef): Array<TreeNodeDef> => {
 	// no child
@@ -37,6 +39,8 @@ const treeDetective = (parentNode?: TreeNodeDef): Array<TreeNodeDef> => {
 			let checkable: boolean = false;
 			let checked: Nullable<TreeNodeDef['checked']> = (void 0);
 			let check: Nullable<TreeNodeDef['check']> = (void 0);
+			let addable: boolean = false;
+			let removable: boolean = false;
 			if (VUtils.isPrimitive(item)) {
 				// use item itself as label
 				label = `${item ?? ''}`;
@@ -58,58 +62,18 @@ const treeDetective = (parentNode?: TreeNodeDef): Array<TreeNodeDef> => {
 				}
 				checkable = true;
 				checked = () => item.checked ?? false;
-				const syncToChildren = async (def: TreeNodeDef, checked: boolean, options: GlobalEventHandlers) => {
-					await (def.$children ?? []).reduce(async (previous, child) => {
-						await previous;
-						if (child.checkable) {
-							await child.check!(child, checked, TreeNodeCheckedChangeFrom.FROM_PARENT, options);
-						}
-						return previous;
-					}, Promise.resolve());
-				};
-				const syncToParent = async (def: TreeNodeDef, options: GlobalEventHandlers) => {
-					let parent = def.$parent;
-					while (parent != null && parent.checkable) {
-						const allChildChecked = (parent.$children ?? [])
-							.filter(child => child.checkable)
-							.every(child => child.checked!(child));
-						await parent.check!(parent, allChildChecked, TreeNodeCheckedChangeFrom.FROM_CHILD, options);
-						parent = parent.$parent;
-					}
-				};
-				check = async (def, checked, from, options) => {
-					if (def.checked!(def) === checked) {
-						return;
-					}
-					item.checked = checked;
-
-					// it's very important to update the tree model based on given change from
-					// otherwise leads unpredictable behavior
-					switch (from) {
-						case TreeNodeCheckedChangeFrom.FROM_SELF:
-							await syncToChildren(def, checked, options);
-							await syncToParent(def, options);
-							break;
-						case TreeNodeCheckedChangeFrom.FROM_CHILD:
-							await syncToParent(def, options);
-							break;
-						case TreeNodeCheckedChangeFrom.FROM_PARENT:
-							await syncToChildren(def, checked, options);
-							break;
-					}
-				};
+				check = checkNode;
+				addable = true;
+				removable = true;
 			}
 			return {
 				value: item, $ip2r, $ip2p, label,
 				checkable, checked, check,
-				addable: true, add: async (parent: TreeNodeDef) => {
-					console.log(parent);
-					return Promise.reject((void 0));
-				},
-				removable: true, remove: async (node: TreeNodeDef) => {
+				addable: addable, add: addable ? addNode : (void 0),
+				removable: removable, remove: removable ? async (node: TreeNodeDef) => {
 					console.log(node);
 					return Promise.reject((void 0));
-				}
+				} : (void 0)
 			} as TreeNodeDef;
 		}
 	}).filter(item => item != null) as Array<TreeNodeDef>;

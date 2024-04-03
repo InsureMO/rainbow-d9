@@ -172,7 +172,7 @@ export const CssVars = {
 	DIALOG_SHADOW: `var(--d9-dialog-shadow, 0 0 18px 6px ${color(CssConstants.SHADOW_COLOR).alpha(0.4)})`,
 	DIALOG_WIDTH: 'var(--d9-dialog-width, 600px)',
 	DIALOG_MARGIN_TOP: 'var(--d9-dialog-margin-top, 25vh)',
-	DIALOG_MARGIN_LEFT: 'var(--d9-dialog-margin-left, calc(50vw - var(--d9-dialog-width) / 2))',
+	DIALOG_MARGIN_LEFT: 'var(--d9-dialog-margin-left, calc(50vw - var(--d9-dialog-width, 600px) / 2))',
 	DIALOG_PADDING: 'var(--d9-dialog-padding, 32px 32px 16px)',
 	DIALOG_HEADER_MARGIN: 'var(--d9-dialog-header-margin, -32px -32px 0)',
 	DIALOG_HEADER_PADDING: 'var(--d9-dialog-header-padding, 16px)',

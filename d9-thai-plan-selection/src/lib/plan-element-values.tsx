@@ -73,7 +73,7 @@ const getValuesModel = (element: SelectedPlanElement): SelectedPlanElement['valu
 
 export const PlanElementValues = (props: PlanElementValuesProps) => {
 	const {
-		elementDef: elementDef, elementCodes,
+		elementDef, elementCodes,
 		planDef, plan: planModel, plans, $root,
 		elementFixedValue, elementOptionsValue, elementNumberValue, elementNumberValueValidator
 	} = props;
