@@ -1,5 +1,5 @@
 import {MUtils, PPUtils, registerWidget} from '@rainbow-d9/n1';
-import React from 'react';
+import React, {ForwardedRef, forwardRef} from 'react';
 import {TabsEventBusProvider} from './event/tabs-event-bus';
 import {TabBody} from './tab-body';
 import {TabTitle} from './tab-title';
@@ -8,14 +8,15 @@ import {TabsProps} from './types';
 import {redressTabMarker} from './utils';
 import {ATabs, TabsBody, TabsHeader} from './widgets';
 
-const InternalTabs = (props: TabsProps) => {
+const InternalTabs = forwardRef((props: TabsProps, ref: ForwardedRef<HTMLDivElement>) => {
 	const {$pp, $wrapped, initActive, contents, ...rest} = props;
 	const {$p2r, $avs: {$disabled, $visible}} = $wrapped;
 
 	(contents ?? []).forEach(content => redressTabMarker(content));
 
 	return <ATabs {...rest} data-disabled={$disabled} data-visible={$visible}
-	              id={PPUtils.asId(PPUtils.absolute($p2r, $pp), props.id)}>
+	              id={PPUtils.asId(PPUtils.absolute($p2r, $pp), props.id)}
+	              ref={ref}>
 		<TabsHeader>
 			{(contents ?? []).map((content, index) => {
 				const $model = MUtils.getValue($wrapped.$model, $pp);
@@ -37,13 +38,13 @@ const InternalTabs = (props: TabsProps) => {
 		</TabsBody>
 		<TabsController $pp={$pp} $wrapped={$wrapped} initActive={initActive} contents={contents}/>
 	</ATabs>;
-};
+});
 
-export const Tabs = (props: TabsProps) => {
+export const Tabs = forwardRef((props: TabsProps, ref: ForwardedRef<HTMLDivElement>) => {
 	return <TabsEventBusProvider>
-		<InternalTabs {...props}/>
+		<InternalTabs {...props} ref={ref}/>
 	</TabsEventBusProvider>;
-};
+});
 
 registerWidget({key: 'Tabs', JSX: Tabs, container: false, array: false});
 

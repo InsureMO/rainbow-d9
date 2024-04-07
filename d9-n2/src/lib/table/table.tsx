@@ -1,9 +1,9 @@
 import {PPUtils} from '@rainbow-d9/n1';
-import React from 'react';
+import React, {ForwardedRef, forwardRef} from 'react';
 import {TableProps} from './types';
 import {ATable} from './widgets';
 
-export const Table = (props: TableProps) => {
+export const Table = forwardRef((props: TableProps, ref: ForwardedRef<HTMLDivElement>) => {
 	const {
 		// eslint-disable-next-line @typescript-eslint/no-unused-vars
 		$wrapped, headers, pageable,
@@ -13,7 +13,8 @@ export const Table = (props: TableProps) => {
 
 	// render container itself
 	return <ATable {...rest} data-disabled={$disabled} data-visible={$visible}
-	               id={PPUtils.asId(PPUtils.absolute($wrapped.$p2r, props.$pp), props.id)}>
+	               id={PPUtils.asId(PPUtils.absolute($wrapped.$p2r, props.$pp), props.id)}
+	               ref={ref}>
 		{children}
 	</ATable>;
-};
+});

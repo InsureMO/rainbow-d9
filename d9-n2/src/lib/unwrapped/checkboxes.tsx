@@ -1,5 +1,5 @@
 import {MonitorNodeDef, NodeAttributeValues, PropValue, VUtils} from '@rainbow-d9/n1';
-import React from 'react';
+import React, {ForwardedRef, forwardRef} from 'react';
 import {Checkboxes, CheckboxesProps} from '../checkboxes';
 
 /** configuration definition */
@@ -12,7 +12,7 @@ type UnwrappedCheckboxesProps =
 	visible?: boolean;
 };
 
-const UnwrappedCheckboxes = (props: UnwrappedCheckboxesProps) => {
+const UnwrappedCheckboxes = forwardRef((props: UnwrappedCheckboxesProps, ref: ForwardedRef<HTMLDivElement>) => {
 	const {$pp = 'value', value, onValueChange, disabled, visible, ...rest} = props;
 
 	const $onValueChange = onValueChange;
@@ -21,7 +21,8 @@ const UnwrappedCheckboxes = (props: UnwrappedCheckboxesProps) => {
 
 	return <Checkboxes {...rest} $wrapped={{$onValueChange, $avs, $root, $model: $root, $p2r: '.'}}
 	                   $pp={$pp}
-	                   id={rest.id ?? VUtils.generateUniqueId()}/>;
-};
+	                   id={rest.id ?? VUtils.generateUniqueId()}
+	                   ref={ref}/>;
+});
 
 export {UnwrappedCheckboxes, UnwrappedCheckboxesProps};

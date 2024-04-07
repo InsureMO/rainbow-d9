@@ -1,6 +1,6 @@
 import {MUtils, Nullable, PPUtils, VUtils} from '@rainbow-d9/n1';
 import dayjs, {Dayjs} from 'dayjs';
-import React, {MouseEvent} from 'react';
+import React, {ForwardedRef, forwardRef, MouseEvent} from 'react';
 import styled from 'styled-components';
 import {CssVars, DOM_KEY_WIDGET} from '../constants';
 import {DropdownOptionValue} from '../dropdown';
@@ -16,6 +16,7 @@ import {
 } from '../dropdown-assist';
 import {useGlobalHandlers} from '../global';
 import {Date} from '../icons';
+import {useDualRefs} from '../utils';
 import {useCalendarEventBus} from './event/calendar-event-bus';
 import {CalendarEventTypes} from './event/calendar-event-bus-types';
 import {CalendarPopup} from './popup';
@@ -48,7 +49,7 @@ export const DropdownStickCalendar = styled(Date as any).attrs({[DOM_KEY_WIDGET]
     transition: all ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION};
 `;
 
-export const Picker = (props: CalendarProps) => {
+export const Picker = forwardRef((props: CalendarProps, ref: ForwardedRef<HTMLDivElement>) => {
 	const {
 		$pp, $wrapped: {$onValueChange, $model, $p2r, $avs: {$disabled, $visible}},
 		please = '', clearable = true,
@@ -70,6 +71,7 @@ export const Picker = (props: CalendarProps) => {
 		askPopupMaxWidth: () => CssVars.CALENDAR_POPUP_WIDTH_VALUE,
 		fixWidth: true
 	});
+	useDualRefs(containerRef, ref);
 
 	const showPopup = () => {
 		// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
@@ -190,12 +192,13 @@ export const Picker = (props: CalendarProps) => {
 	})();
 
 	return <DropdownContainer active={popupState.active} atBottom={popupState.atBottom}
-	                          ref={containerRef} role="input" tabIndex={0}
+	                          role="input" tabIndex={0}
 	                          {...rest}
 	                          data-w="d9-calendar"
 	                          data-disabled={$disabled} data-visible={$visible}
 	                          onClick={onClicked} onBlur={onBlurred}
-	                          id={PPUtils.asId(PPUtils.absolute($p2r, props.$pp), props.id)}>
+	                          id={PPUtils.asId(PPUtils.absolute($p2r, props.$pp), props.id)}
+	                          ref={containerRef}>
 		<CalendarValueHolder initValue={initValueForPopup}/>
 		<DropdownLabel data-please={!valueAssigned}>{label}</DropdownLabel>
 		<DropdownStick valueAssigned={valueAssigned} clearable={clearable} clear={onClearClicked}
@@ -207,4 +210,4 @@ export const Picker = (props: CalendarProps) => {
 			                 confirm={onConfirm}/>
 			: null}
 	</DropdownContainer>;
-};
+});

@@ -1,5 +1,5 @@
 import {MonitorNodeDef, NodeAttributeValues, PropValue, VUtils} from '@rainbow-d9/n1';
-import React from 'react';
+import React, {ForwardedRef, forwardRef} from 'react';
 import {MultiDropdown, MultiDropdownProps} from '../multi-dropdown';
 
 /** configuration definition */
@@ -12,7 +12,7 @@ type UnwrappedMultiDropdownProps =
 	visible?: boolean;
 };
 
-const UnwrappedMultiDropdown = (props: UnwrappedMultiDropdownProps) => {
+const UnwrappedMultiDropdown = forwardRef((props: UnwrappedMultiDropdownProps, ref: ForwardedRef<HTMLDivElement>) => {
 	const {$pp = 'value', value, onValueChange, disabled, visible, ...rest} = props;
 
 	const $onValueChange = onValueChange;
@@ -21,7 +21,8 @@ const UnwrappedMultiDropdown = (props: UnwrappedMultiDropdownProps) => {
 
 	return <MultiDropdown {...rest} $wrapped={{$onValueChange, $avs, $root, $model: $root, $p2r: '.'}}
 	                      $pp={$pp}
-	                      id={rest.id ?? VUtils.generateUniqueId()}/>;
-};
+	                      id={rest.id ?? VUtils.generateUniqueId()}
+	                      ref={ref}/>;
+});
 
 export {UnwrappedMultiDropdown, UnwrappedMultiDropdownProps};

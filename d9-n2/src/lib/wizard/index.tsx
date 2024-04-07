@@ -1,5 +1,5 @@
 import {MUtils, PPUtils, registerWidget} from '@rainbow-d9/n1';
-import React from 'react';
+import React, {ForwardedRef, forwardRef} from 'react';
 import {WizardEventBusProvider} from './event/wizard-event-bus';
 import {WizardProps} from './types';
 import {useWizardSharedInit} from './use-wizard-shared-init';
@@ -9,7 +9,7 @@ import {WizardController} from './wizard-controller';
 import {WizardStepBody} from './wizard-step-body';
 import {WizardStepTitle} from './wizard-step-title';
 
-const InternalWizard = (props: WizardProps) => {
+const InternalWizard = forwardRef((props: WizardProps, ref: ForwardedRef<HTMLDivElement>) => {
 	const {
 		$pp, $wrapped,
 		reached = 0, freeWalk = false, omitWalker = false,
@@ -26,7 +26,8 @@ const InternalWizard = (props: WizardProps) => {
 	}
 
 	return <AWizard {...rest} data-disabled={$disabled} data-visible={$visible}
-	                id={PPUtils.asId(PPUtils.absolute($p2r, $pp), props.id)}>
+	                id={PPUtils.asId(PPUtils.absolute($p2r, $pp), props.id)}
+	                ref={ref}>
 		<WizardHeader data-balloon={balloon}>
 			{(contents ?? []).map((content, index) => {
 				const $model = MUtils.getValue($wrapped.$model, $pp);
@@ -54,13 +55,13 @@ const InternalWizard = (props: WizardProps) => {
 		</WizardBody>
 		<WizardController $pp={$pp} $wrapped={$wrapped} contents={contents} reached={reached}/>
 	</AWizard>;
-};
+});
 
-export const Wizard = (props: WizardProps) => {
+export const Wizard = forwardRef((props: WizardProps, ref: ForwardedRef<HTMLDivElement>) => {
 	return <WizardEventBusProvider>
-		<InternalWizard {...props}/>
+		<InternalWizard {...props} ref={ref}/>
 	</WizardEventBusProvider>;
-};
+});
 
 registerWidget({key: 'Wizard', JSX: Wizard, container: false, array: false});
 

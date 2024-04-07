@@ -338,7 +338,7 @@ export const Badge = forwardRef((props: BadgeProps, ref: ForwardedRef<HTMLSpanEl
 	const {ink, fill = ButtonFill.FILL, ...rest} = props;
 	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 	// @ts-ignore
-	return <Caption {...rest} ref={ref} data-w="d9-badge" data-ink={ink} data-fill={fill}/>;
+	return <Caption {...rest} data-w="d9-badge" data-ink={ink} data-fill={fill} ref={ref}/>;
 });
 
 registerWidget({key: 'Badge', JSX: Badge, container: false, array: false});

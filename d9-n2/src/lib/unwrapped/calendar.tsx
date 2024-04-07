@@ -1,5 +1,5 @@
 import {MonitorNodeDef, NodeAttributeValues, PropValue, VUtils} from '@rainbow-d9/n1';
-import React from 'react';
+import React, {ForwardedRef, forwardRef} from 'react';
 import {Calendar, CalendarProps} from '../calendar';
 
 /** Calendar configuration definition */
@@ -12,7 +12,7 @@ type UnwrappedCalendarProps =
 	visible?: boolean;
 };
 
-const UnwrappedCalendar = (props: UnwrappedCalendarProps) => {
+const UnwrappedCalendar = forwardRef((props: UnwrappedCalendarProps, ref: ForwardedRef<HTMLDivElement>) => {
 	const {$pp = 'value', value, onValueChange, disabled, visible, ...rest} = props;
 
 	const $onValueChange = onValueChange;
@@ -21,20 +21,21 @@ const UnwrappedCalendar = (props: UnwrappedCalendarProps) => {
 
 	return <Calendar {...rest} $wrapped={{$onValueChange, $avs, $root, $model: $root, $p2r: '.'}}
 	                 $pp={$pp}
-	                 id={rest.id ?? VUtils.generateUniqueId()}/>;
-};
+	                 id={rest.id ?? VUtils.generateUniqueId()}
+	                 ref={ref}/>;
+});
 
 type UnwrappedDateCalendarProps = Omit<UnwrappedCalendarProps, 'time' | 'timeFormat'>;
 
-const UnwrappedDateCalendar = (props: UnwrappedDateCalendarProps) => {
-	return <UnwrappedCalendar {...props} time={false}/>;
-};
+const UnwrappedDateCalendar = forwardRef((props: UnwrappedDateCalendarProps, ref: ForwardedRef<HTMLDivElement>) => {
+	return <UnwrappedCalendar {...props} time={false} ref={ref}/>;
+});
 
 type UnwrappedDateTimeCalendarProps = Omit<UnwrappedCalendarProps, 'time'>;
 
-const UnwrappedDateTimeCalendar = (props: UnwrappedDateTimeCalendarProps) => {
-	return <UnwrappedCalendar {...props} time={true}/>;
-};
+const UnwrappedDateTimeCalendar = forwardRef((props: UnwrappedDateTimeCalendarProps, ref: ForwardedRef<HTMLDivElement>) => {
+	return <UnwrappedCalendar {...props} time={true} ref={ref}/>;
+});
 
 export {
 	UnwrappedCalendar, UnwrappedCalendarProps,

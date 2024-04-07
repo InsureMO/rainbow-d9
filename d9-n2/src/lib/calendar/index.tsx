@@ -1,21 +1,22 @@
 import {registerWidget} from '@rainbow-d9/n1';
-import React from 'react';
+import React, {ForwardedRef, forwardRef} from 'react';
 import {CalendarEventBusProvider} from './event/calendar-event-bus';
 import {Picker} from './picker';
 import {CalendarDef, CalendarFixedTimeAt, CalendarProps} from './types';
 
-export const Calendar = (props: CalendarProps) => {
+export const Calendar = forwardRef((props: CalendarProps, ref: ForwardedRef<HTMLDivElement>) => {
 	return <CalendarEventBusProvider>
-		<Picker {...props} />
+		<Picker {...props} ref={ref}/>
 	</CalendarEventBusProvider>;
-};
+});
 
-export const DateCalendar = (props: Omit<CalendarProps, 'time' | 'timeFormat'>) => {
-	return <Calendar {...props} time={false}/>;
-};
-export const DateTimeCalendar = (props: Omit<CalendarProps, 'time' | 'fixedTimeAt'>) => {
-	return <Calendar {...props} time={true}/>;
-};
+export const DateCalendar = forwardRef((props: Omit<CalendarProps, 'time' | 'timeFormat'>, ref: ForwardedRef<HTMLDivElement>) => {
+	return <Calendar {...props} time={false} ref={ref}/>;
+});
+
+export const DateTimeCalendar = forwardRef((props: Omit<CalendarProps, 'time' | 'fixedTimeAt'>, ref: ForwardedRef<HTMLDivElement>) => {
+	return <Calendar {...props} time={true} ref={ref}/>;
+});
 
 export {CalendarProps, CalendarDef, CalendarFixedTimeAt};
 export * as CalendarConstants from './constants';

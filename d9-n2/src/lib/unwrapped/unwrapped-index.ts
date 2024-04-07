@@ -8,7 +8,14 @@ import {
 	UnwrappedDateTimeCalendar,
 	UnwrappedDateTimeCalendarProps
 } from './calendar';
-import {UnwrappedCaption, UnwrappedCaptionProps, UnwrappedLabel, UnwrappedLabelProps} from './caption';
+import {
+	UnwrappedBadge,
+	UnwrappedBadgeProps,
+	UnwrappedCaption,
+	UnwrappedCaptionProps,
+	UnwrappedLabel,
+	UnwrappedLabelProps
+} from './caption';
 import {UnwrappedCheckbox, UnwrappedCheckboxProps} from './checkbox';
 import {UnwrappedCheckboxes, UnwrappedCheckboxesProps} from './checkboxes';
 import {
@@ -38,7 +45,9 @@ import {UnwrappedTree, UnwrappedTreeProps} from './tree';
 import {UnwrappedWizard, UnwrappedWizardProps} from './wizard';
 
 export {
-	UnwrappedCaption, UnwrappedCaptionProps, UnwrappedLabel, UnwrappedLabelProps,
+	UnwrappedCaption, UnwrappedCaptionProps,
+	UnwrappedLabel, UnwrappedLabelProps,
+	UnwrappedBadge, UnwrappedBadgeProps,
 
 	UnwrappedInput, UnwrappedInputProps,
 	UnwrappedNumberInput, UnwrappedNumberInputProps,

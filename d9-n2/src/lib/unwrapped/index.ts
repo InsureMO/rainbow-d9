@@ -14,6 +14,8 @@ import {
 	UnwrappedDateTimeCalendarProps as DateTimeCalendarProps
 } from './calendar';
 import {
+	UnwrappedBadge as Badge,
+	UnwrappedBadgeProps as BadgeProps,
 	UnwrappedCaption as Caption,
 	UnwrappedCaptionProps as CaptionProps,
 	UnwrappedLabel as Label,
@@ -52,7 +54,7 @@ import {UnwrappedTree as Tree, UnwrappedTreeProps as TreeProps} from './tree';
 import {UnwrappedWizard as Wizard, UnwrappedWizardProps as WizardProps} from './wizard';
 
 export {
-	Caption, CaptionProps, Label, LabelProps,
+	Caption, CaptionProps, Label, LabelProps, Badge, BadgeProps,
 
 	Input, InputProps, NumberInput, NumberInputProps, PasswordInput, PasswordInputProps,
 	DecorateInput, DecorateInputProps, DecorateNumberInput, DecorateNumberInputProps,

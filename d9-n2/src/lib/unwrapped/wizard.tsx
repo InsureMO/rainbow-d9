@@ -1,5 +1,5 @@
 import {MonitorNodeDef, NodeAttributeValues, PropValue, VUtils} from '@rainbow-d9/n1';
-import React from 'react';
+import React, {ForwardedRef, forwardRef} from 'react';
 import {Wizard, WizardProps} from '../wizard';
 
 /** Wizard configuration definition */
@@ -7,7 +7,7 @@ type UnwrappedWizardProps =
 	Omit<WizardProps, 'disabled' | 'value' | '$wrapped' | keyof MonitorNodeDef>
 	& { value?: PropValue; visible?: boolean };
 
-const UnwrappedWizard = (props: UnwrappedWizardProps) => {
+const UnwrappedWizard = forwardRef((props: UnwrappedWizardProps, ref: ForwardedRef<HTMLDivElement>) => {
 	const {
 		$pp = 'value', value,
 		title, visible, ...rest
@@ -20,7 +20,8 @@ const UnwrappedWizard = (props: UnwrappedWizardProps) => {
 	return <Wizard {...rest} title={title}
 	               $wrapped={{$onValueChange, $avs, $root, $model: $root, $p2r: '.'}}
 	               $pp={$pp}
-	               id={rest.id ?? VUtils.generateUniqueId()}/>;
-};
+	               id={rest.id ?? VUtils.generateUniqueId()}
+	               ref={ref}/>;
+});
 
 export {UnwrappedWizard, UnwrappedWizardProps};

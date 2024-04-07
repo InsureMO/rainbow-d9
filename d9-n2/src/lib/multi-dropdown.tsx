@@ -9,7 +9,7 @@ import {
 	VUtils,
 	WidgetProps
 } from '@rainbow-d9/n1';
-import React, {MouseEvent, ReactNode} from 'react';
+import React, {ForwardedRef, forwardRef, MouseEvent, ReactNode} from 'react';
 import styled from 'styled-components';
 import {CssVars, DOM_KEY_WIDGET} from './constants';
 import {
@@ -33,6 +33,7 @@ import {
 	OptionItemsDef
 } from './option-items-assist';
 import {OmitHTMLProps, OmitNodeDef} from './types';
+import {useDualRefs} from './utils';
 
 export type MultiDropdownOptionValue = string | number;
 export type MultiDropdownValue = MultiDropdownOptionValue | Array<MultiDropdownOptionValue>;
@@ -205,7 +206,7 @@ const MultiOption = styled.span.attrs({[DOM_KEY_WIDGET]: 'd9-multi-dropdown-opti
     }
 `;
 
-export const MultiDropdown = (props: MultiDropdownProps) => {
+export const MultiDropdown = forwardRef((props: MultiDropdownProps, ref: ForwardedRef<HTMLDivElement>) => {
 	const {
 		// eslint-disable-next-line @typescript-eslint/no-unused-vars
 		options, optionSort, noAvailable, noMatched,
@@ -225,6 +226,7 @@ export const MultiDropdown = (props: MultiDropdownProps) => {
 		onClicked, onFocused, onKeyUp, onFilterChanged
 	} = useFilterableDropdownOptions(props);
 	const forceUpdate = useForceUpdate();
+	useDualRefs(containerRef, ref);
 
 	const currentValuesToArray = (): Array<MultiDropdownOptionValue> => {
 		const values = MUtils.getValue($model, $pp) as MultiDropdownValue;
@@ -326,12 +328,13 @@ export const MultiDropdown = (props: MultiDropdownProps) => {
 	const deviceTags = MBUtils.pickDeviceTags(props);
 
 	return <MultiDropdownContainer active={popupState.active} atBottom={popupState.atBottom}
-	                               ref={containerRef} role="input" tabIndex={0}
+	                               role="input" tabIndex={0}
 	                               {...rest}
 	                               data-w="d9-multi-dropdown"
 	                               data-disabled={$disabled} data-visible={$visible}
 	                               onFocus={onFocused} onClick={onClicked}
-	                               id={PPUtils.asId(PPUtils.absolute($p2r, $pp), props.id)}>
+	                               id={PPUtils.asId(PPUtils.absolute($p2r, $pp), props.id)}
+	                               ref={containerRef}>
 		{values.map(value => {
 			const v = `${value}`;
 			return <MultiDropdownLabel data-please={false} key={v}>
@@ -364,7 +367,7 @@ export const MultiDropdown = (props: MultiDropdownProps) => {
 			</DropdownPopup>
 			: null}
 	</MultiDropdownContainer>;
-};
+});
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore

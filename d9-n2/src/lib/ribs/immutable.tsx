@@ -1,5 +1,5 @@
 import {registerWidget, WidgetRegistrationOptions} from '@rainbow-d9/n1';
-import React from 'react';
+import React, {ForwardedRef, forwardRef} from 'react';
 import {RibNoData} from './rib-no-data';
 import {Ribs} from './ribs';
 import {ImmutableRibRowProps, ImmutableRibsProps} from './types';
@@ -13,13 +13,13 @@ export const ImmutableRibRow = (props: ImmutableRibRowProps) => {
 	</ARibRow>;
 };
 
-export const ImmutableRibs = (props: ImmutableRibsProps) => {
+export const ImmutableRibs = forwardRef((props: ImmutableRibsProps, ref: ForwardedRef<HTMLDivElement>) => {
 	const {$array, children, ...rest} = props;
 
-	return <Ribs $array={{...$array, addable: false, removable: false}} {...rest}>
+	return <Ribs $array={{...$array, addable: false, removable: false}} {...rest} ref={ref}>
 		{children}
 	</Ribs>;
-};
+});
 
 registerWidget({
 	key: 'RibsView', JSX: ImmutableRibs, NO_ELEMENT: RibNoData, ELEMENT: ImmutableRibRow, container: true, array: true

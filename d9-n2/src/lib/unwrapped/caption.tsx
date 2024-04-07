@@ -1,6 +1,6 @@
 import {MonitorNodeDef, NodeAttributeValues, VUtils} from '@rainbow-d9/n1';
 import React, {ForwardedRef, forwardRef, ReactNode} from 'react';
-import {Caption, CaptionProps, Label, LabelProps} from '../caption';
+import {Badge, BadgeProps, Caption, CaptionProps, Label, LabelProps} from '../caption';
 
 /** Caption configuration definition */
 type UnwrappedCaptionProps =
@@ -51,4 +51,32 @@ const UnwrappedLabel = forwardRef((props: UnwrappedLabelProps, ref: ForwardedRef
 	              ref={ref}/>;
 });
 
-export {UnwrappedCaption, UnwrappedCaptionProps, UnwrappedLabel, UnwrappedLabelProps};
+type UnwrappedBadgeProps =
+	Omit<BadgeProps, 'labelOnValue' | 'valueToLabel' | '$wrapped' | keyof MonitorNodeDef>
+	& {
+	children?: ReactNode;
+	disabled?: boolean;
+	visible?: boolean;
+};
+
+const UnwrappedBadge = forwardRef((props: UnwrappedBadgeProps, ref: ForwardedRef<HTMLSpanElement>) => {
+	const {
+		children, disabled, visible, ...rest
+	} = props;
+
+	const $onValueChange = VUtils.noop;
+	const $avs = {$disabled: disabled, $visible: visible} as NodeAttributeValues;
+	const $root = {};
+
+	return <Badge {...rest}
+	              $wrapped={{$onValueChange, $avs, $root, $model: $root, $p2r: '.'}}
+	              label={children}
+	              id={rest.id ?? VUtils.generateUniqueId()}
+	              ref={ref}/>;
+});
+
+export {
+	UnwrappedCaption, UnwrappedCaptionProps,
+	UnwrappedLabel, UnwrappedLabelProps,
+	UnwrappedBadge, UnwrappedBadgeProps
+};

@@ -7,7 +7,7 @@ import {
 	ValueChangeableNodeDef,
 	WidgetProps
 } from '@rainbow-d9/n1';
-import React, {MouseEvent, ReactNode} from 'react';
+import React, {ForwardedRef, forwardRef, MouseEvent, ReactNode} from 'react';
 import styled from 'styled-components';
 import {CssVars, DOM_KEY_WIDGET} from './constants';
 import {
@@ -31,6 +31,7 @@ import {
 	OptionItemSort
 } from './option-items-assist';
 import {OmitHTMLProps, OmitNodeDef} from './types';
+import {useDualRefs} from './utils';
 
 export type DropdownOptionValue = string | number | boolean;
 export type DropdownOption = OptionItem<DropdownOptionValue>;
@@ -128,7 +129,7 @@ const Option = styled.span.attrs({[DOM_KEY_WIDGET]: 'd9-dropdown-option'})`
     }
 `;
 
-export const Dropdown = (props: DropdownProps) => {
+export const Dropdown = forwardRef((props: DropdownProps, ref: ForwardedRef<HTMLDivElement>) => {
 	const {
 		// eslint-disable-next-line @typescript-eslint/no-unused-vars
 		options, optionSort, noAvailable, noMatched,
@@ -146,6 +147,7 @@ export const Dropdown = (props: DropdownProps) => {
 		popupRef, popupShown, setPopupShown, afterPopupStateChanged,
 		onClicked, onFocused, onKeyUp, onFilterChanged
 	} = useFilterableDropdownOptions(props);
+	useDualRefs(containerRef, ref);
 	const forceUpdate = useForceUpdate();
 
 	const onOptionClicked = (option: DropdownOption) => async (event: MouseEvent<HTMLSpanElement>) => {
@@ -189,12 +191,13 @@ export const Dropdown = (props: DropdownProps) => {
 	const deviceTags = MBUtils.pickDeviceTags(props);
 
 	return <DropdownContainer active={popupState.active} atBottom={popupState.atBottom}
-	                          ref={containerRef} role="input" tabIndex={0}
+	                          role="input" tabIndex={0}
 	                          {...rest}
 	                          data-w="d9-dropdown"
 	                          data-disabled={$disabled} data-visible={$visible}
 	                          onFocus={onFocused} onClick={onClicked}
-	                          id={PPUtils.asId(PPUtils.absolute($p2r, $pp), props.id)}>
+	                          id={PPUtils.asId(PPUtils.absolute($p2r, $pp), props.id)}
+	                          ref={containerRef}>
 		<DropdownLabel data-please={!selected}>{toIntlLabel(label)}</DropdownLabel>
 		<DropdownStick valueAssigned={selected} clearable={clearable} clear={onClearClicked} disabled={$disabled}/>
 		{isDropdownPopupActive(popupState.active)
@@ -218,7 +221,7 @@ export const Dropdown = (props: DropdownProps) => {
 			</DropdownPopup>
 			: null}
 	</DropdownContainer>;
-};
+});
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore

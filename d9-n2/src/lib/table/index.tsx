@@ -1,5 +1,5 @@
 import {registerWidget, WidgetRegistrationOptions} from '@rainbow-d9/n1';
-import React from 'react';
+import React, {ForwardedRef, forwardRef} from 'react';
 import {TableEventBusProvider} from './event/table-event-bus';
 import {Table as T} from './table';
 import {TableBottomBar} from './table-bottom-bar';
@@ -8,14 +8,14 @@ import {TableNoData} from './table-no-data';
 import {TableRow} from './table-row';
 import {TableDef, TableHeaderDef, TableProps, TableRowButtonDef} from './types';
 
-export const Table = (props: TableProps) => {
+export const Table = forwardRef((props: TableProps, ref: ForwardedRef<HTMLDivElement>) => {
 	const {children, ...rest} = props;
 	return <TableEventBusProvider>
-		<T {...rest}>
+		<T {...rest} ref={ref}>
 			{children}
 		</T>
 	</TableEventBusProvider>;
-};
+});
 
 registerWidget({
 	key: 'Table', JSX: Table,
