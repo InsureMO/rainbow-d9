@@ -693,9 +693,9 @@ Built-in name mapping as below,
 | property, $pp                     | property path | No                             | `- property: name`<br/>`- property: customer.name`                                           |
 | disabled, $disabled               | boolean       | No                             | `- disabled`                                                                                 |
 | visible, $visible                 | boolean       | No                             | `- visible: false`                                                                           |
-| validate, $valid                  | various       | No                             | **Not supported yet**                                                                        |
+| validate, $valid                  | various       | No                             |                                                                                              |
 | validateScopes, $validationScopes | text          | No                             | `- validateScopes: s1, s2`<br/>Define the applicable validation scopes.                      |
-| watch, $reaction                  | various       | No                             | **Not supported yet**                                                                        |
+| watch, $reaction                  | various       | No                             |                                                                                              |
 | place, position, pos, $pos        | various       | No                             | Refer to [Position](#position)                                                               |
 | $fc                               | boolean       | No                             | `- $fc`<br/>Force current widget wrapped by a form cell.                                     |
 | label                             | text          | No                             | `- Section::Customer`<br/>`- label: Customer`<br/>Works when widget is wrapped by form cell. |
@@ -858,13 +858,13 @@ A container, default use flex layout.
 
 ### Tab
 
-| Attribute Name | Type     | Description                                         |
-|----------------|----------|-----------------------------------------------------|
-| title          | text     | Tab title.                                          |
-| marker         | text     | Tab marker, global unique.                          |
-| badge          | text     | Tab title badge.                                    |
-| body           | function | From external definition only, starts with `@ext.`. |
-| data           | function | From external definition only, starts with `@ext.`. |
+| Attribute Name | Type     | Description                |
+|----------------|----------|----------------------------|
+| title          | text     | Tab title.                 |
+| marker         | text     | Tab marker, global unique. |
+| badge          | text     | Tab title badge.           |
+| body           | function |                            |
+| data           | function |                            |
 
 > `title` and `badge` attribute follows the `label` default parsing behavior.
 
@@ -892,12 +892,12 @@ The configuration of tab content is the same as `Section`, except follows,
 
 ### Wizard Step (WStep)
 
-| Attribute Name | Type     | Description                                         |
-|----------------|----------|-----------------------------------------------------|
-| title          | text     | Tab title.                                          |
-| marker         | text     | Tab marker, global unique.                          |
-| body           | function | From external definition only, starts with `@ext.`. |
-| data           | function | From external definition only, starts with `@ext.`. |
+| Attribute Name | Type     | Description                |
+|----------------|----------|----------------------------|
+| title          | text     | Tab title.                 |
+| marker         | text     | Tab marker, global unique. |
+| body           | function |                            |
+| data           | function |                            |
 
 > `title` attribute follows the `label` default parsing behavior.
 
@@ -1382,21 +1382,21 @@ Some examples:
 - Default Wrapped by Form Cell: `false`,
 - Default Grid Column Span: `12`.
 
-| Attribute Name        | Type     | Description                                                                           |
-|-----------------------|----------|---------------------------------------------------------------------------------------|
-| elementTitle, caption | various  | Ref to form cell `label` definition.                                                  |
-| noElementReminder     | text     | `- noElementReminder: No Data`                                                        |
-| addable               | boolean  | `- !addable`.<br/>Not available for `RibsView`.                                       |
-| addLabel              | text     | `- addLabel: Create New One`.<br/>Not available for `RibsView`.                       |
-| couldAddElement       | function | From external definition only, starts with `@ext.`.<br/>Not available for `RibsView`. |
-| disableOnCannotAdd    | boolean  | `- disableOnCannotAdd`.<br/>Not available for `RibsView`.                             |
-| elementAdded          | function | From external definition only, starts with `@ext.`.<br/>Not available for `RibsView`. |
-| createElement         | function | From external definition only, starts with `@ext.`.<br/>Not available for `RibsView`. |
-| removable             | boolean  | `- !removable`.<br/>Not available for `RibsView`.                                     |
-| removeLabel           | text     | `- removeLabel: Remove This One`.<br/>Not available for `RibsView`.                   |
-| elementRemoved        | function | From external definition only, starts with `@ext.`.<br/>Not available for `RibsView`. |
-| couldRemoveElement    | function | From external definition only, starts with `@ext.`.<br/>Not available for `RibsView`. |
-| getElementKey         | function | From external definition only, starts with `@ext.`.                                   |
+| Attribute Name        | Type     | Description                                                         |
+|-----------------------|----------|---------------------------------------------------------------------|
+| elementTitle, caption | various  | Ref to form cell `label` definition.                                |
+| noElementReminder     | text     | `- noElementReminder: No Data`                                      |
+| addable               | boolean  | `- !addable`.<br/>Not available for `RibsView`.                     |
+| addLabel              | text     | `- addLabel: Create New One`.<br/>Not available for `RibsView`.     |
+| couldAddElement       | function | Not available for `RibsView`.                                       |
+| disableOnCannotAdd    | boolean  | `- disableOnCannotAdd`.<br/>Not available for `RibsView`.           |
+| elementAdded          | function | Not available for `RibsView`.                                       |
+| createElement         | function | Not available for `RibsView`.                                       |
+| removable             | boolean  | `- !removable`.<br/>Not available for `RibsView`.                   |
+| removeLabel           | text     | `- removeLabel: Remove This One`.<br/>Not available for `RibsView`. |
+| elementRemoved        | function | Not available for `RibsView`.                                       |
+| couldRemoveElement    | function | Not available for `RibsView`.                                       |
+| getElementKey         | function |                                                                     |
 
 ### Syntax of `elementTitle` and `caption`
 
@@ -1441,13 +1441,13 @@ Some examples:
 | noElementReminder            | text                      | `- noElementReminder: No Data`                                                                                                                                                                                       |
 | addable                      | boolean                   | `- !addable`<br/>Not available for `RibsView`.                                                                                                                                                                       |
 | addLabel                     | text                      | `- addLabel: Create New One`                                                                                                                                                                                         |
-| elementAdded                 | function                  | From external definition only, starts with `@ext.`.<br/>Not available for `RibsView`.                                                                                                                                |
-| createElement                | function                  | From external definition only, starts with `@ext.`.<br/>Not available for `RibsView`.                                                                                                                                |
+| elementAdded                 | function                  | Not available for `RibsView`.                                                                                                                                                                                        |
+| createElement                | function                  | Not available for `RibsView`.                                                                                                                                                                                        |
 | removable                    | boolean                   | `- !removable`.<br/>Not available for `RibsView`.                                                                                                                                                                    |
 | removeLabel                  | text                      | `- removeLabel: Remove This One`.<br/>Not available for `RibsView`.                                                                                                                                                  |
-| elementRemoved               | function                  | From external definition only, starts with `@ext.`.<br/>Not available for `RibsView`.                                                                                                                                |
-| couldRemoveElement           | function                  | From external definition only, starts with `@ext.`.<br/>Not available for `RibsView`.                                                                                                                                |
-| getElementKey                | function                  | From external definition only, starts with `@ext.`.                                                                                                                                                                  |
+| elementRemoved               | function                  | Not available for `RibsView`.                                                                                                                                                                                        |
+| couldRemoveElement           | function                  | Not available for `RibsView`.                                                                                                                                                                                        |
+| getElementKey                | function                  |                                                                                                                                                                                                                      |
 | Pagination                   | various                   |                                                                                                                                                                                                                      |
 
 ### Syntax of `headers`
