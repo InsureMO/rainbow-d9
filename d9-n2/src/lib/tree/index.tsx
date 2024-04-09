@@ -81,3 +81,7 @@ export const Tree = forwardRef((props: TreeProps, ref: ForwardedRef<HTMLDivEleme
 registerWidget({key: 'Tree', JSX: Tree, container: false, array: false});
 
 export * from './types';
+export * from './event/tree-event-bus';
+export * from './event/tree-event-bus-types';
+export * from './event/tree-node-event-bus';
+export * from './event/tree-node-event-bus-types';
