@@ -31,9 +31,9 @@ export const InternalTree = forwardRef((props: TreeProps, ref: ForwardedRef<HTML
 			}
 			forceUpdate();
 		};
-		on(GlobalEventTypes.CUSTOM_EVENT, onCustomEvent);
+		on && on(GlobalEventTypes.CUSTOM_EVENT, onCustomEvent);
 		return () => {
-			off(GlobalEventTypes.CUSTOM_EVENT, onCustomEvent);
+			off && off(GlobalEventTypes.CUSTOM_EVENT, onCustomEvent);
 		};
 	}, [on, off, forceUpdate, marker]);
 	const markers = useMarker();

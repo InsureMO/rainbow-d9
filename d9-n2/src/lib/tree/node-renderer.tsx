@@ -186,7 +186,7 @@ export const TreeNodeRenderer = (props: TreeNodeRendererProps) => {
 		const key = `${GlobalEventPrefix.TREE_NODE_CLICKED}:${clipped}`;
 		// eslint-disable-next-line  @typescript-eslint/ban-ts-comment
 		// @ts-ignore
-		fireGlobal(GlobalEventTypes.CUSTOM_EVENT, key, GlobalEventPrefix.TREE_NODE_CLICKED, clipped, {
+		fireGlobal && fireGlobal(GlobalEventTypes.CUSTOM_EVENT, key, GlobalEventPrefix.TREE_NODE_CLICKED, clipped, {
 			root: $wrapped.$root, model: $wrapped.$model, value: node.value
 		});
 	};

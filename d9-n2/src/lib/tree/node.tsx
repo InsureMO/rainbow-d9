@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Fragment} from 'react';
 import {ChildTreeNodes} from './child-nodes';
 import {TreeNodeEventBusProvider, useTreeNodeEventBus} from './event/tree-node-event-bus';
 import {TreeNodeEventTypes} from './event/tree-node-event-bus-types';
@@ -20,10 +20,17 @@ export interface TreeNodeProps {
 	level: number;
 }
 
+const TreeNodeRefresher = (props: Pick<TreeNodeProps, 'node' | '$wrapped'>) => {
+	const {node, $wrapped} = props;
+
+	useRefreshTreeNode(node, $wrapped);
+
+	return <Fragment/>;
+};
+
 export const TreeNode = (props: TreeNodeProps) => {
 	const {initExpandLevel, showIndex, $wrapped, node, displayIndex, lastOfParent, level} = props;
 
-	useRefreshTreeNode(node, $wrapped);
 	const {fire} = useTreeNodeEventBus();
 
 	// bridge event to me
@@ -35,6 +42,7 @@ export const TreeNode = (props: TreeNodeProps) => {
 	const nodeRemoved = (removedNode: TreeNodeDef) => fire && fire(TreeNodeEventTypes.REFRESH_CHILD_NODES_ON_REMOVED, node.marker, removedNode);
 
 	return <TreeNodeEventBusProvider>
+		<TreeNodeRefresher node={node} $wrapped={$wrapped}/>
 		<TreeNodeEventBridge node={node}
 		                     expandParent={expandParent} nodeCheckedChanged={nodeCheckedChanged}
 		                     nodeRemoved={nodeRemoved}/>
