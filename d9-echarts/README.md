@@ -54,6 +54,8 @@ properties and calls `mergeData` to merge the data into echarts options, and the
 	  ```
 ```
 
+> Chart will not respond reaction repaint, to notify chart repaint, fire value changed event by root event bus.
+
 ## Autonomous Chart
 
 On top of Basic Chart, the following properties are added:
