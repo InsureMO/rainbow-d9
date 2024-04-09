@@ -38,6 +38,14 @@
 	  options.series[0].data = data;
 	  return options;
 	  ```
+- Button::
+	- text: Random Data
+	- click:
+	  ```javascript
+	  const {first: oldFirst, second: oldSecond} = options.model;
+	  options.model.first = new Array(7).fill(0).map(() => Math.ceil(Math.random() * 100));
+	  options.global.root.fire('value-changed', '/first', oldFirst, options.model.first);
+	  ```
 
 ### Section::## 10.2 Autonomous Chart
 

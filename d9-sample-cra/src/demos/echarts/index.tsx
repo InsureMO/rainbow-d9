@@ -13,7 +13,7 @@ export const ECharts = () => {
 
 	const externalDefs = {
 		mergeData: {
-			first: (options: EChartsOption, data: any) => {
+			first: (_options: EChartsOption, data: any) => {
 				return {
 					xAxis: {type: 'category', data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']},
 					yAxis: {type: 'value'},

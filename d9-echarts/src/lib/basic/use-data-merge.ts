@@ -1,4 +1,4 @@
-import {MUtils, useWrapperEventBus, WrapperEventTypes} from '@rainbow-d9/n1';
+import {MUtils, PPUtils, PropertyPath, RootEventTypes, useRootEventBus} from '@rainbow-d9/n1';
 import {GlobalEventTypes, useGlobalEventBus} from '@rainbow-d9/n2';
 import {getInstanceByDom} from 'echarts';
 import {MutableRefObject, useEffect} from 'react';
@@ -12,7 +12,7 @@ export const useDataMerge = (ref: MutableRefObject<HTMLDivElement>, domInitializ
 	} = props;
 
 	const {on, off} = useGlobalEventBus();
-	const {on: onWrapper, off: offWrapper} = useWrapperEventBus();
+	const {on: onRoot, off: offRoot} = useRootEventBus();
 	useEffect(() => {
 		if (!domInitialized || ref.current == null) {
 			return;
@@ -39,12 +39,17 @@ export const useDataMerge = (ref: MutableRefObject<HTMLDivElement>, domInitializ
 			}
 			await refreshChart();
 		};
-		const onUnhandledReactionOccurred = async () => await refreshChart();
+		const onValueChanged = async (absolutePath: PropertyPath) => {
+			if (!PPUtils.matches(absolutePath, PPUtils.absolute($p2r, $pp))) {
+				return;
+			}
+			await refreshChart();
+		};
 		on && on(GlobalEventTypes.CUSTOM_EVENT, onCustomEvent);
-		onWrapper && onWrapper(WrapperEventTypes.REPAINT, onUnhandledReactionOccurred);
+		onRoot && onRoot(RootEventTypes.VALUE_CHANGED, onValueChanged);
 		return () => {
-			offWrapper && offWrapper(WrapperEventTypes.REPAINT, onUnhandledReactionOccurred);
+			offRoot && offRoot(RootEventTypes.VALUE_CHANGED, onValueChanged);
 			off && off(GlobalEventTypes.CUSTOM_EVENT, onCustomEvent);
 		};
-	}, [on, off, domInitialized, ref, $p2r, $pp, $model, options, settings, marker, mergeData]);
+	}, [on, off, onRoot, offRoot, domInitialized, ref, $p2r, $pp, $model, options, settings, marker, mergeData]);
 };
