@@ -45,7 +45,7 @@ export type ChartProps = OmitNodeDef<ChartDef> & WidgetProps;
 /**
  * return this to refresh chart
  */
-export const REACTION_REFRESH_CHART = 'reaction-refresh-chart';
+export const REACTION_REFRESH_CHART = 'refresh-chart';
 
 export enum ChartGlobalEventPrefix {
 	DATA_CHANGED = 'chart-data-changed',

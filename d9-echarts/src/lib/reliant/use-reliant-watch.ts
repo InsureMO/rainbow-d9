@@ -1,4 +1,4 @@
-import {useThrottler, useWrapperEventBus, WrapperEventTypes} from '@rainbow-d9/n1';
+import {MUtils, useThrottler, useWrapperEventBus, WrapperEventTypes} from '@rainbow-d9/n1';
 import {useGlobalHandlers} from '@rainbow-d9/n2';
 import {getInstanceByDom} from 'echarts';
 import {MutableRefObject, useEffect} from 'react';
@@ -33,6 +33,7 @@ export const useReliantWatch = (ref: MutableRefObject<HTMLDivElement>, domInitia
 				const chart = getInstanceByDom(ref.current);
 				const data = await fetchData({global: globalHandlers, marker, root: $root, model: $model});
 				if (data != null) {
+					MUtils.setValue($model, $pp, data);
 					const optionsWithData = await mergeData(askOptions(options), data);
 					chart.setOption(optionsWithData, askSettings(settings));
 					// no matter the loading is shown or not, hide it
