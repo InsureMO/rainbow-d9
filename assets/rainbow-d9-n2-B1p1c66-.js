@@ -4,10 +4,10 @@ var __publicField = (obj, key, value) => {
   __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
   return value;
 };
-import { a as color, M as MaskedNumber, e as MaskedDate, g as MaskedFunction, j as MaskedPattern, k as MaskedRange, l as MaskedRegExp, o as MaskedDynamic } from "./vendor-GnqsCPvZ.js";
-import { R as React, r as reactExports, u as useIMask } from "./react-vOk3zbLj.js";
-import { V as VUtils, P as PPUtils, r as registerWidget, c as createLogger, u as useRootEventBus, M as MUtils, N as NUtils, d as Wrapper, e as useForceUpdate, f as MBUtils, b as useWrapperEventBus, W as WrapperEventTypes, g as useCreateEventBus, h as useDefaultAttributeValues, i as PROPERTY_PATH_ME, j as useAttributesWatch, R as RootEventTypes } from "./rainbow-d9-n1-dluxXI2Z.js";
-import { q as qe, W as We } from "./styled-components-TNyvyyVE.js";
+import { a as color, M as MaskedNumber, e as MaskedDate, g as MaskedFunction, j as MaskedPattern, k as MaskedRange, l as MaskedRegExp, o as MaskedDynamic } from "./vendor-eKuzgVh0.js";
+import { R as React, r as reactExports, u as useIMask } from "./react-TxEOKHxf.js";
+import { V as VUtils, P as PPUtils, r as registerWidget, c as createLogger, u as useRootEventBus, M as MUtils, N as NUtils, d as Wrapper, e as useForceUpdate, f as MBUtils, b as useWrapperEventBus, W as WrapperEventTypes, g as useCreateEventBus, h as useDefaultAttributeValues, i as PROPERTY_PATH_ME, j as useAttributesWatch, R as RootEventTypes } from "./rainbow-d9-n1-Pek24I_w.js";
+import { q as qe, W as We } from "./styled-components-00p-3yGi.js";
 import { d as dayjs } from "./dayjs-9Z7dW0Q-.js";
 const DOM_KEY_WIDGET = "data-w";
 const DOM_ID_WIDGET = "data-wid";
@@ -7810,7 +7810,7 @@ const TreeNodeRenderer = (props) => {
     node.click && node.click(node, { global: globalHandlers });
     const clipped = node.marker;
     const key = `${GlobalEventPrefix.TREE_NODE_CLICKED}:${clipped}`;
-    fireGlobal(GlobalEventTypes.CUSTOM_EVENT, key, GlobalEventPrefix.TREE_NODE_CLICKED, clipped, {
+    fireGlobal && fireGlobal(GlobalEventTypes.CUSTOM_EVENT, key, GlobalEventPrefix.TREE_NODE_CLICKED, clipped, {
       root: $wrapped.$root,
       model: $wrapped.$model,
       value: node.value
@@ -7936,27 +7936,27 @@ const useRefreshTreeNode = (node, $wrapped) => {
       }
       switch (prefix) {
         case GlobalEventPrefix.REFRESH_TREE_NODE:
-          fire(TreeNodeEventTypes.REFRESH_NODE, node.marker);
+          fire && fire(TreeNodeEventTypes.REFRESH_NODE, node.marker);
           break;
         case GlobalEventPrefix.REFRESH_TREE_CHILD_NODES:
-          fire(TreeNodeEventTypes.REFRESH_CHILD_NODES, node.marker, false);
+          fire && fire(TreeNodeEventTypes.REFRESH_CHILD_NODES, node.marker, false);
           break;
         case GlobalEventPrefix.RECALC_TREE_CHILD_NODES:
-          fire(TreeNodeEventTypes.REFRESH_CHILD_NODES, node.marker, true);
+          fire && fire(TreeNodeEventTypes.REFRESH_CHILD_NODES, node.marker, true);
           break;
         case GlobalEventPrefix.REFRESH_TREE_NODE_AND_CHILDREN:
-          fire(TreeNodeEventTypes.REFRESH_NODE, node.marker);
-          fire(TreeNodeEventTypes.REFRESH_CHILD_NODES, node.marker, false);
+          fire && fire(TreeNodeEventTypes.REFRESH_NODE, node.marker);
+          fire && fire(TreeNodeEventTypes.REFRESH_CHILD_NODES, node.marker, false);
           break;
         case GlobalEventPrefix.RECALC_TREE_NODE_AND_CHILDREN:
-          fire(TreeNodeEventTypes.REFRESH_NODE, node.marker);
-          fire(TreeNodeEventTypes.REFRESH_CHILD_NODES, node.marker, true);
+          fire && fire(TreeNodeEventTypes.REFRESH_NODE, node.marker);
+          fire && fire(TreeNodeEventTypes.REFRESH_CHILD_NODES, node.marker, true);
           break;
         case GlobalEventPrefix.EXPAND_TREE_NODE:
-          fire(TreeNodeEventTypes.SWITCH_MY_EXPAND, node.marker, true);
+          fire && fire(TreeNodeEventTypes.SWITCH_MY_EXPAND, node.marker, true);
           break;
         case GlobalEventPrefix.COLLAPSE_TREE_NODE:
-          fire(TreeNodeEventTypes.SWITCH_MY_EXPAND, node.marker, false);
+          fire && fire(TreeNodeEventTypes.SWITCH_MY_EXPAND, node.marker, false);
           break;
       }
     };
@@ -7966,9 +7966,13 @@ const useRefreshTreeNode = (node, $wrapped) => {
     };
   }, [onGlobal, offGlobal, fire, node, $wrapped]);
 };
+const TreeNodeRefresher = (props) => {
+  const { node, $wrapped } = props;
+  useRefreshTreeNode(node, $wrapped);
+  return React.createElement(reactExports.Fragment, null);
+};
 const TreeNode = (props) => {
   const { initExpandLevel, showIndex, $wrapped, node, displayIndex, lastOfParent, level } = props;
-  useRefreshTreeNode(node, $wrapped);
   const { fire } = useTreeNodeEventBus();
   const expandParent = (expanded) => fire && fire(TreeNodeEventTypes.SWITCH_MY_EXPAND_FROM_CHILD, node.marker, expanded);
   const nodeCheckedChanged = (checked) => fire && fire(TreeNodeEventTypes.SWITCH_MY_CHECKED_FROM_CHILD, node.marker, checked);
@@ -7976,6 +7980,7 @@ const TreeNode = (props) => {
   return React.createElement(
     TreeNodeEventBusProvider,
     null,
+    React.createElement(TreeNodeRefresher, { node, "$wrapped": $wrapped }),
     React.createElement(TreeNodeEventBridge, { node, expandParent, nodeCheckedChanged, nodeRemoved }),
     React.createElement(
       TreeNodeWrapper,
@@ -8213,9 +8218,9 @@ const InternalTree = reactExports.forwardRef((props, ref) => {
       }
       forceUpdate();
     };
-    on(GlobalEventTypes.CUSTOM_EVENT, onCustomEvent);
+    on && on(GlobalEventTypes.CUSTOM_EVENT, onCustomEvent);
     return () => {
-      off(GlobalEventTypes.CUSTOM_EVENT, onCustomEvent);
+      off && off(GlobalEventTypes.CUSTOM_EVENT, onCustomEvent);
     };
   }, [on, off, forceUpdate, marker]);
   const markers = useMarker();
