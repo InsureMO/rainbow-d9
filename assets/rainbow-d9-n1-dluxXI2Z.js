@@ -4,8 +4,8 @@ var __publicField = (obj, key, value) => {
   __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
   return value;
 };
-import { b as buffer, n as nanoid, E as EventEmitter } from "./vendor-rivyrZcp.js";
-import { r as reactExports, R as React } from "./react-LaGzILSN.js";
+import { b as buffer, n as nanoid, E as EventEmitter } from "./vendor-GnqsCPvZ.js";
+import { r as reactExports, R as React } from "./react-vOk3zbLj.js";
 const VUtils = {
   isEmpty: (v) => v == null || typeof v === "string" && v.length === 0,
   isNotEmpty: (v) => (v ?? "") !== "",
@@ -1841,15 +1841,15 @@ export {
   StandaloneRoot as S,
   VUtils as V,
   WrapperEventTypes as W,
-  useWrapperEventBus as a,
-  useRootEventBus as b,
+  useThrottler as a,
+  useWrapperEventBus as b,
   createLogger as c,
   Wrapper as d,
   useForceUpdate as e,
   MBUtils as f,
   useCreateEventBus as g,
-  PROPERTY_PATH_ME as h,
-  useDefaultAttributeValues as i,
+  useDefaultAttributeValues as h,
+  PROPERTY_PATH_ME as i,
   useAttributesWatch as j,
   MonitorNodeAttributes as k,
   Reaction as l,
@@ -1858,5 +1858,5 @@ export {
   useBridgeEventBus as o,
   BridgeToRootEventTypes as p,
   registerWidget as r,
-  useThrottler as u
+  useRootEventBus as u
 };

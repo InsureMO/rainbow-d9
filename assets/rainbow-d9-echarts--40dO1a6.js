@@ -1,10 +1,10 @@
-import { V as VUtils, r as registerWidget, M as MUtils, u as useThrottler, a as useWrapperEventBus, W as WrapperEventTypes } from "./rainbow-d9-n1-8J3kRsTf.js";
+import { V as VUtils, r as registerWidget, M as MUtils, u as useRootEventBus, R as RootEventTypes, a as useThrottler, b as useWrapperEventBus, W as WrapperEventTypes, P as PPUtils } from "./rainbow-d9-n1-dluxXI2Z.js";
 import { i as init, g as getInstanceByDom } from "./echarts-v5L9gyiQ.js";
-import { r as reactExports, R as React } from "./react-LaGzILSN.js";
-import { D as DOM_KEY_WIDGET, a as DOM_ID_WIDGET, u as useGlobalEventBus, G as GlobalEventTypes, b as useGlobalHandlers } from "./rainbow-d9-n2-lHDB7iAN.js";
-import { q as qe } from "./styled-components-gKUigm2L.js";
-import { i as index$1 } from "./rainbow-d9-n3-9PkjDp5m.js";
-const REACTION_REFRESH_CHART = "reaction-refresh-chart";
+import { r as reactExports, R as React } from "./react-vOk3zbLj.js";
+import { D as DOM_KEY_WIDGET, a as DOM_ID_WIDGET, u as useGlobalEventBus, G as GlobalEventTypes, b as useGlobalHandlers } from "./rainbow-d9-n2-abjls-Ux.js";
+import { q as qe } from "./styled-components-TNyvyyVE.js";
+import { i as index$1 } from "./rainbow-d9-n3--hniEqWx.js";
+const REACTION_REFRESH_CHART = "refresh-chart";
 var ChartGlobalEventPrefix;
 (function(ChartGlobalEventPrefix2) {
   ChartGlobalEventPrefix2["DATA_CHANGED"] = "chart-data-changed";
@@ -97,34 +97,47 @@ const useResize = (ref, domInitialized) => {
   }, [domInitialized, ref]);
 };
 const useDataMerge = (ref, domInitialized, marker, props) => {
-  const { $pp, $wrapped: { $model }, options, settings, mergeData } = props;
+  const { $pp, $wrapped: { $model, $p2r }, options, settings, mergeData } = props;
   const { on, off } = useGlobalEventBus();
+  const { on: onRoot, off: offRoot } = useRootEventBus();
   reactExports.useEffect(() => {
     if (!domInitialized || ref.current == null) {
       return;
     }
-    const onCustomEvent = (_, prefix, clipped) => {
+    const refreshChart = async () => {
+      if (ref.current == null) {
+        return;
+      }
+      const chart = getInstanceByDom(ref.current);
+      const data = MUtils.getValue($model, $pp);
+      if (data != null) {
+        const optionsWithData = await mergeData(askOptions(options), data);
+        chart.setOption(optionsWithData, askSettings(settings));
+        chart.hideLoading();
+      }
+    };
+    const onCustomEvent = async (_, prefix, clipped) => {
       if (clipped !== marker) {
         return;
       }
       if (prefix !== ChartGlobalEventPrefix.DATA_CHANGED) {
         return;
       }
-      const chart = getInstanceByDom(ref.current);
-      const data = MUtils.getValue($model, $pp);
-      (async () => {
-        if (data != null) {
-          const optionsWithData = await mergeData(askOptions(options), data);
-          chart.setOption(optionsWithData, askSettings(settings));
-          chart.hideLoading();
-        }
-      })();
+      await refreshChart();
+    };
+    const onValueChanged = async (absolutePath) => {
+      if (!PPUtils.matches(absolutePath, PPUtils.absolute($p2r, $pp))) {
+        return;
+      }
+      await refreshChart();
     };
     on && on(GlobalEventTypes.CUSTOM_EVENT, onCustomEvent);
+    onRoot && onRoot(RootEventTypes.VALUE_CHANGED, onValueChanged);
     return () => {
+      offRoot && offRoot(RootEventTypes.VALUE_CHANGED, onValueChanged);
       off && off(GlobalEventTypes.CUSTOM_EVENT, onCustomEvent);
     };
-  }, [on, off, domInitialized, ref, $pp, $model, options, settings, marker, mergeData]);
+  }, [on, off, onRoot, offRoot, domInitialized, ref, $p2r, $pp, $model, options, settings, marker, mergeData]);
 };
 const AChart = qe.div.attrs(({ id, "data-w": dataW, chartHeight }) => {
   return {
@@ -297,6 +310,7 @@ const useReliantWatch = (ref, domInitialized, marker, props) => {
         const chart = getInstanceByDom(ref.current);
         const data = await fetchData({ global: globalHandlers, marker, root: $root, model: $model });
         if (data != null) {
+          MUtils.setValue($model, $pp, data);
           const optionsWithData = await mergeData(askOptions(options), data);
           chart.setOption(optionsWithData, askSettings(settings));
           chart.hideLoading();

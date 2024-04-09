@@ -4,10 +4,10 @@ var __publicField = (obj, key, value) => {
   __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
   return value;
 };
-import { a as color, M as MaskedNumber, e as MaskedDate, g as MaskedFunction, j as MaskedPattern, k as MaskedRange, l as MaskedRegExp, o as MaskedDynamic } from "./vendor-rivyrZcp.js";
-import { R as React, r as reactExports, u as useIMask } from "./react-LaGzILSN.js";
-import { V as VUtils, P as PPUtils, r as registerWidget, c as createLogger, b as useRootEventBus, M as MUtils, N as NUtils, d as Wrapper, e as useForceUpdate, a as useWrapperEventBus, W as WrapperEventTypes, f as MBUtils, g as useCreateEventBus, h as PROPERTY_PATH_ME, R as RootEventTypes, i as useDefaultAttributeValues, j as useAttributesWatch } from "./rainbow-d9-n1-8J3kRsTf.js";
-import { q as qe, W as We } from "./styled-components-gKUigm2L.js";
+import { a as color, M as MaskedNumber, e as MaskedDate, g as MaskedFunction, j as MaskedPattern, k as MaskedRange, l as MaskedRegExp, o as MaskedDynamic } from "./vendor-GnqsCPvZ.js";
+import { R as React, r as reactExports, u as useIMask } from "./react-vOk3zbLj.js";
+import { V as VUtils, P as PPUtils, r as registerWidget, c as createLogger, u as useRootEventBus, M as MUtils, N as NUtils, d as Wrapper, e as useForceUpdate, f as MBUtils, b as useWrapperEventBus, W as WrapperEventTypes, g as useCreateEventBus, h as useDefaultAttributeValues, i as PROPERTY_PATH_ME, j as useAttributesWatch, R as RootEventTypes } from "./rainbow-d9-n1-dluxXI2Z.js";
+import { q as qe, W as We } from "./styled-components-TNyvyyVE.js";
 import { d as dayjs } from "./dayjs-9Z7dW0Q-.js";
 const DOM_KEY_WIDGET = "data-w";
 const DOM_ID_WIDGET = "data-wid";
@@ -2455,7 +2455,7 @@ const Label = reactExports.forwardRef((props, ref) => {
 });
 const Badge = reactExports.forwardRef((props, ref) => {
   const { ink, fill = ButtonFill.FILL, ...rest } = props;
-  return React.createElement(Caption, { ...rest, ref, "data-w": "d9-badge", "data-ink": ink, "data-fill": fill });
+  return React.createElement(Caption, { ...rest, "data-w": "d9-badge", "data-ink": ink, "data-fill": fill, ref });
 });
 registerWidget({ key: "Badge", JSX: Badge, container: false, array: false });
 registerWidget({ key: "Label", JSX: Label, container: false, array: false });
@@ -2603,11 +2603,12 @@ const Option$2 = qe.span.attrs({ [DOM_KEY_WIDGET]: "d9-dropdown-option" })`
         background-color: ${CssVars.HOVER_COLOR};
     }
 `;
-const Dropdown = (props) => {
+const Dropdown = reactExports.forwardRef((props, ref) => {
   var _a;
   const { options, optionSort, noAvailable, noMatched, $pp, $wrapped: { $onValueChange, $model, $p2r, $avs: { $disabled, $visible } }, please = "", clearable = true, ...rest } = props;
   const globalHandlers = useGlobalHandlers();
   const { askOptions, displayOptions, filterInputRef, filter, containerRef, popupState, popupHeight, popupRef, popupShown, setPopupShown, afterPopupStateChanged, onClicked, onFocused, onKeyUp, onFilterChanged } = useFilterableDropdownOptions(props);
+  useDualRefs(containerRef, ref);
   const forceUpdate = useForceUpdate();
   const onOptionClicked = (option) => async (event) => {
     if ($disabled) {
@@ -2647,7 +2648,7 @@ const Dropdown = (props) => {
   const deviceTags = MBUtils.pickDeviceTags(props);
   return React.createElement(
     DropdownContainer,
-    { active: popupState.active, atBottom: popupState.atBottom, ref: containerRef, role: "input", tabIndex: 0, ...rest, "data-w": "d9-dropdown", "data-disabled": $disabled, "data-visible": $visible, onFocus: onFocused, onClick: onClicked, id: PPUtils.asId(PPUtils.absolute($p2r, $pp), props.id) },
+    { active: popupState.active, atBottom: popupState.atBottom, role: "input", tabIndex: 0, ...rest, "data-w": "d9-dropdown", "data-disabled": $disabled, "data-visible": $visible, onFocus: onFocused, onClick: onClicked, id: PPUtils.asId(PPUtils.absolute($p2r, $pp), props.id), ref: containerRef },
     React.createElement(DropdownLabel, { "data-please": !selected }, toIntlLabel(label)),
     React.createElement(DropdownStick, { valueAssigned: selected, clearable, clear: onClearClicked, disabled: $disabled }),
     isDropdownPopupActive(popupState.active) ? React.createElement(
@@ -2666,7 +2667,7 @@ const Dropdown = (props) => {
       })
     ) : null
   );
-};
+});
 registerWidget({ key: "Dropdown", JSX: Dropdown, container: false, array: false });
 const MultiDropdownContainer = qe(DropdownContainer)`
     flex-wrap: wrap;
@@ -2815,11 +2816,12 @@ const MultiOption = qe.span.attrs({ [DOM_KEY_WIDGET]: "d9-multi-dropdown-option"
         background-color: ${CssVars.HOVER_COLOR};
     }
 `;
-const MultiDropdown = (props) => {
+const MultiDropdown = reactExports.forwardRef((props, ref) => {
   const { options, optionSort, noAvailable, noMatched, $pp, $wrapped: { $onValueChange, $model, $p2r, $avs: { $disabled, $visible } }, please = "", clearable = true, ...rest } = props;
   const globalHandlers = useGlobalHandlers();
   const { askOptions, displayOptions, filterInputRef, filter, setFilter, containerRef, popupState, popupHeight, popupRef, popupShown, setPopupShown, repaintPopup, onClicked, onFocused, onKeyUp, onFilterChanged } = useFilterableDropdownOptions(props);
   const forceUpdate = useForceUpdate();
+  useDualRefs(containerRef, ref);
   const currentValuesToArray = () => {
     const values2 = MUtils.getValue($model, $pp);
     if (values2 == null) {
@@ -2915,7 +2917,7 @@ const MultiDropdown = (props) => {
   const deviceTags = MBUtils.pickDeviceTags(props);
   return React.createElement(
     MultiDropdownContainer,
-    { active: popupState.active, atBottom: popupState.atBottom, ref: containerRef, role: "input", tabIndex: 0, ...rest, "data-w": "d9-multi-dropdown", "data-disabled": $disabled, "data-visible": $visible, onFocus: onFocused, onClick: onClicked, id: PPUtils.asId(PPUtils.absolute($p2r, $pp), props.id) },
+    { active: popupState.active, atBottom: popupState.atBottom, role: "input", tabIndex: 0, ...rest, "data-w": "d9-multi-dropdown", "data-disabled": $disabled, "data-visible": $visible, onFocus: onFocused, onClick: onClicked, id: PPUtils.asId(PPUtils.absolute($p2r, $pp), props.id), ref: containerRef },
     values.map((value) => {
       var _a;
       const v = `${value}`;
@@ -2954,7 +2956,7 @@ const MultiDropdown = (props) => {
       })
     ) : null
   );
-};
+});
 registerWidget({ key: "MultiDropdown", JSX: MultiDropdown, container: false, array: false });
 const Context$5 = reactExports.createContext({});
 Context$5.displayName = "CalendarEventBus";
@@ -3887,7 +3889,7 @@ const DropdownStickCalendar = qe(Date$1).attrs({ [DOM_KEY_WIDGET]: "d9-dropdown-
     fill: ${CssVars.FONT_COLOR};
     transition: all ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION};
 `;
-const Picker = (props) => {
+const Picker = reactExports.forwardRef((props, ref) => {
   const { $pp, $wrapped: { $onValueChange, $model, $p2r, $avs: { $disabled, $visible } }, please = "", clearable = true, dateFormat = getDefaultCalendarDateFormat(), time, timeFormat = getDefaultCalendarTimeFormat(), storeFormat = getDefaultCalendarDatetimeFormat(), fixedTimeAt = FIX_TIME_AT_START_OF_DAY, initTimeAt, autoConfirm = isCalendarAutoConfirm(), useCalendarIcon = isStickIconUseCalendar(), ...rest } = props;
   const globalHandlers = useGlobalHandlers();
   const { fire } = useCalendarEventBus();
@@ -3896,6 +3898,7 @@ const Picker = (props) => {
     askPopupMaxWidth: () => CssVars.CALENDAR_POPUP_WIDTH_VALUE,
     fixWidth: true
   });
+  useDualRefs(containerRef, ref);
   const showPopup = () => {
     const { top, left, width, height } = getDropdownPosition(containerRef.current);
     const bottom = isPopupAtBottom(top, height, () => CssVars.CALENDAR_POPUP_HEIGHT_VALUE);
@@ -4000,26 +4003,26 @@ const Picker = (props) => {
   })();
   return React.createElement(
     DropdownContainer,
-    { active: popupState.active, atBottom: popupState.atBottom, ref: containerRef, role: "input", tabIndex: 0, ...rest, "data-w": "d9-calendar", "data-disabled": $disabled, "data-visible": $visible, onClick: onClicked, onBlur: onBlurred, id: PPUtils.asId(PPUtils.absolute($p2r, props.$pp), props.id) },
+    { active: popupState.active, atBottom: popupState.atBottom, role: "input", tabIndex: 0, ...rest, "data-w": "d9-calendar", "data-disabled": $disabled, "data-visible": $visible, onClick: onClicked, onBlur: onBlurred, id: PPUtils.asId(PPUtils.absolute($p2r, props.$pp), props.id), ref: containerRef },
     React.createElement(CalendarValueHolder, { initValue: initValueForPopup }),
     React.createElement(DropdownLabel, { "data-please": !valueAssigned }, label),
     React.createElement(DropdownStick, { valueAssigned, clearable, clear: onClearClicked, disabled: $disabled, icon: useCalendarIcon ? React.createElement(DropdownStickCalendar, null) : void 0 }),
     isDropdownPopupActive(popupState.active) ? React.createElement(CalendarPopup, { initValue: initValueForPopup, popupRef, popupState, popupShown, dateFormat, time, timeFormat, initTimeAt, confirm: onConfirm }) : null
   );
-};
-const Calendar = (props) => {
+});
+const Calendar = reactExports.forwardRef((props, ref) => {
   return React.createElement(
     CalendarEventBusProvider,
     null,
-    React.createElement(Picker, { ...props })
+    React.createElement(Picker, { ...props, ref })
   );
-};
-const DateCalendar = (props) => {
-  return React.createElement(Calendar, { ...props, time: false });
-};
-const DateTimeCalendar = (props) => {
-  return React.createElement(Calendar, { ...props, time: true });
-};
+});
+const DateCalendar = reactExports.forwardRef((props, ref) => {
+  return React.createElement(Calendar, { ...props, time: false, ref });
+});
+const DateTimeCalendar = reactExports.forwardRef((props, ref) => {
+  return React.createElement(Calendar, { ...props, time: true, ref });
+});
 registerWidget({ key: "Calendar", JSX: Calendar, container: false, array: false });
 registerWidget({ key: "Date", JSX: DateCalendar, container: false, array: false });
 registerWidget({ key: "DateTime", JSX: DateTimeCalendar, container: false, array: false });
@@ -4983,18 +4986,18 @@ const RibRow = (props) => {
     React.createElement(ARibRowBody, { expanded }, children)
   );
 };
-const Ribs$1 = (props) => {
+const Ribs$1 = reactExports.forwardRef((props, ref) => {
   const { $wrapped: { $p2r, $avs: { $disabled, $visible } }, children, ...rest } = props;
-  return React.createElement(ARibs, { ...rest, "data-disabled": $disabled, "data-visible": $visible, id: PPUtils.asId(PPUtils.absolute($p2r, props.$pp), props.id) }, children);
-};
+  return React.createElement(ARibs, { ...rest, "data-disabled": $disabled, "data-visible": $visible, id: PPUtils.asId(PPUtils.absolute($p2r, props.$pp), props.id), ref }, children);
+});
 const ImmutableRibRow = (props) => {
   const { children } = props;
   return React.createElement(ARibRow, null, children);
 };
-const ImmutableRibs = (props) => {
+const ImmutableRibs = reactExports.forwardRef((props, ref) => {
   const { $array, children, ...rest } = props;
-  return React.createElement(Ribs$1, { "$array": { ...$array, addable: false, removable: false }, ...rest }, children);
-};
+  return React.createElement(Ribs$1, { "$array": { ...$array, addable: false, removable: false }, ...rest, ref }, children);
+});
 registerWidget({
   key: "RibsView",
   JSX: ImmutableRibs,
@@ -5003,10 +5006,10 @@ registerWidget({
   container: true,
   array: true
 });
-const Ribs = (props) => {
+const Ribs = reactExports.forwardRef((props, ref) => {
   const { children, ...rest } = props;
-  return React.createElement(Ribs$1, { ...rest }, children);
-};
+  return React.createElement(Ribs$1, { ...rest, ref }, children);
+});
 registerWidget({
   key: "Ribs",
   JSX: Ribs,
@@ -5259,11 +5262,11 @@ const ATableBottomBarSeparator = qe.span.attrs({ [DOM_KEY_WIDGET]: "d9-table-bot
     border: ${CssVars.BORDER};
     height: calc(${CssVars.INPUT_HEIGHT} * 0.6);
 `;
-const Table$1 = (props) => {
+const Table$1 = reactExports.forwardRef((props, ref) => {
   const { $wrapped, headers, pageable, children, ...rest } = props;
   const { $avs: { $disabled, $visible } } = $wrapped;
-  return React.createElement(ATable, { ...rest, "data-disabled": $disabled, "data-visible": $visible, id: PPUtils.asId(PPUtils.absolute($wrapped.$p2r, props.$pp), props.id) }, children);
-};
+  return React.createElement(ATable, { ...rest, "data-disabled": $disabled, "data-visible": $visible, id: PPUtils.asId(PPUtils.absolute($wrapped.$p2r, props.$pp), props.id), ref }, children);
+});
 var TableEventTypes;
 (function(TableEventTypes2) {
   TableEventTypes2["EXPAND_ROW"] = "expand-row";
@@ -5319,13 +5322,13 @@ const TableBottomBar = (props) => {
     );
   }
 };
-const UnwrappedDropdown = (props) => {
+const UnwrappedDropdown = reactExports.forwardRef((props, ref) => {
   const { $pp = "value", value, onValueChange, disabled, visible, ...rest } = props;
   const $onValueChange = onValueChange;
   const $avs = { $disabled: disabled, $visible: visible };
   const $root = { [$pp]: value };
-  return React.createElement(Dropdown, { ...rest, "$wrapped": { $onValueChange, $avs, $root, $model: $root, $p2r: "." }, "$pp": $pp, id: rest.id ?? VUtils.generateUniqueId() });
-};
+  return React.createElement(Dropdown, { ...rest, "$wrapped": { $onValueChange, $avs, $root, $model: $root, $p2r: "." }, "$pp": $pp, id: rest.id ?? VUtils.generateUniqueId(), ref });
+});
 const APagination = qe.div.attrs(({ id, "data-w": dataW }) => {
   return {
     [DOM_KEY_WIDGET]: dataW || "d9-pagination",
@@ -5947,14 +5950,14 @@ const TableRow = (props) => {
     expands
   );
 };
-const Table = (props) => {
+const Table = reactExports.forwardRef((props, ref) => {
   const { children, ...rest } = props;
   return React.createElement(
     TableEventBusProvider,
     null,
-    React.createElement(Table$1, { ...rest }, children)
+    React.createElement(Table$1, { ...rest, ref }, children)
   );
-};
+});
 registerWidget({
   key: "Table",
   JSX: Table,
@@ -6496,13 +6499,13 @@ const TabsController = (props) => {
   }, []);
   return React.createElement(reactExports.Fragment, null);
 };
-const InternalTabs = (props) => {
+const InternalTabs = reactExports.forwardRef((props, ref) => {
   const { $pp, $wrapped, initActive, contents, ...rest } = props;
   const { $p2r, $avs: { $disabled, $visible } } = $wrapped;
   (contents ?? []).forEach((content) => redressTabMarker(content));
   return React.createElement(
     ATabs,
-    { ...rest, "data-disabled": $disabled, "data-visible": $visible, id: PPUtils.asId(PPUtils.absolute($p2r, $pp), props.id) },
+    { ...rest, "data-disabled": $disabled, "data-visible": $visible, id: PPUtils.asId(PPUtils.absolute($p2r, $pp), props.id), ref },
     React.createElement(TabsHeader, null, (contents ?? []).map((content, index) => {
       const $model = MUtils.getValue($wrapped.$model, $pp);
       const { data, ...rest2 } = content;
@@ -6514,14 +6517,14 @@ const InternalTabs = (props) => {
     })),
     React.createElement(TabsController, { "$pp": $pp, "$wrapped": $wrapped, initActive, contents })
   );
-};
-const Tabs = (props) => {
+});
+const Tabs = reactExports.forwardRef((props, ref) => {
   return React.createElement(
     TabsEventBusProvider,
     null,
-    React.createElement(InternalTabs, { ...props })
+    React.createElement(InternalTabs, { ...props, ref })
   );
-};
+});
 registerWidget({ key: "Tabs", JSX: Tabs, container: false, array: false });
 const Context$2 = reactExports.createContext({});
 Context$2.displayName = "WizardEventBus";
@@ -7144,7 +7147,7 @@ const WizardStepTitle = (props) => {
   }
   return React.createElement(WizardStepTitleWorker, { ...props, active, done, reachedIndex, "$defaultAttributes": $defaultAttributes, "$defaultAttributesSet": $defaultAttributesSet });
 };
-const InternalWizard = (props) => {
+const InternalWizard = reactExports.forwardRef((props, ref) => {
   const { $pp, $wrapped, reached = 0, freeWalk = false, omitWalker = false, balloon = true, emphasisActive = true, contents, ...rest } = props;
   const { $p2r, $avs: { $disabled, $visible } } = $wrapped;
   const sharedState = useWizardSharedInit(props);
@@ -7154,7 +7157,7 @@ const InternalWizard = (props) => {
   }
   return React.createElement(
     AWizard,
-    { ...rest, "data-disabled": $disabled, "data-visible": $visible, id: PPUtils.asId(PPUtils.absolute($p2r, $pp), props.id) },
+    { ...rest, "data-disabled": $disabled, "data-visible": $visible, id: PPUtils.asId(PPUtils.absolute($p2r, $pp), props.id), ref },
     React.createElement(WizardHeader, { "data-balloon": balloon }, (contents ?? []).map((content, index) => {
       const $model = MUtils.getValue($wrapped.$model, $pp);
       return React.createElement(WizardStepTitle, { key: content.marker, "$root": $wrapped.$root, "$model": $model, "$p2r": PPUtils.concat($p2r, $pp), balloon, emphasisActive, ...content, freeWalk, stepIndex: index, marker: content.marker });
@@ -7165,14 +7168,14 @@ const InternalWizard = (props) => {
     })),
     React.createElement(WizardController, { "$pp": $pp, "$wrapped": $wrapped, contents, reached })
   );
-};
-const Wizard = (props) => {
+});
+const Wizard = reactExports.forwardRef((props, ref) => {
   return React.createElement(
     WizardEventBusProvider,
     null,
-    React.createElement(InternalWizard, { ...props })
+    React.createElement(InternalWizard, { ...props, ref })
   );
-};
+});
 registerWidget({ key: "Wizard", JSX: Wizard, container: false, array: false });
 const ATextarea = qe.textarea.attrs(({ id, autoSelect, onFocus }) => {
   if (!autoSelect) {
@@ -7391,13 +7394,13 @@ const TreeNodeEventBridge = (props) => {
   }, [on, off, node, expandParent, nodeCheckedChanged, nodeRemoved]);
   return React.createElement(reactExports.Fragment, null);
 };
-const UnwrappedCheckbox = (props) => {
+const UnwrappedCheckbox = reactExports.forwardRef((props, ref) => {
   const { $pp = "value", value, onValueChange, disabled, visible, ...rest } = props;
   const $onValueChange = onValueChange;
   const $avs = { $disabled: disabled, $visible: visible };
   const $root = { [$pp]: value };
-  return React.createElement(Checkbox, { ...rest, "$wrapped": { $onValueChange, $avs, $root, $model: $root, $p2r: "." }, "$pp": $pp, id: rest.id ?? VUtils.generateUniqueId() });
-};
+  return React.createElement(Checkbox, { ...rest, "$wrapped": { $onValueChange, $avs, $root, $model: $root, $p2r: "." }, "$pp": $pp, id: rest.id ?? VUtils.generateUniqueId(), ref });
+});
 var TreeNodeCheckedChangeFrom;
 (function(TreeNodeCheckedChangeFrom2) {
   TreeNodeCheckedChangeFrom2[TreeNodeCheckedChangeFrom2["FROM_CHILD"] = -1] = "FROM_CHILD";
@@ -8251,6 +8254,19 @@ const Tree = reactExports.forwardRef((props, ref) => {
   );
 });
 registerWidget({ key: "Tree", JSX: Tree, container: false, array: false });
+const UnwrappedCalendar = reactExports.forwardRef((props, ref) => {
+  const { $pp = "value", value, onValueChange, disabled, visible, ...rest } = props;
+  const $onValueChange = onValueChange;
+  const $avs = { $disabled: disabled, $visible: visible };
+  const $root = { [$pp]: value };
+  return React.createElement(Calendar, { ...rest, "$wrapped": { $onValueChange, $avs, $root, $model: $root, $p2r: "." }, "$pp": $pp, id: rest.id ?? VUtils.generateUniqueId(), ref });
+});
+reactExports.forwardRef((props, ref) => {
+  return React.createElement(UnwrappedCalendar, { ...props, time: false, ref });
+});
+reactExports.forwardRef((props, ref) => {
+  return React.createElement(UnwrappedCalendar, { ...props, time: true, ref });
+});
 const UnwrappedCaption = reactExports.forwardRef((props, ref) => {
   const { children, disabled, visible, ...rest } = props;
   const $onValueChange = VUtils.noop;
@@ -8264,6 +8280,13 @@ reactExports.forwardRef((props, ref) => {
   const $avs = { $disabled: disabled, $visible: visible };
   const $root = {};
   return React.createElement(Label, { ...rest, "$wrapped": { $onValueChange, $avs, $root, $model: $root, $p2r: "." }, label: children, id: rest.id ?? VUtils.generateUniqueId(), ref });
+});
+reactExports.forwardRef((props, ref) => {
+  const { children, disabled, visible, ...rest } = props;
+  const $onValueChange = VUtils.noop;
+  const $avs = { $disabled: disabled, $visible: visible };
+  const $root = {};
+  return React.createElement(Badge, { ...rest, "$wrapped": { $onValueChange, $avs, $root, $model: $root, $p2r: "." }, label: children, id: rest.id ?? VUtils.generateUniqueId(), ref });
 });
 const ACheckboxes = qe.div.attrs(({ id }) => {
   return {
@@ -8439,6 +8462,13 @@ reactExports.forwardRef((props, ref) => {
   const $onValueChange = onValueChange;
   const $avs = { $disabled: disabled, $visible: visible };
   const $root = { [$pp]: value };
+  return React.createElement(Checkboxes, { ...rest, "$wrapped": { $onValueChange, $avs, $root, $model: $root, $p2r: "." }, "$pp": $pp, id: rest.id ?? VUtils.generateUniqueId(), ref });
+});
+reactExports.forwardRef((props, ref) => {
+  const { $pp = "value", value, onValueChange, disabled, visible, ...rest } = props;
+  const $onValueChange = onValueChange;
+  const $avs = { $disabled: disabled, $visible: visible };
+  const $root = { [$pp]: value };
   return React.createElement(Input, { ...rest, "$wrapped": { $onValueChange, $avs, $root, $model: $root, $p2r: "." }, "$pp": $pp, id: rest.id ?? VUtils.generateUniqueId(), ref });
 });
 reactExports.forwardRef((props, ref) => {
@@ -8456,6 +8486,13 @@ reactExports.forwardRef((props, ref) => {
   return React.createElement(PasswordInput, { ...rest, "$wrapped": { $onValueChange, $avs, $root, $model: $root, $p2r: "." }, "$pp": $pp, id: rest.id ?? VUtils.generateUniqueId(), ref });
 });
 reactExports.forwardRef((props, ref) => {
+  const { $pp = "value", value, onValueChange, disabled, visible, ...rest } = props;
+  const $onValueChange = onValueChange;
+  const $avs = { $disabled: disabled, $visible: visible };
+  const $root = { [$pp]: value };
+  return React.createElement(MultiDropdown, { ...rest, "$wrapped": { $onValueChange, $avs, $root, $model: $root, $p2r: "." }, "$pp": $pp, id: rest.id ?? VUtils.generateUniqueId(), ref });
+});
+reactExports.forwardRef((props, ref) => {
   const { $pp = "value", value, onValueChange, visible, ...rest } = props;
   const $onValueChange = (value2) => {
     onValueChange(value2);
@@ -8463,6 +8500,13 @@ reactExports.forwardRef((props, ref) => {
   const $avs = { $disabled: false, $visible: visible };
   const $root = { [$pp]: value };
   return React.createElement(Pagination, { ...rest, "$pp": $pp, "$wrapped": { $onValueChange, $avs, $root, $model: $root, $p2r: "." }, id: rest.id ?? VUtils.generateUniqueId(), ref });
+});
+reactExports.forwardRef((props, ref) => {
+  const { $pp = "value", value, onValueChange, disabled, visible, ...rest } = props;
+  const $onValueChange = onValueChange;
+  const $avs = { $disabled: disabled, $visible: visible };
+  const $root = { [$pp]: value };
+  return React.createElement(Radio, { ...rest, "$wrapped": { $onValueChange, $avs, $root, $model: $root, $p2r: "." }, "$pp": $pp, id: rest.id ?? VUtils.generateUniqueId(), ref });
 });
 const ARadios = qe.div.attrs(({ id }) => {
   return {
@@ -8603,6 +8647,13 @@ const Radios = reactExports.forwardRef((props, ref) => {
   }));
 });
 registerWidget({ key: "Radios", JSX: Radios, container: false, array: false });
+reactExports.forwardRef((props, ref) => {
+  const { $pp = "value", value, onValueChange, disabled, visible, ...rest } = props;
+  const $onValueChange = onValueChange;
+  const $avs = { $disabled: disabled, $visible: visible };
+  const $root = { [$pp]: value };
+  return React.createElement(Radios, { ...rest, "$wrapped": { $onValueChange, $avs, $root, $model: $root, $p2r: "." }, "$pp": $pp, id: rest.id ?? VUtils.generateUniqueId(), ref });
+});
 const UnwrappedSection = reactExports.forwardRef((props, ref) => {
   const { title, children, visible, ...rest } = props;
   const $onValueChange = VUtils.noop;
@@ -8611,11 +8662,25 @@ const UnwrappedSection = reactExports.forwardRef((props, ref) => {
   return React.createElement(Section, { ...rest, title, "$nodes": [], "$wrapped": { $onValueChange, $avs, $root, $model: $root, $p2r: "." }, id: rest.id ?? VUtils.generateUniqueId(), ref }, children);
 });
 reactExports.forwardRef((props, ref) => {
+  const { $pp = "value", value, title, visible, ...rest } = props;
+  const $onValueChange = VUtils.noop;
+  const $avs = { $disabled: false, $visible: visible };
+  const $root = { [$pp]: value };
+  return React.createElement(Tabs, { ...rest, title, "$wrapped": { $onValueChange, $avs, $root, $model: $root, $p2r: "." }, "$pp": $pp, id: rest.id ?? VUtils.generateUniqueId(), ref });
+});
+reactExports.forwardRef((props, ref) => {
   const { $pp = "value", data, visible, ...rest } = props;
   const $onValueChange = VUtils.noop;
   const $avs = { $disabled: false, $visible: visible };
   const $root = { [$pp]: data };
   return React.createElement(Tree, { ...rest, "$wrapped": { $onValueChange, $avs, $root, $model: $root, $p2r: "." }, "$pp": $pp, id: rest.id ?? VUtils.generateUniqueId(), ref });
+});
+reactExports.forwardRef((props, ref) => {
+  const { $pp = "value", value, title, visible, ...rest } = props;
+  const $onValueChange = VUtils.noop;
+  const $avs = { $disabled: false, $visible: visible };
+  const $root = { [$pp]: value };
+  return React.createElement(Wizard, { ...rest, title, "$wrapped": { $onValueChange, $avs, $root, $model: $root, $p2r: "." }, "$pp": $pp, id: rest.id ?? VUtils.generateUniqueId(), ref });
 });
 reactExports.forwardRef((props, ref) => {
   const { $pp = "value", value, onValueChange, disabled, visible, ...rest } = props;
