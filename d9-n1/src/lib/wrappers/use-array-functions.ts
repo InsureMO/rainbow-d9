@@ -125,7 +125,7 @@ export const useArrayFunctions = (options: {
 	const getRowElementKey = getArrayElementKey(keys, getElementKey);
 
 	return {
-		elements: elements, $arrayP2r: absolutePathOfArray,
+		elements, $arrayP2r: absolutePathOfArray,
 		addElement, removeElement, createRemoveElementFunc, clearElement, getElementKey: getRowElementKey
 	};
 };
