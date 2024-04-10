@@ -11,7 +11,9 @@ export enum TableEventTypes {
 	PAGE_CHANGED = 'page-changed',
 	PAGE_CHANGED_BY_FILTER = 'page-changed-by-filter',
 
-	FILTER_CHANGED = 'filter-changed'
+	FILTER_CHANGED = 'filter-changed',
+
+	SORT_CHANGED = 'sort-changed'
 }
 
 export interface TableEventBus {
@@ -62,4 +64,10 @@ export interface TableEventBus {
 	on(type: TableEventTypes.FILTER_CHANGED, listener: () => void): this;
 
 	off(type: TableEventTypes.FILTER_CHANGED, listener: () => void): this;
+
+	fire(type: TableEventTypes.SORT_CHANGED, sortStates: object): this;
+
+	on(type: TableEventTypes.SORT_CHANGED, listener: (sortStates: object) => void): this;
+
+	off(type: TableEventTypes.SORT_CHANGED, listener: (sortStates: object) => void): this;
 }

@@ -22,6 +22,7 @@ import {Time} from './time';
 import {Times} from './times';
 import {View} from './view';
 import {XMark} from './xmark';
+import {SortAscendingIcon, SortDescendingIcon, UnSortIcon} from "./sort-icon";
 
 class IconsRegistrar {
 	private static readonly _icons: Record<string, () => JSX.Element> = {};
@@ -65,7 +66,10 @@ IconsRegistrar.register({
 	search: () => <Search/>,
 	plus: () => <Plus/>,
 	xmark: () => <XMark/>,
-	cart: () => <Cart/>
+	cart: () => <Cart/>,
+	sortAscendingIcon: () => <SortAscendingIcon/>,
+	sortDescendingIcon: () => <SortDescendingIcon/>,
+	unSortIcon: () => <UnSortIcon/>,
 });
 
 export {IconsRegistrar};

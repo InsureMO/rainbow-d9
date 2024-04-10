@@ -27,6 +27,7 @@ import {Time} from './time';
 import {Times} from './times';
 import {View} from './view';
 import {XMark} from './xmark';
+import {SortAscendingIcon, SortDescendingIcon, UnSortIcon} from './sort-icon'
 
 // internal purpose
 export {
@@ -34,7 +35,7 @@ export {
 	Check, Times, Remove, Expand, Collapse, Edit, View, Forward, Backward,
 	CaretLeft, CaretRight, CaretDown, ArrowDown, AngleLeft, AngleRight,
 	Spinner, Search, Plus, XMark,
-	Cart,
+	Cart, SortAscendingIcon, SortDescendingIcon, UnSortIcon,
 
 	Registrar
 };
