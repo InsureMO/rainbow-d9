@@ -11,7 +11,10 @@ import {TableProps} from './types';
 import {ATableBottomBar, ATableBottomBarSeparator} from './widgets';
 
 export const TableBottomBarButton = (props: Omit<TableProps, 'children'> & { $array: EnhancedPropsForArray }) => {
-	const {$wrapped, $array: {addLabel, addElement}} = props;
+	const {
+		$wrapped,
+		$array: {addLabel = <IntlLabel keys={['table', 'createItem']} value="Create New Element"/>, addElement}
+	} = props;
 
 	const globalHandlers = useGlobalHandlers();
 	const [disabled] = useArrayCouldAddElement(props);
@@ -23,7 +26,7 @@ export const TableBottomBarButton = (props: Omit<TableProps, 'children'> & { $ar
 	};
 
 	return <Button $wrapped={button$wrapped} ink={ButtonInk.PRIMARY}
-	               text={addLabel ?? <IntlLabel keys={['table', 'createItem']} value="Create New Element"/>}
+	               text={addLabel}
 	               click={onAddClicked}/>;
 };
 

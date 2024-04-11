@@ -137,8 +137,9 @@ export const Radios = forwardRef((props: RadiosProps, ref: ForwardedRef<HTMLDivE
 
 	if (displayOptions.length === 0 || displayOptions.length === 1 && displayOptions[0].value == NO_AVAILABLE_OPTION_ITEM) {
 		return <ARadios data-disabled={$disabled} data-visible={$visible} {...rest}>
-			<Option data-can-click={false} columns={0} compact={true}
-			        data-w="d9-radios-no-available">{noAvailable}</Option>
+			<Option data-can-click={false} columns={0} compact={true} data-w="d9-radios-no-available">
+				{toIntlLabel(noAvailable)}
+			</Option>
 		</ARadios>;
 	}
 

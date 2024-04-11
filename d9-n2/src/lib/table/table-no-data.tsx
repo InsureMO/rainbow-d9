@@ -1,6 +1,6 @@
 import {EnhancedPropsForArray} from '@rainbow-d9/n1';
 import React from 'react';
-import {IntlLabel} from '../intl-label';
+import {IntlLabel, toIntlLabel} from '../intl-label';
 import {TableProps} from './types';
 import {computeColumnsWidth} from './utils';
 import {ATableNoDataRow} from './widgets';
@@ -18,7 +18,7 @@ export const TableNoData = (props: Omit<TableProps, '$array'> & { $array: Enhanc
 		const columnsCount = headers.length + 2 + (tailGrabberAppended ? 1 : 0);
 
 		return <ATableNoDataRow columnsCount={columnsCount}>
-			<span>{noElementReminder}</span>
+			<span>{toIntlLabel(noElementReminder)}</span>
 		</ATableNoDataRow>;
 	}
 };

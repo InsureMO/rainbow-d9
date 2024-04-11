@@ -1,4 +1,4 @@
-import React, {Fragment} from 'react';
+import React, {Fragment, isValidElement} from 'react';
 import {RootEventBus, useRootEventBus} from './events';
 import {ExternalDefKeys, ExternalDefs, ExternalDefsHandlerOptions} from './types';
 import {MUtils, VUtils} from './utils';
@@ -36,7 +36,7 @@ export class ExternalDefCreator {
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const handleExternalDefs = (options: any, reb: RootEventBus, externalDefs: ExternalDefs): any => {
-	if (options == null || VUtils.isPrimitive(options) || typeof options === 'function') {
+	if (options == null || VUtils.isPrimitive(options) || typeof options === 'function' || isValidElement(options)) {
 		// do nothing
 		return options;
 	}

@@ -1,6 +1,7 @@
 import {BaseModel, PropValue, useWrapperEventBus, VUtils, WidgetProps, WrapperEventTypes} from '@rainbow-d9/n1';
 import {ReactNode, useEffect, useState} from 'react';
 import {useGlobalHandlers} from './global';
+import {toIntlLabel} from './intl-label';
 import {GlobalEventHandlers, ModelCarrier} from './types';
 
 /**
@@ -101,7 +102,7 @@ export const useOptionItems = <V>(props: OptionItemsProps<V>) => {
 		return () => {
 			const options = askOptions();
 			if (options.length === 0) {
-				return [{value: NO_AVAILABLE_OPTION_ITEM, label: noAvailable}] as OptionItems<V>;
+				return [{value: NO_AVAILABLE_OPTION_ITEM, label: toIntlLabel(noAvailable)}] as OptionItems<V>;
 			}
 			if (shouldTakeOver != null && shouldTakeOver()) {
 				return takeOver != null ? takeOver(options) : options;

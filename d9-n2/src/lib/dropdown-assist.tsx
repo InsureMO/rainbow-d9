@@ -14,7 +14,7 @@ import styled from 'styled-components';
 import {CssVars, DOM_ID_WIDGET, DOM_KEY_WIDGET} from './constants';
 import {useCollapseFixedThing} from './hooks';
 import {CaretDown, Times} from './icons';
-import {IntlLabel} from './intl-label';
+import {IntlLabel, toIntlLabel} from './intl-label';
 import {
 	NO_MATCHED_OPTION_ITEM,
 	OptionItem,
@@ -480,7 +480,7 @@ export const useFilterableDropdownOptions = <V extends any>(props: OptionItemsPr
 			remained.sort((a, b) => b.str.localeCompare(a.str));
 		}
 		return remained.length === 0
-			? [{value: NO_MATCHED_OPTION_ITEM, label: noMatched}] as OptionItems<V>
+			? [{value: NO_MATCHED_OPTION_ITEM, label: toIntlLabel(noMatched)}] as OptionItems<V>
 			: remained.map(({option}) => option);
 	});
 	const displayOptions = askDisplayOptions();

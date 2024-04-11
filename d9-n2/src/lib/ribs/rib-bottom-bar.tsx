@@ -8,7 +8,10 @@ import {RibsProps} from './types';
 import {ARibBottomBar} from './widgets';
 
 export const RibBottomBarButton = (props: Omit<RibsProps, 'children'> & { $array: EnhancedPropsForArray }) => {
-	const {$wrapped, $array: {addLabel, addElement}} = props;
+	const {
+		$wrapped,
+		$array: {addLabel = <IntlLabel keys={['ribs', 'createItem']} value="Create New Element"/>, addElement}
+	} = props;
 
 	const globalHandlers = useGlobalHandlers();
 	const [disabled] = useArrayCouldAddElement(props);
@@ -20,7 +23,7 @@ export const RibBottomBarButton = (props: Omit<RibsProps, 'children'> & { $array
 	};
 
 	return <Button $wrapped={button$wrapped} ink={ButtonInk.PRIMARY}
-	               text={addLabel ?? <IntlLabel keys={['ribs', 'createItem']} value="Create New Element"/>}
+	               text={addLabel}
 	               click={onAddClicked}/>;
 };
 

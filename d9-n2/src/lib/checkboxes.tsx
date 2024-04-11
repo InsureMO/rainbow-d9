@@ -160,7 +160,7 @@ export const Checkboxes = forwardRef((props: CheckboxesProps, ref: ForwardedRef<
 	if (displayOptions.length === 0 || displayOptions.length === 1 && displayOptions[0].value == NO_AVAILABLE_OPTION_ITEM) {
 		return <ACheckboxes data-disabled={$disabled} data-visible={$visible} {...rest}>
 			<Option data-can-click={false} columns={0} compact={true} data-w="d9-checkboxes-no-available">
-				{noAvailable}
+				{toIntlLabel(noAvailable)}
 			</Option>
 		</ACheckboxes>;
 	}
