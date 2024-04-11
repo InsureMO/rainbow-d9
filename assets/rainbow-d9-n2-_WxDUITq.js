@@ -4,10 +4,10 @@ var __publicField = (obj, key, value) => {
   __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
   return value;
 };
-import { a as color, M as MaskedNumber, e as MaskedDate, g as MaskedFunction, j as MaskedPattern, k as MaskedRange, l as MaskedRegExp, o as MaskedDynamic } from "./vendor-NldSorO2.js";
-import { R as React, r as reactExports, u as useIMask } from "./react-7L1jITep.js";
-import { V as VUtils, P as PPUtils, r as registerWidget, c as createLogger, u as useRootEventBus, M as MUtils, N as NUtils, d as Wrapper, e as useForceUpdate, f as MBUtils, b as useWrapperEventBus, W as WrapperEventTypes, g as useCreateEventBus, h as useDefaultAttributeValues, i as PROPERTY_PATH_ME, j as useAttributesWatch, R as RootEventTypes } from "./rainbow-d9-n1-0BExmXAL.js";
-import { q as qe, W as We } from "./styled-components-eekK1UNA.js";
+import { a as color, M as MaskedNumber, e as MaskedDate, g as MaskedFunction, j as MaskedPattern, k as MaskedRange, l as MaskedRegExp, o as MaskedDynamic } from "./vendor-pImuYRDH.js";
+import { R as React, r as reactExports, u as useIMask } from "./react-d2mL4C0e.js";
+import { V as VUtils, P as PPUtils, r as registerWidget, c as createLogger, u as useRootEventBus, M as MUtils, N as NUtils, d as Wrapper, e as useForceUpdate, f as MBUtils, b as useWrapperEventBus, W as WrapperEventTypes, g as useCreateEventBus, h as useDefaultAttributeValues, i as PROPERTY_PATH_ME, j as useAttributesWatch, R as RootEventTypes } from "./rainbow-d9-n1-EtA5icPl.js";
+import { q as qe, W as We } from "./styled-components-Ey3F1oUB.js";
 import { d as dayjs } from "./dayjs-9Z7dW0Q-.js";
 const DOM_KEY_WIDGET = "data-w";
 const DOM_ID_WIDGET = "data-wid";
@@ -1767,7 +1767,7 @@ const useOptionItems = (props) => {
     return () => {
       const options2 = askOptions();
       if (options2.length === 0) {
-        return [{ value: NO_AVAILABLE_OPTION_ITEM, label: noAvailable }];
+        return [{ value: NO_AVAILABLE_OPTION_ITEM, label: toIntlLabel(noAvailable) }];
       }
       if (shouldTakeOver != null && shouldTakeOver()) {
         return takeOver != null ? takeOver(options2) : options2;
@@ -2148,7 +2148,7 @@ const useFilterableDropdownOptions = (props) => {
     } else if (optionSort == OptionItemSort.DESC) {
       remained.sort((a, b) => b.str.localeCompare(a.str));
     }
-    return remained.length === 0 ? [{ value: NO_MATCHED_OPTION_ITEM, label: noMatched }] : remained.map(({ option }) => option);
+    return remained.length === 0 ? [{ value: NO_MATCHED_OPTION_ITEM, label: toIntlLabel(noMatched) }] : remained.map(({ option }) => option);
   });
   const displayOptions = askDisplayOptions();
   const popupHeight = Math.min(displayOptions.length, 8) * CssVars.INPUT_HEIGHT_VALUE + 2;
@@ -4879,7 +4879,7 @@ const ARibBottomBar = qe.div.attrs({ [DOM_KEY_WIDGET]: "d9-rib-bottom-bar" })`
 `;
 const RibBottomBarButton = (props) => {
   var _a;
-  const { $wrapped, $array: { addLabel, addElement } } = props;
+  const { $wrapped, $array: { addLabel = React.createElement(IntlLabel, { keys: ["ribs", "createItem"], value: "Create New Element" }), addElement } } = props;
   const globalHandlers = useGlobalHandlers();
   const [disabled] = useArrayCouldAddElement(props);
   const onAddClicked = async () => await addElement({ global: globalHandlers });
@@ -4887,7 +4887,7 @@ const RibBottomBarButton = (props) => {
     ...$wrapped,
     $avs: { ...$wrapped.$avs ?? {}, $disabled: disabled === true ? disabled : (_a = $wrapped.$avs) == null ? void 0 : _a.$disabled }
   };
-  return React.createElement(Button, { "$wrapped": button$wrapped, ink: ButtonInk.PRIMARY, text: addLabel ?? React.createElement(IntlLabel, { keys: ["ribs", "createItem"], value: "Create New Element" }), click: onAddClicked });
+  return React.createElement(Button, { "$wrapped": button$wrapped, ink: ButtonInk.PRIMARY, text: addLabel, click: onAddClicked });
 };
 const RibBottomBar = (props) => {
   const { $array: { addable = false } } = props;
@@ -4902,11 +4902,11 @@ const RibBottomBar = (props) => {
   }
 };
 const RibNoData = (props) => {
-  const { $array: { hasElement, noElementReminder } } = props;
+  const { $array: { hasElement, noElementReminder = React.createElement(IntlLabel, { keys: ["ribs", "noElement"], value: "No data found." }) } } = props;
   if (hasElement) {
     return null;
   } else {
-    return React.createElement(ARibNoDataRow, null, noElementReminder ?? React.createElement(IntlLabel, { keys: ["ribs", "noElement"], value: "No data found." }));
+    return React.createElement(ARibNoDataRow, null, toIntlLabel(noElementReminder));
   }
 };
 const ExpandButton$1 = (props) => {
@@ -5280,7 +5280,7 @@ var TableEventTypes;
 })(TableEventTypes || (TableEventTypes = {}));
 const TableBottomBarButton = (props) => {
   var _a;
-  const { $wrapped, $array: { addLabel, addElement } } = props;
+  const { $wrapped, $array: { addLabel = React.createElement(IntlLabel, { keys: ["table", "createItem"], value: "Create New Element" }), addElement } } = props;
   const globalHandlers = useGlobalHandlers();
   const [disabled] = useArrayCouldAddElement(props);
   const onAddClicked = async () => await addElement({ global: globalHandlers });
@@ -5288,7 +5288,7 @@ const TableBottomBarButton = (props) => {
     ...$wrapped,
     $avs: { ...$wrapped.$avs ?? {}, $disabled: disabled === true ? disabled : (_a = $wrapped.$avs) == null ? void 0 : _a.$disabled }
   };
-  return React.createElement(Button, { "$wrapped": button$wrapped, ink: ButtonInk.PRIMARY, text: addLabel ?? React.createElement(IntlLabel, { keys: ["table", "createItem"], value: "Create New Element" }), click: onAddClicked });
+  return React.createElement(Button, { "$wrapped": button$wrapped, ink: ButtonInk.PRIMARY, text: addLabel, click: onAddClicked });
 };
 const TableBottomBar = (props) => {
   const { $wrapped, pageable, $array: { addable = false } } = props;
@@ -5700,7 +5700,7 @@ const TableNoData = (props) => {
     return React.createElement(
       ATableNoDataRow,
       { columnsCount },
-      React.createElement("span", null, noElementReminder)
+      React.createElement("span", null, toIntlLabel(noElementReminder))
     );
   }
 };
@@ -8409,7 +8409,7 @@ const Checkboxes = reactExports.forwardRef((props, ref) => {
     return React.createElement(
       ACheckboxes,
       { "data-disabled": $disabled, "data-visible": $visible, ...rest },
-      React.createElement(Option$1, { "data-can-click": false, columns: 0, compact: true, "data-w": "d9-checkboxes-no-available" }, noAvailable)
+      React.createElement(Option$1, { "data-can-click": false, columns: 0, compact: true, "data-w": "d9-checkboxes-no-available" }, toIntlLabel(noAvailable))
     );
   }
   return React.createElement(ACheckboxes, { "data-disabled": $disabled, "data-visible": $visible, ...rest, ref }, displayOptions.map((option, index) => {
@@ -8615,7 +8615,7 @@ const Radios = reactExports.forwardRef((props, ref) => {
     return React.createElement(
       ARadios,
       { "data-disabled": $disabled, "data-visible": $visible, ...rest },
-      React.createElement(Option, { "data-can-click": false, columns: 0, compact: true, "data-w": "d9-radios-no-available" }, noAvailable)
+      React.createElement(Option, { "data-can-click": false, columns: 0, compact: true, "data-w": "d9-radios-no-available" }, toIntlLabel(noAvailable))
     );
   }
   const modelValue = MUtils.getValue($model, $pp);
