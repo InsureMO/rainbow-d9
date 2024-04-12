@@ -17,6 +17,10 @@ export const TableHeader = (props: TableHeaderProps) => {
 		stickyOffsets, tailGrabberAppended
 	} = props;
 
+	// index column
+	// configured columns (headers)
+	// tail grabbing column
+	// operators column
 	return <>
 		<ATableHeaderCell headerHeight={headerHeight} isGrabber={true} stickyOffset={stickyOffsets[0]}/>
 		{headers.map((header, index) => {

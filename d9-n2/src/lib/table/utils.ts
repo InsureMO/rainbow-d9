@@ -52,14 +52,19 @@ export const computeColumnsWidth = (props: Omit<TableProps, 'children'>) => {
 	const columnsCount = columnsWidth.length;
 	const stickyOffsets: Array<[boolean, Undefinable<string>, Undefinable<string>]> = columnsWidth.map((width, index) => {
 		if (index === 0) {
+			// index column, always sticky
 			return [true, '0', (void 0)];
 		} else if (index === columnsCount - 1) {
+			// operators column, always sticky
 			return [true, (void 0), '0'];
 		} else if (index <= fixedLeadColumns) {
+			// left fixed columns, sticky
 			return [true, `calc(${columnsWidth.slice(0, index).join(' + ')})`, (void 0)];
 		} else if (index >= columnsCount - 1 - fixedTailColumns) {
+			// right fixed columns, sticky
 			return [true, (void 0), `calc(${columnsWidth.slice(index + 1).join(' + ')})`];
 		} else {
+			// other columns, relative
 			return [false, (void 0), (void 0)];
 		}
 	});

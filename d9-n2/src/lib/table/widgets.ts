@@ -206,7 +206,8 @@ export const ATableRowOperators = styled.div.attrs<{ rowIndex: number; rowSpan: 
 	}) <{ rowIndex: number; rowSpan: number }>`
     display: flex;
     position: sticky;
-    align-items: center;
+    align-self: stretch;
+    align-items: start;
     justify-content: flex-end;
     right: 0;
     background-color: ${CssVars.BACKGROUND_COLOR};
@@ -221,9 +222,10 @@ export const ATableRowOperators = styled.div.attrs<{ rowIndex: number; rowSpan: 
         display: flex;
         position: relative;
         align-items: center;
+        padding: 0;
+        margin-top: calc((${CssVars.TABLE_CELL_HEIGHT} - ${CssVars.TABLE_BUTTON_HEIGHT}) / 2);
         height: ${CssVars.TABLE_BUTTON_HEIGHT};
         width: ${CssVars.TABLE_BUTTON_HEIGHT};
-        padding: 0;
 
         &:not(:first-child) {
             margin-left: 4px;
