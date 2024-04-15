@@ -5,7 +5,9 @@ export enum TreeEventTypes {
 	DISCARD_FILTER = 'discard-filter',
 	FILTER_CHANGED = 'filter-changed',
 	ASK_MARKER_ADDER = 'ask-marker-adder',
-	SCROLL_NODE_INTO_VIEW = 'scroll-node-into-view'
+	SCROLL_NODE_INTO_VIEW = 'scroll-node-into-view',
+	SHOW_HOVER_BOX = 'show-hover-box',
+	HIDE_HOVER_BOX = 'hide-hover-box'
 }
 
 export interface TreeEventBus {
@@ -38,4 +40,16 @@ export interface TreeEventBus {
 	on(type: TreeEventTypes.SCROLL_NODE_INTO_VIEW, listener: (marker: string) => void): this;
 
 	off(type: TreeEventTypes.SCROLL_NODE_INTO_VIEW, listener: (marker: string) => void): this;
+
+	fire(type: TreeEventTypes.SHOW_HOVER_BOX, top: number, height: number): this;
+
+	on(type: TreeEventTypes.SHOW_HOVER_BOX, listener: (top: number, height: number) => void): this;
+
+	off(type: TreeEventTypes.SHOW_HOVER_BOX, listener: (top: number, height: number) => void): this;
+
+	fire(type: TreeEventTypes.HIDE_HOVER_BOX): this;
+
+	on(type: TreeEventTypes.HIDE_HOVER_BOX, listener: () => void): this;
+
+	off(type: TreeEventTypes.HIDE_HOVER_BOX, listener: () => void): this;
 }

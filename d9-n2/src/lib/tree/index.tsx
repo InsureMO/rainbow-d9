@@ -1,9 +1,10 @@
 import {MUtils, PPUtils, PROPERTY_PATH_ME, registerWidget, useForceUpdate} from '@rainbow-d9/n1';
-import React, {ForwardedRef, forwardRef, KeyboardEvent, useEffect} from 'react';
+import React, {ForwardedRef, forwardRef, KeyboardEvent, MouseEvent, useEffect} from 'react';
 import {GlobalEventPrefix, GlobalEventTypes, useGlobalEventBus, useGlobalHandlers} from '../global';
 import {TreeContent} from './content';
 import {TreeEventBusProvider, useTreeEventBus} from './event/tree-event-bus';
 import {TreeEventTypes} from './event/tree-event-bus-types';
+import {TreeHoverBox} from './hover-box';
 import {TreeSearchBox} from './search-box';
 import {TreeNodeDef, TreeProps} from './types';
 import {useMarker} from './use-marker';
@@ -50,6 +51,21 @@ export const InternalTree = forwardRef((props: TreeProps, ref: ForwardedRef<HTML
 			fire(TreeEventTypes.SWITCH_SEARCH_BOX);
 		}
 	};
+	const onMouseMove = (event: MouseEvent<HTMLDivElement>) => {
+		const target = event.target as HTMLDivElement;
+		const {top} = target.closest('div[data-w=d9-tree-content-container]').getBoundingClientRect();
+		const element = document.elementFromPoint(event.clientX, event.clientY);
+		const nodeContainer = element.closest('div[data-w=d9-tree-node-container]');
+		if (nodeContainer == null) {
+			fire(TreeEventTypes.HIDE_HOVER_BOX);
+		} else {
+			const {top: nodeTop, height} = nodeContainer.getBoundingClientRect();
+			fire(TreeEventTypes.SHOW_HOVER_BOX, nodeTop - top, height);
+		}
+	};
+	const onMouseLeave = () => {
+		fire(TreeEventTypes.HIDE_HOVER_BOX);
+	};
 
 	const detect = buildTreeNodesDetective(detective, markers);
 	// model of whole tree
@@ -65,7 +81,9 @@ export const InternalTree = forwardRef((props: TreeProps, ref: ForwardedRef<HTML
 	return <ATree {...rest} data-disabled={$disabled} data-visible={$visible} height={height}
 	              id={PPUtils.asId(PPUtils.absolute($p2r, props.$pp), props.id)}
 	              onKeyDown={onKeyDown} tabIndex={0}
+	              onMouseMove={onMouseMove} onMouseLeave={onMouseLeave}
 	              ref={ref}>
+		<TreeHoverBox/>
 		<TreeSearchBox/>
 		<TreeContent root={rootNodeDef} initExpandLevel={initExpandLevel}
 		             showIndex={showIndex} detect={detect} $pp={$pp} $wrapped={$wrapped}/>

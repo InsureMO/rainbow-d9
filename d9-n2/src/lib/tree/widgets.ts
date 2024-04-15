@@ -130,10 +130,6 @@ export const TreeNodeContainer = styled(TreeNode).attrs({'data-w': 'd9-tree-node
         }
     }
 
-    &:hover {
-        background-color: ${CssVars.HOVER_COLOR};
-    }
-
     &[data-expanded=false] ~ *:not(div[data-w=d9-tree-node-operators]) {
         display: none;
     }
@@ -239,10 +235,6 @@ export const TreeNodeContent = styled.span.attrs({'data-w': 'd9-tree-node-conten
         color: ${CssVars.PRIMARY_COLOR};
         opacity: 0.7;
     }
-
-    &:hover {
-        background-color: ${CssVars.HOVER_COLOR};
-    }
 `;
 export const TreeNodeToggle = styled.span.attrs({'data-w': 'd9-tree-node-toggle'})`
     display: inline-block;
@@ -283,4 +275,25 @@ export const TreeNodeLabel = styled.span.attrs({'data-w': 'd9-tree-node-label'})
     &:first-child {
         padding-left: 9px;
     }
+`;
+// noinspection CssUnresolvedCustomProperty
+export const TreeHoverShade = styled.div.attrs<{ top: number; height: number; visible: boolean }>(
+	({top, height, visible}) => {
+		return {
+			'data-w': 'd9-tree-node-hover-shade',
+			style: {
+				'--top': toCssSize(top), '--height': toCssSize(height), '--visible': visible ? 'block' : 'none'
+			}
+		};
+	})<{ top: number; height: number; visible: boolean }>`
+    display: var(--visible);
+    position: absolute;
+    background-color: ${CssVars.HOVER_COLOR};
+    top: var(--top);
+    left: 0;
+    width: 100%;
+    height: var(--height);
+    user-select: none;
+    pointer-events: none;
+    z-index: -1;
 `;
