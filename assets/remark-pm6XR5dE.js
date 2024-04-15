@@ -1,5 +1,5 @@
-import { f as fromMarkdown, t as toHast, e as gfmToMarkdown, h as gfmFromMarkdown } from "./mdast-7uNw-nL9.js";
-import { l as gfm } from "./micromark-16gekEC1.js";
+import { f as fromMarkdown, t as toHast, e as gfmToMarkdown, h as gfmFromMarkdown } from "./mdast-5auWtFCP.js";
+import { l as gfm } from "./micromark-AFwfuhOk.js";
 function remarkParse(options) {
   const parser = (doc) => {
     const settings = (

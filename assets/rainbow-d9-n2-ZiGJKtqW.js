@@ -4,10 +4,10 @@ var __publicField = (obj, key, value) => {
   __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
   return value;
 };
-import { a as color, M as MaskedNumber, e as MaskedDate, g as MaskedFunction, j as MaskedPattern, k as MaskedRange, l as MaskedRegExp, o as MaskedDynamic } from "./vendor-yBVHSwoF.js";
-import { R as React, r as reactExports, u as useIMask } from "./react-KYqnliBG.js";
-import { V as VUtils, P as PPUtils, r as registerWidget, c as createLogger, u as useRootEventBus, M as MUtils, N as NUtils, d as Wrapper, e as useForceUpdate, f as MBUtils, b as useWrapperEventBus, W as WrapperEventTypes, g as useCreateEventBus, h as useDefaultAttributeValues, i as PROPERTY_PATH_ME, j as useAttributesWatch, R as RootEventTypes } from "./rainbow-d9-n1-V7kQYFvW.js";
-import { q as qe, W as We } from "./styled-components-76K8qAwX.js";
+import { a as color, M as MaskedNumber, e as MaskedDate, g as MaskedFunction, j as MaskedPattern, k as MaskedRange, l as MaskedRegExp, o as MaskedDynamic } from "./vendor-fTyz-VwX.js";
+import { R as React, r as reactExports, u as useIMask } from "./react-nhEPU5cZ.js";
+import { V as VUtils, P as PPUtils, r as registerWidget, c as createLogger, u as useRootEventBus, M as MUtils, N as NUtils, d as Wrapper, e as useForceUpdate, f as MBUtils, b as useWrapperEventBus, W as WrapperEventTypes, g as useCreateEventBus, h as useDefaultAttributeValues, i as PROPERTY_PATH_ME, j as useAttributesWatch, R as RootEventTypes } from "./rainbow-d9-n1-cUiIu3_2.js";
+import { q as qe, W as We } from "./styled-components-Q2dDluV6.js";
 import { d as dayjs } from "./dayjs-9Z7dW0Q-.js";
 const DOM_KEY_WIDGET = "data-w";
 const DOM_ID_WIDGET = "data-wid";
@@ -7530,6 +7530,10 @@ const TreeNodeContainer = qe(TreeNode$1).attrs({ "data-w": "d9-tree-node-contain
         > svg:first-child {
             transform: rotateZ(90deg);
         }
+    }
+
+    &:hover {
+        background-color: ${CssVars.HOVER_COLOR};
     }
 
     &[data-expanded=false] ~ *:not(div[data-w=d9-tree-node-operators]) {
