@@ -4,10 +4,10 @@ var __publicField = (obj, key, value) => {
   __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
   return value;
 };
-import { a as color, M as MaskedNumber, e as MaskedDate, g as MaskedFunction, j as MaskedPattern, k as MaskedRange, l as MaskedRegExp, o as MaskedDynamic } from "./vendor-pImuYRDH.js";
-import { R as React, r as reactExports, u as useIMask } from "./react-d2mL4C0e.js";
-import { V as VUtils, P as PPUtils, r as registerWidget, c as createLogger, u as useRootEventBus, M as MUtils, N as NUtils, d as Wrapper, e as useForceUpdate, f as MBUtils, b as useWrapperEventBus, W as WrapperEventTypes, g as useCreateEventBus, h as useDefaultAttributeValues, i as PROPERTY_PATH_ME, j as useAttributesWatch, R as RootEventTypes } from "./rainbow-d9-n1-EtA5icPl.js";
-import { q as qe, W as We } from "./styled-components-Ey3F1oUB.js";
+import { a as color, M as MaskedNumber, e as MaskedDate, g as MaskedFunction, j as MaskedPattern, k as MaskedRange, l as MaskedRegExp, o as MaskedDynamic } from "./vendor-yBVHSwoF.js";
+import { R as React, r as reactExports, u as useIMask } from "./react-KYqnliBG.js";
+import { V as VUtils, P as PPUtils, r as registerWidget, c as createLogger, u as useRootEventBus, M as MUtils, N as NUtils, d as Wrapper, e as useForceUpdate, f as MBUtils, b as useWrapperEventBus, W as WrapperEventTypes, g as useCreateEventBus, h as useDefaultAttributeValues, i as PROPERTY_PATH_ME, j as useAttributesWatch, R as RootEventTypes } from "./rainbow-d9-n1-V7kQYFvW.js";
+import { q as qe, W as We } from "./styled-components-76K8qAwX.js";
 import { d as dayjs } from "./dayjs-9Z7dW0Q-.js";
 const DOM_KEY_WIDGET = "data-w";
 const DOM_ID_WIDGET = "data-wid";
@@ -5203,7 +5203,8 @@ const ATableRowOperators = qe.div.attrs(({ rowIndex, rowSpan }) => {
 })`
     display: flex;
     position: sticky;
-    align-items: center;
+    align-self: stretch;
+    align-items: start;
     justify-content: flex-end;
     right: 0;
     background-color: ${CssVars.BACKGROUND_COLOR};
@@ -5218,9 +5219,10 @@ const ATableRowOperators = qe.div.attrs(({ rowIndex, rowSpan }) => {
         display: flex;
         position: relative;
         align-items: center;
+        padding: 0;
+        margin-top: calc((${CssVars.TABLE_CELL_HEIGHT} - ${CssVars.TABLE_BUTTON_HEIGHT}) / 2);
         height: ${CssVars.TABLE_BUTTON_HEIGHT};
         width: ${CssVars.TABLE_BUTTON_HEIGHT};
-        padding: 0;
 
         &:not(:first-child) {
             margin-left: 4px;
@@ -7508,10 +7510,6 @@ const TreeNode$1 = qe.div.attrs({})`
     align-items: center;
     white-space: nowrap;
 
-    &:hover {
-        background-color: ${CssVars.HOVER_COLOR};
-    }
-
     &:before {
         content: '';
         display: ${({ level }) => level === 0 ? "none" : "block"};
@@ -7526,7 +7524,6 @@ const TreeNode$1 = qe.div.attrs({})`
     }
 `;
 const TreeNodeContainer = qe(TreeNode$1).attrs({ "data-w": "d9-tree-node-container" })`
-    padding-right: 16px;
     cursor: pointer;
 
     &[data-expanded=true] {
@@ -7628,6 +7625,7 @@ const TreeNodeContent = qe.span.attrs({ "data-w": "d9-tree-node-content" })`
     position: relative;
     flex-grow: 1;
     align-items: center;
+    align-self: stretch;
     font-family: ${CssVars.FONT_FAMILY};
     font-size: ${CssVars.FONT_SIZE};
     color: ${CssVars.FONT_COLOR};
@@ -7637,6 +7635,10 @@ const TreeNodeContent = qe.span.attrs({ "data-w": "d9-tree-node-content" })`
         font-size: 0.8em;
         color: ${CssVars.PRIMARY_COLOR};
         opacity: 0.7;
+    }
+
+    &:hover {
+        background-color: ${CssVars.HOVER_COLOR};
     }
 `;
 const TreeNodeToggle = qe.span.attrs({ "data-w": "d9-tree-node-toggle" })`
@@ -7673,6 +7675,7 @@ const TreeNodeLabel = qe.span.attrs({ "data-w": "d9-tree-node-label" })`
     display: flex;
     position: relative;
     align-items: center;
+    align-self: stretch;
 
     &:first-child {
         padding-left: 9px;
