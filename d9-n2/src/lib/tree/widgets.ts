@@ -130,6 +130,10 @@ export const TreeNodeContainer = styled(TreeNode).attrs({'data-w': 'd9-tree-node
         }
     }
 
+    &:hover {
+        background-color: ${CssVars.HOVER_COLOR};
+    }
+
     &[data-expanded=false] ~ *:not(div[data-w=d9-tree-node-operators]) {
         display: none;
     }
