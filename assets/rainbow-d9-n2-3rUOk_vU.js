@@ -4,10 +4,10 @@ var __publicField = (obj, key, value) => {
   __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
   return value;
 };
-import { a as color, M as MaskedNumber, e as MaskedDate, g as MaskedFunction, j as MaskedPattern, k as MaskedRange, l as MaskedRegExp, o as MaskedDynamic } from "./vendor-fTyz-VwX.js";
-import { R as React, r as reactExports, u as useIMask } from "./react-nhEPU5cZ.js";
-import { V as VUtils, P as PPUtils, r as registerWidget, c as createLogger, u as useRootEventBus, M as MUtils, N as NUtils, d as Wrapper, e as useForceUpdate, f as MBUtils, b as useWrapperEventBus, W as WrapperEventTypes, g as useCreateEventBus, h as useDefaultAttributeValues, i as PROPERTY_PATH_ME, j as useAttributesWatch, R as RootEventTypes } from "./rainbow-d9-n1-cUiIu3_2.js";
-import { q as qe, W as We } from "./styled-components-Q2dDluV6.js";
+import { a as color, M as MaskedNumber, e as MaskedDate, g as MaskedFunction, j as MaskedPattern, k as MaskedRange, l as MaskedRegExp, o as MaskedDynamic } from "./vendor-nffdQ-AF.js";
+import { R as React, r as reactExports, u as useIMask } from "./react-W7rwqPk0.js";
+import { V as VUtils, P as PPUtils, r as registerWidget, c as createLogger, u as useRootEventBus, M as MUtils, N as NUtils, d as Wrapper, e as useForceUpdate, f as MBUtils, b as useWrapperEventBus, W as WrapperEventTypes, g as useCreateEventBus, h as useDefaultAttributeValues, i as PROPERTY_PATH_ME, j as useAttributesWatch, R as RootEventTypes } from "./rainbow-d9-n1-MZlpUePR.js";
+import { q as qe, W as We } from "./styled-components-PwbjTE-o.js";
 import { d as dayjs } from "./dayjs-9Z7dW0Q-.js";
 const DOM_KEY_WIDGET = "data-w";
 const DOM_ID_WIDGET = "data-wid";
@@ -7261,6 +7261,8 @@ var TreeEventTypes;
   TreeEventTypes2["FILTER_CHANGED"] = "filter-changed";
   TreeEventTypes2["ASK_MARKER_ADDER"] = "ask-marker-adder";
   TreeEventTypes2["SCROLL_NODE_INTO_VIEW"] = "scroll-node-into-view";
+  TreeEventTypes2["SHOW_HOVER_BOX"] = "show-hover-box";
+  TreeEventTypes2["HIDE_HOVER_BOX"] = "hide-hover-box";
 })(TreeEventTypes || (TreeEventTypes = {}));
 const Context = reactExports.createContext({});
 Context.displayName = "TreeNodeEventBus";
@@ -7532,10 +7534,6 @@ const TreeNodeContainer = qe(TreeNode$1).attrs({ "data-w": "d9-tree-node-contain
         }
     }
 
-    &:hover {
-        background-color: ${CssVars.HOVER_COLOR};
-    }
-
     &[data-expanded=false] ~ *:not(div[data-w=d9-tree-node-operators]) {
         display: none;
     }
@@ -7640,10 +7638,6 @@ const TreeNodeContent = qe.span.attrs({ "data-w": "d9-tree-node-content" })`
         color: ${CssVars.PRIMARY_COLOR};
         opacity: 0.7;
     }
-
-    &:hover {
-        background-color: ${CssVars.HOVER_COLOR};
-    }
 `;
 const TreeNodeToggle = qe.span.attrs({ "data-w": "d9-tree-node-toggle" })`
     display: inline-block;
@@ -7684,6 +7678,27 @@ const TreeNodeLabel = qe.span.attrs({ "data-w": "d9-tree-node-label" })`
     &:first-child {
         padding-left: 9px;
     }
+`;
+const TreeHoverShade = qe.div.attrs(({ top, height, visible }) => {
+  return {
+    "data-w": "d9-tree-node-hover-shade",
+    style: {
+      "--top": toCssSize(top),
+      "--height": toCssSize(height),
+      "--visible": visible ? "block" : "none"
+    }
+  };
+})`
+    display: var(--visible);
+    position: absolute;
+    background-color: ${CssVars.HOVER_COLOR};
+    top: var(--top);
+    left: 0;
+    width: 100%;
+    height: var(--height);
+    user-select: none;
+    pointer-events: none;
+    z-index: -1;
 `;
 const useTreeNodeExpand = (ref, state) => {
   const { fire: fireTree } = useTreeEventBus();
@@ -8059,6 +8074,23 @@ const TreeContent = (props) => {
     return React.createElement(TreeNode, { initExpandLevel, showIndex, detective: detect, "$wrapped": { ...$wrapped, $p2r: node$p2r }, node: child, displayIndex: myDisplayIndex, lastOfParent: last, level: 0, key: child.$ip2p });
   }));
 };
+const TreeHoverBox = () => {
+  const { on, off } = useTreeEventBus();
+  const [state, setState] = reactExports.useState({ visible: false });
+  reactExports.useEffect(() => {
+    const onShowHoverBox = (top, height) => {
+      setState({ visible: true, top, height });
+    };
+    const onHideHoverBox = () => setState({ visible: false });
+    on(TreeEventTypes.SHOW_HOVER_BOX, onShowHoverBox);
+    on(TreeEventTypes.HIDE_HOVER_BOX, onHideHoverBox);
+    return () => {
+      off(TreeEventTypes.SHOW_HOVER_BOX, onShowHoverBox);
+      off(TreeEventTypes.HIDE_HOVER_BOX, onHideHoverBox);
+    };
+  }, [on, off]);
+  return React.createElement(TreeHoverShade, { top: state.top ?? 0, height: state.height ?? 0, visible: state.visible });
+};
 const UnwrappedDecorateInput = reactExports.forwardRef((props, ref) => {
   const { $pp = "value", value, onValueChange, disabled, visible, ...rest } = props;
   const $onValueChange = onValueChange;
@@ -8239,6 +8271,21 @@ const InternalTree = reactExports.forwardRef((props, ref) => {
       fire(TreeEventTypes.SWITCH_SEARCH_BOX);
     }
   };
+  const onMouseMove = (event) => {
+    const target = event.target;
+    const { top } = target.closest("div[data-w=d9-tree-content-container]").getBoundingClientRect();
+    const element = document.elementFromPoint(event.clientX, event.clientY);
+    const nodeContainer = element.closest("div[data-w=d9-tree-node-container]");
+    if (nodeContainer == null) {
+      fire(TreeEventTypes.HIDE_HOVER_BOX);
+    } else {
+      const { top: nodeTop, height: height2 } = nodeContainer.getBoundingClientRect();
+      fire(TreeEventTypes.SHOW_HOVER_BOX, nodeTop - top, height2);
+    }
+  };
+  const onMouseLeave = () => {
+    fire(TreeEventTypes.HIDE_HOVER_BOX);
+  };
   const detect = buildTreeNodesDetective(detective, markers);
   const rootNodeValue = MUtils.getValue($wrapped.$model, $pp);
   const rootNodeDef = {
@@ -8253,7 +8300,8 @@ const InternalTree = reactExports.forwardRef((props, ref) => {
   rootNodeDef.$children = detect(rootNodeDef, { global: globalHandlers }) ?? [];
   return React.createElement(
     ATree,
-    { ...rest, "data-disabled": $disabled, "data-visible": $visible, height, id: PPUtils.asId(PPUtils.absolute($p2r, props.$pp), props.id), onKeyDown, tabIndex: 0, ref },
+    { ...rest, "data-disabled": $disabled, "data-visible": $visible, height, id: PPUtils.asId(PPUtils.absolute($p2r, props.$pp), props.id), onKeyDown, tabIndex: 0, onMouseMove, onMouseLeave, ref },
+    React.createElement(TreeHoverBox, null),
     React.createElement(TreeSearchBox, null),
     React.createElement(TreeContent, { root: rootNodeDef, initExpandLevel, showIndex, detect, "$pp": $pp, "$wrapped": $wrapped })
   );
