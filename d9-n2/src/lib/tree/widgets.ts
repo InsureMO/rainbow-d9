@@ -108,10 +108,6 @@ const TreeNode = styled.div.attrs<{ level: number }>({})<{ level: number }>`
     align-items: center;
     white-space: nowrap;
 
-    &:hover {
-        background-color: ${CssVars.HOVER_COLOR};
-    }
-
     &:before {
         content: '';
         display: ${({level}) => level === 0 ? 'none' : 'block'};
@@ -126,7 +122,6 @@ const TreeNode = styled.div.attrs<{ level: number }>({})<{ level: number }>`
     }
 `;
 export const TreeNodeContainer = styled(TreeNode).attrs({'data-w': 'd9-tree-node-container'})`
-    padding-right: 16px;
     cursor: pointer;
 
     &[data-expanded=true] {
@@ -229,6 +224,7 @@ export const TreeNodeContent = styled.span.attrs({'data-w': 'd9-tree-node-conten
     position: relative;
     flex-grow: 1;
     align-items: center;
+    align-self: stretch;
     font-family: ${CssVars.FONT_FAMILY};
     font-size: ${CssVars.FONT_SIZE};
     color: ${CssVars.FONT_COLOR};
@@ -238,6 +234,10 @@ export const TreeNodeContent = styled.span.attrs({'data-w': 'd9-tree-node-conten
         font-size: 0.8em;
         color: ${CssVars.PRIMARY_COLOR};
         opacity: 0.7;
+    }
+
+    &:hover {
+        background-color: ${CssVars.HOVER_COLOR};
     }
 `;
 export const TreeNodeToggle = styled.span.attrs({'data-w': 'd9-tree-node-toggle'})`
@@ -274,6 +274,7 @@ export const TreeNodeLabel = styled.span.attrs({'data-w': 'd9-tree-node-label'})
     display: flex;
     position: relative;
     align-items: center;
+    align-self: stretch;
 
     &:first-child {
         padding-left: 9px;
