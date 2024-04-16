@@ -1,8 +1,12 @@
+import {BaseModel, PropValue} from '@rainbow-d9/n1';
 import dayjs, {Dayjs} from 'dayjs';
 import React, {useEffect, useState} from 'react';
+import {useGlobalHandlers} from '../../global';
 import {IntlLabel} from '../../intl-label';
 import {useCalendarEventBus} from '../event/calendar-event-bus';
 import {CalendarEventTypes} from '../event/calendar-event-bus-types';
+import {CalendarProps} from '../types';
+import {getDefaultCalendarYMFormat} from '../utils';
 import {LeftCaret, RightCaret} from '../widgets';
 import {computeCalendarDays} from './utils';
 import {
@@ -19,15 +23,29 @@ import {
 	DatePickerShortcutButton
 } from './widgets';
 
-export const DatePicker = (props: { value: Dayjs, dateFormat: string }) => {
-	const {value, dateFormat} = props;
+export interface CalendarDatePickerProps {
+	$root: BaseModel;
+	$model: PropValue;
+	value: Dayjs;
+	dateFormat: string;
+	couldPerform?: CalendarProps['couldPerform'];
+}
 
+interface DatePickerState {
+	visible: boolean;
+	current: Dayjs;
+}
+
+export const DatePicker = (props: CalendarDatePickerProps) => {
+	const {$root, $model, value, dateFormat, couldPerform} = props;
+
+	const globalHandlers = useGlobalHandlers();
 	const {on, off, fire} = useCalendarEventBus();
-	const [visible, setVisible] = useState(true);
+	const [state, setState] = useState<DatePickerState>({visible: true, current: value});
 
 	useEffect(() => {
-		const onOpen = () => setVisible(false);
-		const onClose = () => setVisible(true);
+		const onOpen = () => setState(state => ({...state, visible: false}));
+		const onClose = () => setState({current: value, visible: true});
 		on(CalendarEventTypes.OPEN_YEAR_MONTH_PICKER, onOpen);
 		on(CalendarEventTypes.OPEN_TIME_PICKER, onOpen);
 		on(CalendarEventTypes.CLOSE_YEAR_MONTH_PICKER, onClose);
@@ -38,9 +56,9 @@ export const DatePicker = (props: { value: Dayjs, dateFormat: string }) => {
 			off(CalendarEventTypes.CLOSE_YEAR_MONTH_PICKER, onClose);
 			off(CalendarEventTypes.CLOSE_TIME_PICKER, onClose);
 		};
-	}, [on, off]);
+	}, [on, off, value]);
 
-	if (!visible) {
+	if (!state.visible) {
 		return null;
 	}
 
@@ -51,7 +69,13 @@ export const DatePicker = (props: { value: Dayjs, dateFormat: string }) => {
 
 	const onDateClicked = (date: Dayjs) => () => {
 		const newValue = date.clone().hour(value.hour()).minute(value.minute()).second(value.second()).millisecond(value.millisecond());
-		fire(CalendarEventTypes.VALUE_SELECTED, newValue);
+		const couldPerformValue = couldPerform == null ? true : (couldPerform({
+			root: $root, model: $model, valueToCheck: newValue, checkType: 'date', global: globalHandlers
+		}) !== false);
+		if (couldPerformValue) {
+			fire(CalendarEventTypes.VALUE_SELECTED, newValue);
+		}
+		setState(state => ({...state, current: newValue}));
 	};
 	const onTodayClicked = onDateClicked(today);
 	const onYesterdayClicked = onDateClicked(today.subtract(1, 'day'));
@@ -62,21 +86,25 @@ export const DatePicker = (props: { value: Dayjs, dateFormat: string }) => {
 	const onYearEndClicked = onDateClicked(today.month(11).date(31));
 	const onPrevYearEndClicked = onDateClicked(today.month(11).date(31).subtract(1, 'year'));
 
-	const onGotoPrevMonthClicked = () => onDateClicked(value.subtract(1, 'month'))();
-	const onGotoNextMonthClicked = () => onDateClicked(value.add(1, 'month'))();
+	const onGotoPrevMonthClicked = () => {
+		onDateClicked(state.current.subtract(1, 'month'))();
+	};
+	const onGotoNextMonthClicked = () => {
+		onDateClicked(state.current.add(1, 'month'))();
+	};
 
-	const currentYear = value.year();
-	const currentMonth = value.month();
-	const currentDate = value.date();
+	const currentYear = state.current.year();
+	const currentMonth = state.current.month();
+	// const currentDate = state.current.date();
 	const currentDisplayMonth = (() => {
-		let format = 'MMM YYYY';
+		let format = getDefaultCalendarYMFormat();
 		// Buddhist era
 		if (dateFormat.includes('B')) {
-			format = 'MMM BBBB';
+			format = format.replace(/Y/g, 'B');
 		}
-		return value.format(format);
+		return state.current.format(format);
 	})();
-	const firstDayOfDisplayMonth = value.clone().date(1);
+	const firstDayOfDisplayMonth = state.current.clone().date(1);
 	const days = computeCalendarDays(firstDayOfDisplayMonth);
 
 	return <DatePickerContainer>
@@ -129,11 +157,17 @@ export const DatePicker = (props: { value: Dayjs, dateFormat: string }) => {
 			<DatePickerBodyHeaderCell><IntlLabel keys={['calendar', 'friday']} value="F"/></DatePickerBodyHeaderCell>
 			<DatePickerBodyHeaderCell><IntlLabel keys={['calendar', 'saturday']} value="S"/></DatePickerBodyHeaderCell>
 			{days.map(({year, month, date}) => {
+				const valueToPerform = state.current.clone().year(year).month(month).date(date);
+				const couldPerformValue = couldPerform == null ? true : (couldPerform({
+					root: $root, model: $model, valueToCheck: valueToPerform, checkType: 'date', global: globalHandlers
+				}) !== false);
+				const click = couldPerformValue ? onDateClicked(dayjs().year(year).month(month).date(date)) : (void 0);
 				return <DatePickerBodyDateCell key={`${year}/${month}/${date}`}
 				                               data-current-month={year === currentYear && month === currentMonth}
-				                               data-current={year === currentYear && month === currentMonth && date === currentDate}
+				                               data-current={year === value.year() && month === value.month() && date === value.date()}
 				                               data-today={year === todayYear && month === todayMonth && date === todayDate}
-				                               onClick={onDateClicked(dayjs().year(year).month(month).date(date))}>
+				                               data-could-perform={couldPerformValue}
+				                               onClick={click}>
 					<span>{date}</span>
 				</DatePickerBodyDateCell>;
 			})}

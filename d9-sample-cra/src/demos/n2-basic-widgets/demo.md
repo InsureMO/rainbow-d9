@@ -58,10 +58,19 @@
 	- dateFormat: BBBB/MM/DD
 	- timeFormat: HH
 	- renderOn: desktop, mobile
+	- !autoConfirm
+	- couldPerform:
+	  ```javascript
+	  // April 2024, and after   
+	  return (options.valueToCheck.year() === 2024 && options.valueToCheck.month() >= 3)
+	    || options.valueToCheck.year() > 2024;
+	  ```
+- Date::Buddhist Era::buddhistEra2
+	- dateFormat: BBBB/MM
 - Date::Only Visible on Desktop::mobileDesktop
 	- renderOn:
 	  ```
-      // this line canont be ignored, since renderOn attribute build will not treat single line as function body
+	  // this line canont be ignored, since renderOn attribute build will not treat single line as function body
 	  return ['desktop', 'mobile'];
 	  ```
 - Date::Only Visible on Mobile::mobileDate

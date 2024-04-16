@@ -32,26 +32,42 @@ export const TimePickerSelector = styled.div.attrs({'data-v-scroll': ''})`
 `;
 export const TimePickerSelectorOption = styled.span`
     display: flex;
+    position: relative;
     align-items: center;
     min-height: ${CssVars.INPUT_HEIGHT};
     padding: 0 ${CssVars.CALENDAR_GUTTER_SIZE};
     cursor: pointer;
     transition: all ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION};
 
-    &[data-current=true] {
-        color: ${CssVars.INVERT_COLOR};
+    &[data-could-perform=false] {
+        cursor: default;
 
         &:before {
+            content: '';
             display: block;
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            border-radius: ${CssVars.BORDER_RADIUS};
+            background-color: ${CssVars.WAIVE_COLOR};
+            opacity: 0.3;
+            z-index: 0;
+        }
+    }
+
+    &[data-current=true] {
+        &:before {
+            content: '';
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             background-color: ${CssVars.PRIMARY_COLOR};
-            opacity: 0.5;
-            z-index: -1;
+            opacity: 0.15;
+            z-index: 0;
         }
     }
 

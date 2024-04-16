@@ -1,8 +1,12 @@
+import {BaseModel, PropValue} from '@rainbow-d9/n1';
 import {Dayjs} from 'dayjs';
 import React, {useEffect, useRef, useState} from 'react';
+import {useGlobalHandlers} from '../../global';
 import {IntlLabel} from '../../intl-label';
 import {useCalendarEventBus} from '../event/calendar-event-bus';
 import {CalendarEventTypes} from '../event/calendar-event-bus-types';
+import {CalendarProps} from '../types';
+import {checkDateParts} from '../utils';
 import {
 	MonthSelector,
 	MonthSelectorOption,
@@ -12,12 +16,21 @@ import {
 	YearSelectorOption
 } from './widgets';
 
-export const YearMonthPicker = (props: { value: Dayjs }) => {
-	const {value} = props;
+export interface CalendarYearMonthPickerProps {
+	$root: BaseModel;
+	$model: PropValue;
+	value: Dayjs;
+	dateFormat: string;
+	couldPerform?: CalendarProps['couldPerform'];
+}
 
+export const YearMonthPicker = (props: CalendarYearMonthPickerProps) => {
+	const {$root, $model, value, dateFormat, couldPerform} = props;
+
+	const globalHandlers = useGlobalHandlers();
 	const {on, off, fire} = useCalendarEventBus();
 	const yearSelectorRef = useRef<HTMLDivElement>(null);
-	const [visible, setVisible] = useState(false);
+	const [visible, setVisible] = useState(!checkDateParts(dateFormat).hasDate);
 
 	useEffect(() => {
 		const onOpen = () => setVisible(true);
@@ -53,55 +66,53 @@ export const YearMonthPicker = (props: { value: Dayjs }) => {
 	};
 
 	const maxYear = new Date().getFullYear() + 99;
+	const monthLabels: Array<[Array<string>, string]> = [
+		[['calendar', 'jan'], 'Jan'],
+		[['calendar', 'feb'], 'Feb'],
+		[['calendar', 'mar'], 'Mar'],
+		[['calendar', 'apr'], 'Apr'],
+		[['calendar', 'may'], 'May'],
+		[['calendar', 'jun'], 'Jun'],
+		[['calendar', 'jul'], 'Jul'],
+		[['calendar', 'aug'], 'Aug'],
+		[['calendar', 'sep'], 'Sep'],
+		[['calendar', 'oct'], 'Oct'],
+		[['calendar', 'nov'], 'Nov'],
+		[['calendar', 'dec'], 'Dec']
+	];
+
+	const yearFormat = dateFormat.includes('B') ? 'BBBB' : 'YYYY';
 
 	return <YearMonthPickerContainer>
 		<YearMonthPickerLabel>Year</YearMonthPickerLabel>
 		<YearMonthPickerLabel>Month</YearMonthPickerLabel>
 		<YearSelector ref={yearSelectorRef}>
 			{new Array(200).fill(1).map((_, index) => maxYear - index).map(year => {
+				const valueToPerform = value.clone().year(year);
+				const couldPerformValue = couldPerform == null ? true : (couldPerform({
+					root: $root, model: $model, valueToCheck: valueToPerform, checkType: 'year', global: globalHandlers
+				}) !== false);
+				const click = couldPerformValue ? onYearChange(year) : (void 0);
 				return <YearSelectorOption data-year={year} data-current={year === value.year()}
-				                           onClick={onYearChange(year)} key={year}>
-					{year}
+				                           data-could-perform={couldPerformValue}
+				                           onClick={click} key={year}>
+					{valueToPerform.format(yearFormat)}
 				</YearSelectorOption>;
 			})}
 		</YearSelector>
 		<MonthSelector>
-			<MonthSelectorOption onClick={onMonthChange(0)} data-current={value.month() === 0}>
-				<IntlLabel keys={['calendar', 'jan']} value="Jan"/>
-			</MonthSelectorOption>
-			<MonthSelectorOption onClick={onMonthChange(1)} data-current={value.month() === 1}>
-				<IntlLabel keys={['calendar', 'feb']} value="Feb"/>
-			</MonthSelectorOption>
-			<MonthSelectorOption onClick={onMonthChange(2)} data-current={value.month() === 2}>
-				<IntlLabel keys={['calendar', 'mar']} value="Mar"/>
-			</MonthSelectorOption>
-			<MonthSelectorOption onClick={onMonthChange(3)} data-current={value.month() === 3}>
-				<IntlLabel keys={['calendar', 'apr']} value="Apr"/>
-			</MonthSelectorOption>
-			<MonthSelectorOption onClick={onMonthChange(4)} data-current={value.month() === 4}>
-				<IntlLabel keys={['calendar', 'may']} value="May"/>
-			</MonthSelectorOption>
-			<MonthSelectorOption onClick={onMonthChange(5)} data-current={value.month() === 5}>
-				<IntlLabel keys={['calendar', 'jun']} value="Jun"/>
-			</MonthSelectorOption>
-			<MonthSelectorOption onClick={onMonthChange(6)} data-current={value.month() === 6}>
-				<IntlLabel keys={['calendar', 'jul']} value="Jul"/>
-			</MonthSelectorOption>
-			<MonthSelectorOption onClick={onMonthChange(7)} data-current={value.month() === 7}>
-				<IntlLabel keys={['calendar', 'aug']} value="Aug"/>
-			</MonthSelectorOption>
-			<MonthSelectorOption onClick={onMonthChange(8)} data-current={value.month() === 8}>
-				<IntlLabel keys={['calendar', 'sep']} value="Sep"/>
-			</MonthSelectorOption>
-			<MonthSelectorOption onClick={onMonthChange(9)} data-current={value.month() === 9}>
-				<IntlLabel keys={['calendar', 'oct']} value="Oct"/>
-			</MonthSelectorOption>
-			<MonthSelectorOption onClick={onMonthChange(10)} data-current={value.month() === 10}>
-				<IntlLabel keys={['calendar', 'nov']} value="Nov"/>
-			</MonthSelectorOption>
-			<MonthSelectorOption onClick={onMonthChange(11)} data-current={value.month() === 11}>
-				<IntlLabel keys={['calendar', 'dec']} value="Dec"/>
-			</MonthSelectorOption>
+			{new Array(12).fill(1).map((_, month) => {
+				const valueToPerform = value.clone().month(month);
+				const couldPerformValue = couldPerform == null ? true : (couldPerform({
+					root: $root, model: $model, valueToCheck: valueToPerform, checkType: 'month', global: globalHandlers
+				}) !== false);
+				const click = couldPerformValue ? onMonthChange(month) : (void 0);
+				return <MonthSelectorOption onClick={click} data-current={value.month() === month}
+				                            data-could-perform={couldPerformValue}
+				                            key={month}>
+					<IntlLabel keys={monthLabels[month][0]} value={monthLabels[month][1]}/>
+				</MonthSelectorOption>;
+			})}
 		</MonthSelector>
 	</YearMonthPickerContainer>;
 };

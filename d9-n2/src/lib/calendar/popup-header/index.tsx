@@ -7,6 +7,7 @@ import {IntlLabel} from '../../intl-label';
 import {useCalendarEventBus} from '../event/calendar-event-bus';
 import {CalendarEventTypes} from '../event/calendar-event-bus-types';
 import {CalendarProps} from '../types';
+import {checkDateParts} from '../utils';
 import {
 	PopupHeaderContainer,
 	PopupHeaderDateLabel,
@@ -46,7 +47,9 @@ export const CalendarPopupHeader = (props: CalendarPopupHeaderProps) => {
 	const {dateFormat, time, timeFormat, value, confirm} = props;
 
 	const {fire} = useCalendarEventBus();
-	const [currentPicker, setCurrentPicker] = useState(CurrentPicker.DATE);
+	const [currentPicker, setCurrentPicker] = useState(() => {
+		return checkDateParts(dateFormat).hasDate ? CurrentPicker.DATE : CurrentPicker.YEAR_MONTH;
+	});
 
 	const onYearMonthClicked = () => {
 		fire(CalendarEventTypes.OPEN_YEAR_MONTH_PICKER);
@@ -77,6 +80,8 @@ export const CalendarPopupHeader = (props: CalendarPopupHeaderProps) => {
 	const currentDisplayDate = value.format(dateFormat);
 	const currentDisplayTime = value.format(timeFormat);
 
+	const {hasDate} = checkDateParts(dateFormat);
+
 	return <PopupHeaderContainer>
 		<PopupHeaderDateLabel>{currentDisplayDate}</PopupHeaderDateLabel>
 		{time
@@ -95,8 +100,9 @@ export const CalendarPopupHeader = (props: CalendarPopupHeaderProps) => {
 		{currentPicker !== CurrentPicker.YEAR_MONTH
 			? <PopupHeaderTimeButton onClick={onYearMonthClicked}><DateIcon/></PopupHeaderTimeButton>
 			: null}
-		{currentPicker !== CurrentPicker.DATE
-			? <PopupHeaderTimeButton onClick={onBackClicked}><BackIcon/></PopupHeaderTimeButton> : null}
+		{hasDate && currentPicker !== CurrentPicker.DATE
+			? <PopupHeaderTimeButton onClick={onBackClicked}><BackIcon/></PopupHeaderTimeButton>
+			: null}
 		<PopupHeaderTimeButton onClick={onConfirmClicked}>
 			<IntlLabel keys={['calendar', 'confirm']} value="Ok"/>
 		</PopupHeaderTimeButton>

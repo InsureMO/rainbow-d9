@@ -1,7 +1,8 @@
 import {Undefinable, VUtils} from '@rainbow-d9/n1';
-import {CalendarFixedTimeAt} from '@rainbow-d9/n2';
+import {CalendarDef, CalendarFixedTimeAt} from '@rainbow-d9/n2';
 import {
 	AttributeValueBuild,
+	createSyncSnippetBuild,
 	MonitorHandlerDetective,
 	SpecificWidgetTranslator,
 	ValidatorUtils,
@@ -55,6 +56,8 @@ export const N2CalendarInitTimeAtBuild: AttributeValueBuild<CalendarFixedTimeAt>
 	build: N2CalendarBuildFixedTimeAt
 };
 
+export const N2CalendarCouldPerformBuild = createSyncSnippetBuild<CalendarDef, 'couldPerform'>('couldPerform', ['options']);
+
 export class N2DateTranslator extends SpecificWidgetTranslator<N2WidgetType.DATE> {
 	public getSupportedType(): N2WidgetType.DATE {
 		return N2WidgetType.DATE;
@@ -62,7 +65,7 @@ export class N2DateTranslator extends SpecificWidgetTranslator<N2WidgetType.DATE
 
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	public getAttributeValueBuilders(): Array<AttributeValueBuild<any>> {
-		return [N2CalendarFixedTimeAtBuild, N2CalendarInitTimeAtBuild];
+		return [N2CalendarFixedTimeAtBuild, N2CalendarInitTimeAtBuild, N2CalendarCouldPerformBuild, ValueChangedBuild];
 	}
 
 	public getValidationHandlerDetectives(): Array<MonitorHandlerDetective> {
@@ -80,7 +83,7 @@ export class N2DateTimeTranslator extends SpecificWidgetTranslator<N2WidgetType.
 
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	public getAttributeValueBuilders(): Array<AttributeValueBuild<any>> {
-		return [N2CalendarFixedTimeAtBuild, N2CalendarInitTimeAtBuild];
+		return [N2CalendarFixedTimeAtBuild, N2CalendarInitTimeAtBuild, N2CalendarCouldPerformBuild, ValueChangedBuild];
 	}
 
 	public getValidationHandlerDetectives(): Array<MonitorHandlerDetective> {
@@ -98,7 +101,7 @@ export class N2CalendarTranslator extends SpecificWidgetTranslator<N2WidgetType.
 
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	public getAttributeValueBuilders(): Array<AttributeValueBuild<any>> {
-		return [N2CalendarFixedTimeAtBuild, N2CalendarInitTimeAtBuild, ValueChangedBuild];
+		return [N2CalendarFixedTimeAtBuild, N2CalendarInitTimeAtBuild, N2CalendarCouldPerformBuild, ValueChangedBuild];
 	}
 
 	public getValidationHandlerDetectives(): Array<MonitorHandlerDetective> {
