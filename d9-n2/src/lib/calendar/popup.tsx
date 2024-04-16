@@ -12,7 +12,7 @@ import {checkDateParts} from './utils';
 import {PopupContainer} from './widgets';
 import {YearMonthPicker} from './year-month-picker';
 
-interface CalendarPopupProps extends Required<Pick<CalendarProps, 'dateFormat' | 'time' | 'timeFormat' | 'initTimeAt' | 'couldPerform'>> {
+interface CalendarPopupProps extends Required<Pick<CalendarProps, 'date' | 'dateFormat' | 'time' | 'timeFormat' | 'initTimeAt' | 'couldPerform'>> {
 	$root: BaseModel;
 	$model: PropValue;
 	initValue?: Nullable<Dayjs>;
@@ -26,7 +26,7 @@ export const CalendarPopup = (props: CalendarPopupProps) => {
 	const {
 		$root, $model, initValue,
 		popupRef, popupState, popupShown,
-		dateFormat, time, timeFormat, initTimeAt, couldPerform,
+		date = true, dateFormat, time = false, timeFormat, initTimeAt, couldPerform,
 		confirm
 	} = props;
 
@@ -55,18 +55,20 @@ export const CalendarPopup = (props: CalendarPopupProps) => {
 	                      maxHeight={CssVars.CALENDAR_POPUP_HEIGHT_VALUE}
 	                      shown={popupShown && popupState.active === DropdownPopupStateActive.ACTIVE} ref={popupRef}>
 		<PopupContainer>
-			<CalendarPopupHeader dateFormat={dateFormat} time={time} timeFormat={timeFormat}
+			<CalendarPopupHeader date={date} dateFormat={dateFormat} time={time} timeFormat={timeFormat}
 			                     value={value} confirm={confirm}/>
-			{hasDate
+			{date && hasDate
 				? <DatePicker $root={$root} $model={$model} value={value} dateFormat={dateFormat}
 				              couldPerform={couldPerform}/>
 				: null}
 			{time
-				? <TimePicker $root={$root} $model={$model} value={value} timeFormat={timeFormat}
+				? <TimePicker $root={$root} $model={$model} value={value} date={date} timeFormat={timeFormat}
 				              couldPerform={couldPerform}/>
 				: null}
-			<YearMonthPicker $root={$root} $model={$model} value={value} dateFormat={dateFormat}
-			                 couldPerform={couldPerform}/>
+			{date
+				? <YearMonthPicker $root={$root} $model={$model} value={value} dateFormat={dateFormat}
+				                   couldPerform={couldPerform}/>
+				: null}
 		</PopupContainer>
 	</DropdownPopup>;
 };

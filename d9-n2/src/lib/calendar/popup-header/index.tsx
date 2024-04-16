@@ -16,7 +16,7 @@ import {
 	PopupHeaderTimeLabel
 } from './widgets';
 
-type CalendarPopupHeaderProps = Required<Pick<CalendarProps, 'dateFormat' | 'time' | 'timeFormat'>> & {
+type CalendarPopupHeaderProps = Required<Pick<CalendarProps, 'date' | 'dateFormat' | 'time' | 'timeFormat'>> & {
 	value: Dayjs;
 	confirm: (value: Dayjs) => void;
 }
@@ -44,7 +44,7 @@ enum CurrentPicker {
 }
 
 export const CalendarPopupHeader = (props: CalendarPopupHeaderProps) => {
-	const {dateFormat, time, timeFormat, value, confirm} = props;
+	const {date, dateFormat, time, timeFormat, value, confirm} = props;
 
 	const {fire} = useCalendarEventBus();
 	const [currentPicker, setCurrentPicker] = useState(() => {
@@ -83,12 +83,10 @@ export const CalendarPopupHeader = (props: CalendarPopupHeaderProps) => {
 	const {hasDate} = checkDateParts(dateFormat);
 
 	return <PopupHeaderContainer>
-		<PopupHeaderDateLabel>{currentDisplayDate}</PopupHeaderDateLabel>
-		{time
-			? <PopupHeaderTimeLabel>{currentDisplayTime}</PopupHeaderTimeLabel>
-			: null}
+		{date ? <PopupHeaderDateLabel>{currentDisplayDate}</PopupHeaderDateLabel> : null}
+		{time ? <PopupHeaderTimeLabel>{currentDisplayTime}</PopupHeaderTimeLabel> : null}
 		<PopupHeaderPlaceholder/>
-		{time
+		{date && time
 			? <>
 				<PopupHeaderTimeButton onClick={onToDayStartClicked}>00</PopupHeaderTimeButton>
 				<PopupHeaderTimeButton onClick={onToDayEndClicked}>24</PopupHeaderTimeButton>
@@ -97,10 +95,10 @@ export const CalendarPopupHeader = (props: CalendarPopupHeaderProps) => {
 					: null}
 			</>
 			: null}
-		{currentPicker !== CurrentPicker.YEAR_MONTH
+		{date && currentPicker !== CurrentPicker.YEAR_MONTH
 			? <PopupHeaderTimeButton onClick={onYearMonthClicked}><DateIcon/></PopupHeaderTimeButton>
 			: null}
-		{hasDate && currentPicker !== CurrentPicker.DATE
+		{date && hasDate && currentPicker !== CurrentPicker.DATE
 			? <PopupHeaderTimeButton onClick={onBackClicked}><BackIcon/></PopupHeaderTimeButton>
 			: null}
 		<PopupHeaderTimeButton onClick={onConfirmClicked}>

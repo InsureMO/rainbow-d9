@@ -53,7 +53,7 @@ export const Picker = forwardRef((props: CalendarProps, ref: ForwardedRef<HTMLDi
 	const {
 		$pp, $wrapped: {$onValueChange, $root, $model, $p2r, $avs: {$disabled, $visible}},
 		please = '', clearable = true,
-		dateFormat = getDefaultCalendarDateFormat(), time, timeFormat = getDefaultCalendarTimeFormat(),
+		date, dateFormat = getDefaultCalendarDateFormat(), time, timeFormat = getDefaultCalendarTimeFormat(),
 		storeFormat = getDefaultCalendarDatetimeFormat(),
 		fixedTimeAt = FIX_TIME_AT_START_OF_DAY, initTimeAt,
 		couldPerform,
@@ -176,10 +176,15 @@ export const Picker = forwardRef((props: CalendarProps, ref: ForwardedRef<HTMLDi
 	const label = (() => {
 		if (VUtils.isBlank(value)) {
 			return please || '';
+		} else if (date === false) {
+			// time only
+			return dayjs(value, storeFormat).format(timeFormat);
 		} else if (time) {
+			// both date time
 			const datetimeFormat = computeFormat({date: dateFormat, time: timeFormat});
 			return dayjs(value, storeFormat).format(datetimeFormat);
 		} else {
+			// date only
 			return dayjs(value, storeFormat).format(dateFormat);
 		}
 	})();
@@ -207,7 +212,8 @@ export const Picker = forwardRef((props: CalendarProps, ref: ForwardedRef<HTMLDi
 		{isDropdownPopupActive(popupState.active)
 			? <CalendarPopup $root={$root} $model={$model} initValue={initValueForPopup}
 			                 popupRef={popupRef} popupState={popupState} popupShown={popupShown}
-			                 dateFormat={dateFormat} time={time} timeFormat={timeFormat} initTimeAt={initTimeAt}
+			                 date={date} dateFormat={dateFormat} time={time} timeFormat={timeFormat}
+			                 initTimeAt={initTimeAt}
 			                 couldPerform={couldPerform}
 			                 confirm={onConfirm}/>
 			: null}

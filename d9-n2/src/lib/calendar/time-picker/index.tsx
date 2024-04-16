@@ -13,19 +13,20 @@ export interface CalendarTimePickerProps {
 	$root: BaseModel;
 	$model: PropValue;
 	value: Dayjs;
+	date: boolean;
 	timeFormat: string;
 	couldPerform?: CalendarProps['couldPerform'];
 }
 
 export const TimePicker = (props: CalendarTimePickerProps) => {
-	const {$root, $model, value, timeFormat, couldPerform} = props;
+	const {$root, $model, value, date, timeFormat, couldPerform} = props;
 
 	const hourSelectorRef = useRef<HTMLDivElement>(null);
 	const minuteSelectorRef = useRef<HTMLDivElement>(null);
 	const secondSelectorRef = useRef<HTMLDivElement>(null);
 	const globalHandlers = useGlobalHandlers();
 	const {on, off, fire} = useCalendarEventBus();
-	const [visible, setVisible] = useState(false);
+	const [visible, setVisible] = useState(!date);
 
 	useEffect(() => {
 		const onOpen = () => setVisible(true);

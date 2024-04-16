@@ -10,12 +10,16 @@ export const Calendar = forwardRef((props: CalendarProps, ref: ForwardedRef<HTML
 	</CalendarEventBusProvider>;
 });
 
-export const DateCalendar = forwardRef((props: Omit<CalendarProps, 'time' | 'timeFormat'>, ref: ForwardedRef<HTMLDivElement>) => {
-	return <Calendar {...props} time={false} ref={ref}/>;
+export const DateCalendar = forwardRef((props: Omit<CalendarProps, 'date' | 'time' | 'timeFormat'>, ref: ForwardedRef<HTMLDivElement>) => {
+	return <Calendar {...props} date={true} time={false} ref={ref}/>;
 });
 
-export const DateTimeCalendar = forwardRef((props: Omit<CalendarProps, 'time' | 'fixedTimeAt'>, ref: ForwardedRef<HTMLDivElement>) => {
-	return <Calendar {...props} time={true} ref={ref}/>;
+export const DateTimeCalendar = forwardRef((props: Omit<CalendarProps, 'date' | 'time' | 'fixedTimeAt'>, ref: ForwardedRef<HTMLDivElement>) => {
+	return <Calendar {...props} date={true} time={true} ref={ref}/>;
+});
+
+export const TimeCalendar = forwardRef((props: Omit<CalendarProps, 'date' | 'time' | 'fixedTimeAt'>, ref: ForwardedRef<HTMLDivElement>) => {
+	return <Calendar {...props} date={false} time={true} ref={ref}/>;
 });
 
 export {CalendarProps, CalendarDef, CalendarFixedTimeAt};
@@ -25,3 +29,4 @@ export * as CalendarUtils from './utils';
 registerWidget({key: 'Calendar', JSX: Calendar, container: false, array: false});
 registerWidget({key: 'Date', JSX: DateCalendar, container: false, array: false});
 registerWidget({key: 'DateTime', JSX: DateTimeCalendar, container: false, array: false});
+registerWidget({key: 'Time', JSX: TimeCalendar, container: false, array: false});

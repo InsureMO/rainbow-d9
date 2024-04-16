@@ -14,6 +14,7 @@ export interface CalendarValidRangeOptions<R extends BaseModel, M extends PropVa
 export type CalendarDef = ValueChangeableNodeDef & OmitHTMLProps<HTMLDivElement> & {
 	please?: ReactNode;
 	clearable?: boolean;
+	date?: boolean;
 	dateFormat?: string;
 	time?: boolean;
 	timeFormat?: string;

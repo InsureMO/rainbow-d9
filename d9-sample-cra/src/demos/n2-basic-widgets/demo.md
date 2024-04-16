@@ -73,6 +73,8 @@
 	- dateFormat: BBBB/MM
 - Date::Hide Shortcuts::date3
 	- data-calendar-hide-shortcuts
+- Time::Time Only::time1
+	- timeFormat: HH:mm:ss
 - Date::Only Visible on Desktop::mobileDesktop
 	- renderOn:
 	  ```

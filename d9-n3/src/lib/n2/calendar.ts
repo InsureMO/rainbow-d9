@@ -94,6 +94,24 @@ export class N2DateTimeTranslator extends SpecificWidgetTranslator<N2WidgetType.
 	}
 }
 
+export class N2TimeTranslator extends SpecificWidgetTranslator<N2WidgetType.TIME> {
+	public getSupportedType(): N2WidgetType.TIME {
+		return N2WidgetType.TIME;
+	}
+
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	public getAttributeValueBuilders(): Array<AttributeValueBuild<any>> {
+		return [N2CalendarFixedTimeAtBuild, N2CalendarInitTimeAtBuild, N2CalendarCouldPerformBuild, ValueChangedBuild];
+	}
+
+	public getValidationHandlerDetectives(): Array<MonitorHandlerDetective> {
+		return [
+			ValidatorUtils.DETECT_REQUIRED,
+			...super.getValidationHandlerDetectives()
+		];
+	}
+}
+
 export class N2CalendarTranslator extends SpecificWidgetTranslator<N2WidgetType.CALENDAR> {
 	public getSupportedType(): N2WidgetType.CALENDAR {
 		return N2WidgetType.CALENDAR;

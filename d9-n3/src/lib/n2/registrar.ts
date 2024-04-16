@@ -2,7 +2,7 @@ import {createOrGetTranslateHelperSingleton, WidgetHelper} from '../widget';
 import {N2BoxTranslator} from './box';
 import {N2ButtonTranslator, N2LinkTranslator} from './button';
 import {N2ButtonBarTranslator} from './button-bar';
-import {N2CalendarTranslator, N2DateTimeTranslator, N2DateTranslator} from './calendar';
+import {N2CalendarTranslator, N2DateTimeTranslator, N2DateTranslator, N2TimeTranslator} from './calendar';
 import {N2BadgeTranslator, N2CaptionTranslator, N2LabelTranslator} from './caption';
 import {N2CheckboxTranslator} from './checkbox';
 import {N2CheckboxesTranslator, N2ChecksTranslator} from './checkboxes';
@@ -46,6 +46,7 @@ export const registerN2Widgets = (widgetHelper?: WidgetHelper) => {
 	repo.register(new N2MultiDropdownTranslator(repo));
 	repo.register(new N2DateTranslator(repo));
 	repo.register(new N2DateTimeTranslator(repo));
+	repo.register(new N2TimeTranslator(repo));
 	repo.register(new N2CalendarTranslator(repo));
 
 	repo.register(new N2ButtonTranslator(repo));

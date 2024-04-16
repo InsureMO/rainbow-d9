@@ -1234,8 +1234,9 @@ It is completely consistent with the `Dropdown`, please refer to the previous se
 |-----------------|----------|---------------------------------------------------------------------------------------------------|
 | please          | text     | `- please: Please select...`                                                                      |
 | clearable       | boolean  | `- !clearable`<br/>`- clearable: false`<br/>Allowed to clear the selected value or not.           |
+| date            | boolean  | `- date: false`, only for `Calendar`                                                              |
 | dateFormat      | text     | `- dateFormat: YYYY/MM/DD`, follows `Dayjs`.                                                      |
-| time            | boolean  | `- time: false`, only for `Calendar`                                                              |
+| time            | boolean  | `- time: true`, only for `Calendar`                                                               |
 | timeFormat      | text     | `- timeFormat: HH:mm:ss`, follows `Dayjs`                                                         |
 | storeFormat     | text     | `- storeFormat: YYYY/MM/DD HH:mm:ss`, follows `Dayjs`                                             |
 | autoConfirm     | boolean  | `- autoConfirm: true`<br/>Selected value should be applied to model automatically on blur or not. |

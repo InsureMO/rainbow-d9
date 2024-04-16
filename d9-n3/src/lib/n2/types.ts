@@ -24,6 +24,7 @@ export enum N2WidgetType {
 	CALENDAR = 'Calendar',
 	DATE = 'Date',
 	DATETIME = 'DateTime',
+	TIME = 'Time',
 
 	RIBS = 'Ribs',
 	READONLY_RIBS = 'RibsView',
