@@ -4,10 +4,10 @@ var __publicField = (obj, key, value) => {
   __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
   return value;
 };
-import { c as createLogger, N as NUtils, V as VUtils, k as MonitorNodeAttributes, l as Reaction, E as ExternalDefIndicator, P as PPUtils } from "./rainbow-d9-n1-WpnDTE_L.js";
-import { O as OptionItemSort, R as REACTION_REFRESH_OPTIONS, c as GlobalEventPrefix } from "./rainbow-d9-n2-H5n68r7k.js";
-import { f as fromMarkdown, g as gfmTableFromMarkdown, a as gfmStrikethroughFromMarkdown, b as gfmFootnoteFromMarkdown, c as gfmTaskListItemFromMarkdown, d as frontmatterFromMarkdown } from "./mdast-BxNSHimF.js";
-import { g as gfmTable, h as gfmStrikethrough, i as gfmFootnote, j as gfmTaskListItem, k as frontmatter } from "./micromark-vzjUmcZ3.js";
+import { c as createLogger, N as NUtils, V as VUtils, k as MonitorNodeAttributes, l as Reaction, E as ExternalDefIndicator, P as PPUtils } from "./rainbow-d9-n1-fxxxHIV6.js";
+import { O as OptionItemSort, R as REACTION_REFRESH_OPTIONS, c as GlobalEventPrefix } from "./rainbow-d9-n2-Tn4Dgplp.js";
+import { f as fromMarkdown, g as gfmTableFromMarkdown, a as gfmStrikethroughFromMarkdown, b as gfmFootnoteFromMarkdown, c as gfmTaskListItemFromMarkdown, d as frontmatterFromMarkdown } from "./mdast-Mf8F_3rv.js";
+import { g as gfmTable, h as gfmStrikethrough, i as gfmFootnote, j as gfmTaskListItem, k as frontmatter } from "./micromark-NFFUAI8x.js";
 const AsyncFunction = Object.getPrototypeOf(async function() {
 }).constructor;
 var ParsedNodeType;
@@ -3238,6 +3238,7 @@ var N2WidgetType;
   N2WidgetType2["CALENDAR"] = "Calendar";
   N2WidgetType2["DATE"] = "Date";
   N2WidgetType2["DATETIME"] = "DateTime";
+  N2WidgetType2["TIME"] = "Time";
   N2WidgetType2["RIBS"] = "Ribs";
   N2WidgetType2["READONLY_RIBS"] = "RibsView";
   N2WidgetType2["TABLE_ROW_OPERATORS"] = "RowOperators";
@@ -3643,6 +3644,20 @@ class N2DateTranslator extends SpecificWidgetTranslator {
 class N2DateTimeTranslator extends SpecificWidgetTranslator {
   getSupportedType() {
     return N2WidgetType.DATETIME;
+  }
+  getAttributeValueBuilders() {
+    return [N2CalendarFixedTimeAtBuild, N2CalendarInitTimeAtBuild, N2CalendarCouldPerformBuild, ValueChangedBuild];
+  }
+  getValidationHandlerDetectives() {
+    return [
+      ValidatorUtils.DETECT_REQUIRED,
+      ...super.getValidationHandlerDetectives()
+    ];
+  }
+}
+class N2TimeTranslator extends SpecificWidgetTranslator {
+  getSupportedType() {
+    return N2WidgetType.TIME;
   }
   getAttributeValueBuilders() {
     return [N2CalendarFixedTimeAtBuild, N2CalendarInitTimeAtBuild, N2CalendarCouldPerformBuild, ValueChangedBuild];
@@ -4251,6 +4266,7 @@ const registerN2Widgets$1 = (widgetHelper) => {
   repo.register(new N2MultiDropdownTranslator(repo));
   repo.register(new N2DateTranslator(repo));
   repo.register(new N2DateTimeTranslator(repo));
+  repo.register(new N2TimeTranslator(repo));
   repo.register(new N2CalendarTranslator(repo));
   repo.register(new N2ButtonTranslator(repo));
   repo.register(new N2LinkTranslator(repo));
@@ -4333,6 +4349,7 @@ var index = /* @__PURE__ */ Object.freeze({
   N2TableTranslator,
   N2TabsTranslator,
   N2TextareaTranslator,
+  N2TimeTranslator,
   N2TreeChildNodesBuild,
   N2TreeTranslator,
   get N2WidgetType() {

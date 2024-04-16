@@ -1,8 +1,8 @@
-import { R as React, a as ReactIs } from "./react-Vb3J86hF.js";
-import { w as whitespace, p as stringify, q as stringify$1, S as StyleToObject, u as unified, V as VFile, P as PropTypes } from "./vendor-aVH7FZ7r.js";
-import { a as find, b as hastToReact, s as svg, c as html } from "./property-information-B7qOuxMk.js";
+import { R as React, a as ReactIs } from "./react-pXKvkzAs.js";
+import { w as whitespace, p as stringify, q as stringify$1, S as StyleToObject, u as unified, V as VFile, P as PropTypes } from "./vendor-hN3HVZ-z.js";
+import { a as find, b as hastToReact, s as svg, c as html } from "./property-information-nx_SwaUh.js";
 import { v as visit } from "./unist-5yxlKLF4.js";
-import { r as remarkParse, a as remarkRehype } from "./remark-SseH5sF7.js";
+import { r as remarkParse, a as remarkRehype } from "./remark-Z31hRj1G.js";
 const protocols = ["http", "https", "mailto", "tel"];
 function uriTransformer(uri) {
   const url = (uri || "").trim();
