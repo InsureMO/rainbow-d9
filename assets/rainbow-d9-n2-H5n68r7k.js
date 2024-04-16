@@ -4,10 +4,10 @@ var __publicField = (obj, key, value) => {
   __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
   return value;
 };
-import { a as color, M as MaskedNumber, e as MaskedDate, g as MaskedFunction, j as MaskedPattern, k as MaskedRange, l as MaskedRegExp, o as MaskedDynamic } from "./vendor-nffdQ-AF.js";
-import { R as React, r as reactExports, u as useIMask } from "./react-W7rwqPk0.js";
-import { V as VUtils, P as PPUtils, r as registerWidget, c as createLogger, u as useRootEventBus, M as MUtils, N as NUtils, d as Wrapper, e as useForceUpdate, f as MBUtils, b as useWrapperEventBus, W as WrapperEventTypes, g as useCreateEventBus, h as useDefaultAttributeValues, i as PROPERTY_PATH_ME, j as useAttributesWatch, R as RootEventTypes } from "./rainbow-d9-n1-MZlpUePR.js";
-import { q as qe, W as We } from "./styled-components-PwbjTE-o.js";
+import { a as color, M as MaskedNumber, e as MaskedDate, g as MaskedFunction, j as MaskedPattern, k as MaskedRange, l as MaskedRegExp, o as MaskedDynamic } from "./vendor-aVH7FZ7r.js";
+import { R as React, r as reactExports, u as useIMask } from "./react-Vb3J86hF.js";
+import { V as VUtils, P as PPUtils, r as registerWidget, c as createLogger, u as useRootEventBus, M as MUtils, N as NUtils, d as Wrapper, e as useForceUpdate, f as MBUtils, b as useWrapperEventBus, W as WrapperEventTypes, g as useCreateEventBus, h as useDefaultAttributeValues, i as PROPERTY_PATH_ME, j as useAttributesWatch, R as RootEventTypes } from "./rainbow-d9-n1-WpnDTE_L.js";
+import { q as qe, W as We } from "./styled-components-Jk6MtudL.js";
 import { d as dayjs } from "./dayjs-9Z7dW0Q-.js";
 const DOM_KEY_WIDGET = "data-w";
 const DOM_ID_WIDGET = "data-wid";
@@ -1220,10 +1220,12 @@ const Dialog = () => {
     React.createElement(DialogWrapper, { style: dialog.wrapperStyle }, dialog.content)
   );
 };
+const CALENDAR_YM_FORMAT = "MMM YYYY";
 const CALENDAR_DATE_FORMAT = "YYYY/MM/DD";
 const CALENDAR_TIME_FORMAT = "HH:mm:ss";
 const CALENDAR_DATETIME_FORMAT = `${CALENDAR_DATE_FORMAT} ${CALENDAR_TIME_FORMAT}`;
 const DEFAULTS = {
+  YM_FORMAT: CALENDAR_YM_FORMAT,
   DATE_FORMAT: CALENDAR_DATE_FORMAT,
   TIME_FORMAT: CALENDAR_TIME_FORMAT,
   DATETIME_FORMAT: CALENDAR_DATETIME_FORMAT,
@@ -1231,12 +1233,14 @@ const DEFAULTS = {
   USE_CALENDAR_ICON: false
 };
 const setCalendarDefaults = (defaults) => {
+  DEFAULTS.YM_FORMAT = defaults.ymFormat ?? DEFAULTS.YM_FORMAT;
   DEFAULTS.DATE_FORMAT = defaults.dateFormat ?? DEFAULTS.DATE_FORMAT;
   DEFAULTS.TIME_FORMAT = defaults.timeFormat ?? DEFAULTS.TIME_FORMAT;
   DEFAULTS.DATETIME_FORMAT = defaults.datetimeFormat ?? DEFAULTS.DATETIME_FORMAT;
   DEFAULTS.AUTO_CONFIRM = defaults.autoConfirm ?? DEFAULTS.AUTO_CONFIRM;
   DEFAULTS.USE_CALENDAR_ICON = defaults.useCalendarIcon ?? DEFAULTS.USE_CALENDAR_ICON;
 };
+const getDefaultCalendarYMFormat = () => DEFAULTS.YM_FORMAT;
 const getDefaultCalendarDateFormat = () => DEFAULTS.DATE_FORMAT;
 const getDefaultCalendarTimeFormat = () => DEFAULTS.TIME_FORMAT;
 const getDefaultCalendarDatetimeFormat = () => DEFAULTS.DATETIME_FORMAT;
@@ -1250,13 +1254,24 @@ const toStartOfDay = (datetime) => {
 const toEndOfDay = (datetime) => {
   return datetime.hour(23).minute(59).second(59).millisecond(999);
 };
+const checkTimeParts = (timeFormat) => {
+  const hasMinute = (timeFormat ?? "").includes("m");
+  const hasSecond = hasMinute && (timeFormat ?? "").includes("s");
+  return { hasMinute, hasSecond };
+};
+const checkDateParts = (dateFormat) => {
+  return { hasDate: (dateFormat ?? "").toLowerCase().includes("d") };
+};
 var utils$2 = /* @__PURE__ */ Object.freeze({
   __proto__: null,
   FIX_TIME_AT_END_OF_DAY,
   FIX_TIME_AT_START_OF_DAY,
+  checkDateParts,
+  checkTimeParts,
   getDefaultCalendarDateFormat,
   getDefaultCalendarDatetimeFormat,
   getDefaultCalendarTimeFormat,
+  getDefaultCalendarYMFormat,
   isCalendarAutoConfirm,
   isStickIconUseCalendar,
   setCalendarDefaults,
@@ -3036,156 +3051,199 @@ const computeCalendarDays = (firstDate) => {
   return days;
 };
 const DatePickerContainer = qe.div`
-	display               : grid;
-	grid-template-columns : 1fr auto;
-	cursor                : default;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    cursor: default;
 `;
 const DatePickerShortcut = qe.div`
-	display        : flex;
-	flex-direction : column;
-	grid-row       : span 2;
-	border-right   : ${CssVars.BORDER};
+    display: flex;
+    flex-direction: column;
+    grid-row: span 2;
+    border-right: ${CssVars.BORDER};
 `;
 const DatePickerShortcutButton = qe.span`
-	display      : flex;
-	align-items  : center;
-	height       : ${CssVars.CALENDAR_DATE_CELL_SIZE};
-	padding      : 0 ${CssVars.CALENDAR_GUTTER_SIZE};
-	font-size    : 0.8em;
-	font-variant : ${CssVars.FONT_VARIANT};
-	cursor       : pointer;
-	user-select  : none;
-	transition   : all ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION};
-	&:hover {
-		background-color : ${CssVars.HOVER_COLOR};
-	}
+    display: flex;
+    align-items: center;
+    height: ${CssVars.CALENDAR_DATE_CELL_SIZE};
+    padding: 0 ${CssVars.CALENDAR_GUTTER_SIZE};
+    font-size: 0.8em;
+    font-variant: ${CssVars.FONT_VARIANT};
+    cursor: pointer;
+    user-select: none;
+    transition: all ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION};
+
+    &:hover {
+        background-color: ${CssVars.HOVER_COLOR};
+    }
 `;
 const DatePickerHeader = qe.div`
-	display         : flex;
-	align-items     : center;
-	justify-content : space-between;
-	height          : ${CssVars.INPUT_HEIGHT};
-	padding         : 0 ${CssVars.CALENDAR_GUTTER_SIZE};
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: ${CssVars.INPUT_HEIGHT};
+    padding: 0 ${CssVars.CALENDAR_GUTTER_SIZE};
 `;
 const DatePickerHeaderYearMonth = qe.span`
-	font-weight  : ${CssVars.FONT_BOLD};
-	font-variant : ${CssVars.FONT_VARIANT};
+    font-weight: ${CssVars.FONT_BOLD};
+    font-variant: ${CssVars.FONT_VARIANT};
 `;
 const DatePickerHeaderOperators = qe.div`
-	display     : flex;
-	align-items : center;
+    display: flex;
+    align-items: center;
 `;
 const DatePickerHeaderButton = qe.span`
-	display         : flex;
-	align-items     : center;
-	justify-content : center;
-	font-weight     : ${CssVars.FONT_BOLD};
-	border-radius   : ${CssVars.BORDER_RADIUS};
-	user-select     : none;
-	transition      : all ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION};
-	cursor          : pointer;
-	&:hover {
-		background-color : ${CssVars.HOVER_COLOR};
-	}
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: ${CssVars.FONT_BOLD};
+    border-radius: ${CssVars.BORDER_RADIUS};
+    user-select: none;
+    transition: all ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION};
+    cursor: pointer;
+
+    &:hover {
+        background-color: ${CssVars.HOVER_COLOR};
+    }
 `;
 const DatePickerHeaderTodayButton = qe(DatePickerHeaderButton)`
-	transform        : scale(0.8);
-	transform-origin : right;
-	padding          : 2px 6px;
-	font-variant : ${CssVars.FONT_VARIANT};
+    transform: scale(0.8);
+    transform-origin: right;
+    padding: 2px 6px;
+    font-variant: ${CssVars.FONT_VARIANT};
 `;
 const DatePickerHeaderMonthChangeButton = qe(DatePickerHeaderButton)`
-	height : 20px;
-	width  : 24px;
+    height: 20px;
+    width: 24px;
 `;
 const DatePickerBody = qe.div`
-	display               : grid;
-	grid-template-columns : repeat(7, ${CssVars.CALENDAR_DATE_CELL_SIZE});
-	grid-template-rows    : repeat(7, ${CssVars.CALENDAR_DATE_CELL_SIZE});
+    display: grid;
+    grid-template-columns: repeat(7, ${CssVars.CALENDAR_DATE_CELL_SIZE});
+    grid-template-rows: repeat(7, ${CssVars.CALENDAR_DATE_CELL_SIZE});
 `;
 const DatePickerBodyHeaderCell = qe.span`
-	display         : flex;
-	align-items     : center;
-	justify-content : center;
-	position        : relative;
-	text-align      : center;
-	color           : ${CssVars.PRIMARY_COLOR};
-	font-weight     : ${CssVars.FONT_BOLD};
-	opacity         : 0.7;
-	cursor          : default;
-	&:first-child,
-	&:nth-child(7) {
-		color : ${CssVars.DANGER_COLOR};
-	}
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    text-align: center;
+    color: ${CssVars.PRIMARY_COLOR};
+    font-weight: ${CssVars.FONT_BOLD};
+    opacity: 0.7;
+    cursor: default;
+
+    &:first-child,
+    &:nth-child(7) {
+        color: ${CssVars.DANGER_COLOR};
+    }
 `;
 const DatePickerBodyDateCell = qe.span`
-	display         : flex;
-	align-items     : center;
-	justify-content : center;
-	position        : relative;
-	text-align      : center;
-	cursor          : pointer;
-	&:before {
-		content          : '';
-		display          : block;
-		position         : absolute;
-		top              : calc(${CssVars.CALENDAR_DATE_CELL_SIZE} / 10);
-		left             : calc(${CssVars.CALENDAR_DATE_CELL_SIZE} / 10);
-		height           : calc(${CssVars.CALENDAR_DATE_CELL_SIZE} * 4 / 5);
-		width            : calc(${CssVars.CALENDAR_DATE_CELL_SIZE} * 4 / 5);
-		border-radius    : 100%;
-		background-color : ${CssVars.HOVER_COLOR};
-		opacity          : 0;
-		z-index          : 0;
-		transition       : all ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION};
-	}
-	&:hover:before {
-		opacity : 1;
-	}
-	&[data-current-month=false] {
-		color : ${CssVars.CALENDAR_LIGHT_DATE_COLOR};
-		&:hover {
-			color : ${CssVars.PRIMARY_COLOR};
-		}
-	}
-	&[data-today=true] {
-		font-weight : ${CssVars.FONT_BOLD};
-		color       : ${CssVars.PRIMARY_COLOR};
-	}
-	&[data-current=true] {
-		color : ${CssVars.INVERT_COLOR};
-		&:before {
-			background-color : ${CssVars.INVERT_COLOR};
-			opacity          : 1;
-			z-index          : 0;
-		}
-		&:after {
-			content          : '';
-			display          : block;
-			position         : absolute;
-			top              : calc(${CssVars.CALENDAR_DATE_CELL_SIZE} / 10 + 3px);
-			left             : calc(${CssVars.CALENDAR_DATE_CELL_SIZE} / 10 + 3px);
-			height           : calc(${CssVars.CALENDAR_DATE_CELL_SIZE} * 4 / 5 - 6px);
-			width            : calc(${CssVars.CALENDAR_DATE_CELL_SIZE} * 4 / 5 - 6px);
-			border-radius    : 100%;
-			background-color : ${CssVars.PRIMARY_COLOR};
-			z-index          : 1;
-		}
-		> span {
-			font-size : 0.8em;
-		}
-	}
-	> span {
-		z-index : 2;
-	}
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    text-align: center;
+    cursor: pointer;
+
+    &:before {
+        content: '';
+        display: block;
+        position: absolute;
+        top: calc(${CssVars.CALENDAR_DATE_CELL_SIZE} / 10);
+        left: calc(${CssVars.CALENDAR_DATE_CELL_SIZE} / 10);
+        height: calc(${CssVars.CALENDAR_DATE_CELL_SIZE} * 4 / 5);
+        width: calc(${CssVars.CALENDAR_DATE_CELL_SIZE} * 4 / 5);
+        border-radius: 100%;
+        background-color: ${CssVars.HOVER_COLOR};
+        opacity: 0;
+        z-index: 0;
+        transition: all ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION};
+    }
+
+    &:hover:before {
+        opacity: 1;
+    }
+
+    &[data-current-month=false] {
+        color: ${CssVars.CALENDAR_LIGHT_DATE_COLOR};
+
+        &:hover {
+            color: ${CssVars.PRIMARY_COLOR};
+        }
+    }
+
+    &[data-today=true] {
+        font-weight: ${CssVars.FONT_BOLD};
+        color: ${CssVars.PRIMARY_COLOR};
+    }
+
+    &[data-could-perform=false] {
+        cursor: default;
+
+        &[data-current-month=false]:hover {
+            color: ${CssVars.CALENDAR_LIGHT_DATE_COLOR};
+        }
+
+        &:before {
+            display: none;
+        }
+
+        &:after {
+            content: '';
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: ${CssVars.WAIVE_COLOR};
+            opacity: 0.15;
+            z-index: 0;
+        }
+
+        &:hover:before {
+            opacity: 0;
+        }
+    }
+
+    &[data-current=true] {
+        color: ${CssVars.INVERT_COLOR};
+
+        &:before {
+            background-color: ${CssVars.INVERT_COLOR};
+            opacity: 1;
+            z-index: 0;
+        }
+
+        &:after {
+            content: '';
+            display: block;
+            position: absolute;
+            top: calc(${CssVars.CALENDAR_DATE_CELL_SIZE} / 10 + 3px);
+            left: calc(${CssVars.CALENDAR_DATE_CELL_SIZE} / 10 + 3px);
+            height: calc(${CssVars.CALENDAR_DATE_CELL_SIZE} * 4 / 5 - 6px);
+            width: calc(${CssVars.CALENDAR_DATE_CELL_SIZE} * 4 / 5 - 6px);
+            border-radius: 100%;
+            background-color: ${CssVars.PRIMARY_COLOR};
+            z-index: 1;
+        }
+
+        > span {
+            font-size: 0.8em;
+        }
+    }
+
+    > span {
+        z-index: 2;
+    }
 `;
 const DatePicker = (props) => {
-  const { value, dateFormat } = props;
+  const { $root, $model, value, dateFormat, couldPerform } = props;
+  const globalHandlers = useGlobalHandlers();
   const { on, off, fire } = useCalendarEventBus();
-  const [visible, setVisible] = reactExports.useState(true);
+  const [state, setState] = reactExports.useState({ visible: true, current: value });
   reactExports.useEffect(() => {
-    const onOpen = () => setVisible(false);
-    const onClose = () => setVisible(true);
+    const onOpen = () => setState((state2) => ({ ...state2, visible: false }));
+    const onClose = () => setState({ current: value, visible: true });
     on(CalendarEventTypes.OPEN_YEAR_MONTH_PICKER, onOpen);
     on(CalendarEventTypes.OPEN_TIME_PICKER, onOpen);
     on(CalendarEventTypes.CLOSE_YEAR_MONTH_PICKER, onClose);
@@ -3196,8 +3254,8 @@ const DatePicker = (props) => {
       off(CalendarEventTypes.CLOSE_YEAR_MONTH_PICKER, onClose);
       off(CalendarEventTypes.CLOSE_TIME_PICKER, onClose);
     };
-  }, [on, off]);
-  if (!visible) {
+  }, [on, off, value]);
+  if (!state.visible) {
     return null;
   }
   const today = dayjs();
@@ -3206,7 +3264,17 @@ const DatePicker = (props) => {
   const todayDate = today.date();
   const onDateClicked = (date) => () => {
     const newValue = date.clone().hour(value.hour()).minute(value.minute()).second(value.second()).millisecond(value.millisecond());
-    fire(CalendarEventTypes.VALUE_SELECTED, newValue);
+    const couldPerformValue = couldPerform == null ? true : couldPerform({
+      root: $root,
+      model: $model,
+      valueToCheck: newValue,
+      checkType: "date",
+      global: globalHandlers
+    }) !== false;
+    if (couldPerformValue) {
+      fire(CalendarEventTypes.VALUE_SELECTED, newValue);
+    }
+    setState((state2) => ({ ...state2, current: newValue }));
   };
   const onTodayClicked = onDateClicked(today);
   const onYesterdayClicked = onDateClicked(today.subtract(1, "day"));
@@ -3216,19 +3284,22 @@ const DatePicker = (props) => {
   const onPrevMonthEndClicked = onDateClicked(today.date(1).subtract(1, "day"));
   const onYearEndClicked = onDateClicked(today.month(11).date(31));
   const onPrevYearEndClicked = onDateClicked(today.month(11).date(31).subtract(1, "year"));
-  const onGotoPrevMonthClicked = () => onDateClicked(value.subtract(1, "month"))();
-  const onGotoNextMonthClicked = () => onDateClicked(value.add(1, "month"))();
-  const currentYear = value.year();
-  const currentMonth = value.month();
-  const currentDate = value.date();
+  const onGotoPrevMonthClicked = () => {
+    onDateClicked(state.current.subtract(1, "month"))();
+  };
+  const onGotoNextMonthClicked = () => {
+    onDateClicked(state.current.add(1, "month"))();
+  };
+  const currentYear = state.current.year();
+  const currentMonth = state.current.month();
   const currentDisplayMonth = (() => {
-    let format = "MMM YYYY";
+    let format = getDefaultCalendarYMFormat();
     if (dateFormat.includes("B")) {
-      format = "MMM BBBB";
+      format = format.replace(/Y/g, "B");
     }
-    return value.format(format);
+    return state.current.format(format);
   })();
-  const firstDayOfDisplayMonth = value.clone().date(1);
+  const firstDayOfDisplayMonth = state.current.clone().date(1);
   const days = computeCalendarDays(firstDayOfDisplayMonth);
   return React.createElement(
     DatePickerContainer,
@@ -3340,9 +3411,18 @@ const DatePicker = (props) => {
         React.createElement(IntlLabel, { keys: ["calendar", "saturday"], value: "S" })
       ),
       days.map(({ year, month, date }) => {
+        const valueToPerform = state.current.clone().year(year).month(month).date(date);
+        const couldPerformValue = couldPerform == null ? true : couldPerform({
+          root: $root,
+          model: $model,
+          valueToCheck: valueToPerform,
+          checkType: "date",
+          global: globalHandlers
+        }) !== false;
+        const click = couldPerformValue ? onDateClicked(dayjs().year(year).month(month).date(date)) : void 0;
         return React.createElement(
           DatePickerBodyDateCell,
-          { key: `${year}/${month}/${date}`, "data-current-month": year === currentYear && month === currentMonth, "data-current": year === currentYear && month === currentMonth && date === currentDate, "data-today": year === todayYear && month === todayMonth && date === todayDate, onClick: onDateClicked(dayjs().year(year).month(month).date(date)) },
+          { key: `${year}/${month}/${date}`, "data-current-month": year === currentYear && month === currentMonth, "data-current": year === value.year() && month === value.month() && date === value.date(), "data-today": year === todayYear && month === todayMonth && date === todayDate, "data-could-perform": couldPerformValue, onClick: click },
           React.createElement("span", null, date)
         );
       })
@@ -3417,7 +3497,9 @@ var CurrentPicker;
 const CalendarPopupHeader = (props) => {
   const { dateFormat, time, timeFormat, value, confirm } = props;
   const { fire } = useCalendarEventBus();
-  const [currentPicker, setCurrentPicker] = reactExports.useState(CurrentPicker.DATE);
+  const [currentPicker, setCurrentPicker] = reactExports.useState(() => {
+    return checkDateParts(dateFormat).hasDate ? CurrentPicker.DATE : CurrentPicker.YEAR_MONTH;
+  });
   const onYearMonthClicked = () => {
     fire(CalendarEventTypes.OPEN_YEAR_MONTH_PICKER);
     setCurrentPicker(CurrentPicker.YEAR_MONTH);
@@ -3445,6 +3527,7 @@ const CalendarPopupHeader = (props) => {
   const onConfirmClicked = () => confirm(value);
   const currentDisplayDate = value.format(dateFormat);
   const currentDisplayTime = value.format(timeFormat);
+  const { hasDate } = checkDateParts(dateFormat);
   return React.createElement(
     PopupHeaderContainer,
     null,
@@ -3467,7 +3550,7 @@ const CalendarPopupHeader = (props) => {
       { onClick: onYearMonthClicked },
       React.createElement(DateIcon, null)
     ) : null,
-    currentPicker !== CurrentPicker.DATE ? React.createElement(
+    hasDate && currentPicker !== CurrentPicker.DATE ? React.createElement(
       PopupHeaderTimeButton,
       { onClick: onBackClicked },
       React.createElement(BackIcon, null)
@@ -3510,26 +3593,42 @@ const TimePickerSelector = qe.div.attrs({ "data-v-scroll": "" })`
 `;
 const TimePickerSelectorOption = qe.span`
     display: flex;
+    position: relative;
     align-items: center;
     min-height: ${CssVars.INPUT_HEIGHT};
     padding: 0 ${CssVars.CALENDAR_GUTTER_SIZE};
     cursor: pointer;
     transition: all ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION};
 
-    &[data-current=true] {
-        color: ${CssVars.INVERT_COLOR};
+    &[data-could-perform=false] {
+        cursor: default;
 
         &:before {
+            content: '';
             display: block;
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            border-radius: ${CssVars.BORDER_RADIUS};
+            background-color: ${CssVars.WAIVE_COLOR};
+            opacity: 0.3;
+            z-index: 0;
+        }
+    }
+
+    &[data-current=true] {
+        &:before {
+            content: '';
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             background-color: ${CssVars.PRIMARY_COLOR};
-            opacity: 0.5;
-            z-index: -1;
+            opacity: 0.15;
+            z-index: 0;
         }
     }
 
@@ -3539,10 +3638,11 @@ const TimePickerSelectorOption = qe.span`
     }
 `;
 const TimePicker = (props) => {
-  const { value, timeFormat } = props;
+  const { $root, $model, value, timeFormat, couldPerform } = props;
   const hourSelectorRef = reactExports.useRef(null);
   const minuteSelectorRef = reactExports.useRef(null);
   const secondSelectorRef = reactExports.useRef(null);
+  const globalHandlers = useGlobalHandlers();
   const { on, off, fire } = useCalendarEventBus();
   const [visible, setVisible] = reactExports.useState(false);
   reactExports.useEffect(() => {
@@ -3584,8 +3684,7 @@ const TimePicker = (props) => {
     const newValue = value.second(index);
     fire(CalendarEventTypes.VALUE_SELECTED, newValue);
   };
-  const hasMinute = (timeFormat ?? "").includes("m");
-  const hasSecond = hasMinute && (timeFormat ?? "").includes("s");
+  const { hasMinute, hasSecond } = checkTimeParts(timeFormat);
   const columns = 3 - (!hasMinute ? 1 : 0) - (!hasSecond ? 1 : 0);
   return React.createElement(
     TimePickerContainer,
@@ -3605,14 +3704,41 @@ const TimePicker = (props) => {
       null,
       React.createElement(IntlLabel, { keys: ["calendar", "second"], value: "Second" })
     ) : null,
-    React.createElement(TimePickerSelector, { ref: hourSelectorRef }, new Array(24).fill(1).map((v, index) => {
-      return React.createElement(TimePickerSelectorOption, { "data-current": value.hour() === index, "data-hour": index, onClick: onHourChange(index), key: index }, `${index}`.padStart(2, "0"));
+    React.createElement(TimePickerSelector, { ref: hourSelectorRef }, new Array(24).fill(1).map((_, index) => {
+      const valueToPerform = value.clone().hour(index);
+      const couldPerformValue = couldPerform == null ? true : couldPerform({
+        root: $root,
+        model: $model,
+        valueToCheck: valueToPerform,
+        checkType: "hour",
+        global: globalHandlers
+      }) !== false;
+      const click = couldPerformValue ? onHourChange(index) : void 0;
+      return React.createElement(TimePickerSelectorOption, { "data-current": value.hour() === index, "data-hour": index, "data-could-perform": couldPerformValue, onClick: click, key: index }, `${index}`.padStart(2, "0"));
     })),
-    hasMinute ? React.createElement(TimePickerSelector, { ref: minuteSelectorRef }, new Array(60).fill(1).map((v, index) => {
-      return React.createElement(TimePickerSelectorOption, { "data-current": value.minute() === index, "data-minute": index, onClick: onMinuteChange(index), key: index }, `${index}`.padStart(2, "0"));
+    hasMinute ? React.createElement(TimePickerSelector, { ref: minuteSelectorRef }, new Array(60).fill(1).map((_, index) => {
+      const valueToPerform = value.clone().minute(index);
+      const couldPerformValue = couldPerform == null ? true : couldPerform({
+        root: $root,
+        model: $model,
+        valueToCheck: valueToPerform,
+        checkType: "minute",
+        global: globalHandlers
+      }) !== false;
+      const click = couldPerformValue ? onMinuteChange(index) : void 0;
+      return React.createElement(TimePickerSelectorOption, { "data-current": value.minute() === index, "data-minute": index, "data-could-perform": couldPerformValue, onClick: click, key: index }, `${index}`.padStart(2, "0"));
     })) : null,
-    hasSecond ? React.createElement(TimePickerSelector, { ref: secondSelectorRef }, new Array(60).fill(1).map((v, index) => {
-      return React.createElement(TimePickerSelectorOption, { "data-current": value.second() === index, "data-second": index, onClick: onSecondChange(index), key: index }, `${index}`.padStart(2, "0"));
+    hasSecond ? React.createElement(TimePickerSelector, { ref: secondSelectorRef }, new Array(60).fill(1).map((_, index) => {
+      const valueToPerform = value.clone().second(index);
+      const couldPerformValue = couldPerform == null ? true : couldPerform({
+        root: $root,
+        model: $model,
+        valueToCheck: valueToPerform,
+        checkType: "second",
+        global: globalHandlers
+      }) !== false;
+      const click = couldPerformValue ? onSecondChange(index) : void 0;
+      return React.createElement(TimePickerSelectorOption, { "data-current": value.second() === index, "data-second": index, "data-could-perform": couldPerformValue, onClick: click, key: index }, `${index}`.padStart(2, "0"));
     })) : null
   );
 };
@@ -3653,32 +3779,47 @@ const YearSelector = qe.div.attrs({ "data-v-scroll": "" })`
 `;
 const YearSelectorOption = qe.span`
     display: flex;
+    position: relative;
     align-items: center;
     min-height: ${CssVars.INPUT_HEIGHT};
     padding: 0 ${CssVars.CALENDAR_GUTTER_SIZE};
     cursor: pointer;
     transition: all ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION};
 
-    &[data-current=true] {
-        color: ${CssVars.INVERT_COLOR};
+    &[data-could-perform=false] {
+        cursor: default;
 
         &:before {
+            content: '';
             display: block;
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            border-radius: ${CssVars.BORDER_RADIUS};
+            background-color: ${CssVars.WAIVE_COLOR};
+            opacity: 0.3;
+            z-index: 0;
+        }
+    }
+
+    &[data-current=true] {
+        &:before {
+            content: '';
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             background-color: ${CssVars.PRIMARY_COLOR};
-            opacity: 0.5;
-            z-index: -1;
+            opacity: 0.15;
+            z-index: 0;
         }
     }
 
     &[data-current=false]:hover {
         background-color: ${CssVars.HOVER_COLOR};
-        opacity: 1;
     }
 `;
 const MonthSelector = qe.div`
@@ -3689,16 +3830,34 @@ const MonthSelector = qe.div`
 `;
 const MonthSelectorOption = qe.span`
     display: flex;
+    position: relative;
     align-items: center;
     justify-content: center;
     border-radius: ${CssVars.BORDER_RADIUS};
     cursor: pointer;
     transition: all ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION};
 
-    &[data-current=true] {
-        color: ${CssVars.INVERT_COLOR};
+    &[data-could-perform=false] {
+        cursor: default;
 
         &:before {
+            content: '';
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: ${CssVars.BORDER_RADIUS};
+            background-color: ${CssVars.WAIVE_COLOR};
+            opacity: 0.3;
+            z-index: 0;
+        }
+    }
+
+    &[data-current=true] {
+        &:before {
+            content: '';
             display: block;
             position: absolute;
             top: 0;
@@ -3707,8 +3866,8 @@ const MonthSelectorOption = qe.span`
             height: 100%;
             border-radius: ${CssVars.BORDER_RADIUS};
             background-color: ${CssVars.PRIMARY_COLOR};
-            opacity: 0.5;
-            z-index: -1;
+            opacity: 0.15;
+            z-index: 0;
         }
     }
 
@@ -3718,10 +3877,11 @@ const MonthSelectorOption = qe.span`
     }
 `;
 const YearMonthPicker = (props) => {
-  const { value } = props;
+  const { $root, $model, value, dateFormat, couldPerform } = props;
+  const globalHandlers = useGlobalHandlers();
   const { on, off, fire } = useCalendarEventBus();
   const yearSelectorRef = reactExports.useRef(null);
-  const [visible, setVisible] = reactExports.useState(false);
+  const [visible, setVisible] = reactExports.useState(!checkDateParts(dateFormat).hasDate);
   reactExports.useEffect(() => {
     const onOpen = () => setVisible(true);
     const onClose = () => setVisible(false);
@@ -3753,82 +3913,58 @@ const YearMonthPicker = (props) => {
     fire(CalendarEventTypes.VALUE_SELECTED, newValue);
   };
   const maxYear = (/* @__PURE__ */ new Date()).getFullYear() + 99;
+  const monthLabels = [
+    [["calendar", "jan"], "Jan"],
+    [["calendar", "feb"], "Feb"],
+    [["calendar", "mar"], "Mar"],
+    [["calendar", "apr"], "Apr"],
+    [["calendar", "may"], "May"],
+    [["calendar", "jun"], "Jun"],
+    [["calendar", "jul"], "Jul"],
+    [["calendar", "aug"], "Aug"],
+    [["calendar", "sep"], "Sep"],
+    [["calendar", "oct"], "Oct"],
+    [["calendar", "nov"], "Nov"],
+    [["calendar", "dec"], "Dec"]
+  ];
+  const yearFormat = dateFormat.includes("B") ? "BBBB" : "YYYY";
   return React.createElement(
     YearMonthPickerContainer,
     null,
     React.createElement(YearMonthPickerLabel, null, "Year"),
     React.createElement(YearMonthPickerLabel, null, "Month"),
     React.createElement(YearSelector, { ref: yearSelectorRef }, new Array(200).fill(1).map((_, index) => maxYear - index).map((year) => {
-      return React.createElement(YearSelectorOption, { "data-year": year, "data-current": year === value.year(), onClick: onYearChange(year), key: year }, year);
+      const valueToPerform = value.clone().year(year);
+      const couldPerformValue = couldPerform == null ? true : couldPerform({
+        root: $root,
+        model: $model,
+        valueToCheck: valueToPerform,
+        checkType: "year",
+        global: globalHandlers
+      }) !== false;
+      const click = couldPerformValue ? onYearChange(year) : void 0;
+      return React.createElement(YearSelectorOption, { "data-year": year, "data-current": year === value.year(), "data-could-perform": couldPerformValue, onClick: click, key: year }, valueToPerform.format(yearFormat));
     })),
-    React.createElement(
-      MonthSelector,
-      null,
-      React.createElement(
+    React.createElement(MonthSelector, null, new Array(12).fill(1).map((_, month) => {
+      const valueToPerform = value.clone().month(month);
+      const couldPerformValue = couldPerform == null ? true : couldPerform({
+        root: $root,
+        model: $model,
+        valueToCheck: valueToPerform,
+        checkType: "month",
+        global: globalHandlers
+      }) !== false;
+      const click = couldPerformValue ? onMonthChange(month) : void 0;
+      return React.createElement(
         MonthSelectorOption,
-        { onClick: onMonthChange(0), "data-current": value.month() === 0 },
-        React.createElement(IntlLabel, { keys: ["calendar", "jan"], value: "Jan" })
-      ),
-      React.createElement(
-        MonthSelectorOption,
-        { onClick: onMonthChange(1), "data-current": value.month() === 1 },
-        React.createElement(IntlLabel, { keys: ["calendar", "feb"], value: "Feb" })
-      ),
-      React.createElement(
-        MonthSelectorOption,
-        { onClick: onMonthChange(2), "data-current": value.month() === 2 },
-        React.createElement(IntlLabel, { keys: ["calendar", "mar"], value: "Mar" })
-      ),
-      React.createElement(
-        MonthSelectorOption,
-        { onClick: onMonthChange(3), "data-current": value.month() === 3 },
-        React.createElement(IntlLabel, { keys: ["calendar", "apr"], value: "Apr" })
-      ),
-      React.createElement(
-        MonthSelectorOption,
-        { onClick: onMonthChange(4), "data-current": value.month() === 4 },
-        React.createElement(IntlLabel, { keys: ["calendar", "may"], value: "May" })
-      ),
-      React.createElement(
-        MonthSelectorOption,
-        { onClick: onMonthChange(5), "data-current": value.month() === 5 },
-        React.createElement(IntlLabel, { keys: ["calendar", "jun"], value: "Jun" })
-      ),
-      React.createElement(
-        MonthSelectorOption,
-        { onClick: onMonthChange(6), "data-current": value.month() === 6 },
-        React.createElement(IntlLabel, { keys: ["calendar", "jul"], value: "Jul" })
-      ),
-      React.createElement(
-        MonthSelectorOption,
-        { onClick: onMonthChange(7), "data-current": value.month() === 7 },
-        React.createElement(IntlLabel, { keys: ["calendar", "aug"], value: "Aug" })
-      ),
-      React.createElement(
-        MonthSelectorOption,
-        { onClick: onMonthChange(8), "data-current": value.month() === 8 },
-        React.createElement(IntlLabel, { keys: ["calendar", "sep"], value: "Sep" })
-      ),
-      React.createElement(
-        MonthSelectorOption,
-        { onClick: onMonthChange(9), "data-current": value.month() === 9 },
-        React.createElement(IntlLabel, { keys: ["calendar", "oct"], value: "Oct" })
-      ),
-      React.createElement(
-        MonthSelectorOption,
-        { onClick: onMonthChange(10), "data-current": value.month() === 10 },
-        React.createElement(IntlLabel, { keys: ["calendar", "nov"], value: "Nov" })
-      ),
-      React.createElement(
-        MonthSelectorOption,
-        { onClick: onMonthChange(11), "data-current": value.month() === 11 },
-        React.createElement(IntlLabel, { keys: ["calendar", "dec"], value: "Dec" })
-      )
-    )
+        { onClick: click, "data-current": value.month() === month, "data-could-perform": couldPerformValue, key: month },
+        React.createElement(IntlLabel, { keys: monthLabels[month][0], value: monthLabels[month][1] })
+      );
+    }))
   );
 };
 const CalendarPopup = (props) => {
-  const { initValue, popupRef, popupState, popupShown, dateFormat, time, timeFormat, initTimeAt, confirm } = props;
+  const { $root, $model, initValue, popupRef, popupState, popupShown, dateFormat, time, timeFormat, initTimeAt, couldPerform, confirm } = props;
   const [value, setValue] = reactExports.useState(() => {
     if (initValue != null) {
       return initValue;
@@ -3841,6 +3977,7 @@ const CalendarPopup = (props) => {
     }
   });
   useValueChange(setValue);
+  const { hasDate } = checkDateParts(dateFormat);
   return React.createElement(
     DropdownPopup,
     { ...popupState, minWidth: CssVars.CALENDAR_POPUP_WIDTH_VALUE, maxWidth: CssVars.CALENDAR_POPUP_WIDTH_VALUE, minHeight: CssVars.CALENDAR_POPUP_HEIGHT_VALUE, maxHeight: CssVars.CALENDAR_POPUP_HEIGHT_VALUE, shown: popupShown && popupState.active === DropdownPopupStateActive.ACTIVE, ref: popupRef },
@@ -3848,9 +3985,9 @@ const CalendarPopup = (props) => {
       PopupContainer,
       null,
       React.createElement(CalendarPopupHeader, { dateFormat, time, timeFormat, value, confirm }),
-      React.createElement(DatePicker, { value, dateFormat }),
-      time ? React.createElement(TimePicker, { value, timeFormat }) : null,
-      React.createElement(YearMonthPicker, { value })
+      hasDate ? React.createElement(DatePicker, { "$root": $root, "$model": $model, value, dateFormat, couldPerform }) : null,
+      time ? React.createElement(TimePicker, { "$root": $root, "$model": $model, value, timeFormat, couldPerform }) : null,
+      React.createElement(YearMonthPicker, { "$root": $root, "$model": $model, value, dateFormat, couldPerform })
     )
   );
 };
@@ -3890,7 +4027,7 @@ const DropdownStickCalendar = qe(Date$1).attrs({ [DOM_KEY_WIDGET]: "d9-dropdown-
     transition: all ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION};
 `;
 const Picker = reactExports.forwardRef((props, ref) => {
-  const { $pp, $wrapped: { $onValueChange, $model, $p2r, $avs: { $disabled, $visible } }, please = "", clearable = true, dateFormat = getDefaultCalendarDateFormat(), time, timeFormat = getDefaultCalendarTimeFormat(), storeFormat = getDefaultCalendarDatetimeFormat(), fixedTimeAt = FIX_TIME_AT_START_OF_DAY, initTimeAt, autoConfirm = isCalendarAutoConfirm(), useCalendarIcon = isStickIconUseCalendar(), ...rest } = props;
+  const { $pp, $wrapped: { $onValueChange, $root, $model, $p2r, $avs: { $disabled, $visible } }, please = "", clearable = true, dateFormat = getDefaultCalendarDateFormat(), time, timeFormat = getDefaultCalendarTimeFormat(), storeFormat = getDefaultCalendarDatetimeFormat(), fixedTimeAt = FIX_TIME_AT_START_OF_DAY, initTimeAt, couldPerform, autoConfirm = isCalendarAutoConfirm(), useCalendarIcon = isStickIconUseCalendar(), ...rest } = props;
   const globalHandlers = useGlobalHandlers();
   const { fire } = useCalendarEventBus();
   const { containerRef, popupRef, popupState, setPopupState, popupShown, setPopupShown } = useDropdownControl({
@@ -4007,7 +4144,7 @@ const Picker = reactExports.forwardRef((props, ref) => {
     React.createElement(CalendarValueHolder, { initValue: initValueForPopup }),
     React.createElement(DropdownLabel, { "data-please": !valueAssigned }, label),
     React.createElement(DropdownStick, { valueAssigned, clearable, clear: onClearClicked, disabled: $disabled, icon: useCalendarIcon ? React.createElement(DropdownStickCalendar, null) : void 0 }),
-    isDropdownPopupActive(popupState.active) ? React.createElement(CalendarPopup, { initValue: initValueForPopup, popupRef, popupState, popupShown, dateFormat, time, timeFormat, initTimeAt, confirm: onConfirm }) : null
+    isDropdownPopupActive(popupState.active) ? React.createElement(CalendarPopup, { "$root": $root, "$model": $model, initValue: initValueForPopup, popupRef, popupState, popupShown, dateFormat, time, timeFormat, initTimeAt, couldPerform, confirm: onConfirm }) : null
   );
 });
 const Calendar = reactExports.forwardRef((props, ref) => {

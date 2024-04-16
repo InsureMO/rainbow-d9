@@ -4,10 +4,10 @@ var __publicField = (obj, key, value) => {
   __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
   return value;
 };
-import { c as createLogger, N as NUtils, V as VUtils, k as MonitorNodeAttributes, l as Reaction, E as ExternalDefIndicator, P as PPUtils } from "./rainbow-d9-n1-MZlpUePR.js";
-import { O as OptionItemSort, R as REACTION_REFRESH_OPTIONS, c as GlobalEventPrefix } from "./rainbow-d9-n2-3rUOk_vU.js";
-import { f as fromMarkdown, g as gfmTableFromMarkdown, a as gfmStrikethroughFromMarkdown, b as gfmFootnoteFromMarkdown, c as gfmTaskListItemFromMarkdown, d as frontmatterFromMarkdown } from "./mdast-UEmBrHdK.js";
-import { g as gfmTable, h as gfmStrikethrough, i as gfmFootnote, j as gfmTaskListItem, k as frontmatter } from "./micromark-MLngoREp.js";
+import { c as createLogger, N as NUtils, V as VUtils, k as MonitorNodeAttributes, l as Reaction, E as ExternalDefIndicator, P as PPUtils } from "./rainbow-d9-n1-WpnDTE_L.js";
+import { O as OptionItemSort, R as REACTION_REFRESH_OPTIONS, c as GlobalEventPrefix } from "./rainbow-d9-n2-H5n68r7k.js";
+import { f as fromMarkdown, g as gfmTableFromMarkdown, a as gfmStrikethroughFromMarkdown, b as gfmFootnoteFromMarkdown, c as gfmTaskListItemFromMarkdown, d as frontmatterFromMarkdown } from "./mdast-BxNSHimF.js";
+import { g as gfmTable, h as gfmStrikethrough, i as gfmFootnote, j as gfmTaskListItem, k as frontmatter } from "./micromark-vzjUmcZ3.js";
 const AsyncFunction = Object.getPrototypeOf(async function() {
 }).constructor;
 var ParsedNodeType;
@@ -3625,12 +3625,13 @@ const N2CalendarInitTimeAtBuild = {
   accept: (key) => key === "initTimeAt",
   build: N2CalendarBuildFixedTimeAt
 };
+const N2CalendarCouldPerformBuild = createSyncSnippetBuild("couldPerform", ["options"]);
 class N2DateTranslator extends SpecificWidgetTranslator {
   getSupportedType() {
     return N2WidgetType.DATE;
   }
   getAttributeValueBuilders() {
-    return [N2CalendarFixedTimeAtBuild, N2CalendarInitTimeAtBuild];
+    return [N2CalendarFixedTimeAtBuild, N2CalendarInitTimeAtBuild, N2CalendarCouldPerformBuild, ValueChangedBuild];
   }
   getValidationHandlerDetectives() {
     return [
@@ -3644,7 +3645,7 @@ class N2DateTimeTranslator extends SpecificWidgetTranslator {
     return N2WidgetType.DATETIME;
   }
   getAttributeValueBuilders() {
-    return [N2CalendarFixedTimeAtBuild, N2CalendarInitTimeAtBuild];
+    return [N2CalendarFixedTimeAtBuild, N2CalendarInitTimeAtBuild, N2CalendarCouldPerformBuild, ValueChangedBuild];
   }
   getValidationHandlerDetectives() {
     return [
@@ -3658,7 +3659,7 @@ class N2CalendarTranslator extends SpecificWidgetTranslator {
     return N2WidgetType.CALENDAR;
   }
   getAttributeValueBuilders() {
-    return [N2CalendarFixedTimeAtBuild, N2CalendarInitTimeAtBuild, ValueChangedBuild];
+    return [N2CalendarFixedTimeAtBuild, N2CalendarInitTimeAtBuild, N2CalendarCouldPerformBuild, ValueChangedBuild];
   }
   getValidationHandlerDetectives() {
     return [
@@ -4285,6 +4286,7 @@ var index = /* @__PURE__ */ Object.freeze({
   N2ButtonValidateBlock,
   N2ButtonValidateMinimum,
   N2CalendarBuildFixedTimeAt,
+  N2CalendarCouldPerformBuild,
   N2CalendarFixedTimeAtBuild,
   N2CalendarInitTimeAtBuild,
   N2CalendarTranslator,
