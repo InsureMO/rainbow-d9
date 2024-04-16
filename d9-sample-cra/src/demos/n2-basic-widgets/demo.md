@@ -61,9 +61,13 @@
 	- !autoConfirm
 	- couldPerform:
 	  ```javascript
-	  // April 2024, and after   
-	  return (options.valueToCheck.year() === 2024 && options.valueToCheck.month() >= 3)
-	    || options.valueToCheck.year() > 2024;
+	  // April 2024, and after
+	  if (['year', 'month', 'date'].includes(options.checkType)) {
+	    return (options.valueToCheck.year() === 2024 && options.valueToCheck.month() >= 3)
+	      || options.valueToCheck.year() > 2024;
+	  } else {
+	    return options.valueToCheck.hour() >= 9 && options.valueToCheck.hour() < 18;
+	  }
 	  ```
 - Date::Buddhist Year & Month::buddhistEra2
 	- dateFormat: BBBB/MM
