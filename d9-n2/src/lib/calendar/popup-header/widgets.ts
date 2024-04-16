@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import {CssVars} from '../../constants';
 
-export const PopupHeaderContainer = styled.div`
+export const PopupHeaderContainer = styled.div.attrs({'data-w': 'd9-calendar-popup-header'})`
     display: flex;
     align-items: center;
     border-bottom: ${CssVars.BORDER};
@@ -9,21 +9,21 @@ export const PopupHeaderContainer = styled.div`
     padding: 0 ${CssVars.CALENDAR_GUTTER_SIZE};
     cursor: default;
 `;
-export const PopupHeaderDateLabel = styled.span`
+export const PopupHeaderDateLabel = styled.span.attrs({'data-w': 'd9-calendar-popup-date-label'})`
 	font-size    : 0.8em;
 	font-weight  : ${CssVars.FONT_BOLD};
 	font-variant : ${CssVars.FONT_VARIANT};
 	margin-right : 0.5em;
 `;
-export const PopupHeaderTimeLabel = styled.span`
+export const PopupHeaderTimeLabel = styled.span.attrs({'data-w': 'd9-calendar-popup-header-time-label'})`
 	font-size    : 0.8em;
 	font-weight  : ${CssVars.FONT_BOLD};
 	font-variant : ${CssVars.FONT_VARIANT};
 `;
-export const PopupHeaderPlaceholder = styled.span`
+export const PopupHeaderPlaceholder = styled.span.attrs({'data-w': 'd9-calendar-popup-header-placeholder'})`
 	flex-grow : 1;
 `;
-export const PopupHeaderTimeButton = styled.div`
+export const PopupHeaderTimeButton = styled.div.attrs({'data-w': 'd9-calendar-popup-header-time-button'})`
 	display         : flex;
 	position        : relative;
 	align-items     : center;

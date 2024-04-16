@@ -3,6 +3,7 @@ import {CssVars} from '../../constants';
 
 export const TimePickerContainer = styled.div.attrs<{ columns: number }>(({columns}) => {
 	return {
+		'data-w': 'd9-calendar-time-picker',
 		style: {
 			gridTemplateColumns: `repeat(${columns}, 1fr)`
 		}
@@ -16,13 +17,13 @@ export const TimePickerContainer = styled.div.attrs<{ columns: number }>(({colum
     padding: 0 ${CssVars.CALENDAR_GUTTER_SIZE} ${CssVars.CALENDAR_GUTTER_SIZE};
     cursor: default;
 `;
-export const TimePickerLabel = styled.div`
+export const TimePickerLabel = styled.div.attrs({'data-w': 'd9-calendar-time-picker-label'})`
     display: flex;
     align-items: center;
     font-variant: ${CssVars.FONT_VARIANT};
     font-weight: ${CssVars.FONT_BOLD}
 `;
-export const TimePickerSelector = styled.div.attrs({'data-v-scroll': ''})`
+export const TimePickerSelector = styled.div.attrs({'data-w': 'd9-calendar-time-picker-selector', 'data-v-scroll': ''})`
     display: flex;
     flex-direction: column;
     height: calc(${CssVars.CALENDAR_POPUP_HEIGHT_VALUE}px - ${CssVars.CALENDAR_POPUP_HEADER_HEIGHT} - ${CssVars.INPUT_HEIGHT} * 1.5 - ${CssVars.CALENDAR_GUTTER_SIZE});
@@ -30,7 +31,7 @@ export const TimePickerSelector = styled.div.attrs({'data-v-scroll': ''})`
     border: ${CssVars.BORDER};
     overflow-y: scroll;
 `;
-export const TimePickerSelectorOption = styled.span`
+export const TimePickerSelectorOption = styled.span.attrs({'data-w': 'd9-calendar-time-picker-selector-option'})`
     display: flex;
     position: relative;
     align-items: center;

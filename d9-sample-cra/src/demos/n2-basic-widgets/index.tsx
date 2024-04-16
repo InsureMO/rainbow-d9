@@ -10,6 +10,16 @@ import {markdown as DemoContent} from './demo.md';
 
 const StyleController = styled.div.attrs({})`
     + div[data-w=d9-page] {
+        div[data-w=d9-calendar][data-calendar-hide-shortcuts] {
+            div[data-w=d9-calendar-date-picker] {
+                grid-template-columns: 1fr;
+
+                > div[data-w=d9-calendar-date-picker-shortcuts] {
+                    display: none;
+                }
+            }
+        }
+
         div[data-w=d9-radios][data-as-toggle-button] {
             > span[data-w=d9-radios-option] {
                 border: ${CssVars.BORDER};

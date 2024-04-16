@@ -71,6 +71,8 @@
 	  ```
 - Date::Buddhist Year & Month::buddhistEra2
 	- dateFormat: BBBB/MM
+- Date::Hide Shortcuts::date3
+	- data-calendar-hide-shortcuts
 - Date::Only Visible on Desktop::mobileDesktop
 	- renderOn:
 	  ```
