@@ -1,16 +1,29 @@
+import {BaseModel, PropValue} from '@rainbow-d9/n1';
 import {Dayjs} from 'dayjs';
 import React, {useEffect, useRef, useState} from 'react';
+import {useGlobalHandlers} from '../../global';
 import {IntlLabel} from '../../intl-label';
 import {useCalendarEventBus} from '../event/calendar-event-bus';
 import {CalendarEventTypes} from '../event/calendar-event-bus-types';
+import {CalendarProps} from '../types';
+import {checkTimeParts} from '../utils';
 import {TimePickerContainer, TimePickerLabel, TimePickerSelector, TimePickerSelectorOption} from './widgets';
 
-export const TimePicker = (props: { value: Dayjs, timeFormat: string }) => {
-	const {value, timeFormat} = props;
+export interface CalendarTimePickerProps {
+	$root: BaseModel;
+	$model: PropValue;
+	value: Dayjs;
+	timeFormat: string;
+	couldPerform?: CalendarProps['couldPerform'];
+}
+
+export const TimePicker = (props: CalendarTimePickerProps) => {
+	const {$root, $model, value, timeFormat, couldPerform} = props;
 
 	const hourSelectorRef = useRef<HTMLDivElement>(null);
 	const minuteSelectorRef = useRef<HTMLDivElement>(null);
 	const secondSelectorRef = useRef<HTMLDivElement>(null);
+	const globalHandlers = useGlobalHandlers();
 	const {on, off, fire} = useCalendarEventBus();
 	const [visible, setVisible] = useState(false);
 
@@ -56,8 +69,7 @@ export const TimePicker = (props: { value: Dayjs, timeFormat: string }) => {
 		fire(CalendarEventTypes.VALUE_SELECTED, newValue);
 	};
 
-	const hasMinute = (timeFormat ?? '').includes('m');
-	const hasSecond = hasMinute && (timeFormat ?? '').includes('s');
+	const {hasMinute, hasSecond} = checkTimeParts(timeFormat);
 	const columns = 3 - (!hasMinute ? 1 : 0) - (!hasSecond ? 1 : 0);
 
 	return <TimePickerContainer columns={columns}>
@@ -75,18 +87,30 @@ export const TimePicker = (props: { value: Dayjs, timeFormat: string }) => {
 			</TimePickerLabel>
 			: null}
 		<TimePickerSelector ref={hourSelectorRef}>
-			{new Array(24).fill(1).map((v, index) => {
+			{new Array(24).fill(1).map((_, index) => {
+				const valueToPerform = value.clone().hour(index);
+				const couldPerformValue = couldPerform == null ? true : (couldPerform({
+					root: $root, model: $model, valueToCheck: valueToPerform, global: globalHandlers
+				}) !== false);
+				const click = couldPerformValue ? onHourChange(index) : (void 0);
 				return <TimePickerSelectorOption data-current={value.hour() === index} data-hour={index}
-				                                 onClick={onHourChange(index)} key={index}>
+				                                 data-could-perform={couldPerformValue}
+				                                 onClick={click} key={index}>
 					{`${index}`.padStart(2, '0')}
 				</TimePickerSelectorOption>;
 			})}
 		</TimePickerSelector>
 		{hasMinute
 			? <TimePickerSelector ref={minuteSelectorRef}>
-				{new Array(60).fill(1).map((v, index) => {
+				{new Array(60).fill(1).map((_, index) => {
+					const valueToPerform = value.clone().minute(index);
+					const couldPerformValue = couldPerform == null ? true : (couldPerform({
+						root: $root, model: $model, valueToCheck: valueToPerform, global: globalHandlers
+					}) !== false);
+					const click = couldPerformValue ? onMinuteChange(index) : (void 0);
 					return <TimePickerSelectorOption data-current={value.minute() === index} data-minute={index}
-					                                 onClick={onMinuteChange(index)} key={index}>
+					                                 data-could-perform={couldPerformValue}
+					                                 onClick={click} key={index}>
 						{`${index}`.padStart(2, '0')}
 					</TimePickerSelectorOption>;
 				})}
@@ -94,9 +118,15 @@ export const TimePicker = (props: { value: Dayjs, timeFormat: string }) => {
 			: null}
 		{hasSecond
 			? <TimePickerSelector ref={secondSelectorRef}>
-				{new Array(60).fill(1).map((v, index) => {
+				{new Array(60).fill(1).map((_, index) => {
+					const valueToPerform = value.clone().second(index);
+					const couldPerformValue = couldPerform == null ? true : (couldPerform({
+						root: $root, model: $model, valueToCheck: valueToPerform, global: globalHandlers
+					}) !== false);
+					const click = couldPerformValue ? onSecondChange(index) : (void 0);
 					return <TimePickerSelectorOption data-current={value.second() === index} data-second={index}
-					                                 onClick={onSecondChange(index)} key={index}>
+					                                 data-could-perform={couldPerformValue}
+					                                 onClick={click} key={index}>
 						{`${index}`.padStart(2, '0')}
 					</TimePickerSelectorOption>;
 				})}

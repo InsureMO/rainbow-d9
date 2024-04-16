@@ -1230,18 +1230,19 @@ It is completely consistent with the `Dropdown`, please refer to the previous se
 - Default Grid Column Span: `3`,
 - Declared Built-in Validation: `required`.
 
-| Attribute Name  | Type    | Description                                                                                       |
-|-----------------|---------|---------------------------------------------------------------------------------------------------|
-| please          | text    | `- please: Please select...`                                                                      |
-| clearable       | boolean | `- !clearable`<br/>`- clearable: false`<br/>Allowed to clear the selected value or not.           |
-| dateFormat      | text    | `- dateFormat: YYYY/MM/DD`, follows `Dayjs`.                                                      |
-| time            | boolean | `- time: false`, only for `Calendar`                                                              |
-| timeFormat      | text    | `- timeFormat: HH:mm:ss`, follows `Dayjs`                                                         |
-| storeFormat     | text    | `- storeFormat: YYYY/MM/DD HH:mm:ss`, follows `Dayjs`                                             |
-| autoConfirm     | boolean | `- autoConfirm: true`<br/>Selected value should be applied to model automatically on blur or not. |
-| useCalendarIcon | boolean | `- useCalendarIcon: true`<br/>Use calendar icon instead of caret down.                            |
-| fixedTimeAt     | json    | For `Calendar`, works when time is false; and for `Date`.                                         | 
-| initTimeAt      | json    | For `Calendar`, typically it is not need for date only.                                           | 
+| Attribute Name  | Type     | Description                                                                                       |
+|-----------------|----------|---------------------------------------------------------------------------------------------------|
+| please          | text     | `- please: Please select...`                                                                      |
+| clearable       | boolean  | `- !clearable`<br/>`- clearable: false`<br/>Allowed to clear the selected value or not.           |
+| dateFormat      | text     | `- dateFormat: YYYY/MM/DD`, follows `Dayjs`.                                                      |
+| time            | boolean  | `- time: false`, only for `Calendar`                                                              |
+| timeFormat      | text     | `- timeFormat: HH:mm:ss`, follows `Dayjs`                                                         |
+| storeFormat     | text     | `- storeFormat: YYYY/MM/DD HH:mm:ss`, follows `Dayjs`                                             |
+| autoConfirm     | boolean  | `- autoConfirm: true`<br/>Selected value should be applied to model automatically on blur or not. |
+| useCalendarIcon | boolean  | `- useCalendarIcon: true`<br/>Use calendar icon instead of caret down.                            |
+| fixedTimeAt     | json     | For `Calendar`, works when time is false; and for `Date`.                                         | 
+| initTimeAt      | json     | For `Calendar`, typically it is not need for date only.                                           | 
+| couldPerform    | function | Returns false when given value cannot be performed, otherwise it can.                             | 
 
 > Automatically detect the time format to determine whether to display minutes and seconds. When seconds are present in the time format,
 > minutes will always be displayed.

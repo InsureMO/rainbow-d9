@@ -1,4 +1,4 @@
-import {Nullable} from '@rainbow-d9/n1';
+import {BaseModel, Nullable, PropValue} from '@rainbow-d9/n1';
 import dayjs, {Dayjs} from 'dayjs';
 import React, {RefObject, useState} from 'react';
 import {CssVars} from '../constants';
@@ -8,10 +8,13 @@ import {CalendarPopupHeader} from './popup-header';
 import {TimePicker} from './time-picker';
 import {CalendarProps} from './types';
 import {useValueChange} from './use-value-change';
+import {checkDateParts} from './utils';
 import {PopupContainer} from './widgets';
 import {YearMonthPicker} from './year-month-picker';
 
-interface CalendarPopupProps extends Required<Pick<CalendarProps, 'dateFormat' | 'time' | 'timeFormat' | 'initTimeAt'>> {
+interface CalendarPopupProps extends Required<Pick<CalendarProps, 'dateFormat' | 'time' | 'timeFormat' | 'initTimeAt' | 'couldPerform'>> {
+	$root: BaseModel;
+	$model: PropValue;
 	initValue?: Nullable<Dayjs>;
 	popupRef: RefObject<HTMLDivElement>;
 	popupState: DropdownPopupState;
@@ -21,9 +24,9 @@ interface CalendarPopupProps extends Required<Pick<CalendarProps, 'dateFormat' |
 
 export const CalendarPopup = (props: CalendarPopupProps) => {
 	const {
-		initValue,
+		$root, $model, initValue,
 		popupRef, popupState, popupShown,
-		dateFormat, time, timeFormat, initTimeAt,
+		dateFormat, time, timeFormat, initTimeAt, couldPerform,
 		confirm
 	} = props;
 
@@ -44,6 +47,8 @@ export const CalendarPopup = (props: CalendarPopupProps) => {
 	});
 	useValueChange(setValue);
 
+	const {hasDate} = checkDateParts(dateFormat);
+
 	return <DropdownPopup {...popupState}
 	                      minWidth={CssVars.CALENDAR_POPUP_WIDTH_VALUE} maxWidth={CssVars.CALENDAR_POPUP_WIDTH_VALUE}
 	                      minHeight={CssVars.CALENDAR_POPUP_HEIGHT_VALUE}
@@ -52,9 +57,16 @@ export const CalendarPopup = (props: CalendarPopupProps) => {
 		<PopupContainer>
 			<CalendarPopupHeader dateFormat={dateFormat} time={time} timeFormat={timeFormat}
 			                     value={value} confirm={confirm}/>
-			<DatePicker value={value} dateFormat={dateFormat}/>
-			{time ? <TimePicker value={value} timeFormat={timeFormat}/> : null}
-			<YearMonthPicker value={value}/>
+			{hasDate
+				? <DatePicker $root={$root} $model={$model} value={value} dateFormat={dateFormat}
+				              couldPerform={couldPerform}/>
+				: null}
+			{time
+				? <TimePicker $root={$root} $model={$model} value={value} timeFormat={timeFormat}
+				              couldPerform={couldPerform}/>
+				: null}
+			<YearMonthPicker $root={$root} $model={$model} value={value} dateFormat={dateFormat}
+			                 couldPerform={couldPerform}/>
 		</PopupContainer>
 	</DropdownPopup>;
 };

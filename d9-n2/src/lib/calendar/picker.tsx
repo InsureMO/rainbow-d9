@@ -51,11 +51,12 @@ export const DropdownStickCalendar = styled(Date as any).attrs({[DOM_KEY_WIDGET]
 
 export const Picker = forwardRef((props: CalendarProps, ref: ForwardedRef<HTMLDivElement>) => {
 	const {
-		$pp, $wrapped: {$onValueChange, $model, $p2r, $avs: {$disabled, $visible}},
+		$pp, $wrapped: {$onValueChange, $root, $model, $p2r, $avs: {$disabled, $visible}},
 		please = '', clearable = true,
 		dateFormat = getDefaultCalendarDateFormat(), time, timeFormat = getDefaultCalendarTimeFormat(),
-		storeFormat = getDefaultCalendarDatetimeFormat(), fixedTimeAt = FIX_TIME_AT_START_OF_DAY,
-		initTimeAt,
+		storeFormat = getDefaultCalendarDatetimeFormat(),
+		fixedTimeAt = FIX_TIME_AT_START_OF_DAY, initTimeAt,
+		couldPerform,
 		autoConfirm = isCalendarAutoConfirm(), useCalendarIcon = isStickIconUseCalendar(),
 		...rest
 	} = props;
@@ -204,9 +205,10 @@ export const Picker = forwardRef((props: CalendarProps, ref: ForwardedRef<HTMLDi
 		<DropdownStick valueAssigned={valueAssigned} clearable={clearable} clear={onClearClicked}
 		               disabled={$disabled} icon={useCalendarIcon ? <DropdownStickCalendar/> : (void 0)}/>
 		{isDropdownPopupActive(popupState.active)
-			? <CalendarPopup initValue={initValueForPopup}
+			? <CalendarPopup $root={$root} $model={$model} initValue={initValueForPopup}
 			                 popupRef={popupRef} popupState={popupState} popupShown={popupShown}
 			                 dateFormat={dateFormat} time={time} timeFormat={timeFormat} initTimeAt={initTimeAt}
+			                 couldPerform={couldPerform}
 			                 confirm={onConfirm}/>
 			: null}
 	</DropdownContainer>;
