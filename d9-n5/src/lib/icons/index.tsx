@@ -42,6 +42,7 @@ import {ShowLocatorIcon} from './show-locator';
 import {TableIcon} from './table';
 import {TabsIcon} from './tabs';
 import {TextAreaIcon} from './textarea';
+import {TimeIcon} from './time';
 import {TreeIcon} from './tree';
 import {UploadIcon} from './upload';
 import {WindowIcon} from './window';
@@ -94,6 +95,7 @@ export enum PlaygroundIcons {
 	MULTI_DROPDOWN = 'playground.multi-dropdown',
 	DATE = 'playground.date',
 	DATETIME = 'playground.datetime',
+	TIME = 'playground.time',
 	CHECKBOX = 'playground.checkbox',
 	CHECKS = 'playground.checks',
 	RADIO = 'playground.radio',
@@ -146,6 +148,7 @@ Icons.Registrar.register({
 	[PlaygroundIcons.TEXTAREA]: () => <TextAreaIcon/>,
 	[PlaygroundIcons.DATE]: () => <DateIcon/>,
 	[PlaygroundIcons.DATETIME]: () => <DateTimeIcon/>,
+	[PlaygroundIcons.TIME]: () => <TimeIcon/>,
 	[PlaygroundIcons.UPLOAD]: () => <UploadIcon/>,
 
 	[PlaygroundIcons.DROPDOWN]: () => <DropdownIcon/>,
@@ -166,7 +169,7 @@ export {
 
 	InputIcon, NumberInputIcon, PasswordIcon, TextAreaIcon,
 	DecoInputIcon, DecoNumberIcon, DecoPasswordIcon,
-	DropdownIcon, MultiDropdownIcon, DateIcon, DateTimeIcon,
+	DropdownIcon, MultiDropdownIcon, DateIcon, DateTimeIcon, TimeIcon,
 	CheckboxIcon, ChecksIcon, RadioIcon, RadiosIcon,
 
 	ChartPieIcon, ChartBarIcon, ChartLineIcon, ChartReliantIcon, ChartAutonomousIcon

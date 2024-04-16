@@ -59,7 +59,8 @@ const CalendarProperties: Array<PlaygroundWidgetProperty> = [
 		description: '"start", "0", "end", "HH:mm:ss", "HH:mm:ss.SSS".'
 	},
 	{name: 'autoConfirm', label: 'Boolean.', description: 'Confirm selection when blurred.'},
-	{name: 'useCalendarIcon', label: 'Boolean.', description: 'Use calendar icon instead of caret.'}
+	{name: 'useCalendarIcon', label: 'Boolean.', description: 'Use calendar icon instead of caret.'},
+	{name: 'couldPerform', label: 'Snippet.', description: 'Check given date could be performed or not.'}
 ];
 const OptionItemsProperties: Array<PlaygroundWidgetProperty> = [
 	{name: 'options', label: 'Text, Various.'},
@@ -509,6 +510,18 @@ export const N2Widgets: Array<PlaygroundWidget> = [
 		],
 		icon: PlaygroundIcons.DATETIME, group: PlaygroundWidgetGroupKey.INPUTS, tooltip: 'Datetime picker',
 		template: `DateTime::[caption]::[property]
+- initTimeAt: 12:30:00
+`
+	},
+	{
+		$wt: N2.N2WidgetType.TIME, label: 'Datetime picker.',
+		properties: [
+			...CalendarProperties.filter(({name}) => name !== 'time' && name !== 'fixedTimeAt'),
+			ValueChanged,
+			ValidationRequired
+		],
+		icon: PlaygroundIcons.TIME, group: PlaygroundWidgetGroupKey.INPUTS, tooltip: 'Time picker',
+		template: `Time::[caption]::[property]
 - initTimeAt: 12:30:00
 `
 	},
