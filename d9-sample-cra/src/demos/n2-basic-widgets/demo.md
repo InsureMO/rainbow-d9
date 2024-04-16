@@ -65,7 +65,7 @@
 	  return (options.valueToCheck.year() === 2024 && options.valueToCheck.month() >= 3)
 	    || options.valueToCheck.year() > 2024;
 	  ```
-- Date::Buddhist Era::buddhistEra2
+- Date::Buddhist Year & Month::buddhistEra2
 	- dateFormat: BBBB/MM
 - Date::Only Visible on Desktop::mobileDesktop
 	- renderOn:
