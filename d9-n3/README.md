@@ -1421,6 +1421,14 @@ Some examples:
 > `Ribs` and `RibsView` are array widgets, and the layout of each element can be described using a sublist. It is important to note that the
 > sublist needs to be placed after the attributes list.
 
+### Expand and Collapse Icons
+
+The expand and collapse icons default uses the rib style. You can change it to use section style icons through global settings,
+see below for more details,
+
+- `setRibsDefaults`: to change default settings,
+- `isUseSectionStyleIcons`: default of stick icon.
+
 ## Table
 
 - Default Wrapped by Form Cell: `false`,

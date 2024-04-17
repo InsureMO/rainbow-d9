@@ -1,10 +1,12 @@
 import {ArrayPropValue, BaseModel, StandaloneRoot} from '@rainbow-d9/n1';
-import {GlobalRoot, ModelCarrier} from '@rainbow-d9/n2';
+import {GlobalRoot, ModelCarrier, RibsUtils} from '@rainbow-d9/n2';
 import {CustomEventHandler} from '../custom-event-handler';
 import {N2DemoDialogHandler} from '../n2-dialog-handler';
 import {useDemoMarkdown} from '../use-demo-markdown';
 import DemoData from './demo.json';
 import {markdown as DemoContent} from './demo.md';
+
+RibsUtils.setRibsDefaults({useSectionStyleIcons: true});
 
 export const N2ArrayPanel = () => {
 	const def = useDemoMarkdown(DemoContent);

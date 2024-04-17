@@ -6,7 +6,7 @@ export type RibsArrayDef = ArrayUsedDef;
 /** Ribs configuration definition */
 export type RibsDef =
 	Omit<ArrayContainerDef, '$array'>
-	& { $array?: RibsArrayDef; caption?: CaptionDef }
+	& { $array?: RibsArrayDef; caption?: CaptionDef; useSectionStyleIcons?: boolean; }
 	& OmitHTMLProps<HTMLDivElement>
 /** Ribs widget definition, with html attributes */
 export type RibsProps = OmitNodeDef<RibsDef> & ArrayContainerWidgetProps;

@@ -17,5 +17,7 @@ registerWidget({
 	key: 'Ribs', JSX: Ribs, NO_ELEMENT: RibNoData, ELEMENT: RibRow, BOTTOM: RibBottomBar, container: true, array: true
 } as WidgetRegistrationOptions);
 
+export * as RibsConstants from './constants';
+export * as RibsUtils from './utils';
 export {RibsProps, RibsDef, ImmutableRibsProps, RibsArrayDef};
 export * from './immutable';

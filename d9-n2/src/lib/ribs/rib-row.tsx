@@ -3,11 +3,12 @@ import React, {useState} from 'react';
 import {LabelLike} from '../label-like';
 import {RibRowOperators} from './rib-row-operators';
 import {RibsProps} from './types';
+import {isUseSectionStyleIcons} from './utils';
 import {ARibRow, ARibRowBody, ARibRowHeader, ARibRowHeaderContent, ARibRowIndex} from './widgets';
 
 export const RibRow = (props: Omit<RibsProps, '$array'> & { $array: EnhancedPropsForArrayElement }) => {
 	const {
-		caption,
+		caption, useSectionStyleIcons = isUseSectionStyleIcons(),
 		$wrapped,
 		$array: {elementIndex, removable, removeElement},
 		children
@@ -29,6 +30,7 @@ export const RibRow = (props: Omit<RibsProps, '$array'> & { $array: EnhancedProp
 				<LabelLike label={caption} $wrapped={$wrapped} $validationScopes={props}/>
 			</ARibRowHeaderContent>
 			<RibRowOperators expanded={expanded} expand={expand} collapse={collapse}
+			                 useSectionStyleIcons={useSectionStyleIcons}
 			                 removable={removable} removeElement={removeElement}/>
 		</ARibRowHeader>
 		<ARibRowBody expanded={expanded}>

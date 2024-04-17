@@ -195,6 +195,7 @@ export const Dropdown = forwardRef((props: DropdownProps, ref: ForwardedRef<HTML
 	                          {...rest}
 	                          data-w="d9-dropdown"
 	                          data-disabled={$disabled} data-visible={$visible}
+	                          data-clearable={clearable}
 	                          onFocus={onFocused} onClick={onClicked}
 	                          id={PPUtils.asId(PPUtils.absolute($p2r, $pp), props.id)}
 	                          ref={containerRef}>
