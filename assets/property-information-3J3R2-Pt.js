@@ -1,4 +1,4 @@
-import { i as immutable } from "./vendor-hN3HVZ-z.js";
+import { i as immutable } from "./vendor-LHBFkN_w.js";
 let Schema$3 = class Schema {
   /**
    * @constructor

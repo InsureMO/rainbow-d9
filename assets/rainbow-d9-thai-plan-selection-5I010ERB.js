@@ -1,9 +1,9 @@
-import { r as reactExports, R as React, j as jsxRuntimeExports } from "./react-pXKvkzAs.js";
-import { V as VUtils, r as registerWidget, g as useCreateEventBus, M as MUtils, P as PPUtils, a as useThrottler, e as useForceUpdate, d as Wrapper, S as StandaloneRoot } from "./rainbow-d9-n1-fxxxHIV6.js";
-import { C as CssVars, D as DOM_KEY_WIDGET, a as DOM_ID_WIDGET, d as utils$1, $ as $d9n2, u as useGlobalEventBus, b as useGlobalHandlers, G as GlobalEventTypes, U as UnwrappedButton, B as ButtonInk, e as ButtonFill, I as IntlLabel, L as LabelLike, i as index$2, c as GlobalEventPrefix, f as useAlert, g as useDialog, h as DialogHeader, j as DialogTitle, k as DialogBody, l as DialogFooter, m as GlobalRoot } from "./rainbow-d9-n2-Tn4Dgplp.js";
-import { a as color, n as nanoid } from "./vendor-hN3HVZ-z.js";
-import { q as qe } from "./styled-components-zITiNxR-.js";
-import { i as index$1, p as parseDoc } from "./rainbow-d9-n3-ZahXjEJw.js";
+import { r as reactExports, R as React, j as jsxRuntimeExports } from "./react-fDBYIYZ3.js";
+import { V as VUtils, r as registerWidget, g as useCreateEventBus, M as MUtils, P as PPUtils, a as useThrottler, e as useForceUpdate, d as Wrapper, S as StandaloneRoot } from "./rainbow-d9-n1-ODs37q4o.js";
+import { C as CssVars, D as DOM_KEY_WIDGET, a as DOM_ID_WIDGET, d as utils$2, $ as $d9n2, u as useGlobalEventBus, b as useGlobalHandlers, G as GlobalEventTypes, U as UnwrappedButton, B as ButtonInk, e as ButtonFill, I as IntlLabel, L as LabelLike, i as index$2, c as GlobalEventPrefix, f as useAlert, g as useDialog, h as DialogHeader, j as DialogTitle, k as DialogBody, l as DialogFooter, m as GlobalRoot } from "./rainbow-d9-n2-o6TZy2QL.js";
+import { a as color, n as nanoid } from "./vendor-LHBFkN_w.js";
+import { q as qe } from "./styled-components-MyGBBFnH.js";
+import { i as index$1, p as parseDoc } from "./rainbow-d9-n3-9jvafhE8.js";
 var PlanElementType;
 (function(PlanElementType2) {
   PlanElementType2["CATEGORY"] = "PolicyElementCategory";
@@ -64,8 +64,8 @@ const APlanSelection = qe.div.attrs(({ id, "data-w": dataW, columnCount, compute
     "data-v-scroll": "",
     "data-h-scroll": "",
     style: {
-      "--grid-template-columns": `${utils$1.toCssSize(computedLineHeaderWidth)} repeat(${columnCount}, ${utils$1.toCssSize(computedColumnWidth)})`,
-      "--max-height": utils$1.toCssSize(maxHeight)
+      "--grid-template-columns": `${utils$2.toCssSize(computedLineHeaderWidth)} repeat(${columnCount}, ${utils$2.toCssSize(computedColumnWidth)})`,
+      "--max-height": utils$2.toCssSize(maxHeight)
     }
   };
 })`
@@ -489,10 +489,10 @@ const computeColumnWidth = (columns, columnWidth, lineHeaderWidth) => {
     if (VUtils.isNotBlank(lineHeaderWidth)) {
       return [columnWidth, lineHeaderWidth];
     } else {
-      return [columnWidth, `calc(100% - (${utils$1.toCssSize(columnWidth)} * ${columns}))`];
+      return [columnWidth, `calc(100% - (${utils$2.toCssSize(columnWidth)} * ${columns}))`];
     }
   } else if (VUtils.isNotBlank(lineHeaderWidth)) {
-    return [`calc((100% - ${utils$1.toCssSize(lineHeaderWidth)}) / ${columns})`, lineHeaderWidth];
+    return [`calc((100% - ${utils$2.toCssSize(lineHeaderWidth)}) / ${columns})`, lineHeaderWidth];
   } else if (columns <= 0) {
     return ["minmax(20%, 1fr)", "minmax(40%, 1.5fr)"];
   } else {
@@ -1082,8 +1082,8 @@ const PlanElementOptionsValue = (props) => {
   };
   const root = planModel;
   if (elementOptionsValue == null) {
-    const language = utils$1.locale();
-    const format = utils$1.nfXWithLocale(language, 0);
+    const language = utils$2.locale();
+    const format = utils$2.nfXWithLocale(language, 0);
     const def = {
       $wt: "Box.FC",
       $root,
@@ -1206,8 +1206,8 @@ const PlanElementNumberValue = (props) => {
     const useOptions = max != null && step != null;
     let editorDef;
     if (useOptions) {
-      const language = utils$1.locale();
-      const format = utils$1.nfXWithLocale(language, 0);
+      const language = utils$2.locale();
+      const format = utils$2.nfXWithLocale(language, 0);
       const values = (() => {
         const values2 = [max];
         let value = max;

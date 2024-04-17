@@ -4,10 +4,10 @@ var __publicField = (obj, key, value) => {
   __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
   return value;
 };
-import { a as color, M as MaskedNumber, e as MaskedDate, g as MaskedFunction, j as MaskedPattern, k as MaskedRange, l as MaskedRegExp, o as MaskedDynamic } from "./vendor-hN3HVZ-z.js";
-import { R as React, r as reactExports, u as useIMask } from "./react-pXKvkzAs.js";
-import { V as VUtils, P as PPUtils, r as registerWidget, c as createLogger, u as useRootEventBus, M as MUtils, N as NUtils, d as Wrapper, e as useForceUpdate, f as MBUtils, b as useWrapperEventBus, W as WrapperEventTypes, g as useCreateEventBus, h as useDefaultAttributeValues, i as PROPERTY_PATH_ME, j as useAttributesWatch, R as RootEventTypes } from "./rainbow-d9-n1-fxxxHIV6.js";
-import { q as qe, W as We } from "./styled-components-zITiNxR-.js";
+import { a as color, M as MaskedNumber, e as MaskedDate, g as MaskedFunction, j as MaskedPattern, k as MaskedRange, l as MaskedRegExp, o as MaskedDynamic } from "./vendor-LHBFkN_w.js";
+import { R as React, r as reactExports, u as useIMask } from "./react-fDBYIYZ3.js";
+import { V as VUtils, P as PPUtils, r as registerWidget, c as createLogger, u as useRootEventBus, M as MUtils, N as NUtils, d as Wrapper, e as useForceUpdate, f as MBUtils, b as useWrapperEventBus, W as WrapperEventTypes, g as useCreateEventBus, h as useDefaultAttributeValues, i as PROPERTY_PATH_ME, j as useAttributesWatch, R as RootEventTypes } from "./rainbow-d9-n1-ODs37q4o.js";
+import { q as qe, W as We } from "./styled-components-MyGBBFnH.js";
 import { d as dayjs } from "./dayjs-9Z7dW0Q-.js";
 const DOM_KEY_WIDGET = "data-w";
 const DOM_ID_WIDGET = "data-wid";
@@ -1224,7 +1224,7 @@ const CALENDAR_YM_FORMAT = "MMM YYYY";
 const CALENDAR_DATE_FORMAT = "YYYY/MM/DD";
 const CALENDAR_TIME_FORMAT = "HH:mm:ss";
 const CALENDAR_DATETIME_FORMAT = `${CALENDAR_DATE_FORMAT} ${CALENDAR_TIME_FORMAT}`;
-const DEFAULTS = {
+const DEFAULTS$1 = {
   YM_FORMAT: CALENDAR_YM_FORMAT,
   DATE_FORMAT: CALENDAR_DATE_FORMAT,
   TIME_FORMAT: CALENDAR_TIME_FORMAT,
@@ -1233,19 +1233,19 @@ const DEFAULTS = {
   USE_CALENDAR_ICON: false
 };
 const setCalendarDefaults = (defaults) => {
-  DEFAULTS.YM_FORMAT = defaults.ymFormat ?? DEFAULTS.YM_FORMAT;
-  DEFAULTS.DATE_FORMAT = defaults.dateFormat ?? DEFAULTS.DATE_FORMAT;
-  DEFAULTS.TIME_FORMAT = defaults.timeFormat ?? DEFAULTS.TIME_FORMAT;
-  DEFAULTS.DATETIME_FORMAT = defaults.datetimeFormat ?? DEFAULTS.DATETIME_FORMAT;
-  DEFAULTS.AUTO_CONFIRM = defaults.autoConfirm ?? DEFAULTS.AUTO_CONFIRM;
-  DEFAULTS.USE_CALENDAR_ICON = defaults.useCalendarIcon ?? DEFAULTS.USE_CALENDAR_ICON;
+  DEFAULTS$1.YM_FORMAT = defaults.ymFormat ?? DEFAULTS$1.YM_FORMAT;
+  DEFAULTS$1.DATE_FORMAT = defaults.dateFormat ?? DEFAULTS$1.DATE_FORMAT;
+  DEFAULTS$1.TIME_FORMAT = defaults.timeFormat ?? DEFAULTS$1.TIME_FORMAT;
+  DEFAULTS$1.DATETIME_FORMAT = defaults.datetimeFormat ?? DEFAULTS$1.DATETIME_FORMAT;
+  DEFAULTS$1.AUTO_CONFIRM = defaults.autoConfirm ?? DEFAULTS$1.AUTO_CONFIRM;
+  DEFAULTS$1.USE_CALENDAR_ICON = defaults.useCalendarIcon ?? DEFAULTS$1.USE_CALENDAR_ICON;
 };
-const getDefaultCalendarYMFormat = () => DEFAULTS.YM_FORMAT;
-const getDefaultCalendarDateFormat = () => DEFAULTS.DATE_FORMAT;
-const getDefaultCalendarTimeFormat = () => DEFAULTS.TIME_FORMAT;
-const getDefaultCalendarDatetimeFormat = () => DEFAULTS.DATETIME_FORMAT;
-const isCalendarAutoConfirm = () => DEFAULTS.AUTO_CONFIRM;
-const isStickIconUseCalendar = () => DEFAULTS.USE_CALENDAR_ICON;
+const getDefaultCalendarYMFormat = () => DEFAULTS$1.YM_FORMAT;
+const getDefaultCalendarDateFormat = () => DEFAULTS$1.DATE_FORMAT;
+const getDefaultCalendarTimeFormat = () => DEFAULTS$1.TIME_FORMAT;
+const getDefaultCalendarDatetimeFormat = () => DEFAULTS$1.DATETIME_FORMAT;
+const isCalendarAutoConfirm = () => DEFAULTS$1.AUTO_CONFIRM;
+const isStickIconUseCalendar = () => DEFAULTS$1.USE_CALENDAR_ICON;
 const FIX_TIME_AT_START_OF_DAY = { hour: 0, minute: 0, second: 0, millisecond: 0 };
 const FIX_TIME_AT_END_OF_DAY = { hour: 23, minute: 59, second: 59, millisecond: 59 };
 const toStartOfDay = (datetime) => {
@@ -1262,7 +1262,7 @@ const checkTimeParts = (timeFormat) => {
 const checkDateParts = (dateFormat) => {
   return { hasDate: (dateFormat ?? "").toLowerCase().includes("d") };
 };
-var utils$2 = /* @__PURE__ */ Object.freeze({
+var utils$3 = /* @__PURE__ */ Object.freeze({
   __proto__: null,
   FIX_TIME_AT_END_OF_DAY,
   FIX_TIME_AT_START_OF_DAY,
@@ -1354,7 +1354,7 @@ const useDualRefs = (ref, forwardedRef) => {
   }, [ref, forwardedRef]);
 };
 const N2Logger = createLogger();
-var utils$1 = /* @__PURE__ */ Object.freeze({
+var utils$2 = /* @__PURE__ */ Object.freeze({
   __proto__: null,
   N2Logger,
   computeGridCellStyle,
@@ -2663,7 +2663,7 @@ const Dropdown = reactExports.forwardRef((props, ref) => {
   const deviceTags = MBUtils.pickDeviceTags(props);
   return React.createElement(
     DropdownContainer,
-    { active: popupState.active, atBottom: popupState.atBottom, role: "input", tabIndex: 0, ...rest, "data-w": "d9-dropdown", "data-disabled": $disabled, "data-visible": $visible, onFocus: onFocused, onClick: onClicked, id: PPUtils.asId(PPUtils.absolute($p2r, $pp), props.id), ref: containerRef },
+    { active: popupState.active, atBottom: popupState.atBottom, role: "input", tabIndex: 0, ...rest, "data-w": "d9-dropdown", "data-disabled": $disabled, "data-visible": $visible, "data-clearable": clearable, onFocus: onFocused, onClick: onClicked, id: PPUtils.asId(PPUtils.absolute($p2r, $pp), props.id), ref: containerRef },
     React.createElement(DropdownLabel, { "data-please": !selected }, toIntlLabel(label)),
     React.createElement(DropdownStick, { valueAssigned: selected, clearable, clear: onClearClicked, disabled: $disabled }),
     isDropdownPopupActive(popupState.active) ? React.createElement(
@@ -5054,6 +5054,27 @@ const RibNoData = (props) => {
     return React.createElement(ARibNoDataRow, null, toIntlLabel(noElementReminder));
   }
 };
+const RibRowExpanderSvg = qe(ArrowDown).attrs({ [DOM_KEY_WIDGET]: "d9-rib-row-header-expander-svg" })`
+    height: 70%;
+    color: ${CssVars.FONT_COLOR};
+    opacity: 0.7;
+    transition: transform ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION};
+
+    &[data-expanded=true] {
+        transform: rotateX(180deg);
+    }
+`;
+const SectionStyleExpander = (props) => {
+  const { expanded, expand, collapse } = props;
+  const $wrapped = {
+    $root: {},
+    $model: {},
+    $p2r: ".",
+    $onValueChange: VUtils.noop,
+    $avs: { $disabled: false, $visible: true }
+  };
+  return React.createElement(Button, { "$wrapped": $wrapped, ink: ButtonInk.PRIMARY, fill: ButtonFill.PLAIN, leads: [React.createElement(RibRowExpanderSvg, { "data-expanded": expanded })], click: expanded ? collapse : expand, "data-w": "d9-rib-row-operator" });
+};
 const ExpandButton$1 = (props) => {
   const { onClick } = props;
   const $wrapped = {
@@ -5088,19 +5109,35 @@ const RemoveButton$1 = (props) => {
   return React.createElement(Button, { "$wrapped": $wrapped, ink: ButtonInk.PRIMARY, fill: ButtonFill.PLAIN, leads: ["$icons.remove"], click: onClick, "data-w": "d9-rib-row-operator" });
 };
 const RibRowOperators = (props) => {
-  const { expanded, expand, collapse, removable = false, removeElement } = props;
+  const { expanded, expand, collapse, useSectionStyleIcons, removable = false, removeElement } = props;
   const globalHandlers = useGlobalHandlers();
   const onRemoveClicked = async () => await removeElement(globalHandlers);
   return React.createElement(
     ARibRowOperators,
     { "data-expanded": expanded },
     removable ? React.createElement(RemoveButton$1, { onClick: onRemoveClicked }) : null,
-    !expanded ? React.createElement(ExpandButton$1, { onClick: expand }) : null,
-    expanded ? React.createElement(CollapseButton$1, { onClick: collapse }) : null
+    useSectionStyleIcons ? React.createElement(SectionStyleExpander, { expanded, expand, collapse }) : React.createElement(
+      React.Fragment,
+      null,
+      !expanded ? React.createElement(ExpandButton$1, { onClick: expand }) : null,
+      expanded ? React.createElement(CollapseButton$1, { onClick: collapse }) : null
+    )
   );
 };
+const DEFAULTS = {
+  USE_SECTION_STYLE_ICONS: false
+};
+const setRibsDefaults = (defaults) => {
+  DEFAULTS.USE_SECTION_STYLE_ICONS = defaults.useSectionStyleIcons ?? DEFAULTS.USE_SECTION_STYLE_ICONS;
+};
+const isUseSectionStyleIcons = () => DEFAULTS.USE_SECTION_STYLE_ICONS;
+var utils$1 = /* @__PURE__ */ Object.freeze({
+  __proto__: null,
+  isUseSectionStyleIcons,
+  setRibsDefaults
+});
 const RibRow = (props) => {
-  const { caption, $wrapped, $array: { elementIndex, removable, removeElement }, children } = props;
+  const { caption, useSectionStyleIcons = isUseSectionStyleIcons(), $wrapped, $array: { elementIndex, removable, removeElement }, children } = props;
   const [expanded, setExpanded] = reactExports.useState(false);
   const expand = () => setExpanded(true);
   const collapse = () => setExpanded(false);
@@ -5126,7 +5163,7 @@ const RibRow = (props) => {
         null,
         React.createElement(LabelLike, { label: caption, "$wrapped": $wrapped, "$validationScopes": props })
       ),
-      React.createElement(RibRowOperators, { expanded, expand, collapse, removable, removeElement })
+      React.createElement(RibRowOperators, { expanded, expand, collapse, useSectionStyleIcons, removable, removeElement })
     ),
     React.createElement(ARibRowBody, { expanded }, children)
   );
@@ -8909,7 +8946,7 @@ export {
   DOM_ID_WIDGET as a,
   useGlobalHandlers as b,
   GlobalEventPrefix as c,
-  utils$1 as d,
+  utils$2 as d,
   ButtonFill as e,
   useAlert as f,
   useDialog as g,
@@ -8919,11 +8956,12 @@ export {
   DialogBody as k,
   DialogFooter as l,
   GlobalRoot as m,
-  utils$2 as n,
-  UnwrappedButtonBar as o,
-  ButtonBarAlignment as p,
-  UnwrappedCaption as q,
-  UnwrappedSection as r,
+  utils$3 as n,
+  utils$1 as o,
+  UnwrappedButtonBar as p,
+  ButtonBarAlignment as q,
+  UnwrappedCaption as r,
+  UnwrappedSection as s,
   toIntlLabel as t,
   useGlobalEventBus as u
 };
