@@ -4,10 +4,10 @@ var __publicField = (obj, key, value) => {
   __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
   return value;
 };
-import { a as color, M as MaskedNumber, e as MaskedDate, g as MaskedFunction, j as MaskedPattern, k as MaskedRange, l as MaskedRegExp, o as MaskedDynamic } from "./vendor-LHBFkN_w.js";
-import { R as React, r as reactExports, u as useIMask } from "./react-fDBYIYZ3.js";
-import { V as VUtils, P as PPUtils, r as registerWidget, c as createLogger, u as useRootEventBus, M as MUtils, N as NUtils, d as Wrapper, e as useForceUpdate, f as MBUtils, b as useWrapperEventBus, W as WrapperEventTypes, g as useCreateEventBus, h as useDefaultAttributeValues, i as PROPERTY_PATH_ME, j as useAttributesWatch, R as RootEventTypes } from "./rainbow-d9-n1-ODs37q4o.js";
-import { q as qe, W as We } from "./styled-components-MyGBBFnH.js";
+import { a as color, M as MaskedNumber, e as MaskedDate, g as MaskedFunction, j as MaskedPattern, k as MaskedRange, l as MaskedRegExp, o as MaskedDynamic } from "./vendor-dEUGUKMq.js";
+import { R as React, r as reactExports, u as useIMask } from "./react-XEcpDhC4.js";
+import { V as VUtils, P as PPUtils, r as registerWidget, c as createLogger, u as useRootEventBus, M as MUtils, N as NUtils, d as Wrapper, e as useForceUpdate, f as MBUtils, b as useWrapperEventBus, W as WrapperEventTypes, g as useCreateEventBus, h as useDefaultAttributeValues, i as PROPERTY_PATH_ME, j as useAttributesWatch, R as RootEventTypes } from "./rainbow-d9-n1-OMT1AvAI.js";
+import { q as qe, W as We } from "./styled-components-dW_QAQE6.js";
 import { d as dayjs } from "./dayjs-9Z7dW0Q-.js";
 const DOM_KEY_WIDGET = "data-w";
 const DOM_ID_WIDGET = "data-wid";
@@ -2932,7 +2932,7 @@ const MultiDropdown = reactExports.forwardRef((props, ref) => {
   const deviceTags = MBUtils.pickDeviceTags(props);
   return React.createElement(
     MultiDropdownContainer,
-    { active: popupState.active, atBottom: popupState.atBottom, role: "input", tabIndex: 0, ...rest, "data-w": "d9-multi-dropdown", "data-disabled": $disabled, "data-visible": $visible, onFocus: onFocused, onClick: onClicked, id: PPUtils.asId(PPUtils.absolute($p2r, $pp), props.id), ref: containerRef },
+    { active: popupState.active, atBottom: popupState.atBottom, role: "input", tabIndex: 0, ...rest, "data-w": "d9-multi-dropdown", "data-disabled": $disabled, "data-visible": $visible, "data-clearable": clearable, onFocus: onFocused, onClick: onClicked, id: PPUtils.asId(PPUtils.absolute($p2r, $pp), props.id), ref: containerRef },
     values.map((value) => {
       var _a;
       const v = `${value}`;
