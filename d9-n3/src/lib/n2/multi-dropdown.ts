@@ -34,6 +34,7 @@ export class N2MultiDropdownTranslator extends SpecificWidgetTranslator<N2Widget
 	public getValidationHandlerDetectives(): Array<MonitorHandlerDetective> {
 		return [
 			ValidatorUtils.DETECT_REQUIRED,
+			ValidatorUtils.DETECT_LENGTH,
 			...super.getValidationHandlerDetectives()
 		];
 	}

@@ -25,6 +25,7 @@ export abstract class AbstractN2CheckboxesTranslator<T extends N2WidgetType.CHEC
 	public getValidationHandlerDetectives(): Array<MonitorHandlerDetective> {
 		return [
 			ValidatorUtils.DETECT_REQUIRED,
+			ValidatorUtils.DETECT_LENGTH,
 			...super.getValidationHandlerDetectives()
 		];
 	}
