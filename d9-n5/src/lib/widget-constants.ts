@@ -42,6 +42,7 @@ const Please: PlaygroundWidgetProperty = {name: 'please', label: 'Text. Placehol
 const Clearable: PlaygroundWidgetProperty = {name: 'clearable', label: 'Boolean.', description: 'Default true.'};
 const CalendarProperties: Array<PlaygroundWidgetProperty> = [
 	Please, Clearable,
+	{name: 'date', label: 'Boolean. Allow date part or not.', description: 'Default true.'},
 	{name: 'dateFormat', label: 'Text.', description: 'Default value depends on system settings.'},
 	{name: 'time', label: 'Boolean. Allow time part or not.', description: 'Default false.'},
 	{
@@ -147,7 +148,11 @@ const TableProperties: Array<PlaygroundWidgetProperty> = [
 	}
 ];
 const RibsProperties: Array<PlaygroundWidgetProperty> = [
-	{name: 'caption', label: 'Text, Various.', description: 'Caption for each item.'}
+	{name: 'caption', label: 'Text, Various.', description: 'Caption for each item.'},
+	{
+		name: 'useSectionStyleIcons', label: 'Boolean.',
+		description: 'Use section style icons for expanding and collapsing.'
+	}
 ];
 const ChartProperties: Array<PlaygroundWidgetProperty> = [
 	{name: 'initOptions', label: 'Snippet.', description: 'Init options of echarts.'},
@@ -489,7 +494,7 @@ export const N2Widgets: Array<PlaygroundWidget> = [
 	{
 		$wt: N2.N2WidgetType.DATE, label: 'Date picker. Shortcut of "Calendar"',
 		properties: [
-			...CalendarProperties.filter(({name}) => name !== 'time' && name !== 'timeFormat'),
+			...CalendarProperties.filter(({name}) => name !== 'date' && name !== 'time' && name !== 'timeFormat'),
 			ValueChanged,
 			ValidationRequired
 		],
@@ -504,7 +509,7 @@ export const N2Widgets: Array<PlaygroundWidget> = [
 	{
 		$wt: N2.N2WidgetType.DATETIME, label: 'Datetime picker.',
 		properties: [
-			...CalendarProperties.filter(({name}) => name !== 'time' && name !== 'fixedTimeAt'),
+			...CalendarProperties.filter(({name}) => name !== 'date' && name !== 'time' && name !== 'fixedTimeAt'),
 			ValueChanged,
 			ValidationRequired
 		],
@@ -516,7 +521,7 @@ export const N2Widgets: Array<PlaygroundWidget> = [
 	{
 		$wt: N2.N2WidgetType.TIME, label: 'Datetime picker.',
 		properties: [
-			...CalendarProperties.filter(({name}) => name !== 'time' && name !== 'fixedTimeAt'),
+			...CalendarProperties.filter(({name}) => name !== 'date' && name !== 'time' && name !== 'fixedTimeAt'),
 			ValueChanged,
 			ValidationRequired
 		],
@@ -548,13 +553,13 @@ export const N2Widgets: Array<PlaygroundWidget> = [
 	},
 	{
 		$wt: N2.N2WidgetType.CHECKBOXES, label: 'Checkbox group.',
-		properties: [...CheckboxesProperties, ValueChanged, ValidationRequired],
+		properties: [...CheckboxesProperties, ValueChanged, ValidationRequired, ValidationLength],
 		icon: PlaygroundIcons.CHECKS, group: PlaygroundWidgetGroupKey.OPTIONS, tooltip: 'Checkbox group',
 		notInToolbar: true
 	},
 	{
 		$wt: N2.N2WidgetType.CHECKS, label: 'Checkbox group. Shortcut of "Checkboxes".',
-		properties: [...CheckboxesProperties, ValueChanged, ValidationRequired],
+		properties: [...CheckboxesProperties, ValueChanged, ValidationRequired, ValidationLength],
 		icon: PlaygroundIcons.CHECKS, group: PlaygroundWidgetGroupKey.OPTIONS, tooltip: 'Checkbox group',
 		template: `Checks::[caption]::[property]
 - options: 1: Pizza; 2: Hamburger; 3: Noodle
@@ -605,7 +610,7 @@ export const N2Widgets: Array<PlaygroundWidget> = [
 	},
 	{
 		$wt: N2.N2WidgetType.MULTI_DROPDOWN, label: 'Dropdown allows multiple choices.',
-		properties: [...DropdownProperties, ValueChanged, ValidationRequired],
+		properties: [...DropdownProperties, ValueChanged, ValidationRequired, ValidationLength],
 		icon: PlaygroundIcons.MULTI_DROPDOWN, group: PlaygroundWidgetGroupKey.OPTIONS, tooltip: 'Multiple choices',
 		template: `MultiDropdown::[caption]::[property]
 - !clearable
