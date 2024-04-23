@@ -50,11 +50,13 @@ export const nf3: NumberFormat = wrapNf(nf(3).format);
 
 export const nfWithLocale = (locale: string): NumberFormatter => {
 	return (fractionDigits: number, grouping?: boolean) => {
-		return new Intl.NumberFormat(locale, {
-			useGrouping: grouping == null ? true : grouping,
-			minimumFractionDigits: fractionDigits || 0,
-			maximumFractionDigits: fractionDigits || 0
-		});
+		return new Intl.NumberFormat(
+			VUtils.isBlank(locale) ? (void 0) : locale.replace(/_/g, '-'),
+			{
+				useGrouping: grouping == null ? true : grouping,
+				minimumFractionDigits: fractionDigits || 0,
+				maximumFractionDigits: fractionDigits || 0
+			});
 	};
 };
 export const nfXWithLocale = (locale: string, fractionDigits: number): NumberFormat => {
