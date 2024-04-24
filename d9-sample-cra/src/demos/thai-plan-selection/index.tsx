@@ -11,8 +11,10 @@ import {
 	PlanElementNumberValueDef,
 	PlanElementOptionsValueDef,
 	PlanElementType,
-	PlanElementValueEditType
+	PlanElementValueEditType,
+	PlanSelectionGlobalEventPrefix
 } from '@rainbow-d9/thai-plan-selection';
+import {useRef} from 'react';
 import {CustomEventHandler} from '../custom-event-handler';
 import {N2DemoDialogHandler} from '../n2-dialog-handler';
 import {useDemoMarkdown} from '../use-demo-markdown';
@@ -35,6 +37,23 @@ $d9n2.intl.labels['en-US'] = {
 export const ThaiPlanSelection = () => {
 	const def = useDemoMarkdown(DemoContent);
 
+	// const [dynamicOptions, setDynamicOptions] = useState(() => {
+	// 	return [{value: 900_000}, {value: 950_000}, {value: 1_000_000}];
+	// });
+	const getDynamicOptions = useRef((() => {
+		let times = 0;
+		const options1 = [{value: 900_000}, {value: 950_000}, {value: 1_000_000}];
+		const options2 = [{value: 850_000}, {value: 900_000}, {value: 950_000}, {value: 1_000_000}];
+		return () => {
+			if (times === 0) {
+				times = 1;
+				return options1;
+			} else {
+				return options2;
+			}
+		};
+	})());
+
 	const externalDefs = {
 		defs: async (): Promise<PlanDefs> => {
 			return [
@@ -48,7 +67,7 @@ export const ThaiPlanSelection = () => {
 									values: [
 										{
 											code: 'si', label: 'Sum Insured', defaultValue: 950_000,
-											options: [{value: 900_000}, {value: 950_000}, {value: 1_000_000}],
+											options: getDynamicOptions.current(),
 											editType: PlanElementValueEditType.OPTIONS
 										} as PlanElementOptionsValueDef,
 										{
@@ -224,6 +243,12 @@ export const ThaiPlanSelection = () => {
 				return {code, premium: Math.ceil(50000 + Math.random() * 10000)};
 			}).forEach(({code, premium}) => {
 				MUtils.setValue(DemoData.plans, `${code}.premium.due`, premium);
+			});
+		},
+		refreshPlanDefs: async (options: ButtonClickOptions<BaseModel, PropValue>) => {
+			await options.global.sc(PlanSelectionGlobalEventPrefix.RELOAD_DEFS, 'demo', {
+				root: options.root,
+				model: options.model
 			});
 		}
 	};

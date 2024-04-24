@@ -3,7 +3,8 @@
 ## Section::# 100. ThaiCloud Plan Selection
 
 - PlanSelect::::plans
-	- maxHeight: 800
+	- marker: demo
+	- maxHeight: 750
 	- columns: 3
 	- defs: @ext.defs
 	- currencySymbol: ฿
@@ -11,3 +12,8 @@
 	- buy: @ext.buy
 	- calculationDelay: 3
 	- calculate: @ext.calculate
+
+### Button::::
+
+- text: Refresh Plan Defs
+- click: @ext.refreshPlanDefs

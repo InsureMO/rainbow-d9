@@ -1,8 +1,6 @@
-import {Undefinable} from '@rainbow-d9/n1';
-import {GlobalEventTypes, useGlobalEventBus, useGlobalHandlers} from '@rainbow-d9/n2';
-import {useEffect, useState} from 'react';
-import {PlanDefs, PlanElementCode, PlanElementDef, PlanSelectionGlobalEventPrefix, PlanSelectionProps} from './types';
-import {redressPlanMarker} from './utils';
+import {BaseModel, PropValue, Undefinable} from '@rainbow-d9/n1';
+import {GlobalHandlers} from '@rainbow-d9/n2';
+import {PlanDefs, PlanElementCode, PlanElementDef, PlanSelectionProps} from './types';
 
 export interface PlanElementDefOrdered {
 	code: PlanElementCode;
@@ -77,67 +75,86 @@ const orderPlanDefs = (defs: PlanDefs): Undefinable<PlanDefOrdered> => {
 	return sort(ordered);
 };
 
-export interface PlanDefsState {
-	initialized: boolean;
-	marker: string;
-	defs?: PlanDefs;
-	orderedDefs?: PlanDefOrdered;
+export interface PlanLoadDefsOptions {
+	defs: PlanSelectionProps['defs'];
+	$root: BaseModel;
+	$model: PropValue;
+	globalHandlers: GlobalHandlers;
 }
 
-export const useDefs = (options: PlanSelectionProps) => {
-	const {
-		defs, valuesInit, valuesClear,
-		$wrapped: {$root, $model}
-	} = options;
-
-	const {on, off} = useGlobalEventBus();
-	const globalHandlers = useGlobalHandlers();
-	const [state, setState] = useState<PlanDefsState>({
-		initialized: false, marker: redressPlanMarker(options)
-	});
-	useEffect(() => {
-		const loadDefs = async (beforeChangeState: (defs: PlanDefs) => Promise<void>) => {
-			let loadedDefs: PlanDefs;
-			if (typeof defs === 'function') {
-				loadedDefs = await defs({root: $root, model: $model, global: globalHandlers});
-			} else {
-				loadedDefs = defs;
-			}
-			await beforeChangeState(loadedDefs);
-			setState(state => {
-				return {
-					initialized: true, marker: state.marker,
-					defs: loadedDefs, orderedDefs: orderPlanDefs(loadedDefs)
-				};
-			});
-		};
-		if (!state.initialized) {
-			(async () => await loadDefs(async (defs) => {
-				if (valuesInit != null) {
-					await valuesInit({defs, root: $root, model: $model, global: globalHandlers});
-				}
-			}))();
-		}
-
-		const onCustomEvent = async (_key: string, prefix: string, clipped: string) => {
-			if (!state.initialized || prefix !== PlanSelectionGlobalEventPrefix.RELOAD_DEFS || clipped !== state.marker) {
-				return;
-			}
-			setState(state => ({initialized: false, marker: state.marker}));
-			await loadDefs(async (defs) => {
-				if (valuesClear != null) {
-					await valuesClear({defs, root: $root, model: $model, global: globalHandlers});
-				}
-			});
-		};
-		on(GlobalEventTypes.CUSTOM_EVENT, onCustomEvent);
-		return () => {
-			off(GlobalEventTypes.CUSTOM_EVENT, onCustomEvent);
-		};
-	}, [
-		globalHandlers, on, off,
-		state.initialized, state.marker, defs, valuesInit, valuesClear, $root, $model
-	]);
-
-	return state;
+export const loadDefs = async (options: PlanLoadDefsOptions, beforeChangeState: (defs: PlanDefs) => Promise<void>) => {
+	const {defs, $root, $model, globalHandlers} = options;
+	let loadedDefs: PlanDefs;
+	if (typeof defs === 'function') {
+		loadedDefs = await defs({root: $root, model: $model, global: globalHandlers});
+	} else {
+		loadedDefs = defs;
+	}
+	await beforeChangeState(loadedDefs);
+	return {defs: loadedDefs, orderedDefs: orderPlanDefs(loadedDefs)};
 };
+
+// export interface PlanDefsState {
+// 	initialized: boolean;
+// 	marker: string;
+// 	defs?: PlanDefs;
+// 	orderedDefs?: PlanDefOrdered;
+// }
+
+// export const useDefs = (options: PlanSelectionProps) => {
+// 	const {
+// 		defs, valuesInit, valuesClear,
+// 		$wrapped: {$root, $model}
+// 	} = options;
+//
+// 	const {on, off} = useGlobalEventBus();
+// 	const globalHandlers = useGlobalHandlers();
+// 	const [state, setState] = useState<PlanDefsState>({
+// 		initialized: false, marker: redressPlanMarker(options)
+// 	});
+// 	useEffect(() => {
+// 		const loadDefs = async (beforeChangeState: (defs: PlanDefs) => Promise<void>) => {
+// 			let loadedDefs: PlanDefs;
+// 			if (typeof defs === 'function') {
+// 				loadedDefs = await defs({root: $root, model: $model, global: globalHandlers});
+// 			} else {
+// 				loadedDefs = defs;
+// 			}
+// 			await beforeChangeState(loadedDefs);
+// 			setState(state => {
+// 				return {
+// 					initialized: true, marker: state.marker,
+// 					defs: loadedDefs, orderedDefs: orderPlanDefs(loadedDefs)
+// 				};
+// 			});
+// 		};
+// 		if (!state.initialized) {
+// 			(async () => await loadDefs(async (defs) => {
+// 				if (valuesInit != null) {
+// 					await valuesInit({defs, root: $root, model: $model, global: globalHandlers});
+// 				}
+// 			}))();
+// 		}
+//
+// 		const onCustomEvent = async (_key: string, prefix: string, clipped: string) => {
+// 			if (!state.initialized || prefix !== PlanSelectionGlobalEventPrefix.RELOAD_DEFS || clipped !== state.marker) {
+// 				return;
+// 			}
+// 			// setState(state => ({initialized: false, marker: state.marker}));
+// 			await loadDefs(async (defs) => {
+// 				if (valuesClear != null) {
+// 					await valuesClear({defs, root: $root, model: $model, global: globalHandlers});
+// 				}
+// 			});
+// 		};
+// 		on(GlobalEventTypes.CUSTOM_EVENT, onCustomEvent);
+// 		return () => {
+// 			off(GlobalEventTypes.CUSTOM_EVENT, onCustomEvent);
+// 		};
+// 	}, [
+// 		globalHandlers, on, off,
+// 		state.initialized, state.marker, defs, valuesInit, valuesClear, $root, $model
+// 	]);
+//
+// 	return state;
+// };

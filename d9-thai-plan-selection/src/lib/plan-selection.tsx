@@ -1,13 +1,13 @@
 import {MUtils, PPUtils} from '@rainbow-d9/n1';
-import React from 'react';
+import React, {useState} from 'react';
 import {PlanSelectionEventBusProvider} from './event/plan-selection-event-bus';
 import {PlanBodies} from './plan-bodies';
 import {PlanFooters} from './plan-footers';
 import {PlanHeaders} from './plan-headers';
 import {PlanSelectionValueHandler} from './plan-selection-value-handler';
 import {PlanSelectionProps, SelectedPlans} from './types';
-import {useDefs} from './use-defs';
 import {useLayout} from './use-layout';
+import {redressPlanMarker} from './utils';
 import {APlanSelection} from './widgets';
 
 export const InternalPlanSelection = (props: PlanSelectionProps) => {
@@ -15,6 +15,7 @@ export const InternalPlanSelection = (props: PlanSelectionProps) => {
 		$pp, $wrapped,
 		columns = 3, columnWidth, lineHeaderWidth, maxHeight,
 		currencySymbol, premiumDescription, buyText, buy,
+		defs, valuesInit, valuesClear,
 		planTitle, planSubTitle, elementTitle,
 		elementFixedValue, elementOptionsValue,
 		elementNumberValue, elementNumberValueValidator,
@@ -22,10 +23,15 @@ export const InternalPlanSelection = (props: PlanSelectionProps) => {
 		calculate, calculationDelay = 1,
 		...rest
 	} = props;
-	const {$root, $p2r, $avs: {$disabled, $visible}} = $wrapped;
+	const {$root, $model, $p2r, $avs: {$disabled, $visible}} = $wrapped;
 
-	const {initialized: planDefsInitialized, defs: planDefs, orderedDefs} = useDefs(props);
-	const layout = useLayout(planDefsInitialized, planDefs, columns, columnWidth, lineHeaderWidth);
+	const [state] = useState<{ marker: string }>({marker: redressPlanMarker(props)});
+
+	// const {initialized: planDefsInitialized, defs: planDefs, orderedDefs} = useDefs(props);
+	const layout = useLayout(
+		state.marker, defs, $root, $model,
+		valuesInit, valuesClear,
+		columns, columnWidth, lineHeaderWidth);
 	if (!layout.initialized) {
 		return null;
 	}
@@ -54,7 +60,7 @@ export const InternalPlanSelection = (props: PlanSelectionProps) => {
 			             currencySymbol={currencySymbol} premiumDescription={premiumDescription}
 			             pageCount={layout.pageCount} pageNumber={layout.pageNumber}/>
 			<PlanBodies $root={$root} $p2r={$p2rOfPlans}
-			            displayPlanDefs={layout.displayPlanDefs} orderedDefs={orderedDefs} plans={plansData}
+			            displayPlanDefs={layout.displayPlanDefs} orderedDefs={layout.orderedDefs} plans={plansData}
 			            elementTitle={elementTitle}
 			            elementOptionsValue={elementOptionsValue}
 			            elementNumberValue={elementNumberValue}
