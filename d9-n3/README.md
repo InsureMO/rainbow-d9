@@ -525,6 +525,20 @@ are `desktop`, `mobile`, `tablet`, and `touchable`. You can also specify multipl
 important to note that if no rendering device filter is applied, the component won't render at all, and thus, won't have any event
 listeners. If no device is specified, it will be assumed to render on all devices.
 
+## `data-` Attribute
+
+Attributes starting with `data-` are standard HTML DOM attributes. For these attributes, the following enhancements apply:
+
+- First, standard attributes like boolean values, numeric values, etc.
+- If it's a string type, check if it starts with `$pp.`. If it does, consider it needs to read a value from the model. If not, consider it
+  as a `DataAttributeCalculator` function.
+- Otherwise, use the original value.
+
+It's important to note that `data-` attributes can be reused, for example, when a component is wrapped by a form cell. In such usage
+scenarios, if a `data-` attribute is associated with its own property value changes, it can only be perceived by the component itself,
+rather than directly by the form cell. Therefore, it's necessary to combine it with the `repaint` definition to enable the entire form cell
+to perceive it.
+
 ## Attribute Guard
 
 Any attributes that are not captured by a specific parser will be eventually parsed by the attribute guard. The attribute guard follows the

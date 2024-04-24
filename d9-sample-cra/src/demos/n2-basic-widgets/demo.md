@@ -41,6 +41,8 @@
 	  ```
 	- label: Contract Value
 	- format: @ext.deco.numericFormat
+	- repaint:
+		- on: decorateNumberInput3
 
 ## Section::# 1.2. Basic Widgets - Dropdown
 
