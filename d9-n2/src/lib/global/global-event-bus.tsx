@@ -1,5 +1,6 @@
 import {BaseModel, PropValue, useCreateEventBus} from '@rainbow-d9/n1';
-import React, {createContext, CSSProperties, ReactNode, useContext} from 'react';
+import React, {createContext, CSSProperties, MutableRefObject, ReactNode, useContext} from 'react';
+import {TipOptions} from './tip';
 
 export enum GlobalEventTypes {
 	LANGUAGE_CHANGED = 'language-changed',
@@ -9,6 +10,8 @@ export enum GlobalEventTypes {
 	SHOW_DIALOG = 'show-dialog',
 	HIDE_DIALOG = 'hide-dialog',
 	SHOW_YES_NO_DIALOG = 'show-yes-no-dialog',
+	SHOW_TIP = 'show-tip',
+	HIDE_TIP = 'hide-tip',
 	CUSTOM_EVENT = 'custom-event'
 }
 
@@ -57,6 +60,18 @@ export interface GlobalEventBus {
 	on(type: GlobalEventTypes.SHOW_YES_NO_DIALOG, listener: (question: ReactNode, onYes: () => void, onNo: () => void) => void): this;
 
 	off(type: GlobalEventTypes.SHOW_YES_NO_DIALOG, listener: (question: ReactNode, onYes: () => void, onNo: () => void) => void): this;
+
+	fire(type: GlobalEventTypes.SHOW_TIP, options: TipOptions): this;
+
+	on(type: GlobalEventTypes.SHOW_TIP, listener: (options: TipOptions) => void): this;
+
+	off(type: GlobalEventTypes.SHOW_TIP, listener: (options: TipOptions) => void): this;
+
+	fire(type: GlobalEventTypes.HIDE_TIP, ref: MutableRefObject<HTMLElement>): this;
+
+	on(type: GlobalEventTypes.HIDE_TIP, listener: (ref: MutableRefObject<HTMLElement>) => void): this;
+
+	off(type: GlobalEventTypes.HIDE_TIP, listener: (ref: MutableRefObject<HTMLElement>) => void): this;
 
 	fire<R extends BaseModel, M extends PropValue>(
 		type: GlobalEventTypes.CUSTOM_EVENT,

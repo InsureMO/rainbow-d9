@@ -12,6 +12,9 @@
 	- regex: abc$,^def; Starts with "def" or ends with "abc".
 	- validateScopes: s1
 	- required
+	- data-di-tip-body: return 'Hello, I am a mask input.'
+	- data-di-tip-tag: return 'data-decorate-input'
+	- data-di-tip-max-width: 150
 	- mask:
 	  ```
 	  return {
@@ -28,6 +31,9 @@
 	- numeric
 	- placeholder: A placeholder
 	- grouping
+	- data-tip-title: return 'Hello'
+	- data-tip-body: return 'I am a number input.'
+	- data-tip-tag: return 'data-decorate-input'
 - DecoNumber::0 - 9 are Legal Keys::decorateNumberInput2
 	- leads: $icons.check;$
 	- tails: %;$icons.caretLeft

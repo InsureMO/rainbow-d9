@@ -4,12 +4,14 @@ import {Alert} from './alert';
 import {Dialog, YesNoDialog} from './dialog';
 import {GlobalEventBusProvider} from './global-event-bus';
 import {RemoteRequest, RemoteRequestProps} from './remote-request';
+import {Tip} from './tip';
 
 export interface GlobalRootProps {
 	avoidDefaultAlert?: true;
 	avoidDefaultDialog?: true;
 	avoidDefaultYesNoDialog?: true;
 	avoidDefaultRemoteRequest?: true;
+	avoidDefaultTips?: true;
 	defaultRemoteRequestProps?: RemoteRequestProps;
 	/** children should have a StandaloneRoot */
 	children: ReactNode;
@@ -18,7 +20,7 @@ export interface GlobalRootProps {
 export const GlobalRoot = (props: GlobalRootProps) => {
 	const {
 		avoidDefaultAlert = false, avoidDefaultDialog = false, avoidDefaultYesNoDialog = false,
-		avoidDefaultRemoteRequest = false,
+		avoidDefaultRemoteRequest = false, avoidDefaultTips = false,
 		defaultRemoteRequestProps: {clearAccount = VUtils.noop, on200, on401 = VUtils.noop, on403 = VUtils.noop} = {},
 		children
 	} = props;
@@ -27,6 +29,7 @@ export const GlobalRoot = (props: GlobalRootProps) => {
 		{avoidDefaultAlert ? null : <Alert/>}
 		{avoidDefaultDialog ? null : <Dialog/>}
 		{avoidDefaultYesNoDialog ? null : <YesNoDialog/>}
+		{avoidDefaultTips ? null : <Tip/>}
 		{avoidDefaultRemoteRequest
 			? null
 			: <RemoteRequest clearAccount={clearAccount} on200={on200} on401={on401} on403={on403}/>}

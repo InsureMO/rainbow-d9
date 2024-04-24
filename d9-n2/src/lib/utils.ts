@@ -4,7 +4,14 @@ import {CSSProperties, ForwardedRef, MutableRefObject, useEffect} from 'react';
 import {getDefaultCalendarDateFormat, getDefaultCalendarDatetimeFormat} from './calendar/utils';
 import {$d9n2} from './constants';
 
-export const toCssSize = (size?: number | string): string => typeof size === 'number' ? `${size}px` : `${size ?? ''}`;
+export const toCssSize = (size?: number | string): string => {
+	const ret = VUtils.isNumber(size);
+	if (ret.test) {
+		return `${size}px`;
+	} else {
+		return `${size ?? ''}`;
+	}
+};
 export const omitGridCellStyle = (style?: Partial<CSSProperties>): Partial<CSSProperties> => {
 	const {
 		// eslint-disable-next-line @typescript-eslint/no-unused-vars

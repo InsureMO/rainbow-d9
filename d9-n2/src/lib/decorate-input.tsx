@@ -3,6 +3,7 @@ import React, {CSSProperties, ForwardedRef, forwardRef, ReactNode, useEffect, us
 import styled from 'styled-components';
 import {CssVars, DOM_ID_WIDGET, DOM_KEY_WIDGET} from './constants';
 import {DecorateWrapperDef, transformDecorators} from './decorate-assist';
+import {useTip} from './global';
 import {Input, InputDef, NumberInput, NumberInputDef, PasswordInput, PasswordInputDef} from './input';
 import {toIntlLabel} from './intl-label';
 import {OmitNodeDef} from './types';
@@ -198,6 +199,10 @@ export const DecorateInput = forwardRef((props: DecorateInputProps, ref: Forward
 	const {$wrapped: {$p2r}} = rest;
 	const {tags: deviceTags, attrs: decorateAttrs} = askDecorateAttrs(props, rest);
 
+	const decorateRef = useRef<HTMLDivElement>(null);
+	useDualRefs(decorateRef, ref);
+	useTip({ref: decorateRef, prefix: 'data-di'});
+
 	const computePlaceholder = () => {
 		if (VUtils.isBlank(placeholder)) {
 			return (void 0);
@@ -212,7 +217,7 @@ export const DecorateInput = forwardRef((props: DecorateInputProps, ref: Forward
 	                 placeholder={computePlaceholder()} leads={leads} tails={tails}
 	                 className={className} style={style}
 	                 id={PPUtils.asId(PPUtils.absolute($p2r, props.$pp), props.id)}
-	                 ref={ref}>
+	                 ref={decorateRef}>
 		<Input {...rest}/>
 	</Decorate>;
 });

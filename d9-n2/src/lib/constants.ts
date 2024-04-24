@@ -193,7 +193,18 @@ export const CssVars = {
 	ALERT_Z_INDEX: 99999,
 
 	REMOTE_REQUEST_COLOR: `var(--d9-remote-request-color, ${CssConstants.INFO_COLOR})`,
-	REMOTE_REQUEST_Z_INDEX: 99999
+	REMOTE_REQUEST_Z_INDEX: 99999,
+
+	TIP_Z_INDEX: 999999,
+	TIP_BORDER: `var(--d9-tip-border, 1px solid var(--d9-border-color, ${CssConstants.BORDER_COLOR}))`,
+	TIP_BORDER_RADIUS: 'var(--d9-tip-border-radius, 8px)',
+	TIP_SHADOW: `var(--d9-tip-shadow, 0 0 6px 2px ${color(CssConstants.SHADOW_COLOR).alpha(0.2)})`,
+	TIP_HEADER_HEIGHT: 'var(--d9-tip-header-height, 44px)',
+	TIP_HEADER_BORDER: `var(--d9-tip-header-border, 2px solid var(--d9-border-color, ${CssConstants.BORDER_COLOR}))`,
+	TIP_HEADER_PADDING: 'var(--d9-tip-header-padding, 16px)',
+	TIP_HEADER_FONT_SIZE: 'var(--d9-tip-header-title-font-size, 16px)',
+	TIP_HEADER_FONT_WEIGHT: 'var(--d9-tip-header-title-font-weight, 400)',
+	TIP_BODY_PADDING: 'var(--d9-tip-body-padding, 16px)'
 };
 
 const $d9: $D9N2Window = window as unknown as $D9N2Window;

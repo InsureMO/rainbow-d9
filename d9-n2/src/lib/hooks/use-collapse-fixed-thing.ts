@@ -32,6 +32,9 @@ export const useCollapseFixedThing = (options: {
 			return;
 		}
 		const collapse = (event: Event) => {
+			if (containerRef == null || containerRef.current == null) {
+				return;
+			}
 			// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 			if (notInMe(containerRef.current!, event.target)) {
 				hide();

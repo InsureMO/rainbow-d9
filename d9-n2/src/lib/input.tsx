@@ -22,7 +22,7 @@ import React, {ChangeEvent, FocusEvent, ForwardedRef, forwardRef, useRef} from '
 import {useIMask} from 'react-imask';
 import styled from 'styled-components';
 import {CssVars, DOM_ID_WIDGET, DOM_KEY_WIDGET} from './constants';
-import {useGlobalHandlers} from './global';
+import {useGlobalHandlers, useTip} from './global';
 import {useLanguage} from './intl-label';
 import {OmitHTMLProps2, OmitNodeDef} from './types';
 import {detectNumberFormat, locale, useDualRefs} from './utils';
@@ -185,6 +185,7 @@ export const Input = forwardRef((props: InputProps, ref: ForwardedRef<HTMLInputE
 		}
 	});
 	useDualRefs(inputRef, ref);
+	useTip({ref: inputRef});
 
 	const onChange = async (event: ChangeEvent<HTMLInputElement>) => {
 		// handle change use mask event
