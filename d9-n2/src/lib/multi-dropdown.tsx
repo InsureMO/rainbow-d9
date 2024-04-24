@@ -22,7 +22,7 @@ import {
 	isDropdownPopupActive,
 	useFilterableDropdownOptions
 } from './dropdown-assist';
-import {useGlobalHandlers} from './global';
+import {useGlobalHandlers, useTip} from './global';
 import {Check, Times} from './icons';
 import {toIntlLabel} from './intl-label';
 import {
@@ -227,6 +227,7 @@ export const MultiDropdown = forwardRef((props: MultiDropdownProps, ref: Forward
 	} = useFilterableDropdownOptions(props);
 	const forceUpdate = useForceUpdate();
 	useDualRefs(containerRef, ref);
+	useTip({ref: containerRef});
 
 	const currentValuesToArray = (): Array<MultiDropdownOptionValue> => {
 		const values = MUtils.getValue($model, $pp) as MultiDropdownValue;

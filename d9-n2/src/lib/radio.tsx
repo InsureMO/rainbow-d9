@@ -6,11 +6,12 @@ import {
 	ValueChangeableNodeDef,
 	WidgetProps
 } from '@rainbow-d9/n1';
-import React, {ForwardedRef, forwardRef, KeyboardEvent, MouseEvent} from 'react';
+import React, {ForwardedRef, forwardRef, KeyboardEvent, MouseEvent, useRef} from 'react';
 import styled from 'styled-components';
 import {CssVars, DOM_ID_WIDGET, DOM_KEY_WIDGET} from './constants';
-import {useGlobalHandlers} from './global';
+import {useGlobalHandlers, useTip} from './global';
 import {OmitHTMLProps, OmitNodeDef} from './types';
+import {useDualRefs} from './utils';
 
 export type RadioPossibleValues = [NullPropValue | PrimitivePropValue, NullPropValue | PrimitivePropValue];
 
@@ -121,6 +122,9 @@ export const Radio = forwardRef((props: RadioProps, ref: ForwardedRef<HTMLDivEle
 	} = props;
 
 	const globalHandlers = useGlobalHandlers();
+	const radioRef = useRef<HTMLDivElement>(null);
+	useDualRefs(radioRef, ref);
+	useTip({ref: radioRef});
 
 	const onValueShouldChange = async () => {
 		const oldValue = MUtils.getValue($model, $pp);
@@ -152,7 +156,7 @@ export const Radio = forwardRef((props: RadioProps, ref: ForwardedRef<HTMLDivEle
 
 	return <ARadio data-disabled={$disabled} data-visible={$visible} tabIndex={0}
 	               data-checked={checked}
-	               onClick={onClick} onKeyUp={onKeyUp} {...rest} ref={ref}/>;
+	               onClick={onClick} onKeyUp={onKeyUp} {...rest} ref={radioRef}/>;
 });
 
 registerWidget({key: 'Radio', JSX: Radio, container: false, array: false});

@@ -10,15 +10,15 @@ import {
 	VUtils,
 	WidgetProps
 } from '@rainbow-d9/n1';
-import React, {ForwardedRef, forwardRef, isValidElement, MouseEvent, ReactNode} from 'react';
+import React, {ForwardedRef, forwardRef, isValidElement, MouseEvent, ReactNode, useRef} from 'react';
 import styled from 'styled-components';
 import {ButtonFill, ButtonInk} from './button';
 import {CssVars, DOM_ID_WIDGET, DOM_KEY_WIDGET} from './constants';
 import {DecorateWrapperDef, transformDecorators} from './decorate-assist';
-import {useGlobalHandlers} from './global';
+import {useGlobalHandlers, useTip} from './global';
 import {LabelLike} from './label-like';
 import {GlobalEventHandlers, ModelCarriedHandler, OmitHTMLProps2, OmitNodeDef, ValidationHandlers} from './types';
-import {df, locale, nf, nf0, nf1, nf2, nf3, nfWithLocale, nfXWithLocale, wrapNf} from './utils';
+import {df, locale, nf, nf0, nf1, nf2, nf3, nfWithLocale, nfXWithLocale, useDualRefs, wrapNf} from './utils';
 
 export interface CaptionValueToLabelFormats {
 	nf: (fractionDigits: number, grouping?: boolean) => Intl.NumberFormat;
@@ -57,7 +57,7 @@ export type CaptionProps = OmitNodeDef<CaptionDef> & WidgetProps;
 const ACaption = styled.span.attrs(
 	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 	// @ts-ignore
-	({id, 'data-w': dataW}) => {
+	({id, [DOM_KEY_WIDGET]: dataW}) => {
 		return {
 			[DOM_KEY_WIDGET]: dataW ?? 'd9-caption',
 			[DOM_ID_WIDGET]: id
@@ -243,6 +243,10 @@ export const Caption = forwardRef((props: CaptionProps, ref: ForwardedRef<HTMLSp
 	const label = _text ?? _label;
 
 	const globalHandlers = useGlobalHandlers();
+	const captionRef = useRef<HTMLSpanElement>(null);
+	useDualRefs(captionRef, ref);
+	useTip({ref: captionRef});
+
 	const onClicked = click != null
 		? async (event: MouseEvent<HTMLSpanElement>) => {
 			event.preventDefault();
@@ -307,7 +311,7 @@ export const Caption = forwardRef((props: CaptionProps, ref: ForwardedRef<HTMLSp
 	return <ACaption {...rest} data-disabled={$disabled} data-visible={$visible}
 	                 id={PPUtils.asId(PPUtils.absolute($p2r, props.$pp), props.id)}
 	                 onClick={onClicked} data-clickable={onClicked != null}
-	                 ref={ref}>
+	                 ref={captionRef}>
 		{transformDecorators(leads).map(lead => {
 			return <LeadDecorator key={VUtils.generateUniqueId()}>
 				{lead}

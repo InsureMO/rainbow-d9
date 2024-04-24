@@ -14,7 +14,7 @@ import {
 	isPopupAtBottom,
 	useDropdownControl
 } from '../dropdown-assist';
-import {useGlobalHandlers} from '../global';
+import {useGlobalHandlers, useTip} from '../global';
 import {Date} from '../icons';
 import {useDualRefs} from '../utils';
 import {useCalendarEventBus} from './event/calendar-event-bus';
@@ -75,6 +75,7 @@ export const Picker = forwardRef((props: CalendarProps, ref: ForwardedRef<HTMLDi
 		fixWidth: true
 	});
 	useDualRefs(containerRef, ref);
+	useTip({ref: containerRef});
 
 	const showPopup = () => {
 		// eslint-disable-next-line @typescript-eslint/no-non-null-assertion

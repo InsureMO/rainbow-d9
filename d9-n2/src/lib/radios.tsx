@@ -1,12 +1,13 @@
 import {MUtils, registerWidget, ValueChangeableNodeDef, WidgetProps} from '@rainbow-d9/n1';
-import React, {ForwardedRef, forwardRef, Fragment} from 'react';
+import React, {ForwardedRef, forwardRef, Fragment, useRef} from 'react';
 import styled from 'styled-components';
 import {CssVars, DOM_ID_WIDGET, DOM_KEY_WIDGET} from './constants';
-import {useGlobalHandlers} from './global';
+import {useGlobalHandlers, useTip} from './global';
 import {IntlLabel, toIntlLabel} from './intl-label';
 import {NO_AVAILABLE_OPTION_ITEM, OptionItem, OptionItemsDef, useOptionItems} from './option-items-assist';
 import {Radio, RadioProps} from './radio';
 import {OmitHTMLProps, OmitNodeDef} from './types';
+import {useDualRefs} from './utils';
 
 export type RadiosOptionValue = string | number;
 /** radio configuration definition, radios (radio group) is kind of dropdown */
@@ -38,7 +39,7 @@ const ARadios = styled.div.attrs(({id}) => {
 const Option = styled.span.attrs<{ columns: number, compact: boolean }>(
 	// eslint-disable-next-line  @typescript-eslint/ban-ts-comment
 	// @ts-ignore
-	({columns, compact, 'data-w': dataW}) => {
+	({columns, compact, [DOM_KEY_WIDGET]: dataW}) => {
 		return {
 			[DOM_KEY_WIDGET]: dataW ?? 'd9-radios-option',
 			style: {
@@ -122,6 +123,9 @@ export const Radios = forwardRef((props: RadiosProps, ref: ForwardedRef<HTMLDivE
 	} = props;
 
 	const globalHandlers = useGlobalHandlers();
+	const radiosRef = useRef<HTMLDivElement>(null);
+	useDualRefs(radiosRef, ref);
+	useTip({ref: radiosRef});
 	const {createAskDisplayOptions} = useOptionItems({...props, noAvailable});
 
 	const onOptionClicked = (option: OptionItem<RadiosOptionValue>) => async () => {
@@ -145,7 +149,7 @@ export const Radios = forwardRef((props: RadiosProps, ref: ForwardedRef<HTMLDivE
 
 	const modelValue = MUtils.getValue($model, $pp) as RadiosOptionValue;
 
-	return <ARadios data-disabled={$disabled} data-visible={$visible} {...rest} ref={ref}>
+	return <ARadios data-disabled={$disabled} data-visible={$visible} {...rest} ref={radiosRef}>
 		{displayOptions.map((option, index) => {
 			const {value, label} = option;
 			const valueKey = `${value}_${index + 1}`;

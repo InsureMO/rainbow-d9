@@ -1,9 +1,10 @@
 import {MUtils, PPUtils, registerWidget, ValueChangeableNodeDef, WidgetProps} from '@rainbow-d9/n1';
-import React, {ChangeEvent, FocusEvent, ForwardedRef, forwardRef} from 'react';
+import React, {ChangeEvent, FocusEvent, ForwardedRef, forwardRef, useRef} from 'react';
 import styled from 'styled-components';
 import {CssVars, DOM_ID_WIDGET, DOM_KEY_WIDGET} from './constants';
-import {useGlobalHandlers} from './global';
+import {useGlobalHandlers, useTip} from './global';
 import {OmitHTMLProps2, OmitNodeDef} from './types';
+import {useDualRefs} from './utils';
 
 /** Textarea configuration definition */
 export type TextareaDef = ValueChangeableNodeDef & OmitHTMLProps2<HTMLTextAreaElement, 'value' | 'onChange'> & {
@@ -80,6 +81,9 @@ export const Textarea = forwardRef((props: TextareaProps, ref: ForwardedRef<HTML
 	} = props;
 
 	const globalHandlers = useGlobalHandlers();
+	const textRef = useRef<HTMLTextAreaElement>(null);
+	useDualRefs(textRef, ref);
+	useTip({ref: textRef});
 
 	const onChange = async (event: ChangeEvent<HTMLTextAreaElement>) => {
 		const value = event.target.value;
@@ -91,7 +95,7 @@ export const Textarea = forwardRef((props: TextareaProps, ref: ForwardedRef<HTML
 		// eslint-disable-next-line @typescript-eslint/no-explicit-any
 		              value={(MUtils.getValue($model, $pp) as any) ?? ''} onChange={onChange}
 		              id={PPUtils.asId(PPUtils.absolute($p2r, $pp), props.id)}
-		              ref={ref}/>;
+		              ref={textRef}/>;
 });
 
 registerWidget({key: 'Textarea', JSX: Textarea, container: false, array: false});

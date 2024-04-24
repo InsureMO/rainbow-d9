@@ -1,12 +1,13 @@
 import {MUtils, registerWidget, ValueChangeableNodeDef, WidgetProps} from '@rainbow-d9/n1';
-import React, {ForwardedRef, forwardRef, Fragment} from 'react';
+import React, {ForwardedRef, forwardRef, Fragment, useRef} from 'react';
 import styled from 'styled-components';
 import {Checkbox, CheckboxProps} from './checkbox';
 import {CssVars, DOM_ID_WIDGET, DOM_KEY_WIDGET} from './constants';
-import {useGlobalHandlers} from './global';
+import {useGlobalHandlers, useTip} from './global';
 import {IntlLabel, toIntlLabel} from './intl-label';
 import {NO_AVAILABLE_OPTION_ITEM, OptionItem, OptionItemsDef, useOptionItems} from './option-items-assist';
 import {OmitHTMLProps, OmitNodeDef} from './types';
+import {useDualRefs} from './utils';
 
 /** boolean is for single choice scenario usually */
 export type CheckboxesOptionValue = string | number | boolean;
@@ -42,7 +43,7 @@ const ACheckboxes = styled.div.attrs(({id}) => {
 const Option = styled.span.attrs<{ columns: number, compact: boolean }>(
 	// eslint-disable-next-line  @typescript-eslint/ban-ts-comment
 	// @ts-ignore
-	({columns, compact, 'data-w': dataW}) => {
+	({columns, compact, [DOM_KEY_WIDGET]: dataW}) => {
 		return {
 			[DOM_KEY_WIDGET]: dataW ?? 'd9-checkboxes-option',
 			style: {
@@ -122,6 +123,9 @@ export const Checkboxes = forwardRef((props: CheckboxesProps, ref: ForwardedRef<
 	} = props;
 
 	const globalHandlers = useGlobalHandlers();
+	const checksRef = useRef<HTMLDivElement>(null);
+	useDualRefs(checksRef, ref);
+	useTip({ref: checksRef});
 	const {createAskDisplayOptions} = useOptionItems({...props, noAvailable});
 
 	const getValues = () => {
@@ -165,7 +169,7 @@ export const Checkboxes = forwardRef((props: CheckboxesProps, ref: ForwardedRef<
 		</ACheckboxes>;
 	}
 
-	return <ACheckboxes data-disabled={$disabled} data-visible={$visible} {...rest} ref={ref}>
+	return <ACheckboxes data-disabled={$disabled} data-visible={$visible} {...rest} ref={checksRef}>
 		{displayOptions.map((option, index) => {
 			const {value, label} = option;
 			const valueKey = `${value}_${index + 1}`;

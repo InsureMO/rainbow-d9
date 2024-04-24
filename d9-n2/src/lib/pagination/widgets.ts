@@ -5,7 +5,7 @@ import {CssVars, DOM_ID_WIDGET, DOM_KEY_WIDGET} from '../constants';
 export const APagination = styled.div.attrs(
 	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 	// @ts-ignore
-	({id, 'data-w': dataW}) => {
+	({id, [DOM_KEY_WIDGET]: dataW}) => {
 		return {
 			[DOM_KEY_WIDGET]: dataW || 'd9-pagination',
 			[DOM_ID_WIDGET]: id

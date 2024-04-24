@@ -21,7 +21,7 @@ export type SectionProps = OmitNodeDef<SectionDef> & ContainerWidgetProps;
 const ASection = styled.div.attrs(
 	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 	// @ts-ignore
-	({id, 'data-w': dataW}) => {
+	({id, [DOM_KEY_WIDGET]: dataW}) => {
 		return {
 			[DOM_KEY_WIDGET]: dataW || 'd9-section',
 			[DOM_ID_WIDGET]: id

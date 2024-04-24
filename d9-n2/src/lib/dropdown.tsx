@@ -20,7 +20,7 @@ import {
 	isDropdownPopupActive,
 	useFilterableDropdownOptions
 } from './dropdown-assist';
-import {useGlobalHandlers} from './global';
+import {useGlobalHandlers, useTip} from './global';
 import {toIntlLabel} from './intl-label';
 import {
 	NO_AVAILABLE_OPTION_ITEM,
@@ -148,6 +148,7 @@ export const Dropdown = forwardRef((props: DropdownProps, ref: ForwardedRef<HTML
 		onClicked, onFocused, onKeyUp, onFilterChanged
 	} = useFilterableDropdownOptions(props);
 	useDualRefs(containerRef, ref);
+	useTip({ref: containerRef});
 	const forceUpdate = useForceUpdate();
 
 	const onOptionClicked = (option: DropdownOption) => async (event: MouseEvent<HTMLSpanElement>) => {

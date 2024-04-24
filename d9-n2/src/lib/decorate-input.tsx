@@ -233,6 +233,10 @@ export const DecorateNumberInput = forwardRef((props: DecorateNumberInputProps, 
 	const {$pp, $wrapped: {$p2r, $model, $onValueChange}} = rest;
 	const {tags: deviceTags, attrs: decorateAttrs} = askDecorateAttrs(props, rest);
 
+	const decorateRef = useRef<HTMLDivElement>(null);
+	useDualRefs(decorateRef, ref);
+	useTip({ref: decorateRef, prefix: 'data-di'});
+
 	const [omitPlaceholder, setOmitPlaceholder] = useState(() => {
 		return VUtils.isNotEmpty(MUtils.getValue($model, $pp));
 	});
@@ -256,7 +260,7 @@ export const DecorateNumberInput = forwardRef((props: DecorateNumberInputProps, 
 	                 placeholder={computePlaceholder()} leads={leads} tails={tails}
 	                 className={className} style={style}
 	                 id={PPUtils.asId(PPUtils.absolute($p2r, props.$pp), props.id)}
-	                 ref={ref}>
+	                 ref={decorateRef}>
 		<NumberInput {...rest}/>
 	</Decorate>;
 });
@@ -272,11 +276,15 @@ export const DecoratePasswordInput = forwardRef((props: DecoratePasswordInputPro
 	const {$wrapped: {$p2r}} = rest;
 	const {tags: deviceTags, attrs: decorateAttrs} = askDecorateAttrs(props, rest);
 
+	const decorateRef = useRef<HTMLDivElement>(null);
+	useDualRefs(decorateRef, ref);
+	useTip({ref: decorateRef, prefix: 'data-di'});
+
 	return <Decorate {...deviceTags} {...decorateAttrs}
 	                 placeholder={placeholder} leads={leads} tails={tails}
 	                 className={className} style={style}
 	                 id={PPUtils.asId(PPUtils.absolute($p2r, props.$pp), props.id)}
-	                 ref={ref}>
+	                 ref={decorateRef}>
 		<PasswordInput {...rest}/>
 	</Decorate>;
 });

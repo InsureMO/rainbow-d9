@@ -6,7 +6,7 @@ import {toCssSize} from '../utils';
 export const ATree = styled.div.attrs<{ height: number | string }>(
 	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 	// @ts-ignore
-	({id, 'data-w': dataW, height}) => {
+	({id, [DOM_KEY_WIDGET]: dataW, height}) => {
 		return {
 			[DOM_KEY_WIDGET]: dataW || 'd9-tree',
 			[DOM_ID_WIDGET]: id,
@@ -69,7 +69,7 @@ export const ATree = styled.div.attrs<{ height: number | string }>(
     }
 `;
 export const TreeContentContainer = styled.div.attrs({
-	'data-w': 'd9-tree-content-container',
+	[DOM_KEY_WIDGET]: 'd9-tree-content-container',
 	'data-v-scroll': '',
 	'data-h-scroll': ''
 })`
@@ -83,7 +83,7 @@ export const TreeContentContainer = styled.div.attrs({
     overflow: auto;
 `;
 export const TreeNodeWrapper = styled.div.attrs<{ level: number }>(
-	{'data-w': 'd9-tree-node-wrapper'})<{ level: number }>`
+	{[DOM_KEY_WIDGET]: 'd9-tree-node-wrapper'})<{ level: number }>`
     display: flex;
     position: relative;
     flex-direction: column;
@@ -121,7 +121,7 @@ const TreeNode = styled.div.attrs<{ level: number }>({})<{ level: number }>`
         border-bottom-left-radius: 4px;
     }
 `;
-export const TreeNodeContainer = styled(TreeNode).attrs({'data-w': 'd9-tree-node-container'})`
+export const TreeNodeContainer = styled(TreeNode).attrs({[DOM_KEY_WIDGET]: 'd9-tree-node-container'})`
     cursor: pointer;
 
     &[data-expanded=true] {
@@ -137,7 +137,7 @@ export const TreeNodeContainer = styled(TreeNode).attrs({'data-w': 'd9-tree-node
 // noinspection CssUnresolvedCustomProperty
 export const TreeNodeOperators = styled.div.attrs<{ top: number; right: number }>(({top, right}) => {
 	return {
-		'data-w': 'd9-tree-node-operators',
+		[DOM_KEY_WIDGET]: 'd9-tree-node-operators',
 		style: {
 			'--top': `${top}px`,
 			'--right': `${right}px`
@@ -219,7 +219,7 @@ export const TreeNodeOperators = styled.div.attrs<{ top: number; right: number }
         }
     }
 `;
-export const TreeNodeContent = styled.span.attrs({'data-w': 'd9-tree-node-content'})`
+export const TreeNodeContent = styled.span.attrs({[DOM_KEY_WIDGET]: 'd9-tree-node-content'})`
     display: flex;
     position: relative;
     flex-grow: 1;
@@ -236,7 +236,7 @@ export const TreeNodeContent = styled.span.attrs({'data-w': 'd9-tree-node-conten
         opacity: 0.7;
     }
 `;
-export const TreeNodeToggle = styled.span.attrs({'data-w': 'd9-tree-node-toggle'})`
+export const TreeNodeToggle = styled.span.attrs({[DOM_KEY_WIDGET]: 'd9-tree-node-toggle'})`
     display: inline-block;
     width: 28px;
     height: 28px;
@@ -254,7 +254,7 @@ export const TreeNodeToggle = styled.span.attrs({'data-w': 'd9-tree-node-toggle'
         transition: transform ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION};
     }
 `;
-export const TreeNodeIndex = styled.span.attrs({'data-w': 'd9-tree-node-index'})`
+export const TreeNodeIndex = styled.span.attrs({[DOM_KEY_WIDGET]: 'd9-tree-node-index'})`
     display: flex;
     position: relative;
     align-items: center;
@@ -266,7 +266,7 @@ export const TreeNodeIndex = styled.span.attrs({'data-w': 'd9-tree-node-index'})
         padding-left: 9px;
     }
 `;
-export const TreeNodeLabel = styled.span.attrs({'data-w': 'd9-tree-node-label'})`
+export const TreeNodeLabel = styled.span.attrs({[DOM_KEY_WIDGET]: 'd9-tree-node-label'})`
     display: flex;
     position: relative;
     align-items: center;
@@ -280,7 +280,7 @@ export const TreeNodeLabel = styled.span.attrs({'data-w': 'd9-tree-node-label'})
 export const TreeHoverShade = styled.div.attrs<{ top: number; height: number; visible: boolean }>(
 	({top, height, visible}) => {
 		return {
-			'data-w': 'd9-tree-node-hover-shade',
+			[DOM_KEY_WIDGET]: 'd9-tree-node-hover-shade',
 			style: {
 				'--top': toCssSize(top), '--height': toCssSize(height), '--visible': visible ? 'block' : 'none'
 			}

@@ -1,6 +1,7 @@
 import {Nullable, NUtils, PPUtils, PropValue, useForceUpdate, VUtils} from '@rainbow-d9/n1';
 import React, {MouseEvent, MutableRefObject, useEffect, useRef, useState} from 'react';
 import {ButtonFill, ButtonInk} from '../button';
+import {DOM_KEY_WIDGET} from '../constants';
 import {GlobalEventPrefix, GlobalEventTypes, useGlobalEventBus, useGlobalHandlers} from '../global';
 import {AngleRight} from '../icons';
 import {LabelLike} from '../label-like';
@@ -50,7 +51,7 @@ const useTreeNodeExpand = (ref: MutableRefObject<HTMLDivElement>, state: Mutable
 							return false;
 						} else {
 							const wrapper = element.parentElement;
-							if (wrapper.parentElement.getAttribute('data-w') === 'd9-tree-content-container') {
+							if (wrapper.parentElement.getAttribute(DOM_KEY_WIDGET) === 'd9-tree-content-container') {
 								// reach the root
 								return true;
 							} else {

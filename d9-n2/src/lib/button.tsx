@@ -8,13 +8,14 @@ import {
 	VUtils,
 	WidgetProps
 } from '@rainbow-d9/n1';
-import React, {ForwardedRef, forwardRef, MouseEvent, ReactNode} from 'react';
+import React, {ForwardedRef, forwardRef, MouseEvent, ReactNode, useRef} from 'react';
 import styled from 'styled-components';
 import {CssVars, DOM_ID_WIDGET, DOM_KEY_WIDGET} from './constants';
 import {DecorateWrapperDef, transformDecorators} from './decorate-assist';
-import {useGlobalHandlers} from './global';
+import {useGlobalHandlers, useTip} from './global';
 import {toIntlLabel} from './intl-label';
 import {GlobalEventHandlers, ModelCarriedHandler, OmitHTMLProps2, OmitNodeDef, ValidationHandlers} from './types';
+import {useDualRefs} from './utils';
 
 // noinspection JSUnusedGlobalSymbols
 export enum ButtonFill {
@@ -59,7 +60,7 @@ export type ButtonProps = OmitNodeDef<ButtonDef> & WidgetProps;
 const AButton = styled.button.attrs<{ hasOneLeadOrTail: boolean }>(
 	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 	// @ts-ignore
-	({id, hasOneLeadOrTail, 'data-w': dataW}) => {
+	({id, hasOneLeadOrTail, [DOM_KEY_WIDGET]: dataW}) => {
 		return {
 			[DOM_KEY_WIDGET]: dataW ?? 'd9-button',
 			[DOM_ID_WIDGET]: id,
@@ -460,6 +461,10 @@ export const Button = forwardRef((props: ButtonProps, ref: ForwardedRef<HTMLButt
 	const {$root, $model, $p2r, $avs: {$disabled, $visible}, $vfs} = $wrapped;
 
 	const globalHandlers = useGlobalHandlers();
+	const buttonRef = useRef<HTMLButtonElement>(null);
+	useDualRefs(buttonRef, ref);
+	useTip({ref: buttonRef});
+
 	const onClicked = async (event: MouseEvent<HTMLButtonElement>) => {
 		event.preventDefault();
 		event.stopPropagation();
@@ -493,7 +498,7 @@ export const Button = forwardRef((props: ButtonProps, ref: ForwardedRef<HTMLButt
 	                hasOneLeadOrTail={hasOneLeadOrTail}
 	                onClick={onClicked}
 	                id={PPUtils.asId(PPUtils.absolute($p2r, props.$pp), props.id)}
-	                ref={ref}>
+	                ref={buttonRef}>
 		{transformedLeads.map(lead => {
 			return <LeadDecorator key={VUtils.generateUniqueId()}>
 				{lead}

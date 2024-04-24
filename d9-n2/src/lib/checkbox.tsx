@@ -6,12 +6,13 @@ import {
 	ValueChangeableNodeDef,
 	WidgetProps
 } from '@rainbow-d9/n1';
-import React, {ForwardedRef, forwardRef, KeyboardEvent, MouseEvent} from 'react';
+import React, {ForwardedRef, forwardRef, KeyboardEvent, MouseEvent, useRef} from 'react';
 import styled from 'styled-components';
 import {CssVars, DOM_ID_WIDGET, DOM_KEY_WIDGET} from './constants';
-import {useGlobalHandlers} from './global';
+import {useGlobalHandlers, useTip} from './global';
 import {Check, Times} from './icons';
 import {OmitHTMLProps, OmitNodeDef} from './types';
+import {useDualRefs} from './utils';
 
 export type CheckboxPossibleValues = [NullPropValue | PrimitivePropValue, NullPropValue | PrimitivePropValue];
 
@@ -122,6 +123,10 @@ export const Checkbox = forwardRef((props: CheckboxProps, ref: ForwardedRef<HTML
 	} = props;
 
 	const globalHandlers = useGlobalHandlers();
+	const checkRef = useRef<HTMLDivElement>(null);
+	useDualRefs(checkRef, ref);
+	useTip({ref: checkRef});
+
 	const onValueChange = async () => {
 		const oldValue = MUtils.getValue($model, $pp);
 		const newValue = oldValue == values[0] ? values[1] : values[0];
@@ -148,7 +153,8 @@ export const Checkbox = forwardRef((props: CheckboxProps, ref: ForwardedRef<HTML
 
 	return <ACheckbox data-disabled={$disabled} data-visible={$visible} tabIndex={0}
 	                  data-checked={checked} data-empty-when-false={emptyWhenFalse}
-	                  onClick={onClick} onKeyUp={onKeyUp} {...rest} ref={ref}>
+	                  onClick={onClick} onKeyUp={onKeyUp} {...rest}
+	                  ref={checkRef}>
 		{checked ? <Check/> : (emptyWhenFalse ? <Check/> : <Times/>)}
 	</ACheckbox>;
 });

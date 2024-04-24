@@ -52,8 +52,8 @@ export const AlertBody = styled.div.attrs({[DOM_KEY_WIDGET]: 'alert-body', 'data
     color: ${CssVars.CAPTION_FONT_COLOR};
 `;
 export const AlertFooter = styled.div.attrs({[DOM_KEY_WIDGET]: 'alert-footer'})`
-	display         : flex;
-	justify-content : flex-end;
+    display: flex;
+    justify-content: flex-end;
 `;
 export const AlertLabel = styled.span.attrs({[DOM_KEY_WIDGET]: 'alert-label'})`
     font-variant: ${CssVars.FONT_VARIANT};

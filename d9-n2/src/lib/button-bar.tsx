@@ -21,7 +21,7 @@ export type ButtonBarProps = OmitNodeDef<ButtonBarDef> & ContainerWidgetProps;
 const AButtonBar = styled.div.attrs(
 	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 	// @ts-ignore
-	({id, 'data-w': dataW}) => {
+	({id, [DOM_KEY_WIDGET]: dataW}) => {
 		return {
 			[DOM_KEY_WIDGET]: dataW ?? 'd9-button-bar',
 			[DOM_ID_WIDGET]: id
