@@ -4,10 +4,10 @@ var __publicField = (obj, key, value) => {
   __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
   return value;
 };
-import { c as createLogger, N as NUtils, V as VUtils, k as MonitorNodeAttributes, l as Reaction, E as ExternalDefIndicator, P as PPUtils } from "./rainbow-d9-n1-OMT1AvAI.js";
-import { O as OptionItemSort, R as REACTION_REFRESH_OPTIONS, c as GlobalEventPrefix } from "./rainbow-d9-n2-BYoA32cF.js";
-import { f as fromMarkdown, g as gfmTableFromMarkdown, a as gfmStrikethroughFromMarkdown, b as gfmFootnoteFromMarkdown, c as gfmTaskListItemFromMarkdown, d as frontmatterFromMarkdown } from "./mdast-h8xXs4A0.js";
-import { g as gfmTable, h as gfmStrikethrough, i as gfmFootnote, j as gfmTaskListItem, k as frontmatter } from "./micromark-SiPqE8fw.js";
+import { c as createLogger, N as NUtils, V as VUtils, k as MonitorNodeAttributes, l as Reaction, E as ExternalDefIndicator, P as PPUtils } from "./rainbow-d9-n1-HyutaglD.js";
+import { O as OptionItemSort, R as REACTION_REFRESH_OPTIONS, c as GlobalEventPrefix } from "./rainbow-d9-n2-XhYi0F7w.js";
+import { f as fromMarkdown, g as gfmTableFromMarkdown, a as gfmStrikethroughFromMarkdown, b as gfmFootnoteFromMarkdown, c as gfmTaskListItemFromMarkdown, d as frontmatterFromMarkdown } from "./mdast-2g_fwuvK.js";
+import { g as gfmTable, h as gfmStrikethrough, i as gfmFootnote, j as gfmTaskListItem, k as frontmatter } from "./micromark-qByMHUOs.js";
 const AsyncFunction = Object.getPrototypeOf(async function() {
 }).constructor;
 var ParsedNodeType;
@@ -2224,6 +2224,30 @@ class AnyAttributeBuild {
     return tryBoolAndNumOnAttrValue(value);
   }
 }
+class DataPrefixAttributeBuild {
+  constructor() {
+    __publicField(this, "snippetBuild", createSyncSnippetBuild("$pp.", ["options"], false));
+  }
+  accept(key) {
+    return key.startsWith("data-");
+  }
+  build(value, list) {
+    const parsed = tryBoolAndNumOnAttrValue(value);
+    const type = typeof parsed;
+    if (type === "boolean" || type === "number" || type === "bigint") {
+      return parsed;
+    } else if (type === "string") {
+      const str = parsed;
+      if (str.startsWith("$pp.")) {
+        return str;
+      } else {
+        return this.snippetBuild.build(str, list);
+      }
+    } else {
+      return parsed;
+    }
+  }
+}
 const _AttributeUtils = class _AttributeUtils {
   constructor() {
   }
@@ -2250,6 +2274,7 @@ const _AttributeUtils = class _AttributeUtils {
       _AttributeUtils.REACTION_REPAINT_ATTRIBUTE_BUILDER,
       _AttributeUtils.REACTION_CLEAR_ME_ATTRIBUTE_BUILDER,
       _AttributeUtils.REACTION_WATCH_ATTRIBUTE_BUILDER,
+      _AttributeUtils.DATA_PREFIX_ATTRIBUTE_BUILDER,
       _AttributeUtils.ANY_ATTRIBUTE_BUILDER
     ];
   }
@@ -2264,6 +2289,7 @@ __publicField(_AttributeUtils, "VALIDATION_SCOPES_ATTRIBUTE_BUILDER", new Valida
 __publicField(_AttributeUtils, "REACTION_REPAINT_ATTRIBUTE_BUILDER", new ReactionRepaintAttributeBuild());
 __publicField(_AttributeUtils, "REACTION_CLEAR_ME_ATTRIBUTE_BUILDER", new ReactionClearMeAttributeBuild());
 __publicField(_AttributeUtils, "REACTION_WATCH_ATTRIBUTE_BUILDER", new ReactionWatchAttributeBuild());
+__publicField(_AttributeUtils, "DATA_PREFIX_ATTRIBUTE_BUILDER", new DataPrefixAttributeBuild());
 __publicField(_AttributeUtils, "ANY_ATTRIBUTE_BUILDER", new AnyAttributeBuild());
 __publicField(_AttributeUtils, "CUSTOMIZED_ATTRIBUTE_BUILDERS", {});
 let AttributeUtils = _AttributeUtils;
@@ -3169,6 +3195,7 @@ var index$1 = /* @__PURE__ */ Object.freeze({
   get D9PropertyNames() {
     return D9PropertyNames;
   },
+  DataPrefixAttributeBuild,
   DecorateItemsByStrBuild,
   DecorateLeadsBuild,
   DecorateTailsBuild,
@@ -3483,6 +3510,7 @@ class AbstractN2CheckboxesTranslator extends SpecificWidgetTranslator {
   getValidationHandlerDetectives() {
     return [
       ValidatorUtils.DETECT_REQUIRED,
+      ValidatorUtils.DETECT_LENGTH,
       ...super.getValidationHandlerDetectives()
     ];
   }
@@ -3575,6 +3603,7 @@ class N2MultiDropdownTranslator extends SpecificWidgetTranslator {
   getValidationHandlerDetectives() {
     return [
       ValidatorUtils.DETECT_REQUIRED,
+      ValidatorUtils.DETECT_LENGTH,
       ...super.getValidationHandlerDetectives()
     ];
   }

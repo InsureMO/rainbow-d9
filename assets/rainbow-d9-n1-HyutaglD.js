@@ -4,8 +4,8 @@ var __publicField = (obj, key, value) => {
   __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
   return value;
 };
-import { b as buffer, n as nanoid, E as EventEmitter } from "./vendor-dEUGUKMq.js";
-import { r as reactExports, R as React } from "./react-XEcpDhC4.js";
+import { b as buffer, n as nanoid, E as EventEmitter } from "./vendor-EPq0eIUo.js";
+import { r as reactExports, R as React } from "./react-qvFGHjqT.js";
 const VUtils = {
   isEmpty: (v) => v == null || typeof v === "string" && v.length === 0,
   isNotEmpty: (v) => (v ?? "") !== "",
@@ -719,6 +719,34 @@ const useSetValue = (props) => {
     },
     onValueChanged
   };
+};
+const beautifyDataAttributes = (attributes, options) => {
+  if (attributes == null) {
+    return;
+  }
+  Object.keys(attributes).filter((key) => key.startsWith("data-")).map((key) => [key, `@${key}`]).forEach(([key, defKey]) => {
+    if (attributes[defKey] == null) {
+      const value = attributes[key];
+      const type = typeof value;
+      if (value == null || value === true || value === false)
+        ;
+      else if (type === "string") {
+        if (value.startsWith("$pp.")) {
+          attributes[defKey] = value;
+          attributes[key] = MUtils.getValue(options.model, value.substring(4));
+        }
+      } else if (type === "function") {
+        attributes[defKey] = value;
+        attributes[key] = value({ root: options.root, model: options.model });
+      } else
+        ;
+    } else if (typeof attributes[defKey] === "string") {
+      attributes[key] = MUtils.getValue(options.model, attributes[defKey].substring(4));
+    } else if (typeof attributes[defKey] === "function") {
+      attributes[key] = attributes[defKey]({ root: options.root, model: options.model });
+    } else
+      ;
+  });
 };
 const ValidationEventHolder = () => {
   const { on, off, fire } = useRootEventBus();
@@ -1651,6 +1679,7 @@ const ArrayWrapper = (props) => {
       })
     ];
   };
+  beautifyDataAttributes(rest, { root: $root, model: $model });
   const style = useComputedStyle ? NUtils.computeStyle(rest) : void 0;
   return React.createElement(
     C,
@@ -1675,6 +1704,7 @@ const ContainerWrapper = (props) => {
   const $wrapped = { $root, $p2r, $model, $onValueChange, $avs, $vfs };
   const widget = findWidget($wt);
   const C = widget.JSX;
+  beautifyDataAttributes(rest, { root: $root, model: $model });
   const style = useComputedStyle ? NUtils.computeStyle(rest) : void 0;
   return React.createElement(C, { "$wrapped": $wrapped, ...rest, "$wt": $wt, style, "data-valid": ((_a = $avs == null ? void 0 : $avs.$valid) == null ? void 0 : _a.valid) ?? true }, renderContainerChildren({
     def: props,
@@ -1690,6 +1720,7 @@ const LeafWrapper = (props) => {
   const $wrapped = { $root, $p2r, $model, $onValueChange, $avs, $vfs };
   const widget = findWidget($wt);
   const C = widget.JSX;
+  beautifyDataAttributes(rest, { root: $root, model: $model });
   const style = useComputedStyle ? NUtils.computeStyle(rest) : void 0;
   return React.createElement(C, { "$wrapped": $wrapped, ...rest, "$wt": $wt, style, "data-valid": ((_a = $avs == null ? void 0 : $avs.$valid) == null ? void 0 : _a.valid) ?? true });
 };

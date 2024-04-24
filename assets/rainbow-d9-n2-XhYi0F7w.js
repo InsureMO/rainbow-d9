@@ -4,10 +4,10 @@ var __publicField = (obj, key, value) => {
   __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
   return value;
 };
-import { a as color, M as MaskedNumber, e as MaskedDate, g as MaskedFunction, j as MaskedPattern, k as MaskedRange, l as MaskedRegExp, o as MaskedDynamic } from "./vendor-dEUGUKMq.js";
-import { R as React, r as reactExports, u as useIMask } from "./react-XEcpDhC4.js";
-import { V as VUtils, P as PPUtils, r as registerWidget, c as createLogger, u as useRootEventBus, M as MUtils, N as NUtils, d as Wrapper, e as useForceUpdate, f as MBUtils, b as useWrapperEventBus, W as WrapperEventTypes, g as useCreateEventBus, h as useDefaultAttributeValues, i as PROPERTY_PATH_ME, j as useAttributesWatch, R as RootEventTypes } from "./rainbow-d9-n1-OMT1AvAI.js";
-import { q as qe, W as We } from "./styled-components-dW_QAQE6.js";
+import { a as color, M as MaskedNumber, e as MaskedDate, g as MaskedFunction, j as MaskedPattern, k as MaskedRange, l as MaskedRegExp, o as MaskedDynamic } from "./vendor-EPq0eIUo.js";
+import { R as React, r as reactExports, u as useIMask } from "./react-qvFGHjqT.js";
+import { V as VUtils, P as PPUtils, r as registerWidget, c as createLogger, u as useRootEventBus, M as MUtils, N as NUtils, d as Wrapper, e as useForceUpdate, f as MBUtils, b as useWrapperEventBus, W as WrapperEventTypes, g as useCreateEventBus, h as useDefaultAttributeValues, i as PROPERTY_PATH_ME, j as useAttributesWatch, R as RootEventTypes } from "./rainbow-d9-n1-HyutaglD.js";
+import { q as qe, W as We } from "./styled-components-Mu4B1nFK.js";
 import { d as dayjs } from "./dayjs-9Z7dW0Q-.js";
 const DOM_KEY_WIDGET = "data-w";
 const DOM_ID_WIDGET = "data-wid";
@@ -1230,6 +1230,7 @@ const DEFAULTS$1 = {
   TIME_FORMAT: CALENDAR_TIME_FORMAT,
   DATETIME_FORMAT: CALENDAR_DATETIME_FORMAT,
   AUTO_CONFIRM: true,
+  AUTO_CONFIRM_ON_DATE: false,
   USE_CALENDAR_ICON: false
 };
 const setCalendarDefaults = (defaults) => {
@@ -1238,6 +1239,7 @@ const setCalendarDefaults = (defaults) => {
   DEFAULTS$1.TIME_FORMAT = defaults.timeFormat ?? DEFAULTS$1.TIME_FORMAT;
   DEFAULTS$1.DATETIME_FORMAT = defaults.datetimeFormat ?? DEFAULTS$1.DATETIME_FORMAT;
   DEFAULTS$1.AUTO_CONFIRM = defaults.autoConfirm ?? DEFAULTS$1.AUTO_CONFIRM;
+  DEFAULTS$1.AUTO_CONFIRM_ON_DATE = defaults.autoConfirmOnDate ?? DEFAULTS$1.AUTO_CONFIRM_ON_DATE;
   DEFAULTS$1.USE_CALENDAR_ICON = defaults.useCalendarIcon ?? DEFAULTS$1.USE_CALENDAR_ICON;
 };
 const getDefaultCalendarYMFormat = () => DEFAULTS$1.YM_FORMAT;
@@ -1245,6 +1247,7 @@ const getDefaultCalendarDateFormat = () => DEFAULTS$1.DATE_FORMAT;
 const getDefaultCalendarTimeFormat = () => DEFAULTS$1.TIME_FORMAT;
 const getDefaultCalendarDatetimeFormat = () => DEFAULTS$1.DATETIME_FORMAT;
 const isCalendarAutoConfirm = () => DEFAULTS$1.AUTO_CONFIRM;
+const isCalendarAutoConfirmOnDate = () => DEFAULTS$1.AUTO_CONFIRM_ON_DATE;
 const isStickIconUseCalendar = () => DEFAULTS$1.USE_CALENDAR_ICON;
 const FIX_TIME_AT_START_OF_DAY = { hour: 0, minute: 0, second: 0, millisecond: 0 };
 const FIX_TIME_AT_END_OF_DAY = { hour: 23, minute: 59, second: 59, millisecond: 59 };
@@ -1273,6 +1276,7 @@ var utils$3 = /* @__PURE__ */ Object.freeze({
   getDefaultCalendarTimeFormat,
   getDefaultCalendarYMFormat,
   isCalendarAutoConfirm,
+  isCalendarAutoConfirmOnDate,
   isStickIconUseCalendar,
   setCalendarDefaults,
   toEndOfDay,
@@ -1316,7 +1320,7 @@ const nf2 = wrapNf(nf(2).format);
 const nf3 = wrapNf(nf(3).format);
 const nfWithLocale = (locale2) => {
   return (fractionDigits, grouping) => {
-    return new Intl.NumberFormat(locale2, {
+    return new Intl.NumberFormat(VUtils.isBlank(locale2) ? void 0 : locale2.replace(/_/g, "-"), {
       useGrouping: grouping == null ? true : grouping,
       minimumFractionDigits: fractionDigits || 0,
       maximumFractionDigits: fractionDigits || 0
@@ -1741,6 +1745,7 @@ const REACTION_REFRESH_OPTIONS = "reaction-refresh-options";
 const useOptionItems = (props) => {
   const { options = NO_OPTION_ITEM, noAvailable, $wrapped: { $root, $model } } = props;
   const globalHandlers = useGlobalHandlers();
+  const { on: onGlobal, off: offGlobal } = useGlobalEventBus();
   const { on, off } = useWrapperEventBus();
   const [candidates, setCandidates] = reactExports.useState(() => {
     return { initialized: false, options: NO_OPTION_ITEM };
@@ -1769,12 +1774,17 @@ const useOptionItems = (props) => {
         }
         setCandidates((candidates2) => ({ initialized: false, options: candidates2.options }));
       };
+      const onLanguageChanged = () => {
+        setCandidates((candidates2) => ({ initialized: false, options: candidates2.options }));
+      };
       on(WrapperEventTypes.UNHANDLED_REACTION_OCCURRED, onUnhandledReactionOccurred);
+      onGlobal && onGlobal(GlobalEventTypes.LANGUAGE_CHANGED, onLanguageChanged);
       return () => {
         off(WrapperEventTypes.UNHANDLED_REACTION_OCCURRED, onUnhandledReactionOccurred);
+        offGlobal && offGlobal(GlobalEventTypes.LANGUAGE_CHANGED, onLanguageChanged);
       };
     }
-  }, [on, off]);
+  }, [on, off, onGlobal, offGlobal]);
   const askOptions = () => {
     return candidates.initialized ? candidates.options : VUtils.isFunction(options) ? NO_OPTION_ITEM : options ?? NO_OPTION_ITEM;
   };
@@ -2429,7 +2439,11 @@ const Caption = reactExports.forwardRef((props, ref) => {
     if (labelOnValue && valueToLabel == null) {
       value = MUtils.getValue($model, $pp) ?? "";
     } else if (labelOnValue && valueToLabel != null) {
-      value = valueToLabel(MUtils.getValue($model, $pp), formatter, { global: globalHandlers }) ?? "";
+      value = valueToLabel(MUtils.getValue($model, $pp), formatter, {
+        global: globalHandlers,
+        root: $root,
+        model: $model
+      }) ?? "";
     } else if (label != null) {
       value = React.createElement(LabelLike, { "$wrapped": $wrapped, "$validationScopes": props, label });
     } else {
@@ -3237,7 +3251,7 @@ const DatePickerBodyDateCell = qe.span.attrs({ "data-w": "d9-calendar-date-picke
     }
 `;
 const DatePicker = (props) => {
-  const { $root, $model, value, dateFormat, couldPerform } = props;
+  const { $root, $model, value, dateFormat, time, couldPerform } = props;
   const globalHandlers = useGlobalHandlers();
   const { on, off, fire } = useCalendarEventBus();
   const [state, setState] = reactExports.useState({ visible: true, current: value });
@@ -3262,7 +3276,7 @@ const DatePicker = (props) => {
   const todayYear = today.year();
   const todayMonth = today.month();
   const todayDate = today.date();
-  const onDateClicked = (date) => () => {
+  const onDateChange = (date, isDateChanged) => () => {
     const newValue = date.clone().hour(value.hour()).minute(value.minute()).second(value.second()).millisecond(value.millisecond());
     const couldPerformValue = couldPerform == null ? true : couldPerform({
       root: $root,
@@ -3272,24 +3286,24 @@ const DatePicker = (props) => {
       global: globalHandlers
     }) !== false;
     if (couldPerformValue) {
-      fire(CalendarEventTypes.VALUE_SELECTED, newValue);
+      if (!time) {
+        fire(CalendarEventTypes.VALUE_SELECTED, newValue, isDateChanged);
+      } else {
+        fire(CalendarEventTypes.VALUE_SELECTED, newValue);
+      }
     }
     setState((state2) => ({ ...state2, current: newValue }));
   };
-  const onTodayClicked = onDateClicked(today);
-  const onYesterdayClicked = onDateClicked(today.subtract(1, "day"));
-  const onWeekendClicked = onDateClicked(today.day(6));
-  const onPrevWeekendClicked = onDateClicked(today.day(6).subtract(1, "week"));
-  const onMonthEndClicked = onDateClicked(today.date(1).add(1, "month").subtract(1, "day"));
-  const onPrevMonthEndClicked = onDateClicked(today.date(1).subtract(1, "day"));
-  const onYearEndClicked = onDateClicked(today.month(11).date(31));
-  const onPrevYearEndClicked = onDateClicked(today.month(11).date(31).subtract(1, "year"));
-  const onGotoPrevMonthClicked = () => {
-    onDateClicked(state.current.subtract(1, "month"))();
-  };
-  const onGotoNextMonthClicked = () => {
-    onDateClicked(state.current.add(1, "month"))();
-  };
+  const onTodayClicked = onDateChange(today);
+  const onYesterdayClicked = onDateChange(today.subtract(1, "day"));
+  const onWeekendClicked = onDateChange(today.day(6));
+  const onPrevWeekendClicked = onDateChange(today.day(6).subtract(1, "week"));
+  const onMonthEndClicked = onDateChange(today.date(1).add(1, "month").subtract(1, "day"));
+  const onPrevMonthEndClicked = onDateChange(today.date(1).subtract(1, "day"));
+  const onYearEndClicked = onDateChange(today.month(11).date(31));
+  const onPrevYearEndClicked = onDateChange(today.month(11).date(31).subtract(1, "year"));
+  const onGotoPrevMonthClicked = () => onDateChange(state.current.subtract(1, "month"))();
+  const onGotoNextMonthClicked = () => onDateChange(state.current.add(1, "month"))();
   const currentYear = state.current.year();
   const currentMonth = state.current.month();
   const currentDisplayMonth = (() => {
@@ -3419,7 +3433,7 @@ const DatePicker = (props) => {
           checkType: "date",
           global: globalHandlers
         }) !== false;
-        const click = couldPerformValue ? onDateClicked(dayjs().year(year).month(month).date(date)) : void 0;
+        const click = couldPerformValue ? onDateChange(dayjs().year(year).month(month).date(date), true) : void 0;
         return React.createElement(
           DatePickerBodyDateCell,
           { key: `${year}/${month}/${date}`, "data-current-month": year === currentYear && month === currentMonth, "data-current": year === value.year() && month === value.month() && date === value.date(), "data-today": year === todayYear && month === todayMonth && date === todayDate, "data-could-perform": couldPerformValue, onClick: click },
@@ -3966,7 +3980,7 @@ const YearMonthPicker = (props) => {
   );
 };
 const CalendarPopup = (props) => {
-  const { $root, $model, initValue, popupRef, popupState, popupShown, date = true, dateFormat, time = false, timeFormat, initTimeAt, couldPerform, confirm } = props;
+  const { $root, $model, initValue, popupRef, popupState, popupShown, date = true, dateFormat, time = false, timeFormat, initTimeAt, autoConfirmOnDate, couldPerform, confirm } = props;
   const [value, setValue] = reactExports.useState(() => {
     if (initValue != null) {
       return initValue;
@@ -3978,7 +3992,12 @@ const CalendarPopup = (props) => {
       return date2;
     }
   });
-  useValueChange(setValue);
+  useValueChange((value2, isDateChanged) => {
+    setValue(value2);
+    if (autoConfirmOnDate && isDateChanged) {
+      confirm(value2);
+    }
+  });
   const { hasDate } = checkDateParts(dateFormat);
   return React.createElement(
     DropdownPopup,
@@ -3987,7 +4006,7 @@ const CalendarPopup = (props) => {
       PopupContainer,
       null,
       React.createElement(CalendarPopupHeader, { date, dateFormat, time, timeFormat, value, confirm }),
-      date && hasDate ? React.createElement(DatePicker, { "$root": $root, "$model": $model, value, dateFormat, couldPerform }) : null,
+      date && hasDate ? React.createElement(DatePicker, { "$root": $root, "$model": $model, value, dateFormat, time, couldPerform }) : null,
       time ? React.createElement(TimePicker, { "$root": $root, "$model": $model, value, date, timeFormat, couldPerform }) : null,
       date ? React.createElement(YearMonthPicker, { "$root": $root, "$model": $model, value, dateFormat, couldPerform }) : null
     )
@@ -4029,7 +4048,7 @@ const DropdownStickCalendar = qe(Date$1).attrs({ [DOM_KEY_WIDGET]: "d9-dropdown-
     transition: all ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION};
 `;
 const Picker = reactExports.forwardRef((props, ref) => {
-  const { $pp, $wrapped: { $onValueChange, $root, $model, $p2r, $avs: { $disabled, $visible } }, please = "", clearable = true, date, dateFormat = getDefaultCalendarDateFormat(), time, timeFormat = getDefaultCalendarTimeFormat(), storeFormat = getDefaultCalendarDatetimeFormat(), fixedTimeAt = FIX_TIME_AT_START_OF_DAY, initTimeAt, couldPerform, autoConfirm = isCalendarAutoConfirm(), useCalendarIcon = isStickIconUseCalendar(), ...rest } = props;
+  const { $pp, $wrapped: { $onValueChange, $root, $model, $p2r, $avs: { $disabled, $visible } }, please = "", clearable = true, date, dateFormat = getDefaultCalendarDateFormat(), time, timeFormat = getDefaultCalendarTimeFormat(), storeFormat = getDefaultCalendarDatetimeFormat(), fixedTimeAt = FIX_TIME_AT_START_OF_DAY, initTimeAt, couldPerform, autoConfirm = isCalendarAutoConfirm(), autoConfirmOnDate = isCalendarAutoConfirmOnDate(), useCalendarIcon = isStickIconUseCalendar(), ...rest } = props;
   const globalHandlers = useGlobalHandlers();
   const { fire } = useCalendarEventBus();
   const { containerRef, popupRef, popupState, setPopupState, popupShown, setPopupShown } = useDropdownControl({
@@ -4148,7 +4167,7 @@ const Picker = reactExports.forwardRef((props, ref) => {
     React.createElement(CalendarValueHolder, { initValue: initValueForPopup }),
     React.createElement(DropdownLabel, { "data-please": !valueAssigned }, label),
     React.createElement(DropdownStick, { valueAssigned, clearable, clear: onClearClicked, disabled: $disabled, icon: useCalendarIcon ? React.createElement(DropdownStickCalendar, null) : void 0 }),
-    isDropdownPopupActive(popupState.active) ? React.createElement(CalendarPopup, { "$root": $root, "$model": $model, initValue: initValueForPopup, popupRef, popupState, popupShown, date, dateFormat, time, timeFormat, initTimeAt, couldPerform, confirm: onConfirm }) : null
+    isDropdownPopupActive(popupState.active) ? React.createElement(CalendarPopup, { "$root": $root, "$model": $model, initValue: initValueForPopup, popupRef, popupState, popupShown, date, dateFormat, time, timeFormat, initTimeAt, autoConfirmOnDate, couldPerform, confirm: onConfirm }) : null
   );
 });
 const Calendar = reactExports.forwardRef((props, ref) => {
