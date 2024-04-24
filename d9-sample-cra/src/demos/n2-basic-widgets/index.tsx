@@ -91,6 +91,15 @@ const StyleController = styled.div.attrs({})`
 export const N2BasicWidgets = () => {
 	const def = useDemoMarkdown(DemoContent);
 	const externalDefs = {
+		deco: {
+			numericFormat: {
+				thousandsSeparator: ',',
+				radix: '.',
+				normalizeZeros: false,
+				padFractionalZeros: true,
+				scale: 2
+			}
+		},
 		keydown: {
 			numeric: (event: KeyboardEvent<HTMLInputElement>) => {
 				console.log(`Key event[key=${event.key}, code=${event.code}] capture.`);

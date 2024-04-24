@@ -33,6 +33,9 @@
 	- tails: %;$icons.caretLeft
 	- numeric
 	- onKeyDown: @ext.keydown.numeric
+- DecoNumber::::decorateNumberInput3
+	- label: Contract Value
+	- format: @ext.deco.numericFormat
 
 ## Section::# 1.2. Basic Widgets - Dropdown
 
