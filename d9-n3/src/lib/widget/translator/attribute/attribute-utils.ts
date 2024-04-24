@@ -1,6 +1,7 @@
 import {NodeDef, Undefinable} from '@rainbow-d9/n1';
 import {WidgetType} from '../../../semantic';
 import {AnyAttributeBuild} from './any-attribute-build';
+import {DataPrefixAttributeBuild} from './data-prefix-attribute-build';
 import {DisablementAttributeBuild} from './disablement-attribute-build';
 import {MobilePositionAttributeBuild, PositionAttributeBuild} from './position-attribute-build';
 import {
@@ -25,6 +26,7 @@ export class AttributeUtils {
 	public static readonly REACTION_REPAINT_ATTRIBUTE_BUILDER = new ReactionRepaintAttributeBuild();
 	public static readonly REACTION_CLEAR_ME_ATTRIBUTE_BUILDER = new ReactionClearMeAttributeBuild();
 	public static readonly REACTION_WATCH_ATTRIBUTE_BUILDER = new ReactionWatchAttributeBuild();
+	public static readonly DATA_PREFIX_ATTRIBUTE_BUILDER = new DataPrefixAttributeBuild();
 	public static readonly ANY_ATTRIBUTE_BUILDER = new AnyAttributeBuild();
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	private static CUSTOMIZED_ATTRIBUTE_BUILDERS: Record<WidgetType, Array<AttributeValueBuild<any>>> = {};
@@ -59,6 +61,7 @@ export class AttributeUtils {
 			AttributeUtils.REACTION_REPAINT_ATTRIBUTE_BUILDER,
 			AttributeUtils.REACTION_CLEAR_ME_ATTRIBUTE_BUILDER,
 			AttributeUtils.REACTION_WATCH_ATTRIBUTE_BUILDER,
+			AttributeUtils.DATA_PREFIX_ATTRIBUTE_BUILDER,
 			AttributeUtils.ANY_ATTRIBUTE_BUILDER
 		];
 	}

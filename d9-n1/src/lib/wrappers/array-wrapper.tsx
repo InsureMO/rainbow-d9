@@ -1,5 +1,5 @@
 import React from 'react';
-import {useSetValue} from '../hooks';
+import {beautifyDataAttributes, useSetValue} from '../hooks';
 import {
 	ArrayContainerDef,
 	ArrayContainerWidgetProps,
@@ -60,6 +60,7 @@ export const ArrayWrapper = (props: ArrayWrapperProps) => {
 			})];
 	};
 
+	beautifyDataAttributes(rest, {root: $root, model: $model});
 	const style = useComputedStyle ? NUtils.computeStyle(rest as unknown as StyledNodeDef) : (void 0);
 	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 	// @ts-ignore

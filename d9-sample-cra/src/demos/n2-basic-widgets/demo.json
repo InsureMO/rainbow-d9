@@ -2,6 +2,7 @@
 	"title": "Hello, I am a demo dialog.",
 	"propA": "Property A @root",
 	"decorateInput": "123",
+	"data-value-decorateNumberInput3": 3456,
 	"decorateNumberInput3": 12345.678,
 	"caption": "Some Caption",
 	"nested": {

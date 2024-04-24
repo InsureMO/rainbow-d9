@@ -1,5 +1,5 @@
 import React from 'react';
-import {useSetValue} from '../hooks';
+import {beautifyDataAttributes, useSetValue} from '../hooks';
 import {
 	DeviceTags,
 	ModelHolder,
@@ -28,6 +28,7 @@ export const LeafWrapper = (props: LeafWrapperProps) => {
 	const widget: RegisteredWidget<WidgetProps> = findWidget($wt);
 	const C = widget.JSX;
 
+	beautifyDataAttributes(rest, {root: $root, model: $model});
 	const style = useComputedStyle ? NUtils.computeStyle(rest as unknown as StyledNodeDef) : (void 0);
 	// render container itself
 	// eslint-disable-next-line @typescript-eslint/ban-ts-comment

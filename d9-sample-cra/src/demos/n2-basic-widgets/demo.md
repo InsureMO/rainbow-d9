@@ -34,6 +34,11 @@
 	- numeric
 	- onKeyDown: @ext.keydown.numeric
 - DecoNumber::::decorateNumberInput3
+	- data-value2: $pp.decorateNumberInput3
+	- data-value-func:
+	  ```javascript
+	  return options.model.decorateNumberInput3 < 10000 ? 'lt10000': 'gte10000';
+	  ```
 	- label: Contract Value
 	- format: @ext.deco.numericFormat
 
