@@ -1,6 +1,6 @@
 import {BaseModel, PropValue, useWrapperEventBus, VUtils, WidgetProps, WrapperEventTypes} from '@rainbow-d9/n1';
 import {ReactNode, useEffect, useState} from 'react';
-import {useGlobalHandlers} from './global';
+import {GlobalEventTypes, useGlobalEventBus, useGlobalHandlers} from './global';
 import {toIntlLabel} from './intl-label';
 import {GlobalEventHandlers, ModelCarrier} from './types';
 
@@ -58,6 +58,7 @@ export const useOptionItems = <V>(props: OptionItemsProps<V>) => {
 	} = props;
 
 	const globalHandlers = useGlobalHandlers();
+	const {on: onGlobal, off: offGlobal} = useGlobalEventBus();
 	const {on, off} = useWrapperEventBus();
 	const [candidates, setCandidates] = useState<OptionItemCandidates<V>>((): OptionItemCandidates<V> => {
 		return {initialized: false, options: NO_OPTION_ITEM};
@@ -88,12 +89,18 @@ export const useOptionItems = <V>(props: OptionItemsProps<V>) => {
 				}
 				setCandidates(candidates => ({initialized: false, options: candidates.options}));
 			};
+			// language change, trigger a candidates refresh
+			const onLanguageChanged = () => {
+				setCandidates(candidates => ({initialized: false, options: candidates.options}));
+			};
 			on(WrapperEventTypes.UNHANDLED_REACTION_OCCURRED, onUnhandledReactionOccurred);
+			onGlobal && onGlobal(GlobalEventTypes.LANGUAGE_CHANGED, onLanguageChanged);
 			return () => {
 				off(WrapperEventTypes.UNHANDLED_REACTION_OCCURRED, onUnhandledReactionOccurred);
+				offGlobal && offGlobal(GlobalEventTypes.LANGUAGE_CHANGED, onLanguageChanged);
 			};
 		}
-	}, [on, off]);
+	}, [on, off, onGlobal, offGlobal]);
 
 	const askOptions = (): OptionItems<V> => {
 		return candidates.initialized ? candidates.options : (VUtils.isFunction(options) ? NO_OPTION_ITEM : (options ?? NO_OPTION_ITEM));
