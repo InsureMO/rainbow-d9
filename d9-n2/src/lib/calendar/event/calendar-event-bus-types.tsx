@@ -48,11 +48,11 @@ export interface CalendarEventBus {
 
 	off(type: CalendarEventTypes.INIT_POPUP_VALUE, listener: (value: Dayjs) => void): this;
 
-	fire(type: CalendarEventTypes.VALUE_SELECTED, value: Dayjs): this;
+	fire(type: CalendarEventTypes.VALUE_SELECTED, value: Dayjs, isDateChanged?: true): this;
 
-	on(type: CalendarEventTypes.VALUE_SELECTED, listener: (value: Dayjs) => void): this;
+	on(type: CalendarEventTypes.VALUE_SELECTED, listener: (value: Dayjs, isDateChanged?: true) => void): this;
 
-	off(type: CalendarEventTypes.VALUE_SELECTED, listener: (value: Dayjs) => void): this;
+	off(type: CalendarEventTypes.VALUE_SELECTED, listener: (value: Dayjs, isDateChanged?: true) => void): this;
 
 	fire(type: CalendarEventTypes.VALUE_CLEARED): this;
 

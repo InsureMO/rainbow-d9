@@ -19,6 +19,7 @@ interface CalendarPopupProps extends Required<Pick<CalendarProps, 'date' | 'date
 	popupRef: RefObject<HTMLDivElement>;
 	popupState: DropdownPopupState;
 	popupShown: boolean;
+	autoConfirmOnDate: boolean;
 	confirm: (value: Dayjs) => void;
 }
 
@@ -26,7 +27,8 @@ export const CalendarPopup = (props: CalendarPopupProps) => {
 	const {
 		$root, $model, initValue,
 		popupRef, popupState, popupShown,
-		date = true, dateFormat, time = false, timeFormat, initTimeAt, couldPerform,
+		date = true, dateFormat, time = false, timeFormat, initTimeAt,
+		autoConfirmOnDate, couldPerform,
 		confirm
 	} = props;
 
@@ -43,9 +45,13 @@ export const CalendarPopup = (props: CalendarPopupProps) => {
 			}
 			return date;
 		}
-
 	});
-	useValueChange(setValue);
+	useValueChange((value: Dayjs, isDateChanged?: true) => {
+		setValue(value);
+		if (autoConfirmOnDate && isDateChanged) {
+			confirm(value);
+		}
+	});
 
 	const {hasDate} = checkDateParts(dateFormat);
 
@@ -58,7 +64,7 @@ export const CalendarPopup = (props: CalendarPopupProps) => {
 			<CalendarPopupHeader date={date} dateFormat={dateFormat} time={time} timeFormat={timeFormat}
 			                     value={value} confirm={confirm}/>
 			{date && hasDate
-				? <DatePicker $root={$root} $model={$model} value={value} dateFormat={dateFormat}
+				? <DatePicker $root={$root} $model={$model} value={value} dateFormat={dateFormat} time={time}
 				              couldPerform={couldPerform}/>
 				: null}
 			{time

@@ -3,13 +3,14 @@ import {DEFAULTS} from './constants';
 
 export const setCalendarDefaults = (defaults: {
 	ymFormat?: string; dateFormat?: string; timeFormat?: string; datetimeFormat?: string;
-	autoConfirm?: boolean; useCalendarIcon?: boolean;
+	autoConfirm?: boolean; autoConfirmOnDate?: boolean; useCalendarIcon?: boolean;
 }) => {
 	DEFAULTS.YM_FORMAT = defaults.ymFormat ?? DEFAULTS.YM_FORMAT;
 	DEFAULTS.DATE_FORMAT = defaults.dateFormat ?? DEFAULTS.DATE_FORMAT;
 	DEFAULTS.TIME_FORMAT = defaults.timeFormat ?? DEFAULTS.TIME_FORMAT;
 	DEFAULTS.DATETIME_FORMAT = defaults.datetimeFormat ?? DEFAULTS.DATETIME_FORMAT;
 	DEFAULTS.AUTO_CONFIRM = defaults.autoConfirm ?? DEFAULTS.AUTO_CONFIRM;
+	DEFAULTS.AUTO_CONFIRM_ON_DATE = defaults.autoConfirmOnDate ?? DEFAULTS.AUTO_CONFIRM_ON_DATE;
 	DEFAULTS.USE_CALENDAR_ICON = defaults.useCalendarIcon ?? DEFAULTS.USE_CALENDAR_ICON;
 };
 export const getDefaultCalendarYMFormat = (): string => DEFAULTS.YM_FORMAT;
@@ -18,6 +19,7 @@ export const getDefaultCalendarTimeFormat = (): string => DEFAULTS.TIME_FORMAT;
 export const getDefaultCalendarDatetimeFormat = (): string => DEFAULTS.DATETIME_FORMAT;
 
 export const isCalendarAutoConfirm = (): boolean => DEFAULTS.AUTO_CONFIRM;
+export const isCalendarAutoConfirmOnDate = (): boolean => DEFAULTS.AUTO_CONFIRM_ON_DATE;
 export const isStickIconUseCalendar = (): boolean => DEFAULTS.USE_CALENDAR_ICON;
 
 export const FIX_TIME_AT_START_OF_DAY = {hour: 0, minute: 0, second: 0, millisecond: 0};

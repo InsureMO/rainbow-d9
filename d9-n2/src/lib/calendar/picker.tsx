@@ -27,6 +27,7 @@ import {
 	getDefaultCalendarDatetimeFormat,
 	getDefaultCalendarTimeFormat,
 	isCalendarAutoConfirm,
+	isCalendarAutoConfirmOnDate,
 	isStickIconUseCalendar
 } from './utils';
 import {CalendarValueHolder} from './value-holder';
@@ -57,7 +58,8 @@ export const Picker = forwardRef((props: CalendarProps, ref: ForwardedRef<HTMLDi
 		storeFormat = getDefaultCalendarDatetimeFormat(),
 		fixedTimeAt = FIX_TIME_AT_START_OF_DAY, initTimeAt,
 		couldPerform,
-		autoConfirm = isCalendarAutoConfirm(), useCalendarIcon = isStickIconUseCalendar(),
+		autoConfirm = isCalendarAutoConfirm(), autoConfirmOnDate = isCalendarAutoConfirmOnDate(),
+		useCalendarIcon = isStickIconUseCalendar(),
 		...rest
 	} = props;
 
@@ -213,7 +215,7 @@ export const Picker = forwardRef((props: CalendarProps, ref: ForwardedRef<HTMLDi
 			? <CalendarPopup $root={$root} $model={$model} initValue={initValueForPopup}
 			                 popupRef={popupRef} popupState={popupState} popupShown={popupShown}
 			                 date={date} dateFormat={dateFormat} time={time} timeFormat={timeFormat}
-			                 initTimeAt={initTimeAt}
+			                 initTimeAt={initTimeAt} autoConfirmOnDate={autoConfirmOnDate}
 			                 couldPerform={couldPerform}
 			                 confirm={onConfirm}/>
 			: null}

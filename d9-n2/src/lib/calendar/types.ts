@@ -24,7 +24,10 @@ export type CalendarDef = ValueChangeableNodeDef & OmitHTMLProps<HTMLDivElement>
 	/** the initial time when value is null */
 	initTimeAt?: CalendarFixedTimeAt;
 	couldPerform?: <R extends BaseModel, M extends PropValue>(options: CalendarValidRangeOptions<R, M>) => boolean;
+	/** auto confirm when focus blurred, default true */
 	autoConfirm?: boolean;
+	/** when no time is set, auto confirm on date selection, default false */
+	autoConfirmOnDate?: boolean;
 	useCalendarIcon?: boolean;
 };
 /** widget definition, with html attributes */

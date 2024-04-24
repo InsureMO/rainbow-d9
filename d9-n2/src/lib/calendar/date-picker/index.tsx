@@ -28,6 +28,7 @@ export interface CalendarDatePickerProps {
 	$model: PropValue;
 	value: Dayjs;
 	dateFormat: string;
+	time: boolean;
 	couldPerform?: CalendarProps['couldPerform'];
 }
 
@@ -37,7 +38,7 @@ interface DatePickerState {
 }
 
 export const DatePicker = (props: CalendarDatePickerProps) => {
-	const {$root, $model, value, dateFormat, couldPerform} = props;
+	const {$root, $model, value, dateFormat, time, couldPerform} = props;
 
 	const globalHandlers = useGlobalHandlers();
 	const {on, off, fire} = useCalendarEventBus();
@@ -67,31 +68,31 @@ export const DatePicker = (props: CalendarDatePickerProps) => {
 	const todayMonth = today.month();
 	const todayDate = today.date();
 
-	const onDateClicked = (date: Dayjs) => () => {
+	const onDateChange = (date: Dayjs, isDateChanged?: true) => () => {
 		const newValue = date.clone().hour(value.hour()).minute(value.minute()).second(value.second()).millisecond(value.millisecond());
 		const couldPerformValue = couldPerform == null ? true : (couldPerform({
 			root: $root, model: $model, valueToCheck: newValue, checkType: 'date', global: globalHandlers
 		}) !== false);
 		if (couldPerformValue) {
-			fire(CalendarEventTypes.VALUE_SELECTED, newValue);
+			if (!time) {
+				fire(CalendarEventTypes.VALUE_SELECTED, newValue, isDateChanged);
+			} else {
+				fire(CalendarEventTypes.VALUE_SELECTED, newValue);
+			}
 		}
 		setState(state => ({...state, current: newValue}));
 	};
-	const onTodayClicked = onDateClicked(today);
-	const onYesterdayClicked = onDateClicked(today.subtract(1, 'day'));
-	const onWeekendClicked = onDateClicked(today.day(6));
-	const onPrevWeekendClicked = onDateClicked(today.day(6).subtract(1, 'week'));
-	const onMonthEndClicked = onDateClicked(today.date(1).add(1, 'month').subtract(1, 'day'));
-	const onPrevMonthEndClicked = onDateClicked(today.date(1).subtract(1, 'day'));
-	const onYearEndClicked = onDateClicked(today.month(11).date(31));
-	const onPrevYearEndClicked = onDateClicked(today.month(11).date(31).subtract(1, 'year'));
+	const onTodayClicked = onDateChange(today);
+	const onYesterdayClicked = onDateChange(today.subtract(1, 'day'));
+	const onWeekendClicked = onDateChange(today.day(6));
+	const onPrevWeekendClicked = onDateChange(today.day(6).subtract(1, 'week'));
+	const onMonthEndClicked = onDateChange(today.date(1).add(1, 'month').subtract(1, 'day'));
+	const onPrevMonthEndClicked = onDateChange(today.date(1).subtract(1, 'day'));
+	const onYearEndClicked = onDateChange(today.month(11).date(31));
+	const onPrevYearEndClicked = onDateChange(today.month(11).date(31).subtract(1, 'year'));
 
-	const onGotoPrevMonthClicked = () => {
-		onDateClicked(state.current.subtract(1, 'month'))();
-	};
-	const onGotoNextMonthClicked = () => {
-		onDateClicked(state.current.add(1, 'month'))();
-	};
+	const onGotoPrevMonthClicked = () => onDateChange(state.current.subtract(1, 'month'))();
+	const onGotoNextMonthClicked = () => onDateChange(state.current.add(1, 'month'))();
 
 	const currentYear = state.current.year();
 	const currentMonth = state.current.month();
@@ -161,7 +162,7 @@ export const DatePicker = (props: CalendarDatePickerProps) => {
 				const couldPerformValue = couldPerform == null ? true : (couldPerform({
 					root: $root, model: $model, valueToCheck: valueToPerform, checkType: 'date', global: globalHandlers
 				}) !== false);
-				const click = couldPerformValue ? onDateClicked(dayjs().year(year).month(month).date(date)) : (void 0);
+				const click = couldPerformValue ? onDateChange(dayjs().year(year).month(month).date(date), true) : (void 0);
 				return <DatePickerBodyDateCell key={`${year}/${month}/${date}`}
 				                               data-current-month={year === currentYear && month === currentMonth}
 				                               data-current={year === value.year() && month === value.month() && date === value.date()}

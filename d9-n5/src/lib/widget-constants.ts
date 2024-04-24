@@ -60,6 +60,10 @@ const CalendarProperties: Array<PlaygroundWidgetProperty> = [
 		description: '"start", "0", "end", "HH:mm:ss", "HH:mm:ss.SSS".'
 	},
 	{name: 'autoConfirm', label: 'Boolean.', description: 'Confirm selection when blurred.'},
+	{
+		name: 'autoConfirmOnDate', label: 'Boolean.',
+		description: 'Confirm selection when date clicked when no time part.'
+	},
 	{name: 'useCalendarIcon', label: 'Boolean.', description: 'Use calendar icon instead of caret.'},
 	{name: 'couldPerform', label: 'Snippet.', description: 'Check given date could be performed or not.'}
 ];
@@ -494,7 +498,7 @@ export const N2Widgets: Array<PlaygroundWidget> = [
 	{
 		$wt: N2.N2WidgetType.DATE, label: 'Date picker. Shortcut of "Calendar"',
 		properties: [
-			...CalendarProperties.filter(({name}) => name !== 'date' && name !== 'time' && name !== 'timeFormat'),
+			...CalendarProperties.filter(({name}) => !['date', 'time', 'timeFormat'].includes(name)),
 			ValueChanged,
 			ValidationRequired
 		],
@@ -509,7 +513,7 @@ export const N2Widgets: Array<PlaygroundWidget> = [
 	{
 		$wt: N2.N2WidgetType.DATETIME, label: 'Datetime picker.',
 		properties: [
-			...CalendarProperties.filter(({name}) => name !== 'date' && name !== 'time' && name !== 'fixedTimeAt'),
+			...CalendarProperties.filter(({name}) => !['date', 'time', 'fixedTimeAt'].includes(name)),
 			ValueChanged,
 			ValidationRequired
 		],
@@ -521,7 +525,7 @@ export const N2Widgets: Array<PlaygroundWidget> = [
 	{
 		$wt: N2.N2WidgetType.TIME, label: 'Datetime picker.',
 		properties: [
-			...CalendarProperties.filter(({name}) => name !== 'date' && name !== 'time' && name !== 'fixedTimeAt'),
+			...CalendarProperties.filter(({name}) => !['date', 'dateFormat', 'autoConfirmOnDate', 'time', 'fixedTimeAt'].includes(name)),
 			ValueChanged,
 			ValidationRequired
 		],
