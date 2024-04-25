@@ -4,10 +4,10 @@ var __publicField = (obj, key, value) => {
   __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
   return value;
 };
-import { a as color, M as MaskedNumber, e as MaskedDate, g as MaskedFunction, j as MaskedPattern, k as MaskedRange, l as MaskedRegExp, o as MaskedDynamic } from "./vendor-EPq0eIUo.js";
-import { R as React, r as reactExports, u as useIMask } from "./react-qvFGHjqT.js";
-import { V as VUtils, P as PPUtils, r as registerWidget, c as createLogger, u as useRootEventBus, M as MUtils, N as NUtils, d as Wrapper, e as useForceUpdate, f as MBUtils, b as useWrapperEventBus, W as WrapperEventTypes, g as useCreateEventBus, h as useDefaultAttributeValues, i as PROPERTY_PATH_ME, j as useAttributesWatch, R as RootEventTypes } from "./rainbow-d9-n1-HyutaglD.js";
-import { q as qe, W as We } from "./styled-components-Mu4B1nFK.js";
+import { a as color, M as MaskedNumber, e as MaskedDate, g as MaskedFunction, j as MaskedPattern, k as MaskedRange, l as MaskedRegExp, o as MaskedDynamic } from "./vendor-0Qymwlja.js";
+import { R as React, r as reactExports, u as useIMask } from "./react-XdfZXP58.js";
+import { c as createLogger, V as VUtils, P as PPUtils, r as registerWidget, u as useRootEventBus, M as MUtils, N as NUtils, d as Wrapper, e as useForceUpdate, f as MBUtils, b as useWrapperEventBus, W as WrapperEventTypes, g as useCreateEventBus, h as useDefaultAttributeValues, i as PROPERTY_PATH_ME, j as useAttributesWatch, R as RootEventTypes } from "./rainbow-d9-n1-qtCLMeEY.js";
+import { q as qe, W as We } from "./styled-components-8FdRVy4c.js";
 import { d as dayjs } from "./dayjs-9Z7dW0Q-.js";
 const DOM_KEY_WIDGET = "data-w";
 const DOM_ID_WIDGET = "data-wid";
@@ -172,7 +172,17 @@ const CssVars = {
   ALERT_MARGIN_BOTTOM: "var(--d9-alert-margin-bottom, 32px)",
   ALERT_Z_INDEX: 99999,
   REMOTE_REQUEST_COLOR: `var(--d9-remote-request-color, ${CssConstants.INFO_COLOR})`,
-  REMOTE_REQUEST_Z_INDEX: 99999
+  REMOTE_REQUEST_Z_INDEX: 99999,
+  TIP_Z_INDEX: 999999,
+  TIP_BORDER: `var(--d9-tip-border, 1px solid var(--d9-border-color, ${CssConstants.BORDER_COLOR}))`,
+  TIP_BORDER_RADIUS: "var(--d9-tip-border-radius, 8px)",
+  TIP_SHADOW: `var(--d9-tip-shadow, 0 0 6px 2px ${color(CssConstants.SHADOW_COLOR).alpha(0.2)})`,
+  TIP_HEADER_HEIGHT: "var(--d9-tip-header-height, 44px)",
+  TIP_HEADER_BORDER: `var(--d9-tip-header-border, 2px solid var(--d9-border-color, ${CssConstants.BORDER_COLOR}))`,
+  TIP_HEADER_PADDING: "var(--d9-tip-header-padding, 16px)",
+  TIP_HEADER_FONT_SIZE: "var(--d9-tip-header-title-font-size, 16px)",
+  TIP_HEADER_FONT_WEIGHT: "var(--d9-tip-header-title-font-weight, 400)",
+  TIP_BODY_PADDING: "var(--d9-tip-body-padding, 16px)"
 };
 const $d9 = window;
 $d9.$d9n2 = $d9.$d9n2 ?? {
@@ -485,6 +495,8 @@ var GlobalEventTypes;
   GlobalEventTypes2["SHOW_DIALOG"] = "show-dialog";
   GlobalEventTypes2["HIDE_DIALOG"] = "hide-dialog";
   GlobalEventTypes2["SHOW_YES_NO_DIALOG"] = "show-yes-no-dialog";
+  GlobalEventTypes2["SHOW_TIP"] = "show-tip";
+  GlobalEventTypes2["HIDE_TIP"] = "hide-tip";
   GlobalEventTypes2["CUSTOM_EVENT"] = "custom-event";
 })(GlobalEventTypes || (GlobalEventTypes = {}));
 const Context$6 = reactExports.createContext({});
@@ -495,6 +507,170 @@ const GlobalEventBusProvider = (props) => {
   return React.createElement(Context$6.Provider, { value: bus }, children);
 };
 const useGlobalEventBus = () => reactExports.useContext(Context$6);
+const CALENDAR_YM_FORMAT = "MMM YYYY";
+const CALENDAR_DATE_FORMAT = "YYYY/MM/DD";
+const CALENDAR_TIME_FORMAT = "HH:mm:ss";
+const CALENDAR_DATETIME_FORMAT = `${CALENDAR_DATE_FORMAT} ${CALENDAR_TIME_FORMAT}`;
+const DEFAULTS$1 = {
+  YM_FORMAT: CALENDAR_YM_FORMAT,
+  DATE_FORMAT: CALENDAR_DATE_FORMAT,
+  TIME_FORMAT: CALENDAR_TIME_FORMAT,
+  DATETIME_FORMAT: CALENDAR_DATETIME_FORMAT,
+  AUTO_CONFIRM: true,
+  AUTO_CONFIRM_ON_DATE: false,
+  USE_CALENDAR_ICON: false
+};
+const setCalendarDefaults = (defaults) => {
+  DEFAULTS$1.YM_FORMAT = defaults.ymFormat ?? DEFAULTS$1.YM_FORMAT;
+  DEFAULTS$1.DATE_FORMAT = defaults.dateFormat ?? DEFAULTS$1.DATE_FORMAT;
+  DEFAULTS$1.TIME_FORMAT = defaults.timeFormat ?? DEFAULTS$1.TIME_FORMAT;
+  DEFAULTS$1.DATETIME_FORMAT = defaults.datetimeFormat ?? DEFAULTS$1.DATETIME_FORMAT;
+  DEFAULTS$1.AUTO_CONFIRM = defaults.autoConfirm ?? DEFAULTS$1.AUTO_CONFIRM;
+  DEFAULTS$1.AUTO_CONFIRM_ON_DATE = defaults.autoConfirmOnDate ?? DEFAULTS$1.AUTO_CONFIRM_ON_DATE;
+  DEFAULTS$1.USE_CALENDAR_ICON = defaults.useCalendarIcon ?? DEFAULTS$1.USE_CALENDAR_ICON;
+};
+const getDefaultCalendarYMFormat = () => DEFAULTS$1.YM_FORMAT;
+const getDefaultCalendarDateFormat = () => DEFAULTS$1.DATE_FORMAT;
+const getDefaultCalendarTimeFormat = () => DEFAULTS$1.TIME_FORMAT;
+const getDefaultCalendarDatetimeFormat = () => DEFAULTS$1.DATETIME_FORMAT;
+const isCalendarAutoConfirm = () => DEFAULTS$1.AUTO_CONFIRM;
+const isCalendarAutoConfirmOnDate = () => DEFAULTS$1.AUTO_CONFIRM_ON_DATE;
+const isStickIconUseCalendar = () => DEFAULTS$1.USE_CALENDAR_ICON;
+const FIX_TIME_AT_START_OF_DAY = { hour: 0, minute: 0, second: 0, millisecond: 0 };
+const FIX_TIME_AT_END_OF_DAY = { hour: 23, minute: 59, second: 59, millisecond: 59 };
+const toStartOfDay = (datetime) => {
+  return datetime.hour(0).minute(0).second(0).millisecond(0);
+};
+const toEndOfDay = (datetime) => {
+  return datetime.hour(23).minute(59).second(59).millisecond(999);
+};
+const checkTimeParts = (timeFormat) => {
+  const hasMinute = (timeFormat ?? "").includes("m");
+  const hasSecond = hasMinute && (timeFormat ?? "").includes("s");
+  return { hasMinute, hasSecond };
+};
+const checkDateParts = (dateFormat) => {
+  return { hasDate: (dateFormat ?? "").toLowerCase().includes("d") };
+};
+var utils$3 = /* @__PURE__ */ Object.freeze({
+  __proto__: null,
+  FIX_TIME_AT_END_OF_DAY,
+  FIX_TIME_AT_START_OF_DAY,
+  checkDateParts,
+  checkTimeParts,
+  getDefaultCalendarDateFormat,
+  getDefaultCalendarDatetimeFormat,
+  getDefaultCalendarTimeFormat,
+  getDefaultCalendarYMFormat,
+  isCalendarAutoConfirm,
+  isCalendarAutoConfirmOnDate,
+  isStickIconUseCalendar,
+  setCalendarDefaults,
+  toEndOfDay,
+  toStartOfDay
+});
+const toCssSize = (size) => {
+  const ret = VUtils.isNumber(size);
+  if (ret.test) {
+    return `${size}px`;
+  } else {
+    return `${size ?? ""}`;
+  }
+};
+const omitGridCellStyle = (style) => {
+  const { gridColumn, gridRow, gridArea, ...rest } = style || {};
+  return rest;
+};
+const computeGridCellStyle = (style) => {
+  if (style == null) {
+    return void 0;
+  }
+  const gridCellStyles = [];
+  if (VUtils.isNotBlank(style.gridColumn)) {
+    gridCellStyles.push(`grid-column: ${style.gridColumn};`);
+  }
+  if (VUtils.isNotBlank(style.gridRow)) {
+    gridCellStyles.push(`grid-row: ${style.gridRow};`);
+  }
+  if (VUtils.isNotBlank(style.gridArea)) {
+    gridCellStyles.push(`grid-area: ${style.gridArea};`);
+  }
+  return gridCellStyles.join("");
+};
+const locale = () => $d9n2.intl.language ?? (navigator == null ? void 0 : navigator.language) ?? "en-US";
+const nf = (fractionDigits, grouping) => {
+  return new Intl.NumberFormat(void 0, {
+    useGrouping: grouping == null ? true : grouping,
+    minimumFractionDigits: fractionDigits || 0,
+    maximumFractionDigits: fractionDigits || 0
+  });
+};
+const wrapNf = (format) => {
+  return (value) => value == null ? "" : format(value);
+};
+const nf0 = wrapNf(nf(0).format);
+const nf1 = wrapNf(nf(1).format);
+const nf2 = wrapNf(nf(2).format);
+const nf3 = wrapNf(nf(3).format);
+const nfWithLocale = (locale2) => {
+  return (fractionDigits, grouping) => {
+    return new Intl.NumberFormat(VUtils.isBlank(locale2) ? void 0 : locale2.replace(/_/g, "-"), {
+      useGrouping: grouping == null ? true : grouping,
+      minimumFractionDigits: fractionDigits || 0,
+      maximumFractionDigits: fractionDigits || 0
+    });
+  };
+};
+const nfXWithLocale = (locale2, fractionDigits) => {
+  return wrapNf(nfWithLocale(locale2)(fractionDigits).format);
+};
+const detectNumberFormat = (locale2) => {
+  const formatted = new Intl.NumberFormat(locale2 ?? void 0, { useGrouping: true }).format(12345678909876e-4);
+  const matched = formatted.match(/\D/g);
+  return [matched[0], matched[matched.length - 1]];
+};
+const df = (value, options) => {
+  if (VUtils.isBlank(value)) {
+    return value;
+  }
+  const fromFormat = (options == null ? void 0 : options.from) || getDefaultCalendarDatetimeFormat();
+  const toFormat = (options == null ? void 0 : options.to) || getDefaultCalendarDateFormat();
+  const parsed = dayjs(value, fromFormat);
+  if (parsed.isValid()) {
+    return parsed.format(toFormat);
+  } else {
+    return value;
+  }
+};
+const useDualRefs = (ref, forwardedRef) => {
+  reactExports.useEffect(() => {
+    if (typeof forwardedRef === "function") {
+      forwardedRef(ref.current);
+    } else if (typeof forwardedRef === "object" && forwardedRef !== null) {
+      forwardedRef.current = ref.current;
+    }
+  }, [ref, forwardedRef]);
+};
+const N2Logger = createLogger();
+var utils$2 = /* @__PURE__ */ Object.freeze({
+  __proto__: null,
+  N2Logger,
+  computeGridCellStyle,
+  detectNumberFormat,
+  df,
+  locale,
+  nf,
+  nf0,
+  nf1,
+  nf2,
+  nf3,
+  nfWithLocale,
+  nfXWithLocale,
+  omitGridCellStyle,
+  toCssSize,
+  useDualRefs,
+  wrapNf
+});
 var ButtonFill;
 (function(ButtonFill2) {
   ButtonFill2["LINK"] = "link";
@@ -510,7 +686,7 @@ var ButtonInk;
   ButtonInk2["WARN"] = "warn";
   ButtonInk2["INFO"] = "info";
 })(ButtonInk || (ButtonInk = {}));
-const AButton = qe.button.attrs(({ id, hasOneLeadOrTail, "data-w": dataW }) => {
+const AButton = qe.button.attrs(({ id, hasOneLeadOrTail, [DOM_KEY_WIDGET]: dataW }) => {
   return {
     [DOM_KEY_WIDGET]: dataW ?? "d9-button",
     [DOM_ID_WIDGET]: id,
@@ -903,6 +1079,9 @@ const Button = reactExports.forwardRef((props, ref) => {
   const { head, text, tail, ink = ButtonInk.PRIMARY, fill = ButtonFill.FILL, click, leads, tails, $wrapped, ...rest } = props;
   const { $root, $model, $p2r, $avs: { $disabled, $visible }, $vfs } = $wrapped;
   const globalHandlers = useGlobalHandlers();
+  const buttonRef = reactExports.useRef(null);
+  useDualRefs(buttonRef, ref);
+  useTip({ ref: buttonRef });
   const onClicked = async (event) => {
     event.preventDefault();
     event.stopPropagation();
@@ -927,7 +1106,7 @@ const Button = reactExports.forwardRef((props, ref) => {
   const hasOneLeadOrTail = hasNoText && hasNoHead && hasNoTail && [...transformedLeads, ...transformedTails].length === 1;
   return React.createElement(
     AButton,
-    { ...rest, "data-ink": ink, "data-fill": fill, "data-disabled": $disabled ?? false, "data-visible": $visible, hasOneLeadOrTail, onClick: onClicked, id: PPUtils.asId(PPUtils.absolute($p2r, props.$pp), props.id), ref },
+    { ...rest, "data-ink": ink, "data-fill": fill, "data-disabled": $disabled ?? false, "data-visible": $visible, hasOneLeadOrTail, onClick: onClicked, id: PPUtils.asId(PPUtils.absolute($p2r, props.$pp), props.id), ref: buttonRef },
     transformedLeads.map((lead) => {
       return React.createElement(LeadDecorator$2, { key: VUtils.generateUniqueId() }, lead);
     }),
@@ -1019,8 +1198,8 @@ const AlertBody = qe.div.attrs({ [DOM_KEY_WIDGET]: "alert-body", "data-v-scroll"
     color: ${CssVars.CAPTION_FONT_COLOR};
 `;
 const AlertFooter = qe.div.attrs({ [DOM_KEY_WIDGET]: "alert-footer" })`
-	display         : flex;
-	justify-content : flex-end;
+    display: flex;
+    justify-content: flex-end;
 `;
 const AlertLabel = qe.span.attrs({ [DOM_KEY_WIDGET]: "alert-label" })`
     font-variant: ${CssVars.FONT_VARIANT};
@@ -1220,163 +1399,6 @@ const Dialog = () => {
     React.createElement(DialogWrapper, { style: dialog.wrapperStyle }, dialog.content)
   );
 };
-const CALENDAR_YM_FORMAT = "MMM YYYY";
-const CALENDAR_DATE_FORMAT = "YYYY/MM/DD";
-const CALENDAR_TIME_FORMAT = "HH:mm:ss";
-const CALENDAR_DATETIME_FORMAT = `${CALENDAR_DATE_FORMAT} ${CALENDAR_TIME_FORMAT}`;
-const DEFAULTS$1 = {
-  YM_FORMAT: CALENDAR_YM_FORMAT,
-  DATE_FORMAT: CALENDAR_DATE_FORMAT,
-  TIME_FORMAT: CALENDAR_TIME_FORMAT,
-  DATETIME_FORMAT: CALENDAR_DATETIME_FORMAT,
-  AUTO_CONFIRM: true,
-  AUTO_CONFIRM_ON_DATE: false,
-  USE_CALENDAR_ICON: false
-};
-const setCalendarDefaults = (defaults) => {
-  DEFAULTS$1.YM_FORMAT = defaults.ymFormat ?? DEFAULTS$1.YM_FORMAT;
-  DEFAULTS$1.DATE_FORMAT = defaults.dateFormat ?? DEFAULTS$1.DATE_FORMAT;
-  DEFAULTS$1.TIME_FORMAT = defaults.timeFormat ?? DEFAULTS$1.TIME_FORMAT;
-  DEFAULTS$1.DATETIME_FORMAT = defaults.datetimeFormat ?? DEFAULTS$1.DATETIME_FORMAT;
-  DEFAULTS$1.AUTO_CONFIRM = defaults.autoConfirm ?? DEFAULTS$1.AUTO_CONFIRM;
-  DEFAULTS$1.AUTO_CONFIRM_ON_DATE = defaults.autoConfirmOnDate ?? DEFAULTS$1.AUTO_CONFIRM_ON_DATE;
-  DEFAULTS$1.USE_CALENDAR_ICON = defaults.useCalendarIcon ?? DEFAULTS$1.USE_CALENDAR_ICON;
-};
-const getDefaultCalendarYMFormat = () => DEFAULTS$1.YM_FORMAT;
-const getDefaultCalendarDateFormat = () => DEFAULTS$1.DATE_FORMAT;
-const getDefaultCalendarTimeFormat = () => DEFAULTS$1.TIME_FORMAT;
-const getDefaultCalendarDatetimeFormat = () => DEFAULTS$1.DATETIME_FORMAT;
-const isCalendarAutoConfirm = () => DEFAULTS$1.AUTO_CONFIRM;
-const isCalendarAutoConfirmOnDate = () => DEFAULTS$1.AUTO_CONFIRM_ON_DATE;
-const isStickIconUseCalendar = () => DEFAULTS$1.USE_CALENDAR_ICON;
-const FIX_TIME_AT_START_OF_DAY = { hour: 0, minute: 0, second: 0, millisecond: 0 };
-const FIX_TIME_AT_END_OF_DAY = { hour: 23, minute: 59, second: 59, millisecond: 59 };
-const toStartOfDay = (datetime) => {
-  return datetime.hour(0).minute(0).second(0).millisecond(0);
-};
-const toEndOfDay = (datetime) => {
-  return datetime.hour(23).minute(59).second(59).millisecond(999);
-};
-const checkTimeParts = (timeFormat) => {
-  const hasMinute = (timeFormat ?? "").includes("m");
-  const hasSecond = hasMinute && (timeFormat ?? "").includes("s");
-  return { hasMinute, hasSecond };
-};
-const checkDateParts = (dateFormat) => {
-  return { hasDate: (dateFormat ?? "").toLowerCase().includes("d") };
-};
-var utils$3 = /* @__PURE__ */ Object.freeze({
-  __proto__: null,
-  FIX_TIME_AT_END_OF_DAY,
-  FIX_TIME_AT_START_OF_DAY,
-  checkDateParts,
-  checkTimeParts,
-  getDefaultCalendarDateFormat,
-  getDefaultCalendarDatetimeFormat,
-  getDefaultCalendarTimeFormat,
-  getDefaultCalendarYMFormat,
-  isCalendarAutoConfirm,
-  isCalendarAutoConfirmOnDate,
-  isStickIconUseCalendar,
-  setCalendarDefaults,
-  toEndOfDay,
-  toStartOfDay
-});
-const toCssSize = (size) => typeof size === "number" ? `${size}px` : `${size ?? ""}`;
-const omitGridCellStyle = (style) => {
-  const { gridColumn, gridRow, gridArea, ...rest } = style || {};
-  return rest;
-};
-const computeGridCellStyle = (style) => {
-  if (style == null) {
-    return void 0;
-  }
-  const gridCellStyles = [];
-  if (VUtils.isNotBlank(style.gridColumn)) {
-    gridCellStyles.push(`grid-column: ${style.gridColumn};`);
-  }
-  if (VUtils.isNotBlank(style.gridRow)) {
-    gridCellStyles.push(`grid-row: ${style.gridRow};`);
-  }
-  if (VUtils.isNotBlank(style.gridArea)) {
-    gridCellStyles.push(`grid-area: ${style.gridArea};`);
-  }
-  return gridCellStyles.join("");
-};
-const locale = () => $d9n2.intl.language ?? (navigator == null ? void 0 : navigator.language) ?? "en-US";
-const nf = (fractionDigits, grouping) => {
-  return new Intl.NumberFormat(void 0, {
-    useGrouping: grouping == null ? true : grouping,
-    minimumFractionDigits: fractionDigits || 0,
-    maximumFractionDigits: fractionDigits || 0
-  });
-};
-const wrapNf = (format) => {
-  return (value) => value == null ? "" : format(value);
-};
-const nf0 = wrapNf(nf(0).format);
-const nf1 = wrapNf(nf(1).format);
-const nf2 = wrapNf(nf(2).format);
-const nf3 = wrapNf(nf(3).format);
-const nfWithLocale = (locale2) => {
-  return (fractionDigits, grouping) => {
-    return new Intl.NumberFormat(VUtils.isBlank(locale2) ? void 0 : locale2.replace(/_/g, "-"), {
-      useGrouping: grouping == null ? true : grouping,
-      minimumFractionDigits: fractionDigits || 0,
-      maximumFractionDigits: fractionDigits || 0
-    });
-  };
-};
-const nfXWithLocale = (locale2, fractionDigits) => {
-  return wrapNf(nfWithLocale(locale2)(fractionDigits).format);
-};
-const detectNumberFormat = (locale2) => {
-  const formatted = new Intl.NumberFormat(locale2 ?? void 0, { useGrouping: true }).format(12345678909876e-4);
-  const matched = formatted.match(/\D/g);
-  return [matched[0], matched[matched.length - 1]];
-};
-const df = (value, options) => {
-  if (VUtils.isBlank(value)) {
-    return value;
-  }
-  const fromFormat = (options == null ? void 0 : options.from) || getDefaultCalendarDatetimeFormat();
-  const toFormat = (options == null ? void 0 : options.to) || getDefaultCalendarDateFormat();
-  const parsed = dayjs(value, fromFormat);
-  if (parsed.isValid()) {
-    return parsed.format(toFormat);
-  } else {
-    return value;
-  }
-};
-const useDualRefs = (ref, forwardedRef) => {
-  reactExports.useEffect(() => {
-    if (typeof forwardedRef === "function") {
-      forwardedRef(ref.current);
-    } else if (typeof forwardedRef === "object" && forwardedRef !== null) {
-      forwardedRef.current = ref.current;
-    }
-  }, [ref, forwardedRef]);
-};
-const N2Logger = createLogger();
-var utils$2 = /* @__PURE__ */ Object.freeze({
-  __proto__: null,
-  N2Logger,
-  computeGridCellStyle,
-  detectNumberFormat,
-  df,
-  locale,
-  nf,
-  nf0,
-  nf1,
-  nf2,
-  nf3,
-  nfWithLocale,
-  nfXWithLocale,
-  omitGridCellStyle,
-  toCssSize,
-  useDualRefs,
-  wrapNf
-});
 const SpinnerKeyFrames = We`
 	0% {
 		transform : rotate(0deg);
@@ -1468,6 +1490,245 @@ const RemoteRequest = (props) => {
     { visible: count.value > 0 },
     React.createElement(Spinner, null)
   );
+};
+const notInMe = (me, target) => {
+  const body = document.body;
+  if (target === window) {
+    return true;
+  }
+  let parent = target;
+  while (parent != null) {
+    if (parent === me) {
+      return false;
+    }
+    if (parent === body || parent == null) {
+      return true;
+    }
+    parent = parent == null ? void 0 : parent.parentElement;
+  }
+  return true;
+};
+const useCollapseFixedThing = (options) => {
+  const { containerRef, visible = true, hide, events = ["scroll", "focus", "click"] } = options;
+  reactExports.useEffect(() => {
+    if (!visible) {
+      return;
+    }
+    const collapse = (event) => {
+      if (containerRef == null || containerRef.current == null) {
+        return;
+      }
+      if (notInMe(containerRef.current, event.target)) {
+        hide();
+      }
+    };
+    events.forEach((event) => {
+      window.addEventListener(event, collapse, true);
+    });
+    return () => {
+      events.forEach((event) => {
+        window.removeEventListener(event, collapse, true);
+      });
+    };
+  }, [containerRef, events, visible, hide]);
+};
+const TipContainer = qe.div.attrs(({ visible, minWidth, maxWidth, maxHeight, tag, top, left }) => {
+  return {
+    [DOM_KEY_WIDGET]: "d9-tip",
+    ...VUtils.isNotBlank(tag) ? { [tag]: "" } : {},
+    style: {
+      "--min-width": toCssSize(minWidth),
+      "--max-width": toCssSize(maxWidth),
+      "--max-height": toCssSize(maxHeight),
+      "--top": toCssSize(top),
+      "--left": toCssSize(left),
+      opacity: visible ? 1 : 0,
+      pointerEvents: visible ? "auto" : "none"
+    }
+  };
+})`
+    display: grid;
+    position: fixed;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr;
+    min-width: var(--min-width);
+    max-width: var(--max-width);
+    max-height: var(--max-height);
+    top: var(--top);
+    left: var(--left);
+    background-color: ${CssVars.BACKGROUND_COLOR};
+    border: ${CssVars.TIP_BORDER};
+    border-radius: ${CssVars.TIP_BORDER_RADIUS};
+    box-shadow: ${CssVars.TIP_SHADOW};
+    z-index: ${CssVars.TIP_Z_INDEX};
+    overflow: hidden;
+`;
+const TipHeader = qe.div.attrs({ [DOM_KEY_WIDGET]: "d9-tip-header" })`
+    display: flex;
+    position: relative;
+    align-items: center;
+    height: ${CssVars.TIP_HEADER_HEIGHT};
+    min-height: ${CssVars.TIP_HEADER_HEIGHT};
+    border-bottom: ${CssVars.TIP_HEADER_BORDER};
+`;
+const TipTitle = qe.div.attrs({ [DOM_KEY_WIDGET]: "d9-tip-header-title" })`
+    display: flex;
+    position: relative;
+    align-items: center;
+    flex-grow: 1;
+    font-family: ${CssVars.CAPTION_FONT_FAMILY};
+    font-size: ${CssVars.TIP_HEADER_FONT_SIZE};
+    font-weight: ${CssVars.TIP_HEADER_FONT_WEIGHT};
+    color: ${CssVars.CAPTION_FONT_COLOR};
+    padding: 0 ${CssVars.TIP_HEADER_PADDING};
+`;
+const TipBody = qe.div.attrs({ [DOM_KEY_WIDGET]: "d9-tip-body" })`
+    display: flex;
+    position: relative;
+    padding: 0 ${CssVars.TIP_BODY_PADDING};
+`;
+const TipLabel = qe.span.attrs({ [DOM_KEY_WIDGET]: "d9-tip-label" })`
+    display: flex;
+    position: relative;
+    align-items: center;
+    min-height: ${CssVars.INPUT_HEIGHT};
+    line-height: ${CssVars.LINE_HEIGHT};
+    padding: calc((${CssVars.INPUT_HEIGHT} - ${CssVars.LINE_HEIGHT}) / 2) 0;
+`;
+const Tip = () => {
+  const { on, off } = useGlobalEventBus();
+  const ref = reactExports.useRef(null);
+  const [state, setState] = reactExports.useState({ visible: false });
+  reactExports.useEffect(() => {
+    const onShowTip = (options) => {
+      const { ref: ref2, prefix = "data" } = options;
+      const body = options.body ?? ref2.current.getAttribute(`${prefix}-tip-body`);
+      if (VUtils.isBlank(body)) {
+        return;
+      }
+      const title = options.title ?? ref2.current.getAttribute(`${prefix}-tip-title`);
+      const minWidth = options.minWidth ?? ref2.current.getAttribute(`${prefix}-tip-min-width`);
+      const maxWidth = options.maxWidth ?? ref2.current.getAttribute(`${prefix}-tip-max-width`);
+      const maxHeight = options.maxHeight ?? ref2.current.getAttribute(`${prefix}-tip-max-height`);
+      const delay = (() => {
+        const value = options.delay ?? ref2.current.getAttribute(`${prefix}-tip-delay`);
+        const ret = VUtils.isNumber(value);
+        return ret.test ? ret.value : void 0;
+      })();
+      const tag = options.tag ?? ref2.current.getAttribute(`${prefix}-tip-tag`);
+      if (state.hideTimeout) {
+        window.clearTimeout(state.hideTimeout);
+      }
+      setState({ ref: ref2, title, body, visible: false, minWidth, maxWidth, maxHeight, delay, tag });
+    };
+    const onHideTip = (ref2) => {
+      var _a;
+      if (ref2.current !== ((_a = state.ref) == null ? void 0 : _a.current)) {
+        return;
+      } else {
+        if (state.hideTimeout) {
+          window.clearTimeout(state.hideTimeout);
+        }
+        setState({ visible: false });
+      }
+    };
+    on(GlobalEventTypes.SHOW_TIP, onShowTip);
+    on(GlobalEventTypes.HIDE_TIP, onHideTip);
+    return () => {
+      off(GlobalEventTypes.SHOW_TIP, onShowTip);
+      off(GlobalEventTypes.HIDE_TIP, onHideTip);
+    };
+  }, [on, off, state.ref, state.hideTimeout]);
+  reactExports.useEffect(() => {
+    if (state.ref != null && !state.visible) {
+      const { top, left, width, height } = state.ref.current.getBoundingClientRect();
+      const { width: myWidth, height: myHeight } = ref.current.getBoundingClientRect();
+      const { top: myTop } = (() => {
+        if (top - myHeight - 6 >= 0) {
+          return { top: top - myHeight - 4, onTop: true };
+        } else if (top + height + myHeight + 6 < window.innerHeight) {
+          return { top: top + height + 4, onTop: false };
+        } else {
+          return { top: top - myHeight - 4, onTop: true };
+        }
+      })();
+      const myLeft = (() => {
+        if (width > myWidth) {
+          return left + (width - myWidth) / 2;
+        } else {
+          return left - (myWidth - width) / 2;
+        }
+      })();
+      const hideTimeout = (() => {
+        if (state.delay != null) {
+          return setTimeout(() => setState({ visible: false }), state.delay * 1e3);
+        } else {
+          return void 0;
+        }
+      })();
+      setState((state2) => ({ ...state2, visible: true, top: myTop, left: myLeft, hideTimeout }));
+    }
+  }, [state.ref, state.visible, state.delay]);
+  useCollapseFixedThing({
+    containerRef: state.ref,
+    visible: state.visible,
+    hide: () => {
+      if (state.hideTimeout) {
+        window.clearTimeout(state.hideTimeout);
+      }
+      setState({ visible: false });
+    }
+  });
+  if (state.ref == null) {
+    return null;
+  }
+  return React.createElement(
+    TipContainer,
+    { visible: state.visible, minWidth: state.minWidth, maxWidth: state.maxWidth, maxHeight: state.maxHeight, tag: state.tag, top: state.top, left: state.left, ref },
+    state.title != null ? React.createElement(
+      TipHeader,
+      null,
+      React.createElement(TipTitle, null, state.title)
+    ) : null,
+    React.createElement(TipBody, null, typeof state.body === "string" ? React.createElement(TipLabel, null, state.body) : state.body)
+  );
+};
+const useTip = (options) => {
+  const { ref } = options;
+  const { fire } = useGlobalEventBus();
+  reactExports.useEffect(() => {
+    if (ref.current == null || fire == null) {
+      return;
+    }
+    const onMouseEnter = () => {
+      fire(GlobalEventTypes.SHOW_TIP, options);
+    };
+    const onMouseLeave = () => {
+      fire(GlobalEventTypes.HIDE_TIP, ref);
+    };
+    const onFocusIn = () => {
+      fire(GlobalEventTypes.SHOW_TIP, options);
+    };
+    const onFocusOut = () => {
+      fire(GlobalEventTypes.HIDE_TIP, ref);
+    };
+    const onClick = () => {
+      fire(GlobalEventTypes.SHOW_TIP, options);
+    };
+    const { current } = ref;
+    current.addEventListener("mouseenter", onMouseEnter);
+    current.addEventListener("mouseleave", onMouseLeave);
+    current.addEventListener("focusin", onFocusIn);
+    current.addEventListener("focusout", onFocusOut);
+    current.addEventListener("click", onClick);
+    return () => {
+      current.removeEventListener("mouseenter", onMouseEnter);
+      current.removeEventListener("mouseleave", onMouseLeave);
+      current.removeEventListener("focusin", onFocusIn);
+      current.removeEventListener("focusout", onFocusOut);
+      current.removeEventListener("click", onClick);
+    };
+  }, [fire, ref, options]);
 };
 const useRemoteRequest = () => {
   const { fire } = useGlobalEventBus();
@@ -1616,17 +1877,49 @@ const useGlobalHandlers = () => {
   return handlers;
 };
 const GlobalRoot = (props) => {
-  const { avoidDefaultAlert = false, avoidDefaultDialog = false, avoidDefaultYesNoDialog = false, avoidDefaultRemoteRequest = false, defaultRemoteRequestProps: { clearAccount = VUtils.noop, on200, on401 = VUtils.noop, on403 = VUtils.noop } = {}, children } = props;
+  const { avoidDefaultAlert = false, avoidDefaultDialog = false, avoidDefaultYesNoDialog = false, avoidDefaultRemoteRequest = false, avoidDefaultTips = false, defaultRemoteRequestProps: { clearAccount = VUtils.noop, on200, on401 = VUtils.noop, on403 = VUtils.noop } = {}, children } = props;
   return React.createElement(
     GlobalEventBusProvider,
     null,
     avoidDefaultAlert ? null : React.createElement(Alert, null),
     avoidDefaultDialog ? null : React.createElement(Dialog, null),
     avoidDefaultYesNoDialog ? null : React.createElement(YesNoDialog, null),
+    avoidDefaultTips ? null : React.createElement(Tip, null),
     avoidDefaultRemoteRequest ? null : React.createElement(RemoteRequest, { clearAccount, on200, on401, on403 }),
     children
   );
 };
+var index$1 = /* @__PURE__ */ Object.freeze({
+  __proto__: null,
+  Alert,
+  AlertLabel,
+  Dialog,
+  DialogBody,
+  DialogFooter,
+  DialogHeader,
+  DialogLabel,
+  DialogTitle,
+  GlobalEventBusProvider,
+  get GlobalEventPrefix() {
+    return GlobalEventPrefix;
+  },
+  get GlobalEventTypes() {
+    return GlobalEventTypes;
+  },
+  GlobalRoot,
+  RemoteRequest,
+  Tip,
+  YesNoDialog,
+  useAlert,
+  useCustomGlobalEvent,
+  useDialog,
+  useGlobalEventBus,
+  useGlobalHandlers,
+  useRemoteRequest,
+  useSimpleCustomGlobalEvent,
+  useTip,
+  useYesNoDialog
+});
 const toIntlLabel = (text, ...replacements) => {
   if (typeof text === "string") {
     return React.createElement(IntlLabel, { keys: [`${text}`], value: text, replacements });
@@ -1694,44 +1987,6 @@ const transformDecorator = (decorator) => {
 };
 const transformDecorators = (decorators) => {
   return (decorators ?? []).filter((decorator) => decorator != null).map(transformDecorator);
-};
-const notInMe = (me, target) => {
-  const body = document.body;
-  if (target === window) {
-    return true;
-  }
-  let parent = target;
-  while (parent != null) {
-    if (parent === me) {
-      return false;
-    }
-    if (parent === body || parent == null) {
-      return true;
-    }
-    parent = parent == null ? void 0 : parent.parentElement;
-  }
-  return true;
-};
-const useCollapseFixedThing = (options) => {
-  const { containerRef, visible = true, hide, events = ["scroll", "focus", "click"] } = options;
-  reactExports.useEffect(() => {
-    if (!visible) {
-      return;
-    }
-    const collapse = (event) => {
-      if (notInMe(containerRef.current, event.target)) {
-        hide();
-      }
-    };
-    events.forEach((event) => {
-      window.addEventListener(event, collapse, true);
-    });
-    return () => {
-      events.forEach((event) => {
-        window.removeEventListener(event, collapse, true);
-      });
-    };
-  }, [containerRef, events, visible, hide]);
 };
 var OptionItemSort;
 (function(OptionItemSort2) {
@@ -2245,7 +2500,7 @@ const useFilterableDropdownOptions = (props) => {
     onFilterChanged
   };
 };
-const ACaption = qe.span.attrs(({ id, "data-w": dataW }) => {
+const ACaption = qe.span.attrs(({ id, [DOM_KEY_WIDGET]: dataW }) => {
   return {
     [DOM_KEY_WIDGET]: dataW ?? "d9-caption",
     [DOM_ID_WIDGET]: id
@@ -2418,6 +2673,9 @@ const Caption = reactExports.forwardRef((props, ref) => {
   const { $root, $model, $p2r, $avs: { $disabled, $visible }, $vfs } = $wrapped;
   const label = _text ?? _label;
   const globalHandlers = useGlobalHandlers();
+  const captionRef = reactExports.useRef(null);
+  useDualRefs(captionRef, ref);
+  useTip({ ref: captionRef });
   const onClicked = click != null ? async (event) => {
     event.preventDefault();
     event.stopPropagation();
@@ -2469,7 +2727,7 @@ const Caption = reactExports.forwardRef((props, ref) => {
   })();
   return React.createElement(
     ACaption,
-    { ...rest, "data-disabled": $disabled, "data-visible": $visible, id: PPUtils.asId(PPUtils.absolute($p2r, props.$pp), props.id), onClick: onClicked, "data-clickable": onClicked != null, ref },
+    { ...rest, "data-disabled": $disabled, "data-visible": $visible, id: PPUtils.asId(PPUtils.absolute($p2r, props.$pp), props.id), onClick: onClicked, "data-clickable": onClicked != null, ref: captionRef },
     transformDecorators(leads).map((lead) => {
       return React.createElement(LeadDecorator$1, { key: VUtils.generateUniqueId() }, lead);
     }),
@@ -2515,7 +2773,7 @@ var ButtonBarAlignment;
   ButtonBarAlignment2["CENTER"] = "center";
   ButtonBarAlignment2["RIGHT"] = "right";
 })(ButtonBarAlignment || (ButtonBarAlignment = {}));
-const AButtonBar = qe.div.attrs(({ id, "data-w": dataW }) => {
+const AButtonBar = qe.div.attrs(({ id, [DOM_KEY_WIDGET]: dataW }) => {
   return {
     [DOM_KEY_WIDGET]: dataW ?? "d9-button-bar",
     [DOM_ID_WIDGET]: id
@@ -2638,6 +2896,7 @@ const Dropdown = reactExports.forwardRef((props, ref) => {
   const globalHandlers = useGlobalHandlers();
   const { askOptions, displayOptions, filterInputRef, filter, containerRef, popupState, popupHeight, popupRef, popupShown, setPopupShown, afterPopupStateChanged, onClicked, onFocused, onKeyUp, onFilterChanged } = useFilterableDropdownOptions(props);
   useDualRefs(containerRef, ref);
+  useTip({ ref: containerRef });
   const forceUpdate = useForceUpdate();
   const onOptionClicked = (option) => async (event) => {
     if ($disabled) {
@@ -2851,6 +3110,7 @@ const MultiDropdown = reactExports.forwardRef((props, ref) => {
   const { askOptions, displayOptions, filterInputRef, filter, setFilter, containerRef, popupState, popupHeight, popupRef, popupShown, setPopupShown, repaintPopup, onClicked, onFocused, onKeyUp, onFilterChanged } = useFilterableDropdownOptions(props);
   const forceUpdate = useForceUpdate();
   useDualRefs(containerRef, ref);
+  useTip({ ref: containerRef });
   const currentValuesToArray = () => {
     const values2 = MUtils.getValue($model, $pp);
     if (values2 == null) {
@@ -3064,18 +3324,18 @@ const computeCalendarDays = (firstDate) => {
   }
   return days;
 };
-const DatePickerContainer = qe.div.attrs({ "data-w": "d9-calendar-date-picker" })`
+const DatePickerContainer = qe.div.attrs({ [DOM_KEY_WIDGET]: "d9-calendar-date-picker" })`
     display: grid;
     grid-template-columns: 1fr auto;
     cursor: default;
 `;
-const DatePickerShortcut = qe.div.attrs({ "data-w": "d9-calendar-date-picker-shortcuts" })`
+const DatePickerShortcut = qe.div.attrs({ [DOM_KEY_WIDGET]: "d9-calendar-date-picker-shortcuts" })`
     display: flex;
     flex-direction: column;
     grid-row: span 2;
     border-right: ${CssVars.BORDER};
 `;
-const DatePickerShortcutButton = qe.span.attrs({ "data-w": "d9-calendar-date-picker-shortcut-button" })`
+const DatePickerShortcutButton = qe.span.attrs({ [DOM_KEY_WIDGET]: "d9-calendar-date-picker-shortcut-button" })`
     display: flex;
     align-items: center;
     height: ${CssVars.CALENDAR_DATE_CELL_SIZE};
@@ -3090,22 +3350,22 @@ const DatePickerShortcutButton = qe.span.attrs({ "data-w": "d9-calendar-date-pic
         background-color: ${CssVars.HOVER_COLOR};
     }
 `;
-const DatePickerHeader = qe.div.attrs({ "data-w": "d9-calendar-date-picker-header" })`
+const DatePickerHeader = qe.div.attrs({ [DOM_KEY_WIDGET]: "d9-calendar-date-picker-header" })`
     display: flex;
     align-items: center;
     justify-content: space-between;
     height: ${CssVars.INPUT_HEIGHT};
     padding: 0 ${CssVars.CALENDAR_GUTTER_SIZE};
 `;
-const DatePickerHeaderYearMonth = qe.span.attrs({ "data-w": "d9-calendar-date-picker-header-ym" })`
+const DatePickerHeaderYearMonth = qe.span.attrs({ [DOM_KEY_WIDGET]: "d9-calendar-date-picker-header-ym" })`
     font-weight: ${CssVars.FONT_BOLD};
     font-variant: ${CssVars.FONT_VARIANT};
 `;
-const DatePickerHeaderOperators = qe.div.attrs({ "data-w": "d9-calendar-date-picker-header-operators" })`
+const DatePickerHeaderOperators = qe.div.attrs({ [DOM_KEY_WIDGET]: "d9-calendar-date-picker-header-operators" })`
     display: flex;
     align-items: center;
 `;
-const DatePickerHeaderButton = qe.span.attrs({ "data-w": "d9-calendar-date-picker-header-button" })`
+const DatePickerHeaderButton = qe.span.attrs({ [DOM_KEY_WIDGET]: "d9-calendar-date-picker-header-button" })`
     display: flex;
     align-items: center;
     justify-content: center;
@@ -3129,12 +3389,12 @@ const DatePickerHeaderMonthChangeButton = qe(DatePickerHeaderButton)`
     height: 20px;
     width: 24px;
 `;
-const DatePickerBody = qe.div.attrs({ "data-w": "d9-calendar-date-picker-body" })`
+const DatePickerBody = qe.div.attrs({ [DOM_KEY_WIDGET]: "d9-calendar-date-picker-body" })`
     display: grid;
     grid-template-columns: repeat(7, minmax(${CssVars.CALENDAR_DATE_CELL_SIZE}, 1fr));
     grid-template-rows: repeat(7, ${CssVars.CALENDAR_DATE_CELL_SIZE});
 `;
-const DatePickerBodyHeaderCell = qe.span.attrs({ "data-w": "d9-calendar-date-picker-body-header-cell" })`
+const DatePickerBodyHeaderCell = qe.span.attrs({ [DOM_KEY_WIDGET]: "d9-calendar-date-picker-body-header-cell" })`
     display: flex;
     align-items: center;
     justify-content: center;
@@ -3150,7 +3410,7 @@ const DatePickerBodyHeaderCell = qe.span.attrs({ "data-w": "d9-calendar-date-pic
         color: ${CssVars.DANGER_COLOR};
     }
 `;
-const DatePickerBodyDateCell = qe.span.attrs({ "data-w": "d9-calendar-date-picker-body-date-cell" })`
+const DatePickerBodyDateCell = qe.span.attrs({ [DOM_KEY_WIDGET]: "d9-calendar-date-picker-body-date-cell" })`
     display: flex;
     align-items: center;
     justify-content: center;
@@ -3443,7 +3703,7 @@ const DatePicker = (props) => {
     )
   );
 };
-const PopupHeaderContainer = qe.div.attrs({ "data-w": "d9-calendar-popup-header" })`
+const PopupHeaderContainer = qe.div.attrs({ [DOM_KEY_WIDGET]: "d9-calendar-popup-header" })`
     display: flex;
     align-items: center;
     border-bottom: ${CssVars.BORDER};
@@ -3451,41 +3711,43 @@ const PopupHeaderContainer = qe.div.attrs({ "data-w": "d9-calendar-popup-header"
     padding: 0 ${CssVars.CALENDAR_GUTTER_SIZE};
     cursor: default;
 `;
-const PopupHeaderDateLabel = qe.span.attrs({ "data-w": "d9-calendar-popup-date-label" })`
-	font-size    : 0.8em;
-	font-weight  : ${CssVars.FONT_BOLD};
-	font-variant : ${CssVars.FONT_VARIANT};
-	margin-right : 0.5em;
+const PopupHeaderDateLabel = qe.span.attrs({ [DOM_KEY_WIDGET]: "d9-calendar-popup-date-label" })`
+    font-size: 0.8em;
+    font-weight: ${CssVars.FONT_BOLD};
+    font-variant: ${CssVars.FONT_VARIANT};
+    margin-right: 0.5em;
 `;
-const PopupHeaderTimeLabel = qe.span.attrs({ "data-w": "d9-calendar-popup-header-time-label" })`
-	font-size    : 0.8em;
-	font-weight  : ${CssVars.FONT_BOLD};
-	font-variant : ${CssVars.FONT_VARIANT};
+const PopupHeaderTimeLabel = qe.span.attrs({ [DOM_KEY_WIDGET]: "d9-calendar-popup-header-time-label" })`
+    font-size: 0.8em;
+    font-weight: ${CssVars.FONT_BOLD};
+    font-variant: ${CssVars.FONT_VARIANT};
 `;
-const PopupHeaderPlaceholder = qe.span.attrs({ "data-w": "d9-calendar-popup-header-placeholder" })`
-	flex-grow : 1;
+const PopupHeaderPlaceholder = qe.span.attrs({ [DOM_KEY_WIDGET]: "d9-calendar-popup-header-placeholder" })`
+    flex-grow: 1;
 `;
-const PopupHeaderTimeButton = qe.div.attrs({ "data-w": "d9-calendar-popup-header-time-button" })`
-	display         : flex;
-	position        : relative;
-	align-items     : center;
-	justify-content : center;
-	color           : ${CssVars.FONT_COLOR};
-	height          : calc(${CssVars.CALENDAR_POPUP_HEADER_HEIGHT} - 4px);
-	width           : calc(${CssVars.CALENDAR_POPUP_HEADER_HEIGHT} - 4px);
-	max-height      : ${CssVars.INPUT_HEIGHT};
-	font-size       : 0.8em;
-	font-weight     : ${CssVars.FONT_BOLD};
-	font-variant : ${CssVars.FONT_VARIANT};
-	border-radius   : ${CssVars.BORDER_RADIUS};
-	cursor          : pointer;
-	&:hover {
-		background-color : ${CssVars.HOVER_COLOR};;
-		color            : ${CssVars.PRIMARY_COLOR};
-		> svg {
-			fill : ${CssVars.PRIMARY_COLOR};
-		}
-	}
+const PopupHeaderTimeButton = qe.div.attrs({ [DOM_KEY_WIDGET]: "d9-calendar-popup-header-time-button" })`
+    display: flex;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+    color: ${CssVars.FONT_COLOR};
+    height: calc(${CssVars.CALENDAR_POPUP_HEADER_HEIGHT} - 4px);
+    width: calc(${CssVars.CALENDAR_POPUP_HEADER_HEIGHT} - 4px);
+    max-height: ${CssVars.INPUT_HEIGHT};
+    font-size: 0.8em;
+    font-weight: ${CssVars.FONT_BOLD};
+    font-variant: ${CssVars.FONT_VARIANT};
+    border-radius: ${CssVars.BORDER_RADIUS};
+    cursor: pointer;
+
+    &:hover {
+        background-color: ${CssVars.HOVER_COLOR};;
+        color: ${CssVars.PRIMARY_COLOR};
+
+        > svg {
+            fill: ${CssVars.PRIMARY_COLOR};
+        }
+    }
 `;
 const DateIcon = qe(Date$1)`
     height: ${CssVars.FONT_SIZE};
@@ -3578,7 +3840,7 @@ const CalendarPopupHeader = (props) => {
 };
 const TimePickerContainer = qe.div.attrs(({ columns }) => {
   return {
-    "data-w": "d9-calendar-time-picker",
+    [DOM_KEY_WIDGET]: "d9-calendar-time-picker",
     style: {
       gridTemplateColumns: `repeat(${columns}, 1fr)`
     }
@@ -3592,13 +3854,16 @@ const TimePickerContainer = qe.div.attrs(({ columns }) => {
     padding: 0 ${CssVars.CALENDAR_GUTTER_SIZE} ${CssVars.CALENDAR_GUTTER_SIZE};
     cursor: default;
 `;
-const TimePickerLabel = qe.div.attrs({ "data-w": "d9-calendar-time-picker-label" })`
+const TimePickerLabel = qe.div.attrs({ [DOM_KEY_WIDGET]: "d9-calendar-time-picker-label" })`
     display: flex;
     align-items: center;
     font-variant: ${CssVars.FONT_VARIANT};
     font-weight: ${CssVars.FONT_BOLD}
 `;
-const TimePickerSelector = qe.div.attrs({ "data-w": "d9-calendar-time-picker-selector", "data-v-scroll": "" })`
+const TimePickerSelector = qe.div.attrs({
+  [DOM_KEY_WIDGET]: "d9-calendar-time-picker-selector",
+  "data-v-scroll": ""
+})`
     display: flex;
     flex-direction: column;
     height: calc(${CssVars.CALENDAR_POPUP_HEIGHT_VALUE}px - ${CssVars.CALENDAR_POPUP_HEADER_HEIGHT} - ${CssVars.INPUT_HEIGHT} * 1.5 - ${CssVars.CALENDAR_GUTTER_SIZE});
@@ -3606,7 +3871,7 @@ const TimePickerSelector = qe.div.attrs({ "data-w": "d9-calendar-time-picker-sel
     border: ${CssVars.BORDER};
     overflow-y: scroll;
 `;
-const TimePickerSelectorOption = qe.span.attrs({ "data-w": "d9-calendar-time-picker-selector-option" })`
+const TimePickerSelectorOption = qe.span.attrs({ [DOM_KEY_WIDGET]: "d9-calendar-time-picker-selector-option" })`
     display: flex;
     position: relative;
     align-items: center;
@@ -3766,7 +4031,7 @@ const useValueChange = (onChange) => {
     };
   }, [on, off, onChange]);
 };
-const YearMonthPickerContainer = qe.div.attrs({ "data-w": "d9-calendar-ym-picker" })`
+const YearMonthPickerContainer = qe.div.attrs({ [DOM_KEY_WIDGET]: "d9-calendar-ym-picker" })`
     display: grid;
     position: relative;
     grid-template-columns: 33% 1fr;
@@ -3775,7 +4040,7 @@ const YearMonthPickerContainer = qe.div.attrs({ "data-w": "d9-calendar-ym-picker
     padding: 0 ${CssVars.CALENDAR_GUTTER_SIZE} ${CssVars.CALENDAR_GUTTER_SIZE};
     cursor: default;
 `;
-const YearMonthPickerLabel = qe.div.attrs({ "data-w": "d9-calendar-ym-picker-label" })`
+const YearMonthPickerLabel = qe.div.attrs({ [DOM_KEY_WIDGET]: "d9-calendar-ym-picker-label" })`
     display: flex;
     align-items: center;
     font-variant: ${CssVars.FONT_VARIANT};
@@ -3785,7 +4050,10 @@ const YearMonthPickerLabel = qe.div.attrs({ "data-w": "d9-calendar-ym-picker-lab
         margin-left: calc(${CssVars.CALENDAR_GUTTER_SIZE} * 2);
     }
 `;
-const YearSelector = qe.div.attrs({ "data-w": "d9-calendar-ym-picker-year- selector", "data-v-scroll": "" })`
+const YearSelector = qe.div.attrs({
+  [DOM_KEY_WIDGET]: "d9-calendar-ym-picker-year- selector",
+  "data-v-scroll": ""
+})`
     display: flex;
     flex-direction: column;
     border-radius: ${CssVars.BORDER_RADIUS};
@@ -3793,7 +4061,7 @@ const YearSelector = qe.div.attrs({ "data-w": "d9-calendar-ym-picker-year- selec
     height: calc(${CssVars.CALENDAR_POPUP_HEIGHT_VALUE}px - ${CssVars.CALENDAR_POPUP_HEADER_HEIGHT} - ${CssVars.INPUT_HEIGHT} * 1.5 - ${CssVars.CALENDAR_GUTTER_SIZE});
     overflow-y: scroll;
 `;
-const YearSelectorOption = qe.span.attrs({ "data-w": "d9-calendar-ym-picker-year-selector-option" })`
+const YearSelectorOption = qe.span.attrs({ [DOM_KEY_WIDGET]: "d9-calendar-ym-picker-year-selector-option" })`
     display: flex;
     position: relative;
     align-items: center;
@@ -3838,13 +4106,13 @@ const YearSelectorOption = qe.span.attrs({ "data-w": "d9-calendar-ym-picker-year
         background-color: ${CssVars.HOVER_COLOR};
     }
 `;
-const MonthSelector = qe.div.attrs({ "data-w": "d9-calendar-ym-picker-month-selector" })`
+const MonthSelector = qe.div.attrs({ [DOM_KEY_WIDGET]: "d9-calendar-ym-picker-month-selector" })`
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     grid-column-gap: ${CssVars.CALENDAR_GUTTER_SIZE};
     grid-row-gap: ${CssVars.CALENDAR_GUTTER_SIZE};
 `;
-const MonthSelectorOption = qe.span.attrs({ "data-w": "d9-calendar-ym-picker-month-selector-option" })`
+const MonthSelectorOption = qe.span.attrs({ [DOM_KEY_WIDGET]: "d9-calendar-ym-picker-month-selector-option" })`
     display: flex;
     position: relative;
     align-items: center;
@@ -4057,6 +4325,7 @@ const Picker = reactExports.forwardRef((props, ref) => {
     fixWidth: true
   });
   useDualRefs(containerRef, ref);
+  useTip({ ref: containerRef });
   const showPopup = () => {
     const { top, left, width, height } = getDropdownPosition(containerRef.current);
     const bottom = isPopupAtBottom(top, height, () => CssVars.CALENDAR_POPUP_HEIGHT_VALUE);
@@ -4375,6 +4644,7 @@ const Input = reactExports.forwardRef((props, ref) => {
     }
   });
   useDualRefs(inputRef, ref);
+  useTip({ ref: inputRef });
   const onChange = async (event) => {
     if (hasMask) {
       return;
@@ -4573,6 +4843,9 @@ const DecorateInput = reactExports.forwardRef((props, ref) => {
   const { placeholder, leads, tails, className, style, ...rest } = props;
   const { $wrapped: { $p2r } } = rest;
   const { tags: deviceTags, attrs: decorateAttrs } = askDecorateAttrs(props, rest);
+  const decorateRef = reactExports.useRef(null);
+  useDualRefs(decorateRef, ref);
+  useTip({ ref: decorateRef, prefix: "data-di" });
   const computePlaceholder = () => {
     if (VUtils.isBlank(placeholder)) {
       return void 0;
@@ -4584,7 +4857,7 @@ const DecorateInput = reactExports.forwardRef((props, ref) => {
   };
   return React.createElement(
     Decorate,
-    { ...deviceTags, ...decorateAttrs, placeholder: computePlaceholder(), leads, tails, className, style, id: PPUtils.asId(PPUtils.absolute($p2r, props.$pp), props.id), ref },
+    { ...deviceTags, ...decorateAttrs, placeholder: computePlaceholder(), leads, tails, className, style, id: PPUtils.asId(PPUtils.absolute($p2r, props.$pp), props.id), ref: decorateRef },
     React.createElement(Input, { ...rest })
   );
 });
@@ -4592,6 +4865,9 @@ const DecorateNumberInput = reactExports.forwardRef((props, ref) => {
   const { placeholder, leads, tails, className, style, ...rest } = props;
   const { $pp, $wrapped: { $p2r, $model, $onValueChange } } = rest;
   const { tags: deviceTags, attrs: decorateAttrs } = askDecorateAttrs(props, rest);
+  const decorateRef = reactExports.useRef(null);
+  useDualRefs(decorateRef, ref);
+  useTip({ ref: decorateRef, prefix: "data-di" });
   const [omitPlaceholder, setOmitPlaceholder] = reactExports.useState(() => {
     return VUtils.isNotEmpty(MUtils.getValue($model, $pp));
   });
@@ -4610,7 +4886,7 @@ const DecorateNumberInput = reactExports.forwardRef((props, ref) => {
   };
   return React.createElement(
     Decorate,
-    { ...deviceTags, ...decorateAttrs, placeholder: computePlaceholder(), leads, tails, className, style, id: PPUtils.asId(PPUtils.absolute($p2r, props.$pp), props.id), ref },
+    { ...deviceTags, ...decorateAttrs, placeholder: computePlaceholder(), leads, tails, className, style, id: PPUtils.asId(PPUtils.absolute($p2r, props.$pp), props.id), ref: decorateRef },
     React.createElement(NumberInput, { ...rest })
   );
 });
@@ -4618,9 +4894,12 @@ const DecoratePasswordInput = reactExports.forwardRef((props, ref) => {
   const { placeholder, leads, tails, className, style, ...rest } = props;
   const { $wrapped: { $p2r } } = rest;
   const { tags: deviceTags, attrs: decorateAttrs } = askDecorateAttrs(props, rest);
+  const decorateRef = reactExports.useRef(null);
+  useDualRefs(decorateRef, ref);
+  useTip({ ref: decorateRef, prefix: "data-di" });
   return React.createElement(
     Decorate,
-    { ...deviceTags, ...decorateAttrs, placeholder, leads, tails, className, style, id: PPUtils.asId(PPUtils.absolute($p2r, props.$pp), props.id), ref },
+    { ...deviceTags, ...decorateAttrs, placeholder, leads, tails, className, style, id: PPUtils.asId(PPUtils.absolute($p2r, props.$pp), props.id), ref: decorateRef },
     React.createElement(PasswordInput, { ...rest })
   );
 });
@@ -4719,6 +4998,9 @@ const ACheckbox = qe.div.attrs(({ id }) => {
 const Checkbox = reactExports.forwardRef((props, ref) => {
   const { values = [true, false], emptyWhenFalse = true, $pp, $wrapped: { $onValueChange, $model, $avs: { $disabled, $visible } }, ...rest } = props;
   const globalHandlers = useGlobalHandlers();
+  const checkRef = reactExports.useRef(null);
+  useDualRefs(checkRef, ref);
+  useTip({ ref: checkRef });
   const onValueChange = async () => {
     const oldValue = MUtils.getValue($model, $pp);
     const newValue = oldValue == values[0] ? values[1] : values[0];
@@ -4740,7 +5022,7 @@ const Checkbox = reactExports.forwardRef((props, ref) => {
   };
   const value = MUtils.getValue($model, $pp);
   const checked = (value ?? "") == (values[0] ?? "");
-  return React.createElement(ACheckbox, { "data-disabled": $disabled, "data-visible": $visible, tabIndex: 0, "data-checked": checked, "data-empty-when-false": emptyWhenFalse, onClick, onKeyUp, ...rest, ref }, checked ? React.createElement(Check, null) : emptyWhenFalse ? React.createElement(Check, null) : React.createElement(Times, null));
+  return React.createElement(ACheckbox, { "data-disabled": $disabled, "data-visible": $visible, tabIndex: 0, "data-checked": checked, "data-empty-when-false": emptyWhenFalse, onClick, onKeyUp, ...rest, ref: checkRef }, checked ? React.createElement(Check, null) : emptyWhenFalse ? React.createElement(Check, null) : React.createElement(Times, null));
 });
 registerWidget({ key: "Checkbox", JSX: Checkbox, container: false, array: false });
 const ARadio = qe.div.attrs(({ id }) => {
@@ -4836,6 +5118,9 @@ const ARadio = qe.div.attrs(({ id }) => {
 const Radio = reactExports.forwardRef((props, ref) => {
   const { values = [true, false], $pp, $wrapped: { $onValueChange, $model, $avs: { $disabled, $visible } }, ...rest } = props;
   const globalHandlers = useGlobalHandlers();
+  const radioRef = reactExports.useRef(null);
+  useDualRefs(radioRef, ref);
+  useTip({ ref: radioRef });
   const onValueShouldChange = async () => {
     const oldValue = MUtils.getValue($model, $pp);
     if (oldValue == values[0])
@@ -4861,7 +5146,7 @@ const Radio = reactExports.forwardRef((props, ref) => {
   };
   const value = MUtils.getValue($model, $pp);
   const checked = (value ?? "") == (values[0] ?? "");
-  return React.createElement(ARadio, { "data-disabled": $disabled, "data-visible": $visible, tabIndex: 0, "data-checked": checked, onClick, onKeyUp, ...rest, ref });
+  return React.createElement(ARadio, { "data-disabled": $disabled, "data-visible": $visible, tabIndex: 0, "data-checked": checked, onClick, onKeyUp, ...rest, ref: radioRef });
 });
 registerWidget({ key: "Radio", JSX: Radio, container: false, array: false });
 const APage = qe.div.attrs({ [DOM_KEY_WIDGET]: "d9-page" })`
@@ -5532,7 +5817,7 @@ const UnwrappedDropdown = reactExports.forwardRef((props, ref) => {
   const $root = { [$pp]: value };
   return React.createElement(Dropdown, { ...rest, "$wrapped": { $onValueChange, $avs, $root, $model: $root, $p2r: "." }, "$pp": $pp, id: rest.id ?? VUtils.generateUniqueId(), ref });
 });
-const APagination = qe.div.attrs(({ id, "data-w": dataW }) => {
+const APagination = qe.div.attrs(({ id, [DOM_KEY_WIDGET]: dataW }) => {
   return {
     [DOM_KEY_WIDGET]: dataW || "d9-pagination",
     [DOM_ID_WIDGET]: id
@@ -6172,7 +6457,7 @@ registerWidget({
   container: true,
   array: true
 });
-const ABox = qe.div.attrs(({ id, "data-w": dataW }) => {
+const ABox = qe.div.attrs(({ id, [DOM_KEY_WIDGET]: dataW }) => {
   return {
     [DOM_KEY_WIDGET]: dataW || "d9-box",
     [DOM_ID_WIDGET]: id
@@ -6190,10 +6475,13 @@ const ABox = qe.div.attrs(({ id, "data-w": dataW }) => {
 const Box = reactExports.forwardRef((props, ref) => {
   const { $wrapped, children, ...rest } = props;
   const { $p2r, $avs: { $disabled, $visible } } = $wrapped;
-  return React.createElement(ABox, { ...rest, "data-disabled": $disabled, "data-visible": $visible, id: PPUtils.asId(PPUtils.absolute($p2r, props.$pp), props.id), ref }, children);
+  const boxRef = reactExports.useRef(null);
+  useDualRefs(boxRef, ref);
+  useTip({ ref: boxRef });
+  return React.createElement(ABox, { ...rest, "data-disabled": $disabled, "data-visible": $visible, id: PPUtils.asId(PPUtils.absolute($p2r, props.$pp), props.id), ref: boxRef }, children);
 });
 registerWidget({ key: "Box", JSX: Box, container: true, array: false });
-const ASection = qe.div.attrs(({ id, "data-w": dataW }) => {
+const ASection = qe.div.attrs(({ id, [DOM_KEY_WIDGET]: dataW }) => {
   return {
     [DOM_KEY_WIDGET]: dataW || "d9-section",
     [DOM_ID_WIDGET]: id
@@ -7440,11 +7728,14 @@ const ATextarea = qe.textarea.attrs(({ id, autoSelect, onFocus }) => {
 const Textarea = reactExports.forwardRef((props, ref) => {
   const { autoSelect = true, $pp, $wrapped: { $onValueChange, $model, $p2r, $avs: { $disabled, $visible } }, ...rest } = props;
   const globalHandlers = useGlobalHandlers();
+  const textRef = reactExports.useRef(null);
+  useDualRefs(textRef, ref);
+  useTip({ ref: textRef });
   const onChange = async (event) => {
     const value = event.target.value;
     await $onValueChange(value, true, { global: globalHandlers });
   };
-  return React.createElement(ATextarea, { ...rest, autoSelect, disabled: $disabled, "data-disabled": $disabled, "data-visible": $visible, value: MUtils.getValue($model, $pp) ?? "", onChange, id: PPUtils.asId(PPUtils.absolute($p2r, $pp), props.id), ref });
+  return React.createElement(ATextarea, { ...rest, autoSelect, disabled: $disabled, "data-disabled": $disabled, "data-visible": $visible, value: MUtils.getValue($model, $pp) ?? "", onChange, id: PPUtils.asId(PPUtils.absolute($p2r, $pp), props.id), ref: textRef });
 });
 registerWidget({ key: "Textarea", JSX: Textarea, container: false, array: false });
 const Context$1 = reactExports.createContext({});
@@ -7612,7 +7903,7 @@ var TreeNodeCheckedChangeFrom;
   TreeNodeCheckedChangeFrom2[TreeNodeCheckedChangeFrom2["FROM_SELF"] = 0] = "FROM_SELF";
   TreeNodeCheckedChangeFrom2[TreeNodeCheckedChangeFrom2["FROM_PARENT"] = 1] = "FROM_PARENT";
 })(TreeNodeCheckedChangeFrom || (TreeNodeCheckedChangeFrom = {}));
-const ATree = qe.div.attrs(({ id, "data-w": dataW, height }) => {
+const ATree = qe.div.attrs(({ id, [DOM_KEY_WIDGET]: dataW, height }) => {
   return {
     [DOM_KEY_WIDGET]: dataW || "d9-tree",
     [DOM_ID_WIDGET]: id,
@@ -7675,7 +7966,7 @@ const ATree = qe.div.attrs(({ id, "data-w": dataW, height }) => {
     }
 `;
 const TreeContentContainer = qe.div.attrs({
-  "data-w": "d9-tree-content-container",
+  [DOM_KEY_WIDGET]: "d9-tree-content-container",
   "data-v-scroll": "",
   "data-h-scroll": ""
 })`
@@ -7688,7 +7979,7 @@ const TreeContentContainer = qe.div.attrs({
     border-bottom-right-radius: ${CssVars.BORDER_RADIUS};
     overflow: auto;
 `;
-const TreeNodeWrapper = qe.div.attrs({ "data-w": "d9-tree-node-wrapper" })`
+const TreeNodeWrapper = qe.div.attrs({ [DOM_KEY_WIDGET]: "d9-tree-node-wrapper" })`
     display: flex;
     position: relative;
     flex-direction: column;
@@ -7726,7 +8017,7 @@ const TreeNode$1 = qe.div.attrs({})`
         border-bottom-left-radius: 4px;
     }
 `;
-const TreeNodeContainer = qe(TreeNode$1).attrs({ "data-w": "d9-tree-node-container" })`
+const TreeNodeContainer = qe(TreeNode$1).attrs({ [DOM_KEY_WIDGET]: "d9-tree-node-container" })`
     cursor: pointer;
 
     &[data-expanded=true] {
@@ -7741,7 +8032,7 @@ const TreeNodeContainer = qe(TreeNode$1).attrs({ "data-w": "d9-tree-node-contain
 `;
 const TreeNodeOperators = qe.div.attrs(({ top, right }) => {
   return {
-    "data-w": "d9-tree-node-operators",
+    [DOM_KEY_WIDGET]: "d9-tree-node-operators",
     style: {
       "--top": `${top}px`,
       "--right": `${right}px`
@@ -7823,7 +8114,7 @@ const TreeNodeOperators = qe.div.attrs(({ top, right }) => {
         }
     }
 `;
-const TreeNodeContent = qe.span.attrs({ "data-w": "d9-tree-node-content" })`
+const TreeNodeContent = qe.span.attrs({ [DOM_KEY_WIDGET]: "d9-tree-node-content" })`
     display: flex;
     position: relative;
     flex-grow: 1;
@@ -7840,7 +8131,7 @@ const TreeNodeContent = qe.span.attrs({ "data-w": "d9-tree-node-content" })`
         opacity: 0.7;
     }
 `;
-const TreeNodeToggle = qe.span.attrs({ "data-w": "d9-tree-node-toggle" })`
+const TreeNodeToggle = qe.span.attrs({ [DOM_KEY_WIDGET]: "d9-tree-node-toggle" })`
     display: inline-block;
     width: 28px;
     height: 28px;
@@ -7858,7 +8149,7 @@ const TreeNodeToggle = qe.span.attrs({ "data-w": "d9-tree-node-toggle" })`
         transition: transform ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION};
     }
 `;
-const TreeNodeIndex = qe.span.attrs({ "data-w": "d9-tree-node-index" })`
+const TreeNodeIndex = qe.span.attrs({ [DOM_KEY_WIDGET]: "d9-tree-node-index" })`
     display: flex;
     position: relative;
     align-items: center;
@@ -7870,7 +8161,7 @@ const TreeNodeIndex = qe.span.attrs({ "data-w": "d9-tree-node-index" })`
         padding-left: 9px;
     }
 `;
-const TreeNodeLabel = qe.span.attrs({ "data-w": "d9-tree-node-label" })`
+const TreeNodeLabel = qe.span.attrs({ [DOM_KEY_WIDGET]: "d9-tree-node-label" })`
     display: flex;
     position: relative;
     align-items: center;
@@ -7882,7 +8173,7 @@ const TreeNodeLabel = qe.span.attrs({ "data-w": "d9-tree-node-label" })`
 `;
 const TreeHoverShade = qe.div.attrs(({ top, height, visible }) => {
   return {
-    "data-w": "d9-tree-node-hover-shade",
+    [DOM_KEY_WIDGET]: "d9-tree-node-hover-shade",
     style: {
       "--top": toCssSize(top),
       "--height": toCssSize(height),
@@ -7917,7 +8208,7 @@ const useTreeNodeExpand = (ref, state) => {
               return false;
             } else {
               const wrapper = element.parentElement;
-              if (wrapper.parentElement.getAttribute("data-w") === "d9-tree-content-container") {
+              if (wrapper.parentElement.getAttribute(DOM_KEY_WIDGET) === "d9-tree-content-container") {
                 return true;
               } else {
                 return allExpanded(wrapper.parentElement.firstElementChild);
@@ -8562,7 +8853,7 @@ const ACheckboxes = qe.div.attrs(({ id }) => {
     grid-row: var(--grid-row);
     color: ${CssVars.FONT_COLOR};
 `;
-const Option$1 = qe.span.attrs(({ columns, compact, "data-w": dataW }) => {
+const Option$1 = qe.span.attrs(({ columns, compact, [DOM_KEY_WIDGET]: dataW }) => {
   return {
     [DOM_KEY_WIDGET]: dataW ?? "d9-checkboxes-option",
     style: {
@@ -8633,6 +8924,9 @@ const Separator$1 = qe.span.attrs({ [DOM_KEY_WIDGET]: "d9-checkboxes-option-sepa
 const Checkboxes = reactExports.forwardRef((props, ref) => {
   const { options, optionSort, noAvailable = React.createElement(IntlLabel, { keys: ["options", "noAvailable"], value: "No available options." }), columns = -1, compact = true, single = false, boolOnSingle = false, $pp, $wrapped: { $onValueChange, $model, $avs: { $disabled, $visible } }, ...rest } = props;
   const globalHandlers = useGlobalHandlers();
+  const checksRef = reactExports.useRef(null);
+  useDualRefs(checksRef, ref);
+  useTip({ ref: checksRef });
   const { createAskDisplayOptions } = useOptionItems({ ...props, noAvailable });
   const getValues = () => {
     const modelValues = MUtils.getValue($model, $pp);
@@ -8668,7 +8962,7 @@ const Checkboxes = reactExports.forwardRef((props, ref) => {
       React.createElement(Option$1, { "data-can-click": false, columns: 0, compact: true, "data-w": "d9-checkboxes-no-available" }, toIntlLabel(noAvailable))
     );
   }
-  return React.createElement(ACheckboxes, { "data-disabled": $disabled, "data-visible": $visible, ...rest, ref }, displayOptions.map((option, index) => {
+  return React.createElement(ACheckboxes, { "data-disabled": $disabled, "data-visible": $visible, ...rest, ref: checksRef }, displayOptions.map((option, index) => {
     const { value, label } = option;
     const valueKey = `${value}_${index + 1}`;
     const model = { [valueKey]: values.some((v) => v == value) };
@@ -8782,7 +9076,7 @@ const ARadios = qe.div.attrs(({ id }) => {
     grid-row: var(--grid-row);
     color: ${CssVars.FONT_COLOR};
 `;
-const Option = qe.span.attrs(({ columns, compact, "data-w": dataW }) => {
+const Option = qe.span.attrs(({ columns, compact, [DOM_KEY_WIDGET]: dataW }) => {
   return {
     [DOM_KEY_WIDGET]: dataW ?? "d9-radios-option",
     style: {
@@ -8857,6 +9151,9 @@ const Separator = qe.span.attrs({ [DOM_KEY_WIDGET]: "d9-radios-option-separator"
 const Radios = reactExports.forwardRef((props, ref) => {
   const { options, optionSort, noAvailable = React.createElement(IntlLabel, { keys: ["options", "noAvailable"], value: "No available options." }), columns = -1, compact = true, $pp, $wrapped: { $onValueChange, $model, $avs: { $disabled, $visible } }, ...rest } = props;
   const globalHandlers = useGlobalHandlers();
+  const radiosRef = reactExports.useRef(null);
+  useDualRefs(radiosRef, ref);
+  useTip({ ref: radiosRef });
   const { createAskDisplayOptions } = useOptionItems({ ...props, noAvailable });
   const onOptionClicked = (option) => async () => {
     if ($disabled) {
@@ -8875,7 +9172,7 @@ const Radios = reactExports.forwardRef((props, ref) => {
     );
   }
   const modelValue = MUtils.getValue($model, $pp);
-  return React.createElement(ARadios, { "data-disabled": $disabled, "data-visible": $visible, ...rest, ref }, displayOptions.map((option, index) => {
+  return React.createElement(ARadios, { "data-disabled": $disabled, "data-visible": $visible, ...rest, ref: radiosRef }, displayOptions.map((option, index) => {
     const { value, label } = option;
     const valueKey = `${value}_${index + 1}`;
     const model = { [valueKey]: modelValue == value };
@@ -8967,20 +9264,21 @@ export {
   GlobalEventPrefix as c,
   utils$2 as d,
   ButtonFill as e,
-  useAlert as f,
-  useDialog as g,
-  DialogHeader as h,
+  index$1 as f,
+  useAlert as g,
+  useDialog as h,
   index$2 as i,
-  DialogTitle as j,
-  DialogBody as k,
-  DialogFooter as l,
-  GlobalRoot as m,
-  utils$3 as n,
-  utils$1 as o,
-  UnwrappedButtonBar as p,
-  ButtonBarAlignment as q,
-  UnwrappedCaption as r,
-  UnwrappedSection as s,
+  DialogHeader as j,
+  DialogTitle as k,
+  DialogBody as l,
+  DialogFooter as m,
+  GlobalRoot as n,
+  utils$3 as o,
+  utils$1 as p,
+  UnwrappedButtonBar as q,
+  ButtonBarAlignment as r,
+  UnwrappedCaption as s,
   toIntlLabel as t,
-  useGlobalEventBus as u
+  useGlobalEventBus as u,
+  UnwrappedSection as v
 };

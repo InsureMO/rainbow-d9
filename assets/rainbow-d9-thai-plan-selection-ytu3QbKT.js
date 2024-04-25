@@ -1,9 +1,9 @@
-import { r as reactExports, R as React, j as jsxRuntimeExports } from "./react-qvFGHjqT.js";
-import { V as VUtils, r as registerWidget, g as useCreateEventBus, M as MUtils, P as PPUtils, a as useThrottler, e as useForceUpdate, d as Wrapper, S as StandaloneRoot } from "./rainbow-d9-n1-HyutaglD.js";
-import { C as CssVars, D as DOM_KEY_WIDGET, a as DOM_ID_WIDGET, d as utils$2, $ as $d9n2, u as useGlobalEventBus, b as useGlobalHandlers, G as GlobalEventTypes, U as UnwrappedButton, B as ButtonInk, e as ButtonFill, I as IntlLabel, L as LabelLike, i as index$2, c as GlobalEventPrefix, f as useAlert, g as useDialog, h as DialogHeader, j as DialogTitle, k as DialogBody, l as DialogFooter, m as GlobalRoot } from "./rainbow-d9-n2-XhYi0F7w.js";
-import { a as color, n as nanoid } from "./vendor-EPq0eIUo.js";
-import { q as qe } from "./styled-components-Mu4B1nFK.js";
-import { i as index$1, p as parseDoc } from "./rainbow-d9-n3-U8gRI8Ql.js";
+import { r as reactExports, R as React, j as jsxRuntimeExports } from "./react-XdfZXP58.js";
+import { V as VUtils, r as registerWidget, g as useCreateEventBus, M as MUtils, P as PPUtils, a as useThrottler, e as useForceUpdate, d as Wrapper, S as StandaloneRoot } from "./rainbow-d9-n1-qtCLMeEY.js";
+import { C as CssVars, D as DOM_KEY_WIDGET, a as DOM_ID_WIDGET, d as utils$2, $ as $d9n2, b as useGlobalHandlers, u as useGlobalEventBus, G as GlobalEventTypes, U as UnwrappedButton, B as ButtonInk, e as ButtonFill, I as IntlLabel, L as LabelLike, i as index$2, f as index$1$1, c as GlobalEventPrefix, g as useAlert, h as useDialog, j as DialogHeader, k as DialogTitle, l as DialogBody, m as DialogFooter, n as GlobalRoot } from "./rainbow-d9-n2-LO3iZxs5.js";
+import { a as color, n as nanoid } from "./vendor-0Qymwlja.js";
+import { q as qe } from "./styled-components-8FdRVy4c.js";
+import { i as index$1, p as parseDoc } from "./rainbow-d9-n3-xh9esNZp.js";
 var PlanElementType;
 (function(PlanElementType2) {
   PlanElementType2["CATEGORY"] = "PolicyElementCategory";
@@ -229,7 +229,7 @@ const PlanElementColumnHeaderTitle = qe.div.attrs({ [DOM_KEY_WIDGET]: "d9-plan-s
         }
     }
 `;
-const PlanElementCell = qe.div.attrs({ [DOM_KEY_WIDGET]: "d9-plan-selection-element-cell" })`
+const PlanElementCellContainer = qe.div.attrs({ [DOM_KEY_WIDGET]: "d9-plan-selection-element-cell" })`
     display: flex;
     position: relative;
     flex-direction: column;
@@ -254,7 +254,7 @@ const PlanElementCell = qe.div.attrs({ [DOM_KEY_WIDGET]: "d9-plan-selection-elem
         }
     }
 
-    &[data-element-cateogry=true] { /** category element */
+    &[data-element-category=true] { /** category element */
         justify-content: center;
 
         > svg[data-icon=check] {
@@ -670,69 +670,20 @@ const orderPlanDefs = (defs) => {
   };
   return sort(ordered);
 };
-const useDefs = (options) => {
-  const { defs, valuesInit, valuesClear, $wrapped: { $root, $model } } = options;
-  const { on, off } = useGlobalEventBus();
-  const globalHandlers = useGlobalHandlers();
-  const [state, setState] = reactExports.useState({
-    initialized: false,
-    marker: redressPlanMarker(options)
-  });
-  reactExports.useEffect(() => {
-    const loadDefs = async (beforeChangeState) => {
-      let loadedDefs;
-      if (typeof defs === "function") {
-        loadedDefs = await defs({ root: $root, model: $model, global: globalHandlers });
-      } else {
-        loadedDefs = defs;
-      }
-      await beforeChangeState(loadedDefs);
-      setState((state2) => {
-        return {
-          initialized: true,
-          marker: state2.marker,
-          defs: loadedDefs,
-          orderedDefs: orderPlanDefs(loadedDefs)
-        };
-      });
-    };
-    if (!state.initialized) {
-      (async () => await loadDefs(async (defs2) => {
-        if (valuesInit != null) {
-          await valuesInit({ defs: defs2, root: $root, model: $model, global: globalHandlers });
-        }
-      }))();
-    }
-    const onCustomEvent = async (_key, prefix, clipped) => {
-      if (!state.initialized || prefix !== PlanSelectionGlobalEventPrefix.RELOAD_DEFS || clipped !== state.marker) {
-        return;
-      }
-      setState((state2) => ({ initialized: false, marker: state2.marker }));
-      await loadDefs(async (defs2) => {
-        if (valuesClear != null) {
-          await valuesClear({ defs: defs2, root: $root, model: $model, global: globalHandlers });
-        }
-      });
-    };
-    on(GlobalEventTypes.CUSTOM_EVENT, onCustomEvent);
-    return () => {
-      off(GlobalEventTypes.CUSTOM_EVENT, onCustomEvent);
-    };
-  }, [
-    globalHandlers,
-    on,
-    off,
-    state.initialized,
-    state.marker,
-    defs,
-    valuesInit,
-    valuesClear,
-    $root,
-    $model
-  ]);
-  return state;
+const loadDefs = async (options, beforeChangeState) => {
+  const { defs, $root, $model, globalHandlers } = options;
+  let loadedDefs;
+  if (typeof defs === "function") {
+    loadedDefs = await defs({ root: $root, model: $model, global: globalHandlers });
+  } else {
+    loadedDefs = defs;
+  }
+  await beforeChangeState(loadedDefs);
+  return { defs: loadedDefs, orderedDefs: orderPlanDefs(loadedDefs) };
 };
-const useLayout = (planDefsInitialized, planDefs, columns, columnWidth, lineHeaderWidth) => {
+const useLayout = (marker, defs, $root, $model, valuesInit, valuesClear, columns, columnWidth, lineHeaderWidth) => {
+  const globalHandlers = useGlobalHandlers();
+  const { on: onGlobal, off: offGlobal } = useGlobalEventBus();
   const { on, off } = usePlanSelectionEventBus();
   const [state, setState] = reactExports.useState({
     initialized: false,
@@ -742,66 +693,120 @@ const useLayout = (planDefsInitialized, planDefs, columns, columnWidth, lineHead
     computedLineHeaderWidth: -1
   });
   reactExports.useEffect(() => {
-    if (!planDefsInitialized) {
-      return;
-    }
-    const defs = planDefs ?? [];
-    const planCount = defs.length;
-    let computedColumnCount = Math.min(planCount, columns);
-    let computedColumnWidth;
-    let computedLineHeaderWidth;
-    if (computedColumnCount <= 0) {
-      computedColumnCount = planCount;
-      [computedColumnWidth, computedLineHeaderWidth] = computeColumnWidth(-1, columnWidth, lineHeaderWidth);
-      setState({
-        initialized: true,
-        displayPlanDefs: defs,
-        computedColumnCount,
-        computedColumnWidth,
-        computedLineHeaderWidth
-      });
-    } else {
-      [computedColumnWidth, computedLineHeaderWidth] = computeColumnWidth(computedColumnCount, columnWidth, lineHeaderWidth);
-      if (computedColumnCount < planCount) {
-        const pageCount = Math.ceil(planCount / computedColumnCount);
-        setState((state2) => {
-          const originalPageNumber = state2.pageNumber;
-          let pageNumber;
-          if (originalPageNumber == null) {
-            pageNumber = 1;
-          } else if (originalPageNumber > pageCount) {
-            pageNumber = pageCount;
-          } else {
-            pageNumber = originalPageNumber;
-          }
-          const displayPlanDefs = defs.slice((pageNumber - 1) * computedColumnCount, pageNumber * computedColumnCount);
-          return {
-            initialized: true,
-            displayPlanDefs,
-            pageCount,
-            pageNumber,
-            pageSize: computedColumnCount,
-            computedColumnCount,
-            computedColumnWidth,
-            computedLineHeaderWidth
-          };
-        });
-      } else {
+    const layout = (defs2, orderedDefs) => {
+      defs2 = defs2 ?? [];
+      const planCount = defs2.length;
+      let computedColumnCount = Math.min(planCount, columns);
+      let computedColumnWidth;
+      let computedLineHeaderWidth;
+      if (computedColumnCount <= 0) {
+        computedColumnCount = planCount;
+        [computedColumnWidth, computedLineHeaderWidth] = computeColumnWidth(-1, columnWidth, lineHeaderWidth);
         setState({
           initialized: true,
-          displayPlanDefs: defs,
+          defs: defs2,
+          orderedDefs,
+          displayPlanDefs: defs2,
           computedColumnCount,
           computedColumnWidth,
           computedLineHeaderWidth
         });
+      } else {
+        [computedColumnWidth, computedLineHeaderWidth] = computeColumnWidth(computedColumnCount, columnWidth, lineHeaderWidth);
+        if (computedColumnCount < planCount) {
+          const pageCount = Math.ceil(planCount / computedColumnCount);
+          setState((state2) => {
+            const originalPageNumber = state2.pageNumber;
+            let pageNumber;
+            if (originalPageNumber == null) {
+              pageNumber = 1;
+            } else if (originalPageNumber > pageCount) {
+              pageNumber = pageCount;
+            } else {
+              pageNumber = originalPageNumber;
+            }
+            const displayPlanDefs = defs2.slice((pageNumber - 1) * computedColumnCount, pageNumber * computedColumnCount);
+            return {
+              initialized: true,
+              defs: defs2,
+              orderedDefs,
+              displayPlanDefs,
+              pageCount,
+              pageNumber,
+              pageSize: computedColumnCount,
+              computedColumnCount,
+              computedColumnWidth,
+              computedLineHeaderWidth
+            };
+          });
+        } else {
+          setState({
+            initialized: true,
+            defs: defs2,
+            orderedDefs,
+            displayPlanDefs: defs2,
+            computedColumnCount,
+            computedColumnWidth,
+            computedLineHeaderWidth
+          });
+        }
       }
+    };
+    if (!state.initialized) {
+      (async () => {
+        const { defs: loadedDefs, orderedDefs } = await loadDefs({
+          defs,
+          $root,
+          $model,
+          globalHandlers
+        }, async (defs2) => {
+          if (valuesInit != null) {
+            await valuesInit({ defs: defs2, root: $root, model: $model, global: globalHandlers });
+          }
+        });
+        layout(loadedDefs, orderedDefs);
+      })();
     }
-  }, [planDefsInitialized, planDefs, columns, columnWidth, lineHeaderWidth]);
+    const onCustomEvent = async (_key, prefix, clipped) => {
+      if (!state.initialized || prefix !== PlanSelectionGlobalEventPrefix.RELOAD_DEFS || clipped !== marker) {
+        return;
+      }
+      const { defs: loadedDefs, orderedDefs } = await loadDefs({
+        defs,
+        $root,
+        $model,
+        globalHandlers
+      }, async (defs2) => {
+        if (valuesClear != null) {
+          await valuesClear({ defs: defs2, root: $root, model: $model, global: globalHandlers });
+        }
+      });
+      layout(loadedDefs, orderedDefs);
+    };
+    onGlobal && onGlobal(GlobalEventTypes.CUSTOM_EVENT, onCustomEvent);
+    return () => {
+      offGlobal && offGlobal(GlobalEventTypes.CUSTOM_EVENT, onCustomEvent);
+    };
+  }, [
+    onGlobal,
+    offGlobal,
+    globalHandlers,
+    state.initialized,
+    marker,
+    defs,
+    $root,
+    $model,
+    valuesInit,
+    valuesClear,
+    columns,
+    columnWidth,
+    lineHeaderWidth
+  ]);
   reactExports.useEffect(() => {
     const onSwitchPage = (pageNumber) => {
-      const defs = planDefs ?? [];
+      const defs2 = state.defs ?? [];
       setState((state2) => {
-        const displayPlanDefs = defs.slice((pageNumber - 1) * state2.pageSize, pageNumber * state2.pageSize);
+        const displayPlanDefs = defs2.slice((pageNumber - 1) * state2.pageSize, pageNumber * state2.pageSize);
         const computedColumnCount = displayPlanDefs.length;
         const [computedColumnWidth, computedLineHeaderWidth] = computeColumnWidth(computedColumnCount, columnWidth, lineHeaderWidth);
         return {
@@ -818,7 +823,7 @@ const useLayout = (planDefsInitialized, planDefs, columns, columnWidth, lineHead
     return () => {
       off(PlanSelectionEventTypes.SWITCH_PAGE, onSwitchPage);
     };
-  }, [on, off, planDefs, columnWidth, lineHeaderWidth]);
+  }, [on, off, state.defs, state.orderedDefs, columnWidth, lineHeaderWidth]);
   return state;
 };
 const useElementDefaultValue = (options) => {
@@ -1320,6 +1325,39 @@ const PlanElementValues = (props) => {
     }
   }));
 };
+const PlanElementCellWithTip = (props) => {
+  const { attributes, elementDef, children } = props;
+  const ref = reactExports.useRef(null);
+  index$1$1.useTip({
+    ref,
+    title: elementDef.tip.title,
+    body: elementDef.tip.body,
+    minWidth: elementDef.tip.minWidth,
+    maxWidth: elementDef.tip.maxWidth,
+    maxHeight: elementDef.tip.maxHeight,
+    delay: elementDef.tip.delay
+  });
+  return React.createElement(PlanElementCellContainer, { ...attributes, ref }, children);
+};
+const PlanElementCell = (props) => {
+  const { lack, category, odd, elementDef, children } = props;
+  const attributes = (() => {
+    const attrs = {};
+    if (lack === true) {
+      attrs["data-element-lack"] = true;
+    }
+    if (category === true) {
+      attrs["data-element-category"] = true;
+    }
+    attrs["data-odd"] = odd;
+    return attrs;
+  })();
+  if ((elementDef == null ? void 0 : elementDef.tip) != null && VUtils.isNotBlank(elementDef.tip.body)) {
+    return React.createElement(PlanElementCellWithTip, { attributes, elementDef }, children);
+  } else {
+    return React.createElement(PlanElementCellContainer, { ...attributes }, children);
+  }
+};
 const PlanElement = (props) => {
   const { orderedDef, displayPlanDefs, displayPlanDefCodesMap, elementTitle, elementLevel, ancestorCodes, plansModel, $root, $p2r, elementFixedValue, elementOptionsValue, elementNumberValue, elementNumberValueValidator } = props;
   const model = createPlanModelProxy(plansModel, orderedDef);
@@ -1345,20 +1383,20 @@ const PlanElement = (props) => {
       if (elementDef == null) {
         return React.createElement(
           PlanElementCell,
-          { "data-odd": odd, "data-element-lack": true, key },
+          { odd, lack: true, key },
           React.createElement(index$2.Times, null)
         );
       } else if (isCategoryPlanElementDef(elementDef)) {
         return React.createElement(
           PlanElementCell,
-          { "data-odd": odd, "data-element-cateogry": true, key },
+          { odd, category: true, elementDef, key },
           React.createElement(index$2.Check, null)
         );
       } else {
         const planData = findSelectedPlan(plansModel, planDef.code);
         return React.createElement(
           PlanElementCell,
-          { "data-odd": odd, key },
+          { odd, elementDef, key },
           React.createElement(PlanElementValues, { elementDef, elementCodes, planDef, plan: planData, plans: plansModel, "$root": $root, "$p2r": PPUtils.concat($p2r, planCode), elementFixedValue, elementOptionsValue, elementNumberValue, elementNumberValueValidator })
         );
       }
@@ -1412,10 +1450,10 @@ const PlanFooters = (props) => {
   );
 };
 const InternalPlanSelection = (props) => {
-  const { $pp, $wrapped, columns = 3, columnWidth, lineHeaderWidth, maxHeight, currencySymbol, premiumDescription, buyText, buy, planTitle, planSubTitle, elementTitle, elementFixedValue, elementOptionsValue, elementNumberValue, elementNumberValueValidator, planOperators, calculate, calculationDelay = 1, ...rest } = props;
-  const { $root, $p2r, $avs: { $disabled, $visible } } = $wrapped;
-  const { initialized: planDefsInitialized, defs: planDefs, orderedDefs } = useDefs(props);
-  const layout = useLayout(planDefsInitialized, planDefs, columns, columnWidth, lineHeaderWidth);
+  const { $pp, $wrapped, columns = 3, columnWidth, lineHeaderWidth, maxHeight, currencySymbol, premiumDescription, buyText, buy, defs, valuesInit, valuesClear, planTitle, planSubTitle, elementTitle, elementFixedValue, elementOptionsValue, elementNumberValue, elementNumberValueValidator, planOperators, calculate, calculationDelay = 1, ...rest } = props;
+  const { $root, $model, $p2r, $avs: { $disabled, $visible } } = $wrapped;
+  const [state] = reactExports.useState({ marker: redressPlanMarker(props) });
+  const layout = useLayout(state.marker, defs, $root, $model, valuesInit, valuesClear, columns, columnWidth, lineHeaderWidth);
   if (!layout.initialized) {
     return null;
   }
@@ -1433,7 +1471,7 @@ const InternalPlanSelection = (props) => {
       APlanSelection,
       { ...rest, "data-disabled": $disabled, "data-visible": $visible, columnCount: layout.computedColumnCount, computedColumnWidth: layout.computedColumnWidth, computedLineHeaderWidth: layout.computedLineHeaderWidth, maxHeight, id: PPUtils.asId(PPUtils.absolute($p2r, $pp), props.id) },
       React.createElement(PlanHeaders, { "$root": $root, "$p2r": $p2rOfPlans, displayPlanDefs: layout.displayPlanDefs, plans: plansData, planTitle, planSubTitle, currencySymbol, premiumDescription, pageCount: layout.pageCount, pageNumber: layout.pageNumber }),
-      React.createElement(PlanBodies, { "$root": $root, "$p2r": $p2rOfPlans, displayPlanDefs: layout.displayPlanDefs, orderedDefs, plans: plansData, elementTitle, elementOptionsValue, elementNumberValue, elementNumberValueValidator, elementFixedValue }),
+      React.createElement(PlanBodies, { "$root": $root, "$p2r": $p2rOfPlans, displayPlanDefs: layout.displayPlanDefs, orderedDefs: layout.orderedDefs, plans: plansData, elementTitle, elementOptionsValue, elementNumberValue, elementNumberValueValidator, elementFixedValue }),
       React.createElement(PlanFooters, { "$root": $root, "$p2r": $p2rOfPlans, displayPlanDefs: layout.displayPlanDefs, plans: plansData, planOperators, buyText, buy })
     )
   );
@@ -1570,7 +1608,7 @@ const plans = {
 const DemoData = {
   plans
 };
-const markdown = "# Page::Demo Tab\n\n## Section::# 100. ThaiCloud Plan Selection\n\n- PlanSelect::::plans\n	- maxHeight: 800\n	- columns: 3\n	- defs: @ext.defs\n	- currencySymbol: ฿\n	- premiumDescription: After Tax\n	- buy: @ext.buy\n	- calculationDelay: 3\n	- calculate: @ext.calculate\n";
+const markdown = "# Page::Demo Tab\n\n## Section::# 100. ThaiCloud Plan Selection\n\n- PlanSelect::::plans\n	- marker: demo\n	- maxHeight: 750\n	- columns: 3\n	- defs: @ext.defs\n	- currencySymbol: ฿\n	- premiumDescription: After Tax\n	- buy: @ext.buy\n	- calculationDelay: 3\n	- calculate: @ext.calculate\n\n### Button::::\n\n- text: Refresh Plan Defs\n- click: @ext.refreshPlanDefs\n";
 $d9n2.intl.labels["en-US"] = {
   ...$d9n2.intl.labels["en-US"] ?? {},
   "Standard Plan #1": "标准保障计划 #1",
@@ -1585,6 +1623,19 @@ $d9n2.intl.labels["en-US"] = {
 };
 const ThaiPlanSelection = () => {
   const def = useDemoMarkdown(markdown);
+  const getDynamicOptions = reactExports.useRef(/* @__PURE__ */ (() => {
+    let times = 0;
+    const options1 = [{ value: 9e5 }, { value: 95e4 }, { value: 1e6 }];
+    const options2 = [{ value: 85e4 }, { value: 9e5 }, { value: 95e4 }, { value: 1e6 }];
+    return () => {
+      if (times === 0) {
+        times = 1;
+        return options1;
+      } else {
+        return options2;
+      }
+    };
+  })());
   const externalDefs = {
     defs: async () => {
       return [
@@ -1601,12 +1652,15 @@ const ThaiPlanSelection = () => {
                   code: "ODFTD",
                   name: "Own Damage & Fire & Theft Deductible",
                   type: PlanElementType.COVERAGE,
+                  tip: {
+                    body: "Hello, I am a coverage, code is ODFTD."
+                  },
                   values: [
                     {
                       code: "si",
                       label: "Sum Insured",
                       defaultValue: 95e4,
-                      options: [{ value: 9e5 }, { value: 95e4 }, { value: 1e6 }],
+                      options: getDynamicOptions.current(),
                       editType: PlanElementValueEditType.OPTIONS
                     },
                     {
@@ -1843,6 +1897,12 @@ const ThaiPlanSelection = () => {
         return { code, premium: Math.ceil(5e4 + Math.random() * 1e4) };
       }).forEach(({ code, premium }) => {
         MUtils.setValue(DemoData.plans, `${code}.premium.due`, premium);
+      });
+    },
+    refreshPlanDefs: async (options) => {
+      await options.global.sc(PlanSelectionGlobalEventPrefix.RELOAD_DEFS, "demo", {
+        root: options.root,
+        model: options.model
       });
     }
   };
