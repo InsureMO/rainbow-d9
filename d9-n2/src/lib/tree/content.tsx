@@ -49,14 +49,8 @@ export const TreeContent = (props: TreeContentProps) => {
 				.map(child => filtered(child))
 				.filter(x => x != null);
 			if (children.length !== 0) {
-				if (children.length === (node.$children ?? []).length) {
-					// not filtered
-					return node;
-				} else {
-					return {...node, $children: children};
-				}
-			}
-			if (onlyChecked) {
+				return {...node, $children: children};
+			} else if (onlyChecked) {
 				if (node.checkable && node.checked(node)) {
 					return {...node, $children: []};
 				}
@@ -72,16 +66,20 @@ export const TreeContent = (props: TreeContentProps) => {
 				if (node.label.toLowerCase().includes(matches)) {
 					return {...node, $children: []};
 				}
-			} else {
-				// cannot perform compare, always not match
-				return null;
 			}
+			// cannot perform compare, always not match
+			return null;
 		};
-		return (root.$children ?? []).map(child => filtered(child)).filter(x => x != null);
+		return (root.$children ?? [])
+			.map(child => filtered(child))
+			.filter(x => x != null);
 	};
 
+	const childNodesFiltered = children();
+	console.log(childNodesFiltered);
+
 	return <TreeContentContainer>
-		{children().map((child, index) => {
+		{childNodesFiltered.map((child, index) => {
 			const last = !canAdd && index === childrenCount - 1;
 			const myDisplayIndex = `${index + 1}`;
 			return <TreeNode initExpandLevel={initExpandLevel} showIndex={showIndex}

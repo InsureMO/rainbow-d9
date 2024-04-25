@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import {CssVars, DOM_ID_WIDGET, DOM_KEY_WIDGET} from '../constants';
-import {UnwrappedDecorateInput} from '../unwrapped/unwrapped-index';
+import {UnwrappedDecorateInput} from '../unwrapped/decorate-input';
 import {toCssSize} from '../utils';
 
 // noinspection CssUnresolvedCustomProperty
@@ -33,6 +33,7 @@ export const ATree = styled.div.attrs<{ height: number | string }>(
 // @ts-ignore
 export const TreeSearchInput = styled(UnwrappedDecorateInput)`
     min-height: ${CssVars.INPUT_HEIGHT};
+    background-color: ${CssVars.BACKGROUND_COLOR};
     border-top-left-radius: ${CssVars.BORDER_RADIUS};
     border-top-right-radius: ${CssVars.BORDER_RADIUS};
     border-bottom: ${CssVars.BORDER};

@@ -59,14 +59,19 @@ export const InternalTree = forwardRef((props: TreeProps, ref: ForwardedRef<HTML
 	};
 	const onMouseMove = (event: MouseEvent<HTMLDivElement>) => {
 		const target = event.target as HTMLDivElement;
-		const {top} = target.closest('div[data-w=d9-tree-content-container]').parentElement.getBoundingClientRect();
-		const element = document.elementFromPoint(event.clientX, event.clientY);
-		const nodeContainer = element.closest('div[data-w=d9-tree-node-container]');
-		if (nodeContainer == null) {
+		const contentContainer = target.closest('div[data-w=d9-tree-content-container]');
+		if (contentContainer == null) {
 			fire(TreeEventTypes.HIDE_HOVER_BOX);
 		} else {
-			const {top: nodeTop, height} = nodeContainer.getBoundingClientRect();
-			fire(TreeEventTypes.SHOW_HOVER_BOX, nodeTop - top, height);
+			const {top} = contentContainer.parentElement.getBoundingClientRect();
+			const element = document.elementFromPoint(event.clientX, event.clientY);
+			const nodeContainer = element.closest('div[data-w=d9-tree-node-container]');
+			if (nodeContainer == null) {
+				fire(TreeEventTypes.HIDE_HOVER_BOX);
+			} else {
+				const {top: nodeTop, height} = nodeContainer.getBoundingClientRect();
+				fire(TreeEventTypes.SHOW_HOVER_BOX, nodeTop - top, height);
+			}
 		}
 	};
 	const onMouseLeave = () => {
