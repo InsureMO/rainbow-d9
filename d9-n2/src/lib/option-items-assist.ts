@@ -121,3 +121,9 @@ export const useOptionItems = <V>(props: OptionItemsProps<V>) => {
 
 	return {askOptions, createAskDisplayOptions};
 };
+
+export interface TreeOptionItem<V> extends OptionItem<V> {
+	children?: Array<TreeOptionItem<V>>;
+}
+
+export type TreeOptionItems<V> = Array<TreeOptionItem<V>>;

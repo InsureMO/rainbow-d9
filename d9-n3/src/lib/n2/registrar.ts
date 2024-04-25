@@ -7,6 +7,7 @@ import {N2BadgeTranslator, N2CaptionTranslator, N2LabelTranslator} from './capti
 import {N2CheckboxTranslator} from './checkbox';
 import {N2CheckboxesTranslator, N2ChecksTranslator} from './checkboxes';
 import {N2DropdownTranslator} from './dropdown';
+import {N2DropdownTreeTranslator, N2DTTTranslator} from './dropdown-tree';
 import {
 	N2DecorateInputTranslator,
 	N2DecorateNumberTranslator,
@@ -73,5 +74,7 @@ export const registerN2Widgets = (widgetHelper?: WidgetHelper) => {
 	repo.register(new N2WizardStepTranslator(repo));
 	repo.register(new N2WizardTranslator(repo));
 	repo.register(new N2TreeTranslator(repo));
+	repo.register(new N2DropdownTreeTranslator(repo));
+	repo.register(new N2DTTTranslator(repo));
 	repo.register(new N2PaginationTranslator(repo));
 };

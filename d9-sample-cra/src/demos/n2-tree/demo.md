@@ -8,3 +8,5 @@
 	- height: 400
 - Tree::::tree2
 	- detective: @ext.tree2.detective
+- DropdownTree::::dropdownTree
+	- options: @ext.dropdownTree

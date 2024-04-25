@@ -186,8 +186,8 @@ export const Dropdown = forwardRef((props: DropdownProps, ref: ForwardedRef<HTML
 	const value = MUtils.getValue($model, $pp) as DropdownOptionValue;
 	const selected = value != null;
 	const label = (value == null
-			? toIntlLabel(please)
-			: ((askOptions() as DropdownOptions).find(option => option.value == value)?.label ?? toIntlLabel(please)))
+			? please
+			: ((askOptions() as DropdownOptions).find(option => option.value == value)?.label ?? please))
 		|| '';
 	const deviceTags = MBUtils.pickDeviceTags(props);
 

@@ -14,7 +14,7 @@ import styled from 'styled-components';
 import {CssVars, DOM_ID_WIDGET, DOM_KEY_WIDGET} from './constants';
 import {useCollapseFixedThing} from './hooks';
 import {CaretDown, Times} from './icons';
-import {IntlLabel, toIntlLabel} from './intl-label';
+import {internationalize, IntlLabel, toIntlLabel} from './intl-label';
 import {
 	NO_MATCHED_OPTION_ITEM,
 	OptionItem,
@@ -429,7 +429,7 @@ export const useDropdownControl = (options: {
 };
 
 // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-constraint, @typescript-eslint/no-explicit-any
-export const useFilterableDropdownOptions = <V extends any>(props: OptionItemsProps<V>) => {
+export const useFilterableDropdownOptions = <V extends any>(props: OptionItemsProps<V>, takeoverFilter?: false) => {
 	const {
 		optionSort, maxWidth,
 		noAvailable = <IntlLabel keys={['options', 'noAvailable']} value="No available options."/>,
@@ -458,14 +458,17 @@ export const useFilterableDropdownOptions = <V extends any>(props: OptionItemsPr
 
 	const {askOptions, createAskDisplayOptions} = useOptionItems({...props, noAvailable});
 	const askDisplayOptions = createAskDisplayOptions(() => {
-		return VUtils.isNotBlank(filter) || optionSort != null;
+		// if given takeover filter is false, then never do filter here
+		// otherwise try to do filter now
+		return (takeoverFilter ?? true) && VUtils.isNotBlank(filter) || optionSort != null;
 	}, (options: OptionItems<V>): OptionItems<V> => {
 		const transformed = options.map(option => {
 			let str = '';
 			if (option.stringify != null) {
 				str = option.stringify(option);
 			} else if (['string', 'number', 'boolean'].includes(typeof option.label)) {
-				str = `${option.label}`;
+				const label = `${option.label}`;
+				str = internationalize(label, [label]);
 			}
 			return {str: (str || '').toLowerCase(), option};
 		}) as Array<{ str: string, option: OptionItem<V> }>;
