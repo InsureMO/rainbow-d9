@@ -539,6 +539,27 @@ scenarios, if a `data-` attribute is associated with its own property value chan
 rather than directly by the form cell. Therefore, it's necessary to combine it with the `repaint` definition to enable the entire form cell
 to perceive it.
 
+## Tips
+
+The built-in tip can be easily activated by adding some attributes to the component. The following attributes are necessary:
+
+- `data-tip-body`: Essential for activating the tip. If it has no value, the tip will not be activated.
+- `data-tip-title`: Title of the tip.
+- `data-tip-min-width`: Minimum width.
+- `data-tip-max-width`: Maximum width.
+- `data-tip-max-height`: Maximum height.
+- `data-tip-delay`: Display duration in seconds.
+- `data-tip-tag`: Custom tip DOM attribute name, used for customizing tip styles.
+
+> Most complex components do not support the tip feature, as there isn't actually much necessity for it. If additional support is needed,
+> you can use a Box to wrap around the component.
+
+> Components with pop-up layers, such as Dropdowns and Calendars, although supported, are prone to conflict with Popups, so it's not
+> recommended to use them. If you must use them, please use them with a delay to avoid overlapping issues.
+
+> For decorator components, the tip feature utilizes the `data-di-*` attributes and also supports `data-*`, but it's not recommended to use
+> them simultaneously.
+
 ## Attribute Guard
 
 Any attributes that are not captured by a specific parser will be eventually parsed by the attribute guard. The attribute guard follows the
@@ -1119,6 +1140,8 @@ icons. If you want to use built-in icons, you need to use `$icons.` followed by 
 
 > `placeholder` for decorated input supports i18n, and will be disabled automatically when mask presents. However, the number mask typically
 > doesn't display the mask placeholder, so the placeholder will still take effect.
+
+> The `data-di-*` attributes are used for decorators, while others are applied directly to the input box.
 
 ## Textarea
 

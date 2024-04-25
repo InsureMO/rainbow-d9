@@ -15,6 +15,7 @@
 	- data-di-tip-body: return 'Hello, I am a mask input.'
 	- data-di-tip-tag: return 'data-decorate-input'
 	- data-di-tip-max-width: 150
+	- data-di-tip-delay: 2
 	- mask:
 	  ```
 	  return {
@@ -57,6 +58,7 @@
 	- options:
 		- 1: Option #1
 		- 2: Option #2
+	- data-tip-body: return 'I am a simple dropdown.'
 - Dropdown::::dropdown2
 	- label: Dropdown #2
 	- options: @ext.dropdown2
@@ -67,6 +69,7 @@
 		- 3: A very very very very very very very very very very very very very very very very very very long Option #3
 		- 4: Option #4
 		- 5: Option #5
+	- data-tip-body: return 'I am a multiple-choices dropdown.'
 
 ## Section::# 1.3. Basic Widgets - Calendar
 
@@ -85,6 +88,7 @@
 	    return options.valueToCheck.hour() >= 9 && options.valueToCheck.hour() < 18;
 	  }
 	  ```
+	- data-tip-body: return 'I am a Buddhist Era date time picker.'
 - Date::Buddhist Year & Month::buddhistEra2
 	- dateFormat: BBBB/MM
 - Date::Hide Shortcuts::date3
@@ -107,6 +111,7 @@
 	- valueToLabel: `'Hello World'`
 	- leads: $icons.check;$
 	- tails: %;$icons.caretLeft
+	- data-tip-body: return 'I am a label.'
 - Caption::A Caption::caption
 	- $fc
 	- text: Hello World
@@ -117,6 +122,7 @@
 ## Section::# 1.4. Basic Widgets - Radio
 
 - Radio::A Radio::aRadio
+	- data-tip-body: return 'I am a radio.'
 - Radios::Radio Group::radios1
 	- options:
 		- 1: Option #1
@@ -126,6 +132,7 @@
 		- 5: A very very very very very very very very very very very very very very very very very very long Option #5
 	- place: 6
 	- columns: 4
+	- data-tip-body: return 'I am a radios.'
 - Radios::Radio Group, Fake as Toggle Buttons::radios2
 	- data-as-toggle-button
 	- options:
@@ -139,6 +146,7 @@
 ## Section::# 1.5. Basic Widgets - Checkbox
 
 - Checkbox::A Checkbox::aCheckbox
+	- data-tip-body: return 'I am a checkbox.'
 - Checks::Checkbox Group::checks1
 	- options:
 		- 1: Option #1
@@ -148,6 +156,7 @@
 		- 5: A very very very very very very very very very very very very very very very very very very long Option #5
 	- place: 6
 	- columns: 4
+	- data-tip-body: return 'I am a checkboxes.'
 - Checks::Checkbox Group::checks2
 	- options:
 		- 1: Option #1
@@ -170,6 +179,7 @@
 - Button::
 	- text: Validate Inputs, Scope "S1"
 	- click: validate s1
+	- data-tip-body: return 'I am a button.'
 
 - Caption::
 	- text: Dropdown

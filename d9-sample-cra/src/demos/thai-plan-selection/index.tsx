@@ -64,6 +64,9 @@ export const ThaiPlanSelection = () => {
 								{
 									code: 'ODFTD', name: 'Own Damage & Fire & Theft Deductible',
 									type: PlanElementType.COVERAGE,
+									tip: {
+										body: 'Hello, I am a coverage, code is ODFTD.'
+									},
 									values: [
 										{
 											code: 'si', label: 'Sum Insured', defaultValue: 950_000,

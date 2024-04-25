@@ -2,6 +2,7 @@ import {BaseModel, PPUtils, PropertyPath, PropValue, VUtils, WrappedAttributes} 
 import {Icons, LabelLike} from '@rainbow-d9/n2';
 import {nanoid} from 'nanoid';
 import React from 'react';
+import {PlanElementCell} from './plan-element-cell';
 import {PlanElementValues} from './plan-element-values';
 import {PlanCode, PlanDefs, PlanElementCode, PlanMutableElementDef, PlanSelectionDef, SelectedPlans} from './types';
 import {PlanElementDefOrdered} from './use-defs';
@@ -13,7 +14,7 @@ import {
 	isCategoryPlanElementDef,
 	PlanDefCodesMap
 } from './utils';
-import {PlanElementCell, PlanElementColumnHeader, PlanElementColumnHeaderTitle} from './widgets';
+import {PlanElementColumnHeader, PlanElementColumnHeaderTitle} from './widgets';
 
 export interface PlanElementProps {
 	orderedDef: PlanElementDefOrdered;
@@ -64,16 +65,16 @@ export const PlanElement = (props: PlanElementProps) => {
 			const elementDef = findPlanElementDef(planDefCodesMap, elementCodes);
 			const key = `${planCode}\t${elementCodes.join('\t')}`;
 			if (elementDef == null) {
-				return <PlanElementCell data-odd={odd} data-element-lack={true} key={key}>
+				return <PlanElementCell odd={odd} lack={true} key={key}>
 					<Icons.Times/>
 				</PlanElementCell>;
 			} else if (isCategoryPlanElementDef(elementDef)) {
-				return <PlanElementCell data-odd={odd} data-element-cateogry={true} key={key}>
+				return <PlanElementCell odd={odd} category={true} elementDef={elementDef} key={key}>
 					<Icons.Check/>
 				</PlanElementCell>;
 			} else {
 				const planData = findSelectedPlan(plansModel, planDef.code);
-				return <PlanElementCell data-odd={odd} key={key}>
+				return <PlanElementCell odd={odd} elementDef={elementDef} key={key}>
 					<PlanElementValues elementDef={elementDef as PlanMutableElementDef} elementCodes={elementCodes}
 					                   planDef={planDef} plan={planData}
 					                   plans={plansModel} $root={$root} $p2r={PPUtils.concat($p2r, planCode)}

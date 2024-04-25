@@ -222,7 +222,7 @@ export const PlanElementColumnHeaderTitle = styled.div.attrs({[DOM_KEY_WIDGET]: 
         }
     }
 `;
-export const PlanElementCell = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-plan-selection-element-cell'})`
+export const PlanElementCellContainer = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-plan-selection-element-cell'})`
     display: flex;
     position: relative;
     flex-direction: column;
@@ -247,7 +247,7 @@ export const PlanElementCell = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-plan-sele
         }
     }
 
-    &[data-element-cateogry=true] { /** category element */
+    &[data-element-category=true] { /** category element */
         justify-content: center;
 
         > svg[data-icon=check] {

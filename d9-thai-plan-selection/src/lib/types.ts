@@ -7,7 +7,14 @@ import {
 	ValueChangeableNodeDef,
 	WidgetProps
 } from '@rainbow-d9/n1';
-import {ButtonClick, GlobalEventHandlers, ModelCarriedHandler, OmitHTMLProps, OmitNodeDef} from '@rainbow-d9/n2';
+import {
+	ButtonClick,
+	Global,
+	GlobalEventHandlers,
+	ModelCarriedHandler,
+	OmitHTMLProps,
+	OmitNodeDef
+} from '@rainbow-d9/n2';
 import {ReactNode} from 'react';
 import {PlansChangedEventOptions} from './event/plan-selection-event-bus-types';
 
@@ -30,6 +37,7 @@ export interface PlanElementDef {
 	children?: Array<PlanElementDef>;
 	/** display order, default 0 */
 	displayOrder?: number;
+	tip?: Omit<Global.TipOptions, 'ref' | 'prefix'>;
 }
 
 export interface PlanCategoryDef extends PlanElementDef {

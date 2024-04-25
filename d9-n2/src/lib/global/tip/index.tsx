@@ -11,6 +11,8 @@ export interface TipOptions {
 	minWidth?: string | number;
 	maxWidth?: string | number;
 	maxHeight?: string | number;
+	/** show time in seconds */
+	delay?: number;
 	tag?: string;
 	/** data attribute prefix, data-, data-di- */
 	prefix?: string;
@@ -23,10 +25,12 @@ interface TipState {
 	minWidth?: string | number;
 	maxWidth?: string | number;
 	maxHeight?: string | number;
+	delay?: number;
 	tag?: string;
 	visible: boolean;
 	top?: number;
 	left?: number;
+	hideTimeout?: number;
 }
 
 export const Tip = () => {
@@ -36,21 +40,32 @@ export const Tip = () => {
 	useEffect(() => {
 		const onShowTip = (options: TipOptions) => {
 			const {ref, prefix = 'data'} = options;
-			const title = options.title ?? ref.current.getAttribute(`${prefix}-tip-title`);
 			const body = options.body ?? ref.current.getAttribute(`${prefix}-tip-body`);
-			const minWidth = options.minWidth ?? ref.current.getAttribute(`${prefix}-tip-min-width`);
-			const maxWidth = options.maxWidth ?? ref.current.getAttribute(`${prefix}-tip-max-width`);
-			const maxHeight = options.maxHeight ?? ref.current.getAttribute(`${prefix}-tip-max-height`);
-			const tag = options.tag ?? ref.current.getAttribute(`${prefix}-tip-tag`);
 			if (VUtils.isBlank(body)) {
 				return;
 			}
-			setState({ref, title, body, visible: false, minWidth, maxWidth, maxHeight, tag});
+			const title = options.title ?? ref.current.getAttribute(`${prefix}-tip-title`);
+			const minWidth = options.minWidth ?? ref.current.getAttribute(`${prefix}-tip-min-width`);
+			const maxWidth = options.maxWidth ?? ref.current.getAttribute(`${prefix}-tip-max-width`);
+			const maxHeight = options.maxHeight ?? ref.current.getAttribute(`${prefix}-tip-max-height`);
+			const delay = (() => {
+				const value = options.delay ?? ref.current.getAttribute(`${prefix}-tip-delay`);
+				const ret = VUtils.isNumber(value);
+				return ret.test ? ret.value : (void 0);
+			})();
+			const tag = options.tag ?? ref.current.getAttribute(`${prefix}-tip-tag`);
+			if (state.hideTimeout) {
+				window.clearTimeout(state.hideTimeout);
+			}
+			setState({ref, title, body, visible: false, minWidth, maxWidth, maxHeight, delay, tag});
 		};
 		const onHideTip = (ref: MutableRefObject<HTMLElement>) => {
 			if (ref.current !== state.ref?.current) {
 				return;
 			} else {
+				if (state.hideTimeout) {
+					window.clearTimeout(state.hideTimeout);
+				}
 				setState({visible: false});
 			}
 		};
@@ -60,7 +75,7 @@ export const Tip = () => {
 			off(GlobalEventTypes.SHOW_TIP, onShowTip);
 			off(GlobalEventTypes.HIDE_TIP, onHideTip);
 		};
-	}, [on, off, state.ref]);
+	}, [on, off, state.ref, state.hideTimeout]);
 	useEffect(() => {
 		if (state.ref != null && !state.visible) {
 			const {top, left, width, height} = state.ref.current.getBoundingClientRect();
@@ -84,13 +99,27 @@ export const Tip = () => {
 					return left - (myWidth - width) / 2;
 				}
 			})();
-			setState(state => ({...state, visible: true, top: myTop, left: myLeft}));
+			const hideTimeout = (() => {
+				if (state.delay != null) {
+					return setTimeout(() => setState({visible: false}), state.delay * 1000);
+				} else {
+					return (void 0);
+				}
+			})();
+			// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+			// @ts-ignore
+			setState(state => ({...state, visible: true, top: myTop, left: myLeft, hideTimeout}));
 		}
-	}, [state.ref, state.visible]);
+	}, [state.ref, state.visible, state.delay]);
 	useCollapseFixedThing({
 		containerRef: state.ref,
 		visible: state.visible,
-		hide: () => setState({visible: false})
+		hide: () => {
+			if (state.hideTimeout) {
+				window.clearTimeout(state.hideTimeout);
+			}
+			setState({visible: false});
+		}
 	});
 
 	if (state.ref == null) {
