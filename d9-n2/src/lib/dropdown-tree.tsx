@@ -239,7 +239,7 @@ export const InternalDropdownTree = forwardRef((props: DropdownTreeProps, ref: F
 			return;
 		}
 		const option = node.value as unknown as DropdownTreeOption;
-		if (![NO_MATCHED_OPTION_ITEM, NO_AVAILABLE_OPTION_ITEM].includes(`${option.value}`)) {
+		if ([NO_MATCHED_OPTION_ITEM, NO_AVAILABLE_OPTION_ITEM].includes(`${option.value}`)) {
 			return;
 		}
 		if (couldSelect != null && !couldSelect(option)) {
