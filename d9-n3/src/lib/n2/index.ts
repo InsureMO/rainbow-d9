@@ -22,6 +22,7 @@ export * from './box';
 export * from './tabs';
 export * from './wizard';
 export * from './tree';
+export * from './dropdown-tree';
 export * from './pagination';
 
 export * from './registrar';

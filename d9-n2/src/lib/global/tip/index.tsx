@@ -1,6 +1,7 @@
 import {VUtils} from '@rainbow-d9/n1';
 import React, {MutableRefObject, ReactNode, useEffect, useRef, useState} from 'react';
 import {useCollapseFixedThing} from '../../hooks';
+import {toIntlLabel} from '../../intl-label';
 import {GlobalEventTypes, useGlobalEventBus} from '../global-event-bus';
 import {TipBody, TipContainer, TipHeader, TipLabel, TipTitle} from './widgets';
 
@@ -132,10 +133,10 @@ export const Tip = () => {
 	                     top={state.top} left={state.left}
 	                     ref={ref}>
 		{state.title != null
-			? <TipHeader><TipTitle>{state.title}</TipTitle></TipHeader>
+			? <TipHeader><TipTitle>{toIntlLabel(state.title)}</TipTitle></TipHeader>
 			: null}
 		<TipBody>
-			{(typeof state.body === 'string') ? <TipLabel>{state.body}</TipLabel> : state.body}
+			{(typeof state.body === 'string') ? <TipLabel>{toIntlLabel(state.body)}</TipLabel> : state.body}
 		</TipBody>
 	</TipContainer>;
 };

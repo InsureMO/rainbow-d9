@@ -1,0 +1,288 @@
+import {
+	BaseModel,
+	MBUtils,
+	MUtils,
+	PPUtils,
+	PropValue,
+	registerWidget,
+	Undefinable,
+	useForceUpdate,
+	ValueChangeableNodeDef,
+	WidgetProps
+} from '@rainbow-d9/n1';
+import React, {ChangeEvent, ForwardedRef, forwardRef, MouseEvent, ReactNode} from 'react';
+import styled from 'styled-components';
+import {CssVars, DOM_KEY_WIDGET} from './constants';
+import {
+	DropdownContainer,
+	DropdownLabel,
+	DropdownPopup,
+	DropdownPopupState,
+	DropdownPopupStateActive,
+	DropdownStick,
+	isDropdownPopupActive,
+	useFilterableDropdownOptions
+} from './dropdown-assist';
+import {useGlobalHandlers, useTip} from './global';
+import {toIntlLabel} from './intl-label';
+import {OptionItemSort, TreeOptionItem, TreeOptionItems} from './option-items-assist';
+import {TreeNodeDef, TreeNodeDetect} from './tree';
+import {GlobalEventHandlers, ModelCarrier, OmitHTMLProps, OmitNodeDef} from './types';
+import {UnwrappedTree} from './unwrapped/tree';
+import {toCssSize, useDualRefs} from './utils';
+
+export type DropdownTreeOptionValue = string | number | boolean;
+export type DropdownTreeOption = TreeOptionItem<DropdownTreeOptionValue>;
+export type DropdownTreeOptions = TreeOptionItems<DropdownTreeOptionValue>;
+export {OptionItemSort as DropdownOptionSort};
+
+/** Input configuration definition */
+export type DropdownTreeDef =
+	ValueChangeableNodeDef
+	& OmitHTMLProps<HTMLDivElement>
+	// & OptionItemsDef<DropdownOptionValue>
+	& {
+	please?: ReactNode;
+	clearable?: boolean;
+	options: TreeOptionItems<DropdownTreeOptionValue>
+		| (<R extends BaseModel, M extends PropValue>(options: ModelCarrier<R, M> & GlobalEventHandlers) => Promise<TreeOptionItems<DropdownTreeOptionValue>>);
+	optionSort?: OptionItemSort;
+	noAvailable?: ReactNode;
+	noMatched?: ReactNode;
+	/** some nodes might not be selectable, only for leads child nodes */
+	couldSelect?: (option: DropdownTreeOption) => boolean;
+	/** max popup width */
+	maxWidth?: number;
+};
+/** widget definition, with html attributes */
+export type DropdownTreeProps = OmitNodeDef<DropdownTreeDef> & WidgetProps;
+
+const OptionFilter = styled.div.attrs<Omit<DropdownPopupState, 'active'> & { active: boolean }>(
+	({active, atBottom, top, left, height}) => {
+		return {
+			[DOM_KEY_WIDGET]: 'd9-dropdown-tree-option-filter',
+			style: {
+				opacity: active ? 1 : 0,
+				top: atBottom ? (top + height - 10) : (void 0),
+				bottom: atBottom ? (void 0) : `calc(100vh - ${top}px - 10px)`,
+				left: left - 10
+			}
+		};
+	})<Omit<DropdownPopupState, 'active'> & { active: boolean }>`
+    display: flex;
+    position: fixed;
+    align-items: center;
+    font-family: ${CssVars.FONT_FAMILY};
+    font-size: calc(${CssVars.FONT_SIZE} - 2px);
+    height: calc(${CssVars.INPUT_HEIGHT} / 5 * 4);
+    padding: 0 ${CssVars.INPUT_INDENT};
+    border-radius: ${CssVars.BORDER_RADIUS};
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    pointer-events: none;
+    z-index: calc(${CssVars.DROPDOWN_Z_INDEX} + 1);
+
+    &:before {
+        content: '';
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: ${CssVars.INFO_COLOR};
+        border-radius: ${CssVars.BORDER_RADIUS};
+        opacity: 0.9;
+        z-index: -1;
+    }
+
+    > span:first-child {
+        color: ${CssVars.INVERT_COLOR};
+        font-weight: ${CssVars.FONT_BOLD};
+        margin-right: 4px;
+    }
+
+    > input {
+        border: 0;
+        outline: none;
+        background-color: transparent;
+        color: ${CssVars.INVERT_COLOR};
+        caret-color: transparent;
+        caret-shape: revert;
+    }
+`;
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
+const PopupTree = styled(UnwrappedTree)`
+    border: 0;
+`;
+
+export const DropdownTree = forwardRef((props: DropdownTreeProps, ref: ForwardedRef<HTMLDivElement>) => {
+	const {
+		// eslint-disable-next-line @typescript-eslint/no-unused-vars
+		options, optionSort, noAvailable, noMatched,
+		$pp, $wrapped: {$onValueChange, $model, $p2r, $avs: {$disabled, $visible}},
+		please = '', clearable = true, couldSelect,
+		...rest
+	} = props;
+
+	const globalHandlers = useGlobalHandlers();
+	const {
+		askOptions,
+		filterInputRef, filter, setFilter,
+		containerRef,
+		popupState,
+		popupRef, popupShown, setPopupShown, afterPopupStateChanged,
+		onClicked, onFocused, onKeyUp
+	} = useFilterableDropdownOptions(props, false);
+	useDualRefs(containerRef, ref);
+	useTip({ref: containerRef});
+	const forceUpdate = useForceUpdate();
+
+	const onClearClicked = async (event: MouseEvent<HTMLSpanElement>) => {
+		if ($disabled) {
+			return;
+		}
+		event.preventDefault();
+		event.stopPropagation();
+		const value = MUtils.getValue($model, $pp) as DropdownTreeOptionValue;
+		if (value != null) {
+			await $onValueChange(null, true, {global: globalHandlers});
+		}
+		if (!isDropdownPopupActive(popupState.active)) {
+			// call click to show popup
+			onClicked();
+		} else {
+			// simply force update
+			forceUpdate();
+		}
+	};
+
+	const value = MUtils.getValue($model, $pp) as DropdownTreeOptionValue;
+	const selected = value != null;
+	const allOptions: DropdownTreeOptions = askOptions();
+	const allOptionCount = (() => {
+		const countChildren = (option: DropdownTreeOption) => {
+			return (option.children ?? []).reduce((count, option) => {
+				const childrenCount = countChildren(option);
+				return count + 1 + childrenCount;
+			}, 0);
+		};
+		return allOptions.reduce((count, option) => {
+			return count + countChildren(option);
+		}, 0);
+	})();
+	const popupHeight = Math.min(allOptionCount, 8) * CssVars.INPUT_HEIGHT_VALUE + 2;
+	const label = (() => {
+		if (value == null) {
+			return toIntlLabel(please) || '';
+		}
+		const findOption = (option: DropdownTreeOption): Undefinable<DropdownTreeOption> => {
+			if (option.value == value) {
+				return option;
+			} else if (option.children == null || option.children.length === 0) {
+				return (void 0);
+			} else {
+				for (const child of option.children) {
+					const found = findOption(child);
+					if (found != null) {
+						return found;
+					}
+				}
+				return (void 0);
+			}
+		};
+		for (const option of allOptions) {
+			const found = findOption(option);
+			if (found != null) {
+				return found.label ?? (toIntlLabel(please) || '');
+			}
+		}
+		return toIntlLabel(please) || '';
+	})();
+	const deviceTags = MBUtils.pickDeviceTags(props);
+	const treeModel = {};
+	const onNodeClicked = async (node: TreeNodeDef) => {
+		if ($disabled) {
+			return;
+		}
+		const option = node.value as unknown as DropdownTreeOption;
+		if (couldSelect != null && !couldSelect(option)) {
+			return;
+		}
+		await $onValueChange(option.value, true, {global: globalHandlers});
+		setPopupShown(false);
+		if (filter !== '') {
+			afterPopupStateChanged.afterPopupHide();
+		}
+		setTimeout(() => containerRef.current?.focus(), 100);
+	};
+	const detective: TreeNodeDetect = (parentNode: Undefinable<TreeNodeDef>): Array<TreeNodeDef> => {
+		if (parentNode.value === treeModel) {
+			// parent is root
+			return allOptions.map((option, index) => {
+				return {
+					value: option as unknown as PropValue, $ip2r: `pp${index}`, $ip2p: `pp${index}`,
+					label: option.label,
+					...(option.stringify != null ? {stringify: () => option.stringify(option)} : {}),
+					checkable: false, addable: false, removable: false,
+					click: onNodeClicked
+				} as TreeNodeDef;
+			});
+		} else {
+			return ((parentNode.value as unknown as DropdownTreeOption).children ?? [])
+				.map((option, index) => {
+					return {
+						value: option as unknown as PropValue,
+						$ip2r: PPUtils.concat(parentNode.$ip2r, `pp${index}`), $ip2p: `pp${index}`,
+						label: option.label,
+						...(option.stringify != null ? {stringify: () => option.stringify(option)} : {}),
+						checkable: false,
+						addable: false,
+						removable: false,
+						click: onNodeClicked
+					} as TreeNodeDef;
+				});
+		}
+	};
+	const onFilterChanged = (event: ChangeEvent<HTMLInputElement>) => {
+		if ($disabled) {
+			return;
+		}
+		setFilter(event.target.value);
+	};
+
+	return <DropdownContainer active={popupState.active} atBottom={popupState.atBottom}
+	                          role="input" tabIndex={0}
+	                          {...rest}
+	                          data-w="d9-dropdown-tree"
+	                          data-disabled={$disabled} data-visible={$visible}
+	                          data-clearable={clearable}
+	                          onFocus={onFocused} onClick={onClicked}
+	                          id={PPUtils.asId(PPUtils.absolute($p2r, $pp), props.id)}
+	                          ref={containerRef}>
+		<DropdownLabel data-please={!selected}>{toIntlLabel(label)}</DropdownLabel>
+		<DropdownStick valueAssigned={selected} clearable={clearable} clear={onClearClicked} disabled={$disabled}/>
+		{isDropdownPopupActive(popupState.active)
+			? <DropdownPopup {...{...popupState, minHeight: popupHeight}}
+			                 shown={popupShown && popupState.active === DropdownPopupStateActive.ACTIVE}
+			                 {...deviceTags}
+			                 vScroll={true} ref={popupRef}>
+				<OptionFilter {...{...popupState, active: !!filter}}>
+					<span>?:</span>
+					<input value={filter} onChange={onFilterChanged} onKeyUp={onKeyUp}
+					       ref={filterInputRef}/>
+				</OptionFilter>
+				<PopupTree data={treeModel} initExpandLevel={0} disableSearchBox={true}
+				           detective={detective}
+				           height={`calc(${toCssSize(popupHeight)} - 2px)`}/>
+			</DropdownPopup>
+			: null}
+	</DropdownContainer>;
+});
+
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
+registerWidget({key: 'DropdownTree', JSX: DropdownTree, container: false, array: false});
+registerWidget({key: 'DDT', JSX: DropdownTree, container: false, array: false});

@@ -40,6 +40,8 @@ export enum N2WidgetType {
 	WIZARD_STEP = 'WStep',
 	WIZARD = 'Wizard',
 	TREE = 'Tree',
+	DROPDOWN_TREE = 'DropdownTree',
+	DDT = 'DDT',
 
 	PAGINATION = 'Pagination'
 }

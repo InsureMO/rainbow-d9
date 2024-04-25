@@ -1,5 +1,6 @@
 import {Nullable, PPUtils, VUtils} from '@rainbow-d9/n1';
 import React, {useEffect, useState} from 'react';
+import {internationalize} from '../intl-label';
 import {useTreeEventBus} from './event/tree-event-bus';
 import {TreeEventTypes} from './event/tree-event-bus-types';
 import {TreeNode} from './node';
@@ -63,7 +64,8 @@ export const TreeContent = (props: TreeContentProps) => {
 					return {...node, $children: []};
 				}
 			} else if (typeof node.label === 'string') {
-				if (node.label.toLowerCase().includes(matches)) {
+				const label = internationalize(node.label, [node.label]);
+				if (label.toLowerCase().includes(matches)) {
 					return {...node, $children: []};
 				}
 			}
@@ -74,9 +76,7 @@ export const TreeContent = (props: TreeContentProps) => {
 			.map(child => filtered(child))
 			.filter(x => x != null);
 	};
-
 	const childNodesFiltered = children();
-	console.log(childNodesFiltered);
 
 	return <TreeContentContainer>
 		{childNodesFiltered.map((child, index) => {

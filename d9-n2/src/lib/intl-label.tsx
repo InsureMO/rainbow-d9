@@ -2,6 +2,7 @@ import {MUtils, useForceUpdate, VUtils} from '@rainbow-d9/n1';
 import React, {useEffect} from 'react';
 import {$d9n2} from './constants';
 import {GlobalEventTypes, useGlobalEventBus} from './global';
+import {locale} from './utils';
 
 export interface IntlLabelProps {
 	keys: Array<string>;
@@ -43,29 +44,35 @@ const replaceTemplate = (template: string, values?: Array<any>): string => {
 	return template;
 };
 
-export const IntlLabel = (props: IntlLabelProps) => {
-	const {keys, value, replacements} = props;
-	useLanguage();
-
-	const language = $d9n2.intl.language;
-	let label = value;
+export const internationalize = (label: string, keys: Array<string>): string => {
+	let found = label;
 	if (keys != null && keys.length !== 0) {
+		const language = locale();
 		const key = [...keys].join('.');
 		if (VUtils.isBlank(key)) {
-			label = value;
+			return label;
 		} else {
 			const possible = $d9n2.intl.labels[language]?.[key];
 			if (possible != null && typeof possible == 'string') {
-				label = possible;
+				found = possible;
 			} else {
-				label = MUtils.getValue($d9n2.intl.labels, `${language}.${key}`) as string;
+				found = MUtils.getValue($d9n2.intl.labels, `${language}.${key}`) as string;
 			}
-			if (label == null || VUtils.isBlank(label)) {
-				label = value;
+			if (found == null || VUtils.isBlank(found)) {
+				return label;
 			}
 		}
+	} else {
+		return label;
 	}
-	label = replaceTemplate(label ?? '', replacements);
+};
+
+export const IntlLabel = (props: IntlLabelProps) => {
+	const {keys, value, replacements} = props;
+
+	useLanguage();
+
+	const label = replaceTemplate(internationalize(value, keys) ?? '', replacements);
 
 	return <>{label}</>;
 };

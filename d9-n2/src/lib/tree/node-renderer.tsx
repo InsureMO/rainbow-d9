@@ -141,7 +141,7 @@ export const TreeNodeRenderer = (props: TreeNodeRendererProps) => {
 	const expanded = useRef(level <= initExpandLevel);
 	const {fire: fireGlobal} = useGlobalEventBus();
 	const globalHandlers = useGlobalHandlers();
-	const {on: onTree, off: offTree} = useTreeEventBus();
+	const {on: onTree, off: offTree, fire: fireTree} = useTreeEventBus();
 	const {on, off, fire} = useTreeNodeEventBus();
 	const [operators, setOperators] = useState<TreeNodeOperatorsState>({visible: false, top: 0, right: 0});
 	useTreeNodeExpand(ref, expanded);
@@ -192,13 +192,14 @@ export const TreeNodeRenderer = (props: TreeNodeRendererProps) => {
 		});
 	};
 	const onMouseEnter = () => {
-		if (!hasOperators || operators.visible) {
-			return;
-		}
-		const {top, height} = ref.current.getBoundingClientRect();
 		const {
 			top: treeTop, left: treeLeft, width: treeWidth
 		} = ref.current.closest('div[data-w=d9-tree-content-container]').getBoundingClientRect();
+		const {top, height} = ref.current.getBoundingClientRect();
+		fireTree(TreeEventTypes.SHOW_HOVER_BOX, top - treeTop, height);
+		if (!hasOperators || operators.visible) {
+			return;
+		}
 		const {height: operatorsHeight} = operatorsRef.current.getBoundingClientRect();
 		if (top - operatorsHeight < treeTop) {
 			setOperators({visible: true, top: top + height, right: window.innerWidth - (treeLeft + treeWidth)});
@@ -211,6 +212,7 @@ export const TreeNodeRenderer = (props: TreeNodeRendererProps) => {
 		}
 	};
 	const onMouseLeave = () => {
+		fireTree(TreeEventTypes.HIDE_HOVER_BOX);
 		if (!hasOperators) {
 			return;
 		}

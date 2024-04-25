@@ -1,5 +1,5 @@
 import {Nullable, PPUtils, PropertyPath, StandaloneRoot, VUtils} from '@rainbow-d9/n1';
-import {GlobalRoot, TreeNodeDef} from '@rainbow-d9/n2';
+import {DropdownTreeOptionValue, GlobalRoot, TreeNodeDef, TreeOptionItems} from '@rainbow-d9/n2';
 import {CustomEventHandler} from '../custom-event-handler';
 import {N2DemoDialogHandler} from '../n2-dialog-handler';
 import {useDemoMarkdown} from '../use-demo-markdown';
@@ -81,7 +81,44 @@ export const N2Tree = () => {
 	const def = useDemoMarkdown(DemoContent);
 
 	const externalDefs = {
-		tree2: {detective: treeDetective}
+		tree2: {detective: treeDetective},
+		dropdownTree: (): TreeOptionItems<DropdownTreeOptionValue> => {
+			return [
+				{
+					value: '1', label: 'Top #1', children: [
+						{
+							value: '1.1', label: '2nd #1.1', children: [
+								{value: '1.1.1', label: '3rd #1.1.1'},
+								{value: '1.1.2', label: '3rd #1.1.2'}
+							]
+						},
+						{
+							value: '1.2', label: '2nd #1.2', children: [
+								{value: '1.2.1', label: '3rd #1.2.1'},
+								{value: '1.2.2', label: '3rd #1.2.2'}
+							]
+						}
+					]
+				},
+				{value: '2', label: 'Top #2'},
+				{
+					value: '3', label: 'Top #3', children: [
+						{
+							value: '3.1', label: '2nd #3.1', children: [
+								{value: '3.1.1', label: '3rd #1.1.1'},
+								{value: '3.1.2', label: '3rd #1.1.2'}
+							]
+						},
+						{
+							value: '3.2', label: '2nd #3.2', children: [
+								{value: '3.2.1', label: '3rd #3.2.1'},
+								{value: '3.2.2', label: '3rd #3.2.2'}
+							]
+						}
+					]
+				}
+			];
+		}
 	};
 
 	return <GlobalRoot>
