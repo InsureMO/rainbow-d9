@@ -4,10 +4,10 @@ var __publicField = (obj, key, value) => {
   __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
   return value;
 };
-import { a as color, M as MaskedNumber, e as MaskedDate, g as MaskedFunction, j as MaskedPattern, k as MaskedRange, l as MaskedRegExp, o as MaskedDynamic } from "./vendor-0Qymwlja.js";
-import { R as React, r as reactExports, u as useIMask } from "./react-XdfZXP58.js";
-import { c as createLogger, V as VUtils, P as PPUtils, r as registerWidget, u as useRootEventBus, M as MUtils, N as NUtils, d as Wrapper, e as useForceUpdate, f as MBUtils, b as useWrapperEventBus, W as WrapperEventTypes, g as useCreateEventBus, h as useDefaultAttributeValues, i as PROPERTY_PATH_ME, j as useAttributesWatch, R as RootEventTypes } from "./rainbow-d9-n1-qtCLMeEY.js";
-import { q as qe, W as We } from "./styled-components-8FdRVy4c.js";
+import { a as color, M as MaskedNumber, e as MaskedDate, g as MaskedFunction, j as MaskedPattern, k as MaskedRange, l as MaskedRegExp, o as MaskedDynamic } from "./vendor-DLR_ZLS_.js";
+import { R as React, r as reactExports, u as useIMask } from "./react--EiBBVk3.js";
+import { c as createLogger, V as VUtils, P as PPUtils, r as registerWidget, u as useRootEventBus, M as MUtils, N as NUtils, d as Wrapper, e as useForceUpdate, f as MBUtils, b as useWrapperEventBus, W as WrapperEventTypes, g as useCreateEventBus, h as useDefaultAttributeValues, i as PROPERTY_PATH_ME, j as useAttributesWatch, R as RootEventTypes } from "./rainbow-d9-n1-uPVgkT22.js";
+import { q as qe, W as We } from "./styled-components-kgylBAav.js";
 import { d as dayjs } from "./dayjs-9Z7dW0Q-.js";
 const DOM_KEY_WIDGET = "data-w";
 const DOM_ID_WIDGET = "data-wid";
@@ -499,14 +499,14 @@ var GlobalEventTypes;
   GlobalEventTypes2["HIDE_TIP"] = "hide-tip";
   GlobalEventTypes2["CUSTOM_EVENT"] = "custom-event";
 })(GlobalEventTypes || (GlobalEventTypes = {}));
-const Context$6 = reactExports.createContext({});
-Context$6.displayName = "GlobalEventBus";
+const Context$7 = reactExports.createContext({});
+Context$7.displayName = "GlobalEventBus";
 const GlobalEventBusProvider = (props) => {
   const { children } = props;
   const bus = useCreateEventBus("d9-global");
-  return React.createElement(Context$6.Provider, { value: bus }, children);
+  return React.createElement(Context$7.Provider, { value: bus }, children);
 };
-const useGlobalEventBus = () => reactExports.useContext(Context$6);
+const useGlobalEventBus = () => reactExports.useContext(Context$7);
 const CALENDAR_YM_FORMAT = "MMM YYYY";
 const CALENDAR_DATE_FORMAT = "YYYY/MM/DD";
 const CALENDAR_TIME_FORMAT = "HH:mm:ss";
@@ -1688,9 +1688,9 @@ const Tip = () => {
     state.title != null ? React.createElement(
       TipHeader,
       null,
-      React.createElement(TipTitle, null, state.title)
+      React.createElement(TipTitle, null, toIntlLabel(state.title))
     ) : null,
-    React.createElement(TipBody, null, typeof state.body === "string" ? React.createElement(TipLabel, null, state.body) : state.body)
+    React.createElement(TipBody, null, typeof state.body === "string" ? React.createElement(TipLabel, null, toIntlLabel(state.body)) : state.body)
   );
 };
 const useTip = (options) => {
@@ -1947,29 +1947,35 @@ const replaceTemplate = (template, values) => {
   }
   return template;
 };
-const IntlLabel = (props) => {
+const internationalize = (label, keys) => {
   var _a;
-  const { keys, value, replacements } = props;
-  useLanguage();
-  const language = $d9n2.intl.language;
-  let label = value;
+  let found = label;
   if (keys != null && keys.length !== 0) {
+    const language = locale();
     const key = [...keys].join(".");
     if (VUtils.isBlank(key)) {
-      label = value;
+      return label;
     } else {
       const possible = (_a = $d9n2.intl.labels[language]) == null ? void 0 : _a[key];
       if (possible != null && typeof possible == "string") {
-        label = possible;
+        found = possible;
       } else {
-        label = MUtils.getValue($d9n2.intl.labels, `${language}.${key}`);
+        found = MUtils.getValue($d9n2.intl.labels, `${language}.${key}`);
       }
-      if (label == null || VUtils.isBlank(label)) {
-        label = value;
+      if (found == null || VUtils.isBlank(found)) {
+        return label;
+      } else {
+        return found;
       }
     }
+  } else {
+    return label;
   }
-  label = replaceTemplate(label ?? "", replacements);
+};
+const IntlLabel = (props) => {
+  const { keys, value, replacements } = props;
+  useLanguage();
+  const label = replaceTemplate(internationalize(value, keys) ?? "", replacements);
   return React.createElement(React.Fragment, null, label);
 };
 const transformDecorator = (decorator) => {
@@ -2387,7 +2393,7 @@ const useDropdownControl = (options) => {
   };
 };
 const useFilterableDropdownOptions = (props) => {
-  const { optionSort, maxWidth, noAvailable = React.createElement(IntlLabel, { keys: ["options", "noAvailable"], value: "No available options." }), noMatched = React.createElement(IntlLabel, { keys: ["options", "noMatched"], value: "No matched options." }), $wrapped: { $avs: { $disabled } } } = props;
+  const { optionSort, maxWidth, noAvailable = React.createElement(IntlLabel, { keys: ["options", "noAvailable"], value: "No available options." }), noMatched = React.createElement(IntlLabel, { keys: ["options", "noMatched"], value: "No matched options." }), takeoverFilter, filterChanged, $wrapped: { $avs: { $disabled } } } = props;
   const filterInputRef = reactExports.useRef(null);
   const [filter, setFilter] = reactExports.useState("");
   const [functions] = reactExports.useState(() => {
@@ -2396,7 +2402,10 @@ const useFilterableDropdownOptions = (props) => {
         var _a;
         return (_a = filterInputRef.current) == null ? void 0 : _a.focus();
       },
-      afterPopupHide: () => setTimeout(() => setFilter(""), 100)
+      afterPopupHide: () => setTimeout(async () => {
+        setFilter("");
+        filterChanged && await filterChanged("", "hide");
+      }, 100)
     };
   });
   const { containerRef, popupRef, popupState, setPopupState, popupShown, setPopupShown } = useDropdownControl({
@@ -2407,14 +2416,15 @@ const useFilterableDropdownOptions = (props) => {
   });
   const { askOptions, createAskDisplayOptions } = useOptionItems({ ...props, noAvailable });
   const askDisplayOptions = createAskDisplayOptions(() => {
-    return VUtils.isNotBlank(filter) || optionSort != null;
+    return (takeoverFilter ?? true) && VUtils.isNotBlank(filter) || optionSort != null;
   }, (options) => {
     const transformed = options.map((option) => {
       let str = "";
       if (option.stringify != null) {
         str = option.stringify(option);
       } else if (["string", "number", "boolean"].includes(typeof option.label)) {
-        str = `${option.label}`;
+        const label = `${option.label}`;
+        str = internationalize(label, [label]);
       }
       return { str: (str || "").toLowerCase(), option };
     });
@@ -2463,20 +2473,22 @@ const useFilterableDropdownOptions = (props) => {
     }
     (_a = filterInputRef.current) == null ? void 0 : _a.focus();
   };
-  const onKeyUp = (event) => {
+  const onKeyUp = async (event) => {
     if (!isDropdownPopupActive(popupState.active)) {
       return;
     }
     const { key } = event;
     if (key === "Escape") {
       setFilter("");
+      filterChanged && await filterChanged("", "search");
     }
   };
-  const onFilterChanged = (event) => {
+  const onFilterChanged = async (event) => {
     if ($disabled) {
       return;
     }
     setFilter(event.target.value);
+    filterChanged && await filterChanged(event.target.value, "search");
   };
   return {
     filterInputRef,
@@ -2500,6 +2512,18 @@ const useFilterableDropdownOptions = (props) => {
     onFilterChanged
   };
 };
+var DropdownTreeEventTypes;
+(function(DropdownTreeEventTypes2) {
+  DropdownTreeEventTypes2["FILTER_CHANGED"] = "filter-changed";
+})(DropdownTreeEventTypes || (DropdownTreeEventTypes = {}));
+const Context$6 = reactExports.createContext({});
+Context$6.displayName = "DropdownTreeEventBus";
+const DropdownTreeEventBusProvider = (props) => {
+  const { children } = props;
+  const bus = useCreateEventBus("dropdown-tree");
+  return React.createElement(Context$6.Provider, { value: bus }, children);
+};
+const useDropdownTreeEventBus = () => reactExports.useContext(Context$6);
 const ACaption = qe.span.attrs(({ id, [DOM_KEY_WIDGET]: dataW }) => {
   return {
     [DOM_KEY_WIDGET]: dataW ?? "d9-caption",
@@ -2815,7 +2839,7 @@ const ButtonBar = reactExports.forwardRef((props, ref) => {
   return React.createElement(AButtonBar, { ...rest, "data-alignment": alignment, ref }, children);
 });
 registerWidget({ key: "ButtonBar", JSX: ButtonBar, container: true, array: false });
-const OptionFilter$1 = qe.div.attrs(({ active, atBottom, top, left, height }) => {
+const OptionFilter$2 = qe.div.attrs(({ active, atBottom, top, left, height }) => {
   return {
     [DOM_KEY_WIDGET]: "d9-dropdown-option-filter",
     style: {
@@ -2932,7 +2956,7 @@ const Dropdown = reactExports.forwardRef((props, ref) => {
   };
   const value = MUtils.getValue($model, $pp);
   const selected = value != null;
-  const label = (value == null ? toIntlLabel(please) : ((_a = askOptions().find((option) => option.value == value)) == null ? void 0 : _a.label) ?? toIntlLabel(please)) || "";
+  const label = (value == null ? please : ((_a = askOptions().find((option) => option.value == value)) == null ? void 0 : _a.label) ?? please) || "";
   const deviceTags = MBUtils.pickDeviceTags(props);
   return React.createElement(
     DropdownContainer,
@@ -2943,7 +2967,7 @@ const Dropdown = reactExports.forwardRef((props, ref) => {
       DropdownPopup,
       { ...{ ...popupState, minHeight: popupHeight }, shown: popupShown && popupState.active === DropdownPopupStateActive.ACTIVE, ...deviceTags, vScroll: true, ref: popupRef },
       React.createElement(
-        OptionFilter$1,
+        OptionFilter$2,
         { ...{ ...popupState, active: !!filter } },
         React.createElement("span", null, "?:"),
         React.createElement("input", { value: filter, onChange: onFilterChanged, onKeyUp, ref: filterInputRef })
@@ -2973,7 +2997,7 @@ const MultiDropdownLabel = qe(DropdownLabel)`
     height: unset;
     min-height: calc(${CssVars.INPUT_HEIGHT} - 6px);
     padding: 0 calc(${CssVars.INPUT_INDENT} / 2);
-    margin: 2px 4px 2px 0;
+    margin: 2px 8px 2px -4px;
     white-space: normal;
 
     > span:first-child {
@@ -3013,7 +3037,7 @@ const MultiDropdownStick = qe(DropdownStick)`
     position: absolute;
     right: ${CssVars.INPUT_INDENT};
 `;
-const OptionFilter = qe.div.attrs(({ active, atBottom, top, left, height }) => {
+const OptionFilter$1 = qe.div.attrs(({ active, atBottom, top, left, height }) => {
   return {
     [DOM_KEY_WIDGET]: "d9-multi-dropdown-option-filter",
     style: {
@@ -3156,11 +3180,11 @@ const MultiDropdown = reactExports.forwardRef((props, ref) => {
     }
     if (values2.length === askOptions().length) {
       setPopupShown(false);
+      if (filter !== "") {
+        setTimeout(() => setFilter(""), 100);
+      }
     } else {
       repaintPopup();
-    }
-    if (filter !== "") {
-      setTimeout(() => setFilter(""), 100);
     }
     setTimeout(() => {
       var _a;
@@ -3227,7 +3251,7 @@ const MultiDropdown = reactExports.forwardRef((props, ref) => {
       DropdownPopup,
       { ...{ ...popupState, minHeight: popupHeight }, shown: popupShown && popupState.active === DropdownPopupStateActive.ACTIVE, ...deviceTags, vScroll: true, ref: popupRef },
       React.createElement(
-        OptionFilter,
+        OptionFilter$1,
         { ...{ ...popupState, active: !!filter } },
         React.createElement("span", null, "?:"),
         React.createElement("input", { value: filter, onChange: onFilterChanged, onKeyUp, ref: filterInputRef })
@@ -7748,7 +7772,8 @@ const TreeEventBusProvider = (props) => {
 const useTreeEventBus = () => reactExports.useContext(Context$1);
 var TreeEventTypes;
 (function(TreeEventTypes2) {
-  TreeEventTypes2["SWITCH_SEARCH_BOX"] = "switch-search-box";
+  TreeEventTypes2["OPEN_SEARCH_BOX"] = "switch-search-box";
+  TreeEventTypes2["HIDE_SEARCH_BOX"] = "hide-search-box";
   TreeEventTypes2["DISCARD_FILTER"] = "discard-filter";
   TreeEventTypes2["FILTER_CHANGED"] = "filter-changed";
   TreeEventTypes2["ASK_MARKER_ADDER"] = "ask-marker-adder";
@@ -7903,6 +7928,27 @@ var TreeNodeCheckedChangeFrom;
   TreeNodeCheckedChangeFrom2[TreeNodeCheckedChangeFrom2["FROM_SELF"] = 0] = "FROM_SELF";
   TreeNodeCheckedChangeFrom2[TreeNodeCheckedChangeFrom2["FROM_PARENT"] = 1] = "FROM_PARENT";
 })(TreeNodeCheckedChangeFrom || (TreeNodeCheckedChangeFrom = {}));
+const UnwrappedDecorateInput = reactExports.forwardRef((props, ref) => {
+  const { $pp = "value", value, onValueChange, disabled, visible, ...rest } = props;
+  const $onValueChange = onValueChange;
+  const $avs = { $disabled: disabled, $visible: visible };
+  const $root = { [$pp]: value };
+  return React.createElement(DecorateInput, { ...rest, "$wrapped": { $onValueChange, $avs, $root, $model: $root, $p2r: "." }, "$pp": $pp, id: rest.id ?? VUtils.generateUniqueId(), ref });
+});
+reactExports.forwardRef((props, ref) => {
+  const { $pp = "value", value, onValueChange, disabled, visible, ...rest } = props;
+  const $onValueChange = onValueChange;
+  const $avs = { $disabled: disabled, $visible: visible };
+  const $root = { [$pp]: value };
+  return React.createElement(DecorateNumberInput, { ...rest, "$wrapped": { $onValueChange, $avs, $root, $model: $root, $p2r: "." }, "$pp": $pp, id: rest.id ?? VUtils.generateUniqueId(), ref });
+});
+reactExports.forwardRef((props, ref) => {
+  const { $pp = "value", value, onValueChange, disabled, visible, ...rest } = props;
+  const $onValueChange = onValueChange;
+  const $avs = { $disabled: disabled, $visible: visible };
+  const $root = { [$pp]: value };
+  return React.createElement(DecoratePasswordInput, { ...rest, "$wrapped": { $onValueChange, $avs, $root, $model: $root, $p2r: "." }, "$pp": $pp, id: rest.id ?? VUtils.generateUniqueId(), ref });
+});
 const ATree = qe.div.attrs(({ id, [DOM_KEY_WIDGET]: dataW, height }) => {
   return {
     [DOM_KEY_WIDGET]: dataW || "d9-tree",
@@ -7924,44 +7970,44 @@ const ATree = qe.div.attrs(({ id, [DOM_KEY_WIDGET]: dataW, height }) => {
     &[data-visible=false] {
         display: none;
     }
+`;
+const TreeSearchInput = qe(UnwrappedDecorateInput)`
+    min-height: ${CssVars.INPUT_HEIGHT};
+    background-color: ${CssVars.BACKGROUND_COLOR};
+    border-top-left-radius: ${CssVars.BORDER_RADIUS};
+    border-top-right-radius: ${CssVars.BORDER_RADIUS};
+    border-bottom: ${CssVars.BORDER};
+    overflow: hidden;
+    transition: border-bottom-color ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION};
 
-    > div[data-w=d9-deco-input]:first-child {
-        min-height: ${CssVars.INPUT_HEIGHT};
-        border-top-left-radius: ${CssVars.BORDER_RADIUS};
-        border-top-right-radius: ${CssVars.BORDER_RADIUS};
-        border-bottom: ${CssVars.BORDER};
-        overflow: hidden;
-        transition: border-bottom-color ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION};
+    &[data-visible=false] {
+        height: 0;
+        min-height: 0;
+        border-bottom: 0;
+    }
 
-        &[data-visible=false] {
-            height: 0;
-            min-height: 0;
-            border-bottom: 0;
+    &:focus-within {
+        border-bottom-color: ${CssVars.PRIMARY_COLOR};
+    }
+
+    > span[data-w=d9-deco-lead] {
+        border-top: 0;
+        border-left: 0;
+        border-bottom: 0;
+        border-bottom-left-radius: 0;
+
+        > svg {
+            opacity: 0.3;
+            height: calc(${CssVars.FONT_SIZE} * 0.9);
         }
+    }
 
-        &:focus-within {
-            border-bottom-color: ${CssVars.PRIMARY_COLOR};
-        }
+    > input[data-w=d9-input] {
+        border: 0;
+        border-bottom-right-radius: 0;
 
-        > span[data-w=d9-deco-lead] {
-            border-top: 0;
-            border-left: 0;
-            border-bottom: 0;
-            border-bottom-left-radius: 0;
-
-            > svg {
-                opacity: 0.3;
-                height: calc(${CssVars.FONT_SIZE} * 0.9);
-            }
-        }
-
-        > input[data-w=d9-input] {
-            border: 0;
-            border-bottom-right-radius: 0;
-
-            &:hover, &:focus {
-                box-shadow: none;
-            }
+        &:hover, &:focus {
+            box-shadow: none;
         }
     }
 `;
@@ -8285,7 +8331,7 @@ const TreeNodeRenderer = (props) => {
   const expanded = reactExports.useRef(level <= initExpandLevel);
   const { fire: fireGlobal } = useGlobalEventBus();
   const globalHandlers = useGlobalHandlers();
-  const { on: onTree, off: offTree } = useTreeEventBus();
+  const { on: onTree, off: offTree, fire: fireTree } = useTreeEventBus();
   const { on, off, fire } = useTreeNodeEventBus();
   const [operators, setOperators] = reactExports.useState({ visible: false, top: 0, right: 0 });
   useTreeNodeExpand(ref, expanded);
@@ -8331,11 +8377,12 @@ const TreeNodeRenderer = (props) => {
     });
   };
   const onMouseEnter = () => {
+    const { top: treeTop, left: treeLeft, width: treeWidth } = ref.current.closest("div[data-w=d9-tree-content-container]").getBoundingClientRect();
+    const { top, height } = ref.current.getBoundingClientRect();
+    fireTree(TreeEventTypes.SHOW_HOVER_BOX, top - treeTop, height);
     if (!hasOperators || operators.visible) {
       return;
     }
-    const { top, height } = ref.current.getBoundingClientRect();
-    const { top: treeTop, left: treeLeft, width: treeWidth } = ref.current.closest("div[data-w=d9-tree-content-container]").getBoundingClientRect();
     const { height: operatorsHeight } = operatorsRef.current.getBoundingClientRect();
     if (top - operatorsHeight < treeTop) {
       setOperators({ visible: true, top: top + height, right: window.innerWidth - (treeLeft + treeWidth) });
@@ -8348,6 +8395,7 @@ const TreeNodeRenderer = (props) => {
     }
   };
   const onMouseLeave = () => {
+    fireTree(TreeEventTypes.HIDE_HOVER_BOX);
     if (!hasOperators) {
       return;
     }
@@ -8532,13 +8580,8 @@ const TreeContent = (props) => {
     const filtered = (node) => {
       const children2 = (node.$children ?? []).map((child) => filtered(child)).filter((x) => x != null);
       if (children2.length !== 0) {
-        if (children2.length === (node.$children ?? []).length) {
-          return node;
-        } else {
-          return { ...node, $children: children2 };
-        }
-      }
-      if (onlyChecked) {
+        return { ...node, $children: children2 };
+      } else if (onlyChecked) {
         if (node.checkable && node.checked(node)) {
           return { ...node, $children: [] };
         }
@@ -8551,16 +8594,17 @@ const TreeContent = (props) => {
           return { ...node, $children: [] };
         }
       } else if (typeof node.label === "string") {
-        if (node.label.toLowerCase().includes(matches)) {
+        const label = internationalize(node.label, [node.label]);
+        if (label.toLowerCase().includes(matches)) {
           return { ...node, $children: [] };
         }
-      } else {
-        return null;
       }
+      return null;
     };
     return (root.$children ?? []).map((child) => filtered(child)).filter((x) => x != null);
   };
-  return React.createElement(TreeContentContainer, null, children().map((child, index) => {
+  const childNodesFiltered = children();
+  return React.createElement(TreeContentContainer, null, childNodesFiltered.map((child, index) => {
     const last = !canAdd && index === childrenCount - 1;
     const myDisplayIndex = `${index + 1}`;
     return React.createElement(TreeNode, { initExpandLevel, showIndex, detective: detect, "$wrapped": { ...$wrapped, $p2r: node$p2r }, node: child, displayIndex: myDisplayIndex, lastOfParent: last, level: 0, key: child.$ip2p });
@@ -8583,56 +8627,51 @@ const TreeHoverBox = () => {
   }, [on, off]);
   return React.createElement(TreeHoverShade, { top: state.top ?? 0, height: state.height ?? 0, visible: state.visible });
 };
-const UnwrappedDecorateInput = reactExports.forwardRef((props, ref) => {
-  const { $pp = "value", value, onValueChange, disabled, visible, ...rest } = props;
-  const $onValueChange = onValueChange;
-  const $avs = { $disabled: disabled, $visible: visible };
-  const $root = { [$pp]: value };
-  return React.createElement(DecorateInput, { ...rest, "$wrapped": { $onValueChange, $avs, $root, $model: $root, $p2r: "." }, "$pp": $pp, id: rest.id ?? VUtils.generateUniqueId(), ref });
-});
-reactExports.forwardRef((props, ref) => {
-  const { $pp = "value", value, onValueChange, disabled, visible, ...rest } = props;
-  const $onValueChange = onValueChange;
-  const $avs = { $disabled: disabled, $visible: visible };
-  const $root = { [$pp]: value };
-  return React.createElement(DecorateNumberInput, { ...rest, "$wrapped": { $onValueChange, $avs, $root, $model: $root, $p2r: "." }, "$pp": $pp, id: rest.id ?? VUtils.generateUniqueId(), ref });
-});
-reactExports.forwardRef((props, ref) => {
-  const { $pp = "value", value, onValueChange, disabled, visible, ...rest } = props;
-  const $onValueChange = onValueChange;
-  const $avs = { $disabled: disabled, $visible: visible };
-  const $root = { [$pp]: value };
-  return React.createElement(DecoratePasswordInput, { ...rest, "$wrapped": { $onValueChange, $avs, $root, $model: $root, $p2r: "." }, "$pp": $pp, id: rest.id ?? VUtils.generateUniqueId(), ref });
-});
-const TreeSearchBox = () => {
+const TreeSearchBox = (props) => {
+  const { disabled } = props;
   const ref = reactExports.useRef(null);
   const { on, off, fire } = useTreeEventBus();
   const [state, setState] = reactExports.useState({ value: "", visible: false });
   reactExports.useEffect(() => {
-    const onSwitchSearchBox = () => {
+    if (disabled) {
+      return;
+    }
+    const onOpenSearchBox = () => {
       if (state.visible) {
-        fire(TreeEventTypes.DISCARD_FILTER);
+        return;
       }
-      setState({ value: "", visible: !state.visible });
+      setState({ value: "", visible: true });
     };
-    on(TreeEventTypes.SWITCH_SEARCH_BOX, onSwitchSearchBox);
+    const onHideSearchBox = () => {
+      if (!state.visible) {
+        return;
+      }
+      fire(TreeEventTypes.DISCARD_FILTER);
+      setState({ value: "", visible: false });
+    };
+    on(TreeEventTypes.OPEN_SEARCH_BOX, onOpenSearchBox);
+    on(TreeEventTypes.HIDE_SEARCH_BOX, onHideSearchBox);
     return () => {
-      off(TreeEventTypes.SWITCH_SEARCH_BOX, onSwitchSearchBox);
+      off(TreeEventTypes.OPEN_SEARCH_BOX, onOpenSearchBox);
+      off(TreeEventTypes.HIDE_SEARCH_BOX, onHideSearchBox);
     };
-  }, [on, off, fire, state.visible]);
+  }, [on, off, fire, disabled, state.visible]);
   reactExports.useEffect(() => {
     var _a, _b, _c, _d;
+    if (disabled) {
+      return;
+    }
     if (state.visible) {
       (_b = (_a = ref.current) == null ? void 0 : _a.querySelector("input")) == null ? void 0 : _b.focus();
     } else {
       (_d = (_c = ref.current) == null ? void 0 : _c.parentElement) == null ? void 0 : _d.focus();
     }
-  }, [state.visible]);
+  }, [disabled, state.visible]);
   const onValueChange = (value) => {
     setState((state2) => ({ ...state2, value }));
     fire(TreeEventTypes.FILTER_CHANGED, value);
   };
-  return React.createElement(UnwrappedDecorateInput, { visible: state.visible, value: state.value, onValueChange, leads: ["$icons.search"], placeholder: "tree.filter.placeholder", ref });
+  return React.createElement(TreeSearchInput, { visible: state.visible, value: state.value, onValueChange, leads: ["$icons.search"], placeholder: "tree.filter.placeholder", ref });
 };
 const useMarker = () => {
   const markers = reactExports.useRef({});
@@ -8736,7 +8775,7 @@ const buildTreeNodesDetective = (detective, markers) => {
   };
 };
 const InternalTree = reactExports.forwardRef((props, ref) => {
-  const { $pp, initExpandLevel = -1, showIndex = false, detective, height = 300, marker, $wrapped, ...rest } = props;
+  const { $pp, initExpandLevel = -1, showIndex = false, detective, height = 300, marker, disableSearchBox = false, children, $wrapped, ...rest } = props;
   const { $p2r, $avs: { $disabled, $visible } } = $wrapped;
   const { on, off } = useGlobalEventBus();
   const globalHandlers = useGlobalHandlers();
@@ -8756,27 +8795,17 @@ const InternalTree = reactExports.forwardRef((props, ref) => {
   }, [on, off, forceUpdate, marker]);
   const markers = useMarker();
   const onKeyDown = (event) => {
+    if (disableSearchBox) {
+      return;
+    }
     const isCtrlKey = event.ctrlKey || event.metaKey;
     const isFKey = event.key === "f";
     if (isCtrlKey && isFKey) {
       event.preventDefault();
-      fire(TreeEventTypes.SWITCH_SEARCH_BOX);
+      fire(TreeEventTypes.OPEN_SEARCH_BOX);
+    } else if (event.key === "Escape") {
+      fire(TreeEventTypes.HIDE_SEARCH_BOX);
     }
-  };
-  const onMouseMove = (event) => {
-    const target = event.target;
-    const { top } = target.closest("div[data-w=d9-tree-content-container]").getBoundingClientRect();
-    const element = document.elementFromPoint(event.clientX, event.clientY);
-    const nodeContainer = element.closest("div[data-w=d9-tree-node-container]");
-    if (nodeContainer == null) {
-      fire(TreeEventTypes.HIDE_HOVER_BOX);
-    } else {
-      const { top: nodeTop, height: height2 } = nodeContainer.getBoundingClientRect();
-      fire(TreeEventTypes.SHOW_HOVER_BOX, nodeTop - top, height2);
-    }
-  };
-  const onMouseLeave = () => {
-    fire(TreeEventTypes.HIDE_HOVER_BOX);
   };
   const detect = buildTreeNodesDetective(detective, markers);
   const rootNodeValue = MUtils.getValue($wrapped.$model, $pp);
@@ -8792,9 +8821,10 @@ const InternalTree = reactExports.forwardRef((props, ref) => {
   rootNodeDef.$children = detect(rootNodeDef, { global: globalHandlers }) ?? [];
   return React.createElement(
     ATree,
-    { ...rest, "data-disabled": $disabled, "data-visible": $visible, height, id: PPUtils.asId(PPUtils.absolute($p2r, props.$pp), props.id), onKeyDown, tabIndex: 0, onMouseMove, onMouseLeave, ref },
+    { ...rest, "data-disabled": $disabled, "data-visible": $visible, height, id: PPUtils.asId(PPUtils.absolute($p2r, props.$pp), props.id), onKeyDown, tabIndex: disableSearchBox ? void 0 : 0, ref },
     React.createElement(TreeHoverBox, null),
-    React.createElement(TreeSearchBox, null),
+    React.createElement(TreeSearchBox, { disabled: disableSearchBox }),
+    children,
     React.createElement(TreeContent, { root: rootNodeDef, initExpandLevel, showIndex, detect, "$pp": $pp, "$wrapped": $wrapped })
   );
 });
@@ -8806,6 +8836,240 @@ const Tree = reactExports.forwardRef((props, ref) => {
   );
 });
 registerWidget({ key: "Tree", JSX: Tree, container: false, array: false });
+const UnwrappedTree = reactExports.forwardRef((props, ref) => {
+  const { $pp = "value", data, visible, ...rest } = props;
+  const $onValueChange = VUtils.noop;
+  const $avs = { $disabled: false, $visible: visible };
+  const $root = { [$pp]: data };
+  return React.createElement(Tree, { ...rest, "$wrapped": { $onValueChange, $avs, $root, $model: $root, $p2r: "." }, "$pp": $pp, id: rest.id ?? VUtils.generateUniqueId(), ref });
+});
+const OptionFilter = qe.div.attrs(({ active, atBottom, top, left, height }) => {
+  return {
+    [DOM_KEY_WIDGET]: "d9-dropdown-tree-option-filter",
+    style: {
+      opacity: active ? 1 : 0,
+      top: atBottom ? top + height - 10 : void 0,
+      bottom: atBottom ? void 0 : `calc(100vh - ${top}px - 10px)`,
+      left: left - 10
+    }
+  };
+})`
+    display: flex;
+    position: fixed;
+    align-items: center;
+    font-family: ${CssVars.FONT_FAMILY};
+    font-size: calc(${CssVars.FONT_SIZE} - 2px);
+    height: calc(${CssVars.INPUT_HEIGHT} / 5 * 4);
+    padding: 0 ${CssVars.INPUT_INDENT};
+    border-radius: ${CssVars.BORDER_RADIUS};
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    //pointer-events: none;
+    z-index: calc(${CssVars.DROPDOWN_Z_INDEX} + 1);
+
+    &:before {
+        content: '';
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: ${CssVars.INFO_COLOR};
+        border-radius: ${CssVars.BORDER_RADIUS};
+        opacity: 0.9;
+        z-index: -1;
+    }
+
+    > span:first-child {
+        color: ${CssVars.INVERT_COLOR};
+        font-weight: ${CssVars.FONT_BOLD};
+        margin-right: 4px;
+    }
+
+    > input {
+        border: 0;
+        outline: none;
+        background-color: transparent;
+        color: ${CssVars.INVERT_COLOR};
+        caret-color: transparent;
+        caret-shape: revert;
+    }
+`;
+const PopupTree = qe(UnwrappedTree)`
+    border: 0;
+`;
+const TreeFilterBridge = () => {
+  const { on, off } = useDropdownTreeEventBus();
+  const { fire } = useTreeEventBus();
+  reactExports.useEffect(() => {
+    const onFilterChanged = (filter) => {
+      fire(TreeEventTypes.FILTER_CHANGED, filter);
+    };
+    on(DropdownTreeEventTypes.FILTER_CHANGED, onFilterChanged);
+    return () => {
+      off(DropdownTreeEventTypes.FILTER_CHANGED, onFilterChanged);
+    };
+  }, [on, off, fire]);
+  return React.createElement(reactExports.Fragment, null);
+};
+const InternalDropdownTree = reactExports.forwardRef((props, ref) => {
+  const { options, optionSort, noAvailable, noMatched, $pp, $wrapped: { $onValueChange, $model, $p2r, $avs: { $disabled, $visible } }, please = "", clearable = true, couldSelect, ...rest } = props;
+  const globalHandlers = useGlobalHandlers();
+  const { fire } = useDropdownTreeEventBus();
+  const [filterChanged] = reactExports.useState(() => async (filter2, timing) => {
+    if (timing === "search") {
+      fire(DropdownTreeEventTypes.FILTER_CHANGED, filter2);
+    }
+  });
+  const { askOptions, filterInputRef, filter, onFilterChanged, containerRef, popupState, popupRef, popupShown, setPopupShown, afterPopupStateChanged, onClicked, onFocused, onKeyUp } = useFilterableDropdownOptions({ ...props, takeoverFilter: false, filterChanged });
+  useDualRefs(containerRef, ref);
+  useTip({ ref: containerRef });
+  const forceUpdate = useForceUpdate();
+  const onClearClicked = async (event) => {
+    if ($disabled) {
+      return;
+    }
+    event.preventDefault();
+    event.stopPropagation();
+    const value2 = MUtils.getValue($model, $pp);
+    if (value2 != null) {
+      await $onValueChange(null, true, { global: globalHandlers });
+    }
+    if (!isDropdownPopupActive(popupState.active)) {
+      onClicked();
+    } else {
+      forceUpdate();
+    }
+  };
+  const value = MUtils.getValue($model, $pp);
+  const selected = value != null;
+  const allOptions = askOptions();
+  const allOptionCount = (() => {
+    const countChildren = (option) => {
+      return (option.children ?? []).reduce((count, option2) => {
+        const childrenCount = countChildren(option2);
+        return count + 1 + childrenCount;
+      }, 0);
+    };
+    return allOptions.reduce((count, option) => {
+      return count + countChildren(option);
+    }, 0);
+  })();
+  const popupHeight = Math.min(allOptionCount, 8) * CssVars.INPUT_HEIGHT_VALUE + 2;
+  const label = (() => {
+    if (value == null) {
+      return please || "";
+    }
+    const findOption = (option) => {
+      if (option.value == value) {
+        return option;
+      } else if (option.children == null || option.children.length === 0) {
+        return void 0;
+      } else {
+        for (const child of option.children) {
+          const found = findOption(child);
+          if (found != null) {
+            return found;
+          }
+        }
+        return void 0;
+      }
+    };
+    for (const option of allOptions) {
+      const found = findOption(option);
+      if (found != null) {
+        return found.label ?? (please || "");
+      }
+    }
+    return please || "";
+  })();
+  const deviceTags = MBUtils.pickDeviceTags(props);
+  const treeModel = {};
+  const onNodeClicked = async (node) => {
+    if ($disabled) {
+      return;
+    }
+    const option = node.value;
+    if (![NO_MATCHED_OPTION_ITEM, NO_AVAILABLE_OPTION_ITEM].includes(`${option.value}`)) {
+      return;
+    }
+    if (couldSelect != null && !couldSelect(option)) {
+      return;
+    }
+    await $onValueChange(option.value, true, { global: globalHandlers });
+    setPopupShown(false);
+    if (filter !== "") {
+      afterPopupStateChanged.afterPopupHide();
+    }
+    setTimeout(() => {
+      var _a;
+      return (_a = containerRef.current) == null ? void 0 : _a.focus();
+    }, 100);
+  };
+  const detective = (parentNode) => {
+    if (parentNode.value === treeModel) {
+      return allOptions.map((option, index) => {
+        return {
+          value: option,
+          $ip2r: `pp${index}`,
+          $ip2p: `pp${index}`,
+          label: option.label,
+          ...option.stringify != null ? { stringify: () => option.stringify(option) } : {},
+          checkable: false,
+          addable: false,
+          removable: false,
+          click: onNodeClicked
+        };
+      });
+    } else {
+      return (parentNode.value.children ?? []).map((option, index) => {
+        return {
+          value: option,
+          $ip2r: PPUtils.concat(parentNode.$ip2r, `pp${index}`),
+          $ip2p: `pp${index}`,
+          label: option.label,
+          ...option.stringify != null ? { stringify: () => option.stringify(option) } : {},
+          checkable: false,
+          addable: false,
+          removable: false,
+          click: onNodeClicked
+        };
+      });
+    }
+  };
+  return React.createElement(
+    DropdownContainer,
+    { active: popupState.active, atBottom: popupState.atBottom, role: "input", tabIndex: 0, ...rest, "data-w": "d9-dropdown-tree", "data-disabled": $disabled, "data-visible": $visible, "data-clearable": clearable, onFocus: onFocused, onClick: onClicked, id: PPUtils.asId(PPUtils.absolute($p2r, $pp), props.id), ref: containerRef },
+    React.createElement(DropdownLabel, { "data-please": !selected }, toIntlLabel(label)),
+    React.createElement(DropdownStick, { valueAssigned: selected, clearable, clear: onClearClicked, disabled: $disabled }),
+    isDropdownPopupActive(popupState.active) ? React.createElement(
+      DropdownPopup,
+      { ...{ ...popupState, minHeight: popupHeight }, shown: popupShown && popupState.active === DropdownPopupStateActive.ACTIVE, ...deviceTags, vScroll: true, ref: popupRef },
+      React.createElement(
+        OptionFilter,
+        { ...{ ...popupState, active: !!filter } },
+        React.createElement("span", null, "?:"),
+        React.createElement("input", { value: filter, onChange: onFilterChanged, onKeyUp, ref: filterInputRef })
+      ),
+      React.createElement(
+        PopupTree,
+        { data: treeModel, initExpandLevel: 0, disableSearchBox: true, detective, height: `calc(${toCssSize(popupHeight)} - 2px)` },
+        React.createElement(TreeFilterBridge, null)
+      )
+    ) : null
+  );
+});
+const DropdownTree = reactExports.forwardRef((props, ref) => {
+  return React.createElement(
+    DropdownTreeEventBusProvider,
+    null,
+    React.createElement(InternalDropdownTree, { ...props, ref })
+  );
+});
+registerWidget({ key: "DropdownTree", JSX: DropdownTree, container: false, array: false });
+registerWidget({ key: "DDT", JSX: DropdownTree, container: false, array: false });
 const UnwrappedCalendar = reactExports.forwardRef((props, ref) => {
   const { $pp = "value", value, onValueChange, disabled, visible, ...rest } = props;
   const $onValueChange = onValueChange;
@@ -9225,13 +9489,6 @@ reactExports.forwardRef((props, ref) => {
   const $avs = { $disabled: false, $visible: visible };
   const $root = { [$pp]: value };
   return React.createElement(Tabs, { ...rest, title, "$wrapped": { $onValueChange, $avs, $root, $model: $root, $p2r: "." }, "$pp": $pp, id: rest.id ?? VUtils.generateUniqueId(), ref });
-});
-reactExports.forwardRef((props, ref) => {
-  const { $pp = "value", data, visible, ...rest } = props;
-  const $onValueChange = VUtils.noop;
-  const $avs = { $disabled: false, $visible: visible };
-  const $root = { [$pp]: data };
-  return React.createElement(Tree, { ...rest, "$wrapped": { $onValueChange, $avs, $root, $model: $root, $p2r: "." }, "$pp": $pp, id: rest.id ?? VUtils.generateUniqueId(), ref });
 });
 reactExports.forwardRef((props, ref) => {
   const { $pp = "value", value, title, visible, ...rest } = props;

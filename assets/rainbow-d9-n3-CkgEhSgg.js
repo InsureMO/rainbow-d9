@@ -4,10 +4,10 @@ var __publicField = (obj, key, value) => {
   __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
   return value;
 };
-import { c as createLogger, N as NUtils, V as VUtils, k as MonitorNodeAttributes, l as Reaction, E as ExternalDefIndicator, P as PPUtils } from "./rainbow-d9-n1-qtCLMeEY.js";
-import { O as OptionItemSort, R as REACTION_REFRESH_OPTIONS, c as GlobalEventPrefix } from "./rainbow-d9-n2-LO3iZxs5.js";
-import { f as fromMarkdown, g as gfmTableFromMarkdown, a as gfmStrikethroughFromMarkdown, b as gfmFootnoteFromMarkdown, c as gfmTaskListItemFromMarkdown, d as frontmatterFromMarkdown } from "./mdast-FRf4dhDH.js";
-import { g as gfmTable, h as gfmStrikethrough, i as gfmFootnote, j as gfmTaskListItem, k as frontmatter } from "./micromark-rYsS6zYN.js";
+import { c as createLogger, N as NUtils, V as VUtils, k as MonitorNodeAttributes, l as Reaction, E as ExternalDefIndicator, P as PPUtils } from "./rainbow-d9-n1-uPVgkT22.js";
+import { O as OptionItemSort, R as REACTION_REFRESH_OPTIONS, c as GlobalEventPrefix } from "./rainbow-d9-n2-o3QG5yiD.js";
+import { f as fromMarkdown, g as gfmTableFromMarkdown, a as gfmStrikethroughFromMarkdown, b as gfmFootnoteFromMarkdown, c as gfmTaskListItemFromMarkdown, d as frontmatterFromMarkdown } from "./mdast-cWHG6aAQ.js";
+import { g as gfmTable, h as gfmStrikethrough, i as gfmFootnote, j as gfmTaskListItem, k as frontmatter } from "./micromark-fSRonLwS.js";
 const AsyncFunction = Object.getPrototypeOf(async function() {
 }).constructor;
 var ParsedNodeType;
@@ -3278,6 +3278,8 @@ var N2WidgetType;
   N2WidgetType2["WIZARD_STEP"] = "WStep";
   N2WidgetType2["WIZARD"] = "Wizard";
   N2WidgetType2["TREE"] = "Tree";
+  N2WidgetType2["DROPDOWN_TREE"] = "DropdownTree";
+  N2WidgetType2["DDT"] = "DDT";
   N2WidgetType2["PAGINATION"] = "Pagination";
 })(N2WidgetType || (N2WidgetType = {}));
 const StandardInputValidators = [
@@ -4244,6 +4246,40 @@ class N2TreeTranslator extends SpecificWidgetTranslator {
     return [N2TreeChildNodesBuild];
   }
 }
+const DropdownTreeCouldSelectBuild = createAsyncSnippetBuild("couldSelect", ["option"]);
+class AbstractN2DropdownTreeTranslator extends SpecificWidgetTranslator {
+  getAttributeValueBuilders() {
+    return [DropdownTreeCouldSelectBuild, N2DropdownSortBuild, N2DropdownReactionRefreshOptionsBuild, ValueChangedBuild];
+  }
+  getValidationHandlerDetectives() {
+    return [
+      ValidatorUtils.DETECT_REQUIRED,
+      ...super.getValidationHandlerDetectives()
+    ];
+  }
+  getReactionHandlerDetectives() {
+    return [
+      ...super.getReactionHandlerDetectives(),
+      N2DropdownReactionRefreshOptionsHandlerDetective
+    ];
+  }
+}
+class N2DropdownTreeTranslator extends AbstractN2DropdownTreeTranslator {
+  getSupportedType() {
+    return N2WidgetType.DROPDOWN_TREE;
+  }
+  getAttributeNamesMapping() {
+    return { "DropdownTree.sort": "optionSort" };
+  }
+}
+class N2DTTTranslator extends AbstractN2DropdownTreeTranslator {
+  getSupportedType() {
+    return N2WidgetType.DDT;
+  }
+  getAttributeNamesMapping() {
+    return { "DropdownTree.sort": "optionSort" };
+  }
+}
 const N2PaginationPossibleSizesBuild = {
   accept: (key) => key === "possibleSizes",
   build: (value, _list) => {
@@ -4315,11 +4351,15 @@ const registerN2Widgets$1 = (widgetHelper) => {
   repo.register(new N2WizardStepTranslator(repo));
   repo.register(new N2WizardTranslator(repo));
   repo.register(new N2TreeTranslator(repo));
+  repo.register(new N2DropdownTreeTranslator(repo));
+  repo.register(new N2DTTTranslator(repo));
   repo.register(new N2PaginationTranslator(repo));
 };
 var index = /* @__PURE__ */ Object.freeze({
   __proto__: null,
   AbstractN2CheckboxesTranslator,
+  AbstractN2DropdownTreeTranslator,
+  DropdownTreeCouldSelectBuild,
   InputMaskBuild,
   N2BadgeTranslator,
   N2BoxTranslator,
@@ -4344,6 +4384,7 @@ var index = /* @__PURE__ */ Object.freeze({
   N2CheckboxValuesBuild,
   N2CheckboxesTranslator,
   N2ChecksTranslator,
+  N2DTTTranslator,
   N2DateTimeTranslator,
   N2DateTranslator,
   N2DecorateInputTranslator,
@@ -4356,6 +4397,7 @@ var index = /* @__PURE__ */ Object.freeze({
   N2DropdownReactionRefreshOptionsHandlerDetective,
   N2DropdownSortBuild,
   N2DropdownTranslator,
+  N2DropdownTreeTranslator,
   N2InputTranslator,
   N2LabelTranslator,
   N2LinkTranslator,
