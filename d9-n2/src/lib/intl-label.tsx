@@ -60,6 +60,8 @@ export const internationalize = (label: string, keys: Array<string>): string => 
 			}
 			if (found == null || VUtils.isBlank(found)) {
 				return label;
+			} else {
+				return found;
 			}
 		}
 	} else {

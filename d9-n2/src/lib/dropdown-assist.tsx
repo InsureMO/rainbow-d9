@@ -1,11 +1,13 @@
-import {DeviceTags, MBUtils, Undefinable, VUtils} from '@rainbow-d9/n1';
+import {DeviceTags, MBUtils, Undefinable, useCreateEventBus, VUtils} from '@rainbow-d9/n1';
 import React, {
 	ChangeEvent,
+	createContext,
 	ForwardedRef,
 	forwardRef,
 	KeyboardEvent,
 	MouseEvent,
 	ReactNode,
+	useContext,
 	useEffect,
 	useRef,
 	useState
@@ -428,12 +430,19 @@ export const useDropdownControl = (options: {
 	};
 };
 
+export interface FilterableDropdownOptions<V> extends OptionItemsProps<V> {
+	takeoverFilter?: false;
+	/** keep it in state, and do not change it */
+	filterChanged?: (filter: string, timing: 'hide' | 'search') => Promise<void>;
+}
+
 // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-constraint, @typescript-eslint/no-explicit-any
-export const useFilterableDropdownOptions = <V extends any>(props: OptionItemsProps<V>, takeoverFilter?: false) => {
+export const useFilterableDropdownOptions = <V extends any>(props: FilterableDropdownOptions<V>) => {
 	const {
 		optionSort, maxWidth,
 		noAvailable = <IntlLabel keys={['options', 'noAvailable']} value="No available options."/>,
 		noMatched = <IntlLabel keys={['options', 'noMatched']} value="No matched options."/>,
+		takeoverFilter, filterChanged,
 		$wrapped: {$avs: {$disabled}}
 	} = props;
 
@@ -442,7 +451,10 @@ export const useFilterableDropdownOptions = <V extends any>(props: OptionItemsPr
 	const [functions] = useState(() => {
 		return {
 			afterPopupShown: () => filterInputRef.current?.focus(),
-			afterPopupHide: () => setTimeout(() => setFilter(''), 100)
+			afterPopupHide: () => setTimeout(async () => {
+				setFilter('');
+				filterChanged && (await filterChanged('', 'hide'));
+			}, 100)
 		};
 	});
 	const {
@@ -516,20 +528,22 @@ export const useFilterableDropdownOptions = <V extends any>(props: OptionItemsPr
 		}
 		filterInputRef.current?.focus();
 	};
-	const onKeyUp = (event: KeyboardEvent<HTMLDivElement>) => {
+	const onKeyUp = async (event: KeyboardEvent<HTMLDivElement>) => {
 		if (!isDropdownPopupActive(popupState.active)) {
 			return;
 		}
 		const {key} = event;
 		if (key === 'Escape') {
 			setFilter('');
+			filterChanged && (await filterChanged('', 'search'));
 		}
 	};
-	const onFilterChanged = (event: ChangeEvent<HTMLInputElement>) => {
+	const onFilterChanged = async (event: ChangeEvent<HTMLInputElement>) => {
 		if ($disabled) {
 			return;
 		}
 		setFilter(event.target.value);
+		filterChanged && (await filterChanged(event.target.value, 'search'));
 	};
 
 	return {
@@ -541,3 +555,30 @@ export const useFilterableDropdownOptions = <V extends any>(props: OptionItemsPr
 		onClicked, onFocused, onKeyUp, onFilterChanged
 	};
 };
+
+export enum DropdownTreeEventTypes {
+	FILTER_CHANGED = 'filter-changed',
+}
+
+export interface DropdownTreeEventBus {
+	fire(type: DropdownTreeEventTypes.FILTER_CHANGED, filter: string): this;
+
+	on(type: DropdownTreeEventTypes.FILTER_CHANGED, listener: (filter: string) => void): this;
+
+	off(type: DropdownTreeEventTypes.FILTER_CHANGED, listener: (filter: string) => void): this;
+}
+
+const Context = createContext<DropdownTreeEventBus>({} as DropdownTreeEventBus);
+Context.displayName = 'DropdownTreeEventBus';
+
+export const DropdownTreeEventBusProvider = (props: { children?: ReactNode }) => {
+	const {children} = props;
+
+	const bus = useCreateEventBus<DropdownTreeEventBus>('dropdown-tree');
+
+	return <Context.Provider value={bus}>
+		{children}
+	</Context.Provider>;
+};
+
+export const useDropdownTreeEventBus = () => useContext(Context);

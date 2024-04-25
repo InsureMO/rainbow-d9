@@ -10,7 +10,7 @@ import {
 	ValueChangeableNodeDef,
 	WidgetProps
 } from '@rainbow-d9/n1';
-import React, {ChangeEvent, ForwardedRef, forwardRef, MouseEvent, ReactNode} from 'react';
+import React, {ForwardedRef, forwardRef, Fragment, MouseEvent, ReactNode, useEffect, useState} from 'react';
 import styled from 'styled-components';
 import {CssVars, DOM_KEY_WIDGET} from './constants';
 import {
@@ -20,13 +20,22 @@ import {
 	DropdownPopupState,
 	DropdownPopupStateActive,
 	DropdownStick,
+	DropdownTreeEventBusProvider,
+	DropdownTreeEventTypes,
 	isDropdownPopupActive,
+	useDropdownTreeEventBus,
 	useFilterableDropdownOptions
 } from './dropdown-assist';
 import {useGlobalHandlers, useTip} from './global';
 import {toIntlLabel} from './intl-label';
-import {OptionItemSort, TreeOptionItem, TreeOptionItems} from './option-items-assist';
-import {TreeNodeDef, TreeNodeDetect} from './tree';
+import {
+	NO_AVAILABLE_OPTION_ITEM,
+	NO_MATCHED_OPTION_ITEM,
+	OptionItemSort,
+	TreeOptionItem,
+	TreeOptionItems
+} from './option-items-assist';
+import {TreeEventTypes, TreeNodeDef, TreeNodeDetect, useTreeEventBus} from './tree';
 import {GlobalEventHandlers, ModelCarrier, OmitHTMLProps, OmitNodeDef} from './types';
 import {UnwrappedTree} from './unwrapped/tree';
 import {toCssSize, useDualRefs} from './utils';
@@ -80,7 +89,7 @@ const OptionFilter = styled.div.attrs<Omit<DropdownPopupState, 'active'> & { act
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
-    pointer-events: none;
+    //pointer-events: none;
     z-index: calc(${CssVars.DROPDOWN_Z_INDEX} + 1);
 
     &:before {
@@ -118,7 +127,22 @@ const PopupTree = styled(UnwrappedTree)`
     border: 0;
 `;
 
-export const DropdownTree = forwardRef((props: DropdownTreeProps, ref: ForwardedRef<HTMLDivElement>) => {
+export const TreeFilterBridge = () => {
+	const {on, off} = useDropdownTreeEventBus();
+	const {fire} = useTreeEventBus();
+	useEffect(() => {
+		const onFilterChanged = (filter: string) => {
+			fire(TreeEventTypes.FILTER_CHANGED, filter);
+		};
+		on(DropdownTreeEventTypes.FILTER_CHANGED, onFilterChanged);
+		return () => {
+			off(DropdownTreeEventTypes.FILTER_CHANGED, onFilterChanged);
+		};
+	}, [on, off, fire]);
+
+	return <Fragment/>;
+};
+export const InternalDropdownTree = forwardRef((props: DropdownTreeProps, ref: ForwardedRef<HTMLDivElement>) => {
 	const {
 		// eslint-disable-next-line @typescript-eslint/no-unused-vars
 		options, optionSort, noAvailable, noMatched,
@@ -128,14 +152,21 @@ export const DropdownTree = forwardRef((props: DropdownTreeProps, ref: Forwarded
 	} = props;
 
 	const globalHandlers = useGlobalHandlers();
+	const {fire} = useDropdownTreeEventBus();
+	const [filterChanged] = useState(() => async (filter: string, timing: 'hide' | 'search') => {
+		// tree will re-renderer next popup show, so there is no need to fire event here
+		if (timing === 'search') {
+			fire(DropdownTreeEventTypes.FILTER_CHANGED, filter);
+		}
+	});
 	const {
 		askOptions,
-		filterInputRef, filter, setFilter,
+		filterInputRef, filter, onFilterChanged,
 		containerRef,
 		popupState,
 		popupRef, popupShown, setPopupShown, afterPopupStateChanged,
 		onClicked, onFocused, onKeyUp
-	} = useFilterableDropdownOptions(props, false);
+	} = useFilterableDropdownOptions({...props, takeoverFilter: false, filterChanged});
 	useDualRefs(containerRef, ref);
 	useTip({ref: containerRef});
 	const forceUpdate = useForceUpdate();
@@ -208,6 +239,9 @@ export const DropdownTree = forwardRef((props: DropdownTreeProps, ref: Forwarded
 			return;
 		}
 		const option = node.value as unknown as DropdownTreeOption;
+		if (![NO_MATCHED_OPTION_ITEM, NO_AVAILABLE_OPTION_ITEM].includes(`${option.value}`)) {
+			return;
+		}
 		if (couldSelect != null && !couldSelect(option)) {
 			return;
 		}
@@ -246,12 +280,6 @@ export const DropdownTree = forwardRef((props: DropdownTreeProps, ref: Forwarded
 				});
 		}
 	};
-	const onFilterChanged = (event: ChangeEvent<HTMLInputElement>) => {
-		if ($disabled) {
-			return;
-		}
-		setFilter(event.target.value);
-	};
 
 	return <DropdownContainer active={popupState.active} atBottom={popupState.atBottom}
 	                          role="input" tabIndex={0}
@@ -276,10 +304,18 @@ export const DropdownTree = forwardRef((props: DropdownTreeProps, ref: Forwarded
 				</OptionFilter>
 				<PopupTree data={treeModel} initExpandLevel={0} disableSearchBox={true}
 				           detective={detective}
-				           height={`calc(${toCssSize(popupHeight)} - 2px)`}/>
+				           height={`calc(${toCssSize(popupHeight)} - 2px)`}>
+					<TreeFilterBridge/>
+				</PopupTree>
 			</DropdownPopup>
 			: null}
 	</DropdownContainer>;
+});
+
+export const DropdownTree = forwardRef((props: DropdownTreeProps, ref: ForwardedRef<HTMLDivElement>) => {
+	return <DropdownTreeEventBusProvider>
+		<InternalDropdownTree {...props} ref={ref}/>
+	</DropdownTreeEventBusProvider>;
 });
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment

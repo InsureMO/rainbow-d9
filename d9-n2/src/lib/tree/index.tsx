@@ -71,7 +71,7 @@ export const InternalTree = forwardRef((props: TreeProps, ref: ForwardedRef<HTML
 
 	return <ATree {...rest} data-disabled={$disabled} data-visible={$visible} height={height}
 	              id={PPUtils.asId(PPUtils.absolute($p2r, props.$pp), props.id)}
-	              onKeyDown={onKeyDown} tabIndex={0}
+	              onKeyDown={onKeyDown} tabIndex={disableSearchBox ? (void 0) : 0}
 	              ref={ref}>
 		<TreeHoverBox/>
 		<TreeSearchBox disabled={disableSearchBox}/>
