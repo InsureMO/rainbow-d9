@@ -71,7 +71,7 @@ const MultiDropdownLabel = styled(DropdownLabel)`
     height: unset;
     min-height: calc(${CssVars.INPUT_HEIGHT} - 6px);
     padding: 0 calc(${CssVars.INPUT_INDENT} / 2);
-    margin: 2px 4px 2px 0;
+    margin: 2px 8px 2px -4px;
     white-space: normal;
 
     > span:first-child {
@@ -277,11 +277,11 @@ export const MultiDropdown = forwardRef((props: MultiDropdownProps, ref: Forward
 		}
 		if (values.length === askOptions().length) {
 			setPopupShown(false);
+			if (filter !== '') {
+				setTimeout(() => setFilter(''), 100);
+			}
 		} else {
 			repaintPopup();
-		}
-		if (filter !== '') {
-			setTimeout(() => setFilter(''), 100);
 		}
 		setTimeout(() => containerRef.current?.focus(), 100);
 	};
