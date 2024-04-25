@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import {CssVars, DOM_ID_WIDGET, DOM_KEY_WIDGET} from '../constants';
+import {UnwrappedDecorateInput} from '../unwrapped/unwrapped-index';
 import {toCssSize} from '../utils';
 
 // noinspection CssUnresolvedCustomProperty
@@ -27,44 +28,45 @@ export const ATree = styled.div.attrs<{ height: number | string }>(
     &[data-visible=false] {
         display: none;
     }
+`;
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
+export const TreeSearchInput = styled(UnwrappedDecorateInput)`
+    min-height: ${CssVars.INPUT_HEIGHT};
+    border-top-left-radius: ${CssVars.BORDER_RADIUS};
+    border-top-right-radius: ${CssVars.BORDER_RADIUS};
+    border-bottom: ${CssVars.BORDER};
+    overflow: hidden;
+    transition: border-bottom-color ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION};
 
-    > div[data-w=d9-deco-input]:first-child {
-        min-height: ${CssVars.INPUT_HEIGHT};
-        border-top-left-radius: ${CssVars.BORDER_RADIUS};
-        border-top-right-radius: ${CssVars.BORDER_RADIUS};
-        border-bottom: ${CssVars.BORDER};
-        overflow: hidden;
-        transition: border-bottom-color ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION};
+    &[data-visible=false] {
+        height: 0;
+        min-height: 0;
+        border-bottom: 0;
+    }
 
-        &[data-visible=false] {
-            height: 0;
-            min-height: 0;
-            border-bottom: 0;
+    &:focus-within {
+        border-bottom-color: ${CssVars.PRIMARY_COLOR};
+    }
+
+    > span[data-w=d9-deco-lead] {
+        border-top: 0;
+        border-left: 0;
+        border-bottom: 0;
+        border-bottom-left-radius: 0;
+
+        > svg {
+            opacity: 0.3;
+            height: calc(${CssVars.FONT_SIZE} * 0.9);
         }
+    }
 
-        &:focus-within {
-            border-bottom-color: ${CssVars.PRIMARY_COLOR};
-        }
+    > input[data-w=d9-input] {
+        border: 0;
+        border-bottom-right-radius: 0;
 
-        > span[data-w=d9-deco-lead] {
-            border-top: 0;
-            border-left: 0;
-            border-bottom: 0;
-            border-bottom-left-radius: 0;
-
-            > svg {
-                opacity: 0.3;
-                height: calc(${CssVars.FONT_SIZE} * 0.9);
-            }
-        }
-
-        > input[data-w=d9-input] {
-            border: 0;
-            border-bottom-right-radius: 0;
-
-            &:hover, &:focus {
-                box-shadow: none;
-            }
+        &:hover, &:focus {
+            box-shadow: none;
         }
     }
 `;

@@ -17,6 +17,7 @@ export const InternalTree = forwardRef((props: TreeProps, ref: ForwardedRef<HTML
 		$pp,
 		initExpandLevel = -1, showIndex = false, detective,
 		height = 300, marker,
+		disableSearchBox = false, children,
 		$wrapped, ...rest
 	} = props;
 	const {$p2r, $avs: {$disabled, $visible}} = $wrapped;
@@ -40,6 +41,9 @@ export const InternalTree = forwardRef((props: TreeProps, ref: ForwardedRef<HTML
 	const markers = useMarker();
 
 	const onKeyDown = (event: KeyboardEvent<HTMLDivElement>) => {
+		if (disableSearchBox) {
+			return;
+		}
 		// Check for Ctrl key on Windows/Linux or Command key on Mac
 		const isCtrlKey = event.ctrlKey || event.metaKey;
 		// Check if 'F' key is pressed
@@ -48,12 +52,14 @@ export const InternalTree = forwardRef((props: TreeProps, ref: ForwardedRef<HTML
 		// If Ctrl/Command + F is pressed
 		if (isCtrlKey && isFKey) {
 			event.preventDefault(); // Prevent default browser behavior
-			fire(TreeEventTypes.SWITCH_SEARCH_BOX);
+			fire(TreeEventTypes.OPEN_SEARCH_BOX);
+		} else if (event.key === 'Escape') {
+			fire(TreeEventTypes.HIDE_SEARCH_BOX);
 		}
 	};
 	const onMouseMove = (event: MouseEvent<HTMLDivElement>) => {
 		const target = event.target as HTMLDivElement;
-		const {top} = target.closest('div[data-w=d9-tree-content-container]').getBoundingClientRect();
+		const {top} = target.closest('div[data-w=d9-tree-content-container]').parentElement.getBoundingClientRect();
 		const element = document.elementFromPoint(event.clientX, event.clientY);
 		const nodeContainer = element.closest('div[data-w=d9-tree-node-container]');
 		if (nodeContainer == null) {
@@ -84,7 +90,8 @@ export const InternalTree = forwardRef((props: TreeProps, ref: ForwardedRef<HTML
 	              onMouseMove={onMouseMove} onMouseLeave={onMouseLeave}
 	              ref={ref}>
 		<TreeHoverBox/>
-		<TreeSearchBox/>
+		<TreeSearchBox disabled={disableSearchBox}/>
+		{children}
 		<TreeContent root={rootNodeDef} initExpandLevel={initExpandLevel}
 		             showIndex={showIndex} detect={detect} $pp={$pp} $wrapped={$wrapped}/>
 	</ATree>;

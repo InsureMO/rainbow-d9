@@ -1,7 +1,8 @@
 import {TreeNodeDef} from '../types';
 
 export enum TreeEventTypes {
-	SWITCH_SEARCH_BOX = 'switch-search-box',
+	OPEN_SEARCH_BOX = 'switch-search-box',
+	HIDE_SEARCH_BOX = 'hide-search-box',
 	DISCARD_FILTER = 'discard-filter',
 	FILTER_CHANGED = 'filter-changed',
 	ASK_MARKER_ADDER = 'ask-marker-adder',
@@ -11,11 +12,17 @@ export enum TreeEventTypes {
 }
 
 export interface TreeEventBus {
-	fire(type: TreeEventTypes.SWITCH_SEARCH_BOX): this;
+	fire(type: TreeEventTypes.OPEN_SEARCH_BOX): this;
 
-	on(type: TreeEventTypes.SWITCH_SEARCH_BOX, listener: () => void): this;
+	on(type: TreeEventTypes.OPEN_SEARCH_BOX, listener: () => void): this;
 
-	off(type: TreeEventTypes.SWITCH_SEARCH_BOX, listener: () => void): this;
+	off(type: TreeEventTypes.OPEN_SEARCH_BOX, listener: () => void): this;
+
+	fire(type: TreeEventTypes.HIDE_SEARCH_BOX): this;
+
+	on(type: TreeEventTypes.HIDE_SEARCH_BOX, listener: () => void): this;
+
+	off(type: TreeEventTypes.HIDE_SEARCH_BOX, listener: () => void): this;
 
 	fire(type: TreeEventTypes.DISCARD_FILTER): this;
 

@@ -1,45 +1,61 @@
 import React, {useEffect, useRef, useState} from 'react';
-import {UnwrappedDecorateInput} from '../unwrapped/decorate-input';
 import {useTreeEventBus} from './event/tree-event-bus';
 import {TreeEventTypes} from './event/tree-event-bus-types';
+import {TreeSearchInput} from './widgets';
 
 export interface TreeSearchBoxState {
 	value: string;
 	visible: boolean;
 }
 
-export const TreeSearchBox = () => {
+export const TreeSearchBox = (props: { disabled: boolean }) => {
+	const {disabled} = props;
+
 	const ref = useRef<HTMLDivElement>(null);
 	const {on, off, fire} = useTreeEventBus();
 	const [state, setState] = useState<TreeSearchBoxState>({value: '', visible: false});
 	useEffect(() => {
-		const onSwitchSearchBox = () => {
+		if (disabled) {
+			return;
+		}
+		const onOpenSearchBox = () => {
 			if (state.visible) {
-				// hide
-				fire(TreeEventTypes.DISCARD_FILTER);
+				return;
 			}
-			setState({value: '', visible: !state.visible});
+			setState({value: '', visible: true});
 		};
-		on(TreeEventTypes.SWITCH_SEARCH_BOX, onSwitchSearchBox);
+		const onHideSearchBox = () => {
+			if (!state.visible) {
+				return;
+			}
+			fire(TreeEventTypes.DISCARD_FILTER);
+			setState({value: '', visible: false});
+		};
+		on(TreeEventTypes.OPEN_SEARCH_BOX, onOpenSearchBox);
+		on(TreeEventTypes.HIDE_SEARCH_BOX, onHideSearchBox);
 		return () => {
-			off(TreeEventTypes.SWITCH_SEARCH_BOX, onSwitchSearchBox);
+			off(TreeEventTypes.OPEN_SEARCH_BOX, onOpenSearchBox);
+			off(TreeEventTypes.HIDE_SEARCH_BOX, onHideSearchBox);
 		};
-	}, [on, off, fire, state.visible]);
+	}, [on, off, fire, disabled, state.visible]);
 	useEffect(() => {
+		if (disabled) {
+			return;
+		}
 		if (state.visible) {
 			ref.current?.querySelector('input')?.focus();
 		} else {
 			ref.current?.parentElement?.focus();
 		}
-	}, [state.visible]);
+	}, [disabled, state.visible]);
 
 	const onValueChange = (value: string) => {
 		setState(state => ({...state, value}));
 		fire(TreeEventTypes.FILTER_CHANGED, value);
 	};
 
-	return <UnwrappedDecorateInput visible={state.visible} value={state.value} onValueChange={onValueChange}
-	                               leads={['$icons.search']}
-	                               placeholder="tree.filter.placeholder"
-	                               ref={ref}/>;
+	return <TreeSearchInput visible={state.visible} value={state.value} onValueChange={onValueChange}
+	                        leads={['$icons.search']}
+	                        placeholder="tree.filter.placeholder"
+	                        ref={ref}/>;
 };

@@ -78,6 +78,11 @@ export type TreeDef = NodeDef & OmitHTMLProps2<HTMLDivElement, 'title' | 'height
 	detective?: TreeNodeDetect;
 	height?: number | string;
 	marker?: string;
+	/** disable the search box, default false */
+	disableSearchBox?: boolean;
 };
 /** Tree widget definition, with html attributes */
-export type TreeProps = OmitNodeDef<TreeDef> & WidgetProps;
+export type TreeProps = OmitNodeDef<TreeDef> & WidgetProps & {
+	/** for programmatic usage */
+	children?: ReactNode;
+};
