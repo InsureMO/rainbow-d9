@@ -4,28 +4,28 @@ var __publicField = (obj, key, value) => {
   __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
   return value;
 };
-import { R as React, r as reactExports, j as jsxRuntimeExports, c as client } from "./react-eULmGZqv.js";
-import { r as registerCharts } from "./rainbow-d9-echarts-kMbLtp4i.js";
-import { V as VUtils, r as registerWidget, g as useCreateEventBus, M as MUtils, P as PPUtils, a as useThrottler, e as useForceUpdate, S as StandaloneRoot, m as ExternalDefMismatchIndicator, n as N1Logger, B as BridgeEventBusProvider, o as useBridgeEventBus, p as BridgeToRootEventTypes, E as ExternalDefIndicator, f as MBUtils, D as DeviceDetective } from "./rainbow-d9-n1-lzxxX0eg.js";
-import { i as index$2, D as DOM_KEY_WIDGET, C as CssVars, d as utils$2, b as useGlobalHandlers, t as toIntlLabel, U as UnwrappedButton, B as ButtonInk, I as IntlLabel, e as ButtonFill, o as utils$3, n as GlobalRoot, p as utils$1, $ as $d9n2, u as useGlobalEventBus, q as UnwrappedButtonBar, r as ButtonBarAlignment, G as GlobalEventTypes, s as UnwrappedCaption, T as TreeNodeCheckedChangeFrom, v as UnwrappedSection } from "./rainbow-d9-n2-Z7ZjDnkx.js";
-import { a as index$2$1, b as index, i as index$1, p as parseDoc, r as registerN2Widgets } from "./rainbow-d9-n3-9Bwdgbaf.js";
-import { q as qe, $ as $e } from "./styled-components-Nvi_LCzF.js";
-import { T as Tag, v as tags, x as ViewPlugin, y as syntaxTree, H as HighlightStyle, z as defaultHighlightStyle, A as syntaxHighlighting, B as styleTags, D as Decoration, C as InlineContext, W as WidgetType, F as EditorView, G as EditorState, J as basicSetup, K as keymap, L as indentWithTab, N as markdown$c, O as javascript, Q as markdownLanguage, R as lintGutter, U as linter, X as json, Y as jsonParseLinter, n as nanoid } from "./vendor-wCUoLaWE.js";
-import { r as registerPlanSelect, u as useDemoMarkdown, C as CustomEventHandler, N as N2DemoDialogHandler, T as ThaiPlanSelection, a as ThaiPlanSelectionData, b as ThaiPlanSelectionMarkdown, P as PlanSelectionCssVars } from "./rainbow-d9-thai-plan-selection-GNci4m7w.js";
+import { R as React, r as reactExports, j as jsxRuntimeExports, c as client } from "./react-9JUNisJQ.js";
+import { r as registerCharts } from "./rainbow-d9-echarts-LuDErO6c.js";
+import { V as VUtils, r as registerWidget, g as useCreateEventBus, M as MUtils, P as PPUtils, a as useThrottler, e as useForceUpdate, S as StandaloneRoot, m as ExternalDefMismatchIndicator, n as N1Logger, B as BridgeEventBusProvider, o as useBridgeEventBus, p as BridgeToRootEventTypes, E as ExternalDefIndicator, f as MBUtils, D as DeviceDetective } from "./rainbow-d9-n1-czOgqBsL.js";
+import { i as index$2, D as DOM_KEY_WIDGET, C as CssVars, d as utils$2, b as useGlobalHandlers, t as toIntlLabel, U as UnwrappedButton, B as ButtonInk, I as IntlLabel, e as ButtonFill, o as utils$3, n as GlobalRoot, p as utils$1, $ as $d9n2, u as useGlobalEventBus, q as UnwrappedButtonBar, r as ButtonBarAlignment, G as GlobalEventTypes, s as UnwrappedCaption, T as TreeNodeCheckedChangeFrom, v as UnwrappedSection } from "./rainbow-d9-n2-hcrT8m2S.js";
+import { a as index, b as index$2$1, i as index$1, p as parseDoc, r as registerN2Widgets } from "./rainbow-d9-n3--BeTL8KF.js";
+import { q as qe, $ as $e } from "./styled-components-1neY-nLL.js";
+import { T as Tag, v as tags, x as ViewPlugin, y as syntaxTree, H as HighlightStyle, z as defaultHighlightStyle, A as syntaxHighlighting, B as styleTags, D as Decoration, C as InlineContext, W as WidgetType, F as EditorView, G as EditorState, J as basicSetup, K as keymap, L as indentWithTab, N as markdown$c, O as javascript, Q as markdownLanguage, R as lintGutter, U as linter, X as json, Y as jsonParseLinter, n as nanoid } from "./vendor-evEsej2c.js";
+import { r as registerPlanSelect, u as useDemoMarkdown, C as CustomEventHandler, N as N2DemoDialogHandler, T as ThaiPlanSelection, a as ThaiPlanSelectionData, b as ThaiPlanSelectionMarkdown, P as PlanSelectionCssVars } from "./rainbow-d9-thai-plan-selection-xC_IME3G.js";
 import { d as dayjs, W as WeekOfYear, Q as QuarterOfYear, D as Duration, I as IsToday, R as RelativeTime, A as ArraySupport, O as ObjectSupport, C as CustomParseFormat, U as UTC, B as BuddhistEra } from "./dayjs-9Z7dW0Q-.js";
 import { u as use, a as install, b as install$1, c as install$2, d as install$3, e as install$4, f as install$5, h as installLabelLayout, j as installUniversalTransition, k as install$6, l as install$7 } from "./echarts-v5L9gyiQ.js";
-import { b as remarkGfm } from "./remark-0CX2rn7f.js";
-import { R as ReactMarkdown } from "./react-markdown-lr96GtsI.js";
-import { S as SyntaxHighlighter, m as materialDark, _ as __vitePreload } from "./react-syntax-highlighter-JUl_XqAa.js";
+import { b as remarkGfm } from "./remark-_j1Itbll.js";
+import { R as ReactMarkdown } from "./react-markdown-S_I3pifI.js";
+import { S as SyntaxHighlighter, m as materialDark, _ as __vitePreload } from "./react-syntax-highlighter-8qYg8bjJ.js";
 import "./babel-AnpZxJH-.js";
-import "./mdast-m1XeX9nd.js";
-import "./micromark-hdd7jxs_.js";
+import "./mdast-LRr-mlJO.js";
+import "./micromark-BYsde-GI.js";
 import "./unist-5yxlKLF4.js";
 import "./emotion--D3psyId.js";
 import "./zrender-DEzoFf2M.js";
-import "./property-information-4dnGjXnu.js";
-import "./refractor-iEevYPQP.js";
-import "./hastscript-LRvDTx6n.js";
+import "./property-information-hSdxgbB2.js";
+import "./refractor-lntjGzez.js";
+import "./hastscript-uNAfj0-F.js";
 (function polyfill() {
   const relList = document.createElement("link").relList;
   if (relList && relList.supports && relList.supports("modulepreload")) {
@@ -272,6 +272,16 @@ const DropdownIcon = (props) => {
     { ...props, "data-icon": "playground-dropdown", viewBox: "-3 -3 20 20", xmlns: "http://www.w3.org/2000/svg" },
     React.createElement("path", { fill: "currentColor", d: "M15 4h-14c-0.6 0-1 0.4-1 1v6c0 0.6 0.4 1 1 1h14c0.6 0 1-0.4 1-1v-6c0-0.6-0.4-1-1-1zM10 11h-9v-6h9v6zM13 8.4l-2-1.4h4l-2 1.4z" }),
     React.createElement("path", { fill: "currentColor", d: "M2 6h1v4h-1v-4z" })
+  );
+};
+const DropdownTreeIcon = (props) => {
+  return React.createElement(
+    "svg",
+    { ...props, "data-icon": "playground-dropdown-tree", viewBox: "0 0 24 24", fill: "none", xmlns: "http://www.w3.org/2000/svg" },
+    React.createElement("path", { d: "M2 12C2 7.28595 2 4.92893 3.46447 3.46447C4.92893 2 7.28595 2 12 2C16.714 2 19.0711 2 20.5355 3.46447C22 4.92893 22 7.28595 22 12C22 16.714 22 19.0711 20.5355 20.5355C19.0711 22 16.714 22 12 22C7.28595 22 4.92893 22 3.46447 20.5355C2 19.0711 2 16.714 2 12Z", stroke: "#1C274C", strokeWidth: "1.5" }),
+    React.createElement("path", { opacity: "0.5", d: "M2 13H5.16026C6.06543 13 6.51802 13 6.91584 13.183C7.31367 13.3659 7.60821 13.7096 8.19729 14.3968L8.80271 15.1032C9.39179 15.7904 9.68633 16.1341 10.0842 16.317C10.482 16.5 10.9346 16.5 11.8397 16.5H12.1603C13.0654 16.5 13.518 16.5 13.9158 16.317C14.3137 16.1341 14.6082 15.7904 15.1973 15.1032L15.8027 14.3968C16.3918 13.7096 16.6863 13.3659 17.0842 13.183C17.482 13 17.9346 13 18.8397 13H22", stroke: "#1C274C", strokeWidth: "1.5", strokeLinecap: "round" }),
+    React.createElement("path", { opacity: "0.5", d: "M8 7H16", stroke: "#1C274C", strokeWidth: "1.5", strokeLinecap: "round" }),
+    React.createElement("path", { opacity: "0.5", d: "M10 10.5H14", stroke: "#1C274C", strokeWidth: "1.5", strokeLinecap: "round" })
   );
 };
 const HideEditorBadgeIcon = (props) => {
@@ -591,6 +601,7 @@ var PlaygroundIcons;
   PlaygroundIcons2["RIBS"] = "playground.ribs";
   PlaygroundIcons2["TABLE"] = "playground.table";
   PlaygroundIcons2["TREE"] = "playground.tree";
+  PlaygroundIcons2["DROPDOWN_TREE"] = "playground.dropdown-tree";
   PlaygroundIcons2["TABS"] = "playground.tabs";
   PlaygroundIcons2["WIZARD"] = "playground.wizard";
   PlaygroundIcons2["BUTTON_BAR"] = "playground.button-bar";
@@ -641,6 +652,7 @@ index$2.Registrar.register({
   [PlaygroundIcons.RIBS]: () => React.createElement(RibsIcon, null),
   [PlaygroundIcons.TABLE]: () => React.createElement(TableIcon, null),
   [PlaygroundIcons.TREE]: () => React.createElement(TreeIcon, null),
+  [PlaygroundIcons.DROPDOWN_TREE]: () => React.createElement(DropdownTreeIcon, null),
   [PlaygroundIcons.TABS]: () => React.createElement(TabsIcon, null),
   [PlaygroundIcons.WIZARD]: () => React.createElement(WizardIcon, null),
   [PlaygroundIcons.BUTTON_BAR]: () => React.createElement(ButtonBarIcon, null),
@@ -1014,16 +1026,14 @@ const WidgetDeclarationNodes = [
   { name: "WidgetDeclarationAttrValueStr", style: WidgetDeclarationAttrValueStrTag },
   { name: "WidgetDeclarationAttrValueExt", style: WidgetDeclarationAttrValueExtTag }
 ];
-const WIDGET_DECLARATION_SPLITTER = index$2$1.AbstractSemanticNodeWidgetParser.WIDGET_TITLE_SPLITTER;
-const ATTRIBUTE_DECLARATION_SPLITTER = ":";
-const ATTRIBUTE_DECLARATION_JOINT = ",";
-const ATTRIBUTE_DECLARATION_EXCLAMATION_MARK = "!";
-const ATTRIBUTE_VALUE_CONST_START = "$";
-const ATTRIBUTE_VALUE_ICON_SYMBOL = "$icons";
-const ATTRIBUTE_VALUE_ICON_PREFIX = `${ATTRIBUTE_VALUE_ICON_SYMBOL}.`;
-const ATTRIBUTE_VALUE_REF_START = "@";
-const ATTRIBUTE_VALUE_EXT_SYMBOL = "@ext";
-const ATTRIBUTE_VALUE_EXT_PREFIX = `${ATTRIBUTE_VALUE_EXT_SYMBOL}.`;
+const BOX = {
+  $wt: index.N2WidgetType.BOX,
+  label: "Box, for customized layout.",
+  icon: PlaygroundIcons.BOX,
+  group: PlaygroundWidgetGroupKey.CONTAINERS,
+  template: `Box::[title]
+`
+};
 const ValueChanged = {
   name: "valueChanged",
   label: "Snippet.",
@@ -1034,81 +1044,13 @@ const AutoSelect = {
   label: "Boolean. Select all content automatically.",
   description: "Default true."
 };
-const InputPlaceholder = { name: "placeholder", label: "Text. Placeholder when no content." };
-const DecorateElements = (name) => {
-  return {
-    name,
-    label: "Decorations.",
-    description: "A string or a predefined icon. Icons need to start with “$icons.” Multiple decorations can be connected with “;”."
-  };
+const InputPlaceholder = {
+  name: "placeholder",
+  label: "Text. Placeholder when no content."
 };
-const LeadsDecorateElements = DecorateElements("leads");
-const TailsDecorateElements = DecorateElements("tails");
 const Please = { name: "please", label: "Text. Placeholder." };
 const Clearable = { name: "clearable", label: "Boolean.", description: "Default true." };
-const CalendarProperties = [
-  Please,
-  Clearable,
-  { name: "date", label: "Boolean. Allow date part or not.", description: "Default true." },
-  { name: "dateFormat", label: "Text.", description: "Default value depends on system settings." },
-  { name: "time", label: "Boolean. Allow time part or not.", description: "Default false." },
-  {
-    name: "timeFormat",
-    label: "Text.",
-    description: 'Default value depends on system settings, works only when "time" is true.'
-  },
-  { name: "storeFormat", label: "Text.", description: "Default value depends on system settings." },
-  {
-    name: "fixedTimeAt",
-    label: "Text.",
-    description: 'Default value depends on system settings, works only when "time" is false. "start", "0", "end", "HH:mm:ss", "HH:mm:ss.SSS".'
-  },
-  {
-    name: "initTimeAt",
-    label: "Text.",
-    description: '"start", "0", "end", "HH:mm:ss", "HH:mm:ss.SSS".'
-  },
-  { name: "autoConfirm", label: "Boolean.", description: "Confirm selection when blurred." },
-  {
-    name: "autoConfirmOnDate",
-    label: "Boolean.",
-    description: "Confirm selection when date clicked when no time part."
-  },
-  { name: "useCalendarIcon", label: "Boolean.", description: "Use calendar icon instead of caret." },
-  { name: "couldPerform", label: "Snippet.", description: "Check given date could be performed or not." }
-];
-const OptionItemsProperties = [
-  { name: "options", label: "Text, Various." },
-  { name: "optionSort", label: "Text.", description: '"asc", "desc".' },
-  { name: "sort", label: 'Text. Shortcut of "optionSort".', description: '"asc", "desc".' },
-  { name: "noAvailable", label: "Text.", description: "Reminder text when no available option item." },
-  { name: "noMatched", label: "Text.", description: "Reminder text when no matched option item." }
-];
-const CheckboxesProperties = [
-  ...OptionItemsProperties.filter(({ name }) => name !== "noMatched"),
-  { name: "columns", label: "Number.", description: "Display columns when not on compact mode." },
-  { name: "compact", label: "Boolean.", description: "Default true. Try to fit as many as possible onto one line." },
-  {
-    name: "single",
-    label: "Boolean.",
-    description: "Default false. Use primitive value of model instead of an array."
-  },
-  { name: "boolOnSingle", label: "Boolean.", description: "Default false. Use false when no option checked." }
-];
-const DropdownProperties = [
-  ...OptionItemsProperties,
-  Please,
-  Clearable,
-  { name: "maxWidth", label: "Number.", description: "Max popup width, in pixels." }
-];
 const Click = { name: "click", label: "Snippet.", description: "Handle click event." };
-const CaptionProperties = [
-  { name: "labelOnValue", label: "Boolean.", description: "Default false. Content read from model or not." },
-  { name: "label", label: "Text.", description: 'Static content, ignored when "text" declared.' },
-  { name: "text", label: "Text.", description: 'Static content, works on "labelOnValue" is false.' },
-  { name: "valueToLabel", label: "Snippet.", description: "Snippet to compute display label." },
-  Click
-];
 const Ink = {
   name: "ink",
   label: "Text.",
@@ -1119,11 +1061,21 @@ const Fill = {
   label: "Text.",
   description: 'Fill mode. "link", "plain", "fill".'
 };
-const ButtonProperties = [
-  Ink,
-  Fill,
-  { name: "text", label: "Text.", description: "Label." },
-  Click
+const DecorateElements = (name) => {
+  return {
+    name,
+    label: "Decorations.",
+    description: "A string or a predefined icon. Icons need to start with “$icons.” Multiple decorations can be connected with “;”."
+  };
+};
+const LeadsDecorateElements = DecorateElements("leads");
+const TailsDecorateElements = DecorateElements("tails");
+const OptionItemsProperties = [
+  { name: "options", label: "Text, Various." },
+  { name: "optionSort", label: "Text.", description: '"asc", "desc".' },
+  { name: "sort", label: 'Text. Shortcut of "optionSort".', description: '"asc", "desc".' },
+  { name: "noAvailable", label: "Text.", description: "Reminder text when no available option item." },
+  { name: "noMatched", label: "Text.", description: "Reminder text when no matched option item." }
 ];
 const NoElementReminder = {
   name: "noElementReminder",
@@ -1153,65 +1105,6 @@ const ArrayProperties = [
     description: "Check could remove item or not, runtime check before apply removing."
   },
   { name: "elementRemoved", label: "Snippet.", description: "Handle item removed event." }
-];
-const TableProperties = [
-  {
-    name: "headers",
-    label: "Various.",
-    description: "Column headers."
-  },
-  { name: "headerHeight", label: "Number.", description: "In pixels." },
-  { name: "expandable", label: "Boolean.", description: "Default false. Row expandable." },
-  { name: "fixedLeadColumns", label: "Number.", description: "How many lead columns are fixed." },
-  { name: "fixedTailColumns", label: "Number.", description: "How many tail columns are fixed." },
-  { name: "hideClassicCellsOnExpandable", label: "Boolean.", description: "Default false." },
-  { name: "clickToExpand", label: "Boolean.", description: "Default false." },
-  { name: "maxBodyHeight", label: "Number.", description: "Maximum body height, in pixels." },
-  { name: "operatorsColumnWidth", label: "Number.", description: "Operators column width." },
-  { name: "rowIndexStartsFrom", label: "Number.", description: "Default 1." },
-  {
-    name: "omitDefaultRowOperators",
-    label: "Boolean, Text.",
-    description: 'True to omit the remove, expand, collapse row operators. Or "remove" to omit remove only, "fold" to omit expand and collapse.'
-  }
-];
-const RibsProperties = [
-  { name: "caption", label: "Text, Various.", description: "Caption for each item." },
-  {
-    name: "useSectionStyleIcons",
-    label: "Boolean.",
-    description: "Use section style icons for expanding and collapsing."
-  }
-];
-const ChartProperties = [
-  { name: "initOptions", label: "Snippet.", description: "Init options of echarts." },
-  { name: "options", label: "Snippet.", description: "Options of echarts." },
-  { name: "settings", label: "Snippet.", description: "Settings of echarts." },
-  { name: "marker", label: "Text.", description: "Global identify this section when global event fired." },
-  {
-    name: "mergeData",
-    label: "Snippet.",
-    description: "Merge data into chart options, data format depends on chart type."
-  },
-  {
-    name: "merge",
-    label: 'Snippet. Shortcut of "mergeData".',
-    description: "Merge data into chart options, data format depends on chart type."
-  },
-  { name: "loading", label: "Snippet.", description: "Loading options of echarts." },
-  { name: "height", label: "Text, Number.", description: "Height of chart." }
-];
-const ChartFetchProperties = [
-  {
-    name: "fetchData",
-    label: "Snippet.",
-    description: "Fetch data for chart. Data format depends on chart type."
-  },
-  {
-    name: "fetch",
-    label: 'Snippet. Shortcut of "fetchData".',
-    description: "Fetch data for chart. Data format depends on chart type."
-  }
 ];
 const ValidationRequired = {
   name: "required",
@@ -1258,11 +1151,431 @@ const ValidationRegexp = {
   label: "Boolean, Various.",
   description: 'Same as "regex".'
 };
-const N2WidgetGroups = [
-  { icon: PlaygroundIcons.CONTAINER_GROUP, tooltip: "Container", key: PlaygroundWidgetGroupKey.CONTAINERS },
-  { icon: PlaygroundIcons.INPUT_GROUP, tooltip: "Input", key: PlaygroundWidgetGroupKey.INPUTS },
-  { icon: PlaygroundIcons.OPTIONS_GROUP, tooltip: "Choices", key: PlaygroundWidgetGroupKey.OPTIONS },
-  { icon: PlaygroundIcons.DISPLAY_GROUP, tooltip: "Label & Chart", key: PlaygroundWidgetGroupKey.DISPLAY }
+const ButtonProperties = [
+  Ink,
+  Fill,
+  { name: "text", label: "Text.", description: "Label." },
+  Click
+];
+const BUTTONS = [
+  {
+    $wt: index.N2WidgetType.BUTTON,
+    label: "Button",
+    properties: [...ButtonProperties, LeadsDecorateElements, TailsDecorateElements],
+    icon: PlaygroundIcons.BUTTON,
+    group: PlaygroundWidgetGroupKey.DISPLAY,
+    template: `Button::[caption]
+- ink: success
+- fill: plain
+- leads: $icons.x; $icons.y
+- tails:
+  - first tail
+  - last tail
+- click: validate me
+- validateScopes: scope1, scope2
+`
+  },
+  {
+    $wt: index.N2WidgetType.LINK,
+    label: 'Link. Shortcut of "Button".',
+    description: "With link style.",
+    properties: [
+      ...ButtonProperties.filter(({ name }) => name !== "fill"),
+      LeadsDecorateElements,
+      TailsDecorateElements
+    ],
+    icon: PlaygroundIcons.LINK,
+    group: PlaygroundWidgetGroupKey.DISPLAY,
+    template: `Link::[caption]
+- ink: warn
+- leads: $icons.x; $icons.y
+- tails:
+  - first tail
+  - last tail
+- click: validate me
+- validateScopes: scope1, scope2
+`
+  }
+];
+const BUTTON_BAR = {
+  $wt: index.N2WidgetType.BUTTON_BAR,
+  label: "Button bar.",
+  properties: [{ name: "alignment", label: "Text.", description: '"left", "center", "right".' }],
+  icon: PlaygroundIcons.BUTTON_BAR,
+  group: PlaygroundWidgetGroupKey.CONTAINERS,
+  tooltip: "Button bar",
+  template: `ButtonBar::
+- alignment: left
+- Button::::
+  - click:
+    \`\`\`
+    alert('Remove clicked');
+    \`\`\`
+  - leads: $icons.remove
+  - disabled
+- Button::::
+  - click:
+    \`\`\`
+    alert('Check clicked');
+    \`\`\`
+  - fill: plain
+  - leads: $icons.check
+`
+};
+const CalendarProperties = [
+  Please,
+  Clearable,
+  { name: "date", label: "Boolean. Allow date part or not.", description: "Default true." },
+  { name: "dateFormat", label: "Text.", description: "Default value depends on system settings." },
+  { name: "time", label: "Boolean. Allow time part or not.", description: "Default false." },
+  {
+    name: "timeFormat",
+    label: "Text.",
+    description: 'Default value depends on system settings, works only when "time" is true.'
+  },
+  { name: "storeFormat", label: "Text.", description: "Default value depends on system settings." },
+  {
+    name: "fixedTimeAt",
+    label: "Text.",
+    description: 'Default value depends on system settings, works only when "time" is false. "start", "0", "end", "HH:mm:ss", "HH:mm:ss.SSS".'
+  },
+  {
+    name: "initTimeAt",
+    label: "Text.",
+    description: '"start", "0", "end", "HH:mm:ss", "HH:mm:ss.SSS".'
+  },
+  { name: "autoConfirm", label: "Boolean.", description: "Confirm selection when blurred." },
+  {
+    name: "autoConfirmOnDate",
+    label: "Boolean.",
+    description: "Confirm selection when date clicked when no time part."
+  },
+  { name: "useCalendarIcon", label: "Boolean.", description: "Use calendar icon instead of caret." },
+  { name: "couldPerform", label: "Snippet.", description: "Check given date could be performed or not." }
+];
+const CALENDARS = [
+  {
+    $wt: index.N2WidgetType.CALENDAR,
+    label: "Date picker.",
+    properties: [...CalendarProperties, ValueChanged, ValidationRequired],
+    icon: PlaygroundIcons.DATE,
+    group: PlaygroundWidgetGroupKey.INPUTS,
+    tooltip: "Date picker",
+    notInToolbar: true
+  },
+  {
+    $wt: index.N2WidgetType.DATE,
+    label: 'Date picker. Shortcut of "Calendar"',
+    properties: [
+      ...CalendarProperties.filter(({ name }) => !["date", "time", "timeFormat"].includes(name)),
+      ValueChanged,
+      ValidationRequired
+    ],
+    icon: PlaygroundIcons.DATE,
+    group: PlaygroundWidgetGroupKey.INPUTS,
+    tooltip: "Date picker",
+    template: `Date::[caption]::[property]
+- dateFormat: YYYY/MM/DD
+- fixedTimeAt: start
+- initTimeAt: start
+- useCalendarIcon
+`
+  },
+  {
+    $wt: index.N2WidgetType.DATETIME,
+    label: "Datetime picker.",
+    properties: [
+      ...CalendarProperties.filter(({ name }) => !["date", "time", "fixedTimeAt"].includes(name)),
+      ValueChanged,
+      ValidationRequired
+    ],
+    icon: PlaygroundIcons.DATETIME,
+    group: PlaygroundWidgetGroupKey.INPUTS,
+    tooltip: "Datetime picker",
+    template: `DateTime::[caption]::[property]
+- initTimeAt: 12:30:00
+`
+  },
+  {
+    $wt: index.N2WidgetType.TIME,
+    label: "Datetime picker.",
+    properties: [
+      ...CalendarProperties.filter(({ name }) => !["date", "dateFormat", "autoConfirmOnDate", "time", "fixedTimeAt"].includes(name)),
+      ValueChanged,
+      ValidationRequired
+    ],
+    icon: PlaygroundIcons.TIME,
+    group: PlaygroundWidgetGroupKey.INPUTS,
+    tooltip: "Time picker",
+    template: `Time::[caption]::[property]
+- initTimeAt: 12:30:00
+`
+  }
+];
+const CaptionProperties = [
+  { name: "labelOnValue", label: "Boolean.", description: "Default false. Content read from model or not." },
+  { name: "label", label: "Text.", description: 'Static content, ignored when "text" declared.' },
+  { name: "text", label: "Text.", description: 'Static content, works on "labelOnValue" is false.' },
+  { name: "valueToLabel", label: "Snippet.", description: "Snippet to compute display label." },
+  Click
+];
+const CAPTIONS = [
+  {
+    $wt: index.N2WidgetType.CAPTION,
+    label: "Caption.",
+    properties: [...CaptionProperties, LeadsDecorateElements, TailsDecorateElements],
+    icon: PlaygroundIcons.CAPTION,
+    group: PlaygroundWidgetGroupKey.DISPLAY,
+    template: `Caption::[caption]
+- text: Hello world
+- leads: $icons.x; $icons.y
+- tails:
+  - first tail
+  - last tail
+`
+  },
+  {
+    $wt: index.N2WidgetType.LABEL,
+    label: 'Label. Shortcut of "Caption".',
+    description: "Read text from model.",
+    properties: [
+      ...CaptionProperties.filter(({ name }) => name !== "labelOnValue"),
+      LeadsDecorateElements,
+      TailsDecorateElements
+    ],
+    icon: PlaygroundIcons.LABEL,
+    group: PlaygroundWidgetGroupKey.DISPLAY,
+    template: `Label::[caption]::[property]
+- valueToLabel: \`value ?? 'An empty value.'\`
+- leads: $icons.x; $icons.y
+- tails:
+  - first tail
+  - last tail
+`
+  },
+  {
+    $wt: index.N2WidgetType.BADGE,
+    label: 'Badge. Shortcut of "Caption".',
+    description: "With ink and fill mode.",
+    properties: [...CaptionProperties, Ink, Fill, LeadsDecorateElements, TailsDecorateElements],
+    icon: "",
+    group: PlaygroundWidgetGroupKey.NOT_CARE,
+    notInToolbar: true
+  }
+];
+const CheckboxesProperties = [
+  ...OptionItemsProperties.filter(({ name }) => name !== "noMatched"),
+  { name: "columns", label: "Number.", description: "Display columns when not on compact mode." },
+  { name: "compact", label: "Boolean.", description: "Default true. Try to fit as many as possible onto one line." },
+  {
+    name: "single",
+    label: "Boolean.",
+    description: "Default false. Use primitive value of model instead of an array."
+  },
+  { name: "boolOnSingle", label: "Boolean.", description: "Default false. Use false when no option checked." }
+];
+const CHECKBOXES = [
+  {
+    $wt: index.N2WidgetType.CHECKBOX,
+    properties: [
+      {
+        name: "values",
+        label: "Text.",
+        description: 'One or two values, connected by ",". First is true value, second is false value.'
+      },
+      {
+        name: "emptyWhenFalse",
+        label: "Boolean.",
+        description: "Default false. Use times icon when it is false."
+      },
+      ValueChanged,
+      ValidationRequired
+    ],
+    icon: PlaygroundIcons.CHECKBOX,
+    group: PlaygroundWidgetGroupKey.OPTIONS,
+    template: `Checkbox::[caption]::[property]
+- values: 1, 0
+`
+  },
+  {
+    $wt: index.N2WidgetType.CHECKBOXES,
+    label: "Checkbox group.",
+    properties: [...CheckboxesProperties, ValueChanged, ValidationRequired, ValidationLength],
+    icon: PlaygroundIcons.CHECKS,
+    group: PlaygroundWidgetGroupKey.OPTIONS,
+    tooltip: "Checkbox group",
+    notInToolbar: true
+  },
+  {
+    $wt: index.N2WidgetType.CHECKS,
+    label: 'Checkbox group. Shortcut of "Checkboxes".',
+    properties: [...CheckboxesProperties, ValueChanged, ValidationRequired, ValidationLength],
+    icon: PlaygroundIcons.CHECKS,
+    group: PlaygroundWidgetGroupKey.OPTIONS,
+    tooltip: "Checkbox group",
+    template: `Checks::[caption]::[property]
+- options: 1: Pizza; 2: Hamburger; 3: Noodle
+`
+  }
+];
+const DECORATE_INPUTS = [
+  {
+    $wt: index.N2WidgetType.DECORATE_INPUT,
+    label: "Decorable input box.",
+    properties: [
+      AutoSelect,
+      InputPlaceholder,
+      ValueChanged,
+      LeadsDecorateElements,
+      TailsDecorateElements,
+      ValidationRequired,
+      ValidationRegex,
+      ValidationRegexp,
+      ValidationLength,
+      ValidationNumeric,
+      ValidationPositive,
+      ValidationNotNegative,
+      ValidationInteger,
+      ValidationNumberRange
+    ],
+    icon: PlaygroundIcons.DECO_INPUT,
+    group: PlaygroundWidgetGroupKey.INPUTS,
+    tooltip: "Decorable input",
+    template: `DecoInput::[caption]::[property]
+- placeholder: a placeholder text
+- length: 5,10,15..20; Length should be 5, 10 or between 15 and 20.
+- leads: $icons.x; $icons.y
+- tails:
+  - first tail
+  - last tail
+`
+  },
+  {
+    $wt: index.N2WidgetType.DECORATE_NUMBER,
+    label: "Decorable number input box.",
+    properties: [
+      AutoSelect,
+      InputPlaceholder,
+      ValueChanged,
+      LeadsDecorateElements,
+      TailsDecorateElements,
+      ValidationRequired,
+      ValidationRegex,
+      ValidationRegexp,
+      ValidationLength,
+      ValidationNumeric,
+      ValidationPositive,
+      ValidationNotNegative,
+      ValidationInteger,
+      ValidationNumberRange
+    ],
+    icon: PlaygroundIcons.DECO_NUMBER,
+    group: PlaygroundWidgetGroupKey.INPUTS,
+    tooltip: "Decorable number input",
+    template: `DecoNumber::[caption]::[property]
+- notNegative, integer
+- placeholder: a placeholder text
+- numberRange: ..100],(200..300],[400..; Value should <=100, or >200 and <=300, or >=400.
+- leads: $icons.x; $icons.y
+- tails:
+  - first tail
+  - last tail
+`
+  },
+  {
+    $wt: index.N2WidgetType.DECORATE_PASSWORD,
+    label: "Decorable password input box.",
+    properties: [
+      AutoSelect,
+      InputPlaceholder,
+      ValueChanged,
+      LeadsDecorateElements,
+      TailsDecorateElements,
+      ValidationRequired,
+      ValidationRegex,
+      ValidationRegexp,
+      ValidationLength
+    ],
+    icon: PlaygroundIcons.DECO_PASSWORD,
+    group: PlaygroundWidgetGroupKey.INPUTS,
+    tooltip: "Decorable password input",
+    template: `DecoPwd::[caption]::[property]
+- placeholder: a placeholder text
+- length: 12..; Minimum length is 12.
+- regex: key-of-predefined-regex
+- leads: $icons.x; $icons.y
+- tails:
+  - first tail
+  - last tail
+`
+  }
+];
+const DropdownProperties = [
+  ...OptionItemsProperties,
+  Please,
+  Clearable,
+  { name: "maxWidth", label: "Number.", description: "Max popup width, in pixels." }
+];
+const DROPDOWNS = [
+  {
+    $wt: index.N2WidgetType.DROPDOWN,
+    label: "Dropdown.",
+    properties: [...DropdownProperties, ValueChanged, ValidationRequired],
+    icon: PlaygroundIcons.DROPDOWN,
+    group: PlaygroundWidgetGroupKey.OPTIONS,
+    template: `Dropdown::[caption]::[property]
+- !clearable
+- please: a placeholder text
+- options:
+  - Y: Yes
+  - N: No
+  - U: Unknown
+`
+  },
+  {
+    $wt: index.N2WidgetType.MULTI_DROPDOWN,
+    label: "Dropdown allows multiple choices.",
+    properties: [...DropdownProperties, ValueChanged, ValidationRequired, ValidationLength],
+    icon: PlaygroundIcons.MULTI_DROPDOWN,
+    group: PlaygroundWidgetGroupKey.OPTIONS,
+    tooltip: "Multiple choices",
+    template: `MultiDropdown::[caption]::[property]
+- !clearable
+- please: a placeholder text
+- options: 1: Pizza; 2: Hamburger; 3: Noodle
+- sort: asc
+`
+  }
+];
+const ChartProperties = [
+  { name: "initOptions", label: "Snippet.", description: "Init options of echarts." },
+  { name: "options", label: "Snippet.", description: "Options of echarts." },
+  { name: "settings", label: "Snippet.", description: "Settings of echarts." },
+  { name: "marker", label: "Text.", description: "Global identify this section when global event fired." },
+  {
+    name: "mergeData",
+    label: "Snippet.",
+    description: "Merge data into chart options, data format depends on chart type."
+  },
+  {
+    name: "merge",
+    label: 'Snippet. Shortcut of "mergeData".',
+    description: "Merge data into chart options, data format depends on chart type."
+  },
+  { name: "loading", label: "Snippet.", description: "Loading options of echarts." },
+  { name: "height", label: "Text, Number.", description: "Height of chart." }
+];
+const ChartFetchProperties = [
+  {
+    name: "fetchData",
+    label: "Snippet.",
+    description: "Fetch data for chart. Data format depends on chart type."
+  },
+  {
+    name: "fetch",
+    label: 'Snippet. Shortcut of "fetchData".',
+    description: "Fetch data for chart. Data format depends on chart type."
+  }
 ];
 const EChartsWidgets = [
   {
@@ -1424,14 +1737,7 @@ const EChartsWidgets = [
 `
   }
 ];
-const N2Widgets = [
-  {
-    $wt: index.N2WidgetType.PAGE,
-    description: "Only one allowed, and always at the highest level.",
-    icon: "",
-    group: PlaygroundWidgetGroupKey.NOT_CARE,
-    notInToolbar: true
-  },
+const INPUTS = [
   {
     $wt: index.N2WidgetType.INPUT,
     label: "Input box.",
@@ -1508,212 +1814,28 @@ const N2Widgets = [
 - length: 12..; Minimum length is 12.
 - regex: key-of-predefined-regex
 `
-  },
-  {
-    $wt: index.N2WidgetType.DECORATE_INPUT,
-    label: "Decorable input box.",
-    properties: [
-      AutoSelect,
-      InputPlaceholder,
-      ValueChanged,
-      LeadsDecorateElements,
-      TailsDecorateElements,
-      ValidationRequired,
-      ValidationRegex,
-      ValidationRegexp,
-      ValidationLength,
-      ValidationNumeric,
-      ValidationPositive,
-      ValidationNotNegative,
-      ValidationInteger,
-      ValidationNumberRange
-    ],
-    icon: PlaygroundIcons.DECO_INPUT,
-    group: PlaygroundWidgetGroupKey.INPUTS,
-    tooltip: "Decorable input",
-    template: `DecoInput::[caption]::[property]
-- placeholder: a placeholder text
-- length: 5,10,15..20; Length should be 5, 10 or between 15 and 20.
-- leads: $icons.x; $icons.y
-- tails:
-  - first tail
-  - last tail
-`
-  },
-  {
-    $wt: index.N2WidgetType.DECORATE_NUMBER,
-    label: "Decorable number input box.",
-    properties: [
-      AutoSelect,
-      InputPlaceholder,
-      ValueChanged,
-      LeadsDecorateElements,
-      TailsDecorateElements,
-      ValidationRequired,
-      ValidationRegex,
-      ValidationRegexp,
-      ValidationLength,
-      ValidationNumeric,
-      ValidationPositive,
-      ValidationNotNegative,
-      ValidationInteger,
-      ValidationNumberRange
-    ],
-    icon: PlaygroundIcons.DECO_NUMBER,
-    group: PlaygroundWidgetGroupKey.INPUTS,
-    tooltip: "Decorable number input",
-    template: `DecoNumber::[caption]::[property]
-- notNegative, integer
-- placeholder: a placeholder text
-- numberRange: ..100],(200..300],[400..; Value should <=100, or >200 and <=300, or >=400.
-- leads: $icons.x; $icons.y
-- tails:
-  - first tail
-  - last tail
-`
-  },
-  {
-    $wt: index.N2WidgetType.DECORATE_PASSWORD,
-    label: "Decorable password input box.",
-    properties: [
-      AutoSelect,
-      InputPlaceholder,
-      ValueChanged,
-      LeadsDecorateElements,
-      TailsDecorateElements,
-      ValidationRequired,
-      ValidationRegex,
-      ValidationRegexp,
-      ValidationLength
-    ],
-    icon: PlaygroundIcons.DECO_PASSWORD,
-    group: PlaygroundWidgetGroupKey.INPUTS,
-    tooltip: "Decorable password input",
-    template: `DecoPwd::[caption]::[property]
-- placeholder: a placeholder text
-- length: 12..; Minimum length is 12.
-- regex: key-of-predefined-regex
-- leads: $icons.x; $icons.y
-- tails:
-  - first tail
-  - last tail
-`
-  },
-  {
-    $wt: index.N2WidgetType.TEXTAREA,
-    properties: [
-      AutoSelect,
-      InputPlaceholder,
-      ValueChanged,
-      ValidationRequired,
-      ValidationLength
-    ],
-    icon: PlaygroundIcons.TEXTAREA,
-    group: PlaygroundWidgetGroupKey.INPUTS,
-    template: `Textarea::[caption]::[property]
-- placeholder: a placeholder text
-- length: 10..; Minimum length is 10.
-`
-  },
-  {
-    $wt: index.N2WidgetType.CALENDAR,
-    label: "Date picker.",
-    properties: [...CalendarProperties, ValueChanged, ValidationRequired],
-    icon: PlaygroundIcons.DATE,
-    group: PlaygroundWidgetGroupKey.INPUTS,
-    tooltip: "Date picker",
-    notInToolbar: true
-  },
-  {
-    $wt: index.N2WidgetType.DATE,
-    label: 'Date picker. Shortcut of "Calendar"',
-    properties: [
-      ...CalendarProperties.filter(({ name }) => !["date", "time", "timeFormat"].includes(name)),
-      ValueChanged,
-      ValidationRequired
-    ],
-    icon: PlaygroundIcons.DATE,
-    group: PlaygroundWidgetGroupKey.INPUTS,
-    tooltip: "Date picker",
-    template: `Date::[caption]::[property]
-- dateFormat: YYYY/MM/DD
-- fixedTimeAt: start
-- initTimeAt: start
-- useCalendarIcon
-`
-  },
-  {
-    $wt: index.N2WidgetType.DATETIME,
-    label: "Datetime picker.",
-    properties: [
-      ...CalendarProperties.filter(({ name }) => !["date", "time", "fixedTimeAt"].includes(name)),
-      ValueChanged,
-      ValidationRequired
-    ],
-    icon: PlaygroundIcons.DATETIME,
-    group: PlaygroundWidgetGroupKey.INPUTS,
-    tooltip: "Datetime picker",
-    template: `DateTime::[caption]::[property]
-- initTimeAt: 12:30:00
-`
-  },
-  {
-    $wt: index.N2WidgetType.TIME,
-    label: "Datetime picker.",
-    properties: [
-      ...CalendarProperties.filter(({ name }) => !["date", "dateFormat", "autoConfirmOnDate", "time", "fixedTimeAt"].includes(name)),
-      ValueChanged,
-      ValidationRequired
-    ],
-    icon: PlaygroundIcons.TIME,
-    group: PlaygroundWidgetGroupKey.INPUTS,
-    tooltip: "Time picker",
-    template: `Time::[caption]::[property]
-- initTimeAt: 12:30:00
-`
-  },
-  {
-    $wt: index.N2WidgetType.CHECKBOX,
-    properties: [
-      {
-        name: "values",
-        label: "Text.",
-        description: 'One or two values, connected by ",". First is true value, second is false value.'
-      },
-      {
-        name: "emptyWhenFalse",
-        label: "Boolean.",
-        description: "Default false. Use times icon when it is false."
-      },
-      ValueChanged,
-      ValidationRequired
-    ],
-    icon: PlaygroundIcons.CHECKBOX,
-    group: PlaygroundWidgetGroupKey.OPTIONS,
-    template: `Checkbox::[caption]::[property]
-- values: 1, 0
-`
-  },
-  {
-    $wt: index.N2WidgetType.CHECKBOXES,
-    label: "Checkbox group.",
-    properties: [...CheckboxesProperties, ValueChanged, ValidationRequired, ValidationLength],
-    icon: PlaygroundIcons.CHECKS,
-    group: PlaygroundWidgetGroupKey.OPTIONS,
-    tooltip: "Checkbox group",
-    notInToolbar: true
-  },
-  {
-    $wt: index.N2WidgetType.CHECKS,
-    label: 'Checkbox group. Shortcut of "Checkboxes".',
-    properties: [...CheckboxesProperties, ValueChanged, ValidationRequired, ValidationLength],
-    icon: PlaygroundIcons.CHECKS,
-    group: PlaygroundWidgetGroupKey.OPTIONS,
-    tooltip: "Checkbox group",
-    template: `Checks::[caption]::[property]
-- options: 1: Pizza; 2: Hamburger; 3: Noodle
-`
-  },
+  }
+];
+const PAGE = {
+  $wt: index.N2WidgetType.PAGE,
+  description: "Only one allowed, and always at the highest level.",
+  icon: "",
+  group: PlaygroundWidgetGroupKey.NOT_CARE,
+  notInToolbar: true
+};
+const PAGINATION = {
+  $wt: index.N2WidgetType.PAGINATION,
+  properties: [
+    { name: "freeWalk", label: "Boolean.", description: "Default false. Show page free walker dropdown." },
+    { name: "maxButtons", label: "Number.", description: "Default 7. Maximum page buttons." },
+    { name: "possibleSizes", label: "Text.", description: "Possible page size. Show page size dropdown." },
+    ValueChanged
+  ],
+  icon: "",
+  group: PlaygroundWidgetGroupKey.NOT_CARE,
+  notInToolbar: true
+};
+const RADIOS = [
   {
     $wt: index.N2WidgetType.RADIO,
     label: "Radio button.",
@@ -1750,138 +1872,76 @@ const N2Widgets = [
   - N: No
   - U: Unknown
 `
-  },
+  }
+];
+const RibsProperties = [
+  { name: "caption", label: "Text, Various.", description: "Caption for each item." },
   {
-    $wt: index.N2WidgetType.DROPDOWN,
-    label: "Dropdown.",
-    properties: [...DropdownProperties, ValueChanged, ValidationRequired],
-    icon: PlaygroundIcons.DROPDOWN,
-    group: PlaygroundWidgetGroupKey.OPTIONS,
-    template: `Dropdown::[caption]::[property]
-- !clearable
-- please: a placeholder text
-- options:
-  - Y: Yes
-  - N: No
-  - U: Unknown
+    name: "useSectionStyleIcons",
+    label: "Boolean.",
+    description: "Use section style icons for expanding and collapsing."
+  }
+];
+const RIBS = [
+  {
+    $wt: index.N2WidgetType.RIBS,
+    properties: [...RibsProperties, ...ArrayProperties],
+    icon: PlaygroundIcons.RIBS,
+    group: PlaygroundWidgetGroupKey.CONTAINERS,
+    template: `Ribs::
+- removable, addable, disableOnCannotAdd
+- elementTitle:
+  - labelOnValue
+  - property: titleProperty
+- Input::Property A::propA
+- Input::Property B::propB
 `
   },
   {
-    $wt: index.N2WidgetType.MULTI_DROPDOWN,
-    label: "Dropdown allows multiple choices.",
-    properties: [...DropdownProperties, ValueChanged, ValidationRequired, ValidationLength],
-    icon: PlaygroundIcons.MULTI_DROPDOWN,
-    group: PlaygroundWidgetGroupKey.OPTIONS,
-    tooltip: "Multiple choices",
-    template: `MultiDropdown::[caption]::[property]
-- !clearable
-- please: a placeholder text
-- options: 1: Pizza; 2: Hamburger; 3: Noodle
-- sort: asc
-`
-  },
-  {
-    $wt: index.N2WidgetType.CAPTION,
-    label: "Caption.",
-    properties: [...CaptionProperties, LeadsDecorateElements, TailsDecorateElements],
-    icon: PlaygroundIcons.CAPTION,
-    group: PlaygroundWidgetGroupKey.DISPLAY,
-    template: `Caption::[caption]
-- text: Hello world
-- leads: $icons.x; $icons.y
-- tails:
-  - first tail
-  - last tail
-`
-  },
-  {
-    $wt: index.N2WidgetType.LABEL,
-    label: 'Label. Shortcut of "Caption".',
-    description: "Read text from model.",
-    properties: [
-      ...CaptionProperties.filter(({ name }) => name !== "labelOnValue"),
-      LeadsDecorateElements,
-      TailsDecorateElements
-    ],
-    icon: PlaygroundIcons.LABEL,
-    group: PlaygroundWidgetGroupKey.DISPLAY,
-    template: `Label::[caption]::[property]
-- valueToLabel: \`value ?? 'An empty value.'\`
-- leads: $icons.x; $icons.y
-- tails:
-  - first tail
-  - last tail
-`
-  },
-  {
-    $wt: index.N2WidgetType.BADGE,
-    label: 'Badge. Shortcut of "Caption".',
-    description: "With ink and fill mode.",
-    properties: [...CaptionProperties, Ink, Fill, LeadsDecorateElements, TailsDecorateElements],
+    $wt: index.N2WidgetType.READONLY_RIBS,
+    label: "Readonly Ribs.",
+    properties: [...RibsProperties, NoElementReminder],
     icon: "",
     group: PlaygroundWidgetGroupKey.NOT_CARE,
     notInToolbar: true
-  },
-  {
-    $wt: index.N2WidgetType.BUTTON,
-    label: "Button",
-    properties: [...ButtonProperties, LeadsDecorateElements, TailsDecorateElements],
-    icon: PlaygroundIcons.BUTTON,
-    group: PlaygroundWidgetGroupKey.DISPLAY,
-    template: `Button::[caption]
-- ink: success
-- fill: plain
-- leads: $icons.x; $icons.y
-- tails:
-  - first tail
-  - last tail
-- click: validate me
-- validateScopes: scope1, scope2
-`
-  },
-  {
-    $wt: index.N2WidgetType.LINK,
-    label: 'Link. Shortcut of "Button".',
-    description: "With link style.",
-    properties: [
-      ...ButtonProperties.filter(({ name }) => name !== "fill"),
-      LeadsDecorateElements,
-      TailsDecorateElements
-    ],
-    icon: PlaygroundIcons.LINK,
-    group: PlaygroundWidgetGroupKey.DISPLAY,
-    template: `Link::[caption]
-- ink: warn
-- leads: $icons.x; $icons.y
-- tails:
-  - first tail
-  - last tail
-- click: validate me
-- validateScopes: scope1, scope2
-`
-  },
-  {
-    $wt: index.N2WidgetType.SECTION,
-    icon: PlaygroundIcons.SECTION,
-    group: PlaygroundWidgetGroupKey.CONTAINERS,
-    properties: [
-      { name: "title", label: "Text." },
-      { name: "collapsible", label: "Boolean.", description: "Section could be folded." },
-      { name: "marker", label: "Text.", description: "Global identify this section when global event fired." }
-    ],
-    template: `Section::[title]
+  }
+];
+const SECTION = {
+  $wt: index.N2WidgetType.SECTION,
+  icon: PlaygroundIcons.SECTION,
+  group: PlaygroundWidgetGroupKey.CONTAINERS,
+  properties: [
+    { name: "title", label: "Text." },
+    { name: "collapsible", label: "Boolean.", description: "Section could be folded." },
+    { name: "marker", label: "Text.", description: "Global identify this section when global event fired." }
+  ],
+  template: `Section::[title]
 - collapsible
 - marker: global-unique-marker
 `
-  },
+};
+const TableProperties = [
   {
-    $wt: index.N2WidgetType.BOX,
-    label: "Box, for customized layout.",
-    icon: PlaygroundIcons.BOX,
-    group: PlaygroundWidgetGroupKey.CONTAINERS,
-    template: `Box::[title]
-`
+    name: "headers",
+    label: "Various.",
+    description: "Column headers."
   },
+  { name: "headerHeight", label: "Number.", description: "In pixels." },
+  { name: "expandable", label: "Boolean.", description: "Default false. Row expandable." },
+  { name: "fixedLeadColumns", label: "Number.", description: "How many lead columns are fixed." },
+  { name: "fixedTailColumns", label: "Number.", description: "How many tail columns are fixed." },
+  { name: "hideClassicCellsOnExpandable", label: "Boolean.", description: "Default false." },
+  { name: "clickToExpand", label: "Boolean.", description: "Default false." },
+  { name: "maxBodyHeight", label: "Number.", description: "Maximum body height, in pixels." },
+  { name: "operatorsColumnWidth", label: "Number.", description: "Operators column width." },
+  { name: "rowIndexStartsFrom", label: "Number.", description: "Default 1." },
+  {
+    name: "omitDefaultRowOperators",
+    label: "Boolean, Text.",
+    description: 'True to omit the remove, expand, collapse row operators. Or "remove" to omit remove only, "fold" to omit expand and collapse.'
+  }
+];
+const TABLE = [
   {
     $wt: index.N2WidgetType.TABLE_ROW_OPERATORS,
     label: "Table row operators",
@@ -1957,54 +2017,9 @@ const N2Widgets = [
 - Pagination::::page
   - maxButtons: 3
 `
-  },
-  {
-    $wt: index.N2WidgetType.RIBS,
-    properties: [...RibsProperties, ...ArrayProperties],
-    icon: PlaygroundIcons.RIBS,
-    group: PlaygroundWidgetGroupKey.CONTAINERS,
-    template: `Ribs::
-- removable, addable, disableOnCannotAdd
-- elementTitle:
-  - labelOnValue
-  - property: titleProperty
-- Input::Property A::propA
-- Input::Property B::propB
-`
-  },
-  {
-    $wt: index.N2WidgetType.READONLY_RIBS,
-    label: "Readonly Ribs.",
-    properties: [...RibsProperties, NoElementReminder],
-    icon: "",
-    group: PlaygroundWidgetGroupKey.NOT_CARE,
-    notInToolbar: true
-  },
-  {
-    $wt: index.N2WidgetType.BUTTON_BAR,
-    label: "Button bar.",
-    properties: [{ name: "alignment", label: "Text.", description: '"left", "center", "right".' }],
-    icon: PlaygroundIcons.BUTTON_BAR,
-    group: PlaygroundWidgetGroupKey.CONTAINERS,
-    tooltip: "Button bar",
-    template: `ButtonBar::
-- alignment: left
-- Button::::
-  - click:
-    \`\`\`
-    alert('Remove clicked');
-    \`\`\`
-  - leads: $icons.remove
-  - disabled
-- Button::::
-  - click:
-    \`\`\`
-    alert('Check clicked');
-    \`\`\`
-  - fill: plain
-  - leads: $icons.check
-`
-  },
+  }
+];
+const TABS = [
   {
     $wt: index.N2WidgetType.TAB,
     description: 'Valid only within the confines of the "Tabs".',
@@ -2038,7 +2053,78 @@ const N2Widgets = [
     - ink: info
   - Checkbox::[caption]::[property]
 `
+  }
+];
+const TEXTAREA = {
+  $wt: index.N2WidgetType.TEXTAREA,
+  properties: [
+    AutoSelect,
+    InputPlaceholder,
+    ValueChanged,
+    ValidationRequired,
+    ValidationLength
+  ],
+  icon: PlaygroundIcons.TEXTAREA,
+  group: PlaygroundWidgetGroupKey.INPUTS,
+  template: `Textarea::[caption]::[property]
+- placeholder: a placeholder text
+- length: 10..; Minimum length is 10.
+`
+};
+const TREES = [
+  {
+    $wt: index.N2WidgetType.TREE,
+    properties: [
+      { name: "height", label: "Number.", description: "In pixels." },
+      { name: "initExpandLevel", label: "Number.", description: "Default -1. Starts from 0." },
+      { name: "showIndex", label: "Boolean.", description: "Default false. Show node index or not." },
+      { name: "detective", label: "Snippet.", description: "Tree nodes builder." }
+    ],
+    icon: PlaygroundIcons.TREE,
+    group: PlaygroundWidgetGroupKey.CONTAINERS,
+    template: `Tree::::tree
+- showIndex
+- initExpandLevel: 0
+- height: 400
+`
   },
+  {
+    $wt: index.N2WidgetType.DROPDOWN_TREE,
+    label: "Dropdown with tree.",
+    properties: [
+      { name: "couldSelect", label: "Snippet.", description: "Check if the selected node can be used as a value." },
+      ...DropdownProperties,
+      ValueChanged,
+      ValidationRequired
+    ],
+    icon: PlaygroundIcons.DROPDOWN_TREE,
+    group: PlaygroundWidgetGroupKey.OPTIONS,
+    template: `DropdownTree::[caption]::[property]
+- !clearable
+- please: a placeholder text
+- options: @ext.options
+`
+  },
+  {
+    $wt: index.N2WidgetType.DDT,
+    label: 'Dropdown with tree. Shortcut of "DropdownTree".',
+    properties: [
+      { name: "couldSelect", label: "Snippet.", description: "Check if the selected node can be used as a value." },
+      ...DropdownProperties,
+      ValueChanged,
+      ValidationRequired
+    ],
+    icon: PlaygroundIcons.DROPDOWN_TREE,
+    group: PlaygroundWidgetGroupKey.OPTIONS,
+    template: `DDT::[caption]::[property]
+- !clearable
+- please: a placeholder text
+- options: @ext.options
+`,
+    notInToolbar: true
+  }
+];
+const WIZARD = [
   {
     $wt: index.N2WidgetType.WIZARD_SHARED,
     label: "Shared part for all wizard steps.",
@@ -2092,35 +2178,44 @@ const N2Widgets = [
 - WStep::[caption]::[property3]
 - WStep::[caption]::[property4]
 `
-  },
-  {
-    $wt: index.N2WidgetType.TREE,
-    properties: [
-      { name: "height", label: "Number.", description: "In pixels." },
-      { name: "initExpandLevel", label: "Number.", description: "Default -1. Starts from 0." },
-      { name: "showIndex", label: "Boolean.", description: "Default false. Show node index or not." },
-      { name: "detective", label: "Snippet.", description: "Tree nodes builder." }
-    ],
-    icon: PlaygroundIcons.TREE,
-    group: PlaygroundWidgetGroupKey.CONTAINERS,
-    template: `Tree::::tree
-- showIndex
-- initExpandLevel: 0
-- height: 400
-`
-  },
-  {
-    $wt: index.N2WidgetType.PAGINATION,
-    properties: [
-      { name: "freeWalk", label: "Boolean.", description: "Default false. Show page free walker dropdown." },
-      { name: "maxButtons", label: "Number.", description: "Default 7. Maximum page buttons." },
-      { name: "possibleSizes", label: "Text.", description: "Possible page size. Show page size dropdown." },
-      ValueChanged
-    ],
-    icon: "",
-    group: PlaygroundWidgetGroupKey.NOT_CARE,
-    notInToolbar: true
   }
+];
+const N2Widgets = [
+  PAGE,
+  SECTION,
+  BOX,
+  BUTTON_BAR,
+  ...INPUTS,
+  ...DECORATE_INPUTS,
+  TEXTAREA,
+  ...CALENDARS,
+  ...CHECKBOXES,
+  ...RADIOS,
+  ...DROPDOWNS,
+  ...CAPTIONS,
+  ...BUTTONS,
+  ...TABLE,
+  ...RIBS,
+  ...TABS,
+  ...WIZARD,
+  ...TREES,
+  PAGINATION
+];
+const WIDGET_DECLARATION_SPLITTER = index$2$1.AbstractSemanticNodeWidgetParser.WIDGET_TITLE_SPLITTER;
+const ATTRIBUTE_DECLARATION_SPLITTER = ":";
+const ATTRIBUTE_DECLARATION_JOINT = ",";
+const ATTRIBUTE_DECLARATION_EXCLAMATION_MARK = "!";
+const ATTRIBUTE_VALUE_CONST_START = "$";
+const ATTRIBUTE_VALUE_ICON_SYMBOL = "$icons";
+const ATTRIBUTE_VALUE_ICON_PREFIX = `${ATTRIBUTE_VALUE_ICON_SYMBOL}.`;
+const ATTRIBUTE_VALUE_REF_START = "@";
+const ATTRIBUTE_VALUE_EXT_SYMBOL = "@ext";
+const ATTRIBUTE_VALUE_EXT_PREFIX = `${ATTRIBUTE_VALUE_EXT_SYMBOL}.`;
+const N2WidgetGroups = [
+  { icon: PlaygroundIcons.CONTAINER_GROUP, tooltip: "Container", key: PlaygroundWidgetGroupKey.CONTAINERS },
+  { icon: PlaygroundIcons.INPUT_GROUP, tooltip: "Input", key: PlaygroundWidgetGroupKey.INPUTS },
+  { icon: PlaygroundIcons.OPTIONS_GROUP, tooltip: "Choices", key: PlaygroundWidgetGroupKey.OPTIONS },
+  { icon: PlaygroundIcons.DISPLAY_GROUP, tooltip: "Label & Chart", key: PlaygroundWidgetGroupKey.DISPLAY }
 ];
 const computeWidgetGroups = (groups, useN2) => {
   return [...useN2 ? N2WidgetGroups : [], ...groups];
@@ -4830,7 +4925,7 @@ const registerPlayground = (widgetHelper, widgetType) => {
   const repo = widgetHelper.repository;
   repo.register(new TranslatorClass(repo));
 };
-var define_process_env_default = { GITHUB_STATE: "/home/runner/work/_temp/_runner_file_commands/save_state_da609ce9-74b5-40eb-bdd7-6b207d6c2f51", npm_package_scripts_build_n5_ci: "cd ./d9-n5 && yarn build-ci", npm_package_scripts_build_sample_cra: "cd ./d9-sample-cra && yarn build", STATS_TRP: "true", DEPLOYMENT_BASEPATH: "/opt/runner", DOTNET_NOLOGO: "1", npm_package_dependencies__vitejs_plugin_react: "^4.2.1", USER: "runner", npm_config_version_commit_hooks: "true", npm_config_user_agent: "yarn/1.22.21 npm/? node/v18.20.2 linux x64", npm_package_dependencies__types_jest: "^29.5.4", CI: "true", npm_config_bin_links: "true", npm_package_bugs_url: "https://github.com/InsureMO/rainbow-d9/issues", npm_config_wrap_output: "", RUNNER_ENVIRONMENT: "github-hosted", GITHUB_ENV: "/home/runner/work/_temp/_runner_file_commands/set_env_da609ce9-74b5-40eb-bdd7-6b207d6c2f51", PIPX_HOME: "/opt/pipx", npm_node_execpath: "/opt/hostedtoolcache/node/18.20.2/x64/bin/node", npm_package_scripts_build_thai_all_ci: "yarn build-thai-plan-selection-ci", npm_config_init_version: "1.0.0", npm_package_devDependencies_gh_pages: "^6.1.1", npm_package_dependencies__babel_plugin_proposal_private_property_in_object: "^7.21.11", JAVA_HOME_8_X64: "/usr/lib/jvm/temurin-8-jdk-amd64", SHLVL: "1", HOME: "/home/runner", OLDPWD: "/home/runner/work/rainbow-d9/rainbow-d9", npm_package_browserslist_production_0: ">0.2%", RUNNER_TEMP: "/home/runner/work/_temp", GITHUB_EVENT_PATH: "/home/runner/work/_temp/_github_workflow/event.json", npm_package_scripts_build_all: "yarn build-n123 && yarn build-n5 && yarn build-echarts && yarn build-thai-all", npm_package_browserslist_production_1: "not dead", npm_package_dependencies_react_syntax_highlighter: "^15.5.0", JAVA_HOME_11_X64: "/usr/lib/jvm/temurin-11-jdk-amd64", PIPX_BIN_DIR: "/opt/pipx_bin", GITHUB_REPOSITORY_OWNER: "InsureMO", npm_package_volta_node: "18.19.0", npm_config_init_license: "MIT", npm_package_browserslist_production_2: "not op_mini all", GRADLE_HOME: "/usr/share/gradle-8.7", ANDROID_NDK_LATEST_HOME: "/usr/local/lib/android/sdk/ndk/26.3.11579264", JAVA_HOME_21_X64: "/usr/lib/jvm/temurin-21-jdk-amd64", STATS_RDCL: "true", GITHUB_RETENTION_DAYS: "90", YARN_WRAP_OUTPUT: "false", npm_package_scripts_build_thai_plan_selection_ci: "cd ./d9-thai-plan-selection && yarn build-ci", npm_package_scripts_build_n1: "cd ./d9-n1 && yarn build", npm_config_version_tag_prefix: "v", npm_package_dependencies__rainbow_d9_n2: "1.1.21", GITHUB_REPOSITORY_OWNER_ID: "38915232", POWERSHELL_DISTRIBUTION_CHANNEL: "GitHub-Actions-ubuntu22", AZURE_EXTENSION_DIR: "/opt/az/azcliextensions", GITHUB_HEAD_REF: "", npm_package_scripts_build_n2: "cd ./d9-n2 && yarn build", npm_package_dependencies__types_styled_components: "^5.1.34", npm_package_dependencies__rainbow_d9_n3: "1.1.21", npm_package_dependencies__rainbow_d9_echarts: "1.1.21", SYSTEMD_EXEC_PID: "603", npm_package_scripts_build_echarts: "cd ./d9-echarts && yarn build", npm_package_scripts_build_n3: "cd ./d9-n3 && yarn build", GITHUB_GRAPHQL_URL: "https://api.github.com/graphql", npm_package_description: "Assume the following envs are ready, otherwise contact the tech guy.", npm_package_scripts_predeploy: "npm run build", npm_package_dependencies__rainbow_d9_n5: "1.1.21", GOROOT_1_20_X64: "/opt/hostedtoolcache/go/1.20.14/x64", NVM_DIR: "/home/runner/.nvm", npm_package_readmeFilename: "README.md", npm_package_scripts_build_n5: "cd ./d9-n5 && yarn build", npm_package_dependencies__types_react: "^18.2.21", npm_package_dependencies__testing_library_react: "^13.4.0", DOTNET_SKIP_FIRST_TIME_EXPERIENCE: "1", GOROOT_1_21_X64: "/opt/hostedtoolcache/go/1.21.9/x64", JAVA_HOME_17_X64: "/usr/lib/jvm/temurin-17-jdk-amd64", ImageVersion: "20240422.1.0", RUNNER_OS: "Linux", GITHUB_API_URL: "https://api.github.com", GOROOT_1_22_X64: "/opt/hostedtoolcache/go/1.22.2/x64", SWIFT_PATH: "/usr/share/swift/usr/bin", RUNNER_USER: "runner", STATS_V3PS: "true", CHROMEWEBDRIVER: "/usr/local/share/chromedriver-linux64", JOURNAL_STREAM: "8:19790", GITHUB_WORKFLOW: "Publish to NPM", _: "/opt/hostedtoolcache/node/18.20.2/x64/bin/yarn", npm_package_private: "true", npm_package_dependencies_remark_gfm: "3.0.1", npm_package_scripts_build_thai_all: "yarn build-thai-plan-selection", npm_config_registry: "https://registry.yarnpkg.com", ACTIONS_RUNNER_ACTION_ARCHIVE_CACHE: "/opt/actionarchivecache", STATS_D: "true", GITHUB_RUN_ID: "8835911734", STATS_VMFE: "true", npm_package_workspaces_0: "d9-n1", GITHUB_REF_TYPE: "tag", BOOTSTRAP_HASKELL_NONINTERACTIVE: "1", GITHUB_WORKFLOW_SHA: "ee87b2e48d4430a348430187947ffb291358b65f", GITHUB_BASE_REF: "", ImageOS: "ubuntu22", npm_package_scripts_build_n123_ci: "yarn build-n1-ci && yarn build-n2-ci && yarn build-n3-ci", npm_package_workspaces_1: "d9-n2", npm_config_ignore_scripts: "", npm_package_scripts_start: "vite", npm_package_dependencies_github_markdown_css: "^5.5.0", STATS_BLT: "true", GITHUB_WORKFLOW_REF: "InsureMO/rainbow-d9/.github/workflows/release.yml@refs/tags/r-1.1.22", PERFLOG_LOCATION_SETTING: "RUNNER_PERFLOG", GITHUB_ACTION_REPOSITORY: "", npm_package_workspaces_2: "d9-n3", npm_package_browserslist_development_0: "last 1 chrome version", PATH: "/tmp/yarn--1714061875829-0.9545751082225873:/home/runner/work/rainbow-d9/rainbow-d9/d9-sample-cra/node_modules/.bin:/home/runner/.config/yarn/link/node_modules/.bin:/home/runner/work/rainbow-d9/rainbow-d9/node_modules/.bin:/opt/hostedtoolcache/node/18.20.2/x64/libexec/lib/node_modules/npm/bin/node-gyp-bin:/opt/hostedtoolcache/node/18.20.2/x64/lib/node_modules/npm/bin/node-gyp-bin:/opt/hostedtoolcache/node/18.20.2/x64/bin/node_modules/npm/bin/node-gyp-bin:/tmp/yarn--1714061875639-0.02626701960167188:/home/runner/work/rainbow-d9/rainbow-d9/node_modules/.bin:/home/runner/.config/yarn/link/node_modules/.bin:/home/runner/work/rainbow-d9/rainbow-d9/node_modules/.bin:/opt/hostedtoolcache/node/18.20.2/x64/libexec/lib/node_modules/npm/bin/node-gyp-bin:/opt/hostedtoolcache/node/18.20.2/x64/lib/node_modules/npm/bin/node-gyp-bin:/opt/hostedtoolcache/node/18.20.2/x64/bin/node_modules/npm/bin/node-gyp-bin:/opt/hostedtoolcache/node/18.20.2/x64/bin:/snap/bin:/home/runner/.local/bin:/opt/pipx_bin:/home/runner/.cargo/bin:/home/runner/.config/composer/vendor/bin:/usr/local/.ghcup/bin:/home/runner/.dotnet/tools:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin", NODE: "/opt/hostedtoolcache/node/18.20.2/x64/bin/node", ANT_HOME: "/usr/share/ant", DOTNET_MULTILEVEL_LOOKUP: "0", RUNNER_TRACKING_ID: "github_17532433-75c1-4f41-9552-c92b41d47a1c", INVOCATION_ID: "cadbb69b80834602809c924113588138", RUNNER_TOOL_CACHE: "/opt/hostedtoolcache", npm_package_name: "@rainbow-d9/sample-cra", npm_package_workspaces_3: "d9-n5", npm_package_browserslist_development_1: "last 1 firefox version", npm_package_repository_type: "git", npm_package_dependencies__types_react_syntax_highlighter: "^15.5.11", npm_package_dependencies__rainbow_d9_thai_plan_selection: "1.1.21", GITHUB_ACTION: "__run_5", GITHUB_RUN_NUMBER: "110", GITHUB_TRIGGERING_ACTOR: "bradwoo8621", RUNNER_ARCH: "X64", XDG_RUNTIME_DIR: "/run/user/1001", AGENT_TOOLSDIRECTORY: "/opt/hostedtoolcache", npm_package_scripts_build_thai_plan_selection: "cd ./d9-thai-plan-selection && yarn build", npm_package_workspaces_4: "d9-echarts", npm_package_browserslist_development_2: "last 1 safari version", npm_package_workspaces_5: "d9-thai-plan-selection", LANG: "C.UTF-8", VCPKG_INSTALLATION_ROOT: "/usr/local/share/vcpkg", npm_package_workspaces_6: "d9-sample-cra", npm_package_dependencies_react_dom: "^18.2.0", CONDA: "/usr/share/miniconda", RUNNER_NAME: "GitHub Actions 4", XDG_CONFIG_HOME: "/home/runner/.config", STATS_VMD: "true", GITHUB_REF_NAME: "r-1.1.22", GITHUB_REPOSITORY: "InsureMO/rainbow-d9", STATS_D_D: "true", npm_lifecycle_script: "vite build", npm_package_eslintConfig_extends_0: "react-app", npm_package_dependencies_vite_plugin_markdown: "^2.2.0", npm_package_dependencies_react_markdown: "8.0.7", npm_package_dependencies__types_node: "^20.5.3", STATS_UE: "true", ANDROID_NDK_ROOT: "/usr/local/lib/android/sdk/ndk/25.2.9519653", GITHUB_ACTION_REF: "", DEBIAN_FRONTEND: "noninteractive", npm_package_scripts_build_sample_cra_ci: "cd ./d9-sample-cra && yarn build", npm_config_version_git_message: "v%s", npm_package_eslintConfig_extends_1: "react-app/jest", GITHUB_REPOSITORY_ID: "704514093", GITHUB_ACTIONS: "true", npm_lifecycle_event: "build", npm_package_version: "1.1.21", npm_package_repository_url: "git+https://github.com/InsureMO/rainbow-d9.git", npm_package_dependencies__testing_library_jest_dom: "^5.17.0", GITHUB_REF_PROTECTED: "false", npm_config_argv: '{"remain":[],"cooked":["run","build-sample-cra"],"original":["build-sample-cra"]}', npm_package_volta_yarn: "1.22.21", npm_package_scripts_build: "vite build", npm_package_dependencies__testing_library_user_event: "^13.5.0", GITHUB_WORKSPACE: "/home/runner/work/rainbow-d9/rainbow-d9", ACCEPT_EULA: "Y", GITHUB_JOB: "create-sample-pages", RUNNER_PERFLOG: "/home/runner/perflog", npm_package_dependencies_vite: "^5.0.13", GITHUB_SHA: "ee87b2e48d4430a348430187947ffb291358b65f", GITHUB_RUN_ATTEMPT: "1", npm_config_version_git_tag: "true", npm_config_version_git_sign: "", GITHUB_REF: "refs/tags/r-1.1.22", GITHUB_ACTOR: "bradwoo8621", ANDROID_SDK_ROOT: "/usr/local/lib/android/sdk", npm_package_license: "MIT", npm_config_strict_ssl: "true", LEIN_HOME: "/usr/local/lib/lein", npm_package_scripts_build_n123: "yarn build-n1 && yarn build-n2 && yarn build-n3", GITHUB_PATH: "/home/runner/work/_temp/_runner_file_commands/add_path_da609ce9-74b5-40eb-bdd7-6b207d6c2f51", JAVA_HOME: "/usr/lib/jvm/temurin-11-jdk-amd64", PWD: "/home/runner/work/rainbow-d9/rainbow-d9/d9-sample-cra", GITHUB_ACTOR_ID: "2330098", RUNNER_WORKSPACE: "/home/runner/work/rainbow-d9", npm_execpath: "/opt/hostedtoolcache/node/18.20.2/x64/lib/node_modules/yarn/bin/yarn.js", npm_package_scripts_build_all_ci: "yarn build-n123-ci && yarn build-n5-ci && yarn build-echarts-ci && yarn build-thai-all-ci", HOMEBREW_CLEANUP_PERIODIC_FULL_DAYS: "3650", GITHUB_EVENT_NAME: "push", HOMEBREW_NO_AUTO_UPDATE: "1", ANDROID_HOME: "/usr/local/lib/android/sdk", GITHUB_SERVER_URL: "https://github.com", GECKOWEBDRIVER: "/usr/local/share/gecko_driver", LEIN_JAR: "/usr/local/lib/lein/self-installs/leiningen-2.11.2-standalone.jar", GHCUP_INSTALL_BASE_PREFIX: "/usr/local", GITHUB_OUTPUT: "/home/runner/work/_temp/_runner_file_commands/set_output_da609ce9-74b5-40eb-bdd7-6b207d6c2f51", npm_package_author_name: "Rainbow Team", EDGEWEBDRIVER: "/usr/local/share/edge_driver", STATS_EXT: "true", npm_package_scripts_build_n1_ci: "cd ./d9-n1 && yarn build-ci", npm_config_save_prefix: "^", npm_config_ignore_optional: "", ANDROID_NDK: "/usr/local/lib/android/sdk/ndk/25.2.9519653", SGX_AESM_ADDR: "1", CHROME_BIN: "/usr/bin/google-chrome", npm_package_scripts_build_n2_ci: "cd ./d9-n2 && yarn build-ci", npm_package_scripts_deploy: "gh-pages -d build", npm_package_scripts_preview: "vite preview", SELENIUM_JAR_PATH: "/usr/share/java/selenium-server.jar", STATS_EXTP: "https://provjobdsettingscdn.blob.core.windows.net/settings/provjobdsettings-0.5.172+1/provjobd.data", npm_package_scripts_build_echarts_ci: "cd ./d9-echarts && yarn build-ci", npm_package_scripts_build_n3_ci: "cd ./d9-n3 && yarn build-ci", npm_package_dependencies_web_vitals: "^2.1.4", npm_package_dependencies_typescript: "^5.1.6", INIT_CWD: "/home/runner/work/rainbow-d9/rainbow-d9", ANDROID_NDK_HOME: "/usr/local/lib/android/sdk/ndk/25.2.9519653", GITHUB_STEP_SUMMARY: "/home/runner/work/_temp/_runner_file_commands/step_summary_da609ce9-74b5-40eb-bdd7-6b207d6c2f51", npm_package_dependencies_react: "^18.2.0", npm_package_dependencies__types_react_dom: "^18.2.7", NODE_ENV: "production" };
+var define_process_env_default = { GITHUB_STATE: "/home/runner/work/_temp/_runner_file_commands/save_state_f5f343ab-be95-41a3-ba12-595876682047", npm_package_scripts_build_n5_ci: "cd ./d9-n5 && yarn build-ci", npm_package_scripts_build_sample_cra: "cd ./d9-sample-cra && yarn build", STATS_TRP: "true", DEPLOYMENT_BASEPATH: "/opt/runner", DOTNET_NOLOGO: "1", npm_package_dependencies__vitejs_plugin_react: "^4.2.1", USER: "runner", npm_config_version_commit_hooks: "true", npm_config_user_agent: "yarn/1.22.21 npm/? node/v18.20.2 linux x64", npm_package_dependencies__types_jest: "^29.5.4", CI: "true", npm_config_bin_links: "true", npm_package_bugs_url: "https://github.com/InsureMO/rainbow-d9/issues", npm_config_wrap_output: "", RUNNER_ENVIRONMENT: "github-hosted", GITHUB_ENV: "/home/runner/work/_temp/_runner_file_commands/set_env_f5f343ab-be95-41a3-ba12-595876682047", PIPX_HOME: "/opt/pipx", npm_node_execpath: "/opt/hostedtoolcache/node/18.20.2/x64/bin/node", npm_package_scripts_build_thai_all_ci: "yarn build-thai-plan-selection-ci", npm_config_init_version: "1.0.0", npm_package_devDependencies_gh_pages: "^6.1.1", npm_package_dependencies__babel_plugin_proposal_private_property_in_object: "^7.21.11", JAVA_HOME_8_X64: "/usr/lib/jvm/temurin-8-jdk-amd64", SHLVL: "1", HOME: "/home/runner", OLDPWD: "/home/runner/work/rainbow-d9/rainbow-d9", npm_package_browserslist_production_0: ">0.2%", RUNNER_TEMP: "/home/runner/work/_temp", GITHUB_EVENT_PATH: "/home/runner/work/_temp/_github_workflow/event.json", npm_package_scripts_build_all: "yarn build-n123 && yarn build-n5 && yarn build-echarts && yarn build-thai-all", npm_package_browserslist_production_1: "not dead", npm_package_dependencies_react_syntax_highlighter: "^15.5.0", JAVA_HOME_11_X64: "/usr/lib/jvm/temurin-11-jdk-amd64", PIPX_BIN_DIR: "/opt/pipx_bin", GITHUB_REPOSITORY_OWNER: "InsureMO", npm_package_volta_node: "18.19.0", npm_config_init_license: "MIT", npm_package_browserslist_production_2: "not op_mini all", GRADLE_HOME: "/usr/share/gradle-8.7", ANDROID_NDK_LATEST_HOME: "/usr/local/lib/android/sdk/ndk/26.3.11579264", JAVA_HOME_21_X64: "/usr/lib/jvm/temurin-21-jdk-amd64", STATS_RDCL: "true", GITHUB_RETENTION_DAYS: "90", YARN_WRAP_OUTPUT: "false", npm_package_scripts_build_thai_plan_selection_ci: "cd ./d9-thai-plan-selection && yarn build-ci", npm_package_scripts_build_n1: "cd ./d9-n1 && yarn build", npm_config_version_tag_prefix: "v", npm_package_dependencies__rainbow_d9_n2: "1.1.22", GITHUB_REPOSITORY_OWNER_ID: "38915232", POWERSHELL_DISTRIBUTION_CHANNEL: "GitHub-Actions-ubuntu22", AZURE_EXTENSION_DIR: "/opt/az/azcliextensions", GITHUB_HEAD_REF: "", npm_package_scripts_build_n2: "cd ./d9-n2 && yarn build", npm_package_dependencies__types_styled_components: "^5.1.34", npm_package_dependencies__rainbow_d9_n3: "1.1.22", npm_package_dependencies__rainbow_d9_echarts: "1.1.22", SYSTEMD_EXEC_PID: "593", npm_package_scripts_build_echarts: "cd ./d9-echarts && yarn build", npm_package_scripts_build_n3: "cd ./d9-n3 && yarn build", GITHUB_GRAPHQL_URL: "https://api.github.com/graphql", npm_package_description: "Assume the following envs are ready, otherwise contact the tech guy.", npm_package_scripts_predeploy: "npm run build", npm_package_dependencies__rainbow_d9_n5: "1.1.22", GOROOT_1_20_X64: "/opt/hostedtoolcache/go/1.20.14/x64", NVM_DIR: "/home/runner/.nvm", npm_package_readmeFilename: "README.md", npm_package_scripts_build_n5: "cd ./d9-n5 && yarn build", npm_package_dependencies__types_react: "^18.2.21", npm_package_dependencies__testing_library_react: "^13.4.0", DOTNET_SKIP_FIRST_TIME_EXPERIENCE: "1", GOROOT_1_21_X64: "/opt/hostedtoolcache/go/1.21.9/x64", JAVA_HOME_17_X64: "/usr/lib/jvm/temurin-17-jdk-amd64", ImageVersion: "20240422.1.0", RUNNER_OS: "Linux", GITHUB_API_URL: "https://api.github.com", GOROOT_1_22_X64: "/opt/hostedtoolcache/go/1.22.2/x64", SWIFT_PATH: "/usr/share/swift/usr/bin", RUNNER_USER: "runner", STATS_V3PS: "true", CHROMEWEBDRIVER: "/usr/local/share/chromedriver-linux64", JOURNAL_STREAM: "8:17270", GITHUB_WORKFLOW: "Publish to NPM", _: "/opt/hostedtoolcache/node/18.20.2/x64/bin/yarn", npm_package_private: "true", npm_package_dependencies_remark_gfm: "3.0.1", npm_package_scripts_build_thai_all: "yarn build-thai-plan-selection", npm_config_registry: "https://registry.yarnpkg.com", ACTIONS_RUNNER_ACTION_ARCHIVE_CACHE: "/opt/actionarchivecache", STATS_D: "true", GITHUB_RUN_ID: "8843535904", STATS_VMFE: "true", npm_package_workspaces_0: "d9-n1", GITHUB_REF_TYPE: "tag", BOOTSTRAP_HASKELL_NONINTERACTIVE: "1", GITHUB_WORKFLOW_SHA: "fc6c5705022d19ccf41f477c09ba4876574ae8a1", GITHUB_BASE_REF: "", ImageOS: "ubuntu22", npm_package_scripts_build_n123_ci: "yarn build-n1-ci && yarn build-n2-ci && yarn build-n3-ci", npm_package_workspaces_1: "d9-n2", npm_config_ignore_scripts: "", npm_package_scripts_start: "vite", npm_package_dependencies_github_markdown_css: "^5.5.0", GITHUB_WORKFLOW_REF: "InsureMO/rainbow-d9/.github/workflows/release.yml@refs/tags/r-1.1.23", PERFLOG_LOCATION_SETTING: "RUNNER_PERFLOG", GITHUB_ACTION_REPOSITORY: "", npm_package_workspaces_2: "d9-n3", npm_package_browserslist_development_0: "last 1 chrome version", PATH: "/tmp/yarn--1714109347130-0.3820362043319576:/home/runner/work/rainbow-d9/rainbow-d9/d9-sample-cra/node_modules/.bin:/home/runner/.config/yarn/link/node_modules/.bin:/home/runner/work/rainbow-d9/rainbow-d9/node_modules/.bin:/opt/hostedtoolcache/node/18.20.2/x64/libexec/lib/node_modules/npm/bin/node-gyp-bin:/opt/hostedtoolcache/node/18.20.2/x64/lib/node_modules/npm/bin/node-gyp-bin:/opt/hostedtoolcache/node/18.20.2/x64/bin/node_modules/npm/bin/node-gyp-bin:/tmp/yarn--1714109346940-0.35581820297455646:/home/runner/work/rainbow-d9/rainbow-d9/node_modules/.bin:/home/runner/.config/yarn/link/node_modules/.bin:/home/runner/work/rainbow-d9/rainbow-d9/node_modules/.bin:/opt/hostedtoolcache/node/18.20.2/x64/libexec/lib/node_modules/npm/bin/node-gyp-bin:/opt/hostedtoolcache/node/18.20.2/x64/lib/node_modules/npm/bin/node-gyp-bin:/opt/hostedtoolcache/node/18.20.2/x64/bin/node_modules/npm/bin/node-gyp-bin:/opt/hostedtoolcache/node/18.20.2/x64/bin:/snap/bin:/home/runner/.local/bin:/opt/pipx_bin:/home/runner/.cargo/bin:/home/runner/.config/composer/vendor/bin:/usr/local/.ghcup/bin:/home/runner/.dotnet/tools:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin", NODE: "/opt/hostedtoolcache/node/18.20.2/x64/bin/node", ANT_HOME: "/usr/share/ant", DOTNET_MULTILEVEL_LOOKUP: "0", RUNNER_TRACKING_ID: "github_6187b4b1-8083-4b32-b3ba-1b1635d13234", INVOCATION_ID: "35aa1f15ca924c8aae55efdc671b5a92", RUNNER_TOOL_CACHE: "/opt/hostedtoolcache", npm_package_name: "@rainbow-d9/sample-cra", npm_package_workspaces_3: "d9-n5", npm_package_browserslist_development_1: "last 1 firefox version", npm_package_repository_type: "git", npm_package_dependencies__types_react_syntax_highlighter: "^15.5.11", npm_package_dependencies__rainbow_d9_thai_plan_selection: "1.1.22", GITHUB_ACTION: "__run_5", GITHUB_RUN_NUMBER: "111", GITHUB_TRIGGERING_ACTOR: "bradwoo8621", RUNNER_ARCH: "X64", XDG_RUNTIME_DIR: "/run/user/1001", AGENT_TOOLSDIRECTORY: "/opt/hostedtoolcache", npm_package_scripts_build_thai_plan_selection: "cd ./d9-thai-plan-selection && yarn build", npm_package_workspaces_4: "d9-echarts", npm_package_browserslist_development_2: "last 1 safari version", npm_package_workspaces_5: "d9-thai-plan-selection", LANG: "C.UTF-8", VCPKG_INSTALLATION_ROOT: "/usr/local/share/vcpkg", npm_package_workspaces_6: "d9-sample-cra", npm_package_dependencies_react_dom: "^18.2.0", CONDA: "/usr/share/miniconda", RUNNER_NAME: "GitHub Actions 18", XDG_CONFIG_HOME: "/home/runner/.config", STATS_VMD: "true", GITHUB_REF_NAME: "r-1.1.23", GITHUB_REPOSITORY: "InsureMO/rainbow-d9", STATS_D_D: "true", npm_lifecycle_script: "vite build", npm_package_eslintConfig_extends_0: "react-app", npm_package_dependencies_vite_plugin_markdown: "^2.2.0", npm_package_dependencies_react_markdown: "8.0.7", npm_package_dependencies__types_node: "^20.5.3", STATS_UE: "true", ANDROID_NDK_ROOT: "/usr/local/lib/android/sdk/ndk/25.2.9519653", GITHUB_ACTION_REF: "", DEBIAN_FRONTEND: "noninteractive", npm_package_scripts_build_sample_cra_ci: "cd ./d9-sample-cra && yarn build", npm_config_version_git_message: "v%s", npm_package_eslintConfig_extends_1: "react-app/jest", GITHUB_REPOSITORY_ID: "704514093", GITHUB_ACTIONS: "true", npm_lifecycle_event: "build", npm_package_version: "1.1.22", npm_package_repository_url: "git+https://github.com/InsureMO/rainbow-d9.git", npm_package_dependencies__testing_library_jest_dom: "^5.17.0", GITHUB_REF_PROTECTED: "false", npm_config_argv: '{"remain":[],"cooked":["run","build-sample-cra"],"original":["build-sample-cra"]}', npm_package_volta_yarn: "1.22.21", npm_package_scripts_build: "vite build", npm_package_dependencies__testing_library_user_event: "^13.5.0", GITHUB_WORKSPACE: "/home/runner/work/rainbow-d9/rainbow-d9", ACCEPT_EULA: "Y", GITHUB_JOB: "create-sample-pages", RUNNER_PERFLOG: "/home/runner/perflog", npm_package_dependencies_vite: "^5.0.13", GITHUB_SHA: "fc6c5705022d19ccf41f477c09ba4876574ae8a1", GITHUB_RUN_ATTEMPT: "1", npm_config_version_git_tag: "true", npm_config_version_git_sign: "", GITHUB_REF: "refs/tags/r-1.1.23", GITHUB_ACTOR: "bradwoo8621", ANDROID_SDK_ROOT: "/usr/local/lib/android/sdk", npm_package_license: "MIT", npm_config_strict_ssl: "true", LEIN_HOME: "/usr/local/lib/lein", npm_package_scripts_build_n123: "yarn build-n1 && yarn build-n2 && yarn build-n3", GITHUB_PATH: "/home/runner/work/_temp/_runner_file_commands/add_path_f5f343ab-be95-41a3-ba12-595876682047", JAVA_HOME: "/usr/lib/jvm/temurin-11-jdk-amd64", PWD: "/home/runner/work/rainbow-d9/rainbow-d9/d9-sample-cra", GITHUB_ACTOR_ID: "2330098", RUNNER_WORKSPACE: "/home/runner/work/rainbow-d9", npm_execpath: "/opt/hostedtoolcache/node/18.20.2/x64/lib/node_modules/yarn/bin/yarn.js", npm_package_scripts_build_all_ci: "yarn build-n123-ci && yarn build-n5-ci && yarn build-echarts-ci && yarn build-thai-all-ci", HOMEBREW_CLEANUP_PERIODIC_FULL_DAYS: "3650", GITHUB_EVENT_NAME: "push", HOMEBREW_NO_AUTO_UPDATE: "1", ANDROID_HOME: "/usr/local/lib/android/sdk", GITHUB_SERVER_URL: "https://github.com", GECKOWEBDRIVER: "/usr/local/share/gecko_driver", LEIN_JAR: "/usr/local/lib/lein/self-installs/leiningen-2.11.2-standalone.jar", GHCUP_INSTALL_BASE_PREFIX: "/usr/local", GITHUB_OUTPUT: "/home/runner/work/_temp/_runner_file_commands/set_output_f5f343ab-be95-41a3-ba12-595876682047", npm_package_author_name: "Rainbow Team", EDGEWEBDRIVER: "/usr/local/share/edge_driver", STATS_EXT: "true", npm_package_scripts_build_n1_ci: "cd ./d9-n1 && yarn build-ci", npm_config_save_prefix: "^", npm_config_ignore_optional: "", ANDROID_NDK: "/usr/local/lib/android/sdk/ndk/25.2.9519653", SGX_AESM_ADDR: "1", CHROME_BIN: "/usr/bin/google-chrome", npm_package_scripts_build_n2_ci: "cd ./d9-n2 && yarn build-ci", npm_package_scripts_deploy: "gh-pages -d build", npm_package_scripts_preview: "vite preview", SELENIUM_JAR_PATH: "/usr/share/java/selenium-server.jar", STATS_EXTP: "https://provjobdsettingscdn.blob.core.windows.net/settings/provjobdsettings-0.5.172+1/provjobd.data", npm_package_scripts_build_echarts_ci: "cd ./d9-echarts && yarn build-ci", npm_package_scripts_build_n3_ci: "cd ./d9-n3 && yarn build-ci", npm_package_dependencies_web_vitals: "^2.1.4", npm_package_dependencies_typescript: "^5.1.6", INIT_CWD: "/home/runner/work/rainbow-d9/rainbow-d9", ANDROID_NDK_HOME: "/usr/local/lib/android/sdk/ndk/25.2.9519653", GITHUB_STEP_SUMMARY: "/home/runner/work/_temp/_runner_file_commands/step_summary_f5f343ab-be95-41a3-ba12-595876682047", npm_package_dependencies_react: "^18.2.0", npm_package_dependencies__types_react_dom: "^18.2.7", NODE_ENV: "production" };
 dayjs.extend(WeekOfYear);
 dayjs.extend(QuarterOfYear);
 dayjs.extend(Duration);
@@ -6527,7 +6622,7 @@ const App = () => {
 };
 const reportWebVitals = (onPerfEntry) => {
   if (onPerfEntry && onPerfEntry instanceof Function) {
-    __vitePreload(() => import("./vendor-wCUoLaWE.js").then((n) => n.Z), true ? __vite__mapDeps([0,1,2,3]) : void 0).then(({ getCLS, getFID, getFCP, getLCP, getTTFB }) => {
+    __vitePreload(() => import("./vendor-evEsej2c.js").then((n) => n.Z), true ? __vite__mapDeps([0,1,2,3]) : void 0).then(({ getCLS, getFID, getFCP, getLCP, getTTFB }) => {
       getCLS(onPerfEntry);
       getFID(onPerfEntry);
       getFCP(onPerfEntry);
@@ -6545,7 +6640,7 @@ root.render(
 reportWebVitals();
 function __vite__mapDeps(indexes) {
   if (!__vite__mapDeps.viteFileDeps) {
-    __vite__mapDeps.viteFileDeps = ["assets/vendor-wCUoLaWE.js","assets/babel-AnpZxJH-.js","assets/unist-5yxlKLF4.js","assets/vendor-UDnasYXb.css"]
+    __vite__mapDeps.viteFileDeps = ["assets/vendor-evEsej2c.js","assets/babel-AnpZxJH-.js","assets/unist-5yxlKLF4.js","assets/vendor-UDnasYXb.css"]
   }
   return indexes.map((i) => __vite__mapDeps.viteFileDeps[i])
 }

@@ -4,10 +4,10 @@ var __publicField = (obj, key, value) => {
   __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
   return value;
 };
-import { a as color, M as MaskedNumber, e as MaskedDate, g as MaskedFunction, j as MaskedPattern, k as MaskedRange, l as MaskedRegExp, o as MaskedDynamic } from "./vendor-wCUoLaWE.js";
-import { R as React, r as reactExports, u as useIMask } from "./react-eULmGZqv.js";
-import { c as createLogger, V as VUtils, P as PPUtils, r as registerWidget, u as useRootEventBus, M as MUtils, N as NUtils, d as Wrapper, e as useForceUpdate, f as MBUtils, b as useWrapperEventBus, W as WrapperEventTypes, g as useCreateEventBus, h as useDefaultAttributeValues, i as PROPERTY_PATH_ME, j as useAttributesWatch, R as RootEventTypes } from "./rainbow-d9-n1-lzxxX0eg.js";
-import { q as qe, W as We } from "./styled-components-Nvi_LCzF.js";
+import { a as color, M as MaskedNumber, e as MaskedDate, g as MaskedFunction, j as MaskedPattern, k as MaskedRange, l as MaskedRegExp, o as MaskedDynamic } from "./vendor-evEsej2c.js";
+import { R as React, r as reactExports, u as useIMask } from "./react-9JUNisJQ.js";
+import { c as createLogger, V as VUtils, P as PPUtils, r as registerWidget, u as useRootEventBus, M as MUtils, N as NUtils, d as Wrapper, e as useForceUpdate, f as MBUtils, b as useWrapperEventBus, W as WrapperEventTypes, g as useCreateEventBus, h as useDefaultAttributeValues, i as PROPERTY_PATH_ME, j as useAttributesWatch, R as RootEventTypes } from "./rainbow-d9-n1-czOgqBsL.js";
+import { q as qe, W as We } from "./styled-components-1neY-nLL.js";
 import { d as dayjs } from "./dayjs-9Z7dW0Q-.js";
 const DOM_KEY_WIDGET = "data-w";
 const DOM_ID_WIDGET = "data-wid";
@@ -1241,7 +1241,7 @@ const Alert = () => {
     React.createElement(
       AlertDialog,
       { visible: alert.visible },
-      React.createElement(AlertBody, null, alert.content),
+      React.createElement(AlertBody, null, toIntlLabel(alert.content)),
       React.createElement(
         AlertFooter,
         null,
@@ -1326,7 +1326,7 @@ const YesNoContent = (props) => {
     React.createElement(
       DialogBody,
       null,
-      React.createElement(DialogLabel, null, question)
+      React.createElement(DialogLabel, null, toIntlLabel(question))
     ),
     React.createElement(
       DialogFooter,
