@@ -31,6 +31,7 @@ import {LocateIcon} from './locate';
 import {MaxIcon} from './max';
 import {MinIcon} from './min';
 import {MultiDropdownIcon} from './multi-dropdown';
+import {MultiDropdownTreeIcon} from './multi-dropdown-tree';
 import {NumberInputIcon} from './number-input';
 import {OptionsGroupIcon} from './options-group';
 import {PasswordIcon} from './password';
@@ -72,6 +73,7 @@ export enum PlaygroundIcons {
 	TABLE = 'playground.table',
 	TREE = 'playground.tree',
 	DROPDOWN_TREE = 'playground.dropdown-tree',
+	MULTI_DROPDOWN_TREE = 'playground.multi-dropdown-tree',
 	TABS = 'playground.tabs',
 	WIZARD = 'playground.wizard',
 	BUTTON_BAR = 'playground.button-bar',
@@ -128,6 +130,7 @@ Icons.Registrar.register({
 	[PlaygroundIcons.TABLE]: () => <TableIcon/>,
 	[PlaygroundIcons.TREE]: () => <TreeIcon/>,
 	[PlaygroundIcons.DROPDOWN_TREE]: () => <DropdownTreeIcon/>,
+	[PlaygroundIcons.MULTI_DROPDOWN_TREE]: () => <MultiDropdownTreeIcon/>,
 	[PlaygroundIcons.TABS]: () => <TabsIcon/>,
 	[PlaygroundIcons.WIZARD]: () => <WizardIcon/>,
 	[PlaygroundIcons.BUTTON_BAR]: () => <ButtonBarIcon/>,
@@ -168,7 +171,7 @@ export {
 	ShowEditorBadgeIcon, HideEditorBadgeIcon,
 	MaxIcon, MinIcon, ZenIcon, WindowIcon,
 
-	SectionIcon, BoxIcon, RibsIcon, TabsIcon, TableIcon, TreeIcon, WizardIcon,
+	SectionIcon, BoxIcon, RibsIcon, TabsIcon, TableIcon, TreeIcon, DropdownTreeIcon, MultiDropdownTreeIcon, WizardIcon,
 
 	InputIcon, NumberInputIcon, PasswordIcon, TextAreaIcon,
 	DecoInputIcon, DecoNumberIcon, DecoPasswordIcon,
