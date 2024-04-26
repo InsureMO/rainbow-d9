@@ -19,6 +19,7 @@ import {DecoNumberIcon} from './deco-number';
 import {DecoPasswordIcon} from './deco-password';
 import {DisplayGroupIcon} from './display-group';
 import {DropdownIcon} from './dropdown';
+import {DropdownTreeIcon} from './dropdown-tree';
 import {HideEditorBadgeIcon} from './hide-editor-badge';
 import {HideLocatorIcon} from './hide-locator';
 import {InputIcon} from './input';
@@ -70,6 +71,7 @@ export enum PlaygroundIcons {
 	RIBS = 'playground.ribs',
 	TABLE = 'playground.table',
 	TREE = 'playground.tree',
+	DROPDOWN_TREE = 'playground.dropdown-tree',
 	TABS = 'playground.tabs',
 	WIZARD = 'playground.wizard',
 	BUTTON_BAR = 'playground.button-bar',
@@ -125,6 +127,7 @@ Icons.Registrar.register({
 	[PlaygroundIcons.RIBS]: () => <RibsIcon/>,
 	[PlaygroundIcons.TABLE]: () => <TableIcon/>,
 	[PlaygroundIcons.TREE]: () => <TreeIcon/>,
+	[PlaygroundIcons.DROPDOWN_TREE]: () => <DropdownTreeIcon/>,
 	[PlaygroundIcons.TABS]: () => <TabsIcon/>,
 	[PlaygroundIcons.WIZARD]: () => <WizardIcon/>,
 	[PlaygroundIcons.BUTTON_BAR]: () => <ButtonBarIcon/>,

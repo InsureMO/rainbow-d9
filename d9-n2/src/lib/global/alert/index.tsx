@@ -1,6 +1,6 @@
 import React, {ReactNode, useEffect, useState} from 'react';
 import {ButtonInk} from '../../button';
-import {IntlLabel} from '../../intl-label';
+import {IntlLabel, toIntlLabel} from '../../intl-label';
 import {UnwrappedButton} from '../../unwrapped/button';
 import {GlobalEventTypes, useGlobalEventBus} from '../global-event-bus';
 import {AlertBody, AlertContainer, AlertDialog, AlertFooter} from './widgets';
@@ -47,7 +47,7 @@ export const Alert = () => {
 	return <AlertContainer visible={alert.visible}>
 		<AlertDialog visible={alert.visible}>
 			<AlertBody>
-				{alert.content}
+				{toIntlLabel(alert.content)}
 			</AlertBody>
 			<AlertFooter>
 				<UnwrappedButton ink={ButtonInk.PRIMARY} onClick={onHideClicked}>

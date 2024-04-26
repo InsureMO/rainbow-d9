@@ -1,6 +1,6 @@
 import React, {Fragment, ReactNode, useEffect} from 'react';
 import {ButtonInk} from '../../button';
-import {IntlLabel} from '../../intl-label';
+import {IntlLabel, toIntlLabel} from '../../intl-label';
 import {UnwrappedButton} from '../../unwrapped/button';
 import {GlobalEventTypes, useGlobalEventBus} from '../global-event-bus';
 import {DialogBody, DialogFooter, DialogLabel} from './widgets';
@@ -14,7 +14,7 @@ const YesNoContent = (props: {
 
 	return <>
 		<DialogBody>
-			<DialogLabel>{question}</DialogLabel>
+			<DialogLabel>{toIntlLabel(question)}</DialogLabel>
 		</DialogBody>
 		<DialogFooter>
 			<UnwrappedButton ink={ButtonInk.PRIMARY} onClick={onYes}>
