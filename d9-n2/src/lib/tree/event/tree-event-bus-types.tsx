@@ -8,7 +8,10 @@ export enum TreeEventTypes {
 	ASK_MARKER_ADDER = 'ask-marker-adder',
 	SCROLL_NODE_INTO_VIEW = 'scroll-node-into-view',
 	SHOW_HOVER_BOX = 'show-hover-box',
-	HIDE_HOVER_BOX = 'hide-hover-box'
+	HIDE_HOVER_BOX = 'hide-hover-box',
+	CONTENT_MOUSE_MOVE = 'content-mouse-move',
+	CONTENT_MOUSE_LEAVE = 'content-mouse-leave',
+	ASK_MOUSE_POSITION = 'ask-mouse-position'
 }
 
 export interface TreeEventBus {
@@ -59,4 +62,22 @@ export interface TreeEventBus {
 	on(type: TreeEventTypes.HIDE_HOVER_BOX, listener: () => void): this;
 
 	off(type: TreeEventTypes.HIDE_HOVER_BOX, listener: () => void): this;
+
+	fire(type: TreeEventTypes.CONTENT_MOUSE_MOVE, x: number, y: number): this;
+
+	on(type: TreeEventTypes.CONTENT_MOUSE_MOVE, listener: (x: number, y: number) => void): this;
+
+	off(type: TreeEventTypes.CONTENT_MOUSE_MOVE, listener: (x: number, y: number) => void): this;
+
+	fire(type: TreeEventTypes.CONTENT_MOUSE_LEAVE): this;
+
+	on(type: TreeEventTypes.CONTENT_MOUSE_LEAVE, listener: () => void): this;
+
+	off(type: TreeEventTypes.CONTENT_MOUSE_LEAVE, listener: () => void): this;
+
+	fire(type: TreeEventTypes.ASK_MOUSE_POSITION, callback: (x: number, y: number) => void): this;
+
+	on(type: TreeEventTypes.ASK_MOUSE_POSITION, listener: (callback: (x: number, y: number) => void) => void): this;
+
+	off(type: TreeEventTypes.ASK_MOUSE_POSITION, listener: (callback: (x: number, y: number) => void) => void): this;
 }

@@ -1,5 +1,5 @@
 import {Nullable, PPUtils, VUtils} from '@rainbow-d9/n1';
-import React, {ReactNode, useEffect, useState} from 'react';
+import React, {Fragment, MouseEvent, ReactNode, useEffect, useState} from 'react';
 import {internationalize, IntlLabel, toIntlLabel} from '../intl-label';
 import {ChildTreeNodes} from './child-nodes';
 import {useTreeEventBus} from './event/tree-event-bus';
@@ -11,6 +11,35 @@ import {TreeNodeDef, TreeNodeDetect, TreeProps} from './types';
 import {TreeContentContainer} from './widgets';
 
 export const NO_MATCHED_TREE_NODE = '__no_matched__';
+
+export interface TreeContentMouseState {
+	x: number;
+	y: number;
+	inside: boolean;
+}
+
+export const TreeContentMouseStateHolder = () => {
+	const {on, off} = useTreeEventBus();
+	const [mouse, setMouse] = useState<TreeContentMouseState>({x: 0, y: 0, inside: false});
+	useEffect(() => {
+		const onContentMouseMove = (x, y) => setMouse({x, y, inside: true});
+		const onContentMouseLeave = () => setMouse({x: 0, y: 0, inside: false});
+		const onAskMousePosition = (callback: (x: number, y: number) => void) => {
+			if (mouse.inside) {
+				callback(mouse.x, mouse.y);
+			}
+		};
+		on(TreeEventTypes.CONTENT_MOUSE_MOVE, onContentMouseMove);
+		on(TreeEventTypes.CONTENT_MOUSE_LEAVE, onContentMouseLeave);
+		on(TreeEventTypes.ASK_MOUSE_POSITION, onAskMousePosition);
+		return () => {
+			off(TreeEventTypes.CONTENT_MOUSE_MOVE, onContentMouseMove);
+			off(TreeEventTypes.CONTENT_MOUSE_LEAVE, onContentMouseLeave);
+			off(TreeEventTypes.ASK_MOUSE_POSITION, onAskMousePosition);
+		};
+	}, [on, off, mouse]);
+	return <Fragment/>;
+};
 
 export interface TreeContentProps {
 	root: TreeNodeDef;
@@ -32,7 +61,7 @@ export const TreeContent = (props: TreeContentProps) => {
 	const {$p2r} = $wrapped;
 
 	const [filter, setFilter] = useState('');
-	const {on, off} = useTreeEventBus();
+	const {on, off, fire} = useTreeEventBus();
 	useEffect(() => {
 		const onDiscardFilter = () => setFilter('');
 		const onFilterChanged = (filter: string) => setFilter(`${filter ?? ''}`.trim());
@@ -105,7 +134,26 @@ export const TreeContent = (props: TreeContentProps) => {
 		// and in this case, there is no need to notify parent this event, simply ignore
 		const expandParent = VUtils.noop;
 		const nodeCheckedChanged = VUtils.noop;
-		return <TreeContentContainer>
+		const onMouseMove = (event: MouseEvent<HTMLDivElement>) => {
+			fire(TreeEventTypes.CONTENT_MOUSE_MOVE, event.clientX, event.clientY);
+		};
+		const onMouseLeave = () => {
+			fire(TreeEventTypes.CONTENT_MOUSE_LEAVE);
+		};
+		const onScroll = () => {
+			fire(TreeEventTypes.ASK_MOUSE_POSITION, (x, y) => {
+				const element = document.elementFromPoint(x, y);
+				const node = element.closest('div[data-w=d9-tree-node-container]');
+				if (node == null) {
+					return;
+				}
+				const {top: treeTop} = node.closest('div[data-w=d9-tree]').getBoundingClientRect();
+				const {top, height} = node.getBoundingClientRect();
+				fire(TreeEventTypes.SHOW_HOVER_BOX, top - treeTop, height);
+			});
+		};
+		return <TreeContentContainer onMouseMove={onMouseMove} onMouseLeave={onMouseLeave} onScroll={onScroll}>
+			<TreeContentMouseStateHolder/>
 			<TreeNodeEventBusProvider>
 				<TreeNodeEventBridge node={root}
 				                     expandParent={expandParent} nodeCheckedChanged={nodeCheckedChanged}
