@@ -1,4 +1,4 @@
-import {useForceUpdate} from '@rainbow-d9/n1';
+import {useForceUpdate, VUtils} from '@rainbow-d9/n1';
 import React, {useEffect} from 'react';
 import {useGlobalHandlers} from '../global';
 import {useTreeEventBus} from './event/tree-event-bus';
@@ -17,11 +17,15 @@ export interface ChildTreeNodesProps {
 	displayIndex: string;
 	/** starts from 0 */
 	level: number;
+	/**
+	 * display given child nodes, or use children of given node
+	 */
+	displayChildren?: Array<TreeNodeDef>;
 }
 
 export const ChildTreeNodes = (props: ChildTreeNodesProps) => {
 	const {
-		node,
+		node, displayChildren,
 		initExpandLevel, level, showIndex, displayIndex,
 		detect, $wrapped
 	} = props;
@@ -103,7 +107,7 @@ export const ChildTreeNodes = (props: ChildTreeNodesProps) => {
 		};
 	}, [on, off, forceUpdate, node]);
 
-	const children = node.$children ?? [];
+	const children = displayChildren ?? node.$children ?? [];
 	const childrenCount = children.length;
 	const hasChild = childrenCount !== 0;
 
@@ -113,7 +117,7 @@ export const ChildTreeNodes = (props: ChildTreeNodesProps) => {
 	return <>
 		{children.map((child, index) => {
 			const last = index === childrenCount - 1;
-			const myDisplayIndex = `${displayIndex}.${index + 1}`;
+			const myDisplayIndex = VUtils.isBlank(displayIndex) ? `${index + 1}` : `${displayIndex}.${index + 1}`;
 			return <TreeNode initExpandLevel={initExpandLevel} showIndex={showIndex}
 			                 detect={detect} $wrapped={$wrapped}
 			                 node={child}

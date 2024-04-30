@@ -153,6 +153,7 @@ export enum GlobalEventPrefix {
 	RECALC_TREE_CHILD_NODES = 'recalc-tree-child-nodes',
 	/** refresh node itself and all child nodes  */
 	REFRESH_TREE_NODE_AND_CHILDREN = 'refresh-tree-node-and-children',
+	/** recalculating child nodes, and refresh all child nodes and node itself  */
 	RECALC_TREE_NODE_AND_CHILDREN = 'recalc-tree-node-and-children',
 	/** expand tree node */
 	EXPAND_TREE_NODE = 'expand-tree-node',

@@ -1,9 +1,12 @@
 import {Nullable, PPUtils, VUtils} from '@rainbow-d9/n1';
 import React, {ReactNode, useEffect, useState} from 'react';
 import {internationalize, IntlLabel, toIntlLabel} from '../intl-label';
+import {ChildTreeNodes} from './child-nodes';
 import {useTreeEventBus} from './event/tree-event-bus';
 import {TreeEventTypes} from './event/tree-event-bus-types';
+import {TreeNodeEventBusProvider} from './event/tree-node-event-bus';
 import {TreeNode} from './node';
+import {TreeNodeEventBridge} from './node-event-bridge';
 import {TreeNodeDef, TreeNodeDetect, TreeProps} from './types';
 import {TreeContentContainer} from './widgets';
 
@@ -17,13 +20,14 @@ export interface TreeContentProps {
 	noMatched?: ReactNode;
 	$pp: string;
 	$wrapped: TreeProps['$wrapped'];
+	refresh: () => void;
 }
 
 export const TreeContent = (props: TreeContentProps) => {
 	const {
 		root, $pp, initExpandLevel, showIndex,
 		noMatched = <IntlLabel keys={['tree', 'node', 'noMatched']} value="No matched node."/>,
-		detect, $wrapped
+		detect, $wrapped, refresh
 	} = props;
 	const {$p2r} = $wrapped;
 
@@ -95,19 +99,22 @@ export const TreeContent = (props: TreeContentProps) => {
 			          displayIndex="0" lastOfParent={true} level={0}/>
 		</TreeContentContainer>;
 	} else {
-		const childrenCount = childNodesFiltered.length;
+		// bridge event to me
+		// if it is top level node, then will not be wrapped by tree node event bus provider
+		// then fire is undefined
+		// and in this case, there is no need to notify parent this event, simply ignore
+		const expandParent = VUtils.noop;
+		const nodeCheckedChanged = VUtils.noop;
 		return <TreeContentContainer>
-			{childNodesFiltered.map((child, index) => {
-				const last = index === childrenCount - 1;
-				const myDisplayIndex = `${index + 1}`;
-				return <TreeNode initExpandLevel={initExpandLevel} showIndex={showIndex}
-					// change path to root as path to root of model of whole tree
-					// and keep this path to root for all tree nodes
-					             detect={detect} $wrapped={{...$wrapped, $p2r: node$p2r}}
-					             node={child}
-					             displayIndex={myDisplayIndex} lastOfParent={last} level={0}
-					             key={child.$ip2p}/>;
-			})}
+			<TreeNodeEventBusProvider>
+				<TreeNodeEventBridge node={root}
+				                     expandParent={expandParent} nodeCheckedChanged={nodeCheckedChanged}
+				                     nodeRemoved={refresh}/>
+				<ChildTreeNodes node={root} displayChildren={childNodesFiltered} detect={detect}
+				                initExpandLevel={initExpandLevel} level={-1}
+				                showIndex={showIndex} displayIndex=""
+				                $wrapped={{...$wrapped, $p2r: node$p2r}}/>
+			</TreeNodeEventBusProvider>
 		</TreeContentContainer>;
 	}
 };

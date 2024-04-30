@@ -65,7 +65,9 @@ export const InternalTree = forwardRef((props: TreeProps, ref: ForwardedRef<HTML
 	const rootNodeDef: TreeNodeDef = {
 		// root node use model of whole tree as it value, so path to root and path are both stay itself
 		value: rootNodeValue, $ip2r: PROPERTY_PATH_ME, $ip2p: PROPERTY_PATH_ME,
-		label: '', checkable: false, addable: false, removable: false
+		label: '', checkable: false, addable: false, removable: false,
+		// use tree marker as root node marker
+		marker
 	};
 	rootNodeDef.$children = detect(rootNodeDef, {global: globalHandlers}) ?? [];
 
@@ -77,7 +79,8 @@ export const InternalTree = forwardRef((props: TreeProps, ref: ForwardedRef<HTML
 		<TreeSearchBox disabled={disableSearchBox}/>
 		{children}
 		<TreeContent root={rootNodeDef} initExpandLevel={initExpandLevel}
-		             showIndex={showIndex} noMatched={noMatched} detect={detect} $pp={$pp} $wrapped={$wrapped}/>
+		             showIndex={showIndex} noMatched={noMatched} detect={detect} $pp={$pp} $wrapped={$wrapped}
+		             refresh={() => forceUpdate()}/>
 	</ATree>;
 });
 
