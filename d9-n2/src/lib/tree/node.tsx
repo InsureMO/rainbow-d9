@@ -11,7 +11,7 @@ import {TreeNodeWrapper} from './widgets';
 export interface TreeNodeProps {
 	initExpandLevel: TreeDef['initExpandLevel'];
 	showIndex?: TreeDef['showIndex'];
-	detective?: TreeDef['detective'];
+	detect?: TreeDef['detective'];
 	$wrapped: TreeProps['$wrapped'];
 	node: TreeNodeDef;
 	displayIndex: string;
@@ -29,7 +29,7 @@ const TreeNodeRefresher = (props: Pick<TreeNodeProps, 'node' | '$wrapped'>) => {
 };
 
 export const TreeNode = (props: TreeNodeProps) => {
-	const {initExpandLevel, showIndex, $wrapped, node, displayIndex, lastOfParent, level} = props;
+	const {initExpandLevel, showIndex, detect, $wrapped, node, displayIndex, lastOfParent, level} = props;
 
 	const {fire} = useTreeNodeEventBus();
 
@@ -49,7 +49,7 @@ export const TreeNode = (props: TreeNodeProps) => {
 		<TreeNodeWrapper data-last-of-parent={lastOfParent} level={level}>
 			<TreeNodeRenderer initExpandLevel={initExpandLevel} showIndex={showIndex} $wrapped={$wrapped}
 			                  node={node} displayIndex={displayIndex} lastOfParent={lastOfParent} level={level}/>
-			<ChildTreeNodes node={node}
+			<ChildTreeNodes node={node} detect={detect}
 			                initExpandLevel={initExpandLevel} level={level}
 			                showIndex={showIndex} displayIndex={displayIndex}
 			                $wrapped={$wrapped}/>

@@ -288,6 +288,8 @@ export const TreeNodeRenderer = (props: TreeNodeRendererProps) => {
 		<LabelLike $wrapped={{...$wrapped, $model: node.value, $p2r}} label={node.label}/>
 	</TreeNodeLabel>;
 
+	const children = node.$children ?? [];
+
 	return <TreeNodeContainer data-expanded={expanded.current} data-last-of-parent={lastOfParent} level={level}
 	                          onClick={onEntityClicked}
 	                          onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}
@@ -306,7 +308,7 @@ export const TreeNodeRenderer = (props: TreeNodeRendererProps) => {
 			</TreeNodeOperators>
 			: null}
 		<TreeNodeContent>
-			{(node.$children ?? []).length !== 0
+			{children.length !== 0
 				? <TreeNodeToggle data-expanded={expanded.current} onClick={onToggleClicked}>
 					<AngleRight/>
 				</TreeNodeToggle>

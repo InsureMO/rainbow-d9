@@ -11,7 +11,7 @@ import {TreeDef, TreeNodeDef, TreeProps} from './types';
 export interface ChildTreeNodesProps {
 	initExpandLevel: TreeDef['initExpandLevel'];
 	showIndex?: TreeDef['showIndex'];
-	detective?: TreeDef['detective'];
+	detect?: TreeDef['detective'];
 	$wrapped: TreeProps['$wrapped'];
 	node: TreeNodeDef;
 	displayIndex: string;
@@ -23,7 +23,7 @@ export const ChildTreeNodes = (props: ChildTreeNodesProps) => {
 	const {
 		node,
 		initExpandLevel, level, showIndex, displayIndex,
-		detective, $wrapped
+		detect, $wrapped
 	} = props;
 
 	const {fire: fireTree} = useTreeEventBus();
@@ -32,14 +32,15 @@ export const ChildTreeNodes = (props: ChildTreeNodesProps) => {
 	const forceUpdate = useForceUpdate();
 	useEffect(() => {
 		// eslint-disable-next-line @typescript-eslint/no-unused-vars
-		const onRefreshChildNodes = (_marker: string, detect?: boolean) => {
-			if (detect === true) {
-				node.$children = detective(node, {global: globalHandlers}) ?? [];
+		const onRefreshChildNodes = (_marker: string, redetect?: boolean) => {
+			if (redetect === true) {
+				node.$children = detect(node, {global: globalHandlers}) ?? [];
 			}
 			forceUpdate();
 		};
 		const refreshNodeContent = () => {
-			if (node.$children == null || node.$children.length === 0) {
+			const children = node.$children ?? [];
+			if (children.length === 0) {
 				fire && fire(TreeNodeEventTypes.SWITCH_MY_EXPAND, node.marker, false);
 			}
 		};
@@ -90,7 +91,7 @@ export const ChildTreeNodes = (props: ChildTreeNodesProps) => {
 			off && off(TreeNodeEventTypes.CHILD_PLACEHOLDER_REPLACED, onChildPlaceholderReplaced);
 			off && off(TreeNodeEventTypes.CHILD_PLACEHOLDER_REMOVED, onChildPlaceholderRemoved);
 		};
-	}, [on, off, fire, fireTree, forceUpdate, node, detective, globalHandlers]);
+	}, [on, off, fire, fireTree, forceUpdate, node, detect, globalHandlers]);
 	useEffect(() => {
 		// eslint-disable-next-line @typescript-eslint/no-unused-vars
 		const onNodeCheckedChanged = (_marker: string, _checked: boolean) => {
@@ -114,7 +115,7 @@ export const ChildTreeNodes = (props: ChildTreeNodesProps) => {
 			const last = index === childrenCount - 1;
 			const myDisplayIndex = `${displayIndex}.${index + 1}`;
 			return <TreeNode initExpandLevel={initExpandLevel} showIndex={showIndex}
-			                 detective={detective} $wrapped={$wrapped}
+			                 detect={detect} $wrapped={$wrapped}
 			                 node={child}
 			                 displayIndex={myDisplayIndex} lastOfParent={last} level={level + 1}
 			                 key={child.$ip2p}/>;

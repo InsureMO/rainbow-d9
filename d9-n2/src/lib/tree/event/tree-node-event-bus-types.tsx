@@ -97,11 +97,11 @@ export interface TreeNodeEventBus {
 	/**
 	 * marker: the node marker, to refresh its children
 	 */
-	fire(type: TreeNodeEventTypes.REFRESH_CHILD_NODES, marker: string, detect?: boolean): this;
+	fire(type: TreeNodeEventTypes.REFRESH_CHILD_NODES, marker: string, redetect?: boolean): this;
 
-	on(type: TreeNodeEventTypes.REFRESH_CHILD_NODES, listener: (marker: string, detect?: boolean) => void): this;
+	on(type: TreeNodeEventTypes.REFRESH_CHILD_NODES, listener: (marker: string, redetect?: boolean) => void): this;
 
-	off(type: TreeNodeEventTypes.REFRESH_CHILD_NODES, listener: (marker: string, detect?: boolean) => void): this;
+	off(type: TreeNodeEventTypes.REFRESH_CHILD_NODES, listener: (marker: string, redetect?: boolean) => void): this;
 
 	/**
 	 * marker: the node marker, to refresh its children, triggered by removed node

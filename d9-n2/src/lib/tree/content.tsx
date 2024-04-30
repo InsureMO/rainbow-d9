@@ -40,10 +40,8 @@ export const TreeContent = (props: TreeContentProps) => {
 		};
 	}, [on, off]);
 
-	const childrenCount = root.$children.length;
 	// path to root of model of whole tree
 	const node$p2r = PPUtils.absolute($p2r, $pp);
-	const canAdd = root.addable ?? false;
 
 	const children = () => {
 		if (VUtils.isBlank(filter)) {
@@ -92,19 +90,20 @@ export const TreeContent = (props: TreeContentProps) => {
 		};
 		return <TreeContentContainer>
 			<TreeNode initExpandLevel={0} showIndex={false}
-			          detective={detect} $wrapped={{...$wrapped, $p2r: node$p2r}}
+			          detect={detect} $wrapped={{...$wrapped, $p2r: node$p2r}}
 			          node={def}
 			          displayIndex="0" lastOfParent={true} level={0}/>
 		</TreeContentContainer>;
 	} else {
+		const childrenCount = childNodesFiltered.length;
 		return <TreeContentContainer>
 			{childNodesFiltered.map((child, index) => {
-				const last = !canAdd && index === childrenCount - 1;
+				const last = index === childrenCount - 1;
 				const myDisplayIndex = `${index + 1}`;
 				return <TreeNode initExpandLevel={initExpandLevel} showIndex={showIndex}
 					// change path to root as path to root of model of whole tree
 					// and keep this path to root for all tree nodes
-					             detective={detect} $wrapped={{...$wrapped, $p2r: node$p2r}}
+					             detect={detect} $wrapped={{...$wrapped, $p2r: node$p2r}}
 					             node={child}
 					             displayIndex={myDisplayIndex} lastOfParent={last} level={0}
 					             key={child.$ip2p}/>;

@@ -62,7 +62,15 @@ export interface TreeNodeDef extends TreeNodeOperation2 {
 	marker?: string;
 	label?: string | ReactNode | NodeDef;
 	stringify?: (node: TreeNodeDef) => string;
+	/**
+	 * children nodes, will be detected automatically,
+	 * 1. do not set anything to this attribute outside,
+	 * 2. change this attribute when tree is rendered, and want to change children of this node.
+	 */
 	$children?: Array<TreeNodeDef>;
+	/**
+	 * parent node, will be detected automatically, do not set anything to this attribute outside.
+	 */
 	$parent?: TreeNodeDef;
 }
 
