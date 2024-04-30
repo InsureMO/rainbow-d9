@@ -1,7 +1,7 @@
 import {N2} from '@rainbow-d9/n3';
 import {PlaygroundIcons} from '../icons';
 import {PlaygroundWidget, PlaygroundWidgetGroupKey} from '../types';
-import {ValidationRequired, ValueChanged} from './attributes';
+import {ValidationLength, ValidationRequired, ValueChanged} from './attributes';
 import {DropdownProperties} from './dropdown';
 
 export const TREES: Array<PlaygroundWidget> = [
@@ -41,6 +41,32 @@ export const TREES: Array<PlaygroundWidget> = [
 		],
 		icon: PlaygroundIcons.DROPDOWN_TREE, group: PlaygroundWidgetGroupKey.OPTIONS,
 		template: `DDT::[caption]::[property]
+- !clearable
+- please: a placeholder text
+- options: @ext.options
+`, notInToolbar: true
+	},
+	{
+		$wt: N2.N2WidgetType.MULTI_DROPDOWN_TREE, label: 'Dropdown allows multiple choices, with tree.',
+		properties: [
+			{name: 'couldSelect', label: 'Snippet.', description: 'Check if the selected node can be used as a value.'},
+			...DropdownProperties, ValueChanged, ValidationRequired, ValidationLength
+		],
+		icon: PlaygroundIcons.DROPDOWN_TREE, group: PlaygroundWidgetGroupKey.OPTIONS,
+		template: `MultiDropdownTree::[caption]::[property]
+- !clearable
+- please: a placeholder text
+- options: @ext.options
+`
+	},
+	{
+		$wt: N2.N2WidgetType.MDDT, label: 'Dropdown allows multiple choices, with tree. Shortcut of "DropdownTree".',
+		properties: [
+			{name: 'couldSelect', label: 'Snippet.', description: 'Check if the selected node can be used as a value.'},
+			...DropdownProperties, ValueChanged, ValidationRequired, ValidationLength
+		],
+		icon: PlaygroundIcons.DROPDOWN_TREE, group: PlaygroundWidgetGroupKey.OPTIONS,
+		template: `MDDT::[caption]::[property]
 - !clearable
 - please: a placeholder text
 - options: @ext.options

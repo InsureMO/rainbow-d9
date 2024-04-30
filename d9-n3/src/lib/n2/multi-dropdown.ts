@@ -27,7 +27,6 @@ export class N2MultiDropdownTranslator extends SpecificWidgetTranslator<N2Widget
 
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	public getAttributeValueBuilders(): Array<AttributeValueBuild<any>> {
-		// TODO ValueChangeableNodeDef
 		return [N2DropdownOptionsBuild, N2DropdownSortBuild, N2DropdownReactionRefreshOptionsBuild, ValueChangedBuild];
 	}
 

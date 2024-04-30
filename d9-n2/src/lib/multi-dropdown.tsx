@@ -55,6 +55,7 @@ export type MultiDropdownDef =
 export type MultiDropdownProps = OmitNodeDef<MultiDropdownDef> & WidgetProps;
 
 const MultiDropdownContainer = styled(DropdownContainer)`
+    align-self: start;
     flex-wrap: wrap;
     height: unset;
     min-height: ${CssVars.INPUT_HEIGHT};
@@ -218,12 +219,12 @@ export const MultiDropdown = forwardRef((props: MultiDropdownProps, ref: Forward
 	const globalHandlers = useGlobalHandlers();
 	const {
 		askOptions, displayOptions,
-		filterInputRef, filter, setFilter,
+		filterInputRef, filter, onFilterChanged,
 		containerRef,
 		popupState, popupHeight,
-		popupRef, popupShown, setPopupShown,
+		popupRef, popupShown,
 		repaintPopup,
-		onClicked, onFocused, onKeyUp, onFilterChanged
+		onClicked, onFocused, onKeyUp
 	} = useFilterableDropdownOptions(props);
 	const forceUpdate = useForceUpdate();
 	useDualRefs(containerRef, ref);
@@ -239,6 +240,7 @@ export const MultiDropdown = forwardRef((props: MultiDropdownProps, ref: Forward
 			return values as Array<MultiDropdownOptionValue>;
 		}
 	};
+	// noinspection DuplicatedCode
 	const hasValues = (values: Array<MultiDropdownOptionValue>): boolean => {
 		if (values == null) {
 			return false;
@@ -266,6 +268,7 @@ export const MultiDropdown = forwardRef((props: MultiDropdownProps, ref: Forward
 		event.stopPropagation();
 
 		const values = currentValuesToArray();
+		// noinspection DuplicatedCode
 		if (!hasValues(values)) {
 			// eslint-disable-next-line @typescript-eslint/no-explicit-any
 			await $onValueChange([option.value as any], true, {global: globalHandlers});
@@ -275,16 +278,10 @@ export const MultiDropdown = forwardRef((props: MultiDropdownProps, ref: Forward
 		} else {
 			return;
 		}
-		if (values.length === askOptions().length) {
-			setPopupShown(false);
-			if (filter !== '') {
-				setTimeout(() => setFilter(''), 100);
-			}
-		} else {
-			repaintPopup();
-		}
+		repaintPopup();
 		setTimeout(() => containerRef.current?.focus(), 100);
 	};
+	// noinspection DuplicatedCode
 	const onRemoveClicked = (value: MultiDropdownOptionValue) => async (event: MouseEvent<HTMLSpanElement>) => {
 		if ($disabled) {
 			return;

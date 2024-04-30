@@ -10,10 +10,11 @@ import {
 	ValueChangeableNodeDef,
 	WidgetProps
 } from '@rainbow-d9/n1';
-import React, {ForwardedRef, forwardRef, Fragment, MouseEvent, ReactNode, useEffect, useState} from 'react';
+import React, {ForwardedRef, forwardRef, MouseEvent, ReactNode, useState} from 'react';
 import styled from 'styled-components';
 import {CssVars, DOM_KEY_WIDGET} from './constants';
 import {
+	computeDropdownTreePopupHeight,
 	DropdownContainer,
 	DropdownLabel,
 	DropdownPopup,
@@ -22,6 +23,7 @@ import {
 	DropdownStick,
 	DropdownTreeEventBusProvider,
 	DropdownTreeEventTypes,
+	DropdownTreeFilterBridge,
 	isDropdownPopupActive,
 	useDropdownTreeEventBus,
 	useFilterableDropdownOptions
@@ -35,7 +37,7 @@ import {
 	TreeOptionItem,
 	TreeOptionItems
 } from './option-items-assist';
-import {TreeEventTypes, TreeNodeDef, TreeNodeDetect, useTreeEventBus} from './tree';
+import {TreeNodeDef, TreeNodeDetect} from './tree';
 import {GlobalEventHandlers, ModelCarrier, OmitHTMLProps, OmitNodeDef} from './types';
 import {UnwrappedTree} from './unwrapped/tree';
 import {toCssSize, useDualRefs} from './utils';
@@ -49,12 +51,11 @@ export {OptionItemSort as DropdownOptionSort};
 export type DropdownTreeDef =
 	ValueChangeableNodeDef
 	& OmitHTMLProps<HTMLDivElement>
-	// & OptionItemsDef<DropdownOptionValue>
 	& {
 	please?: ReactNode;
 	clearable?: boolean;
-	options: TreeOptionItems<DropdownTreeOptionValue>
-		| (<R extends BaseModel, M extends PropValue>(options: ModelCarrier<R, M> & GlobalEventHandlers) => Promise<TreeOptionItems<DropdownTreeOptionValue>>);
+	options: DropdownTreeOptions
+		| (<R extends BaseModel, M extends PropValue>(options: ModelCarrier<R, M> & GlobalEventHandlers) => Promise<DropdownTreeOptions>);
 	optionSort?: OptionItemSort;
 	noAvailable?: ReactNode;
 	noMatched?: ReactNode;
@@ -89,7 +90,7 @@ const OptionFilter = styled.div.attrs<Omit<DropdownPopupState, 'active'> & { act
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
-    //pointer-events: none;
+    pointer-events: none;
     z-index: calc(${CssVars.DROPDOWN_Z_INDEX} + 1);
 
     &:before {
@@ -127,21 +128,6 @@ const PopupTree = styled(UnwrappedTree)`
     border: 0;
 `;
 
-export const TreeFilterBridge = () => {
-	const {on, off} = useDropdownTreeEventBus();
-	const {fire} = useTreeEventBus();
-	useEffect(() => {
-		const onFilterChanged = (filter: string) => {
-			fire(TreeEventTypes.FILTER_CHANGED, filter);
-		};
-		on(DropdownTreeEventTypes.FILTER_CHANGED, onFilterChanged);
-		return () => {
-			off(DropdownTreeEventTypes.FILTER_CHANGED, onFilterChanged);
-		};
-	}, [on, off, fire]);
-
-	return <Fragment/>;
-};
 export const InternalDropdownTree = forwardRef((props: DropdownTreeProps, ref: ForwardedRef<HTMLDivElement>) => {
 	const {
 		// eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -193,18 +179,7 @@ export const InternalDropdownTree = forwardRef((props: DropdownTreeProps, ref: F
 	const value = MUtils.getValue($model, $pp) as DropdownTreeOptionValue;
 	const selected = value != null;
 	const allOptions: DropdownTreeOptions = askOptions();
-	const allOptionCount = (() => {
-		const countChildren = (option: DropdownTreeOption) => {
-			return (option.children ?? []).reduce((count, option) => {
-				const childrenCount = countChildren(option);
-				return count + 1 + childrenCount;
-			}, 0);
-		};
-		return allOptions.reduce((count, option) => {
-			return count + countChildren(option);
-		}, 0);
-	})();
-	const popupHeight = Math.min(allOptionCount, 8) * CssVars.INPUT_HEIGHT_VALUE + 2;
+	const popupHeight = computeDropdownTreePopupHeight(allOptions);
 	const label = (() => {
 		if (value == null) {
 			return please || '';
@@ -272,15 +247,14 @@ export const InternalDropdownTree = forwardRef((props: DropdownTreeProps, ref: F
 						$ip2r: PPUtils.concat(parentNode.$ip2r, `pp${index}`), $ip2p: `pp${index}`,
 						label: option.label,
 						...(option.stringify != null ? {stringify: () => option.stringify(option)} : {}),
-						checkable: false,
-						addable: false,
-						removable: false,
+						checkable: false, addable: false, removable: false,
 						click: onNodeClicked
 					} as TreeNodeDef;
 				});
 		}
 	};
 
+	// noinspection DuplicatedCode
 	return <DropdownContainer active={popupState.active} atBottom={popupState.atBottom}
 	                          role="input" tabIndex={0}
 	                          {...rest}
@@ -299,13 +273,12 @@ export const InternalDropdownTree = forwardRef((props: DropdownTreeProps, ref: F
 			                 vScroll={true} ref={popupRef}>
 				<OptionFilter {...{...popupState, active: !!filter}}>
 					<span>?:</span>
-					<input value={filter} onChange={onFilterChanged} onKeyUp={onKeyUp}
-					       ref={filterInputRef}/>
+					<input value={filter} onChange={onFilterChanged} onKeyUp={onKeyUp} ref={filterInputRef}/>
 				</OptionFilter>
 				<PopupTree data={treeModel} initExpandLevel={0} disableSearchBox={true}
 				           detective={detective}
 				           height={`calc(${toCssSize(popupHeight)} - 2px)`}>
-					<TreeFilterBridge/>
+					<DropdownTreeFilterBridge/>
 				</PopupTree>
 			</DropdownPopup>
 			: null}

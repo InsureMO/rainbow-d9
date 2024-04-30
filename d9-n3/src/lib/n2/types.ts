@@ -42,6 +42,8 @@ export enum N2WidgetType {
 	TREE = 'Tree',
 	DROPDOWN_TREE = 'DropdownTree',
 	DDT = 'DDT',
+	MULTI_DROPDOWN_TREE = 'MultiDropdownTree',
+	MDDT = 'MDDT',
 
 	PAGINATION = 'Pagination'
 }

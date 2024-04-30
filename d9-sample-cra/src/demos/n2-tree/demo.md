@@ -10,3 +10,5 @@
 	- detective: @ext.tree2.detective
 - DropdownTree::::dropdownTree
 	- options: @ext.dropdownTree
+- MultiDropdownTree::::multiDropdownTree
+	- options: @ext.dropdownTree

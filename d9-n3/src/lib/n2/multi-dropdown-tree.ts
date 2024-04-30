@@ -17,18 +17,19 @@ import {
 } from './dropdown';
 import {N2WidgetType} from './types';
 
-export const N2DropdownTreeCouldSelectBuild =
+export const MultiDropdownTreeCouldSelectBuild =
 	createSyncSnippetBuild<DropdownTreeDef, 'couldSelect'>('couldSelect', ['option']);
 
-export abstract class AbstractN2DropdownTreeTranslator<T extends N2WidgetType.DROPDOWN_TREE | N2WidgetType.DDT> extends SpecificWidgetTranslator<T> {
+export abstract class AbstractN2MultiDropdownTreeTranslator<T extends N2WidgetType.MULTI_DROPDOWN_TREE | N2WidgetType.MDDT> extends SpecificWidgetTranslator<T> {
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	public getAttributeValueBuilders(): Array<AttributeValueBuild<any>> {
-		return [N2DropdownTreeCouldSelectBuild, N2DropdownSortBuild, N2DropdownReactionRefreshOptionsBuild, ValueChangedBuild];
+		return [MultiDropdownTreeCouldSelectBuild, N2DropdownSortBuild, N2DropdownReactionRefreshOptionsBuild, ValueChangedBuild];
 	}
 
 	public getValidationHandlerDetectives(): Array<MonitorHandlerDetective> {
 		return [
 			ValidatorUtils.DETECT_REQUIRED,
+			ValidatorUtils.DETECT_LENGTH,
 			...super.getValidationHandlerDetectives()
 		];
 	}
@@ -41,22 +42,22 @@ export abstract class AbstractN2DropdownTreeTranslator<T extends N2WidgetType.DR
 	}
 }
 
-export class N2DropdownTreeTranslator extends AbstractN2DropdownTreeTranslator<N2WidgetType.DROPDOWN_TREE> {
-	public getSupportedType(): N2WidgetType.DROPDOWN_TREE {
-		return N2WidgetType.DROPDOWN_TREE;
+export class N2MultiDropdownTreeTranslator extends AbstractN2MultiDropdownTreeTranslator<N2WidgetType.MULTI_DROPDOWN_TREE> {
+	public getSupportedType(): N2WidgetType.MULTI_DROPDOWN_TREE {
+		return N2WidgetType.MULTI_DROPDOWN_TREE;
 	}
 
 	public getAttributeNamesMapping(): Undefinable<Record<CustomAttributeName, WidgetPropertyName>> {
-		return {'DropdownTree.sort': 'optionSort'};
+		return {'MultiDropdownTree.sort': 'optionSort'};
 	}
 }
 
-export class N2DDTTranslator extends AbstractN2DropdownTreeTranslator<N2WidgetType.DDT> {
-	public getSupportedType(): N2WidgetType.DDT {
-		return N2WidgetType.DDT;
+export class N2MDDTTranslator extends AbstractN2MultiDropdownTreeTranslator<N2WidgetType.MDDT> {
+	public getSupportedType(): N2WidgetType.MDDT {
+		return N2WidgetType.MDDT;
 	}
 
 	public getAttributeNamesMapping(): Undefinable<Record<CustomAttributeName, WidgetPropertyName>> {
-		return {'DDT.sort': 'optionSort'};
+		return {'MDDT.sort': 'optionSort'};
 	}
 }

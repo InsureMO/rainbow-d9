@@ -141,11 +141,11 @@ export const Dropdown = forwardRef((props: DropdownProps, ref: ForwardedRef<HTML
 	const globalHandlers = useGlobalHandlers();
 	const {
 		askOptions, displayOptions,
-		filterInputRef, filter,
+		filterInputRef, filter, onFilterChanged,
 		containerRef,
 		popupState, popupHeight,
 		popupRef, popupShown, setPopupShown, afterPopupStateChanged,
-		onClicked, onFocused, onKeyUp, onFilterChanged
+		onClicked, onFocused, onKeyUp
 	} = useFilterableDropdownOptions(props);
 	useDualRefs(containerRef, ref);
 	useTip({ref: containerRef});

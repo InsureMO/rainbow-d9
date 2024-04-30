@@ -12,11 +12,13 @@ const syncToChildren = async (def: TreeNodeDef, checked: boolean, options: Globa
 
 const syncToParent = async (def: TreeNodeDef, options: GlobalEventHandlers) => {
 	let parent = def.$parent;
-	while (parent != null && parent.checkable) {
-		const allChildChecked = (parent.$children ?? [])
-			.filter(child => child.checkable)
-			.every(child => child.checked!(child));
-		await parent.check!(parent, allChildChecked, TreeNodeCheckedChangeFrom.FROM_CHILD, options);
+	while (parent != null) {
+		if (parent.checkable) {
+			const allChildChecked = (parent.$children ?? [])
+				.filter(child => child.checkable)
+				.every(child => child.checked!(child));
+			await parent.check!(parent, allChildChecked, TreeNodeCheckedChangeFrom.FROM_CHILD, options);
+		}
 		parent = parent.$parent;
 	}
 };

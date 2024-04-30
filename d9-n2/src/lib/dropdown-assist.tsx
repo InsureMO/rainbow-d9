@@ -4,6 +4,7 @@ import React, {
 	createContext,
 	ForwardedRef,
 	forwardRef,
+	Fragment,
 	KeyboardEvent,
 	MouseEvent,
 	ReactNode,
@@ -23,8 +24,11 @@ import {
 	OptionItems,
 	OptionItemSort,
 	OptionItemsProps,
+	TreeOptionItem,
+	TreeOptionItems,
 	useOptionItems
 } from './option-items-assist';
+import {TreeEventTypes, useTreeEventBus} from './tree';
 import {toCssSize} from './utils';
 
 export enum DropdownPopupStateActive {
@@ -582,3 +586,36 @@ export const DropdownTreeEventBusProvider = (props: { children?: ReactNode }) =>
 };
 
 export const useDropdownTreeEventBus = () => useContext(Context);
+
+export const DropdownTreeFilterBridge = () => {
+	const {on, off} = useDropdownTreeEventBus();
+	const {fire} = useTreeEventBus();
+	useEffect(() => {
+		const onFilterChanged = (filter: string) => {
+			fire(TreeEventTypes.FILTER_CHANGED, filter);
+		};
+		on(DropdownTreeEventTypes.FILTER_CHANGED, onFilterChanged);
+		return () => {
+			off(DropdownTreeEventTypes.FILTER_CHANGED, onFilterChanged);
+		};
+	}, [on, off, fire]);
+
+	return <Fragment/>;
+};
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const computeDropdownTreePopupHeight = (allOptions: TreeOptionItems<any>): number => {
+	const allOptionCount = (() => {
+		// eslint-disable-next-line @typescript-eslint/no-explicit-any
+		const countChildren = (option: TreeOptionItem<any>) => {
+			return (option.children ?? []).reduce((count, option) => {
+				const childrenCount = countChildren(option);
+				return count + 1 + childrenCount;
+			}, 0);
+		};
+		return allOptions.reduce((count, option) => {
+			return count + countChildren(option);
+		}, 0);
+	})();
+	return Math.min(allOptionCount, 8) * CssVars.INPUT_HEIGHT_VALUE + 2;
+};

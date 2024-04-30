@@ -27,7 +27,7 @@ export const N2CaptionValueToLabelBuild: AttributeValueBuild<Pick<CaptionDef, 'l
 			// this is sync function
 			// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 			// @ts-ignore
-			const func: CaptionValueToLabel = new Function('value', 'formats', `try {
+			const func: CaptionValueToLabel = new Function('value', 'formats', 'options', `try {
 				const $ = formats;
 				return ${value}
 			} catch (e) {
