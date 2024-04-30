@@ -35,11 +35,32 @@ export const ChildTreeNodes = (props: ChildTreeNodesProps) => {
 	const globalHandlers = useGlobalHandlers();
 	const forceUpdate = useForceUpdate();
 	useEffect(() => {
+		const recomputeDisplayChildren = () => {
+			if (node.$displayChildren == null) {
+				return;
+			}
+			if (node.$children == null || node.$children.length === 0) {
+				node.$displayChildren = [];
+				return;
+			}
+			const map: Map<TreeNodeDef, number> = new Map();
+			node.$children.forEach((child, index) => map.set(child, index));
+			node.$displayChildren = node.$displayChildren.filter(child => map.has(child));
+			const displayMap: Map<TreeNodeDef, number> = new Map();
+			node.$displayChildren.forEach((child, index) => displayMap.set(child, index));
+			node.$children.forEach(child => {
+				if (!displayMap.has(child)) {
+					node.$displayChildren.push(child);
+				}
+			});
+			node.$displayChildren.sort((c1, c2) => map.get(c1) - map.get(c2));
+		};
 		// eslint-disable-next-line @typescript-eslint/no-unused-vars
 		const onRefreshChildNodes = (_marker: string, redetect?: boolean) => {
 			if (redetect === true) {
 				node.$children = detect(node, {global: globalHandlers}) ?? [];
 			}
+			recomputeDisplayChildren();
 			forceUpdate();
 		};
 		const refreshNodeContent = () => {
@@ -50,6 +71,7 @@ export const ChildTreeNodes = (props: ChildTreeNodesProps) => {
 		};
 		// eslint-disable-next-line @typescript-eslint/no-unused-vars
 		const onRefreshChildNodesOnRemoved = (_marker: string, _removedNode: TreeNodeDef) => {
+			recomputeDisplayChildren();
 			forceUpdate();
 			refreshNodeContent();
 		};
@@ -68,18 +90,21 @@ export const ChildTreeNodes = (props: ChildTreeNodesProps) => {
 		};
 		// eslint-disable-next-line @typescript-eslint/no-unused-vars
 		const onChildAdded = (_marker: string, addedNode?: TreeNodeDef, _placeholder?: boolean) => {
+			recomputeDisplayChildren();
 			fillMarkerAndBuildHierarchy();
 			forceUpdate();
 			scrollToAdded(addedNode);
 		};
 		// eslint-disable-next-line @typescript-eslint/no-unused-vars
 		const onChildPlaceholderReplaced = (_marker: string, addedNode?: TreeNodeDef) => {
+			recomputeDisplayChildren();
 			fillMarkerAndBuildHierarchy();
 			forceUpdate();
 			scrollToAdded(addedNode);
 		};
 		// eslint-disable-next-line @typescript-eslint/no-unused-vars
 		const onChildPlaceholderRemoved = (_marker: string, _placeholderNode: TreeNodeDef) => {
+			recomputeDisplayChildren();
 			forceUpdate();
 			refreshNodeContent();
 		};
@@ -107,7 +132,7 @@ export const ChildTreeNodes = (props: ChildTreeNodesProps) => {
 		};
 	}, [on, off, forceUpdate, node]);
 
-	const children = displayChildren ?? node.$children ?? [];
+	const children = displayChildren ?? node.$displayChildren ?? node.$children ?? [];
 	const childrenCount = children.length;
 	const hasChild = childrenCount !== 0;
 

@@ -69,6 +69,11 @@ export interface TreeNodeDef extends TreeNodeOperation2 {
 	 */
 	$children?: Array<TreeNodeDef>;
 	/**
+	 * children nodes of this node, will be detected automatically,
+	 * never do anything to this attribute outside.
+	 */
+	$displayChildren?: Array<TreeNodeDef>;
+	/**
 	 * parent node, will be detected automatically, do not set anything to this attribute outside.
 	 */
 	$parent?: TreeNodeDef;

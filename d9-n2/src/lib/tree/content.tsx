@@ -78,6 +78,12 @@ export const TreeContent = (props: TreeContentProps) => {
 
 	const children = () => {
 		if (VUtils.isBlank(filter)) {
+			const removeDisplayChildren = (node: TreeNodeDef) => {
+				// clear display children
+				(node.$children ?? []).forEach(child => removeDisplayChildren(child));
+				delete node.$displayChildren;
+			};
+			removeDisplayChildren(root);
 			return root.$children ?? [];
 		}
 		const matches = filter.trim().toLowerCase();
@@ -87,35 +93,25 @@ export const TreeContent = (props: TreeContentProps) => {
 			const children = (node.$children ?? [])
 				.map(child => filtered(child))
 				.filter(x => x != null);
-			if (children.length !== 0) {
-				return {...node, $children: children};
-			} else if (onlyChecked) {
-				if (node.checkable && node.checked(node)) {
-					return {...node, $children: []};
-				}
-			} else if (onlyUnchecked) {
-				if (node.checkable && (node.checked(node) === false)) {
-					return {...node, $children: []};
-				}
-			} else if (node.stringify != null) {
-				if ((node.stringify(node) ?? '').toLowerCase().includes(matches)) {
-					return {...node, $children: []};
-				}
-			} else if (typeof node.label === 'string') {
-				const label = internationalize(node.label, [node.label]);
-				if (label.toLowerCase().includes(matches)) {
-					return {...node, $children: []};
-				}
+			node.$displayChildren = children;
+			switch (true) {
+				case children.length !== 0:
+				case onlyChecked && node.checkable && node.checked(node):
+				case onlyUnchecked && node.checkable && (node.checked(node) === false):
+				case node.stringify != null && (node.stringify(node) ?? '').toLowerCase().includes(matches):
+				case typeof node.label === 'string' && (internationalize(node.label, [node.label])).toLowerCase().includes(matches):
+					return node;
+				default:
+					// cannot perform compare, always not match
+					return null;
 			}
-			// cannot perform compare, always not match
-			return null;
 		};
 		return (root.$children ?? [])
 			.map(child => filtered(child))
 			.filter(x => x != null);
 	};
-	const childNodesFiltered = children();
-	if (childNodesFiltered.length === 0) {
+	root.$displayChildren = children();
+	if (root.$displayChildren.length === 0) {
 		const def: TreeNodeDef = {
 			value: NO_MATCHED_TREE_NODE, label: toIntlLabel(noMatched),
 			checkable: false, removable: false, addable: false,
@@ -158,7 +154,7 @@ export const TreeContent = (props: TreeContentProps) => {
 				<TreeNodeEventBridge node={root}
 				                     expandParent={expandParent} nodeCheckedChanged={nodeCheckedChanged}
 				                     nodeRemoved={refresh}/>
-				<ChildTreeNodes node={root} displayChildren={childNodesFiltered} detect={detect}
+				<ChildTreeNodes node={root} displayChildren={root.$displayChildren} detect={detect}
 				                initExpandLevel={initExpandLevel} level={-1}
 				                showIndex={showIndex} displayIndex=""
 				                $wrapped={{...$wrapped, $p2r: node$p2r}}/>

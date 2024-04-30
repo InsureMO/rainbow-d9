@@ -288,7 +288,7 @@ export const TreeNodeRenderer = (props: TreeNodeRendererProps) => {
 		<LabelLike $wrapped={{...$wrapped, $model: node.value, $p2r}} label={node.label}/>
 	</TreeNodeLabel>;
 
-	const children = node.$children ?? [];
+	const children = node.$displayChildren ?? node.$children ?? [];
 
 	return <TreeNodeContainer data-expanded={expanded.current} data-last-of-parent={lastOfParent} level={level}
 	                          onClick={onEntityClicked}
