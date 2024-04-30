@@ -4,8 +4,8 @@ var __publicField = (obj, key, value) => {
   __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
   return value;
 };
-import { b as buffer, n as nanoid, E as EventEmitter } from "./vendor-evEsej2c.js";
-import { r as reactExports, R as React } from "./react-9JUNisJQ.js";
+import { b as buffer, n as nanoid, E as EventEmitter } from "./vendor-_BMdYtkr.js";
+import { r as reactExports, R as React } from "./react-bBMQ4niz.js";
 const VUtils = {
   isEmpty: (v) => v == null || typeof v === "string" && v.length === 0,
   isNotEmpty: (v) => (v ?? "") !== "",
@@ -1879,8 +1879,8 @@ export {
   useForceUpdate as e,
   MBUtils as f,
   useCreateEventBus as g,
-  useDefaultAttributeValues as h,
-  PROPERTY_PATH_ME as i,
+  PROPERTY_PATH_ME as h,
+  useDefaultAttributeValues as i,
   useAttributesWatch as j,
   MonitorNodeAttributes as k,
   Reaction as l,

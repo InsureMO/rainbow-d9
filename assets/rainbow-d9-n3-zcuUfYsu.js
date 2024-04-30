@@ -4,10 +4,10 @@ var __publicField = (obj, key, value) => {
   __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
   return value;
 };
-import { c as createLogger, N as NUtils, V as VUtils, k as MonitorNodeAttributes, l as Reaction, E as ExternalDefIndicator, P as PPUtils } from "./rainbow-d9-n1-czOgqBsL.js";
-import { O as OptionItemSort, R as REACTION_REFRESH_OPTIONS, c as GlobalEventPrefix } from "./rainbow-d9-n2-hcrT8m2S.js";
-import { f as fromMarkdown, g as gfmTableFromMarkdown, a as gfmStrikethroughFromMarkdown, b as gfmFootnoteFromMarkdown, c as gfmTaskListItemFromMarkdown, d as frontmatterFromMarkdown } from "./mdast-LRr-mlJO.js";
-import { g as gfmTable, h as gfmStrikethrough, i as gfmFootnote, j as gfmTaskListItem, k as frontmatter } from "./micromark-BYsde-GI.js";
+import { c as createLogger, N as NUtils, V as VUtils, k as MonitorNodeAttributes, l as Reaction, E as ExternalDefIndicator, P as PPUtils } from "./rainbow-d9-n1-SWwvhK8e.js";
+import { O as OptionItemSort, R as REACTION_REFRESH_OPTIONS, c as GlobalEventPrefix } from "./rainbow-d9-n2-C6RxfNEg.js";
+import { f as fromMarkdown, g as gfmTableFromMarkdown, a as gfmStrikethroughFromMarkdown, b as gfmFootnoteFromMarkdown, c as gfmTaskListItemFromMarkdown, d as frontmatterFromMarkdown } from "./mdast-2zUqItcV.js";
+import { g as gfmTable, h as gfmStrikethrough, i as gfmFootnote, j as gfmTaskListItem, k as frontmatter } from "./micromark-4vHhIf8Y.js";
 const AsyncFunction = Object.getPrototypeOf(async function() {
 }).constructor;
 var ParsedNodeType;
@@ -3280,6 +3280,8 @@ var N2WidgetType;
   N2WidgetType2["TREE"] = "Tree";
   N2WidgetType2["DROPDOWN_TREE"] = "DropdownTree";
   N2WidgetType2["DDT"] = "DDT";
+  N2WidgetType2["MULTI_DROPDOWN_TREE"] = "MultiDropdownTree";
+  N2WidgetType2["MDDT"] = "MDDT";
   N2WidgetType2["PAGINATION"] = "Pagination";
 })(N2WidgetType || (N2WidgetType = {}));
 const StandardInputValidators = [
@@ -3871,7 +3873,7 @@ const N2CaptionValueToLabelBuild = {
       return void 0;
     }
     try {
-      const func = new Function("value", "formats", `try {
+      const func = new Function("value", "formats", "options", `try {
 				const $ = formats;
 				return ${value}
 			} catch (e) {
@@ -4246,10 +4248,10 @@ class N2TreeTranslator extends SpecificWidgetTranslator {
     return [N2TreeChildNodesBuild];
   }
 }
-const DropdownTreeCouldSelectBuild = createAsyncSnippetBuild("couldSelect", ["option"]);
+const N2DropdownTreeCouldSelectBuild = createSyncSnippetBuild("couldSelect", ["option"]);
 class AbstractN2DropdownTreeTranslator extends SpecificWidgetTranslator {
   getAttributeValueBuilders() {
-    return [DropdownTreeCouldSelectBuild, N2DropdownSortBuild, N2DropdownReactionRefreshOptionsBuild, ValueChangedBuild];
+    return [N2DropdownTreeCouldSelectBuild, N2DropdownSortBuild, N2DropdownReactionRefreshOptionsBuild, ValueChangedBuild];
   }
   getValidationHandlerDetectives() {
     return [
@@ -4272,12 +4274,47 @@ class N2DropdownTreeTranslator extends AbstractN2DropdownTreeTranslator {
     return { "DropdownTree.sort": "optionSort" };
   }
 }
-class N2DTTTranslator extends AbstractN2DropdownTreeTranslator {
+class N2DDTTranslator extends AbstractN2DropdownTreeTranslator {
   getSupportedType() {
     return N2WidgetType.DDT;
   }
   getAttributeNamesMapping() {
-    return { "DropdownTree.sort": "optionSort" };
+    return { "DDT.sort": "optionSort" };
+  }
+}
+const MultiDropdownTreeCouldSelectBuild = createSyncSnippetBuild("couldSelect", ["option"]);
+class AbstractN2MultiDropdownTreeTranslator extends SpecificWidgetTranslator {
+  getAttributeValueBuilders() {
+    return [MultiDropdownTreeCouldSelectBuild, N2DropdownSortBuild, N2DropdownReactionRefreshOptionsBuild, ValueChangedBuild];
+  }
+  getValidationHandlerDetectives() {
+    return [
+      ValidatorUtils.DETECT_REQUIRED,
+      ValidatorUtils.DETECT_LENGTH,
+      ...super.getValidationHandlerDetectives()
+    ];
+  }
+  getReactionHandlerDetectives() {
+    return [
+      ...super.getReactionHandlerDetectives(),
+      N2DropdownReactionRefreshOptionsHandlerDetective
+    ];
+  }
+}
+class N2MultiDropdownTreeTranslator extends AbstractN2MultiDropdownTreeTranslator {
+  getSupportedType() {
+    return N2WidgetType.MULTI_DROPDOWN_TREE;
+  }
+  getAttributeNamesMapping() {
+    return { "MultiDropdownTree.sort": "optionSort" };
+  }
+}
+class N2MDDTTranslator extends AbstractN2MultiDropdownTreeTranslator {
+  getSupportedType() {
+    return N2WidgetType.MDDT;
+  }
+  getAttributeNamesMapping() {
+    return { "MDDT.sort": "optionSort" };
   }
 }
 const N2PaginationPossibleSizesBuild = {
@@ -4352,15 +4389,18 @@ const registerN2Widgets$1 = (widgetHelper) => {
   repo.register(new N2WizardTranslator(repo));
   repo.register(new N2TreeTranslator(repo));
   repo.register(new N2DropdownTreeTranslator(repo));
-  repo.register(new N2DTTTranslator(repo));
+  repo.register(new N2DDTTranslator(repo));
+  repo.register(new N2MultiDropdownTreeTranslator(repo));
+  repo.register(new N2MDDTTranslator(repo));
   repo.register(new N2PaginationTranslator(repo));
 };
 var index = /* @__PURE__ */ Object.freeze({
   __proto__: null,
   AbstractN2CheckboxesTranslator,
   AbstractN2DropdownTreeTranslator,
-  DropdownTreeCouldSelectBuild,
+  AbstractN2MultiDropdownTreeTranslator,
   InputMaskBuild,
+  MultiDropdownTreeCouldSelectBuild,
   N2BadgeTranslator,
   N2BoxTranslator,
   N2ButtonBarTranslator,
@@ -4384,7 +4424,7 @@ var index = /* @__PURE__ */ Object.freeze({
   N2CheckboxValuesBuild,
   N2CheckboxesTranslator,
   N2ChecksTranslator,
-  N2DTTTranslator,
+  N2DDTTranslator,
   N2DateTimeTranslator,
   N2DateTranslator,
   N2DecorateInputTranslator,
@@ -4397,11 +4437,14 @@ var index = /* @__PURE__ */ Object.freeze({
   N2DropdownReactionRefreshOptionsHandlerDetective,
   N2DropdownSortBuild,
   N2DropdownTranslator,
+  N2DropdownTreeCouldSelectBuild,
   N2DropdownTreeTranslator,
   N2InputTranslator,
   N2LabelTranslator,
   N2LinkTranslator,
+  N2MDDTTranslator,
   N2MultiDropdownTranslator,
+  N2MultiDropdownTreeTranslator,
   N2NumberTranslator,
   N2PaginationPossibleSizesBuild,
   N2PaginationTranslator,
