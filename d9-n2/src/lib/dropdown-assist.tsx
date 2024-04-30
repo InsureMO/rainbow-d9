@@ -444,8 +444,8 @@ export interface FilterableDropdownOptions<V> extends OptionItemsProps<V> {
 export const useFilterableDropdownOptions = <V extends any>(props: FilterableDropdownOptions<V>) => {
 	const {
 		optionSort, maxWidth,
-		noAvailable = <IntlLabel keys={['options', 'noAvailable']} value="No available options."/>,
-		noMatched = <IntlLabel keys={['options', 'noMatched']} value="No matched options."/>,
+		noAvailable = <IntlLabel keys={['options', 'noAvailable']} value="No available option."/>,
+		noMatched = <IntlLabel keys={['options', 'noMatched']} value="No matched option."/>,
 		takeoverFilter, filterChanged,
 		$wrapped: {$avs: {$disabled}}
 	} = props;

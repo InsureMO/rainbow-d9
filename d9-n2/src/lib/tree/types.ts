@@ -78,6 +78,7 @@ export type TreeDef = NodeDef & OmitHTMLProps2<HTMLDivElement, 'title' | 'height
 	detective?: TreeNodeDetect;
 	height?: number | string;
 	marker?: string;
+	noMatched?: ReactNode;
 	/** disable the search box, default false */
 	disableSearchBox?: boolean;
 };

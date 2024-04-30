@@ -17,7 +17,7 @@ export const InternalTree = forwardRef((props: TreeProps, ref: ForwardedRef<HTML
 		$pp,
 		initExpandLevel = -1, showIndex = false, detective,
 		height = 300, marker,
-		disableSearchBox = false, children,
+		noMatched, disableSearchBox = false, children,
 		$wrapped, ...rest
 	} = props;
 	const {$p2r, $avs: {$disabled, $visible}} = $wrapped;
@@ -77,7 +77,7 @@ export const InternalTree = forwardRef((props: TreeProps, ref: ForwardedRef<HTML
 		<TreeSearchBox disabled={disableSearchBox}/>
 		{children}
 		<TreeContent root={rootNodeDef} initExpandLevel={initExpandLevel}
-		             showIndex={showIndex} detect={detect} $pp={$pp} $wrapped={$wrapped}/>
+		             showIndex={showIndex} noMatched={noMatched} detect={detect} $pp={$pp} $wrapped={$wrapped}/>
 	</ATree>;
 });
 
