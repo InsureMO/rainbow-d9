@@ -194,7 +194,7 @@ export const TreeNodeRenderer = (props: TreeNodeRendererProps) => {
 	const onMouseEnter = () => {
 		const {
 			top: treeTop, left: treeLeft, width: treeWidth
-		} = ref.current.closest('div[data-w=d9-tree-content-container]').getBoundingClientRect();
+		} = ref.current.closest('div[data-w=d9-tree]').getBoundingClientRect();
 		const {top, height} = ref.current.getBoundingClientRect();
 		fireTree(TreeEventTypes.SHOW_HOVER_BOX, top - treeTop, height);
 		if (!hasOperators || operators.visible) {
