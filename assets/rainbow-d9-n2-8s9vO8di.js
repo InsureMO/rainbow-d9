@@ -4,10 +4,10 @@ var __publicField = (obj, key, value) => {
   __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
   return value;
 };
-import { a as color, M as MaskedNumber, e as MaskedDate, g as MaskedFunction, j as MaskedPattern, k as MaskedRange, l as MaskedRegExp, o as MaskedDynamic } from "./vendor-_BMdYtkr.js";
-import { R as React, r as reactExports, u as useIMask } from "./react-bBMQ4niz.js";
-import { c as createLogger, V as VUtils, P as PPUtils, r as registerWidget, u as useRootEventBus, M as MUtils, N as NUtils, d as Wrapper, e as useForceUpdate, f as MBUtils, b as useWrapperEventBus, W as WrapperEventTypes, g as useCreateEventBus, h as PROPERTY_PATH_ME, i as useDefaultAttributeValues, j as useAttributesWatch, R as RootEventTypes } from "./rainbow-d9-n1-SWwvhK8e.js";
-import { q as qe, W as We } from "./styled-components-jDn1LTmr.js";
+import { a as color, M as MaskedNumber, e as MaskedDate, g as MaskedFunction, j as MaskedPattern, k as MaskedRange, l as MaskedRegExp, o as MaskedDynamic } from "./vendor-BZZTreDf.js";
+import { R as React, r as reactExports, u as useIMask } from "./react-hzPBN1xn.js";
+import { c as createLogger, V as VUtils, P as PPUtils, r as registerWidget, u as useRootEventBus, M as MUtils, N as NUtils, d as Wrapper, e as useForceUpdate, f as MBUtils, b as useWrapperEventBus, W as WrapperEventTypes, g as useCreateEventBus, h as PROPERTY_PATH_ME, i as useDefaultAttributeValues, j as useAttributesWatch, R as RootEventTypes } from "./rainbow-d9-n1-XhNtwgVu.js";
+import { q as qe, W as We } from "./styled-components-8iL4dtjk.js";
 import { d as dayjs } from "./dayjs-9Z7dW0Q-.js";
 const DOM_KEY_WIDGET = "data-w";
 const DOM_ID_WIDGET = "data-wid";
@@ -1832,6 +1832,7 @@ var GlobalEventPrefix;
   GlobalEventPrefix2["TAB_CHANGED"] = "tab-changed";
   GlobalEventPrefix2["WIZARD_STEP_CHANGED"] = "wstep-changed";
   GlobalEventPrefix2["TREE_NODE_CLICKED"] = "tree-node-clicked";
+  GlobalEventPrefix2["TREE_NODE_DOUBLE_CLICKED"] = "tree-node-double-clicked";
 })(GlobalEventPrefix || (GlobalEventPrefix = {}));
 const useCustomGlobalEvent = () => {
   const { fire } = useGlobalEventBus();
@@ -3373,6 +3374,18 @@ const TreeNodeRenderer = (props) => {
       value: node.value
     });
   };
+  const onEntityDoubleClicked = (event) => {
+    event.preventDefault();
+    event.stopPropagation();
+    node.dblClick && node.dblClick(node, { global: globalHandlers });
+    const clipped = node.marker;
+    const key = `${GlobalEventPrefix.TREE_NODE_DOUBLE_CLICKED}:${clipped}`;
+    fireGlobal && fireGlobal(GlobalEventTypes.CUSTOM_EVENT, key, GlobalEventPrefix.TREE_NODE_DOUBLE_CLICKED, clipped, {
+      root: $wrapped.$root,
+      model: $wrapped.$model,
+      value: node.value
+    });
+  };
   const onMouseEnter = () => {
     const { top: treeTop, left: treeLeft, width: treeWidth } = ref.current.closest("div[data-w=d9-tree]").getBoundingClientRect();
     const { top, height } = ref.current.getBoundingClientRect();
@@ -3456,7 +3469,7 @@ const TreeNodeRenderer = (props) => {
   const children = node.$displayChildren ?? node.$children ?? [];
   return React.createElement(
     TreeNodeContainer,
-    { "data-expanded": expanded.current, "data-last-of-parent": lastOfParent, level, onClick: onEntityClicked, onMouseEnter, onMouseLeave, ref },
+    { "data-expanded": expanded.current, "data-last-of-parent": lastOfParent, level, onClick: onEntityClicked, onDoubleClick: onEntityDoubleClicked, onMouseEnter, onMouseLeave, ref },
     hasOperators ? React.createElement(
       TreeNodeOperators,
       { "data-visible": operators.visible, top: operators.top, right: operators.right, ref: operatorsRef },
