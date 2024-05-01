@@ -191,6 +191,21 @@ export const TreeNodeRenderer = (props: TreeNodeRendererProps) => {
 			root: $wrapped.$root, model: $wrapped.$model, value: node.value
 		});
 	};
+	const onEntityDoubleClicked = (event: MouseEvent<HTMLSpanElement>) => {
+		event.preventDefault();
+		event.stopPropagation();
+
+		// no wait
+		node.dblClick && node.dblClick(node, {global: globalHandlers});
+
+		const clipped = node.marker;
+		const key = `${GlobalEventPrefix.TREE_NODE_DOUBLE_CLICKED}:${clipped}`;
+		// eslint-disable-next-line  @typescript-eslint/ban-ts-comment
+		// @ts-ignore
+		fireGlobal && fireGlobal(GlobalEventTypes.CUSTOM_EVENT, key, GlobalEventPrefix.TREE_NODE_DOUBLE_CLICKED, clipped, {
+			root: $wrapped.$root, model: $wrapped.$model, value: node.value
+		});
+	};
 	const onMouseEnter = () => {
 		const {
 			top: treeTop, left: treeLeft, width: treeWidth
@@ -291,7 +306,7 @@ export const TreeNodeRenderer = (props: TreeNodeRendererProps) => {
 	const children = node.$displayChildren ?? node.$children ?? [];
 
 	return <TreeNodeContainer data-expanded={expanded.current} data-last-of-parent={lastOfParent} level={level}
-	                          onClick={onEntityClicked}
+	                          onClick={onEntityClicked} onDoubleClick={onEntityDoubleClicked}
 	                          onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}
 	                          ref={ref}>
 		{hasOperators

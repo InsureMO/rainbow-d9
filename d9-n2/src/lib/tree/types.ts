@@ -17,6 +17,7 @@ export enum TreeNodeCheckedChangeFrom {
 
 export interface TreeNodeOperation2 extends TreeNodeOperation {
 	click?: (node: TreeNodeDef, handlers: GlobalEventHandlers) => Promise<void>;
+	dblClick?: (node: TreeNodeDef, handlers: GlobalEventHandlers) => Promise<void>;
 	/** get checked, mandatory when checkable */
 	checked?: (node: TreeNodeDef) => boolean;
 	/** changed checked, mandatory when checkable */
