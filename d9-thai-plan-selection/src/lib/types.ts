@@ -235,7 +235,7 @@ export interface PlanValuesClearOptions
 export type PlanValuesClearFunc = (options: PlanValuesClearOptions) => Promise<void>;
 export type PlanTitleFunc = (def: PlanDef, elementValueChanged: boolean) => Array<NodeDef | ReactNode>;
 export type PlanSubTitleFunc = (def: PlanDef, elementValueChanged: boolean, currencySymbol?: string | ReactNode, premiumDescription?: string | ReactNode) => Array<NodeDef | ReactNode>;
-export type PlanElementTitleFunc = (def: PlanElementDef, level: number) => Array<NodeDef | ReactNode>;
+export type PlanElementTitleFunc = (def: PlanElementDef, level: number, forceUpdate: () => void) => Array<NodeDef | ReactNode>;
 
 export interface PlanElementFixedValueOptions {
 	elementDef: PlanMutableElementDef;

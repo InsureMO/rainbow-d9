@@ -184,7 +184,7 @@ export const guardElementTitle = (options: {
 			break;
 	}
 	return def != null
-		? def(elementDef, elementLevel)
+		? def(elementDef, elementLevel, forceUpdate)
 		: [{
 			$wt: 'Caption', text: elementDef.name,
 			'data-plan-element-level': elementLevel, ...domElementAttr,
