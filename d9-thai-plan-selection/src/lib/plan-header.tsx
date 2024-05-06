@@ -1,6 +1,5 @@
 import {BaseModel, PPUtils, PropertyPath, PropValue, useForceUpdate, VUtils, WrappedAttributes} from '@rainbow-d9/n1';
 import {LabelLike} from '@rainbow-d9/n2';
-import {nanoid} from 'nanoid';
 import React, {useEffect, useState} from 'react';
 import {usePlanSelectionEventBus} from './event/plan-selection-event-bus';
 import {
@@ -72,15 +71,15 @@ export const PlanHeader = (props: PlanHeaderProps) => {
 
 	return <APlanHeader data-odd={odd}>
 		<PlanHeaderTitle>
-			{guardPlanTitle({def: planTitle, planDef, elementValueChanged}).map(label => {
-				return <LabelLike key={nanoid()} label={label} $wrapped={$myWrapped}/>;
+			{guardPlanTitle({def: planTitle, planDef, elementValueChanged}).map((label, index) => {
+				return <LabelLike key={index} label={label} $wrapped={$myWrapped}/>;
 			})}
 		</PlanHeaderTitle>
 		<PlanHeaderSubTitle>
 			{guardPlanSubTitle({
 				def: planSubTitle, currencySymbol, premiumDescription, planDef, elementValueChanged
-			}).map(label => {
-				return <LabelLike key={nanoid()} label={label} $wrapped={$myWrapped}/>;
+			}).map((label, index) => {
+				return <LabelLike key={index} label={label} $wrapped={$myWrapped}/>;
 			})}
 		</PlanHeaderSubTitle>
 	</APlanHeader>;

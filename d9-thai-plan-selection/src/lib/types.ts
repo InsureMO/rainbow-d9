@@ -35,6 +35,8 @@ export interface PlanElementDef {
 	description?: string;
 	type: PlanElementType;
 	children?: Array<PlanElementDef>;
+	/** only works when it has children, default undefined means not collapsible */
+	collapsed?: boolean;
 	/** display order, default 0 */
 	displayOrder?: number;
 	tip?: Omit<Global.TipOptions, 'ref' | 'prefix'>;

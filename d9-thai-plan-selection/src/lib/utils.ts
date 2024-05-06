@@ -161,8 +161,9 @@ export const guardPlanSubTitle = (options: {
 
 export const guardElementTitle = (options: {
 	def?: PlanSelectionDef['elementTitle']; orderedDef: PlanElementDefOrdered; elementLevel: number;
+	forceUpdate: () => void;
 }): Array<NodeDef | ReactNode> => {
-	const {def, orderedDef, elementLevel} = options;
+	const {def, orderedDef, elementLevel, forceUpdate} = options;
 	const {def: elementDef} = orderedDef;
 	const domElementAttr = {};
 	switch (elementDef.type) {
@@ -186,7 +187,14 @@ export const guardElementTitle = (options: {
 		? def(elementDef, elementLevel)
 		: [{
 			$wt: 'Caption', text: elementDef.name,
-			'data-plan-element-level': elementLevel, ...domElementAttr
+			'data-plan-element-level': elementLevel, ...domElementAttr,
+			leads: elementDef.collapsed == null ? (void 0) : ['$icons.angleRight'],
+			click: elementDef.collapsed == null
+				? (void 0)
+				: () => {
+					elementDef.collapsed = !elementDef.collapsed;
+					forceUpdate();
+				}
 		} as LabelDef];
 };
 

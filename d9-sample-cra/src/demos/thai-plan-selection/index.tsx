@@ -60,7 +60,7 @@ export const ThaiPlanSelection = () => {
 				{
 					code: 'plan1', name: 'Standard Plan #1', elements: [
 						{
-							code: 'V', name: 'Voluntary', type: PlanElementType.CATEGORY, children: [
+							code: 'V', name: 'Voluntary', type: PlanElementType.CATEGORY, collapsed: true, children: [
 								{
 									code: 'ODFTD', name: 'Own Damage & Fire & Theft Deductible',
 									type: PlanElementType.COVERAGE,
@@ -118,7 +118,7 @@ export const ThaiPlanSelection = () => {
 							]
 						} as PlanCategoryDef,
 						{
-							code: 'PADDD', name: 'Personal Accident - Death & Disability for Driver',
+							code: 'PADDD', name: 'Personal Accident - Death & Disability for Driver', collapsed: false,
 							type: PlanElementType.COVERAGE,
 							values: [
 								{
@@ -162,7 +162,7 @@ export const ThaiPlanSelection = () => {
 							code: 'VC', name: 'Vehicle Collision', type: PlanElementType.COVERAGE
 						} as PlanCoverageDef,
 						{
-							code: 'SC', name: 'Special Cews', type: PlanElementType.CATEGORY,
+							code: 'SC', name: 'Special Cews', type: PlanElementType.CATEGORY, collapsed: true,
 							children: [
 								{
 									code: 'ND', name: 'Natural Disaster', type: PlanElementType.COVERAGE,

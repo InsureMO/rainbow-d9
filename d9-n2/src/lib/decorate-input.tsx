@@ -158,15 +158,15 @@ const Decorate = forwardRef((props: DecorateProps, forwardedRef: ForwardedRef<HT
 
 	return <DecorateInputContainer id={VUtils.isBlank(id) ? (void 0) : `di-${id}`}
 	                               data-placeholder={hasPlaceholder} {...rest} ref={ref}>
-		{transformDecorators(leads).map(lead => {
-			return <LeadDecorator key={VUtils.generateUniqueId()}>
+		{transformDecorators(leads).map((lead, index) => {
+			return <LeadDecorator key={index}>
 				{lead}
 			</LeadDecorator>;
 		})}
 		{children}
 		{hasPlaceholder ? <Placeholder>{toIntlLabel((placeholder ?? '').trim())}</Placeholder> : null}
-		{transformDecorators(tails).map(tail => {
-			return <TailDecorator key={VUtils.generateUniqueId()}>
+		{transformDecorators(tails).map((tail, index) => {
+			return <TailDecorator key={index}>
 				{tail}
 			</TailDecorator>;
 		})}

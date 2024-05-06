@@ -499,8 +499,8 @@ export const Button = forwardRef((props: ButtonProps, ref: ForwardedRef<HTMLButt
 	                onClick={onClicked}
 	                id={PPUtils.asId(PPUtils.absolute($p2r, props.$pp), props.id)}
 	                ref={buttonRef}>
-		{transformedLeads.map(lead => {
-			return <LeadDecorator key={VUtils.generateUniqueId()}>
+		{transformedLeads.map((lead, index) => {
+			return <LeadDecorator key={index}>
 				{lead}
 			</LeadDecorator>;
 		})}
@@ -509,8 +509,8 @@ export const Button = forwardRef((props: ButtonProps, ref: ForwardedRef<HTMLButt
 		{hasNoText ? null : <span data-role="text">{toIntlLabel(text)}</span>}
 		{/** noinspection JSDeprecatedSymbols */}
 		{tail}
-		{transformedTails.map(tail => {
-			return <TailDecorator key={VUtils.generateUniqueId()}>
+		{transformedTails.map((tail, index) => {
+			return <TailDecorator key={index}>
 				{tail}
 			</TailDecorator>;
 		})}

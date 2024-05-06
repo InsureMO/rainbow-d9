@@ -7,7 +7,6 @@ import {
 	PPUtils,
 	PropValue,
 	registerWidget,
-	VUtils,
 	WidgetProps
 } from '@rainbow-d9/n1';
 import React, {ForwardedRef, forwardRef, isValidElement, MouseEvent, ReactNode, useRef} from 'react';
@@ -312,14 +311,14 @@ export const Caption = forwardRef((props: CaptionProps, ref: ForwardedRef<HTMLSp
 	                 id={PPUtils.asId(PPUtils.absolute($p2r, props.$pp), props.id)}
 	                 onClick={onClicked} data-clickable={onClicked != null}
 	                 ref={captionRef}>
-		{transformDecorators(leads).map(lead => {
-			return <LeadDecorator key={VUtils.generateUniqueId()}>
+		{transformDecorators(leads).map((lead, index) => {
+			return <LeadDecorator key={index}>
 				{lead}
 			</LeadDecorator>;
 		})}
 		{children}
-		{transformDecorators(tails).map(tail => {
-			return <TailDecorator key={VUtils.generateUniqueId()}>
+		{transformDecorators(tails).map((tail, index) => {
+			return <TailDecorator key={index}>
 				{tail}
 			</TailDecorator>;
 		})}

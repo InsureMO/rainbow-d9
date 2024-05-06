@@ -194,6 +194,26 @@ export const PlanElementColumnHeader = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-p
     border-bottom: ${CssVars.BORDER};
     background-color: ${PlanSelectionCssVars.BACKGROUND_COLOR};
     z-index: 1;
+
+    &[data-ancestor-collapsed=true] {
+        display: none;
+    }
+
+    &[data-collapsed=true] {
+        > div[data-w=d9-plan-selection-element-header-title] > span[data-w=d9-caption] > span[data-w=d9-deco-lead] > svg[data-icon=angle-right] {
+            transform: unset;
+        }
+    }
+
+    > div[data-w=d9-plan-selection-element-header-title] > span[data-w=d9-caption] > span[data-w=d9-deco-lead] {
+        margin-left: -8px;
+
+        > svg[data-icon=angle-right] {
+            transform: rotate(90deg);
+            transition: transform ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION};
+            height: ${CssVars.FONT_SIZE};
+        }
+    }
 `;
 export const PlanElementColumnHeaderTitle = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-plan-selection-element-header-title'})`
     display: flex;
@@ -235,6 +255,10 @@ export const PlanElementCellContainer = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-
 
     &[data-odd=true] {
         background-color: ${PlanSelectionCssVars.ODD_BACKGROUND_COLOR};
+    }
+
+    &[data-ancestor-collapsed=true] {
+        display: none;
     }
 
     &[data-element-lack=true] { /** element no available for this plan */

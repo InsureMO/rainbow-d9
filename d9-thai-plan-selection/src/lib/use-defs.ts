@@ -4,9 +4,6 @@ import {PlanDefs, PlanElementCode, PlanElementDef, PlanSelectionProps} from './t
 
 export interface PlanElementDefOrdered {
 	code: PlanElementCode;
-	name: string;
-	description?: string;
-	displayOrder: number;
 	children?: Array<PlanElementDefOrdered>;
 	def: PlanElementDef;
 }
@@ -37,10 +34,7 @@ export const orderDef = (
 			exists = {displayOrder, map: {}, ordered: children};
 			orderedCodeMap[element.code] = exists;
 			// let children be empty array now
-			ordered.push({
-				code: element.code, name: element.name, description: element.description,
-				displayOrder, children, def: element
-			});
+			ordered.push({code: element.code, children, def: element});
 		}
 		orderDef(() => element.children ?? [], exists.ordered, exists.map);
 	});
@@ -57,9 +51,9 @@ const orderPlanDefs = (defs: PlanDefs): Undefinable<PlanDefOrdered> => {
 	const sort = (ordered: Array<PlanElementDefOrdered>) => {
 		const original = [...ordered];
 		ordered = ordered.sort((a, b) => {
-			if (a.displayOrder < b.displayOrder) {
+			if (a.def.displayOrder < b.def.displayOrder) {
 				return -1;
-			} else if (a.displayOrder > b.displayOrder) {
+			} else if (a.def.displayOrder > b.def.displayOrder) {
 				return 1;
 			} else {
 				return original.indexOf(a) - original.indexOf(b);

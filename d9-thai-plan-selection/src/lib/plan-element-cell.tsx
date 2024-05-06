@@ -30,12 +30,13 @@ export interface PlanElementCellProps {
 	lack?: true;
 	category?: true;
 	odd: boolean;
+	ancestorCollapsed?: boolean;
 	elementDef?: PlanElementDef;
 	children?: ReactNode;
 }
 
 export const PlanElementCell = (props: PlanElementCellProps) => {
-	const {lack, category, odd, elementDef, children} = props;
+	const {lack, category, odd, ancestorCollapsed, elementDef, children} = props;
 
 	const attributes = (() => {
 		const attrs = {};
@@ -44,6 +45,9 @@ export const PlanElementCell = (props: PlanElementCellProps) => {
 		}
 		if (category === true) {
 			attrs['data-element-category'] = true;
+		}
+		if (ancestorCollapsed === true) {
+			attrs['data-ancestor-collapsed'] = true;
 		}
 		attrs['data-odd'] = odd;
 		return attrs;

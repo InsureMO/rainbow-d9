@@ -1,6 +1,5 @@
 import {BaseModel, PPUtils, PropertyPath, PropValue, VUtils, WrappedAttributes} from '@rainbow-d9/n1';
 import {LabelLike} from '@rainbow-d9/n2';
-import {nanoid} from 'nanoid';
 import React from 'react';
 import {PlanDefs, PlanSelectionProps, SelectedPlans} from './types';
 import {createPlanModelProxy, findSelectedPlan, guardPlanOperators} from './utils';
@@ -39,8 +38,8 @@ export const PlanFooters = (props: PlanFooterProps) => {
 				<PlanFooterOperator>
 					{guardPlanOperators({
 						def: planOperators, planDef, planModel: planData, text: buyText, click: buy
-					}).map(label => {
-						return <LabelLike key={nanoid()} label={label} $wrapped={$myWrapped}/>;
+					}).map((label, index) => {
+						return <LabelLike key={index} label={label} $wrapped={$myWrapped}/>;
 					})}
 				</PlanFooterOperator>
 			</PlanFooter>;
