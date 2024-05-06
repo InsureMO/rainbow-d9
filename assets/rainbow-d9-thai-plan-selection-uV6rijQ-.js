@@ -1,9 +1,9 @@
-import { r as reactExports, R as React, j as jsxRuntimeExports } from "./react-hzPBN1xn.js";
-import { V as VUtils, r as registerWidget, g as useCreateEventBus, M as MUtils, P as PPUtils, a as useThrottler, e as useForceUpdate, d as Wrapper, S as StandaloneRoot } from "./rainbow-d9-n1-XhNtwgVu.js";
-import { C as CssVars, D as DOM_KEY_WIDGET, a as DOM_ID_WIDGET, d as utils$2, $ as $d9n2, b as useGlobalHandlers, u as useGlobalEventBus, G as GlobalEventTypes, U as UnwrappedButton, B as ButtonInk, e as ButtonFill, I as IntlLabel, L as LabelLike, i as index$2, f as index$1$1, c as GlobalEventPrefix, g as useAlert, h as useDialog, j as DialogHeader, k as DialogTitle, l as DialogBody, m as DialogFooter, n as GlobalRoot } from "./rainbow-d9-n2-8s9vO8di.js";
-import { a as color, n as nanoid } from "./vendor-BZZTreDf.js";
-import { q as qe } from "./styled-components-8iL4dtjk.js";
-import { i as index$1, p as parseDoc } from "./rainbow-d9-n3-LqFH3V7Q.js";
+import { r as reactExports, R as React, j as jsxRuntimeExports } from "./react-1dMsa_3-.js";
+import { V as VUtils, r as registerWidget, g as useCreateEventBus, M as MUtils, P as PPUtils, a as useThrottler, e as useForceUpdate, d as Wrapper, S as StandaloneRoot } from "./rainbow-d9-n1-80z7eb_q.js";
+import { C as CssVars, D as DOM_KEY_WIDGET, a as DOM_ID_WIDGET, d as utils$2, $ as $d9n2, b as useGlobalHandlers, u as useGlobalEventBus, G as GlobalEventTypes, U as UnwrappedButton, B as ButtonInk, e as ButtonFill, I as IntlLabel, L as LabelLike, i as index$2, f as index$1$1, c as GlobalEventPrefix, g as useAlert, h as useDialog, j as DialogHeader, k as DialogTitle, l as DialogBody, m as DialogFooter, n as GlobalRoot } from "./rainbow-d9-n2-4qTleo8T.js";
+import { a as color } from "./vendor-jlkyjGF-.js";
+import { q as qe } from "./styled-components-HnQN4qVb.js";
+import { i as index$1, p as parseDoc } from "./rainbow-d9-n3-NRmmzW7O.js";
 var PlanElementType;
 (function(PlanElementType2) {
   PlanElementType2["CATEGORY"] = "PolicyElementCategory";
@@ -201,6 +201,26 @@ const PlanElementColumnHeader = qe.div.attrs({ [DOM_KEY_WIDGET]: "d9-plan-select
     border-bottom: ${CssVars.BORDER};
     background-color: ${PlanSelectionCssVars.BACKGROUND_COLOR};
     z-index: 1;
+
+    &[data-ancestor-collapsed=true] {
+        display: none;
+    }
+
+    &[data-collapsed=true] {
+        > div[data-w=d9-plan-selection-element-header-title] > span[data-w=d9-caption] > span[data-w=d9-deco-lead] > svg[data-icon=angle-right] {
+            transform: unset;
+        }
+    }
+
+    > div[data-w=d9-plan-selection-element-header-title] > span[data-w=d9-caption] > span[data-w=d9-deco-lead] {
+        margin-left: -8px;
+
+        > svg[data-icon=angle-right] {
+            transform: rotate(90deg);
+            transition: transform ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION};
+            height: ${CssVars.FONT_SIZE};
+        }
+    }
 `;
 const PlanElementColumnHeaderTitle = qe.div.attrs({ [DOM_KEY_WIDGET]: "d9-plan-selection-element-header-title" })`
     display: flex;
@@ -242,6 +262,10 @@ const PlanElementCellContainer = qe.div.attrs({ [DOM_KEY_WIDGET]: "d9-plan-selec
 
     &[data-odd=true] {
         background-color: ${PlanSelectionCssVars.ODD_BACKGROUND_COLOR};
+    }
+
+    &[data-ancestor-collapsed=true] {
+        display: none;
     }
 
     &[data-element-lack=true] { /** element no available for this plan */
@@ -564,7 +588,7 @@ const guardPlanSubTitle = (options) => {
   ];
 };
 const guardElementTitle = (options) => {
-  const { def, orderedDef, elementLevel } = options;
+  const { def, orderedDef, elementLevel, forceUpdate } = options;
   const { def: elementDef } = orderedDef;
   const domElementAttr = {};
   switch (elementDef.type) {
@@ -588,7 +612,12 @@ const guardElementTitle = (options) => {
     $wt: "Caption",
     text: elementDef.name,
     "data-plan-element-level": elementLevel,
-    ...domElementAttr
+    ...domElementAttr,
+    leads: elementDef.collapsed == null ? void 0 : ["$icons.angleRight"],
+    click: elementDef.collapsed == null ? void 0 : () => {
+      elementDef.collapsed = !elementDef.collapsed;
+      forceUpdate();
+    }
   }];
 };
 const guardPlanOperators = (options) => {
@@ -631,14 +660,7 @@ const orderDef = (children, ordered, orderedCodeMap) => {
       const children2 = [];
       exists = { displayOrder, map: {}, ordered: children2 };
       orderedCodeMap[element.code] = exists;
-      ordered.push({
-        code: element.code,
-        name: element.name,
-        description: element.description,
-        displayOrder,
-        children: children2,
-        def: element
-      });
+      ordered.push({ code: element.code, children: children2, def: element });
     }
     orderDef(() => element.children ?? [], exists.ordered, exists.map);
   });
@@ -653,9 +675,9 @@ const orderPlanDefs = (defs) => {
   const sort = (ordered2) => {
     const original = [...ordered2];
     ordered2 = ordered2.sort((a, b) => {
-      if (a.displayOrder < b.displayOrder) {
+      if (a.def.displayOrder < b.def.displayOrder) {
         return -1;
-      } else if (a.displayOrder > b.displayOrder) {
+      } else if (a.def.displayOrder > b.def.displayOrder) {
         return 1;
       } else {
         return original.indexOf(a) - original.indexOf(b);
@@ -916,8 +938,8 @@ const PlanHeader = (props) => {
   return React.createElement(
     APlanHeader,
     { "data-odd": odd },
-    React.createElement(PlanHeaderTitle, null, guardPlanTitle({ def: planTitle, planDef, elementValueChanged }).map((label) => {
-      return React.createElement(LabelLike, { key: nanoid(), label, "$wrapped": $myWrapped });
+    React.createElement(PlanHeaderTitle, null, guardPlanTitle({ def: planTitle, planDef, elementValueChanged }).map((label, index) => {
+      return React.createElement(LabelLike, { key: index, label, "$wrapped": $myWrapped });
     })),
     React.createElement(PlanHeaderSubTitle, null, guardPlanSubTitle({
       def: planSubTitle,
@@ -925,8 +947,8 @@ const PlanHeader = (props) => {
       premiumDescription,
       planDef,
       elementValueChanged
-    }).map((label) => {
-      return React.createElement(LabelLike, { key: nanoid(), label, "$wrapped": $myWrapped });
+    }).map((label, index) => {
+      return React.createElement(LabelLike, { key: index, label, "$wrapped": $myWrapped });
     }))
   );
 };
@@ -1340,7 +1362,7 @@ const PlanElementCellWithTip = (props) => {
   return React.createElement(PlanElementCellContainer, { ...attributes, ref }, children);
 };
 const PlanElementCell = (props) => {
-  const { lack, category, odd, elementDef, children } = props;
+  const { lack, category, odd, ancestorCollapsed, elementDef, children } = props;
   const attributes = (() => {
     const attrs = {};
     if (lack === true) {
@@ -1348,6 +1370,9 @@ const PlanElementCell = (props) => {
     }
     if (category === true) {
       attrs["data-element-category"] = true;
+    }
+    if (ancestorCollapsed === true) {
+      attrs["data-ancestor-collapsed"] = true;
     }
     attrs["data-odd"] = odd;
     return attrs;
@@ -1359,7 +1384,8 @@ const PlanElementCell = (props) => {
   }
 };
 const PlanElement = (props) => {
-  const { orderedDef, displayPlanDefs, displayPlanDefCodesMap, elementTitle, elementLevel, ancestorCodes, plansModel, $root, $p2r, elementFixedValue, elementOptionsValue, elementNumberValue, elementNumberValueValidator } = props;
+  const { orderedDef, displayPlanDefs, displayPlanDefCodesMap, elementTitle, elementLevel, ancestorCollapsed, ancestorCodes, plansModel, $root, $p2r, elementFixedValue, elementOptionsValue, elementNumberValue, elementNumberValueValidator } = props;
+  const forceUpdate = useForceUpdate();
   const model = createPlanModelProxy(plansModel, orderedDef);
   const $titleWrapped = { $root, $model: model, $p2r, $onValueChange: VUtils.noop, $avs: {} };
   const elementCode = orderedDef.code;
@@ -1369,9 +1395,9 @@ const PlanElement = (props) => {
     null,
     React.createElement(
       PlanElementColumnHeader,
-      null,
-      React.createElement(PlanElementColumnHeaderTitle, null, guardElementTitle({ def: elementTitle, orderedDef, elementLevel }).map((label) => {
-        return React.createElement(LabelLike, { key: nanoid(), label, "$wrapped": $titleWrapped });
+      { "data-plan-element-level": elementLevel, "data-collapsed": orderedDef.def.collapsed ?? false, "data-ancestor-collapsed": ancestorCollapsed ?? false },
+      React.createElement(PlanElementColumnHeaderTitle, null, guardElementTitle({ def: elementTitle, orderedDef, elementLevel, forceUpdate }).map((label, index) => {
+        return React.createElement(LabelLike, { key: index, label, "$wrapped": $titleWrapped });
       }))
     ),
     displayPlanDefs.map((planDef, displayIndex) => {
@@ -1383,26 +1409,26 @@ const PlanElement = (props) => {
       if (elementDef == null) {
         return React.createElement(
           PlanElementCell,
-          { odd, lack: true, key },
+          { odd, lack: true, ancestorCollapsed: ancestorCollapsed ?? false, key },
           React.createElement(index$2.Times, null)
         );
       } else if (isCategoryPlanElementDef(elementDef)) {
         return React.createElement(
           PlanElementCell,
-          { odd, category: true, elementDef, key },
+          { odd, category: true, ancestorCollapsed: ancestorCollapsed ?? false, elementDef, key },
           React.createElement(index$2.Check, null)
         );
       } else {
         const planData = findSelectedPlan(plansModel, planDef.code);
         return React.createElement(
           PlanElementCell,
-          { odd, elementDef, key },
+          { odd, ancestorCollapsed: ancestorCollapsed ?? false, elementDef, key },
           React.createElement(PlanElementValues, { elementDef, elementCodes, planDef, plan: planData, plans: plansModel, "$root": $root, "$p2r": PPUtils.concat($p2r, planCode), elementFixedValue, elementOptionsValue, elementNumberValue, elementNumberValueValidator })
         );
       }
     }),
     (orderedDef.children ?? []).map((childOrderedDef) => {
-      return React.createElement(PlanElement, { orderedDef: childOrderedDef, displayPlanDefs, displayPlanDefCodesMap, elementTitle, elementLevel: elementLevel + 1, ancestorCodes: elementCodes, plansModel, "$root": $root, "$p2r": $p2r, elementFixedValue, elementOptionsValue, elementNumberValue, elementNumberValueValidator, key: childOrderedDef.code });
+      return React.createElement(PlanElement, { orderedDef: childOrderedDef, ancestorCollapsed: ancestorCollapsed || orderedDef.def.collapsed, displayPlanDefs, displayPlanDefCodesMap, elementTitle, elementLevel: elementLevel + 1, ancestorCodes: elementCodes, plansModel, "$root": $root, "$p2r": $p2r, elementFixedValue, elementOptionsValue, elementNumberValue, elementNumberValueValidator, key: childOrderedDef.code });
     })
   );
 };
@@ -1442,8 +1468,8 @@ const PlanFooters = (props) => {
           planModel: planData,
           text: buyText,
           click: buy
-        }).map((label) => {
-          return React.createElement(LabelLike, { key: nanoid(), label, "$wrapped": $myWrapped });
+        }).map((label, index) => {
+          return React.createElement(LabelLike, { key: index, label, "$wrapped": $myWrapped });
         }))
       );
     })
@@ -1647,6 +1673,7 @@ const ThaiPlanSelection = () => {
               code: "V",
               name: "Voluntary",
               type: PlanElementType.CATEGORY,
+              collapsed: true,
               children: [
                 {
                   code: "ODFTD",
@@ -1727,6 +1754,7 @@ const ThaiPlanSelection = () => {
             {
               code: "PADDD",
               name: "Personal Accident - Death & Disability for Driver",
+              collapsed: false,
               type: PlanElementType.COVERAGE,
               values: [
                 {
@@ -1786,6 +1814,7 @@ const ThaiPlanSelection = () => {
               code: "SC",
               name: "Special Cews",
               type: PlanElementType.CATEGORY,
+              collapsed: true,
               children: [
                 {
                   code: "ND",

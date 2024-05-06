@@ -4,10 +4,10 @@ var __publicField = (obj, key, value) => {
   __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
   return value;
 };
-import { a as color, M as MaskedNumber, e as MaskedDate, g as MaskedFunction, j as MaskedPattern, k as MaskedRange, l as MaskedRegExp, o as MaskedDynamic } from "./vendor-BZZTreDf.js";
-import { R as React, r as reactExports, u as useIMask } from "./react-hzPBN1xn.js";
-import { c as createLogger, V as VUtils, P as PPUtils, r as registerWidget, u as useRootEventBus, M as MUtils, N as NUtils, d as Wrapper, e as useForceUpdate, f as MBUtils, b as useWrapperEventBus, W as WrapperEventTypes, g as useCreateEventBus, h as PROPERTY_PATH_ME, i as useDefaultAttributeValues, j as useAttributesWatch, R as RootEventTypes } from "./rainbow-d9-n1-XhNtwgVu.js";
-import { q as qe, W as We } from "./styled-components-8iL4dtjk.js";
+import { a as color, M as MaskedNumber, e as MaskedDate, g as MaskedFunction, j as MaskedPattern, k as MaskedRange, l as MaskedRegExp, o as MaskedDynamic } from "./vendor-jlkyjGF-.js";
+import { R as React, r as reactExports, u as useIMask } from "./react-1dMsa_3-.js";
+import { c as createLogger, V as VUtils, P as PPUtils, r as registerWidget, u as useRootEventBus, M as MUtils, N as NUtils, d as Wrapper, e as useForceUpdate, f as MBUtils, b as useWrapperEventBus, W as WrapperEventTypes, g as useCreateEventBus, h as PROPERTY_PATH_ME, i as useDefaultAttributeValues, j as useAttributesWatch, R as RootEventTypes } from "./rainbow-d9-n1-80z7eb_q.js";
+import { q as qe, W as We } from "./styled-components-HnQN4qVb.js";
 import { d as dayjs } from "./dayjs-9Z7dW0Q-.js";
 const DOM_KEY_WIDGET = "data-w";
 const DOM_ID_WIDGET = "data-wid";
@@ -1107,14 +1107,14 @@ const Button = reactExports.forwardRef((props, ref) => {
   return React.createElement(
     AButton,
     { ...rest, "data-ink": ink, "data-fill": fill, "data-disabled": $disabled ?? false, "data-visible": $visible, hasOneLeadOrTail, onClick: onClicked, id: PPUtils.asId(PPUtils.absolute($p2r, props.$pp), props.id), ref: buttonRef },
-    transformedLeads.map((lead) => {
-      return React.createElement(LeadDecorator$2, { key: VUtils.generateUniqueId() }, lead);
+    transformedLeads.map((lead, index) => {
+      return React.createElement(LeadDecorator$2, { key: index }, lead);
     }),
     head,
     hasNoText ? null : React.createElement("span", { "data-role": "text" }, toIntlLabel(text)),
     tail,
-    transformedTails.map((tail2) => {
-      return React.createElement(TailDecorator$2, { key: VUtils.generateUniqueId() }, tail2);
+    transformedTails.map((tail2, index) => {
+      return React.createElement(TailDecorator$2, { key: index }, tail2);
     })
   );
 });
@@ -2366,12 +2366,12 @@ const Caption = reactExports.forwardRef((props, ref) => {
   return React.createElement(
     ACaption,
     { ...rest, "data-disabled": $disabled, "data-visible": $visible, id: PPUtils.asId(PPUtils.absolute($p2r, props.$pp), props.id), onClick: onClicked, "data-clickable": onClicked != null, ref: captionRef },
-    transformDecorators(leads).map((lead) => {
-      return React.createElement(LeadDecorator$1, { key: VUtils.generateUniqueId() }, lead);
+    transformDecorators(leads).map((lead, index) => {
+      return React.createElement(LeadDecorator$1, { key: index }, lead);
     }),
     children,
-    transformDecorators(tails).map((tail) => {
-      return React.createElement(TailDecorator$1, { key: VUtils.generateUniqueId() }, tail);
+    transformDecorators(tails).map((tail, index) => {
+      return React.createElement(TailDecorator$1, { key: index }, tail);
     })
   );
 });
@@ -2832,13 +2832,13 @@ const Decorate = reactExports.forwardRef((props, forwardedRef) => {
   return React.createElement(
     DecorateInputContainer,
     { id: VUtils.isBlank(id) ? void 0 : `di-${id}`, "data-placeholder": hasPlaceholder, ...rest, ref },
-    transformDecorators(leads).map((lead) => {
-      return React.createElement(LeadDecorator, { key: VUtils.generateUniqueId() }, lead);
+    transformDecorators(leads).map((lead, index) => {
+      return React.createElement(LeadDecorator, { key: index }, lead);
     }),
     children,
     hasPlaceholder ? React.createElement(Placeholder, null, toIntlLabel((placeholder ?? "").trim())) : null,
-    transformDecorators(tails).map((tail) => {
-      return React.createElement(TailDecorator, { key: VUtils.generateUniqueId() }, tail);
+    transformDecorators(tails).map((tail, index) => {
+      return React.createElement(TailDecorator, { key: index }, tail);
     })
   );
 });
