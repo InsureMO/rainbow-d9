@@ -84,7 +84,7 @@ export const CssVars = {
 	SCROLL_THUMB_COLOR: 'var(--d9-scroll-thumb-color, rgb(193, 193, 193))',
 	SCROLL_BORDER_RADIUS: 'var(--d9-scroll-border-radius, 2px)',
 	SCROLL_HEIGHT: 'var(--d9-scroll-height, 6px)',
-	SCROLL_WEIGHT: 'var(--di-scroll-weight, 4px)',
+	SCROLL_WIDTH: 'var(--d9-scroll-width, 4px)',
 
 	SECTION_HEADER_HEIGHT: 'var(--d9-section-header-height, 44px)',
 	SECTION_HEADER_OFFSET: 'var(--d9-section-header-offset, calc(44px / 3))',

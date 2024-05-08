@@ -92,7 +92,7 @@ export const createEditorStyles = (options: { badge: boolean }) => {
         &::-webkit-scrollbar {
             background-color: transparent;
             height: ${CssVars.SCROLL_HEIGHT};
-            width: ${CssVars.SCROLL_WEIGHT};
+            width: ${CssVars.SCROLL_WIDTH};
         }
 
         &::-webkit-scrollbar-track {
@@ -299,7 +299,7 @@ export const createEditorStyles = (options: { badge: boolean }) => {
             &::-webkit-scrollbar {
                 background-color: transparent;
                 height: ${CssVars.SCROLL_HEIGHT};
-                width: ${CssVars.SCROLL_WEIGHT};
+                width: ${CssVars.SCROLL_WIDTH};
             }
 
             &::-webkit-scrollbar-track {
