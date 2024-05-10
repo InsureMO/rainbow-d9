@@ -4,10 +4,10 @@ var __publicField = (obj, key, value) => {
   __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
   return value;
 };
-import { a as color, M as MaskedNumber, e as MaskedDate, g as MaskedFunction, j as MaskedPattern, k as MaskedRange, l as MaskedRegExp, o as MaskedDynamic } from "./vendor-jlkyjGF-.js";
-import { R as React, r as reactExports, u as useIMask } from "./react-1dMsa_3-.js";
-import { c as createLogger, V as VUtils, P as PPUtils, r as registerWidget, u as useRootEventBus, M as MUtils, N as NUtils, d as Wrapper, e as useForceUpdate, f as MBUtils, b as useWrapperEventBus, W as WrapperEventTypes, g as useCreateEventBus, h as PROPERTY_PATH_ME, i as useDefaultAttributeValues, j as useAttributesWatch, R as RootEventTypes } from "./rainbow-d9-n1-80z7eb_q.js";
-import { q as qe, W as We } from "./styled-components-HnQN4qVb.js";
+import { a as color, M as MaskedNumber, e as MaskedDate, g as MaskedFunction, j as MaskedPattern, k as MaskedRange, l as MaskedRegExp, o as MaskedDynamic } from "./vendor-TSR6RXc3.js";
+import { R as React, r as reactExports, u as useIMask } from "./react-GeCD96lQ.js";
+import { c as createLogger, V as VUtils, P as PPUtils, r as registerWidget, u as useRootEventBus, M as MUtils, N as NUtils, d as Wrapper, e as useForceUpdate, f as MBUtils, b as useWrapperEventBus, W as WrapperEventTypes, g as useCreateEventBus, h as PROPERTY_PATH_ME, i as useDefaultAttributeValues, j as useAttributesWatch, R as RootEventTypes } from "./rainbow-d9-n1-bqDfZtki.js";
+import { q as qe, W as We } from "./styled-components-Hk82igAO.js";
 import { d as dayjs } from "./dayjs-9Z7dW0Q-.js";
 const DOM_KEY_WIDGET = "data-w";
 const DOM_ID_WIDGET = "data-wid";
@@ -82,7 +82,7 @@ const CssVars = {
   SCROLL_THUMB_COLOR: "var(--d9-scroll-thumb-color, rgb(193, 193, 193))",
   SCROLL_BORDER_RADIUS: "var(--d9-scroll-border-radius, 2px)",
   SCROLL_HEIGHT: "var(--d9-scroll-height, 6px)",
-  SCROLL_WEIGHT: "var(--di-scroll-weight, 4px)",
+  SCROLL_WIDTH: "var(--d9-scroll-width, 4px)",
   SECTION_HEADER_HEIGHT: "var(--d9-section-header-height, 44px)",
   SECTION_HEADER_OFFSET: "var(--d9-section-header-offset, calc(44px / 3))",
   SECTION_HEADER_BORDER: `var(--d9-section-header-border, 2px solid var(--d9-border-color, ${CssConstants.BORDER_COLOR}))`,
@@ -1833,6 +1833,7 @@ var GlobalEventPrefix;
   GlobalEventPrefix2["WIZARD_STEP_CHANGED"] = "wstep-changed";
   GlobalEventPrefix2["TREE_NODE_CLICKED"] = "tree-node-clicked";
   GlobalEventPrefix2["TREE_NODE_DOUBLE_CLICKED"] = "tree-node-double-clicked";
+  GlobalEventPrefix2["TREE_NODE_CONTEXT_MENU"] = "tree-node-context-menu";
 })(GlobalEventPrefix || (GlobalEventPrefix = {}));
 const useCustomGlobalEvent = () => {
   const { fire } = useGlobalEventBus();
@@ -3386,6 +3387,18 @@ const TreeNodeRenderer = (props) => {
       value: node.value
     });
   };
+  const onEntityContextMenu = (event) => {
+    event.preventDefault();
+    event.stopPropagation();
+    node.contextMenu && node.contextMenu(node, { global: globalHandlers }, event);
+    const clipped = node.marker;
+    const key = `${GlobalEventPrefix.TREE_NODE_CONTEXT_MENU}:${clipped}`;
+    fireGlobal && fireGlobal(GlobalEventTypes.CUSTOM_EVENT, key, GlobalEventPrefix.TREE_NODE_CONTEXT_MENU, clipped, {
+      root: $wrapped.$root,
+      model: $wrapped.$model,
+      value: node.value
+    });
+  };
   const onMouseEnter = () => {
     const { top: treeTop, left: treeLeft, width: treeWidth } = ref.current.closest("div[data-w=d9-tree]").getBoundingClientRect();
     const { top, height } = ref.current.getBoundingClientRect();
@@ -3469,7 +3482,7 @@ const TreeNodeRenderer = (props) => {
   const children = node.$displayChildren ?? node.$children ?? [];
   return React.createElement(
     TreeNodeContainer,
-    { "data-expanded": expanded.current, "data-last-of-parent": lastOfParent, level, onClick: onEntityClicked, onDoubleClick: onEntityDoubleClicked, onMouseEnter, onMouseLeave, ref },
+    { "data-expanded": expanded.current, "data-last-of-parent": lastOfParent, level, onClick: onEntityClicked, onDoubleClick: onEntityDoubleClicked, onContextMenu: onEntityContextMenu, onMouseEnter, onMouseLeave, ref },
     hasOperators ? React.createElement(
       TreeNodeOperators,
       { "data-visible": operators.visible, top: operators.top, right: operators.right, ref: operatorsRef },

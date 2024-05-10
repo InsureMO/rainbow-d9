@@ -1,9 +1,9 @@
-import { r as reactExports, R as React, j as jsxRuntimeExports } from "./react-1dMsa_3-.js";
-import { V as VUtils, r as registerWidget, g as useCreateEventBus, M as MUtils, P as PPUtils, a as useThrottler, e as useForceUpdate, d as Wrapper, S as StandaloneRoot } from "./rainbow-d9-n1-80z7eb_q.js";
-import { C as CssVars, D as DOM_KEY_WIDGET, a as DOM_ID_WIDGET, d as utils$2, $ as $d9n2, b as useGlobalHandlers, u as useGlobalEventBus, G as GlobalEventTypes, U as UnwrappedButton, B as ButtonInk, e as ButtonFill, I as IntlLabel, L as LabelLike, i as index$2, f as index$1$1, c as GlobalEventPrefix, g as useAlert, h as useDialog, j as DialogHeader, k as DialogTitle, l as DialogBody, m as DialogFooter, n as GlobalRoot } from "./rainbow-d9-n2-4qTleo8T.js";
-import { a as color } from "./vendor-jlkyjGF-.js";
-import { q as qe } from "./styled-components-HnQN4qVb.js";
-import { i as index$1, p as parseDoc } from "./rainbow-d9-n3-NRmmzW7O.js";
+import { r as reactExports, R as React, j as jsxRuntimeExports } from "./react-GeCD96lQ.js";
+import { V as VUtils, r as registerWidget, g as useCreateEventBus, M as MUtils, P as PPUtils, a as useThrottler, e as useForceUpdate, d as Wrapper, S as StandaloneRoot } from "./rainbow-d9-n1-bqDfZtki.js";
+import { C as CssVars, D as DOM_KEY_WIDGET, a as DOM_ID_WIDGET, d as utils$2, $ as $d9n2, b as useGlobalHandlers, u as useGlobalEventBus, G as GlobalEventTypes, U as UnwrappedButton, B as ButtonInk, e as ButtonFill, I as IntlLabel, L as LabelLike, i as index$2, f as index$1$1, c as GlobalEventPrefix, g as useAlert, h as useDialog, j as DialogHeader, k as DialogTitle, l as DialogBody, m as DialogFooter, n as GlobalRoot } from "./rainbow-d9-n2-_SyARUmj.js";
+import { a as color } from "./vendor-TSR6RXc3.js";
+import { q as qe } from "./styled-components-Hk82igAO.js";
+import { i as index$1, p as parseDoc } from "./rainbow-d9-n3-bMrqF5Iy.js";
 var PlanElementType;
 (function(PlanElementType2) {
   PlanElementType2["CATEGORY"] = "PolicyElementCategory";
@@ -608,7 +608,7 @@ const guardElementTitle = (options) => {
       domElementAttr["data-plan-element-unknown"] = true;
       break;
   }
-  return def != null ? def(elementDef, elementLevel) : [{
+  return def != null ? def(elementDef, elementLevel, forceUpdate) : [{
     $wt: "Caption",
     text: elementDef.name,
     "data-plan-element-level": elementLevel,
@@ -1514,7 +1514,7 @@ const PlanSelectionValuesInitBuild = index$1.createAsyncSnippetBuild("valuesInit
 const PlanSelectionValuesClearBuild = index$1.createAsyncSnippetBuild("valuesClear", ["options"]);
 const PlanSelectionTitleBuild = index$1.createSyncSnippetBuild("planTitle", ["def", "elementValueChanged"]);
 const PlanSelectionSubTitleBuild = index$1.createSyncSnippetBuild("planSubTitle", ["def", "elementValueChanged", "currencySymbol", "premiumDescription"]);
-const PlanSelectionElementTitleBuild = index$1.createSyncSnippetBuild("elementTitle", ["def", "level"]);
+const PlanSelectionElementTitleBuild = index$1.createSyncSnippetBuild("elementTitle", ["def", "level", "forceUpdate"]);
 const PlanSelectionElementFixedValueBuild = index$1.createSyncSnippetBuild("elementFixedValue", ["options"]);
 const PlanSelectionElementOptionsValueBuild = index$1.createSyncSnippetBuild("elementOptionsValue", ["options"]);
 const PlanSelectionElementNumberValueBuild = index$1.createSyncSnippetBuild("elementNumberValue", ["options"]);
