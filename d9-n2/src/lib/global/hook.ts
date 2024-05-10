@@ -166,7 +166,8 @@ export enum GlobalEventPrefix {
 	TAB_CHANGED = 'tab-changed',
 	WIZARD_STEP_CHANGED = 'wstep-changed',
 	TREE_NODE_CLICKED = 'tree-node-clicked',
-	TREE_NODE_DOUBLE_CLICKED = 'tree-node-double-clicked'
+	TREE_NODE_DOUBLE_CLICKED = 'tree-node-double-clicked',
+	TREE_NODE_CONTEXT_MENU = 'tree-node-context-menu'
 }
 
 export type CustomGlobalEventHandler = <R extends BaseModel, M extends PropValue>(

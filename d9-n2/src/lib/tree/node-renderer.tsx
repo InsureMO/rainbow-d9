@@ -206,6 +206,21 @@ export const TreeNodeRenderer = (props: TreeNodeRendererProps) => {
 			root: $wrapped.$root, model: $wrapped.$model, value: node.value
 		});
 	};
+	const onEntityContextMenu = (event: MouseEvent<HTMLSpanElement>) => {
+		event.preventDefault();
+		event.stopPropagation();
+
+		// no wait
+		node.contextMenu && node.contextMenu(node, {global: globalHandlers}, event);
+
+		const clipped = node.marker;
+		const key = `${GlobalEventPrefix.TREE_NODE_CONTEXT_MENU}:${clipped}`;
+		// eslint-disable-next-line  @typescript-eslint/ban-ts-comment
+		// @ts-ignore
+		fireGlobal && fireGlobal(GlobalEventTypes.CUSTOM_EVENT, key, GlobalEventPrefix.TREE_NODE_CONTEXT_MENU, clipped, {
+			root: $wrapped.$root, model: $wrapped.$model, value: node.value
+		});
+	};
 	const onMouseEnter = () => {
 		const {
 			top: treeTop, left: treeLeft, width: treeWidth
@@ -307,6 +322,7 @@ export const TreeNodeRenderer = (props: TreeNodeRendererProps) => {
 
 	return <TreeNodeContainer data-expanded={expanded.current} data-last-of-parent={lastOfParent} level={level}
 	                          onClick={onEntityClicked} onDoubleClick={onEntityDoubleClicked}
+	                          onContextMenu={onEntityContextMenu}
 	                          onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}
 	                          ref={ref}>
 		{hasOperators

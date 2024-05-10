@@ -1,5 +1,5 @@
 import {NodeDef, PropertyPath, PropValue, Undefinable, WidgetProps} from '@rainbow-d9/n1';
-import {ReactNode} from 'react';
+import {MouseEvent, ReactNode} from 'react';
 import {GlobalEventHandlers, OmitHTMLProps2, OmitNodeDef} from '../types';
 
 export interface TreeNodeOperation {
@@ -18,6 +18,7 @@ export enum TreeNodeCheckedChangeFrom {
 export interface TreeNodeOperation2 extends TreeNodeOperation {
 	click?: (node: TreeNodeDef, handlers: GlobalEventHandlers) => Promise<void>;
 	dblClick?: (node: TreeNodeDef, handlers: GlobalEventHandlers) => Promise<void>;
+	contextMenu?: (node: TreeNodeDef, handlers: GlobalEventHandlers, event: MouseEvent<HTMLSpanElement>) => Promise<void>;
 	/** get checked, mandatory when checkable */
 	checked?: (node: TreeNodeDef) => boolean;
 	/** changed checked, mandatory when checkable */
