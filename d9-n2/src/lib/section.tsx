@@ -78,13 +78,13 @@ const ASectionExpander = styled.div.attrs<{ expanded: boolean }>(
         background-color: ${CssVars.PRIMARY_COLOR};
 
         > svg {
-            width: calc(${CssVars.SECTION_HEADER_HEIGHT} * 0.3);
             fill: ${CssVars.INVERT_COLOR};
             opacity: 1;
         }
     }
 
     > svg {
+        width: calc(${CssVars.SECTION_HEADER_HEIGHT} * 0.3);
         fill: ${CssVars.FONT_COLOR};
         opacity: 0.5;
         transition: all ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION};
