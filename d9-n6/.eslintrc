@@ -1,0 +1,25 @@
+{
+	"root": true,
+	"parser": "@typescript-eslint/parser",
+	"plugins": [
+		"@typescript-eslint",
+		"react-hooks"
+	],
+	"extends": [
+		"eslint:recommended",
+		"plugin:@typescript-eslint/eslint-recommended",
+		"plugin:@typescript-eslint/recommended",
+		"plugin:react-hooks/recommended"
+	],
+	"rules": {
+		"no-plusplus": 0,
+		"no-mixed-spaces-and-tabs": [
+			"error",
+			"smart-tabs"
+		],
+		"@typescript-eslint/no-empty-interface": "off",
+		"@typescript-eslint/no-non-null-assertion": "off",
+		"@typescript-eslint/adjacent-overload-signatures": "off",
+		"@typescript-eslint/ban-ts-comment": "error"
+	}
+}

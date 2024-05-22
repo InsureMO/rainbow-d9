@@ -47,6 +47,8 @@ Currently, `d9` is divided into three submodules:
 - [d9-n2](https://github.com/InsureMO/rainbow-d9/blob/main/d9-n2/README.md): the widget library,
 - [d9-n3](https://github.com/InsureMO/rainbow-d9/blob/main/d9-n3/README.md): the Markdown parsing library.
 - [d9-n5](https://github.com/InsureMO/rainbow-d9/blob/main/d9-n5/README.md): the `d9` playground.
+- [d9-n6](https://github.com/InsureMO/rainbow-d9/blob/main/d9-n5/README.md): the [`o23`](https://github.com/InsureMO/rainbow-o23)
+  playground.
 - [d9-echarts](https://github.com/InsureMO/rainbow-d9/blob/main/d9-echarts/README.md): the echarts widget library,
 - [d9-thai-plan-selection](https://github.com/InsureMO/rainbow-d9/blob/main/d9-thai-plan-selection/README.md): the plan selection widget,
   collaborate with the Thai Cloud team.

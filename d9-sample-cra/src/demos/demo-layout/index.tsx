@@ -9,6 +9,7 @@ import {N2Table, N2TableData, N2TableMarkdown} from '../n2-table';
 import {N2Tabs, N2TabsData, N2TabsMarkdown} from '../n2-tabs';
 import {N2Tree, N2TreeData, N2TreeMarkdown} from '../n2-tree';
 import {N2Wizard, N2WizardData, N2WizardMarkdown} from '../n2-wizard';
+import {O23Playground, O23PlaygroundData, O23PlaygroundMarkdown} from '../o23-playground';
 import {ThaiPlanSelection, ThaiPlanSelectionData, ThaiPlanSelectionMarkdown} from '../thai-plan-selection';
 
 export * from './widgets';
@@ -41,5 +42,9 @@ export const Demos = [
 	{
 		path: '/playground', label: '999. Playground',
 		C: N2Playground, data: PlaygroundData, markdown: PlaygroundMarkdown
+	},
+	{
+		path: '/o23-playground', label: '1000. O23 Playground',
+		C: O23Playground, data: O23PlaygroundData, markdown: O23PlaygroundMarkdown
 	}
 ];

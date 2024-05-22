@@ -5,6 +5,7 @@
 		"d9-n2",
 		"d9-n3",
 		"d9-n5",
+		"d9-n6",
 		"d9-echarts",
 		"d9-thai-plan-selection",
 		"d9-sample-cra"
@@ -15,6 +16,7 @@
 		"build-n3": "cd ./d9-n3 && yarn build",
 		"build-n123": "yarn build-n1 && yarn build-n2 && yarn build-n3",
 		"build-n5": "cd ./d9-n5 && yarn build",
+		"build-n6": "cd ./d9-n6 && yarn build",
 		"build-echarts": "cd ./d9-echarts && yarn build",
 		"build-thai-plan-selection": "cd ./d9-thai-plan-selection && yarn build",
 		"build-thai-all": "yarn build-thai-plan-selection",
@@ -25,11 +27,12 @@
 		"build-n3-ci": "cd ./d9-n3 && yarn build-ci",
 		"build-n123-ci": "yarn build-n1-ci && yarn build-n2-ci && yarn build-n3-ci",
 		"build-n5-ci": "cd ./d9-n5 && yarn build-ci",
+		"build-n6-ci": "cd ./d9-n6 && yarn build-ci",
 		"build-echarts-ci": "cd ./d9-echarts && yarn build-ci",
 		"build-thai-plan-selection-ci": "cd ./d9-thai-plan-selection && yarn build-ci",
 		"build-thai-all-ci": "yarn build-thai-plan-selection-ci",
 		"build-sample-cra-ci": "cd ./d9-sample-cra && yarn build",
-		"build-all-ci": "yarn build-n123-ci && yarn build-n5-ci && yarn build-echarts-ci && yarn build-thai-all-ci"
+		"build-all-ci": "yarn build-n123-ci && yarn build-n5-ci && yarn build-n6-ci && yarn build-echarts-ci && yarn build-thai-all-ci"
 	},
 	"volta": {
 		"node": "18.19.0",

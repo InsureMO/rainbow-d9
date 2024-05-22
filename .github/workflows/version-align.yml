@@ -54,6 +54,12 @@ jobs:
         with:
           module-name: d9-n5
           target-version: ${{ inputs.version }}
+      - name: Change Version of d9-n6
+        uses: ./.github/actions/change-node-version/
+        id: change-node-version-d9-n6
+        with:
+          module-name: d9-n6
+          target-version: ${{ inputs.version }}
       - name: Change Version of d9-echarts
         uses: ./.github/actions/change-node-version/
         id: change-node-version-d9-echarts
