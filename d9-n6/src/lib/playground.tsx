@@ -1,7 +1,8 @@
 import {MUtils, NodeAttributeValues, ObjectPropValue, PPUtils, PropValue, VUtils} from '@rainbow-d9/n1';
 import {CssVars, DOM_KEY_WIDGET, useGlobalHandlers} from '@rainbow-d9/n2';
-import React, {useRef} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import styled from 'styled-components';
+import {FileDefLoader, YamlDefLoader} from './definition';
 import {Editor} from './editor';
 import {PlaygroundBridge} from './playground-bridge';
 import {PlaygroundEventBusProvider} from './playground-event-bus';
@@ -36,12 +37,22 @@ export const PlaygroundWrapper = styled.div.attrs(
     }
 `;
 
+export interface PlaygroundDelegateState {
+	parser: FileDefLoader;
+}
+
 export const PlaygroundDelegate = (props: PlaygroundProps) => {
-	const {$pp, $wrapped, usage, ...rest} = props;
+	const {$pp, $wrapped, usage, parser, ...rest} = props;
 	const {$p2r, $onValueChange, $avs: {$disabled, $visible}} = $wrapped;
 
 	const ref = useRef<HTMLDivElement>(null);
 	const globalHandlers = useGlobalHandlers();
+	const [state, setState] = useState<PlaygroundDelegateState>(() => {
+		return {parser: parser ?? new YamlDefLoader()};
+	});
+	useEffect(() => {
+		setState(state => ({...state, parser: parser ?? new YamlDefLoader()}));
+	}, [parser]);
 
 	const onContentChanged = async (content?: string) => {
 		await $onValueChange(content, false, {global: globalHandlers});
@@ -52,7 +63,7 @@ export const PlaygroundDelegate = (props: PlaygroundProps) => {
 	                          id={PPUtils.asId(PPUtils.absolute($p2r, $pp), props.id)}
 	                          ref={ref}>
 		<PlaygroundBridge content={content} onContentChanged={onContentChanged}/>
-		<Editor content={content} usage={usage}/>
+		<Editor content={content} usage={usage} parser={state.parser}/>
 	</PlaygroundWrapper>;
 };
 

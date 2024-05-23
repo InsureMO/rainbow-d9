@@ -7,6 +7,12 @@ import {markdown as DemoContent} from './demo.md';
 export const O23Playground = () => {
 	const def = useDemoMarkdown(DemoContent);
 
+	DemoData.yaml = `code: ApiTest
+type: pipeline
+route: /api/test
+method: get
+`;
+
 	return <GlobalRoot>
 		<StandaloneRoot {...def} $root={DemoData}/>
 	</GlobalRoot>;

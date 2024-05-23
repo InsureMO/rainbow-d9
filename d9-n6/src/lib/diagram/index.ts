@@ -8,7 +8,7 @@ export * from './common';
 export * from './start-node';
 export * from './end-node';
 
-export const initStartNode = (engine: DiagramEngine) => {
+export const initEngine = (engine: DiagramEngine) => {
 	const portFactories = engine.getPortFactories();
 	portFactories.registerFactory(new NextStepPortFactory());
 	portFactories.registerFactory(new PreviousStepPortFactory());

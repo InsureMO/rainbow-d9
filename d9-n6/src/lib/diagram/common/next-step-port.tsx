@@ -32,18 +32,14 @@ export class NextStepPortModel extends PortModel {
 	}
 }
 
-export type CreateNextStepPortModel = () => NextStepPortModel;
-
-export class NextStepPortFactory extends AbstractModelFactory<PortModel, DiagramEngine> {
-	private readonly createNextStep: CreateNextStepPortModel = () => new NextStepPortModel();
-
+export class NextStepPortFactory extends AbstractModelFactory<NextStepPortModel, DiagramEngine> {
 	public constructor() {
 		super(NextStepPortModel.TYPE);
 	}
 
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
-	public generateModel(_event: GenerateModelEvent): PortModel {
-		return this.createNextStep();
+	public generateModel(_event: GenerateModelEvent): NextStepPortModel {
+		return new NextStepPortModel();
 	}
 }
 
@@ -52,6 +48,7 @@ export const NextStepPortContainer = styled.div.attrs({[DOM_KEY_WIDGET]: 'o23-pl
     position: relative;
     align-self: end;
     align-items: center;
+    justify-self: end;
     color: ${PlaygroundCssVars.NODE_NEXT_STEP_PORT_COLOR};
     background: ${PlaygroundCssVars.NODE_NEXT_STEP_PORT_BACKGROUND};
     height: ${PlaygroundCssVars.NODE_PORT_HEIGHT};

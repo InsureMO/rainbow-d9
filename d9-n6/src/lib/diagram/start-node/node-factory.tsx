@@ -14,7 +14,7 @@ export class StartNodeFactory extends AbstractReactFactory<StartNodeModel, Diagr
 	}
 
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
-	public generateModel(_event: GenerateModelEvent) {
-		return new StartNodeModel();
+	public generateModel(_event: GenerateModelEvent): StartNodeModel {
+		throw new Error('DO NOT use StartNodeFactory#generateModel.');
 	}
 }

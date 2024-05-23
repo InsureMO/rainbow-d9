@@ -7,6 +7,7 @@ const NODE_START_COLOR = '#eb4119';
 const NODE_END_COLOR = '#ed2b41';
 const NEXT_STEP_PORT_COLOR = '#005f7a';
 const PREVIOUS_STEP_PORT_COLOR = '#00618b';
+const REST_API_VARIABLE_PORT_COLOR = '#c13a92';
 export const PlaygroundCssVars = {
 	EDITOR_BACKGROUND_BLOCK_SIZE,
 	EDITOR_BACKGROUND_LINE_COLOR,
@@ -33,12 +34,19 @@ export const PlaygroundCssVars = {
 	NODE_PREVIOUS_STEP_PORT_COLOR: `var(--o23-playground-previous-step-port-color, ${CssVars.INVERT_COLOR})`,
 	NODE_PREVIOUS_STEP_PORT_BACKGROUND: `var(--o23-playground-previous-step-port-background, linear-gradient(135deg, ${color(PREVIOUS_STEP_PORT_COLOR).lighten(0.5)} 0%, ${PREVIOUS_STEP_PORT_COLOR} 40%, ${color(PREVIOUS_STEP_PORT_COLOR).darken(0.5)} 100%))`,
 	NODE_PREVIOUS_STEP_PORT_PADDING: `var(--o23-playground-previous-step-port-padding, 0 12px 0 8px)`,
+	// rest api variable port
+	NODE_REST_API_VARIABLE_PORT_FONT_SIZE: `var(--o23-playground-rest-api-variable-port-font-size, 0.6em)`,
+	NODE_REST_API_VARIABLE_PORT_FONT_WEIGHT: `var(--o23-playground-rest-api-variable-port-font-weight, 600)`,
+	NODE_REST_API_VARIABLE_PORT_COLOR: `var(--o23-playground-rest-api-variable-port-color, ${CssVars.INVERT_COLOR})`,
+	NODE_REST_API_VARIABLE_PORT_BACKGROUND: `var(--o23-playground-rest-api-variable-port-background, linear-gradient(135deg, ${color(REST_API_VARIABLE_PORT_COLOR).lighten(0.5)} 0%, ${REST_API_VARIABLE_PORT_COLOR} 40%, ${color(REST_API_VARIABLE_PORT_COLOR).darken(0.5)} 100%))`,
+	NODE_REST_API_VARIABLE_PORT_PADDING: `var(--o23-playground-rest-api-variable-port-padding, 0 12px 0 8px)`,
 	// start node
 	NODE_START_BORDER_COLOR: `var(--o23-playground-node-start-border-color, ${NODE_START_COLOR})`,
 	NODE_START_BORDER: `var(--o23-playground-node-start-border, 2px solid ${NODE_START_COLOR})`,
 	NODE_START_TITLE_FONT_WEIGHT: `var(--o23-playground-node-start-title-font-weight, 600)`,
 	NODE_START_TITLE_COLOR: `var(--o23-playground-node-start-title-color, ${CssVars.INVERT_COLOR})`,
 	NODE_START_TITLE_BACKGROUND: `var(--o23-playground-node-start-title-background, linear-gradient(135deg, ${NODE_START_COLOR} 0%, ${color(NODE_START_COLOR).alpha(0.7)} 70%, ${color(NODE_START_COLOR).alpha(0.5)} 100%))`,
+	NODE_START_SECOND_TITLE_DECORATION: 'var(--o23-playground-node-start-second-title-decoration, underline double)',
 	NODE_START_BODY_HEIGHT: `var(--o23-playground-node-start-body-height, 32px)`,
 	NODE_START_BODY_PADDING: `var(--o23-playground-node-start-body-padding, 4px 0 2px 0)`,
 	// start node

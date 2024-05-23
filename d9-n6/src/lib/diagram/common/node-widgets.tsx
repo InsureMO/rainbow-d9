@@ -46,7 +46,7 @@ export const NodeBody = styled.div`
     position: relative;
     grid-column: 1 / span 2;
     grid-row: 2;
-    grid-template-columns: auto 1fr auto;
+    grid-template-columns: auto minmax(40px, 1fr) auto;
     min-height: var(--min-height);
     padding: var(--padding);
 `;

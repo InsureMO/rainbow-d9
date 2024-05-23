@@ -30,18 +30,14 @@ export class PreviousStepPortModel extends PortModel {
 	}
 }
 
-export type CreatePreviousStepPortModel = () => PreviousStepPortModel;
-
-export class PreviousStepPortFactory extends AbstractModelFactory<PortModel, DiagramEngine> {
-	private readonly createPreviousStep: CreatePreviousStepPortModel = () => new PreviousStepPortModel();
-
+export class PreviousStepPortFactory extends AbstractModelFactory<PreviousStepPortModel, DiagramEngine> {
 	public constructor() {
 		super(PreviousStepPortModel.TYPE);
 	}
 
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
-	public generateModel(_event: GenerateModelEvent): PortModel {
-		return this.createPreviousStep();
+	public generateModel(_event: GenerateModelEvent): PreviousStepPortModel {
+		return new PreviousStepPortModel();
 	}
 }
 
@@ -50,6 +46,7 @@ export const PreviousStepPortContainer = styled.div.attrs({[DOM_KEY_WIDGET]: 'o2
     position: relative;
     align-self: end;
     align-items: center;
+    justify-self: start;
     color: ${PlaygroundCssVars.NODE_PREVIOUS_STEP_PORT_COLOR};
     background: ${PlaygroundCssVars.NODE_PREVIOUS_STEP_PORT_BACKGROUND};
     height: ${PlaygroundCssVars.NODE_PORT_HEIGHT};

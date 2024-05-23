@@ -2,9 +2,7 @@ import {useCreateEventBus} from '@rainbow-d9/n1';
 import React, {createContext, ReactNode, useContext} from 'react';
 
 export enum PlaygroundEventTypes {
-	CONTENT_CHANGED = 'content-changed',
-
-	FORCE_UPDATE_EDITOR = 'force-update-editor',
+	CONTENT_CHANGED = 'content-changed'
 }
 
 export interface PlaygroundEventBus {
@@ -13,12 +11,6 @@ export interface PlaygroundEventBus {
 	on(type: PlaygroundEventTypes.CONTENT_CHANGED, listener: (content?: string) => void): this;
 
 	off(type: PlaygroundEventTypes.CONTENT_CHANGED, listener: (content?: string) => void): this;
-
-	fire(type: PlaygroundEventTypes.FORCE_UPDATE_EDITOR): this;
-
-	on(type: PlaygroundEventTypes.FORCE_UPDATE_EDITOR, listener: () => void): this;
-
-	off(type: PlaygroundEventTypes.FORCE_UPDATE_EDITOR, listener: () => void): this;
 }
 
 const Context = createContext<PlaygroundEventBus>({} as PlaygroundEventBus);

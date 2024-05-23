@@ -1,4 +1,5 @@
 import {LinkModel, NodeModel, NodeModelGenerics} from '@projectstorm/react-diagrams';
+import {FileDef} from '../../definition';
 import {NextStepPortModel, PreviousStepPortModel} from '../common';
 
 export interface StartNodeModelGenerics {
@@ -8,7 +9,7 @@ export interface StartNodeModelGenerics {
 export class StartNodeModel extends NodeModel<NodeModelGenerics & StartNodeModelGenerics> {
 	public static readonly TYPE = 'start-node';
 
-	public constructor() {
+	public constructor(public readonly def: FileDef) {
 		super({type: StartNodeModel.TYPE});
 		// always have a port which link to next step
 		this.addPort(new NextStepPortModel());

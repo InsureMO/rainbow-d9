@@ -28,7 +28,7 @@ export const buildConfig = (lint) => {
 		},
 		external: [
 			'react', 'react-dom', 'styled-components',
-			'nanoid', 'color',
+			'nanoid', 'color', 'js-yaml',
 			'@projectstorm/react-canvas-core', '@projectstorm/react-diagrams-core', '@projectstorm/react-diagrams',
 			'@rainbow-d9/n1', '@rainbow-d9/n2', '@rainbow-d9/n3'
 		]

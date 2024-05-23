@@ -1,43 +1,72 @@
 import {CanvasWidget} from '@projectstorm/react-canvas-core';
 import createEngine, {DiagramModel} from '@projectstorm/react-diagrams';
 import {DiagramEngine} from '@projectstorm/react-diagrams-core';
-import {useForceUpdate} from '@rainbow-d9/n1';
+import {VUtils} from '@rainbow-d9/n1';
+import {IntlLabel} from '@rainbow-d9/n2';
 import React, {useEffect, useRef, useState} from 'react';
-import {EndNodeModel, initStartNode, StartNodeModel} from '../diagram';
-import {PlaygroundEventTypes, usePlaygroundEventBus} from '../playground-event-bus';
+import {FileDef, FileDefLoader} from '../definition';
+import {EndNodeModel, initEngine, StartNodeModel} from '../diagram';
 import {EditorProps} from '../types';
 import {ErrorBoundary} from './error-boundary';
 import {EditorWrapper, ParseError} from './widgets';
 
 export interface EditorKernelState {
 	engine: DiagramEngine;
+	content?: string;
+	parser: FileDefLoader;
+	def?: FileDef;
+	message?: string;
 }
 
 const createDiagramEngine = () => {
 	const engine = createEngine();
-	initStartNode(engine);
+	initEngine(engine);
 	return engine;
 };
 
 export const EditorKernel = (props: EditorProps) => {
-	const {content} = props;
+	const {content, parser} = props;
 
 	const vwRef = useRef<HTMLDivElement>(null);
-	const {on, off} = usePlaygroundEventBus();
-	const [state] = useState<EditorKernelState>({engine: createDiagramEngine()});
-	const forceUpdate = useForceUpdate();
+	const [state, setState] = useState<EditorKernelState>(() => {
+		const engine = createDiagramEngine();
+		try {
+			const def = parser.parse(content ?? '');
+			return {engine, content, parser, def};
+		} catch (e) {
+			console.error(e);
+			return {engine, content, parser, message: e.message};
+		}
+	});
 	useEffect(() => {
-		const onForceUpdateViewer = () => {
-			forceUpdate();
-		};
-		on(PlaygroundEventTypes.FORCE_UPDATE_EDITOR, onForceUpdateViewer);
-		return () => {
-			off(PlaygroundEventTypes.FORCE_UPDATE_EDITOR, onForceUpdateViewer);
-		};
-	}, [on, off, forceUpdate]);
+		if (parser === state.parser && content === state.content) {
+			return;
+		}
+		try {
+			const def = parser.parse(content ?? '');
+			setState(state => ({engine: state.engine, content, parser, def}));
+		} catch (e) {
+			console.error(e);
+			setState(state => ({engine: state.engine, content, parser, message: e.message}));
+		}
+	}, [parser, content, state.content, state.parser]);
+
+	if (VUtils.isNotBlank(state.message)) {
+		return <EditorWrapper>
+			<ParseError>{state.message}</ParseError>
+		</EditorWrapper>;
+	} else if (VUtils.isBlank(state.content)) {
+		return <EditorWrapper>
+			<ParseError><IntlLabel keys={['o23', 'error', 'no-content']} value="No content given."/></ParseError>
+		</EditorWrapper>;
+	} else if (state.def == null) {
+		return <EditorWrapper>
+			<ParseError><IntlLabel keys={['o23', 'error', 'no-def']} value="No definition parsed."/></ParseError>
+		</EditorWrapper>;
+	}
 
 	try {
-		const startNode = new StartNodeModel();
+		const startNode = new StartNodeModel(state.def);
 		startNode.setPosition(100, 100);
 		const endNode = new EndNodeModel();
 		endNode.setPosition(500, 100);
@@ -57,7 +86,8 @@ export const EditorKernel = (props: EditorProps) => {
 		</EditorWrapper>;
 	} catch (error) {
 		return <EditorWrapper>
-			<ParseError>{(error as Error).message || 'Parse error occurred.'}</ParseError>
+			<ParseError>{(error as Error).message ||
+				<IntlLabel keys={['o23', 'error', 'parse']} value="Parse error occurred."/>}</ParseError>
 		</EditorWrapper>;
 	}
 };

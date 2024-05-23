@@ -1,7 +1,9 @@
 import {DiagramEngine} from '@projectstorm/react-diagrams';
+import {VUtils} from '@rainbow-d9/n1';
 import {DOM_KEY_WIDGET, IntlLabel} from '@rainbow-d9/n2';
-import React, {useState} from 'react';
+import React from 'react';
 import styled from 'styled-components';
+import {isPipelineDef} from '../../definition';
 import {PlaygroundCssVars} from '../../widgets';
 import {
 	NextStepPortModel,
@@ -13,6 +15,7 @@ import {
 	NodeWrapper
 } from '../common';
 import {StartNodeModel} from './node-model';
+import {RestApiVariablePortWidget} from './rest-api-variable-port';
 
 export interface StartNodeWidgetProps {
 	// node and engine props are required
@@ -46,15 +49,24 @@ export const StartNodeTitle = styled(NodeTitle).attrs({
 		'--color': PlaygroundCssVars.NODE_START_TITLE_COLOR,
 		'--font-weight': PlaygroundCssVars.NODE_START_TITLE_FONT_WEIGHT
 	}
-})``;
-export const StartNodeTypeLabel = styled(NodeSecondTitle).attrs({
+})`
+    &[data-role=route] {
+        text-decoration: ${PlaygroundCssVars.NODE_START_SECOND_TITLE_DECORATION};
+    }
+`;
+export const StartNodeSecondTitle = styled(NodeSecondTitle).attrs({
 	[DOM_KEY_WIDGET]: 'o23-playground-start-node-title',
 	style: {
 		'--color': PlaygroundCssVars.NODE_START_TITLE_COLOR,
 		'--font-weight': PlaygroundCssVars.NODE_START_TITLE_FONT_WEIGHT,
-		'--text-decoration': 'double'
+		'--text-decoration': PlaygroundCssVars.NODE_START_SECOND_TITLE_DECORATION
 	}
-})``;
+})`
+    &[data-role=method] {
+        text-decoration: unset;
+        text-transform: uppercase;
+    }
+`;
 export const StartNodeBody = styled(NodeBody).attrs({
 	[DOM_KEY_WIDGET]: 'o23-playground-start-node-body',
 	style: {
@@ -65,43 +77,61 @@ export const StartNodeBody = styled(NodeBody).attrs({
 	}
 })``;
 
-export enum StartNodeType {
-	REST_API = 'rest-api', STANDARD = 'standard'
-}
-
-export interface StandNodeTypeOption {
-	keys: Array<string>;
-	value: string;
-}
-
-export const StartNodeTypeOptions: Record<StartNodeType, StandNodeTypeOption> = {
-	[StartNodeType.REST_API]: {keys: ['o23', 'node', 'start', 'type', StartNodeType.REST_API], value: '[Rest API]'},
-	[StartNodeType.STANDARD]: {keys: ['o23', 'node', 'start', 'type', StartNodeType.STANDARD], value: '[Standard]'}
-};
-
-export interface StartNodeState {
-	type: StartNodeType;
-}
-
 export const StartNodeWidget = (props: StartNodeWidgetProps) => {
 	const {node, engine} = props;
 
-	const [state] = useState<StartNodeState>(() => {
-		return {
-			type: StartNodeType.REST_API
-		};
-	});
+	const def = node.def;
+
+	const firstTitleRole = () => {
+		if (isPipelineDef(def) && VUtils.isNotBlank(def.route)) {
+			return 'route';
+		}
+		return (void 0);
+	};
+	const firstTitle = () => {
+		if (isPipelineDef(def) && VUtils.isNotBlank(def.route)) {
+			return def.route;
+		}
+		return <IntlLabel keys={['o23', 'node', 'start']} value="Start"/>;
+	};
+	const secondTitleRole = () => {
+		if (isPipelineDef(def) && VUtils.isNotBlank(def.route)) {
+			return 'method';
+		}
+		return (void 0);
+	};
+	const secondTitle = () => {
+		if (isPipelineDef(def)) {
+			if (VUtils.isNotBlank(def.route)) {
+				return `[${def.method || 'post'}]`;
+			} else {
+				return <IntlLabel keys={['o23', 'pipeline', 'type', def.type]} value="Rest API"/>;
+			}
+		}
+		return <IntlLabel keys={['o23', 'pipeline', 'type', def.type]} value={def.type.replace('-', '')}/>;
+	};
 
 	return <StartNodeContainer>
 		<StartNodeHeader>
-			<StartNodeTitle>
-				<IntlLabel keys={['o23', 'node', 'start']} value="Start"/>
+			<StartNodeTitle data-role={firstTitleRole()}>
+				{firstTitle()}
 			</StartNodeTitle>
-			<StartNodeTypeLabel>
-				<IntlLabel keys={StartNodeTypeOptions[state.type].keys} value={StartNodeTypeOptions[state.type].value}/>
-			</StartNodeTypeLabel>
+			<StartNodeSecondTitle data-role={secondTitleRole()}>
+				{secondTitle()}
+			</StartNodeSecondTitle>
 		</StartNodeHeader>
 		<StartNodeBody>
+			{isPipelineDef(def)
+				? <>
+					{VUtils.isNotBlank(def.route) ? null :
+						<RestApiVariablePortWidget label={(def.method || 'post').toUpperCase()}/>}
+					<RestApiVariablePortWidget label="Headers"/>
+					<RestApiVariablePortWidget label="Path Parameters"/>
+					<RestApiVariablePortWidget label="Query Parameters"/>
+					<RestApiVariablePortWidget label="Expose Headers"/>
+					<RestApiVariablePortWidget label="Expose File"/>
+				</>
+				: null}
 			<NextStepPortWidget port={node.getPort(NextStepPortModel.NAME) as NextStepPortModel} engine={engine}/>
 		</StartNodeBody>
 	</StartNodeContainer>;
