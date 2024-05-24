@@ -20,7 +20,7 @@
 	- Column E: 200
 	- Column F: 200
 	- Column G: 100
-- Label::::columnA
+- Input::::columnA
 - Caption::::
 	- label: Say Hello to World
 	- click: alert: Hello World!
@@ -41,6 +41,12 @@
 		- text: X
 		- fill: plain
 		- click: alert: X
+		- visible:
+			- on: columnA
+			- handle:
+			  ```javascript
+			  return (model.columnA ?? '').endsWith('#1');
+			  ```
 	- Button::
 		- fill: plain
 		- tails: $icons.view

@@ -4,7 +4,8 @@ import {
 	NUtils,
 	PropValue,
 	VUtils,
-	WrappedAttributes
+	WrappedAttributes,
+	Wrapper
 } from '@rainbow-d9/n1';
 import React, {MouseEvent, useEffect, useState} from 'react';
 import {Button, ButtonClickOptions, ButtonFill, ButtonInk} from '../button';
@@ -20,8 +21,7 @@ const ExpandButton = (props: { onClick: () => void }) => {
 		$avs: {$disabled: false, $visible: true}
 	};
 	return <Button $wrapped={$wrapped} ink={ButtonInk.PRIMARY} fill={ButtonFill.PLAIN} leads={['$icons.expand']}
-	               click={onClick}
-	               data-w="d9-table-row-operator"/>;
+	               click={onClick} data-role="d9-table-row-operator"/>;
 };
 const CollapseButton = (props: { onClick: () => void }) => {
 	const {onClick} = props;
@@ -30,8 +30,7 @@ const CollapseButton = (props: { onClick: () => void }) => {
 		$avs: {$disabled: false, $visible: true}
 	};
 	return <Button $wrapped={$wrapped} ink={ButtonInk.PRIMARY} fill={ButtonFill.PLAIN} leads={['$icons.collapse']}
-	               click={onClick}
-	               data-w="d9-table-row-operator"/>;
+	               click={onClick} data-role="d9-table-row-operator"/>;
 };
 const RemoveButton = (props: { onClick: () => void }) => {
 	const {onClick} = props;
@@ -40,8 +39,7 @@ const RemoveButton = (props: { onClick: () => void }) => {
 		$avs: {$disabled: false, $visible: true}
 	};
 	return <Button $wrapped={$wrapped} ink={ButtonInk.PRIMARY} fill={ButtonFill.PLAIN} leads={['$icons.remove']}
-	               click={onClick}
-	               data-w="d9-table-row-operator"/>;
+	               click={onClick} data-role="d9-table-row-operator"/>;
 };
 const CustomButton = (props: {
 	def: TableRowButtonDef;
@@ -50,10 +48,11 @@ const CustomButton = (props: {
 	prebuilt: { remove: () => void; expand: () => void; collapse: () => void }
 }) => {
 	const {
-		def: {prebuilt, click, ...rest},
+		def,
 		$wrapped: {$root, $array, $model, $p2r},
 		expandable, expanded, prebuilt: {remove, expand, collapse}
 	} = props;
+	const {prebuilt, click, ...rest} = def;
 
 	if (!expandable && (prebuilt === 'expand' || prebuilt === 'collapse')) {
 		return null;
@@ -81,10 +80,8 @@ const CustomButton = (props: {
 				break;
 		}
 	};
-	const $wrapped: WrappedAttributes = {
-		$root, $model, $p2r, $onValueChange: VUtils.noop, $avs: {$disabled: false, $visible: true}
-	};
-	return <Button $wrapped={$wrapped} click={onClick} {...rest} data-w="d9-table-row-operator"/>;
+	const operatorDef = {...rest, $wt: rest.$wt || 'Button', 'data-role': 'd9-table-row-operator', click: onClick};
+	return <Wrapper $root={$root} $model={$model} $p2r={$p2r} {...operatorDef}/>;
 };
 
 export const TableRowOperators = (props: {

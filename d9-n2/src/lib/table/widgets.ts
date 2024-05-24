@@ -218,10 +218,7 @@ export const ATableRowOperators = styled.div.attrs<{ rowIndex: number; rowSpan: 
         padding: 0;
     }
 
-    > button[data-w=d9-table-row-operator] {
-        display: flex;
-        position: relative;
-        align-items: center;
+    > button[data-w=d9-button][data-role=d9-table-row-operator] {
         padding: 0;
         margin-top: calc((${CssVars.TABLE_CELL_HEIGHT} - ${CssVars.TABLE_BUTTON_HEIGHT}) / 2);
         height: ${CssVars.TABLE_BUTTON_HEIGHT};
