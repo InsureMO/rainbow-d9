@@ -50,6 +50,7 @@ export const PreviousStepPortContainer = styled.div.attrs({[DOM_KEY_WIDGET]: 'o2
     color: ${PlaygroundCssVars.NODE_PREVIOUS_STEP_PORT_COLOR};
     background: ${PlaygroundCssVars.NODE_PREVIOUS_STEP_PORT_BACKGROUND};
     height: ${PlaygroundCssVars.NODE_PORT_HEIGHT};
+    border: ${PlaygroundCssVars.NODE_PREVIOUS_STEP_PORT_BORDER};
     border-top-right-radius: calc(${PlaygroundCssVars.NODE_PORT_HEIGHT} / 2);
     border-bottom-right-radius: calc(${PlaygroundCssVars.NODE_PORT_HEIGHT} / 2);
     font-weight: ${PlaygroundCssVars.NODE_PREVIOUS_STEP_PORT_FONT_WEIGHT};

@@ -52,6 +52,7 @@ export const NextStepPortContainer = styled.div.attrs({[DOM_KEY_WIDGET]: 'o23-pl
     color: ${PlaygroundCssVars.NODE_NEXT_STEP_PORT_COLOR};
     background: ${PlaygroundCssVars.NODE_NEXT_STEP_PORT_BACKGROUND};
     height: ${PlaygroundCssVars.NODE_PORT_HEIGHT};
+    border: ${PlaygroundCssVars.NODE_NEXT_STEP_PORT_BORDER};
     border-top-left-radius: calc(${PlaygroundCssVars.NODE_PORT_HEIGHT} / 2);
     border-bottom-left-radius: calc(${PlaygroundCssVars.NODE_PORT_HEIGHT} / 2);
     font-weight: ${PlaygroundCssVars.NODE_NEXT_STEP_PORT_FONT_WEIGHT};

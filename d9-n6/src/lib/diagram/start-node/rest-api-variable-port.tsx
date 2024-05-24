@@ -12,6 +12,7 @@ export const RestApiVariablePortContainer = styled.div.attrs({[DOM_KEY_WIDGET]: 
     color: ${PlaygroundCssVars.NODE_REST_API_VARIABLE_PORT_COLOR};
     background: ${PlaygroundCssVars.NODE_REST_API_VARIABLE_PORT_BACKGROUND};
     height: ${PlaygroundCssVars.NODE_PORT_HEIGHT};
+    border: ${PlaygroundCssVars.NODE_REST_API_VARIABLE_PORT_BORDER};
     border-top-right-radius: calc(${PlaygroundCssVars.NODE_PORT_HEIGHT} / 2);
     border-bottom-right-radius: calc(${PlaygroundCssVars.NODE_PORT_HEIGHT} / 2);
     font-weight: ${PlaygroundCssVars.NODE_REST_API_VARIABLE_PORT_FONT_WEIGHT};
