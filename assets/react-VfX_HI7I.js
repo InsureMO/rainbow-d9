@@ -1,5 +1,25 @@
-import { s as schedulerExports, P as PropTypes, I as IMask } from "./vendor-TSR6RXc3.js";
-import { g as getDefaultExportFromCjs } from "./babel-AnpZxJH-.js";
+import { T as schedulerExports, U as PropTypes, V as IMask, _ as _values, X as _keys, Y as _filter, Z as _isEqual, $ as _forEach, a0 as _last, a1 as Point, a2 as _debounce, a3 as _cloneDeep, a4 as _flatMap, a5 as _map, a6 as Rectangle, a7 as _mapValues, a8 as _intersection, a9 as boundingBoxFromPoints, aa as _slice, ab as _some, ac as index, ad as _isFinite, ae as _size, af as boundingBoxFromPolygons, ag as BezierCurve, ah as pathfinding, ai as _first, aj as _concat, ak as _get, al as _minBy, am as _maxBy, an as _defer, ao as _range, ap as Path, aq as _reduce } from "./vendor-ctmAJdvj.js";
+import { c as createCache, s as serializeStyles, n as newStyled } from "./emotion-FZLYEHGf.js";
+import { g as getDefaultExportFromCjs } from "./babel-zvTTnt5j.js";
+function _mergeNamespaces(n2, m2) {
+  for (var i = 0; i < m2.length; i++) {
+    const e2 = m2[i];
+    if (typeof e2 !== "string" && !Array.isArray(e2)) {
+      for (const k2 in e2) {
+        if (k2 !== "default" && !(k2 in n2)) {
+          const d2 = Object.getOwnPropertyDescriptor(e2, k2);
+          if (d2) {
+            Object.defineProperty(n2, k2, d2.get ? d2 : {
+              enumerable: true,
+              get: () => e2[k2]
+            });
+          }
+        }
+      }
+    }
+  }
+  return Object.freeze(Object.defineProperty(n2, Symbol.toStringTag, { value: "Module" }));
+}
 var jsxRuntime = { exports: {} };
 var reactJsxRuntime_production_min = {};
 var react = { exports: {} };
@@ -128,7 +148,7 @@ function R$1(a, b2, e2, d2, c2) {
     throw b2 = String(a), Error("Objects are not valid as a React child (found: " + ("[object Object]" === b2 ? "object with keys {" + Object.keys(a).join(", ") + "}" : b2) + "). If you meant to render a collection of children, use an array instead.");
   return h2;
 }
-function S$1(a, b2, e2) {
+function S$c(a, b2, e2) {
   if (null == a)
     return a;
   var d2 = [], c2 = 0;
@@ -155,18 +175,18 @@ function T$1(a) {
   throw a._result;
 }
 var U$1 = { current: null }, V$1 = { transition: null }, W$1 = { ReactCurrentDispatcher: U$1, ReactCurrentBatchConfig: V$1, ReactCurrentOwner: K$1 };
-react_production_min.Children = { map: S$1, forEach: function(a, b2, e2) {
-  S$1(a, function() {
+react_production_min.Children = { map: S$c, forEach: function(a, b2, e2) {
+  S$c(a, function() {
     b2.apply(this, arguments);
   }, e2);
 }, count: function(a) {
   var b2 = 0;
-  S$1(a, function() {
+  S$c(a, function() {
     b2++;
   });
   return b2;
 }, toArray: function(a) {
-  return S$1(a, function(a2) {
+  return S$c(a, function(a2) {
     return a2;
   }) || [];
 }, only: function(a) {
@@ -290,6 +310,10 @@ react_production_min.version = "18.2.0";
 }
 var reactExports = react.exports;
 const React = /* @__PURE__ */ getDefaultExportFromCjs(reactExports);
+const React$1 = /* @__PURE__ */ _mergeNamespaces({
+  __proto__: null,
+  default: React
+}, [reactExports]);
 /**
  * @license React
  * react-jsx-runtime.production.min.js
@@ -299,14 +323,14 @@ const React = /* @__PURE__ */ getDefaultExportFromCjs(reactExports);
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  */
-var f$2 = reactExports, k$2 = Symbol.for("react.element"), l$2 = Symbol.for("react.fragment"), m$4 = Object.prototype.hasOwnProperty, n$2 = f$2.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED.ReactCurrentOwner, p$3 = { key: true, ref: true, __self: true, __source: true };
+var f$2 = reactExports, k$2 = Symbol.for("react.element"), l$2 = Symbol.for("react.fragment"), m$3 = Object.prototype.hasOwnProperty, n$2 = f$2.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED.ReactCurrentOwner, p$3 = { key: true, ref: true, __self: true, __source: true };
 function q$2(c2, a, g2) {
   var b2, d2 = {}, e2 = null, h2 = null;
   void 0 !== g2 && (e2 = "" + g2);
   void 0 !== a.key && (e2 = "" + a.key);
   void 0 !== a.ref && (h2 = a.ref);
   for (b2 in a)
-    m$4.call(a, b2) && !p$3.hasOwnProperty(b2) && (d2[b2] = a[b2]);
+    m$3.call(a, b2) && !p$3.hasOwnProperty(b2) && (d2[b2] = a[b2]);
   if (c2 && c2.defaultProps)
     for (b2 in a = c2.defaultProps, a)
       void 0 === d2[b2] && (d2[b2] = a[b2]);
@@ -4575,7 +4599,7 @@ function Ej(a, b2) {
         null === d2 ? b2 || null === a.tail ? a.tail = null : a.tail.sibling = null : d2.sibling = null;
     }
 }
-function S(a) {
+function S$b(a) {
   var b2 = null !== a.alternate && a.alternate.child === a.child, c2 = 0, d2 = 0;
   if (b2)
     for (var e2 = a.child; null !== e2; )
@@ -4601,9 +4625,9 @@ function Fj(a, b2, c2) {
     case 12:
     case 9:
     case 14:
-      return S(b2), null;
+      return S$b(b2), null;
     case 1:
-      return Zf(b2.type) && $f(), S(b2), null;
+      return Zf(b2.type) && $f(), S$b(b2), null;
     case 3:
       d2 = b2.stateNode;
       Jh();
@@ -4614,7 +4638,7 @@ function Fj(a, b2, c2) {
       if (null === a || null === a.child)
         Gg(b2) ? b2.flags |= 4 : null === a || a.memoizedState.isDehydrated && 0 === (b2.flags & 256) || (b2.flags |= 1024, null !== zg && (Gj(zg), zg = null));
       Bj(a, b2);
-      S(b2);
+      S$b(b2);
       return null;
     case 5:
       Lh(b2);
@@ -4626,7 +4650,7 @@ function Fj(a, b2, c2) {
         if (!d2) {
           if (null === b2.stateNode)
             throw Error(p$2(166));
-          S(b2);
+          S$b(b2);
           return null;
         }
         a = Hh(Eh.current);
@@ -4824,7 +4848,7 @@ function Fj(a, b2, c2) {
         }
         null !== b2.ref && (b2.flags |= 512, b2.flags |= 2097152);
       }
-      S(b2);
+      S$b(b2);
       return null;
     case 6:
       if (a && null != b2.stateNode)
@@ -4852,7 +4876,7 @@ function Fj(a, b2, c2) {
         } else
           d2 = (9 === c2.nodeType ? c2 : c2.ownerDocument).createTextNode(d2), d2[Of] = b2, b2.stateNode = d2;
       }
-      S(b2);
+      S$b(b2);
       return null;
     case 13:
       E(M);
@@ -4871,7 +4895,7 @@ function Fj(a, b2, c2) {
             f2[Of] = b2;
           } else
             Ig(), 0 === (b2.flags & 128) && (b2.memoizedState = null), b2.flags |= 4;
-          S(b2);
+          S$b(b2);
           f2 = false;
         } else
           null !== zg && (Gj(zg), zg = null), f2 = true;
@@ -4883,19 +4907,19 @@ function Fj(a, b2, c2) {
       d2 = null !== d2;
       d2 !== (null !== a && null !== a.memoizedState) && d2 && (b2.child.flags |= 8192, 0 !== (b2.mode & 1) && (null === a || 0 !== (M.current & 1) ? 0 === T && (T = 3) : uj()));
       null !== b2.updateQueue && (b2.flags |= 4);
-      S(b2);
+      S$b(b2);
       return null;
     case 4:
-      return Jh(), Bj(a, b2), null === a && sf(b2.stateNode.containerInfo), S(b2), null;
+      return Jh(), Bj(a, b2), null === a && sf(b2.stateNode.containerInfo), S$b(b2), null;
     case 10:
-      return Rg(b2.type._context), S(b2), null;
+      return Rg(b2.type._context), S$b(b2), null;
     case 17:
-      return Zf(b2.type) && $f(), S(b2), null;
+      return Zf(b2.type) && $f(), S$b(b2), null;
     case 19:
       E(M);
       f2 = b2.memoizedState;
       if (null === f2)
-        return S(b2), null;
+        return S$b(b2), null;
       d2 = 0 !== (b2.flags & 128);
       g2 = f2.rendering;
       if (null === g2)
@@ -4925,18 +4949,18 @@ function Fj(a, b2, c2) {
         if (!d2)
           if (a = Mh(g2), null !== a) {
             if (b2.flags |= 128, d2 = true, c2 = a.updateQueue, null !== c2 && (b2.updateQueue = c2, b2.flags |= 4), Ej(f2, true), null === f2.tail && "hidden" === f2.tailMode && !g2.alternate && !I)
-              return S(b2), null;
+              return S$b(b2), null;
           } else
             2 * B() - f2.renderingStartTime > Hj && 1073741824 !== c2 && (b2.flags |= 128, d2 = true, Ej(f2, false), b2.lanes = 4194304);
         f2.isBackwards ? (g2.sibling = b2.child, b2.child = g2) : (c2 = f2.last, null !== c2 ? c2.sibling = g2 : b2.child = g2, f2.last = g2);
       }
       if (null !== f2.tail)
         return b2 = f2.tail, f2.rendering = b2, f2.tail = b2.sibling, f2.renderingStartTime = B(), b2.sibling = null, c2 = M.current, G(M, d2 ? c2 & 1 | 2 : c2 & 1), b2;
-      S(b2);
+      S$b(b2);
       return null;
     case 22:
     case 23:
-      return Ij(), d2 = null !== b2.memoizedState, null !== a && null !== a.memoizedState !== d2 && (b2.flags |= 8192), d2 && 0 !== (b2.mode & 1) ? 0 !== (gj & 1073741824) && (S(b2), b2.subtreeFlags & 6 && (b2.flags |= 8192)) : S(b2), null;
+      return Ij(), d2 = null !== b2.memoizedState, null !== a && null !== a.memoizedState !== d2 && (b2.flags |= 8192), d2 && 0 !== (b2.mode & 1) ? 0 !== (gj & 1073741824) && (S$b(b2), b2.subtreeFlags & 6 && (b2.flags |= 8192)) : S$b(b2), null;
     case 24:
       return null;
     case 25:
@@ -7275,10 +7299,10 @@ function checkDCE() {
   reactDom.exports = reactDom_production_min;
 }
 var reactDomExports = reactDom.exports;
-var m$3 = reactDomExports;
+var m$2 = reactDomExports;
 {
-  client.createRoot = m$3.createRoot;
-  client.hydrateRoot = m$3.hydrateRoot;
+  client.createRoot = m$2.createRoot;
+  client.hydrateRoot = m$2.hydrateRoot;
 }
 var reactIs$2 = { exports: {} };
 var reactIs_production_min$1 = {};
@@ -7290,7 +7314,7 @@ var reactIs_production_min$1 = {};
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  */
-var b$1 = "function" === typeof Symbol && Symbol.for, c$1 = b$1 ? Symbol.for("react.element") : 60103, d$1 = b$1 ? Symbol.for("react.portal") : 60106, e$1 = b$1 ? Symbol.for("react.fragment") : 60107, f$1 = b$1 ? Symbol.for("react.strict_mode") : 60108, g$1 = b$1 ? Symbol.for("react.profiler") : 60114, h$1 = b$1 ? Symbol.for("react.provider") : 60109, k$1 = b$1 ? Symbol.for("react.context") : 60110, l$1 = b$1 ? Symbol.for("react.async_mode") : 60111, m$2 = b$1 ? Symbol.for("react.concurrent_mode") : 60111, n$1 = b$1 ? Symbol.for("react.forward_ref") : 60112, p$1 = b$1 ? Symbol.for("react.suspense") : 60113, q$1 = b$1 ? Symbol.for("react.suspense_list") : 60120, r = b$1 ? Symbol.for("react.memo") : 60115, t$1 = b$1 ? Symbol.for("react.lazy") : 60116, v$1 = b$1 ? Symbol.for("react.block") : 60121, w = b$1 ? Symbol.for("react.fundamental") : 60117, x = b$1 ? Symbol.for("react.responder") : 60118, y = b$1 ? Symbol.for("react.scope") : 60119;
+var b$1 = "function" === typeof Symbol && Symbol.for, c$1 = b$1 ? Symbol.for("react.element") : 60103, d$1 = b$1 ? Symbol.for("react.portal") : 60106, e$1 = b$1 ? Symbol.for("react.fragment") : 60107, f$1 = b$1 ? Symbol.for("react.strict_mode") : 60108, g$1 = b$1 ? Symbol.for("react.profiler") : 60114, h$1 = b$1 ? Symbol.for("react.provider") : 60109, k$1 = b$1 ? Symbol.for("react.context") : 60110, l$1 = b$1 ? Symbol.for("react.async_mode") : 60111, m$1 = b$1 ? Symbol.for("react.concurrent_mode") : 60111, n$1 = b$1 ? Symbol.for("react.forward_ref") : 60112, p$1 = b$1 ? Symbol.for("react.suspense") : 60113, q$1 = b$1 ? Symbol.for("react.suspense_list") : 60120, r = b$1 ? Symbol.for("react.memo") : 60115, t$1 = b$1 ? Symbol.for("react.lazy") : 60116, v$1 = b$1 ? Symbol.for("react.block") : 60121, w = b$1 ? Symbol.for("react.fundamental") : 60117, x = b$1 ? Symbol.for("react.responder") : 60118, y = b$1 ? Symbol.for("react.scope") : 60119;
 function z(a) {
   if ("object" === typeof a && null !== a) {
     var u2 = a.$$typeof;
@@ -7298,7 +7322,7 @@ function z(a) {
       case c$1:
         switch (a = a.type, a) {
           case l$1:
-          case m$2:
+          case m$1:
           case e$1:
           case g$1:
           case f$1:
@@ -7322,10 +7346,10 @@ function z(a) {
   }
 }
 function A(a) {
-  return z(a) === m$2;
+  return z(a) === m$1;
 }
 reactIs_production_min$1.AsyncMode = l$1;
-reactIs_production_min$1.ConcurrentMode = m$2;
+reactIs_production_min$1.ConcurrentMode = m$1;
 reactIs_production_min$1.ContextConsumer = k$1;
 reactIs_production_min$1.ContextProvider = h$1;
 reactIs_production_min$1.Element = c$1;
@@ -7375,7 +7399,7 @@ reactIs_production_min$1.isSuspense = function(a) {
   return z(a) === p$1;
 };
 reactIs_production_min$1.isValidElementType = function(a) {
-  return "string" === typeof a || "function" === typeof a || a === e$1 || a === m$2 || a === g$1 || a === f$1 || a === p$1 || a === q$1 || "object" === typeof a && null !== a && (a.$$typeof === t$1 || a.$$typeof === r || a.$$typeof === h$1 || a.$$typeof === k$1 || a.$$typeof === n$1 || a.$$typeof === w || a.$$typeof === x || a.$$typeof === y || a.$$typeof === v$1);
+  return "string" === typeof a || "function" === typeof a || a === e$1 || a === m$1 || a === g$1 || a === f$1 || a === p$1 || a === q$1 || "object" === typeof a && null !== a && (a.$$typeof === t$1 || a.$$typeof === r || a.$$typeof === h$1 || a.$$typeof === k$1 || a.$$typeof === n$1 || a.$$typeof === w || a.$$typeof === x || a.$$typeof === y || a.$$typeof === v$1);
 };
 reactIs_production_min$1.typeOf = z;
 {
@@ -7463,7 +7487,7 @@ function hoistNonReactStatics(targetComponent, sourceComponent, blacklist) {
   return targetComponent;
 }
 var hoistNonReactStatics_cjs = hoistNonReactStatics;
-const m$1 = /* @__PURE__ */ getDefaultExportFromCjs(hoistNonReactStatics_cjs);
+const hoistNonReactStatics$1 = /* @__PURE__ */ getDefaultExportFromCjs(hoistNonReactStatics_cjs);
 const MASK_PROPS = {
   // common
   mask: PropTypes.oneOfType([PropTypes.array, PropTypes.func, PropTypes.string, PropTypes.instanceOf(RegExp), PropTypes.oneOf([Date, Number, IMask.Masked]), PropTypes.instanceOf(IMask.Masked)]),
@@ -7674,7 +7698,7 @@ function useIMask(opts, _temp) {
     (_maskRef$current = maskRef.current) == null || _maskRef$current.destroy();
     maskRef.current = null;
   }, []);
-  const _onAccept = reactExports.useCallback((event) => {
+  const _onAccept = reactExports.useCallback((event2) => {
     const m2 = maskRef.current;
     if (!m2)
       return;
@@ -7686,9 +7710,9 @@ function useIMask(opts, _temp) {
     setTypedValue(m2.typedValue);
     setUnmaskedValue(m2.unmaskedValue);
     setValue(m2.value);
-    onAccept == null || onAccept(m2.value, m2, event);
+    onAccept == null || onAccept(m2.value, m2, event2);
   }, [onAccept]);
-  const _onComplete = reactExports.useCallback((event) => maskRef.current && (onComplete == null ? void 0 : onComplete(maskRef.current.value, maskRef.current, event)), [onComplete]);
+  const _onComplete = reactExports.useCallback((event2) => maskRef.current && (onComplete == null ? void 0 : onComplete(maskRef.current.value, maskRef.current, event2)), [onComplete]);
   reactExports.useEffect(() => {
     const el2 = ref.current;
     if (!el2 || !(opts != null && opts.mask))
@@ -7763,6 +7787,3690 @@ function useIMask(opts, _temp) {
     setTypedValue
   };
 }
+class Toolkit {
+  /**
+   * Generats a unique ID (thanks Stack overflow :3)
+   * @returns {String}
+   */
+  static UID() {
+    if (Toolkit.TESTING) {
+      Toolkit.TESTING_UID++;
+      return `${Toolkit.TESTING_UID}`;
+    }
+    return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, (c2) => {
+      const r2 = Math.random() * 16 | 0;
+      const v2 = c2 === "x" ? r2 : r2 & 3 | 8;
+      return v2.toString(16);
+    });
+  }
+  static closest(element, selector) {
+    if (!Element.prototype.closest) {
+      Element.prototype.closest = function(s) {
+        var el2 = this;
+        do {
+          if (Element.prototype.matches.call(el2, s))
+            return el2;
+          el2 = el2.parentElement || el2.parentNode;
+        } while (el2 !== null && el2.nodeType === 1);
+        return null;
+      };
+    }
+    return element.closest(selector);
+  }
+}
+Toolkit.TESTING = false;
+Toolkit.TESTING_UID = 0;
+class BaseObserver {
+  constructor() {
+    this.listeners = {};
+  }
+  fireEventInternal(fire, k2, event2) {
+    this.iterateListeners((listener) => {
+      if (!fire && !event2.firing) {
+        return false;
+      }
+      if (listener[k2]) {
+        listener[k2](event2);
+      }
+    });
+  }
+  fireEvent(event2, k2) {
+    event2 = Object.assign({ firing: true, stopPropagation: () => {
+      event2.firing = false;
+    } }, event2);
+    this.fireEventInternal(true, "eventWillFire", Object.assign(Object.assign({}, event2), { function: k2 }));
+    this.fireEventInternal(false, k2, event2);
+    this.fireEventInternal(true, "eventDidFire", Object.assign(Object.assign({}, event2), { function: k2 }));
+  }
+  iterateListeners(cb2) {
+    for (let id2 in this.listeners) {
+      const res = cb2(this.listeners[id2]);
+      if (res === false) {
+        return;
+      }
+    }
+  }
+  getListenerHandle(listener) {
+    for (let id2 in this.listeners) {
+      if (this.listeners[id2] === listener) {
+        return {
+          id: id2,
+          listener,
+          deregister: () => {
+            delete this.listeners[id2];
+          }
+        };
+      }
+    }
+  }
+  registerListener(listener) {
+    const id2 = Toolkit.UID();
+    this.listeners[id2] = listener;
+    return {
+      id: id2,
+      listener,
+      deregister: () => {
+        delete this.listeners[id2];
+      }
+    };
+  }
+  deregisterListener(listener) {
+    if (typeof listener === "object") {
+      listener.deregister();
+      return true;
+    }
+    const handle = this.getListenerHandle(listener);
+    if (handle) {
+      handle.deregister();
+      return true;
+    }
+    return false;
+  }
+}
+class FactoryBank extends BaseObserver {
+  constructor() {
+    super();
+    this.factories = {};
+  }
+  getFactories() {
+    return _values(this.factories);
+  }
+  clearFactories() {
+    for (let factory in this.factories) {
+      this.deregisterFactory(factory);
+    }
+  }
+  getFactory(type) {
+    if (!this.factories[type]) {
+      throw new Error(`Cannot find factory with type [${type}]`);
+    }
+    return this.factories[type];
+  }
+  registerFactory(factory) {
+    factory.setFactoryBank(this);
+    this.factories[factory.getType()] = factory;
+    this.fireEvent({ factory }, "factoryAdded");
+  }
+  deregisterFactory(type) {
+    const factory = this.factories[type];
+    factory.setFactoryBank(null);
+    delete this.factories[type];
+    this.fireEvent({ factory }, "factoryRemoved");
+  }
+}
+var InputType;
+(function(InputType2) {
+  InputType2["MOUSE_DOWN"] = "mouse-down";
+  InputType2["MOUSE_UP"] = "mouse-up";
+  InputType2["MOUSE_MOVE"] = "mouse-move";
+  InputType2["MOUSE_WHEEL"] = "mouse-wheel";
+  InputType2["KEY_DOWN"] = "key-down";
+  InputType2["KEY_UP"] = "key-up";
+  InputType2["TOUCH_START"] = "touch-start";
+  InputType2["TOUCH_END"] = "touch-end";
+  InputType2["TOUCH_MOVE"] = "touch-move";
+})(InputType || (InputType = {}));
+class Action {
+  constructor(options) {
+    this.options = options;
+    this.id = Toolkit.UID();
+  }
+  setEngine(engine) {
+    this.engine = engine;
+  }
+}
+class ActionEventBus {
+  constructor(engine) {
+    this.actions = {};
+    this.engine = engine;
+    this.keys = {};
+  }
+  getKeys() {
+    return _keys(this.keys);
+  }
+  registerAction(action) {
+    action.setEngine(this.engine);
+    this.actions[action.id] = action;
+    return () => {
+      this.deregisterAction(action);
+    };
+  }
+  deregisterAction(action) {
+    action.setEngine(null);
+    delete this.actions[action.id];
+  }
+  getActionsForType(type) {
+    return _filter(this.actions, (action) => {
+      return action.options.type === type;
+    });
+  }
+  getModelForEvent(actionEvent) {
+    if (actionEvent.model) {
+      return actionEvent.model;
+    }
+    return this.engine.getMouseElement(actionEvent.event);
+  }
+  getActionsForEvent(actionEvent) {
+    const { event: event2 } = actionEvent;
+    if (event2.type === "mousedown") {
+      return this.getActionsForType(InputType.MOUSE_DOWN);
+    } else if (event2.type === "mouseup") {
+      return this.getActionsForType(InputType.MOUSE_UP);
+    } else if (event2.type === "keydown") {
+      this.keys[event2.key.toLowerCase()] = true;
+      return this.getActionsForType(InputType.KEY_DOWN);
+    } else if (event2.type === "keyup") {
+      delete this.keys[event2.key.toLowerCase()];
+      return this.getActionsForType(InputType.KEY_UP);
+    } else if (event2.type === "mousemove") {
+      return this.getActionsForType(InputType.MOUSE_MOVE);
+    } else if (event2.type === "wheel") {
+      return this.getActionsForType(InputType.MOUSE_WHEEL);
+    } else if (event2.type === "touchstart") {
+      return this.getActionsForType(InputType.TOUCH_START);
+    } else if (event2.type === "touchend") {
+      return this.getActionsForType(InputType.TOUCH_END);
+    } else if (event2.type === "touchmove") {
+      return this.getActionsForType(InputType.TOUCH_MOVE);
+    }
+    return [];
+  }
+  fireAction(actionEvent) {
+    const actions = this.getActionsForEvent(actionEvent);
+    for (let action of actions) {
+      action.options.fire(actionEvent);
+    }
+  }
+}
+class PanAndZoomCanvasAction extends Action {
+  constructor(options = {}) {
+    super({
+      type: InputType.MOUSE_WHEEL,
+      fire: (actionEvent) => {
+        const { event: event2 } = actionEvent;
+        for (let layer of this.engine.getModel().getLayers()) {
+          layer.allowRepaint(false);
+        }
+        const model = this.engine.getModel();
+        event2.stopPropagation();
+        if (event2.ctrlKey) {
+          const oldZoomFactor = this.engine.getModel().getZoomLevel() / 100;
+          let scrollDelta = options.inverseZoom ? event2.deltaY : -event2.deltaY;
+          scrollDelta /= 3;
+          if (model.getZoomLevel() + scrollDelta > 10) {
+            model.setZoomLevel(model.getZoomLevel() + scrollDelta);
+          }
+          const zoomFactor = model.getZoomLevel() / 100;
+          const boundingRect = event2.currentTarget.getBoundingClientRect();
+          const clientWidth = boundingRect.width;
+          const clientHeight = boundingRect.height;
+          const widthDiff = clientWidth * zoomFactor - clientWidth * oldZoomFactor;
+          const heightDiff = clientHeight * zoomFactor - clientHeight * oldZoomFactor;
+          const clientX = event2.clientX - boundingRect.left;
+          const clientY = event2.clientY - boundingRect.top;
+          const xFactor = (clientX - model.getOffsetX()) / oldZoomFactor / clientWidth;
+          const yFactor = (clientY - model.getOffsetY()) / oldZoomFactor / clientHeight;
+          model.setOffset(model.getOffsetX() - widthDiff * xFactor, model.getOffsetY() - heightDiff * yFactor);
+        } else {
+          let yDelta = options.inverseZoom ? -event2.deltaY : event2.deltaY;
+          let xDelta = options.inverseZoom ? -event2.deltaX : event2.deltaX;
+          model.setOffset(model.getOffsetX() - xDelta, model.getOffsetY() - yDelta);
+        }
+        this.engine.repaintCanvas();
+        for (let layer of this.engine.getModel().getLayers()) {
+          layer.allowRepaint(true);
+        }
+      }
+    });
+  }
+}
+class ZoomCanvasAction extends Action {
+  constructor(options = {}) {
+    super({
+      type: InputType.MOUSE_WHEEL,
+      fire: (actionEvent) => {
+        const { event: event2 } = actionEvent;
+        for (let layer of this.engine.getModel().getLayers()) {
+          layer.allowRepaint(false);
+        }
+        const model = this.engine.getModel();
+        event2.stopPropagation();
+        const oldZoomFactor = this.engine.getModel().getZoomLevel() / 100;
+        let scrollDelta = options.inverseZoom ? -event2.deltaY : event2.deltaY;
+        if (event2.ctrlKey && scrollDelta % 1 !== 0) {
+          scrollDelta /= 3;
+        } else {
+          scrollDelta /= 60;
+        }
+        if (model.getZoomLevel() + scrollDelta > 10) {
+          model.setZoomLevel(model.getZoomLevel() + scrollDelta);
+        }
+        const zoomFactor = model.getZoomLevel() / 100;
+        const boundingRect = event2.currentTarget.getBoundingClientRect();
+        const clientWidth = boundingRect.width;
+        const clientHeight = boundingRect.height;
+        const widthDiff = clientWidth * zoomFactor - clientWidth * oldZoomFactor;
+        const heightDiff = clientHeight * zoomFactor - clientHeight * oldZoomFactor;
+        const clientX = event2.clientX - boundingRect.left;
+        const clientY = event2.clientY - boundingRect.top;
+        const xFactor = (clientX - model.getOffsetX()) / oldZoomFactor / clientWidth;
+        const yFactor = (clientY - model.getOffsetY()) / oldZoomFactor / clientHeight;
+        model.setOffset(model.getOffsetX() - widthDiff * xFactor, model.getOffsetY() - heightDiff * yFactor);
+        this.engine.repaintCanvas();
+        for (let layer of this.engine.getModel().getLayers()) {
+          layer.allowRepaint(true);
+        }
+      }
+    });
+  }
+}
+class DeleteItemsAction extends Action {
+  constructor(options = {}) {
+    const keyCodes = options.keyCodes || [46, 8];
+    const modifiers = Object.assign({ ctrlKey: false, shiftKey: false, altKey: false, metaKey: false }, options.modifiers);
+    super({
+      type: InputType.KEY_DOWN,
+      fire: (event2) => {
+        const { keyCode, ctrlKey, shiftKey, altKey, metaKey } = event2.event;
+        if (keyCodes.indexOf(keyCode) !== -1 && _isEqual({ ctrlKey, shiftKey, altKey, metaKey }, modifiers)) {
+          _forEach(this.engine.getModel().getSelectedEntities(), (model) => {
+            if (!model.isLocked()) {
+              model.remove();
+            }
+          });
+          this.engine.repaintCanvas();
+        }
+      }
+    });
+  }
+}
+class StateMachine extends BaseObserver {
+  constructor(engine) {
+    super();
+    this.engine = engine;
+    this.stateStack = [];
+  }
+  getCurrentState() {
+    return this.currentState;
+  }
+  pushState(state) {
+    this.stateStack.push(state);
+    this.setState(state);
+  }
+  popState() {
+    this.stateStack.pop();
+    this.setState(_last(this.stateStack));
+  }
+  setState(state) {
+    state.setEngine(this.engine);
+    if (this.currentState) {
+      this.currentState.deactivated(state);
+    }
+    const old = this.currentState;
+    this.currentState = state;
+    if (this.currentState) {
+      this.currentState.activated(old);
+      this.fireEvent({
+        newState: state
+      }, "stateChanged");
+    }
+  }
+}
+class CanvasEngine extends BaseObserver {
+  constructor(options = {}) {
+    super();
+    this.model = null;
+    this.eventBus = new ActionEventBus(this);
+    this.stateMachine = new StateMachine(this);
+    this.layerFactories = new FactoryBank();
+    this.registerFactoryBank(this.layerFactories);
+    this.options = Object.assign({ registerDefaultDeleteItemsAction: true, registerDefaultZoomCanvasAction: true, repaintDebounceMs: 0 }, options);
+    if (this.options.registerDefaultZoomCanvasAction === true) {
+      this.eventBus.registerAction(new ZoomCanvasAction());
+    } else if (this.options.registerDefaultPanAndZoomCanvasAction === true) {
+      this.eventBus.registerAction(new PanAndZoomCanvasAction());
+    }
+    if (this.options.registerDefaultDeleteItemsAction === true) {
+      this.eventBus.registerAction(new DeleteItemsAction());
+    }
+  }
+  getStateMachine() {
+    return this.stateMachine;
+  }
+  getRelativeMousePoint(event2) {
+    const point = this.getRelativePoint(event2.clientX, event2.clientY);
+    return new Point((point.x - this.model.getOffsetX()) / (this.model.getZoomLevel() / 100), (point.y - this.model.getOffsetY()) / (this.model.getZoomLevel() / 100));
+  }
+  getRelativePoint(x2, y2) {
+    const canvasRect = this.canvas.getBoundingClientRect();
+    return new Point(x2 - canvasRect.left, y2 - canvasRect.top);
+  }
+  registerFactoryBank(factory) {
+    factory.registerListener({
+      factoryAdded: (event2) => {
+        event2.factory.setDiagramEngine(this);
+      },
+      factoryRemoved: (event2) => {
+        event2.factory.setDiagramEngine(null);
+      }
+    });
+  }
+  getActionEventBus() {
+    return this.eventBus;
+  }
+  getLayerFactories() {
+    return this.layerFactories;
+  }
+  getFactoryForLayer(layer) {
+    if (typeof layer === "string") {
+      return this.layerFactories.getFactory(layer);
+    }
+    return this.layerFactories.getFactory(layer.getType());
+  }
+  setModel(model) {
+    this.model = model;
+    if (this.canvas) {
+      requestAnimationFrame(() => {
+        this.repaintCanvas();
+      });
+    }
+  }
+  getModel() {
+    return this.model;
+  }
+  repaintCanvas(promise) {
+    const { repaintDebounceMs } = this.options;
+    const repaint = () => {
+      this.iterateListeners((listener) => {
+        if (listener.repaintCanvas) {
+          listener.repaintCanvas();
+        }
+      });
+    };
+    let repaintFn = repaint;
+    if (repaintDebounceMs > 0) {
+      repaintFn = _debounce(repaint, repaintDebounceMs);
+    }
+    if (promise) {
+      return new Promise((resolve) => {
+        const l2 = this.registerListener({
+          rendered: () => {
+            resolve();
+            l2.deregister();
+          }
+        });
+        repaintFn();
+      });
+    }
+    repaintFn();
+  }
+  setCanvas(canvas) {
+    if (this.canvas !== canvas) {
+      this.canvas = canvas;
+      if (canvas) {
+        this.fireEvent({}, "canvasReady");
+      }
+    }
+  }
+  getCanvas() {
+    return this.canvas;
+  }
+  getMouseElement(event2) {
+    return null;
+  }
+  zoomToFit() {
+    const xFactor = this.canvas.clientWidth / this.canvas.scrollWidth;
+    const yFactor = this.canvas.clientHeight / this.canvas.scrollHeight;
+    const zoomFactor = xFactor < yFactor ? xFactor : yFactor;
+    this.model.setZoomLevel(this.model.getZoomLevel() * zoomFactor);
+    this.model.setOffset(0, 0);
+    this.repaintCanvas();
+  }
+}
+class BaseEntity extends BaseObserver {
+  constructor(options = {}) {
+    super();
+    this.options = Object.assign({ id: Toolkit.UID() }, options);
+  }
+  getOptions() {
+    return this.options;
+  }
+  getID() {
+    return this.options.id;
+  }
+  doClone(lookupTable = {}, clone) {
+  }
+  clone(lookupTable = {}) {
+    if (lookupTable[this.options.id]) {
+      return lookupTable[this.options.id];
+    }
+    let clone = _cloneDeep(this);
+    clone.options = Object.assign(Object.assign({}, this.options), { id: Toolkit.UID() });
+    clone.clearListeners();
+    lookupTable[this.options.id] = clone;
+    this.doClone(lookupTable, clone);
+    return clone;
+  }
+  clearListeners() {
+    this.listeners = {};
+  }
+  deserialize(event2) {
+    this.options.id = event2.data.id;
+    this.options.locked = event2.data.locked;
+  }
+  serialize() {
+    return {
+      id: this.options.id,
+      locked: this.options.locked
+    };
+  }
+  fireEvent(event2, k2) {
+    super.fireEvent(Object.assign({ entity: this }, event2), k2);
+  }
+  isLocked() {
+    return this.options.locked;
+  }
+  setLocked(locked = true) {
+    this.options.locked = locked;
+    this.fireEvent({
+      locked
+    }, "lockChanged");
+  }
+}
+class CanvasModel extends BaseEntity {
+  constructor(options = {}) {
+    super(Object.assign({ zoom: 100, gridSize: 0, offsetX: 0, offsetY: 0 }, options));
+    this.layers = [];
+  }
+  getSelectionEntities() {
+    return _flatMap(this.layers, (layer) => {
+      return layer.getSelectionEntities();
+    });
+  }
+  getSelectedEntities() {
+    return _filter(this.getSelectionEntities(), (ob2) => {
+      return ob2.isSelected();
+    });
+  }
+  clearSelection() {
+    _forEach(this.getSelectedEntities(), (element) => {
+      element.setSelected(false);
+    });
+  }
+  getModels() {
+    return _flatMap(this.layers, (layer) => {
+      return _values(layer.getModels());
+    });
+  }
+  addLayer(layer) {
+    layer.setParent(this);
+    layer.registerListener({
+      entityRemoved: (event2) => {
+      }
+    });
+    this.layers.push(layer);
+  }
+  removeLayer(layer) {
+    const index2 = this.layers.indexOf(layer);
+    if (index2 !== -1) {
+      this.layers.splice(index2, 1);
+      return true;
+    }
+    return false;
+  }
+  getLayers() {
+    return this.layers;
+  }
+  setGridSize(size = 0) {
+    this.options.gridSize = size;
+    this.fireEvent({ size }, "gridUpdated");
+  }
+  getGridPosition(pos) {
+    if (this.options.gridSize === 0) {
+      return pos;
+    }
+    return this.options.gridSize * Math.floor((pos + this.options.gridSize / 2) / this.options.gridSize);
+  }
+  deserializeModel(data, engine) {
+    const models = {};
+    const promises = {};
+    const resolvers = {};
+    const event2 = {
+      data,
+      engine,
+      registerModel: (model) => {
+        models[model.getID()] = model;
+        if (resolvers[model.getID()]) {
+          resolvers[model.getID()](model);
+        }
+      },
+      getModel(id2) {
+        if (models[id2]) {
+          return Promise.resolve(models[id2]);
+        }
+        if (!promises[id2]) {
+          promises[id2] = new Promise((resolve) => {
+            resolvers[id2] = resolve;
+          });
+        }
+        return promises[id2];
+      }
+    };
+    this.deserialize(event2);
+  }
+  deserialize(event2) {
+    super.deserialize(event2);
+    this.options.offsetX = event2.data.offsetX;
+    this.options.offsetY = event2.data.offsetY;
+    this.options.zoom = event2.data.zoom;
+    this.options.gridSize = event2.data.gridSize;
+    _forEach(event2.data.layers, (layer) => {
+      const layerOb = event2.engine.getFactoryForLayer(layer.type).generateModel({
+        initialConfig: layer
+      });
+      layerOb.deserialize(Object.assign(Object.assign({}, event2), { data: layer }));
+      this.addLayer(layerOb);
+    });
+  }
+  serialize() {
+    return Object.assign(Object.assign({}, super.serialize()), { offsetX: this.options.offsetX, offsetY: this.options.offsetY, zoom: this.options.zoom, gridSize: this.options.gridSize, layers: _map(this.layers, (layer) => {
+      return layer.serialize();
+    }) });
+  }
+  setZoomLevel(zoom) {
+    this.options.zoom = zoom;
+    this.fireEvent({ zoom }, "zoomUpdated");
+  }
+  setOffset(offsetX, offsetY) {
+    this.options.offsetX = offsetX;
+    this.options.offsetY = offsetY;
+    this.fireEvent({ offsetX, offsetY }, "offsetUpdated");
+  }
+  setOffsetX(offsetX) {
+    this.setOffset(offsetX, this.options.offsetY);
+  }
+  setOffsetY(offsetY) {
+    this.setOffset(this.options.offsetX, offsetY);
+  }
+  getOffsetY() {
+    return this.options.offsetY;
+  }
+  getOffsetX() {
+    return this.options.offsetX;
+  }
+  getZoomLevel() {
+    return this.options.zoom;
+  }
+}
+class AbstractFactory {
+  constructor(type) {
+    this.type = type;
+  }
+  setDiagramEngine(engine) {
+    this.engine = engine;
+  }
+  setFactoryBank(bank) {
+    this.bank = bank;
+  }
+  getType() {
+    return this.type;
+  }
+}
+class AbstractModelFactory extends AbstractFactory {
+}
+class AbstractReactFactory extends AbstractModelFactory {
+}
+class BaseModel extends BaseEntity {
+  constructor(options) {
+    super(options);
+  }
+  performanceTune() {
+    return true;
+  }
+  getParentCanvasModel() {
+    if (!this.parent) {
+      return null;
+    }
+    if (this.parent instanceof CanvasModel) {
+      return this.parent;
+    } else if (this.parent instanceof BaseModel) {
+      return this.parent.getParentCanvasModel();
+    }
+    return null;
+  }
+  getParent() {
+    return this.parent;
+  }
+  setParent(parent) {
+    this.parent = parent;
+  }
+  getSelectionEntities() {
+    return [this];
+  }
+  serialize() {
+    return Object.assign(Object.assign({}, super.serialize()), { type: this.options.type, selected: this.options.selected, extras: this.options.extras });
+  }
+  deserialize(event2) {
+    super.deserialize(event2);
+    this.options.extras = event2.data.extras;
+    this.options.selected = event2.data.selected;
+  }
+  getType() {
+    return this.options.type;
+  }
+  isSelected() {
+    return this.options.selected;
+  }
+  isLocked() {
+    const locked = super.isLocked();
+    if (locked) {
+      return true;
+    }
+    if (this.parent) {
+      return this.parent.isLocked();
+    }
+    return false;
+  }
+  setSelected(selected = true) {
+    if (this.options.selected !== selected) {
+      this.options.selected = selected;
+      this.fireEvent({
+        isSelected: selected
+      }, "selectionChanged");
+    }
+  }
+  remove() {
+    this.fireEvent({}, "entityRemoved");
+  }
+}
+class BasePositionModel extends BaseModel {
+  constructor(options) {
+    super(options);
+    this.position = options.position || new Point(0, 0);
+  }
+  setPosition(x2, y2) {
+    if (x2 instanceof Point) {
+      this.position = x2;
+    } else {
+      this.position = new Point(x2, y2);
+    }
+    this.fireEvent({}, "positionChanged");
+  }
+  getBoundingBox() {
+    return Rectangle.fromPointAndSize(this.position, 0, 0);
+  }
+  deserialize(event2) {
+    super.deserialize(event2);
+    this.position = new Point(event2.data.x, event2.data.y);
+  }
+  serialize() {
+    return Object.assign(Object.assign({}, super.serialize()), { x: this.position.x, y: this.position.y });
+  }
+  getPosition() {
+    return this.position;
+  }
+  getX() {
+    return this.position.x;
+  }
+  getY() {
+    return this.position.y;
+  }
+}
+var EmotionCacheContext = /* @__PURE__ */ reactExports.createContext(
+  // we're doing this to avoid preconstruct's dead code elimination in this one case
+  // because this module is primarily intended for the browser and node
+  // but it's also required in react native and similar environments sometimes
+  // and we could have a special build just for that
+  // but this is much easier and the native packages
+  // might use a different theme context in the future anyway
+  typeof HTMLElement !== "undefined" ? /* @__PURE__ */ createCache({
+    key: "css"
+  }) : null
+);
+EmotionCacheContext.Provider;
+var withEmotionCache = function withEmotionCache2(func) {
+  return /* @__PURE__ */ reactExports.forwardRef(function(props, ref) {
+    var cache = reactExports.useContext(EmotionCacheContext);
+    return func(props, cache, ref);
+  });
+};
+var ThemeContext = /* @__PURE__ */ reactExports.createContext({});
+function css() {
+  for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+    args[_key] = arguments[_key];
+  }
+  return serializeStyles(args);
+}
+var keyframes = function keyframes2() {
+  var insertable = css.apply(void 0, arguments);
+  var name = "animation-" + insertable.name;
+  return {
+    name,
+    styles: "@keyframes " + name + "{" + insertable.styles + "}",
+    anim: 1,
+    toString: function toString() {
+      return "_EMO_" + this.name + "_" + this.styles + "_EMO_";
+    }
+  };
+};
+var S$a;
+(function(S2) {
+  const shared = css`
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		position: absolute;
+		pointer-events: none;
+		transform-origin: 0 0;
+		width: 100%;
+		height: 100%;
+		overflow: visible;
+	`;
+  S2.DivLayer = newStyled.div`
+		${shared}
+	`;
+  S2.SvgLayer = newStyled.svg`
+		${shared}
+	`;
+})(S$a || (S$a = {}));
+class TransformLayerWidget extends reactExports.Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
+  getTransform() {
+    const model = this.props.layer.getParent();
+    return `
+			translate(
+				${model.getOffsetX()}px,
+				${model.getOffsetY()}px)
+			scale(
+				${model.getZoomLevel() / 100}
+			)
+  	`;
+  }
+  getTransformStyle() {
+    if (this.props.layer.getOptions().transformed) {
+      return {
+        transform: this.getTransform()
+      };
+    }
+    return {};
+  }
+  render() {
+    if (this.props.layer.getOptions().isSvg) {
+      return reactExports.createElement(S$a.SvgLayer, { style: this.getTransformStyle() }, this.props.children);
+    }
+    return reactExports.createElement(S$a.DivLayer, { style: this.getTransformStyle() }, this.props.children);
+  }
+}
+class SmartLayerWidget extends reactExports.Component {
+  shouldComponentUpdate() {
+    return this.props.layer.isRepaintEnabled();
+  }
+  render() {
+    return this.props.engine.getFactoryForLayer(this.props.layer).generateReactWidget({ model: this.props.layer });
+  }
+}
+var S$9;
+(function(S2) {
+  S2.Canvas = newStyled.div`
+		position: relative;
+		cursor: move;
+		overflow: hidden;
+	`;
+})(S$9 || (S$9 = {}));
+class CanvasWidget extends reactExports.Component {
+  constructor(props) {
+    super(props);
+    this.ref = reactExports.createRef();
+    this.state = {
+      action: null,
+      diagramEngineListener: null
+    };
+  }
+  componentWillUnmount() {
+    this.props.engine.deregisterListener(this.canvasListener);
+    this.props.engine.setCanvas(null);
+    document.removeEventListener("keyup", this.keyUp);
+    document.removeEventListener("keydown", this.keyDown);
+  }
+  registerCanvas() {
+    this.props.engine.setCanvas(this.ref.current);
+    this.props.engine.iterateListeners((list) => {
+      list.rendered && list.rendered();
+    });
+  }
+  componentDidUpdate() {
+    this.registerCanvas();
+  }
+  componentDidMount() {
+    this.canvasListener = this.props.engine.registerListener({
+      repaintCanvas: () => {
+        this.forceUpdate();
+      }
+    });
+    this.keyDown = (event2) => {
+      this.props.engine.getActionEventBus().fireAction({ event: event2 });
+    };
+    this.keyUp = (event2) => {
+      this.props.engine.getActionEventBus().fireAction({ event: event2 });
+    };
+    document.addEventListener("keyup", this.keyUp);
+    document.addEventListener("keydown", this.keyDown);
+    this.registerCanvas();
+  }
+  render() {
+    const engine = this.props.engine;
+    const model = engine.getModel();
+    return reactExports.createElement(S$9.Canvas, { className: this.props.className, ref: this.ref, onWheel: (event2) => {
+      this.props.engine.getActionEventBus().fireAction({ event: event2 });
+    }, onMouseDown: (event2) => {
+      this.props.engine.getActionEventBus().fireAction({ event: event2 });
+    }, onMouseUp: (event2) => {
+      this.props.engine.getActionEventBus().fireAction({ event: event2 });
+    }, onMouseMove: (event2) => {
+      this.props.engine.getActionEventBus().fireAction({ event: event2 });
+    }, onTouchStart: (event2) => {
+      this.props.engine.getActionEventBus().fireAction({ event: event2 });
+    }, onTouchEnd: (event2) => {
+      this.props.engine.getActionEventBus().fireAction({ event: event2 });
+    }, onTouchMove: (event2) => {
+      this.props.engine.getActionEventBus().fireAction({ event: event2 });
+    } }, model.getLayers().map((layer) => {
+      return reactExports.createElement(
+        TransformLayerWidget,
+        { layer, key: layer.getID() },
+        reactExports.createElement(SmartLayerWidget, { layer, engine: this.props.engine, key: layer.getID() })
+      );
+    }));
+  }
+}
+class LayerModel extends BaseModel {
+  constructor(options = {}) {
+    super(options);
+    this.models = {};
+    this.repaintEnabled = true;
+  }
+  deserialize(event2) {
+    super.deserialize(event2);
+    this.options.isSvg = !!event2.data.isSvg;
+    this.options.transformed = !!event2.data.transformed;
+    _forEach(event2.data.models, (model) => {
+      const modelOb = this.getChildModelFactoryBank(event2.engine).getFactory(model.type).generateModel({
+        initialConfig: model
+      });
+      modelOb.deserialize(Object.assign(Object.assign({}, event2), { data: model }));
+      this.addModel(modelOb);
+    });
+  }
+  serialize() {
+    return Object.assign(Object.assign({}, super.serialize()), { isSvg: this.options.isSvg, transformed: this.options.transformed, models: _mapValues(this.models, (model) => {
+      return model.serialize();
+    }) });
+  }
+  isRepaintEnabled() {
+    return this.repaintEnabled;
+  }
+  allowRepaint(allow = true) {
+    this.repaintEnabled = allow;
+  }
+  remove() {
+    if (this.parent) {
+      this.parent.removeLayer(this);
+    }
+    super.remove();
+  }
+  addModel(model) {
+    model.setParent(this);
+    this.models[model.getID()] = model;
+  }
+  getSelectionEntities() {
+    return _flatMap(this.models, (model) => {
+      return model.getSelectionEntities();
+    });
+  }
+  getModels() {
+    return this.models;
+  }
+  getModel(id2) {
+    return this.models[id2];
+  }
+  removeModel(id2) {
+    const _id = typeof id2 === "string" ? id2 : id2.getID();
+    if (this.models[_id]) {
+      delete this.models[_id];
+      return true;
+    }
+    return false;
+  }
+}
+class SelectionLayerModel extends LayerModel {
+  constructor() {
+    super({
+      transformed: false,
+      isSvg: false,
+      type: "selection"
+    });
+  }
+  setBox(rect) {
+    this.box = rect;
+  }
+  getChildModelFactoryBank() {
+    return null;
+  }
+}
+var S$8;
+(function(S2) {
+  S2.Container = newStyled.div`
+		position: absolute;
+		background-color: rgba(0, 192, 255, 0.2);
+		border: solid 2px rgb(0, 192, 255);
+	`;
+})(S$8 || (S$8 = {}));
+class SelectionBoxWidget extends reactExports.Component {
+  render() {
+    const { rect } = this.props;
+    if (!rect)
+      return null;
+    return reactExports.createElement(S$8.Container, { style: {
+      top: rect.top,
+      left: rect.left,
+      width: rect.width,
+      height: rect.height
+    } });
+  }
+}
+class SelectionBoxLayerFactory extends AbstractReactFactory {
+  constructor() {
+    super("selection");
+  }
+  generateModel(event2) {
+    return new SelectionLayerModel();
+  }
+  generateReactWidget(event2) {
+    return reactExports.createElement(SelectionBoxWidget, { rect: event2.model.box });
+  }
+}
+class PeformanceWidget extends reactExports.Component {
+  shouldComponentUpdate(nextProps, nextState, nextContext) {
+    if (!this.props.model.performanceTune()) {
+      return true;
+    }
+    if (this.props.model !== nextProps.model) {
+      return true;
+    }
+    return !_isEqual(this.props.serialized, nextProps.serialized);
+  }
+  render() {
+    return this.props.children();
+  }
+}
+class State {
+  constructor(options) {
+    this.actions = [];
+    this.keys = [];
+    this.childStates = [];
+    this.options = options;
+  }
+  setEngine(engine) {
+    this.engine = engine;
+  }
+  getOptions() {
+    return this.options;
+  }
+  eject() {
+    this.engine.getStateMachine().popState();
+  }
+  transitionWithEvent(state, event2) {
+    this.engine.getStateMachine().pushState(state);
+    this.engine.getActionEventBus().fireAction(event2);
+  }
+  registerAction(action) {
+    this.actions.push(action);
+  }
+  tryActivateParentState(keys) {
+    if (this.keys.length > 0 && !this.isKeysFullfilled(keys)) {
+      this.eject();
+      return true;
+    }
+    return false;
+  }
+  tryActivateChildState(keys) {
+    const state = this.findStateToActivate(keys);
+    if (state) {
+      this.engine.getStateMachine().pushState(state);
+      return true;
+    }
+    return false;
+  }
+  findStateToActivate(keys) {
+    for (let child of this.childStates) {
+      if (child.isKeysFullfilled(keys)) {
+        return child;
+      }
+    }
+    return null;
+  }
+  isKeysFullfilled(keys) {
+    return _intersection(this.keys, keys).length === this.keys.length;
+  }
+  activated(previous) {
+    const keys = this.engine.getActionEventBus().getKeys();
+    if (this.tryActivateParentState(keys) || this.tryActivateChildState(keys)) {
+      return;
+    }
+    this.handler1 = this.engine.getActionEventBus().registerAction(new Action({
+      type: InputType.KEY_DOWN,
+      fire: () => {
+        this.tryActivateChildState(this.engine.getActionEventBus().getKeys());
+      }
+    }));
+    this.handler2 = this.engine.getActionEventBus().registerAction(new Action({
+      type: InputType.KEY_UP,
+      fire: () => {
+        this.tryActivateParentState(this.engine.getActionEventBus().getKeys());
+      }
+    }));
+    for (let action of this.actions) {
+      this.engine.getActionEventBus().registerAction(action);
+    }
+  }
+  deactivated(next) {
+    if (this.handler1) {
+      this.handler1();
+    }
+    if (this.handler2) {
+      this.handler2();
+    }
+    for (let action of this.actions) {
+      this.engine.getActionEventBus().deregisterAction(action);
+    }
+  }
+}
+class AbstractDisplacementState extends State {
+  constructor(options) {
+    super(options);
+    this.registerAction(new Action({
+      type: InputType.MOUSE_DOWN,
+      fire: (actionEvent) => {
+        const { clientX, clientY } = actionEvent.event;
+        this.handleMoveStart(clientX, clientY);
+      }
+    }));
+    this.registerAction(new Action({
+      type: InputType.MOUSE_MOVE,
+      fire: (actionEvent) => {
+        const { event: event2 } = actionEvent;
+        if (event2.buttons === 0) {
+          this.eject();
+          return;
+        }
+        const { clientX, clientY } = event2;
+        this.handleMove(clientX, clientY, event2);
+      }
+    }));
+    this.registerAction(new Action({
+      type: InputType.MOUSE_UP,
+      fire: () => this.handleMoveEnd()
+    }));
+    this.registerAction(new Action({
+      type: InputType.TOUCH_START,
+      fire: (actionEvent) => {
+        const { clientX, clientY } = actionEvent.event.touches[0];
+        this.handleMoveStart(clientX, clientY);
+      }
+    }));
+    this.registerAction(new Action({
+      type: InputType.TOUCH_MOVE,
+      fire: (actionEvent) => {
+        const { event: event2 } = actionEvent;
+        const { clientX, clientY } = event2.touches[0];
+        this.handleMove(clientX, clientY, event2);
+      }
+    }));
+    this.registerAction(new Action({
+      type: InputType.TOUCH_END,
+      fire: () => this.handleMoveEnd()
+    }));
+  }
+  handleMoveStart(x2, y2) {
+    this.initialX = x2;
+    this.initialY = y2;
+    const rel = this.engine.getRelativePoint(x2, y2);
+    this.initialXRelative = rel.x;
+    this.initialYRelative = rel.y;
+  }
+  handleMove(x2, y2, event2) {
+    this.fireMouseMoved({
+      displacementX: x2 - this.initialX,
+      displacementY: y2 - this.initialY,
+      virtualDisplacementX: (x2 - this.initialX) / (this.engine.getModel().getZoomLevel() / 100),
+      virtualDisplacementY: (y2 - this.initialY) / (this.engine.getModel().getZoomLevel() / 100),
+      event: event2
+    });
+  }
+  handleMoveEnd() {
+    this.eject();
+  }
+}
+var __awaiter = function(thisArg, _arguments, P2, generator) {
+  function adopt(value) {
+    return value instanceof P2 ? value : new P2(function(resolve) {
+      resolve(value);
+    });
+  }
+  return new (P2 || (P2 = Promise))(function(resolve, reject) {
+    function fulfilled(value) {
+      try {
+        step(generator.next(value));
+      } catch (e2) {
+        reject(e2);
+      }
+    }
+    function rejected(value) {
+      try {
+        step(generator["throw"](value));
+      } catch (e2) {
+        reject(e2);
+      }
+    }
+    function step(result) {
+      result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected);
+    }
+    step((generator = generator.apply(thisArg, _arguments || [])).next());
+  });
+};
+class DragCanvasState extends AbstractDisplacementState {
+  constructor(options = {}) {
+    super({
+      name: "drag-canvas"
+    });
+    this.config = Object.assign({ allowDrag: true }, options);
+  }
+  activated(prev) {
+    const _super = Object.create(null, {
+      activated: { get: () => super.activated }
+    });
+    return __awaiter(this, void 0, void 0, function* () {
+      _super.activated.call(this, prev);
+      this.engine.getModel().clearSelection();
+      yield this.engine.repaintCanvas(true);
+      for (let layer of this.engine.getModel().getLayers()) {
+        layer.allowRepaint(false);
+      }
+      this.initialCanvasX = this.engine.getModel().getOffsetX();
+      this.initialCanvasY = this.engine.getModel().getOffsetY();
+    });
+  }
+  deactivated(next) {
+    super.deactivated(next);
+    for (let layer of this.engine.getModel().getLayers()) {
+      layer.allowRepaint(true);
+    }
+  }
+  fireMouseMoved(event2) {
+    if (this.config.allowDrag) {
+      this.engine.getModel().setOffset(this.initialCanvasX + event2.displacementX, this.initialCanvasY + event2.displacementY);
+      this.engine.repaintCanvas();
+    }
+  }
+}
+class SelectionBoxState extends AbstractDisplacementState {
+  constructor() {
+    super({
+      name: "selection-box"
+    });
+  }
+  activated(previous) {
+    super.activated(previous);
+    this.layer = new SelectionLayerModel();
+    this.engine.getModel().addLayer(this.layer);
+  }
+  deactivated(next) {
+    super.deactivated(next);
+    this.layer.remove();
+    this.engine.repaintCanvas();
+  }
+  getBoxDimensions(event2) {
+    let rel;
+    if ("touches" in event2.event) {
+      const touch = event2.event.touches[0];
+      rel = this.engine.getRelativePoint(touch.clientX, touch.clientY);
+    } else {
+      rel = this.engine.getRelativePoint(event2.event.clientX, event2.event.clientY);
+    }
+    return {
+      left: rel.x > this.initialXRelative ? this.initialXRelative : rel.x,
+      top: rel.y > this.initialYRelative ? this.initialYRelative : rel.y,
+      width: Math.abs(rel.x - this.initialXRelative),
+      height: Math.abs(rel.y - this.initialYRelative),
+      right: rel.x < this.initialXRelative ? this.initialXRelative : rel.x,
+      bottom: rel.y < this.initialYRelative ? this.initialYRelative : rel.y
+    };
+  }
+  fireMouseMoved(event2) {
+    this.layer.setBox(this.getBoxDimensions(event2));
+    const relative = this.engine.getRelativeMousePoint({
+      clientX: this.initialX,
+      clientY: this.initialY
+    });
+    if (event2.virtualDisplacementX < 0) {
+      relative.x -= Math.abs(event2.virtualDisplacementX);
+    }
+    if (event2.virtualDisplacementY < 0) {
+      relative.y -= Math.abs(event2.virtualDisplacementY);
+    }
+    const rect = Rectangle.fromPointAndSize(relative, Math.abs(event2.virtualDisplacementX), Math.abs(event2.virtualDisplacementY));
+    for (let model of this.engine.getModel().getSelectionEntities()) {
+      if (model.getBoundingBox) {
+        const bounds = model.getBoundingBox();
+        if (rect.containsPoint(bounds.getTopLeft()) && rect.containsPoint(bounds.getBottomRight())) {
+          model.setSelected(true);
+        } else {
+          model.setSelected(false);
+        }
+      }
+    }
+    this.engine.repaintCanvas();
+  }
+}
+class SelectingState extends State {
+  constructor() {
+    super({
+      name: "selecting"
+    });
+    this.keys = ["shift"];
+    this.registerAction(new Action({
+      type: InputType.MOUSE_DOWN,
+      fire: (event2) => {
+        const element = this.engine.getActionEventBus().getModelForEvent(event2);
+        if (!element) {
+          this.transitionWithEvent(new SelectionBoxState(), event2);
+        } else {
+          element.setSelected(true);
+          this.engine.repaintCanvas();
+        }
+      }
+    }));
+  }
+}
+class MoveItemsState extends AbstractDisplacementState {
+  constructor() {
+    super({
+      name: "move-items"
+    });
+    this.registerAction(new Action({
+      type: InputType.MOUSE_DOWN,
+      fire: (event2) => {
+        const element = this.engine.getActionEventBus().getModelForEvent(event2);
+        if (!element) {
+          return;
+        }
+        if (!element.isSelected()) {
+          this.engine.getModel().clearSelection();
+        }
+        element.setSelected(true);
+        this.engine.repaintCanvas();
+      }
+    }));
+  }
+  activated(previous) {
+    super.activated(previous);
+    this.initialPositions = {};
+  }
+  fireMouseMoved(event2) {
+    const items = this.engine.getModel().getSelectedEntities();
+    const model = this.engine.getModel();
+    for (let item of items) {
+      if (item instanceof BasePositionModel) {
+        if (item.isLocked()) {
+          continue;
+        }
+        if (!this.initialPositions[item.getID()]) {
+          this.initialPositions[item.getID()] = {
+            point: item.getPosition(),
+            item
+          };
+        }
+        const pos = this.initialPositions[item.getID()].point;
+        item.setPosition(model.getGridPosition(pos.x + event2.virtualDisplacementX), model.getGridPosition(pos.y + event2.virtualDisplacementY));
+      }
+    }
+    this.engine.repaintCanvas();
+  }
+}
+class PointModel extends BasePositionModel {
+  constructor(options) {
+    super(Object.assign(Object.assign({}, options), { type: "point" }));
+    this.parent = options.link;
+  }
+  isConnectedToPort() {
+    return this.parent.getPortForPoint(this) !== null;
+  }
+  getLink() {
+    return this.getParent();
+  }
+  remove() {
+    if (this.parent) {
+      this.parent.removePoint(this);
+    }
+    super.remove();
+  }
+  isLocked() {
+    return super.isLocked() || this.getParent().isLocked();
+  }
+}
+class LinkModel extends BaseModel {
+  constructor(options) {
+    super(options);
+    this.points = [
+      new PointModel({
+        link: this
+      }),
+      new PointModel({
+        link: this
+      })
+    ];
+    this.sourcePort = null;
+    this.targetPort = null;
+    this.renderedPaths = [];
+    this.labels = [];
+  }
+  getBoundingBox() {
+    return new Rectangle(boundingBoxFromPoints(_map(this.points, (point) => {
+      return point.getPosition();
+    })));
+  }
+  getSelectionEntities() {
+    if (this.getTargetPort() && this.getSourcePort()) {
+      return super.getSelectionEntities().concat(_slice(this.points, 1, this.points.length - 1));
+    }
+    if (!this.getSourcePort()) {
+      return super.getSelectionEntities().concat(_slice(this.points, 0, this.points.length - 1));
+    }
+    if (!this.getTargetPort()) {
+      return super.getSelectionEntities().concat(_slice(this.points, 1, this.points.length));
+    }
+    return super.getSelectionEntities().concat(this.points);
+  }
+  deserialize(event2) {
+    super.deserialize(event2);
+    this.points = _map(event2.data.points || [], (point) => {
+      var p2 = new PointModel({
+        link: this,
+        position: new Point(point.x, point.y)
+      });
+      p2.deserialize(Object.assign(Object.assign({}, event2), { data: point }));
+      return p2;
+    });
+    _forEach(event2.data.labels || [], (label) => {
+      let labelOb = event2.engine.getFactoryForLabel(label.type).generateModel({});
+      labelOb.deserialize(Object.assign(Object.assign({}, event2), { data: label }));
+      this.addLabel(labelOb);
+    });
+    if (event2.data.target) {
+      event2.getModel(event2.data.targetPort).then((model) => {
+        this.setTargetPort(model);
+      });
+    }
+    if (event2.data.source) {
+      event2.getModel(event2.data.sourcePort).then((model) => {
+        this.setSourcePort(model);
+      });
+    }
+  }
+  getRenderedPath() {
+    return this.renderedPaths;
+  }
+  setRenderedPaths(paths) {
+    this.renderedPaths = paths;
+  }
+  serialize() {
+    return Object.assign(Object.assign({}, super.serialize()), { source: this.sourcePort ? this.sourcePort.getParent().getID() : null, sourcePort: this.sourcePort ? this.sourcePort.getID() : null, target: this.targetPort ? this.targetPort.getParent().getID() : null, targetPort: this.targetPort ? this.targetPort.getID() : null, points: _map(this.points, (point) => {
+      return point.serialize();
+    }), labels: _map(this.labels, (label) => {
+      return label.serialize();
+    }) });
+  }
+  doClone(lookupTable = {}, clone) {
+    clone.setPoints(_map(this.getPoints(), (point) => {
+      return point.clone(lookupTable);
+    }));
+    if (this.sourcePort) {
+      clone.setSourcePort(this.sourcePort.clone(lookupTable));
+    }
+    if (this.targetPort) {
+      clone.setTargetPort(this.targetPort.clone(lookupTable));
+    }
+  }
+  clearPort(port) {
+    if (this.sourcePort === port) {
+      this.setSourcePort(null);
+    } else if (this.targetPort === port) {
+      this.setTargetPort(null);
+    }
+  }
+  remove() {
+    if (this.sourcePort) {
+      this.sourcePort.removeLink(this);
+      delete this.sourcePort;
+    }
+    if (this.targetPort) {
+      this.targetPort.removeLink(this);
+      delete this.targetPort;
+    }
+    super.remove();
+  }
+  isLastPoint(point) {
+    var index2 = this.getPointIndex(point);
+    return index2 === this.points.length - 1;
+  }
+  getPointIndex(point) {
+    return this.points.indexOf(point);
+  }
+  getPointModel(id2) {
+    for (var i = 0; i < this.points.length; i++) {
+      if (this.points[i].getID() === id2) {
+        return this.points[i];
+      }
+    }
+    return null;
+  }
+  getPortForPoint(point) {
+    if (this.sourcePort !== null && this.getFirstPoint().getID() === point.getID()) {
+      return this.sourcePort;
+    }
+    if (this.targetPort !== null && this.getLastPoint().getID() === point.getID()) {
+      return this.targetPort;
+    }
+    return null;
+  }
+  getPointForPort(port) {
+    if (this.sourcePort !== null && this.sourcePort.getID() === port.getID()) {
+      return this.getFirstPoint();
+    }
+    if (this.targetPort !== null && this.targetPort.getID() === port.getID()) {
+      return this.getLastPoint();
+    }
+    return null;
+  }
+  getFirstPoint() {
+    return this.points[0];
+  }
+  getLastPoint() {
+    return this.points[this.points.length - 1];
+  }
+  setSourcePort(port) {
+    if (port !== null) {
+      port.addLink(this);
+    }
+    if (this.sourcePort !== null) {
+      this.sourcePort.removeLink(this);
+    }
+    this.sourcePort = port;
+    this.fireEvent({ port }, "sourcePortChanged");
+    if (port === null || port === void 0 ? void 0 : port.reportedPosition) {
+      this.getPointForPort(port).setPosition(port.getCenter());
+    }
+  }
+  getSourcePort() {
+    return this.sourcePort;
+  }
+  getTargetPort() {
+    return this.targetPort;
+  }
+  setTargetPort(port) {
+    if (port !== null) {
+      port.addLink(this);
+    }
+    if (this.targetPort !== null) {
+      this.targetPort.removeLink(this);
+    }
+    this.targetPort = port;
+    this.fireEvent({ port }, "targetPortChanged");
+    if (port === null || port === void 0 ? void 0 : port.reportedPosition) {
+      this.getPointForPort(port).setPosition(port.getCenter());
+    }
+  }
+  point(x2, y2, index2 = 1) {
+    return this.addPoint(this.generatePoint(x2, y2), index2);
+  }
+  addLabel(label) {
+    label.setParent(this);
+    this.labels.push(label);
+  }
+  getPoints() {
+    return this.points;
+  }
+  getLabels() {
+    return this.labels;
+  }
+  setPoints(points) {
+    _forEach(points, (point) => {
+      point.setParent(this);
+    });
+    this.points = points;
+  }
+  removePoint(pointModel) {
+    if (this.isLastPoint(pointModel))
+      this.remove();
+    this.points.splice(this.getPointIndex(pointModel), 1);
+  }
+  removePointsBefore(pointModel) {
+    this.points.splice(0, this.getPointIndex(pointModel));
+  }
+  removePointsAfter(pointModel) {
+    this.points.splice(this.getPointIndex(pointModel) + 1);
+  }
+  removeMiddlePoints() {
+    if (this.points.length > 2) {
+      this.points.splice(1, this.points.length - 2);
+    }
+  }
+  addPoint(pointModel, index2 = 1) {
+    pointModel.setParent(this);
+    this.points.splice(index2, 0, pointModel);
+    return pointModel;
+  }
+  generatePoint(x2 = 0, y2 = 0) {
+    return new PointModel({
+      link: this,
+      position: new Point(x2, y2)
+    });
+  }
+}
+class NodeModel extends BasePositionModel {
+  constructor(options) {
+    super(options);
+    this.ports = {};
+    this.width = 0;
+    this.height = 0;
+  }
+  getBoundingBox() {
+    return Rectangle.fromPointAndSize(this.getPosition(), this.width, this.height);
+  }
+  setPosition(x2, y2) {
+    const old = this.position;
+    if (x2 instanceof Point) {
+      super.setPosition(x2);
+    } else {
+      super.setPosition(x2, y2);
+    }
+    _forEach(this.ports, (port) => {
+      port.setPosition(port.getX() + this.position.x - old.x, port.getY() + this.position.y - old.y);
+    });
+  }
+  deserialize(event2) {
+    super.deserialize(event2);
+    _forEach(event2.data.ports, (port) => {
+      let portOb = event2.engine.getFactoryForPort(port.type).generateModel({});
+      portOb.deserialize(Object.assign(Object.assign({}, event2), { data: port }));
+      event2.registerModel(portOb);
+      this.addPort(portOb);
+    });
+  }
+  serialize() {
+    return Object.assign(Object.assign({}, super.serialize()), { ports: _map(this.ports, (port) => {
+      return port.serialize();
+    }) });
+  }
+  doClone(lookupTable = {}, clone) {
+    clone.ports = {};
+    _forEach(this.ports, (port) => {
+      clone.addPort(port.clone(lookupTable));
+    });
+  }
+  remove() {
+    super.remove();
+    _forEach(this.ports, (port) => {
+      _forEach(port.getLinks(), (link) => {
+        link.remove();
+      });
+    });
+  }
+  getPortFromID(id2) {
+    for (var i in this.ports) {
+      if (this.ports[i].getID() === id2) {
+        return this.ports[i];
+      }
+    }
+    return null;
+  }
+  getLink(id2) {
+    for (let portID in this.ports) {
+      const links = this.ports[portID].getLinks();
+      if (links[id2]) {
+        return links[id2];
+      }
+    }
+  }
+  getPort(name) {
+    return this.ports[name];
+  }
+  getPorts() {
+    return this.ports;
+  }
+  removePort(port) {
+    for (let link of _values(port.getLinks())) {
+      link.clearPort(port);
+    }
+    if (this.ports[port.getName()]) {
+      this.ports[port.getName()].setParent(null);
+      delete this.ports[port.getName()];
+    }
+  }
+  addPort(port) {
+    port.setParent(this);
+    this.ports[port.getName()] = port;
+    return port;
+  }
+  updateDimensions({ width, height }) {
+    this.width = width;
+    this.height = height;
+  }
+}
+class NodeLayerModel extends LayerModel {
+  constructor() {
+    super({
+      type: "diagram-nodes",
+      isSvg: false,
+      transformed: true
+    });
+  }
+  addModel(model) {
+    if (!(model instanceof NodeModel)) {
+      throw new Error("Can only add nodes to this layer");
+    }
+    model.registerListener({
+      entityRemoved: () => {
+        this.getParent().removeNode(model);
+      }
+    });
+    super.addModel(model);
+  }
+  getChildModelFactoryBank(engine) {
+    return engine.getNodeFactories();
+  }
+  getNodes() {
+    return this.getModels();
+  }
+}
+class LinkLayerModel extends LayerModel {
+  constructor() {
+    super({
+      type: "diagram-links",
+      isSvg: true,
+      transformed: true
+    });
+  }
+  addModel(model) {
+    if (!(model instanceof LinkModel)) {
+      throw new Error("Can only add links to this layer");
+    }
+    model.registerListener({
+      entityRemoved: () => {
+        this.getParent().removeLink(model);
+      }
+    });
+    super.addModel(model);
+  }
+  getLinks() {
+    return this.getModels();
+  }
+  getChildModelFactoryBank(engine) {
+    return engine.getLinkFactories();
+  }
+}
+class DiagramModel extends CanvasModel {
+  constructor(options = {}) {
+    super(options);
+    this.addLayer(new LinkLayerModel());
+    this.addLayer(new NodeLayerModel());
+  }
+  deserialize(event2) {
+    this.layers = [];
+    super.deserialize(event2);
+  }
+  addLayer(layer) {
+    super.addLayer(layer);
+    if (layer instanceof NodeLayerModel) {
+      this.activeNodeLayer = layer;
+    }
+    if (layer instanceof LinkLayerModel) {
+      this.activeLinkLayer = layer;
+    }
+  }
+  getLinkLayers() {
+    return _filter(this.layers, (layer) => {
+      return layer instanceof LinkLayerModel;
+    });
+  }
+  getNodeLayers() {
+    return _filter(this.layers, (layer) => {
+      return layer instanceof NodeLayerModel;
+    });
+  }
+  getActiveNodeLayer() {
+    if (!this.activeNodeLayer) {
+      const layers = this.getNodeLayers();
+      if (layers.length === 0) {
+        this.addLayer(new NodeLayerModel());
+      } else {
+        this.activeNodeLayer = layers[0];
+      }
+    }
+    return this.activeNodeLayer;
+  }
+  getActiveLinkLayer() {
+    if (!this.activeLinkLayer) {
+      const layers = this.getLinkLayers();
+      if (layers.length === 0) {
+        this.addLayer(new LinkLayerModel());
+      } else {
+        this.activeLinkLayer = layers[0];
+      }
+    }
+    return this.activeLinkLayer;
+  }
+  getNode(node) {
+    for (const layer of this.getNodeLayers()) {
+      const model = layer.getModel(node);
+      if (model) {
+        return model;
+      }
+    }
+  }
+  getLink(link) {
+    for (const layer of this.getLinkLayers()) {
+      const model = layer.getModel(link);
+      if (model) {
+        return model;
+      }
+    }
+  }
+  addAll(...models) {
+    _forEach(models, (model) => {
+      if (model instanceof LinkModel) {
+        this.addLink(model);
+      } else if (model instanceof NodeModel) {
+        this.addNode(model);
+      }
+    });
+    return models;
+  }
+  addLink(link) {
+    this.getActiveLinkLayer().addModel(link);
+    this.fireEvent({
+      link,
+      isCreated: true
+    }, "linksUpdated");
+    return link;
+  }
+  addNode(node) {
+    this.getActiveNodeLayer().addModel(node);
+    this.fireEvent({ node, isCreated: true }, "nodesUpdated");
+    return node;
+  }
+  removeLink(link) {
+    const removed = _some(this.getLinkLayers(), (layer) => {
+      return layer.removeModel(link);
+    });
+    if (removed) {
+      this.fireEvent({ link, isCreated: false }, "linksUpdated");
+    }
+  }
+  removeNode(node) {
+    const removed = _some(this.getNodeLayers(), (layer) => {
+      return layer.removeModel(node);
+    });
+    if (removed) {
+      this.fireEvent({ node, isCreated: false }, "nodesUpdated");
+    }
+  }
+  getLinks() {
+    return _flatMap(this.getLinkLayers(), (layer) => {
+      return _values(layer.getModels());
+    });
+  }
+  getNodes() {
+    return _flatMap(this.getNodeLayers(), (layer) => {
+      return _values(layer.getModels());
+    });
+  }
+}
+class LabelModel extends BaseModel {
+  constructor(options) {
+    super(Object.assign(Object.assign({}, options), { offsetX: options.offsetX || 0, offsetY: options.offsetY || 0 }));
+  }
+  deserialize(event2) {
+    super.deserialize(event2);
+    this.options.offsetX = event2.data.offsetX;
+    this.options.offsetY = event2.data.offsetY;
+  }
+  serialize() {
+    return Object.assign(Object.assign({}, super.serialize()), { offsetX: this.options.offsetX, offsetY: this.options.offsetY });
+  }
+}
+var S$7;
+(function(S2) {
+  S2.Label = newStyled.div`
+		display: inline-block;
+		position: absolute;
+	`;
+  S2.Foreign = newStyled.foreignObject`
+		pointer-events: none;
+		overflow: visible;
+	`;
+})(S$7 || (S$7 = {}));
+class LabelWidget extends reactExports.Component {
+  constructor(props) {
+    super(props);
+    this.findPathAndRelativePositionToRenderLabel = (index2) => {
+      const link = this.props.label.getParent();
+      const lengths = link.getRenderedPath().map((path) => path.getTotalLength());
+      let labelPosition = lengths.reduce((previousValue, currentValue) => previousValue + currentValue, 0) * (index2 / (link.getLabels().length + 1));
+      let pathIndex = 0;
+      while (pathIndex < link.getRenderedPath().length) {
+        if (labelPosition - lengths[pathIndex] < 0) {
+          return {
+            path: link.getRenderedPath()[pathIndex],
+            position: labelPosition
+          };
+        }
+        labelPosition -= lengths[pathIndex];
+        pathIndex++;
+      }
+    };
+    this.calculateLabelPosition = () => {
+      const found = this.findPathAndRelativePositionToRenderLabel(this.props.index + 1);
+      if (!found) {
+        return;
+      }
+      const { path, position } = found;
+      const labelDimensions = {
+        width: this.ref.current.offsetWidth,
+        height: this.ref.current.offsetHeight
+      };
+      const pathCentre = path.getPointAtLength(position);
+      const labelCoordinates = {
+        x: pathCentre.x - labelDimensions.width / 2 + this.props.label.getOptions().offsetX,
+        y: pathCentre.y - labelDimensions.height / 2 + this.props.label.getOptions().offsetY
+      };
+      this.ref.current.style.transform = `translate(${labelCoordinates.x}px, ${labelCoordinates.y}px)`;
+    };
+    this.ref = reactExports.createRef();
+  }
+  componentDidUpdate() {
+    window.requestAnimationFrame(this.calculateLabelPosition);
+  }
+  componentDidMount() {
+    window.requestAnimationFrame(this.calculateLabelPosition);
+  }
+  render() {
+    const canvas = this.props.engine.getCanvas();
+    return reactExports.createElement(
+      S$7.Foreign,
+      { key: this.props.label.getID(), width: canvas === null || canvas === void 0 ? void 0 : canvas.offsetWidth, height: canvas === null || canvas === void 0 ? void 0 : canvas.offsetHeight },
+      reactExports.createElement(S$7.Label, { ref: this.ref }, this.props.engine.getFactoryForLabel(this.props.label).generateReactWidget({ model: this.props.label }))
+    );
+  }
+}
+class LinkWidget extends reactExports.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      sourcePort: null,
+      targetPort: null
+    };
+  }
+  componentWillUnmount() {
+    if (this.sourceListener) {
+      this.sourceListener.deregister();
+    }
+    if (this.targetListener) {
+      this.targetListener.deregister();
+    }
+  }
+  static getDerivedStateFromProps(nextProps, prevState) {
+    return {
+      sourcePort: nextProps.link.getSourcePort(),
+      targetPort: nextProps.link.getTargetPort()
+    };
+  }
+  installTarget() {
+    this.targetListener && this.targetListener.deregister();
+    if (!this.props.link.getTargetPort())
+      return;
+    this.targetListener = this.props.link.getTargetPort().registerListener({
+      reportInitialPosition: (event2) => {
+        this.forceUpdate();
+      }
+    });
+  }
+  installSource() {
+    this.sourceListener && this.sourceListener.deregister();
+    if (!this.props.link.getSourcePort())
+      return;
+    this.sourceListener = this.props.link.getSourcePort().registerListener({
+      reportInitialPosition: (event2) => {
+        this.forceUpdate();
+      }
+    });
+  }
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    if (prevState.sourcePort !== this.state.sourcePort) {
+      this.installSource();
+    }
+    if (prevState.targetPort !== this.state.targetPort) {
+      this.installTarget();
+    }
+  }
+  static generateLinePath(firstPoint, lastPoint) {
+    return `M${firstPoint.getX()},${firstPoint.getY()} L ${lastPoint.getX()},${lastPoint.getY()}`;
+  }
+  componentDidMount() {
+    if (this.props.link.getSourcePort()) {
+      this.installSource();
+    }
+    if (this.props.link.getTargetPort()) {
+      this.installTarget();
+    }
+  }
+  render() {
+    const { link } = this.props;
+    if (link.getSourcePort() && !link.getSourcePort().reportedPosition) {
+      return null;
+    }
+    if (link.getTargetPort() && !link.getTargetPort().reportedPosition) {
+      return null;
+    }
+    return reactExports.createElement(PeformanceWidget, { model: this.props.link, serialized: this.props.link.serialize() }, () => {
+      return reactExports.createElement(
+        "g",
+        { "data-linkid": this.props.link.getID() },
+        this.props.diagramEngine.generateWidgetForLink(link),
+        _map(this.props.link.getLabels(), (labelModel, index2) => {
+          return reactExports.createElement(LabelWidget, { key: labelModel.getID(), engine: this.props.diagramEngine, label: labelModel, index: index2 });
+        })
+      );
+    });
+  }
+}
+var S$6;
+(function(S2) {
+  S2.Container = newStyled.div``;
+})(S$6 || (S$6 = {}));
+class LinkLayerWidget extends reactExports.Component {
+  render() {
+    return reactExports.createElement(
+      reactExports.Fragment,
+      null,
+      //only perform these actions when we have a diagram
+      _map(this.props.layer.getLinks(), (link) => {
+        return reactExports.createElement(LinkWidget, { key: link.getID(), link, diagramEngine: this.props.engine });
+      })
+    );
+  }
+}
+class LinkLayerFactory extends AbstractReactFactory {
+  constructor() {
+    super("diagram-links");
+  }
+  generateModel(event2) {
+    return new LinkLayerModel();
+  }
+  generateReactWidget(event2) {
+    return reactExports.createElement(LinkLayerWidget, { layer: event2.model, engine: this.engine });
+  }
+}
+var S$5;
+(function(S2) {
+  S2.Node = newStyled.div`
+		position: absolute;
+		-webkit-touch-callout: none; /* iOS Safari */
+		-webkit-user-select: none; /* Chrome/Safari/Opera */
+		user-select: none;
+		cursor: move;
+		pointer-events: all;
+	`;
+})(S$5 || (S$5 = {}));
+class NodeWidget extends reactExports.Component {
+  constructor(props) {
+    super(props);
+    this.ref = reactExports.createRef();
+  }
+  componentWillUnmount() {
+    var _a;
+    this.ob.disconnect();
+    this.ob = null;
+    (_a = this.listener) === null || _a === void 0 ? void 0 : _a.deregister();
+    this.listener = null;
+  }
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    if (this.listener && this.props.node !== prevProps.node) {
+      this.listener.deregister();
+      this.installSelectionListener();
+    }
+  }
+  installSelectionListener() {
+    this.listener = this.props.node.registerListener({
+      selectionChanged: (event2) => {
+        this.forceUpdate();
+      }
+    });
+  }
+  updateSize(width, height) {
+    this.props.node.updateDimensions({ width, height });
+    try {
+      _forEach(this.props.node.getPorts(), (port) => {
+        port.updateCoords(this.props.diagramEngine.getPortCoords(port));
+      });
+    } catch (ex) {
+    }
+  }
+  componentDidMount() {
+    this.ob = new index((entities) => {
+      const bounds = entities[0].contentRect;
+      this.updateSize(bounds.width, bounds.height);
+    });
+    const b2 = this.ref.current.getBoundingClientRect();
+    this.updateSize(b2.width, b2.height);
+    this.ob.observe(this.ref.current);
+    this.installSelectionListener();
+  }
+  render() {
+    return reactExports.createElement(PeformanceWidget, { model: this.props.node, serialized: this.props.node.serialize() }, () => {
+      return reactExports.createElement(S$5.Node, { className: "node", ref: this.ref, "data-nodeid": this.props.node.getID(), style: {
+        top: this.props.node.getY(),
+        left: this.props.node.getX()
+      } }, this.props.diagramEngine.generateWidgetForNode(this.props.node));
+    });
+  }
+}
+class NodeLayerWidget extends reactExports.Component {
+  render() {
+    return reactExports.createElement(reactExports.Fragment, null, _map(this.props.layer.getNodes(), (node) => {
+      return reactExports.createElement(NodeWidget, { key: node.getID(), diagramEngine: this.props.engine, node });
+    }));
+  }
+}
+class NodeLayerFactory extends AbstractReactFactory {
+  constructor() {
+    super("diagram-nodes");
+  }
+  generateModel(event2) {
+    return new NodeLayerModel();
+  }
+  generateReactWidget(event2) {
+    return reactExports.createElement(NodeLayerWidget, { layer: event2.model, engine: this.engine });
+  }
+}
+var PortModelAlignment;
+(function(PortModelAlignment2) {
+  PortModelAlignment2["TOP"] = "top";
+  PortModelAlignment2["LEFT"] = "left";
+  PortModelAlignment2["BOTTOM"] = "bottom";
+  PortModelAlignment2["RIGHT"] = "right";
+})(PortModelAlignment || (PortModelAlignment = {}));
+class PortModel extends BasePositionModel {
+  constructor(options) {
+    super(options);
+    this.links = {};
+    this.reportedPosition = false;
+  }
+  deserialize(event2) {
+    super.deserialize(event2);
+    this.reportedPosition = false;
+    this.options.name = event2.data.name;
+    this.options.alignment = event2.data.alignment;
+  }
+  serialize() {
+    return Object.assign(Object.assign({}, super.serialize()), { name: this.options.name, alignment: this.options.alignment, parentNode: this.parent.getID(), links: _map(this.links, (link) => {
+      return link.getID();
+    }) });
+  }
+  setPosition(x2, y2) {
+    let old = this.position;
+    super.setPosition(x2, y2);
+    _forEach(this.getLinks(), (link) => {
+      let point = link.getPointForPort(this);
+      point.setPosition(point.getX() + x2 - old.x, point.getY() + y2 - old.y);
+    });
+  }
+  doClone(lookupTable = {}, clone) {
+    clone.links = {};
+    clone.parent = this.getParent().clone(lookupTable);
+  }
+  getNode() {
+    return this.getParent();
+  }
+  getName() {
+    return this.options.name;
+  }
+  getMaximumLinks() {
+    return this.options.maximumLinks;
+  }
+  setMaximumLinks(maximumLinks) {
+    this.options.maximumLinks = maximumLinks;
+  }
+  removeLink(link) {
+    delete this.links[link.getID()];
+  }
+  addLink(link) {
+    this.links[link.getID()] = link;
+  }
+  getLinks() {
+    return this.links;
+  }
+  createLinkModel() {
+    if (_isFinite(this.options.maximumLinks)) {
+      var numberOfLinks = _size(this.links);
+      if (this.options.maximumLinks === 1 && numberOfLinks >= 1) {
+        return _values(this.links)[0];
+      } else if (numberOfLinks >= this.options.maximumLinks) {
+        return null;
+      }
+    }
+    return null;
+  }
+  reportPosition() {
+    _forEach(this.getLinks(), (link) => {
+      link.getPointForPort(this).setPosition(this.getCenter());
+    });
+    this.fireEvent({
+      entity: this
+    }, "reportInitialPosition");
+  }
+  getCenter() {
+    return new Point(this.getX() + this.width / 2, this.getY() + this.height / 2);
+  }
+  getBoundingBox() {
+    return Rectangle.fromPointAndSize(this.position, this.width, this.height);
+  }
+  updateCoords(coords) {
+    this.width = coords.getWidth();
+    this.height = coords.getHeight();
+    this.setPosition(coords.getTopLeft());
+    this.reportedPosition = true;
+    this.reportPosition();
+  }
+  canLinkToPort(port) {
+    return true;
+  }
+  isLocked() {
+    return super.isLocked() || this.getParent().isLocked();
+  }
+}
+class PortWidget extends reactExports.Component {
+  constructor(props) {
+    super(props);
+    this.ref = reactExports.createRef();
+  }
+  report() {
+    this.props.port.updateCoords(this.props.engine.getPortCoords(this.props.port, this.ref.current));
+  }
+  componentWillUnmount() {
+    this.engineListenerHandle && this.engineListenerHandle.deregister();
+  }
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    if (!this.props.port.reportedPosition) {
+      this.report();
+    }
+  }
+  componentDidMount() {
+    this.engineListenerHandle = this.props.engine.registerListener({
+      canvasReady: () => {
+        this.report();
+      }
+    });
+    if (this.props.engine.getCanvas()) {
+      this.report();
+    }
+  }
+  getExtraProps() {
+    if (Toolkit.TESTING) {
+      const links = _keys(this.props.port.getNode().getPort(this.props.port.getName()).links).join(",");
+      return {
+        "data-links": links
+      };
+    }
+    return {};
+  }
+  render() {
+    return reactExports.createElement("div", Object.assign({ style: this.props.style, ref: this.ref, className: `port ${this.props.className || ""}`, "data-name": this.props.port.getName(), "data-nodeid": this.props.port.getNode().getID() }, this.getExtraProps()), this.props.children);
+  }
+}
+class DragNewLinkState extends AbstractDisplacementState {
+  constructor(options = {}) {
+    super({ name: "drag-new-link" });
+    this.config = Object.assign({ allowLooseLinks: true, allowLinksFromLockedPorts: false }, options);
+    this.registerAction(new Action({
+      type: InputType.MOUSE_DOWN,
+      fire: (event2) => {
+        this.port = this.engine.getMouseElement(event2.event);
+        if (!this.config.allowLinksFromLockedPorts && this.port.isLocked()) {
+          this.eject();
+          return;
+        }
+        this.link = this.port.createLinkModel();
+        if (!this.link) {
+          this.eject();
+          return;
+        }
+        this.link.setSelected(true);
+        this.link.setSourcePort(this.port);
+        this.engine.getModel().addLink(this.link);
+        this.port.reportPosition();
+      }
+    }));
+    this.registerAction(new Action({
+      type: InputType.MOUSE_UP,
+      fire: (event2) => {
+        const model = this.engine.getMouseElement(event2.event);
+        if (model instanceof PortModel) {
+          if (this.port.canLinkToPort(model)) {
+            this.link.setTargetPort(model);
+            model.reportPosition();
+            this.engine.repaintCanvas();
+            return;
+          } else {
+            this.link.remove();
+            this.engine.repaintCanvas();
+            return;
+          }
+        }
+        if (!this.config.allowLooseLinks) {
+          this.link.remove();
+          this.engine.repaintCanvas();
+        }
+      }
+    }));
+  }
+  /**
+   * Calculates the link's far-end point position on mouse move.
+   * In order to be as precise as possible the mouse initialXRelative & initialYRelative are taken into account as well
+   * as the possible engine offset
+   */
+  fireMouseMoved(event2) {
+    const portPos = this.port.getPosition();
+    const zoomLevelPercentage = this.engine.getModel().getZoomLevel() / 100;
+    const engineOffsetX = this.engine.getModel().getOffsetX() / zoomLevelPercentage;
+    const engineOffsetY = this.engine.getModel().getOffsetY() / zoomLevelPercentage;
+    const initialXRelative = this.initialXRelative / zoomLevelPercentage;
+    const initialYRelative = this.initialYRelative / zoomLevelPercentage;
+    const linkNextX = portPos.x - engineOffsetX + (initialXRelative - portPos.x) + event2.virtualDisplacementX;
+    const linkNextY = portPos.y - engineOffsetY + (initialYRelative - portPos.y) + event2.virtualDisplacementY;
+    this.link.getLastPoint().setPosition(linkNextX, linkNextY);
+    this.engine.repaintCanvas();
+  }
+}
+class DragDiagramItemsState extends MoveItemsState {
+  constructor() {
+    super();
+    this.registerAction(new Action({
+      type: InputType.MOUSE_UP,
+      fire: (event2) => {
+        const item = this.engine.getMouseElement(event2.event);
+        if (item instanceof PortModel) {
+          _forEach(this.initialPositions, (position) => {
+            if (position.item instanceof PointModel) {
+              const link = position.item.getParent();
+              if (link.getLastPoint() !== position.item) {
+                return;
+              }
+              if (link.getSourcePort().canLinkToPort(item)) {
+                link.setTargetPort(item);
+                item.reportPosition();
+                this.engine.repaintCanvas();
+              }
+            }
+          });
+        }
+      }
+    }));
+  }
+}
+class DefaultDiagramState extends State {
+  constructor() {
+    super({
+      name: "default-diagrams"
+    });
+    this.childStates = [new SelectingState()];
+    this.dragCanvas = new DragCanvasState();
+    this.dragNewLink = new DragNewLinkState();
+    this.dragItems = new DragDiagramItemsState();
+    this.registerAction(new Action({
+      type: InputType.MOUSE_DOWN,
+      fire: (event2) => {
+        const element = this.engine.getActionEventBus().getModelForEvent(event2);
+        if (!element) {
+          this.transitionWithEvent(this.dragCanvas, event2);
+        } else if (element instanceof PortModel) {
+          this.transitionWithEvent(this.dragNewLink, event2);
+        } else {
+          this.transitionWithEvent(this.dragItems, event2);
+        }
+      }
+    }));
+    this.registerAction(new Action({
+      type: InputType.TOUCH_START,
+      fire: (event2) => {
+        this.transitionWithEvent(this.dragCanvas, event2);
+      }
+    }));
+  }
+}
+class DiagramEngine extends CanvasEngine {
+  constructor(options = {}) {
+    super(options);
+    this.maxNumberPointsPerLink = 1e3;
+    this.nodeFactories = new FactoryBank();
+    this.linkFactories = new FactoryBank();
+    this.portFactories = new FactoryBank();
+    this.labelFactories = new FactoryBank();
+    const setup = (factory) => {
+      factory.registerListener({
+        factoryAdded: (event2) => {
+          event2.factory.setDiagramEngine(this);
+        },
+        factoryRemoved: (event2) => {
+          event2.factory.setDiagramEngine(null);
+        }
+      });
+    };
+    setup(this.nodeFactories);
+    setup(this.linkFactories);
+    setup(this.portFactories);
+    setup(this.labelFactories);
+  }
+  /**
+   * Gets a model and element under the mouse cursor
+   */
+  getMouseElement(event2) {
+    var target = event2.target;
+    var diagramModel = this.model;
+    var element = Toolkit.closest(target, ".port[data-name]");
+    if (element) {
+      var nodeElement = Toolkit.closest(target, ".node[data-nodeid]");
+      return diagramModel.getNode(nodeElement.getAttribute("data-nodeid")).getPort(element.getAttribute("data-name"));
+    }
+    element = Toolkit.closest(target, ".point[data-id]");
+    if (element) {
+      return diagramModel.getLink(element.getAttribute("data-linkid")).getPointModel(element.getAttribute("data-id"));
+    }
+    element = Toolkit.closest(target, "[data-linkid]");
+    if (element) {
+      return diagramModel.getLink(element.getAttribute("data-linkid"));
+    }
+    element = Toolkit.closest(target, ".node[data-nodeid]");
+    if (element) {
+      return diagramModel.getNode(element.getAttribute("data-nodeid"));
+    }
+    return null;
+  }
+  //!-------------- FACTORIES ------------
+  getNodeFactories() {
+    return this.nodeFactories;
+  }
+  getLinkFactories() {
+    return this.linkFactories;
+  }
+  getLabelFactories() {
+    return this.labelFactories;
+  }
+  getPortFactories() {
+    return this.portFactories;
+  }
+  getFactoryForNode(node) {
+    if (typeof node === "string") {
+      return this.nodeFactories.getFactory(node);
+    }
+    return this.nodeFactories.getFactory(node.getType());
+  }
+  getFactoryForLink(link) {
+    if (typeof link === "string") {
+      return this.linkFactories.getFactory(link);
+    }
+    return this.linkFactories.getFactory(link.getType());
+  }
+  getFactoryForLabel(label) {
+    if (typeof label === "string") {
+      return this.labelFactories.getFactory(label);
+    }
+    return this.labelFactories.getFactory(label.getType());
+  }
+  getFactoryForPort(port) {
+    if (typeof port === "string") {
+      return this.portFactories.getFactory(port);
+    }
+    return this.portFactories.getFactory(port.getType());
+  }
+  generateWidgetForLink(link) {
+    return this.getFactoryForLink(link).generateReactWidget({ model: link });
+  }
+  generateWidgetForNode(node) {
+    return this.getFactoryForNode(node).generateReactWidget({ model: node });
+  }
+  getNodeElement(node) {
+    const selector = this.canvas.querySelector(`.node[data-nodeid="${node.getID()}"]`);
+    if (selector === null) {
+      throw new Error("Cannot find Node element with nodeID: [" + node.getID() + "]");
+    }
+    return selector;
+  }
+  getNodePortElement(port) {
+    var selector = this.canvas.querySelector(`.port[data-name="${port.getName()}"][data-nodeid="${port.getParent().getID()}"]`);
+    if (selector === null) {
+      throw new Error("Cannot find Node Port element with nodeID: [" + port.getParent().getID() + "] and name: [" + port.getName() + "]");
+    }
+    return selector;
+  }
+  getPortCenter(port) {
+    return this.getPortCoords(port).getOrigin();
+  }
+  /**
+   * Calculate rectangular coordinates of the port passed in.
+   */
+  getPortCoords(port, element) {
+    if (!this.canvas) {
+      throw new Error("Canvas needs to be set first");
+    }
+    if (!element) {
+      element = this.getNodePortElement(port);
+    }
+    const sourceRect = element.getBoundingClientRect();
+    const point = this.getRelativeMousePoint({
+      clientX: sourceRect.left,
+      clientY: sourceRect.top
+    });
+    const zoom = this.model.getZoomLevel() / 100;
+    return Rectangle.fromPointAndSize(point, sourceRect.width / zoom, sourceRect.height / zoom);
+  }
+  /**
+   * Determine the width and height of the node passed in.
+   * It currently assumes nodes have a rectangular shape, can be overriden for customised shapes.
+   */
+  getNodeDimensions(node) {
+    if (!this.canvas) {
+      return {
+        width: 0,
+        height: 0
+      };
+    }
+    const nodeElement = this.getNodeElement(node);
+    const nodeRect = nodeElement.getBoundingClientRect();
+    return {
+      width: nodeRect.width,
+      height: nodeRect.height
+    };
+  }
+  getBoundingNodesRect(nodes) {
+    if (nodes) {
+      if (nodes.length === 0) {
+        return new Rectangle();
+      }
+      return new Rectangle(boundingBoxFromPolygons(nodes.map((node) => node.getBoundingBox())));
+    }
+  }
+  zoomToFitSelectedNodes(options) {
+    const nodes = this.model.getSelectedEntities().filter((entity) => entity instanceof NodeModel);
+    this.zoomToFitNodes({
+      margin: options.margin,
+      maxZoom: options.maxZoom,
+      nodes: nodes.length > 0 ? nodes : null
+    });
+  }
+  zoomToFitNodes(options) {
+    let margin = options || 0;
+    let nodes = [];
+    let maxZoom = null;
+    if (!!options && typeof options == "object") {
+      margin = options.margin || 0;
+      nodes = options.nodes || [];
+      maxZoom = options.maxZoom || null;
+    }
+    if (nodes.length === 0) {
+      nodes = this.model.getNodes();
+    }
+    const nodesRect = this.getBoundingNodesRect(nodes);
+    if (nodesRect) {
+      let canvasRect = this.canvas.getBoundingClientRect();
+      const calculate = (margin2 = 0) => {
+        const xFactor = this.canvas.clientWidth / (nodesRect.getWidth() + margin2 * 2);
+        const yFactor = this.canvas.clientHeight / (nodesRect.getHeight() + margin2 * 2);
+        let zoomFactor = xFactor < yFactor ? xFactor : yFactor;
+        if (maxZoom && zoomFactor > maxZoom) {
+          zoomFactor = maxZoom;
+        }
+        return {
+          zoom: zoomFactor,
+          x: canvasRect.width / 2 - ((nodesRect.getWidth() + margin2 * 2) / 2 + nodesRect.getTopLeft().x) * zoomFactor + margin2,
+          y: canvasRect.height / 2 - ((nodesRect.getHeight() + margin2 * 2) / 2 + nodesRect.getTopLeft().y) * zoomFactor + margin2
+        };
+      };
+      let params = calculate(0);
+      if (margin) {
+        if (params.x < margin || params.y < margin) {
+          params = calculate(margin);
+        }
+      }
+      this.model.setZoomLevel(params.zoom * 100);
+      this.model.setOffset(params.x, params.y);
+      this.repaintCanvas();
+    }
+  }
+  getMaxNumberPointsPerLink() {
+    return this.maxNumberPointsPerLink;
+  }
+  setMaxNumberPointsPerLink(max) {
+    this.maxNumberPointsPerLink = max;
+  }
+}
+class DefaultLabelModel extends LabelModel {
+  constructor(options = {}) {
+    super(Object.assign({ offsetY: options.offsetY == null ? -23 : options.offsetY, type: "default" }, options));
+  }
+  setLabel(label) {
+    this.options.label = label;
+  }
+  deserialize(event2) {
+    super.deserialize(event2);
+    this.options.label = event2.data.label;
+  }
+  serialize() {
+    return Object.assign(Object.assign({}, super.serialize()), { label: this.options.label });
+  }
+}
+var S$4;
+(function(S2) {
+  S2.Label = newStyled.div`
+		background: rgba(0, 0, 0, 0.8);
+		border-radius: 5px;
+		color: white;
+		font-size: 12px;
+		padding: 4px 8px;
+		font-family: sans-serif;
+		user-select: none;
+	`;
+})(S$4 || (S$4 = {}));
+class DefaultLabelWidget extends reactExports.Component {
+  render() {
+    return reactExports.createElement(S$4.Label, null, this.props.model.getOptions().label);
+  }
+}
+class DefaultLabelFactory extends AbstractReactFactory {
+  constructor() {
+    super("default");
+  }
+  generateReactWidget(event2) {
+    return reactExports.createElement(DefaultLabelWidget, { model: event2.model });
+  }
+  generateModel(event2) {
+    return new DefaultLabelModel();
+  }
+}
+class DefaultLinkModel extends LinkModel {
+  constructor(options = {}) {
+    super(Object.assign({ type: "default", width: options.width || 3, color: options.color || "gray", selectedColor: options.selectedColor || "rgb(0,192,255)", curvyness: 50 }, options));
+  }
+  calculateControlOffset(port) {
+    if (port.getOptions().alignment === PortModelAlignment.RIGHT) {
+      return [this.options.curvyness, 0];
+    } else if (port.getOptions().alignment === PortModelAlignment.LEFT) {
+      return [-this.options.curvyness, 0];
+    } else if (port.getOptions().alignment === PortModelAlignment.TOP) {
+      return [0, -this.options.curvyness];
+    }
+    return [0, this.options.curvyness];
+  }
+  getSVGPath() {
+    if (this.points.length == 2) {
+      const curve = new BezierCurve();
+      curve.setSource(this.getFirstPoint().getPosition());
+      curve.setTarget(this.getLastPoint().getPosition());
+      curve.setSourceControl(this.getFirstPoint().getPosition().clone());
+      curve.setTargetControl(this.getLastPoint().getPosition().clone());
+      if (this.sourcePort) {
+        curve.getSourceControl().translate(...this.calculateControlOffset(this.getSourcePort()));
+      }
+      if (this.targetPort) {
+        curve.getTargetControl().translate(...this.calculateControlOffset(this.getTargetPort()));
+      }
+      return curve.getSVGCurve();
+    }
+  }
+  serialize() {
+    return Object.assign(Object.assign({}, super.serialize()), { width: this.options.width, color: this.options.color, curvyness: this.options.curvyness, selectedColor: this.options.selectedColor });
+  }
+  deserialize(event2) {
+    super.deserialize(event2);
+    this.options.color = event2.data.color;
+    this.options.width = event2.data.width;
+    this.options.curvyness = event2.data.curvyness;
+    this.options.selectedColor = event2.data.selectedColor;
+  }
+  addLabel(label) {
+    if (label instanceof LabelModel) {
+      return super.addLabel(label);
+    }
+    let labelOb = new DefaultLabelModel();
+    labelOb.setLabel(label);
+    return super.addLabel(labelOb);
+  }
+  setWidth(width) {
+    this.options.width = width;
+    this.fireEvent({ width }, "widthChanged");
+  }
+  setColor(color) {
+    this.options.color = color;
+    this.fireEvent({ color }, "colorChanged");
+  }
+}
+var S$3;
+(function(S2) {
+  S2.PointTop = newStyled.circle`
+		pointer-events: all;
+	`;
+})(S$3 || (S$3 = {}));
+class DefaultLinkPointWidget extends reactExports.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      selected: false
+    };
+  }
+  render() {
+    const { point } = this.props;
+    return reactExports.createElement(
+      "g",
+      null,
+      reactExports.createElement("circle", { cx: point.getPosition().x, cy: point.getPosition().y, r: 5, fill: this.state.selected || this.props.point.isSelected() ? this.props.colorSelected : this.props.color }),
+      reactExports.createElement(S$3.PointTop, { className: "point", onMouseLeave: () => {
+        this.setState({ selected: false });
+      }, onMouseEnter: () => {
+        this.setState({ selected: true });
+      }, "data-id": point.getID(), "data-linkid": point.getLink().getID(), cx: point.getPosition().x, cy: point.getPosition().y, r: 15, opacity: 0 })
+    );
+  }
+}
+class DefaultLinkSegmentWidget extends reactExports.Component {
+  render() {
+    const Bottom = reactExports.cloneElement(this.props.factory.generateLinkSegment(this.props.link, this.props.selected || this.props.link.isSelected(), this.props.path), {
+      ref: this.props.forwardRef
+    });
+    const Top = reactExports.cloneElement(Bottom, Object.assign(Object.assign({ strokeLinecap: "round", onMouseLeave: () => {
+      this.props.onSelection(false);
+    }, onMouseEnter: () => {
+      this.props.onSelection(true);
+    } }, this.props.extras), { ref: null, "data-linkid": this.props.link.getID(), strokeOpacity: this.props.selected ? 0.1 : 0, strokeWidth: 20, fill: "none", onContextMenu: () => {
+      if (!this.props.link.isLocked()) {
+        event.preventDefault();
+        this.props.link.remove();
+      }
+    } }));
+    return reactExports.createElement(
+      "g",
+      null,
+      Bottom,
+      Top
+    );
+  }
+}
+const DefaultLinkWidget = (props) => {
+  const [selected, setSelected] = reactExports.useState(false);
+  const refPaths = reactExports.useRef([]);
+  const renderPoints = () => {
+    var _a;
+    return (_a = props.renderPoints) !== null && _a !== void 0 ? _a : true;
+  };
+  reactExports.useEffect(() => {
+    props.link.setRenderedPaths(refPaths.current.map((ref) => ref.current).filter(Boolean));
+    return () => {
+      props.link.setRenderedPaths([]);
+    };
+  }, [props.link]);
+  const generateRef = () => {
+    const ref = reactExports.createRef();
+    refPaths.current.push(ref);
+    return ref;
+  };
+  const addPointToLink = (event2, index2) => {
+    if (!event2.shiftKey && !props.link.isLocked() && props.link.getPoints().length - 1 <= props.diagramEngine.getMaxNumberPointsPerLink()) {
+      const position = props.diagramEngine.getRelativeMousePoint(event2);
+      const point = props.link.point(position.x, position.y, index2);
+      event2.persist();
+      event2.stopPropagation();
+      props.diagramEngine.getActionEventBus().fireAction({
+        event: event2,
+        model: point
+      });
+    }
+  };
+  const generatePoint = (point) => {
+    var _a;
+    return reactExports.createElement(DefaultLinkPointWidget, { key: point.getID(), point, colorSelected: (_a = props.link.getOptions().selectedColor) !== null && _a !== void 0 ? _a : "", color: props.link.getOptions().color });
+  };
+  const generateLink = (path, extraProps, id2) => {
+    return reactExports.createElement(DefaultLinkSegmentWidget, { key: `link-${id2}`, path, selected, diagramEngine: props.diagramEngine, factory: props.diagramEngine.getFactoryForLink(props.link), link: props.link, forwardRef: generateRef(), onSelection: setSelected, extras: extraProps });
+  };
+  const points = props.link.getPoints();
+  const paths = [];
+  refPaths.current = [];
+  if (points.length === 2) {
+    paths.push(generateLink(props.link.getSVGPath(), {
+      onMouseDown: (event2) => {
+        var _a;
+        (_a = props.selected) === null || _a === void 0 ? void 0 : _a.call(props, event2);
+        addPointToLink(event2, 1);
+      }
+    }, "0"));
+    if (props.link.getTargetPort() == null) {
+      paths.push(generatePoint(points[1]));
+    }
+  } else {
+    for (let j = 0; j < points.length - 1; j++) {
+      paths.push(generateLink(LinkWidget.generateLinePath(points[j], points[j + 1]), {
+        "data-linkid": props.link.getID(),
+        "data-point": j,
+        onMouseDown: (event2) => {
+          var _a;
+          (_a = props.selected) === null || _a === void 0 ? void 0 : _a.call(props, event2);
+          addPointToLink(event2, j + 1);
+        }
+      }, j));
+    }
+    if (renderPoints()) {
+      for (let i = 1; i < points.length - 1; i++) {
+        paths.push(generatePoint(points[i]));
+      }
+      if (props.link.getTargetPort() == null) {
+        paths.push(generatePoint(points[points.length - 1]));
+      }
+    }
+  }
+  return reactExports.createElement("g", { "data-default-link-test": props.link.getOptions().testName }, paths);
+};
+var S$2;
+(function(S2) {
+  S2.Keyframes = keyframes`
+		from {
+			stroke-dashoffset: 24;
+		}
+		to {
+			stroke-dashoffset: 0;
+		}
+	`;
+  const selected = css`
+		stroke-dasharray: 10, 2;
+		animation: ${S2.Keyframes} 1s linear infinite;
+	`;
+  S2.Path = newStyled.path`
+		${(p2) => p2.selected && selected};
+		fill: none;
+		pointer-events: auto;
+	`;
+})(S$2 || (S$2 = {}));
+class DefaultLinkFactory extends AbstractReactFactory {
+  constructor(type = "default") {
+    super(type);
+  }
+  generateReactWidget(event2) {
+    return reactExports.createElement(DefaultLinkWidget, { link: event2.model, diagramEngine: this.engine });
+  }
+  generateModel(event2) {
+    return new DefaultLinkModel();
+  }
+  generateLinkSegment(model, selected, path) {
+    return reactExports.createElement(S$2.Path, { selected, stroke: selected ? model.getOptions().selectedColor : model.getOptions().color, strokeWidth: model.getOptions().width, d: path });
+  }
+}
+class DefaultPortModel extends PortModel {
+  constructor(options, name, label) {
+    if (!!name) {
+      options = {
+        in: !!options,
+        name,
+        label
+      };
+    }
+    options = options;
+    super(Object.assign({ label: options.label || options.name, alignment: options.in ? PortModelAlignment.LEFT : PortModelAlignment.RIGHT, type: "default" }, options));
+  }
+  deserialize(event2) {
+    super.deserialize(event2);
+    this.options.in = event2.data.in;
+    this.options.label = event2.data.label;
+  }
+  serialize() {
+    return Object.assign(Object.assign({}, super.serialize()), { in: this.options.in, label: this.options.label });
+  }
+  link(port, factory) {
+    let link = this.createLinkModel(factory);
+    link.setSourcePort(this);
+    link.setTargetPort(port);
+    return link;
+  }
+  canLinkToPort(port) {
+    if (port instanceof DefaultPortModel) {
+      return this.options.in !== port.getOptions().in;
+    }
+    return true;
+  }
+  createLinkModel(factory) {
+    let link = super.createLinkModel();
+    if (!link && factory) {
+      return factory.generateModel({});
+    }
+    return link || new DefaultLinkModel();
+  }
+}
+class DefaultNodeModel extends NodeModel {
+  constructor(options = {}, color) {
+    if (typeof options === "string") {
+      options = {
+        name: options,
+        color
+      };
+    }
+    super(Object.assign({ type: "default", name: "Untitled", color: "rgb(0,192,255)" }, options));
+    this.portsOut = [];
+    this.portsIn = [];
+  }
+  doClone(lookupTable, clone) {
+    clone.portsIn = [];
+    clone.portsOut = [];
+    super.doClone(lookupTable, clone);
+  }
+  removePort(port) {
+    super.removePort(port);
+    if (port.getOptions().in) {
+      this.portsIn.splice(this.portsIn.indexOf(port), 1);
+    } else {
+      this.portsOut.splice(this.portsOut.indexOf(port), 1);
+    }
+  }
+  addPort(port) {
+    super.addPort(port);
+    if (port.getOptions().in) {
+      if (this.portsIn.indexOf(port) === -1) {
+        this.portsIn.push(port);
+      }
+    } else {
+      if (this.portsOut.indexOf(port) === -1) {
+        this.portsOut.push(port);
+      }
+    }
+    return port;
+  }
+  addInPort(label, after = true) {
+    const p2 = new DefaultPortModel({
+      in: true,
+      name: label,
+      label,
+      alignment: PortModelAlignment.LEFT
+    });
+    if (!after) {
+      this.portsIn.splice(0, 0, p2);
+    }
+    return this.addPort(p2);
+  }
+  addOutPort(label, after = true) {
+    const p2 = new DefaultPortModel({
+      in: false,
+      name: label,
+      label,
+      alignment: PortModelAlignment.RIGHT
+    });
+    if (!after) {
+      this.portsOut.splice(0, 0, p2);
+    }
+    return this.addPort(p2);
+  }
+  deserialize(event2) {
+    super.deserialize(event2);
+    this.options.name = event2.data.name;
+    this.options.color = event2.data.color;
+    this.portsIn = _map(event2.data.portsInOrder, (id2) => {
+      return this.getPortFromID(id2);
+    });
+    this.portsOut = _map(event2.data.portsOutOrder, (id2) => {
+      return this.getPortFromID(id2);
+    });
+  }
+  serialize() {
+    return Object.assign(Object.assign({}, super.serialize()), { name: this.options.name, color: this.options.color, portsInOrder: _map(this.portsIn, (port) => {
+      return port.getID();
+    }), portsOutOrder: _map(this.portsOut, (port) => {
+      return port.getID();
+    }) });
+  }
+  getInPorts() {
+    return this.portsIn;
+  }
+  getOutPorts() {
+    return this.portsOut;
+  }
+}
+var S$1;
+(function(S2) {
+  S2.PortLabel = newStyled.div`
+		display: flex;
+		margin-top: 1px;
+		align-items: center;
+	`;
+  S2.Label = newStyled.div`
+		padding: 0 5px;
+		flex-grow: 1;
+	`;
+  S2.Port = newStyled.div`
+		width: 15px;
+		height: 15px;
+		background: rgba(255, 255, 255, 0.1);
+
+		&:hover {
+			background: rgb(192, 255, 0);
+		}
+	`;
+})(S$1 || (S$1 = {}));
+class DefaultPortLabel extends reactExports.Component {
+  render() {
+    const port = reactExports.createElement(
+      PortWidget,
+      { engine: this.props.engine, port: this.props.port },
+      reactExports.createElement(S$1.Port, null)
+    );
+    const label = reactExports.createElement(S$1.Label, null, this.props.port.getOptions().label);
+    return reactExports.createElement(
+      S$1.PortLabel,
+      null,
+      this.props.port.getOptions().in ? port : label,
+      this.props.port.getOptions().in ? label : port
+    );
+  }
+}
+var S;
+(function(S2) {
+  S2.Node = newStyled.div`
+		background-color: ${(p2) => p2.background};
+		border-radius: 5px;
+		font-family: sans-serif;
+		color: white;
+		border: solid 2px black;
+		overflow: visible;
+		font-size: 11px;
+		border: solid 2px ${(p2) => p2.selected ? "rgb(0,192,255)" : "black"};
+	`;
+  S2.Title = newStyled.div`
+		background: rgba(0, 0, 0, 0.3);
+		display: flex;
+		white-space: nowrap;
+		justify-items: center;
+	`;
+  S2.TitleName = newStyled.div`
+		flex-grow: 1;
+		padding: 5px 5px;
+	`;
+  S2.Ports = newStyled.div`
+		display: flex;
+		background-image: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.2));
+	`;
+  S2.PortsContainer = newStyled.div`
+		flex-grow: 1;
+		display: flex;
+		flex-direction: column;
+
+		&:first-of-type {
+			margin-right: 10px;
+		}
+
+		&:only-child {
+			margin-right: 0px;
+		}
+	`;
+})(S || (S = {}));
+class DefaultNodeWidget extends reactExports.Component {
+  constructor() {
+    super(...arguments);
+    this.generatePort = (port) => {
+      return reactExports.createElement(DefaultPortLabel, { engine: this.props.engine, port, key: port.getID() });
+    };
+  }
+  render() {
+    return reactExports.createElement(
+      S.Node,
+      { "data-default-node-name": this.props.node.getOptions().name, selected: this.props.node.isSelected(), background: this.props.node.getOptions().color },
+      reactExports.createElement(
+        S.Title,
+        null,
+        reactExports.createElement(S.TitleName, null, this.props.node.getOptions().name)
+      ),
+      reactExports.createElement(
+        S.Ports,
+        null,
+        reactExports.createElement(S.PortsContainer, null, _map(this.props.node.getInPorts(), this.generatePort)),
+        reactExports.createElement(S.PortsContainer, null, _map(this.props.node.getOutPorts(), this.generatePort))
+      )
+    );
+  }
+}
+class DefaultNodeFactory extends AbstractReactFactory {
+  constructor() {
+    super("default");
+  }
+  generateReactWidget(event2) {
+    return reactExports.createElement(DefaultNodeWidget, { engine: this.engine, node: event2.model });
+  }
+  generateModel(event2) {
+    return new DefaultNodeModel();
+  }
+}
+class DefaultPortFactory extends AbstractModelFactory {
+  constructor() {
+    super("default");
+  }
+  generateModel() {
+    return new DefaultPortModel({
+      name: "unknown"
+    });
+  }
+}
+class PathFindingLinkModel extends DefaultLinkModel {
+  constructor(options = {}) {
+    super(Object.assign({ type: PathFindingLinkFactory.NAME }, options));
+  }
+  performanceTune() {
+    return false;
+  }
+}
+const pathFinderInstance = new pathfinding.JumpPointFinder({
+  heuristic: pathfinding.Heuristic.manhattan,
+  diagonalMovement: pathfinding.DiagonalMovement.Never
+});
+class PathFinding {
+  constructor(factory) {
+    this.instance = pathFinderInstance;
+    this.factory = factory;
+  }
+  /**
+   * Taking as argument a fully unblocked walking matrix, this method
+   * finds a direct path from point A to B.
+   */
+  calculateDirectPath(from, to) {
+    const matrix = this.factory.getCanvasMatrix();
+    const grid = new pathfinding.Grid(matrix);
+    return pathFinderInstance.findPath(this.factory.translateRoutingX(Math.floor(from.getX() / this.factory.ROUTING_SCALING_FACTOR)), this.factory.translateRoutingY(Math.floor(from.getY() / this.factory.ROUTING_SCALING_FACTOR)), this.factory.translateRoutingX(Math.floor(to.getX() / this.factory.ROUTING_SCALING_FACTOR)), this.factory.translateRoutingY(Math.floor(to.getY() / this.factory.ROUTING_SCALING_FACTOR)), grid);
+  }
+  /**
+   * Using @link{#calculateDirectPath}'s result as input, we here
+   * determine the first walkable point found in the matrix that includes
+   * blocked paths.
+   */
+  calculateLinkStartEndCoords(matrix, path) {
+    const startIndex = path.findIndex((point) => {
+      if (matrix[point[1]])
+        return matrix[point[1]][point[0]] === 0;
+      else
+        return false;
+    });
+    const endIndex = path.length - 1 - path.slice().reverse().findIndex((point) => {
+      if (matrix[point[1]])
+        return matrix[point[1]][point[0]] === 0;
+      else
+        return false;
+    });
+    if (startIndex === -1 || endIndex === -1) {
+      return void 0;
+    }
+    const pathToStart = path.slice(0, startIndex);
+    const pathToEnd = path.slice(endIndex);
+    return {
+      start: {
+        x: path[startIndex][0],
+        y: path[startIndex][1]
+      },
+      end: {
+        x: path[endIndex][0],
+        y: path[endIndex][1]
+      },
+      pathToStart,
+      pathToEnd
+    };
+  }
+  /**
+   * Puts everything together: merges the paths from/to the centre of the ports,
+   * with the path calculated around other elements.
+   */
+  calculateDynamicPath(routingMatrix, start, end, pathToStart, pathToEnd) {
+    const grid = new pathfinding.Grid(routingMatrix);
+    const dynamicPath = pathFinderInstance.findPath(start.x, start.y, end.x, end.y, grid);
+    const pathCoords = pathToStart.concat(dynamicPath, pathToEnd).map((coords) => [
+      this.factory.translateRoutingX(coords[0], true),
+      this.factory.translateRoutingY(coords[1], true)
+    ]);
+    return pathfinding.Util.compressPath(pathCoords);
+  }
+}
+class PathFindingLinkWidget extends reactExports.Component {
+  constructor(props) {
+    super(props);
+    this.refPaths = [];
+    this.state = {
+      selected: false
+    };
+    this.pathFinding = new PathFinding(this.props.factory);
+  }
+  componentDidUpdate() {
+    this.props.link.setRenderedPaths(this.refPaths.map((ref) => {
+      return ref.current;
+    }));
+  }
+  componentDidMount() {
+    this.props.link.setRenderedPaths(this.refPaths.map((ref) => {
+      return ref.current;
+    }));
+  }
+  componentWillUnmount() {
+    this.props.link.setRenderedPaths([]);
+  }
+  generateLink(path, id2) {
+    const ref = reactExports.createRef();
+    this.refPaths.push(ref);
+    return reactExports.createElement(DefaultLinkSegmentWidget, { key: `link-${id2}`, path, selected: this.state.selected, diagramEngine: this.props.diagramEngine, factory: this.props.diagramEngine.getFactoryForLink(this.props.link), link: this.props.link, forwardRef: ref, onSelection: (selected) => {
+      this.setState({ selected });
+    }, extras: {} });
+  }
+  render() {
+    this.refPaths = [];
+    var points = this.props.link.getPoints();
+    var paths = [];
+    const directPathCoords = this.pathFinding.calculateDirectPath(_first(points), _last(points));
+    const routingMatrix = this.props.factory.getRoutingMatrix();
+    const smartLink = this.pathFinding.calculateLinkStartEndCoords(routingMatrix, directPathCoords);
+    if (smartLink) {
+      const { start, end, pathToStart, pathToEnd } = smartLink;
+      const simplifiedPath = this.pathFinding.calculateDynamicPath(routingMatrix, start, end, pathToStart, pathToEnd);
+      paths.push(
+        //smooth: boolean, extraProps: any, id: string | number, firstPoint: PointModel, lastPoint: PointModel
+        this.generateLink(this.props.factory.generateDynamicPath(simplifiedPath), "0")
+      );
+    }
+    return reactExports.createElement(reactExports.Fragment, null, paths);
+  }
+}
+class PathFindingLinkFactory extends DefaultLinkFactory {
+  constructor() {
+    super(PathFindingLinkFactory.NAME);
+    this.ROUTING_SCALING_FACTOR = 5;
+    this.canvasMatrix = [];
+    this.routingMatrix = [];
+    this.hAdjustmentFactor = 0;
+    this.vAdjustmentFactor = 0;
+    this.calculateMatrixDimensions = () => {
+      const allNodesCoords = _values(this.engine.getModel().getNodes()).map((item) => ({
+        x: item.getX(),
+        width: item.width,
+        y: item.getY(),
+        height: item.height
+      }));
+      const allLinks = _values(this.engine.getModel().getLinks());
+      const allPortsCoords = _flatMap(allLinks.map((link) => [link.getSourcePort(), link.getTargetPort()])).filter((port) => port !== null).map((item) => ({
+        x: item.getX(),
+        width: item.width,
+        y: item.getY(),
+        height: item.height
+      }));
+      const allPointsCoords = _flatMap(allLinks.map((link) => link.getPoints())).map((item) => ({
+        // points don't have width/height, so let's just use 0
+        x: item.getX(),
+        width: 0,
+        y: item.getY(),
+        height: 0
+      }));
+      const sumProps = (object, props) => _reduce(props, (acc, prop) => acc + _get(object, prop, 0), 0);
+      const canvas = this.engine.getCanvas();
+      const concatedCoords = _concat(allNodesCoords, allPortsCoords, allPointsCoords);
+      const minX = Math.floor(Math.min(_get(_minBy(concatedCoords, "x"), "x", 0), 0) / this.ROUTING_SCALING_FACTOR) * this.ROUTING_SCALING_FACTOR;
+      const maxXElement = _maxBy(concatedCoords, (item) => sumProps(item, ["x", "width"]));
+      const maxX = Math.max(sumProps(maxXElement, ["x", "width"]), canvas.offsetWidth);
+      const minYCoords = _minBy(concatedCoords, "y");
+      const minY = Math.floor(Math.min(_get(minYCoords, "y", 0), 0) / this.ROUTING_SCALING_FACTOR) * this.ROUTING_SCALING_FACTOR;
+      const maxYElement = _maxBy(concatedCoords, (item) => sumProps(item, ["y", "height"]));
+      const maxY = Math.max(sumProps(maxYElement, ["y", "height"]), canvas.offsetHeight);
+      return {
+        width: Math.ceil(Math.abs(minX) + maxX),
+        hAdjustmentFactor: Math.abs(minX) / this.ROUTING_SCALING_FACTOR + 1,
+        height: Math.ceil(Math.abs(minY) + maxY),
+        vAdjustmentFactor: Math.abs(minY) / this.ROUTING_SCALING_FACTOR + 1
+      };
+    };
+    this.markNodes = (matrix) => {
+      _values(this.engine.getModel().getNodes()).forEach((node) => {
+        const startX = Math.floor(node.getX() / this.ROUTING_SCALING_FACTOR);
+        const endX = Math.ceil((node.getX() + node.width) / this.ROUTING_SCALING_FACTOR);
+        const startY = Math.floor(node.getY() / this.ROUTING_SCALING_FACTOR);
+        const endY = Math.ceil((node.getY() + node.height) / this.ROUTING_SCALING_FACTOR);
+        for (let x2 = startX - 1; x2 <= endX + 1; x2++) {
+          for (let y2 = startY - 1; y2 < endY + 1; y2++) {
+            this.markMatrixPoint(matrix, this.translateRoutingX(x2), this.translateRoutingY(y2));
+          }
+        }
+      });
+    };
+    this.markPorts = (matrix) => {
+      const allElements = _flatMap(_values(this.engine.getModel().getLinks()).map((link) => [].concat(link.getSourcePort(), link.getTargetPort())));
+      allElements.filter((port) => port !== null).forEach((port) => {
+        const startX = Math.floor(port.x / this.ROUTING_SCALING_FACTOR);
+        const endX = Math.ceil((port.x + port.width) / this.ROUTING_SCALING_FACTOR);
+        const startY = Math.floor(port.y / this.ROUTING_SCALING_FACTOR);
+        const endY = Math.ceil((port.y + port.height) / this.ROUTING_SCALING_FACTOR);
+        for (let x2 = startX - 1; x2 <= endX + 1; x2++) {
+          for (let y2 = startY - 1; y2 < endY + 1; y2++) {
+            this.markMatrixPoint(matrix, this.translateRoutingX(x2), this.translateRoutingY(y2));
+          }
+        }
+      });
+    };
+    this.markMatrixPoint = (matrix, x2, y2) => {
+      if (matrix[y2] !== void 0 && matrix[y2][x2] !== void 0) {
+        matrix[y2][x2] = 1;
+      }
+    };
+  }
+  setDiagramEngine(engine) {
+    super.setDiagramEngine(engine);
+    engine.getStateMachine().registerListener({
+      stateChanged: (event2) => {
+        if (event2.newState instanceof AbstractDisplacementState) {
+          const deRegister = engine.getActionEventBus().registerAction(new Action({
+            type: InputType.MOUSE_UP,
+            fire: () => {
+              this.calculateRoutingMatrix();
+              engine.repaintCanvas();
+              deRegister();
+            }
+          }));
+        }
+      }
+    });
+    this.listener = engine.registerListener({
+      canvasReady: () => {
+        _defer(() => {
+          this.calculateRoutingMatrix();
+          engine.repaintCanvas();
+        });
+      }
+    });
+  }
+  setFactoryBank(bank) {
+    super.setFactoryBank(bank);
+    if (!bank && this.listener) {
+      this.listener.deregister();
+    }
+  }
+  generateReactWidget(event2) {
+    return reactExports.createElement(PathFindingLinkWidget, { diagramEngine: this.engine, link: event2.model, factory: this });
+  }
+  generateModel(event2) {
+    return new PathFindingLinkModel();
+  }
+  /**
+   * A representation of the canvas in the following format:
+   *
+   * +-----------------+
+   * | 0 0 0 0 0 0 0 0 |
+   * | 0 0 0 0 0 0 0 0 |
+   * | 0 0 0 0 0 0 0 0 |
+   * | 0 0 0 0 0 0 0 0 |
+   * | 0 0 0 0 0 0 0 0 |
+   * +-----------------+
+   *
+   * In which all walkable points are marked by zeros.
+   * It uses @link{#ROUTING_SCALING_FACTOR} to reduce the matrix dimensions and improve performance.
+   */
+  getCanvasMatrix() {
+    if (this.canvasMatrix.length === 0) {
+      this.calculateCanvasMatrix();
+    }
+    return this.canvasMatrix;
+  }
+  calculateCanvasMatrix() {
+    const { width: canvasWidth, hAdjustmentFactor, height: canvasHeight, vAdjustmentFactor } = this.calculateMatrixDimensions();
+    this.hAdjustmentFactor = hAdjustmentFactor;
+    this.vAdjustmentFactor = vAdjustmentFactor;
+    const matrixWidth = Math.ceil(canvasWidth / this.ROUTING_SCALING_FACTOR);
+    const matrixHeight = Math.ceil(canvasHeight / this.ROUTING_SCALING_FACTOR);
+    this.canvasMatrix = _range(0, matrixHeight).map(() => {
+      return new Array(matrixWidth).fill(0);
+    });
+  }
+  /**
+   * A representation of the canvas in the following format:
+   *
+   * +-----------------+
+   * | 0 0 1 1 0 0 0 0 |
+   * | 0 0 1 1 0 0 1 1 |
+   * | 0 0 0 0 0 0 1 1 |
+   * | 1 1 0 0 0 0 0 0 |
+   * | 1 1 0 0 0 0 0 0 |
+   * +-----------------+
+   *
+   * In which all points blocked by a node (and its ports) are
+   * marked as 1; points were there is nothing (ie, free) receive 0.
+   */
+  getRoutingMatrix() {
+    if (this.routingMatrix.length === 0) {
+      this.calculateRoutingMatrix();
+    }
+    return this.routingMatrix;
+  }
+  calculateRoutingMatrix() {
+    const matrix = _cloneDeep(this.getCanvasMatrix());
+    this.markNodes(matrix);
+    this.markPorts(matrix);
+    this.routingMatrix = matrix;
+  }
+  /**
+   * The routing matrix does not have negative indexes, but elements could be negatively positioned.
+   * We use the functions below to translate back and forth between these coordinates, relying on the
+   * calculated values of hAdjustmentFactor and vAdjustmentFactor.
+   */
+  translateRoutingX(x2, reverse = false) {
+    return x2 + this.hAdjustmentFactor * (reverse ? -1 : 1);
+  }
+  translateRoutingY(y2, reverse = false) {
+    return y2 + this.vAdjustmentFactor * (reverse ? -1 : 1);
+  }
+  generateDynamicPath(pathCoords) {
+    let path = Path();
+    path = path.moveto(pathCoords[0][0] * this.ROUTING_SCALING_FACTOR, pathCoords[0][1] * this.ROUTING_SCALING_FACTOR);
+    pathCoords.slice(1).forEach((coords) => {
+      path = path.lineto(coords[0] * this.ROUTING_SCALING_FACTOR, coords[1] * this.ROUTING_SCALING_FACTOR);
+    });
+    return path.print();
+  }
+}
+PathFindingLinkFactory.NAME = "pathfinding";
+class RightAngleLinkWidget extends reactExports.Component {
+  constructor(props) {
+    super(props);
+    this.handleMove = (function(event2) {
+      this.draggingEvent(event2, this.dragging_index);
+    }).bind(this);
+    this.handleUp = (function(event2) {
+      this.setState({ canDrag: false, selected: false });
+      window.removeEventListener("mousemove", this.handleMove);
+      window.removeEventListener("mouseup", this.handleUp);
+    }).bind(this);
+    this.refPaths = [];
+    this.state = {
+      selected: false,
+      canDrag: false
+    };
+    this.dragging_index = 0;
+  }
+  componentDidUpdate() {
+    this.props.link.setRenderedPaths(this.refPaths.map((ref) => {
+      return ref.current;
+    }));
+  }
+  componentDidMount() {
+    this.props.link.setRenderedPaths(this.refPaths.map((ref) => {
+      return ref.current;
+    }));
+  }
+  componentWillUnmount() {
+    this.props.link.setRenderedPaths([]);
+  }
+  generateLink(path, extraProps, id2) {
+    const ref = reactExports.createRef();
+    this.refPaths.push(ref);
+    return reactExports.createElement(DefaultLinkSegmentWidget, { key: `link-${id2}`, path, selected: this.state.selected, diagramEngine: this.props.diagramEngine, factory: this.props.diagramEngine.getFactoryForLink(this.props.link), link: this.props.link, forwardRef: ref, onSelection: (selected) => {
+      this.setState({ selected });
+    }, extras: extraProps });
+  }
+  calculatePositions(points, event2, index2, coordinate) {
+    if (index2 === 0) {
+      let point = new PointModel({
+        link: this.props.link,
+        position: new Point(points[index2].getX(), points[index2].getY())
+      });
+      this.props.link.addPoint(point, index2);
+      this.dragging_index++;
+      return;
+    } else if (index2 === points.length - 2) {
+      let point = new PointModel({
+        link: this.props.link,
+        position: new Point(points[index2 + 1].getX(), points[index2 + 1].getY())
+      });
+      this.props.link.addPoint(point, index2 + 1);
+      return;
+    }
+    if (index2 - 2 > 0) {
+      let _points2 = {
+        [index2 - 2]: points[index2 - 2].getPosition(),
+        [index2 + 1]: points[index2 + 1].getPosition(),
+        [index2 - 1]: points[index2 - 1].getPosition()
+      };
+      if (Math.abs(_points2[index2 - 1][coordinate] - _points2[index2 + 1][coordinate]) < 5) {
+        _points2[index2 - 2][coordinate] = this.props.diagramEngine.getRelativeMousePoint(event2)[coordinate];
+        _points2[index2 + 1][coordinate] = this.props.diagramEngine.getRelativeMousePoint(event2)[coordinate];
+        points[index2 - 2].setPosition(_points2[index2 - 2]);
+        points[index2 + 1].setPosition(_points2[index2 + 1]);
+        points[index2 - 1].remove();
+        points[index2 - 1].remove();
+        this.dragging_index--;
+        this.dragging_index--;
+        return;
+      }
+    }
+    if (index2 + 2 < points.length - 2) {
+      let _points2 = {
+        [index2 + 3]: points[index2 + 3].getPosition(),
+        [index2 + 2]: points[index2 + 2].getPosition(),
+        [index2 + 1]: points[index2 + 1].getPosition(),
+        [index2]: points[index2].getPosition()
+      };
+      if (Math.abs(_points2[index2 + 1][coordinate] - _points2[index2 + 2][coordinate]) < 5) {
+        _points2[index2][coordinate] = this.props.diagramEngine.getRelativeMousePoint(event2)[coordinate];
+        _points2[index2 + 3][coordinate] = this.props.diagramEngine.getRelativeMousePoint(event2)[coordinate];
+        points[index2].setPosition(_points2[index2]);
+        points[index2 + 3].setPosition(_points2[index2 + 3]);
+        points[index2 + 1].remove();
+        points[index2 + 1].remove();
+        return;
+      }
+    }
+    let _points = {
+      [index2]: points[index2].getPosition(),
+      [index2 + 1]: points[index2 + 1].getPosition()
+    };
+    _points[index2][coordinate] = this.props.diagramEngine.getRelativeMousePoint(event2)[coordinate];
+    _points[index2 + 1][coordinate] = this.props.diagramEngine.getRelativeMousePoint(event2)[coordinate];
+    points[index2].setPosition(_points[index2]);
+    points[index2 + 1].setPosition(_points[index2 + 1]);
+  }
+  draggingEvent(event2, index2) {
+    let points = this.props.link.getPoints();
+    let dx = Math.abs(points[index2].getX() - points[index2 + 1].getX());
+    let dy = Math.abs(points[index2].getY() - points[index2 + 1].getY());
+    if (dx === 0) {
+      this.calculatePositions(points, event2, index2, "x");
+    } else if (dy === 0) {
+      this.calculatePositions(points, event2, index2, "y");
+    }
+    this.props.link.setFirstAndLastPathsDirection();
+  }
+  render() {
+    let points = this.props.link.getPoints();
+    let paths = [];
+    let pointLeft = points[0];
+    let pointRight = points[points.length - 1];
+    let hadToSwitch = false;
+    if (pointLeft.getX() > pointRight.getX()) {
+      pointLeft = points[points.length - 1];
+      pointRight = points[0];
+      hadToSwitch = true;
+    }
+    let dy = Math.abs(points[0].getY() - points[points.length - 1].getY());
+    if (this.props.link.getTargetPort() === null && points.length === 2) {
+      [...Array(2)].forEach((item) => {
+        this.props.link.addPoint(new PointModel({
+          link: this.props.link,
+          position: new Point(pointLeft.getX(), pointRight.getY())
+        }), 1);
+      });
+      this.props.link.setManuallyFirstAndLastPathsDirection(true, true);
+    } else if (this.props.link.getTargetPort() === null && this.props.link.getSourcePort() !== null) {
+      points[1].setPosition(pointRight.getX() + (pointLeft.getX() - pointRight.getX()) / 2, !hadToSwitch ? pointLeft.getY() : pointRight.getY());
+      points[2].setPosition(pointRight.getX() + (pointLeft.getX() - pointRight.getX()) / 2, !hadToSwitch ? pointRight.getY() : pointLeft.getY());
+    } else if (!this.state.canDrag && points.length > 2) {
+      for (let i = 1; i < points.length; i += points.length - 2) {
+        if (i - 1 === 0) {
+          if (this.props.link.getFirstPathXdirection()) {
+            points[i].setPosition(points[i].getX(), points[i - 1].getY());
+          } else {
+            points[i].setPosition(points[i - 1].getX(), points[i].getY());
+          }
+        } else {
+          if (this.props.link.getLastPathXdirection()) {
+            points[i - 1].setPosition(points[i - 1].getX(), points[i].getY());
+          } else {
+            points[i - 1].setPosition(points[i].getX(), points[i - 1].getY());
+          }
+        }
+      }
+    }
+    if (points.length === 2 && dy !== 0 && !this.state.canDrag) {
+      this.props.link.addPoint(new PointModel({
+        link: this.props.link,
+        position: new Point(pointLeft.getX(), pointRight.getY())
+      }));
+    }
+    for (let j = 0; j < points.length - 1; j++) {
+      paths.push(this.generateLink(LinkWidget.generateLinePath(points[j], points[j + 1]), {
+        "data-linkid": this.props.link.getID(),
+        "data-point": j,
+        onMouseDown: (event2) => {
+          if (event2.button === 0) {
+            this.setState({ canDrag: true });
+            this.dragging_index = j;
+            window.addEventListener("mousemove", this.handleMove);
+            window.addEventListener("mouseup", this.handleUp);
+          }
+        },
+        onMouseEnter: (event2) => {
+          this.setState({ selected: true });
+          this.props.link.lastHoverIndexOfPath = j;
+        }
+      }, j));
+    }
+    this.refPaths = [];
+    return reactExports.createElement("g", { "data-default-link-test": this.props.link.getOptions().testName }, paths);
+  }
+}
+RightAngleLinkWidget.defaultProps = {
+  color: "red",
+  width: 3,
+  link: null,
+  smooth: false,
+  diagramEngine: null,
+  factory: null
+};
+class RightAngleLinkModel extends DefaultLinkModel {
+  constructor(options = {}) {
+    super(Object.assign({ type: RightAngleLinkFactory.NAME }, options));
+    this.lastHoverIndexOfPath = 0;
+    this._lastPathXdirection = false;
+    this._firstPathXdirection = false;
+  }
+  setFirstAndLastPathsDirection() {
+    let points = this.getPoints();
+    for (let i = 1; i < points.length; i += points.length - 2) {
+      let dx = Math.abs(points[i].getX() - points[i - 1].getX());
+      let dy = Math.abs(points[i].getY() - points[i - 1].getY());
+      if (i - 1 === 0) {
+        this._firstPathXdirection = dx > dy;
+      } else {
+        this._lastPathXdirection = dx > dy;
+      }
+    }
+  }
+  // @ts-ignore
+  addPoint(pointModel, index2 = 1) {
+    super.addPoint(pointModel, index2);
+    this.setFirstAndLastPathsDirection();
+    return pointModel;
+  }
+  deserialize(event2) {
+    super.deserialize(event2);
+    this.setFirstAndLastPathsDirection();
+  }
+  setManuallyFirstAndLastPathsDirection(first, last) {
+    this._firstPathXdirection = first;
+    this._lastPathXdirection = last;
+  }
+  getLastPathXdirection() {
+    return this._lastPathXdirection;
+  }
+  getFirstPathXdirection() {
+    return this._firstPathXdirection;
+  }
+  setWidth(width) {
+    this.options.width = width;
+    this.fireEvent({ width }, "widthChanged");
+  }
+  setColor(color) {
+    this.options.color = color;
+    this.fireEvent({ color }, "colorChanged");
+  }
+}
+class RightAngleLinkFactory extends DefaultLinkFactory {
+  constructor() {
+    super(RightAngleLinkFactory.NAME);
+  }
+  generateModel(event2) {
+    return new RightAngleLinkModel();
+  }
+  generateReactWidget(event2) {
+    return reactExports.createElement(RightAngleLinkWidget, { diagramEngine: this.engine, link: event2.model, factory: this });
+  }
+}
+RightAngleLinkFactory.NAME = "rightAngle";
+const createEngine = (options = {}) => {
+  const engine = new DiagramEngine(options);
+  engine.getLayerFactories().registerFactory(new NodeLayerFactory());
+  engine.getLayerFactories().registerFactory(new LinkLayerFactory());
+  engine.getLayerFactories().registerFactory(new SelectionBoxLayerFactory());
+  engine.getLabelFactories().registerFactory(new DefaultLabelFactory());
+  engine.getNodeFactories().registerFactory(new DefaultNodeFactory());
+  engine.getLinkFactories().registerFactory(new DefaultLinkFactory());
+  engine.getLinkFactories().registerFactory(new PathFindingLinkFactory());
+  engine.getPortFactories().registerFactory(new DefaultPortFactory());
+  engine.getStateMachine().pushState(new DefaultDiagramState());
+  return engine;
+};
 var reactIs = { exports: {} };
 var reactIs_production_min = {};
 /**
@@ -7870,12 +11578,25 @@ reactIs_production_min.typeOf = v;
 var reactIsExports = reactIs.exports;
 const ReactIs = /* @__PURE__ */ getDefaultExportFromCjs(reactIsExports);
 export {
-  React as R,
-  ReactIs as a,
-  reactIsExports$1 as b,
-  client as c,
+  AbstractModelFactory as A,
+  CanvasWidget as C,
+  DiagramModel as D,
+  NodeModel as N,
+  PortModel as P,
+  React$1 as R,
+  ThemeContext as T,
+  React as a,
+  ReactIs as b,
+  reactIsExports$1 as c,
+  createEngine as d,
+  PortModelAlignment as e,
+  DefaultLinkModel as f,
+  AbstractReactFactory as g,
+  hoistNonReactStatics$1 as h,
+  PortWidget as i,
   jsxRuntimeExports as j,
-  m$1 as m,
+  client as k,
   reactExports as r,
-  useIMask as u
+  useIMask as u,
+  withEmotionCache as w
 };

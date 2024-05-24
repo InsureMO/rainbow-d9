@@ -2,6 +2,20 @@ var commonjsGlobal = typeof globalThis !== "undefined" ? globalThis : typeof win
 function getDefaultExportFromCjs(x) {
   return x && x.__esModule && Object.prototype.hasOwnProperty.call(x, "default") ? x["default"] : x;
 }
+function _extends$1() {
+  _extends$1 = Object.assign ? Object.assign.bind() : function(target) {
+    for (var i = 1; i < arguments.length; i++) {
+      var source = arguments[i];
+      for (var key in source) {
+        if (Object.prototype.hasOwnProperty.call(source, key)) {
+          target[key] = source[key];
+        }
+      }
+    }
+    return target;
+  };
+  return _extends$1.apply(this, arguments);
+}
 function _objectWithoutPropertiesLoose(source, excluded) {
   if (source == null)
     return {};
@@ -121,10 +135,11 @@ function _extends() {
   return _extends.apply(this, arguments);
 }
 export {
-  _extends as _,
-  _defineProperty as a,
-  _objectWithoutProperties as b,
+  _extends$1 as _,
+  _extends as a,
+  _defineProperty as b,
   commonjsGlobal as c,
-  _toConsumableArray as d,
+  _objectWithoutProperties as d,
+  _toConsumableArray as e,
   getDefaultExportFromCjs as g
 };

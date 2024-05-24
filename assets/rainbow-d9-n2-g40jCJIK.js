@@ -4,11 +4,11 @@ var __publicField = (obj, key, value) => {
   __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
   return value;
 };
-import { a as color, M as MaskedNumber, e as MaskedDate, g as MaskedFunction, j as MaskedPattern, k as MaskedRange, l as MaskedRegExp, o as MaskedDynamic } from "./vendor-TSR6RXc3.js";
-import { R as React, r as reactExports, u as useIMask } from "./react-GeCD96lQ.js";
-import { c as createLogger, V as VUtils, P as PPUtils, r as registerWidget, u as useRootEventBus, M as MUtils, N as NUtils, d as Wrapper, e as useForceUpdate, f as MBUtils, b as useWrapperEventBus, W as WrapperEventTypes, g as useCreateEventBus, h as PROPERTY_PATH_ME, i as useDefaultAttributeValues, j as useAttributesWatch, R as RootEventTypes } from "./rainbow-d9-n1-bqDfZtki.js";
-import { q as qe, W as We } from "./styled-components-Hk82igAO.js";
-import { d as dayjs } from "./dayjs-9Z7dW0Q-.js";
+import { I as color, J as MaskedNumber, L as MaskedDate, N as MaskedFunction, O as MaskedPattern, P as MaskedRange, Q as MaskedRegExp, S as MaskedDynamic } from "./vendor-ctmAJdvj.js";
+import { a as React, r as reactExports, u as useIMask } from "./react-VfX_HI7I.js";
+import { c as createLogger, V as VUtils, P as PPUtils, r as registerWidget, u as useRootEventBus, M as MUtils, N as NUtils, d as Wrapper, e as useForceUpdate, f as MBUtils, b as useWrapperEventBus, W as WrapperEventTypes, g as useCreateEventBus, h as PROPERTY_PATH_ME, i as useDefaultAttributeValues, j as useAttributesWatch, R as RootEventTypes } from "./rainbow-d9-n1-gbyGzXGq.js";
+import { q as qe, W as We } from "./styled-components-xBJU6yph.js";
+import { d as dayjs } from "./dayjs-ZafkOS5_.js";
 const DOM_KEY_WIDGET = "data-w";
 const DOM_ID_WIDGET = "data-wid";
 const ICON_PREFIX = "$icons.";
@@ -6937,10 +6937,7 @@ const ATableRowOperators = qe.div.attrs(({ rowIndex, rowSpan }) => {
         padding: 0;
     }
 
-    > button[data-w=d9-table-row-operator] {
-        display: flex;
-        position: relative;
-        align-items: center;
+    > button[data-w=d9-button][data-role=d9-table-row-operator] {
         padding: 0;
         margin-top: calc((${CssVars.TABLE_CELL_HEIGHT} - ${CssVars.TABLE_BUTTON_HEIGHT}) / 2);
         height: ${CssVars.TABLE_BUTTON_HEIGHT};
@@ -7437,7 +7434,7 @@ const ExpandButton = (props) => {
     $onValueChange: VUtils.noop,
     $avs: { $disabled: false, $visible: true }
   };
-  return React.createElement(Button, { "$wrapped": $wrapped, ink: ButtonInk.PRIMARY, fill: ButtonFill.PLAIN, leads: ["$icons.expand"], click: onClick, "data-w": "d9-table-row-operator" });
+  return React.createElement(Button, { "$wrapped": $wrapped, ink: ButtonInk.PRIMARY, fill: ButtonFill.PLAIN, leads: ["$icons.expand"], click: onClick, "data-role": "d9-table-row-operator" });
 };
 const CollapseButton = (props) => {
   const { onClick } = props;
@@ -7448,7 +7445,7 @@ const CollapseButton = (props) => {
     $onValueChange: VUtils.noop,
     $avs: { $disabled: false, $visible: true }
   };
-  return React.createElement(Button, { "$wrapped": $wrapped, ink: ButtonInk.PRIMARY, fill: ButtonFill.PLAIN, leads: ["$icons.collapse"], click: onClick, "data-w": "d9-table-row-operator" });
+  return React.createElement(Button, { "$wrapped": $wrapped, ink: ButtonInk.PRIMARY, fill: ButtonFill.PLAIN, leads: ["$icons.collapse"], click: onClick, "data-role": "d9-table-row-operator" });
 };
 const RemoveButton = (props) => {
   const { onClick } = props;
@@ -7459,10 +7456,11 @@ const RemoveButton = (props) => {
     $onValueChange: VUtils.noop,
     $avs: { $disabled: false, $visible: true }
   };
-  return React.createElement(Button, { "$wrapped": $wrapped, ink: ButtonInk.PRIMARY, fill: ButtonFill.PLAIN, leads: ["$icons.remove"], click: onClick, "data-w": "d9-table-row-operator" });
+  return React.createElement(Button, { "$wrapped": $wrapped, ink: ButtonInk.PRIMARY, fill: ButtonFill.PLAIN, leads: ["$icons.remove"], click: onClick, "data-role": "d9-table-row-operator" });
 };
 const CustomButton = (props) => {
-  const { def: { prebuilt, click, ...rest }, $wrapped: { $root, $array, $model, $p2r }, expandable, expanded, prebuilt: { remove, expand, collapse } } = props;
+  const { def, $wrapped: { $root, $array, $model, $p2r }, expandable, expanded, prebuilt: { remove, expand, collapse } } = props;
+  const { prebuilt, click, ...rest } = def;
   if (!expandable && (prebuilt === "expand" || prebuilt === "collapse")) {
     return null;
   }
@@ -7488,14 +7486,8 @@ const CustomButton = (props) => {
         break;
     }
   };
-  const $wrapped = {
-    $root,
-    $model,
-    $p2r,
-    $onValueChange: VUtils.noop,
-    $avs: { $disabled: false, $visible: true }
-  };
-  return React.createElement(Button, { "$wrapped": $wrapped, click: onClick, ...rest, "data-w": "d9-table-row-operator" });
+  const operatorDef = { ...rest, $wt: rest.$wt || "Button", "data-role": "d9-table-row-operator", click: onClick };
+  return React.createElement(Wrapper, { "$root": $root, "$model": $model, "$p2r": $p2r, ...operatorDef });
 };
 const TableRowOperators = (props) => {
   const { expandable = false, removable = false, rowIndex, rowSpan, $wrapped, omitDefaultRowOperators = false, rowOperators } = props;
@@ -7772,13 +7764,13 @@ const ASectionExpander = qe.div.attrs({ [DOM_KEY_WIDGET]: "d9-section-header-exp
         background-color: ${CssVars.PRIMARY_COLOR};
 
         > svg {
-            width: calc(${CssVars.SECTION_HEADER_HEIGHT} * 0.3);
             fill: ${CssVars.INVERT_COLOR};
             opacity: 1;
         }
     }
 
     > svg {
+        width: calc(${CssVars.SECTION_HEADER_HEIGHT} * 0.3);
         fill: ${CssVars.FONT_COLOR};
         opacity: 0.5;
         transition: all ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION};
@@ -9949,12 +9941,13 @@ export {
   DialogBody as l,
   DialogFooter as m,
   GlobalRoot as n,
-  utils$3 as o,
-  utils$1 as p,
-  UnwrappedButtonBar as q,
-  ButtonBarAlignment as r,
-  UnwrappedCaption as s,
+  CssConstants as o,
+  UnwrappedCaption as p,
+  utils$3 as q,
+  utils$1 as r,
+  UnwrappedButtonBar as s,
   toIntlLabel as t,
   useGlobalEventBus as u,
-  UnwrappedSection as v
+  ButtonBarAlignment as v,
+  UnwrappedSection as w
 };

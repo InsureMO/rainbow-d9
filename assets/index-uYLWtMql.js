@@ -4,28 +4,28 @@ var __publicField = (obj, key, value) => {
   __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
   return value;
 };
-import { R as React, r as reactExports, j as jsxRuntimeExports, c as client } from "./react-GeCD96lQ.js";
-import { r as registerCharts } from "./rainbow-d9-echarts-xqCl9auZ.js";
-import { V as VUtils, r as registerWidget, g as useCreateEventBus, M as MUtils, P as PPUtils, a as useThrottler, e as useForceUpdate, S as StandaloneRoot, m as ExternalDefMismatchIndicator, n as N1Logger, B as BridgeEventBusProvider, o as useBridgeEventBus, p as BridgeToRootEventTypes, E as ExternalDefIndicator, f as MBUtils, D as DeviceDetective } from "./rainbow-d9-n1-bqDfZtki.js";
-import { i as index$2, D as DOM_KEY_WIDGET, C as CssVars, d as utils$2, b as useGlobalHandlers, t as toIntlLabel, U as UnwrappedButton, B as ButtonInk, I as IntlLabel, e as ButtonFill, o as utils$3, n as GlobalRoot, p as utils$1, $ as $d9n2, u as useGlobalEventBus, q as UnwrappedButtonBar, r as ButtonBarAlignment, G as GlobalEventTypes, s as UnwrappedCaption, T as TreeNodeCheckedChangeFrom, v as UnwrappedSection } from "./rainbow-d9-n2-_SyARUmj.js";
-import { a as index, b as index$2$1, i as index$1, p as parseDoc, r as registerN2Widgets } from "./rainbow-d9-n3-bMrqF5Iy.js";
-import { q as qe, $ as $e } from "./styled-components-Hk82igAO.js";
-import { T as Tag, v as tags, x as ViewPlugin, y as syntaxTree, H as HighlightStyle, z as defaultHighlightStyle, A as syntaxHighlighting, B as styleTags, D as Decoration, C as InlineContext, W as WidgetType, F as EditorView, G as EditorState, J as basicSetup, K as keymap, L as indentWithTab, N as markdown$c, O as javascript, Q as markdownLanguage, R as lintGutter, U as linter, X as json, Y as jsonParseLinter, n as nanoid } from "./vendor-TSR6RXc3.js";
-import { r as registerPlanSelect, u as useDemoMarkdown, C as CustomEventHandler, N as N2DemoDialogHandler, T as ThaiPlanSelection, a as ThaiPlanSelectionData, b as ThaiPlanSelectionMarkdown, P as PlanSelectionCssVars } from "./rainbow-d9-thai-plan-selection-LjKSLctC.js";
-import { d as dayjs, W as WeekOfYear, Q as QuarterOfYear, D as Duration, I as IsToday, R as RelativeTime, A as ArraySupport, O as ObjectSupport, C as CustomParseFormat, U as UTC, B as BuddhistEra } from "./dayjs-9Z7dW0Q-.js";
+import { a as React, r as reactExports, D as DiagramModel, C as CanvasWidget, N as NodeModel, d as createEngine, P as PortModel, e as PortModelAlignment, f as DefaultLinkModel, A as AbstractModelFactory, g as AbstractReactFactory, i as PortWidget, j as jsxRuntimeExports, k as client } from "./react-VfX_HI7I.js";
+import { r as registerCharts } from "./rainbow-d9-echarts-mhC4yMrG.js";
+import { V as VUtils, r as registerWidget, g as useCreateEventBus, M as MUtils, P as PPUtils, a as useThrottler, e as useForceUpdate, S as StandaloneRoot, m as ExternalDefMismatchIndicator, n as N1Logger, B as BridgeEventBusProvider, o as useBridgeEventBus, p as BridgeToRootEventTypes, E as ExternalDefIndicator, f as MBUtils, D as DeviceDetective } from "./rainbow-d9-n1-gbyGzXGq.js";
+import { i as index$2, D as DOM_KEY_WIDGET, C as CssVars, d as utils$2, b as useGlobalHandlers, t as toIntlLabel, U as UnwrappedButton, B as ButtonInk, I as IntlLabel, e as ButtonFill, o as CssConstants, p as UnwrappedCaption, q as utils$3, n as GlobalRoot, r as utils$1, $ as $d9n2, u as useGlobalEventBus, s as UnwrappedButtonBar, v as ButtonBarAlignment, G as GlobalEventTypes, T as TreeNodeCheckedChangeFrom, w as UnwrappedSection } from "./rainbow-d9-n2-g40jCJIK.js";
+import { a as index, b as index$2$1, i as index$1, p as parseDoc, r as registerN2Widgets } from "./rainbow-d9-n3-UuWNHvo9.js";
+import { q as qe, $ as $e } from "./styled-components-xBJU6yph.js";
+import { ay as Tag, az as tags, aA as ViewPlugin, aB as syntaxTree, aC as HighlightStyle, aD as defaultHighlightStyle, aE as syntaxHighlighting, aF as styleTags, aG as Decoration, aH as InlineContext, aI as WidgetType, aJ as EditorView, aK as EditorState, aL as basicSetup, aM as keymap, aN as indentWithTab, aO as markdown$d, aP as javascript, aQ as markdownLanguage, aR as lintGutter, aS as linter, aT as json, aU as jsonParseLinter, I as color, aV as jsYaml, G as nanoid } from "./vendor-ctmAJdvj.js";
+import { r as registerPlanSelect, u as useDemoMarkdown, C as CustomEventHandler, N as N2DemoDialogHandler, T as ThaiPlanSelection, a as ThaiPlanSelectionData, b as ThaiPlanSelectionMarkdown, P as PlanSelectionCssVars } from "./rainbow-d9-thai-plan-selection-FQ2t4ikM.js";
+import { d as dayjs, W as WeekOfYear, Q as QuarterOfYear, D as Duration, I as IsToday, R as RelativeTime, A as ArraySupport, O as ObjectSupport, C as CustomParseFormat, U as UTC, B as BuddhistEra } from "./dayjs-ZafkOS5_.js";
 import { u as use, a as install, b as install$1, c as install$2, d as install$3, e as install$4, f as install$5, h as installLabelLayout, j as installUniversalTransition, k as install$6, l as install$7 } from "./echarts-v5L9gyiQ.js";
-import { b as remarkGfm } from "./remark-u74uMcdQ.js";
-import { R as ReactMarkdown } from "./react-markdown-DEHuKsv0.js";
-import { S as SyntaxHighlighter, m as materialDark, _ as __vitePreload } from "./react-syntax-highlighter-4j5ODqNB.js";
-import "./babel-AnpZxJH-.js";
-import "./mdast-fMTOFGWm.js";
-import "./micromark-UJ_4L-HU.js";
+import { b as remarkGfm } from "./remark-EyoFF6Sh.js";
+import { R as ReactMarkdown } from "./react-markdown-ngsLJJqJ.js";
+import { S as SyntaxHighlighter, m as materialDark, _ as __vitePreload } from "./react-syntax-highlighter-ByUvmx6d.js";
+import "./emotion-FZLYEHGf.js";
+import "./babel-zvTTnt5j.js";
+import "./mdast-g1iQkPhR.js";
+import "./micromark-9GkUWrcU.js";
 import "./unist-5yxlKLF4.js";
-import "./emotion--D3psyId.js";
 import "./zrender-DEzoFf2M.js";
-import "./property-information-54x_22ss.js";
-import "./refractor-PXZkPelk.js";
-import "./hastscript-piVe79W6.js";
+import "./property-information-IfbHeOW5.js";
+import "./refractor-1HMVYhmk.js";
+import "./hastscript-JIvlRNBG.js";
 (function polyfill() {
   const relList = document.createElement("link").relList;
   if (relList && relList.supports && relList.supports("modulepreload")) {
@@ -75,7 +75,7 @@ var PlaygroundWidgetGroupKey;
   PlaygroundWidgetGroupKey2["DISPLAY"] = "display-group";
   PlaygroundWidgetGroupKey2["NOT_CARE"] = "not-care";
 })(PlaygroundWidgetGroupKey || (PlaygroundWidgetGroupKey = {}));
-const PlaygroundCssVars = {
+const PlaygroundCssVars$1 = {
   Z_INDEX: 9999999,
   TOOLBAR_BACKGROUND_COLOR: `var(--d9-playground-toolbar-background-color, ${CssVars.BACKGROUND_COLOR})`,
   TOOLBAR_BUTTON_SIZE: "var(--d9-playground-toolbar-button-size, 30px)",
@@ -693,7 +693,7 @@ index$2.Registrar.register({
   [PlaygroundIcons.RADIO]: () => React.createElement(RadioIcon, null),
   [PlaygroundIcons.RADIOS]: () => React.createElement(RadiosIcon, null)
 });
-var PlaygroundEventTypes;
+var PlaygroundEventTypes$1;
 (function(PlaygroundEventTypes2) {
   PlaygroundEventTypes2["SWITCH_EDITOR_BADGE"] = "switch-editor-badge";
   PlaygroundEventTypes2["SWITCH_VIEWER_WRAPPER"] = "switch-viewer-wrapper";
@@ -710,15 +710,15 @@ var PlaygroundEventTypes;
   PlaygroundEventTypes2["SHOW_WIDGET_TEMPLATE_DIALOG"] = "show-widget-template-dialog";
   PlaygroundEventTypes2["EDIT_MOCK_JSON"] = "edit-mock-json";
   PlaygroundEventTypes2["FORCE_UPDATE_VIEWER"] = "force-update-viewer";
-})(PlaygroundEventTypes || (PlaygroundEventTypes = {}));
-const Context = reactExports.createContext({});
-Context.displayName = "EventBus";
-const PlaygroundEventBusProvider = (props) => {
+})(PlaygroundEventTypes$1 || (PlaygroundEventTypes$1 = {}));
+const Context$1 = reactExports.createContext({});
+Context$1.displayName = "EventBus";
+const PlaygroundEventBusProvider$1 = (props) => {
   const { children } = props;
   const bus = useCreateEventBus("d9-playground");
-  return React.createElement(Context.Provider, { value: bus }, children);
+  return React.createElement(Context$1.Provider, { value: bus }, children);
 };
-const usePlaygroundEventBus = () => reactExports.useContext(Context);
+const usePlaygroundEventBus$1 = () => reactExports.useContext(Context$1);
 const ToolbarWrapper = qe.div.attrs(() => {
   return {
     [DOM_KEY_WIDGET]: "d9-playground-toolbar",
@@ -735,7 +735,7 @@ const ToolbarWrapper = qe.div.attrs(() => {
     grid-template-columns: var(--primary-width) var(--secondary-width);
     grid-template-rows: 1fr;
     width: var(--width);
-    background-color: ${PlaygroundCssVars.TOOLBAR_BACKGROUND_COLOR};
+    background-color: ${PlaygroundCssVars$1.TOOLBAR_BACKGROUND_COLOR};
     border-right: ${CssVars.BORDER};
 
     button[data-w=d9-button] {
@@ -767,7 +767,7 @@ const ToolbarWrapper = qe.div.attrs(() => {
                 width: 100%;
                 height: 100%;
                 border-radius: ${CssVars.BORDER_RADIUS};
-                background-color: ${PlaygroundCssVars.TOOLBAR_BUTTON_ACTIVE_COLOR};
+                background-color: ${PlaygroundCssVars$1.TOOLBAR_BUTTON_ACTIVE_COLOR};
                 opacity: 0;
                 transition: opacity ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION};
                 z-index: 0;
@@ -778,7 +778,7 @@ const ToolbarWrapper = qe.div.attrs(() => {
             }
 
             &:hover {
-                background-color: ${PlaygroundCssVars.TOOLBAR_BUTTON_HOVER_COLOR};
+                background-color: ${PlaygroundCssVars$1.TOOLBAR_BUTTON_HOVER_COLOR};
                 overflow: visible;
 
                 > span[data-role=text] {
@@ -787,14 +787,14 @@ const ToolbarWrapper = qe.div.attrs(() => {
             }
 
             > span[data-w=d9-deco-lead] {
-                width: ${PlaygroundCssVars.TOOLBAR_BUTTON_SIZE};
-                height: ${PlaygroundCssVars.TOOLBAR_BUTTON_SIZE};
+                width: ${PlaygroundCssVars$1.TOOLBAR_BUTTON_SIZE};
+                height: ${PlaygroundCssVars$1.TOOLBAR_BUTTON_SIZE};
                 padding: 0;
                 color: ${CssVars.FONT_COLOR};
                 fill: ${CssVars.FONT_COLOR};
 
                 > svg {
-                    height: calc(${PlaygroundCssVars.TOOLBAR_BUTTON_SIZE} * 0.7);
+                    height: calc(${PlaygroundCssVars$1.TOOLBAR_BUTTON_SIZE} * 0.7);
                     transition: all ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION};
                 }
             }
@@ -805,10 +805,10 @@ const ToolbarWrapper = qe.div.attrs(() => {
                 top: 0;
                 left: calc(100% + 8px);
                 font-variant: none;
-                background-color: ${PlaygroundCssVars.TOOLBAR_TOOLTIP_BACKGROUND_COLOR};
-                box-shadow: ${PlaygroundCssVars.TOOLBAR_TOOLTIP_SHADOW};
+                background-color: ${PlaygroundCssVars$1.TOOLBAR_TOOLTIP_BACKGROUND_COLOR};
+                box-shadow: ${PlaygroundCssVars$1.TOOLBAR_TOOLTIP_SHADOW};
                 border-radius: ${CssVars.BORDER_RADIUS};
-                z-index: ${PlaygroundCssVars.Z_INDEX + 1};
+                z-index: ${PlaygroundCssVars$1.Z_INDEX + 1};
             }
         }
     }
@@ -858,7 +858,7 @@ const ToolbarButtonTooltip = qe.div.attrs({ [DOM_KEY_WIDGET]: "d9-playground-too
     display: flex;
     position: relative;
     align-items: center;
-    height: calc(${PlaygroundCssVars.TOOLBAR_BUTTON_SIZE} * 1.2);
+    height: calc(${PlaygroundCssVars$1.TOOLBAR_BUTTON_SIZE} * 1.2);
     padding: 0 12px;
     white-space: nowrap;
     overflow: hidden;
@@ -875,7 +875,7 @@ const ToolbarButton = (props) => {
 const PrimaryBar = (props) => {
   var _a;
   const { groups } = props;
-  const { fire } = usePlaygroundEventBus();
+  const { fire } = usePlaygroundEventBus$1();
   const [state, setState] = reactExports.useState({
     editorBadge: false,
     locator: true,
@@ -896,41 +896,41 @@ const PrimaryBar = (props) => {
   }, []);
   const onGroupClicked = (group) => () => {
     setState((state2) => ({ ...state2, group }));
-    fire(PlaygroundEventTypes.WIDGET_GROUP_CHANGE, group);
+    fire(PlaygroundEventTypes$1.WIDGET_GROUP_CHANGE, group);
   };
   const onShowBadgeClicked = () => {
-    fire(PlaygroundEventTypes.SWITCH_EDITOR_BADGE, true);
+    fire(PlaygroundEventTypes$1.SWITCH_EDITOR_BADGE, true);
     setState((state2) => ({ ...state2, editorBadge: true }));
   };
   const onHideBadgeClicked = () => {
-    fire(PlaygroundEventTypes.SWITCH_EDITOR_BADGE, false);
+    fire(PlaygroundEventTypes$1.SWITCH_EDITOR_BADGE, false);
     setState((state2) => ({ ...state2, editorBadge: false }));
   };
   const onShowLocatorClicked = () => {
-    fire(PlaygroundEventTypes.SWITCH_VIEWER_WRAPPER, { locator: true });
+    fire(PlaygroundEventTypes$1.SWITCH_VIEWER_WRAPPER, { locator: true });
     setState((state2) => ({ ...state2, locator: true }));
   };
   const onHideLocatorClicked = () => {
-    fire(PlaygroundEventTypes.SWITCH_VIEWER_WRAPPER, { locator: false });
+    fire(PlaygroundEventTypes$1.SWITCH_VIEWER_WRAPPER, { locator: false });
     setState((state2) => ({ ...state2, locator: false }));
   };
   const onMockJsonClicked = () => {
-    fire(PlaygroundEventTypes.EDIT_MOCK_JSON);
+    fire(PlaygroundEventTypes$1.EDIT_MOCK_JSON);
   };
   const onMaxClicked = () => {
-    fire(PlaygroundEventTypes.MAXIMIZE);
+    fire(PlaygroundEventTypes$1.MAXIMIZE);
     setState((state2) => ({ ...state2, maximized: true }));
   };
   const onMinClicked = () => {
-    fire(PlaygroundEventTypes.QUIT_MAXIMIZE);
+    fire(PlaygroundEventTypes$1.QUIT_MAXIMIZE);
     setState((state2) => ({ ...state2, maximized: false }));
   };
   const onZenClicked = () => {
-    fire(PlaygroundEventTypes.ZEN);
+    fire(PlaygroundEventTypes$1.ZEN);
     setState((state2) => ({ ...state2, zen: true }));
   };
   const onWindowClicked = () => {
-    fire(PlaygroundEventTypes.QUIT_ZEN);
+    fire(PlaygroundEventTypes$1.QUIT_ZEN);
     setState((state2) => ({ ...state2, zen: false }));
   };
   return React.createElement(
@@ -952,7 +952,7 @@ const PrimaryBar = (props) => {
 const SecondaryBar = (props) => {
   var _a;
   const { groups, buttons } = props;
-  const { on, off, fire } = usePlaygroundEventBus();
+  const { on, off, fire } = usePlaygroundEventBus$1();
   const [state, setState] = reactExports.useState({
     group: ((_a = groups[0]) == null ? void 0 : _a.key) ?? ""
   });
@@ -960,13 +960,13 @@ const SecondaryBar = (props) => {
     const onWidgetGroupChange = (group) => {
       setState((state2) => ({ ...state2, group }));
     };
-    on(PlaygroundEventTypes.WIDGET_GROUP_CHANGE, onWidgetGroupChange);
+    on(PlaygroundEventTypes$1.WIDGET_GROUP_CHANGE, onWidgetGroupChange);
     return () => {
-      off(PlaygroundEventTypes.WIDGET_GROUP_CHANGE, onWidgetGroupChange);
+      off(PlaygroundEventTypes$1.WIDGET_GROUP_CHANGE, onWidgetGroupChange);
     };
   }, [on, off]);
   const onAddWidget = (keyOrWidgetType) => () => {
-    fire(PlaygroundEventTypes.INSERT_WIDGET_TEMPLATE, keyOrWidgetType);
+    fire(PlaygroundEventTypes$1.INSERT_WIDGET_TEMPLATE, keyOrWidgetType);
   };
   return React.createElement(SecondaryToolbar, null, (buttons[state.group] ?? []).map((button) => {
     const { key, icon, tooltip } = button;
@@ -3385,23 +3385,23 @@ const createEditorStyles = (options) => {
     padding: 0 3px;
 
     &.d9-playground-editor-widget-declaration-type-icon {
-        background-color: ${PlaygroundCssVars.WIDGET_DECLARATION_TYPE_COLOR};
+        background-color: ${PlaygroundCssVars$1.WIDGET_DECLARATION_TYPE_COLOR};
     }
 
     &.d9-playground-editor-widget-declaration-headline-icon {
-        background-color: ${PlaygroundCssVars.WIDGET_DECLARATION_HEADLINE_COLOR};
+        background-color: ${PlaygroundCssVars$1.WIDGET_DECLARATION_HEADLINE_COLOR};
     }
 
     &.d9-playground-editor-widget-declaration-property-icon {
-        background-color: ${PlaygroundCssVars.WIDGET_DECLARATION_PROPERTY_COLOR};
+        background-color: ${PlaygroundCssVars$1.WIDGET_DECLARATION_PROPERTY_COLOR};
     }
 
     &.d9-playground-editor-widget-declaration-id-icon {
-        background-color: ${PlaygroundCssVars.WIDGET_DECLARATION_ID_COLOR};
+        background-color: ${PlaygroundCssVars$1.WIDGET_DECLARATION_ID_COLOR};
     }
 
     &.d9-playground-editor-widget-declaration-flag-icon {
-        background-color: ${PlaygroundCssVars.WIDGET_DECLARATION_FLAG_COLOR};
+        background-color: ${PlaygroundCssVars$1.WIDGET_DECLARATION_FLAG_COLOR};
     }
 
     /** disable icons for list */
@@ -3418,7 +3418,7 @@ const createEditorStyles = (options) => {
     &.d9-playground-editor-widget-declaration-attr-name-icon {
         width: unset;
         padding: 0 3px;
-        background-color: ${PlaygroundCssVars.WIDGET_DECLARATION_ATTR_NAME_COLOR};
+        background-color: ${PlaygroundCssVars$1.WIDGET_DECLARATION_ATTR_NAME_COLOR};
     }
 }
 `;
@@ -3452,7 +3452,7 @@ const createEditorStyles = (options) => {
 
     div.cm-line {
         span.d9-playground-editor-heading-mark {
-            color: ${PlaygroundCssVars.WIDGET_DECLARATION_INSTRUCTION_COLOR};
+            color: ${PlaygroundCssVars$1.WIDGET_DECLARATION_INSTRUCTION_COLOR};
             font-weight: 900;
         }
 
@@ -3478,7 +3478,7 @@ const createEditorStyles = (options) => {
         //}
 
         span.d9-playground-editor-list.d9-playground-editor-list-mark {
-            color: ${PlaygroundCssVars.WIDGET_DECLARATION_INSTRUCTION_COLOR};
+            color: ${PlaygroundCssVars$1.WIDGET_DECLARATION_INSTRUCTION_COLOR};
             font-weight: 600;
             //font-size: 16px;
         }
@@ -3515,30 +3515,30 @@ const createEditorStyles = (options) => {
         span.d9-playground-editor-heading6,
         span.d9-playground-editor-list {
             &.d9-playground-editor-widget-declaration-splitter {
-                color: ${PlaygroundCssVars.WIDGET_DECLARATION_SPLITTER_COLOR};
+                color: ${PlaygroundCssVars$1.WIDGET_DECLARATION_SPLITTER_COLOR};
                 margin: 0 4px;
                 font-weight: 600;
                 font-variant: all-small-caps;
             }
 
             &.d9-playground-editor-widget-declaration-type {
-                color: ${PlaygroundCssVars.WIDGET_DECLARATION_TYPE_COLOR};
+                color: ${PlaygroundCssVars$1.WIDGET_DECLARATION_TYPE_COLOR};
             }
 
             &.d9-playground-editor-widget-declaration-headline {
-                color: ${PlaygroundCssVars.WIDGET_DECLARATION_HEADLINE_COLOR};
+                color: ${PlaygroundCssVars$1.WIDGET_DECLARATION_HEADLINE_COLOR};
             }
 
             &.d9-playground-editor-widget-declaration-property {
-                color: ${PlaygroundCssVars.WIDGET_DECLARATION_PROPERTY_COLOR};
+                color: ${PlaygroundCssVars$1.WIDGET_DECLARATION_PROPERTY_COLOR};
             }
 
             &.d9-playground-editor-widget-declaration-id {
-                color: ${PlaygroundCssVars.WIDGET_DECLARATION_ID_COLOR};
+                color: ${PlaygroundCssVars$1.WIDGET_DECLARATION_ID_COLOR};
             }
 
             &.d9-playground-editor-widget-declaration-flag {
-                color: ${PlaygroundCssVars.WIDGET_DECLARATION_FLAG_COLOR};
+                color: ${PlaygroundCssVars$1.WIDGET_DECLARATION_FLAG_COLOR};
             }
 
             ${badge ? EDITOR_BADGES : ""}
@@ -3550,26 +3550,26 @@ const createEditorStyles = (options) => {
             &.d9-playground-editor-widget-declaration-attr-splitter,
             &.d9-playground-editor-widget-declaration-attr-value-splitter,
             &.d9-playground-editor-widget-declaration-attr-name-joint {
-                color: ${PlaygroundCssVars.WIDGET_DECLARATION_SPLITTER_COLOR};
+                color: ${PlaygroundCssVars$1.WIDGET_DECLARATION_SPLITTER_COLOR};
                 margin: 0 4px;
                 font-weight: 600;
                 font-variant: all-small-caps;
             }
 
             &.d9-playground-editor-widget-declaration-attr-name {
-                color: ${PlaygroundCssVars.WIDGET_DECLARATION_ATTR_NAME_COLOR};
+                color: ${PlaygroundCssVars$1.WIDGET_DECLARATION_ATTR_NAME_COLOR};
             }
 
             &.d9-playground-editor-widget-declaration-attr-value-icon {
-                color: ${PlaygroundCssVars.WIDGET_DECLARATION_ATTR_VALUE_ICON_COLOR};
+                color: ${PlaygroundCssVars$1.WIDGET_DECLARATION_ATTR_VALUE_ICON_COLOR};
             }
 
             &.d9-playground-editor-widget-declaration-attr-value-str {
-                color: ${PlaygroundCssVars.WIDGET_DECLARATION_ATTR_VALUE_STR_COLOR};
+                color: ${PlaygroundCssVars$1.WIDGET_DECLARATION_ATTR_VALUE_STR_COLOR};
             }
 
             &.d9-playground-editor-widget-declaration-attr-value-ext {
-                color: ${PlaygroundCssVars.WIDGET_DECLARATION_ATTR_VALUE_EXT_COLOR};
+                color: ${PlaygroundCssVars$1.WIDGET_DECLARATION_ATTR_VALUE_EXT_COLOR};
             }
 
             ${badge ? BULLET_LIST_BADGES : ""}
@@ -3711,10 +3711,10 @@ const WidgetTemplateDialogWrapper = qe.div.attrs(({ visible }) => {
 })`
     display: flex;
     flex-direction: column;
-    width: ${PlaygroundCssVars.TEMPLATE_DIALOG_WIDTH};
-    margin-top: ${PlaygroundCssVars.TEMPLATE_DIALOG_MARGIN_TOP};
-    margin-left: ${PlaygroundCssVars.TEMPLATE_DIALOG_MARGIN_LEFT};
-    padding: ${PlaygroundCssVars.TEMPLATE_DIALOG_PADDING};
+    width: ${PlaygroundCssVars$1.TEMPLATE_DIALOG_WIDTH};
+    margin-top: ${PlaygroundCssVars$1.TEMPLATE_DIALOG_MARGIN_TOP};
+    margin-left: ${PlaygroundCssVars$1.TEMPLATE_DIALOG_MARGIN_LEFT};
+    padding: ${PlaygroundCssVars$1.TEMPLATE_DIALOG_PADDING};
     background-color: ${CssVars.BACKGROUND_COLOR};
     border-radius: ${CssVars.BORDER_RADIUS};
     box-shadow: ${CssVars.DIALOG_SHADOW};
@@ -3726,8 +3726,8 @@ const WidgetTemplateDialogBody = qe.div.attrs({ [DOM_KEY_WIDGET]: "d9-playground
     position: relative;
     flex-direction: column;
     flex-grow: 1;
-    height: ${PlaygroundCssVars.TEMPLATE_DIALOG_HEIGHT};
-    margin-bottom: ${PlaygroundCssVars.TEMPLATE_DIALOG_BODY_MARGIN_BOTTOM};
+    height: ${PlaygroundCssVars$1.TEMPLATE_DIALOG_HEIGHT};
+    margin-bottom: ${PlaygroundCssVars$1.TEMPLATE_DIALOG_BODY_MARGIN_BOTTOM};
     font-family: ${CssVars.FONT_FAMILY};
     font-size: ${CssVars.FONT_SIZE};
     color: ${CssVars.CAPTION_FONT_COLOR};
@@ -3774,7 +3774,7 @@ const WidgetTemplateDialogFooter = qe.div.attrs({ [DOM_KEY_WIDGET]: "d9-playgrou
 const WidgetTemplateDialog = (props) => {
   const { widgets } = props;
   const ref = reactExports.useRef(null);
-  const { on, off } = usePlaygroundEventBus();
+  const { on, off } = usePlaygroundEventBus$1();
   const [state, setState] = reactExports.useState({ visible: false, copied: false });
   reactExports.useEffect(() => {
     if (ref.current == null) {
@@ -3787,7 +3787,7 @@ const WidgetTemplateDialog = (props) => {
           basicSetup,
           keymap.of([indentWithTab]),
           d9mlHighlightStyle,
-          markdown$c({
+          markdown$d({
             defaultCodeLanguage: javascript({ jsx: false, typescript: false }),
             base: markdownLanguage,
             extensions: d9mlExtensions
@@ -3819,9 +3819,9 @@ const WidgetTemplateDialog = (props) => {
       state.editor.dispatch({ changes: { from: 0, to: doc.length, insert: template } });
       setState((state2) => ({ ...state2, visible: true, copied: false, widgetType: keyOrWidgetType, reason }));
     };
-    on(PlaygroundEventTypes.SHOW_WIDGET_TEMPLATE_DIALOG, show);
+    on(PlaygroundEventTypes$1.SHOW_WIDGET_TEMPLATE_DIALOG, show);
     return () => {
-      off(PlaygroundEventTypes.SHOW_WIDGET_TEMPLATE_DIALOG, show);
+      off(PlaygroundEventTypes$1.SHOW_WIDGET_TEMPLATE_DIALOG, show);
     };
   }, [on, off, state.visible, state.editor, widgets.widgets]);
   reactExports.useEffect(() => {
@@ -3882,7 +3882,7 @@ const WidgetTemplateDialog = (props) => {
     )
   );
 };
-const EditorWrapper = qe.div.attrs(({ editorSize }) => {
+const EditorWrapper$1 = qe.div.attrs(({ editorSize }) => {
   return {
     [DOM_KEY_WIDGET]: "d9-playground-editor",
     style: {
@@ -3910,10 +3910,10 @@ const EditorPanel = qe.div.attrs({ [DOM_KEY_WIDGET]: "d9-playground-editor-panel
 
     ${createEditorStyles({ badge: true })}
 `;
-const Editor = (props) => {
+const Editor$1 = (props) => {
   const { content, externalDefsTypes, widgets, ...rest } = props;
   const ref = reactExports.useRef(null);
-  const { on, off, fire } = usePlaygroundEventBus();
+  const { on, off, fire } = usePlaygroundEventBus$1();
   const [state, setState] = reactExports.useState({ editorBadge: false });
   reactExports.useEffect(() => {
     if (ref.current == null) {
@@ -3927,7 +3927,7 @@ const Editor = (props) => {
           keymap.of([indentWithTab]),
           d9mlHighlightStyle,
           createD9mlCompletions({ widgets, externalDefsTypes: externalDefsTypes ?? {} }),
-          markdown$c({
+          markdown$d({
             defaultCodeLanguage: javascript({ jsx: false, typescript: false }),
             base: markdownLanguage,
             extensions: d9mlExtensions
@@ -3938,7 +3938,7 @@ const Editor = (props) => {
             if (view.docChanged) {
               const doc = view.state.doc;
               const value = doc.toString();
-              fire(PlaygroundEventTypes.CONTENT_CHANGED, value);
+              fire(PlaygroundEventTypes$1.CONTENT_CHANGED, value);
             }
           })
         ]
@@ -3964,18 +3964,18 @@ const Editor = (props) => {
     const onResizeEditor = (width) => {
       setState((state2) => ({ ...state2, size: width }));
     };
-    on(PlaygroundEventTypes.RESIZE_EDITOR, onResizeEditor);
+    on(PlaygroundEventTypes$1.RESIZE_EDITOR, onResizeEditor);
     return () => {
-      off(PlaygroundEventTypes.RESIZE_EDITOR, onResizeEditor);
+      off(PlaygroundEventTypes$1.RESIZE_EDITOR, onResizeEditor);
     };
   }, [on, off]);
   reactExports.useEffect(() => {
     const onSwitchEditorBadge = (visible) => {
       setState((state2) => ({ ...state2, editorBadge: visible }));
     };
-    on(PlaygroundEventTypes.SWITCH_EDITOR_BADGE, onSwitchEditorBadge);
+    on(PlaygroundEventTypes$1.SWITCH_EDITOR_BADGE, onSwitchEditorBadge);
     return () => {
-      off(PlaygroundEventTypes.SWITCH_EDITOR_BADGE, onSwitchEditorBadge);
+      off(PlaygroundEventTypes$1.SWITCH_EDITOR_BADGE, onSwitchEditorBadge);
     };
   }, [on, off]);
   reactExports.useEffect(() => {
@@ -4000,9 +4000,9 @@ const Editor = (props) => {
         }
       }, 100);
     };
-    on(PlaygroundEventTypes.LOCATE_LINE, onLocateLine);
+    on(PlaygroundEventTypes$1.LOCATE_LINE, onLocateLine);
     return () => {
-      off(PlaygroundEventTypes.LOCATE_LINE, onLocateLine);
+      off(PlaygroundEventTypes$1.LOCATE_LINE, onLocateLine);
     };
   }, [on, off, state.editor]);
   reactExports.useEffect(() => {
@@ -4041,17 +4041,17 @@ const Editor = (props) => {
       const { from, to } = editorState.selection.main;
       const { from: fromLineFirstCharPos, number: fromLineNumber, text: fromLineText } = editorState.doc.lineAt(from);
       if (fromLineNumber === 1) {
-        fire(PlaygroundEventTypes.SHOW_WIDGET_TEMPLATE_DIALOG, keyOrWidgetType, findDefaultPrefix(keyOrWidgetType, 2), "The cursor is at the beginning of the designer, so it cannot be directly inserted the widget template.");
+        fire(PlaygroundEventTypes$1.SHOW_WIDGET_TEMPLATE_DIALOG, keyOrWidgetType, findDefaultPrefix(keyOrWidgetType, 2), "The cursor is at the beginning of the designer, so it cannot be directly inserted the widget template.");
         return;
       }
       const text = editorState.sliceDoc(from, to) ?? "";
       if (from !== to && text.trim().length !== 0) {
-        fire(PlaygroundEventTypes.SHOW_WIDGET_TEMPLATE_DIALOG, keyOrWidgetType, findDefaultPrefix(keyOrWidgetType, findClosestPreviousHeadingLevel(fromLineNumber, false)), "The current selection in the designer already contains content, so it cannot be directly inserted the widget template.");
+        fire(PlaygroundEventTypes$1.SHOW_WIDGET_TEMPLATE_DIALOG, keyOrWidgetType, findDefaultPrefix(keyOrWidgetType, findClosestPreviousHeadingLevel(fromLineNumber, false)), "The current selection in the designer already contains content, so it cannot be directly inserted the widget template.");
         return;
       }
       const { number: toLineNumber } = editorState.doc.lineAt(to);
       if (fromLineNumber !== toLineNumber) {
-        fire(PlaygroundEventTypes.SHOW_WIDGET_TEMPLATE_DIALOG, keyOrWidgetType, findDefaultPrefix(keyOrWidgetType, findClosestPreviousHeadingLevel(fromLineNumber, false)), "The current selection contains multiple lines, so it cannot be directly inserted the widget template.");
+        fire(PlaygroundEventTypes$1.SHOW_WIDGET_TEMPLATE_DIALOG, keyOrWidgetType, findDefaultPrefix(keyOrWidgetType, findClosestPreviousHeadingLevel(fromLineNumber, false)), "The current selection contains multiple lines, so it cannot be directly inserted the widget template.");
         return;
       }
       let indent = "";
@@ -4059,11 +4059,11 @@ const Editor = (props) => {
       if (fromLineText.trim().length !== 0) {
         const [, spaces, symbol, content2] = fromLineText.match(/^(\s*)(#{1,6}|-|\*)(.*)$/) ?? [];
         if (symbol == null || spaces.length !== 0 && symbol.includes("#")) {
-          fire(PlaygroundEventTypes.SHOW_WIDGET_TEMPLATE_DIALOG, keyOrWidgetType, findDefaultPrefix(keyOrWidgetType, findClosestPreviousHeadingLevel(fromLineNumber, false)), "The selected line is neither a heading nor a bullet list, so it cannot be directly inserted into the widget template.");
+          fire(PlaygroundEventTypes$1.SHOW_WIDGET_TEMPLATE_DIALOG, keyOrWidgetType, findDefaultPrefix(keyOrWidgetType, findClosestPreviousHeadingLevel(fromLineNumber, false)), "The selected line is neither a heading nor a bullet list, so it cannot be directly inserted into the widget template.");
           return;
         }
         if (content2.trim().length !== 0) {
-          fire(PlaygroundEventTypes.SHOW_WIDGET_TEMPLATE_DIALOG, keyOrWidgetType, findDefaultPrefix(keyOrWidgetType, findClosestPreviousHeadingLevel(fromLineNumber, false)), "The selected line already contains content, so it cannot be directly inserted into the widget template.");
+          fire(PlaygroundEventTypes$1.SHOW_WIDGET_TEMPLATE_DIALOG, keyOrWidgetType, findDefaultPrefix(keyOrWidgetType, findClosestPreviousHeadingLevel(fromLineNumber, false)), "The selected line already contains content, so it cannot be directly inserted into the widget template.");
           return;
         }
         indent = spaces;
@@ -4081,9 +4081,9 @@ const Editor = (props) => {
         }
       });
     };
-    on(PlaygroundEventTypes.INSERT_WIDGET_TEMPLATE, onInsertWidgetTemplate);
+    on(PlaygroundEventTypes$1.INSERT_WIDGET_TEMPLATE, onInsertWidgetTemplate);
     return () => {
-      off(PlaygroundEventTypes.INSERT_WIDGET_TEMPLATE, onInsertWidgetTemplate);
+      off(PlaygroundEventTypes$1.INSERT_WIDGET_TEMPLATE, onInsertWidgetTemplate);
     };
   }, [on, off, fire, state.editor, widgets.widgets]);
   return React.createElement(
@@ -4091,7 +4091,7 @@ const Editor = (props) => {
     null,
     React.createElement(WidgetTemplateDialog, { widgets }),
     React.createElement(
-      EditorWrapper,
+      EditorWrapper$1,
       { editorSize: state.size, ...rest, "data-editor-badge": state.editorBadge },
       React.createElement(EditorPanel, { ref })
     )
@@ -4118,7 +4118,7 @@ const WidgetWrapperAnchor = qe.span.attrs({ [DOM_KEY_WIDGET]: "d9-playground-wid
 `;
 const PlaygroundWidgetWrapper = (props) => {
   const ref = reactExports.useRef(null);
-  const { on, off } = usePlaygroundEventBus();
+  const { on, off } = usePlaygroundEventBus$1();
   reactExports.useEffect(() => {
     const onAskNodeDef = ($key, _widgetType, callback) => {
       if ($key !== props["data-for-playground-key"]) {
@@ -4126,9 +4126,9 @@ const PlaygroundWidgetWrapper = (props) => {
       }
       callback(props);
     };
-    on(PlaygroundEventTypes.ASK_NODE_DEF, onAskNodeDef);
+    on(PlaygroundEventTypes$1.ASK_NODE_DEF, onAskNodeDef);
     return () => {
-      off(PlaygroundEventTypes.ASK_NODE_DEF, onAskNodeDef);
+      off(PlaygroundEventTypes$1.ASK_NODE_DEF, onAskNodeDef);
     };
   }, [on, off, props]);
   return React.createElement(
@@ -4160,12 +4160,12 @@ const ViewerWrapper = qe.div.attrs(({ minViewerWidth }) => {
         min-width: var(--min-viewer-width);
     }
 `;
-const ParseError = qe.div.attrs({ [DOM_KEY_WIDGET]: "d9-playground-viewer-error" })`
+const ParseError$1 = qe.div.attrs({ [DOM_KEY_WIDGET]: "d9-playground-viewer-error" })`
     display: flex;
     position: relative;
     align-items: center;
     padding: 16px 32px;
-    color: ${PlaygroundCssVars.VIEWER_ERROR_COLOR};
+    color: ${PlaygroundCssVars$1.VIEWER_ERROR_COLOR};
     font-size: 1.5em;
     font-style: italic;
     font-weight: 500;
@@ -4179,10 +4179,10 @@ const WidgetWrapper = qe.div.attrs({ [DOM_KEY_WIDGET]: "d9-playground-widget-wra
     height: 0;
     user-select: none;
     pointer-events: none;
-    border-radius: ${PlaygroundCssVars.WIDGET_WRAPPER_BORDER_RADIUS};
-    box-shadow: ${PlaygroundCssVars.WIDGET_WRAPPER_SHADOW};
+    border-radius: ${PlaygroundCssVars$1.WIDGET_WRAPPER_BORDER_RADIUS};
+    box-shadow: ${PlaygroundCssVars$1.WIDGET_WRAPPER_SHADOW};
     transition: top 0.2s, left 0.2s, width 0.2s, height 0.2s;
-    z-index: ${PlaygroundCssVars.WIDGET_WRAPPER_Z_INDEX};
+    z-index: ${PlaygroundCssVars$1.WIDGET_WRAPPER_Z_INDEX};
 
     &[data-view-anchor] + div[data-w=d9-playground-widget-wrapper-toolbar] {
         opacity: 1;
@@ -4199,7 +4199,7 @@ const WidgetWrapperToolbar = qe.div.attrs({ [DOM_KEY_WIDGET]: "d9-playground-wid
     border-top-right-radius: ${CssVars.BORDER_RADIUS};
     opacity: 0;
     transition: bottom 0.2s, left 0.2s, opacity 0.2s;
-    z-index: ${PlaygroundCssVars.WIDGET_WRAPPER_Z_INDEX + 1};
+    z-index: ${PlaygroundCssVars$1.WIDGET_WRAPPER_Z_INDEX + 1};
     user-select: none;
     pointer-events: none;
 
@@ -4209,8 +4209,8 @@ const WidgetWrapperToolbar = qe.div.attrs({ [DOM_KEY_WIDGET]: "d9-playground-wid
         width: ${CssVars.INPUT_HEIGHT};
 
         &:hover, &:focus, &:active {
-            background-color: ${PlaygroundCssVars.WIDGET_WRAPPER_TOOLBAR_COLOR};
-            box-shadow: ${PlaygroundCssVars.WIDGET_WRAPPER_SHADOW};
+            background-color: ${PlaygroundCssVars$1.WIDGET_WRAPPER_TOOLBAR_COLOR};
+            box-shadow: ${PlaygroundCssVars$1.WIDGET_WRAPPER_SHADOW};
 
             > span > svg {
                 color: ${CssVars.INVERT_COLOR};
@@ -4222,13 +4222,13 @@ const WidgetWrapperToolbar = qe.div.attrs({ [DOM_KEY_WIDGET]: "d9-playground-wid
 
             > svg {
                 height: 20px;
-                color: ${PlaygroundCssVars.WIDGET_WRAPPER_TOOLBAR_COLOR};
-                filter: ${PlaygroundCssVars.WIDGET_WRAPPER_TOOLBAR_FILTER};
+                color: ${PlaygroundCssVars$1.WIDGET_WRAPPER_TOOLBAR_COLOR};
+                filter: ${PlaygroundCssVars$1.WIDGET_WRAPPER_TOOLBAR_FILTER};
             }
         }
     }
 `;
-class ErrorBoundary extends React.Component {
+let ErrorBoundary$1 = class ErrorBoundary extends React.Component {
   constructor(props) {
     super(props);
     this.state = { content: props.content, hasError: false };
@@ -4246,11 +4246,11 @@ class ErrorBoundary extends React.Component {
   }
   render() {
     if (this.state.hasError) {
-      return React.createElement(ParseError, null, "Something went wrong.");
+      return React.createElement(ParseError$1, null, "Something went wrong.");
     }
     return this.props.children;
   }
-}
+};
 const clearExternalDefs = (opts) => {
   if (opts == null || VUtils.isPrimitive(opts) || typeof opts === "function")
     ;
@@ -4278,7 +4278,7 @@ const ViewerKernel = (props) => {
   const wwRef = reactExports.useRef(null);
   const wwtRef = reactExports.useRef(null);
   const { replace, clear } = useThrottler();
-  const { on, off, fire } = usePlaygroundEventBus();
+  const { on, off, fire } = usePlaygroundEventBus$1();
   const forceUpdate = useForceUpdate();
   const [state, setState] = reactExports.useState({ locator: true });
   reactExports.useEffect(() => {
@@ -4286,18 +4286,18 @@ const ViewerKernel = (props) => {
       ...state2,
       locator: wrapper.locator
     }));
-    on(PlaygroundEventTypes.SWITCH_VIEWER_WRAPPER, onSwitchViewerWrapper);
+    on(PlaygroundEventTypes$1.SWITCH_VIEWER_WRAPPER, onSwitchViewerWrapper);
     return () => {
-      off(PlaygroundEventTypes.SWITCH_VIEWER_WRAPPER, onSwitchViewerWrapper);
+      off(PlaygroundEventTypes$1.SWITCH_VIEWER_WRAPPER, onSwitchViewerWrapper);
     };
   }, [on, off]);
   reactExports.useEffect(() => {
     const onForceUpdateViewer = () => {
       forceUpdate();
     };
-    on(PlaygroundEventTypes.FORCE_UPDATE_VIEWER, onForceUpdateViewer);
+    on(PlaygroundEventTypes$1.FORCE_UPDATE_VIEWER, onForceUpdateViewer);
     return () => {
-      off(PlaygroundEventTypes.FORCE_UPDATE_VIEWER, onForceUpdateViewer);
+      off(PlaygroundEventTypes$1.FORCE_UPDATE_VIEWER, onForceUpdateViewer);
     };
   }, [on, off, forceUpdate]);
   try {
@@ -4373,13 +4373,13 @@ const ViewerKernel = (props) => {
       const ww = wwRef.current;
       const $key = ww.getAttribute("data-current-for-playground-key");
       const widgetType = ww.getAttribute("data-current-w");
-      fire(PlaygroundEventTypes.ASK_NODE_DEF, $key, widgetType, (def2) => {
+      fire(PlaygroundEventTypes$1.ASK_NODE_DEF, $key, widgetType, (def2) => {
         const { preparsed } = def2;
         if (preparsed == null) {
           return;
         }
         const { content: { position: { start: { line } } } } = preparsed;
-        fire(PlaygroundEventTypes.LOCATE_LINE, line);
+        fire(PlaygroundEventTypes$1.LOCATE_LINE, line);
       });
     };
     const enhancedExternalDefs = {
@@ -4402,7 +4402,7 @@ const ViewerKernel = (props) => {
         )
       ) : null,
       React.createElement(
-        ErrorBoundary,
+        ErrorBoundary$1,
         { content },
         React.createElement(StandaloneRoot, { ...def, "$root": mockData, externalDefs: enhancedExternalDefs })
       )
@@ -4411,7 +4411,7 @@ const ViewerKernel = (props) => {
     return React.createElement(
       ViewerWrapper,
       { minViewerWidth },
-      React.createElement(ParseError, null, error.message || "Parse error occurred.")
+      React.createElement(ParseError$1, null, error.message || "Parse error occurred.")
     );
   }
 };
@@ -4445,10 +4445,10 @@ const MockJsonDialogWrapper = qe.div.attrs(({ visible }) => {
 })`
     display: flex;
     flex-direction: column;
-    width: ${PlaygroundCssVars.TEMPLATE_DIALOG_WIDTH};
-    margin-top: ${PlaygroundCssVars.TEMPLATE_DIALOG_MARGIN_TOP};
-    margin-left: ${PlaygroundCssVars.TEMPLATE_DIALOG_MARGIN_LEFT};
-    padding: ${PlaygroundCssVars.TEMPLATE_DIALOG_PADDING};
+    width: ${PlaygroundCssVars$1.TEMPLATE_DIALOG_WIDTH};
+    margin-top: ${PlaygroundCssVars$1.TEMPLATE_DIALOG_MARGIN_TOP};
+    margin-left: ${PlaygroundCssVars$1.TEMPLATE_DIALOG_MARGIN_LEFT};
+    padding: ${PlaygroundCssVars$1.TEMPLATE_DIALOG_PADDING};
     background-color: ${CssVars.BACKGROUND_COLOR};
     border-radius: ${CssVars.BORDER_RADIUS};
     box-shadow: ${CssVars.DIALOG_SHADOW};
@@ -4460,8 +4460,8 @@ const MockJsonDialogBody = qe.div.attrs({ [DOM_KEY_WIDGET]: "d9-playground-mock-
     position: relative;
     flex-direction: column;
     flex-grow: 1;
-    height: ${PlaygroundCssVars.TEMPLATE_DIALOG_HEIGHT};
-    margin-bottom: ${PlaygroundCssVars.TEMPLATE_DIALOG_BODY_MARGIN_BOTTOM};
+    height: ${PlaygroundCssVars$1.TEMPLATE_DIALOG_HEIGHT};
+    margin-bottom: ${PlaygroundCssVars$1.TEMPLATE_DIALOG_BODY_MARGIN_BOTTOM};
     font-family: ${CssVars.FONT_FAMILY};
     font-size: ${CssVars.FONT_SIZE};
     color: ${CssVars.CAPTION_FONT_COLOR};
@@ -4510,7 +4510,7 @@ const MockJsonDialogFooter = qe.div.attrs({ [DOM_KEY_WIDGET]: "d9-playground-moc
 const MockJsonDialog = (props) => {
   const { mockData } = props;
   const ref = reactExports.useRef(null);
-  const { on, off, fire } = usePlaygroundEventBus();
+  const { on, off, fire } = usePlaygroundEventBus$1();
   const [state, setState] = reactExports.useState({ visible: false, copied: false });
   reactExports.useEffect(() => {
     if (ref.current == null) {
@@ -4549,9 +4549,9 @@ const MockJsonDialog = (props) => {
       state.editor.dispatch({ changes: { from: 0, to: doc.length, insert: json2 } });
       setState((state2) => ({ ...state2, visible: true, copied: false, reason: void 0 }));
     };
-    on(PlaygroundEventTypes.EDIT_MOCK_JSON, show);
+    on(PlaygroundEventTypes$1.EDIT_MOCK_JSON, show);
     return () => {
-      off(PlaygroundEventTypes.EDIT_MOCK_JSON, show);
+      off(PlaygroundEventTypes$1.EDIT_MOCK_JSON, show);
     };
   }, [on, off, state.visible, state.editor, mockData]);
   reactExports.useEffect(() => {
@@ -4582,7 +4582,7 @@ const MockJsonDialog = (props) => {
       const parsed = JSON.parse(json2);
       Object.keys(mockData).forEach((key) => delete mockData[key]);
       Object.keys(parsed).forEach((key) => mockData[key] = parsed[key]);
-      fire(PlaygroundEventTypes.FORCE_UPDATE_VIEWER);
+      fire(PlaygroundEventTypes$1.FORCE_UPDATE_VIEWER);
       onHide();
     } catch {
       setState((state2) => ({
@@ -4645,16 +4645,16 @@ const MockJsonDialog = (props) => {
 };
 const Viewer = (props) => {
   const { minViewerWidth, mockData } = props;
-  const { on, off } = usePlaygroundEventBus();
+  const { on, off } = usePlaygroundEventBus$1();
   const { replace } = useThrottler();
   const [content, setContent] = reactExports.useState("");
   reactExports.useEffect(() => {
     const onContentChanged = (content2) => {
       replace(() => setContent(content2 ?? ""), 500);
     };
-    on(PlaygroundEventTypes.CONTENT_CHANGED, onContentChanged);
+    on(PlaygroundEventTypes$1.CONTENT_CHANGED, onContentChanged);
     return () => {
-      off(PlaygroundEventTypes.CONTENT_CHANGED, onContentChanged);
+      off(PlaygroundEventTypes$1.CONTENT_CHANGED, onContentChanged);
     };
   }, [on, off, replace]);
   if (VUtils.isBlank(content)) {
@@ -4662,7 +4662,7 @@ const Viewer = (props) => {
       ViewerWrapper,
       { minViewerWidth },
       React.createElement(MockJsonDialog, { mockData }),
-      React.createElement(ParseError, null, "No configuration.")
+      React.createElement(ParseError$1, null, "No configuration.")
     );
   }
   return React.createElement(
@@ -4672,9 +4672,9 @@ const Viewer = (props) => {
     React.createElement(ViewerKernel, { ...props, content })
   );
 };
-const PlaygroundBridge = (props) => {
+const PlaygroundBridge$1 = (props) => {
   const { content, onContentChanged } = props;
-  const { on, off } = usePlaygroundEventBus();
+  const { on, off } = usePlaygroundEventBus$1();
   reactExports.useEffect(() => {
     const onChanged = (changed) => {
       if ((content ?? "") === (changed ?? "")) {
@@ -4682,15 +4682,15 @@ const PlaygroundBridge = (props) => {
       }
       (async () => await onContentChanged(changed))();
     };
-    on(PlaygroundEventTypes.CONTENT_CHANGED, onChanged);
+    on(PlaygroundEventTypes$1.CONTENT_CHANGED, onChanged);
     return () => {
-      off(PlaygroundEventTypes.CONTENT_CHANGED, onChanged);
+      off(PlaygroundEventTypes$1.CONTENT_CHANGED, onChanged);
     };
   }, [on, off, content, onContentChanged]);
   return React.createElement(reactExports.Fragment, null);
 };
 const useViewMode = () => {
-  const { on, off } = usePlaygroundEventBus();
+  const { on, off } = usePlaygroundEventBus$1();
   const [state, setState] = reactExports.useState({ zen: false, maximized: false });
   reactExports.useEffect(() => {
     const onMaximize = () => setState((state2) => ({ ...state2, maximized: true }));
@@ -4709,16 +4709,16 @@ const useViewMode = () => {
       }
     };
     window.addEventListener("fullscreenchange", onFullScreenChanged);
-    on(PlaygroundEventTypes.MAXIMIZE, onMaximize);
-    on(PlaygroundEventTypes.QUIT_MAXIMIZE, onQuitMaximize);
-    on(PlaygroundEventTypes.ZEN, onZen);
-    on(PlaygroundEventTypes.QUIT_ZEN, onQuitZen);
+    on(PlaygroundEventTypes$1.MAXIMIZE, onMaximize);
+    on(PlaygroundEventTypes$1.QUIT_MAXIMIZE, onQuitMaximize);
+    on(PlaygroundEventTypes$1.ZEN, onZen);
+    on(PlaygroundEventTypes$1.QUIT_ZEN, onQuitZen);
     return () => {
       window.removeEventListener("fullscreenchange", onFullScreenChanged);
-      off(PlaygroundEventTypes.MAXIMIZE, onMaximize);
-      off(PlaygroundEventTypes.QUIT_MAXIMIZE, onQuitMaximize);
-      off(PlaygroundEventTypes.ZEN, onZen);
-      off(PlaygroundEventTypes.QUIT_ZEN, onQuitZen);
+      off(PlaygroundEventTypes$1.MAXIMIZE, onMaximize);
+      off(PlaygroundEventTypes$1.QUIT_MAXIMIZE, onQuitMaximize);
+      off(PlaygroundEventTypes$1.ZEN, onZen);
+      off(PlaygroundEventTypes$1.QUIT_ZEN, onQuitZen);
     };
   }, [on, off]);
   return state;
@@ -4818,7 +4818,7 @@ const SideSlider = qe.div.attrs(({ active, left }) => {
 
     &:hover {
         &:before {
-            background-color: ${PlaygroundCssVars.SLIDER_BACKGROUND_COLOR};
+            background-color: ${PlaygroundCssVars$1.SLIDER_BACKGROUND_COLOR};
         }
     }
 `;
@@ -4853,7 +4853,7 @@ const Slider = (props) => {
   };
   return React.createElement(SideSlider, { active: state.active, left: state.left ?? 0, onMouseDown, onMouseUp, onMouseMove, ref });
 };
-const PlaygroundWrapper = qe.div.attrs(() => {
+const PlaygroundWrapper$1 = qe.div.attrs(() => {
   return {
     [DOM_KEY_WIDGET]: "d9-playground",
     style: {
@@ -4884,19 +4884,19 @@ const PlaygroundWrapper = qe.div.attrs(() => {
         background-color: ${CssVars.BACKGROUND_COLOR};
         border: 0;
         border-radius: 0;
-        z-index: ${PlaygroundCssVars.Z_INDEX};
+        z-index: ${PlaygroundCssVars$1.Z_INDEX};
     }
 
     &[data-visible=false] {
         display: none;
     }
 `;
-const PlaygroundDelegate = (props) => {
+const PlaygroundDelegate$1 = (props) => {
   const { $pp, $wrapped, mockData, externalDefs, externalDefsTypes, widgets, usage: { useN2 = true, useCharts = false } = {}, minViewerWidth, ...rest } = props;
   const { $p2r, $onValueChange, $avs: { $disabled, $visible } } = $wrapped;
   const ref = reactExports.useRef(null);
   const globalHandlers = useGlobalHandlers();
-  const { fire } = usePlaygroundEventBus();
+  const { fire } = usePlaygroundEventBus$1();
   const { initialized, mockData: initializedMockData, externalDefs: initializedExternalDefs, externalDefsTypes: initializedExternalDefsTypes } = useInitialize({ mockData, externalDefs, externalDefsTypes });
   const availableWidgets = useAvailableWidgets(widgets, { useN2, useCharts });
   const { zen, maximized } = useViewMode();
@@ -4907,32 +4907,32 @@ const PlaygroundDelegate = (props) => {
     await $onValueChange(content2, false, { global: globalHandlers });
   };
   const resizeTo = (width) => {
-    fire(PlaygroundEventTypes.RESIZE_EDITOR, width);
+    fire(PlaygroundEventTypes$1.RESIZE_EDITOR, width);
   };
   const content = MUtils.getValue($wrapped.$model, $pp);
   return React.createElement(
-    PlaygroundWrapper,
+    PlaygroundWrapper$1,
     { ...rest, "data-disabled": $disabled, "data-visible": $visible, "data-zen": zen, "data-maximized": maximized, id: PPUtils.asId(PPUtils.absolute($p2r, $pp), props.id), ref },
-    React.createElement(PlaygroundBridge, { content, onContentChanged }),
+    React.createElement(PlaygroundBridge$1, { content, onContentChanged }),
     React.createElement(Toolbar, { groups: availableWidgets.groups, widgets: availableWidgets.widgets }),
-    React.createElement(Editor, { content, externalDefsTypes: initializedExternalDefsTypes, widgets: availableWidgets }),
+    React.createElement(Editor$1, { content, externalDefsTypes: initializedExternalDefsTypes, widgets: availableWidgets }),
     React.createElement(Help, null),
     React.createElement(Viewer, { mockData: initializedMockData, externalDefs: initializedExternalDefs, minViewerWidth }),
     React.createElement(Slider, { resizeTo })
   );
 };
-const Playground = (props) => {
+const Playground$1 = (props) => {
   return React.createElement(
-    PlaygroundEventBusProvider,
+    PlaygroundEventBusProvider$1,
     null,
-    React.createElement(PlaygroundDelegate, { ...props })
+    React.createElement(PlaygroundDelegate$1, { ...props })
   );
 };
 index$1.ValidatorUtils.registerRegexps({ "abc": /^abc$/ });
 const PlaygroundMockDataBuild = index$1.createAsyncSnippetBuild("mockData", []);
 const PlaygroundExternalDefsBuild = index$1.createAsyncSnippetBuild("externalDefs", []);
 const PlaygroundExternalDefsTypesBuild = index$1.createAsyncSnippetBuild("externalDefsTypes", []);
-class AbstractPlaygroundTranslator extends index$1.SpecificWidgetTranslator {
+let AbstractPlaygroundTranslator$1 = class AbstractPlaygroundTranslator extends index$1.SpecificWidgetTranslator {
   beautifyProperties(def) {
     return super.beautifyProperties(this.beautifyColumnSpan(def, 12));
   }
@@ -4953,10 +4953,10 @@ class AbstractPlaygroundTranslator extends index$1.SpecificWidgetTranslator {
       return mapping;
     }, {});
   }
-}
-const registerPlayground = (widgetHelper, widgetType) => {
+};
+const registerPlayground$1 = (widgetHelper, widgetType) => {
   widgetType = VUtils.isBlank(widgetType) ? "Playground" : widgetType;
-  registerWidget({ key: widgetType, JSX: Playground, container: false, array: false });
+  registerWidget({ key: widgetType, JSX: Playground$1, container: false, array: false });
   registerWidget({
     key: PLAYGROUND_WIDGET_WRAPPER,
     JSX: PlaygroundWidgetWrapper,
@@ -4964,7 +4964,7 @@ const registerPlayground = (widgetHelper, widgetType) => {
     array: false,
     consumePosition: false
   });
-  const TranslatorClass = class extends AbstractPlaygroundTranslator {
+  const TranslatorClass = class extends AbstractPlaygroundTranslator$1 {
     getSupportedType() {
       return widgetType;
     }
@@ -4972,7 +4972,768 @@ const registerPlayground = (widgetHelper, widgetType) => {
   const repo = widgetHelper.repository;
   repo.register(new TranslatorClass(repo));
 };
-var define_process_env_default = { GITHUB_STATE: "/home/runner/work/_temp/_runner_file_commands/save_state_4f44e599-a80c-4994-adcd-34f5c969fd2a", npm_package_scripts_build_n5_ci: "cd ./d9-n5 && yarn build-ci", npm_package_scripts_build_sample_cra: "cd ./d9-sample-cra && yarn build", STATS_TRP: "true", DEPLOYMENT_BASEPATH: "/opt/runner", DOTNET_NOLOGO: "1", npm_package_dependencies__vitejs_plugin_react: "^4.2.1", USER: "runner", npm_config_version_commit_hooks: "true", npm_config_user_agent: "yarn/1.22.21 npm/? node/v18.20.2 linux x64", npm_package_dependencies__types_jest: "^29.5.4", CI: "true", npm_config_bin_links: "true", npm_package_bugs_url: "https://github.com/InsureMO/rainbow-d9/issues", npm_config_wrap_output: "", RUNNER_ENVIRONMENT: "github-hosted", GITHUB_ENV: "/home/runner/work/_temp/_runner_file_commands/set_env_4f44e599-a80c-4994-adcd-34f5c969fd2a", PIPX_HOME: "/opt/pipx", npm_node_execpath: "/opt/hostedtoolcache/node/18.20.2/x64/bin/node", npm_package_scripts_build_thai_all_ci: "yarn build-thai-plan-selection-ci", npm_config_init_version: "1.0.0", npm_package_devDependencies_gh_pages: "^6.1.1", npm_package_dependencies__babel_plugin_proposal_private_property_in_object: "^7.21.11", JAVA_HOME_8_X64: "/usr/lib/jvm/temurin-8-jdk-amd64", SHLVL: "1", HOME: "/home/runner", OLDPWD: "/home/runner/work/rainbow-d9/rainbow-d9", npm_package_browserslist_production_0: ">0.2%", RUNNER_TEMP: "/home/runner/work/_temp", GITHUB_EVENT_PATH: "/home/runner/work/_temp/_github_workflow/event.json", npm_package_scripts_build_all: "yarn build-n123 && yarn build-n5 && yarn build-echarts && yarn build-thai-all", npm_package_browserslist_production_1: "not dead", npm_package_dependencies_react_syntax_highlighter: "^15.5.0", JAVA_HOME_11_X64: "/usr/lib/jvm/temurin-11-jdk-amd64", PIPX_BIN_DIR: "/opt/pipx_bin", GITHUB_REPOSITORY_OWNER: "InsureMO", npm_package_volta_node: "18.19.0", npm_config_init_license: "MIT", npm_package_browserslist_production_2: "not op_mini all", GRADLE_HOME: "/usr/share/gradle-8.7", ANDROID_NDK_LATEST_HOME: "/usr/local/lib/android/sdk/ndk/26.3.11579264", JAVA_HOME_21_X64: "/usr/lib/jvm/temurin-21-jdk-amd64", STATS_RDCL: "true", GITHUB_RETENTION_DAYS: "90", YARN_WRAP_OUTPUT: "false", npm_package_scripts_build_thai_plan_selection_ci: "cd ./d9-thai-plan-selection && yarn build-ci", npm_package_scripts_build_n1: "cd ./d9-n1 && yarn build", npm_config_version_tag_prefix: "v", npm_package_dependencies__rainbow_d9_n2: "1.1.26", GITHUB_REPOSITORY_OWNER_ID: "38915232", POWERSHELL_DISTRIBUTION_CHANNEL: "GitHub-Actions-ubuntu22", AZURE_EXTENSION_DIR: "/opt/az/azcliextensions", GITHUB_HEAD_REF: "", npm_package_scripts_build_n2: "cd ./d9-n2 && yarn build", npm_package_dependencies__types_styled_components: "^5.1.34", npm_package_dependencies__rainbow_d9_n3: "1.1.26", npm_package_dependencies__rainbow_d9_echarts: "1.1.26", SYSTEMD_EXEC_PID: "591", npm_package_scripts_build_echarts: "cd ./d9-echarts && yarn build", npm_package_scripts_build_n3: "cd ./d9-n3 && yarn build", GITHUB_GRAPHQL_URL: "https://api.github.com/graphql", npm_package_description: "Assume the following envs are ready, otherwise contact the tech guy.", npm_package_scripts_predeploy: "npm run build", npm_package_dependencies__rainbow_d9_n5: "1.1.26", GOROOT_1_20_X64: "/opt/hostedtoolcache/go/1.20.14/x64", NVM_DIR: "/home/runner/.nvm", npm_package_readmeFilename: "README.md", npm_package_scripts_build_n5: "cd ./d9-n5 && yarn build", npm_package_dependencies__types_react: "^18.2.21", npm_package_dependencies__testing_library_react: "^13.4.0", DOTNET_SKIP_FIRST_TIME_EXPERIENCE: "1", GOROOT_1_21_X64: "/opt/hostedtoolcache/go/1.21.9/x64", JAVA_HOME_17_X64: "/usr/lib/jvm/temurin-17-jdk-amd64", ImageVersion: "20240422.1.0", RUNNER_OS: "Linux", GITHUB_API_URL: "https://api.github.com", GOROOT_1_22_X64: "/opt/hostedtoolcache/go/1.22.2/x64", SWIFT_PATH: "/usr/share/swift/usr/bin", RUNNER_USER: "runner", STATS_V3PS: "true", CHROMEWEBDRIVER: "/usr/local/share/chromedriver-linux64", JOURNAL_STREAM: "8:19550", GITHUB_WORKFLOW: "Publish to NPM", _: "/opt/hostedtoolcache/node/18.20.2/x64/bin/yarn", npm_package_private: "true", npm_package_dependencies_remark_gfm: "3.0.1", npm_package_scripts_build_thai_all: "yarn build-thai-plan-selection", npm_config_registry: "https://registry.yarnpkg.com", ACTIONS_RUNNER_ACTION_ARCHIVE_CACHE: "/opt/actionarchivecache", STATS_D: "true", GITHUB_RUN_ID: "9026326957", STATS_VMFE: "true", npm_package_workspaces_0: "d9-n1", GITHUB_REF_TYPE: "tag", BOOTSTRAP_HASKELL_NONINTERACTIVE: "1", GITHUB_WORKFLOW_SHA: "8ca18b1eeff708e4202afa97c0854278d6070325", GITHUB_BASE_REF: "", ImageOS: "ubuntu22", npm_package_scripts_build_n123_ci: "yarn build-n1-ci && yarn build-n2-ci && yarn build-n3-ci", npm_package_workspaces_1: "d9-n2", npm_config_ignore_scripts: "", npm_package_scripts_start: "vite", npm_package_dependencies_github_markdown_css: "^5.5.0", GITHUB_WORKFLOW_REF: "InsureMO/rainbow-d9/.github/workflows/release.yml@refs/tags/r-1.1.27", PERFLOG_LOCATION_SETTING: "RUNNER_PERFLOG", GITHUB_ACTION_REPOSITORY: "", npm_package_workspaces_2: "d9-n3", npm_package_browserslist_development_0: "last 1 chrome version", PATH: "/tmp/yarn--1715308143185-0.2383274773654569:/home/runner/work/rainbow-d9/rainbow-d9/d9-sample-cra/node_modules/.bin:/home/runner/.config/yarn/link/node_modules/.bin:/home/runner/work/rainbow-d9/rainbow-d9/node_modules/.bin:/opt/hostedtoolcache/node/18.20.2/x64/libexec/lib/node_modules/npm/bin/node-gyp-bin:/opt/hostedtoolcache/node/18.20.2/x64/lib/node_modules/npm/bin/node-gyp-bin:/opt/hostedtoolcache/node/18.20.2/x64/bin/node_modules/npm/bin/node-gyp-bin:/tmp/yarn--1715308142977-0.36340565930994595:/home/runner/work/rainbow-d9/rainbow-d9/node_modules/.bin:/home/runner/.config/yarn/link/node_modules/.bin:/home/runner/work/rainbow-d9/rainbow-d9/node_modules/.bin:/opt/hostedtoolcache/node/18.20.2/x64/libexec/lib/node_modules/npm/bin/node-gyp-bin:/opt/hostedtoolcache/node/18.20.2/x64/lib/node_modules/npm/bin/node-gyp-bin:/opt/hostedtoolcache/node/18.20.2/x64/bin/node_modules/npm/bin/node-gyp-bin:/opt/hostedtoolcache/node/18.20.2/x64/bin:/snap/bin:/home/runner/.local/bin:/opt/pipx_bin:/home/runner/.cargo/bin:/home/runner/.config/composer/vendor/bin:/usr/local/.ghcup/bin:/home/runner/.dotnet/tools:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin", NODE: "/opt/hostedtoolcache/node/18.20.2/x64/bin/node", ANT_HOME: "/usr/share/ant", DOTNET_MULTILEVEL_LOOKUP: "0", RUNNER_TRACKING_ID: "github_5a33d303-c678-43e2-aedd-093ba2a07d0c", INVOCATION_ID: "552909d85f754d4c90443f0daf536c07", RUNNER_TOOL_CACHE: "/opt/hostedtoolcache", npm_package_name: "@rainbow-d9/sample-cra", npm_package_workspaces_3: "d9-n5", npm_package_browserslist_development_1: "last 1 firefox version", npm_package_repository_type: "git", npm_package_dependencies__types_react_syntax_highlighter: "^15.5.11", npm_package_dependencies__rainbow_d9_thai_plan_selection: "1.1.26", GITHUB_ACTION: "__run_5", GITHUB_RUN_NUMBER: "117", GITHUB_TRIGGERING_ACTOR: "bradwoo8621", RUNNER_ARCH: "X64", XDG_RUNTIME_DIR: "/run/user/1001", AGENT_TOOLSDIRECTORY: "/opt/hostedtoolcache", npm_package_scripts_build_thai_plan_selection: "cd ./d9-thai-plan-selection && yarn build", npm_package_workspaces_4: "d9-echarts", npm_package_browserslist_development_2: "last 1 safari version", npm_package_workspaces_5: "d9-thai-plan-selection", LANG: "C.UTF-8", VCPKG_INSTALLATION_ROOT: "/usr/local/share/vcpkg", npm_package_workspaces_6: "d9-sample-cra", npm_package_dependencies_react_dom: "^18.2.0", CONDA: "/usr/share/miniconda", RUNNER_NAME: "GitHub Actions 7", XDG_CONFIG_HOME: "/home/runner/.config", STATS_VMD: "true", GITHUB_REF_NAME: "r-1.1.27", GITHUB_REPOSITORY: "InsureMO/rainbow-d9", STATS_D_D: "true", npm_lifecycle_script: "vite build", npm_package_eslintConfig_extends_0: "react-app", npm_package_dependencies_vite_plugin_markdown: "^2.2.0", npm_package_dependencies_react_markdown: "8.0.7", npm_package_dependencies__types_node: "^20.5.3", STATS_UE: "true", ANDROID_NDK_ROOT: "/usr/local/lib/android/sdk/ndk/25.2.9519653", GITHUB_ACTION_REF: "", DEBIAN_FRONTEND: "noninteractive", npm_package_scripts_build_sample_cra_ci: "cd ./d9-sample-cra && yarn build", npm_config_version_git_message: "v%s", npm_package_eslintConfig_extends_1: "react-app/jest", GITHUB_REPOSITORY_ID: "704514093", GITHUB_ACTIONS: "true", npm_lifecycle_event: "build", npm_package_version: "1.1.26", npm_package_repository_url: "git+https://github.com/InsureMO/rainbow-d9.git", npm_package_dependencies__testing_library_jest_dom: "^5.17.0", GITHUB_REF_PROTECTED: "false", npm_config_argv: '{"remain":[],"cooked":["run","build-sample-cra"],"original":["build-sample-cra"]}', npm_package_volta_yarn: "1.22.21", npm_package_scripts_build: "vite build", npm_package_dependencies__testing_library_user_event: "^13.5.0", GITHUB_WORKSPACE: "/home/runner/work/rainbow-d9/rainbow-d9", ACCEPT_EULA: "Y", GITHUB_JOB: "create-sample-pages", RUNNER_PERFLOG: "/home/runner/perflog", npm_package_dependencies_vite: "^5.0.13", GITHUB_SHA: "8ca18b1eeff708e4202afa97c0854278d6070325", GITHUB_RUN_ATTEMPT: "1", npm_config_version_git_tag: "true", npm_config_version_git_sign: "", GITHUB_REF: "refs/tags/r-1.1.27", GITHUB_ACTOR: "bradwoo8621", ANDROID_SDK_ROOT: "/usr/local/lib/android/sdk", npm_package_license: "MIT", npm_config_strict_ssl: "true", LEIN_HOME: "/usr/local/lib/lein", npm_package_scripts_build_n123: "yarn build-n1 && yarn build-n2 && yarn build-n3", GITHUB_PATH: "/home/runner/work/_temp/_runner_file_commands/add_path_4f44e599-a80c-4994-adcd-34f5c969fd2a", JAVA_HOME: "/usr/lib/jvm/temurin-11-jdk-amd64", PWD: "/home/runner/work/rainbow-d9/rainbow-d9/d9-sample-cra", GITHUB_ACTOR_ID: "2330098", RUNNER_WORKSPACE: "/home/runner/work/rainbow-d9", npm_execpath: "/opt/hostedtoolcache/node/18.20.2/x64/lib/node_modules/yarn/bin/yarn.js", npm_package_scripts_build_all_ci: "yarn build-n123-ci && yarn build-n5-ci && yarn build-echarts-ci && yarn build-thai-all-ci", HOMEBREW_CLEANUP_PERIODIC_FULL_DAYS: "3650", GITHUB_EVENT_NAME: "push", HOMEBREW_NO_AUTO_UPDATE: "1", ANDROID_HOME: "/usr/local/lib/android/sdk", GITHUB_SERVER_URL: "https://github.com", GECKOWEBDRIVER: "/usr/local/share/gecko_driver", LEIN_JAR: "/usr/local/lib/lein/self-installs/leiningen-2.11.2-standalone.jar", GHCUP_INSTALL_BASE_PREFIX: "/usr/local", GITHUB_OUTPUT: "/home/runner/work/_temp/_runner_file_commands/set_output_4f44e599-a80c-4994-adcd-34f5c969fd2a", npm_package_author_name: "Rainbow Team", EDGEWEBDRIVER: "/usr/local/share/edge_driver", STATS_EXT: "true", npm_package_scripts_build_n1_ci: "cd ./d9-n1 && yarn build-ci", npm_config_save_prefix: "^", npm_config_ignore_optional: "", ANDROID_NDK: "/usr/local/lib/android/sdk/ndk/25.2.9519653", SGX_AESM_ADDR: "1", CHROME_BIN: "/usr/bin/google-chrome", npm_package_scripts_build_n2_ci: "cd ./d9-n2 && yarn build-ci", npm_package_scripts_deploy: "gh-pages -d build", npm_package_scripts_preview: "vite preview", SELENIUM_JAR_PATH: "/usr/share/java/selenium-server.jar", STATS_EXTP: "https://provjobdsettingscdn.blob.core.windows.net/settings/provjobdsettings-0.5.172+1/provjobd.data", npm_package_scripts_build_echarts_ci: "cd ./d9-echarts && yarn build-ci", npm_package_scripts_build_n3_ci: "cd ./d9-n3 && yarn build-ci", npm_package_dependencies_web_vitals: "^2.1.4", npm_package_dependencies_typescript: "^5.1.6", INIT_CWD: "/home/runner/work/rainbow-d9/rainbow-d9", ANDROID_NDK_HOME: "/usr/local/lib/android/sdk/ndk/25.2.9519653", GITHUB_STEP_SUMMARY: "/home/runner/work/_temp/_runner_file_commands/step_summary_4f44e599-a80c-4994-adcd-34f5c969fd2a", npm_package_dependencies_react: "^18.2.0", npm_package_dependencies__types_react_dom: "^18.2.7", NODE_ENV: "production" };
+const EDITOR_BACKGROUND_BLOCK_SIZE = "var(--o23-playground-editor-background-block-size, 48px)";
+const EDITOR_BACKGROUND_LINE_COLOR = `var(--o23-playground-editor-background-line-color, ${color(CssConstants.PRIMARY_COLOR).alpha(0.08)})`;
+const NODE_START_COLOR = "#ffb56b";
+const NODE_END_COLOR = "#e0b35f";
+const NEXT_STEP_PORT_COLOR = "#1f6b73";
+const PREVIOUS_STEP_PORT_COLOR = "#00618b";
+const REST_API_VARIABLE_PORT_COLOR = "#87a55f";
+const PlaygroundCssVars = {
+  EDITOR_BACKGROUND_BLOCK_SIZE,
+  EDITOR_BACKGROUND_LINE_COLOR,
+  EDITOR_BACKGROUND_IMAGE: `var(--o23-playground-editor-background-image, linear-gradient(to right, ${EDITOR_BACKGROUND_LINE_COLOR} 1px, transparent 1px), linear-gradient(to bottom, ${EDITOR_BACKGROUND_LINE_COLOR} 1px, transparent 1px))`,
+  EDITOR_BACKGROUND_SIZE: `var(--o23-playground-editor-background-size, ${EDITOR_BACKGROUND_BLOCK_SIZE} ${EDITOR_BACKGROUND_BLOCK_SIZE})`,
+  EDITOR_BACKGROUND_POSITION: `var(--o23-playground-editor-background-position, -1px -1px)`,
+  EDITOR_ERROR_COLOR: `var(--o23-playground-viewer-error-color, ${CssVars.DANGER_COLOR})`,
+  NODE_BORDER_RADIUS: `var(--o23-playground-node-border-radius, 8px)`,
+  NODE_BACKGROUND: `var(--o23-playground-node-background, ${CssVars.BACKGROUND_COLOR})`,
+  NODE_TITLE_PADDING: `var(--o23-playground-node-title-padding, 0 10px)`,
+  NODE_MIN_WIDTH: `var(--o23-playground-node-min-width, 160px)`,
+  NODE_ICON_SIZE: `var(--o23-playground-node-icon-size, 14px)`,
+  NODE_PORT_HEIGHT: `var(--o23-playground-node-port-height, 20px)`,
+  NODE_NEXT_STEP_PORT_FONT_SIZE: `var(--o23-playground-next-step-port-font-size, 0.6em)`,
+  NODE_NEXT_STEP_PORT_FONT_WEIGHT: `var(--o23-playground-next-step-port-font-weight, 600)`,
+  NODE_NEXT_STEP_PORT_COLOR: `var(--o23-playground-next-step-port-color, ${CssVars.INVERT_COLOR})`,
+  NODE_NEXT_STEP_PORT_BACKGROUND: `var(--o23-playground-next-step-port-background, ${NEXT_STEP_PORT_COLOR})`,
+  NODE_NEXT_STEP_PORT_BORDER: `var(--o23-playground-next-step-port-border, 1px solid ${color(NEXT_STEP_PORT_COLOR).darken(0.1).fade(0.5)})`,
+  NODE_NEXT_STEP_PORT_PADDING: `var(--o23-playground-next-step-port-padding, 0 8px 0 12px)`,
+  NODE_PREVIOUS_STEP_PORT_FONT_SIZE: `var(--o23-playground-previous-step-port-font-size, 0.6em)`,
+  NODE_PREVIOUS_STEP_PORT_FONT_WEIGHT: `var(--o23-playground-previous-step-port-font-weight, 600)`,
+  NODE_PREVIOUS_STEP_PORT_COLOR: `var(--o23-playground-previous-step-port-color, ${CssVars.INVERT_COLOR})`,
+  NODE_PREVIOUS_STEP_PORT_BACKGROUND: `var(--o23-playground-previous-step-port-background, ${PREVIOUS_STEP_PORT_COLOR})`,
+  NODE_PREVIOUS_STEP_PORT_BORDER: `var(--o23-playground-previous-step-port-border, 1px solid ${color(PREVIOUS_STEP_PORT_COLOR).darken(0.1).opaquer(0.5)})`,
+  NODE_PREVIOUS_STEP_PORT_PADDING: `var(--o23-playground-previous-step-port-padding, 0 12px 0 8px)`,
+  NODE_REST_API_VARIABLE_PORT_FONT_SIZE: `var(--o23-playground-rest-api-variable-port-font-size, 0.6em)`,
+  NODE_REST_API_VARIABLE_PORT_FONT_WEIGHT: `var(--o23-playground-rest-api-variable-port-font-weight, 600)`,
+  NODE_REST_API_VARIABLE_PORT_COLOR: `var(--o23-playground-rest-api-variable-port-color, ${CssVars.INVERT_COLOR})`,
+  NODE_REST_API_VARIABLE_PORT_BACKGROUND: `var(--o23-playground-rest-api-variable-port-background, ${REST_API_VARIABLE_PORT_COLOR})`,
+  NODE_REST_API_VARIABLE_PORT_BORDER: `var(--o23-playground-rest-api-variable-port-border, 1px solid ${color(REST_API_VARIABLE_PORT_COLOR).darken(0.1).opaquer(0.5)})`,
+  NODE_REST_API_VARIABLE_PORT_PADDING: `var(--o23-playground-rest-api-variable-port-padding, 0 12px 0 8px)`,
+  NODE_START_BORDER_COLOR: `var(--o23-playground-node-start-border-color, ${NODE_START_COLOR})`,
+  NODE_START_BORDER: `var(--o23-playground-node-start-border, 2px solid ${NODE_START_COLOR})`,
+  NODE_START_TITLE_FONT_WEIGHT: `var(--o23-playground-node-start-title-font-weight, 600)`,
+  NODE_START_TITLE_COLOR: `var(--o23-playground-node-start-title-color, ${CssVars.INVERT_COLOR})`,
+  NODE_START_TITLE_BACKGROUND: `var(--o23-playground-node-start-title-background, linear-gradient(135deg, ${NODE_START_COLOR} 0%, ${color(NODE_START_COLOR).alpha(0.7)} 70%, ${color(NODE_START_COLOR).alpha(0.5)} 100%))`,
+  NODE_START_SECOND_TITLE_DECORATION: "var(--o23-playground-node-start-second-title-decoration, underline double)",
+  NODE_START_BODY_HEIGHT: `var(--o23-playground-node-start-body-height, 32px)`,
+  NODE_START_BODY_PADDING: `var(--o23-playground-node-start-body-padding, 4px 0)`,
+  NODE_END_BORDER_COLOR: `var(--o23-playground-node-end-border-color, ${NODE_END_COLOR})`,
+  NODE_END_BORDER: `var(--o23-playground-node-end-border, 2px solid ${NODE_END_COLOR})`,
+  NODE_END_TITLE_FONT_WEIGHT: `var(--o23-playground-node-end-title-font-weight, 600)`,
+  NODE_END_TITLE_COLOR: `var(--o23-playground-node-end-title-color, ${CssVars.INVERT_COLOR})`,
+  NODE_END_TITLE_BACKGROUND: `var(--o23-playground-node-end-title-background, linear-gradient(135deg, ${NODE_END_COLOR} 0%, ${color(NODE_END_COLOR).alpha(0.7)} 70%, ${color(NODE_END_COLOR).alpha(0.5)} 100%))`,
+  NODE_END_BODY_HEIGHT: `var(--o23-playground-node-end-body-height, 32px)`,
+  NODE_END_BODY_PADDING: `var(--o23-playground-node-end-body-padding, 4px 0)`
+};
+const _NextStepPortModel = class _NextStepPortModel extends PortModel {
+  constructor() {
+    super({
+      type: _NextStepPortModel.TYPE,
+      name: _NextStepPortModel.NAME,
+      alignment: PortModelAlignment.RIGHT
+    });
+  }
+  createLinkModel() {
+    const link = new DefaultLinkModel();
+    link.setSourcePort(this);
+    return link;
+  }
+};
+__publicField(_NextStepPortModel, "TYPE", "next-step-port");
+__publicField(_NextStepPortModel, "NAME", "next-step");
+let NextStepPortModel = _NextStepPortModel;
+class NextStepPortFactory extends AbstractModelFactory {
+  constructor() {
+    super(NextStepPortModel.TYPE);
+  }
+  generateModel(_event) {
+    return new NextStepPortModel();
+  }
+}
+const NextStepPortContainer = qe.div.attrs({ [DOM_KEY_WIDGET]: "o23-playground-next-step-port" })`
+    display: flex;
+    position: relative;
+    align-self: end;
+    align-items: center;
+    justify-self: end;
+    color: ${PlaygroundCssVars.NODE_NEXT_STEP_PORT_COLOR};
+    background: ${PlaygroundCssVars.NODE_NEXT_STEP_PORT_BACKGROUND};
+    height: ${PlaygroundCssVars.NODE_PORT_HEIGHT};
+    border: ${PlaygroundCssVars.NODE_NEXT_STEP_PORT_BORDER};
+    border-top-left-radius: calc(${PlaygroundCssVars.NODE_PORT_HEIGHT} / 2);
+    border-bottom-left-radius: calc(${PlaygroundCssVars.NODE_PORT_HEIGHT} / 2);
+    font-weight: ${PlaygroundCssVars.NODE_NEXT_STEP_PORT_FONT_WEIGHT};
+    font-size: ${PlaygroundCssVars.NODE_NEXT_STEP_PORT_FONT_SIZE};
+    text-transform: uppercase;
+    padding: ${PlaygroundCssVars.NODE_NEXT_STEP_PORT_PADDING};
+    margin-right: -1px;
+    grid-column: 3;
+
+    > div:first-child {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 0;
+        height: 100%;
+    }
+`;
+const NextStepPortWidget = (props) => {
+  const { port, engine } = props;
+  return React.createElement(
+    NextStepPortContainer,
+    null,
+    React.createElement(PortWidget, { port, engine }),
+    React.createElement(
+      "span",
+      null,
+      React.createElement(IntlLabel, { keys: ["o23", "port", "next"], value: "Out" })
+    )
+  );
+};
+const _PreviousStepPortModel = class _PreviousStepPortModel extends PortModel {
+  constructor() {
+    super({
+      type: _PreviousStepPortModel.TYPE,
+      name: _PreviousStepPortModel.NAME,
+      alignment: PortModelAlignment.LEFT
+    });
+  }
+  createLinkModel() {
+    return new DefaultLinkModel();
+  }
+};
+__publicField(_PreviousStepPortModel, "TYPE", "previous-step-port");
+__publicField(_PreviousStepPortModel, "NAME", "previous-step");
+let PreviousStepPortModel = _PreviousStepPortModel;
+class PreviousStepPortFactory extends AbstractModelFactory {
+  constructor() {
+    super(PreviousStepPortModel.TYPE);
+  }
+  generateModel(_event) {
+    return new PreviousStepPortModel();
+  }
+}
+const PreviousStepPortContainer = qe.div.attrs({ [DOM_KEY_WIDGET]: "o23-playground-previous-step-port" })`
+    display: flex;
+    position: relative;
+    align-self: end;
+    align-items: center;
+    justify-self: start;
+    color: ${PlaygroundCssVars.NODE_PREVIOUS_STEP_PORT_COLOR};
+    background: ${PlaygroundCssVars.NODE_PREVIOUS_STEP_PORT_BACKGROUND};
+    height: ${PlaygroundCssVars.NODE_PORT_HEIGHT};
+    border: ${PlaygroundCssVars.NODE_PREVIOUS_STEP_PORT_BORDER};
+    border-top-right-radius: calc(${PlaygroundCssVars.NODE_PORT_HEIGHT} / 2);
+    border-bottom-right-radius: calc(${PlaygroundCssVars.NODE_PORT_HEIGHT} / 2);
+    font-weight: ${PlaygroundCssVars.NODE_PREVIOUS_STEP_PORT_FONT_WEIGHT};
+    font-size: ${PlaygroundCssVars.NODE_PREVIOUS_STEP_PORT_FONT_SIZE};
+    text-transform: uppercase;
+    padding: ${PlaygroundCssVars.NODE_PREVIOUS_STEP_PORT_PADDING};
+    margin-left: -1px;
+    grid-column: 1;
+
+    > div:first-child {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 0;
+        height: 100%;
+    }
+`;
+const PreviousStepPortWidget = (props) => {
+  const { port, engine } = props;
+  return React.createElement(
+    PreviousStepPortContainer,
+    null,
+    React.createElement(PortWidget, { port, engine }),
+    React.createElement(
+      "span",
+      null,
+      React.createElement(IntlLabel, { keys: ["o23", "port", "previous"], value: "In" })
+    )
+  );
+};
+const NodeContainer = qe.div`
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    border-radius: var(--border-radius);
+    border: var(--border);
+    background-color: var(--background-color);
+    min-width: ${PlaygroundCssVars.NODE_MIN_WIDTH};
+`;
+const NodeHeader = qe.div`
+    display: flex;
+    position: relative;
+    border-top-left-radius: var(--border-radius);
+    border-top-right-radius: var(--border-radius);
+    background: var(--background);
+    padding: var(--padding);
+    margin-top: -2px;
+`;
+const NodeTitle = qe(UnwrappedCaption)`
+    flex-grow: 1;
+    color: var(--color);
+    font-weight: var(--font-weight);
+`;
+const NodeSecondTitle = qe(UnwrappedCaption)`
+    justify-content: flex-end;
+    color: var(--color);
+    font-weight: var(--font-weight);
+    text-decoration: var(--text-decoration);
+`;
+const NodeBody = qe.div`
+    display: grid;
+    position: relative;
+    grid-column: 1 / span 2;
+    grid-row: 2;
+    grid-template-columns: auto minmax(40px, 1fr) auto;
+    min-height: var(--min-height);
+    padding: var(--padding);
+`;
+const NodeWrapper = (props) => {
+  const { children, ...rest } = props;
+  return React.createElement(NodeContainer, { ...rest }, children);
+};
+const _EndNodeModel = class _EndNodeModel extends NodeModel {
+  constructor() {
+    super({ type: _EndNodeModel.TYPE });
+    this.addPort(new PreviousStepPortModel());
+  }
+};
+__publicField(_EndNodeModel, "TYPE", "end-node");
+let EndNodeModel = _EndNodeModel;
+const EndNodeContainer = qe(NodeWrapper).attrs({
+  [DOM_KEY_WIDGET]: "o23-playground-end-node",
+  style: {
+    "--border-radius": PlaygroundCssVars.NODE_BORDER_RADIUS,
+    "--border": PlaygroundCssVars.NODE_END_BORDER,
+    "--background-color": PlaygroundCssVars.NODE_BACKGROUND
+  }
+})``;
+const EndNodeHeader = qe(NodeHeader).attrs({
+  [DOM_KEY_WIDGET]: "o23-playground-end-node-header",
+  style: {
+    "--border-radius": PlaygroundCssVars.NODE_BORDER_RADIUS,
+    "--background": PlaygroundCssVars.NODE_END_TITLE_BACKGROUND,
+    "--padding": PlaygroundCssVars.NODE_TITLE_PADDING
+  }
+})``;
+const EndNodeTitle = qe(NodeTitle).attrs({
+  [DOM_KEY_WIDGET]: "o23-playground-end-node-title",
+  style: {
+    "--color": PlaygroundCssVars.NODE_END_TITLE_COLOR,
+    "--font-weight": PlaygroundCssVars.NODE_END_TITLE_FONT_WEIGHT
+  }
+})``;
+const EndNodeBody = qe(NodeBody).attrs({
+  [DOM_KEY_WIDGET]: "o23-playground-end-node-body",
+  style: {
+    "--min-height": PlaygroundCssVars.NODE_END_BODY_HEIGHT,
+    "--padding": PlaygroundCssVars.NODE_END_BODY_PADDING
+  }
+})``;
+const EndNodeWidget = (props) => {
+  const { node, engine } = props;
+  return React.createElement(
+    EndNodeContainer,
+    null,
+    React.createElement(
+      EndNodeHeader,
+      null,
+      React.createElement(
+        EndNodeTitle,
+        null,
+        React.createElement(IntlLabel, { keys: ["o23", "node", "end"], value: "End" })
+      )
+    ),
+    React.createElement(
+      EndNodeBody,
+      null,
+      React.createElement(PreviousStepPortWidget, { port: node.getPort(PreviousStepPortModel.NAME), engine })
+    )
+  );
+};
+class EndNodeFactory extends AbstractReactFactory {
+  constructor() {
+    super(EndNodeModel.TYPE);
+  }
+  generateReactWidget(event) {
+    return React.createElement(EndNodeWidget, { engine: this.engine, node: event.model });
+  }
+  generateModel(_event) {
+    throw new Error("DO NOT use EndNodeFactory#generateModel.");
+  }
+}
+const _StartNodeModel = class _StartNodeModel extends NodeModel {
+  constructor(def) {
+    super({ type: _StartNodeModel.TYPE });
+    __publicField(this, "def");
+    this.def = def;
+    this.addPort(new NextStepPortModel());
+  }
+  routeTo(node) {
+    const port = this.getPort(NextStepPortModel.NAME);
+    const link = port.createLinkModel();
+    link.setTargetPort(node.getPort(PreviousStepPortModel.NAME));
+    return link;
+  }
+};
+__publicField(_StartNodeModel, "TYPE", "start-node");
+let StartNodeModel = _StartNodeModel;
+class FileDefLoader {
+  constructor(options) {
+    __publicField(this, "_redress");
+    this._redress = options == null ? void 0 : options.redress;
+  }
+  dashToCamel(key) {
+    return key.replace(/-(.)/g, (_, group1) => group1.toUpperCase());
+  }
+  redressKeyCase(given) {
+    if (given == null) {
+      return given;
+    } else if (Array.isArray(given)) {
+      return given.map((item) => this.redressKeyCase(item));
+    } else if (typeof given === "object") {
+      return Object.keys(given).reduce((redressed, key) => {
+        if (key.indexOf("-") !== -1) {
+          redressed[this.dashToCamel(key)] = this.redressKeyCase(given[key]);
+        } else {
+          redressed[key] = this.redressKeyCase(given[key]);
+        }
+        return redressed;
+      }, {});
+    } else {
+      return given;
+    }
+  }
+  redressDef(given) {
+    if (this._redress) {
+      given = this._redress(given);
+    }
+    return this.redressKeyCase(given);
+  }
+  parse(content) {
+    const def = this.doParse(content);
+    return this.redressDef(def);
+  }
+}
+class YamlDefLoader extends FileDefLoader {
+  doParse(content) {
+    try {
+      return jsYaml.load(content);
+    } catch (e) {
+      console.group("Failed to parse yaml content to O23 definition.");
+      console.error(e);
+      console.log(content);
+      console.groupEnd();
+      throw new Error("Failed to parse yaml content to O23 definition.");
+    }
+  }
+}
+const isPipelineDef = (def) => def.type === "pipeline";
+const RestApiVariablePortContainer = qe.div.attrs({ [DOM_KEY_WIDGET]: "o23-playground-rest-api-variable-port" })`
+    display: flex;
+    position: relative;
+    align-self: end;
+    align-items: center;
+    justify-self: start;
+    color: ${PlaygroundCssVars.NODE_REST_API_VARIABLE_PORT_COLOR};
+    background: ${PlaygroundCssVars.NODE_REST_API_VARIABLE_PORT_BACKGROUND};
+    height: ${PlaygroundCssVars.NODE_PORT_HEIGHT};
+    border: ${PlaygroundCssVars.NODE_REST_API_VARIABLE_PORT_BORDER};
+    border-top-right-radius: calc(${PlaygroundCssVars.NODE_PORT_HEIGHT} / 2);
+    border-bottom-right-radius: calc(${PlaygroundCssVars.NODE_PORT_HEIGHT} / 2);
+    font-weight: ${PlaygroundCssVars.NODE_REST_API_VARIABLE_PORT_FONT_WEIGHT};
+    font-size: ${PlaygroundCssVars.NODE_REST_API_VARIABLE_PORT_FONT_SIZE};
+    text-transform: capitalize;
+    padding: ${PlaygroundCssVars.NODE_REST_API_VARIABLE_PORT_PADDING};
+    margin-left: -1px;
+    grid-column: 1;
+`;
+const RestApiVariablePortWidget = (props) => {
+  const { label } = props;
+  return React.createElement(
+    RestApiVariablePortContainer,
+    null,
+    React.createElement(
+      "span",
+      null,
+      React.createElement(IntlLabel, { keys: ["o23", "rest-api", "variable", label], value: label })
+    )
+  );
+};
+const StartNodeContainer = qe(NodeWrapper).attrs({
+  [DOM_KEY_WIDGET]: "o23-playground-start-node",
+  style: {
+    "--border-radius": PlaygroundCssVars.NODE_BORDER_RADIUS,
+    "--border": PlaygroundCssVars.NODE_START_BORDER,
+    "--background-color": PlaygroundCssVars.NODE_BACKGROUND
+  }
+})``;
+const StartNodeHeader = qe(NodeHeader).attrs({
+  [DOM_KEY_WIDGET]: "o23-playground-start-node-header",
+  style: {
+    "--border-radius": PlaygroundCssVars.NODE_BORDER_RADIUS,
+    "--background": PlaygroundCssVars.NODE_START_TITLE_BACKGROUND,
+    "--padding": PlaygroundCssVars.NODE_TITLE_PADDING
+  }
+})``;
+const StartNodeTitle = qe(NodeTitle).attrs({
+  [DOM_KEY_WIDGET]: "o23-playground-start-node-title",
+  style: {
+    "--color": PlaygroundCssVars.NODE_START_TITLE_COLOR,
+    "--font-weight": PlaygroundCssVars.NODE_START_TITLE_FONT_WEIGHT
+  }
+})`
+    &[data-role=route] {
+        text-decoration: ${PlaygroundCssVars.NODE_START_SECOND_TITLE_DECORATION};
+    }
+`;
+const StartNodeSecondTitle = qe(NodeSecondTitle).attrs({
+  [DOM_KEY_WIDGET]: "o23-playground-start-node-title",
+  style: {
+    "--color": PlaygroundCssVars.NODE_START_TITLE_COLOR,
+    "--font-weight": PlaygroundCssVars.NODE_START_TITLE_FONT_WEIGHT,
+    "--text-decoration": PlaygroundCssVars.NODE_START_SECOND_TITLE_DECORATION
+  }
+})`
+    &[data-role=method] {
+        text-decoration: unset;
+        text-transform: uppercase;
+    }
+`;
+const StartNodeBody = qe(NodeBody).attrs({
+  [DOM_KEY_WIDGET]: "o23-playground-start-node-body",
+  style: {
+    "--min-height": PlaygroundCssVars.NODE_START_BODY_HEIGHT,
+    "--padding": PlaygroundCssVars.NODE_START_BODY_PADDING
+  }
+})``;
+const StartNodeWidget = (props) => {
+  const { node, engine } = props;
+  const def = node.def;
+  const firstTitleRole = () => {
+    if (isPipelineDef(def) && VUtils.isNotBlank(def.route)) {
+      return "route";
+    }
+    return void 0;
+  };
+  const firstTitle = () => {
+    if (isPipelineDef(def) && VUtils.isNotBlank(def.route)) {
+      return def.route;
+    }
+    return React.createElement(IntlLabel, { keys: ["o23", "node", "start"], value: "Start" });
+  };
+  const secondTitleRole = () => {
+    if (isPipelineDef(def) && VUtils.isNotBlank(def.route)) {
+      return "method";
+    }
+    return void 0;
+  };
+  const secondTitle = () => {
+    if (isPipelineDef(def)) {
+      if (VUtils.isNotBlank(def.route)) {
+        return `[${def.method || "post"}]`;
+      } else {
+        return React.createElement(IntlLabel, { keys: ["o23", "pipeline", "type", def.type], value: "Rest API" });
+      }
+    }
+    return React.createElement(IntlLabel, { keys: ["o23", "pipeline", "type", def.type], value: def.type.replace("-", "") });
+  };
+  return React.createElement(
+    StartNodeContainer,
+    null,
+    React.createElement(
+      StartNodeHeader,
+      null,
+      React.createElement(StartNodeTitle, { "data-role": firstTitleRole() }, firstTitle()),
+      React.createElement(StartNodeSecondTitle, { "data-role": secondTitleRole() }, secondTitle())
+    ),
+    React.createElement(
+      StartNodeBody,
+      null,
+      isPipelineDef(def) ? React.createElement(
+        React.Fragment,
+        null,
+        VUtils.isNotBlank(def.route) ? null : React.createElement(RestApiVariablePortWidget, { label: (def.method || "post").toUpperCase() }),
+        React.createElement(RestApiVariablePortWidget, { label: "Headers" }),
+        React.createElement(RestApiVariablePortWidget, { label: "Path Parameters" }),
+        React.createElement(RestApiVariablePortWidget, { label: "Query Parameters" }),
+        React.createElement(RestApiVariablePortWidget, { label: "Expose Headers" }),
+        React.createElement(RestApiVariablePortWidget, { label: "Expose File" })
+      ) : null,
+      React.createElement(NextStepPortWidget, { port: node.getPort(NextStepPortModel.NAME), engine })
+    )
+  );
+};
+class StartNodeFactory extends AbstractReactFactory {
+  constructor() {
+    super(StartNodeModel.TYPE);
+  }
+  generateReactWidget(event) {
+    return React.createElement(StartNodeWidget, { engine: this.engine, node: event.model });
+  }
+  generateModel(_event) {
+    throw new Error("DO NOT use StartNodeFactory#generateModel.");
+  }
+}
+const initEngine = (engine) => {
+  const portFactories = engine.getPortFactories();
+  portFactories.registerFactory(new NextStepPortFactory());
+  portFactories.registerFactory(new PreviousStepPortFactory());
+  const nodeFactories = engine.getNodeFactories();
+  nodeFactories.registerFactory(new StartNodeFactory());
+  nodeFactories.registerFactory(new EndNodeFactory());
+};
+const EditorWrapper = qe.div.attrs({
+  [DOM_KEY_WIDGET]: "o23-playground-editor",
+  "data-v-scroll": "",
+  "data-h-scroll": ""
+})`
+    display: block;
+    position: relative;
+    align-self: stretch;
+    background-image: ${PlaygroundCssVars.EDITOR_BACKGROUND_IMAGE};
+    background-size: ${PlaygroundCssVars.EDITOR_BACKGROUND_SIZE};
+    background-position: ${PlaygroundCssVars.EDITOR_BACKGROUND_POSITION};
+    overflow: auto;
+
+    > div.o23-playground-editor-content {
+        height: 100%;
+    }
+`;
+const ParseError = qe.div.attrs({ [DOM_KEY_WIDGET]: "o23-playground-viewer-error" })`
+    display: flex;
+    position: relative;
+    align-items: center;
+    padding: 16px 32px;
+    color: ${PlaygroundCssVars.EDITOR_ERROR_COLOR};
+    font-size: 1.5em;
+    font-style: italic;
+    font-weight: 500;
+`;
+class ErrorBoundary2 extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { content: props.content, hasError: false };
+  }
+  static getDerivedStateFromError(error) {
+    console.log(error);
+    return { hasError: true, error };
+  }
+  componentDidCatch(_error, _errorInfo) {
+  }
+  componentDidUpdate(_prevProps, prevState) {
+    if (prevState.content !== this.props.content) {
+      this.setState({ content: this.props.content, hasError: false });
+    }
+  }
+  render() {
+    if (this.state.hasError) {
+      return React.createElement(ParseError, null, "Something went wrong.");
+    }
+    return this.props.children;
+  }
+}
+const createDiagramEngine = () => {
+  const engine = createEngine();
+  initEngine(engine);
+  return engine;
+};
+const EditorKernel = (props) => {
+  const { content, parser } = props;
+  const vwRef = reactExports.useRef(null);
+  const [state, setState] = reactExports.useState(() => {
+    const engine = createDiagramEngine();
+    try {
+      const def = parser.parse(content ?? "");
+      return { engine, content, parser, def };
+    } catch (e) {
+      console.error(e);
+      return { engine, content, parser, message: e.message };
+    }
+  });
+  reactExports.useEffect(() => {
+    if (parser === state.parser && content === state.content) {
+      return;
+    }
+    try {
+      const def = parser.parse(content ?? "");
+      setState((state2) => ({ engine: state2.engine, content, parser, def }));
+    } catch (e) {
+      console.error(e);
+      setState((state2) => ({ engine: state2.engine, content, parser, message: e.message }));
+    }
+  }, [parser, content, state.content, state.parser]);
+  if (VUtils.isNotBlank(state.message)) {
+    return React.createElement(
+      EditorWrapper,
+      null,
+      React.createElement(ParseError, null, state.message)
+    );
+  } else if (VUtils.isBlank(state.content)) {
+    return React.createElement(
+      EditorWrapper,
+      null,
+      React.createElement(
+        ParseError,
+        null,
+        React.createElement(IntlLabel, { keys: ["o23", "error", "no-content"], value: "No content given." })
+      )
+    );
+  } else if (state.def == null) {
+    return React.createElement(
+      EditorWrapper,
+      null,
+      React.createElement(
+        ParseError,
+        null,
+        React.createElement(IntlLabel, { keys: ["o23", "error", "no-def"], value: "No definition parsed." })
+      )
+    );
+  }
+  try {
+    const startNode = new StartNodeModel(state.def);
+    startNode.setPosition(100, 100);
+    const endNode = new EndNodeModel();
+    endNode.setPosition(500, 100);
+    const link = startNode.routeTo(endNode);
+    const model = new DiagramModel();
+    model.addAll(startNode, endNode, link);
+    state.engine.setModel(model);
+    return React.createElement(
+      EditorWrapper,
+      { ref: vwRef },
+      React.createElement(
+        ErrorBoundary2,
+        { content },
+        React.createElement(CanvasWidget, { engine: state.engine, className: "o23-playground-editor-content" })
+      )
+    );
+  } catch (error) {
+    return React.createElement(
+      EditorWrapper,
+      null,
+      React.createElement(ParseError, null, error.message || React.createElement(IntlLabel, { keys: ["o23", "error", "parse"], value: "Parse error occurred." }))
+    );
+  }
+};
+const Editor = (props) => {
+  return React.createElement(EditorKernel, { ...props });
+};
+var PlaygroundEventTypes;
+(function(PlaygroundEventTypes2) {
+  PlaygroundEventTypes2["CONTENT_CHANGED"] = "content-changed";
+})(PlaygroundEventTypes || (PlaygroundEventTypes = {}));
+const Context = reactExports.createContext({});
+Context.displayName = "EventBus";
+const PlaygroundEventBusProvider = (props) => {
+  const { children } = props;
+  const bus = useCreateEventBus("o23-playground");
+  return React.createElement(Context.Provider, { value: bus }, children);
+};
+const usePlaygroundEventBus = () => reactExports.useContext(Context);
+const PlaygroundBridge = (props) => {
+  const { content, onContentChanged } = props;
+  const { on, off } = usePlaygroundEventBus();
+  reactExports.useEffect(() => {
+    const onChanged = (changed) => {
+      if ((content ?? "") === (changed ?? "")) {
+        return;
+      }
+      (async () => await onContentChanged(changed))();
+    };
+    on(PlaygroundEventTypes.CONTENT_CHANGED, onChanged);
+    return () => {
+      off(PlaygroundEventTypes.CONTENT_CHANGED, onChanged);
+    };
+  }, [on, off, content, onContentChanged]);
+  return React.createElement(reactExports.Fragment, null);
+};
+const PlaygroundWrapper = qe.div.attrs(() => {
+  return {
+    [DOM_KEY_WIDGET]: "o23-playground",
+    style: {
+      "--min-height": "500px",
+      "--grid-columns": `1fr`,
+      "--grid-rows": "1fr"
+    }
+  };
+})`
+    display: grid;
+    position: relative;
+    grid-column: var(--grid-column);
+    grid-row: var(--grid-row);
+    grid-template-columns: var(--grid-columns);
+    grid-template-rows: var(--grid-rows);
+    min-height: var(--min-height);
+    height: var(--min-height);
+    border: ${CssVars.BORDER};
+    border-radius: ${CssVars.BORDER_RADIUS};
+    overflow: hidden;
+
+    &[data-visible=false] {
+        display: none;
+    }
+`;
+const PlaygroundDelegate = (props) => {
+  const { $pp, $wrapped, usage, parser, ...rest } = props;
+  const { $p2r, $onValueChange, $avs: { $disabled, $visible } } = $wrapped;
+  const ref = reactExports.useRef(null);
+  const globalHandlers = useGlobalHandlers();
+  const [state, setState] = reactExports.useState(() => {
+    return { parser: parser ?? new YamlDefLoader() };
+  });
+  reactExports.useEffect(() => {
+    setState((state2) => ({ ...state2, parser: parser ?? new YamlDefLoader() }));
+  }, [parser]);
+  const onContentChanged = async (content2) => {
+    await $onValueChange(content2, false, { global: globalHandlers });
+  };
+  const content = MUtils.getValue($wrapped.$model, $pp);
+  return React.createElement(
+    PlaygroundWrapper,
+    { ...rest, "data-disabled": $disabled, "data-visible": $visible, id: PPUtils.asId(PPUtils.absolute($p2r, $pp), props.id), ref },
+    React.createElement(PlaygroundBridge, { content, onContentChanged }),
+    React.createElement(Editor, { content, usage, parser: state.parser })
+  );
+};
+const Playground = (props) => {
+  return React.createElement(
+    PlaygroundEventBusProvider,
+    null,
+    React.createElement(PlaygroundDelegate, { ...props })
+  );
+};
+class AbstractPlaygroundTranslator2 extends index$1.SpecificWidgetTranslator {
+  beautifyProperties(def) {
+    return super.beautifyProperties(this.beautifyColumnSpan(def, 12));
+  }
+  shouldWrapByFormCell() {
+    return false;
+  }
+  getAttributeNamesMapping() {
+    const keys = ["useN3", "useN5", "useN6", "useN7", "useN8"];
+    return keys.reduce((mapping, key) => {
+      mapping[`${this.getSupportedType()}.${key}`] = `usage.${key}`;
+      return mapping;
+    }, {});
+  }
+}
+const registerPlayground = (widgetHelper, widgetType) => {
+  widgetType = VUtils.isBlank(widgetType) ? "O23Playground" : widgetType;
+  registerWidget({ key: widgetType, JSX: Playground, container: false, array: false });
+  const TranslatorClass = class extends AbstractPlaygroundTranslator2 {
+    getSupportedType() {
+      return widgetType;
+    }
+  };
+  const repo = widgetHelper.repository;
+  repo.register(new TranslatorClass(repo));
+};
+var define_process_env_default = { GITHUB_STATE: "/home/runner/work/_temp/_runner_file_commands/save_state_bd8f8343-649e-47b9-a1d3-eb2ac665ee6b", npm_package_scripts_build_n5_ci: "cd ./d9-n5 && yarn build-ci", npm_package_scripts_build_sample_cra: "cd ./d9-sample-cra && yarn build", STATS_TRP: "true", DEPLOYMENT_BASEPATH: "/opt/runner", DOTNET_NOLOGO: "1", npm_package_scripts_build_n6_ci: "cd ./d9-n6 && yarn build-ci", npm_package_dependencies__vitejs_plugin_react: "^4.2.1", USER: "runner", npm_config_version_commit_hooks: "true", npm_config_user_agent: "yarn/1.22.21 npm/? node/v18.20.2 linux x64", npm_package_dependencies__types_jest: "^29.5.4", CI: "true", npm_config_bin_links: "true", npm_package_bugs_url: "https://github.com/InsureMO/rainbow-d9/issues", npm_config_wrap_output: "", RUNNER_ENVIRONMENT: "github-hosted", GITHUB_ENV: "/home/runner/work/_temp/_runner_file_commands/set_env_bd8f8343-649e-47b9-a1d3-eb2ac665ee6b", PIPX_HOME: "/opt/pipx", npm_node_execpath: "/opt/hostedtoolcache/node/18.20.2/x64/bin/node", npm_package_scripts_build_thai_all_ci: "yarn build-thai-plan-selection-ci", npm_config_init_version: "1.0.0", npm_package_devDependencies_gh_pages: "^6.1.1", npm_package_dependencies__babel_plugin_proposal_private_property_in_object: "^7.21.11", JAVA_HOME_8_X64: "/usr/lib/jvm/temurin-8-jdk-amd64", SHLVL: "1", HOME: "/home/runner", OLDPWD: "/home/runner/work/rainbow-d9/rainbow-d9", npm_package_browserslist_production_0: ">0.2%", RUNNER_TEMP: "/home/runner/work/_temp", GITHUB_EVENT_PATH: "/home/runner/work/_temp/_github_workflow/event.json", npm_package_scripts_build_all: "yarn build-n123 && yarn build-n5 && yarn build-n6 && yarn build-echarts && yarn build-thai-all", npm_package_browserslist_production_1: "not dead", npm_package_dependencies_react_syntax_highlighter: "^15.5.0", JAVA_HOME_11_X64: "/usr/lib/jvm/temurin-11-jdk-amd64", PIPX_BIN_DIR: "/opt/pipx_bin", GITHUB_REPOSITORY_OWNER: "InsureMO", npm_package_volta_node: "18.19.0", npm_config_init_license: "MIT", npm_package_browserslist_production_2: "not op_mini all", GRADLE_HOME: "/usr/share/gradle-8.7", ANDROID_NDK_LATEST_HOME: "/usr/local/lib/android/sdk/ndk/26.3.11579264", JAVA_HOME_21_X64: "/usr/lib/jvm/temurin-21-jdk-amd64", STATS_RDCL: "true", GITHUB_RETENTION_DAYS: "90", YARN_WRAP_OUTPUT: "false", npm_package_scripts_build_thai_plan_selection_ci: "cd ./d9-thai-plan-selection && yarn build-ci", npm_package_scripts_build_n1: "cd ./d9-n1 && yarn build", npm_config_version_tag_prefix: "v", npm_package_dependencies__rainbow_d9_n2: "1.1.28-alpha.1", GITHUB_REPOSITORY_OWNER_ID: "38915232", POWERSHELL_DISTRIBUTION_CHANNEL: "GitHub-Actions-ubuntu22", AZURE_EXTENSION_DIR: "/opt/az/azcliextensions", GITHUB_HEAD_REF: "", npm_package_scripts_build_n2: "cd ./d9-n2 && yarn build", npm_package_dependencies__types_styled_components: "^5.1.34", npm_package_dependencies__rainbow_d9_n3: "1.1.28-alpha.1", npm_package_dependencies__rainbow_d9_echarts: "1.1.28-alpha.1", SYSTEMD_EXEC_PID: "588", npm_package_scripts_build_echarts: "cd ./d9-echarts && yarn build", npm_package_scripts_build_n3: "cd ./d9-n3 && yarn build", GITHUB_GRAPHQL_URL: "https://api.github.com/graphql", npm_package_description: "Assume the following envs are ready, otherwise contact the tech guy.", npm_package_scripts_predeploy: "npm run build", npm_package_dependencies__rainbow_d9_n5: "1.1.28-alpha.1", GOROOT_1_20_X64: "/opt/hostedtoolcache/go/1.20.14/x64", NVM_DIR: "/home/runner/.nvm", npm_package_readmeFilename: "README.md", npm_package_scripts_build_n5: "cd ./d9-n5 && yarn build", npm_package_dependencies__types_react: "^18.2.21", npm_package_dependencies__testing_library_react: "^13.4.0", npm_package_dependencies__rainbow_d9_n6: "1.1.28-alpha.1", DOTNET_SKIP_FIRST_TIME_EXPERIENCE: "1", GOROOT_1_21_X64: "/opt/hostedtoolcache/go/1.21.10/x64", JAVA_HOME_17_X64: "/usr/lib/jvm/temurin-17-jdk-amd64", ImageVersion: "20240516.1.0", npm_package_scripts_build_n6: "cd ./d9-n6 && yarn build", RUNNER_OS: "Linux", GITHUB_API_URL: "https://api.github.com", GOROOT_1_22_X64: "/opt/hostedtoolcache/go/1.22.3/x64", SWIFT_PATH: "/usr/share/swift/usr/bin", RUNNER_USER: "runner", STATS_V3PS: "true", CHROMEWEBDRIVER: "/usr/local/share/chromedriver-linux64", JOURNAL_STREAM: "8:19658", GITHUB_WORKFLOW: "Publish to NPM", _: "/opt/hostedtoolcache/node/18.20.2/x64/bin/yarn", npm_package_private: "true", npm_package_dependencies_remark_gfm: "3.0.1", npm_package_scripts_build_thai_all: "yarn build-thai-plan-selection", npm_config_registry: "https://registry.yarnpkg.com", ACTIONS_RUNNER_ACTION_ARCHIVE_CACHE: "/opt/actionarchivecache", STATS_D: "true", GITHUB_RUN_ID: "9222107726", STATS_VMFE: "true", npm_package_workspaces_0: "d9-n1", GITHUB_REF_TYPE: "tag", BOOTSTRAP_HASKELL_NONINTERACTIVE: "1", GITHUB_WORKFLOW_SHA: "18d3bb6bf54d90e550ed1f4bbb491a75d235fd9b", GITHUB_BASE_REF: "", ImageOS: "ubuntu22", npm_package_scripts_build_n123_ci: "yarn build-n1-ci && yarn build-n2-ci && yarn build-n3-ci", npm_package_workspaces_1: "d9-n2", npm_config_ignore_scripts: "", npm_package_scripts_start: "vite", npm_package_dependencies_github_markdown_css: "^5.5.0", GITHUB_WORKFLOW_REF: "InsureMO/rainbow-d9/.github/workflows/release.yml@refs/tags/r-1.1.28", PERFLOG_LOCATION_SETTING: "RUNNER_PERFLOG", GITHUB_ACTION_REPOSITORY: "", npm_package_workspaces_2: "d9-n3", npm_package_browserslist_development_0: "last 1 chrome version", PATH: "/tmp/yarn--1716544856950-0.8687208217687596:/home/runner/work/rainbow-d9/rainbow-d9/d9-sample-cra/node_modules/.bin:/home/runner/.config/yarn/link/node_modules/.bin:/home/runner/work/rainbow-d9/rainbow-d9/node_modules/.bin:/opt/hostedtoolcache/node/18.20.2/x64/libexec/lib/node_modules/npm/bin/node-gyp-bin:/opt/hostedtoolcache/node/18.20.2/x64/lib/node_modules/npm/bin/node-gyp-bin:/opt/hostedtoolcache/node/18.20.2/x64/bin/node_modules/npm/bin/node-gyp-bin:/tmp/yarn--1716544856742-0.862811309336982:/home/runner/work/rainbow-d9/rainbow-d9/node_modules/.bin:/home/runner/.config/yarn/link/node_modules/.bin:/home/runner/work/rainbow-d9/rainbow-d9/node_modules/.bin:/opt/hostedtoolcache/node/18.20.2/x64/libexec/lib/node_modules/npm/bin/node-gyp-bin:/opt/hostedtoolcache/node/18.20.2/x64/lib/node_modules/npm/bin/node-gyp-bin:/opt/hostedtoolcache/node/18.20.2/x64/bin/node_modules/npm/bin/node-gyp-bin:/opt/hostedtoolcache/node/18.20.2/x64/bin:/snap/bin:/home/runner/.local/bin:/opt/pipx_bin:/home/runner/.cargo/bin:/home/runner/.config/composer/vendor/bin:/usr/local/.ghcup/bin:/home/runner/.dotnet/tools:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin", NODE: "/opt/hostedtoolcache/node/18.20.2/x64/bin/node", ANT_HOME: "/usr/share/ant", DOTNET_MULTILEVEL_LOOKUP: "0", RUNNER_TRACKING_ID: "github_9b1c85b9-dc21-4fd4-a75c-059a86f0da0b", INVOCATION_ID: "28cb9d28ea044b4fb8048c0672618601", RUNNER_TOOL_CACHE: "/opt/hostedtoolcache", npm_package_name: "@rainbow-d9/sample-cra", npm_package_workspaces_3: "d9-n5", npm_package_browserslist_development_1: "last 1 firefox version", npm_package_repository_type: "git", npm_package_dependencies__types_react_syntax_highlighter: "^15.5.11", npm_package_dependencies__rainbow_d9_thai_plan_selection: "1.1.28-alpha.1", GITHUB_ACTION: "__run_5", GITHUB_RUN_NUMBER: "119", GITHUB_TRIGGERING_ACTOR: "bradwoo8621", RUNNER_ARCH: "X64", XDG_RUNTIME_DIR: "/run/user/1001", AGENT_TOOLSDIRECTORY: "/opt/hostedtoolcache", npm_package_scripts_build_thai_plan_selection: "cd ./d9-thai-plan-selection && yarn build", npm_package_workspaces_4: "d9-n6", npm_package_browserslist_development_2: "last 1 safari version", npm_package_workspaces_5: "d9-echarts", LANG: "C.UTF-8", VCPKG_INSTALLATION_ROOT: "/usr/local/share/vcpkg", npm_package_workspaces_6: "d9-thai-plan-selection", npm_package_dependencies_react_dom: "^18.2.0", CONDA: "/usr/share/miniconda", RUNNER_NAME: "GitHub Actions 16", XDG_CONFIG_HOME: "/home/runner/.config", STATS_VMD: "true", GITHUB_REF_NAME: "r-1.1.28", GITHUB_REPOSITORY: "InsureMO/rainbow-d9", STATS_D_D: "true", npm_lifecycle_script: "vite build", npm_package_workspaces_7: "d9-sample-cra", npm_package_eslintConfig_extends_0: "react-app", npm_package_dependencies_vite_plugin_markdown: "^2.2.0", npm_package_dependencies_react_markdown: "8.0.7", npm_package_dependencies__types_node: "^20.5.3", STATS_UE: "true", ANDROID_NDK_ROOT: "/usr/local/lib/android/sdk/ndk/25.2.9519653", GITHUB_ACTION_REF: "", DEBIAN_FRONTEND: "noninteractive", npm_package_scripts_build_sample_cra_ci: "cd ./d9-sample-cra && yarn build", npm_config_version_git_message: "v%s", npm_package_eslintConfig_extends_1: "react-app/jest", GITHUB_REPOSITORY_ID: "704514093", GITHUB_ACTIONS: "true", npm_lifecycle_event: "build", npm_package_version: "1.1.28-alpha.1", npm_package_repository_url: "git+https://github.com/InsureMO/rainbow-d9.git", npm_package_dependencies__testing_library_jest_dom: "^5.17.0", GITHUB_REF_PROTECTED: "false", npm_config_argv: '{"remain":[],"cooked":["run","build-sample-cra"],"original":["build-sample-cra"]}', npm_package_volta_yarn: "1.22.21", npm_package_scripts_build: "vite build", npm_package_dependencies__testing_library_user_event: "^13.5.0", GITHUB_WORKSPACE: "/home/runner/work/rainbow-d9/rainbow-d9", ACCEPT_EULA: "Y", GITHUB_JOB: "create-sample-pages", RUNNER_PERFLOG: "/home/runner/perflog", npm_package_dependencies_vite: "^5.0.13", GITHUB_SHA: "18d3bb6bf54d90e550ed1f4bbb491a75d235fd9b", GITHUB_RUN_ATTEMPT: "1", npm_config_version_git_tag: "true", npm_config_version_git_sign: "", GITHUB_REF: "refs/tags/r-1.1.28", GITHUB_ACTOR: "bradwoo8621", ANDROID_SDK_ROOT: "/usr/local/lib/android/sdk", npm_package_license: "MIT", npm_config_strict_ssl: "true", LEIN_HOME: "/usr/local/lib/lein", npm_package_scripts_build_n123: "yarn build-n1 && yarn build-n2 && yarn build-n3", GITHUB_PATH: "/home/runner/work/_temp/_runner_file_commands/add_path_bd8f8343-649e-47b9-a1d3-eb2ac665ee6b", JAVA_HOME: "/usr/lib/jvm/temurin-11-jdk-amd64", PWD: "/home/runner/work/rainbow-d9/rainbow-d9/d9-sample-cra", GITHUB_ACTOR_ID: "2330098", RUNNER_WORKSPACE: "/home/runner/work/rainbow-d9", npm_execpath: "/opt/hostedtoolcache/node/18.20.2/x64/lib/node_modules/yarn/bin/yarn.js", npm_package_scripts_build_all_ci: "yarn build-n123-ci && yarn build-n5-ci && yarn build-n6-ci && yarn build-echarts-ci && yarn build-thai-all-ci", HOMEBREW_CLEANUP_PERIODIC_FULL_DAYS: "3650", GITHUB_EVENT_NAME: "push", HOMEBREW_NO_AUTO_UPDATE: "1", ANDROID_HOME: "/usr/local/lib/android/sdk", GITHUB_SERVER_URL: "https://github.com", GECKOWEBDRIVER: "/usr/local/share/gecko_driver", LEIN_JAR: "/usr/local/lib/lein/self-installs/leiningen-2.11.2-standalone.jar", GHCUP_INSTALL_BASE_PREFIX: "/usr/local", GITHUB_OUTPUT: "/home/runner/work/_temp/_runner_file_commands/set_output_bd8f8343-649e-47b9-a1d3-eb2ac665ee6b", npm_package_author_name: "Rainbow Team", EDGEWEBDRIVER: "/usr/local/share/edge_driver", STATS_EXT: "true", npm_package_scripts_build_n1_ci: "cd ./d9-n1 && yarn build-ci", npm_config_save_prefix: "^", npm_config_ignore_optional: "", ANDROID_NDK: "/usr/local/lib/android/sdk/ndk/25.2.9519653", SGX_AESM_ADDR: "1", CHROME_BIN: "/usr/bin/google-chrome", npm_package_scripts_build_n2_ci: "cd ./d9-n2 && yarn build-ci", npm_package_scripts_deploy: "gh-pages -d build", npm_package_scripts_preview: "vite preview", SELENIUM_JAR_PATH: "/usr/share/java/selenium-server.jar", STATS_EXTP: "https://provjobdsettingscdn.blob.core.windows.net/settings/provjobdsettings-0.5.172+1/provjobd.data", npm_package_scripts_build_echarts_ci: "cd ./d9-echarts && yarn build-ci", npm_package_scripts_build_n3_ci: "cd ./d9-n3 && yarn build-ci", npm_package_dependencies_web_vitals: "^2.1.4", npm_package_dependencies_typescript: "^5.1.6", INIT_CWD: "/home/runner/work/rainbow-d9/rainbow-d9", ANDROID_NDK_HOME: "/usr/local/lib/android/sdk/ndk/25.2.9519653", GITHUB_STEP_SUMMARY: "/home/runner/work/_temp/_runner_file_commands/step_summary_bd8f8343-649e-47b9-a1d3-eb2ac665ee6b", npm_package_dependencies_react: "^18.2.0", npm_package_dependencies__types_react_dom: "^18.2.7", NODE_ENV: "production" };
 dayjs.extend(WeekOfYear);
 dayjs.extend(QuarterOfYear);
 dayjs.extend(Duration);
@@ -4991,6 +5752,7 @@ dayjs.extend(BuddhistEra);
   registerN2Widgets(widgetsHelper);
   registerCharts(widgetsHelper);
   registerPlanSelect(widgetsHelper);
+  registerPlayground$1(widgetsHelper);
   registerPlayground(widgetsHelper);
   utils$3.setCalendarDefaults({
     dateFormat: "DD/MM/YYYY",
@@ -5077,12 +5839,12 @@ const third = {
     }
   ]
 };
-const DemoData$a = {
+const DemoData$b = {
   first,
   second,
   third
 };
-const markdown$b = "# Page::Demo Tab\n\n## Section::# 10. ECharts\n\n### Section::## 10.1 Simple Charts\n\n- Chart::Use Canvas, Default::first\n	- $fc\n	- options:\n	  ```javascript\n	  return {\n	    xAxis: {type: 'category', data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']},\n	    yAxis: {type: 'value'},\n	    series: [{type: 'bar'}]\n	  }\n	  ```\n	- merge:\n	  ```javascript\n	  options.series[0].data = data;\n	  return options;\n	  ```\n- Chart::Use SVG::first\n	- $fc\n	- initOptions:\n	  ```javascript\n	  return { renderer: 'svg' };\n	  ```\n	- options:\n	  ```javascript\n	  return {\n	    xAxis: {type: 'category', data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']},\n	    yAxis: {type: 'value'},\n	    series: [{type: 'bar'}]\n	  }\n	  ```\n	- merge:\n	  ```javascript\n	  options.series[0].data = data;\n	  return options;\n	  ```\n- Button::\n	- text: Random Data\n	- click:\n	  ```javascript\n	  const {first: oldFirst, second: oldSecond} = options.model;\n	  options.model.first = new Array(7).fill(0).map(() => Math.ceil(Math.random() * 100));\n	  options.global.root.fire('value-changed', '/first', oldFirst, options.model.first);\n	  ```\n\n### Section::## 10.2 Autonomous Chart\n\n- AutChart::Refresh every 1 second::second\n	- $fc\n	- options:\n	  ```javascript\n	  return {\n	    legend: {top: 'bottom'},\n	    series: [\n	      {\n	        name: 'Nightingale Chart', type: 'pie', radius: ['20%', '60%'], center: ['50%', '50%'], roseType: 'area',\n	        itemStyle: { borderRadius: 8 }\n	      }\n	    ]\n	  }\n	  ```\n	- merge:\n	  ```javascript\n	  options.series[0].data = data;\n	  return options;\n	  ```\n	- fetch:\n	  ```typescript\n	  return ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'].map(name => {\n	    return { value: Math.ceil(Math.random() * 30) + 20, name };\n	  });\n	  ```\n	- interval: 1\n\n### Section::## 10.3 Chart on External Data\n\n- data-rows-auto-1fr: true\n\n- Dropdown::Month::third.criteria.weekOfYear\n	- options: 1:Jan; 2:Feb; 3:Mar; 4:Apr; 5:May; 6:Jun; 7:Jul; 8:Aug; 9:Sep; 10:Oct; 11:Nov; 12:Dec\n	- place: $row: 1, $col: 1, $cols: 3\n- Dropdown::Gender::third.criteria.gender\n	- options: F:Female;M:Male\n	- place: $row: 2, $col: 1, $cols: 3\n- RelChart::::third.data\n	- place: $row: 1, $rows: 2, $col: 4, $cols: 3\n	- options:\n	  ```javascript\n	  return {\n	    legend: {top: 'bottom'},\n	    series: [\n	      {\n	        name: 'Nightingale Chart', type: 'pie', radius: ['20%', '60%'], center: ['50%', '50%'], roseType: 'area',\n	        itemStyle: { borderRadius: 8 }\n	      }\n	    ]\n	  }\n	  ```\n	- merge:\n	  ```javascript\n	  options.series[0].data = data;\n	  return options;\n	  ```\n	- fetch:\n	  ```typescript\n	  return ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'].map(name => {\n	    return { value: Math.ceil(Math.random() * 30) + 20, name };\n	  });\n	  ```\n	- criteria:\n		- on: /third.criteria.**";
+const markdown$c = "# Page::Demo Tab\n\n## Section::# 10. ECharts\n\n### Section::## 10.1 Simple Charts\n\n- Chart::Use Canvas, Default::first\n	- $fc\n	- options:\n	  ```javascript\n	  return {\n	    xAxis: {type: 'category', data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']},\n	    yAxis: {type: 'value'},\n	    series: [{type: 'bar'}]\n	  }\n	  ```\n	- merge:\n	  ```javascript\n	  options.series[0].data = data;\n	  return options;\n	  ```\n- Chart::Use SVG::first\n	- $fc\n	- initOptions:\n	  ```javascript\n	  return { renderer: 'svg' };\n	  ```\n	- options:\n	  ```javascript\n	  return {\n	    xAxis: {type: 'category', data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']},\n	    yAxis: {type: 'value'},\n	    series: [{type: 'bar'}]\n	  }\n	  ```\n	- merge:\n	  ```javascript\n	  options.series[0].data = data;\n	  return options;\n	  ```\n- Button::\n	- text: Random Data\n	- click:\n	  ```javascript\n	  const {first: oldFirst, second: oldSecond} = options.model;\n	  options.model.first = new Array(7).fill(0).map(() => Math.ceil(Math.random() * 100));\n	  options.global.root.fire('value-changed', '/first', oldFirst, options.model.first);\n	  ```\n\n### Section::## 10.2 Autonomous Chart\n\n- AutChart::Refresh every 1 second::second\n	- $fc\n	- options:\n	  ```javascript\n	  return {\n	    legend: {top: 'bottom'},\n	    series: [\n	      {\n	        name: 'Nightingale Chart', type: 'pie', radius: ['20%', '60%'], center: ['50%', '50%'], roseType: 'area',\n	        itemStyle: { borderRadius: 8 }\n	      }\n	    ]\n	  }\n	  ```\n	- merge:\n	  ```javascript\n	  options.series[0].data = data;\n	  return options;\n	  ```\n	- fetch:\n	  ```typescript\n	  return ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'].map(name => {\n	    return { value: Math.ceil(Math.random() * 30) + 20, name };\n	  });\n	  ```\n	- interval: 1\n\n### Section::## 10.3 Chart on External Data\n\n- data-rows-auto-1fr: true\n\n- Dropdown::Month::third.criteria.weekOfYear\n	- options: 1:Jan; 2:Feb; 3:Mar; 4:Apr; 5:May; 6:Jun; 7:Jul; 8:Aug; 9:Sep; 10:Oct; 11:Nov; 12:Dec\n	- place: $row: 1, $col: 1, $cols: 3\n- Dropdown::Gender::third.criteria.gender\n	- options: F:Female;M:Male\n	- place: $row: 2, $col: 1, $cols: 3\n- RelChart::::third.data\n	- place: $row: 1, $rows: 2, $col: 4, $cols: 3\n	- options:\n	  ```javascript\n	  return {\n	    legend: {top: 'bottom'},\n	    series: [\n	      {\n	        name: 'Nightingale Chart', type: 'pie', radius: ['20%', '60%'], center: ['50%', '50%'], roseType: 'area',\n	        itemStyle: { borderRadius: 8 }\n	      }\n	    ]\n	  }\n	  ```\n	- merge:\n	  ```javascript\n	  options.series[0].data = data;\n	  return options;\n	  ```\n	- fetch:\n	  ```typescript\n	  return ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'].map(name => {\n	    return { value: Math.ceil(Math.random() * 30) + 20, name };\n	  });\n	  ```\n	- criteria:\n		- on: /third.criteria.**";
 use([
   install,
   install$1,
@@ -5096,7 +5858,7 @@ use([
   install$7
 ]);
 const ECharts = () => {
-  const def = useDemoMarkdown(markdown$b);
+  const def = useDemoMarkdown(markdown$c);
   const externalDefs = {
     mergeData: {
       first: (_options, data) => {
@@ -5113,11 +5875,11 @@ const ECharts = () => {
   return /* @__PURE__ */ jsxRuntimeExports.jsxs(GlobalRoot, { children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx(CustomEventHandler, {}),
     /* @__PURE__ */ jsxRuntimeExports.jsx(N2DemoDialogHandler, {}),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(StandaloneRoot, { ...def, $root: DemoData$a, externalDefs })
+    /* @__PURE__ */ jsxRuntimeExports.jsx(StandaloneRoot, { ...def, $root: DemoData$b, externalDefs })
   ] });
 };
-const EChartsData = DemoData$a;
-const EChartsMarkdown = markdown$b;
+const EChartsData = DemoData$b;
+const EChartsMarkdown = markdown$c;
 const ribs = [
   {
     propA: "Property A 1 @ribs",
@@ -5128,13 +5890,13 @@ const ribs = [
     propB: "Property B 2 @ribs"
   }
 ];
-const DemoData$9 = {
+const DemoData$a = {
   ribs
 };
-const markdown$a = "# Page::Demo Tab\n\n## Section::# 4. Array Panel\n\n### Ribs::::ribs\n\n- removable, addable, disableOnCannotAdd\n- elementTitle:\n	- labelOnValue\n	- property: propA\n- couldAddElement: @ext.couldAddElement\n- Input::Property A::propA\n- Input::Property B::propB\n";
+const markdown$b = "# Page::Demo Tab\n\n## Section::# 4. Array Panel\n\n### Ribs::::ribs\n\n- removable, addable, disableOnCannotAdd\n- elementTitle:\n	- labelOnValue\n	- property: propA\n- couldAddElement: @ext.couldAddElement\n- Input::Property A::propA\n- Input::Property B::propB\n";
 utils$1.setRibsDefaults({ useSectionStyleIcons: true });
 const N2ArrayPanel = () => {
-  const def = useDemoMarkdown(markdown$a);
+  const def = useDemoMarkdown(markdown$b);
   const externalDefs = {
     couldAddElement: async (options, _handlers) => {
       return (options.model ?? []).length < 5;
@@ -5143,11 +5905,11 @@ const N2ArrayPanel = () => {
   return /* @__PURE__ */ jsxRuntimeExports.jsxs(GlobalRoot, { children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx(CustomEventHandler, {}),
     /* @__PURE__ */ jsxRuntimeExports.jsx(N2DemoDialogHandler, {}),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(StandaloneRoot, { ...def, $root: DemoData$9, externalDefs })
+    /* @__PURE__ */ jsxRuntimeExports.jsx(StandaloneRoot, { ...def, $root: DemoData$a, externalDefs })
   ] });
 };
-const N2ArrayPanelData = DemoData$9;
-const N2ArrayPanelMarkdown = markdown$a;
+const N2ArrayPanelData = DemoData$a;
+const N2ArrayPanelMarkdown = markdown$b;
 const title = "Hello, I am a demo dialog.";
 const propA = "Property A @root";
 const decorateInput = "123";
@@ -5156,7 +5918,7 @@ const caption = "Some Caption";
 const nested = {
   propA: "Property A @nested"
 };
-const DemoData$8 = {
+const DemoData$9 = {
   title,
   propA,
   decorateInput,
@@ -5165,7 +5927,7 @@ const DemoData$8 = {
   caption,
   nested
 };
-const markdown$9 = "# Page::Demo Tab\n\n## Section::# 1.1. Basic Widgets - Decorated Input\n\n- DecoInput::Decorate Input::decorateInput\n	- label:\n		- labelOnValue\n		- property: decorateInput\n		- leads: Masked:\n	- leads: Hello\n	- tails: World\n	- regex: abc$,^def; Starts with \"def\" or ends with \"abc\".\n	- validateScopes: s1\n	- required\n	- data-di-tip-body: return 'Hello, I am a mask input.'\n	- data-di-tip-tag: return 'data-decorate-input'\n	- data-di-tip-max-width: 150\n	- data-di-tip-delay: 2\n	- mask:\n	  ```\n	  return {\n		mask: '**** **** ****',\n		lazy: false,\n		autofix: true\n	  }\n	  ```\n- DecoNumber::Decorate Number Input::decorateNumberInput\n	- label:\n		- valueToLabel: `'Number, Grouping'`\n	- leads: $icons.check;$\n	- tails: %;$icons.caretLeft\n	- numeric\n	- placeholder: A placeholder\n	- grouping\n	- data-tip-title: return 'Hello'\n	- data-tip-body: return 'I am a number input.'\n	- data-tip-tag: return 'data-decorate-input'\n- DecoNumber::0 - 9 are Legal Keys::decorateNumberInput2\n	- leads: $icons.check;$\n	- tails: %;$icons.caretLeft\n	- numeric\n	- onKeyDown: @ext.keydown.numeric\n- DecoNumber::::decorateNumberInput3\n	- data-value2: $pp.decorateNumberInput3\n	- data-value-func:\n	  ```javascript\n	  return options.model.decorateNumberInput3 < 10000 ? 'lt10000': 'gte10000';\n	  ```\n	- label: Contract Value\n	- format: @ext.deco.numericFormat\n	- repaint:\n		- on: decorateNumberInput3\n\n## Section::# 1.2. Basic Widgets - Dropdown\n\n- Dropdown::::dropdown\n	- label: Dropdown\n	- options:\n		- 1: Option #1\n		- 2: Option #2\n	- data-tip-body: return 'I am a simple dropdown.'\n- Dropdown::::dropdown2\n	- label: Dropdown #2\n	- options: @ext.dropdown2\n- MultiDropdown::Multiple Dropdown::multiDropdown\n	- options:\n		- 1: Option #1\n		- 2: Option #2\n		- 3: A very very very very very very very very very very very very very very very very very very long Option #3\n		- 4: Option #4\n		- 5: Option #5\n	- data-tip-body: return 'I am a multiple-choices dropdown.'\n\n## Section::# 1.3. Basic Widgets - Calendar\n\n- DateTime::Buddhist Era::buddhistEra\n	- dateFormat: BBBB/MM/DD\n	- timeFormat: HH\n	- renderOn: desktop, mobile\n	- !autoConfirm\n	- couldPerform:\n	  ```javascript\n	  // April 2024, and after\n	  if (['year', 'month', 'date'].includes(options.checkType)) {\n	    return (options.valueToCheck.year() === 2024 && options.valueToCheck.month() >= 3)\n	      || options.valueToCheck.year() > 2024;\n	  } else {\n	    return options.valueToCheck.hour() >= 9 && options.valueToCheck.hour() < 18;\n	  }\n	  ```\n	- data-tip-body: return 'I am a Buddhist Era date time picker.'\n- Date::Buddhist Year & Month::buddhistEra2\n	- dateFormat: BBBB/MM\n- Date::Hide Shortcuts::date3\n	- data-calendar-hide-shortcuts\n	- autoConfirmOnDate\n- Time::Time Only::time1\n	- timeFormat: HH:mm:ss\n- Date::Only Visible on Desktop::mobileDesktop\n	- renderOn:\n	  ```\n	  // this line canont be ignored, since renderOn attribute build will not treat single line as function body\n	  return ['desktop', 'mobile'];\n	  ```\n- Date::Only Visible on Mobile::mobileDate\n	- renderOn: mobile\n\n## Section::# 1.4. Basic Widgets - Label\n\n- Label::A Label::label\n	- valueToLabel: `'Hello World'`\n	- leads: $icons.check;$\n	- tails: %;$icons.caretLeft\n	- data-tip-body: return 'I am a label.'\n- Caption::A Caption::caption\n	- $fc\n	- text: Hello World\n- Caption::A Caption::caption\n	- $fc\n	- valueToLabel: `'Caption is [' + value + ']'`\n\n## Section::# 1.4. Basic Widgets - Radio\n\n- Radio::A Radio::aRadio\n	- data-tip-body: return 'I am a radio.'\n- Radios::Radio Group::radios1\n	- options:\n		- 1: Option #1\n		- 2: Option #2\n		- 3: Option #3\n		- 4: Option #4\n		- 5: A very very very very very very very very very very very very very very very very very very long Option #5\n	- place: 6\n	- columns: 4\n	- data-tip-body: return 'I am a radios.'\n- Radios::Radio Group, Fake as Toggle Buttons::radios2\n	- data-as-toggle-button\n	- options:\n		- 1: Option #1\n		- 2: Option #2\n		- 3: Option #3\n		- 4: Option #4\n		- 5: Option #5\n	- place: 12\n\n## Section::# 1.5. Basic Widgets - Checkbox\n\n- Checkbox::A Checkbox::aCheckbox\n	- data-tip-body: return 'I am a checkbox.'\n- Checks::Checkbox Group::checks1\n	- options:\n		- 1: Option #1\n		- 2: Option #2\n		- 3: Option #3\n		- 4: Option #4\n		- 5: A very very very very very very very very very very very very very very very very very very long Option #5\n	- place: 6\n	- columns: 4\n	- data-tip-body: return 'I am a checkboxes.'\n- Checks::Checkbox Group::checks2\n	- options:\n		- 1: Option #1\n		- 2: Option #2\n		- 3: Option #3\n		- 4: Option #4\n	- single\n- Checks::Checkbox Group, Fake as Toggle Buttons::checks3\n	- data-as-toggle-button\n	- options:\n		- 1: Option #1\n		- 2: Option #2\n		- 3: Option #3\n		- 4: Option #4\n		- 5: Option #5\n	- place: 12\n\n## Section::# 1.6. Basic Widgets - Button\n\n- Button::\n	- text: Validate Inputs, Scope \"S1\"\n	- click: validate s1\n	- data-tip-body: return 'I am a button.'\n\n- Caption::\n	- text: Dropdown\n		- property: BizTransaction.PaymentMethod\n		- disabled, data-as-label\n		- please: Let you see me.\n		- options: F: Female\n	- click:\n	  ```\n	  const {global: {sc}, root, model} = options;\n	  await sc( 'dialog', 'direct-card', {root, model});\n	  ```\n";
+const markdown$a = "# Page::Demo Tab\n\n## Section::# 1.1. Basic Widgets - Decorated Input\n\n- DecoInput::Decorate Input::decorateInput\n	- label:\n		- labelOnValue\n		- property: decorateInput\n		- leads: Masked:\n	- leads: Hello\n	- tails: World\n	- regex: abc$,^def; Starts with \"def\" or ends with \"abc\".\n	- validateScopes: s1\n	- required\n	- data-di-tip-body: return 'Hello, I am a mask input.'\n	- data-di-tip-tag: return 'data-decorate-input'\n	- data-di-tip-max-width: 150\n	- data-di-tip-delay: 2\n	- mask:\n	  ```\n	  return {\n		mask: '**** **** ****',\n		lazy: false,\n		autofix: true\n	  }\n	  ```\n- DecoNumber::Decorate Number Input::decorateNumberInput\n	- label:\n		- valueToLabel: `'Number, Grouping'`\n	- leads: $icons.check;$\n	- tails: %;$icons.caretLeft\n	- numeric\n	- placeholder: A placeholder\n	- grouping\n	- data-tip-title: return 'Hello'\n	- data-tip-body: return 'I am a number input.'\n	- data-tip-tag: return 'data-decorate-input'\n- DecoNumber::0 - 9 are Legal Keys::decorateNumberInput2\n	- leads: $icons.check;$\n	- tails: %;$icons.caretLeft\n	- numeric\n	- onKeyDown: @ext.keydown.numeric\n- DecoNumber::::decorateNumberInput3\n	- data-value2: $pp.decorateNumberInput3\n	- data-value-func:\n	  ```javascript\n	  return options.model.decorateNumberInput3 < 10000 ? 'lt10000': 'gte10000';\n	  ```\n	- label: Contract Value\n	- format: @ext.deco.numericFormat\n	- repaint:\n		- on: decorateNumberInput3\n\n## Section::# 1.2. Basic Widgets - Dropdown\n\n- Dropdown::::dropdown\n	- label: Dropdown\n	- options:\n		- 1: Option #1\n		- 2: Option #2\n	- data-tip-body: return 'I am a simple dropdown.'\n- Dropdown::::dropdown2\n	- label: Dropdown #2\n	- options: @ext.dropdown2\n- MultiDropdown::Multiple Dropdown::multiDropdown\n	- options:\n		- 1: Option #1\n		- 2: Option #2\n		- 3: A very very very very very very very very very very very very very very very very very very long Option #3\n		- 4: Option #4\n		- 5: Option #5\n	- data-tip-body: return 'I am a multiple-choices dropdown.'\n\n## Section::# 1.3. Basic Widgets - Calendar\n\n- DateTime::Buddhist Era::buddhistEra\n	- dateFormat: BBBB/MM/DD\n	- timeFormat: HH\n	- renderOn: desktop, mobile\n	- !autoConfirm\n	- couldPerform:\n	  ```javascript\n	  // April 2024, and after\n	  if (['year', 'month', 'date'].includes(options.checkType)) {\n	    return (options.valueToCheck.year() === 2024 && options.valueToCheck.month() >= 3)\n	      || options.valueToCheck.year() > 2024;\n	  } else {\n	    return options.valueToCheck.hour() >= 9 && options.valueToCheck.hour() < 18;\n	  }\n	  ```\n	- data-tip-body: return 'I am a Buddhist Era date time picker.'\n- Date::Buddhist Year & Month::buddhistEra2\n	- dateFormat: BBBB/MM\n- Date::Hide Shortcuts::date3\n	- data-calendar-hide-shortcuts\n	- autoConfirmOnDate\n- Time::Time Only::time1\n	- timeFormat: HH:mm:ss\n- Date::Only Visible on Desktop::mobileDesktop\n	- renderOn:\n	  ```\n	  // this line canont be ignored, since renderOn attribute build will not treat single line as function body\n	  return ['desktop', 'mobile'];\n	  ```\n- Date::Only Visible on Mobile::mobileDate\n	- renderOn: mobile\n\n## Section::# 1.4. Basic Widgets - Label\n\n- Label::A Label::label\n	- valueToLabel: `'Hello World'`\n	- leads: $icons.check;$\n	- tails: %;$icons.caretLeft\n	- data-tip-body: return 'I am a label.'\n- Caption::A Caption::caption\n	- $fc\n	- text: Hello World\n- Caption::A Caption::caption\n	- $fc\n	- valueToLabel: `'Caption is [' + value + ']'`\n\n## Section::# 1.4. Basic Widgets - Radio\n\n- Radio::A Radio::aRadio\n	- data-tip-body: return 'I am a radio.'\n- Radios::Radio Group::radios1\n	- options:\n		- 1: Option #1\n		- 2: Option #2\n		- 3: Option #3\n		- 4: Option #4\n		- 5: A very very very very very very very very very very very very very very very very very very long Option #5\n	- place: 6\n	- columns: 4\n	- data-tip-body: return 'I am a radios.'\n- Radios::Radio Group, Fake as Toggle Buttons::radios2\n	- data-as-toggle-button\n	- options:\n		- 1: Option #1\n		- 2: Option #2\n		- 3: Option #3\n		- 4: Option #4\n		- 5: Option #5\n	- place: 12\n\n## Section::# 1.5. Basic Widgets - Checkbox\n\n- Checkbox::A Checkbox::aCheckbox\n	- data-tip-body: return 'I am a checkbox.'\n- Checks::Checkbox Group::checks1\n	- options:\n		- 1: Option #1\n		- 2: Option #2\n		- 3: Option #3\n		- 4: Option #4\n		- 5: A very very very very very very very very very very very very very very very very very very long Option #5\n	- place: 6\n	- columns: 4\n	- data-tip-body: return 'I am a checkboxes.'\n- Checks::Checkbox Group::checks2\n	- options:\n		- 1: Option #1\n		- 2: Option #2\n		- 3: Option #3\n		- 4: Option #4\n	- single\n- Checks::Checkbox Group, Fake as Toggle Buttons::checks3\n	- data-as-toggle-button\n	- options:\n		- 1: Option #1\n		- 2: Option #2\n		- 3: Option #3\n		- 4: Option #4\n		- 5: Option #5\n	- place: 12\n\n## Section::# 1.6. Basic Widgets - Button\n\n- Button::\n	- text: Validate Inputs, Scope \"S1\"\n	- click: validate s1\n	- data-tip-body: return 'I am a button.'\n\n- Caption::\n	- text: Dropdown\n		- property: BizTransaction.PaymentMethod\n		- disabled, data-as-label\n		- please: Let you see me.\n		- options: F: Female\n	- click:\n	  ```\n	  const {global: {sc}, root, model} = options;\n	  await sc( 'dialog', 'direct-card', {root, model});\n	  ```\n";
 const StyleController = qe.div.attrs({})`
     + div[data-w=d9-page] {
         div[data-w=d9-calendar][data-calendar-hide-shortcuts] {
@@ -5247,7 +6009,7 @@ const StyleController = qe.div.attrs({})`
     }
 `;
 const N2BasicWidgets = () => {
-  const def = useDemoMarkdown(markdown$9);
+  const def = useDemoMarkdown(markdown$a);
   const externalDefs = {
     deco: {
       numericFormat: {
@@ -5278,36 +6040,36 @@ const N2BasicWidgets = () => {
     /* @__PURE__ */ jsxRuntimeExports.jsx(CustomEventHandler, {}),
     /* @__PURE__ */ jsxRuntimeExports.jsx(N2DemoDialogHandler, {}),
     /* @__PURE__ */ jsxRuntimeExports.jsx(StyleController, {}),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(StandaloneRoot, { ...def, $root: DemoData$8, externalDefs })
+    /* @__PURE__ */ jsxRuntimeExports.jsx(StandaloneRoot, { ...def, $root: DemoData$9, externalDefs })
   ] });
 };
-const N2BasicWidgetsData = DemoData$8;
-const N2BasicWidgetsMarkdown = markdown$9;
+const N2BasicWidgetsData = DemoData$9;
+const N2BasicWidgetsMarkdown = markdown$a;
 const section1Title = "# 2.1. First Section, Buttons to Open Demo Dialog";
-const DemoData$7 = {
+const DemoData$8 = {
   section1Title
 };
-const markdown$8 = "# Page::Demo Tab\n\n## Section::\n\n- title:\n	- labelOnValue\n	- property: section1Title\n- ButtonBar::::\n	- alignment: left\n	- Button::::\n		- click: dialog:demo-dialog\n		- leads: $icons.remove\n		- disabled\n	- Button::::\n		- fill: plain\n		- click: dialog:demo-dialog\n		- leads: $icons.check\n	- Button::::\n		- click: dialog:demo-dialog\n		- leads: $icons.times\n		- ink: danger\n	- Button::::\n		- click: dialog:demo-dialog\n		- leads: $icons.back\n		- fill: plain\n		- ink: danger\n	- Button::::\n		- click: dialog:demo-dialog\n		- leads: $icons.arrowDown\n		- ink: success\n	- Button::::\n		- click: dialog:demo-dialog\n		- leads: $icons.caretDown\n		- fill: plain\n		- ink: success\n	- Button::::\n		- click: dialog:demo-dialog\n		- leads: $icons.caretLeft\n		- ink: warn\n	- Button::::\n		- click: dialog:demo-dialog\n		- leads: $icons.caretRight\n		- fill: plain\n		- ink: warn\n	- Button::::\n		- click: dialog:demo-dialog\n		- leads: $icons.collapse\n		- ink: info\n	- Button::::\n		- click: dialog:demo-dialog\n		- leads: $icons.expand\n		- fill: plain\n		- ink: info\n	- Button::::\n		- click: dialog:demo-dialog\n		- leads: $icons.spinner\n		- ink: waive\n	- Button::::\n		- click: dialog:demo-dialog\n		- leads: $icons.time\n		- fill: plain\n		- ink: waive\n	- Button::::\n		- click: dialog:demo-dialog\n		- leads: $icons.date\n		- fill: plain\n		- ink: primary\n		- disabled\n- ButtonBar::::\n	- alignment: left\n	- Button::::\n		- text: Open Demo Dialog\n		- click: dialog:demo-dialog\n		- leads: [\n		- tails: ]\n	- Button::::\n		- text: Open Demo Dialog\n		- click: dialog:demo-dialog\n		- fill: fill\n		- ink: success\n		- leads: $icons.check;$\n		- disabled\n	- Button::::\n		- text: Open Demo Alert\n		- click: alert: Hello, this is a demo alert.\n		- ink: waive\n		- leads: $icons.check;$\n- ButtonBar::::\n	- alignment: left\n	- Button::::\n		- text: Open Demo Dialog\n		- click: dialog:demo-dialog\n		- fill: plain\n		- ink: danger\n		- leads: $icons.check;$\n		- tails: %;$icons.caretLeft\n		- disabled\n	- Button::::\n		- text: Print in Console\n		- click:\n		  ```javascript\n		  console.log(options);\n		  ```\n		- fill: plain\n		- ink: info\n		- leads: $icons.check;$\n- ButtonBar::::\n	- alignment: left\n	- Button::::\n		- text: Open Demo Dialog\n		- click: dialog:demo-dialog\n		- fill: link\n		- ink: warn\n		- leads: $icons.check;$\n		- disabled\n	- Button::::\n		- text: Open Native Alert\n		- click: custom:custom-alert\n		- fill: link\n		- ink: waive\n		- leads: $icons.check;$\n\n## Section::# 2.2. Last Section, Bottom Bar\n\n- ButtonBar::::\n	- alignment: right\n	- Button::::\n		- text: Exit";
+const markdown$9 = "# Page::Demo Tab\n\n## Section::\n\n- title:\n	- labelOnValue\n	- property: section1Title\n- ButtonBar::::\n	- alignment: left\n	- Button::::\n		- click: dialog:demo-dialog\n		- leads: $icons.remove\n		- disabled\n	- Button::::\n		- fill: plain\n		- click: dialog:demo-dialog\n		- leads: $icons.check\n	- Button::::\n		- click: dialog:demo-dialog\n		- leads: $icons.times\n		- ink: danger\n	- Button::::\n		- click: dialog:demo-dialog\n		- leads: $icons.back\n		- fill: plain\n		- ink: danger\n	- Button::::\n		- click: dialog:demo-dialog\n		- leads: $icons.arrowDown\n		- ink: success\n	- Button::::\n		- click: dialog:demo-dialog\n		- leads: $icons.caretDown\n		- fill: plain\n		- ink: success\n	- Button::::\n		- click: dialog:demo-dialog\n		- leads: $icons.caretLeft\n		- ink: warn\n	- Button::::\n		- click: dialog:demo-dialog\n		- leads: $icons.caretRight\n		- fill: plain\n		- ink: warn\n	- Button::::\n		- click: dialog:demo-dialog\n		- leads: $icons.collapse\n		- ink: info\n	- Button::::\n		- click: dialog:demo-dialog\n		- leads: $icons.expand\n		- fill: plain\n		- ink: info\n	- Button::::\n		- click: dialog:demo-dialog\n		- leads: $icons.spinner\n		- ink: waive\n	- Button::::\n		- click: dialog:demo-dialog\n		- leads: $icons.time\n		- fill: plain\n		- ink: waive\n	- Button::::\n		- click: dialog:demo-dialog\n		- leads: $icons.date\n		- fill: plain\n		- ink: primary\n		- disabled\n- ButtonBar::::\n	- alignment: left\n	- Button::::\n		- text: Open Demo Dialog\n		- click: dialog:demo-dialog\n		- leads: [\n		- tails: ]\n	- Button::::\n		- text: Open Demo Dialog\n		- click: dialog:demo-dialog\n		- fill: fill\n		- ink: success\n		- leads: $icons.check;$\n		- disabled\n	- Button::::\n		- text: Open Demo Alert\n		- click: alert: Hello, this is a demo alert.\n		- ink: waive\n		- leads: $icons.check;$\n- ButtonBar::::\n	- alignment: left\n	- Button::::\n		- text: Open Demo Dialog\n		- click: dialog:demo-dialog\n		- fill: plain\n		- ink: danger\n		- leads: $icons.check;$\n		- tails: %;$icons.caretLeft\n		- disabled\n	- Button::::\n		- text: Print in Console\n		- click:\n		  ```javascript\n		  console.log(options);\n		  ```\n		- fill: plain\n		- ink: info\n		- leads: $icons.check;$\n- ButtonBar::::\n	- alignment: left\n	- Button::::\n		- text: Open Demo Dialog\n		- click: dialog:demo-dialog\n		- fill: link\n		- ink: warn\n		- leads: $icons.check;$\n		- disabled\n	- Button::::\n		- text: Open Native Alert\n		- click: custom:custom-alert\n		- fill: link\n		- ink: waive\n		- leads: $icons.check;$\n\n## Section::# 2.2. Last Section, Bottom Bar\n\n- ButtonBar::::\n	- alignment: right\n	- Button::::\n		- text: Exit";
 const N2Buttons = () => {
-  const def = useDemoMarkdown(markdown$8);
+  const def = useDemoMarkdown(markdown$9);
   return /* @__PURE__ */ jsxRuntimeExports.jsxs(GlobalRoot, { children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx(CustomEventHandler, {}),
     /* @__PURE__ */ jsxRuntimeExports.jsx(N2DemoDialogHandler, {}),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(StandaloneRoot, { ...def, $root: DemoData$7 })
+    /* @__PURE__ */ jsxRuntimeExports.jsx(StandaloneRoot, { ...def, $root: DemoData$8 })
   ] });
 };
-const N2ButtonsData = DemoData$7;
-const N2ButtonsMarkdown = markdown$8;
+const N2ButtonsData = DemoData$8;
+const N2ButtonsMarkdown = markdown$9;
 const pagination$1 = {
   pageNumber: 2,
   pageCount: 15,
   pageSize: 20,
   itemCount: 286
 };
-const DemoData$6 = {
+const DemoData$7 = {
   pagination: pagination$1
 };
-const markdown$7 = "# Page::Demo Tab\n\n## Section::# 8. Internationalization\n\n- DecoInput::Test1::test1\n	- required\n	- placeholder: Test1\n- Dropdown::Test2::test2\n	- required: Test 2 is required.\n	- options:\n		- F: Female\n		- M: Male\n- Pagination::::pagination\n	- freeWalk\n	- sizes: 10;20;30\n";
+const markdown$8 = "# Page::Demo Tab\n\n## Section::# 8. Internationalization\n\n- DecoInput::Test1::test1\n	- required\n	- placeholder: Test1\n- Dropdown::Test2::test2\n	- required: Test 2 is required.\n	- options:\n		- F: Female\n		- M: Male\n- Pagination::::pagination\n	- freeWalk\n	- sizes: 10;20;30\n";
 $d9n2.intl.labels["zh"] = {
   "# 8. Internationalization": "# 8. 国际化",
   Test1: "测试1",
@@ -5342,25 +6104,25 @@ const Languages = () => {
   ] });
 };
 const N2Intl = () => {
-  const def = useDemoMarkdown(markdown$7);
+  const def = useDemoMarkdown(markdown$8);
   return /* @__PURE__ */ jsxRuntimeExports.jsxs(GlobalRoot, { children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx(CustomEventHandler, {}),
     /* @__PURE__ */ jsxRuntimeExports.jsx(N2DemoDialogHandler, {}),
     /* @__PURE__ */ jsxRuntimeExports.jsx(Languages, {}),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(StandaloneRoot, { ...def, $root: DemoData$6 })
+    /* @__PURE__ */ jsxRuntimeExports.jsx(StandaloneRoot, { ...def, $root: DemoData$7 })
   ] });
 };
-const N2IntlData = DemoData$6;
-const N2IntlMarkdown = markdown$7;
+const N2IntlData = DemoData$7;
+const N2IntlMarkdown = markdown$8;
 const a = "";
 const b = "b";
 const clearMe = "something";
-const DemoData$5 = {
+const DemoData$6 = {
   a,
   b,
   clearMe
 };
-const markdown$6 = "# Page::Demo Tab\n\n## Section::# 7. Monitors\n\n- Input::Property A::a\n	- repaint:\n		- on: a\n- Input::Shadow of Property A::a\n	- disabled\n	- repaint:\n		- on: a\n- Input::Clear Me when Property A Changed::clearMe\n	- disabled\n	- clearMe:\n		- on: a\n- Input::Last 2 Chars of Property A::last2Chars\n	- disabled\n	- watch:\n		- on: a\n		- handle:\n		  ```javascript\n		  model.last2Chars = model.a.slice(-2);\n          return 'repaint';\n		  ```\n- Input::Property B, Disabled When \"A\" Is Empty::b\n	- place: 2, 1\n	- disabled:\n		- on: a\n		- handle: if ((model.a ?? '').length === 0) {\n		  return true;\n		  } else {\n		  return false;\n		  }\n- Input::Property C, Invisible When \"A\" Is Empty::c\n	- place: 3, 1\n	- visible:\n		- on: a\n		- handle:\n		  ```javascript\n		  if ((model.a ?? '').length === 0) {\n		    return false;\n		  } else {\n		    return true;\n		  }\n		  ```\n- Input::Property D::d\n	- place: 4, 1\n	- required\n	- validate:\n		- on: a\n		- handle:\n		  ```javascript\n		  if (VUtils.isBlank(model.a)) {\n		    return value === 'blank' ? {valid: true}: {valid:false, failReason: 'A is blank, D should be \"blank\".'};\n		  } else if (VUtils.isNumber(model.a).test) {\n		    return value === 'number' ? {valid: true}: {valid:false, failReason: 'A is number, D should be \"number\".'};\n		  } else {\n		    return value === 'string' ? {valid: true}: {valid:false, failReason: 'A is string, D should be \"string\"'};\n		  }       \n		  ```\n- Input::Property X::x\n	- place: 5, 1\n	- watch:\n		- on: x\n		- handle:\n		  ```javascript\n		  const oldValue = model.y;\n		  model.y = `${model.x} and y`;\n		  console.log(`[${oldValue}]`, `[${model.y}]`)\n		  return ['value-changed', {path: '/y', from: oldValue, to: model.y}]\n		  ```\n- Input::Property Y::y\n	- place: 5, 4\n	- visible:\n		- on: y\n		- handle: `return (model.y ?? '').startsWith('123')`";
+const markdown$7 = "# Page::Demo Tab\n\n## Section::# 7. Monitors\n\n- Input::Property A::a\n	- repaint:\n		- on: a\n- Input::Shadow of Property A::a\n	- disabled\n	- repaint:\n		- on: a\n- Input::Clear Me when Property A Changed::clearMe\n	- disabled\n	- clearMe:\n		- on: a\n- Input::Last 2 Chars of Property A::last2Chars\n	- disabled\n	- watch:\n		- on: a\n		- handle:\n		  ```javascript\n		  model.last2Chars = model.a.slice(-2);\n          return 'repaint';\n		  ```\n- Input::Property B, Disabled When \"A\" Is Empty::b\n	- place: 2, 1\n	- disabled:\n		- on: a\n		- handle: if ((model.a ?? '').length === 0) {\n		  return true;\n		  } else {\n		  return false;\n		  }\n- Input::Property C, Invisible When \"A\" Is Empty::c\n	- place: 3, 1\n	- visible:\n		- on: a\n		- handle:\n		  ```javascript\n		  if ((model.a ?? '').length === 0) {\n		    return false;\n		  } else {\n		    return true;\n		  }\n		  ```\n- Input::Property D::d\n	- place: 4, 1\n	- required\n	- validate:\n		- on: a\n		- handle:\n		  ```javascript\n		  if (VUtils.isBlank(model.a)) {\n		    return value === 'blank' ? {valid: true}: {valid:false, failReason: 'A is blank, D should be \"blank\".'};\n		  } else if (VUtils.isNumber(model.a).test) {\n		    return value === 'number' ? {valid: true}: {valid:false, failReason: 'A is number, D should be \"number\".'};\n		  } else {\n		    return value === 'string' ? {valid: true}: {valid:false, failReason: 'A is string, D should be \"string\"'};\n		  }       \n		  ```\n- Input::Property X::x\n	- place: 5, 1\n	- watch:\n		- on: x\n		- handle:\n		  ```javascript\n		  const oldValue = model.y;\n		  model.y = `${model.x} and y`;\n		  console.log(`[${oldValue}]`, `[${model.y}]`)\n		  return ['value-changed', {path: '/y', from: oldValue, to: model.y}]\n		  ```\n- Input::Property Y::y\n	- place: 5, 4\n	- visible:\n		- on: y\n		- handle: `return (model.y ?? '').startsWith('123')`";
 const ALabel = () => {
   const { on, off } = useBridgeEventBus();
   const [changes, setChanges] = reactExports.useState([]);
@@ -5406,26 +6168,26 @@ const AButton = (props) => {
   return /* @__PURE__ */ jsxRuntimeExports.jsx(UnwrappedButton, { onClick: onClicked, children: "Clear A" });
 };
 const N2Monitors = () => {
-  const def = useDemoMarkdown(markdown$6);
+  const def = useDemoMarkdown(markdown$7);
   return /* @__PURE__ */ jsxRuntimeExports.jsxs(BridgeEventBusProvider, { children: [
     /* @__PURE__ */ jsxRuntimeExports.jsxs(GlobalRoot, { children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx(CustomEventHandler, {}),
       /* @__PURE__ */ jsxRuntimeExports.jsx(N2DemoDialogHandler, {}),
-      /* @__PURE__ */ jsxRuntimeExports.jsx(StandaloneRoot, { ...def, $root: DemoData$5 })
+      /* @__PURE__ */ jsxRuntimeExports.jsx(StandaloneRoot, { ...def, $root: DemoData$6 })
     ] }),
     /* @__PURE__ */ jsxRuntimeExports.jsx(ALabel, {}),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(AButton, { data: DemoData$5 })
+    /* @__PURE__ */ jsxRuntimeExports.jsx(AButton, { data: DemoData$6 })
   ] });
 };
-const N2MonitorsData = DemoData$5;
-const N2MonitorsMarkdown = markdown$6;
-const markdown$5 = "# Page::Test Page\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n";
-const DemoData$4 = {
-  markdown: markdown$5
+const N2MonitorsData = DemoData$6;
+const N2MonitorsMarkdown = markdown$7;
+const markdown$6 = "# Page::Test Page\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n";
+const DemoData$5 = {
+  markdown: markdown$6
 };
-const markdown$4 = "# Page::Demo Tab\n\n## Section::# 999. D9 Playground\n\n- Playground::::markdown\n  - useCharts\n  - externalDefs: @ext.playground.externalDefs\n  - externalDefsTypes: @ext.playground.externalDefsTypes\n";
+const markdown$5 = "# Page::Demo Tab\n\n## Section::# 999. D9 Playground\n\n- Playground::::markdown\n  - useCharts\n  - externalDefs: @ext.playground.externalDefs\n  - externalDefsTypes: @ext.playground.externalDefsTypes\n";
 const N2Playground = () => {
-  const def = useDemoMarkdown(markdown$4);
+  const def = useDemoMarkdown(markdown$5);
   const DropdownOptionsWidgets = ["Dropdown", "MultiDropdown", "Checkboxes", "Checks", "Radios"];
   const externalDefs = {
     playground: {
@@ -5464,7 +6226,7 @@ const N2Playground = () => {
       }
     }
   };
-  DemoData$4.markdown = `# Page::Page 2
+  DemoData$5.markdown = `# Page::Page 2
 
 - Input::Test Input::testInput
   - disabled
@@ -5512,10 +6274,10 @@ const N2Playground = () => {
 
 `;
   def.$nodes[0].$nodes[0].mockData = new ExternalDefIndicator("playground.mockData");
-  return /* @__PURE__ */ jsxRuntimeExports.jsx(GlobalRoot, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(StandaloneRoot, { ...def, $root: DemoData$4, externalDefs }) });
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(GlobalRoot, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(StandaloneRoot, { ...def, $root: DemoData$5, externalDefs }) });
 };
-const PlaygroundData = DemoData$4;
-const PlaygroundMarkdown = markdown$4;
+const PlaygroundData = DemoData$5;
+const PlaygroundMarkdown = markdown$5;
 const nestedTables = [
   {
     columnA: "Value of Column A, Row #1",
@@ -5653,18 +6415,18 @@ const pagination = {
 };
 const table2 = [];
 const sectionForTable3 = {};
-const DemoData$3 = {
+const DemoData$4 = {
   nestedTables,
   page,
   pagination,
   table2,
   sectionForTable3
 };
-const markdown$3 = "# Page::Demo Tab\n\n## Section::# 3.1. Table\n\n### Table\n\n- property: nestedTables\n- expandable, clickToExpand, addable, removable, !hideClassicCellsOnExpandable\n- omitDefaultRowOperators\n- addLabel: Add New One\n- maxBodyHeight: 400\n- fixedLeadColumns: 1\n- fixedTailColumns: 1\n- operatorsColumnWidth: 200\n- headers:\n	- Column A: 300\n	- Column B: 300\n	- Column C: 500\n	- Column D: 200\n	- Column E: 200\n	- Column F: 200\n	- Column G: 100\n- Label::::columnA\n- Caption::::\n	- label: Say Hello to World\n	- click: alert: Hello World!\n- Label::::columnC\n- Label::::columnD\n- Label::::columnE\n- Label::::columnF\n- Label::::columnG\n- Table::\n	- property: nested\n	- headers:\n		- Nest Column A: 300\n		- Nest Column B: 300\n	- Label::::columnNA\n	- Label::::columnNB\n- RowOperators::\n	- Button::\n		- text: X\n		- fill: plain\n		- click: alert: X\n	- Button::\n		- fill: plain\n		- tails: $icons.view\n		- click: alert: View\n	- Button::\n		- fill: plain\n		- tails: $icons.edit\n		- click: alert: Edit\n	- Button::\n		- fill: plain\n		- tails: $icons.remove\n		- prebuilt: remove\n	- Button::\n		- fill: plain\n		- tails: $icons.expand\n		- prebuilt: expand\n	- Button::\n		- fill: plain\n		- tails: $icons.collapse\n		- prebuilt: collapse\n- Pagination::::page\n	- maxButtons: 3\n\n## Section::# 3.2. Pagination\n\n- Pagination::::pagination\n	- freeWalk\n	- sizes: 10;20;30\n\n## Section::# 3.3. Remote Table\n\n### Table::\n\n- property: table2\n- headers:\n	- Column A: 300\n- Label::::columnA\n- Pagination::::page2\n	- freeWalk\n	- maxButtons: 3\n	- sizes: 6;9;12\n	- valueChanged: @ext.table2.onPageChanged\n\n## Section::# 3.4. Table 3\n\n- property: sectionForTable3\n\n### Table::\n\n- property: table3\n- addable\n- repaint:\n	- on: table3\n- headers:\n	- Column A: 300\n- Label::::columnA\n\n### Button::::\n\n- text: Add Row Into Table3\n- click: @ext.table3.addRow\n";
-DemoData$3.table2 = DemoData$3.nestedTables.filter((_, index2) => index2 < 5);
-DemoData$3.page2 = JSON.parse(JSON.stringify(DemoData$3.page));
+const markdown$4 = "# Page::Demo Tab\n\n## Section::# 3.1. Table\n\n### Table\n\n- property: nestedTables\n- expandable, clickToExpand, addable, removable, !hideClassicCellsOnExpandable\n- omitDefaultRowOperators\n- addLabel: Add New One\n- maxBodyHeight: 400\n- fixedLeadColumns: 1\n- fixedTailColumns: 1\n- operatorsColumnWidth: 200\n- headers:\n	- Column A: 300\n	- Column B: 300\n	- Column C: 500\n	- Column D: 200\n	- Column E: 200\n	- Column F: 200\n	- Column G: 100\n- Input::::columnA\n- Caption::::\n	- label: Say Hello to World\n	- click: alert: Hello World!\n- Label::::columnC\n- Label::::columnD\n- Label::::columnE\n- Label::::columnF\n- Label::::columnG\n- Table::\n	- property: nested\n	- headers:\n		- Nest Column A: 300\n		- Nest Column B: 300\n	- Label::::columnNA\n	- Label::::columnNB\n- RowOperators::\n	- Button::\n		- text: X\n		- fill: plain\n		- click: alert: X\n		- visible:\n			- on: columnA\n			- handle:\n			  ```javascript\n			  return (model.columnA ?? '').endsWith('#1');\n			  ```\n	- Button::\n		- fill: plain\n		- tails: $icons.view\n		- click: alert: View\n	- Button::\n		- fill: plain\n		- tails: $icons.edit\n		- click: alert: Edit\n	- Button::\n		- fill: plain\n		- tails: $icons.remove\n		- prebuilt: remove\n	- Button::\n		- fill: plain\n		- tails: $icons.expand\n		- prebuilt: expand\n	- Button::\n		- fill: plain\n		- tails: $icons.collapse\n		- prebuilt: collapse\n- Pagination::::page\n	- maxButtons: 3\n\n## Section::# 3.2. Pagination\n\n- Pagination::::pagination\n	- freeWalk\n	- sizes: 10;20;30\n\n## Section::# 3.3. Remote Table\n\n### Table::\n\n- property: table2\n- headers:\n	- Column A: 300\n- Label::::columnA\n- Pagination::::page2\n	- freeWalk\n	- maxButtons: 3\n	- sizes: 6;9;12\n	- valueChanged: @ext.table2.onPageChanged\n\n## Section::# 3.4. Table 3\n\n- property: sectionForTable3\n\n### Table::\n\n- property: table3\n- addable\n- repaint:\n	- on: table3\n- headers:\n	- Column A: 300\n- Label::::columnA\n\n### Button::::\n\n- text: Add Row Into Table3\n- click: @ext.table3.addRow\n";
+DemoData$4.table2 = DemoData$4.nestedTables.filter((_, index2) => index2 < 5);
+DemoData$4.page2 = JSON.parse(JSON.stringify(DemoData$4.page));
 const InternalN2Table = () => {
-  const def = useDemoMarkdown(markdown$3);
+  const def = useDemoMarkdown(markdown$4);
   const { fire } = useBridgeEventBus();
   const externalDefs = {
     table2: {
@@ -5672,12 +6434,12 @@ const InternalN2Table = () => {
         const { newValue: { pageNumber, pageSize } } = options;
         const startIndex = (pageNumber - 1) * pageSize;
         const endIndex = startIndex + pageSize - 1;
-        DemoData$3.table2 = DemoData$3.nestedTables.filter((_, index2) => index2 >= startIndex && index2 <= endIndex);
+        DemoData$4.table2 = DemoData$4.nestedTables.filter((_, index2) => index2 >= startIndex && index2 <= endIndex);
       }
     },
     table3: {
       addRow: () => {
-        const carrier = DemoData$3.sectionForTable3;
+        const carrier = DemoData$4.sectionForTable3;
         if (carrier.table3 == null) {
           carrier.table3 = [{ columnA: nanoid() }];
         } else {
@@ -5694,14 +6456,14 @@ const InternalN2Table = () => {
   return /* @__PURE__ */ jsxRuntimeExports.jsxs(GlobalRoot, { children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx(CustomEventHandler, {}),
     /* @__PURE__ */ jsxRuntimeExports.jsx(N2DemoDialogHandler, {}),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(StandaloneRoot, { ...def, $root: DemoData$3, externalDefs })
+    /* @__PURE__ */ jsxRuntimeExports.jsx(StandaloneRoot, { ...def, $root: DemoData$4, externalDefs })
   ] });
 };
 const N2Table = () => {
   return /* @__PURE__ */ jsxRuntimeExports.jsx(BridgeEventBusProvider, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(InternalN2Table, {}) });
 };
-const N2TableData = DemoData$3;
-const N2TableMarkdown = markdown$3;
+const N2TableData = DemoData$4;
+const N2TableMarkdown = markdown$4;
 const tabs = {
   tab1: {
     tab1Input1: "hello"
@@ -5714,12 +6476,12 @@ const tabs = {
     tab4Input: "Tab4 world."
   }
 };
-const DemoData$2 = {
+const DemoData$3 = {
   tabs
 };
-const markdown$2 = "# Page::Demo Tab\n\n## Section::# 5. Tabs\n\n### Tabs::::tabs\n\n#### Tab::Tab #1::tab1\n\n- Input::First Input In Tab #1::tab1Input1\n\n#### Tab::::tab2\n\n- title:\n	- valueToLabel: `'Tab #2'`\n	- leads: $\n	- tails: $icons.caretLeft\n- badge: Badge\n	- property: count\n	- labelOnValue\n	- ink: info\n- Checkbox::First Check In Tab #2::tab2check1\n\n#### Tab::::tab3\n\n- title: Box\n	- Caption::Tab #3\n\n#### Tab::::tab4\n\n- title: Tab #4\n- body: @ext.tabs.tab4.def\n\n#### Tab::::tab5\n\n- title:\n	- labelOnValue\n	- property: tab5Title\n	- leads: $\n	- tails: $icons.caretLeft\n- data: @ext.tabs.tab5.data\n- Input::First Input In Tab #5::tab5Input\n\n#### Tab::::tab6\n\n- title: Tab #6\n\n#### Tab::::tab7\n\n- title: Tab #7\n\n#### Tab::::tab8\n\n- title: Tab #8\n\n#### Tab::::tab9\n\n- title: Tab #9\n\n#### Tab::::tab10\n\n- title: Tab #10\n\n#### Tab::::tab11\n\n- title: Tab #11\n\n#### Tab::::tab12\n\n- title: Tab #12\n\n#### Tab::::tab13\n\n- title: Tab #13\n\n#### Tab::::tab14\n\n- title: Tab #14\n\n#### Tab::::tab15\n\n- title: Tab #15\n\n#### Tab::::tab16\n\n- title: Tab #16\n\n#### Tab::::tab17\n\n- title: Tab #17\n\n#### Tab::::tab18\n\n- title: Tab #18\n\n#### Tab::::tab19\n\n- title: Tab #19\n\n#### Tab::::tab20\n\n- title: Tab #20\n\n#### Tab::::tab21\n\n- title: Tab #21\n\n#### Tab::::tab22\n\n- title: Tab #22\n\n#### Tab::::tab23\n\n- title: Tab #23\n\n#### Tab::::tab24\n\n- title: Tab #24\n";
+const markdown$3 = "# Page::Demo Tab\n\n## Section::# 5. Tabs\n\n### Tabs::::tabs\n\n#### Tab::Tab #1::tab1\n\n- Input::First Input In Tab #1::tab1Input1\n\n#### Tab::::tab2\n\n- title:\n	- valueToLabel: `'Tab #2'`\n	- leads: $\n	- tails: $icons.caretLeft\n- badge: Badge\n	- property: count\n	- labelOnValue\n	- ink: info\n- Checkbox::First Check In Tab #2::tab2check1\n\n#### Tab::::tab3\n\n- title: Box\n	- Caption::Tab #3\n\n#### Tab::::tab4\n\n- title: Tab #4\n- body: @ext.tabs.tab4.def\n\n#### Tab::::tab5\n\n- title:\n	- labelOnValue\n	- property: tab5Title\n	- leads: $\n	- tails: $icons.caretLeft\n- data: @ext.tabs.tab5.data\n- Input::First Input In Tab #5::tab5Input\n\n#### Tab::::tab6\n\n- title: Tab #6\n\n#### Tab::::tab7\n\n- title: Tab #7\n\n#### Tab::::tab8\n\n- title: Tab #8\n\n#### Tab::::tab9\n\n- title: Tab #9\n\n#### Tab::::tab10\n\n- title: Tab #10\n\n#### Tab::::tab11\n\n- title: Tab #11\n\n#### Tab::::tab12\n\n- title: Tab #12\n\n#### Tab::::tab13\n\n- title: Tab #13\n\n#### Tab::::tab14\n\n- title: Tab #14\n\n#### Tab::::tab15\n\n- title: Tab #15\n\n#### Tab::::tab16\n\n- title: Tab #16\n\n#### Tab::::tab17\n\n- title: Tab #17\n\n#### Tab::::tab18\n\n- title: Tab #18\n\n#### Tab::::tab19\n\n- title: Tab #19\n\n#### Tab::::tab20\n\n- title: Tab #20\n\n#### Tab::::tab21\n\n- title: Tab #21\n\n#### Tab::::tab22\n\n- title: Tab #22\n\n#### Tab::::tab23\n\n- title: Tab #23\n\n#### Tab::::tab24\n\n- title: Tab #24\n";
 const N2Tabs = () => {
-  const def = useDemoMarkdown(markdown$2);
+  const def = useDemoMarkdown(markdown$3);
   const externalDefs = {
     tabs: {
       tab4: {
@@ -5752,11 +6514,11 @@ const N2Tabs = () => {
   return /* @__PURE__ */ jsxRuntimeExports.jsxs(GlobalRoot, { children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx(CustomEventHandler, {}),
     /* @__PURE__ */ jsxRuntimeExports.jsx(N2DemoDialogHandler, {}),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(StandaloneRoot, { ...def, $root: DemoData$2, externalDefs })
+    /* @__PURE__ */ jsxRuntimeExports.jsx(StandaloneRoot, { ...def, $root: DemoData$3, externalDefs })
   ] });
 };
-const N2TabsData = DemoData$2;
-const N2TabsMarkdown = markdown$2;
+const N2TabsData = DemoData$3;
+const N2TabsMarkdown = markdown$3;
 const tree = [
   {
     label: "Top #1",
@@ -5873,11 +6635,11 @@ const tree2 = [
     ]
   }
 ];
-const DemoData$1 = {
+const DemoData$2 = {
   tree,
   tree2
 };
-const markdown$1 = "# Page::Demo Tab\n\n## Section::# 9. N2 Tree\n\n- Tree::::tree\n	- showIndex\n	- initExpandLevel: 0\n	- height: 400\n- Tree::::tree2\n	- detective: @ext.tree2.detective\n- DropdownTree::::dropdownTree\n	- options: @ext.dropdownTree\n- MultiDropdownTree::::multiDropdownTree\n	- options: @ext.dropdownTree";
+const markdown$2 = "# Page::Demo Tab\n\n## Section::# 9. N2 Tree\n\n- Tree::::tree\n	- showIndex\n	- initExpandLevel: 0\n	- height: 400\n- Tree::::tree2\n	- detective: @ext.tree2.detective\n- DropdownTree::::dropdownTree\n	- options: @ext.dropdownTree\n- MultiDropdownTree::::multiDropdownTree\n	- options: @ext.dropdownTree";
 const syncToChildren = async (def, checked, options) => {
   await (def.$children ?? []).reduce(async (previous, child) => {
     await previous;
@@ -6105,7 +6867,7 @@ const treeDetective = (parentNode) => {
   }).filter((item) => item != null);
 };
 const N2Tree = () => {
-  const def = useDemoMarkdown(markdown$1);
+  const def = useDemoMarkdown(markdown$2);
   const externalDefs = {
     tree2: { detective: treeDetective },
     dropdownTree: () => {
@@ -6161,11 +6923,11 @@ const N2Tree = () => {
   return /* @__PURE__ */ jsxRuntimeExports.jsxs(GlobalRoot, { children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx(CustomEventHandler, {}),
     /* @__PURE__ */ jsxRuntimeExports.jsx(N2DemoDialogHandler, {}),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(StandaloneRoot, { ...def, $root: DemoData$1, externalDefs })
+    /* @__PURE__ */ jsxRuntimeExports.jsx(StandaloneRoot, { ...def, $root: DemoData$2, externalDefs })
   ] });
 };
-const N2TreeData = DemoData$1;
-const N2TreeMarkdown = markdown$1;
+const N2TreeData = DemoData$2;
+const N2TreeMarkdown = markdown$2;
 const wizard1 = {
   step1: {
     step1Input1: "hello world"
@@ -6183,21 +6945,37 @@ const wizard2 = {
   },
   step2: {}
 };
-const DemoData = {
+const DemoData$1 = {
   wizard1,
   wizard2
 };
-const markdown = "# Page::Demo Tab\n\n## Section::# 6.1. Wizard\n\n### Wizard::::wizard1\n\n- freeWalk, omitWalker\n\n#### WStep::Step #1::step1\n\n- marker: w1s1\n- Input::First Input In Wizard Step #1::step1Input1\n- Button::\n	- text: Next\n	- tails: $icons.angleRight\n	- place: row: 2, col:11, cols:2\n	- click: wstep: w1s2\n\n#### WStep::::step2\n\n- title:\n	- valueToLabel: `'Step #2'`\n	- leads: $\n	- tails: $icons.caretLeft\n- marker: w1s2\n- Checkbox::First Check In Step #2::step2check1\n- Button::\n	- text: Next\n	- leads: $icons.angleLeft\n	- place: row: 2, col:1, cols:2\n	- click: wstep: w1s1\n	- ink: waive\n- Button::\n	- text: Next\n	- tails: $icons.angleRight\n	- place: row: 2, col:11, cols:2\n	- click: wstep: w1s3\n\n#### WStep::::step3\n\n- title: Step #3\n- marker: w1s3\n- Button::\n	- text: Next\n	- leads: $icons.angleLeft\n	- place: row: 2, col:1, cols:2\n	- click: wstep: w1s2\n	- ink: waive\n- Button::\n	- text: Next\n	- tails: $icons.angleRight\n	- place: row: 2, col:11, cols:2\n	- click: wstep: w1s4\n\n#### WStep::::step4\n\n- title: Step #4\n- marker: w1s4\n- Button::\n	- text: Next\n	- leads: $icons.angleLeft\n	- place: row: 2, col:1, cols:2\n	- click: wstep: w1s3\n	- ink: waive\n\n#### WShared::::shared\n\n- Input::Summary Value::value\n	- pos: 12\n\n## Section::# 6.2. Wizard, Not Balloon\n\n### Wizard::::wizard2\n\n- balloon: false\n- reached: 1\n\n#### WStep::Step #1::step1\n\n- Input::First Input In Wizard Step #1::step1Input1\n\n#### WStep::::step2\n\n- title:\n	- valueToLabel: `'Step #2'`\n	- leads: $\n	- tails: $icons.caretLeft\n- Checkbox::First Check In Step #2::step2check1\n\n#### WStep::::step3\n\n- title: Step #3\n\n#### WStep::::step4\n\n- title: Step #4\n";
+const markdown$1 = "# Page::Demo Tab\n\n## Section::# 6.1. Wizard\n\n### Wizard::::wizard1\n\n- freeWalk, omitWalker\n\n#### WStep::Step #1::step1\n\n- marker: w1s1\n- Input::First Input In Wizard Step #1::step1Input1\n- Button::\n	- text: Next\n	- tails: $icons.angleRight\n	- place: row: 2, col:11, cols:2\n	- click: wstep: w1s2\n\n#### WStep::::step2\n\n- title:\n	- valueToLabel: `'Step #2'`\n	- leads: $\n	- tails: $icons.caretLeft\n- marker: w1s2\n- Checkbox::First Check In Step #2::step2check1\n- Button::\n	- text: Next\n	- leads: $icons.angleLeft\n	- place: row: 2, col:1, cols:2\n	- click: wstep: w1s1\n	- ink: waive\n- Button::\n	- text: Next\n	- tails: $icons.angleRight\n	- place: row: 2, col:11, cols:2\n	- click: wstep: w1s3\n\n#### WStep::::step3\n\n- title: Step #3\n- marker: w1s3\n- Button::\n	- text: Next\n	- leads: $icons.angleLeft\n	- place: row: 2, col:1, cols:2\n	- click: wstep: w1s2\n	- ink: waive\n- Button::\n	- text: Next\n	- tails: $icons.angleRight\n	- place: row: 2, col:11, cols:2\n	- click: wstep: w1s4\n\n#### WStep::::step4\n\n- title: Step #4\n- marker: w1s4\n- Button::\n	- text: Next\n	- leads: $icons.angleLeft\n	- place: row: 2, col:1, cols:2\n	- click: wstep: w1s3\n	- ink: waive\n\n#### WShared::::shared\n\n- Input::Summary Value::value\n	- pos: 12\n\n## Section::# 6.2. Wizard, Not Balloon\n\n### Wizard::::wizard2\n\n- balloon: false\n- reached: 1\n\n#### WStep::Step #1::step1\n\n- Input::First Input In Wizard Step #1::step1Input1\n\n#### WStep::::step2\n\n- title:\n	- valueToLabel: `'Step #2'`\n	- leads: $\n	- tails: $icons.caretLeft\n- Checkbox::First Check In Step #2::step2check1\n\n#### WStep::::step3\n\n- title: Step #3\n\n#### WStep::::step4\n\n- title: Step #4\n";
 const N2Wizard = () => {
-  const def = useDemoMarkdown(markdown);
+  const def = useDemoMarkdown(markdown$1);
   return /* @__PURE__ */ jsxRuntimeExports.jsxs(GlobalRoot, { children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx(CustomEventHandler, {}),
     /* @__PURE__ */ jsxRuntimeExports.jsx(N2DemoDialogHandler, {}),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(StandaloneRoot, { ...def, $root: DemoData })
+    /* @__PURE__ */ jsxRuntimeExports.jsx(StandaloneRoot, { ...def, $root: DemoData$1 })
   ] });
 };
-const N2WizardData = DemoData;
-const N2WizardMarkdown = markdown;
+const N2WizardData = DemoData$1;
+const N2WizardMarkdown = markdown$1;
+const yaml = "";
+const DemoData = {
+  yaml
+};
+const markdown = "# Page::Demo Tab\n\n## Section::# 1000. O23 Playground\n\n- O23Playground::::yaml\n	- useN3, useN5, useN6, useN7, useN8\n";
+const O23Playground = () => {
+  const def = useDemoMarkdown(markdown);
+  DemoData.yaml = `code: ApiTest
+type: pipeline
+route: /api/test
+method: get
+`;
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(GlobalRoot, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(StandaloneRoot, { ...def, $root: DemoData }) });
+};
+const O23PlaygroundData = DemoData;
+const O23PlaygroundMarkdown = markdown;
 const DemoContainer = qe.div.attrs({ "data-w": "d9-demo-container" })`
     display: grid;
     position: relative;
@@ -6414,6 +7192,13 @@ const Demos = [
     C: N2Playground,
     data: PlaygroundData,
     markdown: PlaygroundMarkdown
+  },
+  {
+    path: "/o23-playground",
+    label: "1000. O23 Playground",
+    C: O23Playground,
+    data: O23PlaygroundData,
+    markdown: O23PlaygroundMarkdown
   }
 ];
 const DemoLayoutMenus = (props) => {
@@ -6671,7 +7456,7 @@ const App = () => {
 };
 const reportWebVitals = (onPerfEntry) => {
   if (onPerfEntry && onPerfEntry instanceof Function) {
-    __vitePreload(() => import("./vendor-TSR6RXc3.js").then((n) => n.Z), true ? __vite__mapDeps([0,1,2,3]) : void 0).then(({ getCLS, getFID, getFCP, getLCP, getTTFB }) => {
+    __vitePreload(() => import("./vendor-ctmAJdvj.js").then((n) => n.aW), true ? __vite__mapDeps([0,1,2,3]) : void 0).then(({ getCLS, getFID, getFCP, getLCP, getTTFB }) => {
       getCLS(onPerfEntry);
       getFID(onPerfEntry);
       getFCP(onPerfEntry);
@@ -6689,7 +7474,7 @@ root.render(
 reportWebVitals();
 function __vite__mapDeps(indexes) {
   if (!__vite__mapDeps.viteFileDeps) {
-    __vite__mapDeps.viteFileDeps = ["assets/vendor-TSR6RXc3.js","assets/babel-AnpZxJH-.js","assets/unist-5yxlKLF4.js","assets/vendor-UDnasYXb.css"]
+    __vite__mapDeps.viteFileDeps = ["assets/vendor-ctmAJdvj.js","assets/babel-zvTTnt5j.js","assets/unist-5yxlKLF4.js","assets/vendor-UDnasYXb.css"]
   }
   return indexes.map((i) => __vite__mapDeps.viteFileDeps[i])
 }
