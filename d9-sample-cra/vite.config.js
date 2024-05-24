@@ -8,12 +8,7 @@ export default ({mode}) => {
 			'process.env': {...process.env, ...loadEnv(mode, process.cwd())}
 		},
 		plugins: [
-			react({
-				jsxImportSource: "@emotion/react",
-				babel: {
-					plugins: ["@emotion/babel-plugin"]
-				}
-			}),
+			react(),
 			mdPlugin({mode: [Mode.MARKDOWN]})
 		],
 		server: {host: true, port: 3000, strictPort: true, open: '/'},
@@ -31,9 +26,9 @@ export default ({mode}) => {
 								{name: 'react-syntax-highlighter', includes: ['react-syntax-highlighter']},
 								{name: 'babel', includes: ['@babel']},
 								{name: 'property-information', includes: ['property-information']},
-								{name: 'react', includes: ['react', 'react-dom']},
+								// {name: 'react', includes: ['react', 'react-dom']},
 								{name: 'styled-components', includes: ['styled-components']},
-								{name: 'emotion', includes: ['@emotion']},
+								// {name: 'emotion', includes: ['@emotion']},
 								{name: 'refractor', includes: ['refractor']},
 								{name: 'dayjs', includes: ['dayjs']},
 								{name: 'zrender', includes: ['zrender']},
@@ -46,6 +41,8 @@ export default ({mode}) => {
 								{name: 'rainbow-d9-n1', includes: ['@rainbow-d9/n1']},
 								{name: 'rainbow-d9-n2', includes: ['@rainbow-d9/n2']},
 								{name: 'rainbow-d9-n3', includes: ['@rainbow-d9/n3']},
+								{name: 'rainbow-d9-n5', includes: ['@rainbow-d9/n5']},
+								{name: 'rainbow-d9-n6', includes: ['@rainbow-d9/n6']},
 								{name: 'rainbow-d9-echarts', includes: ['@rainbow-d9/echarts']},
 								{name: 'rainbow-d9-thai-plan-selection', includes: ['@rainbow-d9/thai-plan-selection']}
 							].find(({includes}) => {
@@ -55,6 +52,8 @@ export default ({mode}) => {
 								{name: 'rainbow-d9-n1', includes: ['d9-n1']},
 								{name: 'rainbow-d9-n2', includes: ['d9-n2']},
 								{name: 'rainbow-d9-n3', includes: ['d9-n3']},
+								{name: 'rainbow-d9-n5', includes: ['d9-n5']},
+								{name: 'rainbow-d9-n6', includes: ['d9-n6']},
 								{name: 'rainbow-d9-echarts', includes: ['d9-echarts']},
 								{name: 'rainbow-d9-thai-plan-selection', includes: ['thai-plan-selection']}
 							].find(({includes}) => {
