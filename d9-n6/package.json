@@ -1,6 +1,6 @@
 {
 	"name": "@rainbow-d9/n6",
-	"version": "1.1.28-alpha.1",
+	"version": "1.1.28",
 	"description": "o23 wysiwyg editor",
 	"main": "index.cjs.js",
 	"module": "index.js",
@@ -22,8 +22,8 @@
 	"author": "Rainbow Team",
 	"dependencies": {
 		"@projectstorm/react-diagrams": "^7.0.4",
-		"@rainbow-d9/n2": "1.1.28-alpha.1",
-		"@rainbow-d9/n3": "1.1.28-alpha.1",
+		"@rainbow-d9/n2": "1.1.28",
+		"@rainbow-d9/n3": "1.1.28",
 		"color": "^4.2.3",
 		"js-yaml": "^4.1.0",
 		"nanoid": "^4.0.0",
