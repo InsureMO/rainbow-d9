@@ -1,9 +1,8 @@
-import { r as reactExports, a as React, j as jsx, b as jsxs, F as Fragment } from "./react-yj2EiHa4.js";
-import { V as VUtils, r as registerWidget, g as useCreateEventBus, M as MUtils, P as PPUtils, a as useThrottler, e as useForceUpdate, d as Wrapper, S as StandaloneRoot } from "./rainbow-d9-n1-CI7XR9B5.js";
-import { C as CssVars, D as DOM_KEY_WIDGET, a as DOM_ID_WIDGET, d as utils$2, $ as $d9n2, b as useGlobalHandlers, u as useGlobalEventBus, G as GlobalEventTypes, U as UnwrappedButton, B as ButtonInk, e as ButtonFill, I as IntlLabel, L as LabelLike, i as index$2, f as index$1$1, c as GlobalEventPrefix, g as useAlert, h as useDialog, j as DialogTitle, k as DialogHeader, l as DialogBody, m as DialogFooter, n as GlobalRoot } from "./rainbow-d9-n2-k_PX7MjZ.js";
-import { I as color } from "./vendor-Ih3CtHGV.js";
-import { q as qe } from "./styled-components-QDH3nKgO.js";
-import { i as index$1, p as parseDoc } from "./rainbow-d9-n3-CMeDEONi.js";
+import { a as color, r as reactExports, R as React, a1 as jsxRuntimeExports } from "./vendor-lWAx8mHf.js";
+import { V as VUtils, r as registerWidget, g as useCreateEventBus, M as MUtils, P as PPUtils, a as useThrottler, e as useForceUpdate, d as Wrapper, S as StandaloneRoot } from "./rainbow-d9-n1-w3ml04nl.js";
+import { C as CssVars, D as DOM_KEY_WIDGET, a as DOM_ID_WIDGET, d as utils$2, $ as $d9n2, b as useGlobalHandlers, u as useGlobalEventBus, G as GlobalEventTypes, U as UnwrappedButton, B as ButtonInk, e as ButtonFill, I as IntlLabel, L as LabelLike, i as index$2, h as index$1$1, c as GlobalEventPrefix, j as useAlert, k as useDialog, l as DialogHeader, m as DialogTitle, n as DialogBody, o as DialogFooter, p as GlobalRoot } from "./rainbow-d9-n2-UDT0tXmP.js";
+import { q as qe } from "./styled-components-uSKKRtA-.js";
+import { i as index$1, p as parseDoc } from "./rainbow-d9-n3-wXfS8j79.js";
 var PlanElementType;
 (function(PlanElementType2) {
   PlanElementType2["CATEGORY"] = "PolicyElementCategory";
@@ -57,14 +56,7 @@ const PlanSelectionCssVars = {
   FOOTER_OPERATOR_SHADOW: `var(--d9-plan-selection-footer-operator-background-shadow, 0 0 0 3px ${color("rgb(241,156,56)").alpha(0.4)})`,
   FOOTER_OPERATOR_HOVER_SHADOW: `var(--d9-plan-selection-footer-operator-background-hover-shadow, 0 0 0 3px ${color("rgb(241,156,56)").alpha(0.2)})`
 };
-const APlanSelection = qe.div.attrs(({
-  id,
-  "data-w": dataW,
-  columnCount,
-  computedColumnWidth,
-  computedLineHeaderWidth,
-  maxHeight
-}) => {
+const APlanSelection = qe.div.attrs(({ id, "data-w": dataW, columnCount, computedColumnWidth, computedLineHeaderWidth, maxHeight }) => {
   return {
     [DOM_KEY_WIDGET]: dataW || "d9-plan-selection",
     [DOM_ID_WIDGET]: id,
@@ -89,9 +81,7 @@ const APlanSelection = qe.div.attrs(({
         display: none;
     }
 `;
-const PlanSelectionTopLeftCorner = qe.div.attrs({
-  [DOM_KEY_WIDGET]: "d9-plan-selection-top-left-corner"
-})`
+const PlanSelectionTopLeftCorner = qe.div.attrs({ [DOM_KEY_WIDGET]: "d9-plan-selection-top-left-corner" })`
     display: flex;
     position: sticky;
     flex-direction: column;
@@ -102,9 +92,7 @@ const PlanSelectionTopLeftCorner = qe.div.attrs({
     background-color: ${PlanSelectionCssVars.BACKGROUND_COLOR};
     z-index: 3;
 `;
-const PlanSelectionPagination = qe.div.attrs({
-  [DOM_KEY_WIDGET]: "d9-plan-selection-pagination"
-})`
+const PlanSelectionPagination = qe.div.attrs({ [DOM_KEY_WIDGET]: "d9-plan-selection-pagination" })`
     display: flex;
     position: relative;
     align-items: center;
@@ -123,9 +111,7 @@ const PlanSelectionPagination = qe.div.attrs({
         }
     }
 `;
-const APlanHeader = qe.div.attrs({
-  [DOM_KEY_WIDGET]: "d9-plan-selection-header"
-})`
+const APlanHeader = qe.div.attrs({ [DOM_KEY_WIDGET]: "d9-plan-selection-header" })`
     display: flex;
     position: sticky;
     flex-direction: column;
@@ -152,9 +138,7 @@ const APlanHeader = qe.div.attrs({
         }
     }
 `;
-const PlanHeaderTitle = qe.div.attrs({
-  [DOM_KEY_WIDGET]: "d9-plan-selection-header-title"
-})`
+const PlanHeaderTitle = qe.div.attrs({ [DOM_KEY_WIDGET]: "d9-plan-selection-header-title" })`
     display: flex;
     position: relative;
     align-items: center;
@@ -169,9 +153,7 @@ const PlanHeaderTitle = qe.div.attrs({
         min-height: ${CssVars.INPUT_HEIGHT};
     }
 `;
-const PlanHeaderSubTitle = qe.div.attrs({
-  [DOM_KEY_WIDGET]: "d9-plan-selection-header-sub-title"
-})`
+const PlanHeaderSubTitle = qe.div.attrs({ [DOM_KEY_WIDGET]: "d9-plan-selection-header-sub-title" })`
     display: flex;
     position: relative;
     flex-direction: column;
@@ -209,9 +191,7 @@ const PlanHeaderSubTitle = qe.div.attrs({
         }
     }
 `;
-const PlanElementColumnHeader = qe.div.attrs({
-  [DOM_KEY_WIDGET]: "d9-plan-selection-element-header"
-})`
+const PlanElementColumnHeader = qe.div.attrs({ [DOM_KEY_WIDGET]: "d9-plan-selection-element-header" })`
     display: flex;
     position: sticky;
     left: 0;
@@ -241,9 +221,7 @@ const PlanElementColumnHeader = qe.div.attrs({
         }
     }
 `;
-const PlanElementColumnHeaderTitle = qe.div.attrs({
-  [DOM_KEY_WIDGET]: "d9-plan-selection-element-header-title"
-})`
+const PlanElementColumnHeaderTitle = qe.div.attrs({ [DOM_KEY_WIDGET]: "d9-plan-selection-element-header-title" })`
     display: flex;
     position: relative;
     align-items: center;
@@ -270,9 +248,7 @@ const PlanElementColumnHeaderTitle = qe.div.attrs({
         }
     }
 `;
-const PlanElementCellContainer = qe.div.attrs({
-  [DOM_KEY_WIDGET]: "d9-plan-selection-element-cell"
-})`
+const PlanElementCellContainer = qe.div.attrs({ [DOM_KEY_WIDGET]: "d9-plan-selection-element-cell" })`
     display: flex;
     position: relative;
     flex-direction: column;
@@ -423,9 +399,7 @@ const PlanElementCellContainer = qe.div.attrs({
         }
     }
 `;
-const PlanElementUnitLabel = qe.span.attrs({
-  [DOM_KEY_WIDGET]: "d9-plan-selection-element-unit"
-})`
+const PlanElementUnitLabel = qe.span.attrs({ [DOM_KEY_WIDGET]: "d9-plan-selection-element-unit" })`
     display: flex;
     position: relative;
     align-items: center;
@@ -438,9 +412,7 @@ const PlanElementUnitLabel = qe.span.attrs({
         margin-left: ${PlanSelectionCssVars.ELEMENT_VALUE_UNIT_GAP};
     }
 `;
-const PlanSelectionBottomLeftCorner = qe.div.attrs({
-  [DOM_KEY_WIDGET]: "d9-plan-selection-bottom-left-corner"
-})`
+const PlanSelectionBottomLeftCorner = qe.div.attrs({ [DOM_KEY_WIDGET]: "d9-plan-selection-bottom-left-corner" })`
     display: block;
     position: sticky;
     bottom: 0;
@@ -451,9 +423,7 @@ const PlanSelectionBottomLeftCorner = qe.div.attrs({
     background-color: ${PlanSelectionCssVars.BACKGROUND_COLOR};
     z-index: 3;
 `;
-const PlanFooter = qe.div.attrs({
-  [DOM_KEY_WIDGET]: "d9-plan-selection-footer"
-})`
+const PlanFooter = qe.div.attrs({ [DOM_KEY_WIDGET]: "d9-plan-selection-footer" })`
     display: flex;
     position: sticky;
     bottom: 0;
@@ -473,9 +443,7 @@ const PlanFooter = qe.div.attrs({
         }
     }
 `;
-const PlanFooterOperator = qe.div.attrs({
-  [DOM_KEY_WIDGET]: "d9-plan-selection-footer-operator"
-})`
+const PlanFooterOperator = qe.div.attrs({ [DOM_KEY_WIDGET]: "d9-plan-selection-footer-operator" })`
     display: flex;
     position: relative;
     align-items: center;
@@ -519,13 +487,9 @@ var PlanSelectionEventTypes;
 const Context = reactExports.createContext({});
 Context.displayName = "PlanSelectionEventBus";
 const PlanSelectionEventBusProvider = (props) => {
-  const {
-    children
-  } = props;
+  const { children } = props;
   const bus = useCreateEventBus("plan-selection");
-  return React.createElement(Context.Provider, {
-    value: bus
-  }, children);
+  return React.createElement(Context.Provider, { value: bus }, children);
 };
 const usePlanSelectionEventBus = () => reactExports.useContext(Context);
 const redressPlanMarker = (content) => {
@@ -572,11 +536,7 @@ const computeColumnWidth = (columns, columnWidth, lineHeaderWidth) => {
 const findSelectedPlan = (plans2, code) => {
   let found = plans2[code];
   if (found == null) {
-    found = {
-      code,
-      selected: false,
-      elements: {}
-    };
+    found = { code, selected: false, elements: {} };
     plans2[code] = found;
   }
   return found;
@@ -594,58 +554,41 @@ const createPlanModelProxy = (plan, def) => {
   });
 };
 const guardPlanTitle = (options) => {
-  const {
-    def,
-    planDef,
-    elementValueChanged
-  } = options;
-  return def != null ? def(planDef, elementValueChanged) : [{
-    $wt: "Caption",
-    text: planDef.name
-  }];
+  const { def, planDef, elementValueChanged } = options;
+  return def != null ? def(planDef, elementValueChanged) : [{ $wt: "Caption", text: planDef.name }];
 };
 const guardPlanSubTitle = (options) => {
-  const {
-    def,
-    currencySymbol,
-    premiumDescription,
-    planDef,
-    elementValueChanged
-  } = options;
-  return def != null ? def(planDef, elementValueChanged, currencySymbol, premiumDescription) : [elementValueChanged ? {
-    $wt: "Caption",
-    "data-plan-premium": true,
-    text: "???",
-    leads: [currencySymbol].filter((x) => VUtils.isNotBlank(x))
-  } : {
-    $wt: "Label",
-    $pp: "premium.due",
-    "data-plan-premium": true,
-    valueToLabel: (value, formats) => {
-      try {
-        return value == null ? "" : formats.nf0(value);
-      } catch (e) {
-        console.error(e);
-        return value == null ? "" : value;
-      }
+  const { def, currencySymbol, premiumDescription, planDef, elementValueChanged } = options;
+  return def != null ? def(planDef, elementValueChanged, currencySymbol, premiumDescription) : [
+    elementValueChanged ? {
+      $wt: "Caption",
+      "data-plan-premium": true,
+      text: "???",
+      leads: [currencySymbol].filter((x) => VUtils.isNotBlank(x))
+    } : {
+      $wt: "Label",
+      $pp: "premium.due",
+      "data-plan-premium": true,
+      valueToLabel: (value, formats) => {
+        try {
+          return value == null ? "" : formats.nf0(value);
+        } catch (e) {
+          console.error(e);
+          return value == null ? "" : value;
+        }
+      },
+      leads: [currencySymbol].filter((x) => VUtils.isNotBlank(x))
     },
-    leads: [currencySymbol].filter((x) => VUtils.isNotBlank(x))
-  }, {
-    $wt: "Caption",
-    "data-plan-premium-desc": true,
-    text: premiumDescription
-  }];
+    {
+      $wt: "Caption",
+      "data-plan-premium-desc": true,
+      text: premiumDescription
+    }
+  ];
 };
 const guardElementTitle = (options) => {
-  const {
-    def,
-    orderedDef,
-    elementLevel,
-    forceUpdate
-  } = options;
-  const {
-    def: elementDef
-  } = orderedDef;
+  const { def, orderedDef, elementLevel, forceUpdate } = options;
+  const { def: elementDef } = orderedDef;
   const domElementAttr = {};
   switch (elementDef.type) {
     case PlanElementType.CATEGORY:
@@ -677,13 +620,7 @@ const guardElementTitle = (options) => {
   }];
 };
 const guardPlanOperators = (options) => {
-  const {
-    def,
-    planDef,
-    planModel,
-    text,
-    click
-  } = options;
+  const { def, planDef, planModel, text, click } = options;
   return def != null ? def(planDef, planModel) : [{
     $wt: "Button",
     text: VUtils.isBlank(text) ? "Buy" : text,
@@ -720,17 +657,9 @@ const orderDef = (children, ordered, orderedCodeMap) => {
     else {
       const displayOrder = element.displayOrder ?? 0;
       const children2 = [];
-      exists = {
-        displayOrder,
-        map: {},
-        ordered: children2
-      };
+      exists = { displayOrder, map: {}, ordered: children2 };
       orderedCodeMap[element.code] = exists;
-      ordered.push({
-        code: element.code,
-        children: children2,
-        def: element
-      });
+      ordered.push({ code: element.code, children: children2, def: element });
     }
     orderDef(() => element.children ?? [], exists.ordered, exists.map);
   });
@@ -753,9 +682,7 @@ const orderPlanDefs = (defs) => {
         return original.indexOf(a) - original.indexOf(b);
       }
     });
-    ordered2.forEach(({
-      children
-    }) => {
+    ordered2.forEach(({ children }) => {
       if (children != null && children.length !== 0) {
         sort(children);
       }
@@ -765,38 +692,20 @@ const orderPlanDefs = (defs) => {
   return sort(ordered);
 };
 const loadDefs = async (options, beforeChangeState) => {
-  const {
-    defs,
-    $root,
-    $model,
-    globalHandlers
-  } = options;
+  const { defs, $root, $model, globalHandlers } = options;
   let loadedDefs;
   if (typeof defs === "function") {
-    loadedDefs = await defs({
-      root: $root,
-      model: $model,
-      global: globalHandlers
-    });
+    loadedDefs = await defs({ root: $root, model: $model, global: globalHandlers });
   } else {
     loadedDefs = defs;
   }
   await beforeChangeState(loadedDefs);
-  return {
-    defs: loadedDefs,
-    orderedDefs: orderPlanDefs(loadedDefs)
-  };
+  return { defs: loadedDefs, orderedDefs: orderPlanDefs(loadedDefs) };
 };
 const useLayout = (marker, defs, $root, $model, valuesInit, valuesClear, columns, columnWidth, lineHeaderWidth) => {
   const globalHandlers = useGlobalHandlers();
-  const {
-    on: onGlobal,
-    off: offGlobal
-  } = useGlobalEventBus();
-  const {
-    on,
-    off
-  } = usePlanSelectionEventBus();
+  const { on: onGlobal, off: offGlobal } = useGlobalEventBus();
+  const { on, off } = usePlanSelectionEventBus();
   const [state, setState] = reactExports.useState({
     initialized: false,
     displayPlanDefs: [],
@@ -866,22 +775,14 @@ const useLayout = (marker, defs, $root, $model, valuesInit, valuesClear, columns
     };
     if (!state.initialized) {
       (async () => {
-        const {
-          defs: loadedDefs,
-          orderedDefs
-        } = await loadDefs({
+        const { defs: loadedDefs, orderedDefs } = await loadDefs({
           defs,
           $root,
           $model,
           globalHandlers
         }, async (defs2) => {
           if (valuesInit != null) {
-            await valuesInit({
-              defs: defs2,
-              root: $root,
-              model: $model,
-              global: globalHandlers
-            });
+            await valuesInit({ defs: defs2, root: $root, model: $model, global: globalHandlers });
           }
         });
         layout(loadedDefs, orderedDefs);
@@ -891,22 +792,14 @@ const useLayout = (marker, defs, $root, $model, valuesInit, valuesClear, columns
       if (!state.initialized || prefix !== PlanSelectionGlobalEventPrefix.RELOAD_DEFS || clipped !== marker) {
         return;
       }
-      const {
-        defs: loadedDefs,
-        orderedDefs
-      } = await loadDefs({
+      const { defs: loadedDefs, orderedDefs } = await loadDefs({
         defs,
         $root,
         $model,
         globalHandlers
       }, async (defs2) => {
         if (valuesClear != null) {
-          await valuesClear({
-            defs: defs2,
-            root: $root,
-            model: $model,
-            global: globalHandlers
-          });
+          await valuesClear({ defs: defs2, root: $root, model: $model, global: globalHandlers });
         }
       });
       layout(loadedDefs, orderedDefs);
@@ -915,7 +808,21 @@ const useLayout = (marker, defs, $root, $model, valuesInit, valuesClear, columns
     return () => {
       offGlobal && offGlobal(GlobalEventTypes.CUSTOM_EVENT, onCustomEvent);
     };
-  }, [onGlobal, offGlobal, globalHandlers, state.initialized, marker, defs, $root, $model, valuesInit, valuesClear, columns, columnWidth, lineHeaderWidth]);
+  }, [
+    onGlobal,
+    offGlobal,
+    globalHandlers,
+    state.initialized,
+    marker,
+    defs,
+    $root,
+    $model,
+    valuesInit,
+    valuesClear,
+    columns,
+    columnWidth,
+    lineHeaderWidth
+  ]);
   reactExports.useEffect(() => {
     const onSwitchPage = (pageNumber) => {
       const defs2 = state.defs ?? [];
@@ -941,11 +848,7 @@ const useLayout = (marker, defs, $root, $model, valuesInit, valuesClear, columns
   return state;
 };
 const useElementDefaultValue = (options) => {
-  const {
-    model,
-    $pp,
-    defaultValues
-  } = options;
+  const { model, $pp, defaultValues } = options;
   reactExports.useEffect(() => {
     const existsValue = MUtils.getValue(model, $pp);
     if (VUtils.isNotBlank(existsValue)) {
@@ -962,32 +865,15 @@ const useElementDefaultValue = (options) => {
   }, []);
 };
 const PlanSelectionValueHandler = (props) => {
-  const {
-    calculationDelay = 1,
-    calculate
-  } = props;
-  const {
-    on,
-    off,
-    fire
-  } = usePlanSelectionEventBus();
+  const { calculationDelay = 1, calculate } = props;
+  const { on, off, fire } = usePlanSelectionEventBus();
   const changes = reactExports.useRef(null);
-  const {
-    replace
-  } = useThrottler();
+  const { replace } = useThrottler();
   reactExports.useEffect(() => {
     const onElementValueChanged = (options) => {
-      const {
-        root,
-        model,
-        ...rest
-      } = options;
+      const { root, model, ...rest } = options;
       if (changes.current == null) {
-        changes.current = {
-          root,
-          model,
-          changes: [rest]
-        };
+        changes.current = { root, model, changes: [rest] };
       } else {
         changes.current.changes.push(rest);
       }
@@ -997,9 +883,7 @@ const PlanSelectionValueHandler = (props) => {
         if (calculate != null) {
           (async () => {
             await calculate(event);
-            event.changes.map((change) => change.planDef).forEach((planDef) => fire(PlanSelectionEventTypes.PREMIUM_CALCULATED, {
-              planDef
-            }));
+            event.changes.map((change) => change.planDef).forEach((planDef) => fire(PlanSelectionEventTypes.PREMIUM_CALCULATED, { planDef }));
           })();
         }
       }, calculationDelay * 1e3);
@@ -1012,21 +896,8 @@ const PlanSelectionValueHandler = (props) => {
   return React.createElement(React.Fragment, null);
 };
 const PlanHeader = (props) => {
-  const {
-    $root,
-    $p2r,
-    plans: plans2,
-    displayIndex,
-    planDef,
-    planTitle,
-    planSubTitle,
-    currencySymbol,
-    premiumDescription
-  } = props;
-  const {
-    on,
-    off
-  } = usePlanSelectionEventBus();
+  const { $root, $p2r, plans: plans2, displayIndex, planDef, planTitle, planSubTitle, currencySymbol, premiumDescription } = props;
+  const { on, off } = usePlanSelectionEventBus();
   const [elementValueChanged, setElementValueChanged] = reactExports.useState(false);
   const forceUpdate = useForceUpdate();
   reactExports.useEffect(() => {
@@ -1063,108 +934,71 @@ const PlanHeader = (props) => {
     $avs: {}
   };
   const odd = displayIndex % 2 === 0;
-  return React.createElement(APlanHeader, {
-    "data-odd": odd
-  }, React.createElement(PlanHeaderTitle, null, guardPlanTitle({
-    def: planTitle,
-    planDef,
-    elementValueChanged
-  }).map((label, index) => {
-    return React.createElement(LabelLike, {
-      key: index,
-      label,
-      "$wrapped": $myWrapped
-    });
-  })), React.createElement(PlanHeaderSubTitle, null, guardPlanSubTitle({
-    def: planSubTitle,
-    currencySymbol,
-    premiumDescription,
-    planDef,
-    elementValueChanged
-  }).map((label, index) => {
-    return React.createElement(LabelLike, {
-      key: index,
-      label,
-      "$wrapped": $myWrapped
-    });
-  })));
+  return React.createElement(
+    APlanHeader,
+    { "data-odd": odd },
+    React.createElement(PlanHeaderTitle, null, guardPlanTitle({ def: planTitle, planDef, elementValueChanged }).map((label, index) => {
+      return React.createElement(LabelLike, { key: index, label, "$wrapped": $myWrapped });
+    })),
+    React.createElement(PlanHeaderSubTitle, null, guardPlanSubTitle({
+      def: planSubTitle,
+      currencySymbol,
+      premiumDescription,
+      planDef,
+      elementValueChanged
+    }).map((label, index) => {
+      return React.createElement(LabelLike, { key: index, label, "$wrapped": $myWrapped });
+    }))
+  );
 };
 $d9n2.intl.labels["en-US"].planSelection = {
-  pagination: {
-    page: "Page",
-    of: "of",
-    pages: "pages"
-  }
+  pagination: { page: "Page", of: "of", pages: "pages" }
 };
 const PlanHeaders = (props) => {
-  const {
-    $root,
-    $p2r,
-    displayPlanDefs,
-    plans: plans2,
-    planTitle,
-    planSubTitle,
-    currencySymbol,
-    premiumDescription,
-    pageCount,
-    pageNumber
-  } = props;
-  const {
-    fire
-  } = usePlanSelectionEventBus();
+  const { $root, $p2r, displayPlanDefs, plans: plans2, planTitle, planSubTitle, currencySymbol, premiumDescription, pageCount, pageNumber } = props;
+  const { fire } = usePlanSelectionEventBus();
   const onSwitchPageClicked = (pageNumber2) => () => {
     fire(PlanSelectionEventTypes.SWITCH_PAGE, pageNumber2);
   };
-  return React.createElement(React.Fragment, null, React.createElement(PlanSelectionTopLeftCorner, null, pageNumber != null ? React.createElement(PlanSelectionPagination, null, pageNumber != 1 ? React.createElement(UnwrappedButton, {
-    ink: ButtonInk.WARN,
-    fill: ButtonFill.LINK,
-    leads: ["$icons.angleLeft"],
-    onClick: onSwitchPageClicked(pageNumber - 1)
-  }) : null, React.createElement("span", null, React.createElement("span", null, React.createElement(IntlLabel, {
-    keys: ["planSelection", "pagination", "page"],
-    value: "Page"
-  })), React.createElement("span", null, pageNumber), React.createElement("span", null, React.createElement(IntlLabel, {
-    keys: ["planSelection", "pagination", "of"],
-    value: "of"
-  })), React.createElement("span", null, pageCount), React.createElement("span", null, React.createElement(IntlLabel, {
-    keys: ["planSelection", "pagination", "pages"],
-    value: "pages"
-  }))), pageNumber !== pageCount ? React.createElement(UnwrappedButton, {
-    ink: ButtonInk.WARN,
-    fill: ButtonFill.LINK,
-    leads: ["$icons.angleRight"],
-    onClick: onSwitchPageClicked(pageNumber + 1)
-  }) : null) : null), displayPlanDefs.map((planDef, displayIndex) => {
-    return React.createElement(PlanHeader, {
-      "$root": $root,
-      "$p2r": $p2r,
-      plans: plans2,
-      displayIndex,
-      planDef,
-      planTitle,
-      planSubTitle,
-      currencySymbol,
-      premiumDescription,
-      key: planDef.code
-    });
-  }));
+  return React.createElement(
+    React.Fragment,
+    null,
+    React.createElement(PlanSelectionTopLeftCorner, null, pageNumber != null ? React.createElement(
+      PlanSelectionPagination,
+      null,
+      pageNumber != 1 ? React.createElement(UnwrappedButton, { ink: ButtonInk.WARN, fill: ButtonFill.LINK, leads: ["$icons.angleLeft"], onClick: onSwitchPageClicked(pageNumber - 1) }) : null,
+      React.createElement(
+        "span",
+        null,
+        React.createElement(
+          "span",
+          null,
+          React.createElement(IntlLabel, { keys: ["planSelection", "pagination", "page"], value: "Page" })
+        ),
+        React.createElement("span", null, pageNumber),
+        React.createElement(
+          "span",
+          null,
+          React.createElement(IntlLabel, { keys: ["planSelection", "pagination", "of"], value: "of" })
+        ),
+        React.createElement("span", null, pageCount),
+        React.createElement(
+          "span",
+          null,
+          React.createElement(IntlLabel, { keys: ["planSelection", "pagination", "pages"], value: "pages" })
+        )
+      ),
+      pageNumber !== pageCount ? React.createElement(UnwrappedButton, { ink: ButtonInk.WARN, fill: ButtonFill.LINK, leads: ["$icons.angleRight"], onClick: onSwitchPageClicked(pageNumber + 1) }) : null
+    ) : null),
+    displayPlanDefs.map((planDef, displayIndex) => {
+      return React.createElement(PlanHeader, { "$root": $root, "$p2r": $p2r, plans: plans2, displayIndex, planDef, planTitle, planSubTitle, currencySymbol, premiumDescription, key: planDef.code });
+    })
+  );
 };
 const PlanElementPin = (props) => {
-  const {
-    $root,
-    $p2r,
-    plans: plans2,
-    plan,
-    planDef,
-    element,
-    elementDef
-  } = props;
-  const {
-    pinned = true
-  } = elementDef;
-  const {
-    fire
-  } = usePlanSelectionEventBus();
+  const { $root, $p2r, plans: plans2, plan, planDef, element, elementDef } = props;
+  const { pinned = true } = elementDef;
+  const { fire } = usePlanSelectionEventBus();
   const onSelectedChanged = (value) => {
     fire(PlanSelectionEventTypes.ELEMENT_VALUE_CHANGED, {
       root: $root,
@@ -1186,24 +1020,13 @@ const PlanElementPin = (props) => {
     "data-element-pinned": pinned,
     emptyWhenFalse: false,
     $disabled: pinned,
-    valueChanged: ({
-      newValue
-    }) => onSelectedChanged(newValue)
+    valueChanged: ({ newValue }) => onSelectedChanged(newValue)
   };
-  return React.createElement(Wrapper, {
-    ...def
-  });
+  return React.createElement(Wrapper, { ...def });
 };
 const PlanElementUnit = (props) => {
-  const {
-    valueDef,
-    $root,
-    $p2r,
-    values: valuesModel
-  } = props;
-  const {
-    unit
-  } = valueDef;
+  const { valueDef, $root, $p2r, values: valuesModel } = props;
+  const { unit } = valueDef;
   const unit$wrapped = {
     $root,
     $model: valuesModel,
@@ -1211,33 +1034,16 @@ const PlanElementUnit = (props) => {
     $onValueChange: VUtils.noop,
     $avs: {}
   };
-  return React.createElement(PlanElementUnitLabel, null, React.createElement(LabelLike, {
-    label: unit,
-    "$wrapped": unit$wrapped
-  }));
+  return React.createElement(
+    PlanElementUnitLabel,
+    null,
+    React.createElement(LabelLike, { label: unit, "$wrapped": unit$wrapped })
+  );
 };
 const PlanElementFixedValue = (props) => {
-  const {
-    elementDef,
-    valueDef,
-    plan: planModel,
-    elementCodes,
-    $root,
-    $p2r,
-    element: elementModel,
-    values: valuesModel,
-    elementFixedValue
-  } = props;
-  const {
-    code: $pp,
-    label,
-    defaultValue
-  } = valueDef;
-  useElementDefaultValue({
-    model: valuesModel,
-    $pp,
-    defaultValues: [defaultValue]
-  });
+  const { elementDef, valueDef, plan: planModel, elementCodes, $root, $p2r, element: elementModel, values: valuesModel, elementFixedValue } = props;
+  const { code: $pp, label, defaultValue } = valueDef;
+  useElementDefaultValue({ model: valuesModel, $pp, defaultValues: [defaultValue] });
   const root = planModel;
   if (elementFixedValue == null) {
     const def = {
@@ -1247,31 +1053,27 @@ const PlanElementFixedValue = (props) => {
       $p2r,
       $pp: ".",
       label,
-      $nodes: [{
-        $wt: "Label",
-        $pp,
-        "data-plan-element-fix-value": true,
-        valueToLabel: (value, formats) => {
-          try {
-            return value == null ? "" : formats.nf0(value);
-          } catch (e) {
-            console.error(e);
-            return value == null ? "" : `${value}`;
+      $nodes: [
+        {
+          $wt: "Label",
+          $pp,
+          "data-plan-element-fix-value": true,
+          valueToLabel: (value, formats) => {
+            try {
+              return value == null ? "" : formats.nf0(value);
+            } catch (e) {
+              console.error(e);
+              return value == null ? "" : `${value}`;
+            }
           }
+        },
+        {
+          $wt: "Caption",
+          text: React.createElement(PlanElementUnit, { valueDef, "$root": $root, "$p2r": $p2r, values: valuesModel })
         }
-      }, {
-        $wt: "Caption",
-        text: React.createElement(PlanElementUnit, {
-          valueDef,
-          "$root": $root,
-          "$p2r": $p2r,
-          values: valuesModel
-        })
-      }]
+      ]
     };
-    return React.createElement(Wrapper, {
-      ...def
-    });
+    return React.createElement(Wrapper, { ...def });
   } else {
     return React.createElement(React.Fragment, null, elementFixedValue({
       elementDef,
@@ -1282,44 +1084,16 @@ const PlanElementFixedValue = (props) => {
       element: elementModel,
       values: valuesModel
     }).map((def) => {
-      return React.createElement(Wrapper, {
-        ...def,
-        "$root": root,
-        "$model": valuesModel,
-        "$p2r": $p2r
-      });
+      return React.createElement(Wrapper, { ...def, "$root": root, "$model": valuesModel, "$p2r": $p2r });
     }));
   }
 };
 const PlanElementOptionsValue = (props) => {
   var _a;
-  const {
-    planDef,
-    elementDef,
-    valueDef,
-    plan: planModel,
-    plans: plans2,
-    $root,
-    $p2r,
-    elementCodes,
-    element: elementModel,
-    values: valuesModel,
-    elementOptionsValue
-  } = props;
-  const {
-    code: $pp,
-    label,
-    defaultValue,
-    options
-  } = valueDef;
-  const {
-    fire
-  } = usePlanSelectionEventBus();
-  useElementDefaultValue({
-    model: valuesModel,
-    $pp,
-    defaultValues: [defaultValue, (_a = options == null ? void 0 : options[0]) == null ? void 0 : _a.value]
-  });
+  const { planDef, elementDef, valueDef, plan: planModel, plans: plans2, $root, $p2r, elementCodes, element: elementModel, values: valuesModel, elementOptionsValue } = props;
+  const { code: $pp, label, defaultValue, options } = valueDef;
+  const { fire } = usePlanSelectionEventBus();
+  useElementDefaultValue({ model: valuesModel, $pp, defaultValues: [defaultValue, (_a = options == null ? void 0 : options[0]) == null ? void 0 : _a.value] });
   const onValueChanged = async (value) => {
     fire(PlanSelectionEventTypes.ELEMENT_VALUE_CHANGED, {
       root: $root,
@@ -1343,48 +1117,38 @@ const PlanElementOptionsValue = (props) => {
       $p2r,
       $pp: ".",
       label,
-      $nodes: [{
-        $wt: "Dropdown",
-        $pp,
-        "data-plan-element-options-value": true,
-        clearable: false,
-        options: (options ?? []).map((option) => {
-          const {
-            label: label2,
-            value,
-            stringify
-          } = option;
-          let displayLabel = VUtils.isBlank(label2) ? value : label2;
-          if (typeof displayLabel === "number") {
-            displayLabel = format(displayLabel);
-          } else if (typeof displayLabel === "string" && VUtils.isNotBlank(displayLabel)) {
-            const value2 = Number(displayLabel);
-            if (!isNaN(value2)) {
-              displayLabel = format(value2);
+      $nodes: [
+        {
+          $wt: "Dropdown",
+          $pp,
+          "data-plan-element-options-value": true,
+          clearable: false,
+          options: (options ?? []).map((option) => {
+            const { label: label2, value, stringify } = option;
+            let displayLabel = VUtils.isBlank(label2) ? value : label2;
+            if (typeof displayLabel === "number") {
+              displayLabel = format(displayLabel);
+            } else if (typeof displayLabel === "string" && VUtils.isNotBlank(displayLabel)) {
+              const value2 = Number(displayLabel);
+              if (!isNaN(value2)) {
+                displayLabel = format(value2);
+              }
             }
-          }
-          return {
-            label: displayLabel,
-            value,
-            stringify: stringify != null ? () => stringify(displayLabel) ?? "" : void 0
-          };
-        }),
-        valueChanged: ({
-          newValue
-        }) => onValueChanged(newValue)
-      }, {
-        $wt: "Caption",
-        text: React.createElement(PlanElementUnit, {
-          valueDef,
-          "$root": $root,
-          "$p2r": $p2r,
-          values: valuesModel
-        })
-      }]
+            return {
+              label: displayLabel,
+              value,
+              stringify: stringify != null ? () => stringify(displayLabel) ?? "" : void 0
+            };
+          }),
+          valueChanged: ({ newValue }) => onValueChanged(newValue)
+        },
+        {
+          $wt: "Caption",
+          text: React.createElement(PlanElementUnit, { valueDef, "$root": $root, "$p2r": $p2r, values: valuesModel })
+        }
+      ]
     };
-    return React.createElement(Wrapper, {
-      ...def
-    });
+    return React.createElement(Wrapper, { ...def });
   } else {
     return React.createElement(React.Fragment, null, elementOptionsValue({
       elementDef,
@@ -1396,21 +1160,12 @@ const PlanElementOptionsValue = (props) => {
       values: valuesModel,
       onValueChanged
     }).map((def) => {
-      return React.createElement(Wrapper, {
-        ...def,
-        "$root": root,
-        "$model": valuesModel,
-        "$p2r": $p2r
-      });
+      return React.createElement(Wrapper, { ...def, "$root": root, "$model": valuesModel, "$p2r": $p2r });
     }));
   }
 };
 const checkMinMaxStep = (valueDef) => {
-  let {
-    min,
-    max,
-    step
-  } = valueDef;
+  let { min, max, step } = valueDef;
   [min, max, step] = [min, max, step].map((value) => {
     const tested = VUtils.isPositive(value);
     return tested.test ? tested.value : void 0;
@@ -1418,38 +1173,19 @@ const checkMinMaxStep = (valueDef) => {
   if (min != null && max != null && min > max) {
     [min, max] = [max, min];
   }
-  return {
-    min,
-    max,
-    step
-  };
+  return { min, max, step };
 };
 const PlanElementNumberValueDefaultValidator = (options) => {
-  const {
-    valueDef: {
-      code: $pp
-    },
-    min = 0,
-    max,
-    step
-  } = options;
+  const { valueDef: { code: $pp }, min = 0, max, step } = options;
   return (options2) => {
-    const {
-      value: model
-    } = options2;
+    const { value: model } = options2;
     const value = MUtils.getValue(model, $pp);
     if (VUtils.isBlank(value)) {
-      return {
-        valid: false,
-        failReason: "Value should be a number."
-      };
+      return { valid: false, failReason: "Value should be a number." };
     }
     const tested = VUtils.isNumber(value);
     if (!tested.test) {
-      return {
-        valid: false,
-        failReason: "Value should be a number."
-      };
+      return { valid: false, failReason: "Value should be a number." };
     }
     const testedValue = tested.value;
     if (max != null && testedValue > max) {
@@ -1470,40 +1206,14 @@ const PlanElementNumberValueDefaultValidator = (options) => {
         failReason: min === 0 ? `Value should be a multiple of ${step}.` : `Value should start from ${min} and plus a multiple of ${step}.`
       };
     }
-    return {
-      valid: true
-    };
+    return { valid: true };
   };
 };
 const PlanElementNumberValue = (props) => {
-  const {
-    planDef,
-    elementDef,
-    valueDef,
-    plan: planModel,
-    plans: plans2,
-    $root,
-    $p2r,
-    elementCodes,
-    element: elementModel,
-    values: valuesModel,
-    elementNumberValue,
-    elementNumberValueValidator
-  } = props;
-  const {
-    code: $pp,
-    label,
-    defaultValue,
-    min
-  } = valueDef;
-  const {
-    fire
-  } = usePlanSelectionEventBus();
-  useElementDefaultValue({
-    model: valuesModel,
-    $pp,
-    defaultValues: [defaultValue, min ?? 0]
-  });
+  const { planDef, elementDef, valueDef, plan: planModel, plans: plans2, $root, $p2r, elementCodes, element: elementModel, values: valuesModel, elementNumberValue, elementNumberValueValidator } = props;
+  const { code: $pp, label, defaultValue, min } = valueDef;
+  const { fire } = usePlanSelectionEventBus();
+  useElementDefaultValue({ model: valuesModel, $pp, defaultValues: [defaultValue, min ?? 0] });
   const onValueChanged = async (value) => {
     fire(PlanSelectionEventTypes.ELEMENT_VALUE_CHANGED, {
       root: $root,
@@ -1518,11 +1228,7 @@ const PlanElementNumberValue = (props) => {
   };
   const root = planModel;
   if (elementNumberValue == null) {
-    const {
-      min: min2,
-      max,
-      step
-    } = checkMinMaxStep(valueDef);
+    const { min: min2, max, step } = checkMinMaxStep(valueDef);
     const useOptions = max != null && step != null;
     let editorDef;
     if (useOptions) {
@@ -1543,23 +1249,16 @@ const PlanElementNumberValue = (props) => {
         "data-plan-element-number-value": true,
         clearable: false,
         options: values.map((value) => {
-          return {
-            label: format(value),
-            value
-          };
+          return { label: format(value), value };
         }),
-        valueChanged: ({
-          newValue
-        }) => onValueChanged(newValue)
+        valueChanged: ({ newValue }) => onValueChanged(newValue)
       };
     } else {
       editorDef = {
         $wt: "Number",
         $pp,
         "data-plan-element-number-value": true,
-        valueChanged: ({
-          newValue
-        }) => onValueChanged(newValue)
+        valueChanged: ({ newValue }) => onValueChanged(newValue)
       };
     }
     const def = {
@@ -1571,30 +1270,17 @@ const PlanElementNumberValue = (props) => {
       label,
       $valid: useOptions ? void 0 : {
         $watch: [$pp],
-        $handle: elementNumberValueValidator != null ? elementNumberValueValidator({
-          elementDef,
-          valueDef
-        }) : PlanElementNumberValueDefaultValidator({
-          elementDef,
-          valueDef,
-          min: min2,
-          max,
-          step
-        })
+        $handle: elementNumberValueValidator != null ? elementNumberValueValidator({ elementDef, valueDef }) : PlanElementNumberValueDefaultValidator({ elementDef, valueDef, min: min2, max, step })
       },
-      $nodes: [editorDef, {
-        $wt: "Caption",
-        text: React.createElement(PlanElementUnit, {
-          valueDef,
-          "$root": $root,
-          "$p2r": $p2r,
-          values: valuesModel
-        })
-      }]
+      $nodes: [
+        editorDef,
+        {
+          $wt: "Caption",
+          text: React.createElement(PlanElementUnit, { valueDef, "$root": $root, "$p2r": $p2r, values: valuesModel })
+        }
+      ]
     };
-    return React.createElement(Wrapper, {
-      ...def
-    });
+    return React.createElement(Wrapper, { ...def });
   } else {
     return React.createElement(React.Fragment, null, elementNumberValue({
       elementDef,
@@ -1606,26 +1292,15 @@ const PlanElementNumberValue = (props) => {
       values: valuesModel,
       onValueChanged
     }).map((def) => {
-      return React.createElement(Wrapper, {
-        ...def,
-        "$root": root,
-        "$model": valuesModel,
-        "$p2r": $p2r
-      });
+      return React.createElement(Wrapper, { ...def, "$root": root, "$model": valuesModel, "$p2r": $p2r });
     }));
   }
 };
 const getElementModel = (plan, $elementToPlans, elementDef) => {
-  const {
-    code,
-    pinned = true
-  } = elementDef;
+  const { code, pinned = true } = elementDef;
   let elementModel = MUtils.getValue(plan, $elementToPlans);
   if (elementModel == null) {
-    elementModel = {
-      code,
-      selected: pinned
-    };
+    elementModel = { code, selected: pinned };
     MUtils.setValue(plan, $elementToPlans, elementModel);
   } else {
     MUtils.setValue(elementModel, `code`, elementDef.code);
@@ -1644,21 +1319,8 @@ const getValuesModel = (element) => {
   return valuesModel;
 };
 const PlanElementValues = (props) => {
-  const {
-    elementDef,
-    elementCodes,
-    planDef,
-    plan: planModel,
-    plans: plans2,
-    $root,
-    elementFixedValue,
-    elementOptionsValue,
-    elementNumberValue,
-    elementNumberValueValidator
-  } = props;
-  const {
-    values = []
-  } = elementDef;
+  const { elementDef, elementCodes, planDef, plan: planModel, plans: plans2, $root, elementFixedValue, elementOptionsValue, elementNumberValue, elementNumberValueValidator } = props;
+  const { values = [] } = elementDef;
   const $elementToPlans = elementCodes.map((code, index) => {
     if (index === 0) {
       return `elements.${code}`;
@@ -1669,77 +1331,23 @@ const PlanElementValues = (props) => {
   const element$p2r = PPUtils.concat(props.$p2r, $elementToPlans);
   const elementModel = getElementModel(planModel, $elementToPlans, elementDef);
   if (values.length === 0) {
-    return React.createElement(PlanElementPin, {
-      "$root": $root,
-      "$p2r": element$p2r,
-      plans: plans2,
-      plan: planModel,
-      planDef,
-      element: elementModel,
-      elementDef
-    });
+    return React.createElement(PlanElementPin, { "$root": $root, "$p2r": element$p2r, plans: plans2, plan: planModel, planDef, element: elementModel, elementDef });
   }
   const value$p2r = PPUtils.concat(element$p2r, "values");
   const valuesModel = getValuesModel(elementModel);
   return React.createElement(React.Fragment, null, values.map((valueDef) => {
-    const {
-      code
-    } = valueDef;
+    const { code } = valueDef;
     if (isElementNumberValueDef(valueDef)) {
-      return React.createElement(PlanElementNumberValue, {
-        planDef,
-        elementDef,
-        valueDef,
-        elementCodes,
-        "$root": $root,
-        "$p2r": value$p2r,
-        plans: plans2,
-        plan: planModel,
-        element: elementModel,
-        values: valuesModel,
-        elementNumberValue,
-        elementNumberValueValidator,
-        key: code
-      });
+      return React.createElement(PlanElementNumberValue, { planDef, elementDef, valueDef, elementCodes, "$root": $root, "$p2r": value$p2r, plans: plans2, plan: planModel, element: elementModel, values: valuesModel, elementNumberValue, elementNumberValueValidator, key: code });
     } else if (isElementOptionsValueDef(valueDef)) {
-      return React.createElement(PlanElementOptionsValue, {
-        planDef,
-        elementDef,
-        valueDef,
-        elementCodes,
-        "$root": $root,
-        "$p2r": value$p2r,
-        plans: plans2,
-        plan: planModel,
-        element: elementModel,
-        values: valuesModel,
-        elementOptionsValue,
-        key: code
-      });
+      return React.createElement(PlanElementOptionsValue, { planDef, elementDef, valueDef, elementCodes, "$root": $root, "$p2r": value$p2r, plans: plans2, plan: planModel, element: elementModel, values: valuesModel, elementOptionsValue, key: code });
     } else {
-      return React.createElement(PlanElementFixedValue, {
-        planDef,
-        elementDef,
-        valueDef,
-        elementCodes,
-        "$root": $root,
-        "$p2r": value$p2r,
-        plans: plans2,
-        plan: planModel,
-        element: elementModel,
-        values: valuesModel,
-        elementFixedValue,
-        key: code
-      });
+      return React.createElement(PlanElementFixedValue, { planDef, elementDef, valueDef, elementCodes, "$root": $root, "$p2r": value$p2r, plans: plans2, plan: planModel, element: elementModel, values: valuesModel, elementFixedValue, key: code });
     }
   }));
 };
 const PlanElementCellWithTip = (props) => {
-  const {
-    attributes,
-    elementDef,
-    children
-  } = props;
+  const { attributes, elementDef, children } = props;
   const ref = reactExports.useRef(null);
   index$1$1.useTip({
     ref,
@@ -1750,20 +1358,10 @@ const PlanElementCellWithTip = (props) => {
     maxHeight: elementDef.tip.maxHeight,
     delay: elementDef.tip.delay
   });
-  return React.createElement(PlanElementCellContainer, {
-    ...attributes,
-    ref
-  }, children);
+  return React.createElement(PlanElementCellContainer, { ...attributes, ref }, children);
 };
 const PlanElementCell = (props) => {
-  const {
-    lack,
-    category,
-    odd,
-    ancestorCollapsed,
-    elementDef,
-    children
-  } = props;
+  const { lack, category, odd, ancestorCollapsed, elementDef, children } = props;
   const attributes = (() => {
     const attrs = {};
     if (lack === true) {
@@ -1779,236 +1377,107 @@ const PlanElementCell = (props) => {
     return attrs;
   })();
   if ((elementDef == null ? void 0 : elementDef.tip) != null && VUtils.isNotBlank(elementDef.tip.body)) {
-    return React.createElement(PlanElementCellWithTip, {
-      attributes,
-      elementDef
-    }, children);
+    return React.createElement(PlanElementCellWithTip, { attributes, elementDef }, children);
   } else {
-    return React.createElement(PlanElementCellContainer, {
-      ...attributes
-    }, children);
+    return React.createElement(PlanElementCellContainer, { ...attributes }, children);
   }
 };
 const PlanElement = (props) => {
-  const {
-    orderedDef,
-    displayPlanDefs,
-    displayPlanDefCodesMap,
-    elementTitle,
-    elementLevel,
-    ancestorCollapsed,
-    ancestorCodes,
-    plansModel,
-    $root,
-    $p2r,
-    elementFixedValue,
-    elementOptionsValue,
-    elementNumberValue,
-    elementNumberValueValidator
-  } = props;
+  const { orderedDef, displayPlanDefs, displayPlanDefCodesMap, elementTitle, elementLevel, ancestorCollapsed, ancestorCodes, plansModel, $root, $p2r, elementFixedValue, elementOptionsValue, elementNumberValue, elementNumberValueValidator } = props;
   const forceUpdate = useForceUpdate();
   const model = createPlanModelProxy(plansModel, orderedDef);
-  const $titleWrapped = {
-    $root,
-    $model: model,
-    $p2r,
-    $onValueChange: VUtils.noop,
-    $avs: {}
-  };
+  const $titleWrapped = { $root, $model: model, $p2r, $onValueChange: VUtils.noop, $avs: {} };
   const elementCode = orderedDef.code;
   const elementCodes = ancestorCodes == null ? [elementCode] : [...ancestorCodes, elementCode];
-  return React.createElement(React.Fragment, null, React.createElement(PlanElementColumnHeader, {
-    "data-plan-element-level": elementLevel,
-    "data-collapsed": orderedDef.def.collapsed ?? false,
-    "data-ancestor-collapsed": ancestorCollapsed ?? false
-  }, React.createElement(PlanElementColumnHeaderTitle, null, guardElementTitle({
-    def: elementTitle,
-    orderedDef,
-    elementLevel,
-    forceUpdate
-  }).map((label, index) => {
-    return React.createElement(LabelLike, {
-      key: index,
-      label,
-      "$wrapped": $titleWrapped
-    });
-  }))), displayPlanDefs.map((planDef, displayIndex) => {
-    const odd = displayIndex % 2 === 0;
-    const {
-      code: planCode
-    } = planDef;
-    const planDefCodesMap = displayPlanDefCodesMap[planCode];
-    const elementDef = findPlanElementDef(planDefCodesMap, elementCodes);
-    const key = `${planCode}	${elementCodes.join("	")}`;
-    if (elementDef == null) {
-      return React.createElement(PlanElementCell, {
-        odd,
-        lack: true,
-        ancestorCollapsed: ancestorCollapsed ?? false,
-        key
-      }, React.createElement(index$2.Times, null));
-    } else if (isCategoryPlanElementDef(elementDef)) {
-      return React.createElement(PlanElementCell, {
-        odd,
-        category: true,
-        ancestorCollapsed: ancestorCollapsed ?? false,
-        elementDef,
-        key
-      }, React.createElement(index$2.Check, null));
-    } else {
-      const planData = findSelectedPlan(plansModel, planDef.code);
-      return React.createElement(PlanElementCell, {
-        odd,
-        ancestorCollapsed: ancestorCollapsed ?? false,
-        elementDef,
-        key
-      }, React.createElement(PlanElementValues, {
-        elementDef,
-        elementCodes,
-        planDef,
-        plan: planData,
-        plans: plansModel,
-        "$root": $root,
-        "$p2r": PPUtils.concat($p2r, planCode),
-        elementFixedValue,
-        elementOptionsValue,
-        elementNumberValue,
-        elementNumberValueValidator
-      }));
-    }
-  }), (orderedDef.children ?? []).map((childOrderedDef) => {
-    return React.createElement(PlanElement, {
-      orderedDef: childOrderedDef,
-      ancestorCollapsed: ancestorCollapsed || orderedDef.def.collapsed,
-      displayPlanDefs,
-      displayPlanDefCodesMap,
-      elementTitle,
-      elementLevel: elementLevel + 1,
-      ancestorCodes: elementCodes,
-      plansModel,
-      "$root": $root,
-      "$p2r": $p2r,
-      elementFixedValue,
-      elementOptionsValue,
-      elementNumberValue,
-      elementNumberValueValidator,
-      key: childOrderedDef.code
-    });
-  }));
+  return React.createElement(
+    React.Fragment,
+    null,
+    React.createElement(
+      PlanElementColumnHeader,
+      { "data-plan-element-level": elementLevel, "data-collapsed": orderedDef.def.collapsed ?? false, "data-ancestor-collapsed": ancestorCollapsed ?? false },
+      React.createElement(PlanElementColumnHeaderTitle, null, guardElementTitle({ def: elementTitle, orderedDef, elementLevel, forceUpdate }).map((label, index) => {
+        return React.createElement(LabelLike, { key: index, label, "$wrapped": $titleWrapped });
+      }))
+    ),
+    displayPlanDefs.map((planDef, displayIndex) => {
+      const odd = displayIndex % 2 === 0;
+      const { code: planCode } = planDef;
+      const planDefCodesMap = displayPlanDefCodesMap[planCode];
+      const elementDef = findPlanElementDef(planDefCodesMap, elementCodes);
+      const key = `${planCode}	${elementCodes.join("	")}`;
+      if (elementDef == null) {
+        return React.createElement(
+          PlanElementCell,
+          { odd, lack: true, ancestorCollapsed: ancestorCollapsed ?? false, key },
+          React.createElement(index$2.Times, null)
+        );
+      } else if (isCategoryPlanElementDef(elementDef)) {
+        return React.createElement(
+          PlanElementCell,
+          { odd, category: true, ancestorCollapsed: ancestorCollapsed ?? false, elementDef, key },
+          React.createElement(index$2.Check, null)
+        );
+      } else {
+        const planData = findSelectedPlan(plansModel, planDef.code);
+        return React.createElement(
+          PlanElementCell,
+          { odd, ancestorCollapsed: ancestorCollapsed ?? false, elementDef, key },
+          React.createElement(PlanElementValues, { elementDef, elementCodes, planDef, plan: planData, plans: plansModel, "$root": $root, "$p2r": PPUtils.concat($p2r, planCode), elementFixedValue, elementOptionsValue, elementNumberValue, elementNumberValueValidator })
+        );
+      }
+    }),
+    (orderedDef.children ?? []).map((childOrderedDef) => {
+      return React.createElement(PlanElement, { orderedDef: childOrderedDef, ancestorCollapsed: ancestorCollapsed || orderedDef.def.collapsed, displayPlanDefs, displayPlanDefCodesMap, elementTitle, elementLevel: elementLevel + 1, ancestorCodes: elementCodes, plansModel, "$root": $root, "$p2r": $p2r, elementFixedValue, elementOptionsValue, elementNumberValue, elementNumberValueValidator, key: childOrderedDef.code });
+    })
+  );
 };
 const PlanBodies = (props) => {
-  const {
-    $root,
-    $p2r,
-    displayPlanDefs,
-    orderedDefs,
-    plans: plans2,
-    elementTitle,
-    elementOptionsValue,
-    elementNumberValue,
-    elementNumberValueValidator,
-    elementFixedValue
-  } = props;
+  const { $root, $p2r, displayPlanDefs, orderedDefs, plans: plans2, elementTitle, elementOptionsValue, elementNumberValue, elementNumberValueValidator, elementFixedValue } = props;
   const displayPlanDefCodesMap = displayPlanDefs.reduce((map, def) => {
     map[def.code] = buildPlanOrElementDefCodesMap(() => def.elements ?? []);
     return map;
   }, {});
   return React.createElement(React.Fragment, null, (orderedDefs ?? []).map((orderedDef) => {
-    return React.createElement(PlanElement, {
-      orderedDef,
-      displayPlanDefs,
-      displayPlanDefCodesMap,
-      elementTitle,
-      elementLevel: 0,
-      plansModel: plans2,
-      "$root": $root,
-      "$p2r": $p2r,
-      elementOptionsValue,
-      elementNumberValue,
-      elementNumberValueValidator,
-      elementFixedValue,
-      key: orderedDef.code
-    });
+    return React.createElement(PlanElement, { orderedDef, displayPlanDefs, displayPlanDefCodesMap, elementTitle, elementLevel: 0, plansModel: plans2, "$root": $root, "$p2r": $p2r, elementOptionsValue, elementNumberValue, elementNumberValueValidator, elementFixedValue, key: orderedDef.code });
   }));
 };
 const PlanFooters = (props) => {
-  const {
-    $root,
-    $p2r,
-    displayPlanDefs,
-    plans: plans2,
-    planOperators,
-    buyText,
-    buy
-  } = props;
-  return React.createElement(React.Fragment, null, React.createElement(PlanSelectionBottomLeftCorner, null), displayPlanDefs.map((planDef, displayIndex) => {
-    const planData = findSelectedPlan(plans2, planDef.code);
-    const odd = displayIndex % 2 === 0;
-    const model = createPlanModelProxy(planData, planDef);
-    const $myWrapped = {
-      $root,
-      $model: model,
-      $p2r: PPUtils.concat($p2r, planDef.code),
-      $onValueChange: VUtils.noop,
-      $avs: {}
-    };
-    return React.createElement(PlanFooter, {
-      "data-odd": odd,
-      key: planDef.code
-    }, React.createElement(PlanFooterOperator, null, guardPlanOperators({
-      def: planOperators,
-      planDef,
-      planModel: planData,
-      text: buyText,
-      click: buy
-    }).map((label, index) => {
-      return React.createElement(LabelLike, {
-        key: index,
-        label,
-        "$wrapped": $myWrapped
-      });
-    })));
-  }));
+  const { $root, $p2r, displayPlanDefs, plans: plans2, planOperators, buyText, buy } = props;
+  return React.createElement(
+    React.Fragment,
+    null,
+    React.createElement(PlanSelectionBottomLeftCorner, null),
+    displayPlanDefs.map((planDef, displayIndex) => {
+      const planData = findSelectedPlan(plans2, planDef.code);
+      const odd = displayIndex % 2 === 0;
+      const model = createPlanModelProxy(planData, planDef);
+      const $myWrapped = {
+        $root,
+        $model: model,
+        $p2r: PPUtils.concat($p2r, planDef.code),
+        $onValueChange: VUtils.noop,
+        $avs: {}
+      };
+      return React.createElement(
+        PlanFooter,
+        { "data-odd": odd, key: planDef.code },
+        React.createElement(PlanFooterOperator, null, guardPlanOperators({
+          def: planOperators,
+          planDef,
+          planModel: planData,
+          text: buyText,
+          click: buy
+        }).map((label, index) => {
+          return React.createElement(LabelLike, { key: index, label, "$wrapped": $myWrapped });
+        }))
+      );
+    })
+  );
 };
 const InternalPlanSelection = (props) => {
-  const {
-    $pp,
-    $wrapped,
-    columns = 3,
-    columnWidth,
-    lineHeaderWidth,
-    maxHeight,
-    currencySymbol,
-    premiumDescription,
-    buyText,
-    buy,
-    defs,
-    valuesInit,
-    valuesClear,
-    planTitle,
-    planSubTitle,
-    elementTitle,
-    elementFixedValue,
-    elementOptionsValue,
-    elementNumberValue,
-    elementNumberValueValidator,
-    planOperators,
-    calculate,
-    calculationDelay = 1,
-    ...rest
-  } = props;
-  const {
-    $root,
-    $model,
-    $p2r,
-    $avs: {
-      $disabled,
-      $visible
-    }
-  } = $wrapped;
-  const [state] = reactExports.useState({
-    marker: redressPlanMarker(props)
-  });
+  const { $pp, $wrapped, columns = 3, columnWidth, lineHeaderWidth, maxHeight, currencySymbol, premiumDescription, buyText, buy, defs, valuesInit, valuesClear, planTitle, planSubTitle, elementTitle, elementFixedValue, elementOptionsValue, elementNumberValue, elementNumberValueValidator, planOperators, calculate, calculationDelay = 1, ...rest } = props;
+  const { $root, $model, $p2r, $avs: { $disabled, $visible } } = $wrapped;
+  const [state] = reactExports.useState({ marker: redressPlanMarker(props) });
   const layout = useLayout(state.marker, defs, $root, $model, valuesInit, valuesClear, columns, columnWidth, lineHeaderWidth);
   if (!layout.initialized) {
     return null;
@@ -2019,54 +1488,25 @@ const InternalPlanSelection = (props) => {
     MUtils.setValue($wrapped.$model, $pp, plansData);
   }
   const $p2rOfPlans = PPUtils.concat($p2r, $pp);
-  return React.createElement(React.Fragment, null, React.createElement(PlanSelectionValueHandler, {
-    calculate,
-    calculationDelay
-  }), React.createElement(APlanSelection, {
-    ...rest,
-    "data-disabled": $disabled,
-    "data-visible": $visible,
-    columnCount: layout.computedColumnCount,
-    computedColumnWidth: layout.computedColumnWidth,
-    computedLineHeaderWidth: layout.computedLineHeaderWidth,
-    maxHeight,
-    id: PPUtils.asId(PPUtils.absolute($p2r, $pp), props.id)
-  }, React.createElement(PlanHeaders, {
-    "$root": $root,
-    "$p2r": $p2rOfPlans,
-    displayPlanDefs: layout.displayPlanDefs,
-    plans: plansData,
-    planTitle,
-    planSubTitle,
-    currencySymbol,
-    premiumDescription,
-    pageCount: layout.pageCount,
-    pageNumber: layout.pageNumber
-  }), React.createElement(PlanBodies, {
-    "$root": $root,
-    "$p2r": $p2rOfPlans,
-    displayPlanDefs: layout.displayPlanDefs,
-    orderedDefs: layout.orderedDefs,
-    plans: plansData,
-    elementTitle,
-    elementOptionsValue,
-    elementNumberValue,
-    elementNumberValueValidator,
-    elementFixedValue
-  }), React.createElement(PlanFooters, {
-    "$root": $root,
-    "$p2r": $p2rOfPlans,
-    displayPlanDefs: layout.displayPlanDefs,
-    plans: plansData,
-    planOperators,
-    buyText,
-    buy
-  })));
+  return React.createElement(
+    React.Fragment,
+    null,
+    React.createElement(PlanSelectionValueHandler, { calculate, calculationDelay }),
+    React.createElement(
+      APlanSelection,
+      { ...rest, "data-disabled": $disabled, "data-visible": $visible, columnCount: layout.computedColumnCount, computedColumnWidth: layout.computedColumnWidth, computedLineHeaderWidth: layout.computedLineHeaderWidth, maxHeight, id: PPUtils.asId(PPUtils.absolute($p2r, $pp), props.id) },
+      React.createElement(PlanHeaders, { "$root": $root, "$p2r": $p2rOfPlans, displayPlanDefs: layout.displayPlanDefs, plans: plansData, planTitle, planSubTitle, currencySymbol, premiumDescription, pageCount: layout.pageCount, pageNumber: layout.pageNumber }),
+      React.createElement(PlanBodies, { "$root": $root, "$p2r": $p2rOfPlans, displayPlanDefs: layout.displayPlanDefs, orderedDefs: layout.orderedDefs, plans: plansData, elementTitle, elementOptionsValue, elementNumberValue, elementNumberValueValidator, elementFixedValue }),
+      React.createElement(PlanFooters, { "$root": $root, "$p2r": $p2rOfPlans, displayPlanDefs: layout.displayPlanDefs, plans: plansData, planOperators, buyText, buy })
+    )
+  );
 };
 const PlanSelection = (props) => {
-  return React.createElement(PlanSelectionEventBusProvider, null, React.createElement(InternalPlanSelection, {
-    ...props
-  }));
+  return React.createElement(
+    PlanSelectionEventBusProvider,
+    null,
+    React.createElement(InternalPlanSelection, { ...props })
+  );
 };
 const PlanSelectionDefsBuild = index$1.createAsyncSnippetBuild("defs", ["options"]);
 const PlanSelectionValuesInitBuild = index$1.createAsyncSnippetBuild("valuesInit", ["options"]);
@@ -2088,17 +1528,25 @@ class AbstractPlanSelectionTranslator extends index$1.SpecificWidgetTranslator {
     return false;
   }
   getAttributeValueBuilders() {
-    return [PlanSelectionDefsBuild, PlanSelectionValuesInitBuild, PlanSelectionValuesClearBuild, PlanSelectionTitleBuild, PlanSelectionSubTitleBuild, PlanSelectionElementTitleBuild, PlanSelectionElementFixedValueBuild, PlanSelectionElementOptionsValueBuild, PlanSelectionElementNumberValueBuild, PlanSelectionElementNumberValueValidatorBuild, PlanSelectionPlanOperatorsBuild, PlanSelectionCalculateBuild];
+    return [
+      PlanSelectionDefsBuild,
+      PlanSelectionValuesInitBuild,
+      PlanSelectionValuesClearBuild,
+      PlanSelectionTitleBuild,
+      PlanSelectionSubTitleBuild,
+      PlanSelectionElementTitleBuild,
+      PlanSelectionElementFixedValueBuild,
+      PlanSelectionElementOptionsValueBuild,
+      PlanSelectionElementNumberValueBuild,
+      PlanSelectionElementNumberValueValidatorBuild,
+      PlanSelectionPlanOperatorsBuild,
+      PlanSelectionCalculateBuild
+    ];
   }
 }
 const registerPlanSelect = (widgetHelper, widgetType) => {
   widgetType = VUtils.isBlank(widgetType) ? "PlanSelect" : widgetType;
-  registerWidget({
-    key: widgetType,
-    JSX: PlanSelection,
-    container: false,
-    array: false
-  });
+  registerWidget({ key: widgetType, JSX: PlanSelection, container: false, array: false });
   const TranslatorClass = class extends AbstractPlanSelectionTranslator {
     getSupportedType() {
       return widgetType;
@@ -2108,10 +1556,7 @@ const registerPlanSelect = (widgetHelper, widgetType) => {
   repo.register(new TranslatorClass(repo));
 };
 const CustomEventHandler = () => {
-  const {
-    on,
-    off
-  } = useGlobalEventBus();
+  const { on, off } = useGlobalEventBus();
   reactExports.useEffect(() => {
     const onCustomEvent = (key, prefix, clipped, _models) => {
       if (prefix !== GlobalEventPrefix.CUSTOM) {
@@ -2125,55 +1570,37 @@ const CustomEventHandler = () => {
       off && off(GlobalEventTypes.CUSTOM_EVENT, onCustomEvent);
     };
   }, [on, off]);
-  return /* @__PURE__ */ jsx(reactExports.Fragment, {});
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(reactExports.Fragment, {});
 };
 const useDemoMarkdown = (markdown2) => {
   const [state, setState] = reactExports.useState(() => {
     const def = parseDoc(markdown2).node;
-    return {
-      def,
-      markdown: markdown2
-    };
+    return { def, markdown: markdown2 };
   });
   reactExports.useEffect(() => {
     if (markdown2 === state.markdown) {
       return;
     }
-    setState({
-      def: parseDoc(markdown2).node,
-      markdown: markdown2
-    });
+    setState({ def: parseDoc(markdown2).node, markdown: markdown2 });
   }, [markdown2, state.markdown]);
   return state.def;
 };
 const markdown$1 = "# Page:: Demo Dialog\n\n- Label::Property A::propA\n	- valueToLabel: `'This is property \"A\".'` \n";
-const DEFAULT_STYLES = {
-  width: "80vw",
-  height: "80vh",
-  margin: "10vh auto"
-};
+const DEFAULT_STYLES = { width: "80vw", height: "80vh", margin: "10vh auto" };
 const N2DemoDialogHandler = () => {
   const def = useDemoMarkdown(markdown$1);
-  const {
-    on,
-    off
-  } = useGlobalEventBus();
-  const {
-    show: showAlert
-  } = useAlert();
-  const {
-    show: showDialog,
-    hide: hideDialog
-  } = useDialog();
+  const { on, off } = useGlobalEventBus();
+  const { show: showAlert } = useAlert();
+  const { show: showDialog, hide: hideDialog } = useDialog();
   reactExports.useEffect(() => {
     const onCustomEvent = async (key, prefix, clipped, models) => {
       if (prefix === GlobalEventPrefix.DIALOG) {
         const dialogKey = clipped.trim();
         if (VUtils.isNotEmpty(dialogKey)) {
-          showDialog(/* @__PURE__ */ jsxs(Fragment, { children: [
-            /* @__PURE__ */ jsx(DialogHeader, { children: /* @__PURE__ */ jsx(DialogTitle, { children: "This is a demo dialog." }) }),
-            /* @__PURE__ */ jsx(DialogBody, { children: /* @__PURE__ */ jsx(StandaloneRoot, { ...def, $root: models == null ? void 0 : models.root }) }),
-            /* @__PURE__ */ jsx(DialogFooter, { children: /* @__PURE__ */ jsx(UnwrappedButton, { onClick: () => hideDialog(), children: "Close" }) })
+          showDialog(/* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx(DialogHeader, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(DialogTitle, { children: "This is a demo dialog." }) }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx(DialogBody, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(StandaloneRoot, { ...def, $root: models == null ? void 0 : models.root }) }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx(DialogFooter, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(UnwrappedButton, { onClick: () => hideDialog(), children: "Close" }) })
           ] }), DEFAULT_STYLES);
         } else {
           console.log(`Custom event[key=${key}] is ignored since no dialog key detected.`);
@@ -2187,7 +1614,7 @@ const N2DemoDialogHandler = () => {
       off(GlobalEventTypes.CUSTOM_EVENT, onCustomEvent);
     };
   }, [on, off, showAlert, showDialog, hideDialog, def]);
-  return /* @__PURE__ */ jsx(reactExports.Fragment, {});
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(reactExports.Fragment, {});
 };
 const plans = {
   plan1: {
@@ -2223,22 +1650,8 @@ const ThaiPlanSelection = () => {
   const def = useDemoMarkdown(markdown);
   const getDynamicOptions = reactExports.useRef(/* @__PURE__ */ (() => {
     let times = 0;
-    const options1 = [{
-      value: 9e5
-    }, {
-      value: 95e4
-    }, {
-      value: 1e6
-    }];
-    const options2 = [{
-      value: 85e4
-    }, {
-      value: 9e5
-    }, {
-      value: 95e4
-    }, {
-      value: 1e6
-    }];
+    const options1 = [{ value: 9e5 }, { value: 95e4 }, { value: 1e6 }];
+    const options2 = [{ value: 85e4 }, { value: 9e5 }, { value: 95e4 }, { value: 1e6 }];
     return () => {
       if (times === 0) {
         times = 1;
@@ -2250,240 +1663,267 @@ const ThaiPlanSelection = () => {
   })());
   const externalDefs = {
     defs: async () => {
-      return [{
-        code: "plan1",
-        name: "Standard Plan #1",
-        elements: [{
-          code: "V",
-          name: "Voluntary",
-          type: PlanElementType.CATEGORY,
-          collapsed: true,
-          children: [{
-            code: "ODFTD",
-            name: "Own Damage & Fire & Theft Deductible",
-            type: PlanElementType.COVERAGE,
-            tip: {
-              body: "Hello, I am a coverage, code is ODFTD."
+      return [
+        {
+          code: "plan1",
+          name: "Standard Plan #1",
+          elements: [
+            {
+              code: "V",
+              name: "Voluntary",
+              type: PlanElementType.CATEGORY,
+              collapsed: true,
+              children: [
+                {
+                  code: "ODFTD",
+                  name: "Own Damage & Fire & Theft Deductible",
+                  type: PlanElementType.COVERAGE,
+                  tip: {
+                    body: "Hello, I am a coverage, code is ODFTD."
+                  },
+                  values: [
+                    {
+                      code: "si",
+                      label: "Sum Insured",
+                      defaultValue: 95e4,
+                      options: getDynamicOptions.current(),
+                      editType: PlanElementValueEditType.OPTIONS
+                    },
+                    {
+                      code: "limit",
+                      label: "Limit",
+                      options: [{ value: 2e5 }, { value: 3e5 }, { value: 5e5 }],
+                      editType: PlanElementValueEditType.OPTIONS,
+                      unit: "Per Accident"
+                    }
+                  ]
+                },
+                {
+                  code: "FT",
+                  name: "Fire & Theft",
+                  type: PlanElementType.COVERAGE,
+                  values: [
+                    {
+                      code: "si",
+                      label: "Sum Insured",
+                      editType: PlanElementValueEditType.NUMBER,
+                      min: 1e3,
+                      max: 5e3,
+                      step: 1e3
+                    }
+                  ]
+                },
+                {
+                  code: "TPLBI",
+                  name: "Third Party Liability - Bodily Injury",
+                  type: PlanElementType.COVERAGE,
+                  values: [
+                    {
+                      code: "si",
+                      label: "Sum Insured",
+                      defaultValue: 5e4,
+                      editType: PlanElementValueEditType.NUMBER
+                    },
+                    {
+                      code: "limit1",
+                      label: "Limit",
+                      defaultValue: 1e3,
+                      editType: PlanElementValueEditType.NUMBER,
+                      max: 5e3,
+                      unit: "Per Accident"
+                    },
+                    {
+                      code: "limit2",
+                      label: "Limit",
+                      defaultValue: 5e3,
+                      editType: PlanElementValueEditType.NUMBER,
+                      min: 5e3,
+                      step: 1e3,
+                      unit: "Per Person"
+                    }
+                  ]
+                },
+                {
+                  code: "TPLPDD",
+                  name: "Third Party Liability - Property Damage Deductible",
+                  type: PlanElementType.COVERAGE
+                }
+              ]
             },
-            values: [{
-              code: "si",
-              label: "Sum Insured",
-              defaultValue: 95e4,
-              options: getDynamicOptions.current(),
-              editType: PlanElementValueEditType.OPTIONS
-            }, {
-              code: "limit",
-              label: "Limit",
-              options: [{
-                value: 2e5
-              }, {
-                value: 3e5
-              }, {
-                value: 5e5
-              }],
-              editType: PlanElementValueEditType.OPTIONS,
-              unit: "Per Accident"
-            }]
-          }, {
-            code: "FT",
-            name: "Fire & Theft",
-            type: PlanElementType.COVERAGE,
-            values: [{
-              code: "si",
-              label: "Sum Insured",
-              editType: PlanElementValueEditType.NUMBER,
-              min: 1e3,
-              max: 5e3,
-              step: 1e3
-            }]
-          }, {
-            code: "TPLBI",
-            name: "Third Party Liability - Bodily Injury",
-            type: PlanElementType.COVERAGE,
-            values: [{
-              code: "si",
-              label: "Sum Insured",
-              defaultValue: 5e4,
-              editType: PlanElementValueEditType.NUMBER
-            }, {
-              code: "limit1",
-              label: "Limit",
-              defaultValue: 1e3,
-              editType: PlanElementValueEditType.NUMBER,
-              max: 5e3,
-              unit: "Per Accident"
-            }, {
-              code: "limit2",
-              label: "Limit",
-              defaultValue: 5e3,
-              editType: PlanElementValueEditType.NUMBER,
-              min: 5e3,
-              step: 1e3,
-              unit: "Per Person"
-            }]
-          }, {
-            code: "TPLPDD",
-            name: "Third Party Liability - Property Damage Deductible",
-            type: PlanElementType.COVERAGE
-          }]
-        }, {
-          code: "PADDD",
-          name: "Personal Accident - Death & Disability for Driver",
-          collapsed: false,
-          type: PlanElementType.COVERAGE,
-          values: [{
-            code: "si",
-            label: "Sum Insured",
-            defaultValue: 5e4,
-            editType: PlanElementValueEditType.NUMBER
-          }],
-          children: [{
-            code: "PADDD-1",
-            name: "Personal Accident - Death & Disability for Driver #1",
-            type: PlanElementType.BENEFIT,
-            values: [{
-              code: "si",
-              label: "Sum Insured",
-              defaultValue: 5e4,
-              editType: PlanElementValueEditType.NUMBER
-            }]
-          }]
-        }, {
-          code: "PADDP",
-          name: "Personal Accident - Death & Disability for Passenger",
-          type: PlanElementType.COVERAGE
-        }, {
-          code: "PATDD",
-          name: "Personal Accident - Temporary Disability for Driver",
-          type: PlanElementType.COVERAGE
-        }, {
-          code: "PATDP",
-          name: "Personal Accident - Temporary Disability for Passenger",
-          type: PlanElementType.COVERAGE
-        }, {
-          code: "ME",
-          name: "Medical Expense",
-          type: PlanElementType.COVERAGE
-        }, {
-          code: "BBCC",
-          name: "Bail Bond in Criminal Cases",
-          type: PlanElementType.COVERAGE
-        }, {
-          code: "VC",
-          name: "Vehicle Collision",
-          type: PlanElementType.COVERAGE
-        }, {
-          code: "SC",
-          name: "Special Cews",
-          type: PlanElementType.CATEGORY,
-          collapsed: true,
-          children: [{
-            code: "ND",
-            name: "Natural Disaster",
-            type: PlanElementType.COVERAGE,
-            values: [{
-              code: "si",
-              label: "Sum Insured",
-              defaultValue: 5e6,
-              editType: PlanElementValueEditType.FIXED
-            }, {
-              code: "limit",
-              label: "Limit",
-              defaultValue: 1e6,
-              editType: PlanElementValueEditType.FIXED,
-              unit: "Per Accident"
-            }],
-            displayOrder: 200
-          }]
-        }]
-      }, {
-        code: "plan2",
-        name: "Standard Plan #2",
-        elements: [{
-          code: "V",
-          name: "Voluntary",
-          type: PlanElementType.CATEGORY,
-          children: [{
-            code: "ODFTD",
-            name: "Own Damage & Fire & Theft Deductible",
-            type: PlanElementType.COVERAGE,
-            values: [{
-              code: "si",
-              label: "Sum Insured",
-              defaultValue: 85e4,
-              options: [{
-                value: 8e5
-              }, {
-                value: 85e4
-              }, {
-                value: 9e5
-              }],
-              editType: PlanElementValueEditType.OPTIONS
-            }, {
-              code: "limit",
-              label: "Limit",
-              options: [{
-                value: 2e5
-              }, {
-                value: 3e5
-              }, {
-                value: 5e5
-              }],
-              editType: PlanElementValueEditType.OPTIONS,
-              unit: "Per Accident"
-            }]
-          }]
-        }, {
-          code: "SC",
-          name: "Special Cews",
-          type: PlanElementType.CATEGORY,
-          children: [{
-            code: "F",
-            name: "Flood",
-            type: PlanElementType.COVERAGE,
-            pinned: false,
-            displayOrder: 100
-          }]
-        }]
-      }, {
-        code: "plan3",
-        name: "Standard Plan #3",
-        elements: []
-      }, {
-        code: "plan4",
-        name: "Standard Plan #4",
-        elements: []
-      }, {
-        code: "plan5",
-        name: "Standard Plan #5",
-        elements: []
-      }, {
-        code: "plan6",
-        name: "Standard Plan #6",
-        elements: []
-      }, {
-        code: "plan7",
-        name: "Standard Plan #7",
-        elements: []
-      }];
+            {
+              code: "PADDD",
+              name: "Personal Accident - Death & Disability for Driver",
+              collapsed: false,
+              type: PlanElementType.COVERAGE,
+              values: [
+                {
+                  code: "si",
+                  label: "Sum Insured",
+                  defaultValue: 5e4,
+                  editType: PlanElementValueEditType.NUMBER
+                }
+              ],
+              children: [
+                {
+                  code: "PADDD-1",
+                  name: "Personal Accident - Death & Disability for Driver #1",
+                  type: PlanElementType.BENEFIT,
+                  values: [
+                    {
+                      code: "si",
+                      label: "Sum Insured",
+                      defaultValue: 5e4,
+                      editType: PlanElementValueEditType.NUMBER
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              code: "PADDP",
+              name: "Personal Accident - Death & Disability for Passenger",
+              type: PlanElementType.COVERAGE
+            },
+            {
+              code: "PATDD",
+              name: "Personal Accident - Temporary Disability for Driver",
+              type: PlanElementType.COVERAGE
+            },
+            {
+              code: "PATDP",
+              name: "Personal Accident - Temporary Disability for Passenger",
+              type: PlanElementType.COVERAGE
+            },
+            {
+              code: "ME",
+              name: "Medical Expense",
+              type: PlanElementType.COVERAGE
+            },
+            {
+              code: "BBCC",
+              name: "Bail Bond in Criminal Cases",
+              type: PlanElementType.COVERAGE
+            },
+            {
+              code: "VC",
+              name: "Vehicle Collision",
+              type: PlanElementType.COVERAGE
+            },
+            {
+              code: "SC",
+              name: "Special Cews",
+              type: PlanElementType.CATEGORY,
+              collapsed: true,
+              children: [
+                {
+                  code: "ND",
+                  name: "Natural Disaster",
+                  type: PlanElementType.COVERAGE,
+                  values: [
+                    {
+                      code: "si",
+                      label: "Sum Insured",
+                      defaultValue: 5e6,
+                      editType: PlanElementValueEditType.FIXED
+                    },
+                    {
+                      code: "limit",
+                      label: "Limit",
+                      defaultValue: 1e6,
+                      editType: PlanElementValueEditType.FIXED,
+                      unit: "Per Accident"
+                    }
+                  ],
+                  displayOrder: 200
+                }
+              ]
+            }
+          ]
+        },
+        {
+          code: "plan2",
+          name: "Standard Plan #2",
+          elements: [
+            {
+              code: "V",
+              name: "Voluntary",
+              type: PlanElementType.CATEGORY,
+              children: [
+                {
+                  code: "ODFTD",
+                  name: "Own Damage & Fire & Theft Deductible",
+                  type: PlanElementType.COVERAGE,
+                  values: [
+                    {
+                      code: "si",
+                      label: "Sum Insured",
+                      defaultValue: 85e4,
+                      options: [{ value: 8e5 }, { value: 85e4 }, { value: 9e5 }],
+                      editType: PlanElementValueEditType.OPTIONS
+                    },
+                    {
+                      code: "limit",
+                      label: "Limit",
+                      options: [{ value: 2e5 }, { value: 3e5 }, { value: 5e5 }],
+                      editType: PlanElementValueEditType.OPTIONS,
+                      unit: "Per Accident"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              code: "SC",
+              name: "Special Cews",
+              type: PlanElementType.CATEGORY,
+              children: [
+                {
+                  code: "F",
+                  name: "Flood",
+                  type: PlanElementType.COVERAGE,
+                  pinned: false,
+                  displayOrder: 100
+                }
+              ]
+            }
+          ]
+        },
+        {
+          code: "plan3",
+          name: "Standard Plan #3",
+          elements: []
+        },
+        {
+          code: "plan4",
+          name: "Standard Plan #4",
+          elements: []
+        },
+        {
+          code: "plan5",
+          name: "Standard Plan #5",
+          elements: []
+        },
+        {
+          code: "plan6",
+          name: "Standard Plan #6",
+          elements: []
+        },
+        {
+          code: "plan7",
+          name: "Standard Plan #7",
+          elements: []
+        }
+      ];
     },
     buy: (options) => {
       console.log(options);
       console.log(options.model.$revoke());
     },
     calculate: async (event) => {
-      const {
-        changes
-      } = event;
+      const { changes } = event;
       [...new Set(changes.map((change) => change.planDef.code))].map((code) => {
-        return {
-          code,
-          premium: Math.ceil(5e4 + Math.random() * 1e4)
-        };
-      }).forEach(({
-        code,
-        premium
-      }) => {
+        return { code, premium: Math.ceil(5e4 + Math.random() * 1e4) };
+      }).forEach(({ code, premium }) => {
         MUtils.setValue(DemoData.plans, `${code}.premium.due`, premium);
       });
     },
@@ -2494,10 +1934,10 @@ const ThaiPlanSelection = () => {
       });
     }
   };
-  return /* @__PURE__ */ jsxs(GlobalRoot, { children: [
-    /* @__PURE__ */ jsx(CustomEventHandler, {}),
-    /* @__PURE__ */ jsx(N2DemoDialogHandler, {}),
-    /* @__PURE__ */ jsx(StandaloneRoot, { ...def, $root: DemoData, externalDefs })
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs(GlobalRoot, { children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx(CustomEventHandler, {}),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(N2DemoDialogHandler, {}),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(StandaloneRoot, { ...def, $root: DemoData, externalDefs })
   ] });
 };
 const ThaiPlanSelectionData = DemoData;

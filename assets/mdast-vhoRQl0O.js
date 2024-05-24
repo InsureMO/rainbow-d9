@@ -1,5 +1,5 @@
-import { p as postprocess, a as parse, b as preprocess, n as normalizeIdentifier, d as decodeString, c as decodeNumericCharacterReference, m as matters, e as normalizeUri, u as unicodeWhitespace, f as unicodePunctuation } from "./micromark-Cr-GrtcL.js";
-import { y as decodeNamedCharacterReference, z as markdownTable, A as trimLines, B as ccount } from "./vendor-Ih3CtHGV.js";
+import { p as postprocess, a as parse, b as preprocess, n as normalizeIdentifier, d as decodeString, c as decodeNumericCharacterReference, m as matters, e as normalizeUri, u as unicodeWhitespace, f as unicodePunctuation } from "./micromark-ezE51Whj.js";
+import { d as decodeNamedCharacterReference, m as markdownTable, t as trimLines, c as ccount } from "./vendor-lWAx8mHf.js";
 import { s as stringifyPosition, p as pointStart, a as pointEnd, v as visit, g as generated, b as position, c as convert, d as visitParents } from "./unist-5yxlKLF4.js";
 const emptyOptions = {};
 function toString(value2, options) {
