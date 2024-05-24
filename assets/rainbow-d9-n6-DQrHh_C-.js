@@ -4,11 +4,11 @@ var __publicField = (obj, key, value) => {
   __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
   return value;
 };
-import { f as CssConstants, C as CssVars, D as DOM_KEY_WIDGET, g as UnwrappedCaption, b as useGlobalHandlers, I as IntlLabel } from "./rainbow-d9-n2-UDT0tXmP.js";
-import { a as color, R as React, r as reactExports, O as jsYaml, P as DiagramModel, Q as CanvasWidget, S as NodeModel, U as createEngine, X as PortModel, Y as PortModelAlignment, Z as DefaultLinkModel, _ as AbstractModelFactory, $ as AbstractReactFactory, a0 as PortWidget } from "./vendor-lWAx8mHf.js";
-import { V as VUtils, r as registerWidget, g as useCreateEventBus, M as MUtils, P as PPUtils } from "./rainbow-d9-n1-w3ml04nl.js";
-import { q as qe } from "./styled-components-uSKKRtA-.js";
-import { i as index$1 } from "./rainbow-d9-n3-wXfS8j79.js";
+import { f as CssConstants, C as CssVars, D as DOM_KEY_WIDGET, g as UnwrappedCaption, b as useGlobalHandlers, I as IntlLabel } from "./rainbow-d9-n2-ZijmlPcS.js";
+import { a as color, L as jsYaml } from "./vendor-IJfZytkt.js";
+import { q as qe, R as React, r as reactExports, D as DiagramModel, C as CanvasWidget, N as NodeModel, c as createEngine, P as PortModel, a as PortModelAlignment, b as DefaultLinkModel, A as AbstractModelFactory, d as AbstractReactFactory, e as PortWidget } from "./react-base-8dmOZIh-.js";
+import { V as VUtils, r as registerWidget, g as useCreateEventBus, M as MUtils, P as PPUtils } from "./rainbow-d9-n1-XAGjs1Nc.js";
+import { i as index$1 } from "./rainbow-d9-n3-N187UjDI.js";
 const EDITOR_BACKGROUND_BLOCK_SIZE = "var(--o23-playground-editor-background-block-size, 48px)";
 const EDITOR_BACKGROUND_LINE_COLOR = `var(--o23-playground-editor-background-line-color, ${color(CssConstants.PRIMARY_COLOR).alpha(0.08)})`;
 const NODE_START_COLOR = "#ffb56b";
