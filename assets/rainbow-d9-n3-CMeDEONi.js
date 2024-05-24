@@ -4,10 +4,10 @@ var __publicField = (obj, key, value) => {
   __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
   return value;
 };
-import { c as createLogger, N as NUtils, V as VUtils, k as MonitorNodeAttributes, l as Reaction, E as ExternalDefIndicator, P as PPUtils } from "./rainbow-d9-n1-gbyGzXGq.js";
-import { O as OptionItemSort, R as REACTION_REFRESH_OPTIONS, c as GlobalEventPrefix } from "./rainbow-d9-n2-g40jCJIK.js";
-import { f as fromMarkdown, g as gfmTableFromMarkdown, a as gfmStrikethroughFromMarkdown, b as gfmFootnoteFromMarkdown, c as gfmTaskListItemFromMarkdown, d as frontmatterFromMarkdown } from "./mdast-g1iQkPhR.js";
-import { g as gfmTable, h as gfmStrikethrough, i as gfmFootnote, j as gfmTaskListItem, k as frontmatter } from "./micromark-9GkUWrcU.js";
+import { c as createLogger, N as NUtils, V as VUtils, k as MonitorNodeAttributes, l as Reaction, E as ExternalDefIndicator, P as PPUtils } from "./rainbow-d9-n1-CI7XR9B5.js";
+import { O as OptionItemSort, R as REACTION_REFRESH_OPTIONS, c as GlobalEventPrefix } from "./rainbow-d9-n2-k_PX7MjZ.js";
+import { f as fromMarkdown, g as gfmTableFromMarkdown, a as gfmStrikethroughFromMarkdown, b as gfmFootnoteFromMarkdown, c as gfmTaskListItemFromMarkdown, d as frontmatterFromMarkdown } from "./mdast-8s2fRqFI.js";
+import { g as gfmTable, h as gfmStrikethrough, i as gfmFootnote, j as gfmTaskListItem, k as frontmatter } from "./micromark-Cr-GrtcL.js";
 const AsyncFunction = Object.getPrototypeOf(async function() {
 }).constructor;
 var ParsedNodeType;
@@ -84,7 +84,10 @@ const _CodePreparser = class _CodePreparser extends AbstractAstNodePreparser {
     return false;
   }
   parse(node) {
-    return { type: ParsedNodeType.CODE, content: node };
+    return {
+      type: ParsedNodeType.CODE,
+      content: node
+    };
   }
 };
 __publicField(_CodePreparser, "TYPE", "code");
@@ -97,7 +100,10 @@ const _DefinitionPreparser = class _DefinitionPreparser extends AbstractAstNodeP
     return false;
   }
   parse(node) {
-    return { type: ParsedNodeType.DEFINITION, content: node };
+    return {
+      type: ParsedNodeType.DEFINITION,
+      content: node
+    };
   }
 };
 __publicField(_DefinitionPreparser, "TYPE", "definition");
@@ -110,7 +116,10 @@ const _HtmlPreparser = class _HtmlPreparser extends AbstractAstNodePreparser {
     return false;
   }
   parse(node) {
-    return { type: ParsedNodeType.HTML, content: node };
+    return {
+      type: ParsedNodeType.HTML,
+      content: node
+    };
   }
 };
 __publicField(_HtmlPreparser, "TYPE", "html");
@@ -123,7 +132,10 @@ const _ParagraphPreparser = class _ParagraphPreparser extends AbstractAstNodePre
     return false;
   }
   parse(node) {
-    return { type: ParsedNodeType.PARAGRAPH, content: node };
+    return {
+      type: ParsedNodeType.PARAGRAPH,
+      content: node
+    };
   }
 };
 __publicField(_ParagraphPreparser, "TYPE", "paragraph");
@@ -136,7 +148,10 @@ const _TablePreparser = class _TablePreparser extends AbstractAstNodePreparser {
     return false;
   }
   parseCell(node) {
-    return { type: ParsedNodeType.TABLE_CELL, content: node };
+    return {
+      type: ParsedNodeType.TABLE_CELL,
+      content: node
+    };
   }
   parseRow(node) {
     return {
@@ -163,7 +178,10 @@ const _ThematicBreakPreparser = class _ThematicBreakPreparser extends AbstractAs
     return false;
   }
   parse(node) {
-    return { type: ParsedNodeType.THEMATIC_BREAK, content: node };
+    return {
+      type: ParsedNodeType.THEMATIC_BREAK,
+      content: node
+    };
   }
 };
 __publicField(_ThematicBreakPreparser, "TYPE", "thematicBreak");
@@ -173,17 +191,7 @@ const _ListPreparser = class _ListPreparser extends AbstractAstNodePreparser {
     return _ListPreparser.TYPE;
   }
   isChildConcerned(child) {
-    return [
-      _ListPreparser.TYPE,
-      ParagraphPreparser.TYPE,
-      CodePreparser.TYPE,
-      FootnoteDefinitionPreparser.TYPE,
-      ThematicBreakPreparser.TYPE,
-      BlockquotePreparser.TYPE,
-      HtmlPreparser.TYPE,
-      DefinitionPreparser.TYPE,
-      TablePreparser.TYPE
-    ].includes(child.type);
+    return [_ListPreparser.TYPE, ParagraphPreparser.TYPE, CodePreparser.TYPE, FootnoteDefinitionPreparser.TYPE, ThematicBreakPreparser.TYPE, BlockquotePreparser.TYPE, HtmlPreparser.TYPE, DefinitionPreparser.TYPE, TablePreparser.TYPE].includes(child.type);
   }
   parseListItem(listItem) {
     return {
@@ -207,17 +215,7 @@ const _FootnoteDefinitionPreparser = class _FootnoteDefinitionPreparser extends 
     return _FootnoteDefinitionPreparser.TYPE;
   }
   isChildConcerned(child) {
-    return [
-      ListPreparser.TYPE,
-      ParagraphPreparser.TYPE,
-      CodePreparser.TYPE,
-      _FootnoteDefinitionPreparser.TYPE,
-      ThematicBreakPreparser.TYPE,
-      BlockquotePreparser.TYPE,
-      HtmlPreparser.TYPE,
-      DefinitionPreparser.TYPE,
-      TablePreparser.TYPE
-    ].includes(child.type);
+    return [ListPreparser.TYPE, ParagraphPreparser.TYPE, CodePreparser.TYPE, _FootnoteDefinitionPreparser.TYPE, ThematicBreakPreparser.TYPE, BlockquotePreparser.TYPE, HtmlPreparser.TYPE, DefinitionPreparser.TYPE, TablePreparser.TYPE].includes(child.type);
   }
   parse(node) {
     return {
@@ -234,17 +232,7 @@ const _BlockquotePreparser = class _BlockquotePreparser extends AbstractAstNodeP
     return _BlockquotePreparser.TYPE;
   }
   isChildConcerned(child) {
-    return [
-      ListPreparser.TYPE,
-      ParagraphPreparser.TYPE,
-      CodePreparser.TYPE,
-      FootnoteDefinitionPreparser.TYPE,
-      ThematicBreakPreparser.TYPE,
-      _BlockquotePreparser.TYPE,
-      HtmlPreparser.TYPE,
-      DefinitionPreparser.TYPE,
-      TablePreparser.TYPE
-    ].includes(child.type);
+    return [ListPreparser.TYPE, ParagraphPreparser.TYPE, CodePreparser.TYPE, FootnoteDefinitionPreparser.TYPE, ThematicBreakPreparser.TYPE, _BlockquotePreparser.TYPE, HtmlPreparser.TYPE, DefinitionPreparser.TYPE, TablePreparser.TYPE].includes(child.type);
   }
   parse(node) {
     return {
@@ -264,7 +252,10 @@ const _BreakPreparser = class _BreakPreparser extends AbstractAstNodePreparser {
     return false;
   }
   parse(node) {
-    return { type: ParsedNodeType.BREAK, content: node };
+    return {
+      type: ParsedNodeType.BREAK,
+      content: node
+    };
   }
 };
 __publicField(_BreakPreparser, "TYPE", "break");
@@ -277,7 +268,10 @@ const _DeletePreparser = class _DeletePreparser extends AbstractAstNodePreparser
     return false;
   }
   parse(node) {
-    return { type: ParsedNodeType.DELETE, content: node };
+    return {
+      type: ParsedNodeType.DELETE,
+      content: node
+    };
   }
 };
 __publicField(_DeletePreparser, "TYPE", "delete");
@@ -290,7 +284,10 @@ const _EmphasisPreparser = class _EmphasisPreparser extends AbstractAstNodePrepa
     return false;
   }
   parse(node) {
-    return { type: ParsedNodeType.EMPHASIS, content: node };
+    return {
+      type: ParsedNodeType.EMPHASIS,
+      content: node
+    };
   }
 };
 __publicField(_EmphasisPreparser, "TYPE", "emphasis");
@@ -303,7 +300,10 @@ const _FootnotePreparser = class _FootnotePreparser extends AbstractAstNodePrepa
     return false;
   }
   parse(node) {
-    return { type: ParsedNodeType.FOOTNOTE, content: node };
+    return {
+      type: ParsedNodeType.FOOTNOTE,
+      content: node
+    };
   }
 };
 __publicField(_FootnotePreparser, "TYPE", "footnote");
@@ -316,7 +316,10 @@ const _FootnoteReferencePreparser = class _FootnoteReferencePreparser extends Ab
     return false;
   }
   parse(node) {
-    return { type: ParsedNodeType.FOOTNOTE_REFERENCE, content: node };
+    return {
+      type: ParsedNodeType.FOOTNOTE_REFERENCE,
+      content: node
+    };
   }
 };
 __publicField(_FootnoteReferencePreparser, "TYPE", "footnoteReference");
@@ -329,7 +332,11 @@ const _HeadingPreparser = class _HeadingPreparser extends AbstractAstNodePrepars
     return false;
   }
   parse(node) {
-    return { type: ParsedNodeType.HEADING, content: node, children: [] };
+    return {
+      type: ParsedNodeType.HEADING,
+      content: node,
+      children: []
+    };
   }
 };
 __publicField(_HeadingPreparser, "TYPE", "heading");
@@ -342,7 +349,10 @@ const _ImagePreparser = class _ImagePreparser extends AbstractAstNodePreparser {
     return false;
   }
   parse(node) {
-    return { type: ParsedNodeType.IMAGE, content: node };
+    return {
+      type: ParsedNodeType.IMAGE,
+      content: node
+    };
   }
 };
 __publicField(_ImagePreparser, "TYPE", "image");
@@ -355,7 +365,10 @@ const _ImageReferencePreparser = class _ImageReferencePreparser extends Abstract
     return false;
   }
   parse(node) {
-    return { type: ParsedNodeType.IMAGE_REFERENCE, content: node };
+    return {
+      type: ParsedNodeType.IMAGE_REFERENCE,
+      content: node
+    };
   }
 };
 __publicField(_ImageReferencePreparser, "TYPE", "imageReference");
@@ -368,7 +381,10 @@ const _InlineCodePreparser = class _InlineCodePreparser extends AbstractAstNodeP
     return false;
   }
   parse(node) {
-    return { type: ParsedNodeType.INLINE_CODE, content: node };
+    return {
+      type: ParsedNodeType.INLINE_CODE,
+      content: node
+    };
   }
 };
 __publicField(_InlineCodePreparser, "TYPE", "inlineCode");
@@ -381,7 +397,10 @@ const _LinkPreparser = class _LinkPreparser extends AbstractAstNodePreparser {
     return false;
   }
   parse(node) {
-    return { type: ParsedNodeType.LINK, content: node };
+    return {
+      type: ParsedNodeType.LINK,
+      content: node
+    };
   }
 };
 __publicField(_LinkPreparser, "TYPE", "link");
@@ -394,7 +413,10 @@ const _LinkReferencePreparser = class _LinkReferencePreparser extends AbstractAs
     return false;
   }
   parse(node) {
-    return { type: ParsedNodeType.LINK_REFERENCE, content: node };
+    return {
+      type: ParsedNodeType.LINK_REFERENCE,
+      content: node
+    };
   }
 };
 __publicField(_LinkReferencePreparser, "TYPE", "linkReference");
@@ -407,7 +429,10 @@ const _StrongPreparser = class _StrongPreparser extends AbstractAstNodePreparser
     return false;
   }
   parse(node) {
-    return { type: ParsedNodeType.STRONG, content: node };
+    return {
+      type: ParsedNodeType.STRONG,
+      content: node
+    };
   }
 };
 __publicField(_StrongPreparser, "TYPE", "strong");
@@ -420,7 +445,10 @@ const _TextPreparser = class _TextPreparser extends AbstractAstNodePreparser {
     return false;
   }
   parse(node) {
-    return { type: ParsedNodeType.TEXT, content: node };
+    return {
+      type: ParsedNodeType.TEXT,
+      content: node
+    };
   }
 };
 __publicField(_TextPreparser, "TYPE", "text");
@@ -433,7 +461,10 @@ const _YamlPreparser = class _YamlPreparser extends AbstractAstNodePreparser {
     return false;
   }
   parse(node) {
-    return { type: ParsedNodeType.YAML, content: node };
+    return {
+      type: ParsedNodeType.YAML,
+      content: node
+    };
   }
 };
 __publicField(_YamlPreparser, "TYPE", "yaml");
@@ -460,7 +491,9 @@ class AstNodePreparserRepository {
     return (types ?? []).map((type) => this.askPreparser(type)).filter((preparser) => preparser != null);
   }
 }
-const SINGLETON$6 = { repo: void 0 };
+const SINGLETON$6 = {
+  repo: void 0
+};
 const createOrGetPreparserRepositorySingleton = () => {
   if (SINGLETON$6.repo == null) {
     const repo = new AstNodePreparserRepository();
@@ -534,51 +567,18 @@ class DepthFirstVisitor {
 class AstHelper extends AbstractParentPreparser {
   askRoot(content) {
     return fromMarkdown(content ?? "", {
-      extensions: [
-        gfmTable,
-        gfmStrikethrough(),
-        gfmFootnote(),
-        gfmTaskListItem,
-        frontmatter(["yaml", "toml"])
-      ],
-      mdastExtensions: [
-        gfmTableFromMarkdown,
-        gfmStrikethroughFromMarkdown,
-        gfmFootnoteFromMarkdown(),
-        gfmTaskListItemFromMarkdown,
-        frontmatterFromMarkdown(["yaml", "toml"])
-      ]
+      extensions: [gfmTable, gfmStrikethrough(), gfmFootnote(), gfmTaskListItem, frontmatter(["yaml", "toml"])],
+      mdastExtensions: [gfmTableFromMarkdown, gfmStrikethroughFromMarkdown, gfmFootnoteFromMarkdown(), gfmTaskListItemFromMarkdown, frontmatterFromMarkdown(["yaml", "toml"])]
     });
   }
   preparePreparsedTree() {
-    return { ignored: [], headings: [] };
+    return {
+      ignored: [],
+      headings: []
+    };
   }
   isChildConcerned(child) {
-    return [
-      HeadingPreparser.TYPE,
-      ListPreparser.TYPE,
-      ParagraphPreparser.TYPE,
-      CodePreparser.TYPE,
-      TextPreparser.TYPE,
-      EmphasisPreparser.TYPE,
-      StrongPreparser.TYPE,
-      DeletePreparser.TYPE,
-      InlineCodePreparser.TYPE,
-      LinkPreparser.TYPE,
-      LinkReferencePreparser.TYPE,
-      ImagePreparser.TYPE,
-      ImageReferencePreparser.TYPE,
-      FootnotePreparser.TYPE,
-      FootnoteDefinitionPreparser.TYPE,
-      FootnoteReferencePreparser.TYPE,
-      BreakPreparser.TYPE,
-      ThematicBreakPreparser.TYPE,
-      BlockquotePreparser.TYPE,
-      HtmlPreparser.TYPE,
-      DefinitionPreparser.TYPE,
-      YamlPreparser.TYPE,
-      TablePreparser.TYPE
-    ].includes(child.type);
+    return [HeadingPreparser.TYPE, ListPreparser.TYPE, ParagraphPreparser.TYPE, CodePreparser.TYPE, TextPreparser.TYPE, EmphasisPreparser.TYPE, StrongPreparser.TYPE, DeletePreparser.TYPE, InlineCodePreparser.TYPE, LinkPreparser.TYPE, LinkReferencePreparser.TYPE, ImagePreparser.TYPE, ImageReferencePreparser.TYPE, FootnotePreparser.TYPE, FootnoteDefinitionPreparser.TYPE, FootnoteReferencePreparser.TYPE, BreakPreparser.TYPE, ThematicBreakPreparser.TYPE, BlockquotePreparser.TYPE, HtmlPreparser.TYPE, DefinitionPreparser.TYPE, YamlPreparser.TYPE, TablePreparser.TYPE].includes(child.type);
   }
   askAsTree(content) {
     const tree = this.preparePreparsedTree();
@@ -587,7 +587,9 @@ class AstHelper extends AbstractParentPreparser {
     return tree;
   }
 }
-const SINGLETON$5 = { helper: void 0 };
+const SINGLETON$5 = {
+  helper: void 0
+};
 const createOrGetAskHelperSingleton = () => {
   if (SINGLETON$5.helper == null) {
     SINGLETON$5.helper = new AstHelper(createOrGetPreparserRepositorySingleton());
@@ -795,7 +797,10 @@ const _BreakParser = class _BreakParser extends AbstractSemanticNodeParser {
     return _BreakParser.TYPE;
   }
   parsePreparsed(preparsed) {
-    return { type: ParsedNodeType.BREAK, preparsed };
+    return {
+      type: ParsedNodeType.BREAK,
+      preparsed
+    };
   }
 };
 __publicField(_BreakParser, "TYPE", "break");
@@ -945,10 +950,16 @@ const _HeadingParser = class _HeadingParser extends AbstractSemanticNodeWidgetPa
     const str = (title ?? "").trim();
     const matches = this.getTitleFlagMatchers().find((matcher) => str.endsWith(matcher));
     if (matches == null) {
-      return { title, $flag: WidgetFlag.STANDARD };
+      return {
+        title,
+        $flag: WidgetFlag.STANDARD
+      };
     } else {
       const index2 = title.indexOf(matches);
-      return { title: title.substring(0, index2), $flag: this.asWidgetFlag(matches) };
+      return {
+        title: title.substring(0, index2),
+        $flag: this.asWidgetFlag(matches)
+      };
     }
   }
   matchWidget(title) {
@@ -956,33 +967,62 @@ const _HeadingParser = class _HeadingParser extends AbstractSemanticNodeWidgetPa
     const $key = NUtils.generateReactKey();
     if (segments.length === 1) {
       const $wt = segments[0].trim();
-      return { $wt, headline: "", $id: $key, $key };
+      return {
+        $wt,
+        headline: "",
+        $id: $key,
+        $key
+      };
     } else if (segments.length === 3) {
       const $pp = segments[segments.length - 1].trim();
       const $wt = segments[0].trim();
       const headline = segments.slice(1, segments.length - 1).join(this.getWidgetTitleSplitter()).trim();
-      return { $wt, headline: headline.trim(), $pp, $id: $key, $key };
+      return {
+        $wt,
+        headline: headline.trim(),
+        $pp,
+        $id: $key,
+        $key
+      };
     } else if (segments.length > 3) {
       const $id = segments[segments.length - 1].trim();
       const $pp = segments[segments.length - 2].trim();
       const $wt = segments[0].trim();
       const headline = segments.slice(1, segments.length - 2).join(this.getWidgetTitleSplitter()).trim();
-      return { $wt, headline: headline.trim(), $pp, $id, $key };
+      return {
+        $wt,
+        headline: headline.trim(),
+        $pp,
+        $id,
+        $key
+      };
     } else {
       const $wt = segments[0].trim();
       const headline = segments[1].trim();
-      return { $wt, headline: VUtils.isBlank(headline) ? void 0 : headline.trim(), $id: $key, $key };
+      return {
+        $wt,
+        headline: VUtils.isBlank(headline) ? void 0 : headline.trim(),
+        $id: $key,
+        $key
+      };
     }
   }
   parsePreparsed(preparsed) {
-    const parsed = { type: ParsedNodeType.HEADING, kind: ParsedHeadingKind.IDENTIFIED, preparsed };
+    const parsed = {
+      type: ParsedNodeType.HEADING,
+      kind: ParsedHeadingKind.IDENTIFIED,
+      preparsed
+    };
     const title = this.askTitle(this.parseManyNative(preparsed.content.children ?? []));
     if (title === false) {
       return this.asReserved(parsed);
     } else if (VUtils.isBlank(title)) {
       return this.asReserved(parsed);
     }
-    const { title: titleStr, $flag } = this.parseTitle(title);
+    const {
+      title: titleStr,
+      $flag
+    } = this.parseTitle(title);
     const widget = this.matchWidget(titleStr);
     if (VUtils.isBlank(widget.$wt)) {
       return this.asReserved(parsed);
@@ -1003,7 +1043,11 @@ const _HtmlParser = class _HtmlParser extends AbstractSemanticNodeParser {
     return _HtmlParser.TYPE;
   }
   parsePreparsed(preparsed) {
-    return { type: ParsedNodeType.HTML, preparsed, text: preparsed.content.value ?? "" };
+    return {
+      type: ParsedNodeType.HTML,
+      preparsed,
+      text: preparsed.content.value ?? ""
+    };
   }
 };
 __publicField(_HtmlParser, "TYPE", "html");
@@ -1046,7 +1090,11 @@ const _InlineCodeParser = class _InlineCodeParser extends AbstractSemanticNodePa
     return _InlineCodeParser.TYPE;
   }
   parsePreparsed(preparsed) {
-    return { type: ParsedNodeType.INLINE_CODE, preparsed, text: preparsed.content.value ?? "" };
+    return {
+      type: ParsedNodeType.INLINE_CODE,
+      preparsed,
+      text: preparsed.content.value ?? ""
+    };
   }
 };
 __publicField(_InlineCodeParser, "TYPE", "inlineCode");
@@ -1120,19 +1168,7 @@ const _ListParser = class _ListParser extends AbstractSemanticNodeWidgetParser {
             }
           }
           break;
-        case [
-          ParsedNodeType.EMPHASIS,
-          ParsedNodeType.STRONG,
-          ParsedNodeType.DELETE,
-          ParsedNodeType.HTML,
-          ParsedNodeType.INLINE_CODE,
-          ParsedNodeType.IMAGE,
-          ParsedNodeType.IMAGE_REFERENCE,
-          ParsedNodeType.FOOTNOTE,
-          ParsedNodeType.FOOTNOTE_REFERENCE,
-          ParsedNodeType.LINK,
-          ParsedNodeType.LINK_REFERENCE
-        ].includes(phrasing.type):
+        case [ParsedNodeType.EMPHASIS, ParsedNodeType.STRONG, ParsedNodeType.DELETE, ParsedNodeType.HTML, ParsedNodeType.INLINE_CODE, ParsedNodeType.IMAGE, ParsedNodeType.IMAGE_REFERENCE, ParsedNodeType.FOOTNOTE, ParsedNodeType.FOOTNOTE_REFERENCE, ParsedNodeType.LINK, ParsedNodeType.LINK_REFERENCE].includes(phrasing.type):
           (broken ? parsed.content : parsed.title).push(phrasing);
           break;
         case phrasing.type === ParsedNodeType.BREAK:
@@ -1146,7 +1182,11 @@ const _ListParser = class _ListParser extends AbstractSemanticNodeWidgetParser {
           N3Logger.error(`Child node[type=${phrasing.type}] of root not supported yet, ignored.`, _ListParser.name);
       }
       return parsed;
-    }, { title: [], content: [], paragraph });
+    }, {
+      title: [],
+      content: [],
+      paragraph
+    });
   }
   getTitleFlagMatchers() {
     return _ListParser.WIDGET_TITLE_FLAG_MATCHERS;
@@ -1155,10 +1195,16 @@ const _ListParser = class _ListParser extends AbstractSemanticNodeWidgetParser {
     const str = (title ?? "").trim();
     const matches = this.getTitleFlagMatchers().find((matcher) => str.endsWith(matcher));
     if (matches == null) {
-      return { title, $flag: WidgetFlag.STANDARD };
+      return {
+        title,
+        $flag: WidgetFlag.STANDARD
+      };
     } else {
       const index2 = title.indexOf(matches);
-      return { title: title.substring(0, index2), $flag: this.asWidgetFlag(matches) };
+      return {
+        title: title.substring(0, index2),
+        $flag: this.asWidgetFlag(matches)
+      };
     }
   }
   matchRefWidget(title) {
@@ -1170,7 +1216,10 @@ const _ListParser = class _ListParser extends AbstractSemanticNodeWidgetParser {
     if (VUtils.isBlank($ref)) {
       return false;
     } else {
-      return { $ref, $flag: WidgetFlag.IGNORE };
+      return {
+        $ref,
+        $flag: WidgetFlag.IGNORE
+      };
     }
   }
   matchWidget(title) {
@@ -1184,14 +1233,21 @@ const _ListParser = class _ListParser extends AbstractSemanticNodeWidgetParser {
       if (VUtils.isBlank($wt)) {
         return false;
       }
-      return { $wt, label: VUtils.isBlank(label) ? void 0 : label.trim(), $pp };
+      return {
+        $wt,
+        label: VUtils.isBlank(label) ? void 0 : label.trim(),
+        $pp
+      };
     } else {
       const $wt = segments[0].trim();
       const label = segments[1].trim();
       if (VUtils.isBlank($wt)) {
         return false;
       }
-      return { $wt, label: VUtils.isBlank(label) ? void 0 : label.trim() };
+      return {
+        $wt,
+        label: VUtils.isBlank(label) ? void 0 : label.trim()
+      };
     }
   }
   matchAttributePair(headline) {
@@ -1199,13 +1255,19 @@ const _ListParser = class _ListParser extends AbstractSemanticNodeWidgetParser {
     if (matches == null) {
       return false;
     }
-    return { attributeName: matches[1].trim(), attributeValue: matches[2].trim() };
+    return {
+      attributeName: matches[1].trim(),
+      attributeValue: matches[2].trim()
+    };
   }
   regroupToParagraph(paragraph, phrasings) {
     if (phrasings.length == 0) {
       return null;
     } else {
-      return { ...paragraph, children: phrasings };
+      return {
+        ...paragraph,
+        children: phrasings
+      };
     }
   }
   rebuildListItemChildren(paragraph, phrasings, rest) {
@@ -1213,10 +1275,7 @@ const _ListParser = class _ListParser extends AbstractSemanticNodeWidgetParser {
     if (paragraph == null) {
       return this.parseManyPreparsed(rest);
     } else {
-      return [
-        paragraph,
-        ...this.parseManyPreparsed(rest)
-      ];
+      return [paragraph, ...this.parseManyPreparsed(rest)];
     }
   }
   parseListItem(listItem) {
@@ -1233,12 +1292,28 @@ const _ListParser = class _ListParser extends AbstractSemanticNodeWidgetParser {
     if (first.type !== ParsedNodeType.PARAGRAPH) {
       return this.asReserved(parsed);
     }
-    const { position: { start: { line: listItemStartLineNumber } } } = listItem.content;
-    const { position: { start: { line: paragraphStartLineNumber } } } = first.content;
+    const {
+      position: {
+        start: {
+          line: listItemStartLineNumber
+        }
+      }
+    } = listItem.content;
+    const {
+      position: {
+        start: {
+          line: paragraphStartLineNumber
+        }
+      }
+    } = first.content;
     if (listItemStartLineNumber !== paragraphStartLineNumber) {
       return this.asReserved(parsed);
     }
-    const { title: titlePhrasings, content: contentPhrasings, paragraph } = this.findListItemTitle(first);
+    const {
+      title: titlePhrasings,
+      content: contentPhrasings,
+      paragraph
+    } = this.findListItemTitle(first);
     if (titlePhrasings.length === 0) {
       return this.asReserved(parsed);
     }
@@ -1248,7 +1323,10 @@ const _ListParser = class _ListParser extends AbstractSemanticNodeWidgetParser {
     } else if (VUtils.isBlank(title)) {
       return this.asReserved(parsed);
     }
-    const { title: titleStr, $flag } = this.parseTitle(title);
+    const {
+      title: titleStr,
+      $flag
+    } = this.parseTitle(title);
     const refWidget = this.matchRefWidget(titleStr);
     if (refWidget !== false) {
       return {
@@ -1279,7 +1357,11 @@ const _ListParser = class _ListParser extends AbstractSemanticNodeWidgetParser {
       };
     }
     const attributes = titleStr.split(",").map((segment) => segment.trim());
-    return { ...parsed, kind: ParsedListItemKind.ATTRIBUTES, attributes };
+    return {
+      ...parsed,
+      kind: ParsedListItemKind.ATTRIBUTES,
+      attributes
+    };
   }
   parsePreparsed(preparsed) {
     return {
@@ -1355,7 +1437,11 @@ const _TextParser = class _TextParser extends AbstractSemanticNodeParser {
     return _TextParser.TYPE;
   }
   parsePreparsed(preparsed) {
-    return { type: ParsedNodeType.TEXT, preparsed, text: preparsed.content.value ?? "" };
+    return {
+      type: ParsedNodeType.TEXT,
+      preparsed,
+      text: preparsed.content.value ?? ""
+    };
   }
 };
 __publicField(_TextParser, "TYPE", "text");
@@ -1365,7 +1451,10 @@ const _ThematicBreakParser = class _ThematicBreakParser extends AbstractSemantic
     return _ThematicBreakParser.TYPE;
   }
   parsePreparsed(preparsed) {
-    return { type: ParsedNodeType.THEMATIC_BREAK, preparsed };
+    return {
+      type: ParsedNodeType.THEMATIC_BREAK,
+      preparsed
+    };
   }
 };
 __publicField(_ThematicBreakParser, "TYPE", "thematicBreak");
@@ -1375,7 +1464,11 @@ const _YamlParser = class _YamlParser extends AbstractSemanticNodeParser {
     return _YamlParser.TYPE;
   }
   parsePreparsed(preparsed) {
-    return { type: ParsedNodeType.YAML, preparsed, text: preparsed.content.value ?? "" };
+    return {
+      type: ParsedNodeType.YAML,
+      preparsed,
+      text: preparsed.content.value ?? ""
+    };
   }
 };
 __publicField(_YamlParser, "TYPE", "yaml");
@@ -1408,7 +1501,9 @@ class SemanticNodeParserRepository {
     return (types ?? []).map((type) => this.askParser(type)).filter((parser) => parser != null);
   }
 }
-const SINGLETON$4 = { repo: void 0 };
+const SINGLETON$4 = {
+  repo: void 0
+};
 const createOrGetParserRepositorySingleton = () => {
   if (SINGLETON$4.repo == null) {
     const repo = new SemanticNodeParserRepository(createOrGetPreparserRepositorySingleton());
@@ -1458,7 +1553,12 @@ const _SemanticHelper = class _SemanticHelper extends HeadingParser {
     if (used.length === 1) {
       const one = used[0];
       const type = one.$wt === _SemanticHelper.PAGE ? IdentifiedBlockType.PAGE : IdentifiedBlockType.WIDGET;
-      return { exported: [one], type, independent: [], ignored };
+      return {
+        exported: [one],
+        type,
+        independent: [],
+        ignored
+      };
     }
     const roots = [];
     const independent = [];
@@ -1470,7 +1570,12 @@ const _SemanticHelper = class _SemanticHelper extends HeadingParser {
           independent.push(heading);
         }
       });
-      return { exported: roots, type: IdentifiedBlockType.PAGE, independent, ignored };
+      return {
+        exported: roots,
+        type: IdentifiedBlockType.PAGE,
+        independent,
+        ignored
+      };
     } else {
       used.forEach((heading) => {
         if (heading.$flag === WidgetFlag.EXPORT) {
@@ -1482,13 +1587,20 @@ const _SemanticHelper = class _SemanticHelper extends HeadingParser {
           independent.push(heading);
         }
       });
-      return { exported: roots, type: IdentifiedBlockType.WIDGET, independent, ignored };
+      return {
+        exported: roots,
+        type: IdentifiedBlockType.WIDGET,
+        independent,
+        ignored
+      };
     }
   }
 };
 __publicField(_SemanticHelper, "PAGE", "Page");
 let SemanticHelper = _SemanticHelper;
-const SINGLETON$3 = { helper: void 0 };
+const SINGLETON$3 = {
+  helper: void 0
+};
 const createOrGetSemanticHelperSingleton = () => {
   if (SINGLETON$3.helper == null) {
     SINGLETON$3.helper = new SemanticHelper(createOrGetParserRepositorySingleton());
@@ -1657,13 +1769,28 @@ class AbstractPositionAttributeBuild {
       case 0:
         return void 0;
       case 1:
-        return { $cols: values[0] };
+        return {
+          $cols: values[0]
+        };
       case 2:
-        return { $row: values[0], $col: values[1], $cols: 3 };
+        return {
+          $row: values[0],
+          $col: values[1],
+          $cols: 3
+        };
       case 3:
-        return { $row: values[0], $col: values[1], $cols: values[2] };
+        return {
+          $row: values[0],
+          $col: values[1],
+          $cols: values[2]
+        };
       default:
-        return { $row: values[0], $col: values[1], $cols: values[2], $rows: values[3] };
+        return {
+          $row: values[0],
+          $col: values[1],
+          $cols: values[2],
+          $rows: values[3]
+        };
     }
   }
   build(value) {
@@ -1695,7 +1822,11 @@ const DecorateWrapperBuild = (value, list) => {
     return [];
   }
   if (list.children[0].type === ParsedNodeType.LIST) {
-    return (list.children[0].children ?? []).filter(SemanticUtils.isAttributesListItem).filter(({ attributes }) => attributes != null && attributes.length !== 0).map(({ attributes }) => attributes[0]);
+    return (list.children[0].children ?? []).filter(SemanticUtils.isAttributesListItem).filter(({
+      attributes
+    }) => attributes != null && attributes.length !== 0).map(({
+      attributes
+    }) => attributes[0]);
   } else {
     return [];
   }
@@ -1718,19 +1849,13 @@ const _AbstractTranslator = class _AbstractTranslator {
     return this.repository.askSpecificTranslator($wt);
   }
   postTranslationCorrectionWork(def) {
-    const { node } = def;
+    const {
+      node
+    } = def;
     if (node == null) {
       return def;
     }
-    [
-      "$key",
-      D9PropertyNames.PROPERTY,
-      D9PropertyNames.POSITION,
-      D9PropertyNames.MOBILE_POSITION,
-      D9PropertyNames.VALIDATION_SCOPES,
-      MonitorNodeAttributes.VALID,
-      MonitorNodeAttributes.REACTION
-    ].forEach((key) => {
+    ["$key", D9PropertyNames.PROPERTY, D9PropertyNames.POSITION, D9PropertyNames.MOBILE_POSITION, D9PropertyNames.VALIDATION_SCOPES, MonitorNodeAttributes.VALID, MonitorNodeAttributes.REACTION].forEach((key) => {
       if (typeof node[key] === "boolean") {
         delete node[key];
       }
@@ -1762,32 +1887,48 @@ const _AbstractTranslator = class _AbstractTranslator {
     const children = parent.children ?? [];
     const [first, ...rest] = children.filter((child) => child.type === ParsedNodeType.LIST);
     if (first == null) {
-      return { attributes: [], widgets: [], ignored: [] };
+      return {
+        attributes: [],
+        widgets: [],
+        ignored: []
+      };
     }
     return [first, ...rest].reduce((classified, child, index2) => {
       child.children.forEach((item) => {
         if (SemanticUtils.isAnyWidgetListItem(item) && item.$flag === WidgetFlag.IGNORE) {
-          item.ignoredOnTransitToWidget = { type: IgnoredOnTransitToWidgetDefType.DECLARE_AS_IGNORED };
+          item.ignoredOnTransitToWidget = {
+            type: IgnoredOnTransitToWidgetDefType.DECLARE_AS_IGNORED
+          };
           classified.ignored.push(item);
         } else if (SemanticUtils.isReservedListItem(item)) {
-          item.ignoredOnTransitToWidget = { type: IgnoredOnTransitToWidgetDefType.DETECT_AS_RESERVED };
+          item.ignoredOnTransitToWidget = {
+            type: IgnoredOnTransitToWidgetDefType.DETECT_AS_RESERVED
+          };
           classified.ignored.push(item);
         } else if (SemanticUtils.isAnyAttributeListItem(item)) {
           if (index2 === 0 && classified.widgets.length === 0) {
             classified.attributes.push(item);
           } else {
-            item.ignoredOnTransitToWidget = { type: IgnoredOnTransitToWidgetDefType.INCORRECT_INDEX_ATTR_AFTER_WIDGET };
+            item.ignoredOnTransitToWidget = {
+              type: IgnoredOnTransitToWidgetDefType.INCORRECT_INDEX_ATTR_AFTER_WIDGET
+            };
             classified.ignored.push(item);
           }
         } else if (SemanticUtils.isAnyWidgetListItem(item)) {
           classified.widgets.push(item);
         } else {
-          item.ignoredOnTransitToWidget = { type: IgnoredOnTransitToWidgetDefType.UNKNOWN };
+          item.ignoredOnTransitToWidget = {
+            type: IgnoredOnTransitToWidgetDefType.UNKNOWN
+          };
           classified.ignored.push(item);
         }
       });
       return classified;
-    }, { attributes: [], widgets: [], ignored: [] });
+    }, {
+      attributes: [],
+      widgets: [],
+      ignored: []
+    });
   }
   parseAttributes($wt, list) {
     return (list.attributes || []).reduce((options, attribute) => {
@@ -1818,7 +1959,10 @@ const _AbstractTranslator = class _AbstractTranslator {
     }
   }
   parseAttributePair($wt, list) {
-    const { attributeName: name, attributeValue } = list;
+    const {
+      attributeName: name,
+      attributeValue
+    } = list;
     const key = AttributeNameUtils.mapAttributeName($wt, name);
     const value = this.buildAttributeValue($wt, key, attributeValue ?? void 0, list);
     if (VUtils.isBlank(value)) {
@@ -1826,19 +1970,23 @@ const _AbstractTranslator = class _AbstractTranslator {
     } else if (typeof value === "object" && !Array.isArray(value) && value[key] != null) {
       return value;
     } else {
-      return { [key]: value };
+      return {
+        [key]: value
+      };
     }
   }
   combineMonitors(options) {
-    return [
-      this.repository.validatorBuild,
-      this.repository.reactorBuild,
-      this.repository.disablementBuild,
-      this.repository.visibilityBuild
-    ].reduce((attrs, build) => build.combine({ ...options, attributes: attrs }), options.attributes);
+    return [this.repository.validatorBuild, this.repository.reactorBuild, this.repository.disablementBuild, this.repository.visibilityBuild].reduce((attrs, build) => build.combine({
+      ...options,
+      attributes: attrs
+    }), options.attributes);
   }
   parseAndCombineAttributes(options) {
-    const { $wt, items, $pp } = options;
+    const {
+      $wt,
+      items,
+      $pp
+    } = options;
     const attributes = (items || []).map((item) => {
       if (SemanticUtils.isAttributesListItem(item)) {
         return this.parseAttributes($wt, item);
@@ -1864,7 +2012,11 @@ const _AbstractTranslator = class _AbstractTranslator {
       });
       return options2;
     }, {});
-    return this.combineMonitors({ $wt, $pp: attributes[D9PropertyNames.PROPERTY] || $pp, attributes });
+    return this.combineMonitors({
+      $wt,
+      $pp: attributes[D9PropertyNames.PROPERTY] || $pp,
+      attributes
+    });
   }
   ignoreFailureParsing(parsed) {
     if (parsed.success !== false) {
@@ -1874,7 +2026,9 @@ const _AbstractTranslator = class _AbstractTranslator {
     }
   }
   buildChildrenOnSubHeadings(options, parseOptions) {
-    const { widgets } = options;
+    const {
+      widgets
+    } = options;
     const headings = widgets.filter((widget) => widget.type === ParsedNodeType.HEADING);
     const identifiedHeadings = headings.filter(SemanticUtils.isIdentifiedHeading);
     return identifiedHeadings.map((item) => {
@@ -1887,7 +2041,9 @@ const _AbstractTranslator = class _AbstractTranslator {
     }).filter((x) => x != null);
   }
   buildChildrenOnList(options, parseOptions) {
-    const { widgets } = options;
+    const {
+      widgets
+    } = options;
     return widgets.map((item) => {
       if (SemanticUtils.isWidgetListItem(item)) {
         const translator = this.repository.askTranslator(item.$wt);
@@ -1910,12 +2066,7 @@ const parseCodeBlock = (code) => {
 };
 const parseParagraph = (textCarrier) => {
   return (textCarrier.children ?? []).filter((child) => {
-    return [
-      ParsedNodeType.INLINE_CODE,
-      ParsedNodeType.TEXT,
-      ParsedNodeType.EMPHASIS,
-      ParsedNodeType.STRONG
-    ].includes(child.type);
+    return [ParsedNodeType.INLINE_CODE, ParsedNodeType.TEXT, ParsedNodeType.EMPHASIS, ParsedNodeType.STRONG].includes(child.type);
   }).map((child) => {
     if (child.type === ParsedNodeType.INLINE_CODE) {
       return child.text;
@@ -1931,7 +2082,9 @@ const parseParagraph = (textCarrier) => {
   }).join("");
 };
 const parseSnippet = (attributeValue, item) => {
-  const { children } = item;
+  const {
+    children
+  } = item;
   const concerned = (children ?? []).filter((child) => child.type === ParsedNodeType.CODE || ParsedNodeType.PARAGRAPH);
   if (concerned.length === 0) {
     if (VUtils.isNotBlank(attributeValue)) {
@@ -2020,7 +2173,10 @@ class ValidationScopesAttributeBuild {
 }
 class MonitorableAttributeBuild {
   createComplexAttributeValue() {
-    return { on: [], snippet: "" };
+    return {
+      on: [],
+      snippet: ""
+    };
   }
   parseOn(value, _list) {
     if (VUtils.isNotBlank(value)) {
@@ -2030,7 +2186,9 @@ class MonitorableAttributeBuild {
     }
   }
   parseAttribute(_attributeName, _attributeValue, _item) {
-    return { parsed: false };
+    return {
+      parsed: false
+    };
   }
   build(value, list) {
     if (VUtils.isNotBlank(value)) {
@@ -2051,13 +2209,20 @@ class MonitorableAttributeBuild {
     }
     const complex = this.createComplexAttributeValue();
     (list.children[0].children ?? []).filter(SemanticUtils.isAttributePairListItem).map((item) => {
-      const { attributeName, attributeValue } = item;
+      const {
+        attributeName,
+        attributeValue
+      } = item;
       if (attributeName === "on") {
         complex.on = this.parseOn(attributeValue, item);
       } else if (attributeName === "handle") {
         complex.snippet = parseSnippet(attributeValue, item);
       } else {
-        const { parsed, name, value: value2 } = this.parseAttribute(attributeName, attributeValue, item);
+        const {
+          parsed,
+          name,
+          value: value2
+        } = this.parseAttribute(attributeName, attributeValue, item);
         if (parsed) {
           complex[name] = value2;
         }
@@ -2262,21 +2427,7 @@ const _AttributeUtils = class _AttributeUtils {
     return existing;
   }
   static findAttributeBuilders($wt) {
-    return [
-      ..._AttributeUtils.CUSTOMIZED_ATTRIBUTE_BUILDERS[$wt] ?? [],
-      _AttributeUtils.POSITION_ATTRIBUTE_BUILDER,
-      _AttributeUtils.MOBILE_POSITION_ATTRIBUTE_BUILDER,
-      _AttributeUtils.RENDER_ON_ATTRIBUTE_BUILDER,
-      _AttributeUtils.ENABLEMENT_ATTRIBUTE_BUILDER,
-      _AttributeUtils.VISIBILITY_ATTRIBUTE_BUILDER,
-      _AttributeUtils.VALIDATION_ATTRIBUTE_BUILDER,
-      _AttributeUtils.VALIDATION_SCOPES_ATTRIBUTE_BUILDER,
-      _AttributeUtils.REACTION_REPAINT_ATTRIBUTE_BUILDER,
-      _AttributeUtils.REACTION_CLEAR_ME_ATTRIBUTE_BUILDER,
-      _AttributeUtils.REACTION_WATCH_ATTRIBUTE_BUILDER,
-      _AttributeUtils.DATA_PREFIX_ATTRIBUTE_BUILDER,
-      _AttributeUtils.ANY_ATTRIBUTE_BUILDER
-    ];
+    return [..._AttributeUtils.CUSTOMIZED_ATTRIBUTE_BUILDERS[$wt] ?? [], _AttributeUtils.POSITION_ATTRIBUTE_BUILDER, _AttributeUtils.MOBILE_POSITION_ATTRIBUTE_BUILDER, _AttributeUtils.RENDER_ON_ATTRIBUTE_BUILDER, _AttributeUtils.ENABLEMENT_ATTRIBUTE_BUILDER, _AttributeUtils.VISIBILITY_ATTRIBUTE_BUILDER, _AttributeUtils.VALIDATION_ATTRIBUTE_BUILDER, _AttributeUtils.VALIDATION_SCOPES_ATTRIBUTE_BUILDER, _AttributeUtils.REACTION_REPAINT_ATTRIBUTE_BUILDER, _AttributeUtils.REACTION_CLEAR_ME_ATTRIBUTE_BUILDER, _AttributeUtils.REACTION_WATCH_ATTRIBUTE_BUILDER, _AttributeUtils.DATA_PREFIX_ATTRIBUTE_BUILDER, _AttributeUtils.ANY_ATTRIBUTE_BUILDER];
   }
 };
 __publicField(_AttributeUtils, "POSITION_ATTRIBUTE_BUILDER", new PositionAttributeBuild());
@@ -2308,32 +2459,51 @@ class AbstractMonitorBuild {
   buildHandlersDetective(find) {
     return (options) => {
       return find(options.$wt).reduce((monitorHandlers, detect) => {
-        const { attributes, handlers } = monitorHandlers;
-        const handle = detect({ ...options, attributes });
+        const {
+          attributes,
+          handlers
+        } = monitorHandlers;
+        const handle = detect({
+          ...options,
+          attributes
+        });
         if (handle != null) {
           handlers.push(handle);
         }
-        return { attributes, handlers };
-      }, { attributes: options.attributes, handlers: [] });
+        return {
+          attributes,
+          handlers
+        };
+      }, {
+        attributes: options.attributes,
+        handlers: []
+      });
     };
   }
   findMonitors(handlers) {
     return handlers.map((handler) => {
       if (typeof handler === "function") {
-        return { $handle: handler };
+        return {
+          $handle: handler
+        };
       } else {
         return handler;
       }
     });
   }
   findWatches(monitors) {
-    return monitors.map(({ $watch }) => $watch).filter(($watch) => $watch != null).flat();
+    return monitors.map(({
+      $watch
+    }) => $watch).filter(($watch) => $watch != null).flat();
   }
   allowNoWatch() {
     return false;
   }
   combine(options) {
-    const { attributes: attrs, handlers } = this.buildHandlersDetective(this.getAllDetectives())(options);
+    const {
+      attributes: attrs,
+      handlers
+    } = this.buildHandlersDetective(this.getAllDetectives())(options);
     if (handlers == null || handlers.length === 0) {
       return attrs;
     }
@@ -2349,14 +2519,24 @@ class AbstractMonitorBuild {
   }
 }
 const createDefaultMonitorHandlerDetective = (options) => {
-  const { attributeName, redressResult, ignoreDefault = false, deleteAttribute = false } = options;
+  const {
+    attributeName,
+    redressResult,
+    ignoreDefault = false,
+    deleteAttribute = false
+  } = options;
   return (options2) => {
-    const { attributes } = options2;
+    const {
+      attributes
+    } = options2;
     const value = attributes[attributeName];
     if (value == null || typeof value === "boolean") {
       return void 0;
     }
-    const { on, snippet } = value;
+    const {
+      on,
+      snippet
+    } = value;
     if (deleteAttribute) {
       delete attributes[attributeName];
     }
@@ -2364,7 +2544,11 @@ const createDefaultMonitorHandlerDetective = (options) => {
       return void 0;
     }
     if (snippet instanceof ExternalDefIndicator) {
-      return { $watch: on, $handle: snippet, $default: snippet };
+      return {
+        $watch: on,
+        $handle: snippet,
+        $default: snippet
+      };
     }
     let redressedSnippet;
     if (!snippet.includes("\n")) {
@@ -2392,18 +2576,29 @@ const createDefaultMonitorHandlerDetective = (options) => {
   };
 };
 const detectSimpleCheck = (options) => {
-  const { attrName, defaultInvalidMessage, validate } = options;
+  const {
+    attrName,
+    defaultInvalidMessage,
+    validate
+  } = options;
   return (options2) => {
-    const { attributes } = options2;
+    const {
+      attributes
+    } = options2;
     if (attributes[attrName] !== true && typeof attributes[attrName] !== "string") {
       return void 0;
     }
     const message = attributes[attrName] === true ? defaultInvalidMessage : attributes[attrName];
     delete attributes[attrName];
     return (options3) => {
-      const { value } = options3;
+      const {
+        value
+      } = options3;
       if (!validate(value)) {
-        return { valid: false, failReason: message };
+        return {
+          valid: false,
+          failReason: message
+        };
       }
     };
   };
@@ -2436,7 +2631,9 @@ const detectInteger = detectSimpleCheck({
   validate: (value) => `${value ?? ""}`.length === 0 || VUtils.isInteger(value).test
 });
 const detectRegex = (options) => {
-  const { attributes } = options;
+  const {
+    attributes
+  } = options;
   const regex = attributes.regex || attributes.regexp;
   if (VUtils.isBlank(regex)) {
     return void 0;
@@ -2458,17 +2655,26 @@ const detectRegex = (options) => {
     });
     const message = VUtils.isBlank(match[2]) ? `Field pattern should match regexp[${match[1]}].` : match[2].trim();
     return (options2) => {
-      const { value } = options2;
+      const {
+        value
+      } = options2;
       if (VUtils.isEmpty(value) || patterns.some((pattern) => pattern.test(`${value}`))) {
-        return { valid: true };
+        return {
+          valid: true
+        };
       } else {
-        return { valid: false, failReason: message };
+        return {
+          valid: false,
+          failReason: message
+        };
       }
     };
   }
 };
 const detectLength = (options) => {
-  const { attributes } = options;
+  const {
+    attributes
+  } = options;
   if (attributes.length == null) {
     return void 0;
   }
@@ -2476,10 +2682,14 @@ const detectLength = (options) => {
   if (mightBePositive.test) {
     delete attributes.length;
     return (options2) => {
-      const { value } = options2;
+      const {
+        value
+      } = options2;
       const length = `${value ?? ""}`.length;
       if (length === 0) {
-        return { valid: true };
+        return {
+          valid: true
+        };
       } else if (length !== mightBePositive.value) {
         return {
           valid: false,
@@ -2509,14 +2719,23 @@ const detectLength = (options) => {
       if (rules.length !== 0) {
         delete attributes.length;
         return (options2) => {
-          const { value } = options2;
+          const {
+            value
+          } = options2;
           const length = `${value ?? ""}`.length;
           if (length === 0) {
-            return { valid: true };
+            return {
+              valid: true
+            };
           } else if (rules.some((rule) => rule(length))) {
-            return { valid: true };
+            return {
+              valid: true
+            };
           } else {
-            return { valid: false, failReason: message };
+            return {
+              valid: false,
+              failReason: message
+            };
           }
         };
       }
@@ -2524,7 +2743,9 @@ const detectLength = (options) => {
   }
 };
 const detectNumberRange = (options) => {
-  const { attributes } = options;
+  const {
+    attributes
+  } = options;
   if (attributes.numberRange == null) {
     return void 0;
   }
@@ -2549,14 +2770,23 @@ const detectNumberRange = (options) => {
       if (rules.length !== 0) {
         delete attributes.numberRange;
         return (options2) => {
-          const { value } = options2;
+          const {
+            value
+          } = options2;
           const testedValue = VUtils.isNumber(value);
           if (!testedValue.test) {
-            return { valid: true };
+            return {
+              valid: true
+            };
           } else if (rules.some((rule) => rule(testedValue.value))) {
-            return { valid: true };
+            return {
+              valid: true
+            };
           } else {
-            return { valid: false, failReason: message };
+            return {
+              valid: false,
+              failReason: message
+            };
           }
         };
       }
@@ -2593,7 +2823,9 @@ __publicField(_ValidatorUtils, "DETECT_VALIDATION", createDefaultMonitorHandlerD
   attributeName: MonitorNodeAttributes.VALID,
   redressResult: (ret) => {
     if (ret == null) {
-      return { valid: true };
+      return {
+        valid: true
+      };
     } else {
       return ret;
     }
@@ -2621,7 +2853,9 @@ class ValidatorBuild extends AbstractMonitorBuild {
     attributes[MonitorNodeAttributes.VALID] = {
       $watch: watches.length === 0 ? void 0 : watches,
       $handle: async (options) => {
-        return await monitors.reduce(async (result, { $handle }) => {
+        return await monitors.reduce(async (result, {
+          $handle
+        }) => {
           const ret = await result;
           if (!ret.valid) {
             return ret;
@@ -2631,7 +2865,9 @@ class ValidatorBuild extends AbstractMonitorBuild {
           } else {
             return result;
           }
-        }, Promise.resolve({ valid: true }));
+        }, Promise.resolve({
+          valid: true
+        }));
       }
     };
     return attributes;
@@ -2682,15 +2918,21 @@ class ReactionBuild extends AbstractMonitorBuild {
     attributes[MonitorNodeAttributes.REACTION] = {
       $watch: watches,
       $handle: async (options) => {
-        const { changedOn } = options;
-        const results = await Promise.all(monitors.filter(({ $watch }) => {
+        const {
+          changedOn
+        } = options;
+        const results = await Promise.all(monitors.filter(({
+          $watch
+        }) => {
           const should = $watch.some((watch) => {
             const watchPath = PPUtils.absolute(options.pathToRoot, watch);
             const match = PPUtils.matches(watchPath, changedOn);
             return match;
           });
           return should;
-        }).map(async ({ $handle }) => {
+        }).map(async ({
+          $handle
+        }) => {
           const ret = await $handle(options);
           return ret;
         }).filter(async (result) => VUtils.isNotBlank(await result)));
@@ -2735,7 +2977,9 @@ class DisablementBuild extends AbstractMonitorBuild {
     attributes[MonitorNodeAttributes.DISABLED] = {
       $watch: watches,
       $handle: async (options) => {
-        return await monitors.reduce(async (result, { $handle }) => {
+        return await monitors.reduce(async (result, {
+          $handle
+        }) => {
           const ret = await result;
           if (ret) {
             return ret;
@@ -2744,7 +2988,9 @@ class DisablementBuild extends AbstractMonitorBuild {
         }, Promise.resolve(false));
       },
       $default: async (options) => {
-        return await monitors.reduce(async (result, { $handle }) => {
+        return await monitors.reduce(async (result, {
+          $handle
+        }) => {
           try {
             const ret = await result;
             if (ret) {
@@ -2792,7 +3038,9 @@ class VisibilityBuild extends AbstractMonitorBuild {
     attributes[MonitorNodeAttributes.VISIBLE] = {
       $watch: watches,
       $handle: async (options) => {
-        return await monitors.reduce(async (result, { $handle }) => {
+        return await monitors.reduce(async (result, {
+          $handle
+        }) => {
           const ret = await result;
           if (!ret) {
             return ret;
@@ -2801,7 +3049,9 @@ class VisibilityBuild extends AbstractMonitorBuild {
         }, Promise.resolve(true));
       },
       $default: async (options) => {
-        return await monitors.reduce(async (result, { $handle }) => {
+        return await monitors.reduce(async (result, {
+          $handle
+        }) => {
           try {
             const ret = await result;
             if (!ret) {
@@ -2825,16 +3075,24 @@ class PageTranslator extends AbstractTranslator {
   doTranslate(node, parseOptions) {
     const $wt = SemanticHelper.PAGE;
     const classified = this.classifyAttributesAndSubWidgetsByList(node);
-    const attributes = this.parseAndCombineAttributes({ $wt, items: classified.attributes });
+    const attributes = this.parseAndCombineAttributes({
+      $wt,
+      items: classified.attributes
+    });
     const def = {
       $wt,
       ...attributes,
-      $nodes: [
-        ...this.buildChildrenOnList({ widgets: classified.widgets }, parseOptions),
-        ...this.buildChildrenOnSubHeadings({ widgets: node.children }, parseOptions)
-      ].map((parsed) => parsed.node)
+      $nodes: [...this.buildChildrenOnList({
+        widgets: classified.widgets
+      }, parseOptions), ...this.buildChildrenOnSubHeadings({
+        widgets: node.children
+      }, parseOptions)].map((parsed) => parsed.node)
     };
-    return { node: def, exportKey: node.headline, success: true };
+    return {
+      node: def,
+      exportKey: node.headline,
+      success: true
+    };
   }
 }
 const _WidgetTranslator = class _WidgetTranslator extends AbstractTranslator {
@@ -2846,30 +3104,56 @@ const _WidgetTranslator = class _WidgetTranslator extends AbstractTranslator {
   }
   tryToWrapByFormCell($wt, label) {
     if (label == null) {
-      return { $wt };
+      return {
+        $wt
+      };
     } else if (typeof label === "string") {
-      return { $wt: `${$wt}${_WidgetTranslator.FORM_CELL_SUFFIX}`, label: label.trim() };
+      return {
+        $wt: `${$wt}${_WidgetTranslator.FORM_CELL_SUFFIX}`,
+        label: label.trim()
+      };
     } else {
-      return { $wt: `${$wt}${_WidgetTranslator.FORM_CELL_SUFFIX}`, label };
+      return {
+        $wt: `${$wt}${_WidgetTranslator.FORM_CELL_SUFFIX}`,
+        label
+      };
     }
   }
   attemptToFormCell(options) {
-    const { $wt, attributes, translator } = options;
-    const { label } = attributes;
+    const {
+      $wt,
+      attributes,
+      translator
+    } = options;
+    const {
+      label
+    } = attributes;
     if (this.isForceWrappedByFormCell(attributes)) {
       return this.tryToWrapByFormCell($wt, label ?? "");
     } else if (translator.shouldWrapByFormCell()) {
       return this.tryToWrapByFormCell($wt, label);
     } else if (label == null || typeof label === "string" && VUtils.isBlank(label)) {
-      return { $wt };
+      return {
+        $wt
+      };
     } else {
-      return { $wt, [translator.transformLabelAttributeName()]: label };
+      return {
+        $wt,
+        [translator.transformLabelAttributeName()]: label
+      };
     }
   }
   tryToTranslateAttributeToWidget(options, parseOptions) {
-    const { $wt, classified, attributeName, given } = options;
+    const {
+      $wt,
+      classified,
+      attributeName,
+      given
+    } = options;
     let transformed;
-    const { attributes } = classified;
+    const {
+      attributes
+    } = classified;
     const found = (attributes ?? []).filter(SemanticUtils.isAttributePairListItem).find((attr) => AttributeNameUtils.mapAttributeName($wt, attr.attributeName) === attributeName);
     if (found == null) {
       transformed = given;
@@ -2878,7 +3162,10 @@ const _WidgetTranslator = class _WidgetTranslator extends AbstractTranslator {
     } else {
       const def = found;
       classified.attributes = classified.attributes.filter((attr) => attr !== found);
-      const { node, success } = this.translate({
+      const {
+        node,
+        success
+      } = this.translate({
         type: ParsedNodeType.LIST_ITEM,
         kind: ParsedListItemKind.WIDGET,
         $wt: (def.attributeValue ?? "").trim() || "Caption",
@@ -2886,7 +3173,10 @@ const _WidgetTranslator = class _WidgetTranslator extends AbstractTranslator {
         $flag: WidgetFlag.STANDARD,
         preparsed: {
           type: ParsedNodeType.LIST_ITEM,
-          content: { type: "listItem", children: (def.children ?? []).map((child) => child.preparsed.content) },
+          content: {
+            type: "listItem",
+            children: (def.children ?? []).map((child) => child.preparsed.content)
+          },
           children: (def.children ?? []).map((child) => child.preparsed)
         }
       }, parseOptions);
@@ -2900,7 +3190,9 @@ const _WidgetTranslator = class _WidgetTranslator extends AbstractTranslator {
     return transformed;
   }
   doTranslateNode(node, $pp, label, findChildren, parseOptions) {
-    const { $wt } = node;
+    const {
+      $wt
+    } = node;
     const classified = this.classifyAttributesAndSubWidgetsByList(node);
     const translator = this.findSpecificTranslator($wt);
     let transformedLabel;
@@ -2932,35 +3224,55 @@ const _WidgetTranslator = class _WidgetTranslator extends AbstractTranslator {
     Object.keys(transformedWidgets).forEach((name) => attributes[name] = transformedWidgets[name]);
     let def;
     if (translator != null) {
-      def = translator.redressProperties({ ...attributes, label: transformedLabel });
+      def = translator.redressProperties({
+        ...attributes,
+        label: transformedLabel
+      });
       def = translator.beautifyProperties({
         $pp,
         ...def,
-        ...this.attemptToFormCell({ $wt, attributes: def, translator })
+        ...this.attemptToFormCell({
+          $wt,
+          attributes: def,
+          translator
+        })
       });
     } else {
-      def = { $pp, ...attributes, $wt };
+      def = {
+        $pp,
+        ...attributes,
+        $wt
+      };
     }
-    const children = [
-      ...this.buildChildrenOnList({ widgets: classified.widgets }, parseOptions),
-      ...findChildren()
-    ].map((parsed) => parsed.node);
+    const children = [...this.buildChildrenOnList({
+      widgets: classified.widgets
+    }, parseOptions), ...findChildren()].map((parsed) => parsed.node);
     if (children != null && children.length !== 0) {
       def.$nodes = children;
     }
     def = translator == null ? void 0 : translator.postWork(def);
-    return { node: def, success: true };
+    return {
+      node: def,
+      success: true
+    };
   }
   doTranslate(node, parseOptions) {
     if (node.type === ParsedNodeType.HEADING) {
       return this.doTranslateNode(node, node.$pp, node.headline, () => {
-        return this.buildChildrenOnSubHeadings({ widgets: node.children }, parseOptions);
+        return this.buildChildrenOnSubHeadings({
+          widgets: node.children
+        }, parseOptions);
       }, parseOptions);
     } else if (node.type === ParsedNodeType.LIST_ITEM) {
       return this.doTranslateNode(node, node.$pp, node.label, () => [], parseOptions);
     } else {
       N3Logger.error(`Given node type[${node.type}] is not supported.`, _WidgetTranslator.name);
-      return { node: { $wt: "" }, success: false };
+      return {
+        node: {
+          $wt: ""
+        },
+        success: false
+      };
     }
   }
 };
@@ -2995,7 +3307,9 @@ class SpecificWidgetTranslator {
     var _a;
     if (((_a = def.$pos) == null ? void 0 : _a.$cols) == null) {
       if (def.$pos == null) {
-        def.$pos = { $cols: cols };
+        def.$pos = {
+          $cols: cols
+        };
       } else {
         def.$pos.$cols = cols;
       }
@@ -3012,11 +3326,7 @@ class SpecificWidgetTranslator {
     return [ValidatorUtils.DETECT_VALIDATION];
   }
   getReactionHandlerDetectives() {
-    return [
-      ReactionUtils.DETECT_REACTION_REPAINT,
-      ReactionUtils.DETECT_REACTION_CLEAR_ME,
-      ReactionUtils.DETECT_REACTION_WATCH
-    ];
+    return [ReactionUtils.DETECT_REACTION_REPAINT, ReactionUtils.DETECT_REACTION_CLEAR_ME, ReactionUtils.DETECT_REACTION_WATCH];
   }
   getEnablementHandlerDetectives() {
     return [DisablementUtils.DETECT_DISABLED];
@@ -3035,34 +3345,14 @@ const ArrayElementRemovedBuild = createAsyncSnippetBuild("$array.elementRemoved"
 const ArrayCouldRemoveElementBuild = createAsyncSnippetBuild("$array.couldRemoveElement", ["options"]);
 class SpecificArrayWidgetTranslator extends SpecificWidgetTranslator {
   buildDefaultAttributeNamesMapping(additional) {
-    const keys = [
-      "noElementReminder",
-      "addable",
-      "addLabel",
-      "elementAdded",
-      "createElement",
-      "couldAddElement",
-      "disableOnCannotAdd",
-      "removable",
-      "removeLabel",
-      "elementRemoved",
-      "couldRemoveElement",
-      "getElementKey"
-    ];
+    const keys = ["noElementReminder", "addable", "addLabel", "elementAdded", "createElement", "couldAddElement", "disableOnCannotAdd", "removable", "removeLabel", "elementRemoved", "couldRemoveElement", "getElementKey"];
     return keys.reduce((mapping, key) => {
       mapping[`${this.getSupportedType()}.${key}`] = `$array.${key}`;
       return mapping;
     }, additional ?? {});
   }
   getAttributeValueBuilders() {
-    return [
-      ArrayElementAddedBuild,
-      ArrayCreateElementBuild,
-      ArrayCouldAddElementBuild,
-      ArrayElementRemovedBuild,
-      ArrayCouldRemoveElementBuild,
-      ...super.getAttributeValueBuilders()
-    ];
+    return [ArrayElementAddedBuild, ArrayCreateElementBuild, ArrayCouldAddElementBuild, ArrayElementRemovedBuild, ArrayCouldRemoveElementBuild, ...super.getAttributeValueBuilders()];
   }
 }
 class WidgetTranslatorRepository {
@@ -3143,7 +3433,9 @@ class WidgetTranslatorRepository {
     return this.specificTranslators[$wt];
   }
 }
-const SINGLETON$2 = { repo: void 0 };
+const SINGLETON$2 = {
+  repo: void 0
+};
 const createOrGetTranslatorRepositorySingleton = () => {
   if (SINGLETON$2.repo == null) {
     SINGLETON$2.repo = new WidgetTranslatorRepository();
@@ -3163,12 +3455,19 @@ class WidgetHelper {
     const translator = this._repository.askTranslator(heading.$wt);
     if (translator == null) {
       N3Logger.error(`Translator of root node[type=${heading.$wt}] is not found. All content ignored.`, WidgetHelper.name);
-      return { node: { $wt: "" }, success: false };
+      return {
+        node: {
+          $wt: ""
+        },
+        success: false
+      };
     }
     return translator.translate(heading, parseOptions);
   }
 }
-const SINGLETON$1 = { helper: void 0 };
+const SINGLETON$1 = {
+  helper: void 0
+};
 const createOrGetTranslateHelperSingleton = () => {
   if (SINGLETON$1.helper == null) {
     SINGLETON$1.helper = new WidgetHelper(createOrGetTranslatorRepositorySingleton());
@@ -3284,19 +3583,8 @@ var N2WidgetType;
   N2WidgetType2["MDDT"] = "MDDT";
   N2WidgetType2["PAGINATION"] = "Pagination";
 })(N2WidgetType || (N2WidgetType = {}));
-const StandardInputValidators = [
-  ValidatorUtils.DETECT_LENGTH,
-  ValidatorUtils.DETECT_NUMERIC,
-  ValidatorUtils.DETECT_POSITIVE,
-  ValidatorUtils.DETECT_NOT_NEGATIVE,
-  ValidatorUtils.DETECT_INTEGER,
-  ValidatorUtils.DETECT_NUMBER_RANGE,
-  ValidatorUtils.DETECT_REGEX
-];
-const PasswordInputValidators = [
-  ValidatorUtils.DETECT_LENGTH,
-  ValidatorUtils.DETECT_REGEX
-];
+const StandardInputValidators = [ValidatorUtils.DETECT_LENGTH, ValidatorUtils.DETECT_NUMERIC, ValidatorUtils.DETECT_POSITIVE, ValidatorUtils.DETECT_NOT_NEGATIVE, ValidatorUtils.DETECT_INTEGER, ValidatorUtils.DETECT_NUMBER_RANGE, ValidatorUtils.DETECT_REGEX];
+const PasswordInputValidators = [ValidatorUtils.DETECT_LENGTH, ValidatorUtils.DETECT_REGEX];
 const DecorateInputRequiredDetective = wrapMonitorHandlerDetective(ValidatorUtils.DETECT_REQUIRED, (attributes) => attributes["data-di-required"] = true);
 const InputMaskBuild = createSyncSnippetBuild("mask", [], true);
 class N2InputTranslator extends SpecificWidgetTranslator {
@@ -3307,11 +3595,7 @@ class N2InputTranslator extends SpecificWidgetTranslator {
     return [InputMaskBuild, ValueChangedBuild];
   }
   getValidationHandlerDetectives() {
-    return [
-      ValidatorUtils.DETECT_REQUIRED,
-      ...StandardInputValidators,
-      ...super.getValidationHandlerDetectives()
-    ];
+    return [ValidatorUtils.DETECT_REQUIRED, ...StandardInputValidators, ...super.getValidationHandlerDetectives()];
   }
 }
 class N2NumberTranslator extends SpecificWidgetTranslator {
@@ -3322,11 +3606,7 @@ class N2NumberTranslator extends SpecificWidgetTranslator {
     return [ValueChangedBuild];
   }
   getValidationHandlerDetectives() {
-    return [
-      ValidatorUtils.DETECT_REQUIRED,
-      ...StandardInputValidators,
-      ...super.getValidationHandlerDetectives()
-    ];
+    return [ValidatorUtils.DETECT_REQUIRED, ...StandardInputValidators, ...super.getValidationHandlerDetectives()];
   }
 }
 class N2PasswordTranslator extends SpecificWidgetTranslator {
@@ -3337,11 +3617,7 @@ class N2PasswordTranslator extends SpecificWidgetTranslator {
     return [ValueChangedBuild];
   }
   getValidationHandlerDetectives() {
-    return [
-      ValidatorUtils.DETECT_REQUIRED,
-      ...PasswordInputValidators,
-      ...super.getValidationHandlerDetectives()
-    ];
+    return [ValidatorUtils.DETECT_REQUIRED, ...PasswordInputValidators, ...super.getValidationHandlerDetectives()];
   }
 }
 class N2DecorateInputTranslator extends SpecificWidgetTranslator {
@@ -3352,11 +3628,7 @@ class N2DecorateInputTranslator extends SpecificWidgetTranslator {
     return [InputMaskBuild, DecorateLeadsBuild, DecorateTailsBuild, ValueChangedBuild];
   }
   getValidationHandlerDetectives() {
-    return [
-      DecorateInputRequiredDetective,
-      ...StandardInputValidators,
-      ...super.getValidationHandlerDetectives()
-    ];
+    return [DecorateInputRequiredDetective, ...StandardInputValidators, ...super.getValidationHandlerDetectives()];
   }
 }
 class N2DecorateNumberTranslator extends SpecificWidgetTranslator {
@@ -3367,11 +3639,7 @@ class N2DecorateNumberTranslator extends SpecificWidgetTranslator {
     return [DecorateLeadsBuild, DecorateTailsBuild, ValueChangedBuild];
   }
   getValidationHandlerDetectives() {
-    return [
-      DecorateInputRequiredDetective,
-      ...StandardInputValidators,
-      ...super.getValidationHandlerDetectives()
-    ];
+    return [DecorateInputRequiredDetective, ...StandardInputValidators, ...super.getValidationHandlerDetectives()];
   }
 }
 class N2DecoratePasswordTranslator extends SpecificWidgetTranslator {
@@ -3382,11 +3650,7 @@ class N2DecoratePasswordTranslator extends SpecificWidgetTranslator {
     return [DecorateLeadsBuild, DecorateTailsBuild, ValueChangedBuild];
   }
   getValidationHandlerDetectives() {
-    return [
-      DecorateInputRequiredDetective,
-      ...PasswordInputValidators,
-      ...super.getValidationHandlerDetectives()
-    ];
+    return [DecorateInputRequiredDetective, ...PasswordInputValidators, ...super.getValidationHandlerDetectives()];
   }
 }
 class N2TextareaTranslator extends SpecificWidgetTranslator {
@@ -3397,11 +3661,7 @@ class N2TextareaTranslator extends SpecificWidgetTranslator {
     return [ValueChangedBuild];
   }
   getValidationHandlerDetectives() {
-    return [
-      ValidatorUtils.DETECT_REQUIRED,
-      ValidatorUtils.DETECT_LENGTH,
-      ...super.getValidationHandlerDetectives()
-    ];
+    return [ValidatorUtils.DETECT_REQUIRED, ValidatorUtils.DETECT_LENGTH, ...super.getValidationHandlerDetectives()];
   }
 }
 const N2CheckboxValuesBuild = {
@@ -3428,14 +3688,14 @@ class N2CheckboxTranslator extends SpecificWidgetTranslator {
     return [N2CheckboxValuesBuild, ValueChangedBuild];
   }
   getValidationHandlerDetectives() {
-    return [
-      ValidatorUtils.DETECT_REQUIRED,
-      ...super.getValidationHandlerDetectives()
-    ];
+    return [ValidatorUtils.DETECT_REQUIRED, ...super.getValidationHandlerDetectives()];
   }
 }
 const N2DropdownOptionsByStrBuild = (value) => {
-  return value.split(";").map((option) => option.trim()).filter((option) => VUtils.isNotBlank(option)).map((option) => option.split(":")).map(([value2, label]) => [value2.trim(), (label ?? "").trim()]).filter(([value2, label]) => VUtils.isNotBlank(value2) && VUtils.isNotBlank(label)).map(([value2, label]) => ({ value: value2, label }));
+  return value.split(";").map((option) => option.trim()).filter((option) => VUtils.isNotBlank(option)).map((option) => option.split(":")).map(([value2, label]) => [value2.trim(), (label ?? "").trim()]).filter(([value2, label]) => VUtils.isNotBlank(value2) && VUtils.isNotBlank(label)).map(([value2, label]) => ({
+    value: value2,
+    label
+  }));
 };
 const N2DropdownOptionsBuild = {
   accept: (key) => key === "options",
@@ -3447,7 +3707,13 @@ const N2DropdownOptionsBuild = {
       return [];
     }
     if (list.children[0].type === ParsedNodeType.LIST) {
-      return (list.children[0].children ?? []).filter(SemanticUtils.isAttributePairListItem).map(({ attributeName, attributeValue }) => ({ value: attributeName, label: attributeValue }));
+      return (list.children[0].children ?? []).filter(SemanticUtils.isAttributePairListItem).map(({
+        attributeName,
+        attributeValue
+      }) => ({
+        value: attributeName,
+        label: attributeValue
+      }));
     } else {
       return [];
     }
@@ -3489,22 +3755,18 @@ class N2DropdownTranslator extends SpecificWidgetTranslator {
     return N2WidgetType.DROPDOWN;
   }
   getAttributeNamesMapping() {
-    return { "Dropdown.sort": "optionSort" };
+    return {
+      "Dropdown.sort": "optionSort"
+    };
   }
   getAttributeValueBuilders() {
     return [N2DropdownOptionsBuild, N2DropdownSortBuild, N2DropdownReactionRefreshOptionsBuild, ValueChangedBuild];
   }
   getValidationHandlerDetectives() {
-    return [
-      ValidatorUtils.DETECT_REQUIRED,
-      ...super.getValidationHandlerDetectives()
-    ];
+    return [ValidatorUtils.DETECT_REQUIRED, ...super.getValidationHandlerDetectives()];
   }
   getReactionHandlerDetectives() {
-    return [
-      ...super.getReactionHandlerDetectives(),
-      N2DropdownReactionRefreshOptionsHandlerDetective
-    ];
+    return [...super.getReactionHandlerDetectives(), N2DropdownReactionRefreshOptionsHandlerDetective];
   }
 }
 class AbstractN2CheckboxesTranslator extends SpecificWidgetTranslator {
@@ -3512,17 +3774,10 @@ class AbstractN2CheckboxesTranslator extends SpecificWidgetTranslator {
     return [N2DropdownOptionsBuild, N2DropdownSortBuild, ValueChangedBuild, N2DropdownReactionRefreshOptionsBuild];
   }
   getValidationHandlerDetectives() {
-    return [
-      ValidatorUtils.DETECT_REQUIRED,
-      ValidatorUtils.DETECT_LENGTH,
-      ...super.getValidationHandlerDetectives()
-    ];
+    return [ValidatorUtils.DETECT_REQUIRED, ValidatorUtils.DETECT_LENGTH, ...super.getValidationHandlerDetectives()];
   }
   getReactionHandlerDetectives() {
-    return [
-      ...super.getReactionHandlerDetectives(),
-      N2DropdownReactionRefreshOptionsHandlerDetective
-    ];
+    return [...super.getReactionHandlerDetectives(), N2DropdownReactionRefreshOptionsHandlerDetective];
   }
 }
 class N2CheckboxesTranslator extends AbstractN2CheckboxesTranslator {
@@ -3530,7 +3785,9 @@ class N2CheckboxesTranslator extends AbstractN2CheckboxesTranslator {
     return N2WidgetType.CHECKBOXES;
   }
   getAttributeNamesMapping() {
-    return { "Checkboxes.sort": "optionSort" };
+    return {
+      "Checkboxes.sort": "optionSort"
+    };
   }
 }
 class N2ChecksTranslator extends AbstractN2CheckboxesTranslator {
@@ -3538,7 +3795,9 @@ class N2ChecksTranslator extends AbstractN2CheckboxesTranslator {
     return N2WidgetType.CHECKS;
   }
   getAttributeNamesMapping() {
-    return { "Checks.sort": "optionSort" };
+    return {
+      "Checks.sort": "optionSort"
+    };
   }
 }
 const N2RadioValuesBuild = {
@@ -3565,10 +3824,7 @@ class N2RadioTranslator extends SpecificWidgetTranslator {
     return [N2RadioValuesBuild, ValueChangedBuild];
   }
   getValidationHandlerDetectives() {
-    return [
-      ValidatorUtils.DETECT_REQUIRED,
-      ...super.getValidationHandlerDetectives()
-    ];
+    return [ValidatorUtils.DETECT_REQUIRED, ...super.getValidationHandlerDetectives()];
   }
 }
 class N2RadiosTranslator extends SpecificWidgetTranslator {
@@ -3576,22 +3832,18 @@ class N2RadiosTranslator extends SpecificWidgetTranslator {
     return N2WidgetType.RADIOS;
   }
   getAttributeNamesMapping() {
-    return { "Radios.sort": "optionSort" };
+    return {
+      "Radios.sort": "optionSort"
+    };
   }
   getAttributeValueBuilders() {
     return [N2DropdownOptionsBuild, N2DropdownSortBuild, N2DropdownReactionRefreshOptionsBuild, ValueChangedBuild];
   }
   getValidationHandlerDetectives() {
-    return [
-      ValidatorUtils.DETECT_REQUIRED,
-      ...super.getValidationHandlerDetectives()
-    ];
+    return [ValidatorUtils.DETECT_REQUIRED, ...super.getValidationHandlerDetectives()];
   }
   getReactionHandlerDetectives() {
-    return [
-      ...super.getReactionHandlerDetectives(),
-      N2DropdownReactionRefreshOptionsHandlerDetective
-    ];
+    return [...super.getReactionHandlerDetectives(), N2DropdownReactionRefreshOptionsHandlerDetective];
   }
 }
 class N2MultiDropdownTranslator extends SpecificWidgetTranslator {
@@ -3599,23 +3851,18 @@ class N2MultiDropdownTranslator extends SpecificWidgetTranslator {
     return N2WidgetType.MULTI_DROPDOWN;
   }
   getAttributeNamesMapping() {
-    return { "MultiDropdown.sort": "optionSort" };
+    return {
+      "MultiDropdown.sort": "optionSort"
+    };
   }
   getAttributeValueBuilders() {
     return [N2DropdownOptionsBuild, N2DropdownSortBuild, N2DropdownReactionRefreshOptionsBuild, ValueChangedBuild];
   }
   getValidationHandlerDetectives() {
-    return [
-      ValidatorUtils.DETECT_REQUIRED,
-      ValidatorUtils.DETECT_LENGTH,
-      ...super.getValidationHandlerDetectives()
-    ];
+    return [ValidatorUtils.DETECT_REQUIRED, ValidatorUtils.DETECT_LENGTH, ...super.getValidationHandlerDetectives()];
   }
   getReactionHandlerDetectives() {
-    return [
-      ...super.getReactionHandlerDetectives(),
-      N2DropdownReactionRefreshOptionsHandlerDetective
-    ];
+    return [...super.getReactionHandlerDetectives(), N2DropdownReactionRefreshOptionsHandlerDetective];
   }
 }
 const N2CalendarBuildFixedTimeAt = (value) => {
@@ -3624,9 +3871,19 @@ const N2CalendarBuildFixedTimeAt = (value) => {
   }
   value = value.trim().toLowerCase();
   if (value === "start" || value === "0") {
-    return { hour: 0, minute: 0, second: 0, millisecond: 0 };
+    return {
+      hour: 0,
+      minute: 0,
+      second: 0,
+      millisecond: 0
+    };
   } else if (value === "end") {
-    return { hour: 23, minute: 59, second: 59, millisecond: 999 };
+    return {
+      hour: 23,
+      minute: 59,
+      second: 59,
+      millisecond: 999
+    };
   }
   const parts = value.split(".").map((part) => part.split(":")).flat();
   if (parts.length !== 3 && parts.length !== 4) {
@@ -3641,14 +3898,29 @@ const N2CalendarBuildFixedTimeAt = (value) => {
     if (h > 23 || m > 59 || s > 59) {
       return void 0;
     } else if (h === 23 && m === 59 && s === 59) {
-      return { hour: 23, minute: 59, second: 59, millisecond: 999 };
+      return {
+        hour: 23,
+        minute: 59,
+        second: 59,
+        millisecond: 999
+      };
     } else {
-      return { hour: h, minute: m, second: s, millisecond: 0 };
+      return {
+        hour: h,
+        minute: m,
+        second: s,
+        millisecond: 0
+      };
     }
   } else if (ms > 999) {
     return void 0;
   } else {
-    return { hour: h, minute: m, second: s, millisecond: ms };
+    return {
+      hour: h,
+      minute: m,
+      second: s,
+      millisecond: ms
+    };
   }
 };
 const N2CalendarFixedTimeAtBuild = {
@@ -3668,10 +3940,7 @@ class N2DateTranslator extends SpecificWidgetTranslator {
     return [N2CalendarFixedTimeAtBuild, N2CalendarInitTimeAtBuild, N2CalendarCouldPerformBuild, ValueChangedBuild];
   }
   getValidationHandlerDetectives() {
-    return [
-      ValidatorUtils.DETECT_REQUIRED,
-      ...super.getValidationHandlerDetectives()
-    ];
+    return [ValidatorUtils.DETECT_REQUIRED, ...super.getValidationHandlerDetectives()];
   }
 }
 class N2DateTimeTranslator extends SpecificWidgetTranslator {
@@ -3682,10 +3951,7 @@ class N2DateTimeTranslator extends SpecificWidgetTranslator {
     return [N2CalendarFixedTimeAtBuild, N2CalendarInitTimeAtBuild, N2CalendarCouldPerformBuild, ValueChangedBuild];
   }
   getValidationHandlerDetectives() {
-    return [
-      ValidatorUtils.DETECT_REQUIRED,
-      ...super.getValidationHandlerDetectives()
-    ];
+    return [ValidatorUtils.DETECT_REQUIRED, ...super.getValidationHandlerDetectives()];
   }
 }
 class N2TimeTranslator extends SpecificWidgetTranslator {
@@ -3696,10 +3962,7 @@ class N2TimeTranslator extends SpecificWidgetTranslator {
     return [N2CalendarFixedTimeAtBuild, N2CalendarInitTimeAtBuild, N2CalendarCouldPerformBuild, ValueChangedBuild];
   }
   getValidationHandlerDetectives() {
-    return [
-      ValidatorUtils.DETECT_REQUIRED,
-      ...super.getValidationHandlerDetectives()
-    ];
+    return [ValidatorUtils.DETECT_REQUIRED, ...super.getValidationHandlerDetectives()];
   }
 }
 class N2CalendarTranslator extends SpecificWidgetTranslator {
@@ -3710,28 +3973,44 @@ class N2CalendarTranslator extends SpecificWidgetTranslator {
     return [N2CalendarFixedTimeAtBuild, N2CalendarInitTimeAtBuild, N2CalendarCouldPerformBuild, ValueChangedBuild];
   }
   getValidationHandlerDetectives() {
-    return [
-      ValidatorUtils.DETECT_REQUIRED,
-      ...super.getValidationHandlerDetectives()
-    ];
+    return [ValidatorUtils.DETECT_REQUIRED, ...super.getValidationHandlerDetectives()];
   }
 }
 const decoratedByPrefix = (declaration, prefix) => {
   if (VUtils.isBlank(declaration)) {
-    return { test: false, origin: declaration };
+    return {
+      test: false,
+      origin: declaration
+    };
   }
   const lowerCaseDeclaration = declaration.trim().toLowerCase();
   if (lowerCaseDeclaration.startsWith(`${prefix}:`) || lowerCaseDeclaration.startsWith(`${prefix} `)) {
-    return { test: true, origin: declaration, clipped: declaration.substring(prefix.length + 1).trim() };
+    return {
+      test: true,
+      origin: declaration,
+      clipped: declaration.substring(prefix.length + 1).trim()
+    };
   } else {
-    return { test: false, origin: declaration };
+    return {
+      test: false,
+      origin: declaration
+    };
   }
 };
 const buildShowAlert = (declaration) => {
-  const { test, clipped } = decoratedByPrefix(declaration, GlobalEventPrefix.ALERT);
+  const {
+    test,
+    clipped
+  } = decoratedByPrefix(declaration, GlobalEventPrefix.ALERT);
   if (test) {
     return async (options) => {
-      const { global: { alert: { show } } } = options;
+      const {
+        global: {
+          alert: {
+            show
+          }
+        }
+      } = options;
       return await show((clipped ?? "").trim());
     };
   } else {
@@ -3739,45 +4018,79 @@ const buildShowAlert = (declaration) => {
   }
 };
 const buildShowDialog = (declaration) => {
-  const { test, origin, clipped } = decoratedByPrefix(declaration, GlobalEventPrefix.DIALOG);
+  const {
+    test,
+    origin,
+    clipped
+  } = decoratedByPrefix(declaration, GlobalEventPrefix.DIALOG);
   if (test) {
     return async (options) => {
-      const { global: { custom }, root, model } = options;
-      return await custom(origin, GlobalEventPrefix.DIALOG, clipped, { root, model });
+      const {
+        global: {
+          custom
+        },
+        root,
+        model
+      } = options;
+      return await custom(origin, GlobalEventPrefix.DIALOG, clipped, {
+        root,
+        model
+      });
     };
   } else {
     return void 0;
   }
 };
 const buildSwitchWizardStep = (declaration) => {
-  const { test, origin, clipped } = decoratedByPrefix(declaration, GlobalEventPrefix.WIZARD_STEP);
+  const {
+    test,
+    origin,
+    clipped
+  } = decoratedByPrefix(declaration, GlobalEventPrefix.WIZARD_STEP);
   if (test) {
     return async (options) => {
-      const { global: { custom }, root, model } = options;
-      return await custom(origin, GlobalEventPrefix.WIZARD_STEP, clipped, { root, model });
+      const {
+        global: {
+          custom
+        },
+        root,
+        model
+      } = options;
+      return await custom(origin, GlobalEventPrefix.WIZARD_STEP, clipped, {
+        root,
+        model
+      });
     };
   } else {
     return void 0;
   }
 };
 const buildCustomEvent = (declaration) => {
-  const { test, origin, clipped } = decoratedByPrefix(declaration, GlobalEventPrefix.CUSTOM);
+  const {
+    test,
+    origin,
+    clipped
+  } = decoratedByPrefix(declaration, GlobalEventPrefix.CUSTOM);
   if (test) {
     return async (options) => {
-      const { global: { custom }, root, model } = options;
-      return await custom(origin, GlobalEventPrefix.CUSTOM, clipped, { root, model });
+      const {
+        global: {
+          custom
+        },
+        root,
+        model
+      } = options;
+      return await custom(origin, GlobalEventPrefix.CUSTOM, clipped, {
+        root,
+        model
+      });
     };
   } else {
     return void 0;
   }
 };
 const buildClickHandler = (declaration) => {
-  const builds = [
-    buildShowAlert,
-    buildShowDialog,
-    buildSwitchWizardStep,
-    buildCustomEvent
-  ];
+  const builds = [buildShowAlert, buildShowDialog, buildSwitchWizardStep, buildCustomEvent];
   for (const build of builds) {
     const handler = build(declaration);
     if (handler != null) {
@@ -3787,11 +4100,21 @@ const buildClickHandler = (declaration) => {
   return void 0;
 };
 const N2ButtonValidateMinimum = async (options) => {
-  const { validators: { $mine } } = options;
+  const {
+    validators: {
+      $mine
+    }
+  } = options;
   await $mine();
 };
 const N2ButtonValidateBlock = async (options) => {
-  const { validators: { $arrayElement, $closestContainer, $all } } = options;
+  const {
+    validators: {
+      $arrayElement,
+      $closestContainer,
+      $all
+    }
+  } = options;
   if (!$arrayElement != null) {
     await $arrayElement();
   } else if ($closestContainer != null) {
@@ -3801,12 +4124,20 @@ const N2ButtonValidateBlock = async (options) => {
   }
 };
 const N2ButtonValidateAll = async (options) => {
-  const { validators: { $all } } = options;
+  const {
+    validators: {
+      $all
+    }
+  } = options;
   await $all();
 };
 const N2ButtonCreateScopesValidate = (scopes) => {
   return async (options) => {
-    const { validators: { $given } } = options;
+    const {
+      validators: {
+        $given
+      }
+    } = options;
     await $given(scopes);
   };
 };
@@ -3880,7 +4211,10 @@ const N2CaptionValueToLabelBuild = {
 				console.error(e);
 				return value == null ? '' : value;
 			}`);
-      return { labelOnValue: true, valueToLabel: func };
+      return {
+        labelOnValue: true,
+        valueToLabel: func
+      };
     } catch (e) {
       N3Logger.error(e, "N2CaptionValueToLabelBuild");
       return void 0;
@@ -3898,12 +4232,18 @@ const N2CaptionClickBuild = {
   }
 };
 const N2CaptionReactionDetective = (options) => {
-  const { $pp, attributes } = options;
+  const {
+    $pp,
+    attributes
+  } = options;
   if (attributes.labelOnValue !== true) {
     return void 0;
   }
   const watches = [$pp].filter((path) => VUtils.isNotBlank(path));
-  return { $watch: watches, $handle: NUtils.reactWithRepaint };
+  return {
+    $watch: watches,
+    $handle: NUtils.reactWithRepaint
+  };
 };
 const N2CaptionRedressLabelAndText = (def) => {
   const defs = def;
@@ -3934,10 +4274,7 @@ class N2CaptionTranslator extends SpecificWidgetTranslator {
     return [N2CaptionValueToLabelBuild, N2CaptionClickBuild, DecorateLeadsBuild, DecorateTailsBuild];
   }
   getReactionHandlerDetectives() {
-    return [
-      N2CaptionReactionDetective,
-      ...super.getReactionHandlerDetectives()
-    ];
+    return [N2CaptionReactionDetective, ...super.getReactionHandlerDetectives()];
   }
 }
 class N2LabelTranslator extends SpecificWidgetTranslator {
@@ -3948,16 +4285,16 @@ class N2LabelTranslator extends SpecificWidgetTranslator {
     return [...super.getToWidgetAttributeNames(), "text"];
   }
   redressProperties(def) {
-    return super.redressProperties(N2CaptionRedressLabelAndText({ ...def, labelOnValue: true }));
+    return super.redressProperties(N2CaptionRedressLabelAndText({
+      ...def,
+      labelOnValue: true
+    }));
   }
   getAttributeValueBuilders() {
     return [N2CaptionValueToLabelBuild, N2CaptionClickBuild, DecorateLeadsBuild, DecorateTailsBuild];
   }
   getReactionHandlerDetectives() {
-    return [
-      N2CaptionReactionDetective,
-      ...super.getReactionHandlerDetectives()
-    ];
+    return [N2CaptionReactionDetective, ...super.getReactionHandlerDetectives()];
   }
 }
 class N2BadgeTranslator extends SpecificWidgetTranslator {
@@ -3974,10 +4311,7 @@ class N2BadgeTranslator extends SpecificWidgetTranslator {
     return [N2CaptionValueToLabelBuild, N2CaptionClickBuild, DecorateLeadsBuild, DecorateTailsBuild];
   }
   getReactionHandlerDetectives() {
-    return [
-      N2CaptionReactionDetective,
-      ...super.getReactionHandlerDetectives()
-    ];
+    return [N2CaptionReactionDetective, ...super.getReactionHandlerDetectives()];
   }
 }
 class AbstractRibsTranslator extends SpecificArrayWidgetTranslator {
@@ -3991,7 +4325,9 @@ class AbstractRibsTranslator extends SpecificArrayWidgetTranslator {
     return [...super.getToWidgetAttributeNames(), "caption"];
   }
   getAttributeNamesMapping() {
-    return this.buildDefaultAttributeNamesMapping({ [`${this.getSupportedType()}.elementTitle`]: "caption" });
+    return this.buildDefaultAttributeNamesMapping({
+      [`${this.getSupportedType()}.elementTitle`]: "caption"
+    });
   }
 }
 class N2RibsTranslator extends AbstractRibsTranslator {
@@ -4011,14 +4347,20 @@ const N2TableHeadersBuild = {
       return void 0;
     }
     const headers = (list.children[0].children ?? []).filter(SemanticUtils.isAttributePairListItem).map((pair, index2) => {
-      const { attributeName, attributeValue } = pair;
+      const {
+        attributeName,
+        attributeValue
+      } = pair;
       if (VUtils.isBlank(attributeName)) {
         return null;
       } else if (attributeName.toLowerCase() === "column" || VUtils.isBlank(attributeValue)) {
         if (pair.children == null || pair.children.length === 0 || pair.children[0].type !== ParsedNodeType.LIST) {
           return null;
         }
-        const parsed = (pair.children[0].children ?? []).filter(SemanticUtils.isAttributePairListItem).reduce((attrs, { attributeName: attributeName2, attributeValue: attributeValue2 }) => {
+        const parsed = (pair.children[0].children ?? []).filter(SemanticUtils.isAttributePairListItem).reduce((attrs, {
+          attributeName: attributeName2,
+          attributeValue: attributeValue2
+        }) => {
           const name = attributeName2.toLowerCase().trim();
           if (name === "label") {
             attrs.label = attributeValue2.trim();
@@ -4034,7 +4376,10 @@ const N2TableHeadersBuild = {
           return attrs;
         }, {});
         if (VUtils.isNotBlank(parsed.label) && VUtils.isNotBlank(parsed.width)) {
-          return { ...parsed, index: index2 };
+          return {
+            ...parsed,
+            index: index2
+          };
         } else {
           return null;
         }
@@ -4042,12 +4387,23 @@ const N2TableHeadersBuild = {
         const value = attributeValue.trim();
         const positive = VUtils.isPositive(value);
         if (positive.test) {
-          return { label: attributeName.trim(), width: positive.value, index: index2 };
+          return {
+            label: attributeName.trim(),
+            width: positive.value,
+            index: index2
+          };
         } else {
-          return { label: attributeName.trim(), width: value, index: index2 };
+          return {
+            label: attributeName.trim(),
+            width: value,
+            index: index2
+          };
         }
       }
-    }).filter((x) => x != null).map((x, index2) => ({ ...x, index: index2 }));
+    }).filter((x) => x != null).map((x, index2) => ({
+      ...x,
+      index: index2
+    }));
     return headers.length === 0 ? void 0 : headers;
   }
 };
@@ -4073,15 +4429,14 @@ class N2TableTranslator extends SpecificArrayWidgetTranslator {
     return this.buildDefaultAttributeNamesMapping();
   }
   getAttributeValueBuilders() {
-    return [
-      ...super.getAttributeValueBuilders(),
-      N2TableHeadersBuild
-    ];
+    return [...super.getAttributeValueBuilders(), N2TableHeadersBuild];
   }
   postWork(def) {
     var _a;
     const defs = def;
-    const { $nodes } = defs;
+    const {
+      $nodes
+    } = defs;
     defs.rowOperators = (_a = ($nodes ?? []).find((node) => node.$wt === N2WidgetType.TABLE_ROW_OPERATORS)) == null ? void 0 : _a.$nodes;
     defs.pageable = ($nodes ?? []).find((node) => node.$wt === N2WidgetType.PAGINATION);
     defs.$nodes = ($nodes ?? []).filter((node) => {
@@ -4177,7 +4532,9 @@ class N2WizardSharedTranslator extends SpecificWidgetTranslator {
     if (shareDef.body == null || !(shareDef.body instanceof ExternalDefIndicator)) {
       shareDef.body = {
         $wt: N2WidgetType.SECTION,
-        $pos: { $cols: 3 },
+        $pos: {
+          $cols: 3
+        },
         $nodes: defs.$nodes
       };
       delete defs.$nodes;
@@ -4209,7 +4566,9 @@ class N2WizardStepTranslator extends SpecificWidgetTranslator {
     if (stepDef.body == null || !(stepDef.body instanceof ExternalDefIndicator)) {
       stepDef.body = {
         $wt: N2WidgetType.SECTION,
-        $pos: { $cols: 12 },
+        $pos: {
+          $cols: 12
+        },
         $nodes: defs.$nodes
       };
       delete defs.$nodes;
@@ -4229,7 +4588,9 @@ class N2WizardTranslator extends SpecificWidgetTranslator {
   }
   postWork(def) {
     const defs = def;
-    const { $nodes } = defs;
+    const {
+      $nodes
+    } = defs;
     defs.shared = ($nodes ?? []).find((node) => node.$wt === N2WidgetType.WIZARD_SHARED);
     defs.contents = ($nodes ?? []).filter((node) => node.$wt === N2WidgetType.WIZARD_STEP);
     delete defs.$nodes;
@@ -4254,16 +4615,10 @@ class AbstractN2DropdownTreeTranslator extends SpecificWidgetTranslator {
     return [N2DropdownTreeCouldSelectBuild, N2DropdownSortBuild, N2DropdownReactionRefreshOptionsBuild, ValueChangedBuild];
   }
   getValidationHandlerDetectives() {
-    return [
-      ValidatorUtils.DETECT_REQUIRED,
-      ...super.getValidationHandlerDetectives()
-    ];
+    return [ValidatorUtils.DETECT_REQUIRED, ...super.getValidationHandlerDetectives()];
   }
   getReactionHandlerDetectives() {
-    return [
-      ...super.getReactionHandlerDetectives(),
-      N2DropdownReactionRefreshOptionsHandlerDetective
-    ];
+    return [...super.getReactionHandlerDetectives(), N2DropdownReactionRefreshOptionsHandlerDetective];
   }
 }
 class N2DropdownTreeTranslator extends AbstractN2DropdownTreeTranslator {
@@ -4271,7 +4626,9 @@ class N2DropdownTreeTranslator extends AbstractN2DropdownTreeTranslator {
     return N2WidgetType.DROPDOWN_TREE;
   }
   getAttributeNamesMapping() {
-    return { "DropdownTree.sort": "optionSort" };
+    return {
+      "DropdownTree.sort": "optionSort"
+    };
   }
 }
 class N2DDTTranslator extends AbstractN2DropdownTreeTranslator {
@@ -4279,7 +4636,9 @@ class N2DDTTranslator extends AbstractN2DropdownTreeTranslator {
     return N2WidgetType.DDT;
   }
   getAttributeNamesMapping() {
-    return { "DDT.sort": "optionSort" };
+    return {
+      "DDT.sort": "optionSort"
+    };
   }
 }
 const MultiDropdownTreeCouldSelectBuild = createSyncSnippetBuild("couldSelect", ["option"]);
@@ -4288,17 +4647,10 @@ class AbstractN2MultiDropdownTreeTranslator extends SpecificWidgetTranslator {
     return [MultiDropdownTreeCouldSelectBuild, N2DropdownSortBuild, N2DropdownReactionRefreshOptionsBuild, ValueChangedBuild];
   }
   getValidationHandlerDetectives() {
-    return [
-      ValidatorUtils.DETECT_REQUIRED,
-      ValidatorUtils.DETECT_LENGTH,
-      ...super.getValidationHandlerDetectives()
-    ];
+    return [ValidatorUtils.DETECT_REQUIRED, ValidatorUtils.DETECT_LENGTH, ...super.getValidationHandlerDetectives()];
   }
   getReactionHandlerDetectives() {
-    return [
-      ...super.getReactionHandlerDetectives(),
-      N2DropdownReactionRefreshOptionsHandlerDetective
-    ];
+    return [...super.getReactionHandlerDetectives(), N2DropdownReactionRefreshOptionsHandlerDetective];
   }
 }
 class N2MultiDropdownTreeTranslator extends AbstractN2MultiDropdownTreeTranslator {
@@ -4306,7 +4658,9 @@ class N2MultiDropdownTreeTranslator extends AbstractN2MultiDropdownTreeTranslato
     return N2WidgetType.MULTI_DROPDOWN_TREE;
   }
   getAttributeNamesMapping() {
-    return { "MultiDropdownTree.sort": "optionSort" };
+    return {
+      "MultiDropdownTree.sort": "optionSort"
+    };
   }
 }
 class N2MDDTTranslator extends AbstractN2MultiDropdownTreeTranslator {
@@ -4314,7 +4668,9 @@ class N2MDDTTranslator extends AbstractN2MultiDropdownTreeTranslator {
     return N2WidgetType.MDDT;
   }
   getAttributeNamesMapping() {
-    return { "MDDT.sort": "optionSort" };
+    return {
+      "MDDT.sort": "optionSort"
+    };
   }
 }
 const N2PaginationPossibleSizesBuild = {
@@ -4344,14 +4700,18 @@ class N2PaginationTranslator extends SpecificWidgetTranslator {
     return false;
   }
   getAttributeNamesMapping() {
-    return { "Pagination.sizes": "possibleSizes" };
+    return {
+      "Pagination.sizes": "possibleSizes"
+    };
   }
   getAttributeValueBuilders() {
     return [N2PaginationPossibleSizesBuild, ValueChangedBuild];
   }
 }
 const registerN2Widgets$1 = (widgetHelper) => {
-  const { repository: repo } = widgetHelper ?? createOrGetTranslateHelperSingleton();
+  const {
+    repository: repo
+  } = widgetHelper ?? createOrGetTranslateHelperSingleton();
   repo.register(new N2InputTranslator(repo));
   repo.register(new N2NumberTranslator(repo));
   repo.register(new N2PasswordTranslator(repo));
@@ -4502,33 +4862,46 @@ class DocParser {
     if (VUtils.isBlank(def)) {
       N3Logger.error("No content determined in given markdown content.", DocParser.name);
       return {
-        node: { $wt: "Page" },
+        node: {
+          $wt: "Page"
+        },
         success: false,
         error: "No content determined in given markdown content."
       };
     }
-    const { headings: preparsedHeadings } = this._ast.askAsTree(def);
+    const {
+      headings: preparsedHeadings
+    } = this._ast.askAsTree(def);
     if (preparsedHeadings.length === 0) {
       N3Logger.error("No available content determined, at least one heading in content. All content ignored.", DocParser.name);
       return {
-        node: { $wt: "Page" },
+        node: {
+          $wt: "Page"
+        },
         success: false,
         error: "No available content determined, at least one heading in content. All content ignored."
       };
     }
     const headings = preparsedHeadings.map((heading) => this._semantic.parsePreparsed(heading));
-    const { exported, independent } = this._semantic.classifyParsedHeadings(headings);
+    const {
+      exported,
+      independent
+    } = this._semantic.classifyParsedHeadings(headings);
     if (exported.length === 0) {
       N3Logger.error("Heading not found, must follow format[Type[[::Headline]::Id]]. All content ignored.", DocParser.name);
       return {
-        node: { $wt: "Page" },
+        node: {
+          $wt: "Page"
+        },
         success: false,
         error: "Heading not found, must follow format[Type[[::Headline]::Id]]. All content ignored."
       };
     } else if (exported.length > 1) {
       N3Logger.error("Multiple roots does not support yet. All content ignored.", DocParser.name);
       return {
-        node: { $wt: "Page" },
+        node: {
+          $wt: "Page"
+        },
         success: false,
         error: "Multiple roots does not support yet. All content ignored."
       };
@@ -4539,11 +4912,19 @@ class DocParser {
       return parsedRoot;
     } catch (error) {
       N3Logger.error(error, DocParser.name);
-      return { node: { $wt: "Page" }, success: false, error };
+      return {
+        node: {
+          $wt: "Page"
+        },
+        success: false,
+        error
+      };
     }
   }
 }
-const SINGLETON = { parser: void 0 };
+const SINGLETON = {
+  parser: void 0
+};
 const parseDoc = new Proxy(() => void 0, {
   apply(target, _thisArg, argArray) {
     if (SINGLETON.parser == null) {

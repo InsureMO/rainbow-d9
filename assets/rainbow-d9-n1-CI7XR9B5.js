@@ -4,8 +4,8 @@ var __publicField = (obj, key, value) => {
   __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
   return value;
 };
-import { F as buffer, G as nanoid, H as EventEmitter } from "./vendor-ctmAJdvj.js";
-import { r as reactExports, a as React } from "./react-VfX_HI7I.js";
+import { F as buffer, G as nanoid, H as EventEmitter } from "./vendor-Ih3CtHGV.js";
+import { r as reactExports, a as React } from "./react-yj2EiHa4.js";
 const VUtils = {
   isEmpty: (v) => v == null || typeof v === "string" && v.length === 0,
   isNotEmpty: (v) => (v ?? "") !== "",
@@ -14,17 +14,29 @@ const VUtils = {
   isPrimitive: (v) => v != null && ["string", "number", "boolean", "symbol", "bigint"].includes(typeof v),
   isNumber: (v) => {
     if (VUtils.isBlank(v)) {
-      return { test: false };
+      return {
+        test: false
+      };
     }
     switch (typeof v) {
       case "number":
-        return { test: true, value: v };
+        return {
+          test: true,
+          value: v
+        };
       case "string": {
         const n = Number(v);
-        return Number.isNaN(n) ? { test: false } : { test: true, value: n };
+        return Number.isNaN(n) ? {
+          test: false
+        } : {
+          test: true,
+          value: n
+        };
       }
       default:
-        return { test: false };
+        return {
+          test: false
+        };
     }
   },
   assertNumber: (v, assert) => {
@@ -34,7 +46,9 @@ const VUtils = {
     } else if (assert(result.value)) {
       return result;
     } else {
-      return { test: false };
+      return {
+        test: false
+      };
     }
   },
   isInteger: (v) => VUtils.assertNumber(v, Number.isInteger),
@@ -360,16 +374,26 @@ const NUtils = {
         map2[scope] = true;
         return map2;
       }, {});
-      return { list, map };
+      return {
+        list,
+        map
+      };
     })()).list;
   },
   reactWithRepaint: () => Reaction.REPAINT,
   reactWithClear: () => Reaction.CLEAR_VALUE,
   asGridPosByDefault: ($pos, defaultCols) => {
     if ($pos == null) {
-      return { gridColumn: `span ${defaultCols}` };
+      return {
+        gridColumn: `span ${defaultCols}`
+      };
     }
-    const { $col, $cols, $row, $rows } = $pos;
+    const {
+      $col,
+      $cols,
+      $row,
+      $rows
+    } = $pos;
     const pos = {};
     switch (true) {
       case ($col == null && $cols == null):
@@ -404,17 +428,25 @@ const NUtils = {
     if (def.$mpos != null) {
       return NUtils.asGridPosByDefault(def.$mpos, 12);
     } else if (def.$pos != null) {
-      const { $cols } = def.$pos;
-      return { gridColumn: `span ${Math.min(12, $cols * 4)}` };
+      const {
+        $cols
+      } = def.$pos;
+      return {
+        gridColumn: `span ${Math.min(12, $cols * 4)}`
+      };
     } else {
-      return { gridColumn: "span 12" };
+      return {
+        gridColumn: "span 12"
+      };
     }
   },
   asGridPosForNonMobile: (def) => {
     return NUtils.asGridPosByDefault(def.$pos, 3);
   },
   asGridPos: (def) => {
-    const { "data-mobile": mobile } = def;
+    const {
+      "data-mobile": mobile
+    } = def;
     if (mobile) {
       return NUtils.asGridPosForMobile(def);
     } else {
@@ -495,7 +527,10 @@ const MBUtils = {
     }
     DETECTED_DEVICE.touchable = touchable;
     if (touchable) {
-      const { innerWidth, innerHeight } = window;
+      const {
+        innerWidth,
+        innerHeight
+      } = window;
       if (innerWidth <= 499 || innerHeight <= 499) {
         DETECTED_DEVICE.mobile = true;
         DETECTED_DEVICE.tablet = false;
@@ -571,9 +606,13 @@ var RootEventTypes;
 const Context$4 = reactExports.createContext({});
 Context$4.displayName = "EventBus";
 const RootEventBusProvider = (props) => {
-  const { children } = props;
+  const {
+    children
+  } = props;
   const bus = useCreateEventBus("d9-root");
-  return React.createElement(Context$4.Provider, { value: bus }, children);
+  return React.createElement(Context$4.Provider, {
+    value: bus
+  }, children);
 };
 const useRootEventBus = () => reactExports.useContext(Context$4);
 var ContainerEventTypes;
@@ -585,9 +624,13 @@ var ContainerEventTypes;
 const Context$3 = reactExports.createContext({});
 Context$3.displayName = "EventBus";
 const ContainerEventBusProvider = (props) => {
-  const { children } = props;
+  const {
+    children
+  } = props;
   const bus = useCreateEventBus("d9-container");
-  return React.createElement(Context$3.Provider, { value: bus }, children);
+  return React.createElement(Context$3.Provider, {
+    value: bus
+  }, children);
 };
 const useContainerEventBus = () => reactExports.useContext(Context$3);
 var ArrayElementEventTypes;
@@ -599,9 +642,13 @@ var ArrayElementEventTypes;
 const Context$2 = reactExports.createContext({});
 Context$2.displayName = "ArrayElementEventBus";
 const ArrayElementEventBusProvider = (props) => {
-  const { children } = props;
+  const {
+    children
+  } = props;
   const bus = useCreateEventBus("d9-array-element");
-  return React.createElement(Context$2.Provider, { value: bus }, children);
+  return React.createElement(Context$2.Provider, {
+    value: bus
+  }, children);
 };
 const useArrayElementEventBus = () => reactExports.useContext(Context$2);
 var WrapperEventTypes;
@@ -613,9 +660,13 @@ var WrapperEventTypes;
 const Context$1 = reactExports.createContext({});
 Context$1.displayName = "EventBus";
 const WrapperEventBusProvider = (props) => {
-  const { children } = props;
+  const {
+    children
+  } = props;
   const bus = useCreateEventBus("d9-wrapper");
-  return React.createElement(Context$1.Provider, { value: bus }, children);
+  return React.createElement(Context$1.Provider, {
+    value: bus
+  }, children);
 };
 const useWrapperEventBus = () => reactExports.useContext(Context$1);
 const useForceUpdate = () => {
@@ -672,7 +723,10 @@ const VALUE_CHANGED_OPTIONS = {
   DELAY_MS: 150
 };
 const askOldValue = (options) => {
-  const { stateOldValue, currentOldValue } = options;
+  const {
+    stateOldValue,
+    currentOldValue
+  } = options;
   if (stateOldValue == null) {
     return currentOldValue;
   } else if (stateOldValue != currentOldValue) {
@@ -682,13 +736,25 @@ const askOldValue = (options) => {
   }
 };
 const useValueChanged = () => {
-  const { fire } = useRootEventBus();
-  const { fire: fireWrapper } = useWrapperEventBus();
+  const {
+    fire
+  } = useRootEventBus();
+  const {
+    fire: fireWrapper
+  } = useWrapperEventBus();
   const [values] = reactExports.useState({});
-  const { replace } = useThrottler();
+  const {
+    replace
+  } = useThrottler();
   return (options) => {
-    const { absolutePath, newValue } = options;
-    const oldValue = askOldValue({ stateOldValue: values[absolutePath], currentOldValue: options.oldValue });
+    const {
+      absolutePath,
+      newValue
+    } = options;
+    const oldValue = askOldValue({
+      stateOldValue: values[absolutePath],
+      currentOldValue: options.oldValue
+    });
     values[absolutePath] = oldValue;
     replace(() => {
       new Promise((resolve) => {
@@ -705,16 +771,29 @@ const useSetValue = (props) => {
   const forceUpdate = useForceUpdate();
   return {
     onValueChange: async (newValue, doForceUpdate = true, ...args) => {
-      const { $p2r, $model, $pp, valueChanged } = props;
+      const {
+        $p2r,
+        $model,
+        $pp,
+        valueChanged
+      } = props;
       const oldValue = MUtils.setValue($model, $pp, newValue);
       if (doForceUpdate) {
         forceUpdate();
       }
       const absolutePath = PPUtils.absolute($p2r, $pp);
       if (valueChanged != null) {
-        await valueChanged({ absolutePath, oldValue, newValue }, ...args);
+        await valueChanged({
+          absolutePath,
+          oldValue,
+          newValue
+        }, ...args);
       }
-      onValueChanged({ absolutePath, oldValue, newValue }, ...args);
+      onValueChanged({
+        absolutePath,
+        oldValue,
+        newValue
+      }, ...args);
       N1Logger.debug(`Value set[old=${oldValue}, new=${newValue}, path=${$pp}, absolutePath=${absolutePath}].`, $model, "SetValueHook");
     },
     onValueChanged
@@ -737,24 +816,39 @@ const beautifyDataAttributes = (attributes, options) => {
         }
       } else if (type === "function") {
         attributes[defKey] = value;
-        attributes[key] = value({ root: options.root, model: options.model });
+        attributes[key] = value({
+          root: options.root,
+          model: options.model
+        });
       } else
         ;
     } else if (typeof attributes[defKey] === "string") {
       attributes[key] = MUtils.getValue(options.model, attributes[defKey].substring(4));
     } else if (typeof attributes[defKey] === "function") {
-      attributes[key] = attributes[defKey]({ root: options.root, model: options.model });
+      attributes[key] = attributes[defKey]({
+        root: options.root,
+        model: options.model
+      });
     } else
       ;
   });
 };
 const ValidationEventHolder = () => {
-  const { on, off, fire } = useRootEventBus();
-  const [validationEventState] = reactExports.useState({ byIds: {}, byScopes: {} });
+  const {
+    on,
+    off,
+    fire
+  } = useRootEventBus();
+  const [validationEventState] = reactExports.useState({
+    byIds: {},
+    byScopes: {}
+  });
   reactExports.useEffect(() => {
     const onValidate = async (scopes, onValidate2) => {
       if (scopes == null || scopes.length === 0) {
-        const validated = await Promise.all(Object.values(validationEventState.byIds).map(({ validate }) => validate()));
+        const validated = await Promise.all(Object.values(validationEventState.byIds).map(({
+          validate
+        }) => validate()));
         onValidate2({
           failed: validated.filter((validated2) => !validated2.valid),
           passed: validated.filter((validated2) => validated2.valid)
@@ -765,7 +859,10 @@ const ValidationEventHolder = () => {
             ids.list.push(id);
           }
           return ids;
-        }, { map: {}, list: [] }).list.map((id) => {
+        }, {
+          map: {},
+          list: []
+        }).list.map((id) => {
           var _a;
           return (_a = validationEventState.byIds[id]) == null ? void 0 : _a.validate;
         }).filter((validate) => validate != null).map((validate) => validate()));
@@ -776,7 +873,10 @@ const ValidationEventHolder = () => {
       }
     };
     const onRegisterValidatable = (uniqueId, scopes, validate) => {
-      validationEventState.byIds[uniqueId] = { validate, scopes };
+      validationEventState.byIds[uniqueId] = {
+        validate,
+        scopes
+      };
       (scopes || []).forEach((scope) => {
         if (validationEventState.byScopes[scope] == null) {
           validationEventState.byScopes[scope] = {};
@@ -785,7 +885,9 @@ const ValidationEventHolder = () => {
       });
     };
     const onUnregisterValidatable = (uniqueId) => {
-      const { scopes = [] } = validationEventState.byIds[uniqueId] || {};
+      const {
+        scopes = []
+      } = validationEventState.byIds[uniqueId] || {};
       delete validationEventState.byIds[uniqueId];
       (scopes || []).forEach((scope) => {
         if (validationEventState.byScopes[scope] != null) {
@@ -825,11 +927,22 @@ const useFixedScopeValidationEventHandlers = () => {
       }
     };
   });
-  return { state, ...handlers };
+  return {
+    state,
+    ...handlers
+  };
 };
 const ContainerValidationEventHolder = () => {
-  const { on, off } = useContainerEventBus();
-  const { state, onValidate, onRegisterValidatable, onUnregisterValidatable } = useFixedScopeValidationEventHandlers();
+  const {
+    on,
+    off
+  } = useContainerEventBus();
+  const {
+    state,
+    onValidate,
+    onRegisterValidatable,
+    onUnregisterValidatable
+  } = useFixedScopeValidationEventHandlers();
   reactExports.useEffect(() => {
     on(ContainerEventTypes.VALIDATE, onValidate);
     on(ContainerEventTypes.REGISTER_VALIDATABLE, onRegisterValidatable);
@@ -843,8 +956,16 @@ const ContainerValidationEventHolder = () => {
   return React.createElement(reactExports.Fragment, null);
 };
 const ArrayElementValidationEventHolder = () => {
-  const { on, off } = useArrayElementEventBus();
-  const { state, onValidate, onRegisterValidatable, onUnregisterValidatable } = useFixedScopeValidationEventHandlers();
+  const {
+    on,
+    off
+  } = useArrayElementEventBus();
+  const {
+    state,
+    onValidate,
+    onRegisterValidatable,
+    onUnregisterValidatable
+  } = useFixedScopeValidationEventHandlers();
   reactExports.useEffect(() => {
     on(ArrayElementEventTypes.VALIDATE, onValidate);
     on(ArrayElementEventTypes.REGISTER_VALIDATABLE, onRegisterValidatable);
@@ -872,18 +993,29 @@ const RootToBridgeUndercover = () => {
       return;
     }
     const onNotifyValueChanged = (args) => {
-      const { absolutePath, from, to } = args;
+      const {
+        absolutePath,
+        from,
+        to
+      } = args;
       root.fire(RootEventTypes.VALUE_CHANGED, absolutePath, from, to);
     };
     const onValidateRequest = (args) => {
-      const { scopes, onValidated: onValidated2 } = args;
+      const {
+        scopes,
+        onValidated: onValidated2
+      } = args;
       root.fire(RootEventTypes.VALIDATE, scopes, onValidated2 ?? VUtils.noop);
     };
     const onValidated = (options) => {
       bridge.fire(BridgeToRootEventTypes.LISTEN_VALIDATED, options);
     };
     const onValueChanged = (absolutePath, from, to) => {
-      bridge.fire(BridgeToRootEventTypes.LISTEN_VALUE_CHANGED, { absolutePath, from, to });
+      bridge.fire(BridgeToRootEventTypes.LISTEN_VALUE_CHANGED, {
+        absolutePath,
+        from,
+        to
+      });
     };
     bridge.on(BridgeToRootEventTypes.NOTIFY_VALUE_CHANGED, onNotifyValueChanged);
     bridge.on(BridgeToRootEventTypes.PERFORM_VALIDATE, onValidateRequest);
@@ -900,7 +1032,9 @@ const RootToBridgeUndercover = () => {
 };
 MBUtils.createDeviceTagsOnHTMLTag();
 const DeviceDetective = () => {
-  const { fire } = useRootEventBus();
+  const {
+    fire
+  } = useRootEventBus();
   const [tags, setTags] = reactExports.useState(MBUtils.computeDeviceTags());
   reactExports.useEffect(() => {
     const onWindowResize = () => {
@@ -923,7 +1057,10 @@ const DeviceDetective = () => {
   return React.createElement(reactExports.Fragment, null);
 };
 const useDeviceTags = () => {
-  const { on, off } = useRootEventBus();
+  const {
+    on,
+    off
+  } = useRootEventBus();
   const [tags, setTags] = reactExports.useState(MBUtils.computeDeviceTags());
   reactExports.useEffect(() => {
     const onDeviceChanged = (tags2) => setTags(tags2);
@@ -937,9 +1074,13 @@ const useDeviceTags = () => {
 const Context = reactExports.createContext({});
 Context.displayName = "BridgeEventBus";
 const BridgeEventBusProvider = (props) => {
-  const { children } = props;
+  const {
+    children
+  } = props;
   const bus = useCreateEventBus("bridge-event-bus");
-  return React.createElement(Context.Provider, { value: bus }, children);
+  return React.createElement(Context.Provider, {
+    value: bus
+  }, children);
 };
 const useBridgeEventBus = () => reactExports.useContext(Context);
 class ExternalDefIndicator {
@@ -1026,7 +1167,10 @@ const ExternalDefMismatchIndicators = new Proxy({}, {
   }
 });
 const ExternalDefsHandler = (props) => {
-  const { options, externalDefs } = props;
+  const {
+    options,
+    externalDefs
+  } = props;
   const reb = useRootEventBus();
   if (externalDefs == null) {
     handleExternalDefs(options, reb, ExternalDefMismatchIndicators);
@@ -1045,7 +1189,11 @@ const findWatches = (def) => {
     if (isDeclaredAsPlainValue(key, declared)) {
       return null;
     }
-    const { $watch, $handle, $default } = declared;
+    const {
+      $watch,
+      $handle,
+      $default
+    } = declared;
     if (key !== MonitorNodeAttributes.VALID && ($watch == null || $watch.length === 0)) {
       N1Logger.error("Watch def: ", declared, "FindWatches");
       N1Logger.error(`At least one path needs to be declared on attribute[${key}] monitor, ignored.`, "FindWatches");
@@ -1056,17 +1204,33 @@ const findWatches = (def) => {
       N1Logger.error(`Monitor handler is missed on attribute[${key}] monitor, ignored.`, "FindWatches");
       return null;
     }
-    return { $watch, $handle, $default, $attributeName: key };
+    return {
+      $watch,
+      $handle,
+      $default,
+      $attributeName: key
+    };
   }).filter((x) => x != null);
 };
 const buildDefaultAttributeValues = async (def) => {
-  const { $root, $model, $pp } = def;
+  const {
+    $root,
+    $model,
+    $pp
+  } = def;
   const values = await findWatches(def).reduce(async (values2, declared) => {
     const attrs = await values2;
-    const { $attributeName, $default } = declared;
+    const {
+      $attributeName,
+      $default
+    } = declared;
     if (VUtils.isFunction($default)) {
       const value = MUtils.getValue($model, $pp);
-      attrs[$attributeName.trim()] = await $default({ root: $root, model: $model, value });
+      attrs[$attributeName.trim()] = await $default({
+        root: $root,
+        model: $model,
+        value
+      });
     } else if ($default == null)
       ;
     else {
@@ -1084,7 +1248,11 @@ const buildDefaultAttributeValues = async (def) => {
 };
 const buildWatches = (def) => {
   return findWatches(def).reduce((watches, watchDef) => {
-    const { $watch, $attributeName, $handle } = watchDef;
+    const {
+      $watch,
+      $attributeName,
+      $handle
+    } = watchDef;
     ($watch || []).filter((path) => VUtils.isNotBlank(path)).map((path) => path.trim()).forEach((path) => {
       let existing = watches[path];
       if (existing == null) {
@@ -1124,9 +1292,18 @@ const findContainerChildKey = (keys, find) => {
 };
 const useValidate = (options) => {
   var _a;
-  const { props, attributeValues, setAttributeValues } = options;
-  const { fire } = useRootEventBus();
-  const { on, off } = useWrapperEventBus();
+  const {
+    props,
+    attributeValues,
+    setAttributeValues
+  } = options;
+  const {
+    fire
+  } = useRootEventBus();
+  const {
+    on,
+    off
+  } = useWrapperEventBus();
   reactExports.useEffect(() => {
     const onValidate = async (from, to) => {
       var _a2, _b;
@@ -1144,9 +1321,14 @@ const useValidate = (options) => {
           from,
           to
         });
-        const current = attributeValues[MonitorNodeAttributes.VALID] ?? { valid: true };
+        const current = attributeValues[MonitorNodeAttributes.VALID] ?? {
+          valid: true
+        };
         if (result.valid !== current.valid || result.failReason != current.failReason) {
-          setAttributeValues((attributes) => ({ ...attributes, [MonitorNodeAttributes.VALID]: result }));
+          setAttributeValues((attributes) => ({
+            ...attributes,
+            [MonitorNodeAttributes.VALID]: result
+          }));
         }
         fire && fire(RootEventTypes.VALIDATED, {
           root: props.$root,
@@ -1159,7 +1341,9 @@ const useValidate = (options) => {
         });
       } else if (((_b = attributeValues[MonitorNodeAttributes.VALID]) == null ? void 0 : _b.valid) === false) {
         setAttributeValues((attributes) => {
-          const attrs = { ...attributes };
+          const attrs = {
+            ...attributes
+          };
           delete attrs[MonitorNodeAttributes.VALID];
           return attrs;
         });
@@ -1178,25 +1362,24 @@ const useValidate = (options) => {
     return () => {
       off(WrapperEventTypes.VALIDATE, onValidate);
     };
-  }, [
-    fire,
-    on,
-    off,
-    attributeValues,
-    setAttributeValues,
-    (_a = props.$valid) == null ? void 0 : _a.$handle,
-    props.$root,
-    props.$model,
-    props.$p2r,
-    props.$pp
-  ]);
+  }, [fire, on, off, attributeValues, setAttributeValues, (_a = props.$valid) == null ? void 0 : _a.$handle, props.$root, props.$model, props.$p2r, props.$pp]);
 };
 const useValidationRegistration = (options) => {
   var _a;
-  const { props, attributeValues, setAttributeValues } = options;
-  const { fire: fireRoot } = useRootEventBus();
-  const { fire: fireContainer } = useContainerEventBus();
-  const { fire: fireArrayElement } = useArrayElementEventBus();
+  const {
+    props,
+    attributeValues,
+    setAttributeValues
+  } = options;
+  const {
+    fire: fireRoot
+  } = useRootEventBus();
+  const {
+    fire: fireContainer
+  } = useContainerEventBus();
+  const {
+    fire: fireArrayElement
+  } = useArrayElementEventBus();
   const [uniqueId] = reactExports.useState(NUtils.generateReactKey());
   reactExports.useEffect(() => {
     var _a2;
@@ -1216,10 +1399,16 @@ const useValidationRegistration = (options) => {
         const $handle = (_a3 = props.$valid) == null ? void 0 : _a3.$handle;
         const absolutePath = PPUtils.absolute(props.$p2r, props.$pp);
         if ($handle == null) {
-          resolve({ path: absolutePath, valid: true });
+          resolve({
+            path: absolutePath,
+            valid: true
+          });
         } else {
           (async () => {
-            const { $root, $model } = props;
+            const {
+              $root,
+              $model
+            } = props;
             const value = MUtils.getValue($model, props.$pp);
             const result = await $handle({
               root: $root,
@@ -1231,11 +1420,19 @@ const useValidationRegistration = (options) => {
               changedOn: absolutePath,
               to: value
             });
-            const current = attributeValues[MonitorNodeAttributes.VALID] ?? { valid: true };
+            const current = attributeValues[MonitorNodeAttributes.VALID] ?? {
+              valid: true
+            };
             if (result.valid !== current.valid || result.failReason != current.failReason) {
-              setAttributeValues((attributes) => ({ ...attributes, [MonitorNodeAttributes.VALID]: result }));
+              setAttributeValues((attributes) => ({
+                ...attributes,
+                [MonitorNodeAttributes.VALID]: result
+              }));
             }
-            resolve({ path: absolutePath, ...result });
+            resolve({
+              path: absolutePath,
+              ...result
+            });
           })();
         }
       });
@@ -1248,25 +1445,18 @@ const useValidationRegistration = (options) => {
       fireContainer && fireContainer(ContainerEventTypes.UNREGISTER_VALIDATABLE, uniqueId);
       fireArrayElement && fireArrayElement(ArrayElementEventTypes.UNREGISTER_VALIDATABLE, uniqueId);
     };
-  }, [
-    fireRoot,
-    fireContainer,
-    fireArrayElement,
-    attributeValues,
-    setAttributeValues,
-    uniqueId,
-    props,
-    (_a = props.$valid) == null ? void 0 : _a.$handle,
-    props.$root,
-    props.$model,
-    props.$p2r,
-    props.$pp
-  ]);
+  }, [fireRoot, fireContainer, fireArrayElement, attributeValues, setAttributeValues, uniqueId, props, (_a = props.$valid) == null ? void 0 : _a.$handle, props.$root, props.$model, props.$p2r, props.$pp]);
 };
 const useValidationFunctions = (def) => {
-  const { fire: fireRoot } = useRootEventBus();
-  const { fire: fireContainer } = useContainerEventBus();
-  const { fire: fireArrayElement } = useArrayElementEventBus();
+  const {
+    fire: fireRoot
+  } = useRootEventBus();
+  const {
+    fire: fireContainer
+  } = useContainerEventBus();
+  const {
+    fire: fireArrayElement
+  } = useArrayElementEventBus();
   const validate = (scopes) => {
     return new Promise((resolve) => {
       fireRoot && fireRoot(RootEventTypes.VALIDATE, scopes ?? [], resolve);
@@ -1330,9 +1520,19 @@ const shouldUpdateAttribute = (values, attributeValues) => {
   return false;
 };
 const useAttributesWatch = (options) => {
-  const { props, attributeValues, setAttributeValues } = options;
-  const { on, off, fire } = useRootEventBus();
-  const { fire: fireWrapper } = useWrapperEventBus();
+  const {
+    props,
+    attributeValues,
+    setAttributeValues
+  } = options;
+  const {
+    on,
+    off,
+    fire
+  } = useRootEventBus();
+  const {
+    fire: fireWrapper
+  } = useWrapperEventBus();
   const [watches] = reactExports.useState(buildWatches(props));
   reactExports.useEffect(() => {
     const onValueChanged = async (absolutePath, from, to) => {
@@ -1357,7 +1557,10 @@ const useAttributesWatch = (options) => {
             to
           });
           if (name !== MonitorNodeAttributes.REACTION) {
-            return { name, value };
+            return {
+              name,
+              value
+            };
           } else {
             let reactions = [];
             if (Array.isArray(value)) {
@@ -1377,11 +1580,17 @@ const useAttributesWatch = (options) => {
             if (reactions.includes(Reaction.CLEAR_VALUE)) {
               const oldValue = MUtils.setValue(props.$model, props.$pp, null);
               fire && fire(RootEventTypes.VALUE_CHANGED, myAbsolutePath, oldValue, null);
-              ret = { name, value: VUtils.generateUniqueId() };
+              ret = {
+                name,
+                value: VUtils.generateUniqueId()
+              };
             }
             if (reactions.includes(Reaction.REPAINT)) {
               if (ret == null) {
-                ret = { name, value: VUtils.generateUniqueId() };
+                ret = {
+                  name,
+                  value: VUtils.generateUniqueId()
+                };
               }
             }
             if (reactions.includes(Reaction.VALUE_CHANGED)) {
@@ -1406,17 +1615,16 @@ const useAttributesWatch = (options) => {
                 }
               }
             }
-            reactions.filter((reaction) => ![
-              Reaction.CLEAR_VALUE,
-              Reaction.REPAINT,
-              Reaction.VALUE_CHANGED
-            ].includes(reaction)).forEach((reaction) => {
+            reactions.filter((reaction) => ![Reaction.CLEAR_VALUE, Reaction.REPAINT, Reaction.VALUE_CHANGED].includes(reaction)).forEach((reaction) => {
               fireWrapper && fireWrapper(WrapperEventTypes.UNHANDLED_REACTION_OCCURRED, reaction);
             });
             return ret;
           }
         }));
-        const values = handledValuePairs.filter((x) => x != null).reduce((values2, { name, value }) => {
+        const values = handledValuePairs.filter((x) => x != null).reduce((values2, {
+          name,
+          value
+        }) => {
           values2[name] = value;
           return values2;
         }, {});
@@ -1434,7 +1642,10 @@ const useAttributesWatch = (options) => {
           });
         }
         if (shouldUpdateAttribute(values, attributeValues)) {
-          setAttributeValues((attributes) => ({ ...attributes, ...values }));
+          setAttributeValues((attributes) => ({
+            ...attributes,
+            ...values
+          }));
         }
       }
     };
@@ -1447,27 +1658,39 @@ const useAttributesWatch = (options) => {
         off(RootEventTypes.VALUE_CHANGED, onValueChanged);
       }
     };
-  }, [
-    on,
-    off,
-    fire,
-    fireWrapper,
-    attributeValues,
-    setAttributeValues,
-    watches,
-    props.$wt,
-    props.$root,
-    props.$model,
-    props.$p2r,
-    props.$pp
-  ]);
+  }, [on, off, fire, fireWrapper, attributeValues, setAttributeValues, watches, props.$wt, props.$root, props.$model, props.$p2r, props.$pp]);
 };
 const useArrayFunctions = (options) => {
-  const { props, onValueChanged } = options;
-  const { $root, $p2r, $model, $array: { couldAddElement, createElement, elementAdded, couldRemoveElement, elementRemoved, getElementKey } = {}, ...rest } = props;
+  const {
+    props,
+    onValueChanged
+  } = options;
+  const {
+    $root,
+    $p2r,
+    $model,
+    $array: {
+      couldAddElement,
+      createElement,
+      elementAdded,
+      couldRemoveElement,
+      elementRemoved,
+      getElementKey
+    } = {},
+    ...rest
+  } = props;
   const [keys] = reactExports.useState([]);
   const forceUpdate = useForceUpdate();
-  const { $array, absolutePathOfArray } = PPUtils.isLevelStayed(rest.$pp) ? { $array: $model, absolutePathOfArray: $p2r } : { $array: MUtils.getValue($model, rest.$pp), absolutePathOfArray: PPUtils.absolute($p2r, rest.$pp) };
+  const {
+    $array,
+    absolutePathOfArray
+  } = PPUtils.isLevelStayed(rest.$pp) ? {
+    $array: $model,
+    absolutePathOfArray: $p2r
+  } : {
+    $array: MUtils.getValue($model, rest.$pp),
+    absolutePathOfArray: PPUtils.absolute($p2r, rest.$pp)
+  };
   let elements;
   if ($array != null && !Array.isArray($array)) {
     N1Logger.error("Data model must be an array or null.", "ArrayFunctionsHook");
@@ -1504,7 +1727,11 @@ const useArrayFunctions = (options) => {
       index
     }, ...args);
     forceUpdate();
-    await onValueChanged({ absolutePath: absolutePathOfArray, oldValue: oldElements, newValue: elements }, ...args);
+    await onValueChanged({
+      absolutePath: absolutePathOfArray,
+      oldValue: oldElements,
+      newValue: elements
+    }, ...args);
   };
   const createRemoveElementFunc = (elementModel, index) => {
     return async (...args) => await removeElement(elementModel, index, ...args);
@@ -1522,13 +1749,20 @@ const useArrayFunctions = (options) => {
       }, ...args);
     }));
     forceUpdate();
-    await onValueChanged({ absolutePath: absolutePathOfArray, oldValue: oldElements, newValue: elements }, ...args);
+    await onValueChanged({
+      absolutePath: absolutePathOfArray,
+      oldValue: oldElements,
+      newValue: elements
+    }, ...args);
   };
   const shouldAddElement = async (...args) => {
     if (couldAddElement == null) {
       return Promise.resolve(true);
     }
-    return await couldAddElement({ root: $root, model: $array }, ...args);
+    return await couldAddElement({
+      root: $root,
+      model: $array
+    }, ...args);
   };
   const addElement = async (...args) => {
     const shouldRemove = await shouldAddElement(...args);
@@ -1536,7 +1770,11 @@ const useArrayFunctions = (options) => {
       return;
     }
     const oldElements = $array == null ? null : [...$array];
-    const newElement = createElement != null ? await createElement({ root: $root, model: $array, index: elements.length }, ...args) : {};
+    const newElement = createElement != null ? await createElement({
+      root: $root,
+      model: $array,
+      index: elements.length
+    }, ...args) : {};
     elements.push(newElement);
     elementAdded && await elementAdded({
       root: $root,
@@ -1548,7 +1786,11 @@ const useArrayFunctions = (options) => {
       MUtils.setValue($model, rest.$pp, elements);
     }
     forceUpdate();
-    await onValueChanged({ absolutePath: absolutePathOfArray, oldValue: oldElements, newValue: elements }, ...args);
+    await onValueChanged({
+      absolutePath: absolutePathOfArray,
+      oldValue: oldElements,
+      newValue: elements
+    }, ...args);
   };
   const getRowElementKey = getArrayElementKey(keys, getElementKey);
   return {
@@ -1562,33 +1804,59 @@ const useArrayFunctions = (options) => {
   };
 };
 const useDefaultAttributeValues = (props) => {
-  const [state, setState] = reactExports.useState({ initialized: false });
+  const [state, setState] = reactExports.useState({
+    initialized: false
+  });
   reactExports.useEffect(() => {
     if (state.initialized) {
       return;
     }
     (async () => {
       const $defaultAttributes2 = await buildDefaultAttributeValues(props);
-      setState({ ...$defaultAttributes2, initialized: true });
+      setState({
+        ...$defaultAttributes2,
+        initialized: true
+      });
     })();
   }, [state.initialized, props]);
   if (!state.initialized) {
-    return { initialized: false };
+    return {
+      initialized: false
+    };
   }
-  const { initialized, ...$defaultAttributes } = state;
+  const {
+    initialized,
+    ...$defaultAttributes
+  } = state;
   const $defaultAttributesSet = (values) => {
     if (typeof values == "function") {
-      setState(({ initialized: initialized2, ...attributes }) => {
-        return { ...values(attributes) ?? {}, initialized: true };
+      setState(({
+        initialized: initialized2,
+        ...attributes
+      }) => {
+        return {
+          ...values(attributes) ?? {},
+          initialized: true
+        };
       });
     } else {
-      setState({ ...values ?? {}, initialized: true });
+      setState({
+        ...values ?? {},
+        initialized: true
+      });
     }
   };
-  return { initialized, $defaultAttributes, $defaultAttributesSet };
+  return {
+    initialized,
+    $defaultAttributes,
+    $defaultAttributesSet
+  };
 };
 const useContainerChildren = (options) => {
-  const { def, nodesFrom } = options;
+  const {
+    def,
+    nodesFrom
+  } = options;
   const childrenDefs = NUtils.getChildNodes(def, nodesFrom) || [];
   const [keys] = reactExports.useState(() => {
     return childrenDefs.map((child) => [child, NUtils.generateReactKey()]);
@@ -1605,25 +1873,53 @@ const useContainerChildren = (options) => {
       }
     }
   });
-  return { keys, defs: childrenDefs };
+  return {
+    keys,
+    defs: childrenDefs
+  };
 };
 const WidgetsRegistration = {};
 const registerWidget = (options) => {
-  const { key, ...widget } = options;
+  const {
+    key,
+    ...widget
+  } = options;
   const existing = WidgetsRegistration[key] ?? null;
   WidgetsRegistration[key] = widget;
   if (existing != null) {
     console.warn(`Widget[key=${key}, def=${JSON.stringify(existing)}] is replaced by [${JSON.stringify(widget)}]`);
   }
-  return { key, ...existing };
+  return {
+    key,
+    ...existing
+  };
 };
 const findWidget = (key) => {
   const widget = WidgetsRegistration[key];
-  return widget == null ? null : { key, ...widget };
+  return widget == null ? null : {
+    key,
+    ...widget
+  };
 };
 const ArrayElement = (props) => {
-  const { elements, elementModel, index, $wrapped, $arrayP2r, $array, createRemoveElementFunc, widget, originalProps, ...rest } = props;
-  const { keys, defs: childrenDefs } = useContainerChildren({ def: originalProps });
+  const {
+    elements,
+    elementModel,
+    index,
+    $wrapped,
+    $arrayP2r,
+    $array,
+    createRemoveElementFunc,
+    widget,
+    originalProps,
+    ...rest
+  } = props;
+  const {
+    keys,
+    defs: childrenDefs
+  } = useContainerChildren({
+    def: originalProps
+  });
   const $p2r = PPUtils.concat($arrayP2r, `[${index}]`);
   const enhancedForElement = {
     ...$array,
@@ -1631,36 +1927,66 @@ const ArrayElement = (props) => {
     removeElement: createRemoveElementFunc(elementModel, index)
   };
   const ElementContainer = widget.ELEMENT;
-  return React.createElement(
-    ArrayElementEventBusProvider,
-    null,
-    React.createElement(ArrayElementValidationEventHolder, null),
-    React.createElement(ElementContainer, { "$wrapped": {
+  return React.createElement(ArrayElementEventBusProvider, null, React.createElement(ArrayElementValidationEventHolder, null), React.createElement(ElementContainer, {
+    "$wrapped": {
       ...$wrapped,
       $arrayHolder: $wrapped.$model,
       $array: elements,
       $p2r,
       $model: elementModel
-    }, "$array": enhancedForElement, ...rest }, renderContainerChildren({
-      def: originalProps,
-      childrenDefs,
-      keys,
-      $wrapped: {
-        ...$wrapped,
-        $arrayHolder: $wrapped.$model,
-        $array: elements,
-        $p2r,
-        $model: elementModel
-      }
-    }))
-  );
+    },
+    "$array": enhancedForElement,
+    ...rest
+  }, renderContainerChildren({
+    def: originalProps,
+    childrenDefs,
+    keys,
+    $wrapped: {
+      ...$wrapped,
+      $arrayHolder: $wrapped.$model,
+      $array: elements,
+      $p2r,
+      $model: elementModel
+    }
+  })));
 };
 const ArrayWrapper = (props) => {
   var _a;
-  const { $root, $p2r, $model, $wt, $avs, $vfs, $array, useComputedStyle, ...rest } = props;
-  const { onValueChange: $onValueChange, onValueChanged } = useSetValue(props);
-  const $wrapped = { $root, $p2r, $model, $onValueChange, $avs, $vfs };
-  const { elements, $arrayP2r, addElement, removeElement, createRemoveElementFunc, clearElement, getElementKey } = useArrayFunctions({ props, onValueChanged });
+  const {
+    $root,
+    $p2r,
+    $model,
+    $wt,
+    $avs,
+    $vfs,
+    $array,
+    useComputedStyle,
+    ...rest
+  } = props;
+  const {
+    onValueChange: $onValueChange,
+    onValueChanged
+  } = useSetValue(props);
+  const $wrapped = {
+    $root,
+    $p2r,
+    $model,
+    $onValueChange,
+    $avs,
+    $vfs
+  };
+  const {
+    elements,
+    $arrayP2r,
+    addElement,
+    removeElement,
+    createRemoveElementFunc,
+    clearElement,
+    getElementKey
+  } = useArrayFunctions({
+    props,
+    onValueChanged
+  });
   const hasElement = elements.length !== 0;
   const widget = findWidget($wt);
   const C = widget.JSX;
@@ -1668,70 +1994,196 @@ const ArrayWrapper = (props) => {
   const Body = widget.BODY;
   const NoData = widget.NO_ELEMENT;
   const Bottom = widget.BOTTOM;
-  const enhancedForArray = { ...$array, removeElement, addElement, hasElement, clearElement };
-  const body = () => {
-    return [
-      NoData != null && (elements == null || elements.length === 0) ? React.createElement(NoData, { "$wrapped": $wrapped, "$array": enhancedForArray, ...rest, key: "$$no-data$$" }) : null,
-      ...elements.map((elementModel, index) => {
-        const key = getElementKey(elementModel);
-        N1Logger.debug(`Array element[key=${key}, path=${$p2r}].`, elementModel, "ArrayWrapper");
-        return React.createElement(ArrayElement, { elements, elementModel, index, "$wrapped": $wrapped, "$arrayP2r": $arrayP2r, "$array": enhancedForArray, createRemoveElementFunc, widget, originalProps: props, ...rest, key });
-      })
-    ];
+  const enhancedForArray = {
+    ...$array,
+    removeElement,
+    addElement,
+    hasElement,
+    clearElement
   };
-  beautifyDataAttributes(rest, { root: $root, model: $model });
+  const body = () => {
+    return [NoData != null && (elements == null || elements.length === 0) ? React.createElement(NoData, {
+      "$wrapped": $wrapped,
+      "$array": enhancedForArray,
+      ...rest,
+      key: "$$no-data$$"
+    }) : null, ...elements.map((elementModel, index) => {
+      const key = getElementKey(elementModel);
+      N1Logger.debug(`Array element[key=${key}, path=${$p2r}].`, elementModel, "ArrayWrapper");
+      return React.createElement(ArrayElement, {
+        elements,
+        elementModel,
+        index,
+        "$wrapped": $wrapped,
+        "$arrayP2r": $arrayP2r,
+        "$array": enhancedForArray,
+        createRemoveElementFunc,
+        widget,
+        originalProps: props,
+        ...rest,
+        key
+      });
+    })];
+  };
+  beautifyDataAttributes(rest, {
+    root: $root,
+    model: $model
+  });
   const style = useComputedStyle ? NUtils.computeStyle(rest) : void 0;
-  return React.createElement(
-    C,
-    { "$wrapped": $wrapped, ...rest, "$wt": $wt, style, "data-valid": ((_a = $avs == null ? void 0 : $avs.$valid) == null ? void 0 : _a.valid) ?? true },
-    Top != null ? React.createElement(Top, { "$wrapped": $wrapped, "$array": enhancedForArray, ...rest }) : null,
-    Body == null ? body() : React.createElement(Body, { "$wrapped": $wrapped, "$array": enhancedForArray, ...rest }, body()),
-    Bottom != null ? React.createElement(Bottom, { "$wrapped": $wrapped, "$array": enhancedForArray, ...rest }) : null
-  );
+  return React.createElement(C, {
+    "$wrapped": $wrapped,
+    ...rest,
+    "$wt": $wt,
+    style,
+    "data-valid": ((_a = $avs == null ? void 0 : $avs.$valid) == null ? void 0 : _a.valid) ?? true
+  }, Top != null ? React.createElement(Top, {
+    "$wrapped": $wrapped,
+    "$array": enhancedForArray,
+    ...rest
+  }) : null, Body == null ? body() : React.createElement(Body, {
+    "$wrapped": $wrapped,
+    "$array": enhancedForArray,
+    ...rest
+  }, body()), Bottom != null ? React.createElement(Bottom, {
+    "$wrapped": $wrapped,
+    "$array": enhancedForArray,
+    ...rest
+  }) : null);
 };
 const ContainerWrapper = (props) => {
   var _a;
-  const { $root, $p2r, $model, $wt, $avs, $vfs, useComputedStyle, ...rest } = props;
-  const { keys, defs: childrenDefs } = useContainerChildren({ def: props });
-  const { $subModel, $subP2r } = (() => {
+  const {
+    $root,
+    $p2r,
+    $model,
+    $wt,
+    $avs,
+    $vfs,
+    useComputedStyle,
+    ...rest
+  } = props;
+  const {
+    keys,
+    defs: childrenDefs
+  } = useContainerChildren({
+    def: props
+  });
+  const {
+    $subModel,
+    $subP2r
+  } = (() => {
     if (PPUtils.isLevelStayed(rest.$pp)) {
-      return { $subModel: $model, $subP2r: $p2r };
+      return {
+        $subModel: $model,
+        $subP2r: $p2r
+      };
     } else {
-      return { $subModel: MUtils.getValue($model, rest.$pp), $subP2r: PPUtils.absolute($p2r, rest.$pp) };
+      return {
+        $subModel: MUtils.getValue($model, rest.$pp),
+        $subP2r: PPUtils.absolute($p2r, rest.$pp)
+      };
     }
   })();
   const $onValueChange = useSetValue(props).onValueChange;
-  const $wrapped = { $root, $p2r, $model, $onValueChange, $avs, $vfs };
+  const $wrapped = {
+    $root,
+    $p2r,
+    $model,
+    $onValueChange,
+    $avs,
+    $vfs
+  };
   const widget = findWidget($wt);
   const C = widget.JSX;
-  beautifyDataAttributes(rest, { root: $root, model: $model });
+  beautifyDataAttributes(rest, {
+    root: $root,
+    model: $model
+  });
   const style = useComputedStyle ? NUtils.computeStyle(rest) : void 0;
-  return React.createElement(C, { "$wrapped": $wrapped, ...rest, "$wt": $wt, style, "data-valid": ((_a = $avs == null ? void 0 : $avs.$valid) == null ? void 0 : _a.valid) ?? true }, renderContainerChildren({
+  return React.createElement(C, {
+    "$wrapped": $wrapped,
+    ...rest,
+    "$wt": $wt,
+    style,
+    "data-valid": ((_a = $avs == null ? void 0 : $avs.$valid) == null ? void 0 : _a.valid) ?? true
+  }, renderContainerChildren({
     def: props,
     childrenDefs,
     keys,
-    $wrapped: { ...$wrapped, $p2r: $subP2r, $model: $subModel }
+    $wrapped: {
+      ...$wrapped,
+      $p2r: $subP2r,
+      $model: $subModel
+    }
   }));
 };
 const LeafWrapper = (props) => {
   var _a;
-  const { $root, $p2r, $model, $wt, $avs, $vfs, useComputedStyle, ...rest } = props;
+  const {
+    $root,
+    $p2r,
+    $model,
+    $wt,
+    $avs,
+    $vfs,
+    useComputedStyle,
+    ...rest
+  } = props;
   const $onValueChange = useSetValue(props).onValueChange;
-  const $wrapped = { $root, $p2r, $model, $onValueChange, $avs, $vfs };
+  const $wrapped = {
+    $root,
+    $p2r,
+    $model,
+    $onValueChange,
+    $avs,
+    $vfs
+  };
   const widget = findWidget($wt);
   const C = widget.JSX;
-  beautifyDataAttributes(rest, { root: $root, model: $model });
+  beautifyDataAttributes(rest, {
+    root: $root,
+    model: $model
+  });
   const style = useComputedStyle ? NUtils.computeStyle(rest) : void 0;
-  return React.createElement(C, { "$wrapped": $wrapped, ...rest, "$wt": $wt, style, "data-valid": ((_a = $avs == null ? void 0 : $avs.$valid) == null ? void 0 : _a.valid) ?? true });
+  return React.createElement(C, {
+    "$wrapped": $wrapped,
+    ...rest,
+    "$wt": $wt,
+    style,
+    "data-valid": ((_a = $avs == null ? void 0 : $avs.$valid) == null ? void 0 : _a.valid) ?? true
+  });
 };
 const WrapperDelegateWorker = (workerProps) => {
-  const { $wt, $defaultAttributes: attributeValues, $defaultAttributesSet: setAttributeValues, ...rest } = workerProps;
-  const props = { $wt, ...rest };
-  const { on, off } = useWrapperEventBus();
+  const {
+    $wt,
+    $defaultAttributes: attributeValues,
+    $defaultAttributesSet: setAttributeValues,
+    ...rest
+  } = workerProps;
+  const props = {
+    $wt,
+    ...rest
+  };
+  const {
+    on,
+    off
+  } = useWrapperEventBus();
   const validators = useValidationFunctions(props);
-  useAttributesWatch({ props, attributeValues, setAttributeValues });
-  useValidate({ props, attributeValues, setAttributeValues });
-  useValidationRegistration({ props, attributeValues, setAttributeValues });
+  useAttributesWatch({
+    props,
+    attributeValues,
+    setAttributeValues
+  });
+  useValidate({
+    props,
+    attributeValues,
+    setAttributeValues
+  });
+  useValidationRegistration({
+    props,
+    attributeValues,
+    setAttributeValues
+  });
   const forceUpdate = useForceUpdate();
   reactExports.useEffect(() => {
     on(WrapperEventTypes.REPAINT, forceUpdate);
@@ -1769,36 +2221,58 @@ const WrapperDelegateWorker = (workerProps) => {
       return null;
     }
     if (widget.container && widget.array) {
-      return React.createElement(
-        ContainerEventBusProvider,
-        null,
-        React.createElement(ContainerValidationEventHolder, null),
-        React.createElement(ArrayWrapper, { ...props, "$wt": widgetType, "$avs": attributeValues, "$vfs": validators, useComputedStyle: widget.consumePosition !== false })
-      );
+      return React.createElement(ContainerEventBusProvider, null, React.createElement(ContainerValidationEventHolder, null), React.createElement(ArrayWrapper, {
+        ...props,
+        "$wt": widgetType,
+        "$avs": attributeValues,
+        "$vfs": validators,
+        useComputedStyle: widget.consumePosition !== false
+      }));
     } else if (widget.container) {
-      return React.createElement(
-        ContainerEventBusProvider,
-        null,
-        React.createElement(ContainerValidationEventHolder, null),
-        React.createElement(ContainerWrapper, { ...props, "$wt": widgetType, "$avs": attributeValues, "$vfs": validators, useComputedStyle: widget.consumePosition !== false })
-      );
+      return React.createElement(ContainerEventBusProvider, null, React.createElement(ContainerValidationEventHolder, null), React.createElement(ContainerWrapper, {
+        ...props,
+        "$wt": widgetType,
+        "$avs": attributeValues,
+        "$vfs": validators,
+        useComputedStyle: widget.consumePosition !== false
+      }));
     } else {
-      return React.createElement(LeafWrapper, { ...props, "$wt": widgetType, "$avs": attributeValues, "$vfs": validators, useComputedStyle: !coverConsumePosition && widget.consumePosition !== false });
+      return React.createElement(LeafWrapper, {
+        ...props,
+        "$wt": widgetType,
+        "$avs": attributeValues,
+        "$vfs": validators,
+        useComputedStyle: !coverConsumePosition && widget.consumePosition !== false
+      });
     }
   })();
   return coverWidgets.reduce((child, [$wt2, cover]) => {
     if (child == null) {
       return null;
     }
-    return React.createElement(LeafWrapper, { ...props, "$wt": $wt2, "$avs": attributeValues, "$vfs": validators, useComputedStyle: cover.consumePosition !== false }, child);
+    return React.createElement(LeafWrapper, {
+      ...props,
+      "$wt": $wt2,
+      "$avs": attributeValues,
+      "$vfs": validators,
+      useComputedStyle: cover.consumePosition !== false
+    }, child);
   }, kernel);
 };
 const WrapperDelegate = (props) => {
-  const { initialized, $defaultAttributes, $defaultAttributesSet } = useDefaultAttributeValues(props);
+  const {
+    initialized,
+    $defaultAttributes,
+    $defaultAttributesSet
+  } = useDefaultAttributeValues(props);
   if (!initialized) {
     return null;
   }
-  return React.createElement(WrapperDelegateWorker, { ...props, "$defaultAttributes": $defaultAttributes, "$defaultAttributesSet": $defaultAttributesSet });
+  return React.createElement(WrapperDelegateWorker, {
+    ...props,
+    "$defaultAttributes": $defaultAttributes,
+    "$defaultAttributesSet": $defaultAttributesSet
+  });
 };
 const computeRenderOnTags = (renderOn) => {
   if (renderOn == null) {
@@ -1820,46 +2294,75 @@ const Wrapper = (props) => {
   if (!render) {
     return null;
   }
-  return React.createElement(
-    WrapperEventBusProvider,
-    null,
-    React.createElement(WrapperDelegate, { ...props, ...deviceTags })
-  );
+  return React.createElement(WrapperEventBusProvider, null, React.createElement(WrapperDelegate, {
+    ...props,
+    ...deviceTags
+  }));
 };
 const renderContainerChildren = (options) => {
-  const { def, childrenDefs, keys, $wrapped: { $root, $p2r, $model } } = options;
+  const {
+    def,
+    childrenDefs,
+    keys,
+    $wrapped: {
+      $root,
+      $p2r,
+      $model
+    }
+  } = options;
   return childrenDefs.filter((x) => x != null).map((childProps) => {
-    const { $key: keyOfChild, ...restOfChild } = childProps;
+    const {
+      $key: keyOfChild,
+      ...restOfChild
+    } = childProps;
     const key = findContainerChildKey(keys, childProps);
     N1Logger.debug(`Container element[key=${key}, path=${PPUtils.concat($p2r, restOfChild.$pp)}].`, childProps, "RenderContainerChildren");
     NUtils.inheritValidationScopes(def, restOfChild);
-    return React.createElement(Wrapper, { "$root": $root, "$p2r": $p2r, "$model": $model, "$key": key, ...restOfChild, key });
+    return React.createElement(Wrapper, {
+      "$root": $root,
+      "$p2r": $p2r,
+      "$model": $model,
+      "$key": key,
+      ...restOfChild,
+      key
+    });
   });
 };
 window.Buffer = buffer.Buffer;
 const StandaloneRoot = (props) => {
-  const { $key, $root, $pp, $validationScopes, externalDefs, leading, children, tailing, ...rest } = props;
+  const {
+    $key,
+    $root,
+    $pp,
+    $validationScopes,
+    externalDefs,
+    leading,
+    children,
+    tailing,
+    ...rest
+  } = props;
   if ($root == null) {
     N1Logger.error("Root data model cannot be null, nothing would be rendering now.", "StandaloneRoot");
     return null;
   }
   const modelPath = PPUtils.legalize($pp);
   const model = MUtils.getValue($root, modelPath);
-  const recompute = { $key, $validationScopes };
+  const recompute = {
+    $key,
+    $validationScopes
+  };
   NUtils.getDefKey(recompute);
   NUtils.inheritValidationScopes({}, recompute);
-  return React.createElement(
-    RootEventBusProvider,
-    null,
-    React.createElement(ExternalDefsHandler, { options: rest, externalDefs }),
-    React.createElement(DeviceDetective, null),
-    React.createElement(RootToBridgeUndercover, null),
-    React.createElement(ValidationEventHolder, null),
-    leading,
-    children,
-    React.createElement(Wrapper, { "$root": $root, "$p2r": modelPath, "$model": model, ...recompute, ...rest }),
-    tailing
-  );
+  return React.createElement(RootEventBusProvider, null, React.createElement(ExternalDefsHandler, {
+    options: rest,
+    externalDefs
+  }), React.createElement(DeviceDetective, null), React.createElement(RootToBridgeUndercover, null), React.createElement(ValidationEventHolder, null), leading, children, React.createElement(Wrapper, {
+    "$root": $root,
+    "$p2r": modelPath,
+    "$model": model,
+    ...recompute,
+    ...rest
+  }), tailing);
 };
 export {
   BridgeEventBusProvider as B,

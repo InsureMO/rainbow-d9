@@ -1,9 +1,9 @@
-import { V as VUtils, r as registerWidget, M as MUtils, u as useRootEventBus, R as RootEventTypes, a as useThrottler, b as useWrapperEventBus, W as WrapperEventTypes, P as PPUtils } from "./rainbow-d9-n1-gbyGzXGq.js";
+import { V as VUtils, r as registerWidget, M as MUtils, u as useRootEventBus, R as RootEventTypes, a as useThrottler, b as useWrapperEventBus, W as WrapperEventTypes, P as PPUtils } from "./rainbow-d9-n1-CI7XR9B5.js";
 import { i as init, g as getInstanceByDom } from "./echarts-v5L9gyiQ.js";
-import { r as reactExports, a as React } from "./react-VfX_HI7I.js";
-import { D as DOM_KEY_WIDGET, a as DOM_ID_WIDGET, u as useGlobalEventBus, G as GlobalEventTypes, b as useGlobalHandlers } from "./rainbow-d9-n2-g40jCJIK.js";
-import { q as qe } from "./styled-components-xBJU6yph.js";
-import { i as index$1 } from "./rainbow-d9-n3-UuWNHvo9.js";
+import { r as reactExports, a as React } from "./react-yj2EiHa4.js";
+import { D as DOM_KEY_WIDGET, a as DOM_ID_WIDGET, u as useGlobalEventBus, G as GlobalEventTypes, b as useGlobalHandlers } from "./rainbow-d9-n2-k_PX7MjZ.js";
+import { q as qe } from "./styled-components-QDH3nKgO.js";
+import { i as index$1 } from "./rainbow-d9-n3-CMeDEONi.js";
 const REACTION_REFRESH_CHART = "refresh-chart";
 var ChartGlobalEventPrefix;
 (function(ChartGlobalEventPrefix2) {
@@ -34,7 +34,17 @@ const askSettings = (settings) => {
   return settings;
 };
 const useInitialize = (ref, props) => {
-  const { $pp, $wrapped: { $model }, initOptions, options, settings, mergeData, loading } = props;
+  const {
+    $pp,
+    $wrapped: {
+      $model
+    },
+    initOptions,
+    options,
+    settings,
+    mergeData,
+    loading
+  } = props;
   const [state, setState] = React.useState({
     domInitialized: false,
     marker: redressChartMarker(props)
@@ -58,7 +68,10 @@ const useInitialize = (ref, props) => {
           chart.showLoading(loadingOptions);
         }
       }
-      setState((state2) => ({ ...state2, domInitialized: true }));
+      setState((state2) => ({
+        ...state2,
+        domInitialized: true
+      }));
     })();
     return () => {
     };
@@ -97,9 +110,24 @@ const useResize = (ref, domInitialized) => {
   }, [domInitialized, ref]);
 };
 const useDataMerge = (ref, domInitialized, marker, props) => {
-  const { $pp, $wrapped: { $model, $p2r }, options, settings, mergeData } = props;
-  const { on, off } = useGlobalEventBus();
-  const { on: onRoot, off: offRoot } = useRootEventBus();
+  const {
+    $pp,
+    $wrapped: {
+      $model,
+      $p2r
+    },
+    options,
+    settings,
+    mergeData
+  } = props;
+  const {
+    on,
+    off
+  } = useGlobalEventBus();
+  const {
+    on: onRoot,
+    off: offRoot
+  } = useRootEventBus();
   reactExports.useEffect(() => {
     if (!domInitialized || ref.current == null) {
       return;
@@ -139,7 +167,11 @@ const useDataMerge = (ref, domInitialized, marker, props) => {
     };
   }, [on, off, onRoot, offRoot, domInitialized, ref, $p2r, $pp, $model, options, settings, marker, mergeData]);
 };
-const AChart = qe.div.attrs(({ id, "data-w": dataW, chartHeight }) => {
+const AChart = qe.div.attrs(({
+  id,
+  "data-w": dataW,
+  chartHeight
+}) => {
   return {
     [DOM_KEY_WIDGET]: dataW ?? "d9-chart",
     [DOM_ID_WIDGET]: id,
@@ -156,12 +188,32 @@ const AChart = qe.div.attrs(({ id, "data-w": dataW, chartHeight }) => {
     height: var(--chart-height);
 `;
 const Chart = (props) => {
-  const { options, settings, marker, mergeData, loading, $wrapped: { $avs: { $disabled, $visible } }, height, ...rest } = props;
+  const {
+    options,
+    settings,
+    marker,
+    mergeData,
+    loading,
+    $wrapped: {
+      $avs: {
+        $disabled,
+        $visible
+      }
+    },
+    height,
+    ...rest
+  } = props;
   const ref = reactExports.useRef(null);
   const [state] = useInitialize(ref, props);
   useResize(ref, state.domInitialized);
   useDataMerge(ref, state.domInitialized, state.marker, props);
-  return React.createElement(AChart, { ...rest, "data-disabled": $disabled, "data-visible": $visible, chartHeight: height, ref });
+  return React.createElement(AChart, {
+    ...rest,
+    "data-disabled": $disabled,
+    "data-visible": $visible,
+    chartHeight: height,
+    ref
+  });
 };
 const ChartInitOptionsBuild = index$1.createSyncSnippetBuild("initOptions", []);
 const ChartOptionsBuild = index$1.createSyncSnippetBuild("options", []);
@@ -177,20 +229,38 @@ class AbstractChartTranslator extends index$1.SpecificWidgetTranslator {
 }
 const registerChart = (widgetHelper, widgetType) => {
   widgetType = VUtils.isBlank(widgetType) ? "Chart" : widgetType;
-  registerWidget({ key: widgetType, JSX: Chart, container: false, array: false });
+  registerWidget({
+    key: widgetType,
+    JSX: Chart,
+    container: false,
+    array: false
+  });
   const TranslatorClass = class extends AbstractChartTranslator {
     getSupportedType() {
       return widgetType;
     }
     getAttributeNamesMapping() {
-      return { [`${widgetType}.merge`]: "mergeData" };
+      return {
+        [`${widgetType}.merge`]: "mergeData"
+      };
     }
   };
   const repo = widgetHelper.repository;
   repo.register(new TranslatorClass(repo));
 };
 const useAutonomousFetch = (ref, domInitialized, marker, props) => {
-  const { $pp, $wrapped: { $root, $model }, options, settings, mergeData, fetchData, fetchInterval = 10 } = props;
+  const {
+    $pp,
+    $wrapped: {
+      $root,
+      $model
+    },
+    options,
+    settings,
+    mergeData,
+    fetchData,
+    fetchInterval = 10
+  } = props;
   const globalHandlers = useGlobalHandlers();
   reactExports.useEffect(() => {
     if (!domInitialized || ref.current == null) {
@@ -201,7 +271,12 @@ const useAutonomousFetch = (ref, domInitialized, marker, props) => {
         return;
       }
       const chart = getInstanceByDom(ref.current);
-      const data2 = await fetchData({ global: globalHandlers, marker, root: $root, model: $model });
+      const data2 = await fetchData({
+        global: globalHandlers,
+        marker,
+        root: $root,
+        model: $model
+      });
       if (data2 != null) {
         MUtils.setValue($model, $pp, data2);
         const optionsWithData = await mergeData(askOptions(options), data2);
@@ -229,29 +304,39 @@ const useAutonomousFetch = (ref, domInitialized, marker, props) => {
       } catch {
       }
     };
-  }, [
-    globalHandlers,
-    domInitialized,
-    ref,
-    $pp,
-    $root,
-    $model,
-    options,
-    settings,
-    mergeData,
-    marker,
-    fetchData,
-    fetchInterval
-  ]);
+  }, [globalHandlers, domInitialized, ref, $pp, $root, $model, options, settings, mergeData, marker, fetchData, fetchInterval]);
 };
 const AutonomousChart = (props) => {
-  const { options, settings, marker, mergeData, loading, fetchData, fetchInterval, $wrapped: { $avs: { $disabled, $visible } }, height, ...rest } = props;
+  const {
+    options,
+    settings,
+    marker,
+    mergeData,
+    loading,
+    fetchData,
+    fetchInterval,
+    $wrapped: {
+      $avs: {
+        $disabled,
+        $visible
+      }
+    },
+    height,
+    ...rest
+  } = props;
   const ref = reactExports.useRef(null);
   const [state] = useInitialize(ref, props);
   useResize(ref, state.domInitialized);
   useDataMerge(ref, state.domInitialized, state.marker, props);
   useAutonomousFetch(ref, state.domInitialized, state.marker, props);
-  return React.createElement(AChart, { ...rest, "data-w": "d9-aut-chart", "data-disabled": $disabled, "data-visible": $visible, chartHeight: height, ref });
+  return React.createElement(AChart, {
+    ...rest,
+    "data-w": "d9-aut-chart",
+    "data-disabled": $disabled,
+    "data-visible": $visible,
+    chartHeight: height,
+    ref
+  });
 };
 const AutonomousChartInitOptionsBuild = index$1.createSyncSnippetBuild("initOptions", []);
 const AutonomousChartOptionsBuild = index$1.createSyncSnippetBuild("options", []);
@@ -263,18 +348,17 @@ class AbstractAutonomousChartTranslator extends index$1.SpecificWidgetTranslator
     return false;
   }
   getAttributeValueBuilders() {
-    return [
-      AutonomousChartInitOptionsBuild,
-      AutonomousChartOptionsBuild,
-      AutonomousChartSettingsBuild,
-      AutonomousChartMergeDataBuild,
-      AutonomousChartFetchDataBuild
-    ];
+    return [AutonomousChartInitOptionsBuild, AutonomousChartOptionsBuild, AutonomousChartSettingsBuild, AutonomousChartMergeDataBuild, AutonomousChartFetchDataBuild];
   }
 }
 const registerAutonomousChart = (widgetHelper, widgetType) => {
   widgetType = VUtils.isBlank(widgetType) ? "AutChart" : widgetType;
-  registerWidget({ key: widgetType, JSX: AutonomousChart, container: false, array: false });
+  registerWidget({
+    key: widgetType,
+    JSX: AutonomousChart,
+    container: false,
+    array: false
+  });
   const TranslatorClass = class extends AbstractAutonomousChartTranslator {
     getSupportedType() {
       return widgetType;
@@ -291,10 +375,27 @@ const registerAutonomousChart = (widgetHelper, widgetType) => {
   repo.register(new TranslatorClass(repo));
 };
 const useReliantWatch = (ref, domInitialized, marker, props) => {
-  const { $pp, $wrapped: { $root, $model }, options, settings, mergeData, fetchData, fetchDefer = 1 } = props;
+  const {
+    $pp,
+    $wrapped: {
+      $root,
+      $model
+    },
+    options,
+    settings,
+    mergeData,
+    fetchData,
+    fetchDefer = 1
+  } = props;
   const globalHandlers = useGlobalHandlers();
-  const { replace, clear } = useThrottler();
-  const { on, off } = useWrapperEventBus();
+  const {
+    replace,
+    clear
+  } = useThrottler();
+  const {
+    on,
+    off
+  } = useWrapperEventBus();
   reactExports.useEffect(() => {
     if (!domInitialized || ref.current == null) {
       return;
@@ -308,7 +409,12 @@ const useReliantWatch = (ref, domInitialized, marker, props) => {
           return;
         }
         const chart = getInstanceByDom(ref.current);
-        const data = await fetchData({ global: globalHandlers, marker, root: $root, model: $model });
+        const data = await fetchData({
+          global: globalHandlers,
+          marker,
+          root: $root,
+          model: $model
+        });
         if (data != null) {
           MUtils.setValue($model, $pp, data);
           const optionsWithData = await mergeData(askOptions(options), data);
@@ -321,33 +427,38 @@ const useReliantWatch = (ref, domInitialized, marker, props) => {
     return () => {
       off && off(WrapperEventTypes.UNHANDLED_REACTION_OCCURRED, onUnhandledReactionOccurred);
     };
-  }, [
-    globalHandlers,
-    on,
-    off,
-    replace,
-    clear,
-    domInitialized,
-    ref,
-    $pp,
-    $root,
-    $model,
+  }, [globalHandlers, on, off, replace, clear, domInitialized, ref, $pp, $root, $model, options, settings, marker, mergeData, fetchData, fetchDefer]);
+};
+const ReliantChart = (props) => {
+  const {
     options,
     settings,
     marker,
     mergeData,
+    loading,
+    $wrapped: {
+      $avs: {
+        $disabled,
+        $visible
+      }
+    },
     fetchData,
-    fetchDefer
-  ]);
-};
-const ReliantChart = (props) => {
-  const { options, settings, marker, mergeData, loading, $wrapped: { $avs: { $disabled, $visible } }, fetchData, height, ...rest } = props;
+    height,
+    ...rest
+  } = props;
   const ref = reactExports.useRef(null);
   const [state] = useInitialize(ref, props);
   useResize(ref, state.domInitialized);
   useDataMerge(ref, state.domInitialized, state.marker, props);
   useReliantWatch(ref, state.domInitialized, state.marker, props);
-  return React.createElement(AChart, { ...rest, "data-w": "d9-rel-chart", "data-disabled": $disabled, "data-visible": $visible, chartHeight: height, ref });
+  return React.createElement(AChart, {
+    ...rest,
+    "data-w": "d9-rel-chart",
+    "data-disabled": $disabled,
+    "data-visible": $visible,
+    chartHeight: height,
+    ref
+  });
 };
 const ReliantChartInitOptionsBuild = index$1.createSyncSnippetBuild("initOptions", []);
 const ReliantChartOptionsBuild = index$1.createSyncSnippetBuild("options", []);
@@ -374,25 +485,20 @@ class AbstractReliantChartTranslator extends index$1.SpecificWidgetTranslator {
     return false;
   }
   getAttributeValueBuilders() {
-    return [
-      ReliantChartInitOptionsBuild,
-      ReliantChartOptionsBuild,
-      ReliantChartSettingsBuild,
-      ReliantChartMergeDataBuild,
-      ReliantChartFetchDataBuild,
-      ReliantChartReactionCriteriaBuild
-    ];
+    return [ReliantChartInitOptionsBuild, ReliantChartOptionsBuild, ReliantChartSettingsBuild, ReliantChartMergeDataBuild, ReliantChartFetchDataBuild, ReliantChartReactionCriteriaBuild];
   }
   getReactionHandlerDetectives() {
-    return [
-      ...super.getReactionHandlerDetectives(),
-      ReliantChartReactionCriteriaHandlerDetective
-    ];
+    return [...super.getReactionHandlerDetectives(), ReliantChartReactionCriteriaHandlerDetective];
   }
 }
 const registerReliantChart = (widgetHelper, widgetType) => {
   widgetType = VUtils.isBlank(widgetType) ? "RelChart" : widgetType;
-  registerWidget({ key: widgetType, JSX: ReliantChart, container: false, array: false });
+  registerWidget({
+    key: widgetType,
+    JSX: ReliantChart,
+    container: false,
+    array: false
+  });
   const TranslatorClass = class extends AbstractReliantChartTranslator {
     getSupportedType() {
       return widgetType;

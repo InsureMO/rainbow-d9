@@ -19,6 +19,347 @@ function _mergeNamespaces(n2, m2) {
   }
   return Object.freeze(Object.defineProperty(n2, Symbol.toStringTag, { value: "Module" }));
 }
+var MS = "-ms-";
+var MOZ = "-moz-";
+var WEBKIT = "-webkit-";
+var COMMENT = "comm";
+var RULESET = "rule";
+var DECLARATION = "decl";
+var IMPORT = "@import";
+var KEYFRAMES = "@keyframes";
+var LAYER = "@layer";
+var abs = Math.abs;
+var from = String.fromCharCode;
+var assign = Object.assign;
+function hash$1(value, length2) {
+  return charat(value, 0) ^ 45 ? (((length2 << 2 ^ charat(value, 0)) << 2 ^ charat(value, 1)) << 2 ^ charat(value, 2)) << 2 ^ charat(value, 3) : 0;
+}
+function trim$1(value) {
+  return value.trim();
+}
+function match(value, pattern) {
+  return (value = pattern.exec(value)) ? value[0] : value;
+}
+function replace(value, pattern, replacement) {
+  return value.replace(pattern, replacement);
+}
+function indexof(value, search2) {
+  return value.indexOf(search2);
+}
+function charat(value, index2) {
+  return value.charCodeAt(index2) | 0;
+}
+function substr(value, begin, end) {
+  return value.slice(begin, end);
+}
+function strlen(value) {
+  return value.length;
+}
+function sizeof(value) {
+  return value.length;
+}
+function append(value, array) {
+  return array.push(value), value;
+}
+function combine(array, callback) {
+  return array.map(callback).join("");
+}
+var line = 1;
+var column = 1;
+var length = 0;
+var position$2 = 0;
+var character = 0;
+var characters = "";
+function node(value, root2, parent, type2, props, children, length2) {
+  return { value, root: root2, parent, type: type2, props, children, line, column, length: length2, return: "" };
+}
+function copy$1(root2, props) {
+  return assign(node("", null, null, "", null, null, 0), root2, { length: -root2.length }, props);
+}
+function char() {
+  return character;
+}
+function prev() {
+  character = position$2 > 0 ? charat(characters, --position$2) : 0;
+  if (column--, character === 10)
+    column = 1, line--;
+  return character;
+}
+function next() {
+  character = position$2 < length ? charat(characters, position$2++) : 0;
+  if (column++, character === 10)
+    column = 1, line++;
+  return character;
+}
+function peek() {
+  return charat(characters, position$2);
+}
+function caret() {
+  return position$2;
+}
+function slice$2(begin, end) {
+  return substr(characters, begin, end);
+}
+function token(type2) {
+  switch (type2) {
+    case 0:
+    case 9:
+    case 10:
+    case 13:
+    case 32:
+      return 5;
+    case 33:
+    case 43:
+    case 44:
+    case 47:
+    case 62:
+    case 64:
+    case 126:
+    case 59:
+    case 123:
+    case 125:
+      return 4;
+    case 58:
+      return 3;
+    case 34:
+    case 39:
+    case 40:
+    case 91:
+      return 2;
+    case 41:
+    case 93:
+      return 1;
+  }
+  return 0;
+}
+function alloc(value) {
+  return line = column = 1, length = strlen(characters = value), position$2 = 0, [];
+}
+function dealloc(value) {
+  return characters = "", value;
+}
+function delimit(type2) {
+  return trim$1(slice$2(position$2 - 1, delimiter(type2 === 91 ? type2 + 2 : type2 === 40 ? type2 + 1 : type2)));
+}
+function whitespace$1(type2) {
+  while (character = peek())
+    if (character < 33)
+      next();
+    else
+      break;
+  return token(type2) > 2 || token(character) > 3 ? "" : " ";
+}
+function escaping(index2, count2) {
+  while (--count2 && next())
+    if (character < 48 || character > 102 || character > 57 && character < 65 || character > 70 && character < 97)
+      break;
+  return slice$2(index2, caret() + (count2 < 6 && peek() == 32 && next() == 32));
+}
+function delimiter(type2) {
+  while (next())
+    switch (character) {
+      case type2:
+        return position$2;
+      case 34:
+      case 39:
+        if (type2 !== 34 && type2 !== 39)
+          delimiter(character);
+        break;
+      case 40:
+        if (type2 === 41)
+          delimiter(type2);
+        break;
+      case 92:
+        next();
+        break;
+    }
+  return position$2;
+}
+function commenter(type2, index2) {
+  while (next())
+    if (type2 + character === 47 + 10)
+      break;
+    else if (type2 + character === 42 + 42 && peek() === 47)
+      break;
+  return "/*" + slice$2(index2, position$2 - 1) + "*" + from(type2 === 47 ? type2 : next());
+}
+function identifier$3(index2) {
+  while (!token(peek()))
+    next();
+  return slice$2(index2, position$2);
+}
+function compile(value) {
+  return dealloc(parse$3("", null, null, null, [""], value = alloc(value), 0, [0], value));
+}
+function parse$3(value, root2, parent, rule, rules, rulesets, pseudo, points, declarations) {
+  var index2 = 0;
+  var offset = 0;
+  var length2 = pseudo;
+  var atrule = 0;
+  var property2 = 0;
+  var previous = 0;
+  var variable2 = 1;
+  var scanning = 1;
+  var ampersand2 = 1;
+  var character2 = 0;
+  var type2 = "";
+  var props = rules;
+  var children = rulesets;
+  var reference = rule;
+  var characters2 = type2;
+  while (scanning)
+    switch (previous = character2, character2 = next()) {
+      case 40:
+        if (previous != 108 && charat(characters2, length2 - 1) == 58) {
+          if (indexof(characters2 += replace(delimit(character2), "&", "&\f"), "&\f") != -1)
+            ampersand2 = -1;
+          break;
+        }
+      case 34:
+      case 39:
+      case 91:
+        characters2 += delimit(character2);
+        break;
+      case 9:
+      case 10:
+      case 13:
+      case 32:
+        characters2 += whitespace$1(previous);
+        break;
+      case 92:
+        characters2 += escaping(caret() - 1, 7);
+        continue;
+      case 47:
+        switch (peek()) {
+          case 42:
+          case 47:
+            append(comment$1(commenter(next(), caret()), root2, parent), declarations);
+            break;
+          default:
+            characters2 += "/";
+        }
+        break;
+      case 123 * variable2:
+        points[index2++] = strlen(characters2) * ampersand2;
+      case 125 * variable2:
+      case 59:
+      case 0:
+        switch (character2) {
+          case 0:
+          case 125:
+            scanning = 0;
+          case 59 + offset:
+            if (ampersand2 == -1)
+              characters2 = replace(characters2, /\f/g, "");
+            if (property2 > 0 && strlen(characters2) - length2)
+              append(property2 > 32 ? declaration(characters2 + ";", rule, parent, length2 - 1) : declaration(replace(characters2, " ", "") + ";", rule, parent, length2 - 2), declarations);
+            break;
+          case 59:
+            characters2 += ";";
+          default:
+            append(reference = ruleset(characters2, root2, parent, index2, offset, rules, points, type2, props = [], children = [], length2), rulesets);
+            if (character2 === 123)
+              if (offset === 0)
+                parse$3(characters2, root2, reference, reference, props, rulesets, length2, points, children);
+              else
+                switch (atrule === 99 && charat(characters2, 3) === 110 ? 100 : atrule) {
+                  case 100:
+                  case 108:
+                  case 109:
+                  case 115:
+                    parse$3(value, reference, reference, rule && append(ruleset(value, reference, reference, 0, 0, rules, points, type2, rules, props = [], length2), children), rules, children, length2, points, rule ? props : children);
+                    break;
+                  default:
+                    parse$3(characters2, reference, reference, reference, [""], children, 0, points, children);
+                }
+        }
+        index2 = offset = property2 = 0, variable2 = ampersand2 = 1, type2 = characters2 = "", length2 = pseudo;
+        break;
+      case 58:
+        length2 = 1 + strlen(characters2), property2 = previous;
+      default:
+        if (variable2 < 1) {
+          if (character2 == 123)
+            --variable2;
+          else if (character2 == 125 && variable2++ == 0 && prev() == 125)
+            continue;
+        }
+        switch (characters2 += from(character2), character2 * variable2) {
+          case 38:
+            ampersand2 = offset > 0 ? 1 : (characters2 += "\f", -1);
+            break;
+          case 44:
+            points[index2++] = (strlen(characters2) - 1) * ampersand2, ampersand2 = 1;
+            break;
+          case 64:
+            if (peek() === 45)
+              characters2 += delimit(next());
+            atrule = peek(), offset = length2 = strlen(type2 = characters2 += identifier$3(caret())), character2++;
+            break;
+          case 45:
+            if (previous === 45 && strlen(characters2) == 2)
+              variable2 = 0;
+        }
+    }
+  return rulesets;
+}
+function ruleset(value, root2, parent, index2, offset, rules, points, type2, props, children, length2) {
+  var post = offset - 1;
+  var rule = offset === 0 ? rules : [""];
+  var size2 = sizeof(rule);
+  for (var i2 = 0, j = 0, k = 0; i2 < index2; ++i2)
+    for (var x = 0, y2 = substr(value, post + 1, post = abs(j = points[i2])), z = value; x < size2; ++x)
+      if (z = trim$1(j > 0 ? rule[x] + " " + y2 : replace(y2, /&\f/g, rule[x])))
+        props[k++] = z;
+  return node(value, root2, parent, offset === 0 ? RULESET : type2, props, children, length2);
+}
+function comment$1(value, root2, parent) {
+  return node(value, root2, parent, COMMENT, from(char()), substr(value, 2, -2), 0);
+}
+function declaration(value, root2, parent, length2) {
+  return node(value, root2, parent, DECLARATION, substr(value, 0, length2), substr(value, length2 + 1, -1), length2);
+}
+function serialize$1(children, callback) {
+  var output = "";
+  var length2 = sizeof(children);
+  for (var i2 = 0; i2 < length2; i2++)
+    output += callback(children[i2], i2, children, callback) || "";
+  return output;
+}
+function stringify$2(element2, index2, children, callback) {
+  switch (element2.type) {
+    case LAYER:
+      if (element2.children.length)
+        break;
+    case IMPORT:
+    case DECLARATION:
+      return element2.return = element2.return || element2.value;
+    case COMMENT:
+      return "";
+    case KEYFRAMES:
+      return element2.return = element2.value + "{" + serialize$1(element2.children, callback) + "}";
+    case RULESET:
+      element2.value = element2.props.join(",");
+  }
+  return strlen(children = serialize$1(element2.children, callback)) ? element2.return = element2.value + "{" + children + "}" : "";
+}
+function middleware(collection) {
+  var length2 = sizeof(collection);
+  return function(element2, index2, children, callback) {
+    var output = "";
+    for (var i2 = 0; i2 < length2; i2++)
+      output += collection[i2](element2, index2, children, callback) || "";
+    return output;
+  };
+}
+function rulesheet(callback) {
+  return function(element2) {
+    if (!element2.root) {
+      if (element2 = element2.return)
+        callback(element2);
+    }
+  };
+}
 var scheduler = { exports: {} };
 var scheduler_production_min = {};
 /**
@@ -2691,13 +3032,13 @@ var isArrayish$1 = function isArrayish(obj) {
 };
 var isArrayish2 = isArrayish$1;
 var concat$1 = Array.prototype.concat;
-var slice$2 = Array.prototype.slice;
+var slice$1 = Array.prototype.slice;
 var swizzle$1 = simpleSwizzle.exports = function swizzle(args) {
   var results = [];
   for (var i2 = 0, len = args.length; i2 < len; i2++) {
     var arg = args[i2];
     if (isArrayish2(arg)) {
-      results = concat$1.call(results, slice$2.call(arg));
+      results = concat$1.call(results, slice$1.call(arg));
     } else {
       results.push(arg);
     }
@@ -7594,7 +7935,7 @@ function markdownTable(table, options = {}) {
       mostCellsPerRow = table[rowIndex].length;
     }
     while (++columnIndex2 < table[rowIndex].length) {
-      const cell = serialize$1(table[rowIndex][columnIndex2]);
+      const cell = serialize(table[rowIndex][columnIndex2]);
       if (options.alignDelimiters !== false) {
         const size2 = stringLength(cell);
         sizes2[columnIndex2] = size2;
@@ -7705,7 +8046,7 @@ function markdownTable(table, options = {}) {
   }
   return lines.join("\n");
 }
-function serialize$1(value) {
+function serialize(value) {
   return value === null || value === void 0 ? "" : String(value);
 }
 function defaultStringLength(value) {
@@ -23078,24 +23419,24 @@ function getStyleTags(node2) {
   return rule || null;
 }
 const t$1 = Tag.define;
-const comment$1 = t$1(), name$1 = t$1(), typeName = t$1(name$1), propertyName = t$1(name$1), literal = t$1(), string = t$1(literal), number = t$1(literal), content = t$1(), heading = t$1(content), keyword = t$1(), operator = t$1(), punctuation = t$1(), bracket = t$1(punctuation), meta = t$1();
+const comment = t$1(), name$1 = t$1(), typeName = t$1(name$1), propertyName = t$1(name$1), literal = t$1(), string = t$1(literal), number = t$1(literal), content = t$1(), heading = t$1(content), keyword = t$1(), operator = t$1(), punctuation = t$1(), bracket = t$1(punctuation), meta = t$1();
 const tags$1 = {
   /**
   A comment.
   */
-  comment: comment$1,
+  comment,
   /**
   A line [comment](#highlight.tags.comment).
   */
-  lineComment: t$1(comment$1),
+  lineComment: t$1(comment),
   /**
   A block [comment](#highlight.tags.comment).
   */
-  blockComment: t$1(comment$1),
+  blockComment: t$1(comment),
   /**
   A documentation [comment](#highlight.tags.comment).
   */
-  docComment: t$1(comment$1),
+  docComment: t$1(comment),
   /**
   Any kind of identifier.
   */
@@ -26109,7 +26450,7 @@ const defaultKeymap = /* @__PURE__ */ [
   { key: "Alt-A", run: toggleBlockComment }
 ].concat(standardKeymap);
 const indentWithTab = { key: "Tab", run: indentMore, shift: indentLess };
-var define_process_env_default = { GITHUB_STATE: "/home/runner/work/_temp/_runner_file_commands/save_state_bd8f8343-649e-47b9-a1d3-eb2ac665ee6b", npm_package_scripts_build_n5_ci: "cd ./d9-n5 && yarn build-ci", npm_package_scripts_build_sample_cra: "cd ./d9-sample-cra && yarn build", STATS_TRP: "true", DEPLOYMENT_BASEPATH: "/opt/runner", DOTNET_NOLOGO: "1", npm_package_scripts_build_n6_ci: "cd ./d9-n6 && yarn build-ci", npm_package_dependencies__vitejs_plugin_react: "^4.2.1", USER: "runner", npm_config_version_commit_hooks: "true", npm_config_user_agent: "yarn/1.22.21 npm/? node/v18.20.2 linux x64", npm_package_dependencies__types_jest: "^29.5.4", CI: "true", npm_config_bin_links: "true", npm_package_bugs_url: "https://github.com/InsureMO/rainbow-d9/issues", npm_config_wrap_output: "", RUNNER_ENVIRONMENT: "github-hosted", GITHUB_ENV: "/home/runner/work/_temp/_runner_file_commands/set_env_bd8f8343-649e-47b9-a1d3-eb2ac665ee6b", PIPX_HOME: "/opt/pipx", npm_node_execpath: "/opt/hostedtoolcache/node/18.20.2/x64/bin/node", npm_package_scripts_build_thai_all_ci: "yarn build-thai-plan-selection-ci", npm_config_init_version: "1.0.0", npm_package_devDependencies_gh_pages: "^6.1.1", npm_package_dependencies__babel_plugin_proposal_private_property_in_object: "^7.21.11", JAVA_HOME_8_X64: "/usr/lib/jvm/temurin-8-jdk-amd64", SHLVL: "1", HOME: "/home/runner", OLDPWD: "/home/runner/work/rainbow-d9/rainbow-d9", npm_package_browserslist_production_0: ">0.2%", RUNNER_TEMP: "/home/runner/work/_temp", GITHUB_EVENT_PATH: "/home/runner/work/_temp/_github_workflow/event.json", npm_package_scripts_build_all: "yarn build-n123 && yarn build-n5 && yarn build-n6 && yarn build-echarts && yarn build-thai-all", npm_package_browserslist_production_1: "not dead", npm_package_dependencies_react_syntax_highlighter: "^15.5.0", JAVA_HOME_11_X64: "/usr/lib/jvm/temurin-11-jdk-amd64", PIPX_BIN_DIR: "/opt/pipx_bin", GITHUB_REPOSITORY_OWNER: "InsureMO", npm_package_volta_node: "18.19.0", npm_config_init_license: "MIT", npm_package_browserslist_production_2: "not op_mini all", GRADLE_HOME: "/usr/share/gradle-8.7", ANDROID_NDK_LATEST_HOME: "/usr/local/lib/android/sdk/ndk/26.3.11579264", JAVA_HOME_21_X64: "/usr/lib/jvm/temurin-21-jdk-amd64", STATS_RDCL: "true", GITHUB_RETENTION_DAYS: "90", YARN_WRAP_OUTPUT: "false", npm_package_scripts_build_thai_plan_selection_ci: "cd ./d9-thai-plan-selection && yarn build-ci", npm_package_scripts_build_n1: "cd ./d9-n1 && yarn build", npm_config_version_tag_prefix: "v", npm_package_dependencies__rainbow_d9_n2: "1.1.28-alpha.1", GITHUB_REPOSITORY_OWNER_ID: "38915232", POWERSHELL_DISTRIBUTION_CHANNEL: "GitHub-Actions-ubuntu22", AZURE_EXTENSION_DIR: "/opt/az/azcliextensions", GITHUB_HEAD_REF: "", npm_package_scripts_build_n2: "cd ./d9-n2 && yarn build", npm_package_dependencies__types_styled_components: "^5.1.34", npm_package_dependencies__rainbow_d9_n3: "1.1.28-alpha.1", npm_package_dependencies__rainbow_d9_echarts: "1.1.28-alpha.1", SYSTEMD_EXEC_PID: "588", npm_package_scripts_build_echarts: "cd ./d9-echarts && yarn build", npm_package_scripts_build_n3: "cd ./d9-n3 && yarn build", GITHUB_GRAPHQL_URL: "https://api.github.com/graphql", npm_package_description: "Assume the following envs are ready, otherwise contact the tech guy.", npm_package_scripts_predeploy: "npm run build", npm_package_dependencies__rainbow_d9_n5: "1.1.28-alpha.1", GOROOT_1_20_X64: "/opt/hostedtoolcache/go/1.20.14/x64", NVM_DIR: "/home/runner/.nvm", npm_package_readmeFilename: "README.md", npm_package_scripts_build_n5: "cd ./d9-n5 && yarn build", npm_package_dependencies__types_react: "^18.2.21", npm_package_dependencies__testing_library_react: "^13.4.0", npm_package_dependencies__rainbow_d9_n6: "1.1.28-alpha.1", DOTNET_SKIP_FIRST_TIME_EXPERIENCE: "1", GOROOT_1_21_X64: "/opt/hostedtoolcache/go/1.21.10/x64", JAVA_HOME_17_X64: "/usr/lib/jvm/temurin-17-jdk-amd64", ImageVersion: "20240516.1.0", npm_package_scripts_build_n6: "cd ./d9-n6 && yarn build", RUNNER_OS: "Linux", GITHUB_API_URL: "https://api.github.com", GOROOT_1_22_X64: "/opt/hostedtoolcache/go/1.22.3/x64", SWIFT_PATH: "/usr/share/swift/usr/bin", RUNNER_USER: "runner", STATS_V3PS: "true", CHROMEWEBDRIVER: "/usr/local/share/chromedriver-linux64", JOURNAL_STREAM: "8:19658", GITHUB_WORKFLOW: "Publish to NPM", _: "/opt/hostedtoolcache/node/18.20.2/x64/bin/yarn", npm_package_private: "true", npm_package_dependencies_remark_gfm: "3.0.1", npm_package_scripts_build_thai_all: "yarn build-thai-plan-selection", npm_config_registry: "https://registry.yarnpkg.com", ACTIONS_RUNNER_ACTION_ARCHIVE_CACHE: "/opt/actionarchivecache", STATS_D: "true", GITHUB_RUN_ID: "9222107726", STATS_VMFE: "true", npm_package_workspaces_0: "d9-n1", GITHUB_REF_TYPE: "tag", BOOTSTRAP_HASKELL_NONINTERACTIVE: "1", GITHUB_WORKFLOW_SHA: "18d3bb6bf54d90e550ed1f4bbb491a75d235fd9b", GITHUB_BASE_REF: "", ImageOS: "ubuntu22", npm_package_scripts_build_n123_ci: "yarn build-n1-ci && yarn build-n2-ci && yarn build-n3-ci", npm_package_workspaces_1: "d9-n2", npm_config_ignore_scripts: "", npm_package_scripts_start: "vite", npm_package_dependencies_github_markdown_css: "^5.5.0", GITHUB_WORKFLOW_REF: "InsureMO/rainbow-d9/.github/workflows/release.yml@refs/tags/r-1.1.28", PERFLOG_LOCATION_SETTING: "RUNNER_PERFLOG", GITHUB_ACTION_REPOSITORY: "", npm_package_workspaces_2: "d9-n3", npm_package_browserslist_development_0: "last 1 chrome version", PATH: "/tmp/yarn--1716544856950-0.8687208217687596:/home/runner/work/rainbow-d9/rainbow-d9/d9-sample-cra/node_modules/.bin:/home/runner/.config/yarn/link/node_modules/.bin:/home/runner/work/rainbow-d9/rainbow-d9/node_modules/.bin:/opt/hostedtoolcache/node/18.20.2/x64/libexec/lib/node_modules/npm/bin/node-gyp-bin:/opt/hostedtoolcache/node/18.20.2/x64/lib/node_modules/npm/bin/node-gyp-bin:/opt/hostedtoolcache/node/18.20.2/x64/bin/node_modules/npm/bin/node-gyp-bin:/tmp/yarn--1716544856742-0.862811309336982:/home/runner/work/rainbow-d9/rainbow-d9/node_modules/.bin:/home/runner/.config/yarn/link/node_modules/.bin:/home/runner/work/rainbow-d9/rainbow-d9/node_modules/.bin:/opt/hostedtoolcache/node/18.20.2/x64/libexec/lib/node_modules/npm/bin/node-gyp-bin:/opt/hostedtoolcache/node/18.20.2/x64/lib/node_modules/npm/bin/node-gyp-bin:/opt/hostedtoolcache/node/18.20.2/x64/bin/node_modules/npm/bin/node-gyp-bin:/opt/hostedtoolcache/node/18.20.2/x64/bin:/snap/bin:/home/runner/.local/bin:/opt/pipx_bin:/home/runner/.cargo/bin:/home/runner/.config/composer/vendor/bin:/usr/local/.ghcup/bin:/home/runner/.dotnet/tools:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin", NODE: "/opt/hostedtoolcache/node/18.20.2/x64/bin/node", ANT_HOME: "/usr/share/ant", DOTNET_MULTILEVEL_LOOKUP: "0", RUNNER_TRACKING_ID: "github_9b1c85b9-dc21-4fd4-a75c-059a86f0da0b", INVOCATION_ID: "28cb9d28ea044b4fb8048c0672618601", RUNNER_TOOL_CACHE: "/opt/hostedtoolcache", npm_package_name: "@rainbow-d9/sample-cra", npm_package_workspaces_3: "d9-n5", npm_package_browserslist_development_1: "last 1 firefox version", npm_package_repository_type: "git", npm_package_dependencies__types_react_syntax_highlighter: "^15.5.11", npm_package_dependencies__rainbow_d9_thai_plan_selection: "1.1.28-alpha.1", GITHUB_ACTION: "__run_5", GITHUB_RUN_NUMBER: "119", GITHUB_TRIGGERING_ACTOR: "bradwoo8621", RUNNER_ARCH: "X64", XDG_RUNTIME_DIR: "/run/user/1001", AGENT_TOOLSDIRECTORY: "/opt/hostedtoolcache", npm_package_scripts_build_thai_plan_selection: "cd ./d9-thai-plan-selection && yarn build", npm_package_workspaces_4: "d9-n6", npm_package_browserslist_development_2: "last 1 safari version", npm_package_workspaces_5: "d9-echarts", LANG: "C.UTF-8", VCPKG_INSTALLATION_ROOT: "/usr/local/share/vcpkg", npm_package_workspaces_6: "d9-thai-plan-selection", npm_package_dependencies_react_dom: "^18.2.0", CONDA: "/usr/share/miniconda", RUNNER_NAME: "GitHub Actions 16", XDG_CONFIG_HOME: "/home/runner/.config", STATS_VMD: "true", GITHUB_REF_NAME: "r-1.1.28", GITHUB_REPOSITORY: "InsureMO/rainbow-d9", STATS_D_D: "true", npm_lifecycle_script: "vite build", npm_package_workspaces_7: "d9-sample-cra", npm_package_eslintConfig_extends_0: "react-app", npm_package_dependencies_vite_plugin_markdown: "^2.2.0", npm_package_dependencies_react_markdown: "8.0.7", npm_package_dependencies__types_node: "^20.5.3", STATS_UE: "true", ANDROID_NDK_ROOT: "/usr/local/lib/android/sdk/ndk/25.2.9519653", GITHUB_ACTION_REF: "", DEBIAN_FRONTEND: "noninteractive", npm_package_scripts_build_sample_cra_ci: "cd ./d9-sample-cra && yarn build", npm_config_version_git_message: "v%s", npm_package_eslintConfig_extends_1: "react-app/jest", GITHUB_REPOSITORY_ID: "704514093", GITHUB_ACTIONS: "true", npm_lifecycle_event: "build", npm_package_version: "1.1.28-alpha.1", npm_package_repository_url: "git+https://github.com/InsureMO/rainbow-d9.git", npm_package_dependencies__testing_library_jest_dom: "^5.17.0", GITHUB_REF_PROTECTED: "false", npm_config_argv: '{"remain":[],"cooked":["run","build-sample-cra"],"original":["build-sample-cra"]}', npm_package_volta_yarn: "1.22.21", npm_package_scripts_build: "vite build", npm_package_dependencies__testing_library_user_event: "^13.5.0", GITHUB_WORKSPACE: "/home/runner/work/rainbow-d9/rainbow-d9", ACCEPT_EULA: "Y", GITHUB_JOB: "create-sample-pages", RUNNER_PERFLOG: "/home/runner/perflog", npm_package_dependencies_vite: "^5.0.13", GITHUB_SHA: "18d3bb6bf54d90e550ed1f4bbb491a75d235fd9b", GITHUB_RUN_ATTEMPT: "1", npm_config_version_git_tag: "true", npm_config_version_git_sign: "", GITHUB_REF: "refs/tags/r-1.1.28", GITHUB_ACTOR: "bradwoo8621", ANDROID_SDK_ROOT: "/usr/local/lib/android/sdk", npm_package_license: "MIT", npm_config_strict_ssl: "true", LEIN_HOME: "/usr/local/lib/lein", npm_package_scripts_build_n123: "yarn build-n1 && yarn build-n2 && yarn build-n3", GITHUB_PATH: "/home/runner/work/_temp/_runner_file_commands/add_path_bd8f8343-649e-47b9-a1d3-eb2ac665ee6b", JAVA_HOME: "/usr/lib/jvm/temurin-11-jdk-amd64", PWD: "/home/runner/work/rainbow-d9/rainbow-d9/d9-sample-cra", GITHUB_ACTOR_ID: "2330098", RUNNER_WORKSPACE: "/home/runner/work/rainbow-d9", npm_execpath: "/opt/hostedtoolcache/node/18.20.2/x64/lib/node_modules/yarn/bin/yarn.js", npm_package_scripts_build_all_ci: "yarn build-n123-ci && yarn build-n5-ci && yarn build-n6-ci && yarn build-echarts-ci && yarn build-thai-all-ci", HOMEBREW_CLEANUP_PERIODIC_FULL_DAYS: "3650", GITHUB_EVENT_NAME: "push", HOMEBREW_NO_AUTO_UPDATE: "1", ANDROID_HOME: "/usr/local/lib/android/sdk", GITHUB_SERVER_URL: "https://github.com", GECKOWEBDRIVER: "/usr/local/share/gecko_driver", LEIN_JAR: "/usr/local/lib/lein/self-installs/leiningen-2.11.2-standalone.jar", GHCUP_INSTALL_BASE_PREFIX: "/usr/local", GITHUB_OUTPUT: "/home/runner/work/_temp/_runner_file_commands/set_output_bd8f8343-649e-47b9-a1d3-eb2ac665ee6b", npm_package_author_name: "Rainbow Team", EDGEWEBDRIVER: "/usr/local/share/edge_driver", STATS_EXT: "true", npm_package_scripts_build_n1_ci: "cd ./d9-n1 && yarn build-ci", npm_config_save_prefix: "^", npm_config_ignore_optional: "", ANDROID_NDK: "/usr/local/lib/android/sdk/ndk/25.2.9519653", SGX_AESM_ADDR: "1", CHROME_BIN: "/usr/bin/google-chrome", npm_package_scripts_build_n2_ci: "cd ./d9-n2 && yarn build-ci", npm_package_scripts_deploy: "gh-pages -d build", npm_package_scripts_preview: "vite preview", SELENIUM_JAR_PATH: "/usr/share/java/selenium-server.jar", STATS_EXTP: "https://provjobdsettingscdn.blob.core.windows.net/settings/provjobdsettings-0.5.172+1/provjobd.data", npm_package_scripts_build_echarts_ci: "cd ./d9-echarts && yarn build-ci", npm_package_scripts_build_n3_ci: "cd ./d9-n3 && yarn build-ci", npm_package_dependencies_web_vitals: "^2.1.4", npm_package_dependencies_typescript: "^5.1.6", INIT_CWD: "/home/runner/work/rainbow-d9/rainbow-d9", ANDROID_NDK_HOME: "/usr/local/lib/android/sdk/ndk/25.2.9519653", GITHUB_STEP_SUMMARY: "/home/runner/work/_temp/_runner_file_commands/step_summary_bd8f8343-649e-47b9-a1d3-eb2ac665ee6b", npm_package_dependencies_react: "^18.2.0", npm_package_dependencies__types_react_dom: "^18.2.7", NODE_ENV: "production" };
+var define_process_env_default = { GITHUB_STATE: "/home/runner/work/_temp/_runner_file_commands/save_state_fcb9914c-d539-4604-bb37-001a15615ced", npm_package_scripts_build_n5_ci: "cd ./d9-n5 && yarn build-ci", npm_package_scripts_build_sample_cra: "cd ./d9-sample-cra && yarn build", STATS_TRP: "true", DEPLOYMENT_BASEPATH: "/opt/runner", DOTNET_NOLOGO: "1", npm_package_scripts_build_n6_ci: "cd ./d9-n6 && yarn build-ci", npm_package_dependencies__vitejs_plugin_react: "^4.2.1", USER: "runner", npm_config_version_commit_hooks: "true", npm_config_user_agent: "yarn/1.22.21 npm/? node/v18.20.2 linux x64", npm_package_dependencies__types_jest: "^29.5.4", CI: "true", npm_config_bin_links: "true", npm_package_bugs_url: "https://github.com/InsureMO/rainbow-d9/issues", npm_config_wrap_output: "", RUNNER_ENVIRONMENT: "github-hosted", GITHUB_ENV: "/home/runner/work/_temp/_runner_file_commands/set_env_fcb9914c-d539-4604-bb37-001a15615ced", PIPX_HOME: "/opt/pipx", npm_node_execpath: "/opt/hostedtoolcache/node/18.20.2/x64/bin/node", npm_package_scripts_build_thai_all_ci: "yarn build-thai-plan-selection-ci", npm_config_init_version: "1.0.0", npm_package_devDependencies_gh_pages: "^6.1.1", npm_package_dependencies__babel_plugin_proposal_private_property_in_object: "^7.21.11", JAVA_HOME_8_X64: "/usr/lib/jvm/temurin-8-jdk-amd64", SHLVL: "1", HOME: "/home/runner", OLDPWD: "/home/runner/work/rainbow-d9/rainbow-d9", npm_package_browserslist_production_0: ">0.2%", RUNNER_TEMP: "/home/runner/work/_temp", GITHUB_EVENT_PATH: "/home/runner/work/_temp/_github_workflow/event.json", npm_package_scripts_build_all: "yarn build-n123 && yarn build-n5 && yarn build-n6 && yarn build-echarts && yarn build-thai-all", npm_package_browserslist_production_1: "not dead", npm_package_dependencies_react_syntax_highlighter: "^15.5.0", JAVA_HOME_11_X64: "/usr/lib/jvm/temurin-11-jdk-amd64", PIPX_BIN_DIR: "/opt/pipx_bin", GITHUB_REPOSITORY_OWNER: "InsureMO", npm_package_volta_node: "18.19.0", npm_config_init_license: "MIT", npm_package_browserslist_production_2: "not op_mini all", GRADLE_HOME: "/usr/share/gradle-8.7", ANDROID_NDK_LATEST_HOME: "/usr/local/lib/android/sdk/ndk/26.3.11579264", JAVA_HOME_21_X64: "/usr/lib/jvm/temurin-21-jdk-amd64", STATS_RDCL: "true", GITHUB_RETENTION_DAYS: "90", YARN_WRAP_OUTPUT: "false", npm_package_scripts_build_thai_plan_selection_ci: "cd ./d9-thai-plan-selection && yarn build-ci", npm_package_scripts_build_n1: "cd ./d9-n1 && yarn build", npm_config_version_tag_prefix: "v", npm_package_dependencies__rainbow_d9_n2: "1.1.28", GITHUB_REPOSITORY_OWNER_ID: "38915232", POWERSHELL_DISTRIBUTION_CHANNEL: "GitHub-Actions-ubuntu22", AZURE_EXTENSION_DIR: "/opt/az/azcliextensions", GITHUB_HEAD_REF: "", npm_package_scripts_build_n2: "cd ./d9-n2 && yarn build", npm_package_dependencies__types_styled_components: "^5.1.34", npm_package_dependencies__rainbow_d9_n3: "1.1.28", npm_package_dependencies__rainbow_d9_echarts: "1.1.28", SYSTEMD_EXEC_PID: "596", npm_package_scripts_build_echarts: "cd ./d9-echarts && yarn build", npm_package_scripts_build_n3: "cd ./d9-n3 && yarn build", GITHUB_GRAPHQL_URL: "https://api.github.com/graphql", npm_package_description: "Assume the following envs are ready, otherwise contact the tech guy.", npm_package_scripts_predeploy: "npm run build", npm_package_dependencies__rainbow_d9_n5: "1.1.28", GOROOT_1_20_X64: "/opt/hostedtoolcache/go/1.20.14/x64", NVM_DIR: "/home/runner/.nvm", npm_package_readmeFilename: "README.md", npm_package_scripts_build_n5: "cd ./d9-n5 && yarn build", npm_package_dependencies__types_react: "^18.2.21", npm_package_dependencies__testing_library_react: "^13.4.0", npm_package_dependencies__rainbow_d9_n6: "1.1.28", DOTNET_SKIP_FIRST_TIME_EXPERIENCE: "1", GOROOT_1_21_X64: "/opt/hostedtoolcache/go/1.21.10/x64", JAVA_HOME_17_X64: "/usr/lib/jvm/temurin-17-jdk-amd64", ImageVersion: "20240516.1.0", npm_package_scripts_build_n6: "cd ./d9-n6 && yarn build", RUNNER_OS: "Linux", GITHUB_API_URL: "https://api.github.com", GOROOT_1_22_X64: "/opt/hostedtoolcache/go/1.22.3/x64", SWIFT_PATH: "/usr/share/swift/usr/bin", RUNNER_USER: "runner", STATS_V3PS: "true", CHROMEWEBDRIVER: "/usr/local/share/chromedriver-linux64", JOURNAL_STREAM: "8:18170", GITHUB_WORKFLOW: "Publish to NPM", _: "/opt/hostedtoolcache/node/18.20.2/x64/bin/yarn", npm_package_private: "true", npm_package_dependencies_remark_gfm: "3.0.1", npm_package_scripts_build_thai_all: "yarn build-thai-plan-selection", npm_config_registry: "https://registry.yarnpkg.com", ACTIONS_RUNNER_ACTION_ARCHIVE_CACHE: "/opt/actionarchivecache", STATS_D: "true", GITHUB_RUN_ID: "9222296126", STATS_VMFE: "true", npm_package_workspaces_0: "d9-n1", GITHUB_REF_TYPE: "tag", BOOTSTRAP_HASKELL_NONINTERACTIVE: "1", GITHUB_WORKFLOW_SHA: "a7ac1f05fcb6385f328c52e299032c261d3d40a7", GITHUB_BASE_REF: "", ImageOS: "ubuntu22", npm_package_scripts_build_n123_ci: "yarn build-n1-ci && yarn build-n2-ci && yarn build-n3-ci", npm_package_workspaces_1: "d9-n2", npm_config_ignore_scripts: "", npm_package_scripts_start: "vite", npm_package_dependencies_github_markdown_css: "^5.5.0", GITHUB_WORKFLOW_REF: "InsureMO/rainbow-d9/.github/workflows/release.yml@refs/tags/r-1.1.28-alpha.2", PERFLOG_LOCATION_SETTING: "RUNNER_PERFLOG", GITHUB_ACTION_REPOSITORY: "", npm_package_workspaces_2: "d9-n3", npm_package_browserslist_development_0: "last 1 chrome version", PATH: "/tmp/yarn--1716545756314-0.8376200254239676:/home/runner/work/rainbow-d9/rainbow-d9/d9-sample-cra/node_modules/.bin:/home/runner/.config/yarn/link/node_modules/.bin:/home/runner/work/rainbow-d9/rainbow-d9/node_modules/.bin:/opt/hostedtoolcache/node/18.20.2/x64/libexec/lib/node_modules/npm/bin/node-gyp-bin:/opt/hostedtoolcache/node/18.20.2/x64/lib/node_modules/npm/bin/node-gyp-bin:/opt/hostedtoolcache/node/18.20.2/x64/bin/node_modules/npm/bin/node-gyp-bin:/tmp/yarn--1716545756126-0.8349994016308158:/home/runner/work/rainbow-d9/rainbow-d9/node_modules/.bin:/home/runner/.config/yarn/link/node_modules/.bin:/home/runner/work/rainbow-d9/rainbow-d9/node_modules/.bin:/opt/hostedtoolcache/node/18.20.2/x64/libexec/lib/node_modules/npm/bin/node-gyp-bin:/opt/hostedtoolcache/node/18.20.2/x64/lib/node_modules/npm/bin/node-gyp-bin:/opt/hostedtoolcache/node/18.20.2/x64/bin/node_modules/npm/bin/node-gyp-bin:/opt/hostedtoolcache/node/18.20.2/x64/bin:/snap/bin:/home/runner/.local/bin:/opt/pipx_bin:/home/runner/.cargo/bin:/home/runner/.config/composer/vendor/bin:/usr/local/.ghcup/bin:/home/runner/.dotnet/tools:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin", NODE: "/opt/hostedtoolcache/node/18.20.2/x64/bin/node", ANT_HOME: "/usr/share/ant", DOTNET_MULTILEVEL_LOOKUP: "0", RUNNER_TRACKING_ID: "github_4f844508-fa70-4102-bf14-f16bd632ff1d", INVOCATION_ID: "a7d1800b60a84422bcefffda59f6a731", RUNNER_TOOL_CACHE: "/opt/hostedtoolcache", npm_package_name: "@rainbow-d9/sample-cra", npm_package_workspaces_3: "d9-n5", npm_package_browserslist_development_1: "last 1 firefox version", npm_package_repository_type: "git", npm_package_dependencies__types_react_syntax_highlighter: "^15.5.11", npm_package_dependencies__rainbow_d9_thai_plan_selection: "1.1.28", GITHUB_ACTION: "__run_5", GITHUB_RUN_NUMBER: "120", GITHUB_TRIGGERING_ACTOR: "bradwoo8621", RUNNER_ARCH: "X64", XDG_RUNTIME_DIR: "/run/user/1001", AGENT_TOOLSDIRECTORY: "/opt/hostedtoolcache", npm_package_scripts_build_thai_plan_selection: "cd ./d9-thai-plan-selection && yarn build", npm_package_workspaces_4: "d9-n6", npm_package_browserslist_development_2: "last 1 safari version", npm_package_workspaces_5: "d9-echarts", LANG: "C.UTF-8", VCPKG_INSTALLATION_ROOT: "/usr/local/share/vcpkg", npm_package_workspaces_6: "d9-thai-plan-selection", npm_package_dependencies_react_dom: "^18.2.0", CONDA: "/usr/share/miniconda", RUNNER_NAME: "GitHub Actions 2", XDG_CONFIG_HOME: "/home/runner/.config", STATS_VMD: "true", GITHUB_REF_NAME: "r-1.1.28-alpha.2", GITHUB_REPOSITORY: "InsureMO/rainbow-d9", STATS_D_D: "true", npm_lifecycle_script: "vite build", npm_package_workspaces_7: "d9-sample-cra", npm_package_eslintConfig_extends_0: "react-app", npm_package_dependencies_vite_plugin_markdown: "^2.2.0", npm_package_dependencies_react_markdown: "8.0.7", npm_package_dependencies__types_node: "^20.5.3", STATS_UE: "true", ANDROID_NDK_ROOT: "/usr/local/lib/android/sdk/ndk/25.2.9519653", GITHUB_ACTION_REF: "", DEBIAN_FRONTEND: "noninteractive", npm_package_scripts_build_sample_cra_ci: "cd ./d9-sample-cra && yarn build", npm_config_version_git_message: "v%s", npm_package_eslintConfig_extends_1: "react-app/jest", GITHUB_REPOSITORY_ID: "704514093", GITHUB_ACTIONS: "true", npm_lifecycle_event: "build", npm_package_version: "1.1.28", npm_package_repository_url: "git+https://github.com/InsureMO/rainbow-d9.git", npm_package_dependencies__testing_library_jest_dom: "^5.17.0", GITHUB_REF_PROTECTED: "false", npm_config_argv: '{"remain":[],"cooked":["run","build-sample-cra"],"original":["build-sample-cra"]}', npm_package_volta_yarn: "1.22.21", npm_package_scripts_build: "vite build", npm_package_dependencies__testing_library_user_event: "^13.5.0", GITHUB_WORKSPACE: "/home/runner/work/rainbow-d9/rainbow-d9", ACCEPT_EULA: "Y", GITHUB_JOB: "create-sample-pages", RUNNER_PERFLOG: "/home/runner/perflog", npm_package_dependencies_vite: "^5.0.13", GITHUB_SHA: "a7ac1f05fcb6385f328c52e299032c261d3d40a7", GITHUB_RUN_ATTEMPT: "1", npm_config_version_git_tag: "true", npm_config_version_git_sign: "", GITHUB_REF: "refs/tags/r-1.1.28-alpha.2", GITHUB_ACTOR: "bradwoo8621", ANDROID_SDK_ROOT: "/usr/local/lib/android/sdk", npm_package_license: "MIT", npm_config_strict_ssl: "true", LEIN_HOME: "/usr/local/lib/lein", npm_package_scripts_build_n123: "yarn build-n1 && yarn build-n2 && yarn build-n3", GITHUB_PATH: "/home/runner/work/_temp/_runner_file_commands/add_path_fcb9914c-d539-4604-bb37-001a15615ced", JAVA_HOME: "/usr/lib/jvm/temurin-11-jdk-amd64", PWD: "/home/runner/work/rainbow-d9/rainbow-d9/d9-sample-cra", GITHUB_ACTOR_ID: "2330098", RUNNER_WORKSPACE: "/home/runner/work/rainbow-d9", npm_execpath: "/opt/hostedtoolcache/node/18.20.2/x64/lib/node_modules/yarn/bin/yarn.js", npm_package_scripts_build_all_ci: "yarn build-n123-ci && yarn build-n5-ci && yarn build-n6-ci && yarn build-echarts-ci && yarn build-thai-all-ci", HOMEBREW_CLEANUP_PERIODIC_FULL_DAYS: "3650", GITHUB_EVENT_NAME: "push", HOMEBREW_NO_AUTO_UPDATE: "1", ANDROID_HOME: "/usr/local/lib/android/sdk", GITHUB_SERVER_URL: "https://github.com", GECKOWEBDRIVER: "/usr/local/share/gecko_driver", LEIN_JAR: "/usr/local/lib/lein/self-installs/leiningen-2.11.2-standalone.jar", GHCUP_INSTALL_BASE_PREFIX: "/usr/local", GITHUB_OUTPUT: "/home/runner/work/_temp/_runner_file_commands/set_output_fcb9914c-d539-4604-bb37-001a15615ced", npm_package_author_name: "Rainbow Team", EDGEWEBDRIVER: "/usr/local/share/edge_driver", STATS_EXT: "true", npm_package_scripts_build_n1_ci: "cd ./d9-n1 && yarn build-ci", npm_config_save_prefix: "^", npm_config_ignore_optional: "", ANDROID_NDK: "/usr/local/lib/android/sdk/ndk/25.2.9519653", SGX_AESM_ADDR: "1", CHROME_BIN: "/usr/bin/google-chrome", npm_package_scripts_build_n2_ci: "cd ./d9-n2 && yarn build-ci", npm_package_scripts_deploy: "gh-pages -d build", npm_package_scripts_preview: "vite preview", SELENIUM_JAR_PATH: "/usr/share/java/selenium-server.jar", STATS_EXTP: "https://provjobdsettingscdn.blob.core.windows.net/settings/provjobdsettings-0.5.172+1/provjobd.data", npm_package_scripts_build_echarts_ci: "cd ./d9-echarts && yarn build-ci", npm_package_scripts_build_n3_ci: "cd ./d9-n3 && yarn build-ci", npm_package_dependencies_web_vitals: "^2.1.4", npm_package_dependencies_typescript: "^5.1.6", INIT_CWD: "/home/runner/work/rainbow-d9/rainbow-d9", ANDROID_NDK_HOME: "/usr/local/lib/android/sdk/ndk/25.2.9519653", GITHUB_STEP_SUMMARY: "/home/runner/work/_temp/_runner_file_commands/step_summary_fcb9914c-d539-4604-bb37-001a15615ced", npm_package_dependencies_react: "^18.2.0", npm_package_dependencies__types_react_dom: "^18.2.7", NODE_ENV: "production" };
 let Stack$4 = class Stack {
   /**
   @internal
@@ -32320,7 +32661,7 @@ function configureNesting(tags2 = [], attributes = []) {
     return null;
   });
 }
-const descendantOp = 99, Unit = 1, callee = 100, identifier$3 = 101, VariableName = 2;
+const descendantOp = 99, Unit = 1, callee = 100, identifier$2 = 101, VariableName = 2;
 const space$2 = [
   9,
   10,
@@ -32348,7 +32689,7 @@ const space$2 = [
   8287,
   12288
 ];
-const colon = 58, parenL = 40, underscore = 95, bracketL = 91, dash = 45, period = 46, hash$1 = 35, percent = 37, ampersand$1 = 38, backslash = 92, newline = 10;
+const colon = 58, parenL = 40, underscore = 95, bracketL = 91, dash = 45, period = 46, hash = 35, percent = 37, ampersand$1 = 38, backslash = 92, newline = 10;
 function isAlpha(ch) {
   return ch >= 65 && ch <= 90 || ch >= 97 && ch <= 122 || ch >= 161;
 }
@@ -32371,7 +32712,7 @@ const identifiers = new ExternalTokenizer((input, stack) => {
       inside2 = true;
     } else {
       if (inside2)
-        input.acceptToken(next2 == parenL ? callee : dashes == 2 && stack.canShift(VariableName) ? VariableName : identifier$3);
+        input.acceptToken(next2 == parenL ? callee : dashes == 2 && stack.canShift(VariableName) ? VariableName : identifier$2);
       break;
     }
   }
@@ -32379,7 +32720,7 @@ const identifiers = new ExternalTokenizer((input, stack) => {
 const descendant = new ExternalTokenizer((input) => {
   if (space$2.includes(input.peek(-1))) {
     let { next: next2 } = input;
-    if (isAlpha(next2) || next2 == underscore || next2 == hash$1 || next2 == period || next2 == bracketL || next2 == colon && isAlpha(input.peek(1)) || next2 == dash || next2 == ampersand$1)
+    if (isAlpha(next2) || next2 == underscore || next2 == hash || next2 == period || next2 == bracketL || next2 == colon && isAlpha(input.peek(1)) || next2 == dash || next2 == ampersand$1)
       input.acceptToken(descendantOp);
   }
 });
@@ -33184,7 +33525,7 @@ const tags = /* @__PURE__ */ [
   "u",
   "ul"
 ].map((name2) => ({ type: "type", label: name2 }));
-const identifier$2 = /^(\w[\w-]*|-\w[\w-]*|)$/, variable = /^-(-[\w-]*)?$/;
+const identifier$1 = /^(\w[\w-]*|-\w[\w-]*|)$/, variable = /^-(-[\w-]*)?$/;
 function isVarArg(node2, doc2) {
   var _a2;
   if (node2.name == "(" || node2.type.isError)
@@ -33241,11 +33582,11 @@ const defineCSSCompletionSource = (isVariable) => (context) => {
   let { state, pos } = context, node2 = syntaxTree(state).resolveInner(pos, -1);
   let isDash = node2.type.isError && node2.from == node2.to - 1 && state.doc.sliceString(node2.from, node2.to) == "-";
   if (node2.name == "PropertyName" || (isDash || node2.name == "TagName") && /^(Block|Styles)$/.test(node2.resolve(node2.to).name))
-    return { from: node2.from, options: properties(), validFor: identifier$2 };
+    return { from: node2.from, options: properties(), validFor: identifier$1 };
   if (node2.name == "ValueName")
-    return { from: node2.from, options: values$1, validFor: identifier$2 };
+    return { from: node2.from, options: values$1, validFor: identifier$1 };
   if (node2.name == "PseudoClassName")
-    return { from: node2.from, options: pseudoClasses, validFor: identifier$2 };
+    return { from: node2.from, options: pseudoClasses, validFor: identifier$1 };
   if (isVariable(node2) || (context.explicit || isDash) && isVarArg(node2, state.doc))
     return {
       from: isVariable(node2) || isDash ? node2.from : pos,
@@ -33255,18 +33596,18 @@ const defineCSSCompletionSource = (isVariable) => (context) => {
   if (node2.name == "TagName") {
     for (let { parent } = node2; parent; parent = parent.parent)
       if (parent.name == "Block")
-        return { from: node2.from, options: properties(), validFor: identifier$2 };
-    return { from: node2.from, options: tags, validFor: identifier$2 };
+        return { from: node2.from, options: properties(), validFor: identifier$1 };
+    return { from: node2.from, options: tags, validFor: identifier$1 };
   }
   if (!context.explicit)
     return null;
   let above = node2.resolve(pos), before = above.childBefore(pos);
   if (before && before.name == ":" && above.name == "PseudoClassSelector")
-    return { from: pos, options: pseudoClasses, validFor: identifier$2 };
+    return { from: pos, options: pseudoClasses, validFor: identifier$1 };
   if (before && before.name == ":" && above.name == "Declaration" || above.name == "ArgList")
-    return { from: pos, options: values$1, validFor: identifier$2 };
+    return { from: pos, options: values$1, validFor: identifier$1 };
   if (above.name == "Block" || above.name == "Styles")
-    return { from: pos, options: properties(), validFor: identifier$2 };
+    return { from: pos, options: properties(), validFor: identifier$1 };
   return null;
 };
 const cssCompletionSource = /* @__PURE__ */ defineCSSCompletionSource((n2) => n2.name == "VariableName");
@@ -33761,7 +34102,7 @@ function openTags(doc2, tree) {
   }
   return open;
 }
-const identifier$1 = /^[:\-\.\w\u00b7-\uffff]*$/;
+const identifier = /^[:\-\.\w\u00b7-\uffff]*$/;
 function completeTag(state, schema2, tree, from2, to) {
   let end = /\s*>/.test(state.sliceDoc(to, to + 5)) ? "" : ">";
   let parent = findParentElement(tree, true);
@@ -33783,7 +34124,7 @@ function completeCloseTag(state, tree, from2, to) {
     from: from2,
     to,
     options: openTags(state.doc, tree).map((tag, i2) => ({ label: tag, apply: tag + end, type: "type", boost: 99 - i2 })),
-    validFor: identifier$1
+    validFor: identifier
   };
 }
 function completeStartTag(state, schema2, tree, pos) {
@@ -33802,7 +34143,7 @@ function completeAttrName(state, schema2, tree, from2, to) {
     from: from2,
     to,
     options: names.map((attrName) => ({ label: attrName, type: "property" })),
-    validFor: identifier$1
+    validFor: identifier
   };
 }
 function completeAttrValue(state, schema2, tree, from2, to) {
@@ -38377,347 +38718,6 @@ function cloneDeep(value) {
 }
 var cloneDeep_1 = cloneDeep;
 const _cloneDeep = /* @__PURE__ */ getDefaultExportFromCjs(cloneDeep_1);
-var MS = "-ms-";
-var MOZ = "-moz-";
-var WEBKIT = "-webkit-";
-var COMMENT = "comm";
-var RULESET = "rule";
-var DECLARATION = "decl";
-var IMPORT = "@import";
-var KEYFRAMES = "@keyframes";
-var LAYER = "@layer";
-var abs = Math.abs;
-var from = String.fromCharCode;
-var assign = Object.assign;
-function hash(value, length2) {
-  return charat(value, 0) ^ 45 ? (((length2 << 2 ^ charat(value, 0)) << 2 ^ charat(value, 1)) << 2 ^ charat(value, 2)) << 2 ^ charat(value, 3) : 0;
-}
-function trim$1(value) {
-  return value.trim();
-}
-function match(value, pattern) {
-  return (value = pattern.exec(value)) ? value[0] : value;
-}
-function replace(value, pattern, replacement) {
-  return value.replace(pattern, replacement);
-}
-function indexof(value, search2) {
-  return value.indexOf(search2);
-}
-function charat(value, index2) {
-  return value.charCodeAt(index2) | 0;
-}
-function substr(value, begin, end) {
-  return value.slice(begin, end);
-}
-function strlen(value) {
-  return value.length;
-}
-function sizeof(value) {
-  return value.length;
-}
-function append(value, array) {
-  return array.push(value), value;
-}
-function combine(array, callback) {
-  return array.map(callback).join("");
-}
-var line = 1;
-var column = 1;
-var length = 0;
-var position$2 = 0;
-var character = 0;
-var characters = "";
-function node(value, root2, parent, type2, props, children, length2) {
-  return { value, root: root2, parent, type: type2, props, children, line, column, length: length2, return: "" };
-}
-function copy$1(root2, props) {
-  return assign(node("", null, null, "", null, null, 0), root2, { length: -root2.length }, props);
-}
-function char() {
-  return character;
-}
-function prev() {
-  character = position$2 > 0 ? charat(characters, --position$2) : 0;
-  if (column--, character === 10)
-    column = 1, line--;
-  return character;
-}
-function next() {
-  character = position$2 < length ? charat(characters, position$2++) : 0;
-  if (column++, character === 10)
-    column = 1, line++;
-  return character;
-}
-function peek() {
-  return charat(characters, position$2);
-}
-function caret() {
-  return position$2;
-}
-function slice$1(begin, end) {
-  return substr(characters, begin, end);
-}
-function token(type2) {
-  switch (type2) {
-    case 0:
-    case 9:
-    case 10:
-    case 13:
-    case 32:
-      return 5;
-    case 33:
-    case 43:
-    case 44:
-    case 47:
-    case 62:
-    case 64:
-    case 126:
-    case 59:
-    case 123:
-    case 125:
-      return 4;
-    case 58:
-      return 3;
-    case 34:
-    case 39:
-    case 40:
-    case 91:
-      return 2;
-    case 41:
-    case 93:
-      return 1;
-  }
-  return 0;
-}
-function alloc(value) {
-  return line = column = 1, length = strlen(characters = value), position$2 = 0, [];
-}
-function dealloc(value) {
-  return characters = "", value;
-}
-function delimit(type2) {
-  return trim$1(slice$1(position$2 - 1, delimiter(type2 === 91 ? type2 + 2 : type2 === 40 ? type2 + 1 : type2)));
-}
-function whitespace$1(type2) {
-  while (character = peek())
-    if (character < 33)
-      next();
-    else
-      break;
-  return token(type2) > 2 || token(character) > 3 ? "" : " ";
-}
-function escaping(index2, count2) {
-  while (--count2 && next())
-    if (character < 48 || character > 102 || character > 57 && character < 65 || character > 70 && character < 97)
-      break;
-  return slice$1(index2, caret() + (count2 < 6 && peek() == 32 && next() == 32));
-}
-function delimiter(type2) {
-  while (next())
-    switch (character) {
-      case type2:
-        return position$2;
-      case 34:
-      case 39:
-        if (type2 !== 34 && type2 !== 39)
-          delimiter(character);
-        break;
-      case 40:
-        if (type2 === 41)
-          delimiter(type2);
-        break;
-      case 92:
-        next();
-        break;
-    }
-  return position$2;
-}
-function commenter(type2, index2) {
-  while (next())
-    if (type2 + character === 47 + 10)
-      break;
-    else if (type2 + character === 42 + 42 && peek() === 47)
-      break;
-  return "/*" + slice$1(index2, position$2 - 1) + "*" + from(type2 === 47 ? type2 : next());
-}
-function identifier(index2) {
-  while (!token(peek()))
-    next();
-  return slice$1(index2, position$2);
-}
-function compile(value) {
-  return dealloc(parse$3("", null, null, null, [""], value = alloc(value), 0, [0], value));
-}
-function parse$3(value, root2, parent, rule, rules, rulesets, pseudo, points, declarations) {
-  var index2 = 0;
-  var offset = 0;
-  var length2 = pseudo;
-  var atrule = 0;
-  var property2 = 0;
-  var previous = 0;
-  var variable2 = 1;
-  var scanning = 1;
-  var ampersand2 = 1;
-  var character2 = 0;
-  var type2 = "";
-  var props = rules;
-  var children = rulesets;
-  var reference = rule;
-  var characters2 = type2;
-  while (scanning)
-    switch (previous = character2, character2 = next()) {
-      case 40:
-        if (previous != 108 && charat(characters2, length2 - 1) == 58) {
-          if (indexof(characters2 += replace(delimit(character2), "&", "&\f"), "&\f") != -1)
-            ampersand2 = -1;
-          break;
-        }
-      case 34:
-      case 39:
-      case 91:
-        characters2 += delimit(character2);
-        break;
-      case 9:
-      case 10:
-      case 13:
-      case 32:
-        characters2 += whitespace$1(previous);
-        break;
-      case 92:
-        characters2 += escaping(caret() - 1, 7);
-        continue;
-      case 47:
-        switch (peek()) {
-          case 42:
-          case 47:
-            append(comment(commenter(next(), caret()), root2, parent), declarations);
-            break;
-          default:
-            characters2 += "/";
-        }
-        break;
-      case 123 * variable2:
-        points[index2++] = strlen(characters2) * ampersand2;
-      case 125 * variable2:
-      case 59:
-      case 0:
-        switch (character2) {
-          case 0:
-          case 125:
-            scanning = 0;
-          case 59 + offset:
-            if (ampersand2 == -1)
-              characters2 = replace(characters2, /\f/g, "");
-            if (property2 > 0 && strlen(characters2) - length2)
-              append(property2 > 32 ? declaration(characters2 + ";", rule, parent, length2 - 1) : declaration(replace(characters2, " ", "") + ";", rule, parent, length2 - 2), declarations);
-            break;
-          case 59:
-            characters2 += ";";
-          default:
-            append(reference = ruleset(characters2, root2, parent, index2, offset, rules, points, type2, props = [], children = [], length2), rulesets);
-            if (character2 === 123)
-              if (offset === 0)
-                parse$3(characters2, root2, reference, reference, props, rulesets, length2, points, children);
-              else
-                switch (atrule === 99 && charat(characters2, 3) === 110 ? 100 : atrule) {
-                  case 100:
-                  case 108:
-                  case 109:
-                  case 115:
-                    parse$3(value, reference, reference, rule && append(ruleset(value, reference, reference, 0, 0, rules, points, type2, rules, props = [], length2), children), rules, children, length2, points, rule ? props : children);
-                    break;
-                  default:
-                    parse$3(characters2, reference, reference, reference, [""], children, 0, points, children);
-                }
-        }
-        index2 = offset = property2 = 0, variable2 = ampersand2 = 1, type2 = characters2 = "", length2 = pseudo;
-        break;
-      case 58:
-        length2 = 1 + strlen(characters2), property2 = previous;
-      default:
-        if (variable2 < 1) {
-          if (character2 == 123)
-            --variable2;
-          else if (character2 == 125 && variable2++ == 0 && prev() == 125)
-            continue;
-        }
-        switch (characters2 += from(character2), character2 * variable2) {
-          case 38:
-            ampersand2 = offset > 0 ? 1 : (characters2 += "\f", -1);
-            break;
-          case 44:
-            points[index2++] = (strlen(characters2) - 1) * ampersand2, ampersand2 = 1;
-            break;
-          case 64:
-            if (peek() === 45)
-              characters2 += delimit(next());
-            atrule = peek(), offset = length2 = strlen(type2 = characters2 += identifier(caret())), character2++;
-            break;
-          case 45:
-            if (previous === 45 && strlen(characters2) == 2)
-              variable2 = 0;
-        }
-    }
-  return rulesets;
-}
-function ruleset(value, root2, parent, index2, offset, rules, points, type2, props, children, length2) {
-  var post = offset - 1;
-  var rule = offset === 0 ? rules : [""];
-  var size2 = sizeof(rule);
-  for (var i2 = 0, j = 0, k = 0; i2 < index2; ++i2)
-    for (var x = 0, y2 = substr(value, post + 1, post = abs(j = points[i2])), z = value; x < size2; ++x)
-      if (z = trim$1(j > 0 ? rule[x] + " " + y2 : replace(y2, /&\f/g, rule[x])))
-        props[k++] = z;
-  return node(value, root2, parent, offset === 0 ? RULESET : type2, props, children, length2);
-}
-function comment(value, root2, parent) {
-  return node(value, root2, parent, COMMENT, from(char()), substr(value, 2, -2), 0);
-}
-function declaration(value, root2, parent, length2) {
-  return node(value, root2, parent, DECLARATION, substr(value, 0, length2), substr(value, length2 + 1, -1), length2);
-}
-function serialize(children, callback) {
-  var output = "";
-  var length2 = sizeof(children);
-  for (var i2 = 0; i2 < length2; i2++)
-    output += callback(children[i2], i2, children, callback) || "";
-  return output;
-}
-function stringify$2(element2, index2, children, callback) {
-  switch (element2.type) {
-    case LAYER:
-      if (element2.children.length)
-        break;
-    case IMPORT:
-    case DECLARATION:
-      return element2.return = element2.return || element2.value;
-    case COMMENT:
-      return "";
-    case KEYFRAMES:
-      return element2.return = element2.value + "{" + serialize(element2.children, callback) + "}";
-    case RULESET:
-      element2.value = element2.props.join(",");
-  }
-  return strlen(children = serialize(element2.children, callback)) ? element2.return = element2.value + "{" + children + "}" : "";
-}
-function middleware(collection) {
-  var length2 = sizeof(collection);
-  return function(element2, index2, children, callback) {
-    var output = "";
-    for (var i2 = 0; i2 < length2; i2++)
-      output += collection[i2](element2, index2, children, callback) || "";
-    return output;
-  };
-}
-function rulesheet(callback) {
-  return function(element2) {
-    if (!element2.root) {
-      if (element2 = element2.return)
-        callback(element2);
-    }
-  };
-}
 var baseAssignValue = _baseAssignValue, baseForOwn = _baseForOwn, baseIteratee$6 = _baseIteratee;
 function mapValues(object, iteratee) {
   var result = {};
@@ -50617,7 +50617,7 @@ export {
   compile as e,
   charat as f,
   strlen as g,
-  hash as h,
+  hash$1 as h,
   indexof as i,
   MOZ as j,
   match as k,
@@ -50628,10 +50628,10 @@ export {
   from as p,
   peek as q,
   replace as r,
-  serialize as s,
+  serialize$1 as s,
   token as t,
   delimit as u,
-  slice$1 as v,
+  slice$2 as v,
   position$2 as w,
   hastUtilParseSelector as x,
   decodeNamedCharacterReference as y,

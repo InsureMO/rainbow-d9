@@ -4,10 +4,10 @@ var __publicField = (obj, key, value) => {
   __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
   return value;
 };
-import { I as color, J as MaskedNumber, L as MaskedDate, N as MaskedFunction, O as MaskedPattern, P as MaskedRange, Q as MaskedRegExp, S as MaskedDynamic } from "./vendor-ctmAJdvj.js";
-import { a as React, r as reactExports, u as useIMask } from "./react-VfX_HI7I.js";
-import { c as createLogger, V as VUtils, P as PPUtils, r as registerWidget, u as useRootEventBus, M as MUtils, N as NUtils, d as Wrapper, e as useForceUpdate, f as MBUtils, b as useWrapperEventBus, W as WrapperEventTypes, g as useCreateEventBus, h as PROPERTY_PATH_ME, i as useDefaultAttributeValues, j as useAttributesWatch, R as RootEventTypes } from "./rainbow-d9-n1-gbyGzXGq.js";
-import { q as qe, W as We } from "./styled-components-xBJU6yph.js";
+import { I as color, J as MaskedNumber, L as MaskedDate, N as MaskedFunction, O as MaskedPattern, P as MaskedRange, Q as MaskedRegExp, S as MaskedDynamic } from "./vendor-Ih3CtHGV.js";
+import { a as React, r as reactExports, u as useIMask } from "./react-yj2EiHa4.js";
+import { c as createLogger, V as VUtils, P as PPUtils, r as registerWidget, u as useRootEventBus, M as MUtils, N as NUtils, d as Wrapper, e as useForceUpdate, f as MBUtils, b as useWrapperEventBus, W as WrapperEventTypes, g as useCreateEventBus, h as PROPERTY_PATH_ME, i as useDefaultAttributeValues, j as useAttributesWatch, R as RootEventTypes } from "./rainbow-d9-n1-CI7XR9B5.js";
+import { q as qe, W as We } from "./styled-components-QDH3nKgO.js";
 import { d as dayjs } from "./dayjs-ZafkOS5_.js";
 const DOM_KEY_WIDGET = "data-w";
 const DOM_ID_WIDGET = "data-wid";
@@ -190,9 +190,17 @@ $d9.$d9n2 = $d9.$d9n2 ?? {
     language: navigator.language || "en-US",
     labels: {
       "en-US": {
-        alert: { confirm: "Ok" },
-        dialog: { confirm: "Yes", discard: "No" },
-        options: { noAvailable: "No available options.", noMatched: "No matched options." },
+        alert: {
+          confirm: "Ok"
+        },
+        dialog: {
+          confirm: "Yes",
+          discard: "No"
+        },
+        options: {
+          noAvailable: "No available options.",
+          noMatched: "No matched options."
+        },
         calendar: {
           confirm: "Ok",
           today: "Today",
@@ -236,8 +244,15 @@ $d9.$d9n2 = $d9.$d9n2 ?? {
           createItem: "Create New Element",
           removeItem: "Remove"
         },
-        wizard: { previous: "Previous", next: "Next" },
-        tree: { filter: { placeholder: "Filter..." } },
+        wizard: {
+          previous: "Previous",
+          next: "Next"
+        },
+        tree: {
+          filter: {
+            placeholder: "Filter..."
+          }
+        },
         pagination: {
           page: "",
           of: "of",
@@ -253,171 +268,261 @@ $d9.$d9n2 = $d9.$d9n2 ?? {
 };
 const $d9n2 = $d9.$d9n2;
 const AngleLeft = (props) => {
-  return React.createElement(
-    "svg",
-    { ...props, "data-icon": "angle-left", xmlns: "http://www.w3.org/2000/svg", viewBox: "0 0 320 512" },
-    React.createElement("path", { opacity: "1", d: "M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z" })
-  );
+  return React.createElement("svg", {
+    ...props,
+    "data-icon": "angle-left",
+    xmlns: "http://www.w3.org/2000/svg",
+    viewBox: "0 0 320 512"
+  }, React.createElement("path", {
+    opacity: "1",
+    d: "M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"
+  }));
 };
 const AngleRight = (props) => {
-  return React.createElement(
-    "svg",
-    { ...props, "data-icon": "angle-right", xmlns: "http://www.w3.org/2000/svg", viewBox: "0 0 320 512" },
-    React.createElement("path", { opacity: "1", d: "M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z" })
-  );
+  return React.createElement("svg", {
+    ...props,
+    "data-icon": "angle-right",
+    xmlns: "http://www.w3.org/2000/svg",
+    viewBox: "0 0 320 512"
+  }, React.createElement("path", {
+    opacity: "1",
+    d: "M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"
+  }));
 };
 const ArrowDown = (props) => {
-  return React.createElement(
-    "svg",
-    { ...props, "data-icon": "arrow-down", xmlns: "http://www.w3.org/2000/svg", viewBox: "0 0 512 512" },
-    React.createElement("path", { opacity: "1", d: "M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z" })
-  );
+  return React.createElement("svg", {
+    ...props,
+    "data-icon": "arrow-down",
+    xmlns: "http://www.w3.org/2000/svg",
+    viewBox: "0 0 512 512"
+  }, React.createElement("path", {
+    opacity: "1",
+    d: "M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z"
+  }));
 };
 const Back = (props) => {
-  return React.createElement(
-    "svg",
-    { ...props, "data-icon": "back", xmlns: "http://www.w3.org/2000/svg", viewBox: "0 0 512 512" },
-    React.createElement("path", { d: "M205 34.8c11.5 5.1 19 16.6 19 29.2v64H336c97.2 0 176 78.8 176 176c0 113.3-81.5 163.9-100.2 174.1c-2.5 1.4-5.3 1.9-8.1 1.9c-10.9 0-19.7-8.9-19.7-19.7c0-7.5 4.3-14.4 9.8-19.5c9.4-8.8 22.2-26.4 22.2-56.7c0-53-43-96-96-96H224v64c0 12.6-7.4 24.1-19 29.2s-25 3-34.4-5.4l-160-144C3.9 225.7 0 217.1 0 208s3.9-17.7 10.6-23.8l160-144c9.4-8.5 22.9-10.6 34.4-5.4z" })
-  );
+  return React.createElement("svg", {
+    ...props,
+    "data-icon": "back",
+    xmlns: "http://www.w3.org/2000/svg",
+    viewBox: "0 0 512 512"
+  }, React.createElement("path", {
+    d: "M205 34.8c11.5 5.1 19 16.6 19 29.2v64H336c97.2 0 176 78.8 176 176c0 113.3-81.5 163.9-100.2 174.1c-2.5 1.4-5.3 1.9-8.1 1.9c-10.9 0-19.7-8.9-19.7-19.7c0-7.5 4.3-14.4 9.8-19.5c9.4-8.8 22.2-26.4 22.2-56.7c0-53-43-96-96-96H224v64c0 12.6-7.4 24.1-19 29.2s-25 3-34.4-5.4l-160-144C3.9 225.7 0 217.1 0 208s3.9-17.7 10.6-23.8l160-144c9.4-8.5 22.9-10.6 34.4-5.4z"
+  }));
 };
 const Backward = (props) => {
-  return React.createElement(
-    "svg",
-    { ...props, "data-icon": "forward", xmlns: "http://www.w3.org/2000/svg", viewBox: "0 0 320 512" },
-    React.createElement("path", { opacity: "1", d: "M267.5 440.6c9.5 7.9 22.8 9.7 34.1 4.4s18.4-16.6 18.4-29V96c0-12.4-7.2-23.7-18.4-29s-24.5-3.6-34.1 4.4l-192 160L64 241V96c0-17.7-14.3-32-32-32S0 78.3 0 96V416c0 17.7 14.3 32 32 32s32-14.3 32-32V271l11.5 9.6 192 160z" })
-  );
+  return React.createElement("svg", {
+    ...props,
+    "data-icon": "forward",
+    xmlns: "http://www.w3.org/2000/svg",
+    viewBox: "0 0 320 512"
+  }, React.createElement("path", {
+    opacity: "1",
+    d: "M267.5 440.6c9.5 7.9 22.8 9.7 34.1 4.4s18.4-16.6 18.4-29V96c0-12.4-7.2-23.7-18.4-29s-24.5-3.6-34.1 4.4l-192 160L64 241V96c0-17.7-14.3-32-32-32S0 78.3 0 96V416c0 17.7 14.3 32 32 32s32-14.3 32-32V271l11.5 9.6 192 160z"
+  }));
 };
 const CaretDown = (props) => {
-  return React.createElement(
-    "svg",
-    { ...props, "data-icon": "caret-down", xmlns: "http://www.w3.org/2000/svg", viewBox: "0 0 320 512" },
-    React.createElement("path", { d: "M137.4 374.6c12.5 12.5 32.8 12.5 45.3 0l128-128c9.2-9.2 11.9-22.9 6.9-34.9s-16.6-19.8-29.6-19.8L32 192c-12.9 0-24.6 7.8-29.6 19.8s-2.2 25.7 6.9 34.9l128 128z" })
-  );
+  return React.createElement("svg", {
+    ...props,
+    "data-icon": "caret-down",
+    xmlns: "http://www.w3.org/2000/svg",
+    viewBox: "0 0 320 512"
+  }, React.createElement("path", {
+    d: "M137.4 374.6c12.5 12.5 32.8 12.5 45.3 0l128-128c9.2-9.2 11.9-22.9 6.9-34.9s-16.6-19.8-29.6-19.8L32 192c-12.9 0-24.6 7.8-29.6 19.8s-2.2 25.7 6.9 34.9l128 128z"
+  }));
 };
 const CaretLeft = (props) => {
-  return React.createElement(
-    "svg",
-    { ...props, "data-icon": "caret-left", xmlns: "http://www.w3.org/2000/svg", viewBox: "0 0 256 512" },
-    React.createElement("path", { d: "M9.4 278.6c-12.5-12.5-12.5-32.8 0-45.3l128-128c9.2-9.2 22.9-11.9 34.9-6.9s19.8 16.6 19.8 29.6l0 256c0 12.9-7.8 24.6-19.8 29.6s-25.7 2.2-34.9-6.9l-128-128z" })
-  );
+  return React.createElement("svg", {
+    ...props,
+    "data-icon": "caret-left",
+    xmlns: "http://www.w3.org/2000/svg",
+    viewBox: "0 0 256 512"
+  }, React.createElement("path", {
+    d: "M9.4 278.6c-12.5-12.5-12.5-32.8 0-45.3l128-128c9.2-9.2 22.9-11.9 34.9-6.9s19.8 16.6 19.8 29.6l0 256c0 12.9-7.8 24.6-19.8 29.6s-25.7 2.2-34.9-6.9l-128-128z"
+  }));
 };
 const CaretRight = (props) => {
-  return React.createElement(
-    "svg",
-    { ...props, "data-icon": "caret-right", xmlns: "http://www.w3.org/2000/svg", viewBox: "0 0 256 512" },
-    React.createElement("path", { d: "M246.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-128-128c-9.2-9.2-22.9-11.9-34.9-6.9s-19.8 16.6-19.8 29.6l0 256c0 12.9 7.8 24.6 19.8 29.6s25.7 2.2 34.9-6.9l128-128z" })
-  );
+  return React.createElement("svg", {
+    ...props,
+    "data-icon": "caret-right",
+    xmlns: "http://www.w3.org/2000/svg",
+    viewBox: "0 0 256 512"
+  }, React.createElement("path", {
+    d: "M246.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-128-128c-9.2-9.2-22.9-11.9-34.9-6.9s-19.8 16.6-19.8 29.6l0 256c0 12.9 7.8 24.6 19.8 29.6s25.7 2.2 34.9-6.9l128-128z"
+  }));
 };
 const Cart = (props) => {
-  return React.createElement(
-    "svg",
-    { ...props, "data-icon": "cart", xmlns: "http://www.w3.org/2000/svg", viewBox: "0 0 576 512" },
-    React.createElement("path", { d: "M0 24C0 10.7 10.7 0 24 0H69.5c22 0 41.5 12.8 50.6 32h411c26.3 0 45.5 25 38.6 50.4l-41 152.3c-8.5 31.4-37 53.3-69.5 53.3H170.7l5.4 28.5c2.2 11.3 12.1 19.5 23.6 19.5H488c13.3 0 24 10.7 24 24s-10.7 24-24 24H199.7c-34.6 0-64.3-24.6-70.7-58.5L77.4 54.5c-.7-3.8-4-6.5-7.9-6.5H24C10.7 48 0 37.3 0 24zM128 464a48 48 0 1 1 96 0 48 48 0 1 1 -96 0zm336-48a48 48 0 1 1 0 96 48 48 0 1 1 0-96z" })
-  );
+  return React.createElement("svg", {
+    ...props,
+    "data-icon": "cart",
+    xmlns: "http://www.w3.org/2000/svg",
+    viewBox: "0 0 576 512"
+  }, React.createElement("path", {
+    d: "M0 24C0 10.7 10.7 0 24 0H69.5c22 0 41.5 12.8 50.6 32h411c26.3 0 45.5 25 38.6 50.4l-41 152.3c-8.5 31.4-37 53.3-69.5 53.3H170.7l5.4 28.5c2.2 11.3 12.1 19.5 23.6 19.5H488c13.3 0 24 10.7 24 24s-10.7 24-24 24H199.7c-34.6 0-64.3-24.6-70.7-58.5L77.4 54.5c-.7-3.8-4-6.5-7.9-6.5H24C10.7 48 0 37.3 0 24zM128 464a48 48 0 1 1 96 0 48 48 0 1 1 -96 0zm336-48a48 48 0 1 1 0 96 48 48 0 1 1 0-96z"
+  }));
 };
 const Check = (props) => {
-  return React.createElement(
-    "svg",
-    { ...props, "data-icon": "check", xmlns: "http://www.w3.org/2000/svg", viewBox: "0 0 448 512" },
-    React.createElement("path", { opacity: "1", d: "M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z" })
-  );
+  return React.createElement("svg", {
+    ...props,
+    "data-icon": "check",
+    xmlns: "http://www.w3.org/2000/svg",
+    viewBox: "0 0 448 512"
+  }, React.createElement("path", {
+    opacity: "1",
+    d: "M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"
+  }));
 };
 const Collapse = (props) => {
-  return React.createElement(
-    "svg",
-    { ...props, "data-icon": "collapse", xmlns: "http://www.w3.org/2000/svg", viewBox: "0 0 448 512" },
-    React.createElement("path", { d: "M160 64c0-17.7-14.3-32-32-32s-32 14.3-32 32v64H32c-17.7 0-32 14.3-32 32s14.3 32 32 32h96c17.7 0 32-14.3 32-32V64zM32 320c-17.7 0-32 14.3-32 32s14.3 32 32 32H96v64c0 17.7 14.3 32 32 32s32-14.3 32-32V352c0-17.7-14.3-32-32-32H32zM352 64c0-17.7-14.3-32-32-32s-32 14.3-32 32v96c0 17.7 14.3 32 32 32h96c17.7 0 32-14.3 32-32s-14.3-32-32-32H352V64zM320 320c-17.7 0-32 14.3-32 32v96c0 17.7 14.3 32 32 32s32-14.3 32-32V384h64c17.7 0 32-14.3 32-32s-14.3-32-32-32H320z" })
-  );
+  return React.createElement("svg", {
+    ...props,
+    "data-icon": "collapse",
+    xmlns: "http://www.w3.org/2000/svg",
+    viewBox: "0 0 448 512"
+  }, React.createElement("path", {
+    d: "M160 64c0-17.7-14.3-32-32-32s-32 14.3-32 32v64H32c-17.7 0-32 14.3-32 32s14.3 32 32 32h96c17.7 0 32-14.3 32-32V64zM32 320c-17.7 0-32 14.3-32 32s14.3 32 32 32H96v64c0 17.7 14.3 32 32 32s32-14.3 32-32V352c0-17.7-14.3-32-32-32H32zM352 64c0-17.7-14.3-32-32-32s-32 14.3-32 32v96c0 17.7 14.3 32 32 32h96c17.7 0 32-14.3 32-32s-14.3-32-32-32H352V64zM320 320c-17.7 0-32 14.3-32 32v96c0 17.7 14.3 32 32 32s32-14.3 32-32V384h64c17.7 0 32-14.3 32-32s-14.3-32-32-32H320z"
+  }));
 };
 const Date$1 = (props) => {
-  return React.createElement(
-    "svg",
-    { ...props, "data-icon": "date", xmlns: "http://www.w3.org/2000/svg", viewBox: "0 0 448 512" },
-    React.createElement("path", { d: "M128 0c17.7 0 32 14.3 32 32V64H288V32c0-17.7 14.3-32 32-32s32 14.3 32 32V64h48c26.5 0 48 21.5 48 48v48H0V112C0 85.5 21.5 64 48 64H96V32c0-17.7 14.3-32 32-32zM0 192H448V464c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V192zm64 80v32c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16V272c0-8.8-7.2-16-16-16H80c-8.8 0-16 7.2-16 16zm128 0v32c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16V272c0-8.8-7.2-16-16-16H208c-8.8 0-16 7.2-16 16zm144-16c-8.8 0-16 7.2-16 16v32c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16V272c0-8.8-7.2-16-16-16H336zM64 400v32c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16V400c0-8.8-7.2-16-16-16H80c-8.8 0-16 7.2-16 16zm144-16c-8.8 0-16 7.2-16 16v32c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16V400c0-8.8-7.2-16-16-16H208zm112 16v32c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16V400c0-8.8-7.2-16-16-16H336c-8.8 0-16 7.2-16 16z" })
-  );
+  return React.createElement("svg", {
+    ...props,
+    "data-icon": "date",
+    xmlns: "http://www.w3.org/2000/svg",
+    viewBox: "0 0 448 512"
+  }, React.createElement("path", {
+    d: "M128 0c17.7 0 32 14.3 32 32V64H288V32c0-17.7 14.3-32 32-32s32 14.3 32 32V64h48c26.5 0 48 21.5 48 48v48H0V112C0 85.5 21.5 64 48 64H96V32c0-17.7 14.3-32 32-32zM0 192H448V464c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V192zm64 80v32c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16V272c0-8.8-7.2-16-16-16H80c-8.8 0-16 7.2-16 16zm128 0v32c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16V272c0-8.8-7.2-16-16-16H208c-8.8 0-16 7.2-16 16zm144-16c-8.8 0-16 7.2-16 16v32c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16V272c0-8.8-7.2-16-16-16H336zM64 400v32c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16V400c0-8.8-7.2-16-16-16H80c-8.8 0-16 7.2-16 16zm144-16c-8.8 0-16 7.2-16 16v32c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16V400c0-8.8-7.2-16-16-16H208zm112 16v32c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16V400c0-8.8-7.2-16-16-16H336c-8.8 0-16 7.2-16 16z"
+  }));
 };
 const Edit = (props) => {
-  return React.createElement(
-    "svg",
-    { ...props, "data-icon": "edit", xmlns: "http://www.w3.org/2000/svg", viewBox: "0 0 512 512" },
-    React.createElement("path", { opacity: "1", d: "M441 58.9L453.1 71c9.4 9.4 9.4 24.6 0 33.9L424 134.1 377.9 88 407 58.9c9.4-9.4 24.6-9.4 33.9 0zM209.8 256.2L344 121.9 390.1 168 255.8 302.2c-2.9 2.9-6.5 5-10.4 6.1l-58.5 16.7 16.7-58.5c1.1-3.9 3.2-7.5 6.1-10.4zM373.1 25L175.8 222.2c-8.7 8.7-15 19.4-18.3 31.1l-28.6 100c-2.4 8.4-.1 17.4 6.1 23.6s15.2 8.5 23.6 6.1l100-28.6c11.8-3.4 22.5-9.7 31.1-18.3L487 138.9c28.1-28.1 28.1-73.7 0-101.8L474.9 25C446.8-3.1 401.2-3.1 373.1 25zM88 64C39.4 64 0 103.4 0 152V424c0 48.6 39.4 88 88 88H360c48.6 0 88-39.4 88-88V312c0-13.3-10.7-24-24-24s-24 10.7-24 24V424c0 22.1-17.9 40-40 40H88c-22.1 0-40-17.9-40-40V152c0-22.1 17.9-40 40-40H200c13.3 0 24-10.7 24-24s-10.7-24-24-24H88z" })
-  );
+  return React.createElement("svg", {
+    ...props,
+    "data-icon": "edit",
+    xmlns: "http://www.w3.org/2000/svg",
+    viewBox: "0 0 512 512"
+  }, React.createElement("path", {
+    opacity: "1",
+    d: "M441 58.9L453.1 71c9.4 9.4 9.4 24.6 0 33.9L424 134.1 377.9 88 407 58.9c9.4-9.4 24.6-9.4 33.9 0zM209.8 256.2L344 121.9 390.1 168 255.8 302.2c-2.9 2.9-6.5 5-10.4 6.1l-58.5 16.7 16.7-58.5c1.1-3.9 3.2-7.5 6.1-10.4zM373.1 25L175.8 222.2c-8.7 8.7-15 19.4-18.3 31.1l-28.6 100c-2.4 8.4-.1 17.4 6.1 23.6s15.2 8.5 23.6 6.1l100-28.6c11.8-3.4 22.5-9.7 31.1-18.3L487 138.9c28.1-28.1 28.1-73.7 0-101.8L474.9 25C446.8-3.1 401.2-3.1 373.1 25zM88 64C39.4 64 0 103.4 0 152V424c0 48.6 39.4 88 88 88H360c48.6 0 88-39.4 88-88V312c0-13.3-10.7-24-24-24s-24 10.7-24 24V424c0 22.1-17.9 40-40 40H88c-22.1 0-40-17.9-40-40V152c0-22.1 17.9-40 40-40H200c13.3 0 24-10.7 24-24s-10.7-24-24-24H88z"
+  }));
 };
 const Expand = (props) => {
-  return React.createElement(
-    "svg",
-    { ...props, "data-icon": "expand", xmlns: "http://www.w3.org/2000/svg", viewBox: "0 0 448 512" },
-    React.createElement("path", { d: "M32 32C14.3 32 0 46.3 0 64v96c0 17.7 14.3 32 32 32s32-14.3 32-32V96h64c17.7 0 32-14.3 32-32s-14.3-32-32-32H32zM64 352c0-17.7-14.3-32-32-32s-32 14.3-32 32v96c0 17.7 14.3 32 32 32h96c17.7 0 32-14.3 32-32s-14.3-32-32-32H64V352zM320 32c-17.7 0-32 14.3-32 32s14.3 32 32 32h64v64c0 17.7 14.3 32 32 32s32-14.3 32-32V64c0-17.7-14.3-32-32-32H320zM448 352c0-17.7-14.3-32-32-32s-32 14.3-32 32v64H320c-17.7 0-32 14.3-32 32s14.3 32 32 32h96c17.7 0 32-14.3 32-32V352z" })
-  );
+  return React.createElement("svg", {
+    ...props,
+    "data-icon": "expand",
+    xmlns: "http://www.w3.org/2000/svg",
+    viewBox: "0 0 448 512"
+  }, React.createElement("path", {
+    d: "M32 32C14.3 32 0 46.3 0 64v96c0 17.7 14.3 32 32 32s32-14.3 32-32V96h64c17.7 0 32-14.3 32-32s-14.3-32-32-32H32zM64 352c0-17.7-14.3-32-32-32s-32 14.3-32 32v96c0 17.7 14.3 32 32 32h96c17.7 0 32-14.3 32-32s-14.3-32-32-32H64V352zM320 32c-17.7 0-32 14.3-32 32s14.3 32 32 32h64v64c0 17.7 14.3 32 32 32s32-14.3 32-32V64c0-17.7-14.3-32-32-32H320zM448 352c0-17.7-14.3-32-32-32s-32 14.3-32 32v64H320c-17.7 0-32 14.3-32 32s14.3 32 32 32h96c17.7 0 32-14.3 32-32V352z"
+  }));
 };
 const Forward = (props) => {
-  return React.createElement(
-    "svg",
-    { ...props, "data-icon": "forward", xmlns: "http://www.w3.org/2000/svg", viewBox: "0 0 320 512" },
-    React.createElement("path", { opacity: "1", d: "M52.5 440.6c-9.5 7.9-22.8 9.7-34.1 4.4S0 428.4 0 416V96C0 83.6 7.2 72.3 18.4 67s24.5-3.6 34.1 4.4l192 160L256 241V96c0-17.7 14.3-32 32-32s32 14.3 32 32V416c0 17.7-14.3 32-32 32s-32-14.3-32-32V271l-11.5 9.6-192 160z" })
-  );
+  return React.createElement("svg", {
+    ...props,
+    "data-icon": "forward",
+    xmlns: "http://www.w3.org/2000/svg",
+    viewBox: "0 0 320 512"
+  }, React.createElement("path", {
+    opacity: "1",
+    d: "M52.5 440.6c-9.5 7.9-22.8 9.7-34.1 4.4S0 428.4 0 416V96C0 83.6 7.2 72.3 18.4 67s24.5-3.6 34.1 4.4l192 160L256 241V96c0-17.7 14.3-32 32-32s32 14.3 32 32V416c0 17.7-14.3 32-32 32s-32-14.3-32-32V271l-11.5 9.6-192 160z"
+  }));
 };
 const Plus = (props) => {
-  return React.createElement(
-    "svg",
-    { ...props, "data-icon": "plus", xmlns: "http://www.w3.org/2000/svg", viewBox: "0 0 448 512" },
-    React.createElement("path", { d: "M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z" })
-  );
+  return React.createElement("svg", {
+    ...props,
+    "data-icon": "plus",
+    xmlns: "http://www.w3.org/2000/svg",
+    viewBox: "0 0 448 512"
+  }, React.createElement("path", {
+    d: "M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z"
+  }));
 };
 const Remove = (props) => {
-  return React.createElement(
-    "svg",
-    { ...props, "data-icon": "remove", xmlns: "http://www.w3.org/2000/svg", viewBox: "0 0 448 512" },
-    React.createElement("path", { d: "M135.2 17.7C140.6 6.8 151.7 0 163.8 0H284.2c12.1 0 23.2 6.8 28.6 17.7L320 32h96c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 96 0 81.7 0 64S14.3 32 32 32h96l7.2-14.3zM32 128H416V448c0 35.3-28.7 64-64 64H96c-35.3 0-64-28.7-64-64V128zm96 64c-8.8 0-16 7.2-16 16V432c0 8.8 7.2 16 16 16s16-7.2 16-16V208c0-8.8-7.2-16-16-16zm96 0c-8.8 0-16 7.2-16 16V432c0 8.8 7.2 16 16 16s16-7.2 16-16V208c0-8.8-7.2-16-16-16zm96 0c-8.8 0-16 7.2-16 16V432c0 8.8 7.2 16 16 16s16-7.2 16-16V208c0-8.8-7.2-16-16-16z" })
-  );
+  return React.createElement("svg", {
+    ...props,
+    "data-icon": "remove",
+    xmlns: "http://www.w3.org/2000/svg",
+    viewBox: "0 0 448 512"
+  }, React.createElement("path", {
+    d: "M135.2 17.7C140.6 6.8 151.7 0 163.8 0H284.2c12.1 0 23.2 6.8 28.6 17.7L320 32h96c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 96 0 81.7 0 64S14.3 32 32 32h96l7.2-14.3zM32 128H416V448c0 35.3-28.7 64-64 64H96c-35.3 0-64-28.7-64-64V128zm96 64c-8.8 0-16 7.2-16 16V432c0 8.8 7.2 16 16 16s16-7.2 16-16V208c0-8.8-7.2-16-16-16zm96 0c-8.8 0-16 7.2-16 16V432c0 8.8 7.2 16 16 16s16-7.2 16-16V208c0-8.8-7.2-16-16-16zm96 0c-8.8 0-16 7.2-16 16V432c0 8.8 7.2 16 16 16s16-7.2 16-16V208c0-8.8-7.2-16-16-16z"
+  }));
 };
 const Search = (props) => {
-  return React.createElement(
-    "svg",
-    { ...props, "data-icon": "search", xmlns: "http://www.w3.org/2000/svg", viewBox: "0 0 512 512" },
-    React.createElement("path", { d: "M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z" })
-  );
+  return React.createElement("svg", {
+    ...props,
+    "data-icon": "search",
+    xmlns: "http://www.w3.org/2000/svg",
+    viewBox: "0 0 512 512"
+  }, React.createElement("path", {
+    d: "M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"
+  }));
 };
 const Spinner = (props) => {
-  return React.createElement(
-    "svg",
-    { ...props, "data-icon": "spinner", xmlns: "http://www.w3.org/2000/svg", viewBox: "0 0 512 512" },
-    React.createElement("path", { d: "M304 48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zm0 416c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM48 304c26.5 0 48-21.5 48-48s-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48zm464-48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM142.9 437c18.7-18.7 18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zm0-294.2c18.7-18.7 18.7-49.1 0-67.9S93.7 56.2 75 75s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zM369.1 437c18.7 18.7 49.1 18.7 67.9 0s18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9z" })
-  );
+  return React.createElement("svg", {
+    ...props,
+    "data-icon": "spinner",
+    xmlns: "http://www.w3.org/2000/svg",
+    viewBox: "0 0 512 512"
+  }, React.createElement("path", {
+    d: "M304 48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zm0 416c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM48 304c26.5 0 48-21.5 48-48s-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48zm464-48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM142.9 437c18.7-18.7 18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zm0-294.2c18.7-18.7 18.7-49.1 0-67.9S93.7 56.2 75 75s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zM369.1 437c18.7 18.7 49.1 18.7 67.9 0s18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9z"
+  }));
 };
 const Time = (props) => {
-  return React.createElement(
-    "svg",
-    { ...props, "data-icon": "time", xmlns: "http://www.w3.org/2000/svg", viewBox: "0 0 448 512" },
-    React.createElement("path", { d: "M256 512C114.6 512 0 397.4 0 256S114.6 0 256 0S512 114.6 512 256s-114.6 256-256 256zM232 120V256c0 8 4 15.5 10.7 20l96 64c11 7.4 25.9 4.4 33.3-6.7s4.4-25.9-6.7-33.3L280 243.2V120c0-13.3-10.7-24-24-24s-24 10.7-24 24z" })
-  );
+  return React.createElement("svg", {
+    ...props,
+    "data-icon": "time",
+    xmlns: "http://www.w3.org/2000/svg",
+    viewBox: "0 0 448 512"
+  }, React.createElement("path", {
+    d: "M256 512C114.6 512 0 397.4 0 256S114.6 0 256 0S512 114.6 512 256s-114.6 256-256 256zM232 120V256c0 8 4 15.5 10.7 20l96 64c11 7.4 25.9 4.4 33.3-6.7s4.4-25.9-6.7-33.3L280 243.2V120c0-13.3-10.7-24-24-24s-24 10.7-24 24z"
+  }));
 };
 const Times = (props) => {
-  return React.createElement(
-    "svg",
-    { ...props, "data-icon": "times", xmlns: "http://www.w3.org/2000/svg", viewBox: "0 0 320 512" },
-    React.createElement("path", { d: "M310.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 210.7 54.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L114.7 256 9.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L160 301.3 265.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L205.3 256 310.6 150.6z" })
-  );
+  return React.createElement("svg", {
+    ...props,
+    "data-icon": "times",
+    xmlns: "http://www.w3.org/2000/svg",
+    viewBox: "0 0 320 512"
+  }, React.createElement("path", {
+    d: "M310.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 210.7 54.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L114.7 256 9.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L160 301.3 265.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L205.3 256 310.6 150.6z"
+  }));
 };
 const View = (props) => {
-  return React.createElement(
-    "svg",
-    { ...props, "data-icon": "view", xmlns: "http://www.w3.org/2000/svg", viewBox: "0 0 22 22" },
-    React.createElement("path", { d: "M19,19a1,1,0,0,0-1,1,2.006,2.006,0,0,1-2,2H4a2.006,2.006,0,0,1-2-2V4A2.006,2.006,0,0,1,4,2H16a2,2,0,0,1,2,2,1,1,0,0,0,2,0,4,4,0,0,0-4-4H4A4,4,0,0,0,0,4V20a4,4,0,0,0,4,4H16a3.995,3.995,0,0,0,4-4A1,1,0,0,0,19,19Z" }),
-    React.createElement("circle", { cx: "5", cy: "14", r: "1" }),
-    React.createElement("circle", { cx: "5", cy: "6", r: "1" }),
-    React.createElement("circle", { cx: "5", cy: "10", r: "1" }),
-    React.createElement("circle", { cx: "5.014", cy: "18", r: "1" }),
-    React.createElement("path", { d: "M15.752,19a1.018,1.018,0,0,0,0-2H8.838a1.019,1.019,0,0,0,0,2Z" }),
-    React.createElement("path", { d: "M23.56,17.29l-2.83-2.83a1.466,1.466,0,0,0-1.14-.43l-1.04-1.05A5.482,5.482,0,0,0,11.48,5h-2.6A.95.95,0,0,0,8,6a.947.947,0,0,0,.881,1h.465a5.451,5.451,0,0,0-.734,2.062A.988.988,0,0,0,8,10a.973.973,0,0,0,.655.946A5.46,5.46,0,0,0,9.554,13H8.881a1.008,1.008,0,0,0,0,2h3.3a5.492,5.492,0,0,0,4.945-.61l1.05,1.05a1.466,1.466,0,0,0,.43,1.14l2.83,2.83a1.509,1.509,0,0,0,2.12,0A1.491,1.491,0,0,0,23.56,17.29Zm-7.05-4.97a3.513,3.513,0,0,1-4.95,0,2.789,2.789,0,0,1-.28-.32h3.04A1.69,1.69,0,0,0,16,10.32V9.68A1.69,1.69,0,0,0,14.32,8H11.06a3.38,3.38,0,0,1,.5-.63,3.5,3.5,0,0,1,4.95,4.95Z" })
-  );
+  return React.createElement("svg", {
+    ...props,
+    "data-icon": "view",
+    xmlns: "http://www.w3.org/2000/svg",
+    viewBox: "0 0 22 22"
+  }, React.createElement("path", {
+    d: "M19,19a1,1,0,0,0-1,1,2.006,2.006,0,0,1-2,2H4a2.006,2.006,0,0,1-2-2V4A2.006,2.006,0,0,1,4,2H16a2,2,0,0,1,2,2,1,1,0,0,0,2,0,4,4,0,0,0-4-4H4A4,4,0,0,0,0,4V20a4,4,0,0,0,4,4H16a3.995,3.995,0,0,0,4-4A1,1,0,0,0,19,19Z"
+  }), React.createElement("circle", {
+    cx: "5",
+    cy: "14",
+    r: "1"
+  }), React.createElement("circle", {
+    cx: "5",
+    cy: "6",
+    r: "1"
+  }), React.createElement("circle", {
+    cx: "5",
+    cy: "10",
+    r: "1"
+  }), React.createElement("circle", {
+    cx: "5.014",
+    cy: "18",
+    r: "1"
+  }), React.createElement("path", {
+    d: "M15.752,19a1.018,1.018,0,0,0,0-2H8.838a1.019,1.019,0,0,0,0,2Z"
+  }), React.createElement("path", {
+    d: "M23.56,17.29l-2.83-2.83a1.466,1.466,0,0,0-1.14-.43l-1.04-1.05A5.482,5.482,0,0,0,11.48,5h-2.6A.95.95,0,0,0,8,6a.947.947,0,0,0,.881,1h.465a5.451,5.451,0,0,0-.734,2.062A.988.988,0,0,0,8,10a.973.973,0,0,0,.655.946A5.46,5.46,0,0,0,9.554,13H8.881a1.008,1.008,0,0,0,0,2h3.3a5.492,5.492,0,0,0,4.945-.61l1.05,1.05a1.466,1.466,0,0,0,.43,1.14l2.83,2.83a1.509,1.509,0,0,0,2.12,0A1.491,1.491,0,0,0,23.56,17.29Zm-7.05-4.97a3.513,3.513,0,0,1-4.95,0,2.789,2.789,0,0,1-.28-.32h3.04A1.69,1.69,0,0,0,16,10.32V9.68A1.69,1.69,0,0,0,14.32,8H11.06a3.38,3.38,0,0,1,.5-.63,3.5,3.5,0,0,1,4.95,4.95Z"
+  }));
 };
 const XMark = (props) => {
-  return React.createElement(
-    "svg",
-    { ...props, "data-icon": "xmark", xmlns: "http://www.w3.org/2000/svg", viewBox: "0 0 384 512" },
-    React.createElement("path", { d: "M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z" })
-  );
+  return React.createElement("svg", {
+    ...props,
+    "data-icon": "xmark",
+    xmlns: "http://www.w3.org/2000/svg",
+    viewBox: "0 0 384 512"
+  }, React.createElement("path", {
+    d: "M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"
+  }));
 };
 const _IconsRegistrar = class _IconsRegistrar {
   constructor() {
@@ -502,9 +607,13 @@ var GlobalEventTypes;
 const Context$7 = reactExports.createContext({});
 Context$7.displayName = "GlobalEventBus";
 const GlobalEventBusProvider = (props) => {
-  const { children } = props;
+  const {
+    children
+  } = props;
   const bus = useCreateEventBus("d9-global");
-  return React.createElement(Context$7.Provider, { value: bus }, children);
+  return React.createElement(Context$7.Provider, {
+    value: bus
+  }, children);
 };
 const useGlobalEventBus = () => reactExports.useContext(Context$7);
 const CALENDAR_YM_FORMAT = "MMM YYYY";
@@ -536,8 +645,18 @@ const getDefaultCalendarDatetimeFormat = () => DEFAULTS$1.DATETIME_FORMAT;
 const isCalendarAutoConfirm = () => DEFAULTS$1.AUTO_CONFIRM;
 const isCalendarAutoConfirmOnDate = () => DEFAULTS$1.AUTO_CONFIRM_ON_DATE;
 const isStickIconUseCalendar = () => DEFAULTS$1.USE_CALENDAR_ICON;
-const FIX_TIME_AT_START_OF_DAY = { hour: 0, minute: 0, second: 0, millisecond: 0 };
-const FIX_TIME_AT_END_OF_DAY = { hour: 23, minute: 59, second: 59, millisecond: 59 };
+const FIX_TIME_AT_START_OF_DAY = {
+  hour: 0,
+  minute: 0,
+  second: 0,
+  millisecond: 0
+};
+const FIX_TIME_AT_END_OF_DAY = {
+  hour: 23,
+  minute: 59,
+  second: 59,
+  millisecond: 59
+};
 const toStartOfDay = (datetime) => {
   return datetime.hour(0).minute(0).second(0).millisecond(0);
 };
@@ -547,10 +666,15 @@ const toEndOfDay = (datetime) => {
 const checkTimeParts = (timeFormat) => {
   const hasMinute = (timeFormat ?? "").includes("m");
   const hasSecond = hasMinute && (timeFormat ?? "").includes("s");
-  return { hasMinute, hasSecond };
+  return {
+    hasMinute,
+    hasSecond
+  };
 };
 const checkDateParts = (dateFormat) => {
-  return { hasDate: (dateFormat ?? "").toLowerCase().includes("d") };
+  return {
+    hasDate: (dateFormat ?? "").toLowerCase().includes("d")
+  };
 };
 var utils$3 = /* @__PURE__ */ Object.freeze({
   __proto__: null,
@@ -578,7 +702,12 @@ const toCssSize = (size) => {
   }
 };
 const omitGridCellStyle = (style) => {
-  const { gridColumn, gridRow, gridArea, ...rest } = style || {};
+  const {
+    gridColumn,
+    gridRow,
+    gridArea,
+    ...rest
+  } = style || {};
   return rest;
 };
 const computeGridCellStyle = (style) => {
@@ -625,7 +754,9 @@ const nfXWithLocale = (locale2, fractionDigits) => {
   return wrapNf(nfWithLocale(locale2)(fractionDigits).format);
 };
 const detectNumberFormat = (locale2) => {
-  const formatted = new Intl.NumberFormat(locale2 ?? void 0, { useGrouping: true }).format(12345678909876e-4);
+  const formatted = new Intl.NumberFormat(locale2 ?? void 0, {
+    useGrouping: true
+  }).format(12345678909876e-4);
   const matched = formatted.match(/\D/g);
   return [matched[0], matched[matched.length - 1]];
 };
@@ -686,7 +817,11 @@ var ButtonInk;
   ButtonInk2["WARN"] = "warn";
   ButtonInk2["INFO"] = "info";
 })(ButtonInk || (ButtonInk = {}));
-const AButton = qe.button.attrs(({ id, hasOneLeadOrTail, [DOM_KEY_WIDGET]: dataW }) => {
+const AButton = qe.button.attrs(({
+  id,
+  hasOneLeadOrTail,
+  [DOM_KEY_WIDGET]: dataW
+}) => {
   return {
     [DOM_KEY_WIDGET]: dataW ?? "d9-button",
     [DOM_ID_WIDGET]: id,
@@ -1076,12 +1211,34 @@ const TailDecorator$2 = qe(Decorator$2).attrs({
 })`
 `;
 const Button = reactExports.forwardRef((props, ref) => {
-  const { head, text, tail, ink = ButtonInk.PRIMARY, fill = ButtonFill.FILL, click, leads, tails, $wrapped, ...rest } = props;
-  const { $root, $model, $p2r, $avs: { $disabled, $visible }, $vfs } = $wrapped;
+  const {
+    head,
+    text,
+    tail,
+    ink = ButtonInk.PRIMARY,
+    fill = ButtonFill.FILL,
+    click,
+    leads,
+    tails,
+    $wrapped,
+    ...rest
+  } = props;
+  const {
+    $root,
+    $model,
+    $p2r,
+    $avs: {
+      $disabled,
+      $visible
+    },
+    $vfs
+  } = $wrapped;
   const globalHandlers = useGlobalHandlers();
   const buttonRef = reactExports.useRef(null);
   useDualRefs(buttonRef, ref);
-  useTip({ ref: buttonRef });
+  useTip({
+    ref: buttonRef
+  });
   const onClicked = async (event) => {
     event.preventDefault();
     event.stopPropagation();
@@ -1104,50 +1261,124 @@ const Button = reactExports.forwardRef((props, ref) => {
   const hasNoHead = head == null || VUtils.isPrimitive(head) && VUtils.isBlank(head);
   const hasNoTail = tail == null || VUtils.isPrimitive(tail) && VUtils.isBlank(tail);
   const hasOneLeadOrTail = hasNoText && hasNoHead && hasNoTail && [...transformedLeads, ...transformedTails].length === 1;
-  return React.createElement(
-    AButton,
-    { ...rest, "data-ink": ink, "data-fill": fill, "data-disabled": $disabled ?? false, "data-visible": $visible, hasOneLeadOrTail, onClick: onClicked, id: PPUtils.asId(PPUtils.absolute($p2r, props.$pp), props.id), ref: buttonRef },
-    transformedLeads.map((lead, index) => {
-      return React.createElement(LeadDecorator$2, { key: index }, lead);
-    }),
-    head,
-    hasNoText ? null : React.createElement("span", { "data-role": "text" }, toIntlLabel(text)),
-    tail,
-    transformedTails.map((tail2, index) => {
-      return React.createElement(TailDecorator$2, { key: index }, tail2);
-    })
-  );
+  return React.createElement(AButton, {
+    ...rest,
+    "data-ink": ink,
+    "data-fill": fill,
+    "data-disabled": $disabled ?? false,
+    "data-visible": $visible,
+    hasOneLeadOrTail,
+    onClick: onClicked,
+    id: PPUtils.asId(PPUtils.absolute($p2r, props.$pp), props.id),
+    ref: buttonRef
+  }, transformedLeads.map((lead, index) => {
+    return React.createElement(LeadDecorator$2, {
+      key: index
+    }, lead);
+  }), head, hasNoText ? null : React.createElement("span", {
+    "data-role": "text"
+  }, toIntlLabel(text)), tail, transformedTails.map((tail2, index) => {
+    return React.createElement(TailDecorator$2, {
+      key: index
+    }, tail2);
+  }));
 });
 const Link = reactExports.forwardRef((props, ref) => {
-  return React.createElement(Button, { ...props, fill: ButtonFill.LINK, ref });
+  return React.createElement(Button, {
+    ...props,
+    fill: ButtonFill.LINK,
+    ref
+  });
 });
-registerWidget({ key: "Button", JSX: Button, container: false, array: false });
-registerWidget({ key: "Link", JSX: Link, container: false, array: false });
+registerWidget({
+  key: "Button",
+  JSX: Button,
+  container: false,
+  array: false
+});
+registerWidget({
+  key: "Link",
+  JSX: Link,
+  container: false,
+  array: false
+});
 const UnwrappedButton = reactExports.forwardRef((props, ref) => {
-  const { onClick, ink = ButtonInk.PRIMARY, fill = ButtonFill.FILL, children, disabled, visible, ...rest } = props;
+  const {
+    onClick,
+    ink = ButtonInk.PRIMARY,
+    fill = ButtonFill.FILL,
+    children,
+    disabled,
+    visible,
+    ...rest
+  } = props;
   const $onValueChange = VUtils.noop;
-  const $avs = { $disabled: disabled, $visible: visible };
+  const $avs = {
+    $disabled: disabled,
+    $visible: visible
+  };
   const $root = {};
   const click = (options, event) => {
     if (onClick) {
       onClick(event);
     }
   };
-  return React.createElement(Button, { ...rest, ink, fill, "$wrapped": { $onValueChange, $avs, $root, $model: $root, $p2r: "." }, text: children, click, id: rest.id ?? VUtils.generateUniqueId(), ref });
+  return React.createElement(Button, {
+    ...rest,
+    ink,
+    fill,
+    "$wrapped": {
+      $onValueChange,
+      $avs,
+      $root,
+      $model: $root,
+      $p2r: "."
+    },
+    text: children,
+    click,
+    id: rest.id ?? VUtils.generateUniqueId(),
+    ref
+  });
 });
 reactExports.forwardRef((props, ref) => {
-  const { onClick, ink = ButtonInk.PRIMARY, children, disabled, visible, ...rest } = props;
+  const {
+    onClick,
+    ink = ButtonInk.PRIMARY,
+    children,
+    disabled,
+    visible,
+    ...rest
+  } = props;
   const $onValueChange = VUtils.noop;
-  const $avs = { $disabled: disabled, $visible: visible };
+  const $avs = {
+    $disabled: disabled,
+    $visible: visible
+  };
   const $root = {};
   const click = (options, event) => {
     if (onClick) {
       onClick(event);
     }
   };
-  return React.createElement(Link, { ...rest, ink, "$wrapped": { $onValueChange, $avs, $root, $model: $root, $p2r: "." }, text: children, click, id: rest.id ?? VUtils.generateUniqueId(), ref });
+  return React.createElement(Link, {
+    ...rest,
+    ink,
+    "$wrapped": {
+      $onValueChange,
+      $avs,
+      $root,
+      $model: $root,
+      $p2r: "."
+    },
+    text: children,
+    click,
+    id: rest.id ?? VUtils.generateUniqueId(),
+    ref
+  });
 });
-const AlertContainer = qe.div.attrs(({ visible }) => {
+const AlertContainer = qe.div.attrs(({
+  visible
+}) => {
   return {
     [DOM_KEY_WIDGET]: "alert",
     style: {
@@ -1167,7 +1398,9 @@ const AlertContainer = qe.div.attrs(({ visible }) => {
     transition: all ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION};
     z-index: ${CssVars.ALERT_Z_INDEX};
 `;
-const AlertDialog = qe.div.attrs(({ visible }) => {
+const AlertDialog = qe.div.attrs(({
+  visible
+}) => {
   return {
     [DOM_KEY_WIDGET]: "alert-dialog",
     style: {
@@ -1187,7 +1420,10 @@ const AlertDialog = qe.div.attrs(({ visible }) => {
     transform: scale(0.75);
     transition: all ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION};
 `;
-const AlertBody = qe.div.attrs({ [DOM_KEY_WIDGET]: "alert-body", "data-v-scroll": "" })`
+const AlertBody = qe.div.attrs({
+  [DOM_KEY_WIDGET]: "alert-body",
+  "data-v-scroll": ""
+})`
     flex-grow: 1;
     min-height: ${CssVars.ALERT_MIN_HEIGHT};
     max-height: ${CssVars.ALERT_MAX_HEIGHT};
@@ -1197,17 +1433,27 @@ const AlertBody = qe.div.attrs({ [DOM_KEY_WIDGET]: "alert-body", "data-v-scroll"
     font-size: ${CssVars.FONT_SIZE};
     color: ${CssVars.CAPTION_FONT_COLOR};
 `;
-const AlertFooter = qe.div.attrs({ [DOM_KEY_WIDGET]: "alert-footer" })`
+const AlertFooter = qe.div.attrs({
+  [DOM_KEY_WIDGET]: "alert-footer"
+})`
     display: flex;
     justify-content: flex-end;
 `;
-const AlertLabel = qe.span.attrs({ [DOM_KEY_WIDGET]: "alert-label" })`
+const AlertLabel = qe.span.attrs({
+  [DOM_KEY_WIDGET]: "alert-label"
+})`
     font-variant: ${CssVars.FONT_VARIANT};
     min-height: ${CssVars.INPUT_HEIGHT};
 `;
 const Alert = () => {
-  const { on, off, fire } = useGlobalEventBus();
-  const [alert, setAlert] = reactExports.useState({ visible: false });
+  const {
+    on,
+    off,
+    fire
+  } = useGlobalEventBus();
+  const [alert, setAlert] = reactExports.useState({
+    visible: false
+  });
   reactExports.useEffect(() => {
     const show = (content, onHide) => {
       if (alert.visible) {
@@ -1218,13 +1464,20 @@ const Alert = () => {
         document.body.style.paddingRight = `${padding}px`;
       }
       document.body.style.overflowY = "hidden";
-      setAlert({ visible: true, content, onHide });
+      setAlert({
+        visible: true,
+        content,
+        onHide
+      });
     };
     const hide = () => {
       document.body.style.paddingRight = "";
       document.body.style.overflowY = "";
       const onHide = alert.onHide;
-      setAlert({ visible: false, content: alert.content });
+      setAlert({
+        visible: false,
+        content: alert.content
+      });
       onHide && onHide();
     };
     on(GlobalEventTypes.SHOW_ALERT, show);
@@ -1235,26 +1488,21 @@ const Alert = () => {
     };
   }, [on, off, alert.content, alert.onHide, alert.visible]);
   const onHideClicked = () => fire && fire(GlobalEventTypes.HIDE_ALERT);
-  return React.createElement(
-    AlertContainer,
-    { visible: alert.visible },
-    React.createElement(
-      AlertDialog,
-      { visible: alert.visible },
-      React.createElement(AlertBody, null, toIntlLabel(alert.content)),
-      React.createElement(
-        AlertFooter,
-        null,
-        React.createElement(
-          UnwrappedButton,
-          { ink: ButtonInk.PRIMARY, onClick: onHideClicked },
-          React.createElement(IntlLabel, { keys: ["alert", "confirm"], value: "Ok" })
-        )
-      )
-    )
-  );
+  return React.createElement(AlertContainer, {
+    visible: alert.visible
+  }, React.createElement(AlertDialog, {
+    visible: alert.visible
+  }, React.createElement(AlertBody, null, toIntlLabel(alert.content)), React.createElement(AlertFooter, null, React.createElement(UnwrappedButton, {
+    ink: ButtonInk.PRIMARY,
+    onClick: onHideClicked
+  }, React.createElement(IntlLabel, {
+    keys: ["alert", "confirm"],
+    value: "Ok"
+  })))));
 };
-const DialogContainer = qe.div.attrs(({ visible }) => {
+const DialogContainer = qe.div.attrs(({
+  visible
+}) => {
   return {
     [DOM_KEY_WIDGET]: "dialog",
     style: {
@@ -1274,7 +1522,9 @@ const DialogContainer = qe.div.attrs(({ visible }) => {
     transition: all ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION};
     z-index: ${CssVars.DIALOG_Z_INDEX};
 `;
-const DialogWrapper = qe.div.attrs({ [DOM_KEY_WIDGET]: "dialog-wrapper" })`
+const DialogWrapper = qe.div.attrs({
+  [DOM_KEY_WIDGET]: "dialog-wrapper"
+})`
     margin-top: ${CssVars.DIALOG_MARGIN_TOP};
     margin-left: ${CssVars.DIALOG_MARGIN_LEFT};
     width: ${CssVars.DIALOG_WIDTH};
@@ -1285,7 +1535,9 @@ const DialogWrapper = qe.div.attrs({ [DOM_KEY_WIDGET]: "dialog-wrapper" })`
     border-radius: ${CssVars.BORDER_RADIUS};
     box-shadow: ${CssVars.DIALOG_SHADOW};
 `;
-const DialogHeader = qe.div.attrs({ [DOM_KEY_WIDGET]: "dialog-header" })`
+const DialogHeader = qe.div.attrs({
+  [DOM_KEY_WIDGET]: "dialog-header"
+})`
     display: flex;
     position: relative;
     padding: 0 ${CssVars.DIALOG_HEADER_PADDING};
@@ -1293,16 +1545,22 @@ const DialogHeader = qe.div.attrs({ [DOM_KEY_WIDGET]: "dialog-header" })`
     margin: ${CssVars.DIALOG_HEADER_MARGIN};
     align-items: center;
 `;
-const DialogTitle = qe.div.attrs({ [DOM_KEY_WIDGET]: "dialog-title" })`
+const DialogTitle = qe.div.attrs({
+  [DOM_KEY_WIDGET]: "dialog-title"
+})`
     font-family: ${CssVars.DIALOG_HEADER_FONT_FAMILY};
     font-size: ${CssVars.DIALOG_HEADER_FONT_SIZE};
     text-transform: uppercase;
 `;
-const DialogBody = qe.div.attrs({ [DOM_KEY_WIDGET]: "dialog-body" })`
+const DialogBody = qe.div.attrs({
+  [DOM_KEY_WIDGET]: "dialog-body"
+})`
     flex-grow: 1;
     min-height: ${CssVars.DIALOG_BODY_MIN_HEIGHT};
 `;
-const DialogFooter = qe.div.attrs({ [DOM_KEY_WIDGET]: "dialog-footer" })`
+const DialogFooter = qe.div.attrs({
+  [DOM_KEY_WIDGET]: "dialog-footer"
+})`
     display: flex;
     align-items: center;
     justify-content: flex-end;
@@ -1313,42 +1571,46 @@ const DialogFooter = qe.div.attrs({ [DOM_KEY_WIDGET]: "dialog-footer" })`
         }
     }
 `;
-const DialogLabel = qe.span.attrs({ [DOM_KEY_WIDGET]: "dialog-label" })`
+const DialogLabel = qe.span.attrs({
+  [DOM_KEY_WIDGET]: "dialog-label"
+})`
     font-variant: ${CssVars.FONT_VARIANT};
     line-height: ${CssVars.LINE_HEIGHT};
     min-height: ${CssVars.LINE_HEIGHT};
 `;
 const YesNoContent = (props) => {
-  const { question, onYes, onNo } = props;
-  return React.createElement(
-    React.Fragment,
-    null,
-    React.createElement(
-      DialogBody,
-      null,
-      React.createElement(DialogLabel, null, toIntlLabel(question))
-    ),
-    React.createElement(
-      DialogFooter,
-      null,
-      React.createElement(
-        UnwrappedButton,
-        { ink: ButtonInk.PRIMARY, onClick: onYes },
-        React.createElement(IntlLabel, { keys: ["dialog", "confirm"], value: "Yes" })
-      ),
-      React.createElement(
-        UnwrappedButton,
-        { ink: ButtonInk.WAIVE, onClick: onNo },
-        React.createElement(IntlLabel, { keys: ["dialog", "discard"], value: "No" })
-      )
-    )
-  );
+  const {
+    question,
+    onYes,
+    onNo
+  } = props;
+  return React.createElement(React.Fragment, null, React.createElement(DialogBody, null, React.createElement(DialogLabel, null, toIntlLabel(question))), React.createElement(DialogFooter, null, React.createElement(UnwrappedButton, {
+    ink: ButtonInk.PRIMARY,
+    onClick: onYes
+  }, React.createElement(IntlLabel, {
+    keys: ["dialog", "confirm"],
+    value: "Yes"
+  })), React.createElement(UnwrappedButton, {
+    ink: ButtonInk.WAIVE,
+    onClick: onNo
+  }, React.createElement(IntlLabel, {
+    keys: ["dialog", "discard"],
+    value: "No"
+  }))));
 };
 const YesNoDialog = () => {
-  const { fire, on, off } = useGlobalEventBus();
+  const {
+    fire,
+    on,
+    off
+  } = useGlobalEventBus();
   reactExports.useEffect(() => {
     const show = (question, onYes, onNo) => {
-      fire && fire(GlobalEventTypes.SHOW_DIALOG, React.createElement(YesNoContent, { question, onYes, onNo }));
+      fire && fire(GlobalEventTypes.SHOW_DIALOG, React.createElement(YesNoContent, {
+        question,
+        onYes,
+        onNo
+      }));
     };
     on(GlobalEventTypes.SHOW_YES_NO_DIALOG, show);
     return () => {
@@ -1358,8 +1620,13 @@ const YesNoDialog = () => {
   return React.createElement(reactExports.Fragment, null);
 };
 const Dialog = () => {
-  const { on, off } = useGlobalEventBus();
-  const [dialog, setDialog] = reactExports.useState({ visible: false });
+  const {
+    on,
+    off
+  } = useGlobalEventBus();
+  const [dialog, setDialog] = reactExports.useState({
+    visible: false
+  });
   const [functions] = reactExports.useState({
     show: (content, wrapperStyle) => {
       if (dialog.visible) {
@@ -1370,13 +1637,24 @@ const Dialog = () => {
         document.body.style.paddingRight = `${padding}px`;
       }
       document.body.style.overflowY = "hidden";
-      setDialog({ visible: true, content, wrapperStyle });
+      setDialog({
+        visible: true,
+        content,
+        wrapperStyle
+      });
     },
     hide: () => {
       document.body.style.paddingRight = "";
       document.body.style.overflowY = "";
-      setDialog(({ content, wrapperStyle }) => {
-        return { visible: false, content, wrapperStyle };
+      setDialog(({
+        content,
+        wrapperStyle
+      }) => {
+        return {
+          visible: false,
+          content,
+          wrapperStyle
+        };
       });
     }
   });
@@ -1390,14 +1668,17 @@ const Dialog = () => {
   }, [on, off, functions.show, functions.hide]);
   const onTransitionEnd = () => {
     if (!dialog.visible) {
-      setDialog({ visible: false });
+      setDialog({
+        visible: false
+      });
     }
   };
-  return React.createElement(
-    DialogContainer,
-    { visible: dialog.visible, onTransitionEnd },
-    React.createElement(DialogWrapper, { style: dialog.wrapperStyle }, dialog.content)
-  );
+  return React.createElement(DialogContainer, {
+    visible: dialog.visible,
+    onTransitionEnd
+  }, React.createElement(DialogWrapper, {
+    style: dialog.wrapperStyle
+  }, dialog.content));
 };
 const SpinnerKeyFrames = We`
 	0% {
@@ -1407,7 +1688,9 @@ const SpinnerKeyFrames = We`
 		transform : rotate(360deg);
 	}
 `;
-const RemoteRequestContainer = qe.div.attrs(({ visible }) => {
+const RemoteRequestContainer = qe.div.attrs(({
+  visible
+}) => {
   return {
     [DOM_KEY_WIDGET]: "remote-request",
     style: {
@@ -1432,9 +1715,20 @@ const RemoteRequestContainer = qe.div.attrs(({ visible }) => {
     }
 `;
 const RemoteRequest = (props) => {
-  const { clearAccount, on200: doOn200, on401: doOn401, on403: doOn403 } = props;
-  const { on, off, fire } = useGlobalEventBus();
-  const [count] = reactExports.useState({ value: 0 });
+  const {
+    clearAccount,
+    on200: doOn200,
+    on401: doOn401,
+    on403: doOn403
+  } = props;
+  const {
+    on,
+    off,
+    fire
+  } = useGlobalEventBus();
+  const [count] = reactExports.useState({
+    value: 0
+  });
   const forceUpdate = useForceUpdate();
   reactExports.useEffect(() => {
     const on401 = () => {
@@ -1485,11 +1779,9 @@ const RemoteRequest = (props) => {
       off(GlobalEventTypes.INVOKE_REMOTE_REQUEST, onInvokeRemoteRequest);
     };
   }, [on, off, fire, forceUpdate, clearAccount, doOn200, doOn401, doOn403, count]);
-  return React.createElement(
-    RemoteRequestContainer,
-    { visible: count.value > 0 },
-    React.createElement(Spinner, null)
-  );
+  return React.createElement(RemoteRequestContainer, {
+    visible: count.value > 0
+  }, React.createElement(Spinner, null));
 };
 const notInMe = (me, target) => {
   const body = document.body;
@@ -1509,7 +1801,12 @@ const notInMe = (me, target) => {
   return true;
 };
 const useCollapseFixedThing = (options) => {
-  const { containerRef, visible = true, hide, events = ["scroll", "focus", "click"] } = options;
+  const {
+    containerRef,
+    visible = true,
+    hide,
+    events = ["scroll", "focus", "click"]
+  } = options;
   reactExports.useEffect(() => {
     if (!visible) {
       return;
@@ -1532,10 +1829,20 @@ const useCollapseFixedThing = (options) => {
     };
   }, [containerRef, events, visible, hide]);
 };
-const TipContainer = qe.div.attrs(({ visible, minWidth, maxWidth, maxHeight, tag, top, left }) => {
+const TipContainer = qe.div.attrs(({
+  visible,
+  minWidth,
+  maxWidth,
+  maxHeight,
+  tag,
+  top,
+  left
+}) => {
   return {
     [DOM_KEY_WIDGET]: "d9-tip",
-    ...VUtils.isNotBlank(tag) ? { [tag]: "" } : {},
+    ...VUtils.isNotBlank(tag) ? {
+      [tag]: ""
+    } : {},
     style: {
       "--min-width": toCssSize(minWidth),
       "--max-width": toCssSize(maxWidth),
@@ -1563,7 +1870,9 @@ const TipContainer = qe.div.attrs(({ visible, minWidth, maxWidth, maxHeight, tag
     z-index: ${CssVars.TIP_Z_INDEX};
     overflow: hidden;
 `;
-const TipHeader = qe.div.attrs({ [DOM_KEY_WIDGET]: "d9-tip-header" })`
+const TipHeader = qe.div.attrs({
+  [DOM_KEY_WIDGET]: "d9-tip-header"
+})`
     display: flex;
     position: relative;
     align-items: center;
@@ -1571,7 +1880,9 @@ const TipHeader = qe.div.attrs({ [DOM_KEY_WIDGET]: "d9-tip-header" })`
     min-height: ${CssVars.TIP_HEADER_HEIGHT};
     border-bottom: ${CssVars.TIP_HEADER_BORDER};
 `;
-const TipTitle = qe.div.attrs({ [DOM_KEY_WIDGET]: "d9-tip-header-title" })`
+const TipTitle = qe.div.attrs({
+  [DOM_KEY_WIDGET]: "d9-tip-header-title"
+})`
     display: flex;
     position: relative;
     align-items: center;
@@ -1582,12 +1893,16 @@ const TipTitle = qe.div.attrs({ [DOM_KEY_WIDGET]: "d9-tip-header-title" })`
     color: ${CssVars.CAPTION_FONT_COLOR};
     padding: 0 ${CssVars.TIP_HEADER_PADDING};
 `;
-const TipBody = qe.div.attrs({ [DOM_KEY_WIDGET]: "d9-tip-body" })`
+const TipBody = qe.div.attrs({
+  [DOM_KEY_WIDGET]: "d9-tip-body"
+})`
     display: flex;
     position: relative;
     padding: 0 ${CssVars.TIP_BODY_PADDING};
 `;
-const TipLabel = qe.span.attrs({ [DOM_KEY_WIDGET]: "d9-tip-label" })`
+const TipLabel = qe.span.attrs({
+  [DOM_KEY_WIDGET]: "d9-tip-label"
+})`
     display: flex;
     position: relative;
     align-items: center;
@@ -1596,12 +1911,20 @@ const TipLabel = qe.span.attrs({ [DOM_KEY_WIDGET]: "d9-tip-label" })`
     padding: calc((${CssVars.INPUT_HEIGHT} - ${CssVars.LINE_HEIGHT}) / 2) 0;
 `;
 const Tip = () => {
-  const { on, off } = useGlobalEventBus();
+  const {
+    on,
+    off
+  } = useGlobalEventBus();
   const ref = reactExports.useRef(null);
-  const [state, setState] = reactExports.useState({ visible: false });
+  const [state, setState] = reactExports.useState({
+    visible: false
+  });
   reactExports.useEffect(() => {
     const onShowTip = (options) => {
-      const { ref: ref2, prefix = "data" } = options;
+      const {
+        ref: ref2,
+        prefix = "data"
+      } = options;
       const body = options.body ?? ref2.current.getAttribute(`${prefix}-tip-body`);
       if (VUtils.isBlank(body)) {
         return;
@@ -1619,7 +1942,17 @@ const Tip = () => {
       if (state.hideTimeout) {
         window.clearTimeout(state.hideTimeout);
       }
-      setState({ ref: ref2, title, body, visible: false, minWidth, maxWidth, maxHeight, delay, tag });
+      setState({
+        ref: ref2,
+        title,
+        body,
+        visible: false,
+        minWidth,
+        maxWidth,
+        maxHeight,
+        delay,
+        tag
+      });
     };
     const onHideTip = (ref2) => {
       var _a;
@@ -1629,7 +1962,9 @@ const Tip = () => {
         if (state.hideTimeout) {
           window.clearTimeout(state.hideTimeout);
         }
-        setState({ visible: false });
+        setState({
+          visible: false
+        });
       }
     };
     on(GlobalEventTypes.SHOW_TIP, onShowTip);
@@ -1641,15 +1976,34 @@ const Tip = () => {
   }, [on, off, state.ref, state.hideTimeout]);
   reactExports.useEffect(() => {
     if (state.ref != null && !state.visible) {
-      const { top, left, width, height } = state.ref.current.getBoundingClientRect();
-      const { width: myWidth, height: myHeight } = ref.current.getBoundingClientRect();
-      const { top: myTop } = (() => {
+      const {
+        top,
+        left,
+        width,
+        height
+      } = state.ref.current.getBoundingClientRect();
+      const {
+        width: myWidth,
+        height: myHeight
+      } = ref.current.getBoundingClientRect();
+      const {
+        top: myTop
+      } = (() => {
         if (top - myHeight - 6 >= 0) {
-          return { top: top - myHeight - 4, onTop: true };
+          return {
+            top: top - myHeight - 4,
+            onTop: true
+          };
         } else if (top + height + myHeight + 6 < window.innerHeight) {
-          return { top: top + height + 4, onTop: false };
+          return {
+            top: top + height + 4,
+            onTop: false
+          };
         } else {
-          return { top: top - myHeight - 4, onTop: true };
+          return {
+            top: top - myHeight - 4,
+            onTop: true
+          };
         }
       })();
       const myLeft = (() => {
@@ -1661,12 +2015,20 @@ const Tip = () => {
       })();
       const hideTimeout = (() => {
         if (state.delay != null) {
-          return setTimeout(() => setState({ visible: false }), state.delay * 1e3);
+          return setTimeout(() => setState({
+            visible: false
+          }), state.delay * 1e3);
         } else {
           return void 0;
         }
       })();
-      setState((state2) => ({ ...state2, visible: true, top: myTop, left: myLeft, hideTimeout }));
+      setState((state2) => ({
+        ...state2,
+        visible: true,
+        top: myTop,
+        left: myLeft,
+        hideTimeout
+      }));
     }
   }, [state.ref, state.visible, state.delay]);
   useCollapseFixedThing({
@@ -1676,26 +2038,32 @@ const Tip = () => {
       if (state.hideTimeout) {
         window.clearTimeout(state.hideTimeout);
       }
-      setState({ visible: false });
+      setState({
+        visible: false
+      });
     }
   });
   if (state.ref == null) {
     return null;
   }
-  return React.createElement(
-    TipContainer,
-    { visible: state.visible, minWidth: state.minWidth, maxWidth: state.maxWidth, maxHeight: state.maxHeight, tag: state.tag, top: state.top, left: state.left, ref },
-    state.title != null ? React.createElement(
-      TipHeader,
-      null,
-      React.createElement(TipTitle, null, toIntlLabel(state.title))
-    ) : null,
-    React.createElement(TipBody, null, typeof state.body === "string" ? React.createElement(TipLabel, null, toIntlLabel(state.body)) : state.body)
-  );
+  return React.createElement(TipContainer, {
+    visible: state.visible,
+    minWidth: state.minWidth,
+    maxWidth: state.maxWidth,
+    maxHeight: state.maxHeight,
+    tag: state.tag,
+    top: state.top,
+    left: state.left,
+    ref
+  }, state.title != null ? React.createElement(TipHeader, null, React.createElement(TipTitle, null, toIntlLabel(state.title))) : null, React.createElement(TipBody, null, typeof state.body === "string" ? React.createElement(TipLabel, null, toIntlLabel(state.body)) : state.body));
 };
 const useTip = (options) => {
-  const { ref } = options;
-  const { fire } = useGlobalEventBus();
+  const {
+    ref
+  } = options;
+  const {
+    fire
+  } = useGlobalEventBus();
   reactExports.useEffect(() => {
     if (ref.current == null || fire == null) {
       return;
@@ -1715,7 +2083,9 @@ const useTip = (options) => {
     const onClick = () => {
       fire(GlobalEventTypes.SHOW_TIP, options);
     };
-    const { current } = ref;
+    const {
+      current
+    } = ref;
     current.addEventListener("mouseenter", onMouseEnter);
     current.addEventListener("mouseleave", onMouseLeave);
     current.addEventListener("focusin", onFocusIn);
@@ -1731,7 +2101,9 @@ const useTip = (options) => {
   }, [fire, ref, options]);
 };
 const useRemoteRequest = () => {
-  const { fire } = useGlobalEventBus();
+  const {
+    fire
+  } = useGlobalEventBus();
   const [functions] = reactExports.useState(() => {
     const doRemoteRequest = async (request, disableAlert) => {
       return new Promise((resolve, reject) => {
@@ -1747,9 +2119,15 @@ const useRemoteRequest = () => {
       neverFailRequest: async (request, disableAlert) => {
         try {
           const result = await doRemoteRequest(request, disableAlert);
-          return { failed: false, result };
+          return {
+            failed: false,
+            result
+          };
         } catch (error) {
-          return { failed: true, error };
+          return {
+            failed: true,
+            error
+          };
         }
       }
     };
@@ -1757,7 +2135,9 @@ const useRemoteRequest = () => {
   return functions;
 };
 const useAlert = () => {
-  const { fire } = useGlobalEventBus();
+  const {
+    fire
+  } = useGlobalEventBus();
   const [functions] = reactExports.useState(() => {
     return {
       show: async (content) => {
@@ -1777,7 +2157,9 @@ const useAlert = () => {
   return functions;
 };
 const useDialog = () => {
-  const { fire } = useGlobalEventBus();
+  const {
+    fire
+  } = useGlobalEventBus();
   const [functions] = reactExports.useState(() => {
     return {
       show: (content, wrapperStyle) => {
@@ -1791,7 +2173,9 @@ const useDialog = () => {
   return functions;
 };
 const useYesNoDialog = () => {
-  const { fire } = useGlobalEventBus();
+  const {
+    fire
+  } = useGlobalEventBus();
   const [functions] = reactExports.useState(() => {
     return {
       show: async (content) => {
@@ -1836,7 +2220,9 @@ var GlobalEventPrefix;
   GlobalEventPrefix2["TREE_NODE_CONTEXT_MENU"] = "tree-node-context-menu";
 })(GlobalEventPrefix || (GlobalEventPrefix = {}));
 const useCustomGlobalEvent = () => {
-  const { fire } = useGlobalEventBus();
+  const {
+    fire
+  } = useGlobalEventBus();
   const [func] = reactExports.useState(() => {
     return async (key, prefix, clipped, models) => {
       return new Promise((resolve) => {
@@ -1848,7 +2234,9 @@ const useCustomGlobalEvent = () => {
   return func;
 };
 const useSimpleCustomGlobalEvent = () => {
-  const { fire } = useGlobalEventBus();
+  const {
+    fire
+  } = useGlobalEventBus();
   const [func] = reactExports.useState(() => {
     return async (prefix, clipped, models) => {
       return new Promise((resolve) => {
@@ -1866,7 +2254,9 @@ const useGlobalHandlers = () => {
   const remoteRequest = useRemoteRequest();
   const customEvent = useCustomGlobalEvent();
   const scEvent = useSimpleCustomGlobalEvent();
-  const { fire } = useRootEventBus() ?? {};
+  const {
+    fire
+  } = useRootEventBus() ?? {};
   const [handlers] = reactExports.useState({
     alert,
     dialog,
@@ -1874,22 +2264,33 @@ const useGlobalHandlers = () => {
     remoteRequest,
     custom: customEvent,
     sc: scEvent,
-    root: fire == null ? void 0 : { fire }
+    root: fire == null ? void 0 : {
+      fire
+    }
   });
   return handlers;
 };
 const GlobalRoot = (props) => {
-  const { avoidDefaultAlert = false, avoidDefaultDialog = false, avoidDefaultYesNoDialog = false, avoidDefaultRemoteRequest = false, avoidDefaultTips = false, defaultRemoteRequestProps: { clearAccount = VUtils.noop, on200, on401 = VUtils.noop, on403 = VUtils.noop } = {}, children } = props;
-  return React.createElement(
-    GlobalEventBusProvider,
-    null,
-    avoidDefaultAlert ? null : React.createElement(Alert, null),
-    avoidDefaultDialog ? null : React.createElement(Dialog, null),
-    avoidDefaultYesNoDialog ? null : React.createElement(YesNoDialog, null),
-    avoidDefaultTips ? null : React.createElement(Tip, null),
-    avoidDefaultRemoteRequest ? null : React.createElement(RemoteRequest, { clearAccount, on200, on401, on403 }),
+  const {
+    avoidDefaultAlert = false,
+    avoidDefaultDialog = false,
+    avoidDefaultYesNoDialog = false,
+    avoidDefaultRemoteRequest = false,
+    avoidDefaultTips = false,
+    defaultRemoteRequestProps: {
+      clearAccount = VUtils.noop,
+      on200,
+      on401 = VUtils.noop,
+      on403 = VUtils.noop
+    } = {},
     children
-  );
+  } = props;
+  return React.createElement(GlobalEventBusProvider, null, avoidDefaultAlert ? null : React.createElement(Alert, null), avoidDefaultDialog ? null : React.createElement(Dialog, null), avoidDefaultYesNoDialog ? null : React.createElement(YesNoDialog, null), avoidDefaultTips ? null : React.createElement(Tip, null), avoidDefaultRemoteRequest ? null : React.createElement(RemoteRequest, {
+    clearAccount,
+    on200,
+    on401,
+    on403
+  }), children);
 };
 var index$1 = /* @__PURE__ */ Object.freeze({
   __proto__: null,
@@ -1924,13 +2325,20 @@ var index$1 = /* @__PURE__ */ Object.freeze({
 });
 const toIntlLabel = (text, ...replacements) => {
   if (typeof text === "string") {
-    return React.createElement(IntlLabel, { keys: [`${text}`], value: text, replacements });
+    return React.createElement(IntlLabel, {
+      keys: [`${text}`],
+      value: text,
+      replacements
+    });
   } else {
     return text;
   }
 };
 const useLanguage = () => {
-  const { on, off } = useGlobalEventBus();
+  const {
+    on,
+    off
+  } = useGlobalEventBus();
   const forceUpdate = useForceUpdate();
   reactExports.useEffect(() => {
     const onLanguageChanged = () => {
@@ -1975,7 +2383,11 @@ const internationalize = (label, keys) => {
   }
 };
 const IntlLabel = (props) => {
-  const { keys, value, replacements } = props;
+  const {
+    keys,
+    value,
+    replacements
+  } = props;
   useLanguage();
   const label = replaceTemplate(internationalize(value, keys) ?? "", replacements);
   return React.createElement(React.Fragment, null, label);
@@ -1988,7 +2400,10 @@ const transformDecorator = (decorator) => {
         return React.createElement(Found, null);
       }
     } else {
-      return React.createElement(IntlLabel, { keys: [decorator], value: decorator });
+      return React.createElement(IntlLabel, {
+        keys: [decorator],
+        value: decorator
+      });
     }
   }
   return decorator;
@@ -2006,12 +2421,28 @@ const NO_MATCHED_OPTION_ITEM = "__no_matched__";
 const NO_AVAILABLE_OPTION_ITEM = "__no_available__";
 const REACTION_REFRESH_OPTIONS = "reaction-refresh-options";
 const useOptionItems = (props) => {
-  const { options = NO_OPTION_ITEM, noAvailable, $wrapped: { $root, $model } } = props;
+  const {
+    options = NO_OPTION_ITEM,
+    noAvailable,
+    $wrapped: {
+      $root,
+      $model
+    }
+  } = props;
   const globalHandlers = useGlobalHandlers();
-  const { on: onGlobal, off: offGlobal } = useGlobalEventBus();
-  const { on, off } = useWrapperEventBus();
+  const {
+    on: onGlobal,
+    off: offGlobal
+  } = useGlobalEventBus();
+  const {
+    on,
+    off
+  } = useWrapperEventBus();
   const [candidates, setCandidates] = reactExports.useState(() => {
-    return { initialized: false, options: NO_OPTION_ITEM };
+    return {
+      initialized: false,
+      options: NO_OPTION_ITEM
+    };
   });
   reactExports.useEffect(() => {
     if (!candidates.initialized) {
@@ -2019,14 +2450,24 @@ const useOptionItems = (props) => {
         (async () => {
           setCandidates({
             initialized: true,
-            options: await options({ root: $root, model: $model, global: globalHandlers })
+            options: await options({
+              root: $root,
+              model: $model,
+              global: globalHandlers
+            })
           });
         })();
       } else {
-        setCandidates({ initialized: true, options: options ?? NO_OPTION_ITEM });
+        setCandidates({
+          initialized: true,
+          options: options ?? NO_OPTION_ITEM
+        });
       }
     } else if (!VUtils.isFunction(options) && options !== candidates.options) {
-      setCandidates({ initialized: true, options });
+      setCandidates({
+        initialized: true,
+        options
+      });
     }
   }, [globalHandlers, candidates.initialized, candidates.options, options, $root, $model]);
   reactExports.useEffect(() => {
@@ -2035,10 +2476,16 @@ const useOptionItems = (props) => {
         if (command !== REACTION_REFRESH_OPTIONS) {
           return;
         }
-        setCandidates((candidates2) => ({ initialized: false, options: candidates2.options }));
+        setCandidates((candidates2) => ({
+          initialized: false,
+          options: candidates2.options
+        }));
       };
       const onLanguageChanged = () => {
-        setCandidates((candidates2) => ({ initialized: false, options: candidates2.options }));
+        setCandidates((candidates2) => ({
+          initialized: false,
+          options: candidates2.options
+        }));
       };
       on(WrapperEventTypes.UNHANDLED_REACTION_OCCURRED, onUnhandledReactionOccurred);
       onGlobal && onGlobal(GlobalEventTypes.LANGUAGE_CHANGED, onLanguageChanged);
@@ -2055,7 +2502,10 @@ const useOptionItems = (props) => {
     return () => {
       const options2 = askOptions();
       if (options2.length === 0) {
-        return [{ value: NO_AVAILABLE_OPTION_ITEM, label: toIntlLabel(noAvailable) }];
+        return [{
+          value: NO_AVAILABLE_OPTION_ITEM,
+          label: toIntlLabel(noAvailable)
+        }];
       }
       if (shouldTakeOver != null && shouldTakeOver()) {
         return takeOver != null ? takeOver(options2) : options2;
@@ -2064,14 +2514,21 @@ const useOptionItems = (props) => {
       }
     };
   };
-  return { askOptions, createAskDisplayOptions };
+  return {
+    askOptions,
+    createAskDisplayOptions
+  };
 };
 const Context$6 = reactExports.createContext({});
 Context$6.displayName = "TreeEventBus";
 const TreeEventBusProvider = (props) => {
-  const { children } = props;
+  const {
+    children
+  } = props;
   const bus = useCreateEventBus("tree");
-  return React.createElement(Context$6.Provider, { value: bus }, children);
+  return React.createElement(Context$6.Provider, {
+    value: bus
+  }, children);
 };
 const useTreeEventBus = () => reactExports.useContext(Context$6);
 var TreeEventTypes;
@@ -2091,9 +2548,13 @@ var TreeEventTypes;
 const Context$5 = reactExports.createContext({});
 Context$5.displayName = "TreeNodeEventBus";
 const TreeNodeEventBusProvider = (props) => {
-  const { children } = props;
+  const {
+    children
+  } = props;
   const bus = useCreateEventBus("tree-node");
-  return React.createElement(Context$5.Provider, { value: bus }, children);
+  return React.createElement(Context$5.Provider, {
+    value: bus
+  }, children);
 };
 const useTreeNodeEventBus = () => reactExports.useContext(Context$5);
 var TreeNodeEventTypes;
@@ -2114,8 +2575,16 @@ var TreeNodeEventTypes;
   TreeNodeEventTypes2["NODE_REMOVED"] = "node-removed";
 })(TreeNodeEventTypes || (TreeNodeEventTypes = {}));
 const TreeNodeEventBridge = (props) => {
-  const { node, expandParent, nodeCheckedChanged, nodeRemoved } = props;
-  const { on, off } = useTreeNodeEventBus();
+  const {
+    node,
+    expandParent,
+    nodeCheckedChanged,
+    nodeRemoved
+  } = props;
+  const {
+    on,
+    off
+  } = useTreeNodeEventBus();
   reactExports.useEffect(() => {
     const onExpandParent = (_marker, expanded) => {
       if (expanded) {
@@ -2139,7 +2608,10 @@ const TreeNodeEventBridge = (props) => {
   }, [on, off, node, expandParent, nodeCheckedChanged, nodeRemoved]);
   return React.createElement(reactExports.Fragment, null);
 };
-const ACaption = qe.span.attrs(({ id, [DOM_KEY_WIDGET]: dataW }) => {
+const ACaption = qe.span.attrs(({
+  id,
+  [DOM_KEY_WIDGET]: dataW
+}) => {
   return {
     [DOM_KEY_WIDGET]: dataW ?? "d9-caption",
     [DOM_ID_WIDGET]: id
@@ -2248,7 +2720,13 @@ const ACaption = qe.span.attrs(({ id, [DOM_KEY_WIDGET]: dataW }) => {
         }
     }
 `;
-const formatter = new Proxy({ nf, nf0, nf1, nf2, nf3 }, {
+const formatter = new Proxy({
+  nf,
+  nf0,
+  nf1,
+  nf2,
+  nf3
+}, {
   get(target, p) {
     const func = target[p];
     if (p === "df") {
@@ -2308,13 +2786,35 @@ const TailDecorator$1 = qe(Decorator$1).attrs({
 })`
 `;
 const Caption = reactExports.forwardRef((props, ref) => {
-  const { label: _label, text: _text, leads, tails, labelOnValue, valueToLabel, click, $pp, $wrapped, ...rest } = props;
-  const { $root, $model, $p2r, $avs: { $disabled, $visible }, $vfs } = $wrapped;
+  const {
+    label: _label,
+    text: _text,
+    leads,
+    tails,
+    labelOnValue,
+    valueToLabel,
+    click,
+    $pp,
+    $wrapped,
+    ...rest
+  } = props;
+  const {
+    $root,
+    $model,
+    $p2r,
+    $avs: {
+      $disabled,
+      $visible
+    },
+    $vfs
+  } = $wrapped;
   const label = _text ?? _label;
   const globalHandlers = useGlobalHandlers();
   const captionRef = reactExports.useRef(null);
   useDualRefs(captionRef, ref);
-  useTip({ ref: captionRef });
+  useTip({
+    ref: captionRef
+  });
   const onClicked = click != null ? async (event) => {
     event.preventDefault();
     event.stopPropagation();
@@ -2342,7 +2842,11 @@ const Caption = reactExports.forwardRef((props, ref) => {
         model: $model
       }) ?? "";
     } else if (label != null) {
-      value = React.createElement(LabelLike, { "$wrapped": $wrapped, "$validationScopes": props, label });
+      value = React.createElement(LabelLike, {
+        "$wrapped": $wrapped,
+        "$validationScopes": props,
+        label
+      });
     } else {
       value = "";
     }
@@ -2364,49 +2868,109 @@ const Caption = reactExports.forwardRef((props, ref) => {
     }
     return value;
   })();
-  return React.createElement(
-    ACaption,
-    { ...rest, "data-disabled": $disabled, "data-visible": $visible, id: PPUtils.asId(PPUtils.absolute($p2r, props.$pp), props.id), onClick: onClicked, "data-clickable": onClicked != null, ref: captionRef },
-    transformDecorators(leads).map((lead, index) => {
-      return React.createElement(LeadDecorator$1, { key: index }, lead);
-    }),
-    children,
-    transformDecorators(tails).map((tail, index) => {
-      return React.createElement(TailDecorator$1, { key: index }, tail);
-    })
-  );
+  return React.createElement(ACaption, {
+    ...rest,
+    "data-disabled": $disabled,
+    "data-visible": $visible,
+    id: PPUtils.asId(PPUtils.absolute($p2r, props.$pp), props.id),
+    onClick: onClicked,
+    "data-clickable": onClicked != null,
+    ref: captionRef
+  }, transformDecorators(leads).map((lead, index) => {
+    return React.createElement(LeadDecorator$1, {
+      key: index
+    }, lead);
+  }), children, transformDecorators(tails).map((tail, index) => {
+    return React.createElement(TailDecorator$1, {
+      key: index
+    }, tail);
+  }));
 });
 const Label = reactExports.forwardRef((props, ref) => {
-  return React.createElement(Caption, { ...props, labelOnValue: true, ref });
+  return React.createElement(Caption, {
+    ...props,
+    labelOnValue: true,
+    ref
+  });
 });
 const Badge = reactExports.forwardRef((props, ref) => {
-  const { ink, fill = ButtonFill.FILL, ...rest } = props;
-  return React.createElement(Caption, { ...rest, "data-w": "d9-badge", "data-ink": ink, "data-fill": fill, ref });
+  const {
+    ink,
+    fill = ButtonFill.FILL,
+    ...rest
+  } = props;
+  return React.createElement(Caption, {
+    ...rest,
+    "data-w": "d9-badge",
+    "data-ink": ink,
+    "data-fill": fill,
+    ref
+  });
 });
-registerWidget({ key: "Badge", JSX: Badge, container: false, array: false });
-registerWidget({ key: "Label", JSX: Label, container: false, array: false });
-registerWidget({ key: "Caption", JSX: Caption, container: false, array: false });
+registerWidget({
+  key: "Badge",
+  JSX: Badge,
+  container: false,
+  array: false
+});
+registerWidget({
+  key: "Label",
+  JSX: Label,
+  container: false,
+  array: false
+});
+registerWidget({
+  key: "Caption",
+  JSX: Caption,
+  container: false,
+  array: false
+});
 const LabelLike = (props) => {
-  const { label, $wrapped, $validationScopes, wrapByCaption = false, ...rest } = props;
+  const {
+    label,
+    $wrapped,
+    $validationScopes,
+    wrapByCaption = false,
+    ...rest
+  } = props;
   if (label == null || React.isValidElement(label) || typeof label === "string" || VUtils.isBlank(label.$wt)) {
     if (wrapByCaption) {
       if (typeof label === "string") {
-        return React.createElement(Caption, { label: toIntlLabel(label), "$wrapped": $wrapped, ...rest });
+        return React.createElement(Caption, {
+          label: toIntlLabel(label),
+          "$wrapped": $wrapped,
+          ...rest
+        });
       } else {
-        return React.createElement(Caption, { label, "$wrapped": $wrapped, ...rest });
+        return React.createElement(Caption, {
+          label,
+          "$wrapped": $wrapped,
+          ...rest
+        });
       }
     } else {
       return React.createElement(React.Fragment, null, toIntlLabel(label));
     }
   } else {
     const def = label;
-    const { $key: keyOfChild, ...more } = def;
+    const {
+      $key: keyOfChild,
+      ...more
+    } = def;
     NUtils.getDefKey(def);
     NUtils.inheritValidationScopes($validationScopes, def);
-    return React.createElement(Wrapper, { "$root": $wrapped.$root, "$model": $wrapped.$model, "$p2r": $wrapped.$p2r, ...rest, ...more });
+    return React.createElement(Wrapper, {
+      "$root": $wrapped.$root,
+      "$model": $wrapped.$model,
+      "$p2r": $wrapped.$p2r,
+      ...rest,
+      ...more
+    });
   }
 };
-const ACheckbox = qe.div.attrs(({ id }) => {
+const ACheckbox = qe.div.attrs(({
+  id
+}) => {
   return {
     [DOM_KEY_WIDGET]: "d9-checkbox",
     [DOM_ID_WIDGET]: id
@@ -2496,15 +3060,32 @@ const ACheckbox = qe.div.attrs(({ id }) => {
     }
 `;
 const Checkbox = reactExports.forwardRef((props, ref) => {
-  const { values = [true, false], emptyWhenFalse = true, $pp, $wrapped: { $onValueChange, $model, $avs: { $disabled, $visible } }, ...rest } = props;
+  const {
+    values = [true, false],
+    emptyWhenFalse = true,
+    $pp,
+    $wrapped: {
+      $onValueChange,
+      $model,
+      $avs: {
+        $disabled,
+        $visible
+      }
+    },
+    ...rest
+  } = props;
   const globalHandlers = useGlobalHandlers();
   const checkRef = reactExports.useRef(null);
   useDualRefs(checkRef, ref);
-  useTip({ ref: checkRef });
+  useTip({
+    ref: checkRef
+  });
   const onValueChange = async () => {
     const oldValue = MUtils.getValue($model, $pp);
     const newValue = oldValue == values[0] ? values[1] : values[0];
-    await $onValueChange(newValue, true, { global: globalHandlers });
+    await $onValueChange(newValue, true, {
+      global: globalHandlers
+    });
   };
   const onClick = async (event) => {
     if ($disabled) {
@@ -2515,22 +3096,63 @@ const Checkbox = reactExports.forwardRef((props, ref) => {
     await onValueChange();
   };
   const onKeyUp = async (event) => {
-    const { key } = event;
+    const {
+      key
+    } = event;
     if (key === " ") {
       await onValueChange();
     }
   };
   const value = MUtils.getValue($model, $pp);
   const checked = (value ?? "") == (values[0] ?? "");
-  return React.createElement(ACheckbox, { "data-disabled": $disabled, "data-visible": $visible, tabIndex: 0, "data-checked": checked, "data-empty-when-false": emptyWhenFalse, onClick, onKeyUp, ...rest, ref: checkRef }, checked ? React.createElement(Check, null) : emptyWhenFalse ? React.createElement(Check, null) : React.createElement(Times, null));
+  return React.createElement(ACheckbox, {
+    "data-disabled": $disabled,
+    "data-visible": $visible,
+    tabIndex: 0,
+    "data-checked": checked,
+    "data-empty-when-false": emptyWhenFalse,
+    onClick,
+    onKeyUp,
+    ...rest,
+    ref: checkRef
+  }, checked ? React.createElement(Check, null) : emptyWhenFalse ? React.createElement(Check, null) : React.createElement(Times, null));
 });
-registerWidget({ key: "Checkbox", JSX: Checkbox, container: false, array: false });
+registerWidget({
+  key: "Checkbox",
+  JSX: Checkbox,
+  container: false,
+  array: false
+});
 const UnwrappedCheckbox = reactExports.forwardRef((props, ref) => {
-  const { $pp = "value", value, onValueChange, disabled, visible, ...rest } = props;
+  const {
+    $pp = "value",
+    value,
+    onValueChange,
+    disabled,
+    visible,
+    ...rest
+  } = props;
   const $onValueChange = onValueChange;
-  const $avs = { $disabled: disabled, $visible: visible };
-  const $root = { [$pp]: value };
-  return React.createElement(Checkbox, { ...rest, "$wrapped": { $onValueChange, $avs, $root, $model: $root, $p2r: "." }, "$pp": $pp, id: rest.id ?? VUtils.generateUniqueId(), ref });
+  const $avs = {
+    $disabled: disabled,
+    $visible: visible
+  };
+  const $root = {
+    [$pp]: value
+  };
+  return React.createElement(Checkbox, {
+    ...rest,
+    "$wrapped": {
+      $onValueChange,
+      $avs,
+      $root,
+      $model: $root,
+      $p2r: "."
+    },
+    "$pp": $pp,
+    id: rest.id ?? VUtils.generateUniqueId(),
+    ref
+  });
 });
 var TreeNodeCheckedChangeFrom;
 (function(TreeNodeCheckedChangeFrom2) {
@@ -2548,7 +3170,11 @@ const InputMaskTypes = {
   enum: MaskedRange,
   dynamic: MaskedDynamic
 };
-const AnInput = qe.input.attrs(({ id, autoSelect, onFocus }) => {
+const AnInput = qe.input.attrs(({
+  id,
+  autoSelect,
+  onFocus
+}) => {
   if (!autoSelect) {
     return {
       [DOM_KEY_WIDGET]: "d9-input",
@@ -2611,7 +3237,11 @@ const AnInput = qe.input.attrs(({ id, autoSelect, onFocus }) => {
     }
 `;
 const stringifyInputValue = (options) => {
-  const { $model, $pp, value } = options;
+  const {
+    $model,
+    $pp,
+    value
+  } = options;
   if (value == null) {
     return "";
   }
@@ -2630,8 +3260,25 @@ const stringifyInputValue = (options) => {
   }
 };
 const Input = reactExports.forwardRef((props, ref) => {
-  const { autoSelect = true, valueToNumber = false, mask, $pp, $wrapped: { $onValueChange, $model, $p2r, $avs: { $disabled, $visible } }, ...rest } = props;
-  const valueRef = reactExports.useRef({ value: MUtils.getValue($model, $pp) });
+  const {
+    autoSelect = true,
+    valueToNumber = false,
+    mask,
+    $pp,
+    $wrapped: {
+      $onValueChange,
+      $model,
+      $p2r,
+      $avs: {
+        $disabled,
+        $visible
+      }
+    },
+    ...rest
+  } = props;
+  const valueRef = reactExports.useRef({
+    value: MUtils.getValue($model, $pp)
+  });
   const globalHandlers = useGlobalHandlers();
   const onValueChanged = async (value) => {
     if (`${valueRef.current.value ?? ""}` !== `${value ?? ""}`) {
@@ -2639,12 +3286,18 @@ const Input = reactExports.forwardRef((props, ref) => {
       if (valueToNumber && !value.includes(" ")) {
         const tested = VUtils.isNumber(value);
         if (tested.test) {
-          await $onValueChange(tested.value, true, { global: globalHandlers });
+          await $onValueChange(tested.value, true, {
+            global: globalHandlers
+          });
         } else {
-          await $onValueChange(value, true, { global: globalHandlers });
+          await $onValueChange(value, true, {
+            global: globalHandlers
+          });
         }
       } else {
-        await $onValueChange(value, true, { global: globalHandlers });
+        await $onValueChange(value, true, {
+          global: globalHandlers
+        });
       }
     }
   };
@@ -2654,7 +3307,9 @@ const Input = reactExports.forwardRef((props, ref) => {
     lazy: false
   } : void 0;
   const maskValueInitializedRef = reactExports.useRef(false);
-  const { ref: inputRef } = useIMask(maskOptions, {
+  const {
+    ref: inputRef
+  } = useIMask(maskOptions, {
     onAccept: (_, mask2) => {
       if (maskValueInitializedRef.current) {
         onValueChanged(mask2.unmaskedValue);
@@ -2665,7 +3320,9 @@ const Input = reactExports.forwardRef((props, ref) => {
     }
   });
   useDualRefs(inputRef, ref);
-  useTip({ ref: inputRef });
+  useTip({
+    ref: inputRef
+  });
   const onChange = async (event) => {
     if (hasMask) {
       return;
@@ -2678,34 +3335,90 @@ const Input = reactExports.forwardRef((props, ref) => {
   else {
     valueRef.current.value = valueFromModel;
   }
-  const displayValue = hasMask ? void 0 : stringifyInputValue({ $model, $pp, value: valueRef.current.value });
-  return React.createElement(AnInput, { ...rest, autoSelect, disabled: $disabled, "data-disabled": $disabled, "data-visible": $visible, value: displayValue, onChange, id: PPUtils.asId(PPUtils.absolute($p2r, $pp), props.id), ref: inputRef });
+  const displayValue = hasMask ? void 0 : stringifyInputValue({
+    $model,
+    $pp,
+    value: valueRef.current.value
+  });
+  return React.createElement(AnInput, {
+    ...rest,
+    autoSelect,
+    disabled: $disabled,
+    "data-disabled": $disabled,
+    "data-visible": $visible,
+    value: displayValue,
+    onChange,
+    id: PPUtils.asId(PPUtils.absolute($p2r, $pp), props.id),
+    ref: inputRef
+  });
 });
 const NumberInput = reactExports.forwardRef((props, ref) => {
-  const { format, grouping = false, ...rest } = props;
+  const {
+    format,
+    grouping = false,
+    ...rest
+  } = props;
   useLanguage();
   let mask = void 0;
   if (VUtils.isNotBlank(format)) {
     mask = () => {
       if (typeof format === "function") {
-        return { ...MaskedNumber.DEFAULTS, ...format() };
+        return {
+          ...MaskedNumber.DEFAULTS,
+          ...format()
+        };
       } else {
-        return { ...MaskedNumber.DEFAULTS, ...format };
+        return {
+          ...MaskedNumber.DEFAULTS,
+          ...format
+        };
       }
     };
   } else if (grouping) {
     const [groupingSeparator, decimalSeparator] = detectNumberFormat(locale());
-    mask = () => ({ ...MaskedNumber.DEFAULTS, thousandsSeparator: groupingSeparator, radix: decimalSeparator });
+    mask = () => ({
+      ...MaskedNumber.DEFAULTS,
+      thousandsSeparator: groupingSeparator,
+      radix: decimalSeparator
+    });
   }
-  return React.createElement(Input, { ...rest, mask, "data-number": true, valueToNumber: true, ref });
+  return React.createElement(Input, {
+    ...rest,
+    mask,
+    "data-number": true,
+    valueToNumber: true,
+    ref
+  });
 });
 const PasswordInput = reactExports.forwardRef((props, ref) => {
-  return React.createElement(Input, { ...props, type: "password", valueToNumber: false, ref });
+  return React.createElement(Input, {
+    ...props,
+    type: "password",
+    valueToNumber: false,
+    ref
+  });
 });
-registerWidget({ key: "Number", JSX: NumberInput, container: false, array: false });
-registerWidget({ key: "Input", JSX: Input, container: false, array: false });
-registerWidget({ key: "Pwd", JSX: PasswordInput, container: false, array: false });
-const DecorateInputContainer = qe.div.attrs(({ id }) => {
+registerWidget({
+  key: "Number",
+  JSX: NumberInput,
+  container: false,
+  array: false
+});
+registerWidget({
+  key: "Input",
+  JSX: Input,
+  container: false,
+  array: false
+});
+registerWidget({
+  key: "Pwd",
+  JSX: PasswordInput,
+  container: false,
+  array: false
+});
+const DecorateInputContainer = qe.div.attrs(({
+  id
+}) => {
   return {
     [DOM_KEY_WIDGET]: "d9-deco-input",
     [DOM_ID_WIDGET]: VUtils.isBlank(id) ? void 0 : id
@@ -2797,7 +3510,9 @@ const TailDecorator = qe(Decorator).attrs({
         border-bottom-right-radius: ${CssVars.BORDER_RADIUS};
     }
 `;
-const Placeholder = qe.span.attrs({ [DOM_KEY_WIDGET]: "d9-deco-input-placeholder" })`
+const Placeholder = qe.span.attrs({
+  [DOM_KEY_WIDGET]: "d9-deco-input-placeholder"
+})`
     display: flex;
     position: absolute;
     align-items: center;
@@ -2809,7 +3524,14 @@ const Placeholder = qe.span.attrs({ [DOM_KEY_WIDGET]: "d9-deco-input-placeholder
     z-index: 2;
 `;
 const Decorate = reactExports.forwardRef((props, forwardedRef) => {
-  const { id, placeholder, leads, tails, children, ...rest } = props;
+  const {
+    id,
+    placeholder,
+    leads,
+    tails,
+    children,
+    ...rest
+  } = props;
   const ref = reactExports.useRef(null);
   useDualRefs(ref, forwardedRef);
   reactExports.useEffect(() => {
@@ -2820,28 +3542,41 @@ const Decorate = reactExports.forwardRef((props, forwardedRef) => {
     if (node == null) {
       return;
     }
-    const { left: containerLeft } = ref.current.getBoundingClientRect();
+    const {
+      left: containerLeft
+    } = ref.current.getBoundingClientRect();
     const input = ref.current.querySelector("input");
-    const { left, width, height } = input.getBoundingClientRect();
-    const { borderTopWidth, borderBottomWidth, borderLeftWidth, borderRightWidth } = window.getComputedStyle(input);
+    const {
+      left,
+      width,
+      height
+    } = input.getBoundingClientRect();
+    const {
+      borderTopWidth,
+      borderBottomWidth,
+      borderLeftWidth,
+      borderRightWidth
+    } = window.getComputedStyle(input);
     node.style.top = `${Number((borderTopWidth ?? "0").replace("px", ""))}px`;
     node.style.left = `${left - containerLeft + Number((borderLeftWidth ?? "0").replace("px", ""))}px`;
     node.style.width = `${width - Number((borderLeftWidth ?? "0").replace("px", "")) - Number((borderRightWidth ?? "0").replace("px", ""))}px`;
     node.style.height = `${height - Number((borderTopWidth ?? "0").replace("px", "")) - Number((borderBottomWidth ?? "0").replace("px", ""))}px`;
   });
   const hasPlaceholder = VUtils.isNotBlank(placeholder);
-  return React.createElement(
-    DecorateInputContainer,
-    { id: VUtils.isBlank(id) ? void 0 : `di-${id}`, "data-placeholder": hasPlaceholder, ...rest, ref },
-    transformDecorators(leads).map((lead, index) => {
-      return React.createElement(LeadDecorator, { key: index }, lead);
-    }),
-    children,
-    hasPlaceholder ? React.createElement(Placeholder, null, toIntlLabel((placeholder ?? "").trim())) : null,
-    transformDecorators(tails).map((tail, index) => {
-      return React.createElement(TailDecorator, { key: index }, tail);
-    })
-  );
+  return React.createElement(DecorateInputContainer, {
+    id: VUtils.isBlank(id) ? void 0 : `di-${id}`,
+    "data-placeholder": hasPlaceholder,
+    ...rest,
+    ref
+  }, transformDecorators(leads).map((lead, index) => {
+    return React.createElement(LeadDecorator, {
+      key: index
+    }, lead);
+  }), children, hasPlaceholder ? React.createElement(Placeholder, null, toIntlLabel((placeholder ?? "").trim())) : null, transformDecorators(tails).map((tail, index) => {
+    return React.createElement(TailDecorator, {
+      key: index
+    }, tail);
+  }));
 });
 const askDecorateAttrs = (props, rest) => {
   const deviceTags = MBUtils.pickDeviceTags(props);
@@ -2858,15 +3593,35 @@ const askDecorateAttrs = (props, rest) => {
     }
     return attrs;
   }, {});
-  return { tags: deviceTags, attrs: decorateAttrs };
+  return {
+    tags: deviceTags,
+    attrs: decorateAttrs
+  };
 };
 const DecorateInput = reactExports.forwardRef((props, ref) => {
-  const { placeholder, leads, tails, className, style, ...rest } = props;
-  const { $wrapped: { $p2r } } = rest;
-  const { tags: deviceTags, attrs: decorateAttrs } = askDecorateAttrs(props, rest);
+  const {
+    placeholder,
+    leads,
+    tails,
+    className,
+    style,
+    ...rest
+  } = props;
+  const {
+    $wrapped: {
+      $p2r
+    }
+  } = rest;
+  const {
+    tags: deviceTags,
+    attrs: decorateAttrs
+  } = askDecorateAttrs(props, rest);
   const decorateRef = reactExports.useRef(null);
   useDualRefs(decorateRef, ref);
-  useTip({ ref: decorateRef, prefix: "data-di" });
+  useTip({
+    ref: decorateRef,
+    prefix: "data-di"
+  });
   const computePlaceholder = () => {
     if (VUtils.isBlank(placeholder)) {
       return void 0;
@@ -2876,19 +3631,47 @@ const DecorateInput = reactExports.forwardRef((props, ref) => {
     }
     return placeholder;
   };
-  return React.createElement(
-    Decorate,
-    { ...deviceTags, ...decorateAttrs, placeholder: computePlaceholder(), leads, tails, className, style, id: PPUtils.asId(PPUtils.absolute($p2r, props.$pp), props.id), ref: decorateRef },
-    React.createElement(Input, { ...rest })
-  );
+  return React.createElement(Decorate, {
+    ...deviceTags,
+    ...decorateAttrs,
+    placeholder: computePlaceholder(),
+    leads,
+    tails,
+    className,
+    style,
+    id: PPUtils.asId(PPUtils.absolute($p2r, props.$pp), props.id),
+    ref: decorateRef
+  }, React.createElement(Input, {
+    ...rest
+  }));
 });
 const DecorateNumberInput = reactExports.forwardRef((props, ref) => {
-  const { placeholder, leads, tails, className, style, ...rest } = props;
-  const { $pp, $wrapped: { $p2r, $model, $onValueChange } } = rest;
-  const { tags: deviceTags, attrs: decorateAttrs } = askDecorateAttrs(props, rest);
+  const {
+    placeholder,
+    leads,
+    tails,
+    className,
+    style,
+    ...rest
+  } = props;
+  const {
+    $pp,
+    $wrapped: {
+      $p2r,
+      $model,
+      $onValueChange
+    }
+  } = rest;
+  const {
+    tags: deviceTags,
+    attrs: decorateAttrs
+  } = askDecorateAttrs(props, rest);
   const decorateRef = reactExports.useRef(null);
   useDualRefs(decorateRef, ref);
-  useTip({ ref: decorateRef, prefix: "data-di" });
+  useTip({
+    ref: decorateRef,
+    prefix: "data-di"
+  });
   const [omitPlaceholder, setOmitPlaceholder] = reactExports.useState(() => {
     return VUtils.isNotEmpty(MUtils.getValue($model, $pp));
   });
@@ -2905,54 +3688,180 @@ const DecorateNumberInput = reactExports.forwardRef((props, ref) => {
     setOmitPlaceholder(VUtils.isNotEmpty(newValue));
     $onValueChange(newValue, doForceUpdate, ...args);
   };
-  return React.createElement(
-    Decorate,
-    { ...deviceTags, ...decorateAttrs, placeholder: computePlaceholder(), leads, tails, className, style, id: PPUtils.asId(PPUtils.absolute($p2r, props.$pp), props.id), ref: decorateRef },
-    React.createElement(NumberInput, { ...rest })
-  );
+  return React.createElement(Decorate, {
+    ...deviceTags,
+    ...decorateAttrs,
+    placeholder: computePlaceholder(),
+    leads,
+    tails,
+    className,
+    style,
+    id: PPUtils.asId(PPUtils.absolute($p2r, props.$pp), props.id),
+    ref: decorateRef
+  }, React.createElement(NumberInput, {
+    ...rest
+  }));
 });
 const DecoratePasswordInput = reactExports.forwardRef((props, ref) => {
-  const { placeholder, leads, tails, className, style, ...rest } = props;
-  const { $wrapped: { $p2r } } = rest;
-  const { tags: deviceTags, attrs: decorateAttrs } = askDecorateAttrs(props, rest);
+  const {
+    placeholder,
+    leads,
+    tails,
+    className,
+    style,
+    ...rest
+  } = props;
+  const {
+    $wrapped: {
+      $p2r
+    }
+  } = rest;
+  const {
+    tags: deviceTags,
+    attrs: decorateAttrs
+  } = askDecorateAttrs(props, rest);
   const decorateRef = reactExports.useRef(null);
   useDualRefs(decorateRef, ref);
-  useTip({ ref: decorateRef, prefix: "data-di" });
-  return React.createElement(
-    Decorate,
-    { ...deviceTags, ...decorateAttrs, placeholder, leads, tails, className, style, id: PPUtils.asId(PPUtils.absolute($p2r, props.$pp), props.id), ref: decorateRef },
-    React.createElement(PasswordInput, { ...rest })
-  );
+  useTip({
+    ref: decorateRef,
+    prefix: "data-di"
+  });
+  return React.createElement(Decorate, {
+    ...deviceTags,
+    ...decorateAttrs,
+    placeholder,
+    leads,
+    tails,
+    className,
+    style,
+    id: PPUtils.asId(PPUtils.absolute($p2r, props.$pp), props.id),
+    ref: decorateRef
+  }, React.createElement(PasswordInput, {
+    ...rest
+  }));
 });
-registerWidget({ key: "DecoInput", JSX: DecorateInput, container: false, array: false });
-registerWidget({ key: "DecoNumber", JSX: DecorateNumberInput, container: false, array: false });
-registerWidget({ key: "DecoPwd", JSX: DecoratePasswordInput, container: false, array: false });
+registerWidget({
+  key: "DecoInput",
+  JSX: DecorateInput,
+  container: false,
+  array: false
+});
+registerWidget({
+  key: "DecoNumber",
+  JSX: DecorateNumberInput,
+  container: false,
+  array: false
+});
+registerWidget({
+  key: "DecoPwd",
+  JSX: DecoratePasswordInput,
+  container: false,
+  array: false
+});
 const UnwrappedDecorateInput = reactExports.forwardRef((props, ref) => {
-  const { $pp = "value", value, onValueChange, disabled, visible, ...rest } = props;
+  const {
+    $pp = "value",
+    value,
+    onValueChange,
+    disabled,
+    visible,
+    ...rest
+  } = props;
   const $onValueChange = onValueChange;
-  const $avs = { $disabled: disabled, $visible: visible };
-  const $root = { [$pp]: value };
-  return React.createElement(DecorateInput, { ...rest, "$wrapped": { $onValueChange, $avs, $root, $model: $root, $p2r: "." }, "$pp": $pp, id: rest.id ?? VUtils.generateUniqueId(), ref });
+  const $avs = {
+    $disabled: disabled,
+    $visible: visible
+  };
+  const $root = {
+    [$pp]: value
+  };
+  return React.createElement(DecorateInput, {
+    ...rest,
+    "$wrapped": {
+      $onValueChange,
+      $avs,
+      $root,
+      $model: $root,
+      $p2r: "."
+    },
+    "$pp": $pp,
+    id: rest.id ?? VUtils.generateUniqueId(),
+    ref
+  });
 });
 reactExports.forwardRef((props, ref) => {
-  const { $pp = "value", value, onValueChange, disabled, visible, ...rest } = props;
+  const {
+    $pp = "value",
+    value,
+    onValueChange,
+    disabled,
+    visible,
+    ...rest
+  } = props;
   const $onValueChange = onValueChange;
-  const $avs = { $disabled: disabled, $visible: visible };
-  const $root = { [$pp]: value };
-  return React.createElement(DecorateNumberInput, { ...rest, "$wrapped": { $onValueChange, $avs, $root, $model: $root, $p2r: "." }, "$pp": $pp, id: rest.id ?? VUtils.generateUniqueId(), ref });
+  const $avs = {
+    $disabled: disabled,
+    $visible: visible
+  };
+  const $root = {
+    [$pp]: value
+  };
+  return React.createElement(DecorateNumberInput, {
+    ...rest,
+    "$wrapped": {
+      $onValueChange,
+      $avs,
+      $root,
+      $model: $root,
+      $p2r: "."
+    },
+    "$pp": $pp,
+    id: rest.id ?? VUtils.generateUniqueId(),
+    ref
+  });
 });
 reactExports.forwardRef((props, ref) => {
-  const { $pp = "value", value, onValueChange, disabled, visible, ...rest } = props;
+  const {
+    $pp = "value",
+    value,
+    onValueChange,
+    disabled,
+    visible,
+    ...rest
+  } = props;
   const $onValueChange = onValueChange;
-  const $avs = { $disabled: disabled, $visible: visible };
-  const $root = { [$pp]: value };
-  return React.createElement(DecoratePasswordInput, { ...rest, "$wrapped": { $onValueChange, $avs, $root, $model: $root, $p2r: "." }, "$pp": $pp, id: rest.id ?? VUtils.generateUniqueId(), ref });
+  const $avs = {
+    $disabled: disabled,
+    $visible: visible
+  };
+  const $root = {
+    [$pp]: value
+  };
+  return React.createElement(DecoratePasswordInput, {
+    ...rest,
+    "$wrapped": {
+      $onValueChange,
+      $avs,
+      $root,
+      $model: $root,
+      $p2r: "."
+    },
+    "$pp": $pp,
+    id: rest.id ?? VUtils.generateUniqueId(),
+    ref
+  });
 });
-const ATree = qe.div.attrs(({ id, [DOM_KEY_WIDGET]: dataW, height }) => {
+const ATree = qe.div.attrs(({
+  id,
+  [DOM_KEY_WIDGET]: dataW,
+  height
+}) => {
   return {
     [DOM_KEY_WIDGET]: dataW || "d9-tree",
     [DOM_ID_WIDGET]: id,
-    style: { "--height": toCssSize(height) }
+    style: {
+      "--height": toCssSize(height)
+    }
   };
 })`
     display: flex;
@@ -3024,17 +3933,23 @@ const TreeContentContainer = qe.div.attrs({
     border-bottom-right-radius: ${CssVars.BORDER_RADIUS};
     overflow: auto;
 `;
-const TreeNodeWrapper = qe.div.attrs({ [DOM_KEY_WIDGET]: "d9-tree-node-wrapper" })`
+const TreeNodeWrapper = qe.div.attrs({
+  [DOM_KEY_WIDGET]: "d9-tree-node-wrapper"
+})`
     display: flex;
     position: relative;
     flex-direction: column;
 
     &[data-last-of-parent=false]:after {
         content: '';
-        display: ${({ level }) => level === 0 ? "none" : "block"};
+        display: ${({
+  level
+}) => level === 0 ? "none" : "block"};
         position: absolute;
         top: 0;
-        left: ${({ level }) => 13.5 + 20 * (level - 1)}px;
+        left: ${({
+  level
+}) => 13.5 + 20 * (level - 1)}px;
         width: 1px;
         height: 100%;
         background-color: ${CssVars.TREE_LINE_COLOR};
@@ -3045,16 +3960,22 @@ const TreeNode$1 = qe.div.attrs({})`
     position: relative;
     height: ${CssVars.INPUT_HEIGHT};
     min-height: ${CssVars.INPUT_HEIGHT};
-    padding-left: ${({ level }) => 20 * level}px;
+    padding-left: ${({
+  level
+}) => 20 * level}px;
     align-items: center;
     white-space: nowrap;
 
     &:before {
         content: '';
-        display: ${({ level }) => level === 0 ? "none" : "block"};
+        display: ${({
+  level
+}) => level === 0 ? "none" : "block"};
         position: absolute;
         top: 0;
-        left: ${({ level }) => 13.5 + 20 * (level - 1)}px;
+        left: ${({
+  level
+}) => 13.5 + 20 * (level - 1)}px;
         width: 8px;
         height: 50%;
         border-left: 1px solid ${CssVars.TREE_LINE_COLOR};
@@ -3062,7 +3983,9 @@ const TreeNode$1 = qe.div.attrs({})`
         border-bottom-left-radius: 4px;
     }
 `;
-const TreeNodeContainer = qe(TreeNode$1).attrs({ [DOM_KEY_WIDGET]: "d9-tree-node-container" })`
+const TreeNodeContainer = qe(TreeNode$1).attrs({
+  [DOM_KEY_WIDGET]: "d9-tree-node-container"
+})`
     cursor: pointer;
 
     &[data-expanded=true] {
@@ -3075,7 +3998,10 @@ const TreeNodeContainer = qe(TreeNode$1).attrs({ [DOM_KEY_WIDGET]: "d9-tree-node
         display: none;
     }
 `;
-const TreeNodeOperators = qe.div.attrs(({ top, right }) => {
+const TreeNodeOperators = qe.div.attrs(({
+  top,
+  right
+}) => {
   return {
     [DOM_KEY_WIDGET]: "d9-tree-node-operators",
     style: {
@@ -3159,7 +4085,9 @@ const TreeNodeOperators = qe.div.attrs(({ top, right }) => {
         }
     }
 `;
-const TreeNodeContent = qe.span.attrs({ [DOM_KEY_WIDGET]: "d9-tree-node-content" })`
+const TreeNodeContent = qe.span.attrs({
+  [DOM_KEY_WIDGET]: "d9-tree-node-content"
+})`
     display: flex;
     position: relative;
     flex-grow: 1;
@@ -3176,7 +4104,9 @@ const TreeNodeContent = qe.span.attrs({ [DOM_KEY_WIDGET]: "d9-tree-node-content"
         opacity: 0.7;
     }
 `;
-const TreeNodeToggle = qe.span.attrs({ [DOM_KEY_WIDGET]: "d9-tree-node-toggle" })`
+const TreeNodeToggle = qe.span.attrs({
+  [DOM_KEY_WIDGET]: "d9-tree-node-toggle"
+})`
     display: inline-block;
     width: 28px;
     height: 28px;
@@ -3194,7 +4124,9 @@ const TreeNodeToggle = qe.span.attrs({ [DOM_KEY_WIDGET]: "d9-tree-node-toggle" }
         transition: transform ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION};
     }
 `;
-const TreeNodeIndex = qe.span.attrs({ [DOM_KEY_WIDGET]: "d9-tree-node-index" })`
+const TreeNodeIndex = qe.span.attrs({
+  [DOM_KEY_WIDGET]: "d9-tree-node-index"
+})`
     display: flex;
     position: relative;
     align-items: center;
@@ -3206,7 +4138,9 @@ const TreeNodeIndex = qe.span.attrs({ [DOM_KEY_WIDGET]: "d9-tree-node-index" })`
         padding-left: 9px;
     }
 `;
-const TreeNodeLabel = qe.span.attrs({ [DOM_KEY_WIDGET]: "d9-tree-node-label" })`
+const TreeNodeLabel = qe.span.attrs({
+  [DOM_KEY_WIDGET]: "d9-tree-node-label"
+})`
     display: flex;
     position: relative;
     align-items: center;
@@ -3216,7 +4150,11 @@ const TreeNodeLabel = qe.span.attrs({ [DOM_KEY_WIDGET]: "d9-tree-node-label" })`
         padding-left: 9px;
     }
 `;
-const TreeHoverShade = qe.div.attrs(({ top, height, visible }) => {
+const TreeHoverShade = qe.div.attrs(({
+  top,
+  height,
+  visible
+}) => {
   return {
     [DOM_KEY_WIDGET]: "d9-tree-node-hover-shade",
     style: {
@@ -3238,8 +4176,14 @@ const TreeHoverShade = qe.div.attrs(({ top, height, visible }) => {
     z-index: -1;
 `;
 const useTreeNodeExpand = (ref, state) => {
-  const { fire: fireTree } = useTreeEventBus();
-  const { on, off, fire } = useTreeNodeEventBus();
+  const {
+    fire: fireTree
+  } = useTreeEventBus();
+  const {
+    on,
+    off,
+    fire
+  } = useTreeNodeEventBus();
   const forceUpdate = useForceUpdate();
   reactExports.useEffect(() => {
     const onSwitchExpand = (fromMyself) => (marker, expanded, locateToMarker) => {
@@ -3266,9 +4210,15 @@ const useTreeNodeExpand = (ref, state) => {
                 tryToScroll();
               } else {
                 const wrapper = ref.current.closest("div[data-w=d9-tree-node-wrapper]");
-                const { top, height } = wrapper.getBoundingClientRect();
+                const {
+                  top,
+                  height
+                } = wrapper.getBoundingClientRect();
                 const treeContainer = wrapper.closest("div[data-w=d9-tree-content-container]");
-                const { top: treeTop, height: treeHeight } = treeContainer.getBoundingClientRect();
+                const {
+                  top: treeTop,
+                  height: treeHeight
+                } = treeContainer.getBoundingClientRect();
                 if (top + height < treeTop + treeHeight)
                   ;
                 else if (height > treeHeight) {
@@ -3303,7 +4253,11 @@ const useTreeNodeExpand = (ref, state) => {
   }, [on, off, fire, fireTree, forceUpdate, ref, state]);
 };
 const useTreeNodeCheckedChanged = () => {
-  const { on, off, fire } = useTreeNodeEventBus();
+  const {
+    on,
+    off,
+    fire
+  } = useTreeNodeEventBus();
   const forceUpdate = useForceUpdate();
   reactExports.useEffect(() => {
     const onSwitchMyChecked = (marker, checked) => {
@@ -3324,15 +4278,37 @@ const useTreeNodeCheckedChanged = () => {
   }, [on, off, fire, forceUpdate]);
 };
 const TreeNodeRenderer = (props) => {
-  const { initExpandLevel, showIndex, $wrapped, node, displayIndex, lastOfParent, level } = props;
+  const {
+    initExpandLevel,
+    showIndex,
+    $wrapped,
+    node,
+    displayIndex,
+    lastOfParent,
+    level
+  } = props;
   const ref = reactExports.useRef(null);
   const operatorsRef = reactExports.useRef(null);
   const expanded = reactExports.useRef(level <= initExpandLevel);
-  const { fire: fireGlobal } = useGlobalEventBus();
+  const {
+    fire: fireGlobal
+  } = useGlobalEventBus();
   const globalHandlers = useGlobalHandlers();
-  const { on: onTree, off: offTree, fire: fireTree } = useTreeEventBus();
-  const { on, off, fire } = useTreeNodeEventBus();
-  const [operators, setOperators] = reactExports.useState({ visible: false, top: 0, right: 0 });
+  const {
+    on: onTree,
+    off: offTree,
+    fire: fireTree
+  } = useTreeEventBus();
+  const {
+    on,
+    off,
+    fire
+  } = useTreeNodeEventBus();
+  const [operators, setOperators] = reactExports.useState({
+    visible: false,
+    top: 0,
+    right: 0
+  });
   useTreeNodeExpand(ref, expanded);
   useTreeNodeCheckedChanged();
   const forceUpdate = useForceUpdate();
@@ -3351,7 +4327,9 @@ const TreeNodeRenderer = (props) => {
       if (node.marker !== marker) {
         return;
       }
-      (_a = ref.current) == null ? void 0 : _a.scrollIntoView({ behavior: "smooth" });
+      (_a = ref.current) == null ? void 0 : _a.scrollIntoView({
+        behavior: "smooth"
+      });
     };
     onTree(TreeEventTypes.SCROLL_NODE_INTO_VIEW, onScrollNodeIntoView);
     return () => {
@@ -3366,7 +4344,9 @@ const TreeNodeRenderer = (props) => {
   const onEntityClicked = (event) => {
     event.preventDefault();
     event.stopPropagation();
-    node.click && node.click(node, { global: globalHandlers });
+    node.click && node.click(node, {
+      global: globalHandlers
+    });
     const clipped = node.marker;
     const key = `${GlobalEventPrefix.TREE_NODE_CLICKED}:${clipped}`;
     fireGlobal && fireGlobal(GlobalEventTypes.CUSTOM_EVENT, key, GlobalEventPrefix.TREE_NODE_CLICKED, clipped, {
@@ -3378,7 +4358,9 @@ const TreeNodeRenderer = (props) => {
   const onEntityDoubleClicked = (event) => {
     event.preventDefault();
     event.stopPropagation();
-    node.dblClick && node.dblClick(node, { global: globalHandlers });
+    node.dblClick && node.dblClick(node, {
+      global: globalHandlers
+    });
     const clipped = node.marker;
     const key = `${GlobalEventPrefix.TREE_NODE_DOUBLE_CLICKED}:${clipped}`;
     fireGlobal && fireGlobal(GlobalEventTypes.CUSTOM_EVENT, key, GlobalEventPrefix.TREE_NODE_DOUBLE_CLICKED, clipped, {
@@ -3390,7 +4372,9 @@ const TreeNodeRenderer = (props) => {
   const onEntityContextMenu = (event) => {
     event.preventDefault();
     event.stopPropagation();
-    node.contextMenu && node.contextMenu(node, { global: globalHandlers }, event);
+    node.contextMenu && node.contextMenu(node, {
+      global: globalHandlers
+    }, event);
     const clipped = node.marker;
     const key = `${GlobalEventPrefix.TREE_NODE_CONTEXT_MENU}:${clipped}`;
     fireGlobal && fireGlobal(GlobalEventTypes.CUSTOM_EVENT, key, GlobalEventPrefix.TREE_NODE_CONTEXT_MENU, clipped, {
@@ -3400,15 +4384,28 @@ const TreeNodeRenderer = (props) => {
     });
   };
   const onMouseEnter = () => {
-    const { top: treeTop, left: treeLeft, width: treeWidth } = ref.current.closest("div[data-w=d9-tree]").getBoundingClientRect();
-    const { top, height } = ref.current.getBoundingClientRect();
+    const {
+      top: treeTop,
+      left: treeLeft,
+      width: treeWidth
+    } = ref.current.closest("div[data-w=d9-tree]").getBoundingClientRect();
+    const {
+      top,
+      height
+    } = ref.current.getBoundingClientRect();
     fireTree(TreeEventTypes.SHOW_HOVER_BOX, top - treeTop, height);
     if (!hasOperators || operators.visible) {
       return;
     }
-    const { height: operatorsHeight } = operatorsRef.current.getBoundingClientRect();
+    const {
+      height: operatorsHeight
+    } = operatorsRef.current.getBoundingClientRect();
     if (top - operatorsHeight < treeTop) {
-      setOperators({ visible: true, top: top + height, right: window.innerWidth - (treeLeft + treeWidth) });
+      setOperators({
+        visible: true,
+        top: top + height,
+        right: window.innerWidth - (treeLeft + treeWidth)
+      });
     } else {
       setOperators({
         visible: true,
@@ -3422,14 +4419,22 @@ const TreeNodeRenderer = (props) => {
     if (!hasOperators) {
       return;
     }
-    setOperators((state) => ({ ...state, visible: false }));
+    setOperators((state) => ({
+      ...state,
+      visible: false
+    }));
   };
   const onAddClicked = async (event) => {
     event.preventDefault();
     event.stopPropagation();
-    setOperators((state) => ({ ...state, visible: false }));
+    setOperators((state) => ({
+      ...state,
+      visible: false
+    }));
     try {
-      const added = await node.add(node, { global: globalHandlers });
+      const added = await node.add(node, {
+        global: globalHandlers
+      });
       if (added == null) {
         fire(TreeNodeEventTypes.CHILD_ADDED, node.marker);
       } else if (Array.isArray(added)) {
@@ -3450,9 +4455,14 @@ const TreeNodeRenderer = (props) => {
   const onRemoveClicked = async (event) => {
     event.preventDefault();
     event.stopPropagation();
-    setOperators((state) => ({ ...state, visible: false }));
+    setOperators((state) => ({
+      ...state,
+      visible: false
+    }));
     try {
-      await node.remove(node, { global: globalHandlers });
+      await node.remove(node, {
+        global: globalHandlers
+      });
       fire(TreeNodeEventTypes.NODE_REMOVED, node.marker, node);
     } catch {
     }
@@ -3466,55 +4476,67 @@ const TreeNodeRenderer = (props) => {
     checked = node.checked(node);
     check = node.check;
     onCheckValueChanged = async (value) => {
-      await check(node, value, TreeNodeCheckedChangeFrom.FROM_SELF, { global: globalHandlers });
+      await check(node, value, TreeNodeCheckedChangeFrom.FROM_SELF, {
+        global: globalHandlers
+      });
       fire && fire(TreeNodeEventTypes.SWITCH_MY_CHECKED, node.marker, value);
     };
   }
   const addable = (node.addable ?? false) && node.add != null;
   const removable = (node.removable ?? false) && node.remove != null;
   const hasOperators = addable || removable;
-  const label = React.createElement(
-    TreeNodeLabel,
-    null,
-    checkable ? React.createElement(UnwrappedCheckbox, { "$pp": NUtils.generateReactKey(), value: checked, onValueChange: onCheckValueChanged, "data-tree-node-check": true }) : null,
-    React.createElement(LabelLike, { "$wrapped": { ...$wrapped, $model: node.value, $p2r }, label: node.label })
-  );
+  const label = React.createElement(TreeNodeLabel, null, checkable ? React.createElement(UnwrappedCheckbox, {
+    "$pp": NUtils.generateReactKey(),
+    value: checked,
+    onValueChange: onCheckValueChanged,
+    "data-tree-node-check": true
+  }) : null, React.createElement(LabelLike, {
+    "$wrapped": {
+      ...$wrapped,
+      $model: node.value,
+      $p2r
+    },
+    label: node.label
+  }));
   const children = node.$displayChildren ?? node.$children ?? [];
-  return React.createElement(
-    TreeNodeContainer,
-    { "data-expanded": expanded.current, "data-last-of-parent": lastOfParent, level, onClick: onEntityClicked, onDoubleClick: onEntityDoubleClicked, onContextMenu: onEntityContextMenu, onMouseEnter, onMouseLeave, ref },
-    hasOperators ? React.createElement(
-      TreeNodeOperators,
-      { "data-visible": operators.visible, top: operators.top, right: operators.right, ref: operatorsRef },
-      addable ? React.createElement(UnwrappedButton, { onClick: onAddClicked, leads: ["$icons.plus"], ink: ButtonInk.PRIMARY, fill: ButtonFill.FILL }) : null,
-      removable ? React.createElement(UnwrappedButton, { onClick: onRemoveClicked, leads: ["$icons.xmark"], ink: ButtonInk.PRIMARY, fill: ButtonFill.FILL }) : null
-    ) : null,
-    React.createElement(
-      TreeNodeContent,
-      null,
-      children.length !== 0 ? React.createElement(
-        TreeNodeToggle,
-        { "data-expanded": expanded.current, onClick: onToggleClicked },
-        React.createElement(AngleRight, null)
-      ) : null,
-      showIndex && VUtils.isNotBlank(displayIndex) ? React.createElement(
-        React.Fragment,
-        null,
-        React.createElement(
-          TreeNodeIndex,
-          null,
-          "# ",
-          displayIndex,
-          "."
-        ),
-        label
-      ) : label
-    )
-  );
+  return React.createElement(TreeNodeContainer, {
+    "data-expanded": expanded.current,
+    "data-last-of-parent": lastOfParent,
+    level,
+    onClick: onEntityClicked,
+    onDoubleClick: onEntityDoubleClicked,
+    onContextMenu: onEntityContextMenu,
+    onMouseEnter,
+    onMouseLeave,
+    ref
+  }, hasOperators ? React.createElement(TreeNodeOperators, {
+    "data-visible": operators.visible,
+    top: operators.top,
+    right: operators.right,
+    ref: operatorsRef
+  }, addable ? React.createElement(UnwrappedButton, {
+    onClick: onAddClicked,
+    leads: ["$icons.plus"],
+    ink: ButtonInk.PRIMARY,
+    fill: ButtonFill.FILL
+  }) : null, removable ? React.createElement(UnwrappedButton, {
+    onClick: onRemoveClicked,
+    leads: ["$icons.xmark"],
+    ink: ButtonInk.PRIMARY,
+    fill: ButtonFill.FILL
+  }) : null) : null, React.createElement(TreeNodeContent, null, children.length !== 0 ? React.createElement(TreeNodeToggle, {
+    "data-expanded": expanded.current,
+    onClick: onToggleClicked
+  }, React.createElement(AngleRight, null)) : null, showIndex && VUtils.isNotBlank(displayIndex) ? React.createElement(React.Fragment, null, React.createElement(TreeNodeIndex, null, "# ", displayIndex, "."), label) : label));
 };
 const useRefreshTreeNode = (node, $wrapped) => {
-  const { fire } = useTreeNodeEventBus();
-  const { on: onGlobal, off: offGlobal } = useGlobalEventBus();
+  const {
+    fire
+  } = useTreeNodeEventBus();
+  const {
+    on: onGlobal,
+    off: offGlobal
+  } = useGlobalEventBus();
   reactExports.useEffect(() => {
     const onCustomEvent = (_, prefix, clipped) => {
       if (clipped !== node.marker) {
@@ -3553,33 +4575,78 @@ const useRefreshTreeNode = (node, $wrapped) => {
   }, [onGlobal, offGlobal, fire, node, $wrapped]);
 };
 const TreeNodeRefresher = (props) => {
-  const { node, $wrapped } = props;
+  const {
+    node,
+    $wrapped
+  } = props;
   useRefreshTreeNode(node, $wrapped);
   return React.createElement(reactExports.Fragment, null);
 };
 const TreeNode = (props) => {
-  const { initExpandLevel, showIndex, detect, $wrapped, node, displayIndex, lastOfParent, level } = props;
-  const { fire } = useTreeNodeEventBus();
+  const {
+    initExpandLevel,
+    showIndex,
+    detect,
+    $wrapped,
+    node,
+    displayIndex,
+    lastOfParent,
+    level
+  } = props;
+  const {
+    fire
+  } = useTreeNodeEventBus();
   const expandParent = (expanded) => fire && fire(TreeNodeEventTypes.SWITCH_MY_EXPAND_FROM_CHILD, node.marker, expanded);
   const nodeCheckedChanged = (checked) => fire && fire(TreeNodeEventTypes.SWITCH_MY_CHECKED_FROM_CHILD, node.marker, checked);
   const nodeRemoved = (removedNode) => fire && fire(TreeNodeEventTypes.REFRESH_CHILD_NODES_ON_REMOVED, node.marker, removedNode);
-  return React.createElement(
-    TreeNodeEventBusProvider,
-    null,
-    React.createElement(TreeNodeRefresher, { node, "$wrapped": $wrapped }),
-    React.createElement(TreeNodeEventBridge, { node, expandParent, nodeCheckedChanged, nodeRemoved }),
-    React.createElement(
-      TreeNodeWrapper,
-      { "data-last-of-parent": lastOfParent, level },
-      React.createElement(TreeNodeRenderer, { initExpandLevel, showIndex, "$wrapped": $wrapped, node, displayIndex, lastOfParent, level }),
-      React.createElement(ChildTreeNodes, { node, detect, initExpandLevel, level, showIndex, displayIndex, "$wrapped": $wrapped })
-    )
-  );
+  return React.createElement(TreeNodeEventBusProvider, null, React.createElement(TreeNodeRefresher, {
+    node,
+    "$wrapped": $wrapped
+  }), React.createElement(TreeNodeEventBridge, {
+    node,
+    expandParent,
+    nodeCheckedChanged,
+    nodeRemoved
+  }), React.createElement(TreeNodeWrapper, {
+    "data-last-of-parent": lastOfParent,
+    level
+  }, React.createElement(TreeNodeRenderer, {
+    initExpandLevel,
+    showIndex,
+    "$wrapped": $wrapped,
+    node,
+    displayIndex,
+    lastOfParent,
+    level
+  }), React.createElement(ChildTreeNodes, {
+    node,
+    detect,
+    initExpandLevel,
+    level,
+    showIndex,
+    displayIndex,
+    "$wrapped": $wrapped
+  })));
 };
 const ChildTreeNodes = (props) => {
-  const { node, displayChildren, initExpandLevel, level, showIndex, displayIndex, detect, $wrapped } = props;
-  const { fire: fireTree } = useTreeEventBus();
-  const { on, off, fire } = useTreeNodeEventBus();
+  const {
+    node,
+    displayChildren,
+    initExpandLevel,
+    level,
+    showIndex,
+    displayIndex,
+    detect,
+    $wrapped
+  } = props;
+  const {
+    fire: fireTree
+  } = useTreeEventBus();
+  const {
+    on,
+    off,
+    fire
+  } = useTreeNodeEventBus();
   const globalHandlers = useGlobalHandlers();
   const forceUpdate = useForceUpdate();
   reactExports.useEffect(() => {
@@ -3605,7 +4672,9 @@ const ChildTreeNodes = (props) => {
     };
     const onRefreshChildNodes = (_marker, redetect) => {
       if (redetect === true) {
-        node.$children = detect(node, { global: globalHandlers }) ?? [];
+        node.$children = detect(node, {
+          global: globalHandlers
+        }) ?? [];
       }
       recomputeDisplayChildren();
       forceUpdate();
@@ -3682,16 +4751,41 @@ const ChildTreeNodes = (props) => {
   return React.createElement(React.Fragment, null, children.map((child, index) => {
     const last = index === childrenCount - 1;
     const myDisplayIndex = VUtils.isBlank(displayIndex) ? `${index + 1}` : `${displayIndex}.${index + 1}`;
-    return React.createElement(TreeNode, { initExpandLevel, showIndex, detect, "$wrapped": $wrapped, node: child, displayIndex: myDisplayIndex, lastOfParent: last, level: level + 1, key: child.$ip2p });
+    return React.createElement(TreeNode, {
+      initExpandLevel,
+      showIndex,
+      detect,
+      "$wrapped": $wrapped,
+      node: child,
+      displayIndex: myDisplayIndex,
+      lastOfParent: last,
+      level: level + 1,
+      key: child.$ip2p
+    });
   }).filter((x) => x != null));
 };
 const NO_MATCHED_TREE_NODE = "__no_matched__";
 const TreeContentMouseStateHolder = () => {
-  const { on, off } = useTreeEventBus();
-  const [mouse, setMouse] = reactExports.useState({ x: 0, y: 0, inside: false });
+  const {
+    on,
+    off
+  } = useTreeEventBus();
+  const [mouse, setMouse] = reactExports.useState({
+    x: 0,
+    y: 0,
+    inside: false
+  });
   reactExports.useEffect(() => {
-    const onContentMouseMove = (x, y) => setMouse({ x, y, inside: true });
-    const onContentMouseLeave = () => setMouse({ x: 0, y: 0, inside: false });
+    const onContentMouseMove = (x, y) => setMouse({
+      x,
+      y,
+      inside: true
+    });
+    const onContentMouseLeave = () => setMouse({
+      x: 0,
+      y: 0,
+      inside: false
+    });
     const onAskMousePosition = (callback) => {
       if (mouse.inside) {
         callback(mouse.x, mouse.y);
@@ -3709,10 +4803,28 @@ const TreeContentMouseStateHolder = () => {
   return React.createElement(reactExports.Fragment, null);
 };
 const TreeContent = (props) => {
-  const { root, $pp, initExpandLevel, showIndex, noMatched = React.createElement(IntlLabel, { keys: ["tree", "node", "noMatched"], value: "No matched node." }), detect, $wrapped, refresh } = props;
-  const { $p2r } = $wrapped;
+  const {
+    root,
+    $pp,
+    initExpandLevel,
+    showIndex,
+    noMatched = React.createElement(IntlLabel, {
+      keys: ["tree", "node", "noMatched"],
+      value: "No matched node."
+    }),
+    detect,
+    $wrapped,
+    refresh
+  } = props;
+  const {
+    $p2r
+  } = $wrapped;
   const [filter, setFilter] = reactExports.useState("");
-  const { on, off, fire } = useTreeEventBus();
+  const {
+    on,
+    off,
+    fire
+  } = useTreeEventBus();
   reactExports.useEffect(() => {
     const onDiscardFilter = () => setFilter("");
     const onFilterChanged = (filter2) => setFilter(`${filter2 ?? ""}`.trim());
@@ -3763,11 +4875,19 @@ const TreeContent = (props) => {
       $ip2r: PPUtils.absolute($p2r, $pp),
       $ip2p: $pp
     };
-    return React.createElement(
-      TreeContentContainer,
-      null,
-      React.createElement(TreeNode, { initExpandLevel: 0, showIndex: false, detect, "$wrapped": { ...$wrapped, $p2r: node$p2r }, node: def, displayIndex: "0", lastOfParent: true, level: 0 })
-    );
+    return React.createElement(TreeContentContainer, null, React.createElement(TreeNode, {
+      initExpandLevel: 0,
+      showIndex: false,
+      detect,
+      "$wrapped": {
+        ...$wrapped,
+        $p2r: node$p2r
+      },
+      node: def,
+      displayIndex: "0",
+      lastOfParent: true,
+      level: 0
+    }));
   } else {
     const expandParent = VUtils.noop;
     const nodeCheckedChanged = VUtils.noop;
@@ -3784,32 +4904,59 @@ const TreeContent = (props) => {
         if (node == null) {
           return;
         }
-        const { top: treeTop } = node.closest("div[data-w=d9-tree]").getBoundingClientRect();
-        const { top, height } = node.getBoundingClientRect();
+        const {
+          top: treeTop
+        } = node.closest("div[data-w=d9-tree]").getBoundingClientRect();
+        const {
+          top,
+          height
+        } = node.getBoundingClientRect();
         fire(TreeEventTypes.SHOW_HOVER_BOX, top - treeTop, height);
       });
     };
-    return React.createElement(
-      TreeContentContainer,
-      { onMouseMove, onMouseLeave, onScroll },
-      React.createElement(TreeContentMouseStateHolder, null),
-      React.createElement(
-        TreeNodeEventBusProvider,
-        null,
-        React.createElement(TreeNodeEventBridge, { node: root, expandParent, nodeCheckedChanged, nodeRemoved: refresh }),
-        React.createElement(ChildTreeNodes, { node: root, displayChildren: root.$displayChildren, detect, initExpandLevel, level: -1, showIndex, displayIndex: "", "$wrapped": { ...$wrapped, $p2r: node$p2r } })
-      )
-    );
+    return React.createElement(TreeContentContainer, {
+      onMouseMove,
+      onMouseLeave,
+      onScroll
+    }, React.createElement(TreeContentMouseStateHolder, null), React.createElement(TreeNodeEventBusProvider, null, React.createElement(TreeNodeEventBridge, {
+      node: root,
+      expandParent,
+      nodeCheckedChanged,
+      nodeRemoved: refresh
+    }), React.createElement(ChildTreeNodes, {
+      node: root,
+      displayChildren: root.$displayChildren,
+      detect,
+      initExpandLevel,
+      level: -1,
+      showIndex,
+      displayIndex: "",
+      "$wrapped": {
+        ...$wrapped,
+        $p2r: node$p2r
+      }
+    })));
   }
 };
 const TreeHoverBox = () => {
-  const { on, off } = useTreeEventBus();
-  const [state, setState] = reactExports.useState({ visible: false });
+  const {
+    on,
+    off
+  } = useTreeEventBus();
+  const [state, setState] = reactExports.useState({
+    visible: false
+  });
   reactExports.useEffect(() => {
     const onShowHoverBox = (top, height) => {
-      setState({ visible: true, top, height });
+      setState({
+        visible: true,
+        top,
+        height
+      });
     };
-    const onHideHoverBox = () => setState({ visible: false });
+    const onHideHoverBox = () => setState({
+      visible: false
+    });
     on(TreeEventTypes.SHOW_HOVER_BOX, onShowHoverBox);
     on(TreeEventTypes.HIDE_HOVER_BOX, onHideHoverBox);
     return () => {
@@ -3817,13 +4964,26 @@ const TreeHoverBox = () => {
       off(TreeEventTypes.HIDE_HOVER_BOX, onHideHoverBox);
     };
   }, [on, off]);
-  return React.createElement(TreeHoverShade, { top: state.top ?? 0, height: state.height ?? 0, visible: state.visible });
+  return React.createElement(TreeHoverShade, {
+    top: state.top ?? 0,
+    height: state.height ?? 0,
+    visible: state.visible
+  });
 };
 const TreeSearchBox = (props) => {
-  const { disabled } = props;
+  const {
+    disabled
+  } = props;
   const ref = reactExports.useRef(null);
-  const { on, off, fire } = useTreeEventBus();
-  const [state, setState] = reactExports.useState({ value: "", visible: false });
+  const {
+    on,
+    off,
+    fire
+  } = useTreeEventBus();
+  const [state, setState] = reactExports.useState({
+    value: "",
+    visible: false
+  });
   reactExports.useEffect(() => {
     if (disabled) {
       return;
@@ -3832,14 +4992,20 @@ const TreeSearchBox = (props) => {
       if (state.visible) {
         return;
       }
-      setState({ value: "", visible: true });
+      setState({
+        value: "",
+        visible: true
+      });
     };
     const onHideSearchBox = () => {
       if (!state.visible) {
         return;
       }
       fire(TreeEventTypes.DISCARD_FILTER);
-      setState({ value: "", visible: false });
+      setState({
+        value: "",
+        visible: false
+      });
     };
     on(TreeEventTypes.OPEN_SEARCH_BOX, onOpenSearchBox);
     on(TreeEventTypes.HIDE_SEARCH_BOX, onHideSearchBox);
@@ -3860,14 +5026,27 @@ const TreeSearchBox = (props) => {
     }
   }, [disabled, state.visible]);
   const onValueChange = (value) => {
-    setState((state2) => ({ ...state2, value }));
+    setState((state2) => ({
+      ...state2,
+      value
+    }));
     fire(TreeEventTypes.FILTER_CHANGED, value);
   };
-  return React.createElement(TreeSearchInput, { visible: state.visible, value: state.value, onValueChange, leads: ["$icons.search"], placeholder: "tree.filter.placeholder", ref });
+  return React.createElement(TreeSearchInput, {
+    visible: state.visible,
+    value: state.value,
+    onValueChange,
+    leads: ["$icons.search"],
+    placeholder: "tree.filter.placeholder",
+    ref
+  });
 };
 const useMarker = () => {
   const markers = reactExports.useRef({});
-  const { on, off } = useTreeEventBus();
+  const {
+    on,
+    off
+  } = useTreeEventBus();
   const [funcs] = reactExports.useState(() => {
     const generate = (node) => {
       let marker = NUtils.generateReactKey();
@@ -3892,7 +5071,11 @@ const useMarker = () => {
         delete markers[node.marker];
       }
     };
-    return { generate, add, delete: deleteMarker };
+    return {
+      generate,
+      add,
+      delete: deleteMarker
+    };
   });
   reactExports.useEffect(() => {
     const onAskMarkerAdder = (callback) => callback(funcs.add);
@@ -3967,11 +5150,34 @@ const buildTreeNodesDetective = (detective, markers) => {
   };
 };
 const InternalTree = reactExports.forwardRef((props, ref) => {
-  const { $pp, initExpandLevel = -1, showIndex = false, detective, height = 300, marker, noMatched, disableSearchBox = false, children, $wrapped, ...rest } = props;
-  const { $p2r, $avs: { $disabled, $visible } } = $wrapped;
-  const { on, off } = useGlobalEventBus();
+  const {
+    $pp,
+    initExpandLevel = -1,
+    showIndex = false,
+    detective,
+    height = 300,
+    marker,
+    noMatched,
+    disableSearchBox = false,
+    children,
+    $wrapped,
+    ...rest
+  } = props;
+  const {
+    $p2r,
+    $avs: {
+      $disabled,
+      $visible
+    }
+  } = $wrapped;
+  const {
+    on,
+    off
+  } = useGlobalEventBus();
   const globalHandlers = useGlobalHandlers();
-  const { fire } = useTreeEventBus();
+  const {
+    fire
+  } = useTreeEventBus();
   const forceUpdate = useForceUpdate();
   reactExports.useEffect(() => {
     const onCustomEvent = (_, prefix, clipped) => {
@@ -4011,24 +5217,43 @@ const InternalTree = reactExports.forwardRef((props, ref) => {
     removable: false,
     marker
   };
-  rootNodeDef.$children = detect(rootNodeDef, { global: globalHandlers }) ?? [];
-  return React.createElement(
-    ATree,
-    { ...rest, "data-disabled": $disabled, "data-visible": $visible, height, id: PPUtils.asId(PPUtils.absolute($p2r, props.$pp), props.id), onKeyDown, tabIndex: disableSearchBox ? void 0 : 0, ref },
-    React.createElement(TreeHoverBox, null),
-    React.createElement(TreeSearchBox, { disabled: disableSearchBox }),
-    children,
-    React.createElement(TreeContent, { root: rootNodeDef, initExpandLevel, showIndex, noMatched, detect, "$pp": $pp, "$wrapped": $wrapped, refresh: () => forceUpdate() })
-  );
+  rootNodeDef.$children = detect(rootNodeDef, {
+    global: globalHandlers
+  }) ?? [];
+  return React.createElement(ATree, {
+    ...rest,
+    "data-disabled": $disabled,
+    "data-visible": $visible,
+    height,
+    id: PPUtils.asId(PPUtils.absolute($p2r, props.$pp), props.id),
+    onKeyDown,
+    tabIndex: disableSearchBox ? void 0 : 0,
+    ref
+  }, React.createElement(TreeHoverBox, null), React.createElement(TreeSearchBox, {
+    disabled: disableSearchBox
+  }), children, React.createElement(TreeContent, {
+    root: rootNodeDef,
+    initExpandLevel,
+    showIndex,
+    noMatched,
+    detect,
+    "$pp": $pp,
+    "$wrapped": $wrapped,
+    refresh: () => forceUpdate()
+  }));
 });
 const Tree = reactExports.forwardRef((props, ref) => {
-  return React.createElement(
-    TreeEventBusProvider,
-    null,
-    React.createElement(InternalTree, { ...props, ref })
-  );
+  return React.createElement(TreeEventBusProvider, null, React.createElement(InternalTree, {
+    ...props,
+    ref
+  }));
 });
-registerWidget({ key: "Tree", JSX: Tree, container: false, array: false });
+registerWidget({
+  key: "Tree",
+  JSX: Tree,
+  container: false,
+  array: false
+});
 var DropdownPopupStateActive;
 (function(DropdownPopupStateActive2) {
   DropdownPopupStateActive2["WILL_ACTIVE"] = "will-active";
@@ -4038,7 +5263,11 @@ var DropdownPopupStateActive;
 const isDropdownPopupActive = (active) => {
   return [DropdownPopupStateActive.ACTIVE, DropdownPopupStateActive.WILL_ACTIVE].includes(active);
 };
-const DropdownContainer = qe.div.attrs(({ id, active, atBottom }) => {
+const DropdownContainer = qe.div.attrs(({
+  id,
+  active,
+  atBottom
+}) => {
   return {
     [DOM_ID_WIDGET]: id,
     "data-active": isDropdownPopupActive(active),
@@ -4103,7 +5332,9 @@ const DropdownContainer = qe.div.attrs(({ id, active, atBottom }) => {
         }
     }
 `;
-const DropdownLabel = qe.span.attrs({ [DOM_KEY_WIDGET]: "d9-dropdown-label" })`
+const DropdownLabel = qe.span.attrs({
+  [DOM_KEY_WIDGET]: "d9-dropdown-label"
+})`
     flex-grow: 1;
     display: flex;
     align-items: center;
@@ -4123,17 +5354,23 @@ const DropdownLabel = qe.span.attrs({ [DOM_KEY_WIDGET]: "d9-dropdown-label" })`
         display: none;
     }
 `;
-const DropdownStickCaret = qe(CaretDown).attrs({ [DOM_KEY_WIDGET]: "d9-dropdown-caret" })`
+const DropdownStickCaret = qe(CaretDown).attrs({
+  [DOM_KEY_WIDGET]: "d9-dropdown-caret"
+})`
     height: calc(${CssVars.INPUT_HEIGHT} * 2 / 5);
     fill: ${CssVars.FONT_COLOR};
     transition: all ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION};
 `;
-const DropdownStickClear = qe(Times).attrs({ [DOM_KEY_WIDGET]: "d9-dropdown-clear" })`
+const DropdownStickClear = qe(Times).attrs({
+  [DOM_KEY_WIDGET]: "d9-dropdown-clear"
+})`
     height: calc(${CssVars.INPUT_HEIGHT} * 2 / 5);
     fill: ${CssVars.FONT_COLOR};
     transition: all ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION};
 `;
-const DropdownStickContainer = qe.span.attrs({ [DOM_KEY_WIDGET]: "d9-dropdown-stick" })`
+const DropdownStickContainer = qe.span.attrs({
+  [DOM_KEY_WIDGET]: "d9-dropdown-stick"
+})`
     display: flex;
     position: relative;
     align-items: center;
@@ -4169,21 +5406,44 @@ const DropdownStickContainer = qe.span.attrs({ [DOM_KEY_WIDGET]: "d9-dropdown-st
     }
 `;
 const DropdownStick = (props) => {
-  const { valueAssigned, clearable, clear, disabled, icon, ...rest } = props;
+  const {
+    valueAssigned,
+    clearable,
+    clear,
+    disabled,
+    icon,
+    ...rest
+  } = props;
   const onClearClicked = (event) => {
     clear(event);
   };
   if (valueAssigned && clearable) {
-    return React.createElement(
-      DropdownStickContainer,
-      { "data-clear": true, "data-disabled": disabled, onClick: onClearClicked, ...rest },
-      React.createElement(DropdownStickClear, null)
-    );
+    return React.createElement(DropdownStickContainer, {
+      "data-clear": true,
+      "data-disabled": disabled,
+      onClick: onClearClicked,
+      ...rest
+    }, React.createElement(DropdownStickClear, null));
   } else {
-    return React.createElement(DropdownStickContainer, { "data-disabled": disabled, ...rest }, icon == null ? React.createElement(DropdownStickCaret, null) : icon);
+    return React.createElement(DropdownStickContainer, {
+      "data-disabled": disabled,
+      ...rest
+    }, icon == null ? React.createElement(DropdownStickCaret, null) : icon);
   }
 };
-const DropdownPopupContainer = qe.div.attrs(({ atBottom, shown, vScroll, hScroll, top, left, height, minWidth, maxWidth, minHeight, maxHeight }) => {
+const DropdownPopupContainer = qe.div.attrs(({
+  atBottom,
+  shown,
+  vScroll,
+  hScroll,
+  top,
+  left,
+  height,
+  minWidth,
+  maxWidth,
+  minHeight,
+  maxHeight
+}) => {
   return {
     [DOM_KEY_WIDGET]: "d9-dropdown-popup",
     "data-v-scroll": vScroll ? "" : void 0,
@@ -4227,12 +5487,29 @@ const DropdownPopupContainer = qe.div.attrs(({ atBottom, shown, vScroll, hScroll
     pointer-events: var(--pointer-events);
 `;
 const DropdownPopup = reactExports.forwardRef((props, ref) => {
-  const { shown, vScroll, hScroll, children, ...state } = props;
-  return React.createElement(DropdownPopupContainer, { shown, vScroll, hScroll, ...state, ref }, children);
+  const {
+    shown,
+    vScroll,
+    hScroll,
+    children,
+    ...state
+  } = props;
+  return React.createElement(DropdownPopupContainer, {
+    shown,
+    vScroll,
+    hScroll,
+    ...state,
+    ref
+  }, children);
 });
 const getDropdownPosition = (container) => {
   const rect = container.getBoundingClientRect();
-  return { top: rect.top, left: rect.left, width: rect.width, height: rect.height };
+  return {
+    top: rect.top,
+    left: rect.left,
+    width: rect.width,
+    height: rect.height
+  };
 };
 const isPopupAtBottom = (top, height, askPopupHeight) => {
   const popupHeight = askPopupHeight();
@@ -4247,7 +5524,13 @@ const isPopupAtBottom = (top, height, askPopupHeight) => {
 };
 const MAX_WIDTH_MARGIN = 8;
 const useDropdownControl = (options) => {
-  const { askPopupMaxHeight, askPopupMaxWidth, afterPopupShown, afterPopupHide, fixWidth = false } = options;
+  const {
+    askPopupMaxHeight,
+    askPopupMaxWidth,
+    afterPopupShown,
+    afterPopupHide,
+    fixWidth = false
+  } = options;
   const containerRef = reactExports.useRef(null);
   const popupRef = reactExports.useRef(null);
   const [popupState, setPopupState] = reactExports.useState({
@@ -4265,10 +5548,15 @@ const useDropdownControl = (options) => {
   reactExports.useEffect(() => {
     if (isDropdownPopupActive(popupState.active)) {
       setPopupShown(true);
-      const { left, width } = popupRef.current.getBoundingClientRect();
+      const {
+        left,
+        width
+      } = popupRef.current.getBoundingClientRect();
       let toBeWidth = width;
       if (!fixWidth) {
-        const { width: containerWidth } = containerRef.current.getBoundingClientRect();
+        const {
+          width: containerWidth
+        } = containerRef.current.getBoundingClientRect();
         toBeWidth = Math.max(width, containerWidth);
         popupRef.current.style.minWidth = `${toBeWidth}px`;
         const shouldAdjustWidth = (allowWordWrap) => {
@@ -4314,7 +5602,10 @@ const useDropdownControl = (options) => {
         popupRef.current.style.minWidth = "";
       }
       if (left + toBeWidth + MAX_WIDTH_MARGIN > window.innerWidth) {
-        const { left: parentLeft, width: parentWidth } = popupRef.current.parentElement.getBoundingClientRect();
+        const {
+          left: parentLeft,
+          width: parentWidth
+        } = popupRef.current.parentElement.getBoundingClientRect();
         let left2 = parentLeft + parentWidth - toBeWidth;
         if (left2 <= MAX_WIDTH_MARGIN) {
           left2 = window.innerWidth - toBeWidth - MAX_WIDTH_MARGIN;
@@ -4330,14 +5621,20 @@ const useDropdownControl = (options) => {
           maxWidth: toBeWidth
         }));
       } else {
-        setPopupState((state) => ({ ...state, active: DropdownPopupStateActive.ACTIVE }));
+        setPopupState((state) => ({
+          ...state,
+          active: DropdownPopupStateActive.ACTIVE
+        }));
       }
       afterPopupShown && afterPopupShown();
     }
   }, [popupState.active, afterPopupShown, expectMaxWidth, fixWidth]);
   reactExports.useEffect(() => {
     if (!popupShown) {
-      setPopupState((state) => ({ ...state, active: DropdownPopupStateActive.HIDDEN }));
+      setPopupState((state) => ({
+        ...state,
+        active: DropdownPopupStateActive.HIDDEN
+      }));
     }
   }, [popupShown]);
   useCollapseFixedThing({
@@ -4358,7 +5655,25 @@ const useDropdownControl = (options) => {
   };
 };
 const useFilterableDropdownOptions = (props) => {
-  const { optionSort, maxWidth, noAvailable = React.createElement(IntlLabel, { keys: ["options", "noAvailable"], value: "No available option." }), noMatched = React.createElement(IntlLabel, { keys: ["options", "noMatched"], value: "No matched option." }), takeoverFilter, filterChanged, $wrapped: { $avs: { $disabled } } } = props;
+  const {
+    optionSort,
+    maxWidth,
+    noAvailable = React.createElement(IntlLabel, {
+      keys: ["options", "noAvailable"],
+      value: "No available option."
+    }),
+    noMatched = React.createElement(IntlLabel, {
+      keys: ["options", "noMatched"],
+      value: "No matched option."
+    }),
+    takeoverFilter,
+    filterChanged,
+    $wrapped: {
+      $avs: {
+        $disabled
+      }
+    }
+  } = props;
   const filterInputRef = reactExports.useRef(null);
   const [filter, setFilter] = reactExports.useState("");
   const [functions] = reactExports.useState(() => {
@@ -4373,13 +5688,26 @@ const useFilterableDropdownOptions = (props) => {
       }, 100)
     };
   });
-  const { containerRef, popupRef, popupState, setPopupState, popupShown, setPopupShown } = useDropdownControl({
+  const {
+    containerRef,
+    popupRef,
+    popupState,
+    setPopupState,
+    popupShown,
+    setPopupShown
+  } = useDropdownControl({
     askPopupMaxHeight: () => 8 * CssVars.INPUT_HEIGHT_VALUE + 2,
     askPopupMaxWidth: () => maxWidth,
     afterPopupShown: functions.afterPopupShown,
     afterPopupHide: functions.afterPopupHide
   });
-  const { askOptions, createAskDisplayOptions } = useOptionItems({ ...props, noAvailable });
+  const {
+    askOptions,
+    createAskDisplayOptions
+  } = useOptionItems({
+    ...props,
+    noAvailable
+  });
   const askDisplayOptions = createAskDisplayOptions(() => {
     return (takeoverFilter ?? true) && VUtils.isNotBlank(filter) || optionSort != null;
   }, (options) => {
@@ -4391,19 +5719,29 @@ const useFilterableDropdownOptions = (props) => {
         const label = `${option.label}`;
         str = internationalize(label, [label]);
       }
-      return { str: (str || "").toLowerCase(), option };
+      return {
+        str: (str || "").toLowerCase(),
+        option
+      };
     });
     let remained = transformed;
     if (VUtils.isNotBlank(filter)) {
       const filterText = filter.trim().toLowerCase();
-      remained = transformed.filter(({ str }) => str.includes(filterText));
+      remained = transformed.filter(({
+        str
+      }) => str.includes(filterText));
     }
     if (optionSort == OptionItemSort.ASC) {
       remained.sort((a, b) => a.str.localeCompare(b.str));
     } else if (optionSort == OptionItemSort.DESC) {
       remained.sort((a, b) => b.str.localeCompare(a.str));
     }
-    return remained.length === 0 ? [{ value: NO_MATCHED_OPTION_ITEM, label: toIntlLabel(noMatched) }] : remained.map(({ option }) => option);
+    return remained.length === 0 ? [{
+      value: NO_MATCHED_OPTION_ITEM,
+      label: toIntlLabel(noMatched)
+    }] : remained.map(({
+      option
+    }) => option);
   });
   const displayOptions = askDisplayOptions();
   const popupHeight = Math.min(displayOptions.length, 8) * CssVars.INPUT_HEIGHT_VALUE + 2;
@@ -4411,7 +5749,12 @@ const useFilterableDropdownOptions = (props) => {
     if ($disabled) {
       return;
     }
-    const { top, left, width, height } = getDropdownPosition(containerRef.current);
+    const {
+      top,
+      left,
+      width,
+      height
+    } = getDropdownPosition(containerRef.current);
     const bottom = isPopupAtBottom(top, height, () => popupHeight);
     setPopupState((state) => ({
       ...state,
@@ -4442,7 +5785,9 @@ const useFilterableDropdownOptions = (props) => {
     if (!isDropdownPopupActive(popupState.active)) {
       return;
     }
-    const { key } = event;
+    const {
+      key
+    } = event;
     if (key === "Escape") {
       setFilter("");
       filterChanged && await filterChanged("", "search");
@@ -4484,14 +5829,23 @@ var DropdownTreeEventTypes;
 const Context$4 = reactExports.createContext({});
 Context$4.displayName = "DropdownTreeEventBus";
 const DropdownTreeEventBusProvider = (props) => {
-  const { children } = props;
+  const {
+    children
+  } = props;
   const bus = useCreateEventBus("dropdown-tree");
-  return React.createElement(Context$4.Provider, { value: bus }, children);
+  return React.createElement(Context$4.Provider, {
+    value: bus
+  }, children);
 };
 const useDropdownTreeEventBus = () => reactExports.useContext(Context$4);
 const DropdownTreeFilterBridge = () => {
-  const { on, off } = useDropdownTreeEventBus();
-  const { fire } = useTreeEventBus();
+  const {
+    on,
+    off
+  } = useDropdownTreeEventBus();
+  const {
+    fire
+  } = useTreeEventBus();
   reactExports.useEffect(() => {
     const onFilterChanged = (filter) => {
       fire(TreeEventTypes.FILTER_CHANGED, filter);
@@ -4523,7 +5877,10 @@ var ButtonBarAlignment;
   ButtonBarAlignment2["CENTER"] = "center";
   ButtonBarAlignment2["RIGHT"] = "right";
 })(ButtonBarAlignment || (ButtonBarAlignment = {}));
-const AButtonBar = qe.div.attrs(({ id, [DOM_KEY_WIDGET]: dataW }) => {
+const AButtonBar = qe.div.attrs(({
+  id,
+  [DOM_KEY_WIDGET]: dataW
+}) => {
   return {
     [DOM_KEY_WIDGET]: dataW ?? "d9-button-bar",
     [DOM_ID_WIDGET]: id
@@ -4561,11 +5918,30 @@ const AButtonBar = qe.div.attrs(({ id, [DOM_KEY_WIDGET]: dataW }) => {
     }
 `;
 const ButtonBar = reactExports.forwardRef((props, ref) => {
-  const { alignment = ButtonBarAlignment.RIGHT, children, ...rest } = props;
-  return React.createElement(AButtonBar, { ...rest, "data-alignment": alignment, ref }, children);
+  const {
+    alignment = ButtonBarAlignment.RIGHT,
+    children,
+    ...rest
+  } = props;
+  return React.createElement(AButtonBar, {
+    ...rest,
+    "data-alignment": alignment,
+    ref
+  }, children);
 });
-registerWidget({ key: "ButtonBar", JSX: ButtonBar, container: true, array: false });
-const OptionFilter$3 = qe.div.attrs(({ active, atBottom, top, left, height }) => {
+registerWidget({
+  key: "ButtonBar",
+  JSX: ButtonBar,
+  container: true,
+  array: false
+});
+const OptionFilter$3 = qe.div.attrs(({
+  active,
+  atBottom,
+  top,
+  left,
+  height
+}) => {
   return {
     [DOM_KEY_WIDGET]: "d9-dropdown-option-filter",
     style: {
@@ -4619,7 +5995,9 @@ const OptionFilter$3 = qe.div.attrs(({ active, atBottom, top, left, height }) =>
         caret-shape: revert;
     }
 `;
-const Option$2 = qe.span.attrs({ [DOM_KEY_WIDGET]: "d9-dropdown-option" })`
+const Option$2 = qe.span.attrs({
+  [DOM_KEY_WIDGET]: "d9-dropdown-option"
+})`
     display: flex;
     position: relative;
     align-items: center;
@@ -4642,11 +6020,47 @@ const Option$2 = qe.span.attrs({ [DOM_KEY_WIDGET]: "d9-dropdown-option" })`
 `;
 const Dropdown = reactExports.forwardRef((props, ref) => {
   var _a;
-  const { options, optionSort, noAvailable, noMatched, $pp, $wrapped: { $onValueChange, $model, $p2r, $avs: { $disabled, $visible } }, please = "", clearable = true, ...rest } = props;
+  const {
+    options,
+    optionSort,
+    noAvailable,
+    noMatched,
+    $pp,
+    $wrapped: {
+      $onValueChange,
+      $model,
+      $p2r,
+      $avs: {
+        $disabled,
+        $visible
+      }
+    },
+    please = "",
+    clearable = true,
+    ...rest
+  } = props;
   const globalHandlers = useGlobalHandlers();
-  const { askOptions, displayOptions, filterInputRef, filter, onFilterChanged, containerRef, popupState, popupHeight, popupRef, popupShown, setPopupShown, afterPopupStateChanged, onClicked, onFocused, onKeyUp } = useFilterableDropdownOptions(props);
+  const {
+    askOptions,
+    displayOptions,
+    filterInputRef,
+    filter,
+    onFilterChanged,
+    containerRef,
+    popupState,
+    popupHeight,
+    popupRef,
+    popupShown,
+    setPopupShown,
+    afterPopupStateChanged,
+    onClicked,
+    onFocused,
+    onKeyUp
+  } = useFilterableDropdownOptions(props);
   useDualRefs(containerRef, ref);
-  useTip({ ref: containerRef });
+  useTip({
+    ref: containerRef
+  });
   const forceUpdate = useForceUpdate();
   const onOptionClicked = (option) => async (event) => {
     if ($disabled) {
@@ -4654,7 +6068,9 @@ const Dropdown = reactExports.forwardRef((props, ref) => {
     }
     event.preventDefault();
     event.stopPropagation();
-    await $onValueChange(option.value, true, { global: globalHandlers });
+    await $onValueChange(option.value, true, {
+      global: globalHandlers
+    });
     setPopupShown(false);
     if (filter !== "") {
       afterPopupStateChanged.afterPopupHide();
@@ -4672,7 +6088,9 @@ const Dropdown = reactExports.forwardRef((props, ref) => {
     event.stopPropagation();
     const value2 = MUtils.getValue($model, $pp);
     if (value2 != null) {
-      await $onValueChange(null, true, { global: globalHandlers });
+      await $onValueChange(null, true, {
+        global: globalHandlers
+      });
     }
     if (!isDropdownPopupActive(popupState.active)) {
       onClicked();
@@ -4684,29 +6102,65 @@ const Dropdown = reactExports.forwardRef((props, ref) => {
   const selected = value != null;
   const label = (value == null ? please : ((_a = askOptions().find((option) => option.value == value)) == null ? void 0 : _a.label) ?? please) || "";
   const deviceTags = MBUtils.pickDeviceTags(props);
-  return React.createElement(
-    DropdownContainer,
-    { active: popupState.active, atBottom: popupState.atBottom, role: "input", tabIndex: 0, ...rest, "data-w": "d9-dropdown", "data-disabled": $disabled, "data-visible": $visible, "data-clearable": clearable, onFocus: onFocused, onClick: onClicked, id: PPUtils.asId(PPUtils.absolute($p2r, $pp), props.id), ref: containerRef },
-    React.createElement(DropdownLabel, { "data-please": !selected }, toIntlLabel(label)),
-    React.createElement(DropdownStick, { valueAssigned: selected, clearable, clear: onClearClicked, disabled: $disabled }),
-    isDropdownPopupActive(popupState.active) ? React.createElement(
-      DropdownPopup,
-      { ...{ ...popupState, minHeight: popupHeight }, shown: popupShown && popupState.active === DropdownPopupStateActive.ACTIVE, ...deviceTags, vScroll: true, ref: popupRef },
-      React.createElement(
-        OptionFilter$3,
-        { ...{ ...popupState, active: !!filter } },
-        React.createElement("span", null, "?:"),
-        React.createElement("input", { value: filter, onChange: onFilterChanged, onKeyUp, ref: filterInputRef })
-      ),
-      displayOptions.map((option, index) => {
-        const { value: value2, label: label2 } = option;
-        const canClick = ![NO_MATCHED_OPTION_ITEM, NO_AVAILABLE_OPTION_ITEM].includes(`${value2}`);
-        return React.createElement(Option$2, { key: `${value2}-${index}`, "data-can-click": canClick, onClick: canClick ? onOptionClicked(option) : void 0 }, toIntlLabel(label2));
-      })
-    ) : null
-  );
+  return React.createElement(DropdownContainer, {
+    active: popupState.active,
+    atBottom: popupState.atBottom,
+    role: "input",
+    tabIndex: 0,
+    ...rest,
+    "data-w": "d9-dropdown",
+    "data-disabled": $disabled,
+    "data-visible": $visible,
+    "data-clearable": clearable,
+    onFocus: onFocused,
+    onClick: onClicked,
+    id: PPUtils.asId(PPUtils.absolute($p2r, $pp), props.id),
+    ref: containerRef
+  }, React.createElement(DropdownLabel, {
+    "data-please": !selected
+  }, toIntlLabel(label)), React.createElement(DropdownStick, {
+    valueAssigned: selected,
+    clearable,
+    clear: onClearClicked,
+    disabled: $disabled
+  }), isDropdownPopupActive(popupState.active) ? React.createElement(DropdownPopup, {
+    ...{
+      ...popupState,
+      minHeight: popupHeight
+    },
+    shown: popupShown && popupState.active === DropdownPopupStateActive.ACTIVE,
+    ...deviceTags,
+    vScroll: true,
+    ref: popupRef
+  }, React.createElement(OptionFilter$3, {
+    ...{
+      ...popupState,
+      active: !!filter
+    }
+  }, React.createElement("span", null, "?:"), React.createElement("input", {
+    value: filter,
+    onChange: onFilterChanged,
+    onKeyUp,
+    ref: filterInputRef
+  })), displayOptions.map((option, index) => {
+    const {
+      value: value2,
+      label: label2
+    } = option;
+    const canClick = ![NO_MATCHED_OPTION_ITEM, NO_AVAILABLE_OPTION_ITEM].includes(`${value2}`);
+    return React.createElement(Option$2, {
+      key: `${value2}-${index}`,
+      "data-can-click": canClick,
+      onClick: canClick ? onOptionClicked(option) : void 0
+    }, toIntlLabel(label2));
+  })) : null);
 });
-registerWidget({ key: "Dropdown", JSX: Dropdown, container: false, array: false });
+registerWidget({
+  key: "Dropdown",
+  JSX: Dropdown,
+  container: false,
+  array: false
+});
 const MultiDropdownContainer = qe(DropdownContainer)`
     align-self: start;
     flex-wrap: wrap;
@@ -4764,7 +6218,13 @@ const MultiDropdownStick = qe(DropdownStick)`
     position: absolute;
     right: ${CssVars.INPUT_INDENT};
 `;
-const OptionFilter$2 = qe.div.attrs(({ active, atBottom, top, left, height }) => {
+const OptionFilter$2 = qe.div.attrs(({
+  active,
+  atBottom,
+  top,
+  left,
+  height
+}) => {
   return {
     [DOM_KEY_WIDGET]: "d9-multi-dropdown-option-filter",
     style: {
@@ -4818,7 +6278,9 @@ const OptionFilter$2 = qe.div.attrs(({ active, atBottom, top, left, height }) =>
         caret-shape: revert;
     }
 `;
-const MultiOption = qe.span.attrs({ [DOM_KEY_WIDGET]: "d9-multi-dropdown-option" })`
+const MultiOption = qe.span.attrs({
+  [DOM_KEY_WIDGET]: "d9-multi-dropdown-option"
+})`
     display: flex;
     position: relative;
     align-items: center;
@@ -4856,12 +6318,47 @@ const MultiOption = qe.span.attrs({ [DOM_KEY_WIDGET]: "d9-multi-dropdown-option"
     }
 `;
 const MultiDropdown = reactExports.forwardRef((props, ref) => {
-  const { options, optionSort, noAvailable, noMatched, $pp, $wrapped: { $onValueChange, $model, $p2r, $avs: { $disabled, $visible } }, please = "", clearable = true, ...rest } = props;
+  const {
+    options,
+    optionSort,
+    noAvailable,
+    noMatched,
+    $pp,
+    $wrapped: {
+      $onValueChange,
+      $model,
+      $p2r,
+      $avs: {
+        $disabled,
+        $visible
+      }
+    },
+    please = "",
+    clearable = true,
+    ...rest
+  } = props;
   const globalHandlers = useGlobalHandlers();
-  const { askOptions, displayOptions, filterInputRef, filter, onFilterChanged, containerRef, popupState, popupHeight, popupRef, popupShown, repaintPopup, onClicked, onFocused, onKeyUp } = useFilterableDropdownOptions(props);
+  const {
+    askOptions,
+    displayOptions,
+    filterInputRef,
+    filter,
+    onFilterChanged,
+    containerRef,
+    popupState,
+    popupHeight,
+    popupRef,
+    popupShown,
+    repaintPopup,
+    onClicked,
+    onFocused,
+    onKeyUp
+  } = useFilterableDropdownOptions(props);
   const forceUpdate = useForceUpdate();
   useDualRefs(containerRef, ref);
-  useTip({ ref: containerRef });
+  useTip({
+    ref: containerRef
+  });
   const currentValuesToArray = () => {
     const values2 = MUtils.getValue($model, $pp);
     if (values2 == null) {
@@ -4899,9 +6396,13 @@ const MultiDropdown = reactExports.forwardRef((props, ref) => {
     event.stopPropagation();
     const values2 = currentValuesToArray();
     if (!hasValues(values2)) {
-      await $onValueChange([option.value], true, { global: globalHandlers });
+      await $onValueChange([option.value], true, {
+        global: globalHandlers
+      });
     } else if (!hasValue(option.value, values2)) {
-      await $onValueChange([...values2, option.value], true, { global: globalHandlers });
+      await $onValueChange([...values2, option.value], true, {
+        global: globalHandlers
+      });
     } else {
       return;
     }
@@ -4921,7 +6422,9 @@ const MultiDropdown = reactExports.forwardRef((props, ref) => {
     if (!hasValues(values2)) {
       return;
     }
-    await $onValueChange(values2.filter((v) => v != value), true, { global: globalHandlers });
+    await $onValueChange(values2.filter((v) => v != value), true, {
+      global: globalHandlers
+    });
     repaintPopup();
   };
   const onClearClicked = async (event) => {
@@ -4932,7 +6435,9 @@ const MultiDropdown = reactExports.forwardRef((props, ref) => {
     event.stopPropagation();
     const values2 = currentValuesToArray();
     if (values2 != null && values2.length !== 0) {
-      await $onValueChange(null, true, { global: globalHandlers });
+      await $onValueChange(null, true, {
+        global: globalHandlers
+      });
     }
     forceUpdate();
     if (!isDropdownPopupActive(popupState.active)) {
@@ -4948,55 +6453,85 @@ const MultiDropdown = reactExports.forwardRef((props, ref) => {
     return map;
   }, {});
   const deviceTags = MBUtils.pickDeviceTags(props);
-  return React.createElement(
-    MultiDropdownContainer,
-    { active: popupState.active, atBottom: popupState.atBottom, role: "input", tabIndex: 0, ...rest, "data-w": "d9-multi-dropdown", "data-disabled": $disabled, "data-visible": $visible, "data-clearable": clearable, onFocus: onFocused, onClick: onClicked, id: PPUtils.asId(PPUtils.absolute($p2r, $pp), props.id), ref: containerRef },
-    values.map((value) => {
-      var _a;
-      const v = `${value}`;
-      return React.createElement(
-        MultiDropdownLabel,
-        { "data-please": false, key: v },
-        React.createElement("span", null, toIntlLabel((_a = optionsAsMap[v]) == null ? void 0 : _a.label)),
-        $disabled ? null : React.createElement(
-          "span",
-          { onClick: onRemoveClicked(value) },
-          React.createElement(Times, null)
-        )
-      );
-    }),
-    React.createElement(DropdownLabel, { "data-please": true }, toIntlLabel(please)),
-    React.createElement(MultiDropdownStick, { valueAssigned: selected, clearable, clear: onClearClicked, disabled: $disabled }),
-    isDropdownPopupActive(popupState.active) ? React.createElement(
-      DropdownPopup,
-      { ...{ ...popupState, minHeight: popupHeight }, shown: popupShown && popupState.active === DropdownPopupStateActive.ACTIVE, ...deviceTags, vScroll: true, ref: popupRef },
-      React.createElement(
-        OptionFilter$2,
-        { ...{ ...popupState, active: !!filter } },
-        React.createElement("span", null, "?:"),
-        React.createElement("input", { value: filter, onChange: onFilterChanged, onKeyUp, ref: filterInputRef })
-      ),
-      displayOptions.map((option, index) => {
-        const { value, label } = option;
-        const canClick = ![NO_MATCHED_OPTION_ITEM, NO_AVAILABLE_OPTION_ITEM].includes(`${value}`);
-        const selected2 = values.includes(value);
-        return React.createElement(
-          MultiOption,
-          { key: `${value}-${index}`, "data-can-click": canClick, onClick: canClick ? onOptionClicked(option) : void 0 },
-          React.createElement("span", null, toIntlLabel(label)),
-          selected2 ? React.createElement(Check, null) : null
-        );
-      })
-    ) : null
-  );
+  return React.createElement(MultiDropdownContainer, {
+    active: popupState.active,
+    atBottom: popupState.atBottom,
+    role: "input",
+    tabIndex: 0,
+    ...rest,
+    "data-w": "d9-multi-dropdown",
+    "data-disabled": $disabled,
+    "data-visible": $visible,
+    "data-clearable": clearable,
+    onFocus: onFocused,
+    onClick: onClicked,
+    id: PPUtils.asId(PPUtils.absolute($p2r, $pp), props.id),
+    ref: containerRef
+  }, values.map((value) => {
+    var _a;
+    const v = `${value}`;
+    return React.createElement(MultiDropdownLabel, {
+      "data-please": false,
+      key: v
+    }, React.createElement("span", null, toIntlLabel((_a = optionsAsMap[v]) == null ? void 0 : _a.label)), $disabled ? null : React.createElement("span", {
+      onClick: onRemoveClicked(value)
+    }, React.createElement(Times, null)));
+  }), React.createElement(DropdownLabel, {
+    "data-please": true
+  }, toIntlLabel(please)), React.createElement(MultiDropdownStick, {
+    valueAssigned: selected,
+    clearable,
+    clear: onClearClicked,
+    disabled: $disabled
+  }), isDropdownPopupActive(popupState.active) ? React.createElement(DropdownPopup, {
+    ...{
+      ...popupState,
+      minHeight: popupHeight
+    },
+    shown: popupShown && popupState.active === DropdownPopupStateActive.ACTIVE,
+    ...deviceTags,
+    vScroll: true,
+    ref: popupRef
+  }, React.createElement(OptionFilter$2, {
+    ...{
+      ...popupState,
+      active: !!filter
+    }
+  }, React.createElement("span", null, "?:"), React.createElement("input", {
+    value: filter,
+    onChange: onFilterChanged,
+    onKeyUp,
+    ref: filterInputRef
+  })), displayOptions.map((option, index) => {
+    const {
+      value,
+      label
+    } = option;
+    const canClick = ![NO_MATCHED_OPTION_ITEM, NO_AVAILABLE_OPTION_ITEM].includes(`${value}`);
+    const selected2 = values.includes(value);
+    return React.createElement(MultiOption, {
+      key: `${value}-${index}`,
+      "data-can-click": canClick,
+      onClick: canClick ? onOptionClicked(option) : void 0
+    }, React.createElement("span", null, toIntlLabel(label)), selected2 ? React.createElement(Check, null) : null);
+  })) : null);
 });
-registerWidget({ key: "MultiDropdown", JSX: MultiDropdown, container: false, array: false });
+registerWidget({
+  key: "MultiDropdown",
+  JSX: MultiDropdown,
+  container: false,
+  array: false
+});
 const Context$3 = reactExports.createContext({});
 Context$3.displayName = "CalendarEventBus";
 const CalendarEventBusProvider = (props) => {
-  const { children } = props;
+  const {
+    children
+  } = props;
   const bus = useCreateEventBus("calendar");
-  return React.createElement(Context$3.Provider, { value: bus }, children);
+  return React.createElement(Context$3.Provider, {
+    value: bus
+  }, children);
 };
 const useCalendarEventBus = () => reactExports.useContext(Context$3);
 var CalendarEventTypes;
@@ -5010,7 +6545,9 @@ var CalendarEventTypes;
   CalendarEventTypes2["VALUE_CLEARED"] = "value-cleared";
   CalendarEventTypes2["ASK_VALUE"] = "ask-value";
 })(CalendarEventTypes || (CalendarEventTypes = {}));
-const PopupContainer = qe.div.attrs({ [DOM_KEY_WIDGET]: "d9-calendar-popup-wrapper" })`
+const PopupContainer = qe.div.attrs({
+  [DOM_KEY_WIDGET]: "d9-calendar-popup-wrapper"
+})`
     display: flex;
     position: relative;
     flex-direction: column;
@@ -5047,14 +6584,22 @@ const computeCalendarDays = (firstDate) => {
   const month = firstDate.month();
   const lastDate = getLastDateOfMonth(year, month);
   const days = new Array(lastDate).fill(1).map((v, index) => {
-    return { year, month, date: index + 1 };
+    return {
+      year,
+      month,
+      date: index + 1
+    };
   });
   if (weekday !== 0) {
     const previousMonth = month === 0 ? 11 : month - 1;
     const previousYear = month === 0 ? year - 1 : year;
     let previousLastDate = getLastDateOfMonth(previousYear, previousMonth);
     for (let index = weekday - 1; index >= 0; index--) {
-      days.unshift({ year: previousYear, month: previousMonth, date: previousLastDate-- });
+      days.unshift({
+        year: previousYear,
+        month: previousMonth,
+        date: previousLastDate--
+      });
     }
   }
   const length = days.length;
@@ -5063,23 +6608,33 @@ const computeCalendarDays = (firstDate) => {
     const nextYear = month === 11 ? year + 1 : year;
     let date = 1;
     for (let index = days.length; index < 42; index++) {
-      days.push({ year: nextYear, month: nextMonth, date: date++ });
+      days.push({
+        year: nextYear,
+        month: nextMonth,
+        date: date++
+      });
     }
   }
   return days;
 };
-const DatePickerContainer = qe.div.attrs({ [DOM_KEY_WIDGET]: "d9-calendar-date-picker" })`
+const DatePickerContainer = qe.div.attrs({
+  [DOM_KEY_WIDGET]: "d9-calendar-date-picker"
+})`
     display: grid;
     grid-template-columns: 1fr auto;
     cursor: default;
 `;
-const DatePickerShortcut = qe.div.attrs({ [DOM_KEY_WIDGET]: "d9-calendar-date-picker-shortcuts" })`
+const DatePickerShortcut = qe.div.attrs({
+  [DOM_KEY_WIDGET]: "d9-calendar-date-picker-shortcuts"
+})`
     display: flex;
     flex-direction: column;
     grid-row: span 2;
     border-right: ${CssVars.BORDER};
 `;
-const DatePickerShortcutButton = qe.span.attrs({ [DOM_KEY_WIDGET]: "d9-calendar-date-picker-shortcut-button" })`
+const DatePickerShortcutButton = qe.span.attrs({
+  [DOM_KEY_WIDGET]: "d9-calendar-date-picker-shortcut-button"
+})`
     display: flex;
     align-items: center;
     height: ${CssVars.CALENDAR_DATE_CELL_SIZE};
@@ -5094,22 +6649,30 @@ const DatePickerShortcutButton = qe.span.attrs({ [DOM_KEY_WIDGET]: "d9-calendar-
         background-color: ${CssVars.HOVER_COLOR};
     }
 `;
-const DatePickerHeader = qe.div.attrs({ [DOM_KEY_WIDGET]: "d9-calendar-date-picker-header" })`
+const DatePickerHeader = qe.div.attrs({
+  [DOM_KEY_WIDGET]: "d9-calendar-date-picker-header"
+})`
     display: flex;
     align-items: center;
     justify-content: space-between;
     height: ${CssVars.INPUT_HEIGHT};
     padding: 0 ${CssVars.CALENDAR_GUTTER_SIZE};
 `;
-const DatePickerHeaderYearMonth = qe.span.attrs({ [DOM_KEY_WIDGET]: "d9-calendar-date-picker-header-ym" })`
+const DatePickerHeaderYearMonth = qe.span.attrs({
+  [DOM_KEY_WIDGET]: "d9-calendar-date-picker-header-ym"
+})`
     font-weight: ${CssVars.FONT_BOLD};
     font-variant: ${CssVars.FONT_VARIANT};
 `;
-const DatePickerHeaderOperators = qe.div.attrs({ [DOM_KEY_WIDGET]: "d9-calendar-date-picker-header-operators" })`
+const DatePickerHeaderOperators = qe.div.attrs({
+  [DOM_KEY_WIDGET]: "d9-calendar-date-picker-header-operators"
+})`
     display: flex;
     align-items: center;
 `;
-const DatePickerHeaderButton = qe.span.attrs({ [DOM_KEY_WIDGET]: "d9-calendar-date-picker-header-button" })`
+const DatePickerHeaderButton = qe.span.attrs({
+  [DOM_KEY_WIDGET]: "d9-calendar-date-picker-header-button"
+})`
     display: flex;
     align-items: center;
     justify-content: center;
@@ -5133,12 +6696,16 @@ const DatePickerHeaderMonthChangeButton = qe(DatePickerHeaderButton)`
     height: 20px;
     width: 24px;
 `;
-const DatePickerBody = qe.div.attrs({ [DOM_KEY_WIDGET]: "d9-calendar-date-picker-body" })`
+const DatePickerBody = qe.div.attrs({
+  [DOM_KEY_WIDGET]: "d9-calendar-date-picker-body"
+})`
     display: grid;
     grid-template-columns: repeat(7, minmax(${CssVars.CALENDAR_DATE_CELL_SIZE}, 1fr));
     grid-template-rows: repeat(7, ${CssVars.CALENDAR_DATE_CELL_SIZE});
 `;
-const DatePickerBodyHeaderCell = qe.span.attrs({ [DOM_KEY_WIDGET]: "d9-calendar-date-picker-body-header-cell" })`
+const DatePickerBodyHeaderCell = qe.span.attrs({
+  [DOM_KEY_WIDGET]: "d9-calendar-date-picker-body-header-cell"
+})`
     display: flex;
     align-items: center;
     justify-content: center;
@@ -5154,7 +6721,9 @@ const DatePickerBodyHeaderCell = qe.span.attrs({ [DOM_KEY_WIDGET]: "d9-calendar-
         color: ${CssVars.DANGER_COLOR};
     }
 `;
-const DatePickerBodyDateCell = qe.span.attrs({ [DOM_KEY_WIDGET]: "d9-calendar-date-picker-body-date-cell" })`
+const DatePickerBodyDateCell = qe.span.attrs({
+  [DOM_KEY_WIDGET]: "d9-calendar-date-picker-body-date-cell"
+})`
     display: flex;
     align-items: center;
     justify-content: center;
@@ -5255,13 +6824,33 @@ const DatePickerBodyDateCell = qe.span.attrs({ [DOM_KEY_WIDGET]: "d9-calendar-da
     }
 `;
 const DatePicker = (props) => {
-  const { $root, $model, value, dateFormat, time, couldPerform } = props;
+  const {
+    $root,
+    $model,
+    value,
+    dateFormat,
+    time,
+    couldPerform
+  } = props;
   const globalHandlers = useGlobalHandlers();
-  const { on, off, fire } = useCalendarEventBus();
-  const [state, setState] = reactExports.useState({ visible: true, current: value });
+  const {
+    on,
+    off,
+    fire
+  } = useCalendarEventBus();
+  const [state, setState] = reactExports.useState({
+    visible: true,
+    current: value
+  });
   reactExports.useEffect(() => {
-    const onOpen = () => setState((state2) => ({ ...state2, visible: false }));
-    const onClose = () => setState({ current: value, visible: true });
+    const onOpen = () => setState((state2) => ({
+      ...state2,
+      visible: false
+    }));
+    const onClose = () => setState({
+      current: value,
+      visible: true
+    });
     on(CalendarEventTypes.OPEN_YEAR_MONTH_PICKER, onOpen);
     on(CalendarEventTypes.OPEN_TIME_PICKER, onOpen);
     on(CalendarEventTypes.CLOSE_YEAR_MONTH_PICKER, onClose);
@@ -5296,7 +6885,10 @@ const DatePicker = (props) => {
         fire(CalendarEventTypes.VALUE_SELECTED, newValue);
       }
     }
-    setState((state2) => ({ ...state2, current: newValue }));
+    setState((state2) => ({
+      ...state2,
+      current: newValue
+    }));
   };
   const onTodayClicked = onDateChange(today);
   const onYesterdayClicked = onDateChange(today.subtract(1, "day"));
@@ -5319,135 +6911,103 @@ const DatePicker = (props) => {
   })();
   const firstDayOfDisplayMonth = state.current.clone().date(1);
   const days = computeCalendarDays(firstDayOfDisplayMonth);
-  return React.createElement(
-    DatePickerContainer,
-    null,
-    React.createElement(
-      DatePickerShortcut,
-      null,
-      React.createElement(
-        DatePickerShortcutButton,
-        { onClick: onTodayClicked },
-        React.createElement(IntlLabel, { keys: ["calendar", "today"], value: "Today" })
-      ),
-      React.createElement(
-        DatePickerShortcutButton,
-        { onClick: onYesterdayClicked },
-        React.createElement(IntlLabel, { keys: ["calendar", "yesterday"], value: "Yesterday" })
-      ),
-      React.createElement(
-        DatePickerShortcutButton,
-        { onClick: onWeekendClicked },
-        React.createElement(IntlLabel, { keys: ["calendar", "thisWeekEnd"], value: "This Weekend" })
-      ),
-      React.createElement(
-        DatePickerShortcutButton,
-        { onClick: onPrevWeekendClicked },
-        React.createElement(IntlLabel, { keys: ["calendar", "prevWeekend"], value: "Prev Weekend" })
-      ),
-      React.createElement(
-        DatePickerShortcutButton,
-        { onClick: onMonthEndClicked },
-        React.createElement(IntlLabel, { keys: ["calendar", "thisMonthEnd"], value: "This Month End" })
-      ),
-      React.createElement(
-        DatePickerShortcutButton,
-        { onClick: onPrevMonthEndClicked },
-        React.createElement(IntlLabel, { keys: ["calendar", "prevMonthEnd"], value: "Prev month End" })
-      ),
-      React.createElement(
-        DatePickerShortcutButton,
-        { onClick: onYearEndClicked },
-        React.createElement(IntlLabel, { keys: ["calendar", "thisYearEnd"], value: "This Year End" })
-      ),
-      React.createElement(
-        DatePickerShortcutButton,
-        { onClick: onPrevYearEndClicked },
-        React.createElement(IntlLabel, { keys: ["calendar", "prevYearEnd"], value: "Prev Year End" })
-      )
-    ),
-    React.createElement(
-      DatePickerHeader,
-      null,
-      React.createElement(DatePickerHeaderYearMonth, null, currentDisplayMonth),
-      React.createElement(
-        DatePickerHeaderOperators,
-        null,
-        React.createElement(
-          DatePickerHeaderTodayButton,
-          { onClick: onTodayClicked },
-          React.createElement(IntlLabel, { keys: ["calendar", "today"], value: "Today" })
-        ),
-        React.createElement(
-          DatePickerHeaderMonthChangeButton,
-          { onClick: onGotoPrevMonthClicked },
-          React.createElement(LeftCaret, null)
-        ),
-        React.createElement(
-          DatePickerHeaderMonthChangeButton,
-          { onClick: onGotoNextMonthClicked },
-          React.createElement(RightCaret, null)
-        )
-      )
-    ),
-    React.createElement(
-      DatePickerBody,
-      null,
-      React.createElement(
-        DatePickerBodyHeaderCell,
-        null,
-        React.createElement(IntlLabel, { keys: ["calendar", "sunday"], value: "S" })
-      ),
-      React.createElement(
-        DatePickerBodyHeaderCell,
-        null,
-        React.createElement(IntlLabel, { keys: ["calendar", "monday"], value: "M" })
-      ),
-      React.createElement(
-        DatePickerBodyHeaderCell,
-        null,
-        React.createElement(IntlLabel, { keys: ["calendar", "tuesday"], value: "T" })
-      ),
-      React.createElement(
-        DatePickerBodyHeaderCell,
-        null,
-        React.createElement(IntlLabel, { keys: ["calendar", "wednesday"], value: "W" })
-      ),
-      React.createElement(
-        DatePickerBodyHeaderCell,
-        null,
-        React.createElement(IntlLabel, { keys: ["calendar", "thursday"], value: "T" })
-      ),
-      React.createElement(
-        DatePickerBodyHeaderCell,
-        null,
-        React.createElement(IntlLabel, { keys: ["calendar", "friday"], value: "F" })
-      ),
-      React.createElement(
-        DatePickerBodyHeaderCell,
-        null,
-        React.createElement(IntlLabel, { keys: ["calendar", "saturday"], value: "S" })
-      ),
-      days.map(({ year, month, date }) => {
-        const valueToPerform = state.current.clone().year(year).month(month).date(date);
-        const couldPerformValue = couldPerform == null ? true : couldPerform({
-          root: $root,
-          model: $model,
-          valueToCheck: valueToPerform,
-          checkType: "date",
-          global: globalHandlers
-        }) !== false;
-        const click = couldPerformValue ? onDateChange(dayjs().year(year).month(month).date(date), true) : void 0;
-        return React.createElement(
-          DatePickerBodyDateCell,
-          { key: `${year}/${month}/${date}`, "data-current-month": year === currentYear && month === currentMonth, "data-current": year === value.year() && month === value.month() && date === value.date(), "data-today": year === todayYear && month === todayMonth && date === todayDate, "data-could-perform": couldPerformValue, onClick: click },
-          React.createElement("span", null, date)
-        );
-      })
-    )
-  );
+  return React.createElement(DatePickerContainer, null, React.createElement(DatePickerShortcut, null, React.createElement(DatePickerShortcutButton, {
+    onClick: onTodayClicked
+  }, React.createElement(IntlLabel, {
+    keys: ["calendar", "today"],
+    value: "Today"
+  })), React.createElement(DatePickerShortcutButton, {
+    onClick: onYesterdayClicked
+  }, React.createElement(IntlLabel, {
+    keys: ["calendar", "yesterday"],
+    value: "Yesterday"
+  })), React.createElement(DatePickerShortcutButton, {
+    onClick: onWeekendClicked
+  }, React.createElement(IntlLabel, {
+    keys: ["calendar", "thisWeekEnd"],
+    value: "This Weekend"
+  })), React.createElement(DatePickerShortcutButton, {
+    onClick: onPrevWeekendClicked
+  }, React.createElement(IntlLabel, {
+    keys: ["calendar", "prevWeekend"],
+    value: "Prev Weekend"
+  })), React.createElement(DatePickerShortcutButton, {
+    onClick: onMonthEndClicked
+  }, React.createElement(IntlLabel, {
+    keys: ["calendar", "thisMonthEnd"],
+    value: "This Month End"
+  })), React.createElement(DatePickerShortcutButton, {
+    onClick: onPrevMonthEndClicked
+  }, React.createElement(IntlLabel, {
+    keys: ["calendar", "prevMonthEnd"],
+    value: "Prev month End"
+  })), React.createElement(DatePickerShortcutButton, {
+    onClick: onYearEndClicked
+  }, React.createElement(IntlLabel, {
+    keys: ["calendar", "thisYearEnd"],
+    value: "This Year End"
+  })), React.createElement(DatePickerShortcutButton, {
+    onClick: onPrevYearEndClicked
+  }, React.createElement(IntlLabel, {
+    keys: ["calendar", "prevYearEnd"],
+    value: "Prev Year End"
+  }))), React.createElement(DatePickerHeader, null, React.createElement(DatePickerHeaderYearMonth, null, currentDisplayMonth), React.createElement(DatePickerHeaderOperators, null, React.createElement(DatePickerHeaderTodayButton, {
+    onClick: onTodayClicked
+  }, React.createElement(IntlLabel, {
+    keys: ["calendar", "today"],
+    value: "Today"
+  })), React.createElement(DatePickerHeaderMonthChangeButton, {
+    onClick: onGotoPrevMonthClicked
+  }, React.createElement(LeftCaret, null)), React.createElement(DatePickerHeaderMonthChangeButton, {
+    onClick: onGotoNextMonthClicked
+  }, React.createElement(RightCaret, null)))), React.createElement(DatePickerBody, null, React.createElement(DatePickerBodyHeaderCell, null, React.createElement(IntlLabel, {
+    keys: ["calendar", "sunday"],
+    value: "S"
+  })), React.createElement(DatePickerBodyHeaderCell, null, React.createElement(IntlLabel, {
+    keys: ["calendar", "monday"],
+    value: "M"
+  })), React.createElement(DatePickerBodyHeaderCell, null, React.createElement(IntlLabel, {
+    keys: ["calendar", "tuesday"],
+    value: "T"
+  })), React.createElement(DatePickerBodyHeaderCell, null, React.createElement(IntlLabel, {
+    keys: ["calendar", "wednesday"],
+    value: "W"
+  })), React.createElement(DatePickerBodyHeaderCell, null, React.createElement(IntlLabel, {
+    keys: ["calendar", "thursday"],
+    value: "T"
+  })), React.createElement(DatePickerBodyHeaderCell, null, React.createElement(IntlLabel, {
+    keys: ["calendar", "friday"],
+    value: "F"
+  })), React.createElement(DatePickerBodyHeaderCell, null, React.createElement(IntlLabel, {
+    keys: ["calendar", "saturday"],
+    value: "S"
+  })), days.map(({
+    year,
+    month,
+    date
+  }) => {
+    const valueToPerform = state.current.clone().year(year).month(month).date(date);
+    const couldPerformValue = couldPerform == null ? true : couldPerform({
+      root: $root,
+      model: $model,
+      valueToCheck: valueToPerform,
+      checkType: "date",
+      global: globalHandlers
+    }) !== false;
+    const click = couldPerformValue ? onDateChange(dayjs().year(year).month(month).date(date), true) : void 0;
+    return React.createElement(DatePickerBodyDateCell, {
+      key: `${year}/${month}/${date}`,
+      "data-current-month": year === currentYear && month === currentMonth,
+      "data-current": year === value.year() && month === value.month() && date === value.date(),
+      "data-today": year === todayYear && month === todayMonth && date === todayDate,
+      "data-could-perform": couldPerformValue,
+      onClick: click
+    }, React.createElement("span", null, date));
+  })));
 };
-const PopupHeaderContainer = qe.div.attrs({ [DOM_KEY_WIDGET]: "d9-calendar-popup-header" })`
+const PopupHeaderContainer = qe.div.attrs({
+  [DOM_KEY_WIDGET]: "d9-calendar-popup-header"
+})`
     display: flex;
     align-items: center;
     border-bottom: ${CssVars.BORDER};
@@ -5455,21 +7015,29 @@ const PopupHeaderContainer = qe.div.attrs({ [DOM_KEY_WIDGET]: "d9-calendar-popup
     padding: 0 ${CssVars.CALENDAR_GUTTER_SIZE};
     cursor: default;
 `;
-const PopupHeaderDateLabel = qe.span.attrs({ [DOM_KEY_WIDGET]: "d9-calendar-popup-date-label" })`
+const PopupHeaderDateLabel = qe.span.attrs({
+  [DOM_KEY_WIDGET]: "d9-calendar-popup-date-label"
+})`
     font-size: 0.8em;
     font-weight: ${CssVars.FONT_BOLD};
     font-variant: ${CssVars.FONT_VARIANT};
     margin-right: 0.5em;
 `;
-const PopupHeaderTimeLabel = qe.span.attrs({ [DOM_KEY_WIDGET]: "d9-calendar-popup-header-time-label" })`
+const PopupHeaderTimeLabel = qe.span.attrs({
+  [DOM_KEY_WIDGET]: "d9-calendar-popup-header-time-label"
+})`
     font-size: 0.8em;
     font-weight: ${CssVars.FONT_BOLD};
     font-variant: ${CssVars.FONT_VARIANT};
 `;
-const PopupHeaderPlaceholder = qe.span.attrs({ [DOM_KEY_WIDGET]: "d9-calendar-popup-header-placeholder" })`
+const PopupHeaderPlaceholder = qe.span.attrs({
+  [DOM_KEY_WIDGET]: "d9-calendar-popup-header-placeholder"
+})`
     flex-grow: 1;
 `;
-const PopupHeaderTimeButton = qe.div.attrs({ [DOM_KEY_WIDGET]: "d9-calendar-popup-header-time-button" })`
+const PopupHeaderTimeButton = qe.div.attrs({
+  [DOM_KEY_WIDGET]: "d9-calendar-popup-header-time-button"
+})`
     display: flex;
     position: relative;
     align-items: center;
@@ -5515,8 +7083,17 @@ var CurrentPicker;
   CurrentPicker2[CurrentPicker2["TIME"] = 2] = "TIME";
 })(CurrentPicker || (CurrentPicker = {}));
 const CalendarPopupHeader = (props) => {
-  const { date, dateFormat, time, timeFormat, value, confirm } = props;
-  const { fire } = useCalendarEventBus();
+  const {
+    date,
+    dateFormat,
+    time,
+    timeFormat,
+    value,
+    confirm
+  } = props;
+  const {
+    fire
+  } = useCalendarEventBus();
   const [currentPicker, setCurrentPicker] = reactExports.useState(() => {
     return checkDateParts(dateFormat).hasDate ? CurrentPicker.DATE : CurrentPicker.YEAR_MONTH;
   });
@@ -5547,42 +7124,29 @@ const CalendarPopupHeader = (props) => {
   const onConfirmClicked = () => confirm(value);
   const currentDisplayDate = value.format(dateFormat);
   const currentDisplayTime = value.format(timeFormat);
-  const { hasDate } = checkDateParts(dateFormat);
-  return React.createElement(
-    PopupHeaderContainer,
-    null,
-    date ? React.createElement(PopupHeaderDateLabel, null, currentDisplayDate) : null,
-    time ? React.createElement(PopupHeaderTimeLabel, null, currentDisplayTime) : null,
-    React.createElement(PopupHeaderPlaceholder, null),
-    date && time ? React.createElement(
-      React.Fragment,
-      null,
-      React.createElement(PopupHeaderTimeButton, { onClick: onToDayStartClicked }, "00"),
-      React.createElement(PopupHeaderTimeButton, { onClick: onToDayEndClicked }, "24"),
-      currentPicker !== CurrentPicker.TIME ? React.createElement(
-        PopupHeaderTimeButton,
-        { onClick: onToTimeClicked },
-        React.createElement(TimeIcon, null)
-      ) : null
-    ) : null,
-    date && currentPicker !== CurrentPicker.YEAR_MONTH ? React.createElement(
-      PopupHeaderTimeButton,
-      { onClick: onYearMonthClicked },
-      React.createElement(DateIcon, null)
-    ) : null,
-    date && hasDate && currentPicker !== CurrentPicker.DATE ? React.createElement(
-      PopupHeaderTimeButton,
-      { onClick: onBackClicked },
-      React.createElement(BackIcon, null)
-    ) : null,
-    React.createElement(
-      PopupHeaderTimeButton,
-      { onClick: onConfirmClicked },
-      React.createElement(IntlLabel, { keys: ["calendar", "confirm"], value: "Ok" })
-    )
-  );
+  const {
+    hasDate
+  } = checkDateParts(dateFormat);
+  return React.createElement(PopupHeaderContainer, null, date ? React.createElement(PopupHeaderDateLabel, null, currentDisplayDate) : null, time ? React.createElement(PopupHeaderTimeLabel, null, currentDisplayTime) : null, React.createElement(PopupHeaderPlaceholder, null), date && time ? React.createElement(React.Fragment, null, React.createElement(PopupHeaderTimeButton, {
+    onClick: onToDayStartClicked
+  }, "00"), React.createElement(PopupHeaderTimeButton, {
+    onClick: onToDayEndClicked
+  }, "24"), currentPicker !== CurrentPicker.TIME ? React.createElement(PopupHeaderTimeButton, {
+    onClick: onToTimeClicked
+  }, React.createElement(TimeIcon, null)) : null) : null, date && currentPicker !== CurrentPicker.YEAR_MONTH ? React.createElement(PopupHeaderTimeButton, {
+    onClick: onYearMonthClicked
+  }, React.createElement(DateIcon, null)) : null, date && hasDate && currentPicker !== CurrentPicker.DATE ? React.createElement(PopupHeaderTimeButton, {
+    onClick: onBackClicked
+  }, React.createElement(BackIcon, null)) : null, React.createElement(PopupHeaderTimeButton, {
+    onClick: onConfirmClicked
+  }, React.createElement(IntlLabel, {
+    keys: ["calendar", "confirm"],
+    value: "Ok"
+  })));
 };
-const TimePickerContainer = qe.div.attrs(({ columns }) => {
+const TimePickerContainer = qe.div.attrs(({
+  columns
+}) => {
   return {
     [DOM_KEY_WIDGET]: "d9-calendar-time-picker",
     style: {
@@ -5598,7 +7162,9 @@ const TimePickerContainer = qe.div.attrs(({ columns }) => {
     padding: 0 ${CssVars.CALENDAR_GUTTER_SIZE} ${CssVars.CALENDAR_GUTTER_SIZE};
     cursor: default;
 `;
-const TimePickerLabel = qe.div.attrs({ [DOM_KEY_WIDGET]: "d9-calendar-time-picker-label" })`
+const TimePickerLabel = qe.div.attrs({
+  [DOM_KEY_WIDGET]: "d9-calendar-time-picker-label"
+})`
     display: flex;
     align-items: center;
     font-variant: ${CssVars.FONT_VARIANT};
@@ -5615,7 +7181,9 @@ const TimePickerSelector = qe.div.attrs({
     border: ${CssVars.BORDER};
     overflow-y: scroll;
 `;
-const TimePickerSelectorOption = qe.span.attrs({ [DOM_KEY_WIDGET]: "d9-calendar-time-picker-selector-option" })`
+const TimePickerSelectorOption = qe.span.attrs({
+  [DOM_KEY_WIDGET]: "d9-calendar-time-picker-selector-option"
+})`
     display: flex;
     position: relative;
     align-items: center;
@@ -5662,12 +7230,23 @@ const TimePickerSelectorOption = qe.span.attrs({ [DOM_KEY_WIDGET]: "d9-calendar-
     }
 `;
 const TimePicker = (props) => {
-  const { $root, $model, value, date, timeFormat, couldPerform } = props;
+  const {
+    $root,
+    $model,
+    value,
+    date,
+    timeFormat,
+    couldPerform
+  } = props;
   const hourSelectorRef = reactExports.useRef(null);
   const minuteSelectorRef = reactExports.useRef(null);
   const secondSelectorRef = reactExports.useRef(null);
   const globalHandlers = useGlobalHandlers();
-  const { on, off, fire } = useCalendarEventBus();
+  const {
+    on,
+    off,
+    fire
+  } = useCalendarEventBus();
   const [visible, setVisible] = reactExports.useState(!date);
   reactExports.useEffect(() => {
     const onOpen = () => setVisible(true);
@@ -5708,66 +7287,86 @@ const TimePicker = (props) => {
     const newValue = value.second(index);
     fire(CalendarEventTypes.VALUE_SELECTED, newValue);
   };
-  const { hasMinute, hasSecond } = checkTimeParts(timeFormat);
+  const {
+    hasMinute,
+    hasSecond
+  } = checkTimeParts(timeFormat);
   const columns = 3 - (!hasMinute ? 1 : 0) - (!hasSecond ? 1 : 0);
-  return React.createElement(
-    TimePickerContainer,
-    { columns },
-    React.createElement(
-      TimePickerLabel,
-      null,
-      React.createElement(IntlLabel, { keys: ["calendar", "hour"], value: "Hour" })
-    ),
-    hasMinute ? React.createElement(
-      TimePickerLabel,
-      null,
-      React.createElement(IntlLabel, { keys: ["calendar", "minute"], value: "Minute" })
-    ) : null,
-    hasSecond ? React.createElement(
-      TimePickerLabel,
-      null,
-      React.createElement(IntlLabel, { keys: ["calendar", "second"], value: "Second" })
-    ) : null,
-    React.createElement(TimePickerSelector, { ref: hourSelectorRef }, new Array(24).fill(1).map((_, index) => {
-      const valueToPerform = value.clone().hour(index);
-      const couldPerformValue = couldPerform == null ? true : couldPerform({
-        root: $root,
-        model: $model,
-        valueToCheck: valueToPerform,
-        checkType: "hour",
-        global: globalHandlers
-      }) !== false;
-      const click = couldPerformValue ? onHourChange(index) : void 0;
-      return React.createElement(TimePickerSelectorOption, { "data-current": value.hour() === index, "data-hour": index, "data-could-perform": couldPerformValue, onClick: click, key: index }, `${index}`.padStart(2, "0"));
-    })),
-    hasMinute ? React.createElement(TimePickerSelector, { ref: minuteSelectorRef }, new Array(60).fill(1).map((_, index) => {
-      const valueToPerform = value.clone().minute(index);
-      const couldPerformValue = couldPerform == null ? true : couldPerform({
-        root: $root,
-        model: $model,
-        valueToCheck: valueToPerform,
-        checkType: "minute",
-        global: globalHandlers
-      }) !== false;
-      const click = couldPerformValue ? onMinuteChange(index) : void 0;
-      return React.createElement(TimePickerSelectorOption, { "data-current": value.minute() === index, "data-minute": index, "data-could-perform": couldPerformValue, onClick: click, key: index }, `${index}`.padStart(2, "0"));
-    })) : null,
-    hasSecond ? React.createElement(TimePickerSelector, { ref: secondSelectorRef }, new Array(60).fill(1).map((_, index) => {
-      const valueToPerform = value.clone().second(index);
-      const couldPerformValue = couldPerform == null ? true : couldPerform({
-        root: $root,
-        model: $model,
-        valueToCheck: valueToPerform,
-        checkType: "second",
-        global: globalHandlers
-      }) !== false;
-      const click = couldPerformValue ? onSecondChange(index) : void 0;
-      return React.createElement(TimePickerSelectorOption, { "data-current": value.second() === index, "data-second": index, "data-could-perform": couldPerformValue, onClick: click, key: index }, `${index}`.padStart(2, "0"));
-    })) : null
-  );
+  return React.createElement(TimePickerContainer, {
+    columns
+  }, React.createElement(TimePickerLabel, null, React.createElement(IntlLabel, {
+    keys: ["calendar", "hour"],
+    value: "Hour"
+  })), hasMinute ? React.createElement(TimePickerLabel, null, React.createElement(IntlLabel, {
+    keys: ["calendar", "minute"],
+    value: "Minute"
+  })) : null, hasSecond ? React.createElement(TimePickerLabel, null, React.createElement(IntlLabel, {
+    keys: ["calendar", "second"],
+    value: "Second"
+  })) : null, React.createElement(TimePickerSelector, {
+    ref: hourSelectorRef
+  }, new Array(24).fill(1).map((_, index) => {
+    const valueToPerform = value.clone().hour(index);
+    const couldPerformValue = couldPerform == null ? true : couldPerform({
+      root: $root,
+      model: $model,
+      valueToCheck: valueToPerform,
+      checkType: "hour",
+      global: globalHandlers
+    }) !== false;
+    const click = couldPerformValue ? onHourChange(index) : void 0;
+    return React.createElement(TimePickerSelectorOption, {
+      "data-current": value.hour() === index,
+      "data-hour": index,
+      "data-could-perform": couldPerformValue,
+      onClick: click,
+      key: index
+    }, `${index}`.padStart(2, "0"));
+  })), hasMinute ? React.createElement(TimePickerSelector, {
+    ref: minuteSelectorRef
+  }, new Array(60).fill(1).map((_, index) => {
+    const valueToPerform = value.clone().minute(index);
+    const couldPerformValue = couldPerform == null ? true : couldPerform({
+      root: $root,
+      model: $model,
+      valueToCheck: valueToPerform,
+      checkType: "minute",
+      global: globalHandlers
+    }) !== false;
+    const click = couldPerformValue ? onMinuteChange(index) : void 0;
+    return React.createElement(TimePickerSelectorOption, {
+      "data-current": value.minute() === index,
+      "data-minute": index,
+      "data-could-perform": couldPerformValue,
+      onClick: click,
+      key: index
+    }, `${index}`.padStart(2, "0"));
+  })) : null, hasSecond ? React.createElement(TimePickerSelector, {
+    ref: secondSelectorRef
+  }, new Array(60).fill(1).map((_, index) => {
+    const valueToPerform = value.clone().second(index);
+    const couldPerformValue = couldPerform == null ? true : couldPerform({
+      root: $root,
+      model: $model,
+      valueToCheck: valueToPerform,
+      checkType: "second",
+      global: globalHandlers
+    }) !== false;
+    const click = couldPerformValue ? onSecondChange(index) : void 0;
+    return React.createElement(TimePickerSelectorOption, {
+      "data-current": value.second() === index,
+      "data-second": index,
+      "data-could-perform": couldPerformValue,
+      onClick: click,
+      key: index
+    }, `${index}`.padStart(2, "0"));
+  })) : null);
 };
 const useValueChange = (onChange) => {
-  const { on, off } = useCalendarEventBus();
+  const {
+    on,
+    off
+  } = useCalendarEventBus();
   reactExports.useEffect(() => {
     on(CalendarEventTypes.VALUE_SELECTED, onChange);
     return () => {
@@ -5775,7 +7374,9 @@ const useValueChange = (onChange) => {
     };
   }, [on, off, onChange]);
 };
-const YearMonthPickerContainer = qe.div.attrs({ [DOM_KEY_WIDGET]: "d9-calendar-ym-picker" })`
+const YearMonthPickerContainer = qe.div.attrs({
+  [DOM_KEY_WIDGET]: "d9-calendar-ym-picker"
+})`
     display: grid;
     position: relative;
     grid-template-columns: 33% 1fr;
@@ -5784,7 +7385,9 @@ const YearMonthPickerContainer = qe.div.attrs({ [DOM_KEY_WIDGET]: "d9-calendar-y
     padding: 0 ${CssVars.CALENDAR_GUTTER_SIZE} ${CssVars.CALENDAR_GUTTER_SIZE};
     cursor: default;
 `;
-const YearMonthPickerLabel = qe.div.attrs({ [DOM_KEY_WIDGET]: "d9-calendar-ym-picker-label" })`
+const YearMonthPickerLabel = qe.div.attrs({
+  [DOM_KEY_WIDGET]: "d9-calendar-ym-picker-label"
+})`
     display: flex;
     align-items: center;
     font-variant: ${CssVars.FONT_VARIANT};
@@ -5805,7 +7408,9 @@ const YearSelector = qe.div.attrs({
     height: calc(${CssVars.CALENDAR_POPUP_HEIGHT_VALUE}px - ${CssVars.CALENDAR_POPUP_HEADER_HEIGHT} - ${CssVars.INPUT_HEIGHT} * 1.5 - ${CssVars.CALENDAR_GUTTER_SIZE});
     overflow-y: scroll;
 `;
-const YearSelectorOption = qe.span.attrs({ [DOM_KEY_WIDGET]: "d9-calendar-ym-picker-year-selector-option" })`
+const YearSelectorOption = qe.span.attrs({
+  [DOM_KEY_WIDGET]: "d9-calendar-ym-picker-year-selector-option"
+})`
     display: flex;
     position: relative;
     align-items: center;
@@ -5850,13 +7455,17 @@ const YearSelectorOption = qe.span.attrs({ [DOM_KEY_WIDGET]: "d9-calendar-ym-pic
         background-color: ${CssVars.HOVER_COLOR};
     }
 `;
-const MonthSelector = qe.div.attrs({ [DOM_KEY_WIDGET]: "d9-calendar-ym-picker-month-selector" })`
+const MonthSelector = qe.div.attrs({
+  [DOM_KEY_WIDGET]: "d9-calendar-ym-picker-month-selector"
+})`
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     grid-column-gap: ${CssVars.CALENDAR_GUTTER_SIZE};
     grid-row-gap: ${CssVars.CALENDAR_GUTTER_SIZE};
 `;
-const MonthSelectorOption = qe.span.attrs({ [DOM_KEY_WIDGET]: "d9-calendar-ym-picker-month-selector-option" })`
+const MonthSelectorOption = qe.span.attrs({
+  [DOM_KEY_WIDGET]: "d9-calendar-ym-picker-month-selector-option"
+})`
     display: flex;
     position: relative;
     align-items: center;
@@ -5905,9 +7514,19 @@ const MonthSelectorOption = qe.span.attrs({ [DOM_KEY_WIDGET]: "d9-calendar-ym-pi
     }
 `;
 const YearMonthPicker = (props) => {
-  const { $root, $model, value, dateFormat, couldPerform } = props;
+  const {
+    $root,
+    $model,
+    value,
+    dateFormat,
+    couldPerform
+  } = props;
   const globalHandlers = useGlobalHandlers();
-  const { on, off, fire } = useCalendarEventBus();
+  const {
+    on,
+    off,
+    fire
+  } = useCalendarEventBus();
   const yearSelectorRef = reactExports.useRef(null);
   const [visible, setVisible] = reactExports.useState(!checkDateParts(dateFormat).hasDate);
   reactExports.useEffect(() => {
@@ -5941,58 +7560,65 @@ const YearMonthPicker = (props) => {
     fire(CalendarEventTypes.VALUE_SELECTED, newValue);
   };
   const maxYear = (/* @__PURE__ */ new Date()).getFullYear() + 99;
-  const monthLabels = [
-    [["calendar", "jan"], "Jan"],
-    [["calendar", "feb"], "Feb"],
-    [["calendar", "mar"], "Mar"],
-    [["calendar", "apr"], "Apr"],
-    [["calendar", "may"], "May"],
-    [["calendar", "jun"], "Jun"],
-    [["calendar", "jul"], "Jul"],
-    [["calendar", "aug"], "Aug"],
-    [["calendar", "sep"], "Sep"],
-    [["calendar", "oct"], "Oct"],
-    [["calendar", "nov"], "Nov"],
-    [["calendar", "dec"], "Dec"]
-  ];
+  const monthLabels = [[["calendar", "jan"], "Jan"], [["calendar", "feb"], "Feb"], [["calendar", "mar"], "Mar"], [["calendar", "apr"], "Apr"], [["calendar", "may"], "May"], [["calendar", "jun"], "Jun"], [["calendar", "jul"], "Jul"], [["calendar", "aug"], "Aug"], [["calendar", "sep"], "Sep"], [["calendar", "oct"], "Oct"], [["calendar", "nov"], "Nov"], [["calendar", "dec"], "Dec"]];
   const yearFormat = dateFormat.includes("B") ? "BBBB" : "YYYY";
-  return React.createElement(
-    YearMonthPickerContainer,
-    null,
-    React.createElement(YearMonthPickerLabel, null, "Year"),
-    React.createElement(YearMonthPickerLabel, null, "Month"),
-    React.createElement(YearSelector, { ref: yearSelectorRef }, new Array(200).fill(1).map((_, index) => maxYear - index).map((year) => {
-      const valueToPerform = value.clone().year(year);
-      const couldPerformValue = couldPerform == null ? true : couldPerform({
-        root: $root,
-        model: $model,
-        valueToCheck: valueToPerform,
-        checkType: "year",
-        global: globalHandlers
-      }) !== false;
-      const click = couldPerformValue ? onYearChange(year) : void 0;
-      return React.createElement(YearSelectorOption, { "data-year": year, "data-current": year === value.year(), "data-could-perform": couldPerformValue, onClick: click, key: year }, valueToPerform.format(yearFormat));
-    })),
-    React.createElement(MonthSelector, null, new Array(12).fill(1).map((_, month) => {
-      const valueToPerform = value.clone().month(month);
-      const couldPerformValue = couldPerform == null ? true : couldPerform({
-        root: $root,
-        model: $model,
-        valueToCheck: valueToPerform,
-        checkType: "month",
-        global: globalHandlers
-      }) !== false;
-      const click = couldPerformValue ? onMonthChange(month) : void 0;
-      return React.createElement(
-        MonthSelectorOption,
-        { onClick: click, "data-current": value.month() === month, "data-could-perform": couldPerformValue, key: month },
-        React.createElement(IntlLabel, { keys: monthLabels[month][0], value: monthLabels[month][1] })
-      );
-    }))
-  );
+  return React.createElement(YearMonthPickerContainer, null, React.createElement(YearMonthPickerLabel, null, "Year"), React.createElement(YearMonthPickerLabel, null, "Month"), React.createElement(YearSelector, {
+    ref: yearSelectorRef
+  }, new Array(200).fill(1).map((_, index) => maxYear - index).map((year) => {
+    const valueToPerform = value.clone().year(year);
+    const couldPerformValue = couldPerform == null ? true : couldPerform({
+      root: $root,
+      model: $model,
+      valueToCheck: valueToPerform,
+      checkType: "year",
+      global: globalHandlers
+    }) !== false;
+    const click = couldPerformValue ? onYearChange(year) : void 0;
+    return React.createElement(YearSelectorOption, {
+      "data-year": year,
+      "data-current": year === value.year(),
+      "data-could-perform": couldPerformValue,
+      onClick: click,
+      key: year
+    }, valueToPerform.format(yearFormat));
+  })), React.createElement(MonthSelector, null, new Array(12).fill(1).map((_, month) => {
+    const valueToPerform = value.clone().month(month);
+    const couldPerformValue = couldPerform == null ? true : couldPerform({
+      root: $root,
+      model: $model,
+      valueToCheck: valueToPerform,
+      checkType: "month",
+      global: globalHandlers
+    }) !== false;
+    const click = couldPerformValue ? onMonthChange(month) : void 0;
+    return React.createElement(MonthSelectorOption, {
+      onClick: click,
+      "data-current": value.month() === month,
+      "data-could-perform": couldPerformValue,
+      key: month
+    }, React.createElement(IntlLabel, {
+      keys: monthLabels[month][0],
+      value: monthLabels[month][1]
+    }));
+  })));
 };
 const CalendarPopup = (props) => {
-  const { $root, $model, initValue, popupRef, popupState, popupShown, date = true, dateFormat, time = false, timeFormat, initTimeAt, autoConfirmOnDate, couldPerform, confirm } = props;
+  const {
+    $root,
+    $model,
+    initValue,
+    popupRef,
+    popupState,
+    popupShown,
+    date = true,
+    dateFormat,
+    time = false,
+    timeFormat,
+    initTimeAt,
+    autoConfirmOnDate,
+    couldPerform,
+    confirm
+  } = props;
   const [value, setValue] = reactExports.useState(() => {
     if (initValue != null) {
       return initValue;
@@ -6010,23 +7636,55 @@ const CalendarPopup = (props) => {
       confirm(value2);
     }
   });
-  const { hasDate } = checkDateParts(dateFormat);
-  return React.createElement(
-    DropdownPopup,
-    { ...popupState, minWidth: CssVars.CALENDAR_POPUP_WIDTH_VALUE, maxWidth: CssVars.CALENDAR_POPUP_WIDTH_VALUE, minHeight: CssVars.CALENDAR_POPUP_HEIGHT_VALUE, maxHeight: CssVars.CALENDAR_POPUP_HEIGHT_VALUE, shown: popupShown && popupState.active === DropdownPopupStateActive.ACTIVE, ref: popupRef },
-    React.createElement(
-      PopupContainer,
-      null,
-      React.createElement(CalendarPopupHeader, { date, dateFormat, time, timeFormat, value, confirm }),
-      date && hasDate ? React.createElement(DatePicker, { "$root": $root, "$model": $model, value, dateFormat, time, couldPerform }) : null,
-      time ? React.createElement(TimePicker, { "$root": $root, "$model": $model, value, date, timeFormat, couldPerform }) : null,
-      date ? React.createElement(YearMonthPicker, { "$root": $root, "$model": $model, value, dateFormat, couldPerform }) : null
-    )
-  );
+  const {
+    hasDate
+  } = checkDateParts(dateFormat);
+  return React.createElement(DropdownPopup, {
+    ...popupState,
+    minWidth: CssVars.CALENDAR_POPUP_WIDTH_VALUE,
+    maxWidth: CssVars.CALENDAR_POPUP_WIDTH_VALUE,
+    minHeight: CssVars.CALENDAR_POPUP_HEIGHT_VALUE,
+    maxHeight: CssVars.CALENDAR_POPUP_HEIGHT_VALUE,
+    shown: popupShown && popupState.active === DropdownPopupStateActive.ACTIVE,
+    ref: popupRef
+  }, React.createElement(PopupContainer, null, React.createElement(CalendarPopupHeader, {
+    date,
+    dateFormat,
+    time,
+    timeFormat,
+    value,
+    confirm
+  }), date && hasDate ? React.createElement(DatePicker, {
+    "$root": $root,
+    "$model": $model,
+    value,
+    dateFormat,
+    time,
+    couldPerform
+  }) : null, time ? React.createElement(TimePicker, {
+    "$root": $root,
+    "$model": $model,
+    value,
+    date,
+    timeFormat,
+    couldPerform
+  }) : null, date ? React.createElement(YearMonthPicker, {
+    "$root": $root,
+    "$model": $model,
+    value,
+    dateFormat,
+    couldPerform
+  }) : null));
 };
 const CalendarValueHolder = (props) => {
-  const { initValue } = props;
-  const { on, off, fire } = useCalendarEventBus();
+  const {
+    initValue
+  } = props;
+  const {
+    on,
+    off,
+    fire
+  } = useCalendarEventBus();
   const [value, setValue] = reactExports.useState(initValue ?? null);
   reactExports.useEffect(() => {
     setValue(initValue ?? null);
@@ -6045,7 +7703,10 @@ const CalendarValueHolder = (props) => {
   return React.createElement(reactExports.Fragment, null);
 };
 const computeFormat = (options) => {
-  const { date, time } = options;
+  const {
+    date,
+    time
+  } = options;
   if (VUtils.isBlank(time)) {
     return date;
   } else if (VUtils.isBlank(date)) {
@@ -6054,24 +7715,68 @@ const computeFormat = (options) => {
     return `${date} ${time}`;
   }
 };
-const DropdownStickCalendar = qe(Date$1).attrs({ [DOM_KEY_WIDGET]: "d9-dropdown-caret" })`
+const DropdownStickCalendar = qe(Date$1).attrs({
+  [DOM_KEY_WIDGET]: "d9-dropdown-caret"
+})`
     height: calc(${CssVars.INPUT_HEIGHT} * 2 / 5);
     fill: ${CssVars.FONT_COLOR};
     transition: all ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION};
 `;
 const Picker = reactExports.forwardRef((props, ref) => {
-  const { $pp, $wrapped: { $onValueChange, $root, $model, $p2r, $avs: { $disabled, $visible } }, please = "", clearable = true, date, dateFormat = getDefaultCalendarDateFormat(), time, timeFormat = getDefaultCalendarTimeFormat(), storeFormat = getDefaultCalendarDatetimeFormat(), fixedTimeAt = FIX_TIME_AT_START_OF_DAY, initTimeAt, couldPerform, autoConfirm = isCalendarAutoConfirm(), autoConfirmOnDate = isCalendarAutoConfirmOnDate(), useCalendarIcon = isStickIconUseCalendar(), ...rest } = props;
+  const {
+    $pp,
+    $wrapped: {
+      $onValueChange,
+      $root,
+      $model,
+      $p2r,
+      $avs: {
+        $disabled,
+        $visible
+      }
+    },
+    please = "",
+    clearable = true,
+    date,
+    dateFormat = getDefaultCalendarDateFormat(),
+    time,
+    timeFormat = getDefaultCalendarTimeFormat(),
+    storeFormat = getDefaultCalendarDatetimeFormat(),
+    fixedTimeAt = FIX_TIME_AT_START_OF_DAY,
+    initTimeAt,
+    couldPerform,
+    autoConfirm = isCalendarAutoConfirm(),
+    autoConfirmOnDate = isCalendarAutoConfirmOnDate(),
+    useCalendarIcon = isStickIconUseCalendar(),
+    ...rest
+  } = props;
   const globalHandlers = useGlobalHandlers();
-  const { fire } = useCalendarEventBus();
-  const { containerRef, popupRef, popupState, setPopupState, popupShown, setPopupShown } = useDropdownControl({
+  const {
+    fire
+  } = useCalendarEventBus();
+  const {
+    containerRef,
+    popupRef,
+    popupState,
+    setPopupState,
+    popupShown,
+    setPopupShown
+  } = useDropdownControl({
     askPopupMaxHeight: () => CssVars.CALENDAR_POPUP_HEIGHT_VALUE,
     askPopupMaxWidth: () => CssVars.CALENDAR_POPUP_WIDTH_VALUE,
     fixWidth: true
   });
   useDualRefs(containerRef, ref);
-  useTip({ ref: containerRef });
+  useTip({
+    ref: containerRef
+  });
   const showPopup = () => {
-    const { top, left, width, height } = getDropdownPosition(containerRef.current);
+    const {
+      top,
+      left,
+      width,
+      height
+    } = getDropdownPosition(containerRef.current);
     const bottom = isPopupAtBottom(top, height, () => CssVars.CALENDAR_POPUP_HEIGHT_VALUE);
     setPopupState((state) => ({
       ...state,
@@ -6119,16 +7824,29 @@ const Picker = reactExports.forwardRef((props, ref) => {
       newValue = redressTimePart(newValue);
       if (VUtils.isBlank(value)) {
         if (newValue != null) {
-          await $onValueChange(newValue.format(storeFormat), true, { global: globalHandlers });
+          await $onValueChange(newValue.format(storeFormat), true, {
+            global: globalHandlers
+          });
         }
-        setPopupState((state) => ({ ...state, active: DropdownPopupStateActive.HIDDEN }));
+        setPopupState((state) => ({
+          ...state,
+          active: DropdownPopupStateActive.HIDDEN
+        }));
       } else {
         const originalValue = dayjs(value, storeFormat);
         if (!originalValue.isSame(newValue)) {
-          await $onValueChange(newValue.format(storeFormat), true, { global: globalHandlers });
-          setPopupState((state) => ({ ...state, active: DropdownPopupStateActive.HIDDEN }));
+          await $onValueChange(newValue.format(storeFormat), true, {
+            global: globalHandlers
+          });
+          setPopupState((state) => ({
+            ...state,
+            active: DropdownPopupStateActive.HIDDEN
+          }));
         } else {
-          setPopupState((state) => ({ ...state, active: DropdownPopupStateActive.HIDDEN }));
+          setPopupState((state) => ({
+            ...state,
+            active: DropdownPopupStateActive.HIDDEN
+          }));
         }
       }
     });
@@ -6141,7 +7859,9 @@ const Picker = reactExports.forwardRef((props, ref) => {
     event.stopPropagation();
     const value2 = MUtils.getValue($model, $pp);
     if (value2 != null) {
-      await $onValueChange(null, true, { global: globalHandlers });
+      await $onValueChange(null, true, {
+        global: globalHandlers
+      });
       fire(CalendarEventTypes.VALUE_CLEARED);
     }
     showPopup();
@@ -6150,7 +7870,9 @@ const Picker = reactExports.forwardRef((props, ref) => {
     if ($disabled) {
       return;
     }
-    await $onValueChange(redressTimePart(value2).format(storeFormat), true, { global: globalHandlers });
+    await $onValueChange(redressTimePart(value2).format(storeFormat), true, {
+      global: globalHandlers
+    });
     setPopupShown(false);
   };
   const value = MUtils.getValue($model, $pp);
@@ -6161,7 +7883,10 @@ const Picker = reactExports.forwardRef((props, ref) => {
     } else if (date === false) {
       return dayjs(value, storeFormat).format(timeFormat);
     } else if (time) {
-      const datetimeFormat = computeFormat({ date: dateFormat, time: timeFormat });
+      const datetimeFormat = computeFormat({
+        date: dateFormat,
+        time: timeFormat
+      });
       return dayjs(value, storeFormat).format(datetimeFormat);
     } else {
       return dayjs(value, storeFormat).format(dateFormat);
@@ -6174,36 +7899,103 @@ const Picker = reactExports.forwardRef((props, ref) => {
     const parsed = dayjs(value, storeFormat);
     return parsed.isValid() ? parsed : null;
   })();
-  return React.createElement(
-    DropdownContainer,
-    { active: popupState.active, atBottom: popupState.atBottom, role: "input", tabIndex: 0, ...rest, "data-w": "d9-calendar", "data-disabled": $disabled, "data-visible": $visible, onClick: onClicked, onBlur: onBlurred, id: PPUtils.asId(PPUtils.absolute($p2r, props.$pp), props.id), ref: containerRef },
-    React.createElement(CalendarValueHolder, { initValue: initValueForPopup }),
-    React.createElement(DropdownLabel, { "data-please": !valueAssigned }, label),
-    React.createElement(DropdownStick, { valueAssigned, clearable, clear: onClearClicked, disabled: $disabled, icon: useCalendarIcon ? React.createElement(DropdownStickCalendar, null) : void 0 }),
-    isDropdownPopupActive(popupState.active) ? React.createElement(CalendarPopup, { "$root": $root, "$model": $model, initValue: initValueForPopup, popupRef, popupState, popupShown, date, dateFormat, time, timeFormat, initTimeAt, autoConfirmOnDate, couldPerform, confirm: onConfirm }) : null
-  );
+  return React.createElement(DropdownContainer, {
+    active: popupState.active,
+    atBottom: popupState.atBottom,
+    role: "input",
+    tabIndex: 0,
+    ...rest,
+    "data-w": "d9-calendar",
+    "data-disabled": $disabled,
+    "data-visible": $visible,
+    onClick: onClicked,
+    onBlur: onBlurred,
+    id: PPUtils.asId(PPUtils.absolute($p2r, props.$pp), props.id),
+    ref: containerRef
+  }, React.createElement(CalendarValueHolder, {
+    initValue: initValueForPopup
+  }), React.createElement(DropdownLabel, {
+    "data-please": !valueAssigned
+  }, label), React.createElement(DropdownStick, {
+    valueAssigned,
+    clearable,
+    clear: onClearClicked,
+    disabled: $disabled,
+    icon: useCalendarIcon ? React.createElement(DropdownStickCalendar, null) : void 0
+  }), isDropdownPopupActive(popupState.active) ? React.createElement(CalendarPopup, {
+    "$root": $root,
+    "$model": $model,
+    initValue: initValueForPopup,
+    popupRef,
+    popupState,
+    popupShown,
+    date,
+    dateFormat,
+    time,
+    timeFormat,
+    initTimeAt,
+    autoConfirmOnDate,
+    couldPerform,
+    confirm: onConfirm
+  }) : null);
 });
 const Calendar = reactExports.forwardRef((props, ref) => {
-  return React.createElement(
-    CalendarEventBusProvider,
-    null,
-    React.createElement(Picker, { ...props, ref })
-  );
+  return React.createElement(CalendarEventBusProvider, null, React.createElement(Picker, {
+    ...props,
+    ref
+  }));
 });
 const DateCalendar = reactExports.forwardRef((props, ref) => {
-  return React.createElement(Calendar, { ...props, date: true, time: false, ref });
+  return React.createElement(Calendar, {
+    ...props,
+    date: true,
+    time: false,
+    ref
+  });
 });
 const DateTimeCalendar = reactExports.forwardRef((props, ref) => {
-  return React.createElement(Calendar, { ...props, date: true, time: true, ref });
+  return React.createElement(Calendar, {
+    ...props,
+    date: true,
+    time: true,
+    ref
+  });
 });
 const TimeCalendar = reactExports.forwardRef((props, ref) => {
-  return React.createElement(Calendar, { ...props, date: false, time: true, ref });
+  return React.createElement(Calendar, {
+    ...props,
+    date: false,
+    time: true,
+    ref
+  });
 });
-registerWidget({ key: "Calendar", JSX: Calendar, container: false, array: false });
-registerWidget({ key: "Date", JSX: DateCalendar, container: false, array: false });
-registerWidget({ key: "DateTime", JSX: DateTimeCalendar, container: false, array: false });
-registerWidget({ key: "Time", JSX: TimeCalendar, container: false, array: false });
-const AFormCell = qe.div.attrs(({ id }) => {
+registerWidget({
+  key: "Calendar",
+  JSX: Calendar,
+  container: false,
+  array: false
+});
+registerWidget({
+  key: "Date",
+  JSX: DateCalendar,
+  container: false,
+  array: false
+});
+registerWidget({
+  key: "DateTime",
+  JSX: DateTimeCalendar,
+  container: false,
+  array: false
+});
+registerWidget({
+  key: "Time",
+  JSX: TimeCalendar,
+  container: false,
+  array: false
+});
+const AFormCell = qe.div.attrs(({
+  id
+}) => {
   return {
     [DOM_KEY_WIDGET]: "d9-form-cell",
     [DOM_ID_WIDGET]: id
@@ -6225,7 +8017,9 @@ const AFormCell = qe.div.attrs(({ id }) => {
         pointer-events: none;
     }
 `;
-const FormCellInvalidMessage = qe.div.attrs({ [DOM_KEY_WIDGET]: "d9-form-cell-invalid-msg" })`
+const FormCellInvalidMessage = qe.div.attrs({
+  [DOM_KEY_WIDGET]: "d9-form-cell-invalid-msg"
+})`
     display: flex;
     position: relative;
     align-items: center;
@@ -6237,8 +8031,21 @@ const FormCellInvalidMessage = qe.div.attrs({ [DOM_KEY_WIDGET]: "d9-form-cell-in
     padding: ${CssVars.FORM_CELL_INVALID_MESSAGE_PADDING};
 `;
 const FormCell = reactExports.forwardRef((props, ref) => {
-  const { label, holdPositionWhenInvisible = true, $wrapped, children, placeholder, ...rest } = props;
-  const { $avs: { $disabled, $visible, $valid } } = $wrapped;
+  const {
+    label,
+    holdPositionWhenInvisible = true,
+    $wrapped,
+    children,
+    placeholder,
+    ...rest
+  } = props;
+  const {
+    $avs: {
+      $disabled,
+      $visible,
+      $valid
+    }
+  } = $wrapped;
   const validation = $valid;
   const id = PPUtils.asId(PPUtils.absolute($wrapped.$p2r, props.$pp), props.id);
   const fcId = VUtils.isBlank(id) ? void 0 : `fc-${id}`;
@@ -6251,17 +8058,37 @@ const FormCell = reactExports.forwardRef((props, ref) => {
     }
     return attrs;
   }, {});
-  return React.createElement(
-    AFormCell,
-    { ...fcAttrs, "data-disabled": $disabled, "data-visible": $visible, "data-hold-position-on-invisible": holdPositionWhenInvisible, "data-valid": (validation == null ? void 0 : validation.valid) ?? true, id: fcId, ref },
-    React.createElement(LabelLike, { label, "$wrapped": $wrapped, "$validationScopes": props, wrapByCaption: true, "data-r": "d9-fc-caption" }),
-    children,
-    React.createElement(FormCellInvalidMessage, null, (validation == null ? void 0 : validation.valid) === false ? toIntlLabel(validation.failReason) : null)
-  );
+  return React.createElement(AFormCell, {
+    ...fcAttrs,
+    "data-disabled": $disabled,
+    "data-visible": $visible,
+    "data-hold-position-on-invisible": holdPositionWhenInvisible,
+    "data-valid": (validation == null ? void 0 : validation.valid) ?? true,
+    id: fcId,
+    ref
+  }, React.createElement(LabelLike, {
+    label,
+    "$wrapped": $wrapped,
+    "$validationScopes": props,
+    wrapByCaption: true,
+    "data-r": "d9-fc-caption"
+  }), children, React.createElement(FormCellInvalidMessage, null, (validation == null ? void 0 : validation.valid) === false ? toIntlLabel(validation.failReason) : null));
 });
-registerWidget({ key: "FC", JSX: FormCell, container: false, array: false });
-registerWidget({ key: "FormCell", JSX: FormCell, container: false, array: false });
-const ARadio = qe.div.attrs(({ id }) => {
+registerWidget({
+  key: "FC",
+  JSX: FormCell,
+  container: false,
+  array: false
+});
+registerWidget({
+  key: "FormCell",
+  JSX: FormCell,
+  container: false,
+  array: false
+});
+const ARadio = qe.div.attrs(({
+  id
+}) => {
   return {
     [DOM_KEY_WIDGET]: "d9-radio",
     [DOM_ID_WIDGET]: id
@@ -6352,18 +8179,34 @@ const ARadio = qe.div.attrs(({ id }) => {
     }
 `;
 const Radio = reactExports.forwardRef((props, ref) => {
-  const { values = [true, false], $pp, $wrapped: { $onValueChange, $model, $avs: { $disabled, $visible } }, ...rest } = props;
+  const {
+    values = [true, false],
+    $pp,
+    $wrapped: {
+      $onValueChange,
+      $model,
+      $avs: {
+        $disabled,
+        $visible
+      }
+    },
+    ...rest
+  } = props;
   const globalHandlers = useGlobalHandlers();
   const radioRef = reactExports.useRef(null);
   useDualRefs(radioRef, ref);
-  useTip({ ref: radioRef });
+  useTip({
+    ref: radioRef
+  });
   const onValueShouldChange = async () => {
     const oldValue = MUtils.getValue($model, $pp);
     if (oldValue == values[0])
       ;
     else {
       const newValue = oldValue == values[0] ? values[1] : values[0];
-      await $onValueChange(newValue, true, { global: globalHandlers });
+      await $onValueChange(newValue, true, {
+        global: globalHandlers
+      });
     }
   };
   const onClick = async (event) => {
@@ -6375,17 +8218,35 @@ const Radio = reactExports.forwardRef((props, ref) => {
     await onValueShouldChange();
   };
   const onKeyUp = async (event) => {
-    const { key } = event;
+    const {
+      key
+    } = event;
     if (key === " ") {
       await onValueShouldChange();
     }
   };
   const value = MUtils.getValue($model, $pp);
   const checked = (value ?? "") == (values[0] ?? "");
-  return React.createElement(ARadio, { "data-disabled": $disabled, "data-visible": $visible, tabIndex: 0, "data-checked": checked, onClick, onKeyUp, ...rest, ref: radioRef });
+  return React.createElement(ARadio, {
+    "data-disabled": $disabled,
+    "data-visible": $visible,
+    tabIndex: 0,
+    "data-checked": checked,
+    onClick,
+    onKeyUp,
+    ...rest,
+    ref: radioRef
+  });
 });
-registerWidget({ key: "Radio", JSX: Radio, container: false, array: false });
-const APage = qe.div.attrs({ [DOM_KEY_WIDGET]: "d9-page" })`
+registerWidget({
+  key: "Radio",
+  JSX: Radio,
+  container: false,
+  array: false
+});
+const APage = qe.div.attrs({
+  [DOM_KEY_WIDGET]: "d9-page"
+})`
     display: grid;
     position: relative;
     grid-column: var(--grid-column);
@@ -6395,20 +8256,54 @@ const APage = qe.div.attrs({ [DOM_KEY_WIDGET]: "d9-page" })`
     grid-row-gap: ${CssVars.GRID_ROW_GAP};
 `;
 const Page = reactExports.forwardRef((props, ref) => {
-  const { $wrapped: { $avs: { $disabled } }, children, ...rest } = props;
-  return React.createElement(APage, { ...rest, "data-disabled": $disabled, ref }, children);
+  const {
+    $wrapped: {
+      $avs: {
+        $disabled
+      }
+    },
+    children,
+    ...rest
+  } = props;
+  return React.createElement(APage, {
+    ...rest,
+    "data-disabled": $disabled,
+    ref
+  }, children);
 });
-registerWidget({ key: "Page", JSX: Page, container: true, array: false, consumePosition: false });
+registerWidget({
+  key: "Page",
+  JSX: Page,
+  container: true,
+  array: false,
+  consumePosition: false
+});
 const useArrayCouldAddElement = (props) => {
-  const { $pp, $wrapped, $array: { couldAddElement, disableOnCannotAdd = true } } = props;
-  const { on, off } = useRootEventBus();
+  const {
+    $pp,
+    $wrapped,
+    $array: {
+      couldAddElement,
+      disableOnCannotAdd = true
+    }
+  } = props;
+  const {
+    on,
+    off
+  } = useRootEventBus();
   const globalHandlers = useGlobalHandlers();
   const [disabled, setDisabled] = reactExports.useState(false);
   reactExports.useEffect(() => {
     if (disableOnCannotAdd === false || couldAddElement == null) {
       return;
     }
-    const { $array, absolutePathOfArray } = PPUtils.isLevelStayed($pp) ? { $array: $wrapped.$model, absolutePathOfArray: $wrapped.$p2r } : {
+    const {
+      $array,
+      absolutePathOfArray
+    } = PPUtils.isLevelStayed($pp) ? {
+      $array: $wrapped.$model,
+      absolutePathOfArray: $wrapped.$p2r
+    } : {
       $array: MUtils.getValue($wrapped.$model, $pp),
       absolutePathOfArray: PPUtils.absolute($wrapped.$p2r, $pp)
     };
@@ -6416,7 +8311,9 @@ const useArrayCouldAddElement = (props) => {
       const could = await couldAddElement({
         root: $wrapped.$root,
         model: $array
-      }, { global: globalHandlers });
+      }, {
+        global: globalHandlers
+      });
       setDisabled(!could);
     };
     computeEnablement();
@@ -6430,20 +8327,12 @@ const useArrayCouldAddElement = (props) => {
     return () => {
       off && off(RootEventTypes.VALUE_CHANGED, onValueChanged);
     };
-  }, [
-    globalHandlers,
-    on,
-    off,
-    couldAddElement,
-    disableOnCannotAdd,
-    $pp,
-    $wrapped.$p2r,
-    $wrapped.$root,
-    $wrapped.$model
-  ]);
+  }, [globalHandlers, on, off, couldAddElement, disableOnCannotAdd, $pp, $wrapped.$p2r, $wrapped.$root, $wrapped.$model]);
   return [disabled, setDisabled];
 };
-const ARibs = qe.div.attrs(({ id }) => {
+const ARibs = qe.div.attrs(({
+  id
+}) => {
   return {
     [DOM_KEY_WIDGET]: "d9-ribs",
     [DOM_ID_WIDGET]: id
@@ -6464,13 +8353,17 @@ const ARibs = qe.div.attrs(({ id }) => {
         max-height: ${CssVars.RIB_BUTTON_HEIGHT};
     }
 `;
-const ARibRow = qe.div.attrs({ [DOM_KEY_WIDGET]: "d9-rib-row" })`
+const ARibRow = qe.div.attrs({
+  [DOM_KEY_WIDGET]: "d9-rib-row"
+})`
     display: flex;
     position: relative;
     flex-direction: column;
     margin-bottom: ${CssVars.RIB_GAP_SIZE};
 `;
-const ARibRowHeader = qe.div.attrs({ [DOM_KEY_WIDGET]: "d9-rib-row-header" })`
+const ARibRowHeader = qe.div.attrs({
+  [DOM_KEY_WIDGET]: "d9-rib-row-header"
+})`
     display: grid;
     position: relative;
     align-items: center;
@@ -6488,17 +8381,23 @@ const ARibRowHeader = qe.div.attrs({ [DOM_KEY_WIDGET]: "d9-rib-row-header" })`
         cursor: default;
     }
 `;
-const ARibRowIndex = qe.div.attrs({ [DOM_KEY_WIDGET]: "d9-rib-row-index" })`
+const ARibRowIndex = qe.div.attrs({
+  [DOM_KEY_WIDGET]: "d9-rib-row-index"
+})`
     display: flex;
     position: relative;
     font-size: 0.8em;
     font-weight: ${CssVars.FONT_BOLD};
 `;
-const ARibRowHeaderContent = qe.div.attrs({ [DOM_KEY_WIDGET]: "d9-rib-row-header-content" })`
+const ARibRowHeaderContent = qe.div.attrs({
+  [DOM_KEY_WIDGET]: "d9-rib-row-header-content"
+})`
     display: block;
     position: relative;
 `;
-const ARibRowOperators = qe.div.attrs({ [DOM_KEY_WIDGET]: "d9-rib-row-operators" })`
+const ARibRowOperators = qe.div.attrs({
+  [DOM_KEY_WIDGET]: "d9-rib-row-operators"
+})`
     display: flex;
     position: relative;
     align-items: center;
@@ -6517,7 +8416,9 @@ const ARibRowOperators = qe.div.attrs({ [DOM_KEY_WIDGET]: "d9-rib-row-operators"
         }
     }
 `;
-const ARibRowBody = qe.div.attrs(({ expanded }) => {
+const ARibRowBody = qe.div.attrs(({
+  expanded
+}) => {
   return {
     [DOM_KEY_WIDGET]: "d9-rib-row-body",
     style: {
@@ -6535,7 +8436,9 @@ const ARibRowBody = qe.div.attrs(({ expanded }) => {
     grid-row-gap: ${CssVars.GRID_ROW_GAP};
     padding: ${CssVars.SECTION_BODY_PADDING} 0;
 `;
-const ARibNoDataRow = qe.div.attrs({ [DOM_KEY_WIDGET]: "d9-rib-no-data-row" })`
+const ARibNoDataRow = qe.div.attrs({
+  [DOM_KEY_WIDGET]: "d9-rib-no-data-row"
+})`
     display: flex;
     position: relative;
     align-items: center;
@@ -6553,7 +8456,9 @@ const ARibNoDataRow = qe.div.attrs({ [DOM_KEY_WIDGET]: "d9-rib-no-data-row" })`
         padding: 0 ${CssVars.TABLE_CELL_PADDING};
     }
 `;
-const ARibBottomBar = qe.div.attrs({ [DOM_KEY_WIDGET]: "d9-rib-bottom-bar" })`
+const ARibBottomBar = qe.div.attrs({
+  [DOM_KEY_WIDGET]: "d9-rib-bottom-bar"
+})`
     display: flex;
     position: relative;
     align-items: center;
@@ -6564,37 +8469,68 @@ const ARibBottomBar = qe.div.attrs({ [DOM_KEY_WIDGET]: "d9-rib-bottom-bar" })`
 `;
 const RibBottomBarButton = (props) => {
   var _a;
-  const { $wrapped, $array: { addLabel = React.createElement(IntlLabel, { keys: ["ribs", "createItem"], value: "Create New Element" }), addElement } } = props;
+  const {
+    $wrapped,
+    $array: {
+      addLabel = React.createElement(IntlLabel, {
+        keys: ["ribs", "createItem"],
+        value: "Create New Element"
+      }),
+      addElement
+    }
+  } = props;
   const globalHandlers = useGlobalHandlers();
   const [disabled] = useArrayCouldAddElement(props);
-  const onAddClicked = async () => await addElement({ global: globalHandlers });
+  const onAddClicked = async () => await addElement({
+    global: globalHandlers
+  });
   const button$wrapped = {
     ...$wrapped,
-    $avs: { ...$wrapped.$avs ?? {}, $disabled: disabled === true ? disabled : (_a = $wrapped.$avs) == null ? void 0 : _a.$disabled }
+    $avs: {
+      ...$wrapped.$avs ?? {},
+      $disabled: disabled === true ? disabled : (_a = $wrapped.$avs) == null ? void 0 : _a.$disabled
+    }
   };
-  return React.createElement(Button, { "$wrapped": button$wrapped, ink: ButtonInk.PRIMARY, text: addLabel, click: onAddClicked });
+  return React.createElement(Button, {
+    "$wrapped": button$wrapped,
+    ink: ButtonInk.PRIMARY,
+    text: addLabel,
+    click: onAddClicked
+  });
 };
 const RibBottomBar = (props) => {
-  const { $array: { addable = false } } = props;
+  const {
+    $array: {
+      addable = false
+    }
+  } = props;
   if (addable === false) {
     return null;
   } else {
-    return React.createElement(
-      ARibBottomBar,
-      null,
-      React.createElement(RibBottomBarButton, { ...props })
-    );
+    return React.createElement(ARibBottomBar, null, React.createElement(RibBottomBarButton, {
+      ...props
+    }));
   }
 };
 const RibNoData = (props) => {
-  const { $array: { hasElement, noElementReminder = React.createElement(IntlLabel, { keys: ["ribs", "noElement"], value: "No data found." }) } } = props;
+  const {
+    $array: {
+      hasElement,
+      noElementReminder = React.createElement(IntlLabel, {
+        keys: ["ribs", "noElement"],
+        value: "No data found."
+      })
+    }
+  } = props;
   if (hasElement) {
     return null;
   } else {
     return React.createElement(ARibNoDataRow, null, toIntlLabel(noElementReminder));
   }
 };
-const RibRowExpanderSvg = qe(ArrowDown).attrs({ [DOM_KEY_WIDGET]: "d9-rib-row-header-expander-svg" })`
+const RibRowExpanderSvg = qe(ArrowDown).attrs({
+  [DOM_KEY_WIDGET]: "d9-rib-row-header-expander-svg"
+})`
     height: 70%;
     color: ${CssVars.FONT_COLOR};
     opacity: 0.7;
@@ -6605,64 +8541,125 @@ const RibRowExpanderSvg = qe(ArrowDown).attrs({ [DOM_KEY_WIDGET]: "d9-rib-row-he
     }
 `;
 const SectionStyleExpander = (props) => {
-  const { expanded, expand, collapse } = props;
+  const {
+    expanded,
+    expand,
+    collapse
+  } = props;
   const $wrapped = {
     $root: {},
     $model: {},
     $p2r: ".",
     $onValueChange: VUtils.noop,
-    $avs: { $disabled: false, $visible: true }
+    $avs: {
+      $disabled: false,
+      $visible: true
+    }
   };
-  return React.createElement(Button, { "$wrapped": $wrapped, ink: ButtonInk.PRIMARY, fill: ButtonFill.PLAIN, leads: [React.createElement(RibRowExpanderSvg, { "data-expanded": expanded })], click: expanded ? collapse : expand, "data-w": "d9-rib-row-operator" });
+  return React.createElement(Button, {
+    "$wrapped": $wrapped,
+    ink: ButtonInk.PRIMARY,
+    fill: ButtonFill.PLAIN,
+    leads: [React.createElement(RibRowExpanderSvg, {
+      "data-expanded": expanded
+    })],
+    click: expanded ? collapse : expand,
+    "data-w": "d9-rib-row-operator"
+  });
 };
 const ExpandButton$1 = (props) => {
-  const { onClick } = props;
+  const {
+    onClick
+  } = props;
   const $wrapped = {
     $root: {},
     $model: {},
     $p2r: ".",
     $onValueChange: VUtils.noop,
-    $avs: { $disabled: false, $visible: true }
+    $avs: {
+      $disabled: false,
+      $visible: true
+    }
   };
-  return React.createElement(Button, { "$wrapped": $wrapped, ink: ButtonInk.PRIMARY, fill: ButtonFill.PLAIN, leads: ["$icons.expand"], click: onClick, "data-w": "d9-rib-row-operator" });
+  return React.createElement(Button, {
+    "$wrapped": $wrapped,
+    ink: ButtonInk.PRIMARY,
+    fill: ButtonFill.PLAIN,
+    leads: ["$icons.expand"],
+    click: onClick,
+    "data-w": "d9-rib-row-operator"
+  });
 };
 const CollapseButton$1 = (props) => {
-  const { onClick } = props;
+  const {
+    onClick
+  } = props;
   const $wrapped = {
     $root: {},
     $model: {},
     $p2r: ".",
     $onValueChange: VUtils.noop,
-    $avs: { $disabled: false, $visible: true }
+    $avs: {
+      $disabled: false,
+      $visible: true
+    }
   };
-  return React.createElement(Button, { "$wrapped": $wrapped, ink: ButtonInk.PRIMARY, fill: ButtonFill.PLAIN, leads: ["$icons.collapse"], click: onClick, "data-w": "d9-rib-row-operator" });
+  return React.createElement(Button, {
+    "$wrapped": $wrapped,
+    ink: ButtonInk.PRIMARY,
+    fill: ButtonFill.PLAIN,
+    leads: ["$icons.collapse"],
+    click: onClick,
+    "data-w": "d9-rib-row-operator"
+  });
 };
 const RemoveButton$1 = (props) => {
-  const { onClick } = props;
+  const {
+    onClick
+  } = props;
   const $wrapped = {
     $root: {},
     $model: {},
     $p2r: ".",
     $onValueChange: VUtils.noop,
-    $avs: { $disabled: false, $visible: true }
+    $avs: {
+      $disabled: false,
+      $visible: true
+    }
   };
-  return React.createElement(Button, { "$wrapped": $wrapped, ink: ButtonInk.PRIMARY, fill: ButtonFill.PLAIN, leads: ["$icons.remove"], click: onClick, "data-w": "d9-rib-row-operator" });
+  return React.createElement(Button, {
+    "$wrapped": $wrapped,
+    ink: ButtonInk.PRIMARY,
+    fill: ButtonFill.PLAIN,
+    leads: ["$icons.remove"],
+    click: onClick,
+    "data-w": "d9-rib-row-operator"
+  });
 };
 const RibRowOperators = (props) => {
-  const { expanded, expand, collapse, useSectionStyleIcons, removable = false, removeElement } = props;
+  const {
+    expanded,
+    expand,
+    collapse,
+    useSectionStyleIcons,
+    removable = false,
+    removeElement
+  } = props;
   const globalHandlers = useGlobalHandlers();
   const onRemoveClicked = async () => await removeElement(globalHandlers);
-  return React.createElement(
-    ARibRowOperators,
-    { "data-expanded": expanded },
-    removable ? React.createElement(RemoveButton$1, { onClick: onRemoveClicked }) : null,
-    useSectionStyleIcons ? React.createElement(SectionStyleExpander, { expanded, expand, collapse }) : React.createElement(
-      React.Fragment,
-      null,
-      !expanded ? React.createElement(ExpandButton$1, { onClick: expand }) : null,
-      expanded ? React.createElement(CollapseButton$1, { onClick: collapse }) : null
-    )
-  );
+  return React.createElement(ARibRowOperators, {
+    "data-expanded": expanded
+  }, removable ? React.createElement(RemoveButton$1, {
+    onClick: onRemoveClicked
+  }) : null, useSectionStyleIcons ? React.createElement(SectionStyleExpander, {
+    expanded,
+    expand,
+    collapse
+  }) : React.createElement(React.Fragment, null, !expanded ? React.createElement(ExpandButton$1, {
+    onClick: expand
+  }) : null, expanded ? React.createElement(CollapseButton$1, {
+    onClick: collapse
+  }) : null));
 };
 const DEFAULTS = {
   USE_SECTION_STYLE_ICONS: false
@@ -6677,7 +8674,17 @@ var utils$1 = /* @__PURE__ */ Object.freeze({
   setRibsDefaults
 });
 const RibRow = (props) => {
-  const { caption, useSectionStyleIcons = isUseSectionStyleIcons(), $wrapped, $array: { elementIndex, removable, removeElement }, children } = props;
+  const {
+    caption,
+    useSectionStyleIcons = isUseSectionStyleIcons(),
+    $wrapped,
+    $array: {
+      elementIndex,
+      removable,
+      removeElement
+    },
+    children
+  } = props;
   const [expanded, setExpanded] = reactExports.useState(false);
   const expand = () => setExpanded(true);
   const collapse = () => setExpanded(false);
@@ -6686,39 +8693,65 @@ const RibRow = (props) => {
       setExpanded(true);
     }
   };
-  return React.createElement(
-    ARibRow,
-    null,
-    React.createElement(
-      ARibRowHeader,
-      { "data-expanded": expanded, onClick: onRowClicked },
-      React.createElement(
-        ARibRowIndex,
-        null,
-        "# ",
-        elementIndex + 1
-      ),
-      React.createElement(
-        ARibRowHeaderContent,
-        null,
-        React.createElement(LabelLike, { label: caption, "$wrapped": $wrapped, "$validationScopes": props })
-      ),
-      React.createElement(RibRowOperators, { expanded, expand, collapse, useSectionStyleIcons, removable, removeElement })
-    ),
-    React.createElement(ARibRowBody, { expanded }, children)
-  );
+  return React.createElement(ARibRow, null, React.createElement(ARibRowHeader, {
+    "data-expanded": expanded,
+    onClick: onRowClicked
+  }, React.createElement(ARibRowIndex, null, "# ", elementIndex + 1), React.createElement(ARibRowHeaderContent, null, React.createElement(LabelLike, {
+    label: caption,
+    "$wrapped": $wrapped,
+    "$validationScopes": props
+  })), React.createElement(RibRowOperators, {
+    expanded,
+    expand,
+    collapse,
+    useSectionStyleIcons,
+    removable,
+    removeElement
+  })), React.createElement(ARibRowBody, {
+    expanded
+  }, children));
 };
 const Ribs$1 = reactExports.forwardRef((props, ref) => {
-  const { $wrapped: { $p2r, $avs: { $disabled, $visible } }, children, ...rest } = props;
-  return React.createElement(ARibs, { ...rest, "data-disabled": $disabled, "data-visible": $visible, id: PPUtils.asId(PPUtils.absolute($p2r, props.$pp), props.id), ref }, children);
+  const {
+    $wrapped: {
+      $p2r,
+      $avs: {
+        $disabled,
+        $visible
+      }
+    },
+    children,
+    ...rest
+  } = props;
+  return React.createElement(ARibs, {
+    ...rest,
+    "data-disabled": $disabled,
+    "data-visible": $visible,
+    id: PPUtils.asId(PPUtils.absolute($p2r, props.$pp), props.id),
+    ref
+  }, children);
 });
 const ImmutableRibRow = (props) => {
-  const { children } = props;
+  const {
+    children
+  } = props;
   return React.createElement(ARibRow, null, children);
 };
 const ImmutableRibs = reactExports.forwardRef((props, ref) => {
-  const { $array, children, ...rest } = props;
-  return React.createElement(Ribs$1, { "$array": { ...$array, addable: false, removable: false }, ...rest, ref }, children);
+  const {
+    $array,
+    children,
+    ...rest
+  } = props;
+  return React.createElement(Ribs$1, {
+    "$array": {
+      ...$array,
+      addable: false,
+      removable: false
+    },
+    ...rest,
+    ref
+  }, children);
 });
 registerWidget({
   key: "RibsView",
@@ -6729,8 +8762,14 @@ registerWidget({
   array: true
 });
 const Ribs = reactExports.forwardRef((props, ref) => {
-  const { children, ...rest } = props;
-  return React.createElement(Ribs$1, { ...rest, ref }, children);
+  const {
+    children,
+    ...rest
+  } = props;
+  return React.createElement(Ribs$1, {
+    ...rest,
+    ref
+  }, children);
 });
 registerWidget({
   key: "Ribs",
@@ -6744,12 +8783,18 @@ registerWidget({
 const Context$2 = reactExports.createContext({});
 Context$2.displayName = "TableEventBus";
 const TableEventBusProvider = (props) => {
-  const { children } = props;
+  const {
+    children
+  } = props;
   const bus = useCreateEventBus("table");
-  return React.createElement(Context$2.Provider, { value: bus }, children);
+  return React.createElement(Context$2.Provider, {
+    value: bus
+  }, children);
 };
 const useTableEventBus = () => reactExports.useContext(Context$2);
-const ATable = qe.div.attrs(({ id }) => {
+const ATable = qe.div.attrs(({
+  id
+}) => {
   return {
     [DOM_KEY_WIDGET]: "d9-table",
     [DOM_ID_WIDGET]: id
@@ -6764,7 +8809,9 @@ const ATable = qe.div.attrs(({ id }) => {
         display: none;
     }
 `;
-const ATableNoDataRow = qe.div.attrs(({ columnsCount }) => {
+const ATableNoDataRow = qe.div.attrs(({
+  columnsCount
+}) => {
   return {
     [DOM_KEY_WIDGET]: "d9-table-no-data-row",
     style: {
@@ -6792,7 +8839,11 @@ const ATableNoDataRow = qe.div.attrs(({ columnsCount }) => {
         padding: 0 ${CssVars.TABLE_CELL_PADDING};
     }
 `;
-const ATableContent = qe.div.attrs(({ headerHeight, maxBodyHeight, columnsWidth }) => {
+const ATableContent = qe.div.attrs(({
+  headerHeight,
+  maxBodyHeight,
+  columnsWidth
+}) => {
   let maxHeight = void 0;
   if (!VUtils.isBlank(maxBodyHeight)) {
     const computedHeaderHeight = VUtils.isBlank(headerHeight) ? `${CssVars.TABLE_HEADER_HEIGHT} - ${CssVars.TABLE_HEADER_BORDER_SIZE}` : toCssSize(headerHeight);
@@ -6802,7 +8853,10 @@ const ATableContent = qe.div.attrs(({ headerHeight, maxBodyHeight, columnsWidth 
     [DOM_KEY_WIDGET]: "d9-table-content",
     "data-h-scroll": "",
     "data-v-scroll": "",
-    style: { maxHeight, gridTemplateColumns: columnsWidth.join(" ") }
+    style: {
+      maxHeight,
+      gridTemplateColumns: columnsWidth.join(" ")
+    }
   };
 })`
     display: grid;
@@ -6814,7 +8868,11 @@ const ATableContent = qe.div.attrs(({ headerHeight, maxBodyHeight, columnsWidth 
     overflow-x: auto;
     overflow-y: auto;
 `;
-const ATableHeaderCell = qe.div.attrs(({ headerHeight, isGrabber, stickyOffset }) => {
+const ATableHeaderCell = qe.div.attrs(({
+  headerHeight,
+  isGrabber,
+  stickyOffset
+}) => {
   return {
     [DOM_KEY_WIDGET]: "d9-table-header-cell",
     style: {
@@ -6841,7 +8899,10 @@ const ATableHeaderCell = qe.div.attrs(({ headerHeight, isGrabber, stickyOffset }
     white-space: nowrap;
     z-index: 4;
 `;
-const ATableBodyRowIndexCell = qe.div.attrs(({ rowIndex, rowSpan }) => {
+const ATableBodyRowIndexCell = qe.div.attrs(({
+  rowIndex,
+  rowSpan
+}) => {
   return {
     [DOM_KEY_WIDGET]: "d9-table-row-index-cell",
     style: {
@@ -6874,7 +8935,11 @@ const ATableBodyRowIndexCell = qe.div.attrs(({ rowIndex, rowSpan }) => {
         opacity: ${CssVars.TABLE_ROW_INDEX_OPACITY};
     }
 `;
-const ATableBodyCell = qe.div.attrs(({ isGrabber, rowIndex, stickyOffset }) => {
+const ATableBodyCell = qe.div.attrs(({
+  isGrabber,
+  rowIndex,
+  stickyOffset
+}) => {
   return {
     [DOM_KEY_WIDGET]: "d9-table-row-cell",
     style: {
@@ -6914,7 +8979,10 @@ const ATableBodyCell = qe.div.attrs(({ isGrabber, rowIndex, stickyOffset }) => {
         }
     }
 `;
-const ATableRowOperators = qe.div.attrs(({ rowIndex, rowSpan }) => {
+const ATableRowOperators = qe.div.attrs(({
+  rowIndex,
+  rowSpan
+}) => {
   return {
     [DOM_KEY_WIDGET]: "d9-table-row-operators",
     style: {
@@ -6948,7 +9016,10 @@ const ATableRowOperators = qe.div.attrs(({ rowIndex, rowSpan }) => {
         }
     }
 `;
-const ATableBodyCellExpandArea = qe.div.attrs(({ columnsCount, expanded }) => {
+const ATableBodyCellExpandArea = qe.div.attrs(({
+  columnsCount,
+  expanded
+}) => {
   return {
     [DOM_KEY_WIDGET]: "d9-table-row-expand-area",
     style: {
@@ -6965,7 +9036,9 @@ const ATableBodyCellExpandArea = qe.div.attrs(({ columnsCount, expanded }) => {
     overflow: hidden;
     z-index: 1;
 `;
-const ATableBottomBar = qe.div.attrs({ [DOM_KEY_WIDGET]: "d9-table-bottom-bar" })`
+const ATableBottomBar = qe.div.attrs({
+  [DOM_KEY_WIDGET]: "d9-table-bottom-bar"
+})`
     display: flex;
     position: relative;
     align-items: center;
@@ -6976,7 +9049,9 @@ const ATableBottomBar = qe.div.attrs({ [DOM_KEY_WIDGET]: "d9-table-bottom-bar" }
         flex-grow: 1;
     }
 `;
-const ATableBottomBarSeparator = qe.span.attrs({ [DOM_KEY_WIDGET]: "d9-table-bottom-bar-separator" })`
+const ATableBottomBarSeparator = qe.span.attrs({
+  [DOM_KEY_WIDGET]: "d9-table-bottom-bar-separator"
+})`
     display: block;
     position: relative;
     margin: 0 12px;
@@ -6984,9 +9059,26 @@ const ATableBottomBarSeparator = qe.span.attrs({ [DOM_KEY_WIDGET]: "d9-table-bot
     height: calc(${CssVars.INPUT_HEIGHT} * 0.6);
 `;
 const Table$1 = reactExports.forwardRef((props, ref) => {
-  const { $wrapped, headers, pageable, children, ...rest } = props;
-  const { $avs: { $disabled, $visible } } = $wrapped;
-  return React.createElement(ATable, { ...rest, "data-disabled": $disabled, "data-visible": $visible, id: PPUtils.asId(PPUtils.absolute($wrapped.$p2r, props.$pp), props.id), ref }, children);
+  const {
+    $wrapped,
+    headers,
+    pageable,
+    children,
+    ...rest
+  } = props;
+  const {
+    $avs: {
+      $disabled,
+      $visible
+    }
+  } = $wrapped;
+  return React.createElement(ATable, {
+    ...rest,
+    "data-disabled": $disabled,
+    "data-visible": $visible,
+    id: PPUtils.asId(PPUtils.absolute($wrapped.$p2r, props.$pp), props.id),
+    ref
+  }, children);
 });
 var TableEventTypes;
 (function(TableEventTypes2) {
@@ -7001,19 +9093,48 @@ var TableEventTypes;
 })(TableEventTypes || (TableEventTypes = {}));
 const TableBottomBarButton = (props) => {
   var _a;
-  const { $wrapped, $array: { addLabel = React.createElement(IntlLabel, { keys: ["table", "createItem"], value: "Create New Element" }), addElement } } = props;
+  const {
+    $wrapped,
+    $array: {
+      addLabel = React.createElement(IntlLabel, {
+        keys: ["table", "createItem"],
+        value: "Create New Element"
+      }),
+      addElement
+    }
+  } = props;
   const globalHandlers = useGlobalHandlers();
   const [disabled] = useArrayCouldAddElement(props);
-  const onAddClicked = async () => await addElement({ global: globalHandlers });
+  const onAddClicked = async () => await addElement({
+    global: globalHandlers
+  });
   const button$wrapped = {
     ...$wrapped,
-    $avs: { ...$wrapped.$avs ?? {}, $disabled: disabled === true ? disabled : (_a = $wrapped.$avs) == null ? void 0 : _a.$disabled }
+    $avs: {
+      ...$wrapped.$avs ?? {},
+      $disabled: disabled === true ? disabled : (_a = $wrapped.$avs) == null ? void 0 : _a.$disabled
+    }
   };
-  return React.createElement(Button, { "$wrapped": button$wrapped, ink: ButtonInk.PRIMARY, text: addLabel, click: onAddClicked });
+  return React.createElement(Button, {
+    "$wrapped": button$wrapped,
+    ink: ButtonInk.PRIMARY,
+    text: addLabel,
+    click: onAddClicked
+  });
 };
 const TableBottomBar = (props) => {
-  const { $wrapped, pageable, $array: { addable = false } } = props;
-  const { on, off, fire } = useTableEventBus();
+  const {
+    $wrapped,
+    pageable,
+    $array: {
+      addable = false
+    }
+  } = props;
+  const {
+    on,
+    off,
+    fire
+  } = useTableEventBus();
   const forceUpdate = useForceUpdate();
   reactExports.useEffect(() => {
     if (pageable == null) {
@@ -7033,24 +9154,56 @@ const TableBottomBar = (props) => {
     const onPaginationChanged = async (options) => {
       fire(TableEventTypes.PAGE_CHANGED, options.oldValue, options.newValue);
     };
-    const { valueChanged, ...pageableDef } = pageable ?? {};
-    return React.createElement(
-      ATableBottomBar,
-      null,
-      pageable != null ? React.createElement(Wrapper, { ...pageableDef, valueChanged: onPaginationChanged, "$root": $wrapped.$root, "$model": $wrapped.$model, "$p2r": $wrapped.$p2r }) : null,
-      pageable != null && addable !== false ? React.createElement(ATableBottomBarSeparator, null) : null,
-      addable !== false ? React.createElement(TableBottomBarButton, { ...props }) : null
-    );
+    const {
+      valueChanged,
+      ...pageableDef
+    } = pageable ?? {};
+    return React.createElement(ATableBottomBar, null, pageable != null ? React.createElement(Wrapper, {
+      ...pageableDef,
+      valueChanged: onPaginationChanged,
+      "$root": $wrapped.$root,
+      "$model": $wrapped.$model,
+      "$p2r": $wrapped.$p2r
+    }) : null, pageable != null && addable !== false ? React.createElement(ATableBottomBarSeparator, null) : null, addable !== false ? React.createElement(TableBottomBarButton, {
+      ...props
+    }) : null);
   }
 };
 const UnwrappedDropdown = reactExports.forwardRef((props, ref) => {
-  const { $pp = "value", value, onValueChange, disabled, visible, ...rest } = props;
+  const {
+    $pp = "value",
+    value,
+    onValueChange,
+    disabled,
+    visible,
+    ...rest
+  } = props;
   const $onValueChange = onValueChange;
-  const $avs = { $disabled: disabled, $visible: visible };
-  const $root = { [$pp]: value };
-  return React.createElement(Dropdown, { ...rest, "$wrapped": { $onValueChange, $avs, $root, $model: $root, $p2r: "." }, "$pp": $pp, id: rest.id ?? VUtils.generateUniqueId(), ref });
+  const $avs = {
+    $disabled: disabled,
+    $visible: visible
+  };
+  const $root = {
+    [$pp]: value
+  };
+  return React.createElement(Dropdown, {
+    ...rest,
+    "$wrapped": {
+      $onValueChange,
+      $avs,
+      $root,
+      $model: $root,
+      $p2r: "."
+    },
+    "$pp": $pp,
+    id: rest.id ?? VUtils.generateUniqueId(),
+    ref
+  });
 });
-const APagination = qe.div.attrs(({ id, [DOM_KEY_WIDGET]: dataW }) => {
+const APagination = qe.div.attrs(({
+  id,
+  [DOM_KEY_WIDGET]: dataW
+}) => {
   return {
     [DOM_KEY_WIDGET]: dataW || "d9-pagination",
     [DOM_ID_WIDGET]: id
@@ -7106,7 +9259,12 @@ const APagination = qe.div.attrs(({ id, [DOM_KEY_WIDGET]: dataW }) => {
 const guardPaginationData = ($model, $pp) => {
   let data = MUtils.getValue($model, $pp);
   if (data == null) {
-    data = { pageNumber: 1, pageSize: 20, pageCount: 1, itemCount: 0 };
+    data = {
+      pageNumber: 1,
+      pageSize: 20,
+      pageCount: 1,
+      itemCount: 0
+    };
     MUtils.setValue($model, $pp, data);
   }
   const checkPageNumber = VUtils.isPositive(data.pageNumber);
@@ -7157,27 +9315,52 @@ const computePageNumbers = (maxButtons, data) => {
   return pageNumbers;
 };
 const Pagination = reactExports.forwardRef((props, ref) => {
-  const { $pp, $wrapped, freeWalk = false, maxButtons = 7, possibleSizes = [], ...rest } = props;
-  const { $model, $p2r, $onValueChange, $avs: { $disabled, $visible } } = $wrapped;
+  const {
+    $pp,
+    $wrapped,
+    freeWalk = false,
+    maxButtons = 7,
+    possibleSizes = [],
+    ...rest
+  } = props;
+  const {
+    $model,
+    $p2r,
+    $onValueChange,
+    $avs: {
+      $disabled,
+      $visible
+    }
+  } = $wrapped;
   const globalHandlers = useGlobalHandlers();
   const data = guardPaginationData($model, $pp);
   const onPageClicked = (pageNumber) => async () => {
     if (pageNumber !== data.pageNumber) {
       data.pageNumber = pageNumber;
-      await $onValueChange(data, true, { global: globalHandlers });
+      await $onValueChange(data, true, {
+        global: globalHandlers
+      });
     }
   };
   const buildFreeWalkOptions = () => {
-    return new Array(data.pageCount).fill(1).map((_, index) => ({ value: index + 1, label: `${index + 1}` }));
+    return new Array(data.pageCount).fill(1).map((_, index) => ({
+      value: index + 1,
+      label: `${index + 1}`
+    }));
   };
   const onFreeWalkChanged = async (pageNumber) => {
     if (pageNumber !== data.pageNumber) {
       data.pageNumber = pageNumber;
-      await $onValueChange(data, true, { global: globalHandlers });
+      await $onValueChange(data, true, {
+        global: globalHandlers
+      });
     }
   };
   const possibleSizesOptions = (() => {
-    const options = [.../* @__PURE__ */ new Set([...possibleSizes, data.pageSize])].sort().map((size) => ({ value: size, label: `${size}` }));
+    const options = [.../* @__PURE__ */ new Set([...possibleSizes, data.pageSize])].sort().map((size) => ({
+      value: size,
+      label: `${size}`
+    }));
     if (options.length === 1) {
       return [];
     } else {
@@ -7191,7 +9374,9 @@ const Pagination = reactExports.forwardRef((props, ref) => {
       data.pageSize = pageSize;
       data.pageNumber = Math.floor(currentFirstItemIndex / data.pageSize) + 1;
       data.pageCount = Math.ceil(itemCount2 / data.pageSize);
-      await $onValueChange(data, true, { global: globalHandlers });
+      await $onValueChange(data, true, {
+        global: globalHandlers
+      });
     }
   };
   const pageNumbers = computePageNumbers(maxButtons, data);
@@ -7199,83 +9384,112 @@ const Pagination = reactExports.forwardRef((props, ref) => {
   const hasNext = pageNumbers[pageNumbers.length - 1] !== data.pageCount;
   const format = nfXWithLocale(locale(), 0);
   const pageCount = format(data.pageCount);
-  const itemCount = data.itemCount === -1 ? React.createElement(IntlLabel, { keys: ["pagination", "unknownItemCount"], value: "???" }) : format(data.itemCount);
-  return React.createElement(
-    APagination,
-    { ...rest, "data-disabled": $disabled, "data-visible": $visible, id: PPUtils.asId(PPUtils.absolute($p2r, props.$pp), props.id), ref },
-    React.createElement(
-      "div",
-      { "data-page-info": true },
-      React.createElement(
-        "span",
-        null,
-        React.createElement(IntlLabel, { keys: ["pagination", "page"], value: "" })
-      ),
-      freeWalk ? React.createElement(UnwrappedDropdown, { value: data.pageNumber, options: buildFreeWalkOptions(), clearable: false, "data-free-walk": true, onValueChange: onFreeWalkChanged }) : React.createElement("span", null, data.pageNumber),
-      React.createElement(
-        "span",
-        null,
-        React.createElement(IntlLabel, { keys: ["pagination", "of"], value: "of" })
-      ),
-      React.createElement("span", null, pageCount),
-      React.createElement(
-        "span",
-        null,
-        React.createElement(IntlLabel, { keys: ["pagination", "pages"], value: "pages," })
-      ),
-      possibleSizesOptions.length !== 0 ? React.createElement(UnwrappedDropdown, { value: data.pageSize, options: possibleSizesOptions, clearable: false, "data-possible-sizes": true, onValueChange: onPageSizeChanged }) : React.createElement("span", null, data.pageSize),
-      React.createElement(
-        "span",
-        null,
-        React.createElement(IntlLabel, { keys: ["pagination", "afterSize"], value: "items per page," })
-      ),
-      React.createElement(
-        "span",
-        null,
-        React.createElement(IntlLabel, { keys: ["pagination", "total"], value: "total" })
-      ),
-      React.createElement("span", null, itemCount),
-      React.createElement(
-        "span",
-        null,
-        React.createElement(IntlLabel, { keys: ["pagination", "items"], value: "items." })
-      )
-    ),
-    React.createElement(
-      "div",
-      { "data-page-buttons": true },
-      hasPrevious ? React.createElement(
-        React.Fragment,
-        null,
-        React.createElement(UnwrappedButton, { onClick: onPageClicked(1), ink: ButtonInk.PRIMARY, fill: ButtonFill.PLAIN, leads: ["$icons.backward"] }),
-        React.createElement(UnwrappedButton, { onClick: onPageClicked(Math.max(pageNumbers[0] - 1, 1)), ink: ButtonInk.PRIMARY, fill: ButtonFill.PLAIN, leads: ["$icons.angleLeft"] })
-      ) : null,
-      pageNumbers.map((pageNumber) => {
-        return React.createElement(UnwrappedButton, { key: pageNumber, onClick: onPageClicked(pageNumber), ink: ButtonInk.PRIMARY, fill: pageNumber === data.pageNumber ? ButtonFill.FILL : ButtonFill.PLAIN }, pageNumber);
-      }),
-      hasNext ? React.createElement(
-        React.Fragment,
-        null,
-        React.createElement(UnwrappedButton, { onClick: onPageClicked(Math.min(pageNumbers[pageNumbers.length - 1] + 1, data.pageCount)), ink: ButtonInk.PRIMARY, fill: ButtonFill.PLAIN, leads: ["$icons.angleRight"] }),
-        React.createElement(UnwrappedButton, { onClick: onPageClicked(data.pageCount), ink: ButtonInk.PRIMARY, fill: ButtonFill.PLAIN, leads: ["$icons.forward"] })
-      ) : null
-    )
-  );
+  const itemCount = data.itemCount === -1 ? React.createElement(IntlLabel, {
+    keys: ["pagination", "unknownItemCount"],
+    value: "???"
+  }) : format(data.itemCount);
+  return React.createElement(APagination, {
+    ...rest,
+    "data-disabled": $disabled,
+    "data-visible": $visible,
+    id: PPUtils.asId(PPUtils.absolute($p2r, props.$pp), props.id),
+    ref
+  }, React.createElement("div", {
+    "data-page-info": true
+  }, React.createElement("span", null, React.createElement(IntlLabel, {
+    keys: ["pagination", "page"],
+    value: ""
+  })), freeWalk ? React.createElement(UnwrappedDropdown, {
+    value: data.pageNumber,
+    options: buildFreeWalkOptions(),
+    clearable: false,
+    "data-free-walk": true,
+    onValueChange: onFreeWalkChanged
+  }) : React.createElement("span", null, data.pageNumber), React.createElement("span", null, React.createElement(IntlLabel, {
+    keys: ["pagination", "of"],
+    value: "of"
+  })), React.createElement("span", null, pageCount), React.createElement("span", null, React.createElement(IntlLabel, {
+    keys: ["pagination", "pages"],
+    value: "pages,"
+  })), possibleSizesOptions.length !== 0 ? React.createElement(UnwrappedDropdown, {
+    value: data.pageSize,
+    options: possibleSizesOptions,
+    clearable: false,
+    "data-possible-sizes": true,
+    onValueChange: onPageSizeChanged
+  }) : React.createElement("span", null, data.pageSize), React.createElement("span", null, React.createElement(IntlLabel, {
+    keys: ["pagination", "afterSize"],
+    value: "items per page,"
+  })), React.createElement("span", null, React.createElement(IntlLabel, {
+    keys: ["pagination", "total"],
+    value: "total"
+  })), React.createElement("span", null, itemCount), React.createElement("span", null, React.createElement(IntlLabel, {
+    keys: ["pagination", "items"],
+    value: "items."
+  }))), React.createElement("div", {
+    "data-page-buttons": true
+  }, hasPrevious ? React.createElement(React.Fragment, null, React.createElement(UnwrappedButton, {
+    onClick: onPageClicked(1),
+    ink: ButtonInk.PRIMARY,
+    fill: ButtonFill.PLAIN,
+    leads: ["$icons.backward"]
+  }), React.createElement(UnwrappedButton, {
+    onClick: onPageClicked(Math.max(pageNumbers[0] - 1, 1)),
+    ink: ButtonInk.PRIMARY,
+    fill: ButtonFill.PLAIN,
+    leads: ["$icons.angleLeft"]
+  })) : null, pageNumbers.map((pageNumber) => {
+    return React.createElement(UnwrappedButton, {
+      key: pageNumber,
+      onClick: onPageClicked(pageNumber),
+      ink: ButtonInk.PRIMARY,
+      fill: pageNumber === data.pageNumber ? ButtonFill.FILL : ButtonFill.PLAIN
+    }, pageNumber);
+  }), hasNext ? React.createElement(React.Fragment, null, React.createElement(UnwrappedButton, {
+    onClick: onPageClicked(Math.min(pageNumbers[pageNumbers.length - 1] + 1, data.pageCount)),
+    ink: ButtonInk.PRIMARY,
+    fill: ButtonFill.PLAIN,
+    leads: ["$icons.angleRight"]
+  }), React.createElement(UnwrappedButton, {
+    onClick: onPageClicked(data.pageCount),
+    ink: ButtonInk.PRIMARY,
+    fill: ButtonFill.PLAIN,
+    leads: ["$icons.forward"]
+  })) : null));
 });
-registerWidget({ key: "Pagination", JSX: Pagination, container: false, array: false });
+registerWidget({
+  key: "Pagination",
+  JSX: Pagination,
+  container: false,
+  array: false
+});
 const TableHeader = (props) => {
-  const { headers, headerHeight, stickyOffsets, tailGrabberAppended } = props;
-  return React.createElement(
-    React.Fragment,
-    null,
-    React.createElement(ATableHeaderCell, { headerHeight, isGrabber: true, stickyOffset: stickyOffsets[0] }),
-    headers.map((header, index) => {
-      const key = NUtils.getDefKey(header);
-      return React.createElement(ATableHeaderCell, { headerHeight, stickyOffset: stickyOffsets[index + 1], key }, toIntlLabel(header.label));
-    }),
-    tailGrabberAppended ? React.createElement(ATableHeaderCell, { headerHeight, isGrabber: true, stickyOffset: stickyOffsets[stickyOffsets.length - 2] }) : null,
-    React.createElement(ATableHeaderCell, { headerHeight, isGrabber: true, stickyOffset: stickyOffsets[stickyOffsets.length - 1] })
-  );
+  const {
+    headers,
+    headerHeight,
+    stickyOffsets,
+    tailGrabberAppended
+  } = props;
+  return React.createElement(React.Fragment, null, React.createElement(ATableHeaderCell, {
+    headerHeight,
+    isGrabber: true,
+    stickyOffset: stickyOffsets[0]
+  }), headers.map((header, index) => {
+    const key = NUtils.getDefKey(header);
+    return React.createElement(ATableHeaderCell, {
+      headerHeight,
+      stickyOffset: stickyOffsets[index + 1],
+      key
+    }, toIntlLabel(header.label));
+  }), tailGrabberAppended ? React.createElement(ATableHeaderCell, {
+    headerHeight,
+    isGrabber: true,
+    stickyOffset: stickyOffsets[stickyOffsets.length - 2]
+  }) : null, React.createElement(ATableHeaderCell, {
+    headerHeight,
+    isGrabber: true,
+    stickyOffset: stickyOffsets[stickyOffsets.length - 1]
+  }));
 };
 const computeRowIndexColumnWidth = (maxRowIndex) => {
   return `calc(${CssVars.TABLE_ROW_INDEX_COLUMN_WIDTH} + ${CssVars.TABLE_ROW_INDEX_COLUMN_CHAR_WIDTH} * ${Math.max(3, `${maxRowIndex}`.length)})`;
@@ -7299,12 +9513,28 @@ const computeRowOperatorsColumnWidth = (operatorsColumnWidth, expandable, remova
   }
 };
 const computeColumnsWidth = (props) => {
-  const { rowIndexStartsFrom = 1, operatorsColumnWidth = -1, expandable = false, headers, fixedLeadColumns = 0, fixedTailColumns = 0, $wrapped: { $model }, $array: { removable = false }, $pp } = props;
+  const {
+    rowIndexStartsFrom = 1,
+    operatorsColumnWidth = -1,
+    expandable = false,
+    headers,
+    fixedLeadColumns = 0,
+    fixedTailColumns = 0,
+    $wrapped: {
+      $model
+    },
+    $array: {
+      removable = false
+    },
+    $pp
+  } = props;
   const elements = MUtils.getValue($model, $pp) || [];
   const maxRowIndex = rowIndexStartsFrom + elements.length;
   const rowIndexColumnWidth = computeRowIndexColumnWidth(maxRowIndex);
   const rowOperatorsColumnWidth = computeRowOperatorsColumnWidth(operatorsColumnWidth, expandable, removable);
-  const columnsWidth = (headers || []).map(({ width }) => toCssSize(width));
+  const columnsWidth = (headers || []).map(({
+    width
+  }) => toCssSize(width));
   let tailGrabberAppended = false;
   if (fixedTailColumns <= 0 && columnsWidth.every((width) => !width.includes("fr"))) {
     columnsWidth.push("1fr");
@@ -7336,10 +9566,27 @@ const computeColumnsWidth = (props) => {
   };
 };
 const TableContent = (props) => {
-  const { $pp, pageable, $wrapped: { $root, $model, $p2r }, headerHeight, maxBodyHeight, children } = props;
+  const {
+    $pp,
+    pageable,
+    $wrapped: {
+      $root,
+      $model,
+      $p2r
+    },
+    headerHeight,
+    maxBodyHeight,
+    children
+  } = props;
   const globalHandlers = useGlobalHandlers();
-  const { fire: fireWrapper } = useWrapperEventBus();
-  const { on, off, fire } = useTableEventBus();
+  const {
+    fire: fireWrapper
+  } = useWrapperEventBus();
+  const {
+    on,
+    off,
+    fire
+  } = useTableEventBus();
   const forceUpdate = useForceUpdate();
   reactExports.useEffect(() => {
     if (pageable == null) {
@@ -7356,7 +9603,9 @@ const TableContent = (props) => {
           absolutePath: PPUtils.absolute($p2r, pageable.$pp),
           oldValue: from,
           newValue: to
-        }, { global: globalHandlers });
+        }, {
+          global: globalHandlers
+        });
         fireWrapper && fireWrapper(WrapperEventTypes.REPAINT);
         return true;
       } else {
@@ -7382,7 +9631,11 @@ const TableContent = (props) => {
       off(TableEventTypes.FILTER_CHANGED, onFilterChanged);
     };
   }, [globalHandlers, fireWrapper, on, off, fire, forceUpdate, pageable, $root, $model, $p2r, $pp]);
-  const { columnsWidth, tailGrabberAppended, stickyOffsets } = computeColumnsWidth(props);
+  const {
+    columnsWidth,
+    tailGrabberAppended,
+    stickyOffsets
+  } = computeColumnsWidth(props);
   const hasPagination = pageable != null;
   const isCallExternal = (pageable == null ? void 0 : pageable.valueChanged) != null;
   const rows = (() => {
@@ -7404,63 +9657,131 @@ const TableContent = (props) => {
       }).filter((child) => child != null);
     }
   })();
-  return React.createElement(
-    ATableContent,
-    { headerHeight, maxBodyHeight, columnsWidth },
-    React.createElement(TableHeader, { headerHeight, headers: props.headers, stickyOffsets, tailGrabberAppended }),
-    rows
-  );
+  return React.createElement(ATableContent, {
+    headerHeight,
+    maxBodyHeight,
+    columnsWidth
+  }, React.createElement(TableHeader, {
+    headerHeight,
+    headers: props.headers,
+    stickyOffsets,
+    tailGrabberAppended
+  }), rows);
 };
 const TableNoData = (props) => {
-  const { headers, $array: { hasElement, noElementReminder = React.createElement(IntlLabel, { keys: ["table", "noElement"], value: "No data found." }) } } = props;
+  const {
+    headers,
+    $array: {
+      hasElement,
+      noElementReminder = React.createElement(IntlLabel, {
+        keys: ["table", "noElement"],
+        value: "No data found."
+      })
+    }
+  } = props;
   if (hasElement) {
     return null;
   } else {
-    const { tailGrabberAppended } = computeColumnsWidth(props);
+    const {
+      tailGrabberAppended
+    } = computeColumnsWidth(props);
     const columnsCount = headers.length + 2 + (tailGrabberAppended ? 1 : 0);
-    return React.createElement(
-      ATableNoDataRow,
-      { columnsCount },
-      React.createElement("span", null, toIntlLabel(noElementReminder))
-    );
+    return React.createElement(ATableNoDataRow, {
+      columnsCount
+    }, React.createElement("span", null, toIntlLabel(noElementReminder)));
   }
 };
 const ExpandButton = (props) => {
-  const { onClick } = props;
+  const {
+    onClick
+  } = props;
   const $wrapped = {
     $root: {},
     $model: {},
     $p2r: ".",
     $onValueChange: VUtils.noop,
-    $avs: { $disabled: false, $visible: true }
+    $avs: {
+      $disabled: false,
+      $visible: true
+    }
   };
-  return React.createElement(Button, { "$wrapped": $wrapped, ink: ButtonInk.PRIMARY, fill: ButtonFill.PLAIN, leads: ["$icons.expand"], click: onClick, "data-role": "d9-table-row-operator" });
+  return React.createElement(Button, {
+    "$wrapped": $wrapped,
+    ink: ButtonInk.PRIMARY,
+    fill: ButtonFill.PLAIN,
+    leads: ["$icons.expand"],
+    click: onClick,
+    "data-role": "d9-table-row-operator"
+  });
 };
 const CollapseButton = (props) => {
-  const { onClick } = props;
+  const {
+    onClick
+  } = props;
   const $wrapped = {
     $root: {},
     $model: {},
     $p2r: ".",
     $onValueChange: VUtils.noop,
-    $avs: { $disabled: false, $visible: true }
+    $avs: {
+      $disabled: false,
+      $visible: true
+    }
   };
-  return React.createElement(Button, { "$wrapped": $wrapped, ink: ButtonInk.PRIMARY, fill: ButtonFill.PLAIN, leads: ["$icons.collapse"], click: onClick, "data-role": "d9-table-row-operator" });
+  return React.createElement(Button, {
+    "$wrapped": $wrapped,
+    ink: ButtonInk.PRIMARY,
+    fill: ButtonFill.PLAIN,
+    leads: ["$icons.collapse"],
+    click: onClick,
+    "data-role": "d9-table-row-operator"
+  });
 };
 const RemoveButton = (props) => {
-  const { onClick } = props;
+  const {
+    onClick
+  } = props;
   const $wrapped = {
     $root: {},
     $model: {},
     $p2r: ".",
     $onValueChange: VUtils.noop,
-    $avs: { $disabled: false, $visible: true }
+    $avs: {
+      $disabled: false,
+      $visible: true
+    }
   };
-  return React.createElement(Button, { "$wrapped": $wrapped, ink: ButtonInk.PRIMARY, fill: ButtonFill.PLAIN, leads: ["$icons.remove"], click: onClick, "data-role": "d9-table-row-operator" });
+  return React.createElement(Button, {
+    "$wrapped": $wrapped,
+    ink: ButtonInk.PRIMARY,
+    fill: ButtonFill.PLAIN,
+    leads: ["$icons.remove"],
+    click: onClick,
+    "data-role": "d9-table-row-operator"
+  });
 };
 const CustomButton = (props) => {
-  const { def, $wrapped: { $root, $array, $model, $p2r }, expandable, expanded, prebuilt: { remove, expand, collapse } } = props;
-  const { prebuilt, click, ...rest } = def;
+  const {
+    def,
+    $wrapped: {
+      $root,
+      $array,
+      $model,
+      $p2r
+    },
+    expandable,
+    expanded,
+    prebuilt: {
+      remove,
+      expand,
+      collapse
+    }
+  } = props;
+  const {
+    prebuilt,
+    click,
+    ...rest
+  } = def;
   if (!expandable && (prebuilt === "expand" || prebuilt === "collapse")) {
     return null;
   }
@@ -7482,16 +9803,41 @@ const CustomButton = (props) => {
         collapse();
         break;
       default:
-        click && await click({ ...options, array: $array }, event);
+        click && await click({
+          ...options,
+          array: $array
+        }, event);
         break;
     }
   };
-  const operatorDef = { ...rest, $wt: rest.$wt || "Button", "data-role": "d9-table-row-operator", click: onClick };
-  return React.createElement(Wrapper, { "$root": $root, "$model": $model, "$p2r": $p2r, ...operatorDef });
+  const operatorDef = {
+    ...rest,
+    $wt: rest.$wt || "Button",
+    "data-role": "d9-table-row-operator",
+    click: onClick
+  };
+  return React.createElement(Wrapper, {
+    "$root": $root,
+    "$model": $model,
+    "$p2r": $p2r,
+    ...operatorDef
+  });
 };
 const TableRowOperators = (props) => {
-  const { expandable = false, removable = false, rowIndex, rowSpan, $wrapped, omitDefaultRowOperators = false, rowOperators } = props;
-  const { on, off, fire } = useTableEventBus();
+  const {
+    expandable = false,
+    removable = false,
+    rowIndex,
+    rowSpan,
+    $wrapped,
+    omitDefaultRowOperators = false,
+    rowOperators
+  } = props;
+  const {
+    on,
+    off,
+    fire
+  } = useTableEventBus();
   const [expanded, setExpanded] = reactExports.useState(false);
   reactExports.useEffect(() => {
     const onRowExpanded = (expandedRowIndex) => {
@@ -7512,7 +9858,11 @@ const TableRowOperators = (props) => {
     };
   }, [on, off, rowIndex]);
   if (rowIndex === -1 || !removable && !expandable && (rowOperators == null || rowOperators.length === 0)) {
-    return React.createElement(ATableRowOperators, { "data-expanded": false, rowIndex: 0, rowSpan });
+    return React.createElement(ATableRowOperators, {
+      "data-expanded": false,
+      rowIndex: 0,
+      rowSpan
+    });
   }
   const onRemoveElementClicked = () => fire(TableEventTypes.REMOVE_ROW, rowIndex);
   const onExpandClicked = () => {
@@ -7523,27 +9873,57 @@ const TableRowOperators = (props) => {
   };
   const omitFold = omitDefaultRowOperators === true || omitDefaultRowOperators === "fold";
   const omitRemove = omitDefaultRowOperators === true || omitDefaultRowOperators === "remove";
-  return React.createElement(
-    ATableRowOperators,
-    { "data-expanded": expanded, rowIndex, rowSpan },
-    rowOperators == null || rowOperators.length === 0 ? null : React.createElement(React.Fragment, null, rowOperators.map((def) => {
-      const key = NUtils.getDefKey(def);
-      return React.createElement(CustomButton, { def, "$wrapped": $wrapped, expandable, expanded, prebuilt: {
+  return React.createElement(ATableRowOperators, {
+    "data-expanded": expanded,
+    rowIndex,
+    rowSpan
+  }, rowOperators == null || rowOperators.length === 0 ? null : React.createElement(React.Fragment, null, rowOperators.map((def) => {
+    const key = NUtils.getDefKey(def);
+    return React.createElement(CustomButton, {
+      def,
+      "$wrapped": $wrapped,
+      expandable,
+      expanded,
+      prebuilt: {
         remove: onRemoveElementClicked,
         expand: onExpandClicked,
         collapse: onCollapseClicked
-      }, key });
-    })),
-    !omitRemove && removable !== false ? React.createElement(RemoveButton, { onClick: onRemoveElementClicked }) : null,
-    !omitFold && expandable && !expanded ? React.createElement(ExpandButton, { onClick: onExpandClicked }) : null,
-    !omitFold && expandable && expanded ? React.createElement(CollapseButton, { onClick: onCollapseClicked }) : null
-  );
+      },
+      key
+    });
+  })), !omitRemove && removable !== false ? React.createElement(RemoveButton, {
+    onClick: onRemoveElementClicked
+  }) : null, !omitFold && expandable && !expanded ? React.createElement(ExpandButton, {
+    onClick: onExpandClicked
+  }) : null, !omitFold && expandable && expanded ? React.createElement(CollapseButton, {
+    onClick: onCollapseClicked
+  }) : null);
 };
 const TableRow = (props) => {
-  const { headers, expandable = false, hideClassicCellsOnExpandable = false, clickToExpand = false, rowIndexStartsFrom = 1, omitDefaultRowOperators, rowOperators, $wrapped, $array: { removable, elementIndex, removeElement }, pageable, children } = props;
+  const {
+    headers,
+    expandable = false,
+    hideClassicCellsOnExpandable = false,
+    clickToExpand = false,
+    rowIndexStartsFrom = 1,
+    omitDefaultRowOperators,
+    rowOperators,
+    $wrapped,
+    $array: {
+      removable,
+      elementIndex,
+      removeElement
+    },
+    pageable,
+    children
+  } = props;
   const expandAreaRef = reactExports.useRef(null);
   const globalHandlers = useGlobalHandlers();
-  const { on, off, fire } = useTableEventBus();
+  const {
+    on,
+    off,
+    fire
+  } = useTableEventBus();
   const [expanded, setExpanded] = reactExports.useState(false);
   reactExports.useEffect(() => {
     const handleEvent = (func) => (rowIndex) => {
@@ -7560,7 +9940,9 @@ const TableRow = (props) => {
       setExpanded(false);
       fire(TableEventTypes.ROW_COLLAPSED, elementIndex);
     });
-    const onRemoveRow = handleEvent(async () => await removeElement({ global: globalHandlers }));
+    const onRemoveRow = handleEvent(async () => await removeElement({
+      global: globalHandlers
+    }));
     on(TableEventTypes.EXPAND_ROW, onExpandRow);
     on(TableEventTypes.COLLAPSE_ROW, onCollapseRow);
     on(TableEventTypes.REMOVE_ROW, onRemoveRow);
@@ -7573,19 +9955,33 @@ const TableRow = (props) => {
   reactExports.useEffect(() => {
     if (expanded && expandAreaRef.current != null) {
       const contentDiv = expandAreaRef.current.closest("div[data-w=d9-table-content]");
-      const { top, height } = contentDiv.getBoundingClientRect();
-      const { height: headerHeight } = contentDiv.querySelector("div[data-w=d9-table-header-cell]:first-child").getBoundingClientRect();
-      const { top: expandAreaTop, height: expandedAreaHeight } = expandAreaRef.current.getBoundingClientRect();
+      const {
+        top,
+        height
+      } = contentDiv.getBoundingClientRect();
+      const {
+        height: headerHeight
+      } = contentDiv.querySelector("div[data-w=d9-table-header-cell]:first-child").getBoundingClientRect();
+      const {
+        top: expandAreaTop,
+        height: expandedAreaHeight
+      } = expandAreaRef.current.getBoundingClientRect();
       if (top + height >= expandAreaTop + expandedAreaHeight) {
         return;
       }
       const previousDiv = expandAreaRef.current.previousSibling;
-      const { top: previousTop } = previousDiv.getBoundingClientRect();
+      const {
+        top: previousTop
+      } = previousDiv.getBoundingClientRect();
       const offset = expandAreaTop - previousTop;
       if (expandedAreaHeight + offset > height - headerHeight) {
-        contentDiv.scrollTo({ top: previousDiv.offsetTop - headerHeight });
+        contentDiv.scrollTo({
+          top: previousDiv.offsetTop - headerHeight
+        });
       } else {
-        contentDiv.scrollTo({ top: previousDiv.offsetTop + expandedAreaHeight + offset - contentDiv.clientHeight + 1 });
+        contentDiv.scrollTo({
+          top: previousDiv.offsetTop + expandedAreaHeight + offset - contentDiv.clientHeight + 1
+        });
       }
     }
   }, [expanded]);
@@ -7594,8 +9990,13 @@ const TableRow = (props) => {
       fire(TableEventTypes.EXPAND_ROW, elementIndex);
     }
   };
-  const { tailGrabberAppended, stickyOffsets } = computeColumnsWidth(props);
-  const classicCellIndexes = headers.map(({ index }) => index);
+  const {
+    tailGrabberAppended,
+    stickyOffsets
+  } = computeColumnsWidth(props);
+  const classicCellIndexes = headers.map(({
+    index
+  }) => index);
   const childrenAsArray = reactExports.Children.toArray(children);
   const classicCells = childrenAsArray.map((cell, index) => {
     if (!classicCellIndexes.includes(index)) {
@@ -7603,10 +10004,26 @@ const TableRow = (props) => {
     }
     const header = headers[index];
     NUtils.getDefKey(header);
-    return React.createElement(ATableBodyCell, { onClick: onRowClicked, rowIndex: elementIndex, stickyOffset: stickyOffsets[index + 1], "data-expanded": expanded, "data-click-to-expand": clickToExpand, key: header.$key }, cell);
+    return React.createElement(ATableBodyCell, {
+      onClick: onRowClicked,
+      rowIndex: elementIndex,
+      stickyOffset: stickyOffsets[index + 1],
+      "data-expanded": expanded,
+      "data-click-to-expand": clickToExpand,
+      key: header.$key
+    }, cell);
   }).filter((x) => x != null);
   if (tailGrabberAppended) {
-    classicCells.push(React.createElement(ATableBodyCell, { isGrabber: true, rowIndex: elementIndex, onClick: onRowClicked, stickyOffset: stickyOffsets[stickyOffsets.length - 2], "data-expanded": expanded, "data-click-to-expand": clickToExpand, "data-table-row-grabber": true, key: "grabber-cell" }));
+    classicCells.push(React.createElement(ATableBodyCell, {
+      isGrabber: true,
+      rowIndex: elementIndex,
+      onClick: onRowClicked,
+      stickyOffset: stickyOffsets[stickyOffsets.length - 2],
+      "data-expanded": expanded,
+      "data-click-to-expand": clickToExpand,
+      "data-table-row-grabber": true,
+      key: "grabber-cell"
+    }));
   }
   const expandCells = childrenAsArray.map((cell, index) => {
     if (classicCellIndexes.includes(index)) {
@@ -7621,26 +10038,23 @@ const TableRow = (props) => {
       case !expandable:
         return [React.createElement(React.Fragment, null, classicCells), null, 1, 1];
       case !expanded:
-        return [
-          React.createElement(React.Fragment, null, classicCells),
-          React.createElement(ATableBodyCellExpandArea, { columnsCount: expandedAreaColumnCount + 1, expanded, ref: expandAreaRef }, expandCells),
-          1,
-          1
-        ];
+        return [React.createElement(React.Fragment, null, classicCells), React.createElement(ATableBodyCellExpandArea, {
+          columnsCount: expandedAreaColumnCount + 1,
+          expanded,
+          ref: expandAreaRef
+        }, expandCells), 1, 1];
       case hideClassicCellsOnExpandable:
-        return [
-          React.createElement(ATableBodyCellExpandArea, { columnsCount: expandedAreaColumnCount, expanded, ref: expandAreaRef }, expandCells),
-          null,
-          1,
-          1
-        ];
+        return [React.createElement(ATableBodyCellExpandArea, {
+          columnsCount: expandedAreaColumnCount,
+          expanded,
+          ref: expandAreaRef
+        }, expandCells), null, 1, 1];
       case !hideClassicCellsOnExpandable:
-        return [
-          React.createElement(React.Fragment, null, classicCells),
-          React.createElement(ATableBodyCellExpandArea, { columnsCount: expandedAreaColumnCount + 1, expanded, ref: expandAreaRef }, expandCells),
-          2,
-          1
-        ];
+        return [React.createElement(React.Fragment, null, classicCells), React.createElement(ATableBodyCellExpandArea, {
+          columnsCount: expandedAreaColumnCount + 1,
+          expanded,
+          ref: expandAreaRef
+        }, expandCells), 2, 1];
       default:
         return [null, null, 1, 1];
     }
@@ -7653,26 +10067,28 @@ const TableRow = (props) => {
       return (data.pageNumber - 1) * data.pageSize + 1;
     }
   };
-  return React.createElement(
-    React.Fragment,
-    null,
-    React.createElement(
-      ATableBodyRowIndexCell,
-      { rowIndex: elementIndex, rowSpan: indexRowSpan },
-      React.createElement("span", null, elementIndex + computeRowIndexOffset())
-    ),
-    classic,
-    React.createElement(TableRowOperators, { expandable, removable, rowIndex: elementIndex, rowSpan: operatorsRowSpan, "$wrapped": $wrapped, omitDefaultRowOperators, rowOperators }),
-    expands
-  );
+  return React.createElement(React.Fragment, null, React.createElement(ATableBodyRowIndexCell, {
+    rowIndex: elementIndex,
+    rowSpan: indexRowSpan
+  }, React.createElement("span", null, elementIndex + computeRowIndexOffset())), classic, React.createElement(TableRowOperators, {
+    expandable,
+    removable,
+    rowIndex: elementIndex,
+    rowSpan: operatorsRowSpan,
+    "$wrapped": $wrapped,
+    omitDefaultRowOperators,
+    rowOperators
+  }), expands);
 };
 const Table = reactExports.forwardRef((props, ref) => {
-  const { children, ...rest } = props;
-  return React.createElement(
-    TableEventBusProvider,
-    null,
-    React.createElement(Table$1, { ...rest, ref }, children)
-  );
+  const {
+    children,
+    ...rest
+  } = props;
+  return React.createElement(TableEventBusProvider, null, React.createElement(Table$1, {
+    ...rest,
+    ref
+  }, children));
 });
 registerWidget({
   key: "Table",
@@ -7685,7 +10101,10 @@ registerWidget({
   container: true,
   array: true
 });
-const ABox = qe.div.attrs(({ id, [DOM_KEY_WIDGET]: dataW }) => {
+const ABox = qe.div.attrs(({
+  id,
+  [DOM_KEY_WIDGET]: dataW
+}) => {
   return {
     [DOM_KEY_WIDGET]: dataW || "d9-box",
     [DOM_ID_WIDGET]: id
@@ -7701,15 +10120,41 @@ const ABox = qe.div.attrs(({ id, [DOM_KEY_WIDGET]: dataW }) => {
     }
 `;
 const Box = reactExports.forwardRef((props, ref) => {
-  const { $wrapped, children, ...rest } = props;
-  const { $p2r, $avs: { $disabled, $visible } } = $wrapped;
+  const {
+    $wrapped,
+    children,
+    ...rest
+  } = props;
+  const {
+    $p2r,
+    $avs: {
+      $disabled,
+      $visible
+    }
+  } = $wrapped;
   const boxRef = reactExports.useRef(null);
   useDualRefs(boxRef, ref);
-  useTip({ ref: boxRef });
-  return React.createElement(ABox, { ...rest, "data-disabled": $disabled, "data-visible": $visible, id: PPUtils.asId(PPUtils.absolute($p2r, props.$pp), props.id), ref: boxRef }, children);
+  useTip({
+    ref: boxRef
+  });
+  return React.createElement(ABox, {
+    ...rest,
+    "data-disabled": $disabled,
+    "data-visible": $visible,
+    id: PPUtils.asId(PPUtils.absolute($p2r, props.$pp), props.id),
+    ref: boxRef
+  }, children);
 });
-registerWidget({ key: "Box", JSX: Box, container: true, array: false });
-const ASection = qe.div.attrs(({ id, [DOM_KEY_WIDGET]: dataW }) => {
+registerWidget({
+  key: "Box",
+  JSX: Box,
+  container: true,
+  array: false
+});
+const ASection = qe.div.attrs(({
+  id,
+  [DOM_KEY_WIDGET]: dataW
+}) => {
   return {
     [DOM_KEY_WIDGET]: dataW || "d9-section",
     [DOM_ID_WIDGET]: id
@@ -7725,7 +10170,9 @@ const ASection = qe.div.attrs(({ id, [DOM_KEY_WIDGET]: dataW }) => {
         display: none;
     }
 `;
-const ASectionHeader = qe.div.attrs({ [DOM_KEY_WIDGET]: "d9-section-header" })`
+const ASectionHeader = qe.div.attrs({
+  [DOM_KEY_WIDGET]: "d9-section-header"
+})`
     display: flex;
     position: relative;
     align-items: center;
@@ -7738,7 +10185,9 @@ const ASectionHeader = qe.div.attrs({ [DOM_KEY_WIDGET]: "d9-section-header" })`
         padding: ${CssVars.SECTION_BODY_PADDING} 0;
     }
 `;
-const ASectionTitle = qe.div.attrs({ [DOM_KEY_WIDGET]: "d9-section-header-title" })`
+const ASectionTitle = qe.div.attrs({
+  [DOM_KEY_WIDGET]: "d9-section-header-title"
+})`
     display: flex;
     position: relative;
     align-items: center;
@@ -7748,7 +10197,9 @@ const ASectionTitle = qe.div.attrs({ [DOM_KEY_WIDGET]: "d9-section-header-title"
     font-weight: ${CssVars.SECTION_HEADER_FONT_WEIGHT};
     color: ${CssVars.CAPTION_FONT_COLOR};
 `;
-const ASectionExpander = qe.div.attrs({ [DOM_KEY_WIDGET]: "d9-section-header-expander" })`
+const ASectionExpander = qe.div.attrs({
+  [DOM_KEY_WIDGET]: "d9-section-header-expander"
+})`
     display: flex;
     position: relative;
     align-items: center;
@@ -7776,7 +10227,9 @@ const ASectionExpander = qe.div.attrs({ [DOM_KEY_WIDGET]: "d9-section-header-exp
         transition: all ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION};
     }
 `;
-const ASectionExpanderSvg = qe(ArrowDown).attrs({ [DOM_KEY_WIDGET]: "d9-section-header-expander-svg" })`
+const ASectionExpanderSvg = qe(ArrowDown).attrs({
+  [DOM_KEY_WIDGET]: "d9-section-header-expander-svg"
+})`
     height: 70%;
     color: ${CssVars.FONT_COLOR};
     opacity: 0.7;
@@ -7786,7 +10239,9 @@ const ASectionExpanderSvg = qe(ArrowDown).attrs({ [DOM_KEY_WIDGET]: "d9-section-
         transform: rotateX(180deg);
     }
 `;
-const ASectionBody = qe.div.attrs(({ expanded }) => {
+const ASectionBody = qe.div.attrs(({
+  expanded
+}) => {
   return {
     [DOM_KEY_WIDGET]: "d9-section-body",
     style: {
@@ -7801,9 +10256,25 @@ const ASectionBody = qe.div.attrs(({ expanded }) => {
     grid-row-gap: ${CssVars.GRID_ROW_GAP};
 `;
 const Section = reactExports.forwardRef((props, ref) => {
-  const { $wrapped, title, collapsible, marker, children, ...rest } = props;
-  const { $p2r, $avs: { $disabled, $visible } } = $wrapped;
-  const { on: onGlobal, off: offGlobal } = useGlobalEventBus();
+  const {
+    $wrapped,
+    title,
+    collapsible,
+    marker,
+    children,
+    ...rest
+  } = props;
+  const {
+    $p2r,
+    $avs: {
+      $disabled,
+      $visible
+    }
+  } = $wrapped;
+  const {
+    on: onGlobal,
+    off: offGlobal
+  } = useGlobalEventBus();
   const firstRound = reactExports.useRef(true);
   const [expanded, setExpanded] = reactExports.useState(true);
   const fireCustomEvent = useCustomGlobalEvent();
@@ -7833,38 +10304,49 @@ const Section = reactExports.forwardRef((props, ref) => {
     }
     const prefix = expanded ? GlobalEventPrefix.SECTION_EXPANDED : GlobalEventPrefix.SECTION_COLLAPSED;
     const key = `${prefix}:${marker ?? ""}`;
-    fireCustomEvent(key, prefix, marker ?? "", { root: $wrapped.$root, model: $wrapped.$model });
+    fireCustomEvent(key, prefix, marker ?? "", {
+      root: $wrapped.$root,
+      model: $wrapped.$model
+    });
   }, [onGlobal, offGlobal, fireCustomEvent, expanded, marker, $wrapped.$root, $wrapped.$model]);
   const onExpandClicked = () => {
     setExpanded(!expanded);
   };
-  return React.createElement(
-    ASection,
-    { ...rest, "data-disabled": $disabled, "data-visible": $visible, id: PPUtils.asId(PPUtils.absolute($p2r, props.$pp), props.id), ref },
-    title != null ? React.createElement(
-      ASectionHeader,
-      null,
-      React.createElement(
-        ASectionTitle,
-        null,
-        React.createElement(LabelLike, { label: title, "$wrapped": $wrapped, "$validationScopes": props })
-      ),
-      collapsible ? React.createElement(
-        ASectionExpander,
-        { expanded, onClick: onExpandClicked },
-        React.createElement(ASectionExpanderSvg, { "data-expanded": expanded })
-      ) : null
-    ) : null,
-    React.createElement(ASectionBody, { expanded }, children)
-  );
+  return React.createElement(ASection, {
+    ...rest,
+    "data-disabled": $disabled,
+    "data-visible": $visible,
+    id: PPUtils.asId(PPUtils.absolute($p2r, props.$pp), props.id),
+    ref
+  }, title != null ? React.createElement(ASectionHeader, null, React.createElement(ASectionTitle, null, React.createElement(LabelLike, {
+    label: title,
+    "$wrapped": $wrapped,
+    "$validationScopes": props
+  })), collapsible ? React.createElement(ASectionExpander, {
+    expanded,
+    onClick: onExpandClicked
+  }, React.createElement(ASectionExpanderSvg, {
+    "data-expanded": expanded
+  })) : null) : null, React.createElement(ASectionBody, {
+    expanded
+  }, children));
 });
-registerWidget({ key: "Section", JSX: Section, container: true, array: false });
+registerWidget({
+  key: "Section",
+  JSX: Section,
+  container: true,
+  array: false
+});
 const Context$1 = reactExports.createContext({});
 Context$1.displayName = "TabsEventBus";
 const TabsEventBusProvider = (props) => {
-  const { children } = props;
+  const {
+    children
+  } = props;
   const bus = useCreateEventBus("tabs");
-  return React.createElement(Context$1.Provider, { value: bus }, children);
+  return React.createElement(Context$1.Provider, {
+    value: bus
+  }, children);
 };
 const useTabsEventBus = () => reactExports.useContext(Context$1);
 var TabsEventTypes;
@@ -7875,7 +10357,10 @@ var TabsEventTypes;
   TabsEventTypes2["REFRESH_TAB_CONTENT"] = "refresh-tab-content";
 })(TabsEventTypes || (TabsEventTypes = {}));
 const useTabActive = (tabIndex, marker) => {
-  const { on, off } = useTabsEventBus();
+  const {
+    on,
+    off
+  } = useTabsEventBus();
   const [active, setActive] = reactExports.useState(false);
   reactExports.useEffect(() => {
     const onActiveTab = (givenTabIndex, givenMarker) => {
@@ -7893,8 +10378,14 @@ const useTabActive = (tabIndex, marker) => {
   return active;
 };
 const useTabBodyInit = (options) => {
-  const { $pp, marker, def } = options;
-  const [defState, setDefState] = reactExports.useState({ initialized: false });
+  const {
+    $pp,
+    marker,
+    def
+  } = options;
+  const [defState, setDefState] = reactExports.useState({
+    initialized: false
+  });
   reactExports.useEffect(() => {
     if (defState.initialized) {
       return;
@@ -7909,13 +10400,19 @@ const useTabBodyInit = (options) => {
       if (foundDef != null && VUtils.isBlank(foundDef.$pp)) {
         foundDef.$pp = $pp;
       }
-      setDefState({ initialized: true, def: foundDef });
+      setDefState({
+        initialized: true,
+        def: foundDef
+      });
     })();
   }, [defState.initialized, def, $pp, marker]);
   return defState;
 };
 const useTabContentRefresh = (tabIndex, marker) => {
-  const { on, off } = useTabsEventBus();
+  const {
+    on,
+    off
+  } = useTabsEventBus();
   const forceUpdate = useForceUpdate();
   reactExports.useEffect(() => {
     const onActiveTab = (givenTabIndex, givenMarker) => {
@@ -7929,7 +10426,9 @@ const useTabContentRefresh = (tabIndex, marker) => {
     };
   }, [on, off, forceUpdate, tabIndex, marker]);
 };
-const ATabs = qe.div.attrs(({ id }) => {
+const ATabs = qe.div.attrs(({
+  id
+}) => {
   return {
     [DOM_KEY_WIDGET]: "d9-tabs",
     [DOM_ID_WIDGET]: id
@@ -7945,7 +10444,9 @@ const ATabs = qe.div.attrs(({ id }) => {
         display: none;
     }
 `;
-const TabsHeader = qe.div.attrs({ [DOM_KEY_WIDGET]: "d9-tabs-header" })`
+const TabsHeader = qe.div.attrs({
+  [DOM_KEY_WIDGET]: "d9-tabs-header"
+})`
     display: flex;
     position: relative;
     flex-wrap: wrap;
@@ -7954,7 +10455,9 @@ const TabsHeader = qe.div.attrs({ [DOM_KEY_WIDGET]: "d9-tabs-header" })`
     padding: calc(${CssVars.TAB_TITLE_PADDING} / 2) 0;
     border-radius: calc(${CssVars.BORDER_RADIUS} * 2);
 `;
-const ATabTitle = qe.div.attrs({ [DOM_KEY_WIDGET]: "d9-tab-title" })`
+const ATabTitle = qe.div.attrs({
+  [DOM_KEY_WIDGET]: "d9-tab-title"
+})`
     display: flex;
     position: relative;
     align-items: center;
@@ -8009,54 +10512,100 @@ const ATabTitle = qe.div.attrs({ [DOM_KEY_WIDGET]: "d9-tab-title" })`
         box-shadow: ${CssVars.HOVER_SHADOW};
     }
 `;
-const TabsBody = qe.div.attrs({ [DOM_KEY_WIDGET]: "d9-tabs-body" })`
+const TabsBody = qe.div.attrs({
+  [DOM_KEY_WIDGET]: "d9-tabs-body"
+})`
     display: block;
     position: relative;
     border-top: ${CssVars.BORDER};
     padding: ${CssVars.SECTION_BODY_PADDING} 0;
     margin-top: -1px;
 `;
-const ATabBodyVisibility = qe.div.attrs({ [DOM_KEY_WIDGET]: "d9-tab-body-visibility" })`
+const ATabBodyVisibility = qe.div.attrs({
+  [DOM_KEY_WIDGET]: "d9-tab-body-visibility"
+})`
     display: none;
 
     &[data-visible=false] + div[data-w=d9-tab-body] {
         display: none;
     }
 `;
-const ATabBody = qe.div.attrs({ [DOM_KEY_WIDGET]: "d9-tab-body" })`
+const ATabBody = qe.div.attrs({
+  [DOM_KEY_WIDGET]: "d9-tab-body"
+})`
     display: block;
     position: relative;
 `;
 const TabBodyVisibilityController = (props) => {
-  const { tabIndex, marker } = props;
+  const {
+    tabIndex,
+    marker
+  } = props;
   const active = useTabActive(tabIndex, marker);
-  return React.createElement(ATabBodyVisibility, { "data-visible": active });
+  return React.createElement(ATabBodyVisibility, {
+    "data-visible": active
+  });
 };
 const TabBodyContent = (props) => {
-  const { $pp, marker, def, tabIndex, $root, $model, $p2r } = props;
+  const {
+    $pp,
+    marker,
+    def,
+    tabIndex,
+    $root,
+    $model,
+    $p2r
+  } = props;
   useTabContentRefresh(tabIndex, marker);
-  const { initialized, def: bodyDef } = useTabBodyInit({ $pp, marker, def });
+  const {
+    initialized,
+    def: bodyDef
+  } = useTabBodyInit({
+    $pp,
+    marker,
+    def
+  });
   if (!initialized) {
     return React.createElement(ATabBody, null);
   }
-  return React.createElement(
-    ATabBody,
-    null,
-    React.createElement(Wrapper, { ...bodyDef, "$root": $root, "$model": $model, "$p2r": $p2r })
-  );
+  return React.createElement(ATabBody, null, React.createElement(Wrapper, {
+    ...bodyDef,
+    "$root": $root,
+    "$model": $model,
+    "$p2r": $p2r
+  }));
 };
 const TabBody = (props) => {
-  return React.createElement(
-    React.Fragment,
-    null,
-    React.createElement(TabBodyVisibilityController, { tabIndex: props.tabIndex, marker: props.marker }),
-    React.createElement(TabBodyContent, { ...props })
-  );
+  return React.createElement(React.Fragment, null, React.createElement(TabBodyVisibilityController, {
+    tabIndex: props.tabIndex,
+    marker: props.marker
+  }), React.createElement(TabBodyContent, {
+    ...props
+  }));
 };
 const TabTitleWorker = (props) => {
-  const { $pp, title, badge, $root, $model, $p2r, tabIndex, marker, active, $defaultAttributes: attributeValues, $defaultAttributesSet: setAttributeValues, ...rest } = props;
-  const { fire } = useTabsEventBus();
-  useAttributesWatch({ props, attributeValues, setAttributeValues });
+  const {
+    $pp,
+    title,
+    badge,
+    $root,
+    $model,
+    $p2r,
+    tabIndex,
+    marker,
+    active,
+    $defaultAttributes: attributeValues,
+    $defaultAttributesSet: setAttributeValues,
+    ...rest
+  } = props;
+  const {
+    fire
+  } = useTabsEventBus();
+  useAttributesWatch({
+    props,
+    attributeValues,
+    setAttributeValues
+  });
   const $wrapped = {
     $root,
     $model: MUtils.getValue($model, $pp),
@@ -8064,7 +10613,10 @@ const TabTitleWorker = (props) => {
     $avs: attributeValues,
     $onValueChange: VUtils.noop
   };
-  const { $disabled, $visible } = attributeValues;
+  const {
+    $disabled,
+    $visible
+  } = attributeValues;
   const onTitleClicked = (event) => {
     if ($disabled) {
       return;
@@ -8073,22 +10625,42 @@ const TabTitleWorker = (props) => {
     event.stopPropagation();
     fire(TabsEventTypes.TRY_ACTIVE_TAB, tabIndex, marker);
   };
-  return React.createElement(
-    ATabTitle,
-    { "data-disabled": $disabled, "data-visible": $visible, "data-active": active, ...rest, onClick: onTitleClicked },
-    React.createElement(LabelLike, { "$wrapped": $wrapped, label: title, wrapByCaption: true }),
-    React.createElement(LabelLike, { "$wrapped": $wrapped, label: badge })
-  );
+  return React.createElement(ATabTitle, {
+    "data-disabled": $disabled,
+    "data-visible": $visible,
+    "data-active": active,
+    ...rest,
+    onClick: onTitleClicked
+  }, React.createElement(LabelLike, {
+    "$wrapped": $wrapped,
+    label: title,
+    wrapByCaption: true
+  }), React.createElement(LabelLike, {
+    "$wrapped": $wrapped,
+    label: badge
+  }));
 };
 const TabTitle = (props) => {
-  const { tabIndex, marker } = props;
+  const {
+    tabIndex,
+    marker
+  } = props;
   const active = useTabActive(tabIndex, marker);
   useTabContentRefresh(tabIndex, marker);
-  const { initialized, $defaultAttributes, $defaultAttributesSet } = useDefaultAttributeValues(props);
+  const {
+    initialized,
+    $defaultAttributes,
+    $defaultAttributesSet
+  } = useDefaultAttributeValues(props);
   if (!initialized) {
     return null;
   }
-  return React.createElement(TabTitleWorker, { ...props, active, "$defaultAttributes": $defaultAttributes, "$defaultAttributesSet": $defaultAttributesSet });
+  return React.createElement(TabTitleWorker, {
+    ...props,
+    active,
+    "$defaultAttributes": $defaultAttributes,
+    "$defaultAttributesSet": $defaultAttributesSet
+  });
 };
 const redressTabMarker = (content) => {
   if (VUtils.isNotBlank(content.marker)) {
@@ -8128,10 +10700,22 @@ const findActiveOne$1 = (contents, index, marker) => {
   return [found, (contents ?? []).indexOf(found)];
 };
 const TabsController = (props) => {
-  const { $pp, $wrapped, initActive, contents } = props;
-  const { on: onGlobal, off: offGlobal } = useGlobalEventBus();
+  const {
+    $pp,
+    $wrapped,
+    initActive,
+    contents
+  } = props;
+  const {
+    on: onGlobal,
+    off: offGlobal
+  } = useGlobalEventBus();
   const globalHandlers = useGlobalHandlers();
-  const { on, off, fire } = useTabsEventBus();
+  const {
+    on,
+    off,
+    fire
+  } = useTabsEventBus();
   const [activeIndex, setActiveIndex] = reactExports.useState(() => {
     const [, initActiveIndex] = findInitActiveOne(contents, initActive);
     return initActiveIndex;
@@ -8139,7 +10723,11 @@ const TabsController = (props) => {
   const fireCustomEvent = useCustomGlobalEvent();
   reactExports.useEffect(() => {
     const activeTab = async (options) => {
-      const { tabIndex, def, first } = options;
+      const {
+        tabIndex,
+        def,
+        first
+      } = options;
       if (def.data != null) {
         const model = MUtils.getValue($wrapped.$model, PPUtils.concat($pp, def.$pp));
         await def.data({
@@ -8169,10 +10757,18 @@ const TabsController = (props) => {
       const [found, foundIndex] = activeOne;
       if (foundIndex === activeIndex) {
         if (first) {
-          await activeTab({ tabIndex: foundIndex, def: found, first: true });
+          await activeTab({
+            tabIndex: foundIndex,
+            def: found,
+            first: true
+          });
         }
       } else {
-        await activeTab({ tabIndex: foundIndex, def: found, first: false });
+        await activeTab({
+          tabIndex: foundIndex,
+          def: found,
+          first: false
+        });
       }
     };
     const onFirstTabActive = createOnTabActive(true);
@@ -8183,19 +10779,7 @@ const TabsController = (props) => {
       off(TabsEventTypes.FIRST_TRY_ACTIVE_TAB, onFirstTabActive);
       off(TabsEventTypes.TRY_ACTIVE_TAB, onTabActive);
     };
-  }, [
-    on,
-    off,
-    fire,
-    globalHandlers,
-    fireCustomEvent,
-    activeIndex,
-    contents,
-    $pp,
-    $wrapped.$root,
-    $wrapped.$model,
-    $wrapped.$p2r
-  ]);
+  }, [on, off, fire, globalHandlers, fireCustomEvent, activeIndex, contents, $pp, $wrapped.$root, $wrapped.$model, $wrapped.$p2r]);
   reactExports.useEffect(() => {
     const onCustomEvent = (_, prefix, clipped) => {
       if (prefix !== GlobalEventPrefix.TAB) {
@@ -8219,52 +10803,108 @@ const TabsController = (props) => {
   return React.createElement(reactExports.Fragment, null);
 };
 const InternalTabs = reactExports.forwardRef((props, ref) => {
-  const { $pp, $wrapped, initActive, contents, ...rest } = props;
-  const { $p2r, $avs: { $disabled, $visible } } = $wrapped;
+  const {
+    $pp,
+    $wrapped,
+    initActive,
+    contents,
+    ...rest
+  } = props;
+  const {
+    $p2r,
+    $avs: {
+      $disabled,
+      $visible
+    }
+  } = $wrapped;
   (contents ?? []).forEach((content) => redressTabMarker(content));
-  return React.createElement(
-    ATabs,
-    { ...rest, "data-disabled": $disabled, "data-visible": $visible, id: PPUtils.asId(PPUtils.absolute($p2r, $pp), props.id), ref },
-    React.createElement(TabsHeader, null, (contents ?? []).map((content, index) => {
-      const $model = MUtils.getValue($wrapped.$model, $pp);
-      const { data, ...rest2 } = content;
-      return React.createElement(TabTitle, { key: content.marker, "$root": $wrapped.$root, "$model": $model, "$p2r": PPUtils.concat($p2r, $pp), ...rest2, tabIndex: index, marker: content.marker });
-    })),
-    React.createElement(TabsBody, null, (contents ?? []).map((content, index) => {
-      const $model = MUtils.getValue($wrapped.$model, $pp);
-      return React.createElement(TabBody, { key: content.marker, def: content.body, "$pp": content.$pp, "$root": $wrapped.$root, "$model": $model, "$p2r": PPUtils.concat($p2r, $pp), tabIndex: index, marker: content.marker });
-    })),
-    React.createElement(TabsController, { "$pp": $pp, "$wrapped": $wrapped, initActive, contents })
-  );
+  return React.createElement(ATabs, {
+    ...rest,
+    "data-disabled": $disabled,
+    "data-visible": $visible,
+    id: PPUtils.asId(PPUtils.absolute($p2r, $pp), props.id),
+    ref
+  }, React.createElement(TabsHeader, null, (contents ?? []).map((content, index) => {
+    const $model = MUtils.getValue($wrapped.$model, $pp);
+    const {
+      data,
+      ...rest2
+    } = content;
+    return React.createElement(TabTitle, {
+      key: content.marker,
+      "$root": $wrapped.$root,
+      "$model": $model,
+      "$p2r": PPUtils.concat($p2r, $pp),
+      ...rest2,
+      tabIndex: index,
+      marker: content.marker
+    });
+  })), React.createElement(TabsBody, null, (contents ?? []).map((content, index) => {
+    const $model = MUtils.getValue($wrapped.$model, $pp);
+    return React.createElement(TabBody, {
+      key: content.marker,
+      def: content.body,
+      "$pp": content.$pp,
+      "$root": $wrapped.$root,
+      "$model": $model,
+      "$p2r": PPUtils.concat($p2r, $pp),
+      tabIndex: index,
+      marker: content.marker
+    });
+  })), React.createElement(TabsController, {
+    "$pp": $pp,
+    "$wrapped": $wrapped,
+    initActive,
+    contents
+  }));
 });
 const Tabs = reactExports.forwardRef((props, ref) => {
-  return React.createElement(
-    TabsEventBusProvider,
-    null,
-    React.createElement(InternalTabs, { ...props, ref })
-  );
+  return React.createElement(TabsEventBusProvider, null, React.createElement(InternalTabs, {
+    ...props,
+    ref
+  }));
 });
-registerWidget({ key: "Tabs", JSX: Tabs, container: false, array: false });
+registerWidget({
+  key: "Tabs",
+  JSX: Tabs,
+  container: false,
+  array: false
+});
 const Context = reactExports.createContext({});
 Context.displayName = "WizardEventBus";
 const WizardEventBusProvider = (props) => {
-  const { children } = props;
+  const {
+    children
+  } = props;
   const bus = useCreateEventBus("wizard");
-  return React.createElement(Context.Provider, { value: bus }, children);
+  return React.createElement(Context.Provider, {
+    value: bus
+  }, children);
 };
 const useWizardEventBus = () => reactExports.useContext(Context);
 const useWizardSharedInit = (options) => {
-  const { contents, shared } = options;
-  const [state, setState] = reactExports.useState({ initialized: false });
+  const {
+    contents,
+    shared
+  } = options;
+  const [state, setState] = reactExports.useState({
+    initialized: false
+  });
   reactExports.useEffect(() => {
     if (state.initialized) {
       return;
     }
     const findSharedDef = async (def) => {
       if (def == null || def.body == null) {
-        return { def: void 0, lead: void 0 };
+        return {
+          def: void 0,
+          lead: void 0
+        };
       }
-      const { $pp, body } = def;
+      const {
+        $pp,
+        body
+      } = def;
       let foundDef;
       if (typeof body === "function") {
         foundDef = await body();
@@ -8274,11 +10914,21 @@ const useWizardSharedInit = (options) => {
       if (foundDef != null && VUtils.isBlank(foundDef.$pp)) {
         foundDef.$pp = $pp;
       }
-      return { def: foundDef, lead: def.lead };
+      return {
+        def: foundDef,
+        lead: def.lead
+      };
     };
     (async () => {
-      const { def: sharedDef, lead: sharedAtLead } = await findSharedDef(shared);
-      setState({ initialized: true, sharedDef, sharedAtLead });
+      const {
+        def: sharedDef,
+        lead: sharedAtLead
+      } = await findSharedDef(shared);
+      setState({
+        initialized: true,
+        sharedDef,
+        sharedAtLead
+      });
     })();
   }, [state.initialized, contents, shared]);
   return state;
@@ -8304,7 +10954,9 @@ const findActiveOne = (contents, index, marker) => {
   }
   return [found, (contents ?? []).indexOf(found)];
 };
-const AWizard = qe.div.attrs(({ id }) => {
+const AWizard = qe.div.attrs(({
+  id
+}) => {
   return {
     [DOM_KEY_WIDGET]: "d9-wizard",
     [DOM_ID_WIDGET]: id
@@ -8320,7 +10972,9 @@ const AWizard = qe.div.attrs(({ id }) => {
         display: none;
     }
 `;
-const WizardHeader = qe.div.attrs({ [DOM_KEY_WIDGET]: "d9-wizard-header" })`
+const WizardHeader = qe.div.attrs({
+  [DOM_KEY_WIDGET]: "d9-wizard-header"
+})`
     display: flex;
     position: relative;
     flex-wrap: wrap;
@@ -8332,7 +10986,9 @@ const WizardHeader = qe.div.attrs({ [DOM_KEY_WIDGET]: "d9-wizard-header" })`
         column-gap: calc(${CssVars.WIZARD_STEP_TITLE_PADDING} / 2);
     }
 `;
-const AWizardStepTitle = qe.div.attrs({ [DOM_KEY_WIDGET]: "d9-wizard-step-title" })`
+const AWizardStepTitle = qe.div.attrs({
+  [DOM_KEY_WIDGET]: "d9-wizard-step-title"
+})`
     display: flex;
     position: relative;
     flex-grow: 1;
@@ -8474,7 +11130,9 @@ const AWizardStepTitle = qe.div.attrs({ [DOM_KEY_WIDGET]: "d9-wizard-step-title"
         }
     }
 `;
-const AWizardStepBalloon = qe.div.attrs({ [DOM_KEY_WIDGET]: "d9-wizard-step-balloon" })`
+const AWizardStepBalloon = qe.div.attrs({
+  [DOM_KEY_WIDGET]: "d9-wizard-step-balloon"
+})`
     display: flex;
     position: relative;
     align-items: center;
@@ -8520,21 +11178,27 @@ const AWizardStepBalloon = qe.div.attrs({ [DOM_KEY_WIDGET]: "d9-wizard-step-ball
         }
     }
 `;
-const WizardBody = qe.div.attrs({ [DOM_KEY_WIDGET]: "d9-wizard-body" })`
+const WizardBody = qe.div.attrs({
+  [DOM_KEY_WIDGET]: "d9-wizard-body"
+})`
     display: block;
     position: relative;
     border-top: ${CssVars.BORDER};
     padding: ${CssVars.SECTION_BODY_PADDING} 0;
     margin-top: -1px;
 `;
-const AWizardStepBodyVisibility = qe.div.attrs({ [DOM_KEY_WIDGET]: "d9-tab-body-visibility" })`
+const AWizardStepBodyVisibility = qe.div.attrs({
+  [DOM_KEY_WIDGET]: "d9-tab-body-visibility"
+})`
     display: none;
 
     &[data-visible=false] + div[data-w=d9-wizard-step-body] {
         display: none;
     }
 `;
-const AWizardStepBody = qe.div.attrs({ [DOM_KEY_WIDGET]: "d9-wizard-step-body" })`
+const AWizardStepBody = qe.div.attrs({
+  [DOM_KEY_WIDGET]: "d9-wizard-step-body"
+})`
     display: grid;
     position: relative;
     grid-template-columns: repeat(${CssVars.GRID_COLUMNS}, calc((100% - ${CssVars.GRID_COLUMN_GAP} * (${CssVars.GRID_COLUMNS} - 1)) / ${CssVars.GRID_COLUMNS}));
@@ -8562,15 +11226,35 @@ var WizardEventTypes;
   WizardEventTypes2["REFRESH_STEP_CONTENT"] = "refresh-step-content";
 })(WizardEventTypes || (WizardEventTypes = {}));
 const WizardController = (props) => {
-  const { $pp, $wrapped, contents, reached } = props;
-  const { on: onGlobal, off: offGlobal } = useGlobalEventBus();
+  const {
+    $pp,
+    $wrapped,
+    contents,
+    reached
+  } = props;
+  const {
+    on: onGlobal,
+    off: offGlobal
+  } = useGlobalEventBus();
   const globalHandlers = useGlobalHandlers();
-  const { on, off, fire } = useWizardEventBus();
-  const [state, setState] = reactExports.useState({ initialized: false, activeIndex: -1, reachedIndex: -1 });
+  const {
+    on,
+    off,
+    fire
+  } = useWizardEventBus();
+  const [state, setState] = reactExports.useState({
+    initialized: false,
+    activeIndex: -1,
+    reachedIndex: -1
+  });
   const fireCustomEvent = useCustomGlobalEvent();
   reactExports.useEffect(() => {
     const activeStep = async (options) => {
-      const { stepIndex, def, first } = options;
+      const {
+        stepIndex,
+        def,
+        first
+      } = options;
       if (def.data != null) {
         const model = MUtils.getValue($wrapped.$model, PPUtils.concat($pp, def.$pp));
         await def.data({
@@ -8586,7 +11270,11 @@ const WizardController = (props) => {
       }
       const reachedIndex = Math.max(stepIndex, state.reachedIndex);
       setState((state2) => {
-        return { ...state2, activeIndex: stepIndex, reachedIndex };
+        return {
+          ...state2,
+          activeIndex: stepIndex,
+          reachedIndex
+        };
       });
       fire(WizardEventTypes.ACTIVE_STEP, stepIndex, def == null ? void 0 : def.marker, reachedIndex);
       const key = `${GlobalEventPrefix.WIZARD_STEP_CHANGED}:${(def == null ? void 0 : def.marker) ?? ""}`;
@@ -8603,10 +11291,18 @@ const WizardController = (props) => {
       const [found, foundIndex] = activeOne;
       if (foundIndex === state.activeIndex) {
         if (first) {
-          await activeStep({ stepIndex: foundIndex, def: found, first: true });
+          await activeStep({
+            stepIndex: foundIndex,
+            def: found,
+            first: true
+          });
         }
       } else {
-        await activeStep({ stepIndex: foundIndex, def: found, first: false });
+        await activeStep({
+          stepIndex: foundIndex,
+          def: found,
+          first: false
+        });
       }
     };
     const onFirstStepActive = createOnStepActive(true);
@@ -8617,20 +11313,7 @@ const WizardController = (props) => {
       off(WizardEventTypes.FIRST_TRY_ACTIVE_STEP, onFirstStepActive);
       off(WizardEventTypes.TRY_ACTIVE_STEP, onStepActive);
     };
-  }, [
-    on,
-    off,
-    fire,
-    globalHandlers,
-    fireCustomEvent,
-    state.activeIndex,
-    state.reachedIndex,
-    contents,
-    $pp,
-    $wrapped.$root,
-    $wrapped.$model,
-    $wrapped.$p2r
-  ]);
+  }, [on, off, fire, globalHandlers, fireCustomEvent, state.activeIndex, state.reachedIndex, contents, $pp, $wrapped.$root, $wrapped.$model, $wrapped.$p2r]);
   reactExports.useEffect(() => {
     const onCustomEvent = (_, prefix, clipped) => {
       if (prefix !== GlobalEventPrefix.WIZARD_STEP) {
@@ -8669,28 +11352,66 @@ const WizardController = (props) => {
     };
     (async () => {
       const reachedIndex = await findReachedIndex();
-      setState({ initialized: true, activeIndex: reachedIndex, reachedIndex });
+      setState({
+        initialized: true,
+        activeIndex: reachedIndex,
+        reachedIndex
+      });
       fire(WizardEventTypes.FIRST_TRY_ACTIVE_STEP, reachedIndex, "");
     })();
   }, [fire, contents, reached, state.initialized]);
   return React.createElement(reactExports.Fragment, null);
 };
 const UnwrappedButtonBar = reactExports.forwardRef((props, ref) => {
-  const { children, visible, ...rest } = props;
+  const {
+    children,
+    visible,
+    ...rest
+  } = props;
   const $onValueChange = VUtils.noop;
-  const $avs = { $disabled: false, $visible: visible };
+  const $avs = {
+    $disabled: false,
+    $visible: visible
+  };
   const $root = {};
-  return React.createElement(ButtonBar, { ...rest, "$nodes": [], "$wrapped": { $onValueChange, $avs, $root, $model: $root, $p2r: "." }, id: rest.id ?? VUtils.generateUniqueId(), ref }, children);
+  return React.createElement(ButtonBar, {
+    ...rest,
+    "$nodes": [],
+    "$wrapped": {
+      $onValueChange,
+      $avs,
+      $root,
+      $model: $root,
+      $p2r: "."
+    },
+    id: rest.id ?? VUtils.generateUniqueId(),
+    ref
+  }, children);
 });
 const useWizardStepActive = (stepIndex, marker) => {
-  const { on, off } = useWizardEventBus();
-  const [state, setState] = reactExports.useState({ active: false, done: false, reachedIndex: -1 });
+  const {
+    on,
+    off
+  } = useWizardEventBus();
+  const [state, setState] = reactExports.useState({
+    active: false,
+    done: false,
+    reachedIndex: -1
+  });
   reactExports.useEffect(() => {
     const onActiveTab = (givenTabIndex, givenMarker, reachedIndex) => {
       if (stepIndex === givenTabIndex || marker === givenMarker) {
-        setState({ active: true, done: false, reachedIndex });
+        setState({
+          active: true,
+          done: false,
+          reachedIndex
+        });
       } else {
-        setState({ active: false, done: stepIndex < givenTabIndex, reachedIndex });
+        setState({
+          active: false,
+          done: stepIndex < givenTabIndex,
+          reachedIndex
+        });
       }
     };
     on(WizardEventTypes.ACTIVE_STEP, onActiveTab);
@@ -8701,8 +11422,14 @@ const useWizardStepActive = (stepIndex, marker) => {
   return state;
 };
 const useWizardStepBodyInit = (options) => {
-  const { $pp, marker, def } = options;
-  const [defState, setDefState] = reactExports.useState({ initialized: false });
+  const {
+    $pp,
+    marker,
+    def
+  } = options;
+  const [defState, setDefState] = reactExports.useState({
+    initialized: false
+  });
   reactExports.useEffect(() => {
     if (defState.initialized) {
       return;
@@ -8717,13 +11444,19 @@ const useWizardStepBodyInit = (options) => {
       if (foundDef != null && VUtils.isBlank(foundDef.$pp)) {
         foundDef.$pp = $pp;
       }
-      setDefState({ initialized: true, def: foundDef });
+      setDefState({
+        initialized: true,
+        def: foundDef
+      });
     })();
   }, [defState.initialized, def, $pp, marker]);
   return defState;
 };
 const useWizardStepContentRefresh = (tabIndex, marker) => {
-  const { on, off } = useWizardEventBus();
+  const {
+    on,
+    off
+  } = useWizardEventBus();
   const forceUpdate = useForceUpdate();
   reactExports.useEffect(() => {
     const onActiveStep = (givenTabIndex, givenMarker) => {
@@ -8738,20 +11471,51 @@ const useWizardStepContentRefresh = (tabIndex, marker) => {
   }, [on, off, forceUpdate, tabIndex, marker]);
 };
 const WizardStepBodyVisibilityController = (props) => {
-  const { stepIndex, marker } = props;
-  const { active } = useWizardStepActive(stepIndex, marker);
-  return React.createElement(AWizardStepBodyVisibility, { "data-visible": active });
+  const {
+    stepIndex,
+    marker
+  } = props;
+  const {
+    active
+  } = useWizardStepActive(stepIndex, marker);
+  return React.createElement(AWizardStepBodyVisibility, {
+    "data-visible": active
+  });
 };
 const WizardStepSharedPart = (props) => {
-  const { stepIndex, marker, shared, $root, $model, $p2r } = props;
-  const { active } = useWizardStepActive(stepIndex, marker);
+  const {
+    stepIndex,
+    marker,
+    shared,
+    $root,
+    $model,
+    $p2r
+  } = props;
+  const {
+    active
+  } = useWizardStepActive(stepIndex, marker);
   if (shared == null || !active) {
     return null;
   }
-  return React.createElement(Wrapper, { ...shared, "$root": $root, "$model": $model, "$p2r": $p2r });
+  return React.createElement(Wrapper, {
+    ...shared,
+    "$root": $root,
+    "$model": $model,
+    "$p2r": $p2r
+  });
 };
 const computeSharedPosition = (options) => {
-  const { shared, omitWalker, sharedAtLead, defs = { $pos: { $col: 1, $cols: 1 } } } = options;
+  const {
+    shared,
+    omitWalker,
+    sharedAtLead,
+    defs = {
+      $pos: {
+        $col: 1,
+        $cols: 1
+      }
+    }
+  } = options;
   if (shared != null) {
     shared.$pos = shared.$pos ?? {};
     shared.$pos.$row = 1;
@@ -8772,17 +11536,48 @@ const computeSharedPosition = (options) => {
   }
 };
 const WizardStepBodyContent = (props) => {
-  const { $pp, marker, def, $root, $model, $p2r, omitWalker = false, shared, sharedAtLead, firstStep, lastStep, previousMarker, nextMarker, stepIndex } = props;
-  const { fire } = useWizardEventBus();
+  const {
+    $pp,
+    marker,
+    def,
+    $root,
+    $model,
+    $p2r,
+    omitWalker = false,
+    shared,
+    sharedAtLead,
+    firstStep,
+    lastStep,
+    previousMarker,
+    nextMarker,
+    stepIndex
+  } = props;
+  const {
+    fire
+  } = useWizardEventBus();
   useWizardStepContentRefresh(stepIndex, marker);
-  const { initialized, def: bodyDef } = useWizardStepBodyInit({ $pp, marker, def });
+  const {
+    initialized,
+    def: bodyDef
+  } = useWizardStepBodyInit({
+    $pp,
+    marker,
+    def
+  });
   if (!initialized) {
-    computeSharedPosition({ shared, omitWalker, sharedAtLead });
-    return React.createElement(
-      AWizardStepBody,
-      null,
-      React.createElement(WizardStepSharedPart, { stepIndex, marker, shared, "$root": $root, "$model": $model, "$p2r": $p2r })
-    );
+    computeSharedPosition({
+      shared,
+      omitWalker,
+      sharedAtLead
+    });
+    return React.createElement(AWizardStepBody, null, React.createElement(WizardStepSharedPart, {
+      stepIndex,
+      marker,
+      shared,
+      "$root": $root,
+      "$model": $model,
+      "$p2r": $p2r
+    }));
   }
   const onToPreviousClicked = async () => {
     fire(WizardEventTypes.TRY_ACTIVE_STEP, stepIndex - 1, previousMarker);
@@ -8791,40 +11586,81 @@ const WizardStepBodyContent = (props) => {
     fire(WizardEventTypes.TRY_ACTIVE_STEP, stepIndex + 1, nextMarker);
   };
   const defs = bodyDef;
-  computeSharedPosition({ shared, omitWalker, sharedAtLead, defs });
-  return React.createElement(
-    AWizardStepBody,
-    null,
-    React.createElement(WizardStepSharedPart, { stepIndex, marker, shared, "$root": $root, "$model": $model, "$p2r": $p2r }),
-    React.createElement(Wrapper, { ...defs, "$root": $root, "$model": $model, "$p2r": $p2r }),
-    omitWalker ? null : React.createElement(
-      UnwrappedButtonBar,
-      { "data-w": "d9-wizard-walker", "data-grab-all": shared == null, "data-shared-at-lead": sharedAtLead === true },
-      firstStep ? React.createElement("span", null) : React.createElement(
-        UnwrappedButton,
-        { onClick: onToPreviousClicked, leads: ["$icons.angleLeft"], ink: ButtonInk.WAIVE, fill: ButtonFill.FILL },
-        React.createElement(IntlLabel, { keys: ["wizard", "previous"], value: "Previous" })
-      ),
-      lastStep ? React.createElement("span", null) : React.createElement(
-        UnwrappedButton,
-        { onClick: onToNextClicked, tails: ["$icons.angleRight"], ink: ButtonInk.PRIMARY, fill: ButtonFill.FILL },
-        React.createElement(IntlLabel, { keys: ["wizard", "next"], value: "Next" })
-      )
-    )
-  );
+  computeSharedPosition({
+    shared,
+    omitWalker,
+    sharedAtLead,
+    defs
+  });
+  return React.createElement(AWizardStepBody, null, React.createElement(WizardStepSharedPart, {
+    stepIndex,
+    marker,
+    shared,
+    "$root": $root,
+    "$model": $model,
+    "$p2r": $p2r
+  }), React.createElement(Wrapper, {
+    ...defs,
+    "$root": $root,
+    "$model": $model,
+    "$p2r": $p2r
+  }), omitWalker ? null : React.createElement(UnwrappedButtonBar, {
+    "data-w": "d9-wizard-walker",
+    "data-grab-all": shared == null,
+    "data-shared-at-lead": sharedAtLead === true
+  }, firstStep ? React.createElement("span", null) : React.createElement(UnwrappedButton, {
+    onClick: onToPreviousClicked,
+    leads: ["$icons.angleLeft"],
+    ink: ButtonInk.WAIVE,
+    fill: ButtonFill.FILL
+  }, React.createElement(IntlLabel, {
+    keys: ["wizard", "previous"],
+    value: "Previous"
+  })), lastStep ? React.createElement("span", null) : React.createElement(UnwrappedButton, {
+    onClick: onToNextClicked,
+    tails: ["$icons.angleRight"],
+    ink: ButtonInk.PRIMARY,
+    fill: ButtonFill.FILL
+  }, React.createElement(IntlLabel, {
+    keys: ["wizard", "next"],
+    value: "Next"
+  }))));
 };
 const WizardStepBody = (props) => {
-  return React.createElement(
-    React.Fragment,
-    null,
-    React.createElement(WizardStepBodyVisibilityController, { stepIndex: props.stepIndex, marker: props.marker }),
-    React.createElement(WizardStepBodyContent, { ...props })
-  );
+  return React.createElement(React.Fragment, null, React.createElement(WizardStepBodyVisibilityController, {
+    stepIndex: props.stepIndex,
+    marker: props.marker
+  }), React.createElement(WizardStepBodyContent, {
+    ...props
+  }));
 };
 const WizardStepTitleWorker = (props) => {
-  const { $pp, title, $root, $model, $p2r, balloon = true, emphasisActive = true, done, active, freeWalk, reachedIndex, stepIndex, marker, $defaultAttributes: attributeValues, $defaultAttributesSet: setAttributeValues, ...rest } = props;
-  const { fire } = useWizardEventBus();
-  useAttributesWatch({ props, attributeValues, setAttributeValues });
+  const {
+    $pp,
+    title,
+    $root,
+    $model,
+    $p2r,
+    balloon = true,
+    emphasisActive = true,
+    done,
+    active,
+    freeWalk,
+    reachedIndex,
+    stepIndex,
+    marker,
+    $defaultAttributes: attributeValues,
+    $defaultAttributesSet: setAttributeValues,
+    ...rest
+  } = props;
+  const {
+    fire
+  } = useWizardEventBus();
+  useAttributesWatch({
+    props,
+    attributeValues,
+    setAttributeValues
+  });
   const $wrapped = {
     $root,
     $model: MUtils.getValue($model, $pp),
@@ -8832,7 +11668,10 @@ const WizardStepTitleWorker = (props) => {
     $avs: attributeValues,
     $onValueChange: VUtils.noop
   };
-  const { $disabled, $visible } = attributeValues;
+  const {
+    $disabled,
+    $visible
+  } = attributeValues;
   const onTitleClicked = (event) => {
     if ($disabled || active) {
       return;
@@ -8846,57 +11685,137 @@ const WizardStepTitleWorker = (props) => {
     event.stopPropagation();
     fire(WizardEventTypes.TRY_ACTIVE_STEP, stepIndex, marker);
   };
-  return React.createElement(
-    AWizardStepTitle,
-    { "data-disabled": $disabled, "data-visible": $visible, "data-done": done || !active && reachedIndex >= stepIndex, "data-active": active, "data-free-walk": freeWalk || reachedIndex >= stepIndex, "data-balloon": balloon, "data-emphasis": emphasisActive && active, onClick: balloon ? void 0 : onTitleClicked, ...rest },
-    balloon ? React.createElement(
-      AWizardStepBalloon,
-      null,
-      React.createElement("span", { onClick: onTitleClicked }, stepIndex + 1)
-    ) : null,
-    React.createElement(LabelLike, { "$wrapped": $wrapped, label: title, wrapByCaption: true })
-  );
+  return React.createElement(AWizardStepTitle, {
+    "data-disabled": $disabled,
+    "data-visible": $visible,
+    "data-done": done || !active && reachedIndex >= stepIndex,
+    "data-active": active,
+    "data-free-walk": freeWalk || reachedIndex >= stepIndex,
+    "data-balloon": balloon,
+    "data-emphasis": emphasisActive && active,
+    onClick: balloon ? void 0 : onTitleClicked,
+    ...rest
+  }, balloon ? React.createElement(AWizardStepBalloon, null, React.createElement("span", {
+    onClick: onTitleClicked
+  }, stepIndex + 1)) : null, React.createElement(LabelLike, {
+    "$wrapped": $wrapped,
+    label: title,
+    wrapByCaption: true
+  }));
 };
 const WizardStepTitle = (props) => {
-  const { active, done, reachedIndex } = useWizardStepActive(props.stepIndex, props.marker);
+  const {
+    active,
+    done,
+    reachedIndex
+  } = useWizardStepActive(props.stepIndex, props.marker);
   useWizardStepContentRefresh(props.stepIndex, props.marker);
-  const { initialized, $defaultAttributes, $defaultAttributesSet } = useDefaultAttributeValues(props);
+  const {
+    initialized,
+    $defaultAttributes,
+    $defaultAttributesSet
+  } = useDefaultAttributeValues(props);
   if (!initialized) {
     return null;
   }
-  return React.createElement(WizardStepTitleWorker, { ...props, active, done, reachedIndex, "$defaultAttributes": $defaultAttributes, "$defaultAttributesSet": $defaultAttributesSet });
+  return React.createElement(WizardStepTitleWorker, {
+    ...props,
+    active,
+    done,
+    reachedIndex,
+    "$defaultAttributes": $defaultAttributes,
+    "$defaultAttributesSet": $defaultAttributesSet
+  });
 };
 const InternalWizard = reactExports.forwardRef((props, ref) => {
-  const { $pp, $wrapped, reached = 0, freeWalk = false, omitWalker = false, balloon = true, emphasisActive = true, contents, ...rest } = props;
-  const { $p2r, $avs: { $disabled, $visible } } = $wrapped;
+  const {
+    $pp,
+    $wrapped,
+    reached = 0,
+    freeWalk = false,
+    omitWalker = false,
+    balloon = true,
+    emphasisActive = true,
+    contents,
+    ...rest
+  } = props;
+  const {
+    $p2r,
+    $avs: {
+      $disabled,
+      $visible
+    }
+  } = $wrapped;
   const sharedState = useWizardSharedInit(props);
   (contents ?? []).forEach((content) => redressStepMarker(content));
   if (!sharedState.initialized) {
     return null;
   }
-  return React.createElement(
-    AWizard,
-    { ...rest, "data-disabled": $disabled, "data-visible": $visible, id: PPUtils.asId(PPUtils.absolute($p2r, $pp), props.id), ref },
-    React.createElement(WizardHeader, { "data-balloon": balloon }, (contents ?? []).map((content, index) => {
-      const $model = MUtils.getValue($wrapped.$model, $pp);
-      return React.createElement(WizardStepTitle, { key: content.marker, "$root": $wrapped.$root, "$model": $model, "$p2r": PPUtils.concat($p2r, $pp), balloon, emphasisActive, ...content, freeWalk, stepIndex: index, marker: content.marker });
-    })),
-    React.createElement(WizardBody, null, (contents ?? []).map((content, index, all) => {
-      const $model = MUtils.getValue($wrapped.$model, $pp);
-      return React.createElement(WizardStepBody, { key: content.marker, def: content.body, "$pp": content.$pp, "$root": $wrapped.$root, "$model": $model, "$p2r": PPUtils.concat($p2r, $pp), omitWalker, shared: sharedState.sharedDef, sharedAtLead: sharedState.sharedAtLead, firstStep: index === 0, lastStep: index === all.length - 1, previousMarker: index !== 0 ? all[index - 1].marker : void 0, nextMarker: index !== all.length - 1 ? all[index + 1].marker : void 0, stepIndex: index, marker: content.marker });
-    })),
-    React.createElement(WizardController, { "$pp": $pp, "$wrapped": $wrapped, contents, reached })
-  );
+  return React.createElement(AWizard, {
+    ...rest,
+    "data-disabled": $disabled,
+    "data-visible": $visible,
+    id: PPUtils.asId(PPUtils.absolute($p2r, $pp), props.id),
+    ref
+  }, React.createElement(WizardHeader, {
+    "data-balloon": balloon
+  }, (contents ?? []).map((content, index) => {
+    const $model = MUtils.getValue($wrapped.$model, $pp);
+    return React.createElement(WizardStepTitle, {
+      key: content.marker,
+      "$root": $wrapped.$root,
+      "$model": $model,
+      "$p2r": PPUtils.concat($p2r, $pp),
+      balloon,
+      emphasisActive,
+      ...content,
+      freeWalk,
+      stepIndex: index,
+      marker: content.marker
+    });
+  })), React.createElement(WizardBody, null, (contents ?? []).map((content, index, all) => {
+    const $model = MUtils.getValue($wrapped.$model, $pp);
+    return React.createElement(WizardStepBody, {
+      key: content.marker,
+      def: content.body,
+      "$pp": content.$pp,
+      "$root": $wrapped.$root,
+      "$model": $model,
+      "$p2r": PPUtils.concat($p2r, $pp),
+      omitWalker,
+      shared: sharedState.sharedDef,
+      sharedAtLead: sharedState.sharedAtLead,
+      firstStep: index === 0,
+      lastStep: index === all.length - 1,
+      previousMarker: index !== 0 ? all[index - 1].marker : void 0,
+      nextMarker: index !== all.length - 1 ? all[index + 1].marker : void 0,
+      stepIndex: index,
+      marker: content.marker
+    });
+  })), React.createElement(WizardController, {
+    "$pp": $pp,
+    "$wrapped": $wrapped,
+    contents,
+    reached
+  }));
 });
 const Wizard = reactExports.forwardRef((props, ref) => {
-  return React.createElement(
-    WizardEventBusProvider,
-    null,
-    React.createElement(InternalWizard, { ...props, ref })
-  );
+  return React.createElement(WizardEventBusProvider, null, React.createElement(InternalWizard, {
+    ...props,
+    ref
+  }));
 });
-registerWidget({ key: "Wizard", JSX: Wizard, container: false, array: false });
-const ATextarea = qe.textarea.attrs(({ id, autoSelect, onFocus }) => {
+registerWidget({
+  key: "Wizard",
+  JSX: Wizard,
+  container: false,
+  array: false
+});
+const ATextarea = qe.textarea.attrs(({
+  id,
+  autoSelect,
+  onFocus
+}) => {
   if (!autoSelect) {
     return {
       [DOM_KEY_WIDGET]: "d9-textarea",
@@ -8954,26 +11873,86 @@ const ATextarea = qe.textarea.attrs(({ id, autoSelect, onFocus }) => {
     }
 `;
 const Textarea = reactExports.forwardRef((props, ref) => {
-  const { autoSelect = true, $pp, $wrapped: { $onValueChange, $model, $p2r, $avs: { $disabled, $visible } }, ...rest } = props;
+  const {
+    autoSelect = true,
+    $pp,
+    $wrapped: {
+      $onValueChange,
+      $model,
+      $p2r,
+      $avs: {
+        $disabled,
+        $visible
+      }
+    },
+    ...rest
+  } = props;
   const globalHandlers = useGlobalHandlers();
   const textRef = reactExports.useRef(null);
   useDualRefs(textRef, ref);
-  useTip({ ref: textRef });
+  useTip({
+    ref: textRef
+  });
   const onChange = async (event) => {
     const value = event.target.value;
-    await $onValueChange(value, true, { global: globalHandlers });
+    await $onValueChange(value, true, {
+      global: globalHandlers
+    });
   };
-  return React.createElement(ATextarea, { ...rest, autoSelect, disabled: $disabled, "data-disabled": $disabled, "data-visible": $visible, value: MUtils.getValue($model, $pp) ?? "", onChange, id: PPUtils.asId(PPUtils.absolute($p2r, $pp), props.id), ref: textRef });
+  return React.createElement(ATextarea, {
+    ...rest,
+    autoSelect,
+    disabled: $disabled,
+    "data-disabled": $disabled,
+    "data-visible": $visible,
+    value: MUtils.getValue($model, $pp) ?? "",
+    onChange,
+    id: PPUtils.asId(PPUtils.absolute($p2r, $pp), props.id),
+    ref: textRef
+  });
 });
-registerWidget({ key: "Textarea", JSX: Textarea, container: false, array: false });
+registerWidget({
+  key: "Textarea",
+  JSX: Textarea,
+  container: false,
+  array: false
+});
 const UnwrappedTree = reactExports.forwardRef((props, ref) => {
-  const { $pp = "value", data, visible, ...rest } = props;
+  const {
+    $pp = "value",
+    data,
+    visible,
+    ...rest
+  } = props;
   const $onValueChange = VUtils.noop;
-  const $avs = { $disabled: false, $visible: visible };
-  const $root = { [$pp]: data };
-  return React.createElement(Tree, { ...rest, "$wrapped": { $onValueChange, $avs, $root, $model: $root, $p2r: "." }, "$pp": $pp, id: rest.id ?? VUtils.generateUniqueId(), ref });
+  const $avs = {
+    $disabled: false,
+    $visible: visible
+  };
+  const $root = {
+    [$pp]: data
+  };
+  return React.createElement(Tree, {
+    ...rest,
+    "$wrapped": {
+      $onValueChange,
+      $avs,
+      $root,
+      $model: $root,
+      $p2r: "."
+    },
+    "$pp": $pp,
+    id: rest.id ?? VUtils.generateUniqueId(),
+    ref
+  });
 });
-const OptionFilter$1 = qe.div.attrs(({ active, atBottom, top, left, height }) => {
+const OptionFilter$1 = qe.div.attrs(({
+  active,
+  atBottom,
+  top,
+  left,
+  height
+}) => {
   return {
     [DOM_KEY_WIDGET]: "d9-dropdown-tree-option-filter",
     style: {
@@ -9031,17 +12010,58 @@ const PopupTree$1 = qe(UnwrappedTree)`
     border: 0;
 `;
 const InternalDropdownTree = reactExports.forwardRef((props, ref) => {
-  const { options, optionSort, noAvailable, noMatched, $pp, $wrapped: { $onValueChange, $model, $p2r, $avs: { $disabled, $visible } }, please = "", clearable = true, couldSelect, ...rest } = props;
+  const {
+    options,
+    optionSort,
+    noAvailable,
+    noMatched,
+    $pp,
+    $wrapped: {
+      $onValueChange,
+      $model,
+      $p2r,
+      $avs: {
+        $disabled,
+        $visible
+      }
+    },
+    please = "",
+    clearable = true,
+    couldSelect,
+    ...rest
+  } = props;
   const globalHandlers = useGlobalHandlers();
-  const { fire } = useDropdownTreeEventBus();
+  const {
+    fire
+  } = useDropdownTreeEventBus();
   const [filterChanged] = reactExports.useState(() => async (filter2, timing) => {
     if (timing === "search") {
       fire(DropdownTreeEventTypes.FILTER_CHANGED, filter2);
     }
   });
-  const { askOptions, filterInputRef, filter, onFilterChanged, containerRef, popupState, popupRef, popupShown, setPopupShown, afterPopupStateChanged, onClicked, onFocused, onKeyUp } = useFilterableDropdownOptions({ ...props, takeoverFilter: false, filterChanged });
+  const {
+    askOptions,
+    filterInputRef,
+    filter,
+    onFilterChanged,
+    containerRef,
+    popupState,
+    popupRef,
+    popupShown,
+    setPopupShown,
+    afterPopupStateChanged,
+    onClicked,
+    onFocused,
+    onKeyUp
+  } = useFilterableDropdownOptions({
+    ...props,
+    takeoverFilter: false,
+    filterChanged
+  });
   useDualRefs(containerRef, ref);
-  useTip({ ref: containerRef });
+  useTip({
+    ref: containerRef
+  });
   const forceUpdate = useForceUpdate();
   const onClearClicked = async (event) => {
     if ($disabled) {
@@ -9051,7 +12071,9 @@ const InternalDropdownTree = reactExports.forwardRef((props, ref) => {
     event.stopPropagation();
     const value2 = MUtils.getValue($model, $pp);
     if (value2 != null) {
-      await $onValueChange(null, true, { global: globalHandlers });
+      await $onValueChange(null, true, {
+        global: globalHandlers
+      });
     }
     if (!isDropdownPopupActive(popupState.active)) {
       onClicked();
@@ -9103,7 +12125,9 @@ const InternalDropdownTree = reactExports.forwardRef((props, ref) => {
     if (couldSelect != null && !couldSelect(option)) {
       return;
     }
-    await $onValueChange(option.value, true, { global: globalHandlers });
+    await $onValueChange(option.value, true, {
+      global: globalHandlers
+    });
     setPopupShown(false);
     if (filter !== "") {
       afterPopupStateChanged.afterPopupHide();
@@ -9121,7 +12145,9 @@ const InternalDropdownTree = reactExports.forwardRef((props, ref) => {
           $ip2r: `pp${index}`,
           $ip2p: `pp${index}`,
           label: option.label,
-          ...option.stringify != null ? { stringify: () => option.stringify(option) } : {},
+          ...option.stringify != null ? {
+            stringify: () => option.stringify(option)
+          } : {},
           checkable: false,
           addable: false,
           removable: false,
@@ -9135,7 +12161,9 @@ const InternalDropdownTree = reactExports.forwardRef((props, ref) => {
           $ip2r: PPUtils.concat(parentNode.$ip2r, `pp${index}`),
           $ip2p: `pp${index}`,
           label: option.label,
-          ...option.stringify != null ? { stringify: () => option.stringify(option) } : {},
+          ...option.stringify != null ? {
+            stringify: () => option.stringify(option)
+          } : {},
           checkable: false,
           addable: false,
           removable: false,
@@ -9144,37 +12172,72 @@ const InternalDropdownTree = reactExports.forwardRef((props, ref) => {
       });
     }
   };
-  return React.createElement(
-    DropdownContainer,
-    { active: popupState.active, atBottom: popupState.atBottom, role: "input", tabIndex: 0, ...rest, "data-w": "d9-dropdown-tree", "data-disabled": $disabled, "data-visible": $visible, "data-clearable": clearable, onFocus: onFocused, onClick: onClicked, id: PPUtils.asId(PPUtils.absolute($p2r, $pp), props.id), ref: containerRef },
-    React.createElement(DropdownLabel, { "data-please": !selected }, toIntlLabel(label)),
-    React.createElement(DropdownStick, { valueAssigned: selected, clearable, clear: onClearClicked, disabled: $disabled }),
-    isDropdownPopupActive(popupState.active) ? React.createElement(
-      DropdownPopup,
-      { ...{ ...popupState, minHeight: popupHeight }, shown: popupShown && popupState.active === DropdownPopupStateActive.ACTIVE, ...deviceTags, vScroll: true, ref: popupRef },
-      React.createElement(
-        OptionFilter$1,
-        { ...{ ...popupState, active: !!filter } },
-        React.createElement("span", null, "?:"),
-        React.createElement("input", { value: filter, onChange: onFilterChanged, onKeyUp, ref: filterInputRef })
-      ),
-      React.createElement(
-        PopupTree$1,
-        { data: treeModel, initExpandLevel: 0, disableSearchBox: true, detective, height: `calc(${toCssSize(popupHeight)} - 2px)` },
-        React.createElement(DropdownTreeFilterBridge, null)
-      )
-    ) : null
-  );
+  return React.createElement(DropdownContainer, {
+    active: popupState.active,
+    atBottom: popupState.atBottom,
+    role: "input",
+    tabIndex: 0,
+    ...rest,
+    "data-w": "d9-dropdown-tree",
+    "data-disabled": $disabled,
+    "data-visible": $visible,
+    "data-clearable": clearable,
+    onFocus: onFocused,
+    onClick: onClicked,
+    id: PPUtils.asId(PPUtils.absolute($p2r, $pp), props.id),
+    ref: containerRef
+  }, React.createElement(DropdownLabel, {
+    "data-please": !selected
+  }, toIntlLabel(label)), React.createElement(DropdownStick, {
+    valueAssigned: selected,
+    clearable,
+    clear: onClearClicked,
+    disabled: $disabled
+  }), isDropdownPopupActive(popupState.active) ? React.createElement(DropdownPopup, {
+    ...{
+      ...popupState,
+      minHeight: popupHeight
+    },
+    shown: popupShown && popupState.active === DropdownPopupStateActive.ACTIVE,
+    ...deviceTags,
+    vScroll: true,
+    ref: popupRef
+  }, React.createElement(OptionFilter$1, {
+    ...{
+      ...popupState,
+      active: !!filter
+    }
+  }, React.createElement("span", null, "?:"), React.createElement("input", {
+    value: filter,
+    onChange: onFilterChanged,
+    onKeyUp,
+    ref: filterInputRef
+  })), React.createElement(PopupTree$1, {
+    data: treeModel,
+    initExpandLevel: 0,
+    disableSearchBox: true,
+    detective,
+    height: `calc(${toCssSize(popupHeight)} - 2px)`
+  }, React.createElement(DropdownTreeFilterBridge, null))) : null);
 });
 const DropdownTree = reactExports.forwardRef((props, ref) => {
-  return React.createElement(
-    DropdownTreeEventBusProvider,
-    null,
-    React.createElement(InternalDropdownTree, { ...props, ref })
-  );
+  return React.createElement(DropdownTreeEventBusProvider, null, React.createElement(InternalDropdownTree, {
+    ...props,
+    ref
+  }));
 });
-registerWidget({ key: "DropdownTree", JSX: DropdownTree, container: false, array: false });
-registerWidget({ key: "DDT", JSX: DropdownTree, container: false, array: false });
+registerWidget({
+  key: "DropdownTree",
+  JSX: DropdownTree,
+  container: false,
+  array: false
+});
+registerWidget({
+  key: "DDT",
+  JSX: DropdownTree,
+  container: false,
+  array: false
+});
 const MultiDropdownTreeContainer = qe(DropdownContainer)`
     align-self: start;
     flex-wrap: wrap;
@@ -9232,7 +12295,13 @@ const MultiDropdownTreeStick = qe(DropdownStick)`
     position: absolute;
     right: ${CssVars.INPUT_INDENT};
 `;
-const OptionFilter = qe.div.attrs(({ active, atBottom, top, left, height }) => {
+const OptionFilter = qe.div.attrs(({
+  active,
+  atBottom,
+  top,
+  left,
+  height
+}) => {
   return {
     [DOM_KEY_WIDGET]: "d9-multi-dropdown-tree-option-filter",
     style: {
@@ -9290,18 +12359,58 @@ const PopupTree = qe(UnwrappedTree)`
     border: 0;
 `;
 const InternalMultiDropdownTree = reactExports.forwardRef((props, ref) => {
-  const { options, optionSort, noAvailable, noMatched, $pp, $wrapped: { $onValueChange, $model, $p2r, $avs: { $disabled, $visible } }, please = "", clearable = true, couldSelect, ...rest } = props;
+  const {
+    options,
+    optionSort,
+    noAvailable,
+    noMatched,
+    $pp,
+    $wrapped: {
+      $onValueChange,
+      $model,
+      $p2r,
+      $avs: {
+        $disabled,
+        $visible
+      }
+    },
+    please = "",
+    clearable = true,
+    couldSelect,
+    ...rest
+  } = props;
   const globalHandlers = useGlobalHandlers();
-  const { fire } = useDropdownTreeEventBus();
+  const {
+    fire
+  } = useDropdownTreeEventBus();
   const [filterChanged] = reactExports.useState(() => async (filter2, timing) => {
     if (timing === "search") {
       fire(DropdownTreeEventTypes.FILTER_CHANGED, filter2);
     }
   });
-  const { askOptions, filterInputRef, filter, onFilterChanged, containerRef, popupState, popupRef, popupShown, repaintPopup, onClicked, onFocused, onKeyUp } = useFilterableDropdownOptions({ ...props, takeoverFilter: false, filterChanged });
+  const {
+    askOptions,
+    filterInputRef,
+    filter,
+    onFilterChanged,
+    containerRef,
+    popupState,
+    popupRef,
+    popupShown,
+    repaintPopup,
+    onClicked,
+    onFocused,
+    onKeyUp
+  } = useFilterableDropdownOptions({
+    ...props,
+    takeoverFilter: false,
+    filterChanged
+  });
   const forceUpdate = useForceUpdate();
   useDualRefs(containerRef, ref);
-  useTip({ ref: containerRef });
+  useTip({
+    ref: containerRef
+  });
   const currentValuesToArray = () => {
     const values2 = MUtils.getValue($model, $pp);
     if (values2 == null) {
@@ -9341,7 +12450,9 @@ const InternalMultiDropdownTree = reactExports.forwardRef((props, ref) => {
     if (!hasValues(values2)) {
       return;
     }
-    await $onValueChange(values2.filter((v) => v != value), true, { global: globalHandlers });
+    await $onValueChange(values2.filter((v) => v != value), true, {
+      global: globalHandlers
+    });
     repaintPopup();
   };
   const onClearClicked = async (event) => {
@@ -9352,7 +12463,9 @@ const InternalMultiDropdownTree = reactExports.forwardRef((props, ref) => {
     event.stopPropagation();
     const values2 = currentValuesToArray();
     if (values2 != null && values2.length !== 0) {
-      await $onValueChange(null, true, { global: globalHandlers });
+      await $onValueChange(null, true, {
+        global: globalHandlers
+      });
     }
     forceUpdate();
     if (!isDropdownPopupActive(popupState.active)) {
@@ -9385,7 +12498,9 @@ const InternalMultiDropdownTree = reactExports.forwardRef((props, ref) => {
           $ip2r: `pp${index}`,
           $ip2p: `pp${index}`,
           label: option.label,
-          ...option.stringify != null ? { stringify: () => option.stringify(option) } : {},
+          ...option.stringify != null ? {
+            stringify: () => option.stringify(option)
+          } : {},
           checkable: true,
           addable: false,
           removable: false
@@ -9398,7 +12513,9 @@ const InternalMultiDropdownTree = reactExports.forwardRef((props, ref) => {
           $ip2r: PPUtils.concat(parentNode.$ip2r, `pp${index}`),
           $ip2p: `pp${index}`,
           label: option.label,
-          ...option.stringify != null ? { stringify: () => option.stringify(option) } : {},
+          ...option.stringify != null ? {
+            stringify: () => option.stringify(option)
+          } : {},
           checkable: true,
           addable: false,
           removable: false
@@ -9419,12 +12536,18 @@ const InternalMultiDropdownTree = reactExports.forwardRef((props, ref) => {
           const values2 = currentValuesToArray();
           if (checked) {
             if (!hasValues(values2)) {
-              await $onValueChange([value], true, { global: globalHandlers });
+              await $onValueChange([value], true, {
+                global: globalHandlers
+              });
             } else {
-              await $onValueChange([...values2, value], true, { global: globalHandlers });
+              await $onValueChange([...values2, value], true, {
+                global: globalHandlers
+              });
             }
           } else {
-            await $onValueChange(values2.filter((v) => v != value), true, { global: globalHandlers });
+            await $onValueChange(values2.filter((v) => v != value), true, {
+              global: globalHandlers
+            });
           }
           repaintPopup();
           setTimeout(() => {
@@ -9436,86 +12559,210 @@ const InternalMultiDropdownTree = reactExports.forwardRef((props, ref) => {
       return node;
     });
   };
-  return React.createElement(
-    MultiDropdownTreeContainer,
-    { active: popupState.active, atBottom: popupState.atBottom, role: "input", tabIndex: 0, ...rest, "data-w": "d9-multi-dropdown-tree", "data-disabled": $disabled, "data-visible": $visible, "data-clearable": clearable, onFocus: onFocused, onClick: onClicked, id: PPUtils.asId(PPUtils.absolute($p2r, $pp), props.id), ref: containerRef },
-    values.map((value) => {
-      var _a;
-      const v = `${value}`;
-      return React.createElement(
-        MultiDropdownTreeLabel,
-        { "data-please": false, key: v },
-        React.createElement("span", null, toIntlLabel((_a = optionsAsMap[v]) == null ? void 0 : _a.label)),
-        $disabled ? null : React.createElement(
-          "span",
-          { onClick: onRemoveClicked(value) },
-          React.createElement(Times, null)
-        )
-      );
-    }),
-    React.createElement(DropdownLabel, { "data-please": true }, toIntlLabel(please)),
-    React.createElement(MultiDropdownTreeStick, { valueAssigned: selected, clearable, clear: onClearClicked, disabled: $disabled }),
-    isDropdownPopupActive(popupState.active) ? React.createElement(
-      DropdownPopup,
-      { ...{ ...popupState, minHeight: popupHeight }, shown: popupShown && popupState.active === DropdownPopupStateActive.ACTIVE, ...deviceTags, vScroll: true, ref: popupRef },
-      React.createElement(
-        OptionFilter,
-        { ...{ ...popupState, active: !!filter } },
-        React.createElement("span", null, "?:"),
-        React.createElement("input", { value: filter, onChange: onFilterChanged, onKeyUp, ref: filterInputRef })
-      ),
-      React.createElement(
-        PopupTree,
-        { data: treeModel, initExpandLevel: 0, disableSearchBox: true, detective, height: `calc(${toCssSize(popupHeight)} - 2px)` },
-        React.createElement(DropdownTreeFilterBridge, null)
-      )
-    ) : null
-  );
+  return React.createElement(MultiDropdownTreeContainer, {
+    active: popupState.active,
+    atBottom: popupState.atBottom,
+    role: "input",
+    tabIndex: 0,
+    ...rest,
+    "data-w": "d9-multi-dropdown-tree",
+    "data-disabled": $disabled,
+    "data-visible": $visible,
+    "data-clearable": clearable,
+    onFocus: onFocused,
+    onClick: onClicked,
+    id: PPUtils.asId(PPUtils.absolute($p2r, $pp), props.id),
+    ref: containerRef
+  }, values.map((value) => {
+    var _a;
+    const v = `${value}`;
+    return React.createElement(MultiDropdownTreeLabel, {
+      "data-please": false,
+      key: v
+    }, React.createElement("span", null, toIntlLabel((_a = optionsAsMap[v]) == null ? void 0 : _a.label)), $disabled ? null : React.createElement("span", {
+      onClick: onRemoveClicked(value)
+    }, React.createElement(Times, null)));
+  }), React.createElement(DropdownLabel, {
+    "data-please": true
+  }, toIntlLabel(please)), React.createElement(MultiDropdownTreeStick, {
+    valueAssigned: selected,
+    clearable,
+    clear: onClearClicked,
+    disabled: $disabled
+  }), isDropdownPopupActive(popupState.active) ? React.createElement(DropdownPopup, {
+    ...{
+      ...popupState,
+      minHeight: popupHeight
+    },
+    shown: popupShown && popupState.active === DropdownPopupStateActive.ACTIVE,
+    ...deviceTags,
+    vScroll: true,
+    ref: popupRef
+  }, React.createElement(OptionFilter, {
+    ...{
+      ...popupState,
+      active: !!filter
+    }
+  }, React.createElement("span", null, "?:"), React.createElement("input", {
+    value: filter,
+    onChange: onFilterChanged,
+    onKeyUp,
+    ref: filterInputRef
+  })), React.createElement(PopupTree, {
+    data: treeModel,
+    initExpandLevel: 0,
+    disableSearchBox: true,
+    detective,
+    height: `calc(${toCssSize(popupHeight)} - 2px)`
+  }, React.createElement(DropdownTreeFilterBridge, null))) : null);
 });
 const MultiDropdownTree = reactExports.forwardRef((props, ref) => {
-  return React.createElement(
-    DropdownTreeEventBusProvider,
-    null,
-    React.createElement(InternalMultiDropdownTree, { ...props, ref })
-  );
+  return React.createElement(DropdownTreeEventBusProvider, null, React.createElement(InternalMultiDropdownTree, {
+    ...props,
+    ref
+  }));
 });
-registerWidget({ key: "MultiDropdownTree", JSX: MultiDropdownTree, container: false, array: false });
-registerWidget({ key: "MDDT", JSX: MultiDropdownTree, container: false, array: false });
+registerWidget({
+  key: "MultiDropdownTree",
+  JSX: MultiDropdownTree,
+  container: false,
+  array: false
+});
+registerWidget({
+  key: "MDDT",
+  JSX: MultiDropdownTree,
+  container: false,
+  array: false
+});
 const UnwrappedCalendar = reactExports.forwardRef((props, ref) => {
-  const { $pp = "value", value, onValueChange, disabled, visible, ...rest } = props;
+  const {
+    $pp = "value",
+    value,
+    onValueChange,
+    disabled,
+    visible,
+    ...rest
+  } = props;
   const $onValueChange = onValueChange;
-  const $avs = { $disabled: disabled, $visible: visible };
-  const $root = { [$pp]: value };
-  return React.createElement(Calendar, { ...rest, "$wrapped": { $onValueChange, $avs, $root, $model: $root, $p2r: "." }, "$pp": $pp, id: rest.id ?? VUtils.generateUniqueId(), ref });
+  const $avs = {
+    $disabled: disabled,
+    $visible: visible
+  };
+  const $root = {
+    [$pp]: value
+  };
+  return React.createElement(Calendar, {
+    ...rest,
+    "$wrapped": {
+      $onValueChange,
+      $avs,
+      $root,
+      $model: $root,
+      $p2r: "."
+    },
+    "$pp": $pp,
+    id: rest.id ?? VUtils.generateUniqueId(),
+    ref
+  });
 });
 reactExports.forwardRef((props, ref) => {
-  return React.createElement(UnwrappedCalendar, { ...props, time: false, ref });
+  return React.createElement(UnwrappedCalendar, {
+    ...props,
+    time: false,
+    ref
+  });
 });
 reactExports.forwardRef((props, ref) => {
-  return React.createElement(UnwrappedCalendar, { ...props, time: true, ref });
+  return React.createElement(UnwrappedCalendar, {
+    ...props,
+    time: true,
+    ref
+  });
 });
 const UnwrappedCaption = reactExports.forwardRef((props, ref) => {
-  const { children, disabled, visible, ...rest } = props;
+  const {
+    children,
+    disabled,
+    visible,
+    ...rest
+  } = props;
   const $onValueChange = VUtils.noop;
-  const $avs = { $disabled: disabled, $visible: visible };
+  const $avs = {
+    $disabled: disabled,
+    $visible: visible
+  };
   const $root = {};
-  return React.createElement(Caption, { ...rest, "$wrapped": { $onValueChange, $avs, $root, $model: $root, $p2r: "." }, label: children, id: rest.id ?? VUtils.generateUniqueId(), ref });
+  return React.createElement(Caption, {
+    ...rest,
+    "$wrapped": {
+      $onValueChange,
+      $avs,
+      $root,
+      $model: $root,
+      $p2r: "."
+    },
+    label: children,
+    id: rest.id ?? VUtils.generateUniqueId(),
+    ref
+  });
 });
 reactExports.forwardRef((props, ref) => {
-  const { children, disabled, visible, ...rest } = props;
+  const {
+    children,
+    disabled,
+    visible,
+    ...rest
+  } = props;
   const $onValueChange = VUtils.noop;
-  const $avs = { $disabled: disabled, $visible: visible };
+  const $avs = {
+    $disabled: disabled,
+    $visible: visible
+  };
   const $root = {};
-  return React.createElement(Label, { ...rest, "$wrapped": { $onValueChange, $avs, $root, $model: $root, $p2r: "." }, label: children, id: rest.id ?? VUtils.generateUniqueId(), ref });
+  return React.createElement(Label, {
+    ...rest,
+    "$wrapped": {
+      $onValueChange,
+      $avs,
+      $root,
+      $model: $root,
+      $p2r: "."
+    },
+    label: children,
+    id: rest.id ?? VUtils.generateUniqueId(),
+    ref
+  });
 });
 reactExports.forwardRef((props, ref) => {
-  const { children, disabled, visible, ...rest } = props;
+  const {
+    children,
+    disabled,
+    visible,
+    ...rest
+  } = props;
   const $onValueChange = VUtils.noop;
-  const $avs = { $disabled: disabled, $visible: visible };
+  const $avs = {
+    $disabled: disabled,
+    $visible: visible
+  };
   const $root = {};
-  return React.createElement(Badge, { ...rest, "$wrapped": { $onValueChange, $avs, $root, $model: $root, $p2r: "." }, label: children, id: rest.id ?? VUtils.generateUniqueId(), ref });
+  return React.createElement(Badge, {
+    ...rest,
+    "$wrapped": {
+      $onValueChange,
+      $avs,
+      $root,
+      $model: $root,
+      $p2r: "."
+    },
+    label: children,
+    id: rest.id ?? VUtils.generateUniqueId(),
+    ref
+  });
 });
-const ACheckboxes = qe.div.attrs(({ id }) => {
+const ACheckboxes = qe.div.attrs(({
+  id
+}) => {
   return {
     [DOM_KEY_WIDGET]: "d9-checkboxes",
     [DOM_ID_WIDGET]: id
@@ -9528,7 +12775,11 @@ const ACheckboxes = qe.div.attrs(({ id }) => {
     grid-row: var(--grid-row);
     color: ${CssVars.FONT_COLOR};
 `;
-const Option$1 = qe.span.attrs(({ columns, compact, [DOM_KEY_WIDGET]: dataW }) => {
+const Option$1 = qe.span.attrs(({
+  columns,
+  compact,
+  [DOM_KEY_WIDGET]: dataW
+}) => {
   return {
     [DOM_KEY_WIDGET]: dataW ?? "d9-checkboxes-option",
     style: {
@@ -9590,19 +12841,49 @@ const Option$1 = qe.span.attrs(({ columns, compact, [DOM_KEY_WIDGET]: dataW }) =
         //text-overflow: ellipsis;
     }
 `;
-const Separator$1 = qe.span.attrs({ [DOM_KEY_WIDGET]: "d9-checkboxes-option-separator" })`
+const Separator$1 = qe.span.attrs({
+  [DOM_KEY_WIDGET]: "d9-checkboxes-option-separator"
+})`
     display: block;
     position: relative;
     height: 0;
     flex-basis: 100%;
 `;
 const Checkboxes = reactExports.forwardRef((props, ref) => {
-  const { options, optionSort, noAvailable = React.createElement(IntlLabel, { keys: ["options", "noAvailable"], value: "No available options." }), columns = -1, compact = true, single = false, boolOnSingle = false, $pp, $wrapped: { $onValueChange, $model, $avs: { $disabled, $visible } }, ...rest } = props;
+  const {
+    options,
+    optionSort,
+    noAvailable = React.createElement(IntlLabel, {
+      keys: ["options", "noAvailable"],
+      value: "No available options."
+    }),
+    columns = -1,
+    compact = true,
+    single = false,
+    boolOnSingle = false,
+    $pp,
+    $wrapped: {
+      $onValueChange,
+      $model,
+      $avs: {
+        $disabled,
+        $visible
+      }
+    },
+    ...rest
+  } = props;
   const globalHandlers = useGlobalHandlers();
   const checksRef = reactExports.useRef(null);
   useDualRefs(checksRef, ref);
-  useTip({ ref: checksRef });
-  const { createAskDisplayOptions } = useOptionItems({ ...props, noAvailable });
+  useTip({
+    ref: checksRef
+  });
+  const {
+    createAskDisplayOptions
+  } = useOptionItems({
+    ...props,
+    noAvailable
+  });
   const getValues = () => {
     const modelValues = MUtils.getValue($model, $pp);
     return modelValues == null ? [] : Array.isArray(modelValues) ? modelValues : [modelValues];
@@ -9614,15 +12895,23 @@ const Checkboxes = reactExports.forwardRef((props, ref) => {
     const values2 = getValues();
     if (values2.some((v) => v == option.value)) {
       if (single) {
-        await $onValueChange(boolOnSingle ? false : void 0, true, { global: globalHandlers });
+        await $onValueChange(boolOnSingle ? false : void 0, true, {
+          global: globalHandlers
+        });
       } else {
-        await $onValueChange(values2.filter((v) => v != option.value), true, { global: globalHandlers });
+        await $onValueChange(values2.filter((v) => v != option.value), true, {
+          global: globalHandlers
+        });
       }
     } else {
       if (single) {
-        await $onValueChange(option.value, true, { global: globalHandlers });
+        await $onValueChange(option.value, true, {
+          global: globalHandlers
+        });
       } else {
-        await $onValueChange([...values2, option.value], true, { global: globalHandlers });
+        await $onValueChange([...values2, option.value], true, {
+          global: globalHandlers
+        });
       }
     }
   };
@@ -9631,32 +12920,55 @@ const Checkboxes = reactExports.forwardRef((props, ref) => {
   const canClick = !$disabled;
   const values = getValues();
   if (displayOptions.length === 0 || displayOptions.length === 1 && displayOptions[0].value == NO_AVAILABLE_OPTION_ITEM) {
-    return React.createElement(
-      ACheckboxes,
-      { "data-disabled": $disabled, "data-visible": $visible, ...rest },
-      React.createElement(Option$1, { "data-can-click": false, columns: 0, compact: true, "data-w": "d9-checkboxes-no-available" }, toIntlLabel(noAvailable))
-    );
+    return React.createElement(ACheckboxes, {
+      "data-disabled": $disabled,
+      "data-visible": $visible,
+      ...rest
+    }, React.createElement(Option$1, {
+      "data-can-click": false,
+      columns: 0,
+      compact: true,
+      "data-w": "d9-checkboxes-no-available"
+    }, toIntlLabel(noAvailable)));
   }
-  return React.createElement(ACheckboxes, { "data-disabled": $disabled, "data-visible": $visible, ...rest, ref: checksRef }, displayOptions.map((option, index) => {
-    const { value, label } = option;
+  return React.createElement(ACheckboxes, {
+    "data-disabled": $disabled,
+    "data-visible": $visible,
+    ...rest,
+    ref: checksRef
+  }, displayOptions.map((option, index) => {
+    const {
+      value,
+      label
+    } = option;
     const valueKey = `${value}_${index + 1}`;
-    const model = { [valueKey]: values.some((v) => v == value) };
+    const model = {
+      [valueKey]: values.some((v) => v == value)
+    };
     const onValueChange = async (newValue) => {
       if (newValue === true) {
         if (values.some((v) => v == value))
           ;
         else {
           if (single) {
-            await $onValueChange(option.value, true, { global: globalHandlers });
+            await $onValueChange(option.value, true, {
+              global: globalHandlers
+            });
           } else {
-            await $onValueChange([...values, value], true, { global: globalHandlers });
+            await $onValueChange([...values, value], true, {
+              global: globalHandlers
+            });
           }
         }
       } else {
         if (single) {
-          await $onValueChange(boolOnSingle ? false : void 0, true, { global: globalHandlers });
+          await $onValueChange(boolOnSingle ? false : void 0, true, {
+            global: globalHandlers
+          });
         } else {
-          await $onValueChange(values.filter((v) => v != value), true, { global: globalHandlers });
+          await $onValueChange(values.filter((v) => v != value), true, {
+            global: globalHandlers
+          });
         }
       }
     };
@@ -9665,80 +12977,265 @@ const Checkboxes = reactExports.forwardRef((props, ref) => {
       $model: model,
       $p2r: ".",
       $onValueChange: onValueChange,
-      $avs: { $disabled, $visible: true }
+      $avs: {
+        $disabled,
+        $visible: true
+      }
     };
-    const node = React.createElement(
-      Option$1,
-      { "data-can-click": canClick, columns, compact, "data-checked": model[valueKey], onClick: canClick ? onOptionClicked(option) : void 0 },
-      React.createElement(Checkbox, { "$pp": valueKey, "$wrapped": $wrapped }),
-      React.createElement("span", null, toIntlLabel(label))
-    );
+    const node = React.createElement(Option$1, {
+      "data-can-click": canClick,
+      columns,
+      compact,
+      "data-checked": model[valueKey],
+      onClick: canClick ? onOptionClicked(option) : void 0
+    }, React.createElement(Checkbox, {
+      "$pp": valueKey,
+      "$wrapped": $wrapped
+    }), React.createElement("span", null, toIntlLabel(label)));
     if (columns >= 1 && compact && (index + 1) % columns === 0) {
-      return React.createElement(
-        reactExports.Fragment,
-        { key: valueKey },
-        node,
-        React.createElement(Separator$1, null)
-      );
+      return React.createElement(reactExports.Fragment, {
+        key: valueKey
+      }, node, React.createElement(Separator$1, null));
     } else {
-      return React.createElement(reactExports.Fragment, { key: valueKey }, node);
+      return React.createElement(reactExports.Fragment, {
+        key: valueKey
+      }, node);
     }
   }));
 });
-registerWidget({ key: "Checkboxes", JSX: Checkboxes, container: false, array: false });
-registerWidget({ key: "Checks", JSX: Checkboxes, container: false, array: false });
-reactExports.forwardRef((props, ref) => {
-  const { $pp = "value", value, onValueChange, disabled, visible, ...rest } = props;
-  const $onValueChange = onValueChange;
-  const $avs = { $disabled: disabled, $visible: visible };
-  const $root = { [$pp]: value };
-  return React.createElement(Checkboxes, { ...rest, "$wrapped": { $onValueChange, $avs, $root, $model: $root, $p2r: "." }, "$pp": $pp, id: rest.id ?? VUtils.generateUniqueId(), ref });
+registerWidget({
+  key: "Checkboxes",
+  JSX: Checkboxes,
+  container: false,
+  array: false
+});
+registerWidget({
+  key: "Checks",
+  JSX: Checkboxes,
+  container: false,
+  array: false
 });
 reactExports.forwardRef((props, ref) => {
-  const { $pp = "value", value, onValueChange, disabled, visible, ...rest } = props;
+  const {
+    $pp = "value",
+    value,
+    onValueChange,
+    disabled,
+    visible,
+    ...rest
+  } = props;
   const $onValueChange = onValueChange;
-  const $avs = { $disabled: disabled, $visible: visible };
-  const $root = { [$pp]: value };
-  return React.createElement(Input, { ...rest, "$wrapped": { $onValueChange, $avs, $root, $model: $root, $p2r: "." }, "$pp": $pp, id: rest.id ?? VUtils.generateUniqueId(), ref });
+  const $avs = {
+    $disabled: disabled,
+    $visible: visible
+  };
+  const $root = {
+    [$pp]: value
+  };
+  return React.createElement(Checkboxes, {
+    ...rest,
+    "$wrapped": {
+      $onValueChange,
+      $avs,
+      $root,
+      $model: $root,
+      $p2r: "."
+    },
+    "$pp": $pp,
+    id: rest.id ?? VUtils.generateUniqueId(),
+    ref
+  });
 });
 reactExports.forwardRef((props, ref) => {
-  const { $pp = "value", value, onValueChange, disabled, visible, ...rest } = props;
+  const {
+    $pp = "value",
+    value,
+    onValueChange,
+    disabled,
+    visible,
+    ...rest
+  } = props;
   const $onValueChange = onValueChange;
-  const $avs = { $disabled: disabled, $visible: visible };
-  const $root = { [$pp]: value };
-  return React.createElement(NumberInput, { ...rest, "$wrapped": { $onValueChange, $avs, $root, $model: $root, $p2r: "." }, "$pp": $pp, id: rest.id ?? VUtils.generateUniqueId(), ref });
+  const $avs = {
+    $disabled: disabled,
+    $visible: visible
+  };
+  const $root = {
+    [$pp]: value
+  };
+  return React.createElement(Input, {
+    ...rest,
+    "$wrapped": {
+      $onValueChange,
+      $avs,
+      $root,
+      $model: $root,
+      $p2r: "."
+    },
+    "$pp": $pp,
+    id: rest.id ?? VUtils.generateUniqueId(),
+    ref
+  });
 });
 reactExports.forwardRef((props, ref) => {
-  const { $pp = "value", value, onValueChange, disabled, visible, ...rest } = props;
+  const {
+    $pp = "value",
+    value,
+    onValueChange,
+    disabled,
+    visible,
+    ...rest
+  } = props;
   const $onValueChange = onValueChange;
-  const $avs = { $disabled: disabled, $visible: visible };
-  const $root = { [$pp]: value };
-  return React.createElement(PasswordInput, { ...rest, "$wrapped": { $onValueChange, $avs, $root, $model: $root, $p2r: "." }, "$pp": $pp, id: rest.id ?? VUtils.generateUniqueId(), ref });
+  const $avs = {
+    $disabled: disabled,
+    $visible: visible
+  };
+  const $root = {
+    [$pp]: value
+  };
+  return React.createElement(NumberInput, {
+    ...rest,
+    "$wrapped": {
+      $onValueChange,
+      $avs,
+      $root,
+      $model: $root,
+      $p2r: "."
+    },
+    "$pp": $pp,
+    id: rest.id ?? VUtils.generateUniqueId(),
+    ref
+  });
 });
 reactExports.forwardRef((props, ref) => {
-  const { $pp = "value", value, onValueChange, disabled, visible, ...rest } = props;
+  const {
+    $pp = "value",
+    value,
+    onValueChange,
+    disabled,
+    visible,
+    ...rest
+  } = props;
   const $onValueChange = onValueChange;
-  const $avs = { $disabled: disabled, $visible: visible };
-  const $root = { [$pp]: value };
-  return React.createElement(MultiDropdown, { ...rest, "$wrapped": { $onValueChange, $avs, $root, $model: $root, $p2r: "." }, "$pp": $pp, id: rest.id ?? VUtils.generateUniqueId(), ref });
+  const $avs = {
+    $disabled: disabled,
+    $visible: visible
+  };
+  const $root = {
+    [$pp]: value
+  };
+  return React.createElement(PasswordInput, {
+    ...rest,
+    "$wrapped": {
+      $onValueChange,
+      $avs,
+      $root,
+      $model: $root,
+      $p2r: "."
+    },
+    "$pp": $pp,
+    id: rest.id ?? VUtils.generateUniqueId(),
+    ref
+  });
 });
 reactExports.forwardRef((props, ref) => {
-  const { $pp = "value", value, onValueChange, visible, ...rest } = props;
+  const {
+    $pp = "value",
+    value,
+    onValueChange,
+    disabled,
+    visible,
+    ...rest
+  } = props;
+  const $onValueChange = onValueChange;
+  const $avs = {
+    $disabled: disabled,
+    $visible: visible
+  };
+  const $root = {
+    [$pp]: value
+  };
+  return React.createElement(MultiDropdown, {
+    ...rest,
+    "$wrapped": {
+      $onValueChange,
+      $avs,
+      $root,
+      $model: $root,
+      $p2r: "."
+    },
+    "$pp": $pp,
+    id: rest.id ?? VUtils.generateUniqueId(),
+    ref
+  });
+});
+reactExports.forwardRef((props, ref) => {
+  const {
+    $pp = "value",
+    value,
+    onValueChange,
+    visible,
+    ...rest
+  } = props;
   const $onValueChange = (value2) => {
     onValueChange(value2);
   };
-  const $avs = { $disabled: false, $visible: visible };
-  const $root = { [$pp]: value };
-  return React.createElement(Pagination, { ...rest, "$pp": $pp, "$wrapped": { $onValueChange, $avs, $root, $model: $root, $p2r: "." }, id: rest.id ?? VUtils.generateUniqueId(), ref });
+  const $avs = {
+    $disabled: false,
+    $visible: visible
+  };
+  const $root = {
+    [$pp]: value
+  };
+  return React.createElement(Pagination, {
+    ...rest,
+    "$pp": $pp,
+    "$wrapped": {
+      $onValueChange,
+      $avs,
+      $root,
+      $model: $root,
+      $p2r: "."
+    },
+    id: rest.id ?? VUtils.generateUniqueId(),
+    ref
+  });
 });
 reactExports.forwardRef((props, ref) => {
-  const { $pp = "value", value, onValueChange, disabled, visible, ...rest } = props;
+  const {
+    $pp = "value",
+    value,
+    onValueChange,
+    disabled,
+    visible,
+    ...rest
+  } = props;
   const $onValueChange = onValueChange;
-  const $avs = { $disabled: disabled, $visible: visible };
-  const $root = { [$pp]: value };
-  return React.createElement(Radio, { ...rest, "$wrapped": { $onValueChange, $avs, $root, $model: $root, $p2r: "." }, "$pp": $pp, id: rest.id ?? VUtils.generateUniqueId(), ref });
+  const $avs = {
+    $disabled: disabled,
+    $visible: visible
+  };
+  const $root = {
+    [$pp]: value
+  };
+  return React.createElement(Radio, {
+    ...rest,
+    "$wrapped": {
+      $onValueChange,
+      $avs,
+      $root,
+      $model: $root,
+      $p2r: "."
+    },
+    "$pp": $pp,
+    id: rest.id ?? VUtils.generateUniqueId(),
+    ref
+  });
 });
-const ARadios = qe.div.attrs(({ id }) => {
+const ARadios = qe.div.attrs(({
+  id
+}) => {
   return {
     [DOM_KEY_WIDGET]: "d9-radios",
     [DOM_ID_WIDGET]: id
@@ -9751,7 +13248,11 @@ const ARadios = qe.div.attrs(({ id }) => {
     grid-row: var(--grid-row);
     color: ${CssVars.FONT_COLOR};
 `;
-const Option = qe.span.attrs(({ columns, compact, [DOM_KEY_WIDGET]: dataW }) => {
+const Option = qe.span.attrs(({
+  columns,
+  compact,
+  [DOM_KEY_WIDGET]: dataW
+}) => {
   return {
     [DOM_KEY_WIDGET]: dataW ?? "d9-radios-option",
     style: {
@@ -9817,103 +13318,278 @@ const Option = qe.span.attrs(({ columns, compact, [DOM_KEY_WIDGET]: dataW }) => 
         //text-overflow: ellipsis;
     }
 `;
-const Separator = qe.span.attrs({ [DOM_KEY_WIDGET]: "d9-radios-option-separator" })`
+const Separator = qe.span.attrs({
+  [DOM_KEY_WIDGET]: "d9-radios-option-separator"
+})`
     display: block;
     position: relative;
     height: 0;
     flex-basis: 100%;
 `;
 const Radios = reactExports.forwardRef((props, ref) => {
-  const { options, optionSort, noAvailable = React.createElement(IntlLabel, { keys: ["options", "noAvailable"], value: "No available options." }), columns = -1, compact = true, $pp, $wrapped: { $onValueChange, $model, $avs: { $disabled, $visible } }, ...rest } = props;
+  const {
+    options,
+    optionSort,
+    noAvailable = React.createElement(IntlLabel, {
+      keys: ["options", "noAvailable"],
+      value: "No available options."
+    }),
+    columns = -1,
+    compact = true,
+    $pp,
+    $wrapped: {
+      $onValueChange,
+      $model,
+      $avs: {
+        $disabled,
+        $visible
+      }
+    },
+    ...rest
+  } = props;
   const globalHandlers = useGlobalHandlers();
   const radiosRef = reactExports.useRef(null);
   useDualRefs(radiosRef, ref);
-  useTip({ ref: radiosRef });
-  const { createAskDisplayOptions } = useOptionItems({ ...props, noAvailable });
+  useTip({
+    ref: radiosRef
+  });
+  const {
+    createAskDisplayOptions
+  } = useOptionItems({
+    ...props,
+    noAvailable
+  });
   const onOptionClicked = (option) => async () => {
     if ($disabled) {
       return;
     }
-    await $onValueChange(option.value, true, { global: globalHandlers });
+    await $onValueChange(option.value, true, {
+      global: globalHandlers
+    });
   };
   const askDisplayOptions = createAskDisplayOptions();
   const displayOptions = askDisplayOptions();
   const canClick = !$disabled;
   if (displayOptions.length === 0 || displayOptions.length === 1 && displayOptions[0].value == NO_AVAILABLE_OPTION_ITEM) {
-    return React.createElement(
-      ARadios,
-      { "data-disabled": $disabled, "data-visible": $visible, ...rest },
-      React.createElement(Option, { "data-can-click": false, columns: 0, compact: true, "data-w": "d9-radios-no-available" }, toIntlLabel(noAvailable))
-    );
+    return React.createElement(ARadios, {
+      "data-disabled": $disabled,
+      "data-visible": $visible,
+      ...rest
+    }, React.createElement(Option, {
+      "data-can-click": false,
+      columns: 0,
+      compact: true,
+      "data-w": "d9-radios-no-available"
+    }, toIntlLabel(noAvailable)));
   }
   const modelValue = MUtils.getValue($model, $pp);
-  return React.createElement(ARadios, { "data-disabled": $disabled, "data-visible": $visible, ...rest, ref: radiosRef }, displayOptions.map((option, index) => {
-    const { value, label } = option;
+  return React.createElement(ARadios, {
+    "data-disabled": $disabled,
+    "data-visible": $visible,
+    ...rest,
+    ref: radiosRef
+  }, displayOptions.map((option, index) => {
+    const {
+      value,
+      label
+    } = option;
     const valueKey = `${value}_${index + 1}`;
-    const model = { [valueKey]: modelValue == value };
+    const model = {
+      [valueKey]: modelValue == value
+    };
     const onValueChange = async () => {
-      await $onValueChange(value, true, { global: globalHandlers });
+      await $onValueChange(value, true, {
+        global: globalHandlers
+      });
     };
     const $wrapped = {
       $root: model,
       $model: model,
       $p2r: ".",
       $onValueChange: onValueChange,
-      $avs: { $disabled, $visible: true }
+      $avs: {
+        $disabled,
+        $visible: true
+      }
     };
-    const node = React.createElement(
-      Option,
-      { "data-can-click": canClick, columns, compact, "data-checked": model[valueKey], onClick: canClick ? onOptionClicked(option) : void 0 },
-      React.createElement(Radio, { "$pp": valueKey, "$wrapped": $wrapped }),
-      React.createElement("span", null, toIntlLabel(label))
-    );
+    const node = React.createElement(Option, {
+      "data-can-click": canClick,
+      columns,
+      compact,
+      "data-checked": model[valueKey],
+      onClick: canClick ? onOptionClicked(option) : void 0
+    }, React.createElement(Radio, {
+      "$pp": valueKey,
+      "$wrapped": $wrapped
+    }), React.createElement("span", null, toIntlLabel(label)));
     if (columns >= 1 && compact && (index + 1) % columns === 0) {
-      return React.createElement(
-        reactExports.Fragment,
-        { key: valueKey },
-        node,
-        React.createElement(Separator, null)
-      );
+      return React.createElement(reactExports.Fragment, {
+        key: valueKey
+      }, node, React.createElement(Separator, null));
     } else {
-      return React.createElement(reactExports.Fragment, { key: valueKey }, node);
+      return React.createElement(reactExports.Fragment, {
+        key: valueKey
+      }, node);
     }
   }));
 });
-registerWidget({ key: "Radios", JSX: Radios, container: false, array: false });
+registerWidget({
+  key: "Radios",
+  JSX: Radios,
+  container: false,
+  array: false
+});
 reactExports.forwardRef((props, ref) => {
-  const { $pp = "value", value, onValueChange, disabled, visible, ...rest } = props;
+  const {
+    $pp = "value",
+    value,
+    onValueChange,
+    disabled,
+    visible,
+    ...rest
+  } = props;
   const $onValueChange = onValueChange;
-  const $avs = { $disabled: disabled, $visible: visible };
-  const $root = { [$pp]: value };
-  return React.createElement(Radios, { ...rest, "$wrapped": { $onValueChange, $avs, $root, $model: $root, $p2r: "." }, "$pp": $pp, id: rest.id ?? VUtils.generateUniqueId(), ref });
+  const $avs = {
+    $disabled: disabled,
+    $visible: visible
+  };
+  const $root = {
+    [$pp]: value
+  };
+  return React.createElement(Radios, {
+    ...rest,
+    "$wrapped": {
+      $onValueChange,
+      $avs,
+      $root,
+      $model: $root,
+      $p2r: "."
+    },
+    "$pp": $pp,
+    id: rest.id ?? VUtils.generateUniqueId(),
+    ref
+  });
 });
 const UnwrappedSection = reactExports.forwardRef((props, ref) => {
-  const { title, children, visible, ...rest } = props;
+  const {
+    title,
+    children,
+    visible,
+    ...rest
+  } = props;
   const $onValueChange = VUtils.noop;
-  const $avs = { $disabled: false, $visible: visible };
+  const $avs = {
+    $disabled: false,
+    $visible: visible
+  };
   const $root = {};
-  return React.createElement(Section, { ...rest, title, "$nodes": [], "$wrapped": { $onValueChange, $avs, $root, $model: $root, $p2r: "." }, id: rest.id ?? VUtils.generateUniqueId(), ref }, children);
+  return React.createElement(Section, {
+    ...rest,
+    title,
+    "$nodes": [],
+    "$wrapped": {
+      $onValueChange,
+      $avs,
+      $root,
+      $model: $root,
+      $p2r: "."
+    },
+    id: rest.id ?? VUtils.generateUniqueId(),
+    ref
+  }, children);
 });
 reactExports.forwardRef((props, ref) => {
-  const { $pp = "value", value, title, visible, ...rest } = props;
+  const {
+    $pp = "value",
+    value,
+    title,
+    visible,
+    ...rest
+  } = props;
   const $onValueChange = VUtils.noop;
-  const $avs = { $disabled: false, $visible: visible };
-  const $root = { [$pp]: value };
-  return React.createElement(Tabs, { ...rest, title, "$wrapped": { $onValueChange, $avs, $root, $model: $root, $p2r: "." }, "$pp": $pp, id: rest.id ?? VUtils.generateUniqueId(), ref });
+  const $avs = {
+    $disabled: false,
+    $visible: visible
+  };
+  const $root = {
+    [$pp]: value
+  };
+  return React.createElement(Tabs, {
+    ...rest,
+    title,
+    "$wrapped": {
+      $onValueChange,
+      $avs,
+      $root,
+      $model: $root,
+      $p2r: "."
+    },
+    "$pp": $pp,
+    id: rest.id ?? VUtils.generateUniqueId(),
+    ref
+  });
 });
 reactExports.forwardRef((props, ref) => {
-  const { $pp = "value", value, title, visible, ...rest } = props;
+  const {
+    $pp = "value",
+    value,
+    title,
+    visible,
+    ...rest
+  } = props;
   const $onValueChange = VUtils.noop;
-  const $avs = { $disabled: false, $visible: visible };
-  const $root = { [$pp]: value };
-  return React.createElement(Wizard, { ...rest, title, "$wrapped": { $onValueChange, $avs, $root, $model: $root, $p2r: "." }, "$pp": $pp, id: rest.id ?? VUtils.generateUniqueId(), ref });
+  const $avs = {
+    $disabled: false,
+    $visible: visible
+  };
+  const $root = {
+    [$pp]: value
+  };
+  return React.createElement(Wizard, {
+    ...rest,
+    title,
+    "$wrapped": {
+      $onValueChange,
+      $avs,
+      $root,
+      $model: $root,
+      $p2r: "."
+    },
+    "$pp": $pp,
+    id: rest.id ?? VUtils.generateUniqueId(),
+    ref
+  });
 });
 reactExports.forwardRef((props, ref) => {
-  const { $pp = "value", value, onValueChange, disabled, visible, ...rest } = props;
+  const {
+    $pp = "value",
+    value,
+    onValueChange,
+    disabled,
+    visible,
+    ...rest
+  } = props;
   const $onValueChange = onValueChange;
-  const $avs = { $disabled: disabled, $visible: visible };
-  const $root = { [$pp]: value };
-  return React.createElement(Textarea, { ...rest, "$wrapped": { $onValueChange, $avs, $root, $model: $root, $p2r: "." }, "$pp": $pp, id: rest.id ?? VUtils.generateUniqueId(), ref });
+  const $avs = {
+    $disabled: disabled,
+    $visible: visible
+  };
+  const $root = {
+    [$pp]: value
+  };
+  return React.createElement(Textarea, {
+    ...rest,
+    "$wrapped": {
+      $onValueChange,
+      $avs,
+      $root,
+      $model: $root,
+      $p2r: "."
+    },
+    "$pp": $pp,
+    id: rest.id ?? VUtils.generateUniqueId(),
+    ref
+  });
 });
 export {
   $d9n2 as $,
@@ -9936,8 +13612,8 @@ export {
   useAlert as g,
   useDialog as h,
   index$2 as i,
-  DialogHeader as j,
-  DialogTitle as k,
+  DialogTitle as j,
+  DialogHeader as k,
   DialogBody as l,
   DialogFooter as m,
   GlobalRoot as n,
@@ -9945,9 +13621,9 @@ export {
   UnwrappedCaption as p,
   utils$3 as q,
   utils$1 as r,
-  UnwrappedButtonBar as s,
+  ButtonBarAlignment as s,
   toIntlLabel as t,
   useGlobalEventBus as u,
-  ButtonBarAlignment as v,
+  UnwrappedButtonBar as v,
   UnwrappedSection as w
 };
