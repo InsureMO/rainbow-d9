@@ -29,6 +29,7 @@ export default ({mode}) => {
 								// {name: 'react', includes: ['react', 'react-dom']},
 								// {name: 'styled-components', includes: ['styled-components']},
 								// {name: 'emotion', includes: ['@emotion']},
+								// emotion must in same bundle with react, otherwise it leads incorrect imports, don't know why
 								{name: 'react-base', includes: ['react', 'react-dom', 'styled-components', '@emotion']},
 								{name: 'refractor', includes: ['refractor']},
 								{name: 'dayjs', includes: ['dayjs']},
