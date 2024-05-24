@@ -7,7 +7,15 @@ export default ({mode}) => {
 		define: {
 			'process.env': {...process.env, ...loadEnv(mode, process.cwd())}
 		},
-		plugins: [react(), mdPlugin({mode: [Mode.MARKDOWN]})],
+		plugins: [
+			react({
+				jsxImportSource: "@emotion/react",
+				babel: {
+					plugins: ["@emotion/babel-plugin"]
+				}
+			}),
+			mdPlugin({mode: [Mode.MARKDOWN]})
+		],
 		server: {host: true, port: 3000, strictPort: true, open: '/'},
 		base: '/rainbow-d9/',
 		build: {
