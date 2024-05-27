@@ -39,6 +39,21 @@ export const RestApiVariablePortContainer = styled.div.attrs({[DOM_KEY_WIDGET]: 
         width: 1em;
         margin-right: 6px;
     }
+
+    > span[data-role=count],
+    > span[data-role=all] {
+        display: flex;
+        position: relative;
+        align-items: center;
+        height: calc(${PlaygroundCssVars.NODE_PORT_HEIGHT} * 0.6);
+        font-size: 0.6em;
+        font-variant: petite-caps;
+        padding: 0 8px;
+        background: ${PlaygroundCssVars.NODE_REST_API_VARIABLE_PORT_BADGE_BACKGROUND};
+        margin-left: 6px;
+        border: ${PlaygroundCssVars.NODE_REST_API_VARIABLE_PORT_BADGE_BORDER};
+        border-radius: calc(${PlaygroundCssVars.NODE_PORT_HEIGHT} * 0.3);
+    }
 `;
 
 export interface RestApiVariableWidgetProps {
@@ -64,5 +79,13 @@ export const RestApiVariablePortWidget = (props: RestApiVariableWidgetProps) => 
 	return <RestApiVariablePortContainer data-required={required} data-defined={defined}>
 		{icon}
 		<span><IntlLabel keys={['o23', 'rest-api', 'variable', label]} value={label}/></span>
+		{count != null
+			? <span data-role="count">{count}</span>
+			: null}
+		{all === true
+			? <span data-role="all">
+				<IntlLabel keys={['o23', 'rest-api', 'variable', 'all']} value="All"/>
+			</span>
+			: null}
 	</RestApiVariablePortContainer>;
 };

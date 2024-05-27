@@ -11,6 +11,10 @@ export const O23Playground = () => {
 type: pipeline
 route: /api/test
 method: get
+headers: true
+path-params:
+  - id
+  - name
 `;
 
 	return <GlobalRoot>
