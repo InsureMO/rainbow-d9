@@ -29,6 +29,7 @@ export const NodeHeader = styled.div`
 export const NodeTitle = styled(UnwrappedCaption)`
     flex-grow: 1;
     color: var(--color);
+    font-size: var(--font-size);
     font-weight: var(--font-weight);
 `;
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -37,6 +38,7 @@ export const NodeTitle = styled(UnwrappedCaption)`
 export const NodeSecondTitle = styled(UnwrappedCaption)`
     justify-content: flex-end;
     color: var(--color);
+    font-size: var(--font-size);
     font-weight: var(--font-weight);
     text-decoration: var(--text-decoration);
 `;
