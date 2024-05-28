@@ -1,3 +1,4 @@
+import {Nullable} from '@rainbow-d9/n1';
 import {DOM_KEY_WIDGET, IntlLabel} from '@rainbow-d9/n2';
 import React from 'react';
 import styled from 'styled-components';
@@ -62,10 +63,11 @@ export interface RestApiVariableWidgetProps {
 	defined: boolean;
 	count?: number;
 	all?: boolean;
+	allAsBoolean?: boolean;
 }
 
 export const RestApiVariablePortWidget = (props: RestApiVariableWidgetProps) => {
-	const {label, required, defined, count, all} = props;
+	const {label, required, defined, count, all, allAsBoolean = false} = props;
 
 	let icon: JSX.Element;
 	if (defined) {
@@ -76,16 +78,30 @@ export const RestApiVariablePortWidget = (props: RestApiVariableWidgetProps) => 
 		icon = <PortUndefined/>;
 	}
 
+	let badge: Nullable<JSX.Element> = null;
+	if (count != null) {
+		badge = <span data-role="count">{count}</span>;
+	} else if (all != null) {
+		if (allAsBoolean) {
+			if (all === true) {
+				badge = <span data-role="all">
+					<IntlLabel keys={['o23', 'rest-api', 'variable', 'true']} value="Y"/>
+				</span>;
+			} else {
+				badge = <span data-role="all">
+					<IntlLabel keys={['o23', 'rest-api', 'variable', 'false']} value="N"/>
+				</span>;
+			}
+		} else if (all === true) {
+			badge = <span data-role="all">
+				<IntlLabel keys={['o23', 'rest-api', 'variable', 'all']} value="All"/>
+			</span>;
+		}
+	}
+
 	return <RestApiVariablePortContainer data-required={required} data-defined={defined}>
 		{icon}
-		<span><IntlLabel keys={['o23', 'rest-api', 'variable', label]} value={label}/></span>
-		{count != null
-			? <span data-role="count">{count}</span>
-			: null}
-		{all === true
-			? <span data-role="all">
-				<IntlLabel keys={['o23', 'rest-api', 'variable', 'all']} value="All"/>
-			</span>
-			: null}
+		<span><IntlLabel keys={['o23', 'rest-api', 'variable', label.toLowerCase().replace(/\s/g, '-')]} value={label}/></span>
+		{badge}
 	</RestApiVariablePortContainer>;
 };

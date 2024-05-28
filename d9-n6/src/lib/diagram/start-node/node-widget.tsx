@@ -136,6 +136,36 @@ export const RestApiQueryParamsPortWidget = (props: { def: PipelineFileDef }) =>
 	                                  defined={count != null || all != null} count={count} all={all}/>;
 };
 
+export const RestApiBodyPortWidget = (props: { def: PipelineFileDef }) => {
+	const {def} = props;
+
+	const {body} = def;
+
+	return <RestApiVariablePortWidget label="Body" required={false} defined={body != null}
+	                                  all={body} allAsBoolean={true}/>;
+};
+
+export const RestApiExposeHeadersPortWidget = (props: { def: PipelineFileDef }) => {
+	const {def} = props;
+
+	const {exposeHeaders} = def;
+	let count: Undefinable<number> = Object.keys(exposeHeaders ?? {}).length;
+	if (count === 0) {
+		count = (void 0);
+	}
+
+	return <RestApiVariablePortWidget label="Expose Headers" required={false} defined={count != null} count={count}/>;
+};
+
+export const RestApiExposeFilePortWidget = (props: { def: PipelineFileDef }) => {
+	const {def} = props;
+
+	const {exposeFile} = def;
+
+	return <RestApiVariablePortWidget label="Expose File" required={false} defined={exposeFile != null}
+	                                  all={exposeFile} allAsBoolean={true}/>;
+};
+
 export const StartNodeWidget = (props: StartNodeWidgetProps) => {
 	const {node, engine} = props;
 
@@ -216,8 +246,9 @@ export const StartNodeWidget = (props: StartNodeWidgetProps) => {
 					<RestApiHeadersPortWidget def={def as PipelineFileDef}/>
 					<RestApiPathParamsPortWidget def={def as PipelineFileDef}/>
 					<RestApiQueryParamsPortWidget def={def as PipelineFileDef}/>
-					{/*<RestApiVariablePortWidget label="Expose Headers"/>*/}
-					{/*<RestApiVariablePortWidget label="Expose File"/>*/}
+					<RestApiBodyPortWidget def={def as PipelineFileDef}/>
+					<RestApiExposeHeadersPortWidget def={def as PipelineFileDef}/>
+					<RestApiExposeFilePortWidget def={def as PipelineFileDef}/>
 				</>
 				: null}
 			<NextStepPortWidget port={node.getPort(NextStepPortModel.NAME) as NextStepPortModel} engine={engine}/>
