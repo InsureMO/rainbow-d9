@@ -2,6 +2,7 @@ import babel from '@rollup/plugin-babel';
 import eslint from '@rollup/plugin-eslint';
 // import tslint from 'rollup-plugin-tslint';
 import typescript from 'rollup-plugin-typescript2';
+import * as md from 'vite-plugin-markdown';
 
 export const buildConfig = (lint) => {
 	let isCircularImportFound = false;
@@ -14,7 +15,8 @@ export const buildConfig = (lint) => {
 		plugins: [
 			lint ? eslint({exclude: ['../node_modules/**', 'node_modules/**']}) : null,
 			// lint ? tslint({ exclude: ['../node_modules/**', 'node_modules/**'] }) : null,
-			typescript({clean: true}), babel({babelHelpers: "bundled"})
+			typescript({clean: true}), babel({babelHelpers: "bundled"}),
+			md.plugin({mode: [md.Mode.MARKDOWN]})
 		].filter(x => x != null),
 		onwarn(warning, defaultHandler) {
 			if (warning.code === 'CIRCULAR_DEPENDENCY') {

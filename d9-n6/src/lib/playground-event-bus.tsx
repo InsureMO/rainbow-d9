@@ -2,7 +2,9 @@ import {useCreateEventBus} from '@rainbow-d9/n1';
 import React, {createContext, ReactNode, useContext} from 'react';
 
 export enum PlaygroundEventTypes {
-	CONTENT_CHANGED = 'content-changed'
+	CONTENT_CHANGED = 'content-changed',
+	SHOW_EDIT_DIALOG = 'show-edit-dialog',
+	HIDE_EDIT_DIALOG = 'hide-edit-dialog'
 }
 
 export interface PlaygroundEventBus {
@@ -11,6 +13,18 @@ export interface PlaygroundEventBus {
 	on(type: PlaygroundEventTypes.CONTENT_CHANGED, listener: (content?: string) => void): this;
 
 	off(type: PlaygroundEventTypes.CONTENT_CHANGED, listener: (content?: string) => void): this;
+
+	fire(type: PlaygroundEventTypes.SHOW_EDIT_DIALOG, content: ReactNode): this;
+
+	on(type: PlaygroundEventTypes.SHOW_EDIT_DIALOG, listener: (content: ReactNode) => void): this;
+
+	off(type: PlaygroundEventTypes.SHOW_EDIT_DIALOG, listener: (content: ReactNode) => void): this;
+
+	fire(type: PlaygroundEventTypes.HIDE_EDIT_DIALOG): this;
+
+	on(type: PlaygroundEventTypes.HIDE_EDIT_DIALOG, listener: () => void): this;
+
+	off(type: PlaygroundEventTypes.HIDE_EDIT_DIALOG, listener: () => void): this;
 }
 
 const Context = createContext<PlaygroundEventBus>({} as PlaygroundEventBus);

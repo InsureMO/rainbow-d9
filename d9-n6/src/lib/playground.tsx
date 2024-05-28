@@ -3,6 +3,7 @@ import {CssVars, DOM_KEY_WIDGET, useGlobalHandlers} from '@rainbow-d9/n2';
 import React, {useEffect, useRef, useState} from 'react';
 import styled from 'styled-components';
 import {FileDefLoader, YamlDefLoader} from './definition';
+import {EditDialog} from './edit-dialog';
 import {Editor} from './editor';
 import {PlaygroundBridge} from './playground-bridge';
 import {PlaygroundEventBusProvider} from './playground-event-bus';
@@ -69,6 +70,7 @@ export const PlaygroundDelegate = (props: PlaygroundProps) => {
 
 export const Playground = (props: PlaygroundProps) => {
 	return <PlaygroundEventBusProvider>
+		<EditDialog/>
 		<PlaygroundDelegate {...props}/>
 	</PlaygroundEventBusProvider>;
 };

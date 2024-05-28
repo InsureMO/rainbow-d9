@@ -1,5 +1,5 @@
 import {UnwrappedCaption} from '@rainbow-d9/n2';
-import React, {ReactNode} from 'react';
+import React, {DetailedHTMLProps, HTMLAttributes} from 'react';
 import styled from 'styled-components';
 import {PlaygroundCssVars} from '../../widgets';
 
@@ -53,8 +53,7 @@ export const NodeBody = styled.div`
     padding: var(--padding);
 `;
 
-export interface NodeWrapperProps {
-	children: ReactNode;
+export interface NodeWrapperProps extends Omit<DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'ref'> {
 }
 
 export const NodeWrapper = (props: NodeWrapperProps) => {

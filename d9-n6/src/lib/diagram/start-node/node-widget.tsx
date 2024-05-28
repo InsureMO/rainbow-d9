@@ -4,6 +4,8 @@ import {DOM_KEY_WIDGET, IntlLabel} from '@rainbow-d9/n2';
 import React from 'react';
 import styled from 'styled-components';
 import {isPipelineDef, PipelineFileDef} from '../../definition';
+import {DialogContent} from '../../edit-dialog';
+import {PlaygroundEventTypes, usePlaygroundEventBus} from '../../playground-event-bus';
 import {PlaygroundCssVars} from '../../widgets';
 import {
 	NextStepPortModel,
@@ -169,6 +171,8 @@ export const RestApiExposeFilePortWidget = (props: { def: PipelineFileDef }) => 
 export const StartNodeWidget = (props: StartNodeWidgetProps) => {
 	const {node, engine} = props;
 
+	const {fire} = usePlaygroundEventBus();
+
 	const def = node.def;
 
 	const {
@@ -227,7 +231,14 @@ export const StartNodeWidget = (props: StartNodeWidgetProps) => {
 		}
 	})();
 
-	return <StartNodeContainer>
+	const onConfirm = () => {
+		// TODO
+	};
+	const onDoubleClicked = () => {
+		fire(PlaygroundEventTypes.SHOW_EDIT_DIALOG, <DialogContent confirm={onConfirm}/>);
+	};
+
+	return <StartNodeContainer onDoubleClick={onDoubleClicked}>
 		<StartNodeHeader>
 			<StartNodeTitle data-role={firstTitleRole}>
 				{firstTitle}

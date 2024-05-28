@@ -50,7 +50,7 @@ export const DemoIndex = () => {
 				<UnwrappedButton onClick={onHideAllClicked}
 				                 ink={ButtonInk.PRIMARY}
 				                 fill={activeSource === ActiveSource.NONE ? ButtonFill.FILL : ButtonFill.PLAIN}>
-					Hide All
+					Hide
 				</UnwrappedButton>
 				{/** @ts-ignore */}
 				<UnwrappedButton onClick={onMarkdownClicked}
