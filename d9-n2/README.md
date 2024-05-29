@@ -155,6 +155,16 @@ The following are the built-in types of custom events:
 	- `GlobalEventPrefix.COLLAPSE_SECTION`: collapse a section, `clipped` should be a section marker,
 	- `GlobalEventPrefix.SECTION_EXPANDED`: section expanded, `clipped` should be a section marker,
 	- `GlobalEventPrefix.SECTION_COLLAPSED`: section collapsed, `clipped` should be a section marker,
+- Table,
+	- `GlobalEventPrefix.EXPAND_TABLE_ROW`: expand a table row, `clipped` should serve as both a table marker and a row marker/index, joined
+	  by a dash `(-)`,
+	- `GlobalEventPrefix.COLLAPSE_TABLE_ROW`: collapse a table row, `clipped` should serve as both a table marker and a row marker/index,
+	  joined by a dash `(-)`,
+- Ribs,
+	- `GlobalEventPrefix.EXPAND_RIBS_ELEMENT`: expand a ribs element, `clipped` should serve as both a table marker and a row marker/index,
+	  joined by a dash `(-)`,
+	- `GlobalEventPrefix.COLLAPSE_RIBS_ELEMENT`: collapse a ribs element, `clipped` should serve as both a table marker and a row
+	  marker/index, joined by a dash `(-)`,
 - Tabs,
 	- `GlobalEventPrefix.TAB`: active a tab, `clipped` should be a tab marker,
 	- `GlobalEventPrefix.TAB_CHANGED`: tab changed, `clipped` should be a tab marker,
@@ -162,8 +172,21 @@ The following are the built-in types of custom events:
 	- `GlobalEventPrefix.WIZARD_STEP`: active a step, `clipped` should be a step marker,
 	- `GlobalEventPrefix.WIZARD_STEP_CHANGED`: step changed, `clipped` should be a step marker.
 - Tree,
-	- `GlobalEventPrefix.TREE_NODE_CLICKED`: click a tree node, `clipped` should be tree node marker, or path to root of this node model
-	  when node marker not declared.
+	- `GlobalEventPrefix.REFRESH_TREE`: refresh a tree, `clipped` should be tree marker,
+	- `GlobalEventPrefix.EXPAND_TREE_NODE`: expand a tree node, `clipped` should be tree node marker,
+	- `GlobalEventPrefix.COLLAPSE_TREE_NODE`: collapse a tree node, `clipped` should be tree node marker,
+	- `GlobalEventPrefix.REFRESH_TREE_NODE`: refresh a tree node, `clipped` should be tree node marker, only node itself.
+	- `GlobalEventPrefix.REFRESH_TREE_CHILD_NODES`: refresh all child nodes of a tree node, `clipped` should be tree node marker, only
+	  child nodes for display will be recalculated,
+	- `GlobalEventPrefix.RECALC_TREE_CHILD_NODES`: refresh all child nodes of a tree node, `clipped` should be tree node marker, all child
+	  nodes will be recalculated,
+	- `GlobalEventPrefix.REFRESH_TREE_NODE_AND_CHILDREN`: refresh all child nodes of a tree node, `clipped` should be tree node marker, node
+	  itself and all child nodes for display will be recalculated,
+	- `GlobalEventPrefix.RECALC_TREE_NODE_AND_CHILDREN`: refresh all child nodes of a tree node, `clipped` should be tree node marker, node
+	  itself and all child nodes will be recalculated,
+	- `GlobalEventPrefix.TREE_NODE_CLICKED`: a tree node clicked, `clipped` is tree node marker,
+	- `GlobalEventPrefix.TREE_NODE_DOUBLE_CLICKED`: a tree node double-clicked, `clipped` is tree node marker,
+	- `GlobalEventPrefix.TREE_NODE_CONTEXT_MENU`: a tree node clicked for context menu, `clipped` is tree node marker,
 
 # Typical Layers
 

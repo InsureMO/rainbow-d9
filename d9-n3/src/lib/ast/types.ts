@@ -6,11 +6,10 @@ import {
 	Definition,
 	Delete,
 	Emphasis,
-	Footnote,
 	FootnoteDefinition,
 	FootnoteReference,
 	Heading,
-	HTML,
+	Html,
 	Image,
 	ImageReference,
 	InlineCode,
@@ -93,10 +92,6 @@ export interface PreparsedImageReference extends PreparsedNode<ImageReference> {
 	type: ParsedNodeType.IMAGE_REFERENCE;
 }
 
-export interface PreparsedFootnote extends PreparsedNode<Footnote> {
-	type: ParsedNodeType.FOOTNOTE;
-}
-
 export interface PreparsedFootnoteDefinition extends PreparsedNode<FootnoteDefinition> {
 	type: ParsedNodeType.FOOTNOTE_DEFINITION;
 	children: Array<PreparsedSubordinateOfFootnoteDefinitionNodes>;
@@ -119,7 +114,7 @@ export interface PreparsedBlockquote extends PreparsedNode<Blockquote> {
 	children: Array<PreparsedSubordinateOfBlockquoteNodes>;
 }
 
-export interface PreparsedHtml extends PreparsedNode<HTML> {
+export interface PreparsedHtml extends PreparsedNode<Html> {
 	type: ParsedNodeType.HTML;
 }
 
@@ -161,7 +156,6 @@ export interface PreparsedNodeMap {
 	linkReference: PreparsedLinkReference;
 	image: PreparsedImage;
 	imageReference: PreparsedImageReference;
-	footnote: PreparsedFootnote;
 	footnoteDefinition: PreparsedFootnoteDefinition;
 	footnoteReference: PreparsedFootnoteReference;
 	break: PreparsedBreak;

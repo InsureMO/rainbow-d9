@@ -23,7 +23,6 @@ import {
 	DeletePreparser,
 	EmphasisPreparser,
 	FootnoteDefinitionPreparser,
-	FootnotePreparser,
 	FootnoteReferencePreparser,
 	HeadingPreparser,
 	HtmlPreparser,
@@ -104,12 +103,12 @@ class DepthFirstVisitor {
 
 export class AstHelper extends AbstractParentPreparser {
 	protected askRoot(content: MarkdownContent): Root {
-		return fromMarkdown(content ?? '', {
+		return fromMarkdown(content ?? '', 'utf8', {
 			extensions: [
-				gfmTable, gfmStrikethrough(), gfmFootnote(), gfmTaskListItem, frontmatter(['yaml', 'toml'])],
+				gfmTable(), gfmStrikethrough(), gfmFootnote(), gfmTaskListItem(), frontmatter(['yaml', 'toml'])],
 			mdastExtensions: [
-				gfmTableFromMarkdown, gfmStrikethroughFromMarkdown, gfmFootnoteFromMarkdown(),
-				gfmTaskListItemFromMarkdown, frontmatterFromMarkdown(['yaml', 'toml'])]
+				gfmTableFromMarkdown(), gfmStrikethroughFromMarkdown(), gfmFootnoteFromMarkdown(),
+				gfmTaskListItemFromMarkdown(), frontmatterFromMarkdown(['yaml', 'toml'])]
 		});
 	}
 
@@ -133,7 +132,6 @@ export class AstHelper extends AbstractParentPreparser {
 			LinkReferencePreparser.TYPE,
 			ImagePreparser.TYPE,
 			ImageReferencePreparser.TYPE,
-			FootnotePreparser.TYPE,
 			FootnoteDefinitionPreparser.TYPE,
 			FootnoteReferencePreparser.TYPE,
 			BreakPreparser.TYPE,

@@ -2,6 +2,7 @@ import {
 	BaseModel,
 	Enhance$WrappedPropsForArrayElement,
 	NUtils,
+	ObjectPropValue,
 	PropValue,
 	VUtils,
 	WrappedAttributes,
@@ -89,15 +90,22 @@ export const TableRowOperators = (props: {
 	rowIndex: number; rowSpan: number;
 	$wrapped: Enhance$WrappedPropsForArrayElement<Omit<TableProps, '$array'>>['$wrapped'];
 	omitDefaultRowOperators?: TableDef['omitDefaultRowOperators']; rowOperators: TableDef['rowOperators'];
+	initExpanded?: TableDef['initExpanded']
 }) => {
 	const {
 		expandable = false, removable = false, rowIndex, rowSpan,
 		$wrapped,
-		omitDefaultRowOperators = false, rowOperators
+		omitDefaultRowOperators = false, rowOperators,
+		initExpanded
 	} = props;
 
 	const {on, off, fire} = useTableEventBus();
-	const [expanded, setExpanded] = useState(false);
+	const [expanded, setExpanded] = useState(() => {
+		if (initExpanded) {
+			return initExpanded($wrapped.$model as ObjectPropValue, rowIndex);
+		}
+		return false;
+	});
 
 	useEffect(() => {
 		const onRowExpanded = (expandedRowIndex: number) => {

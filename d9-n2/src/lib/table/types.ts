@@ -40,6 +40,7 @@ export type TablePaginationDef = Omit<PaginationDef, 'valueChanged'> & {
 
 /** Table configuration definition */
 export type TableDef = Omit<ArrayContainerDef, '$nodes'> & OmitHTMLProps<HTMLDivElement> & {
+	marker?: string;
 	headers: Array<TableHeaderDef>;
 	headerHeight?: number | string;
 	expandable?: boolean;
@@ -61,6 +62,7 @@ export type TableDef = Omit<ArrayContainerDef, '$nodes'> & OmitHTMLProps<HTMLDiv
 	/** row operators */
 	rowOperators?: Array<TableRowButtonDef>;
 	pageable?: TablePaginationDef;
+	initExpanded?: <R extends BaseModel>(row: R, index: number) => boolean
 };
 
 /** Table widget definition, with html attributes */

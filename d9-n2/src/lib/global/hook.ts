@@ -159,6 +159,14 @@ export enum GlobalEventPrefix {
 	EXPAND_TREE_NODE = 'expand-tree-node',
 	/** collapse tree node */
 	COLLAPSE_TREE_NODE = 'collapse-tree-node',
+	/** expand ribs element */
+	EXPAND_RIBS_ELEMENT = 'expand-ribs-element',
+	/** collapse ribs element */
+	COLLAPSE_RIBS_ELEMENT = 'collapse-ribs-element',
+	/** expand table row */
+	EXPAND_TABLE_ROW = 'expand-table-row',
+	/** collapse table row */
+	COLLAPSE_TABLE_ROW = 'collapse-table-row',
 	CUSTOM = 'custom',
 	// post action, after something happened
 	SECTION_EXPANDED = 'section-expanded',

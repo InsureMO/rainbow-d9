@@ -16,7 +16,6 @@ export * from './blockquote-parser';
 export * from './break-parser';
 export * from './definition-parser';
 export * from './footnote-definition-parser';
-export * from './footnote-parser';
 export * from './footnote-reference-parser';
 export * from './html-parser';
 export * from './image-parser';

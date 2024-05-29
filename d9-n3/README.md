@@ -1427,9 +1427,11 @@ Some examples:
 
 | Attribute Name        | Type     | Description                                                         |
 |-----------------------|----------|---------------------------------------------------------------------|
+| marker                | string   | Identity                                                            |
 | elementTitle, caption | various  | Ref to form cell `label` definition.                                |
 | useSectionStyleIcons  | boolean  | Change expand and collapse icons to use section style icons or not. |
 | showRowIndex          | boolean  | Show row index or not.                                              |
+| initExpanded          | function |                                                                     |
 | noElementReminder     | text     | `- noElementReminder: No Data`                                      |
 | addable               | boolean  | `- !addable`.<br/>Not available for `RibsView`.                     |
 | addLabel              | text     | `- addLabel: Create New One`.<br/>Not available for `RibsView`.     |
@@ -1479,6 +1481,7 @@ see below for more details,
 
 | Attribute Name               | Type                      | Description                                                                                                                                                                                                          |
 |------------------------------|---------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| marker                       | string                    | Identity                                                                                                                                                                                                             |
 | headers                      | various                   |                                                                                                                                                                                                                      |
 | headerHeight                 | number, text              | `- headerHeight: 48`<br/>`- headerHeight: 2em`                                                                                                                                                                       |
 | expandable                   | boolean                   | `- expandable`                                                                                                                                                                                                       |
@@ -1491,6 +1494,7 @@ see below for more details,
 | rowIndexStartsFrom           | number                    | `- rowIndexStartsFrom: 21`                                                                                                                                                                                           |
 | omitDefaultRowOperators      | boolean, `remove`, `fold` | `- omitDefaultRowOperators: true`: omit all default row operators,<br/>`- omitDefaultRowOperators: remove`: omit default remove row operator,<br/>`- omitDefaultRowOperators: fold`: omit default fold row operator. |
 | RowOperators                 | various                   |                                                                                                                                                                                                                      |
+| initExpanded                 | function                  |                                                                                                                                                                                                                      |
 | noElementReminder            | text                      | `- noElementReminder: No Data`                                                                                                                                                                                       |
 | addable                      | boolean                   | `- !addable`<br/>Not available for `RibsView`.                                                                                                                                                                       |
 | addLabel                     | text                      | `- addLabel: Create New One`                                                                                                                                                                                         |

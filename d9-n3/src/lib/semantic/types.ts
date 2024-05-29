@@ -7,7 +7,6 @@ import {
 	PreparsedDefinition,
 	PreparsedDelete,
 	PreparsedEmphasis,
-	PreparsedFootnote,
 	PreparsedFootnoteDefinition,
 	PreparsedFootnoteReference,
 	PreparsedHeading,
@@ -244,11 +243,6 @@ export interface ParsedImageReference extends ParsedNode<PreparsedImageReference
 	type: ParsedNodeType.IMAGE_REFERENCE;
 }
 
-export interface ParsedFootnote extends ParsedNode<PreparsedFootnote> {
-	type: ParsedNodeType.FOOTNOTE;
-	children: Array<ParsedPhrasingNodes>;
-}
-
 export interface ParsedFootnoteReference extends ParsedNode<PreparsedFootnoteReference>, Association {
 	type: ParsedNodeType.FOOTNOTE_REFERENCE;
 }
@@ -301,7 +295,6 @@ export interface ParsedNodeMap {
 	linkReference: ParsedLinkReference;
 	image: ParsedImage;
 	imageReference: ParsedImageReference;
-	footnote: ParsedFootnote;
 	footnoteDefinition: ParsedFootnoteDefinition;
 	footnoteReference: ParsedFootnoteReference;
 	break: ParsedBreak;
@@ -319,7 +312,7 @@ export interface ParsedNodeMap {
 export type ParsedNodes = ParsedNodeMap[keyof ParsedNodeMap];
 export type ParsedStaticPhrasingNodeMap = Pick<ParsedNodeMap,
 	'text' | 'emphasis' | 'strong' | 'delete' | 'html' | 'inlineCode' | 'break'
-	| 'image' | 'imageReference' | 'footnote' | 'footnoteReference'>;
+	| 'image' | 'imageReference' | 'footnoteReference'>;
 export type ParsedStaticPhrasingNodes = ParsedStaticPhrasingNodeMap[keyof ParsedStaticPhrasingNodeMap];
 export type ParsedPhrasingNodeMap = ParsedStaticPhrasingNodeMap & Pick<ParsedNodeMap, 'link' | 'linkReference'>;
 export type ParsedPhrasingNodes = ParsedPhrasingNodeMap[keyof ParsedPhrasingNodeMap];

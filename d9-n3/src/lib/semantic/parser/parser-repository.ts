@@ -8,7 +8,6 @@ import {DefinitionParser} from './definition-parser';
 import {DeleteParser} from './delete-parser';
 import {EmphasisParser} from './emphasis-parser';
 import {FootnoteDefinitionParser} from './footnote-definition-parser';
-import {FootnoteParser} from './footnote-parser';
 import {FootnoteReferenceParser} from './footnote-reference-parser';
 import {HeadingParser} from './heading-parser';
 import {HtmlParser} from './html-parser';
@@ -81,7 +80,6 @@ export const createOrGetParserRepositorySingleton = (): SemanticNodeParserReposi
 		repo.register(new LinkReferenceParser(repo));
 		repo.register(new ImageParser(repo));
 		repo.register(new ImageReferenceParser(repo));
-		repo.register(new FootnoteParser(repo));
 		repo.register(new FootnoteDefinitionParser(repo));
 		repo.register(new FootnoteReferenceParser(repo));
 		repo.register(new BreakParser(repo));

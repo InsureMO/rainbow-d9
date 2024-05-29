@@ -9,5 +9,6 @@
 	- labelOnValue
 	- property: propA
 - couldAddElement: @ext.couldAddElement
+- initExpanded: `index === 1`
 - Input::Property A::propA
 - Input::Property B::propB

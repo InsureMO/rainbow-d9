@@ -1,6 +1,11 @@
-import {Enhance$WrappedPropsForArrayElement, EnhancedPropsForArrayElement, NUtils} from '@rainbow-d9/n1';
+import {
+	Enhance$WrappedPropsForArrayElement,
+	EnhancedPropsForArrayElement,
+	NUtils,
+	ObjectPropValue
+} from '@rainbow-d9/n1';
 import React, {Children, useEffect, useRef, useState} from 'react';
-import {useGlobalHandlers} from '../global';
+import {GlobalEventPrefix, GlobalEventTypes, useGlobalEventBus, useGlobalHandlers} from '../global';
 import {guardPaginationData} from '../pagination';
 import {useTableEventBus} from './event/table-event-bus';
 import {TableEventTypes} from './event/table-event-bus-types';
@@ -15,17 +20,45 @@ export type TableRowProps = Enhance$WrappedPropsForArrayElement<Omit<TableProps,
 
 export const TableRow = (props: TableRowProps) => {
 	const {
+		marker,
 		headers, expandable = false, hideClassicCellsOnExpandable = false, clickToExpand = false,
 		rowIndexStartsFrom = 1, omitDefaultRowOperators, rowOperators,
+		initExpanded,
 		$wrapped,
-		$array: {removable, elementIndex, removeElement}, pageable,
+		$array: {removable, elementIndex, removeElement, getElementKey}, pageable,
 		children
 	} = props;
 
 	const expandAreaRef = useRef<HTMLDivElement>(null);
 	const globalHandlers = useGlobalHandlers();
+	const {on: onGlobal, off: offGlobal} = useGlobalEventBus();
 	const {on, off, fire} = useTableEventBus();
-	const [expanded, setExpanded] = useState(false);
+	const [expanded, setExpanded] = useState(() => {
+		if (initExpanded) {
+			return initExpanded($wrapped.$model as ObjectPropValue, elementIndex);
+		}
+		return false;
+	});
+	const rowMarker = getElementKey != null ? getElementKey($wrapped.$model as ObjectPropValue) : (void 0);
+	useEffect(() => {
+		const onCustomEvent = (_: string, prefix: string, clipped: string) => {
+			if (clipped !== `${marker}-${rowMarker ?? elementIndex}`) {
+				return;
+			}
+			switch (prefix) {
+				case GlobalEventPrefix.EXPAND_TABLE_ROW:
+					fire(TableEventTypes.EXPAND_ROW, elementIndex);
+					break;
+				case GlobalEventPrefix.COLLAPSE_TABLE_ROW:
+					fire(TableEventTypes.COLLAPSE_ROW, elementIndex);
+					break;
+			}
+		};
+		onGlobal && onGlobal(GlobalEventTypes.CUSTOM_EVENT, onCustomEvent);
+		return () => {
+			offGlobal && offGlobal(GlobalEventTypes.CUSTOM_EVENT, onCustomEvent);
+		};
+	}, [onGlobal, offGlobal, fire, marker, rowMarker, elementIndex]);
 	useEffect(() => {
 		const handleEvent = (func: () => void) => (rowIndex: number) => {
 			if (rowIndex !== elementIndex) {
@@ -162,7 +195,8 @@ export const TableRow = (props: TableRowProps) => {
 		<TableRowOperators expandable={expandable} removable={removable} rowIndex={elementIndex}
 		                   rowSpan={operatorsRowSpan}
 		                   $wrapped={$wrapped}
-		                   omitDefaultRowOperators={omitDefaultRowOperators} rowOperators={rowOperators}/>
+		                   omitDefaultRowOperators={omitDefaultRowOperators} rowOperators={rowOperators}
+		                   initExpanded={initExpanded}/>
 		{expands}
 	</>;
 };

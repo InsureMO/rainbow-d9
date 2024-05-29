@@ -80,7 +80,7 @@ export class ListParser extends AbstractSemanticNodeWidgetParser<'list'> {
 					ParsedNodeType.EMPHASIS, ParsedNodeType.STRONG, ParsedNodeType.DELETE,
 					ParsedNodeType.HTML, ParsedNodeType.INLINE_CODE,
 					ParsedNodeType.IMAGE, ParsedNodeType.IMAGE_REFERENCE,
-					ParsedNodeType.FOOTNOTE, ParsedNodeType.FOOTNOTE_REFERENCE,
+					ParsedNodeType.FOOTNOTE_REFERENCE,
 					ParsedNodeType.LINK, ParsedNodeType.LINK_REFERENCE
 				].includes(phrasing.type):
 					// phrasing has no carriage enter inside

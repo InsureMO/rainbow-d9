@@ -1,6 +1,16 @@
 import {NodeDef, Undefinable} from '@rainbow-d9/n1';
-import {CustomAttributeName, SpecificArrayWidgetTranslator, WidgetPropertyName} from '../widget';
+import {RibsDef} from '@rainbow-d9/n2';
+import {
+	AttributeValueBuild,
+	createSyncSnippetBuild,
+	CustomAttributeName,
+	SpecificArrayWidgetTranslator,
+	WidgetPropertyName
+} from '../widget';
 import {N2WidgetType} from './types';
+
+export const N2RibsInitExpandedBuild =
+	createSyncSnippetBuild<RibsDef, 'initExpanded'>('initExpanded', ['row', 'index']);
 
 abstract class AbstractRibsTranslator<T extends N2WidgetType.RIBS | N2WidgetType.READONLY_RIBS> extends SpecificArrayWidgetTranslator<T> {
 	public beautifyProperties<Def extends NodeDef>(def: Partial<Def>): Def {
@@ -17,6 +27,11 @@ abstract class AbstractRibsTranslator<T extends N2WidgetType.RIBS | N2WidgetType
 
 	public getAttributeNamesMapping(): Undefinable<Record<CustomAttributeName, WidgetPropertyName>> {
 		return this.buildDefaultAttributeNamesMapping({[`${this.getSupportedType()}.elementTitle`]: 'caption'});
+	}
+
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	public getAttributeValueBuilders(): Array<AttributeValueBuild<any>> {
+		return [N2RibsInitExpandedBuild];
 	}
 }
 

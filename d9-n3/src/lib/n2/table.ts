@@ -4,6 +4,7 @@ import {ParsedNodeType} from '../node-types';
 import {ParsedList, ParsedListItemAttributePair, SemanticUtils} from '../semantic';
 import {
 	AttributeValueBuild,
+	createSyncSnippetBuild,
 	CustomAttributeName,
 	SpecificArrayWidgetTranslator,
 	SpecificWidgetTranslator,
@@ -77,6 +78,9 @@ export class N2TableRowOperatorsTranslator extends SpecificWidgetTranslator<N2Wi
 	}
 }
 
+export const N2TableInitExpandedBuild =
+	createSyncSnippetBuild<TableDef, 'initExpanded'>('initExpanded', ['row', 'index']);
+
 export class N2TableTranslator extends SpecificArrayWidgetTranslator<N2WidgetType.TABLE> {
 	public getSupportedType(): N2WidgetType.TABLE {
 		return N2WidgetType.TABLE;
@@ -98,7 +102,7 @@ export class N2TableTranslator extends SpecificArrayWidgetTranslator<N2WidgetTyp
 	public getAttributeValueBuilders(): Array<AttributeValueBuild<any>> {
 		return [
 			...super.getAttributeValueBuilders(),
-			N2TableHeadersBuild];
+			N2TableHeadersBuild, N2TableInitExpandedBuild];
 	}
 
 	public postWork<Def extends NodeDef>(def: Partial<Def>): Def {

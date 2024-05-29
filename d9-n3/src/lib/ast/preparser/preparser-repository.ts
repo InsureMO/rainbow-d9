@@ -8,7 +8,6 @@ import {DefinitionPreparser} from './definition-preparser';
 import {DeletePreparser} from './delete-preparser';
 import {EmphasisPreparser} from './emphasis-preparser';
 import {FootnoteDefinitionPreparser} from './footnote-definition-preparser';
-import {FootnotePreparser} from './footnote-preparser';
 import {FootnoteReferencePreparser} from './footnote-reference-preparser';
 import {HeadingPreparser} from './heading-preparser';
 import {HtmlPreparser} from './html-preparser';
@@ -72,7 +71,6 @@ export const createOrGetPreparserRepositorySingleton = (): AstNodePreparserRepos
 		repo.register(new LinkReferencePreparser(repo));
 		repo.register(new ImagePreparser(repo));
 		repo.register(new ImageReferencePreparser(repo));
-		repo.register(new FootnotePreparser(repo));
 		repo.register(new FootnoteDefinitionPreparser(repo));
 		repo.register(new FootnoteReferencePreparser(repo));
 		repo.register(new BreakPreparser(repo));

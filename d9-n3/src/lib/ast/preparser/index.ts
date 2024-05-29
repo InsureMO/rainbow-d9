@@ -16,7 +16,6 @@ export * from './blockquote-preparser';
 export * from './break-preparser';
 export * from './definition-preparser';
 export * from './footnote-definition-preparser';
-export * from './footnote-preparser';
 export * from './footnote-reference-preparser';
 export * from './html-preparser';
 export * from './image-preparser';
