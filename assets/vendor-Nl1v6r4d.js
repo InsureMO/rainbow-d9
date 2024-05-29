@@ -1,6 +1,6 @@
 import { g as getDefaultExportFromCjs, c as commonjsGlobal } from "./babel-zvTTnt5j.js";
-import { s as svg$1, a as html$1, b as find$1, c as hastToReact } from "./property-information-8z9uOPr0.js";
 import { s as stringifyPosition, p as pointStart } from "./unist-QXG10VXN.js";
+import { h as hastToReact } from "./react-base--CcilxRK.js";
 function _mergeNamespaces(n2, m2) {
   for (var i2 = 0; i2 < m2.length; i2++) {
     const e2 = m2[i2];
@@ -7566,15 +7566,15 @@ var format = { exports: {} };
 })(format);
 var formatExports = format.exports;
 const formatter = /* @__PURE__ */ getDefaultExportFromCjs(formatExports);
-const fault = Object.assign(create(Error), {
-  eval: create(EvalError),
-  range: create(RangeError),
-  reference: create(ReferenceError),
-  syntax: create(SyntaxError),
-  type: create(TypeError),
-  uri: create(URIError)
+const fault = Object.assign(create$1(Error), {
+  eval: create$1(EvalError),
+  range: create$1(RangeError),
+  reference: create$1(ReferenceError),
+  syntax: create$1(SyntaxError),
+  type: create$1(TypeError),
+  uri: create$1(URIError)
 });
-function create(Constructor) {
+function create$1(Constructor) {
   FormattedError.displayName = Constructor.displayName || Constructor.name;
   return FormattedError;
   function FormattedError(format2, ...values2) {
@@ -12091,9 +12091,9 @@ class TextView extends ContentView {
   }
 }
 class MarkView extends ContentView {
-  constructor(mark, children = [], length2 = 0) {
+  constructor(mark2, children = [], length2 = 0) {
     super();
-    this.mark = mark;
+    this.mark = mark2;
     this.children = children;
     this.length = length2;
     for (let ch of children)
@@ -13092,8 +13092,8 @@ class ContentBuilder {
   }
 }
 function wrapMarks(view, active) {
-  for (let mark of active)
-    view = new MarkView(mark, [view], view.length);
+  for (let mark2 of active)
+    view = new MarkView(mark2, [view], view.length);
   return view;
 }
 class NullWidget extends WidgetType {
@@ -13194,7 +13194,7 @@ function isolatesEq(a2, b2) {
   }
   return true;
 }
-const types$1 = [];
+const types$2 = [];
 function computeCharTypes(line2, rFrom, rTo, isolates, outerType) {
   for (let iI = 0; iI <= isolates.length; iI++) {
     let from2 = iI ? isolates[iI - 1].to : rFrom, to = iI < isolates.length ? isolates[iI].from : rTo;
@@ -13205,28 +13205,28 @@ function computeCharTypes(line2, rFrom, rTo, isolates, outerType) {
         type2 = prev2;
       else if (type2 == 8 && prevStrong == 4)
         type2 = 16;
-      types$1[i2] = type2 == 4 ? 2 : type2;
+      types$2[i2] = type2 == 4 ? 2 : type2;
       if (type2 & 7)
         prevStrong = type2;
       prev2 = type2;
     }
     for (let i2 = from2, prev2 = prevType, prevStrong = prevType; i2 < to; i2++) {
-      let type2 = types$1[i2];
+      let type2 = types$2[i2];
       if (type2 == 128) {
-        if (i2 < to - 1 && prev2 == types$1[i2 + 1] && prev2 & 24)
-          type2 = types$1[i2] = prev2;
+        if (i2 < to - 1 && prev2 == types$2[i2 + 1] && prev2 & 24)
+          type2 = types$2[i2] = prev2;
         else
-          types$1[i2] = 256;
+          types$2[i2] = 256;
       } else if (type2 == 64) {
         let end = i2 + 1;
-        while (end < to && types$1[end] == 64)
+        while (end < to && types$2[end] == 64)
           end++;
-        let replace2 = i2 && prev2 == 8 || end < rTo && types$1[end] == 8 ? prevStrong == 1 ? 1 : 8 : 256;
+        let replace2 = i2 && prev2 == 8 || end < rTo && types$2[end] == 8 ? prevStrong == 1 ? 1 : 8 : 256;
         for (let j = i2; j < end; j++)
-          types$1[j] = replace2;
+          types$2[j] = replace2;
         i2 = end - 1;
       } else if (type2 == 8 && prevStrong == 1) {
-        types$1[i2] = 1;
+        types$2[i2] = 1;
       }
       prev2 = type2;
       if (type2 & 7)
@@ -13246,7 +13246,7 @@ function processBracketPairs(line2, rFrom, rTo, isolates, outerType) {
               let flags = BracketStack[sJ + 2];
               let type3 = flags & 2 ? outerType : !(flags & 4) ? 0 : flags & 1 ? oppositeType : outerType;
               if (type3)
-                types$1[i2] = types$1[BracketStack[sJ]] = type3;
+                types$2[i2] = types$2[BracketStack[sJ]] = type3;
               sI = sJ;
               break;
             }
@@ -13258,7 +13258,7 @@ function processBracketPairs(line2, rFrom, rTo, isolates, outerType) {
           BracketStack[sI++] = ch;
           BracketStack[sI++] = context;
         }
-      } else if ((type2 = types$1[i2]) == 2 || type2 == 1) {
+      } else if ((type2 = types$2[i2]) == 2 || type2 == 1) {
         let embed = type2 == outerType;
         context = embed ? 0 : 1;
         for (let sJ = sI - 3; sJ >= 0; sJ -= 3) {
@@ -13281,7 +13281,7 @@ function processNeutrals(rFrom, rTo, isolates, outerType) {
   for (let iI = 0, prev2 = outerType; iI <= isolates.length; iI++) {
     let from2 = iI ? isolates[iI - 1].to : rFrom, to = iI < isolates.length ? isolates[iI].from : rTo;
     for (let i2 = from2; i2 < to; ) {
-      let type2 = types$1[i2];
+      let type2 = types$2[i2];
       if (type2 == 256) {
         let end = i2 + 1;
         for (; ; ) {
@@ -13290,21 +13290,21 @@ function processNeutrals(rFrom, rTo, isolates, outerType) {
               break;
             end = isolates[iI++].to;
             to = iI < isolates.length ? isolates[iI].from : rTo;
-          } else if (types$1[end] == 256) {
+          } else if (types$2[end] == 256) {
             end++;
           } else {
             break;
           }
         }
         let beforeL = prev2 == 1;
-        let afterL = (end < rTo ? types$1[end] : outerType) == 1;
+        let afterL = (end < rTo ? types$2[end] : outerType) == 1;
         let replace2 = beforeL == afterL ? beforeL ? 1 : 2 : outerType;
         for (let j = end, jI = iI, fromJ = jI ? isolates[jI - 1].to : rFrom; j > i2; ) {
           if (j == fromJ) {
             j = isolates[--jI].from;
             fromJ = jI ? isolates[jI - 1].to : rFrom;
           }
-          types$1[--j] = replace2;
+          types$2[--j] = replace2;
         }
         i2 = end;
       } else {
@@ -13320,7 +13320,7 @@ function emitSpans(line2, from2, to, level, baseLevel, isolates, order2) {
     for (let iCh = from2, iI = 0; iCh < to; ) {
       let sameDir = true, isNum = false;
       if (iI == isolates.length || iCh < isolates[iI].from) {
-        let next2 = types$1[iCh];
+        let next2 = types$2[iCh];
         if (next2 != ourType) {
           sameDir = false;
           isNum = next2 == 16;
@@ -13341,7 +13341,7 @@ function emitSpans(line2, from2, to, level, baseLevel, isolates, order2) {
                   break run;
                 if (jI < isolates.length && isolates[jI].from == upto)
                   upto = isolates[jI++].to;
-                else if (types$1[upto] == ourType)
+                else if (types$2[upto] == ourType)
                   break run;
                 else
                   break;
@@ -13357,7 +13357,7 @@ function emitSpans(line2, from2, to, level, baseLevel, isolates, order2) {
               iCh = iso.to;
             }
             iScan = iso.to;
-          } else if (iScan == to || (sameDir ? types$1[iScan] != ourType : types$1[iScan] == ourType)) {
+          } else if (iScan == to || (sameDir ? types$2[iScan] != ourType : types$2[iScan] == ourType)) {
             break;
           } else {
             iScan++;
@@ -13373,7 +13373,7 @@ function emitSpans(line2, from2, to, level, baseLevel, isolates, order2) {
     for (let iCh = to, iI = isolates.length; iCh > from2; ) {
       let sameDir = true, isNum = false;
       if (!iI || iCh > isolates[iI - 1].to) {
-        let next2 = types$1[iCh - 1];
+        let next2 = types$2[iCh - 1];
         if (next2 != ourType) {
           sameDir = false;
           isNum = next2 == 16;
@@ -13394,7 +13394,7 @@ function emitSpans(line2, from2, to, level, baseLevel, isolates, order2) {
                   break run;
                 if (jI && isolates[jI - 1].to == upto)
                   upto = isolates[--jI].from;
-                else if (types$1[upto - 1] == ourType)
+                else if (types$2[upto - 1] == ourType)
                   break run;
                 else
                   break;
@@ -13409,7 +13409,7 @@ function emitSpans(line2, from2, to, level, baseLevel, isolates, order2) {
               iCh = iso.from;
             }
             iScan = iso.from;
-          } else if (iScan == from2 || (sameDir ? types$1[iScan - 1] != ourType : types$1[iScan - 1] == ourType)) {
+          } else if (iScan == from2 || (sameDir ? types$2[iScan - 1] != ourType : types$2[iScan - 1] == ourType)) {
             break;
           } else {
             iScan--;
@@ -13436,8 +13436,8 @@ function computeOrder(line2, direction, isolates) {
   if (direction == LTR && !isolates.length && !BidiRE.test(line2))
     return trivialOrder(line2.length);
   if (isolates.length)
-    while (line2.length > types$1.length)
-      types$1[types$1.length] = 256;
+    while (line2.length > types$2.length)
+      types$2[types$2.length] = 256;
   let order2 = [], level = direction == LTR ? 0 : 1;
   computeSectionOrder(line2, level, level, isolates, 0, line2.length, order2);
   return order2;
@@ -16483,7 +16483,7 @@ class ViewState {
           return;
         }
       }
-      let gap = find(current, (gap2) => gap2.from >= line2.from && gap2.to <= line2.to && Math.abs(gap2.from - from2) < halfMargin && Math.abs(gap2.to - to) < halfMargin && !avoid.some((pos) => gap2.from < pos && gap2.to > pos));
+      let gap = find$1(current, (gap2) => gap2.from >= line2.from && gap2.to <= line2.to && Math.abs(gap2.from - from2) < halfMargin && Math.abs(gap2.to - to) < halfMargin && !avoid.some((pos) => gap2.from < pos && gap2.to > pos));
       if (!gap) {
         if (to < line2.to && mayMeasure && wrapping && mayMeasure.visibleRanges.some((r2) => r2.from <= to && r2.to >= to)) {
           let lineStart = mayMeasure.moveToLineBoundary(EditorSelection.cursor(to), false, true).head;
@@ -16638,7 +16638,7 @@ function findFraction(structure, pos) {
   }
   return counted / structure.total;
 }
-function find(array, f2) {
+function find$1(array, f2) {
   for (let val of array)
     if (f2(val))
       return val;
@@ -23105,7 +23105,7 @@ function getStyleTags(node2) {
   return rule || null;
 }
 const t$1 = Tag.define;
-const comment$1 = t$1(), name$2 = t$1(), typeName = t$1(name$2), propertyName = t$1(name$2), literal = t$1(), string = t$1(literal), number = t$1(literal), content = t$1(), heading = t$1(content), keyword = t$1(), operator = t$1(), punctuation = t$1(), bracket = t$1(punctuation), meta = t$1();
+const comment$1 = t$1(), name$2 = t$1(), typeName = t$1(name$2), propertyName = t$1(name$2), literal = t$1(), string = t$1(literal), number$1 = t$1(literal), content = t$1(), heading = t$1(content), keyword = t$1(), operator = t$1(), punctuation = t$1(), bracket = t$1(punctuation), meta = t$1();
 const tags$1 = {
   /**
   A comment.
@@ -23186,15 +23186,15 @@ const tags$1 = {
   /**
   A number [literal](#highlight.tags.literal).
   */
-  number,
+  number: number$1,
   /**
   An integer [number](#highlight.tags.number) literal.
   */
-  integer: t$1(number),
+  integer: t$1(number$1),
   /**
   A floating-point [number](#highlight.tags.number) literal.
   */
-  float: t$1(number),
+  float: t$1(number$1),
   /**
   A boolean [literal](#highlight.tags.literal).
   */
@@ -24677,9 +24677,9 @@ function foldGutter(config2 = {}) {
     buildMarkers(view) {
       let builder = new RangeSetBuilder();
       for (let line2 of view.viewportLineBlocks) {
-        let mark = findFold(view.state, line2.from, line2.to) ? canUnfold : foldable(view.state, line2.from, line2.to) ? canFold : null;
-        if (mark)
-          builder.add(line2.from, line2.from, mark);
+        let mark2 = findFold(view.state, line2.from, line2.to) ? canUnfold : foldable(view.state, line2.from, line2.to) ? canFold : null;
+        if (mark2)
+          builder.add(line2.from, line2.from, mark2);
       }
       return builder.finish();
     }
@@ -24929,10 +24929,10 @@ const bracketMatchingConfig = /* @__PURE__ */ Facet.define({
 const matchingMark = /* @__PURE__ */ Decoration.mark({ class: "cm-matchingBracket" }), nonmatchingMark = /* @__PURE__ */ Decoration.mark({ class: "cm-nonmatchingBracket" });
 function defaultRenderMatch(match2) {
   let decorations2 = [];
-  let mark = match2.matched ? matchingMark : nonmatchingMark;
-  decorations2.push(mark.range(match2.start.from, match2.start.to));
+  let mark2 = match2.matched ? matchingMark : nonmatchingMark;
+  decorations2.push(mark2.range(match2.start.from, match2.start.to));
   if (match2.end)
-    decorations2.push(mark.range(match2.end.from, match2.end.to));
+    decorations2.push(mark2.range(match2.end.from, match2.end.to));
   return decorations2;
 }
 const bracketMatchingState = /* @__PURE__ */ StateField.define({
@@ -26136,7 +26136,7 @@ const defaultKeymap = /* @__PURE__ */ [
   { key: "Alt-A", run: toggleBlockComment }
 ].concat(standardKeymap);
 const indentWithTab = { key: "Tab", run: indentMore, shift: indentLess };
-var define_process_env_default = { GITHUB_STATE: "/home/runner/work/_temp/_runner_file_commands/save_state_532ed1e4-b4ac-4474-9feb-d7a73a3a6f01", GIT_CLONE_PROTECTION_ACTIVE: "false", npm_package_scripts_build_n5_ci: "cd ./d9-n5 && yarn build-ci", npm_package_scripts_build_sample_cra: "cd ./d9-sample-cra && yarn build", STATS_TRP: "true", DEPLOYMENT_BASEPATH: "/opt/runner", DOTNET_NOLOGO: "1", npm_package_scripts_build_n6_ci: "cd ./d9-n6 && yarn build-ci", npm_package_dependencies__vitejs_plugin_react: "^4.2.1", USER: "runner", npm_config_version_commit_hooks: "true", npm_config_user_agent: "yarn/1.22.21 npm/? node/v18.20.3 linux x64", npm_package_dependencies__types_jest: "^29.5.4", CI: "true", npm_config_bin_links: "true", npm_package_bugs_url: "https://github.com/InsureMO/rainbow-d9/issues", npm_config_wrap_output: "", RUNNER_ENVIRONMENT: "github-hosted", GITHUB_ENV: "/home/runner/work/_temp/_runner_file_commands/set_env_532ed1e4-b4ac-4474-9feb-d7a73a3a6f01", PIPX_HOME: "/opt/pipx", npm_node_execpath: "/opt/hostedtoolcache/node/18.20.3/x64/bin/node", npm_package_scripts_build_thai_all_ci: "yarn build-thai-plan-selection-ci", npm_config_init_version: "1.0.0", npm_package_devDependencies_gh_pages: "^6.1.1", npm_package_dependencies__babel_plugin_proposal_private_property_in_object: "^7.21.11", JAVA_HOME_8_X64: "/usr/lib/jvm/temurin-8-jdk-amd64", SHLVL: "1", HOME: "/home/runner", OLDPWD: "/home/runner/work/rainbow-d9/rainbow-d9", npm_package_browserslist_production_0: ">0.2%", RUNNER_TEMP: "/home/runner/work/_temp", GITHUB_EVENT_PATH: "/home/runner/work/_temp/_github_workflow/event.json", npm_package_scripts_build_all: "yarn build-n123 && yarn build-n5 && yarn build-n6 && yarn build-echarts && yarn build-thai-all", npm_package_browserslist_production_1: "not dead", npm_package_dependencies_react_syntax_highlighter: "^15.5.0", JAVA_HOME_11_X64: "/usr/lib/jvm/temurin-11-jdk-amd64", PIPX_BIN_DIR: "/opt/pipx_bin", GITHUB_REPOSITORY_OWNER: "InsureMO", npm_package_volta_node: "18.19.0", npm_config_init_license: "MIT", npm_package_browserslist_production_2: "not op_mini all", GRADLE_HOME: "/usr/share/gradle-8.7", ANDROID_NDK_LATEST_HOME: "/usr/local/lib/android/sdk/ndk/26.3.11579264", JAVA_HOME_21_X64: "/usr/lib/jvm/temurin-21-jdk-amd64", STATS_RDCL: "true", GITHUB_RETENTION_DAYS: "90", YARN_WRAP_OUTPUT: "false", npm_package_scripts_build_thai_plan_selection_ci: "cd ./d9-thai-plan-selection && yarn build-ci", npm_package_scripts_build_n1: "cd ./d9-n1 && yarn build", npm_config_version_tag_prefix: "v", npm_package_dependencies__rainbow_d9_n2: "1.1.28-alpha.4", GITHUB_REPOSITORY_OWNER_ID: "38915232", POWERSHELL_DISTRIBUTION_CHANNEL: "GitHub-Actions-ubuntu22", AZURE_EXTENSION_DIR: "/opt/az/azcliextensions", GITHUB_HEAD_REF: "", npm_package_scripts_build_n2: "cd ./d9-n2 && yarn build", npm_package_dependencies__types_styled_components: "^5.1.34", npm_package_dependencies__rainbow_d9_n3: "1.1.28-alpha.4", npm_package_dependencies__rainbow_d9_echarts: "1.1.28-alpha.4", SYSTEMD_EXEC_PID: "585", npm_package_scripts_build_echarts: "cd ./d9-echarts && yarn build", npm_package_scripts_build_n3: "cd ./d9-n3 && yarn build", GITHUB_GRAPHQL_URL: "https://api.github.com/graphql", npm_package_description: "Assume the following envs are ready, otherwise contact the tech guy.", npm_package_scripts_predeploy: "npm run build", npm_package_dependencies__rainbow_d9_n5: "1.1.28-alpha.4", GOROOT_1_20_X64: "/opt/hostedtoolcache/go/1.20.14/x64", NVM_DIR: "/home/runner/.nvm", npm_package_readmeFilename: "README.md", npm_package_scripts_build_n5: "cd ./d9-n5 && yarn build", npm_package_dependencies__types_react: "^18.2.21", npm_package_dependencies__testing_library_react: "^13.4.0", npm_package_dependencies__rainbow_d9_n6: "1.1.28-alpha.4", DOTNET_SKIP_FIRST_TIME_EXPERIENCE: "1", GOROOT_1_21_X64: "/opt/hostedtoolcache/go/1.21.10/x64", JAVA_HOME_17_X64: "/usr/lib/jvm/temurin-17-jdk-amd64", ImageVersion: "20240526.1.0", npm_package_scripts_build_n6: "cd ./d9-n6 && yarn build", RUNNER_OS: "Linux", GITHUB_API_URL: "https://api.github.com", GOROOT_1_22_X64: "/opt/hostedtoolcache/go/1.22.3/x64", SWIFT_PATH: "/usr/share/swift/usr/bin", RUNNER_USER: "runner", STATS_V3PS: "true", CHROMEWEBDRIVER: "/usr/local/share/chromedriver-linux64", JOURNAL_STREAM: "8:16331", GITHUB_WORKFLOW: "Publish to NPM", _: "/opt/hostedtoolcache/node/18.20.3/x64/bin/yarn", npm_package_private: "true", npm_package_dependencies_remark_gfm: "4.0.0", npm_package_scripts_build_thai_all: "yarn build-thai-plan-selection", npm_config_registry: "https://registry.yarnpkg.com", ACTIONS_RUNNER_ACTION_ARCHIVE_CACHE: "/opt/actionarchivecache", STATS_D: "true", GITHUB_RUN_ID: "9287181396", STATS_VMFE: "true", npm_package_workspaces_0: "d9-n1", GITHUB_REF_TYPE: "tag", BOOTSTRAP_HASKELL_NONINTERACTIVE: "1", GITHUB_WORKFLOW_SHA: "1d16adc43fefd8f26a54a0ed05cfa326a9ebb38b", GITHUB_BASE_REF: "", ImageOS: "ubuntu22", npm_package_scripts_build_n123_ci: "yarn build-n1-ci && yarn build-n2-ci && yarn build-n3-ci", npm_package_workspaces_1: "d9-n2", npm_config_ignore_scripts: "", npm_package_scripts_start: "vite", npm_package_dependencies_github_markdown_css: "^5.5.0", GITHUB_WORKFLOW_REF: "InsureMO/rainbow-d9/.github/workflows/release.yml@refs/tags/r-1.1.29", PERFLOG_LOCATION_SETTING: "RUNNER_PERFLOG", GITHUB_ACTION_REPOSITORY: "", npm_package_workspaces_2: "d9-n3", npm_package_browserslist_development_0: "last 1 chrome version", PATH: "/tmp/yarn--1716990277117-0.02124136281461375:/home/runner/work/rainbow-d9/rainbow-d9/d9-sample-cra/node_modules/.bin:/home/runner/.config/yarn/link/node_modules/.bin:/home/runner/work/rainbow-d9/rainbow-d9/node_modules/.bin:/opt/hostedtoolcache/node/18.20.3/x64/libexec/lib/node_modules/npm/bin/node-gyp-bin:/opt/hostedtoolcache/node/18.20.3/x64/lib/node_modules/npm/bin/node-gyp-bin:/opt/hostedtoolcache/node/18.20.3/x64/bin/node_modules/npm/bin/node-gyp-bin:/tmp/yarn--1716990276919-0.19868152513611115:/home/runner/work/rainbow-d9/rainbow-d9/node_modules/.bin:/home/runner/.config/yarn/link/node_modules/.bin:/home/runner/work/rainbow-d9/rainbow-d9/node_modules/.bin:/opt/hostedtoolcache/node/18.20.3/x64/libexec/lib/node_modules/npm/bin/node-gyp-bin:/opt/hostedtoolcache/node/18.20.3/x64/lib/node_modules/npm/bin/node-gyp-bin:/opt/hostedtoolcache/node/18.20.3/x64/bin/node_modules/npm/bin/node-gyp-bin:/opt/hostedtoolcache/node/18.20.3/x64/bin:/snap/bin:/home/runner/.local/bin:/opt/pipx_bin:/home/runner/.cargo/bin:/home/runner/.config/composer/vendor/bin:/usr/local/.ghcup/bin:/home/runner/.dotnet/tools:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin", NODE: "/opt/hostedtoolcache/node/18.20.3/x64/bin/node", ANT_HOME: "/usr/share/ant", DOTNET_MULTILEVEL_LOOKUP: "0", RUNNER_TRACKING_ID: "github_425aea90-0004-4fb4-bb3b-6edaf1e88094", INVOCATION_ID: "a57582f6828344c281aabe098218e2db", RUNNER_TOOL_CACHE: "/opt/hostedtoolcache", npm_package_name: "@rainbow-d9/sample-cra", npm_package_workspaces_3: "d9-n5", npm_package_browserslist_development_1: "last 1 firefox version", npm_package_repository_type: "git", npm_package_dependencies__types_react_syntax_highlighter: "^15.5.11", npm_package_dependencies__rainbow_d9_thai_plan_selection: "1.1.28-alpha.4", GITHUB_ACTION: "__run_5", GITHUB_RUN_NUMBER: "123", GITHUB_TRIGGERING_ACTOR: "bradwoo8621", RUNNER_ARCH: "X64", XDG_RUNTIME_DIR: "/run/user/1001", AGENT_TOOLSDIRECTORY: "/opt/hostedtoolcache", npm_package_scripts_build_thai_plan_selection: "cd ./d9-thai-plan-selection && yarn build", npm_package_workspaces_4: "d9-n6", npm_package_browserslist_development_2: "last 1 safari version", npm_package_workspaces_5: "d9-echarts", LANG: "C.UTF-8", VCPKG_INSTALLATION_ROOT: "/usr/local/share/vcpkg", npm_package_workspaces_6: "d9-thai-plan-selection", npm_package_dependencies_react_dom: "^18.2.0", CONDA: "/usr/share/miniconda", RUNNER_NAME: "GitHub Actions 18", XDG_CONFIG_HOME: "/home/runner/.config", STATS_VMD: "true", GITHUB_REF_NAME: "r-1.1.29", GITHUB_REPOSITORY: "InsureMO/rainbow-d9", STATS_D_D: "true", npm_lifecycle_script: "vite build", npm_package_workspaces_7: "d9-sample-cra", npm_package_eslintConfig_extends_0: "react-app", npm_package_dependencies_vite_plugin_markdown: "^2.2.0", npm_package_dependencies_react_markdown: "9.0.1", npm_package_dependencies__types_node: "^20.5.3", STATS_UE: "true", ANDROID_NDK_ROOT: "/usr/local/lib/android/sdk/ndk/25.2.9519653", GITHUB_ACTION_REF: "", DEBIAN_FRONTEND: "noninteractive", npm_package_scripts_build_sample_cra_ci: "cd ./d9-sample-cra && yarn build", npm_config_version_git_message: "v%s", npm_package_eslintConfig_extends_1: "react-app/jest", GITHUB_REPOSITORY_ID: "704514093", GITHUB_ACTIONS: "true", npm_lifecycle_event: "build", npm_package_version: "1.1.28-alpha.4", npm_package_repository_url: "git+https://github.com/InsureMO/rainbow-d9.git", npm_package_dependencies__testing_library_jest_dom: "^5.17.0", GITHUB_REF_PROTECTED: "false", npm_config_argv: '{"remain":[],"cooked":["run","build-sample-cra"],"original":["build-sample-cra"]}', npm_package_volta_yarn: "1.22.21", npm_package_scripts_build: "vite build", npm_package_dependencies__testing_library_user_event: "^13.5.0", GITHUB_WORKSPACE: "/home/runner/work/rainbow-d9/rainbow-d9", ACCEPT_EULA: "Y", GITHUB_JOB: "create-sample-pages", RUNNER_PERFLOG: "/home/runner/perflog", npm_package_dependencies_vite: "^5.0.13", GITHUB_SHA: "1d16adc43fefd8f26a54a0ed05cfa326a9ebb38b", GITHUB_RUN_ATTEMPT: "1", npm_config_version_git_tag: "true", npm_config_version_git_sign: "", GITHUB_REF: "refs/tags/r-1.1.29", GITHUB_ACTOR: "bradwoo8621", ANDROID_SDK_ROOT: "/usr/local/lib/android/sdk", npm_package_license: "MIT", npm_config_strict_ssl: "true", LEIN_HOME: "/usr/local/lib/lein", npm_package_scripts_build_n123: "yarn build-n1 && yarn build-n2 && yarn build-n3", GITHUB_PATH: "/home/runner/work/_temp/_runner_file_commands/add_path_532ed1e4-b4ac-4474-9feb-d7a73a3a6f01", JAVA_HOME: "/usr/lib/jvm/temurin-11-jdk-amd64", PWD: "/home/runner/work/rainbow-d9/rainbow-d9/d9-sample-cra", GITHUB_ACTOR_ID: "2330098", RUNNER_WORKSPACE: "/home/runner/work/rainbow-d9", npm_execpath: "/opt/hostedtoolcache/node/18.20.3/x64/lib/node_modules/yarn/bin/yarn.js", npm_package_scripts_build_all_ci: "yarn build-n123-ci && yarn build-n5-ci && yarn build-n6-ci && yarn build-echarts-ci && yarn build-thai-all-ci", HOMEBREW_CLEANUP_PERIODIC_FULL_DAYS: "3650", GITHUB_EVENT_NAME: "push", HOMEBREW_NO_AUTO_UPDATE: "1", ANDROID_HOME: "/usr/local/lib/android/sdk", GITHUB_SERVER_URL: "https://github.com", GECKOWEBDRIVER: "/usr/local/share/gecko_driver", LEIN_JAR: "/usr/local/lib/lein/self-installs/leiningen-2.11.2-standalone.jar", GHCUP_INSTALL_BASE_PREFIX: "/usr/local", GITHUB_OUTPUT: "/home/runner/work/_temp/_runner_file_commands/set_output_532ed1e4-b4ac-4474-9feb-d7a73a3a6f01", npm_package_author_name: "Rainbow Team", EDGEWEBDRIVER: "/usr/local/share/edge_driver", STATS_EXT: "true", npm_package_scripts_build_n1_ci: "cd ./d9-n1 && yarn build-ci", npm_config_save_prefix: "^", npm_config_ignore_optional: "", ANDROID_NDK: "/usr/local/lib/android/sdk/ndk/25.2.9519653", SGX_AESM_ADDR: "1", CHROME_BIN: "/usr/bin/google-chrome", npm_package_scripts_build_n2_ci: "cd ./d9-n2 && yarn build-ci", npm_package_scripts_deploy: "gh-pages -d build", npm_package_scripts_preview: "vite preview", SELENIUM_JAR_PATH: "/usr/share/java/selenium-server.jar", STATS_EXTP: "https://provjobdsettingscdn.blob.core.windows.net/settings/provjobdsettings-0.5.181+6/provjobd.data", npm_package_scripts_build_echarts_ci: "cd ./d9-echarts && yarn build-ci", npm_package_scripts_build_n3_ci: "cd ./d9-n3 && yarn build-ci", npm_package_dependencies_web_vitals: "^2.1.4", npm_package_dependencies_typescript: "^5.1.6", INIT_CWD: "/home/runner/work/rainbow-d9/rainbow-d9", ANDROID_NDK_HOME: "/usr/local/lib/android/sdk/ndk/25.2.9519653", GITHUB_STEP_SUMMARY: "/home/runner/work/_temp/_runner_file_commands/step_summary_532ed1e4-b4ac-4474-9feb-d7a73a3a6f01", npm_package_dependencies_react: "^18.2.0", npm_package_dependencies__types_react_dom: "^18.2.7", NODE_ENV: "production" };
+var define_process_env_default = { GITHUB_STATE: "/home/runner/work/_temp/_runner_file_commands/save_state_d1085ef7-8819-4896-be3e-89b597b74378", GIT_CLONE_PROTECTION_ACTIVE: "false", npm_package_scripts_build_n5_ci: "cd ./d9-n5 && yarn build-ci", npm_package_scripts_build_sample_cra: "cd ./d9-sample-cra && yarn build", STATS_TRP: "true", DEPLOYMENT_BASEPATH: "/opt/runner", DOTNET_NOLOGO: "1", npm_package_scripts_build_n6_ci: "cd ./d9-n6 && yarn build-ci", npm_package_dependencies__vitejs_plugin_react: "^4.2.1", USER: "runner", npm_config_version_commit_hooks: "true", npm_config_user_agent: "yarn/1.22.21 npm/? node/v18.20.3 linux x64", npm_package_dependencies__types_jest: "^29.5.4", CI: "true", npm_config_bin_links: "true", npm_package_bugs_url: "https://github.com/InsureMO/rainbow-d9/issues", npm_config_wrap_output: "", RUNNER_ENVIRONMENT: "github-hosted", GITHUB_ENV: "/home/runner/work/_temp/_runner_file_commands/set_env_d1085ef7-8819-4896-be3e-89b597b74378", PIPX_HOME: "/opt/pipx", npm_node_execpath: "/opt/hostedtoolcache/node/18.20.3/x64/bin/node", npm_package_scripts_build_thai_all_ci: "yarn build-thai-plan-selection-ci", npm_config_init_version: "1.0.0", npm_package_devDependencies_gh_pages: "^6.1.1", npm_package_dependencies__babel_plugin_proposal_private_property_in_object: "^7.21.11", JAVA_HOME_8_X64: "/usr/lib/jvm/temurin-8-jdk-amd64", SHLVL: "1", HOME: "/home/runner", OLDPWD: "/home/runner/work/rainbow-d9/rainbow-d9", npm_package_browserslist_production_0: ">0.2%", RUNNER_TEMP: "/home/runner/work/_temp", GITHUB_EVENT_PATH: "/home/runner/work/_temp/_github_workflow/event.json", npm_package_scripts_build_all: "yarn build-n123 && yarn build-n5 && yarn build-n6 && yarn build-echarts && yarn build-thai-all", npm_package_browserslist_production_1: "not dead", npm_package_dependencies_react_syntax_highlighter: "^15.5.0", JAVA_HOME_11_X64: "/usr/lib/jvm/temurin-11-jdk-amd64", PIPX_BIN_DIR: "/opt/pipx_bin", GITHUB_REPOSITORY_OWNER: "InsureMO", npm_package_volta_node: "18.19.0", npm_config_init_license: "MIT", npm_package_browserslist_production_2: "not op_mini all", GRADLE_HOME: "/usr/share/gradle-8.7", ANDROID_NDK_LATEST_HOME: "/usr/local/lib/android/sdk/ndk/26.3.11579264", JAVA_HOME_21_X64: "/usr/lib/jvm/temurin-21-jdk-amd64", STATS_RDCL: "true", GITHUB_RETENTION_DAYS: "90", YARN_WRAP_OUTPUT: "false", npm_package_scripts_build_thai_plan_selection_ci: "cd ./d9-thai-plan-selection && yarn build-ci", npm_package_scripts_build_n1: "cd ./d9-n1 && yarn build", npm_config_version_tag_prefix: "v", npm_package_dependencies__rainbow_d9_n2: "1.1.29", GITHUB_REPOSITORY_OWNER_ID: "38915232", POWERSHELL_DISTRIBUTION_CHANNEL: "GitHub-Actions-ubuntu22", AZURE_EXTENSION_DIR: "/opt/az/azcliextensions", GITHUB_HEAD_REF: "", npm_package_scripts_build_n2: "cd ./d9-n2 && yarn build", npm_package_dependencies__types_styled_components: "^5.1.34", npm_package_dependencies__rainbow_d9_n3: "1.1.29", npm_package_dependencies__rainbow_d9_echarts: "1.1.29", SYSTEMD_EXEC_PID: "585", npm_package_scripts_build_echarts: "cd ./d9-echarts && yarn build", npm_package_scripts_build_n3: "cd ./d9-n3 && yarn build", GITHUB_GRAPHQL_URL: "https://api.github.com/graphql", npm_package_description: "Assume the following envs are ready, otherwise contact the tech guy.", npm_package_scripts_predeploy: "npm run build", npm_package_dependencies__rainbow_d9_n5: "1.1.29", GOROOT_1_20_X64: "/opt/hostedtoolcache/go/1.20.14/x64", NVM_DIR: "/home/runner/.nvm", npm_package_readmeFilename: "README.md", npm_package_scripts_build_n5: "cd ./d9-n5 && yarn build", npm_package_dependencies__types_react: "^18.2.21", npm_package_dependencies__testing_library_react: "^13.4.0", npm_package_dependencies__rainbow_d9_n6: "1.1.29", DOTNET_SKIP_FIRST_TIME_EXPERIENCE: "1", GOROOT_1_21_X64: "/opt/hostedtoolcache/go/1.21.10/x64", JAVA_HOME_17_X64: "/usr/lib/jvm/temurin-17-jdk-amd64", ImageVersion: "20240526.1.0", npm_package_scripts_build_n6: "cd ./d9-n6 && yarn build", RUNNER_OS: "Linux", GITHUB_API_URL: "https://api.github.com", GOROOT_1_22_X64: "/opt/hostedtoolcache/go/1.22.3/x64", SWIFT_PATH: "/usr/share/swift/usr/bin", RUNNER_USER: "runner", STATS_V3PS: "true", CHROMEWEBDRIVER: "/usr/local/share/chromedriver-linux64", JOURNAL_STREAM: "8:19737", GITHUB_WORKFLOW: "Publish to NPM", _: "/opt/hostedtoolcache/node/18.20.3/x64/bin/yarn", npm_package_private: "true", npm_package_dependencies_remark_gfm: "4.0.0", npm_package_scripts_build_thai_all: "yarn build-thai-plan-selection", npm_config_registry: "https://registry.yarnpkg.com", ACTIONS_RUNNER_ACTION_ARCHIVE_CACHE: "/opt/actionarchivecache", STATS_D: "true", GITHUB_RUN_ID: "9287527561", STATS_VMFE: "true", npm_package_workspaces_0: "d9-n1", GITHUB_REF_TYPE: "tag", BOOTSTRAP_HASKELL_NONINTERACTIVE: "1", GITHUB_WORKFLOW_SHA: "5c0b355090c9ad320911ae840951f7faee7b63c2", GITHUB_BASE_REF: "", ImageOS: "ubuntu22", npm_package_scripts_build_n123_ci: "yarn build-n1-ci && yarn build-n2-ci && yarn build-n3-ci", npm_package_workspaces_1: "d9-n2", npm_config_ignore_scripts: "", npm_package_scripts_start: "vite", npm_package_dependencies_github_markdown_css: "^5.5.0", STATS_BLT: "true", GITHUB_WORKFLOW_REF: "InsureMO/rainbow-d9/.github/workflows/release.yml@refs/tags/r-1.1.29-alpha.1", PERFLOG_LOCATION_SETTING: "RUNNER_PERFLOG", GITHUB_ACTION_REPOSITORY: "", npm_package_workspaces_2: "d9-n3", npm_package_browserslist_development_0: "last 1 chrome version", PATH: "/tmp/yarn--1716991747915-0.5968700129900064:/home/runner/work/rainbow-d9/rainbow-d9/d9-sample-cra/node_modules/.bin:/home/runner/.config/yarn/link/node_modules/.bin:/home/runner/work/rainbow-d9/rainbow-d9/node_modules/.bin:/opt/hostedtoolcache/node/18.20.3/x64/libexec/lib/node_modules/npm/bin/node-gyp-bin:/opt/hostedtoolcache/node/18.20.3/x64/lib/node_modules/npm/bin/node-gyp-bin:/opt/hostedtoolcache/node/18.20.3/x64/bin/node_modules/npm/bin/node-gyp-bin:/tmp/yarn--1716991747724-0.26597529987286816:/home/runner/work/rainbow-d9/rainbow-d9/node_modules/.bin:/home/runner/.config/yarn/link/node_modules/.bin:/home/runner/work/rainbow-d9/rainbow-d9/node_modules/.bin:/opt/hostedtoolcache/node/18.20.3/x64/libexec/lib/node_modules/npm/bin/node-gyp-bin:/opt/hostedtoolcache/node/18.20.3/x64/lib/node_modules/npm/bin/node-gyp-bin:/opt/hostedtoolcache/node/18.20.3/x64/bin/node_modules/npm/bin/node-gyp-bin:/opt/hostedtoolcache/node/18.20.3/x64/bin:/snap/bin:/home/runner/.local/bin:/opt/pipx_bin:/home/runner/.cargo/bin:/home/runner/.config/composer/vendor/bin:/usr/local/.ghcup/bin:/home/runner/.dotnet/tools:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin", NODE: "/opt/hostedtoolcache/node/18.20.3/x64/bin/node", ANT_HOME: "/usr/share/ant", DOTNET_MULTILEVEL_LOOKUP: "0", RUNNER_TRACKING_ID: "github_dbaa4346-b64c-482d-b308-cfb526a4667c", INVOCATION_ID: "5bf662f472b6447eaa2e0900d5c23488", RUNNER_TOOL_CACHE: "/opt/hostedtoolcache", npm_package_name: "@rainbow-d9/sample-cra", npm_package_workspaces_3: "d9-n5", npm_package_browserslist_development_1: "last 1 firefox version", npm_package_repository_type: "git", npm_package_dependencies__types_react_syntax_highlighter: "^15.5.11", npm_package_dependencies__rainbow_d9_thai_plan_selection: "1.1.29", GITHUB_ACTION: "__run_5", GITHUB_RUN_NUMBER: "124", GITHUB_TRIGGERING_ACTOR: "bradwoo8621", RUNNER_ARCH: "X64", XDG_RUNTIME_DIR: "/run/user/1001", AGENT_TOOLSDIRECTORY: "/opt/hostedtoolcache", npm_package_scripts_build_thai_plan_selection: "cd ./d9-thai-plan-selection && yarn build", npm_package_workspaces_4: "d9-n6", npm_package_browserslist_development_2: "last 1 safari version", npm_package_workspaces_5: "d9-echarts", LANG: "C.UTF-8", VCPKG_INSTALLATION_ROOT: "/usr/local/share/vcpkg", npm_package_workspaces_6: "d9-thai-plan-selection", npm_package_dependencies_react_dom: "^18.2.0", CONDA: "/usr/share/miniconda", RUNNER_NAME: "GitHub Actions 9", XDG_CONFIG_HOME: "/home/runner/.config", STATS_VMD: "true", GITHUB_REF_NAME: "r-1.1.29-alpha.1", GITHUB_REPOSITORY: "InsureMO/rainbow-d9", STATS_D_D: "true", npm_lifecycle_script: "vite build", npm_package_workspaces_7: "d9-sample-cra", npm_package_eslintConfig_extends_0: "react-app", npm_package_dependencies_vite_plugin_markdown: "^2.2.0", npm_package_dependencies_react_markdown: "9.0.1", npm_package_dependencies__types_node: "^20.5.3", STATS_UE: "true", ANDROID_NDK_ROOT: "/usr/local/lib/android/sdk/ndk/25.2.9519653", GITHUB_ACTION_REF: "", DEBIAN_FRONTEND: "noninteractive", npm_package_scripts_build_sample_cra_ci: "cd ./d9-sample-cra && yarn build", npm_config_version_git_message: "v%s", npm_package_eslintConfig_extends_1: "react-app/jest", GITHUB_REPOSITORY_ID: "704514093", GITHUB_ACTIONS: "true", npm_lifecycle_event: "build", npm_package_version: "1.1.29", npm_package_repository_url: "git+https://github.com/InsureMO/rainbow-d9.git", npm_package_dependencies__testing_library_jest_dom: "^5.17.0", GITHUB_REF_PROTECTED: "false", npm_config_argv: '{"remain":[],"cooked":["run","build-sample-cra"],"original":["build-sample-cra"]}', npm_package_volta_yarn: "1.22.21", npm_package_scripts_build: "vite build", npm_package_dependencies__testing_library_user_event: "^13.5.0", GITHUB_WORKSPACE: "/home/runner/work/rainbow-d9/rainbow-d9", ACCEPT_EULA: "Y", GITHUB_JOB: "create-sample-pages", RUNNER_PERFLOG: "/home/runner/perflog", npm_package_dependencies_vite: "^5.0.13", GITHUB_SHA: "5c0b355090c9ad320911ae840951f7faee7b63c2", GITHUB_RUN_ATTEMPT: "1", npm_config_version_git_tag: "true", npm_config_version_git_sign: "", GITHUB_REF: "refs/tags/r-1.1.29-alpha.1", GITHUB_ACTOR: "bradwoo8621", ANDROID_SDK_ROOT: "/usr/local/lib/android/sdk", npm_package_license: "MIT", npm_config_strict_ssl: "true", LEIN_HOME: "/usr/local/lib/lein", npm_package_scripts_build_n123: "yarn build-n1 && yarn build-n2 && yarn build-n3", GITHUB_PATH: "/home/runner/work/_temp/_runner_file_commands/add_path_d1085ef7-8819-4896-be3e-89b597b74378", JAVA_HOME: "/usr/lib/jvm/temurin-11-jdk-amd64", PWD: "/home/runner/work/rainbow-d9/rainbow-d9/d9-sample-cra", GITHUB_ACTOR_ID: "2330098", RUNNER_WORKSPACE: "/home/runner/work/rainbow-d9", npm_execpath: "/opt/hostedtoolcache/node/18.20.3/x64/lib/node_modules/yarn/bin/yarn.js", npm_package_scripts_build_all_ci: "yarn build-n123-ci && yarn build-n5-ci && yarn build-n6-ci && yarn build-echarts-ci && yarn build-thai-all-ci", HOMEBREW_CLEANUP_PERIODIC_FULL_DAYS: "3650", GITHUB_EVENT_NAME: "push", HOMEBREW_NO_AUTO_UPDATE: "1", ANDROID_HOME: "/usr/local/lib/android/sdk", GITHUB_SERVER_URL: "https://github.com", GECKOWEBDRIVER: "/usr/local/share/gecko_driver", LEIN_JAR: "/usr/local/lib/lein/self-installs/leiningen-2.11.2-standalone.jar", GHCUP_INSTALL_BASE_PREFIX: "/usr/local", GITHUB_OUTPUT: "/home/runner/work/_temp/_runner_file_commands/set_output_d1085ef7-8819-4896-be3e-89b597b74378", npm_package_author_name: "Rainbow Team", EDGEWEBDRIVER: "/usr/local/share/edge_driver", STATS_EXT: "true", npm_package_scripts_build_n1_ci: "cd ./d9-n1 && yarn build-ci", npm_config_save_prefix: "^", npm_config_ignore_optional: "", ANDROID_NDK: "/usr/local/lib/android/sdk/ndk/25.2.9519653", SGX_AESM_ADDR: "1", CHROME_BIN: "/usr/bin/google-chrome", npm_package_scripts_build_n2_ci: "cd ./d9-n2 && yarn build-ci", npm_package_scripts_deploy: "gh-pages -d build", npm_package_scripts_preview: "vite preview", SELENIUM_JAR_PATH: "/usr/share/java/selenium-server.jar", STATS_EXTP: "https://provjobdsettingscdn.blob.core.windows.net/settings/provjobdsettings-0.5.172+1/provjobd.data", npm_package_scripts_build_echarts_ci: "cd ./d9-echarts && yarn build-ci", npm_package_scripts_build_n3_ci: "cd ./d9-n3 && yarn build-ci", npm_package_dependencies_web_vitals: "^2.1.4", npm_package_dependencies_typescript: "^5.1.6", INIT_CWD: "/home/runner/work/rainbow-d9/rainbow-d9", ANDROID_NDK_HOME: "/usr/local/lib/android/sdk/ndk/25.2.9519653", GITHUB_STEP_SUMMARY: "/home/runner/work/_temp/_runner_file_commands/step_summary_d1085ef7-8819-4896-be3e-89b597b74378", npm_package_dependencies_react: "^18.2.0", npm_package_dependencies__types_react_dom: "^18.2.7", NODE_ENV: "production" };
 let Stack$4 = class Stack {
   /**
   @internal
@@ -30707,8 +30707,8 @@ class BlockContext {
       for (let markI = 0; ; ) {
         let next2 = line2.depth < this.stack.length ? this.stack[this.stack.length - 1] : null;
         while (markI < line2.markers.length && (!next2 || line2.markers[markI].from < next2.end)) {
-          let mark = line2.markers[markI++];
-          this.addNode(mark.type, mark.from, mark.to);
+          let mark2 = line2.markers[markI++];
+          this.addNode(mark2.type, mark2.from, mark2.to);
         }
         if (!next2)
           break;
@@ -31576,15 +31576,15 @@ function injectMarks(elements, marks) {
   if (!elements.length)
     return marks;
   let elts = elements.slice(), eI = 0;
-  for (let mark of marks) {
-    while (eI < elts.length && elts[eI].to < mark.to)
+  for (let mark2 of marks) {
+    while (eI < elts.length && elts[eI].to < mark2.to)
       eI++;
-    if (eI < elts.length && elts[eI].from < mark.from) {
+    if (eI < elts.length && elts[eI].from < mark2.from) {
       let e2 = elts[eI];
       if (e2 instanceof Element$2)
-        elts[eI] = new Element$2(e2.type, e2.from, e2.to, injectMarks(e2.children, [mark]));
+        elts[eI] = new Element$2(e2.type, e2.from, e2.to, injectMarks(e2.children, [mark2]));
     } else {
-      elts.splice(eI++, 0, mark);
+      elts.splice(eI++, 0, mark2);
     }
   }
   return elts;
@@ -31951,15 +31951,15 @@ const Autolink = {
   }]
 };
 const GFM = [Table, TaskList, Strikethrough, Autolink];
-function parseSubSuper(ch, node2, mark) {
+function parseSubSuper(ch, node2, mark2) {
   return (cx, next2, pos) => {
     if (next2 != ch || cx.char(pos + 1) == ch)
       return -1;
-    let elts = [cx.elt(mark, pos, pos + 1)];
+    let elts = [cx.elt(mark2, pos, pos + 1)];
     for (let i2 = pos + 1; i2 < cx.end; i2++) {
       let next3 = cx.char(i2);
       if (next3 == ch)
-        return cx.addElement(cx.elt(node2, pos, i2 + 1, elts.concat(cx.elt(mark, i2, i2 + 1))));
+        return cx.addElement(cx.elt(node2, pos, i2 + 1, elts.concat(cx.elt(mark2, i2, i2 + 1))));
       if (next3 == 92)
         elts.push(cx.elt("Escape", i2, i2++ + 2));
       if (space$3(next3))
@@ -32104,7 +32104,7 @@ function tagNameAfter(input, offset) {
   cachedPos = pos;
   return cachedName = name2 ? name2.toLowerCase() : next2 == question || next2 == bang ? void 0 : null;
 }
-const lessThan$1 = 60, greaterThan = 62, slash = 47, question = 63, bang = 33, dash$1 = 45;
+const lessThan$1 = 60, greaterThan = 62, slash = 47, question = 63, bang = 33, dash$2 = 45;
 function ElementContext(name2, parent) {
   this.name = name2;
   this.parent = parent;
@@ -32179,7 +32179,7 @@ const commentContent = new ExternalTokenizer((input) => {
         input.acceptToken(commentContent$1);
       break;
     }
-    if (input.next == dash$1) {
+    if (input.next == dash$2) {
       dashes++;
     } else if (input.next == greaterThan && dashes >= 2) {
       if (i2 >= 3)
@@ -32375,7 +32375,7 @@ const space$2 = [
   8287,
   12288
 ];
-const colon = 58, parenL = 40, underscore = 95, bracketL = 91, dash = 45, period = 46, hash$1 = 35, percent = 37, ampersand$1 = 38, backslash = 92, newline = 10;
+const colon = 58, parenL = 40, underscore = 95, bracketL = 91, dash$1 = 45, period = 46, hash$1 = 35, percent = 37, ampersand$1 = 38, backslash = 92, newline = 10;
 function isAlpha(ch) {
   return ch >= 65 && ch <= 90 || ch >= 97 && ch <= 122 || ch >= 161;
 }
@@ -32385,10 +32385,10 @@ function isDigit(ch) {
 const identifiers = new ExternalTokenizer((input, stack) => {
   for (let inside2 = false, dashes = 0, i2 = 0; ; i2++) {
     let { next: next2 } = input;
-    if (isAlpha(next2) || next2 == dash || next2 == underscore || inside2 && isDigit(next2)) {
-      if (!inside2 && (next2 != dash || i2 > 0))
+    if (isAlpha(next2) || next2 == dash$1 || next2 == underscore || inside2 && isDigit(next2)) {
+      if (!inside2 && (next2 != dash$1 || i2 > 0))
         inside2 = true;
-      if (dashes === i2 && next2 == dash)
+      if (dashes === i2 && next2 == dash$1)
         dashes++;
       input.advance();
     } else if (next2 == backslash && input.peek(1) != newline) {
@@ -32406,7 +32406,7 @@ const identifiers = new ExternalTokenizer((input, stack) => {
 const descendant = new ExternalTokenizer((input) => {
   if (space$2.includes(input.peek(-1))) {
     let { next: next2 } = input;
-    if (isAlpha(next2) || next2 == underscore || next2 == hash$1 || next2 == period || next2 == bracketL || next2 == colon && isAlpha(input.peek(1)) || next2 == dash || next2 == ampersand$1)
+    if (isAlpha(next2) || next2 == underscore || next2 == hash$1 || next2 == period || next2 == bracketL || next2 == colon && isAlpha(input.peek(1)) || next2 == dash$1 || next2 == ampersand$1)
       input.acceptToken(descendantOp);
   }
 });
@@ -33747,7 +33747,7 @@ const GlobalAttrs = {
 const eventAttributes = /* @__PURE__ */ "beforeunload copy cut dragstart dragover dragleave dragenter dragend drag paste focus blur change click load mousedown mouseenter mouseleave mouseup keydown keyup resize scroll unload".split(" ").map((n2) => "on" + n2);
 for (let a2 of eventAttributes)
   GlobalAttrs[a2] = null;
-let Schema$2 = class Schema {
+let Schema$3 = class Schema {
   constructor(extraTags, extraAttrs) {
     this.tags = Object.assign(Object.assign({}, Tags), extraTags);
     this.globalAttrs = Object.assign(Object.assign({}, GlobalAttrs), extraAttrs);
@@ -33755,7 +33755,7 @@ let Schema$2 = class Schema {
     this.globalAttrNames = Object.keys(this.globalAttrs);
   }
 };
-Schema$2.default = /* @__PURE__ */ new Schema$2();
+Schema$3.default = /* @__PURE__ */ new Schema$3();
 function elementName(doc2, tree, max = doc2.length) {
   if (!tree)
     return "";
@@ -33886,11 +33886,11 @@ function htmlCompletionFor(schema2, context) {
   }
 }
 function htmlCompletionSource(context) {
-  return htmlCompletionFor(Schema$2.default, context);
+  return htmlCompletionFor(Schema$3.default, context);
 }
 function htmlCompletionSourceWith(config2) {
   let { extraTags, extraGlobalAttributes: extraAttrs } = config2;
-  let schema2 = extraAttrs || extraTags ? new Schema$2(extraTags, extraAttrs) : Schema$2.default;
+  let schema2 = extraAttrs || extraTags ? new Schema$3(extraTags, extraAttrs) : Schema$3.default;
   return (context) => htmlCompletionFor(schema2, context);
 }
 const jsonParser = /* @__PURE__ */ javascriptLanguage.parser.configure({ top: "SingleExpression" });
@@ -33989,7 +33989,7 @@ const htmlPlain = /* @__PURE__ */ LRLanguage.define({
 const htmlLanguage = /* @__PURE__ */ htmlPlain.configure({
   wrap: /* @__PURE__ */ configureNesting(defaultNesting, defaultAttrs)
 });
-function html(config2 = {}) {
+function html$2(config2 = {}) {
   let dialect = "", wrap2;
   if (config2.matchClosingTags === false)
     dialect = "noMatch";
@@ -34375,7 +34375,7 @@ const markdownKeymap = [
   { key: "Enter", run: insertNewlineContinueMarkup },
   { key: "Backspace", run: deleteMarkupBackward }
 ];
-const htmlNoMatch = /* @__PURE__ */ html({ matchClosingTags: false });
+const htmlNoMatch = /* @__PURE__ */ html$2({ matchClosingTags: false });
 function markdown(config2 = {}) {
   let { codeLanguages, defaultCodeLanguage, addKeymap = true, base: { parser: parser2 } = commonmarkLanguage, completeHTMLTags = true } = config2;
   if (!(parser2 instanceof MarkdownParser))
@@ -35969,11 +35969,11 @@ class LintPanel {
     return new LintPanel(view);
   }
 }
-function svg(content2, attrs = `viewBox="0 0 40 40"`) {
+function svg$2(content2, attrs = `viewBox="0 0 40 40"`) {
   return `url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" ${attrs}>${encodeURIComponent(content2)}</svg>')`;
 }
 function underline(color2) {
-  return svg(`<path d="m0 2.5 l2 -1.5 l1 0 l2 1.5 l1 0" stroke="${color2}" fill="none" stroke-width=".7"/>`, `width="6" height="3"`);
+  return svg$2(`<path d="m0 2.5 l2 -1.5 l1 0 l2 1.5 l1 0" stroke="${color2}" fill="none" stroke-width=".7"/>`, `width="6" height="3"`);
 }
 const baseTheme = /* @__PURE__ */ EditorView.baseTheme({
   ".cm-diagnostic": {
@@ -36190,13 +36190,13 @@ const lintGutterTheme = /* @__PURE__ */ EditorView.baseTheme({
     height: "1em"
   },
   ".cm-lint-marker-info": {
-    content: /* @__PURE__ */ svg(`<path fill="#aaf" stroke="#77e" stroke-width="6" stroke-linejoin="round" d="M5 5L35 5L35 35L5 35Z"/>`)
+    content: /* @__PURE__ */ svg$2(`<path fill="#aaf" stroke="#77e" stroke-width="6" stroke-linejoin="round" d="M5 5L35 5L35 35L5 35Z"/>`)
   },
   ".cm-lint-marker-warning": {
-    content: /* @__PURE__ */ svg(`<path fill="#fe8" stroke="#fd7" stroke-width="6" stroke-linejoin="round" d="M20 6L37 35L3 35Z"/>`)
+    content: /* @__PURE__ */ svg$2(`<path fill="#fe8" stroke="#fd7" stroke-width="6" stroke-linejoin="round" d="M20 6L37 35L3 35Z"/>`)
   },
   ".cm-lint-marker-error": {
-    content: /* @__PURE__ */ svg(`<circle cx="20" cy="20" r="15" fill="#f87" stroke="#f43" stroke-width="6"/>`)
+    content: /* @__PURE__ */ svg$2(`<circle cx="20" cy="20" r="15" fill="#f87" stroke="#f43" stroke-width="6"/>`)
   }
 });
 const lintExtensions = [
@@ -44020,7 +44020,7 @@ function notime(name2, fn) {
 }
 var _$k = lodash_1;
 var util$9 = util$a;
-var normalize$2 = {
+var normalize$3 = {
   run: run$1,
   undo: undo$1
 };
@@ -45301,7 +45301,7 @@ function positionY(g2) {
 }
 var _$1 = lodash_1;
 var acyclic = acyclic$1;
-var normalize$1 = normalize$2;
+var normalize$2 = normalize$3;
 var rank = rank_1;
 var normalizeRanks = util$a.normalizeRanks;
 var parentDummyChains = parentDummyChains_1;
@@ -45363,7 +45363,7 @@ function runLayout(g2, time2) {
     removeEdgeLabelProxies(g2);
   });
   time2("    normalize.run", function() {
-    normalize$1.run(g2);
+    normalize$2.run(g2);
   });
   time2("    parentDummyChains", function() {
     parentDummyChains(g2);
@@ -45390,7 +45390,7 @@ function runLayout(g2, time2) {
     removeBorderNodes(g2);
   });
   time2("    normalize.undo", function() {
-    normalize$1.undo(g2);
+    normalize$2.undo(g2);
   });
   time2("    fixupEdgeLabelCoords", function() {
     fixupEdgeLabelCoords(g2);
@@ -45802,11 +45802,11 @@ function formatError(exception2, compact) {
   }
   return message + " " + where;
 }
-function YAMLException$1(reason, mark) {
+function YAMLException$1(reason, mark2) {
   Error.call(this);
   this.name = "YAMLException";
   this.reason = reason;
-  this.mark = mark;
+  this.mark = mark2;
   this.message = formatError(this, false);
   if (Error.captureStackTrace) {
     Error.captureStackTrace(this, this.constructor);
@@ -45841,9 +45841,9 @@ function getLine(buffer2, lineStart, lineEnd2, position2, maxLineLength) {
 function padStart(string2, max) {
   return common.repeat(" ", max - string2.length) + string2;
 }
-function makeSnippet(mark, options) {
+function makeSnippet(mark2, options) {
   options = Object.create(options || null);
-  if (!mark.buffer)
+  if (!mark2.buffer)
     return null;
   if (!options.maxLength)
     options.maxLength = 79;
@@ -45858,44 +45858,44 @@ function makeSnippet(mark, options) {
   var lineEnds = [];
   var match2;
   var foundLineNo = -1;
-  while (match2 = re2.exec(mark.buffer)) {
+  while (match2 = re2.exec(mark2.buffer)) {
     lineEnds.push(match2.index);
     lineStarts.push(match2.index + match2[0].length);
-    if (mark.position <= match2.index && foundLineNo < 0) {
+    if (mark2.position <= match2.index && foundLineNo < 0) {
       foundLineNo = lineStarts.length - 2;
     }
   }
   if (foundLineNo < 0)
     foundLineNo = lineStarts.length - 1;
   var result = "", i2, line2;
-  var lineNoLength = Math.min(mark.line + options.linesAfter, lineEnds.length).toString().length;
+  var lineNoLength = Math.min(mark2.line + options.linesAfter, lineEnds.length).toString().length;
   var maxLineLength = options.maxLength - (options.indent + lineNoLength + 3);
   for (i2 = 1; i2 <= options.linesBefore; i2++) {
     if (foundLineNo - i2 < 0)
       break;
     line2 = getLine(
-      mark.buffer,
+      mark2.buffer,
       lineStarts[foundLineNo - i2],
       lineEnds[foundLineNo - i2],
-      mark.position - (lineStarts[foundLineNo] - lineStarts[foundLineNo - i2]),
+      mark2.position - (lineStarts[foundLineNo] - lineStarts[foundLineNo - i2]),
       maxLineLength
     );
-    result = common.repeat(" ", options.indent) + padStart((mark.line - i2 + 1).toString(), lineNoLength) + " | " + line2.str + "\n" + result;
+    result = common.repeat(" ", options.indent) + padStart((mark2.line - i2 + 1).toString(), lineNoLength) + " | " + line2.str + "\n" + result;
   }
-  line2 = getLine(mark.buffer, lineStarts[foundLineNo], lineEnds[foundLineNo], mark.position, maxLineLength);
-  result += common.repeat(" ", options.indent) + padStart((mark.line + 1).toString(), lineNoLength) + " | " + line2.str + "\n";
+  line2 = getLine(mark2.buffer, lineStarts[foundLineNo], lineEnds[foundLineNo], mark2.position, maxLineLength);
+  result += common.repeat(" ", options.indent) + padStart((mark2.line + 1).toString(), lineNoLength) + " | " + line2.str + "\n";
   result += common.repeat("-", options.indent + lineNoLength + 3 + line2.pos) + "^\n";
   for (i2 = 1; i2 <= options.linesAfter; i2++) {
     if (foundLineNo + i2 >= lineEnds.length)
       break;
     line2 = getLine(
-      mark.buffer,
+      mark2.buffer,
       lineStarts[foundLineNo + i2],
       lineEnds[foundLineNo + i2],
-      mark.position - (lineStarts[foundLineNo] - lineStarts[foundLineNo + i2]),
+      mark2.position - (lineStarts[foundLineNo] - lineStarts[foundLineNo + i2]),
       maxLineLength
     );
-    result += common.repeat(" ", options.indent) + padStart((mark.line + i2 + 1).toString(), lineNoLength) + " | " + line2.str + "\n";
+    result += common.repeat(" ", options.indent) + padStart((mark2.line + i2 + 1).toString(), lineNoLength) + " | " + line2.str + "\n";
   }
   return result.replace(/\n$/, "");
 }
@@ -46406,7 +46406,7 @@ var timestamp = new type("tag:yaml.org,2002:timestamp", {
 function resolveYamlMerge(data2) {
   return data2 === "<<" || data2 === null;
 }
-var merge = new type("tag:yaml.org,2002:merge", {
+var merge$1 = new type("tag:yaml.org,2002:merge", {
   kind: "scalar",
   resolve: resolveYamlMerge
 });
@@ -46582,7 +46582,7 @@ var set = new type("tag:yaml.org,2002:set", {
 var _default$1 = core.extend({
   implicit: [
     timestamp,
-    merge
+    merge$1
   ],
   explicit: [
     binary,
@@ -46685,7 +46685,7 @@ function State$1(input, options) {
   this.documents = [];
 }
 function generateError(state, message) {
-  var mark = {
+  var mark2 = {
     name: state.filename,
     buffer: state.input.slice(0, -1),
     // omit trailing \0
@@ -46693,8 +46693,8 @@ function generateError(state, message) {
     line: state.line,
     column: state.position - state.lineStart
   };
-  mark.snippet = snippet(mark);
-  return new exception(message, mark);
+  mark2.snippet = snippet(mark2);
+  return new exception(message, mark2);
 }
 function throwError(state, message) {
   throw generateError(state, message);
@@ -48385,7 +48385,7 @@ function renamed(from2, to) {
   };
 }
 var Type = type;
-var Schema2 = schema;
+var Schema$2 = schema;
 var FAILSAFE_SCHEMA = failsafe;
 var JSON_SCHEMA = json;
 var CORE_SCHEMA = core;
@@ -48394,7 +48394,7 @@ var load = loader.load;
 var loadAll = loader.loadAll;
 var dump = dumper.dump;
 var YAMLException = exception;
-var types = {
+var types$1 = {
   binary,
   float,
   map,
@@ -48404,7 +48404,7 @@ var types = {
   timestamp,
   bool,
   int,
-  merge,
+  merge: merge$1,
   omap,
   seq,
   str
@@ -48414,7 +48414,7 @@ var safeLoadAll = renamed("safeLoadAll", "loadAll");
 var safeDump = renamed("safeDump", "dump");
 var jsYaml = {
   Type,
-  Schema: Schema2,
+  Schema: Schema$2,
   FAILSAFE_SCHEMA,
   JSON_SCHEMA,
   CORE_SCHEMA,
@@ -48423,7 +48423,7 @@ var jsYaml = {
   loadAll,
   dump,
   YAMLException,
-  types,
+  types: types$1,
   safeLoad,
   safeLoadAll,
   safeDump
@@ -48450,6 +48450,1176 @@ function whitespace(thing) {
 function empty(value) {
   return value.replace(re, "") === "";
 }
+class Schema2 {
+  /**
+   * @constructor
+   * @param {Properties} property
+   * @param {Normal} normal
+   * @param {string} [space]
+   */
+  constructor(property2, normal, space2) {
+    this.property = property2;
+    this.normal = normal;
+    if (space2) {
+      this.space = space2;
+    }
+  }
+}
+Schema2.prototype.property = {};
+Schema2.prototype.normal = {};
+Schema2.prototype.space = null;
+function merge(definitions, space2) {
+  const property2 = {};
+  const normal = {};
+  let index2 = -1;
+  while (++index2 < definitions.length) {
+    Object.assign(property2, definitions[index2].property);
+    Object.assign(normal, definitions[index2].normal);
+  }
+  return new Schema2(property2, normal, space2);
+}
+function normalize$1(value) {
+  return value.toLowerCase();
+}
+class Info {
+  /**
+   * @constructor
+   * @param {string} property
+   * @param {string} attribute
+   */
+  constructor(property2, attribute) {
+    this.property = property2;
+    this.attribute = attribute;
+  }
+}
+Info.prototype.space = null;
+Info.prototype.boolean = false;
+Info.prototype.booleanish = false;
+Info.prototype.overloadedBoolean = false;
+Info.prototype.number = false;
+Info.prototype.commaSeparated = false;
+Info.prototype.spaceSeparated = false;
+Info.prototype.commaOrSpaceSeparated = false;
+Info.prototype.mustUseProperty = false;
+Info.prototype.defined = false;
+let powers = 0;
+const boolean = increment();
+const booleanish = increment();
+const overloadedBoolean = increment();
+const number = increment();
+const spaceSeparated = increment();
+const commaSeparated = increment();
+const commaOrSpaceSeparated = increment();
+function increment() {
+  return 2 ** ++powers;
+}
+const types = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+  __proto__: null,
+  boolean,
+  booleanish,
+  commaOrSpaceSeparated,
+  commaSeparated,
+  number,
+  overloadedBoolean,
+  spaceSeparated
+}, Symbol.toStringTag, { value: "Module" }));
+const checks = Object.keys(types);
+class DefinedInfo extends Info {
+  /**
+   * @constructor
+   * @param {string} property
+   * @param {string} attribute
+   * @param {number|null} [mask]
+   * @param {string} [space]
+   */
+  constructor(property2, attribute, mask, space2) {
+    let index2 = -1;
+    super(property2, attribute);
+    mark(this, "space", space2);
+    if (typeof mask === "number") {
+      while (++index2 < checks.length) {
+        const check = checks[index2];
+        mark(this, checks[index2], (mask & types[check]) === types[check]);
+      }
+    }
+  }
+}
+DefinedInfo.prototype.defined = true;
+function mark(values2, key, value) {
+  if (value) {
+    values2[key] = value;
+  }
+}
+const own$3 = {}.hasOwnProperty;
+function create(definition) {
+  const property2 = {};
+  const normal = {};
+  let prop;
+  for (prop in definition.properties) {
+    if (own$3.call(definition.properties, prop)) {
+      const value = definition.properties[prop];
+      const info = new DefinedInfo(
+        prop,
+        definition.transform(definition.attributes || {}, prop),
+        value,
+        definition.space
+      );
+      if (definition.mustUseProperty && definition.mustUseProperty.includes(prop)) {
+        info.mustUseProperty = true;
+      }
+      property2[prop] = info;
+      normal[normalize$1(prop)] = prop;
+      normal[normalize$1(info.attribute)] = prop;
+    }
+  }
+  return new Schema2(property2, normal, definition.space);
+}
+const xlink = create({
+  space: "xlink",
+  transform(_2, prop) {
+    return "xlink:" + prop.slice(5).toLowerCase();
+  },
+  properties: {
+    xLinkActuate: null,
+    xLinkArcRole: null,
+    xLinkHref: null,
+    xLinkRole: null,
+    xLinkShow: null,
+    xLinkTitle: null,
+    xLinkType: null
+  }
+});
+const xml = create({
+  space: "xml",
+  transform(_2, prop) {
+    return "xml:" + prop.slice(3).toLowerCase();
+  },
+  properties: { xmlLang: null, xmlBase: null, xmlSpace: null }
+});
+function caseSensitiveTransform(attributes, attribute) {
+  return attribute in attributes ? attributes[attribute] : attribute;
+}
+function caseInsensitiveTransform(attributes, property2) {
+  return caseSensitiveTransform(attributes, property2.toLowerCase());
+}
+const xmlns = create({
+  space: "xmlns",
+  attributes: { xmlnsxlink: "xmlns:xlink" },
+  transform: caseInsensitiveTransform,
+  properties: { xmlns: null, xmlnsXLink: null }
+});
+const aria = create({
+  transform(_2, prop) {
+    return prop === "role" ? prop : "aria-" + prop.slice(4).toLowerCase();
+  },
+  properties: {
+    ariaActiveDescendant: null,
+    ariaAtomic: booleanish,
+    ariaAutoComplete: null,
+    ariaBusy: booleanish,
+    ariaChecked: booleanish,
+    ariaColCount: number,
+    ariaColIndex: number,
+    ariaColSpan: number,
+    ariaControls: spaceSeparated,
+    ariaCurrent: null,
+    ariaDescribedBy: spaceSeparated,
+    ariaDetails: null,
+    ariaDisabled: booleanish,
+    ariaDropEffect: spaceSeparated,
+    ariaErrorMessage: null,
+    ariaExpanded: booleanish,
+    ariaFlowTo: spaceSeparated,
+    ariaGrabbed: booleanish,
+    ariaHasPopup: null,
+    ariaHidden: booleanish,
+    ariaInvalid: null,
+    ariaKeyShortcuts: null,
+    ariaLabel: null,
+    ariaLabelledBy: spaceSeparated,
+    ariaLevel: number,
+    ariaLive: null,
+    ariaModal: booleanish,
+    ariaMultiLine: booleanish,
+    ariaMultiSelectable: booleanish,
+    ariaOrientation: null,
+    ariaOwns: spaceSeparated,
+    ariaPlaceholder: null,
+    ariaPosInSet: number,
+    ariaPressed: booleanish,
+    ariaReadOnly: booleanish,
+    ariaRelevant: null,
+    ariaRequired: booleanish,
+    ariaRoleDescription: spaceSeparated,
+    ariaRowCount: number,
+    ariaRowIndex: number,
+    ariaRowSpan: number,
+    ariaSelected: booleanish,
+    ariaSetSize: number,
+    ariaSort: null,
+    ariaValueMax: number,
+    ariaValueMin: number,
+    ariaValueNow: number,
+    ariaValueText: null,
+    role: null
+  }
+});
+const html$1 = create({
+  space: "html",
+  attributes: {
+    acceptcharset: "accept-charset",
+    classname: "class",
+    htmlfor: "for",
+    httpequiv: "http-equiv"
+  },
+  transform: caseInsensitiveTransform,
+  mustUseProperty: ["checked", "multiple", "muted", "selected"],
+  properties: {
+    // Standard Properties.
+    abbr: null,
+    accept: commaSeparated,
+    acceptCharset: spaceSeparated,
+    accessKey: spaceSeparated,
+    action: null,
+    allow: null,
+    allowFullScreen: boolean,
+    allowPaymentRequest: boolean,
+    allowUserMedia: boolean,
+    alt: null,
+    as: null,
+    async: boolean,
+    autoCapitalize: null,
+    autoComplete: spaceSeparated,
+    autoFocus: boolean,
+    autoPlay: boolean,
+    blocking: spaceSeparated,
+    capture: boolean,
+    charSet: null,
+    checked: boolean,
+    cite: null,
+    className: spaceSeparated,
+    cols: number,
+    colSpan: null,
+    content: null,
+    contentEditable: booleanish,
+    controls: boolean,
+    controlsList: spaceSeparated,
+    coords: number | commaSeparated,
+    crossOrigin: null,
+    data: null,
+    dateTime: null,
+    decoding: null,
+    default: boolean,
+    defer: boolean,
+    dir: null,
+    dirName: null,
+    disabled: boolean,
+    download: overloadedBoolean,
+    draggable: booleanish,
+    encType: null,
+    enterKeyHint: null,
+    fetchPriority: null,
+    form: null,
+    formAction: null,
+    formEncType: null,
+    formMethod: null,
+    formNoValidate: boolean,
+    formTarget: null,
+    headers: spaceSeparated,
+    height: number,
+    hidden: boolean,
+    high: number,
+    href: null,
+    hrefLang: null,
+    htmlFor: spaceSeparated,
+    httpEquiv: spaceSeparated,
+    id: null,
+    imageSizes: null,
+    imageSrcSet: null,
+    inert: boolean,
+    inputMode: null,
+    integrity: null,
+    is: null,
+    isMap: boolean,
+    itemId: null,
+    itemProp: spaceSeparated,
+    itemRef: spaceSeparated,
+    itemScope: boolean,
+    itemType: spaceSeparated,
+    kind: null,
+    label: null,
+    lang: null,
+    language: null,
+    list: null,
+    loading: null,
+    loop: boolean,
+    low: number,
+    manifest: null,
+    max: null,
+    maxLength: number,
+    media: null,
+    method: null,
+    min: null,
+    minLength: number,
+    multiple: boolean,
+    muted: boolean,
+    name: null,
+    nonce: null,
+    noModule: boolean,
+    noValidate: boolean,
+    onAbort: null,
+    onAfterPrint: null,
+    onAuxClick: null,
+    onBeforeMatch: null,
+    onBeforePrint: null,
+    onBeforeToggle: null,
+    onBeforeUnload: null,
+    onBlur: null,
+    onCancel: null,
+    onCanPlay: null,
+    onCanPlayThrough: null,
+    onChange: null,
+    onClick: null,
+    onClose: null,
+    onContextLost: null,
+    onContextMenu: null,
+    onContextRestored: null,
+    onCopy: null,
+    onCueChange: null,
+    onCut: null,
+    onDblClick: null,
+    onDrag: null,
+    onDragEnd: null,
+    onDragEnter: null,
+    onDragExit: null,
+    onDragLeave: null,
+    onDragOver: null,
+    onDragStart: null,
+    onDrop: null,
+    onDurationChange: null,
+    onEmptied: null,
+    onEnded: null,
+    onError: null,
+    onFocus: null,
+    onFormData: null,
+    onHashChange: null,
+    onInput: null,
+    onInvalid: null,
+    onKeyDown: null,
+    onKeyPress: null,
+    onKeyUp: null,
+    onLanguageChange: null,
+    onLoad: null,
+    onLoadedData: null,
+    onLoadedMetadata: null,
+    onLoadEnd: null,
+    onLoadStart: null,
+    onMessage: null,
+    onMessageError: null,
+    onMouseDown: null,
+    onMouseEnter: null,
+    onMouseLeave: null,
+    onMouseMove: null,
+    onMouseOut: null,
+    onMouseOver: null,
+    onMouseUp: null,
+    onOffline: null,
+    onOnline: null,
+    onPageHide: null,
+    onPageShow: null,
+    onPaste: null,
+    onPause: null,
+    onPlay: null,
+    onPlaying: null,
+    onPopState: null,
+    onProgress: null,
+    onRateChange: null,
+    onRejectionHandled: null,
+    onReset: null,
+    onResize: null,
+    onScroll: null,
+    onScrollEnd: null,
+    onSecurityPolicyViolation: null,
+    onSeeked: null,
+    onSeeking: null,
+    onSelect: null,
+    onSlotChange: null,
+    onStalled: null,
+    onStorage: null,
+    onSubmit: null,
+    onSuspend: null,
+    onTimeUpdate: null,
+    onToggle: null,
+    onUnhandledRejection: null,
+    onUnload: null,
+    onVolumeChange: null,
+    onWaiting: null,
+    onWheel: null,
+    open: boolean,
+    optimum: number,
+    pattern: null,
+    ping: spaceSeparated,
+    placeholder: null,
+    playsInline: boolean,
+    popover: null,
+    popoverTarget: null,
+    popoverTargetAction: null,
+    poster: null,
+    preload: null,
+    readOnly: boolean,
+    referrerPolicy: null,
+    rel: spaceSeparated,
+    required: boolean,
+    reversed: boolean,
+    rows: number,
+    rowSpan: number,
+    sandbox: spaceSeparated,
+    scope: null,
+    scoped: boolean,
+    seamless: boolean,
+    selected: boolean,
+    shadowRootDelegatesFocus: boolean,
+    shadowRootMode: null,
+    shape: null,
+    size: number,
+    sizes: null,
+    slot: null,
+    span: number,
+    spellCheck: booleanish,
+    src: null,
+    srcDoc: null,
+    srcLang: null,
+    srcSet: null,
+    start: number,
+    step: null,
+    style: null,
+    tabIndex: number,
+    target: null,
+    title: null,
+    translate: null,
+    type: null,
+    typeMustMatch: boolean,
+    useMap: null,
+    value: booleanish,
+    width: number,
+    wrap: null,
+    // Legacy.
+    // See: https://html.spec.whatwg.org/#other-elements,-attributes-and-apis
+    align: null,
+    // Several. Use CSS `text-align` instead,
+    aLink: null,
+    // `<body>`. Use CSS `a:active {color}` instead
+    archive: spaceSeparated,
+    // `<object>`. List of URIs to archives
+    axis: null,
+    // `<td>` and `<th>`. Use `scope` on `<th>`
+    background: null,
+    // `<body>`. Use CSS `background-image` instead
+    bgColor: null,
+    // `<body>` and table elements. Use CSS `background-color` instead
+    border: number,
+    // `<table>`. Use CSS `border-width` instead,
+    borderColor: null,
+    // `<table>`. Use CSS `border-color` instead,
+    bottomMargin: number,
+    // `<body>`
+    cellPadding: null,
+    // `<table>`
+    cellSpacing: null,
+    // `<table>`
+    char: null,
+    // Several table elements. When `align=char`, sets the character to align on
+    charOff: null,
+    // Several table elements. When `char`, offsets the alignment
+    classId: null,
+    // `<object>`
+    clear: null,
+    // `<br>`. Use CSS `clear` instead
+    code: null,
+    // `<object>`
+    codeBase: null,
+    // `<object>`
+    codeType: null,
+    // `<object>`
+    color: null,
+    // `<font>` and `<hr>`. Use CSS instead
+    compact: boolean,
+    // Lists. Use CSS to reduce space between items instead
+    declare: boolean,
+    // `<object>`
+    event: null,
+    // `<script>`
+    face: null,
+    // `<font>`. Use CSS instead
+    frame: null,
+    // `<table>`
+    frameBorder: null,
+    // `<iframe>`. Use CSS `border` instead
+    hSpace: number,
+    // `<img>` and `<object>`
+    leftMargin: number,
+    // `<body>`
+    link: null,
+    // `<body>`. Use CSS `a:link {color: *}` instead
+    longDesc: null,
+    // `<frame>`, `<iframe>`, and `<img>`. Use an `<a>`
+    lowSrc: null,
+    // `<img>`. Use a `<picture>`
+    marginHeight: number,
+    // `<body>`
+    marginWidth: number,
+    // `<body>`
+    noResize: boolean,
+    // `<frame>`
+    noHref: boolean,
+    // `<area>`. Use no href instead of an explicit `nohref`
+    noShade: boolean,
+    // `<hr>`. Use background-color and height instead of borders
+    noWrap: boolean,
+    // `<td>` and `<th>`
+    object: null,
+    // `<applet>`
+    profile: null,
+    // `<head>`
+    prompt: null,
+    // `<isindex>`
+    rev: null,
+    // `<link>`
+    rightMargin: number,
+    // `<body>`
+    rules: null,
+    // `<table>`
+    scheme: null,
+    // `<meta>`
+    scrolling: booleanish,
+    // `<frame>`. Use overflow in the child context
+    standby: null,
+    // `<object>`
+    summary: null,
+    // `<table>`
+    text: null,
+    // `<body>`. Use CSS `color` instead
+    topMargin: number,
+    // `<body>`
+    valueType: null,
+    // `<param>`
+    version: null,
+    // `<html>`. Use a doctype.
+    vAlign: null,
+    // Several. Use CSS `vertical-align` instead
+    vLink: null,
+    // `<body>`. Use CSS `a:visited {color}` instead
+    vSpace: number,
+    // `<img>` and `<object>`
+    // Non-standard Properties.
+    allowTransparency: null,
+    autoCorrect: null,
+    autoSave: null,
+    disablePictureInPicture: boolean,
+    disableRemotePlayback: boolean,
+    prefix: null,
+    property: null,
+    results: number,
+    security: null,
+    unselectable: null
+  }
+});
+const svg$1 = create({
+  space: "svg",
+  attributes: {
+    accentHeight: "accent-height",
+    alignmentBaseline: "alignment-baseline",
+    arabicForm: "arabic-form",
+    baselineShift: "baseline-shift",
+    capHeight: "cap-height",
+    className: "class",
+    clipPath: "clip-path",
+    clipRule: "clip-rule",
+    colorInterpolation: "color-interpolation",
+    colorInterpolationFilters: "color-interpolation-filters",
+    colorProfile: "color-profile",
+    colorRendering: "color-rendering",
+    crossOrigin: "crossorigin",
+    dataType: "datatype",
+    dominantBaseline: "dominant-baseline",
+    enableBackground: "enable-background",
+    fillOpacity: "fill-opacity",
+    fillRule: "fill-rule",
+    floodColor: "flood-color",
+    floodOpacity: "flood-opacity",
+    fontFamily: "font-family",
+    fontSize: "font-size",
+    fontSizeAdjust: "font-size-adjust",
+    fontStretch: "font-stretch",
+    fontStyle: "font-style",
+    fontVariant: "font-variant",
+    fontWeight: "font-weight",
+    glyphName: "glyph-name",
+    glyphOrientationHorizontal: "glyph-orientation-horizontal",
+    glyphOrientationVertical: "glyph-orientation-vertical",
+    hrefLang: "hreflang",
+    horizAdvX: "horiz-adv-x",
+    horizOriginX: "horiz-origin-x",
+    horizOriginY: "horiz-origin-y",
+    imageRendering: "image-rendering",
+    letterSpacing: "letter-spacing",
+    lightingColor: "lighting-color",
+    markerEnd: "marker-end",
+    markerMid: "marker-mid",
+    markerStart: "marker-start",
+    navDown: "nav-down",
+    navDownLeft: "nav-down-left",
+    navDownRight: "nav-down-right",
+    navLeft: "nav-left",
+    navNext: "nav-next",
+    navPrev: "nav-prev",
+    navRight: "nav-right",
+    navUp: "nav-up",
+    navUpLeft: "nav-up-left",
+    navUpRight: "nav-up-right",
+    onAbort: "onabort",
+    onActivate: "onactivate",
+    onAfterPrint: "onafterprint",
+    onBeforePrint: "onbeforeprint",
+    onBegin: "onbegin",
+    onCancel: "oncancel",
+    onCanPlay: "oncanplay",
+    onCanPlayThrough: "oncanplaythrough",
+    onChange: "onchange",
+    onClick: "onclick",
+    onClose: "onclose",
+    onCopy: "oncopy",
+    onCueChange: "oncuechange",
+    onCut: "oncut",
+    onDblClick: "ondblclick",
+    onDrag: "ondrag",
+    onDragEnd: "ondragend",
+    onDragEnter: "ondragenter",
+    onDragExit: "ondragexit",
+    onDragLeave: "ondragleave",
+    onDragOver: "ondragover",
+    onDragStart: "ondragstart",
+    onDrop: "ondrop",
+    onDurationChange: "ondurationchange",
+    onEmptied: "onemptied",
+    onEnd: "onend",
+    onEnded: "onended",
+    onError: "onerror",
+    onFocus: "onfocus",
+    onFocusIn: "onfocusin",
+    onFocusOut: "onfocusout",
+    onHashChange: "onhashchange",
+    onInput: "oninput",
+    onInvalid: "oninvalid",
+    onKeyDown: "onkeydown",
+    onKeyPress: "onkeypress",
+    onKeyUp: "onkeyup",
+    onLoad: "onload",
+    onLoadedData: "onloadeddata",
+    onLoadedMetadata: "onloadedmetadata",
+    onLoadStart: "onloadstart",
+    onMessage: "onmessage",
+    onMouseDown: "onmousedown",
+    onMouseEnter: "onmouseenter",
+    onMouseLeave: "onmouseleave",
+    onMouseMove: "onmousemove",
+    onMouseOut: "onmouseout",
+    onMouseOver: "onmouseover",
+    onMouseUp: "onmouseup",
+    onMouseWheel: "onmousewheel",
+    onOffline: "onoffline",
+    onOnline: "ononline",
+    onPageHide: "onpagehide",
+    onPageShow: "onpageshow",
+    onPaste: "onpaste",
+    onPause: "onpause",
+    onPlay: "onplay",
+    onPlaying: "onplaying",
+    onPopState: "onpopstate",
+    onProgress: "onprogress",
+    onRateChange: "onratechange",
+    onRepeat: "onrepeat",
+    onReset: "onreset",
+    onResize: "onresize",
+    onScroll: "onscroll",
+    onSeeked: "onseeked",
+    onSeeking: "onseeking",
+    onSelect: "onselect",
+    onShow: "onshow",
+    onStalled: "onstalled",
+    onStorage: "onstorage",
+    onSubmit: "onsubmit",
+    onSuspend: "onsuspend",
+    onTimeUpdate: "ontimeupdate",
+    onToggle: "ontoggle",
+    onUnload: "onunload",
+    onVolumeChange: "onvolumechange",
+    onWaiting: "onwaiting",
+    onZoom: "onzoom",
+    overlinePosition: "overline-position",
+    overlineThickness: "overline-thickness",
+    paintOrder: "paint-order",
+    panose1: "panose-1",
+    pointerEvents: "pointer-events",
+    referrerPolicy: "referrerpolicy",
+    renderingIntent: "rendering-intent",
+    shapeRendering: "shape-rendering",
+    stopColor: "stop-color",
+    stopOpacity: "stop-opacity",
+    strikethroughPosition: "strikethrough-position",
+    strikethroughThickness: "strikethrough-thickness",
+    strokeDashArray: "stroke-dasharray",
+    strokeDashOffset: "stroke-dashoffset",
+    strokeLineCap: "stroke-linecap",
+    strokeLineJoin: "stroke-linejoin",
+    strokeMiterLimit: "stroke-miterlimit",
+    strokeOpacity: "stroke-opacity",
+    strokeWidth: "stroke-width",
+    tabIndex: "tabindex",
+    textAnchor: "text-anchor",
+    textDecoration: "text-decoration",
+    textRendering: "text-rendering",
+    transformOrigin: "transform-origin",
+    typeOf: "typeof",
+    underlinePosition: "underline-position",
+    underlineThickness: "underline-thickness",
+    unicodeBidi: "unicode-bidi",
+    unicodeRange: "unicode-range",
+    unitsPerEm: "units-per-em",
+    vAlphabetic: "v-alphabetic",
+    vHanging: "v-hanging",
+    vIdeographic: "v-ideographic",
+    vMathematical: "v-mathematical",
+    vectorEffect: "vector-effect",
+    vertAdvY: "vert-adv-y",
+    vertOriginX: "vert-origin-x",
+    vertOriginY: "vert-origin-y",
+    wordSpacing: "word-spacing",
+    writingMode: "writing-mode",
+    xHeight: "x-height",
+    // These were camelcased in Tiny. Now lowercased in SVG 2
+    playbackOrder: "playbackorder",
+    timelineBegin: "timelinebegin"
+  },
+  transform: caseSensitiveTransform,
+  properties: {
+    about: commaOrSpaceSeparated,
+    accentHeight: number,
+    accumulate: null,
+    additive: null,
+    alignmentBaseline: null,
+    alphabetic: number,
+    amplitude: number,
+    arabicForm: null,
+    ascent: number,
+    attributeName: null,
+    attributeType: null,
+    azimuth: number,
+    bandwidth: null,
+    baselineShift: null,
+    baseFrequency: null,
+    baseProfile: null,
+    bbox: null,
+    begin: null,
+    bias: number,
+    by: null,
+    calcMode: null,
+    capHeight: number,
+    className: spaceSeparated,
+    clip: null,
+    clipPath: null,
+    clipPathUnits: null,
+    clipRule: null,
+    color: null,
+    colorInterpolation: null,
+    colorInterpolationFilters: null,
+    colorProfile: null,
+    colorRendering: null,
+    content: null,
+    contentScriptType: null,
+    contentStyleType: null,
+    crossOrigin: null,
+    cursor: null,
+    cx: null,
+    cy: null,
+    d: null,
+    dataType: null,
+    defaultAction: null,
+    descent: number,
+    diffuseConstant: number,
+    direction: null,
+    display: null,
+    dur: null,
+    divisor: number,
+    dominantBaseline: null,
+    download: boolean,
+    dx: null,
+    dy: null,
+    edgeMode: null,
+    editable: null,
+    elevation: number,
+    enableBackground: null,
+    end: null,
+    event: null,
+    exponent: number,
+    externalResourcesRequired: null,
+    fill: null,
+    fillOpacity: number,
+    fillRule: null,
+    filter: null,
+    filterRes: null,
+    filterUnits: null,
+    floodColor: null,
+    floodOpacity: null,
+    focusable: null,
+    focusHighlight: null,
+    fontFamily: null,
+    fontSize: null,
+    fontSizeAdjust: null,
+    fontStretch: null,
+    fontStyle: null,
+    fontVariant: null,
+    fontWeight: null,
+    format: null,
+    fr: null,
+    from: null,
+    fx: null,
+    fy: null,
+    g1: commaSeparated,
+    g2: commaSeparated,
+    glyphName: commaSeparated,
+    glyphOrientationHorizontal: null,
+    glyphOrientationVertical: null,
+    glyphRef: null,
+    gradientTransform: null,
+    gradientUnits: null,
+    handler: null,
+    hanging: number,
+    hatchContentUnits: null,
+    hatchUnits: null,
+    height: null,
+    href: null,
+    hrefLang: null,
+    horizAdvX: number,
+    horizOriginX: number,
+    horizOriginY: number,
+    id: null,
+    ideographic: number,
+    imageRendering: null,
+    initialVisibility: null,
+    in: null,
+    in2: null,
+    intercept: number,
+    k: number,
+    k1: number,
+    k2: number,
+    k3: number,
+    k4: number,
+    kernelMatrix: commaOrSpaceSeparated,
+    kernelUnitLength: null,
+    keyPoints: null,
+    // SEMI_COLON_SEPARATED
+    keySplines: null,
+    // SEMI_COLON_SEPARATED
+    keyTimes: null,
+    // SEMI_COLON_SEPARATED
+    kerning: null,
+    lang: null,
+    lengthAdjust: null,
+    letterSpacing: null,
+    lightingColor: null,
+    limitingConeAngle: number,
+    local: null,
+    markerEnd: null,
+    markerMid: null,
+    markerStart: null,
+    markerHeight: null,
+    markerUnits: null,
+    markerWidth: null,
+    mask: null,
+    maskContentUnits: null,
+    maskUnits: null,
+    mathematical: null,
+    max: null,
+    media: null,
+    mediaCharacterEncoding: null,
+    mediaContentEncodings: null,
+    mediaSize: number,
+    mediaTime: null,
+    method: null,
+    min: null,
+    mode: null,
+    name: null,
+    navDown: null,
+    navDownLeft: null,
+    navDownRight: null,
+    navLeft: null,
+    navNext: null,
+    navPrev: null,
+    navRight: null,
+    navUp: null,
+    navUpLeft: null,
+    navUpRight: null,
+    numOctaves: null,
+    observer: null,
+    offset: null,
+    onAbort: null,
+    onActivate: null,
+    onAfterPrint: null,
+    onBeforePrint: null,
+    onBegin: null,
+    onCancel: null,
+    onCanPlay: null,
+    onCanPlayThrough: null,
+    onChange: null,
+    onClick: null,
+    onClose: null,
+    onCopy: null,
+    onCueChange: null,
+    onCut: null,
+    onDblClick: null,
+    onDrag: null,
+    onDragEnd: null,
+    onDragEnter: null,
+    onDragExit: null,
+    onDragLeave: null,
+    onDragOver: null,
+    onDragStart: null,
+    onDrop: null,
+    onDurationChange: null,
+    onEmptied: null,
+    onEnd: null,
+    onEnded: null,
+    onError: null,
+    onFocus: null,
+    onFocusIn: null,
+    onFocusOut: null,
+    onHashChange: null,
+    onInput: null,
+    onInvalid: null,
+    onKeyDown: null,
+    onKeyPress: null,
+    onKeyUp: null,
+    onLoad: null,
+    onLoadedData: null,
+    onLoadedMetadata: null,
+    onLoadStart: null,
+    onMessage: null,
+    onMouseDown: null,
+    onMouseEnter: null,
+    onMouseLeave: null,
+    onMouseMove: null,
+    onMouseOut: null,
+    onMouseOver: null,
+    onMouseUp: null,
+    onMouseWheel: null,
+    onOffline: null,
+    onOnline: null,
+    onPageHide: null,
+    onPageShow: null,
+    onPaste: null,
+    onPause: null,
+    onPlay: null,
+    onPlaying: null,
+    onPopState: null,
+    onProgress: null,
+    onRateChange: null,
+    onRepeat: null,
+    onReset: null,
+    onResize: null,
+    onScroll: null,
+    onSeeked: null,
+    onSeeking: null,
+    onSelect: null,
+    onShow: null,
+    onStalled: null,
+    onStorage: null,
+    onSubmit: null,
+    onSuspend: null,
+    onTimeUpdate: null,
+    onToggle: null,
+    onUnload: null,
+    onVolumeChange: null,
+    onWaiting: null,
+    onZoom: null,
+    opacity: null,
+    operator: null,
+    order: null,
+    orient: null,
+    orientation: null,
+    origin: null,
+    overflow: null,
+    overlay: null,
+    overlinePosition: number,
+    overlineThickness: number,
+    paintOrder: null,
+    panose1: null,
+    path: null,
+    pathLength: number,
+    patternContentUnits: null,
+    patternTransform: null,
+    patternUnits: null,
+    phase: null,
+    ping: spaceSeparated,
+    pitch: null,
+    playbackOrder: null,
+    pointerEvents: null,
+    points: null,
+    pointsAtX: number,
+    pointsAtY: number,
+    pointsAtZ: number,
+    preserveAlpha: null,
+    preserveAspectRatio: null,
+    primitiveUnits: null,
+    propagate: null,
+    property: commaOrSpaceSeparated,
+    r: null,
+    radius: null,
+    referrerPolicy: null,
+    refX: null,
+    refY: null,
+    rel: commaOrSpaceSeparated,
+    rev: commaOrSpaceSeparated,
+    renderingIntent: null,
+    repeatCount: null,
+    repeatDur: null,
+    requiredExtensions: commaOrSpaceSeparated,
+    requiredFeatures: commaOrSpaceSeparated,
+    requiredFonts: commaOrSpaceSeparated,
+    requiredFormats: commaOrSpaceSeparated,
+    resource: null,
+    restart: null,
+    result: null,
+    rotate: null,
+    rx: null,
+    ry: null,
+    scale: null,
+    seed: null,
+    shapeRendering: null,
+    side: null,
+    slope: null,
+    snapshotTime: null,
+    specularConstant: number,
+    specularExponent: number,
+    spreadMethod: null,
+    spacing: null,
+    startOffset: null,
+    stdDeviation: null,
+    stemh: null,
+    stemv: null,
+    stitchTiles: null,
+    stopColor: null,
+    stopOpacity: null,
+    strikethroughPosition: number,
+    strikethroughThickness: number,
+    string: null,
+    stroke: null,
+    strokeDashArray: commaOrSpaceSeparated,
+    strokeDashOffset: null,
+    strokeLineCap: null,
+    strokeLineJoin: null,
+    strokeMiterLimit: number,
+    strokeOpacity: number,
+    strokeWidth: null,
+    style: null,
+    surfaceScale: number,
+    syncBehavior: null,
+    syncBehaviorDefault: null,
+    syncMaster: null,
+    syncTolerance: null,
+    syncToleranceDefault: null,
+    systemLanguage: commaOrSpaceSeparated,
+    tabIndex: number,
+    tableValues: null,
+    target: null,
+    targetX: number,
+    targetY: number,
+    textAnchor: null,
+    textDecoration: null,
+    textRendering: null,
+    textLength: null,
+    timelineBegin: null,
+    title: null,
+    transformBehavior: null,
+    type: null,
+    typeOf: commaOrSpaceSeparated,
+    to: null,
+    transform: null,
+    transformOrigin: null,
+    u1: null,
+    u2: null,
+    underlinePosition: number,
+    underlineThickness: number,
+    unicode: null,
+    unicodeBidi: null,
+    unicodeRange: null,
+    unitsPerEm: number,
+    values: null,
+    vAlphabetic: number,
+    vMathematical: number,
+    vectorEffect: null,
+    vHanging: number,
+    vIdeographic: number,
+    version: null,
+    vertAdvY: number,
+    vertOriginX: number,
+    vertOriginY: number,
+    viewBox: null,
+    viewTarget: null,
+    visibility: null,
+    width: null,
+    widths: null,
+    wordSpacing: null,
+    writingMode: null,
+    x: null,
+    x1: null,
+    x2: null,
+    xChannelSelector: null,
+    xHeight: number,
+    y: null,
+    y1: null,
+    y2: null,
+    yChannelSelector: null,
+    z: null,
+    zoomAndPan: null
+  }
+});
+const valid = /^data[-\w.:]+$/i;
+const dash = /-[a-z]/g;
+const cap$1 = /[A-Z]/g;
+function find(schema2, value) {
+  const normal = normalize$1(value);
+  let prop = value;
+  let Type2 = Info;
+  if (normal in schema2.normal) {
+    return schema2.property[schema2.normal[normal]];
+  }
+  if (normal.length > 4 && normal.slice(0, 4) === "data" && valid.test(value)) {
+    if (value.charAt(4) === "-") {
+      const rest = value.slice(5).replace(dash, camelcase);
+      prop = "data" + rest.charAt(0).toUpperCase() + rest.slice(1);
+    } else {
+      const rest = value.slice(4);
+      if (!dash.test(rest)) {
+        let dashes = rest.replace(cap$1, kebab);
+        if (dashes.charAt(0) !== "-") {
+          dashes = "-" + dashes;
+        }
+        value = "data" + dashes;
+      }
+    }
+    Type2 = DefinedInfo;
+  }
+  return new Type2(prop, value);
+}
+function kebab($0) {
+  return "-" + $0.toLowerCase();
+}
+function camelcase($0) {
+  return $0.charAt(1).toUpperCase();
+}
+const html = merge([xml, xlink, xmlns, aria, html$1], "html");
+const svg = merge([xml, xlink, xmlns, aria, svg$1], "svg");
 function stringify(values2) {
   return values2.join(" ").trim();
 }
@@ -48794,7 +49964,7 @@ function toJsxRuntime(tree, options) {
     ignoreInvalidStyle: options.ignoreInvalidStyle || false,
     passKeys: options.passKeys !== false,
     passNode: options.passNode || false,
-    schema: options.space === "svg" ? svg$1 : html$1,
+    schema: options.space === "svg" ? svg : html,
     stylePropertyNameCase: options.stylePropertyNameCase || "dom",
     tableCellAlignToStyle: options.tableCellAlignToStyle !== false
   };
@@ -48833,7 +50003,7 @@ function element(state, node2, key) {
   const parentSchema = state.schema;
   let schema2 = parentSchema;
   if (node2.tagName.toLowerCase() === "svg" && parentSchema.space === "html") {
-    schema2 = svg$1;
+    schema2 = svg;
     state.schema = schema2;
   }
   state.ancestors.push(node2);
@@ -48876,7 +50046,7 @@ function mdxJsxElement(state, node2, key) {
   const parentSchema = state.schema;
   let schema2 = parentSchema;
   if (node2.name === "svg" && parentSchema.space === "html") {
-    schema2 = svg$1;
+    schema2 = svg;
     state.schema = schema2;
   }
   state.ancestors.push(node2);
@@ -49025,7 +50195,7 @@ function createChildren(state, node2) {
   return children;
 }
 function createProperty(state, prop, value) {
-  const info = find$1(state.schema, prop);
+  const info = find(state.schema, prop);
   if (value === null || value === void 0 || typeof value === "number" && Number.isNaN(value)) {
     return;
   }
