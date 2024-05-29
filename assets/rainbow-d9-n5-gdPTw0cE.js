@@ -4,11 +4,11 @@ var __publicField = (obj, key, value) => {
   __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
   return value;
 };
-import { i as index$2, D as DOM_KEY_WIDGET, C as CssVars, d as utils$2, b as useGlobalHandlers, t as toIntlLabel, U as UnwrappedButton, B as ButtonInk, I as IntlLabel, e as ButtonFill } from "./rainbow-d9-n2-ZijmlPcS.js";
-import { R as React, r as reactExports, q as qe } from "./react-base-8dmOZIh-.js";
-import { V as VUtils, r as registerWidget, g as useCreateEventBus, M as MUtils, P as PPUtils, a as useThrottler, e as useForceUpdate, S as StandaloneRoot, m as ExternalDefMismatchIndicator } from "./rainbow-d9-n1-XAGjs1Nc.js";
-import { T as Tag, p as tags, V as ViewPlugin, s as syntaxTree, H as HighlightStyle, q as defaultHighlightStyle, r as syntaxHighlighting, u as styleTags, D as Decoration, I as InlineContext, W as WidgetType, v as EditorView, w as EditorState, x as basicSetup, y as keymap, z as indentWithTab, A as markdown, B as javascript, C as markdownLanguage, F as lintGutter, G as linter, J as json, K as jsonParseLinter } from "./vendor-IJfZytkt.js";
-import { a as index, b as index$2$1, i as index$1, p as parseDoc } from "./rainbow-d9-n3-N187UjDI.js";
+import { i as index$2, D as DOM_KEY_WIDGET, C as CssVars, d as utils$2, b as useGlobalHandlers, t as toIntlLabel, U as UnwrappedButton, B as ButtonInk, I as IntlLabel, e as ButtonFill } from "./rainbow-d9-n2-r-Dv2r4a.js";
+import { R as React, r as reactExports, q as qe } from "./react-base-CBbsC6IK.js";
+import { V as VUtils, r as registerWidget, g as useCreateEventBus, M as MUtils, P as PPUtils, a as useThrottler, e as useForceUpdate, S as StandaloneRoot, m as ExternalDefMismatchIndicator } from "./rainbow-d9-n1-UUyvC56G.js";
+import { T as Tag, r as tags, V as ViewPlugin, u as syntaxTree, H as HighlightStyle, v as defaultHighlightStyle, w as syntaxHighlighting, x as styleTags, D as Decoration, I as InlineContext, W as WidgetType, y as EditorView, z as EditorState, A as basicSetup, B as keymap, C as indentWithTab, F as markdown, G as javascript, J as markdownLanguage, K as lintGutter, L as linter, N as json, O as jsonParseLinter } from "./vendor--jRDi6-0.js";
+import { a as index, b as index$2$1, i as index$1, p as parseDoc } from "./rainbow-d9-n3-eGcUgbei.js";
 var PlaygroundWidgetGroupKey;
 (function(PlaygroundWidgetGroupKey2) {
   PlaygroundWidgetGroupKey2["CONTAINERS"] = "container-group";

@@ -4,10 +4,10 @@ var __publicField = (obj, key, value) => {
   __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
   return value;
 };
-import { c as createLogger, N as NUtils, V as VUtils, k as MonitorNodeAttributes, l as Reaction, E as ExternalDefIndicator, P as PPUtils } from "./rainbow-d9-n1-XAGjs1Nc.js";
-import { O as OptionItemSort, R as REACTION_REFRESH_OPTIONS, c as GlobalEventPrefix } from "./rainbow-d9-n2-ZijmlPcS.js";
-import { f as fromMarkdown, g as gfmTableFromMarkdown, a as gfmStrikethroughFromMarkdown, b as gfmFootnoteFromMarkdown, c as gfmTaskListItemFromMarkdown, d as frontmatterFromMarkdown } from "./mdast-FHnHHeGa.js";
-import { g as gfmTable, h as gfmStrikethrough, i as gfmFootnote, j as gfmTaskListItem, k as frontmatter } from "./micromark-FOt4i_z9.js";
+import { c as createLogger, N as NUtils, V as VUtils, k as MonitorNodeAttributes, l as Reaction, E as ExternalDefIndicator, P as PPUtils } from "./rainbow-d9-n1-UUyvC56G.js";
+import { O as OptionItemSort, R as REACTION_REFRESH_OPTIONS, c as GlobalEventPrefix } from "./rainbow-d9-n2-r-Dv2r4a.js";
+import { f as fromMarkdown, g as gfmTableFromMarkdown, a as gfmStrikethroughFromMarkdown, b as gfmFootnoteFromMarkdown, c as gfmTaskListItemFromMarkdown, d as frontmatterFromMarkdown } from "./mdast-kExnZAaq.js";
+import { g as gfmTable, h as gfmStrikethrough, i as gfmFootnote, j as gfmTaskListItem, k as frontmatter } from "./micromark-SZOvble_.js";
 const AsyncFunction = Object.getPrototypeOf(async function() {
 }).constructor;
 var ParsedNodeType;
@@ -29,15 +29,14 @@ var ParsedNodeType;
   ParsedNodeType2[ParsedNodeType2["LINK_REFERENCE"] = 14] = "LINK_REFERENCE";
   ParsedNodeType2[ParsedNodeType2["IMAGE"] = 15] = "IMAGE";
   ParsedNodeType2[ParsedNodeType2["IMAGE_REFERENCE"] = 16] = "IMAGE_REFERENCE";
-  ParsedNodeType2[ParsedNodeType2["FOOTNOTE"] = 17] = "FOOTNOTE";
-  ParsedNodeType2[ParsedNodeType2["FOOTNOTE_DEFINITION"] = 18] = "FOOTNOTE_DEFINITION";
-  ParsedNodeType2[ParsedNodeType2["FOOTNOTE_REFERENCE"] = 19] = "FOOTNOTE_REFERENCE";
-  ParsedNodeType2[ParsedNodeType2["BREAK"] = 20] = "BREAK";
-  ParsedNodeType2[ParsedNodeType2["THEMATIC_BREAK"] = 21] = "THEMATIC_BREAK";
-  ParsedNodeType2[ParsedNodeType2["BLOCKQUOTE"] = 22] = "BLOCKQUOTE";
-  ParsedNodeType2[ParsedNodeType2["HTML"] = 23] = "HTML";
-  ParsedNodeType2[ParsedNodeType2["DEFINITION"] = 24] = "DEFINITION";
-  ParsedNodeType2[ParsedNodeType2["YAML"] = 25] = "YAML";
+  ParsedNodeType2[ParsedNodeType2["FOOTNOTE_DEFINITION"] = 17] = "FOOTNOTE_DEFINITION";
+  ParsedNodeType2[ParsedNodeType2["FOOTNOTE_REFERENCE"] = 18] = "FOOTNOTE_REFERENCE";
+  ParsedNodeType2[ParsedNodeType2["BREAK"] = 19] = "BREAK";
+  ParsedNodeType2[ParsedNodeType2["THEMATIC_BREAK"] = 20] = "THEMATIC_BREAK";
+  ParsedNodeType2[ParsedNodeType2["BLOCKQUOTE"] = 21] = "BLOCKQUOTE";
+  ParsedNodeType2[ParsedNodeType2["HTML"] = 22] = "HTML";
+  ParsedNodeType2[ParsedNodeType2["DEFINITION"] = 23] = "DEFINITION";
+  ParsedNodeType2[ParsedNodeType2["YAML"] = 24] = "YAML";
 })(ParsedNodeType || (ParsedNodeType = {}));
 const N3Logger = createLogger();
 class AbstractPreparser {
@@ -295,19 +294,6 @@ const _EmphasisPreparser = class _EmphasisPreparser extends AbstractAstNodePrepa
 };
 __publicField(_EmphasisPreparser, "TYPE", "emphasis");
 let EmphasisPreparser = _EmphasisPreparser;
-const _FootnotePreparser = class _FootnotePreparser extends AbstractAstNodePreparser {
-  getSupportedType() {
-    return _FootnotePreparser.TYPE;
-  }
-  isChildConcerned(_child) {
-    return false;
-  }
-  parse(node) {
-    return { type: ParsedNodeType.FOOTNOTE, content: node };
-  }
-};
-__publicField(_FootnotePreparser, "TYPE", "footnote");
-let FootnotePreparser = _FootnotePreparser;
 const _FootnoteReferencePreparser = class _FootnoteReferencePreparser extends AbstractAstNodePreparser {
   getSupportedType() {
     return _FootnoteReferencePreparser.TYPE;
@@ -477,7 +463,6 @@ const createOrGetPreparserRepositorySingleton = () => {
     repo.register(new LinkReferencePreparser(repo));
     repo.register(new ImagePreparser(repo));
     repo.register(new ImageReferencePreparser(repo));
-    repo.register(new FootnotePreparser(repo));
     repo.register(new FootnoteDefinitionPreparser(repo));
     repo.register(new FootnoteReferencePreparser(repo));
     repo.register(new BreakPreparser(repo));
@@ -533,19 +518,19 @@ class DepthFirstVisitor {
 }
 class AstHelper extends AbstractParentPreparser {
   askRoot(content) {
-    return fromMarkdown(content ?? "", {
+    return fromMarkdown(content ?? "", "utf8", {
       extensions: [
-        gfmTable,
+        gfmTable(),
         gfmStrikethrough(),
         gfmFootnote(),
-        gfmTaskListItem,
+        gfmTaskListItem(),
         frontmatter(["yaml", "toml"])
       ],
       mdastExtensions: [
-        gfmTableFromMarkdown,
-        gfmStrikethroughFromMarkdown,
+        gfmTableFromMarkdown(),
+        gfmStrikethroughFromMarkdown(),
         gfmFootnoteFromMarkdown(),
-        gfmTaskListItemFromMarkdown,
+        gfmTaskListItemFromMarkdown(),
         frontmatterFromMarkdown(["yaml", "toml"])
       ]
     });
@@ -568,7 +553,6 @@ class AstHelper extends AbstractParentPreparser {
       LinkReferencePreparser.TYPE,
       ImagePreparser.TYPE,
       ImageReferencePreparser.TYPE,
-      FootnotePreparser.TYPE,
       FootnoteDefinitionPreparser.TYPE,
       FootnoteReferencePreparser.TYPE,
       BreakPreparser.TYPE,
@@ -877,20 +861,6 @@ const _FootnoteDefinitionParser = class _FootnoteDefinitionParser extends Abstra
 };
 __publicField(_FootnoteDefinitionParser, "TYPE", "footnoteDefinition");
 let FootnoteDefinitionParser = _FootnoteDefinitionParser;
-const _FootnoteParser = class _FootnoteParser extends AbstractSemanticNodeParser {
-  getSupportedType() {
-    return _FootnoteParser.TYPE;
-  }
-  parsePreparsed(preparsed) {
-    return {
-      type: ParsedNodeType.FOOTNOTE,
-      preparsed,
-      children: this.parseManyNative(preparsed.content.children ?? [])
-    };
-  }
-};
-__publicField(_FootnoteParser, "TYPE", "footnote");
-let FootnoteParser = _FootnoteParser;
 const _FootnoteReferenceParser = class _FootnoteReferenceParser extends AbstractSemanticNodeParser {
   getSupportedType() {
     return _FootnoteReferenceParser.TYPE;
@@ -1128,7 +1098,6 @@ const _ListParser = class _ListParser extends AbstractSemanticNodeWidgetParser {
           ParsedNodeType.INLINE_CODE,
           ParsedNodeType.IMAGE,
           ParsedNodeType.IMAGE_REFERENCE,
-          ParsedNodeType.FOOTNOTE,
           ParsedNodeType.FOOTNOTE_REFERENCE,
           ParsedNodeType.LINK,
           ParsedNodeType.LINK_REFERENCE
@@ -1425,7 +1394,6 @@ const createOrGetParserRepositorySingleton = () => {
     repo.register(new LinkReferenceParser(repo));
     repo.register(new ImageParser(repo));
     repo.register(new ImageReferenceParser(repo));
-    repo.register(new FootnoteParser(repo));
     repo.register(new FootnoteDefinitionParser(repo));
     repo.register(new FootnoteReferenceParser(repo));
     repo.register(new BreakParser(repo));
@@ -1507,7 +1475,6 @@ var index$2 = /* @__PURE__ */ Object.freeze({
   DeleteParser,
   EmphasisParser,
   FootnoteDefinitionParser,
-  FootnoteParser,
   FootnoteReferenceParser,
   HeadingParser,
   HtmlParser,
@@ -3980,6 +3947,7 @@ class N2BadgeTranslator extends SpecificWidgetTranslator {
     ];
   }
 }
+const N2RibsInitExpandedBuild = createSyncSnippetBuild("initExpanded", ["row", "index"]);
 class AbstractRibsTranslator extends SpecificArrayWidgetTranslator {
   beautifyProperties(def) {
     return super.beautifyProperties(this.beautifyColumnSpan(def, 12));
@@ -3992,6 +3960,9 @@ class AbstractRibsTranslator extends SpecificArrayWidgetTranslator {
   }
   getAttributeNamesMapping() {
     return this.buildDefaultAttributeNamesMapping({ [`${this.getSupportedType()}.elementTitle`]: "caption" });
+  }
+  getAttributeValueBuilders() {
+    return [N2RibsInitExpandedBuild];
   }
 }
 class N2RibsTranslator extends AbstractRibsTranslator {
@@ -4059,6 +4030,7 @@ class N2TableRowOperatorsTranslator extends SpecificWidgetTranslator {
     return false;
   }
 }
+const N2TableInitExpandedBuild = createSyncSnippetBuild("initExpanded", ["row", "index"]);
 class N2TableTranslator extends SpecificArrayWidgetTranslator {
   getSupportedType() {
     return N2WidgetType.TABLE;
@@ -4075,7 +4047,8 @@ class N2TableTranslator extends SpecificArrayWidgetTranslator {
   getAttributeValueBuilders() {
     return [
       ...super.getAttributeValueBuilders(),
-      N2TableHeadersBuild
+      N2TableHeadersBuild,
+      N2TableInitExpandedBuild
     ];
   }
   postWork(def) {
@@ -4452,6 +4425,7 @@ var index = /* @__PURE__ */ Object.freeze({
   N2RadioTranslator,
   N2RadioValuesBuild,
   N2RadiosTranslator,
+  N2RibsInitExpandedBuild,
   N2RibsTranslator,
   N2RibsViewTranslator,
   N2SectionTranslator,
@@ -4459,6 +4433,7 @@ var index = /* @__PURE__ */ Object.freeze({
   N2TabDataChangedBuild,
   N2TabTranslator,
   N2TableHeadersBuild,
+  N2TableInitExpandedBuild,
   N2TableRowOperatorsTranslator,
   N2TableTranslator,
   N2TabsTranslator,

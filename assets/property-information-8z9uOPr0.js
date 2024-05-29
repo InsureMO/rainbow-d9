@@ -1,4 +1,4 @@
-import { i as immutable } from "./vendor-IJfZytkt.js";
+import { i as immutable } from "./vendor--jRDi6-0.js";
 let Schema$3 = class Schema {
   /**
    * @constructor
@@ -1840,9 +1840,9 @@ function camelcase($0) {
   return $0.charAt(1).toUpperCase();
 }
 export {
-  find$1 as a,
-  hastToReact as b,
-  html$2 as c,
+  html$2 as a,
+  find$1 as b,
+  hastToReact as c,
   find_1 as f,
   html_1 as h,
   normalize_1 as n,

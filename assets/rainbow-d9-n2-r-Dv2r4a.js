@@ -4,9 +4,9 @@ var __publicField = (obj, key, value) => {
   __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
   return value;
 };
-import { a as color, M as MaskedNumber, e as MaskedDate, g as MaskedFunction, j as MaskedPattern, k as MaskedRange, l as MaskedRegExp, o as MaskedDynamic } from "./vendor-IJfZytkt.js";
-import { R as React, r as reactExports, q as qe, W as We, u as useIMask } from "./react-base-8dmOZIh-.js";
-import { c as createLogger, V as VUtils, P as PPUtils, r as registerWidget, u as useRootEventBus, M as MUtils, N as NUtils, d as Wrapper, e as useForceUpdate, f as MBUtils, b as useWrapperEventBus, W as WrapperEventTypes, g as useCreateEventBus, h as PROPERTY_PATH_ME, i as useDefaultAttributeValues, j as useAttributesWatch, R as RootEventTypes } from "./rainbow-d9-n1-XAGjs1Nc.js";
+import { a as color, M as MaskedNumber, e as MaskedDate, g as MaskedFunction, j as MaskedPattern, k as MaskedRange, p as MaskedRegExp, q as MaskedDynamic } from "./vendor--jRDi6-0.js";
+import { R as React, r as reactExports, q as qe, W as We, u as useIMask } from "./react-base-CBbsC6IK.js";
+import { c as createLogger, V as VUtils, P as PPUtils, r as registerWidget, u as useRootEventBus, M as MUtils, N as NUtils, d as Wrapper, e as useForceUpdate, f as MBUtils, b as useWrapperEventBus, W as WrapperEventTypes, g as useCreateEventBus, h as PROPERTY_PATH_ME, i as useDefaultAttributeValues, j as useAttributesWatch, R as RootEventTypes } from "./rainbow-d9-n1-UUyvC56G.js";
 import { d as dayjs } from "./dayjs-ZafkOS5_.js";
 const DOM_KEY_WIDGET = "data-w";
 const DOM_ID_WIDGET = "data-wid";
@@ -1825,6 +1825,10 @@ var GlobalEventPrefix;
   GlobalEventPrefix2["RECALC_TREE_NODE_AND_CHILDREN"] = "recalc-tree-node-and-children";
   GlobalEventPrefix2["EXPAND_TREE_NODE"] = "expand-tree-node";
   GlobalEventPrefix2["COLLAPSE_TREE_NODE"] = "collapse-tree-node";
+  GlobalEventPrefix2["EXPAND_RIBS_ELEMENT"] = "expand-ribs-element";
+  GlobalEventPrefix2["COLLAPSE_RIBS_ELEMENT"] = "collapse-ribs-element";
+  GlobalEventPrefix2["EXPAND_TABLE_ROW"] = "expand-table-row";
+  GlobalEventPrefix2["COLLAPSE_TABLE_ROW"] = "collapse-table-row";
   GlobalEventPrefix2["CUSTOM"] = "custom";
   GlobalEventPrefix2["SECTION_EXPANDED"] = "section-expanded";
   GlobalEventPrefix2["SECTION_COLLAPSED"] = "section-collapsed";
@@ -6486,6 +6490,17 @@ const ARibRowHeader = qe.div.attrs({ [DOM_KEY_WIDGET]: "d9-rib-row-header" })`
     &[data-expanded=true] {
         cursor: default;
     }
+
+    &[data-show-row-index=false] {
+        > div[data-w=d9-rib-row-index] {
+            width: 0;
+            overflow: hidden;
+        }
+
+        > div[data-w=d9-rib-row-header-content] {
+            margin-left: calc(-1 * ${CssVars.SECTION_BODY_PADDING});
+        }
+    }
 `;
 const ARibRowIndex = qe.div.attrs({ [DOM_KEY_WIDGET]: "d9-rib-row-index" })`
     display: flex;
@@ -6664,20 +6679,50 @@ const RibRowOperators = (props) => {
   );
 };
 const DEFAULTS = {
-  USE_SECTION_STYLE_ICONS: false
+  USE_SECTION_STYLE_ICONS: false,
+  SHOW_ROW_INDEX: true
 };
 const setRibsDefaults = (defaults) => {
   DEFAULTS.USE_SECTION_STYLE_ICONS = defaults.useSectionStyleIcons ?? DEFAULTS.USE_SECTION_STYLE_ICONS;
+  DEFAULTS.SHOW_ROW_INDEX = defaults.showRowIndex ?? DEFAULTS.SHOW_ROW_INDEX;
 };
 const isUseSectionStyleIcons = () => DEFAULTS.USE_SECTION_STYLE_ICONS;
+const isShowRowIndex = () => DEFAULTS.SHOW_ROW_INDEX;
 var utils$1 = /* @__PURE__ */ Object.freeze({
   __proto__: null,
+  isShowRowIndex,
   isUseSectionStyleIcons,
   setRibsDefaults
 });
 const RibRow = (props) => {
-  const { caption, useSectionStyleIcons = isUseSectionStyleIcons(), $wrapped, $array: { elementIndex, removable, removeElement }, children } = props;
-  const [expanded, setExpanded] = reactExports.useState(false);
+  const { marker = "", caption, useSectionStyleIcons = isUseSectionStyleIcons(), showRowIndex = isShowRowIndex(), initExpanded, $wrapped, $array: { elementIndex, removable, removeElement, getElementKey }, children } = props;
+  const { on: onGlobal, off: offGlobal } = useGlobalEventBus();
+  const [expanded, setExpanded] = reactExports.useState(() => {
+    if (initExpanded) {
+      return initExpanded($wrapped.$model, elementIndex);
+    }
+    return false;
+  });
+  const rowMarker = getElementKey != null ? getElementKey($wrapped.$model) : void 0;
+  reactExports.useEffect(() => {
+    const onCustomEvent = (_, prefix, clipped) => {
+      if (clipped !== `${marker}-${rowMarker ?? elementIndex}`) {
+        return;
+      }
+      switch (prefix) {
+        case GlobalEventPrefix.EXPAND_RIBS_ELEMENT:
+          setExpanded(true);
+          break;
+        case GlobalEventPrefix.COLLAPSE_RIBS_ELEMENT:
+          setExpanded(false);
+          break;
+      }
+    };
+    onGlobal && onGlobal(GlobalEventTypes.CUSTOM_EVENT, onCustomEvent);
+    return () => {
+      offGlobal && offGlobal(GlobalEventTypes.CUSTOM_EVENT, onCustomEvent);
+    };
+  }, [onGlobal, offGlobal, marker, rowMarker, elementIndex]);
   const expand = () => setExpanded(true);
   const collapse = () => setExpanded(false);
   const onRowClicked = () => {
@@ -6690,7 +6735,7 @@ const RibRow = (props) => {
     null,
     React.createElement(
       ARibRowHeader,
-      { "data-expanded": expanded, onClick: onRowClicked },
+      { "data-expanded": expanded, "data-show-row-index": showRowIndex, onClick: onRowClicked },
       React.createElement(
         ARibRowIndex,
         null,
@@ -7489,9 +7534,14 @@ const CustomButton = (props) => {
   return React.createElement(Wrapper, { "$root": $root, "$model": $model, "$p2r": $p2r, ...operatorDef });
 };
 const TableRowOperators = (props) => {
-  const { expandable = false, removable = false, rowIndex, rowSpan, $wrapped, omitDefaultRowOperators = false, rowOperators } = props;
+  const { expandable = false, removable = false, rowIndex, rowSpan, $wrapped, omitDefaultRowOperators = false, rowOperators, initExpanded } = props;
   const { on, off, fire } = useTableEventBus();
-  const [expanded, setExpanded] = reactExports.useState(false);
+  const [expanded, setExpanded] = reactExports.useState(() => {
+    if (initExpanded) {
+      return initExpanded($wrapped.$model, rowIndex);
+    }
+    return false;
+  });
   reactExports.useEffect(() => {
     const onRowExpanded = (expandedRowIndex) => {
       if (expandedRowIndex === rowIndex) {
@@ -7539,11 +7589,37 @@ const TableRowOperators = (props) => {
   );
 };
 const TableRow = (props) => {
-  const { headers, expandable = false, hideClassicCellsOnExpandable = false, clickToExpand = false, rowIndexStartsFrom = 1, omitDefaultRowOperators, rowOperators, $wrapped, $array: { removable, elementIndex, removeElement }, pageable, children } = props;
+  const { marker, headers, expandable = false, hideClassicCellsOnExpandable = false, clickToExpand = false, rowIndexStartsFrom = 1, omitDefaultRowOperators, rowOperators, initExpanded, $wrapped, $array: { removable, elementIndex, removeElement, getElementKey }, pageable, children } = props;
   const expandAreaRef = reactExports.useRef(null);
   const globalHandlers = useGlobalHandlers();
+  const { on: onGlobal, off: offGlobal } = useGlobalEventBus();
   const { on, off, fire } = useTableEventBus();
-  const [expanded, setExpanded] = reactExports.useState(false);
+  const [expanded, setExpanded] = reactExports.useState(() => {
+    if (initExpanded) {
+      return initExpanded($wrapped.$model, elementIndex);
+    }
+    return false;
+  });
+  const rowMarker = getElementKey != null ? getElementKey($wrapped.$model) : void 0;
+  reactExports.useEffect(() => {
+    const onCustomEvent = (_, prefix, clipped) => {
+      if (clipped !== `${marker}-${rowMarker ?? elementIndex}`) {
+        return;
+      }
+      switch (prefix) {
+        case GlobalEventPrefix.EXPAND_TABLE_ROW:
+          fire(TableEventTypes.EXPAND_ROW, elementIndex);
+          break;
+        case GlobalEventPrefix.COLLAPSE_TABLE_ROW:
+          fire(TableEventTypes.COLLAPSE_ROW, elementIndex);
+          break;
+      }
+    };
+    onGlobal && onGlobal(GlobalEventTypes.CUSTOM_EVENT, onCustomEvent);
+    return () => {
+      offGlobal && offGlobal(GlobalEventTypes.CUSTOM_EVENT, onCustomEvent);
+    };
+  }, [onGlobal, offGlobal, fire, marker, rowMarker, elementIndex]);
   reactExports.useEffect(() => {
     const handleEvent = (func) => (rowIndex) => {
       if (rowIndex !== elementIndex) {
@@ -7661,7 +7737,7 @@ const TableRow = (props) => {
       React.createElement("span", null, elementIndex + computeRowIndexOffset())
     ),
     classic,
-    React.createElement(TableRowOperators, { expandable, removable, rowIndex: elementIndex, rowSpan: operatorsRowSpan, "$wrapped": $wrapped, omitDefaultRowOperators, rowOperators }),
+    React.createElement(TableRowOperators, { expandable, removable, rowIndex: elementIndex, rowSpan: operatorsRowSpan, "$wrapped": $wrapped, omitDefaultRowOperators, rowOperators, initExpanded }),
     expands
   );
 };

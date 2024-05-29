@@ -1,5 +1,6 @@
 import { g as getDefaultExportFromCjs, c as commonjsGlobal } from "./babel-zvTTnt5j.js";
-import { s as stringifyPosition } from "./unist-5yxlKLF4.js";
+import { s as svg$1, a as html$1, b as find$1, c as hastToReact } from "./property-information-8z9uOPr0.js";
+import { s as stringifyPosition, p as pointStart } from "./unist-QXG10VXN.js";
 function _mergeNamespaces(n2, m2) {
   for (var i2 = 0; i2 < m2.length; i2++) {
     const e2 = m2[i2];
@@ -281,7 +282,7 @@ var scheduler_production_min = {};
   scheduler.exports = scheduler_production_min;
 }
 var schedulerExports = scheduler.exports;
-var buffer$1 = {};
+var buffer = {};
 var base64Js = {};
 base64Js.byteLength = byteLength;
 base64Js.toByteArray = toByteArray;
@@ -677,7 +678,7 @@ ieee754.write = function(buffer2, value, offset, isLE, mLen, nBytes) {
     }
     return Buffer2.alloc(+length2);
   }
-  Buffer2.isBuffer = function isBuffer3(b2) {
+  Buffer2.isBuffer = function isBuffer2(b2) {
     return b2 != null && b2._isBuffer === true && b2 !== Buffer2.prototype;
   };
   Buffer2.compare = function compare2(a2, b2) {
@@ -2150,7 +2151,7 @@ ieee754.write = function(buffer2, value, offset, isLE, mLen, nBytes) {
   function BufferBigIntNotDefined() {
     throw new Error("BigInt not supported");
   }
-})(buffer$1);
+})(buffer);
 var events = { exports: {} };
 var R = typeof Reflect === "object" ? Reflect : null;
 var ReflectApply = R && typeof R.apply === "function" ? R.apply : function ReflectApply2(target, receiver, args) {
@@ -2714,9 +2715,9 @@ var colorNames = colorName;
 var swizzle2 = simpleSwizzleExports;
 var hasOwnProperty$d = Object.hasOwnProperty;
 var reverseNames = /* @__PURE__ */ Object.create(null);
-for (var name$2 in colorNames) {
-  if (hasOwnProperty$d.call(colorNames, name$2)) {
-    reverseNames[colorNames[name$2]] = name$2;
+for (var name$3 in colorNames) {
+  if (hasOwnProperty$d.call(colorNames, name$3)) {
+    reverseNames[colorNames[name$3]] = name$3;
   }
 }
 var cs = colorString$1.exports = {
@@ -7458,15 +7459,19 @@ var factoryWithThrowingShims = function() {
 }
 var propTypesExports = propTypes.exports;
 const PropTypes = /* @__PURE__ */ getDefaultExportFromCjs(propTypesExports);
-const element = document.createElement("i");
+const element$1 = document.createElement("i");
 function decodeNamedCharacterReference(value) {
   const characterReference = "&" + value + ";";
-  element.innerHTML = characterReference;
-  const char2 = element.textContent;
+  element$1.innerHTML = characterReference;
+  const char2 = element$1.textContent;
   if (char2.charCodeAt(char2.length - 1) === 59 && value !== "semi") {
     return false;
   }
   return char2 === characterReference ? false : char2;
+}
+function ok() {
+}
+function unreachable() {
 }
 var format = { exports: {} };
 (function(module) {
@@ -7594,7 +7599,7 @@ function markdownTable(table, options = {}) {
       mostCellsPerRow = table[rowIndex].length;
     }
     while (++columnIndex2 < table[rowIndex].length) {
-      const cell = serialize$1(table[rowIndex][columnIndex2]);
+      const cell = serialize$2(table[rowIndex][columnIndex2]);
       if (options.alignDelimiters !== false) {
         const size2 = stringLength(cell);
         sizes2[columnIndex2] = size2;
@@ -7705,7 +7710,7 @@ function markdownTable(table, options = {}) {
   }
   return lines.join("\n");
 }
-function serialize$1(value) {
+function serialize$2(value) {
   return value === null || value === void 0 ? "" : String(value);
 }
 function defaultStringLength(value) {
@@ -7714,6 +7719,28 @@ function defaultStringLength(value) {
 function toAlignment(value) {
   const code = typeof value === "string" ? value.codePointAt(0) : 0;
   return code === 67 || code === 99 ? 99 : code === 76 || code === 108 ? 108 : code === 82 || code === 114 ? 114 : 0;
+}
+function longestStreak(value, substring) {
+  const source = String(value);
+  let index2 = source.indexOf(substring);
+  let expected = index2;
+  let count2 = 0;
+  let max = 0;
+  if (typeof substring !== "string") {
+    throw new TypeError("Expected substring");
+  }
+  while (index2 !== -1) {
+    if (index2 === expected) {
+      if (++count2 > max) {
+        max = count2;
+      }
+    } else {
+      count2 = 1;
+    }
+    expected = index2 + substring.length;
+    index2 = source.indexOf(substring, expected);
+  }
+  return max;
 }
 class Text {
   /**
@@ -7735,7 +7762,7 @@ class Text {
   /**
   Replace a range of the text with the given content.
   */
-  replace(from2, to, text) {
+  replace(from2, to, text2) {
     [from2, to] = clip(this, from2, to);
     let parts = [];
     this.decompose(
@@ -7745,10 +7772,10 @@ class Text {
       2
       /* Open.To */
     );
-    if (text.length)
-      text.decompose(
+    if (text2.length)
+      text2.decompose(
         0,
-        text.length,
+        text2.length,
         parts,
         1 | 2
         /* Open.To */
@@ -7760,7 +7787,7 @@ class Text {
       1
       /* Open.From */
     );
-    return TextNode.from(parts, this.length - (to - from2) + text.length);
+    return TextNode.from(parts, this.length - (to - from2) + text2.length);
   }
   /**
   Append another document to this one.
@@ -7856,18 +7883,18 @@ class Text {
   /**
   Create a `Text` instance for the given array of lines.
   */
-  static of(text) {
-    if (text.length == 0)
+  static of(text2) {
+    if (text2.length == 0)
       throw new RangeError("A document must have at least one line");
-    if (text.length == 1 && !text[0])
+    if (text2.length == 1 && !text2[0])
       return Text.empty;
-    return text.length <= 32 ? new TextLeaf(text) : TextNode.from(TextLeaf.split(text, []));
+    return text2.length <= 32 ? new TextLeaf(text2) : TextNode.from(TextLeaf.split(text2, []));
   }
 }
 class TextLeaf extends Text {
-  constructor(text, length2 = textLength(text)) {
+  constructor(text2, length2 = textLength(text2)) {
     super();
-    this.text = text;
+    this.text = text2;
     this.length = length2;
   }
   get lines() {
@@ -7886,26 +7913,26 @@ class TextLeaf extends Text {
     }
   }
   decompose(from2, to, target, open) {
-    let text = from2 <= 0 && to >= this.length ? this : new TextLeaf(sliceText(this.text, from2, to), Math.min(to, this.length) - Math.max(0, from2));
+    let text2 = from2 <= 0 && to >= this.length ? this : new TextLeaf(sliceText(this.text, from2, to), Math.min(to, this.length) - Math.max(0, from2));
     if (open & 1) {
       let prev2 = target.pop();
-      let joined = appendText(text.text, prev2.text.slice(), 0, text.length);
+      let joined = appendText(text2.text, prev2.text.slice(), 0, text2.length);
       if (joined.length <= 32) {
-        target.push(new TextLeaf(joined, prev2.length + text.length));
+        target.push(new TextLeaf(joined, prev2.length + text2.length));
       } else {
         let mid = joined.length >> 1;
         target.push(new TextLeaf(joined.slice(0, mid)), new TextLeaf(joined.slice(mid)));
       }
     } else {
-      target.push(text);
+      target.push(text2);
     }
   }
-  replace(from2, to, text) {
-    if (!(text instanceof TextLeaf))
-      return super.replace(from2, to, text);
+  replace(from2, to, text2) {
+    if (!(text2 instanceof TextLeaf))
+      return super.replace(from2, to, text2);
     [from2, to] = clip(this, from2, to);
-    let lines = appendText(this.text, appendText(text.text, sliceText(this.text, 0, from2)), to);
-    let newLen = this.length + text.length - (to - from2);
+    let lines = appendText(this.text, appendText(text2.text, sliceText(this.text, 0, from2)), to);
+    let newLen = this.length + text2.length - (to - from2);
     if (lines.length <= 32)
       return new TextLeaf(lines, newLen);
     return TextNode.from(TextLeaf.split(lines, []), newLen);
@@ -7930,9 +7957,9 @@ class TextLeaf extends Text {
   scanIdentical() {
     return 0;
   }
-  static split(text, target) {
+  static split(text2, target) {
     let part = [], len = -1;
-    for (let line2 of text) {
+    for (let line2 of text2) {
       part.push(line2);
       len += line2.length + 1;
       if (part.length == 32) {
@@ -7977,24 +8004,24 @@ class TextNode extends Text {
       pos = end + 1;
     }
   }
-  replace(from2, to, text) {
+  replace(from2, to, text2) {
     [from2, to] = clip(this, from2, to);
-    if (text.lines < this.lines)
+    if (text2.lines < this.lines)
       for (let i2 = 0, pos = 0; i2 < this.children.length; i2++) {
         let child = this.children[i2], end = pos + child.length;
         if (from2 >= pos && to <= end) {
-          let updated = child.replace(from2 - pos, to - pos, text);
+          let updated = child.replace(from2 - pos, to - pos, text2);
           let totalLines = this.lines - child.lines + updated.lines;
           if (updated.lines < totalLines >> 5 - 1 && updated.lines > totalLines >> 5 + 1) {
             let copy2 = this.children.slice();
             copy2[i2] = updated;
-            return new TextNode(copy2, this.length - (to - from2) + text.length);
+            return new TextNode(copy2, this.length - (to - from2) + text2.length);
           }
           return super.replace(pos, end, updated);
         }
         pos = end + 1;
       }
-    return super.replace(from2, to, text);
+    return super.replace(from2, to, text2);
   }
   sliceString(from2, to = this.length, lineSep = "\n") {
     [from2, to] = clip(this, from2, to);
@@ -8077,15 +8104,15 @@ class TextNode extends Text {
   }
 }
 Text.empty = /* @__PURE__ */ new TextLeaf([""], 0);
-function textLength(text) {
+function textLength(text2) {
   let length2 = -1;
-  for (let line2 of text)
+  for (let line2 of text2)
     length2 += line2.length + 1;
   return length2;
 }
-function appendText(text, target, from2 = 0, to = 1e9) {
-  for (let pos = 0, i2 = 0, first2 = true; i2 < text.length && pos <= to; i2++) {
-    let line2 = text[i2], end = pos + line2.length;
+function appendText(text2, target, from2 = 0, to = 1e9) {
+  for (let pos = 0, i2 = 0, first2 = true; i2 < text2.length && pos <= to; i2++) {
+    let line2 = text2[i2], end = pos + line2.length;
     if (end >= from2) {
       if (end > to)
         line2 = line2.slice(0, to - pos);
@@ -8101,17 +8128,17 @@ function appendText(text, target, from2 = 0, to = 1e9) {
   }
   return target;
 }
-function sliceText(text, from2, to) {
-  return appendText(text, [""], from2, to);
+function sliceText(text2, from2, to) {
+  return appendText(text2, [""], from2, to);
 }
 class RawTextCursor {
-  constructor(text, dir = 1) {
+  constructor(text2, dir = 1) {
     this.dir = dir;
     this.done = false;
     this.lineBreak = false;
     this.value = "";
-    this.nodes = [text];
-    this.offsets = [dir > 0 ? 1 : (text instanceof TextLeaf ? text.text.length : text.children.length) << 1];
+    this.nodes = [text2];
+    this.offsets = [dir > 0 ? 1 : (text2 instanceof TextLeaf ? text2.text.length : text2.children.length) << 1];
   }
   nextInner(skip, dir) {
     this.done = this.lineBreak = false;
@@ -8168,11 +8195,11 @@ class RawTextCursor {
   }
 }
 class PartialTextCursor {
-  constructor(text, start, end) {
+  constructor(text2, start, end) {
     this.value = "";
     this.done = false;
-    this.cursor = new RawTextCursor(text, start > end ? -1 : 1);
-    this.pos = start > end ? text.length : 0;
+    this.cursor = new RawTextCursor(text2, start > end ? -1 : 1);
+    this.pos = start > end ? text2.length : 0;
     this.from = Math.min(start, end);
     this.to = Math.max(start, end);
   }
@@ -8248,11 +8275,11 @@ let Line$1 = class Line {
   /**
   @internal
   */
-  constructor(from2, to, number2, text) {
+  constructor(from2, to, number2, text2) {
     this.from = from2;
     this.to = to;
     this.number = number2;
-    this.text = text;
+    this.text = text2;
   }
   /**
   The length of the line (not including any line break after it).
@@ -8261,9 +8288,9 @@ let Line$1 = class Line {
     return this.to - this.from;
   }
 };
-function clip(text, from2, to) {
-  from2 = Math.max(0, Math.min(text.length, from2));
-  return [from2, Math.max(from2, Math.min(text.length, to))];
+function clip(text2, from2, to) {
+  from2 = Math.max(0, Math.min(text2.length, from2));
+  return [from2, Math.max(from2, Math.min(text2.length, to))];
 }
 let extend$4 = /* @__PURE__ */ "lc,34,7n,7,7b,19,,,,2,,2,,,20,b,1c,l,g,,2t,7,2,6,2,2,,4,z,,u,r,2j,b,1m,9,9,,o,4,,9,,3,,5,17,3,3b,f,,w,1j,,,,4,8,4,,3,7,a,2,t,,1m,,,,2,4,8,,9,,a,2,q,,2,2,1l,,4,2,4,2,2,3,3,,u,2,3,,b,2,1l,,4,5,,2,4,,k,2,m,6,,,1m,,,2,,4,8,,7,3,a,2,u,,1n,,,,c,,9,,14,,3,,1l,3,5,3,,4,7,2,b,2,t,,1m,,2,,2,,3,,5,2,7,2,b,2,s,2,1l,2,,,2,4,8,,9,,a,2,t,,20,,4,,2,3,,,8,,29,,2,7,c,8,2q,,2,9,b,6,22,2,r,,,,,,1j,e,,5,,2,5,b,,10,9,,2u,4,,6,,2,2,2,p,2,4,3,g,4,d,,2,2,6,,f,,jj,3,qa,3,t,3,t,2,u,2,1s,2,,7,8,,2,b,9,,19,3,3b,2,y,,3a,3,4,2,9,,6,3,63,2,2,,1m,,,7,,,,,2,8,6,a,2,,1c,h,1r,4,1c,7,,,5,,14,9,c,2,w,4,2,2,,3,1k,,,2,3,,,3,1m,8,2,2,48,3,,d,,7,4,,6,,3,2,5i,1m,,5,ek,,5f,x,2da,3,3x,,2o,w,fe,6,2x,2,n9w,4,,a,w,2,28,2,7k,,3,,4,,p,2,5,,47,2,q,i,d,,12,8,p,b,1a,3,1c,,2,4,2,2,13,,1v,6,2,2,2,2,c,,8,,1b,,1f,,,3,2,2,5,2,,,16,2,8,,6m,,2,,4,,fn4,,kh,g,g,g,a6,2,gt,,6a,,45,5,1ae,3,,2,5,4,14,3,4,,4l,2,fx,4,ar,2,49,b,4w,,1i,f,1k,3,1d,4,2,2,1x,3,10,5,,8,1q,,c,2,1g,9,a,4,2,,2n,3,2,,,2,6,,4g,,3,8,l,2,1l,2,,,,,m,,e,7,3,5,5f,8,2,3,,,n,,29,,2,6,,,2,,,2,,2,6j,,2,4,6,2,,2,r,2,2d,8,2,,,2,2y,,,,2,6,,,2t,3,2,4,,5,77,9,,2,6t,,a,2,,,4,,40,4,2,2,4,,w,a,14,6,2,4,8,,9,6,2,3,1a,d,,2,ba,7,,6,,,2a,m,2,7,,2,,2,3e,6,3,,,2,,7,,,20,2,3,,,,9n,2,f0b,5,1n,7,t4,,1r,4,29,,f5k,2,43q,,,3,4,5,8,8,2,7,u,4,44,3,1iz,1j,4,1e,8,,e,,m,5,,f,11s,7,,h,2,7,,2,,5,79,7,c5,4,15s,7,31,7,240,5,gx7k,2o,3k,6o".split(",").map((s2) => s2 ? parseInt(s2, 36) : 1);
 for (let i2 = 1; i2 < extend$4.length; i2++)
@@ -8531,7 +8558,7 @@ class ChangeSet extends ChangeDesc {
   apply(doc2) {
     if (this.length != doc2.length)
       throw new RangeError("Applying change set to a document with the wrong length");
-    iterChanges(this, (fromA, toA, fromB, _toB, text) => doc2 = doc2.replace(fromB, fromB + (toA - fromA), text), false);
+    iterChanges(this, (fromA, toA, fromB, _toB, text2) => doc2 = doc2.replace(fromB, fromB + (toA - fromA), text2), false);
     return doc2;
   }
   mapDesc(other, before = false) {
@@ -8776,18 +8803,18 @@ function iterChanges(desc, f2, individual) {
       posA += len;
       posB += len;
     } else {
-      let endA = posA, endB = posB, text = Text.empty;
+      let endA = posA, endB = posB, text2 = Text.empty;
       for (; ; ) {
         endA += len;
         endB += ins;
         if (ins && inserted)
-          text = text.append(inserted[i2 - 2 >> 1]);
+          text2 = text2.append(inserted[i2 - 2 >> 1]);
         if (individual || i2 == desc.sections.length || desc.sections[i2 + 1] < 0)
           break;
         len = desc.sections[i2++];
         ins = desc.sections[i2++];
       }
-      f2(posA, endA, posB, endB, text);
+      f2(posA, endA, posB, endB, text2);
       posA = endA;
       posB = endB;
     }
@@ -10033,12 +10060,12 @@ class EditorState {
   Create a [transaction spec](https://codemirror.net/6/docs/ref/#state.TransactionSpec) that
   replaces every selection range with the given content.
   */
-  replaceSelection(text) {
-    if (typeof text == "string")
-      text = this.toText(text);
+  replaceSelection(text2) {
+    if (typeof text2 == "string")
+      text2 = this.toText(text2);
     return this.changeByRange((range2) => ({
-      changes: { from: range2.from, to: range2.to, insert: text },
-      range: EditorSelection.cursor(range2.from + text.length)
+      changes: { from: range2.from, to: range2.to, insert: text2 },
+      range: EditorSelection.cursor(range2.from + text2.length)
     }));
   }
   /**
@@ -10256,18 +10283,18 @@ class EditorState {
   this returns null.
   */
   wordAt(pos) {
-    let { text, from: from2, length: length2 } = this.doc.lineAt(pos);
+    let { text: text2, from: from2, length: length2 } = this.doc.lineAt(pos);
     let cat = this.charCategorizer(pos);
     let start = pos - from2, end = pos - from2;
     while (start > 0) {
-      let prev2 = findClusterBreak(text, start, false);
-      if (cat(text.slice(prev2, start)) != CharCategory.Word)
+      let prev2 = findClusterBreak(text2, start, false);
+      if (cat(text2.slice(prev2, start)) != CharCategory.Word)
         break;
       start = prev2;
     }
     while (end < length2) {
-      let next2 = findClusterBreak(text, end);
-      if (cat(text.slice(end, next2)) != CharCategory.Word)
+      let next2 = findClusterBreak(text2, end);
+      if (cat(text2.slice(end, next2)) != CharCategory.Word)
         break;
       end = next2;
     }
@@ -11100,7 +11127,7 @@ function findColumn(string2, col, tabSize, strict) {
 }
 const C = "ͼ";
 const COUNT = typeof Symbol == "undefined" ? "__" + C : Symbol.for(C);
-const SET = typeof Symbol == "undefined" ? "__styleSet" + Math.floor(Math.random() * 1e8) : Symbol("styleSet");
+const SET$1 = typeof Symbol == "undefined" ? "__styleSet" + Math.floor(Math.random() * 1e8) : Symbol("styleSet");
 const top = typeof globalThis != "undefined" ? globalThis : typeof window != "undefined" ? window : {};
 class StyleModule {
   // :: (Object<Style>, ?{finish: ?(string) → string})
@@ -11170,7 +11197,7 @@ class StyleModule {
   // If a Content Security Policy nonce is provided, it is added to
   // the `<style>` tag generated by the library.
   static mount(root2, modules, options) {
-    let set2 = root2[SET], nonce = options && options.nonce;
+    let set2 = root2[SET$1], nonce = options && options.nonce;
     if (!set2)
       set2 = new StyleSet(root2, nonce);
     else if (nonce)
@@ -11185,7 +11212,7 @@ class StyleSet {
     if (!root2.head && root2.adoptedStyleSheets && win.CSSStyleSheet) {
       let adopted = adoptedSet.get(doc2);
       if (adopted)
-        return root2[SET] = adopted;
+        return root2[SET$1] = adopted;
       this.sheet = new win.CSSStyleSheet();
       adoptedSet.set(doc2, this);
     } else {
@@ -11194,7 +11221,7 @@ class StyleSet {
         this.styleTag.setAttribute("nonce", nonce);
     }
     this.modules = [];
-    root2[SET] = this;
+    root2[SET$1] = this;
   }
   mount(modules, root2) {
     let sheet = this.sheet;
@@ -11222,10 +11249,10 @@ class StyleSet {
       if (root2.adoptedStyleSheets.indexOf(this.sheet) < 0)
         root2.adoptedStyleSheets = [this.sheet, ...root2.adoptedStyleSheets];
     } else {
-      let text = "";
+      let text2 = "";
       for (let i2 = 0; i2 < this.modules.length; i2++)
-        text += this.modules[i2].getRules() + "\n";
-      this.styleTag.textContent = text;
+        text2 += this.modules[i2].getRules() + "\n";
+      this.styleTag.textContent = text2;
       let target = root2.head || root2;
       if (this.styleTag.parentNode != target)
         target.insertBefore(this.styleTag, target.firstChild);
@@ -11236,7 +11263,7 @@ class StyleSet {
       this.styleTag.setAttribute("nonce", nonce);
   }
 }
-var base$1 = {
+var base = {
   8: "Backspace",
   9: "Tab",
   10: "Enter",
@@ -11319,19 +11346,19 @@ var shift = {
 var mac = typeof navigator != "undefined" && /Mac/.test(navigator.platform);
 var ie$1 = typeof navigator != "undefined" && /MSIE \d|Trident\/(?:[7-9]|\d{2,})\..*rv:(\d+)/.exec(navigator.userAgent);
 for (var i$2 = 0; i$2 < 10; i$2++)
-  base$1[48 + i$2] = base$1[96 + i$2] = String(i$2);
+  base[48 + i$2] = base[96 + i$2] = String(i$2);
 for (var i$2 = 1; i$2 <= 24; i$2++)
-  base$1[i$2 + 111] = "F" + i$2;
+  base[i$2 + 111] = "F" + i$2;
 for (var i$2 = 65; i$2 <= 90; i$2++) {
-  base$1[i$2] = String.fromCharCode(i$2 + 32);
+  base[i$2] = String.fromCharCode(i$2 + 32);
   shift[i$2] = String.fromCharCode(i$2);
 }
-for (var code in base$1)
+for (var code in base)
   if (!shift.hasOwnProperty(code))
-    shift[code] = base$1[code];
+    shift[code] = base[code];
 function keyName(event) {
   var ignoreKey = mac && event.metaKey && event.shiftKey && !event.ctrlKey && !event.altKey || ie$1 && event.shiftKey && event.key && event.key.length == 1 || event.key == "Unidentified";
-  var name2 = !ignoreKey && event.key || (event.shiftKey ? shift : base$1)[event.keyCode] || event.key || "Unidentified";
+  var name2 = !ignoreKey && event.key || (event.shiftKey ? shift : base)[event.keyCode] || event.key || "Unidentified";
   if (name2 == "Esc")
     name2 = "Escape";
   if (name2 == "Del")
@@ -12013,9 +12040,9 @@ var browser = {
 };
 const MaxJoinLen = 256;
 class TextView extends ContentView {
-  constructor(text) {
+  constructor(text2) {
     super();
-    this.text = text;
+    this.text = text2;
   }
   get length() {
     return this.text.length;
@@ -12130,8 +12157,8 @@ class MarkView extends ContentView {
     return coordsInChildren(this, pos, side);
   }
 }
-function textCoords(text, pos, side) {
-  let length2 = text.nodeValue.length;
+function textCoords(text2, pos, side) {
+  let length2 = text2.nodeValue.length;
   if (pos > length2)
     pos = length2;
   let from2 = pos, to = pos, flatten2 = 0;
@@ -12151,7 +12178,7 @@ function textCoords(text, pos, side) {
     else if (to < length2)
       to++;
   }
-  let rects = textRange(text, from2, to).getClientRects();
+  let rects = textRange(text2, from2, to).getClientRects();
   if (!rects.length)
     return null;
   let rect = rects[(flatten2 ? flatten2 < 0 : side >= 0) ? 0 : rects.length - 1];
@@ -12218,8 +12245,8 @@ class WidgetView extends ContentView {
     let top2 = this;
     while (top2.parent)
       top2 = top2.parent;
-    let { view } = top2, text = view && view.state.doc, start = this.posAtStart;
-    return text ? text.slice(start, start + this.length) : Text.empty;
+    let { view } = top2, text2 = view && view.state.doc, start = this.posAtStart;
+    return text2 ? text2.slice(start, start + this.length) : Text.empty;
   }
   domAtPos(pos) {
     return (this.length ? pos == 0 : this.side > 0) ? DOMPos.before(this.dom) : DOMPos.after(this.dom, pos == this.length);
@@ -13055,8 +13082,8 @@ class ContentBuilder {
     if (this.openStart < 0)
       this.openStart = openStart;
   }
-  static build(text, from2, to, decorations2, dynamicDecorationMap) {
-    let builder = new ContentBuilder(text, from2, to, dynamicDecorationMap);
+  static build(text2, from2, to, decorations2, dynamicDecorationMap) {
+    let builder = new ContentBuilder(text2, from2, to, dynamicDecorationMap);
     builder.openEnd = RangeSet.spans(decorations2, from2, to, builder);
     if (builder.openStart < 0)
       builder.openStart = builder.openEnd;
@@ -13441,9 +13468,9 @@ function moveVisually(line2, order2, dir, start, forward) {
     return EditorSelection.cursor(nextSpan.side(!forward, dir) + line2.from, nextSpan.forward(forward, dir) ? 1 : -1, nextSpan.level);
   return EditorSelection.cursor(nextIndex + line2.from, span.forward(forward, dir) ? -1 : 1, span.level);
 }
-function autoDirection(text, from2, to) {
+function autoDirection(text2, from2, to) {
   for (let i2 = from2; i2 < to; i2++) {
-    let type2 = charType(text.charCodeAt(i2));
+    let type2 = charType(text2.charCodeAt(i2));
     if (type2 == 1)
       return LTR;
     if (type2 == 2 || type2 == 4)
@@ -13940,9 +13967,9 @@ class DocView extends ContentView {
           if (browser.gecko) {
             let nextTo = nextToUneditable(anchor.node, anchor.offset);
             if (nextTo && nextTo != (1 | 2)) {
-              let text = nearbyTextNode(anchor.node, anchor.offset, nextTo == 1 ? 1 : -1);
-              if (text)
-                anchor = new DOMPos(text.node, text.offset);
+              let text2 = nearbyTextNode(anchor.node, anchor.offset, nextTo == 1 ? 1 : -1);
+              if (text2)
+                anchor = new DOMPos(text2.node, text2.offset);
             }
           }
           rawSel.collapse(anchor.node, anchor.offset);
@@ -14269,10 +14296,10 @@ function findCompositionRange(view, changes, headPos) {
   let found = findCompositionNode(view, headPos);
   if (!found)
     return null;
-  let { node: textNode, from: from2, to } = found, text = textNode.nodeValue;
-  if (/[\n\r]/.test(text))
+  let { node: textNode, from: from2, to } = found, text2 = textNode.nodeValue;
+  if (/[\n\r]/.test(text2))
     return null;
-  if (view.state.doc.sliceString(found.from, found.to) != text)
+  if (view.state.doc.sliceString(found.from, found.to) != text2)
     return null;
   let inv = changes.invertedDesc;
   let range2 = new ChangedRange(inv.mapPos(from2), inv.mapPos(to), from2, to);
@@ -15033,9 +15060,9 @@ function capturePaste(view) {
   }, 50);
 }
 function doPaste(view, input) {
-  let { state } = view, changes, i2 = 1, text = state.toText(input);
-  let byLine = text.lines == state.selection.ranges.length;
-  let linewise = lastLinewiseCopy != null && state.selection.ranges.every((r2) => r2.empty) && lastLinewiseCopy == text.toString();
+  let { state } = view, changes, i2 = 1, text2 = state.toText(input);
+  let byLine = text2.lines == state.selection.ranges.length;
+  let linewise = lastLinewiseCopy != null && state.selection.ranges.every((r2) => r2.empty) && lastLinewiseCopy == text2.toString();
   if (linewise) {
     let lastLine = -1;
     changes = state.changeByRange((range2) => {
@@ -15043,7 +15070,7 @@ function doPaste(view, input) {
       if (line2.from == lastLine)
         return { range: range2 };
       lastLine = line2.from;
-      let insert2 = state.toText((byLine ? text.line(i2++).text : input) + state.lineBreak);
+      let insert2 = state.toText((byLine ? text2.line(i2++).text : input) + state.lineBreak);
       return {
         changes: { from: line2.from, insert: insert2 },
         range: EditorSelection.cursor(range2.from + insert2.length)
@@ -15051,14 +15078,14 @@ function doPaste(view, input) {
     });
   } else if (byLine) {
     changes = state.changeByRange((range2) => {
-      let line2 = text.line(i2++);
+      let line2 = text2.line(i2++);
       return {
         changes: { from: range2.from, to: range2.to, insert: line2.text },
         range: EditorSelection.cursor(range2.from + line2.length)
       };
     });
   } else {
-    changes = state.replaceSelection(text);
+    changes = state.replaceSelection(text2);
   }
   view.dispatch(changes, {
     userEvent: "input.paste",
@@ -15214,13 +15241,13 @@ handlers.dragend = (view) => {
   view.inputState.draggedContent = null;
   return false;
 };
-function dropText(view, event, text, direct) {
-  if (!text)
+function dropText(view, event, text2, direct) {
+  if (!text2)
     return;
   let dropPos = view.posAtCoords({ x: event.clientX, y: event.clientY }, false);
   let { draggedContent } = view.inputState;
   let del = direct && draggedContent && dragMovesSelection(view, event) ? { from: draggedContent.from, to: draggedContent.to } : null;
-  let ins = { from: dropPos, insert: text };
+  let ins = { from: dropPos, insert: text2 };
   let changes = view.state.changes(del ? [del, ins] : ins);
   view.focus();
   view.dispatch({
@@ -15237,26 +15264,26 @@ handlers.drop = (view, event) => {
     return true;
   let files = event.dataTransfer.files;
   if (files && files.length) {
-    let text = Array(files.length), read = 0;
+    let text2 = Array(files.length), read = 0;
     let finishFile = () => {
       if (++read == files.length)
-        dropText(view, event, text.filter((s2) => s2 != null).join(view.state.lineBreak), false);
+        dropText(view, event, text2.filter((s2) => s2 != null).join(view.state.lineBreak), false);
     };
     for (let i2 = 0; i2 < files.length; i2++) {
       let reader = new FileReader();
       reader.onerror = finishFile;
       reader.onload = () => {
         if (!/[\x00-\x08\x0e-\x1f]{2}/.test(reader.result))
-          text[i2] = reader.result;
+          text2[i2] = reader.result;
         finishFile();
       };
       reader.readAsText(files[i2]);
     }
     return true;
   } else {
-    let text = event.dataTransfer.getData("Text");
-    if (text) {
-      dropText(view, event, text, true);
+    let text2 = event.dataTransfer.getData("Text");
+    if (text2) {
+      dropText(view, event, text2, true);
       return true;
     }
   }
@@ -15275,15 +15302,15 @@ handlers.paste = (view, event) => {
     return false;
   }
 };
-function captureCopy(view, text) {
+function captureCopy(view, text2) {
   let parent = view.dom.parentNode;
   if (!parent)
     return;
   let target = parent.appendChild(document.createElement("textarea"));
   target.style.cssText = "position: fixed; left: -10000px; top: 10px";
-  target.value = text;
+  target.value = text2;
   target.focus();
-  target.selectionEnd = text.length;
+  target.selectionEnd = text2.length;
   target.selectionStart = 0;
   setTimeout(() => {
     target.remove();
@@ -15313,10 +15340,10 @@ function copiedRange(state) {
 }
 let lastLinewiseCopy = null;
 handlers.copy = handlers.cut = (view, event) => {
-  let { text, ranges, linewise } = copiedRange(view.state);
-  if (!text && !linewise)
+  let { text: text2, ranges, linewise } = copiedRange(view.state);
+  if (!text2 && !linewise)
     return false;
-  lastLinewiseCopy = linewise ? text : null;
+  lastLinewiseCopy = linewise ? text2 : null;
   if (event.type == "cut" && !view.state.readOnly)
     view.dispatch({
       changes: ranges,
@@ -15326,10 +15353,10 @@ handlers.copy = handlers.cut = (view, event) => {
   let data2 = brokenClipboardAPI ? null : event.clipboardData;
   if (data2) {
     data2.clearData();
-    data2.setData("text/plain", text);
+    data2.setData("text/plain", text2);
     return true;
   } else {
-    captureCopy(view, text);
+    captureCopy(view, text2);
     return false;
   }
 };
@@ -16945,8 +16972,8 @@ class DOMReader {
     this.text = "";
     this.lineSeparator = state.facet(EditorState.lineSeparator);
   }
-  append(text) {
-    this.text += text;
+  append(text2) {
+    this.text += text2;
   }
   lineBreak() {
     this.text += LineBreakPlaceholder;
@@ -16971,20 +16998,20 @@ class DOMReader {
     return this;
   }
   readTextNode(node2) {
-    let text = node2.nodeValue;
+    let text2 = node2.nodeValue;
     for (let point of this.points)
       if (point.node == node2)
-        point.pos = this.text.length + Math.min(point.offset, text.length);
-    for (let off = 0, re = this.lineSeparator ? null : /\r\n?|\n/g; ; ) {
+        point.pos = this.text.length + Math.min(point.offset, text2.length);
+    for (let off = 0, re2 = this.lineSeparator ? null : /\r\n?|\n/g; ; ) {
       let nextBreak = -1, breakSize = 1, m2;
       if (this.lineSeparator) {
-        nextBreak = text.indexOf(this.lineSeparator, off);
+        nextBreak = text2.indexOf(this.lineSeparator, off);
         breakSize = this.lineSeparator.length;
-      } else if (m2 = re.exec(text)) {
+      } else if (m2 = re2.exec(text2)) {
         nextBreak = m2.index;
         breakSize = m2[0].length;
       }
-      this.append(text.slice(off, nextBreak < 0 ? text.length : nextBreak));
+      this.append(text2.slice(off, nextBreak < 0 ? text2.length : nextBreak));
       if (nextBreak < 0)
         break;
       this.lineBreak();
@@ -17128,12 +17155,12 @@ function applyDOMChange(view, domChange) {
       return true;
     if (browser.android && (change.from == sel.from && change.to == sel.to && change.insert.length == 1 && change.insert.lines == 2 && dispatchKey(view.contentDOM, "Enter", 13) || (change.from == sel.from - 1 && change.to == sel.to && change.insert.length == 0 || lastKey == 8 && change.insert.length < change.to - change.from && change.to > sel.head) && dispatchKey(view.contentDOM, "Backspace", 8) || change.from == sel.from && change.to == sel.to + 1 && change.insert.length == 0 && dispatchKey(view.contentDOM, "Delete", 46)))
       return true;
-    let text = change.insert.toString();
+    let text2 = change.insert.toString();
     if (view.inputState.composing >= 0)
       view.inputState.composing++;
     let defaultTr;
     let defaultInsert = () => defaultTr || (defaultTr = applyDefaultInsert(view, change, newSel));
-    if (!view.state.facet(inputHandler$1).some((h2) => h2(view, change.from, change.to, text, defaultInsert)))
+    if (!view.state.facet(inputHandler$1).some((h2) => h2(view, change.from, change.to, text2, defaultInsert)))
       view.dispatch(defaultInsert());
     return true;
   } else if (newSel && !newSel.main.eq(sel)) {
@@ -18750,7 +18777,7 @@ function runHandlers(map2, event, view, scope) {
     if (runFor(scopeObj[prefix + modifiers(name2, event, !isChar)])) {
       handled = true;
     } else if (isChar && (event.altKey || event.metaKey || event.ctrlKey) && // Ctrl-Alt may be used for AltGr on Windows
-    !(browser.windows && event.ctrlKey && event.altKey) && (baseName = base$1[event.keyCode]) && baseName != name2) {
+    !(browser.windows && event.ctrlKey && event.altKey) && (baseName = base[event.keyCode]) && baseName != name2) {
       if (runFor(scopeObj[prefix + modifiers(baseName, event, true)])) {
         handled = true;
       } else if (event.shiftKey && (shiftName = shift[event.keyCode]) != name2 && shiftName != baseName && runFor(scopeObj[prefix + modifiers(shiftName, event, false)])) {
@@ -19167,11 +19194,11 @@ const drawDropCursor = /* @__PURE__ */ ViewPlugin.fromClass(class {
 function dropCursor() {
   return [dropCursorPos, drawDropCursor];
 }
-function iterMatches(doc2, re, from2, to, f2) {
-  re.lastIndex = 0;
+function iterMatches(doc2, re2, from2, to, f2) {
+  re2.lastIndex = 0;
   for (let cursor = doc2.iterRange(from2, to), pos = from2, m2; !cursor.next().done; pos += cursor.value.length) {
     if (!cursor.lineBreak)
-      while (m2 = re.exec(cursor.value))
+      while (m2 = re2.exec(cursor.value))
         f2(pos + m2.index, m2);
   }
 }
@@ -23078,7 +23105,7 @@ function getStyleTags(node2) {
   return rule || null;
 }
 const t$1 = Tag.define;
-const comment$1 = t$1(), name$1 = t$1(), typeName = t$1(name$1), propertyName = t$1(name$1), literal = t$1(), string = t$1(literal), number = t$1(literal), content = t$1(), heading = t$1(content), keyword = t$1(), operator = t$1(), punctuation = t$1(), bracket = t$1(punctuation), meta = t$1();
+const comment$1 = t$1(), name$2 = t$1(), typeName = t$1(name$2), propertyName = t$1(name$2), literal = t$1(), string = t$1(literal), number = t$1(literal), content = t$1(), heading = t$1(content), keyword = t$1(), operator = t$1(), punctuation = t$1(), bracket = t$1(punctuation), meta = t$1();
 const tags$1 = {
   /**
   A comment.
@@ -23099,11 +23126,11 @@ const tags$1 = {
   /**
   Any kind of identifier.
   */
-  name: name$1,
+  name: name$2,
   /**
   The [name](#highlight.tags.name) of a variable.
   */
-  variableName: t$1(name$1),
+  variableName: t$1(name$2),
   /**
   A type [name](#highlight.tags.name).
   */
@@ -23123,19 +23150,19 @@ const tags$1 = {
   /**
   The [name](#highlight.tags.name) of a class.
   */
-  className: t$1(name$1),
+  className: t$1(name$2),
   /**
   A label [name](#highlight.tags.name).
   */
-  labelName: t$1(name$1),
+  labelName: t$1(name$2),
   /**
   A namespace [name](#highlight.tags.name).
   */
-  namespace: t$1(name$1),
+  namespace: t$1(name$2),
   /**
   The [name](#highlight.tags.name) of a macro.
   */
-  macroName: t$1(name$1),
+  macroName: t$1(name$2),
   /**
   A literal value.
   */
@@ -24159,18 +24186,18 @@ class IndentContext {
   textAfterPos(pos, bias = 1) {
     if (this.options.simulateDoubleBreak && pos == this.options.simulateBreak)
       return "";
-    let { text, from: from2 } = this.lineAt(pos, bias);
-    return text.slice(pos - from2, Math.min(text.length, pos + 100 - from2));
+    let { text: text2, from: from2 } = this.lineAt(pos, bias);
+    return text2.slice(pos - from2, Math.min(text2.length, pos + 100 - from2));
   }
   /**
   Find the column for the given position.
   */
   column(pos, bias = 1) {
-    let { text, from: from2 } = this.lineAt(pos, bias);
-    let result = this.countColumn(text, pos - from2);
+    let { text: text2, from: from2 } = this.lineAt(pos, bias);
+    let result = this.countColumn(text2, pos - from2);
     let override = this.options.overrideIndentation ? this.options.overrideIndentation(from2) : -1;
     if (override > -1)
-      result += override - this.countColumn(text, text.search(/\S|$/));
+      result += override - this.countColumn(text2, text2.search(/\S|$/));
     return result;
   }
   /**
@@ -24184,14 +24211,14 @@ class IndentContext {
   Find the indentation column of the line at the given point.
   */
   lineIndent(pos, bias = 1) {
-    let { text, from: from2 } = this.lineAt(pos, bias);
+    let { text: text2, from: from2 } = this.lineAt(pos, bias);
     let override = this.options.overrideIndentation;
     if (override) {
       let overriden = override(from2);
       if (overriden > -1)
         return overriden;
     }
-    return this.countColumn(text, text.search(/\S|$/));
+    return this.countColumn(text2, text2.search(/\S|$/));
   }
   /**
   Returns the [simulated line
@@ -24998,12 +25025,12 @@ function matchPlainBrackets(state, pos, dir, tree, tokenType, maxScanDistance, b
   let startToken = { from: dir < 0 ? pos - 1 : pos, to: dir > 0 ? pos + 1 : pos };
   let iter = state.doc.iterRange(pos, dir > 0 ? state.doc.length : 0), depth = 0;
   for (let distance = 0; !iter.next().done && distance <= maxScanDistance; ) {
-    let text = iter.value;
+    let text2 = iter.value;
     if (dir < 0)
-      distance += text.length;
+      distance += text2.length;
     let basePos = pos + distance * dir;
-    for (let pos2 = dir > 0 ? 0 : text.length - 1, end = dir > 0 ? text.length : -1; pos2 != end; pos2 += dir) {
-      let found = brackets.indexOf(text[pos2]);
+    for (let pos2 = dir > 0 ? 0 : text2.length - 1, end = dir > 0 ? text2.length : -1; pos2 != end; pos2 += dir) {
+      let found = brackets.indexOf(text2[pos2]);
       if (found < 0 || tree.resolveInner(basePos + pos2, 1).type != tokenType)
         continue;
       if (found % 2 == 0 == dir > 0) {
@@ -25015,7 +25042,7 @@ function matchPlainBrackets(state, pos, dir, tree, tokenType, maxScanDistance, b
       }
     }
     if (dir > 0)
-      distance += text.length;
+      distance += text2.length;
   }
   return iter.done ? { start: startToken, matched: false } : null;
 }
@@ -26109,7 +26136,7 @@ const defaultKeymap = /* @__PURE__ */ [
   { key: "Alt-A", run: toggleBlockComment }
 ].concat(standardKeymap);
 const indentWithTab = { key: "Tab", run: indentMore, shift: indentLess };
-var define_process_env_default = { GITHUB_STATE: "/home/runner/work/_temp/_runner_file_commands/save_state_05d17ecb-f1bf-45bf-85b8-8a30bb1e34e4", npm_package_scripts_build_n5_ci: "cd ./d9-n5 && yarn build-ci", npm_package_scripts_build_sample_cra: "cd ./d9-sample-cra && yarn build", STATS_TRP: "true", DEPLOYMENT_BASEPATH: "/opt/runner", DOTNET_NOLOGO: "1", npm_package_scripts_build_n6_ci: "cd ./d9-n6 && yarn build-ci", npm_package_dependencies__vitejs_plugin_react: "^4.2.1", USER: "runner", npm_config_version_commit_hooks: "true", npm_config_user_agent: "yarn/1.22.21 npm/? node/v18.20.2 linux x64", npm_package_dependencies__types_jest: "^29.5.4", CI: "true", npm_config_bin_links: "true", npm_package_bugs_url: "https://github.com/InsureMO/rainbow-d9/issues", npm_config_wrap_output: "", RUNNER_ENVIRONMENT: "github-hosted", GITHUB_ENV: "/home/runner/work/_temp/_runner_file_commands/set_env_05d17ecb-f1bf-45bf-85b8-8a30bb1e34e4", PIPX_HOME: "/opt/pipx", npm_node_execpath: "/opt/hostedtoolcache/node/18.20.2/x64/bin/node", npm_package_scripts_build_thai_all_ci: "yarn build-thai-plan-selection-ci", npm_config_init_version: "1.0.0", npm_package_devDependencies_gh_pages: "^6.1.1", npm_package_dependencies__babel_plugin_proposal_private_property_in_object: "^7.21.11", JAVA_HOME_8_X64: "/usr/lib/jvm/temurin-8-jdk-amd64", SHLVL: "1", HOME: "/home/runner", OLDPWD: "/home/runner/work/rainbow-d9/rainbow-d9", npm_package_browserslist_production_0: ">0.2%", RUNNER_TEMP: "/home/runner/work/_temp", GITHUB_EVENT_PATH: "/home/runner/work/_temp/_github_workflow/event.json", npm_package_scripts_build_all: "yarn build-n123 && yarn build-n5 && yarn build-n6 && yarn build-echarts && yarn build-thai-all", npm_package_browserslist_production_1: "not dead", npm_package_dependencies_react_syntax_highlighter: "^15.5.0", JAVA_HOME_11_X64: "/usr/lib/jvm/temurin-11-jdk-amd64", PIPX_BIN_DIR: "/opt/pipx_bin", GITHUB_REPOSITORY_OWNER: "InsureMO", npm_package_volta_node: "18.19.0", npm_config_init_license: "MIT", npm_package_browserslist_production_2: "not op_mini all", GRADLE_HOME: "/usr/share/gradle-8.7", ANDROID_NDK_LATEST_HOME: "/usr/local/lib/android/sdk/ndk/26.3.11579264", JAVA_HOME_21_X64: "/usr/lib/jvm/temurin-21-jdk-amd64", STATS_RDCL: "true", GITHUB_RETENTION_DAYS: "90", YARN_WRAP_OUTPUT: "false", npm_package_scripts_build_thai_plan_selection_ci: "cd ./d9-thai-plan-selection && yarn build-ci", npm_package_scripts_build_n1: "cd ./d9-n1 && yarn build", npm_config_version_tag_prefix: "v", npm_package_dependencies__rainbow_d9_n2: "1.1.28-alpha.3", GITHUB_REPOSITORY_OWNER_ID: "38915232", POWERSHELL_DISTRIBUTION_CHANNEL: "GitHub-Actions-ubuntu22", AZURE_EXTENSION_DIR: "/opt/az/azcliextensions", GITHUB_HEAD_REF: "", npm_package_scripts_build_n2: "cd ./d9-n2 && yarn build", npm_package_dependencies__types_styled_components: "^5.1.34", npm_package_dependencies__rainbow_d9_n3: "1.1.28-alpha.3", npm_package_dependencies__rainbow_d9_echarts: "1.1.28-alpha.3", SYSTEMD_EXEC_PID: "588", npm_package_scripts_build_echarts: "cd ./d9-echarts && yarn build", npm_package_scripts_build_n3: "cd ./d9-n3 && yarn build", GITHUB_GRAPHQL_URL: "https://api.github.com/graphql", npm_package_description: "Assume the following envs are ready, otherwise contact the tech guy.", npm_package_scripts_predeploy: "npm run build", npm_package_dependencies__rainbow_d9_n5: "1.1.28-alpha.3", GOROOT_1_20_X64: "/opt/hostedtoolcache/go/1.20.14/x64", NVM_DIR: "/home/runner/.nvm", npm_package_readmeFilename: "README.md", npm_package_scripts_build_n5: "cd ./d9-n5 && yarn build", npm_package_dependencies__types_react: "^18.2.21", npm_package_dependencies__testing_library_react: "^13.4.0", npm_package_dependencies__rainbow_d9_n6: "1.1.28-alpha.3", DOTNET_SKIP_FIRST_TIME_EXPERIENCE: "1", GOROOT_1_21_X64: "/opt/hostedtoolcache/go/1.21.10/x64", JAVA_HOME_17_X64: "/usr/lib/jvm/temurin-17-jdk-amd64", ImageVersion: "20240516.1.0", npm_package_scripts_build_n6: "cd ./d9-n6 && yarn build", RUNNER_OS: "Linux", GITHUB_API_URL: "https://api.github.com", GOROOT_1_22_X64: "/opt/hostedtoolcache/go/1.22.3/x64", SWIFT_PATH: "/usr/share/swift/usr/bin", RUNNER_USER: "runner", STATS_V3PS: "true", CHROMEWEBDRIVER: "/usr/local/share/chromedriver-linux64", JOURNAL_STREAM: "8:21636", GITHUB_WORKFLOW: "Publish to NPM", _: "/opt/hostedtoolcache/node/18.20.2/x64/bin/yarn", npm_package_private: "true", npm_package_dependencies_remark_gfm: "3.0.1", npm_package_scripts_build_thai_all: "yarn build-thai-plan-selection", npm_config_registry: "https://registry.yarnpkg.com", ACTIONS_RUNNER_ACTION_ARCHIVE_CACHE: "/opt/actionarchivecache", STATS_D: "true", GITHUB_RUN_ID: "9223139584", STATS_VMFE: "true", npm_package_workspaces_0: "d9-n1", GITHUB_REF_TYPE: "tag", BOOTSTRAP_HASKELL_NONINTERACTIVE: "1", GITHUB_WORKFLOW_SHA: "1156073c730314c1456fa6ca0b3f404a6e705e2c", GITHUB_BASE_REF: "", ImageOS: "ubuntu22", npm_package_scripts_build_n123_ci: "yarn build-n1-ci && yarn build-n2-ci && yarn build-n3-ci", npm_package_workspaces_1: "d9-n2", npm_config_ignore_scripts: "", npm_package_scripts_start: "vite", npm_package_dependencies_github_markdown_css: "^5.5.0", GITHUB_WORKFLOW_REF: "InsureMO/rainbow-d9/.github/workflows/release.yml@refs/tags/r-1.1.28-alpha.4", PERFLOG_LOCATION_SETTING: "RUNNER_PERFLOG", GITHUB_ACTION_REPOSITORY: "", npm_package_workspaces_2: "d9-n3", npm_package_browserslist_development_0: "last 1 chrome version", PATH: "/tmp/yarn--1716550130178-0.7532860034134838:/home/runner/work/rainbow-d9/rainbow-d9/d9-sample-cra/node_modules/.bin:/home/runner/.config/yarn/link/node_modules/.bin:/home/runner/work/rainbow-d9/rainbow-d9/node_modules/.bin:/opt/hostedtoolcache/node/18.20.2/x64/libexec/lib/node_modules/npm/bin/node-gyp-bin:/opt/hostedtoolcache/node/18.20.2/x64/lib/node_modules/npm/bin/node-gyp-bin:/opt/hostedtoolcache/node/18.20.2/x64/bin/node_modules/npm/bin/node-gyp-bin:/tmp/yarn--1716550129975-0.8167086151158107:/home/runner/work/rainbow-d9/rainbow-d9/node_modules/.bin:/home/runner/.config/yarn/link/node_modules/.bin:/home/runner/work/rainbow-d9/rainbow-d9/node_modules/.bin:/opt/hostedtoolcache/node/18.20.2/x64/libexec/lib/node_modules/npm/bin/node-gyp-bin:/opt/hostedtoolcache/node/18.20.2/x64/lib/node_modules/npm/bin/node-gyp-bin:/opt/hostedtoolcache/node/18.20.2/x64/bin/node_modules/npm/bin/node-gyp-bin:/opt/hostedtoolcache/node/18.20.2/x64/bin:/snap/bin:/home/runner/.local/bin:/opt/pipx_bin:/home/runner/.cargo/bin:/home/runner/.config/composer/vendor/bin:/usr/local/.ghcup/bin:/home/runner/.dotnet/tools:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin", NODE: "/opt/hostedtoolcache/node/18.20.2/x64/bin/node", ANT_HOME: "/usr/share/ant", DOTNET_MULTILEVEL_LOOKUP: "0", RUNNER_TRACKING_ID: "github_9086b28b-b348-49a5-b45d-11935b4f4352", INVOCATION_ID: "d2f5781c18db45bcbadbe677324b884d", RUNNER_TOOL_CACHE: "/opt/hostedtoolcache", npm_package_name: "@rainbow-d9/sample-cra", npm_package_workspaces_3: "d9-n5", npm_package_browserslist_development_1: "last 1 firefox version", npm_package_repository_type: "git", npm_package_dependencies__types_react_syntax_highlighter: "^15.5.11", npm_package_dependencies__rainbow_d9_thai_plan_selection: "1.1.28-alpha.3", GITHUB_ACTION: "__run_5", GITHUB_RUN_NUMBER: "122", GITHUB_TRIGGERING_ACTOR: "bradwoo8621", RUNNER_ARCH: "X64", XDG_RUNTIME_DIR: "/run/user/1001", AGENT_TOOLSDIRECTORY: "/opt/hostedtoolcache", npm_package_scripts_build_thai_plan_selection: "cd ./d9-thai-plan-selection && yarn build", npm_package_workspaces_4: "d9-n6", npm_package_browserslist_development_2: "last 1 safari version", npm_package_workspaces_5: "d9-echarts", LANG: "C.UTF-8", VCPKG_INSTALLATION_ROOT: "/usr/local/share/vcpkg", npm_package_workspaces_6: "d9-thai-plan-selection", npm_package_dependencies_react_dom: "^18.2.0", CONDA: "/usr/share/miniconda", RUNNER_NAME: "GitHub Actions 18", XDG_CONFIG_HOME: "/home/runner/.config", STATS_VMD: "true", GITHUB_REF_NAME: "r-1.1.28-alpha.4", GITHUB_REPOSITORY: "InsureMO/rainbow-d9", STATS_D_D: "true", npm_lifecycle_script: "vite build", npm_package_workspaces_7: "d9-sample-cra", npm_package_eslintConfig_extends_0: "react-app", npm_package_dependencies_vite_plugin_markdown: "^2.2.0", npm_package_dependencies_react_markdown: "8.0.7", npm_package_dependencies__types_node: "^20.5.3", STATS_UE: "true", ANDROID_NDK_ROOT: "/usr/local/lib/android/sdk/ndk/25.2.9519653", GITHUB_ACTION_REF: "", DEBIAN_FRONTEND: "noninteractive", npm_package_scripts_build_sample_cra_ci: "cd ./d9-sample-cra && yarn build", npm_config_version_git_message: "v%s", npm_package_eslintConfig_extends_1: "react-app/jest", GITHUB_REPOSITORY_ID: "704514093", GITHUB_ACTIONS: "true", npm_lifecycle_event: "build", npm_package_version: "1.1.28-alpha.3", npm_package_repository_url: "git+https://github.com/InsureMO/rainbow-d9.git", npm_package_dependencies__testing_library_jest_dom: "^5.17.0", GITHUB_REF_PROTECTED: "false", npm_config_argv: '{"remain":[],"cooked":["run","build-sample-cra"],"original":["build-sample-cra"]}', npm_package_volta_yarn: "1.22.21", npm_package_scripts_build: "vite build", npm_package_dependencies__testing_library_user_event: "^13.5.0", GITHUB_WORKSPACE: "/home/runner/work/rainbow-d9/rainbow-d9", ACCEPT_EULA: "Y", GITHUB_JOB: "create-sample-pages", RUNNER_PERFLOG: "/home/runner/perflog", npm_package_dependencies_vite: "^5.0.13", GITHUB_SHA: "1156073c730314c1456fa6ca0b3f404a6e705e2c", GITHUB_RUN_ATTEMPT: "1", npm_config_version_git_tag: "true", npm_config_version_git_sign: "", GITHUB_REF: "refs/tags/r-1.1.28-alpha.4", GITHUB_ACTOR: "bradwoo8621", ANDROID_SDK_ROOT: "/usr/local/lib/android/sdk", npm_package_license: "MIT", npm_config_strict_ssl: "true", LEIN_HOME: "/usr/local/lib/lein", npm_package_scripts_build_n123: "yarn build-n1 && yarn build-n2 && yarn build-n3", GITHUB_PATH: "/home/runner/work/_temp/_runner_file_commands/add_path_05d17ecb-f1bf-45bf-85b8-8a30bb1e34e4", JAVA_HOME: "/usr/lib/jvm/temurin-11-jdk-amd64", PWD: "/home/runner/work/rainbow-d9/rainbow-d9/d9-sample-cra", GITHUB_ACTOR_ID: "2330098", RUNNER_WORKSPACE: "/home/runner/work/rainbow-d9", npm_execpath: "/opt/hostedtoolcache/node/18.20.2/x64/lib/node_modules/yarn/bin/yarn.js", npm_package_scripts_build_all_ci: "yarn build-n123-ci && yarn build-n5-ci && yarn build-n6-ci && yarn build-echarts-ci && yarn build-thai-all-ci", HOMEBREW_CLEANUP_PERIODIC_FULL_DAYS: "3650", GITHUB_EVENT_NAME: "push", HOMEBREW_NO_AUTO_UPDATE: "1", ANDROID_HOME: "/usr/local/lib/android/sdk", GITHUB_SERVER_URL: "https://github.com", GECKOWEBDRIVER: "/usr/local/share/gecko_driver", LEIN_JAR: "/usr/local/lib/lein/self-installs/leiningen-2.11.2-standalone.jar", GHCUP_INSTALL_BASE_PREFIX: "/usr/local", GITHUB_OUTPUT: "/home/runner/work/_temp/_runner_file_commands/set_output_05d17ecb-f1bf-45bf-85b8-8a30bb1e34e4", npm_package_author_name: "Rainbow Team", EDGEWEBDRIVER: "/usr/local/share/edge_driver", STATS_EXT: "true", npm_package_scripts_build_n1_ci: "cd ./d9-n1 && yarn build-ci", npm_config_save_prefix: "^", npm_config_ignore_optional: "", ANDROID_NDK: "/usr/local/lib/android/sdk/ndk/25.2.9519653", SGX_AESM_ADDR: "1", CHROME_BIN: "/usr/bin/google-chrome", npm_package_scripts_build_n2_ci: "cd ./d9-n2 && yarn build-ci", npm_package_scripts_deploy: "gh-pages -d build", npm_package_scripts_preview: "vite preview", SELENIUM_JAR_PATH: "/usr/share/java/selenium-server.jar", STATS_EXTP: "https://provjobdsettingscdn.blob.core.windows.net/settings/provjobdsettings-0.5.172+1/provjobd.data", npm_package_scripts_build_echarts_ci: "cd ./d9-echarts && yarn build-ci", npm_package_scripts_build_n3_ci: "cd ./d9-n3 && yarn build-ci", npm_package_dependencies_web_vitals: "^2.1.4", npm_package_dependencies_typescript: "^5.1.6", INIT_CWD: "/home/runner/work/rainbow-d9/rainbow-d9", ANDROID_NDK_HOME: "/usr/local/lib/android/sdk/ndk/25.2.9519653", GITHUB_STEP_SUMMARY: "/home/runner/work/_temp/_runner_file_commands/step_summary_05d17ecb-f1bf-45bf-85b8-8a30bb1e34e4", npm_package_dependencies_react: "^18.2.0", npm_package_dependencies__types_react_dom: "^18.2.7", NODE_ENV: "production" };
+var define_process_env_default = { GITHUB_STATE: "/home/runner/work/_temp/_runner_file_commands/save_state_532ed1e4-b4ac-4474-9feb-d7a73a3a6f01", GIT_CLONE_PROTECTION_ACTIVE: "false", npm_package_scripts_build_n5_ci: "cd ./d9-n5 && yarn build-ci", npm_package_scripts_build_sample_cra: "cd ./d9-sample-cra && yarn build", STATS_TRP: "true", DEPLOYMENT_BASEPATH: "/opt/runner", DOTNET_NOLOGO: "1", npm_package_scripts_build_n6_ci: "cd ./d9-n6 && yarn build-ci", npm_package_dependencies__vitejs_plugin_react: "^4.2.1", USER: "runner", npm_config_version_commit_hooks: "true", npm_config_user_agent: "yarn/1.22.21 npm/? node/v18.20.3 linux x64", npm_package_dependencies__types_jest: "^29.5.4", CI: "true", npm_config_bin_links: "true", npm_package_bugs_url: "https://github.com/InsureMO/rainbow-d9/issues", npm_config_wrap_output: "", RUNNER_ENVIRONMENT: "github-hosted", GITHUB_ENV: "/home/runner/work/_temp/_runner_file_commands/set_env_532ed1e4-b4ac-4474-9feb-d7a73a3a6f01", PIPX_HOME: "/opt/pipx", npm_node_execpath: "/opt/hostedtoolcache/node/18.20.3/x64/bin/node", npm_package_scripts_build_thai_all_ci: "yarn build-thai-plan-selection-ci", npm_config_init_version: "1.0.0", npm_package_devDependencies_gh_pages: "^6.1.1", npm_package_dependencies__babel_plugin_proposal_private_property_in_object: "^7.21.11", JAVA_HOME_8_X64: "/usr/lib/jvm/temurin-8-jdk-amd64", SHLVL: "1", HOME: "/home/runner", OLDPWD: "/home/runner/work/rainbow-d9/rainbow-d9", npm_package_browserslist_production_0: ">0.2%", RUNNER_TEMP: "/home/runner/work/_temp", GITHUB_EVENT_PATH: "/home/runner/work/_temp/_github_workflow/event.json", npm_package_scripts_build_all: "yarn build-n123 && yarn build-n5 && yarn build-n6 && yarn build-echarts && yarn build-thai-all", npm_package_browserslist_production_1: "not dead", npm_package_dependencies_react_syntax_highlighter: "^15.5.0", JAVA_HOME_11_X64: "/usr/lib/jvm/temurin-11-jdk-amd64", PIPX_BIN_DIR: "/opt/pipx_bin", GITHUB_REPOSITORY_OWNER: "InsureMO", npm_package_volta_node: "18.19.0", npm_config_init_license: "MIT", npm_package_browserslist_production_2: "not op_mini all", GRADLE_HOME: "/usr/share/gradle-8.7", ANDROID_NDK_LATEST_HOME: "/usr/local/lib/android/sdk/ndk/26.3.11579264", JAVA_HOME_21_X64: "/usr/lib/jvm/temurin-21-jdk-amd64", STATS_RDCL: "true", GITHUB_RETENTION_DAYS: "90", YARN_WRAP_OUTPUT: "false", npm_package_scripts_build_thai_plan_selection_ci: "cd ./d9-thai-plan-selection && yarn build-ci", npm_package_scripts_build_n1: "cd ./d9-n1 && yarn build", npm_config_version_tag_prefix: "v", npm_package_dependencies__rainbow_d9_n2: "1.1.28-alpha.4", GITHUB_REPOSITORY_OWNER_ID: "38915232", POWERSHELL_DISTRIBUTION_CHANNEL: "GitHub-Actions-ubuntu22", AZURE_EXTENSION_DIR: "/opt/az/azcliextensions", GITHUB_HEAD_REF: "", npm_package_scripts_build_n2: "cd ./d9-n2 && yarn build", npm_package_dependencies__types_styled_components: "^5.1.34", npm_package_dependencies__rainbow_d9_n3: "1.1.28-alpha.4", npm_package_dependencies__rainbow_d9_echarts: "1.1.28-alpha.4", SYSTEMD_EXEC_PID: "585", npm_package_scripts_build_echarts: "cd ./d9-echarts && yarn build", npm_package_scripts_build_n3: "cd ./d9-n3 && yarn build", GITHUB_GRAPHQL_URL: "https://api.github.com/graphql", npm_package_description: "Assume the following envs are ready, otherwise contact the tech guy.", npm_package_scripts_predeploy: "npm run build", npm_package_dependencies__rainbow_d9_n5: "1.1.28-alpha.4", GOROOT_1_20_X64: "/opt/hostedtoolcache/go/1.20.14/x64", NVM_DIR: "/home/runner/.nvm", npm_package_readmeFilename: "README.md", npm_package_scripts_build_n5: "cd ./d9-n5 && yarn build", npm_package_dependencies__types_react: "^18.2.21", npm_package_dependencies__testing_library_react: "^13.4.0", npm_package_dependencies__rainbow_d9_n6: "1.1.28-alpha.4", DOTNET_SKIP_FIRST_TIME_EXPERIENCE: "1", GOROOT_1_21_X64: "/opt/hostedtoolcache/go/1.21.10/x64", JAVA_HOME_17_X64: "/usr/lib/jvm/temurin-17-jdk-amd64", ImageVersion: "20240526.1.0", npm_package_scripts_build_n6: "cd ./d9-n6 && yarn build", RUNNER_OS: "Linux", GITHUB_API_URL: "https://api.github.com", GOROOT_1_22_X64: "/opt/hostedtoolcache/go/1.22.3/x64", SWIFT_PATH: "/usr/share/swift/usr/bin", RUNNER_USER: "runner", STATS_V3PS: "true", CHROMEWEBDRIVER: "/usr/local/share/chromedriver-linux64", JOURNAL_STREAM: "8:16331", GITHUB_WORKFLOW: "Publish to NPM", _: "/opt/hostedtoolcache/node/18.20.3/x64/bin/yarn", npm_package_private: "true", npm_package_dependencies_remark_gfm: "4.0.0", npm_package_scripts_build_thai_all: "yarn build-thai-plan-selection", npm_config_registry: "https://registry.yarnpkg.com", ACTIONS_RUNNER_ACTION_ARCHIVE_CACHE: "/opt/actionarchivecache", STATS_D: "true", GITHUB_RUN_ID: "9287181396", STATS_VMFE: "true", npm_package_workspaces_0: "d9-n1", GITHUB_REF_TYPE: "tag", BOOTSTRAP_HASKELL_NONINTERACTIVE: "1", GITHUB_WORKFLOW_SHA: "1d16adc43fefd8f26a54a0ed05cfa326a9ebb38b", GITHUB_BASE_REF: "", ImageOS: "ubuntu22", npm_package_scripts_build_n123_ci: "yarn build-n1-ci && yarn build-n2-ci && yarn build-n3-ci", npm_package_workspaces_1: "d9-n2", npm_config_ignore_scripts: "", npm_package_scripts_start: "vite", npm_package_dependencies_github_markdown_css: "^5.5.0", GITHUB_WORKFLOW_REF: "InsureMO/rainbow-d9/.github/workflows/release.yml@refs/tags/r-1.1.29", PERFLOG_LOCATION_SETTING: "RUNNER_PERFLOG", GITHUB_ACTION_REPOSITORY: "", npm_package_workspaces_2: "d9-n3", npm_package_browserslist_development_0: "last 1 chrome version", PATH: "/tmp/yarn--1716990277117-0.02124136281461375:/home/runner/work/rainbow-d9/rainbow-d9/d9-sample-cra/node_modules/.bin:/home/runner/.config/yarn/link/node_modules/.bin:/home/runner/work/rainbow-d9/rainbow-d9/node_modules/.bin:/opt/hostedtoolcache/node/18.20.3/x64/libexec/lib/node_modules/npm/bin/node-gyp-bin:/opt/hostedtoolcache/node/18.20.3/x64/lib/node_modules/npm/bin/node-gyp-bin:/opt/hostedtoolcache/node/18.20.3/x64/bin/node_modules/npm/bin/node-gyp-bin:/tmp/yarn--1716990276919-0.19868152513611115:/home/runner/work/rainbow-d9/rainbow-d9/node_modules/.bin:/home/runner/.config/yarn/link/node_modules/.bin:/home/runner/work/rainbow-d9/rainbow-d9/node_modules/.bin:/opt/hostedtoolcache/node/18.20.3/x64/libexec/lib/node_modules/npm/bin/node-gyp-bin:/opt/hostedtoolcache/node/18.20.3/x64/lib/node_modules/npm/bin/node-gyp-bin:/opt/hostedtoolcache/node/18.20.3/x64/bin/node_modules/npm/bin/node-gyp-bin:/opt/hostedtoolcache/node/18.20.3/x64/bin:/snap/bin:/home/runner/.local/bin:/opt/pipx_bin:/home/runner/.cargo/bin:/home/runner/.config/composer/vendor/bin:/usr/local/.ghcup/bin:/home/runner/.dotnet/tools:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin", NODE: "/opt/hostedtoolcache/node/18.20.3/x64/bin/node", ANT_HOME: "/usr/share/ant", DOTNET_MULTILEVEL_LOOKUP: "0", RUNNER_TRACKING_ID: "github_425aea90-0004-4fb4-bb3b-6edaf1e88094", INVOCATION_ID: "a57582f6828344c281aabe098218e2db", RUNNER_TOOL_CACHE: "/opt/hostedtoolcache", npm_package_name: "@rainbow-d9/sample-cra", npm_package_workspaces_3: "d9-n5", npm_package_browserslist_development_1: "last 1 firefox version", npm_package_repository_type: "git", npm_package_dependencies__types_react_syntax_highlighter: "^15.5.11", npm_package_dependencies__rainbow_d9_thai_plan_selection: "1.1.28-alpha.4", GITHUB_ACTION: "__run_5", GITHUB_RUN_NUMBER: "123", GITHUB_TRIGGERING_ACTOR: "bradwoo8621", RUNNER_ARCH: "X64", XDG_RUNTIME_DIR: "/run/user/1001", AGENT_TOOLSDIRECTORY: "/opt/hostedtoolcache", npm_package_scripts_build_thai_plan_selection: "cd ./d9-thai-plan-selection && yarn build", npm_package_workspaces_4: "d9-n6", npm_package_browserslist_development_2: "last 1 safari version", npm_package_workspaces_5: "d9-echarts", LANG: "C.UTF-8", VCPKG_INSTALLATION_ROOT: "/usr/local/share/vcpkg", npm_package_workspaces_6: "d9-thai-plan-selection", npm_package_dependencies_react_dom: "^18.2.0", CONDA: "/usr/share/miniconda", RUNNER_NAME: "GitHub Actions 18", XDG_CONFIG_HOME: "/home/runner/.config", STATS_VMD: "true", GITHUB_REF_NAME: "r-1.1.29", GITHUB_REPOSITORY: "InsureMO/rainbow-d9", STATS_D_D: "true", npm_lifecycle_script: "vite build", npm_package_workspaces_7: "d9-sample-cra", npm_package_eslintConfig_extends_0: "react-app", npm_package_dependencies_vite_plugin_markdown: "^2.2.0", npm_package_dependencies_react_markdown: "9.0.1", npm_package_dependencies__types_node: "^20.5.3", STATS_UE: "true", ANDROID_NDK_ROOT: "/usr/local/lib/android/sdk/ndk/25.2.9519653", GITHUB_ACTION_REF: "", DEBIAN_FRONTEND: "noninteractive", npm_package_scripts_build_sample_cra_ci: "cd ./d9-sample-cra && yarn build", npm_config_version_git_message: "v%s", npm_package_eslintConfig_extends_1: "react-app/jest", GITHUB_REPOSITORY_ID: "704514093", GITHUB_ACTIONS: "true", npm_lifecycle_event: "build", npm_package_version: "1.1.28-alpha.4", npm_package_repository_url: "git+https://github.com/InsureMO/rainbow-d9.git", npm_package_dependencies__testing_library_jest_dom: "^5.17.0", GITHUB_REF_PROTECTED: "false", npm_config_argv: '{"remain":[],"cooked":["run","build-sample-cra"],"original":["build-sample-cra"]}', npm_package_volta_yarn: "1.22.21", npm_package_scripts_build: "vite build", npm_package_dependencies__testing_library_user_event: "^13.5.0", GITHUB_WORKSPACE: "/home/runner/work/rainbow-d9/rainbow-d9", ACCEPT_EULA: "Y", GITHUB_JOB: "create-sample-pages", RUNNER_PERFLOG: "/home/runner/perflog", npm_package_dependencies_vite: "^5.0.13", GITHUB_SHA: "1d16adc43fefd8f26a54a0ed05cfa326a9ebb38b", GITHUB_RUN_ATTEMPT: "1", npm_config_version_git_tag: "true", npm_config_version_git_sign: "", GITHUB_REF: "refs/tags/r-1.1.29", GITHUB_ACTOR: "bradwoo8621", ANDROID_SDK_ROOT: "/usr/local/lib/android/sdk", npm_package_license: "MIT", npm_config_strict_ssl: "true", LEIN_HOME: "/usr/local/lib/lein", npm_package_scripts_build_n123: "yarn build-n1 && yarn build-n2 && yarn build-n3", GITHUB_PATH: "/home/runner/work/_temp/_runner_file_commands/add_path_532ed1e4-b4ac-4474-9feb-d7a73a3a6f01", JAVA_HOME: "/usr/lib/jvm/temurin-11-jdk-amd64", PWD: "/home/runner/work/rainbow-d9/rainbow-d9/d9-sample-cra", GITHUB_ACTOR_ID: "2330098", RUNNER_WORKSPACE: "/home/runner/work/rainbow-d9", npm_execpath: "/opt/hostedtoolcache/node/18.20.3/x64/lib/node_modules/yarn/bin/yarn.js", npm_package_scripts_build_all_ci: "yarn build-n123-ci && yarn build-n5-ci && yarn build-n6-ci && yarn build-echarts-ci && yarn build-thai-all-ci", HOMEBREW_CLEANUP_PERIODIC_FULL_DAYS: "3650", GITHUB_EVENT_NAME: "push", HOMEBREW_NO_AUTO_UPDATE: "1", ANDROID_HOME: "/usr/local/lib/android/sdk", GITHUB_SERVER_URL: "https://github.com", GECKOWEBDRIVER: "/usr/local/share/gecko_driver", LEIN_JAR: "/usr/local/lib/lein/self-installs/leiningen-2.11.2-standalone.jar", GHCUP_INSTALL_BASE_PREFIX: "/usr/local", GITHUB_OUTPUT: "/home/runner/work/_temp/_runner_file_commands/set_output_532ed1e4-b4ac-4474-9feb-d7a73a3a6f01", npm_package_author_name: "Rainbow Team", EDGEWEBDRIVER: "/usr/local/share/edge_driver", STATS_EXT: "true", npm_package_scripts_build_n1_ci: "cd ./d9-n1 && yarn build-ci", npm_config_save_prefix: "^", npm_config_ignore_optional: "", ANDROID_NDK: "/usr/local/lib/android/sdk/ndk/25.2.9519653", SGX_AESM_ADDR: "1", CHROME_BIN: "/usr/bin/google-chrome", npm_package_scripts_build_n2_ci: "cd ./d9-n2 && yarn build-ci", npm_package_scripts_deploy: "gh-pages -d build", npm_package_scripts_preview: "vite preview", SELENIUM_JAR_PATH: "/usr/share/java/selenium-server.jar", STATS_EXTP: "https://provjobdsettingscdn.blob.core.windows.net/settings/provjobdsettings-0.5.181+6/provjobd.data", npm_package_scripts_build_echarts_ci: "cd ./d9-echarts && yarn build-ci", npm_package_scripts_build_n3_ci: "cd ./d9-n3 && yarn build-ci", npm_package_dependencies_web_vitals: "^2.1.4", npm_package_dependencies_typescript: "^5.1.6", INIT_CWD: "/home/runner/work/rainbow-d9/rainbow-d9", ANDROID_NDK_HOME: "/usr/local/lib/android/sdk/ndk/25.2.9519653", GITHUB_STEP_SUMMARY: "/home/runner/work/_temp/_runner_file_commands/step_summary_532ed1e4-b4ac-4474-9feb-d7a73a3a6f01", npm_package_dependencies_react: "^18.2.0", npm_package_dependencies__types_react_dom: "^18.2.7", NODE_ENV: "production" };
 let Stack$4 = class Stack {
   /**
   @internal
@@ -28156,14 +28183,14 @@ function ensureAnchor(expr, start) {
   return new RegExp(`${addStart ? "^" : ""}(?:${source})${addEnd ? "$" : ""}`, (_a2 = expr.flags) !== null && _a2 !== void 0 ? _a2 : expr.ignoreCase ? "i" : "");
 }
 const pickedCompletion = /* @__PURE__ */ Annotation.define();
-function insertCompletionText(state, text, from2, to) {
+function insertCompletionText(state, text2, from2, to) {
   let { main } = state.selection, fromOff = from2 - main.from, toOff = to - main.from;
   return Object.assign(Object.assign({}, state.changeByRange((range2) => {
     if (range2 != main && from2 != to && state.sliceDoc(range2.from + fromOff, range2.from + toOff) != state.sliceDoc(from2, to))
       return { range: range2 };
     return {
-      changes: { from: range2.from + fromOff, to: to == main.from ? range2.to : range2.from + toOff, insert: text },
-      range: EditorSelection.cursor(range2.from + fromOff + text.length)
+      changes: { from: range2.from + fromOff, to: to == main.from ? range2.to : range2.from + toOff, insert: text2 },
+      range: EditorSelection.cursor(range2.from + fromOff + text2.length)
     };
   })), { scrollIntoView: true, userEvent: "input.complete" });
 }
@@ -28940,8 +28967,8 @@ class ActiveResult extends ActiveSource {
 function checkValid(validFor, state, from2, to) {
   if (!validFor)
     return false;
-  let text = state.sliceDoc(from2, to);
-  return typeof validFor == "function" ? validFor(text, from2, to, state) : ensureAnchor(validFor, true).test(text);
+  let text2 = state.sliceDoc(from2, to);
+  return typeof validFor == "function" ? validFor(text2, from2, to, state) : ensureAnchor(validFor, true).test(text2);
 }
 const setActiveEffect = /* @__PURE__ */ StateEffect.define({
   map(sources, mapping) {
@@ -29330,21 +29357,21 @@ class Snippet {
     this.fieldPositions = fieldPositions;
   }
   instantiate(state, pos) {
-    let text = [], lineStart = [pos];
+    let text2 = [], lineStart = [pos];
     let lineObj = state.doc.lineAt(pos), baseIndent = /^\s*/.exec(lineObj.text)[0];
     for (let line2 of this.lines) {
-      if (text.length) {
+      if (text2.length) {
         let indent = baseIndent, tabs = /^\t*/.exec(line2)[0].length;
         for (let i2 = 0; i2 < tabs; i2++)
           indent += state.facet(indentUnit);
         lineStart.push(pos + indent.length - tabs);
         line2 = indent + line2.slice(tabs);
       }
-      text.push(line2);
+      text2.push(line2);
       pos += line2.length + 1;
     }
     let ranges = this.fieldPositions.map((pos2) => new FieldRange(pos2.field, lineStart[pos2.line] + pos2.from, lineStart[pos2.line] + pos2.to));
-    return { text, ranges };
+    return { text: text2, ranges };
   }
   static parse(template) {
     let fields = [];
@@ -29444,9 +29471,9 @@ function fieldSelection(ranges, field) {
 function snippet$1(template) {
   let snippet2 = Snippet.parse(template);
   return (editor, completion, from2, to) => {
-    let { text, ranges } = snippet2.instantiate(editor.state, from2);
+    let { text: text2, ranges } = snippet2.instantiate(editor.state, from2);
     let spec = {
-      changes: { from: from2, to, insert: Text.of(text) },
+      changes: { from: from2, to, insert: Text.of(text2) },
       scrollIntoView: true,
       annotations: completion ? [pickedCompletion.of(completion), Transaction.userEvent.of("input.complete")] : void 0
     };
@@ -30020,8 +30047,8 @@ function elementName$1(doc2, tree, max = doc2.length) {
   return "";
 }
 const android = typeof navigator == "object" && /* @__PURE__ */ /Android\b/.test(navigator.userAgent);
-const autoCloseTags$1 = /* @__PURE__ */ EditorView.inputHandler.of((view, from2, to, text, defaultInsert) => {
-  if ((android ? view.composing : view.compositionStarted) || view.state.readOnly || from2 != to || text != ">" && text != "/" || !javascriptLanguage.isActiveAt(view.state, from2, -1))
+const autoCloseTags$1 = /* @__PURE__ */ EditorView.inputHandler.of((view, from2, to, text2, defaultInsert) => {
+  if ((android ? view.composing : view.compositionStarted) || view.state.readOnly || from2 != to || text2 != ">" && text2 != "/" || !javascriptLanguage.isActiveAt(view.state, from2, -1))
     return false;
   let base2 = defaultInsert(), { state } = base2;
   let closeTags = state.changeByRange((range2) => {
@@ -30029,17 +30056,17 @@ const autoCloseTags$1 = /* @__PURE__ */ EditorView.inputHandler.of((view, from2,
     let { head: head2 } = range2, around = syntaxTree(state).resolveInner(head2 - 1, -1), name2;
     if (around.name == "JSXStartTag")
       around = around.parent;
-    if (state.doc.sliceString(head2 - 1, head2) != text || around.name == "JSXAttributeValue" && around.to > head2)
+    if (state.doc.sliceString(head2 - 1, head2) != text2 || around.name == "JSXAttributeValue" && around.to > head2)
       ;
-    else if (text == ">" && around.name == "JSXFragmentTag") {
+    else if (text2 == ">" && around.name == "JSXFragmentTag") {
       return { range: range2, changes: { from: head2, insert: `</>` } };
-    } else if (text == "/" && around.name == "JSXStartCloseTag") {
+    } else if (text2 == "/" && around.name == "JSXStartCloseTag") {
       let empty2 = around.parent, base3 = empty2.parent;
       if (base3 && empty2.from == head2 - 2 && ((name2 = elementName$1(state.doc, base3.firstChild, head2)) || ((_a2 = base3.firstChild) === null || _a2 === void 0 ? void 0 : _a2.name) == "JSXFragmentTag")) {
         let insert2 = `${name2}>`;
         return { range: EditorSelection.cursor(head2 + insert2.length, -1), changes: { from: head2, insert: insert2 } };
       }
-    } else if (text == ">") {
+    } else if (text2 == ">") {
       let openTag = findOpenTag(around);
       if (openTag && openTag.name == "JSXOpenTag" && !/^\/?>|^<\//.test(state.doc.sliceString(head2, head2 + 2)) && (name2 = elementName$1(state.doc, openTag, head2)))
         return { range: range2, changes: { from: head2, insert: `</${name2}>` } };
@@ -30170,8 +30197,8 @@ class Line2 {
     return skipSpace(this.text, from2);
   }
   /// @internal
-  reset(text) {
-    this.text = text;
+  reset(text2) {
+    this.text = text2;
     this.baseIndent = this.basePos = this.pos = this.indent = 0;
     this.forwardInner();
     this.depth = 1;
@@ -30605,9 +30632,9 @@ class LinkReferenceParser {
     }
   }
 }
-function lineEnd(text, pos) {
-  for (; pos < text.length; pos++) {
-    let next2 = text.charCodeAt(pos);
+function lineEnd(text2, pos) {
+  for (; pos < text2.length; pos++) {
+    let next2 = text2.charCodeAt(pos);
     if (next2 == 10)
       break;
     if (!space$3(next2))
@@ -30818,9 +30845,9 @@ class BlockContext {
   }
   /// @internal
   readLine() {
-    let { line: line2 } = this, { text, end } = this.scanLine(this.absoluteLineStart);
+    let { line: line2 } = this, { text: text2, end } = this.scanLine(this.absoluteLineStart);
     this.absoluteLineEnd = end;
-    line2.reset(text);
+    line2.reset(text2);
     for (; line2.depth < this.stack.length; line2.depth++) {
       let cx = this.stack[line2.depth], handler = this.parser.skipContextMarkup[cx.type];
       if (!handler)
@@ -30831,14 +30858,14 @@ class BlockContext {
     }
   }
   lineChunkAt(pos) {
-    let next2 = this.input.chunk(pos), text;
+    let next2 = this.input.chunk(pos), text2;
     if (!this.input.lineChunks) {
       let eol = next2.indexOf("\n");
-      text = eol < 0 ? next2 : next2.slice(0, eol);
+      text2 = eol < 0 ? next2 : next2.slice(0, eol);
     } else {
-      text = next2 == "\n" ? "" : next2;
+      text2 = next2 == "\n" ? "" : next2;
     }
-    return pos + text.length > this.to ? text.slice(0, this.to - pos) : text;
+    return pos + text2.length > this.to ? text2.slice(0, this.to - pos) : text2;
   }
   /// The end position of the previous line.
   prevLineEnd() {
@@ -31045,8 +31072,8 @@ class MarkdownParser extends Parser {
   /// Parse the given piece of inline text at the given offset,
   /// returning an array of [`Element`](#Element) objects representing
   /// the inline content.
-  parseInline(text, offset) {
-    let cx = new InlineContext(this, text, offset);
+  parseInline(text2, offset) {
+    let cx = new InlineContext(this, text2, offset);
     outer:
       for (let pos = offset; pos < cx.end; ) {
         let next2 = cx.char(pos);
@@ -31321,16 +31348,16 @@ const DefaultInline = {
   }
 };
 function finishLink(cx, content2, type2, start, startPos) {
-  let { text } = cx, next2 = cx.char(startPos), endPos = startPos;
+  let { text: text2 } = cx, next2 = cx.char(startPos), endPos = startPos;
   content2.unshift(elt(Type$2.LinkMark, start, start + (type2 == Type$2.Image ? 2 : 1)));
   content2.push(elt(Type$2.LinkMark, startPos - 1, startPos));
   if (next2 == 40) {
     let pos = cx.skipSpace(startPos + 1);
-    let dest = parseURL(text, pos - cx.offset, cx.offset), title;
+    let dest = parseURL(text2, pos - cx.offset, cx.offset), title;
     if (dest) {
       pos = cx.skipSpace(dest.to);
       if (pos != dest.to) {
-        title = parseLinkTitle(text, pos - cx.offset, cx.offset);
+        title = parseLinkTitle(text2, pos - cx.offset, cx.offset);
         if (title)
           pos = cx.skipSpace(title.to);
       }
@@ -31345,7 +31372,7 @@ function finishLink(cx, content2, type2, start, startPos) {
       content2.push(elt(Type$2.LinkMark, pos, endPos));
     }
   } else if (next2 == 91) {
-    let label = parseLinkLabel(text, startPos - cx.offset, cx.offset, false);
+    let label = parseLinkLabel(text2, startPos - cx.offset, cx.offset, false);
     if (label) {
       content2.push(label);
       endPos = label.to;
@@ -31353,11 +31380,11 @@ function finishLink(cx, content2, type2, start, startPos) {
   }
   return elt(type2, start, endPos, content2);
 }
-function parseURL(text, start, offset) {
-  let next2 = text.charCodeAt(start);
+function parseURL(text2, start, offset) {
+  let next2 = text2.charCodeAt(start);
   if (next2 == 60) {
-    for (let pos = start + 1; pos < text.length; pos++) {
-      let ch = text.charCodeAt(pos);
+    for (let pos = start + 1; pos < text2.length; pos++) {
+      let ch = text2.charCodeAt(pos);
       if (ch == 62)
         return elt(Type$2.URL, start + offset, pos + 1 + offset);
       if (ch == 60 || ch == 10)
@@ -31366,8 +31393,8 @@ function parseURL(text, start, offset) {
     return null;
   } else {
     let depth = 0, pos = start;
-    for (let escaped = false; pos < text.length; pos++) {
-      let ch = text.charCodeAt(pos);
+    for (let escaped = false; pos < text2.length; pos++) {
+      let ch = text2.charCodeAt(pos);
       if (space$3(ch)) {
         break;
       } else if (escaped) {
@@ -31382,16 +31409,16 @@ function parseURL(text, start, offset) {
         escaped = true;
       }
     }
-    return pos > start ? elt(Type$2.URL, start + offset, pos + offset) : pos == text.length ? null : false;
+    return pos > start ? elt(Type$2.URL, start + offset, pos + offset) : pos == text2.length ? null : false;
   }
 }
-function parseLinkTitle(text, start, offset) {
-  let next2 = text.charCodeAt(start);
+function parseLinkTitle(text2, start, offset) {
+  let next2 = text2.charCodeAt(start);
   if (next2 != 39 && next2 != 34 && next2 != 40)
     return false;
   let end = next2 == 40 ? 41 : next2;
-  for (let pos = start + 1, escaped = false; pos < text.length; pos++) {
-    let ch = text.charCodeAt(pos);
+  for (let pos = start + 1, escaped = false; pos < text2.length; pos++) {
+    let ch = text2.charCodeAt(pos);
     if (escaped)
       escaped = false;
     else if (ch == end)
@@ -31401,9 +31428,9 @@ function parseLinkTitle(text, start, offset) {
   }
   return null;
 }
-function parseLinkLabel(text, start, offset, requireNonWS) {
-  for (let escaped = false, pos = start + 1, end = Math.min(text.length, pos + 999); pos < end; pos++) {
-    let ch = text.charCodeAt(pos);
+function parseLinkLabel(text2, start, offset, requireNonWS) {
+  for (let escaped = false, pos = start + 1, end = Math.min(text2.length, pos + 999); pos < end; pos++) {
+    let ch = text2.charCodeAt(pos);
     if (escaped)
       escaped = false;
     else if (ch == 93)
@@ -31421,9 +31448,9 @@ function parseLinkLabel(text, start, offset, requireNonWS) {
 }
 class InlineContext {
   /// @internal
-  constructor(parser2, text, offset) {
+  constructor(parser2, text2, offset) {
     this.parser = parser2;
-    this.text = text;
+    this.text = text2;
     this.offset = offset;
     this.parts = [];
   }
@@ -31869,26 +31896,26 @@ function count(str2, from2, to, ch) {
       result++;
   return result;
 }
-function autolinkURLEnd(text, from2) {
+function autolinkURLEnd(text2, from2) {
   urlRE.lastIndex = from2;
-  let m2 = urlRE.exec(text);
+  let m2 = urlRE.exec(text2);
   if (!m2 || lastTwoDomainWords.exec(m2[0])[0].indexOf("_") > -1)
     return -1;
   let end = from2 + m2[0].length;
   for (; ; ) {
-    let last2 = text[end - 1], m3;
-    if (/[?!.,:*_~]/.test(last2) || last2 == ")" && count(text, from2, end, ")") > count(text, from2, end, "("))
+    let last2 = text2[end - 1], m3;
+    if (/[?!.,:*_~]/.test(last2) || last2 == ")" && count(text2, from2, end, ")") > count(text2, from2, end, "("))
       end--;
-    else if (last2 == ";" && (m3 = /&(?:#\d+|#x[a-f\d]+|\w+);$/.exec(text.slice(from2, end))))
+    else if (last2 == ";" && (m3 = /&(?:#\d+|#x[a-f\d]+|\w+);$/.exec(text2.slice(from2, end))))
       end = from2 + m3.index;
     else
       break;
   }
   return end;
 }
-function autolinkEmailEnd(text, from2) {
+function autolinkEmailEnd(text2, from2) {
   emailRE.lastIndex = from2;
-  let m2 = emailRE.exec(text);
+  let m2 = emailRE.exec(text2);
   if (!m2)
     return -1;
   let last2 = m2[0][m2[0].length - 1];
@@ -33979,23 +34006,23 @@ function html(config2 = {}) {
   ]);
 }
 const selfClosers = /* @__PURE__ */ new Set(/* @__PURE__ */ "area base br col command embed frame hr img input keygen link meta param source track wbr menuitem".split(" "));
-const autoCloseTags = /* @__PURE__ */ EditorView.inputHandler.of((view, from2, to, text, insertTransaction) => {
-  if (view.composing || view.state.readOnly || from2 != to || text != ">" && text != "/" || !htmlLanguage.isActiveAt(view.state, from2, -1))
+const autoCloseTags = /* @__PURE__ */ EditorView.inputHandler.of((view, from2, to, text2, insertTransaction) => {
+  if (view.composing || view.state.readOnly || from2 != to || text2 != ">" && text2 != "/" || !htmlLanguage.isActiveAt(view.state, from2, -1))
     return false;
   let base2 = insertTransaction(), { state } = base2;
   let closeTags = state.changeByRange((range2) => {
     var _a2, _b, _c;
-    let didType = state.doc.sliceString(range2.from - 1, range2.to) == text;
+    let didType = state.doc.sliceString(range2.from - 1, range2.to) == text2;
     let { head: head2 } = range2, around = syntaxTree(state).resolveInner(head2 - 1, -1), name2;
     if (around.name == "TagName" || around.name == "StartTag")
       around = around.parent;
-    if (didType && text == ">" && around.name == "OpenTag") {
+    if (didType && text2 == ">" && around.name == "OpenTag") {
       if (((_b = (_a2 = around.parent) === null || _a2 === void 0 ? void 0 : _a2.lastChild) === null || _b === void 0 ? void 0 : _b.name) != "CloseTag" && (name2 = elementName(state.doc, around.parent, head2)) && !selfClosers.has(name2)) {
         let to2 = head2 + (state.doc.sliceString(head2, head2 + 1) === ">" ? 1 : 0);
         let insert2 = `</${name2}>`;
         return { range: range2, changes: { from: head2, to: to2, insert: insert2 } };
       }
-    } else if (didType && text == "/" && around.name == "IncompleteCloseTag") {
+    } else if (didType && text2 == "/" && around.name == "IncompleteCloseTag") {
       let base3 = around.parent;
       if (around.from == head2 - 2 && ((_c = base3.lastChild) === null || _c === void 0 ? void 0 : _c.name) != "CloseTag" && (name2 = elementName(state.doc, base3, head2)) && !selfClosers.has(name2)) {
         let to2 = head2 + (state.doc.sliceString(head2, head2 + 1) === ">" ? 1 : 0);
@@ -34443,14 +34470,14 @@ class SearchCursor {
   [`.normalize("NFKD")`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/normalize)
   (when supported).
   */
-  constructor(text, query, from2 = 0, to = text.length, normalize2, test) {
+  constructor(text2, query, from2 = 0, to = text2.length, normalize2, test) {
     this.test = test;
     this.value = { from: 0, to: 0 };
     this.done = false;
     this.matches = [];
     this.buffer = "";
     this.bufferPos = 0;
-    this.iter = text.iterRange(from2, to);
+    this.iter = text2.iterRange(from2, to);
     this.bufferStart = from2;
     this.normalize = normalize2 ? (x) => normalize2(basicNormalize(x)) : basicNormalize;
     this.query = this.normalize(query);
@@ -34539,7 +34566,7 @@ if (typeof Symbol != "undefined")
   SearchCursor.prototype[Symbol.iterator] = function() {
     return this;
   };
-const empty = { from: -1, to: -1, match: /* @__PURE__ */ /.*/.exec("") };
+const empty$1 = { from: -1, to: -1, match: /* @__PURE__ */ /.*/.exec("") };
 const baseFlags = "gm" + (/x/.unicode == null ? "" : "u");
 class RegExpCursor {
   /**
@@ -34547,20 +34574,20 @@ class RegExpCursor {
   document. `query` should be the raw pattern (as you'd pass it to
   `new RegExp`).
   */
-  constructor(text, query, options, from2 = 0, to = text.length) {
-    this.text = text;
+  constructor(text2, query, options, from2 = 0, to = text2.length) {
+    this.text = text2;
     this.to = to;
     this.curLine = "";
     this.done = false;
-    this.value = empty;
+    this.value = empty$1;
     if (/\\[sWDnr]|\n|\r|\[\^/.test(query))
-      return new MultilineRegExpCursor(text, query, options, from2, to);
+      return new MultilineRegExpCursor(text2, query, options, from2, to);
     this.re = new RegExp(query, baseFlags + ((options === null || options === void 0 ? void 0 : options.ignoreCase) ? "i" : ""));
     this.test = options === null || options === void 0 ? void 0 : options.test;
-    this.iter = text.iter();
-    let startLine = text.lineAt(from2);
+    this.iter = text2.iter();
+    let startLine = text2.lineAt(from2);
     this.curLineStart = startLine.from;
-    this.matchPos = toCharEnd(text, from2);
+    this.matchPos = toCharEnd(text2, from2);
     this.getLine(this.curLineStart);
   }
   getLine(skip) {
@@ -34610,9 +34637,9 @@ class RegExpCursor {
 }
 const flattened = /* @__PURE__ */ new WeakMap();
 class FlattenedDoc {
-  constructor(from2, text) {
+  constructor(from2, text2) {
     this.from = from2;
-    this.text = text;
+    this.text = text2;
   }
   get to() {
     return this.from + this.text.length;
@@ -34626,27 +34653,27 @@ class FlattenedDoc {
     }
     if (cached.from == from2 && cached.to == to)
       return cached;
-    let { text, from: cachedFrom } = cached;
+    let { text: text2, from: cachedFrom } = cached;
     if (cachedFrom > from2) {
-      text = doc2.sliceString(from2, cachedFrom) + text;
+      text2 = doc2.sliceString(from2, cachedFrom) + text2;
       cachedFrom = from2;
     }
     if (cached.to < to)
-      text += doc2.sliceString(cached.to, to);
-    flattened.set(doc2, new FlattenedDoc(cachedFrom, text));
-    return new FlattenedDoc(from2, text.slice(from2 - cachedFrom, to - cachedFrom));
+      text2 += doc2.sliceString(cached.to, to);
+    flattened.set(doc2, new FlattenedDoc(cachedFrom, text2));
+    return new FlattenedDoc(from2, text2.slice(from2 - cachedFrom, to - cachedFrom));
   }
 }
 class MultilineRegExpCursor {
-  constructor(text, query, options, from2, to) {
-    this.text = text;
+  constructor(text2, query, options, from2, to) {
+    this.text = text2;
     this.to = to;
     this.done = false;
-    this.value = empty;
-    this.matchPos = toCharEnd(text, from2);
+    this.value = empty$1;
+    this.matchPos = toCharEnd(text2, from2);
     this.re = new RegExp(query, baseFlags + ((options === null || options === void 0 ? void 0 : options.ignoreCase) ? "i" : ""));
     this.test = options === null || options === void 0 ? void 0 : options.test;
-    this.flat = FlattenedDoc.get(text, from2, this.chunkEnd(
+    this.flat = FlattenedDoc.get(text2, from2, this.chunkEnd(
       from2 + 5e3
       /* Chunk.Base */
     ));
@@ -34691,10 +34718,10 @@ function validRegExp(source) {
     return false;
   }
 }
-function toCharEnd(text, pos) {
-  if (pos >= text.length)
+function toCharEnd(text2, pos) {
+  if (pos >= text2.length)
     return pos;
-  let line2 = text.lineAt(pos), next2;
+  let line2 = text2.lineAt(pos), next2;
   while (pos < line2.to && (next2 = line2.text.charCodeAt(pos - line2.from)) >= 56320 && next2 < 57344)
     pos++;
   return pos;
@@ -34943,8 +34970,8 @@ class SearchQuery {
   /**
   @internal
   */
-  unquote(text) {
-    return this.literal ? text : text.replace(/\\([nrt\\])/g, (_2, ch) => ch == "n" ? "\n" : ch == "r" ? "\r" : ch == "t" ? "	" : "\\");
+  unquote(text2) {
+    return this.literal ? text2 : text2.replace(/\\([nrt\\])/g, (_2, ch) => ch == "n" ? "\n" : ch == "r" ? "\r" : ch == "t" ? "	" : "\\");
   }
   /**
   Compare this query to another query.
@@ -35453,22 +35480,22 @@ const Break = /[\s\.,:;?!]/;
 function announceMatch(view, { from: from2, to }) {
   let line2 = view.state.doc.lineAt(from2), lineEnd2 = view.state.doc.lineAt(to).to;
   let start = Math.max(line2.from, from2 - AnnounceMargin), end = Math.min(lineEnd2, to + AnnounceMargin);
-  let text = view.state.sliceDoc(start, end);
+  let text2 = view.state.sliceDoc(start, end);
   if (start != line2.from) {
     for (let i2 = 0; i2 < AnnounceMargin; i2++)
-      if (!Break.test(text[i2 + 1]) && Break.test(text[i2])) {
-        text = text.slice(i2);
+      if (!Break.test(text2[i2 + 1]) && Break.test(text2[i2])) {
+        text2 = text2.slice(i2);
         break;
       }
   }
   if (end != lineEnd2) {
-    for (let i2 = text.length - 1; i2 > text.length - AnnounceMargin; i2--)
-      if (!Break.test(text[i2 - 1]) && Break.test(text[i2])) {
-        text = text.slice(0, i2);
+    for (let i2 = text2.length - 1; i2 > text2.length - AnnounceMargin; i2--)
+      if (!Break.test(text2[i2 - 1]) && Break.test(text2[i2])) {
+        text2 = text2.slice(0, i2);
         break;
       }
   }
-  return EditorView.announce.of(`${view.state.phrase("current match")}. ${text} ${view.state.phrase("on line")} ${line2.number}.`);
+  return EditorView.announce.of(`${view.state.phrase("current match")}. ${text2} ${view.state.phrase("on line")} ${line2.number}.`);
 }
 const baseTheme$2 = /* @__PURE__ */ EditorView.baseTheme({
   ".cm-panel.cm-search": {
@@ -36307,11 +36334,11 @@ var freeGlobal$1 = typeof commonjsGlobal == "object" && commonjsGlobal && common
 var _freeGlobal = freeGlobal$1;
 var freeGlobal = _freeGlobal;
 var freeSelf = typeof self == "object" && self && self.Object === Object && self;
-var root$a = freeGlobal || freeSelf || Function("return this")();
-var _root = root$a;
-var root$9 = _root;
+var root$b = freeGlobal || freeSelf || Function("return this")();
+var _root = root$b;
+var root$a = _root;
 var now$1 = function() {
-  return root$9.Date.now();
+  return root$a.Date.now();
 };
 var now_1 = now$1;
 var reWhitespace = /\s/;
@@ -36328,8 +36355,8 @@ function baseTrim$1(string2) {
   return string2 ? string2.slice(0, trimmedEndIndex(string2) + 1).replace(reTrimStart, "") : string2;
 }
 var _baseTrim = baseTrim$1;
-var root$8 = _root;
-var Symbol$7 = root$8.Symbol;
+var root$9 = _root;
+var Symbol$7 = root$9.Symbol;
 var _Symbol = Symbol$7;
 var Symbol$6 = _Symbol;
 var objectProto$e = Object.prototype;
@@ -36532,12 +36559,12 @@ var isArguments$3 = baseIsArguments(/* @__PURE__ */ function() {
 var isArguments_1 = isArguments$3;
 var isArray$j = Array.isArray;
 var isArray_1 = isArray$j;
-var isBuffer$5 = { exports: {} };
+var isBuffer$3 = { exports: {} };
 function stubFalse() {
   return false;
 }
 var stubFalse_1 = stubFalse;
-isBuffer$5.exports;
+isBuffer$3.exports;
 (function(module, exports) {
   var root2 = _root, stubFalse2 = stubFalse_1;
   var freeExports = exports && !exports.nodeType && exports;
@@ -36545,10 +36572,10 @@ isBuffer$5.exports;
   var moduleExports = freeModule && freeModule.exports === freeExports;
   var Buffer2 = moduleExports ? root2.Buffer : void 0;
   var nativeIsBuffer = Buffer2 ? Buffer2.isBuffer : void 0;
-  var isBuffer3 = nativeIsBuffer || stubFalse2;
-  module.exports = isBuffer3;
-})(isBuffer$5, isBuffer$5.exports);
-var isBufferExports = isBuffer$5.exports;
+  var isBuffer2 = nativeIsBuffer || stubFalse2;
+  module.exports = isBuffer2;
+})(isBuffer$3, isBuffer$3.exports);
+var isBufferExports = isBuffer$3.exports;
 var MAX_SAFE_INTEGER$1 = 9007199254740991;
 var reIsUint = /^(?:0|[1-9]\d*)$/;
 function isIndex$3(value, length2) {
@@ -36603,11 +36630,11 @@ var baseIsTypedArray = _baseIsTypedArray, baseUnary$4 = _baseUnary, nodeUtil$2 =
 var nodeIsTypedArray = nodeUtil$2 && nodeUtil$2.isTypedArray;
 var isTypedArray$2 = nodeIsTypedArray ? baseUnary$4(nodeIsTypedArray) : baseIsTypedArray;
 var isTypedArray_1 = isTypedArray$2;
-var baseTimes = _baseTimes, isArguments$2 = isArguments_1, isArray$i = isArray_1, isBuffer$4 = isBufferExports, isIndex$2 = _isIndex, isTypedArray$1 = isTypedArray_1;
+var baseTimes = _baseTimes, isArguments$2 = isArguments_1, isArray$i = isArray_1, isBuffer$2 = isBufferExports, isIndex$2 = _isIndex, isTypedArray$1 = isTypedArray_1;
 var objectProto$b = Object.prototype;
 var hasOwnProperty$a = objectProto$b.hasOwnProperty;
 function arrayLikeKeys$2(value, inherited) {
-  var isArr = isArray$i(value), isArg = !isArr && isArguments$2(value), isBuff = !isArr && !isArg && isBuffer$4(value), isType = !isArr && !isArg && !isBuff && isTypedArray$1(value), skipIndexes = isArr || isArg || isBuff || isType, result = skipIndexes ? baseTimes(value.length, String) : [], length2 = result.length;
+  var isArr = isArray$i(value), isArg = !isArr && isArguments$2(value), isBuff = !isArr && !isArg && isBuffer$2(value), isType = !isArr && !isArg && !isBuff && isTypedArray$1(value), skipIndexes = isArr || isArg || isBuff || isType, result = skipIndexes ? baseTimes(value.length, String) : [], length2 = result.length;
   for (var key in value) {
     if ((inherited || hasOwnProperty$a.call(value, key)) && !(skipIndexes && // Safari 9 has enumerable `arguments.length` in strict mode.
     (key == "length" || // Node.js 0.10 has enumerable non-index properties on buffers.
@@ -36919,8 +36946,8 @@ function stackHas$1(key) {
   return this.__data__.has(key);
 }
 var _stackHas = stackHas$1;
-var root$7 = _root;
-var coreJsData$1 = root$7["__core-js_shared__"];
+var root$8 = _root;
+var coreJsData$1 = root$8["__core-js_shared__"];
 var _coreJsData = coreJsData$1;
 var coreJsData = _coreJsData;
 var maskSrcKey = function() {
@@ -36974,8 +37001,8 @@ function getNative$7(object, key) {
   return baseIsNative(value) ? value : void 0;
 }
 var _getNative = getNative$7;
-var getNative$6 = _getNative, root$6 = _root;
-var Map$4 = getNative$6(root$6, "Map");
+var getNative$6 = _getNative, root$7 = _root;
+var Map$4 = getNative$6(root$7, "Map");
 var _Map = Map$4;
 var getNative$5 = _getNative;
 var nativeCreate$4 = getNative$5(Object, "create");
@@ -37208,8 +37235,8 @@ function equalArrays$2(array, other, bitmask, customizer, equalFunc, stack) {
   return result;
 }
 var _equalArrays = equalArrays$2;
-var root$5 = _root;
-var Uint8Array$3 = root$5.Uint8Array;
+var root$6 = _root;
+var Uint8Array$3 = root$6.Uint8Array;
 var _Uint8Array = Uint8Array$3;
 function mapToArray$1(map2) {
   var index2 = -1, result = Array(map2.size);
@@ -37375,17 +37402,17 @@ function equalObjects$1(object, other, bitmask, customizer, equalFunc, stack) {
   return result;
 }
 var _equalObjects = equalObjects$1;
-var getNative$4 = _getNative, root$4 = _root;
-var DataView$1 = getNative$4(root$4, "DataView");
+var getNative$4 = _getNative, root$5 = _root;
+var DataView$1 = getNative$4(root$5, "DataView");
 var _DataView = DataView$1;
-var getNative$3 = _getNative, root$3 = _root;
-var Promise$2 = getNative$3(root$3, "Promise");
+var getNative$3 = _getNative, root$4 = _root;
+var Promise$2 = getNative$3(root$4, "Promise");
 var _Promise = Promise$2;
-var getNative$2 = _getNative, root$2 = _root;
-var Set$2 = getNative$2(root$2, "Set");
+var getNative$2 = _getNative, root$3 = _root;
+var Set$2 = getNative$2(root$3, "Set");
 var _Set = Set$2;
-var getNative$1 = _getNative, root$1 = _root;
-var WeakMap$2 = getNative$1(root$1, "WeakMap");
+var getNative$1 = _getNative, root$2 = _root;
+var WeakMap$2 = getNative$1(root$2, "WeakMap");
 var _WeakMap = WeakMap$2;
 var DataView = _DataView, Map$1 = _Map, Promise$1 = _Promise, Set$1 = _Set, WeakMap$1 = _WeakMap, baseGetTag$1 = _baseGetTag, toSource = _toSource;
 var mapTag$4 = "[object Map]", objectTag$2 = "[object Object]", promiseTag = "[object Promise]", setTag$4 = "[object Set]", weakMapTag$1 = "[object WeakMap]";
@@ -37413,7 +37440,7 @@ if (DataView && getTag$5(new DataView(new ArrayBuffer(1))) != dataViewTag$2 || M
   };
 }
 var _getTag = getTag$5;
-var Stack$2 = _Stack, equalArrays = _equalArrays, equalByTag = _equalByTag, equalObjects = _equalObjects, getTag$4 = _getTag, isArray$f = isArray_1, isBuffer$3 = isBufferExports, isTypedArray = isTypedArray_1;
+var Stack$2 = _Stack, equalArrays = _equalArrays, equalByTag = _equalByTag, equalObjects = _equalObjects, getTag$4 = _getTag, isArray$f = isArray_1, isBuffer$1 = isBufferExports, isTypedArray = isTypedArray_1;
 var COMPARE_PARTIAL_FLAG$2 = 1;
 var argsTag$1 = "[object Arguments]", arrayTag$1 = "[object Array]", objectTag$1 = "[object Object]";
 var objectProto$3 = Object.prototype;
@@ -37423,8 +37450,8 @@ function baseIsEqualDeep$1(object, other, bitmask, customizer, equalFunc, stack)
   objTag = objTag == argsTag$1 ? objectTag$1 : objTag;
   othTag = othTag == argsTag$1 ? objectTag$1 : othTag;
   var objIsObj = objTag == objectTag$1, othIsObj = othTag == objectTag$1, isSameTag = objTag == othTag;
-  if (isSameTag && isBuffer$3(object)) {
-    if (!isBuffer$3(other)) {
+  if (isSameTag && isBuffer$1(object)) {
+    if (!isBuffer$1(other)) {
       return false;
     }
     objIsArr = true;
@@ -37607,16 +37634,16 @@ function baseToString$1(value) {
 }
 var _baseToString = baseToString$1;
 var baseToString = _baseToString;
-function toString$1(value) {
+function toString$2(value) {
   return value == null ? "" : baseToString(value);
 }
-var toString_1 = toString$1;
-var isArray$c = isArray_1, isKey$2 = _isKey, stringToPath = _stringToPath, toString = toString_1;
+var toString_1 = toString$2;
+var isArray$c = isArray_1, isKey$2 = _isKey, stringToPath = _stringToPath, toString$1 = toString_1;
 function castPath$2(value, object) {
   if (isArray$c(value)) {
     return value;
   }
-  return isKey$2(value, object) ? [value] : stringToPath(toString(value));
+  return isKey$2(value, object) ? [value] : stringToPath(toString$1(value));
 }
 var _castPath = castPath$2;
 var isSymbol$2 = isSymbol_1;
@@ -38302,7 +38329,7 @@ var baseIsSet = _baseIsSet, baseUnary$2 = _baseUnary, nodeUtil = _nodeUtilExport
 var nodeIsSet = nodeUtil && nodeUtil.isSet;
 var isSet$1 = nodeIsSet ? baseUnary$2(nodeIsSet) : baseIsSet;
 var isSet_1 = isSet$1;
-var Stack2 = _Stack, arrayEach = _arrayEach, assignValue = _assignValue, baseAssign = _baseAssign, baseAssignIn = _baseAssignIn, cloneBuffer = _cloneBufferExports, copyArray$1 = _copyArray, copySymbols = _copySymbols, copySymbolsIn = _copySymbolsIn, getAllKeys = _getAllKeys, getAllKeysIn = _getAllKeysIn, getTag$1 = _getTag, initCloneArray = _initCloneArray, initCloneByTag = _initCloneByTag, initCloneObject = _initCloneObject, isArray$6 = isArray_1, isBuffer$2 = isBufferExports, isMap = isMap_1, isObject$2 = isObject_1$1, isSet = isSet_1, keys$1 = keys_1, keysIn = keysIn_1;
+var Stack2 = _Stack, arrayEach = _arrayEach, assignValue = _assignValue, baseAssign = _baseAssign, baseAssignIn = _baseAssignIn, cloneBuffer = _cloneBufferExports, copyArray$1 = _copyArray, copySymbols = _copySymbols, copySymbolsIn = _copySymbolsIn, getAllKeys = _getAllKeys, getAllKeysIn = _getAllKeysIn, getTag$1 = _getTag, initCloneArray = _initCloneArray, initCloneByTag = _initCloneByTag, initCloneObject = _initCloneObject, isArray$6 = isArray_1, isBuffer = isBufferExports, isMap = isMap_1, isObject$2 = isObject_1$1, isSet = isSet_1, keys$1 = keys_1, keysIn = keysIn_1;
 var CLONE_DEEP_FLAG$1 = 1, CLONE_FLAT_FLAG = 2, CLONE_SYMBOLS_FLAG$1 = 4;
 var argsTag = "[object Arguments]", arrayTag = "[object Array]", boolTag = "[object Boolean]", dateTag = "[object Date]", errorTag = "[object Error]", funcTag = "[object Function]", genTag = "[object GeneratorFunction]", mapTag$1 = "[object Map]", numberTag = "[object Number]", objectTag = "[object Object]", regexpTag = "[object RegExp]", setTag$1 = "[object Set]", stringTag$1 = "[object String]", symbolTag = "[object Symbol]", weakMapTag = "[object WeakMap]";
 var arrayBufferTag = "[object ArrayBuffer]", dataViewTag = "[object DataView]", float32Tag = "[object Float32Array]", float64Tag = "[object Float64Array]", int8Tag = "[object Int8Array]", int16Tag = "[object Int16Array]", int32Tag = "[object Int32Array]", uint8Tag = "[object Uint8Array]", uint8ClampedTag = "[object Uint8ClampedArray]", uint16Tag = "[object Uint16Array]", uint32Tag = "[object Uint32Array]";
@@ -38328,7 +38355,7 @@ function baseClone$1(value, bitmask, customizer, key, object, stack) {
     }
   } else {
     var tag = getTag$1(value), isFunc = tag == funcTag || tag == genTag;
-    if (isBuffer$2(value)) {
+    if (isBuffer(value)) {
       return cloneBuffer(value, isDeep);
     }
     if (tag == objectTag || tag == argsTag || isFunc && !object) {
@@ -38547,9 +38574,9 @@ function identifier(index2) {
   return slice$1(index2, position$2);
 }
 function compile(value) {
-  return dealloc(parse$3("", null, null, null, [""], value = alloc(value), 0, [0], value));
+  return dealloc(parse$2("", null, null, null, [""], value = alloc(value), 0, [0], value));
 }
-function parse$3(value, root2, parent, rule, rules, rulesets, pseudo, points, declarations) {
+function parse$2(value, root2, parent, rule, rules, rulesets, pseudo, points, declarations) {
   var index2 = 0;
   var offset = 0;
   var length2 = pseudo;
@@ -38618,17 +38645,17 @@ function parse$3(value, root2, parent, rule, rules, rulesets, pseudo, points, de
             append(reference = ruleset(characters2, root2, parent, index2, offset, rules, points, type2, props = [], children = [], length2), rulesets);
             if (character2 === 123)
               if (offset === 0)
-                parse$3(characters2, root2, reference, reference, props, rulesets, length2, points, children);
+                parse$2(characters2, root2, reference, reference, props, rulesets, length2, points, children);
               else
                 switch (atrule === 99 && charat(characters2, 3) === 110 ? 100 : atrule) {
                   case 100:
                   case 108:
                   case 109:
                   case 115:
-                    parse$3(value, reference, reference, rule && append(ruleset(value, reference, reference, 0, 0, rules, points, type2, rules, props = [], length2), children), rules, children, length2, points, rule ? props : children);
+                    parse$2(value, reference, reference, rule && append(ruleset(value, reference, reference, 0, 0, rules, points, type2, rules, props = [], length2), children), rules, children, length2, points, rule ? props : children);
                     break;
                   default:
-                    parse$3(characters2, reference, reference, reference, [""], children, 0, points, children);
+                    parse$2(characters2, reference, reference, reference, [""], children, 0, points, children);
                 }
         }
         index2 = offset = property2 = 0, variable2 = ampersand2 = 1, type2 = characters2 = "", length2 = pseudo;
@@ -38677,7 +38704,7 @@ function comment(value, root2, parent) {
 function declaration(value, root2, parent, length2) {
   return node(value, root2, parent, DECLARATION, substr(value, 0, length2), substr(value, length2 + 1, -1), length2);
 }
-function serialize(children, callback) {
+function serialize$1(children, callback) {
   var output = "";
   var length2 = sizeof(children);
   for (var i2 = 0; i2 < length2; i2++)
@@ -38695,11 +38722,11 @@ function stringify$2(element2, index2, children, callback) {
     case COMMENT:
       return "";
     case KEYFRAMES:
-      return element2.return = element2.value + "{" + serialize(element2.children, callback) + "}";
+      return element2.return = element2.value + "{" + serialize$1(element2.children, callback) + "}";
     case RULESET:
       element2.value = element2.props.join(",");
   }
-  return strlen(children = serialize(element2.children, callback)) ? element2.return = element2.value + "{" + children + "}" : "";
+  return strlen(children = serialize$1(element2.children, callback)) ? element2.return = element2.value + "{" + children + "}" : "";
 }
 function middleware(collection) {
   var length2 = sizeof(collection);
@@ -39480,8 +39507,8 @@ var index = function() {
   }
   return ResizeObserver$1;
 }();
-var root = _root;
-var nativeIsFinite = root.isFinite;
+var root$1 = _root;
+var nativeIsFinite = root$1.isFinite;
 function isFinite$1(value) {
   return typeof value == "number" && nativeIsFinite(value);
 }
@@ -41774,7 +41801,7 @@ function requireIsEmpty() {
   if (hasRequiredIsEmpty)
     return isEmpty_1;
   hasRequiredIsEmpty = 1;
-  var baseKeys2 = _baseKeys, getTag2 = _getTag, isArguments2 = isArguments_1, isArray3 = isArray_1, isArrayLike2 = isArrayLike_1, isBuffer3 = isBufferExports, isPrototype2 = _isPrototype, isTypedArray2 = isTypedArray_1;
+  var baseKeys2 = _baseKeys, getTag2 = _getTag, isArguments2 = isArguments_1, isArray3 = isArray_1, isArrayLike2 = isArrayLike_1, isBuffer2 = isBufferExports, isPrototype2 = _isPrototype, isTypedArray2 = isTypedArray_1;
   var mapTag2 = "[object Map]", setTag2 = "[object Set]";
   var objectProto2 = Object.prototype;
   var hasOwnProperty2 = objectProto2.hasOwnProperty;
@@ -41782,7 +41809,7 @@ function requireIsEmpty() {
     if (value == null) {
       return true;
     }
-    if (isArrayLike2(value) && (isArray3(value) || typeof value == "string" || typeof value.splice == "function" || isBuffer3(value) || isTypedArray2(value) || isArguments2(value))) {
+    if (isArrayLike2(value) && (isArray3(value) || typeof value == "string" || typeof value.splice == "function" || isBuffer2(value) || isTypedArray2(value) || isArguments2(value))) {
       return !value.length;
     }
     var tag = getTag2(value);
@@ -41820,9 +41847,9 @@ function requireTransform() {
   if (hasRequiredTransform)
     return transform_1;
   hasRequiredTransform = 1;
-  var arrayEach2 = _arrayEach, baseCreate2 = _baseCreate, baseForOwn2 = _baseForOwn, baseIteratee2 = _baseIteratee, getPrototype2 = _getPrototype, isArray3 = isArray_1, isBuffer3 = isBufferExports, isFunction2 = isFunction_1, isObject2 = isObject_1$1, isTypedArray2 = isTypedArray_1;
+  var arrayEach2 = _arrayEach, baseCreate2 = _baseCreate, baseForOwn2 = _baseForOwn, baseIteratee2 = _baseIteratee, getPrototype2 = _getPrototype, isArray3 = isArray_1, isBuffer2 = isBufferExports, isFunction2 = isFunction_1, isObject2 = isObject_1$1, isTypedArray2 = isTypedArray_1;
   function transform(object, iteratee, accumulator) {
-    var isArr = isArray3(object), isArrLike = isArr || isBuffer3(object) || isTypedArray2(object);
+    var isArr = isArray3(object), isArrLike = isArr || isBuffer2(object) || isTypedArray2(object);
     iteratee = baseIteratee2(iteratee);
     if (accumulator == null) {
       var Ctor = object && object.constructor;
@@ -43223,7 +43250,7 @@ function require_baseMergeDeep() {
   if (hasRequired_baseMergeDeep)
     return _baseMergeDeep;
   hasRequired_baseMergeDeep = 1;
-  var assignMergeValue = require_assignMergeValue(), cloneBuffer2 = _cloneBufferExports, cloneTypedArray2 = _cloneTypedArray, copyArray2 = _copyArray, initCloneObject2 = _initCloneObject, isArguments2 = isArguments_1, isArray3 = isArray_1, isArrayLikeObject2 = isArrayLikeObject_1, isBuffer3 = isBufferExports, isFunction2 = isFunction_1, isObject2 = isObject_1$1, isPlainObject3 = requireIsPlainObject(), isTypedArray2 = isTypedArray_1, safeGet = require_safeGet(), toPlainObject = requireToPlainObject();
+  var assignMergeValue = require_assignMergeValue(), cloneBuffer2 = _cloneBufferExports, cloneTypedArray2 = _cloneTypedArray, copyArray2 = _copyArray, initCloneObject2 = _initCloneObject, isArguments2 = isArguments_1, isArray3 = isArray_1, isArrayLikeObject2 = isArrayLikeObject_1, isBuffer2 = isBufferExports, isFunction2 = isFunction_1, isObject2 = isObject_1$1, isPlainObject3 = requireIsPlainObject(), isTypedArray2 = isTypedArray_1, safeGet = require_safeGet(), toPlainObject = requireToPlainObject();
   function baseMergeDeep(object, source, key, srcIndex, mergeFunc, customizer, stack) {
     var objValue = safeGet(object, key), srcValue = safeGet(source, key), stacked = stack.get(srcValue);
     if (stacked) {
@@ -43233,7 +43260,7 @@ function require_baseMergeDeep() {
     var newValue = customizer ? customizer(objValue, srcValue, key + "", object, source, stack) : void 0;
     var isCommon = newValue === void 0;
     if (isCommon) {
-      var isArr = isArray3(srcValue), isBuff = !isArr && isBuffer3(srcValue), isTyped = !isArr && !isBuff && isTypedArray2(srcValue);
+      var isArr = isArray3(srcValue), isBuff = !isArr && isBuffer2(srcValue), isTyped = !isArr && !isBuff && isTypedArray2(srcValue);
       newValue = srcValue;
       if (isArr || isBuff || isTyped) {
         if (isArray3(objValue)) {
@@ -45789,7 +45816,7 @@ function YAMLException$1(reason, mark) {
 }
 YAMLException$1.prototype = Object.create(Error.prototype);
 YAMLException$1.prototype.constructor = YAMLException$1;
-YAMLException$1.prototype.toString = function toString2(compact) {
+YAMLException$1.prototype.toString = function toString(compact) {
   return this.name + ": " + formatError(this, compact);
 };
 var exception = YAMLException$1;
@@ -45826,12 +45853,12 @@ function makeSnippet(mark, options) {
     options.linesBefore = 3;
   if (typeof options.linesAfter !== "number")
     options.linesAfter = 2;
-  var re = /\r?\n|\r|\0/g;
+  var re2 = /\r?\n|\r|\0/g;
   var lineStarts = [0];
   var lineEnds = [];
   var match2;
   var foundLineNo = -1;
-  while (match2 = re.exec(mark.buffer)) {
+  while (match2 = re2.exec(mark.buffer)) {
     lineEnds.push(match2.index);
     lineStarts.push(match2.index + match2[0].length);
     if (mark.position <= match2.index && foundLineNo < 0) {
@@ -46552,7 +46579,7 @@ var set = new type("tag:yaml.org,2002:set", {
   resolve: resolveYamlSet,
   construct: constructYamlSet
 });
-var _default = core.extend({
+var _default$1 = core.extend({
   implicit: [
     timestamp,
     merge
@@ -46642,7 +46669,7 @@ for (var i$1 = 0; i$1 < 256; i$1++) {
 function State$1(input, options) {
   this.input = input;
   this.filename = options["filename"] || null;
-  this.schema = options["schema"] || _default;
+  this.schema = options["schema"] || _default$1;
   this.onWarning = options["onWarning"] || null;
   this.legacy = options["legacy"] || false;
   this.json = options["json"] || false;
@@ -47825,7 +47852,7 @@ function encodeHex(character2) {
 }
 var QUOTING_TYPE_SINGLE = 1, QUOTING_TYPE_DOUBLE = 2;
 function State(options) {
-  this.schema = options["schema"] || _default;
+  this.schema = options["schema"] || _default$1;
   this.indent = Math.max(1, options["indent"] || 2);
   this.noArrayIndent = options["noArrayIndent"] || false;
   this.skipInvalid = options["skipInvalid"] || false;
@@ -48362,7 +48389,7 @@ var Schema2 = schema;
 var FAILSAFE_SCHEMA = failsafe;
 var JSON_SCHEMA = json;
 var CORE_SCHEMA = core;
-var DEFAULT_SCHEMA = _default;
+var DEFAULT_SCHEMA = _default$1;
 var load = loader.load;
 var loadAll = loader.loadAll;
 var dump = dumper.dump;
@@ -48401,86 +48428,317 @@ var jsYaml = {
   safeLoadAll,
   safeDump
 };
-/*!
- * Determine if an object is a Buffer
- *
- * @author   Feross Aboukhadijeh <https://feross.org>
- * @license  MIT
- */
-var isBuffer = function isBuffer2(obj) {
-  return obj != null && obj.constructor != null && typeof obj.constructor.isBuffer === "function" && obj.constructor.isBuffer(obj);
+function stringify$1(values2, options) {
+  const settings = options || {};
+  const input = values2[values2.length - 1] === "" ? [...values2, ""] : values2;
+  return input.join(
+    (settings.padRight ? " " : "") + "," + (settings.padLeft === false ? "" : " ")
+  ).trim();
+}
+const nameRe = /^[$_\p{ID_Start}][$_\u{200C}\u{200D}\p{ID_Continue}]*$/u;
+const nameReJsx = /^[$_\p{ID_Start}][-$_\u{200C}\u{200D}\p{ID_Continue}]*$/u;
+const emptyOptions = {};
+function name$1(name2, options) {
+  const settings = options || emptyOptions;
+  const re2 = settings.jsx ? nameReJsx : nameRe;
+  return re2.test(name2);
+}
+const re = /[ \t\n\f\r]/g;
+function whitespace(thing) {
+  return typeof thing === "object" ? thing.type === "text" ? empty(thing.value) : false : empty(thing);
+}
+function empty(value) {
+  return value.replace(re, "") === "";
+}
+function stringify(values2) {
+  return values2.join(" ").trim();
+}
+var cjs = {};
+var COMMENT_REGEX = /\/\*[^*]*\*+([^/*][^*]*\*+)*\//g;
+var NEWLINE_REGEX = /\n/g;
+var WHITESPACE_REGEX = /^\s*/;
+var PROPERTY_REGEX = /^(\*?[-#/*\\\w]+(\[[0-9a-z_-]+\])?)\s*/;
+var COLON_REGEX = /^:\s*/;
+var VALUE_REGEX = /^((?:'(?:\\'|.)*?'|"(?:\\"|.)*?"|\([^)]*?\)|[^};])+)/;
+var SEMICOLON_REGEX = /^[;\s]*/;
+var TRIM_REGEX = /^\s+|\s+$/g;
+var NEWLINE = "\n";
+var FORWARD_SLASH = "/";
+var ASTERISK = "*";
+var EMPTY_STRING = "";
+var TYPE_COMMENT = "comment";
+var TYPE_DECLARATION = "declaration";
+var inlineStyleParser = function(style, options) {
+  if (typeof style !== "string") {
+    throw new TypeError("First argument must be a string");
+  }
+  if (!style)
+    return [];
+  options = options || {};
+  var lineno = 1;
+  var column2 = 1;
+  function updatePosition(str2) {
+    var lines = str2.match(NEWLINE_REGEX);
+    if (lines)
+      lineno += lines.length;
+    var i2 = str2.lastIndexOf(NEWLINE);
+    column2 = ~i2 ? str2.length - i2 : column2 + str2.length;
+  }
+  function position2() {
+    var start = { line: lineno, column: column2 };
+    return function(node2) {
+      node2.position = new Position(start);
+      whitespace2();
+      return node2;
+    };
+  }
+  function Position(start) {
+    this.start = start;
+    this.end = { line: lineno, column: column2 };
+    this.source = options.source;
+  }
+  Position.prototype.content = style;
+  function error(msg) {
+    var err = new Error(
+      options.source + ":" + lineno + ":" + column2 + ": " + msg
+    );
+    err.reason = msg;
+    err.filename = options.source;
+    err.line = lineno;
+    err.column = column2;
+    err.source = style;
+    if (options.silent)
+      ;
+    else {
+      throw err;
+    }
+  }
+  function match2(re2) {
+    var m2 = re2.exec(style);
+    if (!m2)
+      return;
+    var str2 = m2[0];
+    updatePosition(str2);
+    style = style.slice(str2.length);
+    return m2;
+  }
+  function whitespace2() {
+    match2(WHITESPACE_REGEX);
+  }
+  function comments(rules) {
+    var c2;
+    rules = rules || [];
+    while (c2 = comment2()) {
+      if (c2 !== false) {
+        rules.push(c2);
+      }
+    }
+    return rules;
+  }
+  function comment2() {
+    var pos = position2();
+    if (FORWARD_SLASH != style.charAt(0) || ASTERISK != style.charAt(1))
+      return;
+    var i2 = 2;
+    while (EMPTY_STRING != style.charAt(i2) && (ASTERISK != style.charAt(i2) || FORWARD_SLASH != style.charAt(i2 + 1))) {
+      ++i2;
+    }
+    i2 += 2;
+    if (EMPTY_STRING === style.charAt(i2 - 1)) {
+      return error("End of comment missing");
+    }
+    var str2 = style.slice(2, i2 - 2);
+    column2 += 2;
+    updatePosition(str2);
+    style = style.slice(i2);
+    column2 += 2;
+    return pos({
+      type: TYPE_COMMENT,
+      comment: str2
+    });
+  }
+  function declaration2() {
+    var pos = position2();
+    var prop = match2(PROPERTY_REGEX);
+    if (!prop)
+      return;
+    comment2();
+    if (!match2(COLON_REGEX))
+      return error("property missing ':'");
+    var val = match2(VALUE_REGEX);
+    var ret = pos({
+      type: TYPE_DECLARATION,
+      property: trim(prop[0].replace(COMMENT_REGEX, EMPTY_STRING)),
+      value: val ? trim(val[0].replace(COMMENT_REGEX, EMPTY_STRING)) : EMPTY_STRING
+    });
+    match2(SEMICOLON_REGEX);
+    return ret;
+  }
+  function declarations() {
+    var decls = [];
+    comments(decls);
+    var decl;
+    while (decl = declaration2()) {
+      if (decl !== false) {
+        decls.push(decl);
+        comments(decls);
+      }
+    }
+    return decls;
+  }
+  whitespace2();
+  return declarations();
 };
-const isBuffer$1 = /* @__PURE__ */ getDefaultExportFromCjs(isBuffer);
+function trim(str2) {
+  return str2 ? str2.replace(TRIM_REGEX, EMPTY_STRING) : EMPTY_STRING;
+}
+var __importDefault = commonjsGlobal && commonjsGlobal.__importDefault || function(mod) {
+  return mod && mod.__esModule ? mod : { "default": mod };
+};
+Object.defineProperty(cjs, "__esModule", { value: true });
+var inline_style_parser_1 = __importDefault(inlineStyleParser);
+function StyleToObject(style, iterator) {
+  var styleObject = null;
+  if (!style || typeof style !== "string") {
+    return styleObject;
+  }
+  var declarations = (0, inline_style_parser_1.default)(style);
+  var hasIterator = typeof iterator === "function";
+  declarations.forEach(function(declaration2) {
+    if (declaration2.type !== "declaration") {
+      return;
+    }
+    var property2 = declaration2.property, value = declaration2.value;
+    if (hasIterator) {
+      iterator(property2, value, declaration2);
+    } else if (value) {
+      styleObject = styleObject || {};
+      styleObject[property2] = value;
+    }
+  });
+  return styleObject;
+}
+var _default = cjs.default = StyleToObject;
+const styleToObject = _default.default || _default;
 class VFileMessage extends Error {
   /**
-   * Create a message for `reason` at `place` from `origin`.
+   * Create a message for `reason`.
    *
-   * When an error is passed in as `reason`, the `stack` is copied.
+   * > 🪦 **Note**: also has obsolete signatures.
    *
-   * @param {string | Error | VFileMessage} reason
-   *   Reason for message, uses the stack and message of the error if given.
+   * @overload
+   * @param {string} reason
+   * @param {Options | null | undefined} [options]
+   * @returns
    *
-   *   > 👉 **Note**: you should use markdown.
-   * @param {Node | NodeLike | Position | Point | null | undefined} [place]
-   *   Place in file where the message occurred.
+   * @overload
+   * @param {string} reason
+   * @param {Node | NodeLike | null | undefined} parent
+   * @param {string | null | undefined} [origin]
+   * @returns
+   *
+   * @overload
+   * @param {string} reason
+   * @param {Point | Position | null | undefined} place
+   * @param {string | null | undefined} [origin]
+   * @returns
+   *
+   * @overload
+   * @param {string} reason
+   * @param {string | null | undefined} [origin]
+   * @returns
+   *
+   * @overload
+   * @param {Error | VFileMessage} cause
+   * @param {Node | NodeLike | null | undefined} parent
+   * @param {string | null | undefined} [origin]
+   * @returns
+   *
+   * @overload
+   * @param {Error | VFileMessage} cause
+   * @param {Point | Position | null | undefined} place
+   * @param {string | null | undefined} [origin]
+   * @returns
+   *
+   * @overload
+   * @param {Error | VFileMessage} cause
+   * @param {string | null | undefined} [origin]
+   * @returns
+   *
+   * @param {Error | VFileMessage | string} causeOrReason
+   *   Reason for message, should use markdown.
+   * @param {Node | NodeLike | Options | Point | Position | string | null | undefined} [optionsOrParentOrPlace]
+   *   Configuration (optional).
    * @param {string | null | undefined} [origin]
    *   Place in code where the message originates (example:
    *   `'my-package:my-rule'` or `'my-rule'`).
    * @returns
    *   Instance of `VFileMessage`.
    */
-  // To do: next major: expose `undefined` everywhere instead of `null`.
-  constructor(reason, place, origin) {
-    const parts = [null, null];
-    let position2 = {
-      // @ts-expect-error: we always follows the structure of `position`.
-      start: { line: null, column: null },
-      // @ts-expect-error: "
-      end: { line: null, column: null }
-    };
+  // eslint-disable-next-line complexity
+  constructor(causeOrReason, optionsOrParentOrPlace, origin) {
     super();
-    if (typeof place === "string") {
-      origin = place;
-      place = void 0;
+    if (typeof optionsOrParentOrPlace === "string") {
+      origin = optionsOrParentOrPlace;
+      optionsOrParentOrPlace = void 0;
     }
-    if (typeof origin === "string") {
+    let reason = "";
+    let options = {};
+    let legacyCause = false;
+    if (optionsOrParentOrPlace) {
+      if ("line" in optionsOrParentOrPlace && "column" in optionsOrParentOrPlace) {
+        options = { place: optionsOrParentOrPlace };
+      } else if ("start" in optionsOrParentOrPlace && "end" in optionsOrParentOrPlace) {
+        options = { place: optionsOrParentOrPlace };
+      } else if ("type" in optionsOrParentOrPlace) {
+        options = {
+          ancestors: [optionsOrParentOrPlace],
+          place: optionsOrParentOrPlace.position
+        };
+      } else {
+        options = { ...optionsOrParentOrPlace };
+      }
+    }
+    if (typeof causeOrReason === "string") {
+      reason = causeOrReason;
+    } else if (!options.cause && causeOrReason) {
+      legacyCause = true;
+      reason = causeOrReason.message;
+      options.cause = causeOrReason;
+    }
+    if (!options.ruleId && !options.source && typeof origin === "string") {
       const index2 = origin.indexOf(":");
       if (index2 === -1) {
-        parts[1] = origin;
+        options.ruleId = origin;
       } else {
-        parts[0] = origin.slice(0, index2);
-        parts[1] = origin.slice(index2 + 1);
+        options.source = origin.slice(0, index2);
+        options.ruleId = origin.slice(index2 + 1);
       }
     }
-    if (place) {
-      if ("type" in place || "position" in place) {
-        if (place.position) {
-          position2 = place.position;
-        }
-      } else if ("start" in place || "end" in place) {
-        position2 = place;
-      } else if ("line" in place || "column" in place) {
-        position2.start = place;
+    if (!options.place && options.ancestors && options.ancestors) {
+      const parent = options.ancestors[options.ancestors.length - 1];
+      if (parent) {
+        options.place = parent.position;
       }
     }
-    this.name = stringifyPosition(place) || "1:1";
-    this.message = typeof reason === "object" ? reason.message : reason;
-    this.stack = "";
-    if (typeof reason === "object" && reason.stack) {
-      this.stack = reason.stack;
-    }
-    this.reason = this.message;
-    this.fatal;
-    this.line = position2.start.line;
-    this.column = position2.start.column;
-    this.position = position2;
-    this.source = parts[0];
-    this.ruleId = parts[1];
+    const start = options.place && "start" in options.place ? options.place.start : options.place;
+    this.ancestors = options.ancestors || void 0;
+    this.cause = options.cause || void 0;
+    this.column = start ? start.column : void 0;
+    this.fatal = void 0;
     this.file;
+    this.message = reason;
+    this.line = start ? start.line : void 0;
+    this.name = stringifyPosition(options.place) || "1:1";
+    this.place = options.place || void 0;
+    this.reason = this.message;
+    this.ruleId = options.ruleId || void 0;
+    this.source = options.source || void 0;
+    this.stack = legacyCause && options.cause && typeof options.cause.stack === "string" ? options.cause.stack : "";
     this.actual;
     this.expected;
-    this.url;
     this.note;
+    this.url;
   }
 }
 VFileMessage.prototype.file = "";
@@ -48488,539 +48746,661 @@ VFileMessage.prototype.name = "";
 VFileMessage.prototype.reason = "";
 VFileMessage.prototype.message = "";
 VFileMessage.prototype.stack = "";
-VFileMessage.prototype.fatal = null;
-VFileMessage.prototype.column = null;
-VFileMessage.prototype.line = null;
-VFileMessage.prototype.source = null;
-VFileMessage.prototype.ruleId = null;
-VFileMessage.prototype.position = null;
-const path = { basename, dirname, extname, join, sep: "/" };
-function basename(path2, ext) {
-  if (ext !== void 0 && typeof ext !== "string") {
-    throw new TypeError('"ext" argument must be a string');
+VFileMessage.prototype.column = void 0;
+VFileMessage.prototype.line = void 0;
+VFileMessage.prototype.ancestors = void 0;
+VFileMessage.prototype.cause = void 0;
+VFileMessage.prototype.fatal = void 0;
+VFileMessage.prototype.place = void 0;
+VFileMessage.prototype.ruleId = void 0;
+VFileMessage.prototype.source = void 0;
+const own$2 = {}.hasOwnProperty;
+const emptyMap = /* @__PURE__ */ new Map();
+const cap = /[A-Z]/g;
+const dashSomething = /-([a-z])/g;
+const tableElements = /* @__PURE__ */ new Set(["table", "tbody", "thead", "tfoot", "tr"]);
+const tableCellElement = /* @__PURE__ */ new Set(["td", "th"]);
+const docs = "https://github.com/syntax-tree/hast-util-to-jsx-runtime";
+function toJsxRuntime(tree, options) {
+  if (!options || options.Fragment === void 0) {
+    throw new TypeError("Expected `Fragment` in options");
   }
-  assertPath$1(path2);
-  let start = 0;
-  let end = -1;
-  let index2 = path2.length;
-  let seenNonSlash;
-  if (ext === void 0 || ext.length === 0 || ext.length > path2.length) {
-    while (index2--) {
-      if (path2.charCodeAt(index2) === 47) {
-        if (seenNonSlash) {
-          start = index2 + 1;
-          break;
-        }
-      } else if (end < 0) {
-        seenNonSlash = true;
-        end = index2 + 1;
-      }
+  const filePath = options.filePath || void 0;
+  let create2;
+  if (options.development) {
+    if (typeof options.jsxDEV !== "function") {
+      throw new TypeError(
+        "Expected `jsxDEV` in options when `development: true`"
+      );
     }
-    return end < 0 ? "" : path2.slice(start, end);
+    create2 = developmentCreate(filePath, options.jsxDEV);
+  } else {
+    if (typeof options.jsx !== "function") {
+      throw new TypeError("Expected `jsx` in production options");
+    }
+    if (typeof options.jsxs !== "function") {
+      throw new TypeError("Expected `jsxs` in production options");
+    }
+    create2 = productionCreate(filePath, options.jsx, options.jsxs);
   }
-  if (ext === path2) {
-    return "";
+  const state = {
+    Fragment: options.Fragment,
+    ancestors: [],
+    components: options.components || {},
+    create: create2,
+    elementAttributeNameCase: options.elementAttributeNameCase || "react",
+    evaluater: options.createEvaluater ? options.createEvaluater() : void 0,
+    filePath,
+    ignoreInvalidStyle: options.ignoreInvalidStyle || false,
+    passKeys: options.passKeys !== false,
+    passNode: options.passNode || false,
+    schema: options.space === "svg" ? svg$1 : html$1,
+    stylePropertyNameCase: options.stylePropertyNameCase || "dom",
+    tableCellAlignToStyle: options.tableCellAlignToStyle !== false
+  };
+  const result = one(state, tree, void 0);
+  if (result && typeof result !== "string") {
+    return result;
   }
-  let firstNonSlashEnd = -1;
-  let extIndex = ext.length - 1;
-  while (index2--) {
-    if (path2.charCodeAt(index2) === 47) {
-      if (seenNonSlash) {
-        start = index2 + 1;
-        break;
-      }
-    } else {
-      if (firstNonSlashEnd < 0) {
-        seenNonSlash = true;
-        firstNonSlashEnd = index2 + 1;
-      }
-      if (extIndex > -1) {
-        if (path2.charCodeAt(index2) === ext.charCodeAt(extIndex--)) {
-          if (extIndex < 0) {
-            end = index2;
-          }
+  return state.create(
+    tree,
+    state.Fragment,
+    { children: result || void 0 },
+    void 0
+  );
+}
+function one(state, node2, key) {
+  if (node2.type === "element") {
+    return element(state, node2, key);
+  }
+  if (node2.type === "mdxFlowExpression" || node2.type === "mdxTextExpression") {
+    return mdxExpression(state, node2);
+  }
+  if (node2.type === "mdxJsxFlowElement" || node2.type === "mdxJsxTextElement") {
+    return mdxJsxElement(state, node2, key);
+  }
+  if (node2.type === "mdxjsEsm") {
+    return mdxEsm(state, node2);
+  }
+  if (node2.type === "root") {
+    return root(state, node2, key);
+  }
+  if (node2.type === "text") {
+    return text(state, node2);
+  }
+}
+function element(state, node2, key) {
+  const parentSchema = state.schema;
+  let schema2 = parentSchema;
+  if (node2.tagName.toLowerCase() === "svg" && parentSchema.space === "html") {
+    schema2 = svg$1;
+    state.schema = schema2;
+  }
+  state.ancestors.push(node2);
+  const type2 = findComponentFromName(state, node2.tagName, false);
+  const props = createElementProps(state, node2);
+  let children = createChildren(state, node2);
+  if (tableElements.has(node2.tagName)) {
+    children = children.filter(function(child) {
+      return typeof child === "string" ? !whitespace(child) : true;
+    });
+  }
+  addNode(state, props, type2, node2);
+  addChildren(props, children);
+  state.ancestors.pop();
+  state.schema = parentSchema;
+  return state.create(node2, type2, props, key);
+}
+function mdxExpression(state, node2) {
+  if (node2.data && node2.data.estree && state.evaluater) {
+    const program = node2.data.estree;
+    const expression = program.body[0];
+    ok(expression.type === "ExpressionStatement");
+    return (
+      /** @type {Child | undefined} */
+      state.evaluater.evaluateExpression(expression.expression)
+    );
+  }
+  crashEstree(state, node2.position);
+}
+function mdxEsm(state, node2) {
+  if (node2.data && node2.data.estree && state.evaluater) {
+    return (
+      /** @type {Child | undefined} */
+      state.evaluater.evaluateProgram(node2.data.estree)
+    );
+  }
+  crashEstree(state, node2.position);
+}
+function mdxJsxElement(state, node2, key) {
+  const parentSchema = state.schema;
+  let schema2 = parentSchema;
+  if (node2.name === "svg" && parentSchema.space === "html") {
+    schema2 = svg$1;
+    state.schema = schema2;
+  }
+  state.ancestors.push(node2);
+  const type2 = node2.name === null ? state.Fragment : findComponentFromName(state, node2.name, true);
+  const props = createJsxElementProps(state, node2);
+  const children = createChildren(state, node2);
+  addNode(state, props, type2, node2);
+  addChildren(props, children);
+  state.ancestors.pop();
+  state.schema = parentSchema;
+  return state.create(node2, type2, props, key);
+}
+function root(state, node2, key) {
+  const props = {};
+  addChildren(props, createChildren(state, node2));
+  return state.create(node2, state.Fragment, props, key);
+}
+function text(_2, node2) {
+  return node2.value;
+}
+function addNode(state, props, type2, node2) {
+  if (typeof type2 !== "string" && type2 !== state.Fragment && state.passNode) {
+    props.node = node2;
+  }
+}
+function addChildren(props, children) {
+  if (children.length > 0) {
+    const value = children.length > 1 ? children : children[0];
+    if (value) {
+      props.children = value;
+    }
+  }
+}
+function productionCreate(_2, jsx2, jsxs) {
+  return create2;
+  function create2(_3, type2, props, key) {
+    const isStaticChildren = Array.isArray(props.children);
+    const fn = isStaticChildren ? jsxs : jsx2;
+    return key ? fn(type2, props, key) : fn(type2, props);
+  }
+}
+function developmentCreate(filePath, jsxDEV) {
+  return create2;
+  function create2(node2, type2, props, key) {
+    const isStaticChildren = Array.isArray(props.children);
+    const point = pointStart(node2);
+    return jsxDEV(
+      type2,
+      props,
+      key,
+      isStaticChildren,
+      {
+        columnNumber: point ? point.column - 1 : void 0,
+        fileName: filePath,
+        lineNumber: point ? point.line : void 0
+      },
+      void 0
+    );
+  }
+}
+function createElementProps(state, node2) {
+  const props = {};
+  let alignValue;
+  let prop;
+  for (prop in node2.properties) {
+    if (prop !== "children" && own$2.call(node2.properties, prop)) {
+      const result = createProperty(state, prop, node2.properties[prop]);
+      if (result) {
+        const [key, value] = result;
+        if (state.tableCellAlignToStyle && key === "align" && typeof value === "string" && tableCellElement.has(node2.tagName)) {
+          alignValue = value;
         } else {
-          extIndex = -1;
-          end = firstNonSlashEnd;
+          props[key] = value;
         }
       }
     }
   }
-  if (start === end) {
-    end = firstNonSlashEnd;
-  } else if (end < 0) {
-    end = path2.length;
+  if (alignValue) {
+    const style = (
+      /** @type {Style} */
+      props.style || (props.style = {})
+    );
+    style[state.stylePropertyNameCase === "css" ? "text-align" : "textAlign"] = alignValue;
   }
-  return path2.slice(start, end);
+  return props;
 }
-function dirname(path2) {
-  assertPath$1(path2);
-  if (path2.length === 0) {
-    return ".";
-  }
-  let end = -1;
-  let index2 = path2.length;
-  let unmatchedSlash;
-  while (--index2) {
-    if (path2.charCodeAt(index2) === 47) {
-      if (unmatchedSlash) {
-        end = index2;
-        break;
+function createJsxElementProps(state, node2) {
+  const props = {};
+  for (const attribute of node2.attributes) {
+    if (attribute.type === "mdxJsxExpressionAttribute") {
+      if (attribute.data && attribute.data.estree && state.evaluater) {
+        const program = attribute.data.estree;
+        const expression = program.body[0];
+        ok(expression.type === "ExpressionStatement");
+        const objectExpression = expression.expression;
+        ok(objectExpression.type === "ObjectExpression");
+        const property2 = objectExpression.properties[0];
+        ok(property2.type === "SpreadElement");
+        Object.assign(
+          props,
+          state.evaluater.evaluateExpression(property2.argument)
+        );
+      } else {
+        crashEstree(state, node2.position);
       }
-    } else if (!unmatchedSlash) {
-      unmatchedSlash = true;
-    }
-  }
-  return end < 0 ? path2.charCodeAt(0) === 47 ? "/" : "." : end === 1 && path2.charCodeAt(0) === 47 ? "//" : path2.slice(0, end);
-}
-function extname(path2) {
-  assertPath$1(path2);
-  let index2 = path2.length;
-  let end = -1;
-  let startPart = 0;
-  let startDot = -1;
-  let preDotState = 0;
-  let unmatchedSlash;
-  while (index2--) {
-    const code = path2.charCodeAt(index2);
-    if (code === 47) {
-      if (unmatchedSlash) {
-        startPart = index2 + 1;
-        break;
-      }
-      continue;
-    }
-    if (end < 0) {
-      unmatchedSlash = true;
-      end = index2 + 1;
-    }
-    if (code === 46) {
-      if (startDot < 0) {
-        startDot = index2;
-      } else if (preDotState !== 1) {
-        preDotState = 1;
-      }
-    } else if (startDot > -1) {
-      preDotState = -1;
-    }
-  }
-  if (startDot < 0 || end < 0 || // We saw a non-dot character immediately before the dot.
-  preDotState === 0 || // The (right-most) trimmed path component is exactly `..`.
-  preDotState === 1 && startDot === end - 1 && startDot === startPart + 1) {
-    return "";
-  }
-  return path2.slice(startDot, end);
-}
-function join(...segments) {
-  let index2 = -1;
-  let joined;
-  while (++index2 < segments.length) {
-    assertPath$1(segments[index2]);
-    if (segments[index2]) {
-      joined = joined === void 0 ? segments[index2] : joined + "/" + segments[index2];
-    }
-  }
-  return joined === void 0 ? "." : normalize(joined);
-}
-function normalize(path2) {
-  assertPath$1(path2);
-  const absolute = path2.charCodeAt(0) === 47;
-  let value = normalizeString(path2, !absolute);
-  if (value.length === 0 && !absolute) {
-    value = ".";
-  }
-  if (value.length > 0 && path2.charCodeAt(path2.length - 1) === 47) {
-    value += "/";
-  }
-  return absolute ? "/" + value : value;
-}
-function normalizeString(path2, allowAboveRoot) {
-  let result = "";
-  let lastSegmentLength = 0;
-  let lastSlash = -1;
-  let dots = 0;
-  let index2 = -1;
-  let code;
-  let lastSlashIndex;
-  while (++index2 <= path2.length) {
-    if (index2 < path2.length) {
-      code = path2.charCodeAt(index2);
-    } else if (code === 47) {
-      break;
     } else {
-      code = 47;
-    }
-    if (code === 47) {
-      if (lastSlash === index2 - 1 || dots === 1)
-        ;
-      else if (lastSlash !== index2 - 1 && dots === 2) {
-        if (result.length < 2 || lastSegmentLength !== 2 || result.charCodeAt(result.length - 1) !== 46 || result.charCodeAt(result.length - 2) !== 46) {
-          if (result.length > 2) {
-            lastSlashIndex = result.lastIndexOf("/");
-            if (lastSlashIndex !== result.length - 1) {
-              if (lastSlashIndex < 0) {
-                result = "";
-                lastSegmentLength = 0;
-              } else {
-                result = result.slice(0, lastSlashIndex);
-                lastSegmentLength = result.length - 1 - result.lastIndexOf("/");
-              }
-              lastSlash = index2;
-              dots = 0;
-              continue;
-            }
-          } else if (result.length > 0) {
-            result = "";
-            lastSegmentLength = 0;
-            lastSlash = index2;
-            dots = 0;
-            continue;
-          }
-        }
-        if (allowAboveRoot) {
-          result = result.length > 0 ? result + "/.." : "..";
-          lastSegmentLength = 2;
+      const name2 = attribute.name;
+      let value;
+      if (attribute.value && typeof attribute.value === "object") {
+        if (attribute.value.data && attribute.value.data.estree && state.evaluater) {
+          const program = attribute.value.data.estree;
+          const expression = program.body[0];
+          ok(expression.type === "ExpressionStatement");
+          value = state.evaluater.evaluateExpression(expression.expression);
+        } else {
+          crashEstree(state, node2.position);
         }
       } else {
-        if (result.length > 0) {
-          result += "/" + path2.slice(lastSlash + 1, index2);
-        } else {
-          result = path2.slice(lastSlash + 1, index2);
-        }
-        lastSegmentLength = index2 - lastSlash - 1;
+        value = attribute.value === null ? true : attribute.value;
       }
-      lastSlash = index2;
-      dots = 0;
-    } else if (code === 46 && dots > -1) {
-      dots++;
-    } else {
-      dots = -1;
+      props[name2] = /** @type {Props[keyof Props]} */
+      value;
+    }
+  }
+  return props;
+}
+function createChildren(state, node2) {
+  const children = [];
+  let index2 = -1;
+  const countsByName = state.passKeys ? /* @__PURE__ */ new Map() : emptyMap;
+  while (++index2 < node2.children.length) {
+    const child = node2.children[index2];
+    let key;
+    if (state.passKeys) {
+      const name2 = child.type === "element" ? child.tagName : child.type === "mdxJsxFlowElement" || child.type === "mdxJsxTextElement" ? child.name : void 0;
+      if (name2) {
+        const count2 = countsByName.get(name2) || 0;
+        key = name2 + "-" + count2;
+        countsByName.set(name2, count2 + 1);
+      }
+    }
+    const result = one(state, child, key);
+    if (result !== void 0)
+      children.push(result);
+  }
+  return children;
+}
+function createProperty(state, prop, value) {
+  const info = find$1(state.schema, prop);
+  if (value === null || value === void 0 || typeof value === "number" && Number.isNaN(value)) {
+    return;
+  }
+  if (Array.isArray(value)) {
+    value = info.commaSeparated ? stringify$1(value) : stringify(value);
+  }
+  if (info.property === "style") {
+    let styleObject = typeof value === "object" ? value : parseStyle(state, String(value));
+    if (state.stylePropertyNameCase === "css") {
+      styleObject = transformStylesToCssCasing(styleObject);
+    }
+    return ["style", styleObject];
+  }
+  return [
+    state.elementAttributeNameCase === "react" && info.space ? hastToReact[info.property] || info.property : info.attribute,
+    value
+  ];
+}
+function parseStyle(state, value) {
+  const result = {};
+  try {
+    styleToObject(value, replacer);
+  } catch (error) {
+    if (!state.ignoreInvalidStyle) {
+      const cause = (
+        /** @type {Error} */
+        error
+      );
+      const message = new VFileMessage("Cannot parse `style` attribute", {
+        ancestors: state.ancestors,
+        cause,
+        ruleId: "style",
+        source: "hast-util-to-jsx-runtime"
+      });
+      message.file = state.filePath || void 0;
+      message.url = docs + "#cannot-parse-style-attribute";
+      throw message;
     }
   }
   return result;
-}
-function assertPath$1(path2) {
-  if (typeof path2 !== "string") {
-    throw new TypeError(
-      "Path must be a string. Received " + JSON.stringify(path2)
-    );
-  }
-}
-const proc = { cwd };
-function cwd() {
-  return "/";
-}
-function isUrl(fileUrlOrPath) {
-  return fileUrlOrPath !== null && typeof fileUrlOrPath === "object" && // @ts-expect-error: indexable.
-  fileUrlOrPath.href && // @ts-expect-error: indexable.
-  fileUrlOrPath.origin;
-}
-function urlToPath(path2) {
-  if (typeof path2 === "string") {
-    path2 = new URL(path2);
-  } else if (!isUrl(path2)) {
-    const error = new TypeError(
-      'The "path" argument must be of type string or an instance of URL. Received `' + path2 + "`"
-    );
-    error.code = "ERR_INVALID_ARG_TYPE";
-    throw error;
-  }
-  if (path2.protocol !== "file:") {
-    const error = new TypeError("The URL must be of scheme file");
-    error.code = "ERR_INVALID_URL_SCHEME";
-    throw error;
-  }
-  return getPathFromURLPosix(path2);
-}
-function getPathFromURLPosix(url) {
-  if (url.hostname !== "") {
-    const error = new TypeError(
-      'File URL host must be "localhost" or empty on darwin'
-    );
-    error.code = "ERR_INVALID_FILE_URL_HOST";
-    throw error;
-  }
-  const pathname = url.pathname;
-  let index2 = -1;
-  while (++index2 < pathname.length) {
-    if (pathname.charCodeAt(index2) === 37 && pathname.charCodeAt(index2 + 1) === 50) {
-      const third = pathname.charCodeAt(index2 + 2);
-      if (third === 70 || third === 102) {
-        const error = new TypeError(
-          "File URL path must not include encoded / characters"
-        );
-        error.code = "ERR_INVALID_FILE_URL_PATH";
-        throw error;
-      }
+  function replacer(name2, value2) {
+    let key = name2;
+    if (key.slice(0, 2) !== "--") {
+      if (key.slice(0, 4) === "-ms-")
+        key = "ms-" + key.slice(4);
+      key = key.replace(dashSomething, toCamel);
     }
+    result[key] = value2;
   }
-  return decodeURIComponent(pathname);
 }
-const order = ["history", "path", "basename", "stem", "extname", "dirname"];
-class VFile {
-  /**
-   * Create a new virtual file.
-   *
-   * `options` is treated as:
-   *
-   * *   `string` or `Buffer` — `{value: options}`
-   * *   `URL` — `{path: options}`
-   * *   `VFile` — shallow copies its data over to the new file
-   * *   `object` — all fields are shallow copied over to the new file
-   *
-   * Path related fields are set in the following order (least specific to
-   * most specific): `history`, `path`, `basename`, `stem`, `extname`,
-   * `dirname`.
-   *
-   * You cannot set `dirname` or `extname` without setting either `history`,
-   * `path`, `basename`, or `stem` too.
-   *
-   * @param {Compatible | null | undefined} [value]
-   *   File value.
-   * @returns
-   *   New instance.
-   */
-  constructor(value) {
-    let options;
-    if (!value) {
-      options = {};
-    } else if (typeof value === "string" || buffer(value)) {
-      options = { value };
-    } else if (isUrl(value)) {
-      options = { path: value };
-    } else {
-      options = value;
-    }
-    this.data = {};
-    this.messages = [];
-    this.history = [];
-    this.cwd = proc.cwd();
-    this.value;
-    this.stored;
-    this.result;
-    this.map;
+function findComponentFromName(state, name2, allowExpression) {
+  let result;
+  if (!allowExpression) {
+    result = { type: "Literal", value: name2 };
+  } else if (name2.includes(".")) {
+    const identifiers2 = name2.split(".");
     let index2 = -1;
-    while (++index2 < order.length) {
-      const prop2 = order[index2];
-      if (prop2 in options && options[prop2] !== void 0 && options[prop2] !== null) {
-        this[prop2] = prop2 === "history" ? [...options[prop2]] : options[prop2];
-      }
+    let node2;
+    while (++index2 < identifiers2.length) {
+      const prop = name$1(identifiers2[index2]) ? { type: "Identifier", name: identifiers2[index2] } : { type: "Literal", value: identifiers2[index2] };
+      node2 = node2 ? {
+        type: "MemberExpression",
+        object: node2,
+        property: prop,
+        computed: Boolean(index2 && prop.type === "Literal"),
+        optional: false
+      } : prop;
     }
-    let prop;
-    for (prop in options) {
-      if (!order.includes(prop)) {
-        this[prop] = options[prop];
-      }
-    }
+    result = node2;
+  } else {
+    result = name$1(name2) && !/^[a-z]/.test(name2) ? { type: "Identifier", name: name2 } : { type: "Literal", value: name2 };
   }
-  /**
-   * Get the full path (example: `'~/index.min.js'`).
-   *
-   * @returns {string}
-   */
-  get path() {
-    return this.history[this.history.length - 1];
-  }
-  /**
-   * Set the full path (example: `'~/index.min.js'`).
-   *
-   * Cannot be nullified.
-   * You can set a file URL (a `URL` object with a `file:` protocol) which will
-   * be turned into a path with `url.fileURLToPath`.
-   *
-   * @param {string | URL} path
-   */
-  set path(path2) {
-    if (isUrl(path2)) {
-      path2 = urlToPath(path2);
-    }
-    assertNonEmpty(path2, "path");
-    if (this.path !== path2) {
-      this.history.push(path2);
-    }
-  }
-  /**
-   * Get the parent path (example: `'~'`).
-   */
-  get dirname() {
-    return typeof this.path === "string" ? path.dirname(this.path) : void 0;
-  }
-  /**
-   * Set the parent path (example: `'~'`).
-   *
-   * Cannot be set if there’s no `path` yet.
-   */
-  set dirname(dirname2) {
-    assertPath(this.basename, "dirname");
-    this.path = path.join(dirname2 || "", this.basename);
-  }
-  /**
-   * Get the basename (including extname) (example: `'index.min.js'`).
-   */
-  get basename() {
-    return typeof this.path === "string" ? path.basename(this.path) : void 0;
-  }
-  /**
-   * Set basename (including extname) (`'index.min.js'`).
-   *
-   * Cannot contain path separators (`'/'` on unix, macOS, and browsers, `'\'`
-   * on windows).
-   * Cannot be nullified (use `file.path = file.dirname` instead).
-   */
-  set basename(basename2) {
-    assertNonEmpty(basename2, "basename");
-    assertPart(basename2, "basename");
-    this.path = path.join(this.dirname || "", basename2);
-  }
-  /**
-   * Get the extname (including dot) (example: `'.js'`).
-   */
-  get extname() {
-    return typeof this.path === "string" ? path.extname(this.path) : void 0;
-  }
-  /**
-   * Set the extname (including dot) (example: `'.js'`).
-   *
-   * Cannot contain path separators (`'/'` on unix, macOS, and browsers, `'\'`
-   * on windows).
-   * Cannot be set if there’s no `path` yet.
-   */
-  set extname(extname2) {
-    assertPart(extname2, "extname");
-    assertPath(this.dirname, "extname");
-    if (extname2) {
-      if (extname2.charCodeAt(0) !== 46) {
-        throw new Error("`extname` must start with `.`");
-      }
-      if (extname2.includes(".", 1)) {
-        throw new Error("`extname` cannot contain multiple dots");
-      }
-    }
-    this.path = path.join(this.dirname, this.stem + (extname2 || ""));
-  }
-  /**
-   * Get the stem (basename w/o extname) (example: `'index.min'`).
-   */
-  get stem() {
-    return typeof this.path === "string" ? path.basename(this.path, this.extname) : void 0;
-  }
-  /**
-   * Set the stem (basename w/o extname) (example: `'index.min'`).
-   *
-   * Cannot contain path separators (`'/'` on unix, macOS, and browsers, `'\'`
-   * on windows).
-   * Cannot be nullified (use `file.path = file.dirname` instead).
-   */
-  set stem(stem) {
-    assertNonEmpty(stem, "stem");
-    assertPart(stem, "stem");
-    this.path = path.join(this.dirname || "", stem + (this.extname || ""));
-  }
-  /**
-   * Serialize the file.
-   *
-   * @param {BufferEncoding | null | undefined} [encoding='utf8']
-   *   Character encoding to understand `value` as when it’s a `Buffer`
-   *   (default: `'utf8'`).
-   * @returns {string}
-   *   Serialized file.
-   */
-  toString(encoding) {
-    return (this.value || "").toString(encoding || void 0);
-  }
-  /**
-   * Create a warning message associated with the file.
-   *
-   * Its `fatal` is set to `false` and `file` is set to the current file path.
-   * Its added to `file.messages`.
-   *
-   * @param {string | Error | VFileMessage} reason
-   *   Reason for message, uses the stack and message of the error if given.
-   * @param {Node | NodeLike | Position | Point | null | undefined} [place]
-   *   Place in file where the message occurred.
-   * @param {string | null | undefined} [origin]
-   *   Place in code where the message originates (example:
-   *   `'my-package:my-rule'` or `'my-rule'`).
-   * @returns {VFileMessage}
-   *   Message.
-   */
-  message(reason, place, origin) {
-    const message = new VFileMessage(reason, place, origin);
-    if (this.path) {
-      message.name = this.path + ":" + message.name;
-      message.file = this.path;
-    }
-    message.fatal = false;
-    this.messages.push(message);
-    return message;
-  }
-  /**
-   * Create an info message associated with the file.
-   *
-   * Its `fatal` is set to `null` and `file` is set to the current file path.
-   * Its added to `file.messages`.
-   *
-   * @param {string | Error | VFileMessage} reason
-   *   Reason for message, uses the stack and message of the error if given.
-   * @param {Node | NodeLike | Position | Point | null | undefined} [place]
-   *   Place in file where the message occurred.
-   * @param {string | null | undefined} [origin]
-   *   Place in code where the message originates (example:
-   *   `'my-package:my-rule'` or `'my-rule'`).
-   * @returns {VFileMessage}
-   *   Message.
-   */
-  info(reason, place, origin) {
-    const message = this.message(reason, place, origin);
-    message.fatal = null;
-    return message;
-  }
-  /**
-   * Create a fatal error associated with the file.
-   *
-   * Its `fatal` is set to `true` and `file` is set to the current file path.
-   * Its added to `file.messages`.
-   *
-   * > 👉 **Note**: a fatal error means that a file is no longer processable.
-   *
-   * @param {string | Error | VFileMessage} reason
-   *   Reason for message, uses the stack and message of the error if given.
-   * @param {Node | NodeLike | Position | Point | null | undefined} [place]
-   *   Place in file where the message occurred.
-   * @param {string | null | undefined} [origin]
-   *   Place in code where the message originates (example:
-   *   `'my-package:my-rule'` or `'my-rule'`).
-   * @returns {never}
-   *   Message.
-   * @throws {VFileMessage}
-   *   Message.
-   */
-  fail(reason, place, origin) {
-    const message = this.message(reason, place, origin);
-    message.fatal = true;
-    throw message;
-  }
-}
-function assertPart(part, name2) {
-  if (part && part.includes(path.sep)) {
-    throw new Error(
-      "`" + name2 + "` cannot be a path: did not expect `" + path.sep + "`"
+  if (result.type === "Literal") {
+    const name3 = (
+      /** @type {keyof JSX.IntrinsicElements} */
+      result.value
     );
+    return own$2.call(state.components, name3) ? state.components[name3] : name3;
   }
-}
-function assertNonEmpty(part, name2) {
-  if (!part) {
-    throw new Error("`" + name2 + "` cannot be empty");
+  if (state.evaluater) {
+    return state.evaluater.evaluateExpression(result);
   }
+  crashEstree(state);
 }
-function assertPath(path2, name2) {
-  if (!path2) {
-    throw new Error("Setting `" + name2 + "` requires `path` to be set too");
+function crashEstree(state, place) {
+  const message = new VFileMessage(
+    "Cannot handle MDX estrees without `createEvaluater`",
+    {
+      ancestors: state.ancestors,
+      place,
+      ruleId: "mdx-estree",
+      source: "hast-util-to-jsx-runtime"
+    }
+  );
+  message.file = state.filePath || void 0;
+  message.url = docs + "#cannot-handle-mdx-estrees-without-createevaluater";
+  throw message;
+}
+function transformStylesToCssCasing(domCasing) {
+  const cssCasing = {};
+  let from2;
+  for (from2 in domCasing) {
+    if (own$2.call(domCasing, from2)) {
+      cssCasing[transformStyleToCssCasing(from2)] = domCasing[from2];
+    }
   }
+  return cssCasing;
 }
-function buffer(value) {
-  return isBuffer$1(value);
+function transformStyleToCssCasing(from2) {
+  let to = from2.replace(cap, toDash);
+  if (to.slice(0, 3) === "ms-")
+    to = "-" + to;
+  return to;
 }
+function toCamel(_2, $1) {
+  return $1.toUpperCase();
+}
+function toDash($0) {
+  return "-" + $0.toLowerCase();
+}
+const urlAttributes = {
+  action: ["form"],
+  cite: ["blockquote", "del", "ins", "q"],
+  data: ["object"],
+  formAction: ["button", "input"],
+  href: ["a", "area", "base", "link"],
+  icon: ["menuitem"],
+  itemId: null,
+  manifest: ["html"],
+  ping: ["a", "area"],
+  poster: ["video"],
+  src: [
+    "audio",
+    "embed",
+    "iframe",
+    "img",
+    "input",
+    "script",
+    "source",
+    "track",
+    "video"
+  ]
+};
+const tab$1 = 9;
+const space$1 = 32;
+function trimLines(value) {
+  const source = String(value);
+  const search2 = /\r?\n|\r/g;
+  let match2 = search2.exec(source);
+  let last2 = 0;
+  const lines = [];
+  while (match2) {
+    lines.push(
+      trimLine(source.slice(last2, match2.index), last2 > 0, true),
+      match2[0]
+    );
+    last2 = match2.index + match2[0].length;
+    match2 = search2.exec(source);
+  }
+  lines.push(trimLine(source.slice(last2), last2 > 0, false));
+  return lines.join("");
+}
+function trimLine(value, start, end) {
+  let startIndex = 0;
+  let endIndex = value.length;
+  if (start) {
+    let code = value.codePointAt(startIndex);
+    while (code === tab$1 || code === space$1) {
+      startIndex++;
+      code = value.codePointAt(startIndex);
+    }
+  }
+  if (end) {
+    let code = value.codePointAt(endIndex - 1);
+    while (code === tab$1 || code === space$1) {
+      endIndex--;
+      code = value.codePointAt(endIndex - 1);
+    }
+  }
+  return endIndex > startIndex ? value.slice(startIndex, endIndex) : "";
+}
+const VOID = -1;
+const PRIMITIVE = 0;
+const ARRAY = 1;
+const OBJECT = 2;
+const DATE = 3;
+const REGEXP = 4;
+const MAP = 5;
+const SET = 6;
+const ERROR = 7;
+const BIGINT = 8;
+const env = typeof self === "object" ? self : globalThis;
+const deserializer = ($, _2) => {
+  const as = (out, index2) => {
+    $.set(index2, out);
+    return out;
+  };
+  const unpair = (index2) => {
+    if ($.has(index2))
+      return $.get(index2);
+    const [type2, value] = _2[index2];
+    switch (type2) {
+      case PRIMITIVE:
+      case VOID:
+        return as(value, index2);
+      case ARRAY: {
+        const arr = as([], index2);
+        for (const index3 of value)
+          arr.push(unpair(index3));
+        return arr;
+      }
+      case OBJECT: {
+        const object = as({}, index2);
+        for (const [key, index3] of value)
+          object[unpair(key)] = unpair(index3);
+        return object;
+      }
+      case DATE:
+        return as(new Date(value), index2);
+      case REGEXP: {
+        const { source, flags } = value;
+        return as(new RegExp(source, flags), index2);
+      }
+      case MAP: {
+        const map2 = as(/* @__PURE__ */ new Map(), index2);
+        for (const [key, index3] of value)
+          map2.set(unpair(key), unpair(index3));
+        return map2;
+      }
+      case SET: {
+        const set2 = as(/* @__PURE__ */ new Set(), index2);
+        for (const index3 of value)
+          set2.add(unpair(index3));
+        return set2;
+      }
+      case ERROR: {
+        const { name: name2, message } = value;
+        return as(new env[name2](message), index2);
+      }
+      case BIGINT:
+        return as(BigInt(value), index2);
+      case "BigInt":
+        return as(Object(BigInt(value)), index2);
+    }
+    return as(new env[type2](value), index2);
+  };
+  return unpair;
+};
+const deserialize = (serialized) => deserializer(/* @__PURE__ */ new Map(), serialized)(0);
+const EMPTY = "";
+const { toString: toString2 } = {};
+const { keys } = Object;
+const typeOf = (value) => {
+  const type2 = typeof value;
+  if (type2 !== "object" || !value)
+    return [PRIMITIVE, type2];
+  const asString = toString2.call(value).slice(8, -1);
+  switch (asString) {
+    case "Array":
+      return [ARRAY, EMPTY];
+    case "Object":
+      return [OBJECT, EMPTY];
+    case "Date":
+      return [DATE, EMPTY];
+    case "RegExp":
+      return [REGEXP, EMPTY];
+    case "Map":
+      return [MAP, EMPTY];
+    case "Set":
+      return [SET, EMPTY];
+  }
+  if (asString.includes("Array"))
+    return [ARRAY, asString];
+  if (asString.includes("Error"))
+    return [ERROR, asString];
+  return [OBJECT, asString];
+};
+const shouldSkip = ([TYPE, type2]) => TYPE === PRIMITIVE && (type2 === "function" || type2 === "symbol");
+const serializer = (strict, json2, $, _2) => {
+  const as = (out, value) => {
+    const index2 = _2.push(out) - 1;
+    $.set(value, index2);
+    return index2;
+  };
+  const pair2 = (value) => {
+    if ($.has(value))
+      return $.get(value);
+    let [TYPE, type2] = typeOf(value);
+    switch (TYPE) {
+      case PRIMITIVE: {
+        let entry = value;
+        switch (type2) {
+          case "bigint":
+            TYPE = BIGINT;
+            entry = value.toString();
+            break;
+          case "function":
+          case "symbol":
+            if (strict)
+              throw new TypeError("unable to serialize " + type2);
+            entry = null;
+            break;
+          case "undefined":
+            return as([VOID], value);
+        }
+        return as([TYPE, entry], value);
+      }
+      case ARRAY: {
+        if (type2)
+          return as([type2, [...value]], value);
+        const arr = [];
+        const index2 = as([TYPE, arr], value);
+        for (const entry of value)
+          arr.push(pair2(entry));
+        return index2;
+      }
+      case OBJECT: {
+        if (type2) {
+          switch (type2) {
+            case "BigInt":
+              return as([type2, value.toString()], value);
+            case "Boolean":
+            case "Number":
+            case "String":
+              return as([type2, value.valueOf()], value);
+          }
+        }
+        if (json2 && "toJSON" in value)
+          return pair2(value.toJSON());
+        const entries = [];
+        const index2 = as([TYPE, entries], value);
+        for (const key of keys(value)) {
+          if (strict || !shouldSkip(typeOf(value[key])))
+            entries.push([pair2(key), pair2(value[key])]);
+        }
+        return index2;
+      }
+      case DATE:
+        return as([TYPE, value.toISOString()], value);
+      case REGEXP: {
+        const { source, flags } = value;
+        return as([TYPE, { source, flags }], value);
+      }
+      case MAP: {
+        const entries = [];
+        const index2 = as([TYPE, entries], value);
+        for (const [key, entry] of value) {
+          if (strict || !(shouldSkip(typeOf(key)) || shouldSkip(typeOf(entry))))
+            entries.push([pair2(key), pair2(entry)]);
+        }
+        return index2;
+      }
+      case SET: {
+        const entries = [];
+        const index2 = as([TYPE, entries], value);
+        for (const entry of value) {
+          if (strict || !shouldSkip(typeOf(entry)))
+            entries.push(pair2(entry));
+        }
+        return index2;
+      }
+    }
+    const { message } = value;
+    return as([TYPE, { name: type2, message }], value);
+  };
+  return pair2;
+};
+const serialize = (value, { json: json2, lossy } = {}) => {
+  const _2 = [];
+  return serializer(!(json2 || lossy), !!json2, /* @__PURE__ */ new Map(), _2)(value), _2;
+};
+const structuredClone$1 = typeof structuredClone === "function" ? (
+  /* c8 ignore start */
+  (any, options) => options && ("json" in options || "lossy" in options) ? deserialize(serialize(any, options)) : structuredClone(any)
+) : (any, options) => deserialize(serialize(any, options));
 function bail(error) {
   if (error) {
     throw error;
@@ -49200,80 +49580,1265 @@ function wrap(middleware2, callback) {
     done(null, value);
   }
 }
-const unified = base().freeze();
-const own$1 = {}.hasOwnProperty;
-function base() {
-  const transformers = trough();
-  const attachers = [];
-  let namespace = {};
-  let frozen;
-  let freezeIndex = -1;
-  processor.data = data2;
-  processor.Parser = void 0;
-  processor.Compiler = void 0;
-  processor.freeze = freeze;
-  processor.attachers = attachers;
-  processor.use = use;
-  processor.parse = parse2;
-  processor.stringify = stringify2;
-  processor.run = run2;
-  processor.runSync = runSync;
-  processor.process = process2;
-  processor.processSync = processSync;
-  return processor;
-  function processor() {
-    const destination = base();
-    let index2 = -1;
-    while (++index2 < attachers.length) {
-      destination.use(...attachers[index2]);
+const path = { basename, dirname, extname, join, sep: "/" };
+function basename(path2, ext) {
+  if (ext !== void 0 && typeof ext !== "string") {
+    throw new TypeError('"ext" argument must be a string');
+  }
+  assertPath$1(path2);
+  let start = 0;
+  let end = -1;
+  let index2 = path2.length;
+  let seenNonSlash;
+  if (ext === void 0 || ext.length === 0 || ext.length > path2.length) {
+    while (index2--) {
+      if (path2.codePointAt(index2) === 47) {
+        if (seenNonSlash) {
+          start = index2 + 1;
+          break;
+        }
+      } else if (end < 0) {
+        seenNonSlash = true;
+        end = index2 + 1;
+      }
     }
-    destination.data(extend$2(true, {}, namespace));
+    return end < 0 ? "" : path2.slice(start, end);
+  }
+  if (ext === path2) {
+    return "";
+  }
+  let firstNonSlashEnd = -1;
+  let extIndex = ext.length - 1;
+  while (index2--) {
+    if (path2.codePointAt(index2) === 47) {
+      if (seenNonSlash) {
+        start = index2 + 1;
+        break;
+      }
+    } else {
+      if (firstNonSlashEnd < 0) {
+        seenNonSlash = true;
+        firstNonSlashEnd = index2 + 1;
+      }
+      if (extIndex > -1) {
+        if (path2.codePointAt(index2) === ext.codePointAt(extIndex--)) {
+          if (extIndex < 0) {
+            end = index2;
+          }
+        } else {
+          extIndex = -1;
+          end = firstNonSlashEnd;
+        }
+      }
+    }
+  }
+  if (start === end) {
+    end = firstNonSlashEnd;
+  } else if (end < 0) {
+    end = path2.length;
+  }
+  return path2.slice(start, end);
+}
+function dirname(path2) {
+  assertPath$1(path2);
+  if (path2.length === 0) {
+    return ".";
+  }
+  let end = -1;
+  let index2 = path2.length;
+  let unmatchedSlash;
+  while (--index2) {
+    if (path2.codePointAt(index2) === 47) {
+      if (unmatchedSlash) {
+        end = index2;
+        break;
+      }
+    } else if (!unmatchedSlash) {
+      unmatchedSlash = true;
+    }
+  }
+  return end < 0 ? path2.codePointAt(0) === 47 ? "/" : "." : end === 1 && path2.codePointAt(0) === 47 ? "//" : path2.slice(0, end);
+}
+function extname(path2) {
+  assertPath$1(path2);
+  let index2 = path2.length;
+  let end = -1;
+  let startPart = 0;
+  let startDot = -1;
+  let preDotState = 0;
+  let unmatchedSlash;
+  while (index2--) {
+    const code = path2.codePointAt(index2);
+    if (code === 47) {
+      if (unmatchedSlash) {
+        startPart = index2 + 1;
+        break;
+      }
+      continue;
+    }
+    if (end < 0) {
+      unmatchedSlash = true;
+      end = index2 + 1;
+    }
+    if (code === 46) {
+      if (startDot < 0) {
+        startDot = index2;
+      } else if (preDotState !== 1) {
+        preDotState = 1;
+      }
+    } else if (startDot > -1) {
+      preDotState = -1;
+    }
+  }
+  if (startDot < 0 || end < 0 || // We saw a non-dot character immediately before the dot.
+  preDotState === 0 || // The (right-most) trimmed path component is exactly `..`.
+  preDotState === 1 && startDot === end - 1 && startDot === startPart + 1) {
+    return "";
+  }
+  return path2.slice(startDot, end);
+}
+function join(...segments) {
+  let index2 = -1;
+  let joined;
+  while (++index2 < segments.length) {
+    assertPath$1(segments[index2]);
+    if (segments[index2]) {
+      joined = joined === void 0 ? segments[index2] : joined + "/" + segments[index2];
+    }
+  }
+  return joined === void 0 ? "." : normalize(joined);
+}
+function normalize(path2) {
+  assertPath$1(path2);
+  const absolute = path2.codePointAt(0) === 47;
+  let value = normalizeString(path2, !absolute);
+  if (value.length === 0 && !absolute) {
+    value = ".";
+  }
+  if (value.length > 0 && path2.codePointAt(path2.length - 1) === 47) {
+    value += "/";
+  }
+  return absolute ? "/" + value : value;
+}
+function normalizeString(path2, allowAboveRoot) {
+  let result = "";
+  let lastSegmentLength = 0;
+  let lastSlash = -1;
+  let dots = 0;
+  let index2 = -1;
+  let code;
+  let lastSlashIndex;
+  while (++index2 <= path2.length) {
+    if (index2 < path2.length) {
+      code = path2.codePointAt(index2);
+    } else if (code === 47) {
+      break;
+    } else {
+      code = 47;
+    }
+    if (code === 47) {
+      if (lastSlash === index2 - 1 || dots === 1)
+        ;
+      else if (lastSlash !== index2 - 1 && dots === 2) {
+        if (result.length < 2 || lastSegmentLength !== 2 || result.codePointAt(result.length - 1) !== 46 || result.codePointAt(result.length - 2) !== 46) {
+          if (result.length > 2) {
+            lastSlashIndex = result.lastIndexOf("/");
+            if (lastSlashIndex !== result.length - 1) {
+              if (lastSlashIndex < 0) {
+                result = "";
+                lastSegmentLength = 0;
+              } else {
+                result = result.slice(0, lastSlashIndex);
+                lastSegmentLength = result.length - 1 - result.lastIndexOf("/");
+              }
+              lastSlash = index2;
+              dots = 0;
+              continue;
+            }
+          } else if (result.length > 0) {
+            result = "";
+            lastSegmentLength = 0;
+            lastSlash = index2;
+            dots = 0;
+            continue;
+          }
+        }
+        if (allowAboveRoot) {
+          result = result.length > 0 ? result + "/.." : "..";
+          lastSegmentLength = 2;
+        }
+      } else {
+        if (result.length > 0) {
+          result += "/" + path2.slice(lastSlash + 1, index2);
+        } else {
+          result = path2.slice(lastSlash + 1, index2);
+        }
+        lastSegmentLength = index2 - lastSlash - 1;
+      }
+      lastSlash = index2;
+      dots = 0;
+    } else if (code === 46 && dots > -1) {
+      dots++;
+    } else {
+      dots = -1;
+    }
+  }
+  return result;
+}
+function assertPath$1(path2) {
+  if (typeof path2 !== "string") {
+    throw new TypeError(
+      "Path must be a string. Received " + JSON.stringify(path2)
+    );
+  }
+}
+const proc = { cwd };
+function cwd() {
+  return "/";
+}
+function isUrl(fileUrlOrPath) {
+  return Boolean(
+    fileUrlOrPath !== null && typeof fileUrlOrPath === "object" && "href" in fileUrlOrPath && fileUrlOrPath.href && "protocol" in fileUrlOrPath && fileUrlOrPath.protocol && // @ts-expect-error: indexing is fine.
+    fileUrlOrPath.auth === void 0
+  );
+}
+function urlToPath(path2) {
+  if (typeof path2 === "string") {
+    path2 = new URL(path2);
+  } else if (!isUrl(path2)) {
+    const error = new TypeError(
+      'The "path" argument must be of type string or an instance of URL. Received `' + path2 + "`"
+    );
+    error.code = "ERR_INVALID_ARG_TYPE";
+    throw error;
+  }
+  if (path2.protocol !== "file:") {
+    const error = new TypeError("The URL must be of scheme file");
+    error.code = "ERR_INVALID_URL_SCHEME";
+    throw error;
+  }
+  return getPathFromURLPosix(path2);
+}
+function getPathFromURLPosix(url) {
+  if (url.hostname !== "") {
+    const error = new TypeError(
+      'File URL host must be "localhost" or empty on darwin'
+    );
+    error.code = "ERR_INVALID_FILE_URL_HOST";
+    throw error;
+  }
+  const pathname = url.pathname;
+  let index2 = -1;
+  while (++index2 < pathname.length) {
+    if (pathname.codePointAt(index2) === 37 && pathname.codePointAt(index2 + 1) === 50) {
+      const third = pathname.codePointAt(index2 + 2);
+      if (third === 70 || third === 102) {
+        const error = new TypeError(
+          "File URL path must not include encoded / characters"
+        );
+        error.code = "ERR_INVALID_FILE_URL_PATH";
+        throw error;
+      }
+    }
+  }
+  return decodeURIComponent(pathname);
+}
+const order = (
+  /** @type {const} */
+  [
+    "history",
+    "path",
+    "basename",
+    "stem",
+    "extname",
+    "dirname"
+  ]
+);
+class VFile {
+  /**
+   * Create a new virtual file.
+   *
+   * `options` is treated as:
+   *
+   * *   `string` or `Uint8Array` — `{value: options}`
+   * *   `URL` — `{path: options}`
+   * *   `VFile` — shallow copies its data over to the new file
+   * *   `object` — all fields are shallow copied over to the new file
+   *
+   * Path related fields are set in the following order (least specific to
+   * most specific): `history`, `path`, `basename`, `stem`, `extname`,
+   * `dirname`.
+   *
+   * You cannot set `dirname` or `extname` without setting either `history`,
+   * `path`, `basename`, or `stem` too.
+   *
+   * @param {Compatible | null | undefined} [value]
+   *   File value.
+   * @returns
+   *   New instance.
+   */
+  constructor(value) {
+    let options;
+    if (!value) {
+      options = {};
+    } else if (isUrl(value)) {
+      options = { path: value };
+    } else if (typeof value === "string" || isUint8Array$1(value)) {
+      options = { value };
+    } else {
+      options = value;
+    }
+    this.cwd = proc.cwd();
+    this.data = {};
+    this.history = [];
+    this.messages = [];
+    this.value;
+    this.map;
+    this.result;
+    this.stored;
+    let index2 = -1;
+    while (++index2 < order.length) {
+      const prop2 = order[index2];
+      if (prop2 in options && options[prop2] !== void 0 && options[prop2] !== null) {
+        this[prop2] = prop2 === "history" ? [...options[prop2]] : options[prop2];
+      }
+    }
+    let prop;
+    for (prop in options) {
+      if (!order.includes(prop)) {
+        this[prop] = options[prop];
+      }
+    }
+  }
+  /**
+   * Get the basename (including extname) (example: `'index.min.js'`).
+   *
+   * @returns {string | undefined}
+   *   Basename.
+   */
+  get basename() {
+    return typeof this.path === "string" ? path.basename(this.path) : void 0;
+  }
+  /**
+   * Set basename (including extname) (`'index.min.js'`).
+   *
+   * Cannot contain path separators (`'/'` on unix, macOS, and browsers, `'\'`
+   * on windows).
+   * Cannot be nullified (use `file.path = file.dirname` instead).
+   *
+   * @param {string} basename
+   *   Basename.
+   * @returns {undefined}
+   *   Nothing.
+   */
+  set basename(basename2) {
+    assertNonEmpty(basename2, "basename");
+    assertPart(basename2, "basename");
+    this.path = path.join(this.dirname || "", basename2);
+  }
+  /**
+   * Get the parent path (example: `'~'`).
+   *
+   * @returns {string | undefined}
+   *   Dirname.
+   */
+  get dirname() {
+    return typeof this.path === "string" ? path.dirname(this.path) : void 0;
+  }
+  /**
+   * Set the parent path (example: `'~'`).
+   *
+   * Cannot be set if there’s no `path` yet.
+   *
+   * @param {string | undefined} dirname
+   *   Dirname.
+   * @returns {undefined}
+   *   Nothing.
+   */
+  set dirname(dirname2) {
+    assertPath(this.basename, "dirname");
+    this.path = path.join(dirname2 || "", this.basename);
+  }
+  /**
+   * Get the extname (including dot) (example: `'.js'`).
+   *
+   * @returns {string | undefined}
+   *   Extname.
+   */
+  get extname() {
+    return typeof this.path === "string" ? path.extname(this.path) : void 0;
+  }
+  /**
+   * Set the extname (including dot) (example: `'.js'`).
+   *
+   * Cannot contain path separators (`'/'` on unix, macOS, and browsers, `'\'`
+   * on windows).
+   * Cannot be set if there’s no `path` yet.
+   *
+   * @param {string | undefined} extname
+   *   Extname.
+   * @returns {undefined}
+   *   Nothing.
+   */
+  set extname(extname2) {
+    assertPart(extname2, "extname");
+    assertPath(this.dirname, "extname");
+    if (extname2) {
+      if (extname2.codePointAt(0) !== 46) {
+        throw new Error("`extname` must start with `.`");
+      }
+      if (extname2.includes(".", 1)) {
+        throw new Error("`extname` cannot contain multiple dots");
+      }
+    }
+    this.path = path.join(this.dirname, this.stem + (extname2 || ""));
+  }
+  /**
+   * Get the full path (example: `'~/index.min.js'`).
+   *
+   * @returns {string}
+   *   Path.
+   */
+  get path() {
+    return this.history[this.history.length - 1];
+  }
+  /**
+   * Set the full path (example: `'~/index.min.js'`).
+   *
+   * Cannot be nullified.
+   * You can set a file URL (a `URL` object with a `file:` protocol) which will
+   * be turned into a path with `url.fileURLToPath`.
+   *
+   * @param {URL | string} path
+   *   Path.
+   * @returns {undefined}
+   *   Nothing.
+   */
+  set path(path2) {
+    if (isUrl(path2)) {
+      path2 = urlToPath(path2);
+    }
+    assertNonEmpty(path2, "path");
+    if (this.path !== path2) {
+      this.history.push(path2);
+    }
+  }
+  /**
+   * Get the stem (basename w/o extname) (example: `'index.min'`).
+   *
+   * @returns {string | undefined}
+   *   Stem.
+   */
+  get stem() {
+    return typeof this.path === "string" ? path.basename(this.path, this.extname) : void 0;
+  }
+  /**
+   * Set the stem (basename w/o extname) (example: `'index.min'`).
+   *
+   * Cannot contain path separators (`'/'` on unix, macOS, and browsers, `'\'`
+   * on windows).
+   * Cannot be nullified (use `file.path = file.dirname` instead).
+   *
+   * @param {string} stem
+   *   Stem.
+   * @returns {undefined}
+   *   Nothing.
+   */
+  set stem(stem) {
+    assertNonEmpty(stem, "stem");
+    assertPart(stem, "stem");
+    this.path = path.join(this.dirname || "", stem + (this.extname || ""));
+  }
+  // Normal prototypal methods.
+  /**
+   * Create a fatal message for `reason` associated with the file.
+   *
+   * The `fatal` field of the message is set to `true` (error; file not usable)
+   * and the `file` field is set to the current file path.
+   * The message is added to the `messages` field on `file`.
+   *
+   * > 🪦 **Note**: also has obsolete signatures.
+   *
+   * @overload
+   * @param {string} reason
+   * @param {MessageOptions | null | undefined} [options]
+   * @returns {never}
+   *
+   * @overload
+   * @param {string} reason
+   * @param {Node | NodeLike | null | undefined} parent
+   * @param {string | null | undefined} [origin]
+   * @returns {never}
+   *
+   * @overload
+   * @param {string} reason
+   * @param {Point | Position | null | undefined} place
+   * @param {string | null | undefined} [origin]
+   * @returns {never}
+   *
+   * @overload
+   * @param {string} reason
+   * @param {string | null | undefined} [origin]
+   * @returns {never}
+   *
+   * @overload
+   * @param {Error | VFileMessage} cause
+   * @param {Node | NodeLike | null | undefined} parent
+   * @param {string | null | undefined} [origin]
+   * @returns {never}
+   *
+   * @overload
+   * @param {Error | VFileMessage} cause
+   * @param {Point | Position | null | undefined} place
+   * @param {string | null | undefined} [origin]
+   * @returns {never}
+   *
+   * @overload
+   * @param {Error | VFileMessage} cause
+   * @param {string | null | undefined} [origin]
+   * @returns {never}
+   *
+   * @param {Error | VFileMessage | string} causeOrReason
+   *   Reason for message, should use markdown.
+   * @param {Node | NodeLike | MessageOptions | Point | Position | string | null | undefined} [optionsOrParentOrPlace]
+   *   Configuration (optional).
+   * @param {string | null | undefined} [origin]
+   *   Place in code where the message originates (example:
+   *   `'my-package:my-rule'` or `'my-rule'`).
+   * @returns {never}
+   *   Never.
+   * @throws {VFileMessage}
+   *   Message.
+   */
+  fail(causeOrReason, optionsOrParentOrPlace, origin) {
+    const message = this.message(causeOrReason, optionsOrParentOrPlace, origin);
+    message.fatal = true;
+    throw message;
+  }
+  /**
+   * Create an info message for `reason` associated with the file.
+   *
+   * The `fatal` field of the message is set to `undefined` (info; change
+   * likely not needed) and the `file` field is set to the current file path.
+   * The message is added to the `messages` field on `file`.
+   *
+   * > 🪦 **Note**: also has obsolete signatures.
+   *
+   * @overload
+   * @param {string} reason
+   * @param {MessageOptions | null | undefined} [options]
+   * @returns {VFileMessage}
+   *
+   * @overload
+   * @param {string} reason
+   * @param {Node | NodeLike | null | undefined} parent
+   * @param {string | null | undefined} [origin]
+   * @returns {VFileMessage}
+   *
+   * @overload
+   * @param {string} reason
+   * @param {Point | Position | null | undefined} place
+   * @param {string | null | undefined} [origin]
+   * @returns {VFileMessage}
+   *
+   * @overload
+   * @param {string} reason
+   * @param {string | null | undefined} [origin]
+   * @returns {VFileMessage}
+   *
+   * @overload
+   * @param {Error | VFileMessage} cause
+   * @param {Node | NodeLike | null | undefined} parent
+   * @param {string | null | undefined} [origin]
+   * @returns {VFileMessage}
+   *
+   * @overload
+   * @param {Error | VFileMessage} cause
+   * @param {Point | Position | null | undefined} place
+   * @param {string | null | undefined} [origin]
+   * @returns {VFileMessage}
+   *
+   * @overload
+   * @param {Error | VFileMessage} cause
+   * @param {string | null | undefined} [origin]
+   * @returns {VFileMessage}
+   *
+   * @param {Error | VFileMessage | string} causeOrReason
+   *   Reason for message, should use markdown.
+   * @param {Node | NodeLike | MessageOptions | Point | Position | string | null | undefined} [optionsOrParentOrPlace]
+   *   Configuration (optional).
+   * @param {string | null | undefined} [origin]
+   *   Place in code where the message originates (example:
+   *   `'my-package:my-rule'` or `'my-rule'`).
+   * @returns {VFileMessage}
+   *   Message.
+   */
+  info(causeOrReason, optionsOrParentOrPlace, origin) {
+    const message = this.message(causeOrReason, optionsOrParentOrPlace, origin);
+    message.fatal = void 0;
+    return message;
+  }
+  /**
+   * Create a message for `reason` associated with the file.
+   *
+   * The `fatal` field of the message is set to `false` (warning; change may be
+   * needed) and the `file` field is set to the current file path.
+   * The message is added to the `messages` field on `file`.
+   *
+   * > 🪦 **Note**: also has obsolete signatures.
+   *
+   * @overload
+   * @param {string} reason
+   * @param {MessageOptions | null | undefined} [options]
+   * @returns {VFileMessage}
+   *
+   * @overload
+   * @param {string} reason
+   * @param {Node | NodeLike | null | undefined} parent
+   * @param {string | null | undefined} [origin]
+   * @returns {VFileMessage}
+   *
+   * @overload
+   * @param {string} reason
+   * @param {Point | Position | null | undefined} place
+   * @param {string | null | undefined} [origin]
+   * @returns {VFileMessage}
+   *
+   * @overload
+   * @param {string} reason
+   * @param {string | null | undefined} [origin]
+   * @returns {VFileMessage}
+   *
+   * @overload
+   * @param {Error | VFileMessage} cause
+   * @param {Node | NodeLike | null | undefined} parent
+   * @param {string | null | undefined} [origin]
+   * @returns {VFileMessage}
+   *
+   * @overload
+   * @param {Error | VFileMessage} cause
+   * @param {Point | Position | null | undefined} place
+   * @param {string | null | undefined} [origin]
+   * @returns {VFileMessage}
+   *
+   * @overload
+   * @param {Error | VFileMessage} cause
+   * @param {string | null | undefined} [origin]
+   * @returns {VFileMessage}
+   *
+   * @param {Error | VFileMessage | string} causeOrReason
+   *   Reason for message, should use markdown.
+   * @param {Node | NodeLike | MessageOptions | Point | Position | string | null | undefined} [optionsOrParentOrPlace]
+   *   Configuration (optional).
+   * @param {string | null | undefined} [origin]
+   *   Place in code where the message originates (example:
+   *   `'my-package:my-rule'` or `'my-rule'`).
+   * @returns {VFileMessage}
+   *   Message.
+   */
+  message(causeOrReason, optionsOrParentOrPlace, origin) {
+    const message = new VFileMessage(
+      // @ts-expect-error: the overloads are fine.
+      causeOrReason,
+      optionsOrParentOrPlace,
+      origin
+    );
+    if (this.path) {
+      message.name = this.path + ":" + message.name;
+      message.file = this.path;
+    }
+    message.fatal = false;
+    this.messages.push(message);
+    return message;
+  }
+  /**
+   * Serialize the file.
+   *
+   * > **Note**: which encodings are supported depends on the engine.
+   * > For info on Node.js, see:
+   * > <https://nodejs.org/api/util.html#whatwg-supported-encodings>.
+   *
+   * @param {string | null | undefined} [encoding='utf8']
+   *   Character encoding to understand `value` as when it’s a `Uint8Array`
+   *   (default: `'utf-8'`).
+   * @returns {string}
+   *   Serialized file.
+   */
+  toString(encoding) {
+    if (this.value === void 0) {
+      return "";
+    }
+    if (typeof this.value === "string") {
+      return this.value;
+    }
+    const decoder = new TextDecoder(encoding || void 0);
+    return decoder.decode(this.value);
+  }
+}
+function assertPart(part, name2) {
+  if (part && part.includes(path.sep)) {
+    throw new Error(
+      "`" + name2 + "` cannot be a path: did not expect `" + path.sep + "`"
+    );
+  }
+}
+function assertNonEmpty(part, name2) {
+  if (!part) {
+    throw new Error("`" + name2 + "` cannot be empty");
+  }
+}
+function assertPath(path2, name2) {
+  if (!path2) {
+    throw new Error("Setting `" + name2 + "` requires `path` to be set too");
+  }
+}
+function isUint8Array$1(value) {
+  return Boolean(
+    value && typeof value === "object" && "byteLength" in value && "byteOffset" in value
+  );
+}
+const CallableInstance = (
+  /**
+   * @type {new <Parameters extends Array<unknown>, Result>(property: string | symbol) => (...parameters: Parameters) => Result}
+   */
+  /** @type {unknown} */
+  /**
+   * @this {Function}
+   * @param {string | symbol} property
+   * @returns {(...parameters: Array<unknown>) => unknown}
+   */
+  function(property2) {
+    const self2 = this;
+    const constr = self2.constructor;
+    const proto = (
+      /** @type {Record<string | symbol, Function>} */
+      // Prototypes do exist.
+      // type-coverage:ignore-next-line
+      constr.prototype
+    );
+    const func = proto[property2];
+    const apply2 = function() {
+      return func.apply(apply2, arguments);
+    };
+    Object.setPrototypeOf(apply2, proto);
+    const names = Object.getOwnPropertyNames(func);
+    for (const p2 of names) {
+      const descriptor = Object.getOwnPropertyDescriptor(func, p2);
+      if (descriptor)
+        Object.defineProperty(apply2, p2, descriptor);
+    }
+    return apply2;
+  }
+);
+const own$1 = {}.hasOwnProperty;
+class Processor extends CallableInstance {
+  /**
+   * Create a processor.
+   */
+  constructor() {
+    super("copy");
+    this.Compiler = void 0;
+    this.Parser = void 0;
+    this.attachers = [];
+    this.compiler = void 0;
+    this.freezeIndex = -1;
+    this.frozen = void 0;
+    this.namespace = {};
+    this.parser = void 0;
+    this.transformers = trough();
+  }
+  /**
+   * Copy a processor.
+   *
+   * @deprecated
+   *   This is a private internal method and should not be used.
+   * @returns {Processor<ParseTree, HeadTree, TailTree, CompileTree, CompileResult>}
+   *   New *unfrozen* processor ({@link Processor `Processor`}) that is
+   *   configured to work the same as its ancestor.
+   *   When the descendant processor is configured in the future it does not
+   *   affect the ancestral processor.
+   */
+  copy() {
+    const destination = (
+      /** @type {Processor<ParseTree, HeadTree, TailTree, CompileTree, CompileResult>} */
+      new Processor()
+    );
+    let index2 = -1;
+    while (++index2 < this.attachers.length) {
+      const attacher = this.attachers[index2];
+      destination.use(...attacher);
+    }
+    destination.data(extend$2(true, {}, this.namespace));
     return destination;
   }
-  function data2(key, value) {
+  /**
+   * Configure the processor with info available to all plugins.
+   * Information is stored in an object.
+   *
+   * Typically, options can be given to a specific plugin, but sometimes it
+   * makes sense to have information shared with several plugins.
+   * For example, a list of HTML elements that are self-closing, which is
+   * needed during all phases.
+   *
+   * > 👉 **Note**: setting information cannot occur on *frozen* processors.
+   * > Call the processor first to create a new unfrozen processor.
+   *
+   * > 👉 **Note**: to register custom data in TypeScript, augment the
+   * > {@link Data `Data`} interface.
+   *
+   * @example
+   *   This example show how to get and set info:
+   *
+   *   ```js
+   *   import {unified} from 'unified'
+   *
+   *   const processor = unified().data('alpha', 'bravo')
+   *
+   *   processor.data('alpha') // => 'bravo'
+   *
+   *   processor.data() // => {alpha: 'bravo'}
+   *
+   *   processor.data({charlie: 'delta'})
+   *
+   *   processor.data() // => {charlie: 'delta'}
+   *   ```
+   *
+   * @template {keyof Data} Key
+   *
+   * @overload
+   * @returns {Data}
+   *
+   * @overload
+   * @param {Data} dataset
+   * @returns {Processor<ParseTree, HeadTree, TailTree, CompileTree, CompileResult>}
+   *
+   * @overload
+   * @param {Key} key
+   * @returns {Data[Key]}
+   *
+   * @overload
+   * @param {Key} key
+   * @param {Data[Key]} value
+   * @returns {Processor<ParseTree, HeadTree, TailTree, CompileTree, CompileResult>}
+   *
+   * @param {Data | Key} [key]
+   *   Key to get or set, or entire dataset to set, or nothing to get the
+   *   entire dataset (optional).
+   * @param {Data[Key]} [value]
+   *   Value to set (optional).
+   * @returns {unknown}
+   *   The current processor when setting, the value at `key` when getting, or
+   *   the entire dataset when getting without key.
+   */
+  data(key, value) {
     if (typeof key === "string") {
       if (arguments.length === 2) {
-        assertUnfrozen("data", frozen);
-        namespace[key] = value;
-        return processor;
+        assertUnfrozen("data", this.frozen);
+        this.namespace[key] = value;
+        return this;
       }
-      return own$1.call(namespace, key) && namespace[key] || null;
+      return own$1.call(this.namespace, key) && this.namespace[key] || void 0;
     }
     if (key) {
-      assertUnfrozen("data", frozen);
-      namespace = key;
-      return processor;
+      assertUnfrozen("data", this.frozen);
+      this.namespace = key;
+      return this;
     }
-    return namespace;
+    return this.namespace;
   }
-  function freeze() {
-    if (frozen) {
-      return processor;
+  /**
+   * Freeze a processor.
+   *
+   * Frozen processors are meant to be extended and not to be configured
+   * directly.
+   *
+   * When a processor is frozen it cannot be unfrozen.
+   * New processors working the same way can be created by calling the
+   * processor.
+   *
+   * It’s possible to freeze processors explicitly by calling `.freeze()`.
+   * Processors freeze automatically when `.parse()`, `.run()`, `.runSync()`,
+   * `.stringify()`, `.process()`, or `.processSync()` are called.
+   *
+   * @returns {Processor<ParseTree, HeadTree, TailTree, CompileTree, CompileResult>}
+   *   The current processor.
+   */
+  freeze() {
+    if (this.frozen) {
+      return this;
     }
-    while (++freezeIndex < attachers.length) {
-      const [attacher, ...options] = attachers[freezeIndex];
+    const self2 = (
+      /** @type {Processor} */
+      /** @type {unknown} */
+      this
+    );
+    while (++this.freezeIndex < this.attachers.length) {
+      const [attacher, ...options] = this.attachers[this.freezeIndex];
       if (options[0] === false) {
         continue;
       }
       if (options[0] === true) {
         options[0] = void 0;
       }
-      const transformer = attacher.call(processor, ...options);
+      const transformer = attacher.call(self2, ...options);
       if (typeof transformer === "function") {
-        transformers.use(transformer);
+        this.transformers.use(transformer);
       }
     }
-    frozen = true;
-    freezeIndex = Number.POSITIVE_INFINITY;
-    return processor;
+    this.frozen = true;
+    this.freezeIndex = Number.POSITIVE_INFINITY;
+    return this;
   }
-  function use(value, ...options) {
-    let settings;
-    assertUnfrozen("use", frozen);
+  /**
+   * Parse text to a syntax tree.
+   *
+   * > 👉 **Note**: `parse` freezes the processor if not already *frozen*.
+   *
+   * > 👉 **Note**: `parse` performs the parse phase, not the run phase or other
+   * > phases.
+   *
+   * @param {Compatible | undefined} [file]
+   *   file to parse (optional); typically `string` or `VFile`; any value
+   *   accepted as `x` in `new VFile(x)`.
+   * @returns {ParseTree extends undefined ? Node : ParseTree}
+   *   Syntax tree representing `file`.
+   */
+  parse(file) {
+    this.freeze();
+    const realFile = vfile(file);
+    const parser2 = this.parser || this.Parser;
+    assertParser("parse", parser2);
+    return parser2(String(realFile), realFile);
+  }
+  /**
+   * Process the given file as configured on the processor.
+   *
+   * > 👉 **Note**: `process` freezes the processor if not already *frozen*.
+   *
+   * > 👉 **Note**: `process` performs the parse, run, and stringify phases.
+   *
+   * @overload
+   * @param {Compatible | undefined} file
+   * @param {ProcessCallback<VFileWithOutput<CompileResult>>} done
+   * @returns {undefined}
+   *
+   * @overload
+   * @param {Compatible | undefined} [file]
+   * @returns {Promise<VFileWithOutput<CompileResult>>}
+   *
+   * @param {Compatible | undefined} [file]
+   *   File (optional); typically `string` or `VFile`]; any value accepted as
+   *   `x` in `new VFile(x)`.
+   * @param {ProcessCallback<VFileWithOutput<CompileResult>> | undefined} [done]
+   *   Callback (optional).
+   * @returns {Promise<VFile> | undefined}
+   *   Nothing if `done` is given.
+   *   Otherwise a promise, rejected with a fatal error or resolved with the
+   *   processed file.
+   *
+   *   The parsed, transformed, and compiled value is available at
+   *   `file.value` (see note).
+   *
+   *   > 👉 **Note**: unified typically compiles by serializing: most
+   *   > compilers return `string` (or `Uint8Array`).
+   *   > Some compilers, such as the one configured with
+   *   > [`rehype-react`][rehype-react], return other values (in this case, a
+   *   > React tree).
+   *   > If you’re using a compiler that doesn’t serialize, expect different
+   *   > result values.
+   *   >
+   *   > To register custom results in TypeScript, add them to
+   *   > {@link CompileResultMap `CompileResultMap`}.
+   *
+   *   [rehype-react]: https://github.com/rehypejs/rehype-react
+   */
+  process(file, done) {
+    const self2 = this;
+    this.freeze();
+    assertParser("process", this.parser || this.Parser);
+    assertCompiler("process", this.compiler || this.Compiler);
+    return done ? executor(void 0, done) : new Promise(executor);
+    function executor(resolve, reject) {
+      const realFile = vfile(file);
+      const parseTree = (
+        /** @type {HeadTree extends undefined ? Node : HeadTree} */
+        /** @type {unknown} */
+        self2.parse(realFile)
+      );
+      self2.run(parseTree, realFile, function(error, tree, file2) {
+        if (error || !tree || !file2) {
+          return realDone(error);
+        }
+        const compileTree = (
+          /** @type {CompileTree extends undefined ? Node : CompileTree} */
+          /** @type {unknown} */
+          tree
+        );
+        const compileResult = self2.stringify(compileTree, file2);
+        if (looksLikeAValue(compileResult)) {
+          file2.value = compileResult;
+        } else {
+          file2.result = compileResult;
+        }
+        realDone(
+          error,
+          /** @type {VFileWithOutput<CompileResult>} */
+          file2
+        );
+      });
+      function realDone(error, file2) {
+        if (error || !file2) {
+          reject(error);
+        } else if (resolve) {
+          resolve(file2);
+        } else {
+          done(void 0, file2);
+        }
+      }
+    }
+  }
+  /**
+   * Process the given file as configured on the processor.
+   *
+   * An error is thrown if asynchronous transforms are configured.
+   *
+   * > 👉 **Note**: `processSync` freezes the processor if not already *frozen*.
+   *
+   * > 👉 **Note**: `processSync` performs the parse, run, and stringify phases.
+   *
+   * @param {Compatible | undefined} [file]
+   *   File (optional); typically `string` or `VFile`; any value accepted as
+   *   `x` in `new VFile(x)`.
+   * @returns {VFileWithOutput<CompileResult>}
+   *   The processed file.
+   *
+   *   The parsed, transformed, and compiled value is available at
+   *   `file.value` (see note).
+   *
+   *   > 👉 **Note**: unified typically compiles by serializing: most
+   *   > compilers return `string` (or `Uint8Array`).
+   *   > Some compilers, such as the one configured with
+   *   > [`rehype-react`][rehype-react], return other values (in this case, a
+   *   > React tree).
+   *   > If you’re using a compiler that doesn’t serialize, expect different
+   *   > result values.
+   *   >
+   *   > To register custom results in TypeScript, add them to
+   *   > {@link CompileResultMap `CompileResultMap`}.
+   *
+   *   [rehype-react]: https://github.com/rehypejs/rehype-react
+   */
+  processSync(file) {
+    let complete = false;
+    let result;
+    this.freeze();
+    assertParser("processSync", this.parser || this.Parser);
+    assertCompiler("processSync", this.compiler || this.Compiler);
+    this.process(file, realDone);
+    assertDone("processSync", "process", complete);
+    return result;
+    function realDone(error, file2) {
+      complete = true;
+      bail(error);
+      result = file2;
+    }
+  }
+  /**
+   * Run *transformers* on a syntax tree.
+   *
+   * > 👉 **Note**: `run` freezes the processor if not already *frozen*.
+   *
+   * > 👉 **Note**: `run` performs the run phase, not other phases.
+   *
+   * @overload
+   * @param {HeadTree extends undefined ? Node : HeadTree} tree
+   * @param {RunCallback<TailTree extends undefined ? Node : TailTree>} done
+   * @returns {undefined}
+   *
+   * @overload
+   * @param {HeadTree extends undefined ? Node : HeadTree} tree
+   * @param {Compatible | undefined} file
+   * @param {RunCallback<TailTree extends undefined ? Node : TailTree>} done
+   * @returns {undefined}
+   *
+   * @overload
+   * @param {HeadTree extends undefined ? Node : HeadTree} tree
+   * @param {Compatible | undefined} [file]
+   * @returns {Promise<TailTree extends undefined ? Node : TailTree>}
+   *
+   * @param {HeadTree extends undefined ? Node : HeadTree} tree
+   *   Tree to transform and inspect.
+   * @param {(
+   *   RunCallback<TailTree extends undefined ? Node : TailTree> |
+   *   Compatible
+   * )} [file]
+   *   File associated with `node` (optional); any value accepted as `x` in
+   *   `new VFile(x)`.
+   * @param {RunCallback<TailTree extends undefined ? Node : TailTree>} [done]
+   *   Callback (optional).
+   * @returns {Promise<TailTree extends undefined ? Node : TailTree> | undefined}
+   *   Nothing if `done` is given.
+   *   Otherwise, a promise rejected with a fatal error or resolved with the
+   *   transformed tree.
+   */
+  run(tree, file, done) {
+    assertNode(tree);
+    this.freeze();
+    const transformers = this.transformers;
+    if (!done && typeof file === "function") {
+      done = file;
+      file = void 0;
+    }
+    return done ? executor(void 0, done) : new Promise(executor);
+    function executor(resolve, reject) {
+      const realFile = vfile(file);
+      transformers.run(tree, realFile, realDone);
+      function realDone(error, outputTree, file2) {
+        const resultingTree = (
+          /** @type {TailTree extends undefined ? Node : TailTree} */
+          outputTree || tree
+        );
+        if (error) {
+          reject(error);
+        } else if (resolve) {
+          resolve(resultingTree);
+        } else {
+          done(void 0, resultingTree, file2);
+        }
+      }
+    }
+  }
+  /**
+   * Run *transformers* on a syntax tree.
+   *
+   * An error is thrown if asynchronous transforms are configured.
+   *
+   * > 👉 **Note**: `runSync` freezes the processor if not already *frozen*.
+   *
+   * > 👉 **Note**: `runSync` performs the run phase, not other phases.
+   *
+   * @param {HeadTree extends undefined ? Node : HeadTree} tree
+   *   Tree to transform and inspect.
+   * @param {Compatible | undefined} [file]
+   *   File associated with `node` (optional); any value accepted as `x` in
+   *   `new VFile(x)`.
+   * @returns {TailTree extends undefined ? Node : TailTree}
+   *   Transformed tree.
+   */
+  runSync(tree, file) {
+    let complete = false;
+    let result;
+    this.run(tree, file, realDone);
+    assertDone("runSync", "run", complete);
+    return result;
+    function realDone(error, tree2) {
+      bail(error);
+      result = tree2;
+      complete = true;
+    }
+  }
+  /**
+   * Compile a syntax tree.
+   *
+   * > 👉 **Note**: `stringify` freezes the processor if not already *frozen*.
+   *
+   * > 👉 **Note**: `stringify` performs the stringify phase, not the run phase
+   * > or other phases.
+   *
+   * @param {CompileTree extends undefined ? Node : CompileTree} tree
+   *   Tree to compile.
+   * @param {Compatible | undefined} [file]
+   *   File associated with `node` (optional); any value accepted as `x` in
+   *   `new VFile(x)`.
+   * @returns {CompileResult extends undefined ? Value : CompileResult}
+   *   Textual representation of the tree (see note).
+   *
+   *   > 👉 **Note**: unified typically compiles by serializing: most compilers
+   *   > return `string` (or `Uint8Array`).
+   *   > Some compilers, such as the one configured with
+   *   > [`rehype-react`][rehype-react], return other values (in this case, a
+   *   > React tree).
+   *   > If you’re using a compiler that doesn’t serialize, expect different
+   *   > result values.
+   *   >
+   *   > To register custom results in TypeScript, add them to
+   *   > {@link CompileResultMap `CompileResultMap`}.
+   *
+   *   [rehype-react]: https://github.com/rehypejs/rehype-react
+   */
+  stringify(tree, file) {
+    this.freeze();
+    const realFile = vfile(file);
+    const compiler = this.compiler || this.Compiler;
+    assertCompiler("stringify", compiler);
+    assertNode(tree);
+    return compiler(tree, realFile);
+  }
+  /**
+   * Configure the processor to use a plugin, a list of usable values, or a
+   * preset.
+   *
+   * If the processor is already using a plugin, the previous plugin
+   * configuration is changed based on the options that are passed in.
+   * In other words, the plugin is not added a second time.
+   *
+   * > 👉 **Note**: `use` cannot be called on *frozen* processors.
+   * > Call the processor first to create a new unfrozen processor.
+   *
+   * @example
+   *   There are many ways to pass plugins to `.use()`.
+   *   This example gives an overview:
+   *
+   *   ```js
+   *   import {unified} from 'unified'
+   *
+   *   unified()
+   *     // Plugin with options:
+   *     .use(pluginA, {x: true, y: true})
+   *     // Passing the same plugin again merges configuration (to `{x: true, y: false, z: true}`):
+   *     .use(pluginA, {y: false, z: true})
+   *     // Plugins:
+   *     .use([pluginB, pluginC])
+   *     // Two plugins, the second with options:
+   *     .use([pluginD, [pluginE, {}]])
+   *     // Preset with plugins and settings:
+   *     .use({plugins: [pluginF, [pluginG, {}]], settings: {position: false}})
+   *     // Settings only:
+   *     .use({settings: {position: false}})
+   *   ```
+   *
+   * @template {Array<unknown>} [Parameters=[]]
+   * @template {Node | string | undefined} [Input=undefined]
+   * @template [Output=Input]
+   *
+   * @overload
+   * @param {Preset | null | undefined} [preset]
+   * @returns {Processor<ParseTree, HeadTree, TailTree, CompileTree, CompileResult>}
+   *
+   * @overload
+   * @param {PluggableList} list
+   * @returns {Processor<ParseTree, HeadTree, TailTree, CompileTree, CompileResult>}
+   *
+   * @overload
+   * @param {Plugin<Parameters, Input, Output>} plugin
+   * @param {...(Parameters | [boolean])} parameters
+   * @returns {UsePlugin<ParseTree, HeadTree, TailTree, CompileTree, CompileResult, Input, Output>}
+   *
+   * @param {PluggableList | Plugin | Preset | null | undefined} value
+   *   Usable value.
+   * @param {...unknown} parameters
+   *   Parameters, when a plugin is given as a usable value.
+   * @returns {Processor<ParseTree, HeadTree, TailTree, CompileTree, CompileResult>}
+   *   Current processor.
+   */
+  use(value, ...parameters) {
+    const attachers = this.attachers;
+    const namespace = this.namespace;
+    assertUnfrozen("use", this.frozen);
     if (value === null || value === void 0)
       ;
     else if (typeof value === "function") {
-      addPlugin(value, ...options);
+      addPlugin(value, parameters);
     } else if (typeof value === "object") {
       if (Array.isArray(value)) {
         addList(value);
@@ -49283,17 +50848,17 @@ function base() {
     } else {
       throw new TypeError("Expected usable value, not `" + value + "`");
     }
-    if (settings) {
-      namespace.settings = Object.assign(namespace.settings || {}, settings);
-    }
-    return processor;
+    return this;
     function add2(value2) {
       if (typeof value2 === "function") {
-        addPlugin(value2);
+        addPlugin(value2, []);
       } else if (typeof value2 === "object") {
         if (Array.isArray(value2)) {
-          const [plugin, ...options2] = value2;
-          addPlugin(plugin, ...options2);
+          const [plugin, ...parameters2] = (
+            /** @type {PluginTuple<Array<unknown>>} */
+            value2
+          );
+          addPlugin(plugin, parameters2);
         } else {
           addPreset(value2);
         }
@@ -49302,9 +50867,14 @@ function base() {
       }
     }
     function addPreset(result) {
+      if (!("plugins" in result) && !("settings" in result)) {
+        throw new Error(
+          "Expected usable value but received an empty preset, which is probably a mistake: presets typically come with `plugins` and sometimes with `settings`, but this has neither"
+        );
+      }
       addList(result.plugins);
       if (result.settings) {
-        settings = Object.assign(settings || {}, result.settings);
+        namespace.settings = extend$2(true, namespace.settings, result.settings);
       }
     }
     function addList(plugins) {
@@ -49320,160 +50890,37 @@ function base() {
         throw new TypeError("Expected a list of plugins, not `" + plugins + "`");
       }
     }
-    function addPlugin(plugin, value2) {
+    function addPlugin(plugin, parameters2) {
       let index2 = -1;
-      let entry;
+      let entryIndex = -1;
       while (++index2 < attachers.length) {
         if (attachers[index2][0] === plugin) {
-          entry = attachers[index2];
+          entryIndex = index2;
           break;
         }
       }
-      if (entry) {
-        if (isPlainObject2(entry[1]) && isPlainObject2(value2)) {
-          value2 = extend$2(true, entry[1], value2);
+      if (entryIndex === -1) {
+        attachers.push([plugin, ...parameters2]);
+      } else if (parameters2.length > 0) {
+        let [primary, ...rest] = parameters2;
+        const currentPrimary = attachers[entryIndex][1];
+        if (isPlainObject2(currentPrimary) && isPlainObject2(primary)) {
+          primary = extend$2(true, currentPrimary, primary);
         }
-        entry[1] = value2;
-      } else {
-        attachers.push([...arguments]);
+        attachers[entryIndex] = [plugin, primary, ...rest];
       }
     }
   }
-  function parse2(doc2) {
-    processor.freeze();
-    const file = vfile(doc2);
-    const Parser2 = processor.Parser;
-    assertParser("parse", Parser2);
-    if (newable(Parser2, "parse")) {
-      return new Parser2(String(file), file).parse();
-    }
-    return Parser2(String(file), file);
-  }
-  function stringify2(node2, doc2) {
-    processor.freeze();
-    const file = vfile(doc2);
-    const Compiler = processor.Compiler;
-    assertCompiler("stringify", Compiler);
-    assertNode(node2);
-    if (newable(Compiler, "compile")) {
-      return new Compiler(node2, file).compile();
-    }
-    return Compiler(node2, file);
-  }
-  function run2(node2, doc2, callback) {
-    assertNode(node2);
-    processor.freeze();
-    if (!callback && typeof doc2 === "function") {
-      callback = doc2;
-      doc2 = void 0;
-    }
-    if (!callback) {
-      return new Promise(executor);
-    }
-    executor(null, callback);
-    function executor(resolve, reject) {
-      transformers.run(node2, vfile(doc2), done);
-      function done(error, tree, file) {
-        tree = tree || node2;
-        if (error) {
-          reject(error);
-        } else if (resolve) {
-          resolve(tree);
-        } else {
-          callback(null, tree, file);
-        }
-      }
-    }
-  }
-  function runSync(node2, file) {
-    let result;
-    let complete;
-    processor.run(node2, file, done);
-    assertDone("runSync", "run", complete);
-    return result;
-    function done(error, tree) {
-      bail(error);
-      result = tree;
-      complete = true;
-    }
-  }
-  function process2(doc2, callback) {
-    processor.freeze();
-    assertParser("process", processor.Parser);
-    assertCompiler("process", processor.Compiler);
-    if (!callback) {
-      return new Promise(executor);
-    }
-    executor(null, callback);
-    function executor(resolve, reject) {
-      const file = vfile(doc2);
-      processor.run(processor.parse(file), file, (error, tree, file2) => {
-        if (error || !tree || !file2) {
-          done(error);
-        } else {
-          const result = processor.stringify(tree, file2);
-          if (result === void 0 || result === null)
-            ;
-          else if (looksLikeAVFileValue(result)) {
-            file2.value = result;
-          } else {
-            file2.result = result;
-          }
-          done(error, file2);
-        }
-      });
-      function done(error, file2) {
-        if (error || !file2) {
-          reject(error);
-        } else if (resolve) {
-          resolve(file2);
-        } else {
-          callback(null, file2);
-        }
-      }
-    }
-  }
-  function processSync(doc2) {
-    let complete;
-    processor.freeze();
-    assertParser("processSync", processor.Parser);
-    assertCompiler("processSync", processor.Compiler);
-    const file = vfile(doc2);
-    processor.process(file, done);
-    assertDone("processSync", "process", complete);
-    return file;
-    function done(error) {
-      complete = true;
-      bail(error);
-    }
-  }
 }
-function newable(value, name2) {
-  return typeof value === "function" && // Prototypes do exist.
-  // type-coverage:ignore-next-line
-  value.prototype && // A function with keys in its prototype is probably a constructor.
-  // Classes’ prototype methods are not enumerable, so we check if some value
-  // exists in the prototype.
-  // type-coverage:ignore-next-line
-  (keys(value.prototype) || name2 in value.prototype);
-}
-function keys(value) {
-  let key;
-  for (key in value) {
-    if (own$1.call(value, key)) {
-      return true;
-    }
-  }
-  return false;
-}
+const unified = new Processor().freeze();
 function assertParser(name2, value) {
   if (typeof value !== "function") {
-    throw new TypeError("Cannot `" + name2 + "` without `Parser`");
+    throw new TypeError("Cannot `" + name2 + "` without `parser`");
   }
 }
 function assertCompiler(name2, value) {
   if (typeof value !== "function") {
-    throw new TypeError("Cannot `" + name2 + "` without `Compiler`");
+    throw new TypeError("Cannot `" + name2 + "` without `compiler`");
   }
 }
 function assertUnfrozen(name2, frozen) {
@@ -49503,234 +50950,27 @@ function looksLikeAVFile(value) {
     value && typeof value === "object" && "message" in value && "messages" in value
   );
 }
-function looksLikeAVFileValue(value) {
-  return typeof value === "string" || isBuffer$1(value);
+function looksLikeAValue(value) {
+  return typeof value === "string" || isUint8Array(value);
 }
-const tab$1 = 9;
-const space$1 = 32;
-function trimLines(value) {
-  const source = String(value);
-  const search2 = /\r?\n|\r/g;
-  let match2 = search2.exec(source);
-  let last2 = 0;
-  const lines = [];
-  while (match2) {
-    lines.push(
-      trimLine(source.slice(last2, match2.index), last2 > 0, true),
-      match2[0]
-    );
-    last2 = match2.index + match2[0].length;
-    match2 = search2.exec(source);
-  }
-  lines.push(trimLine(source.slice(last2), last2 > 0, false));
-  return lines.join("");
-}
-function trimLine(value, start, end) {
-  let startIndex = 0;
-  let endIndex = value.length;
-  if (start) {
-    let code = value.codePointAt(startIndex);
-    while (code === tab$1 || code === space$1) {
-      startIndex++;
-      code = value.codePointAt(startIndex);
-    }
-  }
-  if (end) {
-    let code = value.codePointAt(endIndex - 1);
-    while (code === tab$1 || code === space$1) {
-      endIndex--;
-      code = value.codePointAt(endIndex - 1);
-    }
-  }
-  return endIndex > startIndex ? value.slice(startIndex, endIndex) : "";
-}
-function whitespace(thing) {
-  const value = (
-    // @ts-expect-error looks like a node.
-    thing && typeof thing === "object" && thing.type === "text" ? (
-      // @ts-expect-error looks like a text.
-      thing.value || ""
-    ) : thing
+function isUint8Array(value) {
+  return Boolean(
+    value && typeof value === "object" && "byteLength" in value && "byteOffset" in value
   );
-  return typeof value === "string" && value.replace(/[ \t\n\f\r]/g, "") === "";
 }
-function stringify$1(values2) {
-  return values2.join(" ").trim();
+function ccount(value, character2) {
+  const source = String(value);
+  if (typeof character2 !== "string") {
+    throw new TypeError("Expected character");
+  }
+  let count2 = 0;
+  let index2 = source.indexOf(character2);
+  while (index2 !== -1) {
+    count2++;
+    index2 = source.indexOf(character2, index2 + character2.length);
+  }
+  return count2;
 }
-function stringify(values2, options) {
-  const settings = options || {};
-  const input = values2[values2.length - 1] === "" ? [...values2, ""] : values2;
-  return input.join(
-    (settings.padRight ? " " : "") + "," + (settings.padLeft === false ? "" : " ")
-  ).trim();
-}
-var styleToObject = { exports: {} };
-var COMMENT_REGEX = /\/\*[^*]*\*+([^/*][^*]*\*+)*\//g;
-var NEWLINE_REGEX = /\n/g;
-var WHITESPACE_REGEX = /^\s*/;
-var PROPERTY_REGEX = /^(\*?[-#/*\\\w]+(\[[0-9a-z_-]+\])?)\s*/;
-var COLON_REGEX = /^:\s*/;
-var VALUE_REGEX = /^((?:'(?:\\'|.)*?'|"(?:\\"|.)*?"|\([^)]*?\)|[^};])+)/;
-var SEMICOLON_REGEX = /^[;\s]*/;
-var TRIM_REGEX = /^\s+|\s+$/g;
-var NEWLINE = "\n";
-var FORWARD_SLASH = "/";
-var ASTERISK = "*";
-var EMPTY_STRING = "";
-var TYPE_COMMENT = "comment";
-var TYPE_DECLARATION = "declaration";
-var inlineStyleParser = function(style, options) {
-  if (typeof style !== "string") {
-    throw new TypeError("First argument must be a string");
-  }
-  if (!style)
-    return [];
-  options = options || {};
-  var lineno = 1;
-  var column2 = 1;
-  function updatePosition(str2) {
-    var lines = str2.match(NEWLINE_REGEX);
-    if (lines)
-      lineno += lines.length;
-    var i2 = str2.lastIndexOf(NEWLINE);
-    column2 = ~i2 ? str2.length - i2 : column2 + str2.length;
-  }
-  function position2() {
-    var start = { line: lineno, column: column2 };
-    return function(node2) {
-      node2.position = new Position(start);
-      whitespace2();
-      return node2;
-    };
-  }
-  function Position(start) {
-    this.start = start;
-    this.end = { line: lineno, column: column2 };
-    this.source = options.source;
-  }
-  Position.prototype.content = style;
-  function error(msg) {
-    var err = new Error(
-      options.source + ":" + lineno + ":" + column2 + ": " + msg
-    );
-    err.reason = msg;
-    err.filename = options.source;
-    err.line = lineno;
-    err.column = column2;
-    err.source = style;
-    if (options.silent)
-      ;
-    else {
-      throw err;
-    }
-  }
-  function match2(re) {
-    var m2 = re.exec(style);
-    if (!m2)
-      return;
-    var str2 = m2[0];
-    updatePosition(str2);
-    style = style.slice(str2.length);
-    return m2;
-  }
-  function whitespace2() {
-    match2(WHITESPACE_REGEX);
-  }
-  function comments(rules) {
-    var c2;
-    rules = rules || [];
-    while (c2 = comment2()) {
-      if (c2 !== false) {
-        rules.push(c2);
-      }
-    }
-    return rules;
-  }
-  function comment2() {
-    var pos = position2();
-    if (FORWARD_SLASH != style.charAt(0) || ASTERISK != style.charAt(1))
-      return;
-    var i2 = 2;
-    while (EMPTY_STRING != style.charAt(i2) && (ASTERISK != style.charAt(i2) || FORWARD_SLASH != style.charAt(i2 + 1))) {
-      ++i2;
-    }
-    i2 += 2;
-    if (EMPTY_STRING === style.charAt(i2 - 1)) {
-      return error("End of comment missing");
-    }
-    var str2 = style.slice(2, i2 - 2);
-    column2 += 2;
-    updatePosition(str2);
-    style = style.slice(i2);
-    column2 += 2;
-    return pos({
-      type: TYPE_COMMENT,
-      comment: str2
-    });
-  }
-  function declaration2() {
-    var pos = position2();
-    var prop = match2(PROPERTY_REGEX);
-    if (!prop)
-      return;
-    comment2();
-    if (!match2(COLON_REGEX))
-      return error("property missing ':'");
-    var val = match2(VALUE_REGEX);
-    var ret = pos({
-      type: TYPE_DECLARATION,
-      property: trim(prop[0].replace(COMMENT_REGEX, EMPTY_STRING)),
-      value: val ? trim(val[0].replace(COMMENT_REGEX, EMPTY_STRING)) : EMPTY_STRING
-    });
-    match2(SEMICOLON_REGEX);
-    return ret;
-  }
-  function declarations() {
-    var decls = [];
-    comments(decls);
-    var decl;
-    while (decl = declaration2()) {
-      if (decl !== false) {
-        decls.push(decl);
-        comments(decls);
-      }
-    }
-    return decls;
-  }
-  whitespace2();
-  return declarations();
-};
-function trim(str2) {
-  return str2 ? str2.replace(TRIM_REGEX, EMPTY_STRING) : EMPTY_STRING;
-}
-var parse$2 = inlineStyleParser;
-function StyleToObject(style, iterator) {
-  var output = null;
-  if (!style || typeof style !== "string") {
-    return output;
-  }
-  var declaration2;
-  var declarations = parse$2(style);
-  var hasIterator = typeof iterator === "function";
-  var property2;
-  var value;
-  for (var i2 = 0, len = declarations.length; i2 < len; i2++) {
-    declaration2 = declarations[i2];
-    property2 = declaration2.property;
-    value = declaration2.value;
-    if (hasIterator) {
-      iterator(property2, value, declaration2);
-    } else if (value) {
-      output || (output = {});
-      output[property2] = value;
-    }
-  }
-  return output;
-}
-styleToObject.exports = StyleToObject;
-styleToObject.exports.default = StyleToObject;
-var styleToObjectExports = styleToObject.exports;
-const StyleToObject$1 = /* @__PURE__ */ getDefaultExportFromCjs(styleToObjectExports);
 var immutable = extend3;
 var hasOwnProperty = Object.prototype.hasOwnProperty;
 function extend3() {
@@ -50354,19 +51594,6 @@ function prohibited(code) {
 function disallowed(code) {
   return code >= 1 && code <= 8 || code === 11 || code >= 13 && code <= 31 || code >= 127 && code <= 159 || code >= 64976 && code <= 65007 || (code & 65535) === 65535 || (code & 65535) === 65534;
 }
-function ccount(value, character2) {
-  const source = String(value);
-  if (typeof character2 !== "string") {
-    throw new TypeError("Expected character");
-  }
-  let count2 = 0;
-  let index2 = source.indexOf(character2);
-  while (index2 !== -1) {
-    count2++;
-    index2 = source.indexOf(character2, index2 + character2.length);
-  }
-  return count2;
-}
 var e, t, n, i, r = function(e2, t2) {
   return { name: e2, value: void 0 === t2 ? -1 : t2, delta: 0, entries: [], id: "v2-".concat(Date.now(), "-").concat(Math.floor(8999999999999 * Math.random()) + 1e12) };
 }, a = function(e2, t2) {
@@ -50523,95 +51750,97 @@ const webVitals = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.definePro
   getTTFB: P
 }, Symbol.toStringTag, { value: "Module" }));
 export {
-  _cloneDeep as $,
-  markdown as A,
-  javascript as B,
-  markdownLanguage as C,
+  _last as $,
+  basicSetup as A,
+  keymap as B,
+  indentWithTab as C,
   Decoration as D,
   EventEmitter$1 as E,
-  lintGutter as F,
-  linter as G,
+  markdown as F,
+  javascript as G,
   HighlightStyle as H,
   InlineContext as I,
-  json$2 as J,
-  jsonParseLinter as K,
-  jsYaml as L,
+  markdownLanguage as J,
+  lintGutter as K,
+  linter as L,
   MaskedNumber as M,
-  schedulerExports as N,
-  IMask as O,
-  PropTypes as P,
-  _keys as Q,
-  _filter as R,
-  _isEqual as S,
+  json$2 as N,
+  jsonParseLinter as O,
+  jsYaml as P,
+  schedulerExports as Q,
+  PropTypes as R,
+  IMask as S,
   Tag as T,
-  _forEach as U,
+  _keys as U,
   ViewPlugin as V,
   WidgetType as W,
-  _last as X,
-  Point as Y,
-  _debounce as Z,
+  _filter as X,
+  _isEqual as Y,
+  _forEach as Z,
   _values as _,
   color$1 as a,
-  _flatMap as a0,
-  _map as a1,
-  Rectangle as a2,
-  middleware as a3,
-  RULESET as a4,
-  combine as a5,
-  KEYFRAMES as a6,
-  serialize as a7,
-  copy$1 as a8,
-  replace as a9,
-  index as aA,
-  _isFinite$1 as aB,
-  _size as aC,
-  boundingBoxFromPolygons as aD,
-  BezierCurve as aE,
-  pathfinding as aF,
-  _first as aG,
-  _concat as aH,
-  _get as aI,
-  _minBy as aJ,
-  _maxBy as aK,
-  _defer as aL,
-  _range as aM,
-  Path as aN,
-  _reduce as aO,
-  whitespace as aP,
-  stringify as aQ,
-  stringify$1 as aR,
-  StyleToObject$1 as aS,
-  unified as aT,
-  VFile as aU,
-  parseEntities_1 as aV,
-  webVitals as aW,
-  DECLARATION as aa,
-  stringify$2 as ab,
-  rulesheet as ac,
-  compile as ad,
-  hash as ae,
-  charat as af,
-  WEBKIT as ag,
-  MS as ah,
-  strlen as ai,
-  indexof as aj,
-  MOZ as ak,
-  match as al,
-  dealloc as am,
-  alloc as an,
-  next as ao,
-  token as ap,
-  from as aq,
-  peek as ar,
-  delimit as as,
-  slice$1 as at,
-  position$2 as au,
-  _mapValues as av,
-  _intersection as aw,
-  boundingBoxFromPoints as ax,
-  _slice as ay,
-  _some as az,
-  buffer$1 as b,
+  Point as a0,
+  _debounce as a1,
+  _cloneDeep as a2,
+  _flatMap as a3,
+  _map as a4,
+  Rectangle as a5,
+  middleware as a6,
+  RULESET as a7,
+  combine as a8,
+  KEYFRAMES as a9,
+  boundingBoxFromPoints as aA,
+  _slice as aB,
+  _some as aC,
+  index as aD,
+  _isFinite$1 as aE,
+  _size as aF,
+  boundingBoxFromPolygons as aG,
+  BezierCurve as aH,
+  pathfinding as aI,
+  _first as aJ,
+  _concat as aK,
+  _get as aL,
+  _minBy as aM,
+  _maxBy as aN,
+  _defer as aO,
+  _range as aP,
+  Path as aQ,
+  _reduce as aR,
+  unified as aS,
+  VFile as aT,
+  unreachable as aU,
+  toJsxRuntime as aV,
+  urlAttributes as aW,
+  parseEntities_1 as aX,
+  webVitals as aY,
+  serialize$1 as aa,
+  copy$1 as ab,
+  replace as ac,
+  DECLARATION as ad,
+  stringify$2 as ae,
+  rulesheet as af,
+  compile as ag,
+  hash as ah,
+  charat as ai,
+  WEBKIT as aj,
+  MS as ak,
+  strlen as al,
+  indexof as am,
+  MOZ as an,
+  match as ao,
+  dealloc as ap,
+  alloc as aq,
+  next as ar,
+  token as as,
+  from as at,
+  peek as au,
+  delimit as av,
+  slice$1 as aw,
+  position$2 as ax,
+  _mapValues as ay,
+  _intersection as az,
+  buffer as b,
   ccount as c,
   decodeNamedCharacterReference as d,
   MaskedDate as e,
@@ -50621,19 +51850,19 @@ export {
   immutable as i,
   MaskedPattern as j,
   MaskedRange as k,
-  MaskedRegExp as l,
+  longestStreak as l,
   markdownTable as m,
   nanoid as n,
-  MaskedDynamic as o,
-  tags$1 as p,
-  defaultHighlightStyle as q,
-  syntaxHighlighting as r,
-  syntaxTree as s,
+  ok as o,
+  MaskedRegExp as p,
+  MaskedDynamic as q,
+  tags$1 as r,
+  structuredClone$1 as s,
   trimLines as t,
-  styleTags as u,
-  EditorView as v,
-  EditorState as w,
-  basicSetup as x,
-  keymap as y,
-  indentWithTab as z
+  syntaxTree as u,
+  defaultHighlightStyle as v,
+  syntaxHighlighting as w,
+  styleTags as x,
+  EditorView as y,
+  EditorState as z
 };
