@@ -12,7 +12,7 @@
 - fixedLeadColumns: 1
 - fixedTailColumns: 1
 - operatorsColumnWidth: 200
-- initExpanded: `index === 1`
+- initExpanded: `return index === 1`
 - headers:
 	- Column A: 300
 	- Column B: 300
