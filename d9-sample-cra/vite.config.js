@@ -25,7 +25,7 @@ export default ({mode}) => {
 								{name: 'react-markdown', includes: ['react-markdown']},
 								{name: 'react-syntax-highlighter', includes: ['react-syntax-highlighter']},
 								{name: 'babel', includes: ['@babel']},
-								{name: 'property-information', includes: ['property-information']},
+								// {name: 'property-information', includes: ['property-information']},
 								// {name: 'react', includes: ['react', 'react-dom']},
 								// {name: 'styled-components', includes: ['styled-components']},
 								// {name: 'emotion', includes: ['@emotion']},
