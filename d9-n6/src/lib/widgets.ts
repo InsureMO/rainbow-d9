@@ -39,6 +39,9 @@ export const PlaygroundCssVars = {
 	EDIT_DIALOG_PART_TITLE_FONT_SIZE: 'var(--o23-playground-dialog-part-title-font-size, 16px)',
 	EDIT_DIALOG_PART_TITLE_FONT_WEIGHT: 'var(--o23-playground-dialog-part-title-font-weight, 600)',
 	EDIT_DIALOG_PART_TITLE_COLOR: `var(--o23-playground-dialog-part-title-color, rgb(184, 184, 184))`,
+	EDIT_DIALOG_LEFT_PART_OPEN_HANDLE_LEFT: 'var(--o23-playground-dialog-left-part-open-handle-left, -16px)',
+	EDIT_DIALOG_LEFT_PART_OPEN_HANDLE_WIDTH: 'var(--o23-playground-dialog-left-part-open-handle-width, 64px)',
+	EDIT_DIALOG_LEFT_PART_OPEN_HANDLE_COLOR: `var(--o23-playground-dialog-left-part-open-handle-color, ${CssVars.PRIMARY_COLOR})`,
 	// node common
 	NODE_BORDER_RADIUS: 'var(--o23-playground-node-border-radius, 8px)',
 	NODE_BACKGROUND: `var(--o23-playground-node-background, ${CssVars.BACKGROUND_COLOR})`,

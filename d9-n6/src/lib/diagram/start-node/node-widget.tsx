@@ -147,6 +147,19 @@ export const RestApiBodyPortWidget = (props: { def: PipelineFileDef }) => {
 	                                  all={body} allAsBoolean={true}/>;
 };
 
+export const RestApiFilesPortWidget = (props: { def: PipelineFileDef }) => {
+	const {def} = props;
+
+	const {files} = def;
+	let all: Undefinable<boolean> = (void 0);
+	if (files != null && files !== false) {
+		all = true;
+	}
+
+	return <RestApiVariablePortWidget label="Files" required={false} defined={all != null}
+	                                  all={all} allAsBoolean={true}/>;
+};
+
 export const RestApiExposeHeadersPortWidget = (props: { def: PipelineFileDef }) => {
 	const {def} = props;
 
@@ -258,6 +271,7 @@ export const StartNodeWidget = (props: StartNodeWidgetProps) => {
 					<RestApiPathParamsPortWidget def={def as PipelineFileDef}/>
 					<RestApiQueryParamsPortWidget def={def as PipelineFileDef}/>
 					<RestApiBodyPortWidget def={def as PipelineFileDef}/>
+					<RestApiFilesPortWidget def={def as PipelineFileDef}/>
 					<RestApiExposeHeadersPortWidget def={def as PipelineFileDef}/>
 					<RestApiExposeFilePortWidget def={def as PipelineFileDef}/>
 				</>

@@ -1,5 +1,6 @@
 export * from './types';
 export * from './widgets';
+export * from './icons';
 
 export * from './editor';
 

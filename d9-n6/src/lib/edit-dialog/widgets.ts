@@ -1,4 +1,4 @@
-import {CssVars, DOM_KEY_WIDGET, Utils} from '@rainbow-d9/n2';
+import {CssVars, DOM_KEY_WIDGET} from '@rainbow-d9/n2';
 import styled from 'styled-components';
 import {PlaygroundCssVars} from '../widgets';
 
@@ -32,19 +32,22 @@ export const EditDialogWrapper = styled.div.attrs({[DOM_KEY_WIDGET]: 'o23-playgr
     width: ${PlaygroundCssVars.EDIT_DIALOG_WIDTH};
     height: ${PlaygroundCssVars.EDIT_DIALOG_HEIGHT};
 `;
-export const EditDialogContentContainer = styled.div.attrs<{ left: number }>(
-	({left}) => {
-		return {
-			[DOM_KEY_WIDGET]: 'o23-playground-edit-dialog-content',
-			style: {
-				gridTemplateColumns: `${Utils.toCssSize(left)} 400px 1fr`
-			}
-		};
-	})<{ left: number }>`
+export const EditDialogLayoutControllerHandle = styled.div.attrs({[DOM_KEY_WIDGET]: 'o23-playground-edit-dialog-layout-controller'})<{
+	opened: boolean
+}>`
+    display: none;
+    position: absolute;
+
+    + div[data-w=o23-playground-edit-dialog-content] {
+        grid-template-columns: ${({opened}) => opened ? `calc((100% - 400px) / 2 - 64px) 400px 1fr` : `64px 400px 1fr`};
+    }
+`;
+export const EditDialogContentContainer = styled.div.attrs({[DOM_KEY_WIDGET]: 'o23-playground-edit-dialog-content'})`
     display: grid;
     position: relative;
     height: 100%;
     width: 100%;
+    transition: grid-template-columns ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION};
 `;
 export const EditorDialogCloser = styled.div.attrs({[DOM_KEY_WIDGET]: 'o23-playground-edit-dialog-closer'})`
     display: flex;
@@ -102,15 +105,7 @@ export const EditDialogRightPart = styled.div.attrs({[DOM_KEY_WIDGET]: 'o23-play
     box-shadow: ${PlaygroundCssVars.EDIT_DIALOG_SHADOW};
     overflow: hidden;
 `;
-export const EditDialogPartContent = styled.div.attrs<{ minWidth?: number }>(
-	({minWidth}) => {
-		return {
-			[DOM_KEY_WIDGET]: 'o23-playground-edit-dialog-part-content',
-			style: {
-				minWidth: Utils.toCssSize(minWidth)
-			}
-		};
-	})<{ minWidth?: number }>`
+export const EditDialogPartContent = styled.div.attrs({[DOM_KEY_WIDGET]: 'o23-playground-edit-dialog-part-content'})`
     display: flex;
     position: relative;
     flex-direction: column;
@@ -131,4 +126,71 @@ export const EditDialogPartTitle = styled.div.attrs({[DOM_KEY_WIDGET]: 'o23-play
     font-size: ${PlaygroundCssVars.EDIT_DIALOG_PART_TITLE_FONT_SIZE};
     font-weight: ${PlaygroundCssVars.EDIT_DIALOG_PART_TITLE_FONT_WEIGHT};
     color: ${PlaygroundCssVars.EDIT_DIALOG_PART_TITLE_COLOR};
+    white-space: nowrap;
+`;
+export const EditDialogPartBody = styled.div.attrs({[DOM_KEY_WIDGET]: 'o23-playground-edit-dialog-part-body'})`
+    display: flex;
+    position: relative;
+    flex-grow: 1;
+`;
+// noinspection CssUnresolvedCustomProperty
+export const EditDialogLeftPartOpenHandle = styled.div.attrs<{ opened: boolean }>(
+	({opened}) => {
+		return {
+			[DOM_KEY_WIDGET]: 'o23-playground-edit-dialog-left-open-handle',
+			style: {
+				'--opacity': opened ? 0 : (void 0),
+				'--pointer-events': opened ? 'none' : 'auto',
+				'--left': opened ? `calc(100% - ${PlaygroundCssVars.EDIT_DIALOG_LEFT_PART_OPEN_HANDLE_WIDTH})` : PlaygroundCssVars.EDIT_DIALOG_LEFT_PART_OPEN_HANDLE_LEFT
+			}
+		};
+	})<{ opened: boolean }>`
+    display: flex;
+    position: absolute;
+    align-items: center;
+    top: 0;
+    left: var(--left);
+    width: ${PlaygroundCssVars.EDIT_DIALOG_LEFT_PART_OPEN_HANDLE_WIDTH};
+    height: 100%;
+    opacity: var(--opacity);
+    pointer-events: var(--pointer-events);
+    cursor: pointer;
+    transition: left ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION}, opacity ${CssVars.TRANSITION_DURATION} calc(${CssVars.TRANSITION_DURATION} / 2) ${CssVars.TRANSITION_TIMING_FUNCTION};
+
+    > svg {
+        color: ${PlaygroundCssVars.EDIT_DIALOG_LEFT_PART_OPEN_HANDLE_COLOR};
+        opacity: 0.7;
+    }
+`;
+// noinspection CssUnresolvedCustomProperty
+export const EditDialogLeftPartCloseHandle = styled.div.attrs<{ opened: boolean }>(
+	({opened}) => {
+		return {
+			[DOM_KEY_WIDGET]: 'o23-playground-edit-dialog-left-close-handle',
+			style: {
+				'--opacity': opened ? (void 0) : 0,
+				'--pointer-events': opened ? 'auto' : 'none'
+			}
+		};
+	})<{ opened: boolean }>`
+    display: flex;
+    position: relative;
+    align-items: center;
+    height: ${PlaygroundCssVars.EDIT_DIALOG_PART_HEADER_HEIGHT};
+    width: ${PlaygroundCssVars.EDIT_DIALOG_PART_HEADER_HEIGHT};
+    opacity: var(--opacity);
+    pointer-events: var(--pointer-events);
+    cursor: pointer;
+    transition: opacity ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION};
+
+    &:hover {
+        > svg {
+            color: ${PlaygroundCssVars.EDIT_DIALOG_LEFT_PART_OPEN_HANDLE_COLOR};
+        }
+    }
+
+    > svg {
+        opacity: 0.7;
+        transition: color ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION};
+    }
 `;

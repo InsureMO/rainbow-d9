@@ -4,15 +4,17 @@ export interface RestApiFileValidator {
 }
 
 export interface RestApiNonameOrNamedFiles extends RestApiFileValidator {
-	/** noname means any file */
+	/** no name means any file */
 	name?: string;
-	/** multiple is ignored when noname declared */
+	/** multiple is ignored when no name declared */
 	multiple?: boolean;
 }
 
 export type RestApiNamedFile = string | { name: string; maxCount?: number; };
 
-export type RestApiMultipleNamedFiles = { names: Array<RestApiNamedFile> } & RestApiFileValidator;
+export interface RestApiMultipleNamedFiles extends RestApiFileValidator {
+	names: Array<RestApiNamedFile>;
+}
 
 export interface RestApiPipelineFileDef {
 	route: string;

@@ -2,8 +2,8 @@ import {Nullable} from '@rainbow-d9/n1';
 import {DOM_KEY_WIDGET, IntlLabel} from '@rainbow-d9/n2';
 import React from 'react';
 import styled from 'styled-components';
+import {PortChecked, PortIncorrect, PortUndefined} from '../../icons';
 import {PlaygroundCssVars} from '../../widgets';
-import {PortChecked, PortIncorrect, PortUndefined} from '../icons';
 
 export const RestApiVariablePortContainer = styled.div.attrs({[DOM_KEY_WIDGET]: 'o23-playground-rest-api-variable-port'})`
     display: flex;

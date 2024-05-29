@@ -28,12 +28,12 @@ export interface PlaygroundEventBus {
 }
 
 const Context = createContext<PlaygroundEventBus>({} as PlaygroundEventBus);
-Context.displayName = 'EventBus';
+Context.displayName = 'PlaygroundEventBus';
 
 export const PlaygroundEventBusProvider = (props: { children?: ReactNode }) => {
 	const {children} = props;
 
-	const bus = useCreateEventBus<PlaygroundEventBus>('o23-playground');
+	const bus = useCreateEventBus<PlaygroundEventBus>('playground');
 
 	return <Context.Provider value={bus}>
 		{children}

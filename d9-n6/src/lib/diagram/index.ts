@@ -3,7 +3,6 @@ import {NextStepPortFactory, PreviousStepPortFactory} from './common';
 import {EndNodeFactory} from './end-node';
 import {StartNodeFactory} from './start-node';
 
-export * from './icons';
 export * from './common';
 export * from './start-node';
 export * from './end-node';

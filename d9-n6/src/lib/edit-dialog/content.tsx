@@ -1,17 +1,14 @@
 import {IntlLabel} from '@rainbow-d9/n2';
 import React from 'react';
-import {Back} from '../diagram';
+import {Back} from '../icons';
 import {PlaygroundEventTypes, usePlaygroundEventBus} from '../playground-event-bus';
-import {
-	EditDialogCenterPart,
-	EditDialogContentContainer,
-	EditDialogLeftPart,
-	EditDialogPartContent,
-	EditDialogPartHeader,
-	EditDialogPartTitle,
-	EditDialogRightPart,
-	EditorDialogCloser
-} from './widgets';
+import {DialogCenterPart} from './center';
+import {EditDialogEventBusProvider} from './edit-dialog-event-bus';
+import {DialogHelpDesk} from './help-desk';
+import {LayoutController} from './layout-controller';
+import {DialogRightPart} from './right';
+import {StateHolder} from './state-holder';
+import {EditDialogContentContainer, EditorDialogCloser} from './widgets';
 
 export interface DialogContentProps {
 	confirm: () => void;
@@ -29,36 +26,17 @@ export const DialogContent = (props: DialogContentProps) => {
 		fire(PlaygroundEventTypes.HIDE_EDIT_DIALOG);
 	};
 
-	return <EditDialogContentContainer left={64}>
-		<EditorDialogCloser onClick={onBackClicked}>
-			<Back/>
-			<IntlLabel keys={['o23', 'dialog', 'close']} value="Back to canvas"/>
-		</EditorDialogCloser>
-		<EditDialogLeftPart>
-			<EditDialogPartContent minWidth={300}>
-				<EditDialogPartHeader>
-					<EditDialogPartTitle>
-						<IntlLabel keys={['o23', 'dialog', 'docs', 'title']} value="Help Desk"/>
-					</EditDialogPartTitle>
-				</EditDialogPartHeader>
-			</EditDialogPartContent>
-		</EditDialogLeftPart>
-		<EditDialogRightPart>
-			<EditDialogPartContent>
-				<EditDialogPartHeader>
-					<EditDialogPartTitle>
-						<IntlLabel keys={['o23', 'dialog', 'specific', 'title']} value="Specific Details"/>
-					</EditDialogPartTitle>
-				</EditDialogPartHeader>
-			</EditDialogPartContent>
-		</EditDialogRightPart>
-		<EditDialogCenterPart>
-			<EditDialogPartContent minWidth={300}>
-				<EditDialogPartHeader>
-					<EditDialogPartTitle>
-					</EditDialogPartTitle>
-				</EditDialogPartHeader>
-			</EditDialogPartContent>
-		</EditDialogCenterPart>
-	</EditDialogContentContainer>;
+	return <EditDialogEventBusProvider>
+		<StateHolder/>
+		<LayoutController/>
+		<EditDialogContentContainer>
+			<EditorDialogCloser onClick={onBackClicked}>
+				<Back/>
+				<IntlLabel keys={['o23', 'dialog', 'close']} value="Back to canvas"/>
+			</EditorDialogCloser>
+			<DialogHelpDesk/>
+			<DialogRightPart/>
+			<DialogCenterPart/>
+		</EditDialogContentContainer>
+	</EditDialogEventBusProvider>;
 };
