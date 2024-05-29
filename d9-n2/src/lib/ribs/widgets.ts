@@ -46,6 +46,17 @@ export const ARibRowHeader = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-rib-row-hea
     &[data-expanded=true] {
         cursor: default;
     }
+
+    &[data-show-row-index=false] {
+        > div[data-w=d9-rib-row-index] {
+            width: 0;
+            overflow: hidden;
+        }
+
+        > div[data-w=d9-rib-row-header-content] {
+            margin-left: calc(-1 * ${CssVars.SECTION_BODY_PADDING});
+        }
+    }
 `;
 export const ARibRowIndex = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-rib-row-index'})`
     display: flex;

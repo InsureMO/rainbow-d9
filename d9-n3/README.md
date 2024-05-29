@@ -1428,6 +1428,8 @@ Some examples:
 | Attribute Name        | Type     | Description                                                         |
 |-----------------------|----------|---------------------------------------------------------------------|
 | elementTitle, caption | various  | Ref to form cell `label` definition.                                |
+| useSectionStyleIcons  | boolean  | Change expand and collapse icons to use section style icons or not. |
+| showRowIndex          | boolean  | Show row index or not.                                              |
 | noElementReminder     | text     | `- noElementReminder: No Data`                                      |
 | addable               | boolean  | `- !addable`.<br/>Not available for `RibsView`.                     |
 | addLabel              | text     | `- addLabel: Create New One`.<br/>Not available for `RibsView`.     |

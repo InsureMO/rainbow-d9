@@ -4,7 +4,7 @@
 
 ### Ribs::::ribs
 
-- removable, addable, disableOnCannotAdd
+- removable, addable, disableOnCannotAdd, !showRowIndex
 - elementTitle:
 	- labelOnValue
 	- property: propA

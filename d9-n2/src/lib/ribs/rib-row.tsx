@@ -3,12 +3,12 @@ import React, {useState} from 'react';
 import {LabelLike} from '../label-like';
 import {RibRowOperators} from './rib-row-operators';
 import {RibsProps} from './types';
-import {isUseSectionStyleIcons} from './utils';
+import {isShowRowIndex, isUseSectionStyleIcons} from './utils';
 import {ARibRow, ARibRowBody, ARibRowHeader, ARibRowHeaderContent, ARibRowIndex} from './widgets';
 
 export const RibRow = (props: Omit<RibsProps, '$array'> & { $array: EnhancedPropsForArrayElement }) => {
 	const {
-		caption, useSectionStyleIcons = isUseSectionStyleIcons(),
+		caption, useSectionStyleIcons = isUseSectionStyleIcons(), showRowIndex = isShowRowIndex(),
 		$wrapped,
 		$array: {elementIndex, removable, removeElement},
 		children
@@ -24,7 +24,7 @@ export const RibRow = (props: Omit<RibsProps, '$array'> & { $array: EnhancedProp
 	};
 
 	return <ARibRow>
-		<ARibRowHeader data-expanded={expanded} onClick={onRowClicked}>
+		<ARibRowHeader data-expanded={expanded} data-show-row-index={showRowIndex} onClick={onRowClicked}>
 			<ARibRowIndex># {elementIndex + 1}</ARibRowIndex>
 			<ARibRowHeaderContent>
 				<LabelLike label={caption} $wrapped={$wrapped} $validationScopes={props}/>
