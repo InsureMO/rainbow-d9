@@ -13,7 +13,7 @@ export const buildConfig = (lint) => {
 			{format: 'cjs', file: './index.cjs.js'}
 		],
 		plugins: [
-			lint ? eslint({exclude: ['../node_modules/**', 'node_modules/**']}) : null,
+			lint ? eslint({exclude: ['../node_modules/**', 'node_modules/**', 'src/**/*.md']}) : null,
 			// lint ? tslint({ exclude: ['../node_modules/**', 'node_modules/**'] }) : null,
 			typescript({clean: true}), babel({babelHelpers: "bundled"}),
 			md.plugin({mode: [md.Mode.MARKDOWN]})
@@ -31,6 +31,8 @@ export const buildConfig = (lint) => {
 		external: [
 			'react', 'react-dom', 'styled-components',
 			'nanoid', 'color', 'js-yaml',
+			'react-markdown', 'remark-gfm',
+			"github-markdown-css/github-markdown.css",
 			'@projectstorm/react-canvas-core', '@projectstorm/react-diagrams-core', '@projectstorm/react-diagrams',
 			'@rainbow-d9/n1', '@rainbow-d9/n2', '@rainbow-d9/n3'
 		]

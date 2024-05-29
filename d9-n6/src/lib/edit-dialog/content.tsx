@@ -2,6 +2,7 @@ import {IntlLabel} from '@rainbow-d9/n2';
 import React from 'react';
 import {Back} from '../icons';
 import {PlaygroundEventTypes, usePlaygroundEventBus} from '../playground-event-bus';
+import {MarkdownContent} from '../types';
 import {DialogCenterPart} from './center';
 import {EditDialogEventBusProvider} from './edit-dialog-event-bus';
 import {DialogHelpDesk} from './help-desk';
@@ -11,11 +12,13 @@ import {StateHolder} from './state-holder';
 import {EditDialogContentContainer, EditorDialogCloser} from './widgets';
 
 export interface DialogContentProps {
+	helpDoc: MarkdownContent;
 	confirm: () => void;
 }
 
 export const DialogContent = (props: DialogContentProps) => {
 	const {
+		helpDoc,
 		confirm
 	} = props;
 
@@ -34,7 +37,7 @@ export const DialogContent = (props: DialogContentProps) => {
 				<Back/>
 				<IntlLabel keys={['o23', 'dialog', 'close']} value="Back to canvas"/>
 			</EditorDialogCloser>
-			<DialogHelpDesk/>
+			<DialogHelpDesk helpDoc={helpDoc}/>
 			<DialogRightPart/>
 			<DialogCenterPart/>
 		</EditDialogContentContainer>

@@ -26,9 +26,12 @@
 		"@rainbow-d9/n3": "1.1.28-alpha.4",
 		"color": "^4.2.3",
 		"js-yaml": "^4.1.0",
+		"github-markdown-css": "^5.5.0",
 		"nanoid": "^4.0.0",
 		"react": "^18.2.0",
 		"react-dom": "^18.2.0",
+		"react-markdown": "9.0.1",
+		"remark-gfm": "4.0.0",
 		"styled-components": "5.3.11"
 	},
 	"devDependencies": {

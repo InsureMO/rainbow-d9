@@ -1,3 +1,5 @@
+import 'github-markdown-css/github-markdown.css';
+
 export * from './types';
 export * from './widgets';
 export * from './icons';

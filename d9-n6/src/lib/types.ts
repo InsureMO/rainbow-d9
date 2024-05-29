@@ -2,6 +2,8 @@ import {MonitorNodeDef, ValueChangeableNodeDef, WidgetProps} from '@rainbow-d9/n
 import {OmitHTMLProps, OmitNodeDef} from '@rainbow-d9/n2';
 import {FileDefLoader} from './definition';
 
+export type MarkdownContent = string;
+
 export type OnContentChanged = (content?: string) => Promise<void>;
 
 export interface PlaygroundModuleUsage {

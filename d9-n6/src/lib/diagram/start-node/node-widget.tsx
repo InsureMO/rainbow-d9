@@ -5,6 +5,7 @@ import React from 'react';
 import styled from 'styled-components';
 import {isPipelineDef, PipelineFileDef} from '../../definition';
 import {DialogContent} from '../../edit-dialog';
+import {HelpDocs} from '../../help-docs';
 import {PlaygroundEventTypes, usePlaygroundEventBus} from '../../playground-event-bus';
 import {PlaygroundCssVars} from '../../widgets';
 import {
@@ -248,7 +249,8 @@ export const StartNodeWidget = (props: StartNodeWidgetProps) => {
 		// TODO
 	};
 	const onDoubleClicked = () => {
-		fire(PlaygroundEventTypes.SHOW_EDIT_DIALOG, <DialogContent confirm={onConfirm}/>);
+		fire(PlaygroundEventTypes.SHOW_EDIT_DIALOG,
+			<DialogContent helpDoc={HelpDocs.pipeline} confirm={onConfirm}/>);
 	};
 
 	return <StartNodeContainer onDoubleClick={onDoubleClicked}>
