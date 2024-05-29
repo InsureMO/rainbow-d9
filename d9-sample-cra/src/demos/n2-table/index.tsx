@@ -1,12 +1,14 @@
 import {
 	BridgeEventBusProvider,
 	BridgeToRootEventTypes,
+	ObjectPropValue,
 	StandaloneRoot,
 	useBridgeEventBus,
 	ValueChangedNotification
 } from '@rainbow-d9/n1';
 import {GlobalRoot, PaginationData} from '@rainbow-d9/n2';
 import {nanoid} from 'nanoid';
+import {MutableRefObject, useRef} from 'react';
 import {CustomEventHandler} from '../custom-event-handler';
 import {N2DemoDialogHandler} from '../n2-dialog-handler';
 import {useDemoMarkdown} from '../use-demo-markdown';
@@ -23,7 +25,23 @@ const InternalN2Table = () => {
 	const def = useDemoMarkdown(DemoContent);
 	const {fire} = useBridgeEventBus();
 
+	const tableInitRef: MutableRefObject<Array<number>> = useRef([]);
 	const externalDefs = {
+		table1: {
+			initExpanded: (_: ObjectPropValue, index: number) => {
+				if (tableInitRef.current.includes(index)) {
+					return false;
+				} else {
+					const expanded = index === 1;
+					if (expanded) {
+						tableInitRef.current.push(index);
+						return true;
+					} else {
+						return false;
+					}
+				}
+			}
+		},
 		table2: {
 			onPageChanged: async (options: { newValue: PaginationData }) => {
 				const {newValue: {pageNumber, pageSize}} = options;

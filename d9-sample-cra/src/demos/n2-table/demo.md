@@ -12,7 +12,7 @@
 - fixedLeadColumns: 1
 - fixedTailColumns: 1
 - operatorsColumnWidth: 200
-- initExpanded: `return index === 1`
+- initExpanded: @ext.table1.initExpanded
 - headers:
 	- Column A: 300
 	- Column B: 300
