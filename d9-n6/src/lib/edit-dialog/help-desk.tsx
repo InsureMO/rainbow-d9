@@ -1,15 +1,16 @@
 import {IntlLabel} from '@rainbow-d9/n2';
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import Markdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import {ArrowLeft, ArrowRight} from '../icons';
+import {PlaygroundEventTypes, usePlaygroundEventBus} from '../playground-event-bus';
 import {MarkdownContent} from '../types';
 import {EditDialogEventTypes, useEditDialogEventBus} from './edit-dialog-event-bus';
 import {useHelpDeskOpened} from './state-holder';
 import {
-	EditDialogLeftPart,
-	EditDialogLeftPartCloseHandle,
-	EditDialogLeftPartOpenHandle,
+	EditDialogHelpDocCloseHandle,
+	EditDialogHelpDocContainer,
+	EditDialogHelpDocOpenHandle,
 	EditDialogPartBody,
 	EditDialogPartContent,
 	EditDialogPartHeader,
@@ -29,9 +30,9 @@ export const CloseHandle = () => {
 		fire(EditDialogEventTypes.CLOSE_HELP_DESK);
 	};
 
-	return <EditDialogLeftPartCloseHandle opened={opened} onClick={onCloseHelpDesk}>
+	return <EditDialogHelpDocCloseHandle opened={opened} onClick={onCloseHelpDesk}>
 		<ArrowLeft/>
-	</EditDialogLeftPartCloseHandle>;
+	</EditDialogHelpDocCloseHandle>;
 };
 
 export const OpenHandle = () => {
@@ -46,19 +47,35 @@ export const OpenHandle = () => {
 		fire(EditDialogEventTypes.OPEN_HELP_DESK);
 	};
 
-	return <EditDialogLeftPartOpenHandle opened={opened} onClick={onOpenHelpDesk}>
+	return <EditDialogHelpDocOpenHandle opened={opened} onClick={onOpenHelpDesk}>
 		<ArrowRight/>
-	</EditDialogLeftPartOpenHandle>;
+	</EditDialogHelpDocOpenHandle>;
 };
 
 export interface DialogHelpDeskProps {
 	helpDoc: MarkdownContent;
 }
 
+export interface DialogHelpDeskState {
+	docWidth?: number;
+}
+
 export const DialogHelpDesk = (props: DialogHelpDeskProps) => {
 	const {helpDoc} = props;
 
-	return <EditDialogLeftPart>
+	const [state, setState] = useState<DialogHelpDeskState>({});
+	const {on, off} = usePlaygroundEventBus();
+	useEffect(() => {
+		const onInitHelpDocWidth = (width: number) => {
+			setState(state => ({...state, docWidth: width}));
+		};
+		on(PlaygroundEventTypes.INIT_HELP_DOC_WIDTH, onInitHelpDocWidth);
+		return () => {
+			off(PlaygroundEventTypes.INIT_HELP_DOC_WIDTH, onInitHelpDocWidth);
+		};
+	}, [on, off]);
+
+	return <EditDialogHelpDocContainer>
 		<EditDialogPartContent>
 			<EditDialogPartHeader>
 				<EditDialogPartTitle>
@@ -68,12 +85,12 @@ export const DialogHelpDesk = (props: DialogHelpDeskProps) => {
 			</EditDialogPartHeader>
 			<EditDialogPartBody>
 				<OpenHandle/>
-				<HelpDocContainer>
+				<HelpDocContainer width={state.docWidth}>
 					<Markdown className="markdown-body" remarkPlugins={[remarkGfm]}>
 						{helpDoc}
 					</Markdown>
 				</HelpDocContainer>
 			</EditDialogPartBody>
 		</EditDialogPartContent>
-	</EditDialogLeftPart>;
+	</EditDialogHelpDocContainer>;
 };

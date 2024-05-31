@@ -3,6 +3,7 @@ import React, {createContext, ReactNode, useContext} from 'react';
 
 export enum PlaygroundEventTypes {
 	CONTENT_CHANGED = 'content-changed',
+	INIT_HELP_DOC_WIDTH = 'init-help-doc-width',
 	SHOW_EDIT_DIALOG = 'show-edit-dialog',
 	HIDE_EDIT_DIALOG = 'hide-edit-dialog'
 }
@@ -13,6 +14,12 @@ export interface PlaygroundEventBus {
 	on(type: PlaygroundEventTypes.CONTENT_CHANGED, listener: (content?: string) => void): this;
 
 	off(type: PlaygroundEventTypes.CONTENT_CHANGED, listener: (content?: string) => void): this;
+
+	fire(type: PlaygroundEventTypes.INIT_HELP_DOC_WIDTH, width: number): this;
+
+	on(type: PlaygroundEventTypes.INIT_HELP_DOC_WIDTH, listener: (width: number) => void): this;
+
+	off(type: PlaygroundEventTypes.INIT_HELP_DOC_WIDTH, listener: (width: number) => void): this;
 
 	fire(type: PlaygroundEventTypes.SHOW_EDIT_DIALOG, content: ReactNode): this;
 

@@ -1,9 +1,14 @@
 import {IntlLabel} from '@rainbow-d9/n2';
 import React from 'react';
-import {EditDialogPartContent, EditDialogPartHeader, EditDialogPartTitle, EditDialogRightPart} from './widgets';
+import {
+	EditDialogPartContent,
+	EditDialogPartHeader,
+	EditDialogPartTitle,
+	EditDialogSpecificDetailsContainer
+} from './widgets';
 
-export const DialogRightPart = () => {
-	return <EditDialogRightPart>
+export const DialogSpecificDetails = () => {
+	return <EditDialogSpecificDetailsContainer>
 		<EditDialogPartContent>
 			<EditDialogPartHeader>
 				<EditDialogPartTitle>
@@ -11,5 +16,5 @@ export const DialogRightPart = () => {
 				</EditDialogPartTitle>
 			</EditDialogPartHeader>
 		</EditDialogPartContent>
-	</EditDialogRightPart>;
+	</EditDialogSpecificDetailsContainer>;
 };

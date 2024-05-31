@@ -43,11 +43,19 @@ export const EditDialogLayoutControllerHandle = styled.div.attrs<{ opened: boole
     position: absolute;
 
     &[data-opened=true] + div[data-w=o23-playground-edit-dialog-content] {
-        grid-template-columns: calc((100% - 400px) / 2 - 64px) 400px 1fr;
+        grid-template-columns: calc((100% - 400px) / 2 - ${PlaygroundCssVars.EDIT_DIALOG_HELP_DOC_COLLAPSED_WIDTH}) ${PlaygroundCssVars.EDIT_DIALOG_NAVIGATOR_WIDTH} 1fr;
+
+        > div[data-w=o23-playground-edit-dialog-help-doc] > div[data-w=o23-playground-edit-dialog-part-content] > div[data-w=o23-playground-edit-dialog-part-header] > div[data-w=o23-playground-edit-dialog-part-title] {
+            color: unset;
+        }
     }
 
     &[data-opened=false] + div[data-w=o23-playground-edit-dialog-content] {
-        grid-template-columns: 64px 400px 1fr;
+        grid-template-columns: ${PlaygroundCssVars.EDIT_DIALOG_HELP_DOC_COLLAPSED_WIDTH} ${PlaygroundCssVars.EDIT_DIALOG_NAVIGATOR_WIDTH} 1fr;
+
+        > div[data-w=o23-playground-edit-dialog-help-doc] > div[data-w=o23-playground-edit-dialog-part-content] > div[data-w=o23-playground-edit-dialog-part-header] > div[data-w=o23-playground-edit-dialog-part-title] {
+            color: ${PlaygroundCssVars.EDIT_DIALOG_HELP_DOC_TITLE_COLOR};
+        }
     }
 `;
 export const EditDialogContentContainer = styled.div.attrs({[DOM_KEY_WIDGET]: 'o23-playground-edit-dialog-content'})`
@@ -56,6 +64,9 @@ export const EditDialogContentContainer = styled.div.attrs({[DOM_KEY_WIDGET]: 'o
     height: 100%;
     width: 100%;
     transition: grid-template-columns ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION};
+`;
+export const EditDialogContentInitializer = styled.div.attrs({[DOM_KEY_WIDGET]: 'o23-playground-edit-dialog-content-initializer'})`
+    display: none;
 `;
 export const EditorDialogCloser = styled.div.attrs({[DOM_KEY_WIDGET]: 'o23-playground-edit-dialog-closer'})`
     display: flex;
@@ -75,7 +86,7 @@ export const EditorDialogCloser = styled.div.attrs({[DOM_KEY_WIDGET]: 'o23-playg
         margin-right: 4px;
     }
 `;
-export const EditDialogLeftPart = styled.div.attrs({[DOM_KEY_WIDGET]: 'o23-playground-edit-dialog-left'})`
+export const EditDialogHelpDocContainer = styled.div.attrs({[DOM_KEY_WIDGET]: 'o23-playground-edit-dialog-help-doc'})`
     display: flex;
     position: relative;
     align-self: stretch;
@@ -87,7 +98,7 @@ export const EditDialogLeftPart = styled.div.attrs({[DOM_KEY_WIDGET]: 'o23-playg
     box-shadow: ${PlaygroundCssVars.EDIT_DIALOG_SHADOW};
     overflow: hidden;
 `;
-export const EditDialogCenterPart = styled.div.attrs({[DOM_KEY_WIDGET]: 'o23-playground-edit-dialog-center'})`
+export const EditDialogNavigatorContainer = styled.div.attrs({[DOM_KEY_WIDGET]: 'o23-playground-edit-dialog-navigator'})`
     display: flex;
     position: relative;
     grid-column: 2;
@@ -100,7 +111,7 @@ export const EditDialogCenterPart = styled.div.attrs({[DOM_KEY_WIDGET]: 'o23-pla
     border: ${PlaygroundCssVars.EDIT_DIALOG_BORDER};
     overflow: hidden;
 `;
-export const EditDialogRightPart = styled.div.attrs({[DOM_KEY_WIDGET]: 'o23-playground-edit-dialog-right'})`
+export const EditDialogSpecificDetailsContainer = styled.div.attrs({[DOM_KEY_WIDGET]: 'o23-playground-edit-dialog-specific-details'})`
     display: flex;
     position: relative;
     grid-column: 3;
@@ -125,6 +136,7 @@ export const EditDialogPartHeader = styled.div.attrs({[DOM_KEY_WIDGET]: 'o23-pla
     position: relative;
     align-items: center;
     min-height: ${PlaygroundCssVars.EDIT_DIALOG_PART_HEADER_HEIGHT};
+    margin-bottom: calc(${PlaygroundCssVars.EDIT_DIALOG_PART_HEADER_HEIGHT} / 4);
 `;
 export const EditDialogPartTitle = styled.div.attrs({[DOM_KEY_WIDGET]: 'o23-playground-edit-dialog-part-title'})`
     display: flex;
@@ -133,25 +145,27 @@ export const EditDialogPartTitle = styled.div.attrs({[DOM_KEY_WIDGET]: 'o23-play
     flex-grow: 1;
     font-size: ${PlaygroundCssVars.EDIT_DIALOG_PART_TITLE_FONT_SIZE};
     font-weight: ${PlaygroundCssVars.EDIT_DIALOG_PART_TITLE_FONT_WEIGHT};
-    color: ${PlaygroundCssVars.EDIT_DIALOG_PART_TITLE_COLOR};
     white-space: nowrap;
+    transition: color ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION};
 `;
 export const EditDialogPartBody = styled.div.attrs({[DOM_KEY_WIDGET]: 'o23-playground-edit-dialog-part-body'})`
     display: flex;
     position: relative;
     flex-grow: 1;
+    margin: ${PlaygroundCssVars.EDIT_DIALOG_PART_BODY_MARGIN};
+    padding: ${PlaygroundCssVars.EDIT_DIALOG_PART_BODY_PADDING};
     overflow: hidden;
 `;
 // noinspection CssUnresolvedCustomProperty
-export const EditDialogLeftPartOpenHandle = styled.div.attrs<{ opened: boolean }>(
+export const EditDialogHelpDocOpenHandle = styled.div.attrs<{ opened: boolean }>(
 	({opened}) => {
 		return {
-			[DOM_KEY_WIDGET]: 'o23-playground-edit-dialog-left-open-handle',
+			[DOM_KEY_WIDGET]: 'o23-playground-edit-dialog-help-doc-open-handle',
 			'data-opened': opened,
 			style: {
 				'--opacity': opened ? 0 : (void 0),
 				'--pointer-events': opened ? 'none' : 'auto',
-				'--left': opened ? `calc(100% - ${PlaygroundCssVars.EDIT_DIALOG_LEFT_PART_OPEN_HANDLE_WIDTH})` : PlaygroundCssVars.EDIT_DIALOG_LEFT_PART_OPEN_HANDLE_LEFT
+				'--left': opened ? `calc(100% - ${PlaygroundCssVars.EDIT_DIALOG_HELP_DOC_OPEN_HANDLE_WIDTH})` : PlaygroundCssVars.EDIT_DIALOG_HELP_DOC_OPEN_HANDLE_LEFT
 			}
 		};
 	})<{ opened: boolean }>`
@@ -160,7 +174,7 @@ export const EditDialogLeftPartOpenHandle = styled.div.attrs<{ opened: boolean }
     align-items: center;
     top: 0;
     left: var(--left);
-    width: ${PlaygroundCssVars.EDIT_DIALOG_LEFT_PART_OPEN_HANDLE_WIDTH};
+    width: ${PlaygroundCssVars.EDIT_DIALOG_HELP_DOC_OPEN_HANDLE_WIDTH};
     height: 100%;
     opacity: var(--opacity);
     pointer-events: var(--pointer-events);
@@ -178,15 +192,15 @@ export const EditDialogLeftPartOpenHandle = styled.div.attrs<{ opened: boolean }
     }
 
     > svg {
-        color: ${PlaygroundCssVars.EDIT_DIALOG_LEFT_PART_OPEN_HANDLE_COLOR};
+        color: ${PlaygroundCssVars.EDIT_DIALOG_HELP_DOC_OPEN_HANDLE_COLOR};
         opacity: 0.7;
     }
 `;
 // noinspection CssUnresolvedCustomProperty
-export const EditDialogLeftPartCloseHandle = styled.div.attrs<{ opened: boolean }>(
+export const EditDialogHelpDocCloseHandle = styled.div.attrs<{ opened: boolean }>(
 	({opened}) => {
 		return {
-			[DOM_KEY_WIDGET]: 'o23-playground-edit-dialog-left-close-handle',
+			[DOM_KEY_WIDGET]: 'o23-playground-edit-dialog-help-doc-close-handle',
 			style: {
 				'--opacity': opened ? (void 0) : 0,
 				'--pointer-events': opened ? 'auto' : 'none'
@@ -205,7 +219,7 @@ export const EditDialogLeftPartCloseHandle = styled.div.attrs<{ opened: boolean 
 
     &:hover {
         > svg {
-            color: ${PlaygroundCssVars.EDIT_DIALOG_LEFT_PART_OPEN_HANDLE_COLOR};
+            color: ${PlaygroundCssVars.EDIT_DIALOG_HELP_DOC_OPEN_HANDLE_COLOR};
         }
     }
 
@@ -214,14 +228,49 @@ export const EditDialogLeftPartCloseHandle = styled.div.attrs<{ opened: boolean 
         transition: color ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION};
     }
 `;
-export const HelpDocContainer = styled.div.attrs({
-	[DOM_KEY_WIDGET]: 'o23-playground-edit-dialog-help-doc',
-	'data-v-scroll': '',
-	'data-h-scroll': ''
-})`
+// noinspection CssUnresolvedCustomProperty
+export const HelpDocContainer = styled.div.attrs<{ width?: number }>(
+	({width}) => {
+		return {
+			[DOM_KEY_WIDGET]: 'o23-playground-edit-dialog-help-doc',
+			'data-v-scroll': '',
+			'data-h-scroll': '',
+			style: {
+				'--min-width': width ? `calc((${width}px - ${PlaygroundCssVars.EDIT_DIALOG_NAVIGATOR_WIDTH}) / 2 - ${PlaygroundCssVars.EDIT_DIALOG_HELP_DOC_COLLAPSED_WIDTH} - ${PlaygroundCssVars.EDIT_DIALOG_PADDING_X})` : (void 0)
+			}
+		};
+	})<{ width?: number }>`
     display: block;
     position: relative;
     flex-grow: 1;
+    margin: ${PlaygroundCssVars.EDIT_DIALOG_HELP_DOC_MARGIN};
+    padding: ${PlaygroundCssVars.EDIT_DIALOG_HELP_DOC_PADDING};
+    min-width: var(--min-width);
     overflow: auto;
     transition: opacity ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION}, filter ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION};
+
+    > div.markdown-body {
+        color: ${PlaygroundCssVars.MARKDOWN_COLOR};
+        background-color: ${PlaygroundCssVars.MARKDOWN_BACKGROUND_COLOR};
+
+        h1 {
+            font-size: 1.5em;
+        }
+
+        h2 {
+            font-size: 1.35em;
+        }
+
+        h3 {
+            font-size: 1.2em;
+        }
+
+        h4 {
+            font-size: 1.1em;
+        }
+
+        h5, h6 {
+            font-size: 1em;
+        }
+    }
 `;
