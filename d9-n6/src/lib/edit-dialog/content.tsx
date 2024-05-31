@@ -9,6 +9,7 @@ import {LayoutController} from './layout-controller';
 import {DialogNavigator} from './navigator';
 import {DialogSpecificDetails} from './specific-details';
 import {StateHolder} from './state-holder';
+import {ConfigurableElement} from './types';
 import {EditDialogContentContainer, EditDialogContentInitializer, EditorDialogCloser} from './widgets';
 
 export const DialogContentInitializer = () => {
@@ -29,12 +30,13 @@ export const DialogContentInitializer = () => {
 
 export interface DialogContentProps {
 	helpDoc: MarkdownContent;
+	elements?: Array<ConfigurableElement>;
 	confirm: () => void;
 }
 
 export const DialogContent = (props: DialogContentProps) => {
 	const {
-		helpDoc,
+		helpDoc, elements,
 		confirm
 	} = props;
 
@@ -55,7 +57,7 @@ export const DialogContent = (props: DialogContentProps) => {
 			</EditorDialogCloser>
 			<DialogHelpDesk helpDoc={helpDoc}/>
 			<DialogSpecificDetails/>
-			<DialogNavigator/>
+			<DialogNavigator elements={elements}/>
 		</EditDialogContentContainer>
 		<DialogContentInitializer/>
 	</EditDialogEventBusProvider>;

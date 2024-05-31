@@ -43,7 +43,7 @@ export const EditDialogLayoutControllerHandle = styled.div.attrs<{ opened: boole
     position: absolute;
 
     &[data-opened=true] + div[data-w=o23-playground-edit-dialog-content] {
-        grid-template-columns: calc((100% - 400px) / 2 - ${PlaygroundCssVars.EDIT_DIALOG_HELP_DOC_COLLAPSED_WIDTH}) ${PlaygroundCssVars.EDIT_DIALOG_NAVIGATOR_WIDTH} 1fr;
+        grid-template-columns: calc((100% - ${PlaygroundCssVars.EDIT_DIALOG_NAVIGATOR_WIDTH}) / 2 - ${PlaygroundCssVars.EDIT_DIALOG_HELP_DOC_COLLAPSED_WIDTH}) ${PlaygroundCssVars.EDIT_DIALOG_NAVIGATOR_WIDTH} 1fr;
 
         > div[data-w=o23-playground-edit-dialog-help-doc] > div[data-w=o23-playground-edit-dialog-part-content] > div[data-w=o23-playground-edit-dialog-part-header] > div[data-w=o23-playground-edit-dialog-part-title] {
             color: unset;
@@ -236,7 +236,7 @@ export const HelpDocContainer = styled.div.attrs<{ width?: number }>(
 			'data-v-scroll': '',
 			'data-h-scroll': '',
 			style: {
-				'--min-width': width ? `calc((${width}px - ${PlaygroundCssVars.EDIT_DIALOG_NAVIGATOR_WIDTH}) / 2 - ${PlaygroundCssVars.EDIT_DIALOG_HELP_DOC_COLLAPSED_WIDTH} - ${PlaygroundCssVars.EDIT_DIALOG_PADDING_X})` : (void 0)
+				'--min-width': width ? `calc((${width}px - ${PlaygroundCssVars.EDIT_DIALOG_NAVIGATOR_WIDTH}) / 2 - ${PlaygroundCssVars.EDIT_DIALOG_HELP_DOC_COLLAPSED_WIDTH} - ${PlaygroundCssVars.EDIT_DIALOG_HELP_DOC_GUTTER_SIZE})` : (void 0)
 			}
 		};
 	})<{ width?: number }>`

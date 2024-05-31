@@ -53,25 +53,16 @@ export const StartNodeTitle = styled(NodeTitle).attrs({
 		'--font-size': PlaygroundCssVars.NODE_START_TITLE_FONT_SIZE,
 		'--font-weight': PlaygroundCssVars.NODE_START_TITLE_FONT_WEIGHT
 	}
-})`
-    &[data-role=route] {
-        text-decoration: ${PlaygroundCssVars.NODE_START_SECOND_TITLE_DECORATION};
-    }
-`;
+})``;
 export const StartNodeSecondTitle = styled(NodeSecondTitle).attrs({
 	[DOM_KEY_WIDGET]: 'o23-playground-start-node-title',
 	style: {
 		'--color': PlaygroundCssVars.NODE_START_TITLE_COLOR,
 		'--font-size': PlaygroundCssVars.NODE_START_SECOND_TITLE_FONT_SIZE,
 		'--font-weight': PlaygroundCssVars.NODE_START_SECOND_TITLE_FONT_WEIGHT,
-		'--text-decoration': PlaygroundCssVars.NODE_START_SECOND_TITLE_DECORATION
+		'--text-decoration': 'unset'
 	}
-})`
-    &[data-role=method] {
-        text-decoration: unset;
-        text-transform: uppercase;
-    }
-`;
+})``;
 export const StartNodeBody = styled(NodeBody).attrs({
 	[DOM_KEY_WIDGET]: 'o23-playground-start-node-body',
 	style: {
@@ -81,6 +72,17 @@ export const StartNodeBody = styled(NodeBody).attrs({
 		'--padding': PlaygroundCssVars.NODE_START_BODY_PADDING
 	}
 })``;
+
+export const RestApiMethodPortWidget = (props: { def: PipelineFileDef }) => {
+	const {def} = props;
+
+	const {method} = def;
+	const all: Undefinable<boolean> = VUtils.isNotBlank(method);
+
+	return <RestApiVariablePortWidget label="Method" required={false}
+	                                  defined={all != null} all={all}
+	                                  allAsBoolean={false} allAsGiven={`${method ?? ''}`.toUpperCase().trim()}/>;
+};
 
 export const RestApiHeadersPortWidget = (props: { def: PipelineFileDef }) => {
 	const {def} = props;
@@ -190,58 +192,19 @@ export const StartNodeWidget = (props: StartNodeWidgetProps) => {
 	const def = node.def;
 
 	const {
-		isApi,
-		firstTitle, firstTitleRole, showRouteLack,
-		secondTitle, secondTitleRole, showMethodLack
+		isApi, showRouteLack, secondTitle, secondTitleRole
 	} = (() => {
 		if (isPipelineDef(def)) {
 			if (VUtils.isNotBlank(def.route)) {
 				// route defined
-				if (VUtils.isNotBlank(def.method)) {
-					// method defined
-					return {
-						isApi: true,
-						firstTitle: def.route, firstTitleRole: 'route', showRouteLack: false,
-						secondTitle: `[${def.method.trim()}]`, secondTitleRole: 'method', showMethodLack: false
-					};
-				} else {
-					// method not defined
-					return {
-						isApi: true,
-						firstTitle: def.route, firstTitleRole: 'route', showRouteLack: false,
-						secondTitle: (void 0), secondTitleRole: (void 0), showMethodLack: true
-					};
-				}
+				return {
+					isApi: true, showRouteLack: false, secondTitle: `[ ${def.route.trim()} ]`, secondTitleRole: 'route'
+				};
 			} else {
-				if (VUtils.isNotBlank(def.method)) {
-					// method defined
-					return {
-						isApi: true,
-						firstTitle: <IntlLabel keys={['o23', 'node', 'start', 'rest']} value="Rest API"/>,
-						firstTitleRole: (void 0), showRouteLack: true,
-						secondTitle: `[${def.method.trim()}]`, secondTitleRole: 'method', showMethodLack: false
-					};
-				} else {
-					// method not defined
-					return {
-						isApi: true,
-						firstTitle: <IntlLabel keys={['o23', 'node', 'start', 'rest']} value="Rest API"/>,
-						firstTitleRole: (void 0), showRouteLack: true,
-						secondTitle: (void 0), secondTitleRole: (void 0), showMethodLack: true
-					};
-				}
+				return {isApi: true, showRouteLack: true, secondTitle: (void 0), secondTitleRole: (void 0)};
 			}
 		} else {
-			return {
-				isApi: false,
-				firstTitle: <IntlLabel keys={['o23', 'node', 'start', 'standard']} value="Start"/>,
-				firstTitleRole: (void 0),
-				showRouteLack: false,
-				secondTitle: <IntlLabel keys={['o23', 'pipeline', 'type', def.type]}
-				                        value={def.type.replace('-', '')}/>,
-				secondTitleRole: (void 0),
-				showMethodLack: false
-			};
+			return {isApi: false, showRouteLack: false, secondTitle: (void 0), secondTitleRole: (void 0)};
 		}
 	})();
 
@@ -255,8 +218,10 @@ export const StartNodeWidget = (props: StartNodeWidgetProps) => {
 
 	return <StartNodeContainer onDoubleClick={onDoubleClicked}>
 		<StartNodeHeader>
-			<StartNodeTitle data-role={firstTitleRole}>
-				{firstTitle}
+			<StartNodeTitle>
+				{VUtils.isNotBlank(def.code)
+					? def.code.trim()
+					: <IntlLabel keys={['o23', 'rest-api', 'code', 'undefined']} value="No code defined"/>}
 			</StartNodeTitle>
 			<StartNodeSecondTitle data-role={secondTitleRole}>
 				{secondTitle}
@@ -266,9 +231,7 @@ export const StartNodeWidget = (props: StartNodeWidgetProps) => {
 			{isApi
 				? <>
 					{showRouteLack ? <RestApiVariablePortWidget label="Route" required={true} defined={false}/> : null}
-					{showMethodLack
-						? <RestApiVariablePortWidget label="Method" required={true} defined={false}/>
-						: null}
+					<RestApiMethodPortWidget def={def as PipelineFileDef}/>
 					<RestApiHeadersPortWidget def={def as PipelineFileDef}/>
 					<RestApiPathParamsPortWidget def={def as PipelineFileDef}/>
 					<RestApiQueryParamsPortWidget def={def as PipelineFileDef}/>

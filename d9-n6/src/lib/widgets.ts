@@ -29,7 +29,6 @@ export const PlaygroundCssVars = {
 	EDIT_DIALOG_BACKGROUND_COLOR: `var(--o23-playground-dialog-background-color, ${CssVars.BACKGROUND_COLOR})`,
 	EDIT_DIALOG_PADDING: 'var(--o23-playground-dialog-padding, 16px)',
 	EDIT_DIALOG_PADDING_LEFT: 'var(--o23-playground-dialog-padding-left, 16px)',
-	EDIT_DIALOG_PADDING_X: 'var(--o23-playground-dialog-padding-x, 32px)',
 	EDIT_DIALOG_SHADOW: `var(--o23-playground-dialog-shadow, ${CssVars.DIALOG_SHADOW})`,
 	EDIT_DIALOG_BORDER_RADIUS: 'var(--o23-playground-dialog-border-radius, 12px)',
 	EDIT_DIALOG_BORDER: `var(--o23-playground-dialog-border, ${CssVars.BORDER})`,
@@ -52,6 +51,7 @@ export const PlaygroundCssVars = {
 	EDIT_DIALOG_HELP_DOC_MARGIN: 'var(--o23-playground-dialog-help-doc-margin, 0 0 0 -16px)',
 	EDIT_DIALOG_HELP_DOC_PADDING: 'var(--o23-playground-dialog-help-doc-padding, 0 16px 0 16px)',
 	EDIT_DIALOG_HELP_DOC_COLLAPSED_WIDTH: 'var(--o23-playground-dialog-help-doc-collapsed-width, 64px)',
+	EDIT_DIALOG_HELP_DOC_GUTTER_SIZE: 'var(--o23-playground-dialog-help-doc-gutter-size, 16px)',
 	EDIT_DIALOG_NAVIGATOR_WIDTH: 'var(--o23-playground-dialog-navigator-width, 400px)',
 	// node common
 	NODE_BORDER_RADIUS: 'var(--o23-playground-node-border-radius, 8px)',

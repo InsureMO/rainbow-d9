@@ -1,6 +1,6 @@
 import {Nullable} from '@rainbow-d9/n1';
 import {DOM_KEY_WIDGET, IntlLabel} from '@rainbow-d9/n2';
-import React from 'react';
+import React, {ReactNode} from 'react';
 import styled from 'styled-components';
 import {PortChecked, PortIncorrect, PortUndefined} from '../../icons';
 import {PlaygroundCssVars} from '../../widgets';
@@ -64,10 +64,11 @@ export interface RestApiVariableWidgetProps {
 	count?: number;
 	all?: boolean;
 	allAsBoolean?: boolean;
+	allAsGiven?: ReactNode;
 }
 
 export const RestApiVariablePortWidget = (props: RestApiVariableWidgetProps) => {
-	const {label, required, defined, count, all, allAsBoolean = false} = props;
+	const {label, required, defined, count, all, allAsBoolean = false, allAsGiven} = props;
 
 	let icon: JSX.Element;
 	if (defined) {
@@ -92,6 +93,8 @@ export const RestApiVariablePortWidget = (props: RestApiVariableWidgetProps) => 
 					<IntlLabel keys={['o23', 'rest-api', 'variable', 'false']} value="N"/>
 				</span>;
 			}
+		} else if (allAsGiven != null) {
+			badge = <span data-role="all">{allAsGiven}</span>;
 		} else if (all === true) {
 			badge = <span data-role="all">
 				<IntlLabel keys={['o23', 'rest-api', 'variable', 'all']} value="All"/>
