@@ -106,13 +106,21 @@ const TailDecorator = styled(Decorator).attrs({
         border-bottom-right-radius: ${CssVars.BORDER_RADIUS};
     }
 `;
+// noinspection CssUnresolvedCustomProperty
 const Placeholder = styled.span.attrs({[DOM_KEY_WIDGET]: 'd9-deco-input-placeholder'})`
-    display: flex;
+    display: block;
     position: absolute;
-    align-items: center;
+    top: var(--top, 0);
+    left: var(--left, 0);
+    width: var(--width, 0);
+    height: var(--height, 0);
+    line-height: var(--height, 0);
     color: ${CssVars.PLACEHOLDER_COLOR};
     background-color: transparent;
     padding: 0 ${CssVars.INPUT_INDENT};
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
     pointer-events: none;
     user-select: none;
     z-index: 2;
@@ -142,16 +150,26 @@ const Decorate = forwardRef((props: DecorateProps, forwardedRef: ForwardedRef<HT
 			return;
 		}
 
-		const {left: containerLeft} = ref.current.getBoundingClientRect();
-		const input = ref.current.querySelector('input');
-		const {left, width, height} = input.getBoundingClientRect();
-		const {
-			borderTopWidth, borderBottomWidth, borderLeftWidth, borderRightWidth
-		} = window.getComputedStyle(input);
-		node.style.top = `${Number((borderTopWidth ?? '0').replace('px', ''))}px`;
-		node.style.left = `${left - containerLeft + Number((borderLeftWidth ?? '0').replace('px', ''))}px`;
-		node.style.width = `${width - Number((borderLeftWidth ?? '0').replace('px', '')) - Number((borderRightWidth ?? '0').replace('px', ''))}px`;
-		node.style.height = `${height - Number((borderTopWidth ?? '0').replace('px', '')) - Number((borderBottomWidth ?? '0').replace('px', ''))}px`;
+		const computePlaceholderSize = () => {
+			const {left: containerLeft} = ref.current.getBoundingClientRect();
+			const input = ref.current.querySelector('input');
+			const {left, width, height} = input.getBoundingClientRect();
+			const {
+				borderTopWidth, borderBottomWidth, borderLeftWidth, borderRightWidth
+			} = window.getComputedStyle(input);
+			node.style.setProperty('--top', `${Number((borderTopWidth ?? '0').replace('px', ''))}px`);
+			node.style.setProperty('--left', `${left - containerLeft + Number((borderLeftWidth ?? '0').replace('px', ''))}px`);
+			node.style.setProperty('--width', `${width - Number((borderLeftWidth ?? '0').replace('px', '')) - Number((borderRightWidth ?? '0').replace('px', ''))}px`);
+			node.style.setProperty('--height', `${height - Number((borderTopWidth ?? '0').replace('px', '')) - Number((borderBottomWidth ?? '0').replace('px', ''))}px`);
+		};
+		const resizeObserver = new ResizeObserver(() => {
+			computePlaceholderSize();
+		});
+		resizeObserver.observe(ref.current);
+		computePlaceholderSize();
+		return () => {
+			resizeObserver?.disconnect();
+		};
 	});
 
 	const hasPlaceholder = VUtils.isNotBlank(placeholder);
