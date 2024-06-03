@@ -4,11 +4,11 @@ import {ReactNode} from 'react';
 export type ConfigurableModel = any;
 
 export interface ConfigurableElement {
-	name: string;
+	code: string;
 	label: string;
 	anchor: string;
 	badge?: (model: ConfigurableModel) => ReactNode;
 	visible?: (model: ConfigurableModel) => boolean;
 	/** typically 2 levels max */
-	children?: ConfigurableElement;
+	children?: Array<ConfigurableElement>;
 }

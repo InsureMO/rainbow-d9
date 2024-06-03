@@ -274,3 +274,54 @@ export const HelpDocContainer = styled.div.attrs<{ width?: number }>(
         }
     }
 `;
+export const NavigatorDialogNavigatorElementsContainer = styled.div.attrs({
+	[DOM_KEY_WIDGET]: 'o23-playground-edit-dialog-configurable-elements',
+	'data-h-scroll': ''
+})`
+    display: flex;
+    position: relative;
+    flex-grow: 1;
+    flex-direction: column;
+    align-self: stretch;
+    margin: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_MARGIN};
+    padding: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_PADDING};
+    overflow-y: auto;
+    overflow-x: hidden;
+`;
+export const NavigatorConfigurableElementContainer = styled.div.attrs<{ level: number }>(() => {
+	return {
+		[DOM_KEY_WIDGET]: 'o23-playground-edit-dialog-configurable-element'
+	};
+})<{ level: number }>`
+    display: flex;
+    position: relative;
+    align-items: center;
+    min-height: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_HEIGHT};
+    margin: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_MARGIN};
+    padding: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_PADDING};
+    border-radius: 0;
+    cursor: pointer;
+    transition: all ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION};
+
+    &:hover {
+        background-color: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_HOVER_COLOR};
+        border-radius: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_BORDER_RADIUS};
+        font-weight: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_HOVER_FONT_WEIGHT};
+    }
+
+    &:not(:last-child) {
+        border-bottom: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_BORDER};
+    }
+`;
+export const NavigatorConfigurableElementLabel = styled.div.attrs({[DOM_KEY_WIDGET]: 'o23-playground-edit-dialog-configurable-element-label'})`
+    display: flex;
+    position: relative;
+    align-items: center;
+    flex-grow: 1;
+`;
+export const NavigatorConfigurableElementBadge = styled.div.attrs({[DOM_KEY_WIDGET]: 'o23-playground-edit-dialog-configurable-element-badge'})`
+    display: flex;
+    position: relative;
+    align-items: center;
+    flex-grow: 1;
+`;

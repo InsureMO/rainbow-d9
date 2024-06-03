@@ -6,17 +6,55 @@ import {
 	EditDialogPartBody,
 	EditDialogPartContent,
 	EditDialogPartHeader,
-	EditDialogPartTitle
+	EditDialogPartTitle,
+	NavigatorConfigurableElementBadge,
+	NavigatorConfigurableElementContainer,
+	NavigatorConfigurableElementLabel,
+	NavigatorDialogNavigatorElementsContainer
 } from './widgets';
 
+export interface DialogNavigatorElementProps {
+	element: ConfigurableElement;
+	model: ConfigurableModel;
+	level: number;
+}
+
+export const DialogNavigatorElement = (props: DialogNavigatorElementProps) => {
+	const {element, model, level} = props;
+	const {label, badge} = element;
+
+	return <>
+		<NavigatorConfigurableElementContainer level={0}>
+			<NavigatorConfigurableElementLabel>{label}</NavigatorConfigurableElementLabel>
+			{badge != null
+				? <NavigatorConfigurableElementBadge>{badge(model)}</NavigatorConfigurableElementBadge>
+				: null}
+		</NavigatorConfigurableElementContainer>
+		{element.children != null
+			? element.children.map(child => {
+				return <DialogNavigatorElement element={child} model={model} level={level + 1} key={element.code}/>;
+			})
+			: null}
+	</>;
+};
+
 export interface DialogNavigatorProps {
-	elements?: Array<ConfigurableElement>;
+	elements: Array<ConfigurableElement>;
 	model: ConfigurableModel;
 }
 
+export const DialogNavigatorElements = (props: DialogNavigatorProps) => {
+	const {elements, model} = props;
+
+	return <NavigatorDialogNavigatorElementsContainer>
+		{elements.map(element => {
+			return <DialogNavigatorElement element={element} model={model} level={0} key={element.code}/>;
+		})}
+	</NavigatorDialogNavigatorElementsContainer>;
+};
+
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-export const DialogNavigator = (_props: DialogNavigatorProps) => {
-	// const {elements, model} = props;
+export const DialogNavigator = (props: DialogNavigatorProps) => {
 	return <EditDialogNavigatorContainer>
 		<EditDialogPartContent>
 			<EditDialogPartHeader>
@@ -25,6 +63,7 @@ export const DialogNavigator = (_props: DialogNavigatorProps) => {
 				</EditDialogPartTitle>
 			</EditDialogPartHeader>
 			<EditDialogPartBody>
+				<DialogNavigatorElements {...props}/>
 			</EditDialogPartBody>
 		</EditDialogPartContent>
 	</EditDialogNavigatorContainer>;

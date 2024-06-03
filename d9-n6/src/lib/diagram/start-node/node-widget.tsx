@@ -3,8 +3,8 @@ import {Undefinable, VUtils} from '@rainbow-d9/n1';
 import {DOM_KEY_WIDGET, IntlLabel} from '@rainbow-d9/n2';
 import React from 'react';
 import styled from 'styled-components';
-import {isPipelineDef, PipelineFileDef} from '../../definition';
-import {DialogContent} from '../../edit-dialog';
+import {isPipelineDef, PipelineFileDef, PipelineStepUseDef} from '../../definition';
+import {ConfigurableElement, ConfigurableModel, DialogContent} from '../../edit-dialog';
 import {HelpDocs} from '../../help-docs';
 import {PlaygroundEventTypes, usePlaygroundEventBus} from '../../playground-event-bus';
 import {PlaygroundCssVars} from '../../widgets';
@@ -211,9 +211,43 @@ export const StartNodeWidget = (props: StartNodeWidgetProps) => {
 	const onConfirm = () => {
 		// TODO
 	};
+	const prepareModel = (): ConfigurableModel => {
+		const model: ConfigurableModel = {};
+		model.code = def.code;
+		model.type = def.type;
+		model.enabled = def.enabled;
+		const pipeline = def as PipelineFileDef;
+		model.route = pipeline.route;
+		model.method = pipeline.method;
+		model.headers = pipeline.headers;
+		model.pathParams = pipeline.pathParams;
+		model.queryParams = pipeline.queryParams;
+		model.body = pipeline.body;
+		model.files = pipeline.files;
+		model.exposeHeaders = pipeline.exposeHeaders;
+		model.exposeFile = pipeline.exposeFile;
+		const step = def as unknown as PipelineStepUseDef;
+		model.use = step.use;
+	};
 	const onDoubleClicked = () => {
+		const elements: Array<ConfigurableElement> = [
+			{code: 'code', label: 'Code', anchor: 'code'},
+			{code: 'type', label: 'Type', anchor: 'type'},
+			{code: 'enabled', label: 'Enabled', anchor: 'enabled'},
+			{code: 'route', label: 'Route', anchor: 'route'},
+			{code: 'method', label: 'Method', anchor: 'method'},
+			{code: 'headers', label: 'Headers', anchor: 'headers'},
+			{code: 'pathParams', label: 'Path Parameters', anchor: 'path-params'},
+			{code: 'queryParams', label: 'Query Parameters', anchor: 'query-params'},
+			{code: 'body', label: 'Body', anchor: 'body'},
+			{code: 'files', label: 'Files', anchor: 'files'},
+			{code: 'exposeHeaders', label: 'Expose Headers', anchor: 'expose-headers'},
+			{code: 'exposeFile', label: 'Expose File', anchor: 'expose-file'},
+			{code: 'use', label: 'Use', anchor: 'use'}
+		];
 		fire(PlaygroundEventTypes.SHOW_EDIT_DIALOG,
-			<DialogContent helpDoc={HelpDocs.pipeline} confirm={onConfirm}/>);
+			<DialogContent helpDoc={HelpDocs.pipeline} confirm={onConfirm} prepare={prepareModel}
+			               elements={elements}/>);
 	};
 
 	return <StartNodeContainer onDoubleClick={onDoubleClicked}>

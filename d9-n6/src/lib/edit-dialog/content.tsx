@@ -30,9 +30,9 @@ export const DialogContentInitializer = () => {
 
 export interface DialogContentProps {
 	helpDoc: MarkdownContent;
-	elements?: Array<ConfigurableElement>;
+	elements: Array<ConfigurableElement>;
 	/** prepare model for editing */
-	prepare?: () => ConfigurableModel;
+	prepare: () => ConfigurableModel;
 	/** write back */
 	confirm: (model: ConfigurableModel) => void;
 }
