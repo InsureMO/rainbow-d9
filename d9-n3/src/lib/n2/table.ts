@@ -131,7 +131,7 @@ export class N2TableTranslator extends SpecificArrayWidgetTranslator<N2WidgetTyp
 	public postWork<Def extends NodeDef>(def: Partial<Def>, supplementary: PostWorkSupplementary): Def {
 		const defs = def as unknown as TableDef & ContainerDef;
 		const {translator, parseOptions} = supplementary;
-		defs.headers = defs.headers.map(header => {
+		defs.headers = defs.headers?.map(header => {
 			if (this.isPendingHeaderLabel(header.label)) {
 				const {value: attributeValue, children} = header.label;
 				const {node, success} = translator.translate({
