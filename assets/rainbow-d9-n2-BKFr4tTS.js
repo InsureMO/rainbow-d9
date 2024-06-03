@@ -4,9 +4,9 @@ var __publicField = (obj, key, value) => {
   __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
   return value;
 };
-import { a as color, M as MaskedNumber, e as MaskedDate, g as MaskedFunction, j as MaskedPattern, k as MaskedRange, p as MaskedRegExp, q as MaskedDynamic } from "./vendor-Nl1v6r4d.js";
-import { R as React, r as reactExports, q as qe, W as We, u as useIMask } from "./react-base--CcilxRK.js";
-import { c as createLogger, V as VUtils, P as PPUtils, r as registerWidget, u as useRootEventBus, M as MUtils, N as NUtils, d as Wrapper, e as useForceUpdate, f as MBUtils, b as useWrapperEventBus, W as WrapperEventTypes, g as useCreateEventBus, h as PROPERTY_PATH_ME, i as useDefaultAttributeValues, j as useAttributesWatch, R as RootEventTypes } from "./rainbow-d9-n1-FREaDOxB.js";
+import { a as color, M as MaskedNumber, e as MaskedDate, g as MaskedFunction, j as MaskedPattern, k as MaskedRange, p as MaskedRegExp, q as MaskedDynamic } from "./vendor-3IExBymI.js";
+import { R as React, r as reactExports, q as qe, W as We, u as useIMask } from "./react-base-zFvZsVyx.js";
+import { c as createLogger, V as VUtils, P as PPUtils, r as registerWidget, u as useRootEventBus, M as MUtils, N as NUtils, d as Wrapper, e as useForceUpdate, f as MBUtils, b as useWrapperEventBus, W as WrapperEventTypes, g as useCreateEventBus, h as PROPERTY_PATH_ME, i as useDefaultAttributeValues, j as useAttributesWatch, R as RootEventTypes } from "./rainbow-d9-n1-_CP42cLV.js";
 import { d as dayjs } from "./dayjs-ZafkOS5_.js";
 const DOM_KEY_WIDGET = "data-w";
 const DOM_ID_WIDGET = "data-wid";
@@ -2801,12 +2801,19 @@ const TailDecorator = qe(Decorator).attrs({
     }
 `;
 const Placeholder = qe.span.attrs({ [DOM_KEY_WIDGET]: "d9-deco-input-placeholder" })`
-    display: flex;
+    display: block;
     position: absolute;
-    align-items: center;
+    top: var(--top, 0);
+    left: var(--left, 0);
+    width: var(--width, 0);
+    height: var(--height, 0);
+    line-height: var(--height, 0);
     color: ${CssVars.PLACEHOLDER_COLOR};
     background-color: transparent;
     padding: 0 ${CssVars.INPUT_INDENT};
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
     pointer-events: none;
     user-select: none;
     z-index: 2;
@@ -2823,14 +2830,24 @@ const Decorate = reactExports.forwardRef((props, forwardedRef) => {
     if (node == null) {
       return;
     }
-    const { left: containerLeft } = ref.current.getBoundingClientRect();
-    const input = ref.current.querySelector("input");
-    const { left, width, height } = input.getBoundingClientRect();
-    const { borderTopWidth, borderBottomWidth, borderLeftWidth, borderRightWidth } = window.getComputedStyle(input);
-    node.style.top = `${Number((borderTopWidth ?? "0").replace("px", ""))}px`;
-    node.style.left = `${left - containerLeft + Number((borderLeftWidth ?? "0").replace("px", ""))}px`;
-    node.style.width = `${width - Number((borderLeftWidth ?? "0").replace("px", "")) - Number((borderRightWidth ?? "0").replace("px", ""))}px`;
-    node.style.height = `${height - Number((borderTopWidth ?? "0").replace("px", "")) - Number((borderBottomWidth ?? "0").replace("px", ""))}px`;
+    const computePlaceholderSize = () => {
+      const { left: containerLeft } = ref.current.getBoundingClientRect();
+      const input = ref.current.querySelector("input");
+      const { left, width, height } = input.getBoundingClientRect();
+      const { borderTopWidth, borderBottomWidth, borderLeftWidth, borderRightWidth } = window.getComputedStyle(input);
+      node.style.setProperty("--top", `${Number((borderTopWidth ?? "0").replace("px", ""))}px`);
+      node.style.setProperty("--left", `${left - containerLeft + Number((borderLeftWidth ?? "0").replace("px", ""))}px`);
+      node.style.setProperty("--width", `${width - Number((borderLeftWidth ?? "0").replace("px", "")) - Number((borderRightWidth ?? "0").replace("px", ""))}px`);
+      node.style.setProperty("--height", `${height - Number((borderTopWidth ?? "0").replace("px", "")) - Number((borderBottomWidth ?? "0").replace("px", ""))}px`);
+    };
+    const resizeObserver = new ResizeObserver(() => {
+      computePlaceholderSize();
+    });
+    resizeObserver.observe(ref.current);
+    computePlaceholderSize();
+    return () => {
+      resizeObserver == null ? void 0 : resizeObserver.disconnect();
+    };
   });
   const hasPlaceholder = VUtils.isNotBlank(placeholder);
   return React.createElement(
@@ -7308,14 +7325,19 @@ const Pagination = reactExports.forwardRef((props, ref) => {
 });
 registerWidget({ key: "Pagination", JSX: Pagination, container: false, array: false });
 const TableHeader = (props) => {
-  const { headers, headerHeight, stickyOffsets, tailGrabberAppended } = props;
+  const { headers, headerHeight, stickyOffsets, tailGrabberAppended, $wrapped: wrapped } = props;
+  const $wrapped = { ...wrapped, $onValueChange: VUtils.noop };
   return React.createElement(
     React.Fragment,
     null,
     React.createElement(ATableHeaderCell, { headerHeight, isGrabber: true, stickyOffset: stickyOffsets[0] }),
     headers.map((header, index) => {
       const key = NUtils.getDefKey(header);
-      return React.createElement(ATableHeaderCell, { headerHeight, stickyOffset: stickyOffsets[index + 1], key }, toIntlLabel(header.label));
+      return React.createElement(
+        ATableHeaderCell,
+        { headerHeight, stickyOffset: stickyOffsets[index + 1], key },
+        React.createElement(LabelLike, { "$wrapped": $wrapped, label: header.label })
+      );
     }),
     tailGrabberAppended ? React.createElement(ATableHeaderCell, { headerHeight, isGrabber: true, stickyOffset: stickyOffsets[stickyOffsets.length - 2] }) : null,
     React.createElement(ATableHeaderCell, { headerHeight, isGrabber: true, stickyOffset: stickyOffsets[stickyOffsets.length - 1] })
@@ -7380,7 +7402,8 @@ const computeColumnsWidth = (props) => {
   };
 };
 const TableContent = (props) => {
-  const { $pp, pageable, $wrapped: { $root, $model, $p2r }, headerHeight, maxBodyHeight, children } = props;
+  const { $pp, pageable, $wrapped, headerHeight, maxBodyHeight, children } = props;
+  const { $root, $model, $p2r } = $wrapped;
   const globalHandlers = useGlobalHandlers();
   const { fire: fireWrapper } = useWrapperEventBus();
   const { on, off, fire } = useTableEventBus();
@@ -7451,7 +7474,7 @@ const TableContent = (props) => {
   return React.createElement(
     ATableContent,
     { headerHeight, maxBodyHeight, columnsWidth },
-    React.createElement(TableHeader, { headerHeight, headers: props.headers, stickyOffsets, tailGrabberAppended }),
+    React.createElement(TableHeader, { headerHeight, headers: props.headers, stickyOffsets, tailGrabberAppended, "$wrapped": $wrapped }),
     rows
   );
 };

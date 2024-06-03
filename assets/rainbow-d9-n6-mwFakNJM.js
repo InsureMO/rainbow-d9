@@ -4,13 +4,13 @@ var __publicField = (obj, key, value) => {
   __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
   return value;
 };
-import { a as color, P as jsYaml } from "./vendor-Nl1v6r4d.js";
-import { f as CssConstants, C as CssVars, D as DOM_KEY_WIDGET, g as UnwrappedCaption, b as useGlobalHandlers, I as IntlLabel } from "./rainbow-d9-n2-mkToKo-P.js";
-import { q as qe, r as reactExports, R as React, D as DiagramModel, C as CanvasWidget, N as NodeModel, c as createEngine, P as PortModel, a as PortModelAlignment, b as DefaultLinkModel, A as AbstractModelFactory, d as AbstractReactFactory, e as PortWidget } from "./react-base--CcilxRK.js";
-import { V as VUtils, r as registerWidget, g as useCreateEventBus, M as MUtils, P as PPUtils } from "./rainbow-d9-n1-FREaDOxB.js";
-import { i as index$1 } from "./rainbow-d9-n3-N0MRE5mr.js";
-import { M as Markdown } from "./react-markdown-n1Yzdqaz.js";
-import { r as remarkGfm } from "./remark-XM-8msL5.js";
+import { a as color, P as jsYaml } from "./vendor-3IExBymI.js";
+import { f as CssConstants, C as CssVars, D as DOM_KEY_WIDGET, g as UnwrappedCaption, b as useGlobalHandlers, I as IntlLabel } from "./rainbow-d9-n2-BKFr4tTS.js";
+import { q as qe, r as reactExports, R as React, D as DiagramModel, C as CanvasWidget, N as NodeModel, c as createEngine, P as PortModel, a as PortModelAlignment, b as DefaultLinkModel, A as AbstractModelFactory, d as AbstractReactFactory, e as PortWidget } from "./react-base-zFvZsVyx.js";
+import { V as VUtils, r as registerWidget, g as useCreateEventBus, M as MUtils, P as PPUtils } from "./rainbow-d9-n1-_CP42cLV.js";
+import { i as index$1 } from "./rainbow-d9-n3-5zEHsxR5.js";
+import { M as Markdown } from "./react-markdown-CrF-cNtn.js";
+import { r as remarkGfm } from "./remark-7_ovcD9t.js";
 const EDITOR_BACKGROUND_BLOCK_SIZE = "var(--o23-playground-editor-background-block-size, 48px)";
 const EDITOR_BACKGROUND_LINE_COLOR = `var(--o23-playground-editor-background-line-color, ${color(CssConstants.PRIMARY_COLOR).alpha(0.08)})`;
 const NODE_START_COLOR = "#ffb56b";
@@ -26,6 +26,8 @@ const PlaygroundCssVars = {
   EDITOR_BACKGROUND_SIZE: `var(--o23-playground-editor-background-size, ${EDITOR_BACKGROUND_BLOCK_SIZE} ${EDITOR_BACKGROUND_BLOCK_SIZE})`,
   EDITOR_BACKGROUND_POSITION: "var(--o23-playground-editor-background-position, -1px -1px)",
   EDITOR_ERROR_COLOR: `var(--o23-playground-editor-error-color, ${CssVars.DANGER_COLOR})`,
+  MARKDOWN_COLOR: `var(--o23-playground-markdown-color, ${CssVars.FONT_COLOR})`,
+  MARKDOWN_BACKGROUND_COLOR: `var(--o23-playground-markdown-background-color, ${CssVars.BACKGROUND_COLOR})`,
   EDIT_DIALOG_BACKDROP_COLOR: "var(--o23-playground-dialog-backdrop-color, rgba(71, 69, 84, 0.75))",
   EDIT_DIALOG_Z_INDEX: "var(--o23-playground-dialog-z-index, 10000)",
   EDIT_DIALOG_MARGIN_TOP: "var(--o23-playground-dialog-margin-top, 32px)",
@@ -34,6 +36,7 @@ const PlaygroundCssVars = {
   EDIT_DIALOG_HEIGHT: "var(--o23-playground-dialog-height, calc(100vh - 64px))",
   EDIT_DIALOG_BACKGROUND_COLOR: `var(--o23-playground-dialog-background-color, ${CssVars.BACKGROUND_COLOR})`,
   EDIT_DIALOG_PADDING: "var(--o23-playground-dialog-padding, 16px)",
+  EDIT_DIALOG_PADDING_LEFT: "var(--o23-playground-dialog-padding-left, 16px)",
   EDIT_DIALOG_SHADOW: `var(--o23-playground-dialog-shadow, ${CssVars.DIALOG_SHADOW})`,
   EDIT_DIALOG_BORDER_RADIUS: "var(--o23-playground-dialog-border-radius, 12px)",
   EDIT_DIALOG_BORDER: `var(--o23-playground-dialog-border, ${CssVars.BORDER})`,
@@ -47,10 +50,17 @@ const PlaygroundCssVars = {
   EDIT_DIALOG_PART_HEADER_HEIGHT: "var(--o23-playground-dialog-part-header-height, 32px)",
   EDIT_DIALOG_PART_TITLE_FONT_SIZE: "var(--o23-playground-dialog-part-title-font-size, 16px)",
   EDIT_DIALOG_PART_TITLE_FONT_WEIGHT: "var(--o23-playground-dialog-part-title-font-weight, 600)",
-  EDIT_DIALOG_PART_TITLE_COLOR: `var(--o23-playground-dialog-part-title-color, rgb(184, 184, 184))`,
-  EDIT_DIALOG_LEFT_PART_OPEN_HANDLE_LEFT: "var(--o23-playground-dialog-left-part-open-handle-left, -16px)",
-  EDIT_DIALOG_LEFT_PART_OPEN_HANDLE_WIDTH: "var(--o23-playground-dialog-left-part-open-handle-width, 64px)",
-  EDIT_DIALOG_LEFT_PART_OPEN_HANDLE_COLOR: `var(--o23-playground-dialog-left-part-open-handle-color, ${CssVars.PRIMARY_COLOR})`,
+  EDIT_DIALOG_PART_BODY_MARGIN: `var(--o23-playground-dialog-part-body-margin, 0 0 0 -16px)`,
+  EDIT_DIALOG_PART_BODY_PADDING: "var(--o23-playground-dialog-part-body-padding, 0 0 0 16px)",
+  EDIT_DIALOG_HELP_DOC_TITLE_COLOR: `var(--o23-playground-dialog-part-title-color, rgb(184, 184, 184))`,
+  EDIT_DIALOG_HELP_DOC_OPEN_HANDLE_LEFT: "var(--o23-playground-dialog-help-doc-open-handle-left, 0)",
+  EDIT_DIALOG_HELP_DOC_OPEN_HANDLE_WIDTH: "var(--o23-playground-dialog-help-doc-open-handle-width, 64px)",
+  EDIT_DIALOG_HELP_DOC_OPEN_HANDLE_COLOR: `var(--o23-playground-dialog-help-doc-open-handle-color, ${CssVars.PRIMARY_COLOR})`,
+  EDIT_DIALOG_HELP_DOC_MARGIN: "var(--o23-playground-dialog-help-doc-margin, 0 0 0 -16px)",
+  EDIT_DIALOG_HELP_DOC_PADDING: "var(--o23-playground-dialog-help-doc-padding, 0 16px 0 16px)",
+  EDIT_DIALOG_HELP_DOC_COLLAPSED_WIDTH: "var(--o23-playground-dialog-help-doc-collapsed-width, 64px)",
+  EDIT_DIALOG_HELP_DOC_GUTTER_SIZE: "var(--o23-playground-dialog-help-doc-gutter-size, 16px)",
+  EDIT_DIALOG_NAVIGATOR_WIDTH: "var(--o23-playground-dialog-navigator-width, 400px)",
   NODE_BORDER_RADIUS: "var(--o23-playground-node-border-radius, 8px)",
   NODE_BACKGROUND: `var(--o23-playground-node-background, ${CssVars.BACKGROUND_COLOR})`,
   NODE_TITLE_PADDING: "var(--o23-playground-node-title-padding, 0 10px)",
@@ -460,6 +470,7 @@ const isPipelineDef = (def) => def.type === "pipeline";
 var PlaygroundEventTypes;
 (function(PlaygroundEventTypes2) {
   PlaygroundEventTypes2["CONTENT_CHANGED"] = "content-changed";
+  PlaygroundEventTypes2["INIT_HELP_DOC_WIDTH"] = "init-help-doc-width";
   PlaygroundEventTypes2["SHOW_EDIT_DIALOG"] = "show-edit-dialog";
   PlaygroundEventTypes2["HIDE_EDIT_DIALOG"] = "hide-edit-dialog";
 })(PlaygroundEventTypes || (PlaygroundEventTypes = {}));
@@ -510,11 +521,19 @@ const EditDialogLayoutControllerHandle = qe.div.attrs(({ opened }) => {
     position: absolute;
 
     &[data-opened=true] + div[data-w=o23-playground-edit-dialog-content] {
-        grid-template-columns: calc((100% - 400px) / 2 - 64px) 400px 1fr;
+        grid-template-columns: calc((100% - ${PlaygroundCssVars.EDIT_DIALOG_NAVIGATOR_WIDTH}) / 2 - ${PlaygroundCssVars.EDIT_DIALOG_HELP_DOC_COLLAPSED_WIDTH}) ${PlaygroundCssVars.EDIT_DIALOG_NAVIGATOR_WIDTH} 1fr;
+
+        > div[data-w=o23-playground-edit-dialog-help-doc] > div[data-w=o23-playground-edit-dialog-part-content] > div[data-w=o23-playground-edit-dialog-part-header] > div[data-w=o23-playground-edit-dialog-part-title] {
+            color: unset;
+        }
     }
 
     &[data-opened=false] + div[data-w=o23-playground-edit-dialog-content] {
-        grid-template-columns: 64px 400px 1fr;
+        grid-template-columns: ${PlaygroundCssVars.EDIT_DIALOG_HELP_DOC_COLLAPSED_WIDTH} ${PlaygroundCssVars.EDIT_DIALOG_NAVIGATOR_WIDTH} 1fr;
+
+        > div[data-w=o23-playground-edit-dialog-help-doc] > div[data-w=o23-playground-edit-dialog-part-content] > div[data-w=o23-playground-edit-dialog-part-header] > div[data-w=o23-playground-edit-dialog-part-title] {
+            color: ${PlaygroundCssVars.EDIT_DIALOG_HELP_DOC_TITLE_COLOR};
+        }
     }
 `;
 const EditDialogContentContainer = qe.div.attrs({ [DOM_KEY_WIDGET]: "o23-playground-edit-dialog-content" })`
@@ -523,6 +542,9 @@ const EditDialogContentContainer = qe.div.attrs({ [DOM_KEY_WIDGET]: "o23-playgro
     height: 100%;
     width: 100%;
     transition: grid-template-columns ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION};
+`;
+const EditDialogContentInitializer = qe.div.attrs({ [DOM_KEY_WIDGET]: "o23-playground-edit-dialog-content-initializer" })`
+    display: none;
 `;
 const EditorDialogCloser = qe.div.attrs({ [DOM_KEY_WIDGET]: "o23-playground-edit-dialog-closer" })`
     display: flex;
@@ -542,7 +564,7 @@ const EditorDialogCloser = qe.div.attrs({ [DOM_KEY_WIDGET]: "o23-playground-edit
         margin-right: 4px;
     }
 `;
-const EditDialogLeftPart = qe.div.attrs({ [DOM_KEY_WIDGET]: "o23-playground-edit-dialog-left" })`
+const EditDialogHelpDocContainer = qe.div.attrs({ [DOM_KEY_WIDGET]: "o23-playground-edit-dialog-help-doc" })`
     display: flex;
     position: relative;
     align-self: stretch;
@@ -554,7 +576,7 @@ const EditDialogLeftPart = qe.div.attrs({ [DOM_KEY_WIDGET]: "o23-playground-edit
     box-shadow: ${PlaygroundCssVars.EDIT_DIALOG_SHADOW};
     overflow: hidden;
 `;
-const EditDialogCenterPart = qe.div.attrs({ [DOM_KEY_WIDGET]: "o23-playground-edit-dialog-center" })`
+const EditDialogNavigatorContainer = qe.div.attrs({ [DOM_KEY_WIDGET]: "o23-playground-edit-dialog-navigator" })`
     display: flex;
     position: relative;
     grid-column: 2;
@@ -567,7 +589,7 @@ const EditDialogCenterPart = qe.div.attrs({ [DOM_KEY_WIDGET]: "o23-playground-ed
     border: ${PlaygroundCssVars.EDIT_DIALOG_BORDER};
     overflow: hidden;
 `;
-const EditDialogRightPart = qe.div.attrs({ [DOM_KEY_WIDGET]: "o23-playground-edit-dialog-right" })`
+const EditDialogSpecificDetailsContainer = qe.div.attrs({ [DOM_KEY_WIDGET]: "o23-playground-edit-dialog-specific-details" })`
     display: flex;
     position: relative;
     grid-column: 3;
@@ -592,6 +614,7 @@ const EditDialogPartHeader = qe.div.attrs({ [DOM_KEY_WIDGET]: "o23-playground-ed
     position: relative;
     align-items: center;
     min-height: ${PlaygroundCssVars.EDIT_DIALOG_PART_HEADER_HEIGHT};
+    margin-bottom: calc(${PlaygroundCssVars.EDIT_DIALOG_PART_HEADER_HEIGHT} / 4);
 `;
 const EditDialogPartTitle = qe.div.attrs({ [DOM_KEY_WIDGET]: "o23-playground-edit-dialog-part-title" })`
     display: flex;
@@ -600,23 +623,25 @@ const EditDialogPartTitle = qe.div.attrs({ [DOM_KEY_WIDGET]: "o23-playground-edi
     flex-grow: 1;
     font-size: ${PlaygroundCssVars.EDIT_DIALOG_PART_TITLE_FONT_SIZE};
     font-weight: ${PlaygroundCssVars.EDIT_DIALOG_PART_TITLE_FONT_WEIGHT};
-    color: ${PlaygroundCssVars.EDIT_DIALOG_PART_TITLE_COLOR};
     white-space: nowrap;
+    transition: color ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION};
 `;
 const EditDialogPartBody = qe.div.attrs({ [DOM_KEY_WIDGET]: "o23-playground-edit-dialog-part-body" })`
     display: flex;
     position: relative;
     flex-grow: 1;
+    margin: ${PlaygroundCssVars.EDIT_DIALOG_PART_BODY_MARGIN};
+    padding: ${PlaygroundCssVars.EDIT_DIALOG_PART_BODY_PADDING};
     overflow: hidden;
 `;
-const EditDialogLeftPartOpenHandle = qe.div.attrs(({ opened }) => {
+const EditDialogHelpDocOpenHandle = qe.div.attrs(({ opened }) => {
   return {
-    [DOM_KEY_WIDGET]: "o23-playground-edit-dialog-left-open-handle",
+    [DOM_KEY_WIDGET]: "o23-playground-edit-dialog-help-doc-open-handle",
     "data-opened": opened,
     style: {
       "--opacity": opened ? 0 : void 0,
       "--pointer-events": opened ? "none" : "auto",
-      "--left": opened ? `calc(100% - ${PlaygroundCssVars.EDIT_DIALOG_LEFT_PART_OPEN_HANDLE_WIDTH})` : PlaygroundCssVars.EDIT_DIALOG_LEFT_PART_OPEN_HANDLE_LEFT
+      "--left": opened ? `calc(100% - ${PlaygroundCssVars.EDIT_DIALOG_HELP_DOC_OPEN_HANDLE_WIDTH})` : PlaygroundCssVars.EDIT_DIALOG_HELP_DOC_OPEN_HANDLE_LEFT
     }
   };
 })`
@@ -625,7 +650,7 @@ const EditDialogLeftPartOpenHandle = qe.div.attrs(({ opened }) => {
     align-items: center;
     top: 0;
     left: var(--left);
-    width: ${PlaygroundCssVars.EDIT_DIALOG_LEFT_PART_OPEN_HANDLE_WIDTH};
+    width: ${PlaygroundCssVars.EDIT_DIALOG_HELP_DOC_OPEN_HANDLE_WIDTH};
     height: 100%;
     opacity: var(--opacity);
     pointer-events: var(--pointer-events);
@@ -643,13 +668,13 @@ const EditDialogLeftPartOpenHandle = qe.div.attrs(({ opened }) => {
     }
 
     > svg {
-        color: ${PlaygroundCssVars.EDIT_DIALOG_LEFT_PART_OPEN_HANDLE_COLOR};
+        color: ${PlaygroundCssVars.EDIT_DIALOG_HELP_DOC_OPEN_HANDLE_COLOR};
         opacity: 0.7;
     }
 `;
-const EditDialogLeftPartCloseHandle = qe.div.attrs(({ opened }) => {
+const EditDialogHelpDocCloseHandle = qe.div.attrs(({ opened }) => {
   return {
-    [DOM_KEY_WIDGET]: "o23-playground-edit-dialog-left-close-handle",
+    [DOM_KEY_WIDGET]: "o23-playground-edit-dialog-help-doc-close-handle",
     style: {
       "--opacity": opened ? void 0 : 0,
       "--pointer-events": opened ? "auto" : "none"
@@ -668,7 +693,7 @@ const EditDialogLeftPartCloseHandle = qe.div.attrs(({ opened }) => {
 
     &:hover {
         > svg {
-            color: ${PlaygroundCssVars.EDIT_DIALOG_LEFT_PART_OPEN_HANDLE_COLOR};
+            color: ${PlaygroundCssVars.EDIT_DIALOG_HELP_DOC_OPEN_HANDLE_COLOR};
         }
     }
 
@@ -677,32 +702,50 @@ const EditDialogLeftPartCloseHandle = qe.div.attrs(({ opened }) => {
         transition: color ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION};
     }
 `;
-const HelpDocContainer = qe.div.attrs({
-  [DOM_KEY_WIDGET]: "o23-playground-edit-dialog-help-doc",
-  "data-v-scroll": "",
-  "data-h-scroll": ""
+const HelpDocContainer = qe.div.attrs(({ width }) => {
+  return {
+    [DOM_KEY_WIDGET]: "o23-playground-edit-dialog-help-doc",
+    "data-v-scroll": "",
+    "data-h-scroll": "",
+    style: {
+      "--min-width": width ? `calc((${width}px - ${PlaygroundCssVars.EDIT_DIALOG_NAVIGATOR_WIDTH}) / 2 - ${PlaygroundCssVars.EDIT_DIALOG_HELP_DOC_COLLAPSED_WIDTH} - ${PlaygroundCssVars.EDIT_DIALOG_HELP_DOC_GUTTER_SIZE})` : void 0
+    }
+  };
 })`
     display: block;
     position: relative;
     flex-grow: 1;
+    margin: ${PlaygroundCssVars.EDIT_DIALOG_HELP_DOC_MARGIN};
+    padding: ${PlaygroundCssVars.EDIT_DIALOG_HELP_DOC_PADDING};
+    min-width: var(--min-width);
     overflow: auto;
     transition: opacity ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION}, filter ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION};
+
+    > div.markdown-body {
+        color: ${PlaygroundCssVars.MARKDOWN_COLOR};
+        background-color: ${PlaygroundCssVars.MARKDOWN_BACKGROUND_COLOR};
+
+        h1 {
+            font-size: 1.5em;
+        }
+
+        h2 {
+            font-size: 1.35em;
+        }
+
+        h3 {
+            font-size: 1.2em;
+        }
+
+        h4 {
+            font-size: 1.1em;
+        }
+
+        h5, h6 {
+            font-size: 1em;
+        }
+    }
 `;
-const DialogCenterPart = () => {
-  return React.createElement(
-    EditDialogCenterPart,
-    null,
-    React.createElement(
-      EditDialogPartContent,
-      null,
-      React.createElement(
-        EditDialogPartHeader,
-        null,
-        React.createElement(EditDialogPartTitle, null)
-      )
-    )
-  );
-};
 var EditDialogEventTypes;
 (function(EditDialogEventTypes2) {
   EditDialogEventTypes2["OPEN_HELP_DESK"] = "open-help-desk";
@@ -757,7 +800,7 @@ const CloseHandle = () => {
     fire(EditDialogEventTypes.CLOSE_HELP_DESK);
   };
   return React.createElement(
-    EditDialogLeftPartCloseHandle,
+    EditDialogHelpDocCloseHandle,
     { opened, onClick: onCloseHelpDesk },
     React.createElement(ArrowLeft, null)
   );
@@ -773,15 +816,26 @@ const OpenHandle = () => {
     fire(EditDialogEventTypes.OPEN_HELP_DESK);
   };
   return React.createElement(
-    EditDialogLeftPartOpenHandle,
+    EditDialogHelpDocOpenHandle,
     { opened, onClick: onOpenHelpDesk },
     React.createElement(ArrowRight, null)
   );
 };
 const DialogHelpDesk = (props) => {
   const { helpDoc } = props;
+  const [state, setState] = reactExports.useState({});
+  const { on, off } = usePlaygroundEventBus();
+  reactExports.useEffect(() => {
+    const onInitHelpDocWidth = (width) => {
+      setState((state2) => ({ ...state2, docWidth: width }));
+    };
+    on(PlaygroundEventTypes.INIT_HELP_DOC_WIDTH, onInitHelpDocWidth);
+    return () => {
+      off(PlaygroundEventTypes.INIT_HELP_DOC_WIDTH, onInitHelpDocWidth);
+    };
+  }, [on, off]);
   return React.createElement(
-    EditDialogLeftPart,
+    EditDialogHelpDocContainer,
     null,
     React.createElement(
       EditDialogPartContent,
@@ -802,7 +856,7 @@ const DialogHelpDesk = (props) => {
         React.createElement(OpenHandle, null),
         React.createElement(
           HelpDocContainer,
-          null,
+          { width: state.docWidth },
           React.createElement(Markdown, { className: "markdown-body", remarkPlugins: [remarkGfm] }, helpDoc)
         )
       )
@@ -817,9 +871,29 @@ const LayoutController = () => {
   }, [fire, setOpened]);
   return React.createElement(EditDialogLayoutControllerHandle, { opened });
 };
-const DialogRightPart = () => {
+const DialogNavigator = (_props) => {
   return React.createElement(
-    EditDialogRightPart,
+    EditDialogNavigatorContainer,
+    null,
+    React.createElement(
+      EditDialogPartContent,
+      null,
+      React.createElement(
+        EditDialogPartHeader,
+        null,
+        React.createElement(
+          EditDialogPartTitle,
+          null,
+          React.createElement(IntlLabel, { keys: ["o23", "dialog", "navigator", "title"], value: "Configurable Elements" })
+        )
+      ),
+      React.createElement(EditDialogPartBody, null)
+    )
+  );
+};
+const DialogSpecificDetails = () => {
+  return React.createElement(
+    EditDialogSpecificDetailsContainer,
     null,
     React.createElement(
       EditDialogPartContent,
@@ -836,11 +910,25 @@ const DialogRightPart = () => {
     )
   );
 };
-const DialogContent = (props) => {
-  const { helpDoc, confirm } = props;
+const DialogContentInitializer = () => {
+  const ref = reactExports.useRef(null);
   const { fire } = usePlaygroundEventBus();
+  reactExports.useEffect(() => {
+    if (ref.current == null) {
+      return;
+    }
+    const container = ref.current.previousElementSibling;
+    const { width } = container.getBoundingClientRect();
+    fire(PlaygroundEventTypes.INIT_HELP_DOC_WIDTH, width);
+  }, [fire]);
+  return React.createElement(EditDialogContentInitializer, { ref });
+};
+const DialogContent = (props) => {
+  const { helpDoc, elements, prepare, confirm } = props;
+  const { fire } = usePlaygroundEventBus();
+  const [state] = reactExports.useState({ model: prepare() });
   const onBackClicked = () => {
-    confirm();
+    confirm(state.model);
     fire(PlaygroundEventTypes.HIDE_EDIT_DIALOG);
   };
   return React.createElement(
@@ -858,9 +946,10 @@ const DialogContent = (props) => {
         React.createElement(IntlLabel, { keys: ["o23", "dialog", "close"], value: "Back to canvas" })
       ),
       React.createElement(DialogHelpDesk, { helpDoc }),
-      React.createElement(DialogRightPart, null),
-      React.createElement(DialogCenterPart, null)
-    )
+      React.createElement(DialogSpecificDetails, null),
+      React.createElement(DialogNavigator, { elements, model: state.model })
+    ),
+    React.createElement(DialogContentInitializer, null)
   );
 };
 const EditDialog = () => {
@@ -903,7 +992,7 @@ const EditDialog = () => {
     React.createElement(EditDialogWrapper, null, state.content)
   );
 };
-const markdown = "# Overview\n\nThere are 3 types of pipelines in the system:\n\n- **Data Pipeline**: This pipeline is used to process data from the source to the destination. It is used to transform the data from one\n  format to another format. It is used to clean the data and to perform some operations on the data. It is used to load the data into the\n  destination.\n- **Model Pipeline**: This pipeline is used to train the model on the data. It is used to test the model on the data. It is used to evaluate\n  the model on the data. It is used to deploy the model on the data.\n- **Deployment Pipeline**: This pipeline is used to deploy the model on the data. It is used to monitor the model on the data. It is used to\n  retrain the model on the data. It is used to update the model on the data.\n\n# Data Pipeline\n\nThe data pipeline is used to process data from the source to the destination. It is used to transform the data from one format to another\nformat. It is used to clean the data and to perform some operations on the data. It is used to load the data into the destination.\n\n# Model Pipeline\n\nThe model pipeline is used to train the model on the data. It is used to test the model on the data. It is used to evaluate the model on the\ndata. It is used to deploy the model on the data.\n\n# Deployment Pipeline\n\nThe deployment pipeline is used to deploy the model on the data. It is used to monitor the model on the data. It is used to retrain the\nmodel on the data. It is used to update the model on the data.\n";
+const markdown = "# Overview\n\n## headline 2\n\n### headline 3\n\n#### headline 4\n\n##### headline 5\n\n###### headline 6 [](#headline-6)\n\nThere are 3 types of pipelines in the system:\n\n- **Data Pipeline**: This pipeline is used to process data from the source to the destination. It is used to transform the data from one\n  format to another format. It is used to clean the data and to perform some operations on the data. It is used to load the data into the\n  destination.\n- **Model Pipeline**: This pipeline is used to train the model on the data. It is used to test the model on the data. It is used to evaluate\n  the model on the data. It is used to deploy the model on the data.\n- **Deployment Pipeline**: This pipeline is used to deploy the model on the data. It is used to monitor the model on the data. It is used to\n  retrain the model on the data. It is used to update the model on the data.\n\n# Data Pipeline\n\nThe data pipeline is used to process data from the source to the destination. It is used to transform the data from one format to another\nformat. It is used to clean the data and to perform some operations on the data. It is used to load the data into the destination.\n\n# Model Pipeline\n\nThe model pipeline is used to train the model on the data. It is used to test the model on the data. It is used to evaluate the model on the\ndata. It is used to deploy the model on the data.\n\n# Deployment Pipeline\n\nThe deployment pipeline is used to deploy the model on the data. It is used to monitor the model on the data. It is used to retrain the\nmodel on the data. It is used to update the model on the data.\n";
 const HelpDocs = {
   pipeline: markdown
 };
@@ -959,7 +1048,7 @@ const RestApiVariablePortContainer = qe.div.attrs({ [DOM_KEY_WIDGET]: "o23-playg
     }
 `;
 const RestApiVariablePortWidget = (props) => {
-  const { label, required, defined, count, all, allAsBoolean = false } = props;
+  const { label, required, defined, count, all, allAsBoolean = false, allAsGiven } = props;
   let icon;
   if (defined) {
     icon = React.createElement(PortChecked, null);
@@ -986,6 +1075,8 @@ const RestApiVariablePortWidget = (props) => {
           React.createElement(IntlLabel, { keys: ["o23", "rest-api", "variable", "false"], value: "N" })
         );
       }
+    } else if (allAsGiven != null) {
+      badge = React.createElement("span", { "data-role": "all" }, allAsGiven);
     } else if (all === true) {
       badge = React.createElement(
         "span",
@@ -1029,25 +1120,16 @@ const StartNodeTitle = qe(NodeTitle).attrs({
     "--font-size": PlaygroundCssVars.NODE_START_TITLE_FONT_SIZE,
     "--font-weight": PlaygroundCssVars.NODE_START_TITLE_FONT_WEIGHT
   }
-})`
-    &[data-role=route] {
-        text-decoration: ${PlaygroundCssVars.NODE_START_SECOND_TITLE_DECORATION};
-    }
-`;
+})``;
 const StartNodeSecondTitle = qe(NodeSecondTitle).attrs({
   [DOM_KEY_WIDGET]: "o23-playground-start-node-title",
   style: {
     "--color": PlaygroundCssVars.NODE_START_TITLE_COLOR,
     "--font-size": PlaygroundCssVars.NODE_START_SECOND_TITLE_FONT_SIZE,
     "--font-weight": PlaygroundCssVars.NODE_START_SECOND_TITLE_FONT_WEIGHT,
-    "--text-decoration": PlaygroundCssVars.NODE_START_SECOND_TITLE_DECORATION
+    "--text-decoration": "unset"
   }
-})`
-    &[data-role=method] {
-        text-decoration: unset;
-        text-transform: uppercase;
-    }
-`;
+})``;
 const StartNodeBody = qe(NodeBody).attrs({
   [DOM_KEY_WIDGET]: "o23-playground-start-node-body",
   style: {
@@ -1055,6 +1137,12 @@ const StartNodeBody = qe(NodeBody).attrs({
     "--padding": PlaygroundCssVars.NODE_START_BODY_PADDING
   }
 })``;
+const RestApiMethodPortWidget = (props) => {
+  const { def } = props;
+  const { method } = def;
+  const all = VUtils.isNotBlank(method);
+  return React.createElement(RestApiVariablePortWidget, { label: "Method", required: false, defined: all != null, all, allAsBoolean: false, allAsGiven: `${method ?? ""}`.toUpperCase().trim() });
+};
 const RestApiHeadersPortWidget = (props) => {
   const { def } = props;
   const { headers } = def;
@@ -1132,63 +1220,20 @@ const StartNodeWidget = (props) => {
   const { node, engine } = props;
   const { fire } = usePlaygroundEventBus();
   const def = node.def;
-  const { isApi, firstTitle, firstTitleRole, showRouteLack, secondTitle, secondTitleRole, showMethodLack } = (() => {
+  const { isApi, showRouteLack, secondTitle, secondTitleRole } = (() => {
     if (isPipelineDef(def)) {
       if (VUtils.isNotBlank(def.route)) {
-        if (VUtils.isNotBlank(def.method)) {
-          return {
-            isApi: true,
-            firstTitle: def.route,
-            firstTitleRole: "route",
-            showRouteLack: false,
-            secondTitle: `[${def.method.trim()}]`,
-            secondTitleRole: "method",
-            showMethodLack: false
-          };
-        } else {
-          return {
-            isApi: true,
-            firstTitle: def.route,
-            firstTitleRole: "route",
-            showRouteLack: false,
-            secondTitle: void 0,
-            secondTitleRole: void 0,
-            showMethodLack: true
-          };
-        }
+        return {
+          isApi: true,
+          showRouteLack: false,
+          secondTitle: `[ ${def.route.trim()} ]`,
+          secondTitleRole: "route"
+        };
       } else {
-        if (VUtils.isNotBlank(def.method)) {
-          return {
-            isApi: true,
-            firstTitle: React.createElement(IntlLabel, { keys: ["o23", "node", "start", "rest"], value: "Rest API" }),
-            firstTitleRole: void 0,
-            showRouteLack: true,
-            secondTitle: `[${def.method.trim()}]`,
-            secondTitleRole: "method",
-            showMethodLack: false
-          };
-        } else {
-          return {
-            isApi: true,
-            firstTitle: React.createElement(IntlLabel, { keys: ["o23", "node", "start", "rest"], value: "Rest API" }),
-            firstTitleRole: void 0,
-            showRouteLack: true,
-            secondTitle: void 0,
-            secondTitleRole: void 0,
-            showMethodLack: true
-          };
-        }
+        return { isApi: true, showRouteLack: true, secondTitle: void 0, secondTitleRole: void 0 };
       }
     } else {
-      return {
-        isApi: false,
-        firstTitle: React.createElement(IntlLabel, { keys: ["o23", "node", "start", "standard"], value: "Start" }),
-        firstTitleRole: void 0,
-        showRouteLack: false,
-        secondTitle: React.createElement(IntlLabel, { keys: ["o23", "pipeline", "type", def.type], value: def.type.replace("-", "") }),
-        secondTitleRole: void 0,
-        showMethodLack: false
-      };
+      return { isApi: false, showRouteLack: false, secondTitle: void 0, secondTitleRole: void 0 };
     }
   })();
   const onConfirm = () => {
@@ -1202,7 +1247,7 @@ const StartNodeWidget = (props) => {
     React.createElement(
       StartNodeHeader,
       null,
-      React.createElement(StartNodeTitle, { "data-role": firstTitleRole }, firstTitle),
+      React.createElement(StartNodeTitle, null, VUtils.isNotBlank(def.code) ? def.code.trim() : React.createElement(IntlLabel, { keys: ["o23", "rest-api", "code", "undefined"], value: "No code defined" })),
       React.createElement(StartNodeSecondTitle, { "data-role": secondTitleRole }, secondTitle)
     ),
     React.createElement(
@@ -1212,7 +1257,7 @@ const StartNodeWidget = (props) => {
         React.Fragment,
         null,
         showRouteLack ? React.createElement(RestApiVariablePortWidget, { label: "Route", required: true, defined: false }) : null,
-        showMethodLack ? React.createElement(RestApiVariablePortWidget, { label: "Method", required: true, defined: false }) : null,
+        React.createElement(RestApiMethodPortWidget, { def }),
         React.createElement(RestApiHeadersPortWidget, { def }),
         React.createElement(RestApiPathParamsPortWidget, { def }),
         React.createElement(RestApiQueryParamsPortWidget, { def }),

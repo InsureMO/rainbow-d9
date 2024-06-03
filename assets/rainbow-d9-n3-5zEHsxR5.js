@@ -4,10 +4,10 @@ var __publicField = (obj, key, value) => {
   __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
   return value;
 };
-import { c as createLogger, N as NUtils, V as VUtils, k as MonitorNodeAttributes, l as Reaction, E as ExternalDefIndicator, P as PPUtils } from "./rainbow-d9-n1-FREaDOxB.js";
-import { O as OptionItemSort, R as REACTION_REFRESH_OPTIONS, c as GlobalEventPrefix } from "./rainbow-d9-n2-mkToKo-P.js";
-import { f as fromMarkdown, g as gfmTableFromMarkdown, a as gfmStrikethroughFromMarkdown, b as gfmFootnoteFromMarkdown, c as gfmTaskListItemFromMarkdown, d as frontmatterFromMarkdown } from "./mdast-wzkm4bMq.js";
-import { g as gfmTable, h as gfmStrikethrough, i as gfmFootnote, j as gfmTaskListItem, k as frontmatter } from "./micromark-c1Knpib2.js";
+import { c as createLogger, N as NUtils, V as VUtils, k as MonitorNodeAttributes, l as Reaction, E as ExternalDefIndicator, P as PPUtils } from "./rainbow-d9-n1-_CP42cLV.js";
+import { O as OptionItemSort, R as REACTION_REFRESH_OPTIONS, c as GlobalEventPrefix } from "./rainbow-d9-n2-BKFr4tTS.js";
+import { f as fromMarkdown, g as gfmTableFromMarkdown, a as gfmStrikethroughFromMarkdown, b as gfmFootnoteFromMarkdown, c as gfmTaskListItemFromMarkdown, d as frontmatterFromMarkdown } from "./mdast-DumspLfa.js";
+import { g as gfmTable, h as gfmStrikethrough, i as gfmFootnote, j as gfmTaskListItem, k as frontmatter } from "./micromark-eeEvOLBG.js";
 const AsyncFunction = Object.getPrototypeOf(async function() {
 }).constructor;
 var ParsedNodeType;
@@ -2915,7 +2915,7 @@ const _WidgetTranslator = class _WidgetTranslator extends AbstractTranslator {
     if (children != null && children.length !== 0) {
       def.$nodes = children;
     }
-    def = translator == null ? void 0 : translator.postWork(def);
+    def = translator == null ? void 0 : translator.postWork(def, { translator: this, parseOptions });
     return { node: def, success: true };
   }
   doTranslate(node, parseOptions) {
@@ -2991,7 +2991,7 @@ class SpecificWidgetTranslator {
   getVisibilityHandlerDetectives() {
     return [VisibilityUtils.DETECT_VISIBILITY];
   }
-  postWork(def) {
+  postWork(def, _supplementary) {
     return def;
   }
 }
@@ -3989,10 +3989,14 @@ const N2TableHeadersBuild = {
         if (pair.children == null || pair.children.length === 0 || pair.children[0].type !== ParsedNodeType.LIST) {
           return null;
         }
-        const parsed = (pair.children[0].children ?? []).filter(SemanticUtils.isAttributePairListItem).reduce((attrs, { attributeName: attributeName2, attributeValue: attributeValue2 }) => {
+        const parsed = (pair.children[0].children ?? []).filter(SemanticUtils.isAttributePairListItem).reduce((attrs, { attributeName: attributeName2, attributeValue: attributeValue2, children }) => {
           const name = attributeName2.toLowerCase().trim();
           if (name === "label") {
-            attrs.label = attributeValue2.trim();
+            if (children != null && children.length !== 0) {
+              attrs.label = { value: attributeValue2.trim(), children, $pending: true };
+            } else {
+              attrs.label = attributeValue2.trim();
+            }
           } else if (name === "width") {
             const value = attributeValue2.trim();
             const positive = VUtils.isPositive(value);
@@ -4051,11 +4055,42 @@ class N2TableTranslator extends SpecificArrayWidgetTranslator {
       N2TableInitExpandedBuild
     ];
   }
-  postWork(def) {
-    var _a;
+  isPendingHeaderLabel(label) {
+    return (label == null ? void 0 : label.$pending) === true;
+  }
+  postWork(def, supplementary) {
+    var _a, _b;
     const defs = def;
+    const { translator, parseOptions } = supplementary;
+    defs.headers = (_a = defs.headers) == null ? void 0 : _a.map((header) => {
+      if (this.isPendingHeaderLabel(header.label)) {
+        const { value: attributeValue, children } = header.label;
+        const { node, success } = translator.translate({
+          type: ParsedNodeType.LIST_ITEM,
+          kind: ParsedListItemKind.WIDGET,
+          $wt: (attributeValue ?? "").trim() || "Caption",
+          children,
+          $flag: WidgetFlag.STANDARD,
+          preparsed: {
+            type: ParsedNodeType.LIST_ITEM,
+            content: {
+              type: "listItem",
+              children: (children ?? []).map((child) => child.preparsed.content)
+            },
+            children: (children ?? []).map((child) => child.preparsed)
+          }
+        }, parseOptions);
+        if (success) {
+          return { label: node, width: header.width, index: header.index };
+        } else {
+          return header;
+        }
+      } else {
+        return header;
+      }
+    });
     const { $nodes } = defs;
-    defs.rowOperators = (_a = ($nodes ?? []).find((node) => node.$wt === N2WidgetType.TABLE_ROW_OPERATORS)) == null ? void 0 : _a.$nodes;
+    defs.rowOperators = (_b = ($nodes ?? []).find((node) => node.$wt === N2WidgetType.TABLE_ROW_OPERATORS)) == null ? void 0 : _b.$nodes;
     defs.pageable = ($nodes ?? []).find((node) => node.$wt === N2WidgetType.PAGINATION);
     defs.$nodes = ($nodes ?? []).filter((node) => {
       return node.$wt !== N2WidgetType.TABLE_ROW_OPERATORS && node.$wt !== N2WidgetType.PAGINATION;
