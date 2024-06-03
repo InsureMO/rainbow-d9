@@ -1,8 +1,15 @@
 import {ArrayUsedDef, NodeDef, Undefinable} from '@rainbow-d9/n1';
 import {WidgetType} from '../../semantic';
+import {DocParseOptions} from '../../types';
 import {AttributeValueBuild, createAsyncSnippetBuild, CustomAttributeName, WidgetPropertyName} from './attribute';
 import {DisablementUtils, MonitorHandlerDetective, ReactionUtils, ValidatorUtils, VisibilityUtils} from './monitor';
 import {WidgetTranslatorRepository} from './translator-repository';
+import {WidgetTranslator} from './widget-translator';
+
+export interface PostWorkSupplementary {
+	translator: WidgetTranslator;
+	parseOptions: DocParseOptions;
+}
 
 export abstract class SpecificWidgetTranslator<T extends WidgetType> {
 	// noinspection TypeScriptAbstractClassConstructorCanBeMadeProtected
@@ -115,7 +122,8 @@ export abstract class SpecificWidgetTranslator<T extends WidgetType> {
 	/**
 	 * default do nothing, return given definition itself.
 	 */
-	public postWork<Def extends NodeDef>(def: Partial<Def>): Def {
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
+	public postWork<Def extends NodeDef>(def: Partial<Def>, _supplementary: PostWorkSupplementary): Def {
 		return def as Def;
 	}
 }

@@ -14,7 +14,11 @@
 - operatorsColumnWidth: 200
 - initExpanded: @ext.table1.initExpanded
 - headers:
-	- Column A: 300
+	- column:
+		- label: Box
+			- Caption::Column A::
+			- Caption::*::
+		- width: 300
 	- Column B: 300
 	- Column C: 500
 	- Column D: 200

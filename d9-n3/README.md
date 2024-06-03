@@ -851,6 +851,7 @@ Here is a simple example:
 
 Use `$d9n2.intl.labels` to define the internationalization string package. For example, you can add `$d9n2.intl.labels.zh` to define a
 Chinese package. After the definition is completed, use the following command to notify the language switch:
+``
 
 ```typescript
 const {fire} = useGlobalEventBus();
@@ -1536,6 +1537,8 @@ The definition of table column headers is very simple, just look at an example t
 	- positive
 	- integer
 ```
+
+> `column.label` follows the `label` default parsing behavior.
 
 ### Syntax of `omitDefaultRowOperators`, `RowOperators`
 

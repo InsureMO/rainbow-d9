@@ -1,24 +1,34 @@
 import {ContainerDef, NodeDef, Undefinable, VUtils} from '@rainbow-d9/n1';
 import {PaginationDef, TableDef, TableHeaderDef, TableRowButtonDef} from '@rainbow-d9/n2';
+import {PreparsedListItem} from '../ast';
 import {ParsedNodeType} from '../node-types';
-import {ParsedList, ParsedListItemAttributePair, SemanticUtils} from '../semantic';
+import {ParsedList, ParsedListItemAttributePair, ParsedListItemKind, SemanticUtils, WidgetFlag} from '../semantic';
 import {
 	AttributeValueBuild,
 	createSyncSnippetBuild,
 	CustomAttributeName,
+	PostWorkSupplementary,
 	SpecificArrayWidgetTranslator,
 	SpecificWidgetTranslator,
 	WidgetPropertyName
 } from '../widget';
 import {N2WidgetType} from './types';
 
-export const N2TableHeadersBuild: AttributeValueBuild<Array<TableHeaderDef>> = {
+export type PendingTableHeaderLabel = {
+	$pending: true;
+	value: string;
+	children: ParsedListItemAttributePair['children']
+}
+export type BuiltTableHeaderDef = TableHeaderDef
+	| (Omit<TableHeaderDef, 'label'> & { label: TableHeaderDef['label'] | PendingTableHeaderLabel });
+
+export const N2TableHeadersBuild: AttributeValueBuild<Array<BuiltTableHeaderDef>> = {
 	accept: (key: WidgetPropertyName) => key === 'headers',
-	build: (_value: Undefinable<string>, list: ParsedListItemAttributePair): Undefinable<Array<TableHeaderDef>> => {
+	build: (_value: Undefinable<string>, list: ParsedListItemAttributePair): Undefinable<Array<BuiltTableHeaderDef>> => {
 		if (list.children == null || list.children.length === 0 || list.children[0].type !== ParsedNodeType.LIST) {
 			return (void 0);
 		}
-		const headers: Array<TableHeaderDef> = ((list.children[0] as ParsedList).children ?? [])
+		const headers: Array<BuiltTableHeaderDef> = ((list.children[0] as ParsedList).children ?? [])
 			.filter(SemanticUtils.isAttributePairListItem)
 			.map((pair, index) => {
 				const {attributeName, attributeValue} = pair;
@@ -31,10 +41,19 @@ export const N2TableHeadersBuild: AttributeValueBuild<Array<TableHeaderDef>> = {
 					}
 					const parsed = ((pair.children[0] as ParsedList).children ?? [])
 						.filter(SemanticUtils.isAttributePairListItem)
-						.reduce((attrs, {attributeName, attributeValue}) => {
+						.reduce((attrs, {attributeName, attributeValue, children}) => {
 							const name = attributeName.toLowerCase().trim();
 							if (name === 'label') {
-								attrs.label = attributeValue.trim();
+								if (children != null && children.length !== 0) {
+									// children defined, pending parse
+									// set a pending flag, pass children and value as attributes on label
+									// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+									// @ts-ignore
+									attrs.label = {value: attributeValue.trim(), children, $pending: true};
+								} else {
+									// no child defined, use value as label
+									attrs.label = attributeValue.trim();
+								}
 							} else if (name === 'width') {
 								const value = attributeValue.trim();
 								const positive = VUtils.isPositive(value);
@@ -105,12 +124,45 @@ export class N2TableTranslator extends SpecificArrayWidgetTranslator<N2WidgetTyp
 			N2TableHeadersBuild, N2TableInitExpandedBuild];
 	}
 
-	public postWork<Def extends NodeDef>(def: Partial<Def>): Def {
-		const defs = def as unknown as ContainerDef;
+	protected isPendingHeaderLabel(label: BuiltTableHeaderDef['label']): label is PendingTableHeaderLabel {
+		return (label as PendingTableHeaderLabel)?.$pending === true;
+	}
+
+	public postWork<Def extends NodeDef>(def: Partial<Def>, supplementary: PostWorkSupplementary): Def {
+		const defs = def as unknown as TableDef & ContainerDef;
+		const {translator, parseOptions} = supplementary;
+		defs.headers = defs.headers.map(header => {
+			if (this.isPendingHeaderLabel(header.label)) {
+				const {value: attributeValue, children} = header.label;
+				const {node, success} = translator.translate({
+					type: ParsedNodeType.LIST_ITEM, kind: ParsedListItemKind.WIDGET,
+					$wt: (attributeValue ?? '').trim() || 'Caption',
+					children: children,
+					$flag: WidgetFlag.STANDARD,
+					preparsed: {
+						type: ParsedNodeType.LIST_ITEM,
+						content: {
+							type: 'listItem',
+							children: (children ?? []).map(child => child.preparsed.content)
+						},
+						// PreparsedSubordinateOfListItemNodes
+						children: (children ?? []).map(child => child.preparsed)
+					} as PreparsedListItem
+				}, parseOptions);
+				if (success) {
+					return {label: node, width: header.width, index: header.index};
+				} else {
+					return header;
+				}
+			} else {
+				return header;
+			}
+		});
+
 		const {$nodes} = defs;
-		(defs as unknown as TableDef).rowOperators = (($nodes ?? [])
+		defs.rowOperators = (($nodes ?? [])
 			.find(node => node.$wt === N2WidgetType.TABLE_ROW_OPERATORS) as ContainerDef)?.$nodes as Array<TableRowButtonDef>;
-		(defs as unknown as TableDef).pageable = (($nodes ?? [])
+		defs.pageable = (($nodes ?? [])
 			.find(node => node.$wt === N2WidgetType.PAGINATION) as ContainerDef) as PaginationDef;
 		defs.$nodes = ($nodes ?? []).filter(node => {
 			return node.$wt !== N2WidgetType.TABLE_ROW_OPERATORS && node.$wt !== N2WidgetType.PAGINATION;
