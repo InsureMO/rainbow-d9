@@ -1,6 +1,6 @@
-import {NUtils, Undefinable} from '@rainbow-d9/n1';
+import {NUtils, Undefinable, VUtils, WrappedAttributes} from '@rainbow-d9/n1';
 import React from 'react';
-import {toIntlLabel} from '../intl-label';
+import {LabelLike} from '../label-like';
 import {TableProps} from './types';
 import {ATableHeaderCell} from './widgets';
 
@@ -9,14 +9,17 @@ export interface TableHeaderProps {
 	headerHeight: TableProps['headerHeight'];
 	stickyOffsets: Array<[boolean, Undefinable<string>, Undefinable<string>]>;
 	tailGrabberAppended: boolean;
+	$wrapped: WrappedAttributes;
 }
 
 export const TableHeader = (props: TableHeaderProps) => {
 	const {
 		headers, headerHeight,
-		stickyOffsets, tailGrabberAppended
+		stickyOffsets, tailGrabberAppended,
+		$wrapped: wrapped
 	} = props;
 
+	const $wrapped = {...wrapped, $onValueChange: VUtils.noop};
 	// index column
 	// configured columns (headers)
 	// tail grabbing column
@@ -26,7 +29,7 @@ export const TableHeader = (props: TableHeaderProps) => {
 		{headers.map((header, index) => {
 			const key = NUtils.getDefKey(header);
 			return <ATableHeaderCell headerHeight={headerHeight} stickyOffset={stickyOffsets[index + 1]} key={key}>
-				{toIntlLabel(header.label)}
+				<LabelLike $wrapped={$wrapped} label={header.label}/>
 			</ATableHeaderCell>;
 		})}
 		{tailGrabberAppended

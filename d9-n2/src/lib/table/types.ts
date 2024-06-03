@@ -13,7 +13,7 @@ import {PaginationDef} from '../pagination';
 import {ModelCarrier, OmitHTMLProps, OmitNodeDef} from '../types';
 
 export interface TableHeaderDef extends Pick<NodeDef, '$key'> {
-	label: ReactNode;
+	label: ReactNode | NodeDef;
 	width: number | string;
 	/** index of {@link TableDef#$nodes}, used to render body cell */
 	index: number;

@@ -21,10 +21,11 @@ import {ATableContent} from './widgets';
 
 export const TableContent = (props: Omit<TableProps, '$array'> & { $array: EnhancedPropsForArray }) => {
 	const {
-		$pp, pageable, $wrapped: {$root, $model, $p2r},
+		$pp, pageable, $wrapped,
 		headerHeight, maxBodyHeight,
 		children
 	} = props;
+	const {$root, $model, $p2r} = $wrapped;
 
 	const globalHandlers = useGlobalHandlers();
 	const {fire: fireWrapper} = useWrapperEventBus();
@@ -114,7 +115,8 @@ export const TableContent = (props: Omit<TableProps, '$array'> & { $array: Enhan
 	return <ATableContent headerHeight={headerHeight} maxBodyHeight={maxBodyHeight} columnsWidth={columnsWidth}>
 		<TableHeader headerHeight={headerHeight} headers={props.headers}
 		             stickyOffsets={stickyOffsets}
-		             tailGrabberAppended={tailGrabberAppended}/>
+		             tailGrabberAppended={tailGrabberAppended}
+		             $wrapped={$wrapped}/>
 		{rows}
 	</ATableContent>;
 };
