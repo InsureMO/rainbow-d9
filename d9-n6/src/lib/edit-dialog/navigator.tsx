@@ -14,9 +14,9 @@ export interface DialogNavigatorProps {
 	model: ConfigurableModel;
 }
 
-export const DialogNavigator = (props: DialogNavigatorProps) => {
-	const {elements, model} = props;
-
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+export const DialogNavigator = (_props: DialogNavigatorProps) => {
+	// const {elements, model} = props;
 	return <EditDialogNavigatorContainer>
 		<EditDialogPartContent>
 			<EditDialogPartHeader>

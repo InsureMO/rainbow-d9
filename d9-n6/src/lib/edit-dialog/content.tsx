@@ -32,7 +32,7 @@ export interface DialogContentProps {
 	helpDoc: MarkdownContent;
 	elements?: Array<ConfigurableElement>;
 	/** prepare model for editing */
-	prepare: () => ConfigurableModel;
+	prepare?: () => ConfigurableModel;
 	/** write back */
 	confirm: (model: ConfigurableModel) => void;
 }
@@ -48,7 +48,7 @@ export const DialogContent = (props: DialogContentProps) => {
 	} = props;
 
 	const {fire} = usePlaygroundEventBus();
-	const [state, setState] = useState<DialogContentState>({model: prepare()});
+	const [state] = useState<DialogContentState>({model: prepare()});
 
 	const onBackClicked = () => {
 		confirm(state.model);
