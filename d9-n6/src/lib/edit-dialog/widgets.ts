@@ -288,9 +288,13 @@ export const NavigatorDialogNavigatorElementsContainer = styled.div.attrs({
     overflow-y: auto;
     overflow-x: hidden;
 `;
-export const NavigatorConfigurableElementContainer = styled.div.attrs<{ level: number }>(() => {
+export const NavigatorConfigurableElementContainer = styled.div.attrs<{ level: number }>(
+	({level}) => {
 	return {
-		[DOM_KEY_WIDGET]: 'o23-playground-edit-dialog-configurable-element'
+		[DOM_KEY_WIDGET]: 'o23-playground-edit-dialog-configurable-element',
+		style: {
+			'--level': level
+		}
 	};
 })<{ level: number }>`
     display: flex;
@@ -313,11 +317,13 @@ export const NavigatorConfigurableElementContainer = styled.div.attrs<{ level: n
         border-bottom: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_BORDER};
     }
 `;
+// noinspection CssUnresolvedCustomProperty
 export const NavigatorConfigurableElementLabel = styled.div.attrs({[DOM_KEY_WIDGET]: 'o23-playground-edit-dialog-configurable-element-label'})`
     display: flex;
     position: relative;
     align-items: center;
     flex-grow: 1;
+    margin-left: calc(var(--level) * ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_INDENT});
 `;
 export const NavigatorConfigurableElementBadge = styled.div.attrs({[DOM_KEY_WIDGET]: 'o23-playground-edit-dialog-configurable-element-badge'})`
     display: flex;

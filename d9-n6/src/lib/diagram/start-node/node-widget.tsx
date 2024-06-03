@@ -60,7 +60,7 @@ export const StartNodeSecondTitle = styled(NodeSecondTitle).attrs({
 	style: {
 		'--color': PlaygroundCssVars.NODE_START_TITLE_COLOR,
 		'--font-size': PlaygroundCssVars.NODE_START_SECOND_TITLE_FONT_SIZE,
-		'--font-weight': PlaygroundCssVars.NODE_START_SECOND_TITLE_FONT_WEIGHT,
+		'--font-weight': PlaygroundCssVars.NODE_START_SECOND_TITLE_FONT_WEIGHT
 	}
 })`
     text-transform: capitalize;
@@ -266,20 +266,24 @@ export const StartNodeWidget = (props: StartNodeWidgetProps) => {
 		const visibleOnPipeline = (model: ConfigurableModel) => model.type === 'pipeline';
 		const elements: Array<ConfigurableElement> = [
 			{code: 'code', label: 'Code', anchor: 'code'},
-			{code: 'type', label: 'Type', anchor: 'type'},
 			{code: 'enabled', label: 'Enabled', anchor: 'enabled'},
-			...[
-				{code: 'route', label: 'Route', anchor: 'route'},
-				{code: 'method', label: 'Method', anchor: 'method'},
-				{code: 'headers', label: 'Headers', anchor: 'headers'},
-				{code: 'pathParams', label: 'Path Parameters', anchor: 'path-params'},
-				{code: 'queryParams', label: 'Query Parameters', anchor: 'query-params'},
-				{code: 'body', label: 'Body', anchor: 'body'},
-				{code: 'files', label: 'Files', anchor: 'files'},
-				{code: 'exposeHeaders', label: 'Expose Headers', anchor: 'expose-headers'},
-				{code: 'exposeFile', label: 'Expose File', anchor: 'expose-file'}
-			].map(element => ({...element, visible: visibleOnPipeline})),
-			{code: 'use', label: 'Use', anchor: 'use'}
+			{
+				code: 'type', label: 'Type', anchor: 'type',
+				children: [
+					...[
+						{code: 'route', label: 'Route', anchor: 'route'},
+						{code: 'method', label: 'Method', anchor: 'method'},
+						{code: 'headers', label: 'Headers', anchor: 'headers'},
+						{code: 'pathParams', label: 'Path Parameters', anchor: 'path-params'},
+						{code: 'queryParams', label: 'Query Parameters', anchor: 'query-params'},
+						{code: 'body', label: 'Body', anchor: 'body'},
+						{code: 'files', label: 'Files', anchor: 'files'},
+						{code: 'exposeHeaders', label: 'Expose Headers', anchor: 'expose-headers'},
+						{code: 'exposeFile', label: 'Expose File', anchor: 'expose-file'}
+					].map(element => ({...element, visible: visibleOnPipeline})),
+					{code: 'use', label: 'Use', anchor: 'use'}
+				]
+			}
 		];
 		fire(PlaygroundEventTypes.SHOW_EDIT_DIALOG,
 			<DialogContent helpDoc={HelpDocs.pipeline} confirm={onConfirm} prepare={prepareModel}

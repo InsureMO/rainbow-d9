@@ -24,7 +24,7 @@ export const DialogNavigatorElement = (props: DialogNavigatorElementProps) => {
 	const {label, badge} = element;
 
 	return <>
-		<NavigatorConfigurableElementContainer level={0}>
+		<NavigatorConfigurableElementContainer level={level}>
 			<NavigatorConfigurableElementLabel>{label}</NavigatorConfigurableElementLabel>
 			{badge != null
 				? <NavigatorConfigurableElementBadge>{badge(model)}</NavigatorConfigurableElementBadge>
@@ -32,7 +32,7 @@ export const DialogNavigatorElement = (props: DialogNavigatorElementProps) => {
 		</NavigatorConfigurableElementContainer>
 		{element.children != null
 			? element.children.map(child => {
-				return <DialogNavigatorElement element={child} model={model} level={level + 1} key={element.code}/>;
+				return <DialogNavigatorElement element={child} model={model} level={level + 1} key={child.code}/>;
 			})
 			: null}
 	</>;
