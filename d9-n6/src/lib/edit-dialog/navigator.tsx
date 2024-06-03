@@ -1,6 +1,6 @@
 import {IntlLabel} from '@rainbow-d9/n2';
 import React from 'react';
-import {ConfigurableElement} from './types';
+import {ConfigurableElement, ConfigurableModel} from './types';
 import {
 	EditDialogNavigatorContainer,
 	EditDialogPartBody,
@@ -11,10 +11,11 @@ import {
 
 export interface DialogNavigatorProps {
 	elements?: Array<ConfigurableElement>;
+	model: ConfigurableModel;
 }
 
 export const DialogNavigator = (props: DialogNavigatorProps) => {
-	const {elements} = props;
+	const {elements, model} = props;
 
 	return <EditDialogNavigatorContainer>
 		<EditDialogPartContent>
