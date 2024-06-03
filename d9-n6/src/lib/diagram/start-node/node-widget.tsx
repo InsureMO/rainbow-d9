@@ -15,6 +15,7 @@ import {
 	NodeHeader,
 	NodeSecondTitle,
 	NodeTitle,
+	NodeTitleSpreader,
 	NodeWrapper
 } from '../common';
 import {StartNodeModel} from './node-model';
@@ -55,14 +56,35 @@ export const StartNodeTitle = styled(NodeTitle).attrs({
 	}
 })``;
 export const StartNodeSecondTitle = styled(NodeSecondTitle).attrs({
-	[DOM_KEY_WIDGET]: 'o23-playground-start-node-title',
+	[DOM_KEY_WIDGET]: 'o23-playground-start-node-second-title',
 	style: {
 		'--color': PlaygroundCssVars.NODE_START_TITLE_COLOR,
 		'--font-size': PlaygroundCssVars.NODE_START_SECOND_TITLE_FONT_SIZE,
 		'--font-weight': PlaygroundCssVars.NODE_START_SECOND_TITLE_FONT_WEIGHT,
-		'--text-decoration': 'unset'
 	}
-})``;
+})`
+    text-transform: capitalize;
+
+    &[data-role=route] {
+        text-transform: unset;
+    }
+
+    &:before, &:after {
+        display: inline-block;
+        position: relative;
+        margin-top: 3px;
+    }
+
+    &:before {
+        content: '〔';
+        margin-right: 2px;
+    }
+
+    &:after {
+        content: '〕';
+        margin-left: 2px;
+    }
+`;
 export const StartNodeBody = styled(NodeBody).attrs({
 	[DOM_KEY_WIDGET]: 'o23-playground-start-node-body',
 	style: {
@@ -196,15 +218,26 @@ export const StartNodeWidget = (props: StartNodeWidgetProps) => {
 	} = (() => {
 		if (isPipelineDef(def)) {
 			if (VUtils.isNotBlank(def.route)) {
-				// route defined
+				// route defined, exposed as rest api
 				return {
-					isApi: true, showRouteLack: false, secondTitle: `[ ${def.route.trim()} ]`, secondTitleRole: 'route'
+					isApi: true, showRouteLack: false, secondTitle: def.route.trim(), secondTitleRole: 'route'
 				};
 			} else {
-				return {isApi: true, showRouteLack: true, secondTitle: (void 0), secondTitleRole: (void 0)};
+				// route not defined, standard pipeline
+				return {
+					isApi: false, showRouteLack: false,
+					secondTitle: <IntlLabel keys={['o23', 'pipeline', 'standard']} value="Pipeline"/>,
+					secondTitleRole: (void 0)
+				};
 			}
 		} else {
-			return {isApi: false, showRouteLack: false, secondTitle: (void 0), secondTitleRole: (void 0)};
+			// not a pipeline, should be a step or a step sets
+			return {
+				isApi: false, showRouteLack: false,
+				secondTitle: <IntlLabel keys={['o23', 'pipeline', def.type]}
+				                        value={(def.type ?? '').replace('-', ' ')}/>,
+				secondTitleRole: (void 0)
+			};
 		}
 	})();
 
@@ -230,19 +263,22 @@ export const StartNodeWidget = (props: StartNodeWidgetProps) => {
 		model.use = step.use;
 	};
 	const onDoubleClicked = () => {
+		const visibleOnPipeline = (model: ConfigurableModel) => model.type === 'pipeline';
 		const elements: Array<ConfigurableElement> = [
 			{code: 'code', label: 'Code', anchor: 'code'},
 			{code: 'type', label: 'Type', anchor: 'type'},
 			{code: 'enabled', label: 'Enabled', anchor: 'enabled'},
-			{code: 'route', label: 'Route', anchor: 'route'},
-			{code: 'method', label: 'Method', anchor: 'method'},
-			{code: 'headers', label: 'Headers', anchor: 'headers'},
-			{code: 'pathParams', label: 'Path Parameters', anchor: 'path-params'},
-			{code: 'queryParams', label: 'Query Parameters', anchor: 'query-params'},
-			{code: 'body', label: 'Body', anchor: 'body'},
-			{code: 'files', label: 'Files', anchor: 'files'},
-			{code: 'exposeHeaders', label: 'Expose Headers', anchor: 'expose-headers'},
-			{code: 'exposeFile', label: 'Expose File', anchor: 'expose-file'},
+			...[
+				{code: 'route', label: 'Route', anchor: 'route'},
+				{code: 'method', label: 'Method', anchor: 'method'},
+				{code: 'headers', label: 'Headers', anchor: 'headers'},
+				{code: 'pathParams', label: 'Path Parameters', anchor: 'path-params'},
+				{code: 'queryParams', label: 'Query Parameters', anchor: 'query-params'},
+				{code: 'body', label: 'Body', anchor: 'body'},
+				{code: 'files', label: 'Files', anchor: 'files'},
+				{code: 'exposeHeaders', label: 'Expose Headers', anchor: 'expose-headers'},
+				{code: 'exposeFile', label: 'Expose File', anchor: 'expose-file'}
+			].map(element => ({...element, visible: visibleOnPipeline})),
 			{code: 'use', label: 'Use', anchor: 'use'}
 		];
 		fire(PlaygroundEventTypes.SHOW_EDIT_DIALOG,
@@ -255,8 +291,9 @@ export const StartNodeWidget = (props: StartNodeWidgetProps) => {
 			<StartNodeTitle>
 				{VUtils.isNotBlank(def.code)
 					? def.code.trim()
-					: <IntlLabel keys={['o23', 'rest-api', 'code', 'undefined']} value="No code defined"/>}
+					: <IntlLabel keys={['o23', 'pipeline', 'code', 'undefined']} value="No code defined"/>}
 			</StartNodeTitle>
+			<NodeTitleSpreader/>
 			<StartNodeSecondTitle data-role={secondTitleRole}>
 				{secondTitle}
 			</StartNodeSecondTitle>

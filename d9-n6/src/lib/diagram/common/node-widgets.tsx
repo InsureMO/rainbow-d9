@@ -1,4 +1,4 @@
-import {UnwrappedCaption} from '@rainbow-d9/n2';
+import {DOM_KEY_WIDGET, UnwrappedCaption} from '@rainbow-d9/n2';
 import React, {DetailedHTMLProps, HTMLAttributes} from 'react';
 import styled from 'styled-components';
 import {PlaygroundCssVars} from '../../widgets';
@@ -27,15 +27,26 @@ export const NodeHeader = styled.div`
 // @ts-ignore
 // noinspection CssUnresolvedCustomProperty
 export const NodeTitle = styled(UnwrappedCaption)`
-    flex-grow: 1;
     color: var(--color);
     font-size: var(--font-size);
     font-weight: var(--font-weight);
+`;
+// noinspection CssUnresolvedCustomProperty
+export const NodeTitleSpreader = styled.span.attrs({[DOM_KEY_WIDGET]: 'o23-playground-node-title-spreader'})`
+    display: flex;
+    position: relative;
+    flex-grow: 1;
+    min-width: var(--min-width, ${PlaygroundCssVars.NODE_TITLE_SPREADER_MIN_WIDTH});
+
+    + span {
+        flex-grow: unset;
+    }
 `;
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 // noinspection CssUnresolvedCustomProperty
 export const NodeSecondTitle = styled(UnwrappedCaption)`
+    flex-grow: 1;
     justify-content: flex-end;
     color: var(--color);
     font-size: var(--font-size);
