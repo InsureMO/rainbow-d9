@@ -261,12 +261,27 @@ export const StartNodeWidget = (props: StartNodeWidgetProps) => {
 		model.exposeFile = pipeline.exposeFile;
 		const step = def as unknown as PipelineStepUseDef;
 		model.use = step.use;
+		return model;
 	};
 	const onDoubleClicked = () => {
 		const visibleOnPipeline = (model: ConfigurableModel) => model.type === 'pipeline';
 		const elements: Array<ConfigurableElement> = [
-			{code: 'code', label: 'Code', anchor: 'code'},
-			{code: 'enabled', label: 'Enabled', anchor: 'enabled'},
+			{
+				code: 'code', label: 'Code', anchor: 'code',
+				badge: model => {
+					if (VUtils.isNotBlank(model.route)) {
+						return model.route.trim();
+					} else {
+						return '?';
+					}
+				}
+			},
+			{
+				code: 'enabled', label: 'Enabled', anchor: 'enabled',
+				badge: model => model.enabled !== false
+					? <IntlLabel keys={['o23', 'variable', 'yes-sign']} value="✓"/>
+					: <IntlLabel keys={['o23', 'variable', 'no-sign']} value="✗"/>
+			},
 			{
 				code: 'type', label: 'Type', anchor: 'type',
 				children: [
@@ -288,7 +303,7 @@ export const StartNodeWidget = (props: StartNodeWidgetProps) => {
 								{code: 'exposeFile', label: 'Expose File', anchor: 'expose-file'}
 							]
 						}
-					].map(element => ({...element, visible: visibleOnPipeline})),
+					].map(element => ({...element, visible: visibleOnPipeline}))
 				]
 			}
 		];

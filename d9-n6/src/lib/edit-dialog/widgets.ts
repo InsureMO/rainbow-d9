@@ -391,5 +391,4 @@ export const NavigatorConfigurableElementBadge = styled.div.attrs({[DOM_KEY_WIDG
     display: flex;
     position: relative;
     align-items: center;
-    flex-grow: 1;
 `;

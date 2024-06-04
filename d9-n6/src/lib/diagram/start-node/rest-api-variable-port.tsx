@@ -86,25 +86,25 @@ export const RestApiVariablePortWidget = (props: RestApiVariableWidgetProps) => 
 		if (allAsBoolean) {
 			if (all === true) {
 				badge = <span data-role="all">
-					<IntlLabel keys={['o23', 'rest-api', 'variable', 'true']} value="Y"/>
+					<IntlLabel keys={['o23', 'variable', 'yes-char']} value="Y"/>
 				</span>;
 			} else {
 				badge = <span data-role="all">
-					<IntlLabel keys={['o23', 'rest-api', 'variable', 'false']} value="N"/>
+					<IntlLabel keys={['o23', 'variable', 'no-char']} value="N"/>
 				</span>;
 			}
 		} else if (allAsGiven != null) {
 			badge = <span data-role="all">{allAsGiven}</span>;
 		} else if (all === true) {
 			badge = <span data-role="all">
-				<IntlLabel keys={['o23', 'rest-api', 'variable', 'all']} value="All"/>
+				<IntlLabel keys={['o23', 'variable', 'all']} value="All"/>
 			</span>;
 		}
 	}
 
 	return <RestApiVariablePortContainer data-required={required} data-defined={defined}>
 		{icon}
-		<span><IntlLabel keys={['o23', 'rest-api', 'variable', label.toLowerCase().replace(/\s/g, '-')]} value={label}/></span>
+		<span>{label}</span>
 		{badge}
 	</RestApiVariablePortContainer>;
 };
