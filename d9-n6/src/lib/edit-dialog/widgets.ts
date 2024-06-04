@@ -288,15 +288,16 @@ export const NavigatorDialogNavigatorElementsContainer = styled.div.attrs({
     overflow-y: auto;
     overflow-x: hidden;
 `;
+// noinspection CssUnresolvedCustomProperty
 export const NavigatorConfigurableElementContainer = styled.div.attrs<{ level: number }>(
 	({level}) => {
-	return {
-		[DOM_KEY_WIDGET]: 'o23-playground-edit-dialog-configurable-element',
-		style: {
-			'--level': level
-		}
-	};
-})<{ level: number }>`
+		return {
+			[DOM_KEY_WIDGET]: 'o23-playground-edit-dialog-configurable-element',
+			style: {
+				'--level': level
+			}
+		};
+	})<{ level: number }>`
     display: flex;
     position: relative;
     align-items: center;
@@ -318,12 +319,73 @@ export const NavigatorConfigurableElementContainer = styled.div.attrs<{ level: n
     }
 `;
 // noinspection CssUnresolvedCustomProperty
-export const NavigatorConfigurableElementLabel = styled.div.attrs({[DOM_KEY_WIDGET]: 'o23-playground-edit-dialog-configurable-element-label'})`
+export const NavigatorConfigurableElementTreeLine = styled.span.attrs<{ level: number; }>(
+	({level}) => {
+		return {
+			[DOM_KEY_WIDGET]: 'o23-playground-edit-dialog-configurable-element-tree-line',
+			style: {
+				'--margin-left': `calc(${level - 1} * ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_INDENT})`
+			}
+		};
+	})<{ level: number; }>`
+    display: flex;
+    position: relative;
+    align-self: stretch;
+    width: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_INDENT};
+    margin-left: var(--margin-left);
+
+    &:before {
+        content: '';
+        display: block;
+        position: absolute;
+        width: 1px;
+        height: calc(100% + 1px);
+        top: 0;
+        left: 3px;
+        background-color: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_TREE_LINE_COLOR};
+    }
+
+    &[data-last-level=true] {
+        &:after {
+            content: '';
+            display: block;
+            position: absolute;
+            width: 100%;
+            height: 50%;
+            top: 0;
+            left: 3px;
+            border-bottom-left-radius: 3px;
+            border-bottom: 1px solid ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_TREE_LINE_COLOR};
+        }
+
+        &[data-last-node=true]:before {
+            display: none;
+        }
+
+        &[data-last-node=true]:after {
+            border-left: 1px solid ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_TREE_LINE_COLOR};
+        }
+    }
+
+    &[data-last-level=false][data-last-node=true]:before {
+        display: none;
+    }
+`;
+// noinspection CssUnresolvedCustomProperty
+export const NavigatorConfigurableElementLabel = styled.div.attrs<{ level: number }>(
+	({level}) => {
+		return {
+			[DOM_KEY_WIDGET]: 'o23-playground-edit-dialog-configurable-element-label',
+			style: {
+				'--margin-left': level === 0 ? 0 : PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_INDENT
+			}
+		};
+	})<{ level: number }>`
     display: flex;
     position: relative;
     align-items: center;
     flex-grow: 1;
-    margin-left: calc(var(--level) * ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_INDENT});
+    margin-left: var(--margin-left);
 `;
 export const NavigatorConfigurableElementBadge = styled.div.attrs({[DOM_KEY_WIDGET]: 'o23-playground-edit-dialog-configurable-element-badge'})`
     display: flex;

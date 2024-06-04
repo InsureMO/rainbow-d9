@@ -272,16 +272,23 @@ export const StartNodeWidget = (props: StartNodeWidgetProps) => {
 				children: [
 					...[
 						{code: 'route', label: 'Route', anchor: 'route'},
-						{code: 'method', label: 'Method', anchor: 'method'},
-						{code: 'headers', label: 'Headers', anchor: 'headers'},
-						{code: 'pathParams', label: 'Path Parameters', anchor: 'path-params'},
-						{code: 'queryParams', label: 'Query Parameters', anchor: 'query-params'},
-						{code: 'body', label: 'Body', anchor: 'body'},
-						{code: 'files', label: 'Files', anchor: 'files'},
-						{code: 'exposeHeaders', label: 'Expose Headers', anchor: 'expose-headers'},
-						{code: 'exposeFile', label: 'Expose File', anchor: 'expose-file'}
+						{
+							code: 'request', label: 'Request', anchor: 'request', children: [
+								{code: 'method', label: 'Method', anchor: 'method'},
+								{code: 'headers', label: 'Headers', anchor: 'headers'},
+								{code: 'pathParams', label: 'Path Parameters', anchor: 'path-params'},
+								{code: 'queryParams', label: 'Query Parameters', anchor: 'query-params'},
+								{code: 'body', label: 'Body', anchor: 'body'},
+								{code: 'files', label: 'Files', anchor: 'files'}
+							]
+						},
+						{
+							code: 'response', label: 'Response', anchor: 'response', children: [
+								{code: 'exposeHeaders', label: 'Expose Headers', anchor: 'expose-headers'},
+								{code: 'exposeFile', label: 'Expose File', anchor: 'expose-file'}
+							]
+						}
 					].map(element => ({...element, visible: visibleOnPipeline})),
-					{code: 'use', label: 'Use', anchor: 'use'}
 				]
 			}
 		];
