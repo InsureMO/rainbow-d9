@@ -46,7 +46,9 @@ export const DialogNavigatorElement = (props: DialogNavigatorElementProps) => {
 				: null}
 		</NavigatorConfigurableElementContainer>
 		{element.children != null
-			? element.children.map((child, index, children) => {
+			? element.children
+				.filter(element => element.visible == null || element.visible(model))
+				.map((child, index, children) => {
 				return <DialogNavigatorElement element={child} model={model}
 				                               level={level + 1} last={[...last, index === children.length - 1]}
 				                               key={child.code}/>;
@@ -64,7 +66,9 @@ export const DialogNavigatorElements = (props: DialogNavigatorProps) => {
 	const {elements, model} = props;
 
 	return <NavigatorDialogNavigatorElementsContainer>
-		{elements.map((element, index, elements) => {
+		{elements
+			.filter(element => element.visible == null || element.visible(model))
+			.map((element, index, elements) => {
 			return <DialogNavigatorElement element={element} model={model}
 			                               level={0}
 			                               last={[index === elements.length - 1]}

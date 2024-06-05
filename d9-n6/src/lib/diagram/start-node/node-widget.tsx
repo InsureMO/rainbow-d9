@@ -3,8 +3,9 @@ import {Undefinable, VUtils} from '@rainbow-d9/n1';
 import {DOM_KEY_WIDGET, IntlLabel} from '@rainbow-d9/n2';
 import React from 'react';
 import styled from 'styled-components';
+import {FileDefs} from '../../configurable-model';
 import {isPipelineDef, PipelineFileDef, PipelineStepUseDef} from '../../definition';
-import {ConfigurableElement, ConfigurableModel, DialogContent} from '../../edit-dialog';
+import {ConfigurableModel, DialogContent} from '../../edit-dialog';
 import {HelpDocs} from '../../help-docs';
 import {PlaygroundEventTypes, usePlaygroundEventBus} from '../../playground-event-bus';
 import {PlaygroundCssVars} from '../../widgets';
@@ -264,52 +265,9 @@ export const StartNodeWidget = (props: StartNodeWidgetProps) => {
 		return model;
 	};
 	const onDoubleClicked = () => {
-		const visibleOnPipeline = (model: ConfigurableModel) => model.type === 'pipeline';
-		const elements: Array<ConfigurableElement> = [
-			{
-				code: 'code', label: 'Code', anchor: 'code',
-				badge: model => {
-					if (VUtils.isNotBlank(model.route)) {
-						return model.route.trim();
-					} else {
-						return '?';
-					}
-				}
-			},
-			{
-				code: 'enabled', label: 'Enabled', anchor: 'enabled',
-				badge: model => model.enabled !== false
-					? <IntlLabel keys={['o23', 'variable', 'yes-sign']} value="✓"/>
-					: <IntlLabel keys={['o23', 'variable', 'no-sign']} value="✗"/>
-			},
-			{
-				code: 'type', label: 'Type', anchor: 'type',
-				children: [
-					...[
-						{code: 'route', label: 'Route', anchor: 'route'},
-						{
-							code: 'request', label: 'Request', anchor: 'request', children: [
-								{code: 'method', label: 'Method', anchor: 'method'},
-								{code: 'headers', label: 'Headers', anchor: 'headers'},
-								{code: 'pathParams', label: 'Path Parameters', anchor: 'path-params'},
-								{code: 'queryParams', label: 'Query Parameters', anchor: 'query-params'},
-								{code: 'body', label: 'Body', anchor: 'body'},
-								{code: 'files', label: 'Files', anchor: 'files'}
-							]
-						},
-						{
-							code: 'response', label: 'Response', anchor: 'response', children: [
-								{code: 'exposeHeaders', label: 'Expose Headers', anchor: 'expose-headers'},
-								{code: 'exposeFile', label: 'Expose File', anchor: 'expose-file'}
-							]
-						}
-					].map(element => ({...element, visible: visibleOnPipeline}))
-				]
-			}
-		];
 		fire(PlaygroundEventTypes.SHOW_EDIT_DIALOG,
 			<DialogContent helpDoc={HelpDocs.pipeline} confirm={onConfirm} prepare={prepareModel}
-			               elements={elements}/>);
+			               elements={FileDefs.elements}/>);
 	};
 
 	return <StartNodeContainer onDoubleClick={onDoubleClicked}>

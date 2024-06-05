@@ -53,3 +53,4 @@ export const EditDialog = () => {
 
 export * from './content';
 export * from './types';
+export * from './exposed-widgets';
