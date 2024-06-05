@@ -58,7 +58,7 @@
 		"vite-plugin-markdown": "^2.2.0"
 	},
 	"volta": {
-		"node": "18.19.0",
+		"node": "22.2.0",
 		"yarn": "1.22.21"
 	}
 }

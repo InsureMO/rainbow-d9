@@ -35,7 +35,7 @@
 		"build-all-ci": "yarn build-n123-ci && yarn build-n5-ci && yarn build-n6-ci && yarn build-echarts-ci && yarn build-thai-all-ci"
 	},
 	"volta": {
-		"node": "18.19.0",
+		"node": "22.2.0",
 		"yarn": "1.22.21"
 	}
 }
