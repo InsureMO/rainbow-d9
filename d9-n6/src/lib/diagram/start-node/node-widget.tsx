@@ -1,12 +1,13 @@
 import {DiagramEngine} from '@projectstorm/react-diagrams';
 import {Undefinable, VUtils} from '@rainbow-d9/n1';
-import {DOM_KEY_WIDGET, IntlLabel} from '@rainbow-d9/n2';
+import {DOM_KEY_WIDGET} from '@rainbow-d9/n2';
 import React from 'react';
 import styled from 'styled-components';
 import {FileDefs} from '../../configurable-model';
 import {isPipelineDef, PipelineFileDef} from '../../definition';
 import {DialogContent} from '../../edit-dialog';
 import {HelpDocs} from '../../help-docs';
+import {Labels} from '../../labels';
 import {PlaygroundEventTypes, usePlaygroundEventBus} from '../../playground-event-bus';
 import {PlaygroundCssVars} from '../../widgets';
 import {
@@ -227,7 +228,7 @@ export const StartNodeWidget = (props: StartNodeWidgetProps) => {
 				// route not defined, standard pipeline
 				return {
 					isApi: false, showRouteLack: false,
-					secondTitle: <IntlLabel keys={['o23', 'pipeline', 'standard']} value="Pipeline"/>,
+					secondTitle: Labels.TypeOfStandardPipeline,
 					secondTitleRole: (void 0)
 				};
 			}
@@ -235,8 +236,7 @@ export const StartNodeWidget = (props: StartNodeWidgetProps) => {
 			// not a pipeline, should be a step or a step sets
 			return {
 				isApi: false, showRouteLack: false,
-				secondTitle: <IntlLabel keys={['o23', 'pipeline', def.type]}
-				                        value={(def.type ?? '').replace('-', ' ')}/>,
+				secondTitle: Labels.TypeOfStepOrSets(def.type),
 				secondTitleRole: (void 0)
 			};
 		}
@@ -257,7 +257,7 @@ export const StartNodeWidget = (props: StartNodeWidgetProps) => {
 			<StartNodeTitle>
 				{VUtils.isNotBlank(def.code)
 					? def.code.trim()
-					: <IntlLabel keys={['o23', 'pipeline', 'code', 'undefined']} value="No code defined"/>}
+					: Labels.NoCodeDefinedInFileDef}
 			</StartNodeTitle>
 			<NodeTitleSpreader/>
 			<StartNodeSecondTitle data-role={secondTitleRole}>

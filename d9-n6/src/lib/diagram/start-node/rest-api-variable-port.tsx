@@ -1,8 +1,9 @@
 import {Nullable} from '@rainbow-d9/n1';
-import {DOM_KEY_WIDGET, IntlLabel} from '@rainbow-d9/n2';
+import {DOM_KEY_WIDGET} from '@rainbow-d9/n2';
 import React, {ReactNode} from 'react';
 import styled from 'styled-components';
 import {PortChecked, PortIncorrect, PortUndefined} from '../../icons';
+import {Labels} from '../../labels';
 import {PlaygroundCssVars} from '../../widgets';
 
 export const RestApiVariablePortContainer = styled.div.attrs({[DOM_KEY_WIDGET]: 'o23-playground-rest-api-variable-port'})`
@@ -79,20 +80,14 @@ export const RestApiVariablePortWidget = (props: RestApiVariableWidgetProps) => 
 		} else if (all != null) {
 			if (allAsBoolean) {
 				if (all === true) {
-					badge = <span data-role="all">
-					<IntlLabel keys={['o23', 'variable', 'yes-char']} value="Y"/>
-				</span>;
+					badge = <span data-role="all">{Labels.YesChar}</span>;
 				} else {
-					badge = <span data-role="all">
-					<IntlLabel keys={['o23', 'variable', 'no-char']} value="N"/>
-				</span>;
+					badge = <span data-role="all">{Labels.NoChar}</span>;
 				}
 			} else if (allAsGiven != null) {
 				badge = <span data-role="all">{allAsGiven}</span>;
 			} else if (all === true) {
-				badge = <span data-role="all">
-				<IntlLabel keys={['o23', 'variable', 'all']} value="All"/>
-			</span>;
+				badge = <span data-role="all">{Labels.All}</span>;
 			}
 		}
 	} else if (required) {

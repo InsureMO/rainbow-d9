@@ -1,8 +1,8 @@
-import {IntlLabel} from '@rainbow-d9/n2';
 import React, {useEffect, useState} from 'react';
 import Markdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import {ArrowLeft, ArrowRight} from '../icons';
+import {Labels} from '../labels';
 import {PlaygroundEventTypes, usePlaygroundEventBus} from '../playground-event-bus';
 import {MarkdownContent} from '../types';
 import {EditDialogEventTypes, useEditDialogEventBus} from './edit-dialog-event-bus';
@@ -78,9 +78,7 @@ export const DialogHelpDesk = (props: DialogHelpDeskProps) => {
 	return <EditDialogHelpDocContainer>
 		<EditDialogPartContent>
 			<EditDialogPartHeader>
-				<EditDialogPartTitle>
-					<IntlLabel keys={['o23', 'dialog', 'docs', 'title']} value="Help Desk"/>
-				</EditDialogPartTitle>
+				<EditDialogPartTitle>{Labels.HelpDesk}</EditDialogPartTitle>
 				<CloseHandle/>
 			</EditDialogPartHeader>
 			<EditDialogPartBody>

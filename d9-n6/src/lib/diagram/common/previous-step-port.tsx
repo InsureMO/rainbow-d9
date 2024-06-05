@@ -8,9 +8,10 @@ import {
 	PortWidget
 } from '@projectstorm/react-diagrams';
 import {DiagramEngine} from '@projectstorm/react-diagrams-core';
-import {DOM_KEY_WIDGET, IntlLabel} from '@rainbow-d9/n2';
+import {DOM_KEY_WIDGET} from '@rainbow-d9/n2';
 import React from 'react';
 import styled from 'styled-components';
+import {Labels} from '../../labels';
 import {PlaygroundCssVars} from '../../widgets';
 
 export class PreviousStepPortModel extends PortModel {
@@ -80,6 +81,6 @@ export const PreviousStepPortWidget = (props: PreviousStepPortWidgetProps) => {
 
 	return <PreviousStepPortContainer>
 		<PortWidget port={port} engine={engine}/>
-		<span><IntlLabel keys={['o23', 'port', 'previous']} value="In"/></span>
+		<span>{Labels.PreviousStepPort}</span>
 	</PreviousStepPortContainer>;
 };

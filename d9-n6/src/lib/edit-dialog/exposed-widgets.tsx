@@ -1,24 +1,39 @@
-import {IntlLabel} from '@rainbow-d9/n2';
 import React from 'react';
-import {ElementBanned, ElementChecked, ElementMissed} from '../icons';
-import {
-	NavigatorConfigurableElementBadgeBanned,
-	NavigatorConfigurableElementBadgeChecked,
-	NavigatorConfigurableElementBadgeMissed
-} from './widgets';
+import {Labels} from '../labels';
+import {NavigatorConfigurableElementBadgeWrapper} from './widgets';
 
 export const ConfigurableElementBadgeChecked = () => {
-	return <NavigatorConfigurableElementBadgeChecked>
-		<IntlLabel keys={['o23', 'variable', 'checked']} value={<ElementChecked/>}/>
-	</NavigatorConfigurableElementBadgeChecked>;
+	return <NavigatorConfigurableElementBadgeWrapper data-role="checked">
+		{Labels.BadgeChecked}
+	</NavigatorConfigurableElementBadgeWrapper>;
 };
 export const ConfigurableElementBadgeMissed = () => {
-	return <NavigatorConfigurableElementBadgeMissed>
-		<IntlLabel keys={['o23', 'variable', 'missed']} value={<ElementMissed/>}/>
-	</NavigatorConfigurableElementBadgeMissed>;
+	return <NavigatorConfigurableElementBadgeWrapper data-role="missed">
+		{Labels.BadgeMissed}
+	</NavigatorConfigurableElementBadgeWrapper>;
 };
 export const ConfigurableElementBadgeBanned = () => {
-	return <NavigatorConfigurableElementBadgeBanned>
-		<IntlLabel keys={['o23', 'variable', 'banned']} value={<ElementBanned/>}/>
-	</NavigatorConfigurableElementBadgeBanned>;
+	return <NavigatorConfigurableElementBadgeWrapper data-role="banned">
+		{Labels.BadgeBanned}
+	</NavigatorConfigurableElementBadgeWrapper>;
+};
+export const ConfigurableElementBadgeAll = () => {
+	return <NavigatorConfigurableElementBadgeWrapper data-role="all">
+		{Labels.All}
+	</NavigatorConfigurableElementBadgeWrapper>;
+};
+export const ConfigurableElementBadgeIgnored = () => {
+	return <NavigatorConfigurableElementBadgeWrapper data-role="ignored">
+		{Labels.Ignored}
+	</NavigatorConfigurableElementBadgeWrapper>;
+};
+export const ConfigurableElementBadgeNotAvailable = () => {
+	return <NavigatorConfigurableElementBadgeWrapper data-role="not-available">
+		{Labels.NotAvailable}
+	</NavigatorConfigurableElementBadgeWrapper>;
+};
+export const ConfigurableElementBadgeCount = (props: { count: number }) => {
+	return <NavigatorConfigurableElementBadgeWrapper data-role="count">
+		{props.count}
+	</NavigatorConfigurableElementBadgeWrapper>;
 };

@@ -16,6 +16,9 @@ headers: true
 path-params:
   - id
   - name
+expose-headers:
+  - x-a: aaa
+  - x-b: bbb
 `;
 
 	return <GlobalRoot>

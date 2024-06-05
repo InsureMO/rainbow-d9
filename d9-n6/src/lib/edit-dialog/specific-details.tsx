@@ -1,5 +1,5 @@
-import {IntlLabel} from '@rainbow-d9/n2';
 import React from 'react';
+import {Labels} from '../labels';
 import {
 	EditDialogPartContent,
 	EditDialogPartHeader,
@@ -11,9 +11,7 @@ export const DialogSpecificDetails = () => {
 	return <EditDialogSpecificDetailsContainer>
 		<EditDialogPartContent>
 			<EditDialogPartHeader>
-				<EditDialogPartTitle>
-					<IntlLabel keys={['o23', 'dialog', 'specific', 'title']} value="Specific Details"/>
-				</EditDialogPartTitle>
+				<EditDialogPartTitle>{Labels.SpecificDetails}</EditDialogPartTitle>
 			</EditDialogPartHeader>
 		</EditDialogPartContent>
 	</EditDialogSpecificDetailsContainer>;

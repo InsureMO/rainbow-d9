@@ -1,6 +1,6 @@
-import {IntlLabel} from '@rainbow-d9/n2';
 import React, {useEffect, useRef, useState} from 'react';
 import {Back} from '../icons';
+import {Labels} from '../labels';
 import {PlaygroundEventTypes, usePlaygroundEventBus} from '../playground-event-bus';
 import {MarkdownContent} from '../types';
 import {EditDialogEventBusProvider} from './edit-dialog-event-bus';
@@ -61,7 +61,7 @@ export const DialogContent = (props: DialogContentProps) => {
 		<EditDialogContentContainer>
 			<EditorDialogCloser onClick={onBackClicked}>
 				<Back/>
-				<IntlLabel keys={['o23', 'dialog', 'close']} value="Back to canvas"/>
+				{Labels.BackToCanvas}
 			</EditorDialogCloser>
 			<DialogHelpDesk helpDoc={helpDoc}/>
 			<DialogSpecificDetails/>

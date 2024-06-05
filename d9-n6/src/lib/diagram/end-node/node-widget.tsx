@@ -1,7 +1,8 @@
 import {DiagramEngine} from '@projectstorm/react-diagrams';
-import {DOM_KEY_WIDGET, IntlLabel} from '@rainbow-d9/n2';
+import {DOM_KEY_WIDGET} from '@rainbow-d9/n2';
 import React from 'react';
 import styled from 'styled-components';
+import {Labels} from '../../labels';
 import {PlaygroundCssVars} from '../../widgets';
 import {NodeBody, NodeHeader, NodeTitle, NodeWrapper, PreviousStepPortModel, PreviousStepPortWidget} from '../common';
 import {EndNodeModel} from './node-model';
@@ -57,9 +58,7 @@ export const EndNodeWidget = (props: EndNodeWidgetProps) => {
 
 	return <EndNodeContainer>
 		<EndNodeHeader>
-			<EndNodeTitle>
-				<IntlLabel keys={['o23', 'node', 'end']} value="End"/>
-			</EndNodeTitle>
+			<EndNodeTitle>{Labels.EndNodeTitle}</EndNodeTitle>
 		</EndNodeHeader>
 		<EndNodeBody>
 			<PreviousStepPortWidget port={node.getPort(PreviousStepPortModel.NAME) as PreviousStepPortModel}

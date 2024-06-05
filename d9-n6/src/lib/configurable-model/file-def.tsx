@@ -10,9 +10,13 @@ import {
 } from '../definition';
 import {
 	ConfigurableElement,
+	ConfigurableElementBadgeAll,
 	ConfigurableElementBadgeBanned,
 	ConfigurableElementBadgeChecked,
+	ConfigurableElementBadgeCount,
+	ConfigurableElementBadgeIgnored,
 	ConfigurableElementBadgeMissed,
+	ConfigurableElementBadgeNotAvailable,
 	ConfigurableModel
 } from '../edit-dialog';
 
@@ -59,6 +63,17 @@ export const prepareModel = (def: FileDef): ConfigurableModel => {
 	return model;
 };
 
+export const allOrArray = (value?: null | true | Array<string>) => {
+	if (value === true) {
+		return <ConfigurableElementBadgeAll/>;
+	} else if (Array.isArray(value)) {
+		const length = value.filter(header => VUtils.isNotBlank(header)).length;
+		return <ConfigurableElementBadgeCount count={length}/>;
+	} else {
+		return <ConfigurableElementBadgeIgnored/>;
+	}
+};
+
 export const visibleOnPipeline = (model: FileDefModel) => model.type === 'pipeline';
 export const visibleOnApi = (model: PipelineFileDefModel) => visibleOnPipeline(model) && model.api === true;
 export const elementCode: ConfigurableElement = {
@@ -98,15 +113,44 @@ export const elementMethod: ConfigurableElement = {
 		}
 	}
 };
-export const elementHeaders: ConfigurableElement = {code: 'headers', label: 'Headers', anchor: 'headers'};
+export const elementHeaders: ConfigurableElement = {
+	code: 'headers', label: 'Headers', anchor: 'headers',
+	badge: (model: PipelineFileDefModel): ReactNode => {
+		return allOrArray(model.headers);
+	}
+};
 export const elementPathParams: ConfigurableElement = {
-	code: 'pathParams', label: 'Path Parameters', anchor: 'path-params'
+	code: 'pathParams', label: 'Path Parameters', anchor: 'path-params',
+	badge: (model: PipelineFileDefModel): ReactNode => {
+		return allOrArray(model.pathParams);
+	}
 };
 export const elementQueryParams: ConfigurableElement = {
-	code: 'queryParams', label: 'Query Parameters', anchor: 'query-params'
+	code: 'queryParams', label: 'Query Parameters', anchor: 'query-params',
+	badge: (model: PipelineFileDefModel): ReactNode => {
+		return allOrArray(model.queryParams);
+	}
 };
-export const elementBody: ConfigurableElement = {code: 'body', label: 'Body', anchor: 'body'};
-export const elementFiles: ConfigurableElement = {code: 'files', label: 'Files', anchor: 'files'};
+export const elementBody: ConfigurableElement = {
+	code: 'body', label: 'Body', anchor: 'body',
+	badge: (model: PipelineFileDefModel): ReactNode => {
+		if (model.body === true) {
+			return <ConfigurableElementBadgeChecked/>;
+		} else {
+			return <ConfigurableElementBadgeIgnored/>;
+		}
+	}
+};
+export const elementFiles: ConfigurableElement = {
+	code: 'files', label: 'Files', anchor: 'files',
+	badge: (model: PipelineFileDefModel): ReactNode => {
+		if (model.files != null && model.files !== false) {
+			return <ConfigurableElementBadgeChecked/>;
+		} else {
+			return <ConfigurableElementBadgeIgnored/>;
+		}
+	}
+};
 export const elementRequest: ConfigurableElement = {
 	code: 'request', label: 'Request', anchor: 'request',
 	children: [
@@ -116,10 +160,25 @@ export const elementRequest: ConfigurableElement = {
 	visible: visibleOnApi
 };
 export const elementExposeHeaders: ConfigurableElement = {
-	code: 'exposeHeaders', label: 'Expose Headers', anchor: 'expose-headers'
+	code: 'exposeHeaders', label: 'Expose Headers', anchor: 'expose-headers',
+	badge: (model: PipelineFileDefModel): ReactNode => {
+		const count = Object.keys(model.exposeHeaders ?? {}).length;
+		if (count !== 0) {
+			return <ConfigurableElementBadgeCount count={count}/>;
+		} else {
+			return <ConfigurableElementBadgeNotAvailable/>;
+		}
+	}
 };
 export const elementExposeFile: ConfigurableElement = {
-	code: 'exposeFile', label: 'Expose File', anchor: 'expose-file'
+	code: 'exposeFile', label: 'Expose File', anchor: 'expose-file',
+	badge: (model: PipelineFileDefModel): ReactNode => {
+		if (model.exposeFile === true) {
+			return <ConfigurableElementBadgeChecked/>;
+		} else {
+			return <ConfigurableElementBadgeNotAvailable/>;
+		}
+	}
 };
 export const elementResponse: ConfigurableElement = {
 	code: 'response', label: 'Response', anchor: 'response',

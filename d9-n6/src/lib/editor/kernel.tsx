@@ -2,10 +2,10 @@ import {CanvasWidget} from '@projectstorm/react-canvas-core';
 import createEngine, {DiagramModel} from '@projectstorm/react-diagrams';
 import {DiagramEngine} from '@projectstorm/react-diagrams-core';
 import {VUtils} from '@rainbow-d9/n1';
-import {IntlLabel} from '@rainbow-d9/n2';
 import React, {useEffect, useRef, useState} from 'react';
 import {FileDef, FileDefLoader} from '../definition';
 import {EndNodeModel, initEngine, StartNodeModel} from '../diagram';
+import {Labels} from '../labels';
 import {EditorProps} from '../types';
 import {ErrorBoundary} from './error-boundary';
 import {EditorWrapper, ParseError} from './widgets';
@@ -57,11 +57,11 @@ export const EditorKernel = (props: EditorProps) => {
 		</EditorWrapper>;
 	} else if (VUtils.isBlank(state.content)) {
 		return <EditorWrapper>
-			<ParseError><IntlLabel keys={['o23', 'error', 'no-content']} value="No content given."/></ParseError>
+			<ParseError>{Labels.NoContent}</ParseError>
 		</EditorWrapper>;
 	} else if (state.def == null) {
 		return <EditorWrapper>
-			<ParseError><IntlLabel keys={['o23', 'error', 'no-def']} value="No definition parsed."/></ParseError>
+			<ParseError>{Labels.NoDefParsed}</ParseError>
 		</EditorWrapper>;
 	}
 
@@ -86,8 +86,7 @@ export const EditorKernel = (props: EditorProps) => {
 		</EditorWrapper>;
 	} catch (error) {
 		return <EditorWrapper>
-			<ParseError>{(error as Error).message ||
-				<IntlLabel keys={['o23', 'error', 'parse']} value="Parse error occurred."/>}</ParseError>
+			<ParseError>{(error as Error).message || Labels.ParseError}</ParseError>
 		</EditorWrapper>;
 	}
 };

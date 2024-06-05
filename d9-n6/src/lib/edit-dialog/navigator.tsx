@@ -1,5 +1,5 @@
-import {IntlLabel} from '@rainbow-d9/n2';
 import React from 'react';
+import {Labels} from '../labels';
 import {ConfigurableElement, ConfigurableModel} from './types';
 import {
 	EditDialogNavigatorContainer,
@@ -49,10 +49,10 @@ export const DialogNavigatorElement = (props: DialogNavigatorElementProps) => {
 			? element.children
 				.filter(element => element.visible == null || element.visible(model))
 				.map((child, index, children) => {
-				return <DialogNavigatorElement element={child} model={model}
-				                               level={level + 1} last={[...last, index === children.length - 1]}
-				                               key={child.code}/>;
-			})
+					return <DialogNavigatorElement element={child} model={model}
+					                               level={level + 1} last={[...last, index === children.length - 1]}
+					                               key={child.code}/>;
+				})
 			: null}
 	</>;
 };
@@ -69,11 +69,11 @@ export const DialogNavigatorElements = (props: DialogNavigatorProps) => {
 		{elements
 			.filter(element => element.visible == null || element.visible(model))
 			.map((element, index, elements) => {
-			return <DialogNavigatorElement element={element} model={model}
-			                               level={0}
-			                               last={[index === elements.length - 1]}
-			                               key={element.code}/>;
-		})}
+				return <DialogNavigatorElement element={element} model={model}
+				                               level={0}
+				                               last={[index === elements.length - 1]}
+				                               key={element.code}/>;
+			})}
 	</NavigatorDialogNavigatorElementsContainer>;
 };
 
@@ -82,9 +82,7 @@ export const DialogNavigator = (props: DialogNavigatorProps) => {
 	return <EditDialogNavigatorContainer>
 		<EditDialogPartContent>
 			<EditDialogPartHeader>
-				<EditDialogPartTitle>
-					<IntlLabel keys={['o23', 'dialog', 'navigator', 'title']} value="Configurable Elements"/>
-				</EditDialogPartTitle>
+				<EditDialogPartTitle>{Labels.ConfigurableElements}</EditDialogPartTitle>
 			</EditDialogPartHeader>
 			<EditDialogPartBody>
 				<DialogNavigatorElements {...props}/>
