@@ -72,6 +72,9 @@ export const PlaygroundCssVars = {
 	EDIT_DIALOG_CONFIGURABLE_ELEMENT_BADGE_MISSED_FONT_WEIGHT: 'var(--o23-playground-dialog-configurable-element-badge-missed-font-weight, 400)',
 	EDIT_DIALOG_CONFIGURABLE_ELEMENT_BADGE_MISSED_BACKGROUND_COLOR: `var(--o23-playground-dialog-configurable-element-badge-missed-background-color, transparent)`,
 	EDIT_DIALOG_CONFIGURABLE_ELEMENT_BADGE_MISSED_COLOR: `var(--o23-playground-dialog-configurable-element-badge-missed-color, ${CssVars.DANGER_COLOR})`,
+	EDIT_DIALOG_CONFIGURABLE_ELEMENT_BADGE_BANNED_FONT_WEIGHT: 'var(--o23-playground-dialog-configurable-element-badge-banned-font-weight, 400)',
+	EDIT_DIALOG_CONFIGURABLE_ELEMENT_BADGE_BANNED_BACKGROUND_COLOR: `var(--o23-playground-dialog-configurable-element-badge-banned-background-color, transparent)`,
+	EDIT_DIALOG_CONFIGURABLE_ELEMENT_BADGE_BANNED_COLOR: `var(--o23-playground-dialog-configurable-element-badge-banned-color, ${CssVars.DANGER_COLOR})`,
 	// node common
 	NODE_BORDER_RADIUS: 'var(--o23-playground-node-border-radius, 8px)',
 	NODE_BACKGROUND: `var(--o23-playground-node-background, ${CssVars.BACKGROUND_COLOR})`,

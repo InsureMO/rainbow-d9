@@ -1,12 +1,12 @@
 import {MUtils, useForceUpdate, VUtils} from '@rainbow-d9/n1';
-import React, {useEffect} from 'react';
+import React, {ReactNode, useEffect} from 'react';
 import {$d9n2} from './constants';
 import {GlobalEventTypes, useGlobalEventBus} from './global';
 import {locale} from './utils';
 
 export interface IntlLabelProps {
 	keys: Array<string>;
-	value?: string;
+	value?: ReactNode;
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	replacements?: Array<any>;
 }
@@ -38,7 +38,7 @@ export const useLanguage = () => {
 const replaceTemplate = (template: string, values?: Array<any>): string => {
 	values = values ?? [];
 	for (let index = 0; index < values.length; index++) {
-		// 使用正则表达式替换模板字符串中的 {i} 为对应的值
+		// replace with given value by index
 		template = template.replace(new RegExp('\\{' + index + '\\}', 'g'), `${values[index] ?? ''}`);
 	}
 	return template;
@@ -74,7 +74,8 @@ export const IntlLabel = (props: IntlLabelProps) => {
 
 	useLanguage();
 
-	const label = replaceTemplate(internationalize(value, keys) ?? '', replacements);
+	let label: ReactNode = replaceTemplate(internationalize('', keys) ?? '', replacements);
+	label = VUtils.isBlank(label) ? value : label;
 
 	return <>{label}</>;
 };

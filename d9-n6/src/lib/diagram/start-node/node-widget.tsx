@@ -4,8 +4,8 @@ import {DOM_KEY_WIDGET, IntlLabel} from '@rainbow-d9/n2';
 import React from 'react';
 import styled from 'styled-components';
 import {FileDefs} from '../../configurable-model';
-import {isPipelineDef, PipelineFileDef, PipelineStepUseDef} from '../../definition';
-import {ConfigurableModel, DialogContent} from '../../edit-dialog';
+import {isPipelineDef, PipelineFileDef} from '../../definition';
+import {DialogContent} from '../../edit-dialog';
 import {HelpDocs} from '../../help-docs';
 import {PlaygroundEventTypes, usePlaygroundEventBus} from '../../playground-event-bus';
 import {PlaygroundCssVars} from '../../widgets';
@@ -102,8 +102,8 @@ export const RestApiMethodPortWidget = (props: { def: PipelineFileDef }) => {
 	const {method} = def;
 	const all: Undefinable<boolean> = VUtils.isNotBlank(method);
 
-	return <RestApiVariablePortWidget label="Method" required={false}
-	                                  defined={all != null} all={all}
+	return <RestApiVariablePortWidget label="Method" required={true}
+	                                  defined={all === true} all={all}
 	                                  allAsBoolean={false} allAsGiven={`${method ?? ''}`.toUpperCase().trim()}/>;
 };
 
@@ -245,25 +245,7 @@ export const StartNodeWidget = (props: StartNodeWidgetProps) => {
 	const onConfirm = () => {
 		// TODO
 	};
-	const prepareModel = (): ConfigurableModel => {
-		const model: ConfigurableModel = {};
-		model.code = def.code;
-		model.type = def.type;
-		model.enabled = def.enabled;
-		const pipeline = def as PipelineFileDef;
-		model.route = pipeline.route;
-		model.method = pipeline.method;
-		model.headers = pipeline.headers;
-		model.pathParams = pipeline.pathParams;
-		model.queryParams = pipeline.queryParams;
-		model.body = pipeline.body;
-		model.files = pipeline.files;
-		model.exposeHeaders = pipeline.exposeHeaders;
-		model.exposeFile = pipeline.exposeFile;
-		const step = def as unknown as PipelineStepUseDef;
-		model.use = step.use;
-		return model;
-	};
+	const prepareModel = () => FileDefs.prepareModel(def);
 	const onDoubleClicked = () => {
 		fire(PlaygroundEventTypes.SHOW_EDIT_DIALOG,
 			<DialogContent helpDoc={HelpDocs.pipeline} confirm={onConfirm} prepare={prepareModel}

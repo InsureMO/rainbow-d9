@@ -71,35 +71,34 @@ export const RestApiVariablePortWidget = (props: RestApiVariableWidgetProps) => 
 	const {label, required, defined, count, all, allAsBoolean = false, allAsGiven} = props;
 
 	let icon: JSX.Element;
+	let badge: Nullable<JSX.Element> = null;
 	if (defined) {
 		icon = <PortChecked/>;
+		if (count != null) {
+			badge = <span data-role="count">{count}</span>;
+		} else if (all != null) {
+			if (allAsBoolean) {
+				if (all === true) {
+					badge = <span data-role="all">
+					<IntlLabel keys={['o23', 'variable', 'yes-char']} value="Y"/>
+				</span>;
+				} else {
+					badge = <span data-role="all">
+					<IntlLabel keys={['o23', 'variable', 'no-char']} value="N"/>
+				</span>;
+				}
+			} else if (allAsGiven != null) {
+				badge = <span data-role="all">{allAsGiven}</span>;
+			} else if (all === true) {
+				badge = <span data-role="all">
+				<IntlLabel keys={['o23', 'variable', 'all']} value="All"/>
+			</span>;
+			}
+		}
 	} else if (required) {
 		icon = <PortIncorrect/>;
 	} else {
 		icon = <PortUndefined/>;
-	}
-
-	let badge: Nullable<JSX.Element> = null;
-	if (count != null) {
-		badge = <span data-role="count">{count}</span>;
-	} else if (all != null) {
-		if (allAsBoolean) {
-			if (all === true) {
-				badge = <span data-role="all">
-					<IntlLabel keys={['o23', 'variable', 'yes-char']} value="Y"/>
-				</span>;
-			} else {
-				badge = <span data-role="all">
-					<IntlLabel keys={['o23', 'variable', 'no-char']} value="N"/>
-				</span>;
-			}
-		} else if (allAsGiven != null) {
-			badge = <span data-role="all">{allAsGiven}</span>;
-		} else if (all === true) {
-			badge = <span data-role="all">
-				<IntlLabel keys={['o23', 'variable', 'all']} value="All"/>
-			</span>;
-		}
 	}
 
 	return <RestApiVariablePortContainer data-required={required} data-defined={defined}>

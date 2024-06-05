@@ -9,6 +9,7 @@ export const O23Playground = () => {
 
 	DemoData.yaml = `code: ApiTest
 type: pipeline
+enabled: false
 route: /api/test
 method: get
 headers: true
