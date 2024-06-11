@@ -151,6 +151,12 @@ const Decorate = forwardRef((props: DecorateProps, forwardedRef: ForwardedRef<HT
 		}
 
 		const computePlaceholderSize = () => {
+			if (ref.current == null) {
+				// to avoid some async error, not sure the exact situation.
+				// it might be something like this widget was unmounted but the resize observer still works,
+				// which means ref is null.
+				return;
+			}
 			const {left: containerLeft} = ref.current.getBoundingClientRect();
 			const input = ref.current.querySelector('input');
 			const {left, width, height} = input.getBoundingClientRect();
