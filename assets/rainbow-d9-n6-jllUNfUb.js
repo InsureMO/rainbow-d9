@@ -4,13 +4,13 @@ var __publicField = (obj, key, value) => {
   __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
   return value;
 };
-import { a as color, P as jsYaml } from "./vendor-3IExBymI.js";
-import { f as CssConstants, C as CssVars, D as DOM_KEY_WIDGET, g as UnwrappedCaption, b as useGlobalHandlers, I as IntlLabel } from "./rainbow-d9-n2-BKFr4tTS.js";
-import { q as qe, r as reactExports, R as React, D as DiagramModel, C as CanvasWidget, N as NodeModel, c as createEngine, P as PortModel, a as PortModelAlignment, b as DefaultLinkModel, A as AbstractModelFactory, d as AbstractReactFactory, e as PortWidget } from "./react-base-zFvZsVyx.js";
-import { V as VUtils, r as registerWidget, g as useCreateEventBus, M as MUtils, P as PPUtils } from "./rainbow-d9-n1-_CP42cLV.js";
-import { i as index$1 } from "./rainbow-d9-n3-5zEHsxR5.js";
-import { M as Markdown } from "./react-markdown-CrF-cNtn.js";
-import { r as remarkGfm } from "./remark-7_ovcD9t.js";
+import { a as color, P as jsYaml } from "./vendor-W_zh5JiD.js";
+import { f as CssConstants, C as CssVars, I as IntlLabel, D as DOM_KEY_WIDGET, g as UnwrappedCaption, b as useGlobalHandlers } from "./rainbow-d9-n2--BLGYt2Q.js";
+import { R as React, q as qe, r as reactExports, D as DiagramModel, C as CanvasWidget, N as NodeModel, c as createEngine, P as PortModel, a as PortModelAlignment, b as DefaultLinkModel, A as AbstractModelFactory, d as AbstractReactFactory, e as PortWidget } from "./react-base-XEFxDFEy.js";
+import { V as VUtils, r as registerWidget, g as useCreateEventBus, M as MUtils, P as PPUtils } from "./rainbow-d9-n1-MgjZKHeq.js";
+import { i as index$1 } from "./rainbow-d9-n3-igu9ix1k.js";
+import { M as Markdown } from "./react-markdown-eC1Jh79A.js";
+import { r as remarkGfm } from "./remark-cDPYgQLN.js";
 const EDITOR_BACKGROUND_BLOCK_SIZE = "var(--o23-playground-editor-background-block-size, 48px)";
 const EDITOR_BACKGROUND_LINE_COLOR = `var(--o23-playground-editor-background-line-color, ${color(CssConstants.PRIMARY_COLOR).alpha(0.08)})`;
 const NODE_START_COLOR = "#ffb56b";
@@ -18,7 +18,6 @@ const NODE_END_COLOR = "#e0b35f";
 const NEXT_STEP_PORT_COLOR = "#1f6b73";
 const PREVIOUS_STEP_PORT_COLOR = "#00618b";
 const REST_API_VARIABLE_PORT_COLOR = "#87a55f";
-const NODE_PORT_UNDEFINED_COLOR = "#968b82";
 const PlaygroundCssVars = {
   EDITOR_BACKGROUND_BLOCK_SIZE,
   EDITOR_BACKGROUND_LINE_COLOR,
@@ -50,8 +49,8 @@ const PlaygroundCssVars = {
   EDIT_DIALOG_PART_HEADER_HEIGHT: "var(--o23-playground-dialog-part-header-height, 32px)",
   EDIT_DIALOG_PART_TITLE_FONT_SIZE: "var(--o23-playground-dialog-part-title-font-size, 16px)",
   EDIT_DIALOG_PART_TITLE_FONT_WEIGHT: "var(--o23-playground-dialog-part-title-font-weight, 600)",
-  EDIT_DIALOG_PART_BODY_MARGIN: `var(--o23-playground-dialog-part-body-margin, 0 0 0 -16px)`,
-  EDIT_DIALOG_PART_BODY_PADDING: "var(--o23-playground-dialog-part-body-padding, 0 0 0 16px)",
+  EDIT_DIALOG_PART_BODY_MARGIN: `var(--o23-playground-dialog-part-body-margin, 0 -16px)`,
+  EDIT_DIALOG_PART_BODY_PADDING: "var(--o23-playground-dialog-part-body-padding, 0 16px)",
   EDIT_DIALOG_HELP_DOC_TITLE_COLOR: `var(--o23-playground-dialog-part-title-color, rgb(184, 184, 184))`,
   EDIT_DIALOG_HELP_DOC_OPEN_HANDLE_LEFT: "var(--o23-playground-dialog-help-doc-open-handle-left, 0)",
   EDIT_DIALOG_HELP_DOC_OPEN_HANDLE_WIDTH: "var(--o23-playground-dialog-help-doc-open-handle-width, 64px)",
@@ -61,9 +60,40 @@ const PlaygroundCssVars = {
   EDIT_DIALOG_HELP_DOC_COLLAPSED_WIDTH: "var(--o23-playground-dialog-help-doc-collapsed-width, 64px)",
   EDIT_DIALOG_HELP_DOC_GUTTER_SIZE: "var(--o23-playground-dialog-help-doc-gutter-size, 16px)",
   EDIT_DIALOG_NAVIGATOR_WIDTH: "var(--o23-playground-dialog-navigator-width, 400px)",
+  EDIT_DIALOG_CONFIGURABLE_ELEMENT_HEIGHT: `var(--o23-playground-dialog-configurable-element-height, ${CssVars.INPUT_HEIGHT})`,
+  EDIT_DIALOG_CONFIGURABLE_ELEMENT_MARGIN: "var(--o23-playground-dialog-configurable-element-margin, 0 -8px)",
+  EDIT_DIALOG_CONFIGURABLE_ELEMENT_PADDING: "var(--o23-playground-dialog-configurable-element-padding, 0 8px)",
+  EDIT_DIALOG_CONFIGURABLE_ELEMENT_BORDER_RADIUS: `var(--o23-playground-dialog-configurable-element-border-radius, ${CssVars.BORDER_RADIUS})`,
+  EDIT_DIALOG_CONFIGURABLE_ELEMENT_BORDER: "var(--o23-playground-dialog-configurable-element-border, 1px solid rgb(236, 242, 248))",
+  EDIT_DIALOG_CONFIGURABLE_ELEMENT_HOVER_COLOR: `var(--o23-playground-dialog-configurable-element-hover-color, ${CssVars.HOVER_COLOR})`,
+  EDIT_DIALOG_CONFIGURABLE_ELEMENT_HOVER_FONT_WEIGHT: `var(--o23-playground-dialog-configurable-element-hover-font-weight, 600)`,
+  EDIT_DIALOG_CONFIGURABLE_ELEMENT_INDENT: "var(--o23-playground-dialog-configurable-element-indent, 8px)",
+  EDIT_DIALOG_CONFIGURABLE_ELEMENT_TREE_LINE_COLOR: `var(--o23-playground-dialog-configurable-element-tree-line-color, ${CssVars.BORDER_COLOR})`,
+  EDIT_DIALOG_CONFIGURABLE_ELEMENT_BADGE_HEIGHT: `var(--o23-playground-dialog-configurable-element-badge-height, calc(${CssVars.INPUT_HEIGHT} * 0.6))`,
+  EDIT_DIALOG_CONFIGURABLE_ELEMENT_BADGE_FONT_WEIGHT: "var(--o23-playground-dialog-configurable-element-badge-font-weight, 400)",
+  EDIT_DIALOG_CONFIGURABLE_ELEMENT_BADGE_PADDING: "var(--o23-playground-dialog-configurable-element-badge-padding, 0 12px)",
+  EDIT_DIALOG_CONFIGURABLE_ELEMENT_BADGE_BORDER_RADIUS: "var(--o23-playground-dialog-configurable-element-badge-border-radius, 6px)",
+  EDIT_DIALOG_CONFIGURABLE_ELEMENT_BADGE_TEXT_FONT_SIZE: "var(--o23-playground-dialog-configurable-element-badge-text-font-size, 0.8em)",
+  EDIT_DIALOG_CONFIGURABLE_ELEMENT_BADGE_TEXT_FONT_WEIGHT: "var(--o23-playground-dialog-configurable-element-badge-text-font-weight, 400)",
+  EDIT_DIALOG_CONFIGURABLE_ELEMENT_BADGE_ICON_MARGIN: "var(--o23-playground-dialog-configurable-element-badge-icon-margin, 0 -8px 0 0)",
+  EDIT_DIALOG_CONFIGURABLE_ELEMENT_BADGE_CHECKED_BACKGROUND_COLOR: `var(--o23-playground-dialog-configurable-element-badge-checked-background-color, transparent)`,
+  EDIT_DIALOG_CONFIGURABLE_ELEMENT_BADGE_CHECKED_COLOR: `var(--o23-playground-dialog-configurable-element-badge-checked-color, ${CssVars.SUCCESS_COLOR})`,
+  EDIT_DIALOG_CONFIGURABLE_ELEMENT_BADGE_MISSED_BACKGROUND_COLOR: `var(--o23-playground-dialog-configurable-element-badge-missed-background-color, transparent)`,
+  EDIT_DIALOG_CONFIGURABLE_ELEMENT_BADGE_MISSED_COLOR: `var(--o23-playground-dialog-configurable-element-badge-missed-color, ${CssVars.DANGER_COLOR})`,
+  EDIT_DIALOG_CONFIGURABLE_ELEMENT_BADGE_BANNED_BACKGROUND_COLOR: `var(--o23-playground-dialog-configurable-element-badge-banned-background-color, transparent)`,
+  EDIT_DIALOG_CONFIGURABLE_ELEMENT_BADGE_BANNED_COLOR: `var(--o23-playground-dialog-configurable-element-badge-banned-color, ${CssVars.DANGER_COLOR})`,
+  EDIT_DIALOG_CONFIGURABLE_ELEMENT_BADGE_ALL_BACKGROUND_COLOR: `var(--o23-playground-dialog-configurable-element-badge-all-background-color, ${CssVars.SUCCESS_COLOR})`,
+  EDIT_DIALOG_CONFIGURABLE_ELEMENT_BADGE_ALL_COLOR: `var(--o23-playground-dialog-configurable-element-badge-all-color, ${CssVars.INVERT_COLOR})`,
+  EDIT_DIALOG_CONFIGURABLE_ELEMENT_BADGE_IGNORED_BACKGROUND_COLOR: `var(--o23-playground-dialog-configurable-element-badge-ignored-background-color, ${CssConstants.WAIVE_COLOR})`,
+  EDIT_DIALOG_CONFIGURABLE_ELEMENT_BADGE_IGNORED_COLOR: `var(--o23-playground-dialog-configurable-element-badge-ignored-color, ${CssVars.INVERT_COLOR})`,
+  EDIT_DIALOG_CONFIGURABLE_ELEMENT_BADGE_NOT_AVAILABLE_BACKGROUND_COLOR: `var(--o23-playground-dialog-configurable-element-badge-not-available-background-color, ${CssVars.WAIVE_COLOR})`,
+  EDIT_DIALOG_CONFIGURABLE_ELEMENT_BADGE_NOT_AVAILABLE_COLOR: `var(--o23-playground-dialog-configurable-element-badge-not-available-color, ${CssVars.INVERT_COLOR})`,
+  EDIT_DIALOG_CONFIGURABLE_ELEMENT_BADGE_COUNT_BACKGROUND_COLOR: `var(--o23-playground-dialog-configurable-element-badge-count-background-color, ${CssVars.SUCCESS_COLOR})`,
+  EDIT_DIALOG_CONFIGURABLE_ELEMENT_BADGE_COUNT_COLOR: `var(--o23-playground-dialog-configurable-element-badge-count-color, ${CssVars.INVERT_COLOR})`,
   NODE_BORDER_RADIUS: "var(--o23-playground-node-border-radius, 8px)",
   NODE_BACKGROUND: `var(--o23-playground-node-background, ${CssVars.BACKGROUND_COLOR})`,
   NODE_TITLE_PADDING: "var(--o23-playground-node-title-padding, 0 10px)",
+  NODE_TITLE_SPREADER_MIN_WIDTH: "var(--o23-playground-node-title-spreader-min-width, 40px)",
   NODE_MIN_WIDTH: "var(--o23-playground-node-min-width, 160px)",
   NODE_ICON_SIZE: "var(--o23-playground-node-icon-size, 14px)",
   NODE_PORT_HEIGHT: "var(--o23-playground-node-port-height, 24px)",
@@ -85,8 +115,8 @@ const PlaygroundCssVars = {
   NODE_REST_API_VARIABLE_PORT_BACKGROUND: `var(--o23-playground-rest-api-variable-port-background, ${REST_API_VARIABLE_PORT_COLOR})`,
   NODE_REST_API_VARIABLE_PORT_BORDER: `var(--o23-playground-rest-api-variable-port-border, 1px solid ${color(REST_API_VARIABLE_PORT_COLOR).darken(0.1).opaquer(0.5)})`,
   NODE_REST_API_VARIABLE_PORT_PADDING: "var(--o23-playground-rest-api-variable-port-padding, 0 12px 0 8px)",
-  NODE_REST_API_VARIABLE_PORT_UNDEFINED_BACKGROUND: `var(--o23-playground-rest-api-variable-port-undefined-background, ${NODE_PORT_UNDEFINED_COLOR})`,
-  NODE_REST_API_VARIABLE_PORT_UNDEFINED_BORDER: `var(--o23-playground-rest-api-variable-port-undefined-border, 1px solid ${color(NODE_PORT_UNDEFINED_COLOR).darken(0.1).opaquer(0.5)})`,
+  NODE_REST_API_VARIABLE_PORT_UNDEFINED_BACKGROUND: `var(--o23-playground-rest-api-variable-port-undefined-background, ${CssConstants.WAIVE_COLOR})`,
+  NODE_REST_API_VARIABLE_PORT_UNDEFINED_BORDER: `var(--o23-playground-rest-api-variable-port-undefined-border, 1px solid ${color(CssConstants.WAIVE_COLOR).darken(0.1).opaquer(0.5)})`,
   NODE_REST_API_VARIABLE_PORT_LACKING_BACKGROUND: `var(--o23-playground-rest-api-variable-port-lacking-background, ${CssVars.DANGER_COLOR})`,
   NODE_REST_API_VARIABLE_PORT_LACKING_BORDER: `var(--o23-playground-rest-api-variable-port-lacking-border, 1px solid ${color(CssConstants.DANGER_COLOR).darken(0.1).opaquer(0.5)})`,
   NODE_REST_API_VARIABLE_PORT_BADGE_BACKGROUND: `var(--o23-playground-rest-api-variable-port-badge-background, ${CssVars.SUCCESS_COLOR})`,
@@ -157,6 +187,56 @@ const PortIncorrect = (props) => {
     React.createElement("path", { d: "M14.5 9.5L9.50002 14.5M9.5 9.49998L14.5 14.5", stroke: "currentColor", strokeWidth: "1.5", strokeLinecap: "round" })
   );
 };
+const ElementChecked = (props) => {
+  return React.createElement(
+    "svg",
+    { ...props, "data-icon": "o23-element-checked", viewBox: "0 0 24 24", fill: "none", xmlns: "http://www.w3.org/2000/svg" },
+    React.createElement("path", { d: "M9.5 12.4L10.9286 14L14.5 10", stroke: "currentColor", strokeWidth: "1.5", strokeLinecap: "round", strokeLinejoin: "round" }),
+    React.createElement("path", { d: "M3 10.4167C3 7.21907 3 5.62028 3.37752 5.08241C3.75503 4.54454 5.25832 4.02996 8.26491 3.00079L8.83772 2.80472C10.405 2.26824 11.1886 2 12 2C12.8114 2 13.595 2.26824 15.1623 2.80472L15.7351 3.00079C18.7417 4.02996 20.245 4.54454 20.6225 5.08241C21 5.62028 21 7.21907 21 10.4167C21 10.8996 21 11.4234 21 11.9914C21 14.4963 20.1632 16.4284 19 17.9041M3.19284 14C4.05026 18.2984 7.57641 20.5129 9.89856 21.5273C10.62 21.8424 10.9807 22 12 22C13.0193 22 13.38 21.8424 14.1014 21.5273C14.6796 21.2747 15.3324 20.9478 16 20.5328", stroke: "currentColor", strokeWidth: "1.5", strokeLinecap: "round" })
+  );
+};
+const ElementMissed = (props) => {
+  return React.createElement(
+    "svg",
+    { ...props, "data-icon": "o23-element-missed", viewBox: "0 0 24 24", fill: "none", xmlns: "http://www.w3.org/2000/svg" },
+    React.createElement("path", { d: "M10.125 8.875C10.125 7.83947 10.9645 7 12 7C13.0355 7 13.875 7.83947 13.875 8.875C13.875 9.56245 13.505 10.1635 12.9534 10.4899C12.478 10.7711 12 11.1977 12 11.75V13", stroke: "currentColor", strokeWidth: "1.5", strokeLinecap: "round" }),
+    React.createElement("circle", { cx: "12", cy: "16", r: "1", fill: "currentColor" }),
+    React.createElement("path", { d: "M7 3.33782C8.47087 2.48697 10.1786 2 12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 10.1786 2.48697 8.47087 3.33782 7", stroke: "currentColor", strokeWidth: "1.5", strokeLinecap: "round" })
+  );
+};
+const ElementBanned = (props) => {
+  return React.createElement(
+    "svg",
+    { ...props, "data-icon": "o23-element-banned", viewBox: "0 0 24 24", fill: "none", xmlns: "http://www.w3.org/2000/svg" },
+    React.createElement("path", { d: "M14.5 9.5L9.50002 14.5M9.5 9.49998L14.5 14.5", stroke: "currentColor", strokeWidth: "1.5", strokeLinecap: "round" }),
+    React.createElement("path", { d: "M3 10.4167C3 7.21907 3 5.62028 3.37752 5.08241C3.75503 4.54454 5.25832 4.02996 8.26491 3.00079L8.83772 2.80472C10.405 2.26824 11.1886 2 12 2C12.8114 2 13.595 2.26824 15.1623 2.80472L15.7351 3.00079C18.7417 4.02996 20.245 4.54454 20.6225 5.08241C21 5.62028 21 7.21907 21 10.4167C21 10.8996 21 11.4234 21 11.9914C21 14.4963 20.1632 16.4284 19 17.9041M3.19284 14C4.05026 18.2984 7.57641 20.5129 9.89856 21.5273C10.62 21.8424 10.9807 22 12 22C13.0193 22 13.38 21.8424 14.1014 21.5273C14.6796 21.2747 15.3324 20.9478 16 20.5328", stroke: "currentColor", strokeWidth: "1.5", strokeLinecap: "round" })
+  );
+};
+const Labels = {
+  NoContent: React.createElement(IntlLabel, { keys: ["o23", "error", "no-content"], value: "No content given." }),
+  NoDefParsed: React.createElement(IntlLabel, { keys: ["o23", "error", "no-def"], value: "No definition parsed." }),
+  ParseError: React.createElement(IntlLabel, { keys: ["o23", "error", "parse"], value: "Parse error occurred." }),
+  EndNodeTitle: React.createElement(IntlLabel, { keys: ["o23", "node", "end"], value: "End" }),
+  PreviousStepPort: React.createElement(IntlLabel, { keys: ["o23", "port", "previous"], value: "In" }),
+  NextStepPort: React.createElement(IntlLabel, { keys: ["o23", "port", "next"], value: "Out" }),
+  HelpDesk: React.createElement(IntlLabel, { keys: ["o23", "dialog", "docs", "title"], value: "Help Desk" }),
+  ConfigurableElements: React.createElement(IntlLabel, { keys: ["o23", "dialog", "navigator", "title"], value: "Configurable Elements" }),
+  SpecificDetails: React.createElement(IntlLabel, { keys: ["o23", "dialog", "specific", "title"], value: "Specific Details" }),
+  BackToCanvas: React.createElement(IntlLabel, { keys: ["o23", "dialog", "close"], value: "Back to canvas" }),
+  TypeOfStandardPipeline: React.createElement(IntlLabel, { keys: ["o23", "pipeline", "standard"], value: "Pipeline" }),
+  TypeOfStepOrSets: (type) => {
+    return React.createElement(IntlLabel, { keys: ["o23", "pipeline", type], value: (type ?? "").replace("-", " ") });
+  },
+  All: React.createElement(IntlLabel, { keys: ["o23", "variable", "all"], value: "All" }),
+  Ignored: React.createElement(IntlLabel, { keys: ["o23", "variable", "ignored"], value: "Ignored" }),
+  NotAvailable: React.createElement(IntlLabel, { keys: ["o23", "variable", "not-available"], value: "N/A" }),
+  YesChar: React.createElement(IntlLabel, { keys: ["o23", "variable", "yes-char"], value: "Y" }),
+  NoChar: React.createElement(IntlLabel, { keys: ["o23", "variable", "no-char"], value: "N" }),
+  BadgeChecked: React.createElement(IntlLabel, { keys: ["o23", "variable", "checked"], value: React.createElement(ElementChecked, null) }),
+  BadgeMissed: React.createElement(IntlLabel, { keys: ["o23", "variable", "missed"], value: React.createElement(ElementMissed, null) }),
+  BadgeBanned: React.createElement(IntlLabel, { keys: ["o23", "variable", "banned"], value: React.createElement(ElementBanned, null) }),
+  NoCodeDefinedInFileDef: React.createElement(IntlLabel, { keys: ["o23", "pipeline", "code", "undefined"], value: "No code defined" })
+};
 const _NextStepPortModel = class _NextStepPortModel extends PortModel {
   constructor() {
     super({
@@ -215,11 +295,7 @@ const NextStepPortWidget = (props) => {
     NextStepPortContainer,
     null,
     React.createElement(PortWidget, { port, engine }),
-    React.createElement(
-      "span",
-      null,
-      React.createElement(IntlLabel, { keys: ["o23", "port", "next"], value: "Out" })
-    )
+    React.createElement("span", null, Labels.NextStepPort)
   );
 };
 const _PreviousStepPortModel = class _PreviousStepPortModel extends PortModel {
@@ -278,11 +354,7 @@ const PreviousStepPortWidget = (props) => {
     PreviousStepPortContainer,
     null,
     React.createElement(PortWidget, { port, engine }),
-    React.createElement(
-      "span",
-      null,
-      React.createElement(IntlLabel, { keys: ["o23", "port", "previous"], value: "In" })
-    )
+    React.createElement("span", null, Labels.PreviousStepPort)
   );
 };
 const NodeContainer = qe.div`
@@ -304,12 +376,22 @@ const NodeHeader = qe.div`
     margin-top: -2px;
 `;
 const NodeTitle = qe(UnwrappedCaption)`
-    flex-grow: 1;
     color: var(--color);
     font-size: var(--font-size);
     font-weight: var(--font-weight);
 `;
+const NodeTitleSpreader = qe.span.attrs({ [DOM_KEY_WIDGET]: "o23-playground-node-title-spreader" })`
+    display: flex;
+    position: relative;
+    flex-grow: 1;
+    min-width: var(--min-width, ${PlaygroundCssVars.NODE_TITLE_SPREADER_MIN_WIDTH});
+
+    + span {
+        flex-grow: unset;
+    }
+`;
 const NodeSecondTitle = qe(UnwrappedCaption)`
+    flex-grow: 1;
     justify-content: flex-end;
     color: var(--color);
     font-size: var(--font-size);
@@ -376,11 +458,7 @@ const EndNodeWidget = (props) => {
     React.createElement(
       EndNodeHeader,
       null,
-      React.createElement(
-        EndNodeTitle,
-        null,
-        React.createElement(IntlLabel, { keys: ["o23", "node", "end"], value: "End" })
-      )
+      React.createElement(EndNodeTitle, null, Labels.EndNodeTitle)
     ),
     React.createElement(
       EndNodeBody,
@@ -746,6 +824,169 @@ const HelpDocContainer = qe.div.attrs(({ width }) => {
         }
     }
 `;
+const NavigatorDialogNavigatorElementsContainer = qe.div.attrs({
+  [DOM_KEY_WIDGET]: "o23-playground-edit-dialog-configurable-elements",
+  "data-h-scroll": ""
+})`
+    display: flex;
+    position: relative;
+    flex-grow: 1;
+    flex-direction: column;
+    align-self: stretch;
+    margin: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_MARGIN};
+    padding: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_PADDING};
+    overflow-y: auto;
+    overflow-x: hidden;
+`;
+const NavigatorConfigurableElementContainer = qe.div.attrs(({ level }) => {
+  return {
+    [DOM_KEY_WIDGET]: "o23-playground-edit-dialog-configurable-element",
+    style: {
+      "--level": level
+    }
+  };
+})`
+    display: flex;
+    position: relative;
+    align-items: center;
+    min-height: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_HEIGHT};
+    margin: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_MARGIN};
+    padding: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_PADDING};
+    border-radius: 0;
+    cursor: pointer;
+    transition: all ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION};
+
+    &:hover {
+        background-color: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_HOVER_COLOR};
+        border-radius: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_BORDER_RADIUS};
+        font-weight: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_HOVER_FONT_WEIGHT};
+    }
+
+    &:not(:last-child) {
+        border-bottom: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_BORDER};
+    }
+`;
+const NavigatorConfigurableElementTreeLine = qe.span.attrs(({ level }) => {
+  return {
+    [DOM_KEY_WIDGET]: "o23-playground-edit-dialog-configurable-element-tree-line",
+    style: {
+      "--margin-left": `calc(${level - 1} * ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_INDENT})`
+    }
+  };
+})`
+    display: flex;
+    position: relative;
+    align-self: stretch;
+    width: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_INDENT};
+    margin-left: var(--margin-left);
+
+    &:before {
+        content: '';
+        display: block;
+        position: absolute;
+        width: 1px;
+        height: calc(100% + 1px);
+        top: 0;
+        left: 3px;
+        background-color: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_TREE_LINE_COLOR};
+    }
+
+    &[data-last-level=true] {
+        &:after {
+            content: '';
+            display: block;
+            position: absolute;
+            width: 100%;
+            height: 50%;
+            top: 0;
+            left: 3px;
+            border-bottom-left-radius: 3px;
+            border-bottom: 1px solid ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_TREE_LINE_COLOR};
+        }
+
+        &[data-last-node=true]:before {
+            display: none;
+        }
+
+        &[data-last-node=true]:after {
+            border-left: 1px solid ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_TREE_LINE_COLOR};
+        }
+    }
+
+    &[data-last-level=false][data-last-node=true]:before {
+        display: none;
+    }
+`;
+const NavigatorConfigurableElementLabel = qe.div.attrs(({ level }) => {
+  return {
+    [DOM_KEY_WIDGET]: "o23-playground-edit-dialog-configurable-element-label",
+    style: {
+      "--margin-left": level === 0 ? 0 : PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_INDENT
+    }
+  };
+})`
+    display: flex;
+    position: relative;
+    align-items: center;
+    flex-grow: 1;
+    margin-left: var(--margin-left);
+`;
+const NavigatorConfigurableElementBadge = qe.div.attrs({ [DOM_KEY_WIDGET]: "o23-playground-edit-dialog-configurable-element-badge" })`
+    display: flex;
+    position: relative;
+    align-items: center;
+    font-weight: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_BADGE_FONT_WEIGHT};
+`;
+const NavigatorConfigurableElementBadgeWrapper = qe.span.attrs({ [DOM_KEY_WIDGET]: "o23-playground-edit-dialog-configurable-element-badge-wrapper" })`
+    display: flex;
+    position: relative;
+    align-items: center;
+    font-size: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_BADGE_TEXT_FONT_SIZE};
+    font-weight: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_BADGE_TEXT_FONT_WEIGHT};
+    height: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_BADGE_HEIGHT};
+    padding: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_BADGE_PADDING};
+    border-radius: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_BADGE_BORDER_RADIUS};
+
+    &[data-role=checked] {
+        background-color: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_BADGE_CHECKED_BACKGROUND_COLOR};
+        color: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_BADGE_CHECKED_COLOR};
+    }
+
+    &[data-role=missed] {
+        background-color: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_BADGE_MISSED_BACKGROUND_COLOR};
+        color: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_BADGE_MISSED_COLOR};
+    }
+
+    &[data-role=banned] {
+        background-color: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_BADGE_BANNED_BACKGROUND_COLOR};
+        color: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_BADGE_BANNED_COLOR};
+    }
+
+    &[data-role=all] {
+        background-color: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_BADGE_ALL_BACKGROUND_COLOR};
+        color: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_BADGE_ALL_COLOR};
+    }
+
+    &[data-role=ignored] {
+        background-color: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_BADGE_IGNORED_BACKGROUND_COLOR};
+        color: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_BADGE_IGNORED_COLOR};
+    }
+
+    &[data-role=not-available] {
+        background-color: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_BADGE_NOT_AVAILABLE_BACKGROUND_COLOR};
+        color: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_BADGE_NOT_AVAILABLE_COLOR};
+    }
+
+    &[data-role=count] {
+        background-color: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_BADGE_COUNT_BACKGROUND_COLOR};
+        color: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_BADGE_COUNT_COLOR};
+    }
+
+    > svg {
+        width: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_BADGE_HEIGHT};
+        margin: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_BADGE_ICON_MARGIN};
+    }
+`;
 var EditDialogEventTypes;
 (function(EditDialogEventTypes2) {
   EditDialogEventTypes2["OPEN_HELP_DESK"] = "open-help-desk";
@@ -821,6 +1062,9 @@ const OpenHandle = () => {
     React.createElement(ArrowRight, null)
   );
 };
+const LinkRenderer = (props) => {
+  return React.createElement("a", { href: props.href, target: "_blank", rel: "noreferrer" }, props.children);
+};
 const DialogHelpDesk = (props) => {
   const { helpDoc } = props;
   const [state, setState] = reactExports.useState({});
@@ -843,11 +1087,7 @@ const DialogHelpDesk = (props) => {
       React.createElement(
         EditDialogPartHeader,
         null,
-        React.createElement(
-          EditDialogPartTitle,
-          null,
-          React.createElement(IntlLabel, { keys: ["o23", "dialog", "docs", "title"], value: "Help Desk" })
-        ),
+        React.createElement(EditDialogPartTitle, null, Labels.HelpDesk),
         React.createElement(CloseHandle, null)
       ),
       React.createElement(
@@ -857,7 +1097,7 @@ const DialogHelpDesk = (props) => {
         React.createElement(
           HelpDocContainer,
           { width: state.docWidth },
-          React.createElement(Markdown, { className: "markdown-body", remarkPlugins: [remarkGfm] }, helpDoc)
+          React.createElement(Markdown, { className: "markdown-body", components: { a: LinkRenderer }, remarkPlugins: [remarkGfm] }, helpDoc)
         )
       )
     )
@@ -871,7 +1111,33 @@ const LayoutController = () => {
   }, [fire, setOpened]);
   return React.createElement(EditDialogLayoutControllerHandle, { opened });
 };
-const DialogNavigator = (_props) => {
+const DialogNavigatorElement = (props) => {
+  const { element, model, level, last } = props;
+  const { label, badge } = element;
+  return React.createElement(
+    React.Fragment,
+    null,
+    React.createElement(
+      NavigatorConfigurableElementContainer,
+      { level },
+      level !== 0 ? new Array(level + 1).fill(1).map((_, index) => {
+        return index !== 0 ? React.createElement(NavigatorConfigurableElementTreeLine, { level: index, "data-last-node": last[index], "data-last-level": index === level, key: index }) : null;
+      }) : null,
+      React.createElement(NavigatorConfigurableElementLabel, { level }, label),
+      badge != null ? React.createElement(NavigatorConfigurableElementBadge, null, badge(model)) : null
+    ),
+    element.children != null ? element.children.filter((element2) => element2.visible == null || element2.visible(model)).map((child, index, children) => {
+      return React.createElement(DialogNavigatorElement, { element: child, model, level: level + 1, last: [...last, index === children.length - 1], key: child.code });
+    }) : null
+  );
+};
+const DialogNavigatorElements = (props) => {
+  const { elements: elements2, model } = props;
+  return React.createElement(NavigatorDialogNavigatorElementsContainer, null, elements2.filter((element) => element.visible == null || element.visible(model)).map((element, index, elements3) => {
+    return React.createElement(DialogNavigatorElement, { element, model, level: 0, last: [index === elements3.length - 1], key: element.code });
+  }));
+};
+const DialogNavigator = (props) => {
   return React.createElement(
     EditDialogNavigatorContainer,
     null,
@@ -881,13 +1147,13 @@ const DialogNavigator = (_props) => {
       React.createElement(
         EditDialogPartHeader,
         null,
-        React.createElement(
-          EditDialogPartTitle,
-          null,
-          React.createElement(IntlLabel, { keys: ["o23", "dialog", "navigator", "title"], value: "Configurable Elements" })
-        )
+        React.createElement(EditDialogPartTitle, null, Labels.ConfigurableElements)
       ),
-      React.createElement(EditDialogPartBody, null)
+      React.createElement(
+        EditDialogPartBody,
+        null,
+        React.createElement(DialogNavigatorElements, { ...props })
+      )
     )
   );
 };
@@ -901,11 +1167,7 @@ const DialogSpecificDetails = () => {
       React.createElement(
         EditDialogPartHeader,
         null,
-        React.createElement(
-          EditDialogPartTitle,
-          null,
-          React.createElement(IntlLabel, { keys: ["o23", "dialog", "specific", "title"], value: "Specific Details" })
-        )
+        React.createElement(EditDialogPartTitle, null, Labels.SpecificDetails)
       )
     )
   );
@@ -924,7 +1186,7 @@ const DialogContentInitializer = () => {
   return React.createElement(EditDialogContentInitializer, { ref });
 };
 const DialogContent = (props) => {
-  const { helpDoc, elements, prepare, confirm } = props;
+  const { helpDoc, elements: elements2, prepare, confirm } = props;
   const { fire } = usePlaygroundEventBus();
   const [state] = reactExports.useState({ model: prepare() });
   const onBackClicked = () => {
@@ -943,14 +1205,35 @@ const DialogContent = (props) => {
         EditorDialogCloser,
         { onClick: onBackClicked },
         React.createElement(Back, null),
-        React.createElement(IntlLabel, { keys: ["o23", "dialog", "close"], value: "Back to canvas" })
+        Labels.BackToCanvas
       ),
       React.createElement(DialogHelpDesk, { helpDoc }),
       React.createElement(DialogSpecificDetails, null),
-      React.createElement(DialogNavigator, { elements, model: state.model })
+      React.createElement(DialogNavigator, { elements: elements2, model: state.model })
     ),
     React.createElement(DialogContentInitializer, null)
   );
+};
+const ConfigurableElementBadgeChecked = () => {
+  return React.createElement(NavigatorConfigurableElementBadgeWrapper, { "data-role": "checked" }, Labels.BadgeChecked);
+};
+const ConfigurableElementBadgeMissed = () => {
+  return React.createElement(NavigatorConfigurableElementBadgeWrapper, { "data-role": "missed" }, Labels.BadgeMissed);
+};
+const ConfigurableElementBadgeBanned = () => {
+  return React.createElement(NavigatorConfigurableElementBadgeWrapper, { "data-role": "banned" }, Labels.BadgeBanned);
+};
+const ConfigurableElementBadgeAll = () => {
+  return React.createElement(NavigatorConfigurableElementBadgeWrapper, { "data-role": "all" }, Labels.All);
+};
+const ConfigurableElementBadgeIgnored = () => {
+  return React.createElement(NavigatorConfigurableElementBadgeWrapper, { "data-role": "ignored" }, Labels.Ignored);
+};
+const ConfigurableElementBadgeNotAvailable = () => {
+  return React.createElement(NavigatorConfigurableElementBadgeWrapper, { "data-role": "not-available" }, Labels.NotAvailable);
+};
+const ConfigurableElementBadgeCount = (props) => {
+  return React.createElement(NavigatorConfigurableElementBadgeWrapper, { "data-role": "count" }, props.count);
 };
 const EditDialog = () => {
   const { on, off } = usePlaygroundEventBus();
@@ -992,7 +1275,206 @@ const EditDialog = () => {
     React.createElement(EditDialogWrapper, null, state.content)
   );
 };
-const markdown = "# Overview\n\n## headline 2\n\n### headline 3\n\n#### headline 4\n\n##### headline 5\n\n###### headline 6 [](#headline-6)\n\nThere are 3 types of pipelines in the system:\n\n- **Data Pipeline**: This pipeline is used to process data from the source to the destination. It is used to transform the data from one\n  format to another format. It is used to clean the data and to perform some operations on the data. It is used to load the data into the\n  destination.\n- **Model Pipeline**: This pipeline is used to train the model on the data. It is used to test the model on the data. It is used to evaluate\n  the model on the data. It is used to deploy the model on the data.\n- **Deployment Pipeline**: This pipeline is used to deploy the model on the data. It is used to monitor the model on the data. It is used to\n  retrain the model on the data. It is used to update the model on the data.\n\n# Data Pipeline\n\nThe data pipeline is used to process data from the source to the destination. It is used to transform the data from one format to another\nformat. It is used to clean the data and to perform some operations on the data. It is used to load the data into the destination.\n\n# Model Pipeline\n\nThe model pipeline is used to train the model on the data. It is used to test the model on the data. It is used to evaluate the model on the\ndata. It is used to deploy the model on the data.\n\n# Deployment Pipeline\n\nThe deployment pipeline is used to deploy the model on the data. It is used to monitor the model on the data. It is used to retrain the\nmodel on the data. It is used to update the model on the data.\n";
+const prepareModel = (def) => {
+  const model = {
+    code: def.code,
+    type: def.type,
+    enabled: def.enabled
+  };
+  if (isPipelineDef(def)) {
+    const pipeline = def;
+    const pipelineModel = model;
+    if (VUtils.isNotBlank(pipeline.route)) {
+      pipelineModel.api = true;
+      pipelineModel.route = pipeline.route;
+      pipelineModel.method = pipeline.method;
+      pipelineModel.headers = pipeline.headers;
+      pipelineModel.pathParams = pipeline.pathParams;
+      pipelineModel.queryParams = pipeline.queryParams;
+      pipelineModel.body = pipeline.body;
+      pipelineModel.files = pipeline.files;
+      pipelineModel.exposeHeaders = pipeline.exposeHeaders;
+      pipelineModel.exposeFile = pipeline.exposeFile;
+    } else {
+      pipelineModel.api = false;
+    }
+  } else {
+    const step = def;
+    model.use = step.use;
+  }
+  return model;
+};
+const allOrArray = (value) => {
+  if (value === true) {
+    return React.createElement(ConfigurableElementBadgeAll, null);
+  } else if (Array.isArray(value)) {
+    const length = value.filter((header) => VUtils.isNotBlank(header)).length;
+    return React.createElement(ConfigurableElementBadgeCount, { count: length });
+  } else {
+    return React.createElement(ConfigurableElementBadgeIgnored, null);
+  }
+};
+const visibleOnPipeline = (model) => model.type === "pipeline";
+const visibleOnApi = (model) => visibleOnPipeline(model) && model.api === true;
+const elementCode = {
+  code: "code",
+  label: "Code",
+  anchor: "code",
+  badge: (model) => {
+    if (VUtils.isNotBlank(model.code)) {
+      return model.code.trim();
+    } else {
+      return React.createElement(ConfigurableElementBadgeMissed, null);
+    }
+  }
+};
+const elementEnabled = {
+  code: "enabled",
+  label: "Enabled",
+  anchor: "enabled",
+  badge: (model) => model.enabled !== false ? React.createElement(ConfigurableElementBadgeChecked, null) : React.createElement(ConfigurableElementBadgeBanned, null)
+};
+const elementRoute = {
+  code: "route",
+  label: "Route",
+  anchor: "route",
+  badge: (model) => {
+    if (VUtils.isNotBlank(model.route)) {
+      return model.route.trim();
+    } else {
+      return React.createElement(ConfigurableElementBadgeMissed, null);
+    }
+  },
+  visible: visibleOnApi
+};
+const elementMethod = {
+  code: "method",
+  label: "Method",
+  anchor: "method",
+  badge: (model) => {
+    if (VUtils.isNotBlank(model.method)) {
+      return model.method.trim().toUpperCase();
+    } else {
+      return React.createElement(ConfigurableElementBadgeMissed, null);
+    }
+  }
+};
+const elementHeaders = {
+  code: "headers",
+  label: "Headers",
+  anchor: "headers",
+  badge: (model) => {
+    return allOrArray(model.headers);
+  }
+};
+const elementPathParams = {
+  code: "pathParams",
+  label: "Path Parameters",
+  anchor: "path-params",
+  badge: (model) => {
+    return allOrArray(model.pathParams);
+  }
+};
+const elementQueryParams = {
+  code: "queryParams",
+  label: "Query Parameters",
+  anchor: "query-params",
+  badge: (model) => {
+    return allOrArray(model.queryParams);
+  }
+};
+const elementBody = {
+  code: "body",
+  label: "Body",
+  anchor: "body",
+  badge: (model) => {
+    if (model.body === true) {
+      return React.createElement(ConfigurableElementBadgeChecked, null);
+    } else {
+      return React.createElement(ConfigurableElementBadgeIgnored, null);
+    }
+  }
+};
+const elementFiles = {
+  code: "files",
+  label: "Files",
+  anchor: "files",
+  badge: (model) => {
+    if (model.files != null && model.files !== false) {
+      return React.createElement(ConfigurableElementBadgeChecked, null);
+    } else {
+      return React.createElement(ConfigurableElementBadgeIgnored, null);
+    }
+  }
+};
+const elementRequest = {
+  code: "request",
+  label: "Request",
+  anchor: "request",
+  children: [
+    elementMethod,
+    elementHeaders,
+    elementPathParams,
+    elementQueryParams,
+    elementBody,
+    elementFiles
+  ],
+  visible: visibleOnApi
+};
+const elementExposeHeaders = {
+  code: "exposeHeaders",
+  label: "Expose Headers",
+  anchor: "expose-headers",
+  badge: (model) => {
+    const count = Object.keys(model.exposeHeaders ?? {}).length;
+    if (count !== 0) {
+      return React.createElement(ConfigurableElementBadgeCount, { count });
+    } else {
+      return React.createElement(ConfigurableElementBadgeNotAvailable, null);
+    }
+  }
+};
+const elementExposeFile = {
+  code: "exposeFile",
+  label: "Expose File",
+  anchor: "expose-file",
+  badge: (model) => {
+    if (model.exposeFile === true) {
+      return React.createElement(ConfigurableElementBadgeChecked, null);
+    } else {
+      return React.createElement(ConfigurableElementBadgeNotAvailable, null);
+    }
+  }
+};
+const elementResponse = {
+  code: "response",
+  label: "Response",
+  anchor: "response",
+  children: [elementExposeHeaders, elementExposeFile],
+  visible: visibleOnApi
+};
+const elementType = {
+  code: "type",
+  label: "Type",
+  anchor: "type",
+  badge: (model) => {
+    switch (true) {
+      case model.api === true:
+        return "REST API";
+      case model.type === "pipeline":
+        return "Pipeline";
+      case model.type === "step-sets":
+        return "Step Sets";
+      case model.type === "step":
+        return "Step";
+      default:
+        return React.createElement(ConfigurableElementBadgeMissed, null);
+    }
+  },
+  children: [elementRoute, elementRequest, elementResponse]
+};
+const elements = [elementCode, elementEnabled, elementType];
+const markdown = "## Overview\n\nThe core concept of `rainbow-o23` is pipeline, where all logic is defined through pipeline and its steps. There are three different forms of\npipeline based on how it is defined:\n\n- Standard pipeline, which can optionally be exposed as a RESTful API. To differentiate, we generally refer to pipelines that are exposed as\n  RESTful APIs as `pipeline`, and pipelines that are not exposed as RESTful APIs as `independent pipeline`. In all documents, we will use\n  this name to refer to it. If not specifically labeled as `independent`, it means that this pipeline has been exposed as a RESTful API.\n- Set of steps, composed of a group of steps,\n- Independent step: based on the definition of a single step.\n\nIf a pipeline is exposed as an API, it does not allow other pipeline steps to call it, otherwise it does. Therefore, if certain logic\ncombinations can be reused, they should be defined as an independent pipeline/set of steps/independent step.\n\n## Common attributes\n\nAll definitions should have the following attributes:\n\n- A `code` attribute for identification within the system, so the value of the `code` attribute is globally unique.\n- A `type` attribute is used to indicate the type of this definition, and the value of the `type` attribute must be one\n  of `pipeline`, `step-sets`, or `step`.\n- An `enabled` attribute is used to indicate whether this definition is effective, and the value of the `enabled` attribute must be\n  either `true` or `false`. If not defined, this definition is considered to be effective by default.\n\n## Pipeline\n\nIf the definition contains a `route` attribute and specifies a URI, it is considered to be published as a RESTful API. A pipeline published\nas a RESTful API includes all standard HTTP protocol elements:\n\n- `route`, URI of API. Excluding the scheme, domain name, and port in the URL, the application configuration can also specify the path\n  context,\n	- To facilitate the definition and parsing of data contained in the `route`, you can use `pathParams` for definition. `pathParams` can\n	  be a list of parameters, or you can use `true` to define receiving all valid path parameters. Please note that the definition of path\n	  parameters must conform to the [nestjs](https://docs.nestjs.com/controllers#route-parameters) standard.\n- `method`, supporting `get`, `post`, `put`, `patch`, and `delete`,\n- `headers`, a list of headers that need to be parsed, or `true` to parse all headers,\n- `queryParams`, a list of query parameters that need to be parsed, or `true` to parse all query parameters,\n- `body`, the content of the HTTP body is in JSON format. To better adapt to common practices of RESTful API usage:\n	- When `method` is specified as `get` and the `body` parameter is not explicitly set to `true`, the system defaults to ignoring the HTTP\n	  body content,\n	- When `method` is not specified as `get` and the `body` parameter is not explicitly set to `false`, the system defaults to parsing the\n	  HTTP body content,\n- ";
 const HelpDocs = {
   pipeline: markdown
 };
@@ -1050,50 +1532,34 @@ const RestApiVariablePortContainer = qe.div.attrs({ [DOM_KEY_WIDGET]: "o23-playg
 const RestApiVariablePortWidget = (props) => {
   const { label, required, defined, count, all, allAsBoolean = false, allAsGiven } = props;
   let icon;
+  let badge = null;
   if (defined) {
     icon = React.createElement(PortChecked, null);
+    if (count != null) {
+      badge = React.createElement("span", { "data-role": "count" }, count);
+    } else if (all != null) {
+      if (allAsBoolean) {
+        if (all === true) {
+          badge = React.createElement("span", { "data-role": "all" }, Labels.YesChar);
+        } else {
+          badge = React.createElement("span", { "data-role": "all" }, Labels.NoChar);
+        }
+      } else if (allAsGiven != null) {
+        badge = React.createElement("span", { "data-role": "all" }, allAsGiven);
+      } else if (all === true) {
+        badge = React.createElement("span", { "data-role": "all" }, Labels.All);
+      }
+    }
   } else if (required) {
     icon = React.createElement(PortIncorrect, null);
   } else {
     icon = React.createElement(PortUndefined, null);
   }
-  let badge = null;
-  if (count != null) {
-    badge = React.createElement("span", { "data-role": "count" }, count);
-  } else if (all != null) {
-    if (allAsBoolean) {
-      if (all === true) {
-        badge = React.createElement(
-          "span",
-          { "data-role": "all" },
-          React.createElement(IntlLabel, { keys: ["o23", "rest-api", "variable", "true"], value: "Y" })
-        );
-      } else {
-        badge = React.createElement(
-          "span",
-          { "data-role": "all" },
-          React.createElement(IntlLabel, { keys: ["o23", "rest-api", "variable", "false"], value: "N" })
-        );
-      }
-    } else if (allAsGiven != null) {
-      badge = React.createElement("span", { "data-role": "all" }, allAsGiven);
-    } else if (all === true) {
-      badge = React.createElement(
-        "span",
-        { "data-role": "all" },
-        React.createElement(IntlLabel, { keys: ["o23", "rest-api", "variable", "all"], value: "All" })
-      );
-    }
-  }
   return React.createElement(
     RestApiVariablePortContainer,
     { "data-required": required, "data-defined": defined },
     icon,
-    React.createElement(
-      "span",
-      null,
-      React.createElement(IntlLabel, { keys: ["o23", "rest-api", "variable", label.toLowerCase().replace(/\s/g, "-")], value: label })
-    ),
+    React.createElement("span", null, label),
     badge
   );
 };
@@ -1122,14 +1588,35 @@ const StartNodeTitle = qe(NodeTitle).attrs({
   }
 })``;
 const StartNodeSecondTitle = qe(NodeSecondTitle).attrs({
-  [DOM_KEY_WIDGET]: "o23-playground-start-node-title",
+  [DOM_KEY_WIDGET]: "o23-playground-start-node-second-title",
   style: {
     "--color": PlaygroundCssVars.NODE_START_TITLE_COLOR,
     "--font-size": PlaygroundCssVars.NODE_START_SECOND_TITLE_FONT_SIZE,
-    "--font-weight": PlaygroundCssVars.NODE_START_SECOND_TITLE_FONT_WEIGHT,
-    "--text-decoration": "unset"
+    "--font-weight": PlaygroundCssVars.NODE_START_SECOND_TITLE_FONT_WEIGHT
   }
-})``;
+})`
+    text-transform: capitalize;
+
+    &[data-role=route] {
+        text-transform: unset;
+    }
+
+    &:before, &:after {
+        display: inline-block;
+        position: relative;
+        margin-top: 3px;
+    }
+
+    &:before {
+        content: '〔';
+        margin-right: 2px;
+    }
+
+    &:after {
+        content: '〕';
+        margin-left: 2px;
+    }
+`;
 const StartNodeBody = qe(NodeBody).attrs({
   [DOM_KEY_WIDGET]: "o23-playground-start-node-body",
   style: {
@@ -1141,7 +1628,7 @@ const RestApiMethodPortWidget = (props) => {
   const { def } = props;
   const { method } = def;
   const all = VUtils.isNotBlank(method);
-  return React.createElement(RestApiVariablePortWidget, { label: "Method", required: false, defined: all != null, all, allAsBoolean: false, allAsGiven: `${method ?? ""}`.toUpperCase().trim() });
+  return React.createElement(RestApiVariablePortWidget, { label: "Method", required: true, defined: all === true, all, allAsBoolean: false, allAsGiven: `${method ?? ""}`.toUpperCase().trim() });
 };
 const RestApiHeadersPortWidget = (props) => {
   const { def } = props;
@@ -1226,20 +1713,31 @@ const StartNodeWidget = (props) => {
         return {
           isApi: true,
           showRouteLack: false,
-          secondTitle: `[ ${def.route.trim()} ]`,
+          secondTitle: def.route.trim(),
           secondTitleRole: "route"
         };
       } else {
-        return { isApi: true, showRouteLack: true, secondTitle: void 0, secondTitleRole: void 0 };
+        return {
+          isApi: false,
+          showRouteLack: false,
+          secondTitle: Labels.TypeOfStandardPipeline,
+          secondTitleRole: void 0
+        };
       }
     } else {
-      return { isApi: false, showRouteLack: false, secondTitle: void 0, secondTitleRole: void 0 };
+      return {
+        isApi: false,
+        showRouteLack: false,
+        secondTitle: Labels.TypeOfStepOrSets(def.type),
+        secondTitleRole: void 0
+      };
     }
   })();
   const onConfirm = () => {
   };
+  const prepareModel$1 = () => prepareModel(def);
   const onDoubleClicked = () => {
-    fire(PlaygroundEventTypes.SHOW_EDIT_DIALOG, React.createElement(DialogContent, { helpDoc: HelpDocs.pipeline, confirm: onConfirm }));
+    fire(PlaygroundEventTypes.SHOW_EDIT_DIALOG, React.createElement(DialogContent, { helpDoc: HelpDocs.pipeline, confirm: onConfirm, prepare: prepareModel$1, elements }));
   };
   return React.createElement(
     StartNodeContainer,
@@ -1247,7 +1745,8 @@ const StartNodeWidget = (props) => {
     React.createElement(
       StartNodeHeader,
       null,
-      React.createElement(StartNodeTitle, null, VUtils.isNotBlank(def.code) ? def.code.trim() : React.createElement(IntlLabel, { keys: ["o23", "rest-api", "code", "undefined"], value: "No code defined" })),
+      React.createElement(StartNodeTitle, null, VUtils.isNotBlank(def.code) ? def.code.trim() : Labels.NoCodeDefinedInFileDef),
+      React.createElement(NodeTitleSpreader, null),
       React.createElement(StartNodeSecondTitle, { "data-role": secondTitleRole }, secondTitle)
     ),
     React.createElement(
@@ -1379,21 +1878,13 @@ const EditorKernel = (props) => {
     return React.createElement(
       EditorWrapper,
       null,
-      React.createElement(
-        ParseError,
-        null,
-        React.createElement(IntlLabel, { keys: ["o23", "error", "no-content"], value: "No content given." })
-      )
+      React.createElement(ParseError, null, Labels.NoContent)
     );
   } else if (state.def == null) {
     return React.createElement(
       EditorWrapper,
       null,
-      React.createElement(
-        ParseError,
-        null,
-        React.createElement(IntlLabel, { keys: ["o23", "error", "no-def"], value: "No definition parsed." })
-      )
+      React.createElement(ParseError, null, Labels.NoDefParsed)
     );
   }
   try {
@@ -1418,7 +1909,7 @@ const EditorKernel = (props) => {
     return React.createElement(
       EditorWrapper,
       null,
-      React.createElement(ParseError, null, error.message || React.createElement(IntlLabel, { keys: ["o23", "error", "parse"], value: "Parse error occurred." }))
+      React.createElement(ParseError, null, error.message || Labels.ParseError)
     );
   }
 };

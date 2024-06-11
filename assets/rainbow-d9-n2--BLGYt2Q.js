@@ -4,9 +4,9 @@ var __publicField = (obj, key, value) => {
   __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
   return value;
 };
-import { a as color, M as MaskedNumber, e as MaskedDate, g as MaskedFunction, j as MaskedPattern, k as MaskedRange, p as MaskedRegExp, q as MaskedDynamic } from "./vendor-3IExBymI.js";
-import { R as React, r as reactExports, q as qe, W as We, u as useIMask } from "./react-base-zFvZsVyx.js";
-import { c as createLogger, V as VUtils, P as PPUtils, r as registerWidget, u as useRootEventBus, M as MUtils, N as NUtils, d as Wrapper, e as useForceUpdate, f as MBUtils, b as useWrapperEventBus, W as WrapperEventTypes, g as useCreateEventBus, h as PROPERTY_PATH_ME, i as useDefaultAttributeValues, j as useAttributesWatch, R as RootEventTypes } from "./rainbow-d9-n1-_CP42cLV.js";
+import { a as color, M as MaskedNumber, e as MaskedDate, g as MaskedFunction, j as MaskedPattern, k as MaskedRange, p as MaskedRegExp, q as MaskedDynamic } from "./vendor-W_zh5JiD.js";
+import { R as React, r as reactExports, q as qe, W as We, u as useIMask } from "./react-base-XEFxDFEy.js";
+import { c as createLogger, V as VUtils, P as PPUtils, r as registerWidget, u as useRootEventBus, M as MUtils, N as NUtils, d as Wrapper, e as useForceUpdate, f as MBUtils, b as useWrapperEventBus, W as WrapperEventTypes, g as useCreateEventBus, h as PROPERTY_PATH_ME, i as useDefaultAttributeValues, j as useAttributesWatch, R as RootEventTypes } from "./rainbow-d9-n1-MgjZKHeq.js";
 import { d as dayjs } from "./dayjs-ZafkOS5_.js";
 const DOM_KEY_WIDGET = "data-w";
 const DOM_ID_WIDGET = "data-wid";
@@ -1980,7 +1980,8 @@ const internationalize = (label, keys) => {
 const IntlLabel = (props) => {
   const { keys, value, replacements } = props;
   useLanguage();
-  const label = replaceTemplate(internationalize(value, keys) ?? "", replacements);
+  let label = replaceTemplate(internationalize("", keys) ?? "", replacements);
+  label = VUtils.isBlank(label) ? value : label;
   return React.createElement(React.Fragment, null, label);
 };
 const transformDecorator = (decorator) => {
@@ -2831,6 +2832,9 @@ const Decorate = reactExports.forwardRef((props, forwardedRef) => {
       return;
     }
     const computePlaceholderSize = () => {
+      if (ref.current == null) {
+        return;
+      }
       const { left: containerLeft } = ref.current.getBoundingClientRect();
       const input = ref.current.querySelector("input");
       const { left, width, height } = input.getBoundingClientRect();
