@@ -1,4 +1,5 @@
 import {useThrottler, VUtils} from '@rainbow-d9/n1';
+import {IntlLabel} from '@rainbow-d9/n2';
 import React, {useEffect, useState} from 'react';
 import {PlaygroundEventTypes, usePlaygroundEventBus} from '../playground-event-bus';
 import {ViewerProps} from '../types';
@@ -25,7 +26,9 @@ export const Viewer = (props: ViewerProps) => {
 	if (VUtils.isBlank(content)) {
 		return <ViewerWrapper minViewerWidth={minViewerWidth}>
 			<MockJsonDialog mockData={mockData}/>
-			<ParseError>No configuration.</ParseError>
+			<ParseError>
+				<IntlLabel keys={['playground', 'error', 'no-content']} value="No content given."/>
+			</ParseError>
 		</ViewerWrapper>;
 	}
 

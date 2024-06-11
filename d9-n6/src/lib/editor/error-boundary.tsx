@@ -1,4 +1,5 @@
 import React, {ErrorInfo, ReactNode} from 'react';
+import {Labels} from '../labels';
 import {ParseError} from './widgets';
 
 export interface ErrorBoundaryProps {
@@ -45,7 +46,7 @@ export class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoun
 		if (this.state.hasError) {
 			// console.error(this.state.error?.stack);
 			// You can render any custom fallback UI
-			return <ParseError>Something went wrong.</ParseError>;
+			return <ParseError>{Labels.ERROR}</ParseError>;
 		}
 
 		return this.props.children;

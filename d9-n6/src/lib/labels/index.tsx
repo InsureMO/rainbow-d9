@@ -4,6 +4,7 @@ import {FileType} from '../definition';
 import {ElementBanned, ElementChecked, ElementMissed} from '../icons';
 
 export const Labels = {
+	ERROR: <IntlLabel keys={['o23', 'error', 'unknown']} value="Something went wrong."/>,
 	NoContent: <IntlLabel keys={['o23', 'error', 'no-content']} value="No content given."/>,
 	NoDefParsed: <IntlLabel keys={['o23', 'error', 'no-def']} value="No definition parsed."/>,
 	ParseError: <IntlLabel keys={['o23', 'error', 'parse']} value="Parse error occurred."/>,

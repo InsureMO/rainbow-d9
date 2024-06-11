@@ -1,3 +1,4 @@
+import {IntlLabel} from '@rainbow-d9/n2';
 import React, {ErrorInfo, ReactNode} from 'react';
 import {ParseError} from './widgets';
 
@@ -45,7 +46,9 @@ export class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoun
 		if (this.state.hasError) {
 			// console.error(this.state.error?.stack);
 			// You can render any custom fallback UI
-			return <ParseError>Something went wrong.</ParseError>;
+			return <ParseError>
+				<IntlLabel keys={['playground', 'error', 'unknown']} value="Something went wrong."/>
+			</ParseError>;
 		}
 
 		return this.props.children;

@@ -7,7 +7,7 @@ import {
 	useThrottler,
 	VUtils
 } from '@rainbow-d9/n1';
-import {ButtonFill, ButtonInk, UnwrappedButton} from '@rainbow-d9/n2';
+import {ButtonFill, ButtonInk, IntlLabel, UnwrappedButton} from '@rainbow-d9/n2';
 import {NodeDefExt, parseDoc} from '@rainbow-d9/n3';
 import React, {MouseEvent, useEffect, useRef, useState} from 'react';
 import {PlaygroundIcons} from '../icons';
@@ -196,7 +196,10 @@ export const ViewerKernel = (props: ViewerProps & { content: string }) => {
 		</ViewerWrapper>;
 	} catch (error) {
 		return <ViewerWrapper minViewerWidth={minViewerWidth}>
-			<ParseError>{(error as Error).message || 'Parse error occurred.'}</ParseError>
+			<ParseError>
+				{(error as Error).message ||
+					<IntlLabel keys={['playground', 'error', 'parse']} value="Parse error occurred."/>}
+			</ParseError>
 		</ViewerWrapper>;
 	}
 };
