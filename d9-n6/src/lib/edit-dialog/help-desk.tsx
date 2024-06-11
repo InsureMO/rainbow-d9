@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {ReactNode, useEffect, useState} from 'react';
 import Markdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import {ArrowLeft, ArrowRight} from '../icons';
@@ -60,6 +60,14 @@ export interface DialogHelpDeskState {
 	docWidth?: number;
 }
 
+export const LinkRenderer = (props: { href: string; children?: ReactNode }) => {
+	return (
+		<a href={props.href} target="_blank" rel="noreferrer">
+			{props.children}
+		</a>
+	);
+};
+
 export const DialogHelpDesk = (props: DialogHelpDeskProps) => {
 	const {helpDoc} = props;
 
@@ -84,7 +92,9 @@ export const DialogHelpDesk = (props: DialogHelpDeskProps) => {
 			<EditDialogPartBody>
 				<OpenHandle/>
 				<HelpDocContainer width={state.docWidth}>
-					<Markdown className="markdown-body" remarkPlugins={[remarkGfm]}>
+					<Markdown className="markdown-body"
+					          components={{a: LinkRenderer}}
+					          remarkPlugins={[remarkGfm]}>
 						{helpDoc}
 					</Markdown>
 				</HelpDocContainer>
