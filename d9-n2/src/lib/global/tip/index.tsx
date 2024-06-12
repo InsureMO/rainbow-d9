@@ -61,7 +61,7 @@ export const Tip = () => {
 	const [state, setState] = useState<TipState>({visible: 'hidden'});
 	const {replace} = useThrottler();
 	useEffect(() => {
-		const onShowTip = (options: TipOptions) => {
+		const paint = (options: TipOptions, keepPosition: boolean) => {
 			replace(() => {
 				const {ref, prefix = 'data'} = options;
 				const body = options.body ?? ref.current.getAttribute(`${prefix}-tip-body`);
@@ -83,10 +83,15 @@ export const Tip = () => {
 					if (state.hideTimeout) {
 						window.clearTimeout(state.hideTimeout);
 					}
-					return {ref, title, body, visible: 'ready', minWidth, maxWidth, maxHeight, delay, tag};
+					return {
+						ref, title, body, visible: 'ready', minWidth, maxWidth, maxHeight, delay, tag,
+						...(keepPosition ? {top: state.top, left: state.left} : {})
+					};
 				});
 			}, 30);
 		};
+		const onShowTip = (options: TipOptions) => paint(options, false);
+		const onRepaintTip = (options: TipOptions) => paint(options, true);
 		const onHideTip = (ref: MutableRefObject<HTMLElement>) => {
 			if (ref.current !== state.ref?.current) {
 				return;
@@ -101,9 +106,11 @@ export const Tip = () => {
 		};
 		on(GlobalEventTypes.SHOW_TIP, onShowTip);
 		on(GlobalEventTypes.HIDE_TIP, onHideTip);
+		on(GlobalEventTypes.REPAINT_TIP, onRepaintTip);
 		return () => {
 			off(GlobalEventTypes.SHOW_TIP, onShowTip);
 			off(GlobalEventTypes.HIDE_TIP, onHideTip);
+			off(GlobalEventTypes.REPAINT_TIP, onRepaintTip);
 		};
 	}, [on, off, replace, state.ref]);
 	useEffect(() => {
@@ -142,7 +149,7 @@ export const Tip = () => {
 			// @ts-ignore
 			setState(state => ({...state, visible: 'visible', top: myTop, left: myLeft, hideTimeout}));
 		}
-	}, [state.ref, state.visible, state.delay]);
+	}, [on, off, state.ref, state.visible, state.delay]);
 	useCollapseFixedThing({
 		containerRef: state.ref,
 		visible: state.visible !== 'hidden',
@@ -183,26 +190,27 @@ export const useTip = (options: TipOptions) => {
 			return;
 		}
 
-		const onMouseEnter = () => {
-			fire(GlobalEventTypes.SHOW_TIP, options);
-			shown.current = true;
+		const show = () => {
+			replace(() => {
+				if (shown.current === true) {
+					fire(GlobalEventTypes.REPAINT_TIP, options);
+				} else {
+					fire(GlobalEventTypes.SHOW_TIP, options);
+					shown.current = true;
+				}
+			}, 30);
 		};
-		const onMouseLeave = () => {
-			shown.current = false;
-			fire(GlobalEventTypes.HIDE_TIP, ref);
+		const hide = () => {
+			replace(() => {
+				shown.current = false;
+				fire(GlobalEventTypes.HIDE_TIP, ref);
+			}, 30);
 		};
-		const onFocusIn = () => {
-			fire(GlobalEventTypes.SHOW_TIP, options);
-			shown.current = true;
-		};
-		const onFocusOut = () => {
-			shown.current = false;
-			fire(GlobalEventTypes.HIDE_TIP, ref);
-		};
-		const onClick = () => {
-			fire(GlobalEventTypes.SHOW_TIP, options);
-			shown.current = true;
-		};
+		const onMouseEnter = show;
+		const onMouseLeave = hide;
+		const onFocusIn = show;
+		const onFocusOut = hide;
+		const onClick = show;
 
 		const {current} = ref;
 
@@ -218,7 +226,7 @@ export const useTip = (options: TipOptions) => {
 			// Multiple events will cause confusion in the visible state, ultimately leading to abnormal tip display.
 			// Therefore, here we use throttling to eliminate continuous refresh occurrences.
 			replace(() => {
-				fire(GlobalEventTypes.SHOW_TIP, options);
+				fire(GlobalEventTypes.REPAINT_TIP, options);
 			}, 70);
 		}
 

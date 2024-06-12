@@ -11,6 +11,7 @@ export const TipContainer = styled.div.attrs<{
 	top?: number; left?: number;
 }>(
 	({visible, minWidth, maxWidth, maxHeight, tag, top, left}) => {
+		const shown = visible === true && top != null && left != null;
 		return {
 			[DOM_KEY_WIDGET]: 'd9-tip',
 			...(VUtils.isNotBlank(tag) ? {[tag]: ''} : {}),
@@ -20,8 +21,8 @@ export const TipContainer = styled.div.attrs<{
 				'--max-height': toCssSize(maxHeight),
 				'--top': toCssSize(top),
 				'--left': toCssSize(left),
-				opacity: visible ? 1 : 0,
-				pointerEvents: visible ? 'auto' : 'none'
+				opacity: shown ? 1 : 0,
+				pointerEvents: shown ? 'auto' : 'none'
 			}
 		};
 	})<{

@@ -12,6 +12,7 @@ export enum GlobalEventTypes {
 	SHOW_YES_NO_DIALOG = 'show-yes-no-dialog',
 	SHOW_TIP = 'show-tip',
 	HIDE_TIP = 'hide-tip',
+	REPAINT_TIP = 'repaint-tip',
 	CUSTOM_EVENT = 'custom-event'
 }
 
@@ -72,6 +73,12 @@ export interface GlobalEventBus {
 	on(type: GlobalEventTypes.HIDE_TIP, listener: (ref: MutableRefObject<HTMLElement>) => void): this;
 
 	off(type: GlobalEventTypes.HIDE_TIP, listener: (ref: MutableRefObject<HTMLElement>) => void): this;
+
+	fire(type: GlobalEventTypes.REPAINT_TIP, options: TipOptions): this;
+
+	on(type: GlobalEventTypes.REPAINT_TIP, listener: (options: TipOptions) => void): this;
+
+	off(type: GlobalEventTypes.REPAINT_TIP, listener: (options: TipOptions) => void): this;
 
 	fire<R extends BaseModel, M extends PropValue>(
 		type: GlobalEventTypes.CUSTOM_EVENT,
