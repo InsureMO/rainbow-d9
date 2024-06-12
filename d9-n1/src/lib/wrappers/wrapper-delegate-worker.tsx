@@ -48,7 +48,7 @@ export const WrapperDelegateWorker = (workerProps: WrapperDelegateWorkerProps) =
 	const coverWidgets: Array<[string, RegisteredWidget<WidgetProps> | null]> = coverTypes.map(coverType => {
 		const cover: RegisteredWidget<WidgetProps> = findWidget(coverType);
 		if (cover == null) {
-			N1Logger.error(`Widget definition of [${widgetType}] in [${$wt}] not found.`, 'WrapperDelegate');
+			N1Logger.error(`Widget definition of [${coverType}] in [${$wt}] not found.`, 'WrapperDelegate');
 			return [coverType, null];
 		}
 		return [coverType, cover];
