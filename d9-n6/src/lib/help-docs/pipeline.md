@@ -1,6 +1,7 @@
 ## Overview
 
-The core concept of `rainbow-o23` is pipeline, where all logic is defined through pipeline and its steps. There are three different forms of
+The core concept of `@rainbow-o23` is pipeline, where all logic is defined through pipeline and its steps. There are three different forms
+of
 pipeline based on how it is defined:
 
 - Standard pipeline, which can optionally be exposed as a RESTful API. To differentiate, we generally refer to pipelines that are exposed as
@@ -40,4 +41,53 @@ as a RESTful API includes all standard HTTP protocol elements:
 	  body content,
 	- When `method` is not specified as `get` and the `body` parameter is not explicitly set to `false`, the system defaults to parsing the
 	  HTTP body content,
-- 
+- `files`, a list of files that need to be parsed, or `true` to parse all files.
+
+There are also some HTTP response definitions:
+
+- `exposeHeaders`, a set of headers that need to be pushed to the client,
+- `exposeFile`, indicating whether the response data is a file.
+
+## Independent pipeline
+
+If the definition does not contain a `route` attribute, it is considered an independent pipeline. An independent pipeline can be called by
+other pipeline steps.
+
+An independent pipeline always includes at least one step, and its behavior is entirely determined by the steps defined within it.
+
+An independent pipeline also has a special property `initOnly`, which if declared as `true`, indicates that this pipeline will only be
+executed when the application starts, and the application will not provide any parameters during execution.
+
+## Set of steps
+
+Steps set, as the name suggests, can define a set of steps. They can also define how their built-in steps are executed, typically in the
+following ways:
+
+- Synchronous serial,
+- Asynchronous serial,
+- Synchronous parallel,
+- Conditional execution,
+- Loop execution (only for input data as an array),
+- Start a database transaction.
+
+By combining the various types of step collections mentioned above, you can construct execution sequences suitable for different scenarios.
+
+## Independent step
+
+Independent steps can be any type of step definition, including step sets. Logically, a step set can be understood as a collection of
+independent steps, and different step sets define the way their built-in steps are executed. Independent steps are implemented by different
+standard step components for different purposes. Here are some built-in independent steps:
+
+- Retrieve values from models or remove attributes,
+- Execute scripts,
+- Generate snowflake IDs,
+- Call predefined independent pipelines or steps,
+- Make remote HTTP API calls,
+- Read from or write to databases.
+
+Additionally, you can also obtain the following independent step support through the `@rainbow-o23` standard extension library:
+
+- Print PDF, Word, Excel, CSV,
+- Manipulate AWS S3 objects.
+
+> The latest step support can be found on [Github](https://github.com/InsureMO/rainbow-o23).

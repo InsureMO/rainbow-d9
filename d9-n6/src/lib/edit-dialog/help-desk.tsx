@@ -61,11 +61,20 @@ export interface DialogHelpDeskState {
 }
 
 export const LinkRenderer = (props: { href: string; children?: ReactNode }) => {
-	return (
-		<a href={props.href} target="_blank" rel="noreferrer">
+	return <a href={props.href} target="_blank" rel="noreferrer">
+		{props.children}
+	</a>;
+};
+export const CodeRenderer = (props: { children?: ReactNode }) => {
+	const {children} = props;
+
+	if (children === '@rainbow-o23') {
+		return <code><a href="https://github.com/InsureMO/rainbow-o23" target="_blank" rel="noreferrer">
 			{props.children}
-		</a>
-	);
+		</a></code>;
+	} else {
+		return <code>{children}</code>;
+	}
 };
 
 export const DialogHelpDesk = (props: DialogHelpDeskProps) => {
@@ -83,6 +92,8 @@ export const DialogHelpDesk = (props: DialogHelpDeskProps) => {
 		};
 	}, [on, off]);
 
+	const components = {a: LinkRenderer, code: CodeRenderer};
+
 	return <EditDialogHelpDocContainer>
 		<EditDialogPartContent>
 			<EditDialogPartHeader>
@@ -92,9 +103,7 @@ export const DialogHelpDesk = (props: DialogHelpDeskProps) => {
 			<EditDialogPartBody>
 				<OpenHandle/>
 				<HelpDocContainer width={state.docWidth}>
-					<Markdown className="markdown-body"
-					          components={{a: LinkRenderer}}
-					          remarkPlugins={[remarkGfm]}>
+					<Markdown className="markdown-body" components={components} remarkPlugins={[remarkGfm]}>
 						{helpDoc}
 					</Markdown>
 				</HelpDocContainer>
