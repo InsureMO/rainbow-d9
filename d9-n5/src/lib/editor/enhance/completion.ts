@@ -2,7 +2,8 @@ import {Completion, CompletionContext, CompletionResult} from '@codemirror/autoc
 import {markdownLanguage} from '@codemirror/lang-markdown';
 import {syntaxTree} from '@codemirror/language';
 import {SyntaxNode, Tree} from '@lezer/common';
-import {N2, VUtils, WidgetType} from '@rainbow-d9/n3';
+import {VUtils, WidgetType} from '@rainbow-d9/n1';
+import {N2} from '@rainbow-d9/n3';
 import {ExternalDefsTypes, ExternalDefType, PlaygroundWidgetProperty, PlaygroundWidgets} from '../../types';
 import {
 	ATTRIBUTE_DECLARATION_EXCLAMATION_MARK,

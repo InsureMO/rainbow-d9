@@ -38,6 +38,7 @@
 - DecoNumber::0 - 9 are Legal Keys::decorateNumberInput2
 	- leads: $icons.check;$
 	- tails: %;$icons.caretLeft
+	- tip: @ext.tip.numeric2
 	- numeric
 	- onKeyDown: @ext.keydown.numeric
 - DecoNumber::::decorateNumberInput3
@@ -48,6 +49,11 @@
 	  ```
 	- label: Contract Value
 	- format: @ext.deco.numericFormat
+	- tip:
+	  ```javascript
+	  console.log(options.model);
+	  return {body: `Hello, I am number input #3, current value is ${options.model.decorateNumberInput3}.`}
+	  ```
 	- repaint:
 		- on: decorateNumberInput3
 

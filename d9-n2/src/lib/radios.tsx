@@ -2,7 +2,7 @@ import {MUtils, registerWidget, ValueChangeableNodeDef, WidgetProps} from '@rain
 import React, {ForwardedRef, forwardRef, Fragment, useRef} from 'react';
 import styled from 'styled-components';
 import {CssVars, DOM_ID_WIDGET, DOM_KEY_WIDGET} from './constants';
-import {useGlobalHandlers, useTip} from './global';
+import {buildTip, TipAttachableWidget, useGlobalHandlers, useTip} from './global';
 import {IntlLabel, toIntlLabel} from './intl-label';
 import {NO_AVAILABLE_OPTION_ITEM, OptionItem, OptionItemsDef, useOptionItems} from './option-items-assist';
 import {Radio, RadioProps} from './radio';
@@ -13,6 +13,7 @@ export type RadiosOptionValue = string | number;
 /** radio configuration definition, radios (radio group) is kind of dropdown */
 export type RadiosDef =
 	ValueChangeableNodeDef
+	& TipAttachableWidget
 	& OmitHTMLProps<HTMLDivElement>
 	& Omit<OptionItemsDef<RadiosOptionValue>, 'noMatched'>
 	& {
@@ -118,14 +119,15 @@ export const Radios = forwardRef((props: RadiosProps, ref: ForwardedRef<HTMLDivE
 		options, optionSort,
 		noAvailable = <IntlLabel keys={['options', 'noAvailable']} value="No available options."/>,
 		columns = -1, compact = true,
-		$pp, $wrapped: {$onValueChange, $model, $avs: {$disabled, $visible}},
+		tip,
+		$pp, $wrapped: {$onValueChange, $root, $model, $avs: {$disabled, $visible}},
 		...rest
 	} = props;
 
 	const globalHandlers = useGlobalHandlers();
 	const radiosRef = useRef<HTMLDivElement>(null);
 	useDualRefs(radiosRef, ref);
-	useTip({ref: radiosRef});
+	useTip({ref: radiosRef, ...buildTip({tip, root: $root, model: $model})});
 	const {createAskDisplayOptions} = useOptionItems({...props, noAvailable});
 
 	const onOptionClicked = (option: OptionItem<RadiosOptionValue>) => async () => {

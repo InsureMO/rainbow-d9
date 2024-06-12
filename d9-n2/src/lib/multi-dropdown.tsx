@@ -22,7 +22,7 @@ import {
 	isDropdownPopupActive,
 	useFilterableDropdownOptions
 } from './dropdown-assist';
-import {useGlobalHandlers, useTip} from './global';
+import {buildTip, TipAttachableWidget, useGlobalHandlers, useTip} from './global';
 import {Check, Times} from './icons';
 import {toIntlLabel} from './intl-label';
 import {
@@ -43,6 +43,7 @@ export type MultiDropdownOptions = OptionItems<MultiDropdownOptionValue>;
 /** Input configuration definition */
 export type MultiDropdownDef =
 	ValueChangeableNodeDef
+	& TipAttachableWidget
 	& OmitHTMLProps<HTMLDivElement>
 	& OptionItemsDef<MultiDropdownOptionValue>
 	& {
@@ -211,8 +212,9 @@ export const MultiDropdown = forwardRef((props: MultiDropdownProps, ref: Forward
 	const {
 		// eslint-disable-next-line @typescript-eslint/no-unused-vars
 		options, optionSort, noAvailable, noMatched,
-		$pp, $wrapped: {$onValueChange, $model, $p2r, $avs: {$disabled, $visible}},
+		$pp, $wrapped: {$onValueChange, $root, $model, $p2r, $avs: {$disabled, $visible}},
 		please = '', clearable = true,
+		tip,
 		...rest
 	} = props;
 
@@ -228,7 +230,7 @@ export const MultiDropdown = forwardRef((props: MultiDropdownProps, ref: Forward
 	} = useFilterableDropdownOptions(props);
 	const forceUpdate = useForceUpdate();
 	useDualRefs(containerRef, ref);
-	useTip({ref: containerRef});
+	useTip({ref: containerRef, ...buildTip({tip, root: $root, model: $model})});
 
 	const currentValuesToArray = (): Array<MultiDropdownOptionValue> => {
 		const values = MUtils.getValue($model, $pp) as MultiDropdownValue;

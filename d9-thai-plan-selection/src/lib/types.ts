@@ -39,7 +39,7 @@ export interface PlanElementDef {
 	collapsed?: boolean;
 	/** display order, default 0 */
 	displayOrder?: number;
-	tip?: Omit<Global.TipOptions, 'ref' | 'prefix'>;
+	tip?: Exclude<Global.TipAttachableWidget['tip'], 'function'>;
 }
 
 export interface PlanCategoryDef extends PlanElementDef {

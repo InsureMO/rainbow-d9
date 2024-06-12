@@ -1,7 +1,8 @@
-import {VUtils} from '@rainbow-d9/n1';
+import {BaseModel, PropValue, VUtils} from '@rainbow-d9/n1';
 import React, {MutableRefObject, ReactNode, useEffect, useRef, useState} from 'react';
 import {useCollapseFixedThing} from '../../hooks';
 import {toIntlLabel} from '../../intl-label';
+import {ModelCarriedHandler} from '../../types';
 import {GlobalEventTypes, useGlobalEventBus} from '../global-event-bus';
 import {TipBody, TipContainer, TipHeader, TipLabel, TipTitle} from './widgets';
 
@@ -18,6 +19,26 @@ export interface TipOptions {
 	/** data attribute prefix, data-, data-di- */
 	prefix?: string;
 }
+
+export interface TipBuildOptions extends ModelCarriedHandler<BaseModel, PropValue> {
+}
+
+export interface TipAttachableWidget {
+	tip?: Omit<TipOptions, 'ref' | 'prefix'> | ((options: TipBuildOptions) => Omit<TipOptions, 'ref' | 'prefix'>);
+}
+
+export const buildTip = (options: {
+	tip?: TipAttachableWidget['tip']
+} & TipBuildOptions): Omit<TipOptions, 'ref' | 'prefix'> => {
+	const {tip, ...rest} = options;
+	if (tip == null) {
+		return {};
+	} else if (typeof tip === 'function') {
+		return tip(rest);
+	} else {
+		return tip;
+	}
+};
 
 interface TipState {
 	ref?: MutableRefObject<HTMLElement>;
@@ -181,3 +202,5 @@ export const useTip = (options: TipOptions) => {
 		};
 	}, [fire, ref, options]);
 };
+
+export * from './widgets';

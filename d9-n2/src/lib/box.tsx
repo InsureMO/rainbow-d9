@@ -2,12 +2,12 @@ import {ContainerDef, ContainerWidgetProps, PPUtils, registerWidget} from '@rain
 import React, {ForwardedRef, forwardRef, useRef} from 'react';
 import styled from 'styled-components';
 import {DOM_ID_WIDGET, DOM_KEY_WIDGET} from './constants';
-import {useTip} from './global';
+import {buildTip, TipAttachableWidget, useTip} from './global';
 import {OmitHTMLProps, OmitNodeDef} from './types';
 import {useDualRefs} from './utils';
 
 /** Box configuration definition */
-export type BoxDef = ContainerDef & OmitHTMLProps<HTMLDivElement>;
+export type BoxDef = ContainerDef & TipAttachableWidget & OmitHTMLProps<HTMLDivElement>;
 /** Box widget definition, with html attributes */
 export type BoxProps = OmitNodeDef<BoxDef> & ContainerWidgetProps;
 
@@ -32,12 +32,12 @@ const ABox = styled.div.attrs(
 `;
 export const Box = forwardRef((props: BoxProps, ref: ForwardedRef<HTMLDivElement>) => {
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
-	const {$wrapped, children, ...rest} = props;
+	const {tip, $wrapped, children, ...rest} = props;
 	const {$p2r, $avs: {$disabled, $visible}} = $wrapped;
 
 	const boxRef = useRef<HTMLDivElement>(null);
 	useDualRefs(boxRef, ref);
-	useTip({ref: boxRef});
+	useTip({ref: boxRef, ...buildTip({tip, root: $wrapped.$root, model: $wrapped.$model})});
 
 	return <ABox {...rest} data-disabled={$disabled} data-visible={$visible}
 	             id={PPUtils.asId(PPUtils.absolute($p2r, props.$pp), props.id)}

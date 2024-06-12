@@ -9,14 +9,14 @@ import {
 import React, {ForwardedRef, forwardRef, KeyboardEvent, MouseEvent, useRef} from 'react';
 import styled from 'styled-components';
 import {CssVars, DOM_ID_WIDGET, DOM_KEY_WIDGET} from './constants';
-import {useGlobalHandlers, useTip} from './global';
+import {buildTip, TipAttachableWidget, useGlobalHandlers, useTip} from './global';
 import {OmitHTMLProps, OmitNodeDef} from './types';
 import {useDualRefs} from './utils';
 
 export type RadioPossibleValues = [NullPropValue | PrimitivePropValue, NullPropValue | PrimitivePropValue];
 
 /** radio configuration definition */
-export type RadioDef = ValueChangeableNodeDef & OmitHTMLProps<HTMLDivElement> & {
+export type RadioDef = ValueChangeableNodeDef & TipAttachableWidget & OmitHTMLProps<HTMLDivElement> & {
 	values?: RadioPossibleValues;
 };
 /** radio widget definition, with html attributes */
@@ -116,15 +116,15 @@ const ARadio = styled.div.attrs(({id}) => {
 
 export const Radio = forwardRef((props: RadioProps, ref: ForwardedRef<HTMLDivElement>) => {
 	const {
-		values = [true, false],
-		$pp, $wrapped: {$onValueChange, $model, $avs: {$disabled, $visible}},
+		values = [true, false], tip,
+		$pp, $wrapped: {$onValueChange, $root, $model, $avs: {$disabled, $visible}},
 		...rest
 	} = props;
 
 	const globalHandlers = useGlobalHandlers();
 	const radioRef = useRef<HTMLDivElement>(null);
 	useDualRefs(radioRef, ref);
-	useTip({ref: radioRef});
+	useTip({ref: radioRef, ...buildTip({tip, root: $root, model: $model})});
 
 	const onValueShouldChange = async () => {
 		const oldValue = MUtils.getValue($model, $pp);

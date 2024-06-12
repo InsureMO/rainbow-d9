@@ -1,5 +1,5 @@
 import {BaseModel, PropValue, StandaloneRoot} from '@rainbow-d9/n1';
-import {CssVars, GlobalEventHandlers, GlobalRoot, ModelCarrier, OptionItems} from '@rainbow-d9/n2';
+import {CssVars, Global, GlobalEventHandlers, GlobalRoot, ModelCarrier, OptionItems} from '@rainbow-d9/n2';
 import {KeyboardEvent} from 'react';
 import styled from 'styled-components';
 import {CustomEventHandler} from '../custom-event-handler';
@@ -99,6 +99,9 @@ export const N2BasicWidgets = () => {
 				padFractionalZeros: true,
 				scale: 2
 			}
+		},
+		tip: {
+			numeric2: {body: <Global.TipLabel>Numeric input #2.<br/>Tips line #2.</Global.TipLabel>}
 		},
 		keydown: {
 			numeric: (event: KeyboardEvent<HTMLInputElement>) => {

@@ -1,6 +1,7 @@
 import {BaseModel, PropValue, ValueChangeableNodeDef, WidgetProps} from '@rainbow-d9/n1';
 import {Dayjs} from 'dayjs';
 import {ReactNode} from 'react';
+import {TipAttachableWidget} from '../global';
 import {GlobalEventHandlers, ModelCarriedHandler, OmitHTMLProps, OmitNodeDef} from '../types';
 
 export type CalendarFixedTimeAt = { hour: number, minute: number, second: number, millisecond: number };
@@ -11,7 +12,7 @@ export interface CalendarValidRangeOptions<R extends BaseModel, M extends PropVa
 	checkType: 'year' | 'month' | 'date' | 'hour' | 'minute' | 'second';
 }
 
-export type CalendarDef = ValueChangeableNodeDef & OmitHTMLProps<HTMLDivElement> & {
+export type CalendarDef = ValueChangeableNodeDef & TipAttachableWidget & OmitHTMLProps<HTMLDivElement> & {
 	please?: ReactNode;
 	clearable?: boolean;
 	date?: boolean;

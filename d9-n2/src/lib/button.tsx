@@ -12,7 +12,7 @@ import React, {ForwardedRef, forwardRef, MouseEvent, ReactNode, useRef} from 're
 import styled from 'styled-components';
 import {CssVars, DOM_ID_WIDGET, DOM_KEY_WIDGET} from './constants';
 import {DecorateWrapperDef, transformDecorators} from './decorate-assist';
-import {useGlobalHandlers, useTip} from './global';
+import {buildTip, TipAttachableWidget, useGlobalHandlers, useTip} from './global';
 import {toIntlLabel} from './intl-label';
 import {GlobalEventHandlers, ModelCarriedHandler, OmitHTMLProps2, OmitNodeDef, ValidationHandlers} from './types';
 import {useDualRefs} from './utils';
@@ -42,7 +42,12 @@ export type ButtonClick = <R extends BaseModel, M extends PropValue>(
 	options: ButtonClickOptions<R, M>, event: MouseEvent<HTMLButtonElement>) => void | Promise<void>;
 
 /** Button configuration definition */
-export type ButtonDef = NodeDef & DecorateWrapperDef & OmitHTMLProps2<HTMLButtonElement, 'type' | 'onClick'> & {
+export type ButtonDef =
+	NodeDef
+	& TipAttachableWidget
+	& DecorateWrapperDef
+	& OmitHTMLProps2<HTMLButtonElement, 'type' | 'onClick'>
+	& {
 	/** @deprecated use leads instead */
 	head?: ReactNode;
 	text?: ReactNode;
@@ -456,6 +461,7 @@ export const Button = forwardRef((props: ButtonProps, ref: ForwardedRef<HTMLButt
 		// noinspection JSDeprecatedSymbols
 		head, text, tail, ink = ButtonInk.PRIMARY, fill = ButtonFill.FILL, click,
 		leads, tails,
+		tip,
 		$wrapped, ...rest
 	} = props;
 	const {$root, $model, $p2r, $avs: {$disabled, $visible}, $vfs} = $wrapped;
@@ -463,7 +469,7 @@ export const Button = forwardRef((props: ButtonProps, ref: ForwardedRef<HTMLButt
 	const globalHandlers = useGlobalHandlers();
 	const buttonRef = useRef<HTMLButtonElement>(null);
 	useDualRefs(buttonRef, ref);
-	useTip({ref: buttonRef});
+	useTip({ref: buttonRef, ...buildTip({tip, root: $root, model: $model})});
 
 	const onClicked = async (event: MouseEvent<HTMLButtonElement>) => {
 		event.preventDefault();

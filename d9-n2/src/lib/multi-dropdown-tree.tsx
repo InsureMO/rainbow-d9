@@ -29,7 +29,7 @@ import {
 	useDropdownTreeEventBus,
 	useFilterableDropdownOptions
 } from './dropdown-assist';
-import {useGlobalHandlers, useTip} from './global';
+import {buildTip, TipAttachableWidget, useGlobalHandlers, useTip} from './global';
 import {Times} from './icons';
 import {toIntlLabel} from './intl-label';
 import {MultiDropdownOptionValue} from './multi-dropdown';
@@ -47,6 +47,7 @@ export type MultiDropdownTreeOptions = TreeOptionItems<MultiDropdownTreeOptionVa
 /** Input configuration definition */
 export type MultiDropdownTreeDef =
 	ValueChangeableNodeDef
+	& TipAttachableWidget
 	& OmitHTMLProps<HTMLDivElement>
 	& {
 	please?: ReactNode;
@@ -190,8 +191,9 @@ export const InternalMultiDropdownTree = forwardRef((props: MultiDropdownTreePro
 	const {
 		// eslint-disable-next-line @typescript-eslint/no-unused-vars
 		options, optionSort, noAvailable, noMatched,
-		$pp, $wrapped: {$onValueChange, $model, $p2r, $avs: {$disabled, $visible}},
+		$pp, $wrapped: {$onValueChange, $root, $model, $p2r, $avs: {$disabled, $visible}},
 		please = '', clearable = true, couldSelect,
+		tip,
 		...rest
 	} = props;
 
@@ -214,7 +216,7 @@ export const InternalMultiDropdownTree = forwardRef((props: MultiDropdownTreePro
 	} = useFilterableDropdownOptions({...props, takeoverFilter: false, filterChanged});
 	const forceUpdate = useForceUpdate();
 	useDualRefs(containerRef, ref);
-	useTip({ref: containerRef});
+	useTip({ref: containerRef, ...buildTip({tip, root: $root, model: $model})});
 
 	const currentValuesToArray = (): Array<MultiDropdownOptionValue> => {
 		const values = MUtils.getValue($model, $pp) as MultiDropdownTreeValue;

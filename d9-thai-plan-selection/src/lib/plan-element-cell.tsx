@@ -15,11 +15,7 @@ export const PlanElementCellWithTip = (props: PlanElementCellWithTipProps) => {
 	const {attributes, elementDef, children} = props;
 
 	const ref = useRef<HTMLDivElement>(null);
-	Global.useTip({
-		ref, title: elementDef.tip.title, body: elementDef.tip.body,
-		minWidth: elementDef.tip.minWidth, maxWidth: elementDef.tip.maxWidth, maxHeight: elementDef.tip.maxHeight,
-		delay: elementDef.tip.delay
-	});
+	Global.useTip({ref, ...(elementDef.tip ?? {})});
 
 	return <PlanElementCellContainer {...attributes} ref={ref}>
 		{children}

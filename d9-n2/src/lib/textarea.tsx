@@ -2,12 +2,16 @@ import {MUtils, PPUtils, registerWidget, ValueChangeableNodeDef, WidgetProps} fr
 import React, {ChangeEvent, FocusEvent, ForwardedRef, forwardRef, useRef} from 'react';
 import styled from 'styled-components';
 import {CssVars, DOM_ID_WIDGET, DOM_KEY_WIDGET} from './constants';
-import {useGlobalHandlers, useTip} from './global';
+import {buildTip, TipAttachableWidget, useGlobalHandlers, useTip} from './global';
 import {OmitHTMLProps2, OmitNodeDef} from './types';
 import {useDualRefs} from './utils';
 
 /** Textarea configuration definition */
-export type TextareaDef = ValueChangeableNodeDef & OmitHTMLProps2<HTMLTextAreaElement, 'value' | 'onChange'> & {
+export type TextareaDef =
+	ValueChangeableNodeDef
+	& TipAttachableWidget
+	& OmitHTMLProps2<HTMLTextAreaElement, 'value' | 'onChange'>
+	& {
 	autoSelect?: boolean;
 };
 /** widget definition, with html attributes */
@@ -76,14 +80,15 @@ const ATextarea = styled.textarea.attrs<{ autoSelect: boolean }>(
 
 export const Textarea = forwardRef((props: TextareaProps, ref: ForwardedRef<HTMLTextAreaElement>) => {
 	const {
-		autoSelect = true, $pp, $wrapped: {$onValueChange, $model, $p2r, $avs: {$disabled, $visible}},
+		autoSelect = true, tip,
+		$pp, $wrapped: {$onValueChange, $root, $model, $p2r, $avs: {$disabled, $visible}},
 		...rest
 	} = props;
 
 	const globalHandlers = useGlobalHandlers();
 	const textRef = useRef<HTMLTextAreaElement>(null);
 	useDualRefs(textRef, ref);
-	useTip({ref: textRef});
+	useTip({ref: textRef, ...buildTip({tip, root: $root, model: $model})});
 
 	const onChange = async (event: ChangeEvent<HTMLTextAreaElement>) => {
 		const value = event.target.value;

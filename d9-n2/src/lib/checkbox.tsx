@@ -9,7 +9,7 @@ import {
 import React, {ForwardedRef, forwardRef, KeyboardEvent, MouseEvent, useRef} from 'react';
 import styled from 'styled-components';
 import {CssVars, DOM_ID_WIDGET, DOM_KEY_WIDGET} from './constants';
-import {useGlobalHandlers, useTip} from './global';
+import {buildTip, TipAttachableWidget, useGlobalHandlers, useTip} from './global';
 import {Check, Times} from './icons';
 import {OmitHTMLProps, OmitNodeDef} from './types';
 import {useDualRefs} from './utils';
@@ -17,7 +17,7 @@ import {useDualRefs} from './utils';
 export type CheckboxPossibleValues = [NullPropValue | PrimitivePropValue, NullPropValue | PrimitivePropValue];
 
 /** checkbox configuration definition */
-export type CheckboxDef = ValueChangeableNodeDef & OmitHTMLProps<HTMLDivElement> & {
+export type CheckboxDef = ValueChangeableNodeDef & TipAttachableWidget & OmitHTMLProps<HTMLDivElement> & {
 	values?: CheckboxPossibleValues;
 	emptyWhenFalse?: boolean;
 };
@@ -118,14 +118,15 @@ const ACheckbox = styled.div.attrs(({id}) => {
 export const Checkbox = forwardRef((props: CheckboxProps, ref: ForwardedRef<HTMLDivElement>) => {
 	const {
 		values = [true, false], emptyWhenFalse = true,
-		$pp, $wrapped: {$onValueChange, $model, $avs: {$disabled, $visible}},
+		tip,
+		$pp, $wrapped: {$onValueChange, $root, $model, $avs: {$disabled, $visible}},
 		...rest
 	} = props;
 
 	const globalHandlers = useGlobalHandlers();
 	const checkRef = useRef<HTMLDivElement>(null);
 	useDualRefs(checkRef, ref);
-	useTip({ref: checkRef});
+	useTip({ref: checkRef, ...buildTip({tip, root: $root, model: $model})});
 
 	const onValueChange = async () => {
 		const oldValue = MUtils.getValue($model, $pp);

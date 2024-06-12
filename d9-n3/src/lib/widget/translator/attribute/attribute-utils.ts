@@ -10,6 +10,7 @@ import {
 	ReactionWatchAttributeBuild
 } from './reaction-attribute-build';
 import {createSyncSnippetBuild} from './snippet-attribute-build';
+import {TipAttachableBuild} from './tip-attachable-build';
 import {AttributeValueBuild} from './types';
 import {ValidationAttributeBuild} from './validation-attribute-build';
 import {ValidationScopesAttributeBuild} from './validation-scopes-attribute-build';
@@ -27,6 +28,8 @@ export class AttributeUtils {
 	public static readonly REACTION_CLEAR_ME_ATTRIBUTE_BUILDER = new ReactionClearMeAttributeBuild();
 	public static readonly REACTION_WATCH_ATTRIBUTE_BUILDER = new ReactionWatchAttributeBuild();
 	public static readonly DATA_PREFIX_ATTRIBUTE_BUILDER = new DataPrefixAttributeBuild();
+	// most widgets have tip, so considering it is common
+	public static readonly TIP_ATTRIBUTE_BUILDER = TipAttachableBuild;
 	public static readonly ANY_ATTRIBUTE_BUILDER = new AnyAttributeBuild();
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	private static CUSTOMIZED_ATTRIBUTE_BUILDERS: Record<WidgetType, Array<AttributeValueBuild<any>>> = {};
@@ -62,6 +65,7 @@ export class AttributeUtils {
 			AttributeUtils.REACTION_CLEAR_ME_ATTRIBUTE_BUILDER,
 			AttributeUtils.REACTION_WATCH_ATTRIBUTE_BUILDER,
 			AttributeUtils.DATA_PREFIX_ATTRIBUTE_BUILDER,
+			AttributeUtils.TIP_ATTRIBUTE_BUILDER,
 			AttributeUtils.ANY_ATTRIBUTE_BUILDER
 		];
 	}

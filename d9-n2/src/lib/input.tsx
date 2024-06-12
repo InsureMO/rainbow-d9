@@ -22,7 +22,7 @@ import React, {ChangeEvent, FocusEvent, ForwardedRef, forwardRef, useRef} from '
 import {useIMask} from 'react-imask';
 import styled from 'styled-components';
 import {CssVars, DOM_ID_WIDGET, DOM_KEY_WIDGET} from './constants';
-import {useGlobalHandlers, useTip} from './global';
+import {buildTip, TipAttachableWidget, useGlobalHandlers, useTip} from './global';
 import {useLanguage} from './intl-label';
 import {OmitHTMLProps2, OmitNodeDef} from './types';
 import {detectNumberFormat, locale, useDualRefs} from './utils';
@@ -39,7 +39,11 @@ export const InputMaskTypes = {
 };
 
 /** Input configuration definition */
-export type InputDef = ValueChangeableNodeDef & OmitHTMLProps2<HTMLInputElement, 'value' | 'onChange'> & {
+export type InputDef =
+	ValueChangeableNodeDef
+	& TipAttachableWidget
+	& OmitHTMLProps2<HTMLInputElement, 'value' | 'onChange'>
+	& {
 	autoSelect?: boolean;
 	valueToNumber?: boolean;
 	mask?: string | ((types: typeof InputMaskTypes) => FactoryOpts);
@@ -139,7 +143,8 @@ export const stringifyInputValue = (options: { $model: PropValue; $pp: PropertyP
 export const Input = forwardRef((props: InputProps, ref: ForwardedRef<HTMLInputElement>) => {
 	const {
 		autoSelect = true, valueToNumber = false, mask,
-		$pp, $wrapped: {$onValueChange, $model, $p2r, $avs: {$disabled, $visible}},
+		tip,
+		$pp, $wrapped: {$onValueChange, $root, $model, $p2r, $avs: {$disabled, $visible}},
 		...rest
 	} = props;
 
@@ -185,7 +190,7 @@ export const Input = forwardRef((props: InputProps, ref: ForwardedRef<HTMLInputE
 		}
 	});
 	useDualRefs(inputRef, ref);
-	useTip({ref: inputRef});
+	useTip({ref: inputRef, ...buildTip({tip, root: $root, model: $model})});
 
 	const onChange = async (event: ChangeEvent<HTMLInputElement>) => {
 		// handle change use mask event

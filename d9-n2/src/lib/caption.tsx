@@ -14,7 +14,7 @@ import styled from 'styled-components';
 import {ButtonFill, ButtonInk} from './button';
 import {CssVars, DOM_ID_WIDGET, DOM_KEY_WIDGET} from './constants';
 import {DecorateWrapperDef, transformDecorators} from './decorate-assist';
-import {useGlobalHandlers, useTip} from './global';
+import {buildTip, TipAttachableWidget, useGlobalHandlers, useTip} from './global';
 import {LabelLike} from './label-like';
 import {GlobalEventHandlers, ModelCarriedHandler, OmitHTMLProps2, OmitNodeDef, ValidationHandlers} from './types';
 import {df, locale, nf, nf0, nf1, nf2, nf3, nfWithLocale, nfXWithLocale, useDualRefs, wrapNf} from './utils';
@@ -39,7 +39,12 @@ export type CaptionClick = <R extends BaseModel, M extends PropValue>(
 	options: CaptionClickOptions<R, M>, event: MouseEvent<HTMLSpanElement>) => void | Promise<void>;
 
 /** Caption configuration definition */
-export type CaptionDef = NodeDef & DecorateWrapperDef & OmitHTMLProps2<HTMLSpanElement, 'onClick'> & {
+export type CaptionDef =
+	NodeDef
+	& TipAttachableWidget
+	& DecorateWrapperDef
+	& OmitHTMLProps2<HTMLSpanElement, 'onClick'>
+	& {
 	labelOnValue?: boolean;
 	/** use label when it is given */
 	label?: ReactNode;
@@ -235,6 +240,7 @@ export const Caption = forwardRef((props: CaptionProps, ref: ForwardedRef<HTMLSp
 		label: _label, text: _text,
 		leads, tails,
 		labelOnValue, valueToLabel, click,
+		tip,
 		$pp, $wrapped,
 		...rest
 	} = props;
@@ -244,7 +250,7 @@ export const Caption = forwardRef((props: CaptionProps, ref: ForwardedRef<HTMLSp
 	const globalHandlers = useGlobalHandlers();
 	const captionRef = useRef<HTMLSpanElement>(null);
 	useDualRefs(captionRef, ref);
-	useTip({ref: captionRef});
+	useTip({ref: captionRef, ...buildTip({tip, root: $root, model: $model})});
 
 	const onClicked = click != null
 		? async (event: MouseEvent<HTMLSpanElement>) => {

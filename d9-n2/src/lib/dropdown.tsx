@@ -20,7 +20,7 @@ import {
 	isDropdownPopupActive,
 	useFilterableDropdownOptions
 } from './dropdown-assist';
-import {useGlobalHandlers, useTip} from './global';
+import {buildTip, TipAttachableWidget, useGlobalHandlers, useTip} from './global';
 import {toIntlLabel} from './intl-label';
 import {
 	NO_AVAILABLE_OPTION_ITEM,
@@ -41,6 +41,7 @@ export {OptionItemSort as DropdownOptionSort};
 /** Input configuration definition */
 export type DropdownDef =
 	ValueChangeableNodeDef
+	& TipAttachableWidget
 	& OmitHTMLProps<HTMLDivElement>
 	& OptionItemsDef<DropdownOptionValue>
 	& {
@@ -133,8 +134,9 @@ export const Dropdown = forwardRef((props: DropdownProps, ref: ForwardedRef<HTML
 	const {
 		// eslint-disable-next-line @typescript-eslint/no-unused-vars
 		options, optionSort, noAvailable, noMatched,
-		$pp, $wrapped: {$onValueChange, $model, $p2r, $avs: {$disabled, $visible}},
+		$pp, $wrapped: {$onValueChange, $root, $model, $p2r, $avs: {$disabled, $visible}},
 		please = '', clearable = true,
+		tip,
 		...rest
 	} = props;
 
@@ -148,7 +150,7 @@ export const Dropdown = forwardRef((props: DropdownProps, ref: ForwardedRef<HTML
 		onClicked, onFocused, onKeyUp
 	} = useFilterableDropdownOptions(props);
 	useDualRefs(containerRef, ref);
-	useTip({ref: containerRef});
+	useTip({ref: containerRef, ...buildTip({tip, root: $root, model: $model})});
 	const forceUpdate = useForceUpdate();
 
 	const onOptionClicked = (option: DropdownOption) => async (event: MouseEvent<HTMLSpanElement>) => {

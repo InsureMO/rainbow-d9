@@ -3,7 +3,7 @@ import React, {ForwardedRef, forwardRef, Fragment, useRef} from 'react';
 import styled from 'styled-components';
 import {Checkbox, CheckboxProps} from './checkbox';
 import {CssVars, DOM_ID_WIDGET, DOM_KEY_WIDGET} from './constants';
-import {useGlobalHandlers, useTip} from './global';
+import {buildTip, TipAttachableWidget, useGlobalHandlers, useTip} from './global';
 import {IntlLabel, toIntlLabel} from './intl-label';
 import {NO_AVAILABLE_OPTION_ITEM, OptionItem, OptionItemsDef, useOptionItems} from './option-items-assist';
 import {OmitHTMLProps, OmitNodeDef} from './types';
@@ -14,6 +14,7 @@ export type CheckboxesOptionValue = string | number | boolean;
 /** checkbox configuration definition, checkboxes (checkbox group) is kind of dropdown */
 export type CheckboxesDef =
 	ValueChangeableNodeDef
+	& TipAttachableWidget
 	& OmitHTMLProps<HTMLDivElement>
 	& Omit<OptionItemsDef<CheckboxesOptionValue>, 'noMatched'>
 	& {
@@ -118,14 +119,15 @@ export const Checkboxes = forwardRef((props: CheckboxesProps, ref: ForwardedRef<
 		options, optionSort,
 		noAvailable = <IntlLabel keys={['options', 'noAvailable']} value="No available options."/>,
 		columns = -1, compact = true, single = false, boolOnSingle = false,
-		$pp, $wrapped: {$onValueChange, $model, $avs: {$disabled, $visible}},
+		tip,
+		$pp, $wrapped: {$onValueChange, $root, $model, $avs: {$disabled, $visible}},
 		...rest
 	} = props;
 
 	const globalHandlers = useGlobalHandlers();
 	const checksRef = useRef<HTMLDivElement>(null);
 	useDualRefs(checksRef, ref);
-	useTip({ref: checksRef});
+	useTip({ref: checksRef, ...buildTip({tip, root: $root, model: $model})});
 	const {createAskDisplayOptions} = useOptionItems({...props, noAvailable});
 
 	const getValues = () => {

@@ -10,7 +10,8 @@ import {
 	Line,
 	MarkdownParser
 } from '@lezer/markdown';
-import {Semantic, VUtils} from '@rainbow-d9/n3';
+import {VUtils} from '@rainbow-d9/n1';
+import {Semantic} from '@rainbow-d9/n3';
 import {
 	ATTRIBUTE_DECLARATION_JOINT,
 	ATTRIBUTE_DECLARATION_SPLITTER,
