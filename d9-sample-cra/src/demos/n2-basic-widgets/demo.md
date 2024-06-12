@@ -51,7 +51,7 @@
 	- format: @ext.deco.numericFormat
 	- tip:
 	  ```javascript
-	  console.log(options.model);
+	  // console.log(options.model);
 	  return {body: `Hello, I am number input #3, current value is ${options.model.decorateNumberInput3}.`}
 	  ```
 	- repaint:
@@ -68,6 +68,11 @@
 - Dropdown::::dropdown2
 	- label: Dropdown #2
 	- options: @ext.dropdown2
+	- data-tip-body:
+	  ```javascript
+	  // console.log(options.model);
+	  return `Hello, I am dropdown #2, current value is ${options.model.dropdown2}.`;
+	  ```
 - MultiDropdown::Multiple Dropdown::multiDropdown
 	- options:
 		- 1: Option #1

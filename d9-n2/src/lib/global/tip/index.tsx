@@ -165,6 +165,7 @@ export const Tip = () => {
 export const useTip = (options: TipOptions) => {
 	const {ref} = options;
 	const {fire} = useGlobalEventBus();
+	const shown = useRef(false);
 	useEffect(() => {
 		if (ref.current == null || fire == null) {
 			return;
@@ -172,18 +173,23 @@ export const useTip = (options: TipOptions) => {
 
 		const onMouseEnter = () => {
 			fire(GlobalEventTypes.SHOW_TIP, options);
+			shown.current = true;
 		};
 		const onMouseLeave = () => {
+			shown.current = false;
 			fire(GlobalEventTypes.HIDE_TIP, ref);
 		};
 		const onFocusIn = () => {
 			fire(GlobalEventTypes.SHOW_TIP, options);
+			shown.current = true;
 		};
 		const onFocusOut = () => {
+			shown.current = false;
 			fire(GlobalEventTypes.HIDE_TIP, ref);
 		};
 		const onClick = () => {
 			fire(GlobalEventTypes.SHOW_TIP, options);
+			shown.current = true;
 		};
 
 		const {current} = ref;
@@ -193,6 +199,11 @@ export const useTip = (options: TipOptions) => {
 		current.addEventListener('focusin', onFocusIn);
 		current.addEventListener('focusout', onFocusOut);
 		current.addEventListener('click', onClick);
+
+		if (shown.current) {
+			fire(GlobalEventTypes.SHOW_TIP, {...(options ?? {})} as TipOptions);
+		}
+
 		return () => {
 			current.removeEventListener('mouseenter', onMouseEnter);
 			current.removeEventListener('mouseleave', onMouseLeave);
