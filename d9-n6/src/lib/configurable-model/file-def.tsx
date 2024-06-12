@@ -1,4 +1,5 @@
-import {VUtils} from '@rainbow-d9/n1';
+import {PropValue, VUtils} from '@rainbow-d9/n1';
+import {UnwrappedCheckbox, UnwrappedInput} from '@rainbow-d9/n2';
 import React, {ReactNode} from 'react';
 import {
 	FileDef,
@@ -19,6 +20,7 @@ import {
 	ConfigurableElementBadgeNotAvailable,
 	ConfigurableModel
 } from '../edit-dialog';
+import {HelpDocs} from '../help-docs';
 
 export interface FileDefModel extends ConfigurableModel, FileDef {
 }
@@ -84,13 +86,28 @@ export const elementCode: ConfigurableElement = {
 		} else {
 			return <ConfigurableElementBadgeMissed/>;
 		}
-	}
+	},
+	editor: (model: FileDefModel): ReactNode => {
+		const onValueChange = (value: PropValue) => {
+			model.code = value as string;
+		};
+		return <UnwrappedInput onValueChange={onValueChange}
+		                       value={model.code ?? ''}/>;
+	},
+	helpDoc: HelpDocs.pipelineCode
 };
 export const elementEnabled: ConfigurableElement = {
 	code: 'enabled', label: 'Enabled', anchor: 'enabled',
 	badge: model => model.enabled !== false
 		? <ConfigurableElementBadgeChecked/>
-		: <ConfigurableElementBadgeBanned/>
+		: <ConfigurableElementBadgeBanned/>,
+	editor: (model: FileDefModel): ReactNode => {
+		const onValueChange = (value: PropValue) => {
+			model.enabled = value as boolean;
+		};
+		return <UnwrappedCheckbox onValueChange={onValueChange} value={model.enabled ?? true}/>;
+	},
+	helpDoc: HelpDocs.pipelineEnabled
 };
 export const elementRoute: ConfigurableElement = {
 	code: 'route', label: 'Route', anchor: 'route',

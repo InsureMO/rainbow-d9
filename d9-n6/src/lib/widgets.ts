@@ -16,8 +16,10 @@ export const PlaygroundCssVars = {
 	EDITOR_BACKGROUND_POSITION: 'var(--o23-playground-editor-background-position, -1px -1px)',
 	EDITOR_ERROR_COLOR: `var(--o23-playground-editor-error-color, ${CssVars.DANGER_COLOR})`,
 	// markdown
+	MARKDOWN_FONT_SIZE: 'var(--o23-playground-markdown-font-size, 14px)',
 	MARKDOWN_COLOR: `var(--o23-playground-markdown-color, ${CssVars.FONT_COLOR})`,
 	MARKDOWN_BACKGROUND_COLOR: `var(--o23-playground-markdown-background-color, ${CssVars.BACKGROUND_COLOR})`,
+	SPECIFIC_MARKDOWN_FONT_SIZE: 'var(--o23-playground-specific-markdown-font-size, 12px)',
 	// dialog
 	EDIT_DIALOG_BACKDROP_COLOR: 'var(--o23-playground-dialog-backdrop-color, rgba(71, 69, 84, 0.75))',
 	EDIT_DIALOG_Z_INDEX: 'var(--o23-playground-dialog-z-index, 10000)',
@@ -28,7 +30,7 @@ export const PlaygroundCssVars = {
 	EDIT_DIALOG_BACKGROUND_COLOR: `var(--o23-playground-dialog-background-color, ${CssVars.BACKGROUND_COLOR})`,
 	EDIT_DIALOG_PADDING: 'var(--o23-playground-dialog-padding, 16px)',
 	EDIT_DIALOG_PADDING_LEFT: 'var(--o23-playground-dialog-padding-left, 16px)',
-	EDIT_DIALOG_SHADOW: `var(--o23-playground-dialog-shadow, ${CssVars.DIALOG_SHADOW})`,
+	EDIT_DIALOG_SHADOW: `var(--o23-playground-dialog-shadow, 0 0 10px 4px rgba(0, 0, 0, 0.2))`,
 	EDIT_DIALOG_BORDER_RADIUS: 'var(--o23-playground-dialog-border-radius, 12px)',
 	EDIT_DIALOG_BORDER: `var(--o23-playground-dialog-border, ${CssVars.BORDER})`,
 	EDIT_DIALOG_CLOSER_TOP: 'var(--o23-playground-dialog-closer-top, -8px)',
@@ -82,6 +84,13 @@ export const PlaygroundCssVars = {
 	EDIT_DIALOG_CONFIGURABLE_ELEMENT_BADGE_NOT_AVAILABLE_COLOR: `var(--o23-playground-dialog-configurable-element-badge-not-available-color, ${CssVars.INVERT_COLOR})`,
 	EDIT_DIALOG_CONFIGURABLE_ELEMENT_BADGE_COUNT_BACKGROUND_COLOR: `var(--o23-playground-dialog-configurable-element-badge-count-background-color, ${CssVars.SUCCESS_COLOR})`,
 	EDIT_DIALOG_CONFIGURABLE_ELEMENT_BADGE_COUNT_COLOR: `var(--o23-playground-dialog-configurable-element-badge-count-color, ${CssVars.INVERT_COLOR})`,
+	EDIT_DIALOG_CONFIGURABLE_ELEMENT_SPECIFIC_MARGIN: 'var(--o23-playground-dialog-configurable-element-specific-margin, 0 -8px)',
+	EDIT_DIALOG_CONFIGURABLE_ELEMENT_SPECIFIC_PADDING: 'var(--o23-playground-dialog-configurable-element-specific-padding, 8px)',
+	EDIT_DIALOG_CONFIGURABLE_ELEMENT_SPECIFIC_GRID_COLUMN_GAP: 'var(--o23-playground-dialog-configurable-element-specific-grid-column-gap, 32px)',
+	EDIT_DIALOG_CONFIGURABLE_ELEMENT_SPECIFIC_GRID_ROW_GAP: 'var(--o23-playground-dialog-configurable-element-specific-grid-row-gap, 8px)',
+	EDIT_DIALOG_CONFIGURABLE_ELEMENT_HELP_LABEL_HEIGHT: `var(--o23-playground-dialog-configurable-element-help-label-height, ${CssVars.INPUT_HEIGHT})`,
+	EDIT_DIALOG_CONFIGURABLE_ELEMENT_HELP_BADGE_HEIGHT: `var(--o23-playground-dialog-configurable-element-help-badge-height, ${CssVars.INPUT_HEIGHT})`,
+	EDIT_DIALOG_CONFIGURABLE_ELEMENT_HELP_BADGE_COLOR: `var(--o23-playground-dialog-configurable-element-help-badge-color, ${CssVars.PRIMARY_COLOR})`,
 	// node common
 	NODE_BORDER_RADIUS: 'var(--o23-playground-node-border-radius, 8px)',
 	NODE_BACKGROUND: `var(--o23-playground-node-background, ${CssVars.BACKGROUND_COLOR})`,

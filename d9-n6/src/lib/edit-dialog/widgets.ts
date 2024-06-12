@@ -64,6 +64,32 @@ export const EditDialogContentContainer = styled.div.attrs({[DOM_KEY_WIDGET]: 'o
     height: 100%;
     width: 100%;
     transition: grid-template-columns ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION};
+
+    div.markdown-body {
+        font-size: ${PlaygroundCssVars.MARKDOWN_FONT_SIZE};
+        color: ${PlaygroundCssVars.MARKDOWN_COLOR};
+        background-color: ${PlaygroundCssVars.MARKDOWN_BACKGROUND_COLOR};
+
+        h1 {
+            font-size: 1.5em;
+        }
+
+        h2 {
+            font-size: 1.35em;
+        }
+
+        h3 {
+            font-size: 1.2em;
+        }
+
+        h4 {
+            font-size: 1.1em;
+        }
+
+        h5, h6 {
+            font-size: 1em;
+        }
+    }
 `;
 export const EditDialogContentInitializer = styled.div.attrs({[DOM_KEY_WIDGET]: 'o23-playground-edit-dialog-content-initializer'})`
     display: none;
@@ -248,34 +274,9 @@ export const HelpDocContainer = styled.div.attrs<{ width?: number }>(
     min-width: var(--min-width);
     overflow: auto;
     transition: opacity ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION}, filter ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION};
-
-    > div.markdown-body {
-        color: ${PlaygroundCssVars.MARKDOWN_COLOR};
-        background-color: ${PlaygroundCssVars.MARKDOWN_BACKGROUND_COLOR};
-
-        h1 {
-            font-size: 1.5em;
-        }
-
-        h2 {
-            font-size: 1.35em;
-        }
-
-        h3 {
-            font-size: 1.2em;
-        }
-
-        h4 {
-            font-size: 1.1em;
-        }
-
-        h5, h6 {
-            font-size: 1em;
-        }
-    }
 `;
-export const NavigatorDialogNavigatorElementsContainer = styled.div.attrs({
-	[DOM_KEY_WIDGET]: 'o23-playground-edit-dialog-configurable-elements',
+export const NavigatorElementsContainer = styled.div.attrs({
+	[DOM_KEY_WIDGET]: 'o23-playground-edit-dialog-navigator-elements',
 	'data-h-scroll': ''
 })`
     display: flex;
@@ -289,10 +290,10 @@ export const NavigatorDialogNavigatorElementsContainer = styled.div.attrs({
     overflow-x: hidden;
 `;
 // noinspection CssUnresolvedCustomProperty
-export const NavigatorConfigurableElementContainer = styled.div.attrs<{ level: number }>(
+export const NavigatorElementContainer = styled.div.attrs<{ level: number }>(
 	({level}) => {
 		return {
-			[DOM_KEY_WIDGET]: 'o23-playground-edit-dialog-configurable-element',
+			[DOM_KEY_WIDGET]: 'o23-playground-edit-dialog-navigator-element',
 			style: {
 				'--level': level
 			}
@@ -319,10 +320,10 @@ export const NavigatorConfigurableElementContainer = styled.div.attrs<{ level: n
     }
 `;
 // noinspection CssUnresolvedCustomProperty
-export const NavigatorConfigurableElementTreeLine = styled.span.attrs<{ level: number; }>(
+export const NavigatorElementTreeLine = styled.span.attrs<{ level: number; }>(
 	({level}) => {
 		return {
-			[DOM_KEY_WIDGET]: 'o23-playground-edit-dialog-configurable-element-tree-line',
+			[DOM_KEY_WIDGET]: 'o23-playground-edit-dialog-navigator-element-tree-line',
 			style: {
 				'--margin-left': `calc(${level - 1} * ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_INDENT})`
 			}
@@ -372,10 +373,10 @@ export const NavigatorConfigurableElementTreeLine = styled.span.attrs<{ level: n
     }
 `;
 // noinspection CssUnresolvedCustomProperty
-export const NavigatorConfigurableElementLabel = styled.div.attrs<{ level: number }>(
+export const NavigatorElementLabel = styled.div.attrs<{ level: number }>(
 	({level}) => {
 		return {
-			[DOM_KEY_WIDGET]: 'o23-playground-edit-dialog-configurable-element-label',
+			[DOM_KEY_WIDGET]: 'o23-playground-edit-dialog-navigator-element-label',
 			style: {
 				'--margin-left': level === 0 ? 0 : PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_INDENT
 			}
@@ -387,13 +388,13 @@ export const NavigatorConfigurableElementLabel = styled.div.attrs<{ level: numbe
     flex-grow: 1;
     margin-left: var(--margin-left);
 `;
-export const NavigatorConfigurableElementBadge = styled.div.attrs({[DOM_KEY_WIDGET]: 'o23-playground-edit-dialog-configurable-element-badge'})`
+export const NavigatorElementBadge = styled.div.attrs({[DOM_KEY_WIDGET]: 'o23-playground-edit-dialog-navigator-element-badge'})`
     display: flex;
     position: relative;
     align-items: center;
     font-weight: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_BADGE_FONT_WEIGHT};
 `;
-export const NavigatorConfigurableElementBadgeWrapper = styled.span.attrs({[DOM_KEY_WIDGET]: 'o23-playground-edit-dialog-configurable-element-badge-wrapper'})`
+export const NavigatorElementBadgeWrapper = styled.span.attrs({[DOM_KEY_WIDGET]: 'o23-playground-edit-dialog-navigator-element-badge-wrapper'})`
     display: flex;
     position: relative;
     align-items: center;
@@ -441,5 +442,71 @@ export const NavigatorConfigurableElementBadgeWrapper = styled.span.attrs({[DOM_
     > svg {
         width: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_BADGE_HEIGHT};
         margin: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_BADGE_ICON_MARGIN};
+    }
+`;
+export const SpecificElementsContainer = styled.div.attrs({
+	[DOM_KEY_WIDGET]: 'o23-playground-edit-dialog-specific-elements',
+	'data-h-scroll': ''
+})`
+    display: grid;
+    position: relative;
+    flex-grow: 1;
+    align-self: stretch;
+    grid-template-columns: auto 1fr;
+    grid-column-gap: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_SPECIFIC_GRID_COLUMN_GAP};
+    grid-row-gap: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_SPECIFIC_GRID_ROW_GAP};
+    align-content: start;
+    margin: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_SPECIFIC_MARGIN};
+    padding: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_SPECIFIC_PADDING};
+    overflow-y: auto;
+    overflow-x: hidden;
+    // avoid external grid effect
+    --grid-column: auto;
+    --grid-row: auto;
+`;
+export const SpecificElementLabel = styled.div.attrs({[DOM_KEY_WIDGET]: 'o23-playground-edit-dialog-specific-element-label'})`
+    display: flex;
+    position: relative;
+    align-items: center;
+    min-height: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_HELP_LABEL_HEIGHT};
+`;
+export const SpecificElementHelpBadge = styled.div.attrs({[DOM_KEY_WIDGET]: 'o23-playground-edit-dialog-specific-element-help-badge'})`
+    display: flex;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+    height: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_HELP_BADGE_HEIGHT};
+    width: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_HELP_BADGE_HEIGHT};
+    opacity: 0;
+    cursor: pointer;
+    pointer-events: none;
+    transition: opacity ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION};
+
+    &[data-visible=true] {
+        opacity: 1;
+        pointer-events: auto;
+    }
+
+    > svg {
+        color: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_HELP_BADGE_COLOR};
+        height: calc(${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_HELP_BADGE_HEIGHT} * 0.6);
+    }
+`;
+export const SpecificElementEditorPlaceholder = styled.div.attrs({[DOM_KEY_WIDGET]: 'o23-playground-edit-dialog-specific-element-editor-placeholder'})``;
+export const SpecificElementHelpDoc = styled.div.attrs({[DOM_KEY_WIDGET]: 'o23-playground-edit-dialog-specific-element-help-doc'})`
+    display: block;
+    position: relative;
+    grid-column: 2;
+    height: 0;
+    overflow: hidden;
+    transition: height ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION};
+
+    &[data-visible=true] {
+        height: auto;
+        overflow: visible;
+    }
+
+    > div.markdown-body {
+        font-size: ${PlaygroundCssVars.SPECIFIC_MARKDOWN_FONT_SIZE};
     }
 `;

@@ -7,11 +7,11 @@ import {
 	EditDialogPartContent,
 	EditDialogPartHeader,
 	EditDialogPartTitle,
-	NavigatorConfigurableElementBadge,
-	NavigatorConfigurableElementContainer,
-	NavigatorConfigurableElementLabel,
-	NavigatorConfigurableElementTreeLine,
-	NavigatorDialogNavigatorElementsContainer
+	NavigatorElementBadge,
+	NavigatorElementContainer,
+	NavigatorElementLabel,
+	NavigatorElementsContainer,
+	NavigatorElementTreeLine
 } from './widgets';
 
 export interface DialogNavigatorElementProps {
@@ -26,25 +26,25 @@ export const DialogNavigatorElement = (props: DialogNavigatorElementProps) => {
 	const {label, badge} = element;
 
 	return <>
-		<NavigatorConfigurableElementContainer level={level}>
+		<NavigatorElementContainer level={level}>
 			{level !== 0 // level starts from 0
 				? new Array(level + 1).fill(1).map((_, index) => {
 					// first level node doesn't need tree line
 					// last level node always needs tree line
 					// other levels depend on whether is the last node of the ancestor level
 					return index !== 0
-						? <NavigatorConfigurableElementTreeLine level={index}
-						                                        data-last-node={last[index]}
-						                                        data-last-level={index === level}
-						                                        key={index}/>
+						? <NavigatorElementTreeLine level={index}
+						                            data-last-node={last[index]}
+						                            data-last-level={index === level}
+						                            key={index}/>
 						: null;
 				})
 				: null}
-			<NavigatorConfigurableElementLabel level={level}>{label}</NavigatorConfigurableElementLabel>
+			<NavigatorElementLabel level={level}>{label}</NavigatorElementLabel>
 			{badge != null
-				? <NavigatorConfigurableElementBadge>{badge(model)}</NavigatorConfigurableElementBadge>
+				? <NavigatorElementBadge>{badge(model)}</NavigatorElementBadge>
 				: null}
-		</NavigatorConfigurableElementContainer>
+		</NavigatorElementContainer>
 		{element.children != null
 			? element.children
 				.filter(element => element.visible == null || element.visible(model))
@@ -65,7 +65,7 @@ export interface DialogNavigatorProps {
 export const DialogNavigatorElements = (props: DialogNavigatorProps) => {
 	const {elements, model} = props;
 
-	return <NavigatorDialogNavigatorElementsContainer>
+	return <NavigatorElementsContainer>
 		{elements
 			.filter(element => element.visible == null || element.visible(model))
 			.map((element, index, elements) => {
@@ -74,7 +74,7 @@ export const DialogNavigatorElements = (props: DialogNavigatorProps) => {
 				                               last={[index === elements.length - 1]}
 				                               key={element.code}/>;
 			})}
-	</NavigatorDialogNavigatorElementsContainer>;
+	</NavigatorElementsContainer>;
 };
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -82,7 +82,7 @@ export const DialogNavigator = (props: DialogNavigatorProps) => {
 	return <EditDialogNavigatorContainer>
 		<EditDialogPartContent>
 			<EditDialogPartHeader>
-				<EditDialogPartTitle>{Labels.ConfigurableElements}</EditDialogPartTitle>
+				<EditDialogPartTitle>{Labels.Navigator}</EditDialogPartTitle>
 			</EditDialogPartHeader>
 			<EditDialogPartBody>
 				<DialogNavigatorElements {...props}/>

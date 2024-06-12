@@ -14,8 +14,8 @@ export const Labels = {
 	NextStepPort: <IntlLabel keys={['o23', 'port', 'next']} value="Out"/>,
 
 	HelpDesk: <IntlLabel keys={['o23', 'dialog', 'docs', 'title']} value="Help Desk"/>,
-	ConfigurableElements: <IntlLabel keys={['o23', 'dialog', 'navigator', 'title']} value="Configurable Elements"/>,
-	SpecificDetails: <IntlLabel keys={['o23', 'dialog', 'specific', 'title']} value="Specific Details"/>,
+	Navigator: <IntlLabel keys={['o23', 'dialog', 'navigator', 'title']} value="Configurable Elements"/>,
+	Specific: <IntlLabel keys={['o23', 'dialog', 'specific', 'title']} value="Specific Details"/>,
 	BackToCanvas: <IntlLabel keys={['o23', 'dialog', 'close']} value="Back to canvas"/>,
 
 	TypeOfStandardPipeline: <IntlLabel keys={['o23', 'pipeline', 'standard']} value="Pipeline"/>,

@@ -1,11 +1,10 @@
-import React, {ReactNode, useEffect, useState} from 'react';
-import Markdown from 'react-markdown';
-import remarkGfm from 'remark-gfm';
+import React, {useEffect, useState} from 'react';
 import {ArrowLeft, ArrowRight} from '../icons';
 import {Labels} from '../labels';
 import {PlaygroundEventTypes, usePlaygroundEventBus} from '../playground-event-bus';
 import {MarkdownContent} from '../types';
 import {EditDialogEventTypes, useEditDialogEventBus} from './edit-dialog-event-bus';
+import {HelpDoc} from './help-doc';
 import {useHelpDeskOpened} from './state-holder';
 import {
 	EditDialogHelpDocCloseHandle,
@@ -60,23 +59,6 @@ export interface DialogHelpDeskState {
 	docWidth?: number;
 }
 
-export const LinkRenderer = (props: { href: string; children?: ReactNode }) => {
-	return <a href={props.href} target="_blank" rel="noreferrer">
-		{props.children}
-	</a>;
-};
-export const CodeRenderer = (props: { children?: ReactNode }) => {
-	const {children} = props;
-
-	if (children === '@rainbow-o23') {
-		return <code><a href="https://github.com/InsureMO/rainbow-o23" target="_blank" rel="noreferrer">
-			{props.children}
-		</a></code>;
-	} else {
-		return <code>{children}</code>;
-	}
-};
-
 export const DialogHelpDesk = (props: DialogHelpDeskProps) => {
 	const {helpDoc} = props;
 
@@ -92,8 +74,6 @@ export const DialogHelpDesk = (props: DialogHelpDeskProps) => {
 		};
 	}, [on, off]);
 
-	const components = {a: LinkRenderer, code: CodeRenderer};
-
 	return <EditDialogHelpDocContainer>
 		<EditDialogPartContent>
 			<EditDialogPartHeader>
@@ -103,9 +83,7 @@ export const DialogHelpDesk = (props: DialogHelpDeskProps) => {
 			<EditDialogPartBody>
 				<OpenHandle/>
 				<HelpDocContainer width={state.docWidth}>
-					<Markdown className="markdown-body" components={components} remarkPlugins={[remarkGfm]}>
-						{helpDoc}
-					</Markdown>
+					<HelpDoc content={helpDoc}/>
 				</HelpDocContainer>
 			</EditDialogPartBody>
 		</EditDialogPartContent>

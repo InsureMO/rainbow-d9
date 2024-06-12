@@ -1,0 +1,1 @@
+Used for locating configurations within the application, required fields, and must be globally unique.

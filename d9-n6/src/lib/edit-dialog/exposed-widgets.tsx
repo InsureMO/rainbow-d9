@@ -1,39 +1,39 @@
 import React from 'react';
 import {Labels} from '../labels';
-import {NavigatorConfigurableElementBadgeWrapper} from './widgets';
+import {NavigatorElementBadgeWrapper} from './widgets';
 
 export const ConfigurableElementBadgeChecked = () => {
-	return <NavigatorConfigurableElementBadgeWrapper data-role="checked">
+	return <NavigatorElementBadgeWrapper data-role="checked">
 		{Labels.BadgeChecked}
-	</NavigatorConfigurableElementBadgeWrapper>;
+	</NavigatorElementBadgeWrapper>;
 };
 export const ConfigurableElementBadgeMissed = () => {
-	return <NavigatorConfigurableElementBadgeWrapper data-role="missed">
+	return <NavigatorElementBadgeWrapper data-role="missed">
 		{Labels.BadgeMissed}
-	</NavigatorConfigurableElementBadgeWrapper>;
+	</NavigatorElementBadgeWrapper>;
 };
 export const ConfigurableElementBadgeBanned = () => {
-	return <NavigatorConfigurableElementBadgeWrapper data-role="banned">
+	return <NavigatorElementBadgeWrapper data-role="banned">
 		{Labels.BadgeBanned}
-	</NavigatorConfigurableElementBadgeWrapper>;
+	</NavigatorElementBadgeWrapper>;
 };
 export const ConfigurableElementBadgeAll = () => {
-	return <NavigatorConfigurableElementBadgeWrapper data-role="all">
+	return <NavigatorElementBadgeWrapper data-role="all">
 		{Labels.All}
-	</NavigatorConfigurableElementBadgeWrapper>;
+	</NavigatorElementBadgeWrapper>;
 };
 export const ConfigurableElementBadgeIgnored = () => {
-	return <NavigatorConfigurableElementBadgeWrapper data-role="ignored">
+	return <NavigatorElementBadgeWrapper data-role="ignored">
 		{Labels.Ignored}
-	</NavigatorConfigurableElementBadgeWrapper>;
+	</NavigatorElementBadgeWrapper>;
 };
 export const ConfigurableElementBadgeNotAvailable = () => {
-	return <NavigatorConfigurableElementBadgeWrapper data-role="not-available">
+	return <NavigatorElementBadgeWrapper data-role="not-available">
 		{Labels.NotAvailable}
-	</NavigatorConfigurableElementBadgeWrapper>;
+	</NavigatorElementBadgeWrapper>;
 };
 export const ConfigurableElementBadgeCount = (props: { count: number }) => {
-	return <NavigatorConfigurableElementBadgeWrapper data-role="count">
+	return <NavigatorElementBadgeWrapper data-role="count">
 		{props.count}
-	</NavigatorConfigurableElementBadgeWrapper>;
+	</NavigatorElementBadgeWrapper>;
 };

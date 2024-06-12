@@ -7,7 +7,7 @@ import {EditDialogEventBusProvider} from './edit-dialog-event-bus';
 import {DialogHelpDesk} from './help-desk';
 import {LayoutController} from './layout-controller';
 import {DialogNavigator} from './navigator';
-import {DialogSpecificDetails} from './specific-details';
+import {DialogSpecific} from './specific';
 import {StateHolder} from './state-holder';
 import {ConfigurableElement, ConfigurableModel} from './types';
 import {EditDialogContentContainer, EditDialogContentInitializer, EditorDialogCloser} from './widgets';
@@ -64,7 +64,7 @@ export const DialogContent = (props: DialogContentProps) => {
 				{Labels.BackToCanvas}
 			</EditorDialogCloser>
 			<DialogHelpDesk helpDoc={helpDoc}/>
-			<DialogSpecificDetails/>
+			<DialogSpecific elements={elements} model={state.model}/>
 			<DialogNavigator elements={elements} model={state.model}/>
 		</EditDialogContentContainer>
 		<DialogContentInitializer/>
