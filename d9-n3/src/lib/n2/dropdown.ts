@@ -11,6 +11,7 @@ import {
 	ReactionMonitorAttributeValue,
 	ReactionTypes,
 	SpecificWidgetTranslator,
+	TipAttachableBuild,
 	ValidatorUtils,
 	ValueChangedBuild,
 	WidgetPropertyName
@@ -98,7 +99,7 @@ export class N2DropdownTranslator extends SpecificWidgetTranslator<N2WidgetType.
 
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	public getAttributeValueBuilders(): Array<AttributeValueBuild<any>> {
-		return [N2DropdownOptionsBuild, N2DropdownSortBuild, N2DropdownReactionRefreshOptionsBuild, ValueChangedBuild];
+		return [N2DropdownOptionsBuild, N2DropdownSortBuild, N2DropdownReactionRefreshOptionsBuild, TipAttachableBuild, ValueChangedBuild];
 	}
 
 	public getValidationHandlerDetectives(): Array<MonitorHandlerDetective> {

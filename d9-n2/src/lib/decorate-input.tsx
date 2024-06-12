@@ -3,13 +3,13 @@ import React, {CSSProperties, ForwardedRef, forwardRef, ReactNode, useEffect, us
 import styled from 'styled-components';
 import {CssVars, DOM_ID_WIDGET, DOM_KEY_WIDGET} from './constants';
 import {DecorateWrapperDef, transformDecorators} from './decorate-assist';
-import {buildTip, useTip} from './global';
+import {buildTip, TipAttachableWidget, useTip} from './global';
 import {Input, InputDef, NumberInput, NumberInputDef, PasswordInput, PasswordInputDef} from './input';
 import {toIntlLabel} from './intl-label';
 import {OmitNodeDef} from './types';
 import {useDualRefs} from './utils';
 
-export type DecorateInputDef = InputDef & DecorateWrapperDef;
+export type DecorateInputDef = InputDef & { diTip?: TipAttachableWidget['tip'] } & DecorateWrapperDef;
 export type DecorateInputProps = OmitNodeDef<DecorateInputDef> & DecorateWrapperDef & WidgetProps;
 
 // noinspection CssUnresolvedCustomProperty
@@ -219,7 +219,7 @@ export const DecorateInput = forwardRef((props: DecorateInputProps, ref: Forward
 	const {
 		placeholder,
 		leads, tails,
-		tip,
+		diTip,
 		className, style, ...rest
 	} = props;
 	const {$wrapped: {$root, $model, $p2r}} = rest;
@@ -227,7 +227,7 @@ export const DecorateInput = forwardRef((props: DecorateInputProps, ref: Forward
 
 	const decorateRef = useRef<HTMLDivElement>(null);
 	useDualRefs(decorateRef, ref);
-	useTip({ref: decorateRef, prefix: 'data-di', ...buildTip({tip, root: $root, model: $model})});
+	useTip({ref: decorateRef, prefix: 'data-di', ...buildTip({tip: diTip, root: $root, model: $model})});
 
 	const computePlaceholder = () => {
 		if (VUtils.isBlank(placeholder)) {
@@ -248,14 +248,14 @@ export const DecorateInput = forwardRef((props: DecorateInputProps, ref: Forward
 	</Decorate>;
 });
 
-export type DecorateNumberInputDef = NumberInputDef & DecorateWrapperDef;
+export type DecorateNumberInputDef = NumberInputDef & { diTip?: TipAttachableWidget['tip'] } & DecorateWrapperDef;
 export type DecorateNumberInputProps = OmitNodeDef<DecorateNumberInputDef> & WidgetProps;
 
 export const DecorateNumberInput = forwardRef((props: DecorateNumberInputProps, ref: ForwardedRef<HTMLDivElement>) => {
 	const {
 		placeholder,
 		leads, tails,
-		tip,
+		diTip,
 		className, style, ...rest
 	} = props;
 	const {$pp, $wrapped: {$p2r, $root, $model, $onValueChange}} = rest;
@@ -263,7 +263,7 @@ export const DecorateNumberInput = forwardRef((props: DecorateNumberInputProps, 
 
 	const decorateRef = useRef<HTMLDivElement>(null);
 	useDualRefs(decorateRef, ref);
-	useTip({ref: decorateRef, prefix: 'data-di', ...buildTip({tip, root: $root, model: $model})});
+	useTip({ref: decorateRef, prefix: 'data-di', ...buildTip({tip: diTip, root: $root, model: $model})});
 
 	const [omitPlaceholder, setOmitPlaceholder] = useState(() => {
 		return VUtils.isNotEmpty(MUtils.getValue($model, $pp));
@@ -293,14 +293,14 @@ export const DecorateNumberInput = forwardRef((props: DecorateNumberInputProps, 
 	</Decorate>;
 });
 
-export type DecoratePasswordInputDef = PasswordInputDef & DecorateWrapperDef;
+export type DecoratePasswordInputDef = PasswordInputDef & { diTip?: TipAttachableWidget['tip'] } & DecorateWrapperDef;
 export type DecoratePasswordInputProps = OmitNodeDef<DecoratePasswordInputDef> & WidgetProps;
 
 export const DecoratePasswordInput = forwardRef((props: DecoratePasswordInputProps, ref: ForwardedRef<HTMLDivElement>) => {
 	const {
 		placeholder,
 		leads, tails,
-		tip,
+		diTip,
 		className, style, ...rest
 	} = props;
 	const {$wrapped: {$p2r, $root, $model}} = rest;
@@ -308,7 +308,7 @@ export const DecoratePasswordInput = forwardRef((props: DecoratePasswordInputPro
 
 	const decorateRef = useRef<HTMLDivElement>(null);
 	useDualRefs(decorateRef, ref);
-	useTip({ref: decorateRef, prefix: 'data-di', ...buildTip({tip, root: $root, model: $model})});
+	useTip({ref: decorateRef, prefix: 'data-di', ...buildTip({tip: diTip, root: $root, model: $model})});
 
 	return <Decorate {...deviceTags} {...decorateAttrs}
 	                 placeholder={placeholder} leads={leads} tails={tails}

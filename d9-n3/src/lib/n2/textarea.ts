@@ -2,6 +2,7 @@ import {
 	AttributeValueBuild,
 	MonitorHandlerDetective,
 	SpecificWidgetTranslator,
+	TipAttachableBuild,
 	ValidatorUtils,
 	ValueChangedBuild
 } from '../widget';
@@ -14,7 +15,7 @@ export class N2TextareaTranslator extends SpecificWidgetTranslator<N2WidgetType.
 
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	public getAttributeValueBuilders(): Array<AttributeValueBuild<any>> {
-		return [ValueChangedBuild];
+		return [TipAttachableBuild, ValueChangedBuild];
 	}
 
 	public getValidationHandlerDetectives(): Array<MonitorHandlerDetective> {

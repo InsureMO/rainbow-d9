@@ -1,4 +1,4 @@
-import {InputDef} from '@rainbow-d9/n2';
+import {Global, InputDef} from '@rainbow-d9/n2';
 import {
 	AttributeValueBuild,
 	createSyncSnippetBuild,
@@ -6,6 +6,7 @@ import {
 	DecorateTailsBuild,
 	MonitorHandlerDetective,
 	SpecificWidgetTranslator,
+	TipAttachableBuild,
 	ValidatorUtils,
 	ValueChangedBuild,
 	wrapMonitorHandlerDetective
@@ -36,7 +37,7 @@ export class N2InputTranslator extends SpecificWidgetTranslator<N2WidgetType.INP
 
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	public getAttributeValueBuilders(): Array<AttributeValueBuild<any>> {
-		return [InputMaskBuild, ValueChangedBuild];
+		return [InputMaskBuild, TipAttachableBuild, ValueChangedBuild];
 	}
 
 	public getValidationHandlerDetectives(): Array<MonitorHandlerDetective> {
@@ -55,7 +56,7 @@ export class N2NumberTranslator extends SpecificWidgetTranslator<N2WidgetType.NU
 
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	public getAttributeValueBuilders(): Array<AttributeValueBuild<any>> {
-		return [ValueChangedBuild];
+		return [TipAttachableBuild, ValueChangedBuild];
 	}
 
 	public getValidationHandlerDetectives(): Array<MonitorHandlerDetective> {
@@ -74,7 +75,7 @@ export class N2PasswordTranslator extends SpecificWidgetTranslator<N2WidgetType.
 
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	public getAttributeValueBuilders(): Array<AttributeValueBuild<any>> {
-		return [ValueChangedBuild];
+		return [TipAttachableBuild, ValueChangedBuild];
 	}
 
 	public getValidationHandlerDetectives(): Array<MonitorHandlerDetective> {
@@ -86,6 +87,10 @@ export class N2PasswordTranslator extends SpecificWidgetTranslator<N2WidgetType.
 	}
 }
 
+export const DecorateInputTipAttachableBuild = createSyncSnippetBuild<{
+	diTip?: Global.TipAttachableWidget['tip']
+}, 'diTip'>('diTip', ['options']);
+
 export class N2DecorateInputTranslator extends SpecificWidgetTranslator<N2WidgetType.DECORATE_INPUT> {
 	public getSupportedType(): N2WidgetType.DECORATE_INPUT {
 		return N2WidgetType.DECORATE_INPUT;
@@ -93,7 +98,7 @@ export class N2DecorateInputTranslator extends SpecificWidgetTranslator<N2Widget
 
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	public getAttributeValueBuilders(): Array<AttributeValueBuild<any>> {
-		return [InputMaskBuild, DecorateLeadsBuild, DecorateTailsBuild, ValueChangedBuild];
+		return [InputMaskBuild, DecorateLeadsBuild, DecorateTailsBuild, TipAttachableBuild, DecorateInputTipAttachableBuild, ValueChangedBuild];
 	}
 
 	public getValidationHandlerDetectives(): Array<MonitorHandlerDetective> {
@@ -112,7 +117,7 @@ export class N2DecorateNumberTranslator extends SpecificWidgetTranslator<N2Widge
 
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	public getAttributeValueBuilders(): Array<AttributeValueBuild<any>> {
-		return [DecorateLeadsBuild, DecorateTailsBuild, ValueChangedBuild];
+		return [DecorateLeadsBuild, DecorateTailsBuild, TipAttachableBuild, DecorateInputTipAttachableBuild, ValueChangedBuild];
 	}
 
 	public getValidationHandlerDetectives(): Array<MonitorHandlerDetective> {
@@ -131,7 +136,7 @@ export class N2DecoratePasswordTranslator extends SpecificWidgetTranslator<N2Wid
 
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	public getAttributeValueBuilders(): Array<AttributeValueBuild<any>> {
-		return [DecorateLeadsBuild, DecorateTailsBuild, ValueChangedBuild];
+		return [DecorateLeadsBuild, DecorateTailsBuild, TipAttachableBuild, DecorateInputTipAttachableBuild, ValueChangedBuild];
 	}
 
 	public getValidationHandlerDetectives(): Array<MonitorHandlerDetective> {

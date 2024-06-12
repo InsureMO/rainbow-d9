@@ -12,6 +12,7 @@ export * from './validation-attribute-build';
 export * from './visibility-attribute-build';
 export * from './snippet-attribute-build';
 export * from './data-prefix-attribute-build';
+export * from './tip-attachable-build';
 export * from './any-attribute-build';
 
 export * from './attribute-utils';

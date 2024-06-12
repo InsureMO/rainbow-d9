@@ -5,6 +5,7 @@ import {
 	createSyncSnippetBuild,
 	MonitorHandlerDetective,
 	SpecificWidgetTranslator,
+	TipAttachableBuild,
 	ValidatorUtils,
 	ValueChangedBuild,
 	WidgetPropertyName
@@ -65,7 +66,7 @@ export class N2DateTranslator extends SpecificWidgetTranslator<N2WidgetType.DATE
 
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	public getAttributeValueBuilders(): Array<AttributeValueBuild<any>> {
-		return [N2CalendarFixedTimeAtBuild, N2CalendarInitTimeAtBuild, N2CalendarCouldPerformBuild, ValueChangedBuild];
+		return [N2CalendarFixedTimeAtBuild, N2CalendarInitTimeAtBuild, N2CalendarCouldPerformBuild, TipAttachableBuild, ValueChangedBuild];
 	}
 
 	public getValidationHandlerDetectives(): Array<MonitorHandlerDetective> {
@@ -83,7 +84,7 @@ export class N2DateTimeTranslator extends SpecificWidgetTranslator<N2WidgetType.
 
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	public getAttributeValueBuilders(): Array<AttributeValueBuild<any>> {
-		return [N2CalendarFixedTimeAtBuild, N2CalendarInitTimeAtBuild, N2CalendarCouldPerformBuild, ValueChangedBuild];
+		return [N2CalendarFixedTimeAtBuild, N2CalendarInitTimeAtBuild, N2CalendarCouldPerformBuild, TipAttachableBuild, ValueChangedBuild];
 	}
 
 	public getValidationHandlerDetectives(): Array<MonitorHandlerDetective> {
@@ -101,7 +102,7 @@ export class N2TimeTranslator extends SpecificWidgetTranslator<N2WidgetType.TIME
 
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	public getAttributeValueBuilders(): Array<AttributeValueBuild<any>> {
-		return [N2CalendarFixedTimeAtBuild, N2CalendarInitTimeAtBuild, N2CalendarCouldPerformBuild, ValueChangedBuild];
+		return [N2CalendarFixedTimeAtBuild, N2CalendarInitTimeAtBuild, N2CalendarCouldPerformBuild, TipAttachableBuild, ValueChangedBuild];
 	}
 
 	public getValidationHandlerDetectives(): Array<MonitorHandlerDetective> {
@@ -119,7 +120,7 @@ export class N2CalendarTranslator extends SpecificWidgetTranslator<N2WidgetType.
 
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	public getAttributeValueBuilders(): Array<AttributeValueBuild<any>> {
-		return [N2CalendarFixedTimeAtBuild, N2CalendarInitTimeAtBuild, N2CalendarCouldPerformBuild, ValueChangedBuild];
+		return [N2CalendarFixedTimeAtBuild, N2CalendarInitTimeAtBuild, N2CalendarCouldPerformBuild, TipAttachableBuild, ValueChangedBuild];
 	}
 
 	public getValidationHandlerDetectives(): Array<MonitorHandlerDetective> {

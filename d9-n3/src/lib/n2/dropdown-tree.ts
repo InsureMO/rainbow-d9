@@ -6,6 +6,7 @@ import {
 	CustomAttributeName,
 	MonitorHandlerDetective,
 	SpecificWidgetTranslator,
+	TipAttachableBuild,
 	ValidatorUtils,
 	ValueChangedBuild,
 	WidgetPropertyName
@@ -23,7 +24,7 @@ export const N2DropdownTreeCouldSelectBuild =
 export abstract class AbstractN2DropdownTreeTranslator<T extends N2WidgetType.DROPDOWN_TREE | N2WidgetType.DDT> extends SpecificWidgetTranslator<T> {
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	public getAttributeValueBuilders(): Array<AttributeValueBuild<any>> {
-		return [N2DropdownTreeCouldSelectBuild, N2DropdownSortBuild, N2DropdownReactionRefreshOptionsBuild, ValueChangedBuild];
+		return [N2DropdownTreeCouldSelectBuild, N2DropdownSortBuild, N2DropdownReactionRefreshOptionsBuild, TipAttachableBuild, ValueChangedBuild];
 	}
 
 	public getValidationHandlerDetectives(): Array<MonitorHandlerDetective> {

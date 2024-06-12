@@ -5,6 +5,7 @@ import {
 	AttributeValueBuild,
 	MonitorHandlerDetective,
 	SpecificWidgetTranslator,
+	TipAttachableBuild,
 	tryBoolOnAttrValue,
 	ValidatorUtils,
 	ValueChangedBuild,
@@ -41,7 +42,7 @@ export class N2RadioTranslator extends SpecificWidgetTranslator<N2WidgetType.RAD
 
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	public getAttributeValueBuilders(): Array<AttributeValueBuild<any>> {
-		return [N2RadioValuesBuild, ValueChangedBuild];
+		return [N2RadioValuesBuild, TipAttachableBuild, ValueChangedBuild];
 	}
 
 	public getValidationHandlerDetectives(): Array<MonitorHandlerDetective> {

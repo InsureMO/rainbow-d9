@@ -4,6 +4,7 @@ import {
 	CustomAttributeName,
 	MonitorHandlerDetective,
 	SpecificWidgetTranslator,
+	TipAttachableBuild,
 	ValidatorUtils,
 	ValueChangedBuild,
 	WidgetPropertyName
@@ -19,7 +20,7 @@ import {N2WidgetType} from './types';
 export abstract class AbstractN2CheckboxesTranslator<T extends N2WidgetType.CHECKBOXES | N2WidgetType.CHECKS> extends SpecificWidgetTranslator<T> {
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	public getAttributeValueBuilders(): Array<AttributeValueBuild<any>> {
-		return [N2DropdownOptionsBuild, N2DropdownSortBuild, ValueChangedBuild, N2DropdownReactionRefreshOptionsBuild];
+		return [N2DropdownOptionsBuild, N2DropdownSortBuild, TipAttachableBuild, ValueChangedBuild, N2DropdownReactionRefreshOptionsBuild];
 	}
 
 	public getValidationHandlerDetectives(): Array<MonitorHandlerDetective> {

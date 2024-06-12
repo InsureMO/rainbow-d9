@@ -7,6 +7,7 @@ import {
 	DecorateLeadsBuild,
 	DecorateTailsBuild,
 	SpecificWidgetTranslator,
+	TipAttachableBuild,
 	WidgetPropertyName
 } from '../widget';
 import {buildClickHandler} from './event-handler';
@@ -89,7 +90,7 @@ export class N2LinkTranslator extends SpecificWidgetTranslator<N2WidgetType.LINK
 
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	public getAttributeValueBuilders(): Array<AttributeValueBuild<any>> {
-		return [N2ButtonClickBuild, DecorateLeadsBuild, DecorateTailsBuild];
+		return [N2ButtonClickBuild, DecorateLeadsBuild, DecorateTailsBuild, TipAttachableBuild];
 	}
 }
 

@@ -10,6 +10,7 @@ import {
 	MonitorHandlerDetective,
 	MonitorHandlerDetectOptions,
 	SpecificWidgetTranslator,
+	TipAttachableBuild,
 	WidgetPropertyName,
 	WidgetTranslator
 } from '../widget';
@@ -102,7 +103,7 @@ export class N2CaptionTranslator extends SpecificWidgetTranslator<N2WidgetType.C
 
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	public getAttributeValueBuilders(): Array<AttributeValueBuild<any>> {
-		return [N2CaptionValueToLabelBuild, N2CaptionClickBuild, DecorateLeadsBuild, DecorateTailsBuild];
+		return [N2CaptionValueToLabelBuild, N2CaptionClickBuild, DecorateLeadsBuild, DecorateTailsBuild, TipAttachableBuild];
 	}
 
 	public getReactionHandlerDetectives(): Array<MonitorHandlerDetective> {
@@ -130,7 +131,7 @@ export class N2LabelTranslator extends SpecificWidgetTranslator<N2WidgetType.LAB
 
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	public getAttributeValueBuilders(): Array<AttributeValueBuild<any>> {
-		return [N2CaptionValueToLabelBuild, N2CaptionClickBuild, DecorateLeadsBuild, DecorateTailsBuild];
+		return [N2CaptionValueToLabelBuild, N2CaptionClickBuild, DecorateLeadsBuild, DecorateTailsBuild, TipAttachableBuild];
 	}
 
 	public getReactionHandlerDetectives(): Array<MonitorHandlerDetective> {
@@ -158,7 +159,7 @@ export class N2BadgeTranslator extends SpecificWidgetTranslator<N2WidgetType.BAD
 
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	public getAttributeValueBuilders(): Array<AttributeValueBuild<any>> {
-		return [N2CaptionValueToLabelBuild, N2CaptionClickBuild, DecorateLeadsBuild, DecorateTailsBuild];
+		return [N2CaptionValueToLabelBuild, N2CaptionClickBuild, DecorateLeadsBuild, DecorateTailsBuild, TipAttachableBuild];
 	}
 
 	public getReactionHandlerDetectives(): Array<MonitorHandlerDetective> {

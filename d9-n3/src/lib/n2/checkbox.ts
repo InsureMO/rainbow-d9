@@ -5,6 +5,7 @@ import {
 	AttributeValueBuild,
 	MonitorHandlerDetective,
 	SpecificWidgetTranslator,
+	TipAttachableBuild,
 	tryBoolOnAttrValue,
 	ValidatorUtils,
 	ValueChangedBuild,
@@ -41,7 +42,7 @@ export class N2CheckboxTranslator extends SpecificWidgetTranslator<N2WidgetType.
 
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	public getAttributeValueBuilders(): Array<AttributeValueBuild<any>> {
-		return [N2CheckboxValuesBuild, ValueChangedBuild];
+		return [N2CheckboxValuesBuild, TipAttachableBuild, ValueChangedBuild];
 	}
 
 	public getValidationHandlerDetectives(): Array<MonitorHandlerDetective> {

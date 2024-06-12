@@ -1,4 +1,4 @@
-import {BaseModel, PropValue, VUtils} from '@rainbow-d9/n1';
+import {BaseModel, PropValue, useThrottler, VUtils} from '@rainbow-d9/n1';
 import React, {MutableRefObject, ReactNode, useEffect, useRef, useState} from 'react';
 import {useCollapseFixedThing} from '../../hooks';
 import {toIntlLabel} from '../../intl-label';
@@ -49,7 +49,7 @@ interface TipState {
 	maxHeight?: string | number;
 	delay?: number;
 	tag?: string;
-	visible: boolean;
+	visible: 'visible' | 'hidden' | 'ready';
 	top?: number;
 	left?: number;
 	hideTimeout?: number;
@@ -58,37 +58,45 @@ interface TipState {
 export const Tip = () => {
 	const {on, off} = useGlobalEventBus();
 	const ref = useRef<HTMLDivElement>(null);
-	const [state, setState] = useState<TipState>({visible: false});
+	const [state, setState] = useState<TipState>({visible: 'hidden'});
+	const {replace} = useThrottler();
 	useEffect(() => {
 		const onShowTip = (options: TipOptions) => {
-			const {ref, prefix = 'data'} = options;
-			const body = options.body ?? ref.current.getAttribute(`${prefix}-tip-body`);
-			if (VUtils.isBlank(body)) {
-				return;
-			}
-			const title = options.title ?? ref.current.getAttribute(`${prefix}-tip-title`);
-			const minWidth = options.minWidth ?? ref.current.getAttribute(`${prefix}-tip-min-width`);
-			const maxWidth = options.maxWidth ?? ref.current.getAttribute(`${prefix}-tip-max-width`);
-			const maxHeight = options.maxHeight ?? ref.current.getAttribute(`${prefix}-tip-max-height`);
-			const delay = (() => {
-				const value = options.delay ?? ref.current.getAttribute(`${prefix}-tip-delay`);
-				const ret = VUtils.isNumber(value);
-				return ret.test ? ret.value : (void 0);
-			})();
-			const tag = options.tag ?? ref.current.getAttribute(`${prefix}-tip-tag`);
-			if (state.hideTimeout) {
-				window.clearTimeout(state.hideTimeout);
-			}
-			setState({ref, title, body, visible: false, minWidth, maxWidth, maxHeight, delay, tag});
+			replace(() => {
+				const {ref, prefix = 'data'} = options;
+				const body = options.body ?? ref.current.getAttribute(`${prefix}-tip-body`);
+				if (VUtils.isBlank(body)) {
+					return;
+				}
+				const title = options.title ?? ref.current.getAttribute(`${prefix}-tip-title`);
+				const minWidth = options.minWidth ?? ref.current.getAttribute(`${prefix}-tip-min-width`);
+				const maxWidth = options.maxWidth ?? ref.current.getAttribute(`${prefix}-tip-max-width`);
+				const maxHeight = options.maxHeight ?? ref.current.getAttribute(`${prefix}-tip-max-height`);
+				const delay = (() => {
+					const value = options.delay ?? ref.current.getAttribute(`${prefix}-tip-delay`);
+					const ret = VUtils.isNumber(value);
+					return ret.test ? ret.value : (void 0);
+				})();
+				const tag = options.tag ?? ref.current.getAttribute(`${prefix}-tip-tag`);
+				// console.log('switch to ready');
+				setState(state => {
+					if (state.hideTimeout) {
+						window.clearTimeout(state.hideTimeout);
+					}
+					return {ref, title, body, visible: 'ready', minWidth, maxWidth, maxHeight, delay, tag};
+				});
+			}, 30);
 		};
 		const onHideTip = (ref: MutableRefObject<HTMLElement>) => {
 			if (ref.current !== state.ref?.current) {
 				return;
 			} else {
-				if (state.hideTimeout) {
-					window.clearTimeout(state.hideTimeout);
-				}
-				setState({visible: false});
+				setState(state => {
+					if (state.hideTimeout) {
+						window.clearTimeout(state.hideTimeout);
+					}
+					return {visible: 'hidden'};
+				});
 			}
 		};
 		on(GlobalEventTypes.SHOW_TIP, onShowTip);
@@ -97,9 +105,9 @@ export const Tip = () => {
 			off(GlobalEventTypes.SHOW_TIP, onShowTip);
 			off(GlobalEventTypes.HIDE_TIP, onHideTip);
 		};
-	}, [on, off, state.ref, state.hideTimeout]);
+	}, [on, off, replace, state.ref]);
 	useEffect(() => {
-		if (state.ref != null && !state.visible) {
+		if (state.ref != null && state.visible === 'ready') {
 			const {top, left, width, height} = state.ref.current.getBoundingClientRect();
 			const {width: myWidth, height: myHeight} = ref.current.getBoundingClientRect();
 			const {top: myTop} = ((): { top: number; onTop: boolean } => {
@@ -121,26 +129,28 @@ export const Tip = () => {
 					return left - (myWidth - width) / 2;
 				}
 			})();
+			// console.log(top, left, width, height, myTop, myLeft, myWidth, myHeight);
 			const hideTimeout = (() => {
 				if (state.delay != null) {
-					return setTimeout(() => setState({visible: false}), state.delay * 1000);
+					return setTimeout(() => setState({visible: 'hidden'}), state.delay * 1000);
 				} else {
 					return (void 0);
 				}
 			})();
+			// console.log('switch to visible');
 			// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 			// @ts-ignore
-			setState(state => ({...state, visible: true, top: myTop, left: myLeft, hideTimeout}));
+			setState(state => ({...state, visible: 'visible', top: myTop, left: myLeft, hideTimeout}));
 		}
 	}, [state.ref, state.visible, state.delay]);
 	useCollapseFixedThing({
 		containerRef: state.ref,
-		visible: state.visible,
+		visible: state.visible !== 'hidden',
 		hide: () => {
 			if (state.hideTimeout) {
 				window.clearTimeout(state.hideTimeout);
 			}
-			setState({visible: false});
+			setState({visible: 'hidden'});
 		}
 	});
 
@@ -148,7 +158,8 @@ export const Tip = () => {
 		return null;
 	}
 
-	return <TipContainer visible={state.visible}
+	// console.log(state);
+	return <TipContainer visible={state.visible !== 'hidden'}
 	                     minWidth={state.minWidth} maxWidth={state.maxWidth} maxHeight={state.maxHeight}
 	                     tag={state.tag}
 	                     top={state.top} left={state.left}
@@ -166,6 +177,7 @@ export const useTip = (options: TipOptions) => {
 	const {ref} = options;
 	const {fire} = useGlobalEventBus();
 	const shown = useRef(false);
+	const {replace} = useThrottler();
 	useEffect(() => {
 		if (ref.current == null || fire == null) {
 			return;
@@ -200,8 +212,14 @@ export const useTip = (options: TipOptions) => {
 		current.addEventListener('focusout', onFocusOut);
 		current.addEventListener('click', onClick);
 
-		if (shown.current) {
-			fire(GlobalEventTypes.SHOW_TIP, {...(options ?? {})} as TipOptions);
+		if (shown.current === true) {
+			// This is very troublesome here. Because components may refresh multiple times due to various reasons,
+			// such as value changes, validation information, and so on, it will result in sending multiple events.
+			// Multiple events will cause confusion in the visible state, ultimately leading to abnormal tip display.
+			// Therefore, here we use throttling to eliminate continuous refresh occurrences.
+			replace(() => {
+				fire(GlobalEventTypes.SHOW_TIP, options);
+			}, 70);
 		}
 
 		return () => {
@@ -211,7 +229,7 @@ export const useTip = (options: TipOptions) => {
 			current.removeEventListener('focusout', onFocusOut);
 			current.removeEventListener('click', onClick);
 		};
-	}, [fire, ref, options]);
+	}, [fire, replace, ref, options]);
 };
 
 export * from './widgets';
