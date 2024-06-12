@@ -4,9 +4,9 @@ var __publicField = (obj, key, value) => {
   __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
   return value;
 };
-import { a as color, M as MaskedNumber, e as MaskedDate, g as MaskedFunction, j as MaskedPattern, k as MaskedRange, p as MaskedRegExp, q as MaskedDynamic } from "./vendor-W_zh5JiD.js";
-import { R as React, r as reactExports, q as qe, W as We, u as useIMask } from "./react-base-XEFxDFEy.js";
-import { c as createLogger, V as VUtils, P as PPUtils, r as registerWidget, u as useRootEventBus, M as MUtils, N as NUtils, d as Wrapper, e as useForceUpdate, f as MBUtils, b as useWrapperEventBus, W as WrapperEventTypes, g as useCreateEventBus, h as PROPERTY_PATH_ME, i as useDefaultAttributeValues, j as useAttributesWatch, R as RootEventTypes } from "./rainbow-d9-n1-MgjZKHeq.js";
+import { a as color, M as MaskedNumber, e as MaskedDate, g as MaskedFunction, j as MaskedPattern, k as MaskedRange, p as MaskedRegExp, q as MaskedDynamic } from "./vendor-9g-Uqt4B.js";
+import { R as React, r as reactExports, q as qe, W as We, u as useIMask } from "./react-base-dlWpmanK.js";
+import { c as createLogger, V as VUtils, P as PPUtils, r as registerWidget, a as useThrottler, u as useRootEventBus, M as MUtils, N as NUtils, d as Wrapper, e as useForceUpdate, f as MBUtils, b as useWrapperEventBus, W as WrapperEventTypes, g as useCreateEventBus, h as PROPERTY_PATH_ME, i as useDefaultAttributeValues, j as useAttributesWatch, R as RootEventTypes } from "./rainbow-d9-n1-mvZG8UjJ.js";
 import { d as dayjs } from "./dayjs-ZafkOS5_.js";
 const DOM_KEY_WIDGET = "data-w";
 const DOM_ID_WIDGET = "data-wid";
@@ -496,6 +496,7 @@ var GlobalEventTypes;
   GlobalEventTypes2["SHOW_YES_NO_DIALOG"] = "show-yes-no-dialog";
   GlobalEventTypes2["SHOW_TIP"] = "show-tip";
   GlobalEventTypes2["HIDE_TIP"] = "hide-tip";
+  GlobalEventTypes2["REPAINT_TIP"] = "repaint-tip";
   GlobalEventTypes2["CUSTOM_EVENT"] = "custom-event";
 })(GlobalEventTypes || (GlobalEventTypes = {}));
 const Context$7 = reactExports.createContext({});
@@ -1075,12 +1076,12 @@ const TailDecorator$2 = qe(Decorator$2).attrs({
 })`
 `;
 const Button = reactExports.forwardRef((props, ref) => {
-  const { head, text, tail, ink = ButtonInk.PRIMARY, fill = ButtonFill.FILL, click, leads, tails, $wrapped, ...rest } = props;
+  const { head, text, tail, ink = ButtonInk.PRIMARY, fill = ButtonFill.FILL, click, leads, tails, tip, $wrapped, ...rest } = props;
   const { $root, $model, $p2r, $avs: { $disabled, $visible }, $vfs } = $wrapped;
   const globalHandlers = useGlobalHandlers();
   const buttonRef = reactExports.useRef(null);
   useDualRefs(buttonRef, ref);
-  useTip({ ref: buttonRef });
+  useTip({ ref: buttonRef, ...buildTip({ tip, root: $root, model: $model }) });
   const onClicked = async (event) => {
     event.preventDefault();
     event.stopPropagation();
@@ -1532,6 +1533,7 @@ const useCollapseFixedThing = (options) => {
   }, [containerRef, events, visible, hide]);
 };
 const TipContainer = qe.div.attrs(({ visible, minWidth, maxWidth, maxHeight, tag, top, left }) => {
+  const shown = visible === true && top != null && left != null;
   return {
     [DOM_KEY_WIDGET]: "d9-tip",
     ...VUtils.isNotBlank(tag) ? { [tag]: "" } : {},
@@ -1541,8 +1543,8 @@ const TipContainer = qe.div.attrs(({ visible, minWidth, maxWidth, maxHeight, tag
       "--max-height": toCssSize(maxHeight),
       "--top": toCssSize(top),
       "--left": toCssSize(left),
-      opacity: visible ? 1 : 0,
-      pointerEvents: visible ? "auto" : "none"
+      opacity: shown ? 1 : 0,
+      pointerEvents: shown ? "auto" : "none"
     }
   };
 })`
@@ -1594,52 +1596,84 @@ const TipLabel = qe.span.attrs({ [DOM_KEY_WIDGET]: "d9-tip-label" })`
     line-height: ${CssVars.LINE_HEIGHT};
     padding: calc((${CssVars.INPUT_HEIGHT} - ${CssVars.LINE_HEIGHT}) / 2) 0;
 `;
+const buildTip = (options) => {
+  const { tip, ...rest } = options;
+  if (tip == null) {
+    return {};
+  } else if (typeof tip === "function") {
+    return tip(rest);
+  } else {
+    return tip;
+  }
+};
 const Tip = () => {
   const { on, off } = useGlobalEventBus();
   const ref = reactExports.useRef(null);
-  const [state, setState] = reactExports.useState({ visible: false });
+  const [state, setState] = reactExports.useState({ visible: "hidden" });
+  const { replace } = useThrottler();
   reactExports.useEffect(() => {
-    const onShowTip = (options) => {
-      const { ref: ref2, prefix = "data" } = options;
-      const body = options.body ?? ref2.current.getAttribute(`${prefix}-tip-body`);
-      if (VUtils.isBlank(body)) {
-        return;
-      }
-      const title = options.title ?? ref2.current.getAttribute(`${prefix}-tip-title`);
-      const minWidth = options.minWidth ?? ref2.current.getAttribute(`${prefix}-tip-min-width`);
-      const maxWidth = options.maxWidth ?? ref2.current.getAttribute(`${prefix}-tip-max-width`);
-      const maxHeight = options.maxHeight ?? ref2.current.getAttribute(`${prefix}-tip-max-height`);
-      const delay = (() => {
-        const value = options.delay ?? ref2.current.getAttribute(`${prefix}-tip-delay`);
-        const ret = VUtils.isNumber(value);
-        return ret.test ? ret.value : void 0;
-      })();
-      const tag = options.tag ?? ref2.current.getAttribute(`${prefix}-tip-tag`);
-      if (state.hideTimeout) {
-        window.clearTimeout(state.hideTimeout);
-      }
-      setState({ ref: ref2, title, body, visible: false, minWidth, maxWidth, maxHeight, delay, tag });
+    const paint = (options, keepPosition) => {
+      replace(() => {
+        const { ref: ref2, prefix = "data" } = options;
+        const body = options.body ?? ref2.current.getAttribute(`${prefix}-tip-body`);
+        if (VUtils.isBlank(body)) {
+          return;
+        }
+        const title = options.title ?? ref2.current.getAttribute(`${prefix}-tip-title`);
+        const minWidth = options.minWidth ?? ref2.current.getAttribute(`${prefix}-tip-min-width`);
+        const maxWidth = options.maxWidth ?? ref2.current.getAttribute(`${prefix}-tip-max-width`);
+        const maxHeight = options.maxHeight ?? ref2.current.getAttribute(`${prefix}-tip-max-height`);
+        const delay = (() => {
+          const value = options.delay ?? ref2.current.getAttribute(`${prefix}-tip-delay`);
+          const ret = VUtils.isNumber(value);
+          return ret.test ? ret.value : void 0;
+        })();
+        const tag = options.tag ?? ref2.current.getAttribute(`${prefix}-tip-tag`);
+        setState((state2) => {
+          if (state2.hideTimeout) {
+            window.clearTimeout(state2.hideTimeout);
+          }
+          return {
+            ref: ref2,
+            title,
+            body,
+            visible: "ready",
+            minWidth,
+            maxWidth,
+            maxHeight,
+            delay,
+            tag,
+            ...keepPosition ? { top: state2.top, left: state2.left } : {}
+          };
+        });
+      }, 30);
     };
+    const onShowTip = (options) => paint(options, false);
+    const onRepaintTip = (options) => paint(options, true);
     const onHideTip = (ref2) => {
       var _a;
       if (ref2.current !== ((_a = state.ref) == null ? void 0 : _a.current)) {
         return;
       } else {
-        if (state.hideTimeout) {
-          window.clearTimeout(state.hideTimeout);
-        }
-        setState({ visible: false });
+        setState((state2) => {
+          if (state2.hideTimeout) {
+            window.clearTimeout(state2.hideTimeout);
+          }
+          return { visible: "hidden" };
+        });
       }
     };
     on(GlobalEventTypes.SHOW_TIP, onShowTip);
     on(GlobalEventTypes.HIDE_TIP, onHideTip);
+    on(GlobalEventTypes.REPAINT_TIP, onRepaintTip);
     return () => {
       off(GlobalEventTypes.SHOW_TIP, onShowTip);
       off(GlobalEventTypes.HIDE_TIP, onHideTip);
+      off(GlobalEventTypes.REPAINT_TIP, onRepaintTip);
     };
-  }, [on, off, state.ref, state.hideTimeout]);
+  }, [on, off, replace, state.ref]);
   reactExports.useEffect(() => {
-    if (state.ref != null && !state.visible) {
+    if (state.ref != null && state.visible === "ready") {
       const { top, left, width, height } = state.ref.current.getBoundingClientRect();
       const { width: myWidth, height: myHeight } = ref.current.getBoundingClientRect();
       const { top: myTop } = (() => {
@@ -1660,22 +1694,22 @@ const Tip = () => {
       })();
       const hideTimeout = (() => {
         if (state.delay != null) {
-          return setTimeout(() => setState({ visible: false }), state.delay * 1e3);
+          return setTimeout(() => setState({ visible: "hidden" }), state.delay * 1e3);
         } else {
           return void 0;
         }
       })();
-      setState((state2) => ({ ...state2, visible: true, top: myTop, left: myLeft, hideTimeout }));
+      setState((state2) => ({ ...state2, visible: "visible", top: myTop, left: myLeft, hideTimeout }));
     }
-  }, [state.ref, state.visible, state.delay]);
+  }, [on, off, state.ref, state.visible, state.delay]);
   useCollapseFixedThing({
     containerRef: state.ref,
-    visible: state.visible,
+    visible: state.visible !== "hidden",
     hide: () => {
       if (state.hideTimeout) {
         window.clearTimeout(state.hideTimeout);
       }
-      setState({ visible: false });
+      setState({ visible: "hidden" });
     }
   });
   if (state.ref == null) {
@@ -1683,7 +1717,7 @@ const Tip = () => {
   }
   return React.createElement(
     TipContainer,
-    { visible: state.visible, minWidth: state.minWidth, maxWidth: state.maxWidth, maxHeight: state.maxHeight, tag: state.tag, top: state.top, left: state.left, ref },
+    { visible: state.visible !== "hidden", minWidth: state.minWidth, maxWidth: state.maxWidth, maxHeight: state.maxHeight, tag: state.tag, top: state.top, left: state.left, ref },
     state.title != null ? React.createElement(
       TipHeader,
       null,
@@ -1695,31 +1729,44 @@ const Tip = () => {
 const useTip = (options) => {
   const { ref } = options;
   const { fire } = useGlobalEventBus();
+  const shown = reactExports.useRef(false);
+  const { replace } = useThrottler();
   reactExports.useEffect(() => {
     if (ref.current == null || fire == null) {
       return;
     }
-    const onMouseEnter = () => {
-      fire(GlobalEventTypes.SHOW_TIP, options);
+    const show = () => {
+      replace(() => {
+        if (shown.current === true) {
+          fire(GlobalEventTypes.REPAINT_TIP, options);
+        } else {
+          fire(GlobalEventTypes.SHOW_TIP, options);
+          shown.current = true;
+        }
+      }, 30);
     };
-    const onMouseLeave = () => {
-      fire(GlobalEventTypes.HIDE_TIP, ref);
+    const hide = () => {
+      replace(() => {
+        shown.current = false;
+        fire(GlobalEventTypes.HIDE_TIP, ref);
+      }, 30);
     };
-    const onFocusIn = () => {
-      fire(GlobalEventTypes.SHOW_TIP, options);
-    };
-    const onFocusOut = () => {
-      fire(GlobalEventTypes.HIDE_TIP, ref);
-    };
-    const onClick = () => {
-      fire(GlobalEventTypes.SHOW_TIP, options);
-    };
+    const onMouseEnter = show;
+    const onMouseLeave = hide;
+    const onFocusIn = show;
+    const onFocusOut = hide;
+    const onClick = show;
     const { current } = ref;
     current.addEventListener("mouseenter", onMouseEnter);
     current.addEventListener("mouseleave", onMouseLeave);
     current.addEventListener("focusin", onFocusIn);
     current.addEventListener("focusout", onFocusOut);
     current.addEventListener("click", onClick);
+    if (shown.current === true) {
+      replace(() => {
+        fire(GlobalEventTypes.REPAINT_TIP, options);
+      }, 70);
+    }
     return () => {
       current.removeEventListener("mouseenter", onMouseEnter);
       current.removeEventListener("mouseleave", onMouseLeave);
@@ -1727,7 +1774,7 @@ const useTip = (options) => {
       current.removeEventListener("focusout", onFocusOut);
       current.removeEventListener("click", onClick);
     };
-  }, [fire, ref, options]);
+  }, [fire, replace, ref, options]);
 };
 const useRemoteRequest = () => {
   const { fire } = useGlobalEventBus();
@@ -1914,7 +1961,13 @@ var index$1 = /* @__PURE__ */ Object.freeze({
   GlobalRoot,
   RemoteRequest,
   Tip,
+  TipBody,
+  TipContainer,
+  TipHeader,
+  TipLabel,
+  TipTitle,
   YesNoDialog,
+  buildTip,
   useAlert,
   useCustomGlobalEvent,
   useDialog,
@@ -2312,13 +2365,13 @@ const TailDecorator$1 = qe(Decorator$1).attrs({
 })`
 `;
 const Caption = reactExports.forwardRef((props, ref) => {
-  const { label: _label, text: _text, leads, tails, labelOnValue, valueToLabel, click, $pp, $wrapped, ...rest } = props;
+  const { label: _label, text: _text, leads, tails, labelOnValue, valueToLabel, click, tip, $pp, $wrapped, ...rest } = props;
   const { $root, $model, $p2r, $avs: { $disabled, $visible }, $vfs } = $wrapped;
   const label = _text ?? _label;
   const globalHandlers = useGlobalHandlers();
   const captionRef = reactExports.useRef(null);
   useDualRefs(captionRef, ref);
-  useTip({ ref: captionRef });
+  useTip({ ref: captionRef, ...buildTip({ tip, root: $root, model: $model }) });
   const onClicked = click != null ? async (event) => {
     event.preventDefault();
     event.stopPropagation();
@@ -2500,11 +2553,11 @@ const ACheckbox = qe.div.attrs(({ id }) => {
     }
 `;
 const Checkbox = reactExports.forwardRef((props, ref) => {
-  const { values = [true, false], emptyWhenFalse = true, $pp, $wrapped: { $onValueChange, $model, $avs: { $disabled, $visible } }, ...rest } = props;
+  const { values = [true, false], emptyWhenFalse = true, tip, $pp, $wrapped: { $onValueChange, $root, $model, $avs: { $disabled, $visible } }, ...rest } = props;
   const globalHandlers = useGlobalHandlers();
   const checkRef = reactExports.useRef(null);
   useDualRefs(checkRef, ref);
-  useTip({ ref: checkRef });
+  useTip({ ref: checkRef, ...buildTip({ tip, root: $root, model: $model }) });
   const onValueChange = async () => {
     const oldValue = MUtils.getValue($model, $pp);
     const newValue = oldValue == values[0] ? values[1] : values[0];
@@ -2634,7 +2687,7 @@ const stringifyInputValue = (options) => {
   }
 };
 const Input = reactExports.forwardRef((props, ref) => {
-  const { autoSelect = true, valueToNumber = false, mask, $pp, $wrapped: { $onValueChange, $model, $p2r, $avs: { $disabled, $visible } }, ...rest } = props;
+  const { autoSelect = true, valueToNumber = false, mask, tip, $pp, $wrapped: { $onValueChange, $root, $model, $p2r, $avs: { $disabled, $visible } }, ...rest } = props;
   const valueRef = reactExports.useRef({ value: MUtils.getValue($model, $pp) });
   const globalHandlers = useGlobalHandlers();
   const onValueChanged = async (value) => {
@@ -2669,7 +2722,7 @@ const Input = reactExports.forwardRef((props, ref) => {
     }
   });
   useDualRefs(inputRef, ref);
-  useTip({ ref: inputRef });
+  useTip({ ref: inputRef, ...buildTip({ tip, root: $root, model: $model }) });
   const onChange = async (event) => {
     if (hasMask) {
       return;
@@ -2885,12 +2938,12 @@ const askDecorateAttrs = (props, rest) => {
   return { tags: deviceTags, attrs: decorateAttrs };
 };
 const DecorateInput = reactExports.forwardRef((props, ref) => {
-  const { placeholder, leads, tails, className, style, ...rest } = props;
-  const { $wrapped: { $p2r } } = rest;
+  const { placeholder, leads, tails, diTip, className, style, ...rest } = props;
+  const { $wrapped: { $root, $model, $p2r } } = rest;
   const { tags: deviceTags, attrs: decorateAttrs } = askDecorateAttrs(props, rest);
   const decorateRef = reactExports.useRef(null);
   useDualRefs(decorateRef, ref);
-  useTip({ ref: decorateRef, prefix: "data-di" });
+  useTip({ ref: decorateRef, prefix: "data-di", ...buildTip({ tip: diTip, root: $root, model: $model }) });
   const computePlaceholder = () => {
     if (VUtils.isBlank(placeholder)) {
       return void 0;
@@ -2907,12 +2960,12 @@ const DecorateInput = reactExports.forwardRef((props, ref) => {
   );
 });
 const DecorateNumberInput = reactExports.forwardRef((props, ref) => {
-  const { placeholder, leads, tails, className, style, ...rest } = props;
-  const { $pp, $wrapped: { $p2r, $model, $onValueChange } } = rest;
+  const { placeholder, leads, tails, diTip, className, style, ...rest } = props;
+  const { $pp, $wrapped: { $p2r, $root, $model, $onValueChange } } = rest;
   const { tags: deviceTags, attrs: decorateAttrs } = askDecorateAttrs(props, rest);
   const decorateRef = reactExports.useRef(null);
   useDualRefs(decorateRef, ref);
-  useTip({ ref: decorateRef, prefix: "data-di" });
+  useTip({ ref: decorateRef, prefix: "data-di", ...buildTip({ tip: diTip, root: $root, model: $model }) });
   const [omitPlaceholder, setOmitPlaceholder] = reactExports.useState(() => {
     return VUtils.isNotEmpty(MUtils.getValue($model, $pp));
   });
@@ -2936,12 +2989,12 @@ const DecorateNumberInput = reactExports.forwardRef((props, ref) => {
   );
 });
 const DecoratePasswordInput = reactExports.forwardRef((props, ref) => {
-  const { placeholder, leads, tails, className, style, ...rest } = props;
-  const { $wrapped: { $p2r } } = rest;
+  const { placeholder, leads, tails, diTip, className, style, ...rest } = props;
+  const { $wrapped: { $p2r, $root, $model } } = rest;
   const { tags: deviceTags, attrs: decorateAttrs } = askDecorateAttrs(props, rest);
   const decorateRef = reactExports.useRef(null);
   useDualRefs(decorateRef, ref);
-  useTip({ ref: decorateRef, prefix: "data-di" });
+  useTip({ ref: decorateRef, prefix: "data-di", ...buildTip({ tip: diTip, root: $root, model: $model }) });
   return React.createElement(
     Decorate,
     { ...deviceTags, ...decorateAttrs, placeholder, leads, tails, className, style, id: PPUtils.asId(PPUtils.absolute($p2r, props.$pp), props.id), ref: decorateRef },
@@ -4666,11 +4719,11 @@ const Option$2 = qe.span.attrs({ [DOM_KEY_WIDGET]: "d9-dropdown-option" })`
 `;
 const Dropdown = reactExports.forwardRef((props, ref) => {
   var _a;
-  const { options, optionSort, noAvailable, noMatched, $pp, $wrapped: { $onValueChange, $model, $p2r, $avs: { $disabled, $visible } }, please = "", clearable = true, ...rest } = props;
+  const { options, optionSort, noAvailable, noMatched, $pp, $wrapped: { $onValueChange, $root, $model, $p2r, $avs: { $disabled, $visible } }, please = "", clearable = true, tip, ...rest } = props;
   const globalHandlers = useGlobalHandlers();
   const { askOptions, displayOptions, filterInputRef, filter, onFilterChanged, containerRef, popupState, popupHeight, popupRef, popupShown, setPopupShown, afterPopupStateChanged, onClicked, onFocused, onKeyUp } = useFilterableDropdownOptions(props);
   useDualRefs(containerRef, ref);
-  useTip({ ref: containerRef });
+  useTip({ ref: containerRef, ...buildTip({ tip, root: $root, model: $model }) });
   const forceUpdate = useForceUpdate();
   const onOptionClicked = (option) => async (event) => {
     if ($disabled) {
@@ -4880,12 +4933,12 @@ const MultiOption = qe.span.attrs({ [DOM_KEY_WIDGET]: "d9-multi-dropdown-option"
     }
 `;
 const MultiDropdown = reactExports.forwardRef((props, ref) => {
-  const { options, optionSort, noAvailable, noMatched, $pp, $wrapped: { $onValueChange, $model, $p2r, $avs: { $disabled, $visible } }, please = "", clearable = true, ...rest } = props;
+  const { options, optionSort, noAvailable, noMatched, $pp, $wrapped: { $onValueChange, $root, $model, $p2r, $avs: { $disabled, $visible } }, please = "", clearable = true, tip, ...rest } = props;
   const globalHandlers = useGlobalHandlers();
   const { askOptions, displayOptions, filterInputRef, filter, onFilterChanged, containerRef, popupState, popupHeight, popupRef, popupShown, repaintPopup, onClicked, onFocused, onKeyUp } = useFilterableDropdownOptions(props);
   const forceUpdate = useForceUpdate();
   useDualRefs(containerRef, ref);
-  useTip({ ref: containerRef });
+  useTip({ ref: containerRef, ...buildTip({ tip, root: $root, model: $model }) });
   const currentValuesToArray = () => {
     const values2 = MUtils.getValue($model, $pp);
     if (values2 == null) {
@@ -6084,7 +6137,7 @@ const DropdownStickCalendar = qe(Date$1).attrs({ [DOM_KEY_WIDGET]: "d9-dropdown-
     transition: all ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION};
 `;
 const Picker = reactExports.forwardRef((props, ref) => {
-  const { $pp, $wrapped: { $onValueChange, $root, $model, $p2r, $avs: { $disabled, $visible } }, please = "", clearable = true, date, dateFormat = getDefaultCalendarDateFormat(), time, timeFormat = getDefaultCalendarTimeFormat(), storeFormat = getDefaultCalendarDatetimeFormat(), fixedTimeAt = FIX_TIME_AT_START_OF_DAY, initTimeAt, couldPerform, autoConfirm = isCalendarAutoConfirm(), autoConfirmOnDate = isCalendarAutoConfirmOnDate(), useCalendarIcon = isStickIconUseCalendar(), ...rest } = props;
+  const { $pp, $wrapped: { $onValueChange, $root, $model, $p2r, $avs: { $disabled, $visible } }, please = "", clearable = true, date, dateFormat = getDefaultCalendarDateFormat(), time, timeFormat = getDefaultCalendarTimeFormat(), storeFormat = getDefaultCalendarDatetimeFormat(), fixedTimeAt = FIX_TIME_AT_START_OF_DAY, initTimeAt, couldPerform, autoConfirm = isCalendarAutoConfirm(), autoConfirmOnDate = isCalendarAutoConfirmOnDate(), useCalendarIcon = isStickIconUseCalendar(), tip, ...rest } = props;
   const globalHandlers = useGlobalHandlers();
   const { fire } = useCalendarEventBus();
   const { containerRef, popupRef, popupState, setPopupState, popupShown, setPopupShown } = useDropdownControl({
@@ -6093,7 +6146,7 @@ const Picker = reactExports.forwardRef((props, ref) => {
     fixWidth: true
   });
   useDualRefs(containerRef, ref);
-  useTip({ ref: containerRef });
+  useTip({ ref: containerRef, ...buildTip({ tip, root: $root, model: $model }) });
   const showPopup = () => {
     const { top, left, width, height } = getDropdownPosition(containerRef.current);
     const bottom = isPopupAtBottom(top, height, () => CssVars.CALENDAR_POPUP_HEIGHT_VALUE);
@@ -6376,11 +6429,11 @@ const ARadio = qe.div.attrs(({ id }) => {
     }
 `;
 const Radio = reactExports.forwardRef((props, ref) => {
-  const { values = [true, false], $pp, $wrapped: { $onValueChange, $model, $avs: { $disabled, $visible } }, ...rest } = props;
+  const { values = [true, false], tip, $pp, $wrapped: { $onValueChange, $root, $model, $avs: { $disabled, $visible } }, ...rest } = props;
   const globalHandlers = useGlobalHandlers();
   const radioRef = reactExports.useRef(null);
   useDualRefs(radioRef, ref);
-  useTip({ ref: radioRef });
+  useTip({ ref: radioRef, ...buildTip({ tip, root: $root, model: $model }) });
   const onValueShouldChange = async () => {
     const oldValue = MUtils.getValue($model, $pp);
     if (oldValue == values[0])
@@ -7803,11 +7856,11 @@ const ABox = qe.div.attrs(({ id, [DOM_KEY_WIDGET]: dataW }) => {
     }
 `;
 const Box = reactExports.forwardRef((props, ref) => {
-  const { $wrapped, children, ...rest } = props;
+  const { tip, $wrapped, children, ...rest } = props;
   const { $p2r, $avs: { $disabled, $visible } } = $wrapped;
   const boxRef = reactExports.useRef(null);
   useDualRefs(boxRef, ref);
-  useTip({ ref: boxRef });
+  useTip({ ref: boxRef, ...buildTip({ tip, root: $wrapped.$root, model: $wrapped.$model }) });
   return React.createElement(ABox, { ...rest, "data-disabled": $disabled, "data-visible": $visible, id: PPUtils.asId(PPUtils.absolute($p2r, props.$pp), props.id), ref: boxRef }, children);
 });
 registerWidget({ key: "Box", JSX: Box, container: true, array: false });
@@ -9056,11 +9109,11 @@ const ATextarea = qe.textarea.attrs(({ id, autoSelect, onFocus }) => {
     }
 `;
 const Textarea = reactExports.forwardRef((props, ref) => {
-  const { autoSelect = true, $pp, $wrapped: { $onValueChange, $model, $p2r, $avs: { $disabled, $visible } }, ...rest } = props;
+  const { autoSelect = true, tip, $pp, $wrapped: { $onValueChange, $root, $model, $p2r, $avs: { $disabled, $visible } }, ...rest } = props;
   const globalHandlers = useGlobalHandlers();
   const textRef = reactExports.useRef(null);
   useDualRefs(textRef, ref);
-  useTip({ ref: textRef });
+  useTip({ ref: textRef, ...buildTip({ tip, root: $root, model: $model }) });
   const onChange = async (event) => {
     const value = event.target.value;
     await $onValueChange(value, true, { global: globalHandlers });
@@ -9133,7 +9186,7 @@ const PopupTree$1 = qe(UnwrappedTree)`
     border: 0;
 `;
 const InternalDropdownTree = reactExports.forwardRef((props, ref) => {
-  const { options, optionSort, noAvailable, noMatched, $pp, $wrapped: { $onValueChange, $model, $p2r, $avs: { $disabled, $visible } }, please = "", clearable = true, couldSelect, ...rest } = props;
+  const { options, optionSort, noAvailable, noMatched, $pp, $wrapped: { $onValueChange, $root, $model, $p2r, $avs: { $disabled, $visible } }, please = "", clearable = true, couldSelect, tip, ...rest } = props;
   const globalHandlers = useGlobalHandlers();
   const { fire } = useDropdownTreeEventBus();
   const [filterChanged] = reactExports.useState(() => async (filter2, timing) => {
@@ -9143,7 +9196,7 @@ const InternalDropdownTree = reactExports.forwardRef((props, ref) => {
   });
   const { askOptions, filterInputRef, filter, onFilterChanged, containerRef, popupState, popupRef, popupShown, setPopupShown, afterPopupStateChanged, onClicked, onFocused, onKeyUp } = useFilterableDropdownOptions({ ...props, takeoverFilter: false, filterChanged });
   useDualRefs(containerRef, ref);
-  useTip({ ref: containerRef });
+  useTip({ ref: containerRef, ...buildTip({ tip, root: $root, model: $model }) });
   const forceUpdate = useForceUpdate();
   const onClearClicked = async (event) => {
     if ($disabled) {
@@ -9392,7 +9445,7 @@ const PopupTree = qe(UnwrappedTree)`
     border: 0;
 `;
 const InternalMultiDropdownTree = reactExports.forwardRef((props, ref) => {
-  const { options, optionSort, noAvailable, noMatched, $pp, $wrapped: { $onValueChange, $model, $p2r, $avs: { $disabled, $visible } }, please = "", clearable = true, couldSelect, ...rest } = props;
+  const { options, optionSort, noAvailable, noMatched, $pp, $wrapped: { $onValueChange, $root, $model, $p2r, $avs: { $disabled, $visible } }, please = "", clearable = true, couldSelect, tip, ...rest } = props;
   const globalHandlers = useGlobalHandlers();
   const { fire } = useDropdownTreeEventBus();
   const [filterChanged] = reactExports.useState(() => async (filter2, timing) => {
@@ -9403,7 +9456,7 @@ const InternalMultiDropdownTree = reactExports.forwardRef((props, ref) => {
   const { askOptions, filterInputRef, filter, onFilterChanged, containerRef, popupState, popupRef, popupShown, repaintPopup, onClicked, onFocused, onKeyUp } = useFilterableDropdownOptions({ ...props, takeoverFilter: false, filterChanged });
   const forceUpdate = useForceUpdate();
   useDualRefs(containerRef, ref);
-  useTip({ ref: containerRef });
+  useTip({ ref: containerRef, ...buildTip({ tip, root: $root, model: $model }) });
   const currentValuesToArray = () => {
     const values2 = MUtils.getValue($model, $pp);
     if (values2 == null) {
@@ -9699,11 +9752,11 @@ const Separator$1 = qe.span.attrs({ [DOM_KEY_WIDGET]: "d9-checkboxes-option-sepa
     flex-basis: 100%;
 `;
 const Checkboxes = reactExports.forwardRef((props, ref) => {
-  const { options, optionSort, noAvailable = React.createElement(IntlLabel, { keys: ["options", "noAvailable"], value: "No available options." }), columns = -1, compact = true, single = false, boolOnSingle = false, $pp, $wrapped: { $onValueChange, $model, $avs: { $disabled, $visible } }, ...rest } = props;
+  const { options, optionSort, noAvailable = React.createElement(IntlLabel, { keys: ["options", "noAvailable"], value: "No available options." }), columns = -1, compact = true, single = false, boolOnSingle = false, tip, $pp, $wrapped: { $onValueChange, $root, $model, $avs: { $disabled, $visible } }, ...rest } = props;
   const globalHandlers = useGlobalHandlers();
   const checksRef = reactExports.useRef(null);
   useDualRefs(checksRef, ref);
-  useTip({ ref: checksRef });
+  useTip({ ref: checksRef, ...buildTip({ tip, root: $root, model: $model }) });
   const { createAskDisplayOptions } = useOptionItems({ ...props, noAvailable });
   const getValues = () => {
     const modelValues = MUtils.getValue($model, $pp);
@@ -9796,7 +9849,7 @@ reactExports.forwardRef((props, ref) => {
   const $root = { [$pp]: value };
   return React.createElement(Checkboxes, { ...rest, "$wrapped": { $onValueChange, $avs, $root, $model: $root, $p2r: "." }, "$pp": $pp, id: rest.id ?? VUtils.generateUniqueId(), ref });
 });
-reactExports.forwardRef((props, ref) => {
+const UnwrappedInput = reactExports.forwardRef((props, ref) => {
   const { $pp = "value", value, onValueChange, disabled, visible, ...rest } = props;
   const $onValueChange = onValueChange;
   const $avs = { $disabled: disabled, $visible: visible };
@@ -9926,11 +9979,11 @@ const Separator = qe.span.attrs({ [DOM_KEY_WIDGET]: "d9-radios-option-separator"
     flex-basis: 100%;
 `;
 const Radios = reactExports.forwardRef((props, ref) => {
-  const { options, optionSort, noAvailable = React.createElement(IntlLabel, { keys: ["options", "noAvailable"], value: "No available options." }), columns = -1, compact = true, $pp, $wrapped: { $onValueChange, $model, $avs: { $disabled, $visible } }, ...rest } = props;
+  const { options, optionSort, noAvailable = React.createElement(IntlLabel, { keys: ["options", "noAvailable"], value: "No available options." }), columns = -1, compact = true, tip, $pp, $wrapped: { $onValueChange, $root, $model, $avs: { $disabled, $visible } }, ...rest } = props;
   const globalHandlers = useGlobalHandlers();
   const radiosRef = reactExports.useRef(null);
   useDualRefs(radiosRef, ref);
-  useTip({ ref: radiosRef });
+  useTip({ ref: radiosRef, ...buildTip({ tip, root: $root, model: $model }) });
   const { createAskDisplayOptions } = useOptionItems({ ...props, noAvailable });
   const onOptionClicked = (option) => async () => {
     if ($disabled) {
@@ -10036,20 +10089,22 @@ export {
   ButtonFill as e,
   CssConstants as f,
   UnwrappedCaption as g,
-  index$1 as h,
+  UnwrappedInput as h,
   index$2 as i,
-  useAlert as j,
-  useDialog as k,
-  DialogHeader as l,
-  DialogTitle as m,
-  DialogBody as n,
-  DialogFooter as o,
-  GlobalRoot as p,
-  utils$3 as q,
-  utils$1 as r,
-  UnwrappedButtonBar as s,
+  UnwrappedCheckbox as j,
+  index$1 as k,
+  useAlert as l,
+  useDialog as m,
+  DialogHeader as n,
+  DialogTitle as o,
+  DialogBody as p,
+  DialogFooter as q,
+  GlobalRoot as r,
+  utils$3 as s,
   toIntlLabel as t,
   useGlobalEventBus as u,
-  ButtonBarAlignment as v,
-  UnwrappedSection as w
+  utils$1 as v,
+  UnwrappedButtonBar as w,
+  ButtonBarAlignment as x,
+  UnwrappedSection as y
 };

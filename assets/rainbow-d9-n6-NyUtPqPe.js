@@ -4,13 +4,13 @@ var __publicField = (obj, key, value) => {
   __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
   return value;
 };
-import { a as color, P as jsYaml } from "./vendor-W_zh5JiD.js";
-import { f as CssConstants, C as CssVars, I as IntlLabel, D as DOM_KEY_WIDGET, g as UnwrappedCaption, b as useGlobalHandlers } from "./rainbow-d9-n2--BLGYt2Q.js";
-import { R as React, q as qe, r as reactExports, D as DiagramModel, C as CanvasWidget, N as NodeModel, c as createEngine, P as PortModel, a as PortModelAlignment, b as DefaultLinkModel, A as AbstractModelFactory, d as AbstractReactFactory, e as PortWidget } from "./react-base-XEFxDFEy.js";
-import { V as VUtils, r as registerWidget, g as useCreateEventBus, M as MUtils, P as PPUtils } from "./rainbow-d9-n1-MgjZKHeq.js";
-import { i as index$1 } from "./rainbow-d9-n3-igu9ix1k.js";
-import { M as Markdown } from "./react-markdown-eC1Jh79A.js";
-import { r as remarkGfm } from "./remark-cDPYgQLN.js";
+import { a as color, P as jsYaml } from "./vendor-9g-Uqt4B.js";
+import { f as CssConstants, C as CssVars, I as IntlLabel, D as DOM_KEY_WIDGET, g as UnwrappedCaption, b as useGlobalHandlers, h as UnwrappedInput, j as UnwrappedCheckbox } from "./rainbow-d9-n2-yCg4gWgR.js";
+import { R as React, q as qe, r as reactExports, D as DiagramModel, C as CanvasWidget, N as NodeModel, c as createEngine, P as PortModel, a as PortModelAlignment, b as DefaultLinkModel, A as AbstractModelFactory, d as AbstractReactFactory, e as PortWidget } from "./react-base-dlWpmanK.js";
+import { V as VUtils, r as registerWidget, g as useCreateEventBus, M as MUtils, P as PPUtils } from "./rainbow-d9-n1-mvZG8UjJ.js";
+import { i as index$1 } from "./rainbow-d9-n3-gqr9PoeQ.js";
+import { M as Markdown } from "./react-markdown-BdGD82TT.js";
+import { r as remarkGfm } from "./remark-1rJfgujb.js";
 const EDITOR_BACKGROUND_BLOCK_SIZE = "var(--o23-playground-editor-background-block-size, 48px)";
 const EDITOR_BACKGROUND_LINE_COLOR = `var(--o23-playground-editor-background-line-color, ${color(CssConstants.PRIMARY_COLOR).alpha(0.08)})`;
 const NODE_START_COLOR = "#ffb56b";
@@ -25,8 +25,10 @@ const PlaygroundCssVars = {
   EDITOR_BACKGROUND_SIZE: `var(--o23-playground-editor-background-size, ${EDITOR_BACKGROUND_BLOCK_SIZE} ${EDITOR_BACKGROUND_BLOCK_SIZE})`,
   EDITOR_BACKGROUND_POSITION: "var(--o23-playground-editor-background-position, -1px -1px)",
   EDITOR_ERROR_COLOR: `var(--o23-playground-editor-error-color, ${CssVars.DANGER_COLOR})`,
+  MARKDOWN_FONT_SIZE: "var(--o23-playground-markdown-font-size, 14px)",
   MARKDOWN_COLOR: `var(--o23-playground-markdown-color, ${CssVars.FONT_COLOR})`,
   MARKDOWN_BACKGROUND_COLOR: `var(--o23-playground-markdown-background-color, ${CssVars.BACKGROUND_COLOR})`,
+  SPECIFIC_MARKDOWN_FONT_SIZE: "var(--o23-playground-specific-markdown-font-size, 12px)",
   EDIT_DIALOG_BACKDROP_COLOR: "var(--o23-playground-dialog-backdrop-color, rgba(71, 69, 84, 0.75))",
   EDIT_DIALOG_Z_INDEX: "var(--o23-playground-dialog-z-index, 10000)",
   EDIT_DIALOG_MARGIN_TOP: "var(--o23-playground-dialog-margin-top, 32px)",
@@ -36,7 +38,7 @@ const PlaygroundCssVars = {
   EDIT_DIALOG_BACKGROUND_COLOR: `var(--o23-playground-dialog-background-color, ${CssVars.BACKGROUND_COLOR})`,
   EDIT_DIALOG_PADDING: "var(--o23-playground-dialog-padding, 16px)",
   EDIT_DIALOG_PADDING_LEFT: "var(--o23-playground-dialog-padding-left, 16px)",
-  EDIT_DIALOG_SHADOW: `var(--o23-playground-dialog-shadow, ${CssVars.DIALOG_SHADOW})`,
+  EDIT_DIALOG_SHADOW: `var(--o23-playground-dialog-shadow, 0 0 10px 4px rgba(0, 0, 0, 0.2))`,
   EDIT_DIALOG_BORDER_RADIUS: "var(--o23-playground-dialog-border-radius, 12px)",
   EDIT_DIALOG_BORDER: `var(--o23-playground-dialog-border, ${CssVars.BORDER})`,
   EDIT_DIALOG_CLOSER_TOP: "var(--o23-playground-dialog-closer-top, -8px)",
@@ -90,6 +92,13 @@ const PlaygroundCssVars = {
   EDIT_DIALOG_CONFIGURABLE_ELEMENT_BADGE_NOT_AVAILABLE_COLOR: `var(--o23-playground-dialog-configurable-element-badge-not-available-color, ${CssVars.INVERT_COLOR})`,
   EDIT_DIALOG_CONFIGURABLE_ELEMENT_BADGE_COUNT_BACKGROUND_COLOR: `var(--o23-playground-dialog-configurable-element-badge-count-background-color, ${CssVars.SUCCESS_COLOR})`,
   EDIT_DIALOG_CONFIGURABLE_ELEMENT_BADGE_COUNT_COLOR: `var(--o23-playground-dialog-configurable-element-badge-count-color, ${CssVars.INVERT_COLOR})`,
+  EDIT_DIALOG_CONFIGURABLE_ELEMENT_SPECIFIC_MARGIN: "var(--o23-playground-dialog-configurable-element-specific-margin, 0 -8px)",
+  EDIT_DIALOG_CONFIGURABLE_ELEMENT_SPECIFIC_PADDING: "var(--o23-playground-dialog-configurable-element-specific-padding, 8px)",
+  EDIT_DIALOG_CONFIGURABLE_ELEMENT_SPECIFIC_GRID_COLUMN_GAP: "var(--o23-playground-dialog-configurable-element-specific-grid-column-gap, 32px)",
+  EDIT_DIALOG_CONFIGURABLE_ELEMENT_SPECIFIC_GRID_ROW_GAP: "var(--o23-playground-dialog-configurable-element-specific-grid-row-gap, 8px)",
+  EDIT_DIALOG_CONFIGURABLE_ELEMENT_HELP_LABEL_HEIGHT: `var(--o23-playground-dialog-configurable-element-help-label-height, ${CssVars.INPUT_HEIGHT})`,
+  EDIT_DIALOG_CONFIGURABLE_ELEMENT_HELP_BADGE_HEIGHT: `var(--o23-playground-dialog-configurable-element-help-badge-height, ${CssVars.INPUT_HEIGHT})`,
+  EDIT_DIALOG_CONFIGURABLE_ELEMENT_HELP_BADGE_COLOR: `var(--o23-playground-dialog-configurable-element-help-badge-color, ${CssVars.PRIMARY_COLOR})`,
   NODE_BORDER_RADIUS: "var(--o23-playground-node-border-radius, 8px)",
   NODE_BACKGROUND: `var(--o23-playground-node-background, ${CssVars.BACKGROUND_COLOR})`,
   NODE_TITLE_PADDING: "var(--o23-playground-node-title-padding, 0 10px)",
@@ -212,7 +221,17 @@ const ElementBanned = (props) => {
     React.createElement("path", { d: "M3 10.4167C3 7.21907 3 5.62028 3.37752 5.08241C3.75503 4.54454 5.25832 4.02996 8.26491 3.00079L8.83772 2.80472C10.405 2.26824 11.1886 2 12 2C12.8114 2 13.595 2.26824 15.1623 2.80472L15.7351 3.00079C18.7417 4.02996 20.245 4.54454 20.6225 5.08241C21 5.62028 21 7.21907 21 10.4167C21 10.8996 21 11.4234 21 11.9914C21 14.4963 20.1632 16.4284 19 17.9041M3.19284 14C4.05026 18.2984 7.57641 20.5129 9.89856 21.5273C10.62 21.8424 10.9807 22 12 22C13.0193 22 13.38 21.8424 14.1014 21.5273C14.6796 21.2747 15.3324 20.9478 16 20.5328", stroke: "currentColor", strokeWidth: "1.5", strokeLinecap: "round" })
   );
 };
+const ElementHelp = (props) => {
+  return React.createElement(
+    "svg",
+    { ...props, "data-icon": "o23-element-help", viewBox: "0 0 24 24", fill: "none", xmlns: "http://www.w3.org/2000/svg" },
+    React.createElement("circle", { opacity: "0.5", cx: "12", cy: "12", r: "10", stroke: "currentColor", strokeWidth: "1.5" }),
+    React.createElement("path", { d: "M10.125 8.875C10.125 7.83947 10.9645 7 12 7C13.0355 7 13.875 7.83947 13.875 8.875C13.875 9.56245 13.505 10.1635 12.9534 10.4899C12.478 10.7711 12 11.1977 12 11.75V13", stroke: "currentColor", strokeWidth: "1.5", strokeLinecap: "round" }),
+    React.createElement("circle", { cx: "12", cy: "16", r: "1", fill: "currentColor" })
+  );
+};
 const Labels = {
+  ERROR: React.createElement(IntlLabel, { keys: ["o23", "error", "unknown"], value: "Something went wrong." }),
   NoContent: React.createElement(IntlLabel, { keys: ["o23", "error", "no-content"], value: "No content given." }),
   NoDefParsed: React.createElement(IntlLabel, { keys: ["o23", "error", "no-def"], value: "No definition parsed." }),
   ParseError: React.createElement(IntlLabel, { keys: ["o23", "error", "parse"], value: "Parse error occurred." }),
@@ -220,8 +239,8 @@ const Labels = {
   PreviousStepPort: React.createElement(IntlLabel, { keys: ["o23", "port", "previous"], value: "In" }),
   NextStepPort: React.createElement(IntlLabel, { keys: ["o23", "port", "next"], value: "Out" }),
   HelpDesk: React.createElement(IntlLabel, { keys: ["o23", "dialog", "docs", "title"], value: "Help Desk" }),
-  ConfigurableElements: React.createElement(IntlLabel, { keys: ["o23", "dialog", "navigator", "title"], value: "Configurable Elements" }),
-  SpecificDetails: React.createElement(IntlLabel, { keys: ["o23", "dialog", "specific", "title"], value: "Specific Details" }),
+  Navigator: React.createElement(IntlLabel, { keys: ["o23", "dialog", "navigator", "title"], value: "Configurable Elements" }),
+  Specific: React.createElement(IntlLabel, { keys: ["o23", "dialog", "specific", "title"], value: "Specific Details" }),
   BackToCanvas: React.createElement(IntlLabel, { keys: ["o23", "dialog", "close"], value: "Back to canvas" }),
   TypeOfStandardPipeline: React.createElement(IntlLabel, { keys: ["o23", "pipeline", "standard"], value: "Pipeline" }),
   TypeOfStepOrSets: (type) => {
@@ -620,6 +639,32 @@ const EditDialogContentContainer = qe.div.attrs({ [DOM_KEY_WIDGET]: "o23-playgro
     height: 100%;
     width: 100%;
     transition: grid-template-columns ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION};
+
+    div.markdown-body {
+        font-size: ${PlaygroundCssVars.MARKDOWN_FONT_SIZE};
+        color: ${PlaygroundCssVars.MARKDOWN_COLOR};
+        background-color: ${PlaygroundCssVars.MARKDOWN_BACKGROUND_COLOR};
+
+        h1 {
+            font-size: 1.5em;
+        }
+
+        h2 {
+            font-size: 1.35em;
+        }
+
+        h3 {
+            font-size: 1.2em;
+        }
+
+        h4 {
+            font-size: 1.1em;
+        }
+
+        h5, h6 {
+            font-size: 1em;
+        }
+    }
 `;
 const EditDialogContentInitializer = qe.div.attrs({ [DOM_KEY_WIDGET]: "o23-playground-edit-dialog-content-initializer" })`
     display: none;
@@ -798,34 +843,9 @@ const HelpDocContainer = qe.div.attrs(({ width }) => {
     min-width: var(--min-width);
     overflow: auto;
     transition: opacity ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION}, filter ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION};
-
-    > div.markdown-body {
-        color: ${PlaygroundCssVars.MARKDOWN_COLOR};
-        background-color: ${PlaygroundCssVars.MARKDOWN_BACKGROUND_COLOR};
-
-        h1 {
-            font-size: 1.5em;
-        }
-
-        h2 {
-            font-size: 1.35em;
-        }
-
-        h3 {
-            font-size: 1.2em;
-        }
-
-        h4 {
-            font-size: 1.1em;
-        }
-
-        h5, h6 {
-            font-size: 1em;
-        }
-    }
 `;
-const NavigatorDialogNavigatorElementsContainer = qe.div.attrs({
-  [DOM_KEY_WIDGET]: "o23-playground-edit-dialog-configurable-elements",
+const NavigatorElementsContainer = qe.div.attrs({
+  [DOM_KEY_WIDGET]: "o23-playground-edit-dialog-navigator-elements",
   "data-h-scroll": ""
 })`
     display: flex;
@@ -838,9 +858,9 @@ const NavigatorDialogNavigatorElementsContainer = qe.div.attrs({
     overflow-y: auto;
     overflow-x: hidden;
 `;
-const NavigatorConfigurableElementContainer = qe.div.attrs(({ level }) => {
+const NavigatorElementContainer = qe.div.attrs(({ level }) => {
   return {
-    [DOM_KEY_WIDGET]: "o23-playground-edit-dialog-configurable-element",
+    [DOM_KEY_WIDGET]: "o23-playground-edit-dialog-navigator-element",
     style: {
       "--level": level
     }
@@ -866,9 +886,9 @@ const NavigatorConfigurableElementContainer = qe.div.attrs(({ level }) => {
         border-bottom: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_BORDER};
     }
 `;
-const NavigatorConfigurableElementTreeLine = qe.span.attrs(({ level }) => {
+const NavigatorElementTreeLine = qe.span.attrs(({ level }) => {
   return {
-    [DOM_KEY_WIDGET]: "o23-playground-edit-dialog-configurable-element-tree-line",
+    [DOM_KEY_WIDGET]: "o23-playground-edit-dialog-navigator-element-tree-line",
     style: {
       "--margin-left": `calc(${level - 1} * ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_INDENT})`
     }
@@ -917,9 +937,9 @@ const NavigatorConfigurableElementTreeLine = qe.span.attrs(({ level }) => {
         display: none;
     }
 `;
-const NavigatorConfigurableElementLabel = qe.div.attrs(({ level }) => {
+const NavigatorElementLabel = qe.div.attrs(({ level }) => {
   return {
-    [DOM_KEY_WIDGET]: "o23-playground-edit-dialog-configurable-element-label",
+    [DOM_KEY_WIDGET]: "o23-playground-edit-dialog-navigator-element-label",
     style: {
       "--margin-left": level === 0 ? 0 : PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_INDENT
     }
@@ -931,13 +951,13 @@ const NavigatorConfigurableElementLabel = qe.div.attrs(({ level }) => {
     flex-grow: 1;
     margin-left: var(--margin-left);
 `;
-const NavigatorConfigurableElementBadge = qe.div.attrs({ [DOM_KEY_WIDGET]: "o23-playground-edit-dialog-configurable-element-badge" })`
+const NavigatorElementBadge = qe.div.attrs({ [DOM_KEY_WIDGET]: "o23-playground-edit-dialog-navigator-element-badge" })`
     display: flex;
     position: relative;
     align-items: center;
     font-weight: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_BADGE_FONT_WEIGHT};
 `;
-const NavigatorConfigurableElementBadgeWrapper = qe.span.attrs({ [DOM_KEY_WIDGET]: "o23-playground-edit-dialog-configurable-element-badge-wrapper" })`
+const NavigatorElementBadgeWrapper = qe.span.attrs({ [DOM_KEY_WIDGET]: "o23-playground-edit-dialog-navigator-element-badge-wrapper" })`
     display: flex;
     position: relative;
     align-items: center;
@@ -987,6 +1007,72 @@ const NavigatorConfigurableElementBadgeWrapper = qe.span.attrs({ [DOM_KEY_WIDGET
         margin: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_BADGE_ICON_MARGIN};
     }
 `;
+const SpecificElementsContainer = qe.div.attrs({
+  [DOM_KEY_WIDGET]: "o23-playground-edit-dialog-specific-elements",
+  "data-h-scroll": ""
+})`
+    display: grid;
+    position: relative;
+    flex-grow: 1;
+    align-self: stretch;
+    grid-template-columns: auto 1fr;
+    grid-column-gap: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_SPECIFIC_GRID_COLUMN_GAP};
+    grid-row-gap: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_SPECIFIC_GRID_ROW_GAP};
+    align-content: start;
+    margin: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_SPECIFIC_MARGIN};
+    padding: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_SPECIFIC_PADDING};
+    overflow-y: auto;
+    overflow-x: hidden;
+    // avoid external grid effect
+    --grid-column: auto;
+    --grid-row: auto;
+`;
+const SpecificElementLabel = qe.div.attrs({ [DOM_KEY_WIDGET]: "o23-playground-edit-dialog-specific-element-label" })`
+    display: flex;
+    position: relative;
+    align-items: center;
+    min-height: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_HELP_LABEL_HEIGHT};
+`;
+const SpecificElementHelpBadge = qe.div.attrs({ [DOM_KEY_WIDGET]: "o23-playground-edit-dialog-specific-element-help-badge" })`
+    display: flex;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+    height: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_HELP_BADGE_HEIGHT};
+    width: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_HELP_BADGE_HEIGHT};
+    opacity: 0;
+    cursor: pointer;
+    pointer-events: none;
+    transition: opacity ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION};
+
+    &[data-visible=true] {
+        opacity: 1;
+        pointer-events: auto;
+    }
+
+    > svg {
+        color: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_HELP_BADGE_COLOR};
+        height: calc(${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_HELP_BADGE_HEIGHT} * 0.6);
+    }
+`;
+const SpecificElementEditorPlaceholder = qe.div.attrs({ [DOM_KEY_WIDGET]: "o23-playground-edit-dialog-specific-element-editor-placeholder" })``;
+const SpecificElementHelpDoc = qe.div.attrs({ [DOM_KEY_WIDGET]: "o23-playground-edit-dialog-specific-element-help-doc" })`
+    display: block;
+    position: relative;
+    grid-column: 2;
+    height: 0;
+    overflow: hidden;
+    transition: height ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION};
+
+    &[data-visible=true] {
+        height: auto;
+        overflow: visible;
+    }
+
+    > div.markdown-body {
+        font-size: ${PlaygroundCssVars.SPECIFIC_MARKDOWN_FONT_SIZE};
+    }
+`;
 var EditDialogEventTypes;
 (function(EditDialogEventTypes2) {
   EditDialogEventTypes2["OPEN_HELP_DESK"] = "open-help-desk";
@@ -1001,6 +1087,26 @@ const EditDialogEventBusProvider = (props) => {
   return React.createElement(Context.Provider, { value: bus }, children);
 };
 const useEditDialogEventBus = () => reactExports.useContext(Context);
+const LinkRenderer = (props) => {
+  return React.createElement("a", { href: props.href, target: "_blank", rel: "noreferrer" }, props.children);
+};
+const CodeRenderer = (props) => {
+  const { children } = props;
+  if (children === "@rainbow-o23") {
+    return React.createElement(
+      "code",
+      null,
+      React.createElement("a", { href: "https://github.com/InsureMO/rainbow-o23", target: "_blank", rel: "noreferrer" }, props.children)
+    );
+  } else {
+    return React.createElement("code", null, children);
+  }
+};
+const components = { a: LinkRenderer, code: CodeRenderer };
+const HelpDoc = (props) => {
+  const { content } = props;
+  return React.createElement(Markdown, { className: "markdown-body", components, remarkPlugins: [remarkGfm] }, content);
+};
 const useHelpDeskOpened = () => {
   const { on, off } = useEditDialogEventBus();
   const [helpDeskOpened, setHelpDeskOpened] = reactExports.useState(false);
@@ -1062,9 +1168,6 @@ const OpenHandle = () => {
     React.createElement(ArrowRight, null)
   );
 };
-const LinkRenderer = (props) => {
-  return React.createElement("a", { href: props.href, target: "_blank", rel: "noreferrer" }, props.children);
-};
 const DialogHelpDesk = (props) => {
   const { helpDoc } = props;
   const [state, setState] = reactExports.useState({});
@@ -1097,7 +1200,7 @@ const DialogHelpDesk = (props) => {
         React.createElement(
           HelpDocContainer,
           { width: state.docWidth },
-          React.createElement(Markdown, { className: "markdown-body", components: { a: LinkRenderer }, remarkPlugins: [remarkGfm] }, helpDoc)
+          React.createElement(HelpDoc, { content: helpDoc })
         )
       )
     )
@@ -1118,13 +1221,13 @@ const DialogNavigatorElement = (props) => {
     React.Fragment,
     null,
     React.createElement(
-      NavigatorConfigurableElementContainer,
+      NavigatorElementContainer,
       { level },
       level !== 0 ? new Array(level + 1).fill(1).map((_, index) => {
-        return index !== 0 ? React.createElement(NavigatorConfigurableElementTreeLine, { level: index, "data-last-node": last[index], "data-last-level": index === level, key: index }) : null;
+        return index !== 0 ? React.createElement(NavigatorElementTreeLine, { level: index, "data-last-node": last[index], "data-last-level": index === level, key: index }) : null;
       }) : null,
-      React.createElement(NavigatorConfigurableElementLabel, { level }, label),
-      badge != null ? React.createElement(NavigatorConfigurableElementBadge, null, badge(model)) : null
+      React.createElement(NavigatorElementLabel, { level }, label),
+      badge != null ? React.createElement(NavigatorElementBadge, null, badge(model)) : null
     ),
     element.children != null ? element.children.filter((element2) => element2.visible == null || element2.visible(model)).map((child, index, children) => {
       return React.createElement(DialogNavigatorElement, { element: child, model, level: level + 1, last: [...last, index === children.length - 1], key: child.code });
@@ -1133,7 +1236,7 @@ const DialogNavigatorElement = (props) => {
 };
 const DialogNavigatorElements = (props) => {
   const { elements: elements2, model } = props;
-  return React.createElement(NavigatorDialogNavigatorElementsContainer, null, elements2.filter((element) => element.visible == null || element.visible(model)).map((element, index, elements3) => {
+  return React.createElement(NavigatorElementsContainer, null, elements2.filter((element) => element.visible == null || element.visible(model)).map((element, index, elements3) => {
     return React.createElement(DialogNavigatorElement, { element, model, level: 0, last: [index === elements3.length - 1], key: element.code });
   }));
 };
@@ -1147,7 +1250,7 @@ const DialogNavigator = (props) => {
       React.createElement(
         EditDialogPartHeader,
         null,
-        React.createElement(EditDialogPartTitle, null, Labels.ConfigurableElements)
+        React.createElement(EditDialogPartTitle, null, Labels.Navigator)
       ),
       React.createElement(
         EditDialogPartBody,
@@ -1157,7 +1260,51 @@ const DialogNavigator = (props) => {
     )
   );
 };
-const DialogSpecificDetails = () => {
+const DialogSpecificElementWrapper = (props) => {
+  const { element, model } = props;
+  const { label, editor, helpDoc } = element;
+  const [showHelp, setShowHelp] = reactExports.useState(false);
+  const onHelpBadgeClicked = () => setShowHelp(!showHelp);
+  const hasHelpDoc = VUtils.isNotBlank(helpDoc);
+  return React.createElement(
+    React.Fragment,
+    null,
+    React.createElement(
+      SpecificElementLabel,
+      null,
+      React.createElement("span", null, label),
+      hasHelpDoc ? React.createElement(
+        SpecificElementHelpBadge,
+        { "data-visible": true, onClick: onHelpBadgeClicked },
+        React.createElement(ElementHelp, null)
+      ) : null
+    ),
+    editor != null ? editor(model) : React.createElement(SpecificElementEditorPlaceholder, null),
+    hasHelpDoc ? React.createElement(
+      SpecificElementHelpDoc,
+      { "data-visible": showHelp },
+      React.createElement(HelpDoc, { content: helpDoc })
+    ) : null
+  );
+};
+const DialogSpecificElement = (props) => {
+  const { element, model } = props;
+  return React.createElement(
+    React.Fragment,
+    null,
+    React.createElement(DialogSpecificElementWrapper, { ...props }),
+    element.children != null ? element.children.filter((element2) => element2.visible == null || element2.visible(model)).map((child) => {
+      return React.createElement(DialogSpecificElement, { element: child, model, key: child.code });
+    }) : null
+  );
+};
+const DialogSpecificElements = (props) => {
+  const { elements: elements2, model } = props;
+  return React.createElement(SpecificElementsContainer, null, elements2.filter((element) => element.visible == null || element.visible(model)).map((element) => {
+    return React.createElement(DialogSpecificElement, { element, model, key: element.code });
+  }));
+};
+const DialogSpecific = (props) => {
   return React.createElement(
     EditDialogSpecificDetailsContainer,
     null,
@@ -1167,7 +1314,12 @@ const DialogSpecificDetails = () => {
       React.createElement(
         EditDialogPartHeader,
         null,
-        React.createElement(EditDialogPartTitle, null, Labels.SpecificDetails)
+        React.createElement(EditDialogPartTitle, null, Labels.Specific)
+      ),
+      React.createElement(
+        EditDialogPartBody,
+        null,
+        React.createElement(DialogSpecificElements, { ...props })
       )
     )
   );
@@ -1208,32 +1360,32 @@ const DialogContent = (props) => {
         Labels.BackToCanvas
       ),
       React.createElement(DialogHelpDesk, { helpDoc }),
-      React.createElement(DialogSpecificDetails, null),
+      React.createElement(DialogSpecific, { elements: elements2, model: state.model }),
       React.createElement(DialogNavigator, { elements: elements2, model: state.model })
     ),
     React.createElement(DialogContentInitializer, null)
   );
 };
 const ConfigurableElementBadgeChecked = () => {
-  return React.createElement(NavigatorConfigurableElementBadgeWrapper, { "data-role": "checked" }, Labels.BadgeChecked);
+  return React.createElement(NavigatorElementBadgeWrapper, { "data-role": "checked" }, Labels.BadgeChecked);
 };
 const ConfigurableElementBadgeMissed = () => {
-  return React.createElement(NavigatorConfigurableElementBadgeWrapper, { "data-role": "missed" }, Labels.BadgeMissed);
+  return React.createElement(NavigatorElementBadgeWrapper, { "data-role": "missed" }, Labels.BadgeMissed);
 };
 const ConfigurableElementBadgeBanned = () => {
-  return React.createElement(NavigatorConfigurableElementBadgeWrapper, { "data-role": "banned" }, Labels.BadgeBanned);
+  return React.createElement(NavigatorElementBadgeWrapper, { "data-role": "banned" }, Labels.BadgeBanned);
 };
 const ConfigurableElementBadgeAll = () => {
-  return React.createElement(NavigatorConfigurableElementBadgeWrapper, { "data-role": "all" }, Labels.All);
+  return React.createElement(NavigatorElementBadgeWrapper, { "data-role": "all" }, Labels.All);
 };
 const ConfigurableElementBadgeIgnored = () => {
-  return React.createElement(NavigatorConfigurableElementBadgeWrapper, { "data-role": "ignored" }, Labels.Ignored);
+  return React.createElement(NavigatorElementBadgeWrapper, { "data-role": "ignored" }, Labels.Ignored);
 };
 const ConfigurableElementBadgeNotAvailable = () => {
-  return React.createElement(NavigatorConfigurableElementBadgeWrapper, { "data-role": "not-available" }, Labels.NotAvailable);
+  return React.createElement(NavigatorElementBadgeWrapper, { "data-role": "not-available" }, Labels.NotAvailable);
 };
 const ConfigurableElementBadgeCount = (props) => {
-  return React.createElement(NavigatorConfigurableElementBadgeWrapper, { "data-role": "count" }, props.count);
+  return React.createElement(NavigatorElementBadgeWrapper, { "data-role": "count" }, props.count);
 };
 const EditDialog = () => {
   const { on, off } = usePlaygroundEventBus();
@@ -1274,6 +1426,14 @@ const EditDialog = () => {
     { visible: state.visible, onTransitionEnd },
     React.createElement(EditDialogWrapper, null, state.content)
   );
+};
+const markdown$2 = "Used for locating configurations within the application, required fields, and must be globally unique.";
+const markdown$1 = "Specify whether the current configuration is effective.\n\n> Note that configurations that are not effective will not be loaded when the application starts, so the effective status cannot be switched\n> at runtime.";
+const markdown = "## Overview\n\nThe core concept of `@rainbow-o23` is pipeline, where all logic is defined through pipeline and its steps. There are three different forms\nof\npipeline based on how it is defined:\n\n- Standard pipeline, which can optionally be exposed as a RESTful API. To differentiate, we generally refer to pipelines that are exposed as\n  RESTful APIs as `pipeline`, and pipelines that are not exposed as RESTful APIs as `independent pipeline`. In all documents, we will use\n  this name to refer to it. If not specifically labeled as `independent`, it means that this pipeline has been exposed as a RESTful API.\n- Set of steps, composed of a group of steps,\n- Independent step: based on the definition of a single step.\n\nIf a pipeline is exposed as an API, it does not allow other pipeline steps to call it, otherwise it does. Therefore, if certain logic\ncombinations can be reused, they should be defined as an independent pipeline/set of steps/independent step.\n\n## Common attributes\n\nAll definitions should have the following attributes:\n\n- A `code` attribute for identification within the system, so the value of the `code` attribute is globally unique.\n- A `type` attribute is used to indicate the type of this definition, and the value of the `type` attribute must be one\n  of `pipeline`, `step-sets`, or `step`.\n- An `enabled` attribute is used to indicate whether this definition is effective, and the value of the `enabled` attribute must be\n  either `true` or `false`. If not defined, this definition is considered to be effective by default.\n\n## Pipeline\n\nIf the definition contains a `route` attribute and specifies a URI, it is considered to be published as a RESTful API. A pipeline published\nas a RESTful API includes all standard HTTP protocol elements:\n\n- `route`, URI of API. Excluding the scheme, domain name, and port in the URL, the application configuration can also specify the path\n  context,\n	- To facilitate the definition and parsing of data contained in the `route`, you can use `pathParams` for definition. `pathParams` can\n	  be a list of parameters, or you can use `true` to define receiving all valid path parameters. Please note that the definition of path\n	  parameters must conform to the [nestjs](https://docs.nestjs.com/controllers#route-parameters) standard.\n- `method`, supporting `get`, `post`, `put`, `patch`, and `delete`,\n- `headers`, a list of headers that need to be parsed, or `true` to parse all headers,\n- `queryParams`, a list of query parameters that need to be parsed, or `true` to parse all query parameters,\n- `body`, the content of the HTTP body is in JSON format. To better adapt to common practices of RESTful API usage:\n	- When `method` is specified as `get` and the `body` parameter is not explicitly set to `true`, the system defaults to ignoring the HTTP\n	  body content,\n	- When `method` is not specified as `get` and the `body` parameter is not explicitly set to `false`, the system defaults to parsing the\n	  HTTP body content,\n- `files`, a list of files that need to be parsed, or `true` to parse all files.\n\nThere are also some HTTP response definitions:\n\n- `exposeHeaders`, a set of headers that need to be pushed to the client,\n- `exposeFile`, indicating whether the response data is a file.\n\n## Independent pipeline\n\nIf the definition does not contain a `route` attribute, it is considered an independent pipeline. An independent pipeline can be called by\nother pipeline steps.\n\nAn independent pipeline always includes at least one step, and its behavior is entirely determined by the steps defined within it.\n\nAn independent pipeline also has a special property `initOnly`, which if declared as `true`, indicates that this pipeline will only be\nexecuted when the application starts, and the application will not provide any parameters during execution.\n\n## Set of steps\n\nSteps set, as the name suggests, can define a set of steps. They can also define how their built-in steps are executed, typically in the\nfollowing ways:\n\n- Synchronous serial,\n- Asynchronous serial,\n- Synchronous parallel,\n- Conditional execution,\n- Loop execution (only for input data as an array),\n- Start a database transaction.\n\nBy combining the various types of step collections mentioned above, you can construct execution sequences suitable for different scenarios.\n\n## Independent step\n\nIndependent steps can be any type of step definition, including step sets. Logically, a step set can be understood as a collection of\nindependent steps, and different step sets define the way their built-in steps are executed. Independent steps are implemented by different\nstandard step components for different purposes. Here are some built-in independent steps:\n\n- Retrieve values from models or remove attributes,\n- Execute scripts,\n- Generate snowflake IDs,\n- Call predefined independent pipelines or steps,\n- Make remote HTTP API calls,\n- Read from or write to databases.\n\nAdditionally, you can also obtain the following independent step support through the `@rainbow-o23` standard extension library:\n\n- Print PDF, Word, Excel, CSV,\n- Manipulate AWS S3 objects.\n\n> The latest step support can be found on [Github](https://github.com/InsureMO/rainbow-o23).\n";
+const HelpDocs = {
+  pipeline: markdown,
+  pipelineCode: markdown$2,
+  pipelineEnabled: markdown$1
 };
 const prepareModel = (def) => {
   const model = {
@@ -1326,13 +1486,27 @@ const elementCode = {
     } else {
       return React.createElement(ConfigurableElementBadgeMissed, null);
     }
-  }
+  },
+  editor: (model) => {
+    const onValueChange = (value) => {
+      model.code = value;
+    };
+    return React.createElement(UnwrappedInput, { onValueChange, value: model.code ?? "" });
+  },
+  helpDoc: HelpDocs.pipelineCode
 };
 const elementEnabled = {
   code: "enabled",
   label: "Enabled",
   anchor: "enabled",
-  badge: (model) => model.enabled !== false ? React.createElement(ConfigurableElementBadgeChecked, null) : React.createElement(ConfigurableElementBadgeBanned, null)
+  badge: (model) => model.enabled !== false ? React.createElement(ConfigurableElementBadgeChecked, null) : React.createElement(ConfigurableElementBadgeBanned, null),
+  editor: (model) => {
+    const onValueChange = (value) => {
+      model.enabled = value;
+    };
+    return React.createElement(UnwrappedCheckbox, { onValueChange, value: model.enabled ?? true });
+  },
+  helpDoc: HelpDocs.pipelineEnabled
 };
 const elementRoute = {
   code: "route",
@@ -1474,10 +1648,6 @@ const elementType = {
   children: [elementRoute, elementRequest, elementResponse]
 };
 const elements = [elementCode, elementEnabled, elementType];
-const markdown = "## Overview\n\nThe core concept of `rainbow-o23` is pipeline, where all logic is defined through pipeline and its steps. There are three different forms of\npipeline based on how it is defined:\n\n- Standard pipeline, which can optionally be exposed as a RESTful API. To differentiate, we generally refer to pipelines that are exposed as\n  RESTful APIs as `pipeline`, and pipelines that are not exposed as RESTful APIs as `independent pipeline`. In all documents, we will use\n  this name to refer to it. If not specifically labeled as `independent`, it means that this pipeline has been exposed as a RESTful API.\n- Set of steps, composed of a group of steps,\n- Independent step: based on the definition of a single step.\n\nIf a pipeline is exposed as an API, it does not allow other pipeline steps to call it, otherwise it does. Therefore, if certain logic\ncombinations can be reused, they should be defined as an independent pipeline/set of steps/independent step.\n\n## Common attributes\n\nAll definitions should have the following attributes:\n\n- A `code` attribute for identification within the system, so the value of the `code` attribute is globally unique.\n- A `type` attribute is used to indicate the type of this definition, and the value of the `type` attribute must be one\n  of `pipeline`, `step-sets`, or `step`.\n- An `enabled` attribute is used to indicate whether this definition is effective, and the value of the `enabled` attribute must be\n  either `true` or `false`. If not defined, this definition is considered to be effective by default.\n\n## Pipeline\n\nIf the definition contains a `route` attribute and specifies a URI, it is considered to be published as a RESTful API. A pipeline published\nas a RESTful API includes all standard HTTP protocol elements:\n\n- `route`, URI of API. Excluding the scheme, domain name, and port in the URL, the application configuration can also specify the path\n  context,\n	- To facilitate the definition and parsing of data contained in the `route`, you can use `pathParams` for definition. `pathParams` can\n	  be a list of parameters, or you can use `true` to define receiving all valid path parameters. Please note that the definition of path\n	  parameters must conform to the [nestjs](https://docs.nestjs.com/controllers#route-parameters) standard.\n- `method`, supporting `get`, `post`, `put`, `patch`, and `delete`,\n- `headers`, a list of headers that need to be parsed, or `true` to parse all headers,\n- `queryParams`, a list of query parameters that need to be parsed, or `true` to parse all query parameters,\n- `body`, the content of the HTTP body is in JSON format. To better adapt to common practices of RESTful API usage:\n	- When `method` is specified as `get` and the `body` parameter is not explicitly set to `true`, the system defaults to ignoring the HTTP\n	  body content,\n	- When `method` is not specified as `get` and the `body` parameter is not explicitly set to `false`, the system defaults to parsing the\n	  HTTP body content,\n- ";
-const HelpDocs = {
-  pipeline: markdown
-};
 const RestApiVariablePortContainer = qe.div.attrs({ [DOM_KEY_WIDGET]: "o23-playground-rest-api-variable-port" })`
     display: flex;
     position: relative;
@@ -1833,7 +2003,7 @@ class ErrorBoundary extends React.Component {
   }
   render() {
     if (this.state.hasError) {
-      return React.createElement(ParseError, null, "Something went wrong.");
+      return React.createElement(ParseError, null, Labels.ERROR);
     }
     return this.props.children;
   }

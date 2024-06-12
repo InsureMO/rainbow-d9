@@ -4,10 +4,10 @@ var __publicField = (obj, key, value) => {
   __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
   return value;
 };
-import { c as createLogger, N as NUtils, V as VUtils, k as MonitorNodeAttributes, l as Reaction, E as ExternalDefIndicator, P as PPUtils } from "./rainbow-d9-n1-MgjZKHeq.js";
-import { O as OptionItemSort, R as REACTION_REFRESH_OPTIONS, c as GlobalEventPrefix } from "./rainbow-d9-n2--BLGYt2Q.js";
-import { f as fromMarkdown, g as gfmTableFromMarkdown, a as gfmStrikethroughFromMarkdown, b as gfmFootnoteFromMarkdown, c as gfmTaskListItemFromMarkdown, d as frontmatterFromMarkdown } from "./mdast-PHdRoZWa.js";
-import { g as gfmTable, h as gfmStrikethrough, i as gfmFootnote, j as gfmTaskListItem, k as frontmatter } from "./micromark-SubUks5-.js";
+import { c as createLogger, N as NUtils, V as VUtils, k as MonitorNodeAttributes, l as Reaction, E as ExternalDefIndicator, P as PPUtils } from "./rainbow-d9-n1-mvZG8UjJ.js";
+import { O as OptionItemSort, R as REACTION_REFRESH_OPTIONS, c as GlobalEventPrefix } from "./rainbow-d9-n2-yCg4gWgR.js";
+import { f as fromMarkdown, g as gfmTableFromMarkdown, a as gfmStrikethroughFromMarkdown, b as gfmFootnoteFromMarkdown, c as gfmTaskListItemFromMarkdown, d as frontmatterFromMarkdown } from "./mdast-DVjOB1sm.js";
+import { g as gfmTable, h as gfmStrikethrough, i as gfmFootnote, j as gfmTaskListItem, k as frontmatter } from "./micromark-VFM-A-Td.js";
 const AsyncFunction = Object.getPrototypeOf(async function() {
 }).constructor;
 var ParsedNodeType;
@@ -2215,6 +2215,7 @@ class DataPrefixAttributeBuild {
     }
   }
 }
+const TipAttachableBuild = createSyncSnippetBuild("tip", ["options"]);
 const _AttributeUtils = class _AttributeUtils {
   constructor() {
   }
@@ -3183,6 +3184,7 @@ var index$1 = /* @__PURE__ */ Object.freeze({
   SpecificArrayWidgetTranslator,
   SpecificWidgetTranslator,
   TRUE_VALUES,
+  TipAttachableBuild,
   ValidationAttributeBuild,
   ValidationScopesAttributeBuild,
   ValidatorBuild,
@@ -3271,7 +3273,7 @@ class N2InputTranslator extends SpecificWidgetTranslator {
     return N2WidgetType.INPUT;
   }
   getAttributeValueBuilders() {
-    return [InputMaskBuild, ValueChangedBuild];
+    return [InputMaskBuild, TipAttachableBuild, ValueChangedBuild];
   }
   getValidationHandlerDetectives() {
     return [
@@ -3286,7 +3288,7 @@ class N2NumberTranslator extends SpecificWidgetTranslator {
     return N2WidgetType.NUMBER;
   }
   getAttributeValueBuilders() {
-    return [ValueChangedBuild];
+    return [TipAttachableBuild, ValueChangedBuild];
   }
   getValidationHandlerDetectives() {
     return [
@@ -3301,7 +3303,7 @@ class N2PasswordTranslator extends SpecificWidgetTranslator {
     return N2WidgetType.PASSWORD;
   }
   getAttributeValueBuilders() {
-    return [ValueChangedBuild];
+    return [TipAttachableBuild, ValueChangedBuild];
   }
   getValidationHandlerDetectives() {
     return [
@@ -3311,12 +3313,13 @@ class N2PasswordTranslator extends SpecificWidgetTranslator {
     ];
   }
 }
+const DecorateInputTipAttachableBuild = createSyncSnippetBuild("diTip", ["options"]);
 class N2DecorateInputTranslator extends SpecificWidgetTranslator {
   getSupportedType() {
     return N2WidgetType.DECORATE_INPUT;
   }
   getAttributeValueBuilders() {
-    return [InputMaskBuild, DecorateLeadsBuild, DecorateTailsBuild, ValueChangedBuild];
+    return [InputMaskBuild, DecorateLeadsBuild, DecorateTailsBuild, TipAttachableBuild, DecorateInputTipAttachableBuild, ValueChangedBuild];
   }
   getValidationHandlerDetectives() {
     return [
@@ -3331,7 +3334,7 @@ class N2DecorateNumberTranslator extends SpecificWidgetTranslator {
     return N2WidgetType.DECORATE_NUMBER;
   }
   getAttributeValueBuilders() {
-    return [DecorateLeadsBuild, DecorateTailsBuild, ValueChangedBuild];
+    return [DecorateLeadsBuild, DecorateTailsBuild, TipAttachableBuild, DecorateInputTipAttachableBuild, ValueChangedBuild];
   }
   getValidationHandlerDetectives() {
     return [
@@ -3346,7 +3349,7 @@ class N2DecoratePasswordTranslator extends SpecificWidgetTranslator {
     return N2WidgetType.DECORATE_PASSWORD;
   }
   getAttributeValueBuilders() {
-    return [DecorateLeadsBuild, DecorateTailsBuild, ValueChangedBuild];
+    return [DecorateLeadsBuild, DecorateTailsBuild, TipAttachableBuild, DecorateInputTipAttachableBuild, ValueChangedBuild];
   }
   getValidationHandlerDetectives() {
     return [
@@ -3361,7 +3364,7 @@ class N2TextareaTranslator extends SpecificWidgetTranslator {
     return N2WidgetType.TEXTAREA;
   }
   getAttributeValueBuilders() {
-    return [ValueChangedBuild];
+    return [TipAttachableBuild, ValueChangedBuild];
   }
   getValidationHandlerDetectives() {
     return [
@@ -3392,7 +3395,7 @@ class N2CheckboxTranslator extends SpecificWidgetTranslator {
     return N2WidgetType.CHECKBOX;
   }
   getAttributeValueBuilders() {
-    return [N2CheckboxValuesBuild, ValueChangedBuild];
+    return [N2CheckboxValuesBuild, TipAttachableBuild, ValueChangedBuild];
   }
   getValidationHandlerDetectives() {
     return [
@@ -3459,7 +3462,7 @@ class N2DropdownTranslator extends SpecificWidgetTranslator {
     return { "Dropdown.sort": "optionSort" };
   }
   getAttributeValueBuilders() {
-    return [N2DropdownOptionsBuild, N2DropdownSortBuild, N2DropdownReactionRefreshOptionsBuild, ValueChangedBuild];
+    return [N2DropdownOptionsBuild, N2DropdownSortBuild, N2DropdownReactionRefreshOptionsBuild, TipAttachableBuild, ValueChangedBuild];
   }
   getValidationHandlerDetectives() {
     return [
@@ -3476,7 +3479,7 @@ class N2DropdownTranslator extends SpecificWidgetTranslator {
 }
 class AbstractN2CheckboxesTranslator extends SpecificWidgetTranslator {
   getAttributeValueBuilders() {
-    return [N2DropdownOptionsBuild, N2DropdownSortBuild, ValueChangedBuild, N2DropdownReactionRefreshOptionsBuild];
+    return [N2DropdownOptionsBuild, N2DropdownSortBuild, TipAttachableBuild, ValueChangedBuild, N2DropdownReactionRefreshOptionsBuild];
   }
   getValidationHandlerDetectives() {
     return [
@@ -3529,7 +3532,7 @@ class N2RadioTranslator extends SpecificWidgetTranslator {
     return N2WidgetType.RADIO;
   }
   getAttributeValueBuilders() {
-    return [N2RadioValuesBuild, ValueChangedBuild];
+    return [N2RadioValuesBuild, TipAttachableBuild, ValueChangedBuild];
   }
   getValidationHandlerDetectives() {
     return [
@@ -3546,7 +3549,7 @@ class N2RadiosTranslator extends SpecificWidgetTranslator {
     return { "Radios.sort": "optionSort" };
   }
   getAttributeValueBuilders() {
-    return [N2DropdownOptionsBuild, N2DropdownSortBuild, N2DropdownReactionRefreshOptionsBuild, ValueChangedBuild];
+    return [N2DropdownOptionsBuild, N2DropdownSortBuild, N2DropdownReactionRefreshOptionsBuild, TipAttachableBuild, ValueChangedBuild];
   }
   getValidationHandlerDetectives() {
     return [
@@ -3569,7 +3572,7 @@ class N2MultiDropdownTranslator extends SpecificWidgetTranslator {
     return { "MultiDropdown.sort": "optionSort" };
   }
   getAttributeValueBuilders() {
-    return [N2DropdownOptionsBuild, N2DropdownSortBuild, N2DropdownReactionRefreshOptionsBuild, ValueChangedBuild];
+    return [N2DropdownOptionsBuild, N2DropdownSortBuild, N2DropdownReactionRefreshOptionsBuild, TipAttachableBuild, ValueChangedBuild];
   }
   getValidationHandlerDetectives() {
     return [
@@ -3632,7 +3635,7 @@ class N2DateTranslator extends SpecificWidgetTranslator {
     return N2WidgetType.DATE;
   }
   getAttributeValueBuilders() {
-    return [N2CalendarFixedTimeAtBuild, N2CalendarInitTimeAtBuild, N2CalendarCouldPerformBuild, ValueChangedBuild];
+    return [N2CalendarFixedTimeAtBuild, N2CalendarInitTimeAtBuild, N2CalendarCouldPerformBuild, TipAttachableBuild, ValueChangedBuild];
   }
   getValidationHandlerDetectives() {
     return [
@@ -3646,7 +3649,7 @@ class N2DateTimeTranslator extends SpecificWidgetTranslator {
     return N2WidgetType.DATETIME;
   }
   getAttributeValueBuilders() {
-    return [N2CalendarFixedTimeAtBuild, N2CalendarInitTimeAtBuild, N2CalendarCouldPerformBuild, ValueChangedBuild];
+    return [N2CalendarFixedTimeAtBuild, N2CalendarInitTimeAtBuild, N2CalendarCouldPerformBuild, TipAttachableBuild, ValueChangedBuild];
   }
   getValidationHandlerDetectives() {
     return [
@@ -3660,7 +3663,7 @@ class N2TimeTranslator extends SpecificWidgetTranslator {
     return N2WidgetType.TIME;
   }
   getAttributeValueBuilders() {
-    return [N2CalendarFixedTimeAtBuild, N2CalendarInitTimeAtBuild, N2CalendarCouldPerformBuild, ValueChangedBuild];
+    return [N2CalendarFixedTimeAtBuild, N2CalendarInitTimeAtBuild, N2CalendarCouldPerformBuild, TipAttachableBuild, ValueChangedBuild];
   }
   getValidationHandlerDetectives() {
     return [
@@ -3674,7 +3677,7 @@ class N2CalendarTranslator extends SpecificWidgetTranslator {
     return N2WidgetType.CALENDAR;
   }
   getAttributeValueBuilders() {
-    return [N2CalendarFixedTimeAtBuild, N2CalendarInitTimeAtBuild, N2CalendarCouldPerformBuild, ValueChangedBuild];
+    return [N2CalendarFixedTimeAtBuild, N2CalendarInitTimeAtBuild, N2CalendarCouldPerformBuild, TipAttachableBuild, ValueChangedBuild];
   }
   getValidationHandlerDetectives() {
     return [
@@ -3819,7 +3822,7 @@ class N2LinkTranslator extends SpecificWidgetTranslator {
     return N2WidgetType.LINK;
   }
   getAttributeValueBuilders() {
-    return [N2ButtonClickBuild, DecorateLeadsBuild, DecorateTailsBuild];
+    return [N2ButtonClickBuild, DecorateLeadsBuild, DecorateTailsBuild, TipAttachableBuild];
   }
 }
 class N2ButtonBarTranslator extends SpecificWidgetTranslator {
@@ -3898,7 +3901,7 @@ class N2CaptionTranslator extends SpecificWidgetTranslator {
     return super.redressProperties(N2CaptionRedressLabelAndText(def));
   }
   getAttributeValueBuilders() {
-    return [N2CaptionValueToLabelBuild, N2CaptionClickBuild, DecorateLeadsBuild, DecorateTailsBuild];
+    return [N2CaptionValueToLabelBuild, N2CaptionClickBuild, DecorateLeadsBuild, DecorateTailsBuild, TipAttachableBuild];
   }
   getReactionHandlerDetectives() {
     return [
@@ -3918,7 +3921,7 @@ class N2LabelTranslator extends SpecificWidgetTranslator {
     return super.redressProperties(N2CaptionRedressLabelAndText({ ...def, labelOnValue: true }));
   }
   getAttributeValueBuilders() {
-    return [N2CaptionValueToLabelBuild, N2CaptionClickBuild, DecorateLeadsBuild, DecorateTailsBuild];
+    return [N2CaptionValueToLabelBuild, N2CaptionClickBuild, DecorateLeadsBuild, DecorateTailsBuild, TipAttachableBuild];
   }
   getReactionHandlerDetectives() {
     return [
@@ -3938,7 +3941,7 @@ class N2BadgeTranslator extends SpecificWidgetTranslator {
     return super.redressProperties(N2CaptionRedressLabelAndText(def));
   }
   getAttributeValueBuilders() {
-    return [N2CaptionValueToLabelBuild, N2CaptionClickBuild, DecorateLeadsBuild, DecorateTailsBuild];
+    return [N2CaptionValueToLabelBuild, N2CaptionClickBuild, DecorateLeadsBuild, DecorateTailsBuild, TipAttachableBuild];
   }
   getReactionHandlerDetectives() {
     return [
@@ -4119,6 +4122,9 @@ class N2BoxTranslator extends SpecificWidgetTranslator {
   getSupportedType() {
     return N2WidgetType.BOX;
   }
+  getAttributeValueBuilders() {
+    return [TipAttachableBuild];
+  }
 }
 const N2TabDataChangedBuild = createAsyncSnippetBuild("data", ["options"]);
 const N2TabBodyChangedBuild = createAsyncSnippetBuild("body", ["marker"]);
@@ -4259,7 +4265,7 @@ class N2TreeTranslator extends SpecificWidgetTranslator {
 const N2DropdownTreeCouldSelectBuild = createSyncSnippetBuild("couldSelect", ["option"]);
 class AbstractN2DropdownTreeTranslator extends SpecificWidgetTranslator {
   getAttributeValueBuilders() {
-    return [N2DropdownTreeCouldSelectBuild, N2DropdownSortBuild, N2DropdownReactionRefreshOptionsBuild, ValueChangedBuild];
+    return [N2DropdownTreeCouldSelectBuild, N2DropdownSortBuild, N2DropdownReactionRefreshOptionsBuild, TipAttachableBuild, ValueChangedBuild];
   }
   getValidationHandlerDetectives() {
     return [
@@ -4293,7 +4299,7 @@ class N2DDTTranslator extends AbstractN2DropdownTreeTranslator {
 const MultiDropdownTreeCouldSelectBuild = createSyncSnippetBuild("couldSelect", ["option"]);
 class AbstractN2MultiDropdownTreeTranslator extends SpecificWidgetTranslator {
   getAttributeValueBuilders() {
-    return [MultiDropdownTreeCouldSelectBuild, N2DropdownSortBuild, N2DropdownReactionRefreshOptionsBuild, ValueChangedBuild];
+    return [MultiDropdownTreeCouldSelectBuild, N2DropdownSortBuild, N2DropdownReactionRefreshOptionsBuild, TipAttachableBuild, ValueChangedBuild];
   }
   getValidationHandlerDetectives() {
     return [
@@ -4407,6 +4413,7 @@ var index = /* @__PURE__ */ Object.freeze({
   AbstractN2CheckboxesTranslator,
   AbstractN2DropdownTreeTranslator,
   AbstractN2MultiDropdownTreeTranslator,
+  DecorateInputTipAttachableBuild,
   InputMaskBuild,
   MultiDropdownTreeCouldSelectBuild,
   N2BadgeTranslator,

@@ -4,8 +4,8 @@ var __publicField = (obj, key, value) => {
   __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
   return value;
 };
-import { b as buffer, n as nanoid, E as EventEmitter } from "./vendor-W_zh5JiD.js";
-import { r as reactExports, R as React } from "./react-base-XEFxDFEy.js";
+import { b as buffer, n as nanoid, E as EventEmitter } from "./vendor-9g-Uqt4B.js";
+import { r as reactExports, R as React } from "./react-base-dlWpmanK.js";
 const VUtils = {
   isEmpty: (v) => v == null || typeof v === "string" && v.length === 0,
   isNotEmpty: (v) => (v ?? "") !== "",
@@ -1752,7 +1752,7 @@ const WrapperDelegateWorker = (workerProps) => {
   const coverWidgets = coverTypes.map((coverType) => {
     const cover = findWidget(coverType);
     if (cover == null) {
-      N1Logger.error(`Widget definition of [${widgetType}] in [${$wt}] not found.`, "WrapperDelegate");
+      N1Logger.error(`Widget definition of [${coverType}] in [${$wt}] not found.`, "WrapperDelegate");
       return [coverType, null];
     }
     return [coverType, cover];
