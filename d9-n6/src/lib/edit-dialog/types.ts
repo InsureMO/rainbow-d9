@@ -22,6 +22,7 @@ export interface ConfigurableElement {
 	// for navigator only
 	badge?: (model: ConfigurableModel) => ReactNode;
 	// for specific only
+	changeBy?: Array<ConfigurableElementAnchor>;
 	group?: true;
 	editor?: (props: ConfigurableElementEditorProps) => JSX.Element;
 	helpDoc?: MarkdownContent;

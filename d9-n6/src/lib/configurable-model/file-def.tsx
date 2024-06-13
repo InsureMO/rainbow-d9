@@ -97,6 +97,7 @@ export const allOrArray = (value?: null | true | Array<string>) => {
 };
 
 const ANCHOR_TYPE = 'type';
+const ANCHOR_ROUTE = 'route';
 export const visibleOnPipeline = (model: FileDefModel) => model.type === 'pipeline';
 export const visibleOnApi = (model: PipelineFileDefModel) => visibleOnPipeline(model) && model.api === true;
 export const elementCode: ConfigurableElement = {
@@ -134,7 +135,7 @@ export const elementEnabled: ConfigurableElement = {
 	helpDoc: HelpDocs.pipelineEnabled
 };
 export const elementRoute: ConfigurableElement = {
-	code: 'route', label: 'Route', anchor: 'route',
+	code: 'route', label: 'Route', anchor: ANCHOR_ROUTE,
 	badge: (model: PipelineFileDefModel): ReactNode => {
 		if (VUtils.isNotBlank(model.route)) {
 			return model.route.trim();
@@ -182,12 +183,12 @@ export const elementMethod: ConfigurableElement = {
 	helpDoc: HelpDocs.pipelineMethod
 };
 
-interface AllIgnoredOrArrayEditorProps extends ConfigurableElementEditorProps<PipelineFileDefModel> {
-	name: 'headers' | 'queryParams';
+export interface AllIgnoredOrArrayEditorProps extends ConfigurableElementEditorProps<PipelineFileDefModel> {
+	name: 'headers' | 'pathParams' | 'queryParams';
 	lead: ReactNode;
 }
 
-const AllIgnoredOrArrayEditor = (props: AllIgnoredOrArrayEditorProps) => {
+export const AllIgnoredOrArrayEditor = (props: AllIgnoredOrArrayEditorProps) => {
 	const {model, onValueChanged, name, lead} = props;
 
 	const inputRef = useRef<HTMLInputElement>(null);
@@ -244,11 +245,17 @@ export const elementHeaders: ConfigurableElement = {
 	editor: HeadersEditor,
 	helpDoc: HelpDocs.pipelineHeaders
 };
+const PathParamsEditor = (props: ConfigurableElementEditorProps<PipelineFileDefModel>) => {
+	return <AllIgnoredOrArrayEditor {...props} name="pathParams" lead={Labels.ParameterNames}/>;
+};
 export const elementPathParams: ConfigurableElement = {
 	code: 'pathParams', label: 'Path Parameters', anchor: 'path-params',
 	badge: (model: PipelineFileDefModel): ReactNode => {
 		return allOrArray(model.pathParams);
-	}
+	},
+	changeBy: [ANCHOR_ROUTE],
+	editor: PathParamsEditor,
+	helpDoc: HelpDocs.pipelinePathParams
 };
 const QueryParamsEditor = (props: ConfigurableElementEditorProps<PipelineFileDefModel>) => {
 	return <AllIgnoredOrArrayEditor {...props} name="queryParams" lead={Labels.ParameterNames}/>;

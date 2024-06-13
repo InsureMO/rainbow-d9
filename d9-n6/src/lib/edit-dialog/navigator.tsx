@@ -1,7 +1,6 @@
 import React from 'react';
 import {Labels} from '../labels';
-import {useElementVisible} from './hooks';
-import {useElementValueChange} from './hooks/use-element-value-change';
+import {useElementValueChange, useElementVisible} from './hooks';
 import {ConfigurableElement, ConfigurableModel} from './types';
 import {
 	EditDialogNavigatorContainer,
