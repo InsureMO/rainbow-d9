@@ -281,7 +281,7 @@ export const MultiDropdown = forwardRef((props: MultiDropdownProps, ref: Forward
 			return;
 		}
 		repaintPopup();
-		setTimeout(() => containerRef.current?.focus(), 100);
+		setTimeout(() => containerRef.current?.focus(), 30);
 	};
 	// noinspection DuplicatedCode
 	const onRemoveClicked = (value: MultiDropdownOptionValue) => async (event: MouseEvent<HTMLSpanElement>) => {

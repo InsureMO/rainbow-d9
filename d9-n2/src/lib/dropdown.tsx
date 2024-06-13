@@ -164,7 +164,7 @@ export const Dropdown = forwardRef((props: DropdownProps, ref: ForwardedRef<HTML
 		if (filter !== '') {
 			afterPopupStateChanged.afterPopupHide();
 		}
-		setTimeout(() => containerRef.current?.focus(), 100);
+		setTimeout(() => containerRef.current?.focus(), 30);
 	};
 	const onClearClicked = async (event: MouseEvent<HTMLSpanElement>) => {
 		if ($disabled) {

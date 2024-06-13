@@ -346,7 +346,7 @@ export const InternalMultiDropdownTree = forwardRef((props: MultiDropdownTreePro
 						await $onValueChange(values.filter(v => v != value), true, {global: globalHandlers});
 					}
 					repaintPopup();
-					setTimeout(() => containerRef.current?.focus(), 100);
+					setTimeout(() => containerRef.current?.focus(), 30);
 				};
 			}
 			return node;

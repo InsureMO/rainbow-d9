@@ -227,7 +227,7 @@ export const InternalDropdownTree = forwardRef((props: DropdownTreeProps, ref: F
 		if (filter !== '') {
 			afterPopupStateChanged.afterPopupHide();
 		}
-		setTimeout(() => containerRef.current?.focus(), 100);
+		setTimeout(() => containerRef.current?.focus(), 30);
 	};
 	const detective: TreeNodeDetect = (parentNode: Undefinable<TreeNodeDef>): Array<TreeNodeDef> => {
 		if (parentNode.value === treeModel) {
