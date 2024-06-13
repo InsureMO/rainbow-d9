@@ -1,5 +1,6 @@
 import React from 'react';
 import {Labels} from '../labels';
+import {useElementVisible} from './hooks';
 import {ConfigurableElement, ConfigurableModel} from './types';
 import {
 	EditDialogNavigatorContainer,
@@ -21,30 +22,40 @@ export interface DialogNavigatorElementProps {
 	last: Array<boolean>;
 }
 
-export const DialogNavigatorElement = (props: DialogNavigatorElementProps) => {
+export const DialogNavigatorElementWrapper = (props: DialogNavigatorElementProps) => {
 	const {element, model, level, last} = props;
 	const {label, badge} = element;
 
+	return <NavigatorElementContainer level={level}>
+		{level !== 0 // level starts from 0
+			? new Array(level + 1).fill(1).map((_, index) => {
+				// first level node doesn't need tree line
+				// last level node always needs tree line
+				// other levels depend on whether is the last node of the ancestor level
+				return index !== 0
+					? <NavigatorElementTreeLine level={index}
+					                            data-last-node={last[index]}
+					                            data-last-level={index === level}
+					                            key={index}/>
+					: null;
+			})
+			: null}
+		<NavigatorElementLabel level={level}>{label}</NavigatorElementLabel>
+		{badge != null
+			? <NavigatorElementBadge>{badge(model)}</NavigatorElementBadge>
+			: null}
+	</NavigatorElementContainer>;
+};
+export const DialogNavigatorElement = (props: DialogNavigatorElementProps) => {
+	const {element, model, level, last} = props;
+
+	const visible = useElementVisible(element, model);
+	if (!visible) {
+		return null;
+	}
+
 	return <>
-		<NavigatorElementContainer level={level}>
-			{level !== 0 // level starts from 0
-				? new Array(level + 1).fill(1).map((_, index) => {
-					// first level node doesn't need tree line
-					// last level node always needs tree line
-					// other levels depend on whether is the last node of the ancestor level
-					return index !== 0
-						? <NavigatorElementTreeLine level={index}
-						                            data-last-node={last[index]}
-						                            data-last-level={index === level}
-						                            key={index}/>
-						: null;
-				})
-				: null}
-			<NavigatorElementLabel level={level}>{label}</NavigatorElementLabel>
-			{badge != null
-				? <NavigatorElementBadge>{badge(model)}</NavigatorElementBadge>
-				: null}
-		</NavigatorElementContainer>
+		<DialogNavigatorElementWrapper {...props}/>
 		{element.children != null
 			? element.children
 				.filter(element => element.visible == null || element.visible(model))

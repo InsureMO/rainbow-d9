@@ -1,8 +1,10 @@
-import {VUtils} from '@rainbow-d9/n1';
+import {useForceUpdate, VUtils} from '@rainbow-d9/n1';
 import React, {useState} from 'react';
 import {ElementHelp} from '../icons';
 import {Labels} from '../labels';
+import {EditDialogEventTypes, useEditDialogEventBus} from './edit-dialog-event-bus';
 import {HelpDoc} from './help-doc';
+import {useElementVisible} from './hooks';
 import {ConfigurableElement, ConfigurableModel} from './types';
 import {
 	EditDialogPartBody,
@@ -24,35 +26,17 @@ export interface DialogSpecificElementProps {
 
 export const DialogSpecificElementWrapper = (props: DialogSpecificElementProps) => {
 	const {element, model} = props;
-	const {label, editor, helpDoc} = element;
+	const {anchor, label, editor, helpDoc} = element;
 
-	// const labelRef = useRef<HTMLDivElement>(null);
+	const {fire} = useEditDialogEventBus();
 	const [showHelp, setShowHelp] = useState(false);
-	// const [showHelpBadge, setShowHelpBadge] = useState(false);
-	// useEffect(() => {
-	// 	if (labelRef.current == null) {
-	// 		return;
-	// 	}
-	// 	const label = labelRef.current;
-	// 	const onMouseEnter = () => setShowHelpBadge(true);
-	// 	const onMouseLeave = () => setShowHelpBadge(false);
-	// 	const attachedElements: Array<HTMLElement> = [label];
-	// 	label.addEventListener('mouseenter', onMouseEnter);
-	// 	label.addEventListener('mouseleave', onMouseLeave);
-	// 	let next = label.nextElementSibling as HTMLElement;
-	// 	while (next != null && next.getAttribute('data-w') !== 'o23-playground-edit-dialog-specific-element-label') {
-	// 		next.addEventListener('mouseenter', onMouseEnter);
-	// 		next.addEventListener('mouseleave', onMouseLeave);
-	// 		next = next.nextElementSibling as HTMLElement;
-	// 	}
-	// 	return () => {
-	// 		attachedElements.forEach(element => {
-	// 			element.removeEventListener('mouseenter', onMouseEnter);
-	// 			element.removeEventListener('mouseleave', onMouseLeave);
-	// 		});
-	// 	};
-	// });
+	const forceUpdate = useForceUpdate();
+
 	const onHelpBadgeClicked = () => setShowHelp(!showHelp);
+	const onValueChanged = () => {
+		forceUpdate();
+		fire(EditDialogEventTypes.ELEMENT_VALUE_CHANGED, anchor);
+	};
 
 	const hasHelpDoc = VUtils.isNotBlank(helpDoc);
 
@@ -65,7 +49,7 @@ export const DialogSpecificElementWrapper = (props: DialogSpecificElementProps) 
 				</SpecificElementHelpBadge>
 				: null}
 		</SpecificElementLabel>
-		{editor != null ? editor(model) : <SpecificElementEditorPlaceholder/>}
+		{editor != null ? editor(model, onValueChanged) : <SpecificElementEditorPlaceholder/>}
 		{hasHelpDoc
 			? <SpecificElementHelpDoc data-visible={showHelp}>
 				<HelpDoc content={helpDoc}/>
@@ -76,11 +60,15 @@ export const DialogSpecificElementWrapper = (props: DialogSpecificElementProps) 
 export const DialogSpecificElement = (props: DialogSpecificElementProps) => {
 	const {element, model} = props;
 
+	const visible = useElementVisible(element, model);
+	if (!visible) {
+		return null;
+	}
+
 	return <>
 		<DialogSpecificElementWrapper {...props}/>
 		{element.children != null
 			? element.children
-				.filter(element => element.visible == null || element.visible(model))
 				.map((child) => {
 					return <DialogSpecificElement element={child} model={model} key={child.code}/>;
 				})

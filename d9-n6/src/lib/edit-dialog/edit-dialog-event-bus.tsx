@@ -4,7 +4,9 @@ import React, {createContext, ReactNode, useContext} from 'react';
 export enum EditDialogEventTypes {
 	OPEN_HELP_DESK = 'open-help-desk',
 	CLOSE_HELP_DESK = 'close-help-desk',
-	ASK_HELP_DESK_OPENED = 'ask-help-desk-opened'
+	ASK_HELP_DESK_OPENED = 'ask-help-desk-opened',
+
+	ELEMENT_VALUE_CHANGED = 'element-value-changed'
 }
 
 export interface EditDialogEventBus {
@@ -25,6 +27,12 @@ export interface EditDialogEventBus {
 	on(type: EditDialogEventTypes.ASK_HELP_DESK_OPENED, listener: (callback: (opened: boolean) => void) => void): this;
 
 	off(type: EditDialogEventTypes.ASK_HELP_DESK_OPENED, listener: (callback: (opened: boolean) => void) => void): this;
+
+	fire(type: EditDialogEventTypes.ELEMENT_VALUE_CHANGED, anchor: string): this;
+
+	on(type: EditDialogEventTypes.ELEMENT_VALUE_CHANGED, listener: (anchor: string) => void): this;
+
+	off(type: EditDialogEventTypes.ELEMENT_VALUE_CHANGED, listener: (anchor: string) => void): this;
 }
 
 const Context = createContext<EditDialogEventBus>({} as EditDialogEventBus);

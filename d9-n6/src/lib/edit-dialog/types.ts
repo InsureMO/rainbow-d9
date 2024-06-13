@@ -3,12 +3,14 @@ import {MarkdownContent} from '../types';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type ConfigurableModel = any;
+export type ConfigurableElementAnchor = string;
 
 export interface ConfigurableElement {
 	// both for navigator and specific
 	code: string;
 	label: string;
-	anchor: string;
+	anchor: ConfigurableElementAnchor;
+	visibleOn?: Array<ConfigurableElementAnchor>;
 	visible?: (model: ConfigurableModel) => boolean;
 	/** typically 2 levels max */
 	children?: Array<ConfigurableElement>;
@@ -16,6 +18,6 @@ export interface ConfigurableElement {
 	badge?: (model: ConfigurableModel) => ReactNode;
 	// for specific only
 	group?: true;
-	editor?: (model: ConfigurableModel) => ReactNode;
+	editor?: (model: ConfigurableModel, onValueChanged: () => void) => ReactNode;
 	helpDoc?: MarkdownContent;
 }

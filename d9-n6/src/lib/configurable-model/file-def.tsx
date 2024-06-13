@@ -1,5 +1,5 @@
 import {PropValue, VUtils} from '@rainbow-d9/n1';
-import {UnwrappedCheckbox, UnwrappedInput} from '@rainbow-d9/n2';
+import {UnwrappedCheckbox, UnwrappedDropdown, UnwrappedInput} from '@rainbow-d9/n2';
 import React, {ReactNode} from 'react';
 import {
 	FileDef,
@@ -76,6 +76,7 @@ export const allOrArray = (value?: null | true | Array<string>) => {
 	}
 };
 
+const ANCHOR_TYPE = 'type';
 export const visibleOnPipeline = (model: FileDefModel) => model.type === 'pipeline';
 export const visibleOnApi = (model: PipelineFileDefModel) => visibleOnPipeline(model) && model.api === true;
 export const elementCode: ConfigurableElement = {
@@ -87,9 +88,10 @@ export const elementCode: ConfigurableElement = {
 			return <ConfigurableElementBadgeMissed/>;
 		}
 	},
-	editor: (model: FileDefModel): ReactNode => {
+	editor: (model: FileDefModel, onValueChanged: () => void): ReactNode => {
 		const onValueChange = (value: PropValue) => {
 			model.code = value as string;
+			onValueChanged();
 		};
 		return <UnwrappedInput onValueChange={onValueChange}
 		                       value={model.code ?? ''}/>;
@@ -101,9 +103,10 @@ export const elementEnabled: ConfigurableElement = {
 	badge: model => model.enabled !== false
 		? <ConfigurableElementBadgeChecked/>
 		: <ConfigurableElementBadgeBanned/>,
-	editor: (model: FileDefModel): ReactNode => {
+	editor: (model: FileDefModel, onValueChanged: () => void): ReactNode => {
 		const onValueChange = (value: PropValue) => {
 			model.enabled = value as boolean;
+			onValueChanged();
 		};
 		return <UnwrappedCheckbox onValueChange={onValueChange} value={model.enabled ?? true}/>;
 	},
@@ -118,7 +121,7 @@ export const elementRoute: ConfigurableElement = {
 			return <ConfigurableElementBadgeMissed/>;
 		}
 	},
-	visible: visibleOnApi
+	visibleOn: [ANCHOR_TYPE], visible: visibleOnApi
 };
 export const elementMethod: ConfigurableElement = {
 	code: 'method', label: 'Method', anchor: 'method',
@@ -174,7 +177,7 @@ export const elementRequest: ConfigurableElement = {
 		elementMethod, elementHeaders, elementPathParams, elementQueryParams,
 		elementBody, elementFiles
 	],
-	visible: visibleOnApi
+	visibleOn: [ANCHOR_TYPE], visible: visibleOnApi
 };
 export const elementExposeHeaders: ConfigurableElement = {
 	code: 'exposeHeaders', label: 'Expose Headers', anchor: 'expose-headers',
@@ -200,10 +203,10 @@ export const elementExposeFile: ConfigurableElement = {
 export const elementResponse: ConfigurableElement = {
 	code: 'response', label: 'Response', anchor: 'response',
 	children: [elementExposeHeaders, elementExposeFile],
-	visible: visibleOnApi
+	visibleOn: [ANCHOR_TYPE], visible: visibleOnApi
 };
 export const elementType: ConfigurableElement = {
-	code: 'type', label: 'Type', anchor: 'type',
+	code: 'type', label: 'Type', anchor: ANCHOR_TYPE,
 	badge: (model: FileDefModel): ReactNode => {
 		switch (true) {
 			case (model as PipelineFileDefModel).api === true:
@@ -218,6 +221,30 @@ export const elementType: ConfigurableElement = {
 				return <ConfigurableElementBadgeMissed/>;
 		}
 	},
+	editor: (model: FileDefModel, onValueChanged: () => void): ReactNode => {
+		const onValueChange = (value: PropValue) => {
+			if (value === 'api') {
+				model.type = 'pipeline';
+				(model as PipelineFileDefModel).api = true;
+			} else if (value === 'pipeline') {
+				model.type = 'pipeline';
+				(model as PipelineFileDefModel).api = false;
+			} else {
+				model.type = value as 'step-sets' | 'step';
+				delete (model as PipelineFileDefModel).api;
+			}
+			onValueChanged();
+		};
+		const value = ((model as PipelineFileDefModel).api === true ? 'api' : model.type) ?? 'pipeline';
+		const options = [
+			{value: 'pipeline', label: 'Independent Pipeline'},
+			{value: 'api', label: 'Pipeline as RESTful API'},
+			{value: 'step-sets', label: 'Set of Steps'},
+			{value: 'step', label: 'Independent Step'}
+		];
+		return <UnwrappedDropdown value={value} onValueChange={onValueChange} options={options}/>;
+	},
+	helpDoc: HelpDocs.pipelineType,
 	children: [elementRoute, elementRequest, elementResponse]
 };
 export const elements = [elementCode, elementEnabled, elementType];
