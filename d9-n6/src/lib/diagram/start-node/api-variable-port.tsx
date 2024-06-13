@@ -6,34 +6,34 @@ import {PortChecked, PortIncorrect, PortUndefined} from '../../icons';
 import {Labels} from '../../labels';
 import {PlaygroundCssVars} from '../../widgets';
 
-export const RestApiVariablePortContainer = styled.div.attrs({[DOM_KEY_WIDGET]: 'o23-playground-rest-api-variable-port'})`
+export const ApiVariablePortContainer = styled.div.attrs({[DOM_KEY_WIDGET]: 'o23-playground-api-variable-port'})`
     display: flex;
     position: relative;
     align-self: end;
     align-items: center;
     justify-self: start;
-    color: ${PlaygroundCssVars.NODE_REST_API_VARIABLE_PORT_COLOR};
-    background: ${PlaygroundCssVars.NODE_REST_API_VARIABLE_PORT_BACKGROUND};
+    color: ${PlaygroundCssVars.NODE_API_VARIABLE_PORT_COLOR};
+    background: ${PlaygroundCssVars.NODE_API_VARIABLE_PORT_BACKGROUND};
     height: ${PlaygroundCssVars.NODE_PORT_HEIGHT};
-    border: ${PlaygroundCssVars.NODE_REST_API_VARIABLE_PORT_BORDER};
+    border: ${PlaygroundCssVars.NODE_API_VARIABLE_PORT_BORDER};
     border-top-right-radius: calc(${PlaygroundCssVars.NODE_PORT_HEIGHT} / 2);
     border-bottom-right-radius: calc(${PlaygroundCssVars.NODE_PORT_HEIGHT} / 2);
-    font-weight: ${PlaygroundCssVars.NODE_REST_API_VARIABLE_PORT_FONT_WEIGHT};
-    font-size: ${PlaygroundCssVars.NODE_REST_API_VARIABLE_PORT_FONT_SIZE};
+    font-weight: ${PlaygroundCssVars.NODE_API_VARIABLE_PORT_FONT_WEIGHT};
+    font-size: ${PlaygroundCssVars.NODE_API_VARIABLE_PORT_FONT_SIZE};
     text-transform: capitalize;
-    padding: ${PlaygroundCssVars.NODE_REST_API_VARIABLE_PORT_PADDING};
+    padding: ${PlaygroundCssVars.NODE_API_VARIABLE_PORT_PADDING};
     margin-left: -1px;
     grid-column: 1;
     white-space: nowrap;
 
     &[data-defined=false] {
-        border: ${PlaygroundCssVars.NODE_REST_API_VARIABLE_PORT_UNDEFINED_BORDER};
-        background: ${PlaygroundCssVars.NODE_REST_API_VARIABLE_PORT_UNDEFINED_BACKGROUND};
+        border: ${PlaygroundCssVars.NODE_API_VARIABLE_PORT_UNDEFINED_BORDER};
+        background: ${PlaygroundCssVars.NODE_API_VARIABLE_PORT_UNDEFINED_BACKGROUND};
     }
 
     &[data-required=true][data-defined=false] {
-        border: ${PlaygroundCssVars.NODE_REST_API_VARIABLE_PORT_LACKING_BORDER};
-        background: ${PlaygroundCssVars.NODE_REST_API_VARIABLE_PORT_LACKING_BACKGROUND};
+        border: ${PlaygroundCssVars.NODE_API_VARIABLE_PORT_LACKING_BORDER};
+        background: ${PlaygroundCssVars.NODE_API_VARIABLE_PORT_LACKING_BACKGROUND};
     }
 
     > svg:first-child {
@@ -51,14 +51,14 @@ export const RestApiVariablePortContainer = styled.div.attrs({[DOM_KEY_WIDGET]: 
         font-size: 0.6em;
         font-variant: petite-caps;
         padding: 0 8px;
-        background: ${PlaygroundCssVars.NODE_REST_API_VARIABLE_PORT_BADGE_BACKGROUND};
+        background: ${PlaygroundCssVars.NODE_API_VARIABLE_PORT_BADGE_BACKGROUND};
         margin-left: 6px;
-        border: ${PlaygroundCssVars.NODE_REST_API_VARIABLE_PORT_BADGE_BORDER};
+        border: ${PlaygroundCssVars.NODE_API_VARIABLE_PORT_BADGE_BORDER};
         border-radius: calc(${PlaygroundCssVars.NODE_PORT_HEIGHT} * 0.3);
     }
 `;
 
-export interface RestApiVariableWidgetProps {
+export interface ApiVariableWidgetProps {
 	label: string;
 	required: boolean;
 	defined: boolean;
@@ -68,7 +68,7 @@ export interface RestApiVariableWidgetProps {
 	allAsGiven?: ReactNode;
 }
 
-export const RestApiVariablePortWidget = (props: RestApiVariableWidgetProps) => {
+export const ApiVariablePortWidget = (props: ApiVariableWidgetProps) => {
 	const {label, required, defined, count, all, allAsBoolean = false, allAsGiven} = props;
 
 	let icon: JSX.Element;
@@ -96,9 +96,9 @@ export const RestApiVariablePortWidget = (props: RestApiVariableWidgetProps) => 
 		icon = <PortUndefined/>;
 	}
 
-	return <RestApiVariablePortContainer data-required={required} data-defined={defined}>
+	return <ApiVariablePortContainer data-required={required} data-defined={defined}>
 		{icon}
 		<span>{label}</span>
 		{badge}
-	</RestApiVariablePortContainer>;
+	</ApiVariablePortContainer>;
 };

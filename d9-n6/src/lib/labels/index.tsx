@@ -1,6 +1,5 @@
 import {IntlLabel} from '@rainbow-d9/n2';
 import React from 'react';
-import {FileType} from '../definition';
 import {ElementBanned, ElementChecked, ElementMissed} from '../icons';
 
 export const Labels = {
@@ -18,13 +17,15 @@ export const Labels = {
 	Specific: <IntlLabel keys={['o23', 'dialog', 'specific', 'title']} value="Specific Details"/>,
 	BackToCanvas: <IntlLabel keys={['o23', 'dialog', 'close']} value="Back to canvas"/>,
 
-	TypeOfStandardPipeline: <IntlLabel keys={['o23', 'pipeline', 'standard']} value="Pipeline"/>,
-	TypeOfStepOrSets: (type: FileType) => {
-		return <IntlLabel keys={['o23', 'pipeline', type]} value={(type ?? '').replace('-', ' ')}/>;
-	},
+	PipelineTypeApi: <IntlLabel keys={['o23', 'pipeline', 'api']} value="Pipeline as API"/>,
+	PipelineTypePipeline: <IntlLabel keys={['o23', 'pipeline', 'standard']} value="Pipeline"/>,
+	PipelineTypeStepSet: <IntlLabel keys={['o23', 'pipeline', 'step-sets']} value="Step Set"/>,
+	PipelineTypeStep: <IntlLabel keys={['o23', 'pipeline', 'step']} value="Step"/>,
+	ParameterNames: <IntlLabel keys={['o23', 'parameter', 'names']} value="Names"/>,
 
 	All: <IntlLabel keys={['o23', 'variable', 'all']} value="All"/>,
 	Ignored: <IntlLabel keys={['o23', 'variable', 'ignored']} value="Ignored"/>,
+	Customized: <IntlLabel keys={['o23', 'variable', 'customized']} value="Customized"/>,
 	NotAvailable: <IntlLabel keys={['o23', 'variable', 'not-available']} value="N/A"/>,
 	YesChar: <IntlLabel keys={['o23', 'variable', 'yes-char']} value="Y"/>,
 	NoChar: <IntlLabel keys={['o23', 'variable', 'no-char']} value="N"/>,

@@ -4,14 +4,14 @@ The core concept of `@rainbow-o23` is pipeline, where all logic is defined throu
 of
 pipeline based on how it is defined:
 
-- Standard pipeline, which can optionally be exposed as a RESTful API. To differentiate, we generally refer to pipelines that are exposed as
-  RESTful APIs as `pipeline`, and pipelines that are not exposed as RESTful APIs as `independent pipeline`. In all documents, we will use
-  this name to refer to it. If not specifically labeled as `independent`, it means that this pipeline has been exposed as a RESTful API.
-- Set of steps, composed of a group of steps,
-- Independent step: based on the definition of a single step.
+- Pipeline, which can optionally be exposed as an API. To differentiate, we generally refer to pipelines that are exposed as
+  APIs as `Pipeline as API`, and pipelines that are not exposed as APIs as `pipeline`. In all documents, we will use
+  this name to refer to it. If not specifically labeled as `as API`, it means that this pipeline has not been exposed as an API.
+- Step set, composed of a group of steps,
+- Step: based on the definition of a single step.
 
-If a pipeline is exposed as an API, it does not allow other pipeline steps to call it, otherwise it does. Therefore, if certain logic
-combinations can be reused, they should be defined as an independent pipeline/set of steps/independent step.
+If defined as a pipeline and is exposed as an API, it does not allow other pipeline steps to call it, otherwise it does. Therefore, if
+certain logic combinations can be reused, they should be defined as a pipeline/steps set/step.
 
 ## Common attributes
 
@@ -23,10 +23,10 @@ All definitions should have the following attributes:
 - An `enabled` attribute is used to indicate whether this definition is effective, and the value of the `enabled` attribute must be
   either `true` or `false`. If not defined, this definition is considered to be effective by default.
 
-## Pipeline
+## Pipeline as API
 
-If the definition contains a `route` attribute and specifies a URI, it is considered to be published as a RESTful API. A pipeline published
-as a RESTful API includes all standard HTTP protocol elements:
+If the definition contains a `route` attribute and specifies a URI, it is considered to be published as an API. A pipeline published
+as an API includes all standard HTTP protocol elements:
 
 - `route`, URI of API. Excluding the scheme, domain name, and port in the URL, the application configuration can also specify the path
   context,
@@ -36,7 +36,7 @@ as a RESTful API includes all standard HTTP protocol elements:
 - `method`, supporting `get`, `post`, `put`, `patch`, and `delete`,
 - `headers`, a list of headers that need to be parsed, or `true` to parse all headers,
 - `queryParams`, a list of query parameters that need to be parsed, or `true` to parse all query parameters,
-- `body`, the content of the HTTP body is in JSON format. To better adapt to common practices of RESTful API usage:
+- `body`, the content of the HTTP body is in JSON format. To better adapt to common practices of HTTP API usage:
 	- When `method` is specified as `get` and the `body` parameter is not explicitly set to `true`, the system defaults to ignoring the HTTP
 	  body content,
 	- When `method` is not specified as `get` and the `body` parameter is not explicitly set to `false`, the system defaults to parsing the
@@ -48,19 +48,18 @@ There are also some HTTP response definitions:
 - `exposeHeaders`, a set of headers that need to be pushed to the client,
 - `exposeFile`, indicating whether the response data is a file.
 
-## Independent pipeline
+## Pipeline
 
-If the definition does not contain a `route` attribute, it is considered an independent pipeline. An independent pipeline can be called by
-other pipeline steps.
+If the definition does not contain a `route` attribute, it is considered a pipeline. A pipeline can be called by other pipeline steps.
 
-An independent pipeline always includes at least one step, and its behavior is entirely determined by the steps defined within it.
+A pipeline always includes at least one step, and its behavior is entirely determined by the steps defined within it.
 
-An independent pipeline also has a special property `initOnly`, which if declared as `true`, indicates that this pipeline will only be
+A pipeline also has a special property `initOnly`, which if declared as `true`, indicates that this pipeline will only be
 executed when the application starts, and the application will not provide any parameters during execution.
 
-## Set of steps
+## Step set
 
-Steps set, as the name suggests, can define a set of steps. They can also define how their built-in steps are executed, typically in the
+Step set, as the name suggests, can define a set of steps. They can also define how their built-in steps are executed, typically in the
 following ways:
 
 - Synchronous serial,
@@ -72,20 +71,20 @@ following ways:
 
 By combining the various types of step collections mentioned above, you can construct execution sequences suitable for different scenarios.
 
-## Independent step
+## Step
 
-Independent steps can be any type of step definition, including step sets. Logically, a step set can be understood as a collection of
-independent steps, and different step sets define the way their built-in steps are executed. Independent steps are implemented by different
-standard step components for different purposes. Here are some built-in independent steps:
+Steps can be any type of step definition, including step sets. Logically, a step set is a step which includes a set of sub steps, and
+different step sets define the way their sub steps are executed. Steps are implemented by different standard step components for
+different purposes. Here are some built-in standard steps:
 
 - Retrieve values from models or remove attributes,
 - Execute scripts,
 - Generate snowflake IDs,
-- Call predefined independent pipelines or steps,
+- Call predefined pipelines or steps,
 - Make remote HTTP API calls,
 - Read from or write to databases.
 
-Additionally, you can also obtain the following independent step support through the `@rainbow-o23` standard extension library:
+Additionally, you can also obtain the following steps support through the `@rainbow-o23` standard extension library:
 
 - Print PDF, Word, Excel, CSV,
 - Manipulate AWS S3 objects.

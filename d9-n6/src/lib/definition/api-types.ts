@@ -1,22 +1,22 @@
-export interface RestApiFileValidator {
+export interface ApiFileValidator {
 	maxSize?: string | number;
 	mimeType?: string;
 }
 
-export interface RestApiNonameOrNamedFiles extends RestApiFileValidator {
+export interface ApiNonameOrNamedFiles extends ApiFileValidator {
 	/** no name means any file */
 	name?: string;
 	/** multiple is ignored when no name declared */
 	multiple?: boolean;
 }
 
-export type RestApiNamedFile = string | { name: string; maxCount?: number; };
+export type ApiNamedFile = string | { name: string; maxCount?: number; };
 
-export interface RestApiMultipleNamedFiles extends RestApiFileValidator {
-	names: Array<RestApiNamedFile>;
+export interface ApiMultipleNamedFiles extends ApiFileValidator {
+	names: Array<ApiNamedFile>;
 }
 
-export interface RestApiPipelineFileDef {
+export interface ApiPipelineFileDef {
 	route: string;
 	method: 'get' | 'post' | 'patch' | 'delete' | 'put';
 	headers?: Array<string> | true;
@@ -27,10 +27,10 @@ export interface RestApiPipelineFileDef {
 		// single or multiple files with single name
 		| string
 		// with single name, explicitly declared it is single or multiple. default multiple is false
-		| RestApiNonameOrNamedFiles
+		| ApiNonameOrNamedFiles
 		// multiple files with multiple names
-		| Array<RestApiNamedFile>
-		| RestApiMultipleNamedFiles;
+		| Array<ApiNamedFile>
+		| ApiMultipleNamedFiles;
 	exposeHeaders?: Record<string, string>;
 	exposeFile?: boolean;
 }

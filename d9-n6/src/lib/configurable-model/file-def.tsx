@@ -1,7 +1,10 @@
 import {PropValue, VUtils} from '@rainbow-d9/n1';
-import {UnwrappedCheckbox, UnwrappedDropdown, UnwrappedInput} from '@rainbow-d9/n2';
-import React, {ReactNode} from 'react';
+import {UnwrappedCheckbox, UnwrappedDecorateInput, UnwrappedDropdown, UnwrappedInput} from '@rainbow-d9/n2';
+import React, {ReactNode, useRef} from 'react';
 import {
+	ApiMultipleNamedFiles,
+	ApiNamedFile,
+	ApiNonameOrNamedFiles,
 	FileDef,
 	isPipelineDef,
 	PipelineFileDef,
@@ -18,9 +21,12 @@ import {
 	ConfigurableElementBadgeIgnored,
 	ConfigurableElementBadgeMissed,
 	ConfigurableElementBadgeNotAvailable,
+	ConfigurableElementEditorProps,
 	ConfigurableModel
 } from '../edit-dialog';
 import {HelpDocs} from '../help-docs';
+import {Labels} from '../labels';
+import {VerticalLinesEditor} from './vertical-lines-editor';
 
 export interface FileDefModel extends ConfigurableModel, FileDef {
 }
@@ -28,6 +34,15 @@ export interface FileDefModel extends ConfigurableModel, FileDef {
 export interface PipelineFileDefModel extends FileDefModel, PipelineFileDef {
 	type: PipelineFileDef['type'];
 	api: boolean;
+	temporary?: {
+		headers?: string;
+		pathParams?: string;
+		queryParams?: string;
+		files?: string // single or multiple files with single name
+			| ApiNonameOrNamedFiles // with single name, explicitly declared it is single or multiple. default multiple is false
+			| Array<ApiNamedFile> // multiple files with multiple names
+			| ApiMultipleNamedFiles;
+	};
 }
 
 export interface StepOrSetsFileDefModel extends FileDefModel, PipelineStepUseDef {
@@ -55,6 +70,11 @@ export const prepareModel = (def: FileDef): ConfigurableModel => {
 			pipelineModel.files = pipeline.files;
 			pipelineModel.exposeHeaders = pipeline.exposeHeaders;
 			pipelineModel.exposeFile = pipeline.exposeFile;
+			pipelineModel.temporary = {
+				headers: pipeline.headers === true ? (void 0) : pipeline.headers?.filter(header => VUtils.isNotBlank(header)).join(', '),
+				pathParams: pipeline.pathParams === true ? (void 0) : pipeline.pathParams?.filter(param => VUtils.isNotBlank(param)).join(', '),
+				queryParams: pipeline.queryParams === true ? (void 0) : pipeline.queryParams?.filter(param => VUtils.isNotBlank(param)).join(', ')
+			};
 		} else {
 			pipelineModel.api = false;
 		}
@@ -88,13 +108,13 @@ export const elementCode: ConfigurableElement = {
 			return <ConfigurableElementBadgeMissed/>;
 		}
 	},
-	editor: (model: FileDefModel, onValueChanged: () => void): ReactNode => {
+	editor: (props: ConfigurableElementEditorProps<FileDefModel>) => {
+		const {model, onValueChanged} = props;
 		const onValueChange = (value: PropValue) => {
 			model.code = value as string;
 			onValueChanged();
 		};
-		return <UnwrappedInput onValueChange={onValueChange}
-		                       value={model.code ?? ''}/>;
+		return <UnwrappedInput onValueChange={onValueChange} value={model.code ?? ''}/>;
 	},
 	helpDoc: HelpDocs.pipelineCode
 };
@@ -103,7 +123,8 @@ export const elementEnabled: ConfigurableElement = {
 	badge: model => model.enabled !== false
 		? <ConfigurableElementBadgeChecked/>
 		: <ConfigurableElementBadgeBanned/>,
-	editor: (model: FileDefModel, onValueChanged: () => void): ReactNode => {
+	editor: (props: ConfigurableElementEditorProps<FileDefModel>) => {
+		const {model, onValueChanged} = props;
 		const onValueChange = (value: PropValue) => {
 			model.enabled = value as boolean;
 			onValueChanged();
@@ -121,7 +142,16 @@ export const elementRoute: ConfigurableElement = {
 			return <ConfigurableElementBadgeMissed/>;
 		}
 	},
-	visibleOn: [ANCHOR_TYPE], visible: visibleOnApi
+	visibleOn: [ANCHOR_TYPE], visible: visibleOnApi,
+	editor: (props: ConfigurableElementEditorProps<PipelineFileDefModel>) => {
+		const {model, onValueChanged} = props;
+		const onValueChange = (value: PropValue) => {
+			model.route = value as string;
+			onValueChanged();
+		};
+		return <UnwrappedInput onValueChange={onValueChange} value={model.route ?? ''}/>;
+	},
+	helpDoc: HelpDocs.pipelineRoute
 };
 export const elementMethod: ConfigurableElement = {
 	code: 'method', label: 'Method', anchor: 'method',
@@ -131,13 +161,88 @@ export const elementMethod: ConfigurableElement = {
 		} else {
 			return <ConfigurableElementBadgeMissed/>;
 		}
-	}
+	},
+	editor: (props: ConfigurableElementEditorProps<PipelineFileDefModel>) => {
+		const {model, onValueChanged} = props;
+		const onValueChange = (value: PropValue) => {
+			model.method = value as PipelineFileDefModel['method'];
+			onValueChanged();
+		};
+		const options = [
+			{value: 'get', label: 'GET'},
+			{value: 'post', label: 'POST'},
+			{value: 'put', label: 'PUT'},
+			{value: 'delete', label: 'DELETE'},
+			{value: 'patch', label: 'PATCH'}
+		];
+		return <UnwrappedDropdown value={model.method ?? ''} onValueChange={onValueChange} options={options}
+		                          clearable={false}
+		                          style={{justifySelf: 'start', width: 'unset', minWidth: 'min(200px, 100%)'}}/>;
+	},
+	helpDoc: HelpDocs.pipelineMethod
+};
+
+interface AllIgnoredOrArrayEditorProps extends ConfigurableElementEditorProps<PipelineFileDefModel> {
+	name: 'headers' | 'queryParams';
+	lead: ReactNode;
+}
+
+const AllIgnoredOrArrayEditor = (props: AllIgnoredOrArrayEditorProps) => {
+	const {model, onValueChanged, name, lead} = props;
+
+	const inputRef = useRef<HTMLInputElement>(null);
+
+	const writeToModel = (value?: string) => {
+		const array = (value ?? '').split(/[,;]/).map(header => header.trim()).filter(header => VUtils.isNotBlank(header));
+		if (array.length === 0) {
+			model[name] = [];
+		} else {
+			model[name] = array;
+		}
+	};
+	const onValueChange = (value: PropValue) => {
+		if (value === 'all') {
+			model[name] = true;
+		} else if (value === 'ignored') {
+			delete model[name];
+		} else {
+			writeToModel(model.temporary?.[name]);
+			setTimeout(() => inputRef.current?.querySelector('input')?.focus(), 50);
+		}
+		onValueChanged();
+	};
+	const onArrayValueChange = (value: PropValue) => {
+		writeToModel(value as string);
+		model.temporary = {...(model.temporary ?? {}), [name]: value as string};
+		onValueChanged();
+	};
+	const value = model[name] == null ? 'ignored' : model[name] === true ? 'all' : 'customized';
+	const options = [
+		{value: 'all', label: Labels.All},
+		{value: 'ignored', label: Labels.Ignored},
+		{value: 'customized', label: Labels.Customized}
+	];
+
+	return <VerticalLinesEditor>
+		<UnwrappedDropdown value={value} onValueChange={onValueChange} options={options}
+		                   clearable={false}
+		                   style={{justifySelf: 'start', width: 'unset', minWidth: 'min(200px, 100%)'}}/>
+		<UnwrappedDecorateInput leads={[lead]}
+		                        value={model.temporary?.[name] ?? ''} onValueChange={onArrayValueChange}
+		                        disabled={value !== 'customized'} ref={inputRef}
+		                        data-di-prefix-text={true}/>
+	</VerticalLinesEditor>;
+};
+const HeadersEditor = (props: ConfigurableElementEditorProps<PipelineFileDefModel>) => {
+	return <AllIgnoredOrArrayEditor {...props} name="headers" lead={Labels.ParameterNames}/>;
 };
 export const elementHeaders: ConfigurableElement = {
 	code: 'headers', label: 'Headers', anchor: 'headers',
 	badge: (model: PipelineFileDefModel): ReactNode => {
 		return allOrArray(model.headers);
-	}
+	},
+	editor: HeadersEditor,
+	helpDoc: HelpDocs.pipelineHeaders
 };
 export const elementPathParams: ConfigurableElement = {
 	code: 'pathParams', label: 'Path Parameters', anchor: 'path-params',
@@ -145,11 +250,16 @@ export const elementPathParams: ConfigurableElement = {
 		return allOrArray(model.pathParams);
 	}
 };
+const QueryParamsEditor = (props: ConfigurableElementEditorProps<PipelineFileDefModel>) => {
+	return <AllIgnoredOrArrayEditor {...props} name="queryParams" lead={Labels.ParameterNames}/>;
+};
 export const elementQueryParams: ConfigurableElement = {
 	code: 'queryParams', label: 'Query Parameters', anchor: 'query-params',
 	badge: (model: PipelineFileDefModel): ReactNode => {
 		return allOrArray(model.queryParams);
-	}
+	},
+	editor: QueryParamsEditor,
+	helpDoc: HelpDocs.pipelineQueryParams
 };
 export const elementBody: ConfigurableElement = {
 	code: 'body', label: 'Body', anchor: 'body',
@@ -177,7 +287,7 @@ export const elementRequest: ConfigurableElement = {
 		elementMethod, elementHeaders, elementPathParams, elementQueryParams,
 		elementBody, elementFiles
 	],
-	visibleOn: [ANCHOR_TYPE], visible: visibleOnApi
+	visibleOn: [ANCHOR_TYPE], visible: visibleOnApi, group: true
 };
 export const elementExposeHeaders: ConfigurableElement = {
 	code: 'exposeHeaders', label: 'Expose Headers', anchor: 'expose-headers',
@@ -203,25 +313,26 @@ export const elementExposeFile: ConfigurableElement = {
 export const elementResponse: ConfigurableElement = {
 	code: 'response', label: 'Response', anchor: 'response',
 	children: [elementExposeHeaders, elementExposeFile],
-	visibleOn: [ANCHOR_TYPE], visible: visibleOnApi
+	visibleOn: [ANCHOR_TYPE], visible: visibleOnApi, group: true
 };
 export const elementType: ConfigurableElement = {
 	code: 'type', label: 'Type', anchor: ANCHOR_TYPE,
 	badge: (model: FileDefModel): ReactNode => {
 		switch (true) {
-			case (model as PipelineFileDefModel).api === true:
-				return 'REST API';
+			case model.type === 'pipeline' && (model as PipelineFileDefModel).api === true:
+				return Labels.PipelineTypeApi;
 			case  model.type === 'pipeline':
-				return 'Pipeline';
+				return Labels.PipelineTypePipeline;
 			case model.type === 'step-sets':
-				return 'Step Sets';
+				return Labels.PipelineTypeStepSet;
 			case model.type === 'step':
-				return 'Step';
+				return Labels.PipelineTypeStep;
 			default:
 				return <ConfigurableElementBadgeMissed/>;
 		}
 	},
-	editor: (model: FileDefModel, onValueChanged: () => void): ReactNode => {
+	editor: (props: ConfigurableElementEditorProps<FileDefModel>) => {
+		const {model, onValueChanged} = props;
 		const onValueChange = (value: PropValue) => {
 			if (value === 'api') {
 				model.type = 'pipeline';
@@ -237,12 +348,14 @@ export const elementType: ConfigurableElement = {
 		};
 		const value = ((model as PipelineFileDefModel).api === true ? 'api' : model.type) ?? 'pipeline';
 		const options = [
-			{value: 'pipeline', label: 'Independent Pipeline'},
-			{value: 'api', label: 'Pipeline as RESTful API'},
-			{value: 'step-sets', label: 'Set of Steps'},
-			{value: 'step', label: 'Independent Step'}
+			{value: 'pipeline', label: Labels.PipelineTypePipeline},
+			{value: 'api', label: Labels.PipelineTypeApi},
+			{value: 'step-sets', label: Labels.PipelineTypeStepSet},
+			{value: 'step', label: Labels.PipelineTypeStep}
 		];
-		return <UnwrappedDropdown value={value} onValueChange={onValueChange} options={options}/>;
+		return <UnwrappedDropdown value={value} onValueChange={onValueChange} options={options}
+		                          clearable={false}
+		                          style={{justifySelf: 'start', width: 'unset', minWidth: 'min(200px, 100%)'}}/>;
 	},
 	helpDoc: HelpDocs.pipelineType,
 	children: [elementRoute, elementRequest, elementResponse]

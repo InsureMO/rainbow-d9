@@ -6,7 +6,7 @@ import React, {useEffect, useRef, useState} from 'react';
 import {FileDef, FileDefLoader} from '../definition';
 import {EndNodeModel, initEngine, StartNodeModel} from '../diagram';
 import {Labels} from '../labels';
-import {EditorProps} from '../types';
+import {EditorProps, MarkdownContent} from '../types';
 import {ErrorBoundary} from './error-boundary';
 import {EditorWrapper, ParseError} from './widgets';
 
@@ -24,6 +24,14 @@ const createDiagramEngine = () => {
 	return engine;
 };
 
+const parseContent = (parser: FileDefLoader, content?: MarkdownContent): FileDef => {
+	const def = parser.parse(content ?? '');
+	// guard
+	if (VUtils.isBlank(def.type)) {
+		def.type = 'pipeline';
+	}
+	return def;
+};
 export const EditorKernel = (props: EditorProps) => {
 	const {content, parser} = props;
 
@@ -31,7 +39,7 @@ export const EditorKernel = (props: EditorProps) => {
 	const [state, setState] = useState<EditorKernelState>(() => {
 		const engine = createDiagramEngine();
 		try {
-			const def = parser.parse(content ?? '');
+			const def = parseContent(parser, content ?? '');
 			return {engine, content, parser, def};
 		} catch (e) {
 			console.error(e);
@@ -43,7 +51,7 @@ export const EditorKernel = (props: EditorProps) => {
 			return;
 		}
 		try {
-			const def = parser.parse(content ?? '');
+			const def = parseContent(parser, content ?? '');
 			setState(state => ({engine: state.engine, content, parser, def}));
 		} catch (e) {
 			console.error(e);

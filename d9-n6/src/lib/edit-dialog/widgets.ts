@@ -89,6 +89,14 @@ export const EditDialogContentContainer = styled.div.attrs({[DOM_KEY_WIDGET]: 'o
         h5, h6 {
             font-size: 1em;
         }
+
+        p, blockquote, ul, ol, dl, table, pre, details {
+            margin-bottom: 4px;
+        }
+
+        > *:last-child {
+            margin-bottom: 0;
+        }
     }
 `;
 export const EditDialogContentInitializer = styled.div.attrs({[DOM_KEY_WIDGET]: 'o23-playground-edit-dialog-content-initializer'})`
@@ -307,7 +315,7 @@ export const NavigatorElementContainer = styled.div.attrs<{ level: number }>(
     padding: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_PADDING};
     border-radius: 0;
     cursor: pointer;
-    transition: all ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION};
+    transition: background-color ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION}, border-radius ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION}, font-weight ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION};
 
     &:hover {
         background-color: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_HOVER_COLOR};
@@ -467,8 +475,25 @@ export const SpecificElementsContainer = styled.div.attrs({
 export const SpecificElementLabel = styled.div.attrs({[DOM_KEY_WIDGET]: 'o23-playground-edit-dialog-specific-element-label'})`
     display: flex;
     position: relative;
-    align-items: center;
+    align-items: start;
     min-height: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_HELP_LABEL_HEIGHT};
+
+    &[data-group=true] {
+        font-weight: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_GROUP_FONT_WEIGHT};
+        border-bottom: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_GROUP_BORDER};
+        margin-right: calc(-1 * ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_SPECIFIC_GRID_COLUMN_GAP});
+
+        + div[data-w=o23-playground-edit-dialog-specific-element-editor-placeholder] {
+            border-bottom: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_GROUP_BORDER};
+        }
+    }
+
+    > span:first-child {
+        height: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_HELP_LABEL_HEIGHT};
+        display: inline-flex;
+        align-items: center;
+        position: relative;
+    }
 `;
 export const SpecificElementHelpBadge = styled.div.attrs({[DOM_KEY_WIDGET]: 'o23-playground-edit-dialog-specific-element-help-badge'})`
     display: flex;
@@ -506,7 +531,7 @@ export const SpecificElementHelpDoc = styled.div.attrs({[DOM_KEY_WIDGET]: 'o23-p
         overflow: visible;
     }
 
-    > div.markdown-body {
+    > div {
         font-size: ${PlaygroundCssVars.SPECIFIC_MARKDOWN_FONT_SIZE};
     }
 `;

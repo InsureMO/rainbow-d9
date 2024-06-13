@@ -11,6 +11,7 @@ export const N2Tabs = () => {
 	const externalDefs = {
 		tabs: {
 			tab4: {
+				// @ts-ignore
 				def: (marker?: string) => {
 					return {
 						$wt: 'Section',

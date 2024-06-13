@@ -26,7 +26,7 @@ export interface DialogSpecificElementProps {
 
 export const DialogSpecificElementWrapper = (props: DialogSpecificElementProps) => {
 	const {element, model} = props;
-	const {anchor, label, editor, helpDoc} = element;
+	const {anchor, label, editor: Editor, helpDoc, group} = element;
 
 	const {fire} = useEditDialogEventBus();
 	const [showHelp, setShowHelp] = useState(false);
@@ -41,7 +41,7 @@ export const DialogSpecificElementWrapper = (props: DialogSpecificElementProps) 
 	const hasHelpDoc = VUtils.isNotBlank(helpDoc);
 
 	return <>
-		<SpecificElementLabel>
+		<SpecificElementLabel data-group={group}>
 			<span>{label}</span>
 			{hasHelpDoc
 				? <SpecificElementHelpBadge data-visible={true} onClick={onHelpBadgeClicked}>
@@ -49,14 +49,15 @@ export const DialogSpecificElementWrapper = (props: DialogSpecificElementProps) 
 				</SpecificElementHelpBadge>
 				: null}
 		</SpecificElementLabel>
-		{editor != null ? editor(model, onValueChanged) : <SpecificElementEditorPlaceholder/>}
+		{Editor != null ? <Editor model={model} onValueChanged={onValueChanged}/> : <SpecificElementEditorPlaceholder/>}
 		{hasHelpDoc
 			? <SpecificElementHelpDoc data-visible={showHelp}>
 				<HelpDoc content={helpDoc}/>
 			</SpecificElementHelpDoc>
-			: null}
+			: <SpecificElementHelpDoc/>}
 	</>;
 };
+
 export const DialogSpecificElement = (props: DialogSpecificElementProps) => {
 	const {element, model} = props;
 

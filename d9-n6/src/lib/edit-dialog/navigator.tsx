@@ -1,6 +1,7 @@
 import React from 'react';
 import {Labels} from '../labels';
 import {useElementVisible} from './hooks';
+import {useElementValueChange} from './hooks/use-element-value-change';
 import {ConfigurableElement, ConfigurableModel} from './types';
 import {
 	EditDialogNavigatorContainer,
@@ -26,6 +27,8 @@ export const DialogNavigatorElementWrapper = (props: DialogNavigatorElementProps
 	const {element, model, level, last} = props;
 	const {label, badge} = element;
 
+	useElementValueChange(element);
+
 	return <NavigatorElementContainer level={level}>
 		{level !== 0 // level starts from 0
 			? new Array(level + 1).fill(1).map((_, index) => {
@@ -46,6 +49,7 @@ export const DialogNavigatorElementWrapper = (props: DialogNavigatorElementProps
 			: null}
 	</NavigatorElementContainer>;
 };
+
 export const DialogNavigatorElement = (props: DialogNavigatorElementProps) => {
 	const {element, model, level, last} = props;
 

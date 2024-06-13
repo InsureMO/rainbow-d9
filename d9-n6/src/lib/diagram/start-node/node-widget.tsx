@@ -4,7 +4,7 @@ import {DOM_KEY_WIDGET} from '@rainbow-d9/n2';
 import React from 'react';
 import styled from 'styled-components';
 import {FileDefs} from '../../configurable-model';
-import {isPipelineDef, PipelineFileDef} from '../../definition';
+import {isPipelineDef, isStepSetsDef, PipelineFileDef} from '../../definition';
 import {DialogContent} from '../../edit-dialog';
 import {HelpDocs} from '../../help-docs';
 import {Labels} from '../../labels';
@@ -20,8 +20,8 @@ import {
 	NodeTitleSpreader,
 	NodeWrapper
 } from '../common';
+import {ApiVariablePortWidget} from './api-variable-port';
 import {StartNodeModel} from './node-model';
-import {RestApiVariablePortWidget} from './rest-api-variable-port';
 
 export interface StartNodeWidgetProps {
 	// node and engine props are required
@@ -97,18 +97,18 @@ export const StartNodeBody = styled(NodeBody).attrs({
 	}
 })``;
 
-export const RestApiMethodPortWidget = (props: { def: PipelineFileDef }) => {
+export const ApiMethodPortWidget = (props: { def: PipelineFileDef }) => {
 	const {def} = props;
 
 	const {method} = def;
 	const all: Undefinable<boolean> = VUtils.isNotBlank(method);
 
-	return <RestApiVariablePortWidget label="Method" required={true}
-	                                  defined={all === true} all={all}
-	                                  allAsBoolean={false} allAsGiven={`${method ?? ''}`.toUpperCase().trim()}/>;
+	return <ApiVariablePortWidget label="Method" required={true}
+	                              defined={all === true} all={all}
+	                              allAsBoolean={false} allAsGiven={`${method ?? ''}`.toUpperCase().trim()}/>;
 };
 
-export const RestApiHeadersPortWidget = (props: { def: PipelineFileDef }) => {
+export const ApiHeadersPortWidget = (props: { def: PipelineFileDef }) => {
 	const {def} = props;
 
 	const {headers} = def;
@@ -123,11 +123,11 @@ export const RestApiHeadersPortWidget = (props: { def: PipelineFileDef }) => {
 		}
 	}
 
-	return <RestApiVariablePortWidget label="Headers" required={false}
-	                                  defined={count != null || all != null} count={count} all={all}/>;
+	return <ApiVariablePortWidget label="Headers" required={false}
+	                              defined={count != null || all != null} count={count} all={all}/>;
 };
 
-export const RestApiPathParamsPortWidget = (props: { def: PipelineFileDef }) => {
+export const ApiPathParamsPortWidget = (props: { def: PipelineFileDef }) => {
 	const {def} = props;
 
 	const {pathParams} = def;
@@ -142,11 +142,11 @@ export const RestApiPathParamsPortWidget = (props: { def: PipelineFileDef }) => 
 		}
 	}
 
-	return <RestApiVariablePortWidget label="Path Parameters" required={false}
-	                                  defined={count != null || all != null} count={count} all={all}/>;
+	return <ApiVariablePortWidget label="Path Parameters" required={false}
+	                              defined={count != null || all != null} count={count} all={all}/>;
 };
 
-export const RestApiQueryParamsPortWidget = (props: { def: PipelineFileDef }) => {
+export const ApiQueryParamsPortWidget = (props: { def: PipelineFileDef }) => {
 	const {def} = props;
 
 	const {queryParams} = def;
@@ -161,20 +161,20 @@ export const RestApiQueryParamsPortWidget = (props: { def: PipelineFileDef }) =>
 		}
 	}
 
-	return <RestApiVariablePortWidget label="Query Parameters" required={false}
-	                                  defined={count != null || all != null} count={count} all={all}/>;
+	return <ApiVariablePortWidget label="Query Parameters" required={false}
+	                              defined={count != null || all != null} count={count} all={all}/>;
 };
 
-export const RestApiBodyPortWidget = (props: { def: PipelineFileDef }) => {
+export const ApiBodyPortWidget = (props: { def: PipelineFileDef }) => {
 	const {def} = props;
 
 	const {body} = def;
 
-	return <RestApiVariablePortWidget label="Body" required={false} defined={body != null}
-	                                  all={body} allAsBoolean={true}/>;
+	return <ApiVariablePortWidget label="Body" required={false} defined={body != null}
+	                              all={body} allAsBoolean={true}/>;
 };
 
-export const RestApiFilesPortWidget = (props: { def: PipelineFileDef }) => {
+export const ApiFilesPortWidget = (props: { def: PipelineFileDef }) => {
 	const {def} = props;
 
 	const {files} = def;
@@ -183,11 +183,11 @@ export const RestApiFilesPortWidget = (props: { def: PipelineFileDef }) => {
 		all = true;
 	}
 
-	return <RestApiVariablePortWidget label="Files" required={false} defined={all != null}
-	                                  all={all} allAsBoolean={true}/>;
+	return <ApiVariablePortWidget label="Files" required={false} defined={all != null}
+	                              all={all} allAsBoolean={true}/>;
 };
 
-export const RestApiExposeHeadersPortWidget = (props: { def: PipelineFileDef }) => {
+export const ApiExposeHeadersPortWidget = (props: { def: PipelineFileDef }) => {
 	const {def} = props;
 
 	const {exposeHeaders} = def;
@@ -196,16 +196,16 @@ export const RestApiExposeHeadersPortWidget = (props: { def: PipelineFileDef }) 
 		count = (void 0);
 	}
 
-	return <RestApiVariablePortWidget label="Expose Headers" required={false} defined={count != null} count={count}/>;
+	return <ApiVariablePortWidget label="Expose Headers" required={false} defined={count != null} count={count}/>;
 };
 
-export const RestApiExposeFilePortWidget = (props: { def: PipelineFileDef }) => {
+export const ApiExposeFilePortWidget = (props: { def: PipelineFileDef }) => {
 	const {def} = props;
 
 	const {exposeFile} = def;
 
-	return <RestApiVariablePortWidget label="Expose File" required={false} defined={exposeFile != null}
-	                                  all={exposeFile} allAsBoolean={true}/>;
+	return <ApiVariablePortWidget label="Expose File" required={false} defined={exposeFile != null}
+	                              all={exposeFile} allAsBoolean={true}/>;
 };
 
 export const StartNodeWidget = (props: StartNodeWidgetProps) => {
@@ -220,7 +220,7 @@ export const StartNodeWidget = (props: StartNodeWidgetProps) => {
 	} = (() => {
 		if (isPipelineDef(def)) {
 			if (VUtils.isNotBlank(def.route)) {
-				// route defined, exposed as rest api
+				// route defined, exposed as api
 				return {
 					isApi: true, showRouteLack: false, secondTitle: def.route.trim(), secondTitleRole: 'route'
 				};
@@ -228,7 +228,7 @@ export const StartNodeWidget = (props: StartNodeWidgetProps) => {
 				// route not defined, standard pipeline
 				return {
 					isApi: false, showRouteLack: false,
-					secondTitle: Labels.TypeOfStandardPipeline,
+					secondTitle: Labels.PipelineTypePipeline,
 					secondTitleRole: (void 0)
 				};
 			}
@@ -236,7 +236,7 @@ export const StartNodeWidget = (props: StartNodeWidgetProps) => {
 			// not a pipeline, should be a step or a step sets
 			return {
 				isApi: false, showRouteLack: false,
-				secondTitle: Labels.TypeOfStepOrSets(def.type),
+				secondTitle: isStepSetsDef(def) ? Labels.PipelineTypeStepSet : Labels.PipelineTypeStep,
 				secondTitleRole: (void 0)
 			};
 		}
@@ -267,15 +267,15 @@ export const StartNodeWidget = (props: StartNodeWidgetProps) => {
 		<StartNodeBody>
 			{isApi
 				? <>
-					{showRouteLack ? <RestApiVariablePortWidget label="Route" required={true} defined={false}/> : null}
-					<RestApiMethodPortWidget def={def as PipelineFileDef}/>
-					<RestApiHeadersPortWidget def={def as PipelineFileDef}/>
-					<RestApiPathParamsPortWidget def={def as PipelineFileDef}/>
-					<RestApiQueryParamsPortWidget def={def as PipelineFileDef}/>
-					<RestApiBodyPortWidget def={def as PipelineFileDef}/>
-					<RestApiFilesPortWidget def={def as PipelineFileDef}/>
-					<RestApiExposeHeadersPortWidget def={def as PipelineFileDef}/>
-					<RestApiExposeFilePortWidget def={def as PipelineFileDef}/>
+					{showRouteLack ? <ApiVariablePortWidget label="Route" required={true} defined={false}/> : null}
+					<ApiMethodPortWidget def={def as PipelineFileDef}/>
+					<ApiHeadersPortWidget def={def as PipelineFileDef}/>
+					<ApiPathParamsPortWidget def={def as PipelineFileDef}/>
+					<ApiQueryParamsPortWidget def={def as PipelineFileDef}/>
+					<ApiBodyPortWidget def={def as PipelineFileDef}/>
+					<ApiFilesPortWidget def={def as PipelineFileDef}/>
+					<ApiExposeHeadersPortWidget def={def as PipelineFileDef}/>
+					<ApiExposeFilePortWidget def={def as PipelineFileDef}/>
 				</>
 				: null}
 			<NextStepPortWidget port={node.getPort(NextStepPortModel.NAME) as NextStepPortModel} engine={engine}/>

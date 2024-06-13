@@ -7,7 +7,7 @@ const NODE_START_COLOR = '#ffb56b';
 const NODE_END_COLOR = '#e0b35f';
 const NEXT_STEP_PORT_COLOR = '#1f6b73';
 const PREVIOUS_STEP_PORT_COLOR = '#00618b';
-const REST_API_VARIABLE_PORT_COLOR = '#87a55f';
+const API_VARIABLE_PORT_COLOR = '#87a55f';
 export const PlaygroundCssVars = {
 	EDITOR_BACKGROUND_BLOCK_SIZE,
 	EDITOR_BACKGROUND_LINE_COLOR,
@@ -91,6 +91,9 @@ export const PlaygroundCssVars = {
 	EDIT_DIALOG_CONFIGURABLE_ELEMENT_HELP_LABEL_HEIGHT: `var(--o23-playground-dialog-configurable-element-help-label-height, ${CssVars.INPUT_HEIGHT})`,
 	EDIT_DIALOG_CONFIGURABLE_ELEMENT_HELP_BADGE_HEIGHT: `var(--o23-playground-dialog-configurable-element-help-badge-height, ${CssVars.INPUT_HEIGHT})`,
 	EDIT_DIALOG_CONFIGURABLE_ELEMENT_HELP_BADGE_COLOR: `var(--o23-playground-dialog-configurable-element-help-badge-color, ${CssVars.PRIMARY_COLOR})`,
+	EDIT_DIALOG_CONFIGURABLE_ELEMENT_GROUP_FONT_WEIGHT: 'var(--o23-playground-dialog-configurable-element-group-font-weight, 600)',
+	EDIT_DIALOG_CONFIGURABLE_ELEMENT_GROUP_BORDER: `var(--o23-playground-dialog-configurable-element-group-border, 1px solid rgb(216, 222, 228))`,
+	EDIT_DIALOG_CONFIGURABLE_ELEMENT_SPECIFIC_INPUT_PREFIX_FONT_SIZE: 'var(--o23-playground-dialog-configurable-element-specific-input-prefix-font-size, max(0.8em, 12px))',
 	// node common
 	NODE_BORDER_RADIUS: 'var(--o23-playground-node-border-radius, 8px)',
 	NODE_BACKGROUND: `var(--o23-playground-node-background, ${CssVars.BACKGROUND_COLOR})`,
@@ -113,19 +116,19 @@ export const PlaygroundCssVars = {
 	NODE_PREVIOUS_STEP_PORT_BACKGROUND: `var(--o23-playground-previous-step-port-background, ${PREVIOUS_STEP_PORT_COLOR})`,
 	NODE_PREVIOUS_STEP_PORT_BORDER: `var(--o23-playground-previous-step-port-border, 1px solid ${color(PREVIOUS_STEP_PORT_COLOR).darken(0.1).opaquer(0.5)})`,
 	NODE_PREVIOUS_STEP_PORT_PADDING: 'var(--o23-playground-previous-step-port-padding, 0 12px 0 8px)',
-	// rest api variable port
-	NODE_REST_API_VARIABLE_PORT_FONT_SIZE: 'var(--o23-playground-rest-api-variable-port-font-size, 14px)',
-	NODE_REST_API_VARIABLE_PORT_FONT_WEIGHT: 'var(--o23-playground-rest-api-variable-port-font-weight, 400)',
-	NODE_REST_API_VARIABLE_PORT_COLOR: `var(--o23-playground-rest-api-variable-port-color, ${CssVars.INVERT_COLOR})`,
-	NODE_REST_API_VARIABLE_PORT_BACKGROUND: `var(--o23-playground-rest-api-variable-port-background, ${REST_API_VARIABLE_PORT_COLOR})`,
-	NODE_REST_API_VARIABLE_PORT_BORDER: `var(--o23-playground-rest-api-variable-port-border, 1px solid ${color(REST_API_VARIABLE_PORT_COLOR).darken(0.1).opaquer(0.5)})`,
-	NODE_REST_API_VARIABLE_PORT_PADDING: 'var(--o23-playground-rest-api-variable-port-padding, 0 12px 0 8px)',
-	NODE_REST_API_VARIABLE_PORT_UNDEFINED_BACKGROUND: `var(--o23-playground-rest-api-variable-port-undefined-background, ${CssConstants.WAIVE_COLOR})`,
-	NODE_REST_API_VARIABLE_PORT_UNDEFINED_BORDER: `var(--o23-playground-rest-api-variable-port-undefined-border, 1px solid ${color(CssConstants.WAIVE_COLOR).darken(0.1).opaquer(0.5)})`,
-	NODE_REST_API_VARIABLE_PORT_LACKING_BACKGROUND: `var(--o23-playground-rest-api-variable-port-lacking-background, ${CssVars.DANGER_COLOR})`,
-	NODE_REST_API_VARIABLE_PORT_LACKING_BORDER: `var(--o23-playground-rest-api-variable-port-lacking-border, 1px solid ${color(CssConstants.DANGER_COLOR).darken(0.1).opaquer(0.5)})`,
-	NODE_REST_API_VARIABLE_PORT_BADGE_BACKGROUND: `var(--o23-playground-rest-api-variable-port-badge-background, ${CssVars.SUCCESS_COLOR})`,
-	NODE_REST_API_VARIABLE_PORT_BADGE_BORDER: `var(--o23-playground-rest-api-variable-port-badge-background, 1px solid ${CssVars.INVERT_COLOR})`,
+	// api variable port
+	NODE_API_VARIABLE_PORT_FONT_SIZE: 'var(--o23-playground-api-variable-port-font-size, 14px)',
+	NODE_API_VARIABLE_PORT_FONT_WEIGHT: 'var(--o23-playground-api-variable-port-font-weight, 400)',
+	NODE_API_VARIABLE_PORT_COLOR: `var(--o23-playground-api-variable-port-color, ${CssVars.INVERT_COLOR})`,
+	NODE_API_VARIABLE_PORT_BACKGROUND: `var(--o23-playground-api-variable-port-background, ${API_VARIABLE_PORT_COLOR})`,
+	NODE_API_VARIABLE_PORT_BORDER: `var(--o23-playground-api-variable-port-border, 1px solid ${color(API_VARIABLE_PORT_COLOR).darken(0.1).opaquer(0.5)})`,
+	NODE_API_VARIABLE_PORT_PADDING: 'var(--o23-playground-api-variable-port-padding, 0 12px 0 8px)',
+	NODE_API_VARIABLE_PORT_UNDEFINED_BACKGROUND: `var(--o23-playground-api-variable-port-undefined-background, ${CssConstants.WAIVE_COLOR})`,
+	NODE_API_VARIABLE_PORT_UNDEFINED_BORDER: `var(--o23-playground-api-variable-port-undefined-border, 1px solid ${color(CssConstants.WAIVE_COLOR).darken(0.1).opaquer(0.5)})`,
+	NODE_API_VARIABLE_PORT_LACKING_BACKGROUND: `var(--o23-playground-api-variable-port-lacking-background, ${CssVars.DANGER_COLOR})`,
+	NODE_API_VARIABLE_PORT_LACKING_BORDER: `var(--o23-playground-api-variable-port-lacking-border, 1px solid ${color(CssConstants.DANGER_COLOR).darken(0.1).opaquer(0.5)})`,
+	NODE_API_VARIABLE_PORT_BADGE_BACKGROUND: `var(--o23-playground-api-variable-port-badge-background, ${CssVars.SUCCESS_COLOR})`,
+	NODE_API_VARIABLE_PORT_BADGE_BORDER: `var(--o23-playground-api-variable-port-badge-background, 1px solid ${CssVars.INVERT_COLOR})`,
 	// start node
 	NODE_START_BORDER_COLOR: `var(--o23-playground-node-start-border-color, ${NODE_START_COLOR})`,
 	NODE_START_BORDER: `var(--o23-playground-node-start-border, 2px solid ${NODE_START_COLOR})`,

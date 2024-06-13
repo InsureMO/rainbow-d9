@@ -5,6 +5,11 @@ import {MarkdownContent} from '../types';
 export type ConfigurableModel = any;
 export type ConfigurableElementAnchor = string;
 
+export interface ConfigurableElementEditorProps<M extends ConfigurableModel = ConfigurableModel> {
+	model: M,
+	onValueChanged: () => void
+}
+
 export interface ConfigurableElement {
 	// both for navigator and specific
 	code: string;
@@ -18,6 +23,6 @@ export interface ConfigurableElement {
 	badge?: (model: ConfigurableModel) => ReactNode;
 	// for specific only
 	group?: true;
-	editor?: (model: ConfigurableModel, onValueChanged: () => void) => ReactNode;
+	editor?: (props: ConfigurableElementEditorProps) => JSX.Element;
 	helpDoc?: MarkdownContent;
 }
