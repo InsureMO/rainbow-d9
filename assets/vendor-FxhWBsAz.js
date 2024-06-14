@@ -1,6 +1,6 @@
 import { g as getDefaultExportFromCjs, c as commonjsGlobal } from "./babel-zvTTnt5j.js";
 import { s as stringifyPosition, p as pointStart } from "./unist-QXG10VXN.js";
-import { h as hastToReact } from "./react-base-dlWpmanK.js";
+import { h as hastToReact } from "./react-base-1xesxUK0.js";
 function _mergeNamespaces(n2, m2) {
   for (var i2 = 0; i2 < m2.length; i2++) {
     const e2 = m2[i2];
@@ -26136,7 +26136,7 @@ const defaultKeymap = /* @__PURE__ */ [
   { key: "Alt-A", run: toggleBlockComment }
 ].concat(standardKeymap);
 const indentWithTab = { key: "Tab", run: indentMore, shift: indentLess };
-var define_process_env_default = { GITHUB_STATE: "/home/runner/work/_temp/_runner_file_commands/save_state_255382c5-f8c0-48e7-8d72-e030d1f1c1f4", npm_package_scripts_build_n5_ci: "cd ./d9-n5 && yarn build-ci", npm_package_scripts_build_sample_cra: "cd ./d9-sample-cra && yarn build", STATS_TRP: "true", DEPLOYMENT_BASEPATH: "/opt/runner", DOTNET_NOLOGO: "1", npm_package_scripts_build_n6_ci: "cd ./d9-n6 && yarn build-ci", npm_package_dependencies__vitejs_plugin_react: "^4.2.1", USER: "runner", npm_config_version_commit_hooks: "true", npm_config_user_agent: "yarn/1.22.21 npm/? node/v18.20.3 linux x64", npm_package_dependencies__types_jest: "^29.5.4", CI: "true", npm_config_bin_links: "true", npm_package_bugs_url: "https://github.com/InsureMO/rainbow-d9/issues", npm_config_wrap_output: "", RUNNER_ENVIRONMENT: "github-hosted", GITHUB_ENV: "/home/runner/work/_temp/_runner_file_commands/set_env_255382c5-f8c0-48e7-8d72-e030d1f1c1f4", PIPX_HOME: "/opt/pipx", npm_node_execpath: "/opt/hostedtoolcache/node/18.20.3/x64/bin/node", npm_package_scripts_build_thai_all_ci: "yarn build-thai-plan-selection-ci", npm_config_init_version: "1.0.0", npm_package_devDependencies_gh_pages: "^6.1.1", npm_package_dependencies__babel_plugin_proposal_private_property_in_object: "^7.21.11", JAVA_HOME_8_X64: "/usr/lib/jvm/temurin-8-jdk-amd64", SHLVL: "1", HOME: "/home/runner", OLDPWD: "/home/runner/work/rainbow-d9/rainbow-d9", npm_package_browserslist_production_0: ">0.2%", RUNNER_TEMP: "/home/runner/work/_temp", GITHUB_EVENT_PATH: "/home/runner/work/_temp/_github_workflow/event.json", npm_package_scripts_build_all: "yarn build-n123 && yarn build-n5 && yarn build-n6 && yarn build-echarts && yarn build-thai-all", npm_package_browserslist_production_1: "not dead", npm_package_dependencies_react_syntax_highlighter: "^15.5.0", JAVA_HOME_11_X64: "/usr/lib/jvm/temurin-11-jdk-amd64", PIPX_BIN_DIR: "/opt/pipx_bin", GITHUB_REPOSITORY_OWNER: "InsureMO", npm_package_volta_node: "22.2.0", npm_config_init_license: "MIT", npm_package_browserslist_production_2: "not op_mini all", GRADLE_HOME: "/usr/share/gradle-8.8", ANDROID_NDK_LATEST_HOME: "/usr/local/lib/android/sdk/ndk/26.3.11579264", JAVA_HOME_21_X64: "/usr/lib/jvm/temurin-21-jdk-amd64", STATS_RDCL: "true", GITHUB_RETENTION_DAYS: "90", YARN_WRAP_OUTPUT: "false", npm_package_scripts_build_thai_plan_selection_ci: "cd ./d9-thai-plan-selection && yarn build-ci", npm_package_scripts_build_n1: "cd ./d9-n1 && yarn build", npm_config_version_tag_prefix: "v", npm_package_dependencies__rainbow_d9_n2: "1.1.31", GITHUB_REPOSITORY_OWNER_ID: "38915232", POWERSHELL_DISTRIBUTION_CHANNEL: "GitHub-Actions-ubuntu22", AZURE_EXTENSION_DIR: "/opt/az/azcliextensions", GITHUB_HEAD_REF: "", npm_package_scripts_build_n2: "cd ./d9-n2 && yarn build", npm_package_dependencies__types_styled_components: "^5.1.34", npm_package_dependencies__rainbow_d9_n3: "1.1.31", npm_package_dependencies__rainbow_d9_echarts: "1.1.31", SYSTEMD_EXEC_PID: "593", npm_package_scripts_build_echarts: "cd ./d9-echarts && yarn build", npm_package_scripts_build_n3: "cd ./d9-n3 && yarn build", GITHUB_GRAPHQL_URL: "https://api.github.com/graphql", npm_package_description: "Assume the following envs are ready, otherwise contact the tech guy.", npm_package_scripts_predeploy: "npm run build", npm_package_dependencies__rainbow_d9_n5: "1.1.31", GOROOT_1_20_X64: "/opt/hostedtoolcache/go/1.20.14/x64", NVM_DIR: "/home/runner/.nvm", npm_package_readmeFilename: "README.md", npm_package_scripts_build_n5: "cd ./d9-n5 && yarn build", npm_package_dependencies__types_react: "^18.2.21", npm_package_dependencies__testing_library_react: "^13.4.0", npm_package_dependencies__rainbow_d9_n6: "1.1.31", DOTNET_SKIP_FIRST_TIME_EXPERIENCE: "1", GOROOT_1_21_X64: "/opt/hostedtoolcache/go/1.21.11/x64", JAVA_HOME_17_X64: "/usr/lib/jvm/temurin-17-jdk-amd64", ImageVersion: "20240609.1.0", npm_package_scripts_build_n6: "cd ./d9-n6 && yarn build", RUNNER_OS: "Linux", GITHUB_API_URL: "https://api.github.com", GOROOT_1_22_X64: "/opt/hostedtoolcache/go/1.22.4/x64", SWIFT_PATH: "/usr/share/swift/usr/bin", RUNNER_USER: "runner", STATS_V3PS: "true", CHROMEWEBDRIVER: "/usr/local/share/chromedriver-linux64", JOURNAL_STREAM: "8:16260", GITHUB_WORKFLOW: "Publish to NPM", _: "/opt/hostedtoolcache/node/18.20.3/x64/bin/yarn", npm_package_private: "true", npm_package_dependencies_remark_gfm: "4.0.0", npm_package_scripts_build_thai_all: "yarn build-thai-plan-selection", npm_config_registry: "https://registry.yarnpkg.com", ACTIONS_RUNNER_ACTION_ARCHIVE_CACHE: "/opt/actionarchivecache", STATS_D: "true", GITHUB_RUN_ID: "9484300127", STATS_VMFE: "true", npm_package_workspaces_0: "d9-n1", GITHUB_REF_TYPE: "tag", BOOTSTRAP_HASKELL_NONINTERACTIVE: "1", GITHUB_WORKFLOW_SHA: "8da243094f247f0f017474bc63a364fa35ecc4eb", GITHUB_BASE_REF: "", ImageOS: "ubuntu22", npm_package_scripts_build_n123_ci: "yarn build-n1-ci && yarn build-n2-ci && yarn build-n3-ci", npm_package_workspaces_1: "d9-n2", npm_config_ignore_scripts: "", npm_package_scripts_start: "vite", npm_package_dependencies_github_markdown_css: "^5.5.0", GITHUB_WORKFLOW_REF: "InsureMO/rainbow-d9/.github/workflows/release.yml@refs/tags/r-1.1.32", PERFLOG_LOCATION_SETTING: "RUNNER_PERFLOG", GITHUB_ACTION_REPOSITORY: "", npm_package_workspaces_2: "d9-n3", npm_package_browserslist_development_0: "last 1 chrome version", PATH: "/tmp/yarn--1718202312759-0.9979822211246114:/home/runner/work/rainbow-d9/rainbow-d9/d9-sample-cra/node_modules/.bin:/home/runner/.config/yarn/link/node_modules/.bin:/home/runner/work/rainbow-d9/rainbow-d9/node_modules/.bin:/opt/hostedtoolcache/node/18.20.3/x64/libexec/lib/node_modules/npm/bin/node-gyp-bin:/opt/hostedtoolcache/node/18.20.3/x64/lib/node_modules/npm/bin/node-gyp-bin:/opt/hostedtoolcache/node/18.20.3/x64/bin/node_modules/npm/bin/node-gyp-bin:/tmp/yarn--1718202312561-0.18251353772669798:/home/runner/work/rainbow-d9/rainbow-d9/node_modules/.bin:/home/runner/.config/yarn/link/node_modules/.bin:/home/runner/work/rainbow-d9/rainbow-d9/node_modules/.bin:/opt/hostedtoolcache/node/18.20.3/x64/libexec/lib/node_modules/npm/bin/node-gyp-bin:/opt/hostedtoolcache/node/18.20.3/x64/lib/node_modules/npm/bin/node-gyp-bin:/opt/hostedtoolcache/node/18.20.3/x64/bin/node_modules/npm/bin/node-gyp-bin:/opt/hostedtoolcache/node/18.20.3/x64/bin:/snap/bin:/home/runner/.local/bin:/opt/pipx_bin:/home/runner/.cargo/bin:/home/runner/.config/composer/vendor/bin:/usr/local/.ghcup/bin:/home/runner/.dotnet/tools:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin", NODE: "/opt/hostedtoolcache/node/18.20.3/x64/bin/node", ANT_HOME: "/usr/share/ant", DOTNET_MULTILEVEL_LOOKUP: "0", RUNNER_TRACKING_ID: "github_692c4caf-5074-456a-8174-72d7f6b7cf6e", INVOCATION_ID: "d0590df1c3ac4432b55df321d93d6e01", RUNNER_TOOL_CACHE: "/opt/hostedtoolcache", npm_package_name: "@rainbow-d9/sample-cra", npm_package_workspaces_3: "d9-n5", npm_package_browserslist_development_1: "last 1 firefox version", npm_package_repository_type: "git", npm_package_dependencies__types_react_syntax_highlighter: "^15.5.11", npm_package_dependencies__rainbow_d9_thai_plan_selection: "1.1.31", GITHUB_ACTION: "__run_5", GITHUB_RUN_NUMBER: "127", GITHUB_TRIGGERING_ACTOR: "bradwoo8621", RUNNER_ARCH: "X64", XDG_RUNTIME_DIR: "/run/user/1001", AGENT_TOOLSDIRECTORY: "/opt/hostedtoolcache", npm_package_scripts_build_thai_plan_selection: "cd ./d9-thai-plan-selection && yarn build", npm_package_workspaces_4: "d9-n6", npm_package_browserslist_development_2: "last 1 safari version", npm_package_workspaces_5: "d9-echarts", LANG: "C.UTF-8", VCPKG_INSTALLATION_ROOT: "/usr/local/share/vcpkg", npm_package_workspaces_6: "d9-thai-plan-selection", npm_package_dependencies_react_dom: "^18.2.0", CONDA: "/usr/share/miniconda", RUNNER_NAME: "GitHub Actions 18", XDG_CONFIG_HOME: "/home/runner/.config", STATS_VMD: "true", GITHUB_REF_NAME: "r-1.1.32", GITHUB_REPOSITORY: "InsureMO/rainbow-d9", STATS_D_D: "true", npm_lifecycle_script: "vite build", npm_package_workspaces_7: "d9-sample-cra", npm_package_eslintConfig_extends_0: "react-app", npm_package_dependencies_vite_plugin_markdown: "^2.2.0", npm_package_dependencies_react_markdown: "9.0.1", npm_package_dependencies__types_node: "^20.5.3", STATS_UE: "true", ANDROID_NDK_ROOT: "/usr/local/lib/android/sdk/ndk/25.2.9519653", GITHUB_ACTION_REF: "", DEBIAN_FRONTEND: "noninteractive", npm_package_scripts_build_sample_cra_ci: "cd ./d9-sample-cra && yarn build", npm_config_version_git_message: "v%s", npm_package_eslintConfig_extends_1: "react-app/jest", GITHUB_REPOSITORY_ID: "704514093", GITHUB_ACTIONS: "true", npm_lifecycle_event: "build", npm_package_version: "1.1.31", npm_package_repository_url: "git+https://github.com/InsureMO/rainbow-d9.git", npm_package_dependencies__testing_library_jest_dom: "^5.17.0", GITHUB_REF_PROTECTED: "false", npm_config_argv: '{"remain":[],"cooked":["run","build-sample-cra"],"original":["build-sample-cra"]}', npm_package_volta_yarn: "1.22.21", npm_package_scripts_build: "vite build", npm_package_dependencies__testing_library_user_event: "^13.5.0", GITHUB_WORKSPACE: "/home/runner/work/rainbow-d9/rainbow-d9", ACCEPT_EULA: "Y", GITHUB_JOB: "create-sample-pages", RUNNER_PERFLOG: "/home/runner/perflog", npm_package_dependencies_vite: "^5.0.13", GITHUB_SHA: "8da243094f247f0f017474bc63a364fa35ecc4eb", GITHUB_RUN_ATTEMPT: "1", npm_config_version_git_tag: "true", npm_config_version_git_sign: "", GITHUB_REF: "refs/tags/r-1.1.32", GITHUB_ACTOR: "bradwoo8621", ANDROID_SDK_ROOT: "/usr/local/lib/android/sdk", npm_package_license: "MIT", npm_config_strict_ssl: "true", LEIN_HOME: "/usr/local/lib/lein", npm_package_scripts_build_n123: "yarn build-n1 && yarn build-n2 && yarn build-n3", GITHUB_PATH: "/home/runner/work/_temp/_runner_file_commands/add_path_255382c5-f8c0-48e7-8d72-e030d1f1c1f4", JAVA_HOME: "/usr/lib/jvm/temurin-11-jdk-amd64", PWD: "/home/runner/work/rainbow-d9/rainbow-d9/d9-sample-cra", GITHUB_ACTOR_ID: "2330098", RUNNER_WORKSPACE: "/home/runner/work/rainbow-d9", npm_execpath: "/opt/hostedtoolcache/node/18.20.3/x64/lib/node_modules/yarn/bin/yarn.js", npm_package_scripts_build_all_ci: "yarn build-n123-ci && yarn build-n5-ci && yarn build-n6-ci && yarn build-echarts-ci && yarn build-thai-all-ci", HOMEBREW_CLEANUP_PERIODIC_FULL_DAYS: "3650", GITHUB_EVENT_NAME: "push", HOMEBREW_NO_AUTO_UPDATE: "1", ANDROID_HOME: "/usr/local/lib/android/sdk", GITHUB_SERVER_URL: "https://github.com", GECKOWEBDRIVER: "/usr/local/share/gecko_driver", LEIN_JAR: "/usr/local/lib/lein/self-installs/leiningen-2.11.2-standalone.jar", GHCUP_INSTALL_BASE_PREFIX: "/usr/local", GITHUB_OUTPUT: "/home/runner/work/_temp/_runner_file_commands/set_output_255382c5-f8c0-48e7-8d72-e030d1f1c1f4", npm_package_author_name: "Rainbow Team", EDGEWEBDRIVER: "/usr/local/share/edge_driver", STATS_EXT: "true", npm_package_scripts_build_n1_ci: "cd ./d9-n1 && yarn build-ci", npm_config_save_prefix: "^", npm_config_ignore_optional: "", ANDROID_NDK: "/usr/local/lib/android/sdk/ndk/25.2.9519653", SGX_AESM_ADDR: "1", CHROME_BIN: "/usr/bin/google-chrome", npm_package_scripts_build_n2_ci: "cd ./d9-n2 && yarn build-ci", npm_package_scripts_deploy: "gh-pages -d build", npm_package_scripts_preview: "vite preview", SELENIUM_JAR_PATH: "/usr/share/java/selenium-server.jar", STATS_EXTP: "https://provjobdsettingscdn.blob.core.windows.net/settings/provjobdsettings-0.5.181+6/provjobd.data", npm_package_scripts_build_echarts_ci: "cd ./d9-echarts && yarn build-ci", npm_package_scripts_build_n3_ci: "cd ./d9-n3 && yarn build-ci", npm_package_dependencies_web_vitals: "^2.1.4", npm_package_dependencies_typescript: "^5.1.6", INIT_CWD: "/home/runner/work/rainbow-d9/rainbow-d9", ANDROID_NDK_HOME: "/usr/local/lib/android/sdk/ndk/25.2.9519653", GITHUB_STEP_SUMMARY: "/home/runner/work/_temp/_runner_file_commands/step_summary_255382c5-f8c0-48e7-8d72-e030d1f1c1f4", npm_package_dependencies_react: "^18.2.0", npm_package_dependencies__types_react_dom: "^18.2.7", NODE_ENV: "production" };
+var define_process_env_default = { GITHUB_STATE: "/home/runner/work/_temp/_runner_file_commands/save_state_cb3e4f61-b762-43c0-9037-8376e6adef6d", npm_package_scripts_build_n5_ci: "cd ./d9-n5 && yarn build-ci", npm_package_scripts_build_sample_cra: "cd ./d9-sample-cra && yarn build", STATS_TRP: "true", DEPLOYMENT_BASEPATH: "/opt/runner", DOTNET_NOLOGO: "1", npm_package_scripts_build_n6_ci: "cd ./d9-n6 && yarn build-ci", npm_package_dependencies__vitejs_plugin_react: "^4.2.1", USER: "runner", npm_config_version_commit_hooks: "true", npm_config_user_agent: "yarn/1.22.21 npm/? node/v18.20.3 linux x64", npm_package_dependencies__types_jest: "^29.5.4", CI: "true", npm_config_bin_links: "true", npm_package_bugs_url: "https://github.com/InsureMO/rainbow-d9/issues", npm_config_wrap_output: "", RUNNER_ENVIRONMENT: "github-hosted", GITHUB_ENV: "/home/runner/work/_temp/_runner_file_commands/set_env_cb3e4f61-b762-43c0-9037-8376e6adef6d", PIPX_HOME: "/opt/pipx", npm_node_execpath: "/opt/hostedtoolcache/node/18.20.3/x64/bin/node", npm_package_scripts_build_thai_all_ci: "yarn build-thai-plan-selection-ci", npm_config_init_version: "1.0.0", npm_package_devDependencies_gh_pages: "^6.1.1", npm_package_dependencies__babel_plugin_proposal_private_property_in_object: "^7.21.11", JAVA_HOME_8_X64: "/usr/lib/jvm/temurin-8-jdk-amd64", SHLVL: "1", HOME: "/home/runner", OLDPWD: "/home/runner/work/rainbow-d9/rainbow-d9", npm_package_browserslist_production_0: ">0.2%", RUNNER_TEMP: "/home/runner/work/_temp", GITHUB_EVENT_PATH: "/home/runner/work/_temp/_github_workflow/event.json", npm_package_scripts_build_all: "yarn build-n123 && yarn build-n5 && yarn build-n6 && yarn build-echarts && yarn build-thai-all", npm_package_browserslist_production_1: "not dead", npm_package_dependencies_react_syntax_highlighter: "^15.5.0", JAVA_HOME_11_X64: "/usr/lib/jvm/temurin-11-jdk-amd64", PIPX_BIN_DIR: "/opt/pipx_bin", GITHUB_REPOSITORY_OWNER: "InsureMO", npm_package_volta_node: "22.2.0", npm_config_init_license: "MIT", npm_package_browserslist_production_2: "not op_mini all", GRADLE_HOME: "/usr/share/gradle-8.8", ANDROID_NDK_LATEST_HOME: "/usr/local/lib/android/sdk/ndk/26.3.11579264", JAVA_HOME_21_X64: "/usr/lib/jvm/temurin-21-jdk-amd64", STATS_RDCL: "true", GITHUB_RETENTION_DAYS: "90", YARN_WRAP_OUTPUT: "false", npm_package_scripts_build_thai_plan_selection_ci: "cd ./d9-thai-plan-selection && yarn build-ci", npm_package_scripts_build_n1: "cd ./d9-n1 && yarn build", npm_config_version_tag_prefix: "v", npm_package_dependencies__rainbow_d9_n2: "1.1.32", GITHUB_REPOSITORY_OWNER_ID: "38915232", POWERSHELL_DISTRIBUTION_CHANNEL: "GitHub-Actions-ubuntu22", AZURE_EXTENSION_DIR: "/opt/az/azcliextensions", GITHUB_HEAD_REF: "", npm_package_scripts_build_n2: "cd ./d9-n2 && yarn build", npm_package_dependencies__types_styled_components: "^5.1.34", npm_package_dependencies__rainbow_d9_n3: "1.1.32", npm_package_dependencies__rainbow_d9_echarts: "1.1.32", SYSTEMD_EXEC_PID: "593", npm_package_scripts_build_echarts: "cd ./d9-echarts && yarn build", npm_package_scripts_build_n3: "cd ./d9-n3 && yarn build", GITHUB_GRAPHQL_URL: "https://api.github.com/graphql", npm_package_description: "Assume the following envs are ready, otherwise contact the tech guy.", npm_package_scripts_predeploy: "npm run build", npm_package_dependencies__rainbow_d9_n5: "1.1.32", GOROOT_1_20_X64: "/opt/hostedtoolcache/go/1.20.14/x64", NVM_DIR: "/home/runner/.nvm", npm_package_readmeFilename: "README.md", npm_package_scripts_build_n5: "cd ./d9-n5 && yarn build", npm_package_dependencies__types_react: "^18.2.21", npm_package_dependencies__testing_library_react: "^13.4.0", npm_package_dependencies__rainbow_d9_n6: "1.1.32", DOTNET_SKIP_FIRST_TIME_EXPERIENCE: "1", GOROOT_1_21_X64: "/opt/hostedtoolcache/go/1.21.11/x64", JAVA_HOME_17_X64: "/usr/lib/jvm/temurin-17-jdk-amd64", ImageVersion: "20240609.1.0", npm_package_scripts_build_n6: "cd ./d9-n6 && yarn build", RUNNER_OS: "Linux", GITHUB_API_URL: "https://api.github.com", GOROOT_1_22_X64: "/opt/hostedtoolcache/go/1.22.4/x64", SWIFT_PATH: "/usr/share/swift/usr/bin", RUNNER_USER: "runner", STATS_V3PS: "true", CHROMEWEBDRIVER: "/usr/local/share/chromedriver-linux64", JOURNAL_STREAM: "8:19333", GITHUB_WORKFLOW: "Publish to NPM", _: "/opt/hostedtoolcache/node/18.20.3/x64/bin/yarn", npm_package_private: "true", npm_package_dependencies_remark_gfm: "4.0.0", npm_package_scripts_build_thai_all: "yarn build-thai-plan-selection", npm_config_registry: "https://registry.yarnpkg.com", ACTIONS_RUNNER_ACTION_ARCHIVE_CACHE: "/opt/actionarchivecache", STATS_D: "true", GITHUB_RUN_ID: "9515610734", STATS_VMFE: "true", npm_package_workspaces_0: "d9-n1", GITHUB_REF_TYPE: "tag", BOOTSTRAP_HASKELL_NONINTERACTIVE: "1", GITHUB_WORKFLOW_SHA: "230ab52acc9d56bb1793ac3f03dc65c512023c49", GITHUB_BASE_REF: "", ImageOS: "ubuntu22", npm_package_scripts_build_n123_ci: "yarn build-n1-ci && yarn build-n2-ci && yarn build-n3-ci", npm_package_workspaces_1: "d9-n2", npm_config_ignore_scripts: "", npm_package_scripts_start: "vite", npm_package_dependencies_github_markdown_css: "^5.5.0", GITHUB_WORKFLOW_REF: "InsureMO/rainbow-d9/.github/workflows/release.yml@refs/tags/r-1.1.33", PERFLOG_LOCATION_SETTING: "RUNNER_PERFLOG", GITHUB_ACTION_REPOSITORY: "", npm_package_workspaces_2: "d9-n3", npm_package_browserslist_development_0: "last 1 chrome version", PATH: "/tmp/yarn--1718366178974-0.7408387310653299:/home/runner/work/rainbow-d9/rainbow-d9/d9-sample-cra/node_modules/.bin:/home/runner/.config/yarn/link/node_modules/.bin:/home/runner/work/rainbow-d9/rainbow-d9/node_modules/.bin:/opt/hostedtoolcache/node/18.20.3/x64/libexec/lib/node_modules/npm/bin/node-gyp-bin:/opt/hostedtoolcache/node/18.20.3/x64/lib/node_modules/npm/bin/node-gyp-bin:/opt/hostedtoolcache/node/18.20.3/x64/bin/node_modules/npm/bin/node-gyp-bin:/tmp/yarn--1718366178778-0.5756901118012074:/home/runner/work/rainbow-d9/rainbow-d9/node_modules/.bin:/home/runner/.config/yarn/link/node_modules/.bin:/home/runner/work/rainbow-d9/rainbow-d9/node_modules/.bin:/opt/hostedtoolcache/node/18.20.3/x64/libexec/lib/node_modules/npm/bin/node-gyp-bin:/opt/hostedtoolcache/node/18.20.3/x64/lib/node_modules/npm/bin/node-gyp-bin:/opt/hostedtoolcache/node/18.20.3/x64/bin/node_modules/npm/bin/node-gyp-bin:/opt/hostedtoolcache/node/18.20.3/x64/bin:/snap/bin:/home/runner/.local/bin:/opt/pipx_bin:/home/runner/.cargo/bin:/home/runner/.config/composer/vendor/bin:/usr/local/.ghcup/bin:/home/runner/.dotnet/tools:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin", NODE: "/opt/hostedtoolcache/node/18.20.3/x64/bin/node", ANT_HOME: "/usr/share/ant", DOTNET_MULTILEVEL_LOOKUP: "0", RUNNER_TRACKING_ID: "github_0f35939d-6637-4ac2-b0e3-f1bb6f04e30b", INVOCATION_ID: "da2226a01bfe4670905d43dee0d7521b", RUNNER_TOOL_CACHE: "/opt/hostedtoolcache", npm_package_name: "@rainbow-d9/sample-cra", npm_package_workspaces_3: "d9-n5", npm_package_browserslist_development_1: "last 1 firefox version", npm_package_repository_type: "git", npm_package_dependencies__types_react_syntax_highlighter: "^15.5.11", npm_package_dependencies__rainbow_d9_thai_plan_selection: "1.1.32", GITHUB_ACTION: "__run_5", GITHUB_RUN_NUMBER: "128", GITHUB_TRIGGERING_ACTOR: "bradwoo8621", RUNNER_ARCH: "X64", XDG_RUNTIME_DIR: "/run/user/1001", AGENT_TOOLSDIRECTORY: "/opt/hostedtoolcache", npm_package_scripts_build_thai_plan_selection: "cd ./d9-thai-plan-selection && yarn build", npm_package_workspaces_4: "d9-n6", npm_package_browserslist_development_2: "last 1 safari version", npm_package_workspaces_5: "d9-echarts", LANG: "C.UTF-8", VCPKG_INSTALLATION_ROOT: "/usr/local/share/vcpkg", npm_package_workspaces_6: "d9-thai-plan-selection", npm_package_dependencies_react_dom: "^18.2.0", CONDA: "/usr/share/miniconda", RUNNER_NAME: "GitHub Actions 5", XDG_CONFIG_HOME: "/home/runner/.config", STATS_VMD: "true", GITHUB_REF_NAME: "r-1.1.33", GITHUB_REPOSITORY: "InsureMO/rainbow-d9", STATS_D_D: "true", npm_lifecycle_script: "vite build", npm_package_workspaces_7: "d9-sample-cra", npm_package_eslintConfig_extends_0: "react-app", npm_package_dependencies_vite_plugin_markdown: "^2.2.0", npm_package_dependencies_react_markdown: "9.0.1", npm_package_dependencies__types_node: "^20.5.3", STATS_UE: "true", ANDROID_NDK_ROOT: "/usr/local/lib/android/sdk/ndk/25.2.9519653", GITHUB_ACTION_REF: "", DEBIAN_FRONTEND: "noninteractive", npm_package_scripts_build_sample_cra_ci: "cd ./d9-sample-cra && yarn build", npm_config_version_git_message: "v%s", npm_package_eslintConfig_extends_1: "react-app/jest", GITHUB_REPOSITORY_ID: "704514093", GITHUB_ACTIONS: "true", npm_lifecycle_event: "build", npm_package_version: "1.1.32", npm_package_repository_url: "git+https://github.com/InsureMO/rainbow-d9.git", npm_package_dependencies__testing_library_jest_dom: "^5.17.0", GITHUB_REF_PROTECTED: "false", npm_config_argv: '{"remain":[],"cooked":["run","build-sample-cra"],"original":["build-sample-cra"]}', npm_package_volta_yarn: "1.22.21", npm_package_scripts_build: "vite build", npm_package_dependencies__testing_library_user_event: "^13.5.0", GITHUB_WORKSPACE: "/home/runner/work/rainbow-d9/rainbow-d9", ACCEPT_EULA: "Y", GITHUB_JOB: "create-sample-pages", RUNNER_PERFLOG: "/home/runner/perflog", npm_package_dependencies_vite: "^5.0.13", GITHUB_SHA: "230ab52acc9d56bb1793ac3f03dc65c512023c49", GITHUB_RUN_ATTEMPT: "1", npm_config_version_git_tag: "true", npm_config_version_git_sign: "", GITHUB_REF: "refs/tags/r-1.1.33", GITHUB_ACTOR: "bradwoo8621", ANDROID_SDK_ROOT: "/usr/local/lib/android/sdk", npm_package_license: "MIT", npm_config_strict_ssl: "true", LEIN_HOME: "/usr/local/lib/lein", npm_package_scripts_build_n123: "yarn build-n1 && yarn build-n2 && yarn build-n3", GITHUB_PATH: "/home/runner/work/_temp/_runner_file_commands/add_path_cb3e4f61-b762-43c0-9037-8376e6adef6d", JAVA_HOME: "/usr/lib/jvm/temurin-11-jdk-amd64", PWD: "/home/runner/work/rainbow-d9/rainbow-d9/d9-sample-cra", GITHUB_ACTOR_ID: "2330098", RUNNER_WORKSPACE: "/home/runner/work/rainbow-d9", npm_execpath: "/opt/hostedtoolcache/node/18.20.3/x64/lib/node_modules/yarn/bin/yarn.js", npm_package_scripts_build_all_ci: "yarn build-n123-ci && yarn build-n5-ci && yarn build-n6-ci && yarn build-echarts-ci && yarn build-thai-all-ci", HOMEBREW_CLEANUP_PERIODIC_FULL_DAYS: "3650", GITHUB_EVENT_NAME: "push", HOMEBREW_NO_AUTO_UPDATE: "1", ANDROID_HOME: "/usr/local/lib/android/sdk", GITHUB_SERVER_URL: "https://github.com", GECKOWEBDRIVER: "/usr/local/share/gecko_driver", LEIN_JAR: "/usr/local/lib/lein/self-installs/leiningen-2.11.2-standalone.jar", GHCUP_INSTALL_BASE_PREFIX: "/usr/local", GITHUB_OUTPUT: "/home/runner/work/_temp/_runner_file_commands/set_output_cb3e4f61-b762-43c0-9037-8376e6adef6d", npm_package_author_name: "Rainbow Team", EDGEWEBDRIVER: "/usr/local/share/edge_driver", STATS_EXT: "true", npm_package_scripts_build_n1_ci: "cd ./d9-n1 && yarn build-ci", npm_config_save_prefix: "^", npm_config_ignore_optional: "", ANDROID_NDK: "/usr/local/lib/android/sdk/ndk/25.2.9519653", SGX_AESM_ADDR: "1", CHROME_BIN: "/usr/bin/google-chrome", npm_package_scripts_build_n2_ci: "cd ./d9-n2 && yarn build-ci", npm_package_scripts_deploy: "gh-pages -d build", npm_package_scripts_preview: "vite preview", SELENIUM_JAR_PATH: "/usr/share/java/selenium-server.jar", STATS_EXTP: "https://provjobdsettingscdn.blob.core.windows.net/settings/provjobdsettings-0.5.181+6/provjobd.data", npm_package_scripts_build_echarts_ci: "cd ./d9-echarts && yarn build-ci", npm_package_scripts_build_n3_ci: "cd ./d9-n3 && yarn build-ci", npm_package_dependencies_web_vitals: "^2.1.4", npm_package_dependencies_typescript: "^5.1.6", INIT_CWD: "/home/runner/work/rainbow-d9/rainbow-d9", ANDROID_NDK_HOME: "/usr/local/lib/android/sdk/ndk/25.2.9519653", GITHUB_STEP_SUMMARY: "/home/runner/work/_temp/_runner_file_commands/step_summary_cb3e4f61-b762-43c0-9037-8376e6adef6d", npm_package_dependencies_react: "^18.2.0", npm_package_dependencies__types_react_dom: "^18.2.7", NODE_ENV: "production" };
 let Stack$4 = class Stack {
   /**
   @internal
@@ -36325,11 +36325,41 @@ const jsonLanguage = /* @__PURE__ */ LRLanguage.define({
 function json$2() {
   return new LanguageSupport(jsonLanguage);
 }
-function isObject$a(value) {
-  var type2 = typeof value;
-  return value != null && (type2 == "object" || type2 == "function");
+function arrayFilter$2(array, predicate) {
+  var index2 = -1, length2 = array == null ? 0 : array.length, resIndex = 0, result = [];
+  while (++index2 < length2) {
+    var value = array[index2];
+    if (predicate(value, index2, array)) {
+      result[resIndex++] = value;
+    }
+  }
+  return result;
 }
-var isObject_1$1 = isObject$a;
+var _arrayFilter = arrayFilter$2;
+function createBaseFor$1(fromRight) {
+  return function(object, iteratee, keysFunc) {
+    var index2 = -1, iterable = Object(object), props = keysFunc(object), length2 = props.length;
+    while (length2--) {
+      var key = props[fromRight ? length2 : ++index2];
+      if (iteratee(iterable[key], key, iterable) === false) {
+        break;
+      }
+    }
+    return object;
+  };
+}
+var _createBaseFor = createBaseFor$1;
+var createBaseFor = _createBaseFor;
+var baseFor$1 = createBaseFor();
+var _baseFor = baseFor$1;
+function baseTimes$1(n2, iteratee) {
+  var index2 = -1, result = Array(n2);
+  while (++index2 < n2) {
+    result[index2] = iteratee(index2);
+  }
+  return result;
+}
+var _baseTimes = baseTimes$1;
 var freeGlobal$1 = typeof commonjsGlobal == "object" && commonjsGlobal && commonjsGlobal.Object === Object && commonjsGlobal;
 var _freeGlobal = freeGlobal$1;
 var freeGlobal = _freeGlobal;
@@ -36337,26 +36367,7 @@ var freeSelf = typeof self == "object" && self && self.Object === Object && self
 var root$b = freeGlobal || freeSelf || Function("return this")();
 var _root = root$b;
 var root$a = _root;
-var now$1 = function() {
-  return root$a.Date.now();
-};
-var now_1 = now$1;
-var reWhitespace = /\s/;
-function trimmedEndIndex$1(string2) {
-  var index2 = string2.length;
-  while (index2-- && reWhitespace.test(string2.charAt(index2))) {
-  }
-  return index2;
-}
-var _trimmedEndIndex = trimmedEndIndex$1;
-var trimmedEndIndex = _trimmedEndIndex;
-var reTrimStart = /^\s+/;
-function baseTrim$1(string2) {
-  return string2 ? string2.slice(0, trimmedEndIndex(string2) + 1).replace(reTrimStart, "") : string2;
-}
-var _baseTrim = baseTrim$1;
-var root$9 = _root;
-var Symbol$7 = root$9.Symbol;
+var Symbol$7 = root$a.Symbol;
 var _Symbol = Symbol$7;
 var Symbol$6 = _Symbol;
 var objectProto$e = Object.prototype;
@@ -36402,159 +36413,19 @@ function isObjectLike$9(value) {
 }
 var isObjectLike_1 = isObjectLike$9;
 var baseGetTag$5 = _baseGetTag, isObjectLike$8 = isObjectLike_1;
-var symbolTag$3 = "[object Symbol]";
-function isSymbol$6(value) {
-  return typeof value == "symbol" || isObjectLike$8(value) && baseGetTag$5(value) == symbolTag$3;
-}
-var isSymbol_1 = isSymbol$6;
-var baseTrim = _baseTrim, isObject$9 = isObject_1$1, isSymbol$5 = isSymbol_1;
-var NAN = 0 / 0;
-var reIsBadHex = /^[-+]0x[0-9a-f]+$/i;
-var reIsBinary = /^0b[01]+$/i;
-var reIsOctal = /^0o[0-7]+$/i;
-var freeParseInt = parseInt;
-function toNumber$2(value) {
-  if (typeof value == "number") {
-    return value;
-  }
-  if (isSymbol$5(value)) {
-    return NAN;
-  }
-  if (isObject$9(value)) {
-    var other = typeof value.valueOf == "function" ? value.valueOf() : value;
-    value = isObject$9(other) ? other + "" : other;
-  }
-  if (typeof value != "string") {
-    return value === 0 ? value : +value;
-  }
-  value = baseTrim(value);
-  var isBinary2 = reIsBinary.test(value);
-  return isBinary2 || reIsOctal.test(value) ? freeParseInt(value.slice(2), isBinary2 ? 2 : 8) : reIsBadHex.test(value) ? NAN : +value;
-}
-var toNumber_1 = toNumber$2;
-var isObject$8 = isObject_1$1, now = now_1, toNumber$1 = toNumber_1;
-var FUNC_ERROR_TEXT$2 = "Expected a function";
-var nativeMax$3 = Math.max, nativeMin$1 = Math.min;
-function debounce(func, wait, options) {
-  var lastArgs, lastThis, maxWait, result, timerId, lastCallTime, lastInvokeTime = 0, leading = false, maxing = false, trailing = true;
-  if (typeof func != "function") {
-    throw new TypeError(FUNC_ERROR_TEXT$2);
-  }
-  wait = toNumber$1(wait) || 0;
-  if (isObject$8(options)) {
-    leading = !!options.leading;
-    maxing = "maxWait" in options;
-    maxWait = maxing ? nativeMax$3(toNumber$1(options.maxWait) || 0, wait) : maxWait;
-    trailing = "trailing" in options ? !!options.trailing : trailing;
-  }
-  function invokeFunc(time2) {
-    var args = lastArgs, thisArg = lastThis;
-    lastArgs = lastThis = void 0;
-    lastInvokeTime = time2;
-    result = func.apply(thisArg, args);
-    return result;
-  }
-  function leadingEdge(time2) {
-    lastInvokeTime = time2;
-    timerId = setTimeout(timerExpired, wait);
-    return leading ? invokeFunc(time2) : result;
-  }
-  function remainingWait(time2) {
-    var timeSinceLastCall = time2 - lastCallTime, timeSinceLastInvoke = time2 - lastInvokeTime, timeWaiting = wait - timeSinceLastCall;
-    return maxing ? nativeMin$1(timeWaiting, maxWait - timeSinceLastInvoke) : timeWaiting;
-  }
-  function shouldInvoke(time2) {
-    var timeSinceLastCall = time2 - lastCallTime, timeSinceLastInvoke = time2 - lastInvokeTime;
-    return lastCallTime === void 0 || timeSinceLastCall >= wait || timeSinceLastCall < 0 || maxing && timeSinceLastInvoke >= maxWait;
-  }
-  function timerExpired() {
-    var time2 = now();
-    if (shouldInvoke(time2)) {
-      return trailingEdge(time2);
-    }
-    timerId = setTimeout(timerExpired, remainingWait(time2));
-  }
-  function trailingEdge(time2) {
-    timerId = void 0;
-    if (trailing && lastArgs) {
-      return invokeFunc(time2);
-    }
-    lastArgs = lastThis = void 0;
-    return result;
-  }
-  function cancel() {
-    if (timerId !== void 0) {
-      clearTimeout(timerId);
-    }
-    lastInvokeTime = 0;
-    lastArgs = lastCallTime = lastThis = timerId = void 0;
-  }
-  function flush() {
-    return timerId === void 0 ? result : trailingEdge(now());
-  }
-  function debounced() {
-    var time2 = now(), isInvoking = shouldInvoke(time2);
-    lastArgs = arguments;
-    lastThis = this;
-    lastCallTime = time2;
-    if (isInvoking) {
-      if (timerId === void 0) {
-        return leadingEdge(lastCallTime);
-      }
-      if (maxing) {
-        clearTimeout(timerId);
-        timerId = setTimeout(timerExpired, wait);
-        return invokeFunc(lastCallTime);
-      }
-    }
-    if (timerId === void 0) {
-      timerId = setTimeout(timerExpired, wait);
-    }
-    return result;
-  }
-  debounced.cancel = cancel;
-  debounced.flush = flush;
-  return debounced;
-}
-var debounce_1 = debounce;
-const _debounce = /* @__PURE__ */ getDefaultExportFromCjs(debounce_1);
-function arrayMap$6(array, iteratee) {
-  var index2 = -1, length2 = array == null ? 0 : array.length, result = Array(length2);
-  while (++index2 < length2) {
-    result[index2] = iteratee(array[index2], index2, array);
-  }
-  return result;
-}
-var _arrayMap = arrayMap$6;
-var arrayMap$5 = _arrayMap;
-function baseValues$1(object, props) {
-  return arrayMap$5(props, function(key) {
-    return object[key];
-  });
-}
-var _baseValues = baseValues$1;
-function baseTimes$1(n2, iteratee) {
-  var index2 = -1, result = Array(n2);
-  while (++index2 < n2) {
-    result[index2] = iteratee(index2);
-  }
-  return result;
-}
-var _baseTimes = baseTimes$1;
-var baseGetTag$4 = _baseGetTag, isObjectLike$7 = isObjectLike_1;
 var argsTag$3 = "[object Arguments]";
 function baseIsArguments$1(value) {
-  return isObjectLike$7(value) && baseGetTag$4(value) == argsTag$3;
+  return isObjectLike$8(value) && baseGetTag$5(value) == argsTag$3;
 }
 var _baseIsArguments = baseIsArguments$1;
-var baseIsArguments = _baseIsArguments, isObjectLike$6 = isObjectLike_1;
+var baseIsArguments = _baseIsArguments, isObjectLike$7 = isObjectLike_1;
 var objectProto$c = Object.prototype;
 var hasOwnProperty$b = objectProto$c.hasOwnProperty;
 var propertyIsEnumerable$1 = objectProto$c.propertyIsEnumerable;
 var isArguments$3 = baseIsArguments(/* @__PURE__ */ function() {
   return arguments;
 }()) ? baseIsArguments : function(value) {
-  return isObjectLike$6(value) && hasOwnProperty$b.call(value, "callee") && !propertyIsEnumerable$1.call(value, "callee");
+  return isObjectLike$7(value) && hasOwnProperty$b.call(value, "callee") && !propertyIsEnumerable$1.call(value, "callee");
 };
 var isArguments_1 = isArguments$3;
 var isArray$j = Array.isArray;
@@ -36589,14 +36460,14 @@ function isLength$3(value) {
   return typeof value == "number" && value > -1 && value % 1 == 0 && value <= MAX_SAFE_INTEGER;
 }
 var isLength_1 = isLength$3;
-var baseGetTag$3 = _baseGetTag, isLength$2 = isLength_1, isObjectLike$5 = isObjectLike_1;
+var baseGetTag$4 = _baseGetTag, isLength$2 = isLength_1, isObjectLike$6 = isObjectLike_1;
 var argsTag$2 = "[object Arguments]", arrayTag$2 = "[object Array]", boolTag$3 = "[object Boolean]", dateTag$3 = "[object Date]", errorTag$2 = "[object Error]", funcTag$2 = "[object Function]", mapTag$6 = "[object Map]", numberTag$3 = "[object Number]", objectTag$3 = "[object Object]", regexpTag$3 = "[object RegExp]", setTag$6 = "[object Set]", stringTag$4 = "[object String]", weakMapTag$2 = "[object WeakMap]";
 var arrayBufferTag$3 = "[object ArrayBuffer]", dataViewTag$4 = "[object DataView]", float32Tag$2 = "[object Float32Array]", float64Tag$2 = "[object Float64Array]", int8Tag$2 = "[object Int8Array]", int16Tag$2 = "[object Int16Array]", int32Tag$2 = "[object Int32Array]", uint8Tag$2 = "[object Uint8Array]", uint8ClampedTag$2 = "[object Uint8ClampedArray]", uint16Tag$2 = "[object Uint16Array]", uint32Tag$2 = "[object Uint32Array]";
 var typedArrayTags = {};
 typedArrayTags[float32Tag$2] = typedArrayTags[float64Tag$2] = typedArrayTags[int8Tag$2] = typedArrayTags[int16Tag$2] = typedArrayTags[int32Tag$2] = typedArrayTags[uint8Tag$2] = typedArrayTags[uint8ClampedTag$2] = typedArrayTags[uint16Tag$2] = typedArrayTags[uint32Tag$2] = true;
 typedArrayTags[argsTag$2] = typedArrayTags[arrayTag$2] = typedArrayTags[arrayBufferTag$3] = typedArrayTags[boolTag$3] = typedArrayTags[dataViewTag$4] = typedArrayTags[dateTag$3] = typedArrayTags[errorTag$2] = typedArrayTags[funcTag$2] = typedArrayTags[mapTag$6] = typedArrayTags[numberTag$3] = typedArrayTags[objectTag$3] = typedArrayTags[regexpTag$3] = typedArrayTags[setTag$6] = typedArrayTags[stringTag$4] = typedArrayTags[weakMapTag$2] = false;
 function baseIsTypedArray$1(value) {
-  return isObjectLike$5(value) && isLength$2(value.length) && !!typedArrayTags[baseGetTag$3(value)];
+  return isObjectLike$6(value) && isLength$2(value.length) && !!typedArrayTags[baseGetTag$4(value)];
 }
 var _baseIsTypedArray = baseIsTypedArray$1;
 function baseUnary$5(func) {
@@ -36678,13 +36549,18 @@ function baseKeys$2(object) {
   return result;
 }
 var _baseKeys = baseKeys$2;
-var baseGetTag$2 = _baseGetTag, isObject$7 = isObject_1$1;
+function isObject$a(value) {
+  var type2 = typeof value;
+  return value != null && (type2 == "object" || type2 == "function");
+}
+var isObject_1$1 = isObject$a;
+var baseGetTag$3 = _baseGetTag, isObject$9 = isObject_1$1;
 var asyncTag = "[object AsyncFunction]", funcTag$1 = "[object Function]", genTag$1 = "[object GeneratorFunction]", proxyTag = "[object Proxy]";
 function isFunction$2(value) {
-  if (!isObject$7(value)) {
+  if (!isObject$9(value)) {
     return false;
   }
-  var tag = baseGetTag$2(value);
+  var tag = baseGetTag$3(value);
   return tag == funcTag$1 || tag == genTag$1 || tag == asyncTag || tag == proxyTag;
 }
 var isFunction_1 = isFunction$2;
@@ -36699,117 +36575,9 @@ function keys$7(object) {
 }
 var keys_1 = keys$7;
 const _keys = /* @__PURE__ */ getDefaultExportFromCjs(keys_1);
-var baseValues = _baseValues, keys$6 = keys_1;
-function values(object) {
-  return object == null ? [] : baseValues(object, keys$6(object));
-}
-var values_1 = values;
-const _values = /* @__PURE__ */ getDefaultExportFromCjs(values_1);
-class Matrix {
-  constructor(matrix) {
-    this.matrix = matrix;
-  }
-  mmul(matrix) {
-    this.matrix = this.matrix.map((row, i2) => matrix.asArray()[0].map((_2, j) => row.reduce((acc, _3, n2) => acc + this.matrix[i2][n2] * matrix.asArray()[n2][j], 0)));
-    return this;
-  }
-  asArray() {
-    return this.matrix;
-  }
-  get(rowIndex, columnIndex) {
-    return this.asArray()[rowIndex][columnIndex];
-  }
-  static multiply(...matrices) {
-    let m2 = matrices[0];
-    for (let i2 = 1; i2 < matrices.length; i2++) {
-      m2 = m2.mmul(matrices[i2]);
-    }
-    return m2;
-  }
-  static scaleMatrix(x, y2) {
-    return new Matrix([
-      [x, 0, 0],
-      [0, y2, 0],
-      [0, 0, 1]
-    ]);
-  }
-  static translateMatrix(x, y2) {
-    return new Matrix([
-      [1, 0, x],
-      [0, 1, y2],
-      [0, 0, 1]
-    ]);
-  }
-  static rotateMatrix(deg2) {
-    return new Matrix([
-      [Math.cos(deg2), -1 * Math.sin(deg2), 0],
-      [Math.sin(deg2), Math.cos(deg2), 0],
-      [0, 0, 1]
-    ]);
-  }
-  static createScaleMatrix(x, y2, origin) {
-    return this.multiply(Matrix.translateMatrix(origin.x, origin.y), Matrix.scaleMatrix(x, y2), Matrix.translateMatrix(-origin.x, -origin.y));
-  }
-  static createRotateMatrix(deg2, origin) {
-    return this.multiply(Matrix.translateMatrix(origin.x, origin.y), Matrix.rotateMatrix(deg2), Matrix.translateMatrix(-origin.x, -origin.y));
-  }
-}
-class Point {
-  constructor(x = 0, y2 = 0) {
-    this.x = x;
-    this.y = y2;
-  }
-  translate(x, y2) {
-    this.x += x;
-    this.y += y2;
-  }
-  clone() {
-    return new Point(this.x, this.y);
-  }
-  toSVG() {
-    return this.x + " " + this.y;
-  }
-  asMatrix() {
-    return new Matrix([[this.x], [this.y], [1]]);
-  }
-  transform(matrix) {
-    let final = matrix.mmul(this.asMatrix());
-    this.x = final.get(0, 0);
-    this.y = final.get(1, 0);
-  }
-  static middlePoint(pointA, pointB) {
-    return new Point((pointB.x + pointA.x) / 2, (pointB.y + pointA.y) / 2);
-  }
-}
-function arrayEach$2(array, iteratee) {
-  var index2 = -1, length2 = array == null ? 0 : array.length;
-  while (++index2 < length2) {
-    if (iteratee(array[index2], index2, array) === false) {
-      break;
-    }
-  }
-  return array;
-}
-var _arrayEach = arrayEach$2;
-function createBaseFor$1(fromRight) {
-  return function(object, iteratee, keysFunc) {
-    var index2 = -1, iterable = Object(object), props = keysFunc(object), length2 = props.length;
-    while (length2--) {
-      var key = props[fromRight ? length2 : ++index2];
-      if (iteratee(iterable[key], key, iterable) === false) {
-        break;
-      }
-    }
-    return object;
-  };
-}
-var _createBaseFor = createBaseFor$1;
-var createBaseFor = _createBaseFor;
-var baseFor$1 = createBaseFor();
-var _baseFor = baseFor$1;
-var baseFor = _baseFor, keys$5 = keys_1;
+var baseFor = _baseFor, keys$6 = keys_1;
 function baseForOwn$2(object, iteratee) {
-  return object && baseFor(object, iteratee, keys$5);
+  return object && baseFor(object, iteratee, keys$6);
 }
 var _baseForOwn = baseForOwn$2;
 var isArrayLike$5 = isArrayLike_1;
@@ -36834,22 +36602,17 @@ var _createBaseEach = createBaseEach$1;
 var baseForOwn$1 = _baseForOwn, createBaseEach = _createBaseEach;
 var baseEach$5 = createBaseEach(baseForOwn$1);
 var _baseEach = baseEach$5;
-function identity$5(value) {
-  return value;
+var baseEach$4 = _baseEach;
+function baseFilter$1(collection, predicate) {
+  var result = [];
+  baseEach$4(collection, function(value, index2, collection2) {
+    if (predicate(value, index2, collection2)) {
+      result.push(value);
+    }
+  });
+  return result;
 }
-var identity_1 = identity$5;
-var identity$4 = identity_1;
-function castFunction$1(value) {
-  return typeof value == "function" ? value : identity$4;
-}
-var _castFunction = castFunction$1;
-var arrayEach$1 = _arrayEach, baseEach$4 = _baseEach, castFunction = _castFunction, isArray$h = isArray_1;
-function forEach(collection, iteratee) {
-  var func = isArray$h(collection) ? arrayEach$1 : baseEach$4;
-  return func(collection, castFunction(iteratee));
-}
-var forEach_1 = forEach;
-const _forEach = /* @__PURE__ */ getDefaultExportFromCjs(forEach_1);
+var _baseFilter = baseFilter$1;
 function listCacheClear$1() {
   this.__data__ = [];
   this.size = 0;
@@ -36946,8 +36709,8 @@ function stackHas$1(key) {
   return this.__data__.has(key);
 }
 var _stackHas = stackHas$1;
-var root$8 = _root;
-var coreJsData$1 = root$8["__core-js_shared__"];
+var root$9 = _root;
+var coreJsData$1 = root$9["__core-js_shared__"];
 var _coreJsData = coreJsData$1;
 var coreJsData = _coreJsData;
 var maskSrcKey = function() {
@@ -36974,7 +36737,7 @@ function toSource$2(func) {
   return "";
 }
 var _toSource = toSource$2;
-var isFunction = isFunction_1, isMasked = _isMasked, isObject$6 = isObject_1$1, toSource$1 = _toSource;
+var isFunction = isFunction_1, isMasked = _isMasked, isObject$8 = isObject_1$1, toSource$1 = _toSource;
 var reRegExpChar = /[\\^$.*+?()[\]{}|]/g;
 var reIsHostCtor = /^\[object .+?Constructor\]$/;
 var funcProto = Function.prototype, objectProto$8 = Object.prototype;
@@ -36984,7 +36747,7 @@ var reIsNative = RegExp(
   "^" + funcToString.call(hasOwnProperty$8).replace(reRegExpChar, "\\$&").replace(/hasOwnProperty|(function).*?(?=\\\()| for .+?(?=\\\])/g, "$1.*?") + "$"
 );
 function baseIsNative$1(value) {
-  if (!isObject$6(value) || isMasked(value)) {
+  if (!isObject$8(value) || isMasked(value)) {
     return false;
   }
   var pattern = isFunction(value) ? reIsNative : reIsHostCtor;
@@ -37001,8 +36764,8 @@ function getNative$7(object, key) {
   return baseIsNative(value) ? value : void 0;
 }
 var _getNative = getNative$7;
-var getNative$6 = _getNative, root$7 = _root;
-var Map$4 = getNative$6(root$7, "Map");
+var getNative$6 = _getNative, root$8 = _root;
+var Map$4 = getNative$6(root$8, "Map");
 var _Map = Map$4;
 var getNative$5 = _getNative;
 var nativeCreate$4 = getNative$5(Object, "create");
@@ -37235,8 +36998,8 @@ function equalArrays$2(array, other, bitmask, customizer, equalFunc, stack) {
   return result;
 }
 var _equalArrays = equalArrays$2;
-var root$6 = _root;
-var Uint8Array$3 = root$6.Uint8Array;
+var root$7 = _root;
+var Uint8Array$3 = root$7.Uint8Array;
 var _Uint8Array = Uint8Array$3;
 function mapToArray$1(map2) {
   var index2 = -1, result = Array(map2.size);
@@ -37256,7 +37019,7 @@ function setToArray$1(set2) {
 var _setToArray = setToArray$1;
 var Symbol$4 = _Symbol, Uint8Array$2 = _Uint8Array, eq$2 = eq_1, equalArrays$1 = _equalArrays, mapToArray = _mapToArray, setToArray = _setToArray;
 var COMPARE_PARTIAL_FLAG$4 = 1, COMPARE_UNORDERED_FLAG$2 = 2;
-var boolTag$2 = "[object Boolean]", dateTag$2 = "[object Date]", errorTag$1 = "[object Error]", mapTag$5 = "[object Map]", numberTag$2 = "[object Number]", regexpTag$2 = "[object RegExp]", setTag$5 = "[object Set]", stringTag$3 = "[object String]", symbolTag$2 = "[object Symbol]";
+var boolTag$2 = "[object Boolean]", dateTag$2 = "[object Date]", errorTag$1 = "[object Error]", mapTag$5 = "[object Map]", numberTag$2 = "[object Number]", regexpTag$2 = "[object RegExp]", setTag$5 = "[object Set]", stringTag$3 = "[object String]", symbolTag$3 = "[object Symbol]";
 var arrayBufferTag$2 = "[object ArrayBuffer]", dataViewTag$3 = "[object DataView]";
 var symbolProto$2 = Symbol$4 ? Symbol$4.prototype : void 0, symbolValueOf$1 = symbolProto$2 ? symbolProto$2.valueOf : void 0;
 function equalByTag$1(object, other, tag, bitmask, customizer, equalFunc, stack) {
@@ -37298,7 +37061,7 @@ function equalByTag$1(object, other, tag, bitmask, customizer, equalFunc, stack)
       var result = equalArrays$1(convert2(object), convert2(other), bitmask, customizer, equalFunc, stack);
       stack["delete"](object);
       return result;
-    case symbolTag$2:
+    case symbolTag$3:
       if (symbolValueOf$1) {
         return symbolValueOf$1.call(object) == symbolValueOf$1.call(other);
       }
@@ -37314,23 +37077,12 @@ function arrayPush$4(array, values2) {
   return array;
 }
 var _arrayPush = arrayPush$4;
-var arrayPush$3 = _arrayPush, isArray$g = isArray_1;
+var arrayPush$3 = _arrayPush, isArray$h = isArray_1;
 function baseGetAllKeys$2(object, keysFunc, symbolsFunc) {
   var result = keysFunc(object);
-  return isArray$g(object) ? result : arrayPush$3(result, symbolsFunc(object));
+  return isArray$h(object) ? result : arrayPush$3(result, symbolsFunc(object));
 }
 var _baseGetAllKeys = baseGetAllKeys$2;
-function arrayFilter$2(array, predicate) {
-  var index2 = -1, length2 = array == null ? 0 : array.length, resIndex = 0, result = [];
-  while (++index2 < length2) {
-    var value = array[index2];
-    if (predicate(value, index2, array)) {
-      result[resIndex++] = value;
-    }
-  }
-  return result;
-}
-var _arrayFilter = arrayFilter$2;
 function stubArray$2() {
   return [];
 }
@@ -37349,9 +37101,9 @@ var getSymbols$3 = !nativeGetSymbols$1 ? stubArray$1 : function(object) {
   });
 };
 var _getSymbols = getSymbols$3;
-var baseGetAllKeys$1 = _baseGetAllKeys, getSymbols$2 = _getSymbols, keys$4 = keys_1;
+var baseGetAllKeys$1 = _baseGetAllKeys, getSymbols$2 = _getSymbols, keys$5 = keys_1;
 function getAllKeys$2(object) {
-  return baseGetAllKeys$1(object, keys$4, getSymbols$2);
+  return baseGetAllKeys$1(object, keys$5, getSymbols$2);
 }
 var _getAllKeys = getAllKeys$2;
 var getAllKeys$1 = _getAllKeys;
@@ -37402,26 +37154,26 @@ function equalObjects$1(object, other, bitmask, customizer, equalFunc, stack) {
   return result;
 }
 var _equalObjects = equalObjects$1;
-var getNative$4 = _getNative, root$5 = _root;
-var DataView$1 = getNative$4(root$5, "DataView");
+var getNative$4 = _getNative, root$6 = _root;
+var DataView$1 = getNative$4(root$6, "DataView");
 var _DataView = DataView$1;
-var getNative$3 = _getNative, root$4 = _root;
-var Promise$2 = getNative$3(root$4, "Promise");
+var getNative$3 = _getNative, root$5 = _root;
+var Promise$2 = getNative$3(root$5, "Promise");
 var _Promise = Promise$2;
-var getNative$2 = _getNative, root$3 = _root;
-var Set$2 = getNative$2(root$3, "Set");
+var getNative$2 = _getNative, root$4 = _root;
+var Set$2 = getNative$2(root$4, "Set");
 var _Set = Set$2;
-var getNative$1 = _getNative, root$2 = _root;
-var WeakMap$2 = getNative$1(root$2, "WeakMap");
+var getNative$1 = _getNative, root$3 = _root;
+var WeakMap$2 = getNative$1(root$3, "WeakMap");
 var _WeakMap = WeakMap$2;
-var DataView = _DataView, Map$1 = _Map, Promise$1 = _Promise, Set$1 = _Set, WeakMap$1 = _WeakMap, baseGetTag$1 = _baseGetTag, toSource = _toSource;
+var DataView = _DataView, Map$1 = _Map, Promise$1 = _Promise, Set$1 = _Set, WeakMap$1 = _WeakMap, baseGetTag$2 = _baseGetTag, toSource = _toSource;
 var mapTag$4 = "[object Map]", objectTag$2 = "[object Object]", promiseTag = "[object Promise]", setTag$4 = "[object Set]", weakMapTag$1 = "[object WeakMap]";
 var dataViewTag$2 = "[object DataView]";
 var dataViewCtorString = toSource(DataView), mapCtorString = toSource(Map$1), promiseCtorString = toSource(Promise$1), setCtorString = toSource(Set$1), weakMapCtorString = toSource(WeakMap$1);
-var getTag$5 = baseGetTag$1;
+var getTag$5 = baseGetTag$2;
 if (DataView && getTag$5(new DataView(new ArrayBuffer(1))) != dataViewTag$2 || Map$1 && getTag$5(new Map$1()) != mapTag$4 || Promise$1 && getTag$5(Promise$1.resolve()) != promiseTag || Set$1 && getTag$5(new Set$1()) != setTag$4 || WeakMap$1 && getTag$5(new WeakMap$1()) != weakMapTag$1) {
   getTag$5 = function(value) {
-    var result = baseGetTag$1(value), Ctor = result == objectTag$2 ? value.constructor : void 0, ctorString = Ctor ? toSource(Ctor) : "";
+    var result = baseGetTag$2(value), Ctor = result == objectTag$2 ? value.constructor : void 0, ctorString = Ctor ? toSource(Ctor) : "";
     if (ctorString) {
       switch (ctorString) {
         case dataViewCtorString:
@@ -37440,13 +37192,13 @@ if (DataView && getTag$5(new DataView(new ArrayBuffer(1))) != dataViewTag$2 || M
   };
 }
 var _getTag = getTag$5;
-var Stack$2 = _Stack, equalArrays = _equalArrays, equalByTag = _equalByTag, equalObjects = _equalObjects, getTag$4 = _getTag, isArray$f = isArray_1, isBuffer$1 = isBufferExports, isTypedArray = isTypedArray_1;
+var Stack$2 = _Stack, equalArrays = _equalArrays, equalByTag = _equalByTag, equalObjects = _equalObjects, getTag$4 = _getTag, isArray$g = isArray_1, isBuffer$1 = isBufferExports, isTypedArray = isTypedArray_1;
 var COMPARE_PARTIAL_FLAG$2 = 1;
 var argsTag$1 = "[object Arguments]", arrayTag$1 = "[object Array]", objectTag$1 = "[object Object]";
 var objectProto$3 = Object.prototype;
 var hasOwnProperty$4 = objectProto$3.hasOwnProperty;
 function baseIsEqualDeep$1(object, other, bitmask, customizer, equalFunc, stack) {
-  var objIsArr = isArray$f(object), othIsArr = isArray$f(other), objTag = objIsArr ? arrayTag$1 : getTag$4(object), othTag = othIsArr ? arrayTag$1 : getTag$4(other);
+  var objIsArr = isArray$g(object), othIsArr = isArray$g(other), objTag = objIsArr ? arrayTag$1 : getTag$4(object), othTag = othIsArr ? arrayTag$1 : getTag$4(other);
   objTag = objTag == argsTag$1 ? objectTag$1 : objTag;
   othTag = othTag == argsTag$1 ? objectTag$1 : othTag;
   var objIsObj = objTag == objectTag$1, othIsObj = othTag == objectTag$1, isSameTag = objTag == othTag;
@@ -37476,12 +37228,12 @@ function baseIsEqualDeep$1(object, other, bitmask, customizer, equalFunc, stack)
   return equalObjects(object, other, bitmask, customizer, equalFunc, stack);
 }
 var _baseIsEqualDeep = baseIsEqualDeep$1;
-var baseIsEqualDeep = _baseIsEqualDeep, isObjectLike$4 = isObjectLike_1;
+var baseIsEqualDeep = _baseIsEqualDeep, isObjectLike$5 = isObjectLike_1;
 function baseIsEqual$3(value, other, bitmask, customizer, stack) {
   if (value === other) {
     return true;
   }
-  if (value == null || other == null || !isObjectLike$4(value) && !isObjectLike$4(other)) {
+  if (value == null || other == null || !isObjectLike$5(value) && !isObjectLike$5(other)) {
     return value !== value && other !== other;
   }
   return baseIsEqualDeep(value, other, bitmask, customizer, baseIsEqual$3, stack);
@@ -37521,14 +37273,14 @@ function baseIsMatch$1(object, source, matchData, customizer) {
   return true;
 }
 var _baseIsMatch = baseIsMatch$1;
-var isObject$5 = isObject_1$1;
+var isObject$7 = isObject_1$1;
 function isStrictComparable$2(value) {
-  return value === value && !isObject$5(value);
+  return value === value && !isObject$7(value);
 }
 var _isStrictComparable = isStrictComparable$2;
-var isStrictComparable$1 = _isStrictComparable, keys$3 = keys_1;
+var isStrictComparable$1 = _isStrictComparable, keys$4 = keys_1;
 function getMatchData$1(object) {
-  var result = keys$3(object), length2 = result.length;
+  var result = keys$4(object), length2 = result.length;
   while (length2--) {
     var key = result[length2], value = object[key];
     result[length2] = [key, value, isStrictComparable$1(value)];
@@ -37556,24 +37308,30 @@ function baseMatches$1(source) {
   };
 }
 var _baseMatches = baseMatches$1;
-var isArray$e = isArray_1, isSymbol$4 = isSymbol_1;
+var baseGetTag$1 = _baseGetTag, isObjectLike$4 = isObjectLike_1;
+var symbolTag$2 = "[object Symbol]";
+function isSymbol$6(value) {
+  return typeof value == "symbol" || isObjectLike$4(value) && baseGetTag$1(value) == symbolTag$2;
+}
+var isSymbol_1 = isSymbol$6;
+var isArray$f = isArray_1, isSymbol$5 = isSymbol_1;
 var reIsDeepProp = /\.|\[(?:[^[\]]*|(["'])(?:(?!\1)[^\\]|\\.)*?\1)\]/, reIsPlainProp = /^\w*$/;
 function isKey$3(value, object) {
-  if (isArray$e(value)) {
+  if (isArray$f(value)) {
     return false;
   }
   var type2 = typeof value;
-  if (type2 == "number" || type2 == "symbol" || type2 == "boolean" || value == null || isSymbol$4(value)) {
+  if (type2 == "number" || type2 == "symbol" || type2 == "boolean" || value == null || isSymbol$5(value)) {
     return true;
   }
   return reIsPlainProp.test(value) || !reIsDeepProp.test(value) || object != null && value in Object(object);
 }
 var _isKey = isKey$3;
 var MapCache = _MapCache;
-var FUNC_ERROR_TEXT$1 = "Expected a function";
+var FUNC_ERROR_TEXT$2 = "Expected a function";
 function memoize$1(func, resolver) {
   if (typeof func != "function" || resolver != null && typeof resolver != "function") {
-    throw new TypeError(FUNC_ERROR_TEXT$1);
+    throw new TypeError(FUNC_ERROR_TEXT$2);
   }
   var memoized = function() {
     var args = arguments, key = resolver ? resolver.apply(this, args) : args[0], cache2 = memoized.cache;
@@ -37616,17 +37374,25 @@ var stringToPath$1 = memoizeCapped(function(string2) {
   return result;
 });
 var _stringToPath = stringToPath$1;
-var Symbol$3 = _Symbol, arrayMap$4 = _arrayMap, isArray$d = isArray_1, isSymbol$3 = isSymbol_1;
+function arrayMap$6(array, iteratee) {
+  var index2 = -1, length2 = array == null ? 0 : array.length, result = Array(length2);
+  while (++index2 < length2) {
+    result[index2] = iteratee(array[index2], index2, array);
+  }
+  return result;
+}
+var _arrayMap = arrayMap$6;
+var Symbol$3 = _Symbol, arrayMap$5 = _arrayMap, isArray$e = isArray_1, isSymbol$4 = isSymbol_1;
 var INFINITY$2 = 1 / 0;
 var symbolProto$1 = Symbol$3 ? Symbol$3.prototype : void 0, symbolToString = symbolProto$1 ? symbolProto$1.toString : void 0;
 function baseToString$1(value) {
   if (typeof value == "string") {
     return value;
   }
-  if (isArray$d(value)) {
-    return arrayMap$4(value, baseToString$1) + "";
+  if (isArray$e(value)) {
+    return arrayMap$5(value, baseToString$1) + "";
   }
-  if (isSymbol$3(value)) {
+  if (isSymbol$4(value)) {
     return symbolToString ? symbolToString.call(value) : "";
   }
   var result = value + "";
@@ -37638,18 +37404,18 @@ function toString$2(value) {
   return value == null ? "" : baseToString(value);
 }
 var toString_1 = toString$2;
-var isArray$c = isArray_1, isKey$2 = _isKey, stringToPath = _stringToPath, toString$1 = toString_1;
+var isArray$d = isArray_1, isKey$2 = _isKey, stringToPath = _stringToPath, toString$1 = toString_1;
 function castPath$2(value, object) {
-  if (isArray$c(value)) {
+  if (isArray$d(value)) {
     return value;
   }
   return isKey$2(value, object) ? [value] : stringToPath(toString$1(value));
 }
 var _castPath = castPath$2;
-var isSymbol$2 = isSymbol_1;
+var isSymbol$3 = isSymbol_1;
 var INFINITY$1 = 1 / 0;
 function toKey$4(value) {
-  if (typeof value == "string" || isSymbol$2(value)) {
+  if (typeof value == "string" || isSymbol$3(value)) {
     return value;
   }
   var result = value + "";
@@ -37677,7 +37443,7 @@ function baseHasIn$1(object, key) {
   return object != null && key in Object(object);
 }
 var _baseHasIn = baseHasIn$1;
-var castPath = _castPath, isArguments$1 = isArguments_1, isArray$b = isArray_1, isIndex$1 = _isIndex, isLength = isLength_1, toKey$2 = _toKey;
+var castPath = _castPath, isArguments$1 = isArguments_1, isArray$c = isArray_1, isIndex$1 = _isIndex, isLength = isLength_1, toKey$2 = _toKey;
 function hasPath$1(object, path2, hasFunc) {
   path2 = castPath(path2, object);
   var index2 = -1, length2 = path2.length, result = false;
@@ -37692,7 +37458,7 @@ function hasPath$1(object, path2, hasFunc) {
     return result;
   }
   length2 = object == null ? 0 : object.length;
-  return !!length2 && isLength(length2) && isIndex$1(key, length2) && (isArray$b(object) || isArguments$1(object));
+  return !!length2 && isLength(length2) && isIndex$1(key, length2) && (isArray$c(object) || isArguments$1(object));
 }
 var _hasPath = hasPath$1;
 var baseHasIn = _baseHasIn, hasPath = _hasPath;
@@ -37712,6 +37478,10 @@ function baseMatchesProperty$1(path2, srcValue) {
   };
 }
 var _baseMatchesProperty = baseMatchesProperty$1;
+function identity$5(value) {
+  return value;
+}
+var identity_1 = identity$5;
 function baseProperty$2(key) {
   return function(object) {
     return object == null ? void 0 : object[key];
@@ -37730,40 +37500,31 @@ function property$1(path2) {
   return isKey(path2) ? baseProperty$1(toKey(path2)) : basePropertyDeep(path2);
 }
 var property_1 = property$1;
-var baseMatches = _baseMatches, baseMatchesProperty = _baseMatchesProperty, identity$3 = identity_1, isArray$a = isArray_1, property = property_1;
+var baseMatches = _baseMatches, baseMatchesProperty = _baseMatchesProperty, identity$4 = identity_1, isArray$b = isArray_1, property = property_1;
 function baseIteratee$9(value) {
   if (typeof value == "function") {
     return value;
   }
   if (value == null) {
-    return identity$3;
+    return identity$4;
   }
   if (typeof value == "object") {
-    return isArray$a(value) ? baseMatchesProperty(value[0], value[1]) : baseMatches(value);
+    return isArray$b(value) ? baseMatchesProperty(value[0], value[1]) : baseMatches(value);
   }
   return property(value);
 }
 var _baseIteratee = baseIteratee$9;
-var baseEach$3 = _baseEach, isArrayLike$4 = isArrayLike_1;
-function baseMap$2(collection, iteratee) {
-  var index2 = -1, result = isArrayLike$4(collection) ? Array(collection.length) : [];
-  baseEach$3(collection, function(value, key, collection2) {
-    result[++index2] = iteratee(value, key, collection2);
-  });
-  return result;
+var arrayFilter = _arrayFilter, baseFilter = _baseFilter, baseIteratee$8 = _baseIteratee, isArray$a = isArray_1;
+function filter(collection, predicate) {
+  var func = isArray$a(collection) ? arrayFilter : baseFilter;
+  return func(collection, baseIteratee$8(predicate));
 }
-var _baseMap = baseMap$2;
-var arrayMap$3 = _arrayMap, baseIteratee$8 = _baseIteratee, baseMap$1 = _baseMap, isArray$9 = isArray_1;
-function map$2(collection, iteratee) {
-  var func = isArray$9(collection) ? arrayMap$3 : baseMap$1;
-  return func(collection, baseIteratee$8(iteratee));
-}
-var map_1 = map$2;
-const _map = /* @__PURE__ */ getDefaultExportFromCjs(map_1);
-var Symbol$2 = _Symbol, isArguments = isArguments_1, isArray$8 = isArray_1;
+var filter_1 = filter;
+const _filter = /* @__PURE__ */ getDefaultExportFromCjs(filter_1);
+var Symbol$2 = _Symbol, isArguments = isArguments_1, isArray$9 = isArray_1;
 var spreadableSymbol = Symbol$2 ? Symbol$2.isConcatSpreadable : void 0;
 function isFlattenable$1(value) {
-  return isArray$8(value) || isArguments(value) || !!(spreadableSymbol && value && value[spreadableSymbol]);
+  return isArray$9(value) || isArguments(value) || !!(spreadableSymbol && value && value[spreadableSymbol]);
 }
 var _isFlattenable = isFlattenable$1;
 var arrayPush$2 = _arrayPush, isFlattenable = _isFlattenable;
@@ -37786,12 +37547,301 @@ function baseFlatten$3(array, depth, predicate, isStrict, result) {
   return result;
 }
 var _baseFlatten = baseFlatten$3;
+var baseEach$3 = _baseEach, isArrayLike$4 = isArrayLike_1;
+function baseMap$2(collection, iteratee) {
+  var index2 = -1, result = isArrayLike$4(collection) ? Array(collection.length) : [];
+  baseEach$3(collection, function(value, key, collection2) {
+    result[++index2] = iteratee(value, key, collection2);
+  });
+  return result;
+}
+var _baseMap = baseMap$2;
+var arrayMap$4 = _arrayMap, baseIteratee$7 = _baseIteratee, baseMap$1 = _baseMap, isArray$8 = isArray_1;
+function map$2(collection, iteratee) {
+  var func = isArray$8(collection) ? arrayMap$4 : baseMap$1;
+  return func(collection, baseIteratee$7(iteratee));
+}
+var map_1 = map$2;
+const _map = /* @__PURE__ */ getDefaultExportFromCjs(map_1);
 var baseFlatten$2 = _baseFlatten, map$1 = map_1;
 function flatMap(collection, iteratee) {
   return baseFlatten$2(map$1(collection, iteratee), 1);
 }
 var flatMap_1 = flatMap;
 const _flatMap = /* @__PURE__ */ getDefaultExportFromCjs(flatMap_1);
+function arrayEach$2(array, iteratee) {
+  var index2 = -1, length2 = array == null ? 0 : array.length;
+  while (++index2 < length2) {
+    if (iteratee(array[index2], index2, array) === false) {
+      break;
+    }
+  }
+  return array;
+}
+var _arrayEach = arrayEach$2;
+var identity$3 = identity_1;
+function castFunction$1(value) {
+  return typeof value == "function" ? value : identity$3;
+}
+var _castFunction = castFunction$1;
+var arrayEach$1 = _arrayEach, baseEach$2 = _baseEach, castFunction = _castFunction, isArray$7 = isArray_1;
+function forEach(collection, iteratee) {
+  var func = isArray$7(collection) ? arrayEach$1 : baseEach$2;
+  return func(collection, castFunction(iteratee));
+}
+var forEach_1 = forEach;
+const _forEach = /* @__PURE__ */ getDefaultExportFromCjs(forEach_1);
+var baseEach$1 = _baseEach;
+function baseSome$1(collection, predicate) {
+  var result;
+  baseEach$1(collection, function(value, index2, collection2) {
+    result = predicate(value, index2, collection2);
+    return !result;
+  });
+  return !!result;
+}
+var _baseSome = baseSome$1;
+var eq$1 = eq_1, isArrayLike$3 = isArrayLike_1, isIndex = _isIndex, isObject$6 = isObject_1$1;
+function isIterateeCall$4(value, index2, object) {
+  if (!isObject$6(object)) {
+    return false;
+  }
+  var type2 = typeof index2;
+  if (type2 == "number" ? isArrayLike$3(object) && isIndex(index2, object.length) : type2 == "string" && index2 in object) {
+    return eq$1(object[index2], value);
+  }
+  return false;
+}
+var _isIterateeCall = isIterateeCall$4;
+var arraySome = _arraySome, baseIteratee$6 = _baseIteratee, baseSome = _baseSome, isArray$6 = isArray_1, isIterateeCall$3 = _isIterateeCall;
+function some(collection, predicate, guard) {
+  var func = isArray$6(collection) ? arraySome : baseSome;
+  if (guard && isIterateeCall$3(collection, predicate, guard)) {
+    predicate = void 0;
+  }
+  return func(collection, baseIteratee$6(predicate));
+}
+var some_1 = some;
+const _some = /* @__PURE__ */ getDefaultExportFromCjs(some_1);
+var arrayMap$3 = _arrayMap;
+function baseValues$1(object, props) {
+  return arrayMap$3(props, function(key) {
+    return object[key];
+  });
+}
+var _baseValues = baseValues$1;
+var baseValues = _baseValues, keys$3 = keys_1;
+function values(object) {
+  return object == null ? [] : baseValues(object, keys$3(object));
+}
+var values_1 = values;
+const _values = /* @__PURE__ */ getDefaultExportFromCjs(values_1);
+var root$2 = _root;
+var now$1 = function() {
+  return root$2.Date.now();
+};
+var now_1 = now$1;
+var reWhitespace = /\s/;
+function trimmedEndIndex$1(string2) {
+  var index2 = string2.length;
+  while (index2-- && reWhitespace.test(string2.charAt(index2))) {
+  }
+  return index2;
+}
+var _trimmedEndIndex = trimmedEndIndex$1;
+var trimmedEndIndex = _trimmedEndIndex;
+var reTrimStart = /^\s+/;
+function baseTrim$1(string2) {
+  return string2 ? string2.slice(0, trimmedEndIndex(string2) + 1).replace(reTrimStart, "") : string2;
+}
+var _baseTrim = baseTrim$1;
+var baseTrim = _baseTrim, isObject$5 = isObject_1$1, isSymbol$2 = isSymbol_1;
+var NAN = 0 / 0;
+var reIsBadHex = /^[-+]0x[0-9a-f]+$/i;
+var reIsBinary = /^0b[01]+$/i;
+var reIsOctal = /^0o[0-7]+$/i;
+var freeParseInt = parseInt;
+function toNumber$2(value) {
+  if (typeof value == "number") {
+    return value;
+  }
+  if (isSymbol$2(value)) {
+    return NAN;
+  }
+  if (isObject$5(value)) {
+    var other = typeof value.valueOf == "function" ? value.valueOf() : value;
+    value = isObject$5(other) ? other + "" : other;
+  }
+  if (typeof value != "string") {
+    return value === 0 ? value : +value;
+  }
+  value = baseTrim(value);
+  var isBinary2 = reIsBinary.test(value);
+  return isBinary2 || reIsOctal.test(value) ? freeParseInt(value.slice(2), isBinary2 ? 2 : 8) : reIsBadHex.test(value) ? NAN : +value;
+}
+var toNumber_1 = toNumber$2;
+var isObject$4 = isObject_1$1, now = now_1, toNumber$1 = toNumber_1;
+var FUNC_ERROR_TEXT$1 = "Expected a function";
+var nativeMax$3 = Math.max, nativeMin$1 = Math.min;
+function debounce(func, wait, options) {
+  var lastArgs, lastThis, maxWait, result, timerId, lastCallTime, lastInvokeTime = 0, leading = false, maxing = false, trailing = true;
+  if (typeof func != "function") {
+    throw new TypeError(FUNC_ERROR_TEXT$1);
+  }
+  wait = toNumber$1(wait) || 0;
+  if (isObject$4(options)) {
+    leading = !!options.leading;
+    maxing = "maxWait" in options;
+    maxWait = maxing ? nativeMax$3(toNumber$1(options.maxWait) || 0, wait) : maxWait;
+    trailing = "trailing" in options ? !!options.trailing : trailing;
+  }
+  function invokeFunc(time2) {
+    var args = lastArgs, thisArg = lastThis;
+    lastArgs = lastThis = void 0;
+    lastInvokeTime = time2;
+    result = func.apply(thisArg, args);
+    return result;
+  }
+  function leadingEdge(time2) {
+    lastInvokeTime = time2;
+    timerId = setTimeout(timerExpired, wait);
+    return leading ? invokeFunc(time2) : result;
+  }
+  function remainingWait(time2) {
+    var timeSinceLastCall = time2 - lastCallTime, timeSinceLastInvoke = time2 - lastInvokeTime, timeWaiting = wait - timeSinceLastCall;
+    return maxing ? nativeMin$1(timeWaiting, maxWait - timeSinceLastInvoke) : timeWaiting;
+  }
+  function shouldInvoke(time2) {
+    var timeSinceLastCall = time2 - lastCallTime, timeSinceLastInvoke = time2 - lastInvokeTime;
+    return lastCallTime === void 0 || timeSinceLastCall >= wait || timeSinceLastCall < 0 || maxing && timeSinceLastInvoke >= maxWait;
+  }
+  function timerExpired() {
+    var time2 = now();
+    if (shouldInvoke(time2)) {
+      return trailingEdge(time2);
+    }
+    timerId = setTimeout(timerExpired, remainingWait(time2));
+  }
+  function trailingEdge(time2) {
+    timerId = void 0;
+    if (trailing && lastArgs) {
+      return invokeFunc(time2);
+    }
+    lastArgs = lastThis = void 0;
+    return result;
+  }
+  function cancel() {
+    if (timerId !== void 0) {
+      clearTimeout(timerId);
+    }
+    lastInvokeTime = 0;
+    lastArgs = lastCallTime = lastThis = timerId = void 0;
+  }
+  function flush() {
+    return timerId === void 0 ? result : trailingEdge(now());
+  }
+  function debounced() {
+    var time2 = now(), isInvoking = shouldInvoke(time2);
+    lastArgs = arguments;
+    lastThis = this;
+    lastCallTime = time2;
+    if (isInvoking) {
+      if (timerId === void 0) {
+        return leadingEdge(lastCallTime);
+      }
+      if (maxing) {
+        clearTimeout(timerId);
+        timerId = setTimeout(timerExpired, wait);
+        return invokeFunc(lastCallTime);
+      }
+    }
+    if (timerId === void 0) {
+      timerId = setTimeout(timerExpired, wait);
+    }
+    return result;
+  }
+  debounced.cancel = cancel;
+  debounced.flush = flush;
+  return debounced;
+}
+var debounce_1 = debounce;
+const _debounce = /* @__PURE__ */ getDefaultExportFromCjs(debounce_1);
+class Matrix {
+  constructor(matrix) {
+    this.matrix = matrix;
+  }
+  mmul(matrix) {
+    this.matrix = this.matrix.map((row, i2) => matrix.asArray()[0].map((_2, j) => row.reduce((acc, _3, n2) => acc + this.matrix[i2][n2] * matrix.asArray()[n2][j], 0)));
+    return this;
+  }
+  asArray() {
+    return this.matrix;
+  }
+  get(rowIndex, columnIndex) {
+    return this.asArray()[rowIndex][columnIndex];
+  }
+  static multiply(...matrices) {
+    let m2 = matrices[0];
+    for (let i2 = 1; i2 < matrices.length; i2++) {
+      m2 = m2.mmul(matrices[i2]);
+    }
+    return m2;
+  }
+  static scaleMatrix(x, y2) {
+    return new Matrix([
+      [x, 0, 0],
+      [0, y2, 0],
+      [0, 0, 1]
+    ]);
+  }
+  static translateMatrix(x, y2) {
+    return new Matrix([
+      [1, 0, x],
+      [0, 1, y2],
+      [0, 0, 1]
+    ]);
+  }
+  static rotateMatrix(deg2) {
+    return new Matrix([
+      [Math.cos(deg2), -1 * Math.sin(deg2), 0],
+      [Math.sin(deg2), Math.cos(deg2), 0],
+      [0, 0, 1]
+    ]);
+  }
+  static createScaleMatrix(x, y2, origin) {
+    return this.multiply(Matrix.translateMatrix(origin.x, origin.y), Matrix.scaleMatrix(x, y2), Matrix.translateMatrix(-origin.x, -origin.y));
+  }
+  static createRotateMatrix(deg2, origin) {
+    return this.multiply(Matrix.translateMatrix(origin.x, origin.y), Matrix.rotateMatrix(deg2), Matrix.translateMatrix(-origin.x, -origin.y));
+  }
+}
+class Point {
+  constructor(x = 0, y2 = 0) {
+    this.x = x;
+    this.y = y2;
+  }
+  translate(x, y2) {
+    this.x += x;
+    this.y += y2;
+  }
+  clone() {
+    return new Point(this.x, this.y);
+  }
+  toSVG() {
+    return this.x + " " + this.y;
+  }
+  asMatrix() {
+    return new Matrix([[this.x], [this.y], [1]]);
+  }
+  transform(matrix) {
+    let final = matrix.mmul(this.asMatrix());
+    this.x = final.get(0, 0);
+    this.y = final.get(1, 0);
+  }
+  static middlePoint(pointA, pointB) {
+    return new Point((pointB.x + pointA.x) / 2, (pointB.y + pointA.y) / 2);
+  }
+}
 var BoundsCorner;
 (function(BoundsCorner2) {
   BoundsCorner2["TOP_LEFT"] = "TL";
@@ -38023,24 +38073,6 @@ class BezierCurve extends Polygon {
     this.points[BezierCurvepPoints.TARGET] = point;
   }
 }
-var baseEach$2 = _baseEach;
-function baseFilter$1(collection, predicate) {
-  var result = [];
-  baseEach$2(collection, function(value, index2, collection2) {
-    if (predicate(value, index2, collection2)) {
-      result.push(value);
-    }
-  });
-  return result;
-}
-var _baseFilter = baseFilter$1;
-var arrayFilter = _arrayFilter, baseFilter = _baseFilter, baseIteratee$7 = _baseIteratee, isArray$7 = isArray_1;
-function filter(collection, predicate) {
-  var func = isArray$7(collection) ? arrayFilter : baseFilter;
-  return func(collection, baseIteratee$7(predicate));
-}
-var filter_1 = filter;
-const _filter = /* @__PURE__ */ getDefaultExportFromCjs(filter_1);
 var baseIsEqual = _baseIsEqual;
 function isEqual(value, other) {
   return baseIsEqual(value, other);
@@ -38077,12 +38109,12 @@ function baseAssignValue$3(object, key, value) {
   }
 }
 var _baseAssignValue = baseAssignValue$3;
-var baseAssignValue$2 = _baseAssignValue, eq$1 = eq_1;
+var baseAssignValue$2 = _baseAssignValue, eq = eq_1;
 var objectProto$2 = Object.prototype;
 var hasOwnProperty$3 = objectProto$2.hasOwnProperty;
 function assignValue$2(object, key, value) {
   var objValue = object[key];
-  if (!(hasOwnProperty$3.call(object, key) && eq$1(objValue, value)) || value === void 0 && !(key in object)) {
+  if (!(hasOwnProperty$3.call(object, key) && eq(objValue, value)) || value === void 0 && !(key in object)) {
     baseAssignValue$2(object, key, value);
   }
 }
@@ -38122,11 +38154,11 @@ function nativeKeysIn$1(object) {
   return result;
 }
 var _nativeKeysIn = nativeKeysIn$1;
-var isObject$4 = isObject_1$1, isPrototype$1 = _isPrototype, nativeKeysIn = _nativeKeysIn;
+var isObject$3 = isObject_1$1, isPrototype$1 = _isPrototype, nativeKeysIn = _nativeKeysIn;
 var objectProto$1 = Object.prototype;
 var hasOwnProperty$2 = objectProto$1.hasOwnProperty;
 function baseKeysIn$1(object) {
-  if (!isObject$4(object)) {
+  if (!isObject$3(object)) {
     return nativeKeysIn(object);
   }
   var isProto = isPrototype$1(object), result = [];
@@ -38138,9 +38170,9 @@ function baseKeysIn$1(object) {
   return result;
 }
 var _baseKeysIn = baseKeysIn$1;
-var arrayLikeKeys = _arrayLikeKeys, baseKeysIn = _baseKeysIn, isArrayLike$3 = isArrayLike_1;
+var arrayLikeKeys = _arrayLikeKeys, baseKeysIn = _baseKeysIn, isArrayLike$2 = isArrayLike_1;
 function keysIn$3(object) {
-  return isArrayLike$3(object) ? arrayLikeKeys(object, true) : baseKeysIn(object);
+  return isArrayLike$2(object) ? arrayLikeKeys(object, true) : baseKeysIn(object);
 }
 var keysIn_1 = keysIn$3;
 var copyObject$2 = _copyObject, keysIn$2 = keysIn_1;
@@ -38285,13 +38317,13 @@ function initCloneByTag$1(object, tag, isDeep) {
   }
 }
 var _initCloneByTag = initCloneByTag$1;
-var isObject$3 = isObject_1$1;
+var isObject$2 = isObject_1$1;
 var objectCreate = Object.create;
 var baseCreate$1 = /* @__PURE__ */ function() {
   function object() {
   }
   return function(proto) {
-    if (!isObject$3(proto)) {
+    if (!isObject$2(proto)) {
       return {};
     }
     if (objectCreate) {
@@ -38329,7 +38361,7 @@ var baseIsSet = _baseIsSet, baseUnary$2 = _baseUnary, nodeUtil = _nodeUtilExport
 var nodeIsSet = nodeUtil && nodeUtil.isSet;
 var isSet$1 = nodeIsSet ? baseUnary$2(nodeIsSet) : baseIsSet;
 var isSet_1 = isSet$1;
-var Stack2 = _Stack, arrayEach = _arrayEach, assignValue = _assignValue, baseAssign = _baseAssign, baseAssignIn = _baseAssignIn, cloneBuffer = _cloneBufferExports, copyArray$1 = _copyArray, copySymbols = _copySymbols, copySymbolsIn = _copySymbolsIn, getAllKeys = _getAllKeys, getAllKeysIn = _getAllKeysIn, getTag$1 = _getTag, initCloneArray = _initCloneArray, initCloneByTag = _initCloneByTag, initCloneObject = _initCloneObject, isArray$6 = isArray_1, isBuffer = isBufferExports, isMap = isMap_1, isObject$2 = isObject_1$1, isSet = isSet_1, keys$1 = keys_1, keysIn = keysIn_1;
+var Stack2 = _Stack, arrayEach = _arrayEach, assignValue = _assignValue, baseAssign = _baseAssign, baseAssignIn = _baseAssignIn, cloneBuffer = _cloneBufferExports, copyArray$1 = _copyArray, copySymbols = _copySymbols, copySymbolsIn = _copySymbolsIn, getAllKeys = _getAllKeys, getAllKeysIn = _getAllKeysIn, getTag$1 = _getTag, initCloneArray = _initCloneArray, initCloneByTag = _initCloneByTag, initCloneObject = _initCloneObject, isArray$5 = isArray_1, isBuffer = isBufferExports, isMap = isMap_1, isObject$1 = isObject_1$1, isSet = isSet_1, keys$1 = keys_1, keysIn = keysIn_1;
 var CLONE_DEEP_FLAG$1 = 1, CLONE_FLAT_FLAG = 2, CLONE_SYMBOLS_FLAG$1 = 4;
 var argsTag = "[object Arguments]", arrayTag = "[object Array]", boolTag = "[object Boolean]", dateTag = "[object Date]", errorTag = "[object Error]", funcTag = "[object Function]", genTag = "[object GeneratorFunction]", mapTag$1 = "[object Map]", numberTag = "[object Number]", objectTag = "[object Object]", regexpTag = "[object RegExp]", setTag$1 = "[object Set]", stringTag$1 = "[object String]", symbolTag = "[object Symbol]", weakMapTag = "[object WeakMap]";
 var arrayBufferTag = "[object ArrayBuffer]", dataViewTag = "[object DataView]", float32Tag = "[object Float32Array]", float64Tag = "[object Float64Array]", int8Tag = "[object Int8Array]", int16Tag = "[object Int16Array]", int32Tag = "[object Int32Array]", uint8Tag = "[object Uint8Array]", uint8ClampedTag = "[object Uint8ClampedArray]", uint16Tag = "[object Uint16Array]", uint32Tag = "[object Uint32Array]";
@@ -38344,10 +38376,10 @@ function baseClone$1(value, bitmask, customizer, key, object, stack) {
   if (result !== void 0) {
     return result;
   }
-  if (!isObject$2(value)) {
+  if (!isObject$1(value)) {
     return value;
   }
-  var isArr = isArray$6(value);
+  var isArr = isArray$5(value);
   if (isArr) {
     result = initCloneArray(value);
     if (!isDeep) {
@@ -38745,10 +38777,10 @@ function rulesheet(callback) {
     }
   };
 }
-var baseAssignValue = _baseAssignValue, baseForOwn = _baseForOwn, baseIteratee$6 = _baseIteratee;
+var baseAssignValue = _baseAssignValue, baseForOwn = _baseForOwn, baseIteratee$5 = _baseIteratee;
 function mapValues(object, iteratee) {
   var result = {};
-  iteratee = baseIteratee$6(iteratee);
+  iteratee = baseIteratee$5(iteratee);
   baseForOwn(object, function(value, key, object2) {
     baseAssignValue(result, key, iteratee(value, key, object2));
   });
@@ -38911,9 +38943,9 @@ function baseRest$3(func, start) {
   return setToString(overRest(func, start, identity$1), func + "");
 }
 var _baseRest = baseRest$3;
-var isArrayLike$2 = isArrayLike_1, isObjectLike$1 = isObjectLike_1;
+var isArrayLike$1 = isArrayLike_1, isObjectLike$1 = isObjectLike_1;
 function isArrayLikeObject$1(value) {
-  return isObjectLike$1(value) && isArrayLike$2(value);
+  return isObjectLike$1(value) && isArrayLike$1(value);
 }
 var isArrayLikeObject_1 = isArrayLikeObject$1;
 var isArrayLikeObject = isArrayLikeObject_1;
@@ -38928,38 +38960,6 @@ var intersection = baseRest$2(function(arrays) {
 });
 var intersection_1 = intersection;
 const _intersection = /* @__PURE__ */ getDefaultExportFromCjs(intersection_1);
-var baseEach$1 = _baseEach;
-function baseSome$1(collection, predicate) {
-  var result;
-  baseEach$1(collection, function(value, index2, collection2) {
-    result = predicate(value, index2, collection2);
-    return !result;
-  });
-  return !!result;
-}
-var _baseSome = baseSome$1;
-var eq = eq_1, isArrayLike$1 = isArrayLike_1, isIndex = _isIndex, isObject$1 = isObject_1$1;
-function isIterateeCall$4(value, index2, object) {
-  if (!isObject$1(object)) {
-    return false;
-  }
-  var type2 = typeof index2;
-  if (type2 == "number" ? isArrayLike$1(object) && isIndex(index2, object.length) : type2 == "string" && index2 in object) {
-    return eq(object[index2], value);
-  }
-  return false;
-}
-var _isIterateeCall = isIterateeCall$4;
-var arraySome = _arraySome, baseIteratee$5 = _baseIteratee, baseSome = _baseSome, isArray$5 = isArray_1, isIterateeCall$3 = _isIterateeCall;
-function some(collection, predicate, guard) {
-  var func = isArray$5(collection) ? arraySome : baseSome;
-  if (guard && isIterateeCall$3(collection, predicate, guard)) {
-    predicate = void 0;
-  }
-  return func(collection, baseIteratee$5(predicate));
-}
-var some_1 = some;
-const _some = /* @__PURE__ */ getDefaultExportFromCjs(some_1);
 function baseSlice$1(array, start, end) {
   var index2 = -1, length2 = array.length;
   if (start < 0) {
@@ -45740,6 +45740,3719 @@ var version = "0.8.5";
   },
   version
 });
+function stringify$1(values2, options) {
+  const settings = options || {};
+  const input = values2[values2.length - 1] === "" ? [...values2, ""] : values2;
+  return input.join(
+    (settings.padRight ? " " : "") + "," + (settings.padLeft === false ? "" : " ")
+  ).trim();
+}
+const nameRe = /^[$_\p{ID_Start}][$_\u{200C}\u{200D}\p{ID_Continue}]*$/u;
+const nameReJsx = /^[$_\p{ID_Start}][-$_\u{200C}\u{200D}\p{ID_Continue}]*$/u;
+const emptyOptions = {};
+function name$1(name2, options) {
+  const settings = options || emptyOptions;
+  const re2 = settings.jsx ? nameReJsx : nameRe;
+  return re2.test(name2);
+}
+const re = /[ \t\n\f\r]/g;
+function whitespace(thing) {
+  return typeof thing === "object" ? thing.type === "text" ? empty(thing.value) : false : empty(thing);
+}
+function empty(value) {
+  return value.replace(re, "") === "";
+}
+let Schema$2 = class Schema2 {
+  /**
+   * @constructor
+   * @param {Properties} property
+   * @param {Normal} normal
+   * @param {string} [space]
+   */
+  constructor(property2, normal, space2) {
+    this.property = property2;
+    this.normal = normal;
+    if (space2) {
+      this.space = space2;
+    }
+  }
+};
+Schema$2.prototype.property = {};
+Schema$2.prototype.normal = {};
+Schema$2.prototype.space = null;
+function merge$1(definitions, space2) {
+  const property2 = {};
+  const normal = {};
+  let index2 = -1;
+  while (++index2 < definitions.length) {
+    Object.assign(property2, definitions[index2].property);
+    Object.assign(normal, definitions[index2].normal);
+  }
+  return new Schema$2(property2, normal, space2);
+}
+function normalize$1(value) {
+  return value.toLowerCase();
+}
+class Info {
+  /**
+   * @constructor
+   * @param {string} property
+   * @param {string} attribute
+   */
+  constructor(property2, attribute) {
+    this.property = property2;
+    this.attribute = attribute;
+  }
+}
+Info.prototype.space = null;
+Info.prototype.boolean = false;
+Info.prototype.booleanish = false;
+Info.prototype.overloadedBoolean = false;
+Info.prototype.number = false;
+Info.prototype.commaSeparated = false;
+Info.prototype.spaceSeparated = false;
+Info.prototype.commaOrSpaceSeparated = false;
+Info.prototype.mustUseProperty = false;
+Info.prototype.defined = false;
+let powers = 0;
+const boolean = increment();
+const booleanish = increment();
+const overloadedBoolean = increment();
+const number = increment();
+const spaceSeparated = increment();
+const commaSeparated = increment();
+const commaOrSpaceSeparated = increment();
+function increment() {
+  return 2 ** ++powers;
+}
+const types$1 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+  __proto__: null,
+  boolean,
+  booleanish,
+  commaOrSpaceSeparated,
+  commaSeparated,
+  number,
+  overloadedBoolean,
+  spaceSeparated
+}, Symbol.toStringTag, { value: "Module" }));
+const checks = Object.keys(types$1);
+class DefinedInfo extends Info {
+  /**
+   * @constructor
+   * @param {string} property
+   * @param {string} attribute
+   * @param {number|null} [mask]
+   * @param {string} [space]
+   */
+  constructor(property2, attribute, mask, space2) {
+    let index2 = -1;
+    super(property2, attribute);
+    mark(this, "space", space2);
+    if (typeof mask === "number") {
+      while (++index2 < checks.length) {
+        const check = checks[index2];
+        mark(this, checks[index2], (mask & types$1[check]) === types$1[check]);
+      }
+    }
+  }
+}
+DefinedInfo.prototype.defined = true;
+function mark(values2, key, value) {
+  if (value) {
+    values2[key] = value;
+  }
+}
+const own$3 = {}.hasOwnProperty;
+function create(definition) {
+  const property2 = {};
+  const normal = {};
+  let prop;
+  for (prop in definition.properties) {
+    if (own$3.call(definition.properties, prop)) {
+      const value = definition.properties[prop];
+      const info = new DefinedInfo(
+        prop,
+        definition.transform(definition.attributes || {}, prop),
+        value,
+        definition.space
+      );
+      if (definition.mustUseProperty && definition.mustUseProperty.includes(prop)) {
+        info.mustUseProperty = true;
+      }
+      property2[prop] = info;
+      normal[normalize$1(prop)] = prop;
+      normal[normalize$1(info.attribute)] = prop;
+    }
+  }
+  return new Schema$2(property2, normal, definition.space);
+}
+const xlink = create({
+  space: "xlink",
+  transform(_2, prop) {
+    return "xlink:" + prop.slice(5).toLowerCase();
+  },
+  properties: {
+    xLinkActuate: null,
+    xLinkArcRole: null,
+    xLinkHref: null,
+    xLinkRole: null,
+    xLinkShow: null,
+    xLinkTitle: null,
+    xLinkType: null
+  }
+});
+const xml = create({
+  space: "xml",
+  transform(_2, prop) {
+    return "xml:" + prop.slice(3).toLowerCase();
+  },
+  properties: { xmlLang: null, xmlBase: null, xmlSpace: null }
+});
+function caseSensitiveTransform(attributes, attribute) {
+  return attribute in attributes ? attributes[attribute] : attribute;
+}
+function caseInsensitiveTransform(attributes, property2) {
+  return caseSensitiveTransform(attributes, property2.toLowerCase());
+}
+const xmlns = create({
+  space: "xmlns",
+  attributes: { xmlnsxlink: "xmlns:xlink" },
+  transform: caseInsensitiveTransform,
+  properties: { xmlns: null, xmlnsXLink: null }
+});
+const aria = create({
+  transform(_2, prop) {
+    return prop === "role" ? prop : "aria-" + prop.slice(4).toLowerCase();
+  },
+  properties: {
+    ariaActiveDescendant: null,
+    ariaAtomic: booleanish,
+    ariaAutoComplete: null,
+    ariaBusy: booleanish,
+    ariaChecked: booleanish,
+    ariaColCount: number,
+    ariaColIndex: number,
+    ariaColSpan: number,
+    ariaControls: spaceSeparated,
+    ariaCurrent: null,
+    ariaDescribedBy: spaceSeparated,
+    ariaDetails: null,
+    ariaDisabled: booleanish,
+    ariaDropEffect: spaceSeparated,
+    ariaErrorMessage: null,
+    ariaExpanded: booleanish,
+    ariaFlowTo: spaceSeparated,
+    ariaGrabbed: booleanish,
+    ariaHasPopup: null,
+    ariaHidden: booleanish,
+    ariaInvalid: null,
+    ariaKeyShortcuts: null,
+    ariaLabel: null,
+    ariaLabelledBy: spaceSeparated,
+    ariaLevel: number,
+    ariaLive: null,
+    ariaModal: booleanish,
+    ariaMultiLine: booleanish,
+    ariaMultiSelectable: booleanish,
+    ariaOrientation: null,
+    ariaOwns: spaceSeparated,
+    ariaPlaceholder: null,
+    ariaPosInSet: number,
+    ariaPressed: booleanish,
+    ariaReadOnly: booleanish,
+    ariaRelevant: null,
+    ariaRequired: booleanish,
+    ariaRoleDescription: spaceSeparated,
+    ariaRowCount: number,
+    ariaRowIndex: number,
+    ariaRowSpan: number,
+    ariaSelected: booleanish,
+    ariaSetSize: number,
+    ariaSort: null,
+    ariaValueMax: number,
+    ariaValueMin: number,
+    ariaValueNow: number,
+    ariaValueText: null,
+    role: null
+  }
+});
+const html$1 = create({
+  space: "html",
+  attributes: {
+    acceptcharset: "accept-charset",
+    classname: "class",
+    htmlfor: "for",
+    httpequiv: "http-equiv"
+  },
+  transform: caseInsensitiveTransform,
+  mustUseProperty: ["checked", "multiple", "muted", "selected"],
+  properties: {
+    // Standard Properties.
+    abbr: null,
+    accept: commaSeparated,
+    acceptCharset: spaceSeparated,
+    accessKey: spaceSeparated,
+    action: null,
+    allow: null,
+    allowFullScreen: boolean,
+    allowPaymentRequest: boolean,
+    allowUserMedia: boolean,
+    alt: null,
+    as: null,
+    async: boolean,
+    autoCapitalize: null,
+    autoComplete: spaceSeparated,
+    autoFocus: boolean,
+    autoPlay: boolean,
+    blocking: spaceSeparated,
+    capture: boolean,
+    charSet: null,
+    checked: boolean,
+    cite: null,
+    className: spaceSeparated,
+    cols: number,
+    colSpan: null,
+    content: null,
+    contentEditable: booleanish,
+    controls: boolean,
+    controlsList: spaceSeparated,
+    coords: number | commaSeparated,
+    crossOrigin: null,
+    data: null,
+    dateTime: null,
+    decoding: null,
+    default: boolean,
+    defer: boolean,
+    dir: null,
+    dirName: null,
+    disabled: boolean,
+    download: overloadedBoolean,
+    draggable: booleanish,
+    encType: null,
+    enterKeyHint: null,
+    fetchPriority: null,
+    form: null,
+    formAction: null,
+    formEncType: null,
+    formMethod: null,
+    formNoValidate: boolean,
+    formTarget: null,
+    headers: spaceSeparated,
+    height: number,
+    hidden: boolean,
+    high: number,
+    href: null,
+    hrefLang: null,
+    htmlFor: spaceSeparated,
+    httpEquiv: spaceSeparated,
+    id: null,
+    imageSizes: null,
+    imageSrcSet: null,
+    inert: boolean,
+    inputMode: null,
+    integrity: null,
+    is: null,
+    isMap: boolean,
+    itemId: null,
+    itemProp: spaceSeparated,
+    itemRef: spaceSeparated,
+    itemScope: boolean,
+    itemType: spaceSeparated,
+    kind: null,
+    label: null,
+    lang: null,
+    language: null,
+    list: null,
+    loading: null,
+    loop: boolean,
+    low: number,
+    manifest: null,
+    max: null,
+    maxLength: number,
+    media: null,
+    method: null,
+    min: null,
+    minLength: number,
+    multiple: boolean,
+    muted: boolean,
+    name: null,
+    nonce: null,
+    noModule: boolean,
+    noValidate: boolean,
+    onAbort: null,
+    onAfterPrint: null,
+    onAuxClick: null,
+    onBeforeMatch: null,
+    onBeforePrint: null,
+    onBeforeToggle: null,
+    onBeforeUnload: null,
+    onBlur: null,
+    onCancel: null,
+    onCanPlay: null,
+    onCanPlayThrough: null,
+    onChange: null,
+    onClick: null,
+    onClose: null,
+    onContextLost: null,
+    onContextMenu: null,
+    onContextRestored: null,
+    onCopy: null,
+    onCueChange: null,
+    onCut: null,
+    onDblClick: null,
+    onDrag: null,
+    onDragEnd: null,
+    onDragEnter: null,
+    onDragExit: null,
+    onDragLeave: null,
+    onDragOver: null,
+    onDragStart: null,
+    onDrop: null,
+    onDurationChange: null,
+    onEmptied: null,
+    onEnded: null,
+    onError: null,
+    onFocus: null,
+    onFormData: null,
+    onHashChange: null,
+    onInput: null,
+    onInvalid: null,
+    onKeyDown: null,
+    onKeyPress: null,
+    onKeyUp: null,
+    onLanguageChange: null,
+    onLoad: null,
+    onLoadedData: null,
+    onLoadedMetadata: null,
+    onLoadEnd: null,
+    onLoadStart: null,
+    onMessage: null,
+    onMessageError: null,
+    onMouseDown: null,
+    onMouseEnter: null,
+    onMouseLeave: null,
+    onMouseMove: null,
+    onMouseOut: null,
+    onMouseOver: null,
+    onMouseUp: null,
+    onOffline: null,
+    onOnline: null,
+    onPageHide: null,
+    onPageShow: null,
+    onPaste: null,
+    onPause: null,
+    onPlay: null,
+    onPlaying: null,
+    onPopState: null,
+    onProgress: null,
+    onRateChange: null,
+    onRejectionHandled: null,
+    onReset: null,
+    onResize: null,
+    onScroll: null,
+    onScrollEnd: null,
+    onSecurityPolicyViolation: null,
+    onSeeked: null,
+    onSeeking: null,
+    onSelect: null,
+    onSlotChange: null,
+    onStalled: null,
+    onStorage: null,
+    onSubmit: null,
+    onSuspend: null,
+    onTimeUpdate: null,
+    onToggle: null,
+    onUnhandledRejection: null,
+    onUnload: null,
+    onVolumeChange: null,
+    onWaiting: null,
+    onWheel: null,
+    open: boolean,
+    optimum: number,
+    pattern: null,
+    ping: spaceSeparated,
+    placeholder: null,
+    playsInline: boolean,
+    popover: null,
+    popoverTarget: null,
+    popoverTargetAction: null,
+    poster: null,
+    preload: null,
+    readOnly: boolean,
+    referrerPolicy: null,
+    rel: spaceSeparated,
+    required: boolean,
+    reversed: boolean,
+    rows: number,
+    rowSpan: number,
+    sandbox: spaceSeparated,
+    scope: null,
+    scoped: boolean,
+    seamless: boolean,
+    selected: boolean,
+    shadowRootDelegatesFocus: boolean,
+    shadowRootMode: null,
+    shape: null,
+    size: number,
+    sizes: null,
+    slot: null,
+    span: number,
+    spellCheck: booleanish,
+    src: null,
+    srcDoc: null,
+    srcLang: null,
+    srcSet: null,
+    start: number,
+    step: null,
+    style: null,
+    tabIndex: number,
+    target: null,
+    title: null,
+    translate: null,
+    type: null,
+    typeMustMatch: boolean,
+    useMap: null,
+    value: booleanish,
+    width: number,
+    wrap: null,
+    // Legacy.
+    // See: https://html.spec.whatwg.org/#other-elements,-attributes-and-apis
+    align: null,
+    // Several. Use CSS `text-align` instead,
+    aLink: null,
+    // `<body>`. Use CSS `a:active {color}` instead
+    archive: spaceSeparated,
+    // `<object>`. List of URIs to archives
+    axis: null,
+    // `<td>` and `<th>`. Use `scope` on `<th>`
+    background: null,
+    // `<body>`. Use CSS `background-image` instead
+    bgColor: null,
+    // `<body>` and table elements. Use CSS `background-color` instead
+    border: number,
+    // `<table>`. Use CSS `border-width` instead,
+    borderColor: null,
+    // `<table>`. Use CSS `border-color` instead,
+    bottomMargin: number,
+    // `<body>`
+    cellPadding: null,
+    // `<table>`
+    cellSpacing: null,
+    // `<table>`
+    char: null,
+    // Several table elements. When `align=char`, sets the character to align on
+    charOff: null,
+    // Several table elements. When `char`, offsets the alignment
+    classId: null,
+    // `<object>`
+    clear: null,
+    // `<br>`. Use CSS `clear` instead
+    code: null,
+    // `<object>`
+    codeBase: null,
+    // `<object>`
+    codeType: null,
+    // `<object>`
+    color: null,
+    // `<font>` and `<hr>`. Use CSS instead
+    compact: boolean,
+    // Lists. Use CSS to reduce space between items instead
+    declare: boolean,
+    // `<object>`
+    event: null,
+    // `<script>`
+    face: null,
+    // `<font>`. Use CSS instead
+    frame: null,
+    // `<table>`
+    frameBorder: null,
+    // `<iframe>`. Use CSS `border` instead
+    hSpace: number,
+    // `<img>` and `<object>`
+    leftMargin: number,
+    // `<body>`
+    link: null,
+    // `<body>`. Use CSS `a:link {color: *}` instead
+    longDesc: null,
+    // `<frame>`, `<iframe>`, and `<img>`. Use an `<a>`
+    lowSrc: null,
+    // `<img>`. Use a `<picture>`
+    marginHeight: number,
+    // `<body>`
+    marginWidth: number,
+    // `<body>`
+    noResize: boolean,
+    // `<frame>`
+    noHref: boolean,
+    // `<area>`. Use no href instead of an explicit `nohref`
+    noShade: boolean,
+    // `<hr>`. Use background-color and height instead of borders
+    noWrap: boolean,
+    // `<td>` and `<th>`
+    object: null,
+    // `<applet>`
+    profile: null,
+    // `<head>`
+    prompt: null,
+    // `<isindex>`
+    rev: null,
+    // `<link>`
+    rightMargin: number,
+    // `<body>`
+    rules: null,
+    // `<table>`
+    scheme: null,
+    // `<meta>`
+    scrolling: booleanish,
+    // `<frame>`. Use overflow in the child context
+    standby: null,
+    // `<object>`
+    summary: null,
+    // `<table>`
+    text: null,
+    // `<body>`. Use CSS `color` instead
+    topMargin: number,
+    // `<body>`
+    valueType: null,
+    // `<param>`
+    version: null,
+    // `<html>`. Use a doctype.
+    vAlign: null,
+    // Several. Use CSS `vertical-align` instead
+    vLink: null,
+    // `<body>`. Use CSS `a:visited {color}` instead
+    vSpace: number,
+    // `<img>` and `<object>`
+    // Non-standard Properties.
+    allowTransparency: null,
+    autoCorrect: null,
+    autoSave: null,
+    disablePictureInPicture: boolean,
+    disableRemotePlayback: boolean,
+    prefix: null,
+    property: null,
+    results: number,
+    security: null,
+    unselectable: null
+  }
+});
+const svg$1 = create({
+  space: "svg",
+  attributes: {
+    accentHeight: "accent-height",
+    alignmentBaseline: "alignment-baseline",
+    arabicForm: "arabic-form",
+    baselineShift: "baseline-shift",
+    capHeight: "cap-height",
+    className: "class",
+    clipPath: "clip-path",
+    clipRule: "clip-rule",
+    colorInterpolation: "color-interpolation",
+    colorInterpolationFilters: "color-interpolation-filters",
+    colorProfile: "color-profile",
+    colorRendering: "color-rendering",
+    crossOrigin: "crossorigin",
+    dataType: "datatype",
+    dominantBaseline: "dominant-baseline",
+    enableBackground: "enable-background",
+    fillOpacity: "fill-opacity",
+    fillRule: "fill-rule",
+    floodColor: "flood-color",
+    floodOpacity: "flood-opacity",
+    fontFamily: "font-family",
+    fontSize: "font-size",
+    fontSizeAdjust: "font-size-adjust",
+    fontStretch: "font-stretch",
+    fontStyle: "font-style",
+    fontVariant: "font-variant",
+    fontWeight: "font-weight",
+    glyphName: "glyph-name",
+    glyphOrientationHorizontal: "glyph-orientation-horizontal",
+    glyphOrientationVertical: "glyph-orientation-vertical",
+    hrefLang: "hreflang",
+    horizAdvX: "horiz-adv-x",
+    horizOriginX: "horiz-origin-x",
+    horizOriginY: "horiz-origin-y",
+    imageRendering: "image-rendering",
+    letterSpacing: "letter-spacing",
+    lightingColor: "lighting-color",
+    markerEnd: "marker-end",
+    markerMid: "marker-mid",
+    markerStart: "marker-start",
+    navDown: "nav-down",
+    navDownLeft: "nav-down-left",
+    navDownRight: "nav-down-right",
+    navLeft: "nav-left",
+    navNext: "nav-next",
+    navPrev: "nav-prev",
+    navRight: "nav-right",
+    navUp: "nav-up",
+    navUpLeft: "nav-up-left",
+    navUpRight: "nav-up-right",
+    onAbort: "onabort",
+    onActivate: "onactivate",
+    onAfterPrint: "onafterprint",
+    onBeforePrint: "onbeforeprint",
+    onBegin: "onbegin",
+    onCancel: "oncancel",
+    onCanPlay: "oncanplay",
+    onCanPlayThrough: "oncanplaythrough",
+    onChange: "onchange",
+    onClick: "onclick",
+    onClose: "onclose",
+    onCopy: "oncopy",
+    onCueChange: "oncuechange",
+    onCut: "oncut",
+    onDblClick: "ondblclick",
+    onDrag: "ondrag",
+    onDragEnd: "ondragend",
+    onDragEnter: "ondragenter",
+    onDragExit: "ondragexit",
+    onDragLeave: "ondragleave",
+    onDragOver: "ondragover",
+    onDragStart: "ondragstart",
+    onDrop: "ondrop",
+    onDurationChange: "ondurationchange",
+    onEmptied: "onemptied",
+    onEnd: "onend",
+    onEnded: "onended",
+    onError: "onerror",
+    onFocus: "onfocus",
+    onFocusIn: "onfocusin",
+    onFocusOut: "onfocusout",
+    onHashChange: "onhashchange",
+    onInput: "oninput",
+    onInvalid: "oninvalid",
+    onKeyDown: "onkeydown",
+    onKeyPress: "onkeypress",
+    onKeyUp: "onkeyup",
+    onLoad: "onload",
+    onLoadedData: "onloadeddata",
+    onLoadedMetadata: "onloadedmetadata",
+    onLoadStart: "onloadstart",
+    onMessage: "onmessage",
+    onMouseDown: "onmousedown",
+    onMouseEnter: "onmouseenter",
+    onMouseLeave: "onmouseleave",
+    onMouseMove: "onmousemove",
+    onMouseOut: "onmouseout",
+    onMouseOver: "onmouseover",
+    onMouseUp: "onmouseup",
+    onMouseWheel: "onmousewheel",
+    onOffline: "onoffline",
+    onOnline: "ononline",
+    onPageHide: "onpagehide",
+    onPageShow: "onpageshow",
+    onPaste: "onpaste",
+    onPause: "onpause",
+    onPlay: "onplay",
+    onPlaying: "onplaying",
+    onPopState: "onpopstate",
+    onProgress: "onprogress",
+    onRateChange: "onratechange",
+    onRepeat: "onrepeat",
+    onReset: "onreset",
+    onResize: "onresize",
+    onScroll: "onscroll",
+    onSeeked: "onseeked",
+    onSeeking: "onseeking",
+    onSelect: "onselect",
+    onShow: "onshow",
+    onStalled: "onstalled",
+    onStorage: "onstorage",
+    onSubmit: "onsubmit",
+    onSuspend: "onsuspend",
+    onTimeUpdate: "ontimeupdate",
+    onToggle: "ontoggle",
+    onUnload: "onunload",
+    onVolumeChange: "onvolumechange",
+    onWaiting: "onwaiting",
+    onZoom: "onzoom",
+    overlinePosition: "overline-position",
+    overlineThickness: "overline-thickness",
+    paintOrder: "paint-order",
+    panose1: "panose-1",
+    pointerEvents: "pointer-events",
+    referrerPolicy: "referrerpolicy",
+    renderingIntent: "rendering-intent",
+    shapeRendering: "shape-rendering",
+    stopColor: "stop-color",
+    stopOpacity: "stop-opacity",
+    strikethroughPosition: "strikethrough-position",
+    strikethroughThickness: "strikethrough-thickness",
+    strokeDashArray: "stroke-dasharray",
+    strokeDashOffset: "stroke-dashoffset",
+    strokeLineCap: "stroke-linecap",
+    strokeLineJoin: "stroke-linejoin",
+    strokeMiterLimit: "stroke-miterlimit",
+    strokeOpacity: "stroke-opacity",
+    strokeWidth: "stroke-width",
+    tabIndex: "tabindex",
+    textAnchor: "text-anchor",
+    textDecoration: "text-decoration",
+    textRendering: "text-rendering",
+    transformOrigin: "transform-origin",
+    typeOf: "typeof",
+    underlinePosition: "underline-position",
+    underlineThickness: "underline-thickness",
+    unicodeBidi: "unicode-bidi",
+    unicodeRange: "unicode-range",
+    unitsPerEm: "units-per-em",
+    vAlphabetic: "v-alphabetic",
+    vHanging: "v-hanging",
+    vIdeographic: "v-ideographic",
+    vMathematical: "v-mathematical",
+    vectorEffect: "vector-effect",
+    vertAdvY: "vert-adv-y",
+    vertOriginX: "vert-origin-x",
+    vertOriginY: "vert-origin-y",
+    wordSpacing: "word-spacing",
+    writingMode: "writing-mode",
+    xHeight: "x-height",
+    // These were camelcased in Tiny. Now lowercased in SVG 2
+    playbackOrder: "playbackorder",
+    timelineBegin: "timelinebegin"
+  },
+  transform: caseSensitiveTransform,
+  properties: {
+    about: commaOrSpaceSeparated,
+    accentHeight: number,
+    accumulate: null,
+    additive: null,
+    alignmentBaseline: null,
+    alphabetic: number,
+    amplitude: number,
+    arabicForm: null,
+    ascent: number,
+    attributeName: null,
+    attributeType: null,
+    azimuth: number,
+    bandwidth: null,
+    baselineShift: null,
+    baseFrequency: null,
+    baseProfile: null,
+    bbox: null,
+    begin: null,
+    bias: number,
+    by: null,
+    calcMode: null,
+    capHeight: number,
+    className: spaceSeparated,
+    clip: null,
+    clipPath: null,
+    clipPathUnits: null,
+    clipRule: null,
+    color: null,
+    colorInterpolation: null,
+    colorInterpolationFilters: null,
+    colorProfile: null,
+    colorRendering: null,
+    content: null,
+    contentScriptType: null,
+    contentStyleType: null,
+    crossOrigin: null,
+    cursor: null,
+    cx: null,
+    cy: null,
+    d: null,
+    dataType: null,
+    defaultAction: null,
+    descent: number,
+    diffuseConstant: number,
+    direction: null,
+    display: null,
+    dur: null,
+    divisor: number,
+    dominantBaseline: null,
+    download: boolean,
+    dx: null,
+    dy: null,
+    edgeMode: null,
+    editable: null,
+    elevation: number,
+    enableBackground: null,
+    end: null,
+    event: null,
+    exponent: number,
+    externalResourcesRequired: null,
+    fill: null,
+    fillOpacity: number,
+    fillRule: null,
+    filter: null,
+    filterRes: null,
+    filterUnits: null,
+    floodColor: null,
+    floodOpacity: null,
+    focusable: null,
+    focusHighlight: null,
+    fontFamily: null,
+    fontSize: null,
+    fontSizeAdjust: null,
+    fontStretch: null,
+    fontStyle: null,
+    fontVariant: null,
+    fontWeight: null,
+    format: null,
+    fr: null,
+    from: null,
+    fx: null,
+    fy: null,
+    g1: commaSeparated,
+    g2: commaSeparated,
+    glyphName: commaSeparated,
+    glyphOrientationHorizontal: null,
+    glyphOrientationVertical: null,
+    glyphRef: null,
+    gradientTransform: null,
+    gradientUnits: null,
+    handler: null,
+    hanging: number,
+    hatchContentUnits: null,
+    hatchUnits: null,
+    height: null,
+    href: null,
+    hrefLang: null,
+    horizAdvX: number,
+    horizOriginX: number,
+    horizOriginY: number,
+    id: null,
+    ideographic: number,
+    imageRendering: null,
+    initialVisibility: null,
+    in: null,
+    in2: null,
+    intercept: number,
+    k: number,
+    k1: number,
+    k2: number,
+    k3: number,
+    k4: number,
+    kernelMatrix: commaOrSpaceSeparated,
+    kernelUnitLength: null,
+    keyPoints: null,
+    // SEMI_COLON_SEPARATED
+    keySplines: null,
+    // SEMI_COLON_SEPARATED
+    keyTimes: null,
+    // SEMI_COLON_SEPARATED
+    kerning: null,
+    lang: null,
+    lengthAdjust: null,
+    letterSpacing: null,
+    lightingColor: null,
+    limitingConeAngle: number,
+    local: null,
+    markerEnd: null,
+    markerMid: null,
+    markerStart: null,
+    markerHeight: null,
+    markerUnits: null,
+    markerWidth: null,
+    mask: null,
+    maskContentUnits: null,
+    maskUnits: null,
+    mathematical: null,
+    max: null,
+    media: null,
+    mediaCharacterEncoding: null,
+    mediaContentEncodings: null,
+    mediaSize: number,
+    mediaTime: null,
+    method: null,
+    min: null,
+    mode: null,
+    name: null,
+    navDown: null,
+    navDownLeft: null,
+    navDownRight: null,
+    navLeft: null,
+    navNext: null,
+    navPrev: null,
+    navRight: null,
+    navUp: null,
+    navUpLeft: null,
+    navUpRight: null,
+    numOctaves: null,
+    observer: null,
+    offset: null,
+    onAbort: null,
+    onActivate: null,
+    onAfterPrint: null,
+    onBeforePrint: null,
+    onBegin: null,
+    onCancel: null,
+    onCanPlay: null,
+    onCanPlayThrough: null,
+    onChange: null,
+    onClick: null,
+    onClose: null,
+    onCopy: null,
+    onCueChange: null,
+    onCut: null,
+    onDblClick: null,
+    onDrag: null,
+    onDragEnd: null,
+    onDragEnter: null,
+    onDragExit: null,
+    onDragLeave: null,
+    onDragOver: null,
+    onDragStart: null,
+    onDrop: null,
+    onDurationChange: null,
+    onEmptied: null,
+    onEnd: null,
+    onEnded: null,
+    onError: null,
+    onFocus: null,
+    onFocusIn: null,
+    onFocusOut: null,
+    onHashChange: null,
+    onInput: null,
+    onInvalid: null,
+    onKeyDown: null,
+    onKeyPress: null,
+    onKeyUp: null,
+    onLoad: null,
+    onLoadedData: null,
+    onLoadedMetadata: null,
+    onLoadStart: null,
+    onMessage: null,
+    onMouseDown: null,
+    onMouseEnter: null,
+    onMouseLeave: null,
+    onMouseMove: null,
+    onMouseOut: null,
+    onMouseOver: null,
+    onMouseUp: null,
+    onMouseWheel: null,
+    onOffline: null,
+    onOnline: null,
+    onPageHide: null,
+    onPageShow: null,
+    onPaste: null,
+    onPause: null,
+    onPlay: null,
+    onPlaying: null,
+    onPopState: null,
+    onProgress: null,
+    onRateChange: null,
+    onRepeat: null,
+    onReset: null,
+    onResize: null,
+    onScroll: null,
+    onSeeked: null,
+    onSeeking: null,
+    onSelect: null,
+    onShow: null,
+    onStalled: null,
+    onStorage: null,
+    onSubmit: null,
+    onSuspend: null,
+    onTimeUpdate: null,
+    onToggle: null,
+    onUnload: null,
+    onVolumeChange: null,
+    onWaiting: null,
+    onZoom: null,
+    opacity: null,
+    operator: null,
+    order: null,
+    orient: null,
+    orientation: null,
+    origin: null,
+    overflow: null,
+    overlay: null,
+    overlinePosition: number,
+    overlineThickness: number,
+    paintOrder: null,
+    panose1: null,
+    path: null,
+    pathLength: number,
+    patternContentUnits: null,
+    patternTransform: null,
+    patternUnits: null,
+    phase: null,
+    ping: spaceSeparated,
+    pitch: null,
+    playbackOrder: null,
+    pointerEvents: null,
+    points: null,
+    pointsAtX: number,
+    pointsAtY: number,
+    pointsAtZ: number,
+    preserveAlpha: null,
+    preserveAspectRatio: null,
+    primitiveUnits: null,
+    propagate: null,
+    property: commaOrSpaceSeparated,
+    r: null,
+    radius: null,
+    referrerPolicy: null,
+    refX: null,
+    refY: null,
+    rel: commaOrSpaceSeparated,
+    rev: commaOrSpaceSeparated,
+    renderingIntent: null,
+    repeatCount: null,
+    repeatDur: null,
+    requiredExtensions: commaOrSpaceSeparated,
+    requiredFeatures: commaOrSpaceSeparated,
+    requiredFonts: commaOrSpaceSeparated,
+    requiredFormats: commaOrSpaceSeparated,
+    resource: null,
+    restart: null,
+    result: null,
+    rotate: null,
+    rx: null,
+    ry: null,
+    scale: null,
+    seed: null,
+    shapeRendering: null,
+    side: null,
+    slope: null,
+    snapshotTime: null,
+    specularConstant: number,
+    specularExponent: number,
+    spreadMethod: null,
+    spacing: null,
+    startOffset: null,
+    stdDeviation: null,
+    stemh: null,
+    stemv: null,
+    stitchTiles: null,
+    stopColor: null,
+    stopOpacity: null,
+    strikethroughPosition: number,
+    strikethroughThickness: number,
+    string: null,
+    stroke: null,
+    strokeDashArray: commaOrSpaceSeparated,
+    strokeDashOffset: null,
+    strokeLineCap: null,
+    strokeLineJoin: null,
+    strokeMiterLimit: number,
+    strokeOpacity: number,
+    strokeWidth: null,
+    style: null,
+    surfaceScale: number,
+    syncBehavior: null,
+    syncBehaviorDefault: null,
+    syncMaster: null,
+    syncTolerance: null,
+    syncToleranceDefault: null,
+    systemLanguage: commaOrSpaceSeparated,
+    tabIndex: number,
+    tableValues: null,
+    target: null,
+    targetX: number,
+    targetY: number,
+    textAnchor: null,
+    textDecoration: null,
+    textRendering: null,
+    textLength: null,
+    timelineBegin: null,
+    title: null,
+    transformBehavior: null,
+    type: null,
+    typeOf: commaOrSpaceSeparated,
+    to: null,
+    transform: null,
+    transformOrigin: null,
+    u1: null,
+    u2: null,
+    underlinePosition: number,
+    underlineThickness: number,
+    unicode: null,
+    unicodeBidi: null,
+    unicodeRange: null,
+    unitsPerEm: number,
+    values: null,
+    vAlphabetic: number,
+    vMathematical: number,
+    vectorEffect: null,
+    vHanging: number,
+    vIdeographic: number,
+    version: null,
+    vertAdvY: number,
+    vertOriginX: number,
+    vertOriginY: number,
+    viewBox: null,
+    viewTarget: null,
+    visibility: null,
+    width: null,
+    widths: null,
+    wordSpacing: null,
+    writingMode: null,
+    x: null,
+    x1: null,
+    x2: null,
+    xChannelSelector: null,
+    xHeight: number,
+    y: null,
+    y1: null,
+    y2: null,
+    yChannelSelector: null,
+    z: null,
+    zoomAndPan: null
+  }
+});
+const valid = /^data[-\w.:]+$/i;
+const dash = /-[a-z]/g;
+const cap$1 = /[A-Z]/g;
+function find(schema2, value) {
+  const normal = normalize$1(value);
+  let prop = value;
+  let Type2 = Info;
+  if (normal in schema2.normal) {
+    return schema2.property[schema2.normal[normal]];
+  }
+  if (normal.length > 4 && normal.slice(0, 4) === "data" && valid.test(value)) {
+    if (value.charAt(4) === "-") {
+      const rest = value.slice(5).replace(dash, camelcase);
+      prop = "data" + rest.charAt(0).toUpperCase() + rest.slice(1);
+    } else {
+      const rest = value.slice(4);
+      if (!dash.test(rest)) {
+        let dashes = rest.replace(cap$1, kebab);
+        if (dashes.charAt(0) !== "-") {
+          dashes = "-" + dashes;
+        }
+        value = "data" + dashes;
+      }
+    }
+    Type2 = DefinedInfo;
+  }
+  return new Type2(prop, value);
+}
+function kebab($0) {
+  return "-" + $0.toLowerCase();
+}
+function camelcase($0) {
+  return $0.charAt(1).toUpperCase();
+}
+const html = merge$1([xml, xlink, xmlns, aria, html$1], "html");
+const svg = merge$1([xml, xlink, xmlns, aria, svg$1], "svg");
+function stringify(values2) {
+  return values2.join(" ").trim();
+}
+var cjs = {};
+var COMMENT_REGEX = /\/\*[^*]*\*+([^/*][^*]*\*+)*\//g;
+var NEWLINE_REGEX = /\n/g;
+var WHITESPACE_REGEX = /^\s*/;
+var PROPERTY_REGEX = /^(\*?[-#/*\\\w]+(\[[0-9a-z_-]+\])?)\s*/;
+var COLON_REGEX = /^:\s*/;
+var VALUE_REGEX = /^((?:'(?:\\'|.)*?'|"(?:\\"|.)*?"|\([^)]*?\)|[^};])+)/;
+var SEMICOLON_REGEX = /^[;\s]*/;
+var TRIM_REGEX = /^\s+|\s+$/g;
+var NEWLINE = "\n";
+var FORWARD_SLASH = "/";
+var ASTERISK = "*";
+var EMPTY_STRING = "";
+var TYPE_COMMENT = "comment";
+var TYPE_DECLARATION = "declaration";
+var inlineStyleParser = function(style, options) {
+  if (typeof style !== "string") {
+    throw new TypeError("First argument must be a string");
+  }
+  if (!style)
+    return [];
+  options = options || {};
+  var lineno = 1;
+  var column2 = 1;
+  function updatePosition(str2) {
+    var lines = str2.match(NEWLINE_REGEX);
+    if (lines)
+      lineno += lines.length;
+    var i2 = str2.lastIndexOf(NEWLINE);
+    column2 = ~i2 ? str2.length - i2 : column2 + str2.length;
+  }
+  function position2() {
+    var start = { line: lineno, column: column2 };
+    return function(node2) {
+      node2.position = new Position(start);
+      whitespace2();
+      return node2;
+    };
+  }
+  function Position(start) {
+    this.start = start;
+    this.end = { line: lineno, column: column2 };
+    this.source = options.source;
+  }
+  Position.prototype.content = style;
+  function error(msg) {
+    var err = new Error(
+      options.source + ":" + lineno + ":" + column2 + ": " + msg
+    );
+    err.reason = msg;
+    err.filename = options.source;
+    err.line = lineno;
+    err.column = column2;
+    err.source = style;
+    if (options.silent)
+      ;
+    else {
+      throw err;
+    }
+  }
+  function match2(re2) {
+    var m2 = re2.exec(style);
+    if (!m2)
+      return;
+    var str2 = m2[0];
+    updatePosition(str2);
+    style = style.slice(str2.length);
+    return m2;
+  }
+  function whitespace2() {
+    match2(WHITESPACE_REGEX);
+  }
+  function comments(rules) {
+    var c2;
+    rules = rules || [];
+    while (c2 = comment2()) {
+      if (c2 !== false) {
+        rules.push(c2);
+      }
+    }
+    return rules;
+  }
+  function comment2() {
+    var pos = position2();
+    if (FORWARD_SLASH != style.charAt(0) || ASTERISK != style.charAt(1))
+      return;
+    var i2 = 2;
+    while (EMPTY_STRING != style.charAt(i2) && (ASTERISK != style.charAt(i2) || FORWARD_SLASH != style.charAt(i2 + 1))) {
+      ++i2;
+    }
+    i2 += 2;
+    if (EMPTY_STRING === style.charAt(i2 - 1)) {
+      return error("End of comment missing");
+    }
+    var str2 = style.slice(2, i2 - 2);
+    column2 += 2;
+    updatePosition(str2);
+    style = style.slice(i2);
+    column2 += 2;
+    return pos({
+      type: TYPE_COMMENT,
+      comment: str2
+    });
+  }
+  function declaration2() {
+    var pos = position2();
+    var prop = match2(PROPERTY_REGEX);
+    if (!prop)
+      return;
+    comment2();
+    if (!match2(COLON_REGEX))
+      return error("property missing ':'");
+    var val = match2(VALUE_REGEX);
+    var ret = pos({
+      type: TYPE_DECLARATION,
+      property: trim(prop[0].replace(COMMENT_REGEX, EMPTY_STRING)),
+      value: val ? trim(val[0].replace(COMMENT_REGEX, EMPTY_STRING)) : EMPTY_STRING
+    });
+    match2(SEMICOLON_REGEX);
+    return ret;
+  }
+  function declarations() {
+    var decls = [];
+    comments(decls);
+    var decl;
+    while (decl = declaration2()) {
+      if (decl !== false) {
+        decls.push(decl);
+        comments(decls);
+      }
+    }
+    return decls;
+  }
+  whitespace2();
+  return declarations();
+};
+function trim(str2) {
+  return str2 ? str2.replace(TRIM_REGEX, EMPTY_STRING) : EMPTY_STRING;
+}
+var __importDefault = commonjsGlobal && commonjsGlobal.__importDefault || function(mod) {
+  return mod && mod.__esModule ? mod : { "default": mod };
+};
+Object.defineProperty(cjs, "__esModule", { value: true });
+var inline_style_parser_1 = __importDefault(inlineStyleParser);
+function StyleToObject(style, iterator) {
+  var styleObject = null;
+  if (!style || typeof style !== "string") {
+    return styleObject;
+  }
+  var declarations = (0, inline_style_parser_1.default)(style);
+  var hasIterator = typeof iterator === "function";
+  declarations.forEach(function(declaration2) {
+    if (declaration2.type !== "declaration") {
+      return;
+    }
+    var property2 = declaration2.property, value = declaration2.value;
+    if (hasIterator) {
+      iterator(property2, value, declaration2);
+    } else if (value) {
+      styleObject = styleObject || {};
+      styleObject[property2] = value;
+    }
+  });
+  return styleObject;
+}
+var _default$1 = cjs.default = StyleToObject;
+const styleToObject = _default$1.default || _default$1;
+class VFileMessage extends Error {
+  /**
+   * Create a message for `reason`.
+   *
+   * > 🪦 **Note**: also has obsolete signatures.
+   *
+   * @overload
+   * @param {string} reason
+   * @param {Options | null | undefined} [options]
+   * @returns
+   *
+   * @overload
+   * @param {string} reason
+   * @param {Node | NodeLike | null | undefined} parent
+   * @param {string | null | undefined} [origin]
+   * @returns
+   *
+   * @overload
+   * @param {string} reason
+   * @param {Point | Position | null | undefined} place
+   * @param {string | null | undefined} [origin]
+   * @returns
+   *
+   * @overload
+   * @param {string} reason
+   * @param {string | null | undefined} [origin]
+   * @returns
+   *
+   * @overload
+   * @param {Error | VFileMessage} cause
+   * @param {Node | NodeLike | null | undefined} parent
+   * @param {string | null | undefined} [origin]
+   * @returns
+   *
+   * @overload
+   * @param {Error | VFileMessage} cause
+   * @param {Point | Position | null | undefined} place
+   * @param {string | null | undefined} [origin]
+   * @returns
+   *
+   * @overload
+   * @param {Error | VFileMessage} cause
+   * @param {string | null | undefined} [origin]
+   * @returns
+   *
+   * @param {Error | VFileMessage | string} causeOrReason
+   *   Reason for message, should use markdown.
+   * @param {Node | NodeLike | Options | Point | Position | string | null | undefined} [optionsOrParentOrPlace]
+   *   Configuration (optional).
+   * @param {string | null | undefined} [origin]
+   *   Place in code where the message originates (example:
+   *   `'my-package:my-rule'` or `'my-rule'`).
+   * @returns
+   *   Instance of `VFileMessage`.
+   */
+  // eslint-disable-next-line complexity
+  constructor(causeOrReason, optionsOrParentOrPlace, origin) {
+    super();
+    if (typeof optionsOrParentOrPlace === "string") {
+      origin = optionsOrParentOrPlace;
+      optionsOrParentOrPlace = void 0;
+    }
+    let reason = "";
+    let options = {};
+    let legacyCause = false;
+    if (optionsOrParentOrPlace) {
+      if ("line" in optionsOrParentOrPlace && "column" in optionsOrParentOrPlace) {
+        options = { place: optionsOrParentOrPlace };
+      } else if ("start" in optionsOrParentOrPlace && "end" in optionsOrParentOrPlace) {
+        options = { place: optionsOrParentOrPlace };
+      } else if ("type" in optionsOrParentOrPlace) {
+        options = {
+          ancestors: [optionsOrParentOrPlace],
+          place: optionsOrParentOrPlace.position
+        };
+      } else {
+        options = { ...optionsOrParentOrPlace };
+      }
+    }
+    if (typeof causeOrReason === "string") {
+      reason = causeOrReason;
+    } else if (!options.cause && causeOrReason) {
+      legacyCause = true;
+      reason = causeOrReason.message;
+      options.cause = causeOrReason;
+    }
+    if (!options.ruleId && !options.source && typeof origin === "string") {
+      const index2 = origin.indexOf(":");
+      if (index2 === -1) {
+        options.ruleId = origin;
+      } else {
+        options.source = origin.slice(0, index2);
+        options.ruleId = origin.slice(index2 + 1);
+      }
+    }
+    if (!options.place && options.ancestors && options.ancestors) {
+      const parent = options.ancestors[options.ancestors.length - 1];
+      if (parent) {
+        options.place = parent.position;
+      }
+    }
+    const start = options.place && "start" in options.place ? options.place.start : options.place;
+    this.ancestors = options.ancestors || void 0;
+    this.cause = options.cause || void 0;
+    this.column = start ? start.column : void 0;
+    this.fatal = void 0;
+    this.file;
+    this.message = reason;
+    this.line = start ? start.line : void 0;
+    this.name = stringifyPosition(options.place) || "1:1";
+    this.place = options.place || void 0;
+    this.reason = this.message;
+    this.ruleId = options.ruleId || void 0;
+    this.source = options.source || void 0;
+    this.stack = legacyCause && options.cause && typeof options.cause.stack === "string" ? options.cause.stack : "";
+    this.actual;
+    this.expected;
+    this.note;
+    this.url;
+  }
+}
+VFileMessage.prototype.file = "";
+VFileMessage.prototype.name = "";
+VFileMessage.prototype.reason = "";
+VFileMessage.prototype.message = "";
+VFileMessage.prototype.stack = "";
+VFileMessage.prototype.column = void 0;
+VFileMessage.prototype.line = void 0;
+VFileMessage.prototype.ancestors = void 0;
+VFileMessage.prototype.cause = void 0;
+VFileMessage.prototype.fatal = void 0;
+VFileMessage.prototype.place = void 0;
+VFileMessage.prototype.ruleId = void 0;
+VFileMessage.prototype.source = void 0;
+const own$2 = {}.hasOwnProperty;
+const emptyMap = /* @__PURE__ */ new Map();
+const cap = /[A-Z]/g;
+const dashSomething = /-([a-z])/g;
+const tableElements = /* @__PURE__ */ new Set(["table", "tbody", "thead", "tfoot", "tr"]);
+const tableCellElement = /* @__PURE__ */ new Set(["td", "th"]);
+const docs = "https://github.com/syntax-tree/hast-util-to-jsx-runtime";
+function toJsxRuntime(tree, options) {
+  if (!options || options.Fragment === void 0) {
+    throw new TypeError("Expected `Fragment` in options");
+  }
+  const filePath = options.filePath || void 0;
+  let create2;
+  if (options.development) {
+    if (typeof options.jsxDEV !== "function") {
+      throw new TypeError(
+        "Expected `jsxDEV` in options when `development: true`"
+      );
+    }
+    create2 = developmentCreate(filePath, options.jsxDEV);
+  } else {
+    if (typeof options.jsx !== "function") {
+      throw new TypeError("Expected `jsx` in production options");
+    }
+    if (typeof options.jsxs !== "function") {
+      throw new TypeError("Expected `jsxs` in production options");
+    }
+    create2 = productionCreate(filePath, options.jsx, options.jsxs);
+  }
+  const state = {
+    Fragment: options.Fragment,
+    ancestors: [],
+    components: options.components || {},
+    create: create2,
+    elementAttributeNameCase: options.elementAttributeNameCase || "react",
+    evaluater: options.createEvaluater ? options.createEvaluater() : void 0,
+    filePath,
+    ignoreInvalidStyle: options.ignoreInvalidStyle || false,
+    passKeys: options.passKeys !== false,
+    passNode: options.passNode || false,
+    schema: options.space === "svg" ? svg : html,
+    stylePropertyNameCase: options.stylePropertyNameCase || "dom",
+    tableCellAlignToStyle: options.tableCellAlignToStyle !== false
+  };
+  const result = one(state, tree, void 0);
+  if (result && typeof result !== "string") {
+    return result;
+  }
+  return state.create(
+    tree,
+    state.Fragment,
+    { children: result || void 0 },
+    void 0
+  );
+}
+function one(state, node2, key) {
+  if (node2.type === "element") {
+    return element(state, node2, key);
+  }
+  if (node2.type === "mdxFlowExpression" || node2.type === "mdxTextExpression") {
+    return mdxExpression(state, node2);
+  }
+  if (node2.type === "mdxJsxFlowElement" || node2.type === "mdxJsxTextElement") {
+    return mdxJsxElement(state, node2, key);
+  }
+  if (node2.type === "mdxjsEsm") {
+    return mdxEsm(state, node2);
+  }
+  if (node2.type === "root") {
+    return root(state, node2, key);
+  }
+  if (node2.type === "text") {
+    return text(state, node2);
+  }
+}
+function element(state, node2, key) {
+  const parentSchema = state.schema;
+  let schema2 = parentSchema;
+  if (node2.tagName.toLowerCase() === "svg" && parentSchema.space === "html") {
+    schema2 = svg;
+    state.schema = schema2;
+  }
+  state.ancestors.push(node2);
+  const type2 = findComponentFromName(state, node2.tagName, false);
+  const props = createElementProps(state, node2);
+  let children = createChildren(state, node2);
+  if (tableElements.has(node2.tagName)) {
+    children = children.filter(function(child) {
+      return typeof child === "string" ? !whitespace(child) : true;
+    });
+  }
+  addNode(state, props, type2, node2);
+  addChildren(props, children);
+  state.ancestors.pop();
+  state.schema = parentSchema;
+  return state.create(node2, type2, props, key);
+}
+function mdxExpression(state, node2) {
+  if (node2.data && node2.data.estree && state.evaluater) {
+    const program = node2.data.estree;
+    const expression = program.body[0];
+    ok(expression.type === "ExpressionStatement");
+    return (
+      /** @type {Child | undefined} */
+      state.evaluater.evaluateExpression(expression.expression)
+    );
+  }
+  crashEstree(state, node2.position);
+}
+function mdxEsm(state, node2) {
+  if (node2.data && node2.data.estree && state.evaluater) {
+    return (
+      /** @type {Child | undefined} */
+      state.evaluater.evaluateProgram(node2.data.estree)
+    );
+  }
+  crashEstree(state, node2.position);
+}
+function mdxJsxElement(state, node2, key) {
+  const parentSchema = state.schema;
+  let schema2 = parentSchema;
+  if (node2.name === "svg" && parentSchema.space === "html") {
+    schema2 = svg;
+    state.schema = schema2;
+  }
+  state.ancestors.push(node2);
+  const type2 = node2.name === null ? state.Fragment : findComponentFromName(state, node2.name, true);
+  const props = createJsxElementProps(state, node2);
+  const children = createChildren(state, node2);
+  addNode(state, props, type2, node2);
+  addChildren(props, children);
+  state.ancestors.pop();
+  state.schema = parentSchema;
+  return state.create(node2, type2, props, key);
+}
+function root(state, node2, key) {
+  const props = {};
+  addChildren(props, createChildren(state, node2));
+  return state.create(node2, state.Fragment, props, key);
+}
+function text(_2, node2) {
+  return node2.value;
+}
+function addNode(state, props, type2, node2) {
+  if (typeof type2 !== "string" && type2 !== state.Fragment && state.passNode) {
+    props.node = node2;
+  }
+}
+function addChildren(props, children) {
+  if (children.length > 0) {
+    const value = children.length > 1 ? children : children[0];
+    if (value) {
+      props.children = value;
+    }
+  }
+}
+function productionCreate(_2, jsx2, jsxs) {
+  return create2;
+  function create2(_3, type2, props, key) {
+    const isStaticChildren = Array.isArray(props.children);
+    const fn = isStaticChildren ? jsxs : jsx2;
+    return key ? fn(type2, props, key) : fn(type2, props);
+  }
+}
+function developmentCreate(filePath, jsxDEV) {
+  return create2;
+  function create2(node2, type2, props, key) {
+    const isStaticChildren = Array.isArray(props.children);
+    const point = pointStart(node2);
+    return jsxDEV(
+      type2,
+      props,
+      key,
+      isStaticChildren,
+      {
+        columnNumber: point ? point.column - 1 : void 0,
+        fileName: filePath,
+        lineNumber: point ? point.line : void 0
+      },
+      void 0
+    );
+  }
+}
+function createElementProps(state, node2) {
+  const props = {};
+  let alignValue;
+  let prop;
+  for (prop in node2.properties) {
+    if (prop !== "children" && own$2.call(node2.properties, prop)) {
+      const result = createProperty(state, prop, node2.properties[prop]);
+      if (result) {
+        const [key, value] = result;
+        if (state.tableCellAlignToStyle && key === "align" && typeof value === "string" && tableCellElement.has(node2.tagName)) {
+          alignValue = value;
+        } else {
+          props[key] = value;
+        }
+      }
+    }
+  }
+  if (alignValue) {
+    const style = (
+      /** @type {Style} */
+      props.style || (props.style = {})
+    );
+    style[state.stylePropertyNameCase === "css" ? "text-align" : "textAlign"] = alignValue;
+  }
+  return props;
+}
+function createJsxElementProps(state, node2) {
+  const props = {};
+  for (const attribute of node2.attributes) {
+    if (attribute.type === "mdxJsxExpressionAttribute") {
+      if (attribute.data && attribute.data.estree && state.evaluater) {
+        const program = attribute.data.estree;
+        const expression = program.body[0];
+        ok(expression.type === "ExpressionStatement");
+        const objectExpression = expression.expression;
+        ok(objectExpression.type === "ObjectExpression");
+        const property2 = objectExpression.properties[0];
+        ok(property2.type === "SpreadElement");
+        Object.assign(
+          props,
+          state.evaluater.evaluateExpression(property2.argument)
+        );
+      } else {
+        crashEstree(state, node2.position);
+      }
+    } else {
+      const name2 = attribute.name;
+      let value;
+      if (attribute.value && typeof attribute.value === "object") {
+        if (attribute.value.data && attribute.value.data.estree && state.evaluater) {
+          const program = attribute.value.data.estree;
+          const expression = program.body[0];
+          ok(expression.type === "ExpressionStatement");
+          value = state.evaluater.evaluateExpression(expression.expression);
+        } else {
+          crashEstree(state, node2.position);
+        }
+      } else {
+        value = attribute.value === null ? true : attribute.value;
+      }
+      props[name2] = /** @type {Props[keyof Props]} */
+      value;
+    }
+  }
+  return props;
+}
+function createChildren(state, node2) {
+  const children = [];
+  let index2 = -1;
+  const countsByName = state.passKeys ? /* @__PURE__ */ new Map() : emptyMap;
+  while (++index2 < node2.children.length) {
+    const child = node2.children[index2];
+    let key;
+    if (state.passKeys) {
+      const name2 = child.type === "element" ? child.tagName : child.type === "mdxJsxFlowElement" || child.type === "mdxJsxTextElement" ? child.name : void 0;
+      if (name2) {
+        const count2 = countsByName.get(name2) || 0;
+        key = name2 + "-" + count2;
+        countsByName.set(name2, count2 + 1);
+      }
+    }
+    const result = one(state, child, key);
+    if (result !== void 0)
+      children.push(result);
+  }
+  return children;
+}
+function createProperty(state, prop, value) {
+  const info = find(state.schema, prop);
+  if (value === null || value === void 0 || typeof value === "number" && Number.isNaN(value)) {
+    return;
+  }
+  if (Array.isArray(value)) {
+    value = info.commaSeparated ? stringify$1(value) : stringify(value);
+  }
+  if (info.property === "style") {
+    let styleObject = typeof value === "object" ? value : parseStyle(state, String(value));
+    if (state.stylePropertyNameCase === "css") {
+      styleObject = transformStylesToCssCasing(styleObject);
+    }
+    return ["style", styleObject];
+  }
+  return [
+    state.elementAttributeNameCase === "react" && info.space ? hastToReact[info.property] || info.property : info.attribute,
+    value
+  ];
+}
+function parseStyle(state, value) {
+  const result = {};
+  try {
+    styleToObject(value, replacer);
+  } catch (error) {
+    if (!state.ignoreInvalidStyle) {
+      const cause = (
+        /** @type {Error} */
+        error
+      );
+      const message = new VFileMessage("Cannot parse `style` attribute", {
+        ancestors: state.ancestors,
+        cause,
+        ruleId: "style",
+        source: "hast-util-to-jsx-runtime"
+      });
+      message.file = state.filePath || void 0;
+      message.url = docs + "#cannot-parse-style-attribute";
+      throw message;
+    }
+  }
+  return result;
+  function replacer(name2, value2) {
+    let key = name2;
+    if (key.slice(0, 2) !== "--") {
+      if (key.slice(0, 4) === "-ms-")
+        key = "ms-" + key.slice(4);
+      key = key.replace(dashSomething, toCamel);
+    }
+    result[key] = value2;
+  }
+}
+function findComponentFromName(state, name2, allowExpression) {
+  let result;
+  if (!allowExpression) {
+    result = { type: "Literal", value: name2 };
+  } else if (name2.includes(".")) {
+    const identifiers2 = name2.split(".");
+    let index2 = -1;
+    let node2;
+    while (++index2 < identifiers2.length) {
+      const prop = name$1(identifiers2[index2]) ? { type: "Identifier", name: identifiers2[index2] } : { type: "Literal", value: identifiers2[index2] };
+      node2 = node2 ? {
+        type: "MemberExpression",
+        object: node2,
+        property: prop,
+        computed: Boolean(index2 && prop.type === "Literal"),
+        optional: false
+      } : prop;
+    }
+    result = node2;
+  } else {
+    result = name$1(name2) && !/^[a-z]/.test(name2) ? { type: "Identifier", name: name2 } : { type: "Literal", value: name2 };
+  }
+  if (result.type === "Literal") {
+    const name3 = (
+      /** @type {keyof JSX.IntrinsicElements} */
+      result.value
+    );
+    return own$2.call(state.components, name3) ? state.components[name3] : name3;
+  }
+  if (state.evaluater) {
+    return state.evaluater.evaluateExpression(result);
+  }
+  crashEstree(state);
+}
+function crashEstree(state, place) {
+  const message = new VFileMessage(
+    "Cannot handle MDX estrees without `createEvaluater`",
+    {
+      ancestors: state.ancestors,
+      place,
+      ruleId: "mdx-estree",
+      source: "hast-util-to-jsx-runtime"
+    }
+  );
+  message.file = state.filePath || void 0;
+  message.url = docs + "#cannot-handle-mdx-estrees-without-createevaluater";
+  throw message;
+}
+function transformStylesToCssCasing(domCasing) {
+  const cssCasing = {};
+  let from2;
+  for (from2 in domCasing) {
+    if (own$2.call(domCasing, from2)) {
+      cssCasing[transformStyleToCssCasing(from2)] = domCasing[from2];
+    }
+  }
+  return cssCasing;
+}
+function transformStyleToCssCasing(from2) {
+  let to = from2.replace(cap, toDash);
+  if (to.slice(0, 3) === "ms-")
+    to = "-" + to;
+  return to;
+}
+function toCamel(_2, $1) {
+  return $1.toUpperCase();
+}
+function toDash($0) {
+  return "-" + $0.toLowerCase();
+}
+const urlAttributes = {
+  action: ["form"],
+  cite: ["blockquote", "del", "ins", "q"],
+  data: ["object"],
+  formAction: ["button", "input"],
+  href: ["a", "area", "base", "link"],
+  icon: ["menuitem"],
+  itemId: null,
+  manifest: ["html"],
+  ping: ["a", "area"],
+  poster: ["video"],
+  src: [
+    "audio",
+    "embed",
+    "iframe",
+    "img",
+    "input",
+    "script",
+    "source",
+    "track",
+    "video"
+  ]
+};
+const tab$1 = 9;
+const space$1 = 32;
+function trimLines(value) {
+  const source = String(value);
+  const search2 = /\r?\n|\r/g;
+  let match2 = search2.exec(source);
+  let last2 = 0;
+  const lines = [];
+  while (match2) {
+    lines.push(
+      trimLine(source.slice(last2, match2.index), last2 > 0, true),
+      match2[0]
+    );
+    last2 = match2.index + match2[0].length;
+    match2 = search2.exec(source);
+  }
+  lines.push(trimLine(source.slice(last2), last2 > 0, false));
+  return lines.join("");
+}
+function trimLine(value, start, end) {
+  let startIndex = 0;
+  let endIndex = value.length;
+  if (start) {
+    let code = value.codePointAt(startIndex);
+    while (code === tab$1 || code === space$1) {
+      startIndex++;
+      code = value.codePointAt(startIndex);
+    }
+  }
+  if (end) {
+    let code = value.codePointAt(endIndex - 1);
+    while (code === tab$1 || code === space$1) {
+      endIndex--;
+      code = value.codePointAt(endIndex - 1);
+    }
+  }
+  return endIndex > startIndex ? value.slice(startIndex, endIndex) : "";
+}
+const VOID = -1;
+const PRIMITIVE = 0;
+const ARRAY = 1;
+const OBJECT = 2;
+const DATE = 3;
+const REGEXP = 4;
+const MAP = 5;
+const SET = 6;
+const ERROR = 7;
+const BIGINT = 8;
+const env = typeof self === "object" ? self : globalThis;
+const deserializer = ($, _2) => {
+  const as = (out, index2) => {
+    $.set(index2, out);
+    return out;
+  };
+  const unpair = (index2) => {
+    if ($.has(index2))
+      return $.get(index2);
+    const [type2, value] = _2[index2];
+    switch (type2) {
+      case PRIMITIVE:
+      case VOID:
+        return as(value, index2);
+      case ARRAY: {
+        const arr = as([], index2);
+        for (const index3 of value)
+          arr.push(unpair(index3));
+        return arr;
+      }
+      case OBJECT: {
+        const object = as({}, index2);
+        for (const [key, index3] of value)
+          object[unpair(key)] = unpair(index3);
+        return object;
+      }
+      case DATE:
+        return as(new Date(value), index2);
+      case REGEXP: {
+        const { source, flags } = value;
+        return as(new RegExp(source, flags), index2);
+      }
+      case MAP: {
+        const map2 = as(/* @__PURE__ */ new Map(), index2);
+        for (const [key, index3] of value)
+          map2.set(unpair(key), unpair(index3));
+        return map2;
+      }
+      case SET: {
+        const set2 = as(/* @__PURE__ */ new Set(), index2);
+        for (const index3 of value)
+          set2.add(unpair(index3));
+        return set2;
+      }
+      case ERROR: {
+        const { name: name2, message } = value;
+        return as(new env[name2](message), index2);
+      }
+      case BIGINT:
+        return as(BigInt(value), index2);
+      case "BigInt":
+        return as(Object(BigInt(value)), index2);
+    }
+    return as(new env[type2](value), index2);
+  };
+  return unpair;
+};
+const deserialize = (serialized) => deserializer(/* @__PURE__ */ new Map(), serialized)(0);
+const EMPTY = "";
+const { toString } = {};
+const { keys } = Object;
+const typeOf = (value) => {
+  const type2 = typeof value;
+  if (type2 !== "object" || !value)
+    return [PRIMITIVE, type2];
+  const asString = toString.call(value).slice(8, -1);
+  switch (asString) {
+    case "Array":
+      return [ARRAY, EMPTY];
+    case "Object":
+      return [OBJECT, EMPTY];
+    case "Date":
+      return [DATE, EMPTY];
+    case "RegExp":
+      return [REGEXP, EMPTY];
+    case "Map":
+      return [MAP, EMPTY];
+    case "Set":
+      return [SET, EMPTY];
+  }
+  if (asString.includes("Array"))
+    return [ARRAY, asString];
+  if (asString.includes("Error"))
+    return [ERROR, asString];
+  return [OBJECT, asString];
+};
+const shouldSkip = ([TYPE, type2]) => TYPE === PRIMITIVE && (type2 === "function" || type2 === "symbol");
+const serializer = (strict, json2, $, _2) => {
+  const as = (out, value) => {
+    const index2 = _2.push(out) - 1;
+    $.set(value, index2);
+    return index2;
+  };
+  const pair2 = (value) => {
+    if ($.has(value))
+      return $.get(value);
+    let [TYPE, type2] = typeOf(value);
+    switch (TYPE) {
+      case PRIMITIVE: {
+        let entry = value;
+        switch (type2) {
+          case "bigint":
+            TYPE = BIGINT;
+            entry = value.toString();
+            break;
+          case "function":
+          case "symbol":
+            if (strict)
+              throw new TypeError("unable to serialize " + type2);
+            entry = null;
+            break;
+          case "undefined":
+            return as([VOID], value);
+        }
+        return as([TYPE, entry], value);
+      }
+      case ARRAY: {
+        if (type2)
+          return as([type2, [...value]], value);
+        const arr = [];
+        const index2 = as([TYPE, arr], value);
+        for (const entry of value)
+          arr.push(pair2(entry));
+        return index2;
+      }
+      case OBJECT: {
+        if (type2) {
+          switch (type2) {
+            case "BigInt":
+              return as([type2, value.toString()], value);
+            case "Boolean":
+            case "Number":
+            case "String":
+              return as([type2, value.valueOf()], value);
+          }
+        }
+        if (json2 && "toJSON" in value)
+          return pair2(value.toJSON());
+        const entries = [];
+        const index2 = as([TYPE, entries], value);
+        for (const key of keys(value)) {
+          if (strict || !shouldSkip(typeOf(value[key])))
+            entries.push([pair2(key), pair2(value[key])]);
+        }
+        return index2;
+      }
+      case DATE:
+        return as([TYPE, value.toISOString()], value);
+      case REGEXP: {
+        const { source, flags } = value;
+        return as([TYPE, { source, flags }], value);
+      }
+      case MAP: {
+        const entries = [];
+        const index2 = as([TYPE, entries], value);
+        for (const [key, entry] of value) {
+          if (strict || !(shouldSkip(typeOf(key)) || shouldSkip(typeOf(entry))))
+            entries.push([pair2(key), pair2(entry)]);
+        }
+        return index2;
+      }
+      case SET: {
+        const entries = [];
+        const index2 = as([TYPE, entries], value);
+        for (const entry of value) {
+          if (strict || !shouldSkip(typeOf(entry)))
+            entries.push(pair2(entry));
+        }
+        return index2;
+      }
+    }
+    const { message } = value;
+    return as([TYPE, { name: type2, message }], value);
+  };
+  return pair2;
+};
+const serialize = (value, { json: json2, lossy } = {}) => {
+  const _2 = [];
+  return serializer(!(json2 || lossy), !!json2, /* @__PURE__ */ new Map(), _2)(value), _2;
+};
+const structuredClone$1 = typeof structuredClone === "function" ? (
+  /* c8 ignore start */
+  (any, options) => options && ("json" in options || "lossy" in options) ? deserialize(serialize(any, options)) : structuredClone(any)
+) : (any, options) => deserialize(serialize(any, options));
+function bail(error) {
+  if (error) {
+    throw error;
+  }
+}
+var hasOwn = Object.prototype.hasOwnProperty;
+var toStr = Object.prototype.toString;
+var defineProperty = Object.defineProperty;
+var gOPD = Object.getOwnPropertyDescriptor;
+var isArray = function isArray2(arr) {
+  if (typeof Array.isArray === "function") {
+    return Array.isArray(arr);
+  }
+  return toStr.call(arr) === "[object Array]";
+};
+var isPlainObject$1 = function isPlainObject(obj) {
+  if (!obj || toStr.call(obj) !== "[object Object]") {
+    return false;
+  }
+  var hasOwnConstructor = hasOwn.call(obj, "constructor");
+  var hasIsPrototypeOf = obj.constructor && obj.constructor.prototype && hasOwn.call(obj.constructor.prototype, "isPrototypeOf");
+  if (obj.constructor && !hasOwnConstructor && !hasIsPrototypeOf) {
+    return false;
+  }
+  var key;
+  for (key in obj) {
+  }
+  return typeof key === "undefined" || hasOwn.call(obj, key);
+};
+var setProperty = function setProperty2(target, options) {
+  if (defineProperty && options.name === "__proto__") {
+    defineProperty(target, options.name, {
+      enumerable: true,
+      configurable: true,
+      value: options.newValue,
+      writable: true
+    });
+  } else {
+    target[options.name] = options.newValue;
+  }
+};
+var getProperty = function getProperty2(obj, name2) {
+  if (name2 === "__proto__") {
+    if (!hasOwn.call(obj, name2)) {
+      return void 0;
+    } else if (gOPD) {
+      return gOPD(obj, name2).value;
+    }
+  }
+  return obj[name2];
+};
+var extend$2 = function extend() {
+  var options, name2, src, copy2, copyIsArray, clone;
+  var target = arguments[0];
+  var i2 = 1;
+  var length2 = arguments.length;
+  var deep = false;
+  if (typeof target === "boolean") {
+    deep = target;
+    target = arguments[1] || {};
+    i2 = 2;
+  }
+  if (target == null || typeof target !== "object" && typeof target !== "function") {
+    target = {};
+  }
+  for (; i2 < length2; ++i2) {
+    options = arguments[i2];
+    if (options != null) {
+      for (name2 in options) {
+        src = getProperty(target, name2);
+        copy2 = getProperty(options, name2);
+        if (target !== copy2) {
+          if (deep && copy2 && (isPlainObject$1(copy2) || (copyIsArray = isArray(copy2)))) {
+            if (copyIsArray) {
+              copyIsArray = false;
+              clone = src && isArray(src) ? src : [];
+            } else {
+              clone = src && isPlainObject$1(src) ? src : {};
+            }
+            setProperty(target, { name: name2, newValue: extend(deep, clone, copy2) });
+          } else if (typeof copy2 !== "undefined") {
+            setProperty(target, { name: name2, newValue: copy2 });
+          }
+        }
+      }
+    }
+  }
+  return target;
+};
+const extend$3 = /* @__PURE__ */ getDefaultExportFromCjs(extend$2);
+function isPlainObject2(value) {
+  if (typeof value !== "object" || value === null) {
+    return false;
+  }
+  const prototype = Object.getPrototypeOf(value);
+  return (prototype === null || prototype === Object.prototype || Object.getPrototypeOf(prototype) === null) && !(Symbol.toStringTag in value) && !(Symbol.iterator in value);
+}
+function trough() {
+  const fns = [];
+  const pipeline = { run: run2, use };
+  return pipeline;
+  function run2(...values2) {
+    let middlewareIndex = -1;
+    const callback = values2.pop();
+    if (typeof callback !== "function") {
+      throw new TypeError("Expected function as last argument, not " + callback);
+    }
+    next2(null, ...values2);
+    function next2(error, ...output) {
+      const fn = fns[++middlewareIndex];
+      let index2 = -1;
+      if (error) {
+        callback(error);
+        return;
+      }
+      while (++index2 < values2.length) {
+        if (output[index2] === null || output[index2] === void 0) {
+          output[index2] = values2[index2];
+        }
+      }
+      values2 = output;
+      if (fn) {
+        wrap(fn, next2)(...output);
+      } else {
+        callback(null, ...output);
+      }
+    }
+  }
+  function use(middelware) {
+    if (typeof middelware !== "function") {
+      throw new TypeError(
+        "Expected `middelware` to be a function, not " + middelware
+      );
+    }
+    fns.push(middelware);
+    return pipeline;
+  }
+}
+function wrap(middleware2, callback) {
+  let called;
+  return wrapped;
+  function wrapped(...parameters) {
+    const fnExpectsCallback = middleware2.length > parameters.length;
+    let result;
+    if (fnExpectsCallback) {
+      parameters.push(done);
+    }
+    try {
+      result = middleware2.apply(this, parameters);
+    } catch (error) {
+      const exception2 = (
+        /** @type {Error} */
+        error
+      );
+      if (fnExpectsCallback && called) {
+        throw exception2;
+      }
+      return done(exception2);
+    }
+    if (!fnExpectsCallback) {
+      if (result instanceof Promise) {
+        result.then(then, done);
+      } else if (result instanceof Error) {
+        done(result);
+      } else {
+        then(result);
+      }
+    }
+  }
+  function done(error, ...output) {
+    if (!called) {
+      called = true;
+      callback(error, ...output);
+    }
+  }
+  function then(value) {
+    done(null, value);
+  }
+}
+const path = { basename, dirname, extname, join, sep: "/" };
+function basename(path2, ext) {
+  if (ext !== void 0 && typeof ext !== "string") {
+    throw new TypeError('"ext" argument must be a string');
+  }
+  assertPath$1(path2);
+  let start = 0;
+  let end = -1;
+  let index2 = path2.length;
+  let seenNonSlash;
+  if (ext === void 0 || ext.length === 0 || ext.length > path2.length) {
+    while (index2--) {
+      if (path2.codePointAt(index2) === 47) {
+        if (seenNonSlash) {
+          start = index2 + 1;
+          break;
+        }
+      } else if (end < 0) {
+        seenNonSlash = true;
+        end = index2 + 1;
+      }
+    }
+    return end < 0 ? "" : path2.slice(start, end);
+  }
+  if (ext === path2) {
+    return "";
+  }
+  let firstNonSlashEnd = -1;
+  let extIndex = ext.length - 1;
+  while (index2--) {
+    if (path2.codePointAt(index2) === 47) {
+      if (seenNonSlash) {
+        start = index2 + 1;
+        break;
+      }
+    } else {
+      if (firstNonSlashEnd < 0) {
+        seenNonSlash = true;
+        firstNonSlashEnd = index2 + 1;
+      }
+      if (extIndex > -1) {
+        if (path2.codePointAt(index2) === ext.codePointAt(extIndex--)) {
+          if (extIndex < 0) {
+            end = index2;
+          }
+        } else {
+          extIndex = -1;
+          end = firstNonSlashEnd;
+        }
+      }
+    }
+  }
+  if (start === end) {
+    end = firstNonSlashEnd;
+  } else if (end < 0) {
+    end = path2.length;
+  }
+  return path2.slice(start, end);
+}
+function dirname(path2) {
+  assertPath$1(path2);
+  if (path2.length === 0) {
+    return ".";
+  }
+  let end = -1;
+  let index2 = path2.length;
+  let unmatchedSlash;
+  while (--index2) {
+    if (path2.codePointAt(index2) === 47) {
+      if (unmatchedSlash) {
+        end = index2;
+        break;
+      }
+    } else if (!unmatchedSlash) {
+      unmatchedSlash = true;
+    }
+  }
+  return end < 0 ? path2.codePointAt(0) === 47 ? "/" : "." : end === 1 && path2.codePointAt(0) === 47 ? "//" : path2.slice(0, end);
+}
+function extname(path2) {
+  assertPath$1(path2);
+  let index2 = path2.length;
+  let end = -1;
+  let startPart = 0;
+  let startDot = -1;
+  let preDotState = 0;
+  let unmatchedSlash;
+  while (index2--) {
+    const code = path2.codePointAt(index2);
+    if (code === 47) {
+      if (unmatchedSlash) {
+        startPart = index2 + 1;
+        break;
+      }
+      continue;
+    }
+    if (end < 0) {
+      unmatchedSlash = true;
+      end = index2 + 1;
+    }
+    if (code === 46) {
+      if (startDot < 0) {
+        startDot = index2;
+      } else if (preDotState !== 1) {
+        preDotState = 1;
+      }
+    } else if (startDot > -1) {
+      preDotState = -1;
+    }
+  }
+  if (startDot < 0 || end < 0 || // We saw a non-dot character immediately before the dot.
+  preDotState === 0 || // The (right-most) trimmed path component is exactly `..`.
+  preDotState === 1 && startDot === end - 1 && startDot === startPart + 1) {
+    return "";
+  }
+  return path2.slice(startDot, end);
+}
+function join(...segments) {
+  let index2 = -1;
+  let joined;
+  while (++index2 < segments.length) {
+    assertPath$1(segments[index2]);
+    if (segments[index2]) {
+      joined = joined === void 0 ? segments[index2] : joined + "/" + segments[index2];
+    }
+  }
+  return joined === void 0 ? "." : normalize(joined);
+}
+function normalize(path2) {
+  assertPath$1(path2);
+  const absolute = path2.codePointAt(0) === 47;
+  let value = normalizeString(path2, !absolute);
+  if (value.length === 0 && !absolute) {
+    value = ".";
+  }
+  if (value.length > 0 && path2.codePointAt(path2.length - 1) === 47) {
+    value += "/";
+  }
+  return absolute ? "/" + value : value;
+}
+function normalizeString(path2, allowAboveRoot) {
+  let result = "";
+  let lastSegmentLength = 0;
+  let lastSlash = -1;
+  let dots = 0;
+  let index2 = -1;
+  let code;
+  let lastSlashIndex;
+  while (++index2 <= path2.length) {
+    if (index2 < path2.length) {
+      code = path2.codePointAt(index2);
+    } else if (code === 47) {
+      break;
+    } else {
+      code = 47;
+    }
+    if (code === 47) {
+      if (lastSlash === index2 - 1 || dots === 1)
+        ;
+      else if (lastSlash !== index2 - 1 && dots === 2) {
+        if (result.length < 2 || lastSegmentLength !== 2 || result.codePointAt(result.length - 1) !== 46 || result.codePointAt(result.length - 2) !== 46) {
+          if (result.length > 2) {
+            lastSlashIndex = result.lastIndexOf("/");
+            if (lastSlashIndex !== result.length - 1) {
+              if (lastSlashIndex < 0) {
+                result = "";
+                lastSegmentLength = 0;
+              } else {
+                result = result.slice(0, lastSlashIndex);
+                lastSegmentLength = result.length - 1 - result.lastIndexOf("/");
+              }
+              lastSlash = index2;
+              dots = 0;
+              continue;
+            }
+          } else if (result.length > 0) {
+            result = "";
+            lastSegmentLength = 0;
+            lastSlash = index2;
+            dots = 0;
+            continue;
+          }
+        }
+        if (allowAboveRoot) {
+          result = result.length > 0 ? result + "/.." : "..";
+          lastSegmentLength = 2;
+        }
+      } else {
+        if (result.length > 0) {
+          result += "/" + path2.slice(lastSlash + 1, index2);
+        } else {
+          result = path2.slice(lastSlash + 1, index2);
+        }
+        lastSegmentLength = index2 - lastSlash - 1;
+      }
+      lastSlash = index2;
+      dots = 0;
+    } else if (code === 46 && dots > -1) {
+      dots++;
+    } else {
+      dots = -1;
+    }
+  }
+  return result;
+}
+function assertPath$1(path2) {
+  if (typeof path2 !== "string") {
+    throw new TypeError(
+      "Path must be a string. Received " + JSON.stringify(path2)
+    );
+  }
+}
+const proc = { cwd };
+function cwd() {
+  return "/";
+}
+function isUrl(fileUrlOrPath) {
+  return Boolean(
+    fileUrlOrPath !== null && typeof fileUrlOrPath === "object" && "href" in fileUrlOrPath && fileUrlOrPath.href && "protocol" in fileUrlOrPath && fileUrlOrPath.protocol && // @ts-expect-error: indexing is fine.
+    fileUrlOrPath.auth === void 0
+  );
+}
+function urlToPath(path2) {
+  if (typeof path2 === "string") {
+    path2 = new URL(path2);
+  } else if (!isUrl(path2)) {
+    const error = new TypeError(
+      'The "path" argument must be of type string or an instance of URL. Received `' + path2 + "`"
+    );
+    error.code = "ERR_INVALID_ARG_TYPE";
+    throw error;
+  }
+  if (path2.protocol !== "file:") {
+    const error = new TypeError("The URL must be of scheme file");
+    error.code = "ERR_INVALID_URL_SCHEME";
+    throw error;
+  }
+  return getPathFromURLPosix(path2);
+}
+function getPathFromURLPosix(url) {
+  if (url.hostname !== "") {
+    const error = new TypeError(
+      'File URL host must be "localhost" or empty on darwin'
+    );
+    error.code = "ERR_INVALID_FILE_URL_HOST";
+    throw error;
+  }
+  const pathname = url.pathname;
+  let index2 = -1;
+  while (++index2 < pathname.length) {
+    if (pathname.codePointAt(index2) === 37 && pathname.codePointAt(index2 + 1) === 50) {
+      const third = pathname.codePointAt(index2 + 2);
+      if (third === 70 || third === 102) {
+        const error = new TypeError(
+          "File URL path must not include encoded / characters"
+        );
+        error.code = "ERR_INVALID_FILE_URL_PATH";
+        throw error;
+      }
+    }
+  }
+  return decodeURIComponent(pathname);
+}
+const order = (
+  /** @type {const} */
+  [
+    "history",
+    "path",
+    "basename",
+    "stem",
+    "extname",
+    "dirname"
+  ]
+);
+class VFile {
+  /**
+   * Create a new virtual file.
+   *
+   * `options` is treated as:
+   *
+   * *   `string` or `Uint8Array` — `{value: options}`
+   * *   `URL` — `{path: options}`
+   * *   `VFile` — shallow copies its data over to the new file
+   * *   `object` — all fields are shallow copied over to the new file
+   *
+   * Path related fields are set in the following order (least specific to
+   * most specific): `history`, `path`, `basename`, `stem`, `extname`,
+   * `dirname`.
+   *
+   * You cannot set `dirname` or `extname` without setting either `history`,
+   * `path`, `basename`, or `stem` too.
+   *
+   * @param {Compatible | null | undefined} [value]
+   *   File value.
+   * @returns
+   *   New instance.
+   */
+  constructor(value) {
+    let options;
+    if (!value) {
+      options = {};
+    } else if (isUrl(value)) {
+      options = { path: value };
+    } else if (typeof value === "string" || isUint8Array$1(value)) {
+      options = { value };
+    } else {
+      options = value;
+    }
+    this.cwd = proc.cwd();
+    this.data = {};
+    this.history = [];
+    this.messages = [];
+    this.value;
+    this.map;
+    this.result;
+    this.stored;
+    let index2 = -1;
+    while (++index2 < order.length) {
+      const prop2 = order[index2];
+      if (prop2 in options && options[prop2] !== void 0 && options[prop2] !== null) {
+        this[prop2] = prop2 === "history" ? [...options[prop2]] : options[prop2];
+      }
+    }
+    let prop;
+    for (prop in options) {
+      if (!order.includes(prop)) {
+        this[prop] = options[prop];
+      }
+    }
+  }
+  /**
+   * Get the basename (including extname) (example: `'index.min.js'`).
+   *
+   * @returns {string | undefined}
+   *   Basename.
+   */
+  get basename() {
+    return typeof this.path === "string" ? path.basename(this.path) : void 0;
+  }
+  /**
+   * Set basename (including extname) (`'index.min.js'`).
+   *
+   * Cannot contain path separators (`'/'` on unix, macOS, and browsers, `'\'`
+   * on windows).
+   * Cannot be nullified (use `file.path = file.dirname` instead).
+   *
+   * @param {string} basename
+   *   Basename.
+   * @returns {undefined}
+   *   Nothing.
+   */
+  set basename(basename2) {
+    assertNonEmpty(basename2, "basename");
+    assertPart(basename2, "basename");
+    this.path = path.join(this.dirname || "", basename2);
+  }
+  /**
+   * Get the parent path (example: `'~'`).
+   *
+   * @returns {string | undefined}
+   *   Dirname.
+   */
+  get dirname() {
+    return typeof this.path === "string" ? path.dirname(this.path) : void 0;
+  }
+  /**
+   * Set the parent path (example: `'~'`).
+   *
+   * Cannot be set if there’s no `path` yet.
+   *
+   * @param {string | undefined} dirname
+   *   Dirname.
+   * @returns {undefined}
+   *   Nothing.
+   */
+  set dirname(dirname2) {
+    assertPath(this.basename, "dirname");
+    this.path = path.join(dirname2 || "", this.basename);
+  }
+  /**
+   * Get the extname (including dot) (example: `'.js'`).
+   *
+   * @returns {string | undefined}
+   *   Extname.
+   */
+  get extname() {
+    return typeof this.path === "string" ? path.extname(this.path) : void 0;
+  }
+  /**
+   * Set the extname (including dot) (example: `'.js'`).
+   *
+   * Cannot contain path separators (`'/'` on unix, macOS, and browsers, `'\'`
+   * on windows).
+   * Cannot be set if there’s no `path` yet.
+   *
+   * @param {string | undefined} extname
+   *   Extname.
+   * @returns {undefined}
+   *   Nothing.
+   */
+  set extname(extname2) {
+    assertPart(extname2, "extname");
+    assertPath(this.dirname, "extname");
+    if (extname2) {
+      if (extname2.codePointAt(0) !== 46) {
+        throw new Error("`extname` must start with `.`");
+      }
+      if (extname2.includes(".", 1)) {
+        throw new Error("`extname` cannot contain multiple dots");
+      }
+    }
+    this.path = path.join(this.dirname, this.stem + (extname2 || ""));
+  }
+  /**
+   * Get the full path (example: `'~/index.min.js'`).
+   *
+   * @returns {string}
+   *   Path.
+   */
+  get path() {
+    return this.history[this.history.length - 1];
+  }
+  /**
+   * Set the full path (example: `'~/index.min.js'`).
+   *
+   * Cannot be nullified.
+   * You can set a file URL (a `URL` object with a `file:` protocol) which will
+   * be turned into a path with `url.fileURLToPath`.
+   *
+   * @param {URL | string} path
+   *   Path.
+   * @returns {undefined}
+   *   Nothing.
+   */
+  set path(path2) {
+    if (isUrl(path2)) {
+      path2 = urlToPath(path2);
+    }
+    assertNonEmpty(path2, "path");
+    if (this.path !== path2) {
+      this.history.push(path2);
+    }
+  }
+  /**
+   * Get the stem (basename w/o extname) (example: `'index.min'`).
+   *
+   * @returns {string | undefined}
+   *   Stem.
+   */
+  get stem() {
+    return typeof this.path === "string" ? path.basename(this.path, this.extname) : void 0;
+  }
+  /**
+   * Set the stem (basename w/o extname) (example: `'index.min'`).
+   *
+   * Cannot contain path separators (`'/'` on unix, macOS, and browsers, `'\'`
+   * on windows).
+   * Cannot be nullified (use `file.path = file.dirname` instead).
+   *
+   * @param {string} stem
+   *   Stem.
+   * @returns {undefined}
+   *   Nothing.
+   */
+  set stem(stem) {
+    assertNonEmpty(stem, "stem");
+    assertPart(stem, "stem");
+    this.path = path.join(this.dirname || "", stem + (this.extname || ""));
+  }
+  // Normal prototypal methods.
+  /**
+   * Create a fatal message for `reason` associated with the file.
+   *
+   * The `fatal` field of the message is set to `true` (error; file not usable)
+   * and the `file` field is set to the current file path.
+   * The message is added to the `messages` field on `file`.
+   *
+   * > 🪦 **Note**: also has obsolete signatures.
+   *
+   * @overload
+   * @param {string} reason
+   * @param {MessageOptions | null | undefined} [options]
+   * @returns {never}
+   *
+   * @overload
+   * @param {string} reason
+   * @param {Node | NodeLike | null | undefined} parent
+   * @param {string | null | undefined} [origin]
+   * @returns {never}
+   *
+   * @overload
+   * @param {string} reason
+   * @param {Point | Position | null | undefined} place
+   * @param {string | null | undefined} [origin]
+   * @returns {never}
+   *
+   * @overload
+   * @param {string} reason
+   * @param {string | null | undefined} [origin]
+   * @returns {never}
+   *
+   * @overload
+   * @param {Error | VFileMessage} cause
+   * @param {Node | NodeLike | null | undefined} parent
+   * @param {string | null | undefined} [origin]
+   * @returns {never}
+   *
+   * @overload
+   * @param {Error | VFileMessage} cause
+   * @param {Point | Position | null | undefined} place
+   * @param {string | null | undefined} [origin]
+   * @returns {never}
+   *
+   * @overload
+   * @param {Error | VFileMessage} cause
+   * @param {string | null | undefined} [origin]
+   * @returns {never}
+   *
+   * @param {Error | VFileMessage | string} causeOrReason
+   *   Reason for message, should use markdown.
+   * @param {Node | NodeLike | MessageOptions | Point | Position | string | null | undefined} [optionsOrParentOrPlace]
+   *   Configuration (optional).
+   * @param {string | null | undefined} [origin]
+   *   Place in code where the message originates (example:
+   *   `'my-package:my-rule'` or `'my-rule'`).
+   * @returns {never}
+   *   Never.
+   * @throws {VFileMessage}
+   *   Message.
+   */
+  fail(causeOrReason, optionsOrParentOrPlace, origin) {
+    const message = this.message(causeOrReason, optionsOrParentOrPlace, origin);
+    message.fatal = true;
+    throw message;
+  }
+  /**
+   * Create an info message for `reason` associated with the file.
+   *
+   * The `fatal` field of the message is set to `undefined` (info; change
+   * likely not needed) and the `file` field is set to the current file path.
+   * The message is added to the `messages` field on `file`.
+   *
+   * > 🪦 **Note**: also has obsolete signatures.
+   *
+   * @overload
+   * @param {string} reason
+   * @param {MessageOptions | null | undefined} [options]
+   * @returns {VFileMessage}
+   *
+   * @overload
+   * @param {string} reason
+   * @param {Node | NodeLike | null | undefined} parent
+   * @param {string | null | undefined} [origin]
+   * @returns {VFileMessage}
+   *
+   * @overload
+   * @param {string} reason
+   * @param {Point | Position | null | undefined} place
+   * @param {string | null | undefined} [origin]
+   * @returns {VFileMessage}
+   *
+   * @overload
+   * @param {string} reason
+   * @param {string | null | undefined} [origin]
+   * @returns {VFileMessage}
+   *
+   * @overload
+   * @param {Error | VFileMessage} cause
+   * @param {Node | NodeLike | null | undefined} parent
+   * @param {string | null | undefined} [origin]
+   * @returns {VFileMessage}
+   *
+   * @overload
+   * @param {Error | VFileMessage} cause
+   * @param {Point | Position | null | undefined} place
+   * @param {string | null | undefined} [origin]
+   * @returns {VFileMessage}
+   *
+   * @overload
+   * @param {Error | VFileMessage} cause
+   * @param {string | null | undefined} [origin]
+   * @returns {VFileMessage}
+   *
+   * @param {Error | VFileMessage | string} causeOrReason
+   *   Reason for message, should use markdown.
+   * @param {Node | NodeLike | MessageOptions | Point | Position | string | null | undefined} [optionsOrParentOrPlace]
+   *   Configuration (optional).
+   * @param {string | null | undefined} [origin]
+   *   Place in code where the message originates (example:
+   *   `'my-package:my-rule'` or `'my-rule'`).
+   * @returns {VFileMessage}
+   *   Message.
+   */
+  info(causeOrReason, optionsOrParentOrPlace, origin) {
+    const message = this.message(causeOrReason, optionsOrParentOrPlace, origin);
+    message.fatal = void 0;
+    return message;
+  }
+  /**
+   * Create a message for `reason` associated with the file.
+   *
+   * The `fatal` field of the message is set to `false` (warning; change may be
+   * needed) and the `file` field is set to the current file path.
+   * The message is added to the `messages` field on `file`.
+   *
+   * > 🪦 **Note**: also has obsolete signatures.
+   *
+   * @overload
+   * @param {string} reason
+   * @param {MessageOptions | null | undefined} [options]
+   * @returns {VFileMessage}
+   *
+   * @overload
+   * @param {string} reason
+   * @param {Node | NodeLike | null | undefined} parent
+   * @param {string | null | undefined} [origin]
+   * @returns {VFileMessage}
+   *
+   * @overload
+   * @param {string} reason
+   * @param {Point | Position | null | undefined} place
+   * @param {string | null | undefined} [origin]
+   * @returns {VFileMessage}
+   *
+   * @overload
+   * @param {string} reason
+   * @param {string | null | undefined} [origin]
+   * @returns {VFileMessage}
+   *
+   * @overload
+   * @param {Error | VFileMessage} cause
+   * @param {Node | NodeLike | null | undefined} parent
+   * @param {string | null | undefined} [origin]
+   * @returns {VFileMessage}
+   *
+   * @overload
+   * @param {Error | VFileMessage} cause
+   * @param {Point | Position | null | undefined} place
+   * @param {string | null | undefined} [origin]
+   * @returns {VFileMessage}
+   *
+   * @overload
+   * @param {Error | VFileMessage} cause
+   * @param {string | null | undefined} [origin]
+   * @returns {VFileMessage}
+   *
+   * @param {Error | VFileMessage | string} causeOrReason
+   *   Reason for message, should use markdown.
+   * @param {Node | NodeLike | MessageOptions | Point | Position | string | null | undefined} [optionsOrParentOrPlace]
+   *   Configuration (optional).
+   * @param {string | null | undefined} [origin]
+   *   Place in code where the message originates (example:
+   *   `'my-package:my-rule'` or `'my-rule'`).
+   * @returns {VFileMessage}
+   *   Message.
+   */
+  message(causeOrReason, optionsOrParentOrPlace, origin) {
+    const message = new VFileMessage(
+      // @ts-expect-error: the overloads are fine.
+      causeOrReason,
+      optionsOrParentOrPlace,
+      origin
+    );
+    if (this.path) {
+      message.name = this.path + ":" + message.name;
+      message.file = this.path;
+    }
+    message.fatal = false;
+    this.messages.push(message);
+    return message;
+  }
+  /**
+   * Serialize the file.
+   *
+   * > **Note**: which encodings are supported depends on the engine.
+   * > For info on Node.js, see:
+   * > <https://nodejs.org/api/util.html#whatwg-supported-encodings>.
+   *
+   * @param {string | null | undefined} [encoding='utf8']
+   *   Character encoding to understand `value` as when it’s a `Uint8Array`
+   *   (default: `'utf-8'`).
+   * @returns {string}
+   *   Serialized file.
+   */
+  toString(encoding) {
+    if (this.value === void 0) {
+      return "";
+    }
+    if (typeof this.value === "string") {
+      return this.value;
+    }
+    const decoder = new TextDecoder(encoding || void 0);
+    return decoder.decode(this.value);
+  }
+}
+function assertPart(part, name2) {
+  if (part && part.includes(path.sep)) {
+    throw new Error(
+      "`" + name2 + "` cannot be a path: did not expect `" + path.sep + "`"
+    );
+  }
+}
+function assertNonEmpty(part, name2) {
+  if (!part) {
+    throw new Error("`" + name2 + "` cannot be empty");
+  }
+}
+function assertPath(path2, name2) {
+  if (!path2) {
+    throw new Error("Setting `" + name2 + "` requires `path` to be set too");
+  }
+}
+function isUint8Array$1(value) {
+  return Boolean(
+    value && typeof value === "object" && "byteLength" in value && "byteOffset" in value
+  );
+}
+const CallableInstance = (
+  /**
+   * @type {new <Parameters extends Array<unknown>, Result>(property: string | symbol) => (...parameters: Parameters) => Result}
+   */
+  /** @type {unknown} */
+  /**
+   * @this {Function}
+   * @param {string | symbol} property
+   * @returns {(...parameters: Array<unknown>) => unknown}
+   */
+  function(property2) {
+    const self2 = this;
+    const constr = self2.constructor;
+    const proto = (
+      /** @type {Record<string | symbol, Function>} */
+      // Prototypes do exist.
+      // type-coverage:ignore-next-line
+      constr.prototype
+    );
+    const func = proto[property2];
+    const apply2 = function() {
+      return func.apply(apply2, arguments);
+    };
+    Object.setPrototypeOf(apply2, proto);
+    const names = Object.getOwnPropertyNames(func);
+    for (const p2 of names) {
+      const descriptor = Object.getOwnPropertyDescriptor(func, p2);
+      if (descriptor)
+        Object.defineProperty(apply2, p2, descriptor);
+    }
+    return apply2;
+  }
+);
+const own$1 = {}.hasOwnProperty;
+class Processor extends CallableInstance {
+  /**
+   * Create a processor.
+   */
+  constructor() {
+    super("copy");
+    this.Compiler = void 0;
+    this.Parser = void 0;
+    this.attachers = [];
+    this.compiler = void 0;
+    this.freezeIndex = -1;
+    this.frozen = void 0;
+    this.namespace = {};
+    this.parser = void 0;
+    this.transformers = trough();
+  }
+  /**
+   * Copy a processor.
+   *
+   * @deprecated
+   *   This is a private internal method and should not be used.
+   * @returns {Processor<ParseTree, HeadTree, TailTree, CompileTree, CompileResult>}
+   *   New *unfrozen* processor ({@link Processor `Processor`}) that is
+   *   configured to work the same as its ancestor.
+   *   When the descendant processor is configured in the future it does not
+   *   affect the ancestral processor.
+   */
+  copy() {
+    const destination = (
+      /** @type {Processor<ParseTree, HeadTree, TailTree, CompileTree, CompileResult>} */
+      new Processor()
+    );
+    let index2 = -1;
+    while (++index2 < this.attachers.length) {
+      const attacher = this.attachers[index2];
+      destination.use(...attacher);
+    }
+    destination.data(extend$3(true, {}, this.namespace));
+    return destination;
+  }
+  /**
+   * Configure the processor with info available to all plugins.
+   * Information is stored in an object.
+   *
+   * Typically, options can be given to a specific plugin, but sometimes it
+   * makes sense to have information shared with several plugins.
+   * For example, a list of HTML elements that are self-closing, which is
+   * needed during all phases.
+   *
+   * > 👉 **Note**: setting information cannot occur on *frozen* processors.
+   * > Call the processor first to create a new unfrozen processor.
+   *
+   * > 👉 **Note**: to register custom data in TypeScript, augment the
+   * > {@link Data `Data`} interface.
+   *
+   * @example
+   *   This example show how to get and set info:
+   *
+   *   ```js
+   *   import {unified} from 'unified'
+   *
+   *   const processor = unified().data('alpha', 'bravo')
+   *
+   *   processor.data('alpha') // => 'bravo'
+   *
+   *   processor.data() // => {alpha: 'bravo'}
+   *
+   *   processor.data({charlie: 'delta'})
+   *
+   *   processor.data() // => {charlie: 'delta'}
+   *   ```
+   *
+   * @template {keyof Data} Key
+   *
+   * @overload
+   * @returns {Data}
+   *
+   * @overload
+   * @param {Data} dataset
+   * @returns {Processor<ParseTree, HeadTree, TailTree, CompileTree, CompileResult>}
+   *
+   * @overload
+   * @param {Key} key
+   * @returns {Data[Key]}
+   *
+   * @overload
+   * @param {Key} key
+   * @param {Data[Key]} value
+   * @returns {Processor<ParseTree, HeadTree, TailTree, CompileTree, CompileResult>}
+   *
+   * @param {Data | Key} [key]
+   *   Key to get or set, or entire dataset to set, or nothing to get the
+   *   entire dataset (optional).
+   * @param {Data[Key]} [value]
+   *   Value to set (optional).
+   * @returns {unknown}
+   *   The current processor when setting, the value at `key` when getting, or
+   *   the entire dataset when getting without key.
+   */
+  data(key, value) {
+    if (typeof key === "string") {
+      if (arguments.length === 2) {
+        assertUnfrozen("data", this.frozen);
+        this.namespace[key] = value;
+        return this;
+      }
+      return own$1.call(this.namespace, key) && this.namespace[key] || void 0;
+    }
+    if (key) {
+      assertUnfrozen("data", this.frozen);
+      this.namespace = key;
+      return this;
+    }
+    return this.namespace;
+  }
+  /**
+   * Freeze a processor.
+   *
+   * Frozen processors are meant to be extended and not to be configured
+   * directly.
+   *
+   * When a processor is frozen it cannot be unfrozen.
+   * New processors working the same way can be created by calling the
+   * processor.
+   *
+   * It’s possible to freeze processors explicitly by calling `.freeze()`.
+   * Processors freeze automatically when `.parse()`, `.run()`, `.runSync()`,
+   * `.stringify()`, `.process()`, or `.processSync()` are called.
+   *
+   * @returns {Processor<ParseTree, HeadTree, TailTree, CompileTree, CompileResult>}
+   *   The current processor.
+   */
+  freeze() {
+    if (this.frozen) {
+      return this;
+    }
+    const self2 = (
+      /** @type {Processor} */
+      /** @type {unknown} */
+      this
+    );
+    while (++this.freezeIndex < this.attachers.length) {
+      const [attacher, ...options] = this.attachers[this.freezeIndex];
+      if (options[0] === false) {
+        continue;
+      }
+      if (options[0] === true) {
+        options[0] = void 0;
+      }
+      const transformer = attacher.call(self2, ...options);
+      if (typeof transformer === "function") {
+        this.transformers.use(transformer);
+      }
+    }
+    this.frozen = true;
+    this.freezeIndex = Number.POSITIVE_INFINITY;
+    return this;
+  }
+  /**
+   * Parse text to a syntax tree.
+   *
+   * > 👉 **Note**: `parse` freezes the processor if not already *frozen*.
+   *
+   * > 👉 **Note**: `parse` performs the parse phase, not the run phase or other
+   * > phases.
+   *
+   * @param {Compatible | undefined} [file]
+   *   file to parse (optional); typically `string` or `VFile`; any value
+   *   accepted as `x` in `new VFile(x)`.
+   * @returns {ParseTree extends undefined ? Node : ParseTree}
+   *   Syntax tree representing `file`.
+   */
+  parse(file) {
+    this.freeze();
+    const realFile = vfile(file);
+    const parser2 = this.parser || this.Parser;
+    assertParser("parse", parser2);
+    return parser2(String(realFile), realFile);
+  }
+  /**
+   * Process the given file as configured on the processor.
+   *
+   * > 👉 **Note**: `process` freezes the processor if not already *frozen*.
+   *
+   * > 👉 **Note**: `process` performs the parse, run, and stringify phases.
+   *
+   * @overload
+   * @param {Compatible | undefined} file
+   * @param {ProcessCallback<VFileWithOutput<CompileResult>>} done
+   * @returns {undefined}
+   *
+   * @overload
+   * @param {Compatible | undefined} [file]
+   * @returns {Promise<VFileWithOutput<CompileResult>>}
+   *
+   * @param {Compatible | undefined} [file]
+   *   File (optional); typically `string` or `VFile`]; any value accepted as
+   *   `x` in `new VFile(x)`.
+   * @param {ProcessCallback<VFileWithOutput<CompileResult>> | undefined} [done]
+   *   Callback (optional).
+   * @returns {Promise<VFile> | undefined}
+   *   Nothing if `done` is given.
+   *   Otherwise a promise, rejected with a fatal error or resolved with the
+   *   processed file.
+   *
+   *   The parsed, transformed, and compiled value is available at
+   *   `file.value` (see note).
+   *
+   *   > 👉 **Note**: unified typically compiles by serializing: most
+   *   > compilers return `string` (or `Uint8Array`).
+   *   > Some compilers, such as the one configured with
+   *   > [`rehype-react`][rehype-react], return other values (in this case, a
+   *   > React tree).
+   *   > If you’re using a compiler that doesn’t serialize, expect different
+   *   > result values.
+   *   >
+   *   > To register custom results in TypeScript, add them to
+   *   > {@link CompileResultMap `CompileResultMap`}.
+   *
+   *   [rehype-react]: https://github.com/rehypejs/rehype-react
+   */
+  process(file, done) {
+    const self2 = this;
+    this.freeze();
+    assertParser("process", this.parser || this.Parser);
+    assertCompiler("process", this.compiler || this.Compiler);
+    return done ? executor(void 0, done) : new Promise(executor);
+    function executor(resolve, reject) {
+      const realFile = vfile(file);
+      const parseTree = (
+        /** @type {HeadTree extends undefined ? Node : HeadTree} */
+        /** @type {unknown} */
+        self2.parse(realFile)
+      );
+      self2.run(parseTree, realFile, function(error, tree, file2) {
+        if (error || !tree || !file2) {
+          return realDone(error);
+        }
+        const compileTree = (
+          /** @type {CompileTree extends undefined ? Node : CompileTree} */
+          /** @type {unknown} */
+          tree
+        );
+        const compileResult = self2.stringify(compileTree, file2);
+        if (looksLikeAValue(compileResult)) {
+          file2.value = compileResult;
+        } else {
+          file2.result = compileResult;
+        }
+        realDone(
+          error,
+          /** @type {VFileWithOutput<CompileResult>} */
+          file2
+        );
+      });
+      function realDone(error, file2) {
+        if (error || !file2) {
+          reject(error);
+        } else if (resolve) {
+          resolve(file2);
+        } else {
+          done(void 0, file2);
+        }
+      }
+    }
+  }
+  /**
+   * Process the given file as configured on the processor.
+   *
+   * An error is thrown if asynchronous transforms are configured.
+   *
+   * > 👉 **Note**: `processSync` freezes the processor if not already *frozen*.
+   *
+   * > 👉 **Note**: `processSync` performs the parse, run, and stringify phases.
+   *
+   * @param {Compatible | undefined} [file]
+   *   File (optional); typically `string` or `VFile`; any value accepted as
+   *   `x` in `new VFile(x)`.
+   * @returns {VFileWithOutput<CompileResult>}
+   *   The processed file.
+   *
+   *   The parsed, transformed, and compiled value is available at
+   *   `file.value` (see note).
+   *
+   *   > 👉 **Note**: unified typically compiles by serializing: most
+   *   > compilers return `string` (or `Uint8Array`).
+   *   > Some compilers, such as the one configured with
+   *   > [`rehype-react`][rehype-react], return other values (in this case, a
+   *   > React tree).
+   *   > If you’re using a compiler that doesn’t serialize, expect different
+   *   > result values.
+   *   >
+   *   > To register custom results in TypeScript, add them to
+   *   > {@link CompileResultMap `CompileResultMap`}.
+   *
+   *   [rehype-react]: https://github.com/rehypejs/rehype-react
+   */
+  processSync(file) {
+    let complete = false;
+    let result;
+    this.freeze();
+    assertParser("processSync", this.parser || this.Parser);
+    assertCompiler("processSync", this.compiler || this.Compiler);
+    this.process(file, realDone);
+    assertDone("processSync", "process", complete);
+    return result;
+    function realDone(error, file2) {
+      complete = true;
+      bail(error);
+      result = file2;
+    }
+  }
+  /**
+   * Run *transformers* on a syntax tree.
+   *
+   * > 👉 **Note**: `run` freezes the processor if not already *frozen*.
+   *
+   * > 👉 **Note**: `run` performs the run phase, not other phases.
+   *
+   * @overload
+   * @param {HeadTree extends undefined ? Node : HeadTree} tree
+   * @param {RunCallback<TailTree extends undefined ? Node : TailTree>} done
+   * @returns {undefined}
+   *
+   * @overload
+   * @param {HeadTree extends undefined ? Node : HeadTree} tree
+   * @param {Compatible | undefined} file
+   * @param {RunCallback<TailTree extends undefined ? Node : TailTree>} done
+   * @returns {undefined}
+   *
+   * @overload
+   * @param {HeadTree extends undefined ? Node : HeadTree} tree
+   * @param {Compatible | undefined} [file]
+   * @returns {Promise<TailTree extends undefined ? Node : TailTree>}
+   *
+   * @param {HeadTree extends undefined ? Node : HeadTree} tree
+   *   Tree to transform and inspect.
+   * @param {(
+   *   RunCallback<TailTree extends undefined ? Node : TailTree> |
+   *   Compatible
+   * )} [file]
+   *   File associated with `node` (optional); any value accepted as `x` in
+   *   `new VFile(x)`.
+   * @param {RunCallback<TailTree extends undefined ? Node : TailTree>} [done]
+   *   Callback (optional).
+   * @returns {Promise<TailTree extends undefined ? Node : TailTree> | undefined}
+   *   Nothing if `done` is given.
+   *   Otherwise, a promise rejected with a fatal error or resolved with the
+   *   transformed tree.
+   */
+  run(tree, file, done) {
+    assertNode(tree);
+    this.freeze();
+    const transformers = this.transformers;
+    if (!done && typeof file === "function") {
+      done = file;
+      file = void 0;
+    }
+    return done ? executor(void 0, done) : new Promise(executor);
+    function executor(resolve, reject) {
+      const realFile = vfile(file);
+      transformers.run(tree, realFile, realDone);
+      function realDone(error, outputTree, file2) {
+        const resultingTree = (
+          /** @type {TailTree extends undefined ? Node : TailTree} */
+          outputTree || tree
+        );
+        if (error) {
+          reject(error);
+        } else if (resolve) {
+          resolve(resultingTree);
+        } else {
+          done(void 0, resultingTree, file2);
+        }
+      }
+    }
+  }
+  /**
+   * Run *transformers* on a syntax tree.
+   *
+   * An error is thrown if asynchronous transforms are configured.
+   *
+   * > 👉 **Note**: `runSync` freezes the processor if not already *frozen*.
+   *
+   * > 👉 **Note**: `runSync` performs the run phase, not other phases.
+   *
+   * @param {HeadTree extends undefined ? Node : HeadTree} tree
+   *   Tree to transform and inspect.
+   * @param {Compatible | undefined} [file]
+   *   File associated with `node` (optional); any value accepted as `x` in
+   *   `new VFile(x)`.
+   * @returns {TailTree extends undefined ? Node : TailTree}
+   *   Transformed tree.
+   */
+  runSync(tree, file) {
+    let complete = false;
+    let result;
+    this.run(tree, file, realDone);
+    assertDone("runSync", "run", complete);
+    return result;
+    function realDone(error, tree2) {
+      bail(error);
+      result = tree2;
+      complete = true;
+    }
+  }
+  /**
+   * Compile a syntax tree.
+   *
+   * > 👉 **Note**: `stringify` freezes the processor if not already *frozen*.
+   *
+   * > 👉 **Note**: `stringify` performs the stringify phase, not the run phase
+   * > or other phases.
+   *
+   * @param {CompileTree extends undefined ? Node : CompileTree} tree
+   *   Tree to compile.
+   * @param {Compatible | undefined} [file]
+   *   File associated with `node` (optional); any value accepted as `x` in
+   *   `new VFile(x)`.
+   * @returns {CompileResult extends undefined ? Value : CompileResult}
+   *   Textual representation of the tree (see note).
+   *
+   *   > 👉 **Note**: unified typically compiles by serializing: most compilers
+   *   > return `string` (or `Uint8Array`).
+   *   > Some compilers, such as the one configured with
+   *   > [`rehype-react`][rehype-react], return other values (in this case, a
+   *   > React tree).
+   *   > If you’re using a compiler that doesn’t serialize, expect different
+   *   > result values.
+   *   >
+   *   > To register custom results in TypeScript, add them to
+   *   > {@link CompileResultMap `CompileResultMap`}.
+   *
+   *   [rehype-react]: https://github.com/rehypejs/rehype-react
+   */
+  stringify(tree, file) {
+    this.freeze();
+    const realFile = vfile(file);
+    const compiler = this.compiler || this.Compiler;
+    assertCompiler("stringify", compiler);
+    assertNode(tree);
+    return compiler(tree, realFile);
+  }
+  /**
+   * Configure the processor to use a plugin, a list of usable values, or a
+   * preset.
+   *
+   * If the processor is already using a plugin, the previous plugin
+   * configuration is changed based on the options that are passed in.
+   * In other words, the plugin is not added a second time.
+   *
+   * > 👉 **Note**: `use` cannot be called on *frozen* processors.
+   * > Call the processor first to create a new unfrozen processor.
+   *
+   * @example
+   *   There are many ways to pass plugins to `.use()`.
+   *   This example gives an overview:
+   *
+   *   ```js
+   *   import {unified} from 'unified'
+   *
+   *   unified()
+   *     // Plugin with options:
+   *     .use(pluginA, {x: true, y: true})
+   *     // Passing the same plugin again merges configuration (to `{x: true, y: false, z: true}`):
+   *     .use(pluginA, {y: false, z: true})
+   *     // Plugins:
+   *     .use([pluginB, pluginC])
+   *     // Two plugins, the second with options:
+   *     .use([pluginD, [pluginE, {}]])
+   *     // Preset with plugins and settings:
+   *     .use({plugins: [pluginF, [pluginG, {}]], settings: {position: false}})
+   *     // Settings only:
+   *     .use({settings: {position: false}})
+   *   ```
+   *
+   * @template {Array<unknown>} [Parameters=[]]
+   * @template {Node | string | undefined} [Input=undefined]
+   * @template [Output=Input]
+   *
+   * @overload
+   * @param {Preset | null | undefined} [preset]
+   * @returns {Processor<ParseTree, HeadTree, TailTree, CompileTree, CompileResult>}
+   *
+   * @overload
+   * @param {PluggableList} list
+   * @returns {Processor<ParseTree, HeadTree, TailTree, CompileTree, CompileResult>}
+   *
+   * @overload
+   * @param {Plugin<Parameters, Input, Output>} plugin
+   * @param {...(Parameters | [boolean])} parameters
+   * @returns {UsePlugin<ParseTree, HeadTree, TailTree, CompileTree, CompileResult, Input, Output>}
+   *
+   * @param {PluggableList | Plugin | Preset | null | undefined} value
+   *   Usable value.
+   * @param {...unknown} parameters
+   *   Parameters, when a plugin is given as a usable value.
+   * @returns {Processor<ParseTree, HeadTree, TailTree, CompileTree, CompileResult>}
+   *   Current processor.
+   */
+  use(value, ...parameters) {
+    const attachers = this.attachers;
+    const namespace = this.namespace;
+    assertUnfrozen("use", this.frozen);
+    if (value === null || value === void 0)
+      ;
+    else if (typeof value === "function") {
+      addPlugin(value, parameters);
+    } else if (typeof value === "object") {
+      if (Array.isArray(value)) {
+        addList(value);
+      } else {
+        addPreset(value);
+      }
+    } else {
+      throw new TypeError("Expected usable value, not `" + value + "`");
+    }
+    return this;
+    function add2(value2) {
+      if (typeof value2 === "function") {
+        addPlugin(value2, []);
+      } else if (typeof value2 === "object") {
+        if (Array.isArray(value2)) {
+          const [plugin, ...parameters2] = (
+            /** @type {PluginTuple<Array<unknown>>} */
+            value2
+          );
+          addPlugin(plugin, parameters2);
+        } else {
+          addPreset(value2);
+        }
+      } else {
+        throw new TypeError("Expected usable value, not `" + value2 + "`");
+      }
+    }
+    function addPreset(result) {
+      if (!("plugins" in result) && !("settings" in result)) {
+        throw new Error(
+          "Expected usable value but received an empty preset, which is probably a mistake: presets typically come with `plugins` and sometimes with `settings`, but this has neither"
+        );
+      }
+      addList(result.plugins);
+      if (result.settings) {
+        namespace.settings = extend$3(true, namespace.settings, result.settings);
+      }
+    }
+    function addList(plugins) {
+      let index2 = -1;
+      if (plugins === null || plugins === void 0)
+        ;
+      else if (Array.isArray(plugins)) {
+        while (++index2 < plugins.length) {
+          const thing = plugins[index2];
+          add2(thing);
+        }
+      } else {
+        throw new TypeError("Expected a list of plugins, not `" + plugins + "`");
+      }
+    }
+    function addPlugin(plugin, parameters2) {
+      let index2 = -1;
+      let entryIndex = -1;
+      while (++index2 < attachers.length) {
+        if (attachers[index2][0] === plugin) {
+          entryIndex = index2;
+          break;
+        }
+      }
+      if (entryIndex === -1) {
+        attachers.push([plugin, ...parameters2]);
+      } else if (parameters2.length > 0) {
+        let [primary, ...rest] = parameters2;
+        const currentPrimary = attachers[entryIndex][1];
+        if (isPlainObject2(currentPrimary) && isPlainObject2(primary)) {
+          primary = extend$3(true, currentPrimary, primary);
+        }
+        attachers[entryIndex] = [plugin, primary, ...rest];
+      }
+    }
+  }
+}
+const unified = new Processor().freeze();
+function assertParser(name2, value) {
+  if (typeof value !== "function") {
+    throw new TypeError("Cannot `" + name2 + "` without `parser`");
+  }
+}
+function assertCompiler(name2, value) {
+  if (typeof value !== "function") {
+    throw new TypeError("Cannot `" + name2 + "` without `compiler`");
+  }
+}
+function assertUnfrozen(name2, frozen) {
+  if (frozen) {
+    throw new Error(
+      "Cannot call `" + name2 + "` on a frozen processor.\nCreate a new processor first, by calling it: use `processor()` instead of `processor`."
+    );
+  }
+}
+function assertNode(node2) {
+  if (!isPlainObject2(node2) || typeof node2.type !== "string") {
+    throw new TypeError("Expected node, got `" + node2 + "`");
+  }
+}
+function assertDone(name2, asyncName, complete) {
+  if (!complete) {
+    throw new Error(
+      "`" + name2 + "` finished async. Use `" + asyncName + "` instead"
+    );
+  }
+}
+function vfile(value) {
+  return looksLikeAVFile(value) ? value : new VFile(value);
+}
+function looksLikeAVFile(value) {
+  return Boolean(
+    value && typeof value === "object" && "message" in value && "messages" in value
+  );
+}
+function looksLikeAValue(value) {
+  return typeof value === "string" || isUint8Array(value);
+}
+function isUint8Array(value) {
+  return Boolean(
+    value && typeof value === "object" && "byteLength" in value && "byteOffset" in value
+  );
+}
+function ccount(value, character2) {
+  const source = String(value);
+  if (typeof character2 !== "string") {
+    throw new TypeError("Expected character");
+  }
+  let count2 = 0;
+  let index2 = source.indexOf(character2);
+  while (index2 !== -1) {
+    count2++;
+    index2 = source.indexOf(character2, index2 + character2.length);
+  }
+  return count2;
+}
 /*! js-yaml 4.1.0 https://github.com/nodeca/js-yaml @license MIT */
 function isNothing(subject) {
   return typeof subject === "undefined" || subject === null;
@@ -45754,7 +49467,7 @@ function toArray(sequence) {
     return [];
   return [sequence];
 }
-function extend$3(target, source) {
+function extend$1(target, source) {
   var index2, length2, key, sourceKeys;
   if (source) {
     sourceKeys = Object.keys(source);
@@ -45780,7 +49493,7 @@ var isObject_1 = isObject;
 var toArray_1 = toArray;
 var repeat_1 = repeat;
 var isNegativeZero_1 = isNegativeZero;
-var extend_1 = extend$3;
+var extend_1 = extend$1;
 var common = {
   isNothing: isNothing_1,
   isObject: isObject_1,
@@ -45816,7 +49529,7 @@ function YAMLException$1(reason, mark2) {
 }
 YAMLException$1.prototype = Object.create(Error.prototype);
 YAMLException$1.prototype.constructor = YAMLException$1;
-YAMLException$1.prototype.toString = function toString(compact) {
+YAMLException$1.prototype.toString = function toString2(compact) {
   return this.name + ": " + formatError(this, compact);
 };
 var exception = YAMLException$1;
@@ -45998,7 +49711,7 @@ function compileMap() {
 function Schema$1(definition) {
   return this.extend(definition);
 }
-Schema$1.prototype.extend = function extend(definition) {
+Schema$1.prototype.extend = function extend2(definition) {
   var implicit = [];
   var explicit = [];
   if (definition instanceof type) {
@@ -46406,7 +50119,7 @@ var timestamp = new type("tag:yaml.org,2002:timestamp", {
 function resolveYamlMerge(data2) {
   return data2 === "<<" || data2 === null;
 }
-var merge$1 = new type("tag:yaml.org,2002:merge", {
+var merge = new type("tag:yaml.org,2002:merge", {
   kind: "scalar",
   resolve: resolveYamlMerge
 });
@@ -46579,10 +50292,10 @@ var set = new type("tag:yaml.org,2002:set", {
   resolve: resolveYamlSet,
   construct: constructYamlSet
 });
-var _default$1 = core.extend({
+var _default = core.extend({
   implicit: [
     timestamp,
-    merge$1
+    merge
   ],
   explicit: [
     binary,
@@ -46669,7 +50382,7 @@ for (var i$1 = 0; i$1 < 256; i$1++) {
 function State$1(input, options) {
   this.input = input;
   this.filename = options["filename"] || null;
-  this.schema = options["schema"] || _default$1;
+  this.schema = options["schema"] || _default;
   this.onWarning = options["onWarning"] || null;
   this.legacy = options["legacy"] || false;
   this.json = options["json"] || false;
@@ -47852,7 +51565,7 @@ function encodeHex(character2) {
 }
 var QUOTING_TYPE_SINGLE = 1, QUOTING_TYPE_DOUBLE = 2;
 function State(options) {
-  this.schema = options["schema"] || _default$1;
+  this.schema = options["schema"] || _default;
   this.indent = Math.max(1, options["indent"] || 2);
   this.noArrayIndent = options["noArrayIndent"] || false;
   this.skipInvalid = options["skipInvalid"] || false;
@@ -48385,16 +52098,16 @@ function renamed(from2, to) {
   };
 }
 var Type = type;
-var Schema$2 = schema;
+var Schema3 = schema;
 var FAILSAFE_SCHEMA = failsafe;
 var JSON_SCHEMA = json;
 var CORE_SCHEMA = core;
-var DEFAULT_SCHEMA = _default$1;
+var DEFAULT_SCHEMA = _default;
 var load = loader.load;
 var loadAll = loader.loadAll;
 var dump = dumper.dump;
 var YAMLException = exception;
-var types$1 = {
+var types = {
   binary,
   float,
   map,
@@ -48404,7 +52117,7 @@ var types$1 = {
   timestamp,
   bool,
   int,
-  merge: merge$1,
+  merge,
   omap,
   seq,
   str
@@ -48414,7 +52127,7 @@ var safeLoadAll = renamed("safeLoadAll", "loadAll");
 var safeDump = renamed("safeDump", "dump");
 var jsYaml = {
   Type,
-  Schema: Schema$2,
+  Schema: Schema3,
   FAILSAFE_SCHEMA,
   JSON_SCHEMA,
   CORE_SCHEMA,
@@ -48423,3724 +52136,11 @@ var jsYaml = {
   loadAll,
   dump,
   YAMLException,
-  types: types$1,
+  types,
   safeLoad,
   safeLoadAll,
   safeDump
 };
-function stringify$1(values2, options) {
-  const settings = options || {};
-  const input = values2[values2.length - 1] === "" ? [...values2, ""] : values2;
-  return input.join(
-    (settings.padRight ? " " : "") + "," + (settings.padLeft === false ? "" : " ")
-  ).trim();
-}
-const nameRe = /^[$_\p{ID_Start}][$_\u{200C}\u{200D}\p{ID_Continue}]*$/u;
-const nameReJsx = /^[$_\p{ID_Start}][-$_\u{200C}\u{200D}\p{ID_Continue}]*$/u;
-const emptyOptions = {};
-function name$1(name2, options) {
-  const settings = options || emptyOptions;
-  const re2 = settings.jsx ? nameReJsx : nameRe;
-  return re2.test(name2);
-}
-const re = /[ \t\n\f\r]/g;
-function whitespace(thing) {
-  return typeof thing === "object" ? thing.type === "text" ? empty(thing.value) : false : empty(thing);
-}
-function empty(value) {
-  return value.replace(re, "") === "";
-}
-class Schema2 {
-  /**
-   * @constructor
-   * @param {Properties} property
-   * @param {Normal} normal
-   * @param {string} [space]
-   */
-  constructor(property2, normal, space2) {
-    this.property = property2;
-    this.normal = normal;
-    if (space2) {
-      this.space = space2;
-    }
-  }
-}
-Schema2.prototype.property = {};
-Schema2.prototype.normal = {};
-Schema2.prototype.space = null;
-function merge(definitions, space2) {
-  const property2 = {};
-  const normal = {};
-  let index2 = -1;
-  while (++index2 < definitions.length) {
-    Object.assign(property2, definitions[index2].property);
-    Object.assign(normal, definitions[index2].normal);
-  }
-  return new Schema2(property2, normal, space2);
-}
-function normalize$1(value) {
-  return value.toLowerCase();
-}
-class Info {
-  /**
-   * @constructor
-   * @param {string} property
-   * @param {string} attribute
-   */
-  constructor(property2, attribute) {
-    this.property = property2;
-    this.attribute = attribute;
-  }
-}
-Info.prototype.space = null;
-Info.prototype.boolean = false;
-Info.prototype.booleanish = false;
-Info.prototype.overloadedBoolean = false;
-Info.prototype.number = false;
-Info.prototype.commaSeparated = false;
-Info.prototype.spaceSeparated = false;
-Info.prototype.commaOrSpaceSeparated = false;
-Info.prototype.mustUseProperty = false;
-Info.prototype.defined = false;
-let powers = 0;
-const boolean = increment();
-const booleanish = increment();
-const overloadedBoolean = increment();
-const number = increment();
-const spaceSeparated = increment();
-const commaSeparated = increment();
-const commaOrSpaceSeparated = increment();
-function increment() {
-  return 2 ** ++powers;
-}
-const types = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
-  __proto__: null,
-  boolean,
-  booleanish,
-  commaOrSpaceSeparated,
-  commaSeparated,
-  number,
-  overloadedBoolean,
-  spaceSeparated
-}, Symbol.toStringTag, { value: "Module" }));
-const checks = Object.keys(types);
-class DefinedInfo extends Info {
-  /**
-   * @constructor
-   * @param {string} property
-   * @param {string} attribute
-   * @param {number|null} [mask]
-   * @param {string} [space]
-   */
-  constructor(property2, attribute, mask, space2) {
-    let index2 = -1;
-    super(property2, attribute);
-    mark(this, "space", space2);
-    if (typeof mask === "number") {
-      while (++index2 < checks.length) {
-        const check = checks[index2];
-        mark(this, checks[index2], (mask & types[check]) === types[check]);
-      }
-    }
-  }
-}
-DefinedInfo.prototype.defined = true;
-function mark(values2, key, value) {
-  if (value) {
-    values2[key] = value;
-  }
-}
-const own$3 = {}.hasOwnProperty;
-function create(definition) {
-  const property2 = {};
-  const normal = {};
-  let prop;
-  for (prop in definition.properties) {
-    if (own$3.call(definition.properties, prop)) {
-      const value = definition.properties[prop];
-      const info = new DefinedInfo(
-        prop,
-        definition.transform(definition.attributes || {}, prop),
-        value,
-        definition.space
-      );
-      if (definition.mustUseProperty && definition.mustUseProperty.includes(prop)) {
-        info.mustUseProperty = true;
-      }
-      property2[prop] = info;
-      normal[normalize$1(prop)] = prop;
-      normal[normalize$1(info.attribute)] = prop;
-    }
-  }
-  return new Schema2(property2, normal, definition.space);
-}
-const xlink = create({
-  space: "xlink",
-  transform(_2, prop) {
-    return "xlink:" + prop.slice(5).toLowerCase();
-  },
-  properties: {
-    xLinkActuate: null,
-    xLinkArcRole: null,
-    xLinkHref: null,
-    xLinkRole: null,
-    xLinkShow: null,
-    xLinkTitle: null,
-    xLinkType: null
-  }
-});
-const xml = create({
-  space: "xml",
-  transform(_2, prop) {
-    return "xml:" + prop.slice(3).toLowerCase();
-  },
-  properties: { xmlLang: null, xmlBase: null, xmlSpace: null }
-});
-function caseSensitiveTransform(attributes, attribute) {
-  return attribute in attributes ? attributes[attribute] : attribute;
-}
-function caseInsensitiveTransform(attributes, property2) {
-  return caseSensitiveTransform(attributes, property2.toLowerCase());
-}
-const xmlns = create({
-  space: "xmlns",
-  attributes: { xmlnsxlink: "xmlns:xlink" },
-  transform: caseInsensitiveTransform,
-  properties: { xmlns: null, xmlnsXLink: null }
-});
-const aria = create({
-  transform(_2, prop) {
-    return prop === "role" ? prop : "aria-" + prop.slice(4).toLowerCase();
-  },
-  properties: {
-    ariaActiveDescendant: null,
-    ariaAtomic: booleanish,
-    ariaAutoComplete: null,
-    ariaBusy: booleanish,
-    ariaChecked: booleanish,
-    ariaColCount: number,
-    ariaColIndex: number,
-    ariaColSpan: number,
-    ariaControls: spaceSeparated,
-    ariaCurrent: null,
-    ariaDescribedBy: spaceSeparated,
-    ariaDetails: null,
-    ariaDisabled: booleanish,
-    ariaDropEffect: spaceSeparated,
-    ariaErrorMessage: null,
-    ariaExpanded: booleanish,
-    ariaFlowTo: spaceSeparated,
-    ariaGrabbed: booleanish,
-    ariaHasPopup: null,
-    ariaHidden: booleanish,
-    ariaInvalid: null,
-    ariaKeyShortcuts: null,
-    ariaLabel: null,
-    ariaLabelledBy: spaceSeparated,
-    ariaLevel: number,
-    ariaLive: null,
-    ariaModal: booleanish,
-    ariaMultiLine: booleanish,
-    ariaMultiSelectable: booleanish,
-    ariaOrientation: null,
-    ariaOwns: spaceSeparated,
-    ariaPlaceholder: null,
-    ariaPosInSet: number,
-    ariaPressed: booleanish,
-    ariaReadOnly: booleanish,
-    ariaRelevant: null,
-    ariaRequired: booleanish,
-    ariaRoleDescription: spaceSeparated,
-    ariaRowCount: number,
-    ariaRowIndex: number,
-    ariaRowSpan: number,
-    ariaSelected: booleanish,
-    ariaSetSize: number,
-    ariaSort: null,
-    ariaValueMax: number,
-    ariaValueMin: number,
-    ariaValueNow: number,
-    ariaValueText: null,
-    role: null
-  }
-});
-const html$1 = create({
-  space: "html",
-  attributes: {
-    acceptcharset: "accept-charset",
-    classname: "class",
-    htmlfor: "for",
-    httpequiv: "http-equiv"
-  },
-  transform: caseInsensitiveTransform,
-  mustUseProperty: ["checked", "multiple", "muted", "selected"],
-  properties: {
-    // Standard Properties.
-    abbr: null,
-    accept: commaSeparated,
-    acceptCharset: spaceSeparated,
-    accessKey: spaceSeparated,
-    action: null,
-    allow: null,
-    allowFullScreen: boolean,
-    allowPaymentRequest: boolean,
-    allowUserMedia: boolean,
-    alt: null,
-    as: null,
-    async: boolean,
-    autoCapitalize: null,
-    autoComplete: spaceSeparated,
-    autoFocus: boolean,
-    autoPlay: boolean,
-    blocking: spaceSeparated,
-    capture: boolean,
-    charSet: null,
-    checked: boolean,
-    cite: null,
-    className: spaceSeparated,
-    cols: number,
-    colSpan: null,
-    content: null,
-    contentEditable: booleanish,
-    controls: boolean,
-    controlsList: spaceSeparated,
-    coords: number | commaSeparated,
-    crossOrigin: null,
-    data: null,
-    dateTime: null,
-    decoding: null,
-    default: boolean,
-    defer: boolean,
-    dir: null,
-    dirName: null,
-    disabled: boolean,
-    download: overloadedBoolean,
-    draggable: booleanish,
-    encType: null,
-    enterKeyHint: null,
-    fetchPriority: null,
-    form: null,
-    formAction: null,
-    formEncType: null,
-    formMethod: null,
-    formNoValidate: boolean,
-    formTarget: null,
-    headers: spaceSeparated,
-    height: number,
-    hidden: boolean,
-    high: number,
-    href: null,
-    hrefLang: null,
-    htmlFor: spaceSeparated,
-    httpEquiv: spaceSeparated,
-    id: null,
-    imageSizes: null,
-    imageSrcSet: null,
-    inert: boolean,
-    inputMode: null,
-    integrity: null,
-    is: null,
-    isMap: boolean,
-    itemId: null,
-    itemProp: spaceSeparated,
-    itemRef: spaceSeparated,
-    itemScope: boolean,
-    itemType: spaceSeparated,
-    kind: null,
-    label: null,
-    lang: null,
-    language: null,
-    list: null,
-    loading: null,
-    loop: boolean,
-    low: number,
-    manifest: null,
-    max: null,
-    maxLength: number,
-    media: null,
-    method: null,
-    min: null,
-    minLength: number,
-    multiple: boolean,
-    muted: boolean,
-    name: null,
-    nonce: null,
-    noModule: boolean,
-    noValidate: boolean,
-    onAbort: null,
-    onAfterPrint: null,
-    onAuxClick: null,
-    onBeforeMatch: null,
-    onBeforePrint: null,
-    onBeforeToggle: null,
-    onBeforeUnload: null,
-    onBlur: null,
-    onCancel: null,
-    onCanPlay: null,
-    onCanPlayThrough: null,
-    onChange: null,
-    onClick: null,
-    onClose: null,
-    onContextLost: null,
-    onContextMenu: null,
-    onContextRestored: null,
-    onCopy: null,
-    onCueChange: null,
-    onCut: null,
-    onDblClick: null,
-    onDrag: null,
-    onDragEnd: null,
-    onDragEnter: null,
-    onDragExit: null,
-    onDragLeave: null,
-    onDragOver: null,
-    onDragStart: null,
-    onDrop: null,
-    onDurationChange: null,
-    onEmptied: null,
-    onEnded: null,
-    onError: null,
-    onFocus: null,
-    onFormData: null,
-    onHashChange: null,
-    onInput: null,
-    onInvalid: null,
-    onKeyDown: null,
-    onKeyPress: null,
-    onKeyUp: null,
-    onLanguageChange: null,
-    onLoad: null,
-    onLoadedData: null,
-    onLoadedMetadata: null,
-    onLoadEnd: null,
-    onLoadStart: null,
-    onMessage: null,
-    onMessageError: null,
-    onMouseDown: null,
-    onMouseEnter: null,
-    onMouseLeave: null,
-    onMouseMove: null,
-    onMouseOut: null,
-    onMouseOver: null,
-    onMouseUp: null,
-    onOffline: null,
-    onOnline: null,
-    onPageHide: null,
-    onPageShow: null,
-    onPaste: null,
-    onPause: null,
-    onPlay: null,
-    onPlaying: null,
-    onPopState: null,
-    onProgress: null,
-    onRateChange: null,
-    onRejectionHandled: null,
-    onReset: null,
-    onResize: null,
-    onScroll: null,
-    onScrollEnd: null,
-    onSecurityPolicyViolation: null,
-    onSeeked: null,
-    onSeeking: null,
-    onSelect: null,
-    onSlotChange: null,
-    onStalled: null,
-    onStorage: null,
-    onSubmit: null,
-    onSuspend: null,
-    onTimeUpdate: null,
-    onToggle: null,
-    onUnhandledRejection: null,
-    onUnload: null,
-    onVolumeChange: null,
-    onWaiting: null,
-    onWheel: null,
-    open: boolean,
-    optimum: number,
-    pattern: null,
-    ping: spaceSeparated,
-    placeholder: null,
-    playsInline: boolean,
-    popover: null,
-    popoverTarget: null,
-    popoverTargetAction: null,
-    poster: null,
-    preload: null,
-    readOnly: boolean,
-    referrerPolicy: null,
-    rel: spaceSeparated,
-    required: boolean,
-    reversed: boolean,
-    rows: number,
-    rowSpan: number,
-    sandbox: spaceSeparated,
-    scope: null,
-    scoped: boolean,
-    seamless: boolean,
-    selected: boolean,
-    shadowRootDelegatesFocus: boolean,
-    shadowRootMode: null,
-    shape: null,
-    size: number,
-    sizes: null,
-    slot: null,
-    span: number,
-    spellCheck: booleanish,
-    src: null,
-    srcDoc: null,
-    srcLang: null,
-    srcSet: null,
-    start: number,
-    step: null,
-    style: null,
-    tabIndex: number,
-    target: null,
-    title: null,
-    translate: null,
-    type: null,
-    typeMustMatch: boolean,
-    useMap: null,
-    value: booleanish,
-    width: number,
-    wrap: null,
-    // Legacy.
-    // See: https://html.spec.whatwg.org/#other-elements,-attributes-and-apis
-    align: null,
-    // Several. Use CSS `text-align` instead,
-    aLink: null,
-    // `<body>`. Use CSS `a:active {color}` instead
-    archive: spaceSeparated,
-    // `<object>`. List of URIs to archives
-    axis: null,
-    // `<td>` and `<th>`. Use `scope` on `<th>`
-    background: null,
-    // `<body>`. Use CSS `background-image` instead
-    bgColor: null,
-    // `<body>` and table elements. Use CSS `background-color` instead
-    border: number,
-    // `<table>`. Use CSS `border-width` instead,
-    borderColor: null,
-    // `<table>`. Use CSS `border-color` instead,
-    bottomMargin: number,
-    // `<body>`
-    cellPadding: null,
-    // `<table>`
-    cellSpacing: null,
-    // `<table>`
-    char: null,
-    // Several table elements. When `align=char`, sets the character to align on
-    charOff: null,
-    // Several table elements. When `char`, offsets the alignment
-    classId: null,
-    // `<object>`
-    clear: null,
-    // `<br>`. Use CSS `clear` instead
-    code: null,
-    // `<object>`
-    codeBase: null,
-    // `<object>`
-    codeType: null,
-    // `<object>`
-    color: null,
-    // `<font>` and `<hr>`. Use CSS instead
-    compact: boolean,
-    // Lists. Use CSS to reduce space between items instead
-    declare: boolean,
-    // `<object>`
-    event: null,
-    // `<script>`
-    face: null,
-    // `<font>`. Use CSS instead
-    frame: null,
-    // `<table>`
-    frameBorder: null,
-    // `<iframe>`. Use CSS `border` instead
-    hSpace: number,
-    // `<img>` and `<object>`
-    leftMargin: number,
-    // `<body>`
-    link: null,
-    // `<body>`. Use CSS `a:link {color: *}` instead
-    longDesc: null,
-    // `<frame>`, `<iframe>`, and `<img>`. Use an `<a>`
-    lowSrc: null,
-    // `<img>`. Use a `<picture>`
-    marginHeight: number,
-    // `<body>`
-    marginWidth: number,
-    // `<body>`
-    noResize: boolean,
-    // `<frame>`
-    noHref: boolean,
-    // `<area>`. Use no href instead of an explicit `nohref`
-    noShade: boolean,
-    // `<hr>`. Use background-color and height instead of borders
-    noWrap: boolean,
-    // `<td>` and `<th>`
-    object: null,
-    // `<applet>`
-    profile: null,
-    // `<head>`
-    prompt: null,
-    // `<isindex>`
-    rev: null,
-    // `<link>`
-    rightMargin: number,
-    // `<body>`
-    rules: null,
-    // `<table>`
-    scheme: null,
-    // `<meta>`
-    scrolling: booleanish,
-    // `<frame>`. Use overflow in the child context
-    standby: null,
-    // `<object>`
-    summary: null,
-    // `<table>`
-    text: null,
-    // `<body>`. Use CSS `color` instead
-    topMargin: number,
-    // `<body>`
-    valueType: null,
-    // `<param>`
-    version: null,
-    // `<html>`. Use a doctype.
-    vAlign: null,
-    // Several. Use CSS `vertical-align` instead
-    vLink: null,
-    // `<body>`. Use CSS `a:visited {color}` instead
-    vSpace: number,
-    // `<img>` and `<object>`
-    // Non-standard Properties.
-    allowTransparency: null,
-    autoCorrect: null,
-    autoSave: null,
-    disablePictureInPicture: boolean,
-    disableRemotePlayback: boolean,
-    prefix: null,
-    property: null,
-    results: number,
-    security: null,
-    unselectable: null
-  }
-});
-const svg$1 = create({
-  space: "svg",
-  attributes: {
-    accentHeight: "accent-height",
-    alignmentBaseline: "alignment-baseline",
-    arabicForm: "arabic-form",
-    baselineShift: "baseline-shift",
-    capHeight: "cap-height",
-    className: "class",
-    clipPath: "clip-path",
-    clipRule: "clip-rule",
-    colorInterpolation: "color-interpolation",
-    colorInterpolationFilters: "color-interpolation-filters",
-    colorProfile: "color-profile",
-    colorRendering: "color-rendering",
-    crossOrigin: "crossorigin",
-    dataType: "datatype",
-    dominantBaseline: "dominant-baseline",
-    enableBackground: "enable-background",
-    fillOpacity: "fill-opacity",
-    fillRule: "fill-rule",
-    floodColor: "flood-color",
-    floodOpacity: "flood-opacity",
-    fontFamily: "font-family",
-    fontSize: "font-size",
-    fontSizeAdjust: "font-size-adjust",
-    fontStretch: "font-stretch",
-    fontStyle: "font-style",
-    fontVariant: "font-variant",
-    fontWeight: "font-weight",
-    glyphName: "glyph-name",
-    glyphOrientationHorizontal: "glyph-orientation-horizontal",
-    glyphOrientationVertical: "glyph-orientation-vertical",
-    hrefLang: "hreflang",
-    horizAdvX: "horiz-adv-x",
-    horizOriginX: "horiz-origin-x",
-    horizOriginY: "horiz-origin-y",
-    imageRendering: "image-rendering",
-    letterSpacing: "letter-spacing",
-    lightingColor: "lighting-color",
-    markerEnd: "marker-end",
-    markerMid: "marker-mid",
-    markerStart: "marker-start",
-    navDown: "nav-down",
-    navDownLeft: "nav-down-left",
-    navDownRight: "nav-down-right",
-    navLeft: "nav-left",
-    navNext: "nav-next",
-    navPrev: "nav-prev",
-    navRight: "nav-right",
-    navUp: "nav-up",
-    navUpLeft: "nav-up-left",
-    navUpRight: "nav-up-right",
-    onAbort: "onabort",
-    onActivate: "onactivate",
-    onAfterPrint: "onafterprint",
-    onBeforePrint: "onbeforeprint",
-    onBegin: "onbegin",
-    onCancel: "oncancel",
-    onCanPlay: "oncanplay",
-    onCanPlayThrough: "oncanplaythrough",
-    onChange: "onchange",
-    onClick: "onclick",
-    onClose: "onclose",
-    onCopy: "oncopy",
-    onCueChange: "oncuechange",
-    onCut: "oncut",
-    onDblClick: "ondblclick",
-    onDrag: "ondrag",
-    onDragEnd: "ondragend",
-    onDragEnter: "ondragenter",
-    onDragExit: "ondragexit",
-    onDragLeave: "ondragleave",
-    onDragOver: "ondragover",
-    onDragStart: "ondragstart",
-    onDrop: "ondrop",
-    onDurationChange: "ondurationchange",
-    onEmptied: "onemptied",
-    onEnd: "onend",
-    onEnded: "onended",
-    onError: "onerror",
-    onFocus: "onfocus",
-    onFocusIn: "onfocusin",
-    onFocusOut: "onfocusout",
-    onHashChange: "onhashchange",
-    onInput: "oninput",
-    onInvalid: "oninvalid",
-    onKeyDown: "onkeydown",
-    onKeyPress: "onkeypress",
-    onKeyUp: "onkeyup",
-    onLoad: "onload",
-    onLoadedData: "onloadeddata",
-    onLoadedMetadata: "onloadedmetadata",
-    onLoadStart: "onloadstart",
-    onMessage: "onmessage",
-    onMouseDown: "onmousedown",
-    onMouseEnter: "onmouseenter",
-    onMouseLeave: "onmouseleave",
-    onMouseMove: "onmousemove",
-    onMouseOut: "onmouseout",
-    onMouseOver: "onmouseover",
-    onMouseUp: "onmouseup",
-    onMouseWheel: "onmousewheel",
-    onOffline: "onoffline",
-    onOnline: "ononline",
-    onPageHide: "onpagehide",
-    onPageShow: "onpageshow",
-    onPaste: "onpaste",
-    onPause: "onpause",
-    onPlay: "onplay",
-    onPlaying: "onplaying",
-    onPopState: "onpopstate",
-    onProgress: "onprogress",
-    onRateChange: "onratechange",
-    onRepeat: "onrepeat",
-    onReset: "onreset",
-    onResize: "onresize",
-    onScroll: "onscroll",
-    onSeeked: "onseeked",
-    onSeeking: "onseeking",
-    onSelect: "onselect",
-    onShow: "onshow",
-    onStalled: "onstalled",
-    onStorage: "onstorage",
-    onSubmit: "onsubmit",
-    onSuspend: "onsuspend",
-    onTimeUpdate: "ontimeupdate",
-    onToggle: "ontoggle",
-    onUnload: "onunload",
-    onVolumeChange: "onvolumechange",
-    onWaiting: "onwaiting",
-    onZoom: "onzoom",
-    overlinePosition: "overline-position",
-    overlineThickness: "overline-thickness",
-    paintOrder: "paint-order",
-    panose1: "panose-1",
-    pointerEvents: "pointer-events",
-    referrerPolicy: "referrerpolicy",
-    renderingIntent: "rendering-intent",
-    shapeRendering: "shape-rendering",
-    stopColor: "stop-color",
-    stopOpacity: "stop-opacity",
-    strikethroughPosition: "strikethrough-position",
-    strikethroughThickness: "strikethrough-thickness",
-    strokeDashArray: "stroke-dasharray",
-    strokeDashOffset: "stroke-dashoffset",
-    strokeLineCap: "stroke-linecap",
-    strokeLineJoin: "stroke-linejoin",
-    strokeMiterLimit: "stroke-miterlimit",
-    strokeOpacity: "stroke-opacity",
-    strokeWidth: "stroke-width",
-    tabIndex: "tabindex",
-    textAnchor: "text-anchor",
-    textDecoration: "text-decoration",
-    textRendering: "text-rendering",
-    transformOrigin: "transform-origin",
-    typeOf: "typeof",
-    underlinePosition: "underline-position",
-    underlineThickness: "underline-thickness",
-    unicodeBidi: "unicode-bidi",
-    unicodeRange: "unicode-range",
-    unitsPerEm: "units-per-em",
-    vAlphabetic: "v-alphabetic",
-    vHanging: "v-hanging",
-    vIdeographic: "v-ideographic",
-    vMathematical: "v-mathematical",
-    vectorEffect: "vector-effect",
-    vertAdvY: "vert-adv-y",
-    vertOriginX: "vert-origin-x",
-    vertOriginY: "vert-origin-y",
-    wordSpacing: "word-spacing",
-    writingMode: "writing-mode",
-    xHeight: "x-height",
-    // These were camelcased in Tiny. Now lowercased in SVG 2
-    playbackOrder: "playbackorder",
-    timelineBegin: "timelinebegin"
-  },
-  transform: caseSensitiveTransform,
-  properties: {
-    about: commaOrSpaceSeparated,
-    accentHeight: number,
-    accumulate: null,
-    additive: null,
-    alignmentBaseline: null,
-    alphabetic: number,
-    amplitude: number,
-    arabicForm: null,
-    ascent: number,
-    attributeName: null,
-    attributeType: null,
-    azimuth: number,
-    bandwidth: null,
-    baselineShift: null,
-    baseFrequency: null,
-    baseProfile: null,
-    bbox: null,
-    begin: null,
-    bias: number,
-    by: null,
-    calcMode: null,
-    capHeight: number,
-    className: spaceSeparated,
-    clip: null,
-    clipPath: null,
-    clipPathUnits: null,
-    clipRule: null,
-    color: null,
-    colorInterpolation: null,
-    colorInterpolationFilters: null,
-    colorProfile: null,
-    colorRendering: null,
-    content: null,
-    contentScriptType: null,
-    contentStyleType: null,
-    crossOrigin: null,
-    cursor: null,
-    cx: null,
-    cy: null,
-    d: null,
-    dataType: null,
-    defaultAction: null,
-    descent: number,
-    diffuseConstant: number,
-    direction: null,
-    display: null,
-    dur: null,
-    divisor: number,
-    dominantBaseline: null,
-    download: boolean,
-    dx: null,
-    dy: null,
-    edgeMode: null,
-    editable: null,
-    elevation: number,
-    enableBackground: null,
-    end: null,
-    event: null,
-    exponent: number,
-    externalResourcesRequired: null,
-    fill: null,
-    fillOpacity: number,
-    fillRule: null,
-    filter: null,
-    filterRes: null,
-    filterUnits: null,
-    floodColor: null,
-    floodOpacity: null,
-    focusable: null,
-    focusHighlight: null,
-    fontFamily: null,
-    fontSize: null,
-    fontSizeAdjust: null,
-    fontStretch: null,
-    fontStyle: null,
-    fontVariant: null,
-    fontWeight: null,
-    format: null,
-    fr: null,
-    from: null,
-    fx: null,
-    fy: null,
-    g1: commaSeparated,
-    g2: commaSeparated,
-    glyphName: commaSeparated,
-    glyphOrientationHorizontal: null,
-    glyphOrientationVertical: null,
-    glyphRef: null,
-    gradientTransform: null,
-    gradientUnits: null,
-    handler: null,
-    hanging: number,
-    hatchContentUnits: null,
-    hatchUnits: null,
-    height: null,
-    href: null,
-    hrefLang: null,
-    horizAdvX: number,
-    horizOriginX: number,
-    horizOriginY: number,
-    id: null,
-    ideographic: number,
-    imageRendering: null,
-    initialVisibility: null,
-    in: null,
-    in2: null,
-    intercept: number,
-    k: number,
-    k1: number,
-    k2: number,
-    k3: number,
-    k4: number,
-    kernelMatrix: commaOrSpaceSeparated,
-    kernelUnitLength: null,
-    keyPoints: null,
-    // SEMI_COLON_SEPARATED
-    keySplines: null,
-    // SEMI_COLON_SEPARATED
-    keyTimes: null,
-    // SEMI_COLON_SEPARATED
-    kerning: null,
-    lang: null,
-    lengthAdjust: null,
-    letterSpacing: null,
-    lightingColor: null,
-    limitingConeAngle: number,
-    local: null,
-    markerEnd: null,
-    markerMid: null,
-    markerStart: null,
-    markerHeight: null,
-    markerUnits: null,
-    markerWidth: null,
-    mask: null,
-    maskContentUnits: null,
-    maskUnits: null,
-    mathematical: null,
-    max: null,
-    media: null,
-    mediaCharacterEncoding: null,
-    mediaContentEncodings: null,
-    mediaSize: number,
-    mediaTime: null,
-    method: null,
-    min: null,
-    mode: null,
-    name: null,
-    navDown: null,
-    navDownLeft: null,
-    navDownRight: null,
-    navLeft: null,
-    navNext: null,
-    navPrev: null,
-    navRight: null,
-    navUp: null,
-    navUpLeft: null,
-    navUpRight: null,
-    numOctaves: null,
-    observer: null,
-    offset: null,
-    onAbort: null,
-    onActivate: null,
-    onAfterPrint: null,
-    onBeforePrint: null,
-    onBegin: null,
-    onCancel: null,
-    onCanPlay: null,
-    onCanPlayThrough: null,
-    onChange: null,
-    onClick: null,
-    onClose: null,
-    onCopy: null,
-    onCueChange: null,
-    onCut: null,
-    onDblClick: null,
-    onDrag: null,
-    onDragEnd: null,
-    onDragEnter: null,
-    onDragExit: null,
-    onDragLeave: null,
-    onDragOver: null,
-    onDragStart: null,
-    onDrop: null,
-    onDurationChange: null,
-    onEmptied: null,
-    onEnd: null,
-    onEnded: null,
-    onError: null,
-    onFocus: null,
-    onFocusIn: null,
-    onFocusOut: null,
-    onHashChange: null,
-    onInput: null,
-    onInvalid: null,
-    onKeyDown: null,
-    onKeyPress: null,
-    onKeyUp: null,
-    onLoad: null,
-    onLoadedData: null,
-    onLoadedMetadata: null,
-    onLoadStart: null,
-    onMessage: null,
-    onMouseDown: null,
-    onMouseEnter: null,
-    onMouseLeave: null,
-    onMouseMove: null,
-    onMouseOut: null,
-    onMouseOver: null,
-    onMouseUp: null,
-    onMouseWheel: null,
-    onOffline: null,
-    onOnline: null,
-    onPageHide: null,
-    onPageShow: null,
-    onPaste: null,
-    onPause: null,
-    onPlay: null,
-    onPlaying: null,
-    onPopState: null,
-    onProgress: null,
-    onRateChange: null,
-    onRepeat: null,
-    onReset: null,
-    onResize: null,
-    onScroll: null,
-    onSeeked: null,
-    onSeeking: null,
-    onSelect: null,
-    onShow: null,
-    onStalled: null,
-    onStorage: null,
-    onSubmit: null,
-    onSuspend: null,
-    onTimeUpdate: null,
-    onToggle: null,
-    onUnload: null,
-    onVolumeChange: null,
-    onWaiting: null,
-    onZoom: null,
-    opacity: null,
-    operator: null,
-    order: null,
-    orient: null,
-    orientation: null,
-    origin: null,
-    overflow: null,
-    overlay: null,
-    overlinePosition: number,
-    overlineThickness: number,
-    paintOrder: null,
-    panose1: null,
-    path: null,
-    pathLength: number,
-    patternContentUnits: null,
-    patternTransform: null,
-    patternUnits: null,
-    phase: null,
-    ping: spaceSeparated,
-    pitch: null,
-    playbackOrder: null,
-    pointerEvents: null,
-    points: null,
-    pointsAtX: number,
-    pointsAtY: number,
-    pointsAtZ: number,
-    preserveAlpha: null,
-    preserveAspectRatio: null,
-    primitiveUnits: null,
-    propagate: null,
-    property: commaOrSpaceSeparated,
-    r: null,
-    radius: null,
-    referrerPolicy: null,
-    refX: null,
-    refY: null,
-    rel: commaOrSpaceSeparated,
-    rev: commaOrSpaceSeparated,
-    renderingIntent: null,
-    repeatCount: null,
-    repeatDur: null,
-    requiredExtensions: commaOrSpaceSeparated,
-    requiredFeatures: commaOrSpaceSeparated,
-    requiredFonts: commaOrSpaceSeparated,
-    requiredFormats: commaOrSpaceSeparated,
-    resource: null,
-    restart: null,
-    result: null,
-    rotate: null,
-    rx: null,
-    ry: null,
-    scale: null,
-    seed: null,
-    shapeRendering: null,
-    side: null,
-    slope: null,
-    snapshotTime: null,
-    specularConstant: number,
-    specularExponent: number,
-    spreadMethod: null,
-    spacing: null,
-    startOffset: null,
-    stdDeviation: null,
-    stemh: null,
-    stemv: null,
-    stitchTiles: null,
-    stopColor: null,
-    stopOpacity: null,
-    strikethroughPosition: number,
-    strikethroughThickness: number,
-    string: null,
-    stroke: null,
-    strokeDashArray: commaOrSpaceSeparated,
-    strokeDashOffset: null,
-    strokeLineCap: null,
-    strokeLineJoin: null,
-    strokeMiterLimit: number,
-    strokeOpacity: number,
-    strokeWidth: null,
-    style: null,
-    surfaceScale: number,
-    syncBehavior: null,
-    syncBehaviorDefault: null,
-    syncMaster: null,
-    syncTolerance: null,
-    syncToleranceDefault: null,
-    systemLanguage: commaOrSpaceSeparated,
-    tabIndex: number,
-    tableValues: null,
-    target: null,
-    targetX: number,
-    targetY: number,
-    textAnchor: null,
-    textDecoration: null,
-    textRendering: null,
-    textLength: null,
-    timelineBegin: null,
-    title: null,
-    transformBehavior: null,
-    type: null,
-    typeOf: commaOrSpaceSeparated,
-    to: null,
-    transform: null,
-    transformOrigin: null,
-    u1: null,
-    u2: null,
-    underlinePosition: number,
-    underlineThickness: number,
-    unicode: null,
-    unicodeBidi: null,
-    unicodeRange: null,
-    unitsPerEm: number,
-    values: null,
-    vAlphabetic: number,
-    vMathematical: number,
-    vectorEffect: null,
-    vHanging: number,
-    vIdeographic: number,
-    version: null,
-    vertAdvY: number,
-    vertOriginX: number,
-    vertOriginY: number,
-    viewBox: null,
-    viewTarget: null,
-    visibility: null,
-    width: null,
-    widths: null,
-    wordSpacing: null,
-    writingMode: null,
-    x: null,
-    x1: null,
-    x2: null,
-    xChannelSelector: null,
-    xHeight: number,
-    y: null,
-    y1: null,
-    y2: null,
-    yChannelSelector: null,
-    z: null,
-    zoomAndPan: null
-  }
-});
-const valid = /^data[-\w.:]+$/i;
-const dash = /-[a-z]/g;
-const cap$1 = /[A-Z]/g;
-function find(schema2, value) {
-  const normal = normalize$1(value);
-  let prop = value;
-  let Type2 = Info;
-  if (normal in schema2.normal) {
-    return schema2.property[schema2.normal[normal]];
-  }
-  if (normal.length > 4 && normal.slice(0, 4) === "data" && valid.test(value)) {
-    if (value.charAt(4) === "-") {
-      const rest = value.slice(5).replace(dash, camelcase);
-      prop = "data" + rest.charAt(0).toUpperCase() + rest.slice(1);
-    } else {
-      const rest = value.slice(4);
-      if (!dash.test(rest)) {
-        let dashes = rest.replace(cap$1, kebab);
-        if (dashes.charAt(0) !== "-") {
-          dashes = "-" + dashes;
-        }
-        value = "data" + dashes;
-      }
-    }
-    Type2 = DefinedInfo;
-  }
-  return new Type2(prop, value);
-}
-function kebab($0) {
-  return "-" + $0.toLowerCase();
-}
-function camelcase($0) {
-  return $0.charAt(1).toUpperCase();
-}
-const html = merge([xml, xlink, xmlns, aria, html$1], "html");
-const svg = merge([xml, xlink, xmlns, aria, svg$1], "svg");
-function stringify(values2) {
-  return values2.join(" ").trim();
-}
-var cjs = {};
-var COMMENT_REGEX = /\/\*[^*]*\*+([^/*][^*]*\*+)*\//g;
-var NEWLINE_REGEX = /\n/g;
-var WHITESPACE_REGEX = /^\s*/;
-var PROPERTY_REGEX = /^(\*?[-#/*\\\w]+(\[[0-9a-z_-]+\])?)\s*/;
-var COLON_REGEX = /^:\s*/;
-var VALUE_REGEX = /^((?:'(?:\\'|.)*?'|"(?:\\"|.)*?"|\([^)]*?\)|[^};])+)/;
-var SEMICOLON_REGEX = /^[;\s]*/;
-var TRIM_REGEX = /^\s+|\s+$/g;
-var NEWLINE = "\n";
-var FORWARD_SLASH = "/";
-var ASTERISK = "*";
-var EMPTY_STRING = "";
-var TYPE_COMMENT = "comment";
-var TYPE_DECLARATION = "declaration";
-var inlineStyleParser = function(style, options) {
-  if (typeof style !== "string") {
-    throw new TypeError("First argument must be a string");
-  }
-  if (!style)
-    return [];
-  options = options || {};
-  var lineno = 1;
-  var column2 = 1;
-  function updatePosition(str2) {
-    var lines = str2.match(NEWLINE_REGEX);
-    if (lines)
-      lineno += lines.length;
-    var i2 = str2.lastIndexOf(NEWLINE);
-    column2 = ~i2 ? str2.length - i2 : column2 + str2.length;
-  }
-  function position2() {
-    var start = { line: lineno, column: column2 };
-    return function(node2) {
-      node2.position = new Position(start);
-      whitespace2();
-      return node2;
-    };
-  }
-  function Position(start) {
-    this.start = start;
-    this.end = { line: lineno, column: column2 };
-    this.source = options.source;
-  }
-  Position.prototype.content = style;
-  function error(msg) {
-    var err = new Error(
-      options.source + ":" + lineno + ":" + column2 + ": " + msg
-    );
-    err.reason = msg;
-    err.filename = options.source;
-    err.line = lineno;
-    err.column = column2;
-    err.source = style;
-    if (options.silent)
-      ;
-    else {
-      throw err;
-    }
-  }
-  function match2(re2) {
-    var m2 = re2.exec(style);
-    if (!m2)
-      return;
-    var str2 = m2[0];
-    updatePosition(str2);
-    style = style.slice(str2.length);
-    return m2;
-  }
-  function whitespace2() {
-    match2(WHITESPACE_REGEX);
-  }
-  function comments(rules) {
-    var c2;
-    rules = rules || [];
-    while (c2 = comment2()) {
-      if (c2 !== false) {
-        rules.push(c2);
-      }
-    }
-    return rules;
-  }
-  function comment2() {
-    var pos = position2();
-    if (FORWARD_SLASH != style.charAt(0) || ASTERISK != style.charAt(1))
-      return;
-    var i2 = 2;
-    while (EMPTY_STRING != style.charAt(i2) && (ASTERISK != style.charAt(i2) || FORWARD_SLASH != style.charAt(i2 + 1))) {
-      ++i2;
-    }
-    i2 += 2;
-    if (EMPTY_STRING === style.charAt(i2 - 1)) {
-      return error("End of comment missing");
-    }
-    var str2 = style.slice(2, i2 - 2);
-    column2 += 2;
-    updatePosition(str2);
-    style = style.slice(i2);
-    column2 += 2;
-    return pos({
-      type: TYPE_COMMENT,
-      comment: str2
-    });
-  }
-  function declaration2() {
-    var pos = position2();
-    var prop = match2(PROPERTY_REGEX);
-    if (!prop)
-      return;
-    comment2();
-    if (!match2(COLON_REGEX))
-      return error("property missing ':'");
-    var val = match2(VALUE_REGEX);
-    var ret = pos({
-      type: TYPE_DECLARATION,
-      property: trim(prop[0].replace(COMMENT_REGEX, EMPTY_STRING)),
-      value: val ? trim(val[0].replace(COMMENT_REGEX, EMPTY_STRING)) : EMPTY_STRING
-    });
-    match2(SEMICOLON_REGEX);
-    return ret;
-  }
-  function declarations() {
-    var decls = [];
-    comments(decls);
-    var decl;
-    while (decl = declaration2()) {
-      if (decl !== false) {
-        decls.push(decl);
-        comments(decls);
-      }
-    }
-    return decls;
-  }
-  whitespace2();
-  return declarations();
-};
-function trim(str2) {
-  return str2 ? str2.replace(TRIM_REGEX, EMPTY_STRING) : EMPTY_STRING;
-}
-var __importDefault = commonjsGlobal && commonjsGlobal.__importDefault || function(mod) {
-  return mod && mod.__esModule ? mod : { "default": mod };
-};
-Object.defineProperty(cjs, "__esModule", { value: true });
-var inline_style_parser_1 = __importDefault(inlineStyleParser);
-function StyleToObject(style, iterator) {
-  var styleObject = null;
-  if (!style || typeof style !== "string") {
-    return styleObject;
-  }
-  var declarations = (0, inline_style_parser_1.default)(style);
-  var hasIterator = typeof iterator === "function";
-  declarations.forEach(function(declaration2) {
-    if (declaration2.type !== "declaration") {
-      return;
-    }
-    var property2 = declaration2.property, value = declaration2.value;
-    if (hasIterator) {
-      iterator(property2, value, declaration2);
-    } else if (value) {
-      styleObject = styleObject || {};
-      styleObject[property2] = value;
-    }
-  });
-  return styleObject;
-}
-var _default = cjs.default = StyleToObject;
-const styleToObject = _default.default || _default;
-class VFileMessage extends Error {
-  /**
-   * Create a message for `reason`.
-   *
-   * > 🪦 **Note**: also has obsolete signatures.
-   *
-   * @overload
-   * @param {string} reason
-   * @param {Options | null | undefined} [options]
-   * @returns
-   *
-   * @overload
-   * @param {string} reason
-   * @param {Node | NodeLike | null | undefined} parent
-   * @param {string | null | undefined} [origin]
-   * @returns
-   *
-   * @overload
-   * @param {string} reason
-   * @param {Point | Position | null | undefined} place
-   * @param {string | null | undefined} [origin]
-   * @returns
-   *
-   * @overload
-   * @param {string} reason
-   * @param {string | null | undefined} [origin]
-   * @returns
-   *
-   * @overload
-   * @param {Error | VFileMessage} cause
-   * @param {Node | NodeLike | null | undefined} parent
-   * @param {string | null | undefined} [origin]
-   * @returns
-   *
-   * @overload
-   * @param {Error | VFileMessage} cause
-   * @param {Point | Position | null | undefined} place
-   * @param {string | null | undefined} [origin]
-   * @returns
-   *
-   * @overload
-   * @param {Error | VFileMessage} cause
-   * @param {string | null | undefined} [origin]
-   * @returns
-   *
-   * @param {Error | VFileMessage | string} causeOrReason
-   *   Reason for message, should use markdown.
-   * @param {Node | NodeLike | Options | Point | Position | string | null | undefined} [optionsOrParentOrPlace]
-   *   Configuration (optional).
-   * @param {string | null | undefined} [origin]
-   *   Place in code where the message originates (example:
-   *   `'my-package:my-rule'` or `'my-rule'`).
-   * @returns
-   *   Instance of `VFileMessage`.
-   */
-  // eslint-disable-next-line complexity
-  constructor(causeOrReason, optionsOrParentOrPlace, origin) {
-    super();
-    if (typeof optionsOrParentOrPlace === "string") {
-      origin = optionsOrParentOrPlace;
-      optionsOrParentOrPlace = void 0;
-    }
-    let reason = "";
-    let options = {};
-    let legacyCause = false;
-    if (optionsOrParentOrPlace) {
-      if ("line" in optionsOrParentOrPlace && "column" in optionsOrParentOrPlace) {
-        options = { place: optionsOrParentOrPlace };
-      } else if ("start" in optionsOrParentOrPlace && "end" in optionsOrParentOrPlace) {
-        options = { place: optionsOrParentOrPlace };
-      } else if ("type" in optionsOrParentOrPlace) {
-        options = {
-          ancestors: [optionsOrParentOrPlace],
-          place: optionsOrParentOrPlace.position
-        };
-      } else {
-        options = { ...optionsOrParentOrPlace };
-      }
-    }
-    if (typeof causeOrReason === "string") {
-      reason = causeOrReason;
-    } else if (!options.cause && causeOrReason) {
-      legacyCause = true;
-      reason = causeOrReason.message;
-      options.cause = causeOrReason;
-    }
-    if (!options.ruleId && !options.source && typeof origin === "string") {
-      const index2 = origin.indexOf(":");
-      if (index2 === -1) {
-        options.ruleId = origin;
-      } else {
-        options.source = origin.slice(0, index2);
-        options.ruleId = origin.slice(index2 + 1);
-      }
-    }
-    if (!options.place && options.ancestors && options.ancestors) {
-      const parent = options.ancestors[options.ancestors.length - 1];
-      if (parent) {
-        options.place = parent.position;
-      }
-    }
-    const start = options.place && "start" in options.place ? options.place.start : options.place;
-    this.ancestors = options.ancestors || void 0;
-    this.cause = options.cause || void 0;
-    this.column = start ? start.column : void 0;
-    this.fatal = void 0;
-    this.file;
-    this.message = reason;
-    this.line = start ? start.line : void 0;
-    this.name = stringifyPosition(options.place) || "1:1";
-    this.place = options.place || void 0;
-    this.reason = this.message;
-    this.ruleId = options.ruleId || void 0;
-    this.source = options.source || void 0;
-    this.stack = legacyCause && options.cause && typeof options.cause.stack === "string" ? options.cause.stack : "";
-    this.actual;
-    this.expected;
-    this.note;
-    this.url;
-  }
-}
-VFileMessage.prototype.file = "";
-VFileMessage.prototype.name = "";
-VFileMessage.prototype.reason = "";
-VFileMessage.prototype.message = "";
-VFileMessage.prototype.stack = "";
-VFileMessage.prototype.column = void 0;
-VFileMessage.prototype.line = void 0;
-VFileMessage.prototype.ancestors = void 0;
-VFileMessage.prototype.cause = void 0;
-VFileMessage.prototype.fatal = void 0;
-VFileMessage.prototype.place = void 0;
-VFileMessage.prototype.ruleId = void 0;
-VFileMessage.prototype.source = void 0;
-const own$2 = {}.hasOwnProperty;
-const emptyMap = /* @__PURE__ */ new Map();
-const cap = /[A-Z]/g;
-const dashSomething = /-([a-z])/g;
-const tableElements = /* @__PURE__ */ new Set(["table", "tbody", "thead", "tfoot", "tr"]);
-const tableCellElement = /* @__PURE__ */ new Set(["td", "th"]);
-const docs = "https://github.com/syntax-tree/hast-util-to-jsx-runtime";
-function toJsxRuntime(tree, options) {
-  if (!options || options.Fragment === void 0) {
-    throw new TypeError("Expected `Fragment` in options");
-  }
-  const filePath = options.filePath || void 0;
-  let create2;
-  if (options.development) {
-    if (typeof options.jsxDEV !== "function") {
-      throw new TypeError(
-        "Expected `jsxDEV` in options when `development: true`"
-      );
-    }
-    create2 = developmentCreate(filePath, options.jsxDEV);
-  } else {
-    if (typeof options.jsx !== "function") {
-      throw new TypeError("Expected `jsx` in production options");
-    }
-    if (typeof options.jsxs !== "function") {
-      throw new TypeError("Expected `jsxs` in production options");
-    }
-    create2 = productionCreate(filePath, options.jsx, options.jsxs);
-  }
-  const state = {
-    Fragment: options.Fragment,
-    ancestors: [],
-    components: options.components || {},
-    create: create2,
-    elementAttributeNameCase: options.elementAttributeNameCase || "react",
-    evaluater: options.createEvaluater ? options.createEvaluater() : void 0,
-    filePath,
-    ignoreInvalidStyle: options.ignoreInvalidStyle || false,
-    passKeys: options.passKeys !== false,
-    passNode: options.passNode || false,
-    schema: options.space === "svg" ? svg : html,
-    stylePropertyNameCase: options.stylePropertyNameCase || "dom",
-    tableCellAlignToStyle: options.tableCellAlignToStyle !== false
-  };
-  const result = one(state, tree, void 0);
-  if (result && typeof result !== "string") {
-    return result;
-  }
-  return state.create(
-    tree,
-    state.Fragment,
-    { children: result || void 0 },
-    void 0
-  );
-}
-function one(state, node2, key) {
-  if (node2.type === "element") {
-    return element(state, node2, key);
-  }
-  if (node2.type === "mdxFlowExpression" || node2.type === "mdxTextExpression") {
-    return mdxExpression(state, node2);
-  }
-  if (node2.type === "mdxJsxFlowElement" || node2.type === "mdxJsxTextElement") {
-    return mdxJsxElement(state, node2, key);
-  }
-  if (node2.type === "mdxjsEsm") {
-    return mdxEsm(state, node2);
-  }
-  if (node2.type === "root") {
-    return root(state, node2, key);
-  }
-  if (node2.type === "text") {
-    return text(state, node2);
-  }
-}
-function element(state, node2, key) {
-  const parentSchema = state.schema;
-  let schema2 = parentSchema;
-  if (node2.tagName.toLowerCase() === "svg" && parentSchema.space === "html") {
-    schema2 = svg;
-    state.schema = schema2;
-  }
-  state.ancestors.push(node2);
-  const type2 = findComponentFromName(state, node2.tagName, false);
-  const props = createElementProps(state, node2);
-  let children = createChildren(state, node2);
-  if (tableElements.has(node2.tagName)) {
-    children = children.filter(function(child) {
-      return typeof child === "string" ? !whitespace(child) : true;
-    });
-  }
-  addNode(state, props, type2, node2);
-  addChildren(props, children);
-  state.ancestors.pop();
-  state.schema = parentSchema;
-  return state.create(node2, type2, props, key);
-}
-function mdxExpression(state, node2) {
-  if (node2.data && node2.data.estree && state.evaluater) {
-    const program = node2.data.estree;
-    const expression = program.body[0];
-    ok(expression.type === "ExpressionStatement");
-    return (
-      /** @type {Child | undefined} */
-      state.evaluater.evaluateExpression(expression.expression)
-    );
-  }
-  crashEstree(state, node2.position);
-}
-function mdxEsm(state, node2) {
-  if (node2.data && node2.data.estree && state.evaluater) {
-    return (
-      /** @type {Child | undefined} */
-      state.evaluater.evaluateProgram(node2.data.estree)
-    );
-  }
-  crashEstree(state, node2.position);
-}
-function mdxJsxElement(state, node2, key) {
-  const parentSchema = state.schema;
-  let schema2 = parentSchema;
-  if (node2.name === "svg" && parentSchema.space === "html") {
-    schema2 = svg;
-    state.schema = schema2;
-  }
-  state.ancestors.push(node2);
-  const type2 = node2.name === null ? state.Fragment : findComponentFromName(state, node2.name, true);
-  const props = createJsxElementProps(state, node2);
-  const children = createChildren(state, node2);
-  addNode(state, props, type2, node2);
-  addChildren(props, children);
-  state.ancestors.pop();
-  state.schema = parentSchema;
-  return state.create(node2, type2, props, key);
-}
-function root(state, node2, key) {
-  const props = {};
-  addChildren(props, createChildren(state, node2));
-  return state.create(node2, state.Fragment, props, key);
-}
-function text(_2, node2) {
-  return node2.value;
-}
-function addNode(state, props, type2, node2) {
-  if (typeof type2 !== "string" && type2 !== state.Fragment && state.passNode) {
-    props.node = node2;
-  }
-}
-function addChildren(props, children) {
-  if (children.length > 0) {
-    const value = children.length > 1 ? children : children[0];
-    if (value) {
-      props.children = value;
-    }
-  }
-}
-function productionCreate(_2, jsx2, jsxs) {
-  return create2;
-  function create2(_3, type2, props, key) {
-    const isStaticChildren = Array.isArray(props.children);
-    const fn = isStaticChildren ? jsxs : jsx2;
-    return key ? fn(type2, props, key) : fn(type2, props);
-  }
-}
-function developmentCreate(filePath, jsxDEV) {
-  return create2;
-  function create2(node2, type2, props, key) {
-    const isStaticChildren = Array.isArray(props.children);
-    const point = pointStart(node2);
-    return jsxDEV(
-      type2,
-      props,
-      key,
-      isStaticChildren,
-      {
-        columnNumber: point ? point.column - 1 : void 0,
-        fileName: filePath,
-        lineNumber: point ? point.line : void 0
-      },
-      void 0
-    );
-  }
-}
-function createElementProps(state, node2) {
-  const props = {};
-  let alignValue;
-  let prop;
-  for (prop in node2.properties) {
-    if (prop !== "children" && own$2.call(node2.properties, prop)) {
-      const result = createProperty(state, prop, node2.properties[prop]);
-      if (result) {
-        const [key, value] = result;
-        if (state.tableCellAlignToStyle && key === "align" && typeof value === "string" && tableCellElement.has(node2.tagName)) {
-          alignValue = value;
-        } else {
-          props[key] = value;
-        }
-      }
-    }
-  }
-  if (alignValue) {
-    const style = (
-      /** @type {Style} */
-      props.style || (props.style = {})
-    );
-    style[state.stylePropertyNameCase === "css" ? "text-align" : "textAlign"] = alignValue;
-  }
-  return props;
-}
-function createJsxElementProps(state, node2) {
-  const props = {};
-  for (const attribute of node2.attributes) {
-    if (attribute.type === "mdxJsxExpressionAttribute") {
-      if (attribute.data && attribute.data.estree && state.evaluater) {
-        const program = attribute.data.estree;
-        const expression = program.body[0];
-        ok(expression.type === "ExpressionStatement");
-        const objectExpression = expression.expression;
-        ok(objectExpression.type === "ObjectExpression");
-        const property2 = objectExpression.properties[0];
-        ok(property2.type === "SpreadElement");
-        Object.assign(
-          props,
-          state.evaluater.evaluateExpression(property2.argument)
-        );
-      } else {
-        crashEstree(state, node2.position);
-      }
-    } else {
-      const name2 = attribute.name;
-      let value;
-      if (attribute.value && typeof attribute.value === "object") {
-        if (attribute.value.data && attribute.value.data.estree && state.evaluater) {
-          const program = attribute.value.data.estree;
-          const expression = program.body[0];
-          ok(expression.type === "ExpressionStatement");
-          value = state.evaluater.evaluateExpression(expression.expression);
-        } else {
-          crashEstree(state, node2.position);
-        }
-      } else {
-        value = attribute.value === null ? true : attribute.value;
-      }
-      props[name2] = /** @type {Props[keyof Props]} */
-      value;
-    }
-  }
-  return props;
-}
-function createChildren(state, node2) {
-  const children = [];
-  let index2 = -1;
-  const countsByName = state.passKeys ? /* @__PURE__ */ new Map() : emptyMap;
-  while (++index2 < node2.children.length) {
-    const child = node2.children[index2];
-    let key;
-    if (state.passKeys) {
-      const name2 = child.type === "element" ? child.tagName : child.type === "mdxJsxFlowElement" || child.type === "mdxJsxTextElement" ? child.name : void 0;
-      if (name2) {
-        const count2 = countsByName.get(name2) || 0;
-        key = name2 + "-" + count2;
-        countsByName.set(name2, count2 + 1);
-      }
-    }
-    const result = one(state, child, key);
-    if (result !== void 0)
-      children.push(result);
-  }
-  return children;
-}
-function createProperty(state, prop, value) {
-  const info = find(state.schema, prop);
-  if (value === null || value === void 0 || typeof value === "number" && Number.isNaN(value)) {
-    return;
-  }
-  if (Array.isArray(value)) {
-    value = info.commaSeparated ? stringify$1(value) : stringify(value);
-  }
-  if (info.property === "style") {
-    let styleObject = typeof value === "object" ? value : parseStyle(state, String(value));
-    if (state.stylePropertyNameCase === "css") {
-      styleObject = transformStylesToCssCasing(styleObject);
-    }
-    return ["style", styleObject];
-  }
-  return [
-    state.elementAttributeNameCase === "react" && info.space ? hastToReact[info.property] || info.property : info.attribute,
-    value
-  ];
-}
-function parseStyle(state, value) {
-  const result = {};
-  try {
-    styleToObject(value, replacer);
-  } catch (error) {
-    if (!state.ignoreInvalidStyle) {
-      const cause = (
-        /** @type {Error} */
-        error
-      );
-      const message = new VFileMessage("Cannot parse `style` attribute", {
-        ancestors: state.ancestors,
-        cause,
-        ruleId: "style",
-        source: "hast-util-to-jsx-runtime"
-      });
-      message.file = state.filePath || void 0;
-      message.url = docs + "#cannot-parse-style-attribute";
-      throw message;
-    }
-  }
-  return result;
-  function replacer(name2, value2) {
-    let key = name2;
-    if (key.slice(0, 2) !== "--") {
-      if (key.slice(0, 4) === "-ms-")
-        key = "ms-" + key.slice(4);
-      key = key.replace(dashSomething, toCamel);
-    }
-    result[key] = value2;
-  }
-}
-function findComponentFromName(state, name2, allowExpression) {
-  let result;
-  if (!allowExpression) {
-    result = { type: "Literal", value: name2 };
-  } else if (name2.includes(".")) {
-    const identifiers2 = name2.split(".");
-    let index2 = -1;
-    let node2;
-    while (++index2 < identifiers2.length) {
-      const prop = name$1(identifiers2[index2]) ? { type: "Identifier", name: identifiers2[index2] } : { type: "Literal", value: identifiers2[index2] };
-      node2 = node2 ? {
-        type: "MemberExpression",
-        object: node2,
-        property: prop,
-        computed: Boolean(index2 && prop.type === "Literal"),
-        optional: false
-      } : prop;
-    }
-    result = node2;
-  } else {
-    result = name$1(name2) && !/^[a-z]/.test(name2) ? { type: "Identifier", name: name2 } : { type: "Literal", value: name2 };
-  }
-  if (result.type === "Literal") {
-    const name3 = (
-      /** @type {keyof JSX.IntrinsicElements} */
-      result.value
-    );
-    return own$2.call(state.components, name3) ? state.components[name3] : name3;
-  }
-  if (state.evaluater) {
-    return state.evaluater.evaluateExpression(result);
-  }
-  crashEstree(state);
-}
-function crashEstree(state, place) {
-  const message = new VFileMessage(
-    "Cannot handle MDX estrees without `createEvaluater`",
-    {
-      ancestors: state.ancestors,
-      place,
-      ruleId: "mdx-estree",
-      source: "hast-util-to-jsx-runtime"
-    }
-  );
-  message.file = state.filePath || void 0;
-  message.url = docs + "#cannot-handle-mdx-estrees-without-createevaluater";
-  throw message;
-}
-function transformStylesToCssCasing(domCasing) {
-  const cssCasing = {};
-  let from2;
-  for (from2 in domCasing) {
-    if (own$2.call(domCasing, from2)) {
-      cssCasing[transformStyleToCssCasing(from2)] = domCasing[from2];
-    }
-  }
-  return cssCasing;
-}
-function transformStyleToCssCasing(from2) {
-  let to = from2.replace(cap, toDash);
-  if (to.slice(0, 3) === "ms-")
-    to = "-" + to;
-  return to;
-}
-function toCamel(_2, $1) {
-  return $1.toUpperCase();
-}
-function toDash($0) {
-  return "-" + $0.toLowerCase();
-}
-const urlAttributes = {
-  action: ["form"],
-  cite: ["blockquote", "del", "ins", "q"],
-  data: ["object"],
-  formAction: ["button", "input"],
-  href: ["a", "area", "base", "link"],
-  icon: ["menuitem"],
-  itemId: null,
-  manifest: ["html"],
-  ping: ["a", "area"],
-  poster: ["video"],
-  src: [
-    "audio",
-    "embed",
-    "iframe",
-    "img",
-    "input",
-    "script",
-    "source",
-    "track",
-    "video"
-  ]
-};
-const tab$1 = 9;
-const space$1 = 32;
-function trimLines(value) {
-  const source = String(value);
-  const search2 = /\r?\n|\r/g;
-  let match2 = search2.exec(source);
-  let last2 = 0;
-  const lines = [];
-  while (match2) {
-    lines.push(
-      trimLine(source.slice(last2, match2.index), last2 > 0, true),
-      match2[0]
-    );
-    last2 = match2.index + match2[0].length;
-    match2 = search2.exec(source);
-  }
-  lines.push(trimLine(source.slice(last2), last2 > 0, false));
-  return lines.join("");
-}
-function trimLine(value, start, end) {
-  let startIndex = 0;
-  let endIndex = value.length;
-  if (start) {
-    let code = value.codePointAt(startIndex);
-    while (code === tab$1 || code === space$1) {
-      startIndex++;
-      code = value.codePointAt(startIndex);
-    }
-  }
-  if (end) {
-    let code = value.codePointAt(endIndex - 1);
-    while (code === tab$1 || code === space$1) {
-      endIndex--;
-      code = value.codePointAt(endIndex - 1);
-    }
-  }
-  return endIndex > startIndex ? value.slice(startIndex, endIndex) : "";
-}
-const VOID = -1;
-const PRIMITIVE = 0;
-const ARRAY = 1;
-const OBJECT = 2;
-const DATE = 3;
-const REGEXP = 4;
-const MAP = 5;
-const SET = 6;
-const ERROR = 7;
-const BIGINT = 8;
-const env = typeof self === "object" ? self : globalThis;
-const deserializer = ($, _2) => {
-  const as = (out, index2) => {
-    $.set(index2, out);
-    return out;
-  };
-  const unpair = (index2) => {
-    if ($.has(index2))
-      return $.get(index2);
-    const [type2, value] = _2[index2];
-    switch (type2) {
-      case PRIMITIVE:
-      case VOID:
-        return as(value, index2);
-      case ARRAY: {
-        const arr = as([], index2);
-        for (const index3 of value)
-          arr.push(unpair(index3));
-        return arr;
-      }
-      case OBJECT: {
-        const object = as({}, index2);
-        for (const [key, index3] of value)
-          object[unpair(key)] = unpair(index3);
-        return object;
-      }
-      case DATE:
-        return as(new Date(value), index2);
-      case REGEXP: {
-        const { source, flags } = value;
-        return as(new RegExp(source, flags), index2);
-      }
-      case MAP: {
-        const map2 = as(/* @__PURE__ */ new Map(), index2);
-        for (const [key, index3] of value)
-          map2.set(unpair(key), unpair(index3));
-        return map2;
-      }
-      case SET: {
-        const set2 = as(/* @__PURE__ */ new Set(), index2);
-        for (const index3 of value)
-          set2.add(unpair(index3));
-        return set2;
-      }
-      case ERROR: {
-        const { name: name2, message } = value;
-        return as(new env[name2](message), index2);
-      }
-      case BIGINT:
-        return as(BigInt(value), index2);
-      case "BigInt":
-        return as(Object(BigInt(value)), index2);
-    }
-    return as(new env[type2](value), index2);
-  };
-  return unpair;
-};
-const deserialize = (serialized) => deserializer(/* @__PURE__ */ new Map(), serialized)(0);
-const EMPTY = "";
-const { toString: toString2 } = {};
-const { keys } = Object;
-const typeOf = (value) => {
-  const type2 = typeof value;
-  if (type2 !== "object" || !value)
-    return [PRIMITIVE, type2];
-  const asString = toString2.call(value).slice(8, -1);
-  switch (asString) {
-    case "Array":
-      return [ARRAY, EMPTY];
-    case "Object":
-      return [OBJECT, EMPTY];
-    case "Date":
-      return [DATE, EMPTY];
-    case "RegExp":
-      return [REGEXP, EMPTY];
-    case "Map":
-      return [MAP, EMPTY];
-    case "Set":
-      return [SET, EMPTY];
-  }
-  if (asString.includes("Array"))
-    return [ARRAY, asString];
-  if (asString.includes("Error"))
-    return [ERROR, asString];
-  return [OBJECT, asString];
-};
-const shouldSkip = ([TYPE, type2]) => TYPE === PRIMITIVE && (type2 === "function" || type2 === "symbol");
-const serializer = (strict, json2, $, _2) => {
-  const as = (out, value) => {
-    const index2 = _2.push(out) - 1;
-    $.set(value, index2);
-    return index2;
-  };
-  const pair2 = (value) => {
-    if ($.has(value))
-      return $.get(value);
-    let [TYPE, type2] = typeOf(value);
-    switch (TYPE) {
-      case PRIMITIVE: {
-        let entry = value;
-        switch (type2) {
-          case "bigint":
-            TYPE = BIGINT;
-            entry = value.toString();
-            break;
-          case "function":
-          case "symbol":
-            if (strict)
-              throw new TypeError("unable to serialize " + type2);
-            entry = null;
-            break;
-          case "undefined":
-            return as([VOID], value);
-        }
-        return as([TYPE, entry], value);
-      }
-      case ARRAY: {
-        if (type2)
-          return as([type2, [...value]], value);
-        const arr = [];
-        const index2 = as([TYPE, arr], value);
-        for (const entry of value)
-          arr.push(pair2(entry));
-        return index2;
-      }
-      case OBJECT: {
-        if (type2) {
-          switch (type2) {
-            case "BigInt":
-              return as([type2, value.toString()], value);
-            case "Boolean":
-            case "Number":
-            case "String":
-              return as([type2, value.valueOf()], value);
-          }
-        }
-        if (json2 && "toJSON" in value)
-          return pair2(value.toJSON());
-        const entries = [];
-        const index2 = as([TYPE, entries], value);
-        for (const key of keys(value)) {
-          if (strict || !shouldSkip(typeOf(value[key])))
-            entries.push([pair2(key), pair2(value[key])]);
-        }
-        return index2;
-      }
-      case DATE:
-        return as([TYPE, value.toISOString()], value);
-      case REGEXP: {
-        const { source, flags } = value;
-        return as([TYPE, { source, flags }], value);
-      }
-      case MAP: {
-        const entries = [];
-        const index2 = as([TYPE, entries], value);
-        for (const [key, entry] of value) {
-          if (strict || !(shouldSkip(typeOf(key)) || shouldSkip(typeOf(entry))))
-            entries.push([pair2(key), pair2(entry)]);
-        }
-        return index2;
-      }
-      case SET: {
-        const entries = [];
-        const index2 = as([TYPE, entries], value);
-        for (const entry of value) {
-          if (strict || !shouldSkip(typeOf(entry)))
-            entries.push(pair2(entry));
-        }
-        return index2;
-      }
-    }
-    const { message } = value;
-    return as([TYPE, { name: type2, message }], value);
-  };
-  return pair2;
-};
-const serialize = (value, { json: json2, lossy } = {}) => {
-  const _2 = [];
-  return serializer(!(json2 || lossy), !!json2, /* @__PURE__ */ new Map(), _2)(value), _2;
-};
-const structuredClone$1 = typeof structuredClone === "function" ? (
-  /* c8 ignore start */
-  (any, options) => options && ("json" in options || "lossy" in options) ? deserialize(serialize(any, options)) : structuredClone(any)
-) : (any, options) => deserialize(serialize(any, options));
-function bail(error) {
-  if (error) {
-    throw error;
-  }
-}
-var hasOwn = Object.prototype.hasOwnProperty;
-var toStr = Object.prototype.toString;
-var defineProperty = Object.defineProperty;
-var gOPD = Object.getOwnPropertyDescriptor;
-var isArray = function isArray2(arr) {
-  if (typeof Array.isArray === "function") {
-    return Array.isArray(arr);
-  }
-  return toStr.call(arr) === "[object Array]";
-};
-var isPlainObject$1 = function isPlainObject(obj) {
-  if (!obj || toStr.call(obj) !== "[object Object]") {
-    return false;
-  }
-  var hasOwnConstructor = hasOwn.call(obj, "constructor");
-  var hasIsPrototypeOf = obj.constructor && obj.constructor.prototype && hasOwn.call(obj.constructor.prototype, "isPrototypeOf");
-  if (obj.constructor && !hasOwnConstructor && !hasIsPrototypeOf) {
-    return false;
-  }
-  var key;
-  for (key in obj) {
-  }
-  return typeof key === "undefined" || hasOwn.call(obj, key);
-};
-var setProperty = function setProperty2(target, options) {
-  if (defineProperty && options.name === "__proto__") {
-    defineProperty(target, options.name, {
-      enumerable: true,
-      configurable: true,
-      value: options.newValue,
-      writable: true
-    });
-  } else {
-    target[options.name] = options.newValue;
-  }
-};
-var getProperty = function getProperty2(obj, name2) {
-  if (name2 === "__proto__") {
-    if (!hasOwn.call(obj, name2)) {
-      return void 0;
-    } else if (gOPD) {
-      return gOPD(obj, name2).value;
-    }
-  }
-  return obj[name2];
-};
-var extend$1 = function extend2() {
-  var options, name2, src, copy2, copyIsArray, clone;
-  var target = arguments[0];
-  var i2 = 1;
-  var length2 = arguments.length;
-  var deep = false;
-  if (typeof target === "boolean") {
-    deep = target;
-    target = arguments[1] || {};
-    i2 = 2;
-  }
-  if (target == null || typeof target !== "object" && typeof target !== "function") {
-    target = {};
-  }
-  for (; i2 < length2; ++i2) {
-    options = arguments[i2];
-    if (options != null) {
-      for (name2 in options) {
-        src = getProperty(target, name2);
-        copy2 = getProperty(options, name2);
-        if (target !== copy2) {
-          if (deep && copy2 && (isPlainObject$1(copy2) || (copyIsArray = isArray(copy2)))) {
-            if (copyIsArray) {
-              copyIsArray = false;
-              clone = src && isArray(src) ? src : [];
-            } else {
-              clone = src && isPlainObject$1(src) ? src : {};
-            }
-            setProperty(target, { name: name2, newValue: extend2(deep, clone, copy2) });
-          } else if (typeof copy2 !== "undefined") {
-            setProperty(target, { name: name2, newValue: copy2 });
-          }
-        }
-      }
-    }
-  }
-  return target;
-};
-const extend$2 = /* @__PURE__ */ getDefaultExportFromCjs(extend$1);
-function isPlainObject2(value) {
-  if (typeof value !== "object" || value === null) {
-    return false;
-  }
-  const prototype = Object.getPrototypeOf(value);
-  return (prototype === null || prototype === Object.prototype || Object.getPrototypeOf(prototype) === null) && !(Symbol.toStringTag in value) && !(Symbol.iterator in value);
-}
-function trough() {
-  const fns = [];
-  const pipeline = { run: run2, use };
-  return pipeline;
-  function run2(...values2) {
-    let middlewareIndex = -1;
-    const callback = values2.pop();
-    if (typeof callback !== "function") {
-      throw new TypeError("Expected function as last argument, not " + callback);
-    }
-    next2(null, ...values2);
-    function next2(error, ...output) {
-      const fn = fns[++middlewareIndex];
-      let index2 = -1;
-      if (error) {
-        callback(error);
-        return;
-      }
-      while (++index2 < values2.length) {
-        if (output[index2] === null || output[index2] === void 0) {
-          output[index2] = values2[index2];
-        }
-      }
-      values2 = output;
-      if (fn) {
-        wrap(fn, next2)(...output);
-      } else {
-        callback(null, ...output);
-      }
-    }
-  }
-  function use(middelware) {
-    if (typeof middelware !== "function") {
-      throw new TypeError(
-        "Expected `middelware` to be a function, not " + middelware
-      );
-    }
-    fns.push(middelware);
-    return pipeline;
-  }
-}
-function wrap(middleware2, callback) {
-  let called;
-  return wrapped;
-  function wrapped(...parameters) {
-    const fnExpectsCallback = middleware2.length > parameters.length;
-    let result;
-    if (fnExpectsCallback) {
-      parameters.push(done);
-    }
-    try {
-      result = middleware2.apply(this, parameters);
-    } catch (error) {
-      const exception2 = (
-        /** @type {Error} */
-        error
-      );
-      if (fnExpectsCallback && called) {
-        throw exception2;
-      }
-      return done(exception2);
-    }
-    if (!fnExpectsCallback) {
-      if (result instanceof Promise) {
-        result.then(then, done);
-      } else if (result instanceof Error) {
-        done(result);
-      } else {
-        then(result);
-      }
-    }
-  }
-  function done(error, ...output) {
-    if (!called) {
-      called = true;
-      callback(error, ...output);
-    }
-  }
-  function then(value) {
-    done(null, value);
-  }
-}
-const path = { basename, dirname, extname, join, sep: "/" };
-function basename(path2, ext) {
-  if (ext !== void 0 && typeof ext !== "string") {
-    throw new TypeError('"ext" argument must be a string');
-  }
-  assertPath$1(path2);
-  let start = 0;
-  let end = -1;
-  let index2 = path2.length;
-  let seenNonSlash;
-  if (ext === void 0 || ext.length === 0 || ext.length > path2.length) {
-    while (index2--) {
-      if (path2.codePointAt(index2) === 47) {
-        if (seenNonSlash) {
-          start = index2 + 1;
-          break;
-        }
-      } else if (end < 0) {
-        seenNonSlash = true;
-        end = index2 + 1;
-      }
-    }
-    return end < 0 ? "" : path2.slice(start, end);
-  }
-  if (ext === path2) {
-    return "";
-  }
-  let firstNonSlashEnd = -1;
-  let extIndex = ext.length - 1;
-  while (index2--) {
-    if (path2.codePointAt(index2) === 47) {
-      if (seenNonSlash) {
-        start = index2 + 1;
-        break;
-      }
-    } else {
-      if (firstNonSlashEnd < 0) {
-        seenNonSlash = true;
-        firstNonSlashEnd = index2 + 1;
-      }
-      if (extIndex > -1) {
-        if (path2.codePointAt(index2) === ext.codePointAt(extIndex--)) {
-          if (extIndex < 0) {
-            end = index2;
-          }
-        } else {
-          extIndex = -1;
-          end = firstNonSlashEnd;
-        }
-      }
-    }
-  }
-  if (start === end) {
-    end = firstNonSlashEnd;
-  } else if (end < 0) {
-    end = path2.length;
-  }
-  return path2.slice(start, end);
-}
-function dirname(path2) {
-  assertPath$1(path2);
-  if (path2.length === 0) {
-    return ".";
-  }
-  let end = -1;
-  let index2 = path2.length;
-  let unmatchedSlash;
-  while (--index2) {
-    if (path2.codePointAt(index2) === 47) {
-      if (unmatchedSlash) {
-        end = index2;
-        break;
-      }
-    } else if (!unmatchedSlash) {
-      unmatchedSlash = true;
-    }
-  }
-  return end < 0 ? path2.codePointAt(0) === 47 ? "/" : "." : end === 1 && path2.codePointAt(0) === 47 ? "//" : path2.slice(0, end);
-}
-function extname(path2) {
-  assertPath$1(path2);
-  let index2 = path2.length;
-  let end = -1;
-  let startPart = 0;
-  let startDot = -1;
-  let preDotState = 0;
-  let unmatchedSlash;
-  while (index2--) {
-    const code = path2.codePointAt(index2);
-    if (code === 47) {
-      if (unmatchedSlash) {
-        startPart = index2 + 1;
-        break;
-      }
-      continue;
-    }
-    if (end < 0) {
-      unmatchedSlash = true;
-      end = index2 + 1;
-    }
-    if (code === 46) {
-      if (startDot < 0) {
-        startDot = index2;
-      } else if (preDotState !== 1) {
-        preDotState = 1;
-      }
-    } else if (startDot > -1) {
-      preDotState = -1;
-    }
-  }
-  if (startDot < 0 || end < 0 || // We saw a non-dot character immediately before the dot.
-  preDotState === 0 || // The (right-most) trimmed path component is exactly `..`.
-  preDotState === 1 && startDot === end - 1 && startDot === startPart + 1) {
-    return "";
-  }
-  return path2.slice(startDot, end);
-}
-function join(...segments) {
-  let index2 = -1;
-  let joined;
-  while (++index2 < segments.length) {
-    assertPath$1(segments[index2]);
-    if (segments[index2]) {
-      joined = joined === void 0 ? segments[index2] : joined + "/" + segments[index2];
-    }
-  }
-  return joined === void 0 ? "." : normalize(joined);
-}
-function normalize(path2) {
-  assertPath$1(path2);
-  const absolute = path2.codePointAt(0) === 47;
-  let value = normalizeString(path2, !absolute);
-  if (value.length === 0 && !absolute) {
-    value = ".";
-  }
-  if (value.length > 0 && path2.codePointAt(path2.length - 1) === 47) {
-    value += "/";
-  }
-  return absolute ? "/" + value : value;
-}
-function normalizeString(path2, allowAboveRoot) {
-  let result = "";
-  let lastSegmentLength = 0;
-  let lastSlash = -1;
-  let dots = 0;
-  let index2 = -1;
-  let code;
-  let lastSlashIndex;
-  while (++index2 <= path2.length) {
-    if (index2 < path2.length) {
-      code = path2.codePointAt(index2);
-    } else if (code === 47) {
-      break;
-    } else {
-      code = 47;
-    }
-    if (code === 47) {
-      if (lastSlash === index2 - 1 || dots === 1)
-        ;
-      else if (lastSlash !== index2 - 1 && dots === 2) {
-        if (result.length < 2 || lastSegmentLength !== 2 || result.codePointAt(result.length - 1) !== 46 || result.codePointAt(result.length - 2) !== 46) {
-          if (result.length > 2) {
-            lastSlashIndex = result.lastIndexOf("/");
-            if (lastSlashIndex !== result.length - 1) {
-              if (lastSlashIndex < 0) {
-                result = "";
-                lastSegmentLength = 0;
-              } else {
-                result = result.slice(0, lastSlashIndex);
-                lastSegmentLength = result.length - 1 - result.lastIndexOf("/");
-              }
-              lastSlash = index2;
-              dots = 0;
-              continue;
-            }
-          } else if (result.length > 0) {
-            result = "";
-            lastSegmentLength = 0;
-            lastSlash = index2;
-            dots = 0;
-            continue;
-          }
-        }
-        if (allowAboveRoot) {
-          result = result.length > 0 ? result + "/.." : "..";
-          lastSegmentLength = 2;
-        }
-      } else {
-        if (result.length > 0) {
-          result += "/" + path2.slice(lastSlash + 1, index2);
-        } else {
-          result = path2.slice(lastSlash + 1, index2);
-        }
-        lastSegmentLength = index2 - lastSlash - 1;
-      }
-      lastSlash = index2;
-      dots = 0;
-    } else if (code === 46 && dots > -1) {
-      dots++;
-    } else {
-      dots = -1;
-    }
-  }
-  return result;
-}
-function assertPath$1(path2) {
-  if (typeof path2 !== "string") {
-    throw new TypeError(
-      "Path must be a string. Received " + JSON.stringify(path2)
-    );
-  }
-}
-const proc = { cwd };
-function cwd() {
-  return "/";
-}
-function isUrl(fileUrlOrPath) {
-  return Boolean(
-    fileUrlOrPath !== null && typeof fileUrlOrPath === "object" && "href" in fileUrlOrPath && fileUrlOrPath.href && "protocol" in fileUrlOrPath && fileUrlOrPath.protocol && // @ts-expect-error: indexing is fine.
-    fileUrlOrPath.auth === void 0
-  );
-}
-function urlToPath(path2) {
-  if (typeof path2 === "string") {
-    path2 = new URL(path2);
-  } else if (!isUrl(path2)) {
-    const error = new TypeError(
-      'The "path" argument must be of type string or an instance of URL. Received `' + path2 + "`"
-    );
-    error.code = "ERR_INVALID_ARG_TYPE";
-    throw error;
-  }
-  if (path2.protocol !== "file:") {
-    const error = new TypeError("The URL must be of scheme file");
-    error.code = "ERR_INVALID_URL_SCHEME";
-    throw error;
-  }
-  return getPathFromURLPosix(path2);
-}
-function getPathFromURLPosix(url) {
-  if (url.hostname !== "") {
-    const error = new TypeError(
-      'File URL host must be "localhost" or empty on darwin'
-    );
-    error.code = "ERR_INVALID_FILE_URL_HOST";
-    throw error;
-  }
-  const pathname = url.pathname;
-  let index2 = -1;
-  while (++index2 < pathname.length) {
-    if (pathname.codePointAt(index2) === 37 && pathname.codePointAt(index2 + 1) === 50) {
-      const third = pathname.codePointAt(index2 + 2);
-      if (third === 70 || third === 102) {
-        const error = new TypeError(
-          "File URL path must not include encoded / characters"
-        );
-        error.code = "ERR_INVALID_FILE_URL_PATH";
-        throw error;
-      }
-    }
-  }
-  return decodeURIComponent(pathname);
-}
-const order = (
-  /** @type {const} */
-  [
-    "history",
-    "path",
-    "basename",
-    "stem",
-    "extname",
-    "dirname"
-  ]
-);
-class VFile {
-  /**
-   * Create a new virtual file.
-   *
-   * `options` is treated as:
-   *
-   * *   `string` or `Uint8Array` — `{value: options}`
-   * *   `URL` — `{path: options}`
-   * *   `VFile` — shallow copies its data over to the new file
-   * *   `object` — all fields are shallow copied over to the new file
-   *
-   * Path related fields are set in the following order (least specific to
-   * most specific): `history`, `path`, `basename`, `stem`, `extname`,
-   * `dirname`.
-   *
-   * You cannot set `dirname` or `extname` without setting either `history`,
-   * `path`, `basename`, or `stem` too.
-   *
-   * @param {Compatible | null | undefined} [value]
-   *   File value.
-   * @returns
-   *   New instance.
-   */
-  constructor(value) {
-    let options;
-    if (!value) {
-      options = {};
-    } else if (isUrl(value)) {
-      options = { path: value };
-    } else if (typeof value === "string" || isUint8Array$1(value)) {
-      options = { value };
-    } else {
-      options = value;
-    }
-    this.cwd = proc.cwd();
-    this.data = {};
-    this.history = [];
-    this.messages = [];
-    this.value;
-    this.map;
-    this.result;
-    this.stored;
-    let index2 = -1;
-    while (++index2 < order.length) {
-      const prop2 = order[index2];
-      if (prop2 in options && options[prop2] !== void 0 && options[prop2] !== null) {
-        this[prop2] = prop2 === "history" ? [...options[prop2]] : options[prop2];
-      }
-    }
-    let prop;
-    for (prop in options) {
-      if (!order.includes(prop)) {
-        this[prop] = options[prop];
-      }
-    }
-  }
-  /**
-   * Get the basename (including extname) (example: `'index.min.js'`).
-   *
-   * @returns {string | undefined}
-   *   Basename.
-   */
-  get basename() {
-    return typeof this.path === "string" ? path.basename(this.path) : void 0;
-  }
-  /**
-   * Set basename (including extname) (`'index.min.js'`).
-   *
-   * Cannot contain path separators (`'/'` on unix, macOS, and browsers, `'\'`
-   * on windows).
-   * Cannot be nullified (use `file.path = file.dirname` instead).
-   *
-   * @param {string} basename
-   *   Basename.
-   * @returns {undefined}
-   *   Nothing.
-   */
-  set basename(basename2) {
-    assertNonEmpty(basename2, "basename");
-    assertPart(basename2, "basename");
-    this.path = path.join(this.dirname || "", basename2);
-  }
-  /**
-   * Get the parent path (example: `'~'`).
-   *
-   * @returns {string | undefined}
-   *   Dirname.
-   */
-  get dirname() {
-    return typeof this.path === "string" ? path.dirname(this.path) : void 0;
-  }
-  /**
-   * Set the parent path (example: `'~'`).
-   *
-   * Cannot be set if there’s no `path` yet.
-   *
-   * @param {string | undefined} dirname
-   *   Dirname.
-   * @returns {undefined}
-   *   Nothing.
-   */
-  set dirname(dirname2) {
-    assertPath(this.basename, "dirname");
-    this.path = path.join(dirname2 || "", this.basename);
-  }
-  /**
-   * Get the extname (including dot) (example: `'.js'`).
-   *
-   * @returns {string | undefined}
-   *   Extname.
-   */
-  get extname() {
-    return typeof this.path === "string" ? path.extname(this.path) : void 0;
-  }
-  /**
-   * Set the extname (including dot) (example: `'.js'`).
-   *
-   * Cannot contain path separators (`'/'` on unix, macOS, and browsers, `'\'`
-   * on windows).
-   * Cannot be set if there’s no `path` yet.
-   *
-   * @param {string | undefined} extname
-   *   Extname.
-   * @returns {undefined}
-   *   Nothing.
-   */
-  set extname(extname2) {
-    assertPart(extname2, "extname");
-    assertPath(this.dirname, "extname");
-    if (extname2) {
-      if (extname2.codePointAt(0) !== 46) {
-        throw new Error("`extname` must start with `.`");
-      }
-      if (extname2.includes(".", 1)) {
-        throw new Error("`extname` cannot contain multiple dots");
-      }
-    }
-    this.path = path.join(this.dirname, this.stem + (extname2 || ""));
-  }
-  /**
-   * Get the full path (example: `'~/index.min.js'`).
-   *
-   * @returns {string}
-   *   Path.
-   */
-  get path() {
-    return this.history[this.history.length - 1];
-  }
-  /**
-   * Set the full path (example: `'~/index.min.js'`).
-   *
-   * Cannot be nullified.
-   * You can set a file URL (a `URL` object with a `file:` protocol) which will
-   * be turned into a path with `url.fileURLToPath`.
-   *
-   * @param {URL | string} path
-   *   Path.
-   * @returns {undefined}
-   *   Nothing.
-   */
-  set path(path2) {
-    if (isUrl(path2)) {
-      path2 = urlToPath(path2);
-    }
-    assertNonEmpty(path2, "path");
-    if (this.path !== path2) {
-      this.history.push(path2);
-    }
-  }
-  /**
-   * Get the stem (basename w/o extname) (example: `'index.min'`).
-   *
-   * @returns {string | undefined}
-   *   Stem.
-   */
-  get stem() {
-    return typeof this.path === "string" ? path.basename(this.path, this.extname) : void 0;
-  }
-  /**
-   * Set the stem (basename w/o extname) (example: `'index.min'`).
-   *
-   * Cannot contain path separators (`'/'` on unix, macOS, and browsers, `'\'`
-   * on windows).
-   * Cannot be nullified (use `file.path = file.dirname` instead).
-   *
-   * @param {string} stem
-   *   Stem.
-   * @returns {undefined}
-   *   Nothing.
-   */
-  set stem(stem) {
-    assertNonEmpty(stem, "stem");
-    assertPart(stem, "stem");
-    this.path = path.join(this.dirname || "", stem + (this.extname || ""));
-  }
-  // Normal prototypal methods.
-  /**
-   * Create a fatal message for `reason` associated with the file.
-   *
-   * The `fatal` field of the message is set to `true` (error; file not usable)
-   * and the `file` field is set to the current file path.
-   * The message is added to the `messages` field on `file`.
-   *
-   * > 🪦 **Note**: also has obsolete signatures.
-   *
-   * @overload
-   * @param {string} reason
-   * @param {MessageOptions | null | undefined} [options]
-   * @returns {never}
-   *
-   * @overload
-   * @param {string} reason
-   * @param {Node | NodeLike | null | undefined} parent
-   * @param {string | null | undefined} [origin]
-   * @returns {never}
-   *
-   * @overload
-   * @param {string} reason
-   * @param {Point | Position | null | undefined} place
-   * @param {string | null | undefined} [origin]
-   * @returns {never}
-   *
-   * @overload
-   * @param {string} reason
-   * @param {string | null | undefined} [origin]
-   * @returns {never}
-   *
-   * @overload
-   * @param {Error | VFileMessage} cause
-   * @param {Node | NodeLike | null | undefined} parent
-   * @param {string | null | undefined} [origin]
-   * @returns {never}
-   *
-   * @overload
-   * @param {Error | VFileMessage} cause
-   * @param {Point | Position | null | undefined} place
-   * @param {string | null | undefined} [origin]
-   * @returns {never}
-   *
-   * @overload
-   * @param {Error | VFileMessage} cause
-   * @param {string | null | undefined} [origin]
-   * @returns {never}
-   *
-   * @param {Error | VFileMessage | string} causeOrReason
-   *   Reason for message, should use markdown.
-   * @param {Node | NodeLike | MessageOptions | Point | Position | string | null | undefined} [optionsOrParentOrPlace]
-   *   Configuration (optional).
-   * @param {string | null | undefined} [origin]
-   *   Place in code where the message originates (example:
-   *   `'my-package:my-rule'` or `'my-rule'`).
-   * @returns {never}
-   *   Never.
-   * @throws {VFileMessage}
-   *   Message.
-   */
-  fail(causeOrReason, optionsOrParentOrPlace, origin) {
-    const message = this.message(causeOrReason, optionsOrParentOrPlace, origin);
-    message.fatal = true;
-    throw message;
-  }
-  /**
-   * Create an info message for `reason` associated with the file.
-   *
-   * The `fatal` field of the message is set to `undefined` (info; change
-   * likely not needed) and the `file` field is set to the current file path.
-   * The message is added to the `messages` field on `file`.
-   *
-   * > 🪦 **Note**: also has obsolete signatures.
-   *
-   * @overload
-   * @param {string} reason
-   * @param {MessageOptions | null | undefined} [options]
-   * @returns {VFileMessage}
-   *
-   * @overload
-   * @param {string} reason
-   * @param {Node | NodeLike | null | undefined} parent
-   * @param {string | null | undefined} [origin]
-   * @returns {VFileMessage}
-   *
-   * @overload
-   * @param {string} reason
-   * @param {Point | Position | null | undefined} place
-   * @param {string | null | undefined} [origin]
-   * @returns {VFileMessage}
-   *
-   * @overload
-   * @param {string} reason
-   * @param {string | null | undefined} [origin]
-   * @returns {VFileMessage}
-   *
-   * @overload
-   * @param {Error | VFileMessage} cause
-   * @param {Node | NodeLike | null | undefined} parent
-   * @param {string | null | undefined} [origin]
-   * @returns {VFileMessage}
-   *
-   * @overload
-   * @param {Error | VFileMessage} cause
-   * @param {Point | Position | null | undefined} place
-   * @param {string | null | undefined} [origin]
-   * @returns {VFileMessage}
-   *
-   * @overload
-   * @param {Error | VFileMessage} cause
-   * @param {string | null | undefined} [origin]
-   * @returns {VFileMessage}
-   *
-   * @param {Error | VFileMessage | string} causeOrReason
-   *   Reason for message, should use markdown.
-   * @param {Node | NodeLike | MessageOptions | Point | Position | string | null | undefined} [optionsOrParentOrPlace]
-   *   Configuration (optional).
-   * @param {string | null | undefined} [origin]
-   *   Place in code where the message originates (example:
-   *   `'my-package:my-rule'` or `'my-rule'`).
-   * @returns {VFileMessage}
-   *   Message.
-   */
-  info(causeOrReason, optionsOrParentOrPlace, origin) {
-    const message = this.message(causeOrReason, optionsOrParentOrPlace, origin);
-    message.fatal = void 0;
-    return message;
-  }
-  /**
-   * Create a message for `reason` associated with the file.
-   *
-   * The `fatal` field of the message is set to `false` (warning; change may be
-   * needed) and the `file` field is set to the current file path.
-   * The message is added to the `messages` field on `file`.
-   *
-   * > 🪦 **Note**: also has obsolete signatures.
-   *
-   * @overload
-   * @param {string} reason
-   * @param {MessageOptions | null | undefined} [options]
-   * @returns {VFileMessage}
-   *
-   * @overload
-   * @param {string} reason
-   * @param {Node | NodeLike | null | undefined} parent
-   * @param {string | null | undefined} [origin]
-   * @returns {VFileMessage}
-   *
-   * @overload
-   * @param {string} reason
-   * @param {Point | Position | null | undefined} place
-   * @param {string | null | undefined} [origin]
-   * @returns {VFileMessage}
-   *
-   * @overload
-   * @param {string} reason
-   * @param {string | null | undefined} [origin]
-   * @returns {VFileMessage}
-   *
-   * @overload
-   * @param {Error | VFileMessage} cause
-   * @param {Node | NodeLike | null | undefined} parent
-   * @param {string | null | undefined} [origin]
-   * @returns {VFileMessage}
-   *
-   * @overload
-   * @param {Error | VFileMessage} cause
-   * @param {Point | Position | null | undefined} place
-   * @param {string | null | undefined} [origin]
-   * @returns {VFileMessage}
-   *
-   * @overload
-   * @param {Error | VFileMessage} cause
-   * @param {string | null | undefined} [origin]
-   * @returns {VFileMessage}
-   *
-   * @param {Error | VFileMessage | string} causeOrReason
-   *   Reason for message, should use markdown.
-   * @param {Node | NodeLike | MessageOptions | Point | Position | string | null | undefined} [optionsOrParentOrPlace]
-   *   Configuration (optional).
-   * @param {string | null | undefined} [origin]
-   *   Place in code where the message originates (example:
-   *   `'my-package:my-rule'` or `'my-rule'`).
-   * @returns {VFileMessage}
-   *   Message.
-   */
-  message(causeOrReason, optionsOrParentOrPlace, origin) {
-    const message = new VFileMessage(
-      // @ts-expect-error: the overloads are fine.
-      causeOrReason,
-      optionsOrParentOrPlace,
-      origin
-    );
-    if (this.path) {
-      message.name = this.path + ":" + message.name;
-      message.file = this.path;
-    }
-    message.fatal = false;
-    this.messages.push(message);
-    return message;
-  }
-  /**
-   * Serialize the file.
-   *
-   * > **Note**: which encodings are supported depends on the engine.
-   * > For info on Node.js, see:
-   * > <https://nodejs.org/api/util.html#whatwg-supported-encodings>.
-   *
-   * @param {string | null | undefined} [encoding='utf8']
-   *   Character encoding to understand `value` as when it’s a `Uint8Array`
-   *   (default: `'utf-8'`).
-   * @returns {string}
-   *   Serialized file.
-   */
-  toString(encoding) {
-    if (this.value === void 0) {
-      return "";
-    }
-    if (typeof this.value === "string") {
-      return this.value;
-    }
-    const decoder = new TextDecoder(encoding || void 0);
-    return decoder.decode(this.value);
-  }
-}
-function assertPart(part, name2) {
-  if (part && part.includes(path.sep)) {
-    throw new Error(
-      "`" + name2 + "` cannot be a path: did not expect `" + path.sep + "`"
-    );
-  }
-}
-function assertNonEmpty(part, name2) {
-  if (!part) {
-    throw new Error("`" + name2 + "` cannot be empty");
-  }
-}
-function assertPath(path2, name2) {
-  if (!path2) {
-    throw new Error("Setting `" + name2 + "` requires `path` to be set too");
-  }
-}
-function isUint8Array$1(value) {
-  return Boolean(
-    value && typeof value === "object" && "byteLength" in value && "byteOffset" in value
-  );
-}
-const CallableInstance = (
-  /**
-   * @type {new <Parameters extends Array<unknown>, Result>(property: string | symbol) => (...parameters: Parameters) => Result}
-   */
-  /** @type {unknown} */
-  /**
-   * @this {Function}
-   * @param {string | symbol} property
-   * @returns {(...parameters: Array<unknown>) => unknown}
-   */
-  function(property2) {
-    const self2 = this;
-    const constr = self2.constructor;
-    const proto = (
-      /** @type {Record<string | symbol, Function>} */
-      // Prototypes do exist.
-      // type-coverage:ignore-next-line
-      constr.prototype
-    );
-    const func = proto[property2];
-    const apply2 = function() {
-      return func.apply(apply2, arguments);
-    };
-    Object.setPrototypeOf(apply2, proto);
-    const names = Object.getOwnPropertyNames(func);
-    for (const p2 of names) {
-      const descriptor = Object.getOwnPropertyDescriptor(func, p2);
-      if (descriptor)
-        Object.defineProperty(apply2, p2, descriptor);
-    }
-    return apply2;
-  }
-);
-const own$1 = {}.hasOwnProperty;
-class Processor extends CallableInstance {
-  /**
-   * Create a processor.
-   */
-  constructor() {
-    super("copy");
-    this.Compiler = void 0;
-    this.Parser = void 0;
-    this.attachers = [];
-    this.compiler = void 0;
-    this.freezeIndex = -1;
-    this.frozen = void 0;
-    this.namespace = {};
-    this.parser = void 0;
-    this.transformers = trough();
-  }
-  /**
-   * Copy a processor.
-   *
-   * @deprecated
-   *   This is a private internal method and should not be used.
-   * @returns {Processor<ParseTree, HeadTree, TailTree, CompileTree, CompileResult>}
-   *   New *unfrozen* processor ({@link Processor `Processor`}) that is
-   *   configured to work the same as its ancestor.
-   *   When the descendant processor is configured in the future it does not
-   *   affect the ancestral processor.
-   */
-  copy() {
-    const destination = (
-      /** @type {Processor<ParseTree, HeadTree, TailTree, CompileTree, CompileResult>} */
-      new Processor()
-    );
-    let index2 = -1;
-    while (++index2 < this.attachers.length) {
-      const attacher = this.attachers[index2];
-      destination.use(...attacher);
-    }
-    destination.data(extend$2(true, {}, this.namespace));
-    return destination;
-  }
-  /**
-   * Configure the processor with info available to all plugins.
-   * Information is stored in an object.
-   *
-   * Typically, options can be given to a specific plugin, but sometimes it
-   * makes sense to have information shared with several plugins.
-   * For example, a list of HTML elements that are self-closing, which is
-   * needed during all phases.
-   *
-   * > 👉 **Note**: setting information cannot occur on *frozen* processors.
-   * > Call the processor first to create a new unfrozen processor.
-   *
-   * > 👉 **Note**: to register custom data in TypeScript, augment the
-   * > {@link Data `Data`} interface.
-   *
-   * @example
-   *   This example show how to get and set info:
-   *
-   *   ```js
-   *   import {unified} from 'unified'
-   *
-   *   const processor = unified().data('alpha', 'bravo')
-   *
-   *   processor.data('alpha') // => 'bravo'
-   *
-   *   processor.data() // => {alpha: 'bravo'}
-   *
-   *   processor.data({charlie: 'delta'})
-   *
-   *   processor.data() // => {charlie: 'delta'}
-   *   ```
-   *
-   * @template {keyof Data} Key
-   *
-   * @overload
-   * @returns {Data}
-   *
-   * @overload
-   * @param {Data} dataset
-   * @returns {Processor<ParseTree, HeadTree, TailTree, CompileTree, CompileResult>}
-   *
-   * @overload
-   * @param {Key} key
-   * @returns {Data[Key]}
-   *
-   * @overload
-   * @param {Key} key
-   * @param {Data[Key]} value
-   * @returns {Processor<ParseTree, HeadTree, TailTree, CompileTree, CompileResult>}
-   *
-   * @param {Data | Key} [key]
-   *   Key to get or set, or entire dataset to set, or nothing to get the
-   *   entire dataset (optional).
-   * @param {Data[Key]} [value]
-   *   Value to set (optional).
-   * @returns {unknown}
-   *   The current processor when setting, the value at `key` when getting, or
-   *   the entire dataset when getting without key.
-   */
-  data(key, value) {
-    if (typeof key === "string") {
-      if (arguments.length === 2) {
-        assertUnfrozen("data", this.frozen);
-        this.namespace[key] = value;
-        return this;
-      }
-      return own$1.call(this.namespace, key) && this.namespace[key] || void 0;
-    }
-    if (key) {
-      assertUnfrozen("data", this.frozen);
-      this.namespace = key;
-      return this;
-    }
-    return this.namespace;
-  }
-  /**
-   * Freeze a processor.
-   *
-   * Frozen processors are meant to be extended and not to be configured
-   * directly.
-   *
-   * When a processor is frozen it cannot be unfrozen.
-   * New processors working the same way can be created by calling the
-   * processor.
-   *
-   * It’s possible to freeze processors explicitly by calling `.freeze()`.
-   * Processors freeze automatically when `.parse()`, `.run()`, `.runSync()`,
-   * `.stringify()`, `.process()`, or `.processSync()` are called.
-   *
-   * @returns {Processor<ParseTree, HeadTree, TailTree, CompileTree, CompileResult>}
-   *   The current processor.
-   */
-  freeze() {
-    if (this.frozen) {
-      return this;
-    }
-    const self2 = (
-      /** @type {Processor} */
-      /** @type {unknown} */
-      this
-    );
-    while (++this.freezeIndex < this.attachers.length) {
-      const [attacher, ...options] = this.attachers[this.freezeIndex];
-      if (options[0] === false) {
-        continue;
-      }
-      if (options[0] === true) {
-        options[0] = void 0;
-      }
-      const transformer = attacher.call(self2, ...options);
-      if (typeof transformer === "function") {
-        this.transformers.use(transformer);
-      }
-    }
-    this.frozen = true;
-    this.freezeIndex = Number.POSITIVE_INFINITY;
-    return this;
-  }
-  /**
-   * Parse text to a syntax tree.
-   *
-   * > 👉 **Note**: `parse` freezes the processor if not already *frozen*.
-   *
-   * > 👉 **Note**: `parse` performs the parse phase, not the run phase or other
-   * > phases.
-   *
-   * @param {Compatible | undefined} [file]
-   *   file to parse (optional); typically `string` or `VFile`; any value
-   *   accepted as `x` in `new VFile(x)`.
-   * @returns {ParseTree extends undefined ? Node : ParseTree}
-   *   Syntax tree representing `file`.
-   */
-  parse(file) {
-    this.freeze();
-    const realFile = vfile(file);
-    const parser2 = this.parser || this.Parser;
-    assertParser("parse", parser2);
-    return parser2(String(realFile), realFile);
-  }
-  /**
-   * Process the given file as configured on the processor.
-   *
-   * > 👉 **Note**: `process` freezes the processor if not already *frozen*.
-   *
-   * > 👉 **Note**: `process` performs the parse, run, and stringify phases.
-   *
-   * @overload
-   * @param {Compatible | undefined} file
-   * @param {ProcessCallback<VFileWithOutput<CompileResult>>} done
-   * @returns {undefined}
-   *
-   * @overload
-   * @param {Compatible | undefined} [file]
-   * @returns {Promise<VFileWithOutput<CompileResult>>}
-   *
-   * @param {Compatible | undefined} [file]
-   *   File (optional); typically `string` or `VFile`]; any value accepted as
-   *   `x` in `new VFile(x)`.
-   * @param {ProcessCallback<VFileWithOutput<CompileResult>> | undefined} [done]
-   *   Callback (optional).
-   * @returns {Promise<VFile> | undefined}
-   *   Nothing if `done` is given.
-   *   Otherwise a promise, rejected with a fatal error or resolved with the
-   *   processed file.
-   *
-   *   The parsed, transformed, and compiled value is available at
-   *   `file.value` (see note).
-   *
-   *   > 👉 **Note**: unified typically compiles by serializing: most
-   *   > compilers return `string` (or `Uint8Array`).
-   *   > Some compilers, such as the one configured with
-   *   > [`rehype-react`][rehype-react], return other values (in this case, a
-   *   > React tree).
-   *   > If you’re using a compiler that doesn’t serialize, expect different
-   *   > result values.
-   *   >
-   *   > To register custom results in TypeScript, add them to
-   *   > {@link CompileResultMap `CompileResultMap`}.
-   *
-   *   [rehype-react]: https://github.com/rehypejs/rehype-react
-   */
-  process(file, done) {
-    const self2 = this;
-    this.freeze();
-    assertParser("process", this.parser || this.Parser);
-    assertCompiler("process", this.compiler || this.Compiler);
-    return done ? executor(void 0, done) : new Promise(executor);
-    function executor(resolve, reject) {
-      const realFile = vfile(file);
-      const parseTree = (
-        /** @type {HeadTree extends undefined ? Node : HeadTree} */
-        /** @type {unknown} */
-        self2.parse(realFile)
-      );
-      self2.run(parseTree, realFile, function(error, tree, file2) {
-        if (error || !tree || !file2) {
-          return realDone(error);
-        }
-        const compileTree = (
-          /** @type {CompileTree extends undefined ? Node : CompileTree} */
-          /** @type {unknown} */
-          tree
-        );
-        const compileResult = self2.stringify(compileTree, file2);
-        if (looksLikeAValue(compileResult)) {
-          file2.value = compileResult;
-        } else {
-          file2.result = compileResult;
-        }
-        realDone(
-          error,
-          /** @type {VFileWithOutput<CompileResult>} */
-          file2
-        );
-      });
-      function realDone(error, file2) {
-        if (error || !file2) {
-          reject(error);
-        } else if (resolve) {
-          resolve(file2);
-        } else {
-          done(void 0, file2);
-        }
-      }
-    }
-  }
-  /**
-   * Process the given file as configured on the processor.
-   *
-   * An error is thrown if asynchronous transforms are configured.
-   *
-   * > 👉 **Note**: `processSync` freezes the processor if not already *frozen*.
-   *
-   * > 👉 **Note**: `processSync` performs the parse, run, and stringify phases.
-   *
-   * @param {Compatible | undefined} [file]
-   *   File (optional); typically `string` or `VFile`; any value accepted as
-   *   `x` in `new VFile(x)`.
-   * @returns {VFileWithOutput<CompileResult>}
-   *   The processed file.
-   *
-   *   The parsed, transformed, and compiled value is available at
-   *   `file.value` (see note).
-   *
-   *   > 👉 **Note**: unified typically compiles by serializing: most
-   *   > compilers return `string` (or `Uint8Array`).
-   *   > Some compilers, such as the one configured with
-   *   > [`rehype-react`][rehype-react], return other values (in this case, a
-   *   > React tree).
-   *   > If you’re using a compiler that doesn’t serialize, expect different
-   *   > result values.
-   *   >
-   *   > To register custom results in TypeScript, add them to
-   *   > {@link CompileResultMap `CompileResultMap`}.
-   *
-   *   [rehype-react]: https://github.com/rehypejs/rehype-react
-   */
-  processSync(file) {
-    let complete = false;
-    let result;
-    this.freeze();
-    assertParser("processSync", this.parser || this.Parser);
-    assertCompiler("processSync", this.compiler || this.Compiler);
-    this.process(file, realDone);
-    assertDone("processSync", "process", complete);
-    return result;
-    function realDone(error, file2) {
-      complete = true;
-      bail(error);
-      result = file2;
-    }
-  }
-  /**
-   * Run *transformers* on a syntax tree.
-   *
-   * > 👉 **Note**: `run` freezes the processor if not already *frozen*.
-   *
-   * > 👉 **Note**: `run` performs the run phase, not other phases.
-   *
-   * @overload
-   * @param {HeadTree extends undefined ? Node : HeadTree} tree
-   * @param {RunCallback<TailTree extends undefined ? Node : TailTree>} done
-   * @returns {undefined}
-   *
-   * @overload
-   * @param {HeadTree extends undefined ? Node : HeadTree} tree
-   * @param {Compatible | undefined} file
-   * @param {RunCallback<TailTree extends undefined ? Node : TailTree>} done
-   * @returns {undefined}
-   *
-   * @overload
-   * @param {HeadTree extends undefined ? Node : HeadTree} tree
-   * @param {Compatible | undefined} [file]
-   * @returns {Promise<TailTree extends undefined ? Node : TailTree>}
-   *
-   * @param {HeadTree extends undefined ? Node : HeadTree} tree
-   *   Tree to transform and inspect.
-   * @param {(
-   *   RunCallback<TailTree extends undefined ? Node : TailTree> |
-   *   Compatible
-   * )} [file]
-   *   File associated with `node` (optional); any value accepted as `x` in
-   *   `new VFile(x)`.
-   * @param {RunCallback<TailTree extends undefined ? Node : TailTree>} [done]
-   *   Callback (optional).
-   * @returns {Promise<TailTree extends undefined ? Node : TailTree> | undefined}
-   *   Nothing if `done` is given.
-   *   Otherwise, a promise rejected with a fatal error or resolved with the
-   *   transformed tree.
-   */
-  run(tree, file, done) {
-    assertNode(tree);
-    this.freeze();
-    const transformers = this.transformers;
-    if (!done && typeof file === "function") {
-      done = file;
-      file = void 0;
-    }
-    return done ? executor(void 0, done) : new Promise(executor);
-    function executor(resolve, reject) {
-      const realFile = vfile(file);
-      transformers.run(tree, realFile, realDone);
-      function realDone(error, outputTree, file2) {
-        const resultingTree = (
-          /** @type {TailTree extends undefined ? Node : TailTree} */
-          outputTree || tree
-        );
-        if (error) {
-          reject(error);
-        } else if (resolve) {
-          resolve(resultingTree);
-        } else {
-          done(void 0, resultingTree, file2);
-        }
-      }
-    }
-  }
-  /**
-   * Run *transformers* on a syntax tree.
-   *
-   * An error is thrown if asynchronous transforms are configured.
-   *
-   * > 👉 **Note**: `runSync` freezes the processor if not already *frozen*.
-   *
-   * > 👉 **Note**: `runSync` performs the run phase, not other phases.
-   *
-   * @param {HeadTree extends undefined ? Node : HeadTree} tree
-   *   Tree to transform and inspect.
-   * @param {Compatible | undefined} [file]
-   *   File associated with `node` (optional); any value accepted as `x` in
-   *   `new VFile(x)`.
-   * @returns {TailTree extends undefined ? Node : TailTree}
-   *   Transformed tree.
-   */
-  runSync(tree, file) {
-    let complete = false;
-    let result;
-    this.run(tree, file, realDone);
-    assertDone("runSync", "run", complete);
-    return result;
-    function realDone(error, tree2) {
-      bail(error);
-      result = tree2;
-      complete = true;
-    }
-  }
-  /**
-   * Compile a syntax tree.
-   *
-   * > 👉 **Note**: `stringify` freezes the processor if not already *frozen*.
-   *
-   * > 👉 **Note**: `stringify` performs the stringify phase, not the run phase
-   * > or other phases.
-   *
-   * @param {CompileTree extends undefined ? Node : CompileTree} tree
-   *   Tree to compile.
-   * @param {Compatible | undefined} [file]
-   *   File associated with `node` (optional); any value accepted as `x` in
-   *   `new VFile(x)`.
-   * @returns {CompileResult extends undefined ? Value : CompileResult}
-   *   Textual representation of the tree (see note).
-   *
-   *   > 👉 **Note**: unified typically compiles by serializing: most compilers
-   *   > return `string` (or `Uint8Array`).
-   *   > Some compilers, such as the one configured with
-   *   > [`rehype-react`][rehype-react], return other values (in this case, a
-   *   > React tree).
-   *   > If you’re using a compiler that doesn’t serialize, expect different
-   *   > result values.
-   *   >
-   *   > To register custom results in TypeScript, add them to
-   *   > {@link CompileResultMap `CompileResultMap`}.
-   *
-   *   [rehype-react]: https://github.com/rehypejs/rehype-react
-   */
-  stringify(tree, file) {
-    this.freeze();
-    const realFile = vfile(file);
-    const compiler = this.compiler || this.Compiler;
-    assertCompiler("stringify", compiler);
-    assertNode(tree);
-    return compiler(tree, realFile);
-  }
-  /**
-   * Configure the processor to use a plugin, a list of usable values, or a
-   * preset.
-   *
-   * If the processor is already using a plugin, the previous plugin
-   * configuration is changed based on the options that are passed in.
-   * In other words, the plugin is not added a second time.
-   *
-   * > 👉 **Note**: `use` cannot be called on *frozen* processors.
-   * > Call the processor first to create a new unfrozen processor.
-   *
-   * @example
-   *   There are many ways to pass plugins to `.use()`.
-   *   This example gives an overview:
-   *
-   *   ```js
-   *   import {unified} from 'unified'
-   *
-   *   unified()
-   *     // Plugin with options:
-   *     .use(pluginA, {x: true, y: true})
-   *     // Passing the same plugin again merges configuration (to `{x: true, y: false, z: true}`):
-   *     .use(pluginA, {y: false, z: true})
-   *     // Plugins:
-   *     .use([pluginB, pluginC])
-   *     // Two plugins, the second with options:
-   *     .use([pluginD, [pluginE, {}]])
-   *     // Preset with plugins and settings:
-   *     .use({plugins: [pluginF, [pluginG, {}]], settings: {position: false}})
-   *     // Settings only:
-   *     .use({settings: {position: false}})
-   *   ```
-   *
-   * @template {Array<unknown>} [Parameters=[]]
-   * @template {Node | string | undefined} [Input=undefined]
-   * @template [Output=Input]
-   *
-   * @overload
-   * @param {Preset | null | undefined} [preset]
-   * @returns {Processor<ParseTree, HeadTree, TailTree, CompileTree, CompileResult>}
-   *
-   * @overload
-   * @param {PluggableList} list
-   * @returns {Processor<ParseTree, HeadTree, TailTree, CompileTree, CompileResult>}
-   *
-   * @overload
-   * @param {Plugin<Parameters, Input, Output>} plugin
-   * @param {...(Parameters | [boolean])} parameters
-   * @returns {UsePlugin<ParseTree, HeadTree, TailTree, CompileTree, CompileResult, Input, Output>}
-   *
-   * @param {PluggableList | Plugin | Preset | null | undefined} value
-   *   Usable value.
-   * @param {...unknown} parameters
-   *   Parameters, when a plugin is given as a usable value.
-   * @returns {Processor<ParseTree, HeadTree, TailTree, CompileTree, CompileResult>}
-   *   Current processor.
-   */
-  use(value, ...parameters) {
-    const attachers = this.attachers;
-    const namespace = this.namespace;
-    assertUnfrozen("use", this.frozen);
-    if (value === null || value === void 0)
-      ;
-    else if (typeof value === "function") {
-      addPlugin(value, parameters);
-    } else if (typeof value === "object") {
-      if (Array.isArray(value)) {
-        addList(value);
-      } else {
-        addPreset(value);
-      }
-    } else {
-      throw new TypeError("Expected usable value, not `" + value + "`");
-    }
-    return this;
-    function add2(value2) {
-      if (typeof value2 === "function") {
-        addPlugin(value2, []);
-      } else if (typeof value2 === "object") {
-        if (Array.isArray(value2)) {
-          const [plugin, ...parameters2] = (
-            /** @type {PluginTuple<Array<unknown>>} */
-            value2
-          );
-          addPlugin(plugin, parameters2);
-        } else {
-          addPreset(value2);
-        }
-      } else {
-        throw new TypeError("Expected usable value, not `" + value2 + "`");
-      }
-    }
-    function addPreset(result) {
-      if (!("plugins" in result) && !("settings" in result)) {
-        throw new Error(
-          "Expected usable value but received an empty preset, which is probably a mistake: presets typically come with `plugins` and sometimes with `settings`, but this has neither"
-        );
-      }
-      addList(result.plugins);
-      if (result.settings) {
-        namespace.settings = extend$2(true, namespace.settings, result.settings);
-      }
-    }
-    function addList(plugins) {
-      let index2 = -1;
-      if (plugins === null || plugins === void 0)
-        ;
-      else if (Array.isArray(plugins)) {
-        while (++index2 < plugins.length) {
-          const thing = plugins[index2];
-          add2(thing);
-        }
-      } else {
-        throw new TypeError("Expected a list of plugins, not `" + plugins + "`");
-      }
-    }
-    function addPlugin(plugin, parameters2) {
-      let index2 = -1;
-      let entryIndex = -1;
-      while (++index2 < attachers.length) {
-        if (attachers[index2][0] === plugin) {
-          entryIndex = index2;
-          break;
-        }
-      }
-      if (entryIndex === -1) {
-        attachers.push([plugin, ...parameters2]);
-      } else if (parameters2.length > 0) {
-        let [primary, ...rest] = parameters2;
-        const currentPrimary = attachers[entryIndex][1];
-        if (isPlainObject2(currentPrimary) && isPlainObject2(primary)) {
-          primary = extend$2(true, currentPrimary, primary);
-        }
-        attachers[entryIndex] = [plugin, primary, ...rest];
-      }
-    }
-  }
-}
-const unified = new Processor().freeze();
-function assertParser(name2, value) {
-  if (typeof value !== "function") {
-    throw new TypeError("Cannot `" + name2 + "` without `parser`");
-  }
-}
-function assertCompiler(name2, value) {
-  if (typeof value !== "function") {
-    throw new TypeError("Cannot `" + name2 + "` without `compiler`");
-  }
-}
-function assertUnfrozen(name2, frozen) {
-  if (frozen) {
-    throw new Error(
-      "Cannot call `" + name2 + "` on a frozen processor.\nCreate a new processor first, by calling it: use `processor()` instead of `processor`."
-    );
-  }
-}
-function assertNode(node2) {
-  if (!isPlainObject2(node2) || typeof node2.type !== "string") {
-    throw new TypeError("Expected node, got `" + node2 + "`");
-  }
-}
-function assertDone(name2, asyncName, complete) {
-  if (!complete) {
-    throw new Error(
-      "`" + name2 + "` finished async. Use `" + asyncName + "` instead"
-    );
-  }
-}
-function vfile(value) {
-  return looksLikeAVFile(value) ? value : new VFile(value);
-}
-function looksLikeAVFile(value) {
-  return Boolean(
-    value && typeof value === "object" && "message" in value && "messages" in value
-  );
-}
-function looksLikeAValue(value) {
-  return typeof value === "string" || isUint8Array(value);
-}
-function isUint8Array(value) {
-  return Boolean(
-    value && typeof value === "object" && "byteLength" in value && "byteOffset" in value
-  );
-}
-function ccount(value, character2) {
-  const source = String(value);
-  if (typeof character2 !== "string") {
-    throw new TypeError("Expected character");
-  }
-  let count2 = 0;
-  let index2 = source.indexOf(character2);
-  while (index2 !== -1) {
-    count2++;
-    index2 = source.indexOf(character2, index2 + character2.length);
-  }
-  return count2;
-}
 var immutable = extend3;
 var hasOwnProperty = Object.prototype.hasOwnProperty;
 function extend3() {

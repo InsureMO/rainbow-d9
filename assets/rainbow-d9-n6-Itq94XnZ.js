@@ -4,20 +4,20 @@ var __publicField = (obj, key, value) => {
   __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
   return value;
 };
-import { a as color, P as jsYaml } from "./vendor-9g-Uqt4B.js";
-import { f as CssConstants, C as CssVars, I as IntlLabel, D as DOM_KEY_WIDGET, g as UnwrappedCaption, b as useGlobalHandlers, h as UnwrappedInput, j as UnwrappedCheckbox } from "./rainbow-d9-n2-yCg4gWgR.js";
-import { R as React, q as qe, r as reactExports, D as DiagramModel, C as CanvasWidget, N as NodeModel, c as createEngine, P as PortModel, a as PortModelAlignment, b as DefaultLinkModel, A as AbstractModelFactory, d as AbstractReactFactory, e as PortWidget } from "./react-base-dlWpmanK.js";
-import { V as VUtils, r as registerWidget, g as useCreateEventBus, M as MUtils, P as PPUtils } from "./rainbow-d9-n1-mvZG8UjJ.js";
-import { i as index$1 } from "./rainbow-d9-n3-gqr9PoeQ.js";
-import { M as Markdown } from "./react-markdown-BdGD82TT.js";
-import { r as remarkGfm } from "./remark-1rJfgujb.js";
+import { a as color, P as jsYaml } from "./vendor-FxhWBsAz.js";
+import { f as CssConstants, C as CssVars, I as IntlLabel, D as DOM_KEY_WIDGET, g as UnwrappedCaption, b as useGlobalHandlers, h as UnwrappedInput, j as UnwrappedCheckbox, k as UnwrappedDropdown, l as UnwrappedTextarea, m as UnwrappedDecorateInput } from "./rainbow-d9-n2-v6HY_bjb.js";
+import { R as React, q as qe, r as reactExports, D as DiagramModel, C as CanvasWidget, N as NodeModel, c as createEngine, P as PortModel, a as PortModelAlignment, b as DefaultLinkModel, A as AbstractModelFactory, d as AbstractReactFactory, e as PortWidget } from "./react-base-1xesxUK0.js";
+import { V as VUtils, r as registerWidget, g as useCreateEventBus, M as MUtils, P as PPUtils, e as useForceUpdate } from "./rainbow-d9-n1-gFKePpQk.js";
+import { i as index$1 } from "./rainbow-d9-n3-wStcAEft.js";
+import { M as Markdown } from "./react-markdown-GotOSe77.js";
+import { r as remarkGfm } from "./remark-qd4D0pQk.js";
 const EDITOR_BACKGROUND_BLOCK_SIZE = "var(--o23-playground-editor-background-block-size, 48px)";
 const EDITOR_BACKGROUND_LINE_COLOR = `var(--o23-playground-editor-background-line-color, ${color(CssConstants.PRIMARY_COLOR).alpha(0.08)})`;
 const NODE_START_COLOR = "#ffb56b";
 const NODE_END_COLOR = "#e0b35f";
 const NEXT_STEP_PORT_COLOR = "#1f6b73";
 const PREVIOUS_STEP_PORT_COLOR = "#00618b";
-const REST_API_VARIABLE_PORT_COLOR = "#87a55f";
+const API_VARIABLE_PORT_COLOR = "#87a55f";
 const PlaygroundCssVars = {
   EDITOR_BACKGROUND_BLOCK_SIZE,
   EDITOR_BACKGROUND_LINE_COLOR,
@@ -99,6 +99,9 @@ const PlaygroundCssVars = {
   EDIT_DIALOG_CONFIGURABLE_ELEMENT_HELP_LABEL_HEIGHT: `var(--o23-playground-dialog-configurable-element-help-label-height, ${CssVars.INPUT_HEIGHT})`,
   EDIT_DIALOG_CONFIGURABLE_ELEMENT_HELP_BADGE_HEIGHT: `var(--o23-playground-dialog-configurable-element-help-badge-height, ${CssVars.INPUT_HEIGHT})`,
   EDIT_DIALOG_CONFIGURABLE_ELEMENT_HELP_BADGE_COLOR: `var(--o23-playground-dialog-configurable-element-help-badge-color, ${CssVars.PRIMARY_COLOR})`,
+  EDIT_DIALOG_CONFIGURABLE_ELEMENT_GROUP_FONT_WEIGHT: "var(--o23-playground-dialog-configurable-element-group-font-weight, 600)",
+  EDIT_DIALOG_CONFIGURABLE_ELEMENT_GROUP_BORDER: `var(--o23-playground-dialog-configurable-element-group-border, 1px solid rgb(216, 222, 228))`,
+  EDIT_DIALOG_CONFIGURABLE_ELEMENT_SPECIFIC_INPUT_PREFIX_FONT_SIZE: "var(--o23-playground-dialog-configurable-element-specific-input-prefix-font-size, max(0.8em, 12px))",
   NODE_BORDER_RADIUS: "var(--o23-playground-node-border-radius, 8px)",
   NODE_BACKGROUND: `var(--o23-playground-node-background, ${CssVars.BACKGROUND_COLOR})`,
   NODE_TITLE_PADDING: "var(--o23-playground-node-title-padding, 0 10px)",
@@ -118,18 +121,18 @@ const PlaygroundCssVars = {
   NODE_PREVIOUS_STEP_PORT_BACKGROUND: `var(--o23-playground-previous-step-port-background, ${PREVIOUS_STEP_PORT_COLOR})`,
   NODE_PREVIOUS_STEP_PORT_BORDER: `var(--o23-playground-previous-step-port-border, 1px solid ${color(PREVIOUS_STEP_PORT_COLOR).darken(0.1).opaquer(0.5)})`,
   NODE_PREVIOUS_STEP_PORT_PADDING: "var(--o23-playground-previous-step-port-padding, 0 12px 0 8px)",
-  NODE_REST_API_VARIABLE_PORT_FONT_SIZE: "var(--o23-playground-rest-api-variable-port-font-size, 14px)",
-  NODE_REST_API_VARIABLE_PORT_FONT_WEIGHT: "var(--o23-playground-rest-api-variable-port-font-weight, 400)",
-  NODE_REST_API_VARIABLE_PORT_COLOR: `var(--o23-playground-rest-api-variable-port-color, ${CssVars.INVERT_COLOR})`,
-  NODE_REST_API_VARIABLE_PORT_BACKGROUND: `var(--o23-playground-rest-api-variable-port-background, ${REST_API_VARIABLE_PORT_COLOR})`,
-  NODE_REST_API_VARIABLE_PORT_BORDER: `var(--o23-playground-rest-api-variable-port-border, 1px solid ${color(REST_API_VARIABLE_PORT_COLOR).darken(0.1).opaquer(0.5)})`,
-  NODE_REST_API_VARIABLE_PORT_PADDING: "var(--o23-playground-rest-api-variable-port-padding, 0 12px 0 8px)",
-  NODE_REST_API_VARIABLE_PORT_UNDEFINED_BACKGROUND: `var(--o23-playground-rest-api-variable-port-undefined-background, ${CssConstants.WAIVE_COLOR})`,
-  NODE_REST_API_VARIABLE_PORT_UNDEFINED_BORDER: `var(--o23-playground-rest-api-variable-port-undefined-border, 1px solid ${color(CssConstants.WAIVE_COLOR).darken(0.1).opaquer(0.5)})`,
-  NODE_REST_API_VARIABLE_PORT_LACKING_BACKGROUND: `var(--o23-playground-rest-api-variable-port-lacking-background, ${CssVars.DANGER_COLOR})`,
-  NODE_REST_API_VARIABLE_PORT_LACKING_BORDER: `var(--o23-playground-rest-api-variable-port-lacking-border, 1px solid ${color(CssConstants.DANGER_COLOR).darken(0.1).opaquer(0.5)})`,
-  NODE_REST_API_VARIABLE_PORT_BADGE_BACKGROUND: `var(--o23-playground-rest-api-variable-port-badge-background, ${CssVars.SUCCESS_COLOR})`,
-  NODE_REST_API_VARIABLE_PORT_BADGE_BORDER: `var(--o23-playground-rest-api-variable-port-badge-background, 1px solid ${CssVars.INVERT_COLOR})`,
+  NODE_API_VARIABLE_PORT_FONT_SIZE: "var(--o23-playground-api-variable-port-font-size, 14px)",
+  NODE_API_VARIABLE_PORT_FONT_WEIGHT: "var(--o23-playground-api-variable-port-font-weight, 400)",
+  NODE_API_VARIABLE_PORT_COLOR: `var(--o23-playground-api-variable-port-color, ${CssVars.INVERT_COLOR})`,
+  NODE_API_VARIABLE_PORT_BACKGROUND: `var(--o23-playground-api-variable-port-background, ${API_VARIABLE_PORT_COLOR})`,
+  NODE_API_VARIABLE_PORT_BORDER: `var(--o23-playground-api-variable-port-border, 1px solid ${color(API_VARIABLE_PORT_COLOR).darken(0.1).opaquer(0.5)})`,
+  NODE_API_VARIABLE_PORT_PADDING: "var(--o23-playground-api-variable-port-padding, 0 12px 0 8px)",
+  NODE_API_VARIABLE_PORT_UNDEFINED_BACKGROUND: `var(--o23-playground-api-variable-port-undefined-background, ${CssConstants.WAIVE_COLOR})`,
+  NODE_API_VARIABLE_PORT_UNDEFINED_BORDER: `var(--o23-playground-api-variable-port-undefined-border, 1px solid ${color(CssConstants.WAIVE_COLOR).darken(0.1).opaquer(0.5)})`,
+  NODE_API_VARIABLE_PORT_LACKING_BACKGROUND: `var(--o23-playground-api-variable-port-lacking-background, ${CssVars.DANGER_COLOR})`,
+  NODE_API_VARIABLE_PORT_LACKING_BORDER: `var(--o23-playground-api-variable-port-lacking-border, 1px solid ${color(CssConstants.DANGER_COLOR).darken(0.1).opaquer(0.5)})`,
+  NODE_API_VARIABLE_PORT_BADGE_BACKGROUND: `var(--o23-playground-api-variable-port-badge-background, ${CssVars.SUCCESS_COLOR})`,
+  NODE_API_VARIABLE_PORT_BADGE_BORDER: `var(--o23-playground-api-variable-port-badge-background, 1px solid ${CssVars.INVERT_COLOR})`,
   NODE_START_BORDER_COLOR: `var(--o23-playground-node-start-border-color, ${NODE_START_COLOR})`,
   NODE_START_BORDER: `var(--o23-playground-node-start-border, 2px solid ${NODE_START_COLOR})`,
   NODE_START_TITLE_FONT_SIZE: "var(--o23-playground-node-start-title-font-size, 16px)",
@@ -242,12 +245,18 @@ const Labels = {
   Navigator: React.createElement(IntlLabel, { keys: ["o23", "dialog", "navigator", "title"], value: "Configurable Elements" }),
   Specific: React.createElement(IntlLabel, { keys: ["o23", "dialog", "specific", "title"], value: "Specific Details" }),
   BackToCanvas: React.createElement(IntlLabel, { keys: ["o23", "dialog", "close"], value: "Back to canvas" }),
-  TypeOfStandardPipeline: React.createElement(IntlLabel, { keys: ["o23", "pipeline", "standard"], value: "Pipeline" }),
-  TypeOfStepOrSets: (type) => {
-    return React.createElement(IntlLabel, { keys: ["o23", "pipeline", type], value: (type ?? "").replace("-", " ") });
-  },
+  PipelineTypeApi: React.createElement(IntlLabel, { keys: ["o23", "pipeline", "api"], value: "Pipeline as API" }),
+  PipelineTypePipeline: React.createElement(IntlLabel, { keys: ["o23", "pipeline", "standard"], value: "Pipeline" }),
+  PipelineTypeStepSet: React.createElement(IntlLabel, { keys: ["o23", "pipeline", "step-sets"], value: "Step Set" }),
+  PipelineTypeStep: React.createElement(IntlLabel, { keys: ["o23", "pipeline", "step"], value: "Step" }),
+  ParameterNames: React.createElement(IntlLabel, { keys: ["o23", "parameter", "names"], value: "Names" }),
+  BodyFollowHttpMethod: React.createElement(IntlLabel, { keys: ["o23", "pipeline", "body", "follow-http-method"], value: "Follow method default" }),
+  ParseBody: React.createElement(IntlLabel, { keys: ["o23", "pipeline", "body", "parse"], value: "Parse" }),
   All: React.createElement(IntlLabel, { keys: ["o23", "variable", "all"], value: "All" }),
   Ignored: React.createElement(IntlLabel, { keys: ["o23", "variable", "ignored"], value: "Ignored" }),
+  Designated: React.createElement(IntlLabel, { keys: ["o23", "variable", "designated"], value: "Designated" }),
+  Specified: React.createElement(IntlLabel, { keys: ["o23", "variable", "specified"], value: "Specified" }),
+  Customized: React.createElement(IntlLabel, { keys: ["o23", "variable", "customized"], value: "Customized" }),
   NotAvailable: React.createElement(IntlLabel, { keys: ["o23", "variable", "not-available"], value: "N/A" }),
   YesChar: React.createElement(IntlLabel, { keys: ["o23", "variable", "yes-char"], value: "Y" }),
   NoChar: React.createElement(IntlLabel, { keys: ["o23", "variable", "no-char"], value: "N" }),
@@ -513,57 +522,6 @@ const _StartNodeModel = class _StartNodeModel extends NodeModel {
 };
 __publicField(_StartNodeModel, "TYPE", "start-node");
 let StartNodeModel = _StartNodeModel;
-class FileDefLoader {
-  constructor(options) {
-    __publicField(this, "_redress");
-    this._redress = options == null ? void 0 : options.redress;
-  }
-  dashToCamel(key) {
-    return key.replace(/-(.)/g, (_, group1) => group1.toUpperCase());
-  }
-  redressKeyCase(given) {
-    if (given == null) {
-      return given;
-    } else if (Array.isArray(given)) {
-      return given.map((item) => this.redressKeyCase(item));
-    } else if (typeof given === "object") {
-      return Object.keys(given).reduce((redressed, key) => {
-        if (key.indexOf("-") !== -1) {
-          redressed[this.dashToCamel(key)] = this.redressKeyCase(given[key]);
-        } else {
-          redressed[key] = this.redressKeyCase(given[key]);
-        }
-        return redressed;
-      }, {});
-    } else {
-      return given;
-    }
-  }
-  redressDef(given) {
-    if (this._redress) {
-      given = this._redress(given);
-    }
-    return this.redressKeyCase(given);
-  }
-  parse(content) {
-    const def = this.doParse(content);
-    return this.redressDef(def);
-  }
-}
-class YamlDefLoader extends FileDefLoader {
-  doParse(content) {
-    try {
-      return jsYaml.load(content);
-    } catch (e) {
-      console.group("Failed to parse yaml content to O23 definition.");
-      console.error(e);
-      console.log(content);
-      console.groupEnd();
-      throw new Error("Failed to parse yaml content to O23 definition.");
-    }
-  }
-}
-const isPipelineDef = (def) => def.type === "pipeline";
 var PlaygroundEventTypes;
 (function(PlaygroundEventTypes2) {
   PlaygroundEventTypes2["CONTENT_CHANGED"] = "content-changed";
@@ -663,6 +621,14 @@ const EditDialogContentContainer = qe.div.attrs({ [DOM_KEY_WIDGET]: "o23-playgro
 
         h5, h6 {
             font-size: 1em;
+        }
+
+        p, blockquote, ul, ol, dl, table, pre, details {
+            margin-bottom: 4px;
+        }
+
+        > *:last-child {
+            margin-bottom: 0;
         }
     }
 `;
@@ -857,10 +823,15 @@ const NavigatorElementsContainer = qe.div.attrs({
     padding: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_PADDING};
     overflow-y: auto;
     overflow-x: hidden;
+
+    > div[data-w=o23-playground-edit-dialog-navigator-element]:first-child {
+        border-top-color: transparent;
+    }
 `;
 const NavigatorElementContainer = qe.div.attrs(({ level }) => {
   return {
     [DOM_KEY_WIDGET]: "o23-playground-edit-dialog-navigator-element",
+    "data-level": level,
     style: {
       "--level": level
     }
@@ -872,9 +843,10 @@ const NavigatorElementContainer = qe.div.attrs(({ level }) => {
     min-height: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_HEIGHT};
     margin: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_MARGIN};
     padding: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_PADDING};
+    border-top: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_BORDER};
     border-radius: 0;
     cursor: pointer;
-    transition: all ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION};
+    transition: background-color ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION}, border-radius ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION}, font-weight ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION};
 
     &:hover {
         background-color: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_HOVER_COLOR};
@@ -882,66 +854,12 @@ const NavigatorElementContainer = qe.div.attrs(({ level }) => {
         font-weight: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_HOVER_FONT_WEIGHT};
     }
 
-    &:not(:last-child) {
-        border-bottom: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_BORDER};
-    }
-`;
-const NavigatorElementTreeLine = qe.span.attrs(({ level }) => {
-  return {
-    [DOM_KEY_WIDGET]: "o23-playground-edit-dialog-navigator-element-tree-line",
-    style: {
-      "--margin-left": `calc(${level - 1} * ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_INDENT})`
-    }
-  };
-})`
-    display: flex;
-    position: relative;
-    align-self: stretch;
-    width: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_INDENT};
-    margin-left: var(--margin-left);
-
-    &:before {
-        content: '';
-        display: block;
-        position: absolute;
-        width: 1px;
-        height: calc(100% + 1px);
-        top: 0;
-        left: 3px;
-        background-color: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_TREE_LINE_COLOR};
-    }
-
-    &[data-last-level=true] {
-        &:after {
-            content: '';
-            display: block;
-            position: absolute;
-            width: 100%;
-            height: 50%;
-            top: 0;
-            left: 3px;
-            border-bottom-left-radius: 3px;
-            border-bottom: 1px solid ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_TREE_LINE_COLOR};
-        }
-
-        &[data-last-node=true]:before {
-            display: none;
-        }
-
-        &[data-last-node=true]:after {
-            border-left: 1px solid ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_TREE_LINE_COLOR};
-        }
-    }
-
-    &[data-last-level=false][data-last-node=true]:before {
-        display: none;
-    }
 `;
 const NavigatorElementLabel = qe.div.attrs(({ level }) => {
   return {
     [DOM_KEY_WIDGET]: "o23-playground-edit-dialog-navigator-element-label",
     style: {
-      "--margin-left": level === 0 ? 0 : PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_INDENT
+      "--margin-left": level == 0 ? 0 : `calc(${level * 2} * ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_INDENT})`
     }
   };
 })`
@@ -950,6 +868,7 @@ const NavigatorElementLabel = qe.div.attrs(({ level }) => {
     align-items: center;
     flex-grow: 1;
     margin-left: var(--margin-left);
+    height: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_HEIGHT};
 `;
 const NavigatorElementBadge = qe.div.attrs({ [DOM_KEY_WIDGET]: "o23-playground-edit-dialog-navigator-element-badge" })`
     display: flex;
@@ -1007,6 +926,61 @@ const NavigatorElementBadgeWrapper = qe.span.attrs({ [DOM_KEY_WIDGET]: "o23-play
         margin: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_BADGE_ICON_MARGIN};
     }
 `;
+const NavigatorElementChildren = qe.span.attrs({ [DOM_KEY_WIDGET]: "o23-playground-edit-dialog-navigator-element-children-container" })`
+    display: flex;
+    position: relative;
+    flex-direction: column;
+
+    &:not(:last-child):before {
+        content: '';
+        display: block;
+        position: absolute;
+        width: 1px;
+        height: calc(100% + 1px);
+        top: 0;
+        left: calc(0.5 * ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_INDENT});
+        background-color: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_TREE_LINE_COLOR};
+    }
+
+    > div[data-w=o23-playground-edit-dialog-navigator-element] {
+        > div[data-w=o23-playground-edit-dialog-navigator-element-label] {
+            &:before {
+                content: '';
+                display: block;
+                position: absolute;
+                width: 1px;
+                height: calc(100% + 1px);
+                top: 0;
+                left: calc(-1.5 * ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_INDENT});
+                background-color: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_TREE_LINE_COLOR};
+            }
+
+            &:after {
+                content: '';
+                display: block;
+                position: absolute;
+                width: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_INDENT};
+                height: 50%;
+                top: 0;
+                left: calc(-1.5 * ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_INDENT});
+                border-bottom-left-radius: 3px;
+                border-bottom: 1px solid ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_TREE_LINE_COLOR};
+            }
+        }
+    }
+
+    > div[data-w=o23-playground-edit-dialog-navigator-element]:last-of-type {
+        > div[data-w=o23-playground-edit-dialog-navigator-element-label] {
+            &:before {
+                display: none;
+            }
+
+            &:after {
+                border-left: 1px solid ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_TREE_LINE_COLOR};
+            }
+        }
+    }
+`;
 const SpecificElementsContainer = qe.div.attrs({
   [DOM_KEY_WIDGET]: "o23-playground-edit-dialog-specific-elements",
   "data-h-scroll": ""
@@ -1030,8 +1004,25 @@ const SpecificElementsContainer = qe.div.attrs({
 const SpecificElementLabel = qe.div.attrs({ [DOM_KEY_WIDGET]: "o23-playground-edit-dialog-specific-element-label" })`
     display: flex;
     position: relative;
-    align-items: center;
+    align-items: start;
     min-height: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_HELP_LABEL_HEIGHT};
+
+    &[data-group=true] {
+        font-weight: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_GROUP_FONT_WEIGHT};
+        border-bottom: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_GROUP_BORDER};
+        margin-right: calc(-1 * ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_SPECIFIC_GRID_COLUMN_GAP});
+
+        + div[data-w=o23-playground-edit-dialog-specific-element-editor-placeholder] {
+            border-bottom: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_GROUP_BORDER};
+        }
+    }
+
+    > span:first-child {
+        height: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_HELP_LABEL_HEIGHT};
+        display: inline-flex;
+        align-items: center;
+        position: relative;
+    }
 `;
 const SpecificElementHelpBadge = qe.div.attrs({ [DOM_KEY_WIDGET]: "o23-playground-edit-dialog-specific-element-help-badge" })`
     display: flex;
@@ -1069,7 +1060,7 @@ const SpecificElementHelpDoc = qe.div.attrs({ [DOM_KEY_WIDGET]: "o23-playground-
         overflow: visible;
     }
 
-    > div.markdown-body {
+    > div {
         font-size: ${PlaygroundCssVars.SPECIFIC_MARKDOWN_FONT_SIZE};
     }
 `;
@@ -1078,6 +1069,8 @@ var EditDialogEventTypes;
   EditDialogEventTypes2["OPEN_HELP_DESK"] = "open-help-desk";
   EditDialogEventTypes2["CLOSE_HELP_DESK"] = "close-help-desk";
   EditDialogEventTypes2["ASK_HELP_DESK_OPENED"] = "ask-help-desk-opened";
+  EditDialogEventTypes2["ELEMENT_VALUE_CHANGED"] = "element-value-changed";
+  EditDialogEventTypes2["LOCATE_ELEMENT"] = "locate-element";
 })(EditDialogEventTypes || (EditDialogEventTypes = {}));
 const Context = reactExports.createContext({});
 Context.displayName = "EditDialogEventBus";
@@ -1087,6 +1080,27 @@ const EditDialogEventBusProvider = (props) => {
   return React.createElement(Context.Provider, { value: bus }, children);
 };
 const useEditDialogEventBus = () => reactExports.useContext(Context);
+const ConfigurableElementBadgeChecked = () => {
+  return React.createElement(NavigatorElementBadgeWrapper, { "data-role": "checked" }, Labels.BadgeChecked);
+};
+const ConfigurableElementBadgeMissed = () => {
+  return React.createElement(NavigatorElementBadgeWrapper, { "data-role": "missed" }, Labels.BadgeMissed);
+};
+const ConfigurableElementBadgeBanned = () => {
+  return React.createElement(NavigatorElementBadgeWrapper, { "data-role": "banned" }, Labels.BadgeBanned);
+};
+const ConfigurableElementBadgeAll = () => {
+  return React.createElement(NavigatorElementBadgeWrapper, { "data-role": "all" }, Labels.All);
+};
+const ConfigurableElementBadgeIgnored = () => {
+  return React.createElement(NavigatorElementBadgeWrapper, { "data-role": "ignored" }, Labels.Ignored);
+};
+const ConfigurableElementBadgeNotAvailable = () => {
+  return React.createElement(NavigatorElementBadgeWrapper, { "data-role": "not-available" }, Labels.NotAvailable);
+};
+const ConfigurableElementBadgeCount = (props) => {
+  return React.createElement(NavigatorElementBadgeWrapper, { "data-role": "count" }, props.count);
+};
 const LinkRenderer = (props) => {
   return React.createElement("a", { href: props.href, target: "_blank", rel: "noreferrer" }, props.children);
 };
@@ -1206,37 +1220,75 @@ const DialogHelpDesk = (props) => {
     )
   );
 };
-const LayoutController = () => {
-  const { fire } = useEditDialogEventBus();
-  const [opened, setOpened] = useHelpDeskOpened();
+const useElementVisible = (element, model) => {
+  const { visibleOn, visible } = element;
+  const { on, off } = useEditDialogEventBus();
+  const forceUpdate = useForceUpdate();
   reactExports.useEffect(() => {
-    fire(EditDialogEventTypes.ASK_HELP_DESK_OPENED, (opened2) => setOpened(opened2));
-  }, [fire, setOpened]);
-  return React.createElement(EditDialogLayoutControllerHandle, { opened });
+    if (visibleOn == null || visibleOn.length === 0) {
+      return;
+    }
+    const onElementValueChanged = (anchor) => {
+      if (visibleOn.includes(anchor)) {
+        forceUpdate();
+      }
+    };
+    on(EditDialogEventTypes.ELEMENT_VALUE_CHANGED, onElementValueChanged);
+    return () => {
+      off(EditDialogEventTypes.ELEMENT_VALUE_CHANGED, onElementValueChanged);
+    };
+  }, [on, off, forceUpdate, visibleOn]);
+  return visible == null || visible(model);
+};
+const useElementValueChange = (element) => {
+  const { anchor } = element;
+  const { on, off } = useEditDialogEventBus();
+  const forceUpdate = useForceUpdate();
+  reactExports.useEffect(() => {
+    const onElementValueChanged = (anchorOfChanged) => {
+      if (anchor === anchorOfChanged) {
+        forceUpdate();
+      }
+    };
+    on(EditDialogEventTypes.ELEMENT_VALUE_CHANGED, onElementValueChanged);
+    return () => {
+      off(EditDialogEventTypes.ELEMENT_VALUE_CHANGED, onElementValueChanged);
+    };
+  }, [on, off, forceUpdate, anchor]);
+};
+const DialogNavigatorElementWrapper = (props) => {
+  const { element, model, level } = props;
+  const { label, badge } = element;
+  const { fire } = useEditDialogEventBus();
+  useElementValueChange(element);
+  const onClicked = () => {
+    fire(EditDialogEventTypes.LOCATE_ELEMENT, element.anchor);
+  };
+  return React.createElement(
+    NavigatorElementContainer,
+    { level, onClick: onClicked },
+    React.createElement(NavigatorElementLabel, { level }, label),
+    badge != null ? React.createElement(NavigatorElementBadge, null, badge(model)) : null
+  );
 };
 const DialogNavigatorElement = (props) => {
   const { element, model, level, last } = props;
-  const { label, badge } = element;
+  const visible = useElementVisible(element, model);
+  if (!visible) {
+    return null;
+  }
   return React.createElement(
     React.Fragment,
     null,
-    React.createElement(
-      NavigatorElementContainer,
-      { level },
-      level !== 0 ? new Array(level + 1).fill(1).map((_, index) => {
-        return index !== 0 ? React.createElement(NavigatorElementTreeLine, { level: index, "data-last-node": last[index], "data-last-level": index === level, key: index }) : null;
-      }) : null,
-      React.createElement(NavigatorElementLabel, { level }, label),
-      badge != null ? React.createElement(NavigatorElementBadge, null, badge(model)) : null
-    ),
-    element.children != null ? element.children.filter((element2) => element2.visible == null || element2.visible(model)).map((child, index, children) => {
+    React.createElement(DialogNavigatorElementWrapper, { ...props }),
+    element.children != null ? React.createElement(NavigatorElementChildren, null, element.children.map((child, index, children) => {
       return React.createElement(DialogNavigatorElement, { element: child, model, level: level + 1, last: [...last, index === children.length - 1], key: child.code });
-    }) : null
+    })) : null
   );
 };
 const DialogNavigatorElements = (props) => {
   const { elements: elements2, model } = props;
-  return React.createElement(NavigatorElementsContainer, null, elements2.filter((element) => element.visible == null || element.visible(model)).map((element, index, elements3) => {
+  return React.createElement(NavigatorElementsContainer, null, elements2.map((element, index, elements3) => {
     return React.createElement(DialogNavigatorElement, { element, model, level: 0, last: [index === elements3.length - 1], key: element.code });
   }));
 };
@@ -1260,18 +1312,59 @@ const DialogNavigator = (props) => {
     )
   );
 };
+const useElementValueChangeBy = (element) => {
+  const { changeBy } = element;
+  const { on, off } = useEditDialogEventBus();
+  const forceUpdate = useForceUpdate();
+  reactExports.useEffect(() => {
+    if (changeBy == null || changeBy.length === 0) {
+      return;
+    }
+    const onElementValueChanged = (anchorOfChanged) => {
+      if (changeBy.includes(anchorOfChanged)) {
+        forceUpdate();
+      }
+    };
+    on(EditDialogEventTypes.ELEMENT_VALUE_CHANGED, onElementValueChanged);
+    return () => {
+      off(EditDialogEventTypes.ELEMENT_VALUE_CHANGED, onElementValueChanged);
+    };
+  }, [on, off, forceUpdate, changeBy]);
+};
 const DialogSpecificElementWrapper = (props) => {
   const { element, model } = props;
-  const { label, editor, helpDoc } = element;
+  const { anchor, label, editor: Editor2, helpDoc, group } = element;
+  const ref = reactExports.useRef(null);
+  const { on, off, fire } = useEditDialogEventBus();
   const [showHelp, setShowHelp] = reactExports.useState(false);
+  useElementValueChangeBy(element);
+  const forceUpdate = useForceUpdate();
+  reactExports.useEffect(() => {
+    const onLocateElement = (anchorToLocate) => {
+      if (anchor !== anchorToLocate) {
+        return;
+      }
+      if (ref.current != null) {
+        ref.current.scrollIntoView({ behavior: "smooth", block: "start", inline: "nearest" });
+      }
+    };
+    on(EditDialogEventTypes.LOCATE_ELEMENT, onLocateElement);
+    return () => {
+      off(EditDialogEventTypes.LOCATE_ELEMENT, onLocateElement);
+    };
+  }, [on, off, anchor]);
   const onHelpBadgeClicked = () => setShowHelp(!showHelp);
+  const onValueChanged = () => {
+    forceUpdate();
+    fire(EditDialogEventTypes.ELEMENT_VALUE_CHANGED, anchor);
+  };
   const hasHelpDoc = VUtils.isNotBlank(helpDoc);
   return React.createElement(
     React.Fragment,
     null,
     React.createElement(
       SpecificElementLabel,
-      null,
+      { "data-group": group, ref },
       React.createElement("span", null, label),
       hasHelpDoc ? React.createElement(
         SpecificElementHelpBadge,
@@ -1279,28 +1372,32 @@ const DialogSpecificElementWrapper = (props) => {
         React.createElement(ElementHelp, null)
       ) : null
     ),
-    editor != null ? editor(model) : React.createElement(SpecificElementEditorPlaceholder, null),
+    Editor2 != null ? React.createElement(Editor2, { model, onValueChanged }) : React.createElement(SpecificElementEditorPlaceholder, null),
     hasHelpDoc ? React.createElement(
       SpecificElementHelpDoc,
       { "data-visible": showHelp },
       React.createElement(HelpDoc, { content: helpDoc })
-    ) : null
+    ) : React.createElement(SpecificElementHelpDoc, null)
   );
 };
 const DialogSpecificElement = (props) => {
   const { element, model } = props;
+  const visible = useElementVisible(element, model);
+  if (!visible) {
+    return null;
+  }
   return React.createElement(
     React.Fragment,
     null,
     React.createElement(DialogSpecificElementWrapper, { ...props }),
-    element.children != null ? element.children.filter((element2) => element2.visible == null || element2.visible(model)).map((child) => {
+    element.children != null ? element.children.map((child) => {
       return React.createElement(DialogSpecificElement, { element: child, model, key: child.code });
     }) : null
   );
 };
 const DialogSpecificElements = (props) => {
   const { elements: elements2, model } = props;
-  return React.createElement(SpecificElementsContainer, null, elements2.filter((element) => element.visible == null || element.visible(model)).map((element) => {
+  return React.createElement(SpecificElementsContainer, null, elements2.map((element) => {
     return React.createElement(DialogSpecificElement, { element, model, key: element.code });
   }));
 };
@@ -1323,6 +1420,14 @@ const DialogSpecific = (props) => {
       )
     )
   );
+};
+const LayoutController = () => {
+  const { fire } = useEditDialogEventBus();
+  const [opened, setOpened] = useHelpDeskOpened();
+  reactExports.useEffect(() => {
+    fire(EditDialogEventTypes.ASK_HELP_DESK_OPENED, (opened2) => setOpened(opened2));
+  }, [fire, setOpened]);
+  return React.createElement(EditDialogLayoutControllerHandle, { opened });
 };
 const DialogContentInitializer = () => {
   const ref = reactExports.useRef(null);
@@ -1366,27 +1471,6 @@ const DialogContent = (props) => {
     React.createElement(DialogContentInitializer, null)
   );
 };
-const ConfigurableElementBadgeChecked = () => {
-  return React.createElement(NavigatorElementBadgeWrapper, { "data-role": "checked" }, Labels.BadgeChecked);
-};
-const ConfigurableElementBadgeMissed = () => {
-  return React.createElement(NavigatorElementBadgeWrapper, { "data-role": "missed" }, Labels.BadgeMissed);
-};
-const ConfigurableElementBadgeBanned = () => {
-  return React.createElement(NavigatorElementBadgeWrapper, { "data-role": "banned" }, Labels.BadgeBanned);
-};
-const ConfigurableElementBadgeAll = () => {
-  return React.createElement(NavigatorElementBadgeWrapper, { "data-role": "all" }, Labels.All);
-};
-const ConfigurableElementBadgeIgnored = () => {
-  return React.createElement(NavigatorElementBadgeWrapper, { "data-role": "ignored" }, Labels.Ignored);
-};
-const ConfigurableElementBadgeNotAvailable = () => {
-  return React.createElement(NavigatorElementBadgeWrapper, { "data-role": "not-available" }, Labels.NotAvailable);
-};
-const ConfigurableElementBadgeCount = (props) => {
-  return React.createElement(NavigatorElementBadgeWrapper, { "data-role": "count" }, props.count);
-};
 const EditDialog = () => {
   const { on, off } = usePlaygroundEventBus();
   const [state, setState] = reactExports.useState({ visible: false });
@@ -1427,15 +1511,511 @@ const EditDialog = () => {
     React.createElement(EditDialogWrapper, null, state.content)
   );
 };
-const markdown$2 = "Used for locating configurations within the application, required fields, and must be globally unique.";
-const markdown$1 = "Specify whether the current configuration is effective.\n\n> Note that configurations that are not effective will not be loaded when the application starts, so the effective status cannot be switched\n> at runtime.";
-const markdown = "## Overview\n\nThe core concept of `@rainbow-o23` is pipeline, where all logic is defined through pipeline and its steps. There are three different forms\nof\npipeline based on how it is defined:\n\n- Standard pipeline, which can optionally be exposed as a RESTful API. To differentiate, we generally refer to pipelines that are exposed as\n  RESTful APIs as `pipeline`, and pipelines that are not exposed as RESTful APIs as `independent pipeline`. In all documents, we will use\n  this name to refer to it. If not specifically labeled as `independent`, it means that this pipeline has been exposed as a RESTful API.\n- Set of steps, composed of a group of steps,\n- Independent step: based on the definition of a single step.\n\nIf a pipeline is exposed as an API, it does not allow other pipeline steps to call it, otherwise it does. Therefore, if certain logic\ncombinations can be reused, they should be defined as an independent pipeline/set of steps/independent step.\n\n## Common attributes\n\nAll definitions should have the following attributes:\n\n- A `code` attribute for identification within the system, so the value of the `code` attribute is globally unique.\n- A `type` attribute is used to indicate the type of this definition, and the value of the `type` attribute must be one\n  of `pipeline`, `step-sets`, or `step`.\n- An `enabled` attribute is used to indicate whether this definition is effective, and the value of the `enabled` attribute must be\n  either `true` or `false`. If not defined, this definition is considered to be effective by default.\n\n## Pipeline\n\nIf the definition contains a `route` attribute and specifies a URI, it is considered to be published as a RESTful API. A pipeline published\nas a RESTful API includes all standard HTTP protocol elements:\n\n- `route`, URI of API. Excluding the scheme, domain name, and port in the URL, the application configuration can also specify the path\n  context,\n	- To facilitate the definition and parsing of data contained in the `route`, you can use `pathParams` for definition. `pathParams` can\n	  be a list of parameters, or you can use `true` to define receiving all valid path parameters. Please note that the definition of path\n	  parameters must conform to the [nestjs](https://docs.nestjs.com/controllers#route-parameters) standard.\n- `method`, supporting `get`, `post`, `put`, `patch`, and `delete`,\n- `headers`, a list of headers that need to be parsed, or `true` to parse all headers,\n- `queryParams`, a list of query parameters that need to be parsed, or `true` to parse all query parameters,\n- `body`, the content of the HTTP body is in JSON format. To better adapt to common practices of RESTful API usage:\n	- When `method` is specified as `get` and the `body` parameter is not explicitly set to `true`, the system defaults to ignoring the HTTP\n	  body content,\n	- When `method` is not specified as `get` and the `body` parameter is not explicitly set to `false`, the system defaults to parsing the\n	  HTTP body content,\n- `files`, a list of files that need to be parsed, or `true` to parse all files.\n\nThere are also some HTTP response definitions:\n\n- `exposeHeaders`, a set of headers that need to be pushed to the client,\n- `exposeFile`, indicating whether the response data is a file.\n\n## Independent pipeline\n\nIf the definition does not contain a `route` attribute, it is considered an independent pipeline. An independent pipeline can be called by\nother pipeline steps.\n\nAn independent pipeline always includes at least one step, and its behavior is entirely determined by the steps defined within it.\n\nAn independent pipeline also has a special property `initOnly`, which if declared as `true`, indicates that this pipeline will only be\nexecuted when the application starts, and the application will not provide any parameters during execution.\n\n## Set of steps\n\nSteps set, as the name suggests, can define a set of steps. They can also define how their built-in steps are executed, typically in the\nfollowing ways:\n\n- Synchronous serial,\n- Asynchronous serial,\n- Synchronous parallel,\n- Conditional execution,\n- Loop execution (only for input data as an array),\n- Start a database transaction.\n\nBy combining the various types of step collections mentioned above, you can construct execution sequences suitable for different scenarios.\n\n## Independent step\n\nIndependent steps can be any type of step definition, including step sets. Logically, a step set can be understood as a collection of\nindependent steps, and different step sets define the way their built-in steps are executed. Independent steps are implemented by different\nstandard step components for different purposes. Here are some built-in independent steps:\n\n- Retrieve values from models or remove attributes,\n- Execute scripts,\n- Generate snowflake IDs,\n- Call predefined independent pipelines or steps,\n- Make remote HTTP API calls,\n- Read from or write to databases.\n\nAdditionally, you can also obtain the following independent step support through the `@rainbow-o23` standard extension library:\n\n- Print PDF, Word, Excel, CSV,\n- Manipulate AWS S3 objects.\n\n> The latest step support can be found on [Github](https://github.com/InsureMO/rainbow-o23).\n";
-const HelpDocs = {
-  pipeline: markdown,
-  pipelineCode: markdown$2,
-  pipelineEnabled: markdown$1
+const markdown$c = "If using data from the request body, the data portion of the body must be in valid JSON format.\n\n> `GET` requests by default do not parse the request body, while other requests (methods) default to parsing the request body.\n";
+const markdown$b = "Used for locating configurations within the application, required fields, and must be globally unique.";
+const markdown$a = "Specify whether the current configuration is effective.\n\n> Note that configurations that are not effective will not be loaded when the application starts, so the effective status cannot be switched\n> at runtime.";
+const markdown$9 = "Indicate whether the returned response is a file.\n";
+const markdown$8 = "Specify the response headers to be outputted to the client, including names and values.\n\nThe syntax rules are as follows:\n\n- Use a colon to connect the name and value, for example `x-name: value`. Note that only the content before the first colon is considered\n  the name, and the remaining part is the value,\n- If multiple are needed, they should be written on multiple lines,\n- The spaces around the name and value will be automatically removed.\n";
+const markdown$7 = "To specify receiving multiple request headers, use commas or semicolons as separators.\n";
+const markdown$6 = "Only executed when the application starts, during which the system does not provide any parameters to the pipeline.\n";
+const markdown$5 = "`GET` requests by default do not parse the request body, while other requests (methods) default to parsing the request body.\n";
+const markdown$4 = "Parse parameters from the [route](https://docs.nestjs.com/controllers#route-parameters). For example, can parse the `name`\nand `age` parameters from `https://example.com/:name/:age`.\n\n> The parameter names are automatically synchronized here when modifying the `route` value.\n\n> Although parameters are defined in the `route`, it is still possible to ignore them here, but this is not the recommended approach. \n";
+const markdown$3 = "## Overview\n\nThe core concept of `@rainbow-o23` is pipeline, where all logic is defined through pipeline and its steps. There are three different forms\nof\npipeline based on how it is defined:\n\n- Pipeline, which can optionally be exposed as an API. To differentiate, we generally refer to pipelines that are exposed as\n  APIs as `Pipeline as API`, and pipelines that are not exposed as APIs as `pipeline`. In all documents, we will use\n  this name to refer to it. If not specifically labeled as `as API`, it means that this pipeline has not been exposed as an API.\n- Step set, composed of a group of steps,\n- Step: based on the definition of a single step.\n\nIf defined as a pipeline and is exposed as an API, it does not allow other pipeline steps to call it, otherwise it does. Therefore, if\ncertain logic combinations can be reused, they should be defined as a pipeline/steps set/step.\n\n## Common attributes\n\nAll definitions should have the following attributes:\n\n- A `code` attribute for identification within the system, so the value of the `code` attribute is globally unique.\n- A `type` attribute is used to indicate the type of this definition, and the value of the `type` attribute must be one\n  of `pipeline`, `step-sets`, or `step`.\n- An `enabled` attribute is used to indicate whether this definition is effective, and the value of the `enabled` attribute must be\n  either `true` or `false`. If not defined, this definition is considered to be effective by default.\n\n## Pipeline as API\n\nIf the definition contains a `route` attribute and specifies a URI, it is considered to be published as an API. A pipeline published\nas an API includes all standard HTTP protocol elements:\n\n- `route`, URI of API. Excluding the scheme, domain name, and port in the URL, the application configuration can also specify the path\n  context,\n	- To facilitate the definition and parsing of data contained in the `route`, you can use `pathParams` for definition. `pathParams` can\n	  be a list of parameters, or you can use `true` to define receiving all valid path parameters. Please note that the definition of path\n	  parameters must conform to the [nestjs](https://docs.nestjs.com/controllers#route-parameters) standard.\n- `method`, supporting `get`, `post`, `put`, `patch`, and `delete`,\n- `headers`, a list of headers that need to be parsed, or `true` to parse all headers,\n- `queryParams`, a list of query parameters that need to be parsed, or `true` to parse all query parameters,\n- `body`, the content of the HTTP body is in JSON format. To better adapt to common practices of HTTP API usage:\n	- When `method` is specified as `get` and the `body` parameter is not explicitly set to `true`, the system defaults to ignoring the HTTP\n	  body content,\n	- When `method` is not specified as `get` and the `body` parameter is not explicitly set to `false`, the system defaults to parsing the\n	  HTTP body content,\n- `files`, a list of files that need to be parsed, or `true` to parse all files.\n\nThere are also some HTTP response definitions:\n\n- `exposeHeaders`, a set of headers that need to be pushed to the client,\n- `exposeFile`, indicating whether the response data is a file.\n\n## Pipeline\n\nIf the definition does not contain a `route` attribute, it is considered a pipeline. A pipeline can be called by other pipeline steps.\n\nA pipeline always includes at least one step, and its behavior is entirely determined by the steps defined within it.\n\nA pipeline also has a special property `initOnly`, which if declared as `true`, indicates that this pipeline will only be\nexecuted when the application starts, and the application will not provide any parameters during execution.\n\n## Step set\n\nStep set, as the name suggests, can define a set of steps. They can also define how their built-in steps are executed, typically in the\nfollowing ways:\n\n- Synchronous serial,\n- Asynchronous serial,\n- Synchronous parallel,\n- Conditional execution,\n- Loop execution (only for input data as an array),\n- Start a database transaction.\n\nBy combining the various types of step collections mentioned above, you can construct execution sequences suitable for different scenarios.\n\n## Step\n\nSteps can be any type of step definition, including step sets. Logically, a step set is a step which includes a set of sub steps, and\ndifferent step sets define the way their sub steps are executed. Steps are implemented by different standard step components for\ndifferent purposes. Here are some built-in standard steps:\n\n- Retrieve values from models or remove attributes,\n- Execute scripts,\n- Generate snowflake IDs,\n- Call predefined pipelines or steps,\n- Make remote HTTP API calls,\n- Read from or write to databases.\n\nAdditionally, you can also obtain the following steps support through the `@rainbow-o23` standard extension library:\n\n- Print PDF, Word, Excel, CSV,\n- Manipulate AWS S3 objects.\n\n> The latest step support can be found on [Github](https://github.com/InsureMO/rainbow-o23).\n";
+const markdown$2 = "Parse parameters from the [URL Search](https://developer.mozilla.org/en-US/docs/Web/API/URL/searchParams). For example, can parse the `name`\nand `age` parameters from `https://example.com/?name=Jonathan%20Smith&age=18`.\n\nTo specify receiving multiple query parameters, use commas or semicolons as separators.\n";
+const markdown$1 = "The route of the API, excluding the HTTP protocol scheme, domain name, and port parts. The context of the URL path can also be\nspecified via the system environment variable `CFG_APP_CONTEXT`.\n\n> It should start with `/`.\n\n`route` syntax can be referenced from [nestjs - routing](https://docs.nestjs.com/controllers#routing)\nand [nestjs - route parameters](https://docs.nestjs.com/controllers#route-parameters), as well\nas [express](https://expressjs.com/en/guide/routing.html). Generally, there are the following rules:\n\n- Use regex for matching, but it's not recommended.\n- Define parameters with `:` prefix, for example `:name`, ensuring parameter names conform to the regex pattern `[A-Za-z0-9_]`.\n- For parsing multiple parameters, use `/`, `.`, or `-` as separators. \n";
+const markdown = "- `Pipeline`: A predefined pipeline that can be invoked by other pipelines and can also be executed during application\n  initialization. If specified to execute during application initialization, it cannot be used at runtime, and the initialization is\n  parameterless.\n- `Pipelne as API`: A predefined pipeline exposed as an API, which cannot be invoked by other pipelines.\n- `Step Set`: A predefined set of steps that can be invoked by other pipelines.\n- `Step`: A predefined step that can be invoked by other pipelines.\n";
+const docs = {
+  pipeline: markdown$3,
+  pipelineCode: markdown$b,
+  pipelineEnabled: markdown$a,
+  pipelineType: markdown,
+  pipelineInitOnly: markdown$6,
+  pipelineRoute: markdown$1,
+  pipelineMethod: markdown$5,
+  pipelineHeaders: markdown$7,
+  pipelinePathParams: markdown$4,
+  pipelineQueryParams: markdown$2,
+  pipelineBody: markdown$c,
+  pipelineExposeFile: markdown$9,
+  pipelineExposeHeaders: markdown$8
 };
+const HelpDocs = {
+  ...docs
+};
+const elementCode = {
+  code: "code",
+  label: "Code",
+  anchor: "code",
+  badge: (model) => {
+    if (VUtils.isNotBlank(model.code)) {
+      return model.code.trim();
+    } else {
+      return React.createElement(ConfigurableElementBadgeMissed, null);
+    }
+  },
+  editor: (props) => {
+    const { model, onValueChanged } = props;
+    const onValueChange = (value) => {
+      model.code = value;
+      onValueChanged();
+    };
+    return React.createElement(UnwrappedInput, { onValueChange, value: model.code ?? "" });
+  },
+  helpDoc: HelpDocs.pipelineCode
+};
+const elementEnabled = {
+  code: "enabled",
+  label: "Enabled",
+  anchor: "enabled",
+  badge: (model) => model.enabled !== false ? React.createElement(ConfigurableElementBadgeChecked, null) : React.createElement(ConfigurableElementBadgeBanned, null),
+  editor: (props) => {
+    const { model, onValueChanged } = props;
+    const onValueChange = (value) => {
+      model.enabled = value;
+      onValueChanged();
+    };
+    return React.createElement(UnwrappedCheckbox, { onValueChange, value: model.enabled ?? true });
+  },
+  helpDoc: HelpDocs.pipelineEnabled
+};
+const VerticalLinesEditorContainer = qe.div.attrs({ [DOM_KEY_WIDGET]: "o23-playground-edit-dialog-specific-element-editor-vertical" })`
+    display: grid;
+    position: relative;
+    grid-template-columns: 1fr;
+    grid-row-gap: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_SPECIFIC_GRID_ROW_GAP};
+
+    > div[data-w=d9-deco-input][data-di-prefix-text=true] {
+        &[data-disabled=true] > span:first-child {
+            cursor: default;
+            background-color: ${CssVars.DISABLE_COLOR};
+        }
+
+        > span:first-child {
+            font-size: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_SPECIFIC_INPUT_PREFIX_FONT_SIZE};
+            transition: background-color ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION};
+        }
+    }
+`;
+const VerticalLinesEditor = (props) => {
+  return React.createElement(VerticalLinesEditorContainer, null, props.children);
+};
+const allOrArray = (value) => {
+  if (value === true) {
+    return React.createElement(ConfigurableElementBadgeAll, null);
+  } else if (Array.isArray(value)) {
+    const length = value.filter((header) => VUtils.isNotBlank(header)).length;
+    return React.createElement(ConfigurableElementBadgeCount, { count: length });
+  } else {
+    return React.createElement(ConfigurableElementBadgeIgnored, null);
+  }
+};
+const ANCHOR_TYPE = "type";
+const ANCHOR_ROUTE = "route";
+const ANCHOR_PATH_PARAMS = "path-params";
+const visibleOnPipeline = (model) => model.type === "pipeline";
+const visibleOnNotApi = (model) => visibleOnPipeline(model) && model.api !== true;
+const visibleOnApi = (model) => visibleOnPipeline(model) && model.api === true;
+const AllIgnoredOrArrayOptions = [
+  { value: "all", label: Labels.All },
+  { value: "ignored", label: Labels.Ignored },
+  { value: "specified", label: Labels.Specified }
+];
+const AllIgnoredOrArrayEditor = (props) => {
+  var _a;
+  const { model, onValueChanged, name, lead } = props;
+  const inputRef = reactExports.useRef(null);
+  const writeToModel = (value2) => {
+    const array = (value2 ?? "").split(/[,;]/).map((header) => header.trim()).filter((header) => VUtils.isNotBlank(header));
+    if (array.length === 0) {
+      model[name] = [];
+    } else {
+      model[name] = array;
+    }
+  };
+  const onValueChange = (value2) => {
+    var _a2;
+    if (value2 === "all") {
+      model[name] = true;
+    } else if (value2 === "ignored") {
+      delete model[name];
+    } else {
+      writeToModel((_a2 = model.temporary) == null ? void 0 : _a2[name]);
+      setTimeout(() => {
+        var _a3, _b;
+        return (_b = (_a3 = inputRef.current) == null ? void 0 : _a3.querySelector("input")) == null ? void 0 : _b.focus();
+      }, 50);
+    }
+    onValueChanged();
+  };
+  const onArrayValueChange = (value2) => {
+    writeToModel(value2);
+    model.temporary = { ...model.temporary ?? {}, [name]: value2 };
+    onValueChanged();
+  };
+  const value = model[name] == null ? "ignored" : model[name] === true ? "all" : "specified";
+  return React.createElement(
+    VerticalLinesEditor,
+    null,
+    React.createElement(UnwrappedDropdown, { value, onValueChange, options: AllIgnoredOrArrayOptions, clearable: false, style: { justifySelf: "start", width: "unset", minWidth: "min(200px, 100%)" } }),
+    React.createElement(UnwrappedDecorateInput, { leads: [lead], value: ((_a = model.temporary) == null ? void 0 : _a[name]) ?? "", onValueChange: onArrayValueChange, disabled: value !== "specified", ref: inputRef, "data-di-prefix-text": true })
+  );
+};
+const elementInitOnly = {
+  code: "initOnly",
+  label: "Execute on Initializing",
+  anchor: "initOnly",
+  badge: (model) => model.initOnly !== true ? React.createElement(ConfigurableElementBadgeChecked, null) : React.createElement(ConfigurableElementBadgeBanned, null),
+  visibleOn: [ANCHOR_TYPE],
+  visible: visibleOnNotApi,
+  editor: (props) => {
+    const { model, onValueChanged } = props;
+    const onValueChange = (value) => {
+      model.initOnly = value;
+      onValueChanged();
+    };
+    return React.createElement(UnwrappedCheckbox, { onValueChange, value: model.initOnly ?? false });
+  },
+  helpDoc: HelpDocs.pipelineInitOnly
+};
+const ParseIgnoredOrDefaultOptions = [
+  { value: "default", label: Labels.BodyFollowHttpMethod },
+  { value: "ignored", label: Labels.Ignored },
+  { value: "parse", label: Labels.ParseBody }
+];
+const elementBody = {
+  code: "body",
+  label: "Body",
+  anchor: "body",
+  badge: (model) => {
+    if (model.body === true) {
+      return React.createElement(ConfigurableElementBadgeChecked, null);
+    } else {
+      return React.createElement(ConfigurableElementBadgeIgnored, null);
+    }
+  },
+  editor: (props) => {
+    const { model, onValueChanged } = props;
+    const onValueChange = (value2) => {
+      if (value2 === "default") {
+        delete model.body;
+      } else {
+        model.body = value2 !== "ignored";
+      }
+      onValueChanged();
+    };
+    const value = model.body == null ? "default" : model.body ? "parse" : "ignored";
+    return React.createElement(UnwrappedDropdown, { value, onValueChange, options: ParseIgnoredOrDefaultOptions, clearable: false, style: { justifySelf: "start", width: "unset", minWidth: "min(200px, 100%)" } });
+  },
+  helpDoc: HelpDocs.pipelineBody
+};
+const elementFiles = {
+  code: "files",
+  label: "Files",
+  anchor: "files",
+  badge: (model) => {
+    if (model.files != null && model.files !== false) {
+      return React.createElement(ConfigurableElementBadgeChecked, null);
+    } else {
+      return React.createElement(ConfigurableElementBadgeIgnored, null);
+    }
+  }
+};
+const HeadersEditor = (props) => {
+  return React.createElement(AllIgnoredOrArrayEditor, { ...props, name: "headers", lead: Labels.ParameterNames });
+};
+const elementHeaders = {
+  code: "headers",
+  label: "Headers",
+  anchor: "headers",
+  badge: (model) => allOrArray(model.headers),
+  editor: HeadersEditor,
+  helpDoc: HelpDocs.pipelineHeaders
+};
+const elementMethod = {
+  code: "method",
+  label: "Method",
+  anchor: "method",
+  badge: (model) => {
+    if (VUtils.isNotBlank(model.method)) {
+      return model.method.trim().toUpperCase();
+    } else {
+      return React.createElement(ConfigurableElementBadgeMissed, null);
+    }
+  },
+  editor: (props) => {
+    const { model, onValueChanged } = props;
+    const onValueChange = (value) => {
+      model.method = value;
+      onValueChanged();
+    };
+    const options = [
+      { value: "get", label: "GET" },
+      { value: "post", label: "POST" },
+      { value: "put", label: "PUT" },
+      { value: "delete", label: "DELETE" },
+      { value: "patch", label: "PATCH" }
+    ];
+    return React.createElement(UnwrappedDropdown, { value: model.method ?? "", onValueChange, options, clearable: false, style: { justifySelf: "start", width: "unset", minWidth: "min(200px, 100%)" } });
+  },
+  helpDoc: HelpDocs.pipelineMethod
+};
+const PathParamsEditor = (props) => {
+  var _a;
+  const { model, onValueChanged } = props;
+  const writeToModel = (value2) => {
+    const array = (value2 ?? "").split(/[,;]/).map((header) => header.trim()).filter((header) => VUtils.isNotBlank(header));
+    if (array.length === 0) {
+      model.pathParams = [];
+    } else {
+      model.pathParams = array;
+    }
+  };
+  const onValueChange = (value2) => {
+    var _a2;
+    if (value2 === "all") {
+      model.pathParams = true;
+    } else if (value2 === "ignored") {
+      delete model.pathParams;
+    } else {
+      writeToModel((_a2 = model.temporary) == null ? void 0 : _a2.pathParams);
+    }
+    onValueChanged();
+  };
+  const value = model.pathParams == null ? "ignored" : model.pathParams === true ? "all" : "specified";
+  return React.createElement(
+    VerticalLinesEditor,
+    null,
+    React.createElement(UnwrappedDropdown, { value, onValueChange, options: AllIgnoredOrArrayOptions, clearable: false, style: { justifySelf: "start", width: "unset", minWidth: "min(200px, 100%)" } }),
+    React.createElement(UnwrappedDecorateInput, { leads: [Labels.ParameterNames], value: ((_a = model.temporary) == null ? void 0 : _a.pathParams) ?? "", onValueChange: VUtils.noop, disabled: true, "data-di-prefix-text": true })
+  );
+};
+const elementPathParams = {
+  code: "pathParams",
+  label: "Path Parameters",
+  anchor: ANCHOR_PATH_PARAMS,
+  badge: (model) => allOrArray(model.pathParams),
+  changeBy: [ANCHOR_ROUTE],
+  editor: PathParamsEditor,
+  helpDoc: HelpDocs.pipelinePathParams
+};
+const QueryParamsEditor = (props) => {
+  return React.createElement(AllIgnoredOrArrayEditor, { ...props, name: "queryParams", lead: Labels.ParameterNames });
+};
+const elementQueryParams = {
+  code: "queryParams",
+  label: "Query Parameters",
+  anchor: "query-params",
+  badge: (model) => allOrArray(model.queryParams),
+  editor: QueryParamsEditor,
+  helpDoc: HelpDocs.pipelineQueryParams
+};
+const elementRequest = {
+  code: "request",
+  label: "Request",
+  anchor: "request",
+  children: [
+    elementMethod,
+    elementHeaders,
+    elementPathParams,
+    elementQueryParams,
+    elementBody,
+    elementFiles
+  ],
+  visibleOn: [ANCHOR_TYPE],
+  visible: visibleOnApi,
+  group: true
+};
+const elementExposeFile = {
+  code: "exposeFile",
+  label: "Expose File",
+  anchor: "expose-file",
+  badge: (model) => {
+    if (model.exposeFile === true) {
+      return React.createElement(ConfigurableElementBadgeChecked, null);
+    } else {
+      return React.createElement(ConfigurableElementBadgeNotAvailable, null);
+    }
+  },
+  editor: (props) => {
+    const { model, onValueChanged } = props;
+    const onValueChange = (value) => {
+      model.exposeFile = value;
+      onValueChanged();
+    };
+    return React.createElement(UnwrappedCheckbox, { onValueChange, value: model.exposeFile ?? false });
+  },
+  helpDoc: HelpDocs.pipelineExposeFile
+};
+const elementExposeHeaders = {
+  code: "exposeHeaders",
+  label: "Expose Headers",
+  anchor: "expose-headers",
+  badge: (model) => {
+    const count = Object.keys(model.exposeHeaders ?? {}).length;
+    if (count !== 0) {
+      return React.createElement(ConfigurableElementBadgeCount, { count });
+    } else {
+      return React.createElement(ConfigurableElementBadgeNotAvailable, null);
+    }
+  },
+  editor: (props) => {
+    var _a, _b;
+    const { model, onValueChanged } = props;
+    const onValueChange = (value) => {
+      model.temporary = { ...model.temporary ?? {}, exposeHeaders: value };
+      model.exposeHeaders = value.split("\n").filter((line) => VUtils.isNotBlank(line)).map((line) => [line, line.split(":", 1)[0]]).filter(([, key]) => VUtils.isNotBlank(key)).map(([line, key]) => [key, line.substring(key.length + 1)]).map(([key, value2]) => [key.trim(), (value2 ?? "").trim()]).reduce((acc, [key, value2]) => {
+        acc[key] = value2;
+        return acc;
+      }, {});
+      onValueChanged();
+    };
+    const rows = (((_a = model.temporary) == null ? void 0 : _a.exposeHeaders) ?? "").split("\n").length;
+    return React.createElement(UnwrappedTextarea, { value: ((_b = model.temporary) == null ? void 0 : _b.exposeHeaders) ?? "", onValueChange, style: {
+      height: `calc(${rows} * ${CssVars.LINE_HEIGHT} + ((${CssVars.INPUT_HEIGHT} - ${CssVars.LINE_HEIGHT}) / 2 - ${CssVars.BORDER_WIDTH}) * 2)`,
+      maxHeight: `calc(10 * ${CssVars.LINE_HEIGHT} + ((${CssVars.INPUT_HEIGHT} - ${CssVars.LINE_HEIGHT}) / 2 - ${CssVars.BORDER_WIDTH}) * 2)`
+    } });
+  },
+  helpDoc: HelpDocs.pipelineExposeHeaders
+};
+const elementResponse = {
+  code: "response",
+  label: "Response",
+  anchor: "response",
+  children: [elementExposeHeaders, elementExposeFile],
+  visibleOn: [ANCHOR_TYPE],
+  visible: visibleOnApi,
+  group: true
+};
+const RouteEditor = (props) => {
+  const { model, onValueChanged } = props;
+  const { fire } = useEditDialogEventBus();
+  const onValueChange = (value) => {
+    model.route = value;
+    const pathParamNames = model.route.split(/[/.-]/).map((name) => name.trim()).filter((name) => name.startsWith(":")).map((name) => name.substring(1));
+    model.temporary = { ...model.temporary ?? {}, pathParams: pathParamNames.join(", ") };
+    if (model.pathParams != null && model.pathParams !== true) {
+      model.pathParams = pathParamNames;
+      fire(EditDialogEventTypes.ELEMENT_VALUE_CHANGED, ANCHOR_PATH_PARAMS);
+    }
+    onValueChanged();
+  };
+  return React.createElement(UnwrappedInput, { onValueChange, value: model.route ?? "" });
+};
+const elementRoute = {
+  code: "route",
+  label: "Route",
+  anchor: ANCHOR_ROUTE,
+  badge: (model) => {
+    if (VUtils.isNotBlank(model.route)) {
+      return model.route.trim();
+    } else {
+      return React.createElement(ConfigurableElementBadgeMissed, null);
+    }
+  },
+  visibleOn: [ANCHOR_TYPE],
+  visible: visibleOnApi,
+  editor: RouteEditor,
+  helpDoc: HelpDocs.pipelineRoute
+};
+const elementType = {
+  code: "type",
+  label: "Type",
+  anchor: ANCHOR_TYPE,
+  badge: (model) => {
+    switch (true) {
+      case (model.type === "pipeline" && model.api === true):
+        return Labels.PipelineTypeApi;
+      case model.type === "pipeline":
+        return Labels.PipelineTypePipeline;
+      case model.type === "step-sets":
+        return Labels.PipelineTypeStepSet;
+      case model.type === "step":
+        return Labels.PipelineTypeStep;
+      default:
+        return React.createElement(ConfigurableElementBadgeMissed, null);
+    }
+  },
+  editor: (props) => {
+    const { model, onValueChanged } = props;
+    const onValueChange = (value2) => {
+      if (value2 === "api") {
+        model.type = "pipeline";
+        model.api = true;
+      } else if (value2 === "pipeline") {
+        model.type = "pipeline";
+        model.api = false;
+      } else {
+        model.type = value2;
+        delete model.api;
+      }
+      onValueChanged();
+    };
+    const value = (model.api === true ? "api" : model.type) ?? "pipeline";
+    const options = [
+      { value: "pipeline", label: Labels.PipelineTypePipeline },
+      { value: "api", label: Labels.PipelineTypeApi },
+      { value: "step-sets", label: Labels.PipelineTypeStepSet },
+      { value: "step", label: Labels.PipelineTypeStep }
+    ];
+    return React.createElement(UnwrappedDropdown, { value, onValueChange, options, clearable: false, style: { justifySelf: "start", width: "unset", minWidth: "min(200px, 100%)" } });
+  },
+  helpDoc: HelpDocs.pipelineType,
+  children: [elementInitOnly, elementRoute, elementRequest, elementResponse]
+};
+class FileDefLoader {
+  constructor(options) {
+    __publicField(this, "_redress");
+    this._redress = options == null ? void 0 : options.redress;
+  }
+  dashToCamel(key) {
+    return key.replace(/-(.)/g, (_, group1) => group1.toUpperCase());
+  }
+  redressKeyCase(given) {
+    if (given == null) {
+      return given;
+    } else if (Array.isArray(given)) {
+      return given.map((item) => this.redressKeyCase(item));
+    } else if (typeof given === "object") {
+      return Object.keys(given).reduce((redressed, key) => {
+        if (key.indexOf("-") !== -1) {
+          redressed[this.dashToCamel(key)] = this.redressKeyCase(given[key]);
+        } else {
+          redressed[key] = this.redressKeyCase(given[key]);
+        }
+        return redressed;
+      }, {});
+    } else {
+      return given;
+    }
+  }
+  redressDef(given) {
+    if (this._redress) {
+      given = this._redress(given);
+    }
+    return this.redressKeyCase(given);
+  }
+  parse(content) {
+    const def = this.doParse(content);
+    return this.redressDef(def);
+  }
+}
+class YamlDefLoader extends FileDefLoader {
+  doParse(content) {
+    try {
+      return jsYaml.load(content);
+    } catch (e) {
+      console.group("Failed to parse yaml content to O23 definition.");
+      console.error(e);
+      console.log(content);
+      console.groupEnd();
+      throw new Error("Failed to parse yaml content to O23 definition.");
+    }
+  }
+}
+const isPipelineDef = (def) => def.type === "pipeline";
+const isStepSetsDef = (def) => def.type === "step-sets";
 const prepareModel = (def) => {
+  var _a, _b, _c;
   const model = {
     code: def.code,
     type: def.type,
@@ -1455,6 +2035,12 @@ const prepareModel = (def) => {
       pipelineModel.files = pipeline.files;
       pipelineModel.exposeHeaders = pipeline.exposeHeaders;
       pipelineModel.exposeFile = pipeline.exposeFile;
+      pipelineModel.temporary = {
+        headers: pipeline.headers === true ? void 0 : (_a = pipeline.headers) == null ? void 0 : _a.filter((header) => VUtils.isNotBlank(header)).join(", "),
+        pathParams: pipeline.pathParams === true ? void 0 : (_b = pipeline.pathParams) == null ? void 0 : _b.filter((param) => VUtils.isNotBlank(param)).join(", "),
+        queryParams: pipeline.queryParams === true ? void 0 : (_c = pipeline.queryParams) == null ? void 0 : _c.filter((param) => VUtils.isNotBlank(param)).join(", "),
+        exposeHeaders: pipeline.exposeHeaders === null ? void 0 : Object.keys(pipeline.exposeHeaders).map((key) => key.trim()).filter((key) => VUtils.isNotEmpty(key)).sort((a, b) => a.localeCompare(b, void 0, { sensitivity: "base" })).map((key) => `${key}: ${pipeline.exposeHeaders[key] ?? ""}`).join("\n") + "\n"
+      };
     } else {
       pipelineModel.api = false;
     }
@@ -1464,218 +2050,35 @@ const prepareModel = (def) => {
   }
   return model;
 };
-const allOrArray = (value) => {
-  if (value === true) {
-    return React.createElement(ConfigurableElementBadgeAll, null);
-  } else if (Array.isArray(value)) {
-    const length = value.filter((header) => VUtils.isNotBlank(header)).length;
-    return React.createElement(ConfigurableElementBadgeCount, { count: length });
-  } else {
-    return React.createElement(ConfigurableElementBadgeIgnored, null);
-  }
-};
-const visibleOnPipeline = (model) => model.type === "pipeline";
-const visibleOnApi = (model) => visibleOnPipeline(model) && model.api === true;
-const elementCode = {
-  code: "code",
-  label: "Code",
-  anchor: "code",
-  badge: (model) => {
-    if (VUtils.isNotBlank(model.code)) {
-      return model.code.trim();
-    } else {
-      return React.createElement(ConfigurableElementBadgeMissed, null);
-    }
-  },
-  editor: (model) => {
-    const onValueChange = (value) => {
-      model.code = value;
-    };
-    return React.createElement(UnwrappedInput, { onValueChange, value: model.code ?? "" });
-  },
-  helpDoc: HelpDocs.pipelineCode
-};
-const elementEnabled = {
-  code: "enabled",
-  label: "Enabled",
-  anchor: "enabled",
-  badge: (model) => model.enabled !== false ? React.createElement(ConfigurableElementBadgeChecked, null) : React.createElement(ConfigurableElementBadgeBanned, null),
-  editor: (model) => {
-    const onValueChange = (value) => {
-      model.enabled = value;
-    };
-    return React.createElement(UnwrappedCheckbox, { onValueChange, value: model.enabled ?? true });
-  },
-  helpDoc: HelpDocs.pipelineEnabled
-};
-const elementRoute = {
-  code: "route",
-  label: "Route",
-  anchor: "route",
-  badge: (model) => {
-    if (VUtils.isNotBlank(model.route)) {
-      return model.route.trim();
-    } else {
-      return React.createElement(ConfigurableElementBadgeMissed, null);
-    }
-  },
-  visible: visibleOnApi
-};
-const elementMethod = {
-  code: "method",
-  label: "Method",
-  anchor: "method",
-  badge: (model) => {
-    if (VUtils.isNotBlank(model.method)) {
-      return model.method.trim().toUpperCase();
-    } else {
-      return React.createElement(ConfigurableElementBadgeMissed, null);
-    }
-  }
-};
-const elementHeaders = {
-  code: "headers",
-  label: "Headers",
-  anchor: "headers",
-  badge: (model) => {
-    return allOrArray(model.headers);
-  }
-};
-const elementPathParams = {
-  code: "pathParams",
-  label: "Path Parameters",
-  anchor: "path-params",
-  badge: (model) => {
-    return allOrArray(model.pathParams);
-  }
-};
-const elementQueryParams = {
-  code: "queryParams",
-  label: "Query Parameters",
-  anchor: "query-params",
-  badge: (model) => {
-    return allOrArray(model.queryParams);
-  }
-};
-const elementBody = {
-  code: "body",
-  label: "Body",
-  anchor: "body",
-  badge: (model) => {
-    if (model.body === true) {
-      return React.createElement(ConfigurableElementBadgeChecked, null);
-    } else {
-      return React.createElement(ConfigurableElementBadgeIgnored, null);
-    }
-  }
-};
-const elementFiles = {
-  code: "files",
-  label: "Files",
-  anchor: "files",
-  badge: (model) => {
-    if (model.files != null && model.files !== false) {
-      return React.createElement(ConfigurableElementBadgeChecked, null);
-    } else {
-      return React.createElement(ConfigurableElementBadgeIgnored, null);
-    }
-  }
-};
-const elementRequest = {
-  code: "request",
-  label: "Request",
-  anchor: "request",
-  children: [
-    elementMethod,
-    elementHeaders,
-    elementPathParams,
-    elementQueryParams,
-    elementBody,
-    elementFiles
-  ],
-  visible: visibleOnApi
-};
-const elementExposeHeaders = {
-  code: "exposeHeaders",
-  label: "Expose Headers",
-  anchor: "expose-headers",
-  badge: (model) => {
-    const count = Object.keys(model.exposeHeaders ?? {}).length;
-    if (count !== 0) {
-      return React.createElement(ConfigurableElementBadgeCount, { count });
-    } else {
-      return React.createElement(ConfigurableElementBadgeNotAvailable, null);
-    }
-  }
-};
-const elementExposeFile = {
-  code: "exposeFile",
-  label: "Expose File",
-  anchor: "expose-file",
-  badge: (model) => {
-    if (model.exposeFile === true) {
-      return React.createElement(ConfigurableElementBadgeChecked, null);
-    } else {
-      return React.createElement(ConfigurableElementBadgeNotAvailable, null);
-    }
-  }
-};
-const elementResponse = {
-  code: "response",
-  label: "Response",
-  anchor: "response",
-  children: [elementExposeHeaders, elementExposeFile],
-  visible: visibleOnApi
-};
-const elementType = {
-  code: "type",
-  label: "Type",
-  anchor: "type",
-  badge: (model) => {
-    switch (true) {
-      case model.api === true:
-        return "REST API";
-      case model.type === "pipeline":
-        return "Pipeline";
-      case model.type === "step-sets":
-        return "Step Sets";
-      case model.type === "step":
-        return "Step";
-      default:
-        return React.createElement(ConfigurableElementBadgeMissed, null);
-    }
-  },
-  children: [elementRoute, elementRequest, elementResponse]
-};
 const elements = [elementCode, elementEnabled, elementType];
-const RestApiVariablePortContainer = qe.div.attrs({ [DOM_KEY_WIDGET]: "o23-playground-rest-api-variable-port" })`
+const ApiVariablePortContainer = qe.div.attrs({ [DOM_KEY_WIDGET]: "o23-playground-api-variable-port" })`
     display: flex;
     position: relative;
     align-self: end;
     align-items: center;
     justify-self: start;
-    color: ${PlaygroundCssVars.NODE_REST_API_VARIABLE_PORT_COLOR};
-    background: ${PlaygroundCssVars.NODE_REST_API_VARIABLE_PORT_BACKGROUND};
+    color: ${PlaygroundCssVars.NODE_API_VARIABLE_PORT_COLOR};
+    background: ${PlaygroundCssVars.NODE_API_VARIABLE_PORT_BACKGROUND};
     height: ${PlaygroundCssVars.NODE_PORT_HEIGHT};
-    border: ${PlaygroundCssVars.NODE_REST_API_VARIABLE_PORT_BORDER};
+    border: ${PlaygroundCssVars.NODE_API_VARIABLE_PORT_BORDER};
     border-top-right-radius: calc(${PlaygroundCssVars.NODE_PORT_HEIGHT} / 2);
     border-bottom-right-radius: calc(${PlaygroundCssVars.NODE_PORT_HEIGHT} / 2);
-    font-weight: ${PlaygroundCssVars.NODE_REST_API_VARIABLE_PORT_FONT_WEIGHT};
-    font-size: ${PlaygroundCssVars.NODE_REST_API_VARIABLE_PORT_FONT_SIZE};
+    font-weight: ${PlaygroundCssVars.NODE_API_VARIABLE_PORT_FONT_WEIGHT};
+    font-size: ${PlaygroundCssVars.NODE_API_VARIABLE_PORT_FONT_SIZE};
     text-transform: capitalize;
-    padding: ${PlaygroundCssVars.NODE_REST_API_VARIABLE_PORT_PADDING};
+    padding: ${PlaygroundCssVars.NODE_API_VARIABLE_PORT_PADDING};
     margin-left: -1px;
     grid-column: 1;
     white-space: nowrap;
 
     &[data-defined=false] {
-        border: ${PlaygroundCssVars.NODE_REST_API_VARIABLE_PORT_UNDEFINED_BORDER};
-        background: ${PlaygroundCssVars.NODE_REST_API_VARIABLE_PORT_UNDEFINED_BACKGROUND};
+        border: ${PlaygroundCssVars.NODE_API_VARIABLE_PORT_UNDEFINED_BORDER};
+        background: ${PlaygroundCssVars.NODE_API_VARIABLE_PORT_UNDEFINED_BACKGROUND};
     }
 
     &[data-required=true][data-defined=false] {
-        border: ${PlaygroundCssVars.NODE_REST_API_VARIABLE_PORT_LACKING_BORDER};
-        background: ${PlaygroundCssVars.NODE_REST_API_VARIABLE_PORT_LACKING_BACKGROUND};
+        border: ${PlaygroundCssVars.NODE_API_VARIABLE_PORT_LACKING_BORDER};
+        background: ${PlaygroundCssVars.NODE_API_VARIABLE_PORT_LACKING_BACKGROUND};
     }
 
     > svg:first-child {
@@ -1693,13 +2096,13 @@ const RestApiVariablePortContainer = qe.div.attrs({ [DOM_KEY_WIDGET]: "o23-playg
         font-size: 0.6em;
         font-variant: petite-caps;
         padding: 0 8px;
-        background: ${PlaygroundCssVars.NODE_REST_API_VARIABLE_PORT_BADGE_BACKGROUND};
+        background: ${PlaygroundCssVars.NODE_API_VARIABLE_PORT_BADGE_BACKGROUND};
         margin-left: 6px;
-        border: ${PlaygroundCssVars.NODE_REST_API_VARIABLE_PORT_BADGE_BORDER};
+        border: ${PlaygroundCssVars.NODE_API_VARIABLE_PORT_BADGE_BORDER};
         border-radius: calc(${PlaygroundCssVars.NODE_PORT_HEIGHT} * 0.3);
     }
 `;
-const RestApiVariablePortWidget = (props) => {
+const ApiVariablePortWidget = (props) => {
   const { label, required, defined, count, all, allAsBoolean = false, allAsGiven } = props;
   let icon;
   let badge = null;
@@ -1726,7 +2129,7 @@ const RestApiVariablePortWidget = (props) => {
     icon = React.createElement(PortUndefined, null);
   }
   return React.createElement(
-    RestApiVariablePortContainer,
+    ApiVariablePortContainer,
     { "data-required": required, "data-defined": defined },
     icon,
     React.createElement("span", null, label),
@@ -1794,13 +2197,13 @@ const StartNodeBody = qe(NodeBody).attrs({
     "--padding": PlaygroundCssVars.NODE_START_BODY_PADDING
   }
 })``;
-const RestApiMethodPortWidget = (props) => {
+const ApiMethodPortWidget = (props) => {
   const { def } = props;
   const { method } = def;
   const all = VUtils.isNotBlank(method);
-  return React.createElement(RestApiVariablePortWidget, { label: "Method", required: true, defined: all === true, all, allAsBoolean: false, allAsGiven: `${method ?? ""}`.toUpperCase().trim() });
+  return React.createElement(ApiVariablePortWidget, { label: "Method", required: true, defined: all === true, all, allAsBoolean: false, allAsGiven: `${method ?? ""}`.toUpperCase().trim() });
 };
-const RestApiHeadersPortWidget = (props) => {
+const ApiHeadersPortWidget = (props) => {
   const { def } = props;
   const { headers } = def;
   let count = void 0;
@@ -1813,9 +2216,9 @@ const RestApiHeadersPortWidget = (props) => {
       count = length;
     }
   }
-  return React.createElement(RestApiVariablePortWidget, { label: "Headers", required: false, defined: count != null || all != null, count, all });
+  return React.createElement(ApiVariablePortWidget, { label: "Headers", required: false, defined: count != null || all != null, count, all });
 };
-const RestApiPathParamsPortWidget = (props) => {
+const ApiPathParamsPortWidget = (props) => {
   const { def } = props;
   const { pathParams } = def;
   let count = void 0;
@@ -1828,9 +2231,9 @@ const RestApiPathParamsPortWidget = (props) => {
       count = length;
     }
   }
-  return React.createElement(RestApiVariablePortWidget, { label: "Path Parameters", required: false, defined: count != null || all != null, count, all });
+  return React.createElement(ApiVariablePortWidget, { label: "Path Parameters", required: false, defined: count != null || all != null, count, all });
 };
-const RestApiQueryParamsPortWidget = (props) => {
+const ApiQueryParamsPortWidget = (props) => {
   const { def } = props;
   const { queryParams } = def;
   let count = void 0;
@@ -1843,35 +2246,35 @@ const RestApiQueryParamsPortWidget = (props) => {
       count = length;
     }
   }
-  return React.createElement(RestApiVariablePortWidget, { label: "Query Parameters", required: false, defined: count != null || all != null, count, all });
+  return React.createElement(ApiVariablePortWidget, { label: "Query Parameters", required: false, defined: count != null || all != null, count, all });
 };
-const RestApiBodyPortWidget = (props) => {
+const ApiBodyPortWidget = (props) => {
   const { def } = props;
   const { body } = def;
-  return React.createElement(RestApiVariablePortWidget, { label: "Body", required: false, defined: body != null, all: body, allAsBoolean: true });
+  return React.createElement(ApiVariablePortWidget, { label: "Body", required: false, defined: body != null, all: body, allAsBoolean: true });
 };
-const RestApiFilesPortWidget = (props) => {
+const ApiFilesPortWidget = (props) => {
   const { def } = props;
   const { files } = def;
   let all = void 0;
   if (files != null && files !== false) {
     all = true;
   }
-  return React.createElement(RestApiVariablePortWidget, { label: "Files", required: false, defined: all != null, all, allAsBoolean: true });
+  return React.createElement(ApiVariablePortWidget, { label: "Files", required: false, defined: all != null, all, allAsBoolean: true });
 };
-const RestApiExposeHeadersPortWidget = (props) => {
+const ApiExposeHeadersPortWidget = (props) => {
   const { def } = props;
   const { exposeHeaders } = def;
   let count = Object.keys(exposeHeaders ?? {}).length;
   if (count === 0) {
     count = void 0;
   }
-  return React.createElement(RestApiVariablePortWidget, { label: "Expose Headers", required: false, defined: count != null, count });
+  return React.createElement(ApiVariablePortWidget, { label: "Expose Headers", required: false, defined: count != null, count });
 };
-const RestApiExposeFilePortWidget = (props) => {
+const ApiExposeFilePortWidget = (props) => {
   const { def } = props;
   const { exposeFile } = def;
-  return React.createElement(RestApiVariablePortWidget, { label: "Expose File", required: false, defined: exposeFile != null, all: exposeFile, allAsBoolean: true });
+  return React.createElement(ApiVariablePortWidget, { label: "Expose File", required: false, defined: exposeFile != null, all: exposeFile, allAsBoolean: true });
 };
 const StartNodeWidget = (props) => {
   const { node, engine } = props;
@@ -1890,7 +2293,7 @@ const StartNodeWidget = (props) => {
         return {
           isApi: false,
           showRouteLack: false,
-          secondTitle: Labels.TypeOfStandardPipeline,
+          secondTitle: Labels.PipelineTypePipeline,
           secondTitleRole: void 0
         };
       }
@@ -1898,7 +2301,7 @@ const StartNodeWidget = (props) => {
       return {
         isApi: false,
         showRouteLack: false,
-        secondTitle: Labels.TypeOfStepOrSets(def.type),
+        secondTitle: isStepSetsDef(def) ? Labels.PipelineTypeStepSet : Labels.PipelineTypeStep,
         secondTitleRole: void 0
       };
     }
@@ -1925,15 +2328,15 @@ const StartNodeWidget = (props) => {
       isApi ? React.createElement(
         React.Fragment,
         null,
-        showRouteLack ? React.createElement(RestApiVariablePortWidget, { label: "Route", required: true, defined: false }) : null,
-        React.createElement(RestApiMethodPortWidget, { def }),
-        React.createElement(RestApiHeadersPortWidget, { def }),
-        React.createElement(RestApiPathParamsPortWidget, { def }),
-        React.createElement(RestApiQueryParamsPortWidget, { def }),
-        React.createElement(RestApiBodyPortWidget, { def }),
-        React.createElement(RestApiFilesPortWidget, { def }),
-        React.createElement(RestApiExposeHeadersPortWidget, { def }),
-        React.createElement(RestApiExposeFilePortWidget, { def })
+        showRouteLack ? React.createElement(ApiVariablePortWidget, { label: "Route", required: true, defined: false }) : null,
+        React.createElement(ApiMethodPortWidget, { def }),
+        React.createElement(ApiHeadersPortWidget, { def }),
+        React.createElement(ApiPathParamsPortWidget, { def }),
+        React.createElement(ApiQueryParamsPortWidget, { def }),
+        React.createElement(ApiBodyPortWidget, { def }),
+        React.createElement(ApiFilesPortWidget, { def }),
+        React.createElement(ApiExposeHeadersPortWidget, { def }),
+        React.createElement(ApiExposeFilePortWidget, { def })
       ) : null,
       React.createElement(NextStepPortWidget, { port: node.getPort(NextStepPortModel.NAME), engine })
     )
@@ -2013,13 +2416,20 @@ const createDiagramEngine = () => {
   initEngine(engine);
   return engine;
 };
+const parseContent = (parser, content) => {
+  const def = parser.parse(content ?? "");
+  if (VUtils.isBlank(def.type)) {
+    def.type = "pipeline";
+  }
+  return def;
+};
 const EditorKernel = (props) => {
   const { content, parser } = props;
   const vwRef = reactExports.useRef(null);
   const [state, setState] = reactExports.useState(() => {
     const engine = createDiagramEngine();
     try {
-      const def = parser.parse(content ?? "");
+      const def = parseContent(parser, content ?? "");
       return { engine, content, parser, def };
     } catch (e) {
       console.error(e);
@@ -2031,7 +2441,7 @@ const EditorKernel = (props) => {
       return;
     }
     try {
-      const def = parser.parse(content ?? "");
+      const def = parseContent(parser, content ?? "");
       setState((state2) => ({ engine: state2.engine, content, parser, def }));
     } catch (e) {
       console.error(e);
