@@ -110,12 +110,13 @@ export const parseWidget = (ctx: InlineContext, text: string, offset: number): n
 };
 
 export const parseAttribute = (ctx: InlineContext, text: string, offset: number): number => {
-	const segments = text.split(ATTRIBUTE_DECLARATION_SPLITTER, 2);
+	const segments = text.split(ATTRIBUTE_DECLARATION_SPLITTER);
 	if (segments.length === 1) {
 		return -1;
 	}
 
-	const [attributeName, attributeValue] = segments;
+	const [attributeName, ...attributeValues] = segments;
+	const attributeValue = attributeValues.join(ATTRIBUTE_DECLARATION_SPLITTER);
 	let valueElements: Array<Element>;
 	if ((attributeValue ?? '').indexOf(ATTRIBUTE_VALUE_ICON_SYMBOL) != -1) {
 		const icons = attributeValue.split(';');
