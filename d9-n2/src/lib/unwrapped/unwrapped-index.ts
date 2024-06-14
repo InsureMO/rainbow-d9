@@ -41,6 +41,7 @@ import {UnwrappedRadio, UnwrappedRadioProps} from './radio';
 import {UnwrappedRadios, UnwrappedRadiosProps} from './radios';
 import {UnwrappedSection, UnwrappedSectionProps} from './section';
 import {UnwrappedTabs, UnwrappedTabsProps} from './tabs';
+import {UnwrappedTextarea, UnwrappedTextareaProps} from './textarea';
 import {UnwrappedTree, UnwrappedTreeProps} from './tree';
 import {UnwrappedWizard, UnwrappedWizardProps} from './wizard';
 
@@ -57,6 +58,7 @@ export {
 	UnwrappedDecoratePasswordInput, UnwrappedDecoratePasswordInputProps,
 	UnwrappedCheckbox, UnwrappedCheckboxProps, UnwrappedCheckboxes, UnwrappedCheckboxesProps,
 	UnwrappedRadio, UnwrappedRadioProps, UnwrappedRadios, UnwrappedRadiosProps,
+	UnwrappedTextarea, UnwrappedTextareaProps,
 	UnwrappedDropdown, UnwrappedDropdownProps,
 	UnwrappedMultiDropdown, UnwrappedMultiDropdownProps,
 	UnwrappedCalendar, UnwrappedCalendarProps,
