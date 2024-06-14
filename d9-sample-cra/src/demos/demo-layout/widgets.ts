@@ -23,7 +23,8 @@ export const DemoMenus = styled.div.attrs({
     flex-direction: column;
     height: 100vh;
     border-right: ${CssVars.BORDER};
-    overflow: auto;
+    overflow-x: hidden;
+    overflow-y: auto;
 `;
 export const DemoMenuHeader = styled.div`
     display: flex;

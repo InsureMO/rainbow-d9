@@ -403,7 +403,8 @@ export const NavigatorElementBadgeWrapper = styled.span.attrs({[DOM_KEY_WIDGET]:
         margin: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_BADGE_ICON_MARGIN};
     }
 `;
-export const NavigatorElementChildren = styled.div.attrs({[DOM_KEY_WIDGET]: 'o23-playground-edit-dialog-navigator-element-children-container'})`
+// use span since will use the css last-of-type selector
+export const NavigatorElementChildren = styled.span.attrs({[DOM_KEY_WIDGET]: 'o23-playground-edit-dialog-navigator-element-children-container'})`
     display: flex;
     position: relative;
     flex-direction: column;
@@ -446,7 +447,7 @@ export const NavigatorElementChildren = styled.div.attrs({[DOM_KEY_WIDGET]: 'o23
         }
     }
 
-    > div:nth-last-child(1 of [data-w=o23-playground-edit-dialog-navigator-element]) {
+    > div[data-w=o23-playground-edit-dialog-navigator-element]:last-of-type {
         > div[data-w=o23-playground-edit-dialog-navigator-element-label] {
             &:before {
                 display: none;

@@ -27,7 +27,13 @@ export const prepareModel = (def: FileDef): ConfigurableModel => {
 			pipelineModel.temporary = {
 				headers: pipeline.headers === true ? (void 0) : pipeline.headers?.filter(header => VUtils.isNotBlank(header)).join(', '),
 				pathParams: pipeline.pathParams === true ? (void 0) : pipeline.pathParams?.filter(param => VUtils.isNotBlank(param)).join(', '),
-				queryParams: pipeline.queryParams === true ? (void 0) : pipeline.queryParams?.filter(param => VUtils.isNotBlank(param)).join(', ')
+				queryParams: pipeline.queryParams === true ? (void 0) : pipeline.queryParams?.filter(param => VUtils.isNotBlank(param)).join(', '),
+				exposeHeaders: pipeline.exposeHeaders === null ? (void 0) : Object.keys(pipeline.exposeHeaders)
+					.map(key => key.trim())
+					.filter(key => VUtils.isNotEmpty(key))
+					.sort((a, b) => a.localeCompare(b, (void 0), {sensitivity: 'base'}))
+					.map(key => `${key}: ${pipeline.exposeHeaders![key] ?? ''}`)
+					.join('\n') + '\n'
 			};
 		} else {
 			pipelineModel.api = false;

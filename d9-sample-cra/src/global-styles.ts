@@ -165,4 +165,9 @@ export const GlobalStyles: any = createGlobalStyle`
             }
         }
     }
+
+    div[data-w=d9-playground],
+    div[data-w=o23-playground] {
+        min-height: calc(100vh - 104px);
+    }
 `;

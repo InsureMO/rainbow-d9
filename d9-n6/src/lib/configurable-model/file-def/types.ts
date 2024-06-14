@@ -24,6 +24,7 @@ export interface PipelineFileDefModel extends FileDefModel, PipelineFileDef {
 			| ApiNonameOrNamedFiles // with single name, explicitly declared it is single or multiple. default multiple is false
 			| Array<ApiNamedFile> // multiple files with multiple names
 			| ApiMultipleNamedFiles;
+		exposeHeaders?: string;
 	};
 }
 
