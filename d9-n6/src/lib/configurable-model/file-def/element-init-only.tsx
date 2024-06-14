@@ -13,7 +13,7 @@ import {PipelineFileDefModel} from './types';
 
 export const elementInitOnly: ConfigurableElement = {
 	code: 'initOnly', label: 'Execute on Initializing', anchor: 'initOnly',
-	badge: model => model.initOnly !== true
+	badge: model => model.initOnly === true
 		? <ConfigurableElementBadgeChecked/>
 		: <ConfigurableElementBadgeBanned/>,
 	visibleOn: [ANCHOR_TYPE], visible: visibleOnNotApi,
