@@ -22,9 +22,14 @@ export const Labels = {
 	PipelineTypeStepSet: <IntlLabel keys={['o23', 'pipeline', 'step-sets']} value="Step Set"/>,
 	PipelineTypeStep: <IntlLabel keys={['o23', 'pipeline', 'step']} value="Step"/>,
 	ParameterNames: <IntlLabel keys={['o23', 'parameter', 'names']} value="Names"/>,
+	BodyFollowHttpMethod: <IntlLabel keys={['o23', 'pipeline', 'body', 'follow-http-method']}
+	                                 value="Follow method default"/>,
+	ParseBody: <IntlLabel keys={['o23', 'pipeline', 'body', 'parse']} value="Parse"/>,
 
 	All: <IntlLabel keys={['o23', 'variable', 'all']} value="All"/>,
 	Ignored: <IntlLabel keys={['o23', 'variable', 'ignored']} value="Ignored"/>,
+	Designated: <IntlLabel keys={['o23', 'variable', 'designated']} value="Designated"/>,
+	Specified: <IntlLabel keys={['o23', 'variable', 'specified']} value="Specified"/>,
 	Customized: <IntlLabel keys={['o23', 'variable', 'customized']} value="Customized"/>,
 	NotAvailable: <IntlLabel keys={['o23', 'variable', 'not-available']} value="N/A"/>,
 	YesChar: <IntlLabel keys={['o23', 'variable', 'yes-char']} value="Y"/>,

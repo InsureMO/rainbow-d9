@@ -6,7 +6,9 @@ export enum EditDialogEventTypes {
 	CLOSE_HELP_DESK = 'close-help-desk',
 	ASK_HELP_DESK_OPENED = 'ask-help-desk-opened',
 
-	ELEMENT_VALUE_CHANGED = 'element-value-changed'
+	ELEMENT_VALUE_CHANGED = 'element-value-changed',
+
+	LOCATE_ELEMENT = 'locate-element'
 }
 
 export interface EditDialogEventBus {
@@ -33,6 +35,12 @@ export interface EditDialogEventBus {
 	on(type: EditDialogEventTypes.ELEMENT_VALUE_CHANGED, listener: (anchor: string) => void): this;
 
 	off(type: EditDialogEventTypes.ELEMENT_VALUE_CHANGED, listener: (anchor: string) => void): this;
+
+	fire(type: EditDialogEventTypes.LOCATE_ELEMENT, anchor: string): this;
+
+	on(type: EditDialogEventTypes.LOCATE_ELEMENT, listener: (anchor: string) => void): this;
+
+	off(type: EditDialogEventTypes.LOCATE_ELEMENT, listener: (anchor: string) => void): this;
 }
 
 const Context = createContext<EditDialogEventBus>({} as EditDialogEventBus);

@@ -1,5 +1,6 @@
 import React from 'react';
 import {Labels} from '../labels';
+import {EditDialogEventTypes, useEditDialogEventBus} from './edit-dialog-event-bus';
 import {useElementValueChange, useElementVisible} from './hooks';
 import {ConfigurableElement, ConfigurableModel} from './types';
 import {
@@ -9,10 +10,10 @@ import {
 	EditDialogPartHeader,
 	EditDialogPartTitle,
 	NavigatorElementBadge,
+	NavigatorElementChildren,
 	NavigatorElementContainer,
 	NavigatorElementLabel,
-	NavigatorElementsContainer,
-	NavigatorElementTreeLine
+	NavigatorElementsContainer
 } from './widgets';
 
 export interface DialogNavigatorElementProps {
@@ -23,25 +24,17 @@ export interface DialogNavigatorElementProps {
 }
 
 export const DialogNavigatorElementWrapper = (props: DialogNavigatorElementProps) => {
-	const {element, model, level, last} = props;
+	const {element, model, level} = props;
 	const {label, badge} = element;
 
+	const {fire} = useEditDialogEventBus();
 	useElementValueChange(element);
 
-	return <NavigatorElementContainer level={level}>
-		{level !== 0 // level starts from 0
-			? new Array(level + 1).fill(1).map((_, index) => {
-				// first level node doesn't need tree line
-				// last level node always needs tree line
-				// other levels depend on whether is the last node of the ancestor level
-				return index !== 0
-					? <NavigatorElementTreeLine level={index}
-					                            data-last-node={last[index]}
-					                            data-last-level={index === level}
-					                            key={index}/>
-					: null;
-			})
-			: null}
+	const onClicked = () => {
+		fire(EditDialogEventTypes.LOCATE_ELEMENT, element.anchor);
+	};
+
+	return <NavigatorElementContainer level={level} onClick={onClicked}>
 		<NavigatorElementLabel level={level}>{label}</NavigatorElementLabel>
 		{badge != null
 			? <NavigatorElementBadge>{badge(model)}</NavigatorElementBadge>
@@ -60,13 +53,14 @@ export const DialogNavigatorElement = (props: DialogNavigatorElementProps) => {
 	return <>
 		<DialogNavigatorElementWrapper {...props}/>
 		{element.children != null
-			? element.children
-				.filter(element => element.visible == null || element.visible(model))
-				.map((child, index, children) => {
-					return <DialogNavigatorElement element={child} model={model}
-					                               level={level + 1} last={[...last, index === children.length - 1]}
-					                               key={child.code}/>;
-				})
+			? <NavigatorElementChildren>
+				{element.children
+					.map((child, index, children) => {
+						return <DialogNavigatorElement element={child} model={model}
+						                               level={level + 1} last={[...last, index === children.length - 1]}
+						                               key={child.code}/>;
+					})}
+			</NavigatorElementChildren>
 			: null}
 	</>;
 };
@@ -81,7 +75,6 @@ export const DialogNavigatorElements = (props: DialogNavigatorProps) => {
 
 	return <NavigatorElementsContainer>
 		{elements
-			.filter(element => element.visible == null || element.visible(model))
 			.map((element, index, elements) => {
 				return <DialogNavigatorElement element={element} model={model}
 				                               level={0}

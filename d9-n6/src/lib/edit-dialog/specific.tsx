@@ -1,10 +1,11 @@
 import {useForceUpdate, VUtils} from '@rainbow-d9/n1';
-import React, {useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {ElementHelp} from '../icons';
 import {Labels} from '../labels';
 import {EditDialogEventTypes, useEditDialogEventBus} from './edit-dialog-event-bus';
 import {HelpDoc} from './help-doc';
 import {useElementVisible} from './hooks';
+import {useElementValueChangeBy} from './hooks/use-element-changed-by';
 import {ConfigurableElement, ConfigurableModel} from './types';
 import {
 	EditDialogPartBody,
@@ -28,9 +29,25 @@ export const DialogSpecificElementWrapper = (props: DialogSpecificElementProps) 
 	const {element, model} = props;
 	const {anchor, label, editor: Editor, helpDoc, group} = element;
 
-	const {fire} = useEditDialogEventBus();
+	const ref = useRef<HTMLDivElement>(null);
+	const {on, off, fire} = useEditDialogEventBus();
 	const [showHelp, setShowHelp] = useState(false);
+	useElementValueChangeBy(element);
 	const forceUpdate = useForceUpdate();
+	useEffect(() => {
+		const onLocateElement = (anchorToLocate: string) => {
+			if (anchor !== anchorToLocate) {
+				return;
+			}
+			if (ref.current != null) {
+				ref.current.scrollIntoView({behavior: 'smooth', block: 'start', inline: 'nearest'});
+			}
+		};
+		on(EditDialogEventTypes.LOCATE_ELEMENT, onLocateElement);
+		return () => {
+			off(EditDialogEventTypes.LOCATE_ELEMENT, onLocateElement);
+		};
+	}, [on, off, anchor]);
 
 	const onHelpBadgeClicked = () => setShowHelp(!showHelp);
 	const onValueChanged = () => {
@@ -41,7 +58,7 @@ export const DialogSpecificElementWrapper = (props: DialogSpecificElementProps) 
 	const hasHelpDoc = VUtils.isNotBlank(helpDoc);
 
 	return <>
-		<SpecificElementLabel data-group={group}>
+		<SpecificElementLabel data-group={group} ref={ref}>
 			<span>{label}</span>
 			{hasHelpDoc
 				? <SpecificElementHelpBadge data-visible={true} onClick={onHelpBadgeClicked}>
@@ -87,7 +104,6 @@ export const DialogSpecificElements = (props: DialogSpecificProps) => {
 
 	return <SpecificElementsContainer>
 		{elements
-			.filter(element => element.visible == null || element.visible(model))
 			.map((element) => {
 				return <DialogSpecificElement element={element} model={model} key={element.code}/>;
 			})}

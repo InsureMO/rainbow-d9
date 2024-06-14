@@ -51,6 +51,11 @@ export const EditDialog = () => {
 	</EditDialogContainer>;
 };
 
-export * from './content';
 export * from './types';
+export * from './edit-dialog-event-bus';
 export * from './exposed-widgets';
+export * from './help-desk';
+export * from './help-doc';
+export * from './navigator';
+export * from './specific';
+export * from './content';
