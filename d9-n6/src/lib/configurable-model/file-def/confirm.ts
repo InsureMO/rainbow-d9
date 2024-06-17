@@ -1,14 +1,36 @@
-import {FileDef, isPipelineDef, PipelineStepUseDef} from '../../definition';
+import {FileDef, isPipelineDef, PipelineFileDef, PipelineStepUseDef} from '../../definition';
 import {ConfigurableElementAnchor, ConfigurableModel} from '../../edit-dialog';
 import {FileDefModel, PipelineFileDefModel, StepOrSetsFileDefModel} from './types';
 
 export const confirm = (model: ConfigurableModel, def: FileDef): ConfigurableElementAnchor | true => {
-	const originalType = def.type;
+	// const originalType = def.type;
+	// const originalUse = (def as unknown as PipelineStepUseDef).use;
 
 	const edited = model as FileDefModel;
 	def.code = edited.code;
 	def.type = edited.type;
 	def.enabled = edited.enabled;
+
+	const deleteApiAttrs = (given: FileDef) => {
+		const def = given as PipelineFileDef;
+		delete def.route;
+		delete def.method;
+		delete def.headers;
+		delete def.pathParams;
+		delete def.queryParams;
+		delete def.body;
+		delete def.files;
+		delete def.exposeHeaders;
+		delete def.exposeFile;
+	};
+	const deleteNonApiAttrs = (given: FileDef) => {
+		const def = given as PipelineFileDef;
+		delete def.initOnly;
+	};
+	const deleteNonPipelineAttrs = (given: FileDef) => {
+		const def = given as unknown as PipelineStepUseDef;
+		delete def.use;
+	};
 
 	if (isPipelineDef(def)) {
 		const editedDef = edited as PipelineFileDefModel;
@@ -22,21 +44,16 @@ export const confirm = (model: ConfigurableModel, def: FileDef): ConfigurableEle
 			def.files = editedDef.files;
 			def.exposeHeaders = editedDef.exposeHeaders;
 			def.exposeFile = editedDef.exposeFile;
-			delete def.initOnly;
+			deleteNonApiAttrs(def);
 		} else {
-			delete def.route;
-			delete def.method;
-			delete def.headers;
-			delete def.pathParams;
-			delete def.queryParams;
-			delete def.body;
-			delete def.files;
-			delete def.exposeHeaders;
-			delete def.exposeFile;
 			def.initOnly = editedDef.initOnly === true;
+			deleteApiAttrs(def);
 		}
+		deleteNonPipelineAttrs(def);
 	} else {
 		(def as unknown as PipelineStepUseDef).use = (edited as StepOrSetsFileDefModel).use;
+		deleteApiAttrs(def);
+		deleteNonApiAttrs(def);
 	}
 	return true;
 };

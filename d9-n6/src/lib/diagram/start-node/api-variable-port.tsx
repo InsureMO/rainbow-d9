@@ -36,6 +36,16 @@ export const ApiVariablePortContainer = styled.div.attrs({[DOM_KEY_WIDGET]: 'o23
         background: ${PlaygroundCssVars.NODE_API_VARIABLE_PORT_LACKING_BACKGROUND};
     }
 
+    &[data-danger=true] {
+        border: ${PlaygroundCssVars.NODE_API_VARIABLE_PORT_DANGER_BORDER};
+        background: ${PlaygroundCssVars.NODE_API_VARIABLE_PORT_DANGER_BACKGROUND};
+
+        > span[data-role=count],
+        > span[data-role=all] {
+            background: ${PlaygroundCssVars.NODE_API_VARIABLE_PORT_BADGE_DANGER_BACKGROUND};
+        }
+    }
+
     > svg:first-child {
         height: 1em;
         width: 1em;
@@ -59,17 +69,18 @@ export const ApiVariablePortContainer = styled.div.attrs({[DOM_KEY_WIDGET]: 'o23
 `;
 
 export interface ApiVariableWidgetProps {
-	label: string;
+	label: ReactNode;
 	required: boolean;
 	defined: boolean;
 	count?: number;
 	all?: boolean;
 	allAsBoolean?: boolean;
 	allAsGiven?: ReactNode;
+	danger?: boolean;
 }
 
 export const ApiVariablePortWidget = (props: ApiVariableWidgetProps) => {
-	const {label, required, defined, count, all, allAsBoolean = false, allAsGiven} = props;
+	const {label, required, defined, count, all, allAsBoolean = false, allAsGiven, danger = false} = props;
 
 	let icon: JSX.Element;
 	let badge: Nullable<JSX.Element> = null;
@@ -96,7 +107,7 @@ export const ApiVariablePortWidget = (props: ApiVariableWidgetProps) => {
 		icon = <PortUndefined/>;
 	}
 
-	return <ApiVariablePortContainer data-required={required} data-defined={defined}>
+	return <ApiVariablePortContainer data-required={required} data-defined={defined} data-danger={danger}>
 		{icon}
 		<span>{label}</span>
 		{badge}

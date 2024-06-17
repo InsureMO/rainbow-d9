@@ -97,6 +97,19 @@ export const StartNodeBody = styled(NodeBody).attrs({
 	}
 })``;
 
+export const EnabledPortWidget = (props: { def: PipelineFileDef }) => {
+	const {def} = props;
+
+	const {enabled} = def;
+
+	if (enabled !== false) {
+		return null;
+	}
+
+	return <ApiVariablePortWidget label="Enabled" required={true} defined={true} all={false}
+	                              allAsBoolean={true} danger={true}/>;
+};
+
 export const ApiMethodPortWidget = (props: { def: PipelineFileDef }) => {
 	const {def} = props;
 
@@ -207,6 +220,7 @@ export const ApiExposeFilePortWidget = (props: { def: PipelineFileDef }) => {
 	return <ApiVariablePortWidget label="Expose File" required={false} defined={exposeFile != null}
 	                              all={exposeFile} allAsBoolean={true}/>;
 };
+
 export const InitOnlyPortWidget = (props: { def: PipelineFileDef }) => {
 	const {def} = props;
 
@@ -216,7 +230,8 @@ export const InitOnlyPortWidget = (props: { def: PipelineFileDef }) => {
 		return null;
 	}
 
-	return <ApiVariablePortWidget label="Body" required={false} defined={true} all={true} allAsBoolean={true}/>;
+	return <ApiVariablePortWidget label="Execute on Initializing" required={false} defined={true} all={true}
+	                              allAsBoolean={true}/>;
 };
 
 export const StartNodeWidget = (props: StartNodeWidgetProps) => {
@@ -293,6 +308,7 @@ export const StartNodeWidget = (props: StartNodeWidgetProps) => {
 			</StartNodeSecondTitle>
 		</StartNodeHeader>
 		<StartNodeBody>
+			<EnabledPortWidget def={def as PipelineFileDef}/>
 			{body}
 			<NextStepPortWidget port={node.getPort(NextStepPortModel.NAME) as NextStepPortModel} engine={engine}/>
 		</StartNodeBody>
