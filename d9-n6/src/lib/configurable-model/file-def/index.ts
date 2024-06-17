@@ -6,6 +6,8 @@ export * from './types';
 export * from './helper';
 
 export * from './prepare';
+export * from './confirm';
+export * from './discard';
 
 export * from './element-code';
 export * from './element-enabled';

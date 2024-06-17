@@ -91,6 +91,7 @@ export const prepareModel = (def: FileDef): ConfigurableModel => {
 			};
 		} else {
 			pipelineModel.api = false;
+			pipelineModel.initOnly = pipeline.initOnly;
 		}
 	} else {
 		const step = def as unknown as PipelineStepUseDef;

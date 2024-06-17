@@ -5,7 +5,7 @@ import React from 'react';
 import styled from 'styled-components';
 import {FileDefs} from '../../configurable-model';
 import {isPipelineDef, isStepSetsDef, PipelineFileDef} from '../../definition';
-import {DialogContent} from '../../edit-dialog';
+import {ConfigurableModel, DialogContent} from '../../edit-dialog';
 import {HelpDocs} from '../../help-docs';
 import {Labels} from '../../labels';
 import {PlaygroundEventTypes, usePlaygroundEventBus} from '../../playground-event-bus';
@@ -242,12 +242,8 @@ export const StartNodeWidget = (props: StartNodeWidgetProps) => {
 		}
 	})();
 
-	const onConfirm = () => {
-		// TODO
-	};
-	const onDiscard = () => {
-		// TODO
-	};
+	const onConfirm = (model: ConfigurableModel) => FileDefs.confirm(model, def);
+	const onDiscard = (model: ConfigurableModel) => FileDefs.discard(model);
 	const prepareModel = () => FileDefs.prepareModel(def);
 	const onDoubleClicked = () => {
 		fire(PlaygroundEventTypes.SHOW_EDIT_DIALOG,
