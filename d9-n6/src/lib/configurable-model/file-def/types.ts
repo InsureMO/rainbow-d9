@@ -1,7 +1,4 @@
 import {
-	ApiMultipleNamedFiles,
-	ApiNamedFile,
-	ApiNonameOrNamedFiles,
 	FileDef,
 	PipelineFileDef,
 	PipelineStepFileDef,
@@ -20,10 +17,13 @@ export interface PipelineFileDefModel extends FileDefModel, PipelineFileDef {
 		headers?: string;
 		pathParams?: string;
 		queryParams?: string;
-		files?: string // single or multiple files with single name
-			| ApiNonameOrNamedFiles // with single name, explicitly declared it is single or multiple. default multiple is false
-			| Array<ApiNamedFile> // multiple files with multiple names
-			| ApiMultipleNamedFiles;
+		files?: {
+			parse?: boolean; // parse file or not
+			list?: boolean;  // list file or not, effective on parse is true only
+			files?: string;
+			maxSize?: string;
+			mimeType?: string;
+		};
 		exposeHeaders?: string;
 	};
 }

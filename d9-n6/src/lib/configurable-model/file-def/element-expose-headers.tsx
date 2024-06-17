@@ -37,10 +37,11 @@ export const elementExposeHeaders: ConfigurableElement = {
 				}, {} as PipelineFileDefModel['exposeHeaders']);
 			onValueChanged();
 		};
-		const rows = (model.temporary?.exposeHeaders ?? '').split('\n').length;
+		const rows = Math.max((model.temporary?.exposeHeaders ?? '').split('\n').length, 3);
 
 		return <UnwrappedTextarea value={model.temporary?.exposeHeaders ?? ''} onValueChange={onValueChange}
 		                          style={{
+			                          minHeight: CssVars.INPUT_HEIGHT,
 			                          height: `calc(${rows} * ${CssVars.LINE_HEIGHT} + ((${CssVars.INPUT_HEIGHT} - ${CssVars.LINE_HEIGHT}) / 2 - ${CssVars.BORDER_WIDTH}) * 2)`,
 			                          maxHeight: `calc(10 * ${CssVars.LINE_HEIGHT} + ((${CssVars.INPUT_HEIGHT} - ${CssVars.LINE_HEIGHT}) / 2 - ${CssVars.BORDER_WIDTH}) * 2)`
 		                          }}/>;

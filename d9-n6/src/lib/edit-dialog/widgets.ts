@@ -108,11 +108,23 @@ export const EditorDialogCloser = styled.div.attrs({[DOM_KEY_WIDGET]: 'o23-playg
     align-items: center;
     top: ${PlaygroundCssVars.EDIT_DIALOG_CLOSER_TOP};
     right: 0;
+`;
+export const EditorDialogCloseButton = styled.div.attrs({[DOM_KEY_WIDGET]: 'o23-playground-edit-dialog-close-button'})`
+    display: flex;
+    position: relative;
+    align-items: center;
     color: ${PlaygroundCssVars.EDIT_DIALOG_CLOSER_ICON_COLOR};
     font-size: ${PlaygroundCssVars.EDIT_DIALOG_CLOSER_FONT_SIZE};
     font-weight: ${PlaygroundCssVars.EDIT_DIALOG_CLOSER_FONT_WEIGHT};
     padding: ${PlaygroundCssVars.EDIT_DIALOG_CLOSER_PADDING};
     cursor: pointer;
+    transition: transform ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION};
+
+    &[data-role=confirm]:hover,
+    &[data-role=discard]:hover {
+        transform: scale(1.05);
+        transform-origin: center;
+    }
 
     > svg {
         height: ${PlaygroundCssVars.EDIT_DIALOG_CLOSER_ICON_SIZE};

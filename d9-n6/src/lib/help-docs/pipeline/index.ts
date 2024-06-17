@@ -3,6 +3,7 @@ import {markdown as pipelineCode} from './code.md';
 import {markdown as pipelineEnabled} from './enabled.md';
 import {markdown as pipelineExposeFile} from './expose-file.md';
 import {markdown as pipelineExposeHeaders} from './expose-headers.md';
+import {markdown as pipelineFiles} from './files.md';
 import {markdown as pipelineHeaders} from './headers.md';
 import {markdown as pipelineInitOnly} from './init-only.md';
 import {markdown as pipelineMethod} from './method.md';
@@ -17,6 +18,6 @@ export const docs = {
 	pipelineCode, pipelineEnabled, pipelineType,
 	pipelineInitOnly,
 	pipelineRoute, pipelineMethod, pipelineHeaders, pipelinePathParams, pipelineQueryParams,
-	pipelineBody,
+	pipelineBody, pipelineFiles,
 	pipelineExposeFile, pipelineExposeHeaders
 };

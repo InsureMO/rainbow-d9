@@ -15,7 +15,8 @@ export const Labels = {
 	HelpDesk: <IntlLabel keys={['o23', 'dialog', 'docs', 'title']} value="Help Desk"/>,
 	Navigator: <IntlLabel keys={['o23', 'dialog', 'navigator', 'title']} value="Configurable Elements"/>,
 	Specific: <IntlLabel keys={['o23', 'dialog', 'specific', 'title']} value="Specific Details"/>,
-	BackToCanvas: <IntlLabel keys={['o23', 'dialog', 'close']} value="Back to canvas"/>,
+	ConfirmContent: <IntlLabel keys={['o23', 'dialog', 'confirm']} value="Confirm"/>,
+	DiscardContent: <IntlLabel keys={['o23', 'dialog', 'discard']} value="Discard"/>,
 
 	PipelineTypeApi: <IntlLabel keys={['o23', 'pipeline', 'api']} value="Pipeline as API"/>,
 	PipelineTypePipeline: <IntlLabel keys={['o23', 'pipeline', 'standard']} value="Pipeline"/>,
@@ -25,12 +26,14 @@ export const Labels = {
 	BodyFollowHttpMethod: <IntlLabel keys={['o23', 'pipeline', 'body', 'follow-http-method']}
 	                                 value="Follow method default"/>,
 	ParseBody: <IntlLabel keys={['o23', 'pipeline', 'body', 'parse']} value="Parse"/>,
+	AllFiles: <IntlLabel keys={['o23', 'pipeline', 'files', 'all']} value="Any File"/>,
+	NoFile: <IntlLabel keys={['o23', 'pipeline', 'files', 'ignored']} value="No File"/>,
+	FileMaxSize: <IntlLabel keys={['o23', 'pipeline', 'files', 'max-size']} value="Max size"/>,
+	FileMimeType: <IntlLabel keys={['o23', 'pipeline', 'files', 'mime-type']} value="Mime types"/>,
 
 	All: <IntlLabel keys={['o23', 'variable', 'all']} value="All"/>,
 	Ignored: <IntlLabel keys={['o23', 'variable', 'ignored']} value="Ignored"/>,
-	Designated: <IntlLabel keys={['o23', 'variable', 'designated']} value="Designated"/>,
 	Specified: <IntlLabel keys={['o23', 'variable', 'specified']} value="Specified"/>,
-	Customized: <IntlLabel keys={['o23', 'variable', 'customized']} value="Customized"/>,
 	NotAvailable: <IntlLabel keys={['o23', 'variable', 'not-available']} value="N/A"/>,
 	YesChar: <IntlLabel keys={['o23', 'variable', 'yes-char']} value="Y"/>,
 	NoChar: <IntlLabel keys={['o23', 'variable', 'no-char']} value="N"/>,

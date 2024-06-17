@@ -1,4 +1,5 @@
 export * from './next-step';
+export * from './accept';
 export * from './back';
 export * from './arrow-left';
 export * from './arrow-right';
