@@ -82,7 +82,7 @@ export const prepareModel = (def: FileDef): ConfigurableModel => {
 						};
 					}
 				})(),
-				exposeHeaders: pipeline.exposeHeaders === null ? (void 0) : Object.keys(pipeline.exposeHeaders)
+				exposeHeaders: pipeline.exposeHeaders == null ? (void 0) : Object.keys(pipeline.exposeHeaders)
 					.map(key => key.trim())
 					.filter(key => VUtils.isNotEmpty(key))
 					.sort((a, b) => a.localeCompare(b, (void 0), {sensitivity: 'base'}))

@@ -1,5 +1,5 @@
 import {DiagramEngine} from '@projectstorm/react-diagrams';
-import {Undefinable, VUtils} from '@rainbow-d9/n1';
+import {Undefinable, useForceUpdate, VUtils} from '@rainbow-d9/n1';
 import {DOM_KEY_WIDGET} from '@rainbow-d9/n2';
 import React from 'react';
 import styled from 'styled-components';
@@ -207,42 +207,54 @@ export const ApiExposeFilePortWidget = (props: { def: PipelineFileDef }) => {
 	return <ApiVariablePortWidget label="Expose File" required={false} defined={exposeFile != null}
 	                              all={exposeFile} allAsBoolean={true}/>;
 };
+export const InitOnlyPortWidget = (props: { def: PipelineFileDef }) => {
+	const {def} = props;
+
+	const {initOnly} = def;
+
+	if (initOnly !== true) {
+		return null;
+	}
+
+	return <ApiVariablePortWidget label="Body" required={false} defined={true} all={true} allAsBoolean={true}/>;
+};
 
 export const StartNodeWidget = (props: StartNodeWidgetProps) => {
 	const {node, engine} = props;
 
 	const {fire} = usePlaygroundEventBus();
+	const forceUpdate = useForceUpdate();
 
 	const def = node.def;
 
 	const {
-		isApi, showRouteLack, secondTitle, secondTitleRole
+		isApi, secondTitle, secondTitleRole
 	} = (() => {
 		if (isPipelineDef(def)) {
 			if (VUtils.isNotBlank(def.route)) {
 				// route defined, exposed as api
-				return {
-					isApi: true, showRouteLack: false, secondTitle: def.route.trim(), secondTitleRole: 'route'
-				};
+				return {isApi: true, secondTitle: def.route.trim(), secondTitleRole: 'route'};
 			} else {
 				// route not defined, standard pipeline
-				return {
-					isApi: false, showRouteLack: false,
-					secondTitle: Labels.PipelineTypePipeline,
-					secondTitleRole: (void 0)
-				};
+				return {isApi: false, secondTitle: Labels.PipelineTypePipeline, secondTitleRole: (void 0)};
 			}
 		} else {
 			// not a pipeline, should be a step or a step sets
 			return {
-				isApi: false, showRouteLack: false,
+				isApi: false,
 				secondTitle: isStepSetsDef(def) ? Labels.PipelineTypeStepSet : Labels.PipelineTypeStep,
 				secondTitleRole: (void 0)
 			};
 		}
 	})();
 
-	const onConfirm = (model: ConfigurableModel) => FileDefs.confirm(model, def);
+	const onConfirm = (model: ConfigurableModel) => {
+		const ret = FileDefs.confirm(model, def);
+		if (ret === true) {
+			forceUpdate();
+		}
+		return ret;
+	};
 	const onDiscard = (model: ConfigurableModel) => FileDefs.discard(model);
 	const prepareModel = () => FileDefs.prepareModel(def);
 	const onDoubleClicked = () => {
@@ -251,6 +263,22 @@ export const StartNodeWidget = (props: StartNodeWidgetProps) => {
 			               prepare={prepareModel} confirm={onConfirm} discard={onDiscard}
 			               elements={FileDefs.elements}/>);
 	};
+
+	let body = (void 0);
+	if (isApi) {
+		body = <>
+			<ApiMethodPortWidget def={def as PipelineFileDef}/>
+			<ApiHeadersPortWidget def={def as PipelineFileDef}/>
+			<ApiPathParamsPortWidget def={def as PipelineFileDef}/>
+			<ApiQueryParamsPortWidget def={def as PipelineFileDef}/>
+			<ApiBodyPortWidget def={def as PipelineFileDef}/>
+			<ApiFilesPortWidget def={def as PipelineFileDef}/>
+			<ApiExposeHeadersPortWidget def={def as PipelineFileDef}/>
+			<ApiExposeFilePortWidget def={def as PipelineFileDef}/>
+		</>;
+	} else if (isPipelineDef(def)) {
+		body = <InitOnlyPortWidget def={def as PipelineFileDef}/>;
+	}
 
 	return <StartNodeContainer onDoubleClick={onDoubleClicked}>
 		<StartNodeHeader>
@@ -265,19 +293,7 @@ export const StartNodeWidget = (props: StartNodeWidgetProps) => {
 			</StartNodeSecondTitle>
 		</StartNodeHeader>
 		<StartNodeBody>
-			{isApi
-				? <>
-					{showRouteLack ? <ApiVariablePortWidget label="Route" required={true} defined={false}/> : null}
-					<ApiMethodPortWidget def={def as PipelineFileDef}/>
-					<ApiHeadersPortWidget def={def as PipelineFileDef}/>
-					<ApiPathParamsPortWidget def={def as PipelineFileDef}/>
-					<ApiQueryParamsPortWidget def={def as PipelineFileDef}/>
-					<ApiBodyPortWidget def={def as PipelineFileDef}/>
-					<ApiFilesPortWidget def={def as PipelineFileDef}/>
-					<ApiExposeHeadersPortWidget def={def as PipelineFileDef}/>
-					<ApiExposeFilePortWidget def={def as PipelineFileDef}/>
-				</>
-				: null}
+			{body}
 			<NextStepPortWidget port={node.getPort(NextStepPortModel.NAME) as NextStepPortModel} engine={engine}/>
 		</StartNodeBody>
 	</StartNodeContainer>;
