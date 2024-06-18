@@ -1,8 +1,17 @@
 import {StandaloneRoot} from '@rainbow-d9/n1';
-import {GlobalRoot} from '@rainbow-d9/n2';
+import {$d9n2, GlobalRoot} from '@rainbow-d9/n2';
 import {useDemoMarkdown} from '../use-demo-markdown';
 import DemoData from './demo.json';
 import {markdown as DemoContent} from './demo.md';
+
+$d9n2.intl.labels['en-US'] = {
+	...($d9n2.intl.labels['en-US'] ?? {}),
+	o23: {
+		variable: {
+			enabled: 'Enabled'
+		}
+	}
+};
 
 export const O23Playground = () => {
 	const def = useDemoMarkdown(DemoContent);
