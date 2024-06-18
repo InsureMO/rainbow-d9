@@ -9,7 +9,7 @@ const QueryParamsEditor = (props: ConfigurableElementEditorProps<PipelineFileDef
 	return <AllIgnoredOrArrayEditor {...props} name="queryParams" lead={Labels.ParameterNames}/>;
 };
 export const elementQueryParams: ConfigurableElement = {
-	code: 'queryParams', label: 'Query Parameters', anchor: 'query-params',
+	code: 'queryParams', label: Labels.ApiQueryParametersLabel, anchor: 'query-params',
 	badge: (model: PipelineFileDefModel): ReactNode => allOrArray(model.queryParams),
 	editor: QueryParamsEditor,
 	helpDoc: HelpDocs.pipelineQueryParams

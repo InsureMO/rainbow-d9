@@ -18,7 +18,7 @@ const ParseIgnoredOrDefaultOptions = [
 ];
 
 export const elementBody: ConfigurableElement = {
-	code: 'body', label: 'Body', anchor: 'body',
+	code: 'body', label: Labels.ApiBodyLabel, anchor: 'body',
 	badge: (model: PipelineFileDefModel): ReactNode => {
 		if (model.body === true) {
 			return <ConfigurableElementBadgeChecked/>;

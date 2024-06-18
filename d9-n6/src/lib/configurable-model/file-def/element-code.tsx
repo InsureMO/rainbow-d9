@@ -3,10 +3,11 @@ import {UnwrappedInput} from '@rainbow-d9/n2';
 import React, {ReactNode} from 'react';
 import {ConfigurableElement, ConfigurableElementBadgeMissed, ConfigurableElementEditorProps} from '../../edit-dialog';
 import {HelpDocs} from '../../help-docs';
+import {Labels} from '../../labels';
 import {FileDefModel} from './types';
 
 export const elementCode: ConfigurableElement = {
-	code: 'code', label: 'Code', anchor: 'code',
+	code: 'code', label: Labels.Code, anchor: 'code',
 	badge: (model: FileDefModel): ReactNode => {
 		if (VUtils.isNotBlank(model.code)) {
 			return model.code.trim();

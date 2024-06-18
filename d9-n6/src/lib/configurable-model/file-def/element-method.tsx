@@ -3,10 +3,11 @@ import {UnwrappedDropdown} from '@rainbow-d9/n2';
 import React, {ReactNode} from 'react';
 import {ConfigurableElement, ConfigurableElementBadgeMissed, ConfigurableElementEditorProps} from '../../edit-dialog';
 import {HelpDocs} from '../../help-docs';
+import {Labels} from '../../labels';
 import {PipelineFileDefModel} from './types';
 
 export const elementMethod: ConfigurableElement = {
-	code: 'method', label: 'Method', anchor: 'method',
+	code: 'method', label: Labels.ApiMethodLabel, anchor: 'method',
 	badge: (model: PipelineFileDefModel): ReactNode => {
 		if (VUtils.isNotBlank(model.method)) {
 			return model.method.trim().toUpperCase();

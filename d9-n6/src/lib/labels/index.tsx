@@ -23,6 +23,21 @@ export const Labels = {
 	PipelineTypePipeline: <IntlLabel keys={['o23', 'pipeline', 'standard']} value="Pipeline"/>,
 	PipelineTypeStepSet: <IntlLabel keys={['o23', 'pipeline', 'step-sets']} value="Step Set"/>,
 	PipelineTypeStep: <IntlLabel keys={['o23', 'pipeline', 'step']} value="Step"/>,
+
+	// api attribute labels
+	ApiRouteLabel: <IntlLabel keys={['o23', 'parameter', 'api-route']} value="Route"/>,
+	ApiRequestLabel: <IntlLabel keys={['o23', 'parameter', 'api-request']} value="Request"/>,
+	ApiMethodLabel: <IntlLabel keys={['o23', 'parameter', 'api-method']} value="Method"/>,
+	ApiHeadersLabel: <IntlLabel keys={['o23', 'parameter', 'api-headers']} value="Headers"/>,
+	ApiPathParametersLabel: <IntlLabel keys={['o23', 'parameter', 'api-path-parameters']} value="Path Parameters"/>,
+	ApiQueryParametersLabel: <IntlLabel keys={['o23', 'parameter', 'api-query-parameters']} value="Query Parameters"/>,
+	ApiBodyLabel: <IntlLabel keys={['o23', 'parameter', 'api-body']} value="Body"/>,
+	ApiFilesLabel: <IntlLabel keys={['o23', 'parameter', 'api-files']} value="Files"/>,
+	ApiResponseLabel: <IntlLabel keys={['o23', 'parameter', 'api-response']} value="Response"/>,
+	ApiExposeHeadersLabel: <IntlLabel keys={['o23', 'parameter', 'api-expose-headers']} value="Expose Headers"/>,
+	ApiExposeFileLabel: <IntlLabel keys={['o23', 'parameter', 'api-expose-file']} value="Expose File"/>,
+	ExecuteOnInitLabel: <IntlLabel keys={['o23', 'parameter', 'execute-on-init']} value="Execute on Initializing"/>,
+	// api attribute configuration labels
 	ParameterNames: <IntlLabel keys={['o23', 'parameter', 'names']} value="Names"/>,
 	BodyFollowHttpMethod: <IntlLabel keys={['o23', 'pipeline', 'body', 'follow-http-method']}
 	                                 value="Follow method default"/>,
@@ -32,6 +47,11 @@ export const Labels = {
 	FileMaxSize: <IntlLabel keys={['o23', 'pipeline', 'files', 'max-size']} value="Max size"/>,
 	FileMimeType: <IntlLabel keys={['o23', 'pipeline', 'files', 'mime-type']} value="Mime types"/>,
 
+	// common variables, variable might be used in multiple places,
+	// such as attribute label, attribute configuration label, attribute configuration value label, etc.
+	Type: <IntlLabel keys={['o23', 'variable', 'type']} value="Type"/>,
+	Code: <IntlLabel keys={['o23', 'variable', 'code']} value="Code"/>,
+	Enabled: <IntlLabel keys={['o23', 'variable', 'enabled']} value="Enabled"/>,
 	All: <IntlLabel keys={['o23', 'variable', 'all']} value="All"/>,
 	Ignored: <IntlLabel keys={['o23', 'variable', 'ignored']} value="Ignored"/>,
 	Specified: <IntlLabel keys={['o23', 'variable', 'specified']} value="Specified"/>,

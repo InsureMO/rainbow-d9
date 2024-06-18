@@ -82,6 +82,7 @@ export const EditorKernel = (props: EditorProps) => {
 			return {engine, content, serializer, deserializer, def};
 		} catch (e) {
 			console.error(e);
+			engine.setModel(new DiagramModel());
 			return {engine, content, serializer, deserializer, message: e.message};
 		}
 	})());
@@ -116,10 +117,10 @@ export const EditorKernel = (props: EditorProps) => {
 			stateRef.current.deserializer = deserializer;
 			delete stateRef.current.def;
 			// replace with empty diagram model
-			const model = new DiagramModel();
-			stateRef.current.engine.setModel(model);
+			stateRef.current.engine.setModel(new DiagramModel());
 			stateRef.current.message = e.message;
 		}
+		forceUpdate();
 	}, [fire, replace, forceUpdate, serializer, deserializer, content]);
 
 	if (VUtils.isNotBlank(stateRef.current.message)) {

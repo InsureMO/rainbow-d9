@@ -13,7 +13,7 @@ export interface ConfigurableElementEditorProps<M extends ConfigurableModel = Co
 export interface ConfigurableElement {
 	// both for navigator and specific
 	code: string;
-	label: string;
+	label: ReactNode;
 	anchor: ConfigurableElementAnchor;
 	visibleOn?: Array<ConfigurableElementAnchor>;
 	visible?: (model: ConfigurableModel) => boolean;

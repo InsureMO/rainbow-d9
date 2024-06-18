@@ -9,6 +9,7 @@ import {
 	useEditDialogEventBus
 } from '../../edit-dialog';
 import {HelpDocs} from '../../help-docs';
+import {Labels} from '../../labels';
 import {ANCHOR_PATH_PARAMS, ANCHOR_ROUTE, ANCHOR_TYPE, visibleOnApi} from './helper';
 import {PipelineFileDefModel} from './types';
 
@@ -33,7 +34,7 @@ export const RouteEditor = (props: ConfigurableElementEditorProps<PipelineFileDe
 	return <UnwrappedInput onValueChange={onValueChange} value={model.route ?? ''}/>;
 };
 export const elementRoute: ConfigurableElement = {
-	code: 'route', label: 'Route', anchor: ANCHOR_ROUTE,
+	code: 'route', label: Labels.ApiRouteLabel, anchor: ANCHOR_ROUTE,
 	badge: (model: PipelineFileDefModel): ReactNode => {
 		if (VUtils.isNotBlank(model.route)) {
 			return model.route.trim();

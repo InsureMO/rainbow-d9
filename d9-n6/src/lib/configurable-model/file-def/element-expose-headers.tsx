@@ -8,10 +8,11 @@ import {
 	ConfigurableElementEditorProps
 } from '../../edit-dialog';
 import {HelpDocs} from '../../help-docs';
+import {Labels} from '../../labels';
 import {PipelineFileDefModel} from './types';
 
 export const elementExposeHeaders: ConfigurableElement = {
-	code: 'exposeHeaders', label: 'Expose Headers', anchor: 'expose-headers',
+	code: 'exposeHeaders', label: Labels.ApiExposeHeadersLabel, anchor: 'expose-headers',
 	badge: (model: PipelineFileDefModel): ReactNode => {
 		const count = Object.keys(model.exposeHeaders ?? {}).length;
 		if (count !== 0) {

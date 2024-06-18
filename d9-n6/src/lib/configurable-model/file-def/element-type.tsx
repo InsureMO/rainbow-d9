@@ -12,7 +12,7 @@ import {ANCHOR_TYPE} from './helper';
 import {FileDefModel, PipelineFileDefModel} from './types';
 
 export const elementType: ConfigurableElement = {
-	code: 'type', label: 'Type', anchor: ANCHOR_TYPE,
+	code: 'type', label: Labels.Type, anchor: ANCHOR_TYPE,
 	badge: (model: FileDefModel): ReactNode => {
 		switch (true) {
 			case model.type === 'pipeline' && (model as PipelineFileDefModel).api === true:

@@ -9,7 +9,7 @@ const HeadersEditor = (props: ConfigurableElementEditorProps<PipelineFileDefMode
 	return <AllIgnoredOrArrayEditor {...props} name="headers" lead={Labels.ParameterNames}/>;
 };
 export const elementHeaders: ConfigurableElement = {
-	code: 'headers', label: 'Headers', anchor: 'headers',
+	code: 'headers', label: Labels.ApiHeadersLabel, anchor: 'headers',
 	badge: (model: PipelineFileDefModel): ReactNode => allOrArray(model.headers),
 	editor: HeadersEditor,
 	helpDoc: HelpDocs.pipelineHeaders

@@ -8,11 +8,12 @@ import {
 	ConfigurableElementEditorProps
 } from '../../edit-dialog';
 import {HelpDocs} from '../../help-docs';
+import {Labels} from '../../labels';
 import {ANCHOR_TYPE, visibleOnNotApi} from './helper';
 import {PipelineFileDefModel} from './types';
 
 export const elementInitOnly: ConfigurableElement = {
-	code: 'initOnly', label: 'Execute on Initializing', anchor: 'initOnly',
+	code: 'initOnly', label: Labels.ExecuteOnInitLabel, anchor: 'initOnly',
 	badge: model => model.initOnly === true
 		? <ConfigurableElementBadgeChecked/>
 		: <ConfigurableElementBadgeBanned/>,

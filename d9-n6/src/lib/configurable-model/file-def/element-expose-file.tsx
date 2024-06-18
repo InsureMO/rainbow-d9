@@ -8,10 +8,11 @@ import {
 	ConfigurableElementEditorProps
 } from '../../edit-dialog';
 import {HelpDocs} from '../../help-docs';
+import {Labels} from '../../labels';
 import {PipelineFileDefModel} from './types';
 
 export const elementExposeFile: ConfigurableElement = {
-	code: 'exposeFile', label: 'Expose File', anchor: 'expose-file',
+	code: 'exposeFile', label: Labels.ApiExposeFileLabel, anchor: 'expose-file',
 	badge: (model: PipelineFileDefModel): ReactNode => {
 		if (model.exposeFile === true) {
 			return <ConfigurableElementBadgeChecked/>;

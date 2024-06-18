@@ -212,7 +212,7 @@ export const FilesEditor = (props: ConfigurableElementEditorProps<PipelineFileDe
 };
 
 export const elementFiles: ConfigurableElement = {
-	code: 'files', label: 'Files', anchor: 'files',
+	code: 'files', label: Labels.ApiFilesLabel, anchor: 'files',
 	badge: (model: PipelineFileDefModel): ReactNode => {
 		if (model.files != null && model.files !== false) {
 			return <ConfigurableElementBadgeChecked/>;

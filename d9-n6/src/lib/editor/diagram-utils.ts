@@ -40,6 +40,8 @@ export const createDiagramEntities = (def: FileDef, handlers: DiagramHandlers): 
 			// create a default snippet step
 			const step: PipelineStepDef = {name: '', use: StandardPipelineStepRegisterKey.SNIPPET};
 			steps.push(step);
+			// steps might be created, assign to anyway
+			def.steps = steps;
 		}
 		steps.forEach(step => {
 			currentY += DEFAULT_Y_OFFSET;

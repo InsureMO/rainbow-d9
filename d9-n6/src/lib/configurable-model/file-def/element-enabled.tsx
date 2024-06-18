@@ -8,10 +8,11 @@ import {
 	ConfigurableElementEditorProps
 } from '../../edit-dialog';
 import {HelpDocs} from '../../help-docs';
+import {Labels} from '../../labels';
 import {FileDefModel} from './types';
 
 export const elementEnabled: ConfigurableElement = {
-	code: 'enabled', label: 'Enabled', anchor: 'enabled',
+	code: 'enabled', label: Labels.Enabled, anchor: 'enabled',
 	badge: model => model.enabled !== false
 		? <ConfigurableElementBadgeChecked/>
 		: <ConfigurableElementBadgeBanned/>,

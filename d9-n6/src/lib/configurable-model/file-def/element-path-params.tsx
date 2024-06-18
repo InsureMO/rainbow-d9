@@ -43,7 +43,7 @@ const PathParamsEditor = (props: ConfigurableElementEditorProps<PipelineFileDefM
 	</VerticalLinesEditor>;
 };
 export const elementPathParams: ConfigurableElement = {
-	code: 'pathParams', label: 'Path Parameters', anchor: ANCHOR_PATH_PARAMS,
+	code: 'pathParams', label: Labels.ApiPathParametersLabel, anchor: ANCHOR_PATH_PARAMS,
 	badge: (model: PipelineFileDefModel): ReactNode => allOrArray(model.pathParams),
 	changeBy: [ANCHOR_ROUTE],
 	editor: PathParamsEditor,
