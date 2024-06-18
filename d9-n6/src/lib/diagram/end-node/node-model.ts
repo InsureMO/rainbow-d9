@@ -1,8 +1,8 @@
 import {NodeModel, NodeModelGenerics} from '@projectstorm/react-diagrams';
-import {NextStepPortModel, PreviousStepPortModel} from '../common';
+import {PreviousStepPortModel} from '../common';
 
 export interface EndNodeModelGenerics {
-	PORT: NextStepPortModel;
+	PORT: PreviousStepPortModel;
 }
 
 export class EndNodeModel extends NodeModel<NodeModelGenerics & EndNodeModelGenerics> {

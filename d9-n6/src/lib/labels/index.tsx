@@ -11,6 +11,7 @@ export const Labels = {
 	EndNodeTitle: <IntlLabel keys={['o23', 'node', 'end']} value="End"/>,
 	PreviousStepPort: <IntlLabel keys={['o23', 'port', 'previous']} value="In"/>,
 	NextStepPort: <IntlLabel keys={['o23', 'port', 'next']} value="Out"/>,
+	StepNodeNoname: <IntlLabel keys={['o23', 'node', 'step', 'noname']} value="[Noname]"/>,
 
 	HelpDesk: <IntlLabel keys={['o23', 'dialog', 'docs', 'title']} value="Help Desk"/>,
 	Navigator: <IntlLabel keys={['o23', 'dialog', 'navigator', 'title']} value="Configurable Elements"/>,

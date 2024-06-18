@@ -26,8 +26,13 @@ export class PreviousStepPortModel extends PortModel {
 		});
 	}
 
+	/**
+	 * target is this port
+	 */
 	public createLinkModel(): LinkModel {
-		return new DefaultLinkModel();
+		const link = new DefaultLinkModel();
+		link.setTargetPort(this);
+		return link;
 	}
 }
 

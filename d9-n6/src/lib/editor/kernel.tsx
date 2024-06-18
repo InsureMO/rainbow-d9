@@ -1,12 +1,13 @@
 import {CanvasWidget} from '@projectstorm/react-canvas-core';
-import createEngine, {DiagramModel} from '@projectstorm/react-diagrams';
+import createEngine from '@projectstorm/react-diagrams';
 import {DiagramEngine} from '@projectstorm/react-diagrams-core';
 import {VUtils} from '@rainbow-d9/n1';
 import React, {useEffect, useRef, useState} from 'react';
 import {FileDef, FileDefLoader} from '../definition';
-import {EndNodeModel, initEngine, StartNodeModel} from '../diagram';
+import {initEngine} from '../diagram';
 import {Labels} from '../labels';
 import {EditorProps, MarkdownContent} from '../types';
+import {createDiagramEntities} from './diagram-utils';
 import {ErrorBoundary} from './error-boundary';
 import {EditorWrapper, ParseError} from './widgets';
 
@@ -32,6 +33,7 @@ const parseContent = (parser: FileDefLoader, content?: MarkdownContent): FileDef
 	}
 	return def;
 };
+
 export const EditorKernel = (props: EditorProps) => {
 	const {content, parser} = props;
 
@@ -74,14 +76,7 @@ export const EditorKernel = (props: EditorProps) => {
 	}
 
 	try {
-		const startNode = new StartNodeModel(state.def);
-		startNode.setPosition(100, 100);
-		const endNode = new EndNodeModel();
-		endNode.setPosition(500, 100);
-		const link = startNode.routeTo(endNode);
-
-		const model = new DiagramModel();
-		model.addAll(startNode, endNode, link);
+		const model = createDiagramEntities(state.def);
 		state.engine.setModel(model);
 
 		return <EditorWrapper ref={vwRef}>

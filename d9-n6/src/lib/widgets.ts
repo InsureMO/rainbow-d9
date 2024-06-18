@@ -5,6 +5,7 @@ const EDITOR_BACKGROUND_BLOCK_SIZE = 'var(--o23-playground-editor-background-blo
 const EDITOR_BACKGROUND_LINE_COLOR = `var(--o23-playground-editor-background-line-color, ${color(CssConstants.PRIMARY_COLOR).alpha(0.08)})`;
 const NODE_START_COLOR = '#ffb56b';
 const NODE_END_COLOR = '#e0b35f';
+const NODE_STEP_COLOR = '#54956b';
 const NEXT_STEP_PORT_COLOR = '#1f6b73';
 const PREVIOUS_STEP_PORT_COLOR = '#00618b';
 const API_VARIABLE_PORT_COLOR = '#87a55f';
@@ -144,7 +145,7 @@ export const PlaygroundCssVars = {
 	NODE_START_SECOND_TITLE_DECORATION: 'var(--o23-playground-node-start-second-title-decoration, underline double)',
 	NODE_START_BODY_HEIGHT: `var(--o23-playground-node-start-body-height, 32px)`,
 	NODE_START_BODY_PADDING: 'var(--o23-playground-node-start-body-padding, 8px 0)',
-	// start node
+	// end node
 	NODE_END_BORDER_COLOR: `var(--o23-playground-node-end-border-color, ${NODE_END_COLOR})`,
 	NODE_END_BORDER: `var(--o23-playground-node-end-border, 2px solid ${NODE_END_COLOR})`,
 	NODE_END_TITLE_FONT_SIZE: 'var(--o23-playground-node-end-title-font-size, 16px)',
@@ -152,7 +153,15 @@ export const PlaygroundCssVars = {
 	NODE_END_TITLE_COLOR: `var(--o23-playground-node-end-title-color, ${CssVars.INVERT_COLOR})`,
 	NODE_END_TITLE_BACKGROUND: `var(--o23-playground-node-end-title-background, linear-gradient(135deg, ${NODE_END_COLOR} 0%, ${color(NODE_END_COLOR).alpha(0.7)} 70%, ${color(NODE_END_COLOR).alpha(0.5)} 100%))`,
 	NODE_END_BODY_HEIGHT: 'var(--o23-playground-node-end-body-height, 32px)',
-	NODE_END_BODY_PADDING: 'var(--o23-playground-node-end-body-padding, 8px 0)'
+	NODE_END_BODY_PADDING: 'var(--o23-playground-node-end-body-padding, 8px 0)',
+	// step node
+	NODE_STEP_BORDER: `var(--o23-playground-node-step-border, 2px solid ${NODE_STEP_COLOR})`,
+	NODE_STEP_TITLE_FONT_SIZE: 'var(--o23-playground-node-step-title-font-size, 16px)',
+	NODE_STEP_TITLE_FONT_WEIGHT: 'var(--o23-playground-node-step-title-font-weight, 600)',
+	NODE_STEP_TITLE_COLOR: `var(--o23-playground-node-step-title-color, ${CssVars.INVERT_COLOR})`,
+	NODE_STEP_TITLE_BACKGROUND: `var(--o23-playground-node-step-title-background, linear-gradient(135deg, ${NODE_STEP_COLOR} 0%, ${color(NODE_STEP_COLOR).alpha(0.7)} 70%, ${color(NODE_STEP_COLOR).alpha(0.5)} 100%))`,
+	NODE_STEP_BODY_HEIGHT: 'var(--o23-playground-node-step-body-height, 32px)',
+	NODE_STEP_BODY_PADDING: 'var(--o23-playground-node-step-body-padding, 8px 0)'
 };
 
 // background: linear-gradient(90deg, #24606e, #1f6b73, #207675, #2c8174, #3e8b71, #54956b, #6c9e65, #87a55f, #a3ab5b, #c1b05a, #e0b35f, #ffb56b);

@@ -15,7 +15,7 @@ export class StartNodeModel extends NodeModel<NodeModelGenerics & StartNodeModel
 		this.addPort(new NextStepPortModel());
 	}
 
-	public routeTo(node: NodeModel): LinkModel {
+	public next(node: NodeModel): LinkModel {
 		const port = this.getPort(NextStepPortModel.NAME);
 		const link = port.createLinkModel();
 		link.setTargetPort(node.getPort(PreviousStepPortModel.NAME));
