@@ -12,13 +12,18 @@ import {createDiagramEntities, DiagramHandlers} from './diagram-utils';
 import {ErrorBoundary} from './error-boundary';
 import {EditorWrapper, ParseError} from './widgets';
 
-export interface EditorKernelState {
+export enum EditorKernelDiagramStatus {
+	IGNORED = 'ignored', FIRST_PAINT = 'first-paint', IN_SERVICE = 'in-service'
+}
+
+export interface EditorKernelRefState {
 	engine: DiagramEngine;
 	content?: string;
 	serializer: FileDefSerializer;
 	deserializer: FileDefDeserializer;
 	def?: FileDef;
 	message?: string;
+	diagramStatus: EditorKernelDiagramStatus;
 }
 
 const createDiagramEngine = () => {
@@ -65,7 +70,7 @@ export const EditorKernel = (props: EditorProps) => {
 	const wrapperRef = useRef<HTMLDivElement>(null);
 	const {fire} = usePlaygroundEventBus();
 	const {replace} = useThrottler();
-	const stateRef = useRef<EditorKernelState>((() => {
+	const stateRef = useRef<EditorKernelRefState>((() => {
 		const engine = createDiagramEngine();
 		try {
 			const def = parseContent(deserializer, content ?? '');
@@ -79,11 +84,18 @@ export const EditorKernel = (props: EditorProps) => {
 			});
 			const model = createDiagramEntities(def, handlers);
 			engine.setModel(model);
-			return {engine, content, serializer, deserializer, def};
+			return {
+				engine, content, serializer, deserializer, def,
+				diagramStatus: EditorKernelDiagramStatus.FIRST_PAINT
+			};
 		} catch (e) {
 			console.error(e);
 			engine.setModel(new DiagramModel());
-			return {engine, content, serializer, deserializer, message: e.message};
+			return {
+				engine, content, serializer, deserializer,
+				message: e.message,
+				diagramStatus: EditorKernelDiagramStatus.IGNORED
+			};
 		}
 	})());
 	const forceUpdate = useForceUpdate();
@@ -110,6 +122,7 @@ export const EditorKernel = (props: EditorProps) => {
 			const model = createDiagramEntities(def, handlers);
 			stateRef.current.engine.setModel(model);
 			delete stateRef.current.message;
+			stateRef.current.diagramStatus = EditorKernelDiagramStatus.FIRST_PAINT;
 		} catch (e) {
 			console.error(e);
 			stateRef.current.content = content;
@@ -119,26 +132,35 @@ export const EditorKernel = (props: EditorProps) => {
 			// replace with empty diagram model
 			stateRef.current.engine.setModel(new DiagramModel());
 			stateRef.current.message = e.message;
+			stateRef.current.diagramStatus = EditorKernelDiagramStatus.IGNORED;
 		}
 		forceUpdate();
 	}, [fire, replace, forceUpdate, serializer, deserializer, content]);
+	useEffect(() => {
+		if (EditorKernelDiagramStatus.FIRST_PAINT !== stateRef.current.diagramStatus) {
+			return;
+		}
+		// re-calculate node positions
+		stateRef.current.diagramStatus = EditorKernelDiagramStatus.IN_SERVICE;
+		forceUpdate();
+	}, [forceUpdate, stateRef.current.diagramStatus]);
 
 	if (VUtils.isNotBlank(stateRef.current.message)) {
-		return <EditorWrapper>
+		return <EditorWrapper data-diagram-status={EditorKernelDiagramStatus.IGNORED}>
 			<ParseError>{stateRef.current.message}</ParseError>
 		</EditorWrapper>;
 	} else if (VUtils.isBlank(stateRef.current.content)) {
-		return <EditorWrapper>
+		return <EditorWrapper data-diagram-status={EditorKernelDiagramStatus.IGNORED}>
 			<ParseError>{Labels.NoContent}</ParseError>
 		</EditorWrapper>;
 	} else if (stateRef.current.def == null) {
-		return <EditorWrapper>
+		return <EditorWrapper data-diagram-status={EditorKernelDiagramStatus.IGNORED}>
 			<ParseError>{Labels.NoDefParsed}</ParseError>
 		</EditorWrapper>;
 	}
 
 	try {
-		return <EditorWrapper ref={wrapperRef}>
+		return <EditorWrapper data-diagram-status={stateRef.current.diagramStatus} ref={wrapperRef}>
 			{/**
 			 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 			 @ts-ignore */}
@@ -147,7 +169,7 @@ export const EditorKernel = (props: EditorProps) => {
 			</ErrorBoundary>
 		</EditorWrapper>;
 	} catch (error) {
-		return <EditorWrapper ref={wrapperRef}>
+		return <EditorWrapper data-diagram-status={EditorKernelDiagramStatus.IGNORED} ref={wrapperRef}>
 			<ParseError>{(error as Error).message || Labels.ParseError}</ParseError>
 		</EditorWrapper>;
 	}

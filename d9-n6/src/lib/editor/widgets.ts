@@ -16,6 +16,20 @@ export const EditorWrapper = styled.div.attrs({
     background-position: ${PlaygroundCssVars.EDITOR_BACKGROUND_POSITION};
     overflow: auto;
 
+    &[data-diagram-status=first-paint] {
+        > div.o23-playground-editor-content {
+            opacity: 0;
+            user-select: none;
+            pointer-events: none;
+
+            div.node, div.node * {
+                user-select: none;
+                pointer-events: none;
+                cursor: default;
+            }
+        }
+    }
+
     > div.o23-playground-editor-content {
         height: 100%;
     }
