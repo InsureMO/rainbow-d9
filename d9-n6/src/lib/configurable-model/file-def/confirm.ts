@@ -1,8 +1,9 @@
 import {FileDef, isPipelineDef, PipelineFileDef, PipelineStepUseDef} from '../../definition';
+import {NodeHandlers} from '../../diagram';
 import {ConfigurableElementAnchor, ConfigurableModel} from '../../edit-dialog';
 import {FileDefModel, PipelineFileDefModel, StepOrSetsFileDefModel} from './types';
 
-export const confirm = (model: ConfigurableModel, def: FileDef): ConfigurableElementAnchor | true => {
+export const confirm = (model: ConfigurableModel, def: FileDef, handlers: NodeHandlers): ConfigurableElementAnchor | true => {
 	// const originalType = def.type;
 	// const originalUse = (def as unknown as PipelineStepUseDef).use;
 
@@ -55,5 +56,6 @@ export const confirm = (model: ConfigurableModel, def: FileDef): ConfigurableEle
 		deleteApiAttrs(def);
 		deleteNonApiAttrs(def);
 	}
+	handlers.onChange();
 	return true;
 };

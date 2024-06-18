@@ -1,20 +1,22 @@
 import {CanvasWidget} from '@projectstorm/react-canvas-core';
-import createEngine from '@projectstorm/react-diagrams';
+import createEngine, {DiagramModel} from '@projectstorm/react-diagrams';
 import {DiagramEngine} from '@projectstorm/react-diagrams-core';
-import {VUtils} from '@rainbow-d9/n1';
-import React, {useEffect, useRef, useState} from 'react';
-import {FileDef, FileDefLoader} from '../definition';
+import {useForceUpdate, useThrottler, VUtils} from '@rainbow-d9/n1';
+import React, {useEffect, useRef} from 'react';
+import {FileDef, FileDefDeserializer, FileDefSerializer} from '../definition';
 import {initEngine} from '../diagram';
 import {Labels} from '../labels';
+import {PlaygroundEventTypes, usePlaygroundEventBus} from '../playground-event-bus';
 import {EditorProps, MarkdownContent} from '../types';
-import {createDiagramEntities} from './diagram-utils';
+import {createDiagramEntities, DiagramHandlers} from './diagram-utils';
 import {ErrorBoundary} from './error-boundary';
 import {EditorWrapper, ParseError} from './widgets';
 
 export interface EditorKernelState {
 	engine: DiagramEngine;
 	content?: string;
-	parser: FileDefLoader;
+	serializer: FileDefSerializer;
+	deserializer: FileDefDeserializer;
 	def?: FileDef;
 	message?: string;
 }
@@ -25,7 +27,7 @@ const createDiagramEngine = () => {
 	return engine;
 };
 
-const parseContent = (parser: FileDefLoader, content?: MarkdownContent): FileDef => {
+const parseContent = (parser: FileDefDeserializer, content?: MarkdownContent): FileDef => {
 	const def = parser.parse(content ?? '');
 	// guard
 	if (VUtils.isBlank(def.type)) {
@@ -34,61 +36,117 @@ const parseContent = (parser: FileDefLoader, content?: MarkdownContent): FileDef
 	return def;
 };
 
-export const EditorKernel = (props: EditorProps) => {
-	const {content, parser} = props;
+const createDiagramHandlers = (options: {
+	serializer: FileDefSerializer;
+	replace: (func: () => void, timeout: number) => void;
+	syncContentToStateRef: (content: string) => string;
+	notifyContentChanged: (content: string) => void;
+}): DiagramHandlers => {
+	const {serializer, replace, syncContentToStateRef, notifyContentChanged} = options;
 
-	const vwRef = useRef<HTMLDivElement>(null);
-	const [state, setState] = useState<EditorKernelState>(() => {
+	return {
+		serialize: (def: FileDef) => serializer.stringify(def),
+		onContentChange: (serialize: () => string) => {
+			replace(() => {
+				// sync to state ref first, in case somewhere outside force update widget
+				// will compare the content with state ref
+				const content = syncContentToStateRef(serialize());
+				// and notify content changed
+				notifyContentChanged(content);
+			}, 100);
+		}
+	};
+
+};
+
+export const EditorKernel = (props: EditorProps) => {
+	const {content, serializer, deserializer} = props;
+
+	const wrapperRef = useRef<HTMLDivElement>(null);
+	const {fire} = usePlaygroundEventBus();
+	const {replace} = useThrottler();
+	const stateRef = useRef<EditorKernelState>((() => {
 		const engine = createDiagramEngine();
 		try {
-			const def = parseContent(parser, content ?? '');
-			return {engine, content, parser, def};
+			const def = parseContent(deserializer, content ?? '');
+			const handlers = createDiagramHandlers({
+				serializer, replace, syncContentToStateRef: (content: string) => {
+					stateRef.current.content = content;
+					return content;
+				}, notifyContentChanged: (content: string) => {
+					fire(PlaygroundEventTypes.CONTENT_CHANGED, content);
+				}
+			});
+			const model = createDiagramEntities(def, handlers);
+			engine.setModel(model);
+			return {engine, content, serializer, deserializer, def};
 		} catch (e) {
 			console.error(e);
-			return {engine, content, parser, message: e.message};
+			return {engine, content, serializer, deserializer, message: e.message};
 		}
-	});
+	})());
+	const forceUpdate = useForceUpdate();
 	useEffect(() => {
-		if (parser === state.parser && content === state.content) {
+		if (serializer === stateRef.current.serializer
+			&& deserializer === stateRef.current.deserializer
+			&& content === stateRef.current.content) {
 			return;
 		}
 		try {
-			const def = parseContent(parser, content ?? '');
-			setState(state => ({engine: state.engine, content, parser, def}));
+			const def = parseContent(deserializer, content ?? '');
+			stateRef.current.content = content;
+			stateRef.current.serializer = serializer;
+			stateRef.current.deserializer = deserializer;
+			stateRef.current.def = def;
+			const handlers = createDiagramHandlers({
+				serializer, replace, syncContentToStateRef: (content: string) => {
+					stateRef.current.content = content;
+					return content;
+				}, notifyContentChanged: (content: string) => {
+					fire(PlaygroundEventTypes.CONTENT_CHANGED, content);
+				}
+			});
+			const model = createDiagramEntities(def, handlers);
+			stateRef.current.engine.setModel(model);
+			delete stateRef.current.message;
 		} catch (e) {
 			console.error(e);
-			setState(state => ({engine: state.engine, content, parser, message: e.message}));
+			stateRef.current.content = content;
+			stateRef.current.serializer = serializer;
+			stateRef.current.deserializer = deserializer;
+			delete stateRef.current.def;
+			// replace with empty diagram model
+			const model = new DiagramModel();
+			stateRef.current.engine.setModel(model);
+			stateRef.current.message = e.message;
 		}
-	}, [parser, content, state.content, state.parser]);
+	}, [fire, replace, forceUpdate, serializer, deserializer, content]);
 
-	if (VUtils.isNotBlank(state.message)) {
+	if (VUtils.isNotBlank(stateRef.current.message)) {
 		return <EditorWrapper>
-			<ParseError>{state.message}</ParseError>
+			<ParseError>{stateRef.current.message}</ParseError>
 		</EditorWrapper>;
-	} else if (VUtils.isBlank(state.content)) {
+	} else if (VUtils.isBlank(stateRef.current.content)) {
 		return <EditorWrapper>
 			<ParseError>{Labels.NoContent}</ParseError>
 		</EditorWrapper>;
-	} else if (state.def == null) {
+	} else if (stateRef.current.def == null) {
 		return <EditorWrapper>
 			<ParseError>{Labels.NoDefParsed}</ParseError>
 		</EditorWrapper>;
 	}
 
 	try {
-		const model = createDiagramEntities(state.def);
-		state.engine.setModel(model);
-
-		return <EditorWrapper ref={vwRef}>
+		return <EditorWrapper ref={wrapperRef}>
 			{/**
 			 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 			 @ts-ignore */}
 			<ErrorBoundary content={content}>
-				<CanvasWidget engine={state.engine} className="o23-playground-editor-content"/>
+				<CanvasWidget engine={stateRef.current.engine} className="o23-playground-editor-content"/>
 			</ErrorBoundary>
 		</EditorWrapper>;
 	} catch (error) {
-		return <EditorWrapper>
+		return <EditorWrapper ref={wrapperRef}>
 			<ParseError>{(error as Error).message || Labels.ParseError}</ParseError>
 		</EditorWrapper>;
 	}

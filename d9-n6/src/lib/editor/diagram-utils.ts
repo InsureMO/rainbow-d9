@@ -1,8 +1,20 @@
 import {DiagramModel, LinkModel, NodeModel} from '@projectstorm/react-diagrams';
 import {FileDef, isPipelineDef, PipelineStepDef, StandardPipelineStepRegisterKey} from '../definition';
-import {EndNodeModel, StartNodeModel, StepNodeEntity, StepNodeEntityType, StepNodeModel} from '../diagram';
+import {
+	EndNodeModel,
+	NodeHandlers,
+	StartNodeModel,
+	StepNodeEntity,
+	StepNodeEntityType,
+	StepNodeModel
+} from '../diagram';
 
-export const createDiagramEntities = (def: FileDef): DiagramModel => {
+export interface DiagramHandlers {
+	serialize: (def: FileDef) => string;
+	onContentChange: (serialize: () => string) => void;
+}
+
+export const createDiagramEntities = (def: FileDef, handlers: DiagramHandlers): DiagramModel => {
 	const START_X = 100;
 	const START_Y = 100;
 	const DEFAULT_Y_OFFSET = 400;
@@ -10,11 +22,18 @@ export const createDiagramEntities = (def: FileDef): DiagramModel => {
 	const allNodes: Array<NodeModel> = [];
 	const allLinks: Array<LinkModel> = [];
 
-	const startNode = new StartNodeModel(def);
+	const nodeHandlers: NodeHandlers = {
+		// pending serialize
+		onChange: () => handlers.onContentChange(() => handlers.serialize(def))
+	};
+
+	const startNode = new StartNodeModel(def, nodeHandlers);
 	startNode.setPosition(START_X, START_Y);
 	allNodes.push(startNode);
 
-	let previousNode: StartNodeModel | StepNodeModel = startNode, currentX = START_X, currentY = START_Y;
+	let previousNode: StartNodeModel | StepNodeModel = startNode;
+	const currentX = START_X;
+	let currentY = START_Y;
 	if (isPipelineDef(def)) {
 		const steps = def.steps ?? [];
 		if (steps.length === 0) {
@@ -24,7 +43,7 @@ export const createDiagramEntities = (def: FileDef): DiagramModel => {
 		}
 		steps.forEach(step => {
 			currentY += DEFAULT_Y_OFFSET;
-			const node = new StepNodeModel(new StepNodeEntity(step, StepNodeEntityType.NORMAL, def));
+			const node = new StepNodeModel(new StepNodeEntity(step, StepNodeEntityType.NORMAL, def), nodeHandlers);
 			node.setPosition(currentX, currentY);
 			allNodes.push(node);
 			const link = node.previous(previousNode);
@@ -36,7 +55,7 @@ export const createDiagramEntities = (def: FileDef): DiagramModel => {
 	}
 
 	currentY += DEFAULT_Y_OFFSET;
-	const endNode = new EndNodeModel();
+	const endNode = new EndNodeModel(def, nodeHandlers);
 	endNode.setPosition(currentX, currentY);
 	allNodes.push(endNode);
 	const link = previousNode.next(endNode);

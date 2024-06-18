@@ -1,6 +1,7 @@
 import {LinkModel, NodeModel, NodeModelGenerics} from '@projectstorm/react-diagrams';
 import {FileDef, PipelineStepDef} from '../../definition';
 import {NextStepPortModel, PreviousStepPortModel} from '../common';
+import {HandledNodeModel, NodeHandlers} from '../node-handlers';
 
 export enum StepNodeEntityType {
 	START = 'start',        // file is step-sets or step, use a virtual step to represent it
@@ -20,11 +21,11 @@ export interface StepNodeModelGenerics {
 	OUT: NextStepPortModel;
 }
 
-export class StepNodeModel extends NodeModel<NodeModelGenerics & StepNodeModelGenerics> {
+export class StepNodeModel extends HandledNodeModel<NodeModelGenerics & StepNodeModelGenerics> {
 	public static readonly TYPE = 'step-node';
 
-	public constructor(public readonly entity: StepNodeEntity) {
-		super({type: StepNodeModel.TYPE});
+	public constructor(public readonly entity: StepNodeEntity, handlers: NodeHandlers) {
+		super({type: StepNodeModel.TYPE}, handlers);
 		// always have a port which link from previous step or start node
 		this.addPort(new PreviousStepPortModel());
 		// always have a port which link to next step or end node

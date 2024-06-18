@@ -2,7 +2,7 @@ import {MUtils, NodeAttributeValues, ObjectPropValue, PPUtils, PropValue, VUtils
 import {CssVars, DOM_KEY_WIDGET, useGlobalHandlers} from '@rainbow-d9/n2';
 import React, {useEffect, useRef, useState} from 'react';
 import styled from 'styled-components';
-import {FileDefLoader, YamlDefLoader} from './definition';
+import {FileDefDeserializer, FileDefSerializer, YamlDefLoader, YamlDefSaver} from './definition';
 import {EditDialog} from './edit-dialog';
 import {Editor} from './editor';
 import {PlaygroundBridge} from './playground-bridge';
@@ -39,21 +39,31 @@ export const PlaygroundWrapper = styled.div.attrs(
 `;
 
 export interface PlaygroundDelegateState {
-	parser: FileDefLoader;
+	serializer: FileDefSerializer;
+	deserializer: FileDefDeserializer;
 }
 
 export const PlaygroundDelegate = (props: PlaygroundProps) => {
-	const {$pp, $wrapped, usage, parser, ...rest} = props;
+	const {$pp, $wrapped, usage, serializer, deserializer, ...rest} = props;
 	const {$p2r, $onValueChange, $avs: {$disabled, $visible}} = $wrapped;
 
 	const ref = useRef<HTMLDivElement>(null);
 	const globalHandlers = useGlobalHandlers();
 	const [state, setState] = useState<PlaygroundDelegateState>(() => {
-		return {parser: parser ?? new YamlDefLoader()};
+		return {
+			serializer: serializer ?? new YamlDefSaver(),
+			deserializer: deserializer ?? new YamlDefLoader()
+		};
 	});
 	useEffect(() => {
-		setState(state => ({...state, parser: parser ?? new YamlDefLoader()}));
-	}, [parser]);
+		setState(state => {
+			return {
+				...state,
+				serializer: serializer ?? state.serializer,
+				deserializer: deserializer ?? state.deserializer
+			};
+		});
+	}, [serializer, deserializer]);
 
 	const onContentChanged = async (content?: string) => {
 		await $onValueChange(content, false, {global: globalHandlers});
@@ -64,7 +74,7 @@ export const PlaygroundDelegate = (props: PlaygroundProps) => {
 	                          id={PPUtils.asId(PPUtils.absolute($p2r, $pp), props.id)}
 	                          ref={ref}>
 		<PlaygroundBridge content={content} onContentChanged={onContentChanged}/>
-		<Editor content={content} usage={usage} parser={state.parser}/>
+		<Editor content={content} usage={usage} serializer={state.serializer} deserializer={state.deserializer}/>
 	</PlaygroundWrapper>;
 };
 

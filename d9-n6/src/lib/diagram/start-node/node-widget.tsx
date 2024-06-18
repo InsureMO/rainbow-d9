@@ -264,7 +264,7 @@ export const StartNodeWidget = (props: StartNodeWidgetProps) => {
 	})();
 
 	const onConfirm = (model: ConfigurableModel) => {
-		const ret = FileDefs.confirm(model, def);
+		const ret = FileDefs.confirm(model, def, node.handlers);
 		if (ret === true) {
 			forceUpdate();
 		}

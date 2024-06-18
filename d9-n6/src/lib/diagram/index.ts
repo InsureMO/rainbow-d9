@@ -9,6 +9,8 @@ export * from './start-node';
 export * from './step-node';
 export * from './end-node';
 
+export * from './node-handlers';
+
 export const initEngine = (engine: DiagramEngine) => {
 	const portFactories = engine.getPortFactories();
 	portFactories.registerFactory(new NextStepPortFactory());

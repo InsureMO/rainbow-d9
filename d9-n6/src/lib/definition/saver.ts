@@ -3,21 +3,21 @@ import yaml from 'js-yaml';
 import {FileDef} from './file-def-types';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export type DefExternalLoaderRedress = (given: any) => any
+export type DefExternalSaverRedress = (given: any) => any
 
-export interface DefLoaderOptions {
-	redress?: DefExternalLoaderRedress;
+export interface DefSaverOptions {
+	redress?: DefExternalSaverRedress;
 }
 
-export abstract class FileDefDeserializer {
-	private readonly _redress: Undefinable<DefExternalLoaderRedress>;
+export abstract class FileDefSerializer {
+	private readonly _redress: Undefinable<DefExternalSaverRedress>;
 
-	public constructor(options?: DefLoaderOptions) {
+	public constructor(options?: DefSaverOptions) {
 		this._redress = options?.redress;
 	}
 
-	protected dashToCamel(key: string): string {
-		return key.replace(/-(.)/g, (_, group1) => group1.toUpperCase());
+	protected camelToDash(key: string): string {
+		return key.replace(/([A-Z])/g, ($1) => '-' + $1.toLowerCase());
 	}
 
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -29,7 +29,7 @@ export abstract class FileDefDeserializer {
 		} else if (typeof given === 'object') {
 			return Object.keys(given).reduce((redressed, key) => {
 				if (key.indexOf('-') !== -1) {
-					redressed[this.dashToCamel(key)] = this.redressKeyCase(given[key]);
+					redressed[this.camelToDash(key)] = this.redressKeyCase(given[key]);
 				} else {
 					redressed[key] = this.redressKeyCase(given[key]);
 				}
@@ -48,24 +48,24 @@ export abstract class FileDefDeserializer {
 		return this.redressKeyCase(given);
 	}
 
-	protected abstract doParse(content: string): FileDef;
+	protected abstract doStringify(def: FileDef): string;
 
-	public parse(content: string): FileDef {
-		const def = this.doParse(content);
-		return this.redressDef(def);
+	public stringify(def: FileDef): string {
+		const redressed = this.redressDef(def);
+		return this.doStringify(redressed);
 	}
 }
 
-export class YamlDefLoader extends FileDefDeserializer {
-	public doParse(content: string): FileDef {
+export class YamlDefSaver extends FileDefSerializer {
+	public doStringify(def: FileDef): string {
 		try {
-			return yaml.load(content) as FileDef;
+			return yaml.dump(def);
 		} catch (e) {
-			console.group('Failed to parse yaml content to O23 definition.');
+			console.group('Failed to dump O23 definition to yaml content.');
 			console.error(e);
-			console.log(content);
+			console.log(def);
 			console.groupEnd();
-			throw new Error('Failed to parse yaml content to O23 definition.');
+			throw new Error('Failed to dump O23 definition to yaml content.');
 		}
 	}
 }
