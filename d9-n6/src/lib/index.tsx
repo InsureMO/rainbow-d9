@@ -3,6 +3,7 @@ import 'github-markdown-css/github-markdown.css';
 export * from './types';
 export * from './widgets';
 export * from './icons';
+export * from './labels';
 
 export * from './diagram';
 export * from './edit-dialog';
