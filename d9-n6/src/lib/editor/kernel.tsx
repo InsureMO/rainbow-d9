@@ -140,7 +140,7 @@ export const EditorKernel = (props: EditorProps) => {
 		if (EditorKernelDiagramStatus.FIRST_PAINT !== stateRef.current.diagramStatus) {
 			return;
 		}
-		// re-calculate node positions
+		// TODO re-calculate node positions
 		stateRef.current.diagramStatus = EditorKernelDiagramStatus.IN_SERVICE;
 		forceUpdate();
 	}, [forceUpdate, stateRef.current.diagramStatus]);
