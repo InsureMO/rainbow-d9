@@ -1,6 +1,7 @@
 export * from './types';
 export * from './widgets';
 export * from './icons';
+export * from './labels';
 
 export * from './toolbar';
 export * from './editor';

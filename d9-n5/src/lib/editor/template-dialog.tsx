@@ -4,10 +4,11 @@ import {markdown, markdownLanguage} from '@codemirror/lang-markdown';
 import {EditorState as CodeMirrorState} from '@codemirror/state';
 import {EditorView, keymap} from '@codemirror/view';
 import {WidgetType} from '@rainbow-d9/n1';
-import {ButtonInk, CssVars, DOM_KEY_WIDGET, IntlLabel, toIntlLabel, UnwrappedButton} from '@rainbow-d9/n2';
+import {ButtonInk, CssVars, DOM_KEY_WIDGET, toIntlLabel, UnwrappedButton} from '@rainbow-d9/n2';
 import {basicSetup} from 'codemirror';
 import React, {ReactNode, useEffect, useRef, useState} from 'react';
 import styled from 'styled-components';
+import {Labels} from '../labels';
 import {PlaygroundEventTypes, usePlaygroundEventBus} from '../playground-event-bus';
 import {PlaygroundWidgets} from '../types';
 import {PlaygroundCssVars} from '../widgets';
@@ -210,13 +211,13 @@ export const WidgetTemplateDialog = (props: WidgetTemplateDialogProps) => {
 			<WidgetTemplateDialogFooter>
 				{state.copied
 					? <UnwrappedButton ink={ButtonInk.SUCCESS} onClick={onCopyToClipboard}>
-						<IntlLabel keys={['playground', 'template', 'clipboard', 'copied']} value="Copied!"/>
+						{Labels.CopiedToClipboard}
 					</UnwrappedButton>
 					: <UnwrappedButton ink={ButtonInk.PRIMARY} onClick={onCopyToClipboard}>
-						<IntlLabel keys={['playground', 'template', 'clipboard']} value="Copy to Clipboard"/>
+						{Labels.CopyToClipboard}
 					</UnwrappedButton>}
 				<UnwrappedButton ink={ButtonInk.WAIVE} onClick={onHide}>
-					<IntlLabel keys={['playground', 'template', 'close']} value="Close"/>
+					{Labels.Close}
 				</UnwrappedButton>
 			</WidgetTemplateDialogFooter>
 		</WidgetTemplateDialogWrapper>

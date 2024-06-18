@@ -4,10 +4,11 @@ import {linter, lintGutter} from '@codemirror/lint';
 import {EditorState as CodeMirrorState} from '@codemirror/state';
 import {EditorView, keymap} from '@codemirror/view';
 import {BaseModel} from '@rainbow-d9/n1';
-import {ButtonInk, CssVars, DOM_KEY_WIDGET, IntlLabel, toIntlLabel, UnwrappedButton} from '@rainbow-d9/n2';
+import {ButtonInk, CssVars, DOM_KEY_WIDGET, toIntlLabel, UnwrappedButton} from '@rainbow-d9/n2';
 import {basicSetup} from 'codemirror';
 import React, {ReactNode, useEffect, useRef, useState} from 'react';
 import styled from 'styled-components';
+import {Labels} from '../labels';
 import {PlaygroundEventTypes, usePlaygroundEventBus} from '../playground-event-bus';
 import {PlaygroundCssVars} from '../widgets';
 
@@ -202,8 +203,7 @@ export const MockJsonDialog = (props: MockJsonDialogProps) => {
 		} catch {
 			setState(state => ({
 				...state,
-				reason: <IntlLabel keys={['playground', 'mock', 'json', 'invalid']}
-				                   value="The JSON format is incorrect. Please check and modify before confirming."/>
+				reason: Labels.InvalidJson
 			}));
 		}
 	};
@@ -224,19 +224,19 @@ export const MockJsonDialog = (props: MockJsonDialogProps) => {
 			<MockJsonDialogFooter>
 				{state.copied
 					? <UnwrappedButton ink={ButtonInk.SUCCESS} onClick={onCopyToClipboard}>
-						<IntlLabel keys={['playground', 'mock', 'json', 'clipboard', 'copied']} value="Copied!"/>
+						{Labels.CopiedToClipboard}
 					</UnwrappedButton>
 					: <UnwrappedButton ink={ButtonInk.PRIMARY} onClick={onCopyToClipboard}>
-						<IntlLabel keys={['playground', 'mock', 'json', 'clipboard']} value="Copy to Clipboard"/>
+						{Labels.CopyToClipboard}
 					</UnwrappedButton>}
 				<UnwrappedButton ink={ButtonInk.PRIMARY} onClick={onDownload}>
-					<IntlLabel keys={['playground', 'mock', 'json', 'download']} value="Download as File"/>
+					{Labels.Download}
 				</UnwrappedButton>
 				<UnwrappedButton ink={ButtonInk.PRIMARY} onClick={onConfirm}>
-					<IntlLabel keys={['playground', 'mock', 'json', 'confirm']} value="Confirm and Refresh"/>
+					{Labels.ConfirmAndRefresh}
 				</UnwrappedButton>
 				<UnwrappedButton ink={ButtonInk.WAIVE} onClick={onHide}>
-					<IntlLabel keys={['playground', 'mock', 'json', 'cancel']} value="Cancel"/>
+					{Labels.Cancel};
 				</UnwrappedButton>
 			</MockJsonDialogFooter>
 		</MockJsonDialogWrapper>
