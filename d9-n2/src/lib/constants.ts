@@ -234,6 +234,7 @@ $d9.$d9n2 = $d9.$d9n2 ?? {
 					removeItem: 'Remove'
 				},
 				table: {
+					headers: {index: (void 0), operators: (void 0)},
 					noElement: 'No data found.',
 					createItem: 'Create New Element',
 					removeItem: 'Remove'

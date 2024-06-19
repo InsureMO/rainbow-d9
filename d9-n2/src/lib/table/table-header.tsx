@@ -1,5 +1,6 @@
 import {NUtils, Undefinable, VUtils, WrappedAttributes} from '@rainbow-d9/n1';
 import React from 'react';
+import {IntlLabel} from '../intl-label';
 import {LabelLike} from '../label-like';
 import {TableProps} from './types';
 import {ATableHeaderCell} from './widgets';
@@ -25,7 +26,9 @@ export const TableHeader = (props: TableHeaderProps) => {
 	// tail grabbing column
 	// operators column
 	return <>
-		<ATableHeaderCell headerHeight={headerHeight} isGrabber={true} stickyOffset={stickyOffsets[0]}/>
+		<ATableHeaderCell headerHeight={headerHeight} isGrabber={true} stickyOffset={stickyOffsets[0]}>
+			<IntlLabel keys={['table', 'headers', 'index']} value={(void 0)}/>
+		</ATableHeaderCell>
 		{headers.map((header, index) => {
 			const key = NUtils.getDefKey(header);
 			return <ATableHeaderCell headerHeight={headerHeight} stickyOffset={stickyOffsets[index + 1]} key={key}>
@@ -37,6 +40,8 @@ export const TableHeader = (props: TableHeaderProps) => {
 			                    stickyOffset={stickyOffsets[stickyOffsets.length - 2]}/>
 			: null}
 		<ATableHeaderCell headerHeight={headerHeight} isGrabber={true}
-		                  stickyOffset={stickyOffsets[stickyOffsets.length - 1]}/>
+		                  stickyOffset={stickyOffsets[stickyOffsets.length - 1]}>
+			<IntlLabel keys={['table', 'headers', 'operators']} value={(void 0)}/>
+		</ATableHeaderCell>
 	</>;
 };
