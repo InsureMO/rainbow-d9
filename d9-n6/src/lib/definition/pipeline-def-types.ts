@@ -5,6 +5,11 @@ export interface PipelineStepDef {
 	use: PipelineStepRegisterKey;
 }
 
+export interface PipelineStepDiagramDef extends PipelineStepDef {
+	$x: number;
+	$y: number;
+}
+
 // from @rainbow-o23/n3
 export enum StandardPipelineStepRegisterKey {
 	SNIPPET = 'snippet',

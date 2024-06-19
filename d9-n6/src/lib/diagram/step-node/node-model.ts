@@ -1,4 +1,5 @@
-import {LinkModel, NodeModel, NodeModelGenerics} from '@projectstorm/react-diagrams';
+import {NodeModelGenerics} from '@projectstorm/react-diagrams';
+import {Undefinable} from '@rainbow-d9/n1';
 import {FileDef, PipelineStepDef} from '../../definition';
 import {NextStepPortModel, PreviousStepPortModel} from '../common';
 import {HandledNodeModel, NodeHandlers} from '../node-handlers';
@@ -8,41 +9,36 @@ export enum StepNodeEntityType {
 	NORMAL = 'normal',      // normal step
 }
 
-export class StepNodeEntity {
-	constructor(public readonly step: PipelineStepDef, public readonly type: StepNodeEntityType,
-	            public readonly file: FileDef,
-	            // is sub step of some step
-	            public readonly subOf?: PipelineStepDef) {
-	}
-}
-
 export interface StepNodeModelGenerics {
 	IN: PreviousStepPortModel;
 	OUT: NextStepPortModel;
 }
 
+export interface StepNodeModelOptions {
+	type: StepNodeEntityType;
+	// is sub step of some step
+	subOf?: PipelineStepDef;
+	handlers: NodeHandlers;
+}
+
 export class StepNodeModel extends HandledNodeModel<NodeModelGenerics & StepNodeModelGenerics> {
 	public static readonly TYPE = 'step-node';
 
-	public constructor(public readonly entity: StepNodeEntity, handlers: NodeHandlers) {
-		super({type: StepNodeModel.TYPE}, handlers);
+	public constructor(public readonly step: PipelineStepDef,
+	                   public readonly file: FileDef,
+	                   private readonly rest: StepNodeModelOptions) {
+		super({type: StepNodeModel.TYPE}, rest.handlers);
 		// always have a port which link from previous step or start node
 		this.addPort(new PreviousStepPortModel());
 		// always have a port which link to next step or end node
 		this.addPort(new NextStepPortModel());
 	}
 
-	public previous(node: NodeModel): LinkModel {
-		const port = this.getPort(PreviousStepPortModel.NAME);
-		const link = port.createLinkModel();
-		link.setSourcePort(node.getPort(NextStepPortModel.NAME));
-		return link;
+	public getEntityType() {
+		return this.rest.type;
 	}
 
-	public next(node: NodeModel): LinkModel {
-		const port = this.getPort(NextStepPortModel.NAME);
-		const link = port.createLinkModel();
-		link.setTargetPort(node.getPort(PreviousStepPortModel.NAME));
-		return link;
+	public getSubOf(): Undefinable<PipelineStepDef> {
+		return this.rest.subOf;
 	}
 }

@@ -11,6 +11,17 @@ export interface FileDef {
 	enabled?: boolean;
 }
 
+export interface FileDiagramDef extends FileDef {
+	$diagram?: {
+		// for start node
+		$start?: { $x?: number; $y?: number; },
+		// for end node
+		$end?: { $x?: number; $y?: number; },
+		// for virtual step node if file is step-sets or step
+		$virtualStep?: { $x?: number; $y?: number; }
+	};
+}
+
 export interface PipelineStepUseDef {
 	use: PipelineStepRegisterKey;
 }

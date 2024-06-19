@@ -1,6 +1,6 @@
-import {LinkModel, NodeModel, NodeModelGenerics} from '@projectstorm/react-diagrams';
+import {NodeModelGenerics} from '@projectstorm/react-diagrams';
 import {FileDef} from '../../definition';
-import {NextStepPortModel, PreviousStepPortModel} from '../common';
+import {NextStepPortModel} from '../common';
 import {HandledNodeModel, NodeHandlers} from '../node-handlers';
 
 export interface StartNodeModelGenerics {
@@ -14,12 +14,5 @@ export class StartNodeModel extends HandledNodeModel<NodeModelGenerics & StartNo
 		super({type: StartNodeModel.TYPE}, handlers);
 		// always have a port which link to next step
 		this.addPort(new NextStepPortModel());
-	}
-
-	public next(node: NodeModel): LinkModel {
-		const port = this.getPort(NextStepPortModel.NAME);
-		const link = port.createLinkModel();
-		link.setTargetPort(node.getPort(PreviousStepPortModel.NAME));
-		return link;
 	}
 }

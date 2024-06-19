@@ -4,6 +4,8 @@ export * from './types';
 export * from './widgets';
 export * from './icons';
 export * from './labels';
+export * from './definition';
+export * as O23PlaygroundConstants from './constants';
 
 export * from './diagram';
 export * from './edit-dialog';

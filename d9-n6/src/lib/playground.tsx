@@ -44,7 +44,12 @@ export interface PlaygroundDelegateState {
 }
 
 export const PlaygroundDelegate = (props: PlaygroundProps) => {
-	const {$pp, $wrapped, usage, serializer, deserializer, ...rest} = props;
+	const {
+		$pp, $wrapped,
+		usage, assistant,
+		serializer, deserializer,
+		...rest
+	} = props;
 	const {$p2r, $onValueChange, $avs: {$disabled, $visible}} = $wrapped;
 
 	const ref = useRef<HTMLDivElement>(null);
@@ -74,7 +79,8 @@ export const PlaygroundDelegate = (props: PlaygroundProps) => {
 	                          id={PPUtils.asId(PPUtils.absolute($p2r, $pp), props.id)}
 	                          ref={ref}>
 		<PlaygroundBridge content={content} onContentChanged={onContentChanged}/>
-		<Editor content={content} usage={usage} serializer={state.serializer} deserializer={state.deserializer}/>
+		<Editor content={content} usage={usage} assistant={assistant}
+		        serializer={state.serializer} deserializer={state.deserializer}/>
 	</PlaygroundWrapper>;
 };
 

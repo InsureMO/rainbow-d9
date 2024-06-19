@@ -8,7 +8,7 @@ import {initEngine} from '../diagram';
 import {Labels} from '../labels';
 import {PlaygroundEventTypes, usePlaygroundEventBus} from '../playground-event-bus';
 import {EditorProps, MarkdownContent} from '../types';
-import {createDiagramEntities, DiagramHandlers} from './diagram-utils';
+import {createDiagramNodes, DiagramHandlers} from './diagram-utils';
 import {ErrorBoundary} from './error-boundary';
 import {EditorWrapper, ParseError} from './widgets';
 
@@ -82,7 +82,7 @@ export const EditorKernel = (props: EditorProps) => {
 					fire(PlaygroundEventTypes.CONTENT_CHANGED, content);
 				}
 			});
-			const model = createDiagramEntities(def, handlers);
+			const model = createDiagramNodes(def, handlers);
 			engine.setModel(model);
 			return {
 				engine, content, serializer, deserializer, def,
@@ -119,7 +119,7 @@ export const EditorKernel = (props: EditorProps) => {
 					fire(PlaygroundEventTypes.CONTENT_CHANGED, content);
 				}
 			});
-			const model = createDiagramEntities(def, handlers);
+			const model = createDiagramNodes(def, handlers);
 			stateRef.current.engine.setModel(model);
 			delete stateRef.current.message;
 			stateRef.current.diagramStatus = EditorKernelDiagramStatus.FIRST_PAINT;

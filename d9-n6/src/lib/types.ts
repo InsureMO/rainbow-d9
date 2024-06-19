@@ -1,6 +1,6 @@
 import {MonitorNodeDef, ValueChangeableNodeDef, WidgetProps} from '@rainbow-d9/n1';
 import {OmitHTMLProps, OmitNodeDef} from '@rainbow-d9/n2';
-import {FileDefDeserializer, FileDefSerializer} from './definition';
+import {FileDefDeserializer, FileDefSerializer, PipelineStepDef} from './definition';
 
 export type MarkdownContent = string;
 
@@ -14,9 +14,20 @@ export interface PlaygroundModuleUsage {
 	useN8?: boolean;
 }
 
+export interface PlaygroundModuleAssistant {
+	/**
+	 * create default step placeholder.
+	 * for example. when
+	 * 1. new step,
+	 * 2. first sub step of new step sets
+	 */
+	createDefaultStep?: () => PipelineStepDef;
+}
+
 /** configuration definition */
 export type PlaygroundDef = ValueChangeableNodeDef & OmitHTMLProps<HTMLDivElement> & {
 	usage?: PlaygroundModuleUsage;
+	assistant?: PlaygroundModuleAssistant;
 	/** def file serializer, use yaml by default */
 	serializer?: FileDefSerializer;
 	/** def file deserializer, use yaml by default */
@@ -26,7 +37,7 @@ export type PlaygroundDef = ValueChangeableNodeDef & OmitHTMLProps<HTMLDivElemen
 /** widget definition, with html attributes */
 export type PlaygroundProps = OmitNodeDef<PlaygroundDef> & WidgetProps;
 
-export interface EditorProps extends Pick<PlaygroundProps, 'usage'> {
+export interface EditorProps extends Pick<PlaygroundProps, 'usage' | 'assistant'> {
 	content?: string;
 	serializer: FileDefSerializer;
 	deserializer: FileDefDeserializer;
