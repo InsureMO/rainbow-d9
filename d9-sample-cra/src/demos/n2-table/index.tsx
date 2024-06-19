@@ -6,7 +6,7 @@ import {
 	useBridgeEventBus,
 	ValueChangedNotification
 } from '@rainbow-d9/n1';
-import {GlobalRoot, PaginationData} from '@rainbow-d9/n2';
+import {$d9n2, GlobalRoot, PaginationData} from '@rainbow-d9/n2';
 import {nanoid} from 'nanoid';
 import {MutableRefObject, useRef} from 'react';
 import {CustomEventHandler} from '../custom-event-handler';
@@ -21,6 +21,14 @@ DemoData.table2 = DemoData.nestedTables.filter((_, index) => index < 5);
 // @ts-ignore
 DemoData.page2 = JSON.parse(JSON.stringify(DemoData.page));
 
+$d9n2.intl.labels['en-US'] = {
+	...($d9n2.intl.labels['en-US'] ?? {}),
+	table: {
+		headers: {
+			operators: 'Actions'
+		}
+	}
+};
 const InternalN2Table = () => {
 	const def = useDemoMarkdown(DemoContent);
 	const {fire} = useBridgeEventBus();
