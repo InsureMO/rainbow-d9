@@ -1,13 +1,12 @@
+import {confirm} from './confirm';
+import {discard} from './discard';
 import {elementCode} from './element-code';
 import {elementEnabled} from './element-enabled';
 import {elementType} from './element-type';
+import {prepare} from './prepare';
 
 export * from './types';
 export * from './helper';
-
-export * from './prepare';
-export * from './confirm';
-export * from './discard';
 
 export * from './element-code';
 export * from './element-enabled';
@@ -24,4 +23,6 @@ export * from './element-response';
 export * from './element-expose-headers';
 export * from './element-expose-file';
 
-export const elements = [elementCode, elementEnabled, elementType];
+export const FileDefs = {
+	prepare, confirm, discard, elements: [elementCode, elementType, elementEnabled]
+};

@@ -272,7 +272,7 @@ export const StartNodeWidget = (props: StartNodeWidgetProps) => {
 		return ret;
 	};
 	const onDiscard = (model: ConfigurableModel) => FileDefs.discard(model);
-	const prepareModel = () => FileDefs.prepareModel(def);
+	const prepareModel = () => FileDefs.prepare(def);
 	const onDoubleClicked = () => {
 		fire(PlaygroundEventTypes.SHOW_EDIT_DIALOG,
 			<DialogContent helpDoc={HelpDocs.pipeline}

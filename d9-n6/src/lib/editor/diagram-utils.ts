@@ -84,7 +84,13 @@ export const createStepNode = (step: PipelineStepDef, file: FileDef, options: St
 	allNodes.push(node);
 	const link = node.previous(previousNode);
 	allLinks.push(link);
-	return node;
+	const endNode = DEFAULTS.createSubStepNodes(node);
+	if (endNode == null) {
+		// no sub nodes created
+		return node;
+	} else {
+		return endNode;
+	}
 };
 
 export const createDiagramNodes = (file: FileDef, handlers: DiagramHandlers): DiagramModel => {

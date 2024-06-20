@@ -5,6 +5,18 @@ export interface PipelineStepDef {
 	use: PipelineStepRegisterKey;
 }
 
+export interface AllInPipelineStepDef extends PipelineStepDef {
+	fromRequest?: string;
+	toResponse?: string;
+	mergeRequest?: boolean | string;
+	errorHandles?: {
+		catchable?: string | Array<PipelineStepDef>;
+		uncatchable?: string | Array<PipelineStepDef>;
+		exposed?: string | Array<PipelineStepDef>;
+		any?: string | Array<PipelineStepDef>;
+	};
+}
+
 export interface PipelineStepDiagramDef extends PipelineStepDef {
 	$x: number;
 	$y: number;
@@ -40,4 +52,9 @@ export enum StandardPipelineStepRegisterKey {
 
 	REF_PIPELINE = 'ref-pipeline',
 	REF_STEP = 'ref-step'
+}
+
+export interface SnippetPipelineStepDef extends AllInPipelineStepDef {
+	use: StandardPipelineStepRegisterKey.SNIPPET;
+	snippet?: string;
 }

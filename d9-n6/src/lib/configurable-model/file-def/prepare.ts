@@ -8,9 +8,10 @@ import {
 	PipelineStepUseDef
 } from '../../definition';
 import {ConfigurableModel} from '../../edit-dialog';
+import {FileNodeConfigurer} from '../types';
 import {FileDefModel, PipelineFileDefModel, StepOrSetsFileDefModel} from './types';
 
-export const prepareModel = (def: FileDef): ConfigurableModel => {
+export const prepare: FileNodeConfigurer['prepare'] = (def: FileDef): ConfigurableModel => {
 	const model: FileDefModel = {
 		code: def.code,
 		type: def.type,
