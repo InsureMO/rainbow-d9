@@ -5,6 +5,8 @@ import {createSubNodes} from './create-sub-nodes';
 import {discard} from './discard';
 import {elementName} from './element-name';
 import {PortFromRequest} from './port-from-request';
+import {PortMergeRequest} from './port-merge-request';
+import {PortToResponse} from './port-to-response';
 import {prepare} from './prepare';
 import {CommonStepDefModel, StepPort} from './types';
 
@@ -19,8 +21,8 @@ export interface CommonStepDefsProperties {
 
 export interface CommonStepDefsPorts {
 	fromRequest: StepPort;
-	// toResponse: ConfigurableElement;
-	// mergeRequest: ConfigurableElement;
+	toResponse: StepPort;
+	mergeRequest: StepPort;
 }
 
 export interface CommonStepDefsType extends Omit<StepNodeConfigurer<CommonStepDefModel>, 'use' | 'properties' | 'ports' | 'helpDocs'> {
@@ -31,8 +33,6 @@ export interface CommonStepDefsType extends Omit<StepNodeConfigurer<CommonStepDe
 export const CommonStepDefs: CommonStepDefsType = {
 	prepare, confirm, discard,
 	properties: {name: elementName},
-	ports: {
-		fromRequest: PortFromRequest
-	},
+	ports: {fromRequest: PortFromRequest, toResponse: PortToResponse, mergeRequest: PortMergeRequest},
 	createSubNodes
 };

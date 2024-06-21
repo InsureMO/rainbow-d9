@@ -18,9 +18,9 @@ import {
 	NodeSecondTitle,
 	NodeTitle,
 	NodeTitleSpreader,
-	NodeWrapper
+	NodeWrapper,
+	PrePort
 } from '../common';
-import {ApiVariablePortWidget} from './api-variable-port';
 import {StartNodeModel} from './node-model';
 
 export interface StartNodeWidgetProps {
@@ -106,8 +106,8 @@ export const EnabledPortWidget = (props: { def: PipelineFileDef }) => {
 		return null;
 	}
 
-	return <ApiVariablePortWidget label={Labels.Enabled} required={true} defined={true} all={false}
-	                              allAsBoolean={true} danger={true}/>;
+	return <PrePort label={Labels.Enabled} required={true} defined={true} all={false}
+	                allAsBoolean={true} danger={true}/>;
 };
 
 export const ApiMethodPortWidget = (props: { def: PipelineFileDef }) => {
@@ -116,9 +116,9 @@ export const ApiMethodPortWidget = (props: { def: PipelineFileDef }) => {
 	const {method} = def;
 	const exists = VUtils.isNotBlank(method);
 
-	return <ApiVariablePortWidget label={Labels.ApiMethodLabel} required={true}
-	                              defined={exists} all={exists}
-	                              allAsBoolean={false} allAsGiven={`${method ?? ''}`.toUpperCase().trim()}/>;
+	return <PrePort label={Labels.ApiMethodLabel} required={true}
+	                defined={exists} all={exists}
+	                allAsBoolean={false} allAsGiven={`${method ?? ''}`.toUpperCase().trim()}/>;
 };
 
 export const ApiHeadersPortWidget = (props: { def: PipelineFileDef }) => {
@@ -136,8 +136,8 @@ export const ApiHeadersPortWidget = (props: { def: PipelineFileDef }) => {
 		}
 	}
 
-	return <ApiVariablePortWidget label={Labels.ApiHeadersLabel} required={false}
-	                              defined={count != null || all != null} count={count} all={all}/>;
+	return <PrePort label={Labels.ApiHeadersLabel} required={false}
+	                defined={count != null || all != null} count={count} all={all}/>;
 };
 
 export const ApiPathParamsPortWidget = (props: { def: PipelineFileDef }) => {
@@ -155,8 +155,8 @@ export const ApiPathParamsPortWidget = (props: { def: PipelineFileDef }) => {
 		}
 	}
 
-	return <ApiVariablePortWidget label={Labels.ApiPathParametersLabel} required={false}
-	                              defined={count != null || all != null} count={count} all={all}/>;
+	return <PrePort label={Labels.ApiPathParametersLabel} required={false}
+	                defined={count != null || all != null} count={count} all={all}/>;
 };
 
 export const ApiQueryParamsPortWidget = (props: { def: PipelineFileDef }) => {
@@ -174,8 +174,8 @@ export const ApiQueryParamsPortWidget = (props: { def: PipelineFileDef }) => {
 		}
 	}
 
-	return <ApiVariablePortWidget label={Labels.ApiQueryParametersLabel} required={false}
-	                              defined={count != null || all != null} count={count} all={all}/>;
+	return <PrePort label={Labels.ApiQueryParametersLabel} required={false}
+	                defined={count != null || all != null} count={count} all={all}/>;
 };
 
 export const ApiBodyPortWidget = (props: { def: PipelineFileDef }) => {
@@ -183,8 +183,8 @@ export const ApiBodyPortWidget = (props: { def: PipelineFileDef }) => {
 
 	const {body} = def;
 
-	return <ApiVariablePortWidget label={Labels.ApiBodyLabel} required={false} defined={body != null}
-	                              all={body} allAsBoolean={true}/>;
+	return <PrePort label={Labels.ApiBodyLabel} required={false} defined={body != null}
+	                all={body} allAsBoolean={true}/>;
 };
 
 export const ApiFilesPortWidget = (props: { def: PipelineFileDef }) => {
@@ -196,8 +196,8 @@ export const ApiFilesPortWidget = (props: { def: PipelineFileDef }) => {
 		all = true;
 	}
 
-	return <ApiVariablePortWidget label={Labels.ApiFilesLabel} required={false} defined={all != null}
-	                              all={all} allAsBoolean={true}/>;
+	return <PrePort label={Labels.ApiFilesLabel} required={false} defined={all != null}
+	                all={all} allAsBoolean={true}/>;
 };
 
 export const ApiExposeHeadersPortWidget = (props: { def: PipelineFileDef }) => {
@@ -209,8 +209,8 @@ export const ApiExposeHeadersPortWidget = (props: { def: PipelineFileDef }) => {
 		count = (void 0);
 	}
 
-	return <ApiVariablePortWidget label={Labels.ApiExposeHeadersLabel} required={false} defined={count != null}
-	                              count={count}/>;
+	return <PrePort label={Labels.ApiExposeHeadersLabel} required={false} defined={count != null}
+	                count={count}/>;
 };
 
 export const ApiExposeFilePortWidget = (props: { def: PipelineFileDef }) => {
@@ -218,8 +218,8 @@ export const ApiExposeFilePortWidget = (props: { def: PipelineFileDef }) => {
 
 	const {exposeFile} = def;
 
-	return <ApiVariablePortWidget label={Labels.ApiExposeFileLabel} required={false} defined={exposeFile != null}
-	                              all={exposeFile} allAsBoolean={true}/>;
+	return <PrePort label={Labels.ApiExposeFileLabel} required={false} defined={exposeFile != null}
+	                all={exposeFile} allAsBoolean={true}/>;
 };
 
 export const InitOnlyPortWidget = (props: { def: PipelineFileDef }) => {
@@ -231,8 +231,8 @@ export const InitOnlyPortWidget = (props: { def: PipelineFileDef }) => {
 		return null;
 	}
 
-	return <ApiVariablePortWidget label={Labels.ExecuteOnInitLabel} required={false} defined={true} all={true}
-	                              allAsBoolean={true}/>;
+	return <PrePort label={Labels.ExecuteOnInitLabel} required={false} defined={true} all={true}
+	                allAsBoolean={true}/>;
 };
 
 export const StartNodeWidget = (props: StartNodeWidgetProps) => {

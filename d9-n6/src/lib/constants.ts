@@ -1,6 +1,6 @@
 import {Undefinable} from '@rainbow-d9/n1';
 import {AllStepDefs} from './configurable-model';
-import {PipelineStepDef, StandardPipelineStepRegisterKey} from './definition';
+import {PipelineStepDef, SnippetPipelineStepDef, StandardPipelineStepRegisterKey} from './definition';
 import {StepNodeModel} from './diagram';
 
 const DEFAULT_CREATE_SUB_STEP_NODES = (node: StepNodeModel): Undefinable<StepNodeModel> => {
@@ -10,7 +10,15 @@ const DEFAULT_CREATE_SUB_STEP_NODES = (node: StepNodeModel): Undefinable<StepNod
 };
 
 export const DEFAULTS = {
-	createDefaultStep: (): PipelineStepDef => ({name: '', use: StandardPipelineStepRegisterKey.SNIPPET}),
+	createDefaultStep: (): PipelineStepDef => {
+		return {
+			name: '',
+			use: StandardPipelineStepRegisterKey.SNIPPET,
+			fromRequest: '$factor',
+			toResponse: '$result',
+			mergeRequest: true
+		} as SnippetPipelineStepDef;
+	},
 	createSubStepNodes: DEFAULT_CREATE_SUB_STEP_NODES
 };
 

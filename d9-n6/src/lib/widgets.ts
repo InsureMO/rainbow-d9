@@ -8,7 +8,8 @@ const NODE_END_COLOR = '#e0b35f';
 const NODE_STEP_COLOR = '#54956b';
 const NEXT_STEP_PORT_COLOR = '#1f6b73';
 const PREVIOUS_STEP_PORT_COLOR = '#00618b';
-const API_VARIABLE_PORT_COLOR = '#87a55f';
+const PRE_PORT_COLOR = '#87a55f';
+const POST_PORT_COLOR = '#c69dab';
 export const PlaygroundCssVars = {
 	EDITOR_BACKGROUND_BLOCK_SIZE,
 	EDITOR_BACKGROUND_LINE_COLOR,
@@ -117,22 +118,38 @@ export const PlaygroundCssVars = {
 	NODE_PREVIOUS_STEP_PORT_BACKGROUND: `var(--o23-playground-previous-step-port-background, ${PREVIOUS_STEP_PORT_COLOR})`,
 	NODE_PREVIOUS_STEP_PORT_BORDER: `var(--o23-playground-previous-step-port-border, 1px solid ${color(PREVIOUS_STEP_PORT_COLOR).darken(0.1).opaquer(0.5)})`,
 	NODE_PREVIOUS_STEP_PORT_PADDING: 'var(--o23-playground-previous-step-port-padding, 0 12px 0 8px)',
-	// api variable port
-	NODE_API_VARIABLE_PORT_FONT_SIZE: 'var(--o23-playground-api-variable-port-font-size, 14px)',
-	NODE_API_VARIABLE_PORT_FONT_WEIGHT: 'var(--o23-playground-api-variable-port-font-weight, 400)',
-	NODE_API_VARIABLE_PORT_COLOR: `var(--o23-playground-api-variable-port-color, ${CssVars.INVERT_COLOR})`,
-	NODE_API_VARIABLE_PORT_BACKGROUND: `var(--o23-playground-api-variable-port-background, ${API_VARIABLE_PORT_COLOR})`,
-	NODE_API_VARIABLE_PORT_BORDER: `var(--o23-playground-api-variable-port-border, 1px solid ${color(API_VARIABLE_PORT_COLOR).darken(0.1).opaquer(0.5)})`,
-	NODE_API_VARIABLE_PORT_PADDING: 'var(--o23-playground-api-variable-port-padding, 0 12px 0 8px)',
-	NODE_API_VARIABLE_PORT_UNDEFINED_BACKGROUND: `var(--o23-playground-api-variable-port-undefined-background, ${CssConstants.WAIVE_COLOR})`,
-	NODE_API_VARIABLE_PORT_UNDEFINED_BORDER: `var(--o23-playground-api-variable-port-undefined-border, 1px solid ${color(CssConstants.WAIVE_COLOR).darken(0.1).opaquer(0.5)})`,
-	NODE_API_VARIABLE_PORT_LACKING_BACKGROUND: `var(--o23-playground-api-variable-port-lacking-background, ${CssVars.DANGER_COLOR})`,
-	NODE_API_VARIABLE_PORT_LACKING_BORDER: `var(--o23-playground-api-variable-port-lacking-border, 1px solid ${color(CssConstants.DANGER_COLOR).darken(0.1).opaquer(0.5)})`,
-	NODE_API_VARIABLE_PORT_DANGER_BORDER: `var(--o23-playground-api-variable-port-danger-border, 1px solid ${CssVars.DANGER_COLOR})`,
-	NODE_API_VARIABLE_PORT_DANGER_BACKGROUND: `var(--o23-playground-api-variable-port-danger-background, ${color(CssConstants.DANGER_COLOR).darken(0.1).opaquer(0.5)})`,
-	NODE_API_VARIABLE_PORT_BADGE_BACKGROUND: `var(--o23-playground-api-variable-port-badge-background, ${CssVars.SUCCESS_COLOR})`,
-	NODE_API_VARIABLE_PORT_BADGE_DANGER_BACKGROUND: `var(--o23-playground-api-variable-port-badge-danger-background, ${CssVars.DANGER_COLOR})`,
-	NODE_API_VARIABLE_PORT_BADGE_BORDER: `var(--o23-playground-api-variable-port-badge-background, 1px solid ${CssVars.INVERT_COLOR})`,
+	// pre port
+	NODE_PRE_PORT_FONT_SIZE: 'var(--o23-playground-pre-port-font-size, 14px)',
+	NODE_PRE_PORT_FONT_WEIGHT: 'var(--o23-playground-pre-port-font-weight, 400)',
+	NODE_PRE_PORT_COLOR: `var(--o23-playground-pre-port-color, ${CssVars.INVERT_COLOR})`,
+	NODE_PRE_PORT_BACKGROUND: `var(--o23-playground-pre-port-background, ${PRE_PORT_COLOR})`,
+	NODE_PRE_PORT_BORDER: `var(--o23-playground-pre-port-border, 1px solid ${color(PRE_PORT_COLOR).darken(0.1).opaquer(0.5)})`,
+	NODE_PRE_PORT_PADDING: 'var(--o23-playground-pre-port-padding, 0 12px 0 8px)',
+	NODE_PRE_PORT_UNDEFINED_BACKGROUND: `var(--o23-playground-pre-port-undefined-background, ${CssConstants.WAIVE_COLOR})`,
+	NODE_PRE_PORT_UNDEFINED_BORDER: `var(--o23-playground-pre-port-undefined-border, 1px solid ${color(CssConstants.WAIVE_COLOR).darken(0.1).opaquer(0.5)})`,
+	NODE_PRE_PORT_LACKING_BACKGROUND: `var(--o23-playground-pre-port-lacking-background, ${CssVars.DANGER_COLOR})`,
+	NODE_PRE_PORT_LACKING_BORDER: `var(--o23-playground-pre-port-lacking-border, 1px solid ${color(CssConstants.DANGER_COLOR).darken(0.1).opaquer(0.5)})`,
+	NODE_PRE_PORT_DANGER_BORDER: `var(--o23-playground-pre-port-danger-border, 1px solid ${CssVars.DANGER_COLOR})`,
+	NODE_PRE_PORT_DANGER_BACKGROUND: `var(--o23-playground-pre-port-danger-background, ${color(CssConstants.DANGER_COLOR).darken(0.1).opaquer(0.5)})`,
+	NODE_PRE_PORT_BADGE_BACKGROUND: `var(--o23-playground-pre-port-badge-background, ${CssVars.SUCCESS_COLOR})`,
+	NODE_PRE_PORT_BADGE_DANGER_BACKGROUND: `var(--o23-playground-pre-port-badge-danger-background, ${CssVars.DANGER_COLOR})`,
+	NODE_PRE_PORT_BADGE_BORDER: `var(--o23-playground-pre-port-badge-background, 1px solid ${CssVars.INVERT_COLOR})`,
+	// post port
+	NODE_POST_PORT_FONT_SIZE: 'var(--o23-playground-post-port-font-size, 14px)',
+	NODE_POST_PORT_FONT_WEIGHT: 'var(--o23-playground-post-port-font-weight, 400)',
+	NODE_POST_PORT_COLOR: `var(--o23-playground-post-port-color, ${CssVars.INVERT_COLOR})`,
+	NODE_POST_PORT_BACKGROUND: `var(--o23-playground-post-port-background, ${POST_PORT_COLOR})`,
+	NODE_POST_PORT_BORDER: `var(--o23-playground-post-port-border, 1px solid ${color(POST_PORT_COLOR).darken(0.1).opaquer(0.5)})`,
+	NODE_POST_PORT_PADDING: 'var(--o23-playground-post-port-padding, 0 8px 0 12px)',
+	NODE_POST_PORT_UNDEFINED_BACKGROUND: `var(--o23-playground-post-port-undefined-background, ${CssConstants.WAIVE_COLOR})`,
+	NODE_POST_PORT_UNDEFINED_BORDER: `var(--o23-playground-post-port-undefined-border, 1px solid ${color(CssConstants.WAIVE_COLOR).darken(0.1).opaquer(0.5)})`,
+	NODE_POST_PORT_LACKING_BACKGROUND: `var(--o23-playground-post-port-lacking-background, ${CssVars.DANGER_COLOR})`,
+	NODE_POST_PORT_LACKING_BORDER: `var(--o23-playground-post-port-lacking-border, 1px solid ${color(CssConstants.DANGER_COLOR).darken(0.1).opaquer(0.5)})`,
+	NODE_POST_PORT_DANGER_BORDER: `var(--o23-playground-post-port-danger-border, 1px solid ${CssVars.DANGER_COLOR})`,
+	NODE_POST_PORT_DANGER_BACKGROUND: `var(--o23-playground-post-port-danger-background, ${color(CssConstants.DANGER_COLOR).darken(0.1).opaquer(0.5)})`,
+	NODE_POST_PORT_BADGE_BACKGROUND: `var(--o23-playground-post-port-badge-background, ${CssVars.SUCCESS_COLOR})`,
+	NODE_POST_PORT_BADGE_DANGER_BACKGROUND: `var(--o23-playground-post-port-badge-danger-background, ${CssVars.DANGER_COLOR})`,
+	NODE_POST_PORT_BADGE_BORDER: `var(--o23-playground-post-port-badge-background, 1px solid ${CssVars.INVERT_COLOR})`,
 	// start node
 	NODE_START_BORDER_COLOR: `var(--o23-playground-node-start-border-color, ${NODE_START_COLOR})`,
 	NODE_START_BORDER: `var(--o23-playground-node-start-border, 2px solid ${NODE_START_COLOR})`,

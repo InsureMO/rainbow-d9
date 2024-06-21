@@ -49,6 +49,8 @@ export const Labels = {
 
 	// step
 	StepFromRequest: <IntlLabel keys={['o23', 'step', 'from-request']} value="Transform Input"/>,
+	StepToResponse: <IntlLabel keys={['o23', 'step', 'to-response']} value="Transform Output"/>,
+	StepMergeRequest: <IntlLabel keys={['o23', 'step', 'merge-request']} value="Merge Back"/>,
 
 	// common variables, variable might be used in multiple places,
 	// such as attribute label, attribute configuration label, attribute configuration value label, etc.
