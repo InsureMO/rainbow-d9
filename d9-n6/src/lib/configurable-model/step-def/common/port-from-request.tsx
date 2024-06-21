@@ -8,9 +8,9 @@ export const PortFromRequest = (props: StepPortProps) => {
 	const {step: def} = props;
 
 	const {fromRequest} = def;
-	const exits = VUtils.isNotBlank(fromRequest);
+	const exists = VUtils.isNotBlank(fromRequest);
 
-	if (!exits) {
+	if (!exists) {
 		return null;
 	}
 

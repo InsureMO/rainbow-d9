@@ -23,9 +23,9 @@ export interface CommonStepDefModel extends ConfigurableModel, PipelineStepDef {
 	};
 }
 
-export interface StepPortProps {
-	step: CommonStepDefModel;
+export interface StepPortProps<S extends CommonStepDefModel = CommonStepDefModel> {
+	step: S;
 	file: FileDef;
 }
 
-export type StepPort = (props: StepPortProps) => JSX.Element;
+export type StepPort<S extends CommonStepDefModel = CommonStepDefModel> = (props: StepPortProps<S>) => JSX.Element;

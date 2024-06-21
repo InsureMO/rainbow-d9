@@ -2,6 +2,7 @@ import {HelpDocs} from '../../../help-docs';
 import {StepNodeConfigurer} from '../../types';
 import {CommonStepDefs} from '../common';
 import {confirm} from './confirm';
+import {PortSnippet} from './port-snippet';
 import {prepare} from './prepare';
 import {SnippetStepDefModel} from './types';
 
@@ -14,6 +15,7 @@ export const SnippetStepDefs: StepNodeConfigurer<SnippetStepDefModel> = {
 	ports: [
 		{key: 'from-request', port: CommonStepDefs.ports.fromRequest},
 		{key: 'to-response', port: CommonStepDefs.ports.toResponse},
+		{key: 'snippet', port: PortSnippet},
 		{key: 'merge-request', port: CommonStepDefs.ports.mergeRequest}
 	],
 	createSubNodes: CommonStepDefs.createSubNodes,

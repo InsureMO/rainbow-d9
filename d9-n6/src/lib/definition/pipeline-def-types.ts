@@ -1,27 +1,5 @@
 export type PipelineStepRegisterKey = string;
 
-export interface PipelineStepDef {
-	name: string;
-	use: PipelineStepRegisterKey;
-}
-
-export interface AllInPipelineStepDef extends PipelineStepDef {
-	fromRequest?: string;
-	toResponse?: string;
-	mergeRequest?: boolean | string;
-	errorHandles?: {
-		catchable?: string | Array<PipelineStepDef>;
-		uncatchable?: string | Array<PipelineStepDef>;
-		exposed?: string | Array<PipelineStepDef>;
-		any?: string | Array<PipelineStepDef>;
-	};
-}
-
-export interface PipelineStepDiagramDef extends PipelineStepDef {
-	$x: number;
-	$y: number;
-}
-
 // from @rainbow-o23/n3
 export enum StandardPipelineStepRegisterKey {
 	SNIPPET = 'snippet',
@@ -52,6 +30,28 @@ export enum StandardPipelineStepRegisterKey {
 
 	REF_PIPELINE = 'ref-pipeline',
 	REF_STEP = 'ref-step'
+}
+
+export interface PipelineStepDef {
+	name: string;
+	use: PipelineStepRegisterKey | StandardPipelineStepRegisterKey;
+}
+
+export interface AllInPipelineStepDef extends PipelineStepDef {
+	fromRequest?: string;
+	toResponse?: string;
+	mergeRequest?: boolean | string;
+	errorHandles?: {
+		catchable?: string | Array<PipelineStepDef>;
+		uncatchable?: string | Array<PipelineStepDef>;
+		exposed?: string | Array<PipelineStepDef>;
+		any?: string | Array<PipelineStepDef>;
+	};
+}
+
+export interface PipelineStepDiagramDef extends PipelineStepDef {
+	$x: number;
+	$y: number;
 }
 
 export interface SnippetPipelineStepDef extends AllInPipelineStepDef {
