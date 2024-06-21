@@ -47,6 +47,7 @@ export const PlaygroundCssVars = {
 	EDIT_DIALOG_PART_TITLE_FONT_WEIGHT: 'var(--o23-playground-dialog-part-title-font-weight, 600)',
 	EDIT_DIALOG_PART_BODY_MARGIN: `var(--o23-playground-dialog-part-body-margin, 0 -16px)`,
 	EDIT_DIALOG_PART_BODY_PADDING: 'var(--o23-playground-dialog-part-body-padding, 0 16px)',
+	EDIT_DIALOG_HELP_DOC_MAX_WIDTH: 'var(--o23-playground-dialog-help-doc-max-width, 600px)',
 	EDIT_DIALOG_HELP_DOC_TITLE_COLOR: `var(--o23-playground-dialog-part-title-color, rgb(184, 184, 184))`,
 	EDIT_DIALOG_HELP_DOC_OPEN_HANDLE_LEFT: 'var(--o23-playground-dialog-help-doc-open-handle-left, 0)',
 	EDIT_DIALOG_HELP_DOC_OPEN_HANDLE_WIDTH: 'var(--o23-playground-dialog-help-doc-open-handle-width, 64px)',

@@ -32,7 +32,8 @@ export const buildConfig = (lint) => {
 			'react', 'react-dom', 'styled-components',
 			'nanoid', 'color', 'js-yaml',
 			'react-markdown', 'remark-gfm',
-			"github-markdown-css/github-markdown.css",
+			'github-markdown-css/github-markdown.css',
+			'react-syntax-highlighter', 'react-syntax-highlighter/dist/esm/styles/prism',
 			'@projectstorm/react-canvas-core', '@projectstorm/react-diagrams-core', '@projectstorm/react-diagrams',
 			'@rainbow-d9/n1', '@rainbow-d9/n2', '@rainbow-d9/n3'
 		]

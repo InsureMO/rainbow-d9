@@ -16,7 +16,7 @@ export const prepare: StepNodeConfigurer<CommonStepDefModel>['prepare'] = (def: 
 		errorHandles: {
 			catchable, uncatchable,
 			exposed, any: anyError
-		}
+		} = {}
 	} = def;
 	model.errorHandles = {};
 	const copyErrorHandle = (def: string | Array<PipelineStepDef>,

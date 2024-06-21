@@ -43,7 +43,7 @@ export const EditDialogLayoutControllerHandle = styled.div.attrs<{ opened: boole
     position: absolute;
 
     &[data-opened=true] + div[data-w=o23-playground-edit-dialog-content] {
-        grid-template-columns: calc((100% - ${PlaygroundCssVars.EDIT_DIALOG_NAVIGATOR_WIDTH}) / 2 - ${PlaygroundCssVars.EDIT_DIALOG_HELP_DOC_COLLAPSED_WIDTH}) ${PlaygroundCssVars.EDIT_DIALOG_NAVIGATOR_WIDTH} 1fr;
+        grid-template-columns: min(${PlaygroundCssVars.EDIT_DIALOG_HELP_DOC_MAX_WIDTH}, calc((100% - ${PlaygroundCssVars.EDIT_DIALOG_NAVIGATOR_WIDTH}) / 2 - ${PlaygroundCssVars.EDIT_DIALOG_HELP_DOC_COLLAPSED_WIDTH})) ${PlaygroundCssVars.EDIT_DIALOG_NAVIGATOR_WIDTH} 1fr;
 
         > div[data-w=o23-playground-edit-dialog-help-doc] > div[data-w=o23-playground-edit-dialog-part-content] > div[data-w=o23-playground-edit-dialog-part-header] > div[data-w=o23-playground-edit-dialog-part-title] {
             color: unset;
@@ -143,6 +143,10 @@ export const EditDialogHelpDocContainer = styled.div.attrs({[DOM_KEY_WIDGET]: 'o
     border-bottom-left-radius: ${PlaygroundCssVars.EDIT_DIALOG_BORDER_RADIUS};
     box-shadow: ${PlaygroundCssVars.EDIT_DIALOG_SHADOW};
     overflow: hidden;
+
+    > div[data-w=o23-playground-edit-dialog-part-content] {
+        width: 100%;
+    }
 `;
 export const EditDialogNavigatorContainer = styled.div.attrs({[DOM_KEY_WIDGET]: 'o23-playground-edit-dialog-navigator'})`
     display: flex;
@@ -228,12 +232,12 @@ export const EditDialogHelpDocOpenHandle = styled.div.attrs<{ opened: boolean }>
     z-index: 1;
     transition: left ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION}, opacity ${CssVars.TRANSITION_DURATION} calc(${CssVars.TRANSITION_DURATION} / 2) ${CssVars.TRANSITION_TIMING_FUNCTION};
 
-    &[data-opened=false] + div[data-w=o23-playground-edit-dialog-help-doc] {
+    &[data-opened=false] + div[data-w=o23-playground-edit-dialog-help-doc-content] {
         filter: blur(2px);
         opacity: 0.7;
     }
 
-    &[data-opened=true] + div[data-w=o23-playground-edit-dialog-help-doc] {
+    &[data-opened=true] + div[data-w=o23-playground-edit-dialog-help-doc-content] {
         opacity: 1;
     }
 
@@ -278,7 +282,7 @@ export const EditDialogHelpDocCloseHandle = styled.div.attrs<{ opened: boolean }
 export const HelpDocContainer = styled.div.attrs<{ width?: number }>(
 	({width}) => {
 		return {
-			[DOM_KEY_WIDGET]: 'o23-playground-edit-dialog-help-doc',
+			[DOM_KEY_WIDGET]: 'o23-playground-edit-dialog-help-doc-content',
 			'data-v-scroll': '',
 			'data-h-scroll': '',
 			style: {

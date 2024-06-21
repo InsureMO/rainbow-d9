@@ -11,7 +11,7 @@ import {Labels} from '../../../labels';
 import {CommonStepDefModel} from './types';
 
 export const elementName: ConfigurableElement = {
-	code: 'code', label: Labels.Code, anchor: 'code',
+	code: 'name', label: Labels.Name, anchor: 'name',
 	badge: (model: CommonStepDefModel): ReactNode => {
 		if (VUtils.isNotBlank(model.name)) {
 			return model.name.trim();

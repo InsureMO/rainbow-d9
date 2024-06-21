@@ -48,15 +48,16 @@ export const Labels = {
 	FileMimeType: <IntlLabel keys={['o23', 'pipeline', 'files', 'mime-type']} value="Mime types"/>,
 
 	// step
-	StepFromRequest: <IntlLabel keys={['o23', 'step', 'from-request']} value="Transform Input"/>,
-	StepToResponse: <IntlLabel keys={['o23', 'step', 'to-response']} value="Transform Output"/>,
-	StepMergeRequest: <IntlLabel keys={['o23', 'step', 'merge-request']} value="Merge Back"/>,
+	StepFromRequest: <IntlLabel keys={['o23', 'step', 'from-request']} value="From Input"/>,
+	StepToResponse: <IntlLabel keys={['o23', 'step', 'to-response']} value="To Output"/>,
+	StepMergeRequest: <IntlLabel keys={['o23', 'step', 'merge-request']} value="Merge"/>,
 	SnippetStepSnippet: <IntlLabel keys={['o23', 'step', 'snippet', 'snippet']} value="Snippet"/>,
 
 	// common variables, variable might be used in multiple places,
 	// such as attribute label, attribute configuration label, attribute configuration value label, etc.
 	Type: <IntlLabel keys={['o23', 'variable', 'type']} value="Type"/>,
 	Code: <IntlLabel keys={['o23', 'variable', 'code']} value="Code"/>,
+	Name: <IntlLabel keys={['o23', 'variable', 'name']} value="Name"/>,
 	Enabled: <IntlLabel keys={['o23', 'variable', 'enabled']} value="Enabled"/>,
 	All: <IntlLabel keys={['o23', 'variable', 'all']} value="All"/>,
 	Ignored: <IntlLabel keys={['o23', 'variable', 'ignored']} value="Ignored"/>,

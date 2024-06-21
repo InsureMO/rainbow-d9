@@ -1,3 +1,4 @@
+import {useThrottler} from '@rainbow-d9/n1';
 import React, {useEffect, useRef, useState} from 'react';
 import {Accept, Back} from '../icons';
 import {Labels} from '../labels';
@@ -20,7 +21,7 @@ import {
 export const DialogContentInitializer = () => {
 	const ref = useRef<HTMLDivElement>(null);
 	const {fire} = usePlaygroundEventBus();
-
+	const {replace} = useThrottler();
 	useEffect(() => {
 		if (ref.current == null) {
 			return;
@@ -28,7 +29,17 @@ export const DialogContentInitializer = () => {
 		const container = ref.current.previousElementSibling;
 		const {width} = container.getBoundingClientRect();
 		fire(PlaygroundEventTypes.INIT_HELP_DOC_WIDTH, width);
-	}, [fire]);
+
+		const observer = new ResizeObserver(() => {
+			replace(() => {
+				fire(PlaygroundEventTypes.INIT_HELP_DOC_WIDTH, container.getBoundingClientRect().width);
+			}, 30);
+		});
+		observer.observe(container);
+		return () => {
+			observer.disconnect();
+		};
+	}, [fire, replace]);
 
 	return <EditDialogContentInitializer ref={ref}/>;
 };
