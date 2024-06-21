@@ -36,6 +36,7 @@ export const CodeRenderer = (props: { children?: ReactNode, className?: string, 
 			PreTag="div"
 			children={String(children).replace(/\n$/, '')}
 			language={match[1]}
+			wrapLongLines={true}
 			style={prism}/>;
 	} else {
 		return <code {...rest} className={className}>
