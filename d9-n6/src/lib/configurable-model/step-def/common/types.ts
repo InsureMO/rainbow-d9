@@ -1,4 +1,4 @@
-import {PipelineStepDef} from '../../../definition';
+import {FileDef, PipelineStepDef} from '../../../definition';
 import {ConfigurableModel} from '../../../edit-dialog';
 
 export enum CommonStepErrorHandleType {
@@ -22,3 +22,10 @@ export interface CommonStepDefModel extends ConfigurableModel, PipelineStepDef {
 		useErrorHandlesForAny?: CommonStepErrorHandleType;
 	};
 }
+
+export interface StepPortProps {
+	step: CommonStepDefModel;
+	file: FileDef;
+}
+
+export type StepPort = (props: StepPortProps) => JSX.Element;

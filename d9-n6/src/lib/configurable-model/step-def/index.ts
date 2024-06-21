@@ -1,9 +1,10 @@
+import {StepNodeConfigurer} from '../types';
 import {SnippetStepDefs} from './snippet';
 
 export * from './common';
 
 export * from './snippet';
 
-export const AllStepDefs = [
+export const AllStepDefs: Array<StepNodeConfigurer> = [
 	SnippetStepDefs
 ];

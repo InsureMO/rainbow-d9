@@ -1,8 +1,12 @@
 import {DiagramEngine} from '@projectstorm/react-diagrams';
+import {useForceUpdate} from '@rainbow-d9/n1';
 import {DOM_KEY_WIDGET} from '@rainbow-d9/n2';
 import React from 'react';
 import styled from 'styled-components';
+import {AllStepDefs} from '../../configurable-model';
+import {ConfigurableModel, DialogContent} from '../../edit-dialog';
 import {Labels} from '../../labels';
+import {PlaygroundEventTypes, usePlaygroundEventBus} from '../../playground-event-bus';
 import {PlaygroundCssVars} from '../../widgets';
 import {
 	NextStepPortModel,
@@ -65,13 +69,39 @@ export const StepNodeBody = styled(NodeBody).attrs({
 export const StepNodeWidget = (props: StepNodeWidgetProps) => {
 	const {node, engine} = props;
 
-	return <StepNodeContainer>
+	const {fire} = usePlaygroundEventBus();
+	const forceUpdate = useForceUpdate();
+
+	const {step: def, file} = node;
+	const {use} = def;
+	const StepDefs = AllStepDefs.find(defs => defs.use === use);
+
+	const onConfirm = (model: ConfigurableModel) => {
+		const ret = StepDefs.confirm(model, def, file, node.handlers);
+		if (ret === true) {
+			forceUpdate();
+		}
+		return ret;
+	};
+	const onDiscard = (model: ConfigurableModel) => StepDefs.discard(model);
+	const prepareModel = () => StepDefs.prepare(def);
+	const onDoubleClicked = () => {
+		fire(PlaygroundEventTypes.SHOW_EDIT_DIALOG,
+			<DialogContent helpDoc={StepDefs.helpDocs}
+			               prepare={prepareModel} confirm={onConfirm} discard={onDiscard}
+			               elements={StepDefs.properties}/>);
+	};
+
+	return <StepNodeContainer onDoubleClick={onDoubleClicked}>
 		<StepNodeHeader>
-			<StepNodeTitle>{Labels.StepNodeNoname}</StepNodeTitle>
+			<StepNodeTitle>{(def.name ?? '').trim() || Labels.StepNodeNoname}</StepNodeTitle>
 		</StepNodeHeader>
 		<StepNodeBody>
 			<PreviousStepPortWidget port={node.getPort(PreviousStepPortModel.NAME) as PreviousStepPortModel}
 			                        engine={engine}/>
+			{StepDefs.ports.map(({key, port: StepPort}) => {
+				return <StepPort step={def} file={file} key={key}/>;
+			})}
 			<NextStepPortWidget port={node.getPort(NextStepPortModel.NAME) as NextStepPortModel} engine={engine}/>
 		</StepNodeBody>
 	</StepNodeContainer>;

@@ -114,10 +114,10 @@ export const ApiMethodPortWidget = (props: { def: PipelineFileDef }) => {
 	const {def} = props;
 
 	const {method} = def;
-	const all: Undefinable<boolean> = VUtils.isNotBlank(method);
+	const exists = VUtils.isNotBlank(method);
 
 	return <ApiVariablePortWidget label={Labels.ApiMethodLabel} required={true}
-	                              defined={all === true} all={all}
+	                              defined={exists} all={exists}
 	                              allAsBoolean={false} allAsGiven={`${method ?? ''}`.toUpperCase().trim()}/>;
 };
 

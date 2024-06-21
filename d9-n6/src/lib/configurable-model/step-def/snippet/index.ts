@@ -1,3 +1,4 @@
+import {HelpDocs} from '../../../help-docs';
 import {StepNodeConfigurer} from '../../types';
 import {CommonStepDefs} from '../common';
 import {confirm} from './confirm';
@@ -9,5 +10,10 @@ export * from './types';
 export const SnippetStepDefs: StepNodeConfigurer<SnippetStepDefModel> = {
 	use: 'snippet',
 	prepare, confirm, discard: CommonStepDefs.discard,
-	createSubNodes: CommonStepDefs.createSubNodes
+	properties: [CommonStepDefs.properties.name],
+	ports: [
+		{key: 'from-request', port: CommonStepDefs.ports.fromRequest}
+	],
+	createSubNodes: CommonStepDefs.createSubNodes,
+	helpDocs: HelpDocs.snippetStep
 };

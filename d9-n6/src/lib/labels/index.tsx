@@ -47,6 +47,9 @@ export const Labels = {
 	FileMaxSize: <IntlLabel keys={['o23', 'pipeline', 'files', 'max-size']} value="Max size"/>,
 	FileMimeType: <IntlLabel keys={['o23', 'pipeline', 'files', 'mime-type']} value="Mime types"/>,
 
+	// step
+	StepFromRequest: <IntlLabel keys={['o23', 'step', 'from-request']} value="Transform Input"/>,
+
 	// common variables, variable might be used in multiple places,
 	// such as attribute label, attribute configuration label, attribute configuration value label, etc.
 	Type: <IntlLabel keys={['o23', 'variable', 'type']} value="Type"/>,

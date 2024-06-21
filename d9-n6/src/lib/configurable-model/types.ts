@@ -2,6 +2,8 @@ import {Undefinable} from '@rainbow-d9/n1';
 import {FileDef, PipelineStepDef, PipelineStepRegisterKey} from '../definition';
 import {NodeHandlers, StepNodeModel} from '../diagram';
 import {ConfigurableElement, ConfigurableElementAnchor, ConfigurableModel} from '../edit-dialog';
+import {MarkdownContent} from '../types';
+import {StepPort} from './step-def';
 
 export interface FileNodeConfigurer<D extends FileDef = FileDef, M extends ConfigurableModel = ConfigurableModel> {
 	prepare: (def: D) => M;
@@ -18,6 +20,9 @@ export interface StepNodeConfigurer<D extends PipelineStepDef = PipelineStepDef,
 	confirm: (model: D, def: F, file: FileDef, handlers: NodeHandlers) => ConfigurableElementAnchor | true;
 	/** discard the changes from edit dialog */
 	discard: (model: D) => void;
+	ports?: Array<{ key: string, port: StepPort }>;
+	properties: Array<ConfigurableElement>;
 	/** create nodes for sub steps */
 	createSubNodes: (node: StepNodeModel) => Undefinable<StepNodeModel>;
+	helpDocs: MarkdownContent;
 }
