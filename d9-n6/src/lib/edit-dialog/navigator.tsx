@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {Labels} from '../labels';
 import {EditDialogEventTypes, useEditDialogEventBus} from './edit-dialog-event-bus';
 import {useElementValueChange, useElementVisible} from './hooks';
@@ -11,6 +11,7 @@ import {
 	EditDialogPartTitle,
 	NavigatorElementBadge,
 	NavigatorElementChildren,
+	NavigatorElementChildrenTreeLine,
 	NavigatorElementContainer,
 	NavigatorElementLabel,
 	NavigatorElementsContainer
@@ -42,8 +43,48 @@ export const DialogNavigatorElementWrapper = (props: DialogNavigatorElementProps
 	</NavigatorElementContainer>;
 };
 
-export const DialogNavigatorElement = (props: DialogNavigatorElementProps) => {
+export const DialogNavigatorElementChildrenTreeLine = () => {
+	const ref = useRef<HTMLDivElement>(null);
+	const [offset, setOffset] = useState(0);
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	useEffect(() => {
+		if (ref.current == null) {
+			return;
+		}
+		let height = 0;
+		let ignored = ref.current.previousElementSibling;
+		if (ignored.tagName === 'SPAN') {
+			height += ignored.getBoundingClientRect().height;
+			ignored = ignored.previousElementSibling;
+		}
+		height += ignored.getBoundingClientRect().height;
+		if (offset !== height) {
+			setOffset(height);
+		}
+	});
+
+	return <NavigatorElementChildrenTreeLine offset={offset} ref={ref}/>;
+};
+export const DialogNavigatorElementChildren = (props: DialogNavigatorElementProps) => {
 	const {element, model, level, last} = props;
+
+	if (element.children == null || element.children.length === 0) {
+		return null;
+	}
+
+	return <NavigatorElementChildren>
+		{element.children
+			.map((child, index, children) => {
+				return <DialogNavigatorElement element={child} model={model}
+				                               level={level + 1} last={[...last, index === children.length - 1]}
+				                               key={child.code}/>;
+			})}
+		<DialogNavigatorElementChildrenTreeLine/>
+	</NavigatorElementChildren>;
+};
+
+export const DialogNavigatorElement = (props: DialogNavigatorElementProps) => {
+	const {element, model} = props;
 
 	const visible = useElementVisible(element, model);
 	if (!visible) {
@@ -52,16 +93,7 @@ export const DialogNavigatorElement = (props: DialogNavigatorElementProps) => {
 
 	return <>
 		<DialogNavigatorElementWrapper {...props}/>
-		{element.children != null
-			? <NavigatorElementChildren>
-				{element.children
-					.map((child, index, children) => {
-						return <DialogNavigatorElement element={child} model={model}
-						                               level={level + 1} last={[...last, index === children.length - 1]}
-						                               key={child.code}/>;
-					})}
-			</NavigatorElementChildren>
-			: null}
+		<DialogNavigatorElementChildren {...props}/>
 	</>;
 };
 

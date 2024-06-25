@@ -1,4 +1,4 @@
-import {CssVars, DOM_KEY_WIDGET} from '@rainbow-d9/n2';
+import {CssVars, DOM_KEY_WIDGET, Utils} from '@rainbow-d9/n2';
 import styled from 'styled-components';
 import {PlaygroundCssVars} from '../widgets';
 
@@ -344,7 +344,6 @@ export const NavigatorElementContainer = styled.div.attrs<{ level: number }>(
         border-radius: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_BORDER_RADIUS};
         font-weight: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_HOVER_FONT_WEIGHT};
     }
-
 `;
 // noinspection CssUnresolvedCustomProperty
 export const NavigatorElementLabel = styled.div.attrs<{ level: number }>(
@@ -420,23 +419,15 @@ export const NavigatorElementBadgeWrapper = styled.span.attrs({[DOM_KEY_WIDGET]:
     }
 `;
 // use span since will use the css last-of-type selector
-export const NavigatorElementChildren = styled.span.attrs({
-	[DOM_KEY_WIDGET]: 'o23-playground-edit-dialog-navigator-element-children-container'
-})`
+export const NavigatorElementChildren = styled.span.attrs({[DOM_KEY_WIDGET]: 'o23-playground-edit-dialog-navigator-sub-elements'})`
     display: flex;
     position: relative;
     flex-direction: column;
 
-    &:not(:last-child):before {
-        content: '';
-        display: block;
-        position: absolute;
-        width: 1px;
-        height: calc(100% + 1px);
-        top: 0;
-        left: calc(0.5 * ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_INDENT});
-        background-color: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_TREE_LINE_COLOR};
-        z-index: 1;
+    > span[data-w=o23-playground-edit-dialog-navigator-sub-elements]:nth-last-child(2) {
+        > span[data-w=o23-playground-edit-dialog-navigator-sub-elements-tree-line] {
+            display: none;
+        }
     }
 
     > div[data-w=o23-playground-edit-dialog-navigator-element] {
@@ -477,6 +468,25 @@ export const NavigatorElementChildren = styled.span.attrs({
             }
         }
     }
+`;
+// noinspection CssUnresolvedCustomProperty
+export const NavigatorElementChildrenTreeLine = styled.span.attrs<{ offset: number }>(
+	({offset}) => {
+		return {
+			[DOM_KEY_WIDGET]: 'o23-playground-edit-dialog-navigator-sub-elements-tree-line',
+			style: {
+				'--offset': Utils.toCssSize(offset)
+			}
+		};
+	})<{ offset: number }>`
+    display: block;
+    position: absolute;
+    width: 1px;
+    height: calc(100% + 1px - var(--offset));
+    top: 0;
+    left: calc(0.5 * ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_INDENT});
+    background-color: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_TREE_LINE_COLOR};
+    z-index: 1;
 `;
 export const SpecificElementsContainer = styled.div.attrs({
 	[DOM_KEY_WIDGET]: 'o23-playground-edit-dialog-specific-elements',
