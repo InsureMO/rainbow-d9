@@ -419,7 +419,16 @@ export const NavigatorElementBadgeWrapper = styled.span.attrs({[DOM_KEY_WIDGET]:
     }
 `;
 // use span since will use the css last-of-type selector
-export const NavigatorElementChildren = styled.span.attrs({[DOM_KEY_WIDGET]: 'o23-playground-edit-dialog-navigator-sub-elements'})`
+export const NavigatorElementChildren = styled.span.attrs<{ level: number }>(
+	({level}) => {
+		return {
+			[DOM_KEY_WIDGET]: 'o23-playground-edit-dialog-navigator-sub-elements',
+			'data-level': level,
+			style: {
+				'--level': level
+			}
+		};
+	})<{ level: number }>`
     display: flex;
     position: relative;
     flex-direction: column;
@@ -484,7 +493,7 @@ export const NavigatorElementChildrenTreeLine = styled.span.attrs<{ offset: numb
     width: 1px;
     height: calc(100% + 1px - var(--offset));
     top: 0;
-    left: calc(0.5 * ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_INDENT});
+    left: calc((max((var(--level) - 1), 0) * 2 + 0.5) * ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_INDENT});
     background-color: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_TREE_LINE_COLOR};
     z-index: 1;
 `;

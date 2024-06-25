@@ -51,17 +51,31 @@ export const DialogNavigatorElementChildrenTreeLine = () => {
 		if (ref.current == null) {
 			return;
 		}
-		let height = 0;
-		let ignored = ref.current.previousElementSibling;
-		if (ignored.tagName === 'SPAN') {
-			height += ignored.getBoundingClientRect().height;
-			ignored = ignored.previousElementSibling;
-		}
-		height += ignored.getBoundingClientRect().height;
-		if (offset !== height) {
-			setOffset(height);
+		const parent = ref.current.parentElement;
+		if (parent.nextElementSibling?.nextElementSibling != null) {
+			if (offset !== 0) {
+				setOffset(0);
+			}
+		} else {
+			let height = 0;
+			let ignored = ref.current.previousElementSibling;
+			while (ignored != null) {
+				if (ignored.tagName === 'SPAN') {
+					height += ignored.getBoundingClientRect().height;
+					ignored = ignored.previousElementSibling;
+					height += ignored.getBoundingClientRect().height;
+					break;
+				} else {
+					height += ignored.getBoundingClientRect().height;
+					ignored = ignored.previousElementSibling;
+				}
+			}
+			if (offset !== height) {
+				setOffset(height);
+			}
 		}
 	});
+	// TODO ELEMENT VISIBLE COULD LEAD OFFSET CHANGE, HOW TO HANDLE IT?
 
 	return <NavigatorElementChildrenTreeLine offset={offset} ref={ref}/>;
 };
@@ -72,7 +86,7 @@ export const DialogNavigatorElementChildren = (props: DialogNavigatorElementProp
 		return null;
 	}
 
-	return <NavigatorElementChildren>
+	return <NavigatorElementChildren level={level}>
 		{element.children
 			.map((child, index, children) => {
 				return <DialogNavigatorElement element={child} model={model}
