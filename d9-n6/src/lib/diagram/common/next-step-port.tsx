@@ -11,7 +11,6 @@ import {DiagramEngine} from '@projectstorm/react-diagrams-core';
 import {DOM_KEY_WIDGET} from '@rainbow-d9/n2';
 import React from 'react';
 import styled from 'styled-components';
-import {Labels} from '../../labels';
 import {PlaygroundCssVars} from '../../widgets';
 
 export class NextStepPortModel extends PortModel {
@@ -22,7 +21,7 @@ export class NextStepPortModel extends PortModel {
 		super({
 			type: NextStepPortModel.TYPE,
 			name: NextStepPortModel.NAME,
-			alignment: PortModelAlignment.RIGHT
+			alignment: PortModelAlignment.BOTTOM
 		});
 	}
 
@@ -49,29 +48,22 @@ export class NextStepPortFactory extends AbstractModelFactory<NextStepPortModel,
 
 export const NextStepPortContainer = styled.div.attrs({[DOM_KEY_WIDGET]: 'o23-playground-next-step-port'})`
     display: flex;
-    position: relative;
-    align-self: end;
-    align-items: center;
-    justify-self: end;
-    color: ${PlaygroundCssVars.NODE_NEXT_STEP_PORT_COLOR};
-    background: ${PlaygroundCssVars.NODE_NEXT_STEP_PORT_BACKGROUND};
-    height: ${PlaygroundCssVars.NODE_PORT_HEIGHT};
+    position: absolute;
+    left: calc(50% - ${PlaygroundCssVars.NODE_LINK_PORT_RADIUS});
+    bottom: calc(-1 * ${PlaygroundCssVars.NODE_LINK_PORT_RADIUS});
+    width: calc(${PlaygroundCssVars.NODE_LINK_PORT_RADIUS} * 2);
+    height: ${PlaygroundCssVars.NODE_LINK_PORT_RADIUS};
+    background-color: ${PlaygroundCssVars.NODE_NEXT_STEP_PORT_BACKGROUND_COLOR};
     border: ${PlaygroundCssVars.NODE_NEXT_STEP_PORT_BORDER};
-    border-top-left-radius: calc(${PlaygroundCssVars.NODE_PORT_HEIGHT} / 2);
-    border-bottom-left-radius: calc(${PlaygroundCssVars.NODE_PORT_HEIGHT} / 2);
-    font-weight: ${PlaygroundCssVars.NODE_NEXT_STEP_PORT_FONT_WEIGHT};
-    font-size: ${PlaygroundCssVars.NODE_NEXT_STEP_PORT_FONT_SIZE};
-    text-transform: uppercase;
-    padding: ${PlaygroundCssVars.NODE_NEXT_STEP_PORT_PADDING};
-    margin-right: -1px;
-    grid-column: 3;
+    border-bottom-left-radius: ${PlaygroundCssVars.NODE_LINK_PORT_RADIUS};
+    border-bottom-right-radius: ${PlaygroundCssVars.NODE_LINK_PORT_RADIUS};
 
     > div:first-child {
         position: absolute;
-        top: 0;
-        right: 0;
-        width: 0;
-        height: 100%;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 0;
     }
 `;
 
@@ -86,6 +78,5 @@ export const NextStepPortWidget = (props: NextStepPortWidgetProps) => {
 
 	return <NextStepPortContainer>
 		<PortWidget port={port} engine={engine}/>
-		<span>{Labels.NextStepPort}</span>
 	</NextStepPortContainer>;
 };

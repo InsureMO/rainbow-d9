@@ -311,7 +311,7 @@ export const StartNodeWidget = (props: StartNodeWidgetProps) => {
 		<StartNodeBody>
 			<EnabledPortWidget def={def as PipelineFileDef}/>
 			{body}
-			<NextStepPortWidget port={node.getPort(NextStepPortModel.NAME) as NextStepPortModel} engine={engine}/>
 		</StartNodeBody>
+		<NextStepPortWidget port={node.getPort(NextStepPortModel.NAME) as NextStepPortModel} engine={engine}/>
 	</StartNodeContainer>;
 };

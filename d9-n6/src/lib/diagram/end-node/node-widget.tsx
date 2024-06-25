@@ -57,12 +57,12 @@ export const EndNodeWidget = (props: EndNodeWidgetProps) => {
 	const {node, engine} = props;
 
 	return <EndNodeContainer>
+		<PreviousStepPortWidget port={node.getPort(PreviousStepPortModel.NAME) as PreviousStepPortModel}
+		                        engine={engine}/>
 		<EndNodeHeader>
 			<EndNodeTitle>{Labels.EndNodeTitle}</EndNodeTitle>
 		</EndNodeHeader>
 		<EndNodeBody>
-			<PreviousStepPortWidget port={node.getPort(PreviousStepPortModel.NAME) as PreviousStepPortModel}
-			                        engine={engine}/>
 		</EndNodeBody>
 	</EndNodeContainer>;
 };

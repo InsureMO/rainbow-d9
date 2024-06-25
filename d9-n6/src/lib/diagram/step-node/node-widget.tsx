@@ -93,16 +93,16 @@ export const StepNodeWidget = (props: StepNodeWidgetProps) => {
 	};
 
 	return <StepNodeContainer onDoubleClick={onDoubleClicked}>
+		<PreviousStepPortWidget port={node.getPort(PreviousStepPortModel.NAME) as PreviousStepPortModel}
+		                        engine={engine}/>
 		<StepNodeHeader>
 			<StepNodeTitle>{(def.name ?? '').trim() || Labels.StepNodeNoname}</StepNodeTitle>
 		</StepNodeHeader>
 		<StepNodeBody>
-			<PreviousStepPortWidget port={node.getPort(PreviousStepPortModel.NAME) as PreviousStepPortModel}
-			                        engine={engine}/>
 			{StepDefs.ports.map(({key, port: StepPort}) => {
 				return <StepPort step={def} file={file} key={key}/>;
 			})}
-			<NextStepPortWidget port={node.getPort(NextStepPortModel.NAME) as NextStepPortModel} engine={engine}/>
 		</StepNodeBody>
+		<NextStepPortWidget port={node.getPort(NextStepPortModel.NAME) as NextStepPortModel} engine={engine}/>
 	</StepNodeContainer>;
 };

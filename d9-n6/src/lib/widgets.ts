@@ -6,8 +6,8 @@ const EDITOR_BACKGROUND_LINE_COLOR = `var(--o23-playground-editor-background-lin
 const NODE_START_COLOR = '#ffb56b';
 const NODE_END_COLOR = '#e0b35f';
 const NODE_STEP_COLOR = '#54956b';
-const NEXT_STEP_PORT_COLOR = '#356888';
-const PREVIOUS_STEP_PORT_COLOR = '#00618b';
+const NEXT_STEP_PORT_COLOR = '#a3ab5b';
+const PREVIOUS_STEP_PORT_COLOR = '#8454aa';
 const PRE_PORT_COLOR = '#87a55f';
 const POST_PORT_COLOR = '#c69dab';
 export const PlaygroundCssVars = {
@@ -105,20 +105,11 @@ export const PlaygroundCssVars = {
 	NODE_MIN_WIDTH: 'var(--o23-playground-node-min-width, 160px)',
 	NODE_ICON_SIZE: 'var(--o23-playground-node-icon-size, 14px)',
 	NODE_PORT_HEIGHT: 'var(--o23-playground-node-port-height, 24px)',
-	// next step port
-	NODE_NEXT_STEP_PORT_FONT_SIZE: 'var(--o23-playground-next-step-port-font-size, 14px)',
-	NODE_NEXT_STEP_PORT_FONT_WEIGHT: 'var(--o23-playground-next-step-port-font-weight, 600)',
-	NODE_NEXT_STEP_PORT_COLOR: `var(--o23-playground-next-step-port-color, ${CssVars.INVERT_COLOR})`,
-	NODE_NEXT_STEP_PORT_BACKGROUND: `var(--o23-playground-next-step-port-background, ${NEXT_STEP_PORT_COLOR})`,
-	NODE_NEXT_STEP_PORT_BORDER: `var(--o23-playground-next-step-port-border, 1px solid ${color(NEXT_STEP_PORT_COLOR).darken(0.1).fade(0.5)})`,
-	NODE_NEXT_STEP_PORT_PADDING: 'var(--o23-playground-next-step-port-padding, 0 8px 0 12px)',
-	// previous step port
-	NODE_PREVIOUS_STEP_PORT_FONT_SIZE: 'var(--o23-playground-previous-step-port-font-size, 14px)',
-	NODE_PREVIOUS_STEP_PORT_FONT_WEIGHT: 'var(--o23-playground-previous-step-port-font-weight, 600)',
-	NODE_PREVIOUS_STEP_PORT_COLOR: `var(--o23-playground-previous-step-port-color, ${CssVars.INVERT_COLOR})`,
-	NODE_PREVIOUS_STEP_PORT_BACKGROUND: `var(--o23-playground-previous-step-port-background, ${PREVIOUS_STEP_PORT_COLOR})`,
-	NODE_PREVIOUS_STEP_PORT_BORDER: `var(--o23-playground-previous-step-port-border, 1px solid ${color(PREVIOUS_STEP_PORT_COLOR).darken(0.1).opaquer(0.5)})`,
-	NODE_PREVIOUS_STEP_PORT_PADDING: 'var(--o23-playground-previous-step-port-padding, 0 12px 0 8px)',
+	NODE_LINK_PORT_RADIUS: 'var(--o23-playground-node-link-port-radius, 8px)',
+	NODE_NEXT_STEP_PORT_BACKGROUND_COLOR: `var(--o23-playground-node-next-step-port-background-color, ${NEXT_STEP_PORT_COLOR})`,
+	NODE_NEXT_STEP_PORT_BORDER: `var(--o23-playground-node-next-step-port-border, 2px solid ${color(NEXT_STEP_PORT_COLOR).darken(0.1).opaquer(0.5)})`,
+	NODE_PREVIOUS_STEP_PORT_BACKGROUND_COLOR: `var(--o23-playground-node-previous-step-port-background-color, ${PREVIOUS_STEP_PORT_COLOR})`,
+	NODE_PREVIOUS_STEP_PORT_BORDER: `var(--o23-playground-node-previous-step-port-border, 2px solid ${color(PREVIOUS_STEP_PORT_COLOR).darken(0.1).opaquer(0.5)})`,
 	// pre port
 	NODE_PRE_PORT_FONT_SIZE: 'var(--o23-playground-pre-port-font-size, 14px)',
 	NODE_PRE_PORT_FONT_WEIGHT: 'var(--o23-playground-pre-port-font-weight, 400)',

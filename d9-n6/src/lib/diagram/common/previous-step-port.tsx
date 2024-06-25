@@ -11,7 +11,6 @@ import {DiagramEngine} from '@projectstorm/react-diagrams-core';
 import {DOM_KEY_WIDGET} from '@rainbow-d9/n2';
 import React from 'react';
 import styled from 'styled-components';
-import {Labels} from '../../labels';
 import {PlaygroundCssVars} from '../../widgets';
 
 export class PreviousStepPortModel extends PortModel {
@@ -22,7 +21,7 @@ export class PreviousStepPortModel extends PortModel {
 		super({
 			type: PreviousStepPortModel.TYPE,
 			name: PreviousStepPortModel.NAME,
-			alignment: PortModelAlignment.LEFT
+			alignment: PortModelAlignment.TOP
 		});
 	}
 
@@ -49,29 +48,22 @@ export class PreviousStepPortFactory extends AbstractModelFactory<PreviousStepPo
 
 export const PreviousStepPortContainer = styled.div.attrs({[DOM_KEY_WIDGET]: 'o23-playground-previous-step-port'})`
     display: flex;
-    position: relative;
-    align-self: end;
-    align-items: center;
-    justify-self: start;
-    color: ${PlaygroundCssVars.NODE_PREVIOUS_STEP_PORT_COLOR};
-    background: ${PlaygroundCssVars.NODE_PREVIOUS_STEP_PORT_BACKGROUND};
-    height: ${PlaygroundCssVars.NODE_PORT_HEIGHT};
+    position: absolute;
+    left: calc(50% - ${PlaygroundCssVars.NODE_LINK_PORT_RADIUS});
+    top: calc(-1 * ${PlaygroundCssVars.NODE_LINK_PORT_RADIUS});
+    width: calc(${PlaygroundCssVars.NODE_LINK_PORT_RADIUS} * 2);
+    height: ${PlaygroundCssVars.NODE_LINK_PORT_RADIUS};
+    background-color: ${PlaygroundCssVars.NODE_PREVIOUS_STEP_PORT_BACKGROUND_COLOR};
     border: ${PlaygroundCssVars.NODE_PREVIOUS_STEP_PORT_BORDER};
-    border-top-right-radius: calc(${PlaygroundCssVars.NODE_PORT_HEIGHT} / 2);
-    border-bottom-right-radius: calc(${PlaygroundCssVars.NODE_PORT_HEIGHT} / 2);
-    font-weight: ${PlaygroundCssVars.NODE_PREVIOUS_STEP_PORT_FONT_WEIGHT};
-    font-size: ${PlaygroundCssVars.NODE_PREVIOUS_STEP_PORT_FONT_SIZE};
-    text-transform: uppercase;
-    padding: ${PlaygroundCssVars.NODE_PREVIOUS_STEP_PORT_PADDING};
-    margin-left: -1px;
-    grid-column: 1;
+    border-top-left-radius: ${PlaygroundCssVars.NODE_LINK_PORT_RADIUS};
+    border-top-right-radius: ${PlaygroundCssVars.NODE_LINK_PORT_RADIUS};
 
     > div:first-child {
         position: absolute;
         top: 0;
         left: 0;
-        width: 0;
-        height: 100%;
+        width: 100%;
+        height: 0;
     }
 `;
 
@@ -86,6 +78,5 @@ export const PreviousStepPortWidget = (props: PreviousStepPortWidgetProps) => {
 
 	return <PreviousStepPortContainer>
 		<PortWidget port={port} engine={engine}/>
-		<span>{Labels.PreviousStepPort}</span>
 	</PreviousStepPortContainer>;
 };

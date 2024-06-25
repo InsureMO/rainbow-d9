@@ -9,8 +9,6 @@ export const Labels = {
 	ParseError: <IntlLabel keys={['o23', 'error', 'parse']} value="Parse error occurred."/>,
 
 	EndNodeTitle: <IntlLabel keys={['o23', 'node', 'end']} value="End"/>,
-	PreviousStepPort: <IntlLabel keys={['o23', 'port', 'previous']} value="In"/>,
-	NextStepPort: <IntlLabel keys={['o23', 'port', 'next']} value="Out"/>,
 	StepNodeNoname: <IntlLabel keys={['o23', 'node', 'step', 'noname']} value="[Noname]"/>,
 
 	HelpDesk: <IntlLabel keys={['o23', 'dialog', 'docs', 'title']} value="Help Desk"/>,
