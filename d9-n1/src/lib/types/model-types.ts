@@ -5,10 +5,11 @@ export interface ObjectPropValue {
 	[key: string]: PropValue;
 }
 
-// TODO NO NESTED ARRAY ALLOWED
-export type ArrayPropValue = Array<PropValue>;
+export type NonArrayPropValue = NullPropValue | PrimitivePropValue | ObjectPropValue;
+/** no nested array allowed */
+export type ArrayPropValue = Array<NonArrayPropValue>;
 
-export type PropValue = NullPropValue | PrimitivePropValue | ObjectPropValue | ArrayPropValue;
+export type PropValue = NonArrayPropValue | ArrayPropValue;
 export type BaseModel = ObjectPropValue;
 export type PropertyPath = string;
 
