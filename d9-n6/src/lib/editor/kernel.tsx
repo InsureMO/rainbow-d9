@@ -1,5 +1,5 @@
 import {CanvasWidget} from '@projectstorm/react-canvas-core';
-import createEngine, {DiagramModel, NodeModel} from '@projectstorm/react-diagrams';
+import createEngine, {NodeModel} from '@projectstorm/react-diagrams';
 import {DiagramEngine} from '@projectstorm/react-diagrams-core';
 import {useForceUpdate, useThrottler, VUtils} from '@rainbow-d9/n1';
 import React, {useEffect, useRef} from 'react';
@@ -8,7 +8,7 @@ import {initEngine, NextStepPortModel, StartNodeModel} from '../diagram';
 import {Labels} from '../labels';
 import {PlaygroundEventTypes, usePlaygroundEventBus} from '../playground-event-bus';
 import {EditorProps, MarkdownContent} from '../types';
-import {createDiagramNodes, DiagramHandlers} from './diagram-utils';
+import {cloneDiagramNodes, createDiagramNodes, createLockedDiagramModel, DiagramHandlers} from './diagram-utils';
 import {ErrorBoundary} from './error-boundary';
 import {EditorWrapper, ParseError} from './widgets';
 
@@ -154,7 +154,7 @@ export const EditorKernel = (props: EditorProps) => {
 			};
 		} catch (e) {
 			console.error(e);
-			engine.setModel(new DiagramModel());
+			engine.setModel(createLockedDiagramModel());
 			return {
 				engine, content, serializer, deserializer,
 				message: e.message,
@@ -194,7 +194,7 @@ export const EditorKernel = (props: EditorProps) => {
 			stateRef.current.deserializer = deserializer;
 			delete stateRef.current.def;
 			// replace with empty diagram model
-			stateRef.current.engine.setModel(new DiagramModel());
+			stateRef.current.engine.setModel(createLockedDiagramModel());
 			stateRef.current.message = e.message;
 			stateRef.current.diagramStatus = EditorKernelDiagramStatus.IGNORED;
 		}
@@ -217,9 +217,7 @@ export const EditorKernel = (props: EditorProps) => {
 		buildGrid(startNode, grid, 0, 1);
 		computeGrid(grid, 64, 64, 64, 64);
 		// must reset model, otherwise links might not be repositioned, don't know why.
-		const model = new DiagramModel();
-		model.addAll(...stateRef.current.engine.getModel().getModels());
-		stateRef.current.engine.setModel(model);
+		stateRef.current.engine.setModel(cloneDiagramNodes(stateRef.current.engine.getModel()));
 		stateRef.current.diagramStatus = EditorKernelDiagramStatus.IN_SERVICE;
 		forceUpdate();
 	}, [forceUpdate, stateRef.current.diagramStatus]);
@@ -239,7 +237,9 @@ export const EditorKernel = (props: EditorProps) => {
 	}
 
 	try {
-		return <EditorWrapper data-diagram-status={stateRef.current.diagramStatus} ref={wrapperRef}>
+		return <EditorWrapper data-diagram-status={stateRef.current.diagramStatus}
+		                      data-diagram-locked={stateRef.current.engine.getModel().isLocked()}
+		                      ref={wrapperRef}>
 			{/**
 			 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 			 @ts-ignore */}

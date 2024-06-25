@@ -30,6 +30,16 @@ export const EditorWrapper = styled.div.attrs({
         }
     }
 
+    &[data-diagram-locked=true] {
+        > div.o23-playground-editor-content {
+            cursor: default;
+
+            div.node {
+                cursor: pointer;
+            }
+        }
+    }
+
     > div.o23-playground-editor-content {
         height: 100%;
     }

@@ -93,6 +93,28 @@ export const createStepNode = (step: PipelineStepDef, file: FileDef, options: St
 	}
 };
 
+export class CustomDiagramModel extends DiagramModel {
+	public addLink(link: LinkModel): LinkModel {
+		if (this.isLocked()) {
+			link.setLocked(true);
+		}
+		return super.addLink(link);
+	}
+
+	public addNode(node: NodeModel): NodeModel {
+		if (this.isLocked()) {
+			node.setLocked(true);
+		}
+		return super.addNode(node);
+	}
+}
+
+export const createLockedDiagramModel = (): DiagramModel => {
+	const model = new CustomDiagramModel();
+	model.setLocked(true);
+	return model;
+};
+
 export const createDiagramNodes = (file: FileDef, handlers: DiagramHandlers): DiagramModel => {
 	const allNodes: Array<NodeModel> = [];
 	const allLinks: Array<LinkModel> = [];
@@ -136,8 +158,16 @@ export const createDiagramNodes = (file: FileDef, handlers: DiagramHandlers): Di
 	const link = previousNode.next(endNode);
 	allLinks.push(link);
 
-	const model = new DiagramModel();
+	const model = createLockedDiagramModel();
+	model.setLocked(true);
 	model.addAll(...allNodes, ...allLinks);
 
+	return model;
+};
+
+export const cloneDiagramNodes = (old: DiagramModel): DiagramModel => {
+	const model = createLockedDiagramModel();
+	model.setLocked(true);
+	model.addAll(...old.getModels());
 	return model;
 };

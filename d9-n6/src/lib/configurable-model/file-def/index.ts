@@ -8,5 +8,5 @@ import {prepare} from './prepare';
 export * from './types';
 
 export const FileDefs = {
-	prepare, confirm, discard, elements: [elementCode, elementType, elementEnabled]
+	prepare, confirm, discard, elements: [elementCode, elementEnabled, elementType]
 };
