@@ -46,7 +46,7 @@ export class PreviousStepPortFactory extends AbstractModelFactory<PreviousStepPo
 
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	public generateModel(_event: GenerateModelEvent): PreviousStepPortModel {
-		return new PreviousStepPortModel();
+		throw new Error('DO NOT use PreviousStepPortFactory#generateModel.');
 	}
 }
 

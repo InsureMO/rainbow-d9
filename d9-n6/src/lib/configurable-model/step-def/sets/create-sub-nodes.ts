@@ -9,8 +9,8 @@ import {
 	StepNodeModel
 } from '../../../diagram';
 import {CreateSubNodesOptions, StepNodeConfigurer} from '../../types';
-import {createStepNode} from '../common';
-import {SetsSubStepsPortModel} from './port-sub-steps';
+import {createStepNode, SubStepsPortModel} from '../common';
+import {SetsSubStepsPortName} from './port-sub-steps';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export const createSubNodes: StepNodeConfigurer['createSubNodes'] = (model: StepNodeModel, options: CreateSubNodesOptions): Undefinable<HandledNodeModel> => {
@@ -30,9 +30,9 @@ export const createSubNodes: StepNodeConfigurer['createSubNodes'] = (model: Step
 	previousNode = steps.reduce((previousNode, step) => {
 		const linkPrevious = previousNode === model ?
 			(node: StepNodeModel) => {
-				let port = model.getPort(SetsSubStepsPortModel.NAME) as SetsSubStepsPortModel;
+				let port = model.getPort(SetsSubStepsPortName) as SubStepsPortModel;
 				if (port == null) {
-					port = new SetsSubStepsPortModel();
+					port = new SubStepsPortModel(SetsSubStepsPortName);
 					model.addPort(port);
 				}
 				const link = port.createOutgoingLinkModel();

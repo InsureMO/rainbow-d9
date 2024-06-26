@@ -57,7 +57,6 @@ export const JoinEndNodeWidget = (props: JoinEndNodeWidgetProps) => {
 	const {node, engine} = props;
 
 	const {step: def} = node;
-	const {use} = def;
 
 	return <JoinEndNodeContainer>
 		<PreviousStepPortWidget port={node.getPort(PreviousStepPortModel.NAME) as PreviousStepPortModel}

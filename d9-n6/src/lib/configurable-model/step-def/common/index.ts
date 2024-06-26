@@ -13,6 +13,8 @@ import {CommonStepDefModel, StepPort} from './types';
 export * from './types';
 export * from './utils';
 
+export * from './sub-steps-port';
+
 export interface CommonStepDefsProperties {
 	name: ConfigurableElement;
 	// fromRequest: ConfigurableElement;
