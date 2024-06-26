@@ -4,6 +4,7 @@ import {confirm} from './confirm';
 import {createSubNodes} from './create-sub-nodes';
 import {discard} from './discard';
 import {elementName} from './element-name';
+import {findSubPorts} from './find-sub-ports';
 import {PortFromRequest} from './port-from-request';
 import {PortMergeRequest} from './port-merge-request';
 import {PortToResponse} from './port-to-response';
@@ -14,6 +15,7 @@ export * from './types';
 export * from './utils';
 
 export * from './sub-steps-port';
+export * from './first-sub-step-port';
 
 export interface CommonStepDefsProperties {
 	name: ConfigurableElement;
@@ -37,5 +39,5 @@ export const CommonStepDefs: CommonStepDefsType = {
 	prepare, confirm, discard,
 	properties: {name: elementName},
 	ports: {fromRequest: PortFromRequest, toResponse: PortToResponse, mergeRequest: PortMergeRequest},
-	createSubNodes
+	createSubNodes, findSubPorts
 };

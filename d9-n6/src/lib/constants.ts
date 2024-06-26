@@ -4,7 +4,7 @@ import {PipelineStepDef, SnippetPipelineStepDef, StandardPipelineStepRegisterKey
 import {HandledNodeModel, StepNodeModel} from './diagram';
 
 const DEFAULT_CREATE_SUB_STEP_NODES = (node: StepNodeModel, options: CreateSubNodesOptions): Undefinable<HandledNodeModel> => {
-	return Object.values(AllStepDefs).find(def => {
+	return AllStepDefs.find(def => {
 		return def.use === node.step.use;
 	})?.createSubNodes(node, options);
 };

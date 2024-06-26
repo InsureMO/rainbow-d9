@@ -19,6 +19,6 @@ export const SnippetStepDefs: StepNodeConfigurer<SnippetStepDefModel> = {
 		{key: 'snippet', port: PortSnippet},
 		{key: 'merge-request', port: CommonStepDefs.ports.mergeRequest}
 	],
-	createSubNodes: CommonStepDefs.createSubNodes,
+	createSubNodes: CommonStepDefs.createSubNodes, findSubPorts: CommonStepDefs.findSubPorts,
 	helpDocs: HelpDocs.snippetStep
 };

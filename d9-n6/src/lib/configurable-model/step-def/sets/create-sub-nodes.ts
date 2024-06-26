@@ -1,15 +1,9 @@
 import {Undefinable} from '@rainbow-d9/n1';
 import {DEFAULTS} from '../../../constants';
 import {PipelineStepDef, SetsPipelineStepDef} from '../../../definition';
-import {
-	HandledNodeModel,
-	JoinEndNodeModel,
-	PreviousStepPortModel,
-	StepNodeEntityType,
-	StepNodeModel
-} from '../../../diagram';
+import {HandledNodeModel, JoinEndNodeModel, StepNodeEntityType, StepNodeModel} from '../../../diagram';
 import {CreateSubNodesOptions, StepNodeConfigurer} from '../../types';
-import {createStepNode, SubStepsPortModel} from '../common';
+import {createStepNode, FirstSubStepPortModel, SubStepsPortModel} from '../common';
 import {SetsSubStepsPortName} from './port-sub-steps';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -30,13 +24,19 @@ export const createSubNodes: StepNodeConfigurer['createSubNodes'] = (model: Step
 	previousNode = steps.reduce((previousNode, step) => {
 		const linkPrevious = previousNode === model ?
 			(node: StepNodeModel) => {
-				let port = model.getPort(SetsSubStepsPortName) as SubStepsPortModel;
-				if (port == null) {
-					port = new SubStepsPortModel(SetsSubStepsPortName);
-					model.addPort(port);
+				let sourcePort = model.getPort(SetsSubStepsPortName) as SubStepsPortModel;
+				if (sourcePort == null) {
+					sourcePort = new SubStepsPortModel(SetsSubStepsPortName);
+					model.addPort(sourcePort);
 				}
-				const link = port.createOutgoingLinkModel();
-				link.setTargetPort(node.getPort(PreviousStepPortModel.NAME));
+				const link = sourcePort.createOutgoingLinkModel();
+				let targetPort = node.getPort(FirstSubStepPortModel.NAME);
+				if (targetPort == null) {
+					targetPort = new FirstSubStepPortModel();
+					node.addPort(targetPort);
+				}
+				link.setTargetPort(targetPort);
+				node.asFirstSubStep(true);
 				return link;
 			} :
 			(node: StepNodeModel) => previousNode.next(node);

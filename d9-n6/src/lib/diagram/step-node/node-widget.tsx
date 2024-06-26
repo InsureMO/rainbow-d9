@@ -3,7 +3,7 @@ import {useForceUpdate} from '@rainbow-d9/n1';
 import {DOM_KEY_WIDGET} from '@rainbow-d9/n2';
 import React from 'react';
 import styled from 'styled-components';
-import {AllStepDefs} from '../../configurable-model';
+import {AllStepDefs, FirstSubStepPortModel, FirstSubStepPortWidget} from '../../configurable-model';
 import {ConfigurableModel, DialogContent} from '../../edit-dialog';
 import {Labels} from '../../labels';
 import {PlaygroundEventTypes, usePlaygroundEventBus} from '../../playground-event-bus';
@@ -17,6 +17,7 @@ import {
 	NodeTitle,
 	NodeTitleSpreader,
 	NodeWrapper,
+	PrePort,
 	PreviousStepPortModel,
 	PreviousStepPortWidget
 } from '../common';
@@ -117,19 +118,28 @@ export const StepNodeWidget = (props: StepNodeWidgetProps) => {
 			               prepare={prepareModel} confirm={onConfirm} discard={onDiscard}
 			               elements={StepDefs.properties}/>);
 	};
+	const isFirstSubStep = node.isFirstSubStep();
 	const asUseLabelKey = () => {
 		return 'StepUse' + (use ?? '').trim().split('-').reduce((a, b) => a + b.charAt(0).toUpperCase() + b.slice(1), '');
 	};
 
 	return <StepNodeContainer onDoubleClick={onDoubleClicked}>
-		<PreviousStepPortWidget port={node.getPort(PreviousStepPortModel.NAME) as PreviousStepPortModel}
-		                        engine={engine}/>
+		{isFirstSubStep
+			? null
+			: <PreviousStepPortWidget port={node.getPort(PreviousStepPortModel.NAME) as PreviousStepPortModel}
+			                          engine={engine}/>}
 		<StepNodeHeader>
 			<StepNodeTitle>{(def.name ?? '').trim() || Labels.StepNodeNoname}</StepNodeTitle>
 			<NodeTitleSpreader/>
 			<StepNodeSecondTitle>{Labels[asUseLabelKey()]}</StepNodeSecondTitle>
 		</StepNodeHeader>
 		<StepNodeBody>
+			{isFirstSubStep
+				? <PrePort label={Labels.StepFirstSubStep} required={false} defined={true} data-role="first-sub-step">
+					<FirstSubStepPortWidget port={node.getPort(FirstSubStepPortModel.NAME) as FirstSubStepPortModel}
+					                        engine={engine}/>
+				</PrePort>
+				: null}
 			{StepDefs.ports.map(({key, port: StepPort}) => {
 				return <StepPort step={def} file={file} node={node} engine={engine} key={key}/>;
 			})}

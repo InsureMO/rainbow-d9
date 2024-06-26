@@ -89,6 +89,11 @@ export const PrePortContainer = styled.div.attrs({[DOM_KEY_WIDGET]: 'o23-playgro
         }
     }
 
+    &[data-role=first-sub-step] {
+        border: ${PlaygroundCssVars.NODE_PRE_PORT_FIRST_SUB_STEP_BORDER};
+        background: ${PlaygroundCssVars.NODE_PRE_PORT_FIRST_SUB_STEP_BACKGROUND};
+    }
+
     > svg:first-child {
         height: 1em;
         width: 1em;
@@ -112,14 +117,15 @@ export const PrePortContainer = styled.div.attrs({[DOM_KEY_WIDGET]: 'o23-playgro
 `;
 
 export const PrePort = (props: PortProps) => {
-	const {label, required, defined, danger = false} = props;
+	const {label, required, defined, danger = false, children, ...rest} = props;
 
 	const {icon, badge} = computePortIconAndBadge(props);
 
-	return <PrePortContainer data-required={required} data-defined={defined} data-danger={danger}>
+	return <PrePortContainer data-required={required} data-defined={defined} data-danger={danger} {...rest}>
 		{icon}
 		<span>{label}</span>
 		{badge}
+		{children}
 	</PrePortContainer>;
 };
 

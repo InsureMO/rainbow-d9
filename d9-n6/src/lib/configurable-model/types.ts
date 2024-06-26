@@ -1,4 +1,4 @@
-import {LinkModel, NodeModel} from '@projectstorm/react-diagrams';
+import {LinkModel, NodeModel, PortModel} from '@projectstorm/react-diagrams';
 import {Undefinable} from '@rainbow-d9/n1';
 import {FileDef, PipelineStepDef, PipelineStepRegisterKey} from '../definition';
 import {HandledNodeModel, NodeHandlers, StepNodeModel} from '../diagram';
@@ -31,5 +31,6 @@ export interface StepNodeConfigurer<D extends PipelineStepDef = PipelineStepDef,
 	properties: Array<ConfigurableElement>;
 	/** create nodes for sub steps, returns an end node */
 	createSubNodes: (node: StepNodeModel, options: CreateSubNodesOptions) => Undefinable<HandledNodeModel>;
+	findSubPorts: (node: StepNodeModel) => Undefinable<Array<PortModel>>;
 	helpDocs: MarkdownContent;
 }

@@ -25,6 +25,8 @@ export interface StepNodeModelOptions {
 export class StepNodeModel extends HandledNodeModel<NodeModelGenerics & StepNodeModelGenerics> {
 	public static readonly TYPE = 'step-node';
 
+	private firstSubStep = false;
+
 	public constructor(public readonly step: PipelineStepDef,
 	                   public readonly file: FileDef,
 	                   private readonly rest: StepNodeModelOptions) {
@@ -41,5 +43,13 @@ export class StepNodeModel extends HandledNodeModel<NodeModelGenerics & StepNode
 
 	public getSubOf(): Undefinable<PipelineStepDef> {
 		return this.rest.subOf;
+	}
+
+	public asFirstSubStep(is: boolean) {
+		this.firstSubStep = is;
+	}
+
+	public isFirstSubStep() {
+		return this.firstSubStep;
 	}
 }

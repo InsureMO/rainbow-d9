@@ -1,5 +1,5 @@
 import {DiagramModel, LinkModel, NodeModel} from '@projectstorm/react-diagrams';
-import {createStepNode, setNodePosition} from '../configurable-model';
+import {AllStepDefs, createStepNode, setNodePosition} from '../configurable-model';
 import {DEFAULTS} from '../constants';
 import {
 	FileDef,
@@ -15,7 +15,8 @@ import {
 	NextStepPortModel,
 	NodeHandlers,
 	StartNodeModel,
-	StepNodeEntityType
+	StepNodeEntityType,
+	StepNodeModel
 } from '../diagram';
 
 export interface DiagramHandlers {
@@ -162,20 +163,43 @@ export interface GridCell {
 	left: number;
 }
 
-export const buildGrid = (previous: NodeModel, grid: Array<Array<GridCell>>, x: number, y: number) => {
-	// TODO compute sub step nodes
+/** [x, y] is axis of given node, return used y */
+export const buildGrid = (node: NodeModel, grid: Array<Array<GridCell>>, x: number, y: number): number => {
+	// compute sub step nodes
+	if (node instanceof StepNodeModel) {
+		const {use} = node.step;
+		const ports = AllStepDefs.find(def => def.use === use)?.findSubPorts(node);
+		(ports ?? []).forEach(port => {
+			Object.values(port.getLinks())
+				.forEach(link => {
+					const subNode = link.getTargetPort().getNode();
+					// first sub step node is in the same row and next column with parent node
+					grid[x + 1] = grid[x + 1] ?? [];
+					grid[x + 1][y] = {
+						node: subNode, x: subNode.getPosition().x, y: subNode.getPosition().y,
+						maxWidth: -1, maxHeight: -1, top: -1, left: -1
+					};
+					// [x + 1, y] is hold by first sub step node
+					y = buildGrid(subNode, grid, x + 1, y);
+				});
+		});
+	}
 	// compute next step node
-	const port = previous.getPort(NextStepPortModel.NAME);
+	const port = node.getPort(NextStepPortModel.NAME);
 	if (port != null) {
 		const links = port.getLinks();
 		const link = Object.values(links)[0];
 		const next = link.getTargetPort().getNode();
 		grid[x] = grid[x] ?? [];
-		grid[x][y] = {
+		grid[x][y + 1] = {
 			node: next, x: next.getPosition().x, y: next.getPosition().y,
 			maxWidth: -1, maxHeight: -1, top: -1, left: -1
 		};
-		buildGrid(next, grid, x, y + 1);
+		// [x, y + 1] is hold by next node
+		return buildGrid(next, grid, x, y + 1);
+	} else {
+		// no next port, return y directly
+		return y;
 	}
 };
 
@@ -186,7 +210,7 @@ export const computeGrid = (grid: Array<Array<GridCell>>, top: number, left: num
 	const maxY = grid.reduce((max, column) => Math.max(max, column.length - 1), 0);
 	for (let x = 0; x <= maxX; x++) {
 		const column = grid[x];
-		new Array(maxY + 1).fill(1).forEach(y => {
+		new Array(maxY + 1).fill(1).forEach((v, y) => {
 			if (column[y] == null) {
 				column[y] = {x, y, maxWidth: -1, maxHeight: -1, top: -1, left: -1};
 			}
@@ -201,10 +225,10 @@ export const computeGrid = (grid: Array<Array<GridCell>>, top: number, left: num
 	for (let y = 0; y <= maxY; y++) {
 		const row = grid.map(column => column[y]);
 		const maxHeight = row.reduce((max, cell) => Math.max(max, cell.node?.height ?? 0), 0);
-		offsetY = offsetY + (y === 0 ? 0 : (grid[0][y - 1].maxHeight + columnGap));
+		offsetY = offsetY + (y === 0 ? 0 : (grid[0][y - 1].maxHeight + rowGap));
 		row.forEach(cell => {
 			cell.maxHeight = maxHeight;
-			cell.top = cell.node == null ? (offsetY + maxHeight / 2) : (offsetY + (maxHeight - cell.node.height) / 2);
+			cell.top = cell.node == null ? (offsetY + maxHeight / 2) : (offsetY);
 		});
 	}
 	grid.forEach(column => {

@@ -135,7 +135,8 @@ export const EditorKernel = (props: EditorProps) => {
 			node: startNode, x: startNode.getPosition().x, y: startNode.getPosition().y,
 			maxWidth: -1, maxHeight: -1, top: -1, left: -1
 		};
-		buildGrid(startNode, grid, 0, 1);
+		// [0, 0] is hold by start node
+		buildGrid(startNode, grid, 0, 0);
 		computeGrid(grid, 64, 64, 64, 64);
 		// must reset model, otherwise links might not be repositioned, don't know why.
 		stateRef.current.engine.setModel(cloneDiagramNodes(stateRef.current.engine.getModel()));
