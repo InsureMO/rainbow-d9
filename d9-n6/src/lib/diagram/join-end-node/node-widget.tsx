@@ -59,16 +59,12 @@ export const JoinEndNodeWidget = (props: JoinEndNodeWidgetProps) => {
 	const {step: def} = node;
 	const {use} = def;
 
-	const asUseLabelKey = () => {
-		return 'StepUse' + (use ?? '').trim().split('-').reduce((a, b) => a + b.charAt(0).toUpperCase() + b.slice(1), '');
-	};
-
 	return <JoinEndNodeContainer>
 		<PreviousStepPortWidget port={node.getPort(PreviousStepPortModel.NAME) as PreviousStepPortModel}
 		                        engine={engine}/>
 		<JoinEndNodeHeader>
 			<JoinEndNodeTitle>{Labels.JoinEndNodeTitle}</JoinEndNodeTitle>
-			<StepNodeSecondTitle>{Labels[asUseLabelKey()]}</StepNodeSecondTitle>
+			<StepNodeSecondTitle>{(def.name ?? '').trim() || Labels.StepNodeNoname}</StepNodeSecondTitle>
 		</JoinEndNodeHeader>
 		<NextStepPortWidget port={node.getPort(NextStepPortModel.NAME) as NextStepPortModel} engine={engine}/>
 	</JoinEndNodeContainer>;

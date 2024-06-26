@@ -114,7 +114,8 @@ export const createDiagramNodes = (file: FileDef, handlers: DiagramHandlers): Di
 		}
 		previousNode = steps.reduce((previousNode, step) => {
 			return createStepNode(step, file, {
-				type: StepNodeEntityType.NORMAL, handlers: nodeHandlers, previousNode,
+				type: StepNodeEntityType.NORMAL, handlers: nodeHandlers,
+				previousNode, linkPrevious: (node) => previousNode.next(node),
 				appendNode: (...nodes) => allNodes.push(...nodes),
 				appendLink: (...links) => allLinks.push(...links)
 			});
@@ -124,7 +125,8 @@ export const createDiagramNodes = (file: FileDef, handlers: DiagramHandlers): Di
 		// create a virtual node to represent, treat file def as step def
 		const step = file as unknown as PipelineStepDef;
 		previousNode = createStepNode(step, file, {
-			type: StepNodeEntityType.START, handlers: nodeHandlers, previousNode,
+			type: StepNodeEntityType.START, handlers: nodeHandlers,
+			previousNode, linkPrevious: (node) => previousNode.next(node),
 			appendNode: (...nodes) => allNodes.push(...nodes),
 			appendLink: (...links) => allLinks.push(...links)
 		});

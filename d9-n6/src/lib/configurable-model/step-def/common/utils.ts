@@ -16,6 +16,7 @@ export interface StepNodeCreationOptions {
 	subOf?: PipelineStepDef;
 	handlers: NodeHandlers;
 	previousNode: HandledNodeModel;
+	linkPrevious: (node: StepNodeModel) => LinkModel;
 	appendNode: (...nodes: Array<StepNodeModel>) => void;
 	appendLink: (...links: Array<LinkModel>) => void;
 }
@@ -23,12 +24,12 @@ export interface StepNodeCreationOptions {
 export const createStepNode = (step: PipelineStepDef, file: FileDef, options: StepNodeCreationOptions): Undefinable<HandledNodeModel> => {
 	const {
 		type, subOf, handlers,
-		previousNode, appendNode, appendLink
+		linkPrevious, appendNode, appendLink
 	} = options;
 	const node = new StepNodeModel(step, file, {type, subOf, handlers});
 	setNodePosition(node, () => askStepNodePosition(step));
 	appendNode(node);
-	const link = node.previous(previousNode);
+	const link = linkPrevious(node);
 	appendLink(link);
 	const endOfSub = DEFAULTS.createSubStepNodes(node, {appendNode, appendLink, handlers});
 	return endOfSub == null ? node : endOfSub;
