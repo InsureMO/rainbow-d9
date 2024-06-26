@@ -10,11 +10,6 @@ export const SetsSubStepsPortName = 'sets-sub-steps';
 export const PortSubSteps = (props: StepPortProps<SetsStepDefModel>) => {
 	const {node, engine} = props;
 
-	// guard
-	if (node.getPort(SetsSubStepsPortName) == null) {
-		node.addPort(new SubStepsPortModel(SetsSubStepsPortName));
-	}
-
 	return <PostPort label={Labels.StepSubSteps} required={false} defined={true} data-role="sub-steps">
 		<SubStepsPortWidget port={node.getPort(SetsSubStepsPortName) as SubStepsPortModel}
 		                    engine={engine}/>
