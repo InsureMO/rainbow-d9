@@ -162,6 +162,11 @@ export const PostPortContainer = styled.div.attrs({[DOM_KEY_WIDGET]: 'o23-playgr
         }
     }
 
+    &[data-role=sub-steps] {
+        border: ${PlaygroundCssVars.NODE_POST_PORT_SUB_STEPS_BORDER};
+        background: ${PlaygroundCssVars.NODE_POST_PORT_SUB_STEPS_BACKGROUND};
+    }
+
     > svg:first-child {
         height: 1em;
         width: 1em;
@@ -185,11 +190,11 @@ export const PostPortContainer = styled.div.attrs({[DOM_KEY_WIDGET]: 'o23-playgr
 `;
 
 export const PostPort = (props: PortProps) => {
-	const {label, required, defined, danger = false} = props;
+	const {label, required, defined, danger = false, ...rest} = props;
 
 	const {icon, badge} = computePortIconAndBadge(props);
 
-	return <PostPortContainer data-required={required} data-defined={defined} data-danger={danger}>
+	return <PostPortContainer data-required={required} data-defined={defined} data-danger={danger} {...rest}>
 		{icon}
 		<span>{label}</span>
 		{badge}

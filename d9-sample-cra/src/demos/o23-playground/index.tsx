@@ -28,6 +28,14 @@ path-params:
 expose-headers:
   x-a: aaa
   x-b: bbb
+
+steps:
+  - name: Do validation
+    use: sets
+    steps:
+      - name: Validate name
+        use: snippet
+    to-response: $result
 `;
 
 	return <GlobalRoot>

@@ -58,3 +58,8 @@ export interface SnippetPipelineStepDef extends AllInPipelineStepDef {
 	use: StandardPipelineStepRegisterKey.SNIPPET;
 	snippet?: string;
 }
+
+export interface SetsPipelineStepDef extends AllInPipelineStepDef {
+	use: StandardPipelineStepRegisterKey.SETS;
+	steps: Array<PipelineStepDef>;
+}

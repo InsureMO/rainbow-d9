@@ -22,15 +22,15 @@ export abstract class HandledNodeModel<G extends NodeModelGenerics = NodeModelGe
 	}
 
 	public previous(node: NodeModel): LinkModel {
-		const port = this.getPort(PreviousStepPortModel.NAME);
-		const link = port.createLinkModel();
+		const port = this.getPort(PreviousStepPortModel.NAME) as PreviousStepPortModel;
+		const link = port.createIncomingLinkModel();
 		link.setSourcePort(node.getPort(NextStepPortModel.NAME));
 		return link;
 	}
 
 	public next(node: NodeModel): LinkModel {
-		const port = this.getPort(NextStepPortModel.NAME);
-		const link = port.createLinkModel();
+		const port = this.getPort(NextStepPortModel.NAME) as NextStepPortModel;
+		const link = port.createOutgoingLinkModel();
 		link.setTargetPort(node.getPort(PreviousStepPortModel.NAME));
 		return link;
 	}

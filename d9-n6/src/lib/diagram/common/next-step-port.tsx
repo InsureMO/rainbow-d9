@@ -29,6 +29,10 @@ export class NextStepPortModel extends PortModel {
 	 * source is this port
 	 */
 	public createLinkModel(): LinkModel {
+		return this.createOutgoingLinkModel();
+	}
+
+	public createOutgoingLinkModel(): LinkModel {
 		const link = new DefaultLinkModel();
 		link.setSourcePort(this);
 		return link;

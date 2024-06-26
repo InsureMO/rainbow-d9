@@ -13,7 +13,9 @@ import {
 	NextStepPortWidget,
 	NodeBody,
 	NodeHeader,
+	NodeSecondTitle,
 	NodeTitle,
+	NodeTitleSpreader,
 	NodeWrapper,
 	PreviousStepPortModel,
 	PreviousStepPortWidget
@@ -56,6 +58,30 @@ export const StepNodeTitle = styled(NodeTitle).attrs({
 		'--font-weight': PlaygroundCssVars.NODE_STEP_TITLE_FONT_WEIGHT
 	}
 })``;
+export const StepNodeSecondTitle = styled(NodeSecondTitle).attrs({
+	[DOM_KEY_WIDGET]: 'o23-playground-step-node-second-title',
+	style: {
+		'--color': PlaygroundCssVars.NODE_START_TITLE_COLOR,
+		'--font-size': PlaygroundCssVars.NODE_START_SECOND_TITLE_FONT_SIZE,
+		'--font-weight': PlaygroundCssVars.NODE_START_SECOND_TITLE_FONT_WEIGHT
+	}
+})`
+    &:before, &:after {
+        display: inline-block;
+        position: relative;
+        margin-top: 3px;
+    }
+
+    &:before {
+        content: '〔';
+        margin-right: 2px;
+    }
+
+    &:after {
+        content: '〕';
+        margin-left: 2px;
+    }
+`;
 export const StepNodeBody = styled(NodeBody).attrs({
 	[DOM_KEY_WIDGET]: 'o23-playground-step-node-body',
 	style: {
@@ -91,12 +117,17 @@ export const StepNodeWidget = (props: StepNodeWidgetProps) => {
 			               prepare={prepareModel} confirm={onConfirm} discard={onDiscard}
 			               elements={StepDefs.properties}/>);
 	};
+	const asUseLabelKey = () => {
+		return 'StepUse' + (use ?? '').trim().split('-').reduce((a, b) => a + b.charAt(0).toUpperCase() + b.slice(1), '');
+	};
 
 	return <StepNodeContainer onDoubleClick={onDoubleClicked}>
 		<PreviousStepPortWidget port={node.getPort(PreviousStepPortModel.NAME) as PreviousStepPortModel}
 		                        engine={engine}/>
 		<StepNodeHeader>
 			<StepNodeTitle>{(def.name ?? '').trim() || Labels.StepNodeNoname}</StepNodeTitle>
+			<NodeTitleSpreader/>
+			<StepNodeSecondTitle>{Labels[asUseLabelKey()]}</StepNodeSecondTitle>
 		</StepNodeHeader>
 		<StepNodeBody>
 			{StepDefs.ports.map(({key, port: StepPort}) => {

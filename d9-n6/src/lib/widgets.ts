@@ -10,6 +10,7 @@ const NEXT_STEP_PORT_COLOR = '#a3ab5b';
 const PREVIOUS_STEP_PORT_COLOR = '#8454aa';
 const PRE_PORT_COLOR = '#87a55f';
 const POST_PORT_COLOR = '#c69dab';
+const POST_PORT_SUB_STEPS_COLOR = '#617ba0';
 export const PlaygroundCssVars = {
 	EDITOR_BACKGROUND_BLOCK_SIZE,
 	EDITOR_BACKGROUND_LINE_COLOR,
@@ -139,6 +140,8 @@ export const PlaygroundCssVars = {
 	NODE_POST_PORT_LACKING_BORDER: `var(--o23-playground-post-port-lacking-border, 1px solid ${color(CssConstants.DANGER_COLOR).darken(0.1).opaquer(0.5)})`,
 	NODE_POST_PORT_DANGER_BORDER: `var(--o23-playground-post-port-danger-border, 1px solid ${CssVars.DANGER_COLOR})`,
 	NODE_POST_PORT_DANGER_BACKGROUND: `var(--o23-playground-post-port-danger-background, ${color(CssConstants.DANGER_COLOR).darken(0.1).opaquer(0.5)})`,
+	NODE_POST_PORT_SUB_STEPS_BORDER: `var(--o23-playground-post-port-sub-step-border, 1px solid ${POST_PORT_SUB_STEPS_COLOR})`,
+	NODE_POST_PORT_SUB_STEPS_BACKGROUND: `var(--o23-playground-post-port-sub-step-background, ${color(POST_PORT_SUB_STEPS_COLOR).darken(0.1).opaquer(0.5)})`,
 	NODE_POST_PORT_BADGE_BACKGROUND: `var(--o23-playground-post-port-badge-background, ${color(POST_PORT_COLOR).darken(0.1).opaquer(0.9)})`,
 	NODE_POST_PORT_BADGE_DANGER_BACKGROUND: `var(--o23-playground-post-port-badge-danger-background, ${CssVars.DANGER_COLOR})`,
 	NODE_POST_PORT_BADGE_BORDER: `var(--o23-playground-post-port-badge-background, 1px solid ${CssVars.INVERT_COLOR})`,
