@@ -3,6 +3,7 @@ import {AbstractModelFactory, PortModel} from '@projectstorm/react-diagrams';
 import {DiagramEngine} from '@projectstorm/react-diagrams-core';
 import {NextStepPortFactory, PreviousStepPortFactory} from './common';
 import {EndNodeFactory} from './end-node';
+import {JoinEndNodeFactory} from './join-end-node';
 import {HandledNodeModel} from './node-handlers';
 import {StartNodeFactory} from './start-node';
 import {StepNodeFactory} from './step-node';
@@ -11,6 +12,7 @@ export * from './common';
 export * from './start-node';
 export * from './step-node';
 export * from './end-node';
+export * from './join-end-node';
 
 export * from './node-handlers';
 
@@ -42,5 +44,6 @@ export const initEngine = (engine: DiagramEngine) => {
 	nodeFactories.registerFactory(new StartNodeFactory());
 	nodeFactories.registerFactory(new StepNodeFactory());
 	nodeFactories.registerFactory(new EndNodeFactory());
+	nodeFactories.registerFactory(new JoinEndNodeFactory());
 	Factories.nodes.forEach(factory => nodeFactories.registerFactory(factory));
 };

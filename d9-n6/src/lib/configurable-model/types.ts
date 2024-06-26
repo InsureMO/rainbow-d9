@@ -1,6 +1,7 @@
+import {LinkModel, NodeModel} from '@projectstorm/react-diagrams';
 import {Undefinable} from '@rainbow-d9/n1';
 import {FileDef, PipelineStepDef, PipelineStepRegisterKey} from '../definition';
-import {NodeHandlers, StepNodeModel} from '../diagram';
+import {HandledNodeModel, NodeHandlers, StepNodeModel} from '../diagram';
 import {ConfigurableElement, ConfigurableElementAnchor, ConfigurableModel} from '../edit-dialog';
 import {MarkdownContent} from '../types';
 import {StepPort} from './step-def';
@@ -10,6 +11,12 @@ export interface FileNodeConfigurer<D extends FileDef = FileDef, M extends Confi
 	confirm: (model: M, def: D, handlers: NodeHandlers) => ConfigurableElementAnchor | true;
 	discard: (model: M) => void;
 	elements: Array<ConfigurableElement>;
+}
+
+export interface CreateSubNodesOptions {
+	appendNode: (...nodes: Array<NodeModel>) => void;
+	appendLink: (...links: Array<LinkModel>) => void;
+	handlers: NodeHandlers;
 }
 
 export interface StepNodeConfigurer<D extends PipelineStepDef = PipelineStepDef, F extends PipelineStepDef = PipelineStepDef, M extends ConfigurableModel = ConfigurableModel> {
@@ -22,7 +29,7 @@ export interface StepNodeConfigurer<D extends PipelineStepDef = PipelineStepDef,
 	discard: (model: D) => void;
 	ports?: Array<{ key: string, port: StepPort }>;
 	properties: Array<ConfigurableElement>;
-	/** create nodes for sub steps */
-	createSubNodes: (node: StepNodeModel) => Undefinable<StepNodeModel>;
+	/** create nodes for sub steps, returns an end node */
+	createSubNodes: (node: StepNodeModel, options: CreateSubNodesOptions) => Undefinable<HandledNodeModel>;
 	helpDocs: MarkdownContent;
 }

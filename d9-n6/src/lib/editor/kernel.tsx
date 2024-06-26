@@ -1,19 +1,27 @@
 import {CanvasWidget} from '@projectstorm/react-canvas-core';
-import createEngine, {NodeModel} from '@projectstorm/react-diagrams';
+import createEngine from '@projectstorm/react-diagrams';
 import {DiagramEngine} from '@projectstorm/react-diagrams-core';
 import {useForceUpdate, useThrottler, VUtils} from '@rainbow-d9/n1';
 import React, {useEffect, useRef} from 'react';
 import {FileDef, FileDefDeserializer, FileDefSerializer} from '../definition';
-import {initEngine, NextStepPortModel, StartNodeModel} from '../diagram';
+import {initEngine, StartNodeModel} from '../diagram';
 import {Labels} from '../labels';
 import {PlaygroundEventTypes, usePlaygroundEventBus} from '../playground-event-bus';
 import {EditorProps, MarkdownContent} from '../types';
-import {cloneDiagramNodes, createDiagramNodes, createLockedDiagramModel, DiagramHandlers} from './diagram-utils';
+import {
+	buildGrid,
+	cloneDiagramNodes,
+	computeGrid,
+	createDiagramHandlers,
+	createDiagramNodes,
+	createLockedDiagramModel,
+	GridCell
+} from './diagram-utils';
 import {ErrorBoundary} from './error-boundary';
 import {EditorWrapper, ParseError} from './widgets';
 
 export enum EditorKernelDiagramStatus {
-	IGNORED = 'ignored', FIRST_PAINT = 'first-paint', IN_SERVICE = 'in-service'
+	IGNORED = 'ignored', PAINT = 'paint', IN_SERVICE = 'in-service'
 }
 
 export interface EditorKernelRefState {
@@ -41,93 +49,6 @@ const parseContent = (parser: FileDefDeserializer, content?: MarkdownContent): F
 	return def;
 };
 
-const createDiagramHandlers = (options: {
-	serializer: FileDefSerializer;
-	replace: (func: () => void, timeout: number) => void;
-	syncContentToStateRef: (content: string) => string;
-	notifyContentChanged: (content: string) => void;
-}): DiagramHandlers => {
-	const {serializer, replace, syncContentToStateRef, notifyContentChanged} = options;
-
-	return {
-		serialize: (def: FileDef) => serializer.stringify(def),
-		onContentChange: (serialize: () => string) => {
-			replace(() => {
-				// sync to state ref first, in case somewhere outside force update widget
-				// will compare the content with state ref
-				const content = syncContentToStateRef(serialize());
-				// and notify content changed
-				notifyContentChanged(content);
-			}, 100);
-		}
-	};
-
-};
-
-interface GridCell {
-	node?: NodeModel;
-	x: number;
-	y: number;
-	maxWidth: number;
-	maxHeight: number;
-	top: number;
-	left: number;
-}
-
-const buildGrid = (previous: NodeModel, grid: Array<Array<GridCell>>, x: number, y: number) => {
-	// TODO compute sub step nodes
-	// compute next step node
-	const port = previous.getPort(NextStepPortModel.NAME);
-	if (port != null) {
-		const links = port.getLinks();
-		const link = Object.values(links)[0];
-		const next = link.getTargetPort().getNode();
-		grid[x] = grid[x] ?? [];
-		grid[x][y] = {
-			node: next, x: next.getPosition().x, y: next.getPosition().y,
-			maxWidth: -1, maxHeight: -1, top: -1, left: -1
-		};
-		buildGrid(next, grid, x, y + 1);
-	}
-};
-
-const computeGrid = (grid: Array<Array<GridCell>>, top: number, left: number, rowGap: number, columnGap: number) => {
-	let offsetX = left;
-	let offsetY = top;
-	const maxX = grid.length - 1;
-	const maxY = grid.reduce((max, column) => Math.max(max, column.length - 1), 0);
-	for (let x = 0; x <= maxX; x++) {
-		const column = grid[x];
-		new Array(maxY + 1).fill(1).forEach(y => {
-			if (column[y] == null) {
-				column[y] = {x, y, maxWidth: -1, maxHeight: -1, top: -1, left: -1};
-			}
-		});
-		const maxWidth = column.reduce((max, cell) => Math.max(max, cell.node?.width ?? 0), 0);
-		offsetX = offsetX + (x === 0 ? 0 : (grid[x - 1][0].maxWidth + columnGap));
-		column.forEach(cell => {
-			cell.maxWidth = maxWidth;
-			cell.left = cell.node == null ? (offsetX + maxWidth / 2) : (offsetX + (maxWidth - cell.node.width) / 2);
-		});
-	}
-	for (let y = 0; y <= maxY; y++) {
-		const row = grid.map(column => column[y]);
-		const maxHeight = row.reduce((max, cell) => Math.max(max, cell.node?.height ?? 0), 0);
-		offsetY = offsetY + (y === 0 ? 0 : (grid[0][y - 1].maxHeight + columnGap));
-		row.forEach(cell => {
-			cell.maxHeight = maxHeight;
-			cell.top = cell.node == null ? (offsetY + maxHeight / 2) : (offsetY + (maxHeight - cell.node.height) / 2);
-		});
-	}
-	grid.forEach(column => {
-		column.forEach(cell => {
-			if (cell.node != null) {
-				cell.node.setPosition(cell.left, cell.top);
-			}
-		});
-	});
-};
-
 export const EditorKernel = (props: EditorProps) => {
 	const {content, serializer, deserializer} = props;
 
@@ -150,7 +71,7 @@ export const EditorKernel = (props: EditorProps) => {
 			engine.setModel(model);
 			return {
 				engine, content, serializer, deserializer, def,
-				diagramStatus: EditorKernelDiagramStatus.FIRST_PAINT
+				diagramStatus: EditorKernelDiagramStatus.PAINT
 			};
 		} catch (e) {
 			console.error(e);
@@ -186,7 +107,7 @@ export const EditorKernel = (props: EditorProps) => {
 			const model = createDiagramNodes(def, handlers);
 			stateRef.current.engine.setModel(model);
 			delete stateRef.current.message;
-			stateRef.current.diagramStatus = EditorKernelDiagramStatus.FIRST_PAINT;
+			stateRef.current.diagramStatus = EditorKernelDiagramStatus.PAINT;
 		} catch (e) {
 			console.error(e);
 			stateRef.current.content = content;
@@ -201,7 +122,7 @@ export const EditorKernel = (props: EditorProps) => {
 		forceUpdate();
 	}, [fire, replace, forceUpdate, serializer, deserializer, content]);
 	useEffect(() => {
-		if (EditorKernelDiagramStatus.FIRST_PAINT !== stateRef.current.diagramStatus) {
+		if (EditorKernelDiagramStatus.PAINT !== stateRef.current.diagramStatus) {
 			return;
 		}
 

@@ -11,6 +11,7 @@ import {prepare} from './prepare';
 import {CommonStepDefModel, StepPort} from './types';
 
 export * from './types';
+export * from './utils';
 
 export interface CommonStepDefsProperties {
 	name: ConfigurableElement;

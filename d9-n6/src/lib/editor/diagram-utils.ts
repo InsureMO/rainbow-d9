@@ -1,13 +1,21 @@
 import {DiagramModel, LinkModel, NodeModel} from '@projectstorm/react-diagrams';
+import {createStepNode, setNodePosition} from '../configurable-model';
 import {DEFAULTS} from '../constants';
-import {FileDef, FileDiagramDef, isPipelineDef, PipelineStepDef, PipelineStepDiagramDef} from '../definition';
+import {
+	FileDef,
+	FileDefSerializer,
+	FileDiagramDef,
+	isPipelineDef,
+	PipelineStepDef,
+	PipelineStepDiagramDef
+} from '../definition';
 import {
 	EndNodeModel,
 	HandledNodeModel,
+	NextStepPortModel,
 	NodeHandlers,
 	StartNodeModel,
-	StepNodeEntityType,
-	StepNodeModel
+	StepNodeEntityType
 } from '../diagram';
 
 export interface DiagramHandlers {
@@ -59,40 +67,6 @@ export const askStepNodePosition = (def: PipelineStepDef): DiagramNodePosition =
 	}
 };
 
-const setPosition = (node: HandledNodeModel, position: () => DiagramNodePosition) => {
-	const {x, y, appointed} = position();
-	node.setPosition(x, y);
-	node.setPositionAppointed(appointed);
-};
-
-export interface StepNodeCreationOptions {
-	type: StepNodeEntityType;
-	subOf?: PipelineStepDef;
-	handlers: NodeHandlers;
-	previousNode: HandledNodeModel;
-	allNodes: Array<NodeModel>;
-	allLinks: Array<LinkModel>;
-}
-
-export const createStepNode = (step: PipelineStepDef, file: FileDef, options: StepNodeCreationOptions): StepNodeModel => {
-	const {
-		type, subOf, handlers,
-		previousNode, allNodes, allLinks
-	} = options;
-	const node = new StepNodeModel(step, file, {type, subOf, handlers});
-	setPosition(node, () => askStepNodePosition(step));
-	allNodes.push(node);
-	const link = node.previous(previousNode);
-	allLinks.push(link);
-	const endNode = DEFAULTS.createSubStepNodes(node);
-	if (endNode == null) {
-		// no sub nodes created
-		return node;
-	} else {
-		return endNode;
-	}
-};
-
 export class CustomDiagramModel extends DiagramModel {
 	public addLink(link: LinkModel): LinkModel {
 		if (this.isLocked()) {
@@ -125,7 +99,7 @@ export const createDiagramNodes = (file: FileDef, handlers: DiagramHandlers): Di
 	};
 
 	const startNode = new StartNodeModel(file, nodeHandlers);
-	setPosition(startNode, () => askStartNodePosition(file));
+	setNodePosition(startNode, () => askStartNodePosition(file));
 	allNodes.push(startNode);
 
 	let previousNode: HandledNodeModel = startNode;
@@ -140,7 +114,9 @@ export const createDiagramNodes = (file: FileDef, handlers: DiagramHandlers): Di
 		}
 		previousNode = steps.reduce((previousNode, step) => {
 			return createStepNode(step, file, {
-				type: StepNodeEntityType.NORMAL, handlers: nodeHandlers, previousNode, allNodes, allLinks
+				type: StepNodeEntityType.NORMAL, handlers: nodeHandlers, previousNode,
+				appendNode: (...nodes) => allNodes.push(...nodes),
+				appendLink: (...links) => allLinks.push(...links)
 			});
 		}, previousNode);
 	} else {
@@ -148,12 +124,14 @@ export const createDiagramNodes = (file: FileDef, handlers: DiagramHandlers): Di
 		// create a virtual node to represent, treat file def as step def
 		const step = file as unknown as PipelineStepDef;
 		previousNode = createStepNode(step, file, {
-			type: StepNodeEntityType.START, handlers: nodeHandlers, previousNode, allNodes, allLinks
+			type: StepNodeEntityType.START, handlers: nodeHandlers, previousNode,
+			appendNode: (...nodes) => allNodes.push(...nodes),
+			appendLink: (...links) => allLinks.push(...links)
 		});
 	}
 
 	const endNode = new EndNodeModel(file, nodeHandlers);
-	setPosition(endNode, () => askEndNodePosition(file));
+	setNodePosition(endNode, () => askEndNodePosition(file));
 	allNodes.push(endNode);
 	const link = previousNode.next(endNode);
 	allLinks.push(link);
@@ -170,4 +148,91 @@ export const cloneDiagramNodes = (old: DiagramModel): DiagramModel => {
 	model.setLocked(true);
 	model.addAll(...old.getModels());
 	return model;
+};
+
+export interface GridCell {
+	node?: NodeModel;
+	x: number;
+	y: number;
+	maxWidth: number;
+	maxHeight: number;
+	top: number;
+	left: number;
+}
+
+export const buildGrid = (previous: NodeModel, grid: Array<Array<GridCell>>, x: number, y: number) => {
+	// TODO compute sub step nodes
+	// compute next step node
+	const port = previous.getPort(NextStepPortModel.NAME);
+	if (port != null) {
+		const links = port.getLinks();
+		const link = Object.values(links)[0];
+		const next = link.getTargetPort().getNode();
+		grid[x] = grid[x] ?? [];
+		grid[x][y] = {
+			node: next, x: next.getPosition().x, y: next.getPosition().y,
+			maxWidth: -1, maxHeight: -1, top: -1, left: -1
+		};
+		buildGrid(next, grid, x, y + 1);
+	}
+};
+
+export const computeGrid = (grid: Array<Array<GridCell>>, top: number, left: number, rowGap: number, columnGap: number) => {
+	let offsetX = left;
+	let offsetY = top;
+	const maxX = grid.length - 1;
+	const maxY = grid.reduce((max, column) => Math.max(max, column.length - 1), 0);
+	for (let x = 0; x <= maxX; x++) {
+		const column = grid[x];
+		new Array(maxY + 1).fill(1).forEach(y => {
+			if (column[y] == null) {
+				column[y] = {x, y, maxWidth: -1, maxHeight: -1, top: -1, left: -1};
+			}
+		});
+		const maxWidth = column.reduce((max, cell) => Math.max(max, cell.node?.width ?? 0), 0);
+		offsetX = offsetX + (x === 0 ? 0 : (grid[x - 1][0].maxWidth + columnGap));
+		column.forEach(cell => {
+			cell.maxWidth = maxWidth;
+			cell.left = cell.node == null ? (offsetX + maxWidth / 2) : (offsetX + (maxWidth - cell.node.width) / 2);
+		});
+	}
+	for (let y = 0; y <= maxY; y++) {
+		const row = grid.map(column => column[y]);
+		const maxHeight = row.reduce((max, cell) => Math.max(max, cell.node?.height ?? 0), 0);
+		offsetY = offsetY + (y === 0 ? 0 : (grid[0][y - 1].maxHeight + columnGap));
+		row.forEach(cell => {
+			cell.maxHeight = maxHeight;
+			cell.top = cell.node == null ? (offsetY + maxHeight / 2) : (offsetY + (maxHeight - cell.node.height) / 2);
+		});
+	}
+	grid.forEach(column => {
+		column.forEach(cell => {
+			if (cell.node != null) {
+				cell.node.setPosition(cell.left, cell.top);
+			}
+		});
+	});
+};
+
+export const createDiagramHandlers = (options: {
+	serializer: FileDefSerializer;
+	replace: (func: () => void, timeout: number) => void;
+	syncContentToStateRef: (content: string) => string;
+	notifyContentChanged: (content: string) => void;
+}): DiagramHandlers => {
+	const {serializer, replace, syncContentToStateRef, notifyContentChanged} = options;
+
+	return {
+		serialize: (def: FileDef) => serializer.stringify(def),
+		onContentChange: (serialize: () => string) => {
+			replace(() => {
+				// sync to state ref first, in case somewhere outside force update widget
+				// will compare the content with state ref
+				const content = syncContentToStateRef(serialize());
+				// and notify content changed
+				notifyContentChanged(content);
+			}, 100);
+		}
+	};
+
 };

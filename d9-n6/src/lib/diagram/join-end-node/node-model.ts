@@ -2,33 +2,21 @@ import {NodeModelGenerics} from '@projectstorm/react-diagrams';
 import {Undefinable} from '@rainbow-d9/n1';
 import {FileDef, PipelineStepDef} from '../../definition';
 import {NextStepPortModel, PreviousStepPortModel} from '../common';
-import {HandledNodeModel, NodeHandlers} from '../node-handlers';
+import {HandledNodeModel} from '../node-handlers';
+import {StepNodeModelOptions} from '../step-node';
 
-export enum StepNodeEntityType {
-	START = 'start',        // file is step-sets or step, use a virtual step to represent it
-	NORMAL = 'normal',      // normal step
-	JOIN_END = 'join-end',  // join end step, virtual step to end sub steps
-}
-
-export interface StepNodeModelGenerics {
+export interface JoinEndNodeModelGenerics {
 	IN: PreviousStepPortModel;
 	OUT: NextStepPortModel;
 }
 
-export interface StepNodeModelOptions {
-	type: StepNodeEntityType;
-	// is sub step of some step
-	subOf?: PipelineStepDef;
-	handlers: NodeHandlers;
-}
-
-export class StepNodeModel extends HandledNodeModel<NodeModelGenerics & StepNodeModelGenerics> {
-	public static readonly TYPE = 'step-node';
+export class JoinEndNodeModel extends HandledNodeModel<NodeModelGenerics & JoinEndNodeModelGenerics> {
+	public static readonly TYPE = 'join-end-node';
 
 	public constructor(public readonly step: PipelineStepDef,
 	                   public readonly file: FileDef,
 	                   private readonly rest: StepNodeModelOptions) {
-		super({type: StepNodeModel.TYPE}, rest.handlers);
+		super({type: JoinEndNodeModel.TYPE}, rest.handlers);
 		// always have a port which link from previous step or start node
 		this.addPort(new PreviousStepPortModel());
 		// always have a port which link to next step or end node

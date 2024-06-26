@@ -1,12 +1,12 @@
 import {Undefinable} from '@rainbow-d9/n1';
-import {AllStepDefs} from './configurable-model';
+import {AllStepDefs, CreateSubNodesOptions} from './configurable-model';
 import {PipelineStepDef, SnippetPipelineStepDef, StandardPipelineStepRegisterKey} from './definition';
-import {StepNodeModel} from './diagram';
+import {HandledNodeModel, StepNodeModel} from './diagram';
 
-const DEFAULT_CREATE_SUB_STEP_NODES = (node: StepNodeModel): Undefinable<StepNodeModel> => {
+const DEFAULT_CREATE_SUB_STEP_NODES = (node: StepNodeModel, options: CreateSubNodesOptions): Undefinable<HandledNodeModel> => {
 	return Object.values(AllStepDefs).find(def => {
 		return def.use === node.step.use;
-	})?.createSubNodes(node);
+	})?.createSubNodes(node, options);
 };
 
 export const DEFAULTS = {
@@ -27,18 +27,23 @@ export const setDefaults = (defaults: {
 	/**
 	 * Use the second boolean return value to specify whether to use the default create function.
 	 * In practice, always return false, indicating that none of the default create functions will be effective.
+	 *
+	 * 1. returns null, means use default
+	 * 2. return object, means abandon default
+	 * 3. array, only on first is null or empty array and second is true, means use default (same as returns null)
+	 * 4. array, otherwise, return first
 	 */
-	createSubStepNodes?: (node: StepNodeModel) => (Undefinable<StepNodeModel> | [Undefinable<StepNodeModel>, boolean])
+	createSubStepNodes?: (node: StepNodeModel) => Undefinable<StepNodeModel> | [Undefinable<StepNodeModel>, boolean];
 }) => {
 	DEFAULTS.createDefaultStep = defaults.createDefaultStep ?? DEFAULTS.createDefaultStep;
 	DEFAULTS.createSubStepNodes = defaults.createSubStepNodes != null
-		? (node: StepNodeModel): Undefinable<StepNodeModel> => {
+		? (node: StepNodeModel, options: CreateSubNodesOptions): Undefinable<HandledNodeModel> => {
 			const ret = defaults.createSubStepNodes(node);
 			if (ret == null) {
-				return DEFAULT_CREATE_SUB_STEP_NODES(node);
+				return DEFAULT_CREATE_SUB_STEP_NODES(node, options);
 			} else if (Array.isArray(ret)) {
-				if (ret[0] == null && ret[1] !== false) {
-					return DEFAULT_CREATE_SUB_STEP_NODES(node);
+				if (ret[0] == null && ret[1] === true) {
+					return DEFAULT_CREATE_SUB_STEP_NODES(node, options);
 				} else {
 					return ret[0];
 				}

@@ -3,6 +3,7 @@ import {HelpDocs} from '../../../help-docs';
 import {StepNodeConfigurer} from '../../types';
 import {CommonStepDefs} from '../common';
 import {confirm} from './confirm';
+import {createSubNodes} from './create-sub-nodes';
 import {PortSubSteps} from './port-sub-steps';
 import {prepare} from './prepare';
 import {SetsStepDefModel} from './types';
@@ -19,6 +20,6 @@ export const SetsStepDefs: StepNodeConfigurer<SetsStepDefModel> = {
 		{key: 'to-response', port: CommonStepDefs.ports.toResponse},
 		{key: 'merge-request', port: CommonStepDefs.ports.mergeRequest}
 	],
-	createSubNodes: CommonStepDefs.createSubNodes,
+	createSubNodes: createSubNodes,
 	helpDocs: HelpDocs.snippetStep
 };

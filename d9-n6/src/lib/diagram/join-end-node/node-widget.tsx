@@ -4,27 +4,36 @@ import React from 'react';
 import styled from 'styled-components';
 import {Labels} from '../../labels';
 import {PlaygroundCssVars} from '../../widgets';
-import {NodeBody, NodeHeader, NodeTitle, NodeWrapper, PreviousStepPortModel, PreviousStepPortWidget} from '../common';
-import {EndNodeModel} from './node-model';
+import {
+	NextStepPortModel,
+	NextStepPortWidget,
+	NodeHeader,
+	NodeTitle,
+	NodeWrapper,
+	PreviousStepPortModel,
+	PreviousStepPortWidget
+} from '../common';
+import {StepNodeSecondTitle} from '../step-node';
+import {JoinEndNodeModel} from './node-model';
 
-export interface EndNodeWidgetProps {
+export interface JoinEndNodeWidgetProps {
 	// node and engine props are required
-	node: EndNodeModel;
+	node: JoinEndNodeModel;
 	engine: DiagramEngine;
 }
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
-export const EndNodeContainer = styled(NodeWrapper).attrs({
-	[DOM_KEY_WIDGET]: 'o23-playground-end-node',
+export const JoinEndNodeContainer = styled(NodeWrapper).attrs({
+	[DOM_KEY_WIDGET]: 'o23-playground-join-end-node',
 	style: {
 		'--border-radius': PlaygroundCssVars.NODE_BORDER_RADIUS,
 		'--border': PlaygroundCssVars.NODE_END_BORDER,
 		'--background-color': PlaygroundCssVars.NODE_BACKGROUND
 	}
 })``;
-export const EndNodeHeader = styled(NodeHeader).attrs({
-	[DOM_KEY_WIDGET]: 'o23-playground-end-node-header',
+export const JoinEndNodeHeader = styled(NodeHeader).attrs({
+	[DOM_KEY_WIDGET]: 'o23-playground-join-end-node-header',
 	style: {
 		// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 		// @ts-ignore
@@ -35,35 +44,32 @@ export const EndNodeHeader = styled(NodeHeader).attrs({
 })``;
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
-export const EndNodeTitle = styled(NodeTitle).attrs({
-	[DOM_KEY_WIDGET]: 'o23-playground-end-node-title',
+export const JoinEndNodeTitle = styled(NodeTitle).attrs({
+	[DOM_KEY_WIDGET]: 'o23-playground-join-end-node-title',
 	style: {
 		'--color': PlaygroundCssVars.NODE_END_TITLE_COLOR,
 		'--font-size': PlaygroundCssVars.NODE_END_TITLE_FONT_SIZE,
 		'--font-weight': PlaygroundCssVars.NODE_END_TITLE_FONT_WEIGHT
 	}
 })``;
-export const EndNodeBody = styled(NodeBody).attrs({
-	[DOM_KEY_WIDGET]: 'o23-playground-end-node-body',
-	style: {
-		// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-		// @ts-ignore
-		'--min-height': PlaygroundCssVars.NODE_END_BODY_HEIGHT,
-		'--padding': PlaygroundCssVars.NODE_END_BODY_PADDING
-	}
-})`
-    display: none;
-`;
 
-export const EndNodeWidget = (props: EndNodeWidgetProps) => {
+export const JoinEndNodeWidget = (props: JoinEndNodeWidgetProps) => {
 	const {node, engine} = props;
 
-	return <EndNodeContainer>
+	const {step: def} = node;
+	const {use} = def;
+
+	const asUseLabelKey = () => {
+		return 'StepUse' + (use ?? '').trim().split('-').reduce((a, b) => a + b.charAt(0).toUpperCase() + b.slice(1), '');
+	};
+
+	return <JoinEndNodeContainer>
 		<PreviousStepPortWidget port={node.getPort(PreviousStepPortModel.NAME) as PreviousStepPortModel}
 		                        engine={engine}/>
-		<EndNodeHeader>
-			<EndNodeTitle>{Labels.EndNodeTitle}</EndNodeTitle>
-		</EndNodeHeader>
-		<EndNodeBody/>
-	</EndNodeContainer>;
+		<JoinEndNodeHeader>
+			<JoinEndNodeTitle>{Labels.JoinEndNodeTitle}</JoinEndNodeTitle>
+			<StepNodeSecondTitle>{Labels[asUseLabelKey()]}</StepNodeSecondTitle>
+		</JoinEndNodeHeader>
+		<NextStepPortWidget port={node.getPort(NextStepPortModel.NAME) as NextStepPortModel} engine={engine}/>
+	</JoinEndNodeContainer>;
 };
