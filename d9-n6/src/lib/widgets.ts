@@ -99,6 +99,7 @@ export const PlaygroundCssVars = {
 	EDIT_DIALOG_CONFIGURABLE_ELEMENT_GROUP_BORDER: `var(--o23-playground-dialog-configurable-element-group-border, 1px solid rgb(216, 222, 228))`,
 	EDIT_DIALOG_CONFIGURABLE_ELEMENT_SPECIFIC_INPUT_PREFIX_FONT_SIZE: 'var(--o23-playground-dialog-configurable-element-specific-input-prefix-font-size, max(0.8em, 12px))',
 	// node common
+	NODE_BORDER_WIDTH: `var(--o23-playground-node-border-width, 2px)`,
 	NODE_BORDER_RADIUS: 'var(--o23-playground-node-border-radius, 8px)',
 	NODE_BACKGROUND: `var(--o23-playground-node-background, ${CssVars.BACKGROUND_COLOR})`,
 	NODE_TITLE_PADDING: 'var(--o23-playground-node-title-padding, 0 10px)',
@@ -106,7 +107,8 @@ export const PlaygroundCssVars = {
 	NODE_MIN_WIDTH: 'var(--o23-playground-node-min-width, 160px)',
 	NODE_ICON_SIZE: 'var(--o23-playground-node-icon-size, 14px)',
 	NODE_PORT_HEIGHT: 'var(--o23-playground-node-port-height, 24px)',
-	NODE_LINK_PORT_RADIUS: 'var(--o23-playground-node-link-port-radius, 8px)',
+	NODE_PORT_BORDER_WIDTH: `var(--o23-playground-node-port-border-width, 1px)`,
+	NODE_PORT_RADIUS: 'var(--o23-playground-node-link-port-radius, 8px)',
 	NODE_NEXT_STEP_PORT_BACKGROUND_COLOR: `var(--o23-playground-node-next-step-port-background-color, ${NEXT_STEP_PORT_COLOR})`,
 	NODE_NEXT_STEP_PORT_BORDER: `var(--o23-playground-node-next-step-port-border, 2px solid ${color(NEXT_STEP_PORT_COLOR).darken(0.1).opaquer(0.5)})`,
 	NODE_PREVIOUS_STEP_PORT_BACKGROUND_COLOR: `var(--o23-playground-node-previous-step-port-background-color, ${PREVIOUS_STEP_PORT_COLOR})`,

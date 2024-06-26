@@ -53,14 +53,14 @@ export class NextStepPortFactory extends AbstractModelFactory<NextStepPortModel,
 export const NextStepPortContainer = styled.div.attrs({[DOM_KEY_WIDGET]: 'o23-playground-next-step-port'})`
     display: flex;
     position: absolute;
-    left: calc(50% - ${PlaygroundCssVars.NODE_LINK_PORT_RADIUS});
-    bottom: calc(-1 * ${PlaygroundCssVars.NODE_LINK_PORT_RADIUS});
-    width: calc(${PlaygroundCssVars.NODE_LINK_PORT_RADIUS} * 2);
-    height: ${PlaygroundCssVars.NODE_LINK_PORT_RADIUS};
+    left: calc(50% - ${PlaygroundCssVars.NODE_PORT_RADIUS});
+    bottom: calc(-1 * ${PlaygroundCssVars.NODE_PORT_RADIUS});
+    width: calc(${PlaygroundCssVars.NODE_PORT_RADIUS} * 2);
+    height: ${PlaygroundCssVars.NODE_PORT_RADIUS};
     background-color: ${PlaygroundCssVars.NODE_NEXT_STEP_PORT_BACKGROUND_COLOR};
     border: ${PlaygroundCssVars.NODE_NEXT_STEP_PORT_BORDER};
-    border-bottom-left-radius: ${PlaygroundCssVars.NODE_LINK_PORT_RADIUS};
-    border-bottom-right-radius: ${PlaygroundCssVars.NODE_LINK_PORT_RADIUS};
+    border-bottom-left-radius: ${PlaygroundCssVars.NODE_PORT_RADIUS};
+    border-bottom-right-radius: ${PlaygroundCssVars.NODE_PORT_RADIUS};
 
     > div:first-child {
         position: absolute;

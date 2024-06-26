@@ -1,4 +1,6 @@
+import {DiagramEngine} from '@projectstorm/react-diagrams-core';
 import {AllInPipelineStepDef, FileDef, PipelineStepDef} from '../../../definition';
+import {StepNodeModel} from '../../../diagram';
 import {ConfigurableModel} from '../../../edit-dialog';
 
 export enum MergeRequestType {
@@ -37,6 +39,8 @@ export interface CommonStepDefModel extends ConfigurableModel, PipelineStepDef {
 export interface StepPortProps<S extends AllInPipelineStepDef = AllInPipelineStepDef> {
 	step: S;
 	file: FileDef;
+	node: StepNodeModel;
+	engine: DiagramEngine;
 }
 
 export type StepPort<S extends AllInPipelineStepDef = AllInPipelineStepDef> = (props: StepPortProps<S>) => JSX.Element;

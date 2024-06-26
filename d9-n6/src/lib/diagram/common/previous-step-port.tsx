@@ -53,14 +53,14 @@ export class PreviousStepPortFactory extends AbstractModelFactory<PreviousStepPo
 export const PreviousStepPortContainer = styled.div.attrs({[DOM_KEY_WIDGET]: 'o23-playground-previous-step-port'})`
     display: flex;
     position: absolute;
-    left: calc(50% - ${PlaygroundCssVars.NODE_LINK_PORT_RADIUS});
-    top: calc(-1 * ${PlaygroundCssVars.NODE_LINK_PORT_RADIUS});
-    width: calc(${PlaygroundCssVars.NODE_LINK_PORT_RADIUS} * 2);
-    height: ${PlaygroundCssVars.NODE_LINK_PORT_RADIUS};
+    left: calc(50% - ${PlaygroundCssVars.NODE_PORT_RADIUS});
+    top: calc(-1 * ${PlaygroundCssVars.NODE_PORT_RADIUS});
+    width: calc(${PlaygroundCssVars.NODE_PORT_RADIUS} * 2);
+    height: ${PlaygroundCssVars.NODE_PORT_RADIUS};
     background-color: ${PlaygroundCssVars.NODE_PREVIOUS_STEP_PORT_BACKGROUND_COLOR};
     border: ${PlaygroundCssVars.NODE_PREVIOUS_STEP_PORT_BORDER};
-    border-top-left-radius: ${PlaygroundCssVars.NODE_LINK_PORT_RADIUS};
-    border-top-right-radius: ${PlaygroundCssVars.NODE_LINK_PORT_RADIUS};
+    border-top-left-radius: ${PlaygroundCssVars.NODE_PORT_RADIUS};
+    border-top-right-radius: ${PlaygroundCssVars.NODE_PORT_RADIUS};
 
     > div:first-child {
         position: absolute;

@@ -131,7 +131,7 @@ export const StepNodeWidget = (props: StepNodeWidgetProps) => {
 		</StepNodeHeader>
 		<StepNodeBody>
 			{StepDefs.ports.map(({key, port: StepPort}) => {
-				return <StepPort step={def} file={file} key={key}/>;
+				return <StepPort step={def} file={file} node={node} engine={engine} key={key}/>;
 			})}
 		</StepNodeBody>
 		<NextStepPortWidget port={node.getPort(NextStepPortModel.NAME) as NextStepPortModel} engine={engine}/>

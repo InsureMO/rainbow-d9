@@ -15,6 +15,7 @@ export interface PortProps {
 	allAsBoolean?: boolean;
 	allAsGiven?: ReactNode;
 	danger?: boolean;
+	children?: ReactNode;
 }
 
 export const computePortIconAndBadge = (props: PortProps) => {
@@ -190,7 +191,7 @@ export const PostPortContainer = styled.div.attrs({[DOM_KEY_WIDGET]: 'o23-playgr
 `;
 
 export const PostPort = (props: PortProps) => {
-	const {label, required, defined, danger = false, ...rest} = props;
+	const {label, required, defined, danger = false, children, ...rest} = props;
 
 	const {icon, badge} = computePortIconAndBadge(props);
 
@@ -198,5 +199,6 @@ export const PostPort = (props: PortProps) => {
 		{icon}
 		<span>{label}</span>
 		{badge}
+		{children}
 	</PostPortContainer>;
 };
