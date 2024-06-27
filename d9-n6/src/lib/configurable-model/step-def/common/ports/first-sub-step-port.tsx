@@ -11,7 +11,7 @@ import {DiagramEngine} from '@projectstorm/react-diagrams-core';
 import {DOM_KEY_WIDGET} from '@rainbow-d9/n2';
 import React from 'react';
 import styled from 'styled-components';
-import {PlaygroundCssVars} from '../../../widgets';
+import {PlaygroundCssVars} from '../../../../widgets';
 
 export class FirstSubStepPortModel extends PortModel {
 	public static readonly TYPE = 'first-sub-step-port';
@@ -53,21 +53,21 @@ export class FirstSubStepPortFactory extends AbstractModelFactory<FirstSubStepPo
 export const FirstSubStepPortContainer = styled.div.attrs({[DOM_KEY_WIDGET]: 'o23-playground-first-sub-step-port'})`
     display: flex;
     position: absolute;
-    top: calc(-1 * ${PlaygroundCssVars.NODE_PORT_BORDER_WIDTH});
-    left: calc(${PlaygroundCssVars.NODE_PORT_HEIGHT} / -2 - ${PlaygroundCssVars.NODE_BORDER_WIDTH});
-    width: calc(${PlaygroundCssVars.NODE_PORT_HEIGHT} / 2);
-    height: ${PlaygroundCssVars.NODE_PORT_HEIGHT};
-    background-color: ${PlaygroundCssVars.NODE_PRE_PORT_FIRST_SUB_STEP_BACKGROUND};
-    border: ${PlaygroundCssVars.NODE_PRE_PORT_FIRST_SUB_STEP_BORDER};
-    border-top-left-radius: calc(${PlaygroundCssVars.NODE_PORT_HEIGHT} / 2);
-    border-bottom-left-radius: calc(${PlaygroundCssVars.NODE_PORT_HEIGHT} / 2);
+    top: calc(-1 * ${PlaygroundCssVars.NODE_PORT_RADIUS});
+    left: calc(50% - ${PlaygroundCssVars.NODE_PORT_RADIUS});
+    width: calc(${PlaygroundCssVars.NODE_PORT_RADIUS} * 2);
+    height: ${PlaygroundCssVars.NODE_PORT_RADIUS};
+    background-color: ${PlaygroundCssVars.NODE_PORT_FIRST_SUB_STEP_BACKGROUND};
+    border: ${PlaygroundCssVars.NODE_PORT_FIRST_SUB_STEP_BORDER};
+    border-top-left-radius: ${PlaygroundCssVars.NODE_PORT_RADIUS};
+    border-top-right-radius: ${PlaygroundCssVars.NODE_PORT_RADIUS};
 
     > div:first-child {
         position: absolute;
         top: 0;
         left: 0;
-        width: 0;
-        height: 100%;
+        width: 100%;
+        height: 0;
     }
 `;
 
@@ -77,6 +77,9 @@ export interface FirstSubStepPortWidgetProps {
 	engine: DiagramEngine;
 }
 
+/**
+ * used in step node, when it is first sub step
+ */
 export const FirstSubStepPortWidget = (props: FirstSubStepPortWidgetProps) => {
 	const {port, engine} = props;
 

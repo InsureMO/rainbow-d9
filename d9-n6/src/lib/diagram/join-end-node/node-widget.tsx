@@ -2,6 +2,7 @@ import {DiagramEngine} from '@projectstorm/react-diagrams';
 import {DOM_KEY_WIDGET} from '@rainbow-d9/n2';
 import React from 'react';
 import styled from 'styled-components';
+import {LastSubStepJoinPortModel, LastSubStepJoinPortWidget} from '../../configurable-model';
 import {Labels} from '../../labels';
 import {PlaygroundCssVars} from '../../widgets';
 import {
@@ -61,6 +62,8 @@ export const JoinEndNodeWidget = (props: JoinEndNodeWidgetProps) => {
 	return <JoinEndNodeContainer>
 		<PreviousStepPortWidget port={node.getPort(PreviousStepPortModel.NAME) as PreviousStepPortModel}
 		                        engine={engine}/>
+		<LastSubStepJoinPortWidget port={node.getPort(LastSubStepJoinPortModel.NAME) as LastSubStepJoinPortModel}
+		                           engine={engine}/>
 		<JoinEndNodeHeader>
 			<JoinEndNodeTitle>{Labels.JoinEndNodeTitle}</JoinEndNodeTitle>
 			<StepNodeSecondTitle>{(def.name ?? '').trim() || Labels.StepNodeNoname}</StepNodeSecondTitle>

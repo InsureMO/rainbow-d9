@@ -90,8 +90,8 @@ export const PrePortContainer = styled.div.attrs({[DOM_KEY_WIDGET]: 'o23-playgro
     }
 
     &[data-role=first-sub-step] {
-        border: ${PlaygroundCssVars.NODE_PRE_PORT_FIRST_SUB_STEP_BORDER};
-        background: ${PlaygroundCssVars.NODE_PRE_PORT_FIRST_SUB_STEP_BACKGROUND};
+        border: ${PlaygroundCssVars.NODE_PORT_FIRST_SUB_STEP_BORDER};
+        background: ${PlaygroundCssVars.NODE_PORT_FIRST_SUB_STEP_BACKGROUND};
     }
 
     > svg:first-child {
@@ -170,8 +170,8 @@ export const PostPortContainer = styled.div.attrs({[DOM_KEY_WIDGET]: 'o23-playgr
     }
 
     &[data-role=sub-steps] {
-        border: ${PlaygroundCssVars.NODE_POST_PORT_SUB_STEPS_BORDER};
-        background: ${PlaygroundCssVars.NODE_POST_PORT_SUB_STEPS_BACKGROUND};
+        border: ${PlaygroundCssVars.NODE_PORT_SUB_STEPS_BORDER};
+        background: ${PlaygroundCssVars.NODE_PORT_SUB_STEPS_BACKGROUND};
     }
 
     > svg:first-child {

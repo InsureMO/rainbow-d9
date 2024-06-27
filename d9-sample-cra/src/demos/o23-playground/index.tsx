@@ -34,16 +34,26 @@ steps:
     use: sets
     steps:
       - name: Validate name
-        use: snippet
+        use: sets
+        steps:
+          - name: Validate first name
+            use: snippet
+          - name: Validate last name
+            use: snippet
       - name: Validate age
+        use: snippet
+      - name: Validate country
         use: snippet
       - name: Validate address
         use: sets
         steps:
           - name: "Validate address #1"
             use: snippet
-      - name: Validate job occupation
-        use: snippet
+      - name: Validate job
+        use: sets
+        steps:
+          - name: Validate job occupation
+            use: snippet
     to-response: $result
 `;
 

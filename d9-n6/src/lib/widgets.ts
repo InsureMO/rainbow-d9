@@ -8,10 +8,11 @@ const NODE_END_COLOR = '#e0b35f';
 const NODE_STEP_COLOR = '#54956b';
 const NEXT_STEP_PORT_COLOR = '#a3ab5b';
 const PREVIOUS_STEP_PORT_COLOR = '#8454aa';
+const PORT_FIRST_SUB_STEP_COLOR = '#8454aa';
+const PORT_SUB_STEPS_COLOR = '#617ba0';
+const PORT_LAST_SUB_STEP_JOIN_COLOR = '#00618b';
 const PRE_PORT_COLOR = '#87a55f';
-const PRE_PORT_FIRST_SUB_STEP_COLOR = '#99bcbe';
 const POST_PORT_COLOR = '#c69dab';
-const POST_PORT_SUB_STEPS_COLOR = '#617ba0';
 export const PlaygroundCssVars = {
 	EDITOR_BACKGROUND_BLOCK_SIZE,
 	EDITOR_BACKGROUND_LINE_COLOR,
@@ -114,6 +115,12 @@ export const PlaygroundCssVars = {
 	NODE_NEXT_STEP_PORT_BORDER: `var(--o23-playground-node-next-step-port-border, 2px solid ${color(NEXT_STEP_PORT_COLOR).darken(0.1).opaquer(0.5)})`,
 	NODE_PREVIOUS_STEP_PORT_BACKGROUND_COLOR: `var(--o23-playground-node-previous-step-port-background-color, ${PREVIOUS_STEP_PORT_COLOR})`,
 	NODE_PREVIOUS_STEP_PORT_BORDER: `var(--o23-playground-node-previous-step-port-border, 2px solid ${color(PREVIOUS_STEP_PORT_COLOR).darken(0.1).opaquer(0.5)})`,
+	NODE_PORT_SUB_STEPS_BORDER: `var(--o23-playground-port-sub-step-border, 1px solid ${PORT_SUB_STEPS_COLOR})`,
+	NODE_PORT_SUB_STEPS_BACKGROUND: `var(--o23-playground-port-sub-step-background, ${color(PORT_SUB_STEPS_COLOR).darken(0.1).opaquer(0.5)})`,
+	NODE_PORT_FIRST_SUB_STEP_BACKGROUND: `var(--o23-playground-port-first-sub-step-background, ${PORT_FIRST_SUB_STEP_COLOR})`,
+	NODE_PORT_FIRST_SUB_STEP_BORDER: `var(--o23-playground-port-first-sub-step-border, 1px solid ${color(PORT_FIRST_SUB_STEP_COLOR).darken(0.1).opaquer(0.5)})`,
+	NODE_PORT_LAST_SUB_STEP_JOIN_BACKGROUND: `var(--o23-playground-port-last-sub-step-join-background, ${PORT_LAST_SUB_STEP_JOIN_COLOR})`,
+	NODE_PORT_LAST_SUB_STEP_JOIN_BORDER: `var(--o23-playground-port-last-sub-step-join-border, 1px solid ${color(PORT_LAST_SUB_STEP_JOIN_COLOR).darken(0.1).opaquer(0.5)})`,
 	// pre port
 	NODE_PRE_PORT_FONT_SIZE: 'var(--o23-playground-pre-port-font-size, 14px)',
 	NODE_PRE_PORT_FONT_WEIGHT: 'var(--o23-playground-pre-port-font-weight, 400)',
@@ -127,8 +134,6 @@ export const PlaygroundCssVars = {
 	NODE_PRE_PORT_LACKING_BORDER: `var(--o23-playground-pre-port-lacking-border, 1px solid ${color(CssConstants.DANGER_COLOR).darken(0.1).opaquer(0.5)})`,
 	NODE_PRE_PORT_DANGER_BORDER: `var(--o23-playground-pre-port-danger-border, 1px solid ${CssVars.DANGER_COLOR})`,
 	NODE_PRE_PORT_DANGER_BACKGROUND: `var(--o23-playground-pre-port-danger-background, ${color(CssConstants.DANGER_COLOR).darken(0.1).opaquer(0.5)})`,
-	NODE_PRE_PORT_FIRST_SUB_STEP_BACKGROUND: `var(--o23-playground-pre-port-first-sub-step-background, ${PRE_PORT_FIRST_SUB_STEP_COLOR})`,
-	NODE_PRE_PORT_FIRST_SUB_STEP_BORDER: `var(--o23-playground-pre-port-first-sub-step-border, 1px solid ${color(PRE_PORT_FIRST_SUB_STEP_COLOR).darken(0.1).opaquer(0.5)})`,
 	NODE_PRE_PORT_BADGE_BACKGROUND: `var(--o23-playground-pre-port-badge-background, ${color(PRE_PORT_COLOR).darken(0.1).opaquer(0.9)})`,
 	NODE_PRE_PORT_BADGE_DANGER_BACKGROUND: `var(--o23-playground-pre-port-badge-danger-background, ${CssVars.DANGER_COLOR})`,
 	NODE_PRE_PORT_BADGE_BORDER: `var(--o23-playground-pre-port-badge-background, 1px solid ${CssVars.INVERT_COLOR})`,
@@ -145,8 +150,6 @@ export const PlaygroundCssVars = {
 	NODE_POST_PORT_LACKING_BORDER: `var(--o23-playground-post-port-lacking-border, 1px solid ${color(CssConstants.DANGER_COLOR).darken(0.1).opaquer(0.5)})`,
 	NODE_POST_PORT_DANGER_BORDER: `var(--o23-playground-post-port-danger-border, 1px solid ${CssVars.DANGER_COLOR})`,
 	NODE_POST_PORT_DANGER_BACKGROUND: `var(--o23-playground-post-port-danger-background, ${color(CssConstants.DANGER_COLOR).darken(0.1).opaquer(0.5)})`,
-	NODE_POST_PORT_SUB_STEPS_BORDER: `var(--o23-playground-post-port-sub-step-border, 1px solid ${POST_PORT_SUB_STEPS_COLOR})`,
-	NODE_POST_PORT_SUB_STEPS_BACKGROUND: `var(--o23-playground-post-port-sub-step-background, ${color(POST_PORT_SUB_STEPS_COLOR).darken(0.1).opaquer(0.5)})`,
 	NODE_POST_PORT_BADGE_BACKGROUND: `var(--o23-playground-post-port-badge-background, ${color(POST_PORT_COLOR).darken(0.1).opaquer(0.9)})`,
 	NODE_POST_PORT_BADGE_DANGER_BACKGROUND: `var(--o23-playground-post-port-badge-danger-background, ${CssVars.DANGER_COLOR})`,
 	NODE_POST_PORT_BADGE_BORDER: `var(--o23-playground-post-port-badge-background, 1px solid ${CssVars.INVERT_COLOR})`,

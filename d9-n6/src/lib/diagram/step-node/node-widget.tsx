@@ -17,7 +17,6 @@ import {
 	NodeTitle,
 	NodeTitleSpreader,
 	NodeWrapper,
-	PrePort,
 	PreviousStepPortModel,
 	PreviousStepPortWidget
 } from '../common';
@@ -125,7 +124,8 @@ export const StepNodeWidget = (props: StepNodeWidgetProps) => {
 
 	return <StepNodeContainer onDoubleClick={onDoubleClicked}>
 		{isFirstSubStep
-			? null
+			? <FirstSubStepPortWidget port={node.getPort(FirstSubStepPortModel.NAME) as FirstSubStepPortModel}
+			                          engine={engine}/>
 			: <PreviousStepPortWidget port={node.getPort(PreviousStepPortModel.NAME) as PreviousStepPortModel}
 			                          engine={engine}/>}
 		<StepNodeHeader>
@@ -134,12 +134,6 @@ export const StepNodeWidget = (props: StepNodeWidgetProps) => {
 			<StepNodeSecondTitle>{Labels[asUseLabelKey()]}</StepNodeSecondTitle>
 		</StepNodeHeader>
 		<StepNodeBody>
-			{isFirstSubStep
-				? <PrePort label={Labels.StepFirstSubStep} required={false} defined={true} data-role="first-sub-step">
-					<FirstSubStepPortWidget port={node.getPort(FirstSubStepPortModel.NAME) as FirstSubStepPortModel}
-					                        engine={engine}/>
-				</PrePort>
-				: null}
 			{StepDefs.ports.map(({key, port: StepPort}) => {
 				return <StepPort step={def} file={file} node={node} engine={engine} key={key}/>;
 			})}

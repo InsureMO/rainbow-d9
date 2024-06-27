@@ -78,9 +78,9 @@ export interface NextStepPortWidgetProps {
 }
 
 export const NextStepPortWidget = (props: NextStepPortWidgetProps) => {
-	const {port, engine} = props;
+	const {port, engine, ...rest} = props;
 
-	return <NextStepPortContainer>
+	return <NextStepPortContainer {...rest}>
 		<PortWidget port={port} engine={engine}/>
 	</NextStepPortContainer>;
 };

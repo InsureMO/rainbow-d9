@@ -11,7 +11,7 @@ import {DiagramEngine} from '@projectstorm/react-diagrams-core';
 import {DOM_KEY_WIDGET} from '@rainbow-d9/n2';
 import React from 'react';
 import styled from 'styled-components';
-import {PlaygroundCssVars} from '../../../widgets';
+import {PlaygroundCssVars} from '../../../../widgets';
 
 export class SubStepsPortModel extends PortModel {
 	public static readonly TYPE = 'sub-steps-port';
@@ -52,8 +52,8 @@ export const SubStepsPortContainer = styled.div.attrs({[DOM_KEY_WIDGET]: 'o23-pl
     right: calc(${PlaygroundCssVars.NODE_PORT_HEIGHT} / -2 - ${PlaygroundCssVars.NODE_BORDER_WIDTH});
     width: calc(${PlaygroundCssVars.NODE_PORT_HEIGHT} / 2);
     height: ${PlaygroundCssVars.NODE_PORT_HEIGHT};
-    background-color: ${PlaygroundCssVars.NODE_POST_PORT_SUB_STEPS_BACKGROUND};
-    border: ${PlaygroundCssVars.NODE_POST_PORT_SUB_STEPS_BORDER};
+    background-color: ${PlaygroundCssVars.NODE_PORT_SUB_STEPS_BACKGROUND};
+    border: ${PlaygroundCssVars.NODE_PORT_SUB_STEPS_BORDER};
     border-top-right-radius: calc(${PlaygroundCssVars.NODE_PORT_HEIGHT} / 2);
     border-bottom-right-radius: calc(${PlaygroundCssVars.NODE_PORT_HEIGHT} / 2);
 
@@ -72,6 +72,9 @@ export interface SubStepsPortWidgetProps {
 	engine: DiagramEngine;
 }
 
+/**
+ * used in step node, when it has sub steps
+ */
 export const SubStepsPortWidget = (props: SubStepsPortWidgetProps) => {
 	const {port, engine} = props;
 

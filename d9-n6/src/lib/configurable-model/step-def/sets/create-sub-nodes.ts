@@ -50,7 +50,7 @@ export const createSubNodes: StepNodeConfigurer['createSubNodes'] = (model: Step
 	// now create an end node for end sub nodes
 	const endNode = new JoinEndNodeModel(step, model.file, {type: StepNodeEntityType.JOIN_END, subOf: step, handlers});
 	appendNode(endNode);
-	const link = previousNode.next(endNode);
+	const link = endNode.endOf(previousNode);
 	appendLink(link);
 	const directLink = model.next(endNode);
 	appendLink(directLink);
