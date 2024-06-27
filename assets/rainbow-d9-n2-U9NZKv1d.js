@@ -4,10 +4,10 @@ var __publicField = (obj, key, value) => {
   __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
   return value;
 };
-import { a as color, M as MaskedNumber, e as MaskedDate, g as MaskedFunction, j as MaskedPattern, k as MaskedRange, p as MaskedRegExp, q as MaskedDynamic } from "./vendor-FxhWBsAz.js";
-import { R as React, r as reactExports, q as qe, W as We, u as useIMask } from "./react-base-1xesxUK0.js";
-import { c as createLogger, V as VUtils, P as PPUtils, r as registerWidget, a as useThrottler, u as useRootEventBus, M as MUtils, N as NUtils, d as Wrapper, e as useForceUpdate, f as MBUtils, b as useWrapperEventBus, W as WrapperEventTypes, g as useCreateEventBus, h as PROPERTY_PATH_ME, i as useDefaultAttributeValues, j as useAttributesWatch, R as RootEventTypes } from "./rainbow-d9-n1-gFKePpQk.js";
-import { d as dayjs } from "./dayjs-ZafkOS5_.js";
+import { a as color, M as MaskedNumber, e as MaskedDate, g as MaskedFunction, j as MaskedPattern, k as MaskedRange, p as MaskedRegExp, q as MaskedDynamic } from "./vendor-MZyh1u1d.js";
+import { R as React, r as reactExports, q as qe, W as We, u as useIMask } from "./react-base-8-0nj6j8.js";
+import { c as createLogger, V as VUtils, P as PPUtils, r as registerWidget, a as useThrottler, u as useRootEventBus, M as MUtils, N as NUtils, d as Wrapper, e as useForceUpdate, f as MBUtils, b as useWrapperEventBus, W as WrapperEventTypes, g as useCreateEventBus, h as PROPERTY_PATH_ME, i as useDefaultAttributeValues, j as useAttributesWatch, R as RootEventTypes } from "./rainbow-d9-n1-OB1df9sy.js";
+import { d as dayjs } from "./dayjs-9WAo-H7j.js";
 const DOM_KEY_WIDGET = "data-w";
 const DOM_ID_WIDGET = "data-wid";
 const ICON_PREFIX = "$icons.";
@@ -231,6 +231,7 @@ $d9.$d9n2 = $d9.$d9n2 ?? {
           removeItem: "Remove"
         },
         table: {
+          headers: { index: void 0, operators: void 0 },
           noElement: "No data found.",
           createItem: "Create New Element",
           removeItem: "Remove"
@@ -7387,7 +7388,11 @@ const TableHeader = (props) => {
   return React.createElement(
     React.Fragment,
     null,
-    React.createElement(ATableHeaderCell, { headerHeight, isGrabber: true, stickyOffset: stickyOffsets[0] }),
+    React.createElement(
+      ATableHeaderCell,
+      { headerHeight, isGrabber: true, stickyOffset: stickyOffsets[0] },
+      React.createElement(IntlLabel, { keys: ["table", "headers", "index"], value: void 0 })
+    ),
     headers.map((header, index) => {
       const key = NUtils.getDefKey(header);
       return React.createElement(
@@ -7397,7 +7402,11 @@ const TableHeader = (props) => {
       );
     }),
     tailGrabberAppended ? React.createElement(ATableHeaderCell, { headerHeight, isGrabber: true, stickyOffset: stickyOffsets[stickyOffsets.length - 2] }) : null,
-    React.createElement(ATableHeaderCell, { headerHeight, isGrabber: true, stickyOffset: stickyOffsets[stickyOffsets.length - 1] })
+    React.createElement(
+      ATableHeaderCell,
+      { headerHeight, isGrabber: true, stickyOffset: stickyOffsets[stickyOffsets.length - 1] },
+      React.createElement(IntlLabel, { keys: ["table", "headers", "operators"], value: void 0 })
+    )
   );
 };
 const computeRowIndexColumnWidth = (maxRowIndex) => {

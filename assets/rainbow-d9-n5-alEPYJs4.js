@@ -4,11 +4,11 @@ var __publicField = (obj, key, value) => {
   __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
   return value;
 };
-import { i as index$2, D as DOM_KEY_WIDGET, C as CssVars, d as utils$2, I as IntlLabel, b as useGlobalHandlers, t as toIntlLabel, U as UnwrappedButton, B as ButtonInk, e as ButtonFill } from "./rainbow-d9-n2-v6HY_bjb.js";
-import { R as React, r as reactExports, q as qe } from "./react-base-1xesxUK0.js";
-import { V as VUtils, r as registerWidget, g as useCreateEventBus, M as MUtils, P as PPUtils, a as useThrottler, e as useForceUpdate, S as StandaloneRoot, m as ExternalDefMismatchIndicator } from "./rainbow-d9-n1-gFKePpQk.js";
-import { T as Tag, r as tags, V as ViewPlugin, u as syntaxTree, H as HighlightStyle, v as defaultHighlightStyle, w as syntaxHighlighting, x as styleTags, D as Decoration, I as InlineContext, W as WidgetType, y as EditorView, z as EditorState, A as basicSetup, B as keymap, C as indentWithTab, F as markdown, G as javascript, J as markdownLanguage, K as lintGutter, L as linter, N as json, O as jsonParseLinter } from "./vendor-FxhWBsAz.js";
-import { a as index, b as index$2$1, i as index$1, p as parseDoc } from "./rainbow-d9-n3-wStcAEft.js";
+import { i as index$2, I as IntlLabel, D as DOM_KEY_WIDGET, C as CssVars, d as utils$2, b as useGlobalHandlers, t as toIntlLabel, U as UnwrappedButton, B as ButtonInk, e as ButtonFill } from "./rainbow-d9-n2-U9NZKv1d.js";
+import { R as React, r as reactExports, q as qe } from "./react-base-8-0nj6j8.js";
+import { V as VUtils, r as registerWidget, g as useCreateEventBus, M as MUtils, P as PPUtils, a as useThrottler, e as useForceUpdate, S as StandaloneRoot, m as ExternalDefMismatchIndicator } from "./rainbow-d9-n1-OB1df9sy.js";
+import { T as Tag, r as tags, V as ViewPlugin, u as syntaxTree, H as HighlightStyle, v as defaultHighlightStyle, w as syntaxHighlighting, x as styleTags, D as Decoration, I as InlineContext, W as WidgetType, y as EditorView, z as EditorState, A as basicSetup, B as keymap, C as indentWithTab, F as markdown, G as javascript, J as markdownLanguage, K as lintGutter, L as linter, N as json, O as jsonParseLinter } from "./vendor-MZyh1u1d.js";
+import { a as index, b as index$2$1, i as index$1, p as parseDoc } from "./rainbow-d9-n3-KMpvIgfW.js";
 var PlaygroundWidgetGroupKey;
 (function(PlaygroundWidgetGroupKey2) {
   PlaygroundWidgetGroupKey2["CONTAINERS"] = "container-group";
@@ -635,6 +635,18 @@ index$2.Registrar.register({
   [PlaygroundIcons.RADIO]: () => React.createElement(RadioIcon, null),
   [PlaygroundIcons.RADIOS]: () => React.createElement(RadiosIcon, null)
 });
+const Labels = {
+  ERROR: React.createElement(IntlLabel, { keys: ["playground", "error", "unknown"], value: "Something went wrong." }),
+  NoContentGiven: React.createElement(IntlLabel, { keys: ["playground", "error", "no-content"], value: "No content given." }),
+  ParseError: React.createElement(IntlLabel, { keys: ["playground", "error", "parse"], value: "Parse error occurred." }),
+  InvalidJson: React.createElement(IntlLabel, { keys: ["playground", "mock", "json", "invalid"], value: "The JSON format is incorrect. Please check and modify before confirming." }),
+  CopiedToClipboard: React.createElement(IntlLabel, { keys: ["playground", "message", "copied-to-clipboard"], value: "Copied!" }),
+  CopyToClipboard: React.createElement(IntlLabel, { keys: ["playground", "action", "copy-to-clipboard"], value: "Copy to Clipboard" }),
+  Download: React.createElement(IntlLabel, { keys: ["playground", "action", "download"], value: "Download as File" }),
+  ConfirmAndRefresh: React.createElement(IntlLabel, { keys: ["playground", "action", "confirm-and-refresh"], value: "Confirm and Refresh" }),
+  Close: React.createElement(IntlLabel, { keys: ["playground", "action", "close"], value: "Close" }),
+  Cancel: React.createElement(IntlLabel, { keys: ["playground", "action", "cancel"], value: "Cancel" })
+};
 var PlaygroundEventTypes;
 (function(PlaygroundEventTypes2) {
   PlaygroundEventTypes2["SWITCH_EDITOR_BADGE"] = "switch-editor-badge";
@@ -3807,20 +3819,8 @@ const WidgetTemplateDialog = (props) => {
       React.createElement(
         WidgetTemplateDialogFooter,
         null,
-        state.copied ? React.createElement(
-          UnwrappedButton,
-          { ink: ButtonInk.SUCCESS, onClick: onCopyToClipboard },
-          React.createElement(IntlLabel, { keys: ["playground", "template", "clipboard", "copied"], value: "Copied!" })
-        ) : React.createElement(
-          UnwrappedButton,
-          { ink: ButtonInk.PRIMARY, onClick: onCopyToClipboard },
-          React.createElement(IntlLabel, { keys: ["playground", "template", "clipboard"], value: "Copy to Clipboard" })
-        ),
-        React.createElement(
-          UnwrappedButton,
-          { ink: ButtonInk.WAIVE, onClick: onHide },
-          React.createElement(IntlLabel, { keys: ["playground", "template", "close"], value: "Close" })
-        )
+        state.copied ? React.createElement(UnwrappedButton, { ink: ButtonInk.SUCCESS, onClick: onCopyToClipboard }, Labels.CopiedToClipboard) : React.createElement(UnwrappedButton, { ink: ButtonInk.PRIMARY, onClick: onCopyToClipboard }, Labels.CopyToClipboard),
+        React.createElement(UnwrappedButton, { ink: ButtonInk.WAIVE, onClick: onHide }, Labels.Close)
       )
     )
   );
@@ -4189,11 +4189,7 @@ class ErrorBoundary extends React.Component {
   }
   render() {
     if (this.state.hasError) {
-      return React.createElement(
-        ParseError,
-        null,
-        React.createElement(IntlLabel, { keys: ["playground", "error", "unknown"], value: "Something went wrong." })
-      );
+      return React.createElement(ParseError, null, Labels.ERROR);
     }
     return this.props.children;
   }
@@ -4358,7 +4354,7 @@ const ViewerKernel = (props) => {
     return React.createElement(
       ViewerWrapper,
       { minViewerWidth },
-      React.createElement(ParseError, null, error.message || React.createElement(IntlLabel, { keys: ["playground", "error", "parse"], value: "Parse error occurred." }))
+      React.createElement(ParseError, null, error.message || Labels.ParseError)
     );
   }
 };
@@ -4534,7 +4530,7 @@ const MockJsonDialog = (props) => {
     } catch {
       setState((state2) => ({
         ...state2,
-        reason: React.createElement(IntlLabel, { keys: ["playground", "mock", "json", "invalid"], value: "The JSON format is incorrect. Please check and modify before confirming." })
+        reason: Labels.InvalidJson
       }));
     }
   };
@@ -4562,29 +4558,14 @@ const MockJsonDialog = (props) => {
       React.createElement(
         MockJsonDialogFooter,
         null,
-        state.copied ? React.createElement(
-          UnwrappedButton,
-          { ink: ButtonInk.SUCCESS, onClick: onCopyToClipboard },
-          React.createElement(IntlLabel, { keys: ["playground", "mock", "json", "clipboard", "copied"], value: "Copied!" })
-        ) : React.createElement(
-          UnwrappedButton,
-          { ink: ButtonInk.PRIMARY, onClick: onCopyToClipboard },
-          React.createElement(IntlLabel, { keys: ["playground", "mock", "json", "clipboard"], value: "Copy to Clipboard" })
-        ),
-        React.createElement(
-          UnwrappedButton,
-          { ink: ButtonInk.PRIMARY, onClick: onDownload },
-          React.createElement(IntlLabel, { keys: ["playground", "mock", "json", "download"], value: "Download as File" })
-        ),
-        React.createElement(
-          UnwrappedButton,
-          { ink: ButtonInk.PRIMARY, onClick: onConfirm },
-          React.createElement(IntlLabel, { keys: ["playground", "mock", "json", "confirm"], value: "Confirm and Refresh" })
-        ),
+        state.copied ? React.createElement(UnwrappedButton, { ink: ButtonInk.SUCCESS, onClick: onCopyToClipboard }, Labels.CopiedToClipboard) : React.createElement(UnwrappedButton, { ink: ButtonInk.PRIMARY, onClick: onCopyToClipboard }, Labels.CopyToClipboard),
+        React.createElement(UnwrappedButton, { ink: ButtonInk.PRIMARY, onClick: onDownload }, Labels.Download),
+        React.createElement(UnwrappedButton, { ink: ButtonInk.PRIMARY, onClick: onConfirm }, Labels.ConfirmAndRefresh),
         React.createElement(
           UnwrappedButton,
           { ink: ButtonInk.WAIVE, onClick: onHide },
-          React.createElement(IntlLabel, { keys: ["playground", "mock", "json", "cancel"], value: "Cancel" })
+          Labels.Cancel,
+          ";"
         )
       )
     )
@@ -4609,11 +4590,7 @@ const Viewer = (props) => {
       ViewerWrapper,
       { minViewerWidth },
       React.createElement(MockJsonDialog, { mockData }),
-      React.createElement(
-        ParseError,
-        null,
-        React.createElement(IntlLabel, { keys: ["playground", "error", "no-content"], value: "No content given." })
-      )
+      React.createElement(ParseError, null, Labels.NoContentGiven)
     );
   }
   return React.createElement(
