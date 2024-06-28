@@ -5,6 +5,7 @@ import {useForceUpdate, useThrottler, VUtils} from '@rainbow-d9/n1';
 import React, {useEffect, useRef} from 'react';
 import {FileDef, FileDefDeserializer, FileDefSerializer} from '../definition';
 import {initEngine, StartNodeModel} from '../diagram';
+import {FitCanvas, OriginSize, ZoomIn, ZoomOut} from '../icons';
 import {Labels} from '../labels';
 import {PlaygroundEventTypes, usePlaygroundEventBus} from '../playground-event-bus';
 import {EditorProps, MarkdownContent} from '../types';
@@ -18,7 +19,7 @@ import {
 	GridCell
 } from './diagram-utils';
 import {ErrorBoundary} from './error-boundary';
-import {EditorWrapper, ParseError} from './widgets';
+import {EditorToolbar, EditorToolbarButton, EditorWrapper, ParseError} from './widgets';
 
 export enum EditorKernelDiagramStatus {
 	IGNORED = 'ignored', PAINT = 'paint', IN_SERVICE = 'in-service'
@@ -35,7 +36,10 @@ export interface EditorKernelRefState {
 }
 
 const createDiagramEngine = () => {
-	const engine = createEngine();
+	const engine = createEngine({
+		registerDefaultPanAndZoomCanvasAction: false,
+		registerDefaultZoomCanvasAction: false
+	});
 	initEngine(engine);
 	return engine;
 };
@@ -158,6 +162,24 @@ export const EditorKernel = (props: EditorProps) => {
 		</EditorWrapper>;
 	}
 
+	const zoomTo = (factor: number) => {
+		const engine = stateRef.current.engine;
+		engine.getModel().setZoomLevel(factor);
+		engine.repaintCanvas();
+	};
+	const onZoomInClicked = () => {
+		zoomTo(stateRef.current.engine.getModel().getZoomLevel() - 5);
+	};
+	const onZoomOutClicked = () => {
+		zoomTo(stateRef.current.engine.getModel().getZoomLevel() + 5);
+	};
+	const onOriginSizeClicked = () => {
+		zoomTo(100);
+	};
+	const onFitCanvasClicked = () => {
+		stateRef.current.engine.zoomToFit();
+	};
+
 	try {
 		return <EditorWrapper data-diagram-status={stateRef.current.diagramStatus}
 		                      data-diagram-locked={stateRef.current.engine.getModel().isLocked()}
@@ -167,6 +189,12 @@ export const EditorKernel = (props: EditorProps) => {
 			 @ts-ignore */}
 			<ErrorBoundary content={content}>
 				<CanvasWidget engine={stateRef.current.engine} className="o23-playground-editor-content"/>
+				<EditorToolbar>
+					<EditorToolbarButton onClick={onZoomInClicked}><ZoomIn/></EditorToolbarButton>
+					<EditorToolbarButton onClick={onZoomOutClicked}><ZoomOut/></EditorToolbarButton>
+					<EditorToolbarButton onClick={onOriginSizeClicked}><OriginSize/></EditorToolbarButton>
+					<EditorToolbarButton onClick={onFitCanvasClicked}><FitCanvas/></EditorToolbarButton>
+				</EditorToolbar>
 			</ErrorBoundary>
 		</EditorWrapper>;
 	} catch (error) {

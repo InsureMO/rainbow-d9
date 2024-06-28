@@ -13,3 +13,8 @@ export * from './element-checked';
 export * from './element-missed';
 export * from './element-banned';
 export * from './element-help';
+
+export * from './fit-canvas';
+export * from './origin-size';
+export * from './zoom-in';
+export * from './zoom-out';
