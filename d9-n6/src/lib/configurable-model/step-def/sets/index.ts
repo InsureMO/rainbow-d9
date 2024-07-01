@@ -17,7 +17,8 @@ export const SetsStepDefs: StepNodeConfigurer<SetsStepDefModel> = {
 	ports: [
 		{key: 'from-request', port: CommonStepDefs.ports.fromRequest},
 		{key: 'steps', port: CommonStepDefs.prebuiltPorts.steps},
-		{key: 'catchable', port: CommonStepDefs.ports.catchable},
+		{key: 'catchable', port: CommonStepDefs.ports.handleCatchableError},
+		{key: 'uncatchable', port: CommonStepDefs.ports.handleUncatchableError},
 		{key: 'to-response', port: CommonStepDefs.ports.toResponse},
 		{key: 'merge-request', port: CommonStepDefs.ports.mergeRequest}
 	],

@@ -4,7 +4,7 @@ import {AllInPipelineStepDef, PipelineStepDef} from '../../../definition';
 import {HandledNodeModel, JoinEndNodeModel, StepNodeEntityType, StepNodeModel} from '../../../diagram';
 import {CreateSubNodesOptions} from '../../types';
 import {CommonStepDefsType, CreateSubNodesAndEndNodeOptions, createSubNodesOfSingleRoute} from './index';
-import {CatchablePortModel} from './port-widgets';
+import {CatchableErrorHandlePortModel} from './port-widgets';
 
 export const createSubNodes: CommonStepDefsType['createSubNodes'] = (model: StepNodeModel, options: CreateSubNodesOptions): Undefinable<Array<HandledNodeModel>> => {
 	const step = model.step as AllInPipelineStepDef;
@@ -27,8 +27,8 @@ export const createSubNodes: CommonStepDefsType['createSubNodes'] = (model: Step
 				}
 				return errorHandles.catchable;
 			},
-			findPortFromModel: () => model.getPort(CatchablePortModel.NAME) as CatchablePortModel,
-			createPortFromModel: () => new CatchablePortModel()
+			findPortFromModel: () => model.getPort(CatchableErrorHandlePortModel.NAME) as CatchableErrorHandlePortModel,
+			createPortFromModel: () => new CatchableErrorHandlePortModel()
 		}
 	].filter(({steps, ...rest}) => {
 		return {steps: steps(), ...rest};

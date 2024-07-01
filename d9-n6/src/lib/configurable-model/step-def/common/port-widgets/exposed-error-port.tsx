@@ -7,27 +7,27 @@ import styled from 'styled-components';
 import {PlaygroundCssVars} from '../../../../widgets';
 import {ErrorHandlesPortModel} from './error-handles-port-model';
 
-export class CatchablePortModel extends ErrorHandlesPortModel {
-	public static readonly TYPE = 'catchable-port';
-	public static readonly NAME = 'catchable';
+export class ExposedErrorHandlePortModel extends ErrorHandlesPortModel {
+	public static readonly TYPE = 'exposed-error-handle-port';
+	public static readonly NAME = 'exposed-error-handle';
 
 	public constructor() {
-		super(CatchablePortModel.TYPE, CatchablePortModel.NAME);
+		super(ExposedErrorHandlePortModel.TYPE, ExposedErrorHandlePortModel.NAME);
 	}
 }
 
-export class CatchablePortFactory extends AbstractModelFactory<CatchablePortModel, DiagramEngine> {
+export class ExposedErrorHandlePortFactory extends AbstractModelFactory<ExposedErrorHandlePortModel, DiagramEngine> {
 	public constructor() {
-		super(CatchablePortModel.TYPE);
+		super(ExposedErrorHandlePortModel.TYPE);
 	}
 
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
-	public generateModel(_event: GenerateModelEvent): CatchablePortModel {
-		throw new Error('DO NOT use CatchablePortFactory#generateModel.');
+	public generateModel(_event: GenerateModelEvent): ExposedErrorHandlePortModel {
+		throw new Error('DO NOT use ExposedErrorHandlePortFactory#generateModel.');
 	}
 }
 
-export const CatchablePortContainer = styled.div.attrs({[DOM_KEY_WIDGET]: 'o23-playground-steps-port'})`
+export const ExposedErrorHandlePortContainer = styled.div.attrs({[DOM_KEY_WIDGET]: 'o23-playground-exposed-error-port'})`
     display: flex;
     position: absolute;
     top: calc(-1 * ${PlaygroundCssVars.NODE_PORT_BORDER_WIDTH});
@@ -48,19 +48,19 @@ export const CatchablePortContainer = styled.div.attrs({[DOM_KEY_WIDGET]: 'o23-p
     }
 `;
 
-export interface CatchablePortWidgetProps {
+export interface ExposedErrorHandlePortWidgetProps {
 	// node and engine props are required
-	port: CatchablePortModel;
+	port: ExposedErrorHandlePortModel;
 	engine: DiagramEngine;
 }
 
 /**
- * used in step node, when it has sub steps
+ * used in step node, when it has exposed error handle
  */
-export const CatchablePortWidget = (props: CatchablePortWidgetProps) => {
+export const ExposedErrorHandlePortWidget = (props: ExposedErrorHandlePortWidgetProps) => {
 	const {port, engine} = props;
 
-	return <CatchablePortContainer>
+	return <ExposedErrorHandlePortContainer>
 		<PortWidget port={port} engine={engine}/>
-	</CatchablePortContainer>;
+	</ExposedErrorHandlePortContainer>;
 };

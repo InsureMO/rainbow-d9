@@ -7,7 +7,16 @@ import {createSubNodes, createSubNodesAndEndNode} from './create-sub-nodes';
 import {discard} from './discard';
 import {elementName} from './element-name';
 import {findSubPorts} from './find-sub-ports';
-import {PortCatchable, PortFromRequest, PortMergeRequest, PortSteps, PortToResponse} from './ports';
+import {
+	PortAnyError,
+	PortCatchableError,
+	PortExposedError,
+	PortFromRequest,
+	PortMergeRequest,
+	PortSteps,
+	PortToResponse,
+	PortUncatchableError
+} from './ports';
 import {prepare} from './prepare';
 import {CommonStepDefModel, StepPort} from './types';
 
@@ -31,7 +40,10 @@ export interface CommonStepDefsPorts {
 	fromRequest: StepPort;
 	toResponse: StepPort;
 	mergeRequest: StepPort;
-	catchable: StepPort;
+	handleCatchableError: StepPort;
+	handleUncatchableError: StepPort;
+	handleExposedError: StepPort;
+	handleAnyError: StepPort;
 }
 
 /**
@@ -58,7 +70,8 @@ export const CommonStepDefs: CommonStepDefsType = {
 	properties: {name: elementName},
 	ports: {
 		fromRequest: PortFromRequest, toResponse: PortToResponse, mergeRequest: PortMergeRequest,
-		catchable: PortCatchable
+		handleCatchableError: PortCatchableError, handleUncatchableError: PortUncatchableError,
+		handleExposedError: PortExposedError, handleAnyError: PortAnyError
 	},
 	prebuiltPorts: {
 		steps: PortSteps
