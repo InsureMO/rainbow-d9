@@ -56,7 +56,16 @@ steps:
             use: snippet
     error-handles:
       catchable:
-        - name: Catch validation error
+        - name: Catch catchable error
+          use: snippet
+      uncatchable:
+        - name: Catch uncatchable error
+          use: snippet
+      exposed:
+        - name: Catch exposed error
+          use: snippet
+      any:
+        - name: Catch any error
           use: snippet
     to-response: $result
 `;

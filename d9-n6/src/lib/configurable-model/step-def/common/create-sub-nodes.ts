@@ -3,8 +3,14 @@ import {DEFAULTS} from '../../../constants';
 import {AllInPipelineStepDef, PipelineStepDef} from '../../../definition';
 import {HandledNodeModel, JoinEndNodeModel, StepNodeEntityType, StepNodeModel} from '../../../diagram';
 import {CreateSubNodesOptions} from '../../types';
-import {CommonStepDefsType, CreateSubNodesAndEndNodeOptions, createSubNodesOfSingleRoute} from './index';
-import {CatchableErrorHandlePortModel} from './port-widgets';
+import {
+	AnyErrorHandlePortModel,
+	CatchableErrorHandlePortModel,
+	ExposedErrorHandlePortModel,
+	UncatchableErrorHandlePortModel
+} from './port-widgets';
+import {CommonStepDefsType, CreateSubNodesAndEndNodeOptions} from './types';
+import {createSubNodesOfSingleRoute} from './utils';
 
 export const createSubNodes: CommonStepDefsType['createSubNodes'] = (model: StepNodeModel, options: CreateSubNodesOptions): Undefinable<Array<HandledNodeModel>> => {
 	const step = model.step as AllInPipelineStepDef;
@@ -14,21 +20,39 @@ export const createSubNodes: CommonStepDefsType['createSubNodes'] = (model: Step
 		return (void 0);
 	}
 
+	const createAskSteps = (name: 'catchable' | 'uncatchable' | 'exposed' | 'any'): (() => Undefinable<Array<PipelineStepDef>>) => {
+		return (): Undefinable<Array<PipelineStepDef>> => {
+			if (errorHandles[name] == null || !Array.isArray(errorHandles[name])) {
+				return (void 0);
+			}
+			if (errorHandles[name].length === 0) {
+				// create a default snippet step
+				const defaultFirstStep: PipelineStepDef = DEFAULTS.createDefaultStep();
+				(errorHandles[name] as Array<PipelineStepDef>).push(defaultFirstStep);
+			}
+			return errorHandles[name] as Array<PipelineStepDef>;
+		};
+	};
 	return [
 		{
-			steps: (): Undefinable<Array<PipelineStepDef>> => {
-				if (errorHandles.catchable == null || !Array.isArray(errorHandles.catchable)) {
-					return (void 0);
-				}
-				if (errorHandles.catchable.length === 0) {
-					// create a default snippet step
-					const defaultFirstStep: PipelineStepDef = DEFAULTS.createDefaultStep();
-					errorHandles.catchable.push(defaultFirstStep);
-				}
-				return errorHandles.catchable;
-			},
+			steps: createAskSteps('catchable'),
 			findPortFromModel: () => model.getPort(CatchableErrorHandlePortModel.NAME) as CatchableErrorHandlePortModel,
 			createPortFromModel: () => new CatchableErrorHandlePortModel()
+		},
+		{
+			steps: createAskSteps('uncatchable'),
+			findPortFromModel: () => model.getPort(UncatchableErrorHandlePortModel.NAME) as UncatchableErrorHandlePortModel,
+			createPortFromModel: () => new UncatchableErrorHandlePortModel()
+		},
+		{
+			steps: createAskSteps('exposed'),
+			findPortFromModel: () => model.getPort(ExposedErrorHandlePortModel.NAME) as ExposedErrorHandlePortModel,
+			createPortFromModel: () => new ExposedErrorHandlePortModel()
+		},
+		{
+			steps: createAskSteps('any'),
+			findPortFromModel: () => model.getPort(AnyErrorHandlePortModel.NAME) as AnyErrorHandlePortModel,
+			createPortFromModel: () => new AnyErrorHandlePortModel()
 		}
 	].filter(({steps, ...rest}) => {
 		return {steps: steps(), ...rest};

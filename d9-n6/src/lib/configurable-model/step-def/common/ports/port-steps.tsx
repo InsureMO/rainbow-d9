@@ -1,7 +1,8 @@
 import React from 'react';
 import {PostPort} from '../../../../diagram';
 import {Labels} from '../../../../labels';
-import {StepPortProps, StepsPortModel, StepsPortWidget} from '../index';
+import {StepsPortModel, StepsPortWidget} from '../port-widgets';
+import {StepPortProps} from '../types';
 
 export const StepsPortName = 'steps';
 
