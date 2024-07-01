@@ -1,10 +1,11 @@
 import {AbstractReactFactory} from '@projectstorm/react-canvas-core';
-import {AbstractModelFactory, PortModel} from '@projectstorm/react-diagrams';
+import {AbstractModelFactory, LinkModel, PortModel} from '@projectstorm/react-diagrams';
 import {DiagramEngine} from '@projectstorm/react-diagrams-core';
 import {
 	AnyErrorHandlePortFactory,
 	CatchableErrorHandlePortFactory,
 	ExposedErrorHandlePortFactory,
+	StepsLinkFactory,
 	StepsPortFactory,
 	UncatchableErrorHandlePortFactory
 } from '../configurable-model';
@@ -29,9 +30,13 @@ export abstract class EnginePortFactory<M extends PortModel = PortModel> extends
 export abstract class EngineNodeFactory<M extends HandledNodeModel = HandledNodeModel> extends AbstractReactFactory<M, DiagramEngine> {
 }
 
-const Factories: { ports: Array<EnginePortFactory>, nodes: Array<EngineNodeFactory> } = {
-	ports: [],
-	nodes: []
+export abstract class EngineLinkFactory<M extends LinkModel = LinkModel> extends AbstractReactFactory<M, DiagramEngine> {
+}
+
+const Factories: {
+	ports: Array<EnginePortFactory>, nodes: Array<EngineNodeFactory>, links: Array<EngineLinkFactory>
+} = {
+	ports: [], nodes: [], links: []
 };
 
 export const registerPortFactory = (...factories: Array<EnginePortFactory>) => {
@@ -58,4 +63,8 @@ export const initEngine = (engine: DiagramEngine) => {
 	nodeFactories.registerFactory(new EndNodeFactory());
 	nodeFactories.registerFactory(new JoinEndNodeFactory());
 	Factories.nodes.forEach(factory => nodeFactories.registerFactory(factory));
+
+	const linkFactories = engine.getLinkFactories();
+	linkFactories.registerFactory(new StepsLinkFactory());
+	Factories.links.forEach(factory => linkFactories.registerFactory(factory));
 };

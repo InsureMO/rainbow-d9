@@ -34,6 +34,7 @@ export const buildConfig = (lint) => {
 			'react-markdown', 'remark-gfm',
 			'github-markdown-css/github-markdown.css',
 			'react-syntax-highlighter', 'react-syntax-highlighter/dist/esm/styles/prism',
+			'@projectstorm/geometry',
 			'@projectstorm/react-canvas-core', '@projectstorm/react-diagrams-core', '@projectstorm/react-diagrams',
 			'@rainbow-d9/n1', '@rainbow-d9/n2', '@rainbow-d9/n3'
 		]

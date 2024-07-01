@@ -19,6 +19,7 @@ import {CommonStepDefsType} from './types';
 export * from './types';
 export * from './utils';
 
+export * from './links';
 export * from './port-widgets';
 export * from './ports';
 

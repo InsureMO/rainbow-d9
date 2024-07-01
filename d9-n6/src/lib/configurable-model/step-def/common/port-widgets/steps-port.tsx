@@ -1,17 +1,22 @@
 import {GenerateModelEvent} from '@projectstorm/react-canvas-core';
-import {AbstractModelFactory, PortModelAlignment, PortWidget} from '@projectstorm/react-diagrams';
+import {AbstractModelFactory, LinkModel, PortModelAlignment, PortWidget} from '@projectstorm/react-diagrams';
 import {DiagramEngine} from '@projectstorm/react-diagrams-core';
 import {DOM_KEY_WIDGET} from '@rainbow-d9/n2';
 import React from 'react';
 import styled from 'styled-components';
 import {OutgoingPortModel} from '../../../../diagram';
 import {PlaygroundCssVars} from '../../../../widgets';
+import {StepsLinkModel} from '../links';
 
 export class StepsPortModel extends OutgoingPortModel {
 	public static readonly TYPE = 'steps-port';
 
 	public constructor(name: string) {
 		super(StepsPortModel.TYPE, name, PortModelAlignment.RIGHT);
+	}
+
+	protected createDefaultLinkModel(): LinkModel {
+		return new StepsLinkModel();
 	}
 }
 
