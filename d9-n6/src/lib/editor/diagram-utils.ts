@@ -164,26 +164,30 @@ export interface GridCell {
 	left: number;
 }
 
-/** [x, y] is axis of given node, return used y */
+/**
+ * [x, y] is axis of given node, return last used y
+ */
 export const buildGrid = (node: NodeModel, grid: Array<Array<GridCell>>, x: number, y: number): number => {
 	// compute sub step nodes
 	let hasSubSteps = false;
 	if (node instanceof StepNodeModel) {
 		const {use} = node.step;
 		const ports = AllStepDefs.find(def => def.use === use)?.findSubPorts(node) ?? [];
-		ports.forEach(port => {
+		ports.forEach((port, portIndex) => {
 			Object.values(port.getLinks())
-				.forEach(link => {
+				.forEach((link, linkIndex) => {
+					// only the first one use the same row with parent
+					// otherwise use next row
+					y = y + ((portIndex + linkIndex) === 0 ? 0 : 1);
 					hasSubSteps = true;
 					const subNode = link.getTargetPort().getNode();
 					// first sub step node is in the same row and next column with parent node
 					grid[x + 1] = grid[x + 1] ?? [];
-					grid[x + 1][y + 1] = {
+					grid[x + 1][y] = {
 						node: subNode, x: subNode.getPosition().x, y: subNode.getPosition().y,
 						maxWidth: -1, maxHeight: -1, top: -1, left: -1
 					};
-					// [x + 1, y] is hold by first sub step node
-					y = buildGrid(subNode, grid, x + 1, y + 1);
+					y = buildGrid(subNode, grid, x + 1, y);
 				});
 		});
 	}
@@ -197,12 +201,11 @@ export const buildGrid = (node: NodeModel, grid: Array<Array<GridCell>>, x: numb
 		if (hasSubSteps) {
 			// next must be a join end node
 			// place at same column (x), and use the last row with sub step nodes
-			grid[x][y] = {
+			grid[x][y + 1] = {
 				node: next, x: next.getPosition().x, y: next.getPosition().y,
 				maxWidth: -1, maxHeight: -1, top: -1, left: -1
 			};
-			// [x, y] is hold by next node
-			return buildGrid(next, grid, x, y);
+			return buildGrid(next, grid, x, y + 1);
 		} else if (next instanceof JoinEndNodeModel) {
 			// no sub steps, but next is join end, means this is the last sub step, or some join end node
 			// simply ignore, leave building work to its parent
@@ -213,11 +216,10 @@ export const buildGrid = (node: NodeModel, grid: Array<Array<GridCell>>, x: numb
 				node: next, x: next.getPosition().x, y: next.getPosition().y,
 				maxWidth: -1, maxHeight: -1, top: -1, left: -1
 			};
-			// [x, y + 1] is hold by next node
 			return buildGrid(next, grid, x, y + 1);
 		}
 	} else {
-		// no next port, return y directly
+		// no next port
 		return y;
 	}
 };
@@ -279,5 +281,4 @@ export const createDiagramHandlers = (options: {
 			}, 100);
 		}
 	};
-
 };
