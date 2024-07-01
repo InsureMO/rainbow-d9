@@ -1,7 +1,7 @@
 import {AbstractReactFactory} from '@projectstorm/react-canvas-core';
 import {AbstractModelFactory, PortModel} from '@projectstorm/react-diagrams';
 import {DiagramEngine} from '@projectstorm/react-diagrams-core';
-import {SubStepsPortFactory} from '../configurable-model';
+import {CatchablePortFactory, StepsPortFactory} from '../configurable-model';
 import {NextStepPortFactory, PreviousStepPortFactory} from './common';
 import {EndNodeFactory} from './end-node';
 import {JoinEndNodeFactory} from './join-end-node';
@@ -39,7 +39,8 @@ export const initEngine = (engine: DiagramEngine) => {
 	const portFactories = engine.getPortFactories();
 	portFactories.registerFactory(new NextStepPortFactory());
 	portFactories.registerFactory(new PreviousStepPortFactory());
-	portFactories.registerFactory(new SubStepsPortFactory());
+	portFactories.registerFactory(new StepsPortFactory());
+	portFactories.registerFactory(new CatchablePortFactory());
 	Factories.ports.forEach(factory => portFactories.registerFactory(factory));
 
 	const nodeFactories = engine.getNodeFactories();

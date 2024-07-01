@@ -54,6 +54,10 @@ steps:
         steps:
           - name: Validate job occupation
             use: snippet
+    error-handles:
+      catchable:
+        - name: Catch validation error
+          use: snippet
     to-response: $result
 `;
 

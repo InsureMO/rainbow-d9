@@ -1,22 +1,21 @@
+import {Undefinable} from '@rainbow-d9/n1';
+import {HandledNodeModel, StepNodeModel} from '../../../diagram';
 import {ConfigurableElement} from '../../../edit-dialog';
-import {StepNodeConfigurer} from '../../types';
+import {CreateSubNodesOptions, StepNodeConfigurer} from '../../types';
 import {confirm} from './confirm';
-import {createSubNodes} from './create-sub-nodes';
+import {createSubNodes, createSubNodesAndEndNode} from './create-sub-nodes';
 import {discard} from './discard';
 import {elementName} from './element-name';
 import {findSubPorts} from './find-sub-ports';
-import {PortFromRequest} from './port-from-request';
-import {PortMergeRequest} from './port-merge-request';
-import {PortToResponse} from './port-to-response';
+import {PortCatchable, PortFromRequest, PortMergeRequest, PortSteps, PortToResponse} from './ports';
 import {prepare} from './prepare';
 import {CommonStepDefModel, StepPort} from './types';
 
 export * from './types';
 export * from './utils';
 
-export * from './ports/sub-steps-port';
-export * from './ports/first-sub-step-port';
-export * from './ports/last-sub-step-join-port';
+export * from './port-widgets';
+export * from './ports';
 
 export interface CommonStepDefsProperties {
 	name: ConfigurableElement;
@@ -25,20 +24,44 @@ export interface CommonStepDefsProperties {
 	// mergeRequest: ConfigurableElement;
 }
 
+/**
+ * step extends from AbstractFragmentaryPipelineStep, will inherit these ports
+ */
 export interface CommonStepDefsPorts {
 	fromRequest: StepPort;
 	toResponse: StepPort;
 	mergeRequest: StepPort;
+	catchable: StepPort;
 }
 
-export interface CommonStepDefsType extends Omit<StepNodeConfigurer<CommonStepDefModel>, 'use' | 'properties' | 'ports' | 'helpDocs'> {
+/**
+ * prebuilt but not mandatory
+ */
+export interface PrebuiltStepDefsPorts {
+	steps: StepPort;
+}
+
+export interface CreateSubNodesAndEndNodeOptions extends CreateSubNodesOptions {
+	createSpecificSubNodes?: (node: StepNodeModel, options: CreateSubNodesOptions) => Undefinable<Array<HandledNodeModel>>;
+}
+
+export interface CommonStepDefsType extends Omit<StepNodeConfigurer<CommonStepDefModel>, 'use' | 'properties' | 'ports' | 'createSubNodes' | 'helpDocs'> {
 	properties: CommonStepDefsProperties;
 	ports: CommonStepDefsPorts;
+	prebuiltPorts: PrebuiltStepDefsPorts;
+	createSubNodes: (node: StepNodeModel, options: CreateSubNodesOptions) => Undefinable<Array<HandledNodeModel>>;
+	createSubNodesAndEndNode: (node: StepNodeModel, options: CreateSubNodesAndEndNodeOptions) => Undefinable<HandledNodeModel>;
 }
 
 export const CommonStepDefs: CommonStepDefsType = {
 	prepare, confirm, discard,
 	properties: {name: elementName},
-	ports: {fromRequest: PortFromRequest, toResponse: PortToResponse, mergeRequest: PortMergeRequest},
-	createSubNodes, findSubPorts
+	ports: {
+		fromRequest: PortFromRequest, toResponse: PortToResponse, mergeRequest: PortMergeRequest,
+		catchable: PortCatchable
+	},
+	prebuiltPorts: {
+		steps: PortSteps
+	},
+	createSubNodes, createSubNodesAndEndNode, findSubPorts
 };

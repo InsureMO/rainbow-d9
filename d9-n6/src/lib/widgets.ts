@@ -9,7 +9,7 @@ const NODE_STEP_COLOR = '#54956b';
 const NEXT_STEP_PORT_COLOR = '#a3ab5b';
 const PREVIOUS_STEP_PORT_COLOR = '#8454aa';
 const PORT_FIRST_SUB_STEP_COLOR = '#8454aa';
-const PORT_SUB_STEPS_COLOR = '#617ba0';
+const PORT_STEPS_COLOR = '#617ba0';
 const PORT_LAST_SUB_STEP_JOIN_COLOR = '#00618b';
 const PRE_PORT_COLOR = '#87a55f';
 const POST_PORT_COLOR = '#c69dab';
@@ -124,8 +124,10 @@ export const PlaygroundCssVars = {
 	NODE_NEXT_STEP_PORT_BORDER: `var(--o23-playground-node-next-step-port-border, 2px solid ${color(NEXT_STEP_PORT_COLOR).darken(0.1).opaquer(0.5)})`,
 	NODE_PREVIOUS_STEP_PORT_BACKGROUND_COLOR: `var(--o23-playground-node-previous-step-port-background-color, ${PREVIOUS_STEP_PORT_COLOR})`,
 	NODE_PREVIOUS_STEP_PORT_BORDER: `var(--o23-playground-node-previous-step-port-border, 2px solid ${color(PREVIOUS_STEP_PORT_COLOR).darken(0.1).opaquer(0.5)})`,
-	NODE_PORT_SUB_STEPS_BORDER: `var(--o23-playground-port-sub-step-border, 1px solid ${PORT_SUB_STEPS_COLOR})`,
-	NODE_PORT_SUB_STEPS_BACKGROUND: `var(--o23-playground-port-sub-step-background, ${color(PORT_SUB_STEPS_COLOR).darken(0.1).opaquer(0.5)})`,
+	NODE_PORT_STEPS_BORDER: `var(--o23-playground-port-sub-step-border, 1px solid ${PORT_STEPS_COLOR})`,
+	NODE_PORT_STEPS_BACKGROUND: `var(--o23-playground-port-sub-step-background, ${color(PORT_STEPS_COLOR).darken(0.1).opaquer(0.5)})`,
+	NODE_PORT_ERROR_HANDLES_BORDER: `var(--o23-playground-port-error-handles-border, 1px solid ${CssConstants.DANGER_COLOR})`,
+	NODE_PORT_ERROR_HANDLES_BACKGROUND: `var(--o23-playground-port-error-handles-background, ${color(CssConstants.DANGER_COLOR).darken(0.1).opaquer(0.5)})`,
 	NODE_PORT_FIRST_SUB_STEP_BACKGROUND: `var(--o23-playground-port-first-sub-step-background, ${PORT_FIRST_SUB_STEP_COLOR})`,
 	NODE_PORT_FIRST_SUB_STEP_BORDER: `var(--o23-playground-port-first-sub-step-border, 1px solid ${color(PORT_FIRST_SUB_STEP_COLOR).darken(0.1).opaquer(0.5)})`,
 	NODE_PORT_LAST_SUB_STEP_JOIN_BACKGROUND: `var(--o23-playground-port-last-sub-step-join-background, ${PORT_LAST_SUB_STEP_JOIN_COLOR})`,

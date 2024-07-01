@@ -169,9 +169,17 @@ export const PostPortContainer = styled.div.attrs({[DOM_KEY_WIDGET]: 'o23-playgr
         }
     }
 
-    &[data-role=sub-steps] {
-        border: ${PlaygroundCssVars.NODE_PORT_SUB_STEPS_BORDER};
-        background: ${PlaygroundCssVars.NODE_PORT_SUB_STEPS_BACKGROUND};
+    &[data-role=steps] {
+        border: ${PlaygroundCssVars.NODE_PORT_STEPS_BORDER};
+        background: ${PlaygroundCssVars.NODE_PORT_STEPS_BACKGROUND};
+    }
+
+    &[data-role=catchable-error],
+    &[data-role=uncatchable-error],
+    &[data-role=exposed-error],
+    &[data-role=any-error] {
+        border: ${PlaygroundCssVars.NODE_PORT_ERROR_HANDLES_BORDER};
+        background: ${PlaygroundCssVars.NODE_PORT_ERROR_HANDLES_BACKGROUND};
     }
 
     > svg:first-child {

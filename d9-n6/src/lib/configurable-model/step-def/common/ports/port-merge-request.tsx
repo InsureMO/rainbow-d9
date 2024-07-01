@@ -1,8 +1,8 @@
 import {VUtils} from '@rainbow-d9/n1';
 import React from 'react';
-import {PostPort} from '../../../diagram';
-import {Labels} from '../../../labels';
-import {StepPortProps} from './types';
+import {PostPort} from '../../../../diagram';
+import {Labels} from '../../../../labels';
+import {StepPortProps} from '../types';
 
 export const PortMergeRequest = (props: StepPortProps) => {
 	const {step: def} = props;

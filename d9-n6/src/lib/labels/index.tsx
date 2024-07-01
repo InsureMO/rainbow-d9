@@ -50,7 +50,8 @@ export const Labels = {
 	StepToResponse: <IntlLabel keys={['o23', 'step', 'to-response']} value="To Output"/>,
 	StepMergeRequest: <IntlLabel keys={['o23', 'step', 'merge-request']} value="Merge"/>,
 	SnippetStepSnippet: <IntlLabel keys={['o23', 'step', 'snippet', 'snippet']} value="Snippet"/>,
-	StepSubSteps: <IntlLabel keys={['o23', 'step', 'sets', 'steps']} value="Sub Steps"/>,
+	StepSteps: <IntlLabel keys={['o23', 'step', 'sets', 'steps']} value="Sub Steps"/>,
+	StepCatchable: <IntlLabel keys={['o23', 'step', 'catchable']} value="Catchable Errors"/>,
 	StepFirstSubStep: <IntlLabel keys={['o23', 'step', 'first-sub-step']} value="In"/>,
 	JoinEndNodeTitle: <IntlLabel keys={['o23', 'node', 'join-end']} value="End of "/>,
 

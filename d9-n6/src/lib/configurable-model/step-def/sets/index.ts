@@ -5,7 +5,6 @@ import {CommonStepDefs} from '../common';
 import {confirm} from './confirm';
 import {createSubNodes} from './create-sub-nodes';
 import {findSubPorts} from './find-sub-ports';
-import {PortSubSteps} from './port-sub-steps';
 import {prepare} from './prepare';
 import {SetsStepDefModel} from './types';
 
@@ -17,7 +16,8 @@ export const SetsStepDefs: StepNodeConfigurer<SetsStepDefModel> = {
 	properties: [CommonStepDefs.properties.name],
 	ports: [
 		{key: 'from-request', port: CommonStepDefs.ports.fromRequest},
-		{key: 'sub-steps', port: PortSubSteps},
+		{key: 'steps', port: CommonStepDefs.prebuiltPorts.steps},
+		{key: 'catchable', port: CommonStepDefs.ports.catchable},
 		{key: 'to-response', port: CommonStepDefs.ports.toResponse},
 		{key: 'merge-request', port: CommonStepDefs.ports.mergeRequest}
 	],
