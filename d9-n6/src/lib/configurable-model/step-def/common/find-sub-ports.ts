@@ -2,10 +2,12 @@ import {PortModel} from '@projectstorm/react-diagrams';
 import {Undefinable} from '@rainbow-d9/n1';
 import {StepNodeModel} from '../../../diagram';
 import {StepNodeConfigurer} from '../../types';
+import {CatchablePortModel} from './port-widgets';
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-export const findSubPorts: StepNodeConfigurer['findSubPorts'] = (_model: StepNodeModel): Undefinable<Array<PortModel>> => {
-	// TODO error handles
-	return (void 0);
+export const findSubPorts: StepNodeConfigurer['findSubPorts'] = (model: StepNodeModel): Undefinable<Array<PortModel>> => {
+	// error handles
+	return [
+		model.getPort(CatchablePortModel.NAME)
+	].filter(port => port != null);
 };
 

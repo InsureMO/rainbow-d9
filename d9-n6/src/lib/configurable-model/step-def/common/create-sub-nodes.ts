@@ -51,11 +51,16 @@ export const createSubNodesAndEndNode: CommonStepDefsType['createSubNodesAndEndN
 	const step = model.step as AllInPipelineStepDef;
 	const commonSubNodes = createSubNodes(model, options);
 	const specificSubNodes = createSpecificSubNodes?.(model, options);
+	const subNodes = [...(commonSubNodes ?? []), ...(specificSubNodes ?? [])];
+	if (subNodes.length === 0) {
+		// no sub nodes, no end node
+		return (void 0);
+	}
 
 	// now create an end node for end sub nodes
 	const endNode = new JoinEndNodeModel(step, model.file, {type: StepNodeEntityType.JOIN_END, subOf: step, handlers});
 	appendNode(endNode);
-	[...(commonSubNodes ?? []), ...(specificSubNodes ?? [])].forEach(node => {
+	subNodes.forEach(node => {
 		const link = endNode.endOf(node);
 		appendLink(link);
 	});

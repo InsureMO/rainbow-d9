@@ -4,7 +4,6 @@ import {StepNodeModel} from '../../../diagram';
 import {StepNodeConfigurer} from '../../types';
 import {CommonStepDefs, StepsPortName} from '../common';
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export const findSubPorts: StepNodeConfigurer['findSubPorts'] = (model: StepNodeModel): Undefinable<Array<PortModel>> => {
 	const subStepsPort = model.getPort(StepsPortName);
 

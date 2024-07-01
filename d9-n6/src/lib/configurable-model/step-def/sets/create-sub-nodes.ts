@@ -5,7 +5,6 @@ import {HandledNodeModel, StepNodeModel} from '../../../diagram';
 import {CreateSubNodesOptions, StepNodeConfigurer} from '../../types';
 import {CommonStepDefs, createSubNodesOfSingleRoute, StepsPortModel, StepsPortName} from '../common';
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export const createSubNodes: StepNodeConfigurer['createSubNodes'] = (model: StepNodeModel, options: CreateSubNodesOptions): Undefinable<HandledNodeModel> => {
 	return CommonStepDefs.createSubNodesAndEndNode(model, {
 		// eslint-disable-next-line @typescript-eslint/no-unused-vars
