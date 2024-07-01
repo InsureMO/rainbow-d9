@@ -30,24 +30,30 @@ export interface StepNodeWidgetProps {
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
-export const StepNodeContainer = styled(NodeWrapper).attrs({
-	[DOM_KEY_WIDGET]: 'o23-playground-step-node',
-	style: {
-		'--border-radius': PlaygroundCssVars.NODE_BORDER_RADIUS,
-		'--border': PlaygroundCssVars.NODE_STEP_BORDER,
-		'--background-color': PlaygroundCssVars.NODE_BACKGROUND
-	}
-})``;
-export const StepNodeHeader = styled(NodeHeader).attrs({
-	[DOM_KEY_WIDGET]: 'o23-playground-step-node-header',
-	style: {
-		// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-		// @ts-ignore
-		'--border-radius': PlaygroundCssVars.NODE_BORDER_RADIUS,
-		'--background': PlaygroundCssVars.NODE_STEP_TITLE_BACKGROUND,
-		'--padding': PlaygroundCssVars.NODE_TITLE_PADDING
-	}
-})``;
+export const StepNodeContainer = styled(NodeWrapper).attrs(
+	({'data-use': use}) => {
+		return {
+			[DOM_KEY_WIDGET]: 'o23-playground-step-node',
+			style: {
+				'--border-radius': PlaygroundCssVars.NODE_BORDER_RADIUS,
+				'--border': PlaygroundCssVars[`NODE_STEP_${(use ?? '').trim().toUpperCase().replace(/-/g, '_')}_BORDER`] ?? PlaygroundCssVars.NODE_STEP_BORDER,
+				'--background-color': PlaygroundCssVars.NODE_BACKGROUND
+			}
+		};
+	})``;
+export const StepNodeHeader = styled(NodeHeader).attrs<{ 'data-use'?: string }>(
+	({'data-use': use}) => {
+		return {
+			[DOM_KEY_WIDGET]: 'o23-playground-step-node-header',
+			style: {
+				// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+				// @ts-ignore
+				'--border-radius': PlaygroundCssVars.NODE_BORDER_RADIUS,
+				'--background': PlaygroundCssVars[`NODE_STEP_${(use ?? '').trim().toUpperCase().replace(/-/g, '_')}_TITLE_BACKGROUND`] ?? PlaygroundCssVars.NODE_STEP_TITLE_BACKGROUND,
+				'--padding': PlaygroundCssVars.NODE_TITLE_PADDING
+			}
+		};
+	})``;
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 export const StepNodeTitle = styled(NodeTitle).attrs({
@@ -122,18 +128,19 @@ export const StepNodeWidget = (props: StepNodeWidgetProps) => {
 		return 'StepUse' + (use ?? '').trim().split('-').reduce((a, b) => a + b.charAt(0).toUpperCase() + b.slice(1), '');
 	};
 
-	return <StepNodeContainer onDoubleClick={onDoubleClicked}>
+	return <StepNodeContainer onDoubleClick={onDoubleClicked}
+	                          data-use={use}>
 		{isFirstSubStep
 			? <FirstSubStepPortWidget port={node.getPort(FirstSubStepPortModel.NAME) as FirstSubStepPortModel}
 			                          engine={engine}/>
 			: <PreviousStepPortWidget port={node.getPort(PreviousStepPortModel.NAME) as PreviousStepPortModel}
 			                          engine={engine}/>}
-		<StepNodeHeader>
+		<StepNodeHeader data-use={use}>
 			<StepNodeTitle>{(def.name ?? '').trim() || Labels.StepNodeNoname}</StepNodeTitle>
 			<NodeTitleSpreader/>
 			<StepNodeSecondTitle>{Labels[asUseLabelKey()]}</StepNodeSecondTitle>
 		</StepNodeHeader>
-		<StepNodeBody>
+		<StepNodeBody data-use={use}>
 			{StepDefs.ports.map(({key, port: StepPort}) => {
 				return <StepPort step={def} file={file} node={node} engine={engine} key={key}/>;
 			})}

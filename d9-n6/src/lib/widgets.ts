@@ -6,6 +6,7 @@ const EDITOR_BACKGROUND_LINE_COLOR = `var(--o23-playground-editor-background-lin
 const NODE_START_COLOR = '#ffb56b';
 const NODE_END_COLOR = '#e0b35f';
 const NODE_STEP_COLOR = '#54956b';
+const NODE_STEP_SETS_COLOR = '#615cac';
 const NEXT_STEP_PORT_COLOR = '#a3ab5b';
 const PREVIOUS_STEP_PORT_COLOR = '#8454aa';
 const PORT_FIRST_SUB_STEP_COLOR = '#8454aa';
@@ -192,7 +193,9 @@ export const PlaygroundCssVars = {
 	NODE_STEP_TITLE_COLOR: `var(--o23-playground-node-step-title-color, ${CssVars.INVERT_COLOR})`,
 	NODE_STEP_TITLE_BACKGROUND: `var(--o23-playground-node-step-title-background, linear-gradient(135deg, ${NODE_STEP_COLOR} 0%, ${color(NODE_STEP_COLOR).alpha(0.7)} 70%, ${color(NODE_STEP_COLOR).alpha(0.5)} 100%))`,
 	NODE_STEP_BODY_HEIGHT: 'var(--o23-playground-node-step-body-height, 32px)',
-	NODE_STEP_BODY_PADDING: 'var(--o23-playground-node-step-body-padding, 8px 0)'
+	NODE_STEP_BODY_PADDING: 'var(--o23-playground-node-step-body-padding, 8px 0)',
+	NODE_STEP_SETS_BORDER: `var(--o23-playground-node-step-sets-border, 2px solid ${NODE_STEP_SETS_COLOR})`,
+	NODE_STEP_SETS_TITLE_BACKGROUND: `var(--o23-playground-node-step-sets-title-background, linear-gradient(135deg, ${NODE_STEP_SETS_COLOR} 0%, ${color(NODE_STEP_SETS_COLOR).alpha(0.7)} 70%, ${color(NODE_STEP_SETS_COLOR).alpha(0.5)} 100%))`
 };
 
 // background: linear-gradient(90deg, #24606e, #1f6b73, #207675, #2c8174, #3e8b71, #54956b, #6c9e65, #87a55f, #a3ab5b, #c1b05a, #e0b35f, #ffb56b);
