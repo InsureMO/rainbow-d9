@@ -1,8 +1,8 @@
 import {DefaultLinkModel, LinkModel, PortModel, PortModelAlignment} from '@projectstorm/react-diagrams';
 
 export abstract class OutgoingPortModel extends PortModel {
-	protected constructor(type: string, name: string) {
-		super({type, name, alignment: PortModelAlignment.RIGHT});
+	protected constructor(type: string, name: string, alignment: PortModelAlignment) {
+		super({type, name, alignment});
 	}
 
 	/**
@@ -13,8 +13,12 @@ export abstract class OutgoingPortModel extends PortModel {
 	}
 
 	public createOutgoingLinkModel(): LinkModel {
-		const link = new DefaultLinkModel();
+		const link = this.createDefaultLinkModel();
 		link.setSourcePort(this);
 		return link;
+	}
+
+	protected createDefaultLinkModel(): LinkModel {
+		return new DefaultLinkModel();
 	}
 }

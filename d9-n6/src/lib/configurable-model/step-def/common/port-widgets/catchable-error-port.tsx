@@ -1,5 +1,5 @@
 import {GenerateModelEvent} from '@projectstorm/react-canvas-core';
-import {AbstractModelFactory, PortWidget} from '@projectstorm/react-diagrams';
+import {AbstractModelFactory, PortModelAlignment, PortWidget} from '@projectstorm/react-diagrams';
 import {DiagramEngine} from '@projectstorm/react-diagrams-core';
 import {DOM_KEY_WIDGET} from '@rainbow-d9/n2';
 import React from 'react';
@@ -12,7 +12,7 @@ export class CatchableErrorHandlePortModel extends ErrorHandlesPortModel {
 	public static readonly NAME = 'catchable-error-handle';
 
 	public constructor() {
-		super(CatchableErrorHandlePortModel.TYPE, CatchableErrorHandlePortModel.NAME);
+		super(CatchableErrorHandlePortModel.TYPE, CatchableErrorHandlePortModel.NAME, PortModelAlignment.RIGHT);
 	}
 }
 

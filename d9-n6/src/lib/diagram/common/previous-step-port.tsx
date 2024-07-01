@@ -1,41 +1,18 @@
 import {GenerateModelEvent} from '@projectstorm/react-canvas-core';
-import {
-	AbstractModelFactory,
-	DefaultLinkModel,
-	LinkModel,
-	PortModel,
-	PortModelAlignment,
-	PortWidget
-} from '@projectstorm/react-diagrams';
+import {AbstractModelFactory, PortModelAlignment, PortWidget} from '@projectstorm/react-diagrams';
 import {DiagramEngine} from '@projectstorm/react-diagrams-core';
 import {DOM_KEY_WIDGET} from '@rainbow-d9/n2';
 import React from 'react';
 import styled from 'styled-components';
 import {PlaygroundCssVars} from '../../widgets';
+import {IncomingPortModel} from './incoming-port-model';
 
-export class PreviousStepPortModel extends PortModel {
+export class PreviousStepPortModel extends IncomingPortModel {
 	public static readonly TYPE = 'previous-step-port';
 	public static readonly NAME = 'previous-step';
 
 	public constructor() {
-		super({
-			type: PreviousStepPortModel.TYPE,
-			name: PreviousStepPortModel.NAME,
-			alignment: PortModelAlignment.TOP
-		});
-	}
-
-	/**
-	 * target is this port
-	 */
-	public createLinkModel(): LinkModel {
-		return this.createIncomingLinkModel();
-	}
-
-	public createIncomingLinkModel(): LinkModel {
-		const link = new DefaultLinkModel();
-		link.setTargetPort(this);
-		return link;
+		super(PreviousStepPortModel.TYPE, PreviousStepPortModel.NAME, PortModelAlignment.TOP);
 	}
 }
 
