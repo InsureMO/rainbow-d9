@@ -1,6 +1,7 @@
 import {StandardPipelineStepRegisterKey} from '../../../definition';
 import {HelpDocs} from '../../../help-docs';
 import {StepNodeConfigurer} from '../../types';
+import {registerStepDef} from '../all-step-defs';
 import {CommonStepDefs} from '../common';
 import {confirm} from './confirm';
 import {PortSnippet} from './port-snippet';
@@ -22,3 +23,4 @@ export const SnippetStepDefs: StepNodeConfigurer<SnippetStepDefModel> = {
 	createSubNodes: CommonStepDefs.createSubNodesAndEndNode, findSubPorts: CommonStepDefs.findSubPorts,
 	helpDocs: HelpDocs.snippetStep
 };
+registerStepDef(SnippetStepDefs);

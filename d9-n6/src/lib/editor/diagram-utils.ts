@@ -1,5 +1,5 @@
 import {DiagramModel, LinkModel, NodeModel} from '@projectstorm/react-diagrams';
-import {AllStepDefs, createStepNode, setNodePosition} from '../configurable-model';
+import {createStepNode, findStepDef, setNodePosition} from '../configurable-model';
 import {DEFAULTS} from '../constants';
 import {
 	FileDef,
@@ -172,29 +172,29 @@ export const buildGrid = (node: NodeModel, grid: Array<Array<GridCell>>, x: numb
 	let hasSubSteps = false;
 	if (node instanceof StepNodeModel) {
 		const {use} = node.step;
-		const ports = AllStepDefs.find(def => def.use === use)?.findSubPorts(node) ?? [];
+		const ports = findStepDef(use)?.findSubPorts(node) ?? [];
 		ports.forEach((port, portIndex) => {
-			Object.values(port.getLinks())
-				.forEach((link, linkIndex) => {
-					// only the first one use the same row with parent
-					// otherwise use next row
-					y = y + ((portIndex + linkIndex) === 0 ? 0 : 1);
-					hasSubSteps = true;
-					const subNode = link.getTargetPort().getNode();
-					// first sub step node is in the same row and next column with parent node
-					grid[x + 1] = grid[x + 1] ?? [];
-					grid[x + 1][y] = {
-						node: subNode, x: subNode.getPosition().x, y: subNode.getPosition().y,
-						maxWidth: -1, maxHeight: -1, top: -1, left: -1
-					};
-					y = buildGrid(subNode, grid, x + 1, y);
-				});
+			// one port, one link
+			const link = Object.values(port.getLinks())[0];
+			// only the first one use the same row with parent
+			// otherwise use next row
+			y = y + (portIndex === 0 ? 0 : 1);
+			hasSubSteps = true;
+			const subNode = link.getTargetPort().getNode();
+			// first sub step node is in the same row and next column with parent node
+			grid[x + 1] = grid[x + 1] ?? [];
+			grid[x + 1][y] = {
+				node: subNode, x: subNode.getPosition().x, y: subNode.getPosition().y,
+				maxWidth: -1, maxHeight: -1, top: -1, left: -1
+			};
+			y = buildGrid(subNode, grid, x + 1, y);
 		});
 	}
 	// compute next step node
 	const port = node.getPort(NextStepPortModel.NAME);
 	if (port != null) {
 		const links = port.getLinks();
+		// one port, one link
 		const link = Object.values(links)[0];
 		const next = link.getTargetPort().getNode();
 		grid[x] = grid[x] ?? [];

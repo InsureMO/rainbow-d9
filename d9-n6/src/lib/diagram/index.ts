@@ -4,6 +4,7 @@ import {DiagramEngine} from '@projectstorm/react-diagrams-core';
 import {
 	AnyErrorHandlePortFactory,
 	CatchableErrorHandlePortFactory,
+	ErrorHandlesLinkFactory,
 	ExposedErrorHandlePortFactory,
 	StepsLinkFactory,
 	StepsPortFactory,
@@ -66,5 +67,6 @@ export const initEngine = (engine: DiagramEngine) => {
 
 	const linkFactories = engine.getLinkFactories();
 	linkFactories.registerFactory(new StepsLinkFactory());
+	linkFactories.registerFactory(new ErrorHandlesLinkFactory());
 	Factories.links.forEach(factory => linkFactories.registerFactory(factory));
 };

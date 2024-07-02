@@ -3,7 +3,7 @@ import {useForceUpdate} from '@rainbow-d9/n1';
 import {DOM_KEY_WIDGET} from '@rainbow-d9/n2';
 import React from 'react';
 import styled from 'styled-components';
-import {AllStepDefs, FirstSubStepPortModel, FirstSubStepPortWidget} from '../../configurable-model';
+import {findStepDef, FirstSubStepPortModel, FirstSubStepPortWidget} from '../../configurable-model';
 import {ConfigurableModel, DialogContent} from '../../edit-dialog';
 import {Labels} from '../../labels';
 import {PlaygroundEventTypes, usePlaygroundEventBus} from '../../playground-event-bus';
@@ -106,7 +106,7 @@ export const StepNodeWidget = (props: StepNodeWidgetProps) => {
 
 	const {step: def, file} = node;
 	const {use} = def;
-	const StepDefs = AllStepDefs.find(defs => defs.use === use);
+	const StepDefs = findStepDef(use);
 
 	const onConfirm = (model: ConfigurableModel) => {
 		const ret = StepDefs.confirm(model, def, file, node.handlers);

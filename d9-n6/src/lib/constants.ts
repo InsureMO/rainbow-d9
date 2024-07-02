@@ -1,12 +1,10 @@
 import {Undefinable} from '@rainbow-d9/n1';
-import {AllStepDefs, CreateSubNodesOptions} from './configurable-model';
+import {CreateSubNodesOptions, findStepDef} from './configurable-model';
 import {PipelineStepDef, SnippetPipelineStepDef, StandardPipelineStepRegisterKey} from './definition';
 import {HandledNodeModel, StepNodeModel} from './diagram';
 
 const DEFAULT_CREATE_SUB_STEP_NODES = (node: StepNodeModel, options: CreateSubNodesOptions): Undefinable<HandledNodeModel> => {
-	return AllStepDefs.find(def => {
-		return def.use === node.step.use;
-	})?.createSubNodes(node, options);
+	return findStepDef(node.step.use)?.createSubNodes(node, options);
 };
 
 export const DEFAULTS = {

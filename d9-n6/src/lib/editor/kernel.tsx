@@ -168,10 +168,10 @@ export const EditorKernel = (props: EditorProps) => {
 		engine.repaintCanvas();
 	};
 	const onZoomInClicked = () => {
-		zoomTo(stateRef.current.engine.getModel().getZoomLevel() - 5);
+		zoomTo(stateRef.current.engine.getModel().getZoomLevel() + 5);
 	};
 	const onZoomOutClicked = () => {
-		zoomTo(stateRef.current.engine.getModel().getZoomLevel() + 5);
+		zoomTo(stateRef.current.engine.getModel().getZoomLevel() - 5);
 	};
 	const onOriginSizeClicked = () => {
 		zoomTo(100);
