@@ -16,7 +16,7 @@ export const EditorWrapper = styled.div.attrs({
     background-position: ${PlaygroundCssVars.EDITOR_BACKGROUND_POSITION};
     overflow: auto;
 
-    &[data-diagram-status=first-paint] {
+    &[data-diagram-status=paint] {
         > div.o23-playground-editor-content {
             opacity: 0;
             user-select: none;

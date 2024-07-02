@@ -11,6 +11,9 @@ const NEXT_STEP_PORT_COLOR = '#a3ab5b';
 const PREVIOUS_STEP_PORT_COLOR = '#8454aa';
 const PORT_FIRST_SUB_STEP_COLOR = '#8454aa';
 const PORT_STEPS_COLOR = '#617ba0';
+const LINK_STEPS_COLOR = '#7c8ba2';
+const PORT_ERROR_HANDLES_COLOR = '#c13a92';
+const LINK_ERROR_HANDLES_COLOR = '#a97f98';
 const PORT_LAST_SUB_STEP_JOIN_COLOR = '#00618b';
 const PRE_PORT_COLOR = '#87a55f';
 const POST_PORT_COLOR = '#c69dab';
@@ -127,12 +130,14 @@ export const PlaygroundCssVars = {
 	NODE_PREVIOUS_STEP_PORT_BORDER: `var(--o23-playground-node-previous-step-port-border, 2px solid ${color(PREVIOUS_STEP_PORT_COLOR).darken(0.1).opaquer(0.5)})`,
 	NODE_PORT_STEPS_BORDER: `var(--o23-playground-port-sub-step-border, 1px solid ${PORT_STEPS_COLOR})`,
 	NODE_PORT_STEPS_BACKGROUND: `var(--o23-playground-port-sub-step-background, ${color(PORT_STEPS_COLOR).darken(0.1).opaquer(0.5)})`,
-	NODE_PORT_ERROR_HANDLES_BORDER: `var(--o23-playground-port-error-handles-border, 1px solid ${CssConstants.DANGER_COLOR})`,
-	NODE_PORT_ERROR_HANDLES_BACKGROUND: `var(--o23-playground-port-error-handles-background, ${color(CssConstants.DANGER_COLOR).darken(0.1).opaquer(0.5)})`,
+	NODE_PORT_ERROR_HANDLES_BORDER: `var(--o23-playground-port-error-handles-border, 1px solid ${PORT_ERROR_HANDLES_COLOR})`,
+	NODE_PORT_ERROR_HANDLES_BACKGROUND: `var(--o23-playground-port-error-handles-background, ${color(PORT_ERROR_HANDLES_COLOR).darken(0.1).opaquer(0.5)})`,
 	NODE_PORT_FIRST_SUB_STEP_BACKGROUND: `var(--o23-playground-port-first-sub-step-background, ${PORT_FIRST_SUB_STEP_COLOR})`,
 	NODE_PORT_FIRST_SUB_STEP_BORDER: `var(--o23-playground-port-first-sub-step-border, 1px solid ${color(PORT_FIRST_SUB_STEP_COLOR).darken(0.1).opaquer(0.5)})`,
 	NODE_PORT_LAST_SUB_STEP_JOIN_BACKGROUND: `var(--o23-playground-port-last-sub-step-join-background, ${PORT_LAST_SUB_STEP_JOIN_COLOR})`,
 	NODE_PORT_LAST_SUB_STEP_JOIN_BORDER: `var(--o23-playground-port-last-sub-step-join-border, 1px solid ${color(PORT_LAST_SUB_STEP_JOIN_COLOR).darken(0.1).opaquer(0.5)})`,
+	LINK_ERROR_HANDLES_COLOR: `var(--o23-playground-link-error-handles-color, ${LINK_ERROR_HANDLES_COLOR})`,
+	LINK_ERROR_HANDLES_SELECTED_COLOR: `var(--o23-playground-link-error-handles-selected-color, ${color(LINK_ERROR_HANDLES_COLOR).lighten(0.1).opaquer(0.7)})`,
 	// pre port
 	NODE_PRE_PORT_FONT_SIZE: 'var(--o23-playground-pre-port-font-size, 14px)',
 	NODE_PRE_PORT_FONT_WEIGHT: 'var(--o23-playground-pre-port-font-weight, 400)',

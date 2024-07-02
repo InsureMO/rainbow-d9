@@ -141,7 +141,7 @@ export const EditorKernel = (props: EditorProps) => {
 		};
 		// [0, 0] is hold by start node
 		buildGrid(startNode, grid, 0, 0);
-		computeGrid(grid, 64, 64, 64, 64);
+		computeGrid(grid, 64, 64, 64, 96);
 		// must reset model, otherwise links might not be repositioned, don't know why.
 		stateRef.current.engine.setModel(cloneDiagramNodes(stateRef.current.engine.getModel()));
 		stateRef.current.diagramStatus = EditorKernelDiagramStatus.IN_SERVICE;
