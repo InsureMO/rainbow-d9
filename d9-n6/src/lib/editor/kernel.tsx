@@ -2,11 +2,12 @@ import {CanvasWidget} from '@projectstorm/react-canvas-core';
 import createEngine from '@projectstorm/react-diagrams';
 import {DiagramEngine} from '@projectstorm/react-diagrams-core';
 import {useForceUpdate, useThrottler, VUtils} from '@rainbow-d9/n1';
+import dom2image from 'dom-to-image';
 import React, {useEffect, useRef} from 'react';
 import {DEFAULTS} from '../constants';
 import {FileDef, FileDefDeserializer, FileDefSerializer} from '../definition';
 import {initEngine, StartNodeModel} from '../diagram';
-import {FitCanvas, OriginSize, ZoomIn, ZoomOut} from '../icons';
+import {DownloadImage, FitCanvas, OriginSize, ZoomIn, ZoomOut} from '../icons';
 import {Labels} from '../labels';
 import {PlaygroundEventTypes, usePlaygroundEventBus} from '../playground-event-bus';
 import {EditorProps, MarkdownContent} from '../types';
@@ -181,6 +182,17 @@ export const EditorKernel = (props: EditorProps) => {
 	const onFitCanvasClicked = () => {
 		stateRef.current.engine.zoomToFit();
 	};
+	const onDownloadImageClicked = async () => {
+		const node = wrapperRef.current.querySelector('div.o23-playground-editor-content') as HTMLDivElement;
+		node.style.overflow = 'visible';
+		// noinspection SpellCheckingInspection
+		const dataUrl = await dom2image.toPng(node, {quality: 1, bgcolor: 'white'});
+		node.style.overflow = '';
+		const link = document.createElement('a');
+		link.download = `${stateRef.current.def?.code || 'no-code'}-diagram.png`;
+		link.href = dataUrl;
+		link.click();
+	};
 
 	try {
 		return <EditorWrapper data-diagram-status={stateRef.current.diagramStatus}
@@ -196,6 +208,7 @@ export const EditorKernel = (props: EditorProps) => {
 					<EditorToolbarButton onClick={onZoomOutClicked}><ZoomOut/></EditorToolbarButton>
 					<EditorToolbarButton onClick={onOriginSizeClicked}><OriginSize/></EditorToolbarButton>
 					<EditorToolbarButton onClick={onFitCanvasClicked}><FitCanvas/></EditorToolbarButton>
+					<EditorToolbarButton onClick={onDownloadImageClicked}><DownloadImage/></EditorToolbarButton>
 				</EditorToolbar>
 			</ErrorBoundary>
 		</EditorWrapper>;

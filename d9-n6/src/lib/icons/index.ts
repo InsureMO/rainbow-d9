@@ -18,3 +18,4 @@ export * from './fit-canvas';
 export * from './origin-size';
 export * from './zoom-in';
 export * from './zoom-out';
+export * from './download-image';

@@ -36,6 +36,7 @@ export const buildConfig = (lint) => {
 			'react-syntax-highlighter', 'react-syntax-highlighter/dist/esm/styles/prism',
 			'@projectstorm/geometry',
 			'@projectstorm/react-canvas-core', '@projectstorm/react-diagrams-core', '@projectstorm/react-diagrams',
+			'dom-to-image',
 			'@rainbow-d9/n1', '@rainbow-d9/n2', '@rainbow-d9/n3'
 		]
 	};

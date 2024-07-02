@@ -22,6 +22,11 @@ export const EditorWrapper = styled.div.attrs({
             user-select: none;
             pointer-events: none;
 
+            &::-webkit-scrollbar {
+                height: 0;
+                width: 0;
+            }
+
             div.node, div.node * {
                 user-select: none;
                 pointer-events: none;
