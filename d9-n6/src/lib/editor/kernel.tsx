@@ -3,6 +3,7 @@ import createEngine from '@projectstorm/react-diagrams';
 import {DiagramEngine} from '@projectstorm/react-diagrams-core';
 import {useForceUpdate, useThrottler, VUtils} from '@rainbow-d9/n1';
 import React, {useEffect, useRef} from 'react';
+import {DEFAULTS} from '../constants';
 import {FileDef, FileDefDeserializer, FileDefSerializer} from '../definition';
 import {initEngine, StartNodeModel} from '../diagram';
 import {FitCanvas, OriginSize, ZoomIn, ZoomOut} from '../icons';
@@ -141,7 +142,8 @@ export const EditorKernel = (props: EditorProps) => {
 		};
 		// [0, 0] is hold by start node
 		buildGrid(startNode, grid, 0, 0);
-		computeGrid(grid, 64, 64, 64, 96);
+		const {startTop, startLeft, rowGap, columnGap} = DEFAULTS.diagram;
+		computeGrid(grid, startTop, startLeft, rowGap, columnGap);
 		// must reset model, otherwise links might not be repositioned, don't know why.
 		stateRef.current.engine.setModel(cloneDiagramNodes(stateRef.current.engine.getModel()));
 		stateRef.current.diagramStatus = EditorKernelDiagramStatus.IN_SERVICE;

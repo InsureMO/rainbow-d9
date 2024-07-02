@@ -1,6 +1,7 @@
 import {LinkModel, NodeModel, NodeModelGenerics} from '@projectstorm/react-diagrams';
 import {Undefinable} from '@rainbow-d9/n1';
 import {LastSubStepJoinPortModel} from '../../configurable-model';
+import {EndOfMeJoinLinkModel} from '../../configurable-model/step-def/common/links/link-end-of-me-join';
 import {FileDef, PipelineStepDef} from '../../definition';
 import {NextStepPortModel, PreviousStepPortModel} from '../common';
 import {HandledNodeModel} from '../node-handlers';
@@ -34,8 +35,16 @@ export class JoinEndNodeModel extends HandledNodeModel<NodeModelGenerics & JoinE
 		return this.rest.subOf;
 	}
 
-	public endOf(node: NodeModel): LinkModel {
-		const port = this.getPort(LastSubStepJoinPortModel.NAME) as PreviousStepPortModel;
+	public endOfMe(node: NodeModel): LinkModel {
+		const port = this.getPort(PreviousStepPortModel.NAME) as PreviousStepPortModel;
+		const link = new EndOfMeJoinLinkModel();
+		link.setTargetPort(port);
+		link.setSourcePort(node.getPort(NextStepPortModel.NAME));
+		return link;
+	}
+
+	public endOfSub(node: NodeModel): LinkModel {
+		const port = this.getPort(LastSubStepJoinPortModel.NAME) as LastSubStepJoinPortModel;
 		const link = port.createIncomingLinkModel();
 		link.setSourcePort(node.getPort(NextStepPortModel.NAME));
 		return link;

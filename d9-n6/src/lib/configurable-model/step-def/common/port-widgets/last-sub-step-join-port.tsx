@@ -1,11 +1,12 @@
 import {GenerateModelEvent} from '@projectstorm/react-canvas-core';
-import {AbstractModelFactory, PortModelAlignment, PortWidget} from '@projectstorm/react-diagrams';
+import {AbstractModelFactory, LinkModel, PortModelAlignment, PortWidget} from '@projectstorm/react-diagrams';
 import {DiagramEngine} from '@projectstorm/react-diagrams-core';
 import {DOM_KEY_WIDGET} from '@rainbow-d9/n2';
 import React from 'react';
 import styled from 'styled-components';
 import {IncomingPortModel} from '../../../../diagram';
 import {PlaygroundCssVars} from '../../../../widgets';
+import {LastSubStepJoinLinkModel} from '../links';
 
 export class LastSubStepJoinPortModel extends IncomingPortModel {
 	public static readonly TYPE = 'last-sub-step-join-port';
@@ -13,6 +14,10 @@ export class LastSubStepJoinPortModel extends IncomingPortModel {
 
 	public constructor() {
 		super(LastSubStepJoinPortModel.TYPE, LastSubStepJoinPortModel.NAME, PortModelAlignment.RIGHT);
+	}
+
+	protected createDefaultLinkModel(): LinkModel {
+		return new LastSubStepJoinLinkModel();
 	}
 }
 

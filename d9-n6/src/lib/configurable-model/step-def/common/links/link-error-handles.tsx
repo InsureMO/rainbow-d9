@@ -21,4 +21,12 @@ export class ErrorHandlesLinkFactory extends StandardLinkFactory<ErrorHandlesLin
 	public generateModel(_event: GenerateModelEvent): ErrorHandlesLinkModel {
 		return new ErrorHandlesLinkModel();
 	}
+
+	protected getLinkSegmentDasharray(): string {
+		return PlaygroundCssVars.LINK_ERROR_HANDLES_DASHARRAY;
+	}
+
+	protected getLinkSegmentSelectedDasharray(): string {
+		return PlaygroundCssVars.LINK_ERROR_HANDLES_SELECTED_DASHARRAY;
+	}
 }

@@ -9,6 +9,7 @@ import {
 } from '@projectstorm/react-diagrams';
 import {DiagramEngine} from '@projectstorm/react-diagrams-core';
 import React, {createRef, MouseEvent, RefObject, useEffect, useRef, useState} from 'react';
+import {PlaygroundCssVars} from '../../../../widgets';
 import {StandardLinkSegmentPath} from './standard-link-segment-path';
 
 export interface StandardLinkProps {
@@ -117,8 +118,18 @@ export abstract class StandardLinkFactory<L extends DefaultLinkModel = DefaultLi
 	public generateLinkSegment(model: L, selected: boolean, path: string): JSX.Element {
 		return <StandardLinkSegmentPath
 			selected={selected}
+			dasharray={this.getLinkSegmentDasharray()}
+			selectedDasharray={this.getLinkSegmentSelectedDasharray()}
 			stroke={selected ? model.getOptions().selectedColor : model.getOptions().color}
 			strokeWidth={model.getOptions().width}
 			d={path}/>;
+	}
+
+	protected getLinkSegmentDasharray(): string {
+		return PlaygroundCssVars.LINK_DEFAULT_STROKE_DASHARRAY;
+	}
+
+	protected getLinkSegmentSelectedDasharray(): string {
+		return PlaygroundCssVars.LINK_DEFAULT_SELECTED_STROKE_DASHARRAY;
 	}
 }

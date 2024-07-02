@@ -8,6 +8,12 @@ const DEFAULT_CREATE_SUB_STEP_NODES = (node: StepNodeModel, options: CreateSubNo
 };
 
 export const DEFAULTS = {
+	diagram: {
+		startTop: 64, startLeft: 64,
+		rowGap: 64, columnGap: 128,
+		linkArcRadius: 8, linkGutterSize: 8,
+		linkJoinEndSinkingOffset: 24, linkJoinEndGutterSize: 16
+	},
 	createDefaultStep: (): PipelineStepDef => {
 		return {
 			name: '',
@@ -21,6 +27,12 @@ export const DEFAULTS = {
 };
 
 export const setDefaults = (defaults: {
+	diagram?: {
+		startTop?: number; startLeft?: number;
+		rowGap?: number; columnGap?: number;
+		linkArcRadius?: number; linkGutterSize?: number;
+		linkJoinEndSinkingOffset?: number; linkJoinEndGutterSize?: number;
+	};
 	createDefaultStep?: () => PipelineStepDef;
 	/**
 	 * Use the second boolean return value to specify whether to use the default create function.
@@ -33,6 +45,16 @@ export const setDefaults = (defaults: {
 	 */
 	createSubStepNodes?: (node: StepNodeModel) => Undefinable<StepNodeModel> | [Undefinable<StepNodeModel>, boolean];
 }) => {
+	DEFAULTS.diagram = {
+		startTop: defaults.diagram?.startTop ?? DEFAULTS.diagram.startTop,
+		startLeft: defaults.diagram?.startLeft ?? DEFAULTS.diagram.startLeft,
+		rowGap: Math.max(defaults.diagram?.rowGap ?? 0, DEFAULTS.diagram.rowGap),
+		columnGap: Math.max(defaults.diagram?.columnGap ?? 0, DEFAULTS.diagram.columnGap),
+		linkArcRadius: Math.max(defaults.diagram?.linkArcRadius ?? DEFAULTS.diagram.linkArcRadius, 4),
+		linkGutterSize: Math.max(defaults.diagram?.linkGutterSize ?? 0, DEFAULTS.diagram.linkGutterSize),
+		linkJoinEndSinkingOffset: Math.max(defaults.diagram?.linkJoinEndSinkingOffset ?? 0, DEFAULTS.diagram.linkJoinEndSinkingOffset),
+		linkJoinEndGutterSize: Math.max(defaults.diagram?.linkJoinEndGutterSize ?? 0, DEFAULTS.diagram.linkJoinEndGutterSize)
+	};
 	DEFAULTS.createDefaultStep = defaults.createDefaultStep ?? DEFAULTS.createDefaultStep;
 	DEFAULTS.createSubStepNodes = defaults.createSubStepNodes != null
 		? (node: StepNodeModel, options: CreateSubNodesOptions): Undefinable<HandledNodeModel> => {

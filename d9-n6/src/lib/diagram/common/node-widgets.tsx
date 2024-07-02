@@ -1,4 +1,4 @@
-import {DOM_KEY_WIDGET, UnwrappedCaption} from '@rainbow-d9/n2';
+import {CssVars, DOM_KEY_WIDGET, UnwrappedCaption} from '@rainbow-d9/n2';
 import React, {DetailedHTMLProps, HTMLAttributes} from 'react';
 import styled from 'styled-components';
 import {PlaygroundCssVars} from '../../widgets';
@@ -12,6 +12,7 @@ export const NodeContainer = styled.div`
     border: var(--border);
     background-color: var(--background-color);
     min-width: ${PlaygroundCssVars.NODE_MIN_WIDTH};
+    max-width: ${PlaygroundCssVars.NODE_MAX_WIDTH}
 `;
 // noinspection CssUnresolvedCustomProperty
 export const NodeHeader = styled.div`
@@ -30,6 +31,12 @@ export const NodeTitle = styled(UnwrappedCaption)`
     color: var(--color);
     font-size: var(--font-size);
     font-weight: var(--font-weight);
+    height: unset;
+    min-height: ${CssVars.INPUT_HEIGHT};
+    white-space: unset;
+    overflow: unset;
+    text-overflow: unset;
+    padding: calc((${CssVars.INPUT_HEIGHT} - var(--font-size)) / 2) 0;
 `;
 // noinspection CssUnresolvedCustomProperty
 export const NodeTitleSpreader = styled.span.attrs({[DOM_KEY_WIDGET]: 'o23-playground-node-title-spreader'})`

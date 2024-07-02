@@ -85,10 +85,10 @@ export const createSubNodesAndEndNode: CommonStepDefsType['createSubNodesAndEndN
 	const endNode = new JoinEndNodeModel(step, model.file, {type: StepNodeEntityType.JOIN_END, subOf: step, handlers});
 	appendNode(endNode);
 	subNodes.forEach(node => {
-		const link = endNode.endOf(node);
+		const link = endNode.endOfSub(node);
 		appendLink(link);
 	});
-	const directLink = model.next(endNode);
+	const directLink = endNode.endOfMe(model);
 	appendLink(directLink);
 
 	return endNode;

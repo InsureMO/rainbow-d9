@@ -6,10 +6,14 @@ import {
 	CatchableErrorHandlePortFactory,
 	ErrorHandlesLinkFactory,
 	ExposedErrorHandlePortFactory,
+	FirstSubStepPortFactory,
+	LastSubStepJoinLinkFactory,
+	LastSubStepJoinPortFactory,
 	StepsLinkFactory,
 	StepsPortFactory,
 	UncatchableErrorHandlePortFactory
 } from '../configurable-model';
+import {EndOfMeJoinLinkFactory} from '../configurable-model/step-def/common/links/link-end-of-me-join';
 import {NextStepPortFactory, PreviousStepPortFactory} from './common';
 import {EndNodeFactory} from './end-node';
 import {JoinEndNodeFactory} from './join-end-node';
@@ -56,6 +60,8 @@ export const initEngine = (engine: DiagramEngine) => {
 	portFactories.registerFactory(new UncatchableErrorHandlePortFactory());
 	portFactories.registerFactory(new ExposedErrorHandlePortFactory());
 	portFactories.registerFactory(new AnyErrorHandlePortFactory());
+	portFactories.registerFactory(new FirstSubStepPortFactory());
+	portFactories.registerFactory(new LastSubStepJoinPortFactory());
 	Factories.ports.forEach(factory => portFactories.registerFactory(factory));
 
 	const nodeFactories = engine.getNodeFactories();
@@ -68,5 +74,7 @@ export const initEngine = (engine: DiagramEngine) => {
 	const linkFactories = engine.getLinkFactories();
 	linkFactories.registerFactory(new StepsLinkFactory());
 	linkFactories.registerFactory(new ErrorHandlesLinkFactory());
+	linkFactories.registerFactory(new EndOfMeJoinLinkFactory());
+	linkFactories.registerFactory(new LastSubStepJoinLinkFactory());
 	Factories.links.forEach(factory => linkFactories.registerFactory(factory));
 };

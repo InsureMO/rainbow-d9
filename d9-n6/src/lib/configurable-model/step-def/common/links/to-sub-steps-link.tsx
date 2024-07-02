@@ -1,5 +1,6 @@
 import {DefaultLinkModel} from '@projectstorm/react-diagrams';
 import {DefaultLinkModelOptions} from '@projectstorm/react-diagrams-defaults/dist/@types/link/DefaultLinkModel';
+import {DEFAULTS} from '../../../../constants';
 import {StepNodeModel} from '../../../../diagram';
 import {findStepDef} from '../../all-step-defs';
 import {StepsPortModel} from '../port-widgets';
@@ -17,7 +18,7 @@ export abstract class ToSubStepsLinkModel extends DefaultLinkModel {
 			const targetY = this.getLastPoint().getY();
 			const centerX = this.computeCenterX(sourceX, targetX);
 			const centerY = Math.min(sourceY, targetY) + Math.abs((sourceY - targetY) / 2);
-			const radius = Math.min(8, Math.abs(sourceY - centerY));
+			const radius = Math.min(DEFAULTS.diagram.linkArcRadius, Math.abs(sourceY - centerY));
 			if (sourceY === targetY) {
 				return `M ${sourceX} ${sourceY} L ${targetX} ${targetY}`;
 			} else if (sourceY > targetY) {
@@ -42,7 +43,7 @@ export abstract class ToSubStepsLinkModel extends DefaultLinkModel {
 		}
 	}
 
-	private computeCenterX(sourceX: number, targetX: number) {
+	protected computeCenterX(sourceX: number, targetX: number) {
 		const sourceNode = this.getSourcePort().getNode() as StepNodeModel;
 		const {use} = sourceNode.step;
 		const def = findStepDef(use);
@@ -56,14 +57,14 @@ export abstract class ToSubStepsLinkModel extends DefaultLinkModel {
 		const absoluteCenterX = (minTargetX - Math.min(sourceX, targetX)) / 2;
 		// if steps link exists, count minus 1
 		const linkCount = links.length - (hasStepsLink ? 1 : 0);
-		const linkGutter = this.getLinkGutterSize();
+		const linkGutter = this.getGutterSize();
 		const centerXStart = absoluteCenterX - linkGutter * (linkCount - 1) / 2;
 		// if steps link exists, index minus 1
 		const myIndex = hasStepsLink ? Math.max(0, links.indexOf(this) - 1) : links.indexOf(this);
 		return Math.min(sourceX, targetX) + centerXStart + (linkCount - myIndex - 1) * linkGutter;
 	}
 
-	protected getLinkGutterSize(): number {
-		return 8;
+	protected getGutterSize(): number {
+		return DEFAULTS.diagram.linkGutterSize;
 	}
 }
