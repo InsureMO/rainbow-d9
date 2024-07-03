@@ -20,8 +20,8 @@ Here is a simple example:
 // incoming data
 const incoming = {name: 'John', age: 23};
 
-// Only the age is needed as a parameter in the step processing, not the name
-// Define a transformation script. So in the actual processing logic of the current step, only a number will be received.
+// Only the age is needed as a parameter in the step processing, not the name.
+// Define a transformation script, so in the actual processing logic of the current step, only the age will be collected, and there won't be a field for the name attribute.
 return {age: $factor.age};
 ```
 
@@ -47,7 +47,7 @@ Here is a simple example:
 const outgoing = {name: 'John', age: 23};
 
 // The result data should only include age, not the name.
-// Define a transformation script. The age alone will be stored in memory for subsequent use.
+// Define a transformation script, the age alone will be stored in memory for subsequent use.
 return {age: $result.age};
 ```
 
@@ -75,12 +75,15 @@ const result = {age: 23};
 
 // merge not defined, equivalent to
 context = result;
+// context is {age: 23}
 
 // merge is true, equivalent to
 context = {...context, ...result};
+// context is {name: 'John', age: 23}
 
 // merge is 'person', equivalent to
 context = {...context, person: result};
+// context is {name: 'John', age: 0, person: {age: 23}}
 ```
 
 > Note that in the latter two cases, there is a possibility of name collision resulting in the original context being overwritten.
