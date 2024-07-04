@@ -63,15 +63,15 @@ export const elementToResponse: ConfigurableElement = {
 const MergeToRequestEditor = (props: ConfigurableElementEditorProps<CommonStepDefModel>) => {
 	const {model, onValueChanged} = props;
 
-	const inputRef = useRef<HTMLInputElement>(null);
+	const inputRef = useRef<HTMLDivElement>(null);
 
 	const onValueChange = (value: PropValue) => {
 		model.temporary = {...(model.temporary ?? {}), mergeRequestType: value as MergeRequestType};
+		setTimeout(() => inputRef.current?.querySelector('input')?.focus(), 50);
 		onValueChanged();
 	};
 	const onNameChange = (value: PropValue) => {
 		model.mergeRequest = value as string;
-		setTimeout(() => inputRef.current?.querySelector('input')?.focus(), 50);
 		onValueChanged();
 	};
 	const options = [

@@ -44,7 +44,7 @@ export const AllIgnoredOrArrayOptions = [
 export const AllIgnoredOrArrayEditor = (props: AllIgnoredOrArrayEditorProps) => {
 	const {model, onValueChanged, name, lead} = props;
 
-	const inputRef = useRef<HTMLInputElement>(null);
+	const inputRef = useRef<HTMLDivElement>(null);
 
 	const writeToModel = (value?: string) => {
 		const array = (value ?? '').split(/[,;]/).map(header => header.trim()).filter(header => VUtils.isNotBlank(header));
