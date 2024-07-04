@@ -93,9 +93,9 @@ context = {...context, person: result};
 
 In the following `Write to output` scenarios, and in cases where no merge-back strategy is specified:
 
-- returning `null` or `undefined` (recommended to use `(void 0)` to represent `undefined`) indicates that the original request data will
+- Returning `null` or `undefined` (recommended to use `(void 0)` to represent `undefined`) indicates that the original request data will
   continue to be used as the request data for the next step without any modifications.
-- A flag created by returning `$helpers.$clearContextData()` to clear context data will be used as the request data for the next step, while
+- Returning a flag created by `$helpers.$clearContextData()` to clear context data will be used as the request data for the next step, while
   all other data is cleared.
 
 > Please note that "without any modifications" is a conceptual reference. If the data has already been altered by the logic executed in the
