@@ -13,24 +13,25 @@ import {
 } from '@rainbow-d9/n1';
 import React, {ForwardedRef, forwardRef, MouseEvent, ReactNode, useState} from 'react';
 import styled from 'styled-components';
-import {CssVars, DOM_KEY_WIDGET} from './constants';
+import {CssVars} from './constants';
 import {
 	computeDropdownTreePopupHeight,
 	DropdownContainer,
+	DropdownDefaults,
 	DropdownLabel,
 	DropdownPopup,
-	DropdownPopupState,
 	DropdownPopupStateActive,
 	DropdownStick,
 	DropdownTreeEventBusProvider,
 	DropdownTreeEventTypes,
 	DropdownTreeFilterBridge,
 	isDropdownPopupActive,
+	OptionFilter,
 	useDropdownTreeEventBus,
 	useFilterableDropdownOptions
 } from './dropdown-assist';
 import {buildTip, TipAttachableWidget, useGlobalHandlers, useTip} from './global';
-import {Times} from './icons';
+import {Search, Times} from './icons';
 import {toIntlLabel} from './intl-label';
 import {MultiDropdownOptionValue} from './multi-dropdown';
 import {OptionItemSort, TreeOptionItem, TreeOptionItems} from './option-items-assist';
@@ -123,62 +124,6 @@ const MultiDropdownTreeLabel = styled(DropdownLabel)`
 const MultiDropdownTreeStick = styled(DropdownStick as any)`
     position: absolute;
     right: ${CssVars.INPUT_INDENT};
-`;
-
-const OptionFilter = styled.div.attrs<Omit<DropdownPopupState, 'active'> & { active: boolean }>(
-	({active, atBottom, top, left, height}) => {
-		return {
-			[DOM_KEY_WIDGET]: 'd9-multi-dropdown-tree-option-filter',
-			style: {
-				opacity: active ? 1 : 0,
-				top: atBottom ? (top + height - 10) : (void 0),
-				bottom: atBottom ? (void 0) : `calc(100vh - ${top}px - 10px)`,
-				left: left - 10
-			}
-		};
-	})<Omit<DropdownPopupState, 'active'> & { active: boolean }>`
-    display: flex;
-    position: fixed;
-    align-items: center;
-    font-family: ${CssVars.FONT_FAMILY};
-    font-size: calc(${CssVars.FONT_SIZE} - 2px);
-    height: calc(${CssVars.INPUT_HEIGHT} / 5 * 4);
-    padding: 0 ${CssVars.INPUT_INDENT};
-    border-radius: ${CssVars.BORDER_RADIUS};
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    pointer-events: none;
-    z-index: calc(${CssVars.DROPDOWN_Z_INDEX} + 1);
-
-    &:before {
-        content: '';
-        display: block;
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: ${CssVars.INFO_COLOR};
-        border-radius: ${CssVars.BORDER_RADIUS};
-        opacity: 0.9;
-        z-index: -1;
-    }
-
-    > span:first-child {
-        color: ${CssVars.INVERT_COLOR};
-        font-weight: ${CssVars.FONT_BOLD};
-        margin-right: 4px;
-    }
-
-    > input {
-        border: 0;
-        outline: none;
-        background-color: transparent;
-        color: ${CssVars.INVERT_COLOR};
-        caret-color: transparent;
-        caret-shape: revert;
-    }
 `;
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -287,7 +232,10 @@ export const InternalMultiDropdownTree = forwardRef((props: MultiDropdownTreePro
 	const values = currentValuesToArray();
 	const selected = values != null && values.length !== 0;
 	const allOptions: MultiDropdownTreeOptions = askOptions();
-	const popupHeight = computeDropdownTreePopupHeight(allOptions);
+	const popupHeight = computeDropdownTreePopupHeight(allOptions, filter);
+	const treeHeight = (DropdownDefaults.DEFAULTS.FIX_FILTER && VUtils.isNotBlank(filter))
+		? `calc(${toCssSize(popupHeight)} - ${CssVars.INPUT_HEIGHT} - 2px)`
+		: `calc(${toCssSize(popupHeight)} - 2px)`;
 	const optionsAsMap = (() => {
 		const map: Record<string, MultiDropdownTreeOption> = {};
 		const toMap = (option: MultiDropdownTreeOption) => {
@@ -378,13 +326,13 @@ export const InternalMultiDropdownTree = forwardRef((props: MultiDropdownTreePro
 			                 shown={popupShown && popupState.active === DropdownPopupStateActive.ACTIVE}
 			                 {...deviceTags}
 			                 vScroll={true} ref={popupRef}>
-				<OptionFilter {...{...popupState, active: !!filter}}>
-					<span>?:</span>
+				<OptionFilter {...{...popupState, active: !!filter}} data-w="d9-multi-dropdown-tree-option-filter">
+					<span>?:</span><span><Search/></span>
 					<input value={filter} onChange={onFilterChanged} onKeyUp={onKeyUp} ref={filterInputRef}/>
 				</OptionFilter>
 				<PopupTree data={treeModel} initExpandLevel={0} disableSearchBox={true}
 				           detective={detective}
-				           height={`calc(${toCssSize(popupHeight)} - 2px)`}>
+				           height={treeHeight}>
 					<DropdownTreeFilterBridge/>
 				</PopupTree>
 			</DropdownPopup>

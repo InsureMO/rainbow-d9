@@ -1244,6 +1244,14 @@ still refreshed using the definition of `options`. Therefore, if the `options` d
 there will be no changes. In addition, since refreshing the options may result in the originally selected value becoming invalid, `clearMe`
 can be used in combination to handle this situation.
 
+### Search
+
+All dropdowns provide default option search functionality and offer two styles, which can be set using `setDropdownDefaults`.
+
+> Please note that the search functionality is intended for basic text display. If the label provided in the option item is of type
+> ReactNode, the search functionality will not work. In such cases, you should also provide a stringify function within the option item to
+> retrieve the corresponding text content.
+
 ## Checkboxes (Checks), Radios
 
 In fact, Checkboxes and Radios are just alternative representations of `MultiDropdown` and `Dropdown`, respectively. Therefore, all

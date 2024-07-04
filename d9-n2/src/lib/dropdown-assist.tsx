@@ -503,7 +503,8 @@ export const useFilterableDropdownOptions = <V extends any>(props: FilterableDro
 			: remained.map(({option}) => option);
 	});
 	const displayOptions = askDisplayOptions();
-	const popupHeight = Math.min(displayOptions.length, 8) * CssVars.INPUT_HEIGHT_VALUE + 2;
+	const fixFilterExists = DropdownDefaults.DEFAULTS.FIX_FILTER && VUtils.isNotBlank(filter);
+	const popupHeight = 2 + CssVars.INPUT_HEIGHT_VALUE * Math.min(displayOptions.length + (fixFilterExists ? 1 : 0), 8);
 
 	const repaintPopup = () => {
 		if ($disabled) {
@@ -532,7 +533,7 @@ export const useFilterableDropdownOptions = <V extends any>(props: FilterableDro
 		}
 		filterInputRef.current?.focus();
 	};
-	const onKeyUp = async (event: KeyboardEvent<HTMLDivElement>) => {
+	const onKeyUp = async (event: KeyboardEvent<HTMLInputElement>) => {
 		if (!isDropdownPopupActive(popupState.active)) {
 			return;
 		}
@@ -559,6 +560,127 @@ export const useFilterableDropdownOptions = <V extends any>(props: FilterableDro
 		onClicked, onFocused, onKeyUp, onFilterChanged
 	};
 };
+
+// noinspection CssUnresolvedCustomProperty
+export const OptionFilter = styled.div.attrs<Omit<DropdownPopupState, 'active'> & { active: boolean }>(
+	({
+		 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+		 // @ts-ignore
+		 'data-w': widgetKey,
+		 active, atBottom, top, left, height
+	 }) => {
+		const fixFilter = DropdownDefaults.DEFAULTS.FIX_FILTER ?? false;
+		return {
+			[DOM_KEY_WIDGET]: widgetKey,
+			'data-filter-active': active,
+			'data-fix-filter': fixFilter,
+			style: {
+				'--position': fixFilter ? 'sticky' : 'fixed',
+				'--opacity': fixFilter ? 1 : (active ? 1 : 0),
+				'--top': fixFilter ? 0 : (atBottom ? (top + height - 10) : (void 0)),
+				'--bottom': fixFilter ? (void 0) : (atBottom ? (void 0) : `calc(100vh - ${top}px - 10px)`),
+				'--left': fixFilter ? 0 : (left - 10),
+				'--height': fixFilter ? (active ? CssVars.INPUT_HEIGHT : 0) : `calc(${CssVars.INPUT_HEIGHT} / 5 * 4)`,
+				'--width': fixFilter ? '100%' : (void 0),
+				'--font-size': fixFilter ? CssVars.FONT_SIZE : `calc(${CssVars.FONT_SIZE} - 2px)`,
+				'--padding': fixFilter ? 0 : `0 ${CssVars.INPUT_INDENT}`,
+				'--border-radius': fixFilter ? 0 : CssVars.BORDER_RADIUS
+			}
+		};
+	})<Omit<DropdownPopupState, 'active'> & { active: boolean }>`
+    display: flex;
+    position: var(--position);
+    top: var(--top);
+    bottom: var(--bottom);
+    left: var(--left);
+    align-items: center;
+    font-family: ${CssVars.FONT_FAMILY};
+    font-size: var(--font-size);
+    height: var(--height);
+    width: var(--width);
+    padding: var(--padding);
+    border-radius: var(--border-radius);
+    background-color: ${CssVars.BACKGROUND_COLOR};
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    opacity: var(--opacity);
+    z-index: calc(${CssVars.DROPDOWN_Z_INDEX} + 1);
+
+    &:before {
+        content: '';
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: ${CssVars.INFO_COLOR};
+        border-radius: ${CssVars.BORDER_RADIUS};
+        opacity: 0.9;
+        z-index: -1;
+    }
+
+    &[data-fix-filter=true] {
+        &[data-filter-active=true] {
+            border-bottom: ${CssVars.BORDER};
+        }
+
+        &:before {
+            display: none;
+        }
+
+        > span:first-child {
+            display: none;
+        }
+
+        > span:nth-child(2) {
+            display: flex;
+        }
+
+        > input {
+            color: ${CssVars.FONT_COLOR};
+            caret-color: unset;
+            caret-shape: unset;
+            padding: 0 ${CssVars.INPUT_INDENT};
+            width: 100%;
+            height: 100%;
+        }
+    }
+
+    > span:first-child {
+        color: ${CssVars.INVERT_COLOR};
+        font-weight: ${CssVars.FONT_BOLD};
+        margin-right: 4px;
+    }
+
+    > span:nth-child(2) {
+        display: none;
+        position: relative;
+        align-items: center;
+        justify-content: center;
+        min-width: ${CssVars.INPUT_HEIGHT};
+        height: 100%;
+        border-right: ${CssVars.BORDER};
+        color: ${CssVars.FONT_COLOR};
+        fill: ${CssVars.FONT_COLOR};
+
+        > svg {
+            height: ${CssVars.FONT_SIZE};
+        }
+    }
+
+    > input {
+        font-size: var(--font-size);
+        border-radius: 0;
+        border: 0;
+        outline: none;
+        background-color: transparent;
+        color: ${CssVars.INVERT_COLOR};
+        caret-color: transparent;
+        caret-shape: revert;
+    }
+`;
 
 export enum DropdownTreeEventTypes {
 	FILTER_CHANGED = 'filter-changed',
@@ -604,7 +726,7 @@ export const DropdownTreeFilterBridge = () => {
 };
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const computeDropdownTreePopupHeight = (allOptions: TreeOptionItems<any>): number => {
+export const computeDropdownTreePopupHeight = (allOptions: TreeOptionItems<any>, filter?: string): number => {
 	const allOptionCount = (() => {
 		// eslint-disable-next-line @typescript-eslint/no-explicit-any
 		const countChildren = (option: TreeOptionItem<any>) => {
@@ -617,5 +739,17 @@ export const computeDropdownTreePopupHeight = (allOptions: TreeOptionItems<any>)
 			return count + countChildren(option);
 		}, 0);
 	})();
-	return Math.min(allOptionCount, 8) * CssVars.INPUT_HEIGHT_VALUE + 2;
+	const fixFilterExists = DropdownDefaults.DEFAULTS.FIX_FILTER && VUtils.isNotBlank(filter);
+	return 2 + CssVars.INPUT_HEIGHT_VALUE * Math.min(allOptionCount + (fixFilterExists ? 1 : 0), 8);
+};
+
+export const DropdownDefaults = {
+	DEFAULTS: {FIX_FILTER: false}
+};
+export const DropdownUtils = {
+	setDropdownDefaults: (defaults: {
+		fixFilter?: boolean;
+	}) => {
+		DropdownDefaults.DEFAULTS.FIX_FILTER = defaults.fixFilter ?? DropdownDefaults.DEFAULTS.FIX_FILTER;
+	}
 };

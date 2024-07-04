@@ -14,13 +14,14 @@ import {
 	DropdownContainer,
 	DropdownLabel,
 	DropdownPopup,
-	DropdownPopupState,
 	DropdownPopupStateActive,
 	DropdownStick,
 	isDropdownPopupActive,
+	OptionFilter,
 	useFilterableDropdownOptions
 } from './dropdown-assist';
 import {buildTip, TipAttachableWidget, useGlobalHandlers, useTip} from './global';
+import {Search} from './icons';
 import {toIntlLabel} from './intl-label';
 import {
 	NO_AVAILABLE_OPTION_ITEM,
@@ -53,61 +54,6 @@ export type DropdownDef =
 /** widget definition, with html attributes */
 export type DropdownProps = OmitNodeDef<DropdownDef> & WidgetProps;
 
-const OptionFilter = styled.div.attrs<Omit<DropdownPopupState, 'active'> & { active: boolean }>(
-	({active, atBottom, top, left, height}) => {
-		return {
-			[DOM_KEY_WIDGET]: 'd9-dropdown-option-filter',
-			style: {
-				opacity: active ? 1 : 0,
-				top: atBottom ? (top + height - 10) : (void 0),
-				bottom: atBottom ? (void 0) : `calc(100vh - ${top}px - 10px)`,
-				left: left - 10
-			}
-		};
-	})<Omit<DropdownPopupState, 'active'> & { active: boolean }>`
-    display: flex;
-    position: fixed;
-    align-items: center;
-    font-family: ${CssVars.FONT_FAMILY};
-    font-size: calc(${CssVars.FONT_SIZE} - 2px);
-    height: calc(${CssVars.INPUT_HEIGHT} / 5 * 4);
-    padding: 0 ${CssVars.INPUT_INDENT};
-    border-radius: ${CssVars.BORDER_RADIUS};
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    pointer-events: none;
-    z-index: calc(${CssVars.DROPDOWN_Z_INDEX} + 1);
-
-    &:before {
-        content: '';
-        display: block;
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: ${CssVars.INFO_COLOR};
-        border-radius: ${CssVars.BORDER_RADIUS};
-        opacity: 0.9;
-        z-index: -1;
-    }
-
-    > span:first-child {
-        color: ${CssVars.INVERT_COLOR};
-        font-weight: ${CssVars.FONT_BOLD};
-        margin-right: 4px;
-    }
-
-    > input {
-        border: 0;
-        outline: none;
-        background-color: transparent;
-        color: ${CssVars.INVERT_COLOR};
-        caret-color: transparent;
-        caret-shape: revert;
-    }
-`;
 const Option = styled.span.attrs({[DOM_KEY_WIDGET]: 'd9-dropdown-option'})`
     display: flex;
     position: relative;
@@ -209,8 +155,8 @@ export const Dropdown = forwardRef((props: DropdownProps, ref: ForwardedRef<HTML
 			                 shown={popupShown && popupState.active === DropdownPopupStateActive.ACTIVE}
 			                 {...deviceTags}
 			                 vScroll={true} ref={popupRef}>
-				<OptionFilter {...{...popupState, active: !!filter}}>
-					<span>?:</span>
+				<OptionFilter {...{...popupState, active: !!filter}} data-w="d9-dropdown-option-filter">
+					<span>?:</span><span><Search/></span>
 					<input value={filter} onChange={onFilterChanged} onKeyUp={onKeyUp}
 					       ref={filterInputRef}/>
 				</OptionFilter>

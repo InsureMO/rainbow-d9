@@ -115,7 +115,15 @@ export const N2BasicWidgets = () => {
 		dropdown2: async (_options: ModelCarrier<BaseModel, PropValue> & GlobalEventHandlers): Promise<OptionItems<string>> => {
 			return [
 				{value: '1', label: 'Option #1'},
-				{value: '2', label: 'Option #2'}
+				{value: '2', label: 'Option #2'},
+				{value: '3', label: 'Option #3'},
+				{value: '4', label: 'Option #4'},
+				{value: '5', label: 'Option #5'},
+				{value: '6', label: 'Option #6'},
+				{value: '7', label: 'Option #7'},
+				{value: '8', label: 'Option #8'},
+				{value: '9', label: 'Option #9'},
+				{value: 'X', label: 'Option #X'}
 			];
 		}
 	};

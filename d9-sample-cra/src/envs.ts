@@ -2,7 +2,7 @@ import {registerCharts} from '@rainbow-d9/echarts';
 import {MUtils, N1Logger, PPUtils, VUtils} from '@rainbow-d9/n1';
 // import all n2 widgets
 import '@rainbow-d9/n2';
-import {CalendarUtils} from '@rainbow-d9/n2';
+import {CalendarUtils, DropdownUtils, switchCollapseFixedThingDebug} from '@rainbow-d9/n2';
 import {registerN2Widgets, Widget} from '@rainbow-d9/n3';
 import {registerPlayground} from '@rainbow-d9/n5';
 import {registerPlayground as registerO23Playground} from '@rainbow-d9/n6';
@@ -51,6 +51,9 @@ dayjs.extend(BuddhistEra);
 		// datetimeFormat: askDateTimeFormat(),
 		useCalendarIcon: true
 	});
+	DropdownUtils.setDropdownDefaults({fixFilter: true});
+	// never switch to enabled in production, it is for debug only
+	switchCollapseFixedThingDebug(true);
 })();
 
 // attach anything on window, then you can use it in snippet

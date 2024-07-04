@@ -19,6 +19,11 @@ export const notInMe = (me: HTMLOrSVGElement, target: Nullable<EventTarget>): bo
 	return true;
 };
 
+const collapseFixedThingDebug = {enabled: false};
+export const switchCollapseFixedThingDebug = (enabled = false) => {
+	collapseFixedThingDebug.enabled = enabled;
+};
+
 export const useCollapseFixedThing = (options: {
 	containerRef: RefObject<HTMLOrSVGElement>;
 	visible?: boolean;
@@ -32,21 +37,29 @@ export const useCollapseFixedThing = (options: {
 			return;
 		}
 		const collapse = (event: Event) => {
-			if (containerRef == null || containerRef.current == null) {
-				return;
-			}
-			// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-			if (notInMe(containerRef.current!, event.target)) {
+			if (containerRef?.current != null && notInMe(containerRef.current, event.target)) {
 				hide();
 			}
 		};
 		events.forEach(event => {
 			window.addEventListener(event, collapse, true);
 		});
+		const collapseOnBlur = () => {
+			setTimeout(() => {
+				const node = document.querySelector(':focus');
+				if (node == null || (containerRef?.current != null && notInMe(containerRef.current, node))) {
+					hide();
+				}
+			}, 10);
+		};
+		if (!collapseFixedThingDebug.enabled) {
+			window.addEventListener('blur', collapseOnBlur, true);
+		}
 		return () => {
 			events.forEach(event => {
 				window.removeEventListener(event, collapse, true);
 			});
+			window.removeEventListener('blur', collapseOnBlur, true);
 		};
 	}, [containerRef, events, visible, hide]);
 };
