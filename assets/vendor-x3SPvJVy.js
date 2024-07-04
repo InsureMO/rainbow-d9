@@ -1,6 +1,6 @@
 import { g as getDefaultExportFromCjs, c as commonjsGlobal } from "./babel-wuJLZiHY.js";
 import { s as stringifyPosition, p as pointStart } from "./unist-QXG10VXN.js";
-import { h as hastToReact } from "./react-base-8-0nj6j8.js";
+import { i as hastToReact } from "./react-base-RoI39byt.js";
 function _mergeNamespaces(n2, m2) {
   for (var i2 = 0; i2 < m2.length; i2++) {
     const e2 = m2[i2];
@@ -26136,7 +26136,7 @@ const defaultKeymap = /* @__PURE__ */ [
   { key: "Alt-A", run: toggleBlockComment }
 ].concat(standardKeymap);
 const indentWithTab = { key: "Tab", run: indentMore, shift: indentLess };
-var define_process_env_default = { GITHUB_STATE: "/home/runner/work/_temp/_runner_file_commands/save_state_a0465994-fc09-4154-bed6-eb7acd29e8d3", npm_package_scripts_build_n5_ci: "cd ./d9-n5 && yarn build-ci", npm_package_scripts_build_sample_cra: "cd ./d9-sample-cra && yarn build", STATS_TRP: "true", DEPLOYMENT_BASEPATH: "/opt/runner", DOTNET_NOLOGO: "1", npm_package_scripts_build_n6_ci: "cd ./d9-n6 && yarn build-ci", npm_package_dependencies__vitejs_plugin_react: "^4.2.1", USER: "runner", npm_config_version_commit_hooks: "true", npm_config_user_agent: "yarn/1.22.21 npm/? node/v18.20.3 linux x64", npm_package_dependencies__types_jest: "^29.5.4", CI: "true", npm_config_bin_links: "true", npm_package_bugs_url: "https://github.com/InsureMO/rainbow-d9/issues", npm_config_wrap_output: "", RUNNER_ENVIRONMENT: "github-hosted", GITHUB_ENV: "/home/runner/work/_temp/_runner_file_commands/set_env_a0465994-fc09-4154-bed6-eb7acd29e8d3", PIPX_HOME: "/opt/pipx", npm_node_execpath: "/opt/hostedtoolcache/node/18.20.3/x64/bin/node", npm_package_scripts_build_thai_all_ci: "yarn build-thai-plan-selection-ci", npm_config_init_version: "1.0.0", npm_package_devDependencies_gh_pages: "^6.1.1", npm_package_dependencies__babel_plugin_proposal_private_property_in_object: "^7.21.11", JAVA_HOME_8_X64: "/usr/lib/jvm/temurin-8-jdk-amd64", SHLVL: "1", HOME: "/home/runner", OLDPWD: "/home/runner/work/rainbow-d9/rainbow-d9", npm_package_browserslist_production_0: ">0.2%", RUNNER_TEMP: "/home/runner/work/_temp", GITHUB_EVENT_PATH: "/home/runner/work/_temp/_github_workflow/event.json", npm_package_scripts_build_all: "yarn build-n123 && yarn build-n5 && yarn build-n6 && yarn build-echarts && yarn build-thai-all", npm_package_browserslist_production_1: "not dead", npm_package_dependencies_react_syntax_highlighter: "^15.5.0", JAVA_HOME_11_X64: "/usr/lib/jvm/temurin-11-jdk-amd64", PIPX_BIN_DIR: "/opt/pipx_bin", GITHUB_REPOSITORY_OWNER: "InsureMO", npm_package_volta_node: "22.2.0", npm_config_init_license: "MIT", npm_package_browserslist_production_2: "not op_mini all", GRADLE_HOME: "/usr/share/gradle-8.8", ANDROID_NDK_LATEST_HOME: "/usr/local/lib/android/sdk/ndk/26.3.11579264", JAVA_HOME_21_X64: "/usr/lib/jvm/temurin-21-jdk-amd64", STATS_RDCL: "true", GITHUB_RETENTION_DAYS: "90", YARN_WRAP_OUTPUT: "false", npm_package_scripts_build_thai_plan_selection_ci: "cd ./d9-thai-plan-selection && yarn build-ci", npm_package_scripts_build_n1: "cd ./d9-n1 && yarn build", npm_config_version_tag_prefix: "v", npm_package_dependencies__rainbow_d9_n2: "1.1.33", GITHUB_REPOSITORY_OWNER_ID: "38915232", POWERSHELL_DISTRIBUTION_CHANNEL: "GitHub-Actions-ubuntu22", AZURE_EXTENSION_DIR: "/opt/az/azcliextensions", GITHUB_HEAD_REF: "", npm_package_scripts_build_n2: "cd ./d9-n2 && yarn build", npm_package_dependencies__types_styled_components: "^5.1.34", npm_package_dependencies__rainbow_d9_n3: "1.1.33", npm_package_dependencies__rainbow_d9_echarts: "1.1.33", SYSTEMD_EXEC_PID: "589", npm_package_scripts_build_echarts: "cd ./d9-echarts && yarn build", npm_package_scripts_build_n3: "cd ./d9-n3 && yarn build", GITHUB_GRAPHQL_URL: "https://api.github.com/graphql", npm_package_description: "Assume the following envs are ready, otherwise contact the tech guy.", npm_package_scripts_predeploy: "npm run build", npm_package_dependencies__rainbow_d9_n5: "1.1.33", GOROOT_1_20_X64: "/opt/hostedtoolcache/go/1.20.14/x64", NVM_DIR: "/home/runner/.nvm", npm_package_readmeFilename: "README.md", npm_package_scripts_build_n5: "cd ./d9-n5 && yarn build", npm_package_dependencies__types_react: "^18.2.21", npm_package_dependencies__testing_library_react: "^13.4.0", npm_package_dependencies__rainbow_d9_n6: "1.1.33", DOTNET_SKIP_FIRST_TIME_EXPERIENCE: "1", GOROOT_1_21_X64: "/opt/hostedtoolcache/go/1.21.11/x64", JAVA_HOME_17_X64: "/usr/lib/jvm/temurin-17-jdk-amd64", ImageVersion: "20240616.1.0", npm_package_scripts_build_n6: "cd ./d9-n6 && yarn build", RUNNER_OS: "Linux", GITHUB_API_URL: "https://api.github.com", GOROOT_1_22_X64: "/opt/hostedtoolcache/go/1.22.4/x64", SWIFT_PATH: "/usr/share/swift/usr/bin", RUNNER_USER: "runner", STATS_V3PS: "true", CHROMEWEBDRIVER: "/usr/local/share/chromedriver-linux64", JOURNAL_STREAM: "8:2881", GITHUB_WORKFLOW: "Publish to NPM", _: "/opt/hostedtoolcache/node/18.20.3/x64/bin/yarn", npm_package_private: "true", npm_package_dependencies_remark_gfm: "4.0.0", npm_package_scripts_build_thai_all: "yarn build-thai-plan-selection", npm_config_registry: "https://registry.yarnpkg.com", ACTIONS_RUNNER_ACTION_ARCHIVE_CACHE: "/opt/actionarchivecache", STATS_D: "true", GITHUB_RUN_ID: "9693795809", STATS_VMFE: "true", npm_package_workspaces_0: "d9-n1", GITHUB_REF_TYPE: "tag", BOOTSTRAP_HASKELL_NONINTERACTIVE: "1", GITHUB_WORKFLOW_SHA: "83aa6ea2a008929028c2cfe9e1c9904b6accd8cc", GITHUB_BASE_REF: "", ImageOS: "ubuntu22", npm_package_scripts_build_n123_ci: "yarn build-n1-ci && yarn build-n2-ci && yarn build-n3-ci", npm_package_workspaces_1: "d9-n2", npm_config_ignore_scripts: "", npm_package_scripts_start: "vite", npm_package_dependencies_github_markdown_css: "^5.5.0", GITHUB_WORKFLOW_REF: "InsureMO/rainbow-d9/.github/workflows/release.yml@refs/tags/r-1.1.34", PERFLOG_LOCATION_SETTING: "RUNNER_PERFLOG", GITHUB_ACTION_REPOSITORY: "", npm_package_workspaces_2: "d9-n3", npm_package_browserslist_development_0: "last 1 chrome version", PATH: "/tmp/yarn--1719479593967-0.3047933446379356:/home/runner/work/rainbow-d9/rainbow-d9/d9-sample-cra/node_modules/.bin:/home/runner/.config/yarn/link/node_modules/.bin:/home/runner/work/rainbow-d9/rainbow-d9/node_modules/.bin:/opt/hostedtoolcache/node/18.20.3/x64/libexec/lib/node_modules/npm/bin/node-gyp-bin:/opt/hostedtoolcache/node/18.20.3/x64/lib/node_modules/npm/bin/node-gyp-bin:/opt/hostedtoolcache/node/18.20.3/x64/bin/node_modules/npm/bin/node-gyp-bin:/tmp/yarn--1719479593780-0.8138567353525419:/home/runner/work/rainbow-d9/rainbow-d9/node_modules/.bin:/home/runner/.config/yarn/link/node_modules/.bin:/home/runner/work/rainbow-d9/rainbow-d9/node_modules/.bin:/opt/hostedtoolcache/node/18.20.3/x64/libexec/lib/node_modules/npm/bin/node-gyp-bin:/opt/hostedtoolcache/node/18.20.3/x64/lib/node_modules/npm/bin/node-gyp-bin:/opt/hostedtoolcache/node/18.20.3/x64/bin/node_modules/npm/bin/node-gyp-bin:/opt/hostedtoolcache/node/18.20.3/x64/bin:/snap/bin:/home/runner/.local/bin:/opt/pipx_bin:/home/runner/.cargo/bin:/home/runner/.config/composer/vendor/bin:/usr/local/.ghcup/bin:/home/runner/.dotnet/tools:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin", NODE: "/opt/hostedtoolcache/node/18.20.3/x64/bin/node", ANT_HOME: "/usr/share/ant", DOTNET_MULTILEVEL_LOOKUP: "0", RUNNER_TRACKING_ID: "github_d2c2ea4f-7a6c-4ab2-9a0a-6c22a315cfd0", INVOCATION_ID: "143f24d6d41e424c87c3592c73880763", RUNNER_TOOL_CACHE: "/opt/hostedtoolcache", npm_package_name: "@rainbow-d9/sample-cra", npm_package_workspaces_3: "d9-n5", npm_package_browserslist_development_1: "last 1 firefox version", npm_package_repository_type: "git", npm_package_dependencies__types_react_syntax_highlighter: "^15.5.11", npm_package_dependencies__rainbow_d9_thai_plan_selection: "1.1.33", GITHUB_ACTION: "__run_5", GITHUB_RUN_NUMBER: "130", GITHUB_TRIGGERING_ACTOR: "bradwoo8621", RUNNER_ARCH: "X64", XDG_RUNTIME_DIR: "/run/user/1001", AGENT_TOOLSDIRECTORY: "/opt/hostedtoolcache", npm_package_scripts_build_thai_plan_selection: "cd ./d9-thai-plan-selection && yarn build", npm_package_workspaces_4: "d9-n6", npm_package_browserslist_development_2: "last 1 safari version", npm_package_workspaces_5: "d9-echarts", LANG: "C.UTF-8", VCPKG_INSTALLATION_ROOT: "/usr/local/share/vcpkg", npm_package_workspaces_6: "d9-thai-plan-selection", npm_package_dependencies_react_dom: "^18.2.0", CONDA: "/usr/share/miniconda", RUNNER_NAME: "GitHub Actions 11", XDG_CONFIG_HOME: "/home/runner/.config", STATS_VMD: "true", GITHUB_REF_NAME: "r-1.1.34", GITHUB_REPOSITORY: "InsureMO/rainbow-d9", STATS_D_D: "true", npm_lifecycle_script: "vite build", npm_package_workspaces_7: "d9-sample-cra", npm_package_eslintConfig_extends_0: "react-app", npm_package_dependencies_vite_plugin_markdown: "^2.2.0", npm_package_dependencies_react_markdown: "9.0.1", npm_package_dependencies__types_node: "^20.5.3", STATS_UE: "true", ANDROID_NDK_ROOT: "/usr/local/lib/android/sdk/ndk/25.2.9519653", GITHUB_ACTION_REF: "", DEBIAN_FRONTEND: "noninteractive", npm_package_scripts_build_sample_cra_ci: "cd ./d9-sample-cra && yarn build", npm_config_version_git_message: "v%s", npm_package_eslintConfig_extends_1: "react-app/jest", GITHUB_REPOSITORY_ID: "704514093", GITHUB_ACTIONS: "true", npm_lifecycle_event: "build", npm_package_version: "1.1.33", npm_package_repository_url: "git+https://github.com/InsureMO/rainbow-d9.git", npm_package_dependencies__testing_library_jest_dom: "^5.17.0", GITHUB_REF_PROTECTED: "false", npm_config_argv: '{"remain":[],"cooked":["run","build-sample-cra"],"original":["build-sample-cra"]}', npm_package_volta_yarn: "1.22.21", npm_package_scripts_build: "vite build", npm_package_dependencies__testing_library_user_event: "^13.5.0", GITHUB_WORKSPACE: "/home/runner/work/rainbow-d9/rainbow-d9", ACCEPT_EULA: "Y", GITHUB_JOB: "create-sample-pages", RUNNER_PERFLOG: "/home/runner/perflog", npm_package_dependencies_vite: "^5.0.13", GITHUB_SHA: "83aa6ea2a008929028c2cfe9e1c9904b6accd8cc", GITHUB_RUN_ATTEMPT: "1", npm_config_version_git_tag: "true", npm_config_version_git_sign: "", GITHUB_REF: "refs/tags/r-1.1.34", GITHUB_ACTOR: "bradwoo8621", ANDROID_SDK_ROOT: "/usr/local/lib/android/sdk", npm_package_license: "MIT", npm_config_strict_ssl: "true", LEIN_HOME: "/usr/local/lib/lein", npm_package_scripts_build_n123: "yarn build-n1 && yarn build-n2 && yarn build-n3", GITHUB_PATH: "/home/runner/work/_temp/_runner_file_commands/add_path_a0465994-fc09-4154-bed6-eb7acd29e8d3", JAVA_HOME: "/usr/lib/jvm/temurin-11-jdk-amd64", PWD: "/home/runner/work/rainbow-d9/rainbow-d9/d9-sample-cra", GITHUB_ACTOR_ID: "2330098", RUNNER_WORKSPACE: "/home/runner/work/rainbow-d9", npm_execpath: "/opt/hostedtoolcache/node/18.20.3/x64/lib/node_modules/yarn/bin/yarn.js", npm_package_scripts_build_all_ci: "yarn build-n123-ci && yarn build-n5-ci && yarn build-n6-ci && yarn build-echarts-ci && yarn build-thai-all-ci", HOMEBREW_CLEANUP_PERIODIC_FULL_DAYS: "3650", GITHUB_EVENT_NAME: "push", HOMEBREW_NO_AUTO_UPDATE: "1", ANDROID_HOME: "/usr/local/lib/android/sdk", GITHUB_SERVER_URL: "https://github.com", GECKOWEBDRIVER: "/usr/local/share/gecko_driver", LEIN_JAR: "/usr/local/lib/lein/self-installs/leiningen-2.11.2-standalone.jar", GHCUP_INSTALL_BASE_PREFIX: "/usr/local", GITHUB_OUTPUT: "/home/runner/work/_temp/_runner_file_commands/set_output_a0465994-fc09-4154-bed6-eb7acd29e8d3", npm_package_author_name: "Rainbow Team", EDGEWEBDRIVER: "/usr/local/share/edge_driver", STATS_EXT: "true", npm_package_scripts_build_n1_ci: "cd ./d9-n1 && yarn build-ci", npm_config_save_prefix: "^", npm_config_ignore_optional: "", ANDROID_NDK: "/usr/local/lib/android/sdk/ndk/25.2.9519653", SGX_AESM_ADDR: "1", CHROME_BIN: "/usr/bin/google-chrome", npm_package_scripts_build_n2_ci: "cd ./d9-n2 && yarn build-ci", npm_package_scripts_deploy: "gh-pages -d build", npm_package_scripts_preview: "vite preview", SELENIUM_JAR_PATH: "/usr/share/java/selenium-server.jar", STATS_EXTP: "https://provjobdsettingscdn.blob.core.windows.net/settings/provjobdsettings-0.5.181+6/provjobd.data", npm_package_scripts_build_echarts_ci: "cd ./d9-echarts && yarn build-ci", npm_package_scripts_build_n3_ci: "cd ./d9-n3 && yarn build-ci", npm_package_dependencies_web_vitals: "^2.1.4", npm_package_dependencies_typescript: "^5.1.6", INIT_CWD: "/home/runner/work/rainbow-d9/rainbow-d9", ANDROID_NDK_HOME: "/usr/local/lib/android/sdk/ndk/25.2.9519653", GITHUB_STEP_SUMMARY: "/home/runner/work/_temp/_runner_file_commands/step_summary_a0465994-fc09-4154-bed6-eb7acd29e8d3", npm_package_dependencies_react: "^18.2.0", npm_package_dependencies__types_react_dom: "^18.2.7", NODE_ENV: "production" };
+var define_process_env_default = { GITHUB_STATE: "/home/runner/work/_temp/_runner_file_commands/save_state_9b4fd887-ea09-4182-b8cf-83faba097b76", npm_package_scripts_build_n5_ci: "cd ./d9-n5 && yarn build-ci", npm_package_scripts_build_sample_cra: "cd ./d9-sample-cra && yarn build", STATS_TRP: "true", DEPLOYMENT_BASEPATH: "/opt/runner", DOTNET_NOLOGO: "1", npm_package_scripts_build_n6_ci: "cd ./d9-n6 && yarn build-ci", npm_package_dependencies__vitejs_plugin_react: "^4.2.1", USER: "runner", npm_config_version_commit_hooks: "true", npm_config_user_agent: "yarn/1.22.21 npm/? node/v18.20.3 linux x64", npm_package_dependencies__types_jest: "^29.5.4", CI: "true", npm_config_bin_links: "true", npm_package_bugs_url: "https://github.com/InsureMO/rainbow-d9/issues", npm_config_wrap_output: "", RUNNER_ENVIRONMENT: "github-hosted", GITHUB_ENV: "/home/runner/work/_temp/_runner_file_commands/set_env_9b4fd887-ea09-4182-b8cf-83faba097b76", PIPX_HOME: "/opt/pipx", npm_node_execpath: "/opt/hostedtoolcache/node/18.20.3/x64/bin/node", npm_package_scripts_build_thai_all_ci: "yarn build-thai-plan-selection-ci", npm_config_init_version: "1.0.0", npm_package_devDependencies_gh_pages: "^6.1.1", npm_package_dependencies__babel_plugin_proposal_private_property_in_object: "^7.21.11", JAVA_HOME_8_X64: "/usr/lib/jvm/temurin-8-jdk-amd64", SHLVL: "1", HOME: "/home/runner", OLDPWD: "/home/runner/work/rainbow-d9/rainbow-d9", npm_package_browserslist_production_0: ">0.2%", RUNNER_TEMP: "/home/runner/work/_temp", GITHUB_EVENT_PATH: "/home/runner/work/_temp/_github_workflow/event.json", npm_package_scripts_build_all: "yarn build-n123 && yarn build-n5 && yarn build-n6 && yarn build-echarts && yarn build-thai-all", npm_package_browserslist_production_1: "not dead", npm_package_dependencies_react_syntax_highlighter: "^15.5.0", JAVA_HOME_11_X64: "/usr/lib/jvm/temurin-11-jdk-amd64", PIPX_BIN_DIR: "/opt/pipx_bin", GITHUB_REPOSITORY_OWNER: "InsureMO", npm_package_volta_node: "22.2.0", npm_config_init_license: "MIT", npm_package_browserslist_production_2: "not op_mini all", GRADLE_HOME: "/usr/share/gradle-8.8", ANDROID_NDK_LATEST_HOME: "/usr/local/lib/android/sdk/ndk/26.3.11579264", JAVA_HOME_21_X64: "/usr/lib/jvm/temurin-21-jdk-amd64", STATS_RDCL: "true", GITHUB_RETENTION_DAYS: "90", YARN_WRAP_OUTPUT: "false", npm_package_scripts_build_thai_plan_selection_ci: "cd ./d9-thai-plan-selection && yarn build-ci", npm_package_scripts_build_n1: "cd ./d9-n1 && yarn build", npm_config_version_tag_prefix: "v", npm_package_dependencies__rainbow_d9_n2: "1.1.34", GITHUB_REPOSITORY_OWNER_ID: "38915232", POWERSHELL_DISTRIBUTION_CHANNEL: "GitHub-Actions-ubuntu22", AZURE_EXTENSION_DIR: "/opt/az/azcliextensions", GITHUB_HEAD_REF: "", npm_package_scripts_build_n2: "cd ./d9-n2 && yarn build", npm_package_dependencies__types_styled_components: "^5.1.34", npm_package_dependencies__rainbow_d9_n3: "1.1.34", npm_package_dependencies__rainbow_d9_echarts: "1.1.34", SYSTEMD_EXEC_PID: "597", npm_package_scripts_build_echarts: "cd ./d9-echarts && yarn build", npm_package_scripts_build_n3: "cd ./d9-n3 && yarn build", GITHUB_GRAPHQL_URL: "https://api.github.com/graphql", npm_package_description: "Assume the following envs are ready, otherwise contact the tech guy.", npm_package_scripts_predeploy: "npm run build", npm_package_dependencies__rainbow_d9_n5: "1.1.34", GOROOT_1_20_X64: "/opt/hostedtoolcache/go/1.20.14/x64", NVM_DIR: "/home/runner/.nvm", npm_package_readmeFilename: "README.md", npm_package_scripts_build_n5: "cd ./d9-n5 && yarn build", npm_package_dependencies__types_react: "^18.2.21", npm_package_dependencies__testing_library_react: "^13.4.0", npm_package_dependencies__rainbow_d9_n6: "1.1.34", DOTNET_SKIP_FIRST_TIME_EXPERIENCE: "1", GOROOT_1_21_X64: "/opt/hostedtoolcache/go/1.21.11/x64", JAVA_HOME_17_X64: "/usr/lib/jvm/temurin-17-jdk-amd64", ImageVersion: "20240630.1.0", npm_package_scripts_build_n6: "cd ./d9-n6 && yarn build", RUNNER_OS: "Linux", GITHUB_API_URL: "https://api.github.com", GOROOT_1_22_X64: "/opt/hostedtoolcache/go/1.22.4/x64", SWIFT_PATH: "/usr/share/swift/usr/bin", RUNNER_USER: "runner", STATS_V3PS: "true", CHROMEWEBDRIVER: "/usr/local/share/chromedriver-linux64", JOURNAL_STREAM: "8:20545", GITHUB_WORKFLOW: "Publish to NPM", _: "/opt/hostedtoolcache/node/18.20.3/x64/bin/yarn", npm_package_private: "true", npm_package_dependencies_remark_gfm: "4.0.0", npm_package_scripts_build_thai_all: "yarn build-thai-plan-selection", npm_config_registry: "https://registry.yarnpkg.com", ACTIONS_RUNNER_ACTION_ARCHIVE_CACHE: "/opt/actionarchivecache", STATS_D: "true", GITHUB_RUN_ID: "9797749467", STATS_VMFE: "true", npm_package_workspaces_0: "d9-n1", GITHUB_REF_TYPE: "tag", BOOTSTRAP_HASKELL_NONINTERACTIVE: "1", GITHUB_WORKFLOW_SHA: "e2c4cf2a1ce9975ecf7c7346fb5af0db88f625d3", GITHUB_BASE_REF: "", ImageOS: "ubuntu22", npm_package_scripts_build_n123_ci: "yarn build-n1-ci && yarn build-n2-ci && yarn build-n3-ci", npm_package_workspaces_1: "d9-n2", npm_config_ignore_scripts: "", npm_package_scripts_start: "vite", npm_package_dependencies_github_markdown_css: "^5.5.0", GITHUB_WORKFLOW_REF: "InsureMO/rainbow-d9/.github/workflows/release.yml@refs/tags/r-1.1.35", PERFLOG_LOCATION_SETTING: "RUNNER_PERFLOG", GITHUB_ACTION_REPOSITORY: "", npm_package_workspaces_2: "d9-n3", npm_package_browserslist_development_0: "last 1 chrome version", PATH: "/tmp/yarn--1720112252974-0.9822278815302088:/home/runner/work/rainbow-d9/rainbow-d9/d9-sample-cra/node_modules/.bin:/home/runner/.config/yarn/link/node_modules/.bin:/home/runner/work/rainbow-d9/rainbow-d9/node_modules/.bin:/opt/hostedtoolcache/node/18.20.3/x64/libexec/lib/node_modules/npm/bin/node-gyp-bin:/opt/hostedtoolcache/node/18.20.3/x64/lib/node_modules/npm/bin/node-gyp-bin:/opt/hostedtoolcache/node/18.20.3/x64/bin/node_modules/npm/bin/node-gyp-bin:/tmp/yarn--1720112252787-0.33368271244166325:/home/runner/work/rainbow-d9/rainbow-d9/node_modules/.bin:/home/runner/.config/yarn/link/node_modules/.bin:/home/runner/work/rainbow-d9/rainbow-d9/node_modules/.bin:/opt/hostedtoolcache/node/18.20.3/x64/libexec/lib/node_modules/npm/bin/node-gyp-bin:/opt/hostedtoolcache/node/18.20.3/x64/lib/node_modules/npm/bin/node-gyp-bin:/opt/hostedtoolcache/node/18.20.3/x64/bin/node_modules/npm/bin/node-gyp-bin:/opt/hostedtoolcache/node/18.20.3/x64/bin:/snap/bin:/home/runner/.local/bin:/opt/pipx_bin:/home/runner/.cargo/bin:/home/runner/.config/composer/vendor/bin:/usr/local/.ghcup/bin:/home/runner/.dotnet/tools:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin", NODE: "/opt/hostedtoolcache/node/18.20.3/x64/bin/node", ANT_HOME: "/usr/share/ant", DOTNET_MULTILEVEL_LOOKUP: "0", RUNNER_TRACKING_ID: "github_ea3ba2b5-53ed-4649-9453-84b3b29d5895", INVOCATION_ID: "8b38d69cab0a41c4b557e084ebf730c9", RUNNER_TOOL_CACHE: "/opt/hostedtoolcache", npm_package_name: "@rainbow-d9/sample-cra", npm_package_workspaces_3: "d9-n5", npm_package_browserslist_development_1: "last 1 firefox version", npm_package_repository_type: "git", npm_package_dependencies__types_react_syntax_highlighter: "^15.5.11", npm_package_dependencies__rainbow_d9_thai_plan_selection: "1.1.34", GITHUB_ACTION: "__run_5", GITHUB_RUN_NUMBER: "131", GITHUB_TRIGGERING_ACTOR: "bradwoo8621", RUNNER_ARCH: "X64", XDG_RUNTIME_DIR: "/run/user/1001", AGENT_TOOLSDIRECTORY: "/opt/hostedtoolcache", npm_package_scripts_build_thai_plan_selection: "cd ./d9-thai-plan-selection && yarn build", npm_package_workspaces_4: "d9-n6", npm_package_browserslist_development_2: "last 1 safari version", npm_package_workspaces_5: "d9-echarts", LANG: "C.UTF-8", VCPKG_INSTALLATION_ROOT: "/usr/local/share/vcpkg", npm_package_workspaces_6: "d9-thai-plan-selection", npm_package_dependencies_react_dom: "^18.2.0", CONDA: "/usr/share/miniconda", RUNNER_NAME: "GitHub Actions 1", XDG_CONFIG_HOME: "/home/runner/.config", STATS_VMD: "true", GITHUB_REF_NAME: "r-1.1.35", GITHUB_REPOSITORY: "InsureMO/rainbow-d9", STATS_D_D: "true", npm_lifecycle_script: "vite build", npm_package_workspaces_7: "d9-sample-cra", npm_package_eslintConfig_extends_0: "react-app", npm_package_dependencies_vite_plugin_markdown: "^2.2.0", npm_package_dependencies_react_markdown: "9.0.1", npm_package_dependencies__types_node: "^20.5.3", STATS_UE: "true", ANDROID_NDK_ROOT: "/usr/local/lib/android/sdk/ndk/25.2.9519653", GITHUB_ACTION_REF: "", DEBIAN_FRONTEND: "noninteractive", npm_package_scripts_build_sample_cra_ci: "cd ./d9-sample-cra && yarn build", npm_config_version_git_message: "v%s", npm_package_eslintConfig_extends_1: "react-app/jest", GITHUB_REPOSITORY_ID: "704514093", GITHUB_ACTIONS: "true", npm_lifecycle_event: "build", npm_package_version: "1.1.34", npm_package_repository_url: "git+https://github.com/InsureMO/rainbow-d9.git", npm_package_dependencies__testing_library_jest_dom: "^5.17.0", GITHUB_REF_PROTECTED: "false", npm_config_argv: '{"remain":[],"cooked":["run","build-sample-cra"],"original":["build-sample-cra"]}', npm_package_volta_yarn: "1.22.21", npm_package_scripts_build: "vite build", npm_package_dependencies__testing_library_user_event: "^13.5.0", GITHUB_WORKSPACE: "/home/runner/work/rainbow-d9/rainbow-d9", ACCEPT_EULA: "Y", GITHUB_JOB: "create-sample-pages", RUNNER_PERFLOG: "/home/runner/perflog", npm_package_dependencies_vite: "^5.0.13", GITHUB_SHA: "e2c4cf2a1ce9975ecf7c7346fb5af0db88f625d3", GITHUB_RUN_ATTEMPT: "1", npm_config_version_git_tag: "true", npm_config_version_git_sign: "", GITHUB_REF: "refs/tags/r-1.1.35", GITHUB_ACTOR: "bradwoo8621", ANDROID_SDK_ROOT: "/usr/local/lib/android/sdk", npm_package_license: "MIT", npm_config_strict_ssl: "true", LEIN_HOME: "/usr/local/lib/lein", npm_package_scripts_build_n123: "yarn build-n1 && yarn build-n2 && yarn build-n3", GITHUB_PATH: "/home/runner/work/_temp/_runner_file_commands/add_path_9b4fd887-ea09-4182-b8cf-83faba097b76", JAVA_HOME: "/usr/lib/jvm/temurin-11-jdk-amd64", PWD: "/home/runner/work/rainbow-d9/rainbow-d9/d9-sample-cra", GITHUB_ACTOR_ID: "2330098", RUNNER_WORKSPACE: "/home/runner/work/rainbow-d9", npm_execpath: "/opt/hostedtoolcache/node/18.20.3/x64/lib/node_modules/yarn/bin/yarn.js", npm_package_scripts_build_all_ci: "yarn build-n123-ci && yarn build-n5-ci && yarn build-n6-ci && yarn build-echarts-ci && yarn build-thai-all-ci", HOMEBREW_CLEANUP_PERIODIC_FULL_DAYS: "3650", GITHUB_EVENT_NAME: "push", HOMEBREW_NO_AUTO_UPDATE: "1", ANDROID_HOME: "/usr/local/lib/android/sdk", GITHUB_SERVER_URL: "https://github.com", GECKOWEBDRIVER: "/usr/local/share/gecko_driver", LEIN_JAR: "/usr/local/lib/lein/self-installs/leiningen-2.11.2-standalone.jar", GHCUP_INSTALL_BASE_PREFIX: "/usr/local", GITHUB_OUTPUT: "/home/runner/work/_temp/_runner_file_commands/set_output_9b4fd887-ea09-4182-b8cf-83faba097b76", npm_package_author_name: "Rainbow Team", EDGEWEBDRIVER: "/usr/local/share/edge_driver", STATS_EXT: "true", npm_package_scripts_build_n1_ci: "cd ./d9-n1 && yarn build-ci", npm_config_save_prefix: "^", npm_config_ignore_optional: "", ANDROID_NDK: "/usr/local/lib/android/sdk/ndk/25.2.9519653", SGX_AESM_ADDR: "1", CHROME_BIN: "/usr/bin/google-chrome", npm_package_scripts_build_n2_ci: "cd ./d9-n2 && yarn build-ci", npm_package_scripts_deploy: "gh-pages -d build", npm_package_scripts_preview: "vite preview", SELENIUM_JAR_PATH: "/usr/share/java/selenium-server.jar", STATS_EXTP: "https://provjobdsettingscdn.blob.core.windows.net/settings/provjobdsettings-0.5.181+6/provjobd.data", npm_package_scripts_build_echarts_ci: "cd ./d9-echarts && yarn build-ci", npm_package_scripts_build_n3_ci: "cd ./d9-n3 && yarn build-ci", npm_package_dependencies_web_vitals: "^2.1.4", npm_package_dependencies_typescript: "^5.1.6", INIT_CWD: "/home/runner/work/rainbow-d9/rainbow-d9", ANDROID_NDK_HOME: "/usr/local/lib/android/sdk/ndk/25.2.9519653", GITHUB_STEP_SUMMARY: "/home/runner/work/_temp/_runner_file_commands/step_summary_9b4fd887-ea09-4182-b8cf-83faba097b76", npm_package_dependencies_react: "^18.2.0", npm_package_dependencies__types_react_dom: "^18.2.7", NODE_ENV: "production" };
 let Stack$4 = class Stack {
   /**
   @internal
@@ -52764,6 +52764,598 @@ var version = "0.8.5";
   },
   version
 });
+var domToImage = { exports: {} };
+(function(module) {
+  (function(global2) {
+    var util2 = newUtil();
+    var inliner = newInliner();
+    var fontFaces = newFontFaces();
+    var images = newImages();
+    var defaultOptions = {
+      // Default is to fail on error, no placeholder
+      imagePlaceholder: void 0,
+      // Default cache bust is false, it will use the cache
+      cacheBust: false
+    };
+    var domtoimage = {
+      toSvg,
+      toPng,
+      toJpeg,
+      toBlob,
+      toPixelData,
+      impl: {
+        fontFaces,
+        images,
+        util: util2,
+        inliner,
+        options: {}
+      }
+    };
+    module.exports = domtoimage;
+    function toSvg(node2, options) {
+      options = options || {};
+      copyOptions(options);
+      return Promise.resolve(node2).then(function(node3) {
+        return cloneNode(node3, options.filter, true);
+      }).then(embedFonts).then(inlineImages).then(applyOptions).then(function(clone) {
+        return makeSvgDataUri(
+          clone,
+          options.width || util2.width(node2),
+          options.height || util2.height(node2)
+        );
+      });
+      function applyOptions(clone) {
+        if (options.bgcolor)
+          clone.style.backgroundColor = options.bgcolor;
+        if (options.width)
+          clone.style.width = options.width + "px";
+        if (options.height)
+          clone.style.height = options.height + "px";
+        if (options.style)
+          Object.keys(options.style).forEach(function(property2) {
+            clone.style[property2] = options.style[property2];
+          });
+        return clone;
+      }
+    }
+    function toPixelData(node2, options) {
+      return draw(node2, options || {}).then(function(canvas) {
+        return canvas.getContext("2d").getImageData(
+          0,
+          0,
+          util2.width(node2),
+          util2.height(node2)
+        ).data;
+      });
+    }
+    function toPng(node2, options) {
+      return draw(node2, options || {}).then(function(canvas) {
+        return canvas.toDataURL();
+      });
+    }
+    function toJpeg(node2, options) {
+      options = options || {};
+      return draw(node2, options).then(function(canvas) {
+        return canvas.toDataURL("image/jpeg", options.quality || 1);
+      });
+    }
+    function toBlob(node2, options) {
+      return draw(node2, options || {}).then(util2.canvasToBlob);
+    }
+    function copyOptions(options) {
+      if (typeof options.imagePlaceholder === "undefined") {
+        domtoimage.impl.options.imagePlaceholder = defaultOptions.imagePlaceholder;
+      } else {
+        domtoimage.impl.options.imagePlaceholder = options.imagePlaceholder;
+      }
+      if (typeof options.cacheBust === "undefined") {
+        domtoimage.impl.options.cacheBust = defaultOptions.cacheBust;
+      } else {
+        domtoimage.impl.options.cacheBust = options.cacheBust;
+      }
+    }
+    function draw(domNode, options) {
+      return toSvg(domNode, options).then(util2.makeImage).then(util2.delay(100)).then(function(image) {
+        var canvas = newCanvas(domNode);
+        canvas.getContext("2d").drawImage(image, 0, 0);
+        return canvas;
+      });
+      function newCanvas(domNode2) {
+        var canvas = document.createElement("canvas");
+        canvas.width = options.width || util2.width(domNode2);
+        canvas.height = options.height || util2.height(domNode2);
+        if (options.bgcolor) {
+          var ctx = canvas.getContext("2d");
+          ctx.fillStyle = options.bgcolor;
+          ctx.fillRect(0, 0, canvas.width, canvas.height);
+        }
+        return canvas;
+      }
+    }
+    function cloneNode(node2, filter2, root2) {
+      if (!root2 && filter2 && !filter2(node2))
+        return Promise.resolve();
+      return Promise.resolve(node2).then(makeNodeCopy).then(function(clone) {
+        return cloneChildren(node2, clone, filter2);
+      }).then(function(clone) {
+        return processClone(node2, clone);
+      });
+      function makeNodeCopy(node3) {
+        if (node3 instanceof HTMLCanvasElement)
+          return util2.makeImage(node3.toDataURL());
+        return node3.cloneNode(false);
+      }
+      function cloneChildren(original, clone, filter3) {
+        var children = original.childNodes;
+        if (children.length === 0)
+          return Promise.resolve(clone);
+        return cloneChildrenInOrder(clone, util2.asArray(children), filter3).then(function() {
+          return clone;
+        });
+        function cloneChildrenInOrder(parent, children2, filter4) {
+          var done = Promise.resolve();
+          children2.forEach(function(child) {
+            done = done.then(function() {
+              return cloneNode(child, filter4);
+            }).then(function(childClone) {
+              if (childClone)
+                parent.appendChild(childClone);
+            });
+          });
+          return done;
+        }
+      }
+      function processClone(original, clone) {
+        if (!(clone instanceof Element))
+          return clone;
+        return Promise.resolve().then(cloneStyle).then(clonePseudoElements).then(copyUserInput).then(fixSvg).then(function() {
+          return clone;
+        });
+        function cloneStyle() {
+          copyStyle(window.getComputedStyle(original), clone.style);
+          function copyStyle(source, target) {
+            if (source.cssText)
+              target.cssText = source.cssText;
+            else
+              copyProperties(source, target);
+            function copyProperties(source2, target2) {
+              util2.asArray(source2).forEach(function(name2) {
+                target2.setProperty(
+                  name2,
+                  source2.getPropertyValue(name2),
+                  source2.getPropertyPriority(name2)
+                );
+              });
+            }
+          }
+        }
+        function clonePseudoElements() {
+          [":before", ":after"].forEach(function(element2) {
+            clonePseudoElement(element2);
+          });
+          function clonePseudoElement(element2) {
+            var style = window.getComputedStyle(original, element2);
+            var content2 = style.getPropertyValue("content");
+            if (content2 === "" || content2 === "none")
+              return;
+            var className = util2.uid();
+            clone.className = clone.className + " " + className;
+            var styleElement = document.createElement("style");
+            styleElement.appendChild(formatPseudoElementStyle(className, element2, style));
+            clone.appendChild(styleElement);
+            function formatPseudoElementStyle(className2, element3, style2) {
+              var selector = "." + className2 + ":" + element3;
+              var cssText = style2.cssText ? formatCssText(style2) : formatCssProperties(style2);
+              return document.createTextNode(selector + "{" + cssText + "}");
+              function formatCssText(style3) {
+                var content3 = style3.getPropertyValue("content");
+                return style3.cssText + " content: " + content3 + ";";
+              }
+              function formatCssProperties(style3) {
+                return util2.asArray(style3).map(formatProperty).join("; ") + ";";
+                function formatProperty(name2) {
+                  return name2 + ": " + style3.getPropertyValue(name2) + (style3.getPropertyPriority(name2) ? " !important" : "");
+                }
+              }
+            }
+          }
+        }
+        function copyUserInput() {
+          if (original instanceof HTMLTextAreaElement)
+            clone.innerHTML = original.value;
+          if (original instanceof HTMLInputElement)
+            clone.setAttribute("value", original.value);
+        }
+        function fixSvg() {
+          if (!(clone instanceof SVGElement))
+            return;
+          clone.setAttribute("xmlns", "http://www.w3.org/2000/svg");
+          if (!(clone instanceof SVGRectElement))
+            return;
+          ["width", "height"].forEach(function(attribute) {
+            var value = clone.getAttribute(attribute);
+            if (!value)
+              return;
+            clone.style.setProperty(attribute, value);
+          });
+        }
+      }
+    }
+    function embedFonts(node2) {
+      return fontFaces.resolveAll().then(function(cssText) {
+        var styleNode = document.createElement("style");
+        node2.appendChild(styleNode);
+        styleNode.appendChild(document.createTextNode(cssText));
+        return node2;
+      });
+    }
+    function inlineImages(node2) {
+      return images.inlineAll(node2).then(function() {
+        return node2;
+      });
+    }
+    function makeSvgDataUri(node2, width2, height) {
+      return Promise.resolve(node2).then(function(node3) {
+        node3.setAttribute("xmlns", "http://www.w3.org/1999/xhtml");
+        return new XMLSerializer().serializeToString(node3);
+      }).then(util2.escapeXhtml).then(function(xhtml) {
+        return '<foreignObject x="0" y="0" width="100%" height="100%">' + xhtml + "</foreignObject>";
+      }).then(function(foreignObject) {
+        return '<svg xmlns="http://www.w3.org/2000/svg" width="' + width2 + '" height="' + height + '">' + foreignObject + "</svg>";
+      }).then(function(svg2) {
+        return "data:image/svg+xml;charset=utf-8," + svg2;
+      });
+    }
+    function newUtil() {
+      return {
+        escape,
+        parseExtension,
+        mimeType,
+        dataAsUrl,
+        isDataUrl,
+        canvasToBlob,
+        resolveUrl,
+        getAndEncode,
+        uid: uid(),
+        delay,
+        asArray: asArray2,
+        escapeXhtml,
+        makeImage,
+        width: width2,
+        height
+      };
+      function mimes() {
+        var WOFF = "application/font-woff";
+        var JPEG = "image/jpeg";
+        return {
+          "woff": WOFF,
+          "woff2": WOFF,
+          "ttf": "application/font-truetype",
+          "eot": "application/vnd.ms-fontobject",
+          "png": "image/png",
+          "jpg": JPEG,
+          "jpeg": JPEG,
+          "gif": "image/gif",
+          "tiff": "image/tiff",
+          "svg": "image/svg+xml"
+        };
+      }
+      function parseExtension(url) {
+        var match2 = /\.([^\.\/]*?)$/g.exec(url);
+        if (match2)
+          return match2[1];
+        else
+          return "";
+      }
+      function mimeType(url) {
+        var extension = parseExtension(url).toLowerCase();
+        return mimes()[extension] || "";
+      }
+      function isDataUrl(url) {
+        return url.search(/^(data:)/) !== -1;
+      }
+      function toBlob2(canvas) {
+        return new Promise(function(resolve) {
+          var binaryString = window.atob(canvas.toDataURL().split(",")[1]);
+          var length2 = binaryString.length;
+          var binaryArray = new Uint8Array(length2);
+          for (var i2 = 0; i2 < length2; i2++)
+            binaryArray[i2] = binaryString.charCodeAt(i2);
+          resolve(new Blob([binaryArray], {
+            type: "image/png"
+          }));
+        });
+      }
+      function canvasToBlob(canvas) {
+        if (canvas.toBlob)
+          return new Promise(function(resolve) {
+            canvas.toBlob(resolve);
+          });
+        return toBlob2(canvas);
+      }
+      function resolveUrl(url, baseUrl) {
+        var doc2 = document.implementation.createHTMLDocument();
+        var base2 = doc2.createElement("base");
+        doc2.head.appendChild(base2);
+        var a2 = doc2.createElement("a");
+        doc2.body.appendChild(a2);
+        base2.href = baseUrl;
+        a2.href = url;
+        return a2.href;
+      }
+      function uid() {
+        var index2 = 0;
+        return function() {
+          return "u" + fourRandomChars() + index2++;
+          function fourRandomChars() {
+            return ("0000" + (Math.random() * Math.pow(36, 4) << 0).toString(36)).slice(-4);
+          }
+        };
+      }
+      function makeImage(uri) {
+        return new Promise(function(resolve, reject) {
+          var image = new Image();
+          image.onload = function() {
+            resolve(image);
+          };
+          image.onerror = reject;
+          image.src = uri;
+        });
+      }
+      function getAndEncode(url) {
+        var TIMEOUT = 3e4;
+        if (domtoimage.impl.options.cacheBust) {
+          url += (/\?/.test(url) ? "&" : "?") + (/* @__PURE__ */ new Date()).getTime();
+        }
+        return new Promise(function(resolve) {
+          var request = new XMLHttpRequest();
+          request.onreadystatechange = done;
+          request.ontimeout = timeout;
+          request.responseType = "blob";
+          request.timeout = TIMEOUT;
+          request.open("GET", url, true);
+          request.send();
+          var placeholder;
+          if (domtoimage.impl.options.imagePlaceholder) {
+            var split = domtoimage.impl.options.imagePlaceholder.split(/,/);
+            if (split && split[1]) {
+              placeholder = split[1];
+            }
+          }
+          function done() {
+            if (request.readyState !== 4)
+              return;
+            if (request.status !== 200) {
+              if (placeholder) {
+                resolve(placeholder);
+              } else {
+                fail("cannot fetch resource: " + url + ", status: " + request.status);
+              }
+              return;
+            }
+            var encoder = new FileReader();
+            encoder.onloadend = function() {
+              var content2 = encoder.result.split(/,/)[1];
+              resolve(content2);
+            };
+            encoder.readAsDataURL(request.response);
+          }
+          function timeout() {
+            if (placeholder) {
+              resolve(placeholder);
+            } else {
+              fail("timeout of " + TIMEOUT + "ms occured while fetching resource: " + url);
+            }
+          }
+          function fail(message) {
+            console.error(message);
+            resolve("");
+          }
+        });
+      }
+      function dataAsUrl(content2, type2) {
+        return "data:" + type2 + ";base64," + content2;
+      }
+      function escape(string2) {
+        return string2.replace(/([.*+?^${}()|\[\]\/\\])/g, "\\$1");
+      }
+      function delay(ms) {
+        return function(arg) {
+          return new Promise(function(resolve) {
+            setTimeout(function() {
+              resolve(arg);
+            }, ms);
+          });
+        };
+      }
+      function asArray2(arrayLike) {
+        var array = [];
+        var length2 = arrayLike.length;
+        for (var i2 = 0; i2 < length2; i2++)
+          array.push(arrayLike[i2]);
+        return array;
+      }
+      function escapeXhtml(string2) {
+        return string2.replace(/#/g, "%23").replace(/\n/g, "%0A");
+      }
+      function width2(node2) {
+        var leftBorder = px(node2, "border-left-width");
+        var rightBorder = px(node2, "border-right-width");
+        return node2.scrollWidth + leftBorder + rightBorder;
+      }
+      function height(node2) {
+        var topBorder = px(node2, "border-top-width");
+        var bottomBorder = px(node2, "border-bottom-width");
+        return node2.scrollHeight + topBorder + bottomBorder;
+      }
+      function px(node2, styleProperty) {
+        var value = window.getComputedStyle(node2).getPropertyValue(styleProperty);
+        return parseFloat(value.replace("px", ""));
+      }
+    }
+    function newInliner() {
+      var URL_REGEX = /url\(['"]?([^'"]+?)['"]?\)/g;
+      return {
+        inlineAll,
+        shouldProcess,
+        impl: {
+          readUrls,
+          inline
+        }
+      };
+      function shouldProcess(string2) {
+        return string2.search(URL_REGEX) !== -1;
+      }
+      function readUrls(string2) {
+        var result = [];
+        var match2;
+        while ((match2 = URL_REGEX.exec(string2)) !== null) {
+          result.push(match2[1]);
+        }
+        return result.filter(function(url) {
+          return !util2.isDataUrl(url);
+        });
+      }
+      function inline(string2, url, baseUrl, get2) {
+        return Promise.resolve(url).then(function(url2) {
+          return baseUrl ? util2.resolveUrl(url2, baseUrl) : url2;
+        }).then(get2 || util2.getAndEncode).then(function(data2) {
+          return util2.dataAsUrl(data2, util2.mimeType(url));
+        }).then(function(dataUrl) {
+          return string2.replace(urlAsRegex(url), "$1" + dataUrl + "$3");
+        });
+        function urlAsRegex(url2) {
+          return new RegExp(`(url\\(['"]?)(` + util2.escape(url2) + `)(['"]?\\))`, "g");
+        }
+      }
+      function inlineAll(string2, baseUrl, get2) {
+        if (nothingToInline())
+          return Promise.resolve(string2);
+        return Promise.resolve(string2).then(readUrls).then(function(urls) {
+          var done = Promise.resolve(string2);
+          urls.forEach(function(url) {
+            done = done.then(function(string3) {
+              return inline(string3, url, baseUrl, get2);
+            });
+          });
+          return done;
+        });
+        function nothingToInline() {
+          return !shouldProcess(string2);
+        }
+      }
+    }
+    function newFontFaces() {
+      return {
+        resolveAll,
+        impl: {
+          readAll
+        }
+      };
+      function resolveAll() {
+        return readAll().then(function(webFonts) {
+          return Promise.all(
+            webFonts.map(function(webFont) {
+              return webFont.resolve();
+            })
+          );
+        }).then(function(cssStrings) {
+          return cssStrings.join("\n");
+        });
+      }
+      function readAll() {
+        return Promise.resolve(util2.asArray(document.styleSheets)).then(getCssRules).then(selectWebFontRules).then(function(rules) {
+          return rules.map(newWebFont);
+        });
+        function selectWebFontRules(cssRules) {
+          return cssRules.filter(function(rule) {
+            return rule.type === CSSRule.FONT_FACE_RULE;
+          }).filter(function(rule) {
+            return inliner.shouldProcess(rule.style.getPropertyValue("src"));
+          });
+        }
+        function getCssRules(styleSheets) {
+          var cssRules = [];
+          styleSheets.forEach(function(sheet) {
+            try {
+              util2.asArray(sheet.cssRules || []).forEach(cssRules.push.bind(cssRules));
+            } catch (e2) {
+              console.log("Error while reading CSS rules from " + sheet.href, e2.toString());
+            }
+          });
+          return cssRules;
+        }
+        function newWebFont(webFontRule) {
+          return {
+            resolve: function resolve() {
+              var baseUrl = (webFontRule.parentStyleSheet || {}).href;
+              return inliner.inlineAll(webFontRule.cssText, baseUrl);
+            },
+            src: function() {
+              return webFontRule.style.getPropertyValue("src");
+            }
+          };
+        }
+      }
+    }
+    function newImages() {
+      return {
+        inlineAll,
+        impl: {
+          newImage
+        }
+      };
+      function newImage(element2) {
+        return {
+          inline
+        };
+        function inline(get2) {
+          if (util2.isDataUrl(element2.src))
+            return Promise.resolve();
+          return Promise.resolve(element2.src).then(get2 || util2.getAndEncode).then(function(data2) {
+            return util2.dataAsUrl(data2, util2.mimeType(element2.src));
+          }).then(function(dataUrl) {
+            return new Promise(function(resolve, reject) {
+              element2.onload = resolve;
+              element2.onerror = reject;
+              element2.src = dataUrl;
+            });
+          });
+        }
+      }
+      function inlineAll(node2) {
+        if (!(node2 instanceof Element))
+          return Promise.resolve(node2);
+        return inlineBackground(node2).then(function() {
+          if (node2 instanceof HTMLImageElement)
+            return newImage(node2).inline();
+          else
+            return Promise.all(
+              util2.asArray(node2.childNodes).map(function(child) {
+                return inlineAll(child);
+              })
+            );
+        });
+        function inlineBackground(node3) {
+          var background = node3.style.getPropertyValue("background");
+          if (!background)
+            return Promise.resolve(node3);
+          return inliner.inlineAll(background).then(function(inlined) {
+            node3.style.setProperty(
+              "background",
+              inlined,
+              node3.style.getPropertyPriority("background")
+            );
+          }).then(function() {
+            return node3;
+          });
+        }
+      }
+    }
+  })();
+})(domToImage);
+var domToImageExports = domToImage.exports;
+const dom2image = /* @__PURE__ */ getDefaultExportFromCjs(domToImageExports);
 var e, t, n, i, r = function(e2, t2) {
   return { name: e2, value: void 0 === t2 ? -1 : t2, delta: 0, entries: [], id: "v2-".concat(Date.now(), "-").concat(Math.floor(8999999999999 * Math.random()) + 1e12) };
 }, a = function(e2, t2) {
@@ -52920,7 +53512,7 @@ const webVitals = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.definePro
   getTTFB: P
 }, Symbol.toStringTag, { value: "Module" }));
 export {
-  _last as $,
+  _forEach as $,
   basicSetup as A,
   keymap as B,
   indentWithTab as C,
@@ -52937,79 +53529,80 @@ export {
   json$2 as N,
   jsonParseLinter as O,
   jsYaml as P,
-  schedulerExports as Q,
-  PropTypes as R,
-  IMask as S,
+  dom2image as Q,
+  schedulerExports as R,
+  PropTypes as S,
   Tag as T,
-  _keys as U,
+  IMask as U,
   ViewPlugin as V,
   WidgetType as W,
-  _filter as X,
-  _isEqual as Y,
-  _forEach as Z,
+  _keys as X,
+  _filter as Y,
+  _isEqual as Z,
   _values as _,
   color$1 as a,
-  Point as a0,
-  _debounce as a1,
-  _cloneDeep as a2,
-  _flatMap as a3,
-  _map as a4,
-  Rectangle as a5,
-  middleware as a6,
-  RULESET as a7,
-  combine as a8,
-  KEYFRAMES as a9,
-  boundingBoxFromPoints as aA,
-  _slice as aB,
-  _some as aC,
-  index as aD,
-  _isFinite$1 as aE,
-  _size as aF,
-  boundingBoxFromPolygons as aG,
-  BezierCurve as aH,
-  pathfinding as aI,
-  _first as aJ,
-  _concat as aK,
-  _get as aL,
-  _minBy as aM,
-  _maxBy as aN,
-  _defer as aO,
-  _range as aP,
-  Path as aQ,
-  _reduce as aR,
-  unified as aS,
-  VFile as aT,
-  unreachable as aU,
-  toJsxRuntime as aV,
-  urlAttributes as aW,
-  parseEntities_1 as aX,
-  webVitals as aY,
-  serialize as aa,
-  copy as ab,
-  replace as ac,
-  DECLARATION as ad,
-  stringify as ae,
-  rulesheet as af,
-  compile as ag,
-  hash as ah,
-  charat as ai,
-  WEBKIT as aj,
-  MS as ak,
-  strlen as al,
-  indexof as am,
-  MOZ as an,
-  match as ao,
-  dealloc as ap,
-  alloc as aq,
-  next as ar,
-  token as as,
-  from as at,
-  peek as au,
-  delimit as av,
-  slice$1 as aw,
-  position$2 as ax,
-  _mapValues as ay,
-  _intersection as az,
+  _last as a0,
+  Point as a1,
+  _debounce as a2,
+  _cloneDeep as a3,
+  _flatMap as a4,
+  _map as a5,
+  Rectangle as a6,
+  middleware as a7,
+  RULESET as a8,
+  combine as a9,
+  _intersection as aA,
+  boundingBoxFromPoints as aB,
+  _slice as aC,
+  _some as aD,
+  index as aE,
+  _isFinite$1 as aF,
+  _size as aG,
+  boundingBoxFromPolygons as aH,
+  BezierCurve as aI,
+  pathfinding as aJ,
+  _first as aK,
+  _concat as aL,
+  _get as aM,
+  _minBy as aN,
+  _maxBy as aO,
+  _defer as aP,
+  _range as aQ,
+  Path as aR,
+  _reduce as aS,
+  unified as aT,
+  VFile as aU,
+  unreachable as aV,
+  toJsxRuntime as aW,
+  urlAttributes as aX,
+  parseEntities_1 as aY,
+  webVitals as aZ,
+  KEYFRAMES as aa,
+  serialize as ab,
+  copy as ac,
+  replace as ad,
+  DECLARATION as ae,
+  stringify as af,
+  rulesheet as ag,
+  compile as ah,
+  hash as ai,
+  charat as aj,
+  WEBKIT as ak,
+  MS as al,
+  strlen as am,
+  indexof as an,
+  MOZ as ao,
+  match as ap,
+  dealloc as aq,
+  alloc as ar,
+  next as as,
+  token as at,
+  from as au,
+  peek as av,
+  delimit as aw,
+  slice$1 as ax,
+  position$2 as ay,
+  _mapValues as az,
   buffer as b,
   ccount as c,
   decodeNamedCharacterReference as d,

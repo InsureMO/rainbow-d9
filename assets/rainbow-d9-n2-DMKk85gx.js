@@ -4,9 +4,9 @@ var __publicField = (obj, key, value) => {
   __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
   return value;
 };
-import { a as color, M as MaskedNumber, e as MaskedDate, g as MaskedFunction, j as MaskedPattern, k as MaskedRange, p as MaskedRegExp, q as MaskedDynamic } from "./vendor-MZyh1u1d.js";
-import { R as React, r as reactExports, q as qe, W as We, u as useIMask } from "./react-base-8-0nj6j8.js";
-import { c as createLogger, V as VUtils, P as PPUtils, r as registerWidget, a as useThrottler, u as useRootEventBus, M as MUtils, N as NUtils, d as Wrapper, e as useForceUpdate, f as MBUtils, b as useWrapperEventBus, W as WrapperEventTypes, g as useCreateEventBus, h as PROPERTY_PATH_ME, i as useDefaultAttributeValues, j as useAttributesWatch, R as RootEventTypes } from "./rainbow-d9-n1-OB1df9sy.js";
+import { a as color, M as MaskedNumber, e as MaskedDate, g as MaskedFunction, j as MaskedPattern, k as MaskedRange, p as MaskedRegExp, q as MaskedDynamic } from "./vendor-x3SPvJVy.js";
+import { R as React, r as reactExports, q as qe, W as We, u as useIMask } from "./react-base-RoI39byt.js";
+import { c as createLogger, V as VUtils, P as PPUtils, r as registerWidget, a as useThrottler, u as useRootEventBus, M as MUtils, N as NUtils, d as Wrapper, e as useForceUpdate, f as MBUtils, b as useWrapperEventBus, W as WrapperEventTypes, g as useCreateEventBus, h as PROPERTY_PATH_ME, i as useDefaultAttributeValues, j as useAttributesWatch, R as RootEventTypes } from "./rainbow-d9-n1-u2JbSDNy.js";
 import { d as dayjs } from "./dayjs-9WAo-H7j.js";
 const DOM_KEY_WIDGET = "data-w";
 const DOM_ID_WIDGET = "data-wid";
@@ -1509,6 +1509,10 @@ const notInMe = (me, target) => {
   }
   return true;
 };
+const collapseFixedThingDebug = { enabled: false };
+const switchCollapseFixedThingDebug = (enabled = false) => {
+  collapseFixedThingDebug.enabled = enabled;
+};
 const useCollapseFixedThing = (options) => {
   const { containerRef, visible = true, hide, events = ["scroll", "focus", "click"] } = options;
   reactExports.useEffect(() => {
@@ -1516,20 +1520,29 @@ const useCollapseFixedThing = (options) => {
       return;
     }
     const collapse = (event) => {
-      if (containerRef == null || containerRef.current == null) {
-        return;
-      }
-      if (notInMe(containerRef.current, event.target)) {
+      if ((containerRef == null ? void 0 : containerRef.current) != null && notInMe(containerRef.current, event.target)) {
         hide();
       }
     };
     events.forEach((event) => {
       window.addEventListener(event, collapse, true);
     });
+    const collapseOnBlur = () => {
+      setTimeout(() => {
+        const node = document.querySelector(":focus");
+        if (node == null || (containerRef == null ? void 0 : containerRef.current) != null && notInMe(containerRef.current, node)) {
+          hide();
+        }
+      }, 10);
+    };
+    if (!collapseFixedThingDebug.enabled) {
+      window.addEventListener("blur", collapseOnBlur, true);
+    }
     return () => {
       events.forEach((event) => {
         window.removeEventListener(event, collapse, true);
       });
+      window.removeEventListener("blur", collapseOnBlur, true);
     };
   }, [containerRef, events, visible, hide]);
 };
@@ -4484,7 +4497,8 @@ const useFilterableDropdownOptions = (props) => {
     return remained.length === 0 ? [{ value: NO_MATCHED_OPTION_ITEM, label: toIntlLabel(noMatched) }] : remained.map(({ option }) => option);
   });
   const displayOptions = askDisplayOptions();
-  const popupHeight = Math.min(displayOptions.length, 8) * CssVars.INPUT_HEIGHT_VALUE + 2;
+  const fixFilterExists = DropdownDefaults.DEFAULTS.FIX_FILTER && VUtils.isNotBlank(filter);
+  const popupHeight = 2 + CssVars.INPUT_HEIGHT_VALUE * Math.min(displayOptions.length + (fixFilterExists ? 1 : 0), 8);
   const repaintPopup = () => {
     if ($disabled) {
       return;
@@ -4555,6 +4569,119 @@ const useFilterableDropdownOptions = (props) => {
     onFilterChanged
   };
 };
+const OptionFilter = qe.div.attrs(({ "data-w": widgetKey, active, atBottom, top, left, height }) => {
+  const fixFilter = DropdownDefaults.DEFAULTS.FIX_FILTER ?? false;
+  return {
+    [DOM_KEY_WIDGET]: widgetKey,
+    "data-filter-active": active,
+    "data-fix-filter": fixFilter,
+    style: {
+      "--position": fixFilter ? "sticky" : "fixed",
+      "--opacity": fixFilter ? 1 : active ? 1 : 0,
+      "--top": fixFilter ? 0 : atBottom ? top + height - 10 : void 0,
+      "--bottom": fixFilter ? void 0 : atBottom ? void 0 : `calc(100vh - ${top}px - 10px)`,
+      "--left": fixFilter ? 0 : left - 10,
+      "--height": fixFilter ? active ? CssVars.INPUT_HEIGHT : 0 : `calc(${CssVars.INPUT_HEIGHT} / 5 * 4)`,
+      "--width": fixFilter ? "100%" : void 0,
+      "--font-size": fixFilter ? CssVars.FONT_SIZE : `calc(${CssVars.FONT_SIZE} - 2px)`,
+      "--padding": fixFilter ? 0 : `0 ${CssVars.INPUT_INDENT}`,
+      "--border-radius": fixFilter ? 0 : CssVars.BORDER_RADIUS
+    }
+  };
+})`
+    display: flex;
+    position: var(--position);
+    top: var(--top);
+    bottom: var(--bottom);
+    left: var(--left);
+    align-items: center;
+    font-family: ${CssVars.FONT_FAMILY};
+    font-size: var(--font-size);
+    height: var(--height);
+    width: var(--width);
+    padding: var(--padding);
+    border-radius: var(--border-radius);
+    background-color: ${CssVars.BACKGROUND_COLOR};
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    opacity: var(--opacity);
+    z-index: calc(${CssVars.DROPDOWN_Z_INDEX} + 1);
+
+    &:before {
+        content: '';
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: ${CssVars.INFO_COLOR};
+        border-radius: ${CssVars.BORDER_RADIUS};
+        opacity: 0.9;
+        z-index: -1;
+    }
+
+    &[data-fix-filter=true] {
+        &[data-filter-active=true] {
+            border-bottom: ${CssVars.BORDER};
+        }
+
+        &:before {
+            display: none;
+        }
+
+        > span:first-child {
+            display: none;
+        }
+
+        > span:nth-child(2) {
+            display: flex;
+        }
+
+        > input {
+            color: ${CssVars.FONT_COLOR};
+            caret-color: unset;
+            caret-shape: unset;
+            padding: 0 ${CssVars.INPUT_INDENT};
+            width: 100%;
+            height: 100%;
+        }
+    }
+
+    > span:first-child {
+        color: ${CssVars.INVERT_COLOR};
+        font-weight: ${CssVars.FONT_BOLD};
+        margin-right: 4px;
+    }
+
+    > span:nth-child(2) {
+        display: none;
+        position: relative;
+        align-items: center;
+        justify-content: center;
+        min-width: ${CssVars.INPUT_HEIGHT};
+        height: 100%;
+        border-right: ${CssVars.BORDER};
+        color: ${CssVars.FONT_COLOR};
+        fill: ${CssVars.FONT_COLOR};
+
+        > svg {
+            height: ${CssVars.FONT_SIZE};
+        }
+    }
+
+    > input {
+        font-size: var(--font-size);
+        border-radius: 0;
+        border: 0;
+        outline: none;
+        background-color: transparent;
+        color: ${CssVars.INVERT_COLOR};
+        caret-color: transparent;
+        caret-shape: revert;
+    }
+`;
 var DropdownTreeEventTypes;
 (function(DropdownTreeEventTypes2) {
   DropdownTreeEventTypes2["FILTER_CHANGED"] = "filter-changed";
@@ -4581,7 +4708,7 @@ const DropdownTreeFilterBridge = () => {
   }, [on, off, fire]);
   return React.createElement(reactExports.Fragment, null);
 };
-const computeDropdownTreePopupHeight = (allOptions) => {
+const computeDropdownTreePopupHeight = (allOptions, filter) => {
   const allOptionCount = (() => {
     const countChildren = (option) => {
       return (option.children ?? []).reduce((count, option2) => {
@@ -4593,7 +4720,16 @@ const computeDropdownTreePopupHeight = (allOptions) => {
       return count + countChildren(option);
     }, 0);
   })();
-  return Math.min(allOptionCount, 8) * CssVars.INPUT_HEIGHT_VALUE + 2;
+  const fixFilterExists = DropdownDefaults.DEFAULTS.FIX_FILTER && VUtils.isNotBlank(filter);
+  return 2 + CssVars.INPUT_HEIGHT_VALUE * Math.min(allOptionCount + (fixFilterExists ? 1 : 0), 8);
+};
+const DropdownDefaults = {
+  DEFAULTS: { FIX_FILTER: false }
+};
+const DropdownUtils = {
+  setDropdownDefaults: (defaults) => {
+    DropdownDefaults.DEFAULTS.FIX_FILTER = defaults.fixFilter ?? DropdownDefaults.DEFAULTS.FIX_FILTER;
+  }
 };
 var ButtonBarAlignment;
 (function(ButtonBarAlignment2) {
@@ -4643,60 +4779,6 @@ const ButtonBar = reactExports.forwardRef((props, ref) => {
   return React.createElement(AButtonBar, { ...rest, "data-alignment": alignment, ref }, children);
 });
 registerWidget({ key: "ButtonBar", JSX: ButtonBar, container: true, array: false });
-const OptionFilter$3 = qe.div.attrs(({ active, atBottom, top, left, height }) => {
-  return {
-    [DOM_KEY_WIDGET]: "d9-dropdown-option-filter",
-    style: {
-      opacity: active ? 1 : 0,
-      top: atBottom ? top + height - 10 : void 0,
-      bottom: atBottom ? void 0 : `calc(100vh - ${top}px - 10px)`,
-      left: left - 10
-    }
-  };
-})`
-    display: flex;
-    position: fixed;
-    align-items: center;
-    font-family: ${CssVars.FONT_FAMILY};
-    font-size: calc(${CssVars.FONT_SIZE} - 2px);
-    height: calc(${CssVars.INPUT_HEIGHT} / 5 * 4);
-    padding: 0 ${CssVars.INPUT_INDENT};
-    border-radius: ${CssVars.BORDER_RADIUS};
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    pointer-events: none;
-    z-index: calc(${CssVars.DROPDOWN_Z_INDEX} + 1);
-
-    &:before {
-        content: '';
-        display: block;
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: ${CssVars.INFO_COLOR};
-        border-radius: ${CssVars.BORDER_RADIUS};
-        opacity: 0.9;
-        z-index: -1;
-    }
-
-    > span:first-child {
-        color: ${CssVars.INVERT_COLOR};
-        font-weight: ${CssVars.FONT_BOLD};
-        margin-right: 4px;
-    }
-
-    > input {
-        border: 0;
-        outline: none;
-        background-color: transparent;
-        color: ${CssVars.INVERT_COLOR};
-        caret-color: transparent;
-        caret-shape: revert;
-    }
-`;
 const Option$2 = qe.span.attrs({ [DOM_KEY_WIDGET]: "d9-dropdown-option" })`
     display: flex;
     position: relative;
@@ -4771,9 +4853,14 @@ const Dropdown = reactExports.forwardRef((props, ref) => {
       DropdownPopup,
       { ...{ ...popupState, minHeight: popupHeight }, shown: popupShown && popupState.active === DropdownPopupStateActive.ACTIVE, ...deviceTags, vScroll: true, ref: popupRef },
       React.createElement(
-        OptionFilter$3,
-        { ...{ ...popupState, active: !!filter } },
+        OptionFilter,
+        { ...{ ...popupState, active: !!filter }, "data-w": "d9-dropdown-option-filter" },
         React.createElement("span", null, "?:"),
+        React.createElement(
+          "span",
+          null,
+          React.createElement(Search, null)
+        ),
         React.createElement("input", { value: filter, onChange: onFilterChanged, onKeyUp, ref: filterInputRef })
       ),
       displayOptions.map((option, index) => {
@@ -4841,60 +4928,6 @@ const MultiDropdownLabel = qe(DropdownLabel)`
 const MultiDropdownStick = qe(DropdownStick)`
     position: absolute;
     right: ${CssVars.INPUT_INDENT};
-`;
-const OptionFilter$2 = qe.div.attrs(({ active, atBottom, top, left, height }) => {
-  return {
-    [DOM_KEY_WIDGET]: "d9-multi-dropdown-option-filter",
-    style: {
-      opacity: active ? 1 : 0,
-      top: atBottom ? top + height - 10 : void 0,
-      bottom: atBottom ? void 0 : `calc(100vh - ${top}px - 10px)`,
-      left: left - 10
-    }
-  };
-})`
-    display: flex;
-    position: fixed;
-    align-items: center;
-    font-family: ${CssVars.FONT_FAMILY};
-    font-size: calc(${CssVars.FONT_SIZE} - 2px);
-    height: calc(${CssVars.INPUT_HEIGHT} / 5 * 4);
-    padding: 0 ${CssVars.INPUT_INDENT};
-    border-radius: ${CssVars.BORDER_RADIUS};
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    pointer-events: none;
-    z-index: calc(${CssVars.DROPDOWN_Z_INDEX} + 1);
-
-    &:before {
-        content: '';
-        display: block;
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: ${CssVars.INFO_COLOR};
-        border-radius: ${CssVars.BORDER_RADIUS};
-        opacity: 0.9;
-        z-index: -1;
-    }
-
-    > span:first-child {
-        color: ${CssVars.INVERT_COLOR};
-        font-weight: ${CssVars.FONT_BOLD};
-        margin-right: 4px;
-    }
-
-    > input {
-        border: 0;
-        outline: none;
-        background-color: transparent;
-        color: ${CssVars.INVERT_COLOR};
-        caret-color: transparent;
-        caret-shape: revert;
-    }
 `;
 const MultiOption = qe.span.attrs({ [DOM_KEY_WIDGET]: "d9-multi-dropdown-option" })`
     display: flex;
@@ -5049,9 +5082,14 @@ const MultiDropdown = reactExports.forwardRef((props, ref) => {
       DropdownPopup,
       { ...{ ...popupState, minHeight: popupHeight }, shown: popupShown && popupState.active === DropdownPopupStateActive.ACTIVE, ...deviceTags, vScroll: true, ref: popupRef },
       React.createElement(
-        OptionFilter$2,
-        { ...{ ...popupState, active: !!filter } },
+        OptionFilter,
+        { ...{ ...popupState, active: !!filter }, "data-w": "d9-multi-dropdown-option-filter" },
         React.createElement("span", null, "?:"),
+        React.createElement(
+          "span",
+          null,
+          React.createElement(Search, null)
+        ),
         React.createElement("input", { value: filter, onChange: onFilterChanged, onKeyUp, ref: filterInputRef })
       ),
       displayOptions.map((option, index) => {
@@ -9137,60 +9175,6 @@ const UnwrappedTree = reactExports.forwardRef((props, ref) => {
   const $root = { [$pp]: data };
   return React.createElement(Tree, { ...rest, "$wrapped": { $onValueChange, $avs, $root, $model: $root, $p2r: "." }, "$pp": $pp, id: rest.id ?? VUtils.generateUniqueId(), ref });
 });
-const OptionFilter$1 = qe.div.attrs(({ active, atBottom, top, left, height }) => {
-  return {
-    [DOM_KEY_WIDGET]: "d9-dropdown-tree-option-filter",
-    style: {
-      opacity: active ? 1 : 0,
-      top: atBottom ? top + height - 10 : void 0,
-      bottom: atBottom ? void 0 : `calc(100vh - ${top}px - 10px)`,
-      left: left - 10
-    }
-  };
-})`
-    display: flex;
-    position: fixed;
-    align-items: center;
-    font-family: ${CssVars.FONT_FAMILY};
-    font-size: calc(${CssVars.FONT_SIZE} - 2px);
-    height: calc(${CssVars.INPUT_HEIGHT} / 5 * 4);
-    padding: 0 ${CssVars.INPUT_INDENT};
-    border-radius: ${CssVars.BORDER_RADIUS};
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    pointer-events: none;
-    z-index: calc(${CssVars.DROPDOWN_Z_INDEX} + 1);
-
-    &:before {
-        content: '';
-        display: block;
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: ${CssVars.INFO_COLOR};
-        border-radius: ${CssVars.BORDER_RADIUS};
-        opacity: 0.9;
-        z-index: -1;
-    }
-
-    > span:first-child {
-        color: ${CssVars.INVERT_COLOR};
-        font-weight: ${CssVars.FONT_BOLD};
-        margin-right: 4px;
-    }
-
-    > input {
-        border: 0;
-        outline: none;
-        background-color: transparent;
-        color: ${CssVars.INVERT_COLOR};
-        caret-color: transparent;
-        caret-shape: revert;
-    }
-`;
 const PopupTree$1 = qe(UnwrappedTree)`
     border: 0;
 `;
@@ -9226,7 +9210,8 @@ const InternalDropdownTree = reactExports.forwardRef((props, ref) => {
   const value = MUtils.getValue($model, $pp);
   const selected = value != null;
   const allOptions = askOptions();
-  const popupHeight = computeDropdownTreePopupHeight(allOptions);
+  const popupHeight = computeDropdownTreePopupHeight(allOptions, filter);
+  const treeHeight = DropdownDefaults.DEFAULTS.FIX_FILTER && VUtils.isNotBlank(filter) ? `calc(${toCssSize(popupHeight)} - ${CssVars.INPUT_HEIGHT} - 2px)` : `calc(${toCssSize(popupHeight)} - 2px)`;
   const label = (() => {
     if (value == null) {
       return please || "";
@@ -9317,14 +9302,19 @@ const InternalDropdownTree = reactExports.forwardRef((props, ref) => {
       DropdownPopup,
       { ...{ ...popupState, minHeight: popupHeight }, shown: popupShown && popupState.active === DropdownPopupStateActive.ACTIVE, ...deviceTags, vScroll: true, ref: popupRef },
       React.createElement(
-        OptionFilter$1,
-        { ...{ ...popupState, active: !!filter } },
+        OptionFilter,
+        { ...{ ...popupState, active: !!filter }, "data-w": "d9-dropdown-tree-option-filter" },
         React.createElement("span", null, "?:"),
+        React.createElement(
+          "span",
+          null,
+          React.createElement(Search, null)
+        ),
         React.createElement("input", { value: filter, onChange: onFilterChanged, onKeyUp, ref: filterInputRef })
       ),
       React.createElement(
         PopupTree$1,
-        { data: treeModel, initExpandLevel: 0, disableSearchBox: true, detective, height: `calc(${toCssSize(popupHeight)} - 2px)` },
+        { data: treeModel, initExpandLevel: 0, disableSearchBox: true, detective, height: treeHeight },
         React.createElement(DropdownTreeFilterBridge, null)
       )
     ) : null
@@ -9395,60 +9385,6 @@ const MultiDropdownTreeLabel = qe(DropdownLabel)`
 const MultiDropdownTreeStick = qe(DropdownStick)`
     position: absolute;
     right: ${CssVars.INPUT_INDENT};
-`;
-const OptionFilter = qe.div.attrs(({ active, atBottom, top, left, height }) => {
-  return {
-    [DOM_KEY_WIDGET]: "d9-multi-dropdown-tree-option-filter",
-    style: {
-      opacity: active ? 1 : 0,
-      top: atBottom ? top + height - 10 : void 0,
-      bottom: atBottom ? void 0 : `calc(100vh - ${top}px - 10px)`,
-      left: left - 10
-    }
-  };
-})`
-    display: flex;
-    position: fixed;
-    align-items: center;
-    font-family: ${CssVars.FONT_FAMILY};
-    font-size: calc(${CssVars.FONT_SIZE} - 2px);
-    height: calc(${CssVars.INPUT_HEIGHT} / 5 * 4);
-    padding: 0 ${CssVars.INPUT_INDENT};
-    border-radius: ${CssVars.BORDER_RADIUS};
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    pointer-events: none;
-    z-index: calc(${CssVars.DROPDOWN_Z_INDEX} + 1);
-
-    &:before {
-        content: '';
-        display: block;
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: ${CssVars.INFO_COLOR};
-        border-radius: ${CssVars.BORDER_RADIUS};
-        opacity: 0.9;
-        z-index: -1;
-    }
-
-    > span:first-child {
-        color: ${CssVars.INVERT_COLOR};
-        font-weight: ${CssVars.FONT_BOLD};
-        margin-right: 4px;
-    }
-
-    > input {
-        border: 0;
-        outline: none;
-        background-color: transparent;
-        color: ${CssVars.INVERT_COLOR};
-        caret-color: transparent;
-        caret-shape: revert;
-    }
 `;
 const PopupTree = qe(UnwrappedTree)`
     border: 0;
@@ -9528,7 +9464,8 @@ const InternalMultiDropdownTree = reactExports.forwardRef((props, ref) => {
   const values = currentValuesToArray();
   const selected = values != null && values.length !== 0;
   const allOptions = askOptions();
-  const popupHeight = computeDropdownTreePopupHeight(allOptions);
+  const popupHeight = computeDropdownTreePopupHeight(allOptions, filter);
+  const treeHeight = DropdownDefaults.DEFAULTS.FIX_FILTER && VUtils.isNotBlank(filter) ? `calc(${toCssSize(popupHeight)} - ${CssVars.INPUT_HEIGHT} - 2px)` : `calc(${toCssSize(popupHeight)} - 2px)`;
   const optionsAsMap = (() => {
     const map = {};
     const toMap = (option) => {
@@ -9624,13 +9561,18 @@ const InternalMultiDropdownTree = reactExports.forwardRef((props, ref) => {
       { ...{ ...popupState, minHeight: popupHeight }, shown: popupShown && popupState.active === DropdownPopupStateActive.ACTIVE, ...deviceTags, vScroll: true, ref: popupRef },
       React.createElement(
         OptionFilter,
-        { ...{ ...popupState, active: !!filter } },
+        { ...{ ...popupState, active: !!filter }, "data-w": "d9-multi-dropdown-tree-option-filter" },
         React.createElement("span", null, "?:"),
+        React.createElement(
+          "span",
+          null,
+          React.createElement(Search, null)
+        ),
         React.createElement("input", { value: filter, onChange: onFilterChanged, onKeyUp, ref: filterInputRef })
       ),
       React.createElement(
         PopupTree,
-        { data: treeModel, initExpandLevel: 0, disableSearchBox: true, detective, height: `calc(${toCssSize(popupHeight)} - 2px)` },
+        { data: treeModel, initExpandLevel: 0, disableSearchBox: true, detective, height: treeHeight },
         React.createElement(DropdownTreeFilterBridge, null)
       )
     ) : null
@@ -10081,12 +10023,14 @@ reactExports.forwardRef((props, ref) => {
 });
 export {
   $d9n2 as $,
-  ButtonBarAlignment as A,
+  utils$1 as A,
   ButtonInk as B,
   CssVars as C,
   DOM_KEY_WIDGET as D,
-  UnwrappedSection as E,
+  UnwrappedButtonBar as E,
+  ButtonBarAlignment as F,
   GlobalEventTypes as G,
+  UnwrappedSection as H,
   IntlLabel as I,
   LabelLike as L,
   OptionItemSort as O,
@@ -10102,10 +10046,10 @@ export {
   UnwrappedCaption as g,
   UnwrappedInput as h,
   index$2 as i,
-  UnwrappedCheckbox as j,
-  UnwrappedDropdown as k,
-  UnwrappedTextarea as l,
-  UnwrappedDecorateInput as m,
+  UnwrappedDropdown as j,
+  UnwrappedDecorateInput as k,
+  UnwrappedCheckbox as l,
+  UnwrappedTextarea as m,
   index$1 as n,
   useAlert as o,
   useDialog as p,
@@ -10117,6 +10061,6 @@ export {
   DialogFooter as v,
   GlobalRoot as w,
   utils$3 as x,
-  utils$1 as y,
-  UnwrappedButtonBar as z
+  DropdownUtils as y,
+  switchCollapseFixedThingDebug as z
 };

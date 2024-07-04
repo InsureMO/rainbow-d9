@@ -4,23 +4,26 @@ var __publicField = (obj, key, value) => {
   __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
   return value;
 };
-import { a as color, P as jsYaml } from "./vendor-MZyh1u1d.js";
-import { f as CssConstants, C as CssVars, I as IntlLabel, D as DOM_KEY_WIDGET, d as utils$2, g as UnwrappedCaption, h as UnwrappedInput, b as useGlobalHandlers, j as UnwrappedCheckbox, k as UnwrappedDropdown, l as UnwrappedTextarea, m as UnwrappedDecorateInput } from "./rainbow-d9-n2-U9NZKv1d.js";
-import { R as React, r as reactExports, q as qe, P as PortWidget, a as PortModel, b as PortModelAlignment, D as DefaultLinkModel, N as NodeModel, C as CanvasWidget, c as createEngine, d as DiagramModel, A as AbstractModelFactory, e as AbstractReactFactory } from "./react-base-8-0nj6j8.js";
-import { V as VUtils, r as registerWidget, g as useCreateEventBus, M as MUtils, P as PPUtils, a as useThrottler, e as useForceUpdate } from "./rainbow-d9-n1-OB1df9sy.js";
-import { i as index$1 } from "./rainbow-d9-n3-KMpvIgfW.js";
-import { M as Markdown } from "./react-markdown-0BybtKi9.js";
-import { r as remarkGfm } from "./remark-sXR2w4su.js";
-import { S as SyntaxHighlighter, p as prism } from "./react-syntax-highlighter-94ZoRJV2.js";
+import { a as color, P as jsYaml, Q as dom2image } from "./vendor-x3SPvJVy.js";
+import { f as CssConstants, C as CssVars, I as IntlLabel, D as DOM_KEY_WIDGET, g as UnwrappedCaption, h as UnwrappedInput, j as UnwrappedDropdown, k as UnwrappedDecorateInput, b as useGlobalHandlers, l as UnwrappedCheckbox, m as UnwrappedTextarea } from "./rainbow-d9-n2-DMKk85gx.js";
+import { R as React, r as reactExports, q as qe, W as We, P as PortModelAlignment, a as PortWidget, D as DefaultLinkModel, b as PortModel, N as NodeModel, C as CanvasWidget, c as createEngine, A as AbstractModelFactory, d as DiagramModel, e as DefaultLinkFactory, f as AbstractReactFactory, L as LinkWidget, g as DefaultLinkPointWidget, h as DefaultLinkSegmentWidget } from "./react-base-RoI39byt.js";
+import { V as VUtils, r as registerWidget, g as useCreateEventBus, M as MUtils, P as PPUtils, a as useThrottler, e as useForceUpdate } from "./rainbow-d9-n1-u2JbSDNy.js";
+import { i as index$1 } from "./rainbow-d9-n3-gyTLeDTF.js";
+import { M as Markdown } from "./react-markdown-Vss6qsUz.js";
+import { r as remarkGfm } from "./remark-DHxc17-O.js";
+import { S as SyntaxHighlighter, p as prism } from "./react-syntax-highlighter-nQukEpgW.js";
 const EDITOR_BACKGROUND_BLOCK_SIZE = "var(--o23-playground-editor-background-block-size, 48px)";
 const EDITOR_BACKGROUND_LINE_COLOR = `var(--o23-playground-editor-background-line-color, ${color(CssConstants.PRIMARY_COLOR).alpha(0.08)})`;
 const NODE_START_COLOR = "#ffb56b";
 const NODE_END_COLOR = "#e0b35f";
 const NODE_STEP_COLOR = "#54956b";
+const NODE_STEP_SETS_COLOR = "#615cac";
 const NEXT_STEP_PORT_COLOR = "#a3ab5b";
 const PREVIOUS_STEP_PORT_COLOR = "#8454aa";
 const PORT_FIRST_SUB_STEP_COLOR = "#8454aa";
-const PORT_SUB_STEPS_COLOR = "#617ba0";
+const PORT_STEPS_COLOR = "#617ba0";
+const PORT_ERROR_HANDLES_COLOR = "#c13a92";
+const LINK_ERROR_HANDLES_COLOR = "#a97f98";
 const PORT_LAST_SUB_STEP_JOIN_COLOR = "#00618b";
 const PRE_PORT_COLOR = "#87a55f";
 const POST_PORT_COLOR = "#c69dab";
@@ -31,6 +34,15 @@ const PlaygroundCssVars = {
   EDITOR_BACKGROUND_SIZE: `var(--o23-playground-editor-background-size, ${EDITOR_BACKGROUND_BLOCK_SIZE} ${EDITOR_BACKGROUND_BLOCK_SIZE})`,
   EDITOR_BACKGROUND_POSITION: "var(--o23-playground-editor-background-position, -1px -1px)",
   EDITOR_ERROR_COLOR: `var(--o23-playground-editor-error-color, ${CssVars.DANGER_COLOR})`,
+  EDITOR_TOOLBAR_HEIGHT: "var(--o23-playground-editor-toolbar-height, 32px)",
+  EDITOR_TOOLBAR_GUTTER_SIZE: "var(--o23-playground-editor-toolbar-gutter-size, 8px)",
+  EDITOR_TOOLBAR_BORDER: `var(--o23-playground-editor-toolbar-border, 1px solid ${CssVars.BORDER_COLOR})`,
+  EDITOR_TOOLBAR_BORDER_RADIUS: `var(--o23-playground-editor-toolbar-border-radius, ${CssVars.BORDER_RADIUS})`,
+  EDITOR_TOOLBAR_BUTTON_HEIGHT: `var(--o23-playground-editor-toolbar-button-size, 30px)`,
+  EDITOR_TOOLBAR_BUTTON_WIDTH: `var(--o23-playground-editor-toolbar-button-size, 32px)`,
+  EDITOR_TOOLBAR_BUTTON_COLOR: `var(--o23-playground-editor-toolbar-button-color, ${CssVars.FONT_COLOR})`,
+  EDITOR_TOOLBAR_BUTTON_ACTIVE_COLOR: `var(--o23-playground-editor-toolbar-button-active-color, ${CssVars.INVERT_COLOR})`,
+  EDITOR_TOOLBAR_BUTTON_ACTIVE_BACKGROUND_COLOR: `var(--o23-playground-editor-toolbar-button-active-background-color, ${CssVars.PRIMARY_COLOR})`,
   MARKDOWN_FONT_SIZE: "var(--o23-playground-markdown-font-size, 14px)",
   MARKDOWN_COLOR: `var(--o23-playground-markdown-color, ${CssVars.FONT_COLOR})`,
   MARKDOWN_BACKGROUND_COLOR: `var(--o23-playground-markdown-background-color, ${CssVars.BACKGROUND_COLOR})`,
@@ -78,27 +90,34 @@ const PlaygroundCssVars = {
   EDIT_DIALOG_CONFIGURABLE_ELEMENT_HOVER_FONT_WEIGHT: `var(--o23-playground-dialog-configurable-element-hover-font-weight, 600)`,
   EDIT_DIALOG_CONFIGURABLE_ELEMENT_INDENT: "var(--o23-playground-dialog-configurable-element-indent, 8px)",
   EDIT_DIALOG_CONFIGURABLE_ELEMENT_TREE_LINE_COLOR: `var(--o23-playground-dialog-configurable-element-tree-line-color, ${CssVars.BORDER_COLOR})`,
-  EDIT_DIALOG_CONFIGURABLE_ELEMENT_BADGE_HEIGHT: `var(--o23-playground-dialog-configurable-element-badge-height, calc(${CssVars.INPUT_HEIGHT} * 0.6))`,
+  EDIT_DIALOG_CONFIGURABLE_ELEMENT_BADGE_SIZE: `var(--o23-playground-dialog-configurable-element-badge-size-ratio, calc(0.6 * ${CssVars.INPUT_HEIGHT}))`,
+  EDIT_DIALOG_CONFIGURABLE_ELEMENT_BADGE_SIZE_S: `var(--o23-playground-dialog-configurable-element-badge-size-ratio, calc(0.5 * ${CssVars.INPUT_HEIGHT}))`,
   EDIT_DIALOG_CONFIGURABLE_ELEMENT_BADGE_FONT_WEIGHT: "var(--o23-playground-dialog-configurable-element-badge-font-weight, 400)",
   EDIT_DIALOG_CONFIGURABLE_ELEMENT_BADGE_PADDING: "var(--o23-playground-dialog-configurable-element-badge-padding, 0 12px)",
   EDIT_DIALOG_CONFIGURABLE_ELEMENT_BADGE_BORDER_RADIUS: "var(--o23-playground-dialog-configurable-element-badge-border-radius, 6px)",
   EDIT_DIALOG_CONFIGURABLE_ELEMENT_BADGE_TEXT_FONT_SIZE: "var(--o23-playground-dialog-configurable-element-badge-text-font-size, 0.8em)",
   EDIT_DIALOG_CONFIGURABLE_ELEMENT_BADGE_TEXT_FONT_WEIGHT: "var(--o23-playground-dialog-configurable-element-badge-text-font-weight, 400)",
   EDIT_DIALOG_CONFIGURABLE_ELEMENT_BADGE_ICON_MARGIN: "var(--o23-playground-dialog-configurable-element-badge-icon-margin, 0 -8px 0 0)",
-  EDIT_DIALOG_CONFIGURABLE_ELEMENT_BADGE_CHECKED_BACKGROUND_COLOR: `var(--o23-playground-dialog-configurable-element-badge-checked-background-color, transparent)`,
+  EDIT_DIALOG_CONFIGURABLE_ELEMENT_BADGE_CHECKED_BACKGROUND_COLOR: "var(--o23-playground-dialog-configurable-element-badge-checked-background-color, transparent)",
   EDIT_DIALOG_CONFIGURABLE_ELEMENT_BADGE_CHECKED_COLOR: `var(--o23-playground-dialog-configurable-element-badge-checked-color, ${CssVars.SUCCESS_COLOR})`,
-  EDIT_DIALOG_CONFIGURABLE_ELEMENT_BADGE_MISSED_BACKGROUND_COLOR: `var(--o23-playground-dialog-configurable-element-badge-missed-background-color, transparent)`,
+  EDIT_DIALOG_CONFIGURABLE_ELEMENT_BADGE_MISSED_BACKGROUND_COLOR: "var(--o23-playground-dialog-configurable-element-badge-missed-background-color, transparent)",
   EDIT_DIALOG_CONFIGURABLE_ELEMENT_BADGE_MISSED_COLOR: `var(--o23-playground-dialog-configurable-element-badge-missed-color, ${CssVars.DANGER_COLOR})`,
-  EDIT_DIALOG_CONFIGURABLE_ELEMENT_BADGE_BANNED_BACKGROUND_COLOR: `var(--o23-playground-dialog-configurable-element-badge-banned-background-color, transparent)`,
+  EDIT_DIALOG_CONFIGURABLE_ELEMENT_BADGE_BANNED_BACKGROUND_COLOR: "var(--o23-playground-dialog-configurable-element-badge-banned-background-color, transparent)",
   EDIT_DIALOG_CONFIGURABLE_ELEMENT_BADGE_BANNED_COLOR: `var(--o23-playground-dialog-configurable-element-badge-banned-color, ${CssVars.DANGER_COLOR})`,
   EDIT_DIALOG_CONFIGURABLE_ELEMENT_BADGE_ALL_BACKGROUND_COLOR: `var(--o23-playground-dialog-configurable-element-badge-all-background-color, ${CssVars.SUCCESS_COLOR})`,
   EDIT_DIALOG_CONFIGURABLE_ELEMENT_BADGE_ALL_COLOR: `var(--o23-playground-dialog-configurable-element-badge-all-color, ${CssVars.INVERT_COLOR})`,
-  EDIT_DIALOG_CONFIGURABLE_ELEMENT_BADGE_IGNORED_BACKGROUND_COLOR: `var(--o23-playground-dialog-configurable-element-badge-ignored-background-color, ${CssConstants.WAIVE_COLOR})`,
+  EDIT_DIALOG_CONFIGURABLE_ELEMENT_BADGE_IGNORED_BACKGROUND_COLOR: `var(--o23-playground-dialog-configurable-element-badge-ignored-background-color, ${CssVars.WAIVE_COLOR})`,
   EDIT_DIALOG_CONFIGURABLE_ELEMENT_BADGE_IGNORED_COLOR: `var(--o23-playground-dialog-configurable-element-badge-ignored-color, ${CssVars.INVERT_COLOR})`,
   EDIT_DIALOG_CONFIGURABLE_ELEMENT_BADGE_NOT_AVAILABLE_BACKGROUND_COLOR: `var(--o23-playground-dialog-configurable-element-badge-not-available-background-color, ${CssVars.WAIVE_COLOR})`,
   EDIT_DIALOG_CONFIGURABLE_ELEMENT_BADGE_NOT_AVAILABLE_COLOR: `var(--o23-playground-dialog-configurable-element-badge-not-available-color, ${CssVars.INVERT_COLOR})`,
   EDIT_DIALOG_CONFIGURABLE_ELEMENT_BADGE_COUNT_BACKGROUND_COLOR: `var(--o23-playground-dialog-configurable-element-badge-count-background-color, ${CssVars.SUCCESS_COLOR})`,
   EDIT_DIALOG_CONFIGURABLE_ELEMENT_BADGE_COUNT_COLOR: `var(--o23-playground-dialog-configurable-element-badge-count-color, ${CssVars.INVERT_COLOR})`,
+  EDIT_DIALOG_CONFIGURABLE_ELEMENT_BADGE_SNIPPET_BACKGROUND_COLOR: "var(--o23-playground-dialog-configurable-element-badge-snippet-background-color, transparent)",
+  EDIT_DIALOG_CONFIGURABLE_ELEMENT_BADGE_SNIPPET_COLOR: `var(--o23-playground-dialog-configurable-element-badge-snippet-color, ${CssVars.PRIMARY_COLOR})`,
+  EDIT_DIALOG_CONFIGURABLE_ELEMENT_BADGE_STEPS_BACKGROUND_COLOR: "var(--o23-playground-dialog-configurable-element-badge-steps-background-color, transparent)",
+  EDIT_DIALOG_CONFIGURABLE_ELEMENT_BADGE_STEPS_COLOR: `var(--o23-playground-dialog-configurable-element-badge-steps-color, ${CssVars.PRIMARY_COLOR})`,
+  EDIT_DIALOG_CONFIGURABLE_ELEMENT_BADGE_AS_IS_BACKGROUND_COLOR: `var(--o23-playground-dialog-configurable-element-badge-as-is-background-color, ${CssVars.WAIVE_COLOR})`,
+  EDIT_DIALOG_CONFIGURABLE_ELEMENT_AS_IS_STEPS_COLOR: `var(--o23-playground-dialog-configurable-element-badge-as-is-color, ${CssVars.INVERT_COLOR})`,
   EDIT_DIALOG_CONFIGURABLE_ELEMENT_SPECIFIC_MARGIN: "var(--o23-playground-dialog-configurable-element-specific-margin, 0 -8px)",
   EDIT_DIALOG_CONFIGURABLE_ELEMENT_SPECIFIC_PADDING: "var(--o23-playground-dialog-configurable-element-specific-padding, 8px)",
   EDIT_DIALOG_CONFIGURABLE_ELEMENT_SPECIFIC_GRID_COLUMN_GAP: "var(--o23-playground-dialog-configurable-element-specific-grid-column-gap, 32px)",
@@ -115,6 +134,7 @@ const PlaygroundCssVars = {
   NODE_TITLE_PADDING: "var(--o23-playground-node-title-padding, 0 10px)",
   NODE_TITLE_SPREADER_MIN_WIDTH: "var(--o23-playground-node-title-spreader-min-width, 40px)",
   NODE_MIN_WIDTH: "var(--o23-playground-node-min-width, 160px)",
+  NODE_MAX_WIDTH: `var(--o23-playground-node-max-width, 320px)`,
   NODE_ICON_SIZE: "var(--o23-playground-node-icon-size, 14px)",
   NODE_PORT_HEIGHT: "var(--o23-playground-node-port-height, 24px)",
   NODE_PORT_BORDER_WIDTH: `var(--o23-playground-node-port-border-width, 1px)`,
@@ -123,12 +143,28 @@ const PlaygroundCssVars = {
   NODE_NEXT_STEP_PORT_BORDER: `var(--o23-playground-node-next-step-port-border, 2px solid ${color(NEXT_STEP_PORT_COLOR).darken(0.1).opaquer(0.5)})`,
   NODE_PREVIOUS_STEP_PORT_BACKGROUND_COLOR: `var(--o23-playground-node-previous-step-port-background-color, ${PREVIOUS_STEP_PORT_COLOR})`,
   NODE_PREVIOUS_STEP_PORT_BORDER: `var(--o23-playground-node-previous-step-port-border, 2px solid ${color(PREVIOUS_STEP_PORT_COLOR).darken(0.1).opaquer(0.5)})`,
-  NODE_PORT_SUB_STEPS_BORDER: `var(--o23-playground-port-sub-step-border, 1px solid ${PORT_SUB_STEPS_COLOR})`,
-  NODE_PORT_SUB_STEPS_BACKGROUND: `var(--o23-playground-port-sub-step-background, ${color(PORT_SUB_STEPS_COLOR).darken(0.1).opaquer(0.5)})`,
+  NODE_PORT_STEPS_BORDER: `var(--o23-playground-port-sub-step-border, 1px solid ${PORT_STEPS_COLOR})`,
+  NODE_PORT_STEPS_BACKGROUND: `var(--o23-playground-port-sub-step-background, ${color(PORT_STEPS_COLOR).darken(0.1).opaquer(0.5)})`,
+  NODE_PORT_ERROR_HANDLES_BORDER: `var(--o23-playground-port-error-handles-border, 1px solid ${PORT_ERROR_HANDLES_COLOR})`,
+  NODE_PORT_ERROR_HANDLES_BACKGROUND: `var(--o23-playground-port-error-handles-background, ${color(PORT_ERROR_HANDLES_COLOR).darken(0.1).opaquer(0.5)})`,
   NODE_PORT_FIRST_SUB_STEP_BACKGROUND: `var(--o23-playground-port-first-sub-step-background, ${PORT_FIRST_SUB_STEP_COLOR})`,
   NODE_PORT_FIRST_SUB_STEP_BORDER: `var(--o23-playground-port-first-sub-step-border, 1px solid ${color(PORT_FIRST_SUB_STEP_COLOR).darken(0.1).opaquer(0.5)})`,
   NODE_PORT_LAST_SUB_STEP_JOIN_BACKGROUND: `var(--o23-playground-port-last-sub-step-join-background, ${PORT_LAST_SUB_STEP_JOIN_COLOR})`,
   NODE_PORT_LAST_SUB_STEP_JOIN_BORDER: `var(--o23-playground-port-last-sub-step-join-border, 1px solid ${color(PORT_LAST_SUB_STEP_JOIN_COLOR).darken(0.1).opaquer(0.5)})`,
+  LINK_STROKE_LINECAP: "var(--o23-playground-link-stroke-linecap, round)",
+  LINK_DEFAULT_STROKE_DASHARRAY: "var(--o23-playground-link-default-stroke-dasharray, unset)",
+  LINK_DEFAULT_SELECTED_STROKE_DASHARRAY: "var(--o23-playground-link-default-selected-stroke-dasharray, 8 4)",
+  LINK_SELECTED_STROKE_DASHOFFSET: "var(--o23-playground-link-selected-stroke-dashoffset, 24)",
+  LINK_STEPS_DASHARRAY: "var(--o23-playground-link-steps-dasharray, unset)",
+  LINK_STEPS_SELECTED_DASHARRAY: "var(--o23-playground-link-steps-selected-dasharray, var(--o23-playground-link-default-selected-stroke-dasharray, 8 4))",
+  LINK_ERROR_HANDLES_COLOR: `var(--o23-playground-link-error-handles-color, ${LINK_ERROR_HANDLES_COLOR})`,
+  LINK_ERROR_HANDLES_SELECTED_COLOR: `var(--o23-playground-link-error-handles-selected-color, ${color(LINK_ERROR_HANDLES_COLOR).lighten(0.1).opaquer(0.7)})`,
+  LINK_ERROR_HANDLES_DASHARRAY: "var(--o23-playground-link-error-handles-dasharray, unset)",
+  LINK_ERROR_HANDLES_SELECTED_DASHARRAY: "var(--o23-playground-link-error-handles-selected-dasharray, var(--o23-playground-link-default-selected-stroke-dasharray, 8 4))",
+  LINK_LAST_SUB_STEP_JOIN_DASHARRAY: `var(--o23-playground-link-last-sub-step-join-dasharray, 6)`,
+  LINK_LAST_SUB_STEP_JOIN_SELECTED_DASHARRAY: `var(--o23-playground-link-last-sub-step-join-selected-dasharray, 6)`,
+  LINK_END_OF_ME_JOIN_DASHARRAY: "var(--o23-playground-link-end-of-me-join-dasharray, 6)",
+  LINK_END_OF_ME_JOIN_SELECTED_DASHARRAY: "var(--o23-playground-link-end-of-me-join-selected-dasharray, 6)",
   NODE_PRE_PORT_FONT_SIZE: "var(--o23-playground-pre-port-font-size, 14px)",
   NODE_PRE_PORT_FONT_WEIGHT: "var(--o23-playground-pre-port-font-weight, 400)",
   NODE_PRE_PORT_COLOR: `var(--o23-playground-pre-port-color, ${CssVars.INVERT_COLOR})`,
@@ -184,7 +220,9 @@ const PlaygroundCssVars = {
   NODE_STEP_TITLE_COLOR: `var(--o23-playground-node-step-title-color, ${CssVars.INVERT_COLOR})`,
   NODE_STEP_TITLE_BACKGROUND: `var(--o23-playground-node-step-title-background, linear-gradient(135deg, ${NODE_STEP_COLOR} 0%, ${color(NODE_STEP_COLOR).alpha(0.7)} 70%, ${color(NODE_STEP_COLOR).alpha(0.5)} 100%))`,
   NODE_STEP_BODY_HEIGHT: "var(--o23-playground-node-step-body-height, 32px)",
-  NODE_STEP_BODY_PADDING: "var(--o23-playground-node-step-body-padding, 8px 0)"
+  NODE_STEP_BODY_PADDING: "var(--o23-playground-node-step-body-padding, 8px 0)",
+  NODE_STEP_SETS_BORDER: `var(--o23-playground-node-step-sets-border, 2px solid ${NODE_STEP_SETS_COLOR})`,
+  NODE_STEP_SETS_TITLE_BACKGROUND: `var(--o23-playground-node-step-sets-title-background, linear-gradient(135deg, ${NODE_STEP_SETS_COLOR} 0%, ${color(NODE_STEP_SETS_COLOR).alpha(0.7)} 70%, ${color(NODE_STEP_SETS_COLOR).alpha(0.5)} 100%))`
 };
 const Accept = (props) => {
   return React.createElement(
@@ -276,6 +314,68 @@ const ElementHelp = (props) => {
     React.createElement("circle", { cx: "12", cy: "16", r: "1", fill: "currentColor" })
   );
 };
+const Snippet = (props) => {
+  return React.createElement(
+    "svg",
+    { ...props, "data-icon": "o23-snippet", viewBox: "0 0 24 24", fill: "none", xmlns: "http://www.w3.org/2000/svg" },
+    React.createElement("path", { d: "M15.3929 4.05365L14.8912 4.61112L15.3929 4.05365ZM19.3517 7.61654L18.85 8.17402L19.3517 7.61654ZM21.654 10.1541L20.9689 10.4592V10.4592L21.654 10.1541ZM3.17157 20.8284L3.7019 20.2981H3.7019L3.17157 20.8284ZM20.8284 20.8284L20.2981 20.2981L20.2981 20.2981L20.8284 20.8284ZM14 21.25H10V22.75H14V21.25ZM2.75 14V10H1.25V14H2.75ZM21.25 13.5629V14H22.75V13.5629H21.25ZM14.8912 4.61112L18.85 8.17402L19.8534 7.05907L15.8947 3.49618L14.8912 4.61112ZM22.75 13.5629C22.75 11.8745 22.7651 10.8055 22.3391 9.84897L20.9689 10.4592C21.2349 11.0565 21.25 11.742 21.25 13.5629H22.75ZM18.85 8.17402C20.2034 9.3921 20.7029 9.86199 20.9689 10.4592L22.3391 9.84897C21.9131 8.89241 21.1084 8.18853 19.8534 7.05907L18.85 8.17402ZM10.0298 2.75C11.6116 2.75 12.2085 2.76158 12.7405 2.96573L13.2779 1.5653C12.4261 1.23842 11.498 1.25 10.0298 1.25V2.75ZM15.8947 3.49618C14.8087 2.51878 14.1297 1.89214 13.2779 1.5653L12.7405 2.96573C13.2727 3.16993 13.7215 3.55836 14.8912 4.61112L15.8947 3.49618ZM10 21.25C8.09318 21.25 6.73851 21.2484 5.71085 21.1102C4.70476 20.975 4.12511 20.7213 3.7019 20.2981L2.64124 21.3588C3.38961 22.1071 4.33855 22.4392 5.51098 22.5969C6.66182 22.7516 8.13558 22.75 10 22.75V21.25ZM1.25 14C1.25 15.8644 1.24841 17.3382 1.40313 18.489C1.56076 19.6614 1.89288 20.6104 2.64124 21.3588L3.7019 20.2981C3.27869 19.8749 3.02502 19.2952 2.88976 18.2892C2.75159 17.2615 2.75 15.9068 2.75 14H1.25ZM14 22.75C15.8644 22.75 17.3382 22.7516 18.489 22.5969C19.6614 22.4392 20.6104 22.1071 21.3588 21.3588L20.2981 20.2981C19.8749 20.7213 19.2952 20.975 18.2892 21.1102C17.2615 21.2484 15.9068 21.25 14 21.25V22.75ZM21.25 14C21.25 15.9068 21.2484 17.2615 21.1102 18.2892C20.975 19.2952 20.7213 19.8749 20.2981 20.2981L21.3588 21.3588C22.1071 20.6104 22.4392 19.6614 22.5969 18.489C22.7516 17.3382 22.75 15.8644 22.75 14H21.25ZM2.75 10C2.75 8.09318 2.75159 6.73851 2.88976 5.71085C3.02502 4.70476 3.27869 4.12511 3.7019 3.7019L2.64124 2.64124C1.89288 3.38961 1.56076 4.33855 1.40313 5.51098C1.24841 6.66182 1.25 8.13558 1.25 10H2.75ZM10.0298 1.25C8.15538 1.25 6.67442 1.24842 5.51887 1.40307C4.34232 1.56054 3.39019 1.8923 2.64124 2.64124L3.7019 3.7019C4.12453 3.27928 4.70596 3.02525 5.71785 2.88982C6.75075 2.75158 8.11311 2.75 10.0298 2.75V1.25Z", fill: "currentColor" }),
+    React.createElement("path", { opacity: "0.5", d: "M13 2.5V5C13 7.35702 13 8.53553 13.7322 9.26777C14.4645 10 15.643 10 18 10H22", stroke: "currentColor", strokeWidth: "1.5" }),
+    React.createElement("path", { opacity: "0.5", d: "M7 14L6 15L7 16M11.5 16L12.5 17L11.5 18M10 14L8.5 18", stroke: "currentColor", strokeWidth: "1.5", strokeLinecap: "round", strokeLinejoin: "round" })
+  );
+};
+const Steps = (props) => {
+  return React.createElement(
+    "svg",
+    { ...props, "data-icon": "o23-steps", viewBox: "0 0 24 24", fill: "none", xmlns: "http://www.w3.org/2000/svg" },
+    React.createElement("circle", { cx: "5", cy: "5", r: "3", stroke: "currentColor", strokeWidth: "1.5" }),
+    React.createElement("circle", { cx: "19", cy: "19", r: "3", stroke: "currentColor", strokeWidth: "1.5" }),
+    React.createElement("path", { opacity: "0.5", d: "M11 4.25C10.5858 4.25 10.25 4.58579 10.25 5C10.25 5.41421 10.5858 5.75 11 5.75V4.25ZM13 19L13.5303 19.5303C13.8232 19.2374 13.8232 18.7626 13.5303 18.4697L13 19ZM17.2056 8.68732L17.6083 9.32007L17.2056 8.68732ZM6.79434 15.3127L7.197 15.9454H7.197L6.79434 15.3127ZM12.0303 16.9697C11.7374 16.6768 11.2625 16.6768 10.9696 16.9697C10.6768 17.2626 10.6768 17.7374 10.9696 18.0303L12.0303 16.9697ZM10.9696 19.9697C10.6768 20.2626 10.6768 20.7374 10.9696 21.0303C11.2625 21.3232 11.7374 21.3232 12.0303 21.0303L10.9696 19.9697ZM16.1319 4.25H11V5.75H16.1319V4.25ZM13 18.25H7.86809V19.75H13V18.25ZM16.803 8.05458L6.39169 14.6799L7.197 15.9454L17.6083 9.32007L16.803 8.05458ZM13.5303 18.4697L12.0303 16.9697L10.9696 18.0303L12.4696 19.5303L13.5303 18.4697ZM12.4696 18.4697L10.9696 19.9697L12.0303 21.0303L13.5303 19.5303L12.4696 18.4697ZM7.86809 18.25C6.61754 18.25 6.14195 16.6168 7.197 15.9454L6.39169 14.6799C4.07059 16.157 5.11685 19.75 7.86809 19.75V18.25ZM16.1319 5.75C17.3824 5.75 17.858 7.38318 16.803 8.05458L17.6083 9.32007C19.9294 7.843 18.8831 4.25 16.1319 4.25V5.75Z", fill: "currentColor" })
+  );
+};
+const FitCanvas = (props) => {
+  return React.createElement(
+    "svg",
+    { ...props, "data-icon": "o23-fit-canvas", viewBox: "0 0 24 24", fill: "none", xmlns: "http://www.w3.org/2000/svg" },
+    React.createElement("path", { d: "M12 12L17 7M17 7H13.25M17 7V10.75", stroke: "currentColor", strokeWidth: "1.5", strokeLinecap: "round", strokeLinejoin: "round" }),
+    React.createElement("path", { d: "M12 12L7 17M7 17H10.75M7 17V13.25", stroke: "currentColor", strokeWidth: "1.5", strokeLinecap: "round", strokeLinejoin: "round" }),
+    React.createElement("path", { opacity: "0.5", d: "M2 12C2 7.28595 2 4.92893 3.46447 3.46447C4.92893 2 7.28595 2 12 2C16.714 2 19.0711 2 20.5355 3.46447C22 4.92893 22 7.28595 22 12C22 16.714 22 19.0711 20.5355 20.5355C19.0711 22 16.714 22 12 22C7.28595 22 4.92893 22 3.46447 20.5355C2 19.0711 2 16.714 2 12Z", stroke: "currentColor", strokeWidth: "1.5" })
+  );
+};
+const OriginSize = (props) => {
+  return React.createElement(
+    "svg",
+    { ...props, "data-icon": "o23-origin-size", viewBox: "0 0 24 24", fill: "none", xmlns: "http://www.w3.org/2000/svg" },
+    React.createElement("path", { opacity: "0.5", d: "M11.0002 2C6.94518 2.0073 4.82174 2.10686 3.46471 3.46389C2.00024 4.92835 2.00024 7.28538 2.00024 11.9994C2.00024 16.7135 2.00024 19.0705 3.46471 20.535C4.92918 21.9994 7.2862 21.9994 12.0002 21.9994C16.7143 21.9994 19.0713 21.9994 20.5358 20.535C21.8928 19.1779 21.9924 17.0545 21.9997 12.9994", stroke: "currentColor", strokeWidth: "1.5", strokeLinecap: "round" }),
+    React.createElement("path", { d: "M13 11L22 2M22 2H16.6562M22 2V7.34375M21 3L12 12M12 12H16M12 12V8", stroke: "currentColor", strokeWidth: "1.5", strokeLinecap: "round", strokeLinejoin: "round" })
+  );
+};
+const ZoomIn = (props) => {
+  return React.createElement(
+    "svg",
+    { ...props, "data-icon": "o23-zoom-in", viewBox: "0 0 24 24", fill: "none", xmlns: "http://www.w3.org/2000/svg" },
+    React.createElement("circle", { cx: "11", cy: "11", r: "9", stroke: "currentColor", strokeWidth: "1.5", opacity: "0.5" }),
+    React.createElement("path", { d: "M9 11H11M11 11H13M11 11V13M11 11V9", stroke: "currentColor", strokeWidth: "1.5", strokeLinecap: "round" }),
+    React.createElement("path", { d: "M21.812 20.9748C21.7493 21.0695 21.636 21.1828 21.4094 21.4094C21.1828 21.636 21.0695 21.7493 20.9748 21.812C20.4202 22.1793 19.6699 21.99 19.3559 21.4036C19.3023 21.3035 19.2563 21.15 19.1643 20.843C19.0638 20.5076 19.0136 20.3398 19.0038 20.2218C18.9466 19.5268 19.5268 18.9466 20.2218 19.0038C20.3398 19.0136 20.5075 19.0638 20.843 19.1643C21.15 19.2563 21.3035 19.3023 21.4036 19.3559C21.99 19.6699 22.1793 20.4202 21.812 20.9748Z", stroke: "currentColor", strokeWidth: "1.5", strokeLinecap: "round" })
+  );
+};
+const ZoomOut = (props) => {
+  return React.createElement(
+    "svg",
+    { ...props, "data-icon": "o23-zoom-out", viewBox: "0 0 24 24", fill: "none", xmlns: "http://www.w3.org/2000/svg" },
+    React.createElement("circle", { cx: "11", cy: "11", r: "9", stroke: "currentColor", strokeWidth: "1.5", opacity: "0.5" }),
+    React.createElement("path", { d: "M9 11H11H13", stroke: "currentColor", strokeWidth: "1.5", strokeLinecap: "round" }),
+    React.createElement("path", { d: "M21.812 20.9748C21.7493 21.0695 21.636 21.1828 21.4094 21.4094C21.1828 21.636 21.0695 21.7493 20.9748 21.812C20.4202 22.1793 19.6699 21.99 19.3559 21.4036C19.3023 21.3035 19.2563 21.15 19.1643 20.843C19.0638 20.5076 19.0136 20.3398 19.0038 20.2218C18.9466 19.5268 19.5268 18.9466 20.2218 19.0038C20.3398 19.0136 20.5075 19.0638 20.843 19.1643C21.15 19.2563 21.3035 19.3023 21.4036 19.3559C21.99 19.6699 22.1793 20.4202 21.812 20.9748Z", stroke: "currentColor", strokeWidth: "1.5", strokeLinecap: "round" })
+  );
+};
+const DownloadImage = (props) => {
+  return React.createElement(
+    "svg",
+    { ...props, "data-icon": "o23-download-image", xmlns: "http://www.w3.org/2000/svg", viewBox: "0 0 24 24", fill: "none" },
+    React.createElement("path", { d: "M22 12C22 16.714 22 19.0711 20.5355 20.5355C19.0711 22 16.714 22 12 22C7.28595 22 4.92893 22 3.46447 20.5355C2 19.0711 2 16.714 2 12C2 7.28595 2 4.92893 3.46447 3.46447C4.92893 2 7.28595 2 12 2", stroke: "currentColor", strokeWidth: "1.5", strokeLinecap: "round" }),
+    React.createElement("path", { opacity: "0.5", d: "M2 12.5001L3.75159 10.9675C4.66286 10.1702 6.03628 10.2159 6.89249 11.0721L11.1822 15.3618C11.8694 16.0491 12.9512 16.1428 13.7464 15.5839L14.0446 15.3744C15.1888 14.5702 16.7369 14.6634 17.7765 15.599L21 18.5001", stroke: "currentColor", strokeWidth: "1.5", strokeLinecap: "round" }),
+    React.createElement("path", { d: "M17 11V2M17 11L20 8M17 11L14 8", stroke: "currentColor", strokeWidth: "1.5", strokeLinecap: "round", strokeLinejoin: "round" })
+  );
+};
 const Labels = {
   ERROR: React.createElement(IntlLabel, { keys: ["o23", "error", "unknown"], value: "Something went wrong." }),
   NoContent: React.createElement(IntlLabel, { keys: ["o23", "error", "no-content"], value: "No content given." }),
@@ -311,29 +411,61 @@ const Labels = {
   NoFile: React.createElement(IntlLabel, { keys: ["o23", "pipeline", "files", "ignored"], value: "No File" }),
   FileMaxSize: React.createElement(IntlLabel, { keys: ["o23", "pipeline", "files", "max-size"], value: "Max size" }),
   FileMimeType: React.createElement(IntlLabel, { keys: ["o23", "pipeline", "files", "mime-type"], value: "Mime types" }),
-  StepFromRequest: React.createElement(IntlLabel, { keys: ["o23", "step", "from-request"], value: "From Input" }),
-  StepToResponse: React.createElement(IntlLabel, { keys: ["o23", "step", "to-response"], value: "To Output" }),
-  StepMergeRequest: React.createElement(IntlLabel, { keys: ["o23", "step", "merge-request"], value: "Merge" }),
+  StepFromRequest: React.createElement(IntlLabel, { keys: ["o23", "step", "from-request"], value: "Pick From Input" }),
+  StepToResponse: React.createElement(IntlLabel, { keys: ["o23", "step", "to-response"], value: "Write To Output" }),
+  StepMergeRequest: React.createElement(IntlLabel, { keys: ["o23", "step", "merge-request"], value: "Merge-back strategy" }),
   SnippetStepSnippet: React.createElement(IntlLabel, { keys: ["o23", "step", "snippet", "snippet"], value: "Snippet" }),
-  StepSubSteps: React.createElement(IntlLabel, { keys: ["o23", "step", "sets", "steps"], value: "Sub Steps" }),
+  StepSteps: React.createElement(IntlLabel, { keys: ["o23", "step", "sets", "steps"], value: "Sub Steps" }),
+  StepHandleCatchableError: React.createElement(IntlLabel, { keys: ["o23", "step", "error-handles", "catchable"], value: "Catchable Errors" }),
+  StepHandleUncatchableError: React.createElement(IntlLabel, { keys: ["o23", "step", "error-handles", "uncatchable"], value: "Uncatchable Errors" }),
+  StepHandleExposedError: React.createElement(IntlLabel, { keys: ["o23", "step", "error-handles", "uncatchable"], value: "Exposed Errors" }),
+  StepHandleAnyError: React.createElement(IntlLabel, { keys: ["o23", "step", "error-handles", "uncatchable"], value: "Any Errors" }),
   StepFirstSubStep: React.createElement(IntlLabel, { keys: ["o23", "step", "first-sub-step"], value: "In" }),
   JoinEndNodeTitle: React.createElement(IntlLabel, { keys: ["o23", "node", "join-end"], value: "End of " }),
   StepUseSnippet: React.createElement(IntlLabel, { keys: ["o23", "step", "use", "snippet"], value: "Snippet" }),
   StepUseSets: React.createElement(IntlLabel, { keys: ["o23", "step", "use", "sets"], value: "Sets" }),
+  StepErrorHandleTypeNone: React.createElement(IntlLabel, { keys: ["o23", "step", "error-handle", "none"], value: "Ignored" }),
+  StepErrorHandleTypeSnippet: React.createElement(IntlLabel, { keys: ["o23", "step", "error-handle", "none"], value: "Use Snippet" }),
+  StepErrorHandleTypeSteps: React.createElement(IntlLabel, { keys: ["o23", "step", "error-handle", "none"], value: "Use Sub-steps" }),
+  StepIOTransformer: React.createElement(IntlLabel, { keys: ["o23", "step", "io-transformer", "use"], value: "Transformer" }),
+  StepIOTransformerAsIs: React.createElement(IntlLabel, { keys: ["o23", "step", "io-transformer", "as-is"], value: "As Is" }),
+  StepIOTransformerSnippet: React.createElement(IntlLabel, { keys: ["o23", "step", "io-transformer", "snippet"], value: "Use Snippet" }),
+  StepIOMergeBackReplace: React.createElement(IntlLabel, { keys: ["o23", "step", "io-merge-back", "replace"], value: "Replace" }),
+  StepIOMergeBackUnbox: React.createElement(IntlLabel, { keys: ["o23", "step", "io-merge-back", "unbox"], value: "Unbox and Merge" }),
+  StepIOMergeBackAsProperty: React.createElement(IntlLabel, { keys: ["o23", "step", "io-merge-back", "as-property"], value: "As Specific Property" }),
+  StepIOMergeBackAsPropertyName: React.createElement(IntlLabel, { keys: ["o23", "step", "io-merge-back", "as-property-name"], value: "Property Name" }),
   Type: React.createElement(IntlLabel, { keys: ["o23", "variable", "type"], value: "Type" }),
   Code: React.createElement(IntlLabel, { keys: ["o23", "variable", "code"], value: "Code" }),
   Name: React.createElement(IntlLabel, { keys: ["o23", "variable", "name"], value: "Name" }),
   Enabled: React.createElement(IntlLabel, { keys: ["o23", "variable", "enabled"], value: "Enabled" }),
-  All: React.createElement(IntlLabel, { keys: ["o23", "variable", "all"], value: "All" }),
-  Ignored: React.createElement(IntlLabel, { keys: ["o23", "variable", "ignored"], value: "Ignored" }),
-  Specified: React.createElement(IntlLabel, { keys: ["o23", "variable", "specified"], value: "Specified" }),
-  NotAvailable: React.createElement(IntlLabel, { keys: ["o23", "variable", "not-available"], value: "N/A" }),
-  YesChar: React.createElement(IntlLabel, { keys: ["o23", "variable", "yes-char"], value: "Y" }),
-  NoChar: React.createElement(IntlLabel, { keys: ["o23", "variable", "no-char"], value: "N" }),
-  BadgeChecked: React.createElement(IntlLabel, { keys: ["o23", "variable", "checked"], value: React.createElement(ElementChecked, null) }),
-  BadgeMissed: React.createElement(IntlLabel, { keys: ["o23", "variable", "missed"], value: React.createElement(ElementMissed, null) }),
-  BadgeBanned: React.createElement(IntlLabel, { keys: ["o23", "variable", "banned"], value: React.createElement(ElementBanned, null) }),
+  Use: React.createElement(IntlLabel, { keys: ["o23", "variable", "use"], value: "Use" }),
+  ErrorHandles: React.createElement(IntlLabel, { keys: ["o23", "variable", "error-handles"], value: "Error Handling" }),
+  CatchableErrorHandle: React.createElement(IntlLabel, { keys: ["o23", "variable", "catchable-error-handle"], value: "Catchable" }),
+  UncatchableErrorHandle: React.createElement(IntlLabel, { keys: ["o23", "variable", "uncatchable-error-handle"], value: "Uncatchable" }),
+  ExposedErrorHandle: React.createElement(IntlLabel, { keys: ["o23", "variable", "exposed-error-handle"], value: "Exposed" }),
+  AnyErrorHandle: React.createElement(IntlLabel, { keys: ["o23", "variable", "any-error-handle"], value: "Any" }),
+  All: React.createElement(IntlLabel, { keys: ["o23", "badge", "all"], value: "All" }),
+  Ignored: React.createElement(IntlLabel, { keys: ["o23", "badge", "ignored"], value: "Ignored" }),
+  Specified: React.createElement(IntlLabel, { keys: ["o23", "badge", "specified"], value: "Specified" }),
+  NotAvailable: React.createElement(IntlLabel, { keys: ["o23", "badge", "not-available"], value: "N/A" }),
+  YesChar: React.createElement(IntlLabel, { keys: ["o23", "badge", "yes-char"], value: "Y" }),
+  NoChar: React.createElement(IntlLabel, { keys: ["o23", "badge", "no-char"], value: "N" }),
+  Snippet: React.createElement(IntlLabel, { keys: ["o23", "badge", "snippet"], value: React.createElement(Snippet, null) }),
+  Steps: React.createElement(IntlLabel, { keys: ["o23", "badge", "steps"], value: React.createElement(Steps, null) }),
+  AsIs: React.createElement(IntlLabel, { keys: ["o23", "badge", "as-is"], value: "N/A" }),
+  BadgeChecked: React.createElement(IntlLabel, { keys: ["o23", "badge", "checked"], value: React.createElement(ElementChecked, null) }),
+  BadgeMissed: React.createElement(IntlLabel, { keys: ["o23", "badge", "missed"], value: React.createElement(ElementMissed, null) }),
+  BadgeBanned: React.createElement(IntlLabel, { keys: ["o23", "badge", "banned"], value: React.createElement(ElementBanned, null) }),
   NoCodeDefinedInFileDef: React.createElement(IntlLabel, { keys: ["o23", "pipeline", "code", "undefined"], value: "No code defined" })
+};
+const asUseLabelKey = (use) => {
+  return "StepUse" + (use ?? "").trim().split("-").reduce((a, b) => a + b.charAt(0).toUpperCase() + b.slice(1), "");
+};
+const askUseLabel = (use) => {
+  return Labels[asUseLabelKey(use)];
+};
+const askUseStringifyText = (use) => {
+  return Labels[`${asUseLabelKey(use)}StringifyText`] ?? use;
 };
 var StandardPipelineStepRegisterKey;
 (function(StandardPipelineStepRegisterKey2) {
@@ -833,10 +965,6 @@ const NavigatorElementsContainer = qe.div.attrs({
     padding: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_PADDING};
     overflow-y: auto;
     overflow-x: hidden;
-
-    > div[data-w=o23-playground-edit-dialog-navigator-element]:first-child {
-        border-top-color: transparent;
-    }
 `;
 const NavigatorElementContainer = qe.div.attrs(({ level }) => {
   return {
@@ -851,12 +979,52 @@ const NavigatorElementContainer = qe.div.attrs(({ level }) => {
     position: relative;
     align-items: center;
     min-height: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_HEIGHT};
+    width: 100%;
     margin: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_MARGIN};
     padding: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_PADDING};
     border-top: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_BORDER};
     border-radius: 0;
     cursor: pointer;
     transition: background-color ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION}, border-radius ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION}, font-weight ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION};
+
+    &:not([data-level="0"]) {
+        &:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: calc((var(--level) * 2 - 0.5) * ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_INDENT});
+            width: 1px;
+            height: 100%;
+            background-color: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_TREE_LINE_COLOR};
+        }
+
+        &:after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: calc((var(--level) * 2 - 0.5) * ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_INDENT});
+            width: 8px;
+            height: 1px;
+            background-color: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_TREE_LINE_COLOR};
+        }
+    }
+
+    &:last-of-type {
+        // last one, since flex direction is column reverse
+
+        &:before {
+            border-bottom-left-radius: 3px;
+            width: 8px;
+            height: calc(${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_HEIGHT} / 2);
+            background-color: transparent;
+            border-left: 1px solid ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_TREE_LINE_COLOR};
+            border-bottom: 1px solid ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_TREE_LINE_COLOR};
+        }
+
+        &:after {
+            display: none;
+        }
+    }
 
     &:hover {
         background-color: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_HOVER_COLOR};
@@ -891,7 +1059,7 @@ const NavigatorElementBadgeWrapper = qe.span.attrs({ [DOM_KEY_WIDGET]: "o23-play
     align-items: center;
     font-size: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_BADGE_TEXT_FONT_SIZE};
     font-weight: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_BADGE_TEXT_FONT_WEIGHT};
-    height: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_BADGE_HEIGHT};
+    height: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_BADGE_SIZE};
     padding: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_BADGE_PADDING};
     border-radius: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_BADGE_BORDER_RADIUS};
 
@@ -930,8 +1098,30 @@ const NavigatorElementBadgeWrapper = qe.span.attrs({ [DOM_KEY_WIDGET]: "o23-play
         color: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_BADGE_COUNT_COLOR};
     }
 
+    &[data-role=snippet] {
+        background-color: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_BADGE_SNIPPET_BACKGROUND_COLOR};
+        color: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_BADGE_SNIPPET_COLOR};
+    }
+
+    &[data-role=steps] {
+        background-color: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_BADGE_STEPS_BACKGROUND_COLOR};
+        color: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_BADGE_STEPS_COLOR};
+    }
+
+    &[data-role=as-is] {
+        background-color: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_BADGE_AS_IS_BACKGROUND_COLOR};
+        color: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_AS_IS_STEPS_COLOR};
+    }
+
+    &[data-role=snippet], &[data-role=steps] {
+        > svg {
+            height: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_BADGE_SIZE_S};
+            width: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_BADGE_SIZE_S};
+        }
+    }
+
     > svg {
-        width: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_BADGE_HEIGHT};
+        width: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_BADGE_SIZE};
         margin: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_BADGE_ICON_MARGIN};
     }
 `;
@@ -947,70 +1137,24 @@ const NavigatorElementChildren = qe.span.attrs(({ level }) => {
     display: flex;
     position: relative;
     flex-direction: column;
+    width: 100%;
 
-    > span[data-w=o23-playground-edit-dialog-navigator-sub-elements]:nth-last-child(2) {
-        > span[data-w=o23-playground-edit-dialog-navigator-sub-elements-tree-line] {
-            display: none;
-        }
-    }
+    &:not(:last-child):not([data-level="0"]) {
+        // not last one, since flex direction is column reverse
 
-    > div[data-w=o23-playground-edit-dialog-navigator-element] {
-        > div[data-w=o23-playground-edit-dialog-navigator-element-label] {
-            &:before {
-                content: '';
-                display: block;
-                position: absolute;
-                width: 1px;
-                height: calc(100% + 1px);
-                top: 0;
-                left: calc(-1.5 * ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_INDENT});
-                background-color: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_TREE_LINE_COLOR};
-            }
-
-            &:after {
-                content: '';
-                display: block;
-                position: absolute;
-                width: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_INDENT};
-                height: 50%;
-                top: 0;
-                left: calc(-1.5 * ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_INDENT});
-                border-bottom-left-radius: 3px;
-                border-bottom: 1px solid ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_TREE_LINE_COLOR};
-            }
-        }
-    }
-
-    > div[data-w=o23-playground-edit-dialog-navigator-element]:last-of-type {
-        > div[data-w=o23-playground-edit-dialog-navigator-element-label] {
-            &:before {
-                display: none;
-            }
-
-            &:after {
-                border-left: 1px solid ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_TREE_LINE_COLOR};
-            }
+        &:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: calc(((var(--level) - 1) * 2 + 0.5) * ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_INDENT});
+            width: 1px;
+            height: 100%;
+            background-color: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_TREE_LINE_COLOR};
+            z-index: 1;
         }
     }
 `;
-const NavigatorElementChildrenTreeLine = qe.span.attrs(({ offset }) => {
-  return {
-    [DOM_KEY_WIDGET]: "o23-playground-edit-dialog-navigator-sub-elements-tree-line",
-    style: {
-      "--offset": utils$2.toCssSize(offset)
-    }
-  };
-})`
-    display: block;
-    position: absolute;
-    width: 1px;
-    height: calc(100% + 1px - var(--offset));
-    top: 0;
-    left: calc((max((var(--level) - 1), 0) * 2 + 0.5) * ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_INDENT});
-    background-color: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_TREE_LINE_COLOR};
-    z-index: 1;
-`;
-const SpecificElementsContainer = qe.div.attrs({
+const SpecificElementsContainer = qe.span.attrs({
   [DOM_KEY_WIDGET]: "o23-playground-edit-dialog-specific-elements",
   "data-h-scroll": ""
 })`
@@ -1129,6 +1273,15 @@ const ConfigurableElementBadgeNotAvailable = () => {
 };
 const ConfigurableElementBadgeCount = (props) => {
   return React.createElement(NavigatorElementBadgeWrapper, { "data-role": "count" }, props.count);
+};
+const ConfigurableElementBadgeSnippet = () => {
+  return React.createElement(NavigatorElementBadgeWrapper, { "data-role": "snippet" }, Labels.Snippet);
+};
+const ConfigurableElementBadgeSteps = () => {
+  return React.createElement(NavigatorElementBadgeWrapper, { "data-role": "steps" }, Labels.Steps);
+};
+const ConfigurableElementBadgeAsIs = () => {
+  return React.createElement(NavigatorElementBadgeWrapper, { "data-role": "as-is" }, Labels.AsIs);
 };
 const LinkRenderer = (props) => {
   return React.createElement("a", { href: props.href, target: "_blank", rel: "noreferrer" }, props.children);
@@ -1305,53 +1458,14 @@ const DialogNavigatorElementWrapper = (props) => {
     badge != null ? React.createElement(NavigatorElementBadge, null, badge(model)) : null
   );
 };
-const DialogNavigatorElementChildrenTreeLine = () => {
-  const ref = reactExports.useRef(null);
-  const [offset, setOffset] = reactExports.useState(0);
-  reactExports.useEffect(() => {
-    var _a;
-    if (ref.current == null) {
-      return;
-    }
-    const parent = ref.current.parentElement;
-    if (((_a = parent.nextElementSibling) == null ? void 0 : _a.nextElementSibling) != null) {
-      if (offset !== 0) {
-        setOffset(0);
-      }
-    } else {
-      let height = 0;
-      let ignored = ref.current.previousElementSibling;
-      while (ignored != null) {
-        if (ignored.tagName === "SPAN") {
-          height += ignored.getBoundingClientRect().height;
-          ignored = ignored.previousElementSibling;
-          height += ignored.getBoundingClientRect().height;
-          break;
-        } else {
-          height += ignored.getBoundingClientRect().height;
-          ignored = ignored.previousElementSibling;
-        }
-      }
-      if (offset !== height) {
-        setOffset(height);
-      }
-    }
-  });
-  return React.createElement(NavigatorElementChildrenTreeLine, { offset, ref });
-};
 const DialogNavigatorElementChildren = (props) => {
-  const { element, model, level, last } = props;
+  const { element, model, level } = props;
   if (element.children == null || element.children.length === 0) {
     return null;
   }
-  return React.createElement(
-    NavigatorElementChildren,
-    { level },
-    element.children.map((child, index, children) => {
-      return React.createElement(DialogNavigatorElement, { element: child, model, level: level + 1, last: [...last, index === children.length - 1], key: child.code });
-    }),
-    React.createElement(DialogNavigatorElementChildrenTreeLine, null)
-  );
+  return React.createElement(NavigatorElementChildren, { level }, element.children.map((child) => {
+    return React.createElement(DialogNavigatorElement, { element: child, model, level: level + 1, key: child.code });
+  }));
 };
 const DialogNavigatorElement = (props) => {
   const { element, model } = props;
@@ -1368,8 +1482,8 @@ const DialogNavigatorElement = (props) => {
 };
 const DialogNavigatorElements = (props) => {
   const { elements, model } = props;
-  return React.createElement(NavigatorElementsContainer, null, elements.map((element, index, elements2) => {
-    return React.createElement(DialogNavigatorElement, { element, model, level: 0, last: [index === elements2.length - 1], key: element.code });
+  return React.createElement(NavigatorElementsContainer, null, elements.map((element) => {
+    return React.createElement(DialogNavigatorElement, { element, model, level: 0, key: element.code });
   }));
 };
 const DialogNavigator = (props) => {
@@ -1624,41 +1738,57 @@ const EditDialog = () => {
     React.createElement(EditDialogWrapper, null, state.content)
   );
 };
-const markdown$g = "If using data from the request body, the data portion of the body must be in valid JSON format.\n\n> `GET` requests by default do not parse the request body, while other requests (methods) default to parsing the request body.\n";
-const markdown$f = "Used for locating configurations within the application, required fields, and must be globally unique.";
-const markdown$e = "Specify whether the current configuration is effective.\n\n> Note that configurations that are not effective will not be loaded when the application starts, so the effective status cannot be switched\n> at runtime.";
-const markdown$d = "Indicate whether the returned response is a file.\n";
-const markdown$c = "Specify the response headers to be outputted to the client, including names and values.\n\nThe syntax rules are as follows:\n\n- Use a colon to connect the name and value, for example `x-name: value`. Note that only the content before the first colon is considered\n  the name, and the remaining part is the value,\n- If multiple are needed, they should be written on multiple lines,\n- The spaces around the name and value will be automatically removed.\n";
-const markdown$b = "To accept uploaded files, multiple attributes are required:\n\n- Specify name: Each line represents a name. For multiple names, define them on separate lines,\n- Each name can specify a max count by appending a colon followed by a number after the name,\n	- `<= 0` indicates unlimited files for that name,\n	- `>= 1` indicates a maximum count,\n- Specify maximum file size: Use plain numbers for bytes, or append `k`, `K`, `m`, `M` for kilobytes and megabytes,\n- Specify file type [mime type](https://docs.nestjs.com/techniques/file-upload#file-validation): Separate multiple types with commas or\n  semicolons.\n\n> The maximum file size and file type specifications apply to all files.\n\n> When defining upload file parameters, due to HTTP protocol specifications requiring the use of Form Data, the `body` supports only\n> key-value pairs. Therefore, the parsed data forms a single-layer JSON object and no longer retains a multi-layered structure.\n";
-const markdown$a = "To specify receiving multiple request headers, use commas or semicolons as separators.\n";
-const markdown$9 = "Only executed when the application starts, during which the system does not provide any parameters to the pipeline.\n";
-const markdown$8 = "`GET` requests by default do not parse the request body, while other requests (methods) default to parsing the request body.\n";
-const markdown$7 = "Parse parameters from the [route](https://docs.nestjs.com/controllers#route-parameters). For example, can parse the `name`\nand `age` parameters from `https://example.com/:name/:age`.\n\n> The parameter names are automatically synchronized here when modifying the `route` value.\n\n> Although parameters are defined in the `route`, it is still possible to ignore them here, but this is not the recommended approach. \n";
-const markdown$6 = "## Overview\n\nThe core concept of `@rainbow-o23` is pipeline, where all logic is defined through pipeline and its steps. There are three different forms\nof\npipeline based on how it is defined:\n\n- Pipeline, which can optionally be exposed as an API. To differentiate, we generally refer to pipelines that are exposed as\n  APIs as `Pipeline as API`, and pipelines that are not exposed as APIs as `pipeline`. In all documents, we will use\n  this name to refer to it. If not specifically labeled as `as API`, it means that this pipeline has not been exposed as an API.\n- Step set, composed of a group of steps,\n- Step: based on the definition of a single step.\n\nIf defined as a pipeline and is exposed as an API, it does not allow other pipeline steps to call it, otherwise it does. Therefore, if\ncertain logic combinations can be reused, they should be defined as a pipeline/steps set/step.\n\n## Common attributes\n\nAll definitions should have the following attributes:\n\n- A `code` attribute for identification within the system, so the value of the `code` attribute is globally unique.\n- A `type` attribute is used to indicate the type of this definition, and the value of the `type` attribute must be one\n  of `pipeline`, `step-sets`, or `step`.\n- An `enabled` attribute is used to indicate whether this definition is effective, and the value of the `enabled` attribute must be\n  either `true` or `false`. If not defined, this definition is considered to be effective by default.\n\n## Pipeline as API\n\nIf the definition contains a `route` attribute and specifies a URI, it is considered to be published as an API. A pipeline published\nas an API includes all standard HTTP protocol elements:\n\n- `route`, URI of API. Excluding the scheme, domain name, and port in the URL, the application configuration can also specify the path\n  context,\n	- To facilitate the definition and parsing of data contained in the `route`, you can use `pathParams` for definition. `pathParams` can\n	  be a list of parameters, or you can use `true` to define receiving all valid path parameters. Please note that the definition of path\n	  parameters must conform to the [nestjs](https://docs.nestjs.com/controllers#route-parameters) standard.\n- `method`, supporting `get`, `post`, `put`, `patch`, and `delete`,\n- `headers`, a list of headers that need to be parsed, or `true` to parse all headers,\n- `queryParams`, a list of query parameters that need to be parsed, or `true` to parse all query parameters,\n- `body`, the content of the HTTP body is in JSON format. To better adapt to common practices of HTTP API usage:\n	- When `method` is specified as `get` and the `body` parameter is not explicitly set to `true`, the system defaults to ignoring the HTTP\n	  body content,\n	- When `method` is not specified as `get` and the `body` parameter is not explicitly set to `false`, the system defaults to parsing the\n	  HTTP body content,\n- `files`, a list of files that need to be parsed, or `true` to parse all files.\n\nThere are also some HTTP response definitions:\n\n- `exposeHeaders`, a set of headers that need to be pushed to the client,\n- `exposeFile`, indicating whether the response data is a file.\n\n## Pipeline\n\nIf the definition does not contain a `route` attribute, it is considered a pipeline. A pipeline can be called by other pipeline steps.\n\nA pipeline always includes at least one step, and its behavior is entirely determined by the steps defined within it.\n\nA pipeline also has a special property `initOnly`, which if declared as `true`, indicates that this pipeline will only be\nexecuted when the application starts, and the application will not provide any parameters during execution.\n\n## Step set\n\nStep set, as the name suggests, can define a set of steps. They can also define how their built-in steps are executed, typically in the\nfollowing ways:\n\n- Synchronous serial,\n- Asynchronous serial,\n- Synchronous parallel,\n- Conditional execution,\n- Loop execution (only for input data as an array),\n- Start a database transaction.\n\nBy combining the various types of step collections mentioned above, you can construct execution sequences suitable for different scenarios.\n\n## Step\n\nSteps can be any type of step definition, including step sets. Logically, a step set is a step which includes a set of sub steps, and\ndifferent step sets define the way their sub steps are executed. Steps are implemented by different standard step components for\ndifferent purposes. Here are some built-in standard steps:\n\n- Retrieve values from models or remove attributes,\n- Execute scripts,\n- Generate snowflake IDs,\n- Call predefined pipelines or steps,\n- Make remote HTTP API calls,\n- Read from or write to databases.\n\nAdditionally, you can also obtain the following steps support through the `@rainbow-o23` standard extension library:\n\n- Print PDF, Word, Excel, CSV,\n- Manipulate AWS S3 objects.\n\n> The latest step support can be found on [Github](https://github.com/InsureMO/rainbow-o23).\n";
-const markdown$5 = "Parse parameters from the [URL Search](https://developer.mozilla.org/en-US/docs/Web/API/URL/searchParams). For example, can parse the `name`\nand `age` parameters from `https://example.com/?name=Jonathan%20Smith&age=18`.\n\nTo specify receiving multiple query parameters, use commas or semicolons as separators.\n";
-const markdown$4 = "The route of the API, excluding the HTTP protocol scheme, domain name, and port parts. The context of the URL path can also be\nspecified via the system environment variable `CFG_APP_CONTEXT`.\n\n> It should start with `/`.\n\n`route` syntax can be referenced from [nestjs - routing](https://docs.nestjs.com/controllers#routing)\nand [nestjs - route parameters](https://docs.nestjs.com/controllers#route-parameters), as well\nas [express](https://expressjs.com/en/guide/routing.html). Generally, there are the following rules:\n\n- Use regex for matching, but it's not recommended.\n- Define parameters with `:` prefix, for example `:name`, ensuring parameter names conform to the regex pattern `[A-Za-z0-9_]`.\n- For parsing multiple parameters, use `/`, `.`, or `-` as separators. \n";
-const markdown$3 = "- `Pipeline`: A predefined pipeline that can be invoked by other pipelines and can also be executed during application\n  initialization. If specified to execute during application initialization, it cannot be used at runtime, and the initialization is\n  parameterless.\n- `Pipelne as API`: A predefined pipeline exposed as an API, which cannot be invoked by other pipelines.\n- `Step Set`: A predefined set of steps that can be invoked by other pipelines.\n- `Step`: A predefined step that can be invoked by other pipelines.\n";
+const markdown$o = "If using data from the request body, the data portion of the body must be in valid JSON format.\n\n> `GET` requests by default do not parse the request body, while other requests (methods) default to parsing the request body.\n";
+const markdown$n = "Used for locating configurations within the application, required fields, and must be globally unique.";
+const markdown$m = "Specify whether the current configuration is effective.\n\n> Note that configurations that are not effective will not be loaded when the application starts, so the effective status cannot be switched\n> at runtime.";
+const markdown$l = "Indicate whether the returned response is a file.\n";
+const markdown$k = "Specify the response headers to be outputted to the client, including names and values.\n\nThe syntax rules are as follows:\n\n- Use a colon to connect the name and value, for example `x-name: value`. Note that only the content before the first colon is considered\n  the name, and the remaining part is the value,\n- If multiple are needed, they should be written on multiple lines,\n- The spaces around the name and value will be automatically removed.\n";
+const markdown$j = "To accept uploaded files, multiple attributes are required:\n\n- Specify name: Each line represents a name. For multiple names, define them on separate lines,\n- Each name can specify a max count by appending a colon followed by a number after the name,\n	- `<= 0` indicates unlimited files for that name,\n	- `>= 1` indicates a maximum count,\n- Specify maximum file size: Use plain numbers for bytes, or append `k`, `K`, `m`, `M` for kilobytes and megabytes,\n- Specify file type [mime type](https://docs.nestjs.com/techniques/file-upload#file-validation): Separate multiple types with commas or\n  semicolons.\n\n> The maximum file size and file type specifications apply to all files.\n\n> When defining upload file parameters, due to HTTP protocol specifications requiring the use of Form Data, the `body` supports only\n> key-value pairs. Therefore, the parsed data forms a single-layer JSON object and no longer retains a multi-layered structure.\n";
+const markdown$i = "To specify receiving multiple request headers, use commas or semicolons as separators.\n";
+const markdown$h = "Only executed when the application starts, during which the system does not provide any parameters to the pipeline.\n";
+const markdown$g = "`GET` requests by default do not parse the request body, while other requests (methods) default to parsing the request body.\n";
+const markdown$f = "Parse parameters from the [route](https://docs.nestjs.com/controllers#route-parameters). For example, can parse the `name`\nand `age` parameters from `https://example.com/:name/:age`.\n\n> The parameter names are automatically synchronized here when modifying the `route` value.\n\n> Although parameters are defined in the `route`, it is still possible to ignore them here, but this is not the recommended approach. \n";
+const markdown$e = "## Overview\n\nThe core concept of `@rainbow-o23` is pipeline, where all logic is defined through pipeline and its steps. There are three different forms\nof\npipeline based on how it is defined:\n\n- Pipeline, which can optionally be exposed as an API. To differentiate, we generally refer to pipelines that are exposed as\n  APIs as `Pipeline as API`, and pipelines that are not exposed as APIs as `pipeline`. In all documents, we will use\n  this name to refer to it. If not specifically labeled as `as API`, it means that this pipeline has not been exposed as an API.\n- Step set, composed of a group of steps,\n- Step: based on the definition of a single step.\n\nIf defined as a pipeline and is exposed as an API, it does not allow other pipeline steps to call it, otherwise it does. Therefore, if\ncertain logic combinations can be reused, they should be defined as a pipeline/steps set/step.\n\n## Common attributes\n\nAll definitions should have the following attributes:\n\n- A `code` attribute for identification within the system, so the value of the `code` attribute is globally unique.\n- A `type` attribute is used to indicate the type of this definition, and the value of the `type` attribute must be one\n  of `pipeline`, `step-sets`, or `step`.\n- An `enabled` attribute is used to indicate whether this definition is effective, and the value of the `enabled` attribute must be\n  either `true` or `false`. If not defined, this definition is considered to be effective by default.\n\n## Pipeline as API\n\nIf the definition contains a `route` attribute and specifies a URI, it is considered to be published as an API. A pipeline published\nas an API includes all standard HTTP protocol elements:\n\n- `route`, URI of API. Excluding the scheme, domain name, and port in the URL, the application configuration can also specify the path\n  context,\n	- To facilitate the definition and parsing of data contained in the `route`, you can use `pathParams` for definition. `pathParams` can\n	  be a list of parameters, or you can use `true` to define receiving all valid path parameters. Please note that the definition of path\n	  parameters must conform to the [nestjs](https://docs.nestjs.com/controllers#route-parameters) standard.\n- `method`, supporting `get`, `post`, `put`, `patch`, and `delete`,\n- `headers`, a list of headers that need to be parsed, or `true` to parse all headers,\n- `queryParams`, a list of query parameters that need to be parsed, or `true` to parse all query parameters,\n- `body`, the content of the HTTP body is in JSON format. To better adapt to common practices of HTTP API usage:\n	- When `method` is specified as `get` and the `body` parameter is not explicitly set to `true`, the system defaults to ignoring the HTTP\n	  body content,\n	- When `method` is not specified as `get` and the `body` parameter is not explicitly set to `false`, the system defaults to parsing the\n	  HTTP body content,\n- `files`, a list of files that need to be parsed, or `true` to parse all files.\n\nThere are also some HTTP response definitions:\n\n- `exposeHeaders`, a set of headers that need to be pushed to the client,\n- `exposeFile`, indicating whether the response data is a file.\n\n## Pipeline\n\nIf the definition does not contain a `route` attribute, it is considered a pipeline. A pipeline can be called by other pipeline steps.\n\nA pipeline always includes at least one step, and its behavior is entirely determined by the steps defined within it.\n\nA pipeline also has a special property `initOnly`, which if declared as `true`, indicates that this pipeline will only be\nexecuted when the application starts, and the application will not provide any parameters during execution.\n\n## Step set\n\nStep set, as the name suggests, can define a set of steps. They can also define how their built-in steps are executed, typically in the\nfollowing ways:\n\n- Synchronous serial,\n- Asynchronous serial,\n- Synchronous parallel,\n- Conditional execution,\n- Loop execution (only for input data as an array),\n- Start a database transaction.\n\nBy combining the various types of step collections mentioned above, you can construct execution sequences suitable for different scenarios.\n\n## Step\n\nSteps can be any type of step definition, including step sets. Logically, a step set is a step which includes a set of sub steps, and\ndifferent step sets define the way their sub steps are executed. Steps are implemented by different standard step components for\ndifferent purposes. Here are some built-in standard steps:\n\n- Retrieve values from models or remove attributes,\n- Execute scripts,\n- Generate snowflake IDs,\n- Call predefined pipelines or steps,\n- Make remote HTTP API calls,\n- Read from or write to databases.\n\nAdditionally, you can also obtain the following steps support through the `@rainbow-o23` standard extension library:\n\n- Print PDF, Word, Excel, CSV,\n- Manipulate AWS S3 objects.\n\n> The latest step support can be found on [Github](https://github.com/InsureMO/rainbow-o23).\n";
+const markdown$d = "Parse parameters from the [URL Search](https://developer.mozilla.org/en-US/docs/Web/API/URL/searchParams). For example, can parse the `name`\nand `age` parameters from `https://example.com/?name=Jonathan%20Smith&age=18`.\n\nTo specify receiving multiple query parameters, use commas or semicolons as separators.\n";
+const markdown$c = "The route of the API, excluding the HTTP protocol scheme, domain name, and port parts. The context of the URL path can also be\nspecified via the system environment variable `CFG_APP_CONTEXT`.\n\n> It should start with `/`.\n\n`route` syntax can be referenced from [nestjs - routing](https://docs.nestjs.com/controllers#routing)\nand [nestjs - route parameters](https://docs.nestjs.com/controllers#route-parameters), as well\nas [express](https://expressjs.com/en/guide/routing.html). Generally, there are the following rules:\n\n- Use regex for matching, but it's not recommended.\n- Define parameters with `:` prefix, for example `:name`, ensuring parameter names conform to the regex pattern `[A-Za-z0-9_]`.\n- For parsing multiple parameters, use `/`, `.`, or `-` as separators. \n";
+const markdown$b = "- `Pipeline`: A predefined pipeline that can be invoked by other pipelines and can also be executed during application\n  initialization. If specified to execute during application initialization, it cannot be used at runtime, and the initialization is\n  parameterless.\n- `Pipelne as API`: A predefined pipeline exposed as an API, which cannot be invoked by other pipelines.\n- `Step Set`: A predefined set of steps that can be invoked by other pipelines.\n- `Step`: A predefined step that can be invoked by other pipelines.\n";
 const docs$2 = {
-  pipeline: markdown$6,
-  pipelineCode: markdown$f,
-  pipelineEnabled: markdown$e,
-  pipelineType: markdown$3,
-  pipelineInitOnly: markdown$9,
-  pipelineRoute: markdown$4,
-  pipelineMethod: markdown$8,
-  pipelineHeaders: markdown$a,
-  pipelinePathParams: markdown$7,
-  pipelineQueryParams: markdown$5,
-  pipelineBody: markdown$g,
-  pipelineFiles: markdown$b,
-  pipelineExposeFile: markdown$d,
-  pipelineExposeHeaders: markdown$c
+  pipeline: markdown$e,
+  pipelineCode: markdown$n,
+  pipelineEnabled: markdown$m,
+  pipelineType: markdown$b,
+  pipelineInitOnly: markdown$h,
+  pipelineRoute: markdown$c,
+  pipelineMethod: markdown$g,
+  pipelineHeaders: markdown$i,
+  pipelinePathParams: markdown$f,
+  pipelineQueryParams: markdown$d,
+  pipelineBody: markdown$o,
+  pipelineFiles: markdown$j,
+  pipelineExposeFile: markdown$l,
+  pipelineExposeHeaders: markdown$k
 };
-const markdown$2 = "A brief name that indicates the purpose of the step.\n";
-const markdown$1 = "### Input and output\n\nUsually, when processing logic, we do not need all the memory contexts, but only need to extract certain fragments for processing and return\nthe processing results to the context for subsequent logic to continue processing. Therefore, `@rainbow-o23` provides a relevant\nimplementation, allowing pipeline steps to flexibly access the relevant memory data and write back the processed result data to the context\nin the required format.\n\n#### From input\n\nUse the `From Input` property to define a script. The returned data will be used as input data for this step. The script is a function\nthat takes the following parameters:\n\n- `$factor` represents the incoming data,\n- `$request` represents the original request data (including incoming data and a context), it is not recommended,\n- `$helpers` represents function supporting, and it has a shortcut `$`.\n\nHere is a simple example:\n\n```ts\n// incoming data\nconst incoming = {name: 'John', age: 23};\n\n// Only the age is needed as a parameter in the step processing, not the name\n// Define a transformation script. So in the actual processing logic of the current step, only a number will be received.\nreturn {age: $factor.age};\n```\n\n> `return` is not necessary. If the script is only one line (and has no line breaks), the system will consider the result of executing that\n> line as the result of the entire function.\n\n> It's important to note that whether modifications to memory data during processing will affect the original input data depends on how the\n> transformation is handled. Generally, if deep cloning is not performed, it will affect the data; otherwise, it will not.\n\n#### To output\n\nUse the `To Output` property to define a script. The returned data will be used as output data for this step. The script is a function\nthat takes the following parameters:\n\n- `$result` represents the outgoing data,\n- `$request` represents the original request data (including incoming data and a context), it is not recommended,\n- `$helpers` represents function supporting, and it has a shortcut `$`.\n\nHere is a simple example:\n\n```ts\n// outgoing data\nconst outgoing = {name: 'John', age: 23};\n\n// The result data should only include age, not the name.\n// Define a transformation script. The age alone will be stored in memory for subsequent use.\nreturn {age: $result.age};\n```\n\n> `return` is not necessary. If the script is only one line (and has no line breaks), the system will consider the result of executing that\n> line as the result of the entire function.\n\n#### Merge\n\nHere is the translation of your text into English:\n\nAfter processing the step logic and obtaining the returned data, you can also define how this returned data should be merged into the\ncontext of the entire pipeline. There are several ways to define this, all declared using the `Merge` attribute:\n\n- If not defined, it means the returned data will overwrite the original context and be used as the new context.\n- Defined as `true`, it means the returned data will be automatically unpacked and merged into the original context. In this case, the\n  returned data must be a JSON object and cannot be a primitive type or an array.\n- Defined as a string, it means the returned data will be merged into the original context under the specified name.\n\nHere is a simple example:\n\n```ts\n// context data\nlet context = {name: 'John', age: 0};\nconst result = {age: 23};\n\n// merge not defined, equivalent to\ncontext = result;\n\n// merge is true, equivalent to\ncontext = {...context, ...result};\n\n// merge is 'person', equivalent to\ncontext = {...context, person: result};\n```\n\n> Note that in the latter two cases, there is a possibility of name collision resulting in the original context being overwritten.\n> Therefore, it is necessary to have a clear understanding of the data structure in the context.\n";
+const markdown$a = "Handle any error thrown by current step.\n";
+const markdown$9 = "Handle `CatchableError` thrown by current step.\n";
+const markdown$8 = "Handle `ExposedUncatchableError` thrown by current step.\n";
+const markdown$7 = "Obtain a portion of the request data as the input for this step. Additional processing of the data can also be performed during this\nprocess. The following parameters can be used during the conversion process:\n\n- `$factor`: The content portion of the request data, excluding context data,\n- `$request`: The entire request data, including both content and context,\n- `$helpers` or `$`: Data manipulation helpers.\n\nThe returned data will be used as the real input data for this step. If no data is returned, there is no input data for this step.\n";
+const markdown$6 = "### Input and output\n\nUsually, when processing logic, we do not need all the memory contexts, but only need to extract certain fragments for processing and return\nthe processing results to the context for subsequent logic to continue processing. Therefore, `@rainbow-o23` provides a relevant\nimplementation, allowing pipeline steps to flexibly access the relevant memory data and write back the processed result data to the context\nin the required format.\n\n#### Pick from input\n\nUse the `Pick from input` property to define a script. The returned data will be used as input data for this step. The script is a function\nthat takes the following parameters:\n\n- `$factor` represents the incoming data,\n- `$request` represents the original request data (including incoming data and a context), it is not recommended,\n- `$helpers` represents function supporting, and it has a shortcut `$`.\n\nHere is a simple example:\n\n```ts\n// incoming data\nconst incoming = {name: 'John', age: 23};\n\n// Only the age is needed as a parameter in the step processing, not the name.\n// Define a transformation script, so in the actual processing logic of the current step, only the age will be collected, and there won't be a field for the name attribute.\nreturn {age: $factor.age};\n```\n\n> `return` is not necessary. If the script is only one line (and has no line breaks), the system will consider the result of executing that\n> line as the result of the entire function.\n\n> It's important to note that whether modifications to memory data during processing will affect the original input data depends on how the\n> transformation is handled. Generally, if deep cloning is not performed, it will affect the data; otherwise, it will not.\n\n#### Write to output\n\nUse the `Write to output` property to define a script. The returned data will be used as output data for this step. The script is a function\nthat takes the following parameters:\n\n- `$result` represents the outgoing data,\n- `$request` represents the original request data (including incoming data and a context), it is not recommended,\n- `$helpers` represents function supporting, and it has a shortcut `$`.\n\nHere is a simple example:\n\n```ts\n// outgoing data\nconst outgoing = {name: 'John', age: 23};\n\n// The result data should only include age, not the name.\n// Define a transformation script, the age alone will be stored in memory for subsequent use.\nreturn {age: $result.age};\n```\n\n> `return` is not necessary. If the script is only one line (and has no line breaks), the system will consider the result of executing that\n> line as the result of the entire function.\n\n>\n\n#### Merge-back Strategy\n\nAfter processing the step logic and obtaining the returned data, you can also define how this returned data should be merged into the\ncontext of the entire pipeline. There are several ways to define this, all declared using the `Merge-back strategy` attribute:\n\n- Defined as `Replace`, it means the returned data will overwrite the original context and be used as the new context.\n- Defined as `Unbox and merge`, it means the returned data will be automatically unboxed and merged into the original context. In this\n  case, the returned data must be a JSON object and cannot be a primitive type or an array.\n- Defined as `As specific property`, it means the returned data will be merged into the original context under the specified name.\n\nHere is a simple example:\n\n```ts\n// context data\nlet context = {name: 'John', age: 0};\nconst result = {age: 23};\n\n// merge not defined, equivalent to\ncontext = result;\n// context is {age: 23}\n\n// merge is \"unbox and merge\", equivalent to\ncontext = {...context, ...result};\n// context is {name: 'John', age: 23}\n\n// merge is 'person', equivalent to\ncontext = {...context, person: result};\n// context is {name: 'John', age: 0, person: {age: 23}}\n```\n\n> Note that in the latter two cases, there is a possibility of name collision resulting in the original context being overwritten.\n> Therefore, it is necessary to have a clear understanding of the data structure in the context.\n\n#### Keep or clear\n\nIn the following `Write to output` scenarios, and in cases where merge-back strategy is specified as `Replace`:\n\n- Returning `null` or `undefined` (recommended to use `(void 0)` to represent `undefined`) indicates that the original request data will\n  continue to be used as the request data for the next step without any modifications.\n- Returning a flag created by `$helpers.$clearContextData()` to clear context data will be used as the request data for the next step, while\n  all other data is cleared.\n\n> Please note that \"without any modifications\" is a conceptual reference. If the data has already been altered by the logic executed in the\n> step, the data passed to the next step may not be identical to the input data of this step.\n";
+const markdown$5 = "Define the strategy for writing back step result data to memory:\n\n- `Replace`: means the returned data will overwrite the original context and be used as the new context.\n- `Unbox and merge`: means the returned data will be automatically unboxed and merged into the original context. In this\n  case, the returned data must be a JSON object and cannot be a primitive type or an array.\n- `As specific property`: means the returned data will be merged into the original context under the specified name.\n";
+const markdown$4 = "A brief name that indicates the purpose of the step.\n";
+const markdown$3 = "Write back the result of the step execution to memory for use as the request data in the next step. Additional processing of the data can\nalso be performed during this process. The following parameters can be used during the conversion process:\n\n- `$result`: Result data of the step execution,\n- `$request`: Entire request data, including both content and context,\n- `$helpers` or `$`: Data manipulation helpers.\n\nThe returned data will be written back to memory as the actual result data for this step.\n\n> How the step's returned data is written back to memory depends on the return result of this process and the chosen write-back strategy.\n> Please refer to the merge-back strategy documentation for details.\n";
+const markdown$2 = "Handle `UncatchableError` thrown by current step.\n";
+const markdown$1 = "The specified step definition is used. The logic executed by the system has already been predefined in the step definition. After specifying\nthe step definition, you will also need to specify the parameters required for that step definition.\n";
 const docs$1 = {
-  stepName: markdown$2,
-  stepTransformer: markdown$1.replace(/\$/g, "$$$$")
+  stepName: markdown$4,
+  stepUse: markdown$1,
+  stepFromRequest: markdown$7,
+  stepToResponse: markdown$3,
+  stepMergeToRequest: markdown$5,
+  stepCatchableErrorHandle: markdown$9,
+  stepUncatchableErrorHandle: markdown$2,
+  stepExposedErrorHandle: markdown$8,
+  stepAnyErrorHandle: markdown$a,
+  stepTransformer: markdown$6.replace(/\$/g, "$$$$")
 };
 const markdown = "${transformer}\n";
 const docs = {
@@ -2414,49 +2544,164 @@ const confirm$2 = (model, def, _file, handlers) => {
   handlers.onChange();
   return true;
 };
-const createSubNodes$1 = (_model, _options) => {
-  return void 0;
-};
-const discard = (_model) => VUtils.noop();
-const elementName = {
-  code: "name",
-  label: Labels.Name,
-  anchor: "name",
-  badge: (model) => {
-    if (VUtils.isNotBlank(model.name)) {
-      return model.name.trim();
-    } else {
-      return React.createElement(ConfigurableElementBadgeMissed, null);
+const StandardLinkSelectionKeyFrames = We`
+    from {
+        stroke-dashoffset: ${PlaygroundCssVars.LINK_SELECTED_STROKE_DASHOFFSET};
     }
-  },
-  editor: (props) => {
-    const { model, onValueChanged } = props;
-    const onValueChange = (value) => {
-      model.name = value;
-      onValueChanged();
+    to {
+        stroke-dashoffset: 0;
+    }
+`;
+const StandardLinkSegmentPath = qe.path.attrs(({ selected, dasharray, selectedDasharray }) => {
+  return {
+    [DOM_KEY_WIDGET]: "o23-playground-link-segment-path",
+    style: {
+      "--selected-stroke-dasharray": selected ? selectedDasharray || PlaygroundCssVars.LINK_DEFAULT_SELECTED_STROKE_DASHARRAY : dasharray || void 0,
+      "--selected-animation": selected ? "running" : "paused",
+      "--selected-z-index": selected ? 1 : void 0
+    }
+  };
+})`
+    fill: none;
+    pointer-events: auto;
+    stroke-dasharray: var(--selected-stroke-dasharray);
+    stroke-linecap: ${PlaygroundCssVars.LINK_STROKE_LINECAP};
+    animation: ${StandardLinkSelectionKeyFrames} 1s linear infinite;
+    animation-play-state: var(--selected-animation);
+    z-index: var(--selected-z-index);
+`;
+const StandardLinkWidget = (props) => {
+  const { link, engine, renderPoints: shouldRenderPoints, selected: onSelected } = props;
+  const [selected, setSelected] = reactExports.useState(false);
+  const refPaths = reactExports.useRef([]);
+  reactExports.useEffect(() => {
+    link.setRenderedPaths(refPaths.current.map((ref) => ref.current).filter(Boolean));
+    return () => {
+      link.setRenderedPaths([]);
     };
-    return React.createElement(UnwrappedInput, { onValueChange, value: model.name ?? "" });
-  },
-  helpDoc: HelpDocs.stepName
+  }, [link]);
+  const renderPoints = () => shouldRenderPoints ?? true;
+  const generateRef = () => {
+    const ref = reactExports.createRef();
+    refPaths.current.push(ref);
+    return ref;
+  };
+  const addPointToLink = (event, index) => {
+    if (!event.shiftKey && !link.isLocked() && link.getPoints().length - 1 <= engine.getMaxNumberPointsPerLink()) {
+      const position = engine.getRelativeMousePoint(event);
+      const point = link.point(position.x, position.y, index);
+      event.persist();
+      event.stopPropagation();
+      engine.getActionEventBus().fireAction({ event, model: point });
+    }
+  };
+  const generatePoint = (point) => {
+    return React.createElement(DefaultLinkPointWidget, { key: point.getID(), point, colorSelected: link.getOptions().selectedColor ?? "", color: link.getOptions().color });
+  };
+  const generateLink = (path, extraProps, id) => {
+    return React.createElement(DefaultLinkSegmentWidget, { key: `link-${id}`, path, selected, diagramEngine: engine, factory: engine.getFactoryForLink(link), link, forwardRef: generateRef(), onSelection: setSelected, extras: extraProps });
+  };
+  const points = link.getPoints();
+  const paths = [];
+  refPaths.current = [];
+  if (points.length === 2) {
+    paths.push(generateLink(link.getSVGPath(), {
+      onMouseDown: (event) => {
+        onSelected == null ? void 0 : onSelected(event);
+        addPointToLink(event, 1);
+      }
+    }, "0"));
+    if (link.getTargetPort() == null) {
+      paths.push(generatePoint(points[1]));
+    }
+  } else {
+    for (let j = 0; j < points.length - 1; j++) {
+      paths.push(generateLink(LinkWidget.generateLinePath(points[j], points[j + 1]), {
+        "data-linkid": link.getID(),
+        "data-point": j,
+        onMouseDown: (event) => {
+          onSelected == null ? void 0 : onSelected(event);
+          addPointToLink(event, j + 1);
+        }
+      }, j));
+    }
+    if (renderPoints()) {
+      for (let i = 1; i < points.length - 1; i++) {
+        paths.push(generatePoint(points[i]));
+      }
+      if (link.getTargetPort() == null) {
+        paths.push(generatePoint(points[points.length - 1]));
+      }
+    }
+  }
+  return React.createElement("g", { "data-default-link-test": link.getOptions().testName }, paths);
 };
-const findSubPorts$1 = (_model) => {
-  return void 0;
-};
-const _NextStepPortModel = class _NextStepPortModel extends PortModel {
+class StandardLinkFactory extends DefaultLinkFactory {
+  constructor(type) {
+    super(type);
+  }
+  generateReactWidget(event) {
+    return React.createElement(StandardLinkWidget, { link: event.model, engine: this.engine });
+  }
+  generateLinkSegment(model, selected, path) {
+    return React.createElement(StandardLinkSegmentPath, { selected, dasharray: this.getLinkSegmentDasharray(), selectedDasharray: this.getLinkSegmentSelectedDasharray(), stroke: selected ? model.getOptions().selectedColor : model.getOptions().color, strokeWidth: model.getOptions().width, d: path });
+  }
+  getLinkSegmentDasharray() {
+    return PlaygroundCssVars.LINK_DEFAULT_STROKE_DASHARRAY;
+  }
+  getLinkSegmentSelectedDasharray() {
+    return PlaygroundCssVars.LINK_DEFAULT_SELECTED_STROKE_DASHARRAY;
+  }
+}
+const _EndOfMeJoinLinkModel = class _EndOfMeJoinLinkModel extends DefaultLinkModel {
   constructor() {
-    super({
-      type: _NextStepPortModel.TYPE,
-      name: _NextStepPortModel.NAME,
-      alignment: PortModelAlignment.BOTTOM
-    });
+    super({ type: _EndOfMeJoinLinkModel.TYPE });
+  }
+  getSVGPath() {
+    if (this.points.length == 2) {
+      const sourceX = this.getFirstPoint().getX();
+      const sourceY = this.getFirstPoint().getY();
+      const targetX = this.getLastPoint().getX();
+      const targetY = this.getLastPoint().getY();
+      return `M ${sourceX} ${sourceY} L ${targetX} ${targetY}`;
+    }
+  }
+};
+__publicField(_EndOfMeJoinLinkModel, "TYPE", "end-of-me-join-link");
+let EndOfMeJoinLinkModel = _EndOfMeJoinLinkModel;
+class EndOfMeJoinLinkFactory extends StandardLinkFactory {
+  constructor() {
+    super(EndOfMeJoinLinkModel.TYPE);
+  }
+  generateModel(_event) {
+    return new EndOfMeJoinLinkModel();
+  }
+  getLinkSegmentDasharray() {
+    return PlaygroundCssVars.LINK_END_OF_ME_JOIN_DASHARRAY;
+  }
+  getLinkSegmentSelectedDasharray() {
+    return PlaygroundCssVars.LINK_END_OF_ME_JOIN_SELECTED_DASHARRAY;
+  }
+}
+class OutgoingPortModel extends PortModel {
+  constructor(type, name, alignment) {
+    super({ type, name, alignment });
   }
   createLinkModel() {
     return this.createOutgoingLinkModel();
   }
   createOutgoingLinkModel() {
-    const link = new DefaultLinkModel();
+    const link = this.createDefaultLinkModel();
     link.setSourcePort(this);
     return link;
+  }
+  createDefaultLinkModel() {
+    return new DefaultLinkModel();
+  }
+}
+const _NextStepPortModel = class _NextStepPortModel extends OutgoingPortModel {
+  constructor() {
+    super(_NextStepPortModel.TYPE, _NextStepPortModel.NAME, PortModelAlignment.BOTTOM);
   }
 };
 __publicField(_NextStepPortModel, "TYPE", "next-step-port");
@@ -2498,21 +2743,25 @@ const NextStepPortWidget = (props) => {
     React.createElement(PortWidget, { port, engine })
   );
 };
-const _PreviousStepPortModel = class _PreviousStepPortModel extends PortModel {
-  constructor() {
-    super({
-      type: _PreviousStepPortModel.TYPE,
-      name: _PreviousStepPortModel.NAME,
-      alignment: PortModelAlignment.TOP
-    });
+class IncomingPortModel extends PortModel {
+  constructor(type, name, alignment) {
+    super({ type, name, alignment });
   }
   createLinkModel() {
     return this.createIncomingLinkModel();
   }
   createIncomingLinkModel() {
-    const link = new DefaultLinkModel();
+    const link = this.createDefaultLinkModel();
     link.setTargetPort(this);
     return link;
+  }
+  createDefaultLinkModel() {
+    return new DefaultLinkModel();
+  }
+}
+const _PreviousStepPortModel = class _PreviousStepPortModel extends IncomingPortModel {
+  constructor() {
+    super(_PreviousStepPortModel.TYPE, _PreviousStepPortModel.NAME, PortModelAlignment.TOP);
   }
 };
 __publicField(_PreviousStepPortModel, "TYPE", "previous-step-port");
@@ -2700,9 +2949,17 @@ const PostPortContainer = qe.div.attrs({ [DOM_KEY_WIDGET]: "o23-playground-post-
         }
     }
 
-    &[data-role=sub-steps] {
-        border: ${PlaygroundCssVars.NODE_PORT_SUB_STEPS_BORDER};
-        background: ${PlaygroundCssVars.NODE_PORT_SUB_STEPS_BACKGROUND};
+    &[data-role=steps] {
+        border: ${PlaygroundCssVars.NODE_PORT_STEPS_BORDER};
+        background: ${PlaygroundCssVars.NODE_PORT_STEPS_BACKGROUND};
+    }
+
+    &[data-role=catchable-error],
+    &[data-role=uncatchable-error],
+    &[data-role=exposed-error],
+    &[data-role=any-error] {
+        border: ${PlaygroundCssVars.NODE_PORT_ERROR_HANDLES_BORDER};
+        background: ${PlaygroundCssVars.NODE_PORT_ERROR_HANDLES_BACKGROUND};
     }
 
     > svg:first-child {
@@ -2746,6 +3003,7 @@ const NodeContainer = qe.div`
     border: var(--border);
     background-color: var(--background-color);
     min-width: ${PlaygroundCssVars.NODE_MIN_WIDTH};
+    max-width: ${PlaygroundCssVars.NODE_MAX_WIDTH}
 `;
 const NodeHeader = qe.div`
     display: flex;
@@ -2760,6 +3018,12 @@ const NodeTitle = qe(UnwrappedCaption)`
     color: var(--color);
     font-size: var(--font-size);
     font-weight: var(--font-weight);
+    height: unset;
+    min-height: ${CssVars.INPUT_HEIGHT};
+    white-space: unset;
+    overflow: unset;
+    text-overflow: unset;
+    padding: calc((${CssVars.INPUT_HEIGHT} - var(--font-size)) / 2) 0;
 `;
 const NodeTitleSpreader = qe.span.attrs({ [DOM_KEY_WIDGET]: "o23-playground-node-title-spreader" })`
     display: flex;
@@ -2905,7 +3169,14 @@ const _JoinEndNodeModel = class _JoinEndNodeModel extends HandledNodeModel {
   getSubOf() {
     return this.rest.subOf;
   }
-  endOf(node) {
+  endOfMe(node) {
+    const port = this.getPort(PreviousStepPortModel.NAME);
+    const link = new EndOfMeJoinLinkModel();
+    link.setTargetPort(port);
+    link.setSourcePort(node.getPort(NextStepPortModel.NAME));
+    return link;
+  }
+  endOfSub(node) {
     const port = this.getPort(LastSubStepJoinPortModel.NAME);
     const link = port.createIncomingLinkModel();
     link.setSourcePort(node.getPort(NextStepPortModel.NAME));
@@ -2948,21 +3219,25 @@ const _StepNodeModel = class _StepNodeModel extends HandledNodeModel {
 };
 __publicField(_StepNodeModel, "TYPE", "step-node");
 let StepNodeModel = _StepNodeModel;
-const StepNodeContainer = qe(NodeWrapper).attrs({
-  [DOM_KEY_WIDGET]: "o23-playground-step-node",
-  style: {
-    "--border-radius": PlaygroundCssVars.NODE_BORDER_RADIUS,
-    "--border": PlaygroundCssVars.NODE_STEP_BORDER,
-    "--background-color": PlaygroundCssVars.NODE_BACKGROUND
-  }
+const StepNodeContainer = qe(NodeWrapper).attrs(({ "data-use": use }) => {
+  return {
+    [DOM_KEY_WIDGET]: "o23-playground-step-node",
+    style: {
+      "--border-radius": PlaygroundCssVars.NODE_BORDER_RADIUS,
+      "--border": PlaygroundCssVars[`NODE_STEP_${(use ?? "").trim().toUpperCase().replace(/-/g, "_")}_BORDER`] ?? PlaygroundCssVars.NODE_STEP_BORDER,
+      "--background-color": PlaygroundCssVars.NODE_BACKGROUND
+    }
+  };
 })``;
-const StepNodeHeader = qe(NodeHeader).attrs({
-  [DOM_KEY_WIDGET]: "o23-playground-step-node-header",
-  style: {
-    "--border-radius": PlaygroundCssVars.NODE_BORDER_RADIUS,
-    "--background": PlaygroundCssVars.NODE_STEP_TITLE_BACKGROUND,
-    "--padding": PlaygroundCssVars.NODE_TITLE_PADDING
-  }
+const StepNodeHeader = qe(NodeHeader).attrs(({ "data-use": use }) => {
+  return {
+    [DOM_KEY_WIDGET]: "o23-playground-step-node-header",
+    style: {
+      "--border-radius": PlaygroundCssVars.NODE_BORDER_RADIUS,
+      "--background": PlaygroundCssVars[`NODE_STEP_${(use ?? "").trim().toUpperCase().replace(/-/g, "_")}_TITLE_BACKGROUND`] ?? PlaygroundCssVars.NODE_STEP_TITLE_BACKGROUND,
+      "--padding": PlaygroundCssVars.NODE_TITLE_PADDING
+    }
+  };
 })``;
 const StepNodeTitle = qe(NodeTitle).attrs({
   [DOM_KEY_WIDGET]: "o23-playground-step-node-title",
@@ -3009,7 +3284,7 @@ const StepNodeWidget = (props) => {
   const forceUpdate = useForceUpdate();
   const { step: def, file } = node;
   const { use } = def;
-  const StepDefs = AllStepDefs.find((defs) => defs.use === use);
+  const StepDefs = findStepDef(use);
   const onConfirm = (model) => {
     const ret = StepDefs.confirm(model, def, file, node.handlers);
     if (ret === true) {
@@ -3023,21 +3298,18 @@ const StepNodeWidget = (props) => {
     fire(PlaygroundEventTypes.SHOW_EDIT_DIALOG, React.createElement(DialogContent, { helpDoc: StepDefs.helpDocs, prepare: prepareModel, confirm: onConfirm, discard: onDiscard, elements: StepDefs.properties }));
   };
   const isFirstSubStep = node.isFirstSubStep();
-  const asUseLabelKey = () => {
-    return "StepUse" + (use ?? "").trim().split("-").reduce((a, b) => a + b.charAt(0).toUpperCase() + b.slice(1), "");
-  };
   return React.createElement(
     StepNodeContainer,
-    { onDoubleClick: onDoubleClicked },
+    { onDoubleClick: onDoubleClicked, "data-use": use },
     isFirstSubStep ? React.createElement(FirstSubStepPortWidget, { port: node.getPort(FirstSubStepPortModel.NAME), engine }) : React.createElement(PreviousStepPortWidget, { port: node.getPort(PreviousStepPortModel.NAME), engine }),
     React.createElement(
       StepNodeHeader,
-      null,
+      { "data-use": use },
       React.createElement(StepNodeTitle, null, (def.name ?? "").trim() || Labels.StepNodeNoname),
       React.createElement(NodeTitleSpreader, null),
-      React.createElement(StepNodeSecondTitle, null, Labels[asUseLabelKey()])
+      React.createElement(StepNodeSecondTitle, null, askUseLabel(use))
     ),
-    React.createElement(StepNodeBody, null, StepDefs.ports.map(({ key, port: StepPort }) => {
+    React.createElement(StepNodeBody, { "data-use": use }, StepDefs.ports.map(({ key, port: StepPort }) => {
       return React.createElement(StepPort, { step: def, file, node, engine, key });
     })),
     React.createElement(NextStepPortWidget, { port: node.getPort(NextStepPortModel.NAME), engine })
@@ -3353,13 +3625,20 @@ class StartNodeFactory extends AbstractReactFactory {
 }
 const Factories = {
   ports: [],
-  nodes: []
+  nodes: [],
+  links: []
 };
 const initEngine = (engine) => {
   const portFactories = engine.getPortFactories();
   portFactories.registerFactory(new NextStepPortFactory());
   portFactories.registerFactory(new PreviousStepPortFactory());
-  portFactories.registerFactory(new SubStepsPortFactory());
+  portFactories.registerFactory(new StepsPortFactory());
+  portFactories.registerFactory(new CatchableErrorHandlePortFactory());
+  portFactories.registerFactory(new UncatchableErrorHandlePortFactory());
+  portFactories.registerFactory(new ExposedErrorHandlePortFactory());
+  portFactories.registerFactory(new AnyErrorHandlePortFactory());
+  portFactories.registerFactory(new FirstSubStepPortFactory());
+  portFactories.registerFactory(new LastSubStepJoinPortFactory());
   Factories.ports.forEach((factory) => portFactories.registerFactory(factory));
   const nodeFactories = engine.getNodeFactories();
   nodeFactories.registerFactory(new StartNodeFactory());
@@ -3367,72 +3646,530 @@ const initEngine = (engine) => {
   nodeFactories.registerFactory(new EndNodeFactory());
   nodeFactories.registerFactory(new JoinEndNodeFactory());
   Factories.nodes.forEach((factory) => nodeFactories.registerFactory(factory));
+  const linkFactories = engine.getLinkFactories();
+  linkFactories.registerFactory(new StepsLinkFactory());
+  linkFactories.registerFactory(new ErrorHandlesLinkFactory());
+  linkFactories.registerFactory(new EndOfMeJoinLinkFactory());
+  linkFactories.registerFactory(new LastSubStepJoinLinkFactory());
+  Factories.links.forEach((factory) => linkFactories.registerFactory(factory));
 };
-const PortFromRequest = (props) => {
-  const { step: def } = props;
-  const { fromRequest } = def;
-  const exists = VUtils.isNotBlank(fromRequest);
-  if (!exists) {
-    return null;
-  }
-  return React.createElement(PrePort, { label: Labels.StepFromRequest, required: false, defined: true, all: true, allAsBoolean: true });
+const Defs = {};
+const AllStepDefsAsArray = () => Object.values(Defs);
+const registerStepDef = (def) => {
+  Defs[def.use] = def;
 };
-const PortMergeRequest = (props) => {
-  const { step: def } = props;
-  const { mergeRequest } = def;
-  if (mergeRequest == null) {
-    return null;
-  } else if (mergeRequest === false) {
-    return null;
-  } else if (mergeRequest === true) {
-    return React.createElement(PostPort, { label: Labels.StepMergeRequest, required: false, defined: true, all: true, allAsBoolean: true });
-  } else if (VUtils.isBlank(mergeRequest)) {
-    return null;
-  } else {
-    return React.createElement(PostPort, { label: Labels.StepToResponse, required: false, defined: true, all: true, allAsBoolean: false, allAsGiven: mergeRequest.trim() });
-  }
+const findStepDef = (use) => {
+  return Defs[use];
 };
-const PortToResponse = (props) => {
-  const { step: def } = props;
-  const { toResponse } = def;
-  const exists = VUtils.isNotBlank(toResponse);
-  if (!exists) {
-    return null;
+class ToSubStepsLinkModel extends DefaultLinkModel {
+  constructor(type, options) {
+    super({ type, ...options ?? {} });
   }
-  return React.createElement(PostPort, { label: Labels.StepToResponse, required: false, defined: true, all: true, allAsBoolean: true });
-};
-const prepare$2 = (def) => {
-  const model = {
-    name: def.name,
-    use: def.use,
-    fromRequest: def.fromRequest,
-    toResponse: def.toResponse,
-    temporary: {}
-  };
-  model.temporary.fromRequestAsIs = VUtils.isBlank(def.fromRequest);
-  model.temporary.toResponseAsIs = VUtils.isBlank(def.toResponse);
-  model.temporary.mergeRequestType = VUtils.isBlank(def.mergeRequest) || def.mergeRequest === false ? MergeRequestType.REPLACE : def.mergeRequest === true ? MergeRequestType.UNBOX : MergeRequestType.MERGE_AS_PROPERTY;
-  if (model.temporary.mergeRequestType === MergeRequestType.MERGE_AS_PROPERTY) {
-    model.mergeRequest = def.mergeRequest;
-  }
-  const { errorHandles: { catchable, uncatchable, exposed, any: anyError } = {} } = def;
-  model.errorHandles = {};
-  const copyErrorHandle = (def2, name, flagName) => {
-    if (def2 == null) {
-      model.temporary[flagName] = ErrorHandleType.NONE;
-    } else if (Array.isArray(def2)) {
-      model.temporary[flagName] = ErrorHandleType.STEPS;
-      model.temporary[name] = def2;
-    } else {
-      model.errorHandles[name] = def2;
-      model.temporary[flagName] = ErrorHandleType.SNIPPET;
+  getSVGPath() {
+    if (this.points.length == 2) {
+      const sourceX = this.getFirstPoint().getX();
+      const sourceY = this.getFirstPoint().getY();
+      const targetX = this.getLastPoint().getX();
+      const targetY = this.getLastPoint().getY();
+      const centerX = this.computeCenterX(sourceX, targetX);
+      const centerY = Math.min(sourceY, targetY) + Math.abs((sourceY - targetY) / 2);
+      const radius = Math.min(DEFAULTS.diagram.linkArcRadius, Math.abs(sourceY - centerY));
+      if (sourceY === targetY) {
+        return `M ${sourceX} ${sourceY} L ${targetX} ${targetY}`;
+      } else if (sourceY > targetY) {
+        return [
+          `M ${sourceX} ${sourceY}`,
+          `L ${centerX - radius} ${sourceY}`,
+          `A ${radius} ${radius} 0 0 0 ${centerX} ${sourceY - radius}`,
+          `L ${centerX} ${targetY + radius}`,
+          `A ${radius} ${radius} 0 0 1 ${centerX + radius} ${targetY}`,
+          `L ${targetX} ${targetY}`
+        ].join(" ");
+      } else {
+        return [
+          `M ${sourceX} ${sourceY}`,
+          `L ${centerX - radius} ${sourceY}`,
+          `A ${radius} ${radius} 0 0 1 ${centerX} ${sourceY + radius}`,
+          `L ${centerX} ${targetY - radius}`,
+          `A ${radius} ${radius} 0 0 0 ${centerX + radius} ${targetY}`,
+          `L ${targetX} ${targetY}`
+        ].join(" ");
+      }
     }
-  };
-  copyErrorHandle(catchable, "catchable", "useErrorHandlesForCatchable");
-  copyErrorHandle(uncatchable, "uncatchable", "useErrorHandlesForUncatchable");
-  copyErrorHandle(exposed, "exposed", "useErrorHandlesForExposed");
-  copyErrorHandle(anyError, "any", "useErrorHandlesForAny");
-  return model;
+  }
+  computeCenterX(sourceX, targetX) {
+    const sourceNode = this.getSourcePort().getNode();
+    const { use } = sourceNode.step;
+    const def = findStepDef(use);
+    const ports = def.findSubPorts(sourceNode);
+    const links = ports.map((port) => Object.values(port.getLinks())[0]);
+    const hasStepsLink = links[0].getSourcePort() instanceof StepsPortModel;
+    const minTargetX = links.map((link) => Math.max(link.getFirstPoint().getX(), link.getLastPoint().getX())).reduce((x1, x2) => Math.min(x1, x2));
+    const absoluteCenterX = (minTargetX - Math.min(sourceX, targetX)) / 2;
+    const linkCount = links.length - (hasStepsLink ? 1 : 0);
+    const linkGutter = this.getGutterSize();
+    const centerXStart = absoluteCenterX - linkGutter * (linkCount - 1) / 2;
+    const myIndex = hasStepsLink ? Math.max(0, links.indexOf(this) - 1) : links.indexOf(this);
+    return Math.min(sourceX, targetX) + centerXStart + (linkCount - myIndex - 1) * linkGutter;
+  }
+  getGutterSize() {
+    return DEFAULTS.diagram.linkGutterSize;
+  }
+}
+const _StepsLinkModel = class _StepsLinkModel extends ToSubStepsLinkModel {
+  constructor() {
+    super(_StepsLinkModel.TYPE);
+  }
+};
+__publicField(_StepsLinkModel, "TYPE", "steps-link");
+let StepsLinkModel = _StepsLinkModel;
+class StepsLinkFactory extends StandardLinkFactory {
+  constructor() {
+    super(StepsLinkModel.TYPE);
+  }
+  generateModel(_event) {
+    return new StepsLinkModel();
+  }
+  getLinkSegmentDasharray() {
+    return PlaygroundCssVars.LINK_STEPS_DASHARRAY;
+  }
+  getLinkSegmentSelectedDasharray() {
+    return PlaygroundCssVars.LINK_STEPS_SELECTED_DASHARRAY;
+  }
+}
+const _ErrorHandlesLinkModel = class _ErrorHandlesLinkModel extends ToSubStepsLinkModel {
+  constructor() {
+    super(_ErrorHandlesLinkModel.TYPE, { selectedColor: PlaygroundCssVars.LINK_ERROR_HANDLES_SELECTED_COLOR });
+    this.setColor(PlaygroundCssVars.LINK_ERROR_HANDLES_COLOR);
+  }
+};
+__publicField(_ErrorHandlesLinkModel, "TYPE", "error-handles-link");
+let ErrorHandlesLinkModel = _ErrorHandlesLinkModel;
+class ErrorHandlesLinkFactory extends StandardLinkFactory {
+  constructor() {
+    super(ErrorHandlesLinkModel.TYPE);
+  }
+  generateModel(_event) {
+    return new ErrorHandlesLinkModel();
+  }
+  getLinkSegmentDasharray() {
+    return PlaygroundCssVars.LINK_ERROR_HANDLES_DASHARRAY;
+  }
+  getLinkSegmentSelectedDasharray() {
+    return PlaygroundCssVars.LINK_ERROR_HANDLES_SELECTED_DASHARRAY;
+  }
+}
+const _LastSubStepJoinLinkModel = class _LastSubStepJoinLinkModel extends DefaultLinkModel {
+  constructor() {
+    super({ type: _LastSubStepJoinLinkModel.TYPE });
+  }
+  getSVGPath() {
+    if (this.points.length == 2) {
+      const sourceX = this.getFirstPoint().getX();
+      const sourceY = this.getFirstPoint().getY();
+      const targetX = this.getLastPoint().getX();
+      const targetY = this.getLastPoint().getY();
+      const radius = DEFAULTS.diagram.linkArcRadius;
+      const { index, count } = this.getJoinIndex();
+      if (index === count - 1) {
+        return [
+          `M ${sourceX} ${sourceY}`,
+          `L ${sourceX} ${targetY - radius}`,
+          `A ${radius} ${radius} 0 0 1 ${sourceX - radius} ${targetY}`,
+          `L ${targetX} ${targetY}`
+        ].join(" ");
+      } else {
+        const sinkingOffset = this.getSinkingOffset();
+        const gutterSize = this.getGutterSize();
+        const { firstX, firstY, secondX } = this.getTargetNodePositionBase();
+        return [
+          `M ${sourceX} ${sourceY}`,
+          `L ${sourceX} ${sourceY + sinkingOffset - radius}`,
+          `A ${radius} ${radius} 0 0 1 ${sourceX - radius} ${sourceY + sinkingOffset}`,
+          `L ${firstX + gutterSize * (index + 1) + radius} ${sourceY + sinkingOffset}`,
+          `A ${radius} ${radius} 0 0 0 ${firstX + gutterSize * (index + 1)} ${sourceY + sinkingOffset + radius}`,
+          `L ${firstX + gutterSize * (index + 1)} ${firstY - gutterSize * (index + 1) - radius}`,
+          `A ${radius} ${radius} 0 0 0 ${firstX + gutterSize * (index + 1) + radius} ${firstY - gutterSize * (index + 1)}`,
+          `L ${secondX + gutterSize * (index + 1) - radius} ${firstY - gutterSize * (index + 1)}`,
+          `A ${radius} ${radius} 0 0 1 ${secondX + gutterSize * (index + 1)} ${firstY - gutterSize * (index + 1) + radius}`,
+          `L ${secondX + gutterSize * (index + 1)} ${targetY - radius}`,
+          `A ${radius} ${radius} 0 0 1 ${secondX + gutterSize * (index + 1) - radius} ${targetY}`,
+          `L ${targetX} ${targetY}`
+        ].join(" ");
+      }
+    }
+  }
+  getJoinIndex() {
+    const sourceY = this.getFirstPoint().getY();
+    let index = 0;
+    const links = Object.values(this.getTargetPort().getLinks());
+    links.forEach((link) => {
+      if (link.getFirstPoint().getY() < sourceY) {
+        index++;
+      }
+    });
+    return { index, count: links.length };
+  }
+  getSinkingOffset() {
+    return DEFAULTS.diagram.linkJoinEndSinkingOffset;
+  }
+  getGutterSize() {
+    return DEFAULTS.diagram.linkJoinEndGutterSize;
+  }
+  getTargetNodePositionBase() {
+    const node = this.getTargetPort().getNode();
+    const previousPort = node.getPort(PreviousStepPortModel.NAME);
+    const firstX = Object.values(previousPort.getLinks())[0].getLastPoint().getX();
+    const firstY = node.getY();
+    const secondX = node.getX() + node.width;
+    return { firstX, firstY, secondX };
+  }
+};
+__publicField(_LastSubStepJoinLinkModel, "TYPE", "last-sub-step-join-link");
+let LastSubStepJoinLinkModel = _LastSubStepJoinLinkModel;
+class LastSubStepJoinLinkFactory extends StandardLinkFactory {
+  constructor() {
+    super(LastSubStepJoinLinkModel.TYPE);
+  }
+  generateModel(_event) {
+    return new LastSubStepJoinLinkModel();
+  }
+  getLinkSegmentDasharray() {
+    return PlaygroundCssVars.LINK_LAST_SUB_STEP_JOIN_DASHARRAY;
+  }
+  getLinkSegmentSelectedDasharray() {
+    return PlaygroundCssVars.LINK_LAST_SUB_STEP_JOIN_SELECTED_DASHARRAY;
+  }
+}
+const _StepsPortModel = class _StepsPortModel extends OutgoingPortModel {
+  constructor(name) {
+    super(_StepsPortModel.TYPE, name, PortModelAlignment.RIGHT);
+  }
+  createDefaultLinkModel() {
+    return new StepsLinkModel();
+  }
+};
+__publicField(_StepsPortModel, "TYPE", "steps-port");
+let StepsPortModel = _StepsPortModel;
+class StepsPortFactory extends AbstractModelFactory {
+  constructor() {
+    super(StepsPortModel.TYPE);
+  }
+  generateModel(_event) {
+    throw new Error("DO NOT use StepsPortFactory#generateModel.");
+  }
+}
+const StepsPortContainer = qe.div.attrs({ [DOM_KEY_WIDGET]: "o23-playground-steps-port" })`
+    display: flex;
+    position: absolute;
+    top: calc(-1 * ${PlaygroundCssVars.NODE_PORT_BORDER_WIDTH});
+    right: calc(${PlaygroundCssVars.NODE_PORT_HEIGHT} / -2 - ${PlaygroundCssVars.NODE_BORDER_WIDTH});
+    width: calc(${PlaygroundCssVars.NODE_PORT_HEIGHT} / 2);
+    height: ${PlaygroundCssVars.NODE_PORT_HEIGHT};
+    background-color: ${PlaygroundCssVars.NODE_PORT_STEPS_BACKGROUND};
+    border: ${PlaygroundCssVars.NODE_PORT_STEPS_BORDER};
+    border-top-right-radius: calc(${PlaygroundCssVars.NODE_PORT_HEIGHT} / 2);
+    border-bottom-right-radius: calc(${PlaygroundCssVars.NODE_PORT_HEIGHT} / 2);
+
+    > div:first-child {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 0;
+        height: 100%;
+    }
+`;
+const StepsPortWidget = (props) => {
+  const { port, engine } = props;
+  return React.createElement(
+    StepsPortContainer,
+    null,
+    React.createElement(PortWidget, { port, engine })
+  );
+};
+const _FirstSubStepPortModel = class _FirstSubStepPortModel extends IncomingPortModel {
+  constructor() {
+    super(_FirstSubStepPortModel.TYPE, _FirstSubStepPortModel.NAME, PortModelAlignment.LEFT);
+  }
+};
+__publicField(_FirstSubStepPortModel, "TYPE", "first-sub-step-port");
+__publicField(_FirstSubStepPortModel, "NAME", "first-sub-step");
+let FirstSubStepPortModel = _FirstSubStepPortModel;
+class FirstSubStepPortFactory extends AbstractModelFactory {
+  constructor() {
+    super(FirstSubStepPortModel.TYPE);
+  }
+  generateModel(_event) {
+    throw new Error("DO NOT use FirstSubStepPortFactory#generateModel.");
+  }
+}
+const FirstSubStepPortContainer = qe.div.attrs({ [DOM_KEY_WIDGET]: "o23-playground-first-sub-step-port" })`
+    display: flex;
+    position: absolute;
+    top: calc(${CssVars.INPUT_HEIGHT} / 2 - ${PlaygroundCssVars.NODE_PORT_RADIUS});
+    left: calc(-1 * (${PlaygroundCssVars.NODE_PORT_RADIUS} + ${PlaygroundCssVars.NODE_BORDER_WIDTH}));
+    width: ${PlaygroundCssVars.NODE_PORT_RADIUS};
+    height: calc(${PlaygroundCssVars.NODE_PORT_RADIUS} * 2);
+    background-color: ${PlaygroundCssVars.NODE_PORT_FIRST_SUB_STEP_BACKGROUND};
+    border: ${PlaygroundCssVars.NODE_PORT_FIRST_SUB_STEP_BORDER};
+    border-top-left-radius: ${PlaygroundCssVars.NODE_PORT_RADIUS};
+    border-bottom-left-radius: ${PlaygroundCssVars.NODE_PORT_RADIUS};
+
+    > div:first-child {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 0;
+        height: 100%;
+    }
+`;
+const FirstSubStepPortWidget = (props) => {
+  const { port, engine } = props;
+  return React.createElement(
+    FirstSubStepPortContainer,
+    null,
+    React.createElement(PortWidget, { port, engine })
+  );
+};
+const _LastSubStepJoinPortModel = class _LastSubStepJoinPortModel extends IncomingPortModel {
+  constructor() {
+    super(_LastSubStepJoinPortModel.TYPE, _LastSubStepJoinPortModel.NAME, PortModelAlignment.RIGHT);
+  }
+  createDefaultLinkModel() {
+    return new LastSubStepJoinLinkModel();
+  }
+};
+__publicField(_LastSubStepJoinPortModel, "TYPE", "last-sub-step-join-port");
+__publicField(_LastSubStepJoinPortModel, "NAME", "last-sub-step-join");
+let LastSubStepJoinPortModel = _LastSubStepJoinPortModel;
+class LastSubStepJoinPortFactory extends AbstractModelFactory {
+  constructor() {
+    super(LastSubStepJoinPortModel.TYPE);
+  }
+  generateModel(_event) {
+    throw new Error("DO NOT use LastSubStepJoinPortFactory#generateModel.");
+  }
+}
+const LastSubStepJoinPortContainer = qe.div.attrs({ [DOM_KEY_WIDGET]: "o23-playground-last-sub-step-join-port" })`
+    display: flex;
+    position: absolute;
+    top: calc(50% - ${PlaygroundCssVars.NODE_PORT_RADIUS});
+    right: calc(-1 * ${PlaygroundCssVars.NODE_PORT_RADIUS} - ${PlaygroundCssVars.NODE_BORDER_WIDTH});
+    width: ${PlaygroundCssVars.NODE_PORT_RADIUS};
+    height: calc(${PlaygroundCssVars.NODE_PORT_RADIUS} * 2);
+    background-color: ${PlaygroundCssVars.NODE_PORT_LAST_SUB_STEP_JOIN_BACKGROUND};
+    border: ${PlaygroundCssVars.NODE_PORT_LAST_SUB_STEP_JOIN_BORDER};
+    border-top-right-radius: ${PlaygroundCssVars.NODE_PORT_RADIUS};
+    border-bottom-right-radius: ${PlaygroundCssVars.NODE_PORT_RADIUS};
+
+    > div:first-child {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 0;
+        height: 100%;
+    }
+`;
+const LastSubStepJoinPortWidget = (props) => {
+  const { port, engine } = props;
+  return React.createElement(
+    LastSubStepJoinPortContainer,
+    null,
+    React.createElement(PortWidget, { port, engine })
+  );
+};
+class ErrorHandlesPortModel extends OutgoingPortModel {
+  constructor(type, name, alignment) {
+    super(type, name, alignment);
+  }
+}
+const _CatchableErrorHandlePortModel = class _CatchableErrorHandlePortModel extends ErrorHandlesPortModel {
+  constructor() {
+    super(_CatchableErrorHandlePortModel.TYPE, _CatchableErrorHandlePortModel.NAME, PortModelAlignment.RIGHT);
+  }
+  createDefaultLinkModel() {
+    return new ErrorHandlesLinkModel();
+  }
+};
+__publicField(_CatchableErrorHandlePortModel, "TYPE", "catchable-error-handle-port");
+__publicField(_CatchableErrorHandlePortModel, "NAME", "catchable-error-handle");
+let CatchableErrorHandlePortModel = _CatchableErrorHandlePortModel;
+class CatchableErrorHandlePortFactory extends AbstractModelFactory {
+  constructor() {
+    super(CatchableErrorHandlePortModel.TYPE);
+  }
+  generateModel(_event) {
+    throw new Error("DO NOT use CatchableErrorHandlePortFactory#generateModel.");
+  }
+}
+const CatchableErrorHandlePortContainer = qe.div.attrs({ [DOM_KEY_WIDGET]: "o23-playground-catchable-error-port" })`
+    display: flex;
+    position: absolute;
+    top: calc(-1 * ${PlaygroundCssVars.NODE_PORT_BORDER_WIDTH});
+    right: calc(${PlaygroundCssVars.NODE_PORT_HEIGHT} / -2 - ${PlaygroundCssVars.NODE_BORDER_WIDTH});
+    width: calc(${PlaygroundCssVars.NODE_PORT_HEIGHT} / 2);
+    height: ${PlaygroundCssVars.NODE_PORT_HEIGHT};
+    background-color: ${PlaygroundCssVars.NODE_PORT_ERROR_HANDLES_BACKGROUND};
+    border: ${PlaygroundCssVars.NODE_PORT_ERROR_HANDLES_BORDER};
+    border-top-right-radius: calc(${PlaygroundCssVars.NODE_PORT_HEIGHT} / 2);
+    border-bottom-right-radius: calc(${PlaygroundCssVars.NODE_PORT_HEIGHT} / 2);
+
+    > div:first-child {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 0;
+        height: 100%;
+    }
+`;
+const CatchableErrorHandlePortWidget = (props) => {
+  const { port, engine } = props;
+  return React.createElement(
+    CatchableErrorHandlePortContainer,
+    null,
+    React.createElement(PortWidget, { port, engine })
+  );
+};
+const _UncatchableErrorHandlePortModel = class _UncatchableErrorHandlePortModel extends ErrorHandlesPortModel {
+  constructor() {
+    super(_UncatchableErrorHandlePortModel.TYPE, _UncatchableErrorHandlePortModel.NAME, PortModelAlignment.RIGHT);
+  }
+  createDefaultLinkModel() {
+    return new ErrorHandlesLinkModel();
+  }
+};
+__publicField(_UncatchableErrorHandlePortModel, "TYPE", "uncatchable-error-handle-port");
+__publicField(_UncatchableErrorHandlePortModel, "NAME", "uncatchable-error-handle");
+let UncatchableErrorHandlePortModel = _UncatchableErrorHandlePortModel;
+class UncatchableErrorHandlePortFactory extends AbstractModelFactory {
+  constructor() {
+    super(UncatchableErrorHandlePortModel.TYPE);
+  }
+  generateModel(_event) {
+    throw new Error("DO NOT use UncatchableErrorHandlePortFactory#generateModel.");
+  }
+}
+const UncatchableErrorHandlePortContainer = qe.div.attrs({ [DOM_KEY_WIDGET]: "o23-playground-uncatchable-error-port" })`
+    display: flex;
+    position: absolute;
+    top: calc(-1 * ${PlaygroundCssVars.NODE_PORT_BORDER_WIDTH});
+    right: calc(${PlaygroundCssVars.NODE_PORT_HEIGHT} / -2 - ${PlaygroundCssVars.NODE_BORDER_WIDTH});
+    width: calc(${PlaygroundCssVars.NODE_PORT_HEIGHT} / 2);
+    height: ${PlaygroundCssVars.NODE_PORT_HEIGHT};
+    background-color: ${PlaygroundCssVars.NODE_PORT_ERROR_HANDLES_BACKGROUND};
+    border: ${PlaygroundCssVars.NODE_PORT_ERROR_HANDLES_BORDER};
+    border-top-right-radius: calc(${PlaygroundCssVars.NODE_PORT_HEIGHT} / 2);
+    border-bottom-right-radius: calc(${PlaygroundCssVars.NODE_PORT_HEIGHT} / 2);
+
+    > div:first-child {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 0;
+        height: 100%;
+    }
+`;
+const UncatchableErrorHandlePortWidget = (props) => {
+  const { port, engine } = props;
+  return React.createElement(
+    UncatchableErrorHandlePortContainer,
+    null,
+    React.createElement(PortWidget, { port, engine })
+  );
+};
+const _ExposedErrorHandlePortModel = class _ExposedErrorHandlePortModel extends ErrorHandlesPortModel {
+  constructor() {
+    super(_ExposedErrorHandlePortModel.TYPE, _ExposedErrorHandlePortModel.NAME, PortModelAlignment.RIGHT);
+  }
+  createDefaultLinkModel() {
+    return new ErrorHandlesLinkModel();
+  }
+};
+__publicField(_ExposedErrorHandlePortModel, "TYPE", "exposed-error-handle-port");
+__publicField(_ExposedErrorHandlePortModel, "NAME", "exposed-error-handle");
+let ExposedErrorHandlePortModel = _ExposedErrorHandlePortModel;
+class ExposedErrorHandlePortFactory extends AbstractModelFactory {
+  constructor() {
+    super(ExposedErrorHandlePortModel.TYPE);
+  }
+  generateModel(_event) {
+    throw new Error("DO NOT use ExposedErrorHandlePortFactory#generateModel.");
+  }
+}
+const ExposedErrorHandlePortContainer = qe.div.attrs({ [DOM_KEY_WIDGET]: "o23-playground-exposed-error-port" })`
+    display: flex;
+    position: absolute;
+    top: calc(-1 * ${PlaygroundCssVars.NODE_PORT_BORDER_WIDTH});
+    right: calc(${PlaygroundCssVars.NODE_PORT_HEIGHT} / -2 - ${PlaygroundCssVars.NODE_BORDER_WIDTH});
+    width: calc(${PlaygroundCssVars.NODE_PORT_HEIGHT} / 2);
+    height: ${PlaygroundCssVars.NODE_PORT_HEIGHT};
+    background-color: ${PlaygroundCssVars.NODE_PORT_ERROR_HANDLES_BACKGROUND};
+    border: ${PlaygroundCssVars.NODE_PORT_ERROR_HANDLES_BORDER};
+    border-top-right-radius: calc(${PlaygroundCssVars.NODE_PORT_HEIGHT} / 2);
+    border-bottom-right-radius: calc(${PlaygroundCssVars.NODE_PORT_HEIGHT} / 2);
+
+    > div:first-child {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 0;
+        height: 100%;
+    }
+`;
+const ExposedErrorHandlePortWidget = (props) => {
+  const { port, engine } = props;
+  return React.createElement(
+    ExposedErrorHandlePortContainer,
+    null,
+    React.createElement(PortWidget, { port, engine })
+  );
+};
+const _AnyErrorHandlePortModel = class _AnyErrorHandlePortModel extends ErrorHandlesPortModel {
+  constructor() {
+    super(_AnyErrorHandlePortModel.TYPE, _AnyErrorHandlePortModel.NAME, PortModelAlignment.RIGHT);
+  }
+  createDefaultLinkModel() {
+    return new ErrorHandlesLinkModel();
+  }
+};
+__publicField(_AnyErrorHandlePortModel, "TYPE", "any-error-handle-port");
+__publicField(_AnyErrorHandlePortModel, "NAME", "any-error-handle");
+let AnyErrorHandlePortModel = _AnyErrorHandlePortModel;
+class AnyErrorHandlePortFactory extends AbstractModelFactory {
+  constructor() {
+    super(AnyErrorHandlePortModel.TYPE);
+  }
+  generateModel(_event) {
+    throw new Error("DO NOT use AnyErrorHandlePortFactory#generateModel.");
+  }
+}
+const AnyErrorHandlePortContainer = qe.div.attrs({ [DOM_KEY_WIDGET]: "o23-playground-any-error-port" })`
+    display: flex;
+    position: absolute;
+    top: calc(-1 * ${PlaygroundCssVars.NODE_PORT_BORDER_WIDTH});
+    right: calc(${PlaygroundCssVars.NODE_PORT_HEIGHT} / -2 - ${PlaygroundCssVars.NODE_BORDER_WIDTH});
+    width: calc(${PlaygroundCssVars.NODE_PORT_HEIGHT} / 2);
+    height: ${PlaygroundCssVars.NODE_PORT_HEIGHT};
+    background-color: ${PlaygroundCssVars.NODE_PORT_ERROR_HANDLES_BACKGROUND};
+    border: ${PlaygroundCssVars.NODE_PORT_ERROR_HANDLES_BORDER};
+    border-top-right-radius: calc(${PlaygroundCssVars.NODE_PORT_HEIGHT} / 2);
+    border-bottom-right-radius: calc(${PlaygroundCssVars.NODE_PORT_HEIGHT} / 2);
+
+    > div:first-child {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 0;
+        height: 100%;
+    }
+`;
+const AnyErrorHandlePortWidget = (props) => {
+  const { port, engine } = props;
+  return React.createElement(
+    AnyErrorHandlePortContainer,
+    null,
+    React.createElement(PortWidget, { port, engine })
+  );
 };
 const START_X = 64;
 const START_Y = 64;
@@ -3550,23 +4287,23 @@ const buildGrid = (node, grid, x, y) => {
   let hasSubSteps = false;
   if (node instanceof StepNodeModel) {
     const { use } = node.step;
-    const ports = ((_a = AllStepDefs.find((def) => def.use === use)) == null ? void 0 : _a.findSubPorts(node)) ?? [];
-    ports.forEach((port2) => {
-      Object.values(port2.getLinks()).forEach((link) => {
-        hasSubSteps = true;
-        const subNode = link.getTargetPort().getNode();
-        grid[x + 1] = grid[x + 1] ?? [];
-        grid[x + 1][y + 1] = {
-          node: subNode,
-          x: subNode.getPosition().x,
-          y: subNode.getPosition().y,
-          maxWidth: -1,
-          maxHeight: -1,
-          top: -1,
-          left: -1
-        };
-        y = buildGrid(subNode, grid, x + 1, y + 1);
-      });
+    const ports = ((_a = findStepDef(use)) == null ? void 0 : _a.findSubPorts(node)) ?? [];
+    ports.forEach((port2, portIndex) => {
+      const link = Object.values(port2.getLinks())[0];
+      y = y + (portIndex === 0 ? 0 : 1);
+      hasSubSteps = true;
+      const subNode = link.getTargetPort().getNode();
+      grid[x + 1] = grid[x + 1] ?? [];
+      grid[x + 1][y] = {
+        node: subNode,
+        x: subNode.getPosition().x,
+        y: subNode.getPosition().y,
+        maxWidth: -1,
+        maxHeight: -1,
+        top: -1,
+        left: -1
+      };
+      y = buildGrid(subNode, grid, x + 1, y);
     });
   }
   const port = node.getPort(NextStepPortModel.NAME);
@@ -3576,7 +4313,7 @@ const buildGrid = (node, grid, x, y) => {
     const next = link.getTargetPort().getNode();
     grid[x] = grid[x] ?? [];
     if (hasSubSteps) {
-      grid[x][y] = {
+      grid[x][y + 1] = {
         node: next,
         x: next.getPosition().x,
         y: next.getPosition().y,
@@ -3585,7 +4322,7 @@ const buildGrid = (node, grid, x, y) => {
         top: -1,
         left: -1
       };
-      return buildGrid(next, grid, x, y);
+      return buildGrid(next, grid, x, y + 1);
     } else if (next instanceof JoinEndNodeModel) {
       return y;
     } else {
@@ -3671,11 +4408,16 @@ const EditorWrapper = qe.div.attrs({
     background-position: ${PlaygroundCssVars.EDITOR_BACKGROUND_POSITION};
     overflow: auto;
 
-    &[data-diagram-status=first-paint] {
+    &[data-diagram-status=paint] {
         > div.o23-playground-editor-content {
             opacity: 0;
             user-select: none;
             pointer-events: none;
+
+            &::-webkit-scrollbar {
+                height: 0;
+                width: 0;
+            }
 
             div.node, div.node * {
                 user-select: none;
@@ -3697,6 +4439,56 @@ const EditorWrapper = qe.div.attrs({
 
     > div.o23-playground-editor-content {
         height: 100%;
+    }
+`;
+const EditorToolbar = qe.div.attrs({ [DOM_KEY_WIDGET]: "o23-playground-editor-toolbar" })`
+    display: flex;
+    position: absolute;
+    align-items: center;
+    top: ${PlaygroundCssVars.EDITOR_TOOLBAR_GUTTER_SIZE};
+    right: ${PlaygroundCssVars.EDITOR_TOOLBAR_GUTTER_SIZE};
+    height: ${PlaygroundCssVars.EDITOR_TOOLBAR_HEIGHT};
+    border-radius: ${PlaygroundCssVars.EDITOR_TOOLBAR_BORDER_RADIUS};
+    border: ${PlaygroundCssVars.EDITOR_TOOLBAR_BORDER};
+    background-color: ${CssVars.BACKGROUND_COLOR};
+    overflow: hidden;
+    transition: border-color ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION};
+
+    &:hover {
+        border-color: ${PlaygroundCssVars.EDITOR_TOOLBAR_BUTTON_ACTIVE_BACKGROUND_COLOR};
+
+        > span[data-w=o23-playground-editor-toolbar-button]:not(:hover) {
+            color: ${PlaygroundCssVars.EDITOR_TOOLBAR_BUTTON_ACTIVE_BACKGROUND_COLOR};
+        }
+    }
+`;
+const EditorToolbarButton = qe.span.attrs({ [DOM_KEY_WIDGET]: "o23-playground-editor-toolbar-button" })`
+    display: flex;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+    width: ${PlaygroundCssVars.EDITOR_TOOLBAR_BUTTON_WIDTH};
+    height: ${PlaygroundCssVars.EDITOR_TOOLBAR_BUTTON_HEIGHT};
+    color: ${PlaygroundCssVars.EDITOR_TOOLBAR_BUTTON_COLOR};
+    cursor: pointer;
+    transition: color ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION}, background-color ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION};
+
+    &:not(:last-child) {
+        border-right: ${PlaygroundCssVars.EDITOR_TOOLBAR_BORDER};
+    }
+
+    &:hover {
+        color: ${PlaygroundCssVars.EDITOR_TOOLBAR_BUTTON_ACTIVE_COLOR};
+        background-color: ${PlaygroundCssVars.EDITOR_TOOLBAR_BUTTON_ACTIVE_BACKGROUND_COLOR};
+    }
+
+    > svg {
+        height: calc(${PlaygroundCssVars.EDITOR_TOOLBAR_BUTTON_HEIGHT} / 3 * 2);
+
+        &[data-icon=o23-origin-size] {
+            height: calc(${PlaygroundCssVars.EDITOR_TOOLBAR_BUTTON_HEIGHT} / 3 * 2 - 2px);
+            margin-top: 2px;
+        }
     }
 `;
 const ParseError = qe.div.attrs({ [DOM_KEY_WIDGET]: "o23-playground-viewer-error" })`
@@ -3739,7 +4531,10 @@ var EditorKernelDiagramStatus;
   EditorKernelDiagramStatus2["IN_SERVICE"] = "in-service";
 })(EditorKernelDiagramStatus || (EditorKernelDiagramStatus = {}));
 const createDiagramEngine = () => {
-  const engine = createEngine();
+  const engine = createEngine({
+    registerDefaultPanAndZoomCanvasAction: false,
+    registerDefaultZoomCanvasAction: false
+  });
   initEngine(engine);
   return engine;
 };
@@ -3849,7 +4644,8 @@ const EditorKernel = (props) => {
       left: -1
     };
     buildGrid(startNode, grid, 0, 0);
-    computeGrid(grid, 64, 64, 64, 64);
+    const { startTop, startLeft, rowGap, columnGap } = DEFAULTS.diagram;
+    computeGrid(grid, startTop, startLeft, rowGap, columnGap);
     stateRef.current.engine.setModel(cloneDiagramNodes(stateRef.current.engine.getModel()));
     stateRef.current.diagramStatus = EditorKernelDiagramStatus.IN_SERVICE;
     forceUpdate();
@@ -3873,6 +4669,34 @@ const EditorKernel = (props) => {
       React.createElement(ParseError, null, Labels.NoDefParsed)
     );
   }
+  const zoomTo = (factor) => {
+    const engine = stateRef.current.engine;
+    engine.getModel().setZoomLevel(factor);
+    engine.repaintCanvas();
+  };
+  const onZoomInClicked = () => {
+    zoomTo(stateRef.current.engine.getModel().getZoomLevel() + 5);
+  };
+  const onZoomOutClicked = () => {
+    zoomTo(stateRef.current.engine.getModel().getZoomLevel() - 5);
+  };
+  const onOriginSizeClicked = () => {
+    zoomTo(100);
+  };
+  const onFitCanvasClicked = () => {
+    stateRef.current.engine.zoomToFit();
+  };
+  const onDownloadImageClicked = async () => {
+    var _a;
+    const node = wrapperRef.current.querySelector("div.o23-playground-editor-content");
+    node.style.overflow = "visible";
+    const dataUrl = await dom2image.toPng(node, { quality: 1, bgcolor: "white" });
+    node.style.overflow = "";
+    const link = document.createElement("a");
+    link.download = `${((_a = stateRef.current.def) == null ? void 0 : _a.code) || "no-code"}-diagram.png`;
+    link.href = dataUrl;
+    link.click();
+  };
   try {
     return React.createElement(
       EditorWrapper,
@@ -3880,7 +4704,36 @@ const EditorKernel = (props) => {
       React.createElement(
         ErrorBoundary,
         { content },
-        React.createElement(CanvasWidget, { engine: stateRef.current.engine, className: "o23-playground-editor-content" })
+        React.createElement(CanvasWidget, { engine: stateRef.current.engine, className: "o23-playground-editor-content" }),
+        React.createElement(
+          EditorToolbar,
+          null,
+          React.createElement(
+            EditorToolbarButton,
+            { onClick: onZoomInClicked },
+            React.createElement(ZoomIn, null)
+          ),
+          React.createElement(
+            EditorToolbarButton,
+            { onClick: onZoomOutClicked },
+            React.createElement(ZoomOut, null)
+          ),
+          React.createElement(
+            EditorToolbarButton,
+            { onClick: onOriginSizeClicked },
+            React.createElement(OriginSize, null)
+          ),
+          React.createElement(
+            EditorToolbarButton,
+            { onClick: onFitCanvasClicked },
+            React.createElement(FitCanvas, null)
+          ),
+          React.createElement(
+            EditorToolbarButton,
+            { onClick: onDownloadImageClicked },
+            React.createElement(DownloadImage, null)
+          )
+        )
       )
     );
   } catch (error) {
@@ -3909,246 +4762,539 @@ const createStepNode = (step, file, options) => {
   const endOfSub = DEFAULTS.createSubStepNodes(node, { appendNode, appendLink, handlers });
   return endOfSub == null ? node : endOfSub;
 };
-const _SubStepsPortModel = class _SubStepsPortModel extends PortModel {
-  constructor(name) {
-    super({ type: _SubStepsPortModel.TYPE, name, alignment: PortModelAlignment.RIGHT });
-  }
-  createLinkModel() {
-    return this.createOutgoingLinkModel();
-  }
-  createOutgoingLinkModel() {
-    const link = new DefaultLinkModel();
-    link.setSourcePort(this);
-    return link;
-  }
-};
-__publicField(_SubStepsPortModel, "TYPE", "sub-steps-port");
-let SubStepsPortModel = _SubStepsPortModel;
-class SubStepsPortFactory extends AbstractModelFactory {
-  constructor() {
-    super(SubStepsPortModel.TYPE);
-  }
-  generateModel(_event) {
-    throw new Error("DO NOT use SubStepsPortFactory#generateModel.");
-  }
-}
-const SubStepsPortContainer = qe.div.attrs({ [DOM_KEY_WIDGET]: "o23-playground-sub-steps-port" })`
-    display: flex;
-    position: absolute;
-    top: calc(-1 * ${PlaygroundCssVars.NODE_PORT_BORDER_WIDTH});
-    right: calc(${PlaygroundCssVars.NODE_PORT_HEIGHT} / -2 - ${PlaygroundCssVars.NODE_BORDER_WIDTH});
-    width: calc(${PlaygroundCssVars.NODE_PORT_HEIGHT} / 2);
-    height: ${PlaygroundCssVars.NODE_PORT_HEIGHT};
-    background-color: ${PlaygroundCssVars.NODE_PORT_SUB_STEPS_BACKGROUND};
-    border: ${PlaygroundCssVars.NODE_PORT_SUB_STEPS_BORDER};
-    border-top-right-radius: calc(${PlaygroundCssVars.NODE_PORT_HEIGHT} / 2);
-    border-bottom-right-radius: calc(${PlaygroundCssVars.NODE_PORT_HEIGHT} / 2);
-
-    > div:first-child {
-        position: absolute;
-        top: 0;
-        right: 0;
-        width: 0;
-        height: 100%;
+const createLinkFromParent = (model) => {
+  return (node, findPortFromModel, createPortFromModel) => {
+    let sourcePort = findPortFromModel();
+    if (sourcePort == null) {
+      sourcePort = createPortFromModel();
+      model.addPort(sourcePort);
     }
-`;
-const SubStepsPortWidget = (props) => {
-  const { port, engine } = props;
-  return React.createElement(
-    SubStepsPortContainer,
-    null,
-    React.createElement(PortWidget, { port, engine })
-  );
-};
-const _FirstSubStepPortModel = class _FirstSubStepPortModel extends PortModel {
-  constructor() {
-    super({
-      type: _FirstSubStepPortModel.TYPE,
-      name: _FirstSubStepPortModel.NAME,
-      alignment: PortModelAlignment.RIGHT
-    });
-  }
-  createLinkModel() {
-    return this.createIncomingLinkModel();
-  }
-  createIncomingLinkModel() {
-    const link = new DefaultLinkModel();
-    link.setTargetPort(this);
-    return link;
-  }
-};
-__publicField(_FirstSubStepPortModel, "TYPE", "first-sub-step-port");
-__publicField(_FirstSubStepPortModel, "NAME", "first-sub-step");
-let FirstSubStepPortModel = _FirstSubStepPortModel;
-const FirstSubStepPortContainer = qe.div.attrs({ [DOM_KEY_WIDGET]: "o23-playground-first-sub-step-port" })`
-    display: flex;
-    position: absolute;
-    top: calc(-1 * ${PlaygroundCssVars.NODE_PORT_RADIUS});
-    left: calc(50% - ${PlaygroundCssVars.NODE_PORT_RADIUS});
-    width: calc(${PlaygroundCssVars.NODE_PORT_RADIUS} * 2);
-    height: ${PlaygroundCssVars.NODE_PORT_RADIUS};
-    background-color: ${PlaygroundCssVars.NODE_PORT_FIRST_SUB_STEP_BACKGROUND};
-    border: ${PlaygroundCssVars.NODE_PORT_FIRST_SUB_STEP_BORDER};
-    border-top-left-radius: ${PlaygroundCssVars.NODE_PORT_RADIUS};
-    border-top-right-radius: ${PlaygroundCssVars.NODE_PORT_RADIUS};
-
-    > div:first-child {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 0;
+    const link = sourcePort.createOutgoingLinkModel();
+    let targetPort = node.getPort(FirstSubStepPortModel.NAME);
+    if (targetPort == null) {
+      targetPort = new FirstSubStepPortModel();
+      node.addPort(targetPort);
     }
-`;
-const FirstSubStepPortWidget = (props) => {
-  const { port, engine } = props;
-  return React.createElement(
-    FirstSubStepPortContainer,
-    null,
-    React.createElement(PortWidget, { port, engine })
-  );
-};
-const _LastSubStepJoinPortModel = class _LastSubStepJoinPortModel extends PortModel {
-  constructor() {
-    super({
-      type: _LastSubStepJoinPortModel.TYPE,
-      name: _LastSubStepJoinPortModel.NAME,
-      alignment: PortModelAlignment.RIGHT
-    });
-  }
-  createLinkModel() {
-    return this.createIncomingLinkModel();
-  }
-  createIncomingLinkModel() {
-    const link = new DefaultLinkModel();
-    link.setTargetPort(this);
+    link.setTargetPort(targetPort);
+    node.asFirstSubStep(true);
     return link;
+  };
+};
+const createSubNodesOfSingleRoute = (options) => {
+  const { model, askSteps, options: { appendNode, appendLink, handlers }, findPortFromModel, createPortFromModel } = options;
+  const steps = askSteps();
+  if (steps == null || steps.length === 0) {
+    return void 0;
   }
-};
-__publicField(_LastSubStepJoinPortModel, "TYPE", "last-sub-step-join-port");
-__publicField(_LastSubStepJoinPortModel, "NAME", "last-sub-step-join");
-let LastSubStepJoinPortModel = _LastSubStepJoinPortModel;
-const LastSubStepJoinPortContainer = qe.div.attrs({ [DOM_KEY_WIDGET]: "o23-playground-last-sub-step-join-port" })`
-    display: flex;
-    position: absolute;
-    top: calc(50% - ${PlaygroundCssVars.NODE_PORT_RADIUS});
-    right: calc(-1 * ${PlaygroundCssVars.NODE_PORT_RADIUS} - ${PlaygroundCssVars.NODE_BORDER_WIDTH});
-    width: ${PlaygroundCssVars.NODE_PORT_RADIUS};
-    height: calc(${PlaygroundCssVars.NODE_PORT_RADIUS} * 2);
-    background-color: ${PlaygroundCssVars.NODE_PORT_LAST_SUB_STEP_JOIN_BACKGROUND};
-    border: ${PlaygroundCssVars.NODE_PORT_LAST_SUB_STEP_JOIN_BORDER};
-    border-top-right-radius: ${PlaygroundCssVars.NODE_PORT_RADIUS};
-    border-bottom-right-radius: ${PlaygroundCssVars.NODE_PORT_RADIUS};
-
-    > div:first-child {
-        position: absolute;
-        top: 0;
-        right: 0;
-        width: 0;
-        height: 100%;
-    }
-`;
-const LastSubStepJoinPortWidget = (props) => {
-  const { port, engine } = props;
-  return React.createElement(
-    LastSubStepJoinPortContainer,
-    null,
-    React.createElement(PortWidget, { port, engine })
-  );
-};
-const CommonStepDefs = {
-  prepare: prepare$2,
-  confirm: confirm$2,
-  discard,
-  properties: { name: elementName },
-  ports: { fromRequest: PortFromRequest, toResponse: PortToResponse, mergeRequest: PortMergeRequest },
-  createSubNodes: createSubNodes$1,
-  findSubPorts: findSubPorts$1
-};
-const confirm$1 = (model, def, file, handlers) => {
-  CommonStepDefs.confirm(model, def, file, handlers);
-  handlers.onChange();
-  return true;
-};
-const SetsSubStepsPortName = "sets-sub-steps";
-const PortSubSteps = (props) => {
-  const { node, engine } = props;
-  return React.createElement(
-    PostPort,
-    { label: Labels.StepSubSteps, required: false, defined: true, "data-role": "sub-steps" },
-    React.createElement(SubStepsPortWidget, { port: node.getPort(SetsSubStepsPortName), engine })
-  );
-};
-const createSubNodes = (model, options) => {
-  const { appendNode, appendLink, handlers } = options;
-  const step = model.step;
-  const steps = step.steps ?? [];
-  if (steps.length === 0) {
-    const defaultFirstStep = DEFAULTS.createDefaultStep();
-    steps.push(defaultFirstStep);
-    step.steps = steps;
-  }
-  let previousNode = model;
-  previousNode = steps.reduce((previousNode2, step2) => {
-    const linkPrevious = previousNode2 === model ? (node) => {
-      let sourcePort = model.getPort(SetsSubStepsPortName);
-      if (sourcePort == null) {
-        sourcePort = new SubStepsPortModel(SetsSubStepsPortName);
-        model.addPort(sourcePort);
-      }
-      const link2 = sourcePort.createOutgoingLinkModel();
-      let targetPort = node.getPort(FirstSubStepPortModel.NAME);
-      if (targetPort == null) {
-        targetPort = new FirstSubStepPortModel();
-        node.addPort(targetPort);
-      }
-      link2.setTargetPort(targetPort);
-      node.asFirstSubStep(true);
-      return link2;
-    } : (node) => previousNode2.next(node);
-    return createStepNode(step2, model.file, {
+  const createLinkFromModel = createLinkFromParent(model);
+  const previousNode = model;
+  return steps.reduce((previousNode2, step) => {
+    const linkPrevious = previousNode2 === model ? (node) => createLinkFromModel(node, findPortFromModel, createPortFromModel) : (node) => previousNode2.next(node);
+    return createStepNode(step, model.file, {
       type: StepNodeEntityType.NORMAL,
       handlers,
-      subOf: step2,
+      subOf: step,
       previousNode: previousNode2,
       linkPrevious,
       appendNode,
       appendLink
     });
   }, previousNode);
+};
+const createSubNodes$1 = (model, options) => {
+  const step = model.step;
+  const errorHandles = step.errorHandles;
+  if (errorHandles == null) {
+    return void 0;
+  }
+  const createAskSteps = (name) => {
+    return () => {
+      if (errorHandles[name] == null || !Array.isArray(errorHandles[name])) {
+        return void 0;
+      }
+      if (errorHandles[name].length === 0) {
+        const defaultFirstStep = DEFAULTS.createDefaultStep();
+        errorHandles[name].push(defaultFirstStep);
+      }
+      return errorHandles[name];
+    };
+  };
+  return [
+    {
+      steps: createAskSteps("catchable"),
+      findPortFromModel: () => model.getPort(CatchableErrorHandlePortModel.NAME),
+      createPortFromModel: () => new CatchableErrorHandlePortModel()
+    },
+    {
+      steps: createAskSteps("exposed"),
+      findPortFromModel: () => model.getPort(ExposedErrorHandlePortModel.NAME),
+      createPortFromModel: () => new ExposedErrorHandlePortModel()
+    },
+    {
+      steps: createAskSteps("uncatchable"),
+      findPortFromModel: () => model.getPort(UncatchableErrorHandlePortModel.NAME),
+      createPortFromModel: () => new UncatchableErrorHandlePortModel()
+    },
+    {
+      steps: createAskSteps("any"),
+      findPortFromModel: () => model.getPort(AnyErrorHandlePortModel.NAME),
+      createPortFromModel: () => new AnyErrorHandlePortModel()
+    }
+  ].filter(({ steps, ...rest }) => {
+    return { steps: steps(), ...rest };
+  }).filter(({ steps }) => {
+    return steps != null;
+  }).map(({ steps, findPortFromModel, createPortFromModel }) => {
+    return createSubNodesOfSingleRoute({
+      model,
+      options,
+      askSteps: steps,
+      findPortFromModel,
+      createPortFromModel
+    });
+  });
+};
+const createSubNodesAndEndNode = (model, options) => {
+  const { appendNode, appendLink, handlers, createSpecificSubNodes } = options;
+  const step = model.step;
+  const commonSubNodes = createSubNodes$1(model, options);
+  const specificSubNodes = createSpecificSubNodes == null ? void 0 : createSpecificSubNodes(model, options);
+  const subNodes = [...commonSubNodes ?? [], ...specificSubNodes ?? []];
+  if (subNodes.length === 0) {
+    return void 0;
+  }
   const endNode = new JoinEndNodeModel(step, model.file, { type: StepNodeEntityType.JOIN_END, subOf: step, handlers });
   appendNode(endNode);
-  const link = endNode.endOf(previousNode);
-  appendLink(link);
-  const directLink = model.next(endNode);
+  subNodes.forEach((node) => {
+    const link = endNode.endOfSub(node);
+    appendLink(link);
+  });
+  const directLink = endNode.endOfMe(model);
   appendLink(directLink);
   return endNode;
 };
-const findSubPorts = (model) => {
-  const subStepsPort = model.getPort(SetsSubStepsPortName);
-  return subStepsPort != null ? [subStepsPort, ...[]] : CommonStepDefs.findSubPorts(model);
+const discard = (_model) => VUtils.noop();
+const elementName = {
+  code: "name",
+  label: Labels.Name,
+  anchor: "name",
+  badge: (model) => {
+    if (VUtils.isNotBlank(model.name)) {
+      return model.name.trim();
+    } else {
+      return React.createElement(ConfigurableElementBadgeMissed, null);
+    }
+  },
+  editor: (props) => {
+    const { model, onValueChanged } = props;
+    const onValueChange = (value) => {
+      model.name = value;
+      onValueChanged();
+    };
+    return React.createElement(UnwrappedInput, { onValueChange, value: model.name ?? "" });
+  },
+  helpDoc: HelpDocs.stepName
 };
-const prepare$1 = (def) => {
-  const model = CommonStepDefs.prepare(def);
+const elementUse = {
+  code: "type",
+  label: Labels.Use,
+  anchor: "use",
+  badge: (model) => askUseLabel(model.use),
+  editor: (props) => {
+    const { model, onValueChanged } = props;
+    const onValueChange = (value2) => {
+      const originalUse = model.use;
+      if (originalUse === value2) {
+        return;
+      }
+      model.use = value2;
+      const def = findStepDef(model.use);
+      def.switchUse(model, originalUse);
+      onValueChanged();
+    };
+    const value = model.use;
+    const options = AllStepDefsAsArray().map((def) => {
+      return { value: def.use, label: askUseLabel(def.use), stringify: () => askUseStringifyText(def.use) };
+    });
+    return React.createElement(UnwrappedDropdown, { value, onValueChange, options, clearable: false, style: { justifySelf: "start", width: "unset", minWidth: "min(200px, 100%)" } });
+  },
+  helpDoc: HelpDocs.stepUse
+};
+const createBadge$1 = (name) => {
+  return (model) => {
+    var _a;
+    if (((_a = model.temporary) == null ? void 0 : _a[name]) === false) {
+      return React.createElement(ConfigurableElementBadgeSnippet, null);
+    } else {
+      return React.createElement(ConfigurableElementBadgeAsIs, null);
+    }
+  };
+};
+const createEditor$1 = (names) => {
+  return (props) => {
+    var _a;
+    const { flag, snippet } = names;
+    const { model, onValueChanged } = props;
+    const onValueChange = (value) => {
+      model.temporary = { ...model.temporary ?? {}, [flag]: value };
+      onValueChanged();
+    };
+    const options = [
+      { value: true, label: Labels.StepIOTransformerAsIs },
+      { value: false, label: Labels.StepIOTransformerSnippet }
+    ];
+    return React.createElement(
+      VerticalLinesEditor,
+      null,
+      React.createElement(UnwrappedDropdown, { value: ((_a = model.temporary) == null ? void 0 : _a[flag]) ?? true, onValueChange, options, clearable: false, style: { justifySelf: "start", width: "unset", minWidth: "min(200px, 100%)" } })
+    );
+  };
+};
+const elementFromRequest = {
+  code: "from-request",
+  label: Labels.StepIOTransformer,
+  anchor: "from-request",
+  badge: createBadge$1("fromRequestAsIs"),
+  editor: createEditor$1({ flag: "fromRequestAsIs", snippet: "fromRequest" }),
+  helpDoc: HelpDocs.stepFromRequest
+};
+const elementFromRequestGroup = {
+  code: "from-request-group",
+  label: Labels.StepFromRequest,
+  anchor: "from-request-group",
+  children: [elementFromRequest],
+  group: true
+};
+const elementToResponse = {
+  code: "to-response",
+  label: Labels.StepIOTransformer,
+  anchor: "to-response",
+  badge: createBadge$1("toResponseAsIs"),
+  editor: createEditor$1({ flag: "toResponseAsIs", snippet: "toResponse" }),
+  helpDoc: HelpDocs.stepToResponse
+};
+const MergeToRequestEditor = (props) => {
+  var _a, _b;
+  const { model, onValueChanged } = props;
+  const inputRef = reactExports.useRef(null);
+  const onValueChange = (value) => {
+    model.temporary = { ...model.temporary ?? {}, mergeRequestType: value };
+    setTimeout(() => {
+      var _a2, _b2;
+      return (_b2 = (_a2 = inputRef.current) == null ? void 0 : _a2.querySelector("input")) == null ? void 0 : _b2.focus();
+    }, 50);
+    onValueChanged();
+  };
+  const onNameChange = (value) => {
+    model.mergeRequest = value;
+    onValueChanged();
+  };
+  const options = [
+    { value: MergeRequestType.REPLACE, label: Labels.StepIOMergeBackReplace },
+    { value: MergeRequestType.MERGE_AS_PROPERTY, label: Labels.StepIOMergeBackAsProperty },
+    { value: MergeRequestType.UNBOX, label: Labels.StepIOMergeBackUnbox }
+  ];
+  return React.createElement(
+    VerticalLinesEditor,
+    null,
+    React.createElement(UnwrappedDropdown, { value: ((_a = model.temporary) == null ? void 0 : _a.mergeRequestType) ?? MergeRequestType.REPLACE, onValueChange, options, clearable: false, style: { justifySelf: "start", width: "unset", minWidth: "min(200px, 100%)" } }),
+    React.createElement(UnwrappedDecorateInput, { leads: [Labels.StepIOMergeBackAsPropertyName], value: model.mergeRequest ?? "", onValueChange: onNameChange, disabled: ((_b = model.temporary) == null ? void 0 : _b.mergeRequestType) !== MergeRequestType.MERGE_AS_PROPERTY, ref: inputRef, "data-di-prefix-text": true })
+  );
+};
+const elementMergeToRequest = {
+  code: "merge-to-response",
+  label: Labels.StepMergeRequest,
+  anchor: "merge-to-response",
+  badge: (model) => {
+    const { mergeRequestType: type } = model.temporary ?? {};
+    switch (type) {
+      case MergeRequestType.UNBOX:
+        return Labels.StepIOMergeBackUnbox;
+      case MergeRequestType.MERGE_AS_PROPERTY:
+        return Labels.StepIOMergeBackAsProperty;
+      case MergeRequestType.REPLACE:
+        return Labels.StepIOMergeBackReplace;
+    }
+  },
+  editor: MergeToRequestEditor,
+  helpDoc: HelpDocs.stepMergeToRequest
+};
+const elementToResponseGroup = {
+  code: "to-response-group",
+  label: Labels.StepToResponse,
+  anchor: "to-response-group",
+  children: [elementToResponse, elementMergeToRequest],
+  group: true
+};
+const createBadge = (name) => {
+  return (model) => {
+    var _a;
+    switch ((_a = model.temporary) == null ? void 0 : _a[name]) {
+      case ErrorHandleType.SNIPPET:
+        return React.createElement(ConfigurableElementBadgeSnippet, null);
+      case ErrorHandleType.STEPS:
+        return React.createElement(ConfigurableElementBadgeSteps, null);
+      case ErrorHandleType.NONE:
+      default:
+        return React.createElement(ConfigurableElementBadgeIgnored, null);
+    }
+  };
+};
+const createEditor = (name) => {
+  return (props) => {
+    var _a;
+    const { model, onValueChanged } = props;
+    const onValueChange = (value) => {
+      model.temporary = { ...model.temporary ?? {}, [name]: value };
+      onValueChanged();
+    };
+    const options = [
+      { value: ErrorHandleType.NONE, label: Labels.StepErrorHandleTypeNone },
+      { value: ErrorHandleType.SNIPPET, label: Labels.StepErrorHandleTypeSnippet },
+      { value: ErrorHandleType.STEPS, label: Labels.StepErrorHandleTypeSteps }
+    ];
+    return React.createElement(
+      VerticalLinesEditor,
+      null,
+      React.createElement(UnwrappedDropdown, { value: ((_a = model.temporary) == null ? void 0 : _a[name]) ?? ErrorHandleType.NONE, onValueChange, options, clearable: false, style: { justifySelf: "start", width: "unset", minWidth: "min(200px, 100%)" } })
+    );
+  };
+};
+const elementCatchableErrorHandle = {
+  code: "catchable-error-handle",
+  label: Labels.CatchableErrorHandle,
+  anchor: "catchable-error-handle",
+  badge: createBadge("useErrorHandlesForCatchable"),
+  editor: createEditor("useErrorHandlesForCatchable"),
+  helpDoc: HelpDocs.stepCatchableErrorHandle
+};
+const elementUncatchableErrorHandle = {
+  code: "uncatchable-error-handle",
+  label: Labels.UncatchableErrorHandle,
+  anchor: "uncatchable-error-handle",
+  badge: createBadge("useErrorHandlesForUncatchable"),
+  editor: createEditor("useErrorHandlesForUncatchable"),
+  helpDoc: HelpDocs.stepUncatchableErrorHandle
+};
+const elementExposedErrorHandle = {
+  code: "exposed-error-handle",
+  label: Labels.ExposedErrorHandle,
+  anchor: "exposed-error-handle",
+  badge: createBadge("useErrorHandlesForExposed"),
+  editor: createEditor("useErrorHandlesForExposed"),
+  helpDoc: HelpDocs.stepExposedErrorHandle
+};
+const elementAnyErrorHandle = {
+  code: "any-error-handle",
+  label: Labels.AnyErrorHandle,
+  anchor: "any-error-handle",
+  badge: createBadge("useErrorHandlesForAny"),
+  editor: createEditor("useErrorHandlesForAny"),
+  helpDoc: HelpDocs.stepAnyErrorHandle
+};
+const elementErrorHandles = {
+  code: "error-handles",
+  label: Labels.ErrorHandles,
+  anchor: "error-handles",
+  children: [
+    elementCatchableErrorHandle,
+    elementExposedErrorHandle,
+    elementUncatchableErrorHandle,
+    elementAnyErrorHandle
+  ],
+  group: true
+};
+const findSubPorts$1 = (model) => {
+  return [
+    model.getPort(CatchableErrorHandlePortModel.NAME),
+    model.getPort(ExposedErrorHandlePortModel.NAME),
+    model.getPort(UncatchableErrorHandlePortModel.NAME),
+    model.getPort(AnyErrorHandlePortModel.NAME)
+  ].filter((port) => port != null);
+};
+const PortFromRequest = (props) => {
+  const { step: def } = props;
+  const { fromRequest } = def;
+  const exists = VUtils.isNotBlank(fromRequest);
+  if (!exists) {
+    return null;
+  }
+  return React.createElement(PrePort, { label: Labels.StepFromRequest, required: false, defined: true, all: true, allAsBoolean: true });
+};
+const StepsPortName = "steps";
+const PortSteps = (props) => {
+  const { node, engine } = props;
+  return React.createElement(
+    PostPort,
+    { label: Labels.StepSteps, required: false, defined: true, "data-role": "steps" },
+    React.createElement(StepsPortWidget, { port: node.getPort(StepsPortName), engine })
+  );
+};
+const PortCatchableError = (props) => {
+  const { node, engine, step: def } = props;
+  const { errorHandles: { catchable } = {} } = def;
+  const exists = catchable != null && Array.isArray(catchable);
+  if (!exists) {
+    return null;
+  }
+  return React.createElement(
+    PostPort,
+    { label: Labels.StepHandleCatchableError, required: false, defined: true, "data-role": "catchable-error" },
+    React.createElement(CatchableErrorHandlePortWidget, { port: node.getPort(CatchableErrorHandlePortModel.NAME), engine })
+  );
+};
+const PortUncatchableError = (props) => {
+  const { node, engine, step: def } = props;
+  const { errorHandles: { uncatchable } = {} } = def;
+  const exists = uncatchable != null && Array.isArray(uncatchable);
+  if (!exists) {
+    return null;
+  }
+  return React.createElement(
+    PostPort,
+    { label: Labels.StepHandleUncatchableError, required: false, defined: true, "data-role": "uncatchable-error" },
+    React.createElement(UncatchableErrorHandlePortWidget, { port: node.getPort(UncatchableErrorHandlePortModel.NAME), engine })
+  );
+};
+const PortExposedError = (props) => {
+  const { node, engine, step: def } = props;
+  const { errorHandles: { exposed } = {} } = def;
+  const exists = exposed != null && Array.isArray(exposed);
+  if (!exists) {
+    return null;
+  }
+  return React.createElement(
+    PostPort,
+    { label: Labels.StepHandleExposedError, required: false, defined: true, "data-role": "exposed-error" },
+    React.createElement(ExposedErrorHandlePortWidget, { port: node.getPort(ExposedErrorHandlePortModel.NAME), engine })
+  );
+};
+const PortAnyError = (props) => {
+  const { node, engine, step: def } = props;
+  const { errorHandles: { any } = {} } = def;
+  const exists = any != null && Array.isArray(any);
+  if (!exists) {
+    return null;
+  }
+  return React.createElement(
+    PostPort,
+    { label: Labels.StepHandleAnyError, required: false, defined: true, "data-role": "any-error" },
+    React.createElement(AnyErrorHandlePortWidget, { port: node.getPort(AnyErrorHandlePortModel.NAME), engine })
+  );
+};
+const PortToResponse = (props) => {
+  const { step: def } = props;
+  const { toResponse } = def;
+  const exists = VUtils.isNotBlank(toResponse);
+  if (!exists) {
+    return null;
+  }
+  return React.createElement(PostPort, { label: Labels.StepToResponse, required: false, defined: true, all: true, allAsBoolean: true });
+};
+const PortMergeRequest = (props) => {
+  const { step: def } = props;
+  const { mergeRequest } = def;
+  if (mergeRequest == null) {
+    return null;
+  } else if (mergeRequest === false) {
+    return null;
+  } else if (mergeRequest === true) {
+    return React.createElement(PostPort, { label: Labels.StepMergeRequest, required: false, defined: true, all: true, allAsBoolean: true });
+  } else if (VUtils.isBlank(mergeRequest)) {
+    return null;
+  } else {
+    return React.createElement(PostPort, { label: Labels.StepToResponse, required: false, defined: true, all: true, allAsBoolean: false, allAsGiven: mergeRequest.trim() });
+  }
+};
+const prepare$2 = (def) => {
+  const model = {
+    name: def.name,
+    use: def.use,
+    fromRequest: def.fromRequest,
+    toResponse: def.toResponse,
+    temporary: {}
+  };
+  model.temporary.fromRequestAsIs = VUtils.isBlank(def.fromRequest);
+  model.temporary.toResponseAsIs = VUtils.isBlank(def.toResponse);
+  model.temporary.mergeRequestType = VUtils.isBlank(def.mergeRequest) || def.mergeRequest === false ? MergeRequestType.REPLACE : def.mergeRequest === true ? MergeRequestType.UNBOX : MergeRequestType.MERGE_AS_PROPERTY;
+  if (model.temporary.mergeRequestType === MergeRequestType.MERGE_AS_PROPERTY) {
+    model.mergeRequest = def.mergeRequest;
+  }
+  model.errorHandles = {};
+  const copyErrorHandle = (name, flagName) => {
+    var _a;
+    const handle = (_a = def.errorHandles) == null ? void 0 : _a[name];
+    if (handle == null) {
+      model.temporary[flagName] = ErrorHandleType.NONE;
+    } else if (Array.isArray(handle)) {
+      model.temporary[flagName] = ErrorHandleType.STEPS;
+    } else {
+      model.errorHandles[name] = handle;
+      model.temporary[flagName] = ErrorHandleType.SNIPPET;
+    }
+  };
+  copyErrorHandle("catchable", "useErrorHandlesForCatchable");
+  copyErrorHandle("uncatchable", "useErrorHandlesForUncatchable");
+  copyErrorHandle("exposed", "useErrorHandlesForExposed");
+  copyErrorHandle("any", "useErrorHandlesForAny");
   return model;
 };
-const SetsStepDefs = {
-  use: StandardPipelineStepRegisterKey.SETS,
-  prepare: prepare$1,
-  confirm: confirm$1,
-  discard: CommonStepDefs.discard,
-  properties: [CommonStepDefs.properties.name],
-  ports: [
-    { key: "from-request", port: CommonStepDefs.ports.fromRequest },
-    { key: "sub-steps", port: PortSubSteps },
-    { key: "to-response", port: CommonStepDefs.ports.toResponse },
-    { key: "merge-request", port: CommonStepDefs.ports.mergeRequest }
-  ],
-  createSubNodes,
-  findSubPorts,
-  helpDocs: HelpDocs.snippetStep
+const switchUse$2 = (def, keptPropNames, originalUse) => {
+  const keptProps = {
+    name: true,
+    use: true,
+    fromRequest: true,
+    toResponse: true,
+    mergeRequest: true,
+    errorHandles: true,
+    temporary: true,
+    ...keptPropNames.reduce((names, name) => {
+      return names[name] = true;
+    }, {})
+  };
+  def.temporary[originalUse] = Object.keys(def).reduce((acc, key) => {
+    if (keptProps[key] != true) {
+      acc[key] = def[key];
+      delete def[key];
+    }
+    return acc;
+  }, {});
 };
-const confirm = (model, def, file, handlers) => {
+const CommonStepDefs = {
+  prepare: prepare$2,
+  switchUse: switchUse$2,
+  confirm: confirm$2,
+  discard,
+  properties: {
+    name: elementName,
+    use: elementUse,
+    fromRequest: elementFromRequestGroup,
+    toResponse: elementToResponseGroup,
+    errorHandles: elementErrorHandles
+  },
+  ports: {
+    fromRequest: PortFromRequest,
+    toResponse: PortToResponse,
+    mergeRequest: PortMergeRequest,
+    handleCatchableError: PortCatchableError,
+    handleUncatchableError: PortUncatchableError,
+    handleExposedError: PortExposedError,
+    handleAnyError: PortAnyError
+  },
+  prebuiltPorts: {
+    steps: PortSteps,
+    errorHandles: [
+      { key: "catchable-error-handle", port: PortCatchableError },
+      { key: "exposed-error-handle", port: PortExposedError },
+      { key: "uncatchable-error-handle", port: PortUncatchableError },
+      { key: "any-error-handle", port: PortAnyError }
+    ]
+  },
+  createSubNodes: createSubNodes$1,
+  createSubNodesAndEndNode,
+  findSubPorts: findSubPorts$1
+};
+const confirm$1 = (model, def, file, handlers) => {
   CommonStepDefs.confirm(model, def, file, handlers);
   def.snippet = model.snippet;
   handlers.onChange();
@@ -4160,38 +5306,121 @@ const PortSnippet = (props) => {
   const exists = VUtils.isNotBlank(snippet);
   return React.createElement(PrePort, { label: Labels.SnippetStepSnippet, required: true, defined: exists, all: true, allAsBoolean: true });
 };
-const prepare = (def) => {
+const prepare$1 = (def) => {
   const model = CommonStepDefs.prepare(def);
   model.snippet = def.snippet;
   return model;
 };
+const switchUse$1 = (model, originalUse) => {
+  CommonStepDefs.switchUse(model, ["snippet"], originalUse);
+  return model;
+};
 const SnippetStepDefs = {
   use: StandardPipelineStepRegisterKey.SNIPPET,
-  prepare,
-  confirm,
+  prepare: prepare$1,
+  switchUse: switchUse$1,
+  confirm: confirm$1,
   discard: CommonStepDefs.discard,
-  properties: [CommonStepDefs.properties.name],
+  properties: [
+    CommonStepDefs.properties.name,
+    CommonStepDefs.properties.use,
+    CommonStepDefs.properties.fromRequest,
+    CommonStepDefs.properties.toResponse,
+    CommonStepDefs.properties.errorHandles
+  ],
   ports: [
     { key: "from-request", port: CommonStepDefs.ports.fromRequest },
-    { key: "to-response", port: CommonStepDefs.ports.toResponse },
     { key: "snippet", port: PortSnippet },
+    { key: "catchable-error-handle", port: PortCatchableError },
+    { key: "exposed-error-handle", port: PortExposedError },
+    { key: "uncatchable-error-handle", port: PortUncatchableError },
+    { key: "any-error-handle", port: PortAnyError },
+    { key: "to-response", port: CommonStepDefs.ports.toResponse },
     { key: "merge-request", port: CommonStepDefs.ports.mergeRequest }
   ],
-  createSubNodes: CommonStepDefs.createSubNodes,
+  createSubNodes: CommonStepDefs.createSubNodesAndEndNode,
   findSubPorts: CommonStepDefs.findSubPorts,
   helpDocs: HelpDocs.snippetStep
 };
-const AllStepDefs = [
-  SnippetStepDefs,
-  SetsStepDefs
-];
+registerStepDef(SnippetStepDefs);
+const confirm = (model, def, file, handlers) => {
+  CommonStepDefs.confirm(model, def, file, handlers);
+  handlers.onChange();
+  return true;
+};
+const createSubNodes = (model, options) => {
+  return CommonStepDefs.createSubNodesAndEndNode(model, {
+    ...options,
+    createSpecificSubNodes: (_node, options2) => {
+      const step = model.step;
+      const lastNodeOfSteps = createSubNodesOfSingleRoute({
+        model,
+        options: options2,
+        askSteps: () => {
+          const steps = step.steps ?? [];
+          if (steps.length === 0) {
+            const defaultFirstStep = DEFAULTS.createDefaultStep();
+            steps.push(defaultFirstStep);
+            step.steps = steps;
+          }
+          return steps;
+        },
+        findPortFromModel: () => model.getPort(StepsPortName),
+        createPortFromModel: () => new StepsPortModel(StepsPortName)
+      });
+      return [lastNodeOfSteps];
+    }
+  });
+};
+const findSubPorts = (model) => {
+  const subStepsPort = model.getPort(StepsPortName);
+  return subStepsPort != null ? [subStepsPort, ...CommonStepDefs.findSubPorts(model) ?? []] : CommonStepDefs.findSubPorts(model);
+};
+const prepare = (def) => {
+  const model = CommonStepDefs.prepare(def);
+  return model;
+};
+const switchUse = (model, _originalUse) => model;
+const SetsStepDefs = {
+  use: StandardPipelineStepRegisterKey.SETS,
+  prepare,
+  switchUse,
+  confirm,
+  discard: CommonStepDefs.discard,
+  properties: [
+    CommonStepDefs.properties.name,
+    CommonStepDefs.properties.use,
+    CommonStepDefs.properties.fromRequest,
+    CommonStepDefs.properties.toResponse,
+    CommonStepDefs.properties.errorHandles
+  ],
+  ports: [
+    { key: "from-request", port: CommonStepDefs.ports.fromRequest },
+    { key: "steps", port: CommonStepDefs.prebuiltPorts.steps },
+    ...CommonStepDefs.prebuiltPorts.errorHandles,
+    { key: "to-response", port: CommonStepDefs.ports.toResponse },
+    { key: "merge-request", port: CommonStepDefs.ports.mergeRequest }
+  ],
+  createSubNodes,
+  findSubPorts,
+  helpDocs: HelpDocs.snippetStep
+};
+registerStepDef(SetsStepDefs);
 const DEFAULT_CREATE_SUB_STEP_NODES = (node, options) => {
   var _a;
-  return (_a = AllStepDefs.find((def) => {
-    return def.use === node.step.use;
-  })) == null ? void 0 : _a.createSubNodes(node, options);
+  return (_a = findStepDef(node.step.use)) == null ? void 0 : _a.createSubNodes(node, options);
 };
 const DEFAULTS = {
+  diagram: {
+    startTop: 64,
+    startLeft: 64,
+    rowGap: 64,
+    columnGap: 128,
+    linkArcRadius: 8,
+    linkGutterSize: 8,
+    linkJoinEndSinkingOffset: 24,
+    linkJoinEndGutterSize: 16
+  },
   createDefaultStep: () => {
     return {
       name: "",

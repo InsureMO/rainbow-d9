@@ -1,6 +1,6 @@
 import { c as commonjsGlobal, g as getDefaultExportFromCjs } from "./babel-wuJLZiHY.js";
-import { h as hastscript } from "./hastscript-dlO2nLr-.js";
-import { aX as parseEntities_1 } from "./vendor-MZyh1u1d.js";
+import { h as hastscript } from "./hastscript-O-MPl6QN.js";
+import { aY as parseEntities_1 } from "./vendor-x3SPvJVy.js";
 var prismCore = { exports: {} };
 (function(module) {
   var _self = typeof window !== "undefined" ? window : typeof WorkerGlobalScope !== "undefined" && self instanceof WorkerGlobalScope ? self : {};
