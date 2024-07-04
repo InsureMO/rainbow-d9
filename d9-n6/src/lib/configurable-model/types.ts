@@ -19,14 +19,16 @@ export interface CreateSubNodesOptions {
 	handlers: NodeHandlers;
 }
 
-export interface StepNodeConfigurer<D extends PipelineStepDef = PipelineStepDef, F extends PipelineStepDef = PipelineStepDef, M extends ConfigurableModel = ConfigurableModel> {
+export interface StepNodeConfigurer<F extends PipelineStepDef = PipelineStepDef, M extends ConfigurableModel = ConfigurableModel> {
 	use: PipelineStepRegisterKey;
 	/** prepare configurable model for popup edit dialog */
 	prepare: (def: F) => M;
+	/** use switched, use in given model is updated */
+	switchUse: (model: ConfigurableModel, originalUse: PipelineStepDef['use']) => ConfigurableModel;
 	/** confirm the changes from edit dialog */
-	confirm: (model: D, def: F, file: FileDef, handlers: NodeHandlers) => ConfigurableElementAnchor | true;
+	confirm: (model: M, def: F, file: FileDef, handlers: NodeHandlers) => ConfigurableElementAnchor | true;
 	/** discard the changes from edit dialog */
-	discard: (model: D) => void;
+	discard: (model: M) => void;
 	ports?: Array<{ key: string, port: StepPort }>;
 	properties: Array<ConfigurableElement>;
 	/** create nodes for sub steps, returns an end node */

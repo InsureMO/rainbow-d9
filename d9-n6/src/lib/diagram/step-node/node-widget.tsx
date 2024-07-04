@@ -5,7 +5,7 @@ import React from 'react';
 import styled from 'styled-components';
 import {findStepDef, FirstSubStepPortModel, FirstSubStepPortWidget} from '../../configurable-model';
 import {ConfigurableModel, DialogContent} from '../../edit-dialog';
-import {Labels} from '../../labels';
+import {askUseLabel, Labels} from '../../labels';
 import {PlaygroundEventTypes, usePlaygroundEventBus} from '../../playground-event-bus';
 import {PlaygroundCssVars} from '../../widgets';
 import {
@@ -124,9 +124,6 @@ export const StepNodeWidget = (props: StepNodeWidgetProps) => {
 			               elements={StepDefs.properties}/>);
 	};
 	const isFirstSubStep = node.isFirstSubStep();
-	const asUseLabelKey = () => {
-		return 'StepUse' + (use ?? '').trim().split('-').reduce((a, b) => a + b.charAt(0).toUpperCase() + b.slice(1), '');
-	};
 
 	return <StepNodeContainer onDoubleClick={onDoubleClicked}
 	                          data-use={use}>
@@ -138,7 +135,7 @@ export const StepNodeWidget = (props: StepNodeWidgetProps) => {
 		<StepNodeHeader data-use={use}>
 			<StepNodeTitle>{(def.name ?? '').trim() || Labels.StepNodeNoname}</StepNodeTitle>
 			<NodeTitleSpreader/>
-			<StepNodeSecondTitle>{Labels[asUseLabelKey()]}</StepNodeSecondTitle>
+			<StepNodeSecondTitle>{askUseLabel(use)}</StepNodeSecondTitle>
 		</StepNodeHeader>
 		<StepNodeBody data-use={use}>
 			{StepDefs.ports.map(({key, port: StepPort}) => {

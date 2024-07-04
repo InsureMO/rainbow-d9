@@ -37,3 +37,13 @@ export const ConfigurableElementBadgeCount = (props: { count: number }) => {
 		{props.count}
 	</NavigatorElementBadgeWrapper>;
 };
+export const ConfigurableElementBadgeSnippet = () => {
+	return <NavigatorElementBadgeWrapper data-role="snippet">
+		{Labels.Snippet}
+	</NavigatorElementBadgeWrapper>;
+};
+export const ConfigurableElementBadgeSteps = () => {
+	return <NavigatorElementBadgeWrapper data-role="steps">
+		{Labels.Steps}
+	</NavigatorElementBadgeWrapper>;
+};

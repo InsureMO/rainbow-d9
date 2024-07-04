@@ -28,13 +28,9 @@ export interface CommonStepDefModel extends ConfigurableModel, PipelineStepDef {
 		toResponseAsIs?: boolean;
 		mergeRequestType?: MergeRequestType;
 		useErrorHandlesForCatchable?: ErrorHandleType;
-		catchable?: Array<PipelineStepDef>;
 		useErrorHandlesForUncatchable?: ErrorHandleType;
-		uncatchable?: Array<PipelineStepDef>;
 		useErrorHandlesForExposed?: ErrorHandleType;
-		exposed?: Array<PipelineStepDef>;
 		useErrorHandlesForAny?: ErrorHandleType;
-		any?: Array<PipelineStepDef>;
 	};
 }
 
@@ -49,9 +45,11 @@ export type StepPort<S extends AllInPipelineStepDef = AllInPipelineStepDef> = (p
 
 export interface CommonStepDefsProperties {
 	name: ConfigurableElement;
+	use: ConfigurableElement;
 	// fromRequest: ConfigurableElement;
 	// toResponse: ConfigurableElement;
 	// mergeRequest: ConfigurableElement;
+	errorHandles: ConfigurableElement;
 }
 
 /**
@@ -72,17 +70,18 @@ export interface CommonStepDefsPorts {
  */
 export interface PrebuiltStepDefsPorts {
 	steps: StepPort;
+	errorHandles: Array<{ key: string, port: StepPort }>;
 }
 
 export interface CreateSubNodesAndEndNodeOptions extends CreateSubNodesOptions {
 	createSpecificSubNodes?: (node: StepNodeModel, options: CreateSubNodesOptions) => Undefinable<Array<HandledNodeModel>>;
 }
 
-export interface CommonStepDefsType extends Omit<StepNodeConfigurer<CommonStepDefModel>, 'use' | 'properties' | 'ports' | 'createSubNodes' | 'helpDocs'> {
+export interface CommonStepDefsType extends Omit<StepNodeConfigurer<AllInPipelineStepDef, CommonStepDefModel>, 'switchUse' | 'use' | 'properties' | 'ports' | 'createSubNodes' | 'helpDocs'> {
 	properties: CommonStepDefsProperties;
 	ports: CommonStepDefsPorts;
 	prebuiltPorts: PrebuiltStepDefsPorts;
+	switchUse: (model: ConfigurableModel, keptPropNames: Array<string>, originalUse: PipelineStepDef['use']) => void;
 	createSubNodes: (node: StepNodeModel, options: CreateSubNodesOptions) => Undefinable<Array<HandledNodeModel>>;
 	createSubNodesAndEndNode: (node: StepNodeModel, options: CreateSubNodesAndEndNodeOptions) => Undefinable<HandledNodeModel>;
 }
-

@@ -1,6 +1,6 @@
 import {IntlLabel} from '@rainbow-d9/n2';
 import React from 'react';
-import {ElementBanned, ElementChecked, ElementMissed} from '../icons';
+import {ElementBanned, ElementChecked, ElementMissed, Snippet, Steps} from '../icons';
 
 export const Labels = {
 	ERROR: <IntlLabel keys={['o23', 'error', 'unknown']} value="Something went wrong."/>,
@@ -63,6 +63,9 @@ export const Labels = {
 	// step use
 	StepUseSnippet: <IntlLabel keys={['o23', 'step', 'use', 'snippet']} value="Snippet"/>,
 	StepUseSets: <IntlLabel keys={['o23', 'step', 'use', 'sets']} value="Sets"/>,
+	StepErrorHandleTypeNone: <IntlLabel keys={['o23', 'step', 'error-handle', 'none']} value="Ignored"/>,
+	StepErrorHandleTypeSnippet: <IntlLabel keys={['o23', 'step', 'error-handle', 'none']} value="Use Snippet"/>,
+	StepErrorHandleTypeSteps: <IntlLabel keys={['o23', 'step', 'error-handle', 'none']} value="Use Sub-steps"/>,
 
 	// common variables, variable might be used in multiple places,
 	// such as attribute label, attribute configuration label, attribute configuration value label, etc.
@@ -70,14 +73,36 @@ export const Labels = {
 	Code: <IntlLabel keys={['o23', 'variable', 'code']} value="Code"/>,
 	Name: <IntlLabel keys={['o23', 'variable', 'name']} value="Name"/>,
 	Enabled: <IntlLabel keys={['o23', 'variable', 'enabled']} value="Enabled"/>,
-	All: <IntlLabel keys={['o23', 'variable', 'all']} value="All"/>,
-	Ignored: <IntlLabel keys={['o23', 'variable', 'ignored']} value="Ignored"/>,
-	Specified: <IntlLabel keys={['o23', 'variable', 'specified']} value="Specified"/>,
-	NotAvailable: <IntlLabel keys={['o23', 'variable', 'not-available']} value="N/A"/>,
-	YesChar: <IntlLabel keys={['o23', 'variable', 'yes-char']} value="Y"/>,
-	NoChar: <IntlLabel keys={['o23', 'variable', 'no-char']} value="N"/>,
-	BadgeChecked: <IntlLabel keys={['o23', 'variable', 'checked']} value={<ElementChecked/>}/>,
-	BadgeMissed: <IntlLabel keys={['o23', 'variable', 'missed']} value={<ElementMissed/>}/>,
-	BadgeBanned: <IntlLabel keys={['o23', 'variable', 'banned']} value={<ElementBanned/>}/>,
+	Use: <IntlLabel keys={['o23', 'variable', 'use']} value="Use"/>,
+	ErrorHandles: <IntlLabel keys={['o23', 'variable', 'error-handles']} value="Error Handling"/>,
+	CatchableErrorHandle: <IntlLabel keys={['o23', 'variable', 'catchable-error-handle']} value="Catchable"/>,
+	UncatchableErrorHandle: <IntlLabel keys={['o23', 'variable', 'uncatchable-error-handle']} value="Uncatchable"/>,
+	ExposedErrorHandle: <IntlLabel keys={['o23', 'variable', 'exposed-error-handle']} value="Exposed"/>,
+	AnyErrorHandle: <IntlLabel keys={['o23', 'variable', 'any-error-handle']} value="Any"/>,
+
+	// badge or labels
+	All: <IntlLabel keys={['o23', 'badge', 'all']} value="All"/>,
+	Ignored: <IntlLabel keys={['o23', 'badge', 'ignored']} value="Ignored"/>,
+	Specified: <IntlLabel keys={['o23', 'badge', 'specified']} value="Specified"/>,
+	NotAvailable: <IntlLabel keys={['o23', 'badge', 'not-available']} value="N/A"/>,
+	YesChar: <IntlLabel keys={['o23', 'badge', 'yes-char']} value="Y"/>,
+	NoChar: <IntlLabel keys={['o23', 'badge', 'no-char']} value="N"/>,
+	Snippet: <IntlLabel keys={['o23', 'badge', 'snippet']} value={<Snippet/>}/>,
+	Steps: <IntlLabel keys={['o23', 'badge', 'steps']} value={<Steps/>}/>,
+	BadgeChecked: <IntlLabel keys={['o23', 'badge', 'checked']} value={<ElementChecked/>}/>,
+	BadgeMissed: <IntlLabel keys={['o23', 'badge', 'missed']} value={<ElementMissed/>}/>,
+	BadgeBanned: <IntlLabel keys={['o23', 'badge', 'banned']} value={<ElementBanned/>}/>,
 	NoCodeDefinedInFileDef: <IntlLabel keys={['o23', 'pipeline', 'code', 'undefined']} value="No code defined"/>
+};
+
+export const asUseLabelKey = (use: string) => {
+	return 'StepUse' + (use ?? '').trim().split('-').reduce((a, b) => a + b.charAt(0).toUpperCase() + b.slice(1), '');
+};
+
+export const askUseLabel = (use: string) => {
+	return Labels[asUseLabelKey(use)];
+};
+
+export const askUseStringifyText = (use: string) => {
+	return Labels[`${asUseLabelKey(use)}StringifyText`] ?? use;
 };

@@ -40,14 +40,14 @@ export const createSubNodes: CommonStepDefsType['createSubNodes'] = (model: Step
 			createPortFromModel: () => new CatchableErrorHandlePortModel()
 		},
 		{
-			steps: createAskSteps('uncatchable'),
-			findPortFromModel: () => model.getPort(UncatchableErrorHandlePortModel.NAME) as UncatchableErrorHandlePortModel,
-			createPortFromModel: () => new UncatchableErrorHandlePortModel()
-		},
-		{
 			steps: createAskSteps('exposed'),
 			findPortFromModel: () => model.getPort(ExposedErrorHandlePortModel.NAME) as ExposedErrorHandlePortModel,
 			createPortFromModel: () => new ExposedErrorHandlePortModel()
+		},
+		{
+			steps: createAskSteps('uncatchable'),
+			findPortFromModel: () => model.getPort(UncatchableErrorHandlePortModel.NAME) as UncatchableErrorHandlePortModel,
+			createPortFromModel: () => new UncatchableErrorHandlePortModel()
 		},
 		{
 			steps: createAskSteps('any'),

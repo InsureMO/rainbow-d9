@@ -5,11 +5,12 @@ import {StepNodeConfigurer} from '../../types';
 import {CommonStepDefs} from '../common';
 import {SnippetStepDefModel} from './types';
 
-export const confirm: StepNodeConfigurer['confirm'] = (model: SnippetStepDefModel, def: SnippetPipelineStepDef, file: FileDef, handlers: NodeHandlers): ConfigurableElementAnchor | true => {
-	CommonStepDefs.confirm(model, def, file, handlers);
+export const confirm: StepNodeConfigurer<SnippetPipelineStepDef, SnippetStepDefModel>['confirm'] =
+	(model: SnippetStepDefModel, def: SnippetPipelineStepDef, file: FileDef, handlers: NodeHandlers): ConfigurableElementAnchor | true => {
+		CommonStepDefs.confirm(model, def, file, handlers);
 
-	def.snippet = model.snippet;
+		def.snippet = model.snippet;
 
-	handlers.onChange();
-	return true;
-};
+		handlers.onChange();
+		return true;
+	};

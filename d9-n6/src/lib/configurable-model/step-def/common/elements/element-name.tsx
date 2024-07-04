@@ -5,10 +5,10 @@ import {
 	ConfigurableElement,
 	ConfigurableElementBadgeMissed,
 	ConfigurableElementEditorProps
-} from '../../../edit-dialog';
-import {HelpDocs} from '../../../help-docs';
-import {Labels} from '../../../labels';
-import {CommonStepDefModel} from './types';
+} from '../../../../edit-dialog';
+import {HelpDocs} from '../../../../help-docs';
+import {Labels} from '../../../../labels';
+import {CommonStepDefModel} from '../types';
 
 export const elementName: ConfigurableElement = {
 	code: 'name', label: Labels.Name, anchor: 'name',

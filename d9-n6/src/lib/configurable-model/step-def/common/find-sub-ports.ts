@@ -13,9 +13,8 @@ export const findSubPorts: StepNodeConfigurer['findSubPorts'] = (model: StepNode
 	// error handles
 	return [
 		model.getPort(CatchableErrorHandlePortModel.NAME),
-		model.getPort(UncatchableErrorHandlePortModel.NAME),
 		model.getPort(ExposedErrorHandlePortModel.NAME),
+		model.getPort(UncatchableErrorHandlePortModel.NAME),
 		model.getPort(AnyErrorHandlePortModel.NAME)
 	].filter(port => port != null);
 };
-
