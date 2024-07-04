@@ -2,9 +2,9 @@ import {markdown as stepAnyErrorHandle} from './any-error-handle.md';
 import {markdown as stepCatchableErrorHandle} from './catchable-error-handle.md';
 import {markdown as stepExposedErrorHandle} from './exposed-error-handle.md';
 import {markdown as stepFromRequest} from './from-request.md';
+import {markdown as stepTransformer} from './io-transformer.md';
 import {markdown as stepName} from './name.md';
 import {markdown as stepToResponse} from './to-response.md';
-import {markdown as stepTransformer} from './transformer.md';
 import {markdown as stepUncatchableErrorHandle} from './uncatchable-error-handle.md';
 import {markdown as stepUse} from './use.md';
 

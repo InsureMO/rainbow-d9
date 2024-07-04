@@ -48,7 +48,7 @@ export const Labels = {
 	// step
 	StepFromRequest: <IntlLabel keys={['o23', 'step', 'from-request']} value="Pick From Input"/>,
 	StepToResponse: <IntlLabel keys={['o23', 'step', 'to-response']} value="Write To Output"/>,
-	StepMergeRequest: <IntlLabel keys={['o23', 'step', 'merge-request']} value="Merge"/>,
+	StepMergeRequest: <IntlLabel keys={['o23', 'step', 'merge-request']} value="Merge-back strategy"/>,
 	SnippetStepSnippet: <IntlLabel keys={['o23', 'step', 'snippet', 'snippet']} value="Snippet"/>,
 	StepSteps: <IntlLabel keys={['o23', 'step', 'sets', 'steps']} value="Sub Steps"/>,
 	StepHandleCatchableError: <IntlLabel keys={['o23', 'step', 'error-handles', 'catchable']}

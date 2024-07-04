@@ -5,9 +5,9 @@ the processing results to the context for subsequent logic to continue processin
 implementation, allowing pipeline steps to flexibly access the relevant memory data and write back the processed result data to the context
 in the required format.
 
-#### From input
+#### Pick from input
 
-Use the `From Input` property to define a script. The returned data will be used as input data for this step. The script is a function
+Use the `Pick from input` property to define a script. The returned data will be used as input data for this step. The script is a function
 that takes the following parameters:
 
 - `$factor` represents the incoming data,
@@ -31,9 +31,9 @@ return {age: $factor.age};
 > It's important to note that whether modifications to memory data during processing will affect the original input data depends on how the
 > transformation is handled. Generally, if deep cloning is not performed, it will affect the data; otherwise, it will not.
 
-#### To output
+#### Write to output
 
-Use the `To Output` property to define a script. The returned data will be used as output data for this step. The script is a function
+Use the `Write to output` property to define a script. The returned data will be used as output data for this step. The script is a function
 that takes the following parameters:
 
 - `$result` represents the outgoing data,
@@ -54,16 +54,16 @@ return {age: $result.age};
 > `return` is not necessary. If the script is only one line (and has no line breaks), the system will consider the result of executing that
 > line as the result of the entire function.
 
-#### Merge
+>
 
-Here is the translation of your text into English:
+#### Merge-back Strategy
 
 After processing the step logic and obtaining the returned data, you can also define how this returned data should be merged into the
-context of the entire pipeline. There are several ways to define this, all declared using the `Merge` attribute:
+context of the entire pipeline. There are several ways to define this, all declared using the `Merge-back strategy` attribute:
 
 - If not defined, it means the returned data will overwrite the original context and be used as the new context.
-- Defined as `true`, it means the returned data will be automatically unpacked and merged into the original context. In this case, the
-  returned data must be a JSON object and cannot be a primitive type or an array.
+- Defined as `Unbox and merge`, it means the returned data will be automatically unboxed and merged into the original context. In this
+  case, the returned data must be a JSON object and cannot be a primitive type or an array.
 - Defined as a string, it means the returned data will be merged into the original context under the specified name.
 
 Here is a simple example:
@@ -77,7 +77,7 @@ const result = {age: 23};
 context = result;
 // context is {age: 23}
 
-// merge is true, equivalent to
+// merge is "unbox and merge", equivalent to
 context = {...context, ...result};
 // context is {name: 'John', age: 23}
 
@@ -88,3 +88,15 @@ context = {...context, person: result};
 
 > Note that in the latter two cases, there is a possibility of name collision resulting in the original context being overwritten.
 > Therefore, it is necessary to have a clear understanding of the data structure in the context.
+
+#### Keep or clear
+
+In the following `Write to output` scenarios, and in cases where no merge-back strategy is specified:
+
+- returning `null` or `undefined` (recommended to use `(void 0)` to represent `undefined`) indicates that the original request data will
+  continue to be used as the request data for the next step without any modifications.
+- A flag created by returning `$helpers.$clearContextData()` to clear context data will be used as the request data for the next step, while
+  all other data is cleared.
+
+> Please note that "without any modifications" is a conceptual reference. If the data has already been altered by the logic executed in the
+> step, the data passed to the next step may not be identical to the input data of this step.

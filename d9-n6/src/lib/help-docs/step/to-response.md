@@ -8,4 +8,4 @@ also be performed during this process. The following parameters can be used duri
 The returned data will be written back to memory as the actual result data for this step.
 
 > How the step's returned data is written back to memory depends on the return result of this process and the chosen write-back strategy.
-> Please refer to the write-back strategy documentation for details.
+> Please refer to the merge-back strategy documentation for details.
