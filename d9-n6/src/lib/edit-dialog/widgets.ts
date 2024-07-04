@@ -328,7 +328,6 @@ export const NavigatorElementContainer = styled.div.attrs<{ level: number }>(
     position: relative;
     align-items: center;
     min-height: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_HEIGHT};
-    width: 100%;
     margin: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_MARGIN};
     padding: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_PADDING};
     border-top: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_BORDER};
@@ -491,7 +490,6 @@ export const NavigatorElementChildren = styled.span.attrs<{ level: number }>(
     display: flex;
     position: relative;
     flex-direction: column;
-    width: 100%;
 
     &:not(:last-child):not([data-level="0"]) {
         // not last one, since flex direction is column reverse
