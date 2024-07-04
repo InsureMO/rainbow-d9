@@ -374,7 +374,7 @@ export const NavigatorElementBadgeWrapper = styled.span.attrs({[DOM_KEY_WIDGET]:
     align-items: center;
     font-size: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_BADGE_TEXT_FONT_SIZE};
     font-weight: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_BADGE_TEXT_FONT_WEIGHT};
-    height: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_BADGE_HEIGHT};
+    height: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_BADGE_SIZE};
     padding: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_BADGE_PADDING};
     border-radius: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_BADGE_BORDER_RADIUS};
 
@@ -413,8 +413,30 @@ export const NavigatorElementBadgeWrapper = styled.span.attrs({[DOM_KEY_WIDGET]:
         color: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_BADGE_COUNT_COLOR};
     }
 
+    &[data-role=snippet] {
+        background-color: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_BADGE_SNIPPET_BACKGROUND_COLOR};
+        color: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_BADGE_SNIPPET_COLOR};
+    }
+
+    &[data-role=steps] {
+        background-color: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_BADGE_STEPS_BACKGROUND_COLOR};
+        color: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_BADGE_STEPS_COLOR};
+    }
+
+    &[data-role=as-is] {
+        background-color: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_BADGE_AS_IS_BACKGROUND_COLOR};
+        color: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_AS_IS_STEPS_COLOR};
+    }
+
+    &[data-role=snippet], &[data-role=steps] {
+        > svg {
+            height: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_BADGE_SIZE_S};
+            width: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_BADGE_SIZE_S};
+        }
+    }
+
     > svg {
-        width: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_BADGE_HEIGHT};
+        width: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_BADGE_SIZE};
         margin: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_BADGE_ICON_MARGIN};
     }
 `;
@@ -433,8 +455,13 @@ export const NavigatorElementChildren = styled.span.attrs<{ level: number }>(
     position: relative;
     flex-direction: column;
 
-    > span[data-w=o23-playground-edit-dialog-navigator-sub-elements]:nth-last-child(2) {
-        > span[data-w=o23-playground-edit-dialog-navigator-sub-elements-tree-line] {
+    > span[data-w=o23-playground-edit-dialog-navigator-sub-elements-tree-line]:last-child:nth-child(2) {
+        // only one child element
+        display: none;
+    }
+
+    > span[data-w=o23-playground-edit-dialog-navigator-sub-elements] {
+        &:nth-last-child(2) > span[data-w=o23-playground-edit-dialog-navigator-sub-elements-tree-line] {
             display: none;
         }
     }

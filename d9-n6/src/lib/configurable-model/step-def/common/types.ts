@@ -46,8 +46,8 @@ export type StepPort<S extends AllInPipelineStepDef = AllInPipelineStepDef> = (p
 export interface CommonStepDefsProperties {
 	name: ConfigurableElement;
 	use: ConfigurableElement;
-	// fromRequest: ConfigurableElement;
-	// toResponse: ConfigurableElement;
+	fromRequest: ConfigurableElement;
+	toResponse: ConfigurableElement;
 	// mergeRequest: ConfigurableElement;
 	errorHandles: ConfigurableElement;
 }

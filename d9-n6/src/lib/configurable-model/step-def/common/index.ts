@@ -1,7 +1,13 @@
 import {confirm} from './confirm';
 import {createSubNodes, createSubNodesAndEndNode} from './create-sub-nodes';
 import {discard} from './discard';
-import {elementErrorHandles, elementName, elementUse} from './elements';
+import {
+	elementErrorHandles,
+	elementFromRequestGroup,
+	elementName,
+	elementToResponseGroup,
+	elementUse
+} from './elements';
 import {findSubPorts} from './find-sub-ports';
 import {
 	PortAnyError,
@@ -28,6 +34,7 @@ export const CommonStepDefs: CommonStepDefsType = {
 	prepare, switchUse, confirm, discard,
 	properties: {
 		name: elementName, use: elementUse,
+		fromRequest: elementFromRequestGroup, toResponse: elementToResponseGroup,
 		errorHandles: elementErrorHandles
 	},
 	ports: {

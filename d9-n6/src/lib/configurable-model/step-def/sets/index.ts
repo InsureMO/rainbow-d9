@@ -18,6 +18,8 @@ export const SetsStepDefs: StepNodeConfigurer<SetsPipelineStepDef, SetsStepDefMo
 	properties: [
 		CommonStepDefs.properties.name,
 		CommonStepDefs.properties.use,
+		CommonStepDefs.properties.fromRequest,
+		CommonStepDefs.properties.toResponse,
 		CommonStepDefs.properties.errorHandles
 	],
 	ports: [

@@ -47,3 +47,8 @@ export const ConfigurableElementBadgeSteps = () => {
 		{Labels.Steps}
 	</NavigatorElementBadgeWrapper>;
 };
+export const ConfigurableElementBadgeAsIs = () => {
+	return <NavigatorElementBadgeWrapper data-role="as-is">
+		{Labels.AsIs}
+	</NavigatorElementBadgeWrapper>;
+};

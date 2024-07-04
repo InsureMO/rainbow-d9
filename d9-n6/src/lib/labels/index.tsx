@@ -46,8 +46,8 @@ export const Labels = {
 	FileMimeType: <IntlLabel keys={['o23', 'pipeline', 'files', 'mime-type']} value="Mime types"/>,
 
 	// step
-	StepFromRequest: <IntlLabel keys={['o23', 'step', 'from-request']} value="From Input"/>,
-	StepToResponse: <IntlLabel keys={['o23', 'step', 'to-response']} value="To Output"/>,
+	StepFromRequest: <IntlLabel keys={['o23', 'step', 'from-request']} value="Pick From Input"/>,
+	StepToResponse: <IntlLabel keys={['o23', 'step', 'to-response']} value="Write To Output"/>,
 	StepMergeRequest: <IntlLabel keys={['o23', 'step', 'merge-request']} value="Merge"/>,
 	SnippetStepSnippet: <IntlLabel keys={['o23', 'step', 'snippet', 'snippet']} value="Snippet"/>,
 	StepSteps: <IntlLabel keys={['o23', 'step', 'sets', 'steps']} value="Sub Steps"/>,
@@ -63,9 +63,14 @@ export const Labels = {
 	// step use
 	StepUseSnippet: <IntlLabel keys={['o23', 'step', 'use', 'snippet']} value="Snippet"/>,
 	StepUseSets: <IntlLabel keys={['o23', 'step', 'use', 'sets']} value="Sets"/>,
+	// step error handling types
 	StepErrorHandleTypeNone: <IntlLabel keys={['o23', 'step', 'error-handle', 'none']} value="Ignored"/>,
 	StepErrorHandleTypeSnippet: <IntlLabel keys={['o23', 'step', 'error-handle', 'none']} value="Use Snippet"/>,
 	StepErrorHandleTypeSteps: <IntlLabel keys={['o23', 'step', 'error-handle', 'none']} value="Use Sub-steps"/>,
+	// step request/response transformers
+	StepIOTransformer: <IntlLabel keys={['o23', 'step', 'io-transformer', 'use']} value="Transformer"/>,
+	StepIOTransformerAsIs: <IntlLabel keys={['o23', 'step', 'io-transformer', 'as-is']} value="As Is"/>,
+	StepIOTransformerSnippet: <IntlLabel keys={['o23', 'step', 'io-transformer', 'snippet']} value="Use Snippet"/>,
 
 	// common variables, variable might be used in multiple places,
 	// such as attribute label, attribute configuration label, attribute configuration value label, etc.
@@ -89,6 +94,7 @@ export const Labels = {
 	NoChar: <IntlLabel keys={['o23', 'badge', 'no-char']} value="N"/>,
 	Snippet: <IntlLabel keys={['o23', 'badge', 'snippet']} value={<Snippet/>}/>,
 	Steps: <IntlLabel keys={['o23', 'badge', 'steps']} value={<Steps/>}/>,
+	AsIs: <IntlLabel keys={['o23', 'badge', 'as-is']} value="N/A"/>,
 	BadgeChecked: <IntlLabel keys={['o23', 'badge', 'checked']} value={<ElementChecked/>}/>,
 	BadgeMissed: <IntlLabel keys={['o23', 'badge', 'missed']} value={<ElementMissed/>}/>,
 	BadgeBanned: <IntlLabel keys={['o23', 'badge', 'banned']} value={<ElementBanned/>}/>,

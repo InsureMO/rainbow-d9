@@ -17,6 +17,8 @@ export const SnippetStepDefs: StepNodeConfigurer<SnippetPipelineStepDef, Snippet
 	properties: [
 		CommonStepDefs.properties.name,
 		CommonStepDefs.properties.use,
+		CommonStepDefs.properties.fromRequest,
+		CommonStepDefs.properties.toResponse,
 		CommonStepDefs.properties.errorHandles
 	],
 	ports: [
