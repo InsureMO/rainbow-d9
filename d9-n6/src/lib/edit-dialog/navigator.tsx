@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React from 'react';
 import {Labels} from '../labels';
 import {EditDialogEventTypes, useEditDialogEventBus} from './edit-dialog-event-bus';
 import {useElementValueChange, useElementVisible} from './hooks';
@@ -11,7 +11,6 @@ import {
 	EditDialogPartTitle,
 	NavigatorElementBadge,
 	NavigatorElementChildren,
-	NavigatorElementChildrenTreeLine,
 	NavigatorElementContainer,
 	NavigatorElementLabel,
 	NavigatorElementsContainer
@@ -21,7 +20,6 @@ export interface DialogNavigatorElementProps {
 	element: ConfigurableElement;
 	model: ConfigurableModel;
 	level: number;
-	last: Array<boolean>;
 }
 
 export const DialogNavigatorElementWrapper = (props: DialogNavigatorElementProps) => {
@@ -43,57 +41,17 @@ export const DialogNavigatorElementWrapper = (props: DialogNavigatorElementProps
 	</NavigatorElementContainer>;
 };
 
-export const DialogNavigatorElementChildrenTreeLine = () => {
-	const ref = useRef<HTMLDivElement>(null);
-	const [offset, setOffset] = useState(0);
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	useEffect(() => {
-		if (ref.current == null) {
-			return;
-		}
-		const parent = ref.current.parentElement;
-		if (parent.nextElementSibling?.nextElementSibling != null) {
-			if (offset !== 0) {
-				setOffset(0);
-			}
-		} else {
-			let height = 0;
-			let ignored = ref.current.previousElementSibling;
-			while (ignored != null) {
-				if (ignored.tagName === 'SPAN') {
-					height += ignored.getBoundingClientRect().height;
-					ignored = ignored.previousElementSibling;
-					height += ignored.getBoundingClientRect().height;
-					break;
-				} else {
-					height += ignored.getBoundingClientRect().height;
-					ignored = ignored.previousElementSibling;
-				}
-			}
-			if (offset !== height) {
-				setOffset(height);
-			}
-		}
-	});
-	// TODO ELEMENT VISIBLE COULD LEAD OFFSET CHANGE, HOW TO HANDLE IT?
-
-	return <NavigatorElementChildrenTreeLine offset={offset} ref={ref}/>;
-};
 export const DialogNavigatorElementChildren = (props: DialogNavigatorElementProps) => {
-	const {element, model, level, last} = props;
+	const {element, model, level} = props;
 
 	if (element.children == null || element.children.length === 0) {
 		return null;
 	}
 
 	return <NavigatorElementChildren level={level}>
-		{element.children
-			.map((child, index, children) => {
-				return <DialogNavigatorElement element={child} model={model}
-				                               level={level + 1} last={[...last, index === children.length - 1]}
-				                               key={child.code}/>;
-			})}
-		<DialogNavigatorElementChildrenTreeLine/>
+		{element.children.map((child) => {
+			return <DialogNavigatorElement element={child} model={model} level={level + 1} key={child.code}/>;
+		})}
 	</NavigatorElementChildren>;
 };
 
@@ -120,13 +78,9 @@ export const DialogNavigatorElements = (props: DialogNavigatorProps) => {
 	const {elements, model} = props;
 
 	return <NavigatorElementsContainer>
-		{elements
-			.map((element, index, elements) => {
-				return <DialogNavigatorElement element={element} model={model}
-				                               level={0}
-				                               last={[index === elements.length - 1]}
-				                               key={element.code}/>;
-			})}
+		{elements.map((element) => {
+			return <DialogNavigatorElement element={element} model={model} level={0} key={element.code}/>;
+		})}
 	</NavigatorElementsContainer>;
 };
 

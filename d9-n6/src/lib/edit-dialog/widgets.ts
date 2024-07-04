@@ -1,4 +1,4 @@
-import {CssVars, DOM_KEY_WIDGET, Utils} from '@rainbow-d9/n2';
+import {CssVars, DOM_KEY_WIDGET} from '@rainbow-d9/n2';
 import styled from 'styled-components';
 import {PlaygroundCssVars} from '../widgets';
 
@@ -312,10 +312,6 @@ export const NavigatorElementsContainer = styled.div.attrs({
     padding: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_PADDING};
     overflow-y: auto;
     overflow-x: hidden;
-
-    > div[data-w=o23-playground-edit-dialog-navigator-element]:first-child {
-        border-top-color: transparent;
-    }
 `;
 // noinspection CssUnresolvedCustomProperty
 export const NavigatorElementContainer = styled.div.attrs<{ level: number }>(
@@ -332,12 +328,52 @@ export const NavigatorElementContainer = styled.div.attrs<{ level: number }>(
     position: relative;
     align-items: center;
     min-height: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_HEIGHT};
+    width: 100%;
     margin: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_MARGIN};
     padding: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_PADDING};
     border-top: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_BORDER};
     border-radius: 0;
     cursor: pointer;
     transition: background-color ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION}, border-radius ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION}, font-weight ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION};
+
+    &:not([data-level="0"]) {
+        &:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: calc((var(--level) * 2 - 0.5) * ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_INDENT});
+            width: 1px;
+            height: 100%;
+            background-color: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_TREE_LINE_COLOR};
+        }
+
+        &:after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: calc((var(--level) * 2 - 0.5) * ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_INDENT});
+            width: 8px;
+            height: 1px;
+            background-color: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_TREE_LINE_COLOR};
+        }
+    }
+
+    &:last-of-type {
+        // last one, since flex direction is column reverse
+
+        &:before {
+            border-bottom-left-radius: 3px;
+            width: 8px;
+            height: calc(${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_HEIGHT} / 2);
+            background-color: transparent;
+            border-left: 1px solid ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_TREE_LINE_COLOR};
+            border-bottom: 1px solid ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_TREE_LINE_COLOR};
+        }
+
+        &:after {
+            display: none;
+        }
+    }
 
     &:hover {
         background-color: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_HOVER_COLOR};
@@ -440,7 +476,8 @@ export const NavigatorElementBadgeWrapper = styled.span.attrs({[DOM_KEY_WIDGET]:
         margin: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_BADGE_ICON_MARGIN};
     }
 `;
-// use span since will use the css last-of-type selector
+// use span, since element use *-of-type selector
+// noinspection CssUnresolvedCustomProperty
 export const NavigatorElementChildren = styled.span.attrs<{ level: number }>(
 	({level}) => {
 		return {
@@ -454,77 +491,24 @@ export const NavigatorElementChildren = styled.span.attrs<{ level: number }>(
     display: flex;
     position: relative;
     flex-direction: column;
+    width: 100%;
 
-    > span[data-w=o23-playground-edit-dialog-navigator-sub-elements-tree-line]:last-child:nth-child(2) {
-        // only one child element
-        display: none;
-    }
+    &:not(:last-child):not([data-level="0"]) {
+        // not last one, since flex direction is column reverse
 
-    > span[data-w=o23-playground-edit-dialog-navigator-sub-elements] {
-        &:nth-last-child(2) > span[data-w=o23-playground-edit-dialog-navigator-sub-elements-tree-line] {
-            display: none;
-        }
-    }
-
-    > div[data-w=o23-playground-edit-dialog-navigator-element] {
-        > div[data-w=o23-playground-edit-dialog-navigator-element-label] {
-            &:before {
-                content: '';
-                display: block;
-                position: absolute;
-                width: 1px;
-                height: calc(100% + 1px);
-                top: 0;
-                left: calc(-1.5 * ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_INDENT});
-                background-color: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_TREE_LINE_COLOR};
-            }
-
-            &:after {
-                content: '';
-                display: block;
-                position: absolute;
-                width: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_INDENT};
-                height: 50%;
-                top: 0;
-                left: calc(-1.5 * ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_INDENT});
-                border-bottom-left-radius: 3px;
-                border-bottom: 1px solid ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_TREE_LINE_COLOR};
-            }
-        }
-    }
-
-    > div[data-w=o23-playground-edit-dialog-navigator-element]:last-of-type {
-        > div[data-w=o23-playground-edit-dialog-navigator-element-label] {
-            &:before {
-                display: none;
-            }
-
-            &:after {
-                border-left: 1px solid ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_TREE_LINE_COLOR};
-            }
+        &:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: calc(((var(--level) - 1) * 2 + 0.5) * ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_INDENT});
+            width: 1px;
+            height: 100%;
+            background-color: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_TREE_LINE_COLOR};
+            z-index: 1;
         }
     }
 `;
-// noinspection CssUnresolvedCustomProperty
-export const NavigatorElementChildrenTreeLine = styled.span.attrs<{ offset: number }>(
-	({offset}) => {
-		return {
-			[DOM_KEY_WIDGET]: 'o23-playground-edit-dialog-navigator-sub-elements-tree-line',
-			style: {
-				'--offset': Utils.toCssSize(offset)
-			}
-		};
-	})<{ offset: number }>`
-    display: block;
-    position: absolute;
-    width: 1px;
-    height: calc(100% + 1px - var(--offset));
-    top: 0;
-    left: calc((max((var(--level) - 1), 0) * 2 + 0.5) * ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_INDENT});
-    background-color: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_TREE_LINE_COLOR};
-    z-index: 1;
-`;
-export const SpecificElementsContainer = styled.div.attrs({
+export const SpecificElementsContainer = styled.span.attrs({
 	[DOM_KEY_WIDGET]: 'o23-playground-edit-dialog-specific-elements',
 	'data-h-scroll': ''
 })`
