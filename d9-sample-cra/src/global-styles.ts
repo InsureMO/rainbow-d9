@@ -113,6 +113,10 @@ export const GlobalStyles: any = createGlobalStyle`
             }
         }
 
+        //div[data-w=d9-dropdown-option-filter] > span:first-child {
+        //    display: none;
+        //}
+
         div[data-w=d9-plan-selection] {
             --d9-plan-selection-background-color: ${CssVars.INVERT_COLOR};
 

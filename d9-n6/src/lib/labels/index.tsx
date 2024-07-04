@@ -71,6 +71,12 @@ export const Labels = {
 	StepIOTransformer: <IntlLabel keys={['o23', 'step', 'io-transformer', 'use']} value="Transformer"/>,
 	StepIOTransformerAsIs: <IntlLabel keys={['o23', 'step', 'io-transformer', 'as-is']} value="As Is"/>,
 	StepIOTransformerSnippet: <IntlLabel keys={['o23', 'step', 'io-transformer', 'snippet']} value="Use Snippet"/>,
+	StepIOMergeBackReplace: <IntlLabel keys={['o23', 'step', 'io-merge-back', 'replace']} value="Replace"/>,
+	StepIOMergeBackUnbox: <IntlLabel keys={['o23', 'step', 'io-merge-back', 'unbox']} value="Unbox and Merge"/>,
+	StepIOMergeBackAsProperty: <IntlLabel keys={['o23', 'step', 'io-merge-back', 'as-property']}
+	                                      value="As Specific Property"/>,
+	StepIOMergeBackAsPropertyName: <IntlLabel keys={['o23', 'step', 'io-merge-back', 'as-property-name']}
+	                                          value="Property Name"/>,
 
 	// common variables, variable might be used in multiple places,
 	// such as attribute label, attribute configuration label, attribute configuration value label, etc.

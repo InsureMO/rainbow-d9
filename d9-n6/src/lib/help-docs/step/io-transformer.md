@@ -61,10 +61,10 @@ return {age: $result.age};
 After processing the step logic and obtaining the returned data, you can also define how this returned data should be merged into the
 context of the entire pipeline. There are several ways to define this, all declared using the `Merge-back strategy` attribute:
 
-- If not defined, it means the returned data will overwrite the original context and be used as the new context.
+- Defined as `Replace`, it means the returned data will overwrite the original context and be used as the new context.
 - Defined as `Unbox and merge`, it means the returned data will be automatically unboxed and merged into the original context. In this
   case, the returned data must be a JSON object and cannot be a primitive type or an array.
-- Defined as a string, it means the returned data will be merged into the original context under the specified name.
+- Defined as `As specific property`, it means the returned data will be merged into the original context under the specified name.
 
 Here is a simple example:
 
@@ -91,7 +91,7 @@ context = {...context, person: result};
 
 #### Keep or clear
 
-In the following `Write to output` scenarios, and in cases where no merge-back strategy is specified:
+In the following `Write to output` scenarios, and in cases where merge-back strategy is specified as `Replace`:
 
 - Returning `null` or `undefined` (recommended to use `(void 0)` to represent `undefined`) indicates that the original request data will
   continue to be used as the request data for the next step without any modifications.
