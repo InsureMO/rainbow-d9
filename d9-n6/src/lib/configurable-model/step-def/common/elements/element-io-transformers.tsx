@@ -60,6 +60,37 @@ export const elementToResponse: ConfigurableElement = {
 	editor: createEditor({flag: 'toResponseAsIs', snippet: 'toResponse'}),
 	helpDoc: HelpDocs.stepToResponse
 };
+const MergeToRequestEditor = (props: ConfigurableElementEditorProps<CommonStepDefModel>) => {
+	const {model, onValueChanged} = props;
+
+	const inputRef = useRef<HTMLInputElement>(null);
+
+	const onValueChange = (value: PropValue) => {
+		model.temporary = {...(model.temporary ?? {}), mergeRequestType: value as MergeRequestType};
+		onValueChanged();
+	};
+	const onNameChange = (value: PropValue) => {
+		model.mergeRequest = value as string;
+		setTimeout(() => inputRef.current?.querySelector('input')?.focus(), 50);
+		onValueChanged();
+	};
+	const options = [
+		{value: MergeRequestType.REPLACE, label: Labels.StepIOMergeBackReplace},
+		{value: MergeRequestType.MERGE_AS_PROPERTY, label: Labels.StepIOMergeBackAsProperty},
+		{value: MergeRequestType.UNBOX, label: Labels.StepIOMergeBackUnbox}
+	];
+	return <VerticalLinesEditor>
+		<UnwrappedDropdown value={model.temporary?.mergeRequestType ?? MergeRequestType.REPLACE}
+		                   onValueChange={onValueChange} options={options} clearable={false}
+		                   style={{justifySelf: 'start', width: 'unset', minWidth: 'min(200px, 100%)'}}/>
+		<UnwrappedDecorateInput leads={[Labels.StepIOMergeBackAsPropertyName]}
+		                        value={model.mergeRequest ?? ''}
+		                        onValueChange={onNameChange}
+		                        disabled={model.temporary?.mergeRequestType !== MergeRequestType.MERGE_AS_PROPERTY}
+		                        ref={inputRef}
+		                        data-di-prefix-text={true}/>
+	</VerticalLinesEditor>;
+};
 export const elementMergeToRequest: ConfigurableElement = {
 	code: 'merge-to-response', label: Labels.StepMergeRequest, anchor: 'merge-to-response',
 	badge: (model: CommonStepDefModel): ReactNode => {
@@ -73,37 +104,7 @@ export const elementMergeToRequest: ConfigurableElement = {
 				return Labels.StepIOMergeBackReplace;
 		}
 	},
-	editor: (props: ConfigurableElementEditorProps<CommonStepDefModel>) => {
-		const {model, onValueChanged} = props;
-
-		const inputRef = useRef<HTMLInputElement>(null);
-
-		const onValueChange = (value: PropValue) => {
-			model.temporary = {...(model.temporary ?? {}), mergeRequestType: value as MergeRequestType};
-			onValueChanged();
-		};
-		const onNameChange = (value: PropValue) => {
-			model.mergeRequest = value as string;
-			setTimeout(() => inputRef.current?.querySelector('input')?.focus(), 50);
-			onValueChanged();
-		};
-		const options = [
-			{value: MergeRequestType.REPLACE, label: Labels.StepIOMergeBackReplace},
-			{value: MergeRequestType.MERGE_AS_PROPERTY, label: Labels.StepIOMergeBackAsProperty},
-			{value: MergeRequestType.UNBOX, label: Labels.StepIOMergeBackUnbox}
-		];
-		return <VerticalLinesEditor>
-			<UnwrappedDropdown value={model.temporary?.mergeRequestType ?? MergeRequestType.REPLACE}
-			                   onValueChange={onValueChange} options={options} clearable={false}
-			                   style={{justifySelf: 'start', width: 'unset', minWidth: 'min(200px, 100%)'}}/>
-			<UnwrappedDecorateInput leads={[Labels.StepIOMergeBackAsPropertyName]}
-			                        value={model.mergeRequest ?? ''}
-			                        onValueChange={onNameChange}
-			                        disabled={model.temporary?.mergeRequestType !== MergeRequestType.MERGE_AS_PROPERTY}
-			                        ref={inputRef}
-			                        data-di-prefix-text={true}/>
-		</VerticalLinesEditor>;
-	},
+	editor: MergeToRequestEditor,
 	helpDoc: HelpDocs.stepMergeToRequest
 };
 export const elementToResponseGroup: ConfigurableElement = {
