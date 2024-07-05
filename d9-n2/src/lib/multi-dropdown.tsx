@@ -49,6 +49,7 @@ export type MultiDropdownDef =
 	& {
 	please?: ReactNode;
 	clearable?: boolean;
+	filterable?: boolean;
 	/** max popup width */
 	maxWidth?: number;
 };
@@ -171,7 +172,7 @@ export const MultiDropdown = forwardRef((props: MultiDropdownProps, ref: Forward
 		popupState, popupHeight,
 		popupRef, popupShown,
 		repaintPopup,
-		onClicked, onFocused, onKeyUp
+		onClicked, onFocused, onKeyUp, onAnyInputEvent
 	} = useFilterableDropdownOptions(props);
 	const forceUpdate = useForceUpdate();
 	useDualRefs(containerRef, ref);
@@ -278,7 +279,7 @@ export const MultiDropdown = forwardRef((props: MultiDropdownProps, ref: Forward
 	                               data-w="d9-multi-dropdown"
 	                               data-disabled={$disabled} data-visible={$visible}
 	                               data-clearable={clearable}
-	                               onFocus={onFocused} onClick={onClicked}
+	                               onFocus={onFocused} onClick={onClicked} onKeyDown={onAnyInputEvent}
 	                               id={PPUtils.asId(PPUtils.absolute($p2r, $pp), props.id)}
 	                               ref={containerRef}>
 		{values.map(value => {

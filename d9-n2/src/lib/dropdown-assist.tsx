@@ -435,6 +435,7 @@ export const useDropdownControl = (options: {
 };
 
 export interface FilterableDropdownOptions<V> extends OptionItemsProps<V> {
+	filterable?: boolean;
 	takeoverFilter?: false;
 	/** keep it in state, and do not change it */
 	filterChanged?: (filter: string, timing: 'hide' | 'search') => Promise<void>;
@@ -446,7 +447,7 @@ export const useFilterableDropdownOptions = <V extends any>(props: FilterableDro
 		optionSort, maxWidth,
 		noAvailable = <IntlLabel keys={['options', 'noAvailable']} value="No available option."/>,
 		noMatched = <IntlLabel keys={['options', 'noMatched']} value="No matched option."/>,
-		takeoverFilter, filterChanged,
+		filterable = true, takeoverFilter, filterChanged,
 		$wrapped: {$avs: {$disabled}}
 	} = props;
 
@@ -544,11 +545,22 @@ export const useFilterableDropdownOptions = <V extends any>(props: FilterableDro
 		}
 	};
 	const onFilterChanged = async (event: ChangeEvent<HTMLInputElement>) => {
-		if ($disabled) {
+		if ($disabled || filterable === false) {
 			return;
 		}
 		setFilter(event.target.value);
 		filterChanged && (await filterChanged(event.target.value, 'search'));
+	};
+	const onAnyInputEvent = (event: KeyboardEvent<HTMLElement>) => {
+		if (filterable === false || event.target === filterInputRef.current) {
+			return;
+		}
+		if (!isDropdownPopupActive(popupState.active)) {
+			onClicked();
+		}
+
+		filterInputRef.current?.dispatchEvent(new Event('keydown', event));
+		filterInputRef.current?.focus();
 	};
 
 	return {
@@ -557,7 +569,7 @@ export const useFilterableDropdownOptions = <V extends any>(props: FilterableDro
 		containerRef, popupState, setPopupState, popupHeight,
 		popupRef, popupShown, setPopupShown, afterPopupStateChanged: functions,
 		repaintPopup,
-		onClicked, onFocused, onKeyUp, onFilterChanged
+		onClicked, onFocused, onKeyUp, onFilterChanged, onAnyInputEvent
 	};
 };
 

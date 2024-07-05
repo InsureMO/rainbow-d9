@@ -48,6 +48,7 @@ export type DropdownDef =
 	& {
 	please?: ReactNode;
 	clearable?: boolean;
+	filterable?: boolean;
 	/** max popup width */
 	maxWidth?: number;
 };
@@ -93,7 +94,7 @@ export const Dropdown = forwardRef((props: DropdownProps, ref: ForwardedRef<HTML
 		containerRef,
 		popupState, popupHeight,
 		popupRef, popupShown, setPopupShown, afterPopupStateChanged,
-		onClicked, onFocused, onKeyUp
+		onClicked, onFocused, onKeyUp, onAnyInputEvent
 	} = useFilterableDropdownOptions(props);
 	useDualRefs(containerRef, ref);
 	useTip({ref: containerRef, ...buildTip({tip, root: $root, model: $model})});
@@ -145,7 +146,7 @@ export const Dropdown = forwardRef((props: DropdownProps, ref: ForwardedRef<HTML
 	                          data-w="d9-dropdown"
 	                          data-disabled={$disabled} data-visible={$visible}
 	                          data-clearable={clearable}
-	                          onFocus={onFocused} onClick={onClicked}
+	                          onFocus={onFocused} onClick={onClicked} onKeyDown={onAnyInputEvent}
 	                          id={PPUtils.asId(PPUtils.absolute($p2r, $pp), props.id)}
 	                          ref={containerRef}>
 		<DropdownLabel data-please={!selected}>{toIntlLabel(label)}</DropdownLabel>

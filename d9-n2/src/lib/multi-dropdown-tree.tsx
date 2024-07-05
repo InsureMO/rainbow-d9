@@ -53,6 +53,7 @@ export type MultiDropdownTreeDef =
 	& {
 	please?: ReactNode;
 	clearable?: boolean;
+	filterable?: boolean;
 	options: MultiDropdownTreeOptions
 		| (<R extends BaseModel, M extends PropValue>(options: ModelCarrier<R, M> & GlobalEventHandlers) => Promise<MultiDropdownTreeOptions>);
 	optionSort?: OptionItemSort;
@@ -157,7 +158,7 @@ export const InternalMultiDropdownTree = forwardRef((props: MultiDropdownTreePro
 		popupState,
 		popupRef, popupShown,
 		repaintPopup,
-		onClicked, onFocused, onKeyUp
+		onClicked, onFocused, onKeyUp, onAnyInputEvent
 	} = useFilterableDropdownOptions({...props, takeoverFilter: false, filterChanged});
 	const forceUpdate = useForceUpdate();
 	useDualRefs(containerRef, ref);
@@ -308,7 +309,7 @@ export const InternalMultiDropdownTree = forwardRef((props: MultiDropdownTreePro
 	                                   data-w="d9-multi-dropdown-tree"
 	                                   data-disabled={$disabled} data-visible={$visible}
 	                                   data-clearable={clearable}
-	                                   onFocus={onFocused} onClick={onClicked}
+	                                   onFocus={onFocused} onClick={onClicked} onKeyDown={onAnyInputEvent}
 	                                   id={PPUtils.asId(PPUtils.absolute($p2r, $pp), props.id)}
 	                                   ref={containerRef}>
 		{values.map(value => {

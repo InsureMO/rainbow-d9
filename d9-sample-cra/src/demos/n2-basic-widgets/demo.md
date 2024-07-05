@@ -61,6 +61,7 @@
 
 - Dropdown::::dropdown
 	- label: Dropdown
+	- !filterable
 	- options:
 		- 1: Option #1
 		- 2: Option #2

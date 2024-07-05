@@ -58,6 +58,7 @@ export type DropdownTreeDef =
 	& {
 	please?: ReactNode;
 	clearable?: boolean;
+	filterable?: boolean;
 	options: DropdownTreeOptions
 		| (<R extends BaseModel, M extends PropValue>(options: ModelCarrier<R, M> & GlobalEventHandlers) => Promise<DropdownTreeOptions>);
 	optionSort?: OptionItemSort;
@@ -101,7 +102,7 @@ export const InternalDropdownTree = forwardRef((props: DropdownTreeProps, ref: F
 		containerRef,
 		popupState,
 		popupRef, popupShown, setPopupShown, afterPopupStateChanged,
-		onClicked, onFocused, onKeyUp
+		onClicked, onFocused, onKeyUp, onAnyInputEvent
 	} = useFilterableDropdownOptions({...props, takeoverFilter: false, filterChanged});
 	useDualRefs(containerRef, ref);
 	useTip({ref: containerRef, ...buildTip({tip, root: $root, model: $model})});
@@ -214,7 +215,7 @@ export const InternalDropdownTree = forwardRef((props: DropdownTreeProps, ref: F
 	                          data-w="d9-dropdown-tree"
 	                          data-disabled={$disabled} data-visible={$visible}
 	                          data-clearable={clearable}
-	                          onFocus={onFocused} onClick={onClicked}
+	                          onFocus={onFocused} onClick={onClicked} onKeyDown={onAnyInputEvent}
 	                          id={PPUtils.asId(PPUtils.absolute($p2r, $pp), props.id)}
 	                          ref={containerRef}>
 		<DropdownLabel data-please={!selected}>{toIntlLabel(label)}</DropdownLabel>
