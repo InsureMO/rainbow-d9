@@ -2,12 +2,10 @@ import {CanvasWidget} from '@projectstorm/react-canvas-core';
 import createEngine from '@projectstorm/react-diagrams';
 import {DiagramEngine} from '@projectstorm/react-diagrams-core';
 import {useForceUpdate, useThrottler, VUtils} from '@rainbow-d9/n1';
-import dom2image from 'dom-to-image';
 import React, {useEffect, useRef} from 'react';
 import {DEFAULTS} from '../constants';
 import {FileDef, FileDefDeserializer, FileDefSerializer} from '../definition';
 import {initEngine, StartNodeModel} from '../diagram';
-import {DownloadImage, FitCanvas, OriginSize, ZoomIn, ZoomOut} from '../icons';
 import {Labels} from '../labels';
 import {PlaygroundEventTypes, usePlaygroundEventBus} from '../playground-event-bus';
 import {EditorProps, MarkdownContent} from '../types';
@@ -21,7 +19,8 @@ import {
 	GridCell
 } from './diagram-utils';
 import {ErrorBoundary} from './error-boundary';
-import {EditorToolbar, EditorToolbarButton, EditorWrapper, ParseError} from './widgets';
+import {Toolbar} from './toolbar';
+import {EditorWrapper, ParseError} from './widgets';
 
 export enum EditorKernelDiagramStatus {
 	IGNORED = 'ignored', PAINT = 'paint', IN_SERVICE = 'in-service'
@@ -165,35 +164,6 @@ export const EditorKernel = (props: EditorProps) => {
 		</EditorWrapper>;
 	}
 
-	const zoomTo = (factor: number) => {
-		const engine = stateRef.current.engine;
-		engine.getModel().setZoomLevel(factor);
-		engine.repaintCanvas();
-	};
-	const onZoomInClicked = () => {
-		zoomTo(stateRef.current.engine.getModel().getZoomLevel() + 5);
-	};
-	const onZoomOutClicked = () => {
-		zoomTo(stateRef.current.engine.getModel().getZoomLevel() - 5);
-	};
-	const onOriginSizeClicked = () => {
-		zoomTo(100);
-	};
-	const onFitCanvasClicked = () => {
-		stateRef.current.engine.zoomToFit();
-	};
-	const onDownloadImageClicked = async () => {
-		const node = wrapperRef.current.querySelector('div.o23-playground-editor-content') as HTMLDivElement;
-		node.style.overflow = 'visible';
-		// noinspection SpellCheckingInspection
-		const dataUrl = await dom2image.toPng(node, {quality: 1, bgcolor: 'white'});
-		node.style.overflow = '';
-		const link = document.createElement('a');
-		link.download = `${stateRef.current.def?.code || 'no-code'}-diagram.png`;
-		link.href = dataUrl;
-		link.click();
-	};
-
 	try {
 		return <EditorWrapper data-diagram-status={stateRef.current.diagramStatus}
 		                      data-diagram-locked={stateRef.current.engine.getModel().isLocked()}
@@ -203,13 +173,7 @@ export const EditorKernel = (props: EditorProps) => {
 			 @ts-ignore */}
 			<ErrorBoundary content={content}>
 				<CanvasWidget engine={stateRef.current.engine} className="o23-playground-editor-content"/>
-				<EditorToolbar>
-					<EditorToolbarButton onClick={onZoomInClicked}><ZoomIn/></EditorToolbarButton>
-					<EditorToolbarButton onClick={onZoomOutClicked}><ZoomOut/></EditorToolbarButton>
-					<EditorToolbarButton onClick={onOriginSizeClicked}><OriginSize/></EditorToolbarButton>
-					<EditorToolbarButton onClick={onFitCanvasClicked}><FitCanvas/></EditorToolbarButton>
-					<EditorToolbarButton onClick={onDownloadImageClicked}><DownloadImage/></EditorToolbarButton>
-				</EditorToolbar>
+				<Toolbar engine={stateRef.current.engine}/>
 			</ErrorBoundary>
 		</EditorWrapper>;
 	} catch (error) {

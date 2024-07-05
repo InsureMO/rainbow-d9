@@ -2,10 +2,10 @@ import {LinkModel} from '@projectstorm/react-diagrams';
 import {Undefinable} from '@rainbow-d9/n1';
 import {DEFAULTS} from '../../../constants';
 import {FileDef, PipelineStepDef} from '../../../definition';
-import {HandledNodeModel, NodeHandlers, StepNodeEntityType, StepNodeModel} from '../../../diagram';
+import {HandledNodeModel, NodeHandlers, OutgoingPortModel, StepNodeEntityType, StepNodeModel} from '../../../diagram';
 import {askStepNodePosition, DiagramNodePosition} from '../../../editor';
 import {CreateSubNodesOptions} from '../../types';
-import {FirstSubStepPortModel, OutgoingPortModel} from './port-widgets';
+import {FirstSubStepPortModel} from './port-widgets';
 
 export const setNodePosition = (node: HandledNodeModel, position: () => DiagramNodePosition) => {
 	const {x, y, appointed} = position();

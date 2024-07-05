@@ -1,7 +1,7 @@
 import React, {SVGProps} from 'react';
 
-export const WindowIcon = (props: Omit<SVGProps<SVGSVGElement>, 'xmlns' | 'viewBox'>) => {
-	return <svg {...props} data-icon="playground-window" viewBox="0 0 24 24" fill="none"
+export const Window = (props: Omit<SVGProps<SVGSVGElement>, 'xmlns' | 'viewBox'>) => {
+	return <svg {...props} data-icon="o23-window" viewBox="0 0 24 24" fill="none"
 	            xmlns="http://www.w3.org/2000/svg">
 		<path d="M7 6C7 6.55228 6.55228 7 6 7C5.44772 7 5 6.55228 5 6C5 5.44772 5.44772 5 6 5C6.55228 5 7 5.44772 7 6Z"
 		      fill="currentColor"/>

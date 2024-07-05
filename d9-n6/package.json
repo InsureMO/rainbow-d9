@@ -21,6 +21,7 @@
 	},
 	"author": "Rainbow Team",
 	"dependencies": {
+		"@codemirror/lang-javascript": "^6.2.2",
 		"@projectstorm/react-diagrams": "^7.0.4",
 		"@rainbow-d9/n2": "1.1.36",
 		"@rainbow-d9/n3": "1.1.36",

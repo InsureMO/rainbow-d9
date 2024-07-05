@@ -8,6 +8,7 @@ import {Editor} from './editor';
 import {PlaygroundBridge} from './playground-bridge';
 import {PlaygroundEventBusProvider} from './playground-event-bus';
 import {PlaygroundProps, UnwrappedPlaygroundProps} from './types';
+import {PlaygroundCssVars} from './widgets';
 
 // noinspection CssUnresolvedCustomProperty
 export const PlaygroundWrapper = styled.div.attrs(
@@ -35,6 +36,18 @@ export const PlaygroundWrapper = styled.div.attrs(
 
     &[data-visible=false] {
         display: none;
+    }
+
+    &[data-diagram-work-mode] {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background-color: ${CssVars.BACKGROUND_COLOR};
+        border: 0;
+        border-radius: 0;
+        z-index: ${PlaygroundCssVars.EDITOR_MAX_Z_INDEX};
     }
 `;
 

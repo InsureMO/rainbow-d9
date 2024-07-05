@@ -33,6 +33,7 @@ export const PlaygroundCssVars = {
 	EDITOR_TOOLBAR_BUTTON_COLOR: `var(--o23-playground-editor-toolbar-button-color, ${CssVars.FONT_COLOR})`,
 	EDITOR_TOOLBAR_BUTTON_ACTIVE_COLOR: `var(--o23-playground-editor-toolbar-button-active-color, ${CssVars.INVERT_COLOR})`,
 	EDITOR_TOOLBAR_BUTTON_ACTIVE_BACKGROUND_COLOR: `var(--o23-playground-editor-toolbar-button-active-background-color, ${CssVars.PRIMARY_COLOR})`,
+	EDITOR_MAX_Z_INDEX: `var(--o23-playground-editor-max-z-index, 9999)`,
 	// markdown
 	MARKDOWN_FONT_SIZE: 'var(--o23-playground-markdown-font-size, 14px)',
 	MARKDOWN_COLOR: `var(--o23-playground-markdown-color, ${CssVars.FONT_COLOR})`,
