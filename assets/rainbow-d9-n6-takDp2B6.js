@@ -4,14 +4,14 @@ var __publicField = (obj, key, value) => {
   __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
   return value;
 };
-import { a as color, P as jsYaml, Q as dom2image } from "./vendor-x3SPvJVy.js";
-import { f as CssConstants, C as CssVars, I as IntlLabel, D as DOM_KEY_WIDGET, g as UnwrappedCaption, h as UnwrappedInput, j as UnwrappedDropdown, k as UnwrappedDecorateInput, b as useGlobalHandlers, l as UnwrappedCheckbox, m as UnwrappedTextarea } from "./rainbow-d9-n2-DMKk85gx.js";
-import { R as React, r as reactExports, q as qe, W as We, P as PortModelAlignment, a as PortWidget, D as DefaultLinkModel, b as PortModel, N as NodeModel, C as CanvasWidget, c as createEngine, A as AbstractModelFactory, d as DiagramModel, e as DefaultLinkFactory, f as AbstractReactFactory, L as LinkWidget, g as DefaultLinkPointWidget, h as DefaultLinkSegmentWidget } from "./react-base-RoI39byt.js";
-import { V as VUtils, r as registerWidget, g as useCreateEventBus, M as MUtils, P as PPUtils, a as useThrottler, e as useForceUpdate } from "./rainbow-d9-n1-u2JbSDNy.js";
-import { i as index$1 } from "./rainbow-d9-n3-gyTLeDTF.js";
-import { M as Markdown } from "./react-markdown-Vss6qsUz.js";
-import { r as remarkGfm } from "./remark-DHxc17-O.js";
-import { S as SyntaxHighlighter, p as prism } from "./react-syntax-highlighter-nQukEpgW.js";
+import { a as color, P as jsYaml, Q as dom2image } from "./vendor-QkTfmfrv.js";
+import { f as CssConstants, C as CssVars, I as IntlLabel, D as DOM_KEY_WIDGET, g as UnwrappedCaption, h as UnwrappedInput, j as UnwrappedDropdown, k as UnwrappedDecorateInput, b as useGlobalHandlers, l as UnwrappedCheckbox, m as UnwrappedTextarea } from "./rainbow-d9-n2-wt2u7eCE.js";
+import { R as React, r as reactExports, q as qe, W as We, P as PortModelAlignment, a as PortWidget, D as DefaultLinkModel, b as PortModel, N as NodeModel, C as CanvasWidget, c as createEngine, A as AbstractModelFactory, d as DiagramModel, e as DefaultLinkFactory, f as AbstractReactFactory, L as LinkWidget, g as DefaultLinkPointWidget, h as DefaultLinkSegmentWidget } from "./react-base-iGeJA2-Y.js";
+import { V as VUtils, r as registerWidget, g as useCreateEventBus, M as MUtils, P as PPUtils, a as useThrottler, e as useForceUpdate } from "./rainbow-d9-n1-sgrwQs9e.js";
+import { i as index$1 } from "./rainbow-d9-n3-UcXFXY4h.js";
+import { M as Markdown } from "./react-markdown-Sp2rUdAH.js";
+import { r as remarkGfm } from "./remark-EWYiv7Aw.js";
+import { S as SyntaxHighlighter, p as prism } from "./react-syntax-highlighter-UltWrXQD.js";
 const EDITOR_BACKGROUND_BLOCK_SIZE = "var(--o23-playground-editor-background-block-size, 48px)";
 const EDITOR_BACKGROUND_LINE_COLOR = `var(--o23-playground-editor-background-line-color, ${color(CssConstants.PRIMARY_COLOR).alpha(0.08)})`;
 const NODE_START_COLOR = "#ffb56b";
@@ -979,7 +979,6 @@ const NavigatorElementContainer = qe.div.attrs(({ level }) => {
     position: relative;
     align-items: center;
     min-height: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_HEIGHT};
-    width: 100%;
     margin: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_MARGIN};
     padding: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_PADDING};
     border-top: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_BORDER};
@@ -1137,7 +1136,6 @@ const NavigatorElementChildren = qe.span.attrs(({ level }) => {
     display: flex;
     position: relative;
     flex-direction: column;
-    width: 100%;
 
     &:not(:last-child):not([data-level="0"]) {
         // not last one, since flex direction is column reverse

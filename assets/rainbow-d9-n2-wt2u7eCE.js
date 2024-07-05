@@ -4,9 +4,9 @@ var __publicField = (obj, key, value) => {
   __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
   return value;
 };
-import { a as color, M as MaskedNumber, e as MaskedDate, g as MaskedFunction, j as MaskedPattern, k as MaskedRange, p as MaskedRegExp, q as MaskedDynamic } from "./vendor-x3SPvJVy.js";
-import { R as React, r as reactExports, q as qe, W as We, u as useIMask } from "./react-base-RoI39byt.js";
-import { c as createLogger, V as VUtils, P as PPUtils, r as registerWidget, a as useThrottler, u as useRootEventBus, M as MUtils, N as NUtils, d as Wrapper, e as useForceUpdate, f as MBUtils, b as useWrapperEventBus, W as WrapperEventTypes, g as useCreateEventBus, h as PROPERTY_PATH_ME, i as useDefaultAttributeValues, j as useAttributesWatch, R as RootEventTypes } from "./rainbow-d9-n1-u2JbSDNy.js";
+import { a as color, M as MaskedNumber, e as MaskedDate, g as MaskedFunction, j as MaskedPattern, k as MaskedRange, p as MaskedRegExp, q as MaskedDynamic } from "./vendor-QkTfmfrv.js";
+import { R as React, r as reactExports, q as qe, W as We, u as useIMask } from "./react-base-iGeJA2-Y.js";
+import { c as createLogger, V as VUtils, P as PPUtils, r as registerWidget, a as useThrottler, u as useRootEventBus, M as MUtils, N as NUtils, d as Wrapper, e as useForceUpdate, f as MBUtils, b as useWrapperEventBus, W as WrapperEventTypes, g as useCreateEventBus, h as PROPERTY_PATH_ME, i as useDefaultAttributeValues, j as useAttributesWatch, R as RootEventTypes } from "./rainbow-d9-n1-sgrwQs9e.js";
 import { d as dayjs } from "./dayjs-9WAo-H7j.js";
 const DOM_KEY_WIDGET = "data-w";
 const DOM_ID_WIDGET = "data-wid";
@@ -1509,10 +1509,6 @@ const notInMe = (me, target) => {
   }
   return true;
 };
-const collapseFixedThingDebug = { enabled: false };
-const switchCollapseFixedThingDebug = (enabled = false) => {
-  collapseFixedThingDebug.enabled = enabled;
-};
 const useCollapseFixedThing = (options) => {
   const { containerRef, visible = true, hide, events = ["scroll", "focus", "click"] } = options;
   reactExports.useEffect(() => {
@@ -1535,7 +1531,7 @@ const useCollapseFixedThing = (options) => {
         }
       }, 10);
     };
-    if (!collapseFixedThingDebug.enabled) {
+    {
       window.addEventListener("blur", collapseOnBlur, true);
     }
     return () => {
@@ -4449,7 +4445,7 @@ const useDropdownControl = (options) => {
   };
 };
 const useFilterableDropdownOptions = (props) => {
-  const { optionSort, maxWidth, noAvailable = React.createElement(IntlLabel, { keys: ["options", "noAvailable"], value: "No available option." }), noMatched = React.createElement(IntlLabel, { keys: ["options", "noMatched"], value: "No matched option." }), takeoverFilter, filterChanged, $wrapped: { $avs: { $disabled } } } = props;
+  const { optionSort, maxWidth, noAvailable = React.createElement(IntlLabel, { keys: ["options", "noAvailable"], value: "No available option." }), noMatched = React.createElement(IntlLabel, { keys: ["options", "noMatched"], value: "No matched option." }), filterable = true, takeoverFilter, filterChanged, $wrapped: { $avs: { $disabled } } } = props;
   const filterInputRef = reactExports.useRef(null);
   const [filter, setFilter] = reactExports.useState("");
   const [functions] = reactExports.useState(() => {
@@ -4541,11 +4537,22 @@ const useFilterableDropdownOptions = (props) => {
     }
   };
   const onFilterChanged = async (event) => {
-    if ($disabled) {
+    if ($disabled || filterable === false) {
       return;
     }
     setFilter(event.target.value);
     filterChanged && await filterChanged(event.target.value, "search");
+  };
+  const onAnyInputEvent = (event) => {
+    var _a, _b;
+    if (filterable === false || event.target === filterInputRef.current) {
+      return;
+    }
+    if (!isDropdownPopupActive(popupState.active)) {
+      onClicked();
+    }
+    (_a = filterInputRef.current) == null ? void 0 : _a.dispatchEvent(new Event("keydown", event));
+    (_b = filterInputRef.current) == null ? void 0 : _b.focus();
   };
   return {
     filterInputRef,
@@ -4566,7 +4573,8 @@ const useFilterableDropdownOptions = (props) => {
     onClicked,
     onFocused,
     onKeyUp,
-    onFilterChanged
+    onFilterChanged,
+    onAnyInputEvent
   };
 };
 const OptionFilter = qe.div.attrs(({ "data-w": widgetKey, active, atBottom, top, left, height }) => {
@@ -4804,7 +4812,7 @@ const Dropdown = reactExports.forwardRef((props, ref) => {
   var _a;
   const { options, optionSort, noAvailable, noMatched, $pp, $wrapped: { $onValueChange, $root, $model, $p2r, $avs: { $disabled, $visible } }, please = "", clearable = true, tip, ...rest } = props;
   const globalHandlers = useGlobalHandlers();
-  const { askOptions, displayOptions, filterInputRef, filter, onFilterChanged, containerRef, popupState, popupHeight, popupRef, popupShown, setPopupShown, afterPopupStateChanged, onClicked, onFocused, onKeyUp } = useFilterableDropdownOptions(props);
+  const { askOptions, displayOptions, filterInputRef, filter, onFilterChanged, containerRef, popupState, popupHeight, popupRef, popupShown, setPopupShown, afterPopupStateChanged, onClicked, onFocused, onKeyUp, onAnyInputEvent } = useFilterableDropdownOptions(props);
   useDualRefs(containerRef, ref);
   useTip({ ref: containerRef, ...buildTip({ tip, root: $root, model: $model }) });
   const forceUpdate = useForceUpdate();
@@ -4846,7 +4854,7 @@ const Dropdown = reactExports.forwardRef((props, ref) => {
   const deviceTags = MBUtils.pickDeviceTags(props);
   return React.createElement(
     DropdownContainer,
-    { active: popupState.active, atBottom: popupState.atBottom, role: "input", tabIndex: 0, ...rest, "data-w": "d9-dropdown", "data-disabled": $disabled, "data-visible": $visible, "data-clearable": clearable, onFocus: onFocused, onClick: onClicked, id: PPUtils.asId(PPUtils.absolute($p2r, $pp), props.id), ref: containerRef },
+    { active: popupState.active, atBottom: popupState.atBottom, role: "input", tabIndex: 0, ...rest, "data-w": "d9-dropdown", "data-disabled": $disabled, "data-visible": $visible, "data-clearable": clearable, onFocus: onFocused, onClick: onClicked, onKeyDown: onAnyInputEvent, id: PPUtils.asId(PPUtils.absolute($p2r, $pp), props.id), ref: containerRef },
     React.createElement(DropdownLabel, { "data-please": !selected }, toIntlLabel(label)),
     React.createElement(DropdownStick, { valueAssigned: selected, clearable, clear: onClearClicked, disabled: $disabled }),
     isDropdownPopupActive(popupState.active) ? React.createElement(
@@ -4969,7 +4977,7 @@ const MultiOption = qe.span.attrs({ [DOM_KEY_WIDGET]: "d9-multi-dropdown-option"
 const MultiDropdown = reactExports.forwardRef((props, ref) => {
   const { options, optionSort, noAvailable, noMatched, $pp, $wrapped: { $onValueChange, $root, $model, $p2r, $avs: { $disabled, $visible } }, please = "", clearable = true, tip, ...rest } = props;
   const globalHandlers = useGlobalHandlers();
-  const { askOptions, displayOptions, filterInputRef, filter, onFilterChanged, containerRef, popupState, popupHeight, popupRef, popupShown, repaintPopup, onClicked, onFocused, onKeyUp } = useFilterableDropdownOptions(props);
+  const { askOptions, displayOptions, filterInputRef, filter, onFilterChanged, containerRef, popupState, popupHeight, popupRef, popupShown, repaintPopup, onClicked, onFocused, onKeyUp, onAnyInputEvent } = useFilterableDropdownOptions(props);
   const forceUpdate = useForceUpdate();
   useDualRefs(containerRef, ref);
   useTip({ ref: containerRef, ...buildTip({ tip, root: $root, model: $model }) });
@@ -5061,7 +5069,7 @@ const MultiDropdown = reactExports.forwardRef((props, ref) => {
   const deviceTags = MBUtils.pickDeviceTags(props);
   return React.createElement(
     MultiDropdownContainer,
-    { active: popupState.active, atBottom: popupState.atBottom, role: "input", tabIndex: 0, ...rest, "data-w": "d9-multi-dropdown", "data-disabled": $disabled, "data-visible": $visible, "data-clearable": clearable, onFocus: onFocused, onClick: onClicked, id: PPUtils.asId(PPUtils.absolute($p2r, $pp), props.id), ref: containerRef },
+    { active: popupState.active, atBottom: popupState.atBottom, role: "input", tabIndex: 0, ...rest, "data-w": "d9-multi-dropdown", "data-disabled": $disabled, "data-visible": $visible, "data-clearable": clearable, onFocus: onFocused, onClick: onClicked, onKeyDown: onAnyInputEvent, id: PPUtils.asId(PPUtils.absolute($p2r, $pp), props.id), ref: containerRef },
     values.map((value) => {
       var _a;
       const v = `${value}`;
@@ -9187,7 +9195,7 @@ const InternalDropdownTree = reactExports.forwardRef((props, ref) => {
       fire(DropdownTreeEventTypes.FILTER_CHANGED, filter2);
     }
   });
-  const { askOptions, filterInputRef, filter, onFilterChanged, containerRef, popupState, popupRef, popupShown, setPopupShown, afterPopupStateChanged, onClicked, onFocused, onKeyUp } = useFilterableDropdownOptions({ ...props, takeoverFilter: false, filterChanged });
+  const { askOptions, filterInputRef, filter, onFilterChanged, containerRef, popupState, popupRef, popupShown, setPopupShown, afterPopupStateChanged, onClicked, onFocused, onKeyUp, onAnyInputEvent } = useFilterableDropdownOptions({ ...props, takeoverFilter: false, filterChanged });
   useDualRefs(containerRef, ref);
   useTip({ ref: containerRef, ...buildTip({ tip, root: $root, model: $model }) });
   const forceUpdate = useForceUpdate();
@@ -9295,7 +9303,7 @@ const InternalDropdownTree = reactExports.forwardRef((props, ref) => {
   };
   return React.createElement(
     DropdownContainer,
-    { active: popupState.active, atBottom: popupState.atBottom, role: "input", tabIndex: 0, ...rest, "data-w": "d9-dropdown-tree", "data-disabled": $disabled, "data-visible": $visible, "data-clearable": clearable, onFocus: onFocused, onClick: onClicked, id: PPUtils.asId(PPUtils.absolute($p2r, $pp), props.id), ref: containerRef },
+    { active: popupState.active, atBottom: popupState.atBottom, role: "input", tabIndex: 0, ...rest, "data-w": "d9-dropdown-tree", "data-disabled": $disabled, "data-visible": $visible, "data-clearable": clearable, onFocus: onFocused, onClick: onClicked, onKeyDown: onAnyInputEvent, id: PPUtils.asId(PPUtils.absolute($p2r, $pp), props.id), ref: containerRef },
     React.createElement(DropdownLabel, { "data-please": !selected }, toIntlLabel(label)),
     React.createElement(DropdownStick, { valueAssigned: selected, clearable, clear: onClearClicked, disabled: $disabled }),
     isDropdownPopupActive(popupState.active) ? React.createElement(
@@ -9398,7 +9406,7 @@ const InternalMultiDropdownTree = reactExports.forwardRef((props, ref) => {
       fire(DropdownTreeEventTypes.FILTER_CHANGED, filter2);
     }
   });
-  const { askOptions, filterInputRef, filter, onFilterChanged, containerRef, popupState, popupRef, popupShown, repaintPopup, onClicked, onFocused, onKeyUp } = useFilterableDropdownOptions({ ...props, takeoverFilter: false, filterChanged });
+  const { askOptions, filterInputRef, filter, onFilterChanged, containerRef, popupState, popupRef, popupShown, repaintPopup, onClicked, onFocused, onKeyUp, onAnyInputEvent } = useFilterableDropdownOptions({ ...props, takeoverFilter: false, filterChanged });
   const forceUpdate = useForceUpdate();
   useDualRefs(containerRef, ref);
   useTip({ ref: containerRef, ...buildTip({ tip, root: $root, model: $model }) });
@@ -9539,7 +9547,7 @@ const InternalMultiDropdownTree = reactExports.forwardRef((props, ref) => {
   };
   return React.createElement(
     MultiDropdownTreeContainer,
-    { active: popupState.active, atBottom: popupState.atBottom, role: "input", tabIndex: 0, ...rest, "data-w": "d9-multi-dropdown-tree", "data-disabled": $disabled, "data-visible": $visible, "data-clearable": clearable, onFocus: onFocused, onClick: onClicked, id: PPUtils.asId(PPUtils.absolute($p2r, $pp), props.id), ref: containerRef },
+    { active: popupState.active, atBottom: popupState.atBottom, role: "input", tabIndex: 0, ...rest, "data-w": "d9-multi-dropdown-tree", "data-disabled": $disabled, "data-visible": $visible, "data-clearable": clearable, onFocus: onFocused, onClick: onClicked, onKeyDown: onAnyInputEvent, id: PPUtils.asId(PPUtils.absolute($p2r, $pp), props.id), ref: containerRef },
     values.map((value) => {
       var _a;
       const v = `${value}`;
@@ -10023,14 +10031,13 @@ reactExports.forwardRef((props, ref) => {
 });
 export {
   $d9n2 as $,
-  utils$1 as A,
+  UnwrappedButtonBar as A,
   ButtonInk as B,
   CssVars as C,
   DOM_KEY_WIDGET as D,
-  UnwrappedButtonBar as E,
-  ButtonBarAlignment as F,
+  ButtonBarAlignment as E,
+  UnwrappedSection as F,
   GlobalEventTypes as G,
-  UnwrappedSection as H,
   IntlLabel as I,
   LabelLike as L,
   OptionItemSort as O,
@@ -10062,5 +10069,5 @@ export {
   GlobalRoot as w,
   utils$3 as x,
   DropdownUtils as y,
-  switchCollapseFixedThingDebug as z
+  utils$1 as z
 };
