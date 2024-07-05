@@ -35,7 +35,9 @@ export const CommonStepDefs: CommonStepDefsType = {
 	properties: {
 		name: elementName, use: elementUse,
 		fromRequest: elementFromRequestGroup, toResponse: elementToResponseGroup,
-		errorHandles: elementErrorHandles
+		errorHandles: elementErrorHandles,
+		leadingGroup: [elementName, elementUse, elementFromRequestGroup],
+		tailingGroup: [elementErrorHandles, elementToResponseGroup]
 	},
 	ports: {
 		fromRequest: PortFromRequest, toResponse: PortToResponse, mergeRequest: PortMergeRequest,

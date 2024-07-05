@@ -221,7 +221,12 @@ export const PlaygroundCssVars = {
 	NODE_STEP_BODY_HEIGHT: 'var(--o23-playground-node-step-body-height, 32px)',
 	NODE_STEP_BODY_PADDING: 'var(--o23-playground-node-step-body-padding, 8px 0)',
 	NODE_STEP_SETS_BORDER: `var(--o23-playground-node-step-sets-border, 2px solid ${NODE_STEP_SETS_COLOR})`,
-	NODE_STEP_SETS_TITLE_BACKGROUND: `var(--o23-playground-node-step-sets-title-background, linear-gradient(135deg, ${NODE_STEP_SETS_COLOR} 0%, ${color(NODE_STEP_SETS_COLOR).alpha(0.7)} 70%, ${color(NODE_STEP_SETS_COLOR).alpha(0.5)} 100%))`
+	NODE_STEP_SETS_TITLE_BACKGROUND: `var(--o23-playground-node-step-sets-title-background, linear-gradient(135deg, ${NODE_STEP_SETS_COLOR} 0%, ${color(NODE_STEP_SETS_COLOR).alpha(0.7)} 70%, ${color(NODE_STEP_SETS_COLOR).alpha(0.5)} 100%))`,
+	// snippet
+	SNIPPET_BORDER: `var(--o23-playground-snippet-border, ${CssVars.BORDER})`,
+	SNIPPET_BORDER_RADIUS: `var(--o23-playground-snippet-border-radius, ${CssVars.BORDER_RADIUS})`,
+	SNIPPET_IO_TRANSFORMER_HEIGHT: 'var(--o23-playground-snippet-io-transformer-height, 200px)',
+	SNIPPET_ERROR_HANDLES_HEIGHT: `var(--o23-playground-snippet-error-handles-height, 200px)`
 };
 
 // background: linear-gradient(90deg, #24606e, #1f6b73, #207675, #2c8174, #3e8b71, #54956b, #6c9e65, #87a55f, #a3ab5b, #c1b05a, #e0b35f, #ffb56b);

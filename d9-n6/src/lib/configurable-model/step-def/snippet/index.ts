@@ -15,11 +15,8 @@ export const SnippetStepDefs: StepNodeConfigurer<SnippetPipelineStepDef, Snippet
 	use: StandardPipelineStepRegisterKey.SNIPPET,
 	prepare, switchUse, confirm, discard: CommonStepDefs.discard,
 	properties: [
-		CommonStepDefs.properties.name,
-		CommonStepDefs.properties.use,
-		CommonStepDefs.properties.fromRequest,
-		CommonStepDefs.properties.toResponse,
-		CommonStepDefs.properties.errorHandles
+		...CommonStepDefs.properties.leadingGroup,
+		...CommonStepDefs.properties.tailingGroup
 	],
 	ports: [
 		{key: 'from-request', port: CommonStepDefs.ports.fromRequest},

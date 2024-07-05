@@ -7,7 +7,8 @@ export type ConfigurableElementAnchor = string;
 
 export interface ConfigurableElementEditorProps<M extends ConfigurableModel = ConfigurableModel> {
 	model: M,
-	onValueChanged: () => void
+	/* default repaint is true */
+	onValueChanged: (repaint?: boolean) => void
 }
 
 export interface ConfigurableElement {
@@ -24,6 +25,10 @@ export interface ConfigurableElement {
 	// for specific only
 	changeBy?: Array<ConfigurableElementAnchor>;
 	group?: true;
+	/** available only when it is a group */
+	collapsible?: true;
+	/** available only when it is collapsible, and only impact the initial status */
+	collapsed?: true;
 	editor?: (props: ConfigurableElementEditorProps) => JSX.Element;
 	helpDoc?: MarkdownContent;
 }

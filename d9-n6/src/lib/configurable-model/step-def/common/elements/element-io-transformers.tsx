@@ -9,8 +9,10 @@ import {
 } from '../../../../edit-dialog';
 import {HelpDocs} from '../../../../help-docs';
 import {Labels} from '../../../../labels';
+import {PlaygroundCssVars} from '../../../../widgets';
+import {createSelectableJsEditor} from '../../../js-editor/selectable-js-editor';
 import {VerticalLinesEditor} from '../../../vertical-lines-editor';
-import {CommonStepDefModel, ErrorHandleType, MergeRequestType} from '../types';
+import {CommonStepDefModel, MergeRequestType} from '../types';
 
 const createBadge = (name: 'fromRequestAsIs' | 'toResponseAsIs') => {
 	return (model: CommonStepDefModel): ReactNode => {
@@ -21,27 +23,28 @@ const createBadge = (name: 'fromRequestAsIs' | 'toResponseAsIs') => {
 		}
 	};
 };
-const createEditor =
-	(names: { flag: 'fromRequestAsIs', snippet: 'fromRequest' }
-		| { flag: 'toResponseAsIs', snippet: 'toResponse' }) => {
-		return (props: ConfigurableElementEditorProps<CommonStepDefModel>) => {
-			const {flag, snippet} = names;
-			const {model, onValueChanged} = props;
-			const onValueChange = (value: PropValue) => {
-				model.temporary = {...(model.temporary ?? {}), [flag]: value as ErrorHandleType};
-				onValueChanged();
-			};
-			const options = [
-				{value: true, label: Labels.StepIOTransformerAsIs},
-				{value: false, label: Labels.StepIOTransformerSnippet}
-			];
-			return <VerticalLinesEditor>
-				<UnwrappedDropdown value={model.temporary?.[flag] ?? true}
-				                   onValueChange={onValueChange} options={options} clearable={false}
-				                   style={{justifySelf: 'start', width: 'unset', minWidth: 'min(200px, 100%)'}}/>
-			</VerticalLinesEditor>;
-		};
-	};
+type EditorNames =
+	{ flag: 'fromRequestAsIs', snippet: 'fromRequest' }
+	| { flag: 'toResponseAsIs', snippet: 'toResponse' };
+const createEditor = (names: EditorNames) => {
+	const {flag, snippet} = names;
+	return createSelectableJsEditor<CommonStepDefModel, boolean>({
+		findFlag: (model) => model.temporary?.[flag] ?? true,
+		saveFlag: (model, value) => {
+			model.temporary = {...(model.temporary ?? {}), [flag]: value};
+		},
+		findSnippet: (model) => model[snippet],
+		saveSnippet: (model, text) => {
+			model[snippet] = text;
+		},
+		flagCandidates: [
+			{value: true, label: Labels.StepIOTransformerAsIs},
+			{value: false, label: Labels.StepIOTransformerSnippet}
+		],
+		isSnippetAvailable: (value) => value === false,
+		height: PlaygroundCssVars.SNIPPET_IO_TRANSFORMER_HEIGHT
+	});
+};
 
 export const elementFromRequest: ConfigurableElement = {
 	code: 'from-request', label: Labels.StepIOTransformer, anchor: 'from-request',

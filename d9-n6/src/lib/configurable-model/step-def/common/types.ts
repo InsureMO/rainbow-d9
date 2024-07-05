@@ -48,8 +48,11 @@ export interface CommonStepDefsProperties {
 	use: ConfigurableElement;
 	fromRequest: ConfigurableElement;
 	toResponse: ConfigurableElement;
-	// mergeRequest: ConfigurableElement;
 	errorHandles: ConfigurableElement;
+	/** typically a set of configurable elements at leading position */
+	leadingGroup: Array<ConfigurableElement>;
+	/** typically a set of configurable elements at trailing position */
+	tailingGroup: Array<ConfigurableElement>;
 }
 
 /**

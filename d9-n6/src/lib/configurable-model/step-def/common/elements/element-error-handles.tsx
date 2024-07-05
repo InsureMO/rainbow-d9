@@ -1,16 +1,14 @@
-import {PropValue} from '@rainbow-d9/n1';
-import {UnwrappedDropdown} from '@rainbow-d9/n2';
 import React, {ReactNode} from 'react';
 import {
 	ConfigurableElement,
 	ConfigurableElementBadgeIgnored,
 	ConfigurableElementBadgeSnippet,
-	ConfigurableElementBadgeSteps,
-	ConfigurableElementEditorProps
+	ConfigurableElementBadgeSteps
 } from '../../../../edit-dialog';
 import {HelpDocs} from '../../../../help-docs';
 import {Labels} from '../../../../labels';
-import {VerticalLinesEditor} from '../../../vertical-lines-editor';
+import {PlaygroundCssVars} from '../../../../widgets';
+import {createSelectableJsEditor} from '../../../js-editor/selectable-js-editor';
 import {CommonStepDefModel, ErrorHandleType} from '../types';
 
 const createBadge = (name: 'useErrorHandlesForCatchable' | 'useErrorHandlesForUncatchable' | 'useErrorHandlesForExposed' | 'useErrorHandlesForAny') => {
@@ -26,48 +24,57 @@ const createBadge = (name: 'useErrorHandlesForCatchable' | 'useErrorHandlesForUn
 		}
 	};
 };
-const createEditor = (name: 'useErrorHandlesForCatchable' | 'useErrorHandlesForUncatchable' | 'useErrorHandlesForExposed' | 'useErrorHandlesForAny') => {
-	return (props: ConfigurableElementEditorProps<CommonStepDefModel>) => {
-		const {model, onValueChanged} = props;
-		const onValueChange = (value: PropValue) => {
-			model.temporary = {...(model.temporary ?? {}), [name]: value as ErrorHandleType};
-			onValueChanged();
-		};
-		const options = [
+type EditorNames =
+	{ flag: 'useErrorHandlesForCatchable', snippet: 'catchable' }
+	| { flag: 'useErrorHandlesForUncatchable', snippet: 'uncatchable' }
+	| { flag: 'useErrorHandlesForExposed', snippet: 'exposed' }
+	| { flag: 'useErrorHandlesForAny', snippet: 'any' };
+const createEditor = (names: EditorNames) => {
+	const {flag, snippet} = names;
+	return createSelectableJsEditor<CommonStepDefModel, ErrorHandleType>({
+		findFlag: (model) => model.temporary?.[flag] ?? ErrorHandleType.NONE,
+		saveFlag: (model, value) => {
+			model.temporary = {...(model.temporary ?? {}), [flag]: value};
+		},
+		findSnippet: (model) => model.errorHandles?.[snippet],
+		saveSnippet: (model, text) => {
+			if (model.errorHandles == null) {
+				model.errorHandles = {};
+			}
+			model.errorHandles[snippet] = text;
+		},
+		flagCandidates: [
 			{value: ErrorHandleType.NONE, label: Labels.StepErrorHandleTypeNone},
 			{value: ErrorHandleType.SNIPPET, label: Labels.StepErrorHandleTypeSnippet},
 			{value: ErrorHandleType.STEPS, label: Labels.StepErrorHandleTypeSteps}
-		];
-		return <VerticalLinesEditor>
-			<UnwrappedDropdown value={model.temporary?.[name] ?? ErrorHandleType.NONE}
-			                   onValueChange={onValueChange} options={options} clearable={false}
-			                   style={{justifySelf: 'start', width: 'unset', minWidth: 'min(200px, 100%)'}}/>
-		</VerticalLinesEditor>;
-	};
+		],
+		isSnippetAvailable: (value) => value === ErrorHandleType.SNIPPET,
+		height: PlaygroundCssVars.SNIPPET_ERROR_HANDLES_HEIGHT
+	});
 };
 
 export const elementCatchableErrorHandle: ConfigurableElement = {
 	code: 'catchable-error-handle', label: Labels.CatchableErrorHandle, anchor: 'catchable-error-handle',
 	badge: createBadge('useErrorHandlesForCatchable'),
-	editor: createEditor('useErrorHandlesForCatchable'),
+	editor: createEditor({flag: 'useErrorHandlesForCatchable', snippet: 'catchable'}),
 	helpDoc: HelpDocs.stepCatchableErrorHandle
 };
 export const elementUncatchableErrorHandle: ConfigurableElement = {
 	code: 'uncatchable-error-handle', label: Labels.UncatchableErrorHandle, anchor: 'uncatchable-error-handle',
 	badge: createBadge('useErrorHandlesForUncatchable'),
-	editor: createEditor('useErrorHandlesForUncatchable'),
+	editor: createEditor({flag: 'useErrorHandlesForUncatchable', snippet: 'uncatchable'}),
 	helpDoc: HelpDocs.stepUncatchableErrorHandle
 };
 export const elementExposedErrorHandle: ConfigurableElement = {
 	code: 'exposed-error-handle', label: Labels.ExposedErrorHandle, anchor: 'exposed-error-handle',
 	badge: createBadge('useErrorHandlesForExposed'),
-	editor: createEditor('useErrorHandlesForExposed'),
+	editor: createEditor({flag: 'useErrorHandlesForExposed', snippet: 'exposed'}),
 	helpDoc: HelpDocs.stepExposedErrorHandle
 };
 export const elementAnyErrorHandle: ConfigurableElement = {
 	code: 'any-error-handle', label: Labels.AnyErrorHandle, anchor: 'any-error-handle',
 	badge: createBadge('useErrorHandlesForAny'),
-	editor: createEditor('useErrorHandlesForAny'),
+	editor: createEditor({flag: 'useErrorHandlesForAny', snippet: 'any'}),
 	helpDoc: HelpDocs.stepAnyErrorHandle
 };
 
@@ -76,5 +83,5 @@ export const elementErrorHandles: ConfigurableElement = {
 	children: [
 		elementCatchableErrorHandle, elementExposedErrorHandle, elementUncatchableErrorHandle, elementAnyErrorHandle
 	],
-	group: true
+	group: true, collapsible: true, collapsed: true
 };

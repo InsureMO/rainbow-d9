@@ -50,8 +50,10 @@ export const DialogSpecificElementWrapper = (props: DialogSpecificElementProps) 
 	}, [on, off, anchor]);
 
 	const onHelpBadgeClicked = () => setShowHelp(!showHelp);
-	const onValueChanged = () => {
-		forceUpdate();
+	const onValueChanged = (repaint = true) => {
+		if (repaint) {
+			forceUpdate();
+		}
 		fire(EditDialogEventTypes.ELEMENT_VALUE_CHANGED, anchor);
 	};
 
@@ -66,7 +68,9 @@ export const DialogSpecificElementWrapper = (props: DialogSpecificElementProps) 
 				</SpecificElementHelpBadge>
 				: null}
 		</SpecificElementLabel>
-		{Editor != null ? <Editor model={model} onValueChanged={onValueChanged}/> : <SpecificElementEditorPlaceholder/>}
+		{Editor != null
+			? <Editor model={model} onValueChanged={onValueChanged}/>
+			: <SpecificElementEditorPlaceholder/>}
 		{hasHelpDoc
 			? <SpecificElementHelpDoc data-visible={showHelp}>
 				<HelpDoc content={helpDoc}/>
