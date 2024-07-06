@@ -17,7 +17,7 @@ export const SnippetStepDefs: StepNodeConfigurer<SnippetPipelineStepDef, Snippet
 	prepare, switchUse, confirm, discard: CommonStepDefs.discard,
 	properties: [
 		...CommonStepDefs.properties.leadingGroup,
-		elementSnippet,
+		CommonStepDefs.createMainContentElement(elementSnippet),
 		...CommonStepDefs.properties.tailingGroup
 	],
 	ports: [

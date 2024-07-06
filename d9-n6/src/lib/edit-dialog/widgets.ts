@@ -542,6 +542,14 @@ export const SpecificElementLabel = styled.div.attrs({[DOM_KEY_WIDGET]: 'o23-pla
         }
     }
 
+    &[data-visible=false] {
+        display: none;
+
+        & + * {
+            display: none;
+        }
+    }
+
     > span:first-child {
         height: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_HELP_LABEL_HEIGHT};
         display: inline-flex;
@@ -549,29 +557,60 @@ export const SpecificElementLabel = styled.div.attrs({[DOM_KEY_WIDGET]: 'o23-pla
         position: relative;
     }
 `;
-export const SpecificElementHelpBadge = styled.div.attrs({[DOM_KEY_WIDGET]: 'o23-playground-edit-dialog-specific-element-help-badge'})`
+export const SpecificElementBadge = styled.div.attrs({[DOM_KEY_WIDGET]: 'o23-playground-edit-dialog-specific-element-badge'})`
     display: flex;
     position: relative;
     align-items: center;
     justify-content: center;
-    height: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_HELP_BADGE_HEIGHT};
-    width: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_HELP_BADGE_HEIGHT};
-    opacity: 0;
+    height: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_BADGE_HEIGHT};
+    width: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_BADGE_HEIGHT};
     cursor: pointer;
-    pointer-events: none;
-    transition: opacity ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION};
-
-    &[data-visible=true] {
-        opacity: 1;
-        pointer-events: auto;
-    }
 
     > svg {
-        color: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_HELP_BADGE_COLOR};
-        height: calc(${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_HELP_BADGE_HEIGHT} * 0.6);
+        height: calc(${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_BADGE_HEIGHT} * 0.6);
+        transition: color ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION};
+    }
+
+    &[data-role=help] > svg {
+        &:hover {
+            color: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_HELP_BADGE_COLOR};
+        }
+    }
+
+    &[data-role=expand] > svg {
+        height: calc(${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_BADGE_HEIGHT} * 0.7);
+
+        &:hover {
+            color: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_EXPAND_BADGE_COLOR};
+        }
+    }
+
+    &[data-role=collapse] > svg {
+        height: calc(${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_BADGE_HEIGHT} * 0.7);
+
+        &:hover {
+            color: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_COLLAPSE_BADGE_COLOR};
+        }
     }
 `;
-export const SpecificElementEditorPlaceholder = styled.div.attrs({[DOM_KEY_WIDGET]: 'o23-playground-edit-dialog-specific-element-editor-placeholder'})``;
+export const SpecificElementGroupHeader = styled.div.attrs({[DOM_KEY_WIDGET]: 'o23-playground-edit-dialog-specific-element-group-header'})`
+    display: flex;
+    position: relative;
+    align-items: center;
+    border-bottom: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_GROUP_BORDER};
+    justify-content: flex-end;
+
+    &[data-visible=false] {
+        display: none;
+    }
+`;
+export const SpecificElementEditorPlaceholder = styled.div.attrs({[DOM_KEY_WIDGET]: 'o23-playground-edit-dialog-specific-element-editor-placeholder'})`
+    display: block;
+
+    &[data-visible=false] {
+        display: none;
+    }
+`;
 export const SpecificElementHelpDoc = styled.div.attrs({[DOM_KEY_WIDGET]: 'o23-playground-edit-dialog-specific-element-help-doc'})`
     display: block;
     position: relative;
@@ -583,6 +622,10 @@ export const SpecificElementHelpDoc = styled.div.attrs({[DOM_KEY_WIDGET]: 'o23-p
     &[data-visible=true] {
         height: auto;
         overflow: visible;
+    }
+
+    &[data-visible=false] {
+        display: none;
     }
 
     > div {

@@ -2,6 +2,7 @@ import {confirm} from './confirm';
 import {createSubNodes, createSubNodesAndEndNode} from './create-sub-nodes';
 import {discard} from './discard';
 import {
+	createMainContentElement,
 	elementErrorHandles,
 	elementFromRequestGroup,
 	elementName,
@@ -53,5 +54,6 @@ export const CommonStepDefs: CommonStepDefsType = {
 			{key: 'any-error-handle', port: PortAnyError}
 		]
 	},
-	createSubNodes, createSubNodesAndEndNode, findSubPorts
+	createSubNodes, createSubNodesAndEndNode, findSubPorts,
+	createMainContentElement
 };

@@ -1,11 +1,16 @@
 import {useForceUpdate, VUtils} from '@rainbow-d9/n1';
-import React, {useEffect, useRef, useState} from 'react';
-import {ElementHelp} from '../icons';
+import React, {Fragment, useEffect, useRef, useState} from 'react';
+import {Collapse, ElementHelp, Expand} from '../icons';
 import {Labels} from '../labels';
 import {EditDialogEventTypes, useEditDialogEventBus} from './edit-dialog-event-bus';
 import {HelpDoc} from './help-doc';
 import {useElementVisible} from './hooks';
 import {useElementValueChangeBy} from './hooks/use-element-changed-by';
+import {
+	DialogSpecificElementEventBusProvider,
+	DialogSpecificElementEventTypes,
+	useDialogSpecificElementEventBus
+} from './specific-element-event-bus';
 import {ConfigurableElement, ConfigurableModel} from './types';
 import {
 	EditDialogPartBody,
@@ -13,8 +18,9 @@ import {
 	EditDialogPartHeader,
 	EditDialogPartTitle,
 	EditDialogSpecificDetailsContainer,
+	SpecificElementBadge,
 	SpecificElementEditorPlaceholder,
-	SpecificElementHelpBadge,
+	SpecificElementGroupHeader,
 	SpecificElementHelpDoc,
 	SpecificElementLabel,
 	SpecificElementsContainer
@@ -23,14 +29,24 @@ import {
 export interface DialogSpecificElementProps {
 	element: ConfigurableElement;
 	model: ConfigurableModel;
+	visible: boolean;
 }
 
-export const DialogSpecificElementWrapper = (props: DialogSpecificElementProps) => {
-	const {element, model} = props;
-	const {anchor, label, editor: Editor, helpDoc, group} = element;
+export interface DialogSpecificElementWrapperProps extends DialogSpecificElementProps {
+	askParentExpand: () => void;
+}
+
+export const DialogSpecificElementWrapper = (props: DialogSpecificElementWrapperProps) => {
+	const {element, model, visible = true, askParentExpand} = props;
+	const {
+		anchor, label, editor: Editor, helpDoc,
+		group, collapsible = false
+	} = element;
 
 	const ref = useRef<HTMLDivElement>(null);
 	const {on, off, fire} = useEditDialogEventBus();
+	const {on: onElement, off: offElement, fire: fireElement} = useDialogSpecificElementEventBus();
+	const [collapsed, setCollapsed] = useState(element.collapsed ?? false);
 	const [showHelp, setShowHelp] = useState(false);
 	useElementValueChangeBy(element);
 	const forceUpdate = useForceUpdate();
@@ -40,16 +56,42 @@ export const DialogSpecificElementWrapper = (props: DialogSpecificElementProps) 
 				return;
 			}
 			if (ref.current != null) {
-				ref.current.scrollIntoView({behavior: 'smooth', block: 'start', inline: 'nearest'});
+				if (!visible) {
+					askParentExpand();
+				}
+				setTimeout(() => {
+					ref.current.scrollIntoView({behavior: 'smooth', block: 'start', inline: 'nearest'});
+				}, 30);
 			}
 		};
 		on(EditDialogEventTypes.LOCATE_ELEMENT, onLocateElement);
 		return () => {
 			off(EditDialogEventTypes.LOCATE_ELEMENT, onLocateElement);
 		};
-	}, [on, off, anchor]);
+	}, [on, off, fireElement, anchor, visible, askParentExpand]);
+	useEffect(() => {
+		const onAskExpand = () => {
+			if (!visible) {
+				askParentExpand();
+			}
+			setCollapsed(false);
+			fireElement(DialogSpecificElementEventTypes.EXPAND);
+		};
+		onElement(DialogSpecificElementEventTypes.ASK_EXPAND, onAskExpand);
+		return () => {
+			offElement(DialogSpecificElementEventTypes.ASK_EXPAND, onAskExpand);
+		};
+	}, [onElement, offElement, fireElement, visible, askParentExpand]);
 
 	const onHelpBadgeClicked = () => setShowHelp(!showHelp);
+	const onExpandClicked = () => {
+		setCollapsed(!collapsed);
+		fireElement(DialogSpecificElementEventTypes.EXPAND);
+	};
+	const onCollapseClicked = () => {
+		setCollapsed(!collapsed);
+		fireElement(DialogSpecificElementEventTypes.COLLAPSE);
+	};
 	const onValueChanged = (repaint = true) => {
 		if (repaint) {
 			forceUpdate();
@@ -60,42 +102,87 @@ export const DialogSpecificElementWrapper = (props: DialogSpecificElementProps) 
 	const hasHelpDoc = VUtils.isNotBlank(helpDoc);
 
 	return <>
-		<SpecificElementLabel data-group={group} ref={ref}>
+		<SpecificElementLabel data-group={group} data-visible={visible} ref={ref}>
 			<span>{label}</span>
 			{hasHelpDoc
-				? <SpecificElementHelpBadge data-visible={true} onClick={onHelpBadgeClicked}>
+				? <SpecificElementBadge onClick={onHelpBadgeClicked} data-role="help">
 					<ElementHelp/>
-				</SpecificElementHelpBadge>
+				</SpecificElementBadge>
 				: null}
 		</SpecificElementLabel>
-		{Editor != null
+		{(group && collapsible)
+			? <SpecificElementGroupHeader data-visible={visible}>
+				{collapsed
+					? <SpecificElementBadge onClick={onExpandClicked} data-role="expand">
+						<Expand/>
+					</SpecificElementBadge>
+					: <SpecificElementBadge onClick={onCollapseClicked} data-role="collapse">
+						<Collapse/>
+					</SpecificElementBadge>}
+			</SpecificElementGroupHeader>
+			: null}
+		{(group && !collapsible)
+			? <SpecificElementEditorPlaceholder data-visible={visible}/>
+			: null}
+		{(!group && Editor != null)
 			? <Editor model={model} onValueChanged={onValueChanged}/>
-			: <SpecificElementEditorPlaceholder/>}
+			: null}
 		{hasHelpDoc
-			? <SpecificElementHelpDoc data-visible={showHelp}>
+			? <SpecificElementHelpDoc data-visible={visible && showHelp}>
 				<HelpDoc content={helpDoc}/>
 			</SpecificElementHelpDoc>
-			: <SpecificElementHelpDoc/>}
+			: null}
 	</>;
+};
+
+export const DialogSpecificElementInitExpand = (props: { element: ConfigurableElement }) => {
+	const {element} = props;
+	const {fire} = useDialogSpecificElementEventBus();
+	useEffect(() => {
+		// only once
+		if (element.group !== true || element.collapsible !== true || element.collapsed !== true) {
+			// init collapse only works when it is a group, collapsible and defined as initial collapse
+			return;
+		}
+		fire(DialogSpecificElementEventTypes.COLLAPSE);
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
+
+	return <Fragment/>;
 };
 
 export const DialogSpecificElement = (props: DialogSpecificElementProps) => {
 	const {element, model} = props;
 
-	const visible = useElementVisible(element, model);
-	if (!visible) {
+	const {on, off, fire} = useDialogSpecificElementEventBus();
+	const [visible, setVisible] = useState(props.visible ?? true);
+	useEffect(() => {
+		const onExpand = () => setVisible(true);
+		const onCollapse = () => setVisible(false);
+		on && on(DialogSpecificElementEventTypes.EXPAND, onExpand);
+		on && on(DialogSpecificElementEventTypes.COLLAPSE, onCollapse);
+		return () => {
+			off && off(DialogSpecificElementEventTypes.EXPAND, onExpand);
+			off && off(DialogSpecificElementEventTypes.COLLAPSE, onCollapse);
+		};
+	}, [on, off]);
+	const elementVisible = useElementVisible(element, model);
+	if (!elementVisible) {
 		return null;
 	}
 
-	return <>
-		<DialogSpecificElementWrapper {...props}/>
+	const askParentExpand = () => fire(DialogSpecificElementEventTypes.ASK_EXPAND);
+
+	return <DialogSpecificElementEventBusProvider>
+		<DialogSpecificElementWrapper {...props} visible={visible} askParentExpand={askParentExpand}/>
 		{element.children != null
 			? element.children
 				.map((child) => {
-					return <DialogSpecificElement element={child} model={model} key={child.code}/>;
+					return <DialogSpecificElement element={child} model={model} visible={visible} key={child.code}/>;
 				})
 			: null}
-	</>;
+		<DialogSpecificElementInitExpand element={element}/>
+	</DialogSpecificElementEventBusProvider>;
 };
 
 export interface DialogSpecificProps {
@@ -109,7 +196,8 @@ export const DialogSpecificElements = (props: DialogSpecificProps) => {
 	return <SpecificElementsContainer>
 		{elements
 			.map((element) => {
-				return <DialogSpecificElement element={element} model={model} key={element.code}/>;
+				// top level, always visible
+				return <DialogSpecificElement element={element} model={model} visible={true} key={element.code}/>;
 			})}
 	</SpecificElementsContainer>;
 };

@@ -3,6 +3,8 @@ export * from './accept';
 export * from './back';
 export * from './arrow-left';
 export * from './arrow-right';
+export * from './collapse';
+export * from './expand';
 
 export * from './port-undefined';
 export * from './port-checked';

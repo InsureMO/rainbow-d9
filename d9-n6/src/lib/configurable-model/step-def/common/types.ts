@@ -87,4 +87,5 @@ export interface CommonStepDefsType extends Omit<StepNodeConfigurer<AllInPipelin
 	switchUse: (model: ConfigurableModel, keptPropNames: Array<string>, originalUse: PipelineStepDef['use']) => void;
 	createSubNodes: (node: StepNodeModel, options: CreateSubNodesOptions) => Undefinable<Array<HandledNodeModel>>;
 	createSubNodesAndEndNode: (node: StepNodeModel, options: CreateSubNodesAndEndNodeOptions) => Undefinable<HandledNodeModel>;
+	createMainContentElement: (...children: Array<ConfigurableElement>) => ConfigurableElement;
 }
