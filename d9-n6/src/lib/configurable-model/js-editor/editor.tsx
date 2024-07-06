@@ -29,7 +29,7 @@ import {JsEditorContainer} from './widgets';
 // };
 
 export interface JsEditorProps {
-	visible: boolean;
+	visible?: boolean;
 	height?: number | string;
 	snippet?: string;
 	onChange: (snippet: string) => Promise<void>;
@@ -42,7 +42,7 @@ export interface JsEditorState {
 }
 
 export const JsEditor = (props: JsEditorProps) => {
-	const {visible, height, snippet, onChange} = props;
+	const {visible = true, height, snippet, onChange} = props;
 
 	const ref = useRef<HTMLDivElement>(null);
 	const [state, setState] = useState<JsEditorState>({});

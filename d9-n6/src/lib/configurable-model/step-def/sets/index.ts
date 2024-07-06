@@ -27,6 +27,6 @@ export const SetsStepDefs: StepNodeConfigurer<SetsPipelineStepDef, SetsStepDefMo
 		{key: 'merge-request', port: CommonStepDefs.ports.mergeRequest}
 	],
 	createSubNodes, findSubPorts,
-	helpDocs: HelpDocs.snippetStep
+	helpDocs: HelpDocs.setsStep
 };
 registerStepDef(SetsStepDefs);

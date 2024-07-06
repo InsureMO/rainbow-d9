@@ -225,6 +225,7 @@ export const PlaygroundCssVars = {
 	// snippet
 	SNIPPET_BORDER: `var(--o23-playground-snippet-border, ${CssVars.BORDER})`,
 	SNIPPET_BORDER_RADIUS: `var(--o23-playground-snippet-border-radius, ${CssVars.BORDER_RADIUS})`,
+	SNIPPET_HEIGHT: 'var(--o23-playground-snippet-height, 400px)',
 	SNIPPET_IO_TRANSFORMER_HEIGHT: 'var(--o23-playground-snippet-io-transformer-height, 200px)',
 	SNIPPET_ERROR_HANDLES_HEIGHT: `var(--o23-playground-snippet-error-handles-height, 200px)`
 };

@@ -49,7 +49,6 @@ export const Labels = {
 	StepFromRequest: <IntlLabel keys={['o23', 'step', 'from-request']} value="Pick From Input"/>,
 	StepToResponse: <IntlLabel keys={['o23', 'step', 'to-response']} value="Write To Output"/>,
 	StepMergeRequest: <IntlLabel keys={['o23', 'step', 'merge-request']} value="Merge-back strategy"/>,
-	SnippetStepSnippet: <IntlLabel keys={['o23', 'step', 'snippet', 'snippet']} value="Snippet"/>,
 	StepSteps: <IntlLabel keys={['o23', 'step', 'sets', 'steps']} value="Sub Steps"/>,
 	StepHandleCatchableError: <IntlLabel keys={['o23', 'step', 'error-handles', 'catchable']}
 	                                     value="Catchable Errors"/>,
@@ -77,6 +76,8 @@ export const Labels = {
 	                                      value="As Specific Property"/>,
 	StepIOMergeBackAsPropertyName: <IntlLabel keys={['o23', 'step', 'io-merge-back', 'as-property-name']}
 	                                          value="Property Name"/>,
+	// step snippet
+	StepSnippetSnippet: <IntlLabel keys={['o23', 'step', 'snippet', 'snippet']} value="Snippet"/>,
 
 	// common variables, variable might be used in multiple places,
 	// such as attribute label, attribute configuration label, attribute configuration value label, etc.

@@ -4,6 +4,7 @@ import {StepNodeConfigurer} from '../../types';
 import {registerStepDef} from '../all-step-defs';
 import {CommonStepDefs, PortAnyError, PortCatchableError, PortExposedError, PortUncatchableError} from '../common';
 import {confirm} from './confirm';
+import {elementSnippet} from './element-snippet';
 import {PortSnippet} from './port-snippet';
 import {prepare} from './prepare';
 import {switchUse} from './switch-use';
@@ -16,6 +17,7 @@ export const SnippetStepDefs: StepNodeConfigurer<SnippetPipelineStepDef, Snippet
 	prepare, switchUse, confirm, discard: CommonStepDefs.discard,
 	properties: [
 		...CommonStepDefs.properties.leadingGroup,
+		elementSnippet,
 		...CommonStepDefs.properties.tailingGroup
 	],
 	ports: [

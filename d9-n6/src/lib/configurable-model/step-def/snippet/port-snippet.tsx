@@ -11,6 +11,6 @@ export const PortSnippet = (props: StepPortProps<SnippetStepDefModel>) => {
 	const {snippet} = def;
 	const exists = VUtils.isNotBlank(snippet);
 
-	return <PrePort label={Labels.SnippetStepSnippet} required={true}
+	return <PrePort label={Labels.StepSnippetSnippet} required={true}
 	                defined={exists} all={true} allAsBoolean={true}/>;
 };
