@@ -18,6 +18,7 @@
 		- label: Box
 			- Caption::Column A::
 			- Caption::*::
+				- data-tip-body: return 'I am Column A.'
 		- width: 300
 	- Column B: 300
 	- Column C: 500
