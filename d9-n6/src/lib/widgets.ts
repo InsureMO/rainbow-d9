@@ -130,7 +130,7 @@ export const PlaygroundCssVars = {
 	NODE_TITLE_PADDING: 'var(--o23-playground-node-title-padding, 0 10px)',
 	NODE_TITLE_SPREADER_MIN_WIDTH: 'var(--o23-playground-node-title-spreader-min-width, 40px)',
 	NODE_MIN_WIDTH: 'var(--o23-playground-node-min-width, 160px)',
-	NODE_MAX_WIDTH: `var(--o23-playground-node-max-width, 320px)`,
+	NODE_MAX_WIDTH: `var(--o23-playground-node-max-width, unset)`,
 	NODE_ICON_SIZE: 'var(--o23-playground-node-icon-size, 14px)',
 	NODE_PORT_HEIGHT: 'var(--o23-playground-node-port-height, 24px)',
 	NODE_PORT_BORDER_WIDTH: `var(--o23-playground-node-port-border-width, 1px)`,

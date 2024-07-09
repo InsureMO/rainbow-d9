@@ -4,16 +4,16 @@ import {PrePort} from '../../../../diagram';
 import {Labels} from '../../../../labels';
 import {StepPortProps} from '../types';
 
-export const PortFromRequest = (props: StepPortProps) => {
+export const PortFromInput = (props: StepPortProps) => {
 	const {step: def} = props;
 
-	const {fromRequest} = def;
-	const exists = VUtils.isNotBlank(fromRequest);
+	const {fromInput} = def;
+	const exists = VUtils.isNotBlank(fromInput);
 
 	if (!exists) {
 		return null;
 	}
 
-	return <PrePort label={Labels.StepFromRequest} required={false}
+	return <PrePort label={Labels.StepFromInput} required={false}
 	                defined={true} all={true} allAsBoolean={true}/>;
 };

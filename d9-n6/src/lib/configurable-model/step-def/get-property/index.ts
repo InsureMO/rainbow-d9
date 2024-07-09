@@ -1,28 +1,28 @@
-import {SnippetPipelineStepDef, StandardPipelineStepRegisterKey} from '../../../definition';
+import {GetPropertyPipelineStepDef, StandardPipelineStepRegisterKey} from '../../../definition';
 import {HelpDocs} from '../../../help-docs';
 import {StepNodeConfigurer} from '../../types';
 import {registerStepDef} from '../all-step-defs';
 import {CommonStepDefs, PortAnyError, PortCatchableError, PortExposedError, PortUncatchableError} from '../common';
 import {confirm} from './confirm';
-import {elementSnippet} from './element-snippet';
-import {PortSnippet} from './port-snippet';
+import {elementProperty} from './element-property';
+import {PortProperty} from './port-property';
 import {prepare} from './prepare';
 import {switchUse} from './switch-use';
-import {SnippetStepDefModel} from './types';
+import {GetPropertyStepDefModel} from './types';
 
 export * from './types';
 
-export const SnippetStepDefs: StepNodeConfigurer<SnippetPipelineStepDef, SnippetStepDefModel> = {
-	use: StandardPipelineStepRegisterKey.SNIPPET,
+export const GetPropertyStepDefs: StepNodeConfigurer<GetPropertyPipelineStepDef, GetPropertyStepDefModel> = {
+	use: StandardPipelineStepRegisterKey.GET_PROPERTY,
 	prepare, switchUse, confirm, discard: CommonStepDefs.discard,
 	properties: [
 		...CommonStepDefs.properties.leadingGroup,
-		CommonStepDefs.createMainContentElement(elementSnippet),
+		CommonStepDefs.createMainContentElement(elementProperty),
 		...CommonStepDefs.properties.tailingGroup
 	],
 	ports: [
 		{key: 'from-input', port: CommonStepDefs.ports.fromInput},
-		{key: 'snippet', port: PortSnippet},
+		{key: 'property', port: PortProperty},
 		{key: 'catchable-error-handle', port: PortCatchableError},
 		{key: 'exposed-error-handle', port: PortExposedError},
 		{key: 'uncatchable-error-handle', port: PortUncatchableError},
@@ -31,6 +31,6 @@ export const SnippetStepDefs: StepNodeConfigurer<SnippetPipelineStepDef, Snippet
 		{key: 'merge', port: CommonStepDefs.ports.merge}
 	],
 	createSubNodes: CommonStepDefs.createSubNodesAndEndNode, findSubPorts: CommonStepDefs.findSubPorts,
-	helpDocs: HelpDocs.snippetStep
+	helpDocs: HelpDocs.getPropertyStep
 };
-registerStepDef(SnippetStepDefs);
+registerStepDef(GetPropertyStepDefs);

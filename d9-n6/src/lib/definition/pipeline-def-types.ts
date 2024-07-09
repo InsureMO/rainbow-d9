@@ -38,9 +38,9 @@ export interface PipelineStepDef {
 }
 
 export interface AllInPipelineStepDef extends PipelineStepDef {
-	fromRequest?: string;
-	toResponse?: string;
-	mergeRequest?: boolean | string;
+	fromInput?: string;
+	toOutput?: string;
+	merge?: boolean | string;
 	errorHandles?: {
 		catchable?: string | Array<PipelineStepDef>;
 		uncatchable?: string | Array<PipelineStepDef>;
@@ -57,6 +57,11 @@ export interface PipelineStepDiagramDef extends PipelineStepDef {
 export interface SnippetPipelineStepDef extends AllInPipelineStepDef {
 	use: StandardPipelineStepRegisterKey.SNIPPET;
 	snippet?: string;
+}
+
+export interface GetPropertyPipelineStepDef extends AllInPipelineStepDef {
+	use: StandardPipelineStepRegisterKey.GET_PROPERTY;
+	property?: string;
 }
 
 export interface SetsPipelineStepDef extends AllInPipelineStepDef {

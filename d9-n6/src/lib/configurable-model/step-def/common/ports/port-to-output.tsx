@@ -4,16 +4,16 @@ import {PostPort} from '../../../../diagram';
 import {Labels} from '../../../../labels';
 import {StepPortProps} from '../types';
 
-export const PortToResponse = (props: StepPortProps) => {
+export const PortToOutput = (props: StepPortProps) => {
 	const {step: def} = props;
 
-	const {toResponse} = def;
-	const exists = VUtils.isNotBlank(toResponse);
+	const {toOutput} = def;
+	const exists = VUtils.isNotBlank(toOutput);
 
 	if (!exists) {
 		return null;
 	}
 
-	return <PostPort label={Labels.StepToResponse} required={false}
+	return <PostPort label={Labels.StepToOutput} required={false}
 	                 defined={true} all={true} allAsBoolean={true}/>;
 };

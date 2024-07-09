@@ -5,7 +5,7 @@ import {HandledNodeModel, StepNodeModel} from '../../../diagram';
 import {ConfigurableElement, ConfigurableModel} from '../../../edit-dialog';
 import {CreateSubNodesOptions, StepNodeConfigurer} from '../../types';
 
-export enum MergeRequestType {
+export enum MergeType {
 	REPLACE, UNBOX, MERGE_AS_PROPERTY
 }
 
@@ -14,9 +14,9 @@ export enum ErrorHandleType {
 }
 
 export interface CommonStepDefModel extends ConfigurableModel, PipelineStepDef {
-	fromRequest?: string;
-	toResponse?: string;
-	mergeRequest?: string;
+	fromInput?: string;
+	toOutput?: string;
+	merge?: string;
 	errorHandles?: {
 		catchable?: string;
 		uncatchable?: string;
@@ -24,9 +24,9 @@ export interface CommonStepDefModel extends ConfigurableModel, PipelineStepDef {
 		any?: string;
 	};
 	temporary?: {
-		fromRequestAsIs?: boolean;
-		toResponseAsIs?: boolean;
-		mergeRequestType?: MergeRequestType;
+		fromInputAsIs?: boolean;
+		toOutputAsIs?: boolean;
+		mergeType?: MergeType;
 		useErrorHandlesForCatchable?: ErrorHandleType;
 		useErrorHandlesForUncatchable?: ErrorHandleType;
 		useErrorHandlesForExposed?: ErrorHandleType;
@@ -46,8 +46,8 @@ export type StepPort<S extends AllInPipelineStepDef = AllInPipelineStepDef> = (p
 export interface CommonStepDefsProperties {
 	name: ConfigurableElement;
 	use: ConfigurableElement;
-	fromRequest: ConfigurableElement;
-	toResponse: ConfigurableElement;
+	fromInput: ConfigurableElement;
+	toOutput: ConfigurableElement;
 	errorHandles: ConfigurableElement;
 	/** typically a set of configurable elements at leading position */
 	leadingGroup: Array<ConfigurableElement>;
@@ -59,9 +59,9 @@ export interface CommonStepDefsProperties {
  * step extends from AbstractFragmentaryPipelineStep, will inherit these ports
  */
 export interface CommonStepDefsPorts {
-	fromRequest: StepPort;
-	toResponse: StepPort;
-	mergeRequest: StepPort;
+	fromInput: StepPort;
+	toOutput: StepPort;
+	merge: StepPort;
 	handleCatchableError: StepPort;
 	handleUncatchableError: StepPort;
 	handleExposedError: StepPort;

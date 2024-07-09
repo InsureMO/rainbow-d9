@@ -10,7 +10,6 @@ import {HelpDocs} from '../../../help-docs';
 import {Labels} from '../../../labels';
 import {PlaygroundCssVars} from '../../../widgets';
 import {JsEditor} from '../../js-editor';
-import {VerticalLinesEditor} from '../../vertical-lines-editor';
 import {SnippetStepDefModel} from './types';
 
 const SnippetEditor = (props: ConfigurableElementEditorProps<SnippetStepDefModel>) => {
@@ -20,9 +19,7 @@ const SnippetEditor = (props: ConfigurableElementEditorProps<SnippetStepDefModel
 		model.snippet = snippet;
 		onValueChanged(false);
 	};
-	return <VerticalLinesEditor>
-		<JsEditor snippet={model.snippet} onChange={onValueChange} height={PlaygroundCssVars.SNIPPET_HEIGHT}/>
-	</VerticalLinesEditor>;
+	return <JsEditor snippet={model.snippet} onChange={onValueChange} height={PlaygroundCssVars.SNIPPET_HEIGHT}/>;
 };
 export const elementSnippet: ConfigurableElement = {
 	code: 'snippet', label: Labels.StepSnippetSnippet, anchor: 'snippet',

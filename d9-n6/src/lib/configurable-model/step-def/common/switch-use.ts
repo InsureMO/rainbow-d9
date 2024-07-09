@@ -4,7 +4,7 @@ import {CommonStepDefModel, CommonStepDefsType} from './types';
 export const switchUse: CommonStepDefsType['switchUse'] = (def: CommonStepDefModel, keptPropNames: Array<string>, originalUse: PipelineStepDef['use']): void => {
 	const keptProps: Record<string, true> = {
 		name: true, use: true,
-		fromRequest: true, toResponse: true, mergeRequest: true,
+		fromInput: true, toOutput: true, merge: true,
 		errorHandles: true,
 		temporary: true,
 		...(keptPropNames.reduce((names, name) => {

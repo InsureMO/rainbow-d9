@@ -46,9 +46,11 @@ export const Labels = {
 	FileMimeType: <IntlLabel keys={['o23', 'pipeline', 'files', 'mime-type']} value="Mime types"/>,
 
 	// step
-	StepFromRequest: <IntlLabel keys={['o23', 'step', 'from-request']} value="Pick From Input"/>,
-	StepToResponse: <IntlLabel keys={['o23', 'step', 'to-response']} value="Write To Output"/>,
-	StepMergeRequest: <IntlLabel keys={['o23', 'step', 'merge-request']} value="Merge-back strategy"/>,
+	StepFromInput: <IntlLabel keys={['o23', 'step', 'from-input']} value="Pick From Input"/>,
+	StepToOutput: <IntlLabel keys={['o23', 'step', 'to-output']} value="Write To Output"/>,
+	StepMerge: <IntlLabel keys={['o23', 'step', 'merge']} value="Merge-back strategy"/>,
+	StepMergeReplace: <IntlLabel keys={['o23', 'step', 'merge-replace']} value="Replace Merge"/>,
+	StepMergeAsProperty: <IntlLabel keys={['o23', 'step', 'merge-as-property']} value="Merge As"/>,
 	StepMainContent: <IntlLabel keys={['o23', 'step', 'main-content']} value="Main Task"/>,
 	StepSteps: <IntlLabel keys={['o23', 'step', 'sets', 'steps']} value="Sub Steps"/>,
 	StepHandleCatchableError: <IntlLabel keys={['o23', 'step', 'error-handles', 'catchable']}
@@ -62,6 +64,7 @@ export const Labels = {
 
 	// step use
 	StepUseSnippet: <IntlLabel keys={['o23', 'step', 'use', 'snippet']} value="Snippet"/>,
+	StepUseGetProperty: <IntlLabel keys={['o23', 'step', 'use', 'get-property']} value="Get Property"/>,
 	StepUseSets: <IntlLabel keys={['o23', 'step', 'use', 'sets']} value="Sets"/>,
 	// step error handling types
 	StepErrorHandleTypeNone: <IntlLabel keys={['o23', 'step', 'error-handle', 'none']} value="Ignored"/>,
@@ -79,6 +82,8 @@ export const Labels = {
 	                                          value="Property Name"/>,
 	// step snippet
 	StepSnippetSnippet: <IntlLabel keys={['o23', 'step', 'snippet', 'snippet']} value="Snippet"/>,
+	// step get-property
+	StepGetPropertyProperty: <IntlLabel keys={['o23', 'step', 'get-property', 'property']} value="Property"/>,
 
 	// common variables, variable might be used in multiple places,
 	// such as attribute label, attribute configuration label, attribute configuration value label, etc.

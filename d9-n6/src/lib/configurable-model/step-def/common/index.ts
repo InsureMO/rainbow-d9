@@ -4,9 +4,9 @@ import {discard} from './discard';
 import {
 	createMainContentElement,
 	elementErrorHandles,
-	elementFromRequestGroup,
+	elementFromInputGroup,
 	elementName,
-	elementToResponseGroup,
+	elementToOutputGroup,
 	elementUse
 } from './elements';
 import {findSubPorts} from './find-sub-ports';
@@ -14,10 +14,10 @@ import {
 	PortAnyError,
 	PortCatchableError,
 	PortExposedError,
-	PortFromRequest,
-	PortMergeRequest,
+	PortFromInput,
+	PortMerge,
 	PortSteps,
-	PortToResponse,
+	PortToOutput,
 	PortUncatchableError
 } from './ports';
 import {prepare} from './prepare';
@@ -35,13 +35,13 @@ export const CommonStepDefs: CommonStepDefsType = {
 	prepare, switchUse, confirm, discard,
 	properties: {
 		name: elementName, use: elementUse,
-		fromRequest: elementFromRequestGroup, toResponse: elementToResponseGroup,
+		fromInput: elementFromInputGroup, toOutput: elementToOutputGroup,
 		errorHandles: elementErrorHandles,
-		leadingGroup: [elementName, elementUse, elementFromRequestGroup],
-		tailingGroup: [elementErrorHandles, elementToResponseGroup]
+		leadingGroup: [elementName, elementUse, elementFromInputGroup],
+		tailingGroup: [elementErrorHandles, elementToOutputGroup]
 	},
 	ports: {
-		fromRequest: PortFromRequest, toResponse: PortToResponse, mergeRequest: PortMergeRequest,
+		fromInput: PortFromInput, toOutput: PortToOutput, merge: PortMerge,
 		handleCatchableError: PortCatchableError, handleUncatchableError: PortUncatchableError,
 		handleExposedError: PortExposedError, handleAnyError: PortAnyError
 	},

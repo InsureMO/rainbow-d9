@@ -2,7 +2,7 @@ import {AllInPipelineStepDef, FileDef} from '../../../definition';
 import {NodeHandlers} from '../../../diagram';
 import {ConfigurableElementAnchor} from '../../../edit-dialog';
 import {StepNodeConfigurer} from '../../types';
-import {CommonStepDefModel, ErrorHandleType, MergeRequestType} from './types';
+import {CommonStepDefModel, ErrorHandleType, MergeType} from './types';
 
 export const confirm: StepNodeConfigurer<AllInPipelineStepDef, CommonStepDefModel>['confirm'] =
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -10,26 +10,26 @@ export const confirm: StepNodeConfigurer<AllInPipelineStepDef, CommonStepDefMode
 		def.name = model.name;
 		def.use = model.use;
 		// copy all common properties
-		if (model.temporary?.fromRequestAsIs) {
-			delete def.fromRequest;
+		if (model.temporary?.fromInputAsIs) {
+			delete def.fromInput;
 		} else {
-			def.fromRequest = model.fromRequest;
+			def.fromInput = model.fromInput;
 		}
-		if (model.temporary?.toResponseAsIs) {
-			delete def.toResponse;
+		if (model.temporary?.toOutputAsIs) {
+			delete def.toOutput;
 		} else {
-			def.toResponse = model.toResponse;
+			def.toOutput = model.toOutput;
 		}
-		switch (model.temporary?.mergeRequestType) {
-			case MergeRequestType.MERGE_AS_PROPERTY:
-				def.mergeRequest = model.mergeRequest;
+		switch (model.temporary?.mergeType) {
+			case MergeType.MERGE_AS_PROPERTY:
+				def.merge = model.merge;
 				break;
-			case MergeRequestType.UNBOX:
-				def.mergeRequest = true;
+			case MergeType.UNBOX:
+				def.merge = true;
 				break;
-			case MergeRequestType.REPLACE:
+			case MergeType.REPLACE:
 			default:
-				delete def.mergeRequest;
+				delete def.merge;
 				break;
 		}
 		// copy all error handles

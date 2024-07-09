@@ -18,9 +18,9 @@ export const DEFAULTS = {
 		return {
 			name: '',
 			use: StandardPipelineStepRegisterKey.SNIPPET,
-			fromRequest: '$factor',
-			toResponse: '$result',
-			mergeRequest: true
+			fromInput: '$factor',
+			toOutput: '$result',
+			merge: true
 		} as SnippetPipelineStepDef;
 	},
 	createSubStepNodes: DEFAULT_CREATE_SUB_STEP_NODES

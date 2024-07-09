@@ -36,7 +36,12 @@ steps:
       - name: Validate name
         use: sets
         steps:
+          - name: Get first name
+            use: get-property
+            property: firstName
+            merge: firstName
           - name: Validate first name
+            from-input: return $factor.firstName;
             use: snippet
           - name: Validate last name
             use: snippet
@@ -67,7 +72,7 @@ steps:
       any:
         - name: Catch any error
           use: snippet
-    to-response: $result
+    to-output: $result
 `;
 
 	return <GlobalRoot>

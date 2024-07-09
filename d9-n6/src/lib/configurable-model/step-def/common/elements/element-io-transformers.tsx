@@ -12,9 +12,9 @@ import {Labels} from '../../../../labels';
 import {PlaygroundCssVars} from '../../../../widgets';
 import {createSelectableJsEditor} from '../../../js-editor/selectable-js-editor';
 import {VerticalLinesEditor} from '../../../vertical-lines-editor';
-import {CommonStepDefModel, MergeRequestType} from '../types';
+import {CommonStepDefModel, MergeType} from '../types';
 
-const createBadge = (name: 'fromRequestAsIs' | 'toResponseAsIs') => {
+const createBadge = (name: 'fromInputAsIs' | 'toOutputAsIs') => {
 	return (model: CommonStepDefModel): ReactNode => {
 		if (model.temporary?.[name] === false) {
 			return <ConfigurableElementBadgeSnippet/>;
@@ -24,8 +24,8 @@ const createBadge = (name: 'fromRequestAsIs' | 'toResponseAsIs') => {
 	};
 };
 type EditorNames =
-	{ flag: 'fromRequestAsIs', snippet: 'fromRequest' }
-	| { flag: 'toResponseAsIs', snippet: 'toResponse' };
+	{ flag: 'fromInputAsIs', snippet: 'fromInput' }
+	| { flag: 'toOutputAsIs', snippet: 'toOutput' };
 const createEditor = (names: EditorNames) => {
 	const {flag, snippet} = names;
 	return createSelectableJsEditor<CommonStepDefModel, boolean>({
@@ -46,22 +46,22 @@ const createEditor = (names: EditorNames) => {
 	});
 };
 
-export const elementFromRequest: ConfigurableElement = {
-	code: 'from-request', label: Labels.StepIOTransformer, anchor: 'from-request',
-	badge: createBadge('fromRequestAsIs'),
-	editor: createEditor({flag: 'fromRequestAsIs', snippet: 'fromRequest'}),
-	helpDoc: HelpDocs.stepFromRequest
+export const elementFromInput: ConfigurableElement = {
+	code: 'from-input', label: Labels.StepIOTransformer, anchor: 'from-input',
+	badge: createBadge('fromInputAsIs'),
+	editor: createEditor({flag: 'fromInputAsIs', snippet: 'fromInput'}),
+	helpDoc: HelpDocs.stepFromInput
 };
-export const elementFromRequestGroup: ConfigurableElement = {
-	code: 'from-request-group', label: Labels.StepFromRequest, anchor: 'from-request-group',
-	children: [elementFromRequest],
+export const elementFromInputGroup: ConfigurableElement = {
+	code: 'from-input-group', label: Labels.StepFromInput, anchor: 'from-input-group',
+	children: [elementFromInput],
 	group: true
 };
-export const elementToResponse: ConfigurableElement = {
-	code: 'to-response', label: Labels.StepIOTransformer, anchor: 'to-response',
-	badge: createBadge('toResponseAsIs'),
-	editor: createEditor({flag: 'toResponseAsIs', snippet: 'toResponse'}),
-	helpDoc: HelpDocs.stepToResponse
+export const elementToOutput: ConfigurableElement = {
+	code: 'to-output', label: Labels.StepIOTransformer, anchor: 'to-output',
+	badge: createBadge('toOutputAsIs'),
+	editor: createEditor({flag: 'toOutputAsIs', snippet: 'toOutput'}),
+	helpDoc: HelpDocs.stepToOutput
 };
 const MergeToRequestEditor = (props: ConfigurableElementEditorProps<CommonStepDefModel>) => {
 	const {model, onValueChanged} = props;
@@ -69,49 +69,49 @@ const MergeToRequestEditor = (props: ConfigurableElementEditorProps<CommonStepDe
 	const inputRef = useRef<HTMLDivElement>(null);
 
 	const onValueChange = (value: PropValue) => {
-		model.temporary = {...(model.temporary ?? {}), mergeRequestType: value as MergeRequestType};
+		model.temporary = {...(model.temporary ?? {}), mergeType: value as MergeType};
 		setTimeout(() => inputRef.current?.querySelector('input')?.focus(), 50);
 		onValueChanged();
 	};
 	const onNameChange = (value: PropValue) => {
-		model.mergeRequest = value as string;
+		model.merge = value as string;
 		onValueChanged();
 	};
 	const options = [
-		{value: MergeRequestType.REPLACE, label: Labels.StepIOMergeBackReplace},
-		{value: MergeRequestType.MERGE_AS_PROPERTY, label: Labels.StepIOMergeBackAsProperty},
-		{value: MergeRequestType.UNBOX, label: Labels.StepIOMergeBackUnbox}
+		{value: MergeType.REPLACE, label: Labels.StepIOMergeBackReplace},
+		{value: MergeType.MERGE_AS_PROPERTY, label: Labels.StepIOMergeBackAsProperty},
+		{value: MergeType.UNBOX, label: Labels.StepIOMergeBackUnbox}
 	];
 	return <VerticalLinesEditor>
-		<UnwrappedDropdown value={model.temporary?.mergeRequestType ?? MergeRequestType.REPLACE}
+		<UnwrappedDropdown value={model.temporary?.mergeType ?? MergeType.REPLACE}
 		                   onValueChange={onValueChange} options={options} clearable={false}
 		                   style={{justifySelf: 'start', width: 'unset', minWidth: 'min(200px, 100%)'}}/>
 		<UnwrappedDecorateInput leads={[Labels.StepIOMergeBackAsPropertyName]}
-		                        value={model.mergeRequest ?? ''}
+		                        value={model.merge ?? ''}
 		                        onValueChange={onNameChange}
-		                        disabled={model.temporary?.mergeRequestType !== MergeRequestType.MERGE_AS_PROPERTY}
+		                        disabled={model.temporary?.mergeType !== MergeType.MERGE_AS_PROPERTY}
 		                        ref={inputRef}
 		                        data-di-prefix-text={true}/>
 	</VerticalLinesEditor>;
 };
 export const elementMergeToRequest: ConfigurableElement = {
-	code: 'merge-to-response', label: Labels.StepMergeRequest, anchor: 'merge-to-response',
+	code: 'merge-to-output', label: Labels.StepMerge, anchor: 'merge-to-output',
 	badge: (model: CommonStepDefModel): ReactNode => {
-		const {mergeRequestType: type} = model.temporary ?? {};
+		const {mergeType: type} = model.temporary ?? {};
 		switch (type) {
-			case MergeRequestType.UNBOX:
+			case MergeType.UNBOX:
 				return Labels.StepIOMergeBackUnbox;
-			case MergeRequestType.MERGE_AS_PROPERTY:
+			case MergeType.MERGE_AS_PROPERTY:
 				return Labels.StepIOMergeBackAsProperty;
-			case MergeRequestType.REPLACE:
+			case MergeType.REPLACE:
 				return Labels.StepIOMergeBackReplace;
 		}
 	},
 	editor: MergeToRequestEditor,
 	helpDoc: HelpDocs.stepMergeToRequest
 };
-export const elementToResponseGroup: ConfigurableElement = {
-	code: 'to-response-group', label: Labels.StepToResponse, anchor: 'to-response-group',
-	children: [elementToResponse, elementMergeToRequest],
+export const elementToOutputGroup: ConfigurableElement = {
+	code: 'to-output-group', label: Labels.StepToOutput, anchor: 'to-output-group',
+	children: [elementToOutput, elementMergeToRequest],
 	group: true
 };

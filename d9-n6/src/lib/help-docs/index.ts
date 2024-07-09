@@ -1,3 +1,4 @@
+import {docs as GetPropertyStepDocs} from './get-property-step';
 import {docs as PipelineDocs} from './pipeline';
 import {docs as SetsStepDocs} from './sets-step';
 import {docs as SnippetStepDocs} from './snippet-step';
@@ -7,5 +8,6 @@ export const HelpDocs = {
 	...PipelineDocs,
 	...StepCommonDocs,
 	...SetsStepDocs,
-	...SnippetStepDocs
+	...SnippetStepDocs,
+	...GetPropertyStepDocs
 };
