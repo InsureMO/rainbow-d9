@@ -14,30 +14,35 @@ export interface PortProps {
 	all?: boolean;
 	allAsBoolean?: boolean;
 	allAsGiven?: ReactNode;
+	caseTransform?: 'caps' | 'up';
 	danger?: boolean;
 	children?: ReactNode;
 }
 
 export const computePortIconAndBadge = (props: PortProps) => {
-	const {required, defined, count, all, allAsBoolean = false, allAsGiven} = props;
+	const {
+		required, defined,
+		count, all, allAsBoolean = false, allAsGiven,
+		caseTransform
+	} = props;
 
 	let icon: JSX.Element;
 	let badge: Nullable<JSX.Element> = null;
 	if (defined) {
 		icon = <PortChecked/>;
 		if (count != null) {
-			badge = <span data-role="count">{count}</span>;
+			badge = <span data-role="count" data-case-transform={caseTransform}>{count}</span>;
 		} else if (all != null) {
 			if (allAsBoolean) {
 				if (all === true) {
-					badge = <span data-role="all">{Labels.YesChar}</span>;
+					badge = <span data-role="all" data-case-transform="up">{Labels.YesChar}</span>;
 				} else {
-					badge = <span data-role="all">{Labels.NoChar}</span>;
+					badge = <span data-role="all" data-case-transform="up">{Labels.NoChar}</span>;
 				}
 			} else if (allAsGiven != null) {
-				badge = <span data-role="all">{allAsGiven}</span>;
+				badge = <span data-role="all" data-case-transform={caseTransform}>{allAsGiven}</span>;
 			} else if (all === true) {
-				badge = <span data-role="all">{Labels.All}</span>;
+				badge = <span data-role="all" data-case-transform="up">{Labels.All}</span>;
 			}
 		}
 	} else if (required) {
@@ -63,7 +68,6 @@ export const PrePortContainer = styled.div.attrs({[DOM_KEY_WIDGET]: 'o23-playgro
     border-bottom-right-radius: calc(${PlaygroundCssVars.NODE_PORT_HEIGHT} / 2);
     font-weight: ${PlaygroundCssVars.NODE_PRE_PORT_FONT_WEIGHT};
     font-size: ${PlaygroundCssVars.NODE_PRE_PORT_FONT_SIZE};
-    text-transform: capitalize;
     padding: ${PlaygroundCssVars.NODE_PRE_PORT_PADDING};
     margin-left: -1px;
     grid-column: 1;
@@ -83,13 +87,13 @@ export const PrePortContainer = styled.div.attrs({[DOM_KEY_WIDGET]: 'o23-playgro
         border: ${PlaygroundCssVars.NODE_PRE_PORT_DANGER_BORDER};
         background: ${PlaygroundCssVars.NODE_PRE_PORT_DANGER_BACKGROUND};
 
-        > span[data-role=count],
-        > span[data-role=all] {
+        > span[data-role~=count],
+        > span[data-role~=all] {
             background: ${PlaygroundCssVars.NODE_PRE_PORT_BADGE_DANGER_BACKGROUND};
         }
     }
 
-    &[data-role=first-sub-step] {
+    &[data-role~=first-sub-step] {
         border: ${PlaygroundCssVars.NODE_PORT_FIRST_SUB_STEP_BORDER};
         background: ${PlaygroundCssVars.NODE_PORT_FIRST_SUB_STEP_BACKGROUND};
     }
@@ -100,19 +104,26 @@ export const PrePortContainer = styled.div.attrs({[DOM_KEY_WIDGET]: 'o23-playgro
         margin-right: 6px;
     }
 
-    > span[data-role=count],
-    > span[data-role=all] {
+    > span[data-role~=count],
+    > span[data-role~=all] {
         display: flex;
         position: relative;
         align-items: center;
         height: calc(${PlaygroundCssVars.NODE_PORT_HEIGHT} * 0.6);
         font-size: 0.6em;
-        font-variant: petite-caps;
         padding: 0 8px;
         background: ${PlaygroundCssVars.NODE_PRE_PORT_BADGE_BACKGROUND};
         margin-left: 6px;
         border: ${PlaygroundCssVars.NODE_PRE_PORT_BADGE_BORDER};
         border-radius: calc(${PlaygroundCssVars.NODE_PORT_HEIGHT} * 0.3);
+    }
+
+    > span[data-case-transform=caps] {
+        text-transform: capitalize;
+    }
+
+    > span[data-case-transform=up] {
+        text-transform: uppercase;
     }
 `;
 
@@ -143,7 +154,6 @@ export const PostPortContainer = styled.div.attrs({[DOM_KEY_WIDGET]: 'o23-playgr
     border-bottom-left-radius: calc(${PlaygroundCssVars.NODE_PORT_HEIGHT} / 2);
     font-weight: ${PlaygroundCssVars.NODE_POST_PORT_FONT_WEIGHT};
     font-size: ${PlaygroundCssVars.NODE_POST_PORT_FONT_SIZE};
-    text-transform: capitalize;
     padding: ${PlaygroundCssVars.NODE_POST_PORT_PADDING};
     margin-right: -1px;
     grid-column: 3;
@@ -163,21 +173,21 @@ export const PostPortContainer = styled.div.attrs({[DOM_KEY_WIDGET]: 'o23-playgr
         border: ${PlaygroundCssVars.NODE_POST_PORT_DANGER_BORDER};
         background: ${PlaygroundCssVars.NODE_POST_PORT_DANGER_BACKGROUND};
 
-        > span[data-role=count],
-        > span[data-role=all] {
+        > span[data-role~=count],
+        > span[data-role~=all] {
             background: ${PlaygroundCssVars.NODE_POST_PORT_BADGE_DANGER_BACKGROUND};
         }
     }
 
-    &[data-role=steps] {
+    &[data-role~=steps] {
         border: ${PlaygroundCssVars.NODE_PORT_STEPS_BORDER};
         background: ${PlaygroundCssVars.NODE_PORT_STEPS_BACKGROUND};
     }
 
-    &[data-role=catchable-error],
-    &[data-role=uncatchable-error],
-    &[data-role=exposed-error],
-    &[data-role=any-error] {
+    &[data-role~=catchable-error],
+    &[data-role~=uncatchable-error],
+    &[data-role~=exposed-error],
+    &[data-role~=any-error] {
         border: ${PlaygroundCssVars.NODE_PORT_ERROR_HANDLES_BORDER};
         background: ${PlaygroundCssVars.NODE_PORT_ERROR_HANDLES_BACKGROUND};
     }
@@ -188,19 +198,26 @@ export const PostPortContainer = styled.div.attrs({[DOM_KEY_WIDGET]: 'o23-playgr
         margin-right: 6px;
     }
 
-    > span[data-role=count],
-    > span[data-role=all] {
+    > span[data-role~=count],
+    > span[data-role~=all] {
         display: flex;
         position: relative;
         align-items: center;
         height: calc(${PlaygroundCssVars.NODE_PORT_HEIGHT} * 0.6);
         font-size: 0.6em;
-        font-variant: petite-caps;
         padding: 0 8px;
         background: ${PlaygroundCssVars.NODE_POST_PORT_BADGE_BACKGROUND};
         margin-left: 6px;
         border: ${PlaygroundCssVars.NODE_POST_PORT_BADGE_BORDER};
         border-radius: calc(${PlaygroundCssVars.NODE_PORT_HEIGHT} * 0.3);
+    }
+
+    > span[data-case-transform=caps] {
+        text-transform: capitalize;
+    }
+
+    > span[data-case-transform=up] {
+        text-transform: uppercase;
     }
 `;
 
