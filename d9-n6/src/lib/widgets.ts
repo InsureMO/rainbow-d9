@@ -38,6 +38,12 @@ export const PlaygroundCssVars = {
 	MARKDOWN_FONT_SIZE: 'var(--o23-playground-markdown-font-size, 14px)',
 	MARKDOWN_COLOR: `var(--o23-playground-markdown-color, ${CssVars.FONT_COLOR})`,
 	MARKDOWN_BACKGROUND_COLOR: `var(--o23-playground-markdown-background-color, ${CssVars.BACKGROUND_COLOR})`,
+	MARKDOWN_TABLE_MARGIN: 'var(--o23-playground-markdown-table-margin, 16px 0)',
+	MARKDOWN_TABLE_HEADER_BACKGROUND_COLOR: 'var(--o23-playground-markdown-table-header-background-color, var(--color-canvas-subtle))',
+	MARKDOWN_TABLE_BORDER: 'var(--o23-playground-markdown-table-border, 1px solid var(--color-border-default))',
+	MARKDOWN_TABLE_BORDER_RADIUS: 'var(--o23-playground-markdown-table-border-radius, 4px)',
+	MARKDOWN_TABLE_ROW_BACKGROUND_COLOR: 'var(--o23-playground-markdown-table-row-background-color, var(--color-canvas-default))',
+	MARKDOWN_TABLE_ROW_EVEN_BACKGROUND_COLOR: 'var(--o23-playground-markdown-table-even-row-background-color, var(--color-canvas-subtle))',
 	SPECIFIC_MARKDOWN_FONT_SIZE: 'var(--o23-playground-specific-markdown-font-size, 12px)',
 	// dialog
 	EDIT_DIALOG_BACKDROP_COLOR: 'var(--o23-playground-dialog-backdrop-color, rgba(71, 69, 84, 0.75))',

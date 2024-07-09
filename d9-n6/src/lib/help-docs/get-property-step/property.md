@@ -5,7 +5,7 @@ For example, if there is input data like `{a: {b: [{c: 3}, {c: 4}]}}`, then with
 corresponding value:
 
 | Property | Value                   |
-|----------|-------------------------|
+|:---------|:------------------------|
 | `a`      | `{b: [{c: 3}, {c: 4}]}` |
 | `a.b`    | `[{c: 3}, {c: 4}]`      |
 | `a.b.c`  | `[3, 4]`                |

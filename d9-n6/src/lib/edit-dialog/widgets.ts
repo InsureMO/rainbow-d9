@@ -90,7 +90,60 @@ export const EditDialogContentContainer = styled.div.attrs({[DOM_KEY_WIDGET]: 'o
             font-size: 1em;
         }
 
-        p, blockquote, ul, ol, dl, table, pre, details {
+        table {
+            border-collapse: separate;
+            border-radius: 4px;
+            margin: ${PlaygroundCssVars.MARKDOWN_TABLE_MARGIN};
+
+            > thead > tr {
+                border-top: 0;
+                background-color: ${PlaygroundCssVars.MARKDOWN_TABLE_HEADER_BACKGROUND_COLOR};
+
+                &:first-child {
+                    > th:first-child {
+                        border-top-left-radius: ${PlaygroundCssVars.MARKDOWN_TABLE_BORDER_RADIUS};
+                    }
+
+                    > th:last-child {
+                        border-top-right-radius: ${PlaygroundCssVars.MARKDOWN_TABLE_BORDER_RADIUS};
+                    }
+                }
+
+                > td:not(:first-child) {
+                    border-left: 0;
+                }
+            }
+
+
+            > tbody > tr {
+                border-top: 0;
+                background-color: ${PlaygroundCssVars.MARKDOWN_TABLE_ROW_BACKGROUND_COLOR};
+
+                &:nth-child(even) {
+                    background-color: ${PlaygroundCssVars.MARKDOWN_TABLE_ROW_EVEN_BACKGROUND_COLOR};
+                }
+
+                &:last-child {
+                    > td:first-child {
+                        border-bottom-left-radius: ${PlaygroundCssVars.MARKDOWN_TABLE_BORDER_RADIUS};
+                    }
+
+                    > td:last-child {
+                        border-bottom-right-radius: ${PlaygroundCssVars.MARKDOWN_TABLE_BORDER_RADIUS};
+                    }
+                }
+
+                > td {
+                    border-top: 0;
+
+                    &:not(:first-child) {
+                        border-left: 0;
+                    }
+                }
+            }
+        }
+
+        p, blockquote, ul, ol, dl, pre, details {
             margin-bottom: 4px;
         }
 
