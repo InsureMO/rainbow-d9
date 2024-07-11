@@ -76,9 +76,15 @@ steps:
   - name: Clean Data
     use: sets
     steps:
-      - name: Remove temporary data
-        use: del-property
+      - name: Remove temporary
+        use: del-properties
         property: $temp, $temporary
+      - name: Remove cache
+        use: del-property
+        property: $cache
+  - name: Create a sequence
+    use: snowflake
+    merge: snowflakeId
 `;
 
 	return <GlobalRoot>

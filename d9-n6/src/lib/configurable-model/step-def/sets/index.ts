@@ -20,11 +20,10 @@ export const SetsStepDefs: StepNodeConfigurer<SetsPipelineStepDef, SetsStepDefMo
 		...CommonStepDefs.properties.tailingGroup
 	],
 	ports: [
-		{key: 'from-input', port: CommonStepDefs.ports.fromInput},
+		...CommonStepDefs.prebuiltPorts.input,
 		{key: 'steps', port: CommonStepDefs.prebuiltPorts.steps},
 		...CommonStepDefs.prebuiltPorts.errorHandles,
-		{key: 'to-output', port: CommonStepDefs.ports.toOutput},
-		{key: 'merge', port: CommonStepDefs.ports.merge}
+		...CommonStepDefs.prebuiltPorts.output
 	],
 	createSubNodes, findSubPorts,
 	helpDocs: HelpDocs.setsStep

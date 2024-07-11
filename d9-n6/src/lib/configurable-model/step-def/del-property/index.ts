@@ -2,7 +2,7 @@ import {DelPropertyPipelineStepDef, StandardPipelineStepRegisterKey} from '../..
 import {HelpDocs} from '../../../help-docs';
 import {StepNodeConfigurer} from '../../types';
 import {registerStepDef} from '../all-step-defs';
-import {CommonStepDefs, PortAnyError, PortCatchableError, PortExposedError, PortUncatchableError} from '../common';
+import {CommonStepDefs} from '../common';
 import {confirm} from './confirm';
 import {elementProperty} from './element-property';
 import {PortProperty} from './port-property';
@@ -21,14 +21,10 @@ export const DelPropertyStepDefs: StepNodeConfigurer<DelPropertyPipelineStepDef,
 		...CommonStepDefs.properties.tailingGroup
 	],
 	ports: [
-		{key: 'from-input', port: CommonStepDefs.ports.fromInput},
+		...CommonStepDefs.prebuiltPorts.input,
 		{key: 'property', port: PortProperty},
-		{key: 'catchable-error-handle', port: PortCatchableError},
-		{key: 'exposed-error-handle', port: PortExposedError},
-		{key: 'uncatchable-error-handle', port: PortUncatchableError},
-		{key: 'any-error-handle', port: PortAnyError},
-		{key: 'to-output', port: CommonStepDefs.ports.toOutput},
-		{key: 'merge', port: CommonStepDefs.ports.merge}
+		...CommonStepDefs.prebuiltPorts.errorHandles,
+		...CommonStepDefs.prebuiltPorts.output
 	],
 	createSubNodes: CommonStepDefs.createSubNodesAndEndNode, findSubPorts: CommonStepDefs.findSubPorts,
 	helpDocs: HelpDocs.delPropertyStep
@@ -38,3 +34,4 @@ export const DelPropertiesStepDefs = {
 	use: StandardPipelineStepRegisterKey.DELETE_PROPERTIES
 };
 registerStepDef(DelPropertyStepDefs);
+registerStepDef(DelPropertiesStepDefs);

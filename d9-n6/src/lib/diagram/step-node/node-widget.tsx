@@ -96,7 +96,8 @@ export const StepNodeBody = styled(NodeBody).attrs({
 		'--min-height': PlaygroundCssVars.NODE_STEP_BODY_HEIGHT,
 		'--padding': PlaygroundCssVars.NODE_STEP_BODY_PADDING
 	}
-})``;
+})`
+`;
 
 export const StepNodeWidget = (props: StepNodeWidgetProps) => {
 	const {node, engine} = props;
@@ -125,8 +126,7 @@ export const StepNodeWidget = (props: StepNodeWidgetProps) => {
 	};
 	const isFirstSubStep = node.isFirstSubStep();
 
-	return <StepNodeContainer onDoubleClick={onDoubleClicked}
-	                          data-use={use}>
+	return <StepNodeContainer onDoubleClick={onDoubleClicked} data-use={use}>
 		{isFirstSubStep
 			? <FirstSubStepPortWidget port={node.getPort(FirstSubStepPortModel.NAME) as FirstSubStepPortModel}
 			                          engine={engine}/>

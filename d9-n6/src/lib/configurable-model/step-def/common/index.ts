@@ -47,11 +47,16 @@ export const CommonStepDefs: CommonStepDefsType = {
 	},
 	prebuiltPorts: {
 		steps: PortSteps,
+		input: [{key: 'from-input', port: PortFromInput}],
 		errorHandles: [
 			{key: 'catchable-error-handle', port: PortCatchableError},
 			{key: 'exposed-error-handle', port: PortExposedError},
 			{key: 'uncatchable-error-handle', port: PortUncatchableError},
 			{key: 'any-error-handle', port: PortAnyError}
+		],
+		output: [
+			{key: 'to-output', port: PortToOutput},
+			{key: 'merge', port: PortMerge}
 		]
 	},
 	createSubNodes, createSubNodesAndEndNode, findSubPorts,

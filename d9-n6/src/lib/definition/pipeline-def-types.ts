@@ -69,6 +69,10 @@ export interface DelPropertyPipelineStepDef extends AllInPipelineStepDef {
 	property?: string;
 }
 
+export interface SnowflakePipelineStepDef extends AllInPipelineStepDef {
+	use: StandardPipelineStepRegisterKey.SNOWFLAKE;
+}
+
 export interface SetsPipelineStepDef extends AllInPipelineStepDef {
 	use: StandardPipelineStepRegisterKey.SETS;
 	steps: Array<PipelineStepDef>;

@@ -73,7 +73,9 @@ export interface CommonStepDefsPorts {
  */
 export interface PrebuiltStepDefsPorts {
 	steps: StepPort;
+	input: Array<{ key: string, port: StepPort }>;
 	errorHandles: Array<{ key: string, port: StepPort }>;
+	output: Array<{ key: string, port: StepPort }>;
 }
 
 export interface CreateSubNodesAndEndNodeOptions extends CreateSubNodesOptions {
