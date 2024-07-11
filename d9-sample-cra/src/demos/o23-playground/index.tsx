@@ -73,6 +73,12 @@ steps:
         - name: Catch any error
           use: snippet
     to-output: $result
+  - name: Clean Data
+    use: sets
+    steps:
+      - name: Remove temporary data
+        use: del-property
+        property: $temp, $temporary
 `;
 
 	return <GlobalRoot>

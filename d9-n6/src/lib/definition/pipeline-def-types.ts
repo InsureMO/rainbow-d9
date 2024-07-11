@@ -64,6 +64,11 @@ export interface GetPropertyPipelineStepDef extends AllInPipelineStepDef {
 	property?: string;
 }
 
+export interface DelPropertyPipelineStepDef extends AllInPipelineStepDef {
+	use: StandardPipelineStepRegisterKey.DEL_PROPERTY;
+	property?: string;
+}
+
 export interface SetsPipelineStepDef extends AllInPipelineStepDef {
 	use: StandardPipelineStepRegisterKey.SETS;
 	steps: Array<PipelineStepDef>;
