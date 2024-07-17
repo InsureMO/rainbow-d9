@@ -55,6 +55,8 @@ export const NodeTitleSpreader = styled.span.attrs({[DOM_KEY_WIDGET]: 'o23-playg
 export const NodeSecondTitle = styled(UnwrappedCaption)`
     flex-grow: 1;
     justify-content: flex-end;
+    height: unset;
+    min-height: ${CssVars.INPUT_HEIGHT};
     color: var(--color);
     font-size: var(--font-size);
     font-weight: var(--font-weight);

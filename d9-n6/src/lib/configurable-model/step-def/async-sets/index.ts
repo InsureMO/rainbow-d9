@@ -26,6 +26,6 @@ export const AsyncSetsStepDefs: StepNodeConfigurer<AsyncSetsPipelineStepDef, Asy
 		...CommonStepDefs.prebuiltPorts.output
 	],
 	createSubNodes, findSubPorts,
-	helpDocs: HelpDocs.setsStep
+	helpDocs: HelpDocs.asyncSetsStep
 };
 registerStepDef(AsyncSetsStepDefs);

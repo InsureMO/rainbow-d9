@@ -1,3 +1,4 @@
+import {docs as AsyncSetsStepDocs} from './async-sets-step';
 import {docs as DelPropertyStepDocs} from './del-property-step';
 import {docs as GetPropertyStepDocs} from './get-property-step';
 import {docs as PipelineDocs} from './pipeline';
@@ -9,9 +10,12 @@ import {docs as StepCommonDocs} from './step';
 export const HelpDocs = {
 	...PipelineDocs,
 	...StepCommonDocs,
-	...SetsStepDocs,
+	// basic
 	...SnippetStepDocs,
 	...GetPropertyStepDocs,
 	...DelPropertyStepDocs,
-	...SnowflakeStepDocs
+	...SnowflakeStepDocs,
+	// sets
+	...SetsStepDocs,
+	...AsyncSetsStepDocs
 };

@@ -5,6 +5,7 @@ const EDITOR_BACKGROUND_BLOCK_SIZE = 'var(--o23-playground-editor-background-blo
 const EDITOR_BACKGROUND_LINE_COLOR = `var(--o23-playground-editor-background-line-color, ${color(CssConstants.PRIMARY_COLOR).alpha(0.08)})`;
 const NODE_START_COLOR = '#ffb56b';
 const NODE_END_COLOR = '#e0b35f';
+const NODE_JOIN_END_COLOR = '#c4c2bf';
 const NODE_STEP_COLOR = '#54956b';
 const NODE_STEP_SETS_COLOR = '#615cac';
 const NODE_ASYNC_STEP_SETS_COLOR = '#ff714b';
@@ -221,6 +222,13 @@ export const PlaygroundCssVars = {
 	NODE_END_TITLE_BACKGROUND: `var(--o23-playground-node-end-title-background, linear-gradient(135deg, ${NODE_END_COLOR} 0%, ${color(NODE_END_COLOR).alpha(0.7)} 70%, ${color(NODE_END_COLOR).alpha(0.5)} 100%))`,
 	NODE_END_BODY_HEIGHT: 'var(--o23-playground-node-end-body-height, 32px)',
 	NODE_END_BODY_PADDING: 'var(--o23-playground-node-end-body-padding, 8px 0)',
+	// join end node
+	NODE_JOIN_END_BORDER_COLOR: `var(--o23-playground-node-join-end-border-color, ${NODE_JOIN_END_COLOR})`,
+	NODE_JOIN_END_BORDER: `var(--o23-playground-node-join-end-border, 2px solid ${NODE_JOIN_END_COLOR})`,
+	NODE_JOIN_END_TITLE_FONT_SIZE: 'var(--o23-playground-node-join-end-title-font-size, 16px)',
+	NODE_JOIN_END_TITLE_FONT_WEIGHT: 'var(--o23-playground-node-join-end-title-font-weight, 600)',
+	NODE_JOIN_END_TITLE_COLOR: `var(--o23-playground-node-join-end-title-color, ${CssVars.INVERT_COLOR})`,
+	NODE_JOIN_END_TITLE_BACKGROUND: `var(--o23-playground-node-join-end-title-background, linear-gradient(135deg, ${NODE_JOIN_END_COLOR} 0%, ${color(NODE_JOIN_END_COLOR).alpha(0.7)} 70%, ${color(NODE_JOIN_END_COLOR).alpha(0.5)} 100%))`,
 	// step node
 	NODE_STEP_BORDER: `var(--o23-playground-node-step-border, 2px solid ${NODE_STEP_COLOR})`,
 	NODE_STEP_TITLE_FONT_SIZE: 'var(--o23-playground-node-step-title-font-size, 16px)',

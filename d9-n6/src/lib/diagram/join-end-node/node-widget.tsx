@@ -29,7 +29,7 @@ export const JoinEndNodeContainer = styled(NodeWrapper).attrs({
 	[DOM_KEY_WIDGET]: 'o23-playground-join-end-node',
 	style: {
 		'--border-radius': PlaygroundCssVars.NODE_BORDER_RADIUS,
-		'--border': PlaygroundCssVars.NODE_END_BORDER,
+		'--border': PlaygroundCssVars.NODE_JOIN_END_BORDER,
 		'--background-color': PlaygroundCssVars.NODE_BACKGROUND
 	}
 })``;
@@ -39,7 +39,7 @@ export const JoinEndNodeHeader = styled(NodeHeader).attrs({
 		// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 		// @ts-ignore
 		'--border-radius': PlaygroundCssVars.NODE_BORDER_RADIUS,
-		'--background': PlaygroundCssVars.NODE_END_TITLE_BACKGROUND,
+		'--background': PlaygroundCssVars.NODE_JOIN_END_TITLE_BACKGROUND,
 		'--padding': PlaygroundCssVars.NODE_TITLE_PADDING
 	}
 })``;
@@ -48,9 +48,9 @@ export const JoinEndNodeHeader = styled(NodeHeader).attrs({
 export const JoinEndNodeTitle = styled(NodeTitle).attrs({
 	[DOM_KEY_WIDGET]: 'o23-playground-join-end-node-title',
 	style: {
-		'--color': PlaygroundCssVars.NODE_END_TITLE_COLOR,
-		'--font-size': PlaygroundCssVars.NODE_END_TITLE_FONT_SIZE,
-		'--font-weight': PlaygroundCssVars.NODE_END_TITLE_FONT_WEIGHT
+		'--color': PlaygroundCssVars.NODE_JOIN_END_TITLE_COLOR,
+		'--font-size': PlaygroundCssVars.NODE_JOIN_END_TITLE_FONT_SIZE,
+		'--font-weight': PlaygroundCssVars.NODE_JOIN_END_TITLE_FONT_WEIGHT
 	}
 })``;
 
