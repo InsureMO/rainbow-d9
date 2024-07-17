@@ -69,6 +69,7 @@ export const Labels = {
 	StepUseDelProperties: <IntlLabel keys={['o23', 'step', 'use', 'del-properties']} value="Del Properties"/>,
 	StepUseSnowflake: <IntlLabel keys={['o23', 'step', 'use', 'snowflake']} value="Snowflake"/>,
 	StepUseSets: <IntlLabel keys={['o23', 'step', 'use', 'sets']} value="Sets"/>,
+	StepUseAsyncSets: <IntlLabel keys={['o23', 'step', 'use', 'async-sets']} value="Async Sets"/>,
 	// step error handling types
 	StepErrorHandleTypeNone: <IntlLabel keys={['o23', 'step', 'error-handle', 'none']} value="Ignored"/>,
 	StepErrorHandleTypeSnippet: <IntlLabel keys={['o23', 'step', 'error-handle', 'none']} value="Use Snippet"/>,

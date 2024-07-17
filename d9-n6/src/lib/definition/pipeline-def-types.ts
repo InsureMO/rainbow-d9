@@ -77,3 +77,10 @@ export interface SetsPipelineStepDef extends AllInPipelineStepDef {
 	use: StandardPipelineStepRegisterKey.SETS;
 	steps: Array<PipelineStepDef>;
 }
+
+export interface AsyncSetsPipelineStepDef extends AllInPipelineStepDef {
+	use: StandardPipelineStepRegisterKey.ASYNC_SETS;
+	steps: Array<PipelineStepDef>;
+	// replace error handles, meaningless when it's async
+	errorHandles?: never;
+}

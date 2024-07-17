@@ -85,6 +85,12 @@ steps:
   - name: Create a sequence
     use: snowflake
     merge: snowflakeId
+  - name: Log data
+    use: async-sets
+    steps:
+      - name: Write log
+        use: snippet
+        snippet: $.$logger.log('Data received.', $factor);
 `;
 
 	return <GlobalRoot>

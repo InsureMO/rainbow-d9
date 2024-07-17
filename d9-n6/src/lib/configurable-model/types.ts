@@ -17,6 +17,8 @@ export interface CreateSubNodesOptions {
 	appendNode: (...nodes: Array<NodeModel>) => void;
 	appendLink: (...links: Array<LinkModel>) => void;
 	handlers: NodeHandlers;
+	/** default false */
+	omitErrorHandles?: boolean;
 }
 
 export interface StepNodeConfigurer<F extends PipelineStepDef = PipelineStepDef, M extends ConfigurableModel = ConfigurableModel> {

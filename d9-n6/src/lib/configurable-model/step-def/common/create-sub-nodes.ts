@@ -12,8 +12,11 @@ import {
 import {CommonStepDefsType, CreateSubNodesAndEndNodeOptions} from './types';
 import {createSubNodesOfSingleRoute} from './utils';
 
-export const createSubNodes: CommonStepDefsType['createSubNodes'] = (model: StepNodeModel, options: CreateSubNodesOptions): Undefinable<Array<HandledNodeModel>> => {
-	const step = model.step as AllInPipelineStepDef;
+export const createErrorHandlesSubNodes = (step: AllInPipelineStepDef, model: StepNodeModel, options: CreateSubNodesOptions): Undefinable<Array<HandledNodeModel>> => {
+	const {omitErrorHandles = false} = options;
+	if (omitErrorHandles) {
+		return (void 0);
+	}
 	// error handles
 	const errorHandles = step.errorHandles;
 	if (errorHandles == null) {
@@ -63,6 +66,11 @@ export const createSubNodes: CommonStepDefsType['createSubNodes'] = (model: Step
 			model, options, askSteps: steps, findPortFromModel, createPortFromModel
 		});
 	});
+};
+
+export const createSubNodes: CommonStepDefsType['createSubNodes'] = (model: StepNodeModel, options: CreateSubNodesOptions): Undefinable<Array<HandledNodeModel>> => {
+	const step = model.step as AllInPipelineStepDef;
+	return createErrorHandlesSubNodes(step, model, options);
 };
 
 /**
