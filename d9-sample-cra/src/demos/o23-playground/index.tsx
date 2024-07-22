@@ -91,6 +91,14 @@ steps:
       - name: Write log
         use: snippet
         snippet: $.$logger.log('Data received.', $factor);
+      - name: Write validation results to log
+        use: each
+        from-input: return $factor.results;
+        item-name: result
+        steps:
+          - name: Write validation result to log
+            use: snippet
+            snippet: $.$logger.log('Invalid thing detected.', $factor.result);
 `;
 
 	return <GlobalRoot>

@@ -7,5 +7,6 @@ export * from './snowflake';
 
 export * from './sets';
 export * from './async-sets';
+export * from './each';
 
 export * from './all-step-defs';

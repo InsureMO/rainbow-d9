@@ -9,7 +9,7 @@ export const confirm: StepNodeConfigurer<GetPropertyPipelineStepDef, GetProperty
 	(model: GetPropertyStepDefModel, def: GetPropertyPipelineStepDef, file: FileDef, handlers: NodeHandlers): ConfigurableElementAnchor | true => {
 		CommonStepDefs.confirm(model, def, file, handlers);
 
-		def.property = model.property;
+		def.property = (model.property ?? '').trim();
 
 		handlers.onChange();
 		return true;

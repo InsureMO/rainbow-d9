@@ -52,3 +52,8 @@ export const ConfigurableElementBadgeAsIs = () => {
 		{Labels.AsIs}
 	</NavigatorElementBadgeWrapper>;
 };
+export const ConfigurableElementBadgeUseDefault = () => {
+	return <NavigatorElementBadgeWrapper data-role="use-default">
+		{Labels.UseDefault}
+	</NavigatorElementBadgeWrapper>;
+};

@@ -70,6 +70,7 @@ export const Labels = {
 	StepUseSnowflake: <IntlLabel keys={['o23', 'step', 'use', 'snowflake']} value="Snowflake"/>,
 	StepUseSets: <IntlLabel keys={['o23', 'step', 'use', 'sets']} value="Sets"/>,
 	StepUseAsyncSets: <IntlLabel keys={['o23', 'step', 'use', 'async-sets']} value="Async Sets"/>,
+	StepUseEach: <IntlLabel keys={['o23', 'step', 'use', 'each']} value="Each"/>,
 	// step error handling types
 	StepErrorHandleTypeNone: <IntlLabel keys={['o23', 'step', 'error-handle', 'none']} value="Ignored"/>,
 	StepErrorHandleTypeSnippet: <IntlLabel keys={['o23', 'step', 'error-handle', 'none']} value="Use Snippet"/>,
@@ -90,6 +91,10 @@ export const Labels = {
 	StepGetPropertyProperty: <IntlLabel keys={['o23', 'step', 'get-property', 'property']} value="Property"/>,
 	// step del-property, del-properties
 	StepDelPropertyProperty: <IntlLabel keys={['o23', 'step', 'del-property', 'property']} value="Property"/>,
+	// step each
+	StepEachOriginalContentName: <IntlLabel keys={['o23', 'step', 'each', 'original-content-name']}
+	                                        value="Origin Content Variable"/>,
+	StepEachItemName: <IntlLabel keys={['o23', 'step', 'each', 'item-name']} value="Item Variable"/>,
 
 	// common variables, variable might be used in multiple places,
 	// such as attribute label, attribute configuration label, attribute configuration value label, etc.
@@ -109,6 +114,7 @@ export const Labels = {
 	Ignored: <IntlLabel keys={['o23', 'badge', 'ignored']} value="Ignored"/>,
 	Specified: <IntlLabel keys={['o23', 'badge', 'specified']} value="Specified"/>,
 	NotAvailable: <IntlLabel keys={['o23', 'badge', 'not-available']} value="N/A"/>,
+	UseDefault: <IntlLabel keys={['o23', 'badge', 'use-default']} value="Default"/>,
 	YesChar: <IntlLabel keys={['o23', 'badge', 'yes-char']} value="Y"/>,
 	NoChar: <IntlLabel keys={['o23', 'badge', 'no-char']} value="N"/>,
 	Snippet: <IntlLabel keys={['o23', 'badge', 'snippet']} value={<Snippet/>}/>,

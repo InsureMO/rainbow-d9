@@ -73,14 +73,21 @@ export interface SnowflakePipelineStepDef extends AllInPipelineStepDef {
 	use: StandardPipelineStepRegisterKey.SNOWFLAKE;
 }
 
-export interface SetsPipelineStepDef extends AllInPipelineStepDef {
-	use: StandardPipelineStepRegisterKey.SETS;
+export interface SetsLikePipelineStepDef extends AllInPipelineStepDef {
 	steps: Array<PipelineStepDef>;
 }
 
-export interface AsyncSetsPipelineStepDef extends AllInPipelineStepDef {
+export interface SetsPipelineStepDef extends SetsLikePipelineStepDef {
+	use: StandardPipelineStepRegisterKey.SETS;
+
+}
+
+export interface AsyncSetsPipelineStepDef extends SetsLikePipelineStepDef {
 	use: StandardPipelineStepRegisterKey.ASYNC_SETS;
-	steps: Array<PipelineStepDef>;
-	// replace error handles, meaningless when it's async
-	errorHandles?: never;
+}
+
+export interface EachPipelineStepDef extends SetsLikePipelineStepDef {
+	use: StandardPipelineStepRegisterKey.EACH_SETS;
+	originalContentName?: string;
+	itemName?: string;
 }
