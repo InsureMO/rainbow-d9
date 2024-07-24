@@ -3,11 +3,32 @@ import {CreateSubNodesOptions, findStepDef} from './configurable-model';
 import {PipelineStepDef, SnippetPipelineStepDef, StandardPipelineStepRegisterKey} from './definition';
 import {HandledNodeModel, StepNodeModel} from './diagram';
 
+export interface DiagramConstants {
+	startTop: number;
+	startLeft: number;
+	rowGap: number;
+	columnGap: number;
+	linkArcRadius: number;
+	linkGutterSize: number;
+	linkJoinEndSinkingOffset: number;
+	linkJoinEndGutterSize: number;
+}
+
+export interface Constants {
+	diagram: DiagramConstants;
+	/**
+	 * Used to create a default step to maintain the integrity of the configuration.
+	 * For example, a set must have at least one sub-step. If it does not exist in the given configuration, a default one will be created.
+	 */
+	createDefaultStep: () => PipelineStepDef;
+	createSubStepNodes: (node: StepNodeModel, options: CreateSubNodesOptions) => Undefinable<HandledNodeModel>;
+}
+
 const DEFAULT_CREATE_SUB_STEP_NODES = (node: StepNodeModel, options: CreateSubNodesOptions): Undefinable<HandledNodeModel> => {
 	return findStepDef(node.step.use)?.createSubNodes(node, options);
 };
 
-export const DEFAULTS = {
+export const DEFAULTS: Constants = {
 	diagram: {
 		startTop: 64, startLeft: 64,
 		rowGap: 64, columnGap: 128,
@@ -26,14 +47,9 @@ export const DEFAULTS = {
 	createSubStepNodes: DEFAULT_CREATE_SUB_STEP_NODES
 };
 
-export const setDefaults = (defaults: {
-	diagram?: {
-		startTop?: number; startLeft?: number;
-		rowGap?: number; columnGap?: number;
-		linkArcRadius?: number; linkGutterSize?: number;
-		linkJoinEndSinkingOffset?: number; linkJoinEndGutterSize?: number;
-	};
-	createDefaultStep?: () => PipelineStepDef;
+export interface DefaultsOptions {
+	diagram?: Partial<Constants['diagram']>;
+	createDefaultStep?: Constants['createDefaultStep'];
 	/**
 	 * Use the second boolean return value to specify whether to use the default create function.
 	 * In practice, always return false, indicating that none of the default create functions will be effective.
@@ -44,7 +60,9 @@ export const setDefaults = (defaults: {
 	 * 4. array, otherwise, return first
 	 */
 	createSubStepNodes?: (node: StepNodeModel) => Undefinable<StepNodeModel> | [Undefinable<StepNodeModel>, boolean];
-}) => {
+}
+
+export const setDefaults = (defaults: DefaultsOptions) => {
 	DEFAULTS.diagram = {
 		startTop: defaults.diagram?.startTop ?? DEFAULTS.diagram.startTop,
 		startLeft: defaults.diagram?.startLeft ?? DEFAULTS.diagram.startLeft,

@@ -4,6 +4,7 @@ import {DEFAULTS} from '../../../constants';
 import {FileDef, PipelineStepDef} from '../../../definition';
 import {HandledNodeModel, NodeHandlers, OutgoingPortModel, StepNodeEntityType, StepNodeModel} from '../../../diagram';
 import {askStepNodePosition, DiagramNodePosition} from '../../../editor';
+import {PlaygroundModuleAssistant} from '../../../types';
 import {CreateSubNodesOptions} from '../../types';
 import {FirstSubStepPortModel} from './port-widgets';
 
@@ -17,6 +18,7 @@ export interface StepNodeCreationOptions {
 	type: StepNodeEntityType;
 	subOf?: PipelineStepDef;
 	handlers: NodeHandlers;
+	assistant: Required<PlaygroundModuleAssistant>;
 	previousNode: HandledNodeModel;
 	linkPrevious: (node: StepNodeModel) => LinkModel;
 	appendNode: (...nodes: Array<StepNodeModel>) => void;
@@ -25,7 +27,7 @@ export interface StepNodeCreationOptions {
 
 export const createStepNode = (step: PipelineStepDef, file: FileDef, options: StepNodeCreationOptions): Undefinable<HandledNodeModel> => {
 	const {
-		type, subOf, handlers,
+		type, subOf, handlers, assistant,
 		linkPrevious, appendNode, appendLink
 	} = options;
 	const node = new StepNodeModel(step, file, {type, subOf, handlers});
@@ -33,7 +35,7 @@ export const createStepNode = (step: PipelineStepDef, file: FileDef, options: St
 	appendNode(node);
 	const link = linkPrevious(node);
 	appendLink(link);
-	const endOfSub = DEFAULTS.createSubStepNodes(node, {appendNode, appendLink, handlers});
+	const endOfSub = DEFAULTS.createSubStepNodes(node, {appendNode, appendLink, handlers, assistant});
 	return endOfSub == null ? node : endOfSub;
 };
 
@@ -70,7 +72,7 @@ export interface CreateSubNodesOfSingleRouteOptions {
 export const createSubNodesOfSingleRoute = (options: CreateSubNodesOfSingleRouteOptions): Undefinable<HandledNodeModel> => {
 	const {
 		model, askSteps,
-		options: {appendNode, appendLink, handlers}, findPortFromModel, createPortFromModel
+		options: {appendNode, appendLink, handlers, assistant}, findPortFromModel, createPortFromModel
 	} = options;
 	const steps = askSteps();
 	if (steps == null || steps.length === 0) {
@@ -84,7 +86,7 @@ export const createSubNodesOfSingleRoute = (options: CreateSubNodesOfSingleRoute
 			? (node: StepNodeModel) => createLinkFromModel(node, findPortFromModel, createPortFromModel)
 			: (node: StepNodeModel) => previousNode.next(node);
 		return createStepNode(step, model.file, {
-			type: StepNodeEntityType.NORMAL, handlers, subOf: step,
+			type: StepNodeEntityType.NORMAL, handlers, assistant, subOf: step,
 			previousNode, linkPrevious,
 			appendNode, appendLink
 		});

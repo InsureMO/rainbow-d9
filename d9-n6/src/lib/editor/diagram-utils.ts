@@ -19,9 +19,11 @@ import {
 	StepNodeEntityType,
 	StepNodeModel
 } from '../diagram';
+import {PlaygroundModuleAssistant} from '../types';
 
 export interface DiagramHandlers {
 	serialize: (def: FileDef) => string;
+	assistant: Required<PlaygroundModuleAssistant>;
 	onContentChange: (serialize: () => string) => void;
 }
 
@@ -109,14 +111,14 @@ export const createDiagramNodes = (file: FileDef, handlers: DiagramHandlers): Di
 		const steps = file.steps ?? [];
 		if (steps.length === 0) {
 			// create a default snippet step
-			const step: PipelineStepDef = DEFAULTS.createDefaultStep();
+			const step: PipelineStepDef = handlers.assistant.createDefaultStep();
 			steps.push(step);
 			// steps might be created, assign to anyway
 			file.steps = steps;
 		}
 		previousNode = steps.reduce((previousNode, step) => {
 			return createStepNode(step, file, {
-				type: StepNodeEntityType.NORMAL, handlers: nodeHandlers,
+				type: StepNodeEntityType.NORMAL, handlers: nodeHandlers, assistant: handlers.assistant,
 				previousNode, linkPrevious: (node) => previousNode.next(node),
 				appendNode: (...nodes) => allNodes.push(...nodes),
 				appendLink: (...links) => allLinks.push(...links)
@@ -127,7 +129,7 @@ export const createDiagramNodes = (file: FileDef, handlers: DiagramHandlers): Di
 		// create a virtual node to represent, treat file def as step def
 		const step = file as unknown as PipelineStepDef;
 		previousNode = createStepNode(step, file, {
-			type: StepNodeEntityType.START, handlers: nodeHandlers,
+			type: StepNodeEntityType.START, handlers: nodeHandlers, assistant: handlers.assistant,
 			previousNode, linkPrevious: (node) => previousNode.next(node),
 			appendNode: (...nodes) => allNodes.push(...nodes),
 			appendLink: (...links) => allLinks.push(...links)
@@ -263,14 +265,20 @@ export const computeGrid = (grid: Array<Array<GridCell>>, top: number, left: num
 
 export const createDiagramHandlers = (options: {
 	serializer: FileDefSerializer;
+	assistant?: PlaygroundModuleAssistant;
 	replace: (func: () => void, timeout: number) => void;
 	syncContentToStateRef: (content: string) => string;
 	notifyContentChanged: (content: string) => void;
 }): DiagramHandlers => {
-	const {serializer, replace, syncContentToStateRef, notifyContentChanged} = options;
+	const {serializer, assistant, replace, syncContentToStateRef, notifyContentChanged} = options;
 
 	return {
 		serialize: (def: FileDef) => serializer.stringify(def),
+		assistant: {
+			createDefaultStep: assistant?.createDefaultStep ?? DEFAULTS.createDefaultStep,
+			isValidRefPipeline: assistant?.isValidRefPipeline ?? (() => true),
+			isValidRefStep: assistant?.isValidRefStep ?? (() => true)
+		},
 		onContentChange: (serialize: () => string) => {
 			replace(() => {
 				// sync to state ref first, in case somewhere outside force update widget

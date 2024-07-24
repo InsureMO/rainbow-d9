@@ -1,5 +1,4 @@
 import {Undefinable} from '@rainbow-d9/n1';
-import {DEFAULTS} from '../../../constants';
 import {AllInPipelineStepDef, PipelineStepDef, SetsLikePipelineStepDef} from '../../../definition';
 import {HandledNodeModel, JoinEndNodeModel, StepNodeEntityType, StepNodeModel} from '../../../diagram';
 import {CreateSubNodesOptions} from '../../types';
@@ -15,24 +14,20 @@ import {CommonStepDefsType, CreateSubNodesAndEndNodeOptions} from './types';
 import {createSubNodesOfSingleRoute} from './utils';
 
 export const createErrorHandlesSubNodes = (step: AllInPipelineStepDef, model: StepNodeModel, options: CreateSubNodesOptions): Undefinable<Array<HandledNodeModel>> => {
-	const {omitErrorHandles = false} = options;
-	if (omitErrorHandles) {
-		return (void 0);
-	}
 	// error handles
 	const errorHandles = step.errorHandles;
 	if (errorHandles == null) {
 		return (void 0);
 	}
 
+	const createDefaultStep = options.assistant.createDefaultStep;
 	const createAskSteps = (name: 'catchable' | 'uncatchable' | 'exposed' | 'any'): (() => Undefinable<Array<PipelineStepDef>>) => {
 		return (): Undefinable<Array<PipelineStepDef>> => {
 			if (errorHandles[name] == null || !Array.isArray(errorHandles[name])) {
 				return (void 0);
 			}
 			if (errorHandles[name].length === 0) {
-				// create a default snippet step
-				const defaultFirstStep: PipelineStepDef = DEFAULTS.createDefaultStep();
+				const defaultFirstStep: PipelineStepDef = createDefaultStep();
 				(errorHandles[name] as Array<PipelineStepDef>).push(defaultFirstStep);
 			}
 			return errorHandles[name] as Array<PipelineStepDef>;
@@ -112,6 +107,7 @@ export const createSetsLikeSubNodesAndEndNode: CommonStepDefsType['createSetsLik
 		createSpecificSubNodes: (_node: StepNodeModel, options: CreateSubNodesOptions) => {
 			const step = model.step as SetsLikePipelineStepDef;
 
+			const createDefaultStep = options.assistant.createDefaultStep;
 			// noinspection DuplicatedCode
 			const lastNodeOfSteps = createSubNodesOfSingleRoute({
 				model, options,
@@ -119,7 +115,7 @@ export const createSetsLikeSubNodesAndEndNode: CommonStepDefsType['createSetsLik
 					const steps = step.steps ?? [];
 					if (steps.length === 0) {
 						// create a default snippet step
-						const defaultFirstStep: PipelineStepDef = DEFAULTS.createDefaultStep();
+						const defaultFirstStep: PipelineStepDef = createDefaultStep();
 						steps.push(defaultFirstStep);
 						// steps might be created, assign to anyway
 						step.steps = steps;

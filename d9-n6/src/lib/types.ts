@@ -22,6 +22,8 @@ export interface PlaygroundModuleAssistant {
 	 * 2. first sub step of new step sets
 	 */
 	createDefaultStep?: () => PipelineStepDef;
+	isValidRefPipeline?: (code: string) => boolean;
+	isValidRefStep?: (code: string) => boolean;
 }
 
 /** configuration definition */

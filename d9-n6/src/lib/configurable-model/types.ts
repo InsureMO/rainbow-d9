@@ -3,7 +3,7 @@ import {Undefinable} from '@rainbow-d9/n1';
 import {FileDef, PipelineStepDef, PipelineStepRegisterKey} from '../definition';
 import {HandledNodeModel, NodeHandlers, StepNodeModel} from '../diagram';
 import {ConfigurableElement, ConfigurableElementAnchor, ConfigurableModel} from '../edit-dialog';
-import {MarkdownContent} from '../types';
+import {MarkdownContent, PlaygroundModuleAssistant} from '../types';
 import {StepPort} from './step-def';
 
 export interface FileNodeConfigurer<D extends FileDef = FileDef, M extends ConfigurableModel = ConfigurableModel> {
@@ -17,8 +17,7 @@ export interface CreateSubNodesOptions {
 	appendNode: (...nodes: Array<NodeModel>) => void;
 	appendLink: (...links: Array<LinkModel>) => void;
 	handlers: NodeHandlers;
-	/** default false */
-	omitErrorHandles?: boolean;
+	assistant: Required<PlaygroundModuleAssistant>;
 }
 
 export interface StepNodeConfigurer<F extends PipelineStepDef = PipelineStepDef, M extends ConfigurableModel = ConfigurableModel> {

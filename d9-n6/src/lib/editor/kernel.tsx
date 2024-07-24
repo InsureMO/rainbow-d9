@@ -55,7 +55,7 @@ const parseContent = (parser: FileDefDeserializer, content?: MarkdownContent): F
 };
 
 export const EditorKernel = (props: EditorProps) => {
-	const {content, serializer, deserializer} = props;
+	const {content, assistant, serializer, deserializer} = props;
 
 	const wrapperRef = useRef<HTMLDivElement>(null);
 	const {fire} = usePlaygroundEventBus();
@@ -65,7 +65,7 @@ export const EditorKernel = (props: EditorProps) => {
 		try {
 			const def = parseContent(deserializer, content ?? '');
 			const handlers = createDiagramHandlers({
-				serializer, replace, syncContentToStateRef: (content: string) => {
+				serializer, assistant, replace, syncContentToStateRef: (content: string) => {
 					stateRef.current.content = content;
 					return content;
 				}, notifyContentChanged: (content: string) => {
