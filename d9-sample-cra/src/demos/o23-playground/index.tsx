@@ -12,11 +12,7 @@ $d9n2.intl.labels['en-US'] = {
 		}
 	}
 };
-
-export const O23Playground = () => {
-	const def = useDemoMarkdown(DemoContent);
-
-	DemoData.yaml = `code: ApiTest
+DemoData.yaml = `code: ApiTest
 type: pipeline
 enabled: false
 route: /api/test
@@ -100,6 +96,8 @@ steps:
             use: snippet
             snippet: $.$logger.log('Invalid thing detected.', $factor.result);
 `;
+export const O23Playground = () => {
+	const def = useDemoMarkdown(DemoContent);
 
 	return <GlobalRoot>
 		<StandaloneRoot {...def} $root={DemoData}/>

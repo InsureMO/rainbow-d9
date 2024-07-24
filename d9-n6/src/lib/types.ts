@@ -26,6 +26,12 @@ export interface PlaygroundModuleAssistant {
 	isValidRefStep?: (code: string) => boolean;
 }
 
+export interface PlaygroundBehavior {
+	allowUploadFile?: boolean;
+	allowDownloadFile?: boolean;
+	allowDownloadImage?: boolean;
+}
+
 /** configuration definition */
 export type PlaygroundDef = ValueChangeableNodeDef & OmitHTMLProps<HTMLDivElement> & {
 	usage?: PlaygroundModuleUsage;
@@ -34,13 +40,15 @@ export type PlaygroundDef = ValueChangeableNodeDef & OmitHTMLProps<HTMLDivElemen
 	serializer?: FileDefSerializer;
 	/** def file deserializer, use yaml by default */
 	deserializer?: FileDefDeserializer;
-};
+} & PlaygroundBehavior;
 
 /** widget definition, with html attributes */
 export type PlaygroundProps = OmitNodeDef<PlaygroundDef> & WidgetProps;
 
-export interface EditorProps extends Pick<PlaygroundProps, 'usage' | 'assistant'> {
+export interface EditorProps extends Required<PlaygroundBehavior> {
 	content?: string;
+	usage?: PlaygroundModuleUsage;
+	assistant?: PlaygroundModuleAssistant;
 	serializer: FileDefSerializer;
 	deserializer: FileDefDeserializer;
 }

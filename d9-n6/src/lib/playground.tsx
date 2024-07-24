@@ -6,7 +6,7 @@ import {FileDefDeserializer, FileDefSerializer, YamlDefLoader, YamlDefSaver} fro
 import {EditDialog} from './edit-dialog';
 import {Editor} from './editor';
 import {PlaygroundBridge} from './playground-bridge';
-import {PlaygroundEventBusProvider} from './playground-event-bus';
+import {PlaygroundEventBusProvider, PlaygroundEventTypes, usePlaygroundEventBus} from './playground-event-bus';
 import {PlaygroundProps, UnwrappedPlaygroundProps} from './types';
 import {PlaygroundCssVars} from './widgets';
 
@@ -61,12 +61,14 @@ export const PlaygroundDelegate = (props: PlaygroundProps) => {
 		$pp, $wrapped,
 		usage, assistant,
 		serializer, deserializer,
+		allowUploadFile = false, allowDownloadFile = true, allowDownloadImage = true,
 		...rest
 	} = props;
 	const {$p2r, $onValueChange, $avs: {$disabled, $visible}} = $wrapped;
 
 	const ref = useRef<HTMLDivElement>(null);
 	const globalHandlers = useGlobalHandlers();
+	const {on, off} = usePlaygroundEventBus();
 	const [state, setState] = useState<PlaygroundDelegateState>(() => {
 		return {
 			serializer: serializer ?? new YamlDefSaver(),
@@ -82,6 +84,15 @@ export const PlaygroundDelegate = (props: PlaygroundProps) => {
 			};
 		});
 	}, [serializer, deserializer]);
+	useEffect(() => {
+		const onResetContent = async (content: string) => {
+			await $onValueChange(content, true, {global: globalHandlers});
+		};
+		on(PlaygroundEventTypes.RESET_CONTENT, onResetContent);
+		return () => {
+			off(PlaygroundEventTypes.RESET_CONTENT, onResetContent);
+		};
+	}, [on, off, globalHandlers, $onValueChange]);
 
 	const onContentChanged = async (content?: string) => {
 		await $onValueChange(content, false, {global: globalHandlers});
@@ -93,7 +104,9 @@ export const PlaygroundDelegate = (props: PlaygroundProps) => {
 	                          ref={ref}>
 		<PlaygroundBridge content={content} onContentChanged={onContentChanged}/>
 		<Editor content={content} usage={usage} assistant={assistant}
-		        serializer={state.serializer} deserializer={state.deserializer}/>
+		        serializer={state.serializer} deserializer={state.deserializer}
+		        allowUploadFile={allowUploadFile} allowDownloadFile={allowDownloadFile}
+		        allowDownloadImage={allowDownloadImage}/>
 	</PlaygroundWrapper>;
 };
 

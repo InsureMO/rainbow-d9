@@ -1,13 +1,30 @@
 import {DiagramEngine} from '@projectstorm/react-diagrams-core';
 import dom2image from 'dom-to-image';
 import React, {useEffect, useRef, useState} from 'react';
-import {FileDef} from '../definition';
-import {DownloadImage, FitCanvas, Max, Min, OriginSize, Window, Zen, ZoomIn, ZoomOut} from '../icons';
+import {FileDef, FileDefSerializer} from '../definition';
+import {
+	DownloadFile,
+	DownloadImage,
+	FitCanvas,
+	Max,
+	Min,
+	OriginSize,
+	UploadFile,
+	Window,
+	Zen,
+	ZoomIn,
+	ZoomOut
+} from '../icons';
+import {PlaygroundEventTypes, usePlaygroundEventBus} from '../playground-event-bus';
 import {EditorToolbar, EditorToolbarButton} from './widgets';
 
 export interface ToolbarProps {
 	engine: DiagramEngine;
 	def?: FileDef;
+	serializer: FileDefSerializer;
+	allowUploadFile: boolean;
+	allowDownloadFile: boolean;
+	allowDownloadImage: boolean;
 }
 
 export interface ToolbarState {
@@ -16,9 +33,13 @@ export interface ToolbarState {
 }
 
 export const Toolbar = (props: ToolbarProps) => {
-	const {engine, def} = props;
+	const {
+		engine, def, serializer,
+		allowUploadFile, allowDownloadFile, allowDownloadImage
+	} = props;
 
 	const ref = useRef<HTMLDivElement>(null);
+	const {fire} = usePlaygroundEventBus();
 	const [state, setState] = useState<ToolbarState>({max: false, zen: false});
 	useEffect(() => {
 		const onFullScreenChanged = () => {
@@ -76,11 +97,32 @@ export const Toolbar = (props: ToolbarProps) => {
 		link.href = dataUrl;
 		link.click();
 	};
+	const onDownloadFileClicked = async () => {
+		const link = document.createElement('a');
+		link.download = `${def?.code || 'no-code'}-config.${serializer.extname()}`;
+		link.href = 'data:text/plain;charset=UTF-8,' + encodeURIComponent(serializer.stringify(def));
+		link.click();
+	};
+	const onUploadFileClicked = async () => {
+		const file = document.createElement('input');
+		file.setAttribute('type', 'file');
+		file.setAttribute('accept', '.yml,.yaml');
+		file.setAttribute('multiple', 'false');
+		file.addEventListener('change', () => {
+			if (file.files.length == 1) {
+				const reader = new FileReader();
+				reader.onload = () => {
+					const content = reader.result as string;
+					fire(PlaygroundEventTypes.RESET_CONTENT, content);
+				};
+				reader.readAsText(file.files[0]);
+			}
+		});
+		file.click();
+	};
 	const onMaxClicked = () => setState(state => ({...state, max: true}));
 	const onMinClicked = () => setState(state => ({...state, max: false}));
-	const onZenClicked = () => {
-		setState({zen: true, max: true});
-	};
+	const onZenClicked = () => setState({zen: true, max: true});
 	const onWindowClicked = () => {
 		document.exitFullscreen && document.exitFullscreen();
 		setState({zen: false, max: false});
@@ -91,7 +133,12 @@ export const Toolbar = (props: ToolbarProps) => {
 		<EditorToolbarButton onClick={onZoomOutClicked}><ZoomOut/></EditorToolbarButton>
 		<EditorToolbarButton onClick={onOriginSizeClicked}><OriginSize/></EditorToolbarButton>
 		<EditorToolbarButton onClick={onFitCanvasClicked}><FitCanvas/></EditorToolbarButton>
-		<EditorToolbarButton onClick={onDownloadImageClicked}><DownloadImage/></EditorToolbarButton>
+		{allowDownloadImage
+			? <EditorToolbarButton onClick={onDownloadImageClicked}><DownloadImage/></EditorToolbarButton> : null}
+		{allowDownloadFile
+			? <EditorToolbarButton onClick={onDownloadFileClicked}><DownloadFile/></EditorToolbarButton> : null}
+		{allowUploadFile
+			? <EditorToolbarButton onClick={onUploadFileClicked}><UploadFile/></EditorToolbarButton> : null}
 		{state.max ? null : <EditorToolbarButton onClick={onMaxClicked}><Max/></EditorToolbarButton>}
 		{(state.max && !state.zen) ? <EditorToolbarButton onClick={onMinClicked}><Min/></EditorToolbarButton> : null}
 		{state.zen ? null : <EditorToolbarButton onClick={onZenClicked}><Zen/></EditorToolbarButton>}

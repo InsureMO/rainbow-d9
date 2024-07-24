@@ -54,6 +54,8 @@ export abstract class FileDefSerializer {
 		const redressed = this.redressDef(def);
 		return this.doStringify(redressed);
 	}
+
+	public abstract extname(): string;
 }
 
 export class YamlDefSaver extends FileDefSerializer {
@@ -67,5 +69,9 @@ export class YamlDefSaver extends FileDefSerializer {
 			console.groupEnd();
 			throw new Error('Failed to dump O23 definition to yaml content.');
 		}
+	}
+
+	public extname(): string {
+		return 'yaml';
 	}
 }

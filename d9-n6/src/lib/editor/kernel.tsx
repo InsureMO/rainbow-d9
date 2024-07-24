@@ -55,7 +55,11 @@ const parseContent = (parser: FileDefDeserializer, content?: MarkdownContent): F
 };
 
 export const EditorKernel = (props: EditorProps) => {
-	const {content, assistant, serializer, deserializer} = props;
+	const {
+		content, assistant,
+		serializer, deserializer,
+		allowUploadFile, allowDownloadFile, allowDownloadImage
+	} = props;
 
 	const wrapperRef = useRef<HTMLDivElement>(null);
 	const {fire} = usePlaygroundEventBus();
@@ -173,7 +177,9 @@ export const EditorKernel = (props: EditorProps) => {
 			 @ts-ignore */}
 			<ErrorBoundary content={content}>
 				<CanvasWidget engine={stateRef.current.engine} className="o23-playground-editor-content"/>
-				<Toolbar engine={stateRef.current.engine}/>
+				<Toolbar engine={stateRef.current.engine} def={stateRef.current.def} serializer={serializer}
+				         allowUploadFile={allowUploadFile} allowDownloadFile={allowDownloadFile}
+				         allowDownloadImage={allowDownloadImage}/>
 			</ErrorBoundary>
 		</EditorWrapper>;
 	} catch (error) {

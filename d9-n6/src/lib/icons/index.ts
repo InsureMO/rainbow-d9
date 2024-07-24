@@ -23,6 +23,8 @@ export * from './origin-size';
 export * from './zoom-in';
 export * from './zoom-out';
 export * from './download-image';
+export * from './download-file';
+export * from './upload-file';
 export * from './max';
 export * from './min';
 export * from './window';
