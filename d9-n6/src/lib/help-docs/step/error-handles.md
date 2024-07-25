@@ -28,7 +28,7 @@ practical scenarios, exception catching needs to be done according to requiremen
 
 #### Using snippet
 
-Use snippet processing for handling error. The following parameters can be used during the conversion process:
+Use snippet processing for handling error. The following parameters can be used during the error handling process:
 
 - `$code`: Error code. Note that it is always `O01-99999` when using the `AnyError` handler.
 - `$error`: Error object itself,

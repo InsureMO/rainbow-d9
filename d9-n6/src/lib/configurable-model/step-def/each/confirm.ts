@@ -16,8 +16,8 @@ export const confirm: StepNodeConfigurer<EachPipelineStepDef, EachStepDefModel>[
 		} else {
 			def.originalContentName = model.originalContentName.trim();
 		}
-		if (VUtils.isBlank(model.originalContentName)) {
-			delete def.originalContentName;
+		if (VUtils.isBlank(model.itemName)) {
+			delete def.itemName;
 		} else {
 			def.itemName = model.itemName.trim();
 		}

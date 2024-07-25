@@ -3,6 +3,7 @@ import color from 'color';
 
 const EDITOR_BACKGROUND_BLOCK_SIZE = 'var(--o23-playground-editor-background-block-size, 48px)';
 const EDITOR_BACKGROUND_LINE_COLOR = `var(--o23-playground-editor-background-line-color, ${color(CssConstants.PRIMARY_COLOR).alpha(0.08)})`;
+const EDITOR_ATTRIBUTE_BADGE_COLOR = '#9db6c6';
 const NODE_START_COLOR = '#ffb56b';
 const NODE_END_COLOR = '#e0b35f';
 const NODE_JOIN_END_COLOR = '#c4c2bf';
@@ -10,6 +11,7 @@ const NODE_STEP_COLOR = '#54956b';
 const NODE_STEP_SETS_COLOR = '#615cac';
 const NODE_ASYNC_SETS_STEP_COLOR = '#ff714b';
 const NODE_EACH_STEP_COLOR = '#c6a0d2';
+const NODE_PARALLEL_STEP_COLOR = '#4785ff';
 const NEXT_STEP_PORT_COLOR = '#a3ab5b';
 const PREVIOUS_STEP_PORT_COLOR = '#8454aa';
 const PORT_FIRST_SUB_STEP_COLOR = '#8454aa';
@@ -119,9 +121,13 @@ export const PlaygroundCssVars = {
 	EDIT_DIALOG_CONFIGURABLE_ELEMENT_BADGE_STEPS_BACKGROUND_COLOR: 'var(--o23-playground-dialog-configurable-element-badge-steps-background-color, transparent)',
 	EDIT_DIALOG_CONFIGURABLE_ELEMENT_BADGE_STEPS_COLOR: `var(--o23-playground-dialog-configurable-element-badge-steps-color, ${CssVars.PRIMARY_COLOR})`,
 	EDIT_DIALOG_CONFIGURABLE_ELEMENT_BADGE_AS_IS_BACKGROUND_COLOR: `var(--o23-playground-dialog-configurable-element-badge-as-is-background-color, ${CssVars.WAIVE_COLOR})`,
-	EDIT_DIALOG_CONFIGURABLE_ELEMENT_AS_IS_STEPS_COLOR: `var(--o23-playground-dialog-configurable-element-badge-as-is-color, ${CssVars.INVERT_COLOR})`,
+	EDIT_DIALOG_CONFIGURABLE_ELEMENT_BADGE_AS_IS_COLOR: `var(--o23-playground-dialog-configurable-element-badge-as-is-color, ${CssVars.INVERT_COLOR})`,
 	EDIT_DIALOG_CONFIGURABLE_ELEMENT_BADGE_USE_DEFAULT_BACKGROUND_COLOR: `var(--o23-playground-dialog-configurable-element-badge-use-default-background-color, ${CssVars.WAIVE_COLOR})`,
-	EDIT_DIALOG_CONFIGURABLE_ELEMENT_USE_DEFAULT_STEPS_COLOR: `var(--o23-playground-dialog-configurable-element-badge-use-default-color, ${CssVars.INVERT_COLOR})`,
+	EDIT_DIALOG_CONFIGURABLE_ELEMENT_BADGE_USE_DEFAULT_COLOR: `var(--o23-playground-dialog-configurable-element-badge-use-default-color, ${CssVars.INVERT_COLOR})`,
+	EDIT_DIALOG_CONFIGURABLE_ELEMENT_BADGE_YES_BACKGROUND_COLOR: `var(--o23-playground-dialog-configurable-element-badge-yes-background-color, ${EDITOR_ATTRIBUTE_BADGE_COLOR})`,
+	EDIT_DIALOG_CONFIGURABLE_ELEMENT_BADGE_YES_COLOR: `var(--o23-playground-dialog-configurable-element-badge-yes-color, ${CssVars.INVERT_COLOR})`,
+	EDIT_DIALOG_CONFIGURABLE_ELEMENT_BADGE_NO_BACKGROUND_COLOR: `var(--o23-playground-dialog-configurable-element-badge-no-background-color, ${EDITOR_ATTRIBUTE_BADGE_COLOR})`,
+	EDIT_DIALOG_CONFIGURABLE_ELEMENT_BADGE_NO_COLOR: `var(--o23-playground-dialog-configurable-element-badge-no-color, ${CssVars.INVERT_COLOR})`,
 	EDIT_DIALOG_CONFIGURABLE_ELEMENT_SPECIFIC_MARGIN: 'var(--o23-playground-dialog-configurable-element-specific-margin, 0 -8px)',
 	EDIT_DIALOG_CONFIGURABLE_ELEMENT_SPECIFIC_PADDING: 'var(--o23-playground-dialog-configurable-element-specific-padding, 8px 16px 8px)',
 	EDIT_DIALOG_CONFIGURABLE_ELEMENT_SPECIFIC_GRID_COLUMN_GAP: 'var(--o23-playground-dialog-configurable-element-specific-grid-column-gap, 32px)',
@@ -246,6 +252,8 @@ export const PlaygroundCssVars = {
 	NODE_STEP_ASYNC_SETS_TITLE_BACKGROUND: `var(--o23-playground-node-step-async-sets-title-background, linear-gradient(135deg, ${NODE_ASYNC_SETS_STEP_COLOR} 0%, ${color(NODE_ASYNC_SETS_STEP_COLOR).alpha(0.7)} 70%, ${color(NODE_ASYNC_SETS_STEP_COLOR).alpha(0.5)} 100%))`,
 	NODE_STEP_EACH_BORDER: `var(--o23-playground-node-step-each-border, 2px solid ${NODE_EACH_STEP_COLOR})`,
 	NODE_STEP_EACH_TITLE_BACKGROUND: `var(--o23-playground-node-step-each-title-background, linear-gradient(135deg, ${NODE_EACH_STEP_COLOR} 0%, ${color(NODE_EACH_STEP_COLOR).alpha(0.7)} 70%, ${color(NODE_EACH_STEP_COLOR).alpha(0.5)} 100%))`,
+	NODE_STEP_PARALLEL_BORDER: `var(--o23-playground-node-step-parallel-border, 2px solid ${NODE_PARALLEL_STEP_COLOR})`,
+	NODE_STEP_PARALLEL_TITLE_BACKGROUND: `var(--o23-playground-node-step-parallel-title-background, linear-gradient(135deg, ${NODE_PARALLEL_STEP_COLOR} 0%, ${color(NODE_PARALLEL_STEP_COLOR).alpha(0.7)} 70%, ${color(NODE_PARALLEL_STEP_COLOR).alpha(0.5)} 100%))`,
 	// snippet
 	SNIPPET_BORDER: `var(--o23-playground-snippet-border, ${CssVars.BORDER})`,
 	SNIPPET_BORDER_RADIUS: `var(--o23-playground-snippet-border-radius, ${CssVars.BORDER_RADIUS})`,

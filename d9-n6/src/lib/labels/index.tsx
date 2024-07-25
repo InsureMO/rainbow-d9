@@ -71,6 +71,7 @@ export const Labels = {
 	StepUseSets: <IntlLabel keys={['o23', 'step', 'use', 'sets']} value="Sets"/>,
 	StepUseAsyncSets: <IntlLabel keys={['o23', 'step', 'use', 'async-sets']} value="Async Sets"/>,
 	StepUseEach: <IntlLabel keys={['o23', 'step', 'use', 'each']} value="Each"/>,
+	StepUseParallel: <IntlLabel keys={['o23', 'step', 'use', 'parallel']} value="Parallel"/>,
 	// step error handling types
 	StepErrorHandleTypeNone: <IntlLabel keys={['o23', 'step', 'error-handle', 'none']} value="Ignored"/>,
 	StepErrorHandleTypeSnippet: <IntlLabel keys={['o23', 'step', 'error-handle', 'none']} value="Use Snippet"/>,
@@ -95,6 +96,9 @@ export const Labels = {
 	StepEachOriginalContentName: <IntlLabel keys={['o23', 'step', 'each', 'original-content-name']}
 	                                        value="Origin Content Variable"/>,
 	StepEachItemName: <IntlLabel keys={['o23', 'step', 'each', 'item-name']} value="Item Variable"/>,
+	// step parallel
+	StepParallelCloneData: <IntlLabel keys={['o23', 'step', 'parallel', 'clone-data']} value="Clone For Each Step"/>,
+	StepParallelRace: <IntlLabel keys={['o23', 'step', 'parallel', 'race']} value="Race?"/>,
 
 	// common variables, variable might be used in multiple places,
 	// such as attribute label, attribute configuration label, attribute configuration value label, etc.

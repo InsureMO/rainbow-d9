@@ -57,3 +57,13 @@ export const ConfigurableElementBadgeUseDefault = () => {
 		{Labels.UseDefault}
 	</NavigatorElementBadgeWrapper>;
 };
+export const ConfigurableElementBadgeYes = () => {
+	return <NavigatorElementBadgeWrapper data-role="yes">
+		{Labels.YesChar}
+	</NavigatorElementBadgeWrapper>;
+};
+export const ConfigurableElementBadgeNo = () => {
+	return <NavigatorElementBadgeWrapper data-role="no">
+		{Labels.NoChar}
+	</NavigatorElementBadgeWrapper>;
+};

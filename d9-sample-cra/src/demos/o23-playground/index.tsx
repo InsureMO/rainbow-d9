@@ -98,6 +98,15 @@ steps:
           - name: Write validation result to log
             use: snippet
             snippet: $.$logger.log('Invalid thing detected.', $factor.result);
+  - name: Log data
+    use: parallel
+    steps:
+      - name: Write log to file
+        use: snippet
+        snippet: $.$logger.log('Data received.', $factor);
+      - name: Write log to remote
+        use: snippet
+        snippet: $.$logger.log('Data received.', $factor);
 `;
 export const O23Playground = () => {
 	const def = useDemoMarkdown(DemoContent);

@@ -513,12 +513,22 @@ export const NavigatorElementBadgeWrapper = styled.span.attrs({[DOM_KEY_WIDGET]:
 
     &[data-role=as-is] {
         background-color: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_BADGE_AS_IS_BACKGROUND_COLOR};
-        color: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_AS_IS_STEPS_COLOR};
+        color: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_BADGE_AS_IS_COLOR};
     }
 
     &[data-role=use-default] {
         background-color: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_BADGE_USE_DEFAULT_BACKGROUND_COLOR};
-        color: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_USE_DEFAULT_STEPS_COLOR};
+        color: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_BADGE_USE_DEFAULT_COLOR};
+    }
+
+    &[data-role=yes] {
+        background-color: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_BADGE_YES_BACKGROUND_COLOR};
+        color: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_BADGE_YES_COLOR};
+    }
+
+    &[data-role=no] {
+        background-color: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_BADGE_NO_BACKGROUND_COLOR};
+        color: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_BADGE_NO_COLOR};
     }
 
     &[data-role=snippet], &[data-role=steps] {

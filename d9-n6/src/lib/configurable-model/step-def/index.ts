@@ -8,5 +8,6 @@ export * from './snowflake';
 export * from './sets';
 export * from './async-sets';
 export * from './each';
+export * from './parallel';
 
 export * from './all-step-defs';

@@ -79,7 +79,6 @@ export interface SetsLikePipelineStepDef extends AllInPipelineStepDef {
 
 export interface SetsPipelineStepDef extends SetsLikePipelineStepDef {
 	use: StandardPipelineStepRegisterKey.SETS;
-
 }
 
 export interface AsyncSetsPipelineStepDef extends SetsLikePipelineStepDef {
@@ -90,4 +89,10 @@ export interface EachPipelineStepDef extends SetsLikePipelineStepDef {
 	use: StandardPipelineStepRegisterKey.EACH_SETS;
 	originalContentName?: string;
 	itemName?: string;
+}
+
+export interface ParallelPipelineStepDef extends SetsLikePipelineStepDef {
+	use: StandardPipelineStepRegisterKey.PARALLEL_SETS;
+	cloneData?: string;
+	race?: boolean;
 }

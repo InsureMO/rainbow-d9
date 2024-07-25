@@ -1,7 +1,8 @@
-import {docs as AsyncSetsStepDocs} from './async-sets-step';
+import {docs as AsyncParallelStepDocs} from './async-sets-step';
 import {docs as DelPropertyStepDocs} from './del-property-step';
 import {docs as EachStepDocs} from './each-step';
 import {docs as GetPropertyStepDocs} from './get-property-step';
+import {docs as ParallelStepDocs} from './parallel-step';
 import {docs as PipelineDocs} from './pipeline';
 import {docs as SetsStepDocs} from './sets-step';
 import {docs as SnippetStepDocs} from './snippet-step';
@@ -18,6 +19,7 @@ export const HelpDocs = {
 	...SnowflakeStepDocs,
 	// sets
 	...SetsStepDocs,
-	...AsyncSetsStepDocs,
-	...EachStepDocs
+	...AsyncParallelStepDocs,
+	...EachStepDocs,
+	...ParallelStepDocs
 };
