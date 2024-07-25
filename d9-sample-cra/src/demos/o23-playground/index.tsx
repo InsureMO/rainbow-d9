@@ -58,7 +58,10 @@ steps:
     error-handles:
       catchable:
         - name: Catch catchable error
-          use: snippet
+          use: sets
+          steps:
+            - name: "Catch catchable #1"
+              use: snippet
       uncatchable:
         - name: Catch uncatchable error
           use: snippet
