@@ -98,7 +98,7 @@ export const Labels = {
 	StepEachItemName: <IntlLabel keys={['o23', 'step', 'each', 'item-name']} value="Item Variable"/>,
 	// step parallel
 	StepParallelCloneData: <IntlLabel keys={['o23', 'step', 'parallel', 'clone-data']} value="Clone For Each Step"/>,
-	StepParallelRace: <IntlLabel keys={['o23', 'step', 'parallel', 'race']} value="Race?"/>,
+	StepParallelRace: <IntlLabel keys={['o23', 'step', 'parallel', 'race']} value="Race"/>,
 
 	// common variables, variable might be used in multiple places,
 	// such as attribute label, attribute configuration label, attribute configuration value label, etc.
