@@ -8,6 +8,7 @@ import {createSubNodes} from './create-sub-nodes';
 import {elementCloneData} from './element-clone-data';
 import {elementRace} from './element-race';
 import {findSubPorts} from './find-sub-ports';
+import {PortRace} from './port-race';
 import {prepare} from './prepare';
 import {switchUse} from './switch-use';
 import {ParallelStepDefModel} from './types';
@@ -24,6 +25,7 @@ export const ParallelStepDefs: StepNodeConfigurer<ParallelPipelineStepDef, Paral
 	],
 	ports: [
 		...CommonStepDefs.prebuiltPorts.input,
+		{key: 'race', port: PortRace},
 		{key: 'steps', port: CommonStepDefs.prebuiltPorts.steps},
 		...CommonStepDefs.prebuiltPorts.errorHandles,
 		...CommonStepDefs.prebuiltPorts.output
