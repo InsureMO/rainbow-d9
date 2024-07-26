@@ -2,7 +2,14 @@ import {LinkModel} from '@projectstorm/react-diagrams';
 import {Undefinable} from '@rainbow-d9/n1';
 import {DEFAULTS} from '../../../constants';
 import {FileDef, PipelineStepDef} from '../../../definition';
-import {HandledNodeModel, NodeHandlers, OutgoingPortModel, StepNodeEntityType, StepNodeModel} from '../../../diagram';
+import {
+	HandledNodeModel,
+	LinkExtras,
+	NodeHandlers,
+	OutgoingPortModel,
+	StepNodeEntityType,
+	StepNodeModel
+} from '../../../diagram';
 import {askStepNodePosition, DiagramNodePosition} from '../../../editor';
 import {PlaygroundModuleAssistant} from '../../../types';
 import {CreateSubNodesOptions} from '../../types';
@@ -40,13 +47,16 @@ export const createStepNode = (step: PipelineStepDef, file: FileDef, options: St
 };
 
 export const createLinkFromParent = (model: StepNodeModel) => {
-	return (node: StepNodeModel, findPortFromModel: () => OutgoingPortModel, createPortFromModel: () => OutgoingPortModel) => {
+	return (node: StepNodeModel,
+	        findPortFromModel: () => OutgoingPortModel, createPortFromModel: () => OutgoingPortModel,
+	        askLinkExtras?: () => Undefinable<LinkExtras>
+	) => {
 		let sourcePort = findPortFromModel();
 		if (sourcePort == null) {
 			sourcePort = createPortFromModel();
 			model.addPort(sourcePort);
 		}
-		const link = sourcePort.createOutgoingLinkModel();
+		const link = sourcePort.createOutgoingLinkModel(askLinkExtras == null ? (void 0) : askLinkExtras());
 		let targetPort = node.getPort(FirstSubStepPortModel.NAME);
 		if (targetPort == null) {
 			targetPort = new FirstSubStepPortModel();
@@ -64,6 +74,7 @@ export interface CreateSubNodesOfSingleRouteOptions {
 	options: CreateSubNodesOptions;
 	findPortFromModel: () => OutgoingPortModel;
 	createPortFromModel: () => OutgoingPortModel;
+	askFirstLinkExtras?: () => Undefinable<LinkExtras>;
 }
 
 /**
@@ -72,7 +83,8 @@ export interface CreateSubNodesOfSingleRouteOptions {
 export const createSubNodesOfSingleRoute = (options: CreateSubNodesOfSingleRouteOptions): Undefinable<HandledNodeModel> => {
 	const {
 		model, askSteps,
-		options: {appendNode, appendLink, handlers, assistant}, findPortFromModel, createPortFromModel
+		options: {appendNode, appendLink, handlers, assistant},
+		findPortFromModel, createPortFromModel, askFirstLinkExtras
 	} = options;
 	const steps = askSteps();
 	if (steps == null || steps.length === 0) {
@@ -83,7 +95,7 @@ export const createSubNodesOfSingleRoute = (options: CreateSubNodesOfSingleRoute
 	const previousNode: HandledNodeModel = model;
 	return (steps as Array<PipelineStepDef>).reduce((previousNode, step) => {
 		const linkPrevious = previousNode === model
-			? (node: StepNodeModel) => createLinkFromModel(node, findPortFromModel, createPortFromModel)
+			? (node: StepNodeModel) => createLinkFromModel(node, findPortFromModel, createPortFromModel, askFirstLinkExtras)
 			: (node: StepNodeModel) => previousNode.next(node);
 		return createStepNode(step, model.file, {
 			type: StepNodeEntityType.NORMAL, handlers, assistant, subOf: step,

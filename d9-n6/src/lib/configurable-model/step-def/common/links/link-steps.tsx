@@ -1,13 +1,13 @@
 import {GenerateModelEvent} from '@projectstorm/react-canvas-core';
 import {PlaygroundCssVars} from '../../../../widgets';
 import {StandardLinkFactory} from './standard-link';
-import {ToSubStepsLinkModel} from './to-sub-steps-link';
+import {ToSubStepsLinkModel, ToSubStepsLinkModelOptions} from './to-sub-steps-link';
 
 export class StepsLinkModel extends ToSubStepsLinkModel {
 	public static readonly TYPE = 'steps-link';
 
-	public constructor() {
-		super(StepsLinkModel.TYPE);
+	public constructor(options?: ToSubStepsLinkModelOptions) {
+		super(StepsLinkModel.TYPE, options);
 	}
 }
 

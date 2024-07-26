@@ -105,8 +105,20 @@ steps:
         use: snippet
         snippet: $.$logger.log('Data received.', $factor);
       - name: Write log to remote
-        use: snippet
-        snippet: $.$logger.log('Data received.', $factor);
+        use: sets
+        steps:
+          - name: Prepare log
+            use: snippet
+          - name: Write log
+            use: snippet
+            snippet: $.$logger.log('Data received.', $factor);
+    error-handles:
+      catchable:
+        - name: Catch catchable error
+          use: sets
+          steps:
+            - name: "Catch catchable #1"
+              use: snippet
 `;
 export const O23Playground = () => {
 	const def = useDemoMarkdown(DemoContent);

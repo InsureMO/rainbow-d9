@@ -4,6 +4,7 @@ import {DiagramEngine} from '@projectstorm/react-diagrams-core';
 import {DOM_KEY_WIDGET} from '@rainbow-d9/n2';
 import React from 'react';
 import styled from 'styled-components';
+import {LinkExtras} from '../../../../diagram';
 import {PlaygroundCssVars} from '../../../../widgets';
 import {ErrorHandlesLinkModel} from '../links';
 import {ErrorHandlesPortModel} from './error-handles-port-model';
@@ -16,8 +17,8 @@ export class UncatchableErrorHandlePortModel extends ErrorHandlesPortModel {
 		super(UncatchableErrorHandlePortModel.TYPE, UncatchableErrorHandlePortModel.NAME, PortModelAlignment.RIGHT);
 	}
 
-	protected createDefaultLinkModel(): LinkModel {
-		return new ErrorHandlesLinkModel();
+	protected createDefaultLinkModel(extras?: LinkExtras): LinkModel {
+		return new ErrorHandlesLinkModel(this.toLinkModelOptions(extras));
 	}
 }
 

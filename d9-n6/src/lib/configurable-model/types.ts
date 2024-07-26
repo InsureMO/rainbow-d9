@@ -34,6 +34,7 @@ export interface StepNodeConfigurer<F extends PipelineStepDef = PipelineStepDef,
 	properties: Array<ConfigurableElement>;
 	/** create nodes for sub steps, returns an end node */
 	createSubNodes: (node: StepNodeModel, options: CreateSubNodesOptions) => Undefinable<HandledNodeModel>;
+	/** port for sub-steps must be the first one of returning array */
 	findSubPorts: (node: StepNodeModel) => Undefinable<Array<PortModel>>;
 	helpDocs: MarkdownContent;
 }

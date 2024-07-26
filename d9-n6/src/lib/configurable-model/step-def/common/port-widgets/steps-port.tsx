@@ -4,7 +4,7 @@ import {DiagramEngine} from '@projectstorm/react-diagrams-core';
 import {DOM_KEY_WIDGET} from '@rainbow-d9/n2';
 import React from 'react';
 import styled from 'styled-components';
-import {OutgoingPortModel} from '../../../../diagram';
+import {LinkExtras, OutgoingPortModel} from '../../../../diagram';
 import {PlaygroundCssVars} from '../../../../widgets';
 import {StepsLinkModel} from '../links';
 
@@ -15,8 +15,8 @@ export class StepsPortModel extends OutgoingPortModel {
 		super(StepsPortModel.TYPE, name, PortModelAlignment.RIGHT);
 	}
 
-	protected createDefaultLinkModel(): LinkModel {
-		return new StepsLinkModel();
+	protected createDefaultLinkModel(extras?: LinkExtras): LinkModel {
+		return new StepsLinkModel(this.toLinkModelOptions(extras));
 	}
 }
 

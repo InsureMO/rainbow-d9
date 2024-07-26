@@ -54,13 +54,13 @@ export const createErrorHandlesSubNodes = (step: AllInPipelineStepDef, model: St
 			findPortFromModel: () => model.getPort(AnyErrorHandlePortModel.NAME) as AnyErrorHandlePortModel,
 			createPortFromModel: () => new AnyErrorHandlePortModel()
 		}
-	].filter(({steps, ...rest}) => {
+	].map(({steps, ...rest}) => {
 		return {steps: steps(), ...rest};
 	}).filter(({steps}) => {
-		return steps != null;
+		return steps != null && steps.length !== 0;
 	}).map(({steps, findPortFromModel, createPortFromModel}) => {
 		return createSubNodesOfSingleRoute({
-			model, options, askSteps: steps, findPortFromModel, createPortFromModel
+			model, options, askSteps: () => steps, findPortFromModel, createPortFromModel
 		});
 	});
 };
