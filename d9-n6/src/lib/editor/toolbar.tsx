@@ -89,8 +89,15 @@ export const Toolbar = (props: ToolbarProps) => {
 	const onDownloadImageClicked = async () => {
 		const node = ref.current.parentElement.querySelector('div.o23-playground-editor-content') as HTMLDivElement;
 		node.style.overflow = 'visible';
+		const svgNode = node.querySelector('svg');
+		const transform = svgNode.style.transform;
+		const divNode = node.querySelector('div');
+		svgNode.style.transform = '';
+		divNode.style.transform = '';
 		// noinspection SpellCheckingInspection
 		const dataUrl = await dom2image.toPng(node, {quality: 1, bgcolor: 'white'});
+		svgNode.style.transform = transform;
+		divNode.style.transform = transform;
 		node.style.overflow = '';
 		const link = document.createElement('a');
 		link.download = `${def?.code || 'no-code'}-diagram.png`;

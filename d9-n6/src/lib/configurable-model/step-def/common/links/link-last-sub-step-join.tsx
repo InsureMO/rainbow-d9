@@ -3,6 +3,7 @@ import {DefaultLinkModel} from '@projectstorm/react-diagrams';
 import {DEFAULTS} from '../../../../constants';
 import {PreviousStepPortModel} from '../../../../diagram';
 import {PlaygroundCssVars} from '../../../../widgets';
+import {FirstSubStepPortModel} from '../port-widgets';
 import {StandardLinkFactory} from './standard-link';
 
 export class LastSubStepJoinLinkModel extends DefaultLinkModel {
@@ -79,7 +80,18 @@ export class LastSubStepJoinLinkModel extends DefaultLinkModel {
 	}
 
 	protected getSinkingOffset(): number {
-		return DEFAULTS.diagram.linkJoinEndSinkingOffset;
+		const node = this.getSourcePort().getNode();
+		const nodeBottom = node.getY() + node.height;
+		const previousNode = [
+			...Object.values(node.getPort(PreviousStepPortModel.NAME)?.getLinks() ?? {}),
+			...Object.values(node.getPort(FirstSubStepPortModel.NAME)?.getLinks() ?? {})
+		][0].getSourcePort().getNode();
+		const previousNodeBottom = previousNode.getY() + previousNode.height;
+		if (nodeBottom <= previousNodeBottom) {
+			return previousNodeBottom - nodeBottom + DEFAULTS.diagram.linkJoinEndSinkingOffset;
+		} else {
+			return DEFAULTS.diagram.linkJoinEndSinkingOffset;
+		}
 	}
 
 	protected getGutterSize(): number {

@@ -47,6 +47,12 @@ export const EditorWrapper = styled.div.attrs({
 
     > div.o23-playground-editor-content {
         height: 100%;
+
+        > svg {
+            > g[data-linkid]:hover {
+                z-index: 1;
+            }
+        }
     }
 `;
 export const EditorToolbar = styled.div.attrs({[DOM_KEY_WIDGET]: 'o23-playground-editor-toolbar'})`
