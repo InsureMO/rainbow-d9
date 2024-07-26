@@ -49,9 +49,14 @@ export interface AllInPipelineStepDef extends PipelineStepDef {
 	};
 }
 
+export interface PipelineStepDiagramDetails {
+	$x?: number;
+	$y?: number;
+	$foldSubSteps?: boolean;
+}
+
 export interface PipelineStepDiagramDef extends PipelineStepDef {
-	$x: number;
-	$y: number;
+	$diagram?: PipelineStepDiagramDetails;
 }
 
 export interface SnippetPipelineStepDef extends AllInPipelineStepDef {

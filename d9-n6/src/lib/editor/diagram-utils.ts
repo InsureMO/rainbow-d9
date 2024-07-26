@@ -63,8 +63,8 @@ export const askStepNodePosition = (def: PipelineStepDef): DiagramNodePosition =
 		}
 	} else {
 		const diagramDef = def as PipelineStepDiagramDef;
-		if (diagramDef.$x != null && diagramDef.$y != null) {
-			return {x: diagramDef.$x, y: diagramDef.$y, appointed: true};
+		if (diagramDef.$diagram?.$x != null && diagramDef.$diagram?.$y != null) {
+			return {x: diagramDef.$diagram?.$x, y: diagramDef.$diagram?.$y, appointed: true};
 		} else {
 			return {x: START_X, y: START_Y, appointed: false};
 		}

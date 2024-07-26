@@ -1,10 +1,13 @@
 import {GenerateModelEvent} from '@projectstorm/react-canvas-core';
 import {AbstractModelFactory, LinkModel, PortModelAlignment, PortWidget} from '@projectstorm/react-diagrams';
 import {DiagramEngine} from '@projectstorm/react-diagrams-core';
-import {DOM_KEY_WIDGET} from '@rainbow-d9/n2';
+import {useForceUpdate} from '@rainbow-d9/n1';
+import {CssVars, DOM_KEY_WIDGET} from '@rainbow-d9/n2';
 import React from 'react';
 import styled from 'styled-components';
-import {LinkExtras, OutgoingPortModel} from '../../../../diagram';
+import {PipelineStepDiagramDef} from '../../../../definition';
+import {LinkExtras, OutgoingPortModel, StepNodeModel} from '../../../../diagram';
+import {FoldSubNodes, UnfoldSubNodes} from '../../../../icons';
 import {PlaygroundCssVars} from '../../../../widgets';
 import {StepsLinkModel} from '../links';
 
@@ -34,6 +37,8 @@ export class StepsPortFactory extends AbstractModelFactory<StepsPortModel, Diagr
 export const StepsPortContainer = styled.div.attrs({[DOM_KEY_WIDGET]: 'o23-playground-steps-port'})`
     display: flex;
     position: absolute;
+    align-items: center;
+    justify-content: center;
     top: calc(-1 * ${PlaygroundCssVars.NODE_PORT_BORDER_WIDTH});
     right: calc(${PlaygroundCssVars.NODE_PORT_HEIGHT} / -2 - ${PlaygroundCssVars.NODE_BORDER_WIDTH});
     width: calc(${PlaygroundCssVars.NODE_PORT_HEIGHT} / 2);
@@ -42,11 +47,39 @@ export const StepsPortContainer = styled.div.attrs({[DOM_KEY_WIDGET]: 'o23-playg
     border: ${PlaygroundCssVars.NODE_PORT_STEPS_BORDER};
     border-top-right-radius: calc(${PlaygroundCssVars.NODE_PORT_HEIGHT} / 2);
     border-bottom-right-radius: calc(${PlaygroundCssVars.NODE_PORT_HEIGHT} / 2);
+    transition: width ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION}, right ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION};
 
-    > div:first-child {
+    &:hover {
+        right: calc(0px - ${PlaygroundCssVars.NODE_PORT_HEIGHT} - ${PlaygroundCssVars.NODE_BORDER_WIDTH});
+        width: calc(${PlaygroundCssVars.NODE_PORT_HEIGHT});
+
+        > svg:first-child {
+            width: calc(${PlaygroundCssVars.NODE_PORT_HEIGHT} / 2);
+            opacity: 1;
+        }
+    }
+
+    > svg:first-child {
+        height: calc(${PlaygroundCssVars.NODE_PORT_HEIGHT} / 2);
+        width: 0;
+        opacity: 0;
+        color: ${PlaygroundCssVars.NODE_PORT_STEPS_ICON_COLOR};
+        overflow: hidden;
+        transition: width ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION}, opacity ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION};
+
+        &[data-icon=o23-fold-sub-nodes] {
+            margin-left: -4px;
+        }
+
+        &[data-icon=o23-unfold-sub-nodes] {
+            margin-left: -3px;
+        }
+    }
+
+    > div:last-child {
         position: absolute;
         top: 0;
-        right: 0;
+        left: calc(${PlaygroundCssVars.NODE_PORT_HEIGHT} / 2);
         width: 0;
         height: 100%;
     }
@@ -64,7 +97,22 @@ export interface StepsPortWidgetProps {
 export const StepsPortWidget = (props: StepsPortWidgetProps) => {
 	const {port, engine} = props;
 
-	return <StepsPortContainer>
+	const forceUpdate = useForceUpdate();
+
+	const model = port.getNode() as StepNodeModel;
+	const def = model.step as PipelineStepDiagramDef;
+	const diagram = def.$diagram ?? {$foldSubSteps: false};
+
+	const onClicked = () => {
+		if (def.$diagram == null) {
+			def.$diagram = {$foldSubSteps: diagram.$foldSubSteps};
+		}
+		def.$diagram.$foldSubSteps = !def.$diagram.$foldSubSteps;
+		forceUpdate();
+	};
+
+	return <StepsPortContainer onClick={onClicked}>
+		{diagram.$foldSubSteps ? <UnfoldSubNodes/> : <FoldSubNodes/>}
 		<PortWidget port={port} engine={engine}/>
 	</StepsPortContainer>;
 };
