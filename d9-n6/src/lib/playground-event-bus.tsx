@@ -6,7 +6,9 @@ export enum PlaygroundEventTypes {
 	RESET_CONTENT = 'reset-content',
 	INIT_HELP_DOC_WIDTH = 'init-help-doc-width',
 	SHOW_EDIT_DIALOG = 'show-edit-dialog',
-	HIDE_EDIT_DIALOG = 'hide-edit-dialog'
+	HIDE_EDIT_DIALOG = 'hide-edit-dialog',
+
+	REPAINT = 'repaint'
 }
 
 export interface PlaygroundEventBus {
@@ -39,6 +41,12 @@ export interface PlaygroundEventBus {
 	on(type: PlaygroundEventTypes.HIDE_EDIT_DIALOG, listener: () => void): this;
 
 	off(type: PlaygroundEventTypes.HIDE_EDIT_DIALOG, listener: () => void): this;
+
+	fire(type: PlaygroundEventTypes.REPAINT): this;
+
+	on(type: PlaygroundEventTypes.REPAINT, listener: () => void): this;
+
+	off(type: PlaygroundEventTypes.REPAINT, listener: () => void): this;
 }
 
 const Context = createContext<PlaygroundEventBus>({} as PlaygroundEventBus);

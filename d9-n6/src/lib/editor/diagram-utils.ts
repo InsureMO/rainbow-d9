@@ -285,11 +285,11 @@ export const createDiagramHandlers = (options: {
 			isValidRefStep: assistant?.isValidRefStep ?? (() => true)
 		},
 		onContentChange: (serialize: () => string) => {
+			// sync to state ref first, in case somewhere outside force update widget
+			// need to compare the content with state ref
+			const content = syncContentToStateRef(serialize());
 			replace(() => {
-				// sync to state ref first, in case somewhere outside force update widget
-				// will compare the content with state ref
-				const content = syncContentToStateRef(serialize());
-				// and notify content changed
+				// notify content changed
 				notifyContentChanged(content);
 			}, 100);
 		}

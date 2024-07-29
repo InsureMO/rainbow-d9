@@ -1,5 +1,5 @@
 import {DiagramEngine} from '@projectstorm/react-diagrams';
-import {Undefinable, useForceUpdate, VUtils} from '@rainbow-d9/n1';
+import {Undefinable, VUtils} from '@rainbow-d9/n1';
 import {DOM_KEY_WIDGET} from '@rainbow-d9/n2';
 import React from 'react';
 import styled from 'styled-components';
@@ -239,7 +239,7 @@ export const StartNodeWidget = (props: StartNodeWidgetProps) => {
 	const {node, engine} = props;
 
 	const {fire} = usePlaygroundEventBus();
-	const forceUpdate = useForceUpdate();
+	// const forceUpdate = useForceUpdate();
 
 	const def = node.def;
 
@@ -265,11 +265,7 @@ export const StartNodeWidget = (props: StartNodeWidgetProps) => {
 	})();
 
 	const onConfirm = (model: ConfigurableModel) => {
-		const ret = FileDefs.confirm(model, def, node.handlers);
-		if (ret === true) {
-			forceUpdate();
-		}
-		return ret;
+		return FileDefs.confirm(model, def, node.handlers);
 	};
 	const onDiscard = (model: ConfigurableModel) => FileDefs.discard(model);
 	const prepareModel = () => FileDefs.prepare(def);

@@ -56,13 +56,12 @@ if ($.$errors.isCatchable($error)) {
 }
 ```
 
-> In most cases, special exception handling is not necessary, as @rainbow-o23 will handle all exceptions consistently when returning to the
-> API caller.
+> In most cases, special exception handling is not necessary, as `@rainbow-o23` will handle all exceptions consistently when returning to
+> the API caller.
 
 > When choosing to return normally, meaning no exception is thrown anymore, the returned data will go through the `write to output` process
-> and will be consistent with the normal logic of returning data in the pipeline steps. However, if an exception is thrown and caught during
-> the `write to output` process, and choose to return normally again, the returned data will not go through the `write to output`
-> processing.
+> and will be consistent with the normal logic of returning data in the pipeline steps. However, if an exception is thrown during
+> the `write to output` process, this exception will be thrown directly, no error handling on this situation.
 
 Here are some commonly used utility function examples for exception handling in `$helpers`. For detailed specifications, please refer to
 the `@rainbow-o23` documentation.

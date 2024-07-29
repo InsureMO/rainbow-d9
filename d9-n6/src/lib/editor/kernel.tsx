@@ -1,8 +1,8 @@
 import {CanvasWidget} from '@projectstorm/react-canvas-core';
 import createEngine from '@projectstorm/react-diagrams';
 import {DiagramEngine} from '@projectstorm/react-diagrams-core';
-import {useForceUpdate, useThrottler, VUtils} from '@rainbow-d9/n1';
-import React, {useEffect, useRef} from 'react';
+import {ThrottlerFunctions, Undefinable, useForceUpdate, useThrottler, VUtils} from '@rainbow-d9/n1';
+import React, {MutableRefObject, useEffect, useRef} from 'react';
 import {DEFAULTS} from '../constants';
 import {FileDef, FileDefDeserializer, FileDefSerializer} from '../definition';
 import {initEngine, StartNodeModel} from '../diagram';
@@ -54,6 +54,53 @@ const parseContent = (parser: FileDefDeserializer, content?: MarkdownContent): F
 	return def;
 };
 
+const createRepaint = (options: {
+	serializer: () => FileDefSerializer;
+	deserializer: () => FileDefDeserializer;
+	content: () => Undefinable<string>;
+	stateRef: MutableRefObject<EditorKernelRefState>;
+	replace: ThrottlerFunctions['replace'];
+	onStateContentChanged: () => Promise<void>;
+	onContentChanged: (content?: string) => void;
+}) => {
+	return () => {
+		const {stateRef, replace, onStateContentChanged, onContentChanged} = options;
+
+		const content = options.content();
+		const serializer = options.serializer();
+		const deserializer = options.deserializer();
+
+		try {
+			const def = parseContent(deserializer, content ?? '');
+			stateRef.current.content = content;
+			stateRef.current.serializer = serializer;
+			stateRef.current.deserializer = deserializer;
+			stateRef.current.def = def;
+			const handlers = createDiagramHandlers({
+				serializer, replace, syncContentToStateRef: (content: string) => {
+					stateRef.current.content = content;
+					(async () => await onStateContentChanged())();
+					return content;
+				}, notifyContentChanged: onContentChanged
+			});
+			const model = createDiagramNodes(def, handlers);
+			stateRef.current.engine.setModel(model);
+			delete stateRef.current.message;
+			stateRef.current.diagramStatus = EditorKernelDiagramStatus.PAINT;
+		} catch (e) {
+			console.error(e);
+			stateRef.current.content = content;
+			stateRef.current.serializer = serializer;
+			stateRef.current.deserializer = deserializer;
+			delete stateRef.current.def;
+			// replace with empty diagram model
+			stateRef.current.engine.setModel(createLockedDiagramModel());
+			stateRef.current.message = e.message;
+			stateRef.current.diagramStatus = EditorKernelDiagramStatus.IGNORED;
+		}
+	};
+};
+
 export const EditorKernel = (props: EditorProps) => {
 	const {
 		content, assistant,
@@ -62,15 +109,19 @@ export const EditorKernel = (props: EditorProps) => {
 	} = props;
 
 	const wrapperRef = useRef<HTMLDivElement>(null);
-	const {fire} = usePlaygroundEventBus();
+	const {on, off, fire} = usePlaygroundEventBus();
 	const {replace} = useThrottler();
 	const stateRef = useRef<EditorKernelRefState>((() => {
 		const engine = createDiagramEngine();
 		try {
+			// first round
 			const def = parseContent(deserializer, content ?? '');
 			const handlers = createDiagramHandlers({
 				serializer, assistant, replace, syncContentToStateRef: (content: string) => {
 					stateRef.current.content = content;
+					(async () => {
+						fire(PlaygroundEventTypes.REPAINT);
+					})();
 					return content;
 				}, notifyContentChanged: (content: string) => {
 					fire(PlaygroundEventTypes.CONTENT_CHANGED, content);
@@ -94,43 +145,26 @@ export const EditorKernel = (props: EditorProps) => {
 	})());
 	const forceUpdate = useForceUpdate();
 	useEffect(() => {
+		// in case of serializer/deserializer/content changed from outside
 		if (serializer === stateRef.current.serializer
 			&& deserializer === stateRef.current.deserializer
 			&& content === stateRef.current.content) {
 			return;
 		}
-		try {
-			const def = parseContent(deserializer, content ?? '');
-			stateRef.current.content = content;
-			stateRef.current.serializer = serializer;
-			stateRef.current.deserializer = deserializer;
-			stateRef.current.def = def;
-			const handlers = createDiagramHandlers({
-				serializer, replace, syncContentToStateRef: (content: string) => {
-					stateRef.current.content = content;
-					return content;
-				}, notifyContentChanged: (content: string) => {
-					fire(PlaygroundEventTypes.CONTENT_CHANGED, content);
-				}
-			});
-			const model = createDiagramNodes(def, handlers);
-			stateRef.current.engine.setModel(model);
-			delete stateRef.current.message;
-			stateRef.current.diagramStatus = EditorKernelDiagramStatus.PAINT;
-		} catch (e) {
-			console.error(e);
-			stateRef.current.content = content;
-			stateRef.current.serializer = serializer;
-			stateRef.current.deserializer = deserializer;
-			delete stateRef.current.def;
-			// replace with empty diagram model
-			stateRef.current.engine.setModel(createLockedDiagramModel());
-			stateRef.current.message = e.message;
-			stateRef.current.diagramStatus = EditorKernelDiagramStatus.IGNORED;
-		}
+		createRepaint({
+			serializer: () => serializer, deserializer: () => deserializer, content: () => content,
+			stateRef, replace,
+			onStateContentChanged: async () => {
+				fire(PlaygroundEventTypes.REPAINT);
+			},
+			onContentChanged: (content?: string) => {
+				fire(PlaygroundEventTypes.CONTENT_CHANGED, content);
+			}
+		})();
 		forceUpdate();
 	}, [fire, replace, forceUpdate, serializer, deserializer, content]);
 	useEffect(() => {
+		// compute the node positions, run when status is PAINT, and set status to IN_SERVICE when finished
 		if (EditorKernelDiagramStatus.PAINT !== stateRef.current.diagramStatus) {
 			return;
 		}
@@ -153,6 +187,27 @@ export const EditorKernel = (props: EditorProps) => {
 		stateRef.current.diagramStatus = EditorKernelDiagramStatus.IN_SERVICE;
 		forceUpdate();
 	}, [forceUpdate, stateRef.current.diagramStatus]);
+	useEffect(() => {
+		// repaint on somewhere call REPAINT
+		const onRepaint = () => {
+			createRepaint({
+				serializer: () => stateRef.current.serializer, deserializer: () => stateRef.current.deserializer,
+				content: () => stateRef.current.content,
+				stateRef, replace,
+				onStateContentChanged: async () => {
+					fire(PlaygroundEventTypes.REPAINT);
+				},
+				onContentChanged: (content?: string) => {
+					fire(PlaygroundEventTypes.CONTENT_CHANGED, content);
+				}
+			})();
+			forceUpdate();
+		};
+		on(PlaygroundEventTypes.REPAINT, onRepaint);
+		return () => {
+			off(PlaygroundEventTypes.REPAINT, onRepaint);
+		};
+	}, [on, off, fire, replace, forceUpdate, serializer, deserializer, content]);
 
 	if (VUtils.isNotBlank(stateRef.current.message)) {
 		return <EditorWrapper data-diagram-status={EditorKernelDiagramStatus.IGNORED}>

@@ -1,5 +1,4 @@
 import {DiagramEngine} from '@projectstorm/react-diagrams';
-import {useForceUpdate} from '@rainbow-d9/n1';
 import {DOM_KEY_WIDGET} from '@rainbow-d9/n2';
 import React from 'react';
 import styled from 'styled-components';
@@ -103,20 +102,16 @@ export const StepNodeWidget = (props: StepNodeWidgetProps) => {
 	const {node, engine} = props;
 
 	const {fire} = usePlaygroundEventBus();
-	const forceUpdate = useForceUpdate();
+	// const forceUpdate = useForceUpdate();
 
 	const {step: def, file} = node;
 	const {use} = def;
 	const StepDefs = findStepDef(use);
 
 	const onConfirm = (model: ConfigurableModel) => {
-		const ret = StepDefs.confirm(model, def, file, {
+		return StepDefs.confirm(model, def, file, {
 			handlers: node.handlers, assistant: node.assistant
 		});
-		if (ret === true) {
-			forceUpdate();
-		}
-		return ret;
 	};
 	const onDiscard = (model: ConfigurableModel) => StepDefs.discard(model);
 	const prepareModel = () => StepDefs.prepare(def);
