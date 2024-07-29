@@ -4,10 +4,13 @@ import {DiagramEngine} from '@projectstorm/react-diagrams-core';
 import {DOM_KEY_WIDGET} from '@rainbow-d9/n2';
 import React from 'react';
 import styled from 'styled-components';
-import {LinkExtras} from '../../../../diagram';
+import {LinkExtras, StepNodeModel} from '../../../../diagram';
+import {FoldSubNodes, UnfoldSubNodes} from '../../../../icons';
 import {PlaygroundCssVars} from '../../../../widgets';
 import {ErrorHandlesLinkModel} from '../links';
 import {ErrorHandlesPortModel} from './error-handles-port-model';
+import {useSubNodesFold} from './use-sub-nodes-fold';
+import {SubNodesPortContainer} from './widgets';
 
 export class ExposedErrorHandlePortModel extends ErrorHandlesPortModel {
 	public static readonly TYPE = 'exposed-error-handle-port';
@@ -33,26 +36,16 @@ export class ExposedErrorHandlePortFactory extends AbstractModelFactory<ExposedE
 	}
 }
 
-export const ExposedErrorHandlePortContainer = styled.div.attrs({[DOM_KEY_WIDGET]: 'o23-playground-exposed-error-port'})`
-    display: flex;
-    position: absolute;
-    top: calc(-1 * ${PlaygroundCssVars.NODE_PORT_BORDER_WIDTH});
-    right: calc(${PlaygroundCssVars.NODE_PORT_HEIGHT} / -2 - ${PlaygroundCssVars.NODE_BORDER_WIDTH});
-    width: calc(${PlaygroundCssVars.NODE_PORT_HEIGHT} / 2);
-    height: ${PlaygroundCssVars.NODE_PORT_HEIGHT};
-    background-color: ${PlaygroundCssVars.NODE_PORT_ERROR_HANDLES_BACKGROUND};
-    border: ${PlaygroundCssVars.NODE_PORT_ERROR_HANDLES_BORDER};
-    border-top-right-radius: calc(${PlaygroundCssVars.NODE_PORT_HEIGHT} / 2);
-    border-bottom-right-radius: calc(${PlaygroundCssVars.NODE_PORT_HEIGHT} / 2);
-
-    > div:first-child {
-        position: absolute;
-        top: 0;
-        right: 0;
-        width: 0;
-        height: 100%;
-    }
-`;
+export const ExposedErrorHandlePortContainer = styled(SubNodesPortContainer).attrs({
+	[DOM_KEY_WIDGET]: 'o23-playground-exposed-error-port',
+	style: {
+		// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+		// @ts-ignore
+		'--background-color': PlaygroundCssVars.NODE_PORT_ERROR_HANDLES_BACKGROUND,
+		'--border': PlaygroundCssVars.NODE_PORT_ERROR_HANDLES_BORDER,
+		'--icon-color': PlaygroundCssVars.NODE_PORT_ERROR_HANDLES_ICON_COLOR
+	}
+})``;
 
 export interface ExposedErrorHandlePortWidgetProps {
 	// node and engine props are required
@@ -66,7 +59,11 @@ export interface ExposedErrorHandlePortWidgetProps {
 export const ExposedErrorHandlePortWidget = (props: ExposedErrorHandlePortWidgetProps) => {
 	const {port, engine} = props;
 
-	return <ExposedErrorHandlePortContainer>
+	const model = port.getNode() as StepNodeModel;
+	const {fold, switchFold} = useSubNodesFold({model, property: '$foldExposed'});
+
+	return <ExposedErrorHandlePortContainer data-fold={fold} onClick={switchFold}>
+		{fold ? <UnfoldSubNodes/> : <FoldSubNodes/>}
 		<PortWidget port={port} engine={engine}/>
 	</ExposedErrorHandlePortContainer>;
 };

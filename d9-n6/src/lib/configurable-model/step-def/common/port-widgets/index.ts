@@ -7,3 +7,4 @@ export * from './catchable-error-port';
 export * from './uncatchable-error-port';
 export * from './exposed-error-port';
 export * from './any-error-port';
+export {useSubNodesFold} from './use-sub-nodes-fold';

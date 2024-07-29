@@ -53,6 +53,10 @@ export interface PipelineStepDiagramDetails {
 	$x?: number;
 	$y?: number;
 	$foldSubSteps?: boolean;
+	$foldCatchable?: boolean;
+	$foldUncatchable?: boolean;
+	$foldExposed?: boolean;
+	$foldAny?: boolean;
 }
 
 export interface PipelineStepDiagramDef extends PipelineStepDef {

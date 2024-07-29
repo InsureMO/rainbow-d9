@@ -161,6 +161,7 @@ export const PlaygroundCssVars = {
 	NODE_PORT_STEPS_ICON_COLOR: `var(--o23-playground-port-sub-step-icon-color, ${CssVars.INVERT_COLOR})`,
 	NODE_PORT_ERROR_HANDLES_BORDER: `var(--o23-playground-port-error-handles-border, 1px solid ${PORT_ERROR_HANDLES_COLOR})`,
 	NODE_PORT_ERROR_HANDLES_BACKGROUND: `var(--o23-playground-port-error-handles-background, ${color(PORT_ERROR_HANDLES_COLOR).darken(0.1).opaquer(0.5)})`,
+	NODE_PORT_ERROR_HANDLES_ICON_COLOR: `var(--o23-playground-port-error-handles-icon-color, ${CssVars.INVERT_COLOR})`,
 	NODE_PORT_FIRST_SUB_STEP_BACKGROUND: `var(--o23-playground-port-first-sub-step-background, ${PORT_FIRST_SUB_STEP_COLOR})`,
 	NODE_PORT_FIRST_SUB_STEP_BORDER: `var(--o23-playground-port-first-sub-step-border, 1px solid ${color(PORT_FIRST_SUB_STEP_COLOR).darken(0.1).opaquer(0.5)})`,
 	NODE_PORT_LAST_SUB_STEP_JOIN_BACKGROUND: `var(--o23-playground-port-last-sub-step-join-background, ${PORT_LAST_SUB_STEP_JOIN_COLOR})`,
