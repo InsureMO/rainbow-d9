@@ -102,6 +102,7 @@ export const PlaygroundDelegate = (props: PlaygroundProps) => {
 	return <PlaygroundWrapper {...rest} data-disabled={$disabled} data-visible={$visible}
 	                          id={PPUtils.asId(PPUtils.absolute($p2r, $pp), props.id)}
 	                          ref={ref}>
+		<EditDialog/>
 		<PlaygroundBridge content={content} onContentChanged={onContentChanged}/>
 		<Editor content={content} usage={usage} assistant={assistant}
 		        serializer={state.serializer} deserializer={state.deserializer}
@@ -112,7 +113,6 @@ export const PlaygroundDelegate = (props: PlaygroundProps) => {
 
 export const Playground = (props: PlaygroundProps) => {
 	return <PlaygroundEventBusProvider>
-		<EditDialog/>
 		<PlaygroundDelegate {...props}/>
 	</PlaygroundEventBusProvider>;
 };

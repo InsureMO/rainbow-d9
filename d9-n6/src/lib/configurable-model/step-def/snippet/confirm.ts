@@ -1,16 +1,15 @@
 import {FileDef, SnippetPipelineStepDef} from '../../../definition';
-import {NodeHandlers} from '../../../diagram';
 import {ConfigurableElementAnchor} from '../../../edit-dialog';
-import {StepNodeConfigurer} from '../../types';
+import {ConfirmNodeOptions, StepNodeConfigurer} from '../../types';
 import {CommonStepDefs} from '../common';
 import {SnippetStepDefModel} from './types';
 
 export const confirm: StepNodeConfigurer<SnippetPipelineStepDef, SnippetStepDefModel>['confirm'] =
-	(model: SnippetStepDefModel, def: SnippetPipelineStepDef, file: FileDef, handlers: NodeHandlers): ConfigurableElementAnchor | true => {
-		CommonStepDefs.confirm(model, def, file, handlers);
+	(model: SnippetStepDefModel, def: SnippetPipelineStepDef, file: FileDef, options: ConfirmNodeOptions): ConfigurableElementAnchor | true => {
+		CommonStepDefs.confirm(model, def, file, options);
 
 		def.snippet = model.snippet;
 
-		handlers.onChange();
+		options.handlers.onChange();
 		return true;
 	};

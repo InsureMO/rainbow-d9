@@ -20,6 +20,11 @@ export interface CreateSubNodesOptions {
 	assistant: Required<PlaygroundModuleAssistant>;
 }
 
+export interface ConfirmNodeOptions {
+	handlers: NodeHandlers;
+	assistant: Required<PlaygroundModuleAssistant>;
+}
+
 export interface StepNodeConfigurer<F extends PipelineStepDef = PipelineStepDef, M extends ConfigurableModel = ConfigurableModel> {
 	use: PipelineStepRegisterKey;
 	/** prepare configurable model for popup edit dialog */
@@ -27,7 +32,7 @@ export interface StepNodeConfigurer<F extends PipelineStepDef = PipelineStepDef,
 	/** use switched, use in given model is updated */
 	switchUse: (model: ConfigurableModel, originalUse: PipelineStepDef['use']) => ConfigurableModel;
 	/** confirm the changes from edit dialog */
-	confirm: (model: M, def: F, file: FileDef, handlers: NodeHandlers) => ConfigurableElementAnchor | true;
+	confirm: (model: M, def: F, file: FileDef, options: ConfirmNodeOptions) => ConfigurableElementAnchor | true;
 	/** discard the changes from edit dialog */
 	discard: (model: M) => void;
 	ports?: Array<{ key: string, port: StepPort }>;

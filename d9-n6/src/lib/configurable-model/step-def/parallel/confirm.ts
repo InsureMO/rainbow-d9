@@ -1,14 +1,13 @@
 import {VUtils} from '@rainbow-d9/n1';
 import {FileDef, ParallelPipelineStepDef} from '../../../definition';
-import {NodeHandlers} from '../../../diagram';
 import {ConfigurableElementAnchor} from '../../../edit-dialog';
-import {StepNodeConfigurer} from '../../types';
+import {ConfirmNodeOptions, StepNodeConfigurer} from '../../types';
 import {CommonStepDefs} from '../common';
 import {ParallelStepDefModel} from './types';
 
 export const confirm: StepNodeConfigurer<ParallelPipelineStepDef, ParallelStepDefModel>['confirm'] =
-	(model: ParallelStepDefModel, def: ParallelPipelineStepDef, file: FileDef, handlers: NodeHandlers): ConfigurableElementAnchor | true => {
-		CommonStepDefs.confirm(model, def, file, handlers);
+	(model: ParallelStepDefModel, def: ParallelPipelineStepDef, file: FileDef, options: ConfirmNodeOptions): ConfigurableElementAnchor | true => {
+		CommonStepDefs.confirm(model, def, file, options);
 
 		if (VUtils.isBlank(model.cloneData)) {
 			delete def.cloneData;
@@ -20,6 +19,6 @@ export const confirm: StepNodeConfigurer<ParallelPipelineStepDef, ParallelStepDe
 		} else {
 			def.race = model.race;
 		}
-		handlers.onChange();
+		options.handlers.onChange();
 		return true;
 	};

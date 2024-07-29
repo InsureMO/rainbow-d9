@@ -1,12 +1,13 @@
 import {AllInPipelineStepDef, FileDef} from '../../../definition';
-import {NodeHandlers} from '../../../diagram';
 import {ConfigurableElementAnchor} from '../../../edit-dialog';
-import {StepNodeConfigurer} from '../../types';
+import {ConfirmNodeOptions, StepNodeConfigurer} from '../../types';
 import {CommonStepDefModel, ErrorHandleType, MergeType} from './types';
 
 export const confirm: StepNodeConfigurer<AllInPipelineStepDef, CommonStepDefModel>['confirm'] =
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
-	(model: CommonStepDefModel, def: AllInPipelineStepDef, _file: FileDef, handlers: NodeHandlers): ConfigurableElementAnchor | true => {
+	(model: CommonStepDefModel, def: AllInPipelineStepDef, _file: FileDef, options: ConfirmNodeOptions): ConfigurableElementAnchor | true => {
+		const {assistant} = options;
+
 		def.name = model.name;
 		def.use = model.use;
 		// copy all common properties
@@ -36,10 +37,16 @@ export const confirm: StepNodeConfigurer<AllInPipelineStepDef, CommonStepDefMode
 		const confirmErrorHandling = (name: 'catchable' | 'uncatchable' | 'exposed' | 'any', use?: ErrorHandleType) => {
 			def.errorHandles = def.errorHandles ?? {};
 			if (use === ErrorHandleType.STEPS) {
-				def.errorHandles[name] = model.temporary[name];
+				// steps, the original handles might be steps also, then do nothing
+				// otherwise, replace the error handles with one new step
+				if (def.errorHandles[name] != null && !Array.isArray(def.errorHandles[name])) {
+					def.errorHandles[name] = [assistant.createDefaultStep()];
+				}
 			} else if (use === ErrorHandleType.SNIPPET) {
+				// snippet, copy from edit model
 				def.errorHandles[name] = model.errorHandles?.[name];
 			} else {
+				// none, delete from def
 				delete def.errorHandles[name];
 			}
 		};
@@ -48,6 +55,5 @@ export const confirm: StepNodeConfigurer<AllInPipelineStepDef, CommonStepDefMode
 		confirmErrorHandling('exposed', model.temporary?.useErrorHandlesForExposed);
 		confirmErrorHandling('any', model.temporary?.useErrorHandlesForAny);
 
-		handlers.onChange();
 		return true;
 	};

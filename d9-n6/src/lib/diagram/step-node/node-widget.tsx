@@ -110,7 +110,9 @@ export const StepNodeWidget = (props: StepNodeWidgetProps) => {
 	const StepDefs = findStepDef(use);
 
 	const onConfirm = (model: ConfigurableModel) => {
-		const ret = StepDefs.confirm(model, def, file, node.handlers);
+		const ret = StepDefs.confirm(model, def, file, {
+			handlers: node.handlers, assistant: node.assistant
+		});
 		if (ret === true) {
 			forceUpdate();
 		}

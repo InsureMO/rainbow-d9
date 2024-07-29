@@ -75,7 +75,7 @@ export const createSubNodes: CommonStepDefsType['createSubNodes'] = (model: Step
  */
 export const createSubNodesAndEndNode: CommonStepDefsType['createSubNodesAndEndNode'] = (
 	model: StepNodeModel, options: CreateSubNodesAndEndNodeOptions): Undefinable<HandledNodeModel> => {
-	const {appendNode, appendLink, handlers, createSpecificSubNodes} = options;
+	const {appendNode, appendLink, handlers, assistant, createSpecificSubNodes} = options;
 
 	const step = model.step as AllInPipelineStepDef;
 	const commonSubNodes = createSubNodes(model, options);
@@ -87,7 +87,9 @@ export const createSubNodesAndEndNode: CommonStepDefsType['createSubNodesAndEndN
 	}
 
 	// now create an end node for end sub nodes
-	const endNode = new JoinEndNodeModel(step, model.file, {type: StepNodeEntityType.JOIN_END, subOf: step, handlers});
+	const endNode = new JoinEndNodeModel(step, model.file, {
+		type: StepNodeEntityType.JOIN_END, subOf: step, handlers, assistant
+	});
 	appendNode(endNode);
 	subNodes.forEach(node => {
 		const link = endNode.endOfSub(node);

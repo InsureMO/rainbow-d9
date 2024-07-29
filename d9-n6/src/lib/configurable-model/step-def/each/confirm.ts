@@ -1,15 +1,14 @@
 import {VUtils} from '@rainbow-d9/n1';
 import {EachPipelineStepDef, FileDef} from '../../../definition';
-import {NodeHandlers} from '../../../diagram';
 import {ConfigurableElementAnchor} from '../../../edit-dialog';
-import {StepNodeConfigurer} from '../../types';
+import {ConfirmNodeOptions, StepNodeConfigurer} from '../../types';
 import {CommonStepDefs} from '../common';
 import {EachStepDefModel} from './types';
 
 export const confirm: StepNodeConfigurer<EachPipelineStepDef, EachStepDefModel>['confirm'] =
-	(model: EachStepDefModel, def: EachPipelineStepDef, file: FileDef, handlers: NodeHandlers): ConfigurableElementAnchor | true => {
+	(model: EachStepDefModel, def: EachPipelineStepDef, file: FileDef, options: ConfirmNodeOptions): ConfigurableElementAnchor | true => {
 		// errorHandles is replaced, but keep the confirmation logic anyway
-		CommonStepDefs.confirm(model, def, file, handlers);
+		CommonStepDefs.confirm(model, def, file, options);
 
 		if (VUtils.isBlank(model.originalContentName)) {
 			delete def.originalContentName;
@@ -22,6 +21,6 @@ export const confirm: StepNodeConfigurer<EachPipelineStepDef, EachStepDefModel>[
 			def.itemName = model.itemName.trim();
 		}
 
-		handlers.onChange();
+		options.handlers.onChange();
 		return true;
 	};

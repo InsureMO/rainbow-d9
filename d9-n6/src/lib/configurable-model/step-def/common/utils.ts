@@ -37,7 +37,7 @@ export const createStepNode = (step: PipelineStepDef, file: FileDef, options: St
 		type, subOf, handlers, assistant,
 		linkPrevious, appendNode, appendLink
 	} = options;
-	const node = new StepNodeModel(step, file, {type, subOf, handlers});
+	const node = new StepNodeModel(step, file, {type, subOf, handlers, assistant});
 	setNodePosition(node, () => askStepNodePosition(step));
 	appendNode(node);
 	const link = linkPrevious(node);

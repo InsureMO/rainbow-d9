@@ -18,7 +18,7 @@ export const prepare: StepNodeConfigurer<AllInPipelineStepDef, CommonStepDefMode
 		if (model.temporary.mergeType === MergeType.MERGE_AS_PROPERTY) {
 			model.merge = def.merge as string;
 		}
-		model.errorHandles = {};
+		model.errorHandles = model.errorHandles ?? {};
 		const copyErrorHandle = (name: 'catchable' | 'uncatchable' | 'exposed' | 'any',
 		                         flagName: `useErrorHandlesFor${'Catchable' | 'Uncatchable' | 'Exposed' | 'Any'}`) => {
 			const handle = def.errorHandles?.[name];
@@ -27,7 +27,6 @@ export const prepare: StepNodeConfigurer<AllInPipelineStepDef, CommonStepDefMode
 			} else if (Array.isArray(handle)) {
 				model.temporary[flagName] = ErrorHandleType.STEPS;
 			} else {
-				model.errorHandles[name] = handle;
 				model.temporary[flagName] = ErrorHandleType.SNIPPET;
 			}
 		};
