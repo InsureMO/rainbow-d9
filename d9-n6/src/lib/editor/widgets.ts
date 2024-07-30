@@ -48,6 +48,9 @@ export const EditorWrapper = styled.div.attrs({
     > div.o23-playground-editor-content-backend {
         position: absolute;
         left: 100%;
+        // Width is necessary; 
+        // otherwise, it will cause the node width to be rendered incorrectly,
+        // ultimately resulting in the connections not being straight.
         width: 100%;
         opacity: 0;
         user-select: none;
