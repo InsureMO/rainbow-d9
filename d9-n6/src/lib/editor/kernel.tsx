@@ -6,7 +6,7 @@ import {StartNodeModel} from '../diagram';
 import {Labels} from '../labels';
 import {PlaygroundEventTypes, usePlaygroundEventBus} from '../playground-event-bus';
 import {EditorProps} from '../types';
-import {buildGrid, cloneDiagramNodes, computeGrid, GridCell} from './diagram-utils';
+import {buildGrid, cloneDiagramNodes, computeGrid, createLockedDiagramModel, GridCell} from './diagram-utils';
 import {ErrorBoundary} from './error-boundary';
 import {EditorKernelDiagramStatus, EditorKernelRefState, firstPaint, paint, repaint} from './painter';
 import {Toolbar} from './toolbar';
@@ -88,6 +88,8 @@ export const EditorKernel = (props: EditorProps) => {
 			newModel.setZoomLevel(zoom);
 		}
 		stateRef.current.engine.setModel(newModel);
+		// clear backend model to save dom performance
+		stateRef.current.engineBackend.setModel(createLockedDiagramModel());
 		stateRef.current.diagramStatus = EditorKernelDiagramStatus.IN_SERVICE;
 		forceUpdate();
 	}, [forceUpdate, stateRef.current.diagramStatus]);
