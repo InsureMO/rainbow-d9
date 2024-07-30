@@ -8,4 +8,5 @@ export const Editor = (props: EditorProps) => {
 
 export * from './widgets';
 export * from './diagram-utils';
+export * from './painter';
 export * from './kernel';

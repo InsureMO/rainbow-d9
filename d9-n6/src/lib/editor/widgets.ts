@@ -2,7 +2,7 @@ import {CssVars, DOM_KEY_WIDGET} from '@rainbow-d9/n2';
 import styled from 'styled-components';
 import {PlaygroundCssVars} from '../widgets';
 
-// noinspection CssUnresolvedCustomProperty
+// noinspection CssUnresolvedCustomProperty,CssUnusedSymbol
 export const EditorWrapper = styled.div.attrs({
 	[DOM_KEY_WIDGET]: 'o23-playground-editor',
 	'data-v-scroll': '',
@@ -14,18 +14,14 @@ export const EditorWrapper = styled.div.attrs({
     background-image: ${PlaygroundCssVars.EDITOR_BACKGROUND_IMAGE};
     background-size: ${PlaygroundCssVars.EDITOR_BACKGROUND_SIZE};
     background-position: ${PlaygroundCssVars.EDITOR_BACKGROUND_POSITION};
-    overflow: auto;
+    overflow: hidden;
 
-    &[data-diagram-status=paint] {
+    &[data-diagram-status=paint],
+    &[data-diagram-status=paint-on-position] {
         > div.o23-playground-editor-content {
-            opacity: 0;
+            //opacity: 0;
             user-select: none;
             pointer-events: none;
-
-            &::-webkit-scrollbar {
-                height: 0;
-                width: 0;
-            }
 
             div.node, div.node * {
                 user-select: none;
@@ -47,12 +43,15 @@ export const EditorWrapper = styled.div.attrs({
 
     > div.o23-playground-editor-content {
         height: 100%;
+    }
 
-        > svg {
-            > g[data-linkid]:hover {
-                z-index: 1;
-            }
-        }
+    > div.o23-playground-editor-content-backend {
+        position: absolute;
+        left: 100%;
+        width: 100%;
+        opacity: 0;
+        user-select: none;
+        pointer-events: none;
     }
 `;
 export const EditorToolbar = styled.div.attrs({[DOM_KEY_WIDGET]: 'o23-playground-editor-toolbar'})`
