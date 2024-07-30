@@ -1,5 +1,10 @@
 import {confirm} from './confirm';
-import {createSetsLikeSubNodesAndEndNode, createSubNodes, createSubNodesAndEndNode} from './create-sub-nodes';
+import {
+	createParallelSubNodesAndEndNode,
+	createSetsLikeSubNodesAndEndNode,
+	createSubNodes,
+	createSubNodesAndEndNode
+} from './create-sub-nodes';
 import {discard} from './discard';
 import {
 	createMainContentElement,
@@ -59,7 +64,8 @@ export const CommonStepDefs: CommonStepDefsType = {
 			{key: 'merge', port: PortMerge}
 		]
 	},
-	createSubNodes, createSubNodesAndEndNode, createSetsLikeSubNodesAndEndNode,
+	createSubNodes, createSubNodesAndEndNode,
+	createSetsLikeSubNodesAndEndNode, createParallelSubNodesAndEndNode,
 	findSubPorts,
 	createMainContentElement
 };

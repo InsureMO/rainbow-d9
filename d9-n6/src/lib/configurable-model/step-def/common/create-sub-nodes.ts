@@ -1,7 +1,13 @@
 import {Undefinable} from '@rainbow-d9/n1';
-import {AllInPipelineStepDef, PipelineStepDef, SetsLikePipelineStepDef} from '../../../definition';
+import {
+	AllInPipelineStepDef,
+	PipelineStepDef,
+	PipelineStepDiagramDef,
+	SetsLikePipelineStepDef
+} from '../../../definition';
 import {HandledNodeModel, JoinEndNodeModel, StepNodeEntityType, StepNodeModel} from '../../../diagram';
 import {CreateSubNodesOptions} from '../../types';
+import {CommonStepDefs, ErrorHandlesPortModel} from './index';
 import {
 	AnyErrorHandlePortModel,
 	CatchableErrorHandlePortModel,
@@ -21,11 +27,26 @@ export const createErrorHandlesSubNodes = (step: AllInPipelineStepDef, model: St
 	}
 
 	const createDefaultStep = options.assistant.createDefaultStep;
-	const createAskSteps = (name: 'catchable' | 'uncatchable' | 'exposed' | 'any'): (() => Undefinable<Array<PipelineStepDef>>) => {
+	const createAskSteps = (
+		name: 'catchable' | 'uncatchable' | 'exposed' | 'any',
+		findPortFromModel: () => Undefinable<ErrorHandlesPortModel>,
+		createPortFromModel: () => ErrorHandlesPortModel): (() => Undefinable<Array<PipelineStepDef>>) => {
 		return (): Undefinable<Array<PipelineStepDef>> => {
 			if (errorHandles[name] == null || !Array.isArray(errorHandles[name])) {
 				return (void 0);
 			}
+			const diagram = (step as PipelineStepDiagramDef).$diagram;
+			const hideSteps = diagram?.[`$fold${name.charAt(0).toUpperCase() + name.slice(1)}`] ?? false;
+			if (hideSteps) {
+				// still needs to create port model, but no link attached.
+				let sourcePort = findPortFromModel();
+				if (sourcePort == null) {
+					sourcePort = createPortFromModel();
+					model.addPort(sourcePort);
+				}
+				return (void 0);
+			}
+
 			if (errorHandles[name].length === 0) {
 				const defaultFirstStep: PipelineStepDef = createDefaultStep();
 				(errorHandles[name] as Array<PipelineStepDef>).push(defaultFirstStep);
@@ -35,26 +56,34 @@ export const createErrorHandlesSubNodes = (step: AllInPipelineStepDef, model: St
 	};
 	return [
 		{
-			steps: createAskSteps('catchable'),
+			name: 'catchable',
 			findPortFromModel: () => model.getPort(CatchableErrorHandlePortModel.NAME) as CatchableErrorHandlePortModel,
 			createPortFromModel: () => new CatchableErrorHandlePortModel()
 		},
 		{
-			steps: createAskSteps('exposed'),
+			name: 'exposed',
 			findPortFromModel: () => model.getPort(ExposedErrorHandlePortModel.NAME) as ExposedErrorHandlePortModel,
 			createPortFromModel: () => new ExposedErrorHandlePortModel()
 		},
 		{
-			steps: createAskSteps('uncatchable'),
+			name: 'uncatchable',
 			findPortFromModel: () => model.getPort(UncatchableErrorHandlePortModel.NAME) as UncatchableErrorHandlePortModel,
 			createPortFromModel: () => new UncatchableErrorHandlePortModel()
 		},
 		{
-			steps: createAskSteps('any'),
+			name: 'any',
 			findPortFromModel: () => model.getPort(AnyErrorHandlePortModel.NAME) as AnyErrorHandlePortModel,
 			createPortFromModel: () => new AnyErrorHandlePortModel()
 		}
-	].map(({steps, ...rest}) => {
+	].map(({name, findPortFromModel, createPortFromModel}) => {
+		return {
+			// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+			// @ts-ignore
+			steps: createAskSteps(name, findPortFromModel, createPortFromModel),
+			findPortFromModel,
+			createPortFromModel
+		};
+	}).map(({steps, ...rest}) => {
 		return {steps: steps(), ...rest};
 	}).filter(({steps}) => {
 		return steps != null && steps.length !== 0;
@@ -102,12 +131,22 @@ export const createSubNodesAndEndNode: CommonStepDefsType['createSubNodesAndEndN
 };
 
 export const createSetsLikeSubNodesAndEndNode: CommonStepDefsType['createSetsLikeSubNodesAndEndNode'] = (
-	model: StepNodeModel, options: CreateSubNodesAndEndNodeOptions): Undefinable<HandledNodeModel> => {
+	model: StepNodeModel, options: CreateSubNodesOptions): Undefinable<HandledNodeModel> => {
 	return createSubNodesAndEndNode(model, {
-		// eslint-disable-next-line @typescript-eslint/no-unused-vars
 		...options,
-		createSpecificSubNodes: (_node: StepNodeModel, options: CreateSubNodesOptions) => {
+		createSpecificSubNodes: (_node: StepNodeModel, options: CreateSubNodesOptions): Undefinable<Array<HandledNodeModel>> => {
 			const step = model.step as SetsLikePipelineStepDef;
+			const diagram = (step as PipelineStepDiagramDef).$diagram;
+			const hideSteps = diagram?.$foldSubSteps ?? false;
+			if (hideSteps) {
+				// still needs to create port model, but no link attached.
+				let sourcePort = model.getPort(StepsPortName) as StepsPortModel;
+				if (sourcePort == null) {
+					sourcePort = new StepsPortModel(StepsPortName);
+					model.addPort(sourcePort);
+				}
+				return (void 0);
+			}
 
 			const createDefaultStep = options.assistant.createDefaultStep;
 			// noinspection DuplicatedCode
@@ -131,3 +170,44 @@ export const createSetsLikeSubNodesAndEndNode: CommonStepDefsType['createSetsLik
 		}
 	});
 };
+
+export const createParallelSubNodesAndEndNode: CommonStepDefsType['createParallelSubNodesAndEndNode'] =
+	(model: StepNodeModel, options: CreateSubNodesOptions): Undefinable<HandledNodeModel> => {
+		return CommonStepDefs.createSubNodesAndEndNode(model, {
+			...options,
+			createSpecificSubNodes: (_node: StepNodeModel, options: CreateSubNodesOptions): Undefinable<Array<HandledNodeModel>> => {
+				const step = model.step as SetsLikePipelineStepDef;
+				const diagram = (step as PipelineStepDiagramDef).$diagram;
+				const hideSteps = diagram?.$foldSubSteps ?? false;
+				if (hideSteps) {
+					// still needs to create port model, but no link attached.
+					let sourcePort = model.getPort(StepsPortName) as StepsPortModel;
+					if (sourcePort == null) {
+						sourcePort = new StepsPortModel(StepsPortName);
+						model.addPort(sourcePort);
+					}
+					return (void 0);
+				}
+
+				const createDefaultStep = options.assistant.createDefaultStep;
+				const steps = step.steps ?? [];
+				if (steps.length === 0) {
+					// create a default snippet step
+					const defaultFirstStep: PipelineStepDef = createDefaultStep();
+					steps.push(defaultFirstStep);
+					// steps might be created, assign to anyway
+					step.steps = steps;
+				}
+				// noinspection DuplicatedCode
+				return steps.map((step, stepIndex) => {
+					return createSubNodesOfSingleRoute({
+						model, options,
+						askSteps: () => [step],
+						findPortFromModel: () => model.getPort(StepsPortName) as StepsPortModel,
+						createPortFromModel: () => new StepsPortModel(StepsPortName),
+						askFirstLinkExtras: () => ({index: stepIndex})
+					});
+				});
+			}
+		});
+	};

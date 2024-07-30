@@ -54,7 +54,7 @@ const parseContent = (parser: FileDefDeserializer, content?: MarkdownContent): F
 	return def;
 };
 
-const createRepaint = (options: {
+const repaint = (options: {
 	serializer: () => FileDefSerializer;
 	deserializer: () => FileDefDeserializer;
 	content: () => Undefinable<string>;
@@ -63,42 +63,40 @@ const createRepaint = (options: {
 	onStateContentChanged: () => Promise<void>;
 	onContentChanged: (content?: string) => void;
 }) => {
-	return () => {
-		const {stateRef, replace, onStateContentChanged, onContentChanged} = options;
+	const {stateRef, replace, onStateContentChanged, onContentChanged} = options;
 
-		const content = options.content();
-		const serializer = options.serializer();
-		const deserializer = options.deserializer();
+	const content = options.content();
+	const serializer = options.serializer();
+	const deserializer = options.deserializer();
 
-		try {
-			const def = parseContent(deserializer, content ?? '');
-			stateRef.current.content = content;
-			stateRef.current.serializer = serializer;
-			stateRef.current.deserializer = deserializer;
-			stateRef.current.def = def;
-			const handlers = createDiagramHandlers({
-				serializer, replace, syncContentToStateRef: (content: string) => {
-					stateRef.current.content = content;
-					(async () => await onStateContentChanged())();
-					return content;
-				}, notifyContentChanged: onContentChanged
-			});
-			const model = createDiagramNodes(def, handlers);
-			stateRef.current.engine.setModel(model);
-			delete stateRef.current.message;
-			stateRef.current.diagramStatus = EditorKernelDiagramStatus.PAINT;
-		} catch (e) {
-			console.error(e);
-			stateRef.current.content = content;
-			stateRef.current.serializer = serializer;
-			stateRef.current.deserializer = deserializer;
-			delete stateRef.current.def;
-			// replace with empty diagram model
-			stateRef.current.engine.setModel(createLockedDiagramModel());
-			stateRef.current.message = e.message;
-			stateRef.current.diagramStatus = EditorKernelDiagramStatus.IGNORED;
-		}
-	};
+	try {
+		const def = parseContent(deserializer, content ?? '');
+		stateRef.current.content = content;
+		stateRef.current.serializer = serializer;
+		stateRef.current.deserializer = deserializer;
+		stateRef.current.def = def;
+		const handlers = createDiagramHandlers({
+			serializer, replace, syncContentToStateRef: (content: string) => {
+				stateRef.current.content = content;
+				(async () => await onStateContentChanged())();
+				return content;
+			}, notifyContentChanged: onContentChanged
+		});
+		const model = createDiagramNodes(def, handlers);
+		stateRef.current.engine.setModel(model);
+		delete stateRef.current.message;
+		stateRef.current.diagramStatus = EditorKernelDiagramStatus.PAINT;
+	} catch (e) {
+		console.error(e);
+		stateRef.current.content = content;
+		stateRef.current.serializer = serializer;
+		stateRef.current.deserializer = deserializer;
+		delete stateRef.current.def;
+		// replace with empty diagram model
+		stateRef.current.engine.setModel(createLockedDiagramModel());
+		stateRef.current.message = e.message;
+		stateRef.current.diagramStatus = EditorKernelDiagramStatus.IGNORED;
+	}
 };
 
 export const EditorKernel = (props: EditorProps) => {
@@ -151,7 +149,7 @@ export const EditorKernel = (props: EditorProps) => {
 			&& content === stateRef.current.content) {
 			return;
 		}
-		createRepaint({
+		repaint({
 			serializer: () => serializer, deserializer: () => deserializer, content: () => content,
 			stateRef, replace,
 			onStateContentChanged: async () => {
@@ -160,7 +158,7 @@ export const EditorKernel = (props: EditorProps) => {
 			onContentChanged: (content?: string) => {
 				fire(PlaygroundEventTypes.CONTENT_CHANGED, content);
 			}
-		})();
+		});
 		forceUpdate();
 	}, [fire, replace, forceUpdate, serializer, deserializer, content]);
 	useEffect(() => {
@@ -190,7 +188,7 @@ export const EditorKernel = (props: EditorProps) => {
 	useEffect(() => {
 		// repaint on somewhere call REPAINT
 		const onRepaint = () => {
-			createRepaint({
+			repaint({
 				serializer: () => stateRef.current.serializer, deserializer: () => stateRef.current.deserializer,
 				content: () => stateRef.current.content,
 				stateRef, replace,
@@ -200,14 +198,14 @@ export const EditorKernel = (props: EditorProps) => {
 				onContentChanged: (content?: string) => {
 					fire(PlaygroundEventTypes.CONTENT_CHANGED, content);
 				}
-			})();
+			});
 			forceUpdate();
 		};
 		on(PlaygroundEventTypes.REPAINT, onRepaint);
 		return () => {
 			off(PlaygroundEventTypes.REPAINT, onRepaint);
 		};
-	}, [on, off, fire, replace, forceUpdate, serializer, deserializer, content]);
+	}, [on, off, fire, replace, forceUpdate]);
 
 	if (VUtils.isNotBlank(stateRef.current.message)) {
 		return <EditorWrapper data-diagram-status={EditorKernelDiagramStatus.IGNORED}>

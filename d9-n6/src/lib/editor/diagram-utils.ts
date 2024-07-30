@@ -175,27 +175,30 @@ export const buildGrid = (node: NodeModel, grid: Array<Array<GridCell>>, x: numb
 	if (node instanceof StepNodeModel) {
 		const {use} = node.step;
 		const ports = findStepDef(use)?.findSubPorts(node) ?? [];
-		ports.forEach((port, portIndex) => {
-			// one port, multiple links
-			Object.values(port.getLinks())
-				.sort((l1, l2) => {
-					return (l1.getOptions().extras?.index ?? 0) - (l2.getOptions().extras?.index ?? 0);
-				})
-				.forEach((link, linkIndex) => {
-					// only the first one use the same row with parent
-					// otherwise use next row
-					y = y + ((portIndex === 0 && linkIndex === 0) ? 0 : 1);
-					hasSubSteps = true;
-					const subNode = link.getTargetPort().getNode();
-					// first sub step node is in the same row and next column with parent node
-					grid[x + 1] = grid[x + 1] ?? [];
-					grid[x + 1][y] = {
-						node: subNode, x: subNode.getPosition().x, y: subNode.getPosition().y,
-						maxWidth: -1, maxHeight: -1, top: -1, left: -1
-					};
-					y = buildGrid(subNode, grid, x + 1, y);
-				});
-		});
+		ports
+			.map(port => ({port, links: Object.values(port.getLinks())}))
+			.filter(({links}) => links.length !== 0)
+			.forEach(({links}, portIndex) => {
+				// one port, multiple links
+				links
+					.sort((l1, l2) => {
+						return (l1.getOptions().extras?.index ?? 0) - (l2.getOptions().extras?.index ?? 0);
+					})
+					.forEach((link, linkIndex) => {
+						// only the first one use the same row with parent
+						// otherwise use next row
+						y = y + ((portIndex === 0 && linkIndex === 0) ? 0 : 1);
+						hasSubSteps = true;
+						const subNode = link.getTargetPort().getNode();
+						// first sub step node is in the same row and next column with parent node
+						grid[x + 1] = grid[x + 1] ?? [];
+						grid[x + 1][y] = {
+							node: subNode, x: subNode.getPosition().x, y: subNode.getPosition().y,
+							maxWidth: -1, maxHeight: -1, top: -1, left: -1
+						};
+						y = buildGrid(subNode, grid, x + 1, y);
+					});
+			});
 	}
 	// compute next step node
 	const port = node.getPort(NextStepPortModel.NAME);

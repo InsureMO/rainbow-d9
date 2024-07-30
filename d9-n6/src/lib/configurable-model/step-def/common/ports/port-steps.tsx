@@ -6,7 +6,6 @@ import {StepPortProps} from '../types';
 
 export const StepsPortName = 'steps';
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export const PortSteps = (props: StepPortProps) => {
 	const {node, engine} = props;
 

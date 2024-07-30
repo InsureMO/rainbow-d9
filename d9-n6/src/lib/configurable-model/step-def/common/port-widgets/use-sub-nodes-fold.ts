@@ -19,6 +19,8 @@ export const useSubNodesFold = (options: UseSubNodesFoldOptions) => {
 		}
 		def.$diagram[property] = !def.$diagram[property];
 		forceUpdate();
+		// notify content change, leads diagram repaint
+		model.handlers.onChange();
 	};
 
 	return {

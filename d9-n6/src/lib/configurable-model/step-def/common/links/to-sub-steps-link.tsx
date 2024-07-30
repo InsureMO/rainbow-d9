@@ -52,10 +52,18 @@ export abstract class ToSubStepsLinkModel extends DefaultLinkModel {
 		const {use} = node.step;
 		const def = findStepDef(use);
 		const ports = def.findSubPorts(node);
+		// typically, first port links to sub step nodes
 		const firstPort = ports[0];
-		const hasStepsLink = Object.values(firstPort.getLinks())[0].getSourcePort() instanceof StepsPortModel;
-		const stepsLinkCount = hasStepsLink ? Object.values(firstPort.getLinks()).length : 0;
-		return {ports, hasStepsLink, stepsLinkCount};
+		const linksOfFirstPort = Object.values(firstPort.getLinks());
+		if (linksOfFirstPort.length === 0) {
+			return {ports, hasStepsLink: false, stepsLinkCount: 0};
+		}
+		const sourcePort = linksOfFirstPort[0].getSourcePort();
+		if (!(sourcePort instanceof StepsPortModel)) {
+			// source port of link is not steps port, which means no sub steps
+			return {ports, hasStepsLink: false, stepsLinkCount: 0};
+		}
+		return {ports, hasStepsLink: true, stepsLinkCount: linksOfFirstPort.length};
 	}
 
 	protected computeCenterX(sourceX: number, targetX: number) {
