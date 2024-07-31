@@ -21,10 +21,7 @@ export const docs = {
 	stepErrorHandles: stepErrorHandles.replace(/\$/g, '$$$$')
 };
 
-export const mergeStepDocs = (doc: string) => {
-	const markdown = doc
-		.replace('${transformer}\n', docs.stepIOTransformer)
-		.replace('${errorHandles}\n', docs.stepErrorHandles);
+export const addTocToStepDocs = (markdown: string) => {
 	const indexes = new Array(6).fill(0);
 	let topLevel = 10; // any value >=6 is ok
 	return markdown.split('\n')
@@ -49,4 +46,16 @@ export const mergeStepDocs = (doc: string) => {
 				return `${parsed[0]} ${indexes.slice(topLevel, myLevel + 1).join('.')}. ${parsed[1]}`;
 			}
 		}).join('\n');
+};
+export const mergeStepDocsFreely = (doc: string, replacements: Record<string, string>) => {
+	const markdown = Object.keys(replacements).reduce((doc, key) => {
+		return doc.replace(`\${${key}}`, replacements[key]);
+	}, doc);
+	return addTocToStepDocs(markdown);
+};
+export const mergeStepDocs = (doc: string, toc = true) => {
+	const markdown = doc
+		.replace('${transformer}\n', docs.stepIOTransformer)
+		.replace('${errorHandles}\n', docs.stepErrorHandles);
+	return toc ? addTocToStepDocs(markdown) : markdown;
 };

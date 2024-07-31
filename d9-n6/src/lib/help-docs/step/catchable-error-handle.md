@@ -6,3 +6,4 @@ Handle `CatchableError` thrown by current step. The following parameters can be 
 - `$request`: The entire request data, including both content and context,
 - `$helpers` or `$`: Data manipulation helpers.
 
+> It is an async function, so `await` is available inside.

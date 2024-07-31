@@ -1,5 +1,5 @@
 import {PropValue} from '@rainbow-d9/n1';
-import {UnwrappedDropdown} from '@rainbow-d9/n2';
+import {OptionItemSort, UnwrappedDropdown} from '@rainbow-d9/n2';
 import React, {ReactNode} from 'react';
 import {ConfigurableElement, ConfigurableElementEditorProps} from '../../../../edit-dialog';
 import {HelpDocs} from '../../../../help-docs';
@@ -27,7 +27,7 @@ export const elementUse: ConfigurableElement = {
 			return {value: def.use, label: askUseLabel(def.use), stringify: () => askUseStringifyText(def.use)};
 		});
 		return <UnwrappedDropdown value={value} onValueChange={onValueChange} options={options}
-		                          clearable={false}
+		                          optionSort={OptionItemSort.ASC} clearable={false}
 		                          style={{justifySelf: 'start', width: 'unset', minWidth: 'min(200px, 100%)'}}/>;
 	},
 	helpDoc: HelpDocs.stepUse

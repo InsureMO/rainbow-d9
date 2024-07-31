@@ -26,6 +26,21 @@ expose-headers:
   x-b: bbb
 
 steps:
+  - name: Prepare Data
+    use: parallel    
+    steps:
+      - name: Prepare Codes
+        use: http-fetch
+        system: CodeService
+        endpoint: askCode
+      - name: Prepare Codes 2
+        use: http-get
+        system: CodeService
+        endpoint: askCode
+      - name: Prepare Codes 3
+        use: http-post
+        system: CodeService
+        endpoint: askCode
   - name: Do validation
     use: sets
     steps:
@@ -98,27 +113,6 @@ steps:
           - name: Write validation result to log
             use: snippet
             snippet: $.$logger.log('Invalid thing detected.', $factor.result);
-  - name: Log data
-    use: parallel
-    steps:
-      - name: Write log to file
-        use: snippet
-        snippet: $.$logger.log('Data received.', $factor);
-      - name: Write log to remote
-        use: sets
-        steps:
-          - name: Prepare log
-            use: snippet
-          - name: Write log
-            use: snippet
-            snippet: $.$logger.log('Data received.', $factor);
-    error-handles:
-      catchable:
-        - name: Catch catchable error
-          use: sets
-          steps:
-            - name: "Catch catchable #1"
-              use: snippet
 `;
 export const O23Playground = () => {
 	const def = useDemoMarkdown(DemoContent);

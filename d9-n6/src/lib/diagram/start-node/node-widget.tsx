@@ -117,8 +117,7 @@ export const ApiMethodPortWidget = (props: { def: PipelineFileDef }) => {
 	const exists = VUtils.isNotBlank(method);
 
 	return <PrePort label={Labels.ApiMethodLabel} required={true}
-	                defined={exists} all={exists}
-	                allAsBoolean={false} allAsGiven={`${method ?? ''}`.trim()} caseTransform="up"/>;
+	                defined={exists} all={exists} allAsGiven={`${method ?? ''}`.trim()} caseTransform="up"/>;
 };
 
 export const ApiHeadersPortWidget = (props: { def: PipelineFileDef }) => {

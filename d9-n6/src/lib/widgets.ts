@@ -8,6 +8,7 @@ const NODE_START_COLOR = '#ffb56b';
 const NODE_END_COLOR = '#e0b35f';
 const NODE_JOIN_END_COLOR = '#c4c2bf';
 const NODE_STEP_COLOR = '#54956b';
+const NODE_STEP_HTTP_COLOR = '#8fabb0';
 const NODE_STEP_SETS_COLOR = '#615cac';
 const NODE_ASYNC_SETS_STEP_COLOR = '#ff714b';
 const NODE_EACH_STEP_COLOR = '#c6a0d2';
@@ -248,6 +249,12 @@ export const PlaygroundCssVars = {
 	NODE_STEP_TITLE_BACKGROUND: `var(--o23-playground-node-step-title-background, linear-gradient(135deg, ${NODE_STEP_COLOR} 0%, ${color(NODE_STEP_COLOR).alpha(0.7)} 70%, ${color(NODE_STEP_COLOR).alpha(0.5)} 100%))`,
 	NODE_STEP_BODY_HEIGHT: 'var(--o23-playground-node-step-body-height, 32px)',
 	NODE_STEP_BODY_PADDING: 'var(--o23-playground-node-step-body-padding, 8px 0)',
+	NODE_STEP_HTTP_FETCH_BORDER: `var(--o23-playground-node-step-http-fetch-border, 2px solid ${NODE_STEP_HTTP_COLOR})`,
+	NODE_STEP_HTTP_FETCH_TITLE_BACKGROUND: `var(--o23-playground-node-step-http-fetch-title-background, linear-gradient(135deg, ${NODE_STEP_HTTP_COLOR} 0%, ${color(NODE_STEP_HTTP_COLOR).alpha(0.7)} 70%, ${color(NODE_STEP_HTTP_COLOR).alpha(0.5)} 100%))`,
+	NODE_STEP_HTTP_GET_BORDER: `var(--o23-playground-node-step-http-fetch-border, 2px solid ${NODE_STEP_HTTP_COLOR})`,
+	NODE_STEP_HTTP_GET_TITLE_BACKGROUND: `var(--o23-playground-node-step-http-fetch-title-background, linear-gradient(135deg, ${NODE_STEP_HTTP_COLOR} 0%, ${color(NODE_STEP_HTTP_COLOR).alpha(0.7)} 70%, ${color(NODE_STEP_HTTP_COLOR).alpha(0.5)} 100%))`,
+	NODE_STEP_HTTP_POST_BORDER: `var(--o23-playground-node-step-http-fetch-border, 2px solid ${NODE_STEP_HTTP_COLOR})`,
+	NODE_STEP_HTTP_POST_TITLE_BACKGROUND: `var(--o23-playground-node-step-http-fetch-title-background, linear-gradient(135deg, ${NODE_STEP_HTTP_COLOR} 0%, ${color(NODE_STEP_HTTP_COLOR).alpha(0.7)} 70%, ${color(NODE_STEP_HTTP_COLOR).alpha(0.5)} 100%))`,
 	NODE_STEP_SETS_BORDER: `var(--o23-playground-node-step-sets-border, 2px solid ${NODE_STEP_SETS_COLOR})`,
 	NODE_STEP_SETS_TITLE_BACKGROUND: `var(--o23-playground-node-step-sets-title-background, linear-gradient(135deg, ${NODE_STEP_SETS_COLOR} 0%, ${color(NODE_STEP_SETS_COLOR).alpha(0.7)} 70%, ${color(NODE_STEP_SETS_COLOR).alpha(0.5)} 100%))`,
 	NODE_STEP_ASYNC_SETS_BORDER: `var(--o23-playground-node-step-async-sets-border, 2px solid ${NODE_ASYNC_SETS_STEP_COLOR})`,

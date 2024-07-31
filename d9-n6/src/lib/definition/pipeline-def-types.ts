@@ -82,6 +82,34 @@ export interface SnowflakePipelineStepDef extends AllInPipelineStepDef {
 	use: StandardPipelineStepRegisterKey.SNOWFLAKE;
 }
 
+export interface HttpPipelineStepDef extends AllInPipelineStepDef {
+	system?: string;
+	endpoint?: string;
+	decorateUrl?: string;
+	method?: string;
+	timeout?: number;
+	generateHeaders?: string;
+	bodyUsed?: boolean;
+	generateBody?: string;
+	readResponse?: string;
+	responseErrorHandles?: { [key: string]: string; };
+}
+
+export interface HttpFetchPipelineStepDef extends HttpPipelineStepDef {
+	use: StandardPipelineStepRegisterKey.HTTP_FETCH;
+	responseErrorHandles?: { [key: string]: string; };
+}
+
+export interface HttpGetPipelineStepDef extends HttpPipelineStepDef {
+	use: StandardPipelineStepRegisterKey.HTTP_GET;
+	method: 'get';
+}
+
+export interface HttpPostPipelineStepDef extends HttpPipelineStepDef {
+	use: StandardPipelineStepRegisterKey.HTTP_POST;
+	method: 'get';
+}
+
 export interface SetsLikePipelineStepDef extends AllInPipelineStepDef {
 	steps: Array<PipelineStepDef>;
 }

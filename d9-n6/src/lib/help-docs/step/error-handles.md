@@ -36,6 +36,8 @@ Use snippet processing for handling error. The following parameters can be used 
 - `$request`: The entire request data, including both content and context,
 - `$helpers` or `$`: Data manipulation helpers.
 
+> All handlers are async functions, so `await` is available inside.
+
 After handling the exception in the snippet, can either return normally, rethrow the original exception, or construct and throw a new
 exception. The following examples will provide some references:
 

@@ -20,11 +20,13 @@ export interface TestedIsNumericValue extends TestedNumericValue {
 export interface ValueUtilsType {
 	readonly isEmpty: (v?: AnyValue) => boolean;
 	readonly isNotEmpty: (v?: AnyValue) => boolean;
+	readonly asUndefinedWhenEmpty: <V>(v?: V) => Undefinable<V>;
 	/**
 	 * check the given value is blank or not. null or blank string should be determined as true.
 	 */
 	readonly isBlank: (v?: AnyValue) => boolean;
 	readonly isNotBlank: (v2: AnyValue) => boolean;
+	readonly asUndefinedWhenBlank: <V>(v?: V) => Undefinable<V>;
 	/**
 	 * check the given value is primitive type or not.
 	 * only string/number/boolean will be treated as primitive type.
@@ -50,8 +52,10 @@ export interface ValueUtilsType {
 export const VUtils: ValueUtilsType = {
 	isEmpty: (v?: AnyValue): boolean => v == null || (typeof v === 'string' && v.length === 0),
 	isNotEmpty: (v?: AnyValue): boolean => (v ?? '') !== '',
+	asUndefinedWhenEmpty: <T>(v?: T) => VUtils.isNotEmpty(v) ? v : (void 0),
 	isBlank: (v?: AnyValue) => v == null || (typeof v === 'string' && v.trim().length === 0),
 	isNotBlank: (v?: AnyValue) => v != null && `${v}`.trim().length !== 0,
+	asUndefinedWhenBlank: <T>(v?: T) => VUtils.isNotBlank(v) ? v : (void 0),
 	isPrimitive: (v?: AnyValue) => v != null && ['string', 'number', 'boolean', 'symbol', 'bigint'].includes(typeof v),
 	isNumber: (v?: AnyValue) => {
 		if (VUtils.isBlank(v)) {

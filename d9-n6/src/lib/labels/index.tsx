@@ -66,8 +66,14 @@ export const Labels = {
 	StepUseSnippet: <IntlLabel keys={['o23', 'step', 'use', 'snippet']} value="Snippet"/>,
 	StepUseGetProperty: <IntlLabel keys={['o23', 'step', 'use', 'get-property']} value="Get Property"/>,
 	StepUseDelProperty: <IntlLabel keys={['o23', 'step', 'use', 'del-property']} value="Del Property"/>,
-	StepUseDelProperties: <IntlLabel keys={['o23', 'step', 'use', 'del-properties']} value="Del Properties"/>,
+	StepUseDelProperties: <IntlLabel keys={['o23', 'step', 'use', 'del-properties']}
+	                                 value="Del Properties (Alias for Del Property)"/>,
 	StepUseSnowflake: <IntlLabel keys={['o23', 'step', 'use', 'snowflake']} value="Snowflake"/>,
+	StepUseHttpFetch: <IntlLabel keys={['o23', 'step', 'use', 'http-fetch']} value="Http Fetch"/>,
+	StepUseHttpGet: <IntlLabel keys={['o23', 'step', 'use', 'http-get']}
+	                           value="Http Get (Using Get method for HTTP Fetch)"/>,
+	StepUseHttpPost: <IntlLabel keys={['o23', 'step', 'use', 'http-post']}
+	                            value="Http Post (Using Post method for HTTP Fetch)"/>,
 	StepUseSets: <IntlLabel keys={['o23', 'step', 'use', 'sets']} value="Sets"/>,
 	StepUseAsyncSets: <IntlLabel keys={['o23', 'step', 'use', 'async-sets']} value="Async Sets"/>,
 	StepUseEach: <IntlLabel keys={['o23', 'step', 'use', 'each']} value="Each"/>,
@@ -92,6 +98,9 @@ export const Labels = {
 	StepGetPropertyProperty: <IntlLabel keys={['o23', 'step', 'get-property', 'property']} value="Property"/>,
 	// step del-property, del-properties
 	StepDelPropertyProperty: <IntlLabel keys={['o23', 'step', 'del-property', 'property']} value="Property"/>,
+	// http fetch/get/post
+	StepHttpSystem: <IntlLabel keys={['o23', 'step', 'http', 'system']} value="System"/>,
+	StepHttpEndpoint: <IntlLabel keys={['o23', 'step', 'http', 'endpoint']} value="Endpoint"/>,
 	// step each
 	StepEachOriginalContentName: <IntlLabel keys={['o23', 'step', 'each', 'original-content-name']}
 	                                        value="Origin Content Variable"/>,

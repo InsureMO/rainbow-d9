@@ -19,6 +19,6 @@ export const PortMerge = (props: StepPortProps) => {
 		return null;
 	} else {
 		return <PostPort label={Labels.StepMergeAsProperty} required={false}
-		                 defined={true} all={true} allAsBoolean={false} allAsGiven={merge.trim()}/>;
+		                 defined={true} all={true} allAsGiven={merge.trim()}/>;
 	}
 };

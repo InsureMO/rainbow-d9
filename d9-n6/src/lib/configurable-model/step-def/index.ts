@@ -5,6 +5,8 @@ export * from './get-property';
 export * from './del-property';
 export * from './snowflake';
 
+export * from './http-fetch';
+
 export * from './sets';
 export * from './async-sets';
 export * from './each';

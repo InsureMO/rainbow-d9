@@ -1,0 +1,156 @@
+#### Environment variables
+
+All environment variable names depend on the definitions of the `System code` and `Endpoint code` step variables. For convenience, using the
+following
+definitions, which will be used in the environment variables:
+
+- `SYSTEM`: corresponding to the value of `System code`,
+- `ENDPOINT`: corresponding to the value of `Endpoint code`.
+
+Assuming the value of `System code` is `s1` and the value of `Endpoint code` is `order`, a system parameter
+named `CFG_ENDPOINTS_{SYSTEM}_{ENDPOINT}_URL` would thus be `CFG_ENDPOINTS_S1_ORDER_URL`.
+
+> Note that the values of `System code` and `Endpoint code` will be converted to uppercase, and any `.` characters will be replaced
+> with `_`. Additionally, based on common practices for environment parameter definitions, the values for `System code` and `Endpoint code`
+> cannot include `-`, `=` or whitespace characters.
+
+This step uses the following system environment variables definition:
+
+- `CFG_ENDPOINTS_{SYSTEM}_{ENDPOINT}_URL`: Definition of the endpoint’s URL. This URL can be a fully qualified URL or just a URL context
+  or template, depending on whether and how the `decorateUrl` step variable is used to modify and obtain the final effective access URL,
+- `CFG_ENDPOINTS_{SYSTEM}_GLOBAL_HEADERS`: HTTP request headers used in the step, which are global and will be used in all requests. Defined
+  using the string format `key1=value[;key2=value2...[;keyN=valueN]]`,
+- `CFG_ENDPOINTS_{SYSTEM}_{ENDPOINT}_HEADERS`: HTTP request headers used in the step. Defined using the string
+  format `key1=value[;key2=value2...[;keyN=valueN]]`. If the same key as defined in the global definition is used, the definition here takes
+  precedence, and the value in the global definition will be overwritten,
+- `CFG_ENDPOINTS_{SYSTEM}_GLOBAL_TIMEOUT`: Timeout for the HTTP request in seconds. If not defined, the default value is -1, which means no
+  timeout,
+- `CFG_ENDPOINTS_{SYSTEM}_{ENDPOINT}_TIMEOUT`: Timeout for the HTTP request in seconds. If not defined, use the global definition instead.
+
+> Key of headers are trimmed automatically.
+
+> The timeout definition only takes effect when there is no `timeout` defined in the step variables.
+
+#### Step variables
+
+Making a remote HTTP call requires many parameter definitions, some of which are mandatory and some optional.
+
+##### `System code`
+
+Code for accessing the remote system. Generally, a remote system provides a set of APIs. To facilitate the use of the same defined data in
+different steps, the remote system needs to be defined in code first. This variable is mandatory and case-insensitive.
+
+##### `Endpoint code`
+
+Define an endpoint code for the remote system. This code can represent a single API or a strongly related set of APIs, depending on
+how `decorateUrl` is used.
+
+##### `Decorate URL`
+
+This variable is optional and can be used to decorate the URL of the endpoint. The value can be a JavaScript snippet that will be executed
+as a JavaScript function. This function accepts the following input parameters:
+
+- `$endpointUrl`: The URL read from the environment based on the `System code` and `Endpoint code` definitions, can be a fully qualified URL
+  or just a
+  URL context or template,
+- `$factor`: The content portion of the request data, excluding context data,
+- `$request`: The entire request data, including both content and context,
+- `$helpers` or `$`: Data manipulation helpers.
+
+This function should return the final URL to be used for the HTTP request. If this snippet is not defined, then use the URL configured in
+the environment variables for access.
+
+##### `Http method`
+
+The HTTP method to be used for the request. This variable is mandatory and case-insensitive. It is optional, with a default value of `post`.
+
+##### `Timeout`
+
+The timeout for the HTTP request, in seconds. If not defined, use the timeout configured in the environment variables. If none of these are
+defined, use `-1`, which means no timeout.
+
+##### `Generate request headers`
+
+This variable is optional and can be used to build the HTTP request headers. The value can be a JavaScript snippet that will be executed
+as a JavaScript function. This function accepts the following input parameters:
+
+- `$factor`: The content portion of the request data, excluding context data,
+- `$request`: The entire request data, including both content and context,
+- `$helpers` or `$`: Data manipulation helpers.
+
+This function should return an object (`Record<string, string>`) containing the headers to be used in the HTTP request. If the same key as
+defined in the environment definition is used, the definition here takes precedence, and the headers in the environment definition will be
+overwritten. If this snippet is not defined, then use the headers in the environment definition.
+
+> Key of headers are NOT trimmed.
+
+##### `Use request body`
+
+Specify whether the HTTP request uses the HTTP body content. This variable is optional and follows these rules:
+
+- Not defined: For requests other than `GET`, use the HTTP body by default,
+- `true`: Always use the HTTP body, regardless of the request method,
+- `false`: Always avoid using the HTTP body, regardless of the request method.
+
+> How to generate the HTTP body content is referenced by the definition of the `generateBody` variable.
+
+##### `Generate request body`
+
+This variable is optional and can be used to build the HTTP request body. The value can be a JavaScript snippet that will be executed
+as a JavaScript function. This function accepts the following input parameters:
+
+- `$factor`: The content portion of the request data, excluding context data,
+- `$request`: The entire request data, including both content and context,
+- `$helpers` or `$`: Data manipulation helpers.
+
+This function could return anything. If the returned data is not `null`, `undefined`, and not a string, use `JSON.stringify` to convert it
+to a string. `null` and `undefined` essentially represent the absence of an HTTP body. If this snippet is not defined, the default behavior
+is to use `$factor` as the HTTP body after processing it accordingly.
+
+##### `Read response body`
+
+This variable is optional and can be used to read the HTTP response. The value can be a JavaScript snippet that will be executed
+as a JavaScript function. This function accepts the following input parameters:
+
+- `$response`: The response (`Response`, check [node-fetch](https://www.npmjs.com/package/node-fetch) for more details) object from the HTTP
+  request,
+- `$factor`: The content portion of the request data, excluding context data,
+- `$request`: The entire request data, including both content and context,
+- `$helpers` or `$`: Data manipulation helpers.
+
+This function could return anything, and the returned data will be used as output data of this step. If this snippet is not defined, the
+response should be read as JSON by `Response.json()`. It is important to note that the response body will only be read if the response
+status is in the normal range (`1xx`, `2xx`, `3xx`); otherwise, it will skip to the error handling.
+
+> It is an async function, so `await` is available inside.
+
+##### `Response error handling`
+
+Error handling for different HTTP response statuses is generally implemented in a way that only `4xx` and `5xx` statuses trigger
+error handling. Each exception handling snippet is designed for a specific status; if a status does not have a defined handler, a
+default `UncatchableError` will be thrown, with an error code of `O03-00010`. Error handling can either rethrow the original exception,
+wrap the exception and rethrow it, or return data normally. If data is returned normally, it will be used as the output data for this step.
+
+There are two special cases:
+
+- If the request times out, the status is `600`,
+- If the exception is not caused by the request itself, such as an exception thrown due to a problem with a certain configuration logic,
+  then,
+	- If the exception type is `UncatchableError`, no further handling will be performed and the exception will be directly thrown to the
+	  outer layer,
+	- Otherwise, use the exception handler with status `000` for processing.
+
+> DO NOT rethrow an error that is not an `UncatchableError` from the error handler, as it will be caught again by the error handler with
+> status `000`, which could lead to confusion.
+
+> All handlers are async functions, so `await` is available inside.
+
+#### Returning
+
+The step's return data is from the response of the HTTP request or error handling.
+
+> The returned data can still be further processed during the `Write to output` stage.
+
+${transformer}
+
+${errorHandles}
