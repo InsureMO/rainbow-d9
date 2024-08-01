@@ -2,6 +2,7 @@ import {useForceUpdate, VUtils} from '@rainbow-d9/n1';
 import React, {Fragment, useEffect, useRef, useState} from 'react';
 import {Collapse, ElementHelp, Expand} from '../icons';
 import {Labels} from '../labels';
+import {PlaygroundModuleAssistant} from '../types';
 import {EditDialogEventTypes, useEditDialogEventBus} from './edit-dialog-event-bus';
 import {HelpDoc} from './help-doc';
 import {useElementVisible} from './hooks';
@@ -30,6 +31,7 @@ export interface DialogSpecificElementProps {
 	element: ConfigurableElement;
 	model: ConfigurableModel;
 	visible: boolean;
+	assistant: Required<PlaygroundModuleAssistant>;
 }
 
 export interface DialogSpecificElementWrapperProps extends DialogSpecificElementProps {
@@ -37,7 +39,7 @@ export interface DialogSpecificElementWrapperProps extends DialogSpecificElement
 }
 
 export const DialogSpecificElementWrapper = (props: DialogSpecificElementWrapperProps) => {
-	const {element, model, visible = true, askParentExpand} = props;
+	const {element, model, visible = true, assistant, askParentExpand} = props;
 	const {
 		anchor, label, editor: Editor, helpDoc,
 		group, collapsible = false
@@ -125,7 +127,7 @@ export const DialogSpecificElementWrapper = (props: DialogSpecificElementWrapper
 			? <SpecificElementEditorPlaceholder data-visible={visible}/>
 			: null}
 		{(!group && Editor != null)
-			? <Editor model={model} onValueChanged={onValueChanged}/>
+			? <Editor model={model} onValueChanged={onValueChanged} assistant={assistant}/>
 			: null}
 		{hasHelpDoc
 			? <SpecificElementHelpDoc data-visible={visible && showHelp}>
@@ -152,7 +154,7 @@ export const DialogSpecificElementInitExpand = (props: { element: ConfigurableEl
 };
 
 export const DialogSpecificElement = (props: DialogSpecificElementProps) => {
-	const {element, model} = props;
+	const {element, model, assistant} = props;
 
 	const {on, off, fire} = useDialogSpecificElementEventBus();
 	const [visible, setVisible] = useState(props.visible ?? true);
@@ -178,7 +180,9 @@ export const DialogSpecificElement = (props: DialogSpecificElementProps) => {
 		{element.children != null
 			? element.children
 				.map((child) => {
-					return <DialogSpecificElement element={child} model={model} visible={visible} key={child.code}/>;
+					return <DialogSpecificElement element={child} model={model} visible={visible}
+					                              assistant={assistant}
+					                              key={child.code}/>;
 				})
 			: null}
 		<DialogSpecificElementInitExpand element={element}/>
@@ -188,16 +192,19 @@ export const DialogSpecificElement = (props: DialogSpecificElementProps) => {
 export interface DialogSpecificProps {
 	elements: Array<ConfigurableElement>;
 	model: ConfigurableModel;
+	assistant: Required<PlaygroundModuleAssistant>;
 }
 
 export const DialogSpecificElements = (props: DialogSpecificProps) => {
-	const {elements, model} = props;
+	const {elements, model, assistant} = props;
 
 	return <SpecificElementsContainer>
 		{elements
 			.map((element) => {
 				// top level, always visible
-				return <DialogSpecificElement element={element} model={model} visible={true} key={element.code}/>;
+				return <DialogSpecificElement element={element} model={model} visible={true}
+				                              assistant={assistant}
+				                              key={element.code}/>;
 			})}
 	</SpecificElementsContainer>;
 };

@@ -9,6 +9,7 @@ import {
 } from '../../edit-dialog';
 import {HelpDocs} from '../../help-docs';
 import {Labels} from '../../labels';
+import {CommonElementEditorStyles} from '../styles';
 import {PipelineFileDefModel} from './types';
 
 const ParseIgnoredOrDefaultOptions = [
@@ -39,8 +40,7 @@ export const elementBody: ConfigurableElement = {
 		const value = model.body == null ? 'default' : model.body ? 'parse' : 'ignored';
 
 		return <UnwrappedDropdown value={value} onValueChange={onValueChange} options={ParseIgnoredOrDefaultOptions}
-		                          clearable={false}
-		                          style={{justifySelf: 'start', width: 'unset', minWidth: 'min(200px, 100%)'}}/>;
+		                          clearable={false} style={CommonElementEditorStyles.dropdown}/>;
 	},
 	helpDoc: HelpDocs.pipelineBody
 };

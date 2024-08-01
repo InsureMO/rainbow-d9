@@ -10,6 +10,7 @@ import {
 } from '../../edit-dialog';
 import {HelpDocs} from '../../help-docs';
 import {Labels} from '../../labels';
+import {CommonElementEditorStyles} from '../styles';
 import {VerticalLinesEditor} from '../vertical-lines-editor';
 import {PipelineFileDefModel} from './types';
 
@@ -193,8 +194,7 @@ export const FilesEditor = (props: ConfigurableElementEditorProps<PipelineFileDe
 
 	return <VerticalLinesEditor>
 		<UnwrappedDropdown value={type} onValueChange={onTypeChanged} options={FilesOptions}
-		                   clearable={false}
-		                   style={{justifySelf: 'start', width: 'unset', minWidth: 'min(200px, 100%)'}}/>
+		                   clearable={false} style={CommonElementEditorStyles.dropdown}/>
 		<UnwrappedTextarea value={model.temporary?.files?.files ?? ''} onValueChange={onFilesChanged}
 		                   disabled={type !== 'specified'} ref={inputRef}
 		                   style={{

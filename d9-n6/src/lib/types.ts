@@ -14,6 +14,18 @@ export interface PlaygroundModuleUsage {
 	useN8?: boolean;
 }
 
+export interface PlaygroundSystemEndpointForHttp {
+	code: string;
+	name: string;
+	url?: string;
+}
+
+export interface PlaygroundSystemForHttp {
+	code: string;
+	name: string;
+	endpoints: Array<PlaygroundSystemEndpointForHttp>;
+}
+
 export interface PlaygroundModuleAssistant {
 	/**
 	 * create default step placeholder.
@@ -22,8 +34,9 @@ export interface PlaygroundModuleAssistant {
 	 * 2. first sub step of new step sets
 	 */
 	createDefaultStep?: () => PipelineStepDef;
-	isValidRefPipeline?: (code: string) => boolean;
-	isValidRefStep?: (code: string) => boolean;
+	askRefPipelines?: () => Array<string>;
+	askRefSteps?: () => Array<string>;
+	askSystemsForHttp?: () => Array<PlaygroundSystemForHttp>;
 }
 
 export interface PlaygroundBehavior {

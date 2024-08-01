@@ -4,6 +4,7 @@ import React, {ReactNode} from 'react';
 import {ConfigurableElement, ConfigurableElementEditorProps} from '../../edit-dialog';
 import {HelpDocs} from '../../help-docs';
 import {Labels} from '../../labels';
+import {CommonElementEditorStyles} from '../styles';
 import {VerticalLinesEditor} from '../vertical-lines-editor';
 import {AllIgnoredOrArrayOptions, allOrArray, ANCHOR_PATH_PARAMS, ANCHOR_ROUTE} from './helper';
 import {PipelineFileDefModel} from './types';
@@ -33,8 +34,7 @@ const PathParamsEditor = (props: ConfigurableElementEditorProps<PipelineFileDefM
 
 	return <VerticalLinesEditor>
 		<UnwrappedDropdown value={value} onValueChange={onValueChange} options={AllIgnoredOrArrayOptions}
-		                   clearable={false}
-		                   style={{justifySelf: 'start', width: 'unset', minWidth: 'min(200px, 100%)'}}/>
+		                   clearable={false} style={CommonElementEditorStyles.dropdown}/>
 		<UnwrappedDecorateInput leads={[Labels.ParameterNames]}
 		                        value={model.temporary?.pathParams ?? ''}
 		                        onValueChange={VUtils.noop}

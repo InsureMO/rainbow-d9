@@ -8,6 +8,7 @@ import {
 	ConfigurableElementEditorProps
 } from '../../edit-dialog';
 import {Labels} from '../../labels';
+import {CommonElementEditorStyles} from '../styles';
 import {VerticalLinesEditor} from '../vertical-lines-editor';
 import {FileDefModel, PipelineFileDefModel} from './types';
 
@@ -74,8 +75,7 @@ export const AllIgnoredOrArrayEditor = (props: AllIgnoredOrArrayEditorProps) => 
 
 	return <VerticalLinesEditor>
 		<UnwrappedDropdown value={value} onValueChange={onValueChange} options={AllIgnoredOrArrayOptions}
-		                   clearable={false}
-		                   style={{justifySelf: 'start', width: 'unset', minWidth: 'min(200px, 100%)'}}/>
+		                   clearable={false} style={CommonElementEditorStyles.dropdown}/>
 		<UnwrappedDecorateInput leads={[lead]}
 		                        value={model.temporary?.[name] ?? ''}
 		                        onValueChange={onArrayValueChange}

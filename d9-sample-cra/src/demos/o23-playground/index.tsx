@@ -1,5 +1,6 @@
 import {StandaloneRoot} from '@rainbow-d9/n1';
 import {$d9n2, GlobalRoot} from '@rainbow-d9/n2';
+import {PlaygroundModuleAssistant} from '@rainbow-d9/n6';
 import {useDemoMarkdown} from '../use-demo-markdown';
 import DemoData from './demo.json';
 import {markdown as DemoContent} from './demo.md';
@@ -32,15 +33,15 @@ steps:
       - name: Prepare Codes
         use: http-fetch
         system: CodeService
-        endpoint: askCode
+        endpoint: askProductCodes
       - name: Prepare Codes 2
         use: http-get
         system: CodeService
-        endpoint: askCode
+        endpoint: askProductCategoryCodes
       - name: Prepare Codes 3
         use: http-post
-        system: CodeService
-        endpoint: askCode
+        system: AuthService
+        endpoint: checkToken
   - name: Do validation
     use: sets
     steps:
@@ -116,9 +117,24 @@ steps:
 `;
 export const O23Playground = () => {
 	const def = useDemoMarkdown(DemoContent);
-
+	const externalDefs = {
+		httpSystems: (() => {
+			return [
+				{
+					code: 'CodeService', name: 'Codes Service', endpoints: [
+						{code: 'askProductCodes', name: 'Ask Product Codes'}
+					]
+				},
+				{
+					code: 'CacheService', name: 'Cache Service', endpoints: [
+						{code: 'askCache', name: 'Ask Cache'}
+					]
+				}
+			];
+		}) as PlaygroundModuleAssistant['askSystemsForHttp']
+	};
 	return <GlobalRoot>
-		<StandaloneRoot {...def} $root={DemoData}/>
+		<StandaloneRoot {...def} $root={DemoData} externalDefs={externalDefs}/>
 	</GlobalRoot>;
 };
 

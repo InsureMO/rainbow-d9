@@ -3,7 +3,7 @@ import React, {useEffect, useRef, useState} from 'react';
 import {Accept, Back} from '../icons';
 import {Labels} from '../labels';
 import {PlaygroundEventTypes, usePlaygroundEventBus} from '../playground-event-bus';
-import {MarkdownContent} from '../types';
+import {MarkdownContent, PlaygroundModuleAssistant} from '../types';
 import {EditDialogEventBusProvider, EditDialogEventTypes, useEditDialogEventBus} from './edit-dialog-event-bus';
 import {DialogHelpDesk} from './help-desk';
 import {LayoutController} from './layout-controller';
@@ -56,10 +56,11 @@ export interface DialogWorkAreaProps {
 	/** discard change */
 	discard: (model: ConfigurableModel) => void;
 	model: ConfigurableModel;
+	assistant: Required<PlaygroundModuleAssistant>;
 }
 
 export const DialogWorkArea = (props: DialogWorkAreaProps) => {
-	const {helpDoc, elements, confirm, discard, model} = props;
+	const {helpDoc, elements, confirm, discard, model, assistant} = props;
 
 	const {fire} = usePlaygroundEventBus();
 	const {fire: fireDialog} = useEditDialogEventBus();
@@ -89,7 +90,7 @@ export const DialogWorkArea = (props: DialogWorkAreaProps) => {
 			</EditorDialogCloseButton>
 		</EditorDialogCloser>
 		<DialogHelpDesk helpDoc={helpDoc}/>
-		<DialogSpecific elements={elements} model={model}/>
+		<DialogSpecific elements={elements} model={model} assistant={assistant}/>
 		<DialogNavigator elements={elements} model={model}/>
 	</EditDialogContentContainer>;
 
@@ -104,6 +105,7 @@ export interface DialogContentProps {
 	confirm: (model: ConfigurableModel) => ConfigurableElementAnchor | true;
 	/** discard change */
 	discard: (model: ConfigurableModel) => void;
+	assistant: Required<PlaygroundModuleAssistant>;
 }
 
 export interface DialogContentState {
@@ -113,7 +115,7 @@ export interface DialogContentState {
 export const DialogContent = (props: DialogContentProps) => {
 	const {
 		helpDoc, elements,
-		prepare, confirm, discard
+		prepare, confirm, discard, assistant
 	} = props;
 
 	const [state] = useState<DialogContentState>({model: prepare()});
@@ -121,7 +123,8 @@ export const DialogContent = (props: DialogContentProps) => {
 	return <EditDialogEventBusProvider>
 		<StateHolder/>
 		<LayoutController/>
-		<DialogWorkArea helpDoc={helpDoc} elements={elements} confirm={confirm} discard={discard} model={state.model}/>
+		<DialogWorkArea helpDoc={helpDoc} elements={elements} confirm={confirm} discard={discard} model={state.model}
+		                assistant={assistant}/>
 		<DialogContentInitializer/>
 	</EditDialogEventBusProvider>;
 };

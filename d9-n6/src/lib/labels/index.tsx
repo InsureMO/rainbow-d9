@@ -62,22 +62,19 @@ export const Labels = {
 	StepFirstSubStep: <IntlLabel keys={['o23', 'step', 'first-sub-step']} value="In"/>,
 	JoinEndNodeTitle: <IntlLabel keys={['o23', 'node', 'join-end']} value="End of "/>,
 
-	// step use
-	StepUseSnippet: <IntlLabel keys={['o23', 'step', 'use', 'snippet']} value="Snippet"/>,
-	StepUseGetProperty: <IntlLabel keys={['o23', 'step', 'use', 'get-property']} value="Get Property"/>,
-	StepUseDelProperty: <IntlLabel keys={['o23', 'step', 'use', 'del-property']} value="Del Property"/>,
-	StepUseDelProperties: <IntlLabel keys={['o23', 'step', 'use', 'del-properties']}
-	                                 value="Del Properties (Alias for Del Property)"/>,
-	StepUseSnowflake: <IntlLabel keys={['o23', 'step', 'use', 'snowflake']} value="Snowflake"/>,
-	StepUseHttpFetch: <IntlLabel keys={['o23', 'step', 'use', 'http-fetch']} value="Http Fetch"/>,
-	StepUseHttpGet: <IntlLabel keys={['o23', 'step', 'use', 'http-get']}
-	                           value="Http Get (Using Get method for HTTP Fetch)"/>,
-	StepUseHttpPost: <IntlLabel keys={['o23', 'step', 'use', 'http-post']}
-	                            value="Http Post (Using Post method for HTTP Fetch)"/>,
-	StepUseSets: <IntlLabel keys={['o23', 'step', 'use', 'sets']} value="Sets"/>,
-	StepUseAsyncSets: <IntlLabel keys={['o23', 'step', 'use', 'async-sets']} value="Async Sets"/>,
-	StepUseEach: <IntlLabel keys={['o23', 'step', 'use', 'each']} value="Each"/>,
-	StepUseParallel: <IntlLabel keys={['o23', 'step', 'use', 'parallel']} value="Parallel"/>,
+	// step use, do not use i18n for use labels
+	StepUseSnippet: 'Snippet',
+	StepUseGetProperty: 'Get Property',
+	StepUseDelProperty: 'Del Property',
+	StepUseDelProperties: 'Del Properties (Alias for Del Property)',
+	StepUseSnowflake: 'Snowflake',
+	StepUseHttpFetch: 'Http Fetch',
+	StepUseHttpGet: 'Http Get (Using Get method for HTTP Fetch)',
+	StepUseHttpPost: 'Http Post (Using Post method for HTTP Fetch)',
+	StepUseSets: 'Sets',
+	StepUseAsyncSets: 'Async Sets',
+	StepUseEach: 'Each',
+	StepUseParallel: 'Parallel',
 	// step error handling types
 	StepErrorHandleTypeNone: <IntlLabel keys={['o23', 'step', 'error-handle', 'none']} value="Ignored"/>,
 	StepErrorHandleTypeSnippet: <IntlLabel keys={['o23', 'step', 'error-handle', 'none']} value="Use Snippet"/>,
@@ -99,6 +96,7 @@ export const Labels = {
 	// step del-property, del-properties
 	StepDelPropertyProperty: <IntlLabel keys={['o23', 'step', 'del-property', 'property']} value="Property"/>,
 	// http fetch/get/post
+	StepHttpRemote: <IntlLabel keys={['o23', 'step', 'http', 'system']} value="Remote HTTP API"/>,
 	StepHttpSystem: <IntlLabel keys={['o23', 'step', 'http', 'system']} value="System"/>,
 	StepHttpEndpoint: <IntlLabel keys={['o23', 'step', 'http', 'endpoint']} value="Endpoint"/>,
 	// step each
@@ -136,17 +134,19 @@ export const Labels = {
 	BadgeChecked: <IntlLabel keys={['o23', 'badge', 'checked']} value={<ElementChecked/>}/>,
 	BadgeMissed: <IntlLabel keys={['o23', 'badge', 'missed']} value={<ElementMissed/>}/>,
 	BadgeBanned: <IntlLabel keys={['o23', 'badge', 'banned']} value={<ElementBanned/>}/>,
-	NoCodeDefinedInFileDef: <IntlLabel keys={['o23', 'pipeline', 'code', 'undefined']} value="No code defined"/>
+	NoCodeDefinedInFileDef: <IntlLabel keys={['o23', 'pipeline', 'code', 'undefined']} value="No code defined"/>,
+	// illegal
+	IllegalDropdownOptionSuffix: <IntlLabel keys={['o23', 'illegal', 'dropdown', 'option', 'suffix']}
+	                                        value="(Illegal)"/>
 };
 
 export const asUseLabelKey = (use: string) => {
 	return 'StepUse' + (use ?? '').trim().split('-').reduce((a, b) => a + b.charAt(0).toUpperCase() + b.slice(1), '');
 };
 
+export const asBeautifiedUse = (use: string) => {
+	return use.split('-').map(s => s.charAt(0).toUpperCase() + s.slice(1)).join(' ');
+};
 export const askUseLabel = (use: string) => {
 	return Labels[asUseLabelKey(use)];
-};
-
-export const askUseStringifyText = (use: string) => {
-	return Labels[`${asUseLabelKey(use)}StringifyText`] ?? use;
 };

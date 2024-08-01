@@ -272,7 +272,8 @@ export const StartNodeWidget = (props: StartNodeWidgetProps) => {
 		fire(PlaygroundEventTypes.SHOW_EDIT_DIALOG,
 			<DialogContent helpDoc={HelpDocs.pipeline}
 			               prepare={prepareModel} confirm={onConfirm} discard={onDiscard}
-			               elements={FileDefs.elements}/>);
+			               elements={FileDefs.elements}
+			               assistant={node.assistant}/>);
 	};
 
 	let body = (void 0);

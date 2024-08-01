@@ -4,6 +4,7 @@ import React, {ReactNode} from 'react';
 import {ConfigurableElement, ConfigurableElementBadgeMissed, ConfigurableElementEditorProps} from '../../edit-dialog';
 import {HelpDocs} from '../../help-docs';
 import {Labels} from '../../labels';
+import {CommonElementEditorStyles} from '../styles';
 import {PipelineFileDefModel} from './types';
 
 export const elementMethod: ConfigurableElement = {
@@ -29,8 +30,7 @@ export const elementMethod: ConfigurableElement = {
 			{value: 'patch', label: 'PATCH'}
 		];
 		return <UnwrappedDropdown value={model.method ?? ''} onValueChange={onValueChange} options={options}
-		                          clearable={false}
-		                          style={{justifySelf: 'start', width: 'unset', minWidth: 'min(200px, 100%)'}}/>;
+		                          clearable={false} style={CommonElementEditorStyles.dropdown}/>;
 	},
 	helpDoc: HelpDocs.pipelineMethod
 };

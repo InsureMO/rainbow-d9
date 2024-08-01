@@ -11,6 +11,7 @@ import {HelpDocs} from '../../../../help-docs';
 import {Labels} from '../../../../labels';
 import {PlaygroundCssVars} from '../../../../widgets';
 import {createSelectableJsEditor} from '../../../js-editor/selectable-js-editor';
+import {CommonElementEditorStyles} from '../../../styles';
 import {VerticalLinesEditor} from '../../../vertical-lines-editor';
 import {CommonStepDefModel, MergeType} from '../types';
 
@@ -84,8 +85,8 @@ const MergeToRequestEditor = (props: ConfigurableElementEditorProps<CommonStepDe
 	];
 	return <VerticalLinesEditor>
 		<UnwrappedDropdown value={model.temporary?.mergeType ?? MergeType.REPLACE}
-		                   onValueChange={onValueChange} options={options} clearable={false}
-		                   style={{justifySelf: 'start', width: 'unset', minWidth: 'min(200px, 100%)'}}/>
+		                   onValueChange={onValueChange} options={options}
+		                   clearable={false} style={CommonElementEditorStyles.dropdown}/>
 		<UnwrappedDecorateInput leads={[Labels.StepIOMergeBackAsPropertyName]}
 		                        value={model.merge ?? ''}
 		                        onValueChange={onNameChange}

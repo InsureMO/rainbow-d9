@@ -1,14 +1,15 @@
 import {ReactNode} from 'react';
-import {MarkdownContent} from '../types';
+import {MarkdownContent, PlaygroundModuleAssistant} from '../types';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type ConfigurableModel = any;
 export type ConfigurableElementAnchor = string;
 
 export interface ConfigurableElementEditorProps<M extends ConfigurableModel = ConfigurableModel> {
-	model: M,
+	model: M;
 	/* default repaint is true */
-	onValueChanged: (repaint?: boolean) => void
+	onValueChanged: (repaint?: boolean) => void;
+	assistant: Required<PlaygroundModuleAssistant>;
 }
 
 export interface ConfigurableElement {

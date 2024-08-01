@@ -2,6 +2,7 @@ import {PropValue} from '@rainbow-d9/n1';
 import {DropdownOptions, UnwrappedDropdown} from '@rainbow-d9/n2';
 import React from 'react';
 import {ConfigurableElementEditorProps} from '../../edit-dialog';
+import {CommonElementEditorStyles} from '../styles';
 import {VerticalLinesEditor} from '../vertical-lines-editor';
 import {JsEditor} from './editor';
 
@@ -41,8 +42,7 @@ export const createSelectableJsEditor = <M, FV>(options: SelectableJsEditorOptio
 				/** @ts-ignore */}
 			<UnwrappedDropdown value={flag}
 			                   onValueChange={onValueChange} options={flagCandidates}
-			                   clearable={false} filterable={false}
-			                   style={{justifySelf: 'start', width: 'unset', minWidth: 'min(200px, 100%)'}}/>
+			                   clearable={false} filterable={false} style={CommonElementEditorStyles.dropdown}/>
 			<JsEditor snippet={snippet} onChange={onSnippetChange}
 			          visible={isSnippetAvailable(flag)} height={editorHeight}/>
 		</VerticalLinesEditor>;

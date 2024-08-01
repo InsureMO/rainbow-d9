@@ -1,23 +1,23 @@
 #### Environment variables
 
-All environment variable names depend on the definitions of the `System code` and `Endpoint code` step variables. For convenience, using the
+All environment variable names depend on the definitions of the `System` and `Endpoint` step variables. For convenience, using the
 following
 definitions, which will be used in the environment variables:
 
-- `SYSTEM`: corresponding to the value of `System code`,
-- `ENDPOINT`: corresponding to the value of `Endpoint code`.
+- `SYSTEM`: corresponding to the value of `System`,
+- `ENDPOINT`: corresponding to the value of `Endpoint`.
 
-Assuming the value of `System code` is `s1` and the value of `Endpoint code` is `order`, a system parameter
+Assuming the value of `System` is `s1` and the value of `Endpoint` is `order`, a system parameter
 named `CFG_ENDPOINTS_{SYSTEM}_{ENDPOINT}_URL` would thus be `CFG_ENDPOINTS_S1_ORDER_URL`.
 
-> Note that the values of `System code` and `Endpoint code` will be converted to uppercase, and any `.` characters will be replaced
-> with `_`. Additionally, based on common practices for environment parameter definitions, the values for `System code` and `Endpoint code`
+> Note that the values of `System` and `Endpoint` will be converted to uppercase, and any `.` characters will be replaced
+> with `_`. Additionally, based on common practices for environment parameter definitions, the values for `System` and `Endpoint`
 > cannot include `-`, `=` or whitespace characters.
 
 This step uses the following system environment variables definition:
 
 - `CFG_ENDPOINTS_{SYSTEM}_{ENDPOINT}_URL`: Definition of the endpoint’s URL. This URL can be a fully qualified URL or just a URL context
-  or template, depending on whether and how the `decorateUrl` step variable is used to modify and obtain the final effective access URL,
+  or template, depending on whether and how the `Decorate URL` step variable is used to modify and obtain the final effective access URL,
 - `CFG_ENDPOINTS_{SYSTEM}_GLOBAL_HEADERS`: HTTP request headers used in the step, which are global and will be used in all requests. Defined
   using the string format `key1=value[;key2=value2...[;keyN=valueN]]`,
 - `CFG_ENDPOINTS_{SYSTEM}_{ENDPOINT}_HEADERS`: HTTP request headers used in the step. Defined using the string
@@ -35,22 +35,22 @@ This step uses the following system environment variables definition:
 
 Making a remote HTTP call requires many parameter definitions, some of which are mandatory and some optional.
 
-##### `System code`
+##### `System`
 
 Code for accessing the remote system. Generally, a remote system provides a set of APIs. To facilitate the use of the same defined data in
 different steps, the remote system needs to be defined in code first. This variable is mandatory and case-insensitive.
 
-##### `Endpoint code`
+##### `Endpoint`
 
 Define an endpoint code for the remote system. This code can represent a single API or a strongly related set of APIs, depending on
-how `decorateUrl` is used.
+how `Decorate URL` is used.
 
 ##### `Decorate URL`
 
 This variable is optional and can be used to decorate the URL of the endpoint. The value can be a JavaScript snippet that will be executed
 as a JavaScript function. This function accepts the following input parameters:
 
-- `$endpointUrl`: The URL read from the environment based on the `System code` and `Endpoint code` definitions, can be a fully qualified URL
+- `$endpointUrl`: The URL read from the environment based on the `System` and `Endpoint` definitions, can be a fully qualified URL
   or just a
   URL context or template,
 - `$factor`: The content portion of the request data, excluding context data,

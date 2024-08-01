@@ -102,7 +102,7 @@ export const createDiagramNodes = (file: FileDef, handlers: DiagramHandlers): Di
 		onChange: () => handlers.onContentChange(() => handlers.serialize(file))
 	};
 
-	const startNode = new StartNodeModel(file, nodeHandlers);
+	const startNode = new StartNodeModel(file, {handlers: nodeHandlers, assistant: handlers.assistant});
 	setNodePosition(startNode, () => askStartNodePosition(file));
 	allNodes.push(startNode);
 
@@ -284,8 +284,9 @@ export const createDiagramHandlers = (options: {
 		serialize: (def: FileDef) => serializer.stringify(def),
 		assistant: {
 			createDefaultStep: assistant?.createDefaultStep ?? DEFAULTS.createDefaultStep,
-			isValidRefPipeline: assistant?.isValidRefPipeline ?? (() => true),
-			isValidRefStep: assistant?.isValidRefStep ?? (() => true)
+			askRefPipelines: assistant?.askRefPipelines ?? (() => []),
+			askRefSteps: assistant?.askRefSteps ?? (() => []),
+			askSystemsForHttp: assistant?.askSystemsForHttp ?? (() => [])
 		},
 		onContentChange: (serialize: () => string) => {
 			// sync to state ref first, in case somewhere outside force update widget

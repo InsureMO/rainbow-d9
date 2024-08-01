@@ -4,6 +4,7 @@ import React, {ReactNode} from 'react';
 import {ConfigurableElement, ConfigurableElementBadgeMissed, ConfigurableElementEditorProps} from '../../edit-dialog';
 import {HelpDocs} from '../../help-docs';
 import {Labels} from '../../labels';
+import {CommonElementEditorStyles} from '../styles';
 import {elementInitOnly} from './element-init-only';
 import {elementRequest} from './element-request';
 import {elementResponse} from './element-response';
@@ -50,8 +51,7 @@ export const elementType: ConfigurableElement = {
 			{value: 'step', label: Labels.PipelineTypeStep}
 		];
 		return <UnwrappedDropdown value={value} onValueChange={onValueChange} options={options}
-		                          clearable={false}
-		                          style={{justifySelf: 'start', width: 'unset', minWidth: 'min(200px, 100%)'}}/>;
+		                          clearable={false} style={CommonElementEditorStyles.dropdown}/>;
 	},
 	helpDoc: HelpDocs.pipelineType,
 	children: [elementInitOnly, elementRoute, elementRequest, elementResponse]
