@@ -96,7 +96,7 @@ export const Labels = {
 	// step del-property, del-properties
 	StepDelPropertyProperty: <IntlLabel keys={['o23', 'step', 'del-property', 'property']} value="Property"/>,
 	// http fetch/get/post
-	StepHttpRemote: <IntlLabel keys={['o23', 'step', 'http', 'system']} value="Remote HTTP API"/>,
+	StepHttpRemote: <IntlLabel keys={['o23', 'step', 'http', 'system']} value="HTTP API"/>,
 	StepHttpSystem: <IntlLabel keys={['o23', 'step', 'http', 'system']} value="System"/>,
 	StepHttpEndpoint: <IntlLabel keys={['o23', 'step', 'http', 'endpoint']} value="Endpoint"/>,
 	// step each
