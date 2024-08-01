@@ -23,7 +23,7 @@ export interface ConfigurableElement {
 	children?: Array<ConfigurableElement>;
 	// for navigator only
 	badge?: (model: ConfigurableModel) => ReactNode;
-	// for specific only
+	// for specific only, monitor the changes of defined anchors
 	changeBy?: Array<ConfigurableElementAnchor>;
 	group?: true;
 	/** available only when it is a group */
