@@ -4,20 +4,26 @@ var __publicField = (obj, key, value) => {
   __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
   return value;
 };
-import { a as color, P as jsYaml, Q as dom2image } from "./vendor-QkTfmfrv.js";
-import { f as CssConstants, C as CssVars, I as IntlLabel, D as DOM_KEY_WIDGET, g as UnwrappedCaption, h as UnwrappedInput, j as UnwrappedDropdown, k as UnwrappedDecorateInput, b as useGlobalHandlers, l as UnwrappedCheckbox, m as UnwrappedTextarea } from "./rainbow-d9-n2-wt2u7eCE.js";
-import { R as React, r as reactExports, q as qe, W as We, P as PortModelAlignment, a as PortWidget, D as DefaultLinkModel, b as PortModel, N as NodeModel, C as CanvasWidget, c as createEngine, A as AbstractModelFactory, d as DiagramModel, e as DefaultLinkFactory, f as AbstractReactFactory, L as LinkWidget, g as DefaultLinkPointWidget, h as DefaultLinkSegmentWidget } from "./react-base-iGeJA2-Y.js";
-import { V as VUtils, r as registerWidget, g as useCreateEventBus, M as MUtils, P as PPUtils, a as useThrottler, e as useForceUpdate } from "./rainbow-d9-n1-sgrwQs9e.js";
-import { i as index$1 } from "./rainbow-d9-n3-UcXFXY4h.js";
-import { M as Markdown } from "./react-markdown-Sp2rUdAH.js";
-import { r as remarkGfm } from "./remark-EWYiv7Aw.js";
-import { S as SyntaxHighlighter, p as prism } from "./react-syntax-highlighter-UltWrXQD.js";
+import { a as color, y as EditorView, z as EditorState, A as basicSetup, B as keymap, C as indentWithTab, G as javascript, K as lintGutter, P as Compartment, Q as jsYaml, R as dom2image } from "./vendor-R-Spl4KT.js";
+import { f as CssConstants, C as CssVars, I as IntlLabel, D as DOM_KEY_WIDGET, d as utils$2, g as UnwrappedCaption, h as UnwrappedInput, j as UnwrappedCheckbox, k as UnwrappedDropdown, O as OptionItemSort, l as UnwrappedDecorateInput, b as useGlobalHandlers, m as UnwrappedTextarea } from "./rainbow-d9-n2-uDowY2gS.js";
+import { R as React, r as reactExports, q as qe, W as We, P as PortModelAlignment, a as PortWidget, D as DefaultLinkModel, b as PortModel, N as NodeModel, C as CanvasWidget, c as DiagramModel, d as createEngine, A as AbstractModelFactory, e as DefaultLinkFactory, f as AbstractReactFactory, L as LinkWidget, g as DefaultLinkPointWidget, h as DefaultLinkSegmentWidget } from "./react-base-_kUkTZyT.js";
+import { V as VUtils, r as registerWidget, a as useThrottler, g as useCreateEventBus, e as useForceUpdate, M as MUtils, P as PPUtils } from "./rainbow-d9-n1-4fa2a4TQ.js";
+import { i as index$1 } from "./rainbow-d9-n3-q7vik5Ee.js";
+import { M as Markdown } from "./react-markdown-60uj6MoK.js";
+import { r as remarkGfm } from "./remark-uKKevoCO.js";
+import { S as SyntaxHighlighter, p as prism } from "./react-syntax-highlighter-LKfzZla3.js";
 const EDITOR_BACKGROUND_BLOCK_SIZE = "var(--o23-playground-editor-background-block-size, 48px)";
 const EDITOR_BACKGROUND_LINE_COLOR = `var(--o23-playground-editor-background-line-color, ${color(CssConstants.PRIMARY_COLOR).alpha(0.08)})`;
+const EDITOR_ATTRIBUTE_BADGE_COLOR = "#9db6c6";
 const NODE_START_COLOR = "#ffb56b";
 const NODE_END_COLOR = "#e0b35f";
+const NODE_JOIN_END_COLOR = "#c4c2bf";
 const NODE_STEP_COLOR = "#54956b";
+const NODE_STEP_HTTP_COLOR = "#8fabb0";
 const NODE_STEP_SETS_COLOR = "#615cac";
+const NODE_ASYNC_SETS_STEP_COLOR = "#ff714b";
+const NODE_EACH_STEP_COLOR = "#c6a0d2";
+const NODE_PARALLEL_STEP_COLOR = "#4785ff";
 const NEXT_STEP_PORT_COLOR = "#a3ab5b";
 const PREVIOUS_STEP_PORT_COLOR = "#8454aa";
 const PORT_FIRST_SUB_STEP_COLOR = "#8454aa";
@@ -43,9 +49,16 @@ const PlaygroundCssVars = {
   EDITOR_TOOLBAR_BUTTON_COLOR: `var(--o23-playground-editor-toolbar-button-color, ${CssVars.FONT_COLOR})`,
   EDITOR_TOOLBAR_BUTTON_ACTIVE_COLOR: `var(--o23-playground-editor-toolbar-button-active-color, ${CssVars.INVERT_COLOR})`,
   EDITOR_TOOLBAR_BUTTON_ACTIVE_BACKGROUND_COLOR: `var(--o23-playground-editor-toolbar-button-active-background-color, ${CssVars.PRIMARY_COLOR})`,
+  EDITOR_MAX_Z_INDEX: `var(--o23-playground-editor-max-z-index, 9999)`,
   MARKDOWN_FONT_SIZE: "var(--o23-playground-markdown-font-size, 14px)",
   MARKDOWN_COLOR: `var(--o23-playground-markdown-color, ${CssVars.FONT_COLOR})`,
   MARKDOWN_BACKGROUND_COLOR: `var(--o23-playground-markdown-background-color, ${CssVars.BACKGROUND_COLOR})`,
+  MARKDOWN_TABLE_MARGIN: "var(--o23-playground-markdown-table-margin, 16px 0)",
+  MARKDOWN_TABLE_HEADER_BACKGROUND_COLOR: "var(--o23-playground-markdown-table-header-background-color, var(--color-canvas-subtle))",
+  MARKDOWN_TABLE_BORDER: "var(--o23-playground-markdown-table-border, 1px solid var(--color-border-default))",
+  MARKDOWN_TABLE_BORDER_RADIUS: "var(--o23-playground-markdown-table-border-radius, 4px)",
+  MARKDOWN_TABLE_ROW_BACKGROUND_COLOR: "var(--o23-playground-markdown-table-row-background-color, var(--color-canvas-default))",
+  MARKDOWN_TABLE_ROW_EVEN_BACKGROUND_COLOR: "var(--o23-playground-markdown-table-even-row-background-color, var(--color-canvas-subtle))",
   SPECIFIC_MARKDOWN_FONT_SIZE: "var(--o23-playground-specific-markdown-font-size, 12px)",
   EDIT_DIALOG_BACKDROP_COLOR: "var(--o23-playground-dialog-backdrop-color, rgba(71, 69, 84, 0.75))",
   EDIT_DIALOG_Z_INDEX: "var(--o23-playground-dialog-z-index, 10000)",
@@ -117,14 +130,22 @@ const PlaygroundCssVars = {
   EDIT_DIALOG_CONFIGURABLE_ELEMENT_BADGE_STEPS_BACKGROUND_COLOR: "var(--o23-playground-dialog-configurable-element-badge-steps-background-color, transparent)",
   EDIT_DIALOG_CONFIGURABLE_ELEMENT_BADGE_STEPS_COLOR: `var(--o23-playground-dialog-configurable-element-badge-steps-color, ${CssVars.PRIMARY_COLOR})`,
   EDIT_DIALOG_CONFIGURABLE_ELEMENT_BADGE_AS_IS_BACKGROUND_COLOR: `var(--o23-playground-dialog-configurable-element-badge-as-is-background-color, ${CssVars.WAIVE_COLOR})`,
-  EDIT_DIALOG_CONFIGURABLE_ELEMENT_AS_IS_STEPS_COLOR: `var(--o23-playground-dialog-configurable-element-badge-as-is-color, ${CssVars.INVERT_COLOR})`,
+  EDIT_DIALOG_CONFIGURABLE_ELEMENT_BADGE_AS_IS_COLOR: `var(--o23-playground-dialog-configurable-element-badge-as-is-color, ${CssVars.INVERT_COLOR})`,
+  EDIT_DIALOG_CONFIGURABLE_ELEMENT_BADGE_USE_DEFAULT_BACKGROUND_COLOR: `var(--o23-playground-dialog-configurable-element-badge-use-default-background-color, ${CssVars.WAIVE_COLOR})`,
+  EDIT_DIALOG_CONFIGURABLE_ELEMENT_BADGE_USE_DEFAULT_COLOR: `var(--o23-playground-dialog-configurable-element-badge-use-default-color, ${CssVars.INVERT_COLOR})`,
+  EDIT_DIALOG_CONFIGURABLE_ELEMENT_BADGE_YES_BACKGROUND_COLOR: `var(--o23-playground-dialog-configurable-element-badge-yes-background-color, ${EDITOR_ATTRIBUTE_BADGE_COLOR})`,
+  EDIT_DIALOG_CONFIGURABLE_ELEMENT_BADGE_YES_COLOR: `var(--o23-playground-dialog-configurable-element-badge-yes-color, ${CssVars.INVERT_COLOR})`,
+  EDIT_DIALOG_CONFIGURABLE_ELEMENT_BADGE_NO_BACKGROUND_COLOR: `var(--o23-playground-dialog-configurable-element-badge-no-background-color, ${EDITOR_ATTRIBUTE_BADGE_COLOR})`,
+  EDIT_DIALOG_CONFIGURABLE_ELEMENT_BADGE_NO_COLOR: `var(--o23-playground-dialog-configurable-element-badge-no-color, ${CssVars.INVERT_COLOR})`,
   EDIT_DIALOG_CONFIGURABLE_ELEMENT_SPECIFIC_MARGIN: "var(--o23-playground-dialog-configurable-element-specific-margin, 0 -8px)",
-  EDIT_DIALOG_CONFIGURABLE_ELEMENT_SPECIFIC_PADDING: "var(--o23-playground-dialog-configurable-element-specific-padding, 8px)",
+  EDIT_DIALOG_CONFIGURABLE_ELEMENT_SPECIFIC_PADDING: "var(--o23-playground-dialog-configurable-element-specific-padding, 8px 16px 8px)",
   EDIT_DIALOG_CONFIGURABLE_ELEMENT_SPECIFIC_GRID_COLUMN_GAP: "var(--o23-playground-dialog-configurable-element-specific-grid-column-gap, 32px)",
   EDIT_DIALOG_CONFIGURABLE_ELEMENT_SPECIFIC_GRID_ROW_GAP: "var(--o23-playground-dialog-configurable-element-specific-grid-row-gap, 8px)",
   EDIT_DIALOG_CONFIGURABLE_ELEMENT_HELP_LABEL_HEIGHT: `var(--o23-playground-dialog-configurable-element-help-label-height, ${CssVars.INPUT_HEIGHT})`,
-  EDIT_DIALOG_CONFIGURABLE_ELEMENT_HELP_BADGE_HEIGHT: `var(--o23-playground-dialog-configurable-element-help-badge-height, ${CssVars.INPUT_HEIGHT})`,
+  EDIT_DIALOG_CONFIGURABLE_ELEMENT_BADGE_HEIGHT: `var(--o23-playground-dialog-configurable-element-help-badge-height, ${CssVars.INPUT_HEIGHT})`,
   EDIT_DIALOG_CONFIGURABLE_ELEMENT_HELP_BADGE_COLOR: `var(--o23-playground-dialog-configurable-element-help-badge-color, ${CssVars.PRIMARY_COLOR})`,
+  EDIT_DIALOG_CONFIGURABLE_ELEMENT_EXPAND_BADGE_COLOR: `var(--o23-playground-dialog-configurable-element-expand-badge-color, ${CssVars.PRIMARY_COLOR})`,
+  EDIT_DIALOG_CONFIGURABLE_ELEMENT_COLLAPSE_BADGE_COLOR: `var(--o23-playground-dialog-configurable-element-collapse-badge-color, ${CssVars.PRIMARY_COLOR})`,
   EDIT_DIALOG_CONFIGURABLE_ELEMENT_GROUP_FONT_WEIGHT: "var(--o23-playground-dialog-configurable-element-group-font-weight, 600)",
   EDIT_DIALOG_CONFIGURABLE_ELEMENT_GROUP_BORDER: `var(--o23-playground-dialog-configurable-element-group-border, 1px solid rgb(216, 222, 228))`,
   EDIT_DIALOG_CONFIGURABLE_ELEMENT_SPECIFIC_INPUT_PREFIX_FONT_SIZE: "var(--o23-playground-dialog-configurable-element-specific-input-prefix-font-size, max(0.8em, 12px))",
@@ -134,7 +155,7 @@ const PlaygroundCssVars = {
   NODE_TITLE_PADDING: "var(--o23-playground-node-title-padding, 0 10px)",
   NODE_TITLE_SPREADER_MIN_WIDTH: "var(--o23-playground-node-title-spreader-min-width, 40px)",
   NODE_MIN_WIDTH: "var(--o23-playground-node-min-width, 160px)",
-  NODE_MAX_WIDTH: `var(--o23-playground-node-max-width, 320px)`,
+  NODE_MAX_WIDTH: `var(--o23-playground-node-max-width, unset)`,
   NODE_ICON_SIZE: "var(--o23-playground-node-icon-size, 14px)",
   NODE_PORT_HEIGHT: "var(--o23-playground-node-port-height, 24px)",
   NODE_PORT_BORDER_WIDTH: `var(--o23-playground-node-port-border-width, 1px)`,
@@ -145,8 +166,10 @@ const PlaygroundCssVars = {
   NODE_PREVIOUS_STEP_PORT_BORDER: `var(--o23-playground-node-previous-step-port-border, 2px solid ${color(PREVIOUS_STEP_PORT_COLOR).darken(0.1).opaquer(0.5)})`,
   NODE_PORT_STEPS_BORDER: `var(--o23-playground-port-sub-step-border, 1px solid ${PORT_STEPS_COLOR})`,
   NODE_PORT_STEPS_BACKGROUND: `var(--o23-playground-port-sub-step-background, ${color(PORT_STEPS_COLOR).darken(0.1).opaquer(0.5)})`,
+  NODE_PORT_STEPS_ICON_COLOR: `var(--o23-playground-port-sub-step-icon-color, ${CssVars.INVERT_COLOR})`,
   NODE_PORT_ERROR_HANDLES_BORDER: `var(--o23-playground-port-error-handles-border, 1px solid ${PORT_ERROR_HANDLES_COLOR})`,
   NODE_PORT_ERROR_HANDLES_BACKGROUND: `var(--o23-playground-port-error-handles-background, ${color(PORT_ERROR_HANDLES_COLOR).darken(0.1).opaquer(0.5)})`,
+  NODE_PORT_ERROR_HANDLES_ICON_COLOR: `var(--o23-playground-port-error-handles-icon-color, ${CssVars.INVERT_COLOR})`,
   NODE_PORT_FIRST_SUB_STEP_BACKGROUND: `var(--o23-playground-port-first-sub-step-background, ${PORT_FIRST_SUB_STEP_COLOR})`,
   NODE_PORT_FIRST_SUB_STEP_BORDER: `var(--o23-playground-port-first-sub-step-border, 1px solid ${color(PORT_FIRST_SUB_STEP_COLOR).darken(0.1).opaquer(0.5)})`,
   NODE_PORT_LAST_SUB_STEP_JOIN_BACKGROUND: `var(--o23-playground-port-last-sub-step-join-background, ${PORT_LAST_SUB_STEP_JOIN_COLOR})`,
@@ -214,6 +237,12 @@ const PlaygroundCssVars = {
   NODE_END_TITLE_BACKGROUND: `var(--o23-playground-node-end-title-background, linear-gradient(135deg, ${NODE_END_COLOR} 0%, ${color(NODE_END_COLOR).alpha(0.7)} 70%, ${color(NODE_END_COLOR).alpha(0.5)} 100%))`,
   NODE_END_BODY_HEIGHT: "var(--o23-playground-node-end-body-height, 32px)",
   NODE_END_BODY_PADDING: "var(--o23-playground-node-end-body-padding, 8px 0)",
+  NODE_JOIN_END_BORDER_COLOR: `var(--o23-playground-node-join-end-border-color, ${NODE_JOIN_END_COLOR})`,
+  NODE_JOIN_END_BORDER: `var(--o23-playground-node-join-end-border, 2px solid ${NODE_JOIN_END_COLOR})`,
+  NODE_JOIN_END_TITLE_FONT_SIZE: "var(--o23-playground-node-join-end-title-font-size, 16px)",
+  NODE_JOIN_END_TITLE_FONT_WEIGHT: "var(--o23-playground-node-join-end-title-font-weight, 600)",
+  NODE_JOIN_END_TITLE_COLOR: `var(--o23-playground-node-join-end-title-color, ${CssVars.INVERT_COLOR})`,
+  NODE_JOIN_END_TITLE_BACKGROUND: `var(--o23-playground-node-join-end-title-background, linear-gradient(135deg, ${NODE_JOIN_END_COLOR} 0%, ${color(NODE_JOIN_END_COLOR).alpha(0.7)} 70%, ${color(NODE_JOIN_END_COLOR).alpha(0.5)} 100%))`,
   NODE_STEP_BORDER: `var(--o23-playground-node-step-border, 2px solid ${NODE_STEP_COLOR})`,
   NODE_STEP_TITLE_FONT_SIZE: "var(--o23-playground-node-step-title-font-size, 16px)",
   NODE_STEP_TITLE_FONT_WEIGHT: "var(--o23-playground-node-step-title-font-weight, 600)",
@@ -221,8 +250,26 @@ const PlaygroundCssVars = {
   NODE_STEP_TITLE_BACKGROUND: `var(--o23-playground-node-step-title-background, linear-gradient(135deg, ${NODE_STEP_COLOR} 0%, ${color(NODE_STEP_COLOR).alpha(0.7)} 70%, ${color(NODE_STEP_COLOR).alpha(0.5)} 100%))`,
   NODE_STEP_BODY_HEIGHT: "var(--o23-playground-node-step-body-height, 32px)",
   NODE_STEP_BODY_PADDING: "var(--o23-playground-node-step-body-padding, 8px 0)",
+  NODE_STEP_HTTP_FETCH_BORDER: `var(--o23-playground-node-step-http-fetch-border, 2px solid ${NODE_STEP_HTTP_COLOR})`,
+  NODE_STEP_HTTP_FETCH_TITLE_BACKGROUND: `var(--o23-playground-node-step-http-fetch-title-background, linear-gradient(135deg, ${NODE_STEP_HTTP_COLOR} 0%, ${color(NODE_STEP_HTTP_COLOR).alpha(0.7)} 70%, ${color(NODE_STEP_HTTP_COLOR).alpha(0.5)} 100%))`,
+  NODE_STEP_HTTP_GET_BORDER: `var(--o23-playground-node-step-http-fetch-border, 2px solid ${NODE_STEP_HTTP_COLOR})`,
+  NODE_STEP_HTTP_GET_TITLE_BACKGROUND: `var(--o23-playground-node-step-http-fetch-title-background, linear-gradient(135deg, ${NODE_STEP_HTTP_COLOR} 0%, ${color(NODE_STEP_HTTP_COLOR).alpha(0.7)} 70%, ${color(NODE_STEP_HTTP_COLOR).alpha(0.5)} 100%))`,
+  NODE_STEP_HTTP_POST_BORDER: `var(--o23-playground-node-step-http-fetch-border, 2px solid ${NODE_STEP_HTTP_COLOR})`,
+  NODE_STEP_HTTP_POST_TITLE_BACKGROUND: `var(--o23-playground-node-step-http-fetch-title-background, linear-gradient(135deg, ${NODE_STEP_HTTP_COLOR} 0%, ${color(NODE_STEP_HTTP_COLOR).alpha(0.7)} 70%, ${color(NODE_STEP_HTTP_COLOR).alpha(0.5)} 100%))`,
   NODE_STEP_SETS_BORDER: `var(--o23-playground-node-step-sets-border, 2px solid ${NODE_STEP_SETS_COLOR})`,
-  NODE_STEP_SETS_TITLE_BACKGROUND: `var(--o23-playground-node-step-sets-title-background, linear-gradient(135deg, ${NODE_STEP_SETS_COLOR} 0%, ${color(NODE_STEP_SETS_COLOR).alpha(0.7)} 70%, ${color(NODE_STEP_SETS_COLOR).alpha(0.5)} 100%))`
+  NODE_STEP_SETS_TITLE_BACKGROUND: `var(--o23-playground-node-step-sets-title-background, linear-gradient(135deg, ${NODE_STEP_SETS_COLOR} 0%, ${color(NODE_STEP_SETS_COLOR).alpha(0.7)} 70%, ${color(NODE_STEP_SETS_COLOR).alpha(0.5)} 100%))`,
+  NODE_STEP_ASYNC_SETS_BORDER: `var(--o23-playground-node-step-async-sets-border, 2px solid ${NODE_ASYNC_SETS_STEP_COLOR})`,
+  NODE_STEP_ASYNC_SETS_TITLE_BACKGROUND: `var(--o23-playground-node-step-async-sets-title-background, linear-gradient(135deg, ${NODE_ASYNC_SETS_STEP_COLOR} 0%, ${color(NODE_ASYNC_SETS_STEP_COLOR).alpha(0.7)} 70%, ${color(NODE_ASYNC_SETS_STEP_COLOR).alpha(0.5)} 100%))`,
+  NODE_STEP_EACH_BORDER: `var(--o23-playground-node-step-each-border, 2px solid ${NODE_EACH_STEP_COLOR})`,
+  NODE_STEP_EACH_TITLE_BACKGROUND: `var(--o23-playground-node-step-each-title-background, linear-gradient(135deg, ${NODE_EACH_STEP_COLOR} 0%, ${color(NODE_EACH_STEP_COLOR).alpha(0.7)} 70%, ${color(NODE_EACH_STEP_COLOR).alpha(0.5)} 100%))`,
+  NODE_STEP_PARALLEL_BORDER: `var(--o23-playground-node-step-parallel-border, 2px solid ${NODE_PARALLEL_STEP_COLOR})`,
+  NODE_STEP_PARALLEL_TITLE_BACKGROUND: `var(--o23-playground-node-step-parallel-title-background, linear-gradient(135deg, ${NODE_PARALLEL_STEP_COLOR} 0%, ${color(NODE_PARALLEL_STEP_COLOR).alpha(0.7)} 70%, ${color(NODE_PARALLEL_STEP_COLOR).alpha(0.5)} 100%))`,
+  SNIPPET_BORDER: `var(--o23-playground-snippet-border, ${CssVars.BORDER})`,
+  SNIPPET_BORDER_RADIUS: `var(--o23-playground-snippet-border-radius, ${CssVars.BORDER_RADIUS})`,
+  SNIPPET_HEIGHT: "var(--o23-playground-snippet-height, 400px)",
+  SNIPPET_IO_TRANSFORMER_HEIGHT: "var(--o23-playground-snippet-io-transformer-height, 200px)",
+  SNIPPET_ERROR_HANDLES_HEIGHT: `var(--o23-playground-snippet-error-handles-height, 200px)`,
+  SNIPPET_HTTP_DECORATE_URL_HEIGHT: "var(--o23-playground-snippet-http-decorate-url-height, 200px)"
 };
 const Accept = (props) => {
   return React.createElement(
@@ -254,6 +301,28 @@ const ArrowRight = (props) => {
     "svg",
     { ...props, "data-icon": "o23-arrow-right", viewBox: "0 0 24 24", fill: "none", xmlns: "http://www.w3.org/2000/svg" },
     React.createElement("path", { d: "M8.91016 19.9201L15.4302 13.4001C16.2002 12.6301 16.2002 11.3701 15.4302 10.6001L8.91016 4.08008", stroke: "currentColor", strokeWidth: "1.5", strokeMiterlimit: "10", strokeLinecap: "round", strokeLinejoin: "round" })
+  );
+};
+const Collapse = (props) => {
+  return React.createElement(
+    "svg",
+    { ...props, "data-icon": "o23-collapse", viewBox: "0 0 24 24", fill: "none", xmlns: "http://www.w3.org/2000/svg" },
+    React.createElement("path", { d: "M9.99756 6.00065C9.98309 7.70722 9.88834 8.64801 9.26793 9.26842C8.64752 9.88883 7.70673 9.98358 6.00017 9.99805", stroke: "currentColor", strokeWidth: "1.5", strokeLinecap: "round" }),
+    React.createElement("path", { d: "M9.99756 17.9974C9.98309 16.2908 9.88834 15.35 9.26793 14.7296C8.64752 14.1092 7.70673 14.0145 6.00017 14", stroke: "currentColor", strokeWidth: "1.5", strokeLinecap: "round" }),
+    React.createElement("path", { d: "M14 6.00065C14.0145 7.70722 14.1092 8.64801 14.7296 9.26842C15.35 9.88883 16.2908 9.98358 17.9974 9.99805", stroke: "currentColor", strokeWidth: "1.5", strokeLinecap: "round" }),
+    React.createElement("path", { d: "M14 17.9974C14.0145 16.2908 14.1092 15.35 14.7296 14.7296C15.35 14.1092 16.2908 14.0145 17.9974 14", stroke: "currentColor", strokeWidth: "1.5", strokeLinecap: "round" }),
+    React.createElement("circle", { opacity: "0.5", cx: "12", cy: "12", r: "10", stroke: "currentColor", strokeWidth: "1.5" })
+  );
+};
+const Expand = (props) => {
+  return React.createElement(
+    "svg",
+    { ...props, "data-icon": "o23-expand", viewBox: "0 0 24 24", fill: "none", xmlns: "http://www.w3.org/2000/svg" },
+    React.createElement("path", { d: "M6 9.99739C6.01447 8.29083 6.10921 7.35004 6.72963 6.72963C7.35004 6.10921 8.29083 6.01447 9.99739 6", stroke: "currentColor", strokeWidth: "1.5", strokeLinecap: "round" }),
+    React.createElement("path", { d: "M6 14.0007C6.01447 15.7072 6.10921 16.648 6.72963 17.2684C7.35004 17.8888 8.29083 17.9836 9.99739 17.998", stroke: "currentColor", strokeWidth: "1.5", strokeLinecap: "round" }),
+    React.createElement("path", { d: "M17.9976 9.99739C17.9831 8.29083 17.8883 7.35004 17.2679 6.72963C16.6475 6.10921 15.7067 6.01447 14.0002 6", stroke: "currentColor", strokeWidth: "1.5", strokeLinecap: "round" }),
+    React.createElement("path", { d: "M17.9976 14.0007C17.9831 15.7072 17.8883 16.648 17.2679 17.2684C16.6475 17.8888 15.7067 17.9836 14.0002 17.998", stroke: "currentColor", strokeWidth: "1.5", strokeLinecap: "round" }),
+    React.createElement("circle", { opacity: "0.5", cx: "12", cy: "12", r: "10", stroke: "currentColor", strokeWidth: "1.5" })
   );
 };
 const PortUndefined = (props) => {
@@ -332,6 +401,30 @@ const Steps = (props) => {
     React.createElement("path", { opacity: "0.5", d: "M11 4.25C10.5858 4.25 10.25 4.58579 10.25 5C10.25 5.41421 10.5858 5.75 11 5.75V4.25ZM13 19L13.5303 19.5303C13.8232 19.2374 13.8232 18.7626 13.5303 18.4697L13 19ZM17.2056 8.68732L17.6083 9.32007L17.2056 8.68732ZM6.79434 15.3127L7.197 15.9454H7.197L6.79434 15.3127ZM12.0303 16.9697C11.7374 16.6768 11.2625 16.6768 10.9696 16.9697C10.6768 17.2626 10.6768 17.7374 10.9696 18.0303L12.0303 16.9697ZM10.9696 19.9697C10.6768 20.2626 10.6768 20.7374 10.9696 21.0303C11.2625 21.3232 11.7374 21.3232 12.0303 21.0303L10.9696 19.9697ZM16.1319 4.25H11V5.75H16.1319V4.25ZM13 18.25H7.86809V19.75H13V18.25ZM16.803 8.05458L6.39169 14.6799L7.197 15.9454L17.6083 9.32007L16.803 8.05458ZM13.5303 18.4697L12.0303 16.9697L10.9696 18.0303L12.4696 19.5303L13.5303 18.4697ZM12.4696 18.4697L10.9696 19.9697L12.0303 21.0303L13.5303 19.5303L12.4696 18.4697ZM7.86809 18.25C6.61754 18.25 6.14195 16.6168 7.197 15.9454L6.39169 14.6799C4.07059 16.157 5.11685 19.75 7.86809 19.75V18.25ZM16.1319 5.75C17.3824 5.75 17.858 7.38318 16.803 8.05458L17.6083 9.32007C19.9294 7.843 18.8831 4.25 16.1319 4.25V5.75Z", fill: "currentColor" })
   );
 };
+const FoldSubNodes = (props) => {
+  return React.createElement(
+    "svg",
+    { ...props, "data-icon": "o23-fold-sub-nodes", viewBox: "0 0 24 24", fill: "none", xmlns: "http://www.w3.org/2000/svg" },
+    React.createElement("path", { d: "M11.3357 5.47875L7.36344 9.00968C5.79482 10.404 5.0105 11.1012 5.0105 11.9993C5.0105 12.8975 5.79481 13.5946 7.36344 14.989L11.3357 18.5199C12.0517 19.1563 12.4098 19.4746 12.7049 19.342C13.0001 19.2095 13.0001 18.7305 13.0001 17.7725V15.4279C16.6001 15.4279 20.5001 17.1422 22.0001 19.9993C22.0001 10.8565 16.6668 8.57075 13.0001 8.57075V6.22616C13.0001 5.26817 13.0001 4.78917 12.7049 4.65662C12.4098 4.52407 12.0517 4.8423 11.3357 5.47875Z", stroke: "currentColor", strokeWidth: "1.5", strokeLinecap: "round", strokeLinejoin: "round" }),
+    React.createElement("path", { opacity: "0.5", d: "M8.46129 4.5L3.24509 9.34362C2.45098 10.081 1.99976 11.1158 1.99976 12.1994C1.99976 13.3418 2.50097 14.4266 3.37087 15.1671L8.46129 19.5", stroke: "currentColor", strokeWidth: "1.5", strokeLinecap: "round" })
+  );
+};
+const UnfoldSubNodes = (props) => {
+  return React.createElement(
+    "svg",
+    { ...props, "data-icon": "o23-unfold-sub-nodes", viewBox: "0 0 24 24", fill: "none", xmlns: "http://www.w3.org/2000/svg" },
+    React.createElement("path", { d: "M20 14C21.1046 14 22 13.1046 22 12C22 10.8954 21.1046 10 20 10C18.8954 10 18 10.8954 18 12C18 13.1046 18.8954 14 20 14Z", stroke: "currentColor", strokeWidth: "1.5", strokeLinecap: "round", strokeLinejoin: "round" }),
+    React.createElement("path", { d: "M20 6C21.1046 6 22 5.10457 22 4C22 2.89543 21.1046 2 20 2C18.8954 2 18 2.89543 18 4C18 5.10457 18.8954 6 20 6Z", stroke: "currentColor", strokeWidth: "1.5", strokeLinecap: "round", strokeLinejoin: "round" }),
+    React.createElement("path", { d: "M20 22C21.1046 22 22 21.1046 22 20C22 18.8954 21.1046 18 20 18C18.8954 18 18 18.8954 18 20C18 21.1046 18.8954 22 20 22Z", stroke: "currentColor", strokeWidth: "1.5", strokeLinecap: "round", strokeLinejoin: "round" }),
+    React.createElement("path", { d: "M4 14C5.10457 14 6 13.1046 6 12C6 10.8954 5.10457 10 4 10C2.89543 10 2 10.8954 2 12C2 13.1046 2.89543 14 4 14Z", stroke: "currentColor", strokeWidth: "1.5", strokeLinecap: "round", strokeLinejoin: "round" }),
+    React.createElement(
+      "g",
+      { opacity: "0.4" },
+      React.createElement("path", { d: "M6 12H18", stroke: "currentColor", strokeWidth: "1.5", strokeLinecap: "round", strokeLinejoin: "round" }),
+      React.createElement("path", { d: "M18 4H14C12 4 11 5 11 7V17C11 19 12 20 14 20H18", stroke: "currentColor", strokeWidth: "1.5", strokeLinecap: "round", strokeLinejoin: "round" })
+    )
+  );
+};
 const FitCanvas = (props) => {
   return React.createElement(
     "svg",
@@ -376,6 +469,65 @@ const DownloadImage = (props) => {
     React.createElement("path", { d: "M17 11V2M17 11L20 8M17 11L14 8", stroke: "currentColor", strokeWidth: "1.5", strokeLinecap: "round", strokeLinejoin: "round" })
   );
 };
+const DownloadFile = (props) => {
+  return React.createElement(
+    "svg",
+    { ...props, "data-icon": "o23-download-file", viewBox: "0 0 24 24", fill: "none", xmlns: "http://www.w3.org/2000/svg" },
+    React.createElement("path", { d: "M15.3929 4.05365L14.8912 4.61112L15.3929 4.05365ZM19.3517 7.61654L18.85 8.17402L19.3517 7.61654ZM21.654 10.1541L20.9689 10.4592V10.4592L21.654 10.1541ZM3.17157 20.8284L3.7019 20.2981H3.7019L3.17157 20.8284ZM20.8284 20.8284L20.2981 20.2981L20.2981 20.2981L20.8284 20.8284ZM14 21.25H10V22.75H14V21.25ZM2.75 14V10H1.25V14H2.75ZM21.25 13.5629V14H22.75V13.5629H21.25ZM14.8912 4.61112L18.85 8.17402L19.8534 7.05907L15.8947 3.49618L14.8912 4.61112ZM22.75 13.5629C22.75 11.8745 22.7651 10.8055 22.3391 9.84897L20.9689 10.4592C21.2349 11.0565 21.25 11.742 21.25 13.5629H22.75ZM18.85 8.17402C20.2034 9.3921 20.7029 9.86199 20.9689 10.4592L22.3391 9.84897C21.9131 8.89241 21.1084 8.18853 19.8534 7.05907L18.85 8.17402ZM10.0298 2.75C11.6116 2.75 12.2085 2.76158 12.7405 2.96573L13.2779 1.5653C12.4261 1.23842 11.498 1.25 10.0298 1.25V2.75ZM15.8947 3.49618C14.8087 2.51878 14.1297 1.89214 13.2779 1.5653L12.7405 2.96573C13.2727 3.16993 13.7215 3.55836 14.8912 4.61112L15.8947 3.49618ZM10 21.25C8.09318 21.25 6.73851 21.2484 5.71085 21.1102C4.70476 20.975 4.12511 20.7213 3.7019 20.2981L2.64124 21.3588C3.38961 22.1071 4.33855 22.4392 5.51098 22.5969C6.66182 22.7516 8.13558 22.75 10 22.75V21.25ZM1.25 14C1.25 15.8644 1.24841 17.3382 1.40313 18.489C1.56076 19.6614 1.89288 20.6104 2.64124 21.3588L3.7019 20.2981C3.27869 19.8749 3.02502 19.2952 2.88976 18.2892C2.75159 17.2615 2.75 15.9068 2.75 14H1.25ZM14 22.75C15.8644 22.75 17.3382 22.7516 18.489 22.5969C19.6614 22.4392 20.6104 22.1071 21.3588 21.3588L20.2981 20.2981C19.8749 20.7213 19.2952 20.975 18.2892 21.1102C17.2615 21.2484 15.9068 21.25 14 21.25V22.75ZM21.25 14C21.25 15.9068 21.2484 17.2615 21.1102 18.2892C20.975 19.2952 20.7213 19.8749 20.2981 20.2981L21.3588 21.3588C22.1071 20.6104 22.4392 19.6614 22.5969 18.489C22.7516 17.3382 22.75 15.8644 22.75 14H21.25ZM2.75 10C2.75 8.09318 2.75159 6.73851 2.88976 5.71085C3.02502 4.70476 3.27869 4.12511 3.7019 3.7019L2.64124 2.64124C1.89288 3.38961 1.56076 4.33855 1.40313 5.51098C1.24841 6.66182 1.25 8.13558 1.25 10H2.75ZM10.0298 1.25C8.15538 1.25 6.67442 1.24842 5.51887 1.40307C4.34232 1.56054 3.39019 1.8923 2.64124 2.64124L3.7019 3.7019C4.12453 3.27928 4.70596 3.02525 5.71785 2.88982C6.75075 2.75158 8.11311 2.75 10.0298 2.75V1.25Z", fill: "currentColor" }),
+    React.createElement("path", { opacity: "0.5", d: "M13 2.5V5C13 7.35702 13 8.53553 13.7322 9.26777C14.4645 10 15.643 10 18 10H22", stroke: "currentColor", strokeWidth: "1.5" }),
+    React.createElement("path", { opacity: "0.5", d: "M8.5 13.5L8.5 18.5M8.5 18.5L10.5 16.625M8.5 18.5L6.5 16.625", stroke: "currentColor", strokeWidth: "1.5", strokeLinecap: "round", strokeLinejoin: "round" })
+  );
+};
+const UploadFile = (props) => {
+  return React.createElement(
+    "svg",
+    { ...props, "data-icon": "o23-upload-file", viewBox: "0 0 24 24", fill: "none", xmlns: "http://www.w3.org/2000/svg" },
+    React.createElement("path", { d: "M15.3929 4.05365L14.8912 4.61112L15.3929 4.05365ZM19.3517 7.61654L18.85 8.17402L19.3517 7.61654ZM21.654 10.1541L20.9689 10.4592V10.4592L21.654 10.1541ZM3.17157 20.8284L3.7019 20.2981H3.7019L3.17157 20.8284ZM20.8284 20.8284L20.2981 20.2981L20.2981 20.2981L20.8284 20.8284ZM14 21.25H10V22.75H14V21.25ZM2.75 14V10H1.25V14H2.75ZM21.25 13.5629V14H22.75V13.5629H21.25ZM14.8912 4.61112L18.85 8.17402L19.8534 7.05907L15.8947 3.49618L14.8912 4.61112ZM22.75 13.5629C22.75 11.8745 22.7651 10.8055 22.3391 9.84897L20.9689 10.4592C21.2349 11.0565 21.25 11.742 21.25 13.5629H22.75ZM18.85 8.17402C20.2034 9.3921 20.7029 9.86199 20.9689 10.4592L22.3391 9.84897C21.9131 8.89241 21.1084 8.18853 19.8534 7.05907L18.85 8.17402ZM10.0298 2.75C11.6116 2.75 12.2085 2.76158 12.7405 2.96573L13.2779 1.5653C12.4261 1.23842 11.498 1.25 10.0298 1.25V2.75ZM15.8947 3.49618C14.8087 2.51878 14.1297 1.89214 13.2779 1.5653L12.7405 2.96573C13.2727 3.16993 13.7215 3.55836 14.8912 4.61112L15.8947 3.49618ZM10 21.25C8.09318 21.25 6.73851 21.2484 5.71085 21.1102C4.70476 20.975 4.12511 20.7213 3.7019 20.2981L2.64124 21.3588C3.38961 22.1071 4.33855 22.4392 5.51098 22.5969C6.66182 22.7516 8.13558 22.75 10 22.75V21.25ZM1.25 14C1.25 15.8644 1.24841 17.3382 1.40313 18.489C1.56076 19.6614 1.89288 20.6104 2.64124 21.3588L3.7019 20.2981C3.27869 19.8749 3.02502 19.2952 2.88976 18.2892C2.75159 17.2615 2.75 15.9068 2.75 14H1.25ZM14 22.75C15.8644 22.75 17.3382 22.7516 18.489 22.5969C19.6614 22.4392 20.6104 22.1071 21.3588 21.3588L20.2981 20.2981C19.8749 20.7213 19.2952 20.975 18.2892 21.1102C17.2615 21.2484 15.9068 21.25 14 21.25V22.75ZM21.25 14C21.25 15.9068 21.2484 17.2615 21.1102 18.2892C20.975 19.2952 20.7213 19.8749 20.2981 20.2981L21.3588 21.3588C22.1071 20.6104 22.4392 19.6614 22.5969 18.489C22.7516 17.3382 22.75 15.8644 22.75 14H21.25ZM2.75 10C2.75 8.09318 2.75159 6.73851 2.88976 5.71085C3.02502 4.70476 3.27869 4.12511 3.7019 3.7019L2.64124 2.64124C1.89288 3.38961 1.56076 4.33855 1.40313 5.51098C1.24841 6.66182 1.25 8.13558 1.25 10H2.75ZM10.0298 1.25C8.15538 1.25 6.67442 1.24842 5.51887 1.40307C4.34232 1.56054 3.39019 1.8923 2.64124 2.64124L3.7019 3.7019C4.12453 3.27928 4.70596 3.02525 5.71785 2.88982C6.75075 2.75158 8.11311 2.75 10.0298 2.75V1.25Z", fill: "currentColor" }),
+    React.createElement("path", { opacity: "0.5", d: "M13 2.5V5C13 7.35702 13 8.53553 13.7322 9.26777C14.4645 10 15.643 10 18 10H22", stroke: "currentColor", strokeWidth: "1.5" }),
+    React.createElement("path", { opacity: "0.5", d: "M8.5 18.5L8.5 13.5M8.5 13.5L6.5 15.375M8.5 13.5L10.5 15.375", stroke: "currentColor", strokeWidth: "1.5", strokeLinecap: "round", strokeLinejoin: "round" })
+  );
+};
+const Max = (props) => {
+  return React.createElement(
+    "svg",
+    { ...props, "data-icon": "o23-max", viewBox: "0 0 24 24", fill: "none", xmlns: "http://www.w3.org/2000/svg" },
+    React.createElement("path", { d: "M17 7H14M17 7V10M17 7L13.5 10.5M7 17H10M7 17V14M7 17L10.5 13.5", stroke: "currentColor", strokeWidth: "1.5", strokeLinecap: "round", strokeLinejoin: "round" }),
+    React.createElement("path", { d: "M7 7H10M7 7V10M7 7L10.5 10.5M17 17H14M17 17V14M17 17L13.5 13.5", stroke: "currentColor", strokeWidth: "1.5", strokeLinecap: "round", strokeLinejoin: "round" }),
+    React.createElement("path", { d: "M2 12C2 7.28595 2 4.92893 3.46447 3.46447C4.92893 2 7.28595 2 12 2C16.714 2 19.0711 2 20.5355 3.46447C22 4.92893 22 7.28595 22 12C22 16.714 22 19.0711 20.5355 20.5355C19.0711 22 16.714 22 12 22C7.28595 22 4.92893 22 3.46447 20.5355C2 19.0711 2 16.714 2 12Z", stroke: "currentColor", strokeWidth: "1.5" })
+  );
+};
+const Min = (props) => {
+  return React.createElement(
+    "svg",
+    { ...props, "data-icon": "o23-min", viewBox: "0 0 24 24", fill: "none", xmlns: "http://www.w3.org/2000/svg" },
+    React.createElement("path", { d: "M10.5 13.5H7.5M10.5 13.5V16.5M10.5 13.5L7 17", stroke: "currentColor", strokeWidth: "1.5", strokeLinecap: "round", strokeLinejoin: "round" }),
+    React.createElement("path", { d: "M13.5 10.5H16.5M13.5 10.5V7.5M13.5 10.5L17 7", stroke: "currentColor", strokeWidth: "1.5", strokeLinecap: "round", strokeLinejoin: "round" }),
+    React.createElement("path", { d: "M10.5 10.5H7.5M10.5 10.5V7.5M10.5 10.5L7 7", stroke: "currentColor", strokeWidth: "1.5", strokeLinecap: "round", strokeLinejoin: "round" }),
+    React.createElement("path", { d: "M13.5 13.5H16.5M13.5 13.5V16.5M13.5 13.5L17 17", stroke: "currentColor", strokeWidth: "1.5", strokeLinecap: "round", strokeLinejoin: "round" }),
+    React.createElement("path", { d: "M2 12C2 7.28595 2 4.92893 3.46447 3.46447C4.92893 2 7.28595 2 12 2C16.714 2 19.0711 2 20.5355 3.46447C22 4.92893 22 7.28595 22 12C22 16.714 22 19.0711 20.5355 20.5355C19.0711 22 16.714 22 12 22C7.28595 22 4.92893 22 3.46447 20.5355C2 19.0711 2 16.714 2 12Z", stroke: "currentColor", strokeWidth: "1.5" })
+  );
+};
+const Window = (props) => {
+  return React.createElement(
+    "svg",
+    { ...props, "data-icon": "o23-window", viewBox: "0 0 24 24", fill: "none", xmlns: "http://www.w3.org/2000/svg" },
+    React.createElement("path", { d: "M7 6C7 6.55228 6.55228 7 6 7C5.44772 7 5 6.55228 5 6C5 5.44772 5.44772 5 6 5C6.55228 5 7 5.44772 7 6Z", fill: "currentColor" }),
+    React.createElement("path", { d: "M10 6C10 6.55228 9.55228 7 9 7C8.44772 7 8 6.55228 8 6C8 5.44772 8.44772 5 9 5C9.55228 5 10 5.44772 10 6Z", fill: "currentColor" }),
+    React.createElement("path", { d: "M13 6C13 6.55228 12.5523 7 12 7C11.4477 7 11 6.55228 11 6C11 5.44772 11.4477 5 12 5C12.5523 5 13 5.44772 13 6Z", fill: "currentColor" }),
+    React.createElement("path", { d: "M2 9.5H22", stroke: "currentColor", strokeWidth: "1.5", strokeLinecap: "round" }),
+    React.createElement("path", { d: "M9 21L9 10", stroke: "currentColor", strokeWidth: "1.5", strokeLinecap: "round" }),
+    React.createElement("path", { d: "M2 12C2 7.28596 2 4.92893 3.46447 3.46447C4.92893 2 7.28595 2 12 2C16.714 2 19.0711 2 20.5355 3.46447C22 4.92893 22 7.28596 22 12C22 16.714 22 19.0711 20.5355 20.5355C19.0711 22 16.714 22 12 22C7.28595 22 4.92893 22 3.46447 20.5355C2.49073 19.5618 2.16444 18.1934 2.0551 16", stroke: "currentColor", strokeWidth: "1.5", strokeLinecap: "round" })
+  );
+};
+const Zen = (props) => {
+  return React.createElement(
+    "svg",
+    { ...props, "data-icon": "o23-zen", viewBox: "0 0 24 24", fill: "none", xmlns: "http://www.w3.org/2000/svg" },
+    React.createElement("path", { d: "M14.5 4.5C14.5 5.88071 13.3807 7 12 7C10.6193 7 9.5 5.88071 9.5 4.5C9.5 3.11929 10.6193 2 12 2C13.3807 2 14.5 3.11929 14.5 4.5Z", stroke: "currentColor", strokeWidth: "1.5" }),
+    React.createElement("path", { d: "M3 17L5.58887 15.6918C5.84084 15.5645 6 15.3043 6 15.0196C6 12.0802 8.1377 9.56573 11.0067 9.0825C11.6598 8.9725 12.3402 8.9725 12.9933 9.0825C15.8623 9.56573 18 12.0802 18 15.0196C18 15.3043 18.1592 15.5645 18.4111 15.6918L21 17", stroke: "currentColor", strokeWidth: "1.5", strokeLinecap: "round", strokeLinejoin: "round" }),
+    React.createElement("path", { d: "M9.5 16L8.45827 17.389C8.42647 17.4314 8.41057 17.4526 8.39456 17.4728C8.13149 17.8053 7.76956 18.0456 7.36102 18.1591C7.33616 18.166 7.31042 18.1724 7.25902 18.1852L5.77423 18.5564C4.7315 18.8171 4 19.754 4 20.8288C4 21.4757 4.52435 22 5.17116 22H6.72727C7.32654 22 7.62617 22 7.917 21.9658C8.59721 21.8859 9.25375 21.667 9.84589 21.3229C10.0991 21.1757 10.3388 20.9959 10.8182 20.6364L11 20.5M11 20.5L13 19M11 20.5L13.5397 21.4524C14.1491 21.6809 14.4539 21.7952 14.7688 21.8688C14.9318 21.9069 15.0966 21.9368 15.2625 21.9583C15.5832 22 15.9087 22 16.5596 22H18.8288C19.4757 22 20 21.4757 20 20.8288C20 19.754 19.2685 18.8171 18.2258 18.5564L16.741 18.1852C16.6896 18.1724 16.6638 18.166 16.639 18.1591C16.2304 18.0456 15.8685 17.8053 15.6054 17.4728C15.5895 17.4526 15.5735 17.4313 15.5417 17.389L14.5 16", stroke: "currentColor", strokeWidth: "1.5", strokeLinecap: "round", strokeLinejoin: "round" })
+  );
+};
 const Labels = {
   ERROR: React.createElement(IntlLabel, { keys: ["o23", "error", "unknown"], value: "Something went wrong." }),
   NoContent: React.createElement(IntlLabel, { keys: ["o23", "error", "no-content"], value: "No content given." }),
@@ -411,10 +563,12 @@ const Labels = {
   NoFile: React.createElement(IntlLabel, { keys: ["o23", "pipeline", "files", "ignored"], value: "No File" }),
   FileMaxSize: React.createElement(IntlLabel, { keys: ["o23", "pipeline", "files", "max-size"], value: "Max size" }),
   FileMimeType: React.createElement(IntlLabel, { keys: ["o23", "pipeline", "files", "mime-type"], value: "Mime types" }),
-  StepFromRequest: React.createElement(IntlLabel, { keys: ["o23", "step", "from-request"], value: "Pick From Input" }),
-  StepToResponse: React.createElement(IntlLabel, { keys: ["o23", "step", "to-response"], value: "Write To Output" }),
-  StepMergeRequest: React.createElement(IntlLabel, { keys: ["o23", "step", "merge-request"], value: "Merge-back strategy" }),
-  SnippetStepSnippet: React.createElement(IntlLabel, { keys: ["o23", "step", "snippet", "snippet"], value: "Snippet" }),
+  StepFromInput: React.createElement(IntlLabel, { keys: ["o23", "step", "from-input"], value: "Pick From Input" }),
+  StepToOutput: React.createElement(IntlLabel, { keys: ["o23", "step", "to-output"], value: "Write To Output" }),
+  StepMerge: React.createElement(IntlLabel, { keys: ["o23", "step", "merge"], value: "Merge-back strategy" }),
+  StepMergeReplace: React.createElement(IntlLabel, { keys: ["o23", "step", "merge-replace"], value: "Replace Merge" }),
+  StepMergeAsProperty: React.createElement(IntlLabel, { keys: ["o23", "step", "merge-as-property"], value: "Merge As" }),
+  StepMainContent: React.createElement(IntlLabel, { keys: ["o23", "step", "main-content"], value: "Main Task" }),
   StepSteps: React.createElement(IntlLabel, { keys: ["o23", "step", "sets", "steps"], value: "Sub Steps" }),
   StepHandleCatchableError: React.createElement(IntlLabel, { keys: ["o23", "step", "error-handles", "catchable"], value: "Catchable Errors" }),
   StepHandleUncatchableError: React.createElement(IntlLabel, { keys: ["o23", "step", "error-handles", "uncatchable"], value: "Uncatchable Errors" }),
@@ -422,8 +576,20 @@ const Labels = {
   StepHandleAnyError: React.createElement(IntlLabel, { keys: ["o23", "step", "error-handles", "uncatchable"], value: "Any Errors" }),
   StepFirstSubStep: React.createElement(IntlLabel, { keys: ["o23", "step", "first-sub-step"], value: "In" }),
   JoinEndNodeTitle: React.createElement(IntlLabel, { keys: ["o23", "node", "join-end"], value: "End of " }),
-  StepUseSnippet: React.createElement(IntlLabel, { keys: ["o23", "step", "use", "snippet"], value: "Snippet" }),
-  StepUseSets: React.createElement(IntlLabel, { keys: ["o23", "step", "use", "sets"], value: "Sets" }),
+  StepUseSnippet: "Snippet",
+  StepUseGetProperty: "Get Property",
+  StepUseDelProperty: "Del Property",
+  StepUseDelProperties: "Del Properties (Alias for Del Property)",
+  StepUseSnowflake: "Snowflake",
+  StepUseHttpFetch: "Http Fetch",
+  StepUseHttpGet: "Http Get (Using Get method for HTTP Fetch)",
+  StepUseHttpPost: "Http Post (Using Post method for HTTP Fetch)",
+  StepUseSets: "Sets",
+  StepUseAsyncSets: "Async Sets",
+  StepUseEach: "Each",
+  StepUseParallel: "Parallel",
+  StepVariableIgnoreSnippet: React.createElement(IntlLabel, { keys: ["o23", "step", "common-variable", "ignore-snippet"], value: "Ignore" }),
+  StepVariableUseSnippet: React.createElement(IntlLabel, { keys: ["o23", "step", "common-variable", "use-snippet"], value: "Use Snippet" }),
   StepErrorHandleTypeNone: React.createElement(IntlLabel, { keys: ["o23", "step", "error-handle", "none"], value: "Ignored" }),
   StepErrorHandleTypeSnippet: React.createElement(IntlLabel, { keys: ["o23", "step", "error-handle", "none"], value: "Use Snippet" }),
   StepErrorHandleTypeSteps: React.createElement(IntlLabel, { keys: ["o23", "step", "error-handle", "none"], value: "Use Sub-steps" }),
@@ -434,6 +600,17 @@ const Labels = {
   StepIOMergeBackUnbox: React.createElement(IntlLabel, { keys: ["o23", "step", "io-merge-back", "unbox"], value: "Unbox and Merge" }),
   StepIOMergeBackAsProperty: React.createElement(IntlLabel, { keys: ["o23", "step", "io-merge-back", "as-property"], value: "As Specific Property" }),
   StepIOMergeBackAsPropertyName: React.createElement(IntlLabel, { keys: ["o23", "step", "io-merge-back", "as-property-name"], value: "Property Name" }),
+  StepSnippetSnippet: React.createElement(IntlLabel, { keys: ["o23", "step", "snippet", "snippet"], value: "Snippet" }),
+  StepGetPropertyProperty: React.createElement(IntlLabel, { keys: ["o23", "step", "get-property", "property"], value: "Property" }),
+  StepDelPropertyProperty: React.createElement(IntlLabel, { keys: ["o23", "step", "del-property", "property"], value: "Property" }),
+  StepHttpRemote: React.createElement(IntlLabel, { keys: ["o23", "step", "http", "system"], value: "HTTP API" }),
+  StepHttpSystem: React.createElement(IntlLabel, { keys: ["o23", "step", "http", "system"], value: "System" }),
+  StepHttpEndpoint: React.createElement(IntlLabel, { keys: ["o23", "step", "http", "endpoint"], value: "Endpoint" }),
+  StepHttpDecorateUrl: React.createElement(IntlLabel, { keys: ["o23", "step", "http", "decorate-url"], value: "Decorate URL" }),
+  StepEachOriginalContentName: React.createElement(IntlLabel, { keys: ["o23", "step", "each", "original-content-name"], value: "Origin Content Variable" }),
+  StepEachItemName: React.createElement(IntlLabel, { keys: ["o23", "step", "each", "item-name"], value: "Item Variable" }),
+  StepParallelCloneData: React.createElement(IntlLabel, { keys: ["o23", "step", "parallel", "clone-data"], value: "Clone For Each Step" }),
+  StepParallelRace: React.createElement(IntlLabel, { keys: ["o23", "step", "parallel", "race"], value: "Race" }),
   Type: React.createElement(IntlLabel, { keys: ["o23", "variable", "type"], value: "Type" }),
   Code: React.createElement(IntlLabel, { keys: ["o23", "variable", "code"], value: "Code" }),
   Name: React.createElement(IntlLabel, { keys: ["o23", "variable", "name"], value: "Name" }),
@@ -448,6 +625,8 @@ const Labels = {
   Ignored: React.createElement(IntlLabel, { keys: ["o23", "badge", "ignored"], value: "Ignored" }),
   Specified: React.createElement(IntlLabel, { keys: ["o23", "badge", "specified"], value: "Specified" }),
   NotAvailable: React.createElement(IntlLabel, { keys: ["o23", "badge", "not-available"], value: "N/A" }),
+  UseDefault: React.createElement(IntlLabel, { keys: ["o23", "badge", "use-default"], value: "Default" }),
+  NoDecoration: React.createElement(IntlLabel, { keys: ["o23", "badge", "no-decoration"], value: "No Decoration" }),
   YesChar: React.createElement(IntlLabel, { keys: ["o23", "badge", "yes-char"], value: "Y" }),
   NoChar: React.createElement(IntlLabel, { keys: ["o23", "badge", "no-char"], value: "N" }),
   Snippet: React.createElement(IntlLabel, { keys: ["o23", "badge", "snippet"], value: React.createElement(Snippet, null) }),
@@ -456,16 +635,17 @@ const Labels = {
   BadgeChecked: React.createElement(IntlLabel, { keys: ["o23", "badge", "checked"], value: React.createElement(ElementChecked, null) }),
   BadgeMissed: React.createElement(IntlLabel, { keys: ["o23", "badge", "missed"], value: React.createElement(ElementMissed, null) }),
   BadgeBanned: React.createElement(IntlLabel, { keys: ["o23", "badge", "banned"], value: React.createElement(ElementBanned, null) }),
-  NoCodeDefinedInFileDef: React.createElement(IntlLabel, { keys: ["o23", "pipeline", "code", "undefined"], value: "No code defined" })
+  NoCodeDefinedInFileDef: React.createElement(IntlLabel, { keys: ["o23", "pipeline", "code", "undefined"], value: "No code defined" }),
+  IllegalDropdownOptionSuffix: React.createElement(IntlLabel, { keys: ["o23", "illegal", "dropdown", "option", "suffix"], value: "(Illegal)" })
 };
 const asUseLabelKey = (use) => {
   return "StepUse" + (use ?? "").trim().split("-").reduce((a, b) => a + b.charAt(0).toUpperCase() + b.slice(1), "");
 };
+const asBeautifiedUse = (use) => {
+  return use.split("-").map((s) => s.charAt(0).toUpperCase() + s.slice(1)).join(" ");
+};
 const askUseLabel = (use) => {
   return Labels[asUseLabelKey(use)];
-};
-const askUseStringifyText = (use) => {
-  return Labels[`${asUseLabelKey(use)}StringifyText`] ?? use;
 };
 var StandardPipelineStepRegisterKey;
 (function(StandardPipelineStepRegisterKey2) {
@@ -593,10 +773,13 @@ class YamlDefSaver extends FileDefSerializer {
       throw new Error("Failed to dump O23 definition to yaml content.");
     }
   }
+  extname() {
+    return "yaml";
+  }
 }
 const isPipelineDef = (def) => def.type === "pipeline";
 const isStepSetsDef = (def) => def.type === "step-sets";
-const confirm$3 = (model, def, handlers) => {
+const confirm$9 = (model, def, handlers) => {
   const edited = model;
   def.code = edited.code;
   def.type = edited.type;
@@ -651,18 +834,20 @@ const discard$1 = (_model) => VUtils.noop();
 var PlaygroundEventTypes;
 (function(PlaygroundEventTypes2) {
   PlaygroundEventTypes2["CONTENT_CHANGED"] = "content-changed";
+  PlaygroundEventTypes2["RESET_CONTENT"] = "reset-content";
   PlaygroundEventTypes2["INIT_HELP_DOC_WIDTH"] = "init-help-doc-width";
   PlaygroundEventTypes2["SHOW_EDIT_DIALOG"] = "show-edit-dialog";
   PlaygroundEventTypes2["HIDE_EDIT_DIALOG"] = "hide-edit-dialog";
+  PlaygroundEventTypes2["REPAINT"] = "repaint";
 })(PlaygroundEventTypes || (PlaygroundEventTypes = {}));
-const Context$1 = reactExports.createContext({});
-Context$1.displayName = "PlaygroundEventBus";
+const Context$2 = reactExports.createContext({});
+Context$2.displayName = "PlaygroundEventBus";
 const PlaygroundEventBusProvider = (props) => {
   const { children } = props;
   const bus = useCreateEventBus("playground");
-  return React.createElement(Context$1.Provider, { value: bus }, children);
+  return React.createElement(Context$2.Provider, { value: bus }, children);
 };
-const usePlaygroundEventBus = () => reactExports.useContext(Context$1);
+const usePlaygroundEventBus = () => reactExports.useContext(Context$2);
 const EditDialogContainer = qe.div.attrs(({ visible }) => {
   return {
     [DOM_KEY_WIDGET]: "o23-playground-edit-dialog",
@@ -749,7 +934,60 @@ const EditDialogContentContainer = qe.div.attrs({ [DOM_KEY_WIDGET]: "o23-playgro
             font-size: 1em;
         }
 
-        p, blockquote, ul, ol, dl, table, pre, details {
+        table {
+            border-collapse: separate;
+            border-radius: 4px;
+            margin: ${PlaygroundCssVars.MARKDOWN_TABLE_MARGIN};
+
+            > thead > tr {
+                border-top: 0;
+                background-color: ${PlaygroundCssVars.MARKDOWN_TABLE_HEADER_BACKGROUND_COLOR};
+
+                &:first-child {
+                    > th:first-child {
+                        border-top-left-radius: ${PlaygroundCssVars.MARKDOWN_TABLE_BORDER_RADIUS};
+                    }
+
+                    > th:last-child {
+                        border-top-right-radius: ${PlaygroundCssVars.MARKDOWN_TABLE_BORDER_RADIUS};
+                    }
+                }
+
+                > td:not(:first-child) {
+                    border-left: 0;
+                }
+            }
+
+
+            > tbody > tr {
+                border-top: 0;
+                background-color: ${PlaygroundCssVars.MARKDOWN_TABLE_ROW_BACKGROUND_COLOR};
+
+                &:nth-child(even) {
+                    background-color: ${PlaygroundCssVars.MARKDOWN_TABLE_ROW_EVEN_BACKGROUND_COLOR};
+                }
+
+                &:last-child {
+                    > td:first-child {
+                        border-bottom-left-radius: ${PlaygroundCssVars.MARKDOWN_TABLE_BORDER_RADIUS};
+                    }
+
+                    > td:last-child {
+                        border-bottom-right-radius: ${PlaygroundCssVars.MARKDOWN_TABLE_BORDER_RADIUS};
+                    }
+                }
+
+                > td {
+                    border-top: 0;
+
+                    &:not(:first-child) {
+                        border-left: 0;
+                    }
+                }
+            }
+        }
+
+        p, blockquote, ul, ol, dl, pre, details {
             margin-bottom: 4px;
         }
 
@@ -1109,7 +1347,22 @@ const NavigatorElementBadgeWrapper = qe.span.attrs({ [DOM_KEY_WIDGET]: "o23-play
 
     &[data-role=as-is] {
         background-color: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_BADGE_AS_IS_BACKGROUND_COLOR};
-        color: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_AS_IS_STEPS_COLOR};
+        color: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_BADGE_AS_IS_COLOR};
+    }
+
+    &[data-role=use-default] {
+        background-color: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_BADGE_USE_DEFAULT_BACKGROUND_COLOR};
+        color: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_BADGE_USE_DEFAULT_COLOR};
+    }
+
+    &[data-role=yes] {
+        background-color: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_BADGE_YES_BACKGROUND_COLOR};
+        color: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_BADGE_YES_COLOR};
+    }
+
+    &[data-role=no] {
+        background-color: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_BADGE_NO_BACKGROUND_COLOR};
+        color: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_BADGE_NO_COLOR};
     }
 
     &[data-role=snippet], &[data-role=steps] {
@@ -1188,6 +1441,14 @@ const SpecificElementLabel = qe.div.attrs({ [DOM_KEY_WIDGET]: "o23-playground-ed
         }
     }
 
+    &[data-visible=false] {
+        display: none;
+
+        & + * {
+            display: none;
+        }
+    }
+
     > span:first-child {
         height: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_HELP_LABEL_HEIGHT};
         display: inline-flex;
@@ -1195,29 +1456,60 @@ const SpecificElementLabel = qe.div.attrs({ [DOM_KEY_WIDGET]: "o23-playground-ed
         position: relative;
     }
 `;
-const SpecificElementHelpBadge = qe.div.attrs({ [DOM_KEY_WIDGET]: "o23-playground-edit-dialog-specific-element-help-badge" })`
+const SpecificElementBadge = qe.div.attrs({ [DOM_KEY_WIDGET]: "o23-playground-edit-dialog-specific-element-badge" })`
     display: flex;
     position: relative;
     align-items: center;
     justify-content: center;
-    height: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_HELP_BADGE_HEIGHT};
-    width: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_HELP_BADGE_HEIGHT};
-    opacity: 0;
+    height: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_BADGE_HEIGHT};
+    width: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_BADGE_HEIGHT};
     cursor: pointer;
-    pointer-events: none;
-    transition: opacity ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION};
-
-    &[data-visible=true] {
-        opacity: 1;
-        pointer-events: auto;
-    }
 
     > svg {
-        color: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_HELP_BADGE_COLOR};
-        height: calc(${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_HELP_BADGE_HEIGHT} * 0.6);
+        height: calc(${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_BADGE_HEIGHT} * 0.6);
+        transition: color ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION};
+    }
+
+    &[data-role=help] > svg {
+        &:hover {
+            color: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_HELP_BADGE_COLOR};
+        }
+    }
+
+    &[data-role=expand] > svg {
+        height: calc(${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_BADGE_HEIGHT} * 0.7);
+
+        &:hover {
+            color: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_EXPAND_BADGE_COLOR};
+        }
+    }
+
+    &[data-role=collapse] > svg {
+        height: calc(${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_BADGE_HEIGHT} * 0.7);
+
+        &:hover {
+            color: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_COLLAPSE_BADGE_COLOR};
+        }
     }
 `;
-const SpecificElementEditorPlaceholder = qe.div.attrs({ [DOM_KEY_WIDGET]: "o23-playground-edit-dialog-specific-element-editor-placeholder" })``;
+const SpecificElementGroupHeader = qe.div.attrs({ [DOM_KEY_WIDGET]: "o23-playground-edit-dialog-specific-element-group-header" })`
+    display: flex;
+    position: relative;
+    align-items: center;
+    border-bottom: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_GROUP_BORDER};
+    justify-content: flex-end;
+
+    &[data-visible=false] {
+        display: none;
+    }
+`;
+const SpecificElementEditorPlaceholder = qe.div.attrs({ [DOM_KEY_WIDGET]: "o23-playground-edit-dialog-specific-element-editor-placeholder" })`
+    display: block;
+
+    &[data-visible=false] {
+        display: none;
+    }
+`;
 const SpecificElementHelpDoc = qe.div.attrs({ [DOM_KEY_WIDGET]: "o23-playground-edit-dialog-specific-element-help-doc" })`
     display: block;
     position: relative;
@@ -1229,6 +1521,10 @@ const SpecificElementHelpDoc = qe.div.attrs({ [DOM_KEY_WIDGET]: "o23-playground-
     &[data-visible=true] {
         height: auto;
         overflow: visible;
+    }
+
+    &[data-visible=false] {
+        display: none;
     }
 
     > div {
@@ -1243,14 +1539,14 @@ var EditDialogEventTypes;
   EditDialogEventTypes2["ELEMENT_VALUE_CHANGED"] = "element-value-changed";
   EditDialogEventTypes2["LOCATE_ELEMENT"] = "locate-element";
 })(EditDialogEventTypes || (EditDialogEventTypes = {}));
-const Context = reactExports.createContext({});
-Context.displayName = "EditDialogEventBus";
+const Context$1 = reactExports.createContext({});
+Context$1.displayName = "EditDialogEventBus";
 const EditDialogEventBusProvider = (props) => {
   const { children } = props;
   const bus = useCreateEventBus("edit-dialog");
-  return React.createElement(Context.Provider, { value: bus }, children);
+  return React.createElement(Context$1.Provider, { value: bus }, children);
 };
-const useEditDialogEventBus = () => reactExports.useContext(Context);
+const useEditDialogEventBus = () => reactExports.useContext(Context$1);
 const ConfigurableElementBadgeChecked = () => {
   return React.createElement(NavigatorElementBadgeWrapper, { "data-role": "checked" }, Labels.BadgeChecked);
 };
@@ -1280,6 +1576,15 @@ const ConfigurableElementBadgeSteps = () => {
 };
 const ConfigurableElementBadgeAsIs = () => {
   return React.createElement(NavigatorElementBadgeWrapper, { "data-role": "as-is" }, Labels.AsIs);
+};
+const ConfigurableElementBadgeUseDefault = () => {
+  return React.createElement(NavigatorElementBadgeWrapper, { "data-role": "use-default" }, Labels.UseDefault);
+};
+const ConfigurableElementBadgeYes = () => {
+  return React.createElement(NavigatorElementBadgeWrapper, { "data-role": "yes" }, Labels.YesChar);
+};
+const ConfigurableElementBadgeNo = () => {
+  return React.createElement(NavigatorElementBadgeWrapper, { "data-role": "no" }, Labels.NoChar);
 };
 const LinkRenderer = (props) => {
   return React.createElement("a", { href: props.href, target: "_blank", rel: "noreferrer" }, props.children);
@@ -1523,11 +1828,27 @@ const useElementValueChangeBy = (element) => {
     };
   }, [on, off, forceUpdate, changeBy]);
 };
+var DialogSpecificElementEventTypes;
+(function(DialogSpecificElementEventTypes2) {
+  DialogSpecificElementEventTypes2["EXPAND"] = "expand";
+  DialogSpecificElementEventTypes2["COLLAPSE"] = "collapse";
+  DialogSpecificElementEventTypes2["ASK_EXPAND"] = "ask-expand";
+})(DialogSpecificElementEventTypes || (DialogSpecificElementEventTypes = {}));
+const Context = reactExports.createContext({});
+Context.displayName = "DialogSpecificElementEventBus";
+const DialogSpecificElementEventBusProvider = (props) => {
+  const { children } = props;
+  const bus = useCreateEventBus("dialog-specific-element");
+  return React.createElement(Context.Provider, { value: bus }, children);
+};
+const useDialogSpecificElementEventBus = () => reactExports.useContext(Context);
 const DialogSpecificElementWrapper = (props) => {
-  const { element, model } = props;
-  const { anchor, label, editor: Editor2, helpDoc, group } = element;
+  const { element, model, visible = true, assistant, askParentExpand } = props;
+  const { anchor, label, editor: Editor2, helpDoc, group, collapsible = false } = element;
   const ref = reactExports.useRef(null);
   const { on, off, fire } = useEditDialogEventBus();
+  const { on: onElement, off: offElement, fire: fireElement } = useDialogSpecificElementEventBus();
+  const [collapsed, setCollapsed] = reactExports.useState(element.collapsed ?? false);
   const [showHelp, setShowHelp] = reactExports.useState(false);
   useElementValueChangeBy(element);
   const forceUpdate = useForceUpdate();
@@ -1537,17 +1858,45 @@ const DialogSpecificElementWrapper = (props) => {
         return;
       }
       if (ref.current != null) {
-        ref.current.scrollIntoView({ behavior: "smooth", block: "start", inline: "nearest" });
+        if (!visible) {
+          askParentExpand();
+        }
+        setTimeout(() => {
+          ref.current.scrollIntoView({ behavior: "smooth", block: "start", inline: "nearest" });
+        }, 30);
       }
     };
     on(EditDialogEventTypes.LOCATE_ELEMENT, onLocateElement);
     return () => {
       off(EditDialogEventTypes.LOCATE_ELEMENT, onLocateElement);
     };
-  }, [on, off, anchor]);
+  }, [on, off, fireElement, anchor, visible, askParentExpand]);
+  reactExports.useEffect(() => {
+    const onAskExpand = () => {
+      if (!visible) {
+        askParentExpand();
+      }
+      setCollapsed(false);
+      fireElement(DialogSpecificElementEventTypes.EXPAND);
+    };
+    onElement(DialogSpecificElementEventTypes.ASK_EXPAND, onAskExpand);
+    return () => {
+      offElement(DialogSpecificElementEventTypes.ASK_EXPAND, onAskExpand);
+    };
+  }, [onElement, offElement, fireElement, visible, askParentExpand]);
   const onHelpBadgeClicked = () => setShowHelp(!showHelp);
-  const onValueChanged = () => {
-    forceUpdate();
+  const onExpandClicked = () => {
+    setCollapsed(!collapsed);
+    fireElement(DialogSpecificElementEventTypes.EXPAND);
+  };
+  const onCollapseClicked = () => {
+    setCollapsed(!collapsed);
+    fireElement(DialogSpecificElementEventTypes.COLLAPSE);
+  };
+  const onValueChanged = (repaint2 = true) => {
+    if (repaint2) {
+      forceUpdate();
+    }
     fire(EditDialogEventTypes.ELEMENT_VALUE_CHANGED, anchor);
   };
   const hasHelpDoc = VUtils.isNotBlank(helpDoc);
@@ -1556,41 +1905,76 @@ const DialogSpecificElementWrapper = (props) => {
     null,
     React.createElement(
       SpecificElementLabel,
-      { "data-group": group, ref },
+      { "data-group": group, "data-visible": visible, ref },
       React.createElement("span", null, label),
       hasHelpDoc ? React.createElement(
-        SpecificElementHelpBadge,
-        { "data-visible": true, onClick: onHelpBadgeClicked },
+        SpecificElementBadge,
+        { onClick: onHelpBadgeClicked, "data-role": "help" },
         React.createElement(ElementHelp, null)
       ) : null
     ),
-    Editor2 != null ? React.createElement(Editor2, { model, onValueChanged }) : React.createElement(SpecificElementEditorPlaceholder, null),
+    group && collapsible ? React.createElement(SpecificElementGroupHeader, { "data-visible": visible }, collapsed ? React.createElement(
+      SpecificElementBadge,
+      { onClick: onExpandClicked, "data-role": "expand" },
+      React.createElement(Expand, null)
+    ) : React.createElement(
+      SpecificElementBadge,
+      { onClick: onCollapseClicked, "data-role": "collapse" },
+      React.createElement(Collapse, null)
+    )) : null,
+    group && !collapsible ? React.createElement(SpecificElementEditorPlaceholder, { "data-visible": visible }) : null,
+    !group && Editor2 != null ? React.createElement(Editor2, { model, onValueChanged, assistant }) : null,
     hasHelpDoc ? React.createElement(
       SpecificElementHelpDoc,
-      { "data-visible": showHelp },
+      { "data-visible": visible && showHelp },
       React.createElement(HelpDoc, { content: helpDoc })
-    ) : React.createElement(SpecificElementHelpDoc, null)
+    ) : null
   );
 };
+const DialogSpecificElementInitExpand = (props) => {
+  const { element } = props;
+  const { fire } = useDialogSpecificElementEventBus();
+  reactExports.useEffect(() => {
+    if (element.group !== true || element.collapsible !== true || element.collapsed !== true) {
+      return;
+    }
+    fire(DialogSpecificElementEventTypes.COLLAPSE);
+  }, []);
+  return React.createElement(reactExports.Fragment, null);
+};
 const DialogSpecificElement = (props) => {
-  const { element, model } = props;
-  const visible = useElementVisible(element, model);
-  if (!visible) {
+  const { element, model, assistant } = props;
+  const { on, off, fire } = useDialogSpecificElementEventBus();
+  const [visible, setVisible] = reactExports.useState(props.visible ?? true);
+  reactExports.useEffect(() => {
+    const onExpand = () => setVisible(true);
+    const onCollapse = () => setVisible(false);
+    on && on(DialogSpecificElementEventTypes.EXPAND, onExpand);
+    on && on(DialogSpecificElementEventTypes.COLLAPSE, onCollapse);
+    return () => {
+      off && off(DialogSpecificElementEventTypes.EXPAND, onExpand);
+      off && off(DialogSpecificElementEventTypes.COLLAPSE, onCollapse);
+    };
+  }, [on, off]);
+  const elementVisible = useElementVisible(element, model);
+  if (!elementVisible) {
     return null;
   }
+  const askParentExpand = () => fire(DialogSpecificElementEventTypes.ASK_EXPAND);
   return React.createElement(
-    React.Fragment,
+    DialogSpecificElementEventBusProvider,
     null,
-    React.createElement(DialogSpecificElementWrapper, { ...props }),
+    React.createElement(DialogSpecificElementWrapper, { ...props, visible, askParentExpand }),
     element.children != null ? element.children.map((child) => {
-      return React.createElement(DialogSpecificElement, { element: child, model, key: child.code });
-    }) : null
+      return React.createElement(DialogSpecificElement, { element: child, model, visible, assistant, key: child.code });
+    }) : null,
+    React.createElement(DialogSpecificElementInitExpand, { element })
   );
 };
 const DialogSpecificElements = (props) => {
-  const { elements, model } = props;
+  const { elements, model, assistant } = props;
   return React.createElement(SpecificElementsContainer, null, elements.map((element) => {
-    return React.createElement(DialogSpecificElement, { element, model, key: element.code });
+    return React.createElement(DialogSpecificElement, { element, model, visible: true, assistant, key: element.code });
   }));
 };
 const DialogSpecific = (props) => {
@@ -1645,7 +2029,7 @@ const DialogContentInitializer = () => {
   return React.createElement(EditDialogContentInitializer, { ref });
 };
 const DialogWorkArea = (props) => {
-  const { helpDoc, elements, confirm: confirm2, discard: discard2, model } = props;
+  const { helpDoc, elements, confirm: confirm2, discard: discard2, model, assistant } = props;
   const { fire } = usePlaygroundEventBus();
   const { fire: fireDialog } = useEditDialogEventBus();
   const onConfirmClicked = () => {
@@ -1680,19 +2064,19 @@ const DialogWorkArea = (props) => {
       )
     ),
     React.createElement(DialogHelpDesk, { helpDoc }),
-    React.createElement(DialogSpecific, { elements, model }),
+    React.createElement(DialogSpecific, { elements, model, assistant }),
     React.createElement(DialogNavigator, { elements, model })
   );
 };
 const DialogContent = (props) => {
-  const { helpDoc, elements, prepare: prepare2, confirm: confirm2, discard: discard2 } = props;
+  const { helpDoc, elements, prepare: prepare2, confirm: confirm2, discard: discard2, assistant } = props;
   const [state] = reactExports.useState({ model: prepare2() });
   return React.createElement(
     EditDialogEventBusProvider,
     null,
     React.createElement(StateHolder, null),
     React.createElement(LayoutController, null),
-    React.createElement(DialogWorkArea, { helpDoc, elements, confirm: confirm2, discard: discard2, model: state.model }),
+    React.createElement(DialogWorkArea, { helpDoc, elements, confirm: confirm2, discard: discard2, model: state.model, assistant }),
     React.createElement(DialogContentInitializer, null)
   );
 };
@@ -1736,66 +2120,170 @@ const EditDialog = () => {
     React.createElement(EditDialogWrapper, null, state.content)
   );
 };
-const markdown$o = "If using data from the request body, the data portion of the body must be in valid JSON format.\n\n> `GET` requests by default do not parse the request body, while other requests (methods) default to parsing the request body.\n";
-const markdown$n = "Used for locating configurations within the application, required fields, and must be globally unique.";
-const markdown$m = "Specify whether the current configuration is effective.\n\n> Note that configurations that are not effective will not be loaded when the application starts, so the effective status cannot be switched\n> at runtime.";
-const markdown$l = "Indicate whether the returned response is a file.\n";
-const markdown$k = "Specify the response headers to be outputted to the client, including names and values.\n\nThe syntax rules are as follows:\n\n- Use a colon to connect the name and value, for example `x-name: value`. Note that only the content before the first colon is considered\n  the name, and the remaining part is the value,\n- If multiple are needed, they should be written on multiple lines,\n- The spaces around the name and value will be automatically removed.\n";
-const markdown$j = "To accept uploaded files, multiple attributes are required:\n\n- Specify name: Each line represents a name. For multiple names, define them on separate lines,\n- Each name can specify a max count by appending a colon followed by a number after the name,\n	- `<= 0` indicates unlimited files for that name,\n	- `>= 1` indicates a maximum count,\n- Specify maximum file size: Use plain numbers for bytes, or append `k`, `K`, `m`, `M` for kilobytes and megabytes,\n- Specify file type [mime type](https://docs.nestjs.com/techniques/file-upload#file-validation): Separate multiple types with commas or\n  semicolons.\n\n> The maximum file size and file type specifications apply to all files.\n\n> When defining upload file parameters, due to HTTP protocol specifications requiring the use of Form Data, the `body` supports only\n> key-value pairs. Therefore, the parsed data forms a single-layer JSON object and no longer retains a multi-layered structure.\n";
-const markdown$i = "To specify receiving multiple request headers, use commas or semicolons as separators.\n";
-const markdown$h = "Only executed when the application starts, during which the system does not provide any parameters to the pipeline.\n";
-const markdown$g = "`GET` requests by default do not parse the request body, while other requests (methods) default to parsing the request body.\n";
-const markdown$f = "Parse parameters from the [route](https://docs.nestjs.com/controllers#route-parameters). For example, can parse the `name`\nand `age` parameters from `https://example.com/:name/:age`.\n\n> The parameter names are automatically synchronized here when modifying the `route` value.\n\n> Although parameters are defined in the `route`, it is still possible to ignore them here, but this is not the recommended approach. \n";
-const markdown$e = "## Overview\n\nThe core concept of `@rainbow-o23` is pipeline, where all logic is defined through pipeline and its steps. There are three different forms\nof\npipeline based on how it is defined:\n\n- Pipeline, which can optionally be exposed as an API. To differentiate, we generally refer to pipelines that are exposed as\n  APIs as `Pipeline as API`, and pipelines that are not exposed as APIs as `pipeline`. In all documents, we will use\n  this name to refer to it. If not specifically labeled as `as API`, it means that this pipeline has not been exposed as an API.\n- Step set, composed of a group of steps,\n- Step: based on the definition of a single step.\n\nIf defined as a pipeline and is exposed as an API, it does not allow other pipeline steps to call it, otherwise it does. Therefore, if\ncertain logic combinations can be reused, they should be defined as a pipeline/steps set/step.\n\n## Common attributes\n\nAll definitions should have the following attributes:\n\n- A `code` attribute for identification within the system, so the value of the `code` attribute is globally unique.\n- A `type` attribute is used to indicate the type of this definition, and the value of the `type` attribute must be one\n  of `pipeline`, `step-sets`, or `step`.\n- An `enabled` attribute is used to indicate whether this definition is effective, and the value of the `enabled` attribute must be\n  either `true` or `false`. If not defined, this definition is considered to be effective by default.\n\n## Pipeline as API\n\nIf the definition contains a `route` attribute and specifies a URI, it is considered to be published as an API. A pipeline published\nas an API includes all standard HTTP protocol elements:\n\n- `route`, URI of API. Excluding the scheme, domain name, and port in the URL, the application configuration can also specify the path\n  context,\n	- To facilitate the definition and parsing of data contained in the `route`, you can use `pathParams` for definition. `pathParams` can\n	  be a list of parameters, or you can use `true` to define receiving all valid path parameters. Please note that the definition of path\n	  parameters must conform to the [nestjs](https://docs.nestjs.com/controllers#route-parameters) standard.\n- `method`, supporting `get`, `post`, `put`, `patch`, and `delete`,\n- `headers`, a list of headers that need to be parsed, or `true` to parse all headers,\n- `queryParams`, a list of query parameters that need to be parsed, or `true` to parse all query parameters,\n- `body`, the content of the HTTP body is in JSON format. To better adapt to common practices of HTTP API usage:\n	- When `method` is specified as `get` and the `body` parameter is not explicitly set to `true`, the system defaults to ignoring the HTTP\n	  body content,\n	- When `method` is not specified as `get` and the `body` parameter is not explicitly set to `false`, the system defaults to parsing the\n	  HTTP body content,\n- `files`, a list of files that need to be parsed, or `true` to parse all files.\n\nThere are also some HTTP response definitions:\n\n- `exposeHeaders`, a set of headers that need to be pushed to the client,\n- `exposeFile`, indicating whether the response data is a file.\n\n## Pipeline\n\nIf the definition does not contain a `route` attribute, it is considered a pipeline. A pipeline can be called by other pipeline steps.\n\nA pipeline always includes at least one step, and its behavior is entirely determined by the steps defined within it.\n\nA pipeline also has a special property `initOnly`, which if declared as `true`, indicates that this pipeline will only be\nexecuted when the application starts, and the application will not provide any parameters during execution.\n\n## Step set\n\nStep set, as the name suggests, can define a set of steps. They can also define how their built-in steps are executed, typically in the\nfollowing ways:\n\n- Synchronous serial,\n- Asynchronous serial,\n- Synchronous parallel,\n- Conditional execution,\n- Loop execution (only for input data as an array),\n- Start a database transaction.\n\nBy combining the various types of step collections mentioned above, you can construct execution sequences suitable for different scenarios.\n\n## Step\n\nSteps can be any type of step definition, including step sets. Logically, a step set is a step which includes a set of sub steps, and\ndifferent step sets define the way their sub steps are executed. Steps are implemented by different standard step components for\ndifferent purposes. Here are some built-in standard steps:\n\n- Retrieve values from models or remove attributes,\n- Execute scripts,\n- Generate snowflake IDs,\n- Call predefined pipelines or steps,\n- Make remote HTTP API calls,\n- Read from or write to databases.\n\nAdditionally, you can also obtain the following steps support through the `@rainbow-o23` standard extension library:\n\n- Print PDF, Word, Excel, CSV,\n- Manipulate AWS S3 objects.\n\n> The latest step support can be found on [Github](https://github.com/InsureMO/rainbow-o23).\n";
-const markdown$d = "Parse parameters from the [URL Search](https://developer.mozilla.org/en-US/docs/Web/API/URL/searchParams). For example, can parse the `name`\nand `age` parameters from `https://example.com/?name=Jonathan%20Smith&age=18`.\n\nTo specify receiving multiple query parameters, use commas or semicolons as separators.\n";
-const markdown$c = "The route of the API, excluding the HTTP protocol scheme, domain name, and port parts. The context of the URL path can also be\nspecified via the system environment variable `CFG_APP_CONTEXT`.\n\n> It should start with `/`.\n\n`route` syntax can be referenced from [nestjs - routing](https://docs.nestjs.com/controllers#routing)\nand [nestjs - route parameters](https://docs.nestjs.com/controllers#route-parameters), as well\nas [express](https://expressjs.com/en/guide/routing.html). Generally, there are the following rules:\n\n- Use regex for matching, but it's not recommended.\n- Define parameters with `:` prefix, for example `:name`, ensuring parameter names conform to the regex pattern `[A-Za-z0-9_]`.\n- For parsing multiple parameters, use `/`, `.`, or `-` as separators. \n";
-const markdown$b = "- `Pipeline`: A predefined pipeline that can be invoked by other pipelines and can also be executed during application\n  initialization. If specified to execute during application initialization, it cannot be used at runtime, and the initialization is\n  parameterless.\n- `Pipelne as API`: A predefined pipeline exposed as an API, which cannot be invoked by other pipelines.\n- `Step Set`: A predefined set of steps that can be invoked by other pipelines.\n- `Step`: A predefined step that can be invoked by other pipelines.\n";
+const markdown$K = "Handle any error thrown by current step. The following parameters can be used during the error handling process:\n\n- `$code`: Error code. Note that it is always `O01-99999` when using the `AnyError` handler.\n- `$error`: Error object itself,\n- `$factor`: The content portion of the request data, excluding context data,\n- `$request`: The entire request data, including both content and context,\n- `$helpers` or `$`: Data manipulation helpers.\n\n> It is an async function, so `await` is available inside.\n";
+const markdown$J = "Handle `CatchableError` thrown by current step. The following parameters can be used during the error handling process:\n\n- `$code`: Error code. Note that it is always `O01-99999` when using the `AnyError` handler.\n- `$error`: Error object itself,\n- `$factor`: The content portion of the request data, excluding context data,\n- `$request`: The entire request data, including both content and context,\n- `$helpers` or `$`: Data manipulation helpers.\n\n> It is an async function, so `await` is available inside.\n";
+const markdown$I = "### Error handling\n\nError handling is a critical part of any step. It is important to handle errors properly to ensure that your step is robust\nand reliable. `@rainbow-o23` provided a standard exception handling process, including the following four types of exceptions:\n\n- `CatchableError`: Catchable exception. Generally refers to exceptions thrown in pipeline steps expected to be caught and handled\n  externally,\n- `ExposedUncathableError`: Uncatchable exception which identified as exposed. Generally refers to exceptions thrown in pipeline steps not\n  expected to be handled additionally externally, and should be exposed to the caller,\n- `UncatchableError`: Uncatchable exception. Generally refers to exceptions thrown in pipeline steps not expected to be handled additionally\n  externally,\n- `AnyError`: Any exception. Generally refers to any exception thrown in pipeline steps.\n\nIt is important to note that exception handling is mutually exclusive. If an exception has already been caught by a handler, it will not be\ncaught by any other handlers. After throwing an exception, the pipeline steps will detect exception type in the above order. As long as the\nexception matches the catch type and the processor for that catch type has been defined, the defined processing logic will be entered. In\npractical scenarios, exception catching needs to be done according to requirements. Generally, there are some recommended practices:\n\n- Generally, `CatchableError` is expected to be caught and handled. For whether the pipeline step will throw this exception, please refer to\n  the corresponding step documentation,\n- In most pipeline steps, since custom snippet can be used to define logic (in addition to the step itself, can use snippet to\n  define the logic for `pick from input` and `write to output`), any type of exception can be thrown in these snippets, so whether or not\n  you need to catch it depends on the specific definition of the custom snippet for this step,\n- Generally speaking, `ExposedUncatchableError` and `UncatchableError` do not require further processing,\n- Also, can use `AnyError` to catch all types of exceptions, including `Node.js` standard exceptions\n\n`@rainbow-o23` provides two ways to handle exceptions, which will be demonstrated below.\n\n#### Using snippet\n\nUse snippet processing for handling error. The following parameters can be used during the error handling process:\n\n- `$code`: Error code. Note that it is always `O01-99999` when using the `AnyError` handler.\n- `$error`: Error object itself,\n- `$factor`: The content portion of the request data, excluding context data,\n- `$request`: The entire request data, including both content and context,\n- `$helpers` or `$`: Data manipulation helpers.\n\n> All handlers are async functions, so `await` is available inside.\n\nAfter handling the exception in the snippet, can either return normally, rethrow the original exception, or construct and throw a new\nexception. The following examples will provide some references:\n\n```ts\n// simply log the exception.\n$.$logger.error(`An exception[code=${$code}] caught.`, $error);\n\n// return normally\nreturn 'Everything is OK now.';\n\n// or check exception type, decide to rethrow or construct a new exception\nif ($.$errors.isCatchable($error)) {\n	// construct and throw a new exception\n	$.$errors.exposed({status: 500, code: $code, reason: $error.message});\n} else {\n	// rethrow the original exception\n	throw $error;\n}\n```\n\n> In most cases, special exception handling is not necessary, as `@rainbow-o23` will handle all exceptions consistently when returning to\n> the API caller.\n\n> When choosing to return normally, meaning no exception is thrown anymore, the returned data will go through the `write to output` process\n> and will be consistent with the normal logic of returning data in the pipeline steps. However, if an exception is thrown during\n> the `write to output` process, this exception will be thrown directly, no error handling on this situation.\n\nHere are some commonly used utility function examples for exception handling in `$helpers`. For detailed specifications, please refer to\nthe `@rainbow-o23` documentation.\n\n```ts\n// log exception\n$.$logger.log(`An exception[code=${$code}] caught.`, $error);\n$.$logger.warn(`An exception[code=${$code}] caught.`, $error);\n// If the log function has two or more parameters, and the last one is a string, then the last parameter will be used as the log category\n$.$logger.error(`An exception[code=${$code}] caught.`, $error, 'SomeLogCategory');\n\n// check error type\n// note exposed uncatchable error is also an uncatchable error\n// so if want to check exposed uncatchable error, should check it first\n$.$errors.isCatchable($error);       // check it is a catchable error\n$.$errors.isExposed($error);         // check it is an exposed uncatchable error\n$.$errors.isUncatchable($error);     // check it is an uncatchable error\n\n// construct a new error and rethrow it\n// for catchable\n$.$errors.catchable({code: $code, reason: 'I am catchable.'});\n// for exposed uncatchable, a status field is required\n// status is exactly following the HTTP status code, code is the error code, reason is the error message\n$.$error({status: 500, code: $code, reason: 'Unpredicated error occurred.'});\n$.$errors.exposed({status: 500, code: $code, reason: 'Unpredicated error occurred.'});\n// for uncatchable\n$.$errors.uncatchable({code: $code, reason: 'I am uncatchable.'});\n```\n\n#### Using sub-steps\n\nIn practice, if an exception requires additional handling and is not thrown after processing, it is recommended to configure this using\npipeline steps. When choosing to handle exceptions using pipeline steps, the format of the request data received by the step is as follows\n\n```ts\ninterface Data {\n	$code: string;        // error code \n	$error: Error;        // error itself \n	$factor: any;         // original factor data, return by the pick from input process\n	$request: any;        // original request data, with both input data and pipeline context\n}\n```\n\n";
+const markdown$H = "Handle `ExposedUncatchableError` thrown by current step. The following parameters can be used during the error handling process:\n\n- `$code`: Error code. Note that it is always `O01-99999` when using the `AnyError` handler.\n- `$error`: Error object itself,\n- `$factor`: The content portion of the request data, excluding context data,\n- `$request`: The entire request data, including both content and context,\n- `$helpers` or `$`: Data manipulation helpers.\n\n> It is an async function, so `await` is available inside.\n";
+const markdown$G = "Obtain a portion of the request data as the input for this step. Additional processing of the data can also be performed during this\nprocess. The following parameters can be used during the conversion process:\n\n- `$factor`: The content portion of the request data, excluding context data,\n- `$request`: The entire request data, including both content and context,\n- `$helpers` or `$`: Data manipulation helpers.\n\nThe returned data will be used as the real input data for this step. If no data is returned, there is no input data for this step.\n";
+const markdown$F = "### Input and output\n\nUsually, when processing logic, we do not need all the memory contexts, but only need to extract certain fragments for processing and return\nthe processing results to the context for subsequent logic to continue processing. Therefore, `@rainbow-o23` provides a relevant\nimplementation, allowing pipeline steps to flexibly access the relevant memory data and write back the processed result data to the context\nin the required format.\n\n#### Pick from input\n\nUse the `Pick from input` property to define a script. The returned data will be used as input data for this step. The script is a function\nthat takes the following parameters:\n\n- `$factor` represents the incoming data,\n- `$request` represents the original request data (including incoming data and a context), it is not recommended,\n- `$helpers` represents function supporting, and it has a shortcut `$`.\n\nHere is a simple example:\n\n```ts\n// incoming data\nconst incoming = {name: 'John', age: 23};\n\n// Only the age is needed as a parameter in the step processing, not the name.\n// Define a transformation script, so in the actual processing logic of the current step, only the age will be collected, and there won't be a field for the name attribute.\nreturn {age: $factor.age};\n```\n\n> `return` is not necessary. If the script is only one line (and has no line breaks), the system will consider the result of executing that\n> line as the result of the entire function.\n\n> It's important to note that whether modifications to memory data during processing will affect the original input data depends on how the\n> transformation is handled. Generally, if deep cloning is not performed, it will affect the data; otherwise, it will not.\n\n#### Write to output\n\nUse the `Write to output` property to define a script. The returned data will be used as output data for this step. The script is a function\nthat takes the following parameters:\n\n- `$result` represents the outgoing data,\n- `$request` represents the original request data (including incoming data and a context), it is not recommended,\n- `$helpers` represents function supporting, and it has a shortcut `$`.\n\nHere is a simple example:\n\n```ts\n// outgoing data\nconst outgoing = {name: 'John', age: 23};\n\n// The result data should only include age, not the name.\n// Define a transformation script, the age alone will be stored in memory for subsequent use.\nreturn {age: $result.age};\n```\n\n> `return` is not necessary. If the script is only one line (and has no line breaks), the system will consider the result of executing that\n> line as the result of the entire function.\n\n>\n\n#### Merge-back Strategy\n\nAfter processing the step logic and obtaining the returned data, you can also define how this returned data should be merged into the\ncontext of the entire pipeline. There are several ways to define this, all declared using the `Merge-back strategy` attribute:\n\n- Defined as `Replace`, it means the returned data will overwrite the original context and be used as the new context.\n- Defined as `Unbox and merge`, it means the returned data will be automatically unboxed and merged into the original context. In this\n  case, the returned data must be a JSON object and cannot be a primitive type or an array.\n- Defined as `As specific property`, it means the returned data will be merged into the original context under the specified name.\n\nHere is a simple example:\n\n```ts\n// context data\nlet context = {name: 'John', age: 0};\nconst result = {age: 23};\n\n// merge not defined, equivalent to\ncontext = result;\n// context is {age: 23}\n\n// merge is \"unbox and merge\", equivalent to\ncontext = {...context, ...result};\n// context is {name: 'John', age: 23}\n\n// merge is 'person', equivalent to\ncontext = {...context, person: result};\n// context is {name: 'John', age: 0, person: {age: 23}}\n```\n\n> Note that in the latter two cases, there is a possibility of name collision resulting in the original context being overwritten.\n> Therefore, it is necessary to have a clear understanding of the data structure in the context.\n\n#### Keep or clear\n\nIn the following `Write to output` scenarios, and in cases where merge-back strategy is specified as `Replace`:\n\n- Returning `null` or `undefined` (recommended to use `(void 0)` to represent `undefined`) indicates that the original request data will\n  continue to be used as the request data for the next step without any modifications.\n- Returning a flag created by `$helpers.$clearContextData()` to clear context data will be used as the request data for the next step, while\n  all other data is cleared.\n\n> Please note that \"without any modifications\" is a conceptual reference. If the data has already been altered by the logic executed in the\n> step, the data passed to the next step may not be identical to the input data of this step.\n";
+const markdown$E = "Define the strategy for writing back step result data to memory:\n\n- `Replace`: means the returned data will overwrite the original context and be used as the new context.\n- `Unbox and merge`: means the returned data will be automatically unboxed and merged into the original context. In this\n  case, the returned data must be a JSON object and cannot be a primitive type or an array.\n- `As specific property`: means the returned data will be merged into the original context under the specified name.\n";
+const markdown$D = "A brief name that indicates the purpose of the step.\n";
+const markdown$C = "Write back the result of the step execution to memory for use as the request data in the next step. Additional processing of the data can\nalso be performed during this process. The following parameters can be used during the conversion process:\n\n- `$result`: Result data of the step execution,\n- `$request`: Entire request data, including both content and context,\n- `$helpers` or `$`: Data manipulation helpers.\n\nThe returned data will be written back to memory as the actual result data for this step.\n\n> How the step's returned data is written back to memory depends on the return result of this process and the chosen write-back strategy.\n> Please refer to the merge-back strategy documentation for details.\n";
+const markdown$B = "Handle `UncatchableError` thrown by current step. The following parameters can be used during the error handling process:\n\n- `$code`: Error code. Note that it is always `O01-99999` when using the `AnyError` handler.\n- `$error`: Error object itself,\n- `$factor`: The content portion of the request data, excluding context data,\n- `$request`: The entire request data, including both content and context,\n- `$helpers` or `$`: Data manipulation helpers.\n\n> It is an async function, so `await` is available inside.\n";
+const markdown$A = "The specified step definition is used. The logic executed by the system has already been predefined in the step definition. After specifying\nthe step definition, you will also need to specify the parameters required for that step definition.\n";
+const docs$a = {
+  stepName: markdown$D,
+  stepUse: markdown$A,
+  stepFromInput: markdown$G,
+  stepToOutput: markdown$C,
+  stepMergeToRequest: markdown$E,
+  stepCatchableErrorHandle: markdown$J,
+  stepUncatchableErrorHandle: markdown$B,
+  stepExposedErrorHandle: markdown$H,
+  stepAnyErrorHandle: markdown$K,
+  stepIOTransformer: markdown$F.replace(/\$/g, "$$$$"),
+  stepErrorHandles: markdown$I.replace(/\$/g, "$$$$")
+};
+const addTocToStepDocs = (markdown2) => {
+  const indexes = new Array(6).fill(0);
+  let topLevel = 10;
+  return markdown2.split("\n").map((line) => {
+    const matched = line.match(/^(#{1,6})\s(.*)$/);
+    if (matched == null) {
+      return line;
+    } else {
+      topLevel = Math.min(topLevel, matched[1].length - 1);
+      return [matched[1], matched[2]];
+    }
+  }).map((parsed) => {
+    if (typeof parsed === "string") {
+      return parsed;
+    } else {
+      const myLevel = parsed[0].length - 1;
+      indexes[myLevel]++;
+      for (let i = myLevel + 1; i < indexes.length; i++) {
+        indexes[i] = 0;
+      }
+      return `${parsed[0]} ${indexes.slice(topLevel, myLevel + 1).join(".")}. ${parsed[1]}`;
+    }
+  }).join("\n");
+};
+const mergeStepDocsFreely = (doc, replacements) => {
+  const markdown2 = Object.keys(replacements).reduce((doc2, key) => {
+    return doc2.replace(`\${${key}}`, replacements[key]);
+  }, doc);
+  return addTocToStepDocs(markdown2);
+};
+const mergeStepDocs = (doc, toc = true) => {
+  const markdown2 = doc.replace("${transformer}\n", docs$a.stepIOTransformer).replace("${errorHandles}\n", docs$a.stepErrorHandles);
+  return toc ? addTocToStepDocs(markdown2) : markdown2;
+};
+const markdown$z = "### Async sets step\n\nThe async sets pipeline step includes a set of sub-step definitions, where all the actual processing logic is executed within the sub-steps,\nasynchronously. The input data for the first sub-step could be specified by `Pick from input`.\n\n> Note that the sub-steps are executed in sequence, asynchronous is relative to this async sets step. This also means that modifications to\n> memory within sub-steps cannot be directly reflected in the current process, so must handle it with caution. Generally, direct\n> modifications to input data or context data within sub-steps should be avoided unless it can be confirmed that the data will not be used\n> in the current process.\n\n#### Environment variables\n\nThis step does not use any environment variables.\n\n#### Step variables\n\nThis step has no other properties defined except for using the `steps` attribute to define sub-steps.\n\n#### Returning\n\nThis step does not return anything.\n\n${transformer}\n\n${errorHandles}\n";
+const docs$9 = {
+  asyncSetsStep: mergeStepDocs(markdown$z)
+};
+const markdown$y = "Delete specified property or properties from the input data. If there are multiple attributes, use `,` to connect them.\n\nFor example, if there is input data like `{a: 1, b: 2, c: 3}`, then with the following definition, you can retrieve the\ncorresponding value:\n\n| Property | After deletion  |\n|:---------|:----------------|\n| `a`      | `{b : 2, c: 3}` |\n| `a, b`   | `{c: 3}`        |\n\n> If the specified property name does not exist on the given data object, there will be no side effects.\n";
+const markdown$x = "### Delete property step\n\nThe delete property pipeline step remove the specified property name from input data.\n\n#### Environment variables\n\nThis step does not use any environment variables.\n\n#### Step variables\n\nDefine the `property` attribute to remove a specified property from the input data. Since property does not support multi-level data\nstructures, when removing a property from a non-top-level data object in the input data, should first use `Pick from input` to retrieve\nthe non-top-level object.\n\n#### Returning\n\nThis step does not return anything.\n\n${transformer}\n\n${errorHandles}\n";
+const docs$8 = {
+  stepDelPropertyProperty: markdown$y,
+  delPropertyStep: mergeStepDocs(markdown$x)
+};
+const markdown$w = "The variable name for obtaining the current round's input data in the sub-steps.  \n`$item` by default, and the value can be accessed through `$factor.$item`.\n";
+const markdown$v = "The variable name for obtaining original input data obtained in the sub-steps.\n`$content` by default, and the value can be accessed through `$factor.$content`.\n";
+const markdown$u = "### Each step\n\nThe each pipeline step includes a set of sub-step definitions, where all the actual processing logic is executed within the sub-steps. The\nsub-step set will be executed N times, where N is the length of the given sub-step input data array. For each execution of the sub-step set,\nthe input data are the array element at the current index and original input data itself.\n\n> Ensure that the input data is always an array; otherwise, the sub-steps cannot execute correctly. Additionally, if the given input\n> parameter is `null`, `undefined`, or an array with a length of 0, it will be returned directly without affecting the context data and\n> without executing the `Write to output` stage.\n\n#### Environment variables\n\nThis step does not use any environment variables.\n\n#### Step variables\n\n| Variable name       | Type   | Description                                                                                      |\n|---------------------|--------|--------------------------------------------------------------------------------------------------|\n| originalContentName | string | The name of the variable that contains the original input data. Optional, default is `$content`. |\n| itemName            | string | The name of the variable that contains the current item. Optional, default is `$item`.           |\n\nAt the same time, the step provides a semaphore to exit the loop, named `$semaphore`. Therefore, the format of the input data received by\nthe sub-steps is as follows:\n\n```ts\n// Assuming no parameters are specified, all defaults will be used.\ninterface Data {\n	$content: any;          // original input data\n	$item: any;             // item at the current index\n	$semaphore: Symbol;     // return this semaphore to break and exit the loop\n}\n\n// Assuming the parameters are specified as originalContentName=input, itemName=data\ninterface Data {\n	input: any;             // original input data\n	data: any;              // item at the current index\n	$semaphore: Symbol;     // return this semaphore to break and exit the loop\n}\n```\n\n#### Returning\n\nAn array containing the returns from all execution rounds, maintaining the same order as the given parameter array.\n\n> Typically, need to specify a merge property in the `Write to output` step for use in subsequent pipeline steps.\n\n${transformer}\n\n${errorHandles}\n";
+const docs$7 = {
+  stepEachItemName: markdown$w,
+  stepEachOriginalContentName: markdown$v,
+  eachStep: mergeStepDocs(markdown$u)
+};
+const markdown$t = "Retrieve the value of a specified property name from the input data. Property names can be connected with dots (`.`) to denote multiple\nhierarchical levels.\n\nFor example, if there is input data like `{a: {b: [{c: 3}, {c: 4}]}}`, then with the following definition, you can retrieve the\ncorresponding value:\n\n| Property | Value                   |\n|:---------|:------------------------|\n| `a`      | `{b: [{c: 3}, {c: 4}]}` |\n| `a.b`    | `[{c: 3}, {c: 4}]`      |\n| `a.b.c`  | `[3, 4]`                |\n\n> Please note that when attempting to retrieve a property value from `null`, `undefined`, or a primitive type (including `string`,\n> `number`, `boolean`, `symbol`, `bigint`), will always receive a `null`.\n";
+const markdown$s = "### Get property step\n\nThe get property pipeline step retrieves the value of the specified property name and finally returns the processed result to the memory\ncontext for further processing.\n\n#### Environment variables\n\nThis step does not use any environment variables.\n\n#### Step variables\n\nDefine the `property` attribute to retrieve the value from a specified position in the input data. The retrieval rules are as follows:\n\n- Property names can use dot (`.`) to connect, allowing access to values from nested objects.\n- Values based on `null` or `undefined` will return `null`.\n- Values based on any basic type (including `string`, `number`, `bigint`, `boolean`, `Symbol`) will return `null`.\n- If there are multiple levels of properties and one level's data is an array, the final result will be an array.\n\n#### Returning\n\nThe value of the specified property, can be any value.\n\n> Typically, need to specify a merge property in the `Write to output` step for use in subsequent pipeline steps.\n\n${transformer}\n\n${errorHandles}\n";
+const docs$6 = {
+  stepGetPropertyProperty: markdown$t,
+  getPropertyStep: mergeStepDocs(markdown$s)
+};
+const markdown$r = "Reprocess the endpoint URL read from the environment. The following parameters can be used during the decoration process:\n\n- `$endpointUrl`: The URL read from the environment based on the `System` and `Endpoint` definitions, can be a fully qualified URL\n  or just a\n  URL context or template,\n- `$factor`: The content portion of the request data, excluding context data,\n- `$request`: The entire request data, including both content and context,\n- `$helpers` or `$`: Data manipulation helpers.\n\nShould return the final URL to be used for the HTTP request. If this snippet is not defined, then use the URL configured in\nthe environment variables for access.\n";
+const markdown$q = "Remote HTTP service endpoint code. This code can represent a single API or a strongly related set of APIs, depending on how `Decorate URL`\nis used.\n";
+const markdown$p = "### Http fetch step\n\nThe http fetch pipeline step calls remote HTTP services through defined parameters, and can process the returned results and perform related\nerror handling.\n\n${http}\n";
+const markdown$o = "### Http get step\n\nThe http get pipeline step calls remote HTTP services through defined parameters, and can process the returned results and perform related\nerror handling. The Http method is `get`.\n\n${http}\n";
+const markdown$n = "#### Environment variables\n\nAll environment variable names depend on the definitions of the `System` and `Endpoint` step variables. For convenience, using the\nfollowing\ndefinitions, which will be used in the environment variables:\n\n- `SYSTEM`: corresponding to the value of `System`,\n- `ENDPOINT`: corresponding to the value of `Endpoint`.\n\nAssuming the value of `System` is `s1` and the value of `Endpoint` is `order`, a system parameter\nnamed `CFG_ENDPOINTS_{SYSTEM}_{ENDPOINT}_URL` would thus be `CFG_ENDPOINTS_S1_ORDER_URL`.\n\n> Note that the values of `System` and `Endpoint` will be converted to uppercase, and any `.` characters will be replaced\n> with `_`. Additionally, based on common practices for environment parameter definitions, the values for `System` and `Endpoint`\n> cannot include `-`, `=` or whitespace characters.\n\nThis step uses the following system environment variables definition:\n\n- `CFG_ENDPOINTS_{SYSTEM}_{ENDPOINT}_URL`: Definition of the endpoint’s URL. This URL can be a fully qualified URL or just a URL context\n  or template, depending on whether and how the `Decorate URL` step variable is used to modify and obtain the final effective access URL,\n- `CFG_ENDPOINTS_{SYSTEM}_GLOBAL_HEADERS`: HTTP request headers used in the step, which are global and will be used in all requests. Defined\n  using the string format `key1=value[;key2=value2...[;keyN=valueN]]`,\n- `CFG_ENDPOINTS_{SYSTEM}_{ENDPOINT}_HEADERS`: HTTP request headers used in the step. Defined using the string\n  format `key1=value[;key2=value2...[;keyN=valueN]]`. If the same key as defined in the global definition is used, the definition here takes\n  precedence, and the value in the global definition will be overwritten,\n- `CFG_ENDPOINTS_{SYSTEM}_GLOBAL_TIMEOUT`: Timeout for the HTTP request in seconds. If not defined, the default value is -1, which means no\n  timeout,\n- `CFG_ENDPOINTS_{SYSTEM}_{ENDPOINT}_TIMEOUT`: Timeout for the HTTP request in seconds. If not defined, use the global definition instead.\n\n> Key of headers are trimmed automatically.\n\n> The timeout definition only takes effect when there is no `timeout` defined in the step variables.\n\n#### Step variables\n\nMaking a remote HTTP call requires many parameter definitions, some of which are mandatory and some optional.\n\n##### `System`\n\nCode for accessing the remote system. Generally, a remote system provides a set of APIs. To facilitate the use of the same defined data in\ndifferent steps, the remote system needs to be defined in code first. This variable is mandatory and case-insensitive.\n\n##### `Endpoint`\n\nDefine an endpoint code for the remote system. This code can represent a single API or a strongly related set of APIs, depending on\nhow `Decorate URL` is used.\n\n##### `Decorate URL`\n\nThis variable is optional and can be used to decorate the URL of the endpoint. The value can be a JavaScript snippet that will be executed\nas a JavaScript function. This function accepts the following input parameters:\n\n- `$endpointUrl`: The URL read from the environment based on the `System` and `Endpoint` definitions, can be a fully qualified URL\n  or just a\n  URL context or template,\n- `$factor`: The content portion of the request data, excluding context data,\n- `$request`: The entire request data, including both content and context,\n- `$helpers` or `$`: Data manipulation helpers.\n\nThis function should return the final URL to be used for the HTTP request. If this snippet is not defined, then use the URL configured in\nthe environment variables for access.\n\n##### `Http method`\n\nThe HTTP method to be used for the request. This variable is mandatory and case-insensitive. It is optional, with a default value of `post`.\n\n##### `Timeout`\n\nThe timeout for the HTTP request, in seconds. If not defined, use the timeout configured in the environment variables. If none of these are\ndefined, use `-1`, which means no timeout.\n\n##### `Generate request headers`\n\nThis variable is optional and can be used to build the HTTP request headers. The value can be a JavaScript snippet that will be executed\nas a JavaScript function. This function accepts the following input parameters:\n\n- `$factor`: The content portion of the request data, excluding context data,\n- `$request`: The entire request data, including both content and context,\n- `$helpers` or `$`: Data manipulation helpers.\n\nThis function should return an object (`Record<string, string>`) containing the headers to be used in the HTTP request. If the same key as\ndefined in the environment definition is used, the definition here takes precedence, and the headers in the environment definition will be\noverwritten. If this snippet is not defined, then use the headers in the environment definition.\n\n> Key of headers are NOT trimmed.\n\n##### `Use request body`\n\nSpecify whether the HTTP request uses the HTTP body content. This variable is optional and follows these rules:\n\n- Not defined: For requests other than `GET`, use the HTTP body by default,\n- `true`: Always use the HTTP body, regardless of the request method,\n- `false`: Always avoid using the HTTP body, regardless of the request method.\n\n> How to generate the HTTP body content is referenced by the definition of the `generateBody` variable.\n\n##### `Generate request body`\n\nThis variable is optional and can be used to build the HTTP request body. The value can be a JavaScript snippet that will be executed\nas a JavaScript function. This function accepts the following input parameters:\n\n- `$factor`: The content portion of the request data, excluding context data,\n- `$request`: The entire request data, including both content and context,\n- `$helpers` or `$`: Data manipulation helpers.\n\nThis function could return anything. If the returned data is not `null`, `undefined`, and not a string, use `JSON.stringify` to convert it\nto a string. `null` and `undefined` essentially represent the absence of an HTTP body. If this snippet is not defined, the default behavior\nis to use `$factor` as the HTTP body after processing it accordingly.\n\n##### `Read response body`\n\nThis variable is optional and can be used to read the HTTP response. The value can be a JavaScript snippet that will be executed\nas a JavaScript function. This function accepts the following input parameters:\n\n- `$response`: The response (`Response`, check [node-fetch](https://www.npmjs.com/package/node-fetch) for more details) object from the HTTP\n  request,\n- `$factor`: The content portion of the request data, excluding context data,\n- `$request`: The entire request data, including both content and context,\n- `$helpers` or `$`: Data manipulation helpers.\n\nThis function could return anything, and the returned data will be used as output data of this step. If this snippet is not defined, the\nresponse should be read as JSON by `Response.json()`. It is important to note that the response body will only be read if the response\nstatus is in the normal range (`1xx`, `2xx`, `3xx`); otherwise, it will skip to the error handling.\n\n> It is an async function, so `await` is available inside.\n\n##### `Response error handling`\n\nError handling for different HTTP response statuses is generally implemented in a way that only `4xx` and `5xx` statuses trigger\nerror handling. Each exception handling snippet is designed for a specific status; if a status does not have a defined handler, a\ndefault `UncatchableError` will be thrown, with an error code of `O03-00010`. Error handling can either rethrow the original exception,\nwrap the exception and rethrow it, or return data normally. If data is returned normally, it will be used as the output data for this step.\n\nThere are two special cases:\n\n- If the request times out, the status is `600`,\n- If the exception is not caused by the request itself, such as an exception thrown due to a problem with a certain configuration logic,\n  then,\n	- If the exception type is `UncatchableError`, no further handling will be performed and the exception will be directly thrown to the\n	  outer layer,\n	- Otherwise, use the exception handler with status `000` for processing.\n\n> DO NOT rethrow an error that is not an `UncatchableError` from the error handler, as it will be caught again by the error handler with\n> status `000`, which could lead to confusion.\n\n> All handlers are async functions, so `await` is available inside.\n\n#### Returning\n\nThe step's return data is from the response of the HTTP request or error handling.\n\n> The returned data can still be further processed during the `Write to output` stage.\n\n${transformer}\n\n${errorHandles}\n";
+const markdown$m = "### Http post step\n\nThe http get pipeline step calls remote HTTP services through defined parameters, and can process the returned results and perform related\nerror handling. The Http method is `post`.\n\n${http}\n";
+const markdown$l = "Remote HTTP service provider system code.\n\n";
+const docs$5 = (() => {
+  const httpDocs = mergeStepDocs(markdown$n, false);
+  return {
+    stepHttpSystem: markdown$l,
+    stepHttpEndpoint: markdown$q,
+    stepHttpDecorateUrl: markdown$r,
+    httpFetchStep: mergeStepDocsFreely(markdown$p, { "http": httpDocs }),
+    httpGetStep: mergeStepDocsFreely(markdown$o, { "http": httpDocs }),
+    httpPostStep: mergeStepDocsFreely(markdown$m, { "http": httpDocs })
+  };
+})();
+const markdown$k = "The return value of the function will be used as the input data for each sub-step, and this function will be executed before each sub-step.\nIf the return data contains shared memory data, modifications to this data in any sub-step may affect other sub-steps. The following\nparameters can be used during the clone process:\n\n- `$factor`: The content portion of the request data, excluding context data,\n- `$request`: The entire request data, including both content and context,\n- `$helpers` or `$`: Data manipulation helpers.\n";
+const markdown$j = "Check to receive only the result data of the first completed sub-step; otherwise, receive the result data of all sub-steps in the form of an\narray.\n";
+const markdown$i = "### Parallel sets step\n\nThe parallel sets pipeline step includes a set of sub-step definitions, where all the actual processing logic is executed within the\nsub-steps. Each substep is executed in parallel, and it can be specified whether to collect only the result of the first completed sub-step\nor to collect the results of all sub-steps.The input data for each sub-step is specified by `Pick from input`.\n\n> No matter how the collection of sub-step execution results is specified, if any sub-step throws an exception before the results are\n> collected, the entire parallel process is terminated. Note that the completion of a step does not necessarily mean that other\n> asynchronously executed substeps will be terminated. Please refer\n> to [Promise.race](https://tc39.es/ecma262/multipage/control-abstraction-objects.html#sec-promise.race) for more details.\n\n> The parallel step relies on the exception raised by the sub-step. If the sub-step encounters an exception and is caught and processed by\n> the exception handler without re-throwing an exception, it is considered to have ended normally.\n\n#### Environment variables\n\nThis step does not use any environment variables.\n\n#### Step variables\n\n| Variable name | Type    | Description                                                                                                                  |\n|---------------|---------|------------------------------------------------------------------------------------------------------------------------------|\n| cloneData     | snippet | Provide a snippet to copy data. The return value of this snippet will be used as the input data for each sub-step. Optional. |\n| race          | boolean | When set to `true`, only the result data of the first completed sub-step will be received. Optional, default is `false`.     |\n\n> If `cloneData` snippet is not provided, the input data for each sub-step will be the same memory data, which is shared among all\n> sub-steps. Therefore, any modification of this memory data by one sub-step may affect the other sub-steps.\n\n#### Returning\n\nUse the return from the first resolved sub-step as the return data. If defined to receive the results of all sub-steps, the data will be an\narray; otherwise, it will be the result data returned by the first completed sub-step.\n\n> It can still be further decorated during `Write to output` stage for the return data.\n\n${transformer}\n\n${errorHandles}\n";
+const docs$4 = {
+  stepParallelRace: markdown$j,
+  stepParallelCloneData: markdown$k,
+  parallelStep: mergeStepDocs(markdown$i)
+};
+const markdown$h = "If using data from the request body, the data portion of the body must be in valid JSON format.\n\n> `GET` requests by default do not parse the request body, while other requests (methods) default to parsing the request body.\n";
+const markdown$g = "Used for locating configurations within the application, required fields, and must be globally unique.";
+const markdown$f = "Specify whether the current configuration is effective.\n\n> Note that configurations that are not effective will not be loaded when the application starts, so the effective status cannot be switched\n> at runtime.";
+const markdown$e = "Indicate whether the returned response is a file.\n";
+const markdown$d = "Specify the response headers to be outputted to the client, including names and values.\n\nThe syntax rules are as follows:\n\n- Use a colon to connect the name and value, for example `x-name: value`. Note that only the content before the first colon is considered\n  the name, and the remaining part is the value,\n- If multiple are needed, they should be written on multiple lines,\n- The spaces around the name and value will be automatically removed.\n";
+const markdown$c = "To accept uploaded files, multiple attributes are required:\n\n- Specify name: Each line represents a name. For multiple names, define them on separate lines,\n- Each name can specify a max count by appending a colon followed by a number after the name,\n	- `<= 0` indicates unlimited files for that name,\n	- `>= 1` indicates a maximum count,\n- Specify maximum file size: Use plain numbers for bytes, or append `k`, `K`, `m`, `M` for kilobytes and megabytes,\n- Specify file type [mime type](https://docs.nestjs.com/techniques/file-upload#file-validation): Separate multiple types with commas or\n  semicolons.\n\n> The maximum file size and file type specifications apply to all files.\n\n> When defining upload file parameters, due to HTTP protocol specifications requiring the use of Form Data, the `body` supports only\n> key-value pairs. Therefore, the parsed data forms a single-layer JSON object and no longer retains a multi-layered structure.\n";
+const markdown$b = "To specify receiving multiple request headers, use commas or semicolons as separators.\n";
+const markdown$a = "Only executed when the application starts, during which the system does not provide any parameters to the pipeline.\n";
+const markdown$9 = "`GET` requests by default do not parse the request body, while other requests (methods) default to parsing the request body.\n";
+const markdown$8 = "Parse parameters from the [route](https://docs.nestjs.com/controllers#route-parameters). For example, can parse the `name`\nand `age` parameters from `https://example.com/:name/:age`.\n\n> The parameter names are automatically synchronized here when modifying the `route` value.\n\n> Although parameters are defined in the `route`, it is still possible to ignore them here, but this is not the recommended approach. \n";
+const markdown$7 = "## Overview\n\nThe core concept of `@rainbow-o23` is pipeline, where all logic is defined through pipeline and its steps. There are three different forms\nof\npipeline based on how it is defined:\n\n- Pipeline, which can optionally be exposed as an API. To differentiate, we generally refer to pipelines that are exposed as\n  APIs as `Pipeline as API`, and pipelines that are not exposed as APIs as `pipeline`. In all documents, we will use\n  this name to refer to it. If not specifically labeled as `as API`, it means that this pipeline has not been exposed as an API.\n- Step set, composed of a group of steps,\n- Step: based on the definition of a single step.\n\nIf defined as a pipeline and is exposed as an API, it does not allow other pipeline steps to call it, otherwise it does. Therefore, if\ncertain logic combinations can be reused, they should be defined as a pipeline/steps set/step.\n\n## Common attributes\n\nAll definitions should have the following attributes:\n\n- A `code` attribute for identification within the system, so the value of the `code` attribute is globally unique.\n- A `type` attribute is used to indicate the type of this definition, and the value of the `type` attribute must be one\n  of `pipeline`, `step-sets`, or `step`.\n- An `enabled` attribute is used to indicate whether this definition is effective, and the value of the `enabled` attribute must be\n  either `true` or `false`. If not defined, this definition is considered to be effective by default.\n\n## Pipeline as API\n\nIf the definition contains a `route` attribute and specifies a URI, it is considered to be published as an API. A pipeline published\nas an API includes all standard HTTP protocol elements:\n\n- `route`, URI of API. Excluding the scheme, domain name, and port in the URL, the application configuration can also specify the path\n  context,\n	- To facilitate the definition and parsing of data contained in the `route`, you can use `pathParams` for definition. `pathParams` can\n	  be a list of parameters, or you can use `true` to define receiving all valid path parameters. Please note that the definition of path\n	  parameters must conform to the [nestjs](https://docs.nestjs.com/controllers#route-parameters) standard.\n- `method`, supporting `get`, `post`, `put`, `patch`, and `delete`,\n- `headers`, a list of headers that need to be parsed, or `true` to parse all headers,\n- `queryParams`, a list of query parameters that need to be parsed, or `true` to parse all query parameters,\n- `body`, the content of the HTTP body is in JSON format. To better adapt to common practices of HTTP API usage:\n	- When `method` is specified as `get` and the `body` parameter is not explicitly set to `true`, the system defaults to ignoring the HTTP\n	  body content,\n	- When `method` is not specified as `get` and the `body` parameter is not explicitly set to `false`, the system defaults to parsing the\n	  HTTP body content,\n- `files`, a list of files that need to be parsed, or `true` to parse all files.\n\nThere are also some HTTP response definitions:\n\n- `exposeHeaders`, a set of headers that need to be pushed to the client,\n- `exposeFile`, indicating whether the response data is a file.\n\n## Pipeline\n\nIf the definition does not contain a `route` attribute, it is considered a pipeline. A pipeline can be called by other pipeline steps.\n\nA pipeline always includes at least one step, and its behavior is entirely determined by the steps defined within it.\n\nA pipeline also has a special property `initOnly`, which if declared as `true`, indicates that this pipeline will only be\nexecuted when the application starts, and the application will not provide any parameters during execution.\n\n## Step set\n\nStep set, as the name suggests, can define a set of steps. They can also define how their built-in steps are executed, typically in the\nfollowing ways:\n\n- Synchronous serial,\n- Asynchronous serial,\n- Synchronous parallel,\n- Conditional execution,\n- Loop execution (only for input data as an array),\n- Start a database transaction.\n\nBy combining the various types of step collections mentioned above, you can construct execution sequences suitable for different scenarios.\n\n## Step\n\nSteps can be any type of step definition, including step sets. Logically, a step set is a step which includes a set of sub steps, and\ndifferent step sets define the way their sub steps are executed. Steps are implemented by different standard step components for\ndifferent purposes. Here are some built-in standard steps:\n\n- Retrieve values from models or remove attributes,\n- Execute scripts,\n- Generate snowflake IDs,\n- Call predefined pipelines or steps,\n- Make remote HTTP API calls,\n- Read from or write to databases.\n\nAdditionally, you can also obtain the following steps support through the `@rainbow-o23` standard extension library:\n\n- Print PDF, Word, Excel, CSV,\n- Manipulate AWS S3 objects.\n\n> The latest step support can be found on [Github](https://github.com/InsureMO/rainbow-o23).\n";
+const markdown$6 = "Parse parameters from the [URL Search](https://developer.mozilla.org/en-US/docs/Web/API/URL/searchParams). For example, can parse the `name`\nand `age` parameters from `https://example.com/?name=Jonathan%20Smith&age=18`.\n\nTo specify receiving multiple query parameters, use commas or semicolons as separators.\n";
+const markdown$5 = "The route of the API, excluding the HTTP protocol scheme, domain name, and port parts. The context of the URL path can also be\nspecified via the system environment variable `CFG_APP_CONTEXT`.\n\n> It should start with `/`.\n\n`route` syntax can be referenced from [nestjs - routing](https://docs.nestjs.com/controllers#routing)\nand [nestjs - route parameters](https://docs.nestjs.com/controllers#route-parameters), as well\nas [express](https://expressjs.com/en/guide/routing.html). Generally, there are the following rules:\n\n- Use regex for matching, but it's not recommended.\n- Define parameters with `:` prefix, for example `:name`, ensuring parameter names conform to the regex pattern `[A-Za-z0-9_]`.\n- For parsing multiple parameters, use `/`, `.`, or `-` as separators. \n";
+const markdown$4 = "- `Pipeline`: A predefined pipeline that can be invoked by other pipelines and can also be executed during application\n  initialization. If specified to execute during application initialization, it cannot be used at runtime, and the initialization is\n  parameterless.\n- `Pipelne as API`: A predefined pipeline exposed as an API, which cannot be invoked by other pipelines.\n- `Step Set`: A predefined set of steps that can be invoked by other pipelines.\n- `Step`: A predefined step that can be invoked by other pipelines.\n";
+const docs$3 = {
+  pipeline: markdown$7,
+  pipelineCode: markdown$g,
+  pipelineEnabled: markdown$f,
+  pipelineType: markdown$4,
+  pipelineInitOnly: markdown$a,
+  pipelineRoute: markdown$5,
+  pipelineMethod: markdown$9,
+  pipelineHeaders: markdown$b,
+  pipelinePathParams: markdown$8,
+  pipelineQueryParams: markdown$6,
+  pipelineBody: markdown$h,
+  pipelineFiles: markdown$c,
+  pipelineExposeFile: markdown$e,
+  pipelineExposeHeaders: markdown$d
+};
+const markdown$3 = "### Sets step\n\nThe sets pipeline step includes a set of sub-step definitions, where all the actual processing logic is executed within the sub-steps. The\ninput data for the first sub-step is specified by `Pick from input`.\n\n#### Environment variables\n\nThis step does not use any environment variables.\n\n#### Step variables\n\nThis step has no other properties defined except for using the `steps` attribute to define sub-steps.\n\n#### Returning\n\nUse the return from the final sub-step as the return data.\n\n> It can still be further decorated during `Write to output` stage for the return data.\n\n${transformer}\n\n${errorHandles}\n";
 const docs$2 = {
-  pipeline: markdown$e,
-  pipelineCode: markdown$n,
-  pipelineEnabled: markdown$m,
-  pipelineType: markdown$b,
-  pipelineInitOnly: markdown$h,
-  pipelineRoute: markdown$c,
-  pipelineMethod: markdown$g,
-  pipelineHeaders: markdown$i,
-  pipelinePathParams: markdown$f,
-  pipelineQueryParams: markdown$d,
-  pipelineBody: markdown$o,
-  pipelineFiles: markdown$j,
-  pipelineExposeFile: markdown$l,
-  pipelineExposeHeaders: markdown$k
+  setsStep: mergeStepDocs(markdown$3)
 };
-const markdown$a = "Handle any error thrown by current step.\n";
-const markdown$9 = "Handle `CatchableError` thrown by current step.\n";
-const markdown$8 = "Handle `ExposedUncatchableError` thrown by current step.\n";
-const markdown$7 = "Obtain a portion of the request data as the input for this step. Additional processing of the data can also be performed during this\nprocess. The following parameters can be used during the conversion process:\n\n- `$factor`: The content portion of the request data, excluding context data,\n- `$request`: The entire request data, including both content and context,\n- `$helpers` or `$`: Data manipulation helpers.\n\nThe returned data will be used as the real input data for this step. If no data is returned, there is no input data for this step.\n";
-const markdown$6 = "### Input and output\n\nUsually, when processing logic, we do not need all the memory contexts, but only need to extract certain fragments for processing and return\nthe processing results to the context for subsequent logic to continue processing. Therefore, `@rainbow-o23` provides a relevant\nimplementation, allowing pipeline steps to flexibly access the relevant memory data and write back the processed result data to the context\nin the required format.\n\n#### Pick from input\n\nUse the `Pick from input` property to define a script. The returned data will be used as input data for this step. The script is a function\nthat takes the following parameters:\n\n- `$factor` represents the incoming data,\n- `$request` represents the original request data (including incoming data and a context), it is not recommended,\n- `$helpers` represents function supporting, and it has a shortcut `$`.\n\nHere is a simple example:\n\n```ts\n// incoming data\nconst incoming = {name: 'John', age: 23};\n\n// Only the age is needed as a parameter in the step processing, not the name.\n// Define a transformation script, so in the actual processing logic of the current step, only the age will be collected, and there won't be a field for the name attribute.\nreturn {age: $factor.age};\n```\n\n> `return` is not necessary. If the script is only one line (and has no line breaks), the system will consider the result of executing that\n> line as the result of the entire function.\n\n> It's important to note that whether modifications to memory data during processing will affect the original input data depends on how the\n> transformation is handled. Generally, if deep cloning is not performed, it will affect the data; otherwise, it will not.\n\n#### Write to output\n\nUse the `Write to output` property to define a script. The returned data will be used as output data for this step. The script is a function\nthat takes the following parameters:\n\n- `$result` represents the outgoing data,\n- `$request` represents the original request data (including incoming data and a context), it is not recommended,\n- `$helpers` represents function supporting, and it has a shortcut `$`.\n\nHere is a simple example:\n\n```ts\n// outgoing data\nconst outgoing = {name: 'John', age: 23};\n\n// The result data should only include age, not the name.\n// Define a transformation script, the age alone will be stored in memory for subsequent use.\nreturn {age: $result.age};\n```\n\n> `return` is not necessary. If the script is only one line (and has no line breaks), the system will consider the result of executing that\n> line as the result of the entire function.\n\n>\n\n#### Merge-back Strategy\n\nAfter processing the step logic and obtaining the returned data, you can also define how this returned data should be merged into the\ncontext of the entire pipeline. There are several ways to define this, all declared using the `Merge-back strategy` attribute:\n\n- Defined as `Replace`, it means the returned data will overwrite the original context and be used as the new context.\n- Defined as `Unbox and merge`, it means the returned data will be automatically unboxed and merged into the original context. In this\n  case, the returned data must be a JSON object and cannot be a primitive type or an array.\n- Defined as `As specific property`, it means the returned data will be merged into the original context under the specified name.\n\nHere is a simple example:\n\n```ts\n// context data\nlet context = {name: 'John', age: 0};\nconst result = {age: 23};\n\n// merge not defined, equivalent to\ncontext = result;\n// context is {age: 23}\n\n// merge is \"unbox and merge\", equivalent to\ncontext = {...context, ...result};\n// context is {name: 'John', age: 23}\n\n// merge is 'person', equivalent to\ncontext = {...context, person: result};\n// context is {name: 'John', age: 0, person: {age: 23}}\n```\n\n> Note that in the latter two cases, there is a possibility of name collision resulting in the original context being overwritten.\n> Therefore, it is necessary to have a clear understanding of the data structure in the context.\n\n#### Keep or clear\n\nIn the following `Write to output` scenarios, and in cases where merge-back strategy is specified as `Replace`:\n\n- Returning `null` or `undefined` (recommended to use `(void 0)` to represent `undefined`) indicates that the original request data will\n  continue to be used as the request data for the next step without any modifications.\n- Returning a flag created by `$helpers.$clearContextData()` to clear context data will be used as the request data for the next step, while\n  all other data is cleared.\n\n> Please note that \"without any modifications\" is a conceptual reference. If the data has already been altered by the logic executed in the\n> step, the data passed to the next step may not be identical to the input data of this step.\n";
-const markdown$5 = "Define the strategy for writing back step result data to memory:\n\n- `Replace`: means the returned data will overwrite the original context and be used as the new context.\n- `Unbox and merge`: means the returned data will be automatically unboxed and merged into the original context. In this\n  case, the returned data must be a JSON object and cannot be a primitive type or an array.\n- `As specific property`: means the returned data will be merged into the original context under the specified name.\n";
-const markdown$4 = "A brief name that indicates the purpose of the step.\n";
-const markdown$3 = "Write back the result of the step execution to memory for use as the request data in the next step. Additional processing of the data can\nalso be performed during this process. The following parameters can be used during the conversion process:\n\n- `$result`: Result data of the step execution,\n- `$request`: Entire request data, including both content and context,\n- `$helpers` or `$`: Data manipulation helpers.\n\nThe returned data will be written back to memory as the actual result data for this step.\n\n> How the step's returned data is written back to memory depends on the return result of this process and the chosen write-back strategy.\n> Please refer to the merge-back strategy documentation for details.\n";
-const markdown$2 = "Handle `UncatchableError` thrown by current step.\n";
-const markdown$1 = "The specified step definition is used. The logic executed by the system has already been predefined in the step definition. After specifying\nthe step definition, you will also need to specify the parameters required for that step definition.\n";
+const markdown$2 = "Use snippet processing for data processing. The following parameters can be used during the conversion process:\n\n- `$factor`: The content portion of the request data, excluding context data,\n- `$request`: The entire request data, including both content and context,\n- `$helpers` or `$`: Data manipulation helpers.\n\n> It is an async function, so `await` is available inside.\n";
+const markdown$1 = "### Snippet step\n\nThe snippet pipeline step use a snippet (in JavaScript syntax) to process the data. Conceptually, it can be understood as a function that\nperforms appropriate operations on the given parameters and finally returns the processed result to the memory context for further\nprocessing.\n\n#### Environment variables\n\nThis step does not use any environment variables.\n\n#### Step variables\n\nDefine the `snippet` attribute, which is a JavaScript script that will ultimately be executed as a JavaScript function. This function\naccepts the following input parameters:\n\n- `$factor`: The content portion of the request data, excluding context data,\n- `$request`: The entire request data, including both content and context,\n- `$helpers` or `$`: Data manipulation helpers.\n\n#### Returning\n\nThe snippet's return data follows these conventions:\n\n- If it returns `undefined`, `null`, or no value returned, the context of the entire pipeline is considered unchanged,\n- If it returns `$.$clearContextData()`, the context is considered cleared (this is actually a specific `Symbol` object that, apart from\n  serving as a flag, has no practical significance),\n- Other data is directly returned as the response data.\n\n> The returned data can still be further processed during the `Write to output` stage.\n\n${transformer}\n\n${errorHandles}\n";
 const docs$1 = {
-  stepName: markdown$4,
-  stepUse: markdown$1,
-  stepFromRequest: markdown$7,
-  stepToResponse: markdown$3,
-  stepMergeToRequest: markdown$5,
-  stepCatchableErrorHandle: markdown$9,
-  stepUncatchableErrorHandle: markdown$2,
-  stepExposedErrorHandle: markdown$8,
-  stepAnyErrorHandle: markdown$a,
-  stepTransformer: markdown$6.replace(/\$/g, "$$$$")
+  stepSnippetSnippet: markdown$2,
+  snippetStep: mergeStepDocs(markdown$1)
 };
-const markdown = "${transformer}\n";
+const markdown = "### Snowflake step\n\nThe snowflake pipeline step is used to generate a unique, incrementing sequence number. This sequence number is typically used for scenarios\nsuch as database primary keys or unique identifiers in memory. The sequence number is of type string and contains only numeric characters.\n\n> Monotonic increment is limited to within a single node.\n\n#### Environment variables\n\nThis step uses the following system environment variable definition:\n\n- `CFG_SNOWFLAKE_SHARD_ID`: A number between `0` and `1023`, optional, with a default value of `1`. In a multi-node scenario, each node\n  should be assigned a different shard id to ensure that the sequence numbers do not conflict.\n\n#### Step variables\n\nThis step does not use any step variables.\n\n#### Returning\n\nA string containing a unique serial number.\n\n> Typically, need to specify a merge property in the `Write to output` step for use in subsequent pipeline steps.\n\n${transformer}\n\n${errorHandles}\n";
 const docs = {
-  snippetStep: markdown.replace("${transformer}\n", docs$1.stepTransformer)
+  snowflakeStep: mergeStepDocs(markdown)
 };
 const HelpDocs = {
-  ...docs$2,
+  ...docs$3,
+  ...docs$a,
   ...docs$1,
-  ...docs
+  ...docs$6,
+  ...docs$8,
+  ...docs,
+  ...docs$5,
+  ...docs$2,
+  ...docs$9,
+  ...docs$7,
+  ...docs$4
 };
 const elementCode = {
   code: "code",
@@ -1832,6 +2320,9 @@ const elementEnabled = {
     return React.createElement(UnwrappedCheckbox, { onValueChange, value: model.enabled ?? true });
   },
   helpDoc: HelpDocs.pipelineEnabled
+};
+const CommonElementEditorStyles = {
+  dropdown: { justifySelf: "start", width: "unset", minWidth: "min(200px, 100%)" }
 };
 const VerticalLinesEditorContainer = qe.div.attrs({ [DOM_KEY_WIDGET]: "o23-playground-edit-dialog-specific-element-editor-vertical" })`
     display: grid;
@@ -1911,7 +2402,7 @@ const AllIgnoredOrArrayEditor = (props) => {
   return React.createElement(
     VerticalLinesEditor,
     null,
-    React.createElement(UnwrappedDropdown, { value, onValueChange, options: AllIgnoredOrArrayOptions, clearable: false, style: { justifySelf: "start", width: "unset", minWidth: "min(200px, 100%)" } }),
+    React.createElement(UnwrappedDropdown, { value, onValueChange, options: AllIgnoredOrArrayOptions, clearable: false, style: CommonElementEditorStyles.dropdown }),
     React.createElement(UnwrappedDecorateInput, { leads: [lead], value: ((_a = model.temporary) == null ? void 0 : _a[name]) ?? "", onValueChange: onArrayValueChange, disabled: value !== "specified", ref: inputRef, "data-di-prefix-text": true })
   );
 };
@@ -1959,7 +2450,7 @@ const elementBody = {
       onValueChanged();
     };
     const value = model.body == null ? "default" : model.body ? "parse" : "ignored";
-    return React.createElement(UnwrappedDropdown, { value, onValueChange, options: ParseIgnoredOrDefaultOptions, clearable: false, style: { justifySelf: "start", width: "unset", minWidth: "min(200px, 100%)" } });
+    return React.createElement(UnwrappedDropdown, { value, onValueChange, options: ParseIgnoredOrDefaultOptions, clearable: false, style: CommonElementEditorStyles.dropdown });
   },
   helpDoc: HelpDocs.pipelineBody
 };
@@ -2126,7 +2617,7 @@ const FilesEditor = (props) => {
   return React.createElement(
     VerticalLinesEditor,
     null,
-    React.createElement(UnwrappedDropdown, { value: type, onValueChange: onTypeChanged, options: FilesOptions, clearable: false, style: { justifySelf: "start", width: "unset", minWidth: "min(200px, 100%)" } }),
+    React.createElement(UnwrappedDropdown, { value: type, onValueChange: onTypeChanged, options: FilesOptions, clearable: false, style: CommonElementEditorStyles.dropdown }),
     React.createElement(UnwrappedTextarea, { value: ((_h = (_g = model.temporary) == null ? void 0 : _g.files) == null ? void 0 : _h.files) ?? "", onValueChange: onFilesChanged, disabled: type !== "specified", ref: inputRef, style: {
       minHeight: CssVars.INPUT_HEIGHT,
       height: `calc(${rows} * ${CssVars.LINE_HEIGHT} + ((${CssVars.INPUT_HEIGHT} - ${CssVars.LINE_HEIGHT}) / 2 - ${CssVars.BORDER_WIDTH}) * 2)`,
@@ -2185,7 +2676,7 @@ const elementMethod = {
       { value: "delete", label: "DELETE" },
       { value: "patch", label: "PATCH" }
     ];
-    return React.createElement(UnwrappedDropdown, { value: model.method ?? "", onValueChange, options, clearable: false, style: { justifySelf: "start", width: "unset", minWidth: "min(200px, 100%)" } });
+    return React.createElement(UnwrappedDropdown, { value: model.method ?? "", onValueChange, options, clearable: false, style: CommonElementEditorStyles.dropdown });
   },
   helpDoc: HelpDocs.pipelineMethod
 };
@@ -2215,7 +2706,7 @@ const PathParamsEditor = (props) => {
   return React.createElement(
     VerticalLinesEditor,
     null,
-    React.createElement(UnwrappedDropdown, { value, onValueChange, options: AllIgnoredOrArrayOptions, clearable: false, style: { justifySelf: "start", width: "unset", minWidth: "min(200px, 100%)" } }),
+    React.createElement(UnwrappedDropdown, { value, onValueChange, options: AllIgnoredOrArrayOptions, clearable: false, style: CommonElementEditorStyles.dropdown }),
     React.createElement(UnwrappedDecorateInput, { leads: [Labels.ParameterNames], value: ((_a = model.temporary) == null ? void 0 : _a.pathParams) ?? "", onValueChange: VUtils.noop, disabled: true, "data-di-prefix-text": true })
   );
 };
@@ -2388,12 +2879,12 @@ const elementType = {
       { value: "step-sets", label: Labels.PipelineTypeStepSet },
       { value: "step", label: Labels.PipelineTypeStep }
     ];
-    return React.createElement(UnwrappedDropdown, { value, onValueChange, options, clearable: false, style: { justifySelf: "start", width: "unset", minWidth: "min(200px, 100%)" } });
+    return React.createElement(UnwrappedDropdown, { value, onValueChange, options, clearable: false, style: CommonElementEditorStyles.dropdown });
   },
   helpDoc: HelpDocs.pipelineType,
   children: [elementInitOnly, elementRoute, elementRequest, elementResponse]
 };
-const prepare$3 = (def) => {
+const prepare$9 = (def) => {
   var _a, _b, _c;
   const model = {
     code: def.code,
@@ -2481,54 +2972,57 @@ const prepare$3 = (def) => {
   return model;
 };
 const FileDefs = {
-  prepare: prepare$3,
-  confirm: confirm$3,
+  prepare: prepare$9,
+  confirm: confirm$9,
   discard: discard$1,
   elements: [elementCode, elementEnabled, elementType]
 };
-var MergeRequestType;
-(function(MergeRequestType2) {
-  MergeRequestType2[MergeRequestType2["REPLACE"] = 0] = "REPLACE";
-  MergeRequestType2[MergeRequestType2["UNBOX"] = 1] = "UNBOX";
-  MergeRequestType2[MergeRequestType2["MERGE_AS_PROPERTY"] = 2] = "MERGE_AS_PROPERTY";
-})(MergeRequestType || (MergeRequestType = {}));
+var MergeType;
+(function(MergeType2) {
+  MergeType2[MergeType2["REPLACE"] = 0] = "REPLACE";
+  MergeType2[MergeType2["UNBOX"] = 1] = "UNBOX";
+  MergeType2[MergeType2["MERGE_AS_PROPERTY"] = 2] = "MERGE_AS_PROPERTY";
+})(MergeType || (MergeType = {}));
 var ErrorHandleType;
 (function(ErrorHandleType2) {
   ErrorHandleType2[ErrorHandleType2["NONE"] = 0] = "NONE";
   ErrorHandleType2[ErrorHandleType2["SNIPPET"] = 1] = "SNIPPET";
   ErrorHandleType2[ErrorHandleType2["STEPS"] = 2] = "STEPS";
 })(ErrorHandleType || (ErrorHandleType = {}));
-const confirm$2 = (model, def, _file, handlers) => {
+const confirm$8 = (model, def, _file, options) => {
   var _a, _b, _c, _d, _e, _f, _g;
+  const { assistant } = options;
   def.name = model.name;
   def.use = model.use;
-  if ((_a = model.temporary) == null ? void 0 : _a.fromRequestAsIs) {
-    delete def.fromRequest;
+  if ((_a = model.temporary) == null ? void 0 : _a.fromInputAsIs) {
+    delete def.fromInput;
   } else {
-    def.fromRequest = model.fromRequest;
+    def.fromInput = model.fromInput;
   }
-  if ((_b = model.temporary) == null ? void 0 : _b.toResponseAsIs) {
-    delete def.toResponse;
+  if ((_b = model.temporary) == null ? void 0 : _b.toOutputAsIs) {
+    delete def.toOutput;
   } else {
-    def.toResponse = model.toResponse;
+    def.toOutput = model.toOutput;
   }
-  switch ((_c = model.temporary) == null ? void 0 : _c.mergeRequestType) {
-    case MergeRequestType.MERGE_AS_PROPERTY:
-      def.mergeRequest = model.mergeRequest;
+  switch ((_c = model.temporary) == null ? void 0 : _c.mergeType) {
+    case MergeType.MERGE_AS_PROPERTY:
+      def.merge = model.merge;
       break;
-    case MergeRequestType.UNBOX:
-      def.mergeRequest = true;
+    case MergeType.UNBOX:
+      def.merge = true;
       break;
-    case MergeRequestType.REPLACE:
+    case MergeType.REPLACE:
     default:
-      delete def.mergeRequest;
+      delete def.merge;
       break;
   }
   const confirmErrorHandling = (name, use) => {
     var _a2;
     def.errorHandles = def.errorHandles ?? {};
     if (use === ErrorHandleType.STEPS) {
-      def.errorHandles[name] = model.temporary[name];
+      if (def.errorHandles[name] != null && !Array.isArray(def.errorHandles[name])) {
+        def.errorHandles[name] = [assistant.createDefaultStep()];
+      }
     } else if (use === ErrorHandleType.SNIPPET) {
       def.errorHandles[name] = (_a2 = model.errorHandles) == null ? void 0 : _a2[name];
     } else {
@@ -2539,7 +3033,6 @@ const confirm$2 = (model, def, _file, handlers) => {
   confirmErrorHandling("uncatchable", (_e = model.temporary) == null ? void 0 : _e.useErrorHandlesForUncatchable);
   confirmErrorHandling("exposed", (_f = model.temporary) == null ? void 0 : _f.useErrorHandlesForExposed);
   confirmErrorHandling("any", (_g = model.temporary) == null ? void 0 : _g.useErrorHandlesForAny);
-  handlers.onChange();
   return true;
 };
 const StandardLinkSelectionKeyFrames = We`
@@ -2685,16 +3178,19 @@ class OutgoingPortModel extends PortModel {
   constructor(type, name, alignment) {
     super({ type, name, alignment });
   }
-  createLinkModel() {
-    return this.createOutgoingLinkModel();
+  createLinkModel(extras) {
+    return this.createOutgoingLinkModel(extras);
   }
-  createOutgoingLinkModel() {
-    const link = this.createDefaultLinkModel();
+  createOutgoingLinkModel(extras) {
+    const link = this.createDefaultLinkModel(extras);
     link.setSourcePort(this);
     return link;
   }
-  createDefaultLinkModel() {
-    return new DefaultLinkModel();
+  toLinkModelOptions(extras) {
+    return extras == null ? void 0 : { extras };
+  }
+  createDefaultLinkModel(extras) {
+    return new DefaultLinkModel(this.toLinkModelOptions(extras));
   }
 }
 const _NextStepPortModel = class _NextStepPortModel extends OutgoingPortModel {
@@ -2802,24 +3298,24 @@ const PreviousStepPortWidget = (props) => {
   );
 };
 const computePortIconAndBadge = (props) => {
-  const { required, defined, count, all, allAsBoolean = false, allAsGiven } = props;
+  const { required, defined, count, all, allAsBoolean = false, allAsGiven, caseTransform } = props;
   let icon;
   let badge = null;
   if (defined) {
     icon = React.createElement(PortChecked, null);
     if (count != null) {
-      badge = React.createElement("span", { "data-role": "count" }, count);
+      badge = React.createElement("span", { "data-role": "count", "data-case-transform": caseTransform }, count);
     } else if (all != null) {
       if (allAsBoolean) {
         if (all === true) {
-          badge = React.createElement("span", { "data-role": "all" }, Labels.YesChar);
+          badge = React.createElement("span", { "data-role": "all", "data-case-transform": "up" }, Labels.YesChar);
         } else {
-          badge = React.createElement("span", { "data-role": "all" }, Labels.NoChar);
+          badge = React.createElement("span", { "data-role": "all", "data-case-transform": "up" }, Labels.NoChar);
         }
       } else if (allAsGiven != null) {
-        badge = React.createElement("span", { "data-role": "all" }, allAsGiven);
+        badge = React.createElement("span", { "data-role": "all", "data-case-transform": caseTransform }, allAsGiven);
       } else if (all === true) {
-        badge = React.createElement("span", { "data-role": "all" }, Labels.All);
+        badge = React.createElement("span", { "data-role": "all", "data-case-transform": "up" }, Labels.All);
       }
     }
   } else if (required) {
@@ -2843,7 +3339,6 @@ const PrePortContainer = qe.div.attrs({ [DOM_KEY_WIDGET]: "o23-playground-pre-po
     border-bottom-right-radius: calc(${PlaygroundCssVars.NODE_PORT_HEIGHT} / 2);
     font-weight: ${PlaygroundCssVars.NODE_PRE_PORT_FONT_WEIGHT};
     font-size: ${PlaygroundCssVars.NODE_PRE_PORT_FONT_SIZE};
-    text-transform: capitalize;
     padding: ${PlaygroundCssVars.NODE_PRE_PORT_PADDING};
     margin-left: -1px;
     grid-column: 1;
@@ -2863,13 +3358,13 @@ const PrePortContainer = qe.div.attrs({ [DOM_KEY_WIDGET]: "o23-playground-pre-po
         border: ${PlaygroundCssVars.NODE_PRE_PORT_DANGER_BORDER};
         background: ${PlaygroundCssVars.NODE_PRE_PORT_DANGER_BACKGROUND};
 
-        > span[data-role=count],
-        > span[data-role=all] {
+        > span[data-role~=count],
+        > span[data-role~=all] {
             background: ${PlaygroundCssVars.NODE_PRE_PORT_BADGE_DANGER_BACKGROUND};
         }
     }
 
-    &[data-role=first-sub-step] {
+    &[data-role~=first-sub-step] {
         border: ${PlaygroundCssVars.NODE_PORT_FIRST_SUB_STEP_BORDER};
         background: ${PlaygroundCssVars.NODE_PORT_FIRST_SUB_STEP_BACKGROUND};
     }
@@ -2880,19 +3375,26 @@ const PrePortContainer = qe.div.attrs({ [DOM_KEY_WIDGET]: "o23-playground-pre-po
         margin-right: 6px;
     }
 
-    > span[data-role=count],
-    > span[data-role=all] {
+    > span[data-role~=count],
+    > span[data-role~=all] {
         display: flex;
         position: relative;
         align-items: center;
         height: calc(${PlaygroundCssVars.NODE_PORT_HEIGHT} * 0.6);
         font-size: 0.6em;
-        font-variant: petite-caps;
         padding: 0 8px;
         background: ${PlaygroundCssVars.NODE_PRE_PORT_BADGE_BACKGROUND};
         margin-left: 6px;
         border: ${PlaygroundCssVars.NODE_PRE_PORT_BADGE_BORDER};
         border-radius: calc(${PlaygroundCssVars.NODE_PORT_HEIGHT} * 0.3);
+    }
+
+    > span[data-case-transform=caps] {
+        text-transform: capitalize;
+    }
+
+    > span[data-case-transform=up] {
+        text-transform: uppercase;
     }
 `;
 const PrePort = (props) => {
@@ -2921,7 +3423,6 @@ const PostPortContainer = qe.div.attrs({ [DOM_KEY_WIDGET]: "o23-playground-post-
     border-bottom-left-radius: calc(${PlaygroundCssVars.NODE_PORT_HEIGHT} / 2);
     font-weight: ${PlaygroundCssVars.NODE_POST_PORT_FONT_WEIGHT};
     font-size: ${PlaygroundCssVars.NODE_POST_PORT_FONT_SIZE};
-    text-transform: capitalize;
     padding: ${PlaygroundCssVars.NODE_POST_PORT_PADDING};
     margin-right: -1px;
     grid-column: 3;
@@ -2941,21 +3442,21 @@ const PostPortContainer = qe.div.attrs({ [DOM_KEY_WIDGET]: "o23-playground-post-
         border: ${PlaygroundCssVars.NODE_POST_PORT_DANGER_BORDER};
         background: ${PlaygroundCssVars.NODE_POST_PORT_DANGER_BACKGROUND};
 
-        > span[data-role=count],
-        > span[data-role=all] {
+        > span[data-role~=count],
+        > span[data-role~=all] {
             background: ${PlaygroundCssVars.NODE_POST_PORT_BADGE_DANGER_BACKGROUND};
         }
     }
 
-    &[data-role=steps] {
+    &[data-role~=steps] {
         border: ${PlaygroundCssVars.NODE_PORT_STEPS_BORDER};
         background: ${PlaygroundCssVars.NODE_PORT_STEPS_BACKGROUND};
     }
 
-    &[data-role=catchable-error],
-    &[data-role=uncatchable-error],
-    &[data-role=exposed-error],
-    &[data-role=any-error] {
+    &[data-role~=catchable-error],
+    &[data-role~=uncatchable-error],
+    &[data-role~=exposed-error],
+    &[data-role~=any-error] {
         border: ${PlaygroundCssVars.NODE_PORT_ERROR_HANDLES_BORDER};
         background: ${PlaygroundCssVars.NODE_PORT_ERROR_HANDLES_BACKGROUND};
     }
@@ -2966,19 +3467,26 @@ const PostPortContainer = qe.div.attrs({ [DOM_KEY_WIDGET]: "o23-playground-post-
         margin-right: 6px;
     }
 
-    > span[data-role=count],
-    > span[data-role=all] {
+    > span[data-role~=count],
+    > span[data-role~=all] {
         display: flex;
         position: relative;
         align-items: center;
         height: calc(${PlaygroundCssVars.NODE_PORT_HEIGHT} * 0.6);
         font-size: 0.6em;
-        font-variant: petite-caps;
         padding: 0 8px;
         background: ${PlaygroundCssVars.NODE_POST_PORT_BADGE_BACKGROUND};
         margin-left: 6px;
         border: ${PlaygroundCssVars.NODE_POST_PORT_BADGE_BORDER};
         border-radius: calc(${PlaygroundCssVars.NODE_PORT_HEIGHT} * 0.3);
+    }
+
+    > span[data-case-transform=caps] {
+        text-transform: capitalize;
+    }
+
+    > span[data-case-transform=up] {
+        text-transform: uppercase;
     }
 `;
 const PostPort = (props) => {
@@ -3036,6 +3544,8 @@ const NodeTitleSpreader = qe.span.attrs({ [DOM_KEY_WIDGET]: "o23-playground-node
 const NodeSecondTitle = qe(UnwrappedCaption)`
     flex-grow: 1;
     justify-content: flex-end;
+    height: unset;
+    min-height: ${CssVars.INPUT_HEIGHT};
     color: var(--color);
     font-size: var(--font-size);
     font-weight: var(--font-weight);
@@ -3195,10 +3705,12 @@ const _StepNodeModel = class _StepNodeModel extends HandledNodeModel {
     __publicField(this, "step");
     __publicField(this, "file");
     __publicField(this, "rest");
+    __publicField(this, "assistant");
     __publicField(this, "firstSubStep", false);
     this.step = step;
     this.file = file;
     this.rest = rest;
+    this.assistant = rest.assistant;
     this.addPort(new PreviousStepPortModel());
     this.addPort(new NextStepPortModel());
   }
@@ -3275,25 +3787,24 @@ const StepNodeBody = qe(NodeBody).attrs({
     "--min-height": PlaygroundCssVars.NODE_STEP_BODY_HEIGHT,
     "--padding": PlaygroundCssVars.NODE_STEP_BODY_PADDING
   }
-})``;
+})`
+`;
 const StepNodeWidget = (props) => {
   const { node, engine } = props;
   const { fire } = usePlaygroundEventBus();
-  const forceUpdate = useForceUpdate();
   const { step: def, file } = node;
   const { use } = def;
   const StepDefs = findStepDef(use);
   const onConfirm = (model) => {
-    const ret = StepDefs.confirm(model, def, file, node.handlers);
-    if (ret === true) {
-      forceUpdate();
-    }
-    return ret;
+    return StepDefs.confirm(model, def, file, {
+      handlers: node.handlers,
+      assistant: node.assistant
+    });
   };
   const onDiscard = (model) => StepDefs.discard(model);
   const prepareModel = () => StepDefs.prepare(def);
   const onDoubleClicked = () => {
-    fire(PlaygroundEventTypes.SHOW_EDIT_DIALOG, React.createElement(DialogContent, { helpDoc: StepDefs.helpDocs, prepare: prepareModel, confirm: onConfirm, discard: onDiscard, elements: StepDefs.properties }));
+    fire(PlaygroundEventTypes.SHOW_EDIT_DIALOG, React.createElement(DialogContent, { helpDoc: StepDefs.helpDocs, prepare: prepareModel, confirm: onConfirm, discard: onDiscard, elements: StepDefs.properties, assistant: node.assistant }));
   };
   const isFirstSubStep = node.isFirstSubStep();
   return React.createElement(
@@ -3305,7 +3816,7 @@ const StepNodeWidget = (props) => {
       { "data-use": use },
       React.createElement(StepNodeTitle, null, (def.name ?? "").trim() || Labels.StepNodeNoname),
       React.createElement(NodeTitleSpreader, null),
-      React.createElement(StepNodeSecondTitle, null, askUseLabel(use))
+      React.createElement(StepNodeSecondTitle, null, asBeautifiedUse(use))
     ),
     React.createElement(StepNodeBody, { "data-use": use }, StepDefs.ports.map(({ key, port: StepPort }) => {
       return React.createElement(StepPort, { step: def, file, node, engine, key });
@@ -3328,7 +3839,7 @@ const JoinEndNodeContainer = qe(NodeWrapper).attrs({
   [DOM_KEY_WIDGET]: "o23-playground-join-end-node",
   style: {
     "--border-radius": PlaygroundCssVars.NODE_BORDER_RADIUS,
-    "--border": PlaygroundCssVars.NODE_END_BORDER,
+    "--border": PlaygroundCssVars.NODE_JOIN_END_BORDER,
     "--background-color": PlaygroundCssVars.NODE_BACKGROUND
   }
 })``;
@@ -3336,16 +3847,16 @@ const JoinEndNodeHeader = qe(NodeHeader).attrs({
   [DOM_KEY_WIDGET]: "o23-playground-join-end-node-header",
   style: {
     "--border-radius": PlaygroundCssVars.NODE_BORDER_RADIUS,
-    "--background": PlaygroundCssVars.NODE_END_TITLE_BACKGROUND,
+    "--background": PlaygroundCssVars.NODE_JOIN_END_TITLE_BACKGROUND,
     "--padding": PlaygroundCssVars.NODE_TITLE_PADDING
   }
 })``;
 const JoinEndNodeTitle = qe(NodeTitle).attrs({
   [DOM_KEY_WIDGET]: "o23-playground-join-end-node-title",
   style: {
-    "--color": PlaygroundCssVars.NODE_END_TITLE_COLOR,
-    "--font-size": PlaygroundCssVars.NODE_END_TITLE_FONT_SIZE,
-    "--font-weight": PlaygroundCssVars.NODE_END_TITLE_FONT_WEIGHT
+    "--color": PlaygroundCssVars.NODE_JOIN_END_TITLE_COLOR,
+    "--font-size": PlaygroundCssVars.NODE_JOIN_END_TITLE_FONT_SIZE,
+    "--font-weight": PlaygroundCssVars.NODE_JOIN_END_TITLE_FONT_WEIGHT
   }
 })``;
 const JoinEndNodeWidget = (props) => {
@@ -3377,10 +3888,14 @@ class JoinEndNodeFactory extends AbstractReactFactory {
   }
 }
 const _StartNodeModel = class _StartNodeModel extends HandledNodeModel {
-  constructor(def, handlers) {
-    super({ type: _StartNodeModel.TYPE }, handlers);
+  constructor(def, rest) {
+    super({ type: _StartNodeModel.TYPE }, rest.handlers);
     __publicField(this, "def");
+    __publicField(this, "rest");
+    __publicField(this, "assistant");
     this.def = def;
+    this.rest = rest;
+    this.assistant = rest.assistant;
     this.addPort(new NextStepPortModel());
   }
 };
@@ -3459,7 +3974,7 @@ const ApiMethodPortWidget = (props) => {
   const { def } = props;
   const { method } = def;
   const exists = VUtils.isNotBlank(method);
-  return React.createElement(PrePort, { label: Labels.ApiMethodLabel, required: true, defined: exists, all: exists, allAsBoolean: false, allAsGiven: `${method ?? ""}`.toUpperCase().trim() });
+  return React.createElement(PrePort, { label: Labels.ApiMethodLabel, required: true, defined: exists, all: exists, allAsGiven: `${method ?? ""}`.trim(), caseTransform: "up" });
 };
 const ApiHeadersPortWidget = (props) => {
   const { def } = props;
@@ -3545,7 +4060,6 @@ const InitOnlyPortWidget = (props) => {
 const StartNodeWidget = (props) => {
   const { node, engine } = props;
   const { fire } = usePlaygroundEventBus();
-  const forceUpdate = useForceUpdate();
   const def = node.def;
   const { isApi, secondTitle, secondTitleRole } = (() => {
     if (isPipelineDef(def)) {
@@ -3563,16 +4077,12 @@ const StartNodeWidget = (props) => {
     }
   })();
   const onConfirm = (model) => {
-    const ret = FileDefs.confirm(model, def, node.handlers);
-    {
-      forceUpdate();
-    }
-    return ret;
+    return FileDefs.confirm(model, def, node.handlers);
   };
   const onDiscard = (model) => FileDefs.discard(model);
   const prepareModel = () => FileDefs.prepare(def);
   const onDoubleClicked = () => {
-    fire(PlaygroundEventTypes.SHOW_EDIT_DIALOG, React.createElement(DialogContent, { helpDoc: HelpDocs.pipeline, prepare: prepareModel, confirm: onConfirm, discard: onDiscard, elements: FileDefs.elements }));
+    fire(PlaygroundEventTypes.SHOW_EDIT_DIALOG, React.createElement(DialogContent, { helpDoc: HelpDocs.pipeline, prepare: prepareModel, confirm: onConfirm, discard: onDiscard, elements: FileDefs.elements, assistant: node.assistant }));
   };
   let body = void 0;
   if (isApi) {
@@ -3695,28 +4205,47 @@ class ToSubStepsLinkModel extends DefaultLinkModel {
       }
     }
   }
+  askPorts(node) {
+    const { use } = node.step;
+    const def = findStepDef(use);
+    const ports = def.findSubPorts(node);
+    const firstPort = ports[0];
+    const linksOfFirstPort = Object.values(firstPort.getLinks());
+    if (linksOfFirstPort.length === 0) {
+      return { ports, hasStepsLink: false, stepsLinkCount: 0 };
+    }
+    const sourcePort = linksOfFirstPort[0].getSourcePort();
+    if (!(sourcePort instanceof StepsPortModel)) {
+      return { ports, hasStepsLink: false, stepsLinkCount: 0 };
+    }
+    return { ports, hasStepsLink: true, stepsLinkCount: linksOfFirstPort.length };
+  }
   computeCenterX(sourceX, targetX) {
     const sourceNode = this.getSourcePort().getNode();
-    const { use } = sourceNode.step;
-    const def = findStepDef(use);
-    const ports = def.findSubPorts(sourceNode);
-    const links = ports.map((port) => Object.values(port.getLinks())[0]);
-    const hasStepsLink = links[0].getSourcePort() instanceof StepsPortModel;
+    const { ports, hasStepsLink, stepsLinkCount } = this.askPorts(sourceNode);
+    const links = ports.map((port) => Object.values(port.getLinks())).flat();
     const minTargetX = links.map((link) => Math.max(link.getFirstPoint().getX(), link.getLastPoint().getX())).reduce((x1, x2) => Math.min(x1, x2));
     const absoluteCenterX = (minTargetX - Math.min(sourceX, targetX)) / 2;
-    const linkCount = links.length - (hasStepsLink ? 1 : 0);
+    const nonStepsLinkCount = links.length - stepsLinkCount;
     const linkGutter = this.getGutterSize();
-    const centerXStart = absoluteCenterX - linkGutter * (linkCount - 1) / 2;
-    const myIndex = hasStepsLink ? Math.max(0, links.indexOf(this) - 1) : links.indexOf(this);
-    return Math.min(sourceX, targetX) + centerXStart + (linkCount - myIndex - 1) * linkGutter;
+    const centerXStart = absoluteCenterX - linkGutter * (nonStepsLinkCount - 1) / 2;
+    let myIndex = hasStepsLink ? links.indexOf(this) - stepsLinkCount : links.indexOf(this);
+    if (myIndex < 0) {
+      if (stepsLinkCount > 1 && nonStepsLinkCount > 0) {
+        myIndex = -1;
+      } else {
+        myIndex = 0;
+      }
+    }
+    return Math.min(sourceX, targetX) + centerXStart + (nonStepsLinkCount - myIndex - 1) * linkGutter;
   }
   getGutterSize() {
     return DEFAULTS.diagram.linkGutterSize;
   }
 }
 const _StepsLinkModel = class _StepsLinkModel extends ToSubStepsLinkModel {
-  constructor() {
-    super(_StepsLinkModel.TYPE);
+  constructor(options) {
+    super(_StepsLinkModel.TYPE, options);
   }
 };
 __publicField(_StepsLinkModel, "TYPE", "steps-link");
@@ -3736,8 +4265,8 @@ class StepsLinkFactory extends StandardLinkFactory {
   }
 }
 const _ErrorHandlesLinkModel = class _ErrorHandlesLinkModel extends ToSubStepsLinkModel {
-  constructor() {
-    super(_ErrorHandlesLinkModel.TYPE, { selectedColor: PlaygroundCssVars.LINK_ERROR_HANDLES_SELECTED_COLOR });
+  constructor(options) {
+    super(_ErrorHandlesLinkModel.TYPE, { selectedColor: PlaygroundCssVars.LINK_ERROR_HANDLES_SELECTED_COLOR, ...options ?? {} });
     this.setColor(PlaygroundCssVars.LINK_ERROR_HANDLES_COLOR);
   }
 };
@@ -3809,7 +4338,19 @@ const _LastSubStepJoinLinkModel = class _LastSubStepJoinLinkModel extends Defaul
     return { index, count: links.length };
   }
   getSinkingOffset() {
-    return DEFAULTS.diagram.linkJoinEndSinkingOffset;
+    var _a, _b;
+    const node = this.getSourcePort().getNode();
+    const nodeBottom = node.getY() + node.height;
+    const previousNode = [
+      ...Object.values(((_a = node.getPort(PreviousStepPortModel.NAME)) == null ? void 0 : _a.getLinks()) ?? {}),
+      ...Object.values(((_b = node.getPort(FirstSubStepPortModel.NAME)) == null ? void 0 : _b.getLinks()) ?? {})
+    ][0].getSourcePort().getNode();
+    const previousNodeBottom = previousNode.getY() + previousNode.height;
+    if (nodeBottom <= previousNodeBottom) {
+      return previousNodeBottom - nodeBottom + DEFAULTS.diagram.linkJoinEndSinkingOffset;
+    } else {
+      return DEFAULTS.diagram.linkJoinEndSinkingOffset;
+    }
   }
   getGutterSize() {
     return DEFAULTS.diagram.linkJoinEndGutterSize;
@@ -3839,12 +4380,81 @@ class LastSubStepJoinLinkFactory extends StandardLinkFactory {
     return PlaygroundCssVars.LINK_LAST_SUB_STEP_JOIN_SELECTED_DASHARRAY;
   }
 }
+const useSubNodesFold = (options) => {
+  var _a;
+  const { model, property } = options;
+  const forceUpdate = useForceUpdate();
+  const def = model.step;
+  const onClicked = () => {
+    var _a2;
+    if (def.$diagram == null) {
+      def.$diagram = { [property]: ((_a2 = def.$diagram) == null ? void 0 : _a2[property]) ?? false };
+    }
+    def.$diagram[property] = !def.$diagram[property];
+    forceUpdate();
+    model.handlers.onChange();
+  };
+  return {
+    fold: ((_a = def.$diagram) == null ? void 0 : _a[property]) ?? false,
+    switchFold: onClicked
+  };
+};
+const SubNodesPortContainer = qe.div`
+    display: flex;
+    position: absolute;
+    align-items: center;
+    justify-content: center;
+    top: calc(-1 * ${PlaygroundCssVars.NODE_PORT_BORDER_WIDTH});
+    right: calc(${PlaygroundCssVars.NODE_PORT_HEIGHT} / -2 - ${PlaygroundCssVars.NODE_BORDER_WIDTH});
+    width: calc(${PlaygroundCssVars.NODE_PORT_HEIGHT} / 2);
+    height: ${PlaygroundCssVars.NODE_PORT_HEIGHT};
+    background-color: var(--background-color);
+    border: var(--border);
+    border-top-right-radius: calc(${PlaygroundCssVars.NODE_PORT_HEIGHT} / 2);
+    border-bottom-right-radius: calc(${PlaygroundCssVars.NODE_PORT_HEIGHT} / 2);
+    transition: width ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION}, right ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION};
+
+    &[data-fold=true], &:hover {
+        right: calc(0px - ${PlaygroundCssVars.NODE_PORT_HEIGHT} - ${PlaygroundCssVars.NODE_BORDER_WIDTH});
+        width: calc(${PlaygroundCssVars.NODE_PORT_HEIGHT});
+
+        > svg:first-child {
+            width: calc(${PlaygroundCssVars.NODE_PORT_HEIGHT} / 2);
+            opacity: 1;
+        }
+    }
+
+    > svg:first-child {
+        height: calc(${PlaygroundCssVars.NODE_PORT_HEIGHT} / 2);
+        width: 0;
+        opacity: 0;
+        color: var(--icon-color);
+        overflow: hidden;
+        transition: width ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION}, opacity ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION};
+
+        &[data-icon=o23-fold-sub-nodes] {
+            margin-left: -4px;
+        }
+
+        &[data-icon=o23-unfold-sub-nodes] {
+            margin-left: -3px;
+        }
+    }
+
+    > div:last-child {
+        position: absolute;
+        top: 0;
+        left: calc(${PlaygroundCssVars.NODE_PORT_HEIGHT} / 2);
+        width: 0;
+        height: 100%;
+    }
+`;
 const _StepsPortModel = class _StepsPortModel extends OutgoingPortModel {
   constructor(name) {
     super(_StepsPortModel.TYPE, name, PortModelAlignment.RIGHT);
   }
-  createDefaultLinkModel() {
-    return new StepsLinkModel();
+  createDefaultLinkModel(extras) {
+    return new StepsLinkModel(this.toLinkModelOptions(extras));
   }
 };
 __publicField(_StepsPortModel, "TYPE", "steps-port");
@@ -3857,31 +4467,22 @@ class StepsPortFactory extends AbstractModelFactory {
     throw new Error("DO NOT use StepsPortFactory#generateModel.");
   }
 }
-const StepsPortContainer = qe.div.attrs({ [DOM_KEY_WIDGET]: "o23-playground-steps-port" })`
-    display: flex;
-    position: absolute;
-    top: calc(-1 * ${PlaygroundCssVars.NODE_PORT_BORDER_WIDTH});
-    right: calc(${PlaygroundCssVars.NODE_PORT_HEIGHT} / -2 - ${PlaygroundCssVars.NODE_BORDER_WIDTH});
-    width: calc(${PlaygroundCssVars.NODE_PORT_HEIGHT} / 2);
-    height: ${PlaygroundCssVars.NODE_PORT_HEIGHT};
-    background-color: ${PlaygroundCssVars.NODE_PORT_STEPS_BACKGROUND};
-    border: ${PlaygroundCssVars.NODE_PORT_STEPS_BORDER};
-    border-top-right-radius: calc(${PlaygroundCssVars.NODE_PORT_HEIGHT} / 2);
-    border-bottom-right-radius: calc(${PlaygroundCssVars.NODE_PORT_HEIGHT} / 2);
-
-    > div:first-child {
-        position: absolute;
-        top: 0;
-        right: 0;
-        width: 0;
-        height: 100%;
-    }
-`;
+const StepsPortContainer = qe(SubNodesPortContainer).attrs({
+  [DOM_KEY_WIDGET]: "o23-playground-steps-port",
+  style: {
+    "--background-color": PlaygroundCssVars.NODE_PORT_STEPS_BACKGROUND,
+    "--border": PlaygroundCssVars.NODE_PORT_STEPS_BORDER,
+    "--icon-color": PlaygroundCssVars.NODE_PORT_STEPS_ICON_COLOR
+  }
+})``;
 const StepsPortWidget = (props) => {
   const { port, engine } = props;
+  const model = port.getNode();
+  const { fold, switchFold } = useSubNodesFold({ model, property: "$foldSubSteps" });
   return React.createElement(
     StepsPortContainer,
-    null,
+    { "data-fold": fold, onClick: switchFold },
+    fold ? React.createElement(UnfoldSubNodes, null) : React.createElement(FoldSubNodes, null),
     React.createElement(PortWidget, { port, engine })
   );
 };
@@ -3985,8 +4586,8 @@ const _CatchableErrorHandlePortModel = class _CatchableErrorHandlePortModel exte
   constructor() {
     super(_CatchableErrorHandlePortModel.TYPE, _CatchableErrorHandlePortModel.NAME, PortModelAlignment.RIGHT);
   }
-  createDefaultLinkModel() {
-    return new ErrorHandlesLinkModel();
+  createDefaultLinkModel(extras) {
+    return new ErrorHandlesLinkModel(this.toLinkModelOptions(extras));
   }
 };
 __publicField(_CatchableErrorHandlePortModel, "TYPE", "catchable-error-handle-port");
@@ -4000,31 +4601,22 @@ class CatchableErrorHandlePortFactory extends AbstractModelFactory {
     throw new Error("DO NOT use CatchableErrorHandlePortFactory#generateModel.");
   }
 }
-const CatchableErrorHandlePortContainer = qe.div.attrs({ [DOM_KEY_WIDGET]: "o23-playground-catchable-error-port" })`
-    display: flex;
-    position: absolute;
-    top: calc(-1 * ${PlaygroundCssVars.NODE_PORT_BORDER_WIDTH});
-    right: calc(${PlaygroundCssVars.NODE_PORT_HEIGHT} / -2 - ${PlaygroundCssVars.NODE_BORDER_WIDTH});
-    width: calc(${PlaygroundCssVars.NODE_PORT_HEIGHT} / 2);
-    height: ${PlaygroundCssVars.NODE_PORT_HEIGHT};
-    background-color: ${PlaygroundCssVars.NODE_PORT_ERROR_HANDLES_BACKGROUND};
-    border: ${PlaygroundCssVars.NODE_PORT_ERROR_HANDLES_BORDER};
-    border-top-right-radius: calc(${PlaygroundCssVars.NODE_PORT_HEIGHT} / 2);
-    border-bottom-right-radius: calc(${PlaygroundCssVars.NODE_PORT_HEIGHT} / 2);
-
-    > div:first-child {
-        position: absolute;
-        top: 0;
-        right: 0;
-        width: 0;
-        height: 100%;
-    }
-`;
+const CatchableErrorHandlePortContainer = qe(SubNodesPortContainer).attrs({
+  [DOM_KEY_WIDGET]: "o23-playground-catchable-error-port",
+  style: {
+    "--background-color": PlaygroundCssVars.NODE_PORT_ERROR_HANDLES_BACKGROUND,
+    "--border": PlaygroundCssVars.NODE_PORT_ERROR_HANDLES_BORDER,
+    "--icon-color": PlaygroundCssVars.NODE_PORT_ERROR_HANDLES_ICON_COLOR
+  }
+})``;
 const CatchableErrorHandlePortWidget = (props) => {
   const { port, engine } = props;
+  const model = port.getNode();
+  const { fold, switchFold } = useSubNodesFold({ model, property: "$foldCatchable" });
   return React.createElement(
     CatchableErrorHandlePortContainer,
-    null,
+    { "data-fold": fold, onClick: switchFold },
+    fold ? React.createElement(UnfoldSubNodes, null) : React.createElement(FoldSubNodes, null),
     React.createElement(PortWidget, { port, engine })
   );
 };
@@ -4032,8 +4624,8 @@ const _UncatchableErrorHandlePortModel = class _UncatchableErrorHandlePortModel 
   constructor() {
     super(_UncatchableErrorHandlePortModel.TYPE, _UncatchableErrorHandlePortModel.NAME, PortModelAlignment.RIGHT);
   }
-  createDefaultLinkModel() {
-    return new ErrorHandlesLinkModel();
+  createDefaultLinkModel(extras) {
+    return new ErrorHandlesLinkModel(this.toLinkModelOptions(extras));
   }
 };
 __publicField(_UncatchableErrorHandlePortModel, "TYPE", "uncatchable-error-handle-port");
@@ -4047,31 +4639,22 @@ class UncatchableErrorHandlePortFactory extends AbstractModelFactory {
     throw new Error("DO NOT use UncatchableErrorHandlePortFactory#generateModel.");
   }
 }
-const UncatchableErrorHandlePortContainer = qe.div.attrs({ [DOM_KEY_WIDGET]: "o23-playground-uncatchable-error-port" })`
-    display: flex;
-    position: absolute;
-    top: calc(-1 * ${PlaygroundCssVars.NODE_PORT_BORDER_WIDTH});
-    right: calc(${PlaygroundCssVars.NODE_PORT_HEIGHT} / -2 - ${PlaygroundCssVars.NODE_BORDER_WIDTH});
-    width: calc(${PlaygroundCssVars.NODE_PORT_HEIGHT} / 2);
-    height: ${PlaygroundCssVars.NODE_PORT_HEIGHT};
-    background-color: ${PlaygroundCssVars.NODE_PORT_ERROR_HANDLES_BACKGROUND};
-    border: ${PlaygroundCssVars.NODE_PORT_ERROR_HANDLES_BORDER};
-    border-top-right-radius: calc(${PlaygroundCssVars.NODE_PORT_HEIGHT} / 2);
-    border-bottom-right-radius: calc(${PlaygroundCssVars.NODE_PORT_HEIGHT} / 2);
-
-    > div:first-child {
-        position: absolute;
-        top: 0;
-        right: 0;
-        width: 0;
-        height: 100%;
-    }
-`;
+const UncatchableErrorHandlePortContainer = qe(SubNodesPortContainer).attrs({
+  [DOM_KEY_WIDGET]: "o23-playground-uncatchable-error-port",
+  style: {
+    "--background-color": PlaygroundCssVars.NODE_PORT_ERROR_HANDLES_BACKGROUND,
+    "--border": PlaygroundCssVars.NODE_PORT_ERROR_HANDLES_BORDER,
+    "--icon-color": PlaygroundCssVars.NODE_PORT_ERROR_HANDLES_ICON_COLOR
+  }
+})``;
 const UncatchableErrorHandlePortWidget = (props) => {
   const { port, engine } = props;
+  const model = port.getNode();
+  const { fold, switchFold } = useSubNodesFold({ model, property: "$foldUncatchable" });
   return React.createElement(
     UncatchableErrorHandlePortContainer,
-    null,
+    { "data-fold": fold, onClick: switchFold },
+    fold ? React.createElement(UnfoldSubNodes, null) : React.createElement(FoldSubNodes, null),
     React.createElement(PortWidget, { port, engine })
   );
 };
@@ -4079,8 +4662,8 @@ const _ExposedErrorHandlePortModel = class _ExposedErrorHandlePortModel extends 
   constructor() {
     super(_ExposedErrorHandlePortModel.TYPE, _ExposedErrorHandlePortModel.NAME, PortModelAlignment.RIGHT);
   }
-  createDefaultLinkModel() {
-    return new ErrorHandlesLinkModel();
+  createDefaultLinkModel(extras) {
+    return new ErrorHandlesLinkModel(this.toLinkModelOptions(extras));
   }
 };
 __publicField(_ExposedErrorHandlePortModel, "TYPE", "exposed-error-handle-port");
@@ -4094,31 +4677,22 @@ class ExposedErrorHandlePortFactory extends AbstractModelFactory {
     throw new Error("DO NOT use ExposedErrorHandlePortFactory#generateModel.");
   }
 }
-const ExposedErrorHandlePortContainer = qe.div.attrs({ [DOM_KEY_WIDGET]: "o23-playground-exposed-error-port" })`
-    display: flex;
-    position: absolute;
-    top: calc(-1 * ${PlaygroundCssVars.NODE_PORT_BORDER_WIDTH});
-    right: calc(${PlaygroundCssVars.NODE_PORT_HEIGHT} / -2 - ${PlaygroundCssVars.NODE_BORDER_WIDTH});
-    width: calc(${PlaygroundCssVars.NODE_PORT_HEIGHT} / 2);
-    height: ${PlaygroundCssVars.NODE_PORT_HEIGHT};
-    background-color: ${PlaygroundCssVars.NODE_PORT_ERROR_HANDLES_BACKGROUND};
-    border: ${PlaygroundCssVars.NODE_PORT_ERROR_HANDLES_BORDER};
-    border-top-right-radius: calc(${PlaygroundCssVars.NODE_PORT_HEIGHT} / 2);
-    border-bottom-right-radius: calc(${PlaygroundCssVars.NODE_PORT_HEIGHT} / 2);
-
-    > div:first-child {
-        position: absolute;
-        top: 0;
-        right: 0;
-        width: 0;
-        height: 100%;
-    }
-`;
+const ExposedErrorHandlePortContainer = qe(SubNodesPortContainer).attrs({
+  [DOM_KEY_WIDGET]: "o23-playground-exposed-error-port",
+  style: {
+    "--background-color": PlaygroundCssVars.NODE_PORT_ERROR_HANDLES_BACKGROUND,
+    "--border": PlaygroundCssVars.NODE_PORT_ERROR_HANDLES_BORDER,
+    "--icon-color": PlaygroundCssVars.NODE_PORT_ERROR_HANDLES_ICON_COLOR
+  }
+})``;
 const ExposedErrorHandlePortWidget = (props) => {
   const { port, engine } = props;
+  const model = port.getNode();
+  const { fold, switchFold } = useSubNodesFold({ model, property: "$foldExposed" });
   return React.createElement(
     ExposedErrorHandlePortContainer,
-    null,
+    { "data-fold": fold, onClick: switchFold },
+    fold ? React.createElement(UnfoldSubNodes, null) : React.createElement(FoldSubNodes, null),
     React.createElement(PortWidget, { port, engine })
   );
 };
@@ -4126,8 +4700,8 @@ const _AnyErrorHandlePortModel = class _AnyErrorHandlePortModel extends ErrorHan
   constructor() {
     super(_AnyErrorHandlePortModel.TYPE, _AnyErrorHandlePortModel.NAME, PortModelAlignment.RIGHT);
   }
-  createDefaultLinkModel() {
-    return new ErrorHandlesLinkModel();
+  createDefaultLinkModel(extras) {
+    return new ErrorHandlesLinkModel(this.toLinkModelOptions(extras));
   }
 };
 __publicField(_AnyErrorHandlePortModel, "TYPE", "any-error-handle-port");
@@ -4141,33 +4715,118 @@ class AnyErrorHandlePortFactory extends AbstractModelFactory {
     throw new Error("DO NOT use AnyErrorHandlePortFactory#generateModel.");
   }
 }
-const AnyErrorHandlePortContainer = qe.div.attrs({ [DOM_KEY_WIDGET]: "o23-playground-any-error-port" })`
-    display: flex;
-    position: absolute;
-    top: calc(-1 * ${PlaygroundCssVars.NODE_PORT_BORDER_WIDTH});
-    right: calc(${PlaygroundCssVars.NODE_PORT_HEIGHT} / -2 - ${PlaygroundCssVars.NODE_BORDER_WIDTH});
-    width: calc(${PlaygroundCssVars.NODE_PORT_HEIGHT} / 2);
-    height: ${PlaygroundCssVars.NODE_PORT_HEIGHT};
-    background-color: ${PlaygroundCssVars.NODE_PORT_ERROR_HANDLES_BACKGROUND};
-    border: ${PlaygroundCssVars.NODE_PORT_ERROR_HANDLES_BORDER};
-    border-top-right-radius: calc(${PlaygroundCssVars.NODE_PORT_HEIGHT} / 2);
-    border-bottom-right-radius: calc(${PlaygroundCssVars.NODE_PORT_HEIGHT} / 2);
-
-    > div:first-child {
-        position: absolute;
-        top: 0;
-        right: 0;
-        width: 0;
-        height: 100%;
-    }
-`;
+const AnyErrorHandlePortContainer = qe(SubNodesPortContainer).attrs({
+  [DOM_KEY_WIDGET]: "o23-playground-any-error-port",
+  style: {
+    "--background-color": PlaygroundCssVars.NODE_PORT_ERROR_HANDLES_BACKGROUND,
+    "--border": PlaygroundCssVars.NODE_PORT_ERROR_HANDLES_BORDER,
+    "--icon-color": PlaygroundCssVars.NODE_PORT_ERROR_HANDLES_ICON_COLOR
+  }
+})``;
 const AnyErrorHandlePortWidget = (props) => {
   const { port, engine } = props;
+  const model = port.getNode();
+  const { fold, switchFold } = useSubNodesFold({ model, property: "$foldAny" });
   return React.createElement(
     AnyErrorHandlePortContainer,
-    null,
+    { "data-fold": fold, onClick: switchFold },
+    fold ? React.createElement(UnfoldSubNodes, null) : React.createElement(FoldSubNodes, null),
     React.createElement(PortWidget, { port, engine })
   );
+};
+const PortFromInput = (props) => {
+  const { step: def } = props;
+  const { fromInput } = def;
+  const exists = VUtils.isNotBlank(fromInput);
+  if (!exists) {
+    return null;
+  }
+  return React.createElement(PrePort, { label: Labels.StepFromInput, required: false, defined: true, all: true, allAsBoolean: true });
+};
+const StepsPortName = "steps";
+const PortSteps = (props) => {
+  const { node, engine } = props;
+  return React.createElement(
+    PostPort,
+    { label: Labels.StepSteps, required: false, defined: true, "data-role": "steps" },
+    React.createElement(StepsPortWidget, { port: node.getPort(StepsPortName), engine })
+  );
+};
+const PortCatchableError = (props) => {
+  const { node, engine, step: def } = props;
+  const { errorHandles: { catchable } = {} } = def;
+  const exists = catchable != null && Array.isArray(catchable);
+  if (!exists) {
+    return null;
+  }
+  return React.createElement(
+    PostPort,
+    { label: Labels.StepHandleCatchableError, required: false, defined: true, "data-role": "catchable-error" },
+    React.createElement(CatchableErrorHandlePortWidget, { port: node.getPort(CatchableErrorHandlePortModel.NAME), engine })
+  );
+};
+const PortUncatchableError = (props) => {
+  const { node, engine, step: def } = props;
+  const { errorHandles: { uncatchable } = {} } = def;
+  const exists = uncatchable != null && Array.isArray(uncatchable);
+  if (!exists) {
+    return null;
+  }
+  return React.createElement(
+    PostPort,
+    { label: Labels.StepHandleUncatchableError, required: false, defined: true, "data-role": "uncatchable-error" },
+    React.createElement(UncatchableErrorHandlePortWidget, { port: node.getPort(UncatchableErrorHandlePortModel.NAME), engine })
+  );
+};
+const PortExposedError = (props) => {
+  const { node, engine, step: def } = props;
+  const { errorHandles: { exposed } = {} } = def;
+  const exists = exposed != null && Array.isArray(exposed);
+  if (!exists) {
+    return null;
+  }
+  return React.createElement(
+    PostPort,
+    { label: Labels.StepHandleExposedError, required: false, defined: true, "data-role": "exposed-error" },
+    React.createElement(ExposedErrorHandlePortWidget, { port: node.getPort(ExposedErrorHandlePortModel.NAME), engine })
+  );
+};
+const PortAnyError = (props) => {
+  const { node, engine, step: def } = props;
+  const { errorHandles: { any } = {} } = def;
+  const exists = any != null && Array.isArray(any);
+  if (!exists) {
+    return null;
+  }
+  return React.createElement(
+    PostPort,
+    { label: Labels.StepHandleAnyError, required: false, defined: true, "data-role": "any-error" },
+    React.createElement(AnyErrorHandlePortWidget, { port: node.getPort(AnyErrorHandlePortModel.NAME), engine })
+  );
+};
+const PortToOutput = (props) => {
+  const { step: def } = props;
+  const { toOutput } = def;
+  const exists = VUtils.isNotBlank(toOutput);
+  if (!exists) {
+    return null;
+  }
+  return React.createElement(PostPort, { label: Labels.StepToOutput, required: false, defined: true, all: true, allAsBoolean: true });
+};
+const PortMerge = (props) => {
+  const { step: def } = props;
+  const { merge } = def;
+  if (merge == null) {
+    return null;
+  } else if (merge === false) {
+    return null;
+  } else if (merge === true) {
+    return React.createElement(PostPort, { label: Labels.StepMergeReplace, required: false, defined: true });
+  } else if (VUtils.isBlank(merge)) {
+    return null;
+  } else {
+    return React.createElement(PostPort, { label: Labels.StepMergeAsProperty, required: false, defined: true, all: true, allAsGiven: merge.trim() });
+  }
 };
 const START_X = 64;
 const START_Y = 64;
@@ -4190,7 +4849,7 @@ const askEndNodePosition = (def) => {
   }
 };
 const askStepNodePosition = (def) => {
-  var _a, _b, _c, _d;
+  var _a, _b, _c, _d, _e, _f, _g, _h;
   if (isPipelineDef(def)) {
     const diagramDef = def;
     if (((_b = (_a = diagramDef.$diagram) == null ? void 0 : _a.$virtualStep) == null ? void 0 : _b.$x) != null && ((_d = (_c = diagramDef.$diagram) == null ? void 0 : _c.$virtualStep) == null ? void 0 : _d.$y) != null) {
@@ -4200,8 +4859,8 @@ const askStepNodePosition = (def) => {
     }
   } else {
     const diagramDef = def;
-    if (diagramDef.$x != null && diagramDef.$y != null) {
-      return { x: diagramDef.$x, y: diagramDef.$y, appointed: true };
+    if (((_e = diagramDef.$diagram) == null ? void 0 : _e.$x) != null && ((_f = diagramDef.$diagram) == null ? void 0 : _f.$y) != null) {
+      return { x: (_g = diagramDef.$diagram) == null ? void 0 : _g.$x, y: (_h = diagramDef.$diagram) == null ? void 0 : _h.$y, appointed: true };
     } else {
       return { x: START_X, y: START_Y, appointed: false };
     }
@@ -4232,14 +4891,14 @@ const createDiagramNodes = (file, handlers) => {
   const nodeHandlers = {
     onChange: () => handlers.onContentChange(() => handlers.serialize(file))
   };
-  const startNode = new StartNodeModel(file, nodeHandlers);
+  const startNode = new StartNodeModel(file, { handlers: nodeHandlers, assistant: handlers.assistant });
   setNodePosition(startNode, () => askStartNodePosition(file));
   allNodes.push(startNode);
   let previousNode = startNode;
   if (isPipelineDef(file)) {
     const steps = file.steps ?? [];
     if (steps.length === 0) {
-      const step = DEFAULTS.createDefaultStep();
+      const step = handlers.assistant.createDefaultStep();
       steps.push(step);
       file.steps = steps;
     }
@@ -4247,6 +4906,7 @@ const createDiagramNodes = (file, handlers) => {
       return createStepNode(step, file, {
         type: StepNodeEntityType.NORMAL,
         handlers: nodeHandlers,
+        assistant: handlers.assistant,
         previousNode: previousNode2,
         linkPrevious: (node) => previousNode2.next(node),
         appendNode: (...nodes) => allNodes.push(...nodes),
@@ -4258,6 +4918,7 @@ const createDiagramNodes = (file, handlers) => {
     previousNode = createStepNode(step, file, {
       type: StepNodeEntityType.START,
       handlers: nodeHandlers,
+      assistant: handlers.assistant,
       previousNode,
       linkPrevious: (node) => previousNode.next(node),
       appendNode: (...nodes) => allNodes.push(...nodes),
@@ -4286,22 +4947,26 @@ const buildGrid = (node, grid, x, y) => {
   if (node instanceof StepNodeModel) {
     const { use } = node.step;
     const ports = ((_a = findStepDef(use)) == null ? void 0 : _a.findSubPorts(node)) ?? [];
-    ports.forEach((port2, portIndex) => {
-      const link = Object.values(port2.getLinks())[0];
-      y = y + (portIndex === 0 ? 0 : 1);
-      hasSubSteps = true;
-      const subNode = link.getTargetPort().getNode();
-      grid[x + 1] = grid[x + 1] ?? [];
-      grid[x + 1][y] = {
-        node: subNode,
-        x: subNode.getPosition().x,
-        y: subNode.getPosition().y,
-        maxWidth: -1,
-        maxHeight: -1,
-        top: -1,
-        left: -1
-      };
-      y = buildGrid(subNode, grid, x + 1, y);
+    ports.map((port2) => ({ port: port2, links: Object.values(port2.getLinks()) })).filter(({ links }) => links.length !== 0).forEach(({ links }, portIndex) => {
+      links.sort((l1, l2) => {
+        var _a2, _b;
+        return (((_a2 = l1.getOptions().extras) == null ? void 0 : _a2.index) ?? 0) - (((_b = l2.getOptions().extras) == null ? void 0 : _b.index) ?? 0);
+      }).forEach((link, linkIndex) => {
+        y = y + (portIndex === 0 && linkIndex === 0 ? 0 : 1);
+        hasSubSteps = true;
+        const subNode = link.getTargetPort().getNode();
+        grid[x + 1] = grid[x + 1] ?? [];
+        grid[x + 1][y] = {
+          node: subNode,
+          x: subNode.getPosition().x,
+          y: subNode.getPosition().y,
+          maxWidth: -1,
+          maxHeight: -1,
+          top: -1,
+          left: -1
+        };
+        y = buildGrid(subNode, grid, x + 1, y);
+      });
     });
   }
   const port = node.getPort(NextStepPortModel.NAME);
@@ -4382,12 +5047,18 @@ const computeGrid = (grid, top, left, rowGap, columnGap) => {
   });
 };
 const createDiagramHandlers = (options) => {
-  const { serializer, replace, syncContentToStateRef, notifyContentChanged } = options;
+  const { serializer, assistant, replace, syncContentToStateRef, notifyContentChanged } = options;
   return {
     serialize: (def) => serializer.stringify(def),
+    assistant: {
+      createDefaultStep: (assistant == null ? void 0 : assistant.createDefaultStep) ?? DEFAULTS.createDefaultStep,
+      askRefPipelines: (assistant == null ? void 0 : assistant.askRefPipelines) ?? (() => []),
+      askRefSteps: (assistant == null ? void 0 : assistant.askRefSteps) ?? (() => []),
+      askSystemsForHttp: (assistant == null ? void 0 : assistant.askSystemsForHttp) ?? (() => [])
+    },
     onContentChange: (serialize) => {
+      const content = syncContentToStateRef(serialize());
       replace(() => {
-        const content = syncContentToStateRef(serialize());
         notifyContentChanged(content);
       }, 100);
     }
@@ -4404,18 +5075,14 @@ const EditorWrapper = qe.div.attrs({
     background-image: ${PlaygroundCssVars.EDITOR_BACKGROUND_IMAGE};
     background-size: ${PlaygroundCssVars.EDITOR_BACKGROUND_SIZE};
     background-position: ${PlaygroundCssVars.EDITOR_BACKGROUND_POSITION};
-    overflow: auto;
+    overflow: hidden;
 
-    &[data-diagram-status=paint] {
+    &[data-diagram-status=paint],
+    &[data-diagram-status=paint-on-position] {
         > div.o23-playground-editor-content {
-            opacity: 0;
+            //opacity: 0;
             user-select: none;
             pointer-events: none;
-
-            &::-webkit-scrollbar {
-                height: 0;
-                width: 0;
-            }
 
             div.node, div.node * {
                 user-select: none;
@@ -4437,6 +5104,18 @@ const EditorWrapper = qe.div.attrs({
 
     > div.o23-playground-editor-content {
         height: 100%;
+    }
+
+    > div.o23-playground-editor-content-backend {
+        position: absolute;
+        left: 100%;
+        // Width is necessary; 
+        // otherwise, it will cause the node width to be rendered incorrectly,
+        // ultimately resulting in the connections not being straight.
+        width: 100%;
+        opacity: 0;
+        user-select: none;
+        pointer-events: none;
     }
 `;
 const EditorToolbar = qe.div.attrs({ [DOM_KEY_WIDGET]: "o23-playground-editor-toolbar" })`
@@ -4526,16 +5205,9 @@ var EditorKernelDiagramStatus;
 (function(EditorKernelDiagramStatus2) {
   EditorKernelDiagramStatus2["IGNORED"] = "ignored";
   EditorKernelDiagramStatus2["PAINT"] = "paint";
+  EditorKernelDiagramStatus2["PAINT_ON_POSITION"] = "paint-on-position";
   EditorKernelDiagramStatus2["IN_SERVICE"] = "in-service";
 })(EditorKernelDiagramStatus || (EditorKernelDiagramStatus = {}));
-const createDiagramEngine = () => {
-  const engine = createEngine({
-    registerDefaultPanAndZoomCanvasAction: false,
-    registerDefaultZoomCanvasAction: false
-  });
-  initEngine(engine);
-  return engine;
-};
 const parseContent = (parser, content) => {
   const def = parser.parse(content ?? "");
   if (VUtils.isBlank(def.type)) {
@@ -4543,93 +5215,349 @@ const parseContent = (parser, content) => {
   }
   return def;
 };
-const EditorKernel = (props) => {
-  const { content, serializer, deserializer } = props;
-  const wrapperRef = reactExports.useRef(null);
+const createDiagramModel = (options) => {
+  const { def, serializer, assistant, replace, writeContentToState, onContentChanged } = options;
+  const handlers = createDiagramHandlers({
+    serializer,
+    assistant,
+    replace,
+    syncContentToStateRef: (content) => {
+      writeContentToState(content);
+      return content;
+    },
+    notifyContentChanged: onContentChanged
+  });
+  return createDiagramNodes(def, handlers);
+};
+const createDiagramEngine = () => {
+  const engine = createEngine({
+    registerDefaultPanAndZoomCanvasAction: false,
+    registerDefaultZoomCanvasAction: false
+  });
+  initEngine(engine);
+  const model = createLockedDiagramModel();
+  model.setLocked(true);
+  engine.setModel(model);
+  return engine;
+};
+const firstPaint = (options) => {
+  const { content, serializer, deserializer, assistant, replace, writeContentToState, onContentChanged } = options;
+  const engine = createDiagramEngine();
+  const engineBackend = createDiagramEngine();
+  try {
+    const def = parseContent(deserializer, content ?? "");
+    const model = createDiagramModel({
+      def,
+      serializer,
+      assistant,
+      replace,
+      writeContentToState,
+      onContentChanged
+    });
+    engineBackend.setModel(model);
+    return {
+      engine,
+      engineBackend,
+      content,
+      def,
+      serializer,
+      deserializer,
+      diagramStatus: EditorKernelDiagramStatus.PAINT
+    };
+  } catch (e) {
+    console.error(e);
+    engine.setModel(createLockedDiagramModel());
+    return {
+      engine,
+      engineBackend,
+      content,
+      serializer,
+      deserializer,
+      message: e.message,
+      diagramStatus: EditorKernelDiagramStatus.IGNORED
+    };
+  }
+};
+const paintErrorDiagram = (options) => {
+  const { error, stateRef, content, serializer, deserializer } = options;
+  console.error(error);
+  stateRef.current.content = content;
+  stateRef.current.serializer = serializer;
+  stateRef.current.deserializer = deserializer;
+  delete stateRef.current.def;
+  stateRef.current.engine.setModel(createLockedDiagramModel());
+  stateRef.current.engineBackend.setModel(createLockedDiagramModel());
+  stateRef.current.message = error.message;
+  stateRef.current.diagramStatus = EditorKernelDiagramStatus.IGNORED;
+};
+const paint = (options) => {
+  const { stateRef, replace, onStateContentChanged, onContentChanged } = options;
+  const content = options.content();
+  const serializer = options.serializer();
+  const deserializer = options.deserializer();
+  const assistant = options.assistant();
+  try {
+    const def = parseContent(deserializer, content ?? "");
+    const model = createDiagramModel({
+      def,
+      serializer,
+      assistant,
+      replace,
+      writeContentToState: (content2) => {
+        stateRef.current.content = content2;
+        (async () => await onStateContentChanged())();
+      },
+      onContentChanged
+    });
+    stateRef.current.content = content;
+    stateRef.current.serializer = serializer;
+    stateRef.current.deserializer = deserializer;
+    stateRef.current.def = def;
+    stateRef.current.engineBackend.setModel(model);
+    delete stateRef.current.message;
+    stateRef.current.diagramStatus = EditorKernelDiagramStatus.PAINT;
+  } catch (e) {
+    paintErrorDiagram({ error: e, stateRef, content, serializer, deserializer });
+  }
+};
+const repaint = (options) => {
+  const { stateRef, replace, onStateContentChanged, onContentChanged } = options;
+  const def = stateRef.current.def;
+  const serializer = stateRef.current.serializer;
+  const assistant = options.assistant();
+  try {
+    const model = createDiagramModel({
+      def,
+      serializer,
+      assistant,
+      replace,
+      writeContentToState: (content) => {
+        stateRef.current.content = content;
+        (async () => await onStateContentChanged())();
+      },
+      onContentChanged
+    });
+    stateRef.current.engineBackend.setModel(model);
+    stateRef.current.diagramStatus = EditorKernelDiagramStatus.PAINT_ON_POSITION;
+  } catch (e) {
+    paintErrorDiagram({
+      error: e,
+      stateRef,
+      content: stateRef.current.content,
+      serializer: stateRef.current.serializer,
+      deserializer: stateRef.current.deserializer
+    });
+  }
+};
+const Toolbar = (props) => {
+  const { engine, def, serializer, allowUploadFile, allowDownloadFile, allowDownloadImage } = props;
+  const ref = reactExports.useRef(null);
   const { fire } = usePlaygroundEventBus();
-  const { replace } = useThrottler();
-  const stateRef = reactExports.useRef((() => {
-    const engine = createDiagramEngine();
-    try {
-      const def = parseContent(deserializer, content ?? "");
-      const handlers = createDiagramHandlers({
-        serializer,
-        replace,
-        syncContentToStateRef: (content2) => {
-          stateRef.current.content = content2;
-          return content2;
-        },
-        notifyContentChanged: (content2) => {
-          fire(PlaygroundEventTypes.CONTENT_CHANGED, content2);
+  const [state, setState] = reactExports.useState({ max: false, zen: false });
+  reactExports.useEffect(() => {
+    const onFullScreenChanged = () => {
+      if (document.fullscreenElement == null) {
+        setState({ zen: false, max: false });
+      }
+    };
+    window.addEventListener("fullscreenchange", onFullScreenChanged);
+    return () => {
+      window.removeEventListener("fullscreenchange", onFullScreenChanged);
+    };
+  }, []);
+  reactExports.useEffect(() => {
+    const wrapper = ref.current.parentElement.parentElement;
+    switch (true) {
+      case state.zen:
+        wrapper.setAttribute("data-diagram-work-mode", "zen");
+        document.documentElement.requestFullscreen && document.documentElement.requestFullscreen({ navigationUI: "hide" });
+        break;
+      case state.max:
+        wrapper.setAttribute("data-diagram-work-mode", "max");
+        break;
+      case !state.max:
+        wrapper.removeAttribute("data-diagram-work-mode");
+        if (document.fullscreenElement != null) {
+          document.exitFullscreen && document.exitFullscreen();
         }
-      });
-      const model = createDiagramNodes(def, handlers);
-      engine.setModel(model);
-      return {
-        engine,
-        content,
-        serializer,
-        deserializer,
-        def,
-        diagramStatus: EditorKernelDiagramStatus.PAINT
-      };
-    } catch (e) {
-      console.error(e);
-      engine.setModel(createLockedDiagramModel());
-      return {
-        engine,
-        content,
-        serializer,
-        deserializer,
-        message: e.message,
-        diagramStatus: EditorKernelDiagramStatus.IGNORED
-      };
+        break;
     }
-  })());
+  }, [state.max, state.zen]);
+  const zoomTo = (factor) => {
+    engine.getModel().setZoomLevel(factor);
+    engine.repaintCanvas();
+  };
+  const onZoomInClicked = () => {
+    zoomTo(engine.getModel().getZoomLevel() + 5);
+  };
+  const onZoomOutClicked = () => {
+    zoomTo(engine.getModel().getZoomLevel() - 5);
+  };
+  const onOriginSizeClicked = () => {
+    zoomTo(100);
+  };
+  const onFitCanvasClicked = () => {
+    engine.zoomToFit();
+  };
+  const onDownloadImageClicked = async () => {
+    const node = ref.current.parentElement.querySelector("div.o23-playground-editor-content");
+    node.style.overflow = "visible";
+    const svgNode = node.querySelector("svg");
+    const transform = svgNode.style.transform;
+    const divNode = node.querySelector("div");
+    svgNode.style.transform = "";
+    divNode.style.transform = "";
+    const dataUrl = await dom2image.toPng(node, { quality: 1, bgcolor: "white" });
+    svgNode.style.transform = transform;
+    divNode.style.transform = transform;
+    node.style.overflow = "";
+    const link = document.createElement("a");
+    link.download = `${(def == null ? void 0 : def.code) || "no-code"}-diagram.png`;
+    link.href = dataUrl;
+    link.click();
+  };
+  const onDownloadFileClicked = async () => {
+    const link = document.createElement("a");
+    link.download = `${(def == null ? void 0 : def.code) || "no-code"}-config.${serializer.extname()}`;
+    link.href = "data:text/plain;charset=UTF-8," + encodeURIComponent(serializer.stringify(def));
+    link.click();
+  };
+  const onUploadFileClicked = async () => {
+    const file = document.createElement("input");
+    file.setAttribute("type", "file");
+    file.setAttribute("accept", ".yml,.yaml");
+    file.setAttribute("multiple", "false");
+    file.addEventListener("change", () => {
+      if (file.files.length == 1) {
+        const reader = new FileReader();
+        reader.onload = () => {
+          const content = reader.result;
+          fire(PlaygroundEventTypes.RESET_CONTENT, content);
+        };
+        reader.readAsText(file.files[0]);
+      }
+    });
+    file.click();
+  };
+  const onMaxClicked = () => setState((state2) => ({ ...state2, max: true }));
+  const onMinClicked = () => setState((state2) => ({ ...state2, max: false }));
+  const onZenClicked = () => setState({ zen: true, max: true });
+  const onWindowClicked = () => {
+    document.exitFullscreen && document.exitFullscreen();
+    setState({ zen: false, max: false });
+  };
+  return React.createElement(
+    EditorToolbar,
+    { ref },
+    React.createElement(
+      EditorToolbarButton,
+      { onClick: onZoomInClicked },
+      React.createElement(ZoomIn, null)
+    ),
+    React.createElement(
+      EditorToolbarButton,
+      { onClick: onZoomOutClicked },
+      React.createElement(ZoomOut, null)
+    ),
+    React.createElement(
+      EditorToolbarButton,
+      { onClick: onOriginSizeClicked },
+      React.createElement(OriginSize, null)
+    ),
+    React.createElement(
+      EditorToolbarButton,
+      { onClick: onFitCanvasClicked },
+      React.createElement(FitCanvas, null)
+    ),
+    allowDownloadImage ? React.createElement(
+      EditorToolbarButton,
+      { onClick: onDownloadImageClicked },
+      React.createElement(DownloadImage, null)
+    ) : null,
+    allowDownloadFile ? React.createElement(
+      EditorToolbarButton,
+      { onClick: onDownloadFileClicked },
+      React.createElement(DownloadFile, null)
+    ) : null,
+    allowUploadFile ? React.createElement(
+      EditorToolbarButton,
+      { onClick: onUploadFileClicked },
+      React.createElement(UploadFile, null)
+    ) : null,
+    state.max ? null : React.createElement(
+      EditorToolbarButton,
+      { onClick: onMaxClicked },
+      React.createElement(Max, null)
+    ),
+    state.max && !state.zen ? React.createElement(
+      EditorToolbarButton,
+      { onClick: onMinClicked },
+      React.createElement(Min, null)
+    ) : null,
+    state.zen ? null : React.createElement(
+      EditorToolbarButton,
+      { onClick: onZenClicked },
+      React.createElement(Zen, null)
+    ),
+    state.zen ? React.createElement(
+      EditorToolbarButton,
+      { onClick: onWindowClicked },
+      React.createElement(Window, null)
+    ) : null
+  );
+};
+const EditorKernel = (props) => {
+  const { content, assistant, serializer, deserializer, allowUploadFile, allowDownloadFile, allowDownloadImage } = props;
+  const wrapperRef = reactExports.useRef(null);
+  const { on, off, fire } = usePlaygroundEventBus();
+  const { replace } = useThrottler();
+  const stateRef = reactExports.useRef(firstPaint({
+    content,
+    serializer,
+    deserializer,
+    assistant,
+    replace,
+    writeContentToState: (content2) => {
+      stateRef.current.content = content2;
+      (async () => {
+        fire(PlaygroundEventTypes.REPAINT);
+      })();
+    },
+    onContentChanged: (content2) => {
+      fire(PlaygroundEventTypes.CONTENT_CHANGED, content2);
+    }
+  }));
   const forceUpdate = useForceUpdate();
   reactExports.useEffect(() => {
     if (serializer === stateRef.current.serializer && deserializer === stateRef.current.deserializer && content === stateRef.current.content) {
       return;
     }
-    try {
-      const def = parseContent(deserializer, content ?? "");
-      stateRef.current.content = content;
-      stateRef.current.serializer = serializer;
-      stateRef.current.deserializer = deserializer;
-      stateRef.current.def = def;
-      const handlers = createDiagramHandlers({
-        serializer,
-        replace,
-        syncContentToStateRef: (content2) => {
-          stateRef.current.content = content2;
-          return content2;
-        },
-        notifyContentChanged: (content2) => {
-          fire(PlaygroundEventTypes.CONTENT_CHANGED, content2);
-        }
-      });
-      const model = createDiagramNodes(def, handlers);
-      stateRef.current.engine.setModel(model);
-      delete stateRef.current.message;
-      stateRef.current.diagramStatus = EditorKernelDiagramStatus.PAINT;
-    } catch (e) {
-      console.error(e);
-      stateRef.current.content = content;
-      stateRef.current.serializer = serializer;
-      stateRef.current.deserializer = deserializer;
-      delete stateRef.current.def;
-      stateRef.current.engine.setModel(createLockedDiagramModel());
-      stateRef.current.message = e.message;
-      stateRef.current.diagramStatus = EditorKernelDiagramStatus.IGNORED;
-    }
+    paint({
+      serializer: () => serializer,
+      deserializer: () => deserializer,
+      assistant: () => assistant,
+      content: () => content,
+      stateRef,
+      replace,
+      onStateContentChanged: async () => {
+        fire(PlaygroundEventTypes.REPAINT);
+      },
+      onContentChanged: (content2) => {
+        fire(PlaygroundEventTypes.CONTENT_CHANGED, content2);
+      }
+    });
     forceUpdate();
-  }, [fire, replace, forceUpdate, serializer, deserializer, content]);
+  }, [fire, replace, forceUpdate, serializer, deserializer, assistant, content]);
   reactExports.useEffect(() => {
-    if (EditorKernelDiagramStatus.PAINT !== stateRef.current.diagramStatus) {
+    if (![
+      EditorKernelDiagramStatus.PAINT,
+      EditorKernelDiagramStatus.PAINT_ON_POSITION
+    ].includes(stateRef.current.diagramStatus)) {
       return;
     }
+    const backendModel = stateRef.current.engineBackend.getModel();
     const grid = [];
-    const nodes = stateRef.current.engine.getModel().getNodes();
+    const nodes = backendModel.getNodes();
     const startNode = nodes.find((node) => node instanceof StartNodeModel);
     grid[0] = grid[0] ?? [];
     grid[0][0] = {
@@ -4644,10 +5572,40 @@ const EditorKernel = (props) => {
     buildGrid(startNode, grid, 0, 0);
     const { startTop, startLeft, rowGap, columnGap } = DEFAULTS.diagram;
     computeGrid(grid, startTop, startLeft, rowGap, columnGap);
-    stateRef.current.engine.setModel(cloneDiagramNodes(stateRef.current.engine.getModel()));
+    const newModel = cloneDiagramNodes(backendModel);
+    if (EditorKernelDiagramStatus.PAINT_ON_POSITION === stateRef.current.diagramStatus) {
+      const model = stateRef.current.engine.getModel();
+      const offsetX = model.getOffsetX();
+      const offsetY = model.getOffsetY();
+      const zoom = model.getZoomLevel();
+      newModel.setOffset(offsetX, offsetY);
+      newModel.setZoomLevel(zoom);
+    }
+    stateRef.current.engine.setModel(newModel);
+    stateRef.current.engineBackend.setModel(createLockedDiagramModel());
     stateRef.current.diagramStatus = EditorKernelDiagramStatus.IN_SERVICE;
     forceUpdate();
   }, [forceUpdate, stateRef.current.diagramStatus]);
+  reactExports.useEffect(() => {
+    const onRepaint = () => {
+      repaint({
+        assistant: () => assistant,
+        stateRef,
+        replace,
+        onStateContentChanged: async () => {
+          fire(PlaygroundEventTypes.REPAINT);
+        },
+        onContentChanged: (content2) => {
+          fire(PlaygroundEventTypes.CONTENT_CHANGED, content2);
+        }
+      });
+      forceUpdate();
+    };
+    on(PlaygroundEventTypes.REPAINT, onRepaint);
+    return () => {
+      off(PlaygroundEventTypes.REPAINT, onRepaint);
+    };
+  }, [on, off, fire, replace, forceUpdate, assistant]);
   if (VUtils.isNotBlank(stateRef.current.message)) {
     return React.createElement(
       EditorWrapper,
@@ -4667,34 +5625,6 @@ const EditorKernel = (props) => {
       React.createElement(ParseError, null, Labels.NoDefParsed)
     );
   }
-  const zoomTo = (factor) => {
-    const engine = stateRef.current.engine;
-    engine.getModel().setZoomLevel(factor);
-    engine.repaintCanvas();
-  };
-  const onZoomInClicked = () => {
-    zoomTo(stateRef.current.engine.getModel().getZoomLevel() + 5);
-  };
-  const onZoomOutClicked = () => {
-    zoomTo(stateRef.current.engine.getModel().getZoomLevel() - 5);
-  };
-  const onOriginSizeClicked = () => {
-    zoomTo(100);
-  };
-  const onFitCanvasClicked = () => {
-    stateRef.current.engine.zoomToFit();
-  };
-  const onDownloadImageClicked = async () => {
-    var _a;
-    const node = wrapperRef.current.querySelector("div.o23-playground-editor-content");
-    node.style.overflow = "visible";
-    const dataUrl = await dom2image.toPng(node, { quality: 1, bgcolor: "white" });
-    node.style.overflow = "";
-    const link = document.createElement("a");
-    link.download = `${((_a = stateRef.current.def) == null ? void 0 : _a.code) || "no-code"}-diagram.png`;
-    link.href = dataUrl;
-    link.click();
-  };
   try {
     return React.createElement(
       EditorWrapper,
@@ -4702,36 +5632,9 @@ const EditorKernel = (props) => {
       React.createElement(
         ErrorBoundary,
         { content },
+        React.createElement(CanvasWidget, { engine: stateRef.current.engineBackend, className: "o23-playground-editor-content-backend" }),
         React.createElement(CanvasWidget, { engine: stateRef.current.engine, className: "o23-playground-editor-content" }),
-        React.createElement(
-          EditorToolbar,
-          null,
-          React.createElement(
-            EditorToolbarButton,
-            { onClick: onZoomInClicked },
-            React.createElement(ZoomIn, null)
-          ),
-          React.createElement(
-            EditorToolbarButton,
-            { onClick: onZoomOutClicked },
-            React.createElement(ZoomOut, null)
-          ),
-          React.createElement(
-            EditorToolbarButton,
-            { onClick: onOriginSizeClicked },
-            React.createElement(OriginSize, null)
-          ),
-          React.createElement(
-            EditorToolbarButton,
-            { onClick: onFitCanvasClicked },
-            React.createElement(FitCanvas, null)
-          ),
-          React.createElement(
-            EditorToolbarButton,
-            { onClick: onDownloadImageClicked },
-            React.createElement(DownloadImage, null)
-          )
-        )
+        React.createElement(Toolbar, { engine: stateRef.current.engine, def: stateRef.current.def, serializer, allowUploadFile, allowDownloadFile, allowDownloadImage })
       )
     );
   } catch (error) {
@@ -4751,23 +5654,23 @@ const setNodePosition = (node, position) => {
   node.setPositionAppointed(appointed);
 };
 const createStepNode = (step, file, options) => {
-  const { type, subOf, handlers, linkPrevious, appendNode, appendLink } = options;
-  const node = new StepNodeModel(step, file, { type, subOf, handlers });
+  const { type, subOf, handlers, assistant, linkPrevious, appendNode, appendLink } = options;
+  const node = new StepNodeModel(step, file, { type, subOf, handlers, assistant });
   setNodePosition(node, () => askStepNodePosition(step));
   appendNode(node);
   const link = linkPrevious(node);
   appendLink(link);
-  const endOfSub = DEFAULTS.createSubStepNodes(node, { appendNode, appendLink, handlers });
+  const endOfSub = DEFAULTS.createSubStepNodes(node, { appendNode, appendLink, handlers, assistant });
   return endOfSub == null ? node : endOfSub;
 };
 const createLinkFromParent = (model) => {
-  return (node, findPortFromModel, createPortFromModel) => {
+  return (node, findPortFromModel, createPortFromModel, askLinkExtras) => {
     let sourcePort = findPortFromModel();
     if (sourcePort == null) {
       sourcePort = createPortFromModel();
       model.addPort(sourcePort);
     }
-    const link = sourcePort.createOutgoingLinkModel();
+    const link = sourcePort.createOutgoingLinkModel(askLinkExtras == null ? void 0 : askLinkExtras());
     let targetPort = node.getPort(FirstSubStepPortModel.NAME);
     if (targetPort == null) {
       targetPort = new FirstSubStepPortModel();
@@ -4779,7 +5682,7 @@ const createLinkFromParent = (model) => {
   };
 };
 const createSubNodesOfSingleRoute = (options) => {
-  const { model, askSteps, options: { appendNode, appendLink, handlers }, findPortFromModel, createPortFromModel } = options;
+  const { model, askSteps, options: { appendNode, appendLink, handlers, assistant }, findPortFromModel, createPortFromModel, askFirstLinkExtras } = options;
   const steps = askSteps();
   if (steps == null || steps.length === 0) {
     return void 0;
@@ -4787,10 +5690,11 @@ const createSubNodesOfSingleRoute = (options) => {
   const createLinkFromModel = createLinkFromParent(model);
   const previousNode = model;
   return steps.reduce((previousNode2, step) => {
-    const linkPrevious = previousNode2 === model ? (node) => createLinkFromModel(node, findPortFromModel, createPortFromModel) : (node) => previousNode2.next(node);
+    const linkPrevious = previousNode2 === model ? (node) => createLinkFromModel(node, findPortFromModel, createPortFromModel, askFirstLinkExtras) : (node) => previousNode2.next(node);
     return createStepNode(step, model.file, {
       type: StepNodeEntityType.NORMAL,
       handlers,
+      assistant,
       subOf: step,
       previousNode: previousNode2,
       linkPrevious,
@@ -4799,19 +5703,29 @@ const createSubNodesOfSingleRoute = (options) => {
     });
   }, previousNode);
 };
-const createSubNodes$1 = (model, options) => {
-  const step = model.step;
+const createErrorHandlesSubNodes = (step, model, options) => {
   const errorHandles = step.errorHandles;
   if (errorHandles == null) {
     return void 0;
   }
-  const createAskSteps = (name) => {
+  const createDefaultStep = options.assistant.createDefaultStep;
+  const createAskSteps = (name, findPortFromModel, createPortFromModel) => {
     return () => {
       if (errorHandles[name] == null || !Array.isArray(errorHandles[name])) {
         return void 0;
       }
+      const diagram = step.$diagram;
+      const hideSteps = (diagram == null ? void 0 : diagram[`$fold${name.charAt(0).toUpperCase() + name.slice(1)}`]) ?? false;
+      if (hideSteps) {
+        let sourcePort = findPortFromModel();
+        if (sourcePort == null) {
+          sourcePort = createPortFromModel();
+          model.addPort(sourcePort);
+        }
+        return void 0;
+      }
       if (errorHandles[name].length === 0) {
-        const defaultFirstStep = DEFAULTS.createDefaultStep();
+        const defaultFirstStep = createDefaultStep();
         errorHandles[name].push(defaultFirstStep);
       }
       return errorHandles[name];
@@ -4819,49 +5733,64 @@ const createSubNodes$1 = (model, options) => {
   };
   return [
     {
-      steps: createAskSteps("catchable"),
+      name: "catchable",
       findPortFromModel: () => model.getPort(CatchableErrorHandlePortModel.NAME),
       createPortFromModel: () => new CatchableErrorHandlePortModel()
     },
     {
-      steps: createAskSteps("exposed"),
+      name: "exposed",
       findPortFromModel: () => model.getPort(ExposedErrorHandlePortModel.NAME),
       createPortFromModel: () => new ExposedErrorHandlePortModel()
     },
     {
-      steps: createAskSteps("uncatchable"),
+      name: "uncatchable",
       findPortFromModel: () => model.getPort(UncatchableErrorHandlePortModel.NAME),
       createPortFromModel: () => new UncatchableErrorHandlePortModel()
     },
     {
-      steps: createAskSteps("any"),
+      name: "any",
       findPortFromModel: () => model.getPort(AnyErrorHandlePortModel.NAME),
       createPortFromModel: () => new AnyErrorHandlePortModel()
     }
-  ].filter(({ steps, ...rest }) => {
+  ].map(({ name, findPortFromModel, createPortFromModel }) => {
+    return {
+      steps: createAskSteps(name, findPortFromModel, createPortFromModel),
+      findPortFromModel,
+      createPortFromModel
+    };
+  }).map(({ steps, ...rest }) => {
     return { steps: steps(), ...rest };
   }).filter(({ steps }) => {
-    return steps != null;
+    return steps != null && steps.length !== 0;
   }).map(({ steps, findPortFromModel, createPortFromModel }) => {
     return createSubNodesOfSingleRoute({
       model,
       options,
-      askSteps: steps,
+      askSteps: () => steps,
       findPortFromModel,
       createPortFromModel
     });
   });
 };
-const createSubNodesAndEndNode = (model, options) => {
-  const { appendNode, appendLink, handlers, createSpecificSubNodes } = options;
+const createSubNodes$4 = (model, options) => {
   const step = model.step;
-  const commonSubNodes = createSubNodes$1(model, options);
+  return createErrorHandlesSubNodes(step, model, options);
+};
+const createSubNodesAndEndNode = (model, options) => {
+  const { appendNode, appendLink, handlers, assistant, createSpecificSubNodes } = options;
+  const step = model.step;
+  const commonSubNodes = createSubNodes$4(model, options);
   const specificSubNodes = createSpecificSubNodes == null ? void 0 : createSpecificSubNodes(model, options);
   const subNodes = [...commonSubNodes ?? [], ...specificSubNodes ?? []];
   if (subNodes.length === 0) {
     return void 0;
   }
-  const endNode = new JoinEndNodeModel(step, model.file, { type: StepNodeEntityType.JOIN_END, subOf: step, handlers });
+  const endNode = new JoinEndNodeModel(step, model.file, {
+    type: StepNodeEntityType.JOIN_END,
+    subOf: step,
+    handlers,
+    assistant
+  });
   appendNode(endNode);
   subNodes.forEach((node) => {
     const link = endNode.endOfSub(node);
@@ -4870,6 +5799,76 @@ const createSubNodesAndEndNode = (model, options) => {
   const directLink = endNode.endOfMe(model);
   appendLink(directLink);
   return endNode;
+};
+const createSetsLikeSubNodesAndEndNode = (model, options) => {
+  return createSubNodesAndEndNode(model, {
+    ...options,
+    createSpecificSubNodes: (_node, options2) => {
+      const step = model.step;
+      const diagram = step.$diagram;
+      const hideSteps = (diagram == null ? void 0 : diagram.$foldSubSteps) ?? false;
+      if (hideSteps) {
+        let sourcePort = model.getPort(StepsPortName);
+        if (sourcePort == null) {
+          sourcePort = new StepsPortModel(StepsPortName);
+          model.addPort(sourcePort);
+        }
+        return void 0;
+      }
+      const createDefaultStep = options2.assistant.createDefaultStep;
+      const lastNodeOfSteps = createSubNodesOfSingleRoute({
+        model,
+        options: options2,
+        askSteps: () => {
+          const steps = step.steps ?? [];
+          if (steps.length === 0) {
+            const defaultFirstStep = createDefaultStep();
+            steps.push(defaultFirstStep);
+            step.steps = steps;
+          }
+          return steps;
+        },
+        findPortFromModel: () => model.getPort(StepsPortName),
+        createPortFromModel: () => new StepsPortModel(StepsPortName)
+      });
+      return [lastNodeOfSteps];
+    }
+  });
+};
+const createParallelSubNodesAndEndNode = (model, options) => {
+  return CommonStepDefs.createSubNodesAndEndNode(model, {
+    ...options,
+    createSpecificSubNodes: (_node, options2) => {
+      const step = model.step;
+      const diagram = step.$diagram;
+      const hideSteps = (diagram == null ? void 0 : diagram.$foldSubSteps) ?? false;
+      if (hideSteps) {
+        let sourcePort = model.getPort(StepsPortName);
+        if (sourcePort == null) {
+          sourcePort = new StepsPortModel(StepsPortName);
+          model.addPort(sourcePort);
+        }
+        return void 0;
+      }
+      const createDefaultStep = options2.assistant.createDefaultStep;
+      const steps = step.steps ?? [];
+      if (steps.length === 0) {
+        const defaultFirstStep = createDefaultStep();
+        steps.push(defaultFirstStep);
+        step.steps = steps;
+      }
+      return steps.map((step2, stepIndex) => {
+        return createSubNodesOfSingleRoute({
+          model,
+          options: options2,
+          askSteps: () => [step2],
+          findPortFromModel: () => model.getPort(StepsPortName),
+          createPortFromModel: () => new StepsPortModel(StepsPortName),
+          askFirstLinkExtras: () => ({ index: stepIndex })
+        });
+      });
+    }
+  });
 };
 const discard = (_model) => VUtils.noop();
 const elementName = {
@@ -4897,7 +5896,7 @@ const elementUse = {
   code: "type",
   label: Labels.Use,
   anchor: "use",
-  badge: (model) => askUseLabel(model.use),
+  badge: (model) => asBeautifiedUse(model.use),
   editor: (props) => {
     const { model, onValueChanged } = props;
     const onValueChange = (value2) => {
@@ -4912,11 +5911,228 @@ const elementUse = {
     };
     const value = model.use;
     const options = AllStepDefsAsArray().map((def) => {
-      return { value: def.use, label: askUseLabel(def.use), stringify: () => askUseStringifyText(def.use) };
+      return { value: def.use, label: askUseLabel(def.use) };
     });
-    return React.createElement(UnwrappedDropdown, { value, onValueChange, options, clearable: false, style: { justifySelf: "start", width: "unset", minWidth: "min(200px, 100%)" } });
+    return React.createElement(UnwrappedDropdown, { value, onValueChange, options, optionSort: OptionItemSort.ASC, clearable: false, style: CommonElementEditorStyles.dropdown });
   },
   helpDoc: HelpDocs.stepUse
+};
+const JsEditorContainer = qe.div.attrs(({ "data-height": height }) => {
+  return {
+    [DOM_KEY_WIDGET]: "o23-playground-js-editor",
+    style: {
+      "--height": utils$2.toCssSize(height ?? 300)
+    }
+  };
+})`
+    display: block;
+    position: relative;
+    width: 100%;
+    height: var(--height);
+    min-height: var(--height);
+    max-height: var(--height);
+    border: ${PlaygroundCssVars.SNIPPET_BORDER};
+    border-radius: ${PlaygroundCssVars.SNIPPET_BORDER_RADIUS};
+    overflow: hidden;
+
+    &[data-visible=false] {
+        display: none;
+    }
+
+    > div.cm-editor {
+        height: 100%;
+
+        &.cm-focused {
+            outline: none;
+        }
+
+        > div.cm-scroller {
+            overflow-x: auto;
+            overflow-y: scroll;
+
+            &::-webkit-scrollbar {
+                background-color: transparent;
+                height: ${CssVars.SCROLL_HEIGHT};
+                width: ${CssVars.SCROLL_WIDTH};
+            }
+
+            &::-webkit-scrollbar-track {
+                background-color: ${CssVars.SCROLL_TRACK_COLOR};
+                border-radius: ${CssVars.SCROLL_BORDER_RADIUS};
+            }
+
+            &::-webkit-scrollbar-thumb {
+                background-color: ${CssVars.SCROLL_THUMB_COLOR};
+                border-radius: ${CssVars.SCROLL_BORDER_RADIUS};
+            }
+        }
+
+        div.cm-line {
+        }
+
+        div.cm-panels.cm-panels-bottom {
+            border-top: ${CssVars.BORDER};
+            border-right: ${CssVars.BORDER};
+        }
+
+        div.cm-search.cm-panel {
+            /** beautify search panel */
+            display: grid;
+            position: relative;
+            grid-template-columns: auto auto 1fr auto auto auto;
+            grid-column-gap: 8px;
+            grid-template-rows: auto auto auto;
+            grid-row-gap: 8px;
+
+            > * {
+                margin: 0;
+            }
+
+            > input {
+                grid-column: span 3;
+
+                &:not(:first-child) {
+                    grid-row: 3;
+
+                    ~ * {
+                        grid-row: 3;
+                    }
+                }
+            }
+
+            > button {
+                background-image: none;
+                border: ${CssVars.BORDER};
+                border-radius: ${CssVars.BORDER_RADIUS};
+                text-transform: capitalize;
+                cursor: pointer;
+
+                &:last-child {
+                    padding: 0 8px;
+                }
+            }
+
+            > label {
+                display: flex;
+                position: relative;
+                align-items: center;
+                text-transform: capitalize;
+
+                &:nth-child(7) {
+                    grid-column: span 4;
+                }
+
+                > input {
+                    margin: 0 4px 0 0;
+                }
+            }
+
+            > br {
+                display: none;
+            }
+        }
+
+        div.cm-tooltip-autocomplete {
+            > ul {
+                &::-webkit-scrollbar {
+                    background-color: transparent;
+                    height: ${CssVars.SCROLL_HEIGHT};
+                    width: ${CssVars.SCROLL_WIDTH};
+                }
+
+                &::-webkit-scrollbar-track {
+                    background-color: ${CssVars.SCROLL_TRACK_COLOR};
+                    border-radius: ${CssVars.SCROLL_BORDER_RADIUS};
+                }
+
+                &::-webkit-scrollbar-thumb {
+                    background-color: ${CssVars.SCROLL_THUMB_COLOR};
+                    border-radius: ${CssVars.SCROLL_BORDER_RADIUS};
+                }
+            }
+
+            span.cm-completionLabel {
+                font-weight: 600;
+                margin-right: 16px;
+            }
+        }
+    }
+`;
+const JsEditor = (props) => {
+  const { visible = true, height, snippet, onChange } = props;
+  const ref = reactExports.useRef(null);
+  const [state, setState] = reactExports.useState({});
+  const { replace } = useThrottler();
+  reactExports.useEffect(() => {
+    if (ref.current == null) {
+      return;
+    }
+    const changeListener = new Compartment();
+    const editor = new EditorView({
+      state: EditorState.create({
+        doc: "",
+        extensions: [
+          basicSetup,
+          keymap.of([indentWithTab]),
+          javascript(),
+          lintGutter(),
+          changeListener.of(EditorView.updateListener.of(VUtils.noop))
+        ]
+      }),
+      parent: ref.current
+    });
+    setState((state2) => ({ ...state2, editor, changeListener }));
+    return () => {
+      editor.destroy();
+    };
+  }, []);
+  reactExports.useEffect(() => {
+    if (state.editor == null) {
+      return;
+    }
+    const doc = state.editor.state.doc;
+    const text = doc.toString();
+    if (text !== snippet) {
+      state.editor.dispatch({ changes: { from: 0, to: doc.length, insert: snippet ?? "" } });
+    }
+  }, [state.editor, snippet]);
+  reactExports.useEffect(() => {
+    if (state.editor == null) {
+      return;
+    }
+    state.editor.dispatch({
+      effects: state.changeListener.reconfigure(EditorView.updateListener.of((view) => {
+        if (view.docChanged) {
+          replace(async () => {
+            await onChange(view.state.doc.toString());
+          }, 300);
+        }
+      }))
+    });
+  }, [replace, state.editor, state.changeListener, onChange]);
+  return React.createElement(JsEditorContainer, { "data-visible": visible, "data-height": height, ref });
+};
+const createSelectableJsEditor = (options) => {
+  const { findFlag, saveFlag, findSnippet, saveSnippet, flagCandidates, isSnippetAvailable, height: editorHeight } = options;
+  return (props) => {
+    const { model, onValueChanged } = props;
+    const onValueChange = (value) => {
+      saveFlag(model, value);
+      onValueChanged();
+    };
+    const onSnippetChange = async (snippet2) => {
+      saveSnippet(model, snippet2);
+      onValueChanged(false);
+    };
+    const flag = findFlag(model);
+    const snippet = findSnippet(model);
+    return React.createElement(
+      VerticalLinesEditor,
+      null,
+      React.createElement(UnwrappedDropdown, { value: flag, onValueChange, options: flagCandidates, clearable: false, filterable: false, style: CommonElementEditorStyles.dropdown }),
+      React.createElement(JsEditor, { snippet, onChange: onSnippetChange, visible: isSnippetAvailable(flag), height: editorHeight })
+    );
+  };
 };
 const createBadge$1 = (name) => {
   return (model) => {
@@ -4929,54 +6145,56 @@ const createBadge$1 = (name) => {
   };
 };
 const createEditor$1 = (names) => {
-  return (props) => {
-    var _a;
-    const { flag, snippet } = names;
-    const { model, onValueChanged } = props;
-    const onValueChange = (value) => {
+  const { flag, snippet } = names;
+  return createSelectableJsEditor({
+    findFlag: (model) => {
+      var _a;
+      return ((_a = model.temporary) == null ? void 0 : _a[flag]) ?? true;
+    },
+    saveFlag: (model, value) => {
       model.temporary = { ...model.temporary ?? {}, [flag]: value };
-      onValueChanged();
-    };
-    const options = [
+    },
+    findSnippet: (model) => model[snippet],
+    saveSnippet: (model, text) => {
+      model[snippet] = text;
+    },
+    flagCandidates: [
       { value: true, label: Labels.StepIOTransformerAsIs },
       { value: false, label: Labels.StepIOTransformerSnippet }
-    ];
-    return React.createElement(
-      VerticalLinesEditor,
-      null,
-      React.createElement(UnwrappedDropdown, { value: ((_a = model.temporary) == null ? void 0 : _a[flag]) ?? true, onValueChange, options, clearable: false, style: { justifySelf: "start", width: "unset", minWidth: "min(200px, 100%)" } })
-    );
-  };
+    ],
+    isSnippetAvailable: (value) => value === false,
+    height: PlaygroundCssVars.SNIPPET_IO_TRANSFORMER_HEIGHT
+  });
 };
-const elementFromRequest = {
-  code: "from-request",
+const elementFromInput = {
+  code: "from-input",
   label: Labels.StepIOTransformer,
-  anchor: "from-request",
-  badge: createBadge$1("fromRequestAsIs"),
-  editor: createEditor$1({ flag: "fromRequestAsIs", snippet: "fromRequest" }),
-  helpDoc: HelpDocs.stepFromRequest
+  anchor: "from-input",
+  badge: createBadge$1("fromInputAsIs"),
+  editor: createEditor$1({ flag: "fromInputAsIs", snippet: "fromInput" }),
+  helpDoc: HelpDocs.stepFromInput
 };
-const elementFromRequestGroup = {
-  code: "from-request-group",
-  label: Labels.StepFromRequest,
-  anchor: "from-request-group",
-  children: [elementFromRequest],
+const elementFromInputGroup = {
+  code: "from-input-group",
+  label: Labels.StepFromInput,
+  anchor: "from-input-group",
+  children: [elementFromInput],
   group: true
 };
-const elementToResponse = {
-  code: "to-response",
+const elementToOutput = {
+  code: "to-output",
   label: Labels.StepIOTransformer,
-  anchor: "to-response",
-  badge: createBadge$1("toResponseAsIs"),
-  editor: createEditor$1({ flag: "toResponseAsIs", snippet: "toResponse" }),
-  helpDoc: HelpDocs.stepToResponse
+  anchor: "to-output",
+  badge: createBadge$1("toOutputAsIs"),
+  editor: createEditor$1({ flag: "toOutputAsIs", snippet: "toOutput" }),
+  helpDoc: HelpDocs.stepToOutput
 };
 const MergeToRequestEditor = (props) => {
   var _a, _b;
   const { model, onValueChanged } = props;
   const inputRef = reactExports.useRef(null);
   const onValueChange = (value) => {
-    model.temporary = { ...model.temporary ?? {}, mergeRequestType: value };
+    model.temporary = { ...model.temporary ?? {}, mergeType: value };
     setTimeout(() => {
       var _a2, _b2;
       return (_b2 = (_a2 = inputRef.current) == null ? void 0 : _a2.querySelector("input")) == null ? void 0 : _b2.focus();
@@ -4984,44 +6202,44 @@ const MergeToRequestEditor = (props) => {
     onValueChanged();
   };
   const onNameChange = (value) => {
-    model.mergeRequest = value;
+    model.merge = value;
     onValueChanged();
   };
   const options = [
-    { value: MergeRequestType.REPLACE, label: Labels.StepIOMergeBackReplace },
-    { value: MergeRequestType.MERGE_AS_PROPERTY, label: Labels.StepIOMergeBackAsProperty },
-    { value: MergeRequestType.UNBOX, label: Labels.StepIOMergeBackUnbox }
+    { value: MergeType.REPLACE, label: Labels.StepIOMergeBackReplace },
+    { value: MergeType.MERGE_AS_PROPERTY, label: Labels.StepIOMergeBackAsProperty },
+    { value: MergeType.UNBOX, label: Labels.StepIOMergeBackUnbox }
   ];
   return React.createElement(
     VerticalLinesEditor,
     null,
-    React.createElement(UnwrappedDropdown, { value: ((_a = model.temporary) == null ? void 0 : _a.mergeRequestType) ?? MergeRequestType.REPLACE, onValueChange, options, clearable: false, style: { justifySelf: "start", width: "unset", minWidth: "min(200px, 100%)" } }),
-    React.createElement(UnwrappedDecorateInput, { leads: [Labels.StepIOMergeBackAsPropertyName], value: model.mergeRequest ?? "", onValueChange: onNameChange, disabled: ((_b = model.temporary) == null ? void 0 : _b.mergeRequestType) !== MergeRequestType.MERGE_AS_PROPERTY, ref: inputRef, "data-di-prefix-text": true })
+    React.createElement(UnwrappedDropdown, { value: ((_a = model.temporary) == null ? void 0 : _a.mergeType) ?? MergeType.REPLACE, onValueChange, options, clearable: false, style: CommonElementEditorStyles.dropdown }),
+    React.createElement(UnwrappedDecorateInput, { leads: [Labels.StepIOMergeBackAsPropertyName], value: model.merge ?? "", onValueChange: onNameChange, disabled: ((_b = model.temporary) == null ? void 0 : _b.mergeType) !== MergeType.MERGE_AS_PROPERTY, ref: inputRef, "data-di-prefix-text": true })
   );
 };
 const elementMergeToRequest = {
-  code: "merge-to-response",
-  label: Labels.StepMergeRequest,
-  anchor: "merge-to-response",
+  code: "merge-to-output",
+  label: Labels.StepMerge,
+  anchor: "merge-to-output",
   badge: (model) => {
-    const { mergeRequestType: type } = model.temporary ?? {};
+    const { mergeType: type } = model.temporary ?? {};
     switch (type) {
-      case MergeRequestType.UNBOX:
+      case MergeType.UNBOX:
         return Labels.StepIOMergeBackUnbox;
-      case MergeRequestType.MERGE_AS_PROPERTY:
+      case MergeType.MERGE_AS_PROPERTY:
         return Labels.StepIOMergeBackAsProperty;
-      case MergeRequestType.REPLACE:
+      case MergeType.REPLACE:
         return Labels.StepIOMergeBackReplace;
     }
   },
   editor: MergeToRequestEditor,
   helpDoc: HelpDocs.stepMergeToRequest
 };
-const elementToResponseGroup = {
-  code: "to-response-group",
-  label: Labels.StepToResponse,
-  anchor: "to-response-group",
-  children: [elementToResponse, elementMergeToRequest],
+const elementToOutputGroup = {
+  code: "to-output-group",
+  label: Labels.StepToOutput,
+  anchor: "to-output-group",
+  children: [elementToOutput, elementMergeToRequest],
   group: true
 };
 const createBadge = (name) => {
@@ -5038,32 +6256,41 @@ const createBadge = (name) => {
     }
   };
 };
-const createEditor = (name) => {
-  return (props) => {
-    var _a;
-    const { model, onValueChanged } = props;
-    const onValueChange = (value) => {
-      model.temporary = { ...model.temporary ?? {}, [name]: value };
-      onValueChanged();
-    };
-    const options = [
+const createEditor = (names) => {
+  const { flag, snippet } = names;
+  return createSelectableJsEditor({
+    findFlag: (model) => {
+      var _a;
+      return ((_a = model.temporary) == null ? void 0 : _a[flag]) ?? ErrorHandleType.NONE;
+    },
+    saveFlag: (model, value) => {
+      model.temporary = { ...model.temporary ?? {}, [flag]: value };
+    },
+    findSnippet: (model) => {
+      var _a;
+      return (_a = model.errorHandles) == null ? void 0 : _a[snippet];
+    },
+    saveSnippet: (model, text) => {
+      if (model.errorHandles == null) {
+        model.errorHandles = {};
+      }
+      model.errorHandles[snippet] = text;
+    },
+    flagCandidates: [
       { value: ErrorHandleType.NONE, label: Labels.StepErrorHandleTypeNone },
       { value: ErrorHandleType.SNIPPET, label: Labels.StepErrorHandleTypeSnippet },
       { value: ErrorHandleType.STEPS, label: Labels.StepErrorHandleTypeSteps }
-    ];
-    return React.createElement(
-      VerticalLinesEditor,
-      null,
-      React.createElement(UnwrappedDropdown, { value: ((_a = model.temporary) == null ? void 0 : _a[name]) ?? ErrorHandleType.NONE, onValueChange, options, clearable: false, style: { justifySelf: "start", width: "unset", minWidth: "min(200px, 100%)" } })
-    );
-  };
+    ],
+    isSnippetAvailable: (value) => value === ErrorHandleType.SNIPPET,
+    height: PlaygroundCssVars.SNIPPET_ERROR_HANDLES_HEIGHT
+  });
 };
 const elementCatchableErrorHandle = {
   code: "catchable-error-handle",
   label: Labels.CatchableErrorHandle,
   anchor: "catchable-error-handle",
   badge: createBadge("useErrorHandlesForCatchable"),
-  editor: createEditor("useErrorHandlesForCatchable"),
+  editor: createEditor({ flag: "useErrorHandlesForCatchable", snippet: "catchable" }),
   helpDoc: HelpDocs.stepCatchableErrorHandle
 };
 const elementUncatchableErrorHandle = {
@@ -5071,7 +6298,7 @@ const elementUncatchableErrorHandle = {
   label: Labels.UncatchableErrorHandle,
   anchor: "uncatchable-error-handle",
   badge: createBadge("useErrorHandlesForUncatchable"),
-  editor: createEditor("useErrorHandlesForUncatchable"),
+  editor: createEditor({ flag: "useErrorHandlesForUncatchable", snippet: "uncatchable" }),
   helpDoc: HelpDocs.stepUncatchableErrorHandle
 };
 const elementExposedErrorHandle = {
@@ -5079,7 +6306,7 @@ const elementExposedErrorHandle = {
   label: Labels.ExposedErrorHandle,
   anchor: "exposed-error-handle",
   badge: createBadge("useErrorHandlesForExposed"),
-  editor: createEditor("useErrorHandlesForExposed"),
+  editor: createEditor({ flag: "useErrorHandlesForExposed", snippet: "exposed" }),
   helpDoc: HelpDocs.stepExposedErrorHandle
 };
 const elementAnyErrorHandle = {
@@ -5087,7 +6314,7 @@ const elementAnyErrorHandle = {
   label: Labels.AnyErrorHandle,
   anchor: "any-error-handle",
   badge: createBadge("useErrorHandlesForAny"),
-  editor: createEditor("useErrorHandlesForAny"),
+  editor: createEditor({ flag: "useErrorHandlesForAny", snippet: "any" }),
   helpDoc: HelpDocs.stepAnyErrorHandle
 };
 const elementErrorHandles = {
@@ -5100,9 +6327,20 @@ const elementErrorHandles = {
     elementUncatchableErrorHandle,
     elementAnyErrorHandle
   ],
-  group: true
+  group: true,
+  collapsible: true,
+  collapsed: true
 };
-const findSubPorts$1 = (model) => {
+const createMainContentElement = (...children) => {
+  return {
+    code: "main-content",
+    label: Labels.StepMainContent,
+    anchor: "main-content",
+    children,
+    group: true
+  };
+};
+const findSubPorts$4 = (model) => {
   return [
     model.getPort(CatchableErrorHandlePortModel.NAME),
     model.getPort(ExposedErrorHandlePortModel.NAME),
@@ -5110,115 +6348,21 @@ const findSubPorts$1 = (model) => {
     model.getPort(AnyErrorHandlePortModel.NAME)
   ].filter((port) => port != null);
 };
-const PortFromRequest = (props) => {
-  const { step: def } = props;
-  const { fromRequest } = def;
-  const exists = VUtils.isNotBlank(fromRequest);
-  if (!exists) {
-    return null;
-  }
-  return React.createElement(PrePort, { label: Labels.StepFromRequest, required: false, defined: true, all: true, allAsBoolean: true });
-};
-const StepsPortName = "steps";
-const PortSteps = (props) => {
-  const { node, engine } = props;
-  return React.createElement(
-    PostPort,
-    { label: Labels.StepSteps, required: false, defined: true, "data-role": "steps" },
-    React.createElement(StepsPortWidget, { port: node.getPort(StepsPortName), engine })
-  );
-};
-const PortCatchableError = (props) => {
-  const { node, engine, step: def } = props;
-  const { errorHandles: { catchable } = {} } = def;
-  const exists = catchable != null && Array.isArray(catchable);
-  if (!exists) {
-    return null;
-  }
-  return React.createElement(
-    PostPort,
-    { label: Labels.StepHandleCatchableError, required: false, defined: true, "data-role": "catchable-error" },
-    React.createElement(CatchableErrorHandlePortWidget, { port: node.getPort(CatchableErrorHandlePortModel.NAME), engine })
-  );
-};
-const PortUncatchableError = (props) => {
-  const { node, engine, step: def } = props;
-  const { errorHandles: { uncatchable } = {} } = def;
-  const exists = uncatchable != null && Array.isArray(uncatchable);
-  if (!exists) {
-    return null;
-  }
-  return React.createElement(
-    PostPort,
-    { label: Labels.StepHandleUncatchableError, required: false, defined: true, "data-role": "uncatchable-error" },
-    React.createElement(UncatchableErrorHandlePortWidget, { port: node.getPort(UncatchableErrorHandlePortModel.NAME), engine })
-  );
-};
-const PortExposedError = (props) => {
-  const { node, engine, step: def } = props;
-  const { errorHandles: { exposed } = {} } = def;
-  const exists = exposed != null && Array.isArray(exposed);
-  if (!exists) {
-    return null;
-  }
-  return React.createElement(
-    PostPort,
-    { label: Labels.StepHandleExposedError, required: false, defined: true, "data-role": "exposed-error" },
-    React.createElement(ExposedErrorHandlePortWidget, { port: node.getPort(ExposedErrorHandlePortModel.NAME), engine })
-  );
-};
-const PortAnyError = (props) => {
-  const { node, engine, step: def } = props;
-  const { errorHandles: { any } = {} } = def;
-  const exists = any != null && Array.isArray(any);
-  if (!exists) {
-    return null;
-  }
-  return React.createElement(
-    PostPort,
-    { label: Labels.StepHandleAnyError, required: false, defined: true, "data-role": "any-error" },
-    React.createElement(AnyErrorHandlePortWidget, { port: node.getPort(AnyErrorHandlePortModel.NAME), engine })
-  );
-};
-const PortToResponse = (props) => {
-  const { step: def } = props;
-  const { toResponse } = def;
-  const exists = VUtils.isNotBlank(toResponse);
-  if (!exists) {
-    return null;
-  }
-  return React.createElement(PostPort, { label: Labels.StepToResponse, required: false, defined: true, all: true, allAsBoolean: true });
-};
-const PortMergeRequest = (props) => {
-  const { step: def } = props;
-  const { mergeRequest } = def;
-  if (mergeRequest == null) {
-    return null;
-  } else if (mergeRequest === false) {
-    return null;
-  } else if (mergeRequest === true) {
-    return React.createElement(PostPort, { label: Labels.StepMergeRequest, required: false, defined: true, all: true, allAsBoolean: true });
-  } else if (VUtils.isBlank(mergeRequest)) {
-    return null;
-  } else {
-    return React.createElement(PostPort, { label: Labels.StepToResponse, required: false, defined: true, all: true, allAsBoolean: false, allAsGiven: mergeRequest.trim() });
-  }
-};
-const prepare$2 = (def) => {
+const prepare$8 = (def) => {
   const model = {
     name: def.name,
     use: def.use,
-    fromRequest: def.fromRequest,
-    toResponse: def.toResponse,
+    fromInput: def.fromInput,
+    toOutput: def.toOutput,
     temporary: {}
   };
-  model.temporary.fromRequestAsIs = VUtils.isBlank(def.fromRequest);
-  model.temporary.toResponseAsIs = VUtils.isBlank(def.toResponse);
-  model.temporary.mergeRequestType = VUtils.isBlank(def.mergeRequest) || def.mergeRequest === false ? MergeRequestType.REPLACE : def.mergeRequest === true ? MergeRequestType.UNBOX : MergeRequestType.MERGE_AS_PROPERTY;
-  if (model.temporary.mergeRequestType === MergeRequestType.MERGE_AS_PROPERTY) {
-    model.mergeRequest = def.mergeRequest;
+  model.temporary.fromInputAsIs = VUtils.isBlank(def.fromInput);
+  model.temporary.toOutputAsIs = VUtils.isBlank(def.toOutput);
+  model.temporary.mergeType = VUtils.isBlank(def.merge) || def.merge === false ? MergeType.REPLACE : def.merge === true ? MergeType.UNBOX : MergeType.MERGE_AS_PROPERTY;
+  if (model.temporary.mergeType === MergeType.MERGE_AS_PROPERTY) {
+    model.merge = def.merge;
   }
-  model.errorHandles = {};
+  model.errorHandles = model.errorHandles ?? {};
   const copyErrorHandle = (name, flagName) => {
     var _a;
     const handle = (_a = def.errorHandles) == null ? void 0 : _a[name];
@@ -5227,7 +6371,6 @@ const prepare$2 = (def) => {
     } else if (Array.isArray(handle)) {
       model.temporary[flagName] = ErrorHandleType.STEPS;
     } else {
-      model.errorHandles[name] = handle;
       model.temporary[flagName] = ErrorHandleType.SNIPPET;
     }
   };
@@ -5237,13 +6380,13 @@ const prepare$2 = (def) => {
   copyErrorHandle("any", "useErrorHandlesForAny");
   return model;
 };
-const switchUse$2 = (def, keptPropNames, originalUse) => {
+const switchUse$8 = (def, keptPropNames, originalUse) => {
   const keptProps = {
     name: true,
     use: true,
-    fromRequest: true,
-    toResponse: true,
-    mergeRequest: true,
+    fromInput: true,
+    toOutput: true,
+    merge: true,
     errorHandles: true,
     temporary: true,
     ...keptPropNames.reduce((names, name) => {
@@ -5259,21 +6402,23 @@ const switchUse$2 = (def, keptPropNames, originalUse) => {
   }, {});
 };
 const CommonStepDefs = {
-  prepare: prepare$2,
-  switchUse: switchUse$2,
-  confirm: confirm$2,
+  prepare: prepare$8,
+  switchUse: switchUse$8,
+  confirm: confirm$8,
   discard,
   properties: {
     name: elementName,
     use: elementUse,
-    fromRequest: elementFromRequestGroup,
-    toResponse: elementToResponseGroup,
-    errorHandles: elementErrorHandles
+    fromInput: elementFromInputGroup,
+    toOutput: elementToOutputGroup,
+    errorHandles: elementErrorHandles,
+    leadingGroup: [elementName, elementUse, elementFromInputGroup],
+    tailingGroup: [elementErrorHandles, elementToOutputGroup]
   },
   ports: {
-    fromRequest: PortFromRequest,
-    toResponse: PortToResponse,
-    mergeRequest: PortMergeRequest,
+    fromInput: PortFromInput,
+    toOutput: PortToOutput,
+    merge: PortMerge,
     handleCatchableError: PortCatchableError,
     handleUncatchableError: PortUncatchableError,
     handleExposedError: PortExposedError,
@@ -5281,129 +6426,811 @@ const CommonStepDefs = {
   },
   prebuiltPorts: {
     steps: PortSteps,
+    input: [{ key: "from-input", port: PortFromInput }],
     errorHandles: [
       { key: "catchable-error-handle", port: PortCatchableError },
       { key: "exposed-error-handle", port: PortExposedError },
       { key: "uncatchable-error-handle", port: PortUncatchableError },
       { key: "any-error-handle", port: PortAnyError }
+    ],
+    output: [
+      { key: "to-output", port: PortToOutput },
+      { key: "merge", port: PortMerge }
     ]
   },
-  createSubNodes: createSubNodes$1,
+  createSubNodes: createSubNodes$4,
   createSubNodesAndEndNode,
-  findSubPorts: findSubPorts$1
+  createSetsLikeSubNodesAndEndNode,
+  createParallelSubNodesAndEndNode,
+  findSubPorts: findSubPorts$4,
+  createMainContentElement
 };
-const confirm$1 = (model, def, file, handlers) => {
-  CommonStepDefs.confirm(model, def, file, handlers);
+const confirm$7 = (model, def, file, options) => {
+  CommonStepDefs.confirm(model, def, file, options);
   def.snippet = model.snippet;
-  handlers.onChange();
+  options.handlers.onChange();
   return true;
+};
+const SnippetEditor$1 = (props) => {
+  const { model, onValueChanged } = props;
+  const onValueChange = async (snippet) => {
+    model.snippet = snippet;
+    onValueChanged(false);
+  };
+  return React.createElement(JsEditor, { snippet: model.snippet, onChange: onValueChange, height: PlaygroundCssVars.SNIPPET_HEIGHT });
+};
+const elementSnippet = {
+  code: "snippet",
+  label: Labels.StepSnippetSnippet,
+  anchor: "snippet",
+  badge: (model) => {
+    if (VUtils.isNotBlank(model.snippet)) {
+      return React.createElement(ConfigurableElementBadgeChecked, null);
+    } else {
+      return React.createElement(ConfigurableElementBadgeMissed, null);
+    }
+  },
+  editor: SnippetEditor$1,
+  helpDoc: HelpDocs.stepSnippetSnippet
 };
 const PortSnippet = (props) => {
   const { step: def } = props;
   const { snippet } = def;
   const exists = VUtils.isNotBlank(snippet);
-  return React.createElement(PrePort, { label: Labels.SnippetStepSnippet, required: true, defined: exists, all: true, allAsBoolean: true });
+  return React.createElement(PrePort, { label: Labels.StepSnippetSnippet, required: true, defined: exists, all: true, allAsBoolean: true });
 };
-const prepare$1 = (def) => {
+const prepare$7 = (def) => {
   const model = CommonStepDefs.prepare(def);
   model.snippet = def.snippet;
   return model;
 };
-const switchUse$1 = (model, originalUse) => {
+const switchUse$7 = (model, originalUse) => {
   CommonStepDefs.switchUse(model, ["snippet"], originalUse);
   return model;
 };
 const SnippetStepDefs = {
   use: StandardPipelineStepRegisterKey.SNIPPET,
-  prepare: prepare$1,
-  switchUse: switchUse$1,
-  confirm: confirm$1,
+  prepare: prepare$7,
+  switchUse: switchUse$7,
+  confirm: confirm$7,
   discard: CommonStepDefs.discard,
   properties: [
-    CommonStepDefs.properties.name,
-    CommonStepDefs.properties.use,
-    CommonStepDefs.properties.fromRequest,
-    CommonStepDefs.properties.toResponse,
-    CommonStepDefs.properties.errorHandles
+    ...CommonStepDefs.properties.leadingGroup,
+    CommonStepDefs.createMainContentElement(elementSnippet),
+    ...CommonStepDefs.properties.tailingGroup
   ],
   ports: [
-    { key: "from-request", port: CommonStepDefs.ports.fromRequest },
+    ...CommonStepDefs.prebuiltPorts.input,
     { key: "snippet", port: PortSnippet },
-    { key: "catchable-error-handle", port: PortCatchableError },
-    { key: "exposed-error-handle", port: PortExposedError },
-    { key: "uncatchable-error-handle", port: PortUncatchableError },
-    { key: "any-error-handle", port: PortAnyError },
-    { key: "to-response", port: CommonStepDefs.ports.toResponse },
-    { key: "merge-request", port: CommonStepDefs.ports.mergeRequest }
+    ...CommonStepDefs.prebuiltPorts.errorHandles,
+    ...CommonStepDefs.prebuiltPorts.output
   ],
   createSubNodes: CommonStepDefs.createSubNodesAndEndNode,
   findSubPorts: CommonStepDefs.findSubPorts,
   helpDocs: HelpDocs.snippetStep
 };
 registerStepDef(SnippetStepDefs);
-const confirm = (model, def, file, handlers) => {
-  CommonStepDefs.confirm(model, def, file, handlers);
-  handlers.onChange();
+const confirm$6 = (model, def, file, options) => {
+  CommonStepDefs.confirm(model, def, file, options);
+  def.property = (model.property ?? "").trim();
+  options.handlers.onChange();
+  return true;
+};
+const elementProperty$1 = {
+  code: "property",
+  label: Labels.StepGetPropertyProperty,
+  anchor: "property",
+  badge: (model) => {
+    if (VUtils.isNotBlank(model.property)) {
+      return React.createElement(ConfigurableElementBadgeChecked, null);
+    } else {
+      return React.createElement(ConfigurableElementBadgeMissed, null);
+    }
+  },
+  editor: (props) => {
+    const { model, onValueChanged } = props;
+    const onValueChange = (value) => {
+      model.property = value;
+      onValueChanged();
+    };
+    return React.createElement(UnwrappedInput, { onValueChange, value: model.property ?? "" });
+  },
+  helpDoc: HelpDocs.stepGetPropertyProperty
+};
+const PortProperty$1 = (props) => {
+  const { step: def } = props;
+  const { property } = def;
+  const exists = VUtils.isNotBlank(property);
+  return React.createElement(PrePort, { label: Labels.StepGetPropertyProperty, required: true, defined: exists, all: true, allAsBoolean: true });
+};
+const prepare$6 = (def) => {
+  const model = CommonStepDefs.prepare(def);
+  model.property = def.property;
+  return model;
+};
+const switchUse$6 = (model, originalUse) => {
+  CommonStepDefs.switchUse(model, ["property"], originalUse);
+  return model;
+};
+const GetPropertyStepDefs = {
+  use: StandardPipelineStepRegisterKey.GET_PROPERTY,
+  prepare: prepare$6,
+  switchUse: switchUse$6,
+  confirm: confirm$6,
+  discard: CommonStepDefs.discard,
+  properties: [
+    ...CommonStepDefs.properties.leadingGroup,
+    CommonStepDefs.createMainContentElement(elementProperty$1),
+    ...CommonStepDefs.properties.tailingGroup
+  ],
+  ports: [
+    ...CommonStepDefs.prebuiltPorts.input,
+    { key: "property", port: PortProperty$1 },
+    ...CommonStepDefs.prebuiltPorts.errorHandles,
+    ...CommonStepDefs.prebuiltPorts.output
+  ],
+  createSubNodes: CommonStepDefs.createSubNodesAndEndNode,
+  findSubPorts: CommonStepDefs.findSubPorts,
+  helpDocs: HelpDocs.getPropertyStep
+};
+registerStepDef(GetPropertyStepDefs);
+const confirm$5 = (model, def, file, options) => {
+  CommonStepDefs.confirm(model, def, file, options);
+  def.property = (model.property ?? "").trim();
+  options.handlers.onChange();
+  return true;
+};
+const elementProperty = {
+  code: "property",
+  label: Labels.StepDelPropertyProperty,
+  anchor: "property",
+  badge: (model) => {
+    if (VUtils.isNotBlank(model.property)) {
+      return React.createElement(ConfigurableElementBadgeChecked, null);
+    } else {
+      return React.createElement(ConfigurableElementBadgeMissed, null);
+    }
+  },
+  editor: (props) => {
+    const { model, onValueChanged } = props;
+    const onValueChange = (value) => {
+      model.property = value;
+      onValueChanged();
+    };
+    return React.createElement(UnwrappedInput, { onValueChange, value: model.property ?? "" });
+  },
+  helpDoc: HelpDocs.stepDelPropertyProperty
+};
+const PortProperty = (props) => {
+  const { step: def } = props;
+  const { property } = def;
+  const exists = VUtils.isNotBlank(property);
+  return React.createElement(PrePort, { label: Labels.StepDelPropertyProperty, required: true, defined: exists, all: true, allAsBoolean: true });
+};
+const prepare$5 = (def) => {
+  const model = CommonStepDefs.prepare(def);
+  model.property = def.property;
+  return model;
+};
+const switchUse$5 = (model, originalUse) => {
+  CommonStepDefs.switchUse(model, ["property"], originalUse);
+  return model;
+};
+const DelPropertyStepDefs = {
+  use: StandardPipelineStepRegisterKey.DEL_PROPERTY,
+  prepare: prepare$5,
+  switchUse: switchUse$5,
+  confirm: confirm$5,
+  discard: CommonStepDefs.discard,
+  properties: [
+    ...CommonStepDefs.properties.leadingGroup,
+    CommonStepDefs.createMainContentElement(elementProperty),
+    ...CommonStepDefs.properties.tailingGroup
+  ],
+  ports: [
+    ...CommonStepDefs.prebuiltPorts.input,
+    { key: "property", port: PortProperty },
+    ...CommonStepDefs.prebuiltPorts.errorHandles,
+    ...CommonStepDefs.prebuiltPorts.output
+  ],
+  createSubNodes: CommonStepDefs.createSubNodesAndEndNode,
+  findSubPorts: CommonStepDefs.findSubPorts,
+  helpDocs: HelpDocs.delPropertyStep
+};
+const DelPropertiesStepDefs = {
+  ...DelPropertyStepDefs,
+  use: StandardPipelineStepRegisterKey.DELETE_PROPERTIES
+};
+registerStepDef(DelPropertyStepDefs);
+registerStepDef(DelPropertiesStepDefs);
+const confirm$4 = (model, def, file, options) => {
+  CommonStepDefs.confirm(model, def, file, options);
+  options.handlers.onChange();
+  return true;
+};
+const prepare$4 = (def) => {
+  return CommonStepDefs.prepare(def);
+};
+const switchUse$4 = (model, _originalUse) => model;
+const SnowflakePropertyStepDefs = {
+  use: StandardPipelineStepRegisterKey.SNOWFLAKE,
+  prepare: prepare$4,
+  switchUse: switchUse$4,
+  confirm: confirm$4,
+  discard: CommonStepDefs.discard,
+  properties: [
+    ...CommonStepDefs.properties.leadingGroup,
+    ...CommonStepDefs.properties.tailingGroup
+  ],
+  ports: [
+    ...CommonStepDefs.prebuiltPorts.input,
+    ...CommonStepDefs.prebuiltPorts.errorHandles,
+    ...CommonStepDefs.prebuiltPorts.output
+  ],
+  createSubNodes: CommonStepDefs.createSubNodesAndEndNode,
+  findSubPorts: CommonStepDefs.findSubPorts,
+  helpDocs: HelpDocs.snowflakeStep
+};
+registerStepDef(SnowflakePropertyStepDefs);
+const createConfirm = () => {
+  return (model, def, file, options) => {
+    var _a, _b, _c, _d;
+    CommonStepDefs.confirm(model, def, file, options);
+    def.system = VUtils.asUndefinedWhenBlank(model.system);
+    def.endpoint = VUtils.asUndefinedWhenBlank(model.endpoint);
+    if ((_a = model.temporary) == null ? void 0 : _a.decorateUrlAsIs) {
+      delete def.decorateUrl;
+    } else {
+      def.decorateUrl = VUtils.asUndefinedWhenBlank(model.decorateUrl);
+    }
+    def.method = model.method;
+    def.timeout = VUtils.asUndefinedWhenBlank(model.timeout);
+    if ((_b = model.temporary) == null ? void 0 : _b.generateHeadersAsIs) {
+      delete def.generateHeaders;
+    } else {
+      def.generateHeaders = VUtils.asUndefinedWhenBlank(model.generateHeaders);
+    }
+    def.bodyUsed = model.bodyUsed;
+    if ((_c = model.temporary) == null ? void 0 : _c.generateBodyAsIs) {
+      delete def.generateBody;
+    } else {
+      def.generateBody = VUtils.asUndefinedWhenBlank(model.generateBody);
+    }
+    if ((_d = model.temporary) == null ? void 0 : _d.readResponseAsIs) {
+      delete def.readResponse;
+    } else {
+      def.readResponse = VUtils.asUndefinedWhenBlank(model.readResponse);
+    }
+    def.responseErrorHandles = (model.responseErrorHandles ?? []).reduce((handles, { code, snippet }) => {
+      if (VUtils.isNotBlank(code)) {
+        handles[code] = snippet;
+      }
+      return handles;
+    }, {});
+    if (Object.keys(def.responseErrorHandles).length === 0) {
+      delete def.responseErrorHandles;
+    }
+    options.handlers.onChange();
+    return true;
+  };
+};
+const confirmHttpFetch = createConfirm();
+const confirmHttpGet = createConfirm();
+const confirmHttpPost = createConfirm();
+const elementDecorateUrl = {
+  code: "decorate-url",
+  label: Labels.StepHttpDecorateUrl,
+  anchor: "decorate-url",
+  badge: (model) => {
+    var _a;
+    if (((_a = model.temporary) == null ? void 0 : _a.decorateUrlAsIs) === false) {
+      return React.createElement(ConfigurableElementBadgeSnippet, null);
+    } else {
+      return React.createElement(NavigatorElementBadgeWrapper, { "data-role": "use-default" }, Labels.NoDecoration);
+    }
+  },
+  editor: createSelectableJsEditor({
+    findFlag: (model) => {
+      var _a;
+      return ((_a = model.temporary) == null ? void 0 : _a.decorateUrlAsIs) ?? true;
+    },
+    saveFlag: (model, value) => {
+      model.temporary = { ...model.temporary ?? {}, decorateUrlAsIs: value };
+    },
+    findSnippet: (model) => model.decorateUrl,
+    saveSnippet: (model, text) => {
+      model.decorateUrl = text;
+    },
+    flagCandidates: [
+      { value: true, label: Labels.NoDecoration },
+      { value: false, label: Labels.StepVariableUseSnippet }
+    ],
+    isSnippetAvailable: (value) => value === false,
+    height: PlaygroundCssVars.SNIPPET_HTTP_DECORATE_URL_HEIGHT
+  }),
+  helpDoc: HelpDocs.stepHttpDecorateUrl
+};
+const NotAvailableDropdownOptionLabel = qe.span`
+    color: ${CssVars.DANGER_COLOR};
+
+    > span {
+        margin-left: 0.5em;
+    }
+`;
+const NotAvailableDropdownOption = (props) => {
+  const { label } = props;
+  return React.createElement(
+    NotAvailableDropdownOptionLabel,
+    null,
+    label,
+    React.createElement("span", null, Labels.IllegalDropdownOptionSuffix)
+  );
+};
+const elementEndpoint = {
+  code: "endpoint",
+  label: Labels.StepHttpEndpoint,
+  anchor: "endpoint",
+  badge: (model) => {
+    if (VUtils.isNotBlank(model.endpoint)) {
+      return model.endpoint.trim();
+    } else {
+      return React.createElement(ConfigurableElementBadgeMissed, null);
+    }
+  },
+  changeBy: ["system"],
+  editor: (props) => {
+    const { model, onValueChanged, assistant } = props;
+    const systems = assistant.askSystemsForHttp();
+    const system = VUtils.isBlank(model.system) ? void 0 : model.system.trim();
+    const selectedSystem = systems.find(({ code }) => code === system);
+    const endpoints = (selectedSystem == null ? void 0 : selectedSystem.endpoints) ?? [];
+    const endpoint = VUtils.isBlank(model.endpoint) ? void 0 : model.endpoint.trim();
+    const options = endpoints.map((endpoint2) => {
+      return { value: endpoint2.code, label: endpoint2.name };
+    });
+    const onValueChange = (value) => {
+      model.endpoint = value;
+      onValueChanged();
+    };
+    if (endpoint != null && options.every(({ value }) => value !== endpoint)) {
+      options.unshift({ value: endpoint, label: React.createElement(NotAvailableDropdownOption, { label: endpoint }) });
+    }
+    return React.createElement(UnwrappedDropdown, { value: endpoint, onValueChange, options, clearable: false, style: CommonElementEditorStyles.dropdown });
+  },
+  helpDoc: HelpDocs.stepHttpEndpoint
+};
+const SystemEditor = (props) => {
+  const { model, onValueChanged, assistant } = props;
+  const { fire } = useEditDialogEventBus();
+  const systems = assistant.askSystemsForHttp();
+  const options = systems.map((system2) => {
+    return { value: system2.code, label: system2.name };
+  });
+  const onValueChange = (value) => {
+    model.system = value;
+    const endpoint = VUtils.isBlank(model.endpoint) ? void 0 : model.endpoint.trim();
+    const selectedSystem = systems.find(({ code }) => code === value);
+    const availableEndpoints = selectedSystem.endpoints || [];
+    if (availableEndpoints.every(({ code }) => code !== endpoint)) {
+      delete model.endpoint;
+    }
+    onValueChanged();
+    fire(EditDialogEventTypes.ELEMENT_VALUE_CHANGED, "endpoint");
+  };
+  const system = VUtils.isBlank(model.system) ? void 0 : model.system.trim();
+  if (system != null && options.every(({ value }) => value !== system)) {
+    options.unshift({ value: system, label: React.createElement(NotAvailableDropdownOption, { label: system }) });
+  }
+  return React.createElement(UnwrappedDropdown, { value: system, onValueChange, options, clearable: false, style: CommonElementEditorStyles.dropdown });
+};
+const elementSystem = {
+  code: "system",
+  label: Labels.StepHttpSystem,
+  anchor: "system",
+  badge: (model) => {
+    if (VUtils.isNotBlank(model.system)) {
+      return model.system.trim();
+    } else {
+      return React.createElement(ConfigurableElementBadgeMissed, null);
+    }
+  },
+  editor: SystemEditor,
+  helpDoc: HelpDocs.stepHttpSystem
+};
+const elementRemote = {
+  code: "remote",
+  label: Labels.StepHttpRemote,
+  anchor: "remote",
+  children: [elementSystem, elementEndpoint, elementDecorateUrl],
+  group: true
+};
+const PortEndpoint = (props) => {
+  const { step: def } = props;
+  const { endpoint } = def;
+  const exists = VUtils.isNotBlank(endpoint);
+  return React.createElement(PrePort, { label: Labels.StepHttpEndpoint, required: true, defined: exists, all: true, allAsGiven: (endpoint ?? "").trim() });
+};
+const PortSystem = (props) => {
+  const { step: def } = props;
+  const { system } = def;
+  const exists = VUtils.isNotBlank(system);
+  return React.createElement(PrePort, { label: Labels.StepHttpSystem, required: true, defined: exists, all: true, allAsGiven: (system ?? "").trim() });
+};
+const createPrepare = () => {
+  return (def) => {
+    const model = CommonStepDefs.prepare(def);
+    model.system = def.system;
+    model.endpoint = def.endpoint;
+    model.decorateUrl = def.decorateUrl;
+    model.temporary.decorateUrlAsIs = VUtils.isBlank(def.fromInput);
+    model.method = def.method;
+    model.timeout = def.timeout;
+    model.generateHeaders = def.generateHeaders;
+    model.temporary.generateHeadersAsIs = VUtils.isBlank(def.generateHeaders);
+    model.bodyUsed = def.bodyUsed;
+    model.generateBody = def.generateBody;
+    model.temporary.generateBodyAsIs = VUtils.isBlank(def.generateBody);
+    model.readResponse = def.readResponse;
+    model.temporary.readResponseAsIs = VUtils.isBlank(def.readResponse);
+    model.responseErrorHandles = Object.keys(def.responseErrorHandles ?? {}).map((code) => {
+      var _a;
+      return { code, snippet: (_a = def.responseErrorHandles) == null ? void 0 : _a[code] };
+    });
+    return model;
+  };
+};
+const prepareHttpFetch = createPrepare();
+const prepareHttpGet = createPrepare();
+const prepareHttpPost = createPrepare();
+const createSwitchUse = () => {
+  return (model, originalUse) => {
+    CommonStepDefs.switchUse(model, [
+      "system",
+      "endpoint",
+      "decorateUrl",
+      "method",
+      "timeout",
+      "generateHeaders",
+      "bodyUsed",
+      "generateBody",
+      "readResponse",
+      "responseErrorHandles"
+    ], originalUse);
+    return model;
+  };
+};
+const switchUseHttpFetch = createSwitchUse();
+const switchUseHttpGet = createSwitchUse();
+const switchUseHttpPost = createSwitchUse();
+const createHttpStepDefs = (options) => {
+  const { docs: docs2, ...rest } = options;
+  const defs = {
+    ...rest,
+    discard: CommonStepDefs.discard,
+    properties: [
+      ...CommonStepDefs.properties.leadingGroup,
+      elementRemote,
+      ...CommonStepDefs.properties.tailingGroup
+    ],
+    ports: [
+      ...CommonStepDefs.prebuiltPorts.input,
+      { key: "system", port: PortSystem },
+      { key: "endpoint", port: PortEndpoint },
+      ...CommonStepDefs.prebuiltPorts.errorHandles,
+      ...CommonStepDefs.prebuiltPorts.output
+    ],
+    createSubNodes: CommonStepDefs.createSubNodesAndEndNode,
+    findSubPorts: CommonStepDefs.findSubPorts,
+    helpDocs: docs2
+  };
+  registerStepDef(defs);
+  return defs;
+};
+createHttpStepDefs({
+  use: StandardPipelineStepRegisterKey.HTTP_FETCH,
+  prepare: prepareHttpFetch,
+  switchUse: switchUseHttpFetch,
+  confirm: confirmHttpFetch,
+  docs: HelpDocs.httpFetchStep
+});
+createHttpStepDefs({
+  use: StandardPipelineStepRegisterKey.HTTP_GET,
+  prepare: prepareHttpGet,
+  switchUse: switchUseHttpGet,
+  confirm: confirmHttpGet,
+  docs: HelpDocs.httpGetStep
+});
+createHttpStepDefs({
+  use: StandardPipelineStepRegisterKey.HTTP_POST,
+  prepare: prepareHttpPost,
+  switchUse: switchUseHttpPost,
+  confirm: confirmHttpPost,
+  docs: HelpDocs.httpPostStep
+});
+const confirm$3 = (model, def, file, options) => {
+  CommonStepDefs.confirm(model, def, file, options);
+  options.handlers.onChange();
+  return true;
+};
+const createSubNodes$3 = (model, options) => {
+  return CommonStepDefs.createSetsLikeSubNodesAndEndNode(model, options);
+};
+const findSubPorts$3 = (model) => {
+  const subStepsPort = model.getPort(StepsPortName);
+  return subStepsPort != null ? [subStepsPort, ...CommonStepDefs.findSubPorts(model) ?? []] : CommonStepDefs.findSubPorts(model);
+};
+const prepare$3 = (def) => {
+  const model = CommonStepDefs.prepare(def);
+  return model;
+};
+const switchUse$3 = (model, originalUse) => {
+  CommonStepDefs.switchUse(model, ["steps"], originalUse);
+  return model;
+};
+const SetsStepDefs = {
+  use: StandardPipelineStepRegisterKey.SETS,
+  prepare: prepare$3,
+  switchUse: switchUse$3,
+  confirm: confirm$3,
+  discard: CommonStepDefs.discard,
+  properties: [
+    ...CommonStepDefs.properties.leadingGroup,
+    ...CommonStepDefs.properties.tailingGroup
+  ],
+  ports: [
+    ...CommonStepDefs.prebuiltPorts.input,
+    { key: "steps", port: CommonStepDefs.prebuiltPorts.steps },
+    ...CommonStepDefs.prebuiltPorts.errorHandles,
+    ...CommonStepDefs.prebuiltPorts.output
+  ],
+  createSubNodes: createSubNodes$3,
+  findSubPorts: findSubPorts$3,
+  helpDocs: HelpDocs.setsStep
+};
+registerStepDef(SetsStepDefs);
+const confirm$2 = (model, def, file, options) => {
+  CommonStepDefs.confirm(model, def, file, options);
+  options.handlers.onChange();
+  return true;
+};
+const createSubNodes$2 = (model, options) => {
+  return CommonStepDefs.createSetsLikeSubNodesAndEndNode(model, options);
+};
+const findSubPorts$2 = (model) => {
+  const subStepsPort = model.getPort(StepsPortName);
+  return subStepsPort != null ? [subStepsPort, ...CommonStepDefs.findSubPorts(model) ?? []] : CommonStepDefs.findSubPorts(model);
+};
+const prepare$2 = (def) => {
+  const model = CommonStepDefs.prepare(def);
+  return model;
+};
+const switchUse$2 = (model, originalUse) => {
+  CommonStepDefs.switchUse(model, ["steps"], originalUse);
+  return model;
+};
+const AsyncSetsStepDefs = {
+  use: StandardPipelineStepRegisterKey.ASYNC_SETS,
+  prepare: prepare$2,
+  switchUse: switchUse$2,
+  confirm: confirm$2,
+  discard: CommonStepDefs.discard,
+  properties: [
+    ...CommonStepDefs.properties.leadingGroup,
+    ...CommonStepDefs.properties.tailingGroup
+  ],
+  ports: [
+    ...CommonStepDefs.prebuiltPorts.input,
+    { key: "steps", port: CommonStepDefs.prebuiltPorts.steps },
+    ...CommonStepDefs.prebuiltPorts.errorHandles,
+    ...CommonStepDefs.prebuiltPorts.output
+  ],
+  createSubNodes: createSubNodes$2,
+  findSubPorts: findSubPorts$2,
+  helpDocs: HelpDocs.asyncSetsStep
+};
+registerStepDef(AsyncSetsStepDefs);
+const confirm$1 = (model, def, file, options) => {
+  CommonStepDefs.confirm(model, def, file, options);
+  if (VUtils.isBlank(model.originalContentName)) {
+    delete def.originalContentName;
+  } else {
+    def.originalContentName = model.originalContentName.trim();
+  }
+  if (VUtils.isBlank(model.itemName)) {
+    delete def.itemName;
+  } else {
+    def.itemName = model.itemName.trim();
+  }
+  options.handlers.onChange();
+  return true;
+};
+const createSubNodes$1 = (model, options) => {
+  return CommonStepDefs.createSetsLikeSubNodesAndEndNode(model, options);
+};
+const elementItemName = {
+  code: "item-name",
+  label: Labels.StepEachItemName,
+  anchor: "item-name",
+  badge: (model) => {
+    if (VUtils.isNotBlank(model.itemName)) {
+      return React.createElement(ConfigurableElementBadgeChecked, null);
+    } else {
+      return React.createElement(ConfigurableElementBadgeUseDefault, null);
+    }
+  },
+  editor: (props) => {
+    const { model, onValueChanged } = props;
+    const onValueChange = (value) => {
+      model.itemName = value;
+      onValueChanged();
+    };
+    return React.createElement(UnwrappedInput, { onValueChange, value: model.itemName ?? "", placeholder: "$item" });
+  },
+  helpDoc: HelpDocs.stepEachItemName
+};
+const elementOriginalContentName = {
+  code: "original-content-name",
+  label: Labels.StepEachOriginalContentName,
+  anchor: "original-content-name",
+  badge: (model) => {
+    if (VUtils.isNotBlank(model.originalContentName)) {
+      return React.createElement(ConfigurableElementBadgeChecked, null);
+    } else {
+      return React.createElement(ConfigurableElementBadgeUseDefault, null);
+    }
+  },
+  editor: (props) => {
+    const { model, onValueChanged } = props;
+    const onValueChange = (value) => {
+      model.originalContentName = value;
+      onValueChanged();
+    };
+    return React.createElement(UnwrappedInput, { onValueChange, value: model.originalContentName ?? "", placeholder: "$content" });
+  },
+  helpDoc: HelpDocs.stepEachOriginalContentName
+};
+const findSubPorts$1 = (model) => {
+  const subStepsPort = model.getPort(StepsPortName);
+  return subStepsPort != null ? [subStepsPort, ...CommonStepDefs.findSubPorts(model) ?? []] : CommonStepDefs.findSubPorts(model);
+};
+const prepare$1 = (def) => {
+  const model = CommonStepDefs.prepare(def);
+  model.originalContentName = def.originalContentName;
+  model.itemName = def.itemName;
+  return model;
+};
+const switchUse$1 = (model, originalUse) => {
+  CommonStepDefs.switchUse(model, ["originalContentName", "itemName", "steps"], originalUse);
+  return model;
+};
+const EachStepDefs = {
+  use: StandardPipelineStepRegisterKey.EACH_SETS,
+  prepare: prepare$1,
+  switchUse: switchUse$1,
+  confirm: confirm$1,
+  discard: CommonStepDefs.discard,
+  properties: [
+    ...CommonStepDefs.properties.leadingGroup,
+    CommonStepDefs.createMainContentElement(elementOriginalContentName, elementItemName),
+    ...CommonStepDefs.properties.tailingGroup
+  ],
+  ports: [
+    ...CommonStepDefs.prebuiltPorts.input,
+    { key: "steps", port: CommonStepDefs.prebuiltPorts.steps },
+    ...CommonStepDefs.prebuiltPorts.errorHandles,
+    ...CommonStepDefs.prebuiltPorts.output
+  ],
+  createSubNodes: createSubNodes$1,
+  findSubPorts: findSubPorts$1,
+  helpDocs: HelpDocs.eachStep
+};
+registerStepDef(EachStepDefs);
+const confirm = (model, def, file, options) => {
+  CommonStepDefs.confirm(model, def, file, options);
+  if (VUtils.isBlank(model.cloneData)) {
+    delete def.cloneData;
+  } else {
+    def.cloneData = model.cloneData.trim();
+  }
+  if (VUtils.isBlank(model.race)) {
+    delete def.race;
+  } else {
+    def.race = model.race;
+  }
+  options.handlers.onChange();
   return true;
 };
 const createSubNodes = (model, options) => {
-  return CommonStepDefs.createSubNodesAndEndNode(model, {
-    ...options,
-    createSpecificSubNodes: (_node, options2) => {
-      const step = model.step;
-      const lastNodeOfSteps = createSubNodesOfSingleRoute({
-        model,
-        options: options2,
-        askSteps: () => {
-          const steps = step.steps ?? [];
-          if (steps.length === 0) {
-            const defaultFirstStep = DEFAULTS.createDefaultStep();
-            steps.push(defaultFirstStep);
-            step.steps = steps;
-          }
-          return steps;
-        },
-        findPortFromModel: () => model.getPort(StepsPortName),
-        createPortFromModel: () => new StepsPortModel(StepsPortName)
-      });
-      return [lastNodeOfSteps];
+  return CommonStepDefs.createParallelSubNodesAndEndNode(model, options);
+};
+const SnippetEditor = (props) => {
+  const { model, onValueChanged } = props;
+  const onValueChange = async (snippet) => {
+    model.cloneData = snippet;
+    onValueChanged(false);
+  };
+  return React.createElement(JsEditor, { snippet: model.snippet, onChange: onValueChange, height: PlaygroundCssVars.SNIPPET_HEIGHT });
+};
+const elementCloneData = {
+  code: "clone-data",
+  label: Labels.StepParallelCloneData,
+  anchor: "clone-data",
+  badge: (model) => {
+    if (VUtils.isNotBlank(model.snippet)) {
+      return React.createElement(ConfigurableElementBadgeChecked, null);
+    } else {
+      return React.createElement(ConfigurableElementBadgeIgnored, null);
     }
-  });
+  },
+  editor: SnippetEditor,
+  helpDoc: HelpDocs.stepParallelCloneData
+};
+const elementRace = {
+  code: "race",
+  label: Labels.StepParallelRace,
+  anchor: "race",
+  badge: (model) => {
+    if (model.race == null || model.race === false) {
+      return React.createElement(ConfigurableElementBadgeNo, null);
+    } else {
+      return React.createElement(ConfigurableElementBadgeYes, null);
+    }
+  },
+  editor: (props) => {
+    const { model, onValueChanged } = props;
+    const onValueChange = (value) => {
+      if (value == null || value === false) {
+        delete model.race;
+      } else {
+        model.race = true;
+      }
+      onValueChanged();
+    };
+    return React.createElement(UnwrappedCheckbox, { onValueChange, value: model.race ?? false });
+  },
+  helpDoc: HelpDocs.stepParallelRace
 };
 const findSubPorts = (model) => {
   const subStepsPort = model.getPort(StepsPortName);
   return subStepsPort != null ? [subStepsPort, ...CommonStepDefs.findSubPorts(model) ?? []] : CommonStepDefs.findSubPorts(model);
 };
+const PortRace = (props) => {
+  const { step: def } = props;
+  return React.createElement(PostPort, { label: Labels.StepParallelRace, required: false, defined: true, all: def.race ?? false, allAsBoolean: true });
+};
 const prepare = (def) => {
   const model = CommonStepDefs.prepare(def);
+  model.cloneData = def.cloneData;
+  model.race = def.race;
   return model;
 };
-const switchUse = (model, _originalUse) => model;
-const SetsStepDefs = {
-  use: StandardPipelineStepRegisterKey.SETS,
+const switchUse = (model, originalUse) => {
+  CommonStepDefs.switchUse(model, ["cloneData", "race", "steps"], originalUse);
+  return model;
+};
+const ParallelStepDefs = {
+  use: StandardPipelineStepRegisterKey.PARALLEL_SETS,
   prepare,
   switchUse,
   confirm,
   discard: CommonStepDefs.discard,
   properties: [
-    CommonStepDefs.properties.name,
-    CommonStepDefs.properties.use,
-    CommonStepDefs.properties.fromRequest,
-    CommonStepDefs.properties.toResponse,
-    CommonStepDefs.properties.errorHandles
+    ...CommonStepDefs.properties.leadingGroup,
+    CommonStepDefs.createMainContentElement(elementRace, elementCloneData),
+    ...CommonStepDefs.properties.tailingGroup
   ],
   ports: [
-    { key: "from-request", port: CommonStepDefs.ports.fromRequest },
+    ...CommonStepDefs.prebuiltPorts.input,
+    { key: "race", port: PortRace },
     { key: "steps", port: CommonStepDefs.prebuiltPorts.steps },
     ...CommonStepDefs.prebuiltPorts.errorHandles,
-    { key: "to-response", port: CommonStepDefs.ports.toResponse },
-    { key: "merge-request", port: CommonStepDefs.ports.mergeRequest }
+    ...CommonStepDefs.prebuiltPorts.output
   ],
   createSubNodes,
   findSubPorts,
-  helpDocs: HelpDocs.snippetStep
+  helpDocs: HelpDocs.parallelStep
 };
-registerStepDef(SetsStepDefs);
+registerStepDef(ParallelStepDefs);
 const DEFAULT_CREATE_SUB_STEP_NODES = (node, options) => {
   var _a;
   return (_a = findStepDef(node.step.use)) == null ? void 0 : _a.createSubNodes(node, options);
@@ -5423,9 +7250,9 @@ const DEFAULTS = {
     return {
       name: "",
       use: StandardPipelineStepRegisterKey.SNIPPET,
-      fromRequest: "$factor",
-      toResponse: "$result",
-      mergeRequest: true
+      fromInput: "$factor",
+      toOutput: "$result",
+      merge: true
     };
   },
   createSubStepNodes: DEFAULT_CREATE_SUB_STEP_NODES
@@ -5472,12 +7299,25 @@ const PlaygroundWrapper = qe.div.attrs(() => {
     &[data-visible=false] {
         display: none;
     }
+
+    &[data-diagram-work-mode] {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background-color: ${CssVars.BACKGROUND_COLOR};
+        border: 0;
+        border-radius: 0;
+        z-index: ${PlaygroundCssVars.EDITOR_MAX_Z_INDEX};
+    }
 `;
 const PlaygroundDelegate = (props) => {
-  const { $pp, $wrapped, usage, assistant, serializer, deserializer, ...rest } = props;
+  const { $pp, $wrapped, usage, assistant, serializer, deserializer, allowUploadFile = false, allowDownloadFile = true, allowDownloadImage = true, ...rest } = props;
   const { $p2r, $onValueChange, $avs: { $disabled, $visible } } = $wrapped;
   const ref = reactExports.useRef(null);
   const globalHandlers = useGlobalHandlers();
+  const { on, off } = usePlaygroundEventBus();
   const [state, setState] = reactExports.useState(() => {
     return {
       serializer: serializer ?? new YamlDefSaver(),
@@ -5493,6 +7333,15 @@ const PlaygroundDelegate = (props) => {
       };
     });
   }, [serializer, deserializer]);
+  reactExports.useEffect(() => {
+    const onResetContent = async (content2) => {
+      await $onValueChange(content2, true, { global: globalHandlers });
+    };
+    on(PlaygroundEventTypes.RESET_CONTENT, onResetContent);
+    return () => {
+      off(PlaygroundEventTypes.RESET_CONTENT, onResetContent);
+    };
+  }, [on, off, globalHandlers, $onValueChange]);
   const onContentChanged = async (content2) => {
     await $onValueChange(content2, false, { global: globalHandlers });
   };
@@ -5500,17 +7349,53 @@ const PlaygroundDelegate = (props) => {
   return React.createElement(
     PlaygroundWrapper,
     { ...rest, "data-disabled": $disabled, "data-visible": $visible, id: PPUtils.asId(PPUtils.absolute($p2r, $pp), props.id), ref },
+    React.createElement(EditDialog, null),
     React.createElement(PlaygroundBridge, { content, onContentChanged }),
-    React.createElement(Editor, { content, usage, assistant, serializer: state.serializer, deserializer: state.deserializer })
+    React.createElement(Editor, { content, usage, assistant, serializer: state.serializer, deserializer: state.deserializer, allowUploadFile, allowDownloadFile, allowDownloadImage })
   );
 };
 const Playground = (props) => {
   return React.createElement(
     PlaygroundEventBusProvider,
     null,
-    React.createElement(EditDialog, null),
     React.createElement(PlaygroundDelegate, { ...props })
   );
+};
+const PlaygroundCreateDefaultStepBuild = {
+  accept: (key) => key === "defaultStep",
+  build: (value, list) => {
+    if (VUtils.isBlank(value)) {
+      return void 0;
+    }
+    return index$1.createSyncSnippetBuild("createDefaultStep", []).build(value, list);
+  }
+};
+const PlaygroundAskRefPipelinesBuild = {
+  accept: (key) => key === "refPipelines",
+  build: (value, list) => {
+    if (VUtils.isBlank(value)) {
+      return void 0;
+    }
+    return index$1.createSyncSnippetBuild("askRefPipelines", []).build(value, list);
+  }
+};
+const PlaygroundAskRefStepsBuild = {
+  accept: (key) => key === "refSteps",
+  build: (value, list) => {
+    if (VUtils.isBlank(value)) {
+      return void 0;
+    }
+    return index$1.createSyncSnippetBuild("askRefSteps", []).build(value, list);
+  }
+};
+const PlaygroundaskSystemsForHttpBuild = {
+  accept: (key) => key === "httpSystems",
+  build: (value, list) => {
+    if (VUtils.isBlank(value)) {
+      return void 0;
+    }
+    return index$1.createSyncSnippetBuild("askSystemsForHttp", []).build(value, list);
+  }
 };
 class AbstractPlaygroundTranslator extends index$1.SpecificWidgetTranslator {
   beautifyProperties(def) {
@@ -5519,12 +7404,21 @@ class AbstractPlaygroundTranslator extends index$1.SpecificWidgetTranslator {
   shouldWrapByFormCell() {
     return false;
   }
+  getAttributeValueBuilders() {
+    return [PlaygroundCreateDefaultStepBuild, PlaygroundAskRefPipelinesBuild, PlaygroundAskRefStepsBuild, PlaygroundaskSystemsForHttpBuild];
+  }
   getAttributeNamesMapping() {
-    const keys = ["useN3", "useN5", "useN6", "useN7", "useN8"];
-    return keys.reduce((mapping, key) => {
-      mapping[`${this.getSupportedType()}.${key}`] = `usage.${key}`;
-      return mapping;
-    }, {});
+    const type = this.getSupportedType();
+    return {
+      ...["useN3", "useN5", "useN6", "useN7", "useN8"].reduce((mapping, key) => {
+        mapping[`${type}.${key}`] = `usage.${key}`;
+        return mapping;
+      }, {}),
+      [`${type}.defaultStep`]: "assistant.createDefaultStep",
+      [`${type}.refPipelines`]: "assistant.askRefPipelines",
+      [`${type}.refSteps`]: "assistant.askRefSteps",
+      [`${type}.httpSystems`]: "assistant.askSystemsForHttp"
+    };
   }
 }
 const registerPlayground = (widgetHelper, widgetType) => {

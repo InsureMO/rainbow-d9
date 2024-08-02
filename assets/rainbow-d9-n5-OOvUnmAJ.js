@@ -4,11 +4,11 @@ var __publicField = (obj, key, value) => {
   __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
   return value;
 };
-import { i as index$2, I as IntlLabel, D as DOM_KEY_WIDGET, C as CssVars, d as utils$2, b as useGlobalHandlers, t as toIntlLabel, U as UnwrappedButton, B as ButtonInk, e as ButtonFill } from "./rainbow-d9-n2-wt2u7eCE.js";
-import { R as React, r as reactExports, q as qe } from "./react-base-iGeJA2-Y.js";
-import { V as VUtils, r as registerWidget, g as useCreateEventBus, M as MUtils, P as PPUtils, a as useThrottler, e as useForceUpdate, S as StandaloneRoot, m as ExternalDefMismatchIndicator } from "./rainbow-d9-n1-sgrwQs9e.js";
-import { T as Tag, r as tags, V as ViewPlugin, u as syntaxTree, H as HighlightStyle, v as defaultHighlightStyle, w as syntaxHighlighting, x as styleTags, D as Decoration, I as InlineContext, W as WidgetType, y as EditorView, z as EditorState, A as basicSetup, B as keymap, C as indentWithTab, F as markdown, G as javascript, J as markdownLanguage, K as lintGutter, L as linter, N as json, O as jsonParseLinter } from "./vendor-QkTfmfrv.js";
-import { a as index, b as index$2$1, i as index$1, p as parseDoc } from "./rainbow-d9-n3-UcXFXY4h.js";
+import { i as index$2, I as IntlLabel, D as DOM_KEY_WIDGET, C as CssVars, d as utils$2, b as useGlobalHandlers, t as toIntlLabel, U as UnwrappedButton, B as ButtonInk, e as ButtonFill } from "./rainbow-d9-n2-uDowY2gS.js";
+import { R as React, r as reactExports, q as qe } from "./react-base-_kUkTZyT.js";
+import { V as VUtils, r as registerWidget, g as useCreateEventBus, M as MUtils, P as PPUtils, a as useThrottler, e as useForceUpdate, S as StandaloneRoot, m as ExternalDefMismatchIndicator } from "./rainbow-d9-n1-4fa2a4TQ.js";
+import { T as Tag, r as tags, V as ViewPlugin, u as syntaxTree, H as HighlightStyle, v as defaultHighlightStyle, w as syntaxHighlighting, x as styleTags, D as Decoration, I as InlineContext, W as WidgetType, y as EditorView, z as EditorState, A as basicSetup, B as keymap, C as indentWithTab, F as markdown, G as javascript, J as markdownLanguage, K as lintGutter, L as linter, N as json, O as jsonParseLinter } from "./vendor-R-Spl4KT.js";
+import { a as index, b as index$2$1, i as index$1, p as parseDoc } from "./rainbow-d9-n3-q7vik5Ee.js";
 var PlaygroundWidgetGroupKey;
 (function(PlaygroundWidgetGroupKey2) {
   PlaygroundWidgetGroupKey2["CONTAINERS"] = "container-group";
@@ -496,7 +496,7 @@ const UploadIcon = (props) => {
 const WindowIcon = (props) => {
   return React.createElement(
     "svg",
-    { ...props, "data-icon": "playgroundWindow", viewBox: "0 0 24 24", fill: "none", xmlns: "http://www.w3.org/2000/svg" },
+    { ...props, "data-icon": "playground-window", viewBox: "0 0 24 24", fill: "none", xmlns: "http://www.w3.org/2000/svg" },
     React.createElement("path", { d: "M7 6C7 6.55228 6.55228 7 6 7C5.44772 7 5 6.55228 5 6C5 5.44772 5.44772 5 6 5C6.55228 5 7 5.44772 7 6Z", fill: "currentColor" }),
     React.createElement("path", { d: "M10 6C10 6.55228 9.55228 7 9 7C8.44772 7 8 6.55228 8 6C8 5.44772 8.44772 5 9 5C9.55228 5 10 5.44772 10 6Z", fill: "currentColor" }),
     React.createElement("path", { d: "M13 6C13 6.55228 12.5523 7 12 7C11.4477 7 11 6.55228 11 6C11 5.44772 11.4477 5 12 5C12.5523 5 13 5.44772 13 6Z", fill: "currentColor" }),

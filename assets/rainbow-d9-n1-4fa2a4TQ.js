@@ -4,13 +4,15 @@ var __publicField = (obj, key, value) => {
   __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
   return value;
 };
-import { b as buffer, n as nanoid, E as EventEmitter } from "./vendor-QkTfmfrv.js";
-import { r as reactExports, R as React } from "./react-base-iGeJA2-Y.js";
+import { b as buffer, n as nanoid, E as EventEmitter } from "./vendor-R-Spl4KT.js";
+import { r as reactExports, R as React } from "./react-base-_kUkTZyT.js";
 const VUtils = {
   isEmpty: (v) => v == null || typeof v === "string" && v.length === 0,
   isNotEmpty: (v) => (v ?? "") !== "",
+  asUndefinedWhenEmpty: (v) => VUtils.isNotEmpty(v) ? v : void 0,
   isBlank: (v) => v == null || typeof v === "string" && v.trim().length === 0,
   isNotBlank: (v) => v != null && `${v}`.trim().length !== 0,
+  asUndefinedWhenBlank: (v) => VUtils.isNotBlank(v) ? v : void 0,
   isPrimitive: (v) => v != null && ["string", "number", "boolean", "symbol", "bigint"].includes(typeof v),
   isNumber: (v) => {
     if (VUtils.isBlank(v)) {
@@ -705,14 +707,14 @@ const useSetValue = (props) => {
   const forceUpdate = useForceUpdate();
   return {
     onValueChange: async (newValue, doForceUpdate = true, ...args) => {
-      const { $p2r, $model, $pp, valueChanged } = props;
+      const { $root, $p2r, $model, $pp, valueChanged } = props;
       const oldValue = MUtils.setValue($model, $pp, newValue);
       if (doForceUpdate) {
         forceUpdate();
       }
       const absolutePath = PPUtils.absolute($p2r, $pp);
       if (valueChanged != null) {
-        await valueChanged({ absolutePath, oldValue, newValue }, ...args);
+        await valueChanged({ root: $root, model: $model, absolutePath, oldValue, newValue }, ...args);
       }
       onValueChanged({ absolutePath, oldValue, newValue }, ...args);
       N1Logger.debug(`Value set[old=${oldValue}, new=${newValue}, path=${$pp}, absolutePath=${absolutePath}].`, $model, "SetValueHook");
@@ -1531,12 +1533,17 @@ const useArrayFunctions = (options) => {
     return await couldAddElement({ root: $root, model: $array }, ...args);
   };
   const addElement = async (...args) => {
-    const shouldRemove = await shouldAddElement(...args);
-    if (!shouldRemove) {
+    const shouldAdd = await shouldAddElement(...args);
+    if (!shouldAdd) {
       return;
     }
     const oldElements = $array == null ? null : [...$array];
-    const newElement = createElement != null ? await createElement({ root: $root, model: $array, index: elements.length }, ...args) : {};
+    let newElement;
+    try {
+      newElement = createElement != null ? await createElement({ root: $root, model: $array, index: elements.length }, ...args) : {};
+    } catch {
+      return;
+    }
     elements.push(newElement);
     elementAdded && await elementAdded({
       root: $root,
