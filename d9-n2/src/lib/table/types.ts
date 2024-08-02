@@ -28,7 +28,7 @@ export type TableRowButtonDef = Omit<ButtonDef, 'click'> & {
 };
 
 export interface TablePaginationValueChangedOptions<R extends BaseModel, M extends PropValue, V extends PropValue>
-	extends ValueChangedOptions<V>, ModelCarrier<R, M> {
+	extends ValueChangedOptions<V, R, M>, ModelCarrier<R, M> {
 	$p2r: PropertyPath;
 	$pp: PropertyPath;
 }

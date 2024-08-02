@@ -21,8 +21,6 @@ export const useSetValue = (
 			const absolutePath = PPUtils.absolute($p2r, $pp);
 			if (valueChanged != null) {
 				// try to invoke external function
-				// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-				// @ts-ignore
 				await valueChanged({root: $root, model: $model, absolutePath, oldValue, newValue}, ...args);
 			}
 			// invoke internal functions and events

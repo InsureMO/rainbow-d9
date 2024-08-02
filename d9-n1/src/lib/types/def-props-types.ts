@@ -115,9 +115,9 @@ export interface NodeDef extends MonitorNodeDef {
 	$renderOn?: string | (() => Array<keyof DeviceType>);
 }
 
-export interface ValueChangedOptions<NV extends PropValue> {
-	root: BaseModel;
-	model: BaseModel;
+export interface ValueChangedOptions<NV extends PropValue, R extends BaseModel = BaseModel, M extends PropValue = PropValue> {
+	root: R;
+	model: M;
 	absolutePath: PropertyPath;
 	oldValue: NV;
 	newValue: NV;
