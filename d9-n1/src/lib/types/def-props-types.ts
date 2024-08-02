@@ -116,6 +116,8 @@ export interface NodeDef extends MonitorNodeDef {
 }
 
 export interface ValueChangedOptions<NV extends PropValue> {
+	root: BaseModel;
+	model: BaseModel;
 	absolutePath: PropertyPath;
 	oldValue: NV;
 	newValue: NV;
