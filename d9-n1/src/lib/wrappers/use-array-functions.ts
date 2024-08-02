@@ -1,6 +1,6 @@
 import {useState} from 'react';
 import {useForceUpdate} from '../hooks';
-import {ArrayContainerDef, ArrayPropValue, BaseModel, ModelHolder, OnValueChanged} from '../types';
+import {ArrayContainerDef, ArrayPropValue, BaseModel, ModelHolder, ObjectPropValue, OnValueChanged} from '../types';
 import {MUtils, N1Logger, PPUtils} from '../utils';
 import {getArrayElementKey} from './utils';
 
@@ -95,16 +95,21 @@ export const useArrayFunctions = (options: {
 	};
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	const addElement = async (...args: Array<any>) => {
-		const shouldRemove = await shouldAddElement(...args);
-		if (!shouldRemove) {
+		const shouldAdd = await shouldAddElement(...args);
+		if (!shouldAdd) {
 			return;
 		}
 		// copy to old elements
 		const oldElements = $array == null ? null : [...($array as Array<BaseModel>)];
 		// create new element
-		const newElement = createElement != null
-			? await createElement({root: $root, model: $array as ArrayPropValue, index: elements.length}, ...args)
-			: {};
+		let newElement: ObjectPropValue;
+		try {
+			newElement = createElement != null
+				? await createElement({root: $root, model: $array as ArrayPropValue, index: elements.length}, ...args)
+				: {};
+		} catch {
+			return;
+		}
 		// push into elements
 		elements.push(newElement);
 		// call added function if there is
