@@ -268,7 +268,8 @@ export const PlaygroundCssVars = {
 	SNIPPET_BORDER_RADIUS: `var(--o23-playground-snippet-border-radius, ${CssVars.BORDER_RADIUS})`,
 	SNIPPET_HEIGHT: 'var(--o23-playground-snippet-height, 400px)',
 	SNIPPET_IO_TRANSFORMER_HEIGHT: 'var(--o23-playground-snippet-io-transformer-height, 200px)',
-	SNIPPET_ERROR_HANDLES_HEIGHT: `var(--o23-playground-snippet-error-handles-height, 200px)`
+	SNIPPET_ERROR_HANDLES_HEIGHT: `var(--o23-playground-snippet-error-handles-height, 200px)`,
+	SNIPPET_HTTP_DECORATE_URL_HEIGHT: 'var(--o23-playground-snippet-http-decorate-url-height, 200px)'
 };
 
 // background: linear-gradient(90deg, #24606e, #1f6b73, #207675, #2c8174, #3e8b71, #54956b, #6c9e65, #87a55f, #a3ab5b, #c1b05a, #e0b35f, #ffb56b);

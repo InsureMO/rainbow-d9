@@ -1,4 +1,5 @@
 import {mergeStepDocs, mergeStepDocsFreely} from '../step';
+import {markdown as stepHttpDecorateUrl} from './decorate-url.md';
 import {markdown as stepHttpEndpoint} from './endpoint.md';
 import {markdown as fetchStep} from './fetch-step.md';
 import {markdown as getStep} from './get-step.md';
@@ -10,7 +11,7 @@ export const docs = (() => {
 	const httpDocs = mergeStepDocs(httpStep, false);
 	return {
 		// variables
-		stepHttpSystem, stepHttpEndpoint,
+		stepHttpSystem, stepHttpEndpoint, stepHttpDecorateUrl,
 		// steps
 		httpFetchStep: mergeStepDocsFreely(fetchStep, {'http': httpDocs}),
 		httpGetStep: mergeStepDocsFreely(getStep, {'http': httpDocs}),

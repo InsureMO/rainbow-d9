@@ -75,6 +75,9 @@ export const Labels = {
 	StepUseAsyncSets: 'Async Sets',
 	StepUseEach: 'Each',
 	StepUseParallel: 'Parallel',
+	// step variables common labels
+	StepVariableIgnoreSnippet: <IntlLabel keys={['o23', 'step', 'common-variable', 'ignore-snippet']} value="Ignore"/>,
+	StepVariableUseSnippet: <IntlLabel keys={['o23', 'step', 'common-variable', 'use-snippet']} value="Use Snippet"/>,
 	// step error handling types
 	StepErrorHandleTypeNone: <IntlLabel keys={['o23', 'step', 'error-handle', 'none']} value="Ignored"/>,
 	StepErrorHandleTypeSnippet: <IntlLabel keys={['o23', 'step', 'error-handle', 'none']} value="Use Snippet"/>,
@@ -99,6 +102,7 @@ export const Labels = {
 	StepHttpRemote: <IntlLabel keys={['o23', 'step', 'http', 'system']} value="HTTP API"/>,
 	StepHttpSystem: <IntlLabel keys={['o23', 'step', 'http', 'system']} value="System"/>,
 	StepHttpEndpoint: <IntlLabel keys={['o23', 'step', 'http', 'endpoint']} value="Endpoint"/>,
+	StepHttpDecorateUrl: <IntlLabel keys={['o23', 'step', 'http', 'decorate-url']} value="Decorate URL"/>,
 	// step each
 	StepEachOriginalContentName: <IntlLabel keys={['o23', 'step', 'each', 'original-content-name']}
 	                                        value="Origin Content Variable"/>,
@@ -126,6 +130,7 @@ export const Labels = {
 	Specified: <IntlLabel keys={['o23', 'badge', 'specified']} value="Specified"/>,
 	NotAvailable: <IntlLabel keys={['o23', 'badge', 'not-available']} value="N/A"/>,
 	UseDefault: <IntlLabel keys={['o23', 'badge', 'use-default']} value="Default"/>,
+	NoDecoration: <IntlLabel keys={['o23', 'badge', 'no-decoration']} value="No Decoration"/>,
 	YesChar: <IntlLabel keys={['o23', 'badge', 'yes-char']} value="Y"/>,
 	NoChar: <IntlLabel keys={['o23', 'badge', 'no-char']} value="N"/>,
 	Snippet: <IntlLabel keys={['o23', 'badge', 'snippet']} value={<Snippet/>}/>,

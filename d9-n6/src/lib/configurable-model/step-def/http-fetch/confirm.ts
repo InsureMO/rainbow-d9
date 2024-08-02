@@ -17,19 +17,38 @@ const createConfirm = <D extends HttpPipelineStepDef, M extends HttpStepDefModel
 
 		def.system = VUtils.asUndefinedWhenBlank(model.system);
 		def.endpoint = VUtils.asUndefinedWhenBlank(model.endpoint);
-		def.decorateUrl = VUtils.asUndefinedWhenBlank(model.decorateUrl);
+		if (model.temporary?.decorateUrlAsIs) {
+			delete def.decorateUrl;
+		} else {
+			def.decorateUrl = VUtils.asUndefinedWhenBlank(model.decorateUrl);
+		}
 		def.method = model.method;
 		def.timeout = VUtils.asUndefinedWhenBlank(model.timeout);
-		def.generateHeaders = VUtils.asUndefinedWhenBlank(model.generateHeaders);
+		if (model.temporary?.generateHeadersAsIs) {
+			delete def.generateHeaders;
+		} else {
+			def.generateHeaders = VUtils.asUndefinedWhenBlank(model.generateHeaders);
+		}
 		def.bodyUsed = model.bodyUsed;
-		def.generateBody = VUtils.asUndefinedWhenBlank(model.generateBody);
-		def.readResponse = VUtils.asUndefinedWhenBlank(model.readResponse);
+		if (model.temporary?.generateBodyAsIs) {
+			delete def.generateBody;
+		} else {
+			def.generateBody = VUtils.asUndefinedWhenBlank(model.generateBody);
+		}
+		if (model.temporary?.readResponseAsIs) {
+			delete def.readResponse;
+		} else {
+			def.readResponse = VUtils.asUndefinedWhenBlank(model.readResponse);
+		}
 		def.responseErrorHandles = (model.responseErrorHandles ?? []).reduce((handles, {code, snippet}) => {
 			if (VUtils.isNotBlank(code)) {
 				handles[code] = snippet;
 			}
 			return handles;
 		}, {});
+		if (Object.keys(def.responseErrorHandles).length === 0) {
+			delete def.responseErrorHandles;
+		}
 
 		options.handlers.onChange();
 		return true;

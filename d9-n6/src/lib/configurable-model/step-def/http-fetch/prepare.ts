@@ -1,3 +1,4 @@
+import {VUtils} from '@rainbow-d9/n1';
 import {
 	HttpFetchPipelineStepDef,
 	HttpGetPipelineStepDef,
@@ -15,12 +16,16 @@ const createPrepare = <D extends HttpPipelineStepDef, M extends HttpStepDefModel
 		model.system = def.system;
 		model.endpoint = def.endpoint;
 		model.decorateUrl = def.decorateUrl;
+		model.temporary.decorateUrlAsIs = VUtils.isBlank(def.fromInput);
 		model.method = def.method;
 		model.timeout = def.timeout;
 		model.generateHeaders = def.generateHeaders;
+		model.temporary.generateHeadersAsIs = VUtils.isBlank(def.generateHeaders);
 		model.bodyUsed = def.bodyUsed;
 		model.generateBody = def.generateBody;
+		model.temporary.generateBodyAsIs = VUtils.isBlank(def.generateBody);
 		model.readResponse = def.readResponse;
+		model.temporary.readResponseAsIs = VUtils.isBlank(def.readResponse);
 		model.responseErrorHandles = Object.keys(def.responseErrorHandles ?? {}).map(code => {
 			return {code, snippet: def.responseErrorHandles?.[code]};
 		});
