@@ -104,6 +104,7 @@ export const Labels = {
 	StepHttpEndpoint: <IntlLabel keys={['o23', 'step', 'http', 'endpoint']} value="Endpoint"/>,
 	StepHttpDecorateUrl: <IntlLabel keys={['o23', 'step', 'http', 'decorate-url']} value="Decorate URL"/>,
 	StepHttpMethod: <IntlLabel keys={['o23', 'step', 'http', 'method']} value="HTTP Method"/>,
+	StepHttpTimeout: <IntlLabel keys={['o23', 'step', 'http', 'timeout']} value="Timeout (in Seconds)"/>,
 	// step each
 	StepEachOriginalContentName: <IntlLabel keys={['o23', 'step', 'each', 'original-content-name']}
 	                                        value="Origin Content Variable"/>,
@@ -132,6 +133,7 @@ export const Labels = {
 	NotAvailable: <IntlLabel keys={['o23', 'badge', 'not-available']} value="N/A"/>,
 	UseDefault: <IntlLabel keys={['o23', 'badge', 'use-default']} value="Default"/>,
 	NoDecoration: <IntlLabel keys={['o23', 'badge', 'no-decoration']} value="No Decoration"/>,
+	NoTimeout: <IntlLabel keys={['o23', 'badge', 'no-timeout']} value="No Timeout"/>,
 	YesChar: <IntlLabel keys={['o23', 'badge', 'yes-char']} value="Y"/>,
 	NoChar: <IntlLabel keys={['o23', 'badge', 'no-char']} value="N"/>,
 	Snippet: <IntlLabel keys={['o23', 'badge', 'snippet']} value={<Snippet/>}/>,

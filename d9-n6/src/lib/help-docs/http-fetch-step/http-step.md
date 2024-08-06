@@ -67,7 +67,7 @@ The HTTP method to be used for the request. This variable is mandatory and case-
 ##### `Timeout`
 
 The timeout for the HTTP request, in seconds. If not defined, use the timeout configured in the environment variables. If none of these are
-defined, use `-1`, which means no timeout.
+defined, use `-1` as default, which means no timeout.
 
 ##### `Generate request headers`
 
