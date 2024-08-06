@@ -103,6 +103,7 @@ export const Labels = {
 	StepHttpSystem: <IntlLabel keys={['o23', 'step', 'http', 'system']} value="System"/>,
 	StepHttpEndpoint: <IntlLabel keys={['o23', 'step', 'http', 'endpoint']} value="Endpoint"/>,
 	StepHttpDecorateUrl: <IntlLabel keys={['o23', 'step', 'http', 'decorate-url']} value="Decorate URL"/>,
+	StepHttpMethod: <IntlLabel keys={['o23', 'step', 'http', 'method']} value="HTTP Method"/>,
 	// step each
 	StepEachOriginalContentName: <IntlLabel keys={['o23', 'step', 'each', 'original-content-name']}
 	                                        value="Origin Content Variable"/>,

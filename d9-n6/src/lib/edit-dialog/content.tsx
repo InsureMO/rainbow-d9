@@ -1,5 +1,7 @@
-import {useThrottler} from '@rainbow-d9/n1';
-import React, {useEffect, useRef, useState} from 'react';
+import {useForceUpdate, useThrottler} from '@rainbow-d9/n1';
+import React, {Fragment, ReactNode, useEffect, useRef, useState} from 'react';
+import {findStepDef} from '../configurable-model';
+import {StepNodeModel} from '../diagram';
 import {Accept, Back} from '../icons';
 import {Labels} from '../labels';
 import {PlaygroundEventTypes, usePlaygroundEventBus} from '../playground-event-bus';
@@ -97,15 +99,15 @@ export const DialogWorkArea = (props: DialogWorkAreaProps) => {
 };
 
 export interface DialogContentProps {
+	model: ConfigurableModel;
 	helpDoc: MarkdownContent;
 	elements: Array<ConfigurableElement>;
-	/** prepare model for editing */
-	prepare: () => ConfigurableModel;
 	/** write back, true means successfully */
 	confirm: (model: ConfigurableModel) => ConfigurableElementAnchor | true;
 	/** discard change */
 	discard: (model: ConfigurableModel) => void;
 	assistant: Required<PlaygroundModuleAssistant>;
+	children?: ReactNode;
 }
 
 export interface DialogContentState {
@@ -114,17 +116,65 @@ export interface DialogContentState {
 
 export const DialogContent = (props: DialogContentProps) => {
 	const {
+		model,
 		helpDoc, elements,
-		prepare, confirm, discard, assistant
+		confirm, discard, assistant,
+		children
 	} = props;
 
-	const [state] = useState<DialogContentState>({model: prepare()});
+	const [state] = useState<DialogContentState>({model});
 
 	return <EditDialogEventBusProvider>
+		{children}
 		<StateHolder/>
 		<LayoutController/>
 		<DialogWorkArea helpDoc={helpDoc} elements={elements} confirm={confirm} discard={discard} model={state.model}
 		                assistant={assistant}/>
 		<DialogContentInitializer/>
 	</EditDialogEventBusProvider>;
+};
+
+export const StepUseHandler = (props: { repaint: () => void }) => {
+	const {repaint} = props;
+
+	const {on, off} = useEditDialogEventBus();
+	useEffect(() => {
+		const onElementValueChanged = (anchor: string) => {
+			if (anchor === 'use') {
+				repaint();
+			}
+		};
+		on(EditDialogEventTypes.ELEMENT_VALUE_CHANGED, onElementValueChanged);
+		return () => {
+			off(EditDialogEventTypes.ELEMENT_VALUE_CHANGED, onElementValueChanged);
+		};
+	}, [on, off, repaint]);
+
+	return <Fragment/>;
+};
+export const StepDialogContent = (props: { model: StepNodeModel }) => {
+	const {model: nodeModel} = props;
+
+	const {step: def, file} = nodeModel;
+	// create a configurable model from step def, and put into state
+	const [model] = useState(findStepDef(def.use).prepare(def));
+	const forceUpdate = useForceUpdate();
+
+	// find step defs for editing
+	const {use} = model;
+	const StepDefs = findStepDef(use);
+
+	const onConfirm = (model: ConfigurableModel) => {
+		return StepDefs.confirm(model, def, file, {
+			handlers: nodeModel.handlers, assistant: nodeModel.assistant
+		});
+	};
+	const onDiscard = (model: ConfigurableModel) => StepDefs.discard(model);
+
+	return <DialogContent model={model}
+	                      helpDoc={StepDefs.helpDocs} elements={StepDefs.properties}
+	                      confirm={onConfirm} discard={onDiscard}
+	                      assistant={nodeModel.assistant}>
+		<StepUseHandler repaint={forceUpdate}/>
+	</DialogContent>;
 };

@@ -3,7 +3,8 @@ import {
 	HttpGetPipelineStepDef,
 	HttpPipelineStepDef,
 	HttpPostPipelineStepDef,
-	PipelineStepDef
+	PipelineStepDef,
+	StandardPipelineStepRegisterKey
 } from '../../../definition';
 import {ConfigurableModel} from '../../../edit-dialog';
 import {StepNodeConfigurer} from '../../types';
@@ -24,6 +25,15 @@ const createSwitchUse = <D extends HttpPipelineStepDef, M extends HttpStepDefMod
 			'readResponse',
 			'responseErrorHandles'
 		], originalUse);
+
+		switch (model.use) {
+			case StandardPipelineStepRegisterKey.HTTP_GET:
+				model.method = 'get';
+				break;
+			case StandardPipelineStepRegisterKey.HTTP_POST:
+				model.method = 'post';
+				break;
+		}
 		return model;
 	};
 };

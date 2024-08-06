@@ -9,7 +9,7 @@ import {AllStepDefsAsArray, findStepDef} from '../../all-step-defs';
 import {CommonStepDefModel} from '../types';
 
 export const elementUse: ConfigurableElement = {
-	code: 'type', label: Labels.Use, anchor: 'use',
+	code: 'use', label: Labels.Use, anchor: 'use',
 	badge: (model: CommonStepDefModel): ReactNode => asBeautifiedUse(model.use),
 	editor: (props: ConfigurableElementEditorProps<CommonStepDefModel>) => {
 		const {model, onValueChanged} = props;

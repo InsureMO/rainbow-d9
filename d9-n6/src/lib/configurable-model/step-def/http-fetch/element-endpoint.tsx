@@ -1,5 +1,5 @@
 import {PropValue, VUtils} from '@rainbow-d9/n1';
-import {DropdownOptions, UnwrappedDropdown} from '@rainbow-d9/n2';
+import {DropdownOptions, OptionItemSort, UnwrappedDropdown} from '@rainbow-d9/n2';
 import React, {ReactNode} from 'react';
 import {
 	ConfigurableElement,
@@ -44,6 +44,7 @@ export const elementEndpoint: ConfigurableElement = {
 		}
 
 		return <UnwrappedDropdown value={endpoint} onValueChange={onValueChange} options={options}
+		                          optionSort={OptionItemSort.ASC}
 		                          clearable={false} style={CommonElementEditorStyles.dropdown}/>;
 	},
 	helpDoc: HelpDocs.stepHttpEndpoint

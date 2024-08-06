@@ -1,5 +1,5 @@
 import {PropValue, VUtils} from '@rainbow-d9/n1';
-import {DropdownOptions, UnwrappedDropdown} from '@rainbow-d9/n2';
+import {DropdownOptions, OptionItemSort, UnwrappedDropdown} from '@rainbow-d9/n2';
 import React, {ReactNode} from 'react';
 import {
 	ConfigurableElement,
@@ -43,6 +43,7 @@ const SystemEditor = (props: ConfigurableElementEditorProps<HttpStepDefModel>) =
 	}
 
 	return <UnwrappedDropdown value={system} onValueChange={onValueChange} options={options}
+	                          optionSort={OptionItemSort.ASC}
 	                          clearable={false} style={CommonElementEditorStyles.dropdown}/>;
 };
 export const elementSystem: ConfigurableElement = {

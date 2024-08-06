@@ -3,7 +3,7 @@ import {DOM_KEY_WIDGET} from '@rainbow-d9/n2';
 import React from 'react';
 import styled from 'styled-components';
 import {findStepDef, FirstSubStepPortModel, FirstSubStepPortWidget} from '../../configurable-model';
-import {ConfigurableModel, DialogContent} from '../../edit-dialog';
+import {StepDialogContent} from '../../edit-dialog';
 import {asBeautifiedUse, Labels} from '../../labels';
 import {PlaygroundEventTypes, usePlaygroundEventBus} from '../../playground-event-bus';
 import {PlaygroundCssVars} from '../../widgets';
@@ -102,25 +102,13 @@ export const StepNodeWidget = (props: StepNodeWidgetProps) => {
 	const {node, engine} = props;
 
 	const {fire} = usePlaygroundEventBus();
-	// const forceUpdate = useForceUpdate();
 
 	const {step: def, file} = node;
 	const {use} = def;
 	const StepDefs = findStepDef(use);
 
-	const onConfirm = (model: ConfigurableModel) => {
-		return StepDefs.confirm(model, def, file, {
-			handlers: node.handlers, assistant: node.assistant
-		});
-	};
-	const onDiscard = (model: ConfigurableModel) => StepDefs.discard(model);
-	const prepareModel = () => StepDefs.prepare(def);
 	const onDoubleClicked = () => {
-		fire(PlaygroundEventTypes.SHOW_EDIT_DIALOG,
-			<DialogContent helpDoc={StepDefs.helpDocs}
-			               prepare={prepareModel} confirm={onConfirm} discard={onDiscard}
-			               elements={StepDefs.properties}
-			               assistant={node.assistant}/>);
+		fire(PlaygroundEventTypes.SHOW_EDIT_DIALOG, <StepDialogContent model={node}/>);
 	};
 	const isFirstSubStep = node.isFirstSubStep();
 

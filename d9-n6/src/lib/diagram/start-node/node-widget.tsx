@@ -267,11 +267,11 @@ export const StartNodeWidget = (props: StartNodeWidgetProps) => {
 		return FileDefs.confirm(model, def, node.handlers);
 	};
 	const onDiscard = (model: ConfigurableModel) => FileDefs.discard(model);
-	const prepareModel = () => FileDefs.prepare(def);
 	const onDoubleClicked = () => {
+		const model = FileDefs.prepare(def);
 		fire(PlaygroundEventTypes.SHOW_EDIT_DIALOG,
 			<DialogContent helpDoc={HelpDocs.pipeline}
-			               prepare={prepareModel} confirm={onConfirm} discard={onDiscard}
+			               model={model} confirm={onConfirm} discard={onDiscard}
 			               elements={FileDefs.elements}
 			               assistant={node.assistant}/>);
 	};
