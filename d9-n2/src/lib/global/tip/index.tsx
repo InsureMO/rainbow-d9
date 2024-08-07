@@ -64,20 +64,25 @@ export const Tip = () => {
 		const paint = (options: TipOptions, keepPosition: boolean) => {
 			replace(() => {
 				const {ref, prefix = 'data'} = options;
-				const body = options.body ?? ref.current.getAttribute(`${prefix}-tip-body`);
+				const {current: node} = ref;
+				if (node == null) {
+					return;
+				}
+
+				const body = options.body ?? node.getAttribute(`${prefix}-tip-body`);
 				if (VUtils.isBlank(body)) {
 					return;
 				}
-				const title = options.title ?? ref.current.getAttribute(`${prefix}-tip-title`);
-				const minWidth = options.minWidth ?? ref.current.getAttribute(`${prefix}-tip-min-width`);
-				const maxWidth = options.maxWidth ?? ref.current.getAttribute(`${prefix}-tip-max-width`);
-				const maxHeight = options.maxHeight ?? ref.current.getAttribute(`${prefix}-tip-max-height`);
+				const title = options.title ?? node.getAttribute(`${prefix}-tip-title`);
+				const minWidth = options.minWidth ?? node.getAttribute(`${prefix}-tip-min-width`);
+				const maxWidth = options.maxWidth ?? node.getAttribute(`${prefix}-tip-max-width`);
+				const maxHeight = options.maxHeight ?? node.getAttribute(`${prefix}-tip-max-height`);
 				const delay = (() => {
-					const value = options.delay ?? ref.current.getAttribute(`${prefix}-tip-delay`);
+					const value = options.delay ?? node.getAttribute(`${prefix}-tip-delay`);
 					const ret = VUtils.isNumber(value);
 					return ret.test ? ret.value : (void 0);
 				})();
-				const tag = options.tag ?? ref.current.getAttribute(`${prefix}-tip-tag`);
+				const tag = options.tag ?? node.getAttribute(`${prefix}-tip-tag`);
 				// console.log('switch to ready');
 				setState(state => {
 					if (state.hideTimeout) {
