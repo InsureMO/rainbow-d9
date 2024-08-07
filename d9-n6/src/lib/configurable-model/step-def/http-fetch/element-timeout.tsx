@@ -44,6 +44,8 @@ const MethodEditor = (props: ConfigurableElementEditorProps<HttpStepDefModel>) =
 			const test = VUtils.isPositive(value);
 			if (test.test) {
 				model.timeout = test.value;
+			} else {
+				delete model.timeout;
 			}
 			noTimeoutRef.current = false;
 			setTimeout(() => inputRef.current?.querySelector('input')?.focus(), 50);

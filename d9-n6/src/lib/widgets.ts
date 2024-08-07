@@ -269,7 +269,10 @@ export const PlaygroundCssVars = {
 	SNIPPET_HEIGHT: 'var(--o23-playground-snippet-height, 400px)',
 	SNIPPET_IO_TRANSFORMER_HEIGHT: 'var(--o23-playground-snippet-io-transformer-height, 200px)',
 	SNIPPET_ERROR_HANDLES_HEIGHT: `var(--o23-playground-snippet-error-handles-height, 200px)`,
-	SNIPPET_HTTP_DECORATE_URL_HEIGHT: 'var(--o23-playground-snippet-http-decorate-url-height, 200px)'
+	SNIPPET_HTTP_DECORATE_URL_HEIGHT: 'var(--o23-playground-snippet-http-decorate-url-height, 200px)',
+	SNIPPET_HTTP_GENERATE_HEADERS_HEIGHT: 'var(--o23-playground-snippet-http-generate-headers-height, 200px)',
+	SNIPPET_HTTP_GENERATE_BODY_HEIGHT: 'var(--o23-playground-snippet-http-generate-body-height, 200px)',
+	SNIPPET_HTTP_READ_RESPONSE_HEIGHT: 'var(--o23-playground-snippet-http-read-response-height, 200px)'
 };
 
 // background: linear-gradient(90deg, #24606e, #1f6b73, #207675, #2c8174, #3e8b71, #54956b, #6c9e65, #87a55f, #a3ab5b, #c1b05a, #e0b35f, #ffb56b);

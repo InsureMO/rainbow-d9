@@ -8,6 +8,7 @@ import {
 import {discard} from './discard';
 import {
 	createMainContentElement,
+	createSwitchableSnippetElement,
 	elementErrorHandles,
 	elementFromInputGroup,
 	elementName,
@@ -67,6 +68,7 @@ export const CommonStepDefs: CommonStepDefsType = {
 	createSubNodes, createSubNodesAndEndNode,
 	createSetsLikeSubNodesAndEndNode, createParallelSubNodesAndEndNode,
 	findSubPorts,
-	createMainContentElement
+	createMainContentElement,
+	createSwitchableSnippetElement
 };
 

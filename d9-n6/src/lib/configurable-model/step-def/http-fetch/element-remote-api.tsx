@@ -6,8 +6,8 @@ import {elementMethod} from './element-method';
 import {elementSystem} from './element-system';
 import {elementTimeout} from './element-timeout';
 
-export const elementRemote: ConfigurableElement = {
-	code: 'remote', label: Labels.StepHttpRemoteApi, anchor: 'remote',
+export const elementRemoteApi: ConfigurableElement = {
+	code: 'remote-api', label: Labels.StepHttpRemoteApi, anchor: 'remote-api',
 	children: [elementSystem, elementEndpoint, elementDecorateUrl, elementMethod, elementTimeout],
 	group: true
 };

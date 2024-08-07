@@ -10,7 +10,9 @@ import {StepNodeConfigurer} from '../../types';
 import {registerStepDef} from '../all-step-defs';
 import {CommonStepDefs} from '../common';
 import {confirmHttpFetch, confirmHttpGet, confirmHttpPost} from './confirm';
-import {elementRemote} from './element-remote';
+import {elementRemoteApi} from './element-remote-api';
+import {elementRemoteRequest} from './element-remote-request';
+import {elementRemoteResponse} from './element-remote-response';
 import {PortEndpoint} from './port-endpoint';
 import {PortSystem} from './port-system';
 import {prepareHttpFetch, prepareHttpGet, prepareHttpPost} from './prepare';
@@ -34,7 +36,9 @@ const createHttpStepDefs = <D extends HttpPipelineStepDef, M extends HttpStepDef
 		discard: CommonStepDefs.discard,
 		properties: [
 			...CommonStepDefs.properties.leadingGroup,
-			elementRemote,
+			elementRemoteApi,
+			elementRemoteRequest,
+			elementRemoteResponse,
 			// CommonStepDefs.createMainContentElement(),
 			...CommonStepDefs.properties.tailingGroup
 		],

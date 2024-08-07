@@ -49,7 +49,7 @@ export const elementMethod: ConfigurableElement = {
 		if (VUtils.isNotBlank(model.method)) {
 			return model.method.trim();
 		} else {
-			return 'post';
+			return 'POST';
 		}
 	},
 	changeBy: ['use'],

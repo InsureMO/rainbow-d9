@@ -1,5 +1,6 @@
 import {DiagramEngine} from '@projectstorm/react-diagrams-core';
 import {Undefinable} from '@rainbow-d9/n1';
+import {ReactNode} from 'react';
 import {AllInPipelineStepDef, FileDef, PipelineStepDef} from '../../../definition';
 import {HandledNodeModel, StepNodeModel} from '../../../diagram';
 import {ConfigurableElement, ConfigurableModel} from '../../../edit-dialog';
@@ -82,6 +83,18 @@ export interface CreateSubNodesAndEndNodeOptions extends CreateSubNodesOptions {
 	createSpecificSubNodes?: (node: StepNodeModel, options: CreateSubNodesOptions) => Undefinable<Array<HandledNodeModel>>;
 }
 
+export interface SwitchableSnippetElementOptions<M extends CommonStepDefModel> {
+	code: string;
+	label: ReactNode;
+	anchor: string;
+	property: keyof M;
+	temporaryProperty: keyof M['temporary'];
+	notAvailableBadge?: ReactNode;
+	ignoreCandidateLabel: ReactNode;
+	snippetHeight?: string | number;
+	helpDoc?: string;
+}
+
 export interface CommonStepDefsType extends Omit<StepNodeConfigurer<AllInPipelineStepDef, CommonStepDefModel>, 'switchUse' | 'use' | 'properties' | 'ports' | 'createSubNodes' | 'helpDocs'> {
 	properties: CommonStepDefsProperties;
 	ports: CommonStepDefsPorts;
@@ -92,4 +105,5 @@ export interface CommonStepDefsType extends Omit<StepNodeConfigurer<AllInPipelin
 	createSetsLikeSubNodesAndEndNode: (node: StepNodeModel, options: CreateSubNodesOptions) => Undefinable<HandledNodeModel>;
 	createParallelSubNodesAndEndNode: (model: StepNodeModel, options: CreateSubNodesOptions) => Undefinable<HandledNodeModel>;
 	createMainContentElement: (...children: Array<ConfigurableElement>) => ConfigurableElement;
+	createSwitchableSnippetElement: <M extends CommonStepDefModel>(options: SwitchableSnippetElementOptions<M>) => ConfigurableElement;
 }
