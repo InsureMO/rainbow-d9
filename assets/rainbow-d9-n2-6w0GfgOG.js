@@ -4,9 +4,9 @@ var __publicField = (obj, key, value) => {
   __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
   return value;
 };
-import { a as color, M as MaskedNumber, e as MaskedDate, g as MaskedFunction, j as MaskedPattern, k as MaskedRange, p as MaskedRegExp, q as MaskedDynamic } from "./vendor-R-Spl4KT.js";
-import { R as React, r as reactExports, q as qe, W as We, u as useIMask } from "./react-base-_kUkTZyT.js";
-import { c as createLogger, V as VUtils, P as PPUtils, r as registerWidget, a as useThrottler, u as useRootEventBus, M as MUtils, N as NUtils, d as Wrapper, e as useForceUpdate, f as MBUtils, b as useWrapperEventBus, W as WrapperEventTypes, g as useCreateEventBus, h as PROPERTY_PATH_ME, i as useDefaultAttributeValues, j as useAttributesWatch, R as RootEventTypes } from "./rainbow-d9-n1-4fa2a4TQ.js";
+import { a as color, M as MaskedNumber, e as MaskedDate, g as MaskedFunction, j as MaskedPattern, k as MaskedRange, p as MaskedRegExp, q as MaskedDynamic } from "./vendor-DzjmpdJb.js";
+import { R as React, r as reactExports, q as qe, W as We, u as useIMask } from "./react-base-vnTyKOsC.js";
+import { c as createLogger, V as VUtils, P as PPUtils, r as registerWidget, a as useThrottler, u as useRootEventBus, M as MUtils, N as NUtils, d as Wrapper, e as useForceUpdate, f as MBUtils, b as useWrapperEventBus, W as WrapperEventTypes, g as useCreateEventBus, h as PROPERTY_PATH_ME, i as useDefaultAttributeValues, j as useAttributesWatch, R as RootEventTypes } from "./rainbow-d9-n1-iKksNDqK.js";
 import { d as dayjs } from "./dayjs-9WAo-H7j.js";
 const DOM_KEY_WIDGET = "data-w";
 const DOM_ID_WIDGET = "data-wid";
@@ -1625,20 +1625,24 @@ const Tip = () => {
     const paint = (options, keepPosition) => {
       replace(() => {
         const { ref: ref2, prefix = "data" } = options;
-        const body = options.body ?? ref2.current.getAttribute(`${prefix}-tip-body`);
+        const { current: node } = ref2;
+        if (node == null) {
+          return;
+        }
+        const body = options.body ?? node.getAttribute(`${prefix}-tip-body`);
         if (VUtils.isBlank(body)) {
           return;
         }
-        const title = options.title ?? ref2.current.getAttribute(`${prefix}-tip-title`);
-        const minWidth = options.minWidth ?? ref2.current.getAttribute(`${prefix}-tip-min-width`);
-        const maxWidth = options.maxWidth ?? ref2.current.getAttribute(`${prefix}-tip-max-width`);
-        const maxHeight = options.maxHeight ?? ref2.current.getAttribute(`${prefix}-tip-max-height`);
+        const title = options.title ?? node.getAttribute(`${prefix}-tip-title`);
+        const minWidth = options.minWidth ?? node.getAttribute(`${prefix}-tip-min-width`);
+        const maxWidth = options.maxWidth ?? node.getAttribute(`${prefix}-tip-max-width`);
+        const maxHeight = options.maxHeight ?? node.getAttribute(`${prefix}-tip-max-height`);
         const delay = (() => {
-          const value = options.delay ?? ref2.current.getAttribute(`${prefix}-tip-delay`);
+          const value = options.delay ?? node.getAttribute(`${prefix}-tip-delay`);
           const ret = VUtils.isNumber(value);
           return ret.test ? ret.value : void 0;
         })();
-        const tag = options.tag ?? ref2.current.getAttribute(`${prefix}-tip-tag`);
+        const tag = options.tag ?? node.getAttribute(`${prefix}-tip-tag`);
         setState((state2) => {
           if (state2.hideTimeout) {
             window.clearTimeout(state2.hideTimeout);
@@ -9801,7 +9805,7 @@ const Checkboxes = reactExports.forwardRef((props, ref) => {
 });
 registerWidget({ key: "Checkboxes", JSX: Checkboxes, container: false, array: false });
 registerWidget({ key: "Checks", JSX: Checkboxes, container: false, array: false });
-reactExports.forwardRef((props, ref) => {
+const UnwrappedCheckboxes = reactExports.forwardRef((props, ref) => {
   const { $pp = "value", value, onValueChange, disabled, visible, ...rest } = props;
   const $onValueChange = onValueChange;
   const $avs = { $disabled: disabled, $visible: visible };
@@ -10031,13 +10035,14 @@ reactExports.forwardRef((props, ref) => {
 });
 export {
   $d9n2 as $,
-  UnwrappedButtonBar as A,
+  utils$1 as A,
   ButtonInk as B,
   CssVars as C,
   DOM_KEY_WIDGET as D,
-  ButtonBarAlignment as E,
-  UnwrappedSection as F,
+  UnwrappedButtonBar as E,
+  ButtonBarAlignment as F,
   GlobalEventTypes as G,
+  UnwrappedSection as H,
   IntlLabel as I,
   LabelLike as L,
   OptionItemSort as O,
@@ -10056,18 +10061,18 @@ export {
   UnwrappedCheckbox as j,
   UnwrappedDropdown as k,
   UnwrappedDecorateInput as l,
-  UnwrappedTextarea as m,
-  index$1 as n,
-  useAlert as o,
-  useDialog as p,
-  DialogHeader as q,
-  DialogTitle as r,
-  DialogBody as s,
+  UnwrappedCheckboxes as m,
+  UnwrappedTextarea as n,
+  index$1 as o,
+  useAlert as p,
+  useDialog as q,
+  DialogHeader as r,
+  DialogTitle as s,
   toIntlLabel as t,
   useGlobalEventBus as u,
-  DialogFooter as v,
-  GlobalRoot as w,
-  utils$3 as x,
-  DropdownUtils as y,
-  utils$1 as z
+  DialogBody as v,
+  DialogFooter as w,
+  GlobalRoot as x,
+  utils$3 as y,
+  DropdownUtils as z
 };
