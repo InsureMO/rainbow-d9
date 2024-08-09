@@ -34,6 +34,9 @@ steps:
         use: http-fetch
         system: CodeService
         endpoint: askProductCodes
+        responseErrorHandles:
+          400: |-
+            $.$errors.uncatchable({code: '000', reason: ''});
       - name: Prepare Codes 2
         use: http-get
         system: CodeService

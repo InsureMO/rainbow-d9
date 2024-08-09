@@ -38,7 +38,7 @@ const createPrepare = <D extends HttpPipelineStepDef, M extends HttpStepDefModel
 					}
 
 					snippet = snippet.split('\n').map((line: string) => `\t\t${line}`).join('\n');
-					return `\t${code}: async () => {\n${snippet}\n\t}`;
+					return `\t'${code}': async () => {\n${snippet}\n\t}`;
 				});
 				model.responseErrorHandles = `const handlers = {
 ${handlers}
@@ -46,10 +46,14 @@ ${handlers}
 const {$errorCode} = $options;
 const handle = handlers[$errorCode];
 if (handle == null) {
-\tthrow $.$errors.uncatchable({code: 'O03-00010', reason: \`Error[\${options.$errorCode}] caught when fetch data from remote[\${options.$url}].\`});
+	$.$errors.uncatchable({
+		code: 'O03-00010', 
+		reason: \`Error[\${options.$errorCode}] caught when fetch data from remote[\${options.$url}].\`
+	});
 } else {
-\treturn await handle();
-}`;
+	return await handle();
+}
+`;
 			}
 		}
 		model.temporary.responseErrorHandlesAsIs = VUtils.isBlank(model.responseErrorHandles);
