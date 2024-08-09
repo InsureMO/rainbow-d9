@@ -111,6 +111,8 @@ export const Labels = {
 	StepHttpBodyUsed: <IntlLabel keys={['o23', 'step', 'http', 'body-used']} value="Use Body"/>,
 	StepHttpGenerateBody: <IntlLabel keys={['o23', 'step', 'http', 'generate-body']} value="Generate Body"/>,
 	StepHttpReadResponse: <IntlLabel keys={['o23', 'step', 'http', 'read-response']} value="Read Response"/>,
+	StepHttpResponseErrorHandles: <IntlLabel keys={['o23', 'step', 'http', 'response-error-handles']}
+	                                         value="Response Error Handling"/>,
 	// step each
 	StepEachOriginalContentName: <IntlLabel keys={['o23', 'step', 'each', 'original-content-name']}
 	                                        value="Origin Content Variable"/>,

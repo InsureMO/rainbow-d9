@@ -92,7 +92,7 @@ export interface HttpPipelineStepDef extends AllInPipelineStepDef {
 	bodyUsed?: boolean;
 	generateBody?: string;
 	readResponse?: string;
-	responseErrorHandles?: { [key: string]: string; };
+	responseErrorHandles?: string | { [key: string]: string; };
 }
 
 export interface HttpFetchPipelineStepDef extends HttpPipelineStepDef {

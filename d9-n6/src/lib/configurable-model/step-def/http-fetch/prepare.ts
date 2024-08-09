@@ -26,9 +26,33 @@ const createPrepare = <D extends HttpPipelineStepDef, M extends HttpStepDefModel
 		model.temporary.generateBodyAsIs = VUtils.isBlank(def.generateBody);
 		model.readResponse = def.readResponse;
 		model.temporary.readResponseAsIs = VUtils.isBlank(def.readResponse);
-		model.responseErrorHandles = Object.keys(def.responseErrorHandles ?? {}).map(code => {
-			return {code, snippet: def.responseErrorHandles?.[code]};
-		});
+		if (def.responseErrorHandles != null) {
+			if (typeof def.responseErrorHandles === 'string') {
+				model.responseErrorHandles = def.responseErrorHandles;
+			} else {
+				// async ($options, $helpers, $)
+				const handlers = Object.keys(def.responseErrorHandles).map(code => {
+					let snippet = def.responseErrorHandles[code] ?? '';
+					if (VUtils.isBlank(snippet)) {
+						return '';
+					}
+
+					snippet = snippet.split('\n').map((line: string) => `\t\t${line}`).join('\n');
+					return `\t${code}: async () => {\n${snippet}\n\t}`;
+				});
+				model.responseErrorHandles = `const handlers = {
+${handlers}
+};
+const {$errorCode} = $options;
+const handle = handlers[$errorCode];
+if (handle == null) {
+\tthrow $.$errors.uncatchable({code: 'O03-00010', reason: \`Error[\${options.$errorCode}] caught when fetch data from remote[\${options.$url}].\`});
+} else {
+\treturn await handle();
+}`;
+			}
+		}
+		model.temporary.responseErrorHandlesAsIs = VUtils.isBlank(model.responseErrorHandles);
 
 		return model;
 	};

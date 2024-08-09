@@ -40,12 +40,7 @@ const createConfirm = <D extends HttpPipelineStepDef, M extends HttpStepDefModel
 		} else {
 			def.readResponse = VUtils.asUndefinedWhenBlank(model.readResponse);
 		}
-		def.responseErrorHandles = (model.responseErrorHandles ?? []).reduce((handles, {code, snippet}) => {
-			if (VUtils.isNotBlank(code)) {
-				handles[code] = snippet;
-			}
-			return handles;
-		}, {});
+		def.responseErrorHandles = model.responseErrorHandles;
 		if (Object.keys(def.responseErrorHandles).length === 0) {
 			delete def.responseErrorHandles;
 		}

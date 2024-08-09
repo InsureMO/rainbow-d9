@@ -11,12 +11,13 @@ export interface HttpStepDefModel extends CommonStepDefModel {
 	bodyUsed?: boolean;
 	generateBody?: string;
 	readResponse?: string;
-	responseErrorHandles?: Array<{ code?: string, snippet: string; }>;
+	responseErrorHandles?: string;
 	temporary?: CommonStepDefModel['temporary'] & {
 		decorateUrlAsIs?: boolean;
 		generateHeadersAsIs?: boolean;
 		generateBodyAsIs?: boolean;
 		readResponseAsIs?: boolean;
+		responseErrorHandlesAsIs?: boolean;
 	};
 }
 
