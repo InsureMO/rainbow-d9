@@ -1,14 +1,10 @@
 import {VUtils} from '@rainbow-d9/n1';
-import React, {ReactNode} from 'react';
-import {
-	ConfigurableElement,
-	ConfigurableElementBadgeChecked,
-	ConfigurableElementBadgeIgnored,
-	ConfigurableElementEditorProps
-} from '../../../edit-dialog';
+import React from 'react';
+import {ConfigurableElement, ConfigurableElementEditorProps} from '../../../edit-dialog';
 import {HelpDocs} from '../../../help-docs';
 import {Labels} from '../../../labels';
 import {PlaygroundCssVars} from '../../../widgets';
+import {createCheckOrIgnoreBadge} from '../../common';
 import {JsEditor} from '../../js-editor';
 import {ParallelStepDefModel} from './types';
 
@@ -23,13 +19,7 @@ const SnippetEditor = (props: ConfigurableElementEditorProps<ParallelStepDefMode
 };
 export const elementCloneData: ConfigurableElement = {
 	code: 'clone-data', label: Labels.StepParallelCloneData, anchor: 'clone-data',
-	badge: (model: ParallelStepDefModel): ReactNode => {
-		if (VUtils.isNotBlank(model.snippet)) {
-			return <ConfigurableElementBadgeChecked/>;
-		} else {
-			return <ConfigurableElementBadgeIgnored/>;
-		}
-	},
+	badge: createCheckOrIgnoreBadge({check: (model: ParallelStepDefModel) => VUtils.isNotBlank(model.snippet)}),
 	editor: SnippetEditor,
 	helpDoc: HelpDocs.stepParallelCloneData
 };

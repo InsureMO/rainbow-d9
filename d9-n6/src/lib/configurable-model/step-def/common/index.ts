@@ -71,9 +71,10 @@ export const CommonStepDefs: CommonStepDefsType = {
 	createSubNodes, createSubNodesAndEndNode,
 	createSetsLikeSubNodesAndEndNode, createParallelSubNodesAndEndNode,
 	findSubPorts,
+	// element create
 	createMainContentElement,
 	createSwitchableSnippetElement,
-
+	// configurers
 	createStepNodeConfigurer: <F extends AllInPipelineStepDef, M extends CommonStepDefModel>(options: CreateStepNodeConfigurerOptions<F, M>): StepNodeConfigurer<F, M> => {
 		const {
 			use,

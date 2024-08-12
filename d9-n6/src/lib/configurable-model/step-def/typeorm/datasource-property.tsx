@@ -1,25 +1,16 @@
 import {PropValue, VUtils} from '@rainbow-d9/n1';
 import {DropdownOptions, OptionItemSort, UnwrappedDropdown} from '@rainbow-d9/n2';
-import React, {ReactNode} from 'react';
-import {
-	ConfigurableElementBadgeChecked,
-	ConfigurableElementBadgeMissed,
-	ConfigurableElementEditorProps
-} from '../../../edit-dialog';
+import React from 'react';
+import {ConfigurableElementEditorProps} from '../../../edit-dialog';
 import {HelpDocs} from '../../../help-docs';
 import {Labels} from '../../../labels';
+import {createCheckOrMissBadge} from '../../common';
 import {NotAvailableDropdownOption} from '../../not-available-dropdown-option';
 import {TypeOrmStepDefModel} from './types';
 
 export const typeOrmDatasourceProperty = {
 	code: 'code', label: Labels.StepTypeOrmDatasource, anchor: 'code',
-	badge: (model: TypeOrmStepDefModel): ReactNode => {
-		if (VUtils.isNotBlank(model.datasource)) {
-			return <ConfigurableElementBadgeChecked/>;
-		} else {
-			return <ConfigurableElementBadgeMissed/>;
-		}
-	},
+	badge: createCheckOrMissBadge({check: (model: TypeOrmStepDefModel) => VUtils.isNotBlank(model.datasource)}),
 	editor: (props: ConfigurableElementEditorProps<TypeOrmStepDefModel>) => {
 		const {model, onValueChanged, assistant} = props;
 		const onValueChange = (value: PropValue) => {

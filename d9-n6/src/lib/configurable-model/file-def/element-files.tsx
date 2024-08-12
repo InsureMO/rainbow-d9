@@ -1,15 +1,11 @@
 import {PropValue, useThrottler, VUtils} from '@rainbow-d9/n1';
 import {CssVars, UnwrappedDecorateInput, UnwrappedDropdown, UnwrappedTextarea} from '@rainbow-d9/n2';
-import React, {ReactNode, useRef} from 'react';
+import React, {useRef} from 'react';
 import {ApiNamedFile} from '../../definition';
-import {
-	ConfigurableElement,
-	ConfigurableElementBadgeChecked,
-	ConfigurableElementBadgeIgnored,
-	ConfigurableElementEditorProps
-} from '../../edit-dialog';
+import {ConfigurableElement, ConfigurableElementEditorProps} from '../../edit-dialog';
 import {HelpDocs} from '../../help-docs';
 import {Labels} from '../../labels';
+import {createCheckOrIgnoreBadge} from '../common';
 import {CommonElementEditorStyles} from '../styles';
 import {VerticalLinesEditor} from '../vertical-lines-editor';
 import {PipelineFileDefModel} from './types';
@@ -213,13 +209,7 @@ export const FilesEditor = (props: ConfigurableElementEditorProps<PipelineFileDe
 
 export const elementFiles: ConfigurableElement = {
 	code: 'files', label: Labels.ApiFilesLabel, anchor: 'files',
-	badge: (model: PipelineFileDefModel): ReactNode => {
-		if (model.files != null && model.files !== false) {
-			return <ConfigurableElementBadgeChecked/>;
-		} else {
-			return <ConfigurableElementBadgeIgnored/>;
-		}
-	},
+	badge: createCheckOrIgnoreBadge({check: (model: PipelineFileDefModel) => model.files != null && model.files !== false}),
 	editor: FilesEditor,
 	helpDoc: HelpDocs.pipelineFiles
 };

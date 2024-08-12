@@ -1,13 +1,9 @@
 import {PropValue, VUtils} from '@rainbow-d9/n1';
 import {DropdownOptions, OptionItemSort, UnwrappedDropdown} from '@rainbow-d9/n2';
 import React, {ReactNode} from 'react';
-import {
-	ConfigurableElement,
-	ConfigurableElementBadgeChecked,
-	ConfigurableElementBadgeMissed,
-	ConfigurableElementEditorProps
-} from '../../../edit-dialog';
+import {ConfigurableElement, ConfigurableElementEditorProps} from '../../../edit-dialog';
 import {PlaygroundModuleAssistant} from '../../../types';
+import {createCheckOrMissBadge} from '../../common';
 import {NotAvailableDropdownOption} from '../../not-available-dropdown-option';
 import {RefOnCodeStepDefModel} from './types';
 
@@ -22,13 +18,7 @@ export const createRefOnCodeCodeProperty = (options: CreateRefOnCodeCodeProperty
 
 	return {
 		code: 'code', label, anchor: 'code',
-		badge: (model: RefOnCodeStepDefModel): ReactNode => {
-			if (VUtils.isNotBlank(model.code)) {
-				return <ConfigurableElementBadgeChecked/>;
-			} else {
-				return <ConfigurableElementBadgeMissed/>;
-			}
-		},
+		badge: createCheckOrMissBadge({check: (model: RefOnCodeStepDefModel) => VUtils.isNotBlank(model.code)}),
 		editor: (props: ConfigurableElementEditorProps<RefOnCodeStepDefModel>) => {
 			const {model, onValueChanged, assistant} = props;
 			const onValueChange = (value: PropValue) => {

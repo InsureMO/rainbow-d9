@@ -1,14 +1,10 @@
 import {PropValue} from '@rainbow-d9/n1';
 import {UnwrappedDropdown} from '@rainbow-d9/n2';
-import React, {ReactNode} from 'react';
-import {
-	ConfigurableElement,
-	ConfigurableElementBadgeChecked,
-	ConfigurableElementBadgeIgnored,
-	ConfigurableElementEditorProps
-} from '../../edit-dialog';
+import React from 'react';
+import {ConfigurableElement, ConfigurableElementEditorProps} from '../../edit-dialog';
 import {HelpDocs} from '../../help-docs';
 import {Labels} from '../../labels';
+import {createCheckOrIgnoreBadge} from '../common';
 import {CommonElementEditorStyles} from '../styles';
 import {PipelineFileDefModel} from './types';
 
@@ -20,13 +16,7 @@ const ParseIgnoredOrDefaultOptions = [
 
 export const elementBody: ConfigurableElement = {
 	code: 'body', label: Labels.ApiBodyLabel, anchor: 'body',
-	badge: (model: PipelineFileDefModel): ReactNode => {
-		if (model.body === true) {
-			return <ConfigurableElementBadgeChecked/>;
-		} else {
-			return <ConfigurableElementBadgeIgnored/>;
-		}
-	},
+	badge: createCheckOrIgnoreBadge({check: (model: PipelineFileDefModel) => model.body === true}),
 	editor: (props: ConfigurableElementEditorProps<PipelineFileDefModel>) => {
 		const {model, onValueChanged} = props;
 		const onValueChange = (value: PropValue) => {
