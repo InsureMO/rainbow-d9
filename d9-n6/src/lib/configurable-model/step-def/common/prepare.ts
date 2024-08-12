@@ -1,11 +1,12 @@
 import {VUtils} from '@rainbow-d9/n1';
 import {AllInPipelineStepDef} from '../../../definition';
-import {StepNodeConfigurer} from '../../types';
-import {CommonStepDefModel, ErrorHandleType, MergeType} from './types';
+import {CommonStepDefModel, CommonStepDefsType, ErrorHandleType, MergeType} from './types';
 
-export const prepare: StepNodeConfigurer<AllInPipelineStepDef, CommonStepDefModel>['prepare'] =
-	(def: AllInPipelineStepDef): CommonStepDefModel => {
-		const model: CommonStepDefModel = {
+export const prepare: CommonStepDefsType['prepare'] =
+	<F extends AllInPipelineStepDef, M extends CommonStepDefModel>(def: F, and?: (def: F, model: M) => void): M => {
+		// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+		// @ts-ignore
+		const model: M = {
 			name: def.name, use: def.use,
 			fromInput: def.fromInput, toOutput: def.toOutput,
 			temporary: {}
@@ -34,5 +35,8 @@ export const prepare: StepNodeConfigurer<AllInPipelineStepDef, CommonStepDefMode
 		copyErrorHandle('uncatchable', 'useErrorHandlesForUncatchable');
 		copyErrorHandle('exposed', 'useErrorHandlesForExposed');
 		copyErrorHandle('any', 'useErrorHandlesForAny');
+		if (and != null) {
+			and(def, model);
+		}
 		return model;
 	};

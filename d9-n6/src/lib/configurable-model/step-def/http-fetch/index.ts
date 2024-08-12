@@ -49,8 +49,7 @@ const createHttpStepDefs = <D extends HttpPipelineStepDef, M extends HttpStepDef
 			...CommonStepDefs.prebuiltPorts.errorHandles,
 			...CommonStepDefs.prebuiltPorts.output
 		],
-		createSubNodes: CommonStepDefs.createSubNodesAndEndNode,
-		findSubPorts: CommonStepDefs.findSubPorts,
+		createSubNodes: CommonStepDefs.createSubNodesAndEndNode, findSubPorts: CommonStepDefs.findSubPorts,
 		helpDocs: docs
 	};
 	registerStepDef(defs);

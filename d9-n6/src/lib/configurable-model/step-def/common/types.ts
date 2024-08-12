@@ -3,8 +3,8 @@ import {Undefinable} from '@rainbow-d9/n1';
 import {ReactNode} from 'react';
 import {AllInPipelineStepDef, FileDef, PipelineStepDef} from '../../../definition';
 import {HandledNodeModel, StepNodeModel} from '../../../diagram';
-import {ConfigurableElement, ConfigurableModel} from '../../../edit-dialog';
-import {CreateSubNodesOptions, StepNodeConfigurer} from '../../types';
+import {ConfigurableElement, ConfigurableElementAnchor, ConfigurableModel} from '../../../edit-dialog';
+import {ConfirmNodeOptions, CreateSubNodesOptions, StepNodeConfigurer} from '../../types';
 
 export enum MergeType {
 	REPLACE, UNBOX, MERGE_AS_PROPERTY
@@ -95,15 +95,37 @@ export interface SwitchableSnippetElementOptions<M extends CommonStepDefModel> {
 	helpDoc?: string;
 }
 
-export interface CommonStepDefsType extends Omit<StepNodeConfigurer<AllInPipelineStepDef, CommonStepDefModel>, 'switchUse' | 'use' | 'properties' | 'ports' | 'createSubNodes' | 'helpDocs'> {
+export type AndPrepare<F extends AllInPipelineStepDef, M extends CommonStepDefModel> = (def: F, model: M) => void;
+export type AndConfirmCommit = () => void;
+export type AndConfirm<F extends AllInPipelineStepDef, M extends CommonStepDefModel> = (model: M, def: F, file: FileDef, options: ConfirmNodeOptions) => ConfigurableElementAnchor | AndConfirmCommit;
+
+export interface CreateStepNodeConfigurerOptions<F extends AllInPipelineStepDef, M extends CommonStepDefModel> {
+	use: F['use'];
+	prepare?: ['replace', StepNodeConfigurer<F, M>['prepare']] | ['and', AndPrepare<F, M>];
+	switchUse?: ['replace', StepNodeConfigurer<F, M>['switchUse']] | ['keep', Array<string>];
+	confirm?: ['replace', StepNodeConfigurer<F, M>['confirm']] | ['and', AndConfirm<F, M>];
+	discard?: StepNodeConfigurer<F, M>['discard'];
+	properties?: Array<ConfigurableElement>;
+	ports?: Array<{ key: string, port: StepPort }>;
+	createSubNodes?: StepNodeConfigurer<F, M>['createSubNodes'];
+	findSubPorts?: StepNodeConfigurer<F, M>['findSubPorts'];
+	helpDocs: string;
+}
+
+export interface CommonStepDefsType
+	extends Omit<StepNodeConfigurer<AllInPipelineStepDef, CommonStepDefModel>, 'prepare' | 'switchUse' | 'confirm' | 'use' | 'properties' | 'ports' | 'createSubNodes' | 'helpDocs'> {
 	properties: CommonStepDefsProperties;
 	ports: CommonStepDefsPorts;
 	prebuiltPorts: PrebuiltStepDefsPorts;
+	prepare: <F extends AllInPipelineStepDef, M extends CommonStepDefModel>(def: F, and?: AndPrepare<F, M>) => M;
 	switchUse: (model: ConfigurableModel, keptPropNames: Array<string>, originalUse: PipelineStepDef['use']) => void;
+	confirm: <F extends AllInPipelineStepDef, M extends CommonStepDefModel>(model: M, def: F, file: FileDef, options: ConfirmNodeOptions, and?: AndConfirm<F, M>) => ConfigurableElementAnchor | true;
 	createSubNodes: (node: StepNodeModel, options: CreateSubNodesOptions) => Undefinable<Array<HandledNodeModel>>;
 	createSubNodesAndEndNode: (node: StepNodeModel, options: CreateSubNodesAndEndNodeOptions) => Undefinable<HandledNodeModel>;
 	createSetsLikeSubNodesAndEndNode: (node: StepNodeModel, options: CreateSubNodesOptions) => Undefinable<HandledNodeModel>;
 	createParallelSubNodesAndEndNode: (model: StepNodeModel, options: CreateSubNodesOptions) => Undefinable<HandledNodeModel>;
 	createMainContentElement: (...children: Array<ConfigurableElement>) => ConfigurableElement;
 	createSwitchableSnippetElement: <M extends CommonStepDefModel>(options: SwitchableSnippetElementOptions<M>) => ConfigurableElement;
+
+	createStepNodeConfigurer: <F extends AllInPipelineStepDef, M extends CommonStepDefModel>(options: CreateStepNodeConfigurerOptions<F, M>) => StepNodeConfigurer<F, M>;
 }

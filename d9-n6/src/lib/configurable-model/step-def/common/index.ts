@@ -1,3 +1,6 @@
+import {AllInPipelineStepDef, FileDef, PipelineStepDef} from '../../../definition';
+import {ConfigurableElementAnchor, ConfigurableModel} from '../../../edit-dialog';
+import {ConfirmNodeOptions, StepNodeConfigurer} from '../../types';
 import {confirm} from './confirm';
 import {
 	createParallelSubNodesAndEndNode,
@@ -28,7 +31,7 @@ import {
 } from './ports';
 import {prepare} from './prepare';
 import {switchUse} from './switch-use';
-import {CommonStepDefsType} from './types';
+import {CommonStepDefModel, CommonStepDefsType, CreateStepNodeConfigurerOptions} from './types';
 
 export * from './types';
 export * from './utils';
@@ -69,6 +72,78 @@ export const CommonStepDefs: CommonStepDefsType = {
 	createSetsLikeSubNodesAndEndNode, createParallelSubNodesAndEndNode,
 	findSubPorts,
 	createMainContentElement,
-	createSwitchableSnippetElement
+	createSwitchableSnippetElement,
+
+	createStepNodeConfigurer: <F extends AllInPipelineStepDef, M extends CommonStepDefModel>(options: CreateStepNodeConfigurerOptions<F, M>): StepNodeConfigurer<F, M> => {
+		const {
+			use,
+			prepare, switchUse, confirm, discard,
+			properties, ports,
+			createSubNodes, findSubPorts,
+			helpDocs
+		} = options;
+
+		return {
+			use,
+			prepare: (() => {
+				const [key, func] = prepare;
+				if (key === 'replace') {
+					return func;
+				} else if (key === 'and') {
+					return (def: F): M => CommonStepDefs.prepare(def, func);
+				} else {
+					console.warn(`No prepare defined for step[${use}], use default CommonStepDefs.prepare.`);
+					return (def: F): M => CommonStepDefs.prepare(def);
+				}
+			})(),
+			switchUse: (() => {
+				const [key, content] = switchUse;
+				if (key === 'replace') {
+					return content;
+				} else if (key === 'keep') {
+					return (model: ConfigurableModel, originalUse: PipelineStepDef['use']): ConfigurableModel => {
+						CommonStepDefs.switchUse(model, content, originalUse);
+						return model;
+					};
+				} else {
+					console.warn(`No switchUse defined for step[${use}], use default CommonStepDefs.switchUse.`);
+					return (model: ConfigurableModel, originalUse: PipelineStepDef['use']): ConfigurableModel => {
+						CommonStepDefs.switchUse(model, [], originalUse);
+						return model;
+					};
+				}
+			})(),
+			confirm: (() => {
+				const [key, func] = confirm;
+				if (key === 'replace') {
+					return func;
+				} else if (key === 'and') {
+					return (model: M, def: F, file: FileDef, options: ConfirmNodeOptions): ConfigurableElementAnchor | true => {
+						return CommonStepDefs.confirm(model, def, file, options, func);
+					};
+				} else {
+					console.warn(`No confirm defined for step[${use}], use default CommonStepDefs.confirm.`);
+					return (model: M, def: F, file: FileDef, options: ConfirmNodeOptions): ConfigurableElementAnchor | true => {
+						return CommonStepDefs.confirm(model, def, file, options);
+					};
+				}
+			})(),
+			discard: discard ?? CommonStepDefs.discard,
+			properties: [
+				...CommonStepDefs.properties.leadingGroup,
+				...(properties ?? []),
+				...CommonStepDefs.properties.tailingGroup
+			],
+			ports: [
+				...CommonStepDefs.prebuiltPorts.input,
+				...(ports ?? []),
+				...CommonStepDefs.prebuiltPorts.errorHandles,
+				...CommonStepDefs.prebuiltPorts.output
+			],
+			createSubNodes: createSubNodes ?? CommonStepDefs.createSubNodesAndEndNode,
+			findSubPorts: findSubPorts ?? CommonStepDefs.findSubPorts,
+			helpDocs
+		};
+	}
 };
 

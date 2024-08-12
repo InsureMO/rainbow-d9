@@ -1,12 +1,41 @@
+import {VUtils} from '@rainbow-d9/n1';
 import {AllInPipelineStepDef, FileDef} from '../../../definition';
 import {ConfigurableElementAnchor} from '../../../edit-dialog';
-import {ConfirmNodeOptions, StepNodeConfigurer} from '../../types';
-import {CommonStepDefModel, ErrorHandleType, MergeType} from './types';
+import {ConfirmNodeOptions} from '../../types';
+import {
+	AndConfirm,
+	AndConfirmCommit,
+	CommonStepDefModel,
+	CommonStepDefsType,
+	ErrorHandleType,
+	MergeType
+} from './types';
 
-export const confirm: StepNodeConfigurer<AllInPipelineStepDef, CommonStepDefModel>['confirm'] =
+export const confirm: CommonStepDefsType['confirm'] =
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
-	(model: CommonStepDefModel, def: AllInPipelineStepDef, _file: FileDef, options: ConfirmNodeOptions): ConfigurableElementAnchor | true => {
+	<F extends AllInPipelineStepDef, M extends CommonStepDefModel>(
+		model: M, def: F, file: FileDef, options: ConfirmNodeOptions, and?: AndConfirm<F, M>): ConfigurableElementAnchor | true => {
 		const {assistant} = options;
+
+		// TODO VALIDATE ALL COMMON PROPERTIES
+		// and
+		let resultOfAnd: true | ReturnType<AndConfirm<F, M>>;
+		if (and == null) {
+			resultOfAnd = true;
+		} else {
+			resultOfAnd = and(model, def, file, options);
+		}
+
+		let commitOfAnd: AndConfirmCommit;
+		if (typeof resultOfAnd === 'string') {
+			// something incorrect, return anchor
+			return resultOfAnd;
+		} else if (resultOfAnd === true) {
+			// do nothing
+			commitOfAnd = VUtils.noop;
+		} else {
+			commitOfAnd = resultOfAnd;
+		}
 
 		def.name = model.name;
 		def.use = model.use;
@@ -54,6 +83,8 @@ export const confirm: StepNodeConfigurer<AllInPipelineStepDef, CommonStepDefMode
 		confirmErrorHandling('uncatchable', model.temporary?.useErrorHandlesForUncatchable);
 		confirmErrorHandling('exposed', model.temporary?.useErrorHandlesForExposed);
 		confirmErrorHandling('any', model.temporary?.useErrorHandlesForAny);
+
+		commitOfAnd();
 
 		return true;
 	};
