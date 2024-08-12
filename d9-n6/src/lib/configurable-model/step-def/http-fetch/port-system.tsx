@@ -10,7 +10,7 @@ export const PortSystem = (props: StepPortProps<HttpStepDefModel>) => {
 
 	const {system} = def;
 	const exists = VUtils.isNotBlank(system);
+	const display = (system ?? '').trim();
 
-	return <PrePort label={Labels.StepHttpSystem} required={true}
-	                defined={exists} all={true} allAsGiven={(system ?? '').trim()}/>;
+	return <PrePort label={VUtils.blankThen(display, Labels.StepHttpSystem)} required={true} defined={exists}/>;
 };

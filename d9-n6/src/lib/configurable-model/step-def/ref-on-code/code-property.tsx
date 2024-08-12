@@ -7,23 +7,23 @@ import {
 	ConfigurableElementBadgeMissed,
 	ConfigurableElementEditorProps
 } from '../../../edit-dialog';
-import {Labels} from '../../../labels';
 import {PlaygroundModuleAssistant} from '../../../types';
 import {NotAvailableDropdownOption} from '../../not-available-dropdown-option';
 import {RefOnCodeStepDefModel} from './types';
 
 export interface CreateRefOnCodeCodePropertyOptions {
 	helpDoc: string;
+	label: ReactNode;
 	askOptions: (assistant: Required<PlaygroundModuleAssistant>) => DropdownOptions;
 }
 
 export const createRefOnCodeCodeProperty = (options: CreateRefOnCodeCodePropertyOptions): ConfigurableElement => {
-	const {helpDoc, askOptions} = options;
+	const {helpDoc, label, askOptions} = options;
 
 	return {
-		code: 'code', label: Labels.StepRefPipelineCode, anchor: 'code',
+		code: 'code', label, anchor: 'code',
 		badge: (model: RefOnCodeStepDefModel): ReactNode => {
-			if (VUtils.isNotBlank(model.property)) {
+			if (VUtils.isNotBlank(model.code)) {
 				return <ConfigurableElementBadgeChecked/>;
 			} else {
 				return <ConfigurableElementBadgeMissed/>;

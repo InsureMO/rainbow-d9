@@ -12,6 +12,24 @@ export const PlaygroundCreateDefaultStepBuild: Widget.AttributeValueBuild<Playgr
 		return Widget.createSyncSnippetBuild<PlaygroundModuleAssistant, 'createDefaultStep'>('createDefaultStep', []).build(value, list);
 	}
 };
+export const PlaygroundAskSystemsForHttpBuild: Widget.AttributeValueBuild<PlaygroundModuleAssistant['askSystemsForHttp'] | ExternalDefIndicator> = {
+	accept: (key: Widget.WidgetPropertyName) => key === 'httpSystems',
+	build: (value: Undefinable<string>, list: Semantic.ParsedListItemAttributePair): Undefinable<PlaygroundModuleAssistant['askSystemsForHttp'] | ExternalDefIndicator> => {
+		if (VUtils.isBlank(value)) {
+			return (void 0);
+		}
+		return Widget.createSyncSnippetBuild<PlaygroundModuleAssistant, 'askSystemsForHttp'>('askSystemsForHttp', []).build(value, list);
+	}
+};
+export const PlaygroundAskTypeOrmDatasourcesBuild: Widget.AttributeValueBuild<PlaygroundModuleAssistant['askTypeOrmDatasources'] | ExternalDefIndicator> = {
+	accept: (key: Widget.WidgetPropertyName) => key === 'typeOrmDatasources',
+	build: (value: Undefinable<string>, list: Semantic.ParsedListItemAttributePair): Undefinable<PlaygroundModuleAssistant['askTypeOrmDatasources'] | ExternalDefIndicator> => {
+		if (VUtils.isBlank(value)) {
+			return (void 0);
+		}
+		return Widget.createSyncSnippetBuild<PlaygroundModuleAssistant, 'askTypeOrmDatasources'>('askTypeOrmDatasources', []).build(value, list);
+	}
+};
 export const PlaygroundAskRefPipelinesBuild: Widget.AttributeValueBuild<PlaygroundModuleAssistant['askRefPipelines'] | ExternalDefIndicator> = {
 	accept: (key: Widget.WidgetPropertyName) => key === 'refPipelines',
 	build: (value: Undefinable<string>, list: Semantic.ParsedListItemAttributePair): Undefinable<PlaygroundModuleAssistant['askRefPipelines'] | ExternalDefIndicator> => {
@@ -30,15 +48,6 @@ export const PlaygroundAskRefStepsBuild: Widget.AttributeValueBuild<PlaygroundMo
 		return Widget.createSyncSnippetBuild<PlaygroundModuleAssistant, 'askRefSteps'>('askRefSteps', []).build(value, list);
 	}
 };
-export const PlaygroundaskSystemsForHttpBuild: Widget.AttributeValueBuild<PlaygroundModuleAssistant['askSystemsForHttp'] | ExternalDefIndicator> = {
-	accept: (key: Widget.WidgetPropertyName) => key === 'httpSystems',
-	build: (value: Undefinable<string>, list: Semantic.ParsedListItemAttributePair): Undefinable<PlaygroundModuleAssistant['askSystemsForHttp'] | ExternalDefIndicator> => {
-		if (VUtils.isBlank(value)) {
-			return (void 0);
-		}
-		return Widget.createSyncSnippetBuild<PlaygroundModuleAssistant, 'askSystemsForHttp'>('askSystemsForHttp', []).build(value, list);
-	}
-};
 
 export abstract class AbstractPlaygroundTranslator extends Widget.SpecificWidgetTranslator<string> {
 	public beautifyProperties<Def extends NodeDef>(def: Partial<Def>): Def {
@@ -51,7 +60,12 @@ export abstract class AbstractPlaygroundTranslator extends Widget.SpecificWidget
 
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	public getAttributeValueBuilders(): Array<Widget.AttributeValueBuild<any>> {
-		return [PlaygroundCreateDefaultStepBuild, PlaygroundAskRefPipelinesBuild, PlaygroundAskRefStepsBuild, PlaygroundaskSystemsForHttpBuild];
+		return [
+			PlaygroundCreateDefaultStepBuild,
+			PlaygroundAskSystemsForHttpBuild,
+			PlaygroundAskTypeOrmDatasourcesBuild,
+			PlaygroundAskRefPipelinesBuild, PlaygroundAskRefStepsBuild
+		];
 	}
 
 	public getAttributeNamesMapping(): Undefinable<Record<Widget.CustomAttributeName, Widget.WidgetPropertyName>> {
@@ -62,9 +76,10 @@ export abstract class AbstractPlaygroundTranslator extends Widget.SpecificWidget
 				return mapping;
 			}, {}),
 			[`${type}.defaultStep`]: 'assistant.createDefaultStep',
+			[`${type}.httpSystems`]: 'assistant.askSystemsForHttp',
+			[`${type}.typeOrmDatasources`]: 'assistant.askTypeOrmDatasources',
 			[`${type}.refPipelines`]: 'assistant.askRefPipelines',
-			[`${type}.refSteps`]: 'assistant.askRefSteps',
-			[`${type}.httpSystems`]: 'assistant.askSystemsForHttp'
+			[`${type}.refSteps`]: 'assistant.askRefSteps'
 		};
 	}
 }

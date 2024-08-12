@@ -11,6 +11,8 @@ import {docs as SetsStepDocs} from './sets-step';
 import {docs as SnippetStepDocs} from './snippet-step';
 import {docs as SnowflakeStepDocs} from './snowflake-step';
 import {docs as StepCommonDocs} from './step';
+import {docs as TypeOrmBySnippetStepDocs} from './typeorm-by-snippet-step';
+import {docs as TypeOrmCommonDocs} from './typeorm-step';
 
 export const HelpDocs = {
 	...PipelineDocs,
@@ -27,6 +29,9 @@ export const HelpDocs = {
 	...AsyncParallelStepDocs,
 	...EachStepDocs,
 	...ParallelStepDocs,
+	// typeorm
+	...TypeOrmCommonDocs,
+	...TypeOrmBySnippetStepDocs,
 	// ref
 	...RefPipelineDocs,
 	...RefStepDocs

@@ -12,6 +12,8 @@ export * from './async-sets';
 export * from './each';
 export * from './parallel';
 
+export * from './typeorm';
+
 export * from './ref-on-code';
 
 export * from './all-step-defs';

@@ -21,7 +21,7 @@ const SystemEditor = (props: ConfigurableElementEditorProps<HttpStepDefModel>) =
 
 	const systems = assistant.askSystemsForHttp();
 	const options: DropdownOptions = systems.map(system => {
-		return {value: system.code, label: system.name};
+		return {value: system.code, label: VUtils.blankThen(system.name, system.code)};
 	});
 	const onValueChange = (value: PropValue) => {
 		model.system = value as string;

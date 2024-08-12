@@ -12,12 +12,12 @@ export const createRefOnCodePortCode = (options: CreateRefOnCodeCodePortOptions)
 	const {label} = options;
 
 	return (props: StepPortProps<RefOnCodeStepDefModel>) => {
-		const {step: def} = props;
+		const {step: def, node: {assistant}} = props;
 
 		const {code} = def;
 		const exists = VUtils.isNotBlank(code);
+		const display = (code ?? '').trim();
 
-		return <PrePort label={label} required={true}
-		                defined={exists} all={true} allAsBoolean={true}/>;
+		return <PrePort label={VUtils.blankThen(display, label)} required={true} defined={exists}/>;
 	};
 };

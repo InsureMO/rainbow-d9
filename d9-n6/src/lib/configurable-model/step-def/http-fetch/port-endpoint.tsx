@@ -10,7 +10,7 @@ export const PortEndpoint = (props: StepPortProps<HttpStepDefModel>) => {
 
 	const {endpoint} = def;
 	const exists = VUtils.isNotBlank(endpoint);
+	const display = (endpoint ?? '').trim();
 
-	return <PrePort label={Labels.StepHttpEndpoint} required={true}
-	                defined={exists} all={true} allAsGiven={(endpoint ?? '').trim()}/>;
+	return <PrePort label={VUtils.blankThen(display, Labels.StepHttpEndpoint)} required={true} defined={exists}/>;
 };

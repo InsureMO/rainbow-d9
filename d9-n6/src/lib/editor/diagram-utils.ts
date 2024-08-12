@@ -284,9 +284,10 @@ export const createDiagramHandlers = (options: {
 		serialize: (def: FileDef) => serializer.stringify(def),
 		assistant: {
 			createDefaultStep: assistant?.createDefaultStep ?? DEFAULTS.createDefaultStep,
+			askTypeOrmDatasources: assistant?.askTypeOrmDatasources ?? (() => []),
+			askSystemsForHttp: assistant?.askSystemsForHttp ?? (() => []),
 			askRefPipelines: assistant?.askRefPipelines ?? (() => []),
-			askRefSteps: assistant?.askRefSteps ?? (() => []),
-			askSystemsForHttp: assistant?.askSystemsForHttp ?? (() => [])
+			askRefSteps: assistant?.askRefSteps ?? (() => [])
 		},
 		onContentChange: (serialize: () => string) => {
 			// sync to state ref first, in case somewhere outside force update widget

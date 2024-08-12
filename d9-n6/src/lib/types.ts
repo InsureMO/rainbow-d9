@@ -20,6 +20,17 @@ export interface PlaygroundSystemEndpointForHttp {
 	url?: string;
 }
 
+export interface PlaygroundSystemForHttp {
+	code: string;
+	name: string;
+	endpoints: Array<PlaygroundSystemEndpointForHttp>;
+}
+
+export interface PlaygroundTypeOrmDatasource {
+	code: string;
+	name: string;
+}
+
 export interface PlaygroundRefPipeline {
 	code: string;
 	name: string;
@@ -30,12 +41,6 @@ export interface PlaygroundRefStep {
 	name: string;
 }
 
-export interface PlaygroundSystemForHttp {
-	code: string;
-	name: string;
-	endpoints: Array<PlaygroundSystemEndpointForHttp>;
-}
-
 export interface PlaygroundModuleAssistant {
 	/**
 	 * create default step placeholder.
@@ -44,9 +49,10 @@ export interface PlaygroundModuleAssistant {
 	 * 2. first sub step of new step sets
 	 */
 	createDefaultStep?: () => PipelineStepDef;
+	askSystemsForHttp?: () => Array<PlaygroundSystemForHttp>;
+	askTypeOrmDatasources?: () => Array<PlaygroundTypeOrmDatasource>;
 	askRefPipelines?: () => Array<PlaygroundRefPipeline>;
 	askRefSteps?: () => Array<PlaygroundRefStep>;
-	askSystemsForHttp?: () => Array<PlaygroundSystemForHttp>;
 }
 
 export interface PlaygroundBehavior {

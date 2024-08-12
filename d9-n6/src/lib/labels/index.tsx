@@ -115,6 +115,9 @@ export const Labels = {
 	StepHttpReadResponse: <IntlLabel keys={['o23', 'step', 'http', 'read-response']} value="Read Response"/>,
 	StepHttpResponseErrorHandles: <IntlLabel keys={['o23', 'step', 'http', 'response-error-handles']}
 	                                         value="Response Error Handling"/>,
+	// typeorm
+	StepTypeOrmDatasource: <IntlLabel keys={['o23', 'step', 'typeorm', 'datasource']} value="Datasource"/>,
+	StepTypeOrmTransaction: <IntlLabel keys={['o23', 'step', 'typeorm', 'transaction']} value="Transaction"/>,
 	// ref pipeline
 	StepRefPipelineCode: <IntlLabel keys={['o23', 'step', 'ref-pipeline', 'code']} value="Call Pipeline"/>,
 	// ref step

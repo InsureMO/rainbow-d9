@@ -134,6 +134,20 @@ export interface ParallelPipelineStepDef extends SetsLikePipelineStepDef {
 	race?: boolean;
 }
 
+export interface TypeOrmPipelineStepDef extends AllInPipelineStepDef {
+	datasource?: string;
+	transaction?: string;
+}
+
+export interface TypeOrmOperationPipelineStepDef extends TypeOrmPipelineStepDef {
+	autonomous?: boolean;
+}
+
+export interface TypeOrmBySnippetPipelineStepDef extends TypeOrmOperationPipelineStepDef {
+	use: StandardPipelineStepRegisterKey.TYPEORM_BY_SNIPPET;
+	snippet?: string;
+}
+
 export interface RefOnCodePipelineStepDef extends AllInPipelineStepDef {
 	code?: string;
 }

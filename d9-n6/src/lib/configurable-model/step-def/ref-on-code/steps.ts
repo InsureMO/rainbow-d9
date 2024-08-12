@@ -1,3 +1,4 @@
+import {VUtils} from '@rainbow-d9/n1';
 import {DropdownOptions} from '@rainbow-d9/n2';
 import {ReactNode} from 'react';
 import {
@@ -21,27 +22,27 @@ import {RefOnCodeStepDefModel} from './types';
 
 export interface CreateRefOnCodeStepDefsOptions<F extends RefOnCodePipelineStepDef> {
 	use: F['use'];
-	portCodeLabel: ReactNode;
+	label: ReactNode;
 	askRefOptions: (assistant: Required<PlaygroundModuleAssistant>) => DropdownOptions;
 	elementCodeHelpDoc: string;
 	stepHelpDoc: string;
 }
 
 export const createRefOnCodeStepDefs = <F extends RefOnCodePipelineStepDef, M extends RefOnCodeStepDefModel>(options: CreateRefOnCodeStepDefsOptions<F>): StepNodeConfigurer<F, M> => {
-	const {use, portCodeLabel, askRefOptions, elementCodeHelpDoc, stepHelpDoc} = options;
+	const {use, label, askRefOptions, elementCodeHelpDoc, stepHelpDoc} = options;
 	return {
 		use,
 		prepare, switchUse, confirm, discard: CommonStepDefs.discard,
 		properties: [
 			...CommonStepDefs.properties.leadingGroup,
 			CommonStepDefs.createMainContentElement(createRefOnCodeCodeProperty({
-				helpDoc: elementCodeHelpDoc, askOptions: askRefOptions
+				label, askOptions: askRefOptions, helpDoc: elementCodeHelpDoc
 			})),
 			...CommonStepDefs.properties.tailingGroup
 		],
 		ports: [
 			...CommonStepDefs.prebuiltPorts.input,
-			{key: 'property', port: createRefOnCodePortCode({label: portCodeLabel})},
+			{key: 'code', port: createRefOnCodePortCode({label})},
 			...CommonStepDefs.prebuiltPorts.errorHandles,
 			...CommonStepDefs.prebuiltPorts.output
 		],
@@ -59,11 +60,11 @@ export const RefPipelineStepDefs: StepNodeConfigurer<RefPipelinePipelineStepDef,
 		use: StandardPipelineStepRegisterKey.REF_PIPELINE,
 		askRefOptions: assistant => {
 			return (assistant.askRefPipelines() ?? []).map(pipeline => {
-				return {value: pipeline.code, label: pipeline.name};
+				return {value: pipeline.code, label: VUtils.blankThen(pipeline.name, pipeline.code)};
 			});
 		},
 		elementCodeHelpDoc: HelpDocs.stepRefPipelineCode,
-		portCodeLabel: Labels.StepRefPipelineCode,
+		label: Labels.StepRefPipelineCode,
 		stepHelpDoc: HelpDocs.refPipelineStep
 	});
 registerStepDef(RefPipelineStepDefs);
@@ -77,11 +78,11 @@ export const RefStepStepDefs: StepNodeConfigurer<RefStepPipelineStepDef, RefStep
 		use: StandardPipelineStepRegisterKey.REF_STEP,
 		askRefOptions: assistant => {
 			return (assistant.askRefSteps() ?? []).map(pipeline => {
-				return {value: pipeline.code, label: pipeline.name};
+				return {value: pipeline.code, label: VUtils.blankThen(pipeline.name, pipeline.code)};
 			});
 		},
 		elementCodeHelpDoc: HelpDocs.stepRefStepCode,
-		portCodeLabel: Labels.StepRefStepCode,
+		label: Labels.StepRefStepCode,
 		stepHelpDoc: HelpDocs.refStepStep
 	});
 registerStepDef(RefStepStepDefs);

@@ -27,6 +27,7 @@ export interface ValueUtilsType {
 	readonly isBlank: (v?: AnyValue) => boolean;
 	readonly isNotBlank: (v2: AnyValue) => boolean;
 	readonly asUndefinedWhenBlank: <V>(v?: V) => Undefinable<V>;
+	readonly blankThen: (v: AnyValue, then: AnyValue | (() => AnyValue)) => AnyValue;
 	/**
 	 * check the given value is primitive type or not.
 	 * only string/number/boolean will be treated as primitive type.
@@ -56,6 +57,7 @@ export const VUtils: ValueUtilsType = {
 	isBlank: (v?: AnyValue) => v == null || (typeof v === 'string' && v.trim().length === 0),
 	isNotBlank: (v?: AnyValue) => v != null && `${v}`.trim().length !== 0,
 	asUndefinedWhenBlank: <T>(v?: T) => VUtils.isNotBlank(v) ? v : (void 0),
+	blankThen: (v: AnyValue, then: AnyValue | (() => AnyValue)) => VUtils.isBlank(v) ? (typeof then === 'function' ? then() : then) : v,
 	isPrimitive: (v?: AnyValue) => v != null && ['string', 'number', 'boolean', 'symbol', 'bigint'].includes(typeof v),
 	isNumber: (v?: AnyValue) => {
 		if (VUtils.isBlank(v)) {

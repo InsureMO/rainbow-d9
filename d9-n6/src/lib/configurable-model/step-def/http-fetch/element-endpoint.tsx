@@ -31,7 +31,7 @@ export const elementEndpoint: ConfigurableElement = {
 		const endpoints = selectedSystem?.endpoints ?? [];
 		const endpoint = VUtils.isBlank(model.endpoint) ? (void 0) : model.endpoint.trim();
 		const options: DropdownOptions = endpoints.map(endpoint => {
-			return {value: endpoint.code, label: endpoint.name};
+			return {value: endpoint.code, label: VUtils.blankThen(endpoint.name, endpoint.code)};
 		});
 		const onValueChange = (value: PropValue) => {
 			model.endpoint = value as string;
