@@ -4,6 +4,7 @@ import {PlaygroundModuleAssistant} from '@rainbow-d9/n6';
 import {useDemoMarkdown} from '../use-demo-markdown';
 import DemoData from './demo.json';
 import {markdown as DemoContent} from './demo.md';
+import {yaml as DemoYaml} from './demo.yaml';
 
 $d9n2.intl.labels['en-US'] = {
 	...($d9n2.intl.labels['en-US'] ?? {}),
@@ -13,111 +14,8 @@ $d9n2.intl.labels['en-US'] = {
 		}
 	}
 };
-DemoData.yaml = `code: ApiTest
-type: pipeline
-enabled: false
-route: /api/test
-method: get
-headers: true
-path-params:
-  - id
-  - name
-expose-headers:
-  x-a: aaa
-  x-b: bbb
+DemoData.yaml = DemoYaml;
 
-steps:
-  - name: Prepare Data
-    use: parallel    
-    steps:
-      - name: Prepare Codes
-        use: http-fetch
-        system: CodeService
-        endpoint: askProductCodes
-        responseErrorHandles:
-          400: |-
-            $.$errors.uncatchable({code: '000', reason: ''});
-      - name: Prepare Codes 2
-        use: http-get
-        system: CodeService
-        endpoint: askProductCategoryCodes
-      - name: Prepare Codes 3
-        use: http-post
-        system: AuthService
-        endpoint: checkToken
-  - name: Do validation
-    use: sets
-    steps:
-      - name: Validate name
-        use: sets
-        steps:
-          - name: Get first name
-            use: get-property
-            property: firstName
-            merge: firstName
-          - name: Validate first name
-            from-input: return $factor.firstName;
-            use: snippet
-          - name: Validate last name
-            use: snippet
-      - name: Validate age
-        use: snippet
-      - name: Validate country
-        use: snippet
-      - name: Validate address
-        use: sets
-        steps:
-          - name: "Validate address #1"
-            use: snippet
-      - name: Validate job
-        use: sets
-        steps:
-          - name: Validate job occupation
-            use: snippet
-    error-handles:
-      catchable:
-        - name: Catch catchable error
-          use: sets
-          steps:
-            - name: "Catch catchable #1"
-              use: snippet
-      uncatchable:
-        - name: Catch uncatchable error
-          use: snippet
-      exposed:
-        - name: Catch exposed error
-          use: snippet
-      any:
-        - name: Catch any error
-          use: snippet
-    to-output: $result
-  - name: Clean Data
-    use: sets
-    steps:
-      - name: Remove temporary
-        use: del-properties
-        property: $temp, $temporary
-      - name: Remove cache
-        use: del-property
-        property: $cache
-  - name: Create a sequence
-    use: snowflake
-    merge: snowflakeId
-  - name: Log data
-    use: async-sets
-    steps:
-      - name: Write log
-        use: snippet
-        snippet: $.$logger.log('Data received.', $factor);
-      - name: Write validation results to log
-        use: each
-        from-input: return $factor.results;
-        item-name: result
-        steps:
-          - name: Write validation result to log
-            use: snippet
-            snippet: $.$logger.log('Invalid thing detected.', $factor.result);
-`;
 export const O23Playground = () => {
 	const def = useDemoMarkdown(DemoContent);
 	const externalDefs = {
@@ -134,7 +32,19 @@ export const O23Playground = () => {
 					]
 				}
 			];
-		}) as PlaygroundModuleAssistant['askSystemsForHttp']
+		}) as PlaygroundModuleAssistant['askSystemsForHttp'],
+		refPipelines: (() => {
+			return [
+				{code: 'auth-by-token', name: 'Authenticate by token'},
+				{code: 'auth-by-account', name: 'Authenticate by account'}
+			];
+		}) as PlaygroundModuleAssistant['askRefPipelines'],
+		refSteps: (() => {
+			return [
+				{code: 'ask-roles', name: 'Ask user roles'},
+				{code: 'ask-permissions', name: 'Ask user permissions'}
+			];
+		}) as PlaygroundModuleAssistant['askRefSteps']
 	};
 	return <GlobalRoot>
 		<StandaloneRoot {...def} $root={DemoData} externalDefs={externalDefs}/>

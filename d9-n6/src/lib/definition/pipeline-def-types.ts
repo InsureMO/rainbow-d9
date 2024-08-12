@@ -133,3 +133,15 @@ export interface ParallelPipelineStepDef extends SetsLikePipelineStepDef {
 	cloneData?: string;
 	race?: boolean;
 }
+
+export interface RefOnCodePipelineStepDef extends AllInPipelineStepDef {
+	code?: string;
+}
+
+export interface RefPipelinePipelineStepDef extends RefOnCodePipelineStepDef {
+	use: StandardPipelineStepRegisterKey.REF_PIPELINE;
+}
+
+export interface RefStepPipelineStepDef extends RefOnCodePipelineStepDef {
+	use: StandardPipelineStepRegisterKey.REF_STEP;
+}

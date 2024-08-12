@@ -13,6 +13,8 @@ const NODE_STEP_SETS_COLOR = '#615cac';
 const NODE_ASYNC_SETS_STEP_COLOR = '#ff714b';
 const NODE_EACH_STEP_COLOR = '#c6a0d2';
 const NODE_PARALLEL_STEP_COLOR = '#4785ff';
+const NODE_REF_PIPELINE_STEP_COLOR = '#b1062f';
+const NODE_REF_STEP_STEP_COLOR = '#b1062f';
 const NEXT_STEP_PORT_COLOR = '#a3ab5b';
 const PREVIOUS_STEP_PORT_COLOR = '#8454aa';
 const PORT_FIRST_SUB_STEP_COLOR = '#8454aa';
@@ -263,6 +265,10 @@ export const PlaygroundCssVars = {
 	NODE_STEP_EACH_TITLE_BACKGROUND: `var(--o23-playground-node-step-each-title-background, linear-gradient(135deg, ${NODE_EACH_STEP_COLOR} 0%, ${color(NODE_EACH_STEP_COLOR).alpha(0.7)} 70%, ${color(NODE_EACH_STEP_COLOR).alpha(0.5)} 100%))`,
 	NODE_STEP_PARALLEL_BORDER: `var(--o23-playground-node-step-parallel-border, 2px solid ${NODE_PARALLEL_STEP_COLOR})`,
 	NODE_STEP_PARALLEL_TITLE_BACKGROUND: `var(--o23-playground-node-step-parallel-title-background, linear-gradient(135deg, ${NODE_PARALLEL_STEP_COLOR} 0%, ${color(NODE_PARALLEL_STEP_COLOR).alpha(0.7)} 70%, ${color(NODE_PARALLEL_STEP_COLOR).alpha(0.5)} 100%))`,
+	NODE_STEP_REF_PIPELINE_BORDER: `var(--o23-playground-node-step-ref-pipeline-border, 2px solid ${NODE_REF_PIPELINE_STEP_COLOR})`,
+	NODE_STEP_REF_PIPELINE_TITLE_BACKGROUND: `var(--o23-playground-node-step-ref-pipeline-title-background, linear-gradient(135deg, ${NODE_REF_PIPELINE_STEP_COLOR} 0%, ${color(NODE_REF_PIPELINE_STEP_COLOR).alpha(0.7)} 70%, ${color(NODE_REF_PIPELINE_STEP_COLOR).alpha(0.5)} 100%))`,
+	NODE_STEP_REF_STEP_BORDER: `var(--o23-playground-node-step-ref-pipeline-border, 2px solid ${NODE_REF_STEP_STEP_COLOR})`,
+	NODE_STEP_REF_STEP_TITLE_BACKGROUND: `var(--o23-playground-node-step-ref-pipeline-title-background, linear-gradient(135deg, ${NODE_REF_STEP_STEP_COLOR} 0%, ${color(NODE_REF_STEP_STEP_COLOR).alpha(0.7)} 70%, ${color(NODE_REF_STEP_STEP_COLOR).alpha(0.5)} 100%))`,
 	// snippet
 	SNIPPET_BORDER: `var(--o23-playground-snippet-border, ${CssVars.BORDER})`,
 	SNIPPET_BORDER_RADIUS: `var(--o23-playground-snippet-border-radius, ${CssVars.BORDER_RADIUS})`,

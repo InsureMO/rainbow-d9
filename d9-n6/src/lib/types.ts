@@ -20,6 +20,16 @@ export interface PlaygroundSystemEndpointForHttp {
 	url?: string;
 }
 
+export interface PlaygroundRefPipeline {
+	code: string;
+	name: string;
+}
+
+export interface PlaygroundRefStep {
+	code: string;
+	name: string;
+}
+
 export interface PlaygroundSystemForHttp {
 	code: string;
 	name: string;
@@ -34,8 +44,8 @@ export interface PlaygroundModuleAssistant {
 	 * 2. first sub step of new step sets
 	 */
 	createDefaultStep?: () => PipelineStepDef;
-	askRefPipelines?: () => Array<string>;
-	askRefSteps?: () => Array<string>;
+	askRefPipelines?: () => Array<PlaygroundRefPipeline>;
+	askRefSteps?: () => Array<PlaygroundRefStep>;
 	askSystemsForHttp?: () => Array<PlaygroundSystemForHttp>;
 }
 

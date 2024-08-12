@@ -75,6 +75,8 @@ export const Labels = {
 	StepUseAsyncSets: 'Async Sets',
 	StepUseEach: 'Each',
 	StepUseParallel: 'Parallel',
+	StepUseRefPipeline: 'Call Pipeline',
+	StepUseRefStep: 'Call Pipeline Step',
 	// step variables common labels
 	StepVariableIgnoreSnippet: <IntlLabel keys={['o23', 'step', 'common-variable', 'ignore-snippet']} value="Ignore"/>,
 	StepVariableUseSnippet: <IntlLabel keys={['o23', 'step', 'common-variable', 'use-snippet']} value="Use Snippet"/>,
@@ -113,6 +115,10 @@ export const Labels = {
 	StepHttpReadResponse: <IntlLabel keys={['o23', 'step', 'http', 'read-response']} value="Read Response"/>,
 	StepHttpResponseErrorHandles: <IntlLabel keys={['o23', 'step', 'http', 'response-error-handles']}
 	                                         value="Response Error Handling"/>,
+	// ref pipeline
+	StepRefPipelineCode: <IntlLabel keys={['o23', 'step', 'ref-pipeline', 'code']} value="Call Pipeline"/>,
+	// ref step
+	StepRefStepCode: <IntlLabel keys={['o23', 'step', 'ref-step', 'code']} value="Call Pipeline Step"/>,
 	// step each
 	StepEachOriginalContentName: <IntlLabel keys={['o23', 'step', 'each', 'original-content-name']}
 	                                        value="Origin Content Variable"/>,
