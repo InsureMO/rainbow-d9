@@ -5,6 +5,6 @@ export interface TypeOrmStepDefModel extends CommonStepDefModel {
 	transaction?: string;
 }
 
-export interface TypeOrmOperationStepDefModel extends TypeOrmStepDefModel {
+export interface TypeOrmWithAutonomousStepDefModel extends TypeOrmStepDefModel {
 	autonomous?: boolean;
 }

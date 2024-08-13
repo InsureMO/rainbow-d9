@@ -5,7 +5,7 @@ import {
 	ConfigurableElementBadgeSnippet
 } from '../../../../edit-dialog';
 import {Labels} from '../../../../labels';
-import {createSelectableJsEditor} from '../../../js-editor/selectable-js-editor';
+import {createSelectableSnippetEditor} from '../../../common';
 import {CommonStepDefModel, SwitchableSnippetElementOptions} from '../types';
 
 export const createSwitchableSnippetElement = <M extends CommonStepDefModel>(options: SwitchableSnippetElementOptions<M>): ConfigurableElement => {
@@ -26,7 +26,7 @@ export const createSwitchableSnippetElement = <M extends CommonStepDefModel>(opt
 				return notAvailableBadge ?? <ConfigurableElementBadgeNotAvailable/>;
 			}
 		},
-		editor: createSelectableJsEditor<M, boolean>({
+		editor: createSelectableSnippetEditor<M, boolean>({
 			// eslint-disable-next-line  @typescript-eslint/ban-ts-comment
 			// @ts-ignore
 			findFlag: (model) => model.temporary?.[temporaryProperty] ?? true,

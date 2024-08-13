@@ -8,7 +8,7 @@ import {
 import {HelpDocs} from '../../../../help-docs';
 import {Labels} from '../../../../labels';
 import {PlaygroundCssVars} from '../../../../widgets';
-import {createSelectableJsEditor} from '../../../js-editor/selectable-js-editor';
+import {createSelectableSnippetEditor} from '../../../common';
 import {CommonStepDefModel, ErrorHandleType} from '../types';
 
 const createBadge = (name: 'useErrorHandlesForCatchable' | 'useErrorHandlesForUncatchable' | 'useErrorHandlesForExposed' | 'useErrorHandlesForAny') => {
@@ -31,7 +31,7 @@ type EditorNames =
 	| { flag: 'useErrorHandlesForAny', snippet: 'any' };
 const createEditor = (names: EditorNames) => {
 	const {flag, snippet} = names;
-	return createSelectableJsEditor<CommonStepDefModel, ErrorHandleType>({
+	return createSelectableSnippetEditor<CommonStepDefModel, ErrorHandleType>({
 		findFlag: (model) => model.temporary?.[flag] ?? ErrorHandleType.NONE,
 		saveFlag: (model, value) => {
 			model.temporary = {...(model.temporary ?? {}), [flag]: value};

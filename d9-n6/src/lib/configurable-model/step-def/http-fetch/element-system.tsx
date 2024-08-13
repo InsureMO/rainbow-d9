@@ -1,15 +1,15 @@
 import {PropValue, VUtils} from '@rainbow-d9/n1';
 import {DropdownOptions, OptionItemSort, UnwrappedDropdown} from '@rainbow-d9/n2';
-import React, {ReactNode} from 'react';
+import React from 'react';
 import {
 	ConfigurableElement,
-	ConfigurableElementBadgeMissed,
 	ConfigurableElementEditorProps,
 	EditDialogEventTypes,
 	useEditDialogEventBus
 } from '../../../edit-dialog';
 import {HelpDocs} from '../../../help-docs';
 import {Labels} from '../../../labels';
+import {createValueOrMissBadge} from '../../common';
 import {NotAvailableDropdownOption} from '../../not-available-dropdown-option';
 import {CommonElementEditorStyles} from '../../styles';
 import {HttpStepDefModel} from './types';
@@ -48,13 +48,10 @@ const SystemEditor = (props: ConfigurableElementEditorProps<HttpStepDefModel>) =
 };
 export const elementSystem: ConfigurableElement = {
 	code: 'system', label: Labels.StepHttpSystem, anchor: 'system',
-	badge: (model: HttpStepDefModel): ReactNode => {
-		if (VUtils.isNotBlank(model.system)) {
-			return model.system.trim();
-		} else {
-			return <ConfigurableElementBadgeMissed/>;
-		}
-	},
+	badge: createValueOrMissBadge<HttpStepDefModel>({
+		check: model => VUtils.isNotBlank(model.system),
+		one: model => model.system.trim()
+	}),
 	editor: SystemEditor,
 	helpDoc: HelpDocs.stepHttpSystem
 };

@@ -139,11 +139,11 @@ export interface TypeOrmPipelineStepDef extends AllInPipelineStepDef {
 	transaction?: string;
 }
 
-export interface TypeOrmOperationPipelineStepDef extends TypeOrmPipelineStepDef {
+export interface TypeOrmWithAutonomousPipelineStepDef extends TypeOrmPipelineStepDef {
 	autonomous?: boolean;
 }
 
-export interface TypeOrmBySnippetPipelineStepDef extends TypeOrmOperationPipelineStepDef {
+export interface TypeOrmBySnippetPipelineStepDef extends TypeOrmWithAutonomousPipelineStepDef {
 	use: StandardPipelineStepRegisterKey.TYPEORM_BY_SNIPPET;
 	snippet?: string;
 }

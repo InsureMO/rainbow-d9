@@ -67,14 +67,18 @@ export const Labels = {
 	StepUseGetProperty: 'Get Property',
 	StepUseDelProperty: 'Del Property',
 	StepUseDelProperties: 'Del Properties (Alias for Del Property)',
+	StepUseDelPropertiesBadge: 'Del Properties',
 	StepUseSnowflake: 'Snowflake',
 	StepUseHttpFetch: 'Http Fetch',
 	StepUseHttpGet: 'Http Get (Using Get method for HTTP Fetch)',
+	StepUseHttpGetBadge: 'Http Get',
 	StepUseHttpPost: 'Http Post (Using Post method for HTTP Fetch)',
+	StepUseHttpPostBadge: 'Http Post',
 	StepUseSets: 'Sets',
 	StepUseAsyncSets: 'Async Sets',
 	StepUseEach: 'Each',
 	StepUseParallel: 'Parallel',
+	StepUseTypeormSnippet: 'Typeorm Snippet',
 	StepUseRefPipeline: 'Call Pipeline',
 	StepUseRefStep: 'Call Pipeline Step',
 	// step variables common labels
@@ -175,8 +179,8 @@ export const asUseLabelKey = (use: string) => {
 	return 'StepUse' + (use ?? '').trim().split('-').reduce((a, b) => a + b.charAt(0).toUpperCase() + b.slice(1), '');
 };
 
-export const asBeautifiedUse = (use: string) => {
-	return use.split('-').map(s => s.charAt(0).toUpperCase() + s.slice(1)).join(' ');
+export const askUseBadge = (use: string) => {
+	return Labels[asUseLabelKey(use) + 'Badge'] || Labels[asUseLabelKey(use)];
 };
 export const askUseLabel = (use: string) => {
 	return Labels[asUseLabelKey(use)];

@@ -6,5 +6,6 @@
 	- useN3, useN5, useN6, useN7, useN8
 	- allowDownloadImage, allowDownloadFile, allowUploadFile
 	- httpSystems: @ext.httpSystems
+	- typeOrmDatasources: @ext.typeOrmDatasources
 	- refPipelines: @ext.refPipelines
 	- refSteps: @ext.refSteps

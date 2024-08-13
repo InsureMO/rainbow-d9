@@ -3,14 +3,14 @@ import {DropdownOptions, OptionItemSort, UnwrappedDropdown} from '@rainbow-d9/n2
 import React, {ReactNode} from 'react';
 import {ConfigurableElement, ConfigurableElementEditorProps} from '../../../../edit-dialog';
 import {HelpDocs} from '../../../../help-docs';
-import {asBeautifiedUse, askUseLabel, Labels} from '../../../../labels';
+import {askUseBadge, askUseLabel, Labels} from '../../../../labels';
 import {CommonElementEditorStyles} from '../../../styles';
 import {AllStepDefsAsArray, findStepDef} from '../../all-step-defs';
 import {CommonStepDefModel} from '../types';
 
 export const elementUse: ConfigurableElement = {
 	code: 'use', label: Labels.Use, anchor: 'use',
-	badge: (model: CommonStepDefModel): ReactNode => asBeautifiedUse(model.use),
+	badge: (model: CommonStepDefModel): ReactNode => askUseBadge(model.use),
 	editor: (props: ConfigurableElementEditorProps<CommonStepDefModel>) => {
 		const {model, onValueChanged} = props;
 		const onValueChange = (value: PropValue) => {

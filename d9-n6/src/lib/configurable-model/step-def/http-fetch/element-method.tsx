@@ -1,10 +1,11 @@
 import {PropValue, VUtils} from '@rainbow-d9/n1';
 import {DropdownOptions, OptionItemSort, UnwrappedDropdown} from '@rainbow-d9/n2';
-import React, {ReactNode} from 'react';
+import React from 'react';
 import {StandardPipelineStepRegisterKey} from '../../../definition';
 import {ConfigurableElement, ConfigurableElementEditorProps} from '../../../edit-dialog';
 import {HelpDocs} from '../../../help-docs';
 import {Labels} from '../../../labels';
+import {createValueOrAnotherBadge} from '../../common';
 import {NotAvailableDropdownOption} from '../../not-available-dropdown-option';
 import {CommonElementEditorStyles} from '../../styles';
 import {HttpStepDefModel} from './types';
@@ -45,13 +46,11 @@ const MethodEditor = (props: ConfigurableElementEditorProps<HttpStepDefModel>) =
 };
 export const elementMethod: ConfigurableElement = {
 	code: 'method', label: Labels.StepHttpMethod, anchor: 'method',
-	badge: (model: HttpStepDefModel): ReactNode => {
-		if (VUtils.isNotBlank(model.method)) {
-			return model.method.trim();
-		} else {
-			return 'POST';
-		}
-	},
+	badge: createValueOrAnotherBadge<HttpStepDefModel>({
+		check: model => VUtils.isNotBlank(model.method),
+		one: model => model.method.trim().toUpperCase(),
+		another: 'POST'
+	}),
 	changeBy: ['use'],
 	editor: MethodEditor,
 	helpDoc: HelpDocs.stepHttpMethod

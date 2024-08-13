@@ -1,36 +1,82 @@
+import {VUtils} from '@rainbow-d9/n1';
 import {ParallelPipelineStepDef, StandardPipelineStepRegisterKey} from '../../../definition';
+import {ConfigurableElementAnchor} from '../../../edit-dialog';
 import {HelpDocs} from '../../../help-docs';
-import {StepNodeConfigurer} from '../../types';
+import {Labels} from '../../../labels';
+import {PlaygroundCssVars} from '../../../widgets';
+import {
+	createBoolEditor,
+	createCheckOrIgnoreBadge,
+	createPrePortBoolWithKey,
+	createSnippetEditor,
+	createYesOrNoBadge
+} from '../../common';
 import {registerStepDef} from '../all-step-defs';
-import {CommonStepDefs} from '../common';
-import {confirm} from './confirm';
-import {createSubNodes} from './create-sub-nodes';
-import {elementCloneData} from './element-clone-data';
-import {elementRace} from './element-race';
-import {findSubPorts} from './find-sub-ports';
-import {PortRace} from './port-race';
-import {prepare} from './prepare';
-import {switchUse} from './switch-use';
-import {ParallelStepDefModel} from './types';
+import {AndConfirmCommit, CommonStepDefModel, CommonStepDefs} from '../common';
 
-export * from './types';
+export interface ParallelStepDefModel extends CommonStepDefModel {
+	use: StandardPipelineStepRegisterKey.PARALLEL_SETS;
+	cloneData?: string;
+	race?: boolean;
+}
 
-export const ParallelStepDefs: StepNodeConfigurer<ParallelPipelineStepDef, ParallelStepDefModel> = {
-	use: StandardPipelineStepRegisterKey.PARALLEL_SETS,
-	prepare, switchUse, confirm, discard: CommonStepDefs.discard,
-	properties: [
-		...CommonStepDefs.properties.leadingGroup,
-		CommonStepDefs.createMainContentElement(elementRace, elementCloneData),
-		...CommonStepDefs.properties.tailingGroup
-	],
-	ports: [
-		...CommonStepDefs.prebuiltPorts.input,
-		{key: 'race', port: PortRace},
-		{key: 'steps', port: CommonStepDefs.prebuiltPorts.steps},
-		...CommonStepDefs.prebuiltPorts.errorHandles,
-		...CommonStepDefs.prebuiltPorts.output
-	],
-	createSubNodes, findSubPorts,
-	helpDocs: HelpDocs.parallelStep
-};
+export const ParallelStepDefs =
+	CommonStepDefs.createStepNodeConfigurer<ParallelPipelineStepDef, ParallelStepDefModel>({
+		use: StandardPipelineStepRegisterKey.PARALLEL_SETS,
+		prepare: ['and', (def, model) => {
+			model.cloneData = def.cloneData;
+			model.race = def.race;
+		}],
+		switchUse: ['keep', ['cloneData', 'race', 'steps']],
+		// eslint-disable-next-line @typescript-eslint/no-unused-vars
+		confirm: ['and', (model, def, _file, _options): ConfigurableElementAnchor | AndConfirmCommit => {
+			// TODO VALIDATE PROPERTIES
+			return () => {
+				if (VUtils.isBlank(model.cloneData)) {
+					delete def.cloneData;
+				} else {
+					def.cloneData = model.cloneData.trim();
+				}
+				if (VUtils.isBlank(model.race)) {
+					delete def.race;
+				} else {
+					def.race = model.race;
+				}
+			};
+		}],
+		properties: [
+			CommonStepDefs.createMainContentElement({
+				code: 'race', label: Labels.StepParallelRace, anchor: 'race',
+				badge: createYesOrNoBadge<ParallelStepDefModel>({check: model => model.race === true}),
+				editor: createBoolEditor<ParallelStepDefModel>({
+					getValue: model => model.race,
+					setValue: (model, value) => {
+						if (value === true) {
+							model.race = true;
+						} else {
+							delete model.race;
+						}
+					}
+				}),
+				helpDoc: HelpDocs.stepParallelRace
+			}, {
+				code: 'clone-data', label: Labels.StepParallelCloneData, anchor: 'clone-data',
+				badge: createCheckOrIgnoreBadge<ParallelStepDefModel>({check: model => VUtils.isNotBlank(model.snippet)}),
+				editor: createSnippetEditor<ParallelStepDefModel>({
+					getValue: model => model.cloneData,
+					setValue: (model, value) => model.cloneData = value,
+					height: PlaygroundCssVars.SNIPPET_PARALLEL_CLONE_DATA_HEIGHT
+				}),
+				helpDoc: HelpDocs.stepParallelCloneData
+			})
+		],
+		ports: [
+			createPrePortBoolWithKey<ParallelStepDefModel>({
+				key: 'race', label: Labels.StepParallelRace, getValue: model => model.race
+			}),
+			{key: 'steps', port: CommonStepDefs.prebuiltPorts.steps}
+		],
+		createSubNodes: CommonStepDefs.createParallelSubNodesAndEndNode,
+		helpDocs: HelpDocs.parallelStep
+	});
 registerStepDef(ParallelStepDefs);

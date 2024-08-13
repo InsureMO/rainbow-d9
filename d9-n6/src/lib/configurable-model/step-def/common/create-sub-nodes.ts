@@ -7,10 +7,10 @@ import {
 } from '../../../definition';
 import {HandledNodeModel, JoinEndNodeModel, StepNodeEntityType, StepNodeModel} from '../../../diagram';
 import {CreateSubNodesOptions} from '../../types';
-import {CommonStepDefs, ErrorHandlesPortModel} from './index';
 import {
 	AnyErrorHandlePortModel,
 	CatchableErrorHandlePortModel,
+	ErrorHandlesPortModel,
 	ExposedErrorHandlePortModel,
 	StepsPortModel,
 	UncatchableErrorHandlePortModel
@@ -173,7 +173,7 @@ export const createSetsLikeSubNodesAndEndNode: CommonStepDefsType['createSetsLik
 
 export const createParallelSubNodesAndEndNode: CommonStepDefsType['createParallelSubNodesAndEndNode'] =
 	(model: StepNodeModel, options: CreateSubNodesOptions): Undefinable<HandledNodeModel> => {
-		return CommonStepDefs.createSubNodesAndEndNode(model, {
+		return createSubNodesAndEndNode(model, {
 			...options,
 			createSpecificSubNodes: (_node: StepNodeModel, options: CreateSubNodesOptions): Undefinable<Array<HandledNodeModel>> => {
 				const step = model.step as SetsLikePipelineStepDef;

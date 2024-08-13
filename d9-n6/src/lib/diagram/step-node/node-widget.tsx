@@ -4,7 +4,7 @@ import React from 'react';
 import styled from 'styled-components';
 import {findStepDef, FirstSubStepPortModel, FirstSubStepPortWidget} from '../../configurable-model';
 import {StepDialogContent} from '../../edit-dialog';
-import {asBeautifiedUse, Labels} from '../../labels';
+import {askUseBadge, Labels} from '../../labels';
 import {PlaygroundEventTypes, usePlaygroundEventBus} from '../../playground-event-bus';
 import {PlaygroundCssVars} from '../../widgets';
 import {
@@ -121,7 +121,7 @@ export const StepNodeWidget = (props: StepNodeWidgetProps) => {
 		<StepNodeHeader data-use={use}>
 			<StepNodeTitle>{(def.name ?? '').trim() || Labels.StepNodeNoname}</StepNodeTitle>
 			<NodeTitleSpreader/>
-			<StepNodeSecondTitle>{asBeautifiedUse(use)}</StepNodeSecondTitle>
+			<StepNodeSecondTitle>{askUseBadge(use)}</StepNodeSecondTitle>
 		</StepNodeHeader>
 		<StepNodeBody data-use={use}>
 			{StepDefs.ports.map(({key, port: StepPort}) => {

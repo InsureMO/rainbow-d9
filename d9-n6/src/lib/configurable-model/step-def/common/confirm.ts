@@ -85,6 +85,8 @@ export const confirm: CommonStepDefsType['confirm'] =
 		confirmErrorHandling('any', model.temporary?.useErrorHandlesForAny);
 
 		commitOfAnd();
+		// trigger change
+		options.handlers.onChange();
 
 		return true;
 	};

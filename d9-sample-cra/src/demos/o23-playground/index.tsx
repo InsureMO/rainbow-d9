@@ -33,6 +33,12 @@ export const O23Playground = () => {
 				}
 			];
 		}) as PlaygroundModuleAssistant['askSystemsForHttp'],
+		typeOrmDatasources: (() => {
+			return [
+				{code: 'db-auth', name: 'Account DB'},
+				{code: 'db-data', name: 'Business Data DB'}
+			];
+		}) as PlaygroundModuleAssistant['askTypeOrmDatasources'],
 		refPipelines: (() => {
 			return [
 				{code: 'auth-by-token', name: 'Authenticate by token'},

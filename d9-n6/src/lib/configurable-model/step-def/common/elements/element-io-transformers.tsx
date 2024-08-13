@@ -10,7 +10,7 @@ import {
 import {HelpDocs} from '../../../../help-docs';
 import {Labels} from '../../../../labels';
 import {PlaygroundCssVars} from '../../../../widgets';
-import {createSelectableJsEditor} from '../../../js-editor/selectable-js-editor';
+import {createSelectableSnippetEditor} from '../../../common';
 import {CommonElementEditorStyles} from '../../../styles';
 import {VerticalLinesEditor} from '../../../vertical-lines-editor';
 import {CommonStepDefModel, MergeType} from '../types';
@@ -29,7 +29,7 @@ type EditorNames =
 	| { flag: 'toOutputAsIs', snippet: 'toOutput' };
 const createEditor = (names: EditorNames) => {
 	const {flag, snippet} = names;
-	return createSelectableJsEditor<CommonStepDefModel, boolean>({
+	return createSelectableSnippetEditor<CommonStepDefModel, boolean>({
 		findFlag: (model) => model.temporary?.[flag] ?? true,
 		saveFlag: (model, value) => {
 			model.temporary = {...(model.temporary ?? {}), [flag]: value};

@@ -43,6 +43,14 @@ steps:
         endpoint: checkToken
     $diagram:
       $foldSubSteps: true
+  - name: TypeORM
+    use: sets
+    steps:
+      - name: By snippet
+        use: typeorm-snippet
+        datasource: db-data
+    $diagram:
+      $foldSubSteps: true
   - name: Do validation
     use: sets
     steps:

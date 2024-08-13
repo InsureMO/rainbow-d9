@@ -1,34 +1,66 @@
+import {VUtils} from '@rainbow-d9/n1';
 import {EachPipelineStepDef, StandardPipelineStepRegisterKey} from '../../../definition';
+import {ConfigurableElementAnchor} from '../../../edit-dialog';
 import {HelpDocs} from '../../../help-docs';
-import {StepNodeConfigurer} from '../../types';
+import {Labels} from '../../../labels';
+import {createCheckOrUseDefaultBadge, createStrEditor} from '../../common';
 import {registerStepDef} from '../all-step-defs';
-import {CommonStepDefs} from '../common';
-import {confirm} from './confirm';
-import {createSubNodes} from './create-sub-nodes';
-import {elementItemName} from './element-item-name';
-import {elementOriginalContentName} from './element-original-content-name';
-import {findSubPorts} from './find-sub-ports';
-import {prepare} from './prepare';
-import {switchUse} from './switch-use';
-import {EachStepDefModel} from './types';
+import {AndConfirmCommit, CommonStepDefModel, CommonStepDefs} from '../common';
 
-export * from './types';
+export interface EachStepDefModel extends CommonStepDefModel {
+	use: StandardPipelineStepRegisterKey.EACH_SETS;
+	originalContentName?: string;
+	itemName?: string;
+}
 
-export const EachStepDefs: StepNodeConfigurer<EachPipelineStepDef, EachStepDefModel> = {
-	use: StandardPipelineStepRegisterKey.EACH_SETS,
-	prepare, switchUse, confirm, discard: CommonStepDefs.discard,
-	properties: [
-		...CommonStepDefs.properties.leadingGroup,
-		CommonStepDefs.createMainContentElement(elementOriginalContentName, elementItemName),
-		...CommonStepDefs.properties.tailingGroup
-	],
-	ports: [
-		...CommonStepDefs.prebuiltPorts.input,
-		{key: 'steps', port: CommonStepDefs.prebuiltPorts.steps},
-		...CommonStepDefs.prebuiltPorts.errorHandles,
-		...CommonStepDefs.prebuiltPorts.output
-	],
-	createSubNodes, findSubPorts,
-	helpDocs: HelpDocs.eachStep
-};
+export const EachStepDefs =
+	CommonStepDefs.createStepNodeConfigurer<EachPipelineStepDef, EachStepDefModel>({
+		use: StandardPipelineStepRegisterKey.EACH_SETS,
+		prepare: ['and', (def, model) => {
+			model.originalContentName = def.originalContentName;
+			model.itemName = def.itemName;
+		}],
+		switchUse: ['keep', ['originalContentName', 'itemName', 'steps']],
+		// eslint-disable-next-line @typescript-eslint/no-unused-vars
+		confirm: ['and', (model, def, _file, options): ConfigurableElementAnchor | AndConfirmCommit => {
+			// TODO VALIDATE PROPERTIES
+			return () => {
+				if (VUtils.isBlank(model.originalContentName)) {
+					delete def.originalContentName;
+				} else {
+					def.originalContentName = model.originalContentName.trim();
+				}
+				if (VUtils.isBlank(model.itemName)) {
+					delete def.itemName;
+				} else {
+					def.itemName = model.itemName.trim();
+				}
+			};
+		}],
+		properties: [
+			CommonStepDefs.createMainContentElement({
+				code: 'original-content-name', label: Labels.StepEachOriginalContentName,
+				anchor: 'original-content-name',
+				badge: createCheckOrUseDefaultBadge<EachStepDefModel>({check: model => VUtils.isNotBlank(model.originalContentName)}),
+				editor: createStrEditor<EachStepDefModel>({
+					getValue: model => model.originalContentName,
+					setValue: (model, value) => model.originalContentName = value,
+					placeholder: '$content'
+				}),
+				helpDoc: HelpDocs.stepEachOriginalContentName
+			}, {
+				code: 'item-name', label: Labels.StepEachItemName, anchor: 'item-name',
+				badge: createCheckOrUseDefaultBadge<EachStepDefModel>({check: model => VUtils.isNotBlank(model.itemName)}),
+				editor: createStrEditor<EachStepDefModel>({
+					getValue: model => model.itemName,
+					setValue: (model, value) => model.itemName = value,
+					placeholder: '$item'
+				}),
+				helpDoc: HelpDocs.stepEachItemName
+			})
+		],
+		ports: [{key: 'steps', port: CommonStepDefs.prebuiltPorts.steps}],
+		createSubNodes: CommonStepDefs.createSetsLikeSubNodesAndEndNode,
+		helpDocs: HelpDocs.eachStep
+	});
 registerStepDef(EachStepDefs);

@@ -1,26 +1,20 @@
 import {PropValue, VUtils} from '@rainbow-d9/n1';
 import {DropdownOptions, OptionItemSort, UnwrappedDropdown} from '@rainbow-d9/n2';
-import React, {ReactNode} from 'react';
-import {
-	ConfigurableElement,
-	ConfigurableElementBadgeMissed,
-	ConfigurableElementEditorProps
-} from '../../../edit-dialog';
+import React from 'react';
+import {ConfigurableElement, ConfigurableElementEditorProps} from '../../../edit-dialog';
 import {HelpDocs} from '../../../help-docs';
 import {Labels} from '../../../labels';
+import {createValueOrMissBadge} from '../../common';
 import {NotAvailableDropdownOption} from '../../not-available-dropdown-option';
 import {CommonElementEditorStyles} from '../../styles';
 import {HttpStepDefModel} from './types';
 
 export const elementEndpoint: ConfigurableElement = {
 	code: 'endpoint', label: Labels.StepHttpEndpoint, anchor: 'endpoint',
-	badge: (model: HttpStepDefModel): ReactNode => {
-		if (VUtils.isNotBlank(model.endpoint)) {
-			return model.endpoint.trim();
-		} else {
-			return <ConfigurableElementBadgeMissed/>;
-		}
-	},
+	badge: createValueOrMissBadge<HttpStepDefModel>({
+		check: model => VUtils.isNotBlank(model.endpoint),
+		one: model => model.endpoint.trim()
+	}),
 	changeBy: ['system'],
 	editor: (props: ConfigurableElementEditorProps<HttpStepDefModel>) => {
 		const {model, onValueChanged, assistant} = props;

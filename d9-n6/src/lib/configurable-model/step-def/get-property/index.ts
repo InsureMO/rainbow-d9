@@ -1,32 +1,44 @@
+import {VUtils} from '@rainbow-d9/n1';
 import {GetPropertyPipelineStepDef, StandardPipelineStepRegisterKey} from '../../../definition';
+import {ConfigurableElementAnchor} from '../../../edit-dialog';
 import {HelpDocs} from '../../../help-docs';
-import {StepNodeConfigurer} from '../../types';
+import {Labels} from '../../../labels';
+import {createCheckOrMissBadge, createPrePortExistsWithKey, createStrEditor} from '../../common';
 import {registerStepDef} from '../all-step-defs';
-import {CommonStepDefs} from '../common';
-import {confirm} from './confirm';
-import {elementProperty} from './element-property';
-import {PortProperty} from './port-property';
-import {prepare} from './prepare';
-import {switchUse} from './switch-use';
-import {GetPropertyStepDefModel} from './types';
+import {AndConfirmCommit, CommonStepDefModel, CommonStepDefs} from '../common';
 
-export * from './types';
+export interface GetPropertyStepDefModel extends CommonStepDefModel {
+	use: StandardPipelineStepRegisterKey.GET_PROPERTY;
+	property?: string;
+}
 
-export const GetPropertyStepDefs: StepNodeConfigurer<GetPropertyPipelineStepDef, GetPropertyStepDefModel> = {
-	use: StandardPipelineStepRegisterKey.GET_PROPERTY,
-	prepare, switchUse, confirm, discard: CommonStepDefs.discard,
-	properties: [
-		...CommonStepDefs.properties.leadingGroup,
-		CommonStepDefs.createMainContentElement(elementProperty),
-		...CommonStepDefs.properties.tailingGroup
-	],
-	ports: [
-		...CommonStepDefs.prebuiltPorts.input,
-		{key: 'property', port: PortProperty},
-		...CommonStepDefs.prebuiltPorts.errorHandles,
-		...CommonStepDefs.prebuiltPorts.output
-	],
-	createSubNodes: CommonStepDefs.createSubNodesAndEndNode, findSubPorts: CommonStepDefs.findSubPorts,
-	helpDocs: HelpDocs.getPropertyStep
-};
+export const GetPropertyStepDefs =
+	CommonStepDefs.createStepNodeConfigurer<GetPropertyPipelineStepDef, GetPropertyStepDefModel>({
+		use: StandardPipelineStepRegisterKey.GET_PROPERTY,
+		prepare: ['and', (def, model) => model.property = def.property],
+		switchUse: ['keep', ['property']],
+		// eslint-disable-next-line @typescript-eslint/no-unused-vars
+		confirm: ['and', (model, def, _file, _options): ConfigurableElementAnchor | AndConfirmCommit => {
+			// TODO VALIDATE PROPERTY
+			return () => def.property = (model.property ?? '').trim();
+		}],
+		properties: [
+			CommonStepDefs.createMainContentElement({
+				code: 'property', label: Labels.StepGetPropertyProperty, anchor: 'property',
+				badge: createCheckOrMissBadge<GetPropertyStepDefModel>({check: model => VUtils.isNotBlank(model.property)}),
+				editor: createStrEditor<GetPropertyStepDefModel>({
+					getValue: model => model.property,
+					setValue: (model, value) => model.property = value
+				}),
+				helpDoc: HelpDocs.stepGetPropertyProperty
+			})
+		],
+		ports: [
+			createPrePortExistsWithKey<GetPropertyStepDefModel>({
+				key: 'property', label: Labels.StepGetPropertyProperty,
+				getValue: model => model.property
+			})
+		],
+		helpDocs: HelpDocs.delPropertyStep
+	});
 registerStepDef(GetPropertyStepDefs);

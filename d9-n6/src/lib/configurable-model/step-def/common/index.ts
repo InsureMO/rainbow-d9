@@ -87,46 +87,49 @@ export const CommonStepDefs: CommonStepDefsType = {
 		return {
 			use,
 			prepare: (() => {
-				const [key, func] = prepare;
-				if (key === 'replace') {
-					return func;
-				} else if (key === 'and') {
-					return (def: F): M => CommonStepDefs.prepare(def, func);
-				} else {
-					console.warn(`No prepare defined for step[${use}], use default CommonStepDefs.prepare.`);
-					return (def: F): M => CommonStepDefs.prepare(def);
+				const [key, func] = prepare ?? [];
+				switch (key) {
+					case 'replace':
+						return func;
+					case 'and':
+						return (def: F): M => CommonStepDefs.prepare(def, func);
+					default:
+						console.warn(`No prepare defined for step[${use}], use default CommonStepDefs.prepare.`);
+						return (def: F): M => CommonStepDefs.prepare(def);
 				}
 			})(),
 			switchUse: (() => {
-				const [key, content] = switchUse;
-				if (key === 'replace') {
-					return content;
-				} else if (key === 'keep') {
-					return (model: ConfigurableModel, originalUse: PipelineStepDef['use']): ConfigurableModel => {
-						CommonStepDefs.switchUse(model, content, originalUse);
-						return model;
-					};
-				} else {
-					console.warn(`No switchUse defined for step[${use}], use default CommonStepDefs.switchUse.`);
-					return (model: ConfigurableModel, originalUse: PipelineStepDef['use']): ConfigurableModel => {
-						CommonStepDefs.switchUse(model, [], originalUse);
-						return model;
-					};
+				const [key, content] = switchUse ?? [];
+				switch (key) {
+					case 'replace':
+						return content;
+					case 'keep':
+						return (model: ConfigurableModel, originalUse: PipelineStepDef['use']): ConfigurableModel => {
+							CommonStepDefs.switchUse(model, content, originalUse);
+							return model;
+						};
+					default:
+						console.warn(`No switchUse defined for step[${use}], use default CommonStepDefs.switchUse.`);
+						return (model: ConfigurableModel, originalUse: PipelineStepDef['use']): ConfigurableModel => {
+							CommonStepDefs.switchUse(model, [], originalUse);
+							return model;
+						};
 				}
 			})(),
 			confirm: (() => {
-				const [key, func] = confirm;
-				if (key === 'replace') {
-					return func;
-				} else if (key === 'and') {
-					return (model: M, def: F, file: FileDef, options: ConfirmNodeOptions): ConfigurableElementAnchor | true => {
-						return CommonStepDefs.confirm(model, def, file, options, func);
-					};
-				} else {
-					console.warn(`No confirm defined for step[${use}], use default CommonStepDefs.confirm.`);
-					return (model: M, def: F, file: FileDef, options: ConfirmNodeOptions): ConfigurableElementAnchor | true => {
-						return CommonStepDefs.confirm(model, def, file, options);
-					};
+				const [key, func] = confirm ?? [];
+				switch (key) {
+					case 'replace':
+						return func;
+					case 'and':
+						return (model: M, def: F, file: FileDef, options: ConfirmNodeOptions): ConfigurableElementAnchor | true => {
+							return CommonStepDefs.confirm(model, def, file, options, func);
+						};
+					default:
+						console.warn(`No confirm defined for step[${use}], use default CommonStepDefs.confirm.`);
+						return (model: M, def: F, file: FileDef, options: ConfirmNodeOptions): ConfigurableElementAnchor | true => {
+							return CommonStepDefs.confirm(model, def, file, options);
+						};
 				}
 			})(),
 			discard: discard ?? CommonStepDefs.discard,

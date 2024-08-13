@@ -1,11 +1,12 @@
 import {PropValue, VUtils} from '@rainbow-d9/n1';
 import {CssVars, UnwrappedCheckboxes, UnwrappedDecorateInput} from '@rainbow-d9/n2';
-import React, {ReactNode, useRef} from 'react';
+import React, {useRef} from 'react';
 import styled from 'styled-components';
 import {ConfigurableElement, ConfigurableElementEditorProps} from '../../../edit-dialog';
 import {NavigatorElementBadgeWrapper} from '../../../edit-dialog/widgets';
 import {HelpDocs} from '../../../help-docs';
 import {Labels} from '../../../labels';
+import {createValueOrAnotherBadge} from '../../common';
 import {HttpStepDefModel} from './types';
 
 const TimeoutEditor = styled.div`
@@ -78,15 +79,13 @@ const MethodEditor = (props: ConfigurableElementEditorProps<HttpStepDefModel>) =
 };
 export const elementTimeout: ConfigurableElement = {
 	code: 'timeout', label: Labels.StepHttpTimeout, anchor: 'timeout',
-	badge: (model: HttpStepDefModel): ReactNode => {
-		if (VUtils.isNotBlank(model.timeout)) {
-			return model.timeout;
-		} else {
-			return <NavigatorElementBadgeWrapper data-role="use-default">
-				{Labels.NoTimeout}
-			</NavigatorElementBadgeWrapper>;
-		}
-	},
+	badge: createValueOrAnotherBadge<HttpStepDefModel>({
+		check: model => VUtils.isNotBlank(model.timeout),
+		one: model => model.timeout,
+		another: <NavigatorElementBadgeWrapper data-role="use-default">
+			{Labels.NoTimeout}
+		</NavigatorElementBadgeWrapper>
+	}),
 	editor: MethodEditor,
 	helpDoc: HelpDocs.stepHttpTimeout
 };

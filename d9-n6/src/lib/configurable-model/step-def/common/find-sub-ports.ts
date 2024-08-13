@@ -8,10 +8,13 @@ import {
 	ExposedErrorHandlePortModel,
 	UncatchableErrorHandlePortModel
 } from './port-widgets';
+import {StepsPortName} from './ports';
 
 export const findSubPorts: StepNodeConfigurer['findSubPorts'] = (model: StepNodeModel): Undefinable<Array<PortModel>> => {
-	// error handles
 	return [
+		// steps
+		model.getPort(StepsPortName),
+		// error handles
 		model.getPort(CatchableErrorHandlePortModel.NAME),
 		model.getPort(ExposedErrorHandlePortModel.NAME),
 		model.getPort(UncatchableErrorHandlePortModel.NAME),
