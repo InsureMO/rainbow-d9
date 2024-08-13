@@ -5,6 +5,7 @@ import {ConfigurableElementEditorProps} from '../../../edit-dialog';
 import {PlaygroundModuleAssistant} from '../../../types';
 import {NotAvailableDropdownOption} from '../../not-available-dropdown-option';
 import {CommonStepDefModel} from '../../step-def';
+import {CommonElementEditorStyles} from '../../styles';
 import {trim} from '../utils';
 
 export interface CreateDropdownOnAssistantEditorOptions<M extends CommonStepDefModel, V> {
@@ -32,6 +33,7 @@ export const createDropdownOnAssistantEditor = <M extends CommonStepDefModel, V>
 
 		return <UnwrappedDropdown onValueChange={onValueChange} value={value}
 		                          optionSort={OptionItemSort.ASC}
-		                          clearable={false} options={options}/>;
+		                          clearable={false} options={options}
+		                          style={CommonElementEditorStyles.dropdown}/>;
 	};
 };
