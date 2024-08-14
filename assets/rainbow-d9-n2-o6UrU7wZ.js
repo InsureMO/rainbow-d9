@@ -4,9 +4,9 @@ var __publicField = (obj, key, value) => {
   __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
   return value;
 };
-import { a as color, M as MaskedNumber, e as MaskedDate, g as MaskedFunction, j as MaskedPattern, k as MaskedRange, p as MaskedRegExp, q as MaskedDynamic } from "./vendor-I_mx1A6Z.js";
-import { R as React, r as reactExports, q as qe, W as We, u as useIMask } from "./react-base-3wZo8FSv.js";
-import { c as createLogger, V as VUtils, P as PPUtils, r as registerWidget, a as useThrottler, u as useRootEventBus, M as MUtils, N as NUtils, d as Wrapper, e as useForceUpdate, f as MBUtils, b as useWrapperEventBus, W as WrapperEventTypes, g as useCreateEventBus, h as PROPERTY_PATH_ME, i as useDefaultAttributeValues, j as useAttributesWatch, R as RootEventTypes } from "./rainbow-d9-n1-Ho_xeLnr.js";
+import { a as color, M as MaskedNumber, e as MaskedDate, g as MaskedFunction, j as MaskedPattern, k as MaskedRange, p as MaskedRegExp, q as MaskedDynamic } from "./vendor-D6-KmWRM.js";
+import { R as React, r as reactExports, q as qe, W as We, u as useIMask } from "./react-base-qg_6qKl9.js";
+import { c as createLogger, V as VUtils, P as PPUtils, r as registerWidget, a as useThrottler, u as useRootEventBus, M as MUtils, N as NUtils, d as Wrapper, e as useForceUpdate, f as MBUtils, b as useWrapperEventBus, W as WrapperEventTypes, g as useCreateEventBus, h as PROPERTY_PATH_ME, i as useDefaultAttributeValues, j as useAttributesWatch, R as RootEventTypes } from "./rainbow-d9-n1-ySIaAub0.js";
 import { d as dayjs } from "./dayjs-9WAo-H7j.js";
 const DOM_KEY_WIDGET = "data-w";
 const DOM_ID_WIDGET = "data-wid";
@@ -6060,9 +6060,7 @@ const YearMonthPicker = (props) => {
   if (!visible) {
     return null;
   }
-  const onYearChange = (year) => (event) => {
-    event.stopPropagation();
-    event.preventDefault();
+  const onYearChange = (year) => () => {
     const newValue = value.year(year);
     fire(CalendarEventTypes.VALUE_SELECTED, newValue);
   };
@@ -6196,7 +6194,8 @@ const Picker = reactExports.forwardRef((props, ref) => {
   const { containerRef, popupRef, popupState, setPopupState, popupShown, setPopupShown } = useDropdownControl({
     askPopupMaxHeight: () => CssVars.CALENDAR_POPUP_HEIGHT_VALUE,
     askPopupMaxWidth: () => CssVars.CALENDAR_POPUP_WIDTH_VALUE,
-    fixWidth: true
+    fixWidth: true,
+    afterPopupHide: () => onBlurred()
   });
   useDualRefs(containerRef, ref);
   useTip({ ref: containerRef, ...buildTip({ tip, root: $root, model: $model }) });
@@ -6251,16 +6250,13 @@ const Picker = reactExports.forwardRef((props, ref) => {
         if (newValue != null) {
           await $onValueChange(newValue.format(storeFormat), true, { global: globalHandlers });
         }
-        setPopupState((state) => ({ ...state, active: DropdownPopupStateActive.HIDDEN }));
       } else {
         const originalValue = dayjs(value, storeFormat);
         if (!originalValue.isSame(newValue)) {
           await $onValueChange(newValue.format(storeFormat), true, { global: globalHandlers });
-          setPopupState((state) => ({ ...state, active: DropdownPopupStateActive.HIDDEN }));
-        } else {
-          setPopupState((state) => ({ ...state, active: DropdownPopupStateActive.HIDDEN }));
         }
       }
+      setPopupState((state) => ({ ...state, active: DropdownPopupStateActive.HIDDEN }));
     });
   };
   const onClearClicked = async (event) => {
@@ -6306,7 +6302,7 @@ const Picker = reactExports.forwardRef((props, ref) => {
   })();
   return React.createElement(
     DropdownContainer,
-    { active: popupState.active, atBottom: popupState.atBottom, role: "input", tabIndex: 0, ...rest, "data-w": "d9-calendar", "data-disabled": $disabled, "data-visible": $visible, onClick: onClicked, onBlur: onBlurred, id: PPUtils.asId(PPUtils.absolute($p2r, props.$pp), props.id), ref: containerRef },
+    { active: popupState.active, atBottom: popupState.atBottom, role: "input", tabIndex: 0, ...rest, "data-w": "d9-calendar", "data-disabled": $disabled, "data-visible": $visible, onClick: onClicked, id: PPUtils.asId(PPUtils.absolute($p2r, props.$pp), props.id), ref: containerRef },
     React.createElement(CalendarValueHolder, { initValue: initValueForPopup }),
     React.createElement(DropdownLabel, { "data-please": !valueAssigned }, label),
     React.createElement(DropdownStick, { valueAssigned, clearable, clear: onClearClicked, disabled: $disabled, icon: useCalendarIcon ? React.createElement(DropdownStickCalendar, null) : void 0 }),
