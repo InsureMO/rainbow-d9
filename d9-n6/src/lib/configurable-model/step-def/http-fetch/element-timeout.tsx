@@ -9,7 +9,7 @@ import {Labels} from '../../../labels';
 import {createValueOrAnotherBadge} from '../../common';
 import {HttpStepDefModel} from './types';
 
-const TimeoutEditor = styled.div`
+const TimeoutEditorWrapper = styled.div`
     > div[data-w=d9-deco-input] {
         > span[data-w=d9-deco-lead]:first-child {
             padding-right: 0;
@@ -30,7 +30,7 @@ const TimeoutEditor = styled.div`
         }
     }
 `;
-const MethodEditor = (props: ConfigurableElementEditorProps<HttpStepDefModel>) => {
+const TimeoutEditor = (props: ConfigurableElementEditorProps<HttpStepDefModel>) => {
 	const {model, onValueChanged} = props;
 
 	const inputRef = useRef<HTMLInputElement>(null);
@@ -70,12 +70,12 @@ const MethodEditor = (props: ConfigurableElementEditorProps<HttpStepDefModel>) =
 		                     options={[{value: true, label: Labels.NoTimeout}]}
 		                     single={true} boolOnSingle={true}/>
 	];
-	return <TimeoutEditor>
+	return <TimeoutEditorWrapper>
 		<UnwrappedDecorateInput leads={noTimeout}
 		                        value={valueRef.current} onValueChange={onValueChange}
 		                        disabled={noTimeoutRef.current}
 		                        ref={inputRef}/>
-	</TimeoutEditor>;
+	</TimeoutEditorWrapper>;
 };
 export const elementTimeout: ConfigurableElement = {
 	code: 'timeout', label: Labels.StepHttpTimeout, anchor: 'timeout',
@@ -86,6 +86,6 @@ export const elementTimeout: ConfigurableElement = {
 			{Labels.NoTimeout}
 		</NavigatorElementBadgeWrapper>
 	}),
-	editor: MethodEditor,
+	editor: TimeoutEditor,
 	helpDoc: HelpDocs.stepHttpTimeout
 };

@@ -122,6 +122,7 @@ export const Labels = {
 	// typeorm
 	StepTypeOrmDatasource: <IntlLabel keys={['o23', 'step', 'typeorm', 'datasource']} value="Datasource"/>,
 	StepTypeOrmTransaction: <IntlLabel keys={['o23', 'step', 'typeorm', 'transaction']} value="Transaction"/>,
+	StepTypeOrmSnippet: <IntlLabel keys={['o23', 'step', 'typeorm', 'snippet']} value="Snippet"/>,
 	// ref pipeline
 	StepRefPipelineCode: <IntlLabel keys={['o23', 'step', 'ref-pipeline', 'code']} value="Call Pipeline"/>,
 	// ref step
@@ -159,6 +160,7 @@ export const Labels = {
 	UseInputAsHttpBody: <IntlLabel keys={['o23', 'badge', 'use-input-as-http-body']} value="Use Input"/>,
 	UseJsonFormatForHttpBody: <IntlLabel keys={['o23', 'badge', 'use-json-format-for-http-body']}
 	                                     value="Use JSON Parse"/>,
+	TransactionAutonomous: <IntlLabel keys={['o23', 'badge', 'transaction', 'autonomous']} value="Autonomous"/>,
 	Yes: <IntlLabel keys={['o23', 'badge', 'yes']} value="Yes"/>,
 	YesChar: <IntlLabel keys={['o23', 'badge', 'yes-char']} value="Y"/>,
 	No: <IntlLabel keys={['o23', 'badge', 'no']} value="No"/>,

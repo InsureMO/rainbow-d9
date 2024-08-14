@@ -1,4 +1,5 @@
 import {VUtils} from '@rainbow-d9/n1';
+import {ConfigurableElement} from '../../../edit-dialog';
 import {HelpDocs} from '../../../help-docs';
 import {Labels} from '../../../labels';
 import {PlaygroundModuleAssistant} from '../../../types';
@@ -8,7 +9,7 @@ import {TypeOrmStepDefModel} from './types';
 const askDatasourceOptions = (assistant: Required<PlaygroundModuleAssistant>) => (assistant.askTypeOrmDatasources() ?? []).map(datasource => {
 	return {value: datasource.code, label: VUtils.blankThen(datasource.name, datasource.code)};
 });
-export const elementDatasource = {
+export const elementDatasource: ConfigurableElement = {
 	code: 'datasource', label: Labels.StepTypeOrmDatasource, anchor: 'datasource',
 	badge: createCheckOrMissBadge({check: (model: TypeOrmStepDefModel) => VUtils.isNotBlank(model.datasource)}),
 	editor: createDropdownOnAssistantEditor<TypeOrmStepDefModel, string>({
