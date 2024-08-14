@@ -1,6 +1,6 @@
 import {BaseModel, PropValue} from '@rainbow-d9/n1';
 import {Dayjs} from 'dayjs';
-import React, {useEffect, useRef, useState} from 'react';
+import React, {MouseEvent, useEffect, useRef, useState} from 'react';
 import {useGlobalHandlers} from '../../global';
 import {IntlLabel} from '../../intl-label';
 import {useCalendarEventBus} from '../event/calendar-event-bus';
@@ -56,7 +56,9 @@ export const YearMonthPicker = (props: CalendarYearMonthPickerProps) => {
 		return null;
 	}
 
-	const onYearChange = (year: number) => () => {
+	const onYearChange = (year: number) => (event: MouseEvent<HTMLSpanElement>) => {
+		event.stopPropagation();
+		event.preventDefault();
 		const newValue = value.year(year);
 		fire(CalendarEventTypes.VALUE_SELECTED, newValue);
 	};

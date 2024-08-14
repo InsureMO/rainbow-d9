@@ -21,7 +21,7 @@ export const YearMonthPickerLabel = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-cale
     }
 `;
 export const YearSelector = styled.div.attrs({
-	[DOM_KEY_WIDGET]: 'd9-calendar-ym-picker-year- selector',
+	[DOM_KEY_WIDGET]: 'd9-calendar-ym-picker-year-selector',
 	'data-v-scroll': ''
 })`
     display: flex;
