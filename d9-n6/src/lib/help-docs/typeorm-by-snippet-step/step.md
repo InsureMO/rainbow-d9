@@ -15,6 +15,8 @@ guaranteed to be loaded.
 
 Use the return data from the called pipeline step as the return data for this step.
 
+${typeorm}
+
 ${transformer}
 
 ${errorHandles}

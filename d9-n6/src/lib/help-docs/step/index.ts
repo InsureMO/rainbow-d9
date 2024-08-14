@@ -59,3 +59,7 @@ export const mergeStepDocs = (doc: string, toc = true) => {
 		.replace('${errorHandles}\n', docs.stepErrorHandles);
 	return toc ? addTocToStepDocs(markdown) : markdown;
 };
+export const mergeStepDocsAnd = (doc: string, replace: Record<string, string>, toc = true) => {
+	doc = Object.keys(replace).reduce((doc, key) => doc.replace(key, replace[key]), doc);
+	return mergeStepDocs(doc, toc);
+};
