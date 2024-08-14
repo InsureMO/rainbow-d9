@@ -1,6 +1,6 @@
-import { aU as unified, aV as VFile, aW as unreachable, aX as toJsxRuntime, aY as urlAttributes } from "./vendor-DzjmpdJb.js";
-import { j as jsxRuntimeExports } from "./react-base-vnTyKOsC.js";
-import { a as remarkParse, b as remarkRehype } from "./remark-CtXR4t1M.js";
+import { aU as unified, aV as VFile, aW as unreachable, aX as toJsxRuntime, aY as urlAttributes } from "./vendor-I_mx1A6Z.js";
+import { j as jsxRuntimeExports } from "./react-base-3wZo8FSv.js";
+import { a as remarkParse, b as remarkRehype } from "./remark-VmQ0UwGk.js";
 import { v as visit } from "./unist-QXG10VXN.js";
 const changelog = "https://github.com/remarkjs/react-markdown/blob/main/changelog.md";
 const emptyPlugins = [];

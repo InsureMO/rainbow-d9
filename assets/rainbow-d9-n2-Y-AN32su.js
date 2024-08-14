@@ -4,9 +4,9 @@ var __publicField = (obj, key, value) => {
   __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
   return value;
 };
-import { a as color, M as MaskedNumber, e as MaskedDate, g as MaskedFunction, j as MaskedPattern, k as MaskedRange, p as MaskedRegExp, q as MaskedDynamic } from "./vendor-DzjmpdJb.js";
-import { R as React, r as reactExports, q as qe, W as We, u as useIMask } from "./react-base-vnTyKOsC.js";
-import { c as createLogger, V as VUtils, P as PPUtils, r as registerWidget, a as useThrottler, u as useRootEventBus, M as MUtils, N as NUtils, d as Wrapper, e as useForceUpdate, f as MBUtils, b as useWrapperEventBus, W as WrapperEventTypes, g as useCreateEventBus, h as PROPERTY_PATH_ME, i as useDefaultAttributeValues, j as useAttributesWatch, R as RootEventTypes } from "./rainbow-d9-n1-iKksNDqK.js";
+import { a as color, M as MaskedNumber, e as MaskedDate, g as MaskedFunction, j as MaskedPattern, k as MaskedRange, p as MaskedRegExp, q as MaskedDynamic } from "./vendor-I_mx1A6Z.js";
+import { R as React, r as reactExports, q as qe, W as We, u as useIMask } from "./react-base-3wZo8FSv.js";
+import { c as createLogger, V as VUtils, P as PPUtils, r as registerWidget, a as useThrottler, u as useRootEventBus, M as MUtils, N as NUtils, d as Wrapper, e as useForceUpdate, f as MBUtils, b as useWrapperEventBus, W as WrapperEventTypes, g as useCreateEventBus, h as PROPERTY_PATH_ME, i as useDefaultAttributeValues, j as useAttributesWatch, R as RootEventTypes } from "./rainbow-d9-n1-Ho_xeLnr.js";
 import { d as dayjs } from "./dayjs-9WAo-H7j.js";
 const DOM_KEY_WIDGET = "data-w";
 const DOM_ID_WIDGET = "data-wid";
@@ -5923,7 +5923,7 @@ const YearMonthPickerLabel = qe.div.attrs({ [DOM_KEY_WIDGET]: "d9-calendar-ym-pi
     }
 `;
 const YearSelector = qe.div.attrs({
-  [DOM_KEY_WIDGET]: "d9-calendar-ym-picker-year- selector",
+  [DOM_KEY_WIDGET]: "d9-calendar-ym-picker-year-selector",
   "data-v-scroll": ""
 })`
     display: flex;
@@ -6060,7 +6060,9 @@ const YearMonthPicker = (props) => {
   if (!visible) {
     return null;
   }
-  const onYearChange = (year) => () => {
+  const onYearChange = (year) => (event) => {
+    event.stopPropagation();
+    event.preventDefault();
     const newValue = value.year(year);
     fire(CalendarEventTypes.VALUE_SELECTED, newValue);
   };
@@ -10055,14 +10057,14 @@ export {
   utils$2 as d,
   ButtonFill as e,
   CssConstants as f,
-  UnwrappedCaption as g,
-  UnwrappedInput as h,
+  UnwrappedCheckbox as g,
+  UnwrappedDropdown as h,
   index$2 as i,
-  UnwrappedCheckbox as j,
-  UnwrappedDropdown as k,
-  UnwrappedDecorateInput as l,
-  UnwrappedCheckboxes as m,
-  UnwrappedTextarea as n,
+  UnwrappedInput as j,
+  UnwrappedCaption as k,
+  UnwrappedTextarea as l,
+  UnwrappedDecorateInput as m,
+  UnwrappedCheckboxes as n,
   index$1 as o,
   useAlert as p,
   useDialog as q,

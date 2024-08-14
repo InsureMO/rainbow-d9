@@ -4,8 +4,8 @@ var __publicField = (obj, key, value) => {
   __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
   return value;
 };
-import { b as buffer, n as nanoid, E as EventEmitter } from "./vendor-DzjmpdJb.js";
-import { r as reactExports, R as React } from "./react-base-vnTyKOsC.js";
+import { b as buffer, n as nanoid, E as EventEmitter } from "./vendor-I_mx1A6Z.js";
+import { r as reactExports, R as React } from "./react-base-3wZo8FSv.js";
 const VUtils = {
   isEmpty: (v) => v == null || typeof v === "string" && v.length === 0,
   isNotEmpty: (v) => (v ?? "") !== "",
@@ -13,6 +13,7 @@ const VUtils = {
   isBlank: (v) => v == null || typeof v === "string" && v.trim().length === 0,
   isNotBlank: (v) => v != null && `${v}`.trim().length !== 0,
   asUndefinedWhenBlank: (v) => VUtils.isNotBlank(v) ? v : void 0,
+  blankThen: (v, then) => VUtils.isBlank(v) ? typeof then === "function" ? then() : then : v,
   isPrimitive: (v) => v != null && ["string", "number", "boolean", "symbol", "bigint"].includes(typeof v),
   isNumber: (v) => {
     if (VUtils.isBlank(v)) {
