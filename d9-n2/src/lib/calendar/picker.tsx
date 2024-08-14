@@ -138,18 +138,14 @@ export const Picker = forwardRef((props: CalendarProps, ref: ForwardedRef<HTMLDi
 					// no value assigned in model, use new value
 					await $onValueChange(newValue.format(storeFormat), true, {global: globalHandlers});
 				}
-				setPopupState(state => ({...state, active: DropdownPopupStateActive.HIDDEN}));
 			} else {
 				const originalValue = dayjs(value as string, storeFormat);
 				if (!originalValue.isSame(newValue)) {
 					// old value is not same as new value, use new value
 					await $onValueChange(newValue.format(storeFormat), true, {global: globalHandlers});
-					setPopupState(state => ({...state, active: DropdownPopupStateActive.HIDDEN}));
-				} else {
-					// close popup
-					setPopupState(state => ({...state, active: DropdownPopupStateActive.HIDDEN}));
 				}
 			}
+			setPopupState(state => ({...state, active: DropdownPopupStateActive.HIDDEN}));
 		});
 	};
 
