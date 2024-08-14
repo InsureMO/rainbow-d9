@@ -73,7 +73,8 @@ export const Picker = forwardRef((props: CalendarProps, ref: ForwardedRef<HTMLDi
 	} = useDropdownControl({
 		askPopupMaxHeight: () => CssVars.CALENDAR_POPUP_HEIGHT_VALUE,
 		askPopupMaxWidth: () => CssVars.CALENDAR_POPUP_WIDTH_VALUE,
-		fixWidth: true
+		fixWidth: true,
+		afterPopupHide: () => onBlurred()
 	});
 	useDualRefs(containerRef, ref);
 	useTip({ref: containerRef, ...buildTip({tip, root: $root, model: $model})});
@@ -202,7 +203,7 @@ export const Picker = forwardRef((props: CalendarProps, ref: ForwardedRef<HTMLDi
 	                          {...rest}
 	                          data-w="d9-calendar"
 	                          data-disabled={$disabled} data-visible={$visible}
-	                          onClick={onClicked} onBlur={onBlurred}
+	                          onClick={onClicked}
 	                          id={PPUtils.asId(PPUtils.absolute($p2r, props.$pp), props.id)}
 	                          ref={containerRef}>
 		<CalendarValueHolder initValue={initValueForPopup}/>
