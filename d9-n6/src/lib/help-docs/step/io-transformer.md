@@ -7,8 +7,8 @@ in the required format.
 
 #### Pick from input
 
-Use the `Pick from input` property to define a script. The returned data will be used as input data for this step. The script is a function
-that takes the following parameters:
+Use the `Pick from input` property to define a JavaScript script. The returned data will be used as input data for this step. The script is
+a function that takes the following parameters:
 
 - `$factor` represents the incoming data,
 - `$request` represents the original request data (including incoming data and a context), it is not recommended,

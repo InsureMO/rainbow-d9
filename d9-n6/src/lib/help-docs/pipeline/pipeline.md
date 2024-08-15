@@ -78,7 +78,7 @@ different step sets define the way their sub steps are executed. Steps are imple
 different purposes. Here are some built-in standard steps:
 
 - Retrieve values from models or remove attributes,
-- Execute scripts,
+- Execute snippets,
 - Generate snowflake IDs,
 - Call predefined pipelines or steps,
 - Make remote HTTP API calls,
