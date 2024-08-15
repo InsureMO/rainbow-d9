@@ -8,9 +8,7 @@ This step does not use any environment variables, unless an environment variable
 
 #### Step variables
 
-##### `Snippet`
-
-Use the `snippet` property to define a JavaScript script. The returned data will be used as input data for this step. The script is
+Use the `snippet` property to define a JavaScript script. The returned data will be used as return data for this step. The script is
 a function that takes the following parameters:
 
 - `$runner` represents the [QueryRunner](https://orkhan.gitbook.io/typeorm/docs/query-runner),

@@ -37,7 +37,7 @@ export const buildConfig = (lint) => {
 			'@projectstorm/geometry',
 			'@projectstorm/react-canvas-core', '@projectstorm/react-diagrams-core', '@projectstorm/react-diagrams',
 			'dom-to-image',
-			'@codemirror/commands', '@codemirror/lang-javascript', '@codemirror/lint', '@codemirror/state',
+			'@codemirror/commands', '@codemirror/lang-javascript', '@codemirror/lang-sql', '@codemirror/lint', '@codemirror/state',
 			'@codemirror/view', 'codemirror',
 			'@rainbow-d9/n1', '@rainbow-d9/n2', '@rainbow-d9/n3'
 		]

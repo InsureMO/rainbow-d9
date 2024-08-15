@@ -16,8 +16,6 @@ export enum StandardPipelineStepRegisterKey {
 	ROUTES_SETS = 'routes',
 
 	TYPEORM_BY_SNIPPET = 'typeorm-snippet',
-	TYPEORM_LOAD_ENTITY_BY_ID = 'typeorm-load-entity',
-	TYPEORM_SAVE_ENTITY = 'typeorm-save-entity',
 	TYPEORM_LOAD_ONE_BY_SQL = 'typeorm-load-one',
 	TYPEORM_LOAD_MANY_BY_SQL = 'typeorm-load-many',
 	TYPEORM_SAVE_BY_SQL = 'typeorm-save',
@@ -146,6 +144,26 @@ export interface TypeOrmWithAutonomousPipelineStepDef extends TypeOrmPipelineSte
 export interface TypeOrmBySnippetPipelineStepDef extends TypeOrmWithAutonomousPipelineStepDef {
 	use: StandardPipelineStepRegisterKey.TYPEORM_BY_SNIPPET;
 	snippet?: string;
+}
+
+export interface TypeOrmBySqlPipelineStepDef extends TypeOrmWithAutonomousPipelineStepDef {
+	sql?: string;
+}
+
+export interface TypeOrmBulkSaveBySqlPipelineStepDef extends TypeOrmBySqlPipelineStepDef {
+	use: StandardPipelineStepRegisterKey.TYPEORM_BULK_SAVE_BY_SQL;
+}
+
+export interface TypeOrmSaveBySqlPipelineStepDef extends TypeOrmBySqlPipelineStepDef {
+	use: StandardPipelineStepRegisterKey.TYPEORM_SAVE_BY_SQL;
+}
+
+export interface TypeOrmLoadManyBySqlPipelineStepDef extends TypeOrmBySqlPipelineStepDef {
+	use: StandardPipelineStepRegisterKey.TYPEORM_LOAD_MANY_BY_SQL;
+}
+
+export interface TypeOrmLoadOneBySqlPipelineStepDef extends TypeOrmBySqlPipelineStepDef {
+	use: StandardPipelineStepRegisterKey.TYPEORM_LOAD_ONE_BY_SQL;
 }
 
 export interface RefOnCodePipelineStepDef extends AllInPipelineStepDef {

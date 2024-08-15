@@ -12,6 +12,7 @@ import {docs as SnippetStepDocs} from './snippet-step';
 import {docs as SnowflakeStepDocs} from './snowflake-step';
 import {docs as StepCommonDocs} from './step';
 import {docs as TypeOrmBySnippetStepDocs} from './typeorm-by-snippet-step';
+import {docs as TypeOrmBySqlStepDocs} from './typeorm-by-sql-step';
 import {docs as TypeOrmCommonDocs} from './typeorm-step';
 
 export const HelpDocs = {
@@ -32,6 +33,7 @@ export const HelpDocs = {
 	// typeorm
 	...TypeOrmCommonDocs,
 	...TypeOrmBySnippetStepDocs,
+	...TypeOrmBySqlStepDocs,
 	// ref
 	...RefPipelineDocs,
 	...RefStepDocs

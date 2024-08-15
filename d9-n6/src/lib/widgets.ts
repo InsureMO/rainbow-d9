@@ -272,6 +272,14 @@ export const PlaygroundCssVars = {
 	NODE_STEP_REF_STEP_TITLE_BACKGROUND: `var(--o23-playground-node-step-ref-step-title-background, linear-gradient(135deg, ${NODE_REF_STEP_STEP_COLOR} 0%, ${color(NODE_REF_STEP_STEP_COLOR).alpha(0.7)} 70%, ${color(NODE_REF_STEP_STEP_COLOR).alpha(0.5)} 100%))`,
 	NODE_STEP_TYPEORM_SNIPPET_BORDER: `var(--o23-playground-node-step-typeorm-border, 2px solid ${NODE_TYPEORM_STEP_COLOR})`,
 	NODE_STEP_TYPEORM_SNIPPET_TITLE_BACKGROUND: `var(--o23-playground-node-step-typeorm-title-background, linear-gradient(135deg, ${NODE_TYPEORM_STEP_COLOR} 0%, ${color(NODE_TYPEORM_STEP_COLOR).alpha(0.7)} 70%, ${color(NODE_TYPEORM_STEP_COLOR).alpha(0.5)} 100%))`,
+	NODE_STEP_TYPEORM_BULK_SAVE_BORDER: `var(--o23-playground-node-step-typeorm-border, 2px solid ${NODE_TYPEORM_STEP_COLOR})`,
+	NODE_STEP_TYPEORM_BULK_SAVE_TITLE_BACKGROUND: `var(--o23-playground-node-step-typeorm-title-background, linear-gradient(135deg, ${NODE_TYPEORM_STEP_COLOR} 0%, ${color(NODE_TYPEORM_STEP_COLOR).alpha(0.7)} 70%, ${color(NODE_TYPEORM_STEP_COLOR).alpha(0.5)} 100%))`,
+	NODE_STEP_TYPEORM_SAVE_BORDER: `var(--o23-playground-node-step-typeorm-border, 2px solid ${NODE_TYPEORM_STEP_COLOR})`,
+	NODE_STEP_TYPEORM_SAVE_TITLE_BACKGROUND: `var(--o23-playground-node-step-typeorm-title-background, linear-gradient(135deg, ${NODE_TYPEORM_STEP_COLOR} 0%, ${color(NODE_TYPEORM_STEP_COLOR).alpha(0.7)} 70%, ${color(NODE_TYPEORM_STEP_COLOR).alpha(0.5)} 100%))`,
+	NODE_STEP_TYPEORM_LOAD_MANY_BORDER: `var(--o23-playground-node-step-typeorm-border, 2px solid ${NODE_TYPEORM_STEP_COLOR})`,
+	NODE_STEP_TYPEORM_LOAD_MANY_TITLE_BACKGROUND: `var(--o23-playground-node-step-typeorm-title-background, linear-gradient(135deg, ${NODE_TYPEORM_STEP_COLOR} 0%, ${color(NODE_TYPEORM_STEP_COLOR).alpha(0.7)} 70%, ${color(NODE_TYPEORM_STEP_COLOR).alpha(0.5)} 100%))`,
+	NODE_STEP_TYPEORM_LOAD_ONE_BORDER: `var(--o23-playground-node-step-typeorm-border, 2px solid ${NODE_TYPEORM_STEP_COLOR})`,
+	NODE_STEP_TYPEORM_LOAD_ONE_TITLE_BACKGROUND: `var(--o23-playground-node-step-typeorm-title-background, linear-gradient(135deg, ${NODE_TYPEORM_STEP_COLOR} 0%, ${color(NODE_TYPEORM_STEP_COLOR).alpha(0.7)} 70%, ${color(NODE_TYPEORM_STEP_COLOR).alpha(0.5)} 100%))`,
 	// snippet
 	SNIPPET_BORDER: `var(--o23-playground-snippet-border, ${CssVars.BORDER})`,
 	SNIPPET_BORDER_RADIUS: `var(--o23-playground-snippet-border-radius, ${CssVars.BORDER_RADIUS})`,
@@ -283,7 +291,8 @@ export const PlaygroundCssVars = {
 	SNIPPET_HTTP_GENERATE_HEADERS_HEIGHT: 'var(--o23-playground-snippet-http-generate-headers-height, 200px)',
 	SNIPPET_HTTP_GENERATE_BODY_HEIGHT: 'var(--o23-playground-snippet-http-generate-body-height, 200px)',
 	SNIPPET_HTTP_READ_RESPONSE_HEIGHT: 'var(--o23-playground-snippet-http-read-response-height, 200px)',
-	SNIPPET_HTTP_RESPONSE_ERROR_HANDLES_HEIGHT: 'var(--o23-playground-snippet-http-response-error-handles-height, 300px)'
+	SNIPPET_HTTP_RESPONSE_ERROR_HANDLES_HEIGHT: 'var(--o23-playground-snippet-http-response-error-handles-height, 300px)',
+	SQL_HEIGHT: 'var(--o23-playground-sql-height, 200px)'
 };
 
 // background: linear-gradient(90deg, #24606e, #1f6b73, #207675, #2c8174, #3e8b71, #54956b, #6c9e65, #87a55f, #a3ab5b, #c1b05a, #e0b35f, #ffb56b);

@@ -79,6 +79,10 @@ export const Labels = {
 	StepUseEach: 'Each',
 	StepUseParallel: 'Parallel',
 	StepUseTypeormSnippet: 'Typeorm Snippet',
+	StepUseTypeormBulkSave: 'Typeorm Bulk Save',
+	StepUseTypeormSave: 'Typeorm Save',
+	StepUseTypeormLoadMany: 'Typeorm Load Many',
+	StepUseTypeormLoadOne: 'Typeorm Load One',
 	StepUseRefPipeline: 'Call Pipeline',
 	StepUseRefStep: 'Call Pipeline Step',
 	// step variables common labels
@@ -123,6 +127,9 @@ export const Labels = {
 	StepTypeOrmDatasource: <IntlLabel keys={['o23', 'step', 'typeorm', 'datasource']} value="Datasource"/>,
 	StepTypeOrmTransaction: <IntlLabel keys={['o23', 'step', 'typeorm', 'transaction']} value="Transaction"/>,
 	StepTypeOrmSnippet: <IntlLabel keys={['o23', 'step', 'typeorm', 'snippet']} value="Snippet"/>,
+	StepTypeOrmSql: <IntlLabel keys={['o23', 'step', 'typeorm', 'sql']} value="SQL"/>,
+	StepTypeOrmSqlPredefined: <IntlLabel keys={['o23', 'step', 'typeorm', 'sql-predefined']} value="Predefine"/>,
+	StepTypeOrmSqlByParams: <IntlLabel keys={['o23', 'step', 'typeorm', 'sql-by-params']} value="By Params"/>,
 	// ref pipeline
 	StepRefPipelineCode: <IntlLabel keys={['o23', 'step', 'ref-pipeline', 'code']} value="Call Pipeline"/>,
 	// ref step
@@ -161,6 +168,7 @@ export const Labels = {
 	UseJsonFormatForHttpBody: <IntlLabel keys={['o23', 'badge', 'use-json-format-for-http-body']}
 	                                     value="Use JSON Parse"/>,
 	TransactionAutonomous: <IntlLabel keys={['o23', 'badge', 'transaction', 'autonomous']} value="Autonomous"/>,
+	SqlByParams: <IntlLabel keys={['o23', 'badge', 'sql', 'by-params']} value="By Params"/>,
 	Yes: <IntlLabel keys={['o23', 'badge', 'yes']} value="Yes"/>,
 	YesChar: <IntlLabel keys={['o23', 'badge', 'yes-char']} value="Y"/>,
 	No: <IntlLabel keys={['o23', 'badge', 'no']} value="No"/>,

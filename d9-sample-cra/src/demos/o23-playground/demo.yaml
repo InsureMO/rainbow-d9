@@ -49,6 +49,18 @@ steps:
       - name: By snippet
         use: typeorm-snippet
         datasource: db-data
+      - name: Bulk Save
+        use: typeorm-bulk-save
+        datasource: db-data
+      - name: Save
+        use: typeorm-save
+        datasource: db-data
+      - name: Load Many
+        use: typeorm-load-many
+        datasource: db-data
+      - name: Load One
+        use: typeorm-load-one
+        datasource: db-data
     $diagram:
       $foldSubSteps: true
   - name: Do validation

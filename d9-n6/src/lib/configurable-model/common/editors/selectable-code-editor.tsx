@@ -1,12 +1,22 @@
 import {PropValue} from '@rainbow-d9/n1';
 import {DropdownOptions, UnwrappedDropdown} from '@rainbow-d9/n2';
-import React from 'react';
+import React, {FC} from 'react';
 import {ConfigurableElementEditorProps} from '../../../edit-dialog';
 import {CommonElementEditorStyles} from '../../styles';
 import {VerticalLinesEditor} from '../../vertical-lines-editor';
 import {JsEditor} from '../js-editor';
+import {SqlEditor} from '../sql-editor';
 
-export interface SelectableJsEditorOptions<M, FV> {
+export interface SelectableCodeEditorProps {
+	visible?: boolean;
+	height?: number | string;
+	snippet?: string;
+	onChange: (snippet: string) => Promise<void>;
+}
+
+export type SelectableCodeEditor = FC<SelectableCodeEditorProps>;
+
+export interface SelectableCodeEditorOptions<M, FV> {
 	findFlag: (model: M) => FV;
 	saveFlag: (model: M, value: FV) => void;
 	findSnippet: (model: M) => string;
@@ -14,12 +24,14 @@ export interface SelectableJsEditorOptions<M, FV> {
 	flagCandidates: DropdownOptions;
 	isSnippetAvailable: (value: FV) => boolean;
 	height?: number | string;
+	editor: SelectableCodeEditor;
 }
 
-export const createSelectableSnippetEditor = <M, FV>(options: SelectableJsEditorOptions<M, FV>) => {
+export const createSelectableCodeEditor = <M, FV>(options: SelectableCodeEditorOptions<M, FV>) => {
 	const {
 		findFlag, saveFlag, findSnippet, saveSnippet,
-		flagCandidates, isSnippetAvailable, height: editorHeight
+		flagCandidates, isSnippetAvailable, height: editorHeight,
+		editor: CodeEditor
 	} = options;
 
 	return (props: ConfigurableElementEditorProps<M>) => {
@@ -43,8 +55,15 @@ export const createSelectableSnippetEditor = <M, FV>(options: SelectableJsEditor
 			<UnwrappedDropdown value={flag}
 			                   onValueChange={onValueChange} options={flagCandidates}
 			                   clearable={false} filterable={false} style={CommonElementEditorStyles.dropdown}/>
-			<JsEditor snippet={snippet} onChange={onSnippetChange}
-			          visible={isSnippetAvailable(flag)} height={editorHeight}/>
+			<CodeEditor snippet={snippet} onChange={onSnippetChange}
+			            visible={isSnippetAvailable(flag)} height={editorHeight}/>
 		</VerticalLinesEditor>;
 	};
+};
+
+export const createSelectableSnippetEditor = <M, FV>(options: Omit<SelectableCodeEditorOptions<M, FV>, 'editor'>) => {
+	return createSelectableCodeEditor({...options, editor: JsEditor});
+};
+export const createSelectableSqlEditor = <M, FV>(options: Omit<SelectableCodeEditorOptions<M, FV>, 'editor'>) => {
+	return createSelectableCodeEditor({...options, editor: SqlEditor});
 };

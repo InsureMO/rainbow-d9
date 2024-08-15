@@ -12,6 +12,7 @@ const askDatasourceOptions = (assistant: Required<PlaygroundModuleAssistant>) =>
 export const elementDatasource: ConfigurableElement = {
 	code: 'datasource', label: Labels.StepTypeOrmDatasource, anchor: 'datasource',
 	badge: createCheckOrMissBadge({check: (model: TypeOrmStepDefModel) => VUtils.isNotBlank(model.datasource)}),
+	// TODO SUPPORTS USE ENV
 	editor: createDropdownOnAssistantEditor<TypeOrmStepDefModel, string>({
 		getValue: model => model.datasource,
 		setValue: (model, value) => model.datasource = value,
