@@ -4,14 +4,14 @@ var __publicField = (obj, key, value) => {
   __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
   return value;
 };
-import { a as color, y as EditorView, z as EditorState, A as basicSetup, B as keymap, C as indentWithTab, G as javascript, K as lintGutter, P as Compartment, Q as jsYaml, R as dom2image } from "./vendor-7BmEemzo.js";
-import { f as CssConstants, C as CssVars, I as IntlLabel, D as DOM_KEY_WIDGET, d as utils$2, g as UnwrappedCheckbox, h as UnwrappedDropdown, O as OptionItemSort, j as UnwrappedInput, k as UnwrappedCaption, l as UnwrappedTextarea, m as UnwrappedDecorateInput, n as UnwrappedCheckboxes, b as useGlobalHandlers } from "./rainbow-d9-n2-ILkXr0yY.js";
-import { R as React, r as reactExports, q as qe, W as We, P as PortModelAlignment, a as PortWidget, D as DefaultLinkModel, b as PortModel, N as NodeModel, C as CanvasWidget, c as DiagramModel, d as createEngine, A as AbstractModelFactory, e as DefaultLinkFactory, f as AbstractReactFactory, L as LinkWidget, g as DefaultLinkPointWidget, h as DefaultLinkSegmentWidget } from "./react-base-XKqs4Fwt.js";
-import { V as VUtils, a as useThrottler, r as registerWidget, g as useCreateEventBus, e as useForceUpdate, M as MUtils, P as PPUtils } from "./rainbow-d9-n1-k_VJ_XH7.js";
-import { i as index$1 } from "./rainbow-d9-n3-5HOCYZ5R.js";
-import { M as Markdown } from "./react-markdown-bp8AvsEu.js";
-import { r as remarkGfm } from "./remark-NPacxKq7.js";
-import { S as SyntaxHighlighter, p as prism } from "./react-syntax-highlighter-ulcIM6Hs.js";
+import { a as color, y as EditorView, z as EditorState, A as basicSetup, B as keymap, C as indentWithTab, K as lintGutter, P as Compartment, Q as jsYaml, G as javascript, R as sql$1, S as dom2image } from "./vendor-9PBy61iY.js";
+import { f as CssConstants, C as CssVars, I as IntlLabel, D as DOM_KEY_WIDGET, d as utils$2, g as UnwrappedCheckbox, h as UnwrappedDropdown, O as OptionItemSort, j as UnwrappedInput, k as UnwrappedCaption, l as UnwrappedTextarea, m as UnwrappedDecorateInput, n as UnwrappedCheckboxes, b as useGlobalHandlers } from "./rainbow-d9-n2-xKaTahfo.js";
+import { R as React, r as reactExports, q as qe, W as We, P as PortModelAlignment, a as PortWidget, D as DefaultLinkModel, b as PortModel, N as NodeModel, C as CanvasWidget, c as DiagramModel, d as createEngine, A as AbstractModelFactory, e as DefaultLinkFactory, f as AbstractReactFactory, L as LinkWidget, g as DefaultLinkPointWidget, h as DefaultLinkSegmentWidget } from "./react-base-6HcWNIND.js";
+import { V as VUtils, a as useThrottler, r as registerWidget, g as useCreateEventBus, e as useForceUpdate, M as MUtils, P as PPUtils } from "./rainbow-d9-n1-QwqjAF-C.js";
+import { i as index$1 } from "./rainbow-d9-n3-IReBJVBW.js";
+import { M as Markdown } from "./react-markdown-LN8tJIOK.js";
+import { r as remarkGfm } from "./remark-knKwgtTv.js";
+import { S as SyntaxHighlighter, p as prism } from "./react-syntax-highlighter-5-uT_UBa.js";
 const EDITOR_BACKGROUND_BLOCK_SIZE = "var(--o23-playground-editor-background-block-size, 48px)";
 const EDITOR_BACKGROUND_LINE_COLOR = `var(--o23-playground-editor-background-line-color, ${color(CssConstants.PRIMARY_COLOR).alpha(0.08)})`;
 const EDITOR_ATTRIBUTE_BADGE_COLOR = "#9db6c6";
@@ -273,6 +273,16 @@ const PlaygroundCssVars = {
   NODE_STEP_REF_STEP_TITLE_BACKGROUND: `var(--o23-playground-node-step-ref-step-title-background, linear-gradient(135deg, ${NODE_REF_STEP_STEP_COLOR} 0%, ${color(NODE_REF_STEP_STEP_COLOR).alpha(0.7)} 70%, ${color(NODE_REF_STEP_STEP_COLOR).alpha(0.5)} 100%))`,
   NODE_STEP_TYPEORM_SNIPPET_BORDER: `var(--o23-playground-node-step-typeorm-border, 2px solid ${NODE_TYPEORM_STEP_COLOR})`,
   NODE_STEP_TYPEORM_SNIPPET_TITLE_BACKGROUND: `var(--o23-playground-node-step-typeorm-title-background, linear-gradient(135deg, ${NODE_TYPEORM_STEP_COLOR} 0%, ${color(NODE_TYPEORM_STEP_COLOR).alpha(0.7)} 70%, ${color(NODE_TYPEORM_STEP_COLOR).alpha(0.5)} 100%))`,
+  NODE_STEP_TYPEORM_BULK_SAVE_BORDER: `var(--o23-playground-node-step-typeorm-border, 2px solid ${NODE_TYPEORM_STEP_COLOR})`,
+  NODE_STEP_TYPEORM_BULK_SAVE_TITLE_BACKGROUND: `var(--o23-playground-node-step-typeorm-title-background, linear-gradient(135deg, ${NODE_TYPEORM_STEP_COLOR} 0%, ${color(NODE_TYPEORM_STEP_COLOR).alpha(0.7)} 70%, ${color(NODE_TYPEORM_STEP_COLOR).alpha(0.5)} 100%))`,
+  NODE_STEP_TYPEORM_SAVE_BORDER: `var(--o23-playground-node-step-typeorm-border, 2px solid ${NODE_TYPEORM_STEP_COLOR})`,
+  NODE_STEP_TYPEORM_SAVE_TITLE_BACKGROUND: `var(--o23-playground-node-step-typeorm-title-background, linear-gradient(135deg, ${NODE_TYPEORM_STEP_COLOR} 0%, ${color(NODE_TYPEORM_STEP_COLOR).alpha(0.7)} 70%, ${color(NODE_TYPEORM_STEP_COLOR).alpha(0.5)} 100%))`,
+  NODE_STEP_TYPEORM_LOAD_MANY_BORDER: `var(--o23-playground-node-step-typeorm-border, 2px solid ${NODE_TYPEORM_STEP_COLOR})`,
+  NODE_STEP_TYPEORM_LOAD_MANY_TITLE_BACKGROUND: `var(--o23-playground-node-step-typeorm-title-background, linear-gradient(135deg, ${NODE_TYPEORM_STEP_COLOR} 0%, ${color(NODE_TYPEORM_STEP_COLOR).alpha(0.7)} 70%, ${color(NODE_TYPEORM_STEP_COLOR).alpha(0.5)} 100%))`,
+  NODE_STEP_TYPEORM_LOAD_ONE_BORDER: `var(--o23-playground-node-step-typeorm-border, 2px solid ${NODE_TYPEORM_STEP_COLOR})`,
+  NODE_STEP_TYPEORM_LOAD_ONE_TITLE_BACKGROUND: `var(--o23-playground-node-step-typeorm-title-background, linear-gradient(135deg, ${NODE_TYPEORM_STEP_COLOR} 0%, ${color(NODE_TYPEORM_STEP_COLOR).alpha(0.7)} 70%, ${color(NODE_TYPEORM_STEP_COLOR).alpha(0.5)} 100%))`,
+  NODE_STEP_TYPEORM_TRANSACTIONAL_BORDER: `var(--o23-playground-node-step-typeorm-border, 2px solid ${NODE_TYPEORM_STEP_COLOR})`,
+  NODE_STEP_TYPEORM_TRANSACTIONAL_TITLE_BACKGROUND: `var(--o23-playground-node-step-typeorm-title-background, linear-gradient(135deg, ${NODE_TYPEORM_STEP_COLOR} 0%, ${color(NODE_TYPEORM_STEP_COLOR).alpha(0.7)} 70%, ${color(NODE_TYPEORM_STEP_COLOR).alpha(0.5)} 100%))`,
   SNIPPET_BORDER: `var(--o23-playground-snippet-border, ${CssVars.BORDER})`,
   SNIPPET_BORDER_RADIUS: `var(--o23-playground-snippet-border-radius, ${CssVars.BORDER_RADIUS})`,
   SNIPPET_HEIGHT: "var(--o23-playground-snippet-height, 400px)",
@@ -283,7 +293,8 @@ const PlaygroundCssVars = {
   SNIPPET_HTTP_GENERATE_HEADERS_HEIGHT: "var(--o23-playground-snippet-http-generate-headers-height, 200px)",
   SNIPPET_HTTP_GENERATE_BODY_HEIGHT: "var(--o23-playground-snippet-http-generate-body-height, 200px)",
   SNIPPET_HTTP_READ_RESPONSE_HEIGHT: "var(--o23-playground-snippet-http-read-response-height, 200px)",
-  SNIPPET_HTTP_RESPONSE_ERROR_HANDLES_HEIGHT: "var(--o23-playground-snippet-http-response-error-handles-height, 300px)"
+  SNIPPET_HTTP_RESPONSE_ERROR_HANDLES_HEIGHT: "var(--o23-playground-snippet-http-response-error-handles-height, 300px)",
+  SQL_HEIGHT: "var(--o23-playground-sql-height, 200px)"
 };
 const Accept = (props) => {
   return React.createElement(
@@ -606,6 +617,11 @@ const Labels = {
   StepUseEach: "Each",
   StepUseParallel: "Parallel",
   StepUseTypeormSnippet: "Typeorm Snippet",
+  StepUseTypeormBulkSave: "Typeorm Bulk Save",
+  StepUseTypeormSave: "Typeorm Save",
+  StepUseTypeormLoadMany: "Typeorm Load Many",
+  StepUseTypeormLoadOne: "Typeorm Load One",
+  StepUseTypeormTransactional: "Typeorm Transactional",
   StepUseRefPipeline: "Call Pipeline",
   StepUseRefStep: "Call Pipeline Step",
   StepVariableIgnoreSnippet: React.createElement(IntlLabel, { keys: ["o23", "step", "common-variable", "ignore-snippet"], value: "Ignore" }),
@@ -639,6 +655,9 @@ const Labels = {
   StepTypeOrmDatasource: React.createElement(IntlLabel, { keys: ["o23", "step", "typeorm", "datasource"], value: "Datasource" }),
   StepTypeOrmTransaction: React.createElement(IntlLabel, { keys: ["o23", "step", "typeorm", "transaction"], value: "Transaction" }),
   StepTypeOrmSnippet: React.createElement(IntlLabel, { keys: ["o23", "step", "typeorm", "snippet"], value: "Snippet" }),
+  StepTypeOrmSql: React.createElement(IntlLabel, { keys: ["o23", "step", "typeorm", "sql"], value: "SQL" }),
+  StepTypeOrmSqlPredefined: React.createElement(IntlLabel, { keys: ["o23", "step", "typeorm", "sql-predefined"], value: "Predefine" }),
+  StepTypeOrmSqlByParams: React.createElement(IntlLabel, { keys: ["o23", "step", "typeorm", "sql-by-params"], value: "By Params" }),
   StepRefPipelineCode: React.createElement(IntlLabel, { keys: ["o23", "step", "ref-pipeline", "code"], value: "Call Pipeline" }),
   StepRefStepCode: React.createElement(IntlLabel, { keys: ["o23", "step", "ref-step", "code"], value: "Call Pipeline Step" }),
   StepEachOriginalContentName: React.createElement(IntlLabel, { keys: ["o23", "step", "each", "original-content-name"], value: "Origin Content Variable" }),
@@ -665,7 +684,9 @@ const Labels = {
   NoCustomHttpHeader: React.createElement(IntlLabel, { keys: ["o23", "badge", "no-http-headers"], value: "No Custom Header" }),
   UseInputAsHttpBody: React.createElement(IntlLabel, { keys: ["o23", "badge", "use-input-as-http-body"], value: "Use Input" }),
   UseJsonFormatForHttpBody: React.createElement(IntlLabel, { keys: ["o23", "badge", "use-json-format-for-http-body"], value: "Use JSON Parse" }),
-  TransactionAutonomous: React.createElement(IntlLabel, { keys: ["o23", "badge", "transaction", "autonomous"], value: "Autonomous" }),
+  DatasourceByEnv: React.createElement(IntlLabel, { keys: ["o23", "badge", "datasource-by-env"], value: "By Environment" }),
+  TransactionAutonomous: React.createElement(IntlLabel, { keys: ["o23", "badge", "transaction-autonomous"], value: "Autonomous" }),
+  SqlByParams: React.createElement(IntlLabel, { keys: ["o23", "badge", "sql-by-params"], value: "By Params" }),
   Yes: React.createElement(IntlLabel, { keys: ["o23", "badge", "yes"], value: "Yes" }),
   YesChar: React.createElement(IntlLabel, { keys: ["o23", "badge", "yes-char"], value: "Y" }),
   No: React.createElement(IntlLabel, { keys: ["o23", "badge", "no"], value: "No" }),
@@ -702,8 +723,6 @@ var StandardPipelineStepRegisterKey;
   StandardPipelineStepRegisterKey2["CONDITIONAL_SETS"] = "conditional";
   StandardPipelineStepRegisterKey2["ROUTES_SETS"] = "routes";
   StandardPipelineStepRegisterKey2["TYPEORM_BY_SNIPPET"] = "typeorm-snippet";
-  StandardPipelineStepRegisterKey2["TYPEORM_LOAD_ENTITY_BY_ID"] = "typeorm-load-entity";
-  StandardPipelineStepRegisterKey2["TYPEORM_SAVE_ENTITY"] = "typeorm-save-entity";
   StandardPipelineStepRegisterKey2["TYPEORM_LOAD_ONE_BY_SQL"] = "typeorm-load-one";
   StandardPipelineStepRegisterKey2["TYPEORM_LOAD_MANY_BY_SQL"] = "typeorm-load-many";
   StandardPipelineStepRegisterKey2["TYPEORM_SAVE_BY_SQL"] = "typeorm-save";
@@ -820,7 +839,7 @@ class YamlDefSaver extends FileDefSerializer {
 }
 const isPipelineDef = (def) => def.type === "pipeline";
 const isStepSetsDef = (def) => def.type === "step-sets";
-const confirm$1 = (model, def, handlers) => {
+const confirm$2 = (model, def, handlers) => {
   const edited = model;
   def.code = edited.code;
   def.type = edited.type;
@@ -2198,29 +2217,29 @@ const EditDialog = () => {
     React.createElement(EditDialogWrapper, null, state.content)
   );
 };
-const markdown$$ = "Handle any error thrown by current step. The following parameters can be used during the error handling process:\n\n- `$code`: Error code. Note that it is always `O01-99999` when using the `AnyError` handler.\n- `$error`: Error object itself,\n- `$factor`: The content portion of the request data, excluding context data,\n- `$request`: The entire request data, including both content and context,\n- `$helpers` or `$`: Data manipulation helpers.\n\n> It is an async function, so `await` is available inside.\n";
-const markdown$_ = "Handle `CatchableError` thrown by current step. The following parameters can be used during the error handling process:\n\n- `$code`: Error code. Note that it is always `O01-99999` when using the `AnyError` handler.\n- `$error`: Error object itself,\n- `$factor`: The content portion of the request data, excluding context data,\n- `$request`: The entire request data, including both content and context,\n- `$helpers` or `$`: Data manipulation helpers.\n\n> It is an async function, so `await` is available inside.\n";
-const markdown$Z = "### Error handling\n\nError handling is a critical part of any step. It is important to handle errors properly to ensure that your step is robust\nand reliable. `@rainbow-o23` provided a standard exception handling process, including the following four types of exceptions:\n\n- `CatchableError`: Catchable exception. Generally refers to exceptions thrown in pipeline steps expected to be caught and handled\n  externally,\n- `ExposedUncathableError`: Uncatchable exception which identified as exposed. Generally refers to exceptions thrown in pipeline steps not\n  expected to be handled additionally externally, and should be exposed to the caller,\n- `UncatchableError`: Uncatchable exception. Generally refers to exceptions thrown in pipeline steps not expected to be handled additionally\n  externally,\n- `AnyError`: Any exception. Generally refers to any exception thrown in pipeline steps.\n\nIt is important to note that exception handling is mutually exclusive. If an exception has already been caught by a handler, it will not be\ncaught by any other handlers. After throwing an exception, the pipeline steps will detect exception type in the above order. As long as the\nexception matches the catch type and the processor for that catch type has been defined, the defined processing logic will be entered. In\npractical scenarios, exception catching needs to be done according to requirements. Generally, there are some recommended practices:\n\n- Generally, `CatchableError` is expected to be caught and handled. For whether the pipeline step will throw this exception, please refer to\n  the corresponding step documentation,\n- In most pipeline steps, since custom snippet can be used to define logic (in addition to the step itself, can use snippet to\n  define the logic for `pick from input` and `write to output`), any type of exception can be thrown in these snippets, so whether or not\n  you need to catch it depends on the specific definition of the custom snippet for this step,\n- Generally speaking, `ExposedUncatchableError` and `UncatchableError` do not require further processing,\n- Also, can use `AnyError` to catch all types of exceptions, including `Node.js` standard exceptions\n\n`@rainbow-o23` provides two ways to handle exceptions, which will be demonstrated below.\n\n#### Using snippet\n\nUse snippet processing for handling error. The following parameters can be used during the error handling process:\n\n- `$code`: Error code. Note that it is always `O01-99999` when using the `AnyError` handler.\n- `$error`: Error object itself,\n- `$factor`: The content portion of the request data, excluding context data,\n- `$request`: The entire request data, including both content and context,\n- `$helpers` or `$`: Data manipulation helpers.\n\n> All handlers are async functions, so `await` is available inside.\n\nAfter handling the exception in the snippet, can either return normally, rethrow the original exception, or construct and throw a new\nexception. The following examples will provide some references:\n\n```ts\n// simply log the exception.\n$.$logger.error(`An exception[code=${$code}] caught.`, $error);\n\n// return normally\nreturn 'Everything is OK now.';\n\n// or check exception type, decide to rethrow or construct a new exception\nif ($.$errors.isCatchable($error)) {\n	// construct and throw a new exception\n	$.$errors.exposed({status: 500, code: $code, reason: $error.message});\n} else {\n	// rethrow the original exception\n	throw $error;\n}\n```\n\n> In most cases, special exception handling is not necessary, as `@rainbow-o23` will handle all exceptions consistently when returning to\n> the API caller.\n\n> When choosing to return normally, meaning no exception is thrown anymore, the returned data will go through the `write to output` process\n> and will be consistent with the normal logic of returning data in the pipeline steps. However, if an exception is thrown during\n> the `write to output` process, this exception will be thrown directly, no error handling on this situation.\n\nHere are some commonly used utility function examples for exception handling in `$helpers`. For detailed specifications, please refer to\nthe `@rainbow-o23` documentation.\n\n```ts\n// log exception\n$.$logger.log(`An exception[code=${$code}] caught.`, $error);\n$.$logger.warn(`An exception[code=${$code}] caught.`, $error);\n// If the log function has two or more parameters, and the last one is a string, then the last parameter will be used as the log category\n$.$logger.error(`An exception[code=${$code}] caught.`, $error, 'SomeLogCategory');\n\n// check error type\n// note exposed uncatchable error is also an uncatchable error\n// so if want to check exposed uncatchable error, should check it first\n$.$errors.isCatchable($error);       // check it is a catchable error\n$.$errors.isExposed($error);         // check it is an exposed uncatchable error\n$.$errors.isUncatchable($error);     // check it is an uncatchable error\n\n// construct a new error and rethrow it\n// for catchable\n$.$errors.catchable({code: $code, reason: 'I am catchable.'});\n// for exposed uncatchable, a status field is required\n// status is exactly following the HTTP status code, code is the error code, reason is the error message\n$.$error({status: 500, code: $code, reason: 'Unpredicated error occurred.'});\n$.$errors.exposed({status: 500, code: $code, reason: 'Unpredicated error occurred.'});\n// for uncatchable\n$.$errors.uncatchable({code: $code, reason: 'I am uncatchable.'});\n```\n\n#### Using sub-steps\n\nIn practice, if an exception requires additional handling and is not thrown after processing, it is recommended to configure this using\npipeline steps. When choosing to handle exceptions using pipeline steps, the format of the request data received by the step is as follows\n\n```ts\ninterface Data {\n	$code: string;        // error code \n	$error: Error;        // error itself \n	$factor: any;         // original factor data, return by the pick from input process\n	$request: any;        // original request data, with both input data and pipeline context\n}\n```\n\n";
-const markdown$Y = "Handle `ExposedUncatchableError` thrown by current step. The following parameters can be used during the error handling process:\n\n- `$code`: Error code. Note that it is always `O01-99999` when using the `AnyError` handler.\n- `$error`: Error object itself,\n- `$factor`: The content portion of the request data, excluding context data,\n- `$request`: The entire request data, including both content and context,\n- `$helpers` or `$`: Data manipulation helpers.\n\n> It is an async function, so `await` is available inside.\n";
-const markdown$X = "Obtain a portion of the request data as the input for this step. Additional processing of the data can also be performed during this\nprocess. The following parameters can be used during the conversion process:\n\n- `$factor`: The content portion of the request data, excluding context data,\n- `$request`: The entire request data, including both content and context,\n- `$helpers` or `$`: Data manipulation helpers.\n\nThe returned data will be used as the real input data for this step. If no data is returned, there is no input data for this step.\n";
-const markdown$W = "### Input and output\n\nUsually, when processing logic, we do not need all the memory contexts, but only need to extract certain fragments for processing and return\nthe processing results to the context for subsequent logic to continue processing. Therefore, `@rainbow-o23` provides a relevant\nimplementation, allowing pipeline steps to flexibly access the relevant memory data and write back the processed result data to the context\nin the required format.\n\n#### Pick from input\n\nUse the `Pick from input` property to define a script. The returned data will be used as input data for this step. The script is a function\nthat takes the following parameters:\n\n- `$factor` represents the incoming data,\n- `$request` represents the original request data (including incoming data and a context), it is not recommended,\n- `$helpers` represents function supporting, and it has a shortcut `$`.\n\nHere is a simple example:\n\n```ts\n// incoming data\nconst incoming = {name: 'John', age: 23};\n\n// Only the age is needed as a parameter in the step processing, not the name.\n// Define a transformation script, so in the actual processing logic of the current step, only the age will be collected, and there won't be a field for the name attribute.\nreturn {age: $factor.age};\n```\n\n> `return` is not necessary. If the script is only one line (and has no line breaks), the system will consider the result of executing that\n> line as the result of the entire function.\n\n> It's important to note that whether modifications to memory data during processing will affect the original input data depends on how the\n> transformation is handled. Generally, if deep cloning is not performed, it will affect the data; otherwise, it will not.\n\n#### Write to output\n\nUse the `Write to output` property to define a script. The returned data will be used as output data for this step. The script is a function\nthat takes the following parameters:\n\n- `$result` represents the outgoing data,\n- `$request` represents the original request data (including incoming data and a context), it is not recommended,\n- `$helpers` represents function supporting, and it has a shortcut `$`.\n\nHere is a simple example:\n\n```ts\n// outgoing data\nconst outgoing = {name: 'John', age: 23};\n\n// The result data should only include age, not the name.\n// Define a transformation script, the age alone will be stored in memory for subsequent use.\nreturn {age: $result.age};\n```\n\n> `return` is not necessary. If the script is only one line (and has no line breaks), the system will consider the result of executing that\n> line as the result of the entire function.\n\n>\n\n#### Merge-back Strategy\n\nAfter processing the step logic and obtaining the returned data, you can also define how this returned data should be merged into the\ncontext of the entire pipeline. There are several ways to define this, all declared using the `Merge-back strategy` attribute:\n\n- Defined as `Replace`, it means the returned data will overwrite the original context and be used as the new context.\n- Defined as `Unbox and merge`, it means the returned data will be automatically unboxed and merged into the original context. In this\n  case, the returned data must be a JSON object and cannot be a primitive type or an array.\n- Defined as `As specific property`, it means the returned data will be merged into the original context under the specified name.\n\nHere is a simple example:\n\n```ts\n// context data\nlet context = {name: 'John', age: 0};\nconst result = {age: 23};\n\n// merge not defined, equivalent to\ncontext = result;\n// context is {age: 23}\n\n// merge is \"unbox and merge\", equivalent to\ncontext = {...context, ...result};\n// context is {name: 'John', age: 23}\n\n// merge is 'person', equivalent to\ncontext = {...context, person: result};\n// context is {name: 'John', age: 0, person: {age: 23}}\n```\n\n> Note that in the latter two cases, there is a possibility of name collision resulting in the original context being overwritten.\n> Therefore, it is necessary to have a clear understanding of the data structure in the context.\n\n#### Keep or clear\n\nIn the following `Write to output` scenarios, and in cases where merge-back strategy is specified as `Replace`:\n\n- Returning `null` or `undefined` (recommended to use `(void 0)` to represent `undefined`) indicates that the original request data will\n  continue to be used as the request data for the next step without any modifications.\n- Returning a flag created by `$helpers.$clearContextData()` to clear context data will be used as the request data for the next step, while\n  all other data is cleared.\n\n> Please note that \"without any modifications\" is a conceptual reference. If the data has already been altered by the logic executed in the\n> step, the data passed to the next step may not be identical to the input data of this step.\n";
-const markdown$V = "Define the strategy for writing back step result data to memory:\n\n- `Replace`: means the returned data will overwrite the original context and be used as the new context.\n- `Unbox and merge`: means the returned data will be automatically unboxed and merged into the original context. In this\n  case, the returned data must be a JSON object and cannot be a primitive type or an array.\n- `As specific property`: means the returned data will be merged into the original context under the specified name.\n";
-const markdown$U = "A brief name that indicates the purpose of the step.\n";
-const markdown$T = "Write back the result of the step execution to memory for use as the request data in the next step. Additional processing of the data can\nalso be performed during this process. The following parameters can be used during the conversion process:\n\n- `$result`: Result data of the step execution,\n- `$request`: Entire request data, including both content and context,\n- `$helpers` or `$`: Data manipulation helpers.\n\nThe returned data will be written back to memory as the actual result data for this step.\n\n> How the step's returned data is written back to memory depends on the return result of this process and the chosen write-back strategy.\n> Please refer to the merge-back strategy documentation for details.\n";
-const markdown$S = "Handle `UncatchableError` thrown by current step. The following parameters can be used during the error handling process:\n\n- `$code`: Error code. Note that it is always `O01-99999` when using the `AnyError` handler.\n- `$error`: Error object itself,\n- `$factor`: The content portion of the request data, excluding context data,\n- `$request`: The entire request data, including both content and context,\n- `$helpers` or `$`: Data manipulation helpers.\n\n> It is an async function, so `await` is available inside.\n";
-const markdown$R = "The specified step definition is used. The logic executed by the system has already been predefined in the step definition. After specifying\nthe step definition, you will also need to specify the parameters required for that step definition.\n";
-const docs$e = {
-  stepName: markdown$U,
-  stepUse: markdown$R,
-  stepFromInput: markdown$X,
-  stepToOutput: markdown$T,
-  stepMergeToRequest: markdown$V,
-  stepCatchableErrorHandle: markdown$_,
-  stepUncatchableErrorHandle: markdown$S,
-  stepExposedErrorHandle: markdown$Y,
-  stepAnyErrorHandle: markdown$$,
-  stepIOTransformer: markdown$W.replace(/\$/g, "$$$$"),
-  stepErrorHandles: markdown$Z.replace(/\$/g, "$$$$")
+const markdown$14 = "Handle any error thrown by current step. The following parameters can be used during the error handling process:\n\n- `$code`: Error code. Note that it is always `O01-99999` when using the `AnyError` handler.\n- `$error`: Error object itself,\n- `$factor`: The content portion of the request data, excluding context data,\n- `$request`: The entire request data, including both content and context,\n- `$helpers` or `$`: Data manipulation helpers.\n\n> It is an async function, so `await` is available inside.\n";
+const markdown$13 = "Handle `CatchableError` thrown by current step. The following parameters can be used during the error handling process:\n\n- `$code`: Error code. Note that it is always `O01-99999` when using the `AnyError` handler.\n- `$error`: Error object itself,\n- `$factor`: The content portion of the request data, excluding context data,\n- `$request`: The entire request data, including both content and context,\n- `$helpers` or `$`: Data manipulation helpers.\n\n> It is an async function, so `await` is available inside.\n";
+const markdown$12 = "### Error handling\n\nError handling is a critical part of any step. It is important to handle errors properly to ensure that your step is robust\nand reliable. `@rainbow-o23` provided a standard exception handling process, including the following four types of exceptions:\n\n- `CatchableError`: Catchable exception. Generally refers to exceptions thrown in pipeline steps expected to be caught and handled\n  externally,\n- `ExposedUncathableError`: Uncatchable exception which identified as exposed. Generally refers to exceptions thrown in pipeline steps not\n  expected to be handled additionally externally, and should be exposed to the caller,\n- `UncatchableError`: Uncatchable exception. Generally refers to exceptions thrown in pipeline steps not expected to be handled additionally\n  externally,\n- `AnyError`: Any exception. Generally refers to any exception thrown in pipeline steps.\n\nIt is important to note that exception handling is mutually exclusive. If an exception has already been caught by a handler, it will not be\ncaught by any other handlers. After throwing an exception, the pipeline steps will detect exception type in the above order. As long as the\nexception matches the catch type and the processor for that catch type has been defined, the defined processing logic will be entered. In\npractical scenarios, exception catching needs to be done according to requirements. Generally, there are some recommended practices:\n\n- Generally, `CatchableError` is expected to be caught and handled. For whether the pipeline step will throw this exception, please refer to\n  the corresponding step documentation,\n- In most pipeline steps, since custom snippet can be used to define logic (in addition to the step itself, can use snippet to\n  define the logic for `pick from input` and `write to output`), any type of exception can be thrown in these snippets, so whether or not\n  you need to catch it depends on the specific definition of the custom snippet for this step,\n- Generally speaking, `ExposedUncatchableError` and `UncatchableError` do not require further processing,\n- Also, can use `AnyError` to catch all types of exceptions, including `Node.js` standard exceptions\n\n`@rainbow-o23` provides two ways to handle exceptions, which will be demonstrated below.\n\n#### Using snippet\n\nUse snippet processing for handling error. The following parameters can be used during the error handling process:\n\n- `$code`: Error code. Note that it is always `O01-99999` when using the `AnyError` handler.\n- `$error`: Error object itself,\n- `$factor`: The content portion of the request data, excluding context data,\n- `$request`: The entire request data, including both content and context,\n- `$helpers` or `$`: Data manipulation helpers.\n\n> All handlers are async functions, so `await` is available inside.\n\nAfter handling the exception in the snippet, can either return normally, rethrow the original exception, or construct and throw a new\nexception. The following examples will provide some references:\n\n```ts\n// simply log the exception.\n$.$logger.error(`An exception[code=${$code}] caught.`, $error);\n\n// return normally\nreturn 'Everything is OK now.';\n\n// or check exception type, decide to rethrow or construct a new exception\nif ($.$errors.isCatchable($error)) {\n	// construct and throw a new exception\n	$.$errors.exposed({status: 500, code: $code, reason: $error.message});\n} else {\n	// rethrow the original exception\n	throw $error;\n}\n```\n\n> In most cases, special exception handling is not necessary, as `@rainbow-o23` will handle all exceptions consistently when returning to\n> the API caller.\n\n> When choosing to return normally, meaning no exception is thrown anymore, the returned data will go through the `write to output` process\n> and will be consistent with the normal logic of returning data in the pipeline steps. However, if an exception is thrown during\n> the `write to output` process, this exception will be thrown directly, no error handling on this situation.\n\nHere are some commonly used utility function examples for exception handling in `$helpers`. For detailed specifications, please refer to\nthe `@rainbow-o23` documentation.\n\n```ts\n// log exception\n$.$logger.log(`An exception[code=${$code}] caught.`, $error);\n$.$logger.warn(`An exception[code=${$code}] caught.`, $error);\n// If the log function has two or more parameters, and the last one is a string, then the last parameter will be used as the log category\n$.$logger.error(`An exception[code=${$code}] caught.`, $error, 'SomeLogCategory');\n\n// check error type\n// note exposed uncatchable error is also an uncatchable error\n// so if want to check exposed uncatchable error, should check it first\n$.$errors.isCatchable($error);       // check it is a catchable error\n$.$errors.isExposed($error);         // check it is an exposed uncatchable error\n$.$errors.isUncatchable($error);     // check it is an uncatchable error\n\n// construct a new error and rethrow it\n// for catchable\n$.$errors.catchable({code: $code, reason: 'I am catchable.'});\n// for exposed uncatchable, a status field is required\n// status is exactly following the HTTP status code, code is the error code, reason is the error message\n$.$error({status: 500, code: $code, reason: 'Unpredicated error occurred.'});\n$.$errors.exposed({status: 500, code: $code, reason: 'Unpredicated error occurred.'});\n// for uncatchable\n$.$errors.uncatchable({code: $code, reason: 'I am uncatchable.'});\n```\n\n#### Using sub-steps\n\nIn practice, if an exception requires additional handling and is not thrown after processing, it is recommended to configure this using\npipeline steps. When choosing to handle exceptions using pipeline steps, the format of the request data received by the step is as follows\n\n```ts\ninterface Data {\n	$code: string;        // error code \n	$error: Error;        // error itself \n	$factor: any;         // original factor data, return by the pick from input process\n	$request: any;        // original request data, with both input data and pipeline context\n}\n```\n\n";
+const markdown$11 = "Handle `ExposedUncatchableError` thrown by current step. The following parameters can be used during the error handling process:\n\n- `$code`: Error code. Note that it is always `O01-99999` when using the `AnyError` handler.\n- `$error`: Error object itself,\n- `$factor`: The content portion of the request data, excluding context data,\n- `$request`: The entire request data, including both content and context,\n- `$helpers` or `$`: Data manipulation helpers.\n\n> It is an async function, so `await` is available inside.\n";
+const markdown$10 = "Obtain a portion of the request data as the input for this step. Additional processing of the data can also be performed during this\nprocess. The following parameters can be used during the conversion process:\n\n- `$factor`: The content portion of the request data, excluding context data,\n- `$request`: The entire request data, including both content and context,\n- `$helpers` or `$`: Data manipulation helpers.\n\nThe returned data will be used as the real input data for this step. If no data is returned, there is no input data for this step.\n";
+const markdown$$ = "### Input and output\n\nUsually, when processing logic, we do not need all the memory contexts, but only need to extract certain fragments for processing and return\nthe processing results to the context for subsequent logic to continue processing. Therefore, `@rainbow-o23` provides a relevant\nimplementation, allowing pipeline steps to flexibly access the relevant memory data and write back the processed result data to the context\nin the required format.\n\n#### Pick from input\n\nUse the `Pick from input` property to define a JavaScript script. The returned data will be used as input data for this step. The script is\na function that takes the following parameters:\n\n- `$factor` represents the incoming data,\n- `$request` represents the original request data (including incoming data and a context), it is not recommended,\n- `$helpers` represents function supporting, and it has a shortcut `$`.\n\nHere is a simple example:\n\n```ts\n// incoming data\nconst incoming = {name: 'John', age: 23};\n\n// Only the age is needed as a parameter in the step processing, not the name.\n// Define a transformation script, so in the actual processing logic of the current step, only the age will be collected, and there won't be a field for the name attribute.\nreturn {age: $factor.age};\n```\n\n> `return` is not necessary. If the script is only one line (and has no line breaks), the system will consider the result of executing that\n> line as the result of the entire function.\n\n> It's important to note that whether modifications to memory data during processing will affect the original input data depends on how the\n> transformation is handled. Generally, if deep cloning is not performed, it will affect the data; otherwise, it will not.\n\n#### Write to output\n\nUse the `Write to output` property to define a script. The returned data will be used as output data for this step. The script is a function\nthat takes the following parameters:\n\n- `$result` represents the outgoing data,\n- `$request` represents the original request data (including incoming data and a context), it is not recommended,\n- `$helpers` represents function supporting, and it has a shortcut `$`.\n\nHere is a simple example:\n\n```ts\n// outgoing data\nconst outgoing = {name: 'John', age: 23};\n\n// The result data should only include age, not the name.\n// Define a transformation script, the age alone will be stored in memory for subsequent use.\nreturn {age: $result.age};\n```\n\n> `return` is not necessary. If the script is only one line (and has no line breaks), the system will consider the result of executing that\n> line as the result of the entire function.\n\n>\n\n#### Merge-back Strategy\n\nAfter processing the step logic and obtaining the returned data, you can also define how this returned data should be merged into the\ncontext of the entire pipeline. There are several ways to define this, all declared using the `Merge-back strategy` attribute:\n\n- Defined as `Replace`, it means the returned data will overwrite the original context and be used as the new context.\n- Defined as `Unbox and merge`, it means the returned data will be automatically unboxed and merged into the original context. In this\n  case, the returned data must be a JSON object and cannot be a primitive type or an array.\n- Defined as `As specific property`, it means the returned data will be merged into the original context under the specified name.\n\nHere is a simple example:\n\n```ts\n// context data\nlet context = {name: 'John', age: 0};\nconst result = {age: 23};\n\n// merge not defined, equivalent to\ncontext = result;\n// context is {age: 23}\n\n// merge is \"unbox and merge\", equivalent to\ncontext = {...context, ...result};\n// context is {name: 'John', age: 23}\n\n// merge is 'person', equivalent to\ncontext = {...context, person: result};\n// context is {name: 'John', age: 0, person: {age: 23}}\n```\n\n> Note that in the latter two cases, there is a possibility of name collision resulting in the original context being overwritten.\n> Therefore, it is necessary to have a clear understanding of the data structure in the context.\n\n#### Keep or clear\n\nIn the following `Write to output` scenarios, and in cases where merge-back strategy is specified as `Replace`:\n\n- Returning `null` or `undefined` (recommended to use `(void 0)` to represent `undefined`) indicates that the original request data will\n  continue to be used as the request data for the next step without any modifications.\n- Returning a flag created by `$helpers.$clearContextData()` to clear context data will be used as the request data for the next step, while\n  all other data is cleared.\n\n> Please note that \"without any modifications\" is a conceptual reference. If the data has already been altered by the logic executed in the\n> step, the data passed to the next step may not be identical to the input data of this step.\n";
+const markdown$_ = "Define the strategy for writing back step result data to memory:\n\n- `Replace`: means the returned data will overwrite the original context and be used as the new context.\n- `Unbox and merge`: means the returned data will be automatically unboxed and merged into the original context. In this\n  case, the returned data must be a JSON object and cannot be a primitive type or an array.\n- `As specific property`: means the returned data will be merged into the original context under the specified name.\n";
+const markdown$Z = "A brief name that indicates the purpose of the step.\n";
+const markdown$Y = "Write back the result of the step execution to memory for use as the request data in the next step. Additional processing of the data can\nalso be performed during this process. The following parameters can be used during the conversion process:\n\n- `$result`: Result data of the step execution,\n- `$request`: Entire request data, including both content and context,\n- `$helpers` or `$`: Data manipulation helpers.\n\nThe returned data will be written back to memory as the actual result data for this step.\n\n> How the step's returned data is written back to memory depends on the return result of this process and the chosen write-back strategy.\n> Please refer to the merge-back strategy documentation for details.\n";
+const markdown$X = "Handle `UncatchableError` thrown by current step. The following parameters can be used during the error handling process:\n\n- `$code`: Error code. Note that it is always `O01-99999` when using the `AnyError` handler.\n- `$error`: Error object itself,\n- `$factor`: The content portion of the request data, excluding context data,\n- `$request`: The entire request data, including both content and context,\n- `$helpers` or `$`: Data manipulation helpers.\n\n> It is an async function, so `await` is available inside.\n";
+const markdown$W = "The specified step definition is used. The logic executed by the system has already been predefined in the step definition. After specifying\nthe step definition, you will also need to specify the parameters required for that step definition.\n";
+const docs$g = {
+  stepName: markdown$Z,
+  stepUse: markdown$W,
+  stepFromInput: markdown$10,
+  stepToOutput: markdown$Y,
+  stepMergeToRequest: markdown$_,
+  stepCatchableErrorHandle: markdown$13,
+  stepUncatchableErrorHandle: markdown$X,
+  stepExposedErrorHandle: markdown$11,
+  stepAnyErrorHandle: markdown$14,
+  stepIOTransformer: markdown$$.replace(/\$/g, "$$$$"),
+  stepErrorHandles: markdown$12.replace(/\$/g, "$$$$")
 };
 const addTocToStepDocs = (markdown2) => {
   const indexes = new Array(6).fill(0);
@@ -2253,165 +2272,186 @@ const mergeStepDocsFreely = (doc, replacements) => {
   return addTocToStepDocs(markdown2);
 };
 const mergeStepDocs = (doc, toc = true) => {
-  const markdown2 = doc.replace("${transformer}\n", docs$e.stepIOTransformer).replace("${errorHandles}\n", docs$e.stepErrorHandles);
+  const markdown2 = doc.replace("${transformer}\n", docs$g.stepIOTransformer).replace("${errorHandles}\n", docs$g.stepErrorHandles);
   return toc ? addTocToStepDocs(markdown2) : markdown2;
 };
 const mergeStepDocsAnd = (doc, replace, toc = true) => {
   doc = Object.keys(replace).reduce((doc2, key) => doc2.replace(key, replace[key]), doc);
   return mergeStepDocs(doc, toc);
 };
-const markdown$Q = "### Async sets step\n\nThe async sets pipeline step includes a set of sub-step definitions, where all the actual processing logic is executed within the sub-steps,\nasynchronously. The input data for the first sub-step could be specified by `Pick from input`.\n\n> Note that the sub-steps are executed in sequence, asynchronous is relative to this async sets step. This also means that modifications to\n> memory within sub-steps cannot be directly reflected in the current process, so must handle it with caution. Generally, direct\n> modifications to input data or context data within sub-steps should be avoided unless it can be confirmed that the data will not be used\n> in the current process.\n\n#### Environment variables\n\nThis step does not use any environment variables.\n\n#### Step variables\n\nThis step has no other properties defined except for using the `steps` attribute to define sub-steps.\n\n#### Returning\n\nThis step does not return anything.\n\n${transformer}\n\n${errorHandles}\n";
+const markdown$V = "### Async sets step\n\nThe async sets pipeline step includes a set of sub-step definitions, where all the actual processing logic is executed within the sub-steps,\nasynchronously. The input data for the first sub-step could be specified by `Pick from input`.\n\n> Note that the sub-steps are executed in sequence, asynchronous is relative to this async sets step. This also means that modifications to\n> memory within sub-steps cannot be directly reflected in the current process, so must handle it with caution. Generally, direct\n> modifications to input data or context data within sub-steps should be avoided unless it can be confirmed that the data will not be used\n> in the current process.\n\n#### Environment variables\n\nThis step does not use any environment variables.\n\n#### Step variables\n\nThis step has no other properties defined except for using the `steps` attribute to define sub-steps.\n\n#### Returning\n\nThis step does not return anything.\n\n${transformer}\n\n${errorHandles}\n";
+const docs$f = {
+  asyncSetsStep: mergeStepDocs(markdown$V)
+};
+const markdown$U = "Delete specified property or properties from the input data. If there are multiple attributes, use `,` to connect them.\n\nFor example, if there is input data like `{a: 1, b: 2, c: 3}`, then with the following definition, you can retrieve the\ncorresponding value:\n\n| Property | After deletion  |\n|:---------|:----------------|\n| `a`      | `{b : 2, c: 3}` |\n| `a, b`   | `{c: 3}`        |\n\n> If the specified property name does not exist on the given data object, there will be no side effects.\n";
+const markdown$T = "### Delete property step\n\nThe delete property pipeline step remove the specified property name from input data.\n\n#### Environment variables\n\nThis step does not use any environment variables.\n\n#### Step variables\n\nDefine the `property` attribute to remove a specified property from the input data. Since property does not support multi-level data\nstructures, when removing a property from a non-top-level data object in the input data, should first use `Pick from input` to retrieve\nthe non-top-level object.\n\n#### Returning\n\nThis step does not return anything.\n\n${transformer}\n\n${errorHandles}\n";
+const docs$e = {
+  stepDelPropertyProperty: markdown$U,
+  delPropertyStep: mergeStepDocs(markdown$T)
+};
+const markdown$S = "The variable name for obtaining the current round's input data in the sub-steps.  \n`$item` by default, and the value can be accessed through `$factor.$item`.\n";
+const markdown$R = "The variable name for obtaining original input data obtained in the sub-steps.\n`$content` by default, and the value can be accessed through `$factor.$content`.\n";
+const markdown$Q = "### Each step\n\nThe each pipeline step includes a set of sub-step definitions, where all the actual processing logic is executed within the sub-steps. The\nsub-step set will be executed N times, where N is the length of the given sub-step input data array. For each execution of the sub-step set,\nthe input data are the array element at the current index and original input data itself.\n\n> Ensure that the input data is always an array; otherwise, the sub-steps cannot execute correctly. Additionally, if the given input\n> parameter is `null`, `undefined`, or an array with a length of 0, it will be returned directly without affecting the context data and\n> without executing the `Write to output` stage.\n\n#### Environment variables\n\nThis step does not use any environment variables.\n\n#### Step variables\n\n| Variable name       | Type   | Description                                                                                      |\n|---------------------|--------|--------------------------------------------------------------------------------------------------|\n| originalContentName | string | The name of the variable that contains the original input data. Optional, default is `$content`. |\n| itemName            | string | The name of the variable that contains the current item. Optional, default is `$item`.           |\n\nAt the same time, the step provides a semaphore to exit the loop, named `$semaphore`. Therefore, the format of the input data received by\nthe sub-steps is as follows:\n\n```ts\n// Assuming no parameters are specified, all defaults will be used.\ninterface Data {\n	$content: any;          // original input data\n	$item: any;             // item at the current index\n	$semaphore: Symbol;     // return this semaphore to break and exit the loop\n}\n\n// Assuming the parameters are specified as originalContentName=input, itemName=data\ninterface Data {\n	input: any;             // original input data\n	data: any;              // item at the current index\n	$semaphore: Symbol;     // return this semaphore to break and exit the loop\n}\n```\n\n#### Returning\n\nAn array containing the returns from all execution rounds, maintaining the same order as the given parameter array.\n\n> Typically, need to specify a merge property in the `Write to output` step for use in subsequent pipeline steps.\n\n${transformer}\n\n${errorHandles}\n";
 const docs$d = {
-  asyncSetsStep: mergeStepDocs(markdown$Q)
+  stepEachItemName: markdown$S,
+  stepEachOriginalContentName: markdown$R,
+  eachStep: mergeStepDocs(markdown$Q)
 };
-const markdown$P = "Delete specified property or properties from the input data. If there are multiple attributes, use `,` to connect them.\n\nFor example, if there is input data like `{a: 1, b: 2, c: 3}`, then with the following definition, you can retrieve the\ncorresponding value:\n\n| Property | After deletion  |\n|:---------|:----------------|\n| `a`      | `{b : 2, c: 3}` |\n| `a, b`   | `{c: 3}`        |\n\n> If the specified property name does not exist on the given data object, there will be no side effects.\n";
-const markdown$O = "### Delete property step\n\nThe delete property pipeline step remove the specified property name from input data.\n\n#### Environment variables\n\nThis step does not use any environment variables.\n\n#### Step variables\n\nDefine the `property` attribute to remove a specified property from the input data. Since property does not support multi-level data\nstructures, when removing a property from a non-top-level data object in the input data, should first use `Pick from input` to retrieve\nthe non-top-level object.\n\n#### Returning\n\nThis step does not return anything.\n\n${transformer}\n\n${errorHandles}\n";
+const markdown$P = "Retrieve the value of a specified property name from the input data. Property names can be connected with dots (`.`) to denote multiple\nhierarchical levels.\n\nFor example, if there is input data like `{a: {b: [{c: 3}, {c: 4}]}}`, then with the following definition, you can retrieve the\ncorresponding value:\n\n| Property | Value                   |\n|:---------|:------------------------|\n| `a`      | `{b: [{c: 3}, {c: 4}]}` |\n| `a.b`    | `[{c: 3}, {c: 4}]`      |\n| `a.b.c`  | `[3, 4]`                |\n\n> Please note that when attempting to retrieve a property value from `null`, `undefined`, or a primitive type (including `string`,\n> `number`, `boolean`, `symbol`, `bigint`), will always receive a `null`.\n";
+const markdown$O = "### Get property step\n\nThe get property pipeline step retrieves the value of the specified property name and finally returns the processed result to the memory\ncontext for further processing.\n\n#### Environment variables\n\nThis step does not use any environment variables.\n\n#### Step variables\n\nDefine the `property` attribute to retrieve the value from a specified position in the input data. The retrieval rules are as follows:\n\n- Property names can use dot (`.`) to connect, allowing access to values from nested objects.\n- Values based on `null` or `undefined` will return `null`.\n- Values based on any basic type (including `string`, `number`, `bigint`, `boolean`, `Symbol`) will return `null`.\n- If there are multiple levels of properties and one level's data is an array, the final result will be an array.\n\n#### Returning\n\nThe value of the specified property, can be any value.\n\n> Typically, need to specify a merge property in the `Write to output` step for use in subsequent pipeline steps.\n\n${transformer}\n\n${errorHandles}\n";
 const docs$c = {
-  stepDelPropertyProperty: markdown$P,
-  delPropertyStep: mergeStepDocs(markdown$O)
+  stepGetPropertyProperty: markdown$P,
+  getPropertyStep: mergeStepDocs(markdown$O)
 };
-const markdown$N = "The variable name for obtaining the current round's input data in the sub-steps.  \n`$item` by default, and the value can be accessed through `$factor.$item`.\n";
-const markdown$M = "The variable name for obtaining original input data obtained in the sub-steps.\n`$content` by default, and the value can be accessed through `$factor.$content`.\n";
-const markdown$L = "### Each step\n\nThe each pipeline step includes a set of sub-step definitions, where all the actual processing logic is executed within the sub-steps. The\nsub-step set will be executed N times, where N is the length of the given sub-step input data array. For each execution of the sub-step set,\nthe input data are the array element at the current index and original input data itself.\n\n> Ensure that the input data is always an array; otherwise, the sub-steps cannot execute correctly. Additionally, if the given input\n> parameter is `null`, `undefined`, or an array with a length of 0, it will be returned directly without affecting the context data and\n> without executing the `Write to output` stage.\n\n#### Environment variables\n\nThis step does not use any environment variables.\n\n#### Step variables\n\n| Variable name       | Type   | Description                                                                                      |\n|---------------------|--------|--------------------------------------------------------------------------------------------------|\n| originalContentName | string | The name of the variable that contains the original input data. Optional, default is `$content`. |\n| itemName            | string | The name of the variable that contains the current item. Optional, default is `$item`.           |\n\nAt the same time, the step provides a semaphore to exit the loop, named `$semaphore`. Therefore, the format of the input data received by\nthe sub-steps is as follows:\n\n```ts\n// Assuming no parameters are specified, all defaults will be used.\ninterface Data {\n	$content: any;          // original input data\n	$item: any;             // item at the current index\n	$semaphore: Symbol;     // return this semaphore to break and exit the loop\n}\n\n// Assuming the parameters are specified as originalContentName=input, itemName=data\ninterface Data {\n	input: any;             // original input data\n	data: any;              // item at the current index\n	$semaphore: Symbol;     // return this semaphore to break and exit the loop\n}\n```\n\n#### Returning\n\nAn array containing the returns from all execution rounds, maintaining the same order as the given parameter array.\n\n> Typically, need to specify a merge property in the `Write to output` step for use in subsequent pipeline steps.\n\n${transformer}\n\n${errorHandles}\n";
-const docs$b = {
-  stepEachItemName: markdown$N,
-  stepEachOriginalContentName: markdown$M,
-  eachStep: mergeStepDocs(markdown$L)
-};
-const markdown$K = "Retrieve the value of a specified property name from the input data. Property names can be connected with dots (`.`) to denote multiple\nhierarchical levels.\n\nFor example, if there is input data like `{a: {b: [{c: 3}, {c: 4}]}}`, then with the following definition, you can retrieve the\ncorresponding value:\n\n| Property | Value                   |\n|:---------|:------------------------|\n| `a`      | `{b: [{c: 3}, {c: 4}]}` |\n| `a.b`    | `[{c: 3}, {c: 4}]`      |\n| `a.b.c`  | `[3, 4]`                |\n\n> Please note that when attempting to retrieve a property value from `null`, `undefined`, or a primitive type (including `string`,\n> `number`, `boolean`, `symbol`, `bigint`), will always receive a `null`.\n";
-const markdown$J = "### Get property step\n\nThe get property pipeline step retrieves the value of the specified property name and finally returns the processed result to the memory\ncontext for further processing.\n\n#### Environment variables\n\nThis step does not use any environment variables.\n\n#### Step variables\n\nDefine the `property` attribute to retrieve the value from a specified position in the input data. The retrieval rules are as follows:\n\n- Property names can use dot (`.`) to connect, allowing access to values from nested objects.\n- Values based on `null` or `undefined` will return `null`.\n- Values based on any basic type (including `string`, `number`, `bigint`, `boolean`, `Symbol`) will return `null`.\n- If there are multiple levels of properties and one level's data is an array, the final result will be an array.\n\n#### Returning\n\nThe value of the specified property, can be any value.\n\n> Typically, need to specify a merge property in the `Write to output` step for use in subsequent pipeline steps.\n\n${transformer}\n\n${errorHandles}\n";
-const docs$a = {
-  stepGetPropertyProperty: markdown$K,
-  getPropertyStep: mergeStepDocs(markdown$J)
-};
-const markdown$I = "Specify whether the HTTP request includes body content. Without explicitly specifying whether to use the HTTP body, requests other\nthan `GET` will default to using it, whereas the `GET` request will default to ignoring it.\n";
-const markdown$H = "Reprocess the endpoint URL read from the environment. The following parameters can be used during the decoration process:\n\n- `$endpointUrl`: The URL read from the environment based on the `System` and `Endpoint` definitions, can be a fully qualified URL\n  or just a\n  URL context or template,\n- `$factor`: The content portion of the request data, excluding context data,\n- `$request`: The entire request data, including both content and context,\n- `$helpers` or `$`: Data manipulation helpers.\n\nShould return the final URL to be used for the HTTP request. If this snippet is not defined, then use the URL configured in\nthe environment variables for access.\n";
-const markdown$G = "Remote HTTP service endpoint code. This code can represent a single API or a strongly related set of APIs, depending on how `Decorate URL`\nis used.\n";
-const markdown$F = "### Http fetch step\n\nThe http fetch pipeline step calls remote HTTP services through defined parameters, and can process the returned results and perform related\nerror handling.\n\n${http}\n";
-const markdown$E = "Build HTTP request body. The following parameters can be used during the build process:\n\n- `$factor`: The content portion of the request data, excluding context data,\n- `$request`: The entire request data, including both content and context,\n- `$helpers` or `$`: Data manipulation helpers.\n\nThis function could return anything. If the returned data is not `null`, `undefined`, and not a string, use `JSON.stringify` to convert it\nto a string. `null` and `undefined` essentially represent the absence of an HTTP body. If this snippet is not defined, the default behavior\nis to use `$factor` as the HTTP body after processing it accordingly.\n\n> Regardless, this part can be configured, but in scenarios where the body is not used, the configured snippet will be ignored.\n";
-const markdown$D = "Build HTTP request headers. The following parameters can be used during the build process:\n\n- `$factor`: The content portion of the request data, excluding context data,\n- `$request`: The entire request data, including both content and context,\n- `$helpers` or `$`: Data manipulation helpers.\n\nThis function should return an object (`Record<string, string>`) containing the headers to be used in the HTTP request. If the same key as\ndefined in the environment definition is used, the definition here takes precedence, and the headers in the environment definition will be\noverwritten. If this snippet is not defined, then use the headers in the environment definition.\n\n> Key of headers are NOT trimmed.\n";
-const markdown$C = "### Http get step\n\nThe http get pipeline step calls remote HTTP services through defined parameters, and can process the returned results and perform related\nerror handling. The Http method is `get`.\n\n${http}\n";
-const markdown$B = "#### Environment variables\n\nAll environment variable names depend on the definitions of the `System` and `Endpoint` step variables. For convenience, using the\nfollowing\ndefinitions, which will be used in the environment variables:\n\n- `SYSTEM`: corresponding to the value of `System`,\n- `ENDPOINT`: corresponding to the value of `Endpoint`.\n\nAssuming the value of `System` is `s1` and the value of `Endpoint` is `order`, a system parameter\nnamed `CFG_ENDPOINTS_{SYSTEM}_{ENDPOINT}_URL` would thus be `CFG_ENDPOINTS_S1_ORDER_URL`.\n\n> Note that the values of `System` and `Endpoint` will be converted to uppercase, and any `.` characters will be replaced\n> with `_`. Additionally, based on common practices for environment parameter definitions, the values for `System` and `Endpoint`\n> cannot include `-`, `=` or whitespace characters.\n\nThis step uses the following system environment variables definition:\n\n- `CFG_ENDPOINTS_{SYSTEM}_{ENDPOINT}_URL`: Definition of the endpoint’s URL. This URL can be a fully qualified URL or just a URL context\n  or template, depending on whether and how the `Decorate URL` step variable is used to modify and obtain the final effective access URL,\n- `CFG_ENDPOINTS_{SYSTEM}_GLOBAL_HEADERS`: HTTP request headers used in the step, which are global and will be used in all requests. Defined\n  using the string format `key1=value[;key2=value2...[;keyN=valueN]]`,\n- `CFG_ENDPOINTS_{SYSTEM}_{ENDPOINT}_HEADERS`: HTTP request headers used in the step. Defined using the string\n  format `key1=value[;key2=value2...[;keyN=valueN]]`. If the same key as defined in the global definition is used, the definition here takes\n  precedence, and the value in the global definition will be overwritten,\n- `CFG_ENDPOINTS_{SYSTEM}_GLOBAL_TIMEOUT`: Timeout for the HTTP request in seconds. If not defined, the default value is -1, which means no\n  timeout,\n- `CFG_ENDPOINTS_{SYSTEM}_{ENDPOINT}_TIMEOUT`: Timeout for the HTTP request in seconds. If not defined, use the global definition instead.\n\n> Key of headers are trimmed automatically.\n\n> The timeout definition only takes effect when there is no `timeout` defined in the step variables.\n\n#### Step variables\n\nMaking a remote HTTP call requires many parameter definitions, some of which are mandatory and some optional.\n\n##### `System`\n\nCode for accessing the remote system. Generally, a remote system provides a set of APIs. To facilitate the use of the same defined data in\ndifferent steps, the remote system needs to be defined in code first. This variable is mandatory and case-insensitive.\n\n##### `Endpoint`\n\nDefine an endpoint code for the remote system. This code can represent a single API or a strongly related set of APIs, depending on\nhow `Decorate URL` is used.\n\n##### `Decorate URL`\n\nThis variable is optional and can be used to decorate the URL of the endpoint. The value can be a JavaScript snippet that will be executed\nas a JavaScript function. This function accepts the following input parameters:\n\n- `$endpointUrl`: The URL read from the environment based on the `System` and `Endpoint` definitions, can be a fully qualified URL\n  or just a\n  URL context or template,\n- `$factor`: The content portion of the request data, excluding context data,\n- `$request`: The entire request data, including both content and context,\n- `$helpers` or `$`: Data manipulation helpers.\n\nThis function should return the final URL to be used for the HTTP request. If this snippet is not defined, then use the URL configured in\nthe environment variables for access.\n\n##### `Http method`\n\nThe HTTP method to be used for the request. This variable is mandatory and case-insensitive. It is optional, with a default value of `post`.\n\n##### `Timeout`\n\nThe timeout for the HTTP request, in seconds. If not defined, use the timeout configured in the environment variables. If none of these are\ndefined, use `-1` as default, which means no timeout.\n\n##### `Generate request headers`\n\nThis variable is optional and can be used to build the HTTP request headers. The value can be a JavaScript snippet that will be executed\nas a JavaScript function. This function accepts the following input parameters:\n\n- `$factor`: The content portion of the request data, excluding context data,\n- `$request`: The entire request data, including both content and context,\n- `$helpers` or `$`: Data manipulation helpers.\n\nThis function should return an object (`Record<string, string>`) containing the headers to be used in the HTTP request. If the same key as\ndefined in the environment definition is used, the definition here takes precedence, and the headers in the environment definition will be\noverwritten. If this snippet is not defined, then use the headers in the environment definition.\n\n> Key of headers are NOT trimmed.\n\n##### `Use request body`\n\nSpecify whether the HTTP request uses the HTTP body content. This variable is optional and follows these rules:\n\n- Not defined: For requests other than `GET`, use the HTTP body by default,\n- `true`: Always use the HTTP body, regardless of the request method,\n- `false`: Always avoid using the HTTP body, regardless of the request method.\n\n> How to generate the HTTP body content is referenced by the definition of the `generateBody` variable.\n\n##### `Generate request body`\n\nThis variable is optional and can be used to build the HTTP request body. The value can be a JavaScript snippet that will be executed\nas a JavaScript function. This function accepts the following input parameters:\n\n- `$factor`: The content portion of the request data, excluding context data,\n- `$request`: The entire request data, including both content and context,\n- `$helpers` or `$`: Data manipulation helpers.\n\nThis function could return anything. If the returned data is not `null`, `undefined`, and not a string, use `JSON.stringify` to convert it\nto a string. `null` and `undefined` essentially represent the absence of an HTTP body. If this snippet is not defined, the default behavior\nis to use `$factor` as the HTTP body after processing it accordingly.\n\n##### `Read response body`\n\nThis variable is optional and can be used to read the HTTP response. The value can be a JavaScript snippet that will be executed\nas a JavaScript function. This function accepts the following input parameters:\n\n- `$response`: The response (`Response`, check [node-fetch](https://www.npmjs.com/package/node-fetch) for more details) object from the HTTP\n  request,\n- `$factor`: The content portion of the request data, excluding context data,\n- `$request`: The entire request data, including both content and context,\n- `$helpers` or `$`: Data manipulation helpers.\n\nThis function could return anything, and the returned data will be used as output data of this step. If this snippet is not defined, the\nresponse should be read as JSON by `Response.json()`. It is important to note that the response body will only be read if the response\nstatus is in the normal range (`1xx`, `2xx`, `3xx`); otherwise, it will skip to the error handling.\n\n> It is an async function, so `await` is available inside.\n\n##### `Response error handling`\n\nError handling for different HTTP response statuses is generally implemented in a way that only `4xx` and `5xx` statuses trigger\nerror handling. Each exception handling snippet is designed for a specific status; if a status does not have a defined handler, a\ndefault `UncatchableError` will be thrown, with an error code of `O03-00010`. Error handling can either rethrow the original exception,\nwrap the exception and rethrow it, or return data normally. If data is returned normally, it will be used as the output data for this step.\n\nThere are two special cases:\n\n- If the request times out, the status is `600`,\n- If the exception is not caused by the request itself, such as an exception thrown due to a problem with a certain configuration logic,\n  then,\n	- If the exception type is `UncatchableError`, no further handling will be performed and the exception will be directly thrown to the\n	  outer layer,\n	- Otherwise, use the exception handler with status `000` for processing.\n\n> DO NOT rethrow an error that is not an `UncatchableError` from the error handler, as it will be caught again by the error handler with\n> status `000`, which could lead to confusion.\n\n> All handlers are async functions, so `await` is available inside.\n\n#### Returning\n\nThe step's return data is from the response of the HTTP request or error handling.\n\n> The returned data can still be further processed during the `Write to output` stage.\n\n${transformer}\n\n${errorHandles}\n";
-const markdown$A = "HTTP methods are generally defined as `POST` and `GET`. Other commonly used methods include `PUT`, `DELETE`, and `PATCH`. However, `OPTIONS`\nis typically reserved for standard purposes and is generally not recommended for actual data communication. For a comprehensive list of HTTP\nmethods, you can refer to the [MDN HTTP request methods](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods).\n";
-const markdown$z = "### Http post step\n\nThe http get pipeline step calls remote HTTP services through defined parameters, and can process the returned results and perform related\nerror handling. The Http method is `post`.\n\n${http}\n";
-const markdown$y = "Read HTTP response. The following parameters can be used during the build process:\n\n- `$response`: The response (`Response`, check [node-fetch](https://www.npmjs.com/package/node-fetch) for more details) object from the HTTP\n  request,\n- `$factor`: The content portion of the request data, excluding context data,\n- `$request`: The entire request data, including both content and context,\n- `$helpers` or `$`: Data manipulation helpers.\n\nThis function could return anything. It is important to note that the response body will only be read if the response status is in the\nnormal range (`1xx`, `2xx`, `3xx`); otherwise, it will skip to the error handling.\n";
-const markdown$x = "Error handling for different HTTP response statuses is generally implemented in a way that only `4xx` and `5xx` statuses trigger\nerror handling. Each exception handling snippet is designed for a specific status; if a status does not have a defined handler, a\ndefault `UncatchableError` will be thrown, with an error code of `O03-00010`. Error handling can either rethrow the original exception,\nwrap the exception and rethrow it, or return data normally. If data is returned normally, it will be used as the output data for this step.\n\nThere are two special cases:\n\n- If the request times out, the status is `600`,\n- If the exception is not caused by the request itself, such as an exception thrown due to a problem with a certain configuration logic,\n  then,\n	- If the exception type is `UncatchableError`, no further handling will be performed and the exception will be directly thrown to the\n	  outer layer,\n	- Otherwise, use the exception handler with status `000` for processing.\n\n> DO NOT rethrow an error that is not an `UncatchableError` from the error handler, as it will be caught again by the error handler with\n> status `000`, which could lead to confusion.\n\n> It is an async function, so `await` is available inside.\n";
-const markdown$w = "Remote HTTP service provider system code.\n\n";
-const markdown$v = "The timeout for the HTTP request, in seconds. If not defined, use the timeout configured in the environment variables. If none of these are\ndefined, use `-1` as default, which means no timeout.\n";
-const docs$9 = (() => {
-  const httpDocs = mergeStepDocs(markdown$B, false);
+const markdown$N = "Specify whether the HTTP request includes body content. Without explicitly specifying whether to use the HTTP body, requests other\nthan `GET` will default to using it, whereas the `GET` request will default to ignoring it.\n";
+const markdown$M = "Reprocess the endpoint URL read from the environment. The following parameters can be used during the decoration process:\n\n- `$endpointUrl`: The URL read from the environment based on the `System` and `Endpoint` definitions, can be a fully qualified URL\n  or just a\n  URL context or template,\n- `$factor`: The content portion of the request data, excluding context data,\n- `$request`: The entire request data, including both content and context,\n- `$helpers` or `$`: Data manipulation helpers.\n\nShould return the final URL to be used for the HTTP request. If this snippet is not defined, then use the URL configured in\nthe environment variables for access.\n";
+const markdown$L = "Remote HTTP service endpoint code. This code can represent a single API or a strongly related set of APIs, depending on how `Decorate URL`\nis used.\n";
+const markdown$K = "### Http fetch step\n\nThe http fetch pipeline step calls remote HTTP services through defined parameters, and can process the returned results and perform related\nerror handling.\n\n${http}\n";
+const markdown$J = "Build HTTP request body. The following parameters can be used during the build process:\n\n- `$factor`: The content portion of the request data, excluding context data,\n- `$request`: The entire request data, including both content and context,\n- `$helpers` or `$`: Data manipulation helpers.\n\nThis function could return anything. If the returned data is not `null`, `undefined`, and not a string, use `JSON.stringify` to convert it\nto a string. `null` and `undefined` essentially represent the absence of an HTTP body. If this snippet is not defined, the default behavior\nis to use `$factor` as the HTTP body after processing it accordingly.\n\n> Regardless, this part can be configured, but in scenarios where the body is not used, the configured snippet will be ignored.\n";
+const markdown$I = "Build HTTP request headers. The following parameters can be used during the build process:\n\n- `$factor`: The content portion of the request data, excluding context data,\n- `$request`: The entire request data, including both content and context,\n- `$helpers` or `$`: Data manipulation helpers.\n\nThis function should return an object (`Record<string, string>`) containing the headers to be used in the HTTP request. If the same key as\ndefined in the environment definition is used, the definition here takes precedence, and the headers in the environment definition will be\noverwritten. If this snippet is not defined, then use the headers in the environment definition.\n\n> Key of headers are NOT trimmed.\n";
+const markdown$H = "### Http get step\n\nThe http get pipeline step calls remote HTTP services through defined parameters, and can process the returned results and perform related\nerror handling. The Http method is `get`.\n\n${http}\n";
+const markdown$G = "#### Environment variables\n\nAll environment variable names depend on the definitions of the `System` and `Endpoint` step variables. For convenience, using the\nfollowing\ndefinitions, which will be used in the environment variables:\n\n- `SYSTEM`: corresponding to the value of `System`,\n- `ENDPOINT`: corresponding to the value of `Endpoint`.\n\nAssuming the value of `System` is `s1` and the value of `Endpoint` is `order`, a system parameter\nnamed `CFG_ENDPOINTS_{SYSTEM}_{ENDPOINT}_URL` would thus be `CFG_ENDPOINTS_S1_ORDER_URL`.\n\n> Note that the values of `System` and `Endpoint` will be converted to uppercase, and any `.` characters will be replaced\n> with `_`. Additionally, based on common practices for environment parameter definitions, the values for `System` and `Endpoint`\n> cannot include `-`, `=` or whitespace characters.\n\nThis step uses the following system environment variables definition:\n\n- `CFG_ENDPOINTS_{SYSTEM}_{ENDPOINT}_URL`: Definition of the endpoint’s URL. This URL can be a fully qualified URL or just a URL context\n  or template, depending on whether and how the `Decorate URL` step variable is used to modify and obtain the final effective access URL,\n- `CFG_ENDPOINTS_{SYSTEM}_GLOBAL_HEADERS`: HTTP request headers used in the step, which are global and will be used in all requests. Defined\n  using the string format `key1=value[;key2=value2...[;keyN=valueN]]`,\n- `CFG_ENDPOINTS_{SYSTEM}_{ENDPOINT}_HEADERS`: HTTP request headers used in the step. Defined using the string\n  format `key1=value[;key2=value2...[;keyN=valueN]]`. If the same key as defined in the global definition is used, the definition here takes\n  precedence, and the value in the global definition will be overwritten,\n- `CFG_ENDPOINTS_{SYSTEM}_GLOBAL_TIMEOUT`: Timeout for the HTTP request in seconds. If not defined, the default value is -1, which means no\n  timeout,\n- `CFG_ENDPOINTS_{SYSTEM}_{ENDPOINT}_TIMEOUT`: Timeout for the HTTP request in seconds. If not defined, use the global definition instead.\n\n> Key of headers are trimmed automatically.\n\n> The timeout definition only takes effect when there is no `timeout` defined in the step variables.\n\n#### Step variables\n\nMaking a remote HTTP call requires many parameter definitions, some of which are mandatory and some optional.\n\n##### `System`\n\nCode for accessing the remote system. Generally, a remote system provides a set of APIs. To facilitate the use of the same defined data in\ndifferent steps, the remote system needs to be defined in code first. This variable is mandatory and case-insensitive.\n\n##### `Endpoint`\n\nDefine an endpoint code for the remote system. This code can represent a single API or a strongly related set of APIs, depending on\nhow `Decorate URL` is used.\n\n##### `Decorate URL`\n\nThis variable is optional and can be used to decorate the URL of the endpoint. The value can be a JavaScript snippet that will be executed\nas a JavaScript function. This function accepts the following input parameters:\n\n- `$endpointUrl`: The URL read from the environment based on the `System` and `Endpoint` definitions, can be a fully qualified URL\n  or just a\n  URL context or template,\n- `$factor`: The content portion of the request data, excluding context data,\n- `$request`: The entire request data, including both content and context,\n- `$helpers` or `$`: Data manipulation helpers.\n\nThis function should return the final URL to be used for the HTTP request. If this snippet is not defined, then use the URL configured in\nthe environment variables for access.\n\n##### `Http method`\n\nThe HTTP method to be used for the request. This variable is mandatory and case-insensitive. It is optional, with a default value of `post`.\n\n##### `Timeout`\n\nThe timeout for the HTTP request, in seconds. If not defined, use the timeout configured in the environment variables. If none of these are\ndefined, use `-1` as default, which means no timeout.\n\n##### `Generate request headers`\n\nThis variable is optional and can be used to build the HTTP request headers. The value can be a JavaScript snippet that will be executed\nas a JavaScript function. This function accepts the following input parameters:\n\n- `$factor`: The content portion of the request data, excluding context data,\n- `$request`: The entire request data, including both content and context,\n- `$helpers` or `$`: Data manipulation helpers.\n\nThis function should return an object (`Record<string, string>`) containing the headers to be used in the HTTP request. If the same key as\ndefined in the environment definition is used, the definition here takes precedence, and the headers in the environment definition will be\noverwritten. If this snippet is not defined, then use the headers in the environment definition.\n\n> Key of headers are NOT trimmed.\n\n##### `Use request body`\n\nSpecify whether the HTTP request uses the HTTP body content. This variable is optional and follows these rules:\n\n- Not defined: For requests other than `GET`, use the HTTP body by default,\n- `true`: Always use the HTTP body, regardless of the request method,\n- `false`: Always avoid using the HTTP body, regardless of the request method.\n\n> How to generate the HTTP body content is referenced by the definition of the `generateBody` variable.\n\n##### `Generate request body`\n\nThis variable is optional and can be used to build the HTTP request body. The value can be a JavaScript snippet that will be executed\nas a JavaScript function. This function accepts the following input parameters:\n\n- `$factor`: The content portion of the request data, excluding context data,\n- `$request`: The entire request data, including both content and context,\n- `$helpers` or `$`: Data manipulation helpers.\n\nThis function could return anything. If the returned data is not `null`, `undefined`, and not a string, use `JSON.stringify` to convert it\nto a string. `null` and `undefined` essentially represent the absence of an HTTP body. If this snippet is not defined, the default behavior\nis to use `$factor` as the HTTP body after processing it accordingly.\n\n##### `Read response body`\n\nThis variable is optional and can be used to read the HTTP response. The value can be a JavaScript snippet that will be executed\nas a JavaScript function. This function accepts the following input parameters:\n\n- `$response`: The response (`Response`, check [node-fetch](https://www.npmjs.com/package/node-fetch) for more details) object from the HTTP\n  request,\n- `$factor`: The content portion of the request data, excluding context data,\n- `$request`: The entire request data, including both content and context,\n- `$helpers` or `$`: Data manipulation helpers.\n\nThis function could return anything, and the returned data will be used as output data of this step. If this snippet is not defined, the\nresponse should be read as JSON by `Response.json()`. It is important to note that the response body will only be read if the response\nstatus is in the normal range (`1xx`, `2xx`, `3xx`); otherwise, it will skip to the error handling.\n\n> It is an async function, so `await` is available inside.\n\n##### `Response error handling`\n\nError handling for different HTTP response statuses is generally implemented in a way that only `4xx` and `5xx` statuses trigger\nerror handling. Each exception handling snippet is designed for a specific status; if a status does not have a defined handler, a\ndefault `UncatchableError` will be thrown, with an error code of `O03-00010`. Error handling can either rethrow the original exception,\nwrap the exception and rethrow it, or return data normally. If data is returned normally, it will be used as the output data for this step.\n\nThere are two special cases:\n\n- If the request times out, the status is `600`,\n- If the exception is not caused by the request itself, such as an exception thrown due to a problem with a certain configuration logic,\n  then,\n	- If the exception type is `UncatchableError`, no further handling will be performed and the exception will be directly thrown to the\n	  outer layer,\n	- Otherwise, use the exception handler with status `000` for processing.\n\n> DO NOT rethrow an error that is not an `UncatchableError` from the error handler, as it will be caught again by the error handler with\n> status `000`, which could lead to confusion.\n\n> All handlers are async functions, so `await` is available inside.\n\n#### Returning\n\nThe step's return data is from the response of the HTTP request or error handling.\n\n> The returned data can still be further processed during the `Write to output` stage.\n\n${transformer}\n\n${errorHandles}\n";
+const markdown$F = "HTTP methods are generally defined as `POST` and `GET`. Other commonly used methods include `PUT`, `DELETE`, and `PATCH`. However, `OPTIONS`\nis typically reserved for standard purposes and is generally not recommended for actual data communication. For a comprehensive list of HTTP\nmethods, you can refer to the [MDN HTTP request methods](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods).\n";
+const markdown$E = "### Http post step\n\nThe http get pipeline step calls remote HTTP services through defined parameters, and can process the returned results and perform related\nerror handling. The Http method is `post`.\n\n${http}\n";
+const markdown$D = "Read HTTP response. The following parameters can be used during the build process:\n\n- `$response`: The response (`Response`, check [node-fetch](https://www.npmjs.com/package/node-fetch) for more details) object from the HTTP\n  request,\n- `$factor`: The content portion of the request data, excluding context data,\n- `$request`: The entire request data, including both content and context,\n- `$helpers` or `$`: Data manipulation helpers.\n\nThis function could return anything. It is important to note that the response body will only be read if the response status is in the\nnormal range (`1xx`, `2xx`, `3xx`); otherwise, it will skip to the error handling.\n";
+const markdown$C = "Error handling for different HTTP response statuses is generally implemented in a way that only `4xx` and `5xx` statuses trigger\nerror handling. Each exception handling snippet is designed for a specific status; if a status does not have a defined handler, a\ndefault `UncatchableError` will be thrown, with an error code of `O03-00010`. Error handling can either rethrow the original exception,\nwrap the exception and rethrow it, or return data normally. If data is returned normally, it will be used as the output data for this step.\n\nThere are two special cases:\n\n- If the request times out, the status is `600`,\n- If the exception is not caused by the request itself, such as an exception thrown due to a problem with a certain configuration logic,\n  then,\n	- If the exception type is `UncatchableError`, no further handling will be performed and the exception will be directly thrown to the\n	  outer layer,\n	- Otherwise, use the exception handler with status `000` for processing.\n\n> DO NOT rethrow an error that is not an `UncatchableError` from the error handler, as it will be caught again by the error handler with\n> status `000`, which could lead to confusion.\n\n> It is an async function, so `await` is available inside.\n";
+const markdown$B = "Remote HTTP service provider system code.\n\n";
+const markdown$A = "The timeout for the HTTP request, in seconds. If not defined, use the timeout configured in the environment variables. If none of these are\ndefined, use `-1` as default, which means no timeout.\n";
+const docs$b = (() => {
+  const httpDocs = mergeStepDocs(markdown$G, false);
   return {
-    stepHttpSystem: markdown$w,
-    stepHttpEndpoint: markdown$G,
-    stepHttpDecorateUrl: markdown$H,
-    stepHttpMethod: markdown$A,
-    stepHttpTimeout: markdown$v,
-    stepHttpGenerateHeaders: markdown$D,
-    stepHttpBodyUsed: markdown$I,
-    stepHttpGenerateBody: markdown$E,
-    stepHttpReadResponse: markdown$y,
-    stepHttpResponseErrorHandles: markdown$x,
-    httpFetchStep: mergeStepDocsFreely(markdown$F, { "http": httpDocs }),
-    httpGetStep: mergeStepDocsFreely(markdown$C, { "http": httpDocs }),
-    httpPostStep: mergeStepDocsFreely(markdown$z, { "http": httpDocs })
+    stepHttpSystem: markdown$B,
+    stepHttpEndpoint: markdown$L,
+    stepHttpDecorateUrl: markdown$M,
+    stepHttpMethod: markdown$F,
+    stepHttpTimeout: markdown$A,
+    stepHttpGenerateHeaders: markdown$I,
+    stepHttpBodyUsed: markdown$N,
+    stepHttpGenerateBody: markdown$J,
+    stepHttpReadResponse: markdown$D,
+    stepHttpResponseErrorHandles: markdown$C,
+    httpFetchStep: mergeStepDocsFreely(markdown$K, { "http": httpDocs }),
+    httpGetStep: mergeStepDocsFreely(markdown$H, { "http": httpDocs }),
+    httpPostStep: mergeStepDocsFreely(markdown$E, { "http": httpDocs })
   };
 })();
-const markdown$u = "The return value of the function will be used as the input data for each sub-step, and this function will be executed before each sub-step.\nIf the return data contains shared memory data, modifications to this data in any sub-step may affect other sub-steps. The following\nparameters can be used during the clone process:\n\n- `$factor`: The content portion of the request data, excluding context data,\n- `$request`: The entire request data, including both content and context,\n- `$helpers` or `$`: Data manipulation helpers.\n";
-const markdown$t = "Check to receive only the result data of the first completed sub-step; otherwise, receive the result data of all sub-steps in the form of an\narray.\n";
-const markdown$s = "### Parallel sets step\n\nThe parallel sets pipeline step includes a set of sub-step definitions, where all the actual processing logic is executed within the\nsub-steps. Each substep is executed in parallel, and it can be specified whether to collect only the result of the first completed sub-step\nor to collect the results of all sub-steps.The input data for each sub-step is specified by `Pick from input`.\n\n> No matter how the collection of sub-step execution results is specified, if any sub-step throws an exception before the results are\n> collected, the entire parallel process is terminated. Note that the completion of a step does not necessarily mean that other\n> asynchronously executed substeps will be terminated. Please refer\n> to [Promise.race](https://tc39.es/ecma262/multipage/control-abstraction-objects.html#sec-promise.race) for more details.\n\n> The parallel step relies on the exception raised by the sub-step. If the sub-step encounters an exception and is caught and processed by\n> the exception handler without re-throwing an exception, it is considered to have ended normally.\n\n#### Environment variables\n\nThis step does not use any environment variables.\n\n#### Step variables\n\n| Variable name | Type    | Description                                                                                                                  |\n|---------------|---------|------------------------------------------------------------------------------------------------------------------------------|\n| cloneData     | snippet | Provide a snippet to copy data. The return value of this snippet will be used as the input data for each sub-step. Optional. |\n| race          | boolean | When set to `true`, only the result data of the first completed sub-step will be received. Optional, default is `false`.     |\n\n> If `cloneData` snippet is not provided, the input data for each sub-step will be the same memory data, which is shared among all\n> sub-steps. Therefore, any modification of this memory data by one sub-step may affect the other sub-steps.\n\n#### Returning\n\nUse the return from the first resolved sub-step as the return data. If defined to receive the results of all sub-steps, the data will be an\narray; otherwise, it will be the result data returned by the first completed sub-step.\n\n> It can still be further decorated during `Write to output` stage for the return data.\n\n${transformer}\n\n${errorHandles}\n";
+const markdown$z = "The return value of the function will be used as the input data for each sub-step, and this function will be executed before each sub-step.\nIf the return data contains shared memory data, modifications to this data in any sub-step may affect other sub-steps. The following\nparameters can be used during the clone process:\n\n- `$factor`: The content portion of the request data, excluding context data,\n- `$request`: The entire request data, including both content and context,\n- `$helpers` or `$`: Data manipulation helpers.\n";
+const markdown$y = "Check to receive only the result data of the first completed sub-step; otherwise, receive the result data of all sub-steps in the form of an\narray.\n";
+const markdown$x = "### Parallel sets step\n\nThe parallel sets pipeline step includes a set of sub-step definitions, where all the actual processing logic is executed within the\nsub-steps. Each substep is executed in parallel, and it can be specified whether to collect only the result of the first completed sub-step\nor to collect the results of all sub-steps.The input data for each sub-step is specified by `Pick from input`.\n\n> No matter how the collection of sub-step execution results is specified, if any sub-step throws an exception before the results are\n> collected, the entire parallel process is terminated. Note that the completion of a step does not necessarily mean that other\n> asynchronously executed substeps will be terminated. Please refer\n> to [Promise.race](https://tc39.es/ecma262/multipage/control-abstraction-objects.html#sec-promise.race) for more details.\n\n> The parallel step relies on the exception raised by the sub-step. If the sub-step encounters an exception and is caught and processed by\n> the exception handler without re-throwing an exception, it is considered to have ended normally.\n\n#### Environment variables\n\nThis step does not use any environment variables.\n\n#### Step variables\n\n| Variable name | Type    | Description                                                                                                                  |\n|---------------|---------|------------------------------------------------------------------------------------------------------------------------------|\n| cloneData     | snippet | Provide a snippet to copy data. The return value of this snippet will be used as the input data for each sub-step. Optional. |\n| race          | boolean | When set to `true`, only the result data of the first completed sub-step will be received. Optional, default is `false`.     |\n\n> If `cloneData` snippet is not provided, the input data for each sub-step will be the same memory data, which is shared among all\n> sub-steps. Therefore, any modification of this memory data by one sub-step may affect the other sub-steps.\n\n#### Returning\n\nUse the return from the first resolved sub-step as the return data. If defined to receive the results of all sub-steps, the data will be an\narray; otherwise, it will be the result data returned by the first completed sub-step.\n\n> It can still be further decorated during `Write to output` stage for the return data.\n\n${transformer}\n\n${errorHandles}\n";
+const docs$a = {
+  stepParallelRace: markdown$y,
+  stepParallelCloneData: markdown$z,
+  parallelStep: mergeStepDocs(markdown$x)
+};
+const markdown$w = "If using data from the request body, the data portion of the body must be in valid JSON format.\n\n> `GET` requests by default do not parse the request body, while other requests (methods) default to parsing the request body.\n";
+const markdown$v = "Used for locating configurations within the application, required fields, and must be globally unique.";
+const markdown$u = "Specify whether the current configuration is effective.\n\n> Note that configurations that are not effective will not be loaded when the application starts, so the effective status cannot be switched\n> at runtime.";
+const markdown$t = "Indicate whether the returned response is a file.\n";
+const markdown$s = "Specify the response headers to be outputted to the client, including names and values.\n\nThe syntax rules are as follows:\n\n- Use a colon to connect the name and value, for example `x-name: value`. Note that only the content before the first colon is considered\n  the name, and the remaining part is the value,\n- If multiple are needed, they should be written on multiple lines,\n- The spaces around the name and value will be automatically removed.\n";
+const markdown$r = "To accept uploaded files, multiple attributes are required:\n\n- Specify name: Each line represents a name. For multiple names, define them on separate lines,\n- Each name can specify a max count by appending a colon followed by a number after the name,\n	- `<= 0` indicates unlimited files for that name,\n	- `>= 1` indicates a maximum count,\n- Specify maximum file size: Use plain numbers for bytes, or append `k`, `K`, `m`, `M` for kilobytes and megabytes,\n- Specify file type [mime type](https://docs.nestjs.com/techniques/file-upload#file-validation): Separate multiple types with commas or\n  semicolons.\n\n> The maximum file size and file type specifications apply to all files.\n\n> When defining upload file parameters, due to HTTP protocol specifications requiring the use of Form Data, the `body` supports only\n> key-value pairs. Therefore, the parsed data forms a single-layer JSON object and no longer retains a multi-layered structure.\n";
+const markdown$q = "To specify receiving multiple request headers, use commas or semicolons as separators.\n";
+const markdown$p = "Only executed when the application starts, during which the system does not provide any parameters to the pipeline.\n";
+const markdown$o = "`GET` requests by default do not parse the request body, while other requests (methods) default to parsing the request body.\n";
+const markdown$n = "Parse parameters from the [route](https://docs.nestjs.com/controllers#route-parameters). For example, can parse the `name`\nand `age` parameters from `https://example.com/:name/:age`.\n\n> The parameter names are automatically synchronized here when modifying the `route` value.\n\n> Although parameters are defined in the `route`, it is still possible to ignore them here, but this is not the recommended approach. \n";
+const markdown$m = "## Overview\n\nThe core concept of `@rainbow-o23` is pipeline, where all logic is defined through pipeline and its steps. There are three different forms\nof\npipeline based on how it is defined:\n\n- Pipeline, which can optionally be exposed as an API. To differentiate, we generally refer to pipelines that are exposed as\n  APIs as `Pipeline as API`, and pipelines that are not exposed as APIs as `pipeline`. In all documents, we will use\n  this name to refer to it. If not specifically labeled as `as API`, it means that this pipeline has not been exposed as an API.\n- Step set, composed of a group of steps,\n- Step: based on the definition of a single step.\n\nIf defined as a pipeline and is exposed as an API, it does not allow other pipeline steps to call it, otherwise it does. Therefore, if\ncertain logic combinations can be reused, they should be defined as a pipeline/steps set/step.\n\n## Common attributes\n\nAll definitions should have the following attributes:\n\n- A `code` attribute for identification within the system, so the value of the `code` attribute is globally unique.\n- A `type` attribute is used to indicate the type of this definition, and the value of the `type` attribute must be one\n  of `pipeline`, `step-sets`, or `step`.\n- An `enabled` attribute is used to indicate whether this definition is effective, and the value of the `enabled` attribute must be\n  either `true` or `false`. If not defined, this definition is considered to be effective by default.\n\n## Pipeline as API\n\nIf the definition contains a `route` attribute and specifies a URI, it is considered to be published as an API. A pipeline published\nas an API includes all standard HTTP protocol elements:\n\n- `route`, URI of API. Excluding the scheme, domain name, and port in the URL, the application configuration can also specify the path\n  context,\n	- To facilitate the definition and parsing of data contained in the `route`, you can use `pathParams` for definition. `pathParams` can\n	  be a list of parameters, or you can use `true` to define receiving all valid path parameters. Please note that the definition of path\n	  parameters must conform to the [nestjs](https://docs.nestjs.com/controllers#route-parameters) standard.\n- `method`, supporting `get`, `post`, `put`, `patch`, and `delete`,\n- `headers`, a list of headers that need to be parsed, or `true` to parse all headers,\n- `queryParams`, a list of query parameters that need to be parsed, or `true` to parse all query parameters,\n- `body`, the content of the HTTP body is in JSON format. To better adapt to common practices of HTTP API usage:\n	- When `method` is specified as `get` and the `body` parameter is not explicitly set to `true`, the system defaults to ignoring the HTTP\n	  body content,\n	- When `method` is not specified as `get` and the `body` parameter is not explicitly set to `false`, the system defaults to parsing the\n	  HTTP body content,\n- `files`, a list of files that need to be parsed, or `true` to parse all files.\n\nThere are also some HTTP response definitions:\n\n- `exposeHeaders`, a set of headers that need to be pushed to the client,\n- `exposeFile`, indicating whether the response data is a file.\n\n## Pipeline\n\nIf the definition does not contain a `route` attribute, it is considered a pipeline. A pipeline can be called by other pipeline steps.\n\nA pipeline always includes at least one step, and its behavior is entirely determined by the steps defined within it.\n\nA pipeline also has a special property `initOnly`, which if declared as `true`, indicates that this pipeline will only be\nexecuted when the application starts, and the application will not provide any parameters during execution.\n\n## Step set\n\nStep set, as the name suggests, can define a set of steps. They can also define how their built-in steps are executed, typically in the\nfollowing ways:\n\n- Synchronous serial,\n- Asynchronous serial,\n- Synchronous parallel,\n- Conditional execution,\n- Loop execution (only for input data as an array),\n- Start a database transaction.\n\nBy combining the various types of step collections mentioned above, you can construct execution sequences suitable for different scenarios.\n\n## Step\n\nSteps can be any type of step definition, including step sets. Logically, a step set is a step which includes a set of sub steps, and\ndifferent step sets define the way their sub steps are executed. Steps are implemented by different standard step components for\ndifferent purposes. Here are some built-in standard steps:\n\n- Retrieve values from models or remove attributes,\n- Execute snippets,\n- Generate snowflake IDs,\n- Call predefined pipelines or steps,\n- Make remote HTTP API calls,\n- Read from or write to databases.\n\nAdditionally, you can also obtain the following steps support through the `@rainbow-o23` standard extension library:\n\n- Print PDF, Word, Excel, CSV,\n- Manipulate AWS S3 objects.\n\n> The latest step support can be found on [Github](https://github.com/InsureMO/rainbow-o23).\n";
+const markdown$l = "Parse parameters from the [URL Search](https://developer.mozilla.org/en-US/docs/Web/API/URL/searchParams). For example, can parse the `name`\nand `age` parameters from `https://example.com/?name=Jonathan%20Smith&age=18`.\n\nTo specify receiving multiple query parameters, use commas or semicolons as separators.\n";
+const markdown$k = "The route of the API, excluding the HTTP protocol scheme, domain name, and port parts. The context of the URL path can also be\nspecified via the system environment variable `CFG_APP_CONTEXT`.\n\n> It should start with `/`.\n\n`route` syntax can be referenced from [nestjs - routing](https://docs.nestjs.com/controllers#routing)\nand [nestjs - route parameters](https://docs.nestjs.com/controllers#route-parameters), as well\nas [express](https://expressjs.com/en/guide/routing.html). Generally, there are the following rules:\n\n- Use regex for matching, but it's not recommended.\n- Define parameters with `:` prefix, for example `:name`, ensuring parameter names conform to the regex pattern `[A-Za-z0-9_]`.\n- For parsing multiple parameters, use `/`, `.`, or `-` as separators. \n";
+const markdown$j = "- `Pipeline`: A predefined pipeline that can be invoked by other pipelines and can also be executed during application\n  initialization. If specified to execute during application initialization, it cannot be used at runtime, and the initialization is\n  parameterless.\n- `Pipelne as API`: A predefined pipeline exposed as an API, which cannot be invoked by other pipelines.\n- `Step Set`: A predefined set of steps that can be invoked by other pipelines.\n- `Step`: A predefined step that can be invoked by other pipelines.\n";
+const docs$9 = {
+  pipeline: markdown$m,
+  pipelineCode: markdown$v,
+  pipelineEnabled: markdown$u,
+  pipelineType: markdown$j,
+  pipelineInitOnly: markdown$p,
+  pipelineRoute: markdown$k,
+  pipelineMethod: markdown$o,
+  pipelineHeaders: markdown$q,
+  pipelinePathParams: markdown$n,
+  pipelineQueryParams: markdown$l,
+  pipelineBody: markdown$w,
+  pipelineFiles: markdown$r,
+  pipelineExposeFile: markdown$t,
+  pipelineExposeHeaders: markdown$s
+};
+const markdown$i = "Specify the unique code of the pipeline.\n";
+const markdown$h = "### Ref pipeline step\n\nThe ref pipeline step calls the specified pipeline to complete the corresponding logic processing.\n\n#### Environment variables\n\nThis step does not use any environment variables.\n\n#### Step variables\n\nDefine the `code` attribute to specify the pipeline that needs to be invoked At runtime, the pipeline definition needs to be guaranteed to\nbe loaded.\n\n#### Returning\n\nUse the return data from the called pipeline as the return data for this step.\n\n${transformer}\n\n${errorHandles}\n";
 const docs$8 = {
-  stepParallelRace: markdown$t,
-  stepParallelCloneData: markdown$u,
-  parallelStep: mergeStepDocs(markdown$s)
+  stepRefPipelineCode: markdown$i,
+  refPipelineStep: mergeStepDocs(markdown$h)
 };
-const markdown$r = "If using data from the request body, the data portion of the body must be in valid JSON format.\n\n> `GET` requests by default do not parse the request body, while other requests (methods) default to parsing the request body.\n";
-const markdown$q = "Used for locating configurations within the application, required fields, and must be globally unique.";
-const markdown$p = "Specify whether the current configuration is effective.\n\n> Note that configurations that are not effective will not be loaded when the application starts, so the effective status cannot be switched\n> at runtime.";
-const markdown$o = "Indicate whether the returned response is a file.\n";
-const markdown$n = "Specify the response headers to be outputted to the client, including names and values.\n\nThe syntax rules are as follows:\n\n- Use a colon to connect the name and value, for example `x-name: value`. Note that only the content before the first colon is considered\n  the name, and the remaining part is the value,\n- If multiple are needed, they should be written on multiple lines,\n- The spaces around the name and value will be automatically removed.\n";
-const markdown$m = "To accept uploaded files, multiple attributes are required:\n\n- Specify name: Each line represents a name. For multiple names, define them on separate lines,\n- Each name can specify a max count by appending a colon followed by a number after the name,\n	- `<= 0` indicates unlimited files for that name,\n	- `>= 1` indicates a maximum count,\n- Specify maximum file size: Use plain numbers for bytes, or append `k`, `K`, `m`, `M` for kilobytes and megabytes,\n- Specify file type [mime type](https://docs.nestjs.com/techniques/file-upload#file-validation): Separate multiple types with commas or\n  semicolons.\n\n> The maximum file size and file type specifications apply to all files.\n\n> When defining upload file parameters, due to HTTP protocol specifications requiring the use of Form Data, the `body` supports only\n> key-value pairs. Therefore, the parsed data forms a single-layer JSON object and no longer retains a multi-layered structure.\n";
-const markdown$l = "To specify receiving multiple request headers, use commas or semicolons as separators.\n";
-const markdown$k = "Only executed when the application starts, during which the system does not provide any parameters to the pipeline.\n";
-const markdown$j = "`GET` requests by default do not parse the request body, while other requests (methods) default to parsing the request body.\n";
-const markdown$i = "Parse parameters from the [route](https://docs.nestjs.com/controllers#route-parameters). For example, can parse the `name`\nand `age` parameters from `https://example.com/:name/:age`.\n\n> The parameter names are automatically synchronized here when modifying the `route` value.\n\n> Although parameters are defined in the `route`, it is still possible to ignore them here, but this is not the recommended approach. \n";
-const markdown$h = "## Overview\n\nThe core concept of `@rainbow-o23` is pipeline, where all logic is defined through pipeline and its steps. There are three different forms\nof\npipeline based on how it is defined:\n\n- Pipeline, which can optionally be exposed as an API. To differentiate, we generally refer to pipelines that are exposed as\n  APIs as `Pipeline as API`, and pipelines that are not exposed as APIs as `pipeline`. In all documents, we will use\n  this name to refer to it. If not specifically labeled as `as API`, it means that this pipeline has not been exposed as an API.\n- Step set, composed of a group of steps,\n- Step: based on the definition of a single step.\n\nIf defined as a pipeline and is exposed as an API, it does not allow other pipeline steps to call it, otherwise it does. Therefore, if\ncertain logic combinations can be reused, they should be defined as a pipeline/steps set/step.\n\n## Common attributes\n\nAll definitions should have the following attributes:\n\n- A `code` attribute for identification within the system, so the value of the `code` attribute is globally unique.\n- A `type` attribute is used to indicate the type of this definition, and the value of the `type` attribute must be one\n  of `pipeline`, `step-sets`, or `step`.\n- An `enabled` attribute is used to indicate whether this definition is effective, and the value of the `enabled` attribute must be\n  either `true` or `false`. If not defined, this definition is considered to be effective by default.\n\n## Pipeline as API\n\nIf the definition contains a `route` attribute and specifies a URI, it is considered to be published as an API. A pipeline published\nas an API includes all standard HTTP protocol elements:\n\n- `route`, URI of API. Excluding the scheme, domain name, and port in the URL, the application configuration can also specify the path\n  context,\n	- To facilitate the definition and parsing of data contained in the `route`, you can use `pathParams` for definition. `pathParams` can\n	  be a list of parameters, or you can use `true` to define receiving all valid path parameters. Please note that the definition of path\n	  parameters must conform to the [nestjs](https://docs.nestjs.com/controllers#route-parameters) standard.\n- `method`, supporting `get`, `post`, `put`, `patch`, and `delete`,\n- `headers`, a list of headers that need to be parsed, or `true` to parse all headers,\n- `queryParams`, a list of query parameters that need to be parsed, or `true` to parse all query parameters,\n- `body`, the content of the HTTP body is in JSON format. To better adapt to common practices of HTTP API usage:\n	- When `method` is specified as `get` and the `body` parameter is not explicitly set to `true`, the system defaults to ignoring the HTTP\n	  body content,\n	- When `method` is not specified as `get` and the `body` parameter is not explicitly set to `false`, the system defaults to parsing the\n	  HTTP body content,\n- `files`, a list of files that need to be parsed, or `true` to parse all files.\n\nThere are also some HTTP response definitions:\n\n- `exposeHeaders`, a set of headers that need to be pushed to the client,\n- `exposeFile`, indicating whether the response data is a file.\n\n## Pipeline\n\nIf the definition does not contain a `route` attribute, it is considered a pipeline. A pipeline can be called by other pipeline steps.\n\nA pipeline always includes at least one step, and its behavior is entirely determined by the steps defined within it.\n\nA pipeline also has a special property `initOnly`, which if declared as `true`, indicates that this pipeline will only be\nexecuted when the application starts, and the application will not provide any parameters during execution.\n\n## Step set\n\nStep set, as the name suggests, can define a set of steps. They can also define how their built-in steps are executed, typically in the\nfollowing ways:\n\n- Synchronous serial,\n- Asynchronous serial,\n- Synchronous parallel,\n- Conditional execution,\n- Loop execution (only for input data as an array),\n- Start a database transaction.\n\nBy combining the various types of step collections mentioned above, you can construct execution sequences suitable for different scenarios.\n\n## Step\n\nSteps can be any type of step definition, including step sets. Logically, a step set is a step which includes a set of sub steps, and\ndifferent step sets define the way their sub steps are executed. Steps are implemented by different standard step components for\ndifferent purposes. Here are some built-in standard steps:\n\n- Retrieve values from models or remove attributes,\n- Execute scripts,\n- Generate snowflake IDs,\n- Call predefined pipelines or steps,\n- Make remote HTTP API calls,\n- Read from or write to databases.\n\nAdditionally, you can also obtain the following steps support through the `@rainbow-o23` standard extension library:\n\n- Print PDF, Word, Excel, CSV,\n- Manipulate AWS S3 objects.\n\n> The latest step support can be found on [Github](https://github.com/InsureMO/rainbow-o23).\n";
-const markdown$g = "Parse parameters from the [URL Search](https://developer.mozilla.org/en-US/docs/Web/API/URL/searchParams). For example, can parse the `name`\nand `age` parameters from `https://example.com/?name=Jonathan%20Smith&age=18`.\n\nTo specify receiving multiple query parameters, use commas or semicolons as separators.\n";
-const markdown$f = "The route of the API, excluding the HTTP protocol scheme, domain name, and port parts. The context of the URL path can also be\nspecified via the system environment variable `CFG_APP_CONTEXT`.\n\n> It should start with `/`.\n\n`route` syntax can be referenced from [nestjs - routing](https://docs.nestjs.com/controllers#routing)\nand [nestjs - route parameters](https://docs.nestjs.com/controllers#route-parameters), as well\nas [express](https://expressjs.com/en/guide/routing.html). Generally, there are the following rules:\n\n- Use regex for matching, but it's not recommended.\n- Define parameters with `:` prefix, for example `:name`, ensuring parameter names conform to the regex pattern `[A-Za-z0-9_]`.\n- For parsing multiple parameters, use `/`, `.`, or `-` as separators. \n";
-const markdown$e = "- `Pipeline`: A predefined pipeline that can be invoked by other pipelines and can also be executed during application\n  initialization. If specified to execute during application initialization, it cannot be used at runtime, and the initialization is\n  parameterless.\n- `Pipelne as API`: A predefined pipeline exposed as an API, which cannot be invoked by other pipelines.\n- `Step Set`: A predefined set of steps that can be invoked by other pipelines.\n- `Step`: A predefined step that can be invoked by other pipelines.\n";
+const markdown$g = "Specify the unique code of the pipeline step.\n";
+const markdown$f = "### Ref step step\n\nThe ref pipeline step calls the specified pipeline step to complete the corresponding logic processing.\n\n#### Environment variables\n\nThis step does not use any environment variables.\n\n#### Step variables\n\nDefine the `code` attribute to specify the pipeline step that needs to be invoked At runtime, the pipeline step definition needs to be\nguaranteed to be loaded.\n\n#### Returning\n\nUse the return data from the called pipeline step as the return data for this step.\n\n${transformer}\n\n${errorHandles}\n";
 const docs$7 = {
-  pipeline: markdown$h,
-  pipelineCode: markdown$q,
-  pipelineEnabled: markdown$p,
-  pipelineType: markdown$e,
-  pipelineInitOnly: markdown$k,
-  pipelineRoute: markdown$f,
-  pipelineMethod: markdown$j,
-  pipelineHeaders: markdown$l,
-  pipelinePathParams: markdown$i,
-  pipelineQueryParams: markdown$g,
-  pipelineBody: markdown$r,
-  pipelineFiles: markdown$m,
-  pipelineExposeFile: markdown$o,
-  pipelineExposeHeaders: markdown$n
+  stepRefStepCode: markdown$g,
+  refStepStep: mergeStepDocs(markdown$f)
 };
-const markdown$d = "Specify the unique code of the pipeline.\n";
-const markdown$c = "### Ref pipeline step\n\nThe ref pipeline step calls the specified pipeline to complete the corresponding logic processing.\n\n#### Environment variables\n\nThis step does not use any environment variables.\n\n#### Step variables\n\nDefine the `code` attribute to specify the pipeline that needs to be invoked At runtime, the pipeline definition needs to be guaranteed to\nbe loaded.\n\n#### Returning\n\nUse the return data from the called pipeline as the return data for this step.\n\n${transformer}\n\n${errorHandles}\n";
+const markdown$e = "### Sets step\n\nThe sets pipeline step includes a set of sub-step definitions, where all the actual processing logic is executed within the sub-steps. The\ninput data for the first sub-step is specified by `Pick from input`.\n\n#### Environment variables\n\nThis step does not use any environment variables.\n\n#### Step variables\n\nThis step has no other properties defined except for using the `steps` attribute to define sub-steps.\n\n#### Returning\n\nUse the return from the final sub-step as the return data.\n\n> It can still be further decorated during `Write to output` stage for the return data.\n\n${transformer}\n\n${errorHandles}\n";
 const docs$6 = {
-  stepRefPipelineCode: markdown$d,
-  refPipelineStep: mergeStepDocs(markdown$c)
+  setsStep: mergeStepDocs(markdown$e)
 };
-const markdown$b = "Specify the unique code of the pipeline step.\n";
-const markdown$a = "### Ref step step\n\nThe ref pipeline step calls the specified pipeline step to complete the corresponding logic processing.\n\n#### Environment variables\n\nThis step does not use any environment variables.\n\n#### Step variables\n\nDefine the `code` attribute to specify the pipeline step that needs to be invoked At runtime, the pipeline step definition needs to be\nguaranteed to be loaded.\n\n#### Returning\n\nUse the return data from the called pipeline step as the return data for this step.\n\n${transformer}\n\n${errorHandles}\n";
+const markdown$d = "Use snippet processing for data processing. The following parameters can be used during the conversion process:\n\n- `$factor`: The content portion of the request data, excluding context data,\n- `$request`: The entire request data, including both content and context,\n- `$helpers` or `$`: Data manipulation helpers.\n\n> It is an async function, so `await` is available inside.\n";
+const markdown$c = "### Snippet step\n\nThe snippet pipeline step use a snippet (in JavaScript syntax) to process the data. Conceptually, it can be understood as a function that\nperforms appropriate operations on the given parameters and finally returns the processed result to the memory context for further\nprocessing.\n\n#### Environment variables\n\nThis step does not use any environment variables.\n\n#### Step variables\n\nDefine the `snippet` attribute, which is a JavaScript script that will ultimately be executed as a JavaScript function. This function\naccepts the following input parameters:\n\n- `$factor`: The content portion of the request data, excluding context data,\n- `$request`: The entire request data, including both content and context,\n- `$helpers` or `$`: Data manipulation helpers.\n\n#### Returning\n\nThe snippet's return data follows these conventions:\n\n- If it returns `undefined`, `null`, or no value returned, the context of the entire pipeline is considered unchanged,\n- If it returns `$.$clearContextData()`, the context is considered cleared (this is actually a specific `Symbol` object that, apart from\n  serving as a flag, has no practical significance),\n- Other data is directly returned as the response data.\n\n> The returned data can still be further processed during the `Write to output` stage.\n\n${transformer}\n\n${errorHandles}\n";
 const docs$5 = {
-  stepRefStepCode: markdown$b,
-  refStepStep: mergeStepDocs(markdown$a)
+  stepSnippetSnippet: markdown$d,
+  snippetStep: mergeStepDocs(markdown$c)
 };
-const markdown$9 = "### Sets step\n\nThe sets pipeline step includes a set of sub-step definitions, where all the actual processing logic is executed within the sub-steps. The\ninput data for the first sub-step is specified by `Pick from input`.\n\n#### Environment variables\n\nThis step does not use any environment variables.\n\n#### Step variables\n\nThis step has no other properties defined except for using the `steps` attribute to define sub-steps.\n\n#### Returning\n\nUse the return from the final sub-step as the return data.\n\n> It can still be further decorated during `Write to output` stage for the return data.\n\n${transformer}\n\n${errorHandles}\n";
+const markdown$b = "### Snowflake step\n\nThe snowflake pipeline step is used to generate a unique, incrementing sequence number. This sequence number is typically used for scenarios\nsuch as database primary keys or unique identifiers in memory. The sequence number is of type string and contains only numeric characters.\n\n> Monotonic increment is limited to within a single node.\n\n#### Environment variables\n\nThis step uses the following system environment variable definition:\n\n- `CFG_SNOWFLAKE_SHARD_ID`: A number between `0` and `1023`, optional, with a default value of `1`. In a multi-node scenario, each node\n  should be assigned a different shard id to ensure that the sequence numbers do not conflict.\n\n#### Step variables\n\nThis step does not use any step variables.\n\n#### Returning\n\nA string containing a unique serial number.\n\n> Typically, need to specify a merge property in the `Write to output` step for use in subsequent pipeline steps.\n\n${transformer}\n\n${errorHandles}\n";
 const docs$4 = {
-  setsStep: mergeStepDocs(markdown$9)
+  snowflakeStep: mergeStepDocs(markdown$b)
 };
-const markdown$8 = "Use snippet processing for data processing. The following parameters can be used during the conversion process:\n\n- `$factor`: The content portion of the request data, excluding context data,\n- `$request`: The entire request data, including both content and context,\n- `$helpers` or `$`: Data manipulation helpers.\n\n> It is an async function, so `await` is available inside.\n";
-const markdown$7 = "### Snippet step\n\nThe snippet pipeline step use a snippet (in JavaScript syntax) to process the data. Conceptually, it can be understood as a function that\nperforms appropriate operations on the given parameters and finally returns the processed result to the memory context for further\nprocessing.\n\n#### Environment variables\n\nThis step does not use any environment variables.\n\n#### Step variables\n\nDefine the `snippet` attribute, which is a JavaScript script that will ultimately be executed as a JavaScript function. This function\naccepts the following input parameters:\n\n- `$factor`: The content portion of the request data, excluding context data,\n- `$request`: The entire request data, including both content and context,\n- `$helpers` or `$`: Data manipulation helpers.\n\n#### Returning\n\nThe snippet's return data follows these conventions:\n\n- If it returns `undefined`, `null`, or no value returned, the context of the entire pipeline is considered unchanged,\n- If it returns `$.$clearContextData()`, the context is considered cleared (this is actually a specific `Symbol` object that, apart from\n  serving as a flag, has no practical significance),\n- Other data is directly returned as the response data.\n\n> The returned data can still be further processed during the `Write to output` stage.\n\n${transformer}\n\n${errorHandles}\n";
+const markdown$a = "TypeORM steps use transaction names to identify transactions, steps can be grouped under a transaction. If transaction is declared as\nautonomous, the step will be executed in the default transaction (autonomous transaction). Essentially, steps within a transaction should be\nnested in a TypeORM transactional step and have the same transaction name.\n\n> Transactional steps can be nested, meaning a transactional step can contain another transactional step as a sub-step, even if they have\n> different transaction names.\n";
+const markdown$9 = "Specify data source. If using dynamic environment variables for specification, you need to indicate the key of the environment variable,\nsuch as key `db.default` corresponding to the `CFG_DB_DEFAULT` environment variable name.\n";
+const markdown$8 = "TypeORM steps use transaction names to identify transactions, steps can be grouped under a transaction. Essentially, steps within a\ntransaction should be nested in a TypeORM transactional step and have the same transaction name.\n\n> Transactional steps can be nested, meaning a transactional step can contain another transactional step as a sub-step, even if they have\n> different transaction names.\n";
+const markdown$7 = '### TypeORM\n\n`@rainbow-o23` provides a set of pipeline steps for database operations based on [TypeORM](https://typeorm.io/), including transaction\nsupport, SQL read/write, and simple ORM entity operations. Generally, it is recommended to use SQL for data operations. `@rainbow-o23` has\nenhanced SQL syntax to better interact with in-memory data.\n\n#### Datasource\n\nEach TypeOrm step must specify a datasource, which is configured in environment. If using dynamic environment variables for specification,\nyou need to indicate the key of the environment variable, such as key `db.default` corresponding to the `CFG_DB_DEFAULT` environment\nvariable name.\n\n#### Transaction\n\nTypeORM steps use transaction names to identify transactions, steps can be grouped under a transaction. If transaction is declared as\nautonomous, the step will be executed in the default transaction (autonomous transaction). Essentially, steps within a transaction should be\nnested in a TypeORM transactional step and have the same transaction name.\n\n> Transactional steps can be nested, meaning a transactional step can contain another transactional step as a sub-step, even if they have\n> different transaction names.\n\n#### Native SQL Support & Enhancement\n\nSQL supports native database syntax. At the same time, `@rainbow-o23` enhances SQL syntax, allowing the use of the `$property` syntax to\nretrieve corresponding data from data objects, also supports multi-level property names, connected by `.`. For example, `$person.name`\nrepresents that `person` is an object and `name` is a property under `person`. The following are the supported syntax features:\n\n- `IN ($...names)`: `one-of`, `names` should be an array,\n- `LIKE $name%`: `starts-with`,\n- `LIKE $%name`: `ends-with`,\n- `LIKE $%name%`: `contains`.\n\n> Name mapping is case-sensitive.  \n> `LIKE` is case-sensitive.\n\nSince different databases have varying degrees of support for dialects, `@rainbow-o23` also provides appropriate enhanced support for this:\n\n- For pagination, `$.limit($offset, $limit)` will be translated and executed in the appropriate dialect. For example,\n	- `MySQL` uses `LIMIT $offset, $limit`,\n	- `PostgreSQL` uses `OFFSET $offset LIMIT $limit`.\n	- `MSSQL` and `Oracle` use `OFFSET $offset ROWS FETCH NEXT $limit ROWS ONLY`,\n		- `MSSQL` requires an `ORDER BY` clause for pagination SQL. If there is no `ORDER BY` clause, will\n		  use `ORDER BY 1 OFFSET $offset ROWS FETCH NEXT $limit ROWS ONLY`.\n- For JSON column, because some databases (such as MSSQL) do not have a JSON column type, they cannot automatically replace strings in the\n  result set with JSON objects,\n	- Use `config as "config.@json"` to explicitly indicate that the `config` column is of JSON data type.\n	- Use `$config.@json` to explicitly indicate that the `config` property of given parameters is of JSON data type.\n- For boolean column which use numeric(int/smallint/tinyint) as storage type, because some databases (such as PostgreSQL) cannot\n  automatically convert boolean values in memory to numeric 0 or 1 in the database,\n	- Use `enabled as "enabled.@bool"` to explicitly indicate that the `enabled` column is of boolean in-memory and numeric in database data\n	  type.\n	- Use `$enabled.@bool` to explicitly indicate that the `enabled` property of given parameters is of boolean in-memory and numeric in\n	  database data type.\n- For datetime (MySQL, MSSQL) / timestamp (Oracle, PostgreSQL) column,\n	- Use `created_at as "createdAt.@ts"` to explicitly indicate that the `createdAt` column is of string in-memory and timestamp in\n	  database data type.\n	- Use `$createdAt.@ts` to explicitly indicate that the `createdAt` property of given parameters is of string in-memory and timestamp in\n	  database data type.\n\n> It is recommended that if you need to consider support for multiple database dialects, using enhanced syntax will make it easier to write\n> SQL. If you only need to support a specific database, then using its standard syntax is sufficient.\n\n> It is important to note that some databases (such as `PostgreSQL`) do not differentiate column names by case. This can affect the property\n> names of the returned objects in the result set (usually recommended in camel case). Therefore, even though it is not a syntax\n> enhancement, it is strongly recommended to use aliases to standardize the column names in the returned result set, for\n> example, `PERSON_NAME AS "personName"`, please pay attention to the use of quotation marks to correctly preserve the case.\n\n- When given data is an array, provide SQL written using standard binding variable placeholders (sequence numbers),\n	- `MySQL` uses `?`,\n	- `PostgreSQL` uses `$1`, `$2`, ...,\n	- `MSSQL` uses `@0`, `@1`, ...,\n	- `Oracle` uses `:0`, `:1`, ...,\n- When given data is a record, provide SQL written using named binding variable placeholders.\n';
 const docs$3 = {
-  stepSnippetSnippet: markdown$8,
-  snippetStep: mergeStepDocs(markdown$7)
+  stepTypeOrmDatasource: markdown$9,
+  stepTypeOrmTransaction: markdown$8,
+  stepTypeOrmAutonomousOrTransaction: markdown$a,
+  stepTypeOrm: markdown$7
 };
-const markdown$6 = "### Snowflake step\n\nThe snowflake pipeline step is used to generate a unique, incrementing sequence number. This sequence number is typically used for scenarios\nsuch as database primary keys or unique identifiers in memory. The sequence number is of type string and contains only numeric characters.\n\n> Monotonic increment is limited to within a single node.\n\n#### Environment variables\n\nThis step uses the following system environment variable definition:\n\n- `CFG_SNOWFLAKE_SHARD_ID`: A number between `0` and `1023`, optional, with a default value of `1`. In a multi-node scenario, each node\n  should be assigned a different shard id to ensure that the sequence numbers do not conflict.\n\n#### Step variables\n\nThis step does not use any step variables.\n\n#### Returning\n\nA string containing a unique serial number.\n\n> Typically, need to specify a merge property in the `Write to output` step for use in subsequent pipeline steps.\n\n${transformer}\n\n${errorHandles}\n";
+const markdown$6 = "The script is\na function that takes the following parameters:\n\n- `$runner` represents the [QueryRunner](https://orkhan.gitbook.io/typeorm/docs/query-runner),\n- `$factor` represents the incoming data,\n- `$request` represents the original request data (including incoming data and a context), it is not recommended,\n- `$helpers` represents function supporting, and it has a shortcut `$`.\n";
+const markdown$5 = "### TypeOrm by snippet step\n\nUse snippets to handle database data.\n\n#### Environment variables\n\nThis step does not use any environment variables, unless an environment variable key is used when specifying the data source.\n\n#### Step variables\n\nUse the `snippet` property to define a JavaScript script. The returned data will be used as return data for this step. The script is\na function that takes the following parameters:\n\n- `$runner` represents the [QueryRunner](https://orkhan.gitbook.io/typeorm/docs/query-runner),\n- `$factor` represents the incoming data,\n- `$request` represents the original request data (including incoming data and a context), it is not recommended,\n- `$helpers` represents function supporting, and it has a shortcut `$`.\n\nA TypeOrm Query Runner instance, `$runner`, will be passed to the snippet, and the snippet can use this instance to perform any operation on\nthe database.\n\n> Do not need to manually start a transaction, whether using autonomous transaction or if it is nested within transaction step sets.\n> The `$runner` instance passed to the snippet will automatically start a transaction.\n\n#### Returning\n\nUse the return data from snippet as the return data for this step.\n\n${typeorm}\n\n${transformer}\n\n${errorHandles}\n";
 const docs$2 = {
-  snowflakeStep: mergeStepDocs(markdown$6)
+  stepTypeOrmSnippet: markdown$6,
+  typeOrmBySnippetStep: mergeStepDocsAnd(markdown$5, { "${typeorm}\n": docs$3.stepTypeOrm })
 };
-const markdown$5 = "TODO";
-const markdown$4 = "### TypeOrm by snippet step\n\nTODO\n\n#### Environment variables\n\nThis step does not use any environment variables.\n\n#### Step variables\n\nDefine the `code` attribute to specify the pipeline step that needs to be invoked At runtime, the pipeline step definition needs to be\nguaranteed to be loaded.\n\n#### Returning\n\nUse the return data from the called pipeline step as the return data for this step.\n\n${typeorm}\n\n${transformer}\n\n${errorHandles}\n";
+const markdown$4 = "### TypeOrm bulk save by sql step\n\nUse sql to save a collection of data to the database.\n\n#### Environment variables\n\nThis step does not use any environment variables, unless an environment variable key is used when specifying the data source.\n\n#### Step variables\n\nUse the `sql` property to define a SQL sentence. The returned data will be used as return data for this step.\n\n#### Input\n\nThe input data should be an array of array or object, each item represents a row of data to be saved.\n\n```ts\nexport interface InputData {\n	// SQL sentence to save data, could be INSERT, UPDATE or DELETE.\n	// If SQL is defined in the parameters, it takes precedence over the SQL predefined in the steps.\n	sql?: string;\n	// data to save\n	items?: Array<Array<any> | Record<string, any>>;\n}\n```\n\n#### Returning\n\nUse the return data from sql as the return data for this step, returned data follows the following types:\n\n```ts\nexport type ReturnedOfInserts = Array<string | number | bigint>;\nexport type ReturnedOfUpdatesOrDeletes = Array<number>;\n```\n\n> for MSSQL, the return data could be anything, depends on the `OUTPUT` statement in SQL.\n\n${typeorm}\n\n${transformer}\n\n${errorHandles}\n";
+const markdown$3 = "### TypeOrm load many by sql step\n\nUse sql to load data from the database, an array of records will be returned.\n\n#### Environment variables\n\nThis step does not use any environment variables, unless an environment variable key is used when specifying the data source.\n\n#### Step variables\n\nUse the `sql` property to define a SQL sentence. The returned data will be used as return data for this step.\n\n#### Input\n\nThe input data should be an array or a record, representing a row of data to be saved.\n\n```ts\nexport interface InputData {\n	// SQL sentence to load data, should be SELECT\n	// If SQL is defined in the parameters, it takes precedence over the SQL predefined in the steps.\n	sql?: string;\n	// criteira to load\n	params?: Array<any> | Record<string, any>;\n}\n```\n\n#### Returning\n\nUse the return data from sql as the return data for this step, should be an empty array.\n\n${typeorm}\n\n${transformer}\n\n${errorHandles}\n";
+const markdown$2 = "### TypeOrm load one by sql step\n\nUse sql to load data from the database, only one record will be returned.\n\n#### Environment variables\n\nThis step does not use any environment variables, unless an environment variable key is used when specifying the data source.\n\n#### Step variables\n\nUse the `sql` property to define a SQL sentence. The returned data will be used as return data for this step.\n\n#### Input\n\nThe input data should be an array or a record, representing a row of data to be saved.\n\n```ts\nexport interface InputData {\n	// SQL sentence to load data, should be SELECT\n	// If SQL is defined in the parameters, it takes precedence over the SQL predefined in the steps.\n	sql?: string;\n	// criteira to load\n	params?: Array<any> | Record<string, any>;\n}\n```\n\n#### Returning\n\nUse the return data from sql as the return data for this step, could be a record, or `undefined` when nothing found.\n\n${typeorm}\n\n${transformer}\n\n${errorHandles}\n";
+const markdown$1 = "### TypeOrm save by sql step\n\nUse sql to save given data (one record only) to the database.\n\n#### Environment variables\n\nThis step does not use any environment variables, unless an environment variable key is used when specifying the data source.\n\n#### Step variables\n\nUse the `sql` property to define a SQL sentence. The returned data will be used as return data for this step.\n\n#### Input\n\nThe input data should be an array or a record, representing a row of data to be saved.\n\n```ts\nexport interface InputData {\n	// SQL sentence to save data, could be INSERT, UPDATE or DELETE.\n	// If SQL is defined in the parameters, it takes precedence over the SQL predefined in the steps.\n	sql?: string;\n	// data to save\n	values?: Array<any> | Record<string, any>;\n}\n```\n\n#### Returning\n\nUse the return data from sql as the return data for this step, returned data follows the following types:\n\n```ts\nexport type ReturnedOfInsert = string | number | bigint;\nexport type ReturnedOfUpdateOrDelete = number;\n```\n\n> for MSSQL, the return data could be anything, depends on the `OUTPUT` statement in SQL.\n\n${typeorm}\n\n${transformer}\n\n${errorHandles}\n";
+const sql = "Open the `Native SQL Support & Enhancement` section in the left-side step for more information.";
 const docs$1 = {
-  stepTypeOrmSnippet: markdown$5,
-  typeOrmBySnippetStep: mergeStepDocsAnd(markdown$4, { "${typeorm}\n": "" })
+  stepTypeOrmBulkSaveBySqlSql: sql,
+  typeOrmBulkSaveBySqlStep: mergeStepDocsAnd(markdown$4, { "${typeorm}\n": docs$3.stepTypeOrm }),
+  stepTypeOrmSaveBySqlSql: sql,
+  typeOrmSaveBySqlStep: mergeStepDocsAnd(markdown$1, { "${typeorm}\n": docs$3.stepTypeOrm }),
+  stepTypeOrmLoadManyBySqlSql: sql,
+  typeOrmLoadManyBySqlStep: mergeStepDocsAnd(markdown$3, { "${typeorm}\n": docs$3.stepTypeOrm }),
+  stepTypeOrmLoadOneBySqlSql: sql,
+  typeOrmLoadOneBySqlStep: mergeStepDocsAnd(markdown$2, { "${typeorm}\n": docs$3.stepTypeOrm })
 };
-const markdown$3 = "TODO";
-const markdown$2 = "TODO\n";
-const markdown$1 = "TODO\n";
-const markdown = "";
+const markdown = "### TypeOrm transactional step\n\nCreate a transaction with given name, and execute the sub-steps within the transaction.\n\n#### Environment variables\n\nThis step does not use any environment variables, unless an environment variable key is used when specifying the data source.\n\n#### Step variables\n\nThis step has no other properties defined except for using the `steps` attribute to define sub-steps.\n\n#### Returning\n\nUse the return from the final sub-step as the return data.\n\n> It can still be further decorated during `Write to output` stage for the return data.\n\n${typeorm}\n\n${transformer}\n\n${errorHandles}\n";
 const docs = {
-  stepTypeOrmDatasource: markdown$2,
-  stepTypeOrmTransaction: markdown$1,
-  stepTypeOrmAutonomousOrTransaction: markdown$3,
-  stepTypeOrm: markdown
+  typeOrmTransactionalStep: mergeStepDocsAnd(markdown, { "${typeorm}\n": docs$3.stepTypeOrm })
 };
 const HelpDocs = {
-  ...docs$7,
-  ...docs$e,
-  ...docs$3,
-  ...docs$a,
-  ...docs$c,
-  ...docs$2,
   ...docs$9,
+  ...docs$g,
+  ...docs$5,
+  ...docs$c,
+  ...docs$e,
   ...docs$4,
-  ...docs$d,
   ...docs$b,
-  ...docs$8,
-  ...docs,
-  ...docs$1,
   ...docs$6,
-  ...docs$5
+  ...docs$f,
+  ...docs$d,
+  ...docs$a,
+  ...docs$3,
+  ...docs$2,
+  ...docs$1,
+  ...docs,
+  ...docs$8,
+  ...docs$7
 };
 const elementCode = {
   code: "code",
@@ -2434,6 +2474,79 @@ const elementCode = {
   },
   helpDoc: HelpDocs.pipelineCode
 };
+const CommonElementEditorStyles = {
+  dropdown: { justifySelf: "start", width: "unset", minWidth: "min(200px, 100%)" }
+};
+const NotAvailableDropdownOptionLabel = qe.span`
+    color: ${CssVars.DANGER_COLOR};
+
+    > span {
+        margin-left: 0.5em;
+    }
+`;
+const NotAvailableDropdownOption = (props) => {
+  const { label } = props;
+  return React.createElement(
+    NotAvailableDropdownOptionLabel,
+    null,
+    label,
+    React.createElement("span", null, Labels.IllegalDropdownOptionSuffix)
+  );
+};
+const CheckAndValueEditor = qe.div.attrs(({ inputWidth }) => {
+  return {
+    style: {
+      "--input-width": utils$2.toCssSize(inputWidth)
+    }
+  };
+})`
+    > div[data-w=d9-deco-input] {
+        > span[data-w=d9-deco-lead]:first-child {
+            padding-right: 0;
+
+            > div[data-w=d9-checkboxes] {
+                border-top-right-radius: 0;
+                border-bottom-right-radius: 0;
+
+                > span[data-w=d9-checkboxes-option]:first-child {
+                    padding-right: calc(${CssVars.INPUT_INDENT} + 4px);
+                    margin-right: 0;
+
+                    > div[data-w=d9-checkbox] {
+                        transform: scale(0.8);
+                    }
+                }
+            }
+        }
+
+        > input {
+            flex-grow: unset;
+            /* noinspection CssUnresolvedCustomProperty */
+            min-width: var(--input-width);
+        }
+    }
+`;
+const VerticalLinesEditorContainer = qe.div.attrs({ [DOM_KEY_WIDGET]: "o23-playground-edit-dialog-specific-element-editor-vertical" })`
+    display: grid;
+    position: relative;
+    grid-template-columns: 1fr;
+    grid-row-gap: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_SPECIFIC_GRID_ROW_GAP};
+
+    > div[data-w=d9-deco-input][data-di-prefix-text=true] {
+        &[data-disabled=true] > span:first-child {
+            cursor: default;
+            background-color: ${CssVars.DISABLE_COLOR};
+        }
+
+        > span:first-child {
+            font-size: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_SPECIFIC_INPUT_PREFIX_FONT_SIZE};
+            transition: background-color ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION};
+        }
+    }
+`;
+const VerticalLinesEditor = (props) => {
+  return React.createElement(VerticalLinesEditorContainer, null, props.children);
+};
 const createOneOrAnotherBadge = (options) => (model) => options.check(model) ? options.one : options.another;
 const createCheckOrAnotherBadge = (options) => createOneOrAnotherBadge({ ...options, one: React.createElement(ConfigurableElementBadgeChecked, null) });
 const createCheckOrMissBadge = (options) => createCheckOrAnotherBadge({ ...options, another: React.createElement(ConfigurableElementBadgeMissed, null) });
@@ -2444,31 +2557,64 @@ const createCheckOrIgnoreBadge = (options) => createCheckOrAnotherBadge({ ...opt
 const createYesOrNoBadge = (options) => createOneOrAnotherBadge({ ...options, one: React.createElement(ConfigurableElementBadgeYes, null), another: React.createElement(ConfigurableElementBadgeNo, null) });
 const createValueOrAnotherBadge = (options) => (model) => options.check(model) ? options.one(model) : options.another;
 const createValueOrMissBadge = (options) => createValueOrAnotherBadge({ ...options, another: React.createElement(ConfigurableElementBadgeMissed, null) });
-const createBoolEditor = (options) => {
-  const { getValue, setValue, defaultAs = false } = options;
-  return (props) => {
-    const { model, onValueChanged } = props;
-    const onValueChange = (value) => {
-      if (value == null || value === false) {
-        setValue(model, false);
-      } else {
-        setValue(model, true);
-      }
-      onValueChanged();
+const useInitCodeEditor = (options) => {
+  const { setState, createCodeMirrorExtensions: createCodeMirrorExtensions2 } = options;
+  const ref = reactExports.useRef(null);
+  reactExports.useEffect(() => {
+    if (ref.current == null) {
+      return;
+    }
+    const changeListener = new Compartment();
+    const editor = new EditorView({
+      state: EditorState.create({
+        doc: "",
+        extensions: [
+          basicSetup,
+          keymap.of([indentWithTab]),
+          lintGutter(),
+          createCodeMirrorExtensions2(),
+          changeListener.of(EditorView.updateListener.of(VUtils.noop))
+        ]
+      }),
+      parent: ref.current
+    });
+    setState((state) => ({ ...state, editor, changeListener }));
+    return () => {
+      editor.destroy();
     };
-    return React.createElement(UnwrappedCheckbox, { onValueChange, value: getValue(model) ?? defaultAs });
-  };
+  }, [setState, createCodeMirrorExtensions2]);
+  return { ref };
 };
-const createStrEditor = (options) => {
-  const { getValue, setValue, placeholder } = options;
-  return (props) => {
-    const { model, onValueChanged } = props;
-    const onValueChange = (value) => {
-      setValue(model, value);
-      onValueChanged();
-    };
-    return React.createElement(UnwrappedInput, { onValueChange, value: getValue(model) ?? "", placeholder });
-  };
+const useInitCodeContent = (options) => {
+  const { editor, code } = options;
+  reactExports.useEffect(() => {
+    if (editor == null) {
+      return;
+    }
+    const doc = editor.state.doc;
+    const text = doc.toString();
+    if (text !== code) {
+      editor.dispatch({ changes: { from: 0, to: doc.length, insert: code ?? "" } });
+    }
+  }, [editor, code]);
+};
+const useHandleCodeChange = (options) => {
+  const { editor, changeListener, onChange, delay = 300 } = options;
+  const { replace } = useThrottler();
+  reactExports.useEffect(() => {
+    if (editor == null) {
+      return;
+    }
+    editor.dispatch({
+      effects: changeListener.reconfigure(EditorView.updateListener.of((view) => {
+        if (view.docChanged) {
+          replace(async () => {
+            await onChange(view.state.doc.toString());
+          }, delay);
+        }
+      }))
+    });
+  }, [replace, editor, changeListener, onChange, delay]);
 };
 const JsEditorContainer = qe.div.attrs(({ "data-height": height }) => {
   return {
@@ -2611,59 +2757,200 @@ const JsEditorContainer = qe.div.attrs(({ "data-height": height }) => {
         }
     }
 `;
+const createCodeMirrorExtensions$1 = () => {
+  return [
+    javascript()
+  ];
+};
 const JsEditor = (props) => {
   const { visible = true, height, snippet, onChange } = props;
-  const ref = reactExports.useRef(null);
   const [state, setState] = reactExports.useState({});
-  const { replace } = useThrottler();
-  reactExports.useEffect(() => {
-    if (ref.current == null) {
-      return;
-    }
-    const changeListener = new Compartment();
-    const editor = new EditorView({
-      state: EditorState.create({
-        doc: "",
-        extensions: [
-          basicSetup,
-          keymap.of([indentWithTab]),
-          javascript(),
-          lintGutter(),
-          changeListener.of(EditorView.updateListener.of(VUtils.noop))
-        ]
-      }),
-      parent: ref.current
-    });
-    setState((state2) => ({ ...state2, editor, changeListener }));
-    return () => {
-      editor.destroy();
-    };
-  }, []);
-  reactExports.useEffect(() => {
-    if (state.editor == null) {
-      return;
-    }
-    const doc = state.editor.state.doc;
-    const text = doc.toString();
-    if (text !== snippet) {
-      state.editor.dispatch({ changes: { from: 0, to: doc.length, insert: snippet ?? "" } });
-    }
-  }, [state.editor, snippet]);
-  reactExports.useEffect(() => {
-    if (state.editor == null) {
-      return;
-    }
-    state.editor.dispatch({
-      effects: state.changeListener.reconfigure(EditorView.updateListener.of((view) => {
-        if (view.docChanged) {
-          replace(async () => {
-            await onChange(view.state.doc.toString());
-          }, 300);
-        }
-      }))
-    });
-  }, [replace, state.editor, state.changeListener, onChange]);
+  const { ref } = useInitCodeEditor({
+    setState,
+    createCodeMirrorExtensions: createCodeMirrorExtensions$1
+  });
+  useInitCodeContent({ editor: state.editor, code: snippet });
+  useHandleCodeChange({ ...state, onChange });
   return React.createElement(JsEditorContainer, { "data-visible": visible, "data-height": height, ref });
+};
+const SqlEditorContainer = qe.div.attrs(({ "data-height": height }) => {
+  return {
+    [DOM_KEY_WIDGET]: "o23-playground-sql-editor",
+    style: {
+      "--height": utils$2.toCssSize(height ?? 300)
+    }
+  };
+})`
+    display: block;
+    position: relative;
+    width: 100%;
+    height: var(--height);
+    min-height: var(--height);
+    max-height: var(--height);
+    border: ${PlaygroundCssVars.SNIPPET_BORDER};
+    border-radius: ${PlaygroundCssVars.SNIPPET_BORDER_RADIUS};
+    overflow: hidden;
+
+    &[data-visible=false] {
+        display: none;
+    }
+
+    > div.cm-editor {
+        height: 100%;
+
+        &.cm-focused {
+            outline: none;
+        }
+
+        > div.cm-scroller {
+            overflow-x: auto;
+            overflow-y: scroll;
+
+            &::-webkit-scrollbar {
+                background-color: transparent;
+                height: ${CssVars.SCROLL_HEIGHT};
+                width: ${CssVars.SCROLL_WIDTH};
+            }
+
+            &::-webkit-scrollbar-track {
+                background-color: ${CssVars.SCROLL_TRACK_COLOR};
+                border-radius: ${CssVars.SCROLL_BORDER_RADIUS};
+            }
+
+            &::-webkit-scrollbar-thumb {
+                background-color: ${CssVars.SCROLL_THUMB_COLOR};
+                border-radius: ${CssVars.SCROLL_BORDER_RADIUS};
+            }
+        }
+
+        div.cm-line {
+        }
+
+        div.cm-panels.cm-panels-bottom {
+            border-top: ${CssVars.BORDER};
+            border-right: ${CssVars.BORDER};
+        }
+
+        div.cm-search.cm-panel {
+            /** beautify search panel */
+            display: grid;
+            position: relative;
+            grid-template-columns: auto auto 1fr auto auto auto;
+            grid-column-gap: 8px;
+            grid-template-rows: auto auto auto;
+            grid-row-gap: 8px;
+
+            > * {
+                margin: 0;
+            }
+
+            > input {
+                grid-column: span 3;
+
+                &:not(:first-child) {
+                    grid-row: 3;
+
+                    ~ * {
+                        grid-row: 3;
+                    }
+                }
+            }
+
+            > button {
+                background-image: none;
+                border: ${CssVars.BORDER};
+                border-radius: ${CssVars.BORDER_RADIUS};
+                text-transform: capitalize;
+                cursor: pointer;
+
+                &:last-child {
+                    padding: 0 8px;
+                }
+            }
+
+            > label {
+                display: flex;
+                position: relative;
+                align-items: center;
+                text-transform: capitalize;
+
+                &:nth-child(7) {
+                    grid-column: span 4;
+                }
+
+                > input {
+                    margin: 0 4px 0 0;
+                }
+            }
+
+            > br {
+                display: none;
+            }
+        }
+
+        div.cm-tooltip-autocomplete {
+            > ul {
+                &::-webkit-scrollbar {
+                    background-color: transparent;
+                    height: ${CssVars.SCROLL_HEIGHT};
+                    width: ${CssVars.SCROLL_WIDTH};
+                }
+
+                &::-webkit-scrollbar-track {
+                    background-color: ${CssVars.SCROLL_TRACK_COLOR};
+                    border-radius: ${CssVars.SCROLL_BORDER_RADIUS};
+                }
+
+                &::-webkit-scrollbar-thumb {
+                    background-color: ${CssVars.SCROLL_THUMB_COLOR};
+                    border-radius: ${CssVars.SCROLL_BORDER_RADIUS};
+                }
+            }
+
+            span.cm-completionLabel {
+                font-weight: 600;
+                margin-right: 16px;
+            }
+        }
+    }
+`;
+const createCodeMirrorExtensions = () => sql$1();
+const SqlEditor = (props) => {
+  const { visible = true, height, snippet, onChange } = props;
+  const [state, setState] = reactExports.useState({});
+  const { ref } = useInitCodeEditor({
+    setState,
+    createCodeMirrorExtensions
+  });
+  useInitCodeContent({ editor: state.editor, code: snippet });
+  useHandleCodeChange({ ...state, onChange });
+  return React.createElement(SqlEditorContainer, { "data-visible": visible, "data-height": height, ref });
+};
+const createBoolEditor = (options) => {
+  const { getValue, setValue, defaultAs = false } = options;
+  return (props) => {
+    const { model, onValueChanged } = props;
+    const onValueChange = (value) => {
+      if (value == null || value === false) {
+        setValue(model, false);
+      } else {
+        setValue(model, true);
+      }
+      onValueChanged();
+    };
+    return React.createElement(UnwrappedCheckbox, { onValueChange, value: getValue(model) ?? defaultAs });
+  };
+};
+const createStrEditor = (options) => {
+  const { getValue, setValue, placeholder } = options;
+  return (props) => {
+    const { model, onValueChanged } = props;
+    const onValueChange = (value) => {
+      setValue(model, value);
+      onValueChanged();
+    };
+    return React.createElement(UnwrappedInput, { onValueChange, value: getValue(model) ?? "", placeholder });
+  };
 };
 const createSnippetEditor = (options) => {
   const { getValue, setValue, height } = options;
@@ -2676,32 +2963,8 @@ const createSnippetEditor = (options) => {
     return React.createElement(JsEditor, { snippet: getValue(model), onChange: onValueChange, height });
   };
 };
-const CommonElementEditorStyles = {
-  dropdown: { justifySelf: "start", width: "unset", minWidth: "min(200px, 100%)" }
-};
-const VerticalLinesEditorContainer = qe.div.attrs({ [DOM_KEY_WIDGET]: "o23-playground-edit-dialog-specific-element-editor-vertical" })`
-    display: grid;
-    position: relative;
-    grid-template-columns: 1fr;
-    grid-row-gap: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_SPECIFIC_GRID_ROW_GAP};
-
-    > div[data-w=d9-deco-input][data-di-prefix-text=true] {
-        &[data-disabled=true] > span:first-child {
-            cursor: default;
-            background-color: ${CssVars.DISABLE_COLOR};
-        }
-
-        > span:first-child {
-            font-size: ${PlaygroundCssVars.EDIT_DIALOG_CONFIGURABLE_ELEMENT_SPECIFIC_INPUT_PREFIX_FONT_SIZE};
-            transition: background-color ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION};
-        }
-    }
-`;
-const VerticalLinesEditor = (props) => {
-  return React.createElement(VerticalLinesEditorContainer, null, props.children);
-};
-const createSelectableSnippetEditor = (options) => {
-  const { findFlag, saveFlag, findSnippet, saveSnippet, flagCandidates, isSnippetAvailable, height: editorHeight } = options;
+const createSelectableCodeEditor = (options) => {
+  const { findFlag, saveFlag, findSnippet, saveSnippet, flagCandidates, isSnippetAvailable, height: editorHeight, editor: CodeEditor } = options;
   return (props) => {
     const { model, onValueChanged } = props;
     const onValueChange = (value) => {
@@ -2718,25 +2981,15 @@ const createSelectableSnippetEditor = (options) => {
       VerticalLinesEditor,
       null,
       React.createElement(UnwrappedDropdown, { value: flag, onValueChange, options: flagCandidates, clearable: false, filterable: false, style: CommonElementEditorStyles.dropdown }),
-      React.createElement(JsEditor, { snippet, onChange: onSnippetChange, visible: isSnippetAvailable(flag), height: editorHeight })
+      React.createElement(CodeEditor, { snippet, onChange: onSnippetChange, visible: isSnippetAvailable(flag), height: editorHeight })
     );
   };
 };
-const NotAvailableDropdownOptionLabel = qe.span`
-    color: ${CssVars.DANGER_COLOR};
-
-    > span {
-        margin-left: 0.5em;
-    }
-`;
-const NotAvailableDropdownOption = (props) => {
-  const { label } = props;
-  return React.createElement(
-    NotAvailableDropdownOptionLabel,
-    null,
-    label,
-    React.createElement("span", null, Labels.IllegalDropdownOptionSuffix)
-  );
+const createSelectableSnippetEditor = (options) => {
+  return createSelectableCodeEditor({ ...options, editor: JsEditor });
+};
+const createSelectableSqlEditor = (options) => {
+  return createSelectableCodeEditor({ ...options, editor: SqlEditor });
 };
 const trim = (value) => {
   if (value == null) {
@@ -2749,7 +3002,7 @@ const trim = (value) => {
   }
 };
 const createDropdownOnAssistantEditor = (options) => {
-  const { getValue, setValue, askOptions } = options;
+  const { getValue, setValue, askOptions, disabled = () => false, visible = () => true } = options;
   return (props) => {
     const { model, onValueChanged, assistant } = props;
     const onValueChange = (value2) => {
@@ -2761,7 +3014,7 @@ const createDropdownOnAssistantEditor = (options) => {
     if (value != null && options2.every(({ value: v }) => value !== v)) {
       options2.unshift({ value, label: React.createElement(NotAvailableDropdownOption, { label: value }) });
     }
-    return React.createElement(UnwrappedDropdown, { onValueChange, value, optionSort: OptionItemSort.ASC, clearable: false, options: options2, style: CommonElementEditorStyles.dropdown });
+    return React.createElement(UnwrappedDropdown, { onValueChange, value, optionSort: OptionItemSort.ASC, options: options2, clearable: false, disabled: disabled(model), visible: visible(model), style: CommonElementEditorStyles.dropdown });
   };
 };
 const StandardLinkSelectionKeyFrames = We`
@@ -4562,7 +4815,7 @@ const prepare$2 = (def) => {
 };
 const FileDefs = {
   prepare: prepare$2,
-  confirm: confirm$1,
+  confirm: confirm$2,
   discard: discard$1,
   elements: [elementCode, elementEnabled, elementType]
 };
@@ -4578,7 +4831,7 @@ var ErrorHandleType;
   ErrorHandleType2[ErrorHandleType2["SNIPPET"] = 1] = "SNIPPET";
   ErrorHandleType2[ErrorHandleType2["STEPS"] = 2] = "STEPS";
 })(ErrorHandleType || (ErrorHandleType = {}));
-const confirm = (model, def, file, options, and) => {
+const confirm$1 = (model, def, file, options, and) => {
   var _a, _b, _c, _d, _e, _f, _g;
   const { assistant } = options;
   let resultOfAnd;
@@ -6707,7 +6960,7 @@ const switchUse$1 = (def, keptPropNames, originalUse) => {
 const CommonStepDefs = {
   prepare: prepare$1,
   switchUse: switchUse$1,
-  confirm,
+  confirm: confirm$1,
   discard,
   properties: {
     name: elementName,
@@ -7030,27 +7283,6 @@ const elementSystem = {
   editor: SystemEditor,
   helpDoc: HelpDocs.stepHttpSystem
 };
-const TimeoutEditorWrapper = qe.div`
-    > div[data-w=d9-deco-input] {
-        > span[data-w=d9-deco-lead]:first-child {
-            padding-right: 0;
-
-            > div[data-w=d9-checkboxes] > span[data-w=d9-checkboxes-option]:first-child {
-                padding-right: calc(${CssVars.INPUT_INDENT} + 4px);
-                margin-right: 0;
-
-                > div[data-w=d9-checkbox] {
-                    transform: scale(0.8);
-                }
-            }
-        }
-
-        > input {
-            flex-grow: unset;
-            min-width: 150px;
-        }
-    }
-`;
 const TimeoutEditor = (props) => {
   const { model, onValueChanged } = props;
   const inputRef = reactExports.useRef(null);
@@ -7089,8 +7321,8 @@ const TimeoutEditor = (props) => {
     React.createElement(UnwrappedCheckboxes, { onValueChange: onNoTimeoutChange, value: noTimeoutRef.current, options: [{ value: true, label: Labels.NoTimeout }], single: true, boolOnSingle: true })
   ];
   return React.createElement(
-    TimeoutEditorWrapper,
-    null,
+    CheckAndValueEditor,
+    { inputWidth: 150 },
     React.createElement(UnwrappedDecorateInput, { leads: noTimeout, value: valueRef.current, onValueChange, disabled: noTimeoutRef.current, ref: inputRef })
   );
 };
@@ -7475,19 +7707,108 @@ registerStepDef(ParallelStepDefs);
 const askDatasourceOptions = (assistant) => (assistant.askTypeOrmDatasources() ?? []).map((datasource) => {
   return { value: datasource.code, label: VUtils.blankThen(datasource.name, datasource.code) };
 });
+const DatasourceDropdown = createDropdownOnAssistantEditor({
+  getValue: (model) => model.datasource,
+  setValue: (model, value) => model.datasource = value,
+  askOptions: askDatasourceOptions
+});
+const DatasourceEditorContainer = qe.div`
+    display: flex;
+    position: relative;
+    height: ${CssVars.INPUT_HEIGHT};
+
+    > div[data-w=d9-checkboxes] {
+        border: ${CssVars.BORDER};
+        /* noinspection CssReplaceWithShorthandSafely */
+        border-right-width: 0;
+        border-top-left-radius: ${CssVars.BORDER_RADIUS};
+        border-bottom-left-radius: ${CssVars.BORDER_RADIUS};
+
+        > span[data-w="d9-checkboxes-option"]:first-child {
+            padding-right: calc(${CssVars.INPUT_INDENT} + 4px);
+            margin-left: 0;
+            margin-right: 0;
+            min-height: calc(${CssVars.INPUT_HEIGHT} - ${CssVars.BORDER_WIDTH} * 2);
+            padding-top: 0;
+            padding-bottom: 0;
+            border-top-right-radius: 0;
+            border-bottom-right-radius: 0;
+
+            > div[data-w=d9-checkbox] {
+                transform: scale(0.8);
+            }
+        }
+    }
+
+    > div[data-w=d9-dropdown] {
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+    }
+
+    > input {
+        flex-grow: unset;
+        min-width: 250px;
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+    }
+
+    &[data-by-envs=true] {
+        > div[data-w=d9-dropdown] {
+            display: none;
+        }
+    }
+
+    &[data-by-envs=false] {
+        > input {
+            display: none;
+        }
+    }
+`;
+const DatasourceEditor = (props) => {
+  var _a, _b;
+  const { model, onValueChanged } = props;
+  const inputRef = reactExports.useRef(null);
+  const onDatasourceTypeChange = (value) => {
+    var _a2;
+    if (value === true) {
+      model.temporary = { ...model.temporary ?? {}, datasourceByEnvs: true, datasourceCode: model.datasource };
+      model.datasource = `env:${model.temporary.datasourceEnvKey ?? ""}`;
+      setTimeout(() => {
+        var _a3;
+        return (_a3 = inputRef.current) == null ? void 0 : _a3.focus();
+      }, 50);
+    } else {
+      model.temporary = {
+        ...model.temporary ?? {},
+        datasourceByEnvs: false,
+        datasourceEnvKey: (model.datasource ?? "").substring(4)
+      };
+      model.datasource = (_a2 = model.temporary) == null ? void 0 : _a2.datasourceCode;
+    }
+    onValueChanged();
+  };
+  const onEnvKeyChange = (value) => {
+    model.datasource = `env:${value ?? ""}`;
+    onValueChanged();
+  };
+  const envKey = ((_a = model.temporary) == null ? void 0 : _a.datasourceByEnvs) === true ? (model.datasource ?? "").substring(4) : "";
+  return React.createElement(
+    DatasourceEditorContainer,
+    { "data-by-envs": ((_b = model.temporary) == null ? void 0 : _b.datasourceByEnvs) === true },
+    React.createElement(UnwrappedCheckboxes, { onValueChange: onDatasourceTypeChange, value: model.temporary.datasourceByEnvs ?? false, options: [{ value: true, label: Labels.DatasourceByEnv }], single: true, boolOnSingle: true }),
+    React.createElement(UnwrappedInput, { value: envKey, onValueChange: onEnvKeyChange, ref: inputRef }),
+    React.createElement(DatasourceDropdown, { ...props })
+  );
+};
 const elementDatasource = {
   code: "datasource",
   label: Labels.StepTypeOrmDatasource,
   anchor: "datasource",
   badge: createCheckOrMissBadge({ check: (model) => VUtils.isNotBlank(model.datasource) }),
-  editor: createDropdownOnAssistantEditor({
-    getValue: (model) => model.datasource,
-    setValue: (model, value) => model.datasource = value,
-    askOptions: askDatasourceOptions
-  }),
+  editor: DatasourceEditor,
   helpDoc: HelpDocs.stepTypeOrmDatasource
 };
-({
+const elementTransaction = {
   code: "transaction",
   label: Labels.StepTypeOrmTransaction,
   anchor: "transaction",
@@ -7498,28 +7819,7 @@ const elementDatasource = {
     placeholder: "$default-transaction"
   }),
   helpDoc: HelpDocs.stepTypeOrmTransaction
-});
-const AutonomousOrTransactionEditorWrapper = qe.div`
-    > div[data-w=d9-deco-input] {
-        > span[data-w=d9-deco-lead]:first-child {
-            padding-right: 0;
-
-            > div[data-w=d9-checkboxes] > span[data-w=d9-checkboxes-option]:first-child {
-                padding-right: calc(${CssVars.INPUT_INDENT} + 4px);
-                margin-right: 0;
-
-                > div[data-w=d9-checkbox] {
-                    transform: scale(0.8);
-                }
-            }
-        }
-
-        > input {
-            flex-grow: unset;
-            min-width: 250px;
-        }
-    }
-`;
+};
 const AutonomousOrTransactionEditor = (props) => {
   const { model, onValueChanged } = props;
   const inputRef = reactExports.useRef(null);
@@ -7543,8 +7843,8 @@ const AutonomousOrTransactionEditor = (props) => {
     React.createElement(UnwrappedCheckboxes, { onValueChange: onAutonomousChange, value: model.autonomous ?? false, options: [{ value: true, label: Labels.TransactionAutonomous }], single: true, boolOnSingle: true })
   ];
   return React.createElement(
-    AutonomousOrTransactionEditorWrapper,
-    null,
+    CheckAndValueEditor,
+    { inputWidth: 250 },
     React.createElement(UnwrappedDecorateInput, { leads: autonomousCheck, value: model.transaction ?? "", onValueChange: onTransactionChange, disabled: model.autonomous === true, placeholder: "$default-transaction", ref: inputRef })
   );
 };
@@ -7565,9 +7865,55 @@ const elementAutonomousOrTransaction = {
   editor: AutonomousOrTransactionEditor,
   helpDoc: HelpDocs.stepTypeOrmAutonomousOrTransaction
 };
+const PortDatasource = (props) => {
+  const { step: model, node: { assistant } } = props;
+  const { datasource } = model;
+  if (VUtils.isBlank(datasource)) {
+    return React.createElement(PrePort, { label: Labels.StepTypeOrmDatasource, required: true, defined: false });
+  }
+  if (datasource.startsWith("env:")) {
+    const key = datasource.substring(4);
+    if (VUtils.isBlank(key)) {
+      return React.createElement(PrePort, { label: Labels.StepTypeOrmDatasource, required: true, defined: false });
+    } else {
+      return React.createElement(PrePort, { label: Labels.StepTypeOrmDatasource, required: true, defined: true, all: true, allAsGiven: key });
+    }
+  } else {
+    const found = (assistant.askTypeOrmDatasources() ?? []).find((ds) => ds.code === datasource);
+    if (found != null) {
+      return React.createElement(PrePort, { label: found.name || found.code, required: true, defined: true });
+    } else {
+      return React.createElement(PrePort, { label: Labels.StepTypeOrmDatasource, required: true, defined: false });
+    }
+  }
+};
+const PortTransaction = (props) => {
+  const { step: def } = props;
+  const { transaction } = def;
+  if (VUtils.isNotBlank(transaction)) {
+    return React.createElement(PrePort, { label: Labels.StepTypeOrmTransaction, required: true, defined: true, all: true, allAsGiven: transaction.trim() });
+  } else {
+    return React.createElement(PrePort, { label: Labels.StepTypeOrmTransaction, required: true, defined: false });
+  }
+};
+const PortTransactionWithAutonomous = (props) => {
+  const { step: model } = props;
+  const { autonomous, transaction } = model;
+  if (autonomous === true) {
+    return React.createElement(PrePort, { label: Labels.TransactionAutonomous, required: true, defined: true });
+  } else if (VUtils.isNotBlank(transaction)) {
+    return React.createElement(PrePort, { label: Labels.StepTypeOrmTransaction, required: true, defined: true, all: true, allAsGiven: transaction.trim() });
+  } else {
+    return React.createElement(PrePort, { label: Labels.StepTypeOrmTransaction, required: true, defined: false });
+  }
+};
 const prepare = (and) => {
   return (def, model) => {
     model.datasource = def.datasource;
+    if ((model.datasource ?? "").startsWith("env:")) {
+      model.temporary = { ...model.temporary ?? { datasourceByEnvs: true } };
+      model.temporary.datasourceEnvKey = model.datasource.substring(4);
+    }
     model.transaction = def.transaction;
     if (and != null) {
       and(def, model);
@@ -7586,7 +7932,7 @@ const prepareWithAutonomous = (and) => {
 };
 const switchUse = ["datasource", "transaction"];
 const switchUseWithAutonomous = [...switchUse, "autonomous"];
-const confirmWithAutonomous = (and) => {
+const confirm = (and) => {
   return (model, def, file, options) => {
     let andCommit = null;
     if (and != null) {
@@ -7596,46 +7942,172 @@ const confirmWithAutonomous = (and) => {
       }
     }
     return () => {
-      def.autonomous = model.autonomous;
+      def.datasource = model.datasource;
+      def.transaction = model.transaction;
       if (andCommit != null) {
         andCommit();
       }
     };
   };
 };
-const TypeOrmBySnippetStepDefs = CommonStepDefs.createStepNodeConfigurer({
+const confirmWithAutonomous = (and) => {
+  return (model, def, file, options) => {
+    return confirm((model2, def2, file2, options2) => {
+      let andCommit = null;
+      if (and != null) {
+        andCommit = and(model2, def2, file2, options2);
+        if (typeof andCommit === "string") {
+          return andCommit;
+        }
+      }
+      return () => {
+        def2.autonomous = model2.autonomous;
+        if (andCommit != null) {
+          andCommit();
+        }
+      };
+    })(model, def, file, options);
+  };
+};
+const createTypeOrmWithAutonomousStepDefs = (options) => {
+  const { use, andPrepare, keepPropertiesOnUseSwitch, andConfirm, properties, ports = [], helpDocs } = options;
+  return CommonStepDefs.createStepNodeConfigurer({
+    use,
+    prepare: ["and", prepareWithAutonomous(andPrepare)],
+    switchUse: ["keep", [...switchUseWithAutonomous, ...keepPropertiesOnUseSwitch ?? []]],
+    confirm: ["and", confirmWithAutonomous(andConfirm)],
+    properties: [CommonStepDefs.createMainContentElement(elementDatasource, elementAutonomousOrTransaction, ...properties ?? [])],
+    ports: [
+      { key: "datasource", port: PortDatasource },
+      { key: "transaction", port: PortTransactionWithAutonomous },
+      ...ports ?? []
+    ],
+    helpDocs
+  });
+};
+const TypeOrmBySnippetStepDefs = createTypeOrmWithAutonomousStepDefs({
   use: StandardPipelineStepRegisterKey.TYPEORM_BY_SNIPPET,
-  prepare: ["and", prepareWithAutonomous((def, model) => model.snippet = def.snippet)],
-  switchUse: ["keep", [...switchUseWithAutonomous, "snippet"]],
-  confirm: ["and", confirmWithAutonomous((model, def, _file, _options) => {
-    return () => {
-      def.snippet = model.snippet;
-    };
+  andPrepare: (def, model) => model.snippet = def.snippet,
+  keepPropertiesOnUseSwitch: ["snippet"],
+  andConfirm: (model, def, _file, _options) => {
+    return () => def.snippet = model.snippet;
+  },
+  properties: [{
+    code: "snippet",
+    label: Labels.StepTypeOrmSnippet,
+    anchor: "snippet",
+    badge: createCheckOrMissBadge({ check: (model) => VUtils.isNotBlank(model.snippet) }),
+    editor: createSnippetEditor({
+      getValue: (model) => model.snippet,
+      setValue: (model, value) => model.snippet = value,
+      height: PlaygroundCssVars.SNIPPET_HEIGHT
+    }),
+    helpDoc: HelpDocs.stepTypeOrmSnippet
+  }],
+  ports: [createPrePortExistsWithKey({
+    key: "snippet",
+    label: Labels.StepTypeOrmSnippet,
+    getValue: (model) => model.snippet
   })],
-  properties: [
-    CommonStepDefs.createMainContentElement(elementDatasource, elementAutonomousOrTransaction, {
-      code: "snippet",
-      label: Labels.StepTypeOrmSnippet,
-      anchor: "snippet",
-      badge: createCheckOrMissBadge({ check: (model) => VUtils.isNotBlank(model.snippet) }),
-      editor: createSnippetEditor({
-        getValue: (model) => model.snippet,
-        setValue: (model, value) => model.snippet = value,
-        height: PlaygroundCssVars.SNIPPET_HEIGHT
-      }),
-      helpDoc: HelpDocs.stepTypeOrmSnippet
-    })
-  ],
-  ports: [
-    createPrePortExistsWithKey({
-      key: "snippet",
-      label: Labels.StepTypeOrmSnippet,
-      getValue: (model) => model.snippet
-    })
-  ],
   helpDocs: HelpDocs.typeOrmBySnippetStep
 });
 registerStepDef(TypeOrmBySnippetStepDefs);
+const createTypeOrmBySqlPipelineStepDefs = (options) => {
+  const { use, sqlHelpDocs, stepHelpDocs } = options;
+  const defs = createTypeOrmWithAutonomousStepDefs({
+    use,
+    andPrepare: (def, model) => {
+      model.sql = def.sql;
+      model.temporary = model.temporary || {};
+      model.temporary.sqlByParams = VUtils.isBlank(model.sql);
+    },
+    keepPropertiesOnUseSwitch: ["sql"],
+    andConfirm: (model, def, _file, _options) => {
+      return () => {
+        var _a;
+        if (((_a = model.temporary) == null ? void 0 : _a.sqlByParams) === true) {
+          delete def.sql;
+        } else {
+          def.sql = model.sql;
+        }
+      };
+    },
+    properties: [{
+      code: "sql",
+      label: Labels.StepTypeOrmSql,
+      anchor: "sql",
+      badge: (model) => {
+        var _a;
+        if (((_a = model.temporary) == null ? void 0 : _a.sqlByParams) === true) {
+          return Labels.StepTypeOrmSqlByParams;
+        } else if (VUtils.isNotBlank(model.sql)) {
+          return React.createElement(ConfigurableElementBadgeChecked, null);
+        } else {
+          return React.createElement(ConfigurableElementBadgeMissed, null);
+        }
+      },
+      editor: createSelectableSqlEditor({
+        findFlag: (model) => {
+          var _a;
+          return ((_a = model.temporary) == null ? void 0 : _a.sqlByParams) ?? false;
+        },
+        saveFlag: (model, value) => model.temporary = { ...model.temporary ?? {}, sqlByParams: value },
+        findSnippet: (model) => model.sql,
+        saveSnippet: (model, text) => model.sql = text,
+        flagCandidates: [
+          { value: false, label: Labels.StepTypeOrmSqlPredefined },
+          { value: true, label: Labels.StepTypeOrmSqlByParams }
+        ],
+        isSnippetAvailable: (value) => value !== true,
+        height: PlaygroundCssVars.SQL_HEIGHT
+      }),
+      helpDoc: sqlHelpDocs
+    }],
+    ports: [createPrePortExistsWithKey({
+      key: "snippet",
+      label: Labels.StepTypeOrmSql,
+      getValue: (model) => model.sql
+    })],
+    helpDocs: stepHelpDocs
+  });
+  registerStepDef(defs);
+  return defs;
+};
+createTypeOrmBySqlPipelineStepDefs({
+  use: StandardPipelineStepRegisterKey.TYPEORM_BULK_SAVE_BY_SQL,
+  sqlHelpDocs: HelpDocs.stepTypeOrmBulkSaveBySqlSql,
+  stepHelpDocs: HelpDocs.typeOrmBulkSaveBySqlStep
+});
+createTypeOrmBySqlPipelineStepDefs({
+  use: StandardPipelineStepRegisterKey.TYPEORM_SAVE_BY_SQL,
+  sqlHelpDocs: HelpDocs.stepTypeOrmSaveBySqlSql,
+  stepHelpDocs: HelpDocs.typeOrmSaveBySqlStep
+});
+createTypeOrmBySqlPipelineStepDefs({
+  use: StandardPipelineStepRegisterKey.TYPEORM_LOAD_MANY_BY_SQL,
+  sqlHelpDocs: HelpDocs.stepTypeOrmLoadManyBySqlSql,
+  stepHelpDocs: HelpDocs.typeOrmLoadManyBySqlStep
+});
+createTypeOrmBySqlPipelineStepDefs({
+  use: StandardPipelineStepRegisterKey.TYPEORM_LOAD_ONE_BY_SQL,
+  sqlHelpDocs: HelpDocs.stepTypeOrmLoadOneBySqlSql,
+  stepHelpDocs: HelpDocs.typeOrmLoadOneBySqlStep
+});
+const TypeOrmTransactionalStepDefs = CommonStepDefs.createStepNodeConfigurer({
+  use: StandardPipelineStepRegisterKey.TYPEORM_TRANSACTIONAL,
+  prepare: ["and", prepare()],
+  switchUse: ["keep", [...switchUse, "steps"]],
+  confirm: ["and", confirm()],
+  properties: [CommonStepDefs.createMainContentElement(elementDatasource, elementTransaction)],
+  ports: [
+    { key: "datasource", port: PortDatasource },
+    { key: "transaction", port: PortTransaction },
+    { key: "steps", port: CommonStepDefs.prebuiltPorts.steps }
+  ],
+  createSubNodes: CommonStepDefs.createSetsLikeSubNodesAndEndNode,
+  helpDocs: HelpDocs.typeOrmTransactionalStep
+});
+registerStepDef(TypeOrmTransactionalStepDefs);
 const createRefOnCodeStepDefs = (options) => {
   const { use, label, askRefOptions, elementCodeHelpDoc, stepHelpDoc } = options;
   return CommonStepDefs.createStepNodeConfigurer({
