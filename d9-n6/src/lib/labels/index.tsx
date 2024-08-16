@@ -167,8 +167,9 @@ export const Labels = {
 	UseInputAsHttpBody: <IntlLabel keys={['o23', 'badge', 'use-input-as-http-body']} value="Use Input"/>,
 	UseJsonFormatForHttpBody: <IntlLabel keys={['o23', 'badge', 'use-json-format-for-http-body']}
 	                                     value="Use JSON Parse"/>,
-	TransactionAutonomous: <IntlLabel keys={['o23', 'badge', 'transaction', 'autonomous']} value="Autonomous"/>,
-	SqlByParams: <IntlLabel keys={['o23', 'badge', 'sql', 'by-params']} value="By Params"/>,
+	DatasourceByEnv: <IntlLabel keys={['o23', 'badge', 'datasource-by-env']} value="By Environment"/>,
+	TransactionAutonomous: <IntlLabel keys={['o23', 'badge', 'transaction-autonomous']} value="Autonomous"/>,
+	SqlByParams: <IntlLabel keys={['o23', 'badge', 'sql-by-params']} value="By Params"/>,
 	Yes: <IntlLabel keys={['o23', 'badge', 'yes']} value="Yes"/>,
 	YesChar: <IntlLabel keys={['o23', 'badge', 'yes-char']} value="Y"/>,
 	No: <IntlLabel keys={['o23', 'badge', 'no']} value="No"/>,

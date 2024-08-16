@@ -3,19 +3,21 @@ import {DropdownOptions, OptionItemSort, UnwrappedDropdown} from '@rainbow-d9/n2
 import React from 'react';
 import {ConfigurableElementEditorProps} from '../../../edit-dialog';
 import {PlaygroundModuleAssistant} from '../../../types';
-import {NotAvailableDropdownOption} from '../../not-available-dropdown-option';
 import {CommonStepDefModel} from '../../step-def';
-import {CommonElementEditorStyles} from '../../styles';
+import {NotAvailableDropdownOption} from '../not-available-dropdown-option';
+import {CommonElementEditorStyles} from '../styles';
 import {trim} from '../utils';
 
 export interface CreateDropdownOnAssistantEditorOptions<M extends CommonStepDefModel, V> {
 	getValue: (model: M) => V;
 	setValue: (model: M, value: V) => void;
 	askOptions: (assistant: Required<PlaygroundModuleAssistant>) => DropdownOptions;
+	disabled?: (model: M) => boolean;
+	visible?: (model: M) => boolean;
 }
 
 export const createDropdownOnAssistantEditor = <M extends CommonStepDefModel, V>(options: CreateDropdownOnAssistantEditorOptions<M, V>) => {
-	const {getValue, setValue, askOptions} = options;
+	const {getValue, setValue, askOptions, disabled = () => false, visible = () => true} = options;
 
 	return (props: ConfigurableElementEditorProps<M>) => {
 		const {model, onValueChanged, assistant} = props;
@@ -32,8 +34,8 @@ export const createDropdownOnAssistantEditor = <M extends CommonStepDefModel, V>
 		}
 
 		return <UnwrappedDropdown onValueChange={onValueChange} value={value}
-		                          optionSort={OptionItemSort.ASC}
-		                          clearable={false} options={options}
+		                          optionSort={OptionItemSort.ASC} options={options}
+		                          clearable={false} disabled={disabled(model)} visible={visible(model)}
 		                          style={CommonElementEditorStyles.dropdown}/>;
 	};
 };

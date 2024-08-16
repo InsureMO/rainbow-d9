@@ -8,8 +8,7 @@ import {
 	ConfigurableElementEditorProps
 } from '../../edit-dialog';
 import {Labels} from '../../labels';
-import {CommonElementEditorStyles} from '../styles';
-import {VerticalLinesEditor} from '../vertical-lines-editor';
+import {CommonElementEditorStyles, VerticalLinesEditor} from '../common';
 import {FileDefModel, PipelineFileDefModel} from './types';
 
 export const allOrArray = (value?: null | true | Array<string>) => {

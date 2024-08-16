@@ -20,13 +20,13 @@ import {PlaygroundCssVars} from '../../../widgets';
 import {createPrePortExistsWithKey, createSelectableSqlEditor} from '../../common';
 import {ConfirmNodeOptions} from '../../types';
 import {registerStepDef} from '../all-step-defs';
-import {AndConfirmCommit, CommonStepDefModel} from '../common';
+import {AndConfirmCommit} from '../common';
 import {createWithAutonomousStepDefs} from './funcs';
 import {TypeOrmWithAutonomousStepDefModel} from './types';
 
 export interface TypeOrmBySqlStepDefModel extends TypeOrmWithAutonomousStepDefModel {
 	sql?: string;
-	temporary?: CommonStepDefModel['temporary'] & {
+	temporary?: TypeOrmWithAutonomousStepDefModel['temporary'] & {
 		sqlByParams?: boolean;
 	};
 }

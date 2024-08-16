@@ -4,7 +4,7 @@ import React, {ReactNode} from 'react';
 import {ConfigurableElement, ConfigurableElementBadgeMissed, ConfigurableElementEditorProps} from '../../edit-dialog';
 import {HelpDocs} from '../../help-docs';
 import {Labels} from '../../labels';
-import {CommonElementEditorStyles} from '../styles';
+import {CommonElementEditorStyles} from '../common';
 import {PipelineFileDefModel} from './types';
 
 export const elementMethod: ConfigurableElement = {

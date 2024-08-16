@@ -10,9 +10,7 @@ import {
 import {HelpDocs} from '../../../../help-docs';
 import {Labels} from '../../../../labels';
 import {PlaygroundCssVars} from '../../../../widgets';
-import {createSelectableSnippetEditor} from '../../../common';
-import {CommonElementEditorStyles} from '../../../styles';
-import {VerticalLinesEditor} from '../../../vertical-lines-editor';
+import {CommonElementEditorStyles, createSelectableSnippetEditor, VerticalLinesEditor} from '../../../common';
 import {CommonStepDefModel, MergeType} from '../types';
 
 const createBadge = (name: 'fromInputAsIs' | 'toOutputAsIs') => {

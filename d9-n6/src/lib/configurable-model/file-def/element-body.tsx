@@ -4,8 +4,7 @@ import React from 'react';
 import {ConfigurableElement, ConfigurableElementEditorProps} from '../../edit-dialog';
 import {HelpDocs} from '../../help-docs';
 import {Labels} from '../../labels';
-import {createCheckOrIgnoreBadge} from '../common';
-import {CommonElementEditorStyles} from '../styles';
+import {CommonElementEditorStyles, createCheckOrIgnoreBadge} from '../common';
 import {PipelineFileDefModel} from './types';
 
 const ParseIgnoredOrDefaultOptions = [

@@ -1,7 +1,6 @@
 import {PropValue, VUtils} from '@rainbow-d9/n1';
-import {CssVars, UnwrappedCheckboxes, UnwrappedDecorateInput} from '@rainbow-d9/n2';
+import {UnwrappedCheckboxes, UnwrappedDecorateInput} from '@rainbow-d9/n2';
 import React, {ReactNode, useRef} from 'react';
-import styled from 'styled-components';
 import {
 	ConfigurableElement,
 	ConfigurableElementBadgeChecked,
@@ -10,7 +9,7 @@ import {
 } from '../../../edit-dialog';
 import {HelpDocs} from '../../../help-docs';
 import {Labels} from '../../../labels';
-import {createCheckOrMissBadge, createStrEditor} from '../../common';
+import {CheckAndValueEditor, createCheckOrMissBadge, createStrEditor} from '../../common';
 import {TypeOrmStepDefModel, TypeOrmWithAutonomousStepDefModel} from './types';
 
 /**
@@ -27,31 +26,10 @@ export const elementTransaction = {
 	helpDoc: HelpDocs.stepTypeOrmTransaction
 };
 
-const AutonomousOrTransactionEditorWrapper = styled.div`
-    > div[data-w=d9-deco-input] {
-        > span[data-w=d9-deco-lead]:first-child {
-            padding-right: 0;
-
-            > div[data-w=d9-checkboxes] > span[data-w=d9-checkboxes-option]:first-child {
-                padding-right: calc(${CssVars.INPUT_INDENT} + 4px);
-                margin-right: 0;
-
-                > div[data-w=d9-checkbox] {
-                    transform: scale(0.8);
-                }
-            }
-        }
-
-        > input {
-            flex-grow: unset;
-            min-width: 250px;
-        }
-    }
-`;
 const AutonomousOrTransactionEditor = (props: ConfigurableElementEditorProps<TypeOrmWithAutonomousStepDefModel>) => {
 	const {model, onValueChanged} = props;
 
-	const inputRef = useRef<HTMLInputElement>(null);
+	const inputRef = useRef<HTMLDivElement>(null);
 
 	const onAutonomousChange = (value: PropValue) => {
 		if (value === true) {
@@ -72,13 +50,13 @@ const AutonomousOrTransactionEditor = (props: ConfigurableElementEditorProps<Typ
 		                     options={[{value: true, label: Labels.TransactionAutonomous}]}
 		                     single={true} boolOnSingle={true}/>
 	];
-	return <AutonomousOrTransactionEditorWrapper>
+	return <CheckAndValueEditor inputWidth={250}>
 		<UnwrappedDecorateInput leads={autonomousCheck}
 		                        value={model.transaction ?? ''} onValueChange={onTransactionChange}
 		                        disabled={model.autonomous === true}
 		                        placeholder="$default-transaction"
 		                        ref={inputRef}/>
-	</AutonomousOrTransactionEditorWrapper>;
+	</CheckAndValueEditor>;
 };
 /**
  * for autonomous available

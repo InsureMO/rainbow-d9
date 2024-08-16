@@ -10,7 +10,7 @@ import {
 } from '../../../edit-dialog';
 import {HelpDocs} from '../../../help-docs';
 import {Labels} from '../../../labels';
-import {CommonElementEditorStyles} from '../../styles';
+import {CommonElementEditorStyles} from '../../common';
 import {HttpStepDefModel} from './types';
 
 export const elementBodyUsed: ConfigurableElement = {

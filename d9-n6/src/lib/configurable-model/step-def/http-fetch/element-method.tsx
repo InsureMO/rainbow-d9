@@ -5,9 +5,7 @@ import {StandardPipelineStepRegisterKey} from '../../../definition';
 import {ConfigurableElement, ConfigurableElementEditorProps} from '../../../edit-dialog';
 import {HelpDocs} from '../../../help-docs';
 import {Labels} from '../../../labels';
-import {createValueOrAnotherBadge} from '../../common';
-import {NotAvailableDropdownOption} from '../../not-available-dropdown-option';
-import {CommonElementEditorStyles} from '../../styles';
+import {CommonElementEditorStyles, createValueOrAnotherBadge, NotAvailableDropdownOption} from '../../common';
 import {HttpStepDefModel} from './types';
 
 const MethodEditor = (props: ConfigurableElementEditorProps<HttpStepDefModel>) => {

@@ -4,7 +4,7 @@ import React, {ReactNode} from 'react';
 import {ConfigurableElement, ConfigurableElementEditorProps} from '../../../../edit-dialog';
 import {HelpDocs} from '../../../../help-docs';
 import {askUseBadge, askUseLabel, Labels} from '../../../../labels';
-import {CommonElementEditorStyles} from '../../../styles';
+import {CommonElementEditorStyles} from '../../../common';
 import {AllStepDefsAsArray, findStepDef} from '../../all-step-defs';
 import {CommonStepDefModel} from '../types';
 

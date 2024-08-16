@@ -5,9 +5,7 @@ import {ApiNamedFile} from '../../definition';
 import {ConfigurableElement, ConfigurableElementEditorProps} from '../../edit-dialog';
 import {HelpDocs} from '../../help-docs';
 import {Labels} from '../../labels';
-import {createCheckOrIgnoreBadge} from '../common';
-import {CommonElementEditorStyles} from '../styles';
-import {VerticalLinesEditor} from '../vertical-lines-editor';
+import {CommonElementEditorStyles, createCheckOrIgnoreBadge, VerticalLinesEditor} from '../common';
 import {PipelineFileDefModel} from './types';
 
 export const FilesOptions = [

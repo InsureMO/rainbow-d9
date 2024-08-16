@@ -4,7 +4,7 @@ import React, {ReactNode} from 'react';
 import {ConfigurableElement, ConfigurableElementBadgeMissed, ConfigurableElementEditorProps} from '../../edit-dialog';
 import {HelpDocs} from '../../help-docs';
 import {Labels} from '../../labels';
-import {CommonElementEditorStyles} from '../styles';
+import {CommonElementEditorStyles} from '../common';
 import {elementInitOnly} from './element-init-only';
 import {elementRequest} from './element-request';
 import {elementResponse} from './element-response';

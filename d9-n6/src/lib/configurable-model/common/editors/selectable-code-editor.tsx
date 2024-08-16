@@ -2,10 +2,10 @@ import {PropValue} from '@rainbow-d9/n1';
 import {DropdownOptions, UnwrappedDropdown} from '@rainbow-d9/n2';
 import React, {FC} from 'react';
 import {ConfigurableElementEditorProps} from '../../../edit-dialog';
-import {CommonElementEditorStyles} from '../../styles';
-import {VerticalLinesEditor} from '../../vertical-lines-editor';
 import {JsEditor} from '../js-editor';
 import {SqlEditor} from '../sql-editor';
+import {CommonElementEditorStyles} from '../styles';
+import {VerticalLinesEditor} from '../vertical-lines-editor';
 
 export interface SelectableCodeEditorProps {
 	visible?: boolean;

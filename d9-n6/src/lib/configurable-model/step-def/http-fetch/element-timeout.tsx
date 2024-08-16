@@ -1,39 +1,17 @@
 import {PropValue, VUtils} from '@rainbow-d9/n1';
-import {CssVars, UnwrappedCheckboxes, UnwrappedDecorateInput} from '@rainbow-d9/n2';
+import {UnwrappedCheckboxes, UnwrappedDecorateInput} from '@rainbow-d9/n2';
 import React, {useRef} from 'react';
-import styled from 'styled-components';
 import {ConfigurableElement, ConfigurableElementEditorProps} from '../../../edit-dialog';
 import {NavigatorElementBadgeWrapper} from '../../../edit-dialog/widgets';
 import {HelpDocs} from '../../../help-docs';
 import {Labels} from '../../../labels';
-import {createValueOrAnotherBadge} from '../../common';
+import {CheckAndValueEditor, createValueOrAnotherBadge} from '../../common';
 import {HttpStepDefModel} from './types';
 
-const TimeoutEditorWrapper = styled.div`
-    > div[data-w=d9-deco-input] {
-        > span[data-w=d9-deco-lead]:first-child {
-            padding-right: 0;
-
-            > div[data-w=d9-checkboxes] > span[data-w=d9-checkboxes-option]:first-child {
-                padding-right: calc(${CssVars.INPUT_INDENT} + 4px);
-                margin-right: 0;
-
-                > div[data-w=d9-checkbox] {
-                    transform: scale(0.8);
-                }
-            }
-        }
-
-        > input {
-            flex-grow: unset;
-            min-width: 150px;
-        }
-    }
-`;
 const TimeoutEditor = (props: ConfigurableElementEditorProps<HttpStepDefModel>) => {
 	const {model, onValueChanged} = props;
 
-	const inputRef = useRef<HTMLInputElement>(null);
+	const inputRef = useRef<HTMLDivElement>(null);
 	const valueRef = useRef<string>(`${model.timeout ?? ''}`);
 	const noTimeoutRef = useRef(model.timeout == null || model.timeout <= 0);
 
@@ -70,12 +48,12 @@ const TimeoutEditor = (props: ConfigurableElementEditorProps<HttpStepDefModel>) 
 		                     options={[{value: true, label: Labels.NoTimeout}]}
 		                     single={true} boolOnSingle={true}/>
 	];
-	return <TimeoutEditorWrapper>
+	return <CheckAndValueEditor inputWidth={150}>
 		<UnwrappedDecorateInput leads={noTimeout}
 		                        value={valueRef.current} onValueChange={onValueChange}
 		                        disabled={noTimeoutRef.current}
 		                        ref={inputRef}/>
-	</TimeoutEditorWrapper>;
+	</CheckAndValueEditor>;
 };
 export const elementTimeout: ConfigurableElement = {
 	code: 'timeout', label: Labels.StepHttpTimeout, anchor: 'timeout',

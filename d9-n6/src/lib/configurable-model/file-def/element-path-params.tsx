@@ -4,8 +4,7 @@ import React, {ReactNode} from 'react';
 import {ConfigurableElement, ConfigurableElementEditorProps} from '../../edit-dialog';
 import {HelpDocs} from '../../help-docs';
 import {Labels} from '../../labels';
-import {CommonElementEditorStyles} from '../styles';
-import {VerticalLinesEditor} from '../vertical-lines-editor';
+import {CommonElementEditorStyles, VerticalLinesEditor} from '../common';
 import {AllIgnoredOrArrayOptions, allOrArray, ANCHOR_PATH_PARAMS, ANCHOR_ROUTE} from './helper';
 import {PipelineFileDefModel} from './types';
 

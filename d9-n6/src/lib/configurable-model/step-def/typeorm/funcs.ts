@@ -12,6 +12,10 @@ export const prepare =
 	<F extends TypeOrmPipelineStepDef, M extends TypeOrmStepDefModel>(and?: (def: F, model: M) => void): AndPrepare<F, M> => {
 		return (def: F, model: M) => {
 			model.datasource = def.datasource;
+			if ((model.datasource ?? '').startsWith('env:')) {
+				model.temporary = {...(model.temporary ?? {datasourceByEnvs: true})};
+				model.temporary.datasourceEnvKey = model.datasource.substring(4);
+			}
 			model.transaction = def.transaction;
 			if (and != null) {
 				and(def, model);

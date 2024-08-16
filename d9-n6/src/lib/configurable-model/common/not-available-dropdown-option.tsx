@@ -1,7 +1,7 @@
 import {CssVars} from '@rainbow-d9/n2';
 import React, {ReactNode} from 'react';
 import styled from 'styled-components';
-import {Labels} from '../labels';
+import {Labels} from '../../labels';
 
 export interface NotAvailableDropdownOptionOptions {
 	label: ReactNode;

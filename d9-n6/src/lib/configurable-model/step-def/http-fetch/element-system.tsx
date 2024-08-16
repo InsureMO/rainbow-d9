@@ -9,9 +9,7 @@ import {
 } from '../../../edit-dialog';
 import {HelpDocs} from '../../../help-docs';
 import {Labels} from '../../../labels';
-import {createValueOrMissBadge} from '../../common';
-import {NotAvailableDropdownOption} from '../../not-available-dropdown-option';
-import {CommonElementEditorStyles} from '../../styles';
+import {CommonElementEditorStyles, createValueOrMissBadge, NotAvailableDropdownOption} from '../../common';
 import {HttpStepDefModel} from './types';
 
 const SystemEditor = (props: ConfigurableElementEditorProps<HttpStepDefModel>) => {
