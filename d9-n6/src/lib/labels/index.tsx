@@ -83,6 +83,7 @@ export const Labels = {
 	StepUseTypeormSave: 'Typeorm Save',
 	StepUseTypeormLoadMany: 'Typeorm Load Many',
 	StepUseTypeormLoadOne: 'Typeorm Load One',
+	StepUseTypeormTransactional: 'Typeorm Transactional',
 	StepUseRefPipeline: 'Call Pipeline',
 	StepUseRefStep: 'Call Pipeline Step',
 	// step variables common labels

@@ -82,32 +82,33 @@ export const confirmWithAutonomous
 	};
 };
 
-export interface CreateWithAutonomousStepDefsOptions<F extends TypeOrmWithAutonomousPipelineStepDef, M extends TypeOrmWithAutonomousStepDefModel> {
+export interface CreateTypeOrmWithAutonomousStepDefsOptions<F extends TypeOrmWithAutonomousPipelineStepDef, M extends TypeOrmWithAutonomousStepDefModel> {
 	use: F['use'];
-	andPrepare: AndPrepare<F, M>;
-	andConfirm: AndConfirm<F, M>;
-	properties: Array<ConfigurableElement>;
+	andPrepare?: AndPrepare<F, M>;
+	keepPropertiesOnUseSwitch?: Array<string>;
+	andConfirm?: AndConfirm<F, M>;
+	properties?: Array<ConfigurableElement>;
 	ports?: Array<{ key: string, port: StepPort }>;
 	helpDocs: string;
 }
 
-export const createWithAutonomousStepDefs =
-	<F extends TypeOrmWithAutonomousPipelineStepDef, M extends TypeOrmWithAutonomousStepDefModel>(options: CreateWithAutonomousStepDefsOptions<F, M>) => {
+export const createTypeOrmWithAutonomousStepDefs =
+	<F extends TypeOrmWithAutonomousPipelineStepDef, M extends TypeOrmWithAutonomousStepDefModel>(options: CreateTypeOrmWithAutonomousStepDefsOptions<F, M>) => {
 		const {
-			use, andPrepare, andConfirm,
+			use, andPrepare, keepPropertiesOnUseSwitch, andConfirm,
 			properties, ports = [], helpDocs
 		} = options;
 
 		return CommonStepDefs.createStepNodeConfigurer<F, M>({
 			use,
 			prepare: ['and', prepareWithAutonomous(andPrepare)],
-			switchUse: ['keep', [...switchUseWithAutonomous, 'snippet']],
+			switchUse: ['keep', [...switchUseWithAutonomous, ...(keepPropertiesOnUseSwitch ?? [])]],
 			confirm: ['and', confirmWithAutonomous(andConfirm)],
-			properties: [CommonStepDefs.createMainContentElement(elementDatasource, elementAutonomousOrTransaction, ...properties)],
+			properties: [CommonStepDefs.createMainContentElement(elementDatasource, elementAutonomousOrTransaction, ...(properties ?? []))],
 			ports: [
 				{key: 'datasource', port: PortDatasource},
 				{key: 'transaction', port: PortTransactionWithAutonomous},
-				...ports
+				...(ports ?? [])
 			],
 			helpDocs
 		});

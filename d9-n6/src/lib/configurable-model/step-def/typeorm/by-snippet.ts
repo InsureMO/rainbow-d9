@@ -8,7 +8,7 @@ import {createCheckOrMissBadge, createPrePortExistsWithKey, createSnippetEditor}
 import {ConfirmNodeOptions} from '../../types';
 import {registerStepDef} from '../all-step-defs';
 import {AndConfirmCommit} from '../common';
-import {createWithAutonomousStepDefs} from './funcs';
+import {createTypeOrmWithAutonomousStepDefs} from './funcs';
 import {TypeOrmWithAutonomousStepDefModel} from './types';
 
 export interface TypeOrmBySnippetStepDefModel extends TypeOrmWithAutonomousStepDefModel {
@@ -17,9 +17,10 @@ export interface TypeOrmBySnippetStepDefModel extends TypeOrmWithAutonomousStepD
 }
 
 export const TypeOrmBySnippetStepDefs =
-	createWithAutonomousStepDefs<TypeOrmBySnippetPipelineStepDef, TypeOrmBySnippetStepDefModel>({
+	createTypeOrmWithAutonomousStepDefs<TypeOrmBySnippetPipelineStepDef, TypeOrmBySnippetStepDefModel>({
 		use: StandardPipelineStepRegisterKey.TYPEORM_BY_SNIPPET,
 		andPrepare: (def, model) => model.snippet = def.snippet,
+		keepPropertiesOnUseSwitch: ['snippet'],
 		// eslint-disable-next-line @typescript-eslint/no-unused-vars
 		andConfirm: (model, def, _file: FileDef, _options: ConfirmNodeOptions): ConfigurableElementAnchor | AndConfirmCommit => {
 			// TODO VALIDATE SNIPPET

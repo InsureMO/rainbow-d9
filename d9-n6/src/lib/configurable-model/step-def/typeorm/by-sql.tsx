@@ -21,7 +21,7 @@ import {createPrePortExistsWithKey, createSelectableSqlEditor} from '../../commo
 import {ConfirmNodeOptions} from '../../types';
 import {registerStepDef} from '../all-step-defs';
 import {AndConfirmCommit} from '../common';
-import {createWithAutonomousStepDefs} from './funcs';
+import {createTypeOrmWithAutonomousStepDefs} from './funcs';
 import {TypeOrmWithAutonomousStepDefModel} from './types';
 
 export interface TypeOrmBySqlStepDefModel extends TypeOrmWithAutonomousStepDefModel {
@@ -56,13 +56,14 @@ interface CreateTypeOrmBySqlPipelineStepDefsOptions<F extends TypeOrmBySqlPipeli
 const createTypeOrmBySqlPipelineStepDefs =
 	<F extends TypeOrmBySqlPipelineStepDef, M extends TypeOrmBySqlStepDefModel>(options: CreateTypeOrmBySqlPipelineStepDefsOptions<F>) => {
 		const {use, sqlHelpDocs, stepHelpDocs} = options;
-		const defs = createWithAutonomousStepDefs<F, M>({
+		const defs = createTypeOrmWithAutonomousStepDefs<F, M>({
 			use,
 			andPrepare: (def, model) => {
 				model.sql = def.sql;
 				model.temporary = model.temporary || {};
 				model.temporary.sqlByParams = VUtils.isBlank(model.sql);
 			},
+			keepPropertiesOnUseSwitch: ['sql'],
 			// eslint-disable-next-line @typescript-eslint/no-unused-vars
 			andConfirm: (model, def, _file: FileDef, _options: ConfirmNodeOptions): ConfigurableElementAnchor | AndConfirmCommit => {
 				// TODO VALIDATE SQL

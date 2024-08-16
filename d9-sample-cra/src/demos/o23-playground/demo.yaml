@@ -44,23 +44,36 @@ steps:
     $diagram:
       $foldSubSteps: true
   - name: TypeORM
-    use: sets
+    use: typeorm-transactional
+    datasource: db-data
+    transaction: t1
     steps:
       - name: By snippet
         use: typeorm-snippet
         datasource: db-data
+        transaction: t1
       - name: Bulk Save
         use: typeorm-bulk-save
         datasource: db-data
-      - name: Save
-        use: typeorm-save
+        transaction: t1
+      - name: TypeORM
+        use: typeorm-transactional
         datasource: db-data
+        transaction: t2
+        steps:
+          - name: Save
+            use: typeorm-save
+            datasource: db-data
+            transaction: t2
       - name: Load Many
         use: typeorm-load-many
         datasource: db-data
+        transaction: t1
       - name: Load One
         use: typeorm-load-one
         datasource: db-data
+        transaction: t1
+        sql: SELECT T.ID AS id, T.NAME AS name FROM TABLE T WHERE T.ID = $id AND T.ENABLED = $enabled.@bool
     $diagram:
       $foldSubSteps: true
   - name: Do validation

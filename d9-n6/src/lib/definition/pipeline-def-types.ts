@@ -166,6 +166,10 @@ export interface TypeOrmLoadOneBySqlPipelineStepDef extends TypeOrmBySqlPipeline
 	use: StandardPipelineStepRegisterKey.TYPEORM_LOAD_ONE_BY_SQL;
 }
 
+export interface TypeOrmTransactionalPipelineStepDef extends TypeOrmPipelineStepDef, SetsLikePipelineStepDef {
+	use: StandardPipelineStepRegisterKey.TYPEORM_TRANSACTIONAL;
+}
+
 export interface RefOnCodePipelineStepDef extends AllInPipelineStepDef {
 	code?: string;
 }

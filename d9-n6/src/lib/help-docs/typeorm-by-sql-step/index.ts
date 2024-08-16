@@ -5,7 +5,7 @@ import {markdown as stepLoadMany} from './step-load-many.md';
 import {markdown as stepLoadOne} from './step-load-one.md';
 import {markdown as stepSave} from './step-save.md';
 
-const sql = 'Open the `Native SQL Support & Enhancement` section in the left-side step descriptions for more information.';
+const sql = 'Open the `Native SQL Support & Enhancement` section in the left-side step for more information.';
 export const docs = {
 	// stepTypeOrmSnippet,
 	// typeOrmBySnippetStep: mergeStepDocsAnd(step, {'${typeorm}\n': common.stepTypeOrm})

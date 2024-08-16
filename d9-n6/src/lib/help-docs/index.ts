@@ -14,6 +14,7 @@ import {docs as StepCommonDocs} from './step';
 import {docs as TypeOrmBySnippetStepDocs} from './typeorm-by-snippet-step';
 import {docs as TypeOrmBySqlStepDocs} from './typeorm-by-sql-step';
 import {docs as TypeOrmCommonDocs} from './typeorm-step';
+import {docs as TypeOrmTransactionalStepDocs} from './typeorm-transactional-step';
 
 export const HelpDocs = {
 	...PipelineDocs,
@@ -34,6 +35,7 @@ export const HelpDocs = {
 	...TypeOrmCommonDocs,
 	...TypeOrmBySnippetStepDocs,
 	...TypeOrmBySqlStepDocs,
+	...TypeOrmTransactionalStepDocs,
 	// ref
 	...RefPipelineDocs,
 	...RefStepDocs
