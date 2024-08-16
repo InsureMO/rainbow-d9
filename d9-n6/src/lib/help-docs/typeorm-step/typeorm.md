@@ -64,3 +64,10 @@ Since different databases have varying degrees of support for dialects, `@rainbo
 > names of the returned objects in the result set (usually recommended in camel case). Therefore, even though it is not a syntax
 > enhancement, it is strongly recommended to use aliases to standardize the column names in the returned result set, for
 > example, `PERSON_NAME AS "personName"`, please pay attention to the use of quotation marks to correctly preserve the case.
+
+- When given data is an array, provide SQL written using standard binding variable placeholders (sequence numbers),
+	- `MySQL` uses `?`,
+	- `PostgreSQL` uses `$1`, `$2`, ...,
+	- `MSSQL` uses `@0`, `@1`, ...,
+	- `Oracle` uses `:0`, `:1`, ...,
+- When given data is a record, provide SQL written using named binding variable placeholders.
