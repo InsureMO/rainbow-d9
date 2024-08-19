@@ -75,11 +75,9 @@ export const EditorCanvasWrapper = styled.div.attrs<{
     > div.o23-playground-editor-content {
         width: var(--canvas-width, 0);
         height: var(--canvas-height, 0);
-
-        > svg, > div {
-            transform: scale(var(--canvas-zoom));
-            transform-origin: top left;
-        }
+        //> svg, > div {
+        //    transform-origin: top left;
+        //}
     }
 `;
 export const EditorToolbar = styled.div.attrs({[DOM_KEY_WIDGET]: 'o23-playground-editor-toolbar'})`
