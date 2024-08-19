@@ -1,8 +1,11 @@
 ### TypeORM
 
 `@rainbow-o23` provides a set of pipeline steps for database operations based on [TypeORM](https://typeorm.io/), including transaction
-support, SQL read/write, and simple ORM entity operations. Generally, it is recommended to use SQL for data operations. `@rainbow-o23` has
-enhanced SQL syntax to better interact with in-memory data.
+support, SQL read and write. Generally, it is recommended to use SQL for data operations. `@rainbow-o23` has enhanced SQL syntax to better
+interact with in-memory data.
+
+> Please refer to [@rainbow-o23](https://github.com/InsureMO/rainbow-o23/blob/main/o23-n3/README.md#database-typeorm-steps) for more
+> information on configuring data sources.
 
 #### Datasource
 
