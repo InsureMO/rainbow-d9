@@ -4,14 +4,14 @@ var __publicField = (obj, key, value) => {
   __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
   return value;
 };
-import { a as color, y as EditorView, z as EditorState, A as basicSetup, B as keymap, C as indentWithTab, K as lintGutter, P as Compartment, Q as jsYaml, G as javascript, R as sql$1, S as dom2image } from "./vendor-9PBy61iY.js";
-import { f as CssConstants, C as CssVars, I as IntlLabel, D as DOM_KEY_WIDGET, d as utils$2, g as UnwrappedCheckbox, h as UnwrappedDropdown, O as OptionItemSort, j as UnwrappedInput, k as UnwrappedCaption, l as UnwrappedTextarea, m as UnwrappedDecorateInput, n as UnwrappedCheckboxes, b as useGlobalHandlers } from "./rainbow-d9-n2-xKaTahfo.js";
-import { R as React, r as reactExports, q as qe, W as We, P as PortModelAlignment, a as PortWidget, D as DefaultLinkModel, b as PortModel, N as NodeModel, C as CanvasWidget, c as DiagramModel, d as createEngine, A as AbstractModelFactory, e as DefaultLinkFactory, f as AbstractReactFactory, L as LinkWidget, g as DefaultLinkPointWidget, h as DefaultLinkSegmentWidget } from "./react-base-6HcWNIND.js";
-import { V as VUtils, a as useThrottler, r as registerWidget, g as useCreateEventBus, e as useForceUpdate, M as MUtils, P as PPUtils } from "./rainbow-d9-n1-QwqjAF-C.js";
-import { i as index$1 } from "./rainbow-d9-n3-IReBJVBW.js";
-import { M as Markdown } from "./react-markdown-LN8tJIOK.js";
-import { r as remarkGfm } from "./remark-knKwgtTv.js";
-import { S as SyntaxHighlighter, p as prism } from "./react-syntax-highlighter-5-uT_UBa.js";
+import { a as color, y as EditorView, z as EditorState, A as basicSetup, B as keymap, C as indentWithTab, K as lintGutter, P as Compartment, Q as jsYaml, G as javascript, R as sql$1, S as dom2image } from "./vendor-KMvu5Thy.js";
+import { f as CssConstants, C as CssVars, I as IntlLabel, D as DOM_KEY_WIDGET, d as utils$2, g as UnwrappedCheckbox, h as UnwrappedDropdown, O as OptionItemSort, j as UnwrappedInput, k as UnwrappedCaption, l as UnwrappedTextarea, m as UnwrappedDecorateInput, n as UnwrappedCheckboxes, b as useGlobalHandlers } from "./rainbow-d9-n2-c3wskaxM.js";
+import { R as React, r as reactExports, q as qe, W as We, P as PortModelAlignment, a as PortWidget, D as DefaultLinkModel, b as PortModel, N as NodeModel, C as CanvasWidget, c as DiagramEngine, d as NodeLayerFactory, L as LinkLayerFactory, S as SelectionBoxLayerFactory, e as DefaultLabelFactory, f as DefaultNodeFactory, g as DefaultLinkFactory, h as PathFindingLinkFactory, i as DefaultPortFactory, A as AbstractModelFactory, j as DiagramModel, k as State, l as SelectingState, m as AbstractReactFactory, n as LinkWidget, o as DefaultLinkPointWidget, p as DefaultLinkSegmentWidget } from "./react-base-Rd9ixZ4P.js";
+import { V as VUtils, a as useThrottler, r as registerWidget, g as useCreateEventBus, e as useForceUpdate, M as MUtils, P as PPUtils } from "./rainbow-d9-n1-gv4-Ep8b.js";
+import { i as index$1 } from "./rainbow-d9-n3-A35-DfLs.js";
+import { M as Markdown } from "./react-markdown-MR25_1Zg.js";
+import { r as remarkGfm } from "./remark-lKaLcTkQ.js";
+import { S as SyntaxHighlighter, p as prism } from "./react-syntax-highlighter-2s1C3W64.js";
 const EDITOR_BACKGROUND_BLOCK_SIZE = "var(--o23-playground-editor-background-block-size, 48px)";
 const EDITOR_BACKGROUND_LINE_COLOR = `var(--o23-playground-editor-background-line-color, ${color(CssConstants.PRIMARY_COLOR).alpha(0.08)})`;
 const EDITOR_ATTRIBUTE_BADGE_COLOR = "#9db6c6";
@@ -616,12 +616,12 @@ const Labels = {
   StepUseAsyncSets: "Async Sets",
   StepUseEach: "Each",
   StepUseParallel: "Parallel",
-  StepUseTypeormSnippet: "Typeorm Snippet",
-  StepUseTypeormBulkSave: "Typeorm Bulk Save",
-  StepUseTypeormSave: "Typeorm Save",
-  StepUseTypeormLoadMany: "Typeorm Load Many",
-  StepUseTypeormLoadOne: "Typeorm Load One",
-  StepUseTypeormTransactional: "Typeorm Transactional",
+  StepUseTypeormSnippet: "TypeOrm Snippet",
+  StepUseTypeormBulkSave: "TypeOrm Bulk Save",
+  StepUseTypeormSave: "TypeOrm Save",
+  StepUseTypeormLoadMany: "TypeOrm Load Many",
+  StepUseTypeormLoadOne: "TypeOrm Load One",
+  StepUseTypeormTransactional: "TypeOrm Transactional",
   StepUseRefPipeline: "Call Pipeline",
   StepUseRefStep: "Call Pipeline Step",
   StepVariableIgnoreSnippet: React.createElement(IntlLabel, { keys: ["o23", "step", "common-variable", "ignore-snippet"], value: "Ignore" }),
@@ -899,6 +899,8 @@ var PlaygroundEventTypes;
   PlaygroundEventTypes2["SHOW_EDIT_DIALOG"] = "show-edit-dialog";
   PlaygroundEventTypes2["HIDE_EDIT_DIALOG"] = "hide-edit-dialog";
   PlaygroundEventTypes2["REPAINT"] = "repaint";
+  PlaygroundEventTypes2["ZOOM_TO"] = "zoom-to";
+  PlaygroundEventTypes2["ZOOM_TO_FIT"] = "zoom-to-fit";
 })(PlaygroundEventTypes || (PlaygroundEventTypes = {}));
 const Context$2 = reactExports.createContext({});
 Context$2.displayName = "PlaygroundEventBus";
@@ -2402,7 +2404,7 @@ const docs$4 = {
 const markdown$a = "TypeORM steps use transaction names to identify transactions, steps can be grouped under a transaction. If transaction is declared as\nautonomous, the step will be executed in the default transaction (autonomous transaction). Essentially, steps within a transaction should be\nnested in a TypeORM transactional step and have the same transaction name.\n\n> Transactional steps can be nested, meaning a transactional step can contain another transactional step as a sub-step, even if they have\n> different transaction names.\n";
 const markdown$9 = "Specify data source. If using dynamic environment variables for specification, you need to indicate the key of the environment variable,\nsuch as key `db.default` corresponding to the `CFG_DB_DEFAULT` environment variable name.\n";
 const markdown$8 = "TypeORM steps use transaction names to identify transactions, steps can be grouped under a transaction. Essentially, steps within a\ntransaction should be nested in a TypeORM transactional step and have the same transaction name.\n\n> Transactional steps can be nested, meaning a transactional step can contain another transactional step as a sub-step, even if they have\n> different transaction names.\n";
-const markdown$7 = '### TypeORM\n\n`@rainbow-o23` provides a set of pipeline steps for database operations based on [TypeORM](https://typeorm.io/), including transaction\nsupport, SQL read/write, and simple ORM entity operations. Generally, it is recommended to use SQL for data operations. `@rainbow-o23` has\nenhanced SQL syntax to better interact with in-memory data.\n\n#### Datasource\n\nEach TypeOrm step must specify a datasource, which is configured in environment. If using dynamic environment variables for specification,\nyou need to indicate the key of the environment variable, such as key `db.default` corresponding to the `CFG_DB_DEFAULT` environment\nvariable name.\n\n#### Transaction\n\nTypeORM steps use transaction names to identify transactions, steps can be grouped under a transaction. If transaction is declared as\nautonomous, the step will be executed in the default transaction (autonomous transaction). Essentially, steps within a transaction should be\nnested in a TypeORM transactional step and have the same transaction name.\n\n> Transactional steps can be nested, meaning a transactional step can contain another transactional step as a sub-step, even if they have\n> different transaction names.\n\n#### Native SQL Support & Enhancement\n\nSQL supports native database syntax. At the same time, `@rainbow-o23` enhances SQL syntax, allowing the use of the `$property` syntax to\nretrieve corresponding data from data objects, also supports multi-level property names, connected by `.`. For example, `$person.name`\nrepresents that `person` is an object and `name` is a property under `person`. The following are the supported syntax features:\n\n- `IN ($...names)`: `one-of`, `names` should be an array,\n- `LIKE $name%`: `starts-with`,\n- `LIKE $%name`: `ends-with`,\n- `LIKE $%name%`: `contains`.\n\n> Name mapping is case-sensitive.  \n> `LIKE` is case-sensitive.\n\nSince different databases have varying degrees of support for dialects, `@rainbow-o23` also provides appropriate enhanced support for this:\n\n- For pagination, `$.limit($offset, $limit)` will be translated and executed in the appropriate dialect. For example,\n	- `MySQL` uses `LIMIT $offset, $limit`,\n	- `PostgreSQL` uses `OFFSET $offset LIMIT $limit`.\n	- `MSSQL` and `Oracle` use `OFFSET $offset ROWS FETCH NEXT $limit ROWS ONLY`,\n		- `MSSQL` requires an `ORDER BY` clause for pagination SQL. If there is no `ORDER BY` clause, will\n		  use `ORDER BY 1 OFFSET $offset ROWS FETCH NEXT $limit ROWS ONLY`.\n- For JSON column, because some databases (such as MSSQL) do not have a JSON column type, they cannot automatically replace strings in the\n  result set with JSON objects,\n	- Use `config as "config.@json"` to explicitly indicate that the `config` column is of JSON data type.\n	- Use `$config.@json` to explicitly indicate that the `config` property of given parameters is of JSON data type.\n- For boolean column which use numeric(int/smallint/tinyint) as storage type, because some databases (such as PostgreSQL) cannot\n  automatically convert boolean values in memory to numeric 0 or 1 in the database,\n	- Use `enabled as "enabled.@bool"` to explicitly indicate that the `enabled` column is of boolean in-memory and numeric in database data\n	  type.\n	- Use `$enabled.@bool` to explicitly indicate that the `enabled` property of given parameters is of boolean in-memory and numeric in\n	  database data type.\n- For datetime (MySQL, MSSQL) / timestamp (Oracle, PostgreSQL) column,\n	- Use `created_at as "createdAt.@ts"` to explicitly indicate that the `createdAt` column is of string in-memory and timestamp in\n	  database data type.\n	- Use `$createdAt.@ts` to explicitly indicate that the `createdAt` property of given parameters is of string in-memory and timestamp in\n	  database data type.\n\n> It is recommended that if you need to consider support for multiple database dialects, using enhanced syntax will make it easier to write\n> SQL. If you only need to support a specific database, then using its standard syntax is sufficient.\n\n> It is important to note that some databases (such as `PostgreSQL`) do not differentiate column names by case. This can affect the property\n> names of the returned objects in the result set (usually recommended in camel case). Therefore, even though it is not a syntax\n> enhancement, it is strongly recommended to use aliases to standardize the column names in the returned result set, for\n> example, `PERSON_NAME AS "personName"`, please pay attention to the use of quotation marks to correctly preserve the case.\n\n- When given data is an array, provide SQL written using standard binding variable placeholders (sequence numbers),\n	- `MySQL` uses `?`,\n	- `PostgreSQL` uses `$1`, `$2`, ...,\n	- `MSSQL` uses `@0`, `@1`, ...,\n	- `Oracle` uses `:0`, `:1`, ...,\n- When given data is a record, provide SQL written using named binding variable placeholders.\n';
+const markdown$7 = '### TypeORM\n\n`@rainbow-o23` provides a set of pipeline steps for database operations based on [TypeORM](https://typeorm.io/), including transaction\nsupport, SQL read and write. Generally, it is recommended to use SQL for data operations. `@rainbow-o23` has enhanced SQL syntax to better\ninteract with in-memory data.\n\n> Please refer to [@rainbow-o23](https://github.com/InsureMO/rainbow-o23/blob/main/o23-n3/README.md#database-typeorm-steps) for more\n> information on configuring data sources.\n\n#### Datasource\n\nEach TypeOrm step must specify a datasource, which is configured in environment. If using dynamic environment variables for specification,\nyou need to indicate the key of the environment variable, such as key `db.default` corresponding to the `CFG_DB_DEFAULT` environment\nvariable name.\n\n#### Transaction\n\nTypeORM steps use transaction names to identify transactions, steps can be grouped under a transaction. If transaction is declared as\nautonomous, the step will be executed in the default transaction (autonomous transaction). Essentially, steps within a transaction should be\nnested in a TypeORM transactional step and have the same transaction name.\n\n> Transactional steps can be nested, meaning a transactional step can contain another transactional step as a sub-step, even if they have\n> different transaction names.\n\n#### Native SQL Support & Enhancement\n\nSQL supports native database syntax. At the same time, `@rainbow-o23` enhances SQL syntax, allowing the use of the `$property` syntax to\nretrieve corresponding data from data objects, also supports multi-level property names, connected by `.`. For example, `$person.name`\nrepresents that `person` is an object and `name` is a property under `person`. The following are the supported syntax features:\n\n- `IN ($...names)`: `one-of`, `names` should be an array,\n- `LIKE $name%`: `starts-with`,\n- `LIKE $%name`: `ends-with`,\n- `LIKE $%name%`: `contains`.\n\n> Name mapping is case-sensitive.  \n> `LIKE` is case-sensitive.\n\nSince different databases have varying degrees of support for dialects, `@rainbow-o23` also provides appropriate enhanced support for this:\n\n- For pagination, `$.limit($offset, $limit)` will be translated and executed in the appropriate dialect. For example,\n	- `MySQL` uses `LIMIT $offset, $limit`,\n	- `PostgreSQL` uses `OFFSET $offset LIMIT $limit`.\n	- `MSSQL` and `Oracle` use `OFFSET $offset ROWS FETCH NEXT $limit ROWS ONLY`,\n		- `MSSQL` requires an `ORDER BY` clause for pagination SQL. If there is no `ORDER BY` clause, will\n		  use `ORDER BY 1 OFFSET $offset ROWS FETCH NEXT $limit ROWS ONLY`.\n- For JSON column, because some databases (such as MSSQL) do not have a JSON column type, they cannot automatically replace strings in the\n  result set with JSON objects,\n	- Use `config as "config.@json"` to explicitly indicate that the `config` column is of JSON data type.\n	- Use `$config.@json` to explicitly indicate that the `config` property of given parameters is of JSON data type.\n- For boolean column which use numeric(int/smallint/tinyint) as storage type, because some databases (such as PostgreSQL) cannot\n  automatically convert boolean values in memory to numeric 0 or 1 in the database,\n	- Use `enabled as "enabled.@bool"` to explicitly indicate that the `enabled` column is of boolean in-memory and numeric in database data\n	  type.\n	- Use `$enabled.@bool` to explicitly indicate that the `enabled` property of given parameters is of boolean in-memory and numeric in\n	  database data type.\n- For datetime (MySQL, MSSQL) / timestamp (Oracle, PostgreSQL) column,\n	- Use `created_at as "createdAt.@ts"` to explicitly indicate that the `createdAt` column is of string in-memory and timestamp in\n	  database data type.\n	- Use `$createdAt.@ts` to explicitly indicate that the `createdAt` property of given parameters is of string in-memory and timestamp in\n	  database data type.\n\n> It is recommended that if you need to consider support for multiple database dialects, using enhanced syntax will make it easier to write\n> SQL. If you only need to support a specific database, then using its standard syntax is sufficient.\n\n> It is important to note that some databases (such as `PostgreSQL`) do not differentiate column names by case. This can affect the property\n> names of the returned objects in the result set (usually recommended in camel case). Therefore, even though it is not a syntax\n> enhancement, it is strongly recommended to use aliases to standardize the column names in the returned result set, for\n> example, `PERSON_NAME AS "personName"`, please pay attention to the use of quotation marks to correctly preserve the case.\n\n- When given data is an array, provide SQL written using standard binding variable placeholders (sequence numbers),\n	- `MySQL` uses `?`,\n	- `PostgreSQL` uses `$1`, `$2`, ...,\n	- `MSSQL` uses `@0`, `@1`, ...,\n	- `Oracle` uses `:0`, `:1`, ...,\n- When given data is a record, provide SQL written using named binding variable placeholders.\n';
 const docs$3 = {
   stepTypeOrmDatasource: markdown$9,
   stepTypeOrmTransaction: markdown$8,
@@ -3508,9 +3510,9 @@ const NodeTitle = qe(UnwrappedCaption)`
     font-weight: var(--font-weight);
     height: unset;
     min-height: ${CssVars.INPUT_HEIGHT};
-    white-space: unset;
-    overflow: unset;
-    text-overflow: unset;
+    //white-space: unset;
+    //overflow: unset;
+    //text-overflow: unset;
     padding: calc((${CssVars.INPUT_HEIGHT} - var(--font-size)) / 2) 0;
 `;
 const NodeTitleSpreader = qe.span.attrs({ [DOM_KEY_WIDGET]: "o23-playground-node-title-spreader" })`
@@ -5560,6 +5562,172 @@ const PortMerge = (props) => {
     return React.createElement(PostPort, { label: Labels.StepMergeAsProperty, required: false, defined: true, all: true, allAsGiven: merge.trim() });
   }
 };
+const EditorWrapper = qe.div.attrs({
+  [DOM_KEY_WIDGET]: "o23-playground-editor",
+  "data-v-scroll": "",
+  "data-h-scroll": ""
+})`
+    display: block;
+    position: relative;
+    align-self: stretch;
+    background-image: ${PlaygroundCssVars.EDITOR_BACKGROUND_IMAGE};
+    background-size: ${PlaygroundCssVars.EDITOR_BACKGROUND_SIZE};
+    background-position: ${PlaygroundCssVars.EDITOR_BACKGROUND_POSITION};
+    overflow: auto;
+
+    &[data-diagram-status=paint],
+    &[data-diagram-status=paint-on-position] {
+        > div[data-w=o23-playground-canvas] > div.o23-playground-editor-content {
+            //opacity: 0;
+            user-select: none;
+            pointer-events: none;
+
+            div.node, div.node * {
+                user-select: none;
+                pointer-events: none;
+                cursor: default;
+            }
+        }
+    }
+
+    &[data-diagram-locked=true] {
+        > div[data-w=o23-playground-canvas] > div.o23-playground-editor-content {
+            cursor: default;
+
+            div.node {
+                cursor: pointer;
+            }
+        }
+    }
+
+    > div.o23-playground-editor-content-backend {
+        position: absolute;
+        left: 100%;
+        // Width is necessary; 
+        // otherwise, it will cause the node width to be rendered incorrectly,
+        // ultimately resulting in the connections not being straight.
+        min-width: 100%;
+        //opacity: 0;
+        user-select: none;
+        pointer-events: none;
+    }
+`;
+const BackendCanvasWrapper = qe.div.attrs({ [DOM_KEY_WIDGET]: "o23-playground-backend-canvas" })`
+    display: block;
+    position: absolute;
+    width: 100%;
+    pointer-events: none;
+    opacity: 0;
+`;
+const EditorCanvasWrapper = qe.div.attrs(({ canvasWidth, canvasHeight, canvasZoom }) => {
+  return {
+    [DOM_KEY_WIDGET]: "o23-playground-canvas",
+    style: {
+      "--canvas-width": utils$2.toCssSize(canvasWidth),
+      "--canvas-height": utils$2.toCssSize(canvasHeight),
+      "--canvas-zoom": canvasZoom
+    }
+  };
+})`
+    display: block;
+    position: relative;
+    min-width: 100%;
+    min-height: 100%;
+    width: calc(var(--canvas-width) * var(--canvas-zoom));
+    height: calc(var(--canvas-height) * var(--canvas-zoom));
+    overflow: hidden;
+
+    > div.o23-playground-editor-content {
+        width: var(--canvas-width, 0);
+        height: var(--canvas-height, 0);
+        //> svg, > div {
+        //    transform-origin: top left;
+        //}
+    }
+`;
+const EditorToolbar = qe.div.attrs({ [DOM_KEY_WIDGET]: "o23-playground-editor-toolbar" })`
+    display: flex;
+    position: absolute;
+    align-items: center;
+    top: ${PlaygroundCssVars.EDITOR_TOOLBAR_GUTTER_SIZE};
+    right: ${PlaygroundCssVars.EDITOR_TOOLBAR_GUTTER_SIZE};
+    height: ${PlaygroundCssVars.EDITOR_TOOLBAR_HEIGHT};
+    border-radius: ${PlaygroundCssVars.EDITOR_TOOLBAR_BORDER_RADIUS};
+    border: ${PlaygroundCssVars.EDITOR_TOOLBAR_BORDER};
+    background-color: ${CssVars.BACKGROUND_COLOR};
+    overflow: hidden;
+    transition: border-color ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION};
+
+    &:hover {
+        border-color: ${PlaygroundCssVars.EDITOR_TOOLBAR_BUTTON_ACTIVE_BACKGROUND_COLOR};
+
+        > span[data-w=o23-playground-editor-toolbar-button]:not(:hover) {
+            color: ${PlaygroundCssVars.EDITOR_TOOLBAR_BUTTON_ACTIVE_BACKGROUND_COLOR};
+        }
+    }
+`;
+const EditorToolbarButton = qe.span.attrs({ [DOM_KEY_WIDGET]: "o23-playground-editor-toolbar-button" })`
+    display: flex;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+    width: ${PlaygroundCssVars.EDITOR_TOOLBAR_BUTTON_WIDTH};
+    height: ${PlaygroundCssVars.EDITOR_TOOLBAR_BUTTON_HEIGHT};
+    color: ${PlaygroundCssVars.EDITOR_TOOLBAR_BUTTON_COLOR};
+    cursor: pointer;
+    transition: color ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION}, background-color ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION};
+
+    &:not(:last-child) {
+        border-right: ${PlaygroundCssVars.EDITOR_TOOLBAR_BORDER};
+    }
+
+    &:hover {
+        color: ${PlaygroundCssVars.EDITOR_TOOLBAR_BUTTON_ACTIVE_COLOR};
+        background-color: ${PlaygroundCssVars.EDITOR_TOOLBAR_BUTTON_ACTIVE_BACKGROUND_COLOR};
+    }
+
+    > svg {
+        height: calc(${PlaygroundCssVars.EDITOR_TOOLBAR_BUTTON_HEIGHT} / 3 * 2);
+
+        &[data-icon=o23-origin-size] {
+            height: calc(${PlaygroundCssVars.EDITOR_TOOLBAR_BUTTON_HEIGHT} / 3 * 2 - 2px);
+            margin-top: 2px;
+        }
+    }
+`;
+const ParseError = qe.div.attrs({ [DOM_KEY_WIDGET]: "o23-playground-viewer-error" })`
+    display: flex;
+    position: relative;
+    align-items: center;
+    padding: 16px 32px;
+    color: ${PlaygroundCssVars.EDITOR_ERROR_COLOR};
+    font-size: 1.5em;
+    font-style: italic;
+    font-weight: 500;
+`;
+class ErrorBoundary extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { content: props.content, hasError: false };
+  }
+  static getDerivedStateFromError(error) {
+    console.log(error);
+    return { hasError: true, error };
+  }
+  componentDidCatch(_error, _errorInfo) {
+  }
+  componentDidUpdate(_prevProps, prevState) {
+    if (prevState.content !== this.props.content) {
+      this.setState({ content: this.props.content, hasError: false });
+    }
+  }
+  render() {
+    if (this.state.hasError) {
+      return React.createElement(ParseError, null, Labels.ERROR);
+    }
+    return this.props.children;
+  }
+}
 const START_X = 64;
 const START_Y = 64;
 const askStartNodePosition = (def) => {
@@ -5797,143 +5965,6 @@ const createDiagramHandlers = (options) => {
     }
   };
 };
-const EditorWrapper = qe.div.attrs({
-  [DOM_KEY_WIDGET]: "o23-playground-editor",
-  "data-v-scroll": "",
-  "data-h-scroll": ""
-})`
-    display: block;
-    position: relative;
-    align-self: stretch;
-    background-image: ${PlaygroundCssVars.EDITOR_BACKGROUND_IMAGE};
-    background-size: ${PlaygroundCssVars.EDITOR_BACKGROUND_SIZE};
-    background-position: ${PlaygroundCssVars.EDITOR_BACKGROUND_POSITION};
-    overflow: hidden;
-
-    &[data-diagram-status=paint],
-    &[data-diagram-status=paint-on-position] {
-        > div.o23-playground-editor-content {
-            //opacity: 0;
-            user-select: none;
-            pointer-events: none;
-
-            div.node, div.node * {
-                user-select: none;
-                pointer-events: none;
-                cursor: default;
-            }
-        }
-    }
-
-    &[data-diagram-locked=true] {
-        > div.o23-playground-editor-content {
-            cursor: default;
-
-            div.node {
-                cursor: pointer;
-            }
-        }
-    }
-
-    > div.o23-playground-editor-content {
-        height: 100%;
-    }
-
-    > div.o23-playground-editor-content-backend {
-        position: absolute;
-        left: 100%;
-        // Width is necessary; 
-        // otherwise, it will cause the node width to be rendered incorrectly,
-        // ultimately resulting in the connections not being straight.
-        width: 100%;
-        opacity: 0;
-        user-select: none;
-        pointer-events: none;
-    }
-`;
-const EditorToolbar = qe.div.attrs({ [DOM_KEY_WIDGET]: "o23-playground-editor-toolbar" })`
-    display: flex;
-    position: absolute;
-    align-items: center;
-    top: ${PlaygroundCssVars.EDITOR_TOOLBAR_GUTTER_SIZE};
-    right: ${PlaygroundCssVars.EDITOR_TOOLBAR_GUTTER_SIZE};
-    height: ${PlaygroundCssVars.EDITOR_TOOLBAR_HEIGHT};
-    border-radius: ${PlaygroundCssVars.EDITOR_TOOLBAR_BORDER_RADIUS};
-    border: ${PlaygroundCssVars.EDITOR_TOOLBAR_BORDER};
-    background-color: ${CssVars.BACKGROUND_COLOR};
-    overflow: hidden;
-    transition: border-color ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION};
-
-    &:hover {
-        border-color: ${PlaygroundCssVars.EDITOR_TOOLBAR_BUTTON_ACTIVE_BACKGROUND_COLOR};
-
-        > span[data-w=o23-playground-editor-toolbar-button]:not(:hover) {
-            color: ${PlaygroundCssVars.EDITOR_TOOLBAR_BUTTON_ACTIVE_BACKGROUND_COLOR};
-        }
-    }
-`;
-const EditorToolbarButton = qe.span.attrs({ [DOM_KEY_WIDGET]: "o23-playground-editor-toolbar-button" })`
-    display: flex;
-    position: relative;
-    align-items: center;
-    justify-content: center;
-    width: ${PlaygroundCssVars.EDITOR_TOOLBAR_BUTTON_WIDTH};
-    height: ${PlaygroundCssVars.EDITOR_TOOLBAR_BUTTON_HEIGHT};
-    color: ${PlaygroundCssVars.EDITOR_TOOLBAR_BUTTON_COLOR};
-    cursor: pointer;
-    transition: color ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION}, background-color ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION};
-
-    &:not(:last-child) {
-        border-right: ${PlaygroundCssVars.EDITOR_TOOLBAR_BORDER};
-    }
-
-    &:hover {
-        color: ${PlaygroundCssVars.EDITOR_TOOLBAR_BUTTON_ACTIVE_COLOR};
-        background-color: ${PlaygroundCssVars.EDITOR_TOOLBAR_BUTTON_ACTIVE_BACKGROUND_COLOR};
-    }
-
-    > svg {
-        height: calc(${PlaygroundCssVars.EDITOR_TOOLBAR_BUTTON_HEIGHT} / 3 * 2);
-
-        &[data-icon=o23-origin-size] {
-            height: calc(${PlaygroundCssVars.EDITOR_TOOLBAR_BUTTON_HEIGHT} / 3 * 2 - 2px);
-            margin-top: 2px;
-        }
-    }
-`;
-const ParseError = qe.div.attrs({ [DOM_KEY_WIDGET]: "o23-playground-viewer-error" })`
-    display: flex;
-    position: relative;
-    align-items: center;
-    padding: 16px 32px;
-    color: ${PlaygroundCssVars.EDITOR_ERROR_COLOR};
-    font-size: 1.5em;
-    font-style: italic;
-    font-weight: 500;
-`;
-class ErrorBoundary extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { content: props.content, hasError: false };
-  }
-  static getDerivedStateFromError(error) {
-    console.log(error);
-    return { hasError: true, error };
-  }
-  componentDidCatch(_error, _errorInfo) {
-  }
-  componentDidUpdate(_prevProps, prevState) {
-    if (prevState.content !== this.props.content) {
-      this.setState({ content: this.props.content, hasError: false });
-    }
-  }
-  render() {
-    if (this.state.hasError) {
-      return React.createElement(ParseError, null, Labels.ERROR);
-    }
-    return this.props.children;
-  }
-}
 var EditorKernelDiagramStatus;
 (function(EditorKernelDiagramStatus2) {
   EditorKernelDiagramStatus2["IGNORED"] = "ignored";
@@ -5962,11 +5993,26 @@ const createDiagramModel = (options) => {
   });
   return createDiagramNodes(def, handlers);
 };
+class DiagramState extends State {
+  constructor() {
+    super({ name: "default-diagrams" });
+    this.childStates = [new SelectingState()];
+  }
+}
 const createDiagramEngine = () => {
-  const engine = createEngine({
+  const engine = new DiagramEngine({
     registerDefaultPanAndZoomCanvasAction: false,
     registerDefaultZoomCanvasAction: false
   });
+  engine.getLayerFactories().registerFactory(new NodeLayerFactory());
+  engine.getLayerFactories().registerFactory(new LinkLayerFactory());
+  engine.getLayerFactories().registerFactory(new SelectionBoxLayerFactory());
+  engine.getLabelFactories().registerFactory(new DefaultLabelFactory());
+  engine.getNodeFactories().registerFactory(new DefaultNodeFactory());
+  engine.getLinkFactories().registerFactory(new DefaultLinkFactory());
+  engine.getLinkFactories().registerFactory(new PathFindingLinkFactory());
+  engine.getPortFactories().registerFactory(new DefaultPortFactory());
+  engine.getStateMachine().pushState(new DiagramState());
   initEngine(engine);
   const model = createLockedDiagramModel();
   model.setLocked(true);
@@ -6022,6 +6068,21 @@ const paintErrorDiagram = (options) => {
   stateRef.current.engineBackend.setModel(createLockedDiagramModel());
   stateRef.current.message = error.message;
   stateRef.current.diagramStatus = EditorKernelDiagramStatus.IGNORED;
+  stateRef.current.canvasZoom = 1;
+  delete stateRef.current.canvasWidth;
+  delete stateRef.current.canvasHeight;
+};
+const computeCanvasSize = (model) => {
+  return (model.getNodes() ?? []).reduce((size, node) => {
+    if (node instanceof EndNodeModel) {
+      size.height = node.getY() + node.height + DEFAULTS.diagram.startTop;
+    }
+    const right = node.getX() + node.width + DEFAULTS.diagram.startLeft;
+    if (size.width == null || right > size.width) {
+      size.width = right;
+    }
+    return size;
+  }, {});
 };
 const paint = (options) => {
   const { stateRef, replace, onStateContentChanged, onContentChanged } = options;
@@ -6046,6 +6107,10 @@ const paint = (options) => {
     stateRef.current.serializer = serializer;
     stateRef.current.deserializer = deserializer;
     stateRef.current.def = def;
+    stateRef.current.canvasZoom = 1;
+    const { width, height } = computeCanvasSize(model);
+    stateRef.current.canvasWidth = width;
+    stateRef.current.canvasHeight = height;
     stateRef.current.engineBackend.setModel(model);
     delete stateRef.current.message;
     stateRef.current.diagramStatus = EditorKernelDiagramStatus.PAINT;
@@ -6082,8 +6147,45 @@ const repaint = (options) => {
     });
   }
 };
+const usePaint = (stateRef) => {
+  const forceUpdate = useForceUpdate();
+  reactExports.useEffect(() => {
+    if (![
+      EditorKernelDiagramStatus.PAINT,
+      EditorKernelDiagramStatus.PAINT_ON_POSITION
+    ].includes(stateRef.current.diagramStatus)) {
+      return;
+    }
+    const backendModel = stateRef.current.engineBackend.getModel();
+    const grid = [];
+    const nodes = backendModel.getNodes();
+    const startNode = nodes.find((node) => node instanceof StartNodeModel);
+    grid[0] = grid[0] ?? [];
+    grid[0][0] = {
+      node: startNode,
+      x: startNode.getPosition().x,
+      y: startNode.getPosition().y,
+      maxWidth: -1,
+      maxHeight: -1,
+      top: -1,
+      left: -1
+    };
+    buildGrid(startNode, grid, 0, 0);
+    const { startTop, startLeft, rowGap, columnGap } = DEFAULTS.diagram;
+    computeGrid(grid, startTop, startLeft, rowGap, columnGap);
+    const newModel = cloneDiagramNodes(backendModel);
+    newModel.setZoomLevel((stateRef.current.canvasZoom ?? 1) * 100);
+    const { width, height } = computeCanvasSize(newModel);
+    stateRef.current.canvasWidth = width;
+    stateRef.current.canvasHeight = height;
+    stateRef.current.engine.setModel(newModel);
+    stateRef.current.engineBackend.setModel(createLockedDiagramModel());
+    stateRef.current.diagramStatus = EditorKernelDiagramStatus.IN_SERVICE;
+    forceUpdate();
+  }, [forceUpdate, stateRef, stateRef.current.diagramStatus]);
+};
 const Toolbar = (props) => {
-  const { engine, def, serializer, allowUploadFile, allowDownloadFile, allowDownloadImage } = props;
+  const { stateRef, serializer, allowUploadFile, allowDownloadFile, allowDownloadImage } = props;
   const ref = reactExports.useRef(null);
   const { fire } = usePlaygroundEventBus();
   const [state, setState] = reactExports.useState({ max: false, zen: false });
@@ -6116,43 +6218,47 @@ const Toolbar = (props) => {
         break;
     }
   }, [state.max, state.zen]);
-  const zoomTo = (factor) => {
-    engine.getModel().setZoomLevel(factor);
-    engine.repaintCanvas();
-  };
   const onZoomInClicked = () => {
-    zoomTo(engine.getModel().getZoomLevel() + 5);
+    fire(PlaygroundEventTypes.ZOOM_TO, (stateRef.current.canvasZoom ?? 1) + 0.05);
   };
   const onZoomOutClicked = () => {
-    zoomTo(engine.getModel().getZoomLevel() - 5);
+    fire(PlaygroundEventTypes.ZOOM_TO, Math.max(stateRef.current.canvasZoom ?? 1, 0.1) - 0.05);
   };
   const onOriginSizeClicked = () => {
-    zoomTo(100);
+    fire(PlaygroundEventTypes.ZOOM_TO, 1);
   };
   const onFitCanvasClicked = () => {
-    engine.zoomToFit();
+    fire(PlaygroundEventTypes.ZOOM_TO_FIT);
   };
   const onDownloadImageClicked = async () => {
-    const node = ref.current.parentElement.querySelector("div.o23-playground-editor-content");
-    node.style.overflow = "visible";
-    const svgNode = node.querySelector("svg");
-    const transform = svgNode.style.transform;
-    const divNode = node.querySelector("div");
-    svgNode.style.transform = "";
-    divNode.style.transform = "";
+    var _a;
+    const backendModel = stateRef.current.engineBackend.getModel();
+    stateRef.current.engineBackend.setModel(cloneDiagramNodes(stateRef.current.engine.getModel()));
+    await stateRef.current.engineBackend.repaintCanvas(true);
+    const node = ref.current.parentElement.querySelector("div.o23-playground-editor-content-backend");
+    const { width, height } = Array.from(node.lastElementChild.children).reduce(({ width: width2, height: height2 }, child) => {
+      const { width: childWidth, height: childHeight } = child.getBoundingClientRect();
+      return {
+        width: Math.max(width2, childWidth + parseInt(child.style.left)),
+        height: Math.max(height2, childHeight + parseInt(child.style.top))
+      };
+    }, { width: 0, height: 0 });
+    node.style.width = `${width + DEFAULTS.diagram.startLeft}px`;
+    node.style.height = `${height + DEFAULTS.diagram.startTop}px`;
     const dataUrl = await dom2image.toPng(node, { quality: 1, bgcolor: "white" });
-    svgNode.style.transform = transform;
-    divNode.style.transform = transform;
-    node.style.overflow = "";
     const link = document.createElement("a");
-    link.download = `${(def == null ? void 0 : def.code) || "no-code"}-diagram.png`;
+    link.download = `${((_a = stateRef.current.def) == null ? void 0 : _a.code) || "no-code"}-diagram.png`;
     link.href = dataUrl;
     link.click();
+    node.style.width = "";
+    node.style.height = "";
+    stateRef.current.engineBackend.setModel(backendModel);
   };
   const onDownloadFileClicked = async () => {
+    var _a;
     const link = document.createElement("a");
-    link.download = `${(def == null ? void 0 : def.code) || "no-code"}-config.${serializer.extname()}`;
-    link.href = "data:text/plain;charset=UTF-8," + encodeURIComponent(serializer.stringify(def));
+    link.download = `${((_a = stateRef.current.def) == null ? void 0 : _a.code) || "no-code"}-config.${serializer.extname()}`;
+    link.href = "data:text/plain;charset=UTF-8," + encodeURIComponent(serializer.stringify(stateRef.current.def));
     link.click();
   };
   const onUploadFileClicked = async () => {
@@ -6239,6 +6345,38 @@ const Toolbar = (props) => {
     ) : null
   );
 };
+const CanvasWrapper = (props) => {
+  const { width, height, zoom: askZoom, zoomTo, children } = props;
+  const ref = reactExports.useRef(null);
+  const { on, off } = usePlaygroundEventBus();
+  const forceUpdate = useForceUpdate();
+  reactExports.useEffect(() => {
+    const onZoomTo = (zoom2) => {
+      zoomTo(zoom2);
+      forceUpdate();
+    };
+    const onZoomToFit = () => {
+      if (ref.current == null) {
+        return;
+      }
+      const parent = ref.current.parentElement;
+      const { width: parentWidth, height: parentHeight } = parent.getBoundingClientRect();
+      const zoom2 = Math.min(parentWidth / (width ?? parentWidth), parentHeight / (height ?? parentHeight));
+      onZoomTo(zoom2);
+    };
+    on(PlaygroundEventTypes.ZOOM_TO, onZoomTo);
+    on(PlaygroundEventTypes.ZOOM_TO_FIT, onZoomToFit);
+    return () => {
+      off(PlaygroundEventTypes.ZOOM_TO, onZoomTo);
+      off(PlaygroundEventTypes.ZOOM_TO_FIT, onZoomToFit);
+    };
+  }, [on, off, forceUpdate, width, height, zoomTo]);
+  let zoom = askZoom();
+  if (zoom === 1) {
+    zoom = void 0;
+  }
+  return React.createElement(EditorCanvasWrapper, { canvasWidth: width, canvasHeight: height, canvasZoom: zoom, ref }, children);
+};
 const EditorKernel = (props) => {
   const { content, assistant, serializer, deserializer, allowUploadFile, allowDownloadFile, allowDownloadImage } = props;
   const wrapperRef = reactExports.useRef(null);
@@ -6282,44 +6420,6 @@ const EditorKernel = (props) => {
     forceUpdate();
   }, [fire, replace, forceUpdate, serializer, deserializer, assistant, content]);
   reactExports.useEffect(() => {
-    if (![
-      EditorKernelDiagramStatus.PAINT,
-      EditorKernelDiagramStatus.PAINT_ON_POSITION
-    ].includes(stateRef.current.diagramStatus)) {
-      return;
-    }
-    const backendModel = stateRef.current.engineBackend.getModel();
-    const grid = [];
-    const nodes = backendModel.getNodes();
-    const startNode = nodes.find((node) => node instanceof StartNodeModel);
-    grid[0] = grid[0] ?? [];
-    grid[0][0] = {
-      node: startNode,
-      x: startNode.getPosition().x,
-      y: startNode.getPosition().y,
-      maxWidth: -1,
-      maxHeight: -1,
-      top: -1,
-      left: -1
-    };
-    buildGrid(startNode, grid, 0, 0);
-    const { startTop, startLeft, rowGap, columnGap } = DEFAULTS.diagram;
-    computeGrid(grid, startTop, startLeft, rowGap, columnGap);
-    const newModel = cloneDiagramNodes(backendModel);
-    if (EditorKernelDiagramStatus.PAINT_ON_POSITION === stateRef.current.diagramStatus) {
-      const model = stateRef.current.engine.getModel();
-      const offsetX = model.getOffsetX();
-      const offsetY = model.getOffsetY();
-      const zoom = model.getZoomLevel();
-      newModel.setOffset(offsetX, offsetY);
-      newModel.setZoomLevel(zoom);
-    }
-    stateRef.current.engine.setModel(newModel);
-    stateRef.current.engineBackend.setModel(createLockedDiagramModel());
-    stateRef.current.diagramStatus = EditorKernelDiagramStatus.IN_SERVICE;
-    forceUpdate();
-  }, [forceUpdate, stateRef.current.diagramStatus]);
-  reactExports.useEffect(() => {
     const onRepaint = () => {
       repaint({
         assistant: () => assistant,
@@ -6339,6 +6439,7 @@ const EditorKernel = (props) => {
       off(PlaygroundEventTypes.REPAINT, onRepaint);
     };
   }, [on, off, fire, replace, forceUpdate, assistant]);
+  usePaint(stateRef);
   if (VUtils.isNotBlank(stateRef.current.message)) {
     return React.createElement(
       EditorWrapper,
@@ -6358,17 +6459,35 @@ const EditorKernel = (props) => {
       React.createElement(ParseError, null, Labels.NoDefParsed)
     );
   }
+  const askZoom = () => stateRef.current.canvasZoom;
+  const zoomTo = (zoom) => {
+    stateRef.current.canvasZoom = zoom;
+    stateRef.current.engine.getModel().setZoomLevel(zoom * 100);
+    stateRef.current.engine.repaintCanvas();
+  };
   try {
     return React.createElement(
-      EditorWrapper,
-      { "data-diagram-status": stateRef.current.diagramStatus, "data-diagram-locked": stateRef.current.engine.getModel().isLocked(), ref: wrapperRef },
+      React.Fragment,
+      null,
       React.createElement(
-        ErrorBoundary,
-        { content },
-        React.createElement(CanvasWidget, { engine: stateRef.current.engineBackend, className: "o23-playground-editor-content-backend" }),
-        React.createElement(CanvasWidget, { engine: stateRef.current.engine, className: "o23-playground-editor-content" }),
-        React.createElement(Toolbar, { engine: stateRef.current.engine, def: stateRef.current.def, serializer, allowUploadFile, allowDownloadFile, allowDownloadImage })
-      )
+        EditorWrapper,
+        { "data-diagram-status": stateRef.current.diagramStatus, "data-diagram-locked": stateRef.current.engine.getModel().isLocked(), ref: wrapperRef },
+        React.createElement(
+          ErrorBoundary,
+          { content },
+          React.createElement(
+            BackendCanvasWrapper,
+            null,
+            React.createElement(CanvasWidget, { engine: stateRef.current.engineBackend, className: "o23-playground-editor-content-backend" })
+          ),
+          React.createElement(
+            CanvasWrapper,
+            { width: stateRef.current.canvasWidth, height: stateRef.current.canvasHeight, zoom: askZoom, zoomTo },
+            React.createElement(CanvasWidget, { engine: stateRef.current.engine, className: "o23-playground-editor-content" })
+          )
+        )
+      ),
+      React.createElement(Toolbar, { stateRef, serializer, allowUploadFile, allowDownloadFile, allowDownloadImage })
     );
   } catch (error) {
     return React.createElement(
