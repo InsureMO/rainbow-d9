@@ -45,11 +45,18 @@ export const EditorWrapper = styled.div.attrs({
         // Width is necessary; 
         // otherwise, it will cause the node width to be rendered incorrectly,
         // ultimately resulting in the connections not being straight.
-        width: 100%;
-        opacity: 0;
+        min-width: 100%;
+        //opacity: 0;
         user-select: none;
         pointer-events: none;
     }
+`;
+export const BackendCanvasWrapper = styled.div.attrs({[DOM_KEY_WIDGET]: 'o23-playground-backend-canvas'})`
+    display: block;
+    position: absolute;
+    width: 100%;
+    pointer-events: none;
+    opacity: 0;
 `;
 // noinspection CssUnresolvedCustomProperty, CssUnusedSymbol
 export const EditorCanvasWrapper = styled.div.attrs<{

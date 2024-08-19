@@ -7,7 +7,7 @@ import {EditorProps} from '../types';
 import {ErrorBoundary} from './error-boundary';
 import {EditorKernelDiagramStatus, EditorKernelRefState, firstPaint, paint, repaint, usePaint} from './painter';
 import {Toolbar} from './toolbar';
-import {EditorCanvasWrapper, EditorWrapper, ParseError} from './widgets';
+import {BackendCanvasWrapper, EditorCanvasWrapper, EditorWrapper, ParseError} from './widgets';
 
 interface CanvasWrapperProps {
 	width?: number;
@@ -149,8 +149,10 @@ export const EditorKernel = (props: EditorProps) => {
 				 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 				 @ts-ignore */}
 				<ErrorBoundary content={content}>
-					<CanvasWidget engine={stateRef.current.engineBackend}
-					              className="o23-playground-editor-content-backend"/>
+					<BackendCanvasWrapper>
+						<CanvasWidget engine={stateRef.current.engineBackend}
+						              className="o23-playground-editor-content-backend"/>
+					</BackendCanvasWrapper>
 					<CanvasWrapper width={stateRef.current.canvasWidth} height={stateRef.current.canvasHeight}
 					               zoom={askZoom} zoomTo={zoomTo}>
 						<CanvasWidget engine={stateRef.current.engine} className="o23-playground-editor-content"/>

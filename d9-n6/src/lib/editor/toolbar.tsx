@@ -1,5 +1,6 @@
 import dom2image from 'dom-to-image';
 import React, {MutableRefObject, useEffect, useRef, useState} from 'react';
+import {DEFAULTS} from '../constants';
 import {FileDefSerializer} from '../definition';
 import {
 	DownloadFile,
@@ -15,6 +16,7 @@ import {
 	ZoomOut
 } from '../icons';
 import {PlaygroundEventTypes, usePlaygroundEventBus} from '../playground-event-bus';
+import {cloneDiagramNodes} from './diagram-utils';
 import {EditorKernelRefState} from './painter';
 import {EditorToolbar, EditorToolbarButton} from './widgets';
 
@@ -82,22 +84,37 @@ export const Toolbar = (props: ToolbarProps) => {
 		fire(PlaygroundEventTypes.ZOOM_TO_FIT);
 	};
 	const onDownloadImageClicked = async () => {
-		const node = ref.current.parentElement.querySelector('div.o23-playground-editor-content') as HTMLDivElement;
-		node.style.overflow = 'visible';
-		const svgNode = node.querySelector('svg');
-		const transform = svgNode.style.transform;
-		const divNode = node.querySelector('div');
-		svgNode.style.transform = '';
-		divNode.style.transform = '';
+		const backendModel = stateRef.current.engineBackend.getModel();
+		stateRef.current.engineBackend.setModel(cloneDiagramNodes(stateRef.current.engine!.getModel()));
+		await stateRef.current.engineBackend.repaintCanvas(true);
+		const node = ref.current.parentElement.querySelector('div.o23-playground-editor-content-backend') as HTMLDivElement;
+		const {width, height} = Array.from(node.lastElementChild.children).reduce(({width, height}, child) => {
+			const {width: childWidth, height: childHeight} = child.getBoundingClientRect();
+			return {
+				width: Math.max(width, childWidth + parseInt((child as HTMLDivElement).style.left)),
+				height: Math.max(height, childHeight + parseInt((child as HTMLDivElement).style.top))
+			};
+		}, {width: 0, height: 0});
+		node.style.width = `${width + DEFAULTS.diagram.startLeft}px`;
+		node.style.height = `${height + DEFAULTS.diagram.startTop}px`;
+		// node.style.overflow = 'visible';
+		// const svgNode = node.querySelector('svg');
+		// const transform = svgNode.style.transform;
+		// const divNode = node.querySelector('div');
+		// svgNode.style.transform = '';
+		// divNode.style.transform = '';
 		// noinspection SpellCheckingInspection
 		const dataUrl = await dom2image.toPng(node, {quality: 1, bgcolor: 'white'});
-		svgNode.style.transform = transform;
-		divNode.style.transform = transform;
-		node.style.overflow = '';
+		// svgNode.style.transform = transform;
+		// divNode.style.transform = transform;
+		// node.style.overflow = '';
 		const link = document.createElement('a');
 		link.download = `${stateRef.current.def?.code || 'no-code'}-diagram.png`;
 		link.href = dataUrl;
 		link.click();
+		node.style.width = '';
+		node.style.height = '';
+		stateRef.current.engineBackend.setModel(backendModel);
 	};
 	const onDownloadFileClicked = async () => {
 		const link = document.createElement('a');

@@ -33,9 +33,9 @@ export const NodeTitle = styled(UnwrappedCaption)`
     font-weight: var(--font-weight);
     height: unset;
     min-height: ${CssVars.INPUT_HEIGHT};
-    white-space: unset;
-    overflow: unset;
-    text-overflow: unset;
+    //white-space: unset;
+    //overflow: unset;
+    //text-overflow: unset;
     padding: calc((${CssVars.INPUT_HEIGHT} - var(--font-size)) / 2) 0;
 `;
 // noinspection CssUnresolvedCustomProperty
