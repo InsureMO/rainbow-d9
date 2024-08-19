@@ -2,19 +2,10 @@ import {CssVars, DOM_KEY_WIDGET, Utils} from '@rainbow-d9/n2';
 import styled from 'styled-components';
 import {PlaygroundCssVars} from '../widgets';
 
-// noinspection CssUnresolvedCustomProperty,CssUnusedSymbol
-export const EditorWrapper = styled.div.attrs<{ canvasWidth?: number | string; canvasHeight?: number | string }>(
-	({canvasWidth, canvasHeight}) => {
-		return {
-			[DOM_KEY_WIDGET]: 'o23-playground-editor',
-			'data-v-scroll': '',
-			'data-h-scroll': '',
-			style: {
-				'--canvas-width': Utils.toCssSize(canvasWidth),
-				'--canvas-height': Utils.toCssSize(canvasHeight)
-			}
-		};
-	})<{ canvasWidth?: number | string; canvasHeight?: number | string }>`
+// noinspection CssUnusedSymbol
+export const EditorWrapper = styled.div.attrs({
+	[DOM_KEY_WIDGET]: 'o23-playground-editor', 'data-v-scroll': '', 'data-h-scroll': ''
+})`
     display: block;
     position: relative;
     align-self: stretch;
@@ -25,7 +16,7 @@ export const EditorWrapper = styled.div.attrs<{ canvasWidth?: number | string; c
 
     &[data-diagram-status=paint],
     &[data-diagram-status=paint-on-position] {
-        > div.o23-playground-editor-content {
+        > div[data-w=o23-playground-canvas] > div.o23-playground-editor-content {
             //opacity: 0;
             user-select: none;
             pointer-events: none;
@@ -39,20 +30,13 @@ export const EditorWrapper = styled.div.attrs<{ canvasWidth?: number | string; c
     }
 
     &[data-diagram-locked=true] {
-        > div.o23-playground-editor-content {
+        > div[data-w=o23-playground-canvas] > div.o23-playground-editor-content {
             cursor: default;
 
             div.node {
                 cursor: pointer;
             }
         }
-    }
-
-    > div.o23-playground-editor-content {
-        min-width: 100%;
-        width: var(--canvas-width, 0);
-        min-height: 100%;
-        height: var(--canvas-height, 0);
     }
 
     > div.o23-playground-editor-content-backend {
@@ -65,6 +49,37 @@ export const EditorWrapper = styled.div.attrs<{ canvasWidth?: number | string; c
         opacity: 0;
         user-select: none;
         pointer-events: none;
+    }
+`;
+// noinspection CssUnresolvedCustomProperty, CssUnusedSymbol
+export const EditorCanvasWrapper = styled.div.attrs<{
+	canvasWidth?: number | string; canvasHeight?: number | string; canvasZoom?: number
+}>(({canvasWidth, canvasHeight, canvasZoom}) => {
+	return {
+		[DOM_KEY_WIDGET]: 'o23-playground-canvas',
+		style: {
+			'--canvas-width': Utils.toCssSize(canvasWidth),
+			'--canvas-height': Utils.toCssSize(canvasHeight),
+			'--canvas-zoom': canvasZoom
+		}
+	};
+})<{ canvasWidth?: number | string; canvasHeight?: number | string; canvasZoom?: number }>`
+    display: block;
+    position: relative;
+    min-width: 100%;
+    min-height: 100%;
+    width: calc(var(--canvas-width) * var(--canvas-zoom));
+    height: calc(var(--canvas-height) * var(--canvas-zoom));
+    overflow: hidden;
+
+    > div.o23-playground-editor-content {
+        width: var(--canvas-width, 0);
+        height: var(--canvas-height, 0);
+
+        > svg, > div {
+            transform: scale(var(--canvas-zoom));
+            transform-origin: top left;
+        }
     }
 `;
 export const EditorToolbar = styled.div.attrs({[DOM_KEY_WIDGET]: 'o23-playground-editor-toolbar'})`

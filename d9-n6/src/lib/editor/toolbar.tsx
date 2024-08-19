@@ -1,7 +1,6 @@
-import {DiagramEngine} from '@projectstorm/react-diagrams-core';
 import dom2image from 'dom-to-image';
-import React, {useEffect, useRef, useState} from 'react';
-import {FileDef, FileDefSerializer} from '../definition';
+import React, {MutableRefObject, useEffect, useRef, useState} from 'react';
+import {FileDefSerializer} from '../definition';
 import {
 	DownloadFile,
 	DownloadImage,
@@ -16,11 +15,11 @@ import {
 	ZoomOut
 } from '../icons';
 import {PlaygroundEventTypes, usePlaygroundEventBus} from '../playground-event-bus';
+import {EditorKernelRefState} from './painter';
 import {EditorToolbar, EditorToolbarButton} from './widgets';
 
 export interface ToolbarProps {
-	engine: DiagramEngine;
-	def?: FileDef;
+	stateRef: MutableRefObject<EditorKernelRefState>;
 	serializer: FileDefSerializer;
 	allowUploadFile: boolean;
 	allowDownloadFile: boolean;
@@ -34,7 +33,7 @@ export interface ToolbarState {
 
 export const Toolbar = (props: ToolbarProps) => {
 	const {
-		engine, def, serializer,
+		stateRef, serializer,
 		allowUploadFile, allowDownloadFile, allowDownloadImage
 	} = props;
 
@@ -70,21 +69,17 @@ export const Toolbar = (props: ToolbarProps) => {
 				break;
 		}
 	}, [state.max, state.zen]);
-	const zoomTo = (factor: number) => {
-		engine.getModel().setZoomLevel(factor);
-		engine.repaintCanvas();
-	};
 	const onZoomInClicked = () => {
-		zoomTo(engine.getModel().getZoomLevel() + 5);
+		fire(PlaygroundEventTypes.ZOOM_TO, (stateRef.current.canvasZoom ?? 1) + 0.05);
 	};
 	const onZoomOutClicked = () => {
-		zoomTo(engine.getModel().getZoomLevel() - 5);
+		fire(PlaygroundEventTypes.ZOOM_TO, Math.max(stateRef.current.canvasZoom ?? 1, 0.1) - 0.05);
 	};
 	const onOriginSizeClicked = () => {
-		zoomTo(100);
+		fire(PlaygroundEventTypes.ZOOM_TO, 1);
 	};
 	const onFitCanvasClicked = () => {
-		engine.zoomToFit();
+		fire(PlaygroundEventTypes.ZOOM_TO_FIT);
 	};
 	const onDownloadImageClicked = async () => {
 		const node = ref.current.parentElement.querySelector('div.o23-playground-editor-content') as HTMLDivElement;
@@ -100,14 +95,14 @@ export const Toolbar = (props: ToolbarProps) => {
 		divNode.style.transform = transform;
 		node.style.overflow = '';
 		const link = document.createElement('a');
-		link.download = `${def?.code || 'no-code'}-diagram.png`;
+		link.download = `${stateRef.current.def?.code || 'no-code'}-diagram.png`;
 		link.href = dataUrl;
 		link.click();
 	};
 	const onDownloadFileClicked = async () => {
 		const link = document.createElement('a');
-		link.download = `${def?.code || 'no-code'}-config.${serializer.extname()}`;
-		link.href = 'data:text/plain;charset=UTF-8,' + encodeURIComponent(serializer.stringify(def));
+		link.download = `${stateRef.current.def?.code || 'no-code'}-config.${serializer.extname()}`;
+		link.href = 'data:text/plain;charset=UTF-8,' + encodeURIComponent(serializer.stringify(stateRef.current.def));
 		link.click();
 	};
 	const onUploadFileClicked = async () => {

@@ -8,13 +8,21 @@ import {
 	DefaultPortFactory
 } from '@projectstorm/react-diagrams-defaults';
 import {PathFindingLinkFactory} from '@projectstorm/react-diagrams-routing';
-import {ThrottlerFunctions, Undefinable, VUtils} from '@rainbow-d9/n1';
-import {MutableRefObject} from 'react';
+import {ThrottlerFunctions, Undefinable, useForceUpdate, VUtils} from '@rainbow-d9/n1';
+import {MutableRefObject, useEffect} from 'react';
 import {DEFAULTS} from '../constants';
 import {FileDef, FileDefDeserializer, FileDefSerializer} from '../definition';
-import {EndNodeModel, initEngine} from '../diagram';
+import {EndNodeModel, initEngine, StartNodeModel} from '../diagram';
 import {MarkdownContent, PlaygroundModuleAssistant} from '../types';
-import {createDiagramHandlers, createDiagramNodes, createLockedDiagramModel} from './diagram-utils';
+import {
+	buildGrid,
+	cloneDiagramNodes,
+	computeGrid,
+	createDiagramHandlers,
+	createDiagramNodes,
+	createLockedDiagramModel,
+	GridCell
+} from './diagram-utils';
 
 export enum EditorKernelDiagramStatus {
 	IGNORED = 'ignored',
@@ -40,8 +48,9 @@ export interface EditorKernelRefState {
 	def?: FileDef;
 	message?: string;
 	diagramStatus: EditorKernelDiagramStatus;
-	canvasHeight?: number | string;
-	canvasWidth?: number | string;
+	canvasHeight?: number;
+	canvasWidth?: number;
+	canvasZoom?: number;
 }
 
 export const parseContent = (parser: FileDefDeserializer, content?: MarkdownContent): FileDef => {
@@ -181,10 +190,12 @@ export const paintErrorDiagram = (options: {
 	stateRef.current.engineBackend.setModel(createLockedDiagramModel());
 	stateRef.current.message = error.message;
 	stateRef.current.diagramStatus = EditorKernelDiagramStatus.IGNORED;
-	stateRef.current.canvasHeight = 0;
+	stateRef.current.canvasZoom = 1;
+	delete stateRef.current.canvasWidth;
+	delete stateRef.current.canvasHeight;
 };
 
-export const computeCanvasSize = (model: DiagramModel): { width?: string | number; height?: string | number } => {
+export const computeCanvasSize = (model: DiagramModel): { width?: number; height?: number } => {
 	return (model.getNodes() ?? []).reduce((size, node) => {
 		if (node instanceof EndNodeModel) {
 			size.height = node.getY() + node.height + DEFAULTS.diagram.startTop;
@@ -194,7 +205,7 @@ export const computeCanvasSize = (model: DiagramModel): { width?: string | numbe
 			size.width = right;
 		}
 		return size;
-	}, {} as { width?: string | number; height?: string | number });
+	}, {} as { width?: number; height?: number });
 };
 
 /**
@@ -223,6 +234,8 @@ export const paint = (options: PaintOptions) => {
 		stateRef.current.serializer = serializer;
 		stateRef.current.deserializer = deserializer;
 		stateRef.current.def = def;
+		// reset zoom to 1
+		stateRef.current.canvasZoom = 1;
 		const {width, height} = computeCanvasSize(model);
 		stateRef.current.canvasWidth = width;
 		stateRef.current.canvasHeight = height;
@@ -270,4 +283,44 @@ export const repaint = (options: RepaintOptions) => {
 			serializer: stateRef.current.serializer, deserializer: stateRef.current.deserializer
 		});
 	}
+};
+
+export const usePaint = (stateRef: MutableRefObject<EditorKernelRefState>) => {
+	const forceUpdate = useForceUpdate();
+	useEffect(() => {
+		// compute the node positions, run when status is PAINT, and set status to IN_SERVICE when finished
+		if (![
+			EditorKernelDiagramStatus.PAINT, EditorKernelDiagramStatus.PAINT_ON_POSITION
+		].includes(stateRef.current.diagramStatus)) {
+			return;
+		}
+
+		const backendModel = stateRef.current.engineBackend.getModel();
+		// re-calculate node positions
+		const grid: Array<Array<GridCell>> = [];
+		const nodes = backendModel.getNodes();
+		const startNode = nodes.find(node => node instanceof StartNodeModel);
+		grid[0] = grid[0] ?? [];
+		grid[0][0] = {
+			node: startNode, x: startNode.getPosition().x, y: startNode.getPosition().y,
+			maxWidth: -1, maxHeight: -1, top: -1, left: -1
+		};
+		// [0, 0] is hold by start node
+		buildGrid(startNode, grid, 0, 0);
+		const {startTop, startLeft, rowGap, columnGap} = DEFAULTS.diagram;
+		computeGrid(grid, startTop, startLeft, rowGap, columnGap);
+		// must reset model, otherwise links might not be repositioned, don't know why.
+		const newModel = cloneDiagramNodes(backendModel);
+		// leave canvas zoom as it is, but need to copy it to the new model
+		newModel.setZoomLevel((stateRef.current.canvasZoom ?? 1) * 100);
+		// reset size only
+		const {width, height} = computeCanvasSize(newModel);
+		stateRef.current.canvasWidth = width;
+		stateRef.current.canvasHeight = height;
+		stateRef.current.engine.setModel(newModel);
+		// clear backend model to save dom performance
+		stateRef.current.engineBackend.setModel(createLockedDiagramModel());
+		stateRef.current.diagramStatus = EditorKernelDiagramStatus.IN_SERVICE;
+		forceUpdate();
+	}, [forceUpdate, stateRef, stateRef.current.diagramStatus]);
 };

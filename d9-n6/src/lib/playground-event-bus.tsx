@@ -8,7 +8,8 @@ export enum PlaygroundEventTypes {
 	SHOW_EDIT_DIALOG = 'show-edit-dialog',
 	HIDE_EDIT_DIALOG = 'hide-edit-dialog',
 
-	REPAINT = 'repaint'
+	REPAINT = 'repaint',
+	ZOOM_TO = 'zoom-to', ZOOM_TO_FIT = 'zoom-to-fit'
 }
 
 export interface PlaygroundEventBus {
@@ -47,6 +48,18 @@ export interface PlaygroundEventBus {
 	on(type: PlaygroundEventTypes.REPAINT, listener: () => void): this;
 
 	off(type: PlaygroundEventTypes.REPAINT, listener: () => void): this;
+
+	fire(type: PlaygroundEventTypes.ZOOM_TO, zoom: number): this;
+
+	on(type: PlaygroundEventTypes.ZOOM_TO, listener: (zoom: number) => void): this;
+
+	off(type: PlaygroundEventTypes.ZOOM_TO, listener: (zoom: number) => void): this;
+
+	fire(type: PlaygroundEventTypes.ZOOM_TO_FIT): this;
+
+	on(type: PlaygroundEventTypes.ZOOM_TO_FIT, listener: () => void): this;
+
+	off(type: PlaygroundEventTypes.ZOOM_TO_FIT, listener: () => void): this;
 }
 
 const Context = createContext<PlaygroundEventBus>({} as PlaygroundEventBus);
