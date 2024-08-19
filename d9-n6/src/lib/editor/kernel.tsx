@@ -8,7 +8,14 @@ import {PlaygroundEventTypes, usePlaygroundEventBus} from '../playground-event-b
 import {EditorProps} from '../types';
 import {buildGrid, cloneDiagramNodes, computeGrid, createLockedDiagramModel, GridCell} from './diagram-utils';
 import {ErrorBoundary} from './error-boundary';
-import {EditorKernelDiagramStatus, EditorKernelRefState, firstPaint, paint, repaint} from './painter';
+import {
+	computeCanvasSize,
+	EditorKernelDiagramStatus,
+	EditorKernelRefState,
+	firstPaint,
+	paint,
+	repaint
+} from './painter';
 import {Toolbar} from './toolbar';
 import {EditorWrapper, ParseError} from './widgets';
 
@@ -87,6 +94,9 @@ export const EditorKernel = (props: EditorProps) => {
 			newModel.setOffset(offsetX, offsetY);
 			newModel.setZoomLevel(zoom);
 		}
+		const {width, height} = computeCanvasSize(newModel);
+		stateRef.current.canvasWidth = width;
+		stateRef.current.canvasHeight = height;
 		stateRef.current.engine.setModel(newModel);
 		// clear backend model to save dom performance
 		stateRef.current.engineBackend.setModel(createLockedDiagramModel());
@@ -114,37 +124,45 @@ export const EditorKernel = (props: EditorProps) => {
 	}, [on, off, fire, replace, forceUpdate, assistant]);
 
 	if (VUtils.isNotBlank(stateRef.current.message)) {
-		return <EditorWrapper data-diagram-status={EditorKernelDiagramStatus.IGNORED}>
+		return <EditorWrapper data-diagram-status={EditorKernelDiagramStatus.IGNORED}
+		                      canvasWidth={stateRef.current.canvasWidth} canvasHeight={stateRef.current.canvasHeight}>
 			<ParseError>{stateRef.current.message}</ParseError>
 		</EditorWrapper>;
 	} else if (VUtils.isBlank(stateRef.current.content)) {
-		return <EditorWrapper data-diagram-status={EditorKernelDiagramStatus.IGNORED}>
+		return <EditorWrapper data-diagram-status={EditorKernelDiagramStatus.IGNORED}
+		                      canvasWidth={stateRef.current.canvasWidth} canvasHeight={stateRef.current.canvasHeight}>
 			<ParseError>{Labels.NoContent}</ParseError>
 		</EditorWrapper>;
 	} else if (stateRef.current.def == null) {
-		return <EditorWrapper data-diagram-status={EditorKernelDiagramStatus.IGNORED}>
+		return <EditorWrapper data-diagram-status={EditorKernelDiagramStatus.IGNORED}
+		                      canvasWidth={stateRef.current.canvasWidth} canvasHeight={stateRef.current.canvasHeight}>
 			<ParseError>{Labels.NoDefParsed}</ParseError>
 		</EditorWrapper>;
 	}
 
 	try {
-		return <EditorWrapper data-diagram-status={stateRef.current.diagramStatus}
-		                      data-diagram-locked={stateRef.current.engine.getModel().isLocked()}
-		                      ref={wrapperRef}>
-			{/**
-			 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-			 @ts-ignore */}
-			<ErrorBoundary content={content}>
-				<CanvasWidget engine={stateRef.current.engineBackend}
-				              className="o23-playground-editor-content-backend"/>
-				<CanvasWidget engine={stateRef.current.engine} className="o23-playground-editor-content"/>
-				<Toolbar engine={stateRef.current.engine} def={stateRef.current.def} serializer={serializer}
-				         allowUploadFile={allowUploadFile} allowDownloadFile={allowDownloadFile}
-				         allowDownloadImage={allowDownloadImage}/>
-			</ErrorBoundary>
-		</EditorWrapper>;
+		return <>
+			<EditorWrapper data-diagram-status={stateRef.current.diagramStatus}
+			               data-diagram-locked={stateRef.current.engine.getModel().isLocked()}
+			               canvasWidth={stateRef.current.canvasWidth} canvasHeight={stateRef.current.canvasHeight}
+			               ref={wrapperRef}>
+				{/**
+				 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+				 @ts-ignore */}
+				<ErrorBoundary content={content}>
+					<CanvasWidget engine={stateRef.current.engineBackend}
+					              className="o23-playground-editor-content-backend"/>
+					<CanvasWidget engine={stateRef.current.engine} className="o23-playground-editor-content"/>
+				</ErrorBoundary>
+			</EditorWrapper>
+			<Toolbar engine={stateRef.current.engine} def={stateRef.current.def} serializer={serializer}
+			         allowUploadFile={allowUploadFile} allowDownloadFile={allowDownloadFile}
+			         allowDownloadImage={allowDownloadImage}/>
+		</>;
 	} catch (error) {
-		return <EditorWrapper data-diagram-status={EditorKernelDiagramStatus.IGNORED} ref={wrapperRef}>
+		return <EditorWrapper data-diagram-status={EditorKernelDiagramStatus.IGNORED}
+		                      canvasWidth={stateRef.current.canvasWidth} canvasHeight={stateRef.current.canvasHeight}
+		                      ref={wrapperRef}>
 			<ParseError>{(error as Error).message || Labels.ParseError}</ParseError>
 		</EditorWrapper>;
 	}

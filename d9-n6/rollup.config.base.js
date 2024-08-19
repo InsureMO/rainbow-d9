@@ -35,6 +35,7 @@ export const buildConfig = (lint) => {
 			'github-markdown-css/github-markdown.css',
 			'react-syntax-highlighter', 'react-syntax-highlighter/dist/esm/styles/prism',
 			'@projectstorm/geometry',
+			'@projectstorm/react-diagrams-defaults', '@projectstorm/react-diagrams-routing',
 			'@projectstorm/react-canvas-core', '@projectstorm/react-diagrams-core', '@projectstorm/react-diagrams',
 			'dom-to-image',
 			'@codemirror/commands', '@codemirror/lang-javascript', '@codemirror/lang-sql', '@codemirror/lint', '@codemirror/state',

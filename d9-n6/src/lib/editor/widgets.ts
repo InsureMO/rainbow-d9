@@ -1,20 +1,27 @@
-import {CssVars, DOM_KEY_WIDGET} from '@rainbow-d9/n2';
+import {CssVars, DOM_KEY_WIDGET, Utils} from '@rainbow-d9/n2';
 import styled from 'styled-components';
 import {PlaygroundCssVars} from '../widgets';
 
 // noinspection CssUnresolvedCustomProperty,CssUnusedSymbol
-export const EditorWrapper = styled.div.attrs({
-	[DOM_KEY_WIDGET]: 'o23-playground-editor',
-	'data-v-scroll': '',
-	'data-h-scroll': ''
-})`
+export const EditorWrapper = styled.div.attrs<{ canvasWidth?: number | string; canvasHeight?: number | string }>(
+	({canvasWidth, canvasHeight}) => {
+		return {
+			[DOM_KEY_WIDGET]: 'o23-playground-editor',
+			'data-v-scroll': '',
+			'data-h-scroll': '',
+			style: {
+				'--canvas-width': Utils.toCssSize(canvasWidth),
+				'--canvas-height': Utils.toCssSize(canvasHeight)
+			}
+		};
+	})<{ canvasWidth?: number | string; canvasHeight?: number | string }>`
     display: block;
     position: relative;
     align-self: stretch;
     background-image: ${PlaygroundCssVars.EDITOR_BACKGROUND_IMAGE};
     background-size: ${PlaygroundCssVars.EDITOR_BACKGROUND_SIZE};
     background-position: ${PlaygroundCssVars.EDITOR_BACKGROUND_POSITION};
-    overflow: hidden;
+    overflow: auto;
 
     &[data-diagram-status=paint],
     &[data-diagram-status=paint-on-position] {
@@ -42,7 +49,10 @@ export const EditorWrapper = styled.div.attrs({
     }
 
     > div.o23-playground-editor-content {
-        height: 100%;
+        min-width: 100%;
+        width: var(--canvas-width, 0);
+        min-height: 100%;
+        height: var(--canvas-height, 0);
     }
 
     > div.o23-playground-editor-content-backend {

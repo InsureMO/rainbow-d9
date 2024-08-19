@@ -2,6 +2,7 @@
 	"name": "@rainbow-d9/sample-cra",
 	"version": "1.1.40-alpha.1",
 	"private": true,
+	"type": "module",
 	"dependencies": {
 		"@babel/plugin-proposal-private-property-in-object": "^7.21.11",
 		"@rainbow-d9/echarts": "1.1.40-alpha.1",

@@ -1,9 +1,18 @@
-import createEngine from '@projectstorm/react-diagrams';
-import {DiagramEngine} from '@projectstorm/react-diagrams-core';
+import {SelectingState, SelectionBoxLayerFactory} from '@projectstorm/react-canvas-core';
+import {DiagramModel, State} from '@projectstorm/react-diagrams';
+import {DiagramEngine, LinkLayerFactory, NodeLayerFactory} from '@projectstorm/react-diagrams-core';
+import {
+	DefaultLabelFactory,
+	DefaultLinkFactory,
+	DefaultNodeFactory,
+	DefaultPortFactory
+} from '@projectstorm/react-diagrams-defaults';
+import {PathFindingLinkFactory} from '@projectstorm/react-diagrams-routing';
 import {ThrottlerFunctions, Undefinable, VUtils} from '@rainbow-d9/n1';
 import {MutableRefObject} from 'react';
+import {DEFAULTS} from '../constants';
 import {FileDef, FileDefDeserializer, FileDefSerializer} from '../definition';
-import {initEngine} from '../diagram';
+import {EndNodeModel, initEngine} from '../diagram';
 import {MarkdownContent, PlaygroundModuleAssistant} from '../types';
 import {createDiagramHandlers, createDiagramNodes, createLockedDiagramModel} from './diagram-utils';
 
@@ -31,6 +40,8 @@ export interface EditorKernelRefState {
 	def?: FileDef;
 	message?: string;
 	diagramStatus: EditorKernelDiagramStatus;
+	canvasHeight?: number | string;
+	canvasWidth?: number | string;
 }
 
 export const parseContent = (parser: FileDefDeserializer, content?: MarkdownContent): FileDef => {
@@ -66,11 +77,32 @@ export const createDiagramModel = (options: {
 	return createDiagramNodes(def, handlers);
 };
 
+/** copy from DefaultDiagramState */
+export class DiagramState extends State {
+	public constructor() {
+		super({name: 'default-diagrams'});
+		this.childStates = [new SelectingState()];
+		// ignore all dragging related actions
+	}
+}
+
 export const createDiagramEngine = () => {
-	const engine = createEngine({
+	// copy from createEngine
+	const engine = new DiagramEngine({
 		registerDefaultPanAndZoomCanvasAction: false,
 		registerDefaultZoomCanvasAction: false
 	});
+	// register model factories
+	engine.getLayerFactories().registerFactory(new NodeLayerFactory());
+	engine.getLayerFactories().registerFactory(new LinkLayerFactory());
+	engine.getLayerFactories().registerFactory(new SelectionBoxLayerFactory());
+	engine.getLabelFactories().registerFactory(new DefaultLabelFactory());
+	engine.getNodeFactories().registerFactory(new DefaultNodeFactory());
+	engine.getLinkFactories().registerFactory(new DefaultLinkFactory());
+	engine.getLinkFactories().registerFactory(new PathFindingLinkFactory());
+	engine.getPortFactories().registerFactory(new DefaultPortFactory());
+	// register the default interaction behaviours
+	engine.getStateMachine().pushState(new DiagramState());
 	initEngine(engine);
 	const model = createLockedDiagramModel();
 	model.setLocked(true);
@@ -149,6 +181,20 @@ export const paintErrorDiagram = (options: {
 	stateRef.current.engineBackend.setModel(createLockedDiagramModel());
 	stateRef.current.message = error.message;
 	stateRef.current.diagramStatus = EditorKernelDiagramStatus.IGNORED;
+	stateRef.current.canvasHeight = 0;
+};
+
+export const computeCanvasSize = (model: DiagramModel): { width?: string | number; height?: string | number } => {
+	return (model.getNodes() ?? []).reduce((size, node) => {
+		if (node instanceof EndNodeModel) {
+			size.height = node.getY() + node.height + DEFAULTS.diagram.startTop;
+		}
+		const right = node.getX() + node.width + DEFAULTS.diagram.startLeft;
+		if (size.width == null || right > size.width) {
+			size.width = right;
+		}
+		return size;
+	}, {} as { width?: string | number; height?: string | number });
 };
 
 /**
@@ -177,6 +223,9 @@ export const paint = (options: PaintOptions) => {
 		stateRef.current.serializer = serializer;
 		stateRef.current.deserializer = deserializer;
 		stateRef.current.def = def;
+		const {width, height} = computeCanvasSize(model);
+		stateRef.current.canvasWidth = width;
+		stateRef.current.canvasHeight = height;
 		stateRef.current.engineBackend.setModel(model);
 		delete stateRef.current.message;
 		stateRef.current.diagramStatus = EditorKernelDiagramStatus.PAINT;
@@ -210,6 +259,8 @@ export const repaint = (options: RepaintOptions) => {
 			},
 			onContentChanged
 		});
+		// don't reset size, just reset model in backend and change status
+		// size will be computed in next paint
 		stateRef.current.engineBackend.setModel(model);
 		stateRef.current.diagramStatus = EditorKernelDiagramStatus.PAINT_ON_POSITION;
 	} catch (e) {
