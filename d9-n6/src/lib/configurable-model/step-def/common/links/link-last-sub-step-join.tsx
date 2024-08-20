@@ -118,7 +118,11 @@ export class LastSubStepJoinLinkFactory extends StandardLinkFactory<LastSubStepJ
 
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	public generateModel(_event: GenerateModelEvent): LastSubStepJoinLinkModel {
-		return new LastSubStepJoinLinkModel();
+		throw new Error('DO NOT use LastSubStepJoinLinkFactory#generateModel.');
+	}
+
+	protected getLinkDataW(): string {
+		return 'o23-playground-last-sub-step-join-link';
 	}
 
 	protected getLinkSegmentDasharray(): string {

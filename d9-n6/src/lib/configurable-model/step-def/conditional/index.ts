@@ -20,7 +20,7 @@ export const ConditionalStepDefs =
 			return () => def.check = (model.check ?? '').trim();
 		}],
 		ports: [{key: 'steps', port: CommonStepDefs.prebuiltPorts.steps}],
-		createSubNodes: CommonStepDefs.createSetsLikeSubNodesAndEndNode,
+		createSubNodes: CommonStepDefs.createConditionalSubNodesAndEndNode,
 		helpDocs: HelpDocs.conditionalStep
 	});
 registerStepDef(ConditionalStepDefs);

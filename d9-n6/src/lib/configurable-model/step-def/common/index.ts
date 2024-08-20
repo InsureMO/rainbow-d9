@@ -3,6 +3,7 @@ import {ConfigurableElementAnchor, ConfigurableModel} from '../../../edit-dialog
 import {ConfirmNodeOptions, StepNodeConfigurer} from '../../types';
 import {confirm} from './confirm';
 import {
+	createConditionalSubNodesAndEndNode,
 	createParallelSubNodesAndEndNode,
 	createSetsLikeSubNodesAndEndNode,
 	createSubNodes,
@@ -69,7 +70,7 @@ export const CommonStepDefs: CommonStepDefsType = {
 		]
 	},
 	createSubNodes, createSubNodesAndEndNode,
-	createSetsLikeSubNodesAndEndNode, createParallelSubNodesAndEndNode,
+	createSetsLikeSubNodesAndEndNode, createParallelSubNodesAndEndNode, createConditionalSubNodesAndEndNode,
 	findSubPorts,
 	// element create
 	createMainContentElement,

@@ -1,6 +1,7 @@
 import {Undefinable} from '@rainbow-d9/n1';
 import {
 	AllInPipelineStepDef,
+	ConditionalPipelineStepDef,
 	PipelineStepDef,
 	PipelineStepDiagramDef,
 	SetsLikePipelineStepDef
@@ -17,7 +18,7 @@ import {
 } from './port-widgets';
 import {StepsPortName} from './ports';
 import {CommonStepDefsType, CreateSubNodesAndEndNodeOptions} from './types';
-import {createSubNodesOfSingleRoute} from './utils';
+import {CreatePortFromModel, createSubNodesOfSingleRoute, FindPortFromModel} from './utils';
 
 export const createErrorHandlesSubNodes = (step: AllInPipelineStepDef, model: StepNodeModel, options: CreateSubNodesOptions): Undefinable<Array<HandledNodeModel>> => {
 	// error handles
@@ -29,8 +30,9 @@ export const createErrorHandlesSubNodes = (step: AllInPipelineStepDef, model: St
 	const createDefaultStep = options.assistant.createDefaultStep;
 	const createAskSteps = (
 		name: 'catchable' | 'uncatchable' | 'exposed' | 'any',
-		findPortFromModel: () => Undefinable<ErrorHandlesPortModel>,
-		createPortFromModel: () => ErrorHandlesPortModel): (() => Undefinable<Array<PipelineStepDef>>) => {
+		findPortFromModel: (model: StepNodeModel) => Undefinable<ErrorHandlesPortModel>,
+		createPortFromModel: (model: StepNodeModel) => ErrorHandlesPortModel
+	): (() => Undefinable<Array<PipelineStepDef>>) => {
 		return (): Undefinable<Array<PipelineStepDef>> => {
 			if (errorHandles[name] == null || !Array.isArray(errorHandles[name])) {
 				return (void 0);
@@ -39,9 +41,9 @@ export const createErrorHandlesSubNodes = (step: AllInPipelineStepDef, model: St
 			const hideSteps = diagram?.[`$fold${name.charAt(0).toUpperCase() + name.slice(1)}`] ?? false;
 			if (hideSteps) {
 				// still needs to create port model, but no link attached.
-				let sourcePort = findPortFromModel();
+				let sourcePort = findPortFromModel(model);
 				if (sourcePort == null) {
-					sourcePort = createPortFromModel();
+					sourcePort = createPortFromModel(model);
 					model.addPort(sourcePort);
 				}
 				return (void 0);
@@ -57,22 +59,22 @@ export const createErrorHandlesSubNodes = (step: AllInPipelineStepDef, model: St
 	return [
 		{
 			name: 'catchable',
-			findPortFromModel: () => model.getPort(CatchableErrorHandlePortModel.NAME) as CatchableErrorHandlePortModel,
+			findPortFromModel: (model: StepNodeModel) => model.getPort(CatchableErrorHandlePortModel.NAME) as CatchableErrorHandlePortModel,
 			createPortFromModel: () => new CatchableErrorHandlePortModel()
 		},
 		{
 			name: 'exposed',
-			findPortFromModel: () => model.getPort(ExposedErrorHandlePortModel.NAME) as ExposedErrorHandlePortModel,
+			findPortFromModel: (model: StepNodeModel) => model.getPort(ExposedErrorHandlePortModel.NAME) as ExposedErrorHandlePortModel,
 			createPortFromModel: () => new ExposedErrorHandlePortModel()
 		},
 		{
 			name: 'uncatchable',
-			findPortFromModel: () => model.getPort(UncatchableErrorHandlePortModel.NAME) as UncatchableErrorHandlePortModel,
+			findPortFromModel: (model: StepNodeModel) => model.getPort(UncatchableErrorHandlePortModel.NAME) as UncatchableErrorHandlePortModel,
 			createPortFromModel: () => new UncatchableErrorHandlePortModel()
 		},
 		{
 			name: 'any',
-			findPortFromModel: () => model.getPort(AnyErrorHandlePortModel.NAME) as AnyErrorHandlePortModel,
+			findPortFromModel: (model: StepNodeModel) => model.getPort(AnyErrorHandlePortModel.NAME) as AnyErrorHandlePortModel,
 			createPortFromModel: () => new AnyErrorHandlePortModel()
 		}
 	].map(({name, findPortFromModel, createPortFromModel}) => {
@@ -80,8 +82,7 @@ export const createErrorHandlesSubNodes = (step: AllInPipelineStepDef, model: St
 			// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 			// @ts-ignore
 			steps: createAskSteps(name, findPortFromModel, createPortFromModel),
-			findPortFromModel,
-			createPortFromModel
+			findPortFromModel, createPortFromModel
 		};
 	}).map(({steps, ...rest}) => {
 		return {steps: steps(), ...rest};
@@ -130,52 +131,67 @@ export const createSubNodesAndEndNode: CommonStepDefsType['createSubNodesAndEndN
 	return endNode;
 };
 
-export const createSubNodesIfShould =
-	(model: StepNodeModel, options: CreateSubNodesOptions,
-	 create: (model: StepNodeModel, options: CreateSubNodesOptions) => Undefinable<Array<HandledNodeModel>>): Undefinable<Array<HandledNodeModel>> => {
-		const step = model.step as SetsLikePipelineStepDef;
-		const diagram = (step as PipelineStepDiagramDef).$diagram;
-		const hideSteps = diagram?.$foldSubSteps ?? false;
-		if (hideSteps) {
-			// still needs to create port model, but no link attached.
-			let sourcePort = model.getPort(StepsPortName) as StepsPortModel;
-			if (sourcePort == null) {
-				sourcePort = new StepsPortModel(StepsPortName);
-				model.addPort(sourcePort);
-			}
-			return (void 0);
-		}
-		return create(model, options);
-	};
-
-export const guardSetsLikeSteps = (model: StepNodeModel, options: CreateSubNodesOptions): Array<PipelineStepDef> => {
-	const step = model.step as SetsLikePipelineStepDef;
-	const createDefaultStep = options.assistant.createDefaultStep;
-	const steps = step.steps ?? [];
-	if (steps.length === 0) {
-		// create a default snippet step
-		const defaultFirstStep: PipelineStepDef = createDefaultStep();
-		steps.push(defaultFirstStep);
-		// steps might be created, assign to anyway
-		step.steps = steps;
-	}
-	return steps;
+const findStepsPortFromModel: FindPortFromModel = (model: StepNodeModel) => model.getPort(StepsPortName) as StepsPortModel;
+const createStepsPortFromModel: CreatePortFromModel = (model: StepNodeModel) => {
+	const portModel = new StepsPortModel(StepsPortName);
+	model.addPort(portModel);
+	return portModel;
 };
+const findOrCreateStepsPortFromModel: CreatePortFromModel = (model: StepNodeModel) => {
+	const portModel = findStepsPortFromModel(model);
+	if (portModel == null) {
+		return createStepsPortFromModel(model);
+	} else {
+		return portModel;
+	}
+};
+
+export const shouldCreateSubNodes = (model: StepNodeModel): boolean => {
+	const step = model.step as SetsLikePipelineStepDef;
+	const diagram = (step as PipelineStepDiagramDef).$diagram;
+	const hideSteps = diagram?.$foldSubSteps ?? false;
+	if (hideSteps) {
+		// still needs to create port model, but no link attached.
+		findOrCreateStepsPortFromModel(model);
+		return false;
+	}
+	return true;
+};
+
+export const guardSubSteps = (property: string): ((model: StepNodeModel, options: CreateSubNodesOptions) => Array<PipelineStepDef>) => {
+	return (model: StepNodeModel, options: CreateSubNodesOptions): Array<PipelineStepDef> => {
+		const step = model.step as SetsLikePipelineStepDef;
+		const createDefaultStep = options.assistant.createDefaultStep;
+		const steps = step[property] ?? [];
+		if (steps.length === 0) {
+			// create a default snippet step
+			const defaultFirstStep: PipelineStepDef = createDefaultStep();
+			steps.push(defaultFirstStep);
+			// steps might be created, assign to anyway
+			step[property] = steps;
+		}
+		return steps;
+	};
+};
+export const guardSetsLikeSteps = guardSubSteps('steps');
+
 export const createSetsLikeSubNodesAndEndNode: CommonStepDefsType['createSetsLikeSubNodesAndEndNode'] =
 	(model: StepNodeModel, options: CreateSubNodesOptions): Undefinable<HandledNodeModel> => {
 		return createSubNodesAndEndNode(model, {
 			...options,
 			createSpecificSubNodes: (model: StepNodeModel, options: CreateSubNodesOptions): Undefinable<Array<HandledNodeModel>> => {
-				return createSubNodesIfShould(model, options, (model: StepNodeModel, options: CreateSubNodesOptions) => {
-					const steps = guardSetsLikeSteps(model, options);
-					const lastNodeOfSteps = createSubNodesOfSingleRoute({
+				const should = shouldCreateSubNodes(model);
+				if (!should) {
+					return (void 0);
+				}
+				const steps = guardSetsLikeSteps(model, options);
+				return [
+					createSubNodesOfSingleRoute({
 						model, options,
 						askSteps: () => steps,
-						findPortFromModel: () => model.getPort(StepsPortName) as StepsPortModel,
-						createPortFromModel: () => new StepsPortModel(StepsPortName)
-					});
-					return [lastNodeOfSteps];
-				});
+						findPortFromModel: findStepsPortFromModel, createPortFromModel: createStepsPortFromModel
+					})
+				];
 			}
 		});
 	};
@@ -185,17 +201,53 @@ export const createParallelSubNodesAndEndNode: CommonStepDefsType['createParalle
 		return createSubNodesAndEndNode(model, {
 			...options,
 			createSpecificSubNodes: (model: StepNodeModel, options: CreateSubNodesOptions): Undefinable<Array<HandledNodeModel>> => {
-				return createSubNodesIfShould(model, options, (model: StepNodeModel, options: CreateSubNodesOptions) => {
-					return guardSetsLikeSteps(model, options).map((step, stepIndex) => {
-						return createSubNodesOfSingleRoute({
-							model, options,
-							askSteps: () => [step],
-							findPortFromModel: () => model.getPort(StepsPortName) as StepsPortModel,
-							createPortFromModel: () => new StepsPortModel(StepsPortName),
-							askFirstLinkExtras: () => ({index: stepIndex})
-						});
+				const should = shouldCreateSubNodes(model);
+				if (!should) {
+					return (void 0);
+				}
+				return guardSetsLikeSteps(model, options).map((step, stepIndex) => {
+					return createSubNodesOfSingleRoute({
+						model, options,
+						askSteps: () => [step],
+						findPortFromModel: findStepsPortFromModel, createPortFromModel: createStepsPortFromModel,
+						askFirstLinkExtras: () => ({index: stepIndex})
 					});
 				});
+			}
+		});
+	};
+
+export const createConditionalSubNodesAndEndNode: CommonStepDefsType['createConditionalSubNodesAndEndNode'] =
+	(model: StepNodeModel, options: CreateSubNodesOptions): Undefinable<HandledNodeModel> => {
+		return createSubNodesAndEndNode(model, {
+			...options,
+			createSpecificSubNodes: (model: StepNodeModel, options: CreateSubNodesOptions): Undefinable<Array<HandledNodeModel>> => {
+				const should = shouldCreateSubNodes(model);
+				if (!should) {
+					return (void 0);
+				}
+				const steps = guardSetsLikeSteps(model, options);
+				const stepsNode = createSubNodesOfSingleRoute({
+					model, options,
+					askSteps: () => steps,
+					findPortFromModel: findStepsPortFromModel, createPortFromModel: createStepsPortFromModel,
+					askFirstLinkExtras: () => ({index: 0})
+				});
+				const step = model.step as ConditionalPipelineStepDef;
+				const otherwise = step.otherwise;
+				if (otherwise == null || otherwise.length === 0) {
+					return [stepsNode];
+				} else {
+					return [
+						stepsNode,
+						createSubNodesOfSingleRoute({
+							model, options,
+							askSteps: () => step.otherwise,
+							findPortFromModel: findStepsPortFromModel, createPortFromModel: createStepsPortFromModel,
+							askFirstLinkExtras: () => ({index: 1})
+						})
+					];
+				}
 			}
 		});
 	};

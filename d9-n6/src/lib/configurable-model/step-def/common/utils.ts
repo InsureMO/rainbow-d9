@@ -46,17 +46,29 @@ export const createStepNode = (step: PipelineStepDef, file: FileDef, options: St
 	return endOfSub == null ? node : endOfSub;
 };
 
-export const createLinkFromParent = (model: StepNodeModel) => {
-	return (node: StepNodeModel,
-	        findPortFromModel: () => OutgoingPortModel, createPortFromModel: () => OutgoingPortModel,
-	        askLinkExtras?: () => Undefinable<LinkExtras>
-	) => {
-		let sourcePort = findPortFromModel();
+export type FindPortFromModel = (model: StepNodeModel) => OutgoingPortModel;
+export type CreatePortFromModel = (model: StepNodeModel) => OutgoingPortModel;
+export type AskFirstLinkExtras = () => Undefinable<LinkExtras>;
+
+export interface CreateLinkFromParentOptions {
+	node: StepNodeModel;
+	findPortFromModel: FindPortFromModel;
+	createPortFromModel: CreatePortFromModel;
+	askLinkExtras?: AskFirstLinkExtras;
+}
+
+export type CreateLinkFromParent = (options: CreateLinkFromParentOptions) => LinkModel;
+export type CreateLink = (sourcePort: OutgoingPortModel, askLinkExtras?: CreateLinkFromParentOptions['askLinkExtras']) => LinkModel;
+
+export const askFirstLinkCreate = (model: StepNodeModel, createLink: CreateLink): CreateLinkFromParent => {
+	return (options: CreateLinkFromParentOptions) => {
+		const {node, findPortFromModel, createPortFromModel, askLinkExtras} = options;
+		let sourcePort = findPortFromModel(model);
 		if (sourcePort == null) {
-			sourcePort = createPortFromModel();
+			sourcePort = createPortFromModel(model);
 			model.addPort(sourcePort);
 		}
-		const link = sourcePort.createOutgoingLinkModel(askLinkExtras == null ? (void 0) : askLinkExtras());
+		const link = createLink(sourcePort, askLinkExtras);
 		let targetPort = node.getPort(FirstSubStepPortModel.NAME);
 		if (targetPort == null) {
 			targetPort = new FirstSubStepPortModel();
@@ -67,14 +79,20 @@ export const createLinkFromParent = (model: StepNodeModel) => {
 		return link;
 	};
 };
+export const askFirstLinkFromParentCreate = (model: StepNodeModel): CreateLinkFromParent => {
+	return askFirstLinkCreate(model, (sourcePort: OutgoingPortModel, askLinkExtras?: CreateLinkFromParentOptions['askLinkExtras']): LinkModel => {
+		return sourcePort.createOutgoingLinkModel(askLinkExtras == null ? (void 0) : askLinkExtras());
+	});
+};
 
 export interface CreateSubNodesOfSingleRouteOptions {
 	model: StepNodeModel;
 	askSteps: () => Undefinable<Array<PipelineStepDef>>;
 	options: CreateSubNodesOptions;
-	findPortFromModel: () => OutgoingPortModel;
-	createPortFromModel: () => OutgoingPortModel;
-	askFirstLinkExtras?: () => Undefinable<LinkExtras>;
+	findPortFromModel: FindPortFromModel;
+	createPortFromModel: CreatePortFromModel;
+	askFirstLinkCreate?: (model: StepNodeModel) => CreateLinkFromParent;
+	askFirstLinkExtras?: AskFirstLinkExtras;
 }
 
 /**
@@ -84,18 +102,20 @@ export const createSubNodesOfSingleRoute = (options: CreateSubNodesOfSingleRoute
 	const {
 		model, askSteps,
 		options: {appendNode, appendLink, handlers, assistant},
-		findPortFromModel, createPortFromModel, askFirstLinkExtras
+		findPortFromModel, createPortFromModel, askFirstLinkCreate, askFirstLinkExtras
 	} = options;
 	const steps = askSteps();
 	if (steps == null || steps.length === 0) {
 		return (void 0);
 	}
 
-	const createLinkFromModel = createLinkFromParent(model);
+	const createLinkFromModel = (askFirstLinkCreate ?? askFirstLinkFromParentCreate)(model);
 	const previousNode: HandledNodeModel = model;
 	return (steps as Array<PipelineStepDef>).reduce((previousNode, step) => {
 		const linkPrevious = previousNode === model
-			? (node: StepNodeModel) => createLinkFromModel(node, findPortFromModel, createPortFromModel, askFirstLinkExtras)
+			? (node: StepNodeModel) => createLinkFromModel({
+				node, findPortFromModel, createPortFromModel, askLinkExtras: askFirstLinkExtras
+			})
 			: (node: StepNodeModel) => previousNode.next(node);
 		return createStepNode(step, model.file, {
 			type: StepNodeEntityType.NORMAL, handlers, assistant, subOf: step,

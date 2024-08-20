@@ -67,7 +67,7 @@ export const EditorCanvasWrapper = styled.div.attrs<{
 		style: {
 			'--canvas-width': Utils.toCssSize(canvasWidth),
 			'--canvas-height': Utils.toCssSize(canvasHeight),
-			'--canvas-zoom': canvasZoom
+			'--canvas-zoom': canvasZoom ?? 1
 		}
 	};
 })<{ canvasWidth?: number | string; canvasHeight?: number | string; canvasZoom?: number }>`
@@ -80,11 +80,8 @@ export const EditorCanvasWrapper = styled.div.attrs<{
     overflow: hidden;
 
     > div.o23-playground-editor-content {
-        width: var(--canvas-width, 0);
-        height: var(--canvas-height, 0);
-        //> svg, > div {
-        //    transform-origin: top left;
-        //}
+        width: 100%;
+        height: 100%;
     }
 `;
 export const EditorToolbar = styled.div.attrs({[DOM_KEY_WIDGET]: 'o23-playground-editor-toolbar'})`

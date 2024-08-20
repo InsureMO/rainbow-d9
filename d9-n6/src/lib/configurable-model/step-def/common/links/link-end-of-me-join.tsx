@@ -28,7 +28,11 @@ export class EndOfMeJoinLinkFactory extends StandardLinkFactory<EndOfMeJoinLinkM
 
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	public generateModel(_event: GenerateModelEvent): EndOfMeJoinLinkModel {
-		return new EndOfMeJoinLinkModel();
+		throw new Error('DO NOT use EndOfMeJoinLinkFactory#generateModel.');
+	}
+
+	protected getLinkDataW(): string {
+		return 'o23-playground-end-of-me-join-link';
 	}
 
 	protected getLinkSegmentDasharray(): string {

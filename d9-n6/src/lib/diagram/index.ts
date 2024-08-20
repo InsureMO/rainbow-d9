@@ -1,5 +1,5 @@
 import {AbstractReactFactory} from '@projectstorm/react-canvas-core';
-import {AbstractModelFactory, LinkModel, PortModel} from '@projectstorm/react-diagrams';
+import {AbstractModelFactory, LabelModel, LinkModel, PortModel} from '@projectstorm/react-diagrams';
 import {DiagramEngine} from '@projectstorm/react-diagrams-core';
 import {
 	AnyErrorHandlePortFactory,
@@ -38,10 +38,14 @@ export abstract class EngineNodeFactory<M extends HandledNodeModel = HandledNode
 export abstract class EngineLinkFactory<M extends LinkModel = LinkModel> extends AbstractReactFactory<M, DiagramEngine> {
 }
 
+export abstract class EngineLabelFactory<M extends LabelModel = LabelModel> extends AbstractReactFactory<M, DiagramEngine> {
+}
+
 const Factories: {
-	ports: Array<EnginePortFactory>, nodes: Array<EngineNodeFactory>, links: Array<EngineLinkFactory>
+	ports: Array<EnginePortFactory>, nodes: Array<EngineNodeFactory>,
+	links: Array<EngineLinkFactory>, labels: Array<EngineLabelFactory>
 } = {
-	ports: [], nodes: [], links: []
+	ports: [], nodes: [], links: [], labels: []
 };
 
 export const registerPortFactory = (...factories: Array<EnginePortFactory>) => {
@@ -49,6 +53,12 @@ export const registerPortFactory = (...factories: Array<EnginePortFactory>) => {
 };
 export const registerNodeFactory = (...factories: Array<EngineNodeFactory>) => {
 	Factories.nodes.push(...factories);
+};
+export const registerLinkFactory = (...factories: Array<EngineLinkFactory>) => {
+	Factories.links.push(...factories);
+};
+export const registerLabelFactory = (...factories: Array<EngineLabelFactory>) => {
+	Factories.labels.push(...factories);
 };
 
 export const initEngine = (engine: DiagramEngine) => {
@@ -77,4 +87,7 @@ export const initEngine = (engine: DiagramEngine) => {
 	linkFactories.registerFactory(new EndOfMeJoinLinkFactory());
 	linkFactories.registerFactory(new LastSubStepJoinLinkFactory());
 	Factories.links.forEach(factory => linkFactories.registerFactory(factory));
+
+	const labelFactories = engine.getLabelFactories();
+	Factories.labels.forEach(factory => labelFactories.registerFactory(factory));
 };

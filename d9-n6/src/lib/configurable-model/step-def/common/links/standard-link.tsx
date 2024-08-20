@@ -101,7 +101,7 @@ export const StandardLinkWidget = (props: StandardLinkProps) => {
 	}
 
 	// noinspection com.intellij.reactbuddy.ArrayToJSXMapInspection
-	return <g data-default-link-test={link.getOptions().testName}>
+	return <g data-default-link-test={link.getOptions().testName || 'no-test-name'}>
 		{paths}
 	</g>;
 };
@@ -117,6 +117,7 @@ export abstract class StandardLinkFactory<L extends DefaultLinkModel = DefaultLi
 
 	public generateLinkSegment(model: L, selected: boolean, path: string): JSX.Element {
 		return <StandardLinkSegmentPath
+			data-link-type={this.getLinkDataW()}
 			selected={selected}
 			dasharray={this.getLinkSegmentDasharray()}
 			selectedDasharray={this.getLinkSegmentSelectedDasharray()}
@@ -124,6 +125,8 @@ export abstract class StandardLinkFactory<L extends DefaultLinkModel = DefaultLi
 			strokeWidth={model.getOptions().width}
 			d={path}/>;
 	}
+
+	protected abstract getLinkDataW(): string;
 
 	protected getLinkSegmentDasharray(): string {
 		return PlaygroundCssVars.LINK_DEFAULT_STROKE_DASHARRAY;

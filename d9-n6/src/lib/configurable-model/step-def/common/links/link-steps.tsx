@@ -18,7 +18,11 @@ export class StepsLinkFactory extends StandardLinkFactory<StepsLinkModel> {
 
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	public generateModel(_event: GenerateModelEvent): StepsLinkModel {
-		return new StepsLinkModel();
+		throw new Error('DO NOT use StepsLinkFactory#generateModel.');
+	}
+
+	protected getLinkDataW(): string {
+		return 'o23-playground-steps-link';
 	}
 
 	protected getLinkSegmentDasharray(): string {

@@ -19,7 +19,11 @@ export class ErrorHandlesLinkFactory extends StandardLinkFactory<ErrorHandlesLin
 
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	public generateModel(_event: GenerateModelEvent): ErrorHandlesLinkModel {
-		return new ErrorHandlesLinkModel();
+		throw new Error('DO NOT use ErrorHandlesLinkFactory#generateModel.');
+	}
+
+	protected getLinkDataW(): string {
+		return 'o23-playground-error-handles-link';
 	}
 
 	protected getLinkSegmentDasharray(): string {
