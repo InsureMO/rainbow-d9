@@ -10,7 +10,6 @@ export interface SetsStepDefModel extends CommonStepDefModel {
 export const SetsStepDefs =
 	CommonStepDefs.createStepNodeConfigurer<SetsPipelineStepDef, SetsStepDefModel>({
 		use: StandardPipelineStepRegisterKey.SETS,
-		switchUse: ['keep', ['steps']],
 		ports: [{key: 'steps', port: CommonStepDefs.prebuiltPorts.steps}],
 		createSubNodes: CommonStepDefs.createSetsLikeSubNodesAndEndNode,
 		helpDocs: HelpDocs.setsStep

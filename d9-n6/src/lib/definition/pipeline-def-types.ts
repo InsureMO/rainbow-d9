@@ -132,6 +132,12 @@ export interface ParallelPipelineStepDef extends SetsLikePipelineStepDef {
 	race?: boolean;
 }
 
+export interface ConditionalPipelineStepDef extends SetsLikePipelineStepDef {
+	use: StandardPipelineStepRegisterKey.CONDITIONAL_SETS;
+	check?: string;
+	otherwise?: Array<PipelineStepDef>;
+}
+
 export interface TypeOrmPipelineStepDef extends AllInPipelineStepDef {
 	datasource?: string;
 	transaction?: string;

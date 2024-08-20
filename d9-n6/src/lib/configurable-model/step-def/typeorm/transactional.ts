@@ -17,7 +17,7 @@ export const TypeOrmTransactionalStepDefs =
 	CommonStepDefs.createStepNodeConfigurer<TypeOrmTransactionalPipelineStepDef, TypeOrmTransactionalStepDefModel>({
 		use: StandardPipelineStepRegisterKey.TYPEORM_TRANSACTIONAL,
 		prepare: ['and', prepare()],
-		switchUse: ['keep', [...switchUse, 'steps']],
+		switchUse: ['keep', switchUse],
 		confirm: ['and', confirm()],
 		properties: [CommonStepDefs.createMainContentElement(elementDatasource, elementTransaction)],
 		ports: [

@@ -27,7 +27,7 @@ export const ParallelStepDefs =
 			model.cloneData = def.cloneData;
 			model.race = def.race;
 		}],
-		switchUse: ['keep', ['cloneData', 'race', 'steps']],
+		switchUse: ['keep', ['cloneData', 'race']],
 		// eslint-disable-next-line @typescript-eslint/no-unused-vars
 		confirm: ['and', (model, def, _file, _options): ConfigurableElementAnchor | AndConfirmCommit => {
 			// TODO VALIDATE PROPERTIES

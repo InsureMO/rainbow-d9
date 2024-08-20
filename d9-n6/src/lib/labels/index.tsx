@@ -78,6 +78,8 @@ export const Labels = {
 	StepUseAsyncSets: 'Async Sets',
 	StepUseEach: 'Each',
 	StepUseParallel: 'Parallel',
+	StepUseConditional: 'Conditional',
+	StepUseRoutes: 'Routes',
 	StepUseTypeormSnippet: 'TypeOrm Snippet',
 	StepUseTypeormBulkSave: 'TypeOrm Bulk Save',
 	StepUseTypeormSave: 'TypeOrm Save',

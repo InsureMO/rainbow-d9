@@ -63,7 +63,7 @@ export const createLinkFromParent = (model: StepNodeModel) => {
 			node.addPort(targetPort);
 		}
 		link.setTargetPort(targetPort);
-		node.asFirstSubStep(true);
+		node.asFirstSubStep();
 		return link;
 	};
 };

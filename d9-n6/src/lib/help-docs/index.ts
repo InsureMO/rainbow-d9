@@ -1,4 +1,5 @@
 import {docs as AsyncParallelStepDocs} from './async-sets-step';
+import {docs as ConditionalStepDocs} from './conditional-step';
 import {docs as DelPropertyStepDocs} from './del-property-step';
 import {docs as EachStepDocs} from './each-step';
 import {docs as GetPropertyStepDocs} from './get-property-step';
@@ -31,6 +32,7 @@ export const HelpDocs = {
 	...AsyncParallelStepDocs,
 	...EachStepDocs,
 	...ParallelStepDocs,
+	...ConditionalStepDocs,
 	// typeorm
 	...TypeOrmCommonDocs,
 	...TypeOrmBySnippetStepDocs,

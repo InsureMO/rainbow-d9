@@ -49,8 +49,8 @@ export class StepNodeModel extends HandledNodeModel<NodeModelGenerics & StepNode
 		return this.rest.subOf;
 	}
 
-	public asFirstSubStep(is: boolean) {
-		this.firstSubStep = is;
+	public asFirstSubStep() {
+		this.firstSubStep = true;
 	}
 
 	public isFirstSubStep() {

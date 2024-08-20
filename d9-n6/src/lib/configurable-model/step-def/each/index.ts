@@ -20,7 +20,7 @@ export const EachStepDefs =
 			model.originalContentName = def.originalContentName;
 			model.itemName = def.itemName;
 		}],
-		switchUse: ['keep', ['originalContentName', 'itemName', 'steps']],
+		switchUse: ['keep', ['originalContentName', 'itemName']],
 		// eslint-disable-next-line @typescript-eslint/no-unused-vars
 		confirm: ['and', (model, def, _file, options): ConfigurableElementAnchor | AndConfirmCommit => {
 			// TODO VALIDATE PROPERTIES

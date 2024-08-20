@@ -12,6 +12,17 @@ expose-headers:
   x-b: bbb
 
 steps:
+  - name: Conditional
+    use: conditional
+    check: $factor.id != null
+    steps:
+      - name: "Check Pass #1"
+        use: snippet
+      - name: "Check Pass #2"
+        use: snippet
+    otherwise:
+      - name: "Otherwise #1"
+        use: snippet
   - name: Auth
     use: sets
     steps:
