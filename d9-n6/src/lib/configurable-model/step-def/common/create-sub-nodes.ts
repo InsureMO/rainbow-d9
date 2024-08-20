@@ -148,27 +148,29 @@ export const createSubNodesIfShould =
 		return create(model, options);
 	};
 
+export const guardSetsLikeSteps = (model: StepNodeModel, options: CreateSubNodesOptions): Array<PipelineStepDef> => {
+	const step = model.step as SetsLikePipelineStepDef;
+	const createDefaultStep = options.assistant.createDefaultStep;
+	const steps = step.steps ?? [];
+	if (steps.length === 0) {
+		// create a default snippet step
+		const defaultFirstStep: PipelineStepDef = createDefaultStep();
+		steps.push(defaultFirstStep);
+		// steps might be created, assign to anyway
+		step.steps = steps;
+	}
+	return steps;
+};
 export const createSetsLikeSubNodesAndEndNode: CommonStepDefsType['createSetsLikeSubNodesAndEndNode'] =
 	(model: StepNodeModel, options: CreateSubNodesOptions): Undefinable<HandledNodeModel> => {
 		return createSubNodesAndEndNode(model, {
 			...options,
 			createSpecificSubNodes: (model: StepNodeModel, options: CreateSubNodesOptions): Undefinable<Array<HandledNodeModel>> => {
 				return createSubNodesIfShould(model, options, (model: StepNodeModel, options: CreateSubNodesOptions) => {
-					const step = model.step as SetsLikePipelineStepDef;
-					const createDefaultStep = options.assistant.createDefaultStep;
+					const steps = guardSetsLikeSteps(model, options);
 					const lastNodeOfSteps = createSubNodesOfSingleRoute({
 						model, options,
-						askSteps: () => {
-							const steps = step.steps ?? [];
-							if (steps.length === 0) {
-								// create a default snippet step
-								const defaultFirstStep: PipelineStepDef = createDefaultStep();
-								steps.push(defaultFirstStep);
-								// steps might be created, assign to anyway
-								step.steps = steps;
-							}
-							return steps;
-						},
+						askSteps: () => steps,
 						findPortFromModel: () => model.getPort(StepsPortName) as StepsPortModel,
 						createPortFromModel: () => new StepsPortModel(StepsPortName)
 					});
@@ -184,17 +186,7 @@ export const createParallelSubNodesAndEndNode: CommonStepDefsType['createParalle
 			...options,
 			createSpecificSubNodes: (model: StepNodeModel, options: CreateSubNodesOptions): Undefinable<Array<HandledNodeModel>> => {
 				return createSubNodesIfShould(model, options, (model: StepNodeModel, options: CreateSubNodesOptions) => {
-					const step = model.step as SetsLikePipelineStepDef;
-					const createDefaultStep = options.assistant.createDefaultStep;
-					const steps = step.steps ?? [];
-					if (steps.length === 0) {
-						// create a default snippet step
-						const defaultFirstStep: PipelineStepDef = createDefaultStep();
-						steps.push(defaultFirstStep);
-						// steps might be created, assign to anyway
-						step.steps = steps;
-					}
-					return steps.map((step, stepIndex) => {
+					return guardSetsLikeSteps(model, options).map((step, stepIndex) => {
 						return createSubNodesOfSingleRoute({
 							model, options,
 							askSteps: () => [step],
