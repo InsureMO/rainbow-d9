@@ -1,5 +1,8 @@
 import {ExternalDefIndicator, NodeDef, registerWidget, Undefinable, VUtils} from '@rainbow-d9/n1';
 import {Semantic, Widget} from '@rainbow-d9/n3';
+import {ReactNode} from 'react';
+import {registerStepDef, StepNodeConfigurer} from './configurable-model';
+import {registerUseBadge, registerUseLabel} from './labels';
 import {Playground} from './playground';
 import {PlaygroundModuleAssistant} from './types';
 
@@ -91,4 +94,17 @@ export const registerPlayground = (widgetHelper: Widget.WidgetHelper, widgetType
 	};
 	const repo = widgetHelper.repository;
 	repo.register(new TranslatorClass(repo));
+};
+
+export interface StepDef {
+	configurer: StepNodeConfigurer;
+	labelOfUse: ReactNode;
+	badgeOfUse?: ReactNode;
+}
+
+export const registerSteps = (options: StepDef) => {
+	const {configurer, labelOfUse, badgeOfUse} = options;
+	registerUseLabel(configurer.use, labelOfUse);
+	registerUseBadge(configurer.use, badgeOfUse);
+	registerStepDef(configurer);
 };

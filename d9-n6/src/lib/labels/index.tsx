@@ -1,5 +1,5 @@
 import {IntlLabel} from '@rainbow-d9/n2';
-import React from 'react';
+import React, {ReactNode} from 'react';
 import {ElementBanned, ElementChecked, ElementMissed, Snippet, Steps} from '../icons';
 
 export const Labels = {
@@ -194,6 +194,12 @@ export const asUseLabelKey = (use: string) => {
 export const askUseBadge = (use: string) => {
 	return Labels[asUseLabelKey(use) + 'Badge'] || Labels[asUseLabelKey(use)];
 };
+export const registerUseBadge = (use: string, badge: ReactNode) => {
+	Labels[asUseLabelKey(use) + 'Badge'] = badge;
+};
 export const askUseLabel = (use: string) => {
 	return Labels[asUseLabelKey(use)];
+};
+export const registerUseLabel = (use: string, label: ReactNode) => {
+	Labels[asUseLabelKey(use)] = label;
 };
