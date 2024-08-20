@@ -130,7 +130,7 @@ export const createWidgetLinter = (options: {
 				&& type === N2.N2WidgetType.PAGE) {
 				diagnostics.push({
 					from: node.from, to: node.to,
-					severity: 'error', message: 'Widget[Page] is only allowed  on heading level 1.'
+					severity: 'error', message: 'Widget[Page] is allowed on heading level 1 only.'
 				});
 			} else {
 				let independentWidget = null;

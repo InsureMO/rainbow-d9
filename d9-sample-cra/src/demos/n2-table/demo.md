@@ -2,7 +2,7 @@
 
 ## Section::# 3.1. Table
 
-### Table
+### Table::
 
 - property: nestedTables
 - expandable, clickToExpand, addable, removable, !hideClassicCellsOnExpandable
