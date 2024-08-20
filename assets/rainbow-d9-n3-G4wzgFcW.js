@@ -4,10 +4,10 @@ var __publicField = (obj, key, value) => {
   __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
   return value;
 };
-import { c as createLogger, N as NUtils, V as VUtils, k as MonitorNodeAttributes, l as Reaction, E as ExternalDefIndicator, P as PPUtils } from "./rainbow-d9-n1-gv4-Ep8b.js";
-import { O as OptionItemSort, R as REACTION_REFRESH_OPTIONS, c as GlobalEventPrefix } from "./rainbow-d9-n2-c3wskaxM.js";
-import { f as fromMarkdown, g as gfmTableFromMarkdown, a as gfmStrikethroughFromMarkdown, b as gfmFootnoteFromMarkdown, c as gfmTaskListItemFromMarkdown, d as frontmatterFromMarkdown } from "./mdast-sZMfzeet.js";
-import { g as gfmTable, h as gfmStrikethrough, i as gfmFootnote, j as gfmTaskListItem, k as frontmatter } from "./micromark-Ue5FFGZj.js";
+import { c as createLogger, N as NUtils, V as VUtils, k as MonitorNodeAttributes, l as Reaction, E as ExternalDefIndicator, P as PPUtils } from "./rainbow-d9-n1-ScXZWsJb.js";
+import { O as OptionItemSort, R as REACTION_REFRESH_OPTIONS, c as GlobalEventPrefix } from "./rainbow-d9-n2-vYNKvkWP.js";
+import { f as fromMarkdown, g as gfmTableFromMarkdown, a as gfmStrikethroughFromMarkdown, b as gfmFootnoteFromMarkdown, c as gfmTaskListItemFromMarkdown, d as frontmatterFromMarkdown } from "./mdast-vrS0zRVA.js";
+import { g as gfmTable, h as gfmStrikethrough, i as gfmFootnote, j as gfmTaskListItem, k as frontmatter } from "./micromark-LTfBN0hH.js";
 const AsyncFunction = Object.getPrototypeOf(async function() {
 }).constructor;
 var ParsedNodeType;
@@ -3253,6 +3253,9 @@ var N2WidgetType;
   N2WidgetType2["MDDT"] = "MDDT";
   N2WidgetType2["PAGINATION"] = "Pagination";
 })(N2WidgetType || (N2WidgetType = {}));
+const N2TranslatorConstants = {
+  tableColumnWidth: 150
+};
 const StandardInputValidators = [
   ValidatorUtils.DETECT_LENGTH,
   ValidatorUtils.DETECT_NUMERIC,
@@ -4011,10 +4014,10 @@ const N2TableHeadersBuild = {
           }
           return attrs;
         }, {});
-        if (VUtils.isNotBlank(parsed.label) && VUtils.isNotBlank(parsed.width)) {
+        if (VUtils.isNotBlank(parsed.width)) {
           return { ...parsed, index: index2 };
         } else {
-          return null;
+          return { ...parsed, width: N2TranslatorConstants.tableColumnWidth, index: index2 };
         }
       } else {
         const value = attributeValue.trim();
@@ -4481,6 +4484,7 @@ var index = /* @__PURE__ */ Object.freeze({
   N2TabsTranslator,
   N2TextareaTranslator,
   N2TimeTranslator,
+  N2TranslatorConstants,
   N2TreeChildNodesBuild,
   N2TreeTranslator,
   get N2WidgetType() {
