@@ -26,6 +26,7 @@ const PORT_STEPS_COLOR = '#617ba0';
 const PORT_ERROR_HANDLES_COLOR = '#c13a92';
 const LINK_ERROR_HANDLES_COLOR = '#a97f98';
 const PORT_LAST_SUB_STEP_JOIN_COLOR = '#00618b';
+const PORT_ROUTE_TEST_COLOR = '#8454aa';
 const PRE_PORT_COLOR = '#87a55f';
 const POST_PORT_COLOR = '#c69dab';
 export const PlaygroundCssVars = {
@@ -172,6 +173,10 @@ export const PlaygroundCssVars = {
 	NODE_PORT_FIRST_SUB_STEP_BORDER: `var(--o23-playground-port-first-sub-step-border, 1px solid ${color(PORT_FIRST_SUB_STEP_COLOR).darken(0.1).opaquer(0.5)})`,
 	NODE_PORT_LAST_SUB_STEP_JOIN_BACKGROUND: `var(--o23-playground-port-last-sub-step-join-background, ${PORT_LAST_SUB_STEP_JOIN_COLOR})`,
 	NODE_PORT_LAST_SUB_STEP_JOIN_BORDER: `var(--o23-playground-port-last-sub-step-join-border, 1px solid ${color(PORT_LAST_SUB_STEP_JOIN_COLOR).darken(0.1).opaquer(0.5)})`,
+	NODE_PORT_ROUTE_TEST_COLOR: `var(--o23-playground-port-route-test-color, ${CssVars.INVERT_COLOR})`,
+	NODE_PORT_ROUTE_TEST_BACKGROUND: `var(--o23-playground-port-route-test-background, ${PORT_ROUTE_TEST_COLOR})`,
+	NODE_PORT_ROUTE_TEST_BORDER: `var(--o23-playground-port-route-test-border, 1px solid ${color(PORT_ROUTE_TEST_COLOR).darken(0.1).opaquer(0.5)})`,
+	NODE_PORT_ROUTE_TEST_RADIUS: 'var(--o23-playground-port-route-test-radius, 10px)',
 	LINK_STROKE_LINECAP: 'var(--o23-playground-link-stroke-linecap, round)',
 	LINK_DEFAULT_STROKE_DASHARRAY: 'var(--o23-playground-link-default-stroke-dasharray, unset)',
 	LINK_DEFAULT_SELECTED_STROKE_DASHARRAY: 'var(--o23-playground-link-default-selected-stroke-dasharray, 8 4)',

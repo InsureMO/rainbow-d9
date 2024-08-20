@@ -1,10 +1,13 @@
 import {GenerateModelEvent} from '@projectstorm/react-canvas-core';
 import {AbstractModelFactory, PortModelAlignment, PortWidget} from '@projectstorm/react-diagrams';
 import {DiagramEngine} from '@projectstorm/react-diagrams-core';
+import {Undefinable} from '@rainbow-d9/n1';
 import {CssVars, DOM_KEY_WIDGET} from '@rainbow-d9/n2';
-import React from 'react';
+import React, {FC, ReactNode} from 'react';
 import styled from 'styled-components';
-import {IncomingPortModel} from '../../../../diagram';
+import {ConditionalPipelineStepDef, PipelineStepDef, StandardPipelineStepRegisterKey} from '../../../../definition';
+import {IncomingPortModel, StepNodeModel} from '../../../../diagram';
+import {RouteTest} from '../../../../icons';
 import {PlaygroundCssVars} from '../../../../widgets';
 
 export class FirstSubStepPortModel extends IncomingPortModel {
@@ -48,6 +51,71 @@ export const FirstSubStepPortContainer = styled.div.attrs({[DOM_KEY_WIDGET]: 'o2
     }
 `;
 
+export type FirstSubStepPortContainerFC = FC<{ children: ReactNode }>;
+export type FirstSubStepPortContainerFind = (step: PipelineStepDef, parent: PipelineStepDef) => Undefinable<FirstSubStepPortContainerFC>;
+
+export const FirstSubStepPortForRuleCheckContainer = styled.div.attrs({[DOM_KEY_WIDGET]: 'o23-playground-route-test-port'})`
+    display: flex;
+    position: absolute;
+    align-items: center;
+    justify-content: center;
+    top: calc(${CssVars.INPUT_HEIGHT} / 2 - ${PlaygroundCssVars.NODE_PORT_ROUTE_TEST_RADIUS});
+    left: calc(-1 * (${PlaygroundCssVars.NODE_PORT_ROUTE_TEST_RADIUS} * 2 + ${PlaygroundCssVars.NODE_BORDER_WIDTH}));
+    width: calc(${PlaygroundCssVars.NODE_PORT_ROUTE_TEST_RADIUS} * 2);
+    height: calc(${PlaygroundCssVars.NODE_PORT_ROUTE_TEST_RADIUS} * 2);
+    background-color: ${PlaygroundCssVars.NODE_PORT_ROUTE_TEST_BACKGROUND};
+    border: ${PlaygroundCssVars.NODE_PORT_ROUTE_TEST_BORDER};
+    border-top-left-radius: ${PlaygroundCssVars.NODE_PORT_ROUTE_TEST_RADIUS};
+    border-bottom-left-radius: ${PlaygroundCssVars.NODE_PORT_ROUTE_TEST_RADIUS};
+    padding-left: calc(${PlaygroundCssVars.NODE_PORT_ROUTE_TEST_RADIUS} * 0.3);
+
+    > svg {
+        width: calc(${PlaygroundCssVars.NODE_PORT_ROUTE_TEST_RADIUS} * 1.4);
+        height: calc(${PlaygroundCssVars.NODE_PORT_ROUTE_TEST_RADIUS} * 1.4);
+        color: ${PlaygroundCssVars.NODE_PORT_ROUTE_TEST_COLOR};
+    }
+
+    > div:last-child {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 0;
+        height: 100%;
+    }
+`;
+export const FirstSubStepPortForRouteTest = (props: { children: ReactNode }) => {
+	const {children} = props;
+
+	return <FirstSubStepPortForRuleCheckContainer>
+		<RouteTest/>
+		{children}
+	</FirstSubStepPortForRuleCheckContainer>;
+};
+
+const FirstSubStepPortContainerFinds: Array<FirstSubStepPortContainerFind> = [
+	(step, parent) => {
+		if (parent.use === StandardPipelineStepRegisterKey.CONDITIONAL_SETS
+			&& (parent as ConditionalPipelineStepDef).steps?.[0] === step) {
+			return FirstSubStepPortForRouteTest;
+		}
+		return (void 0);
+	}
+];
+export const registerFirstSubStepPortContainerFind = (find: FirstSubStepPortContainerFind) => {
+	if (!FirstSubStepPortContainerFinds.includes(find)) {
+		FirstSubStepPortContainerFinds.push(find);
+	}
+};
+export const findFirstSubStepPortContainer = (step: PipelineStepDef, parent: PipelineStepDef): FirstSubStepPortContainerFC => {
+	for (const find of FirstSubStepPortContainerFinds) {
+		const C = find(step, parent);
+		if (C != null) {
+			return C;
+		}
+	}
+	return FirstSubStepPortContainer;
+};
+
 export interface FirstSubStepPortWidgetProps {
 	// node and engine props are required
 	port: FirstSubStepPortModel;
@@ -60,7 +128,11 @@ export interface FirstSubStepPortWidgetProps {
 export const FirstSubStepPortWidget = (props: FirstSubStepPortWidgetProps) => {
 	const {port, engine} = props;
 
-	return <FirstSubStepPortContainer>
+	const C = findFirstSubStepPortContainer(
+		(port.getParent() as StepNodeModel).step,
+		(Object.values(port.getLinks())[0].getSourcePort().getNode() as StepNodeModel).step);
+
+	return <C>
 		<PortWidget port={port} engine={engine}/>
-	</FirstSubStepPortContainer>;
+	</C>;
 };
