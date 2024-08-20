@@ -12,6 +12,7 @@ import {
 	SpecificWidgetTranslator,
 	WidgetPropertyName
 } from '../widget';
+import {N2TranslatorConstants} from './constants';
 import {N2WidgetType} from './types';
 
 export type PendingTableHeaderLabel = {
@@ -65,10 +66,10 @@ export const N2TableHeadersBuild: AttributeValueBuild<Array<BuiltTableHeaderDef>
 							}
 							return attrs;
 						}, {} as Omit<TableHeaderDef, 'index'>);
-					if (VUtils.isNotBlank(parsed.label) && VUtils.isNotBlank(parsed.width)) {
+					if (VUtils.isNotBlank(parsed.width)) {
 						return {...parsed, index};
 					} else {
-						return null;
+						return {...parsed, width: N2TranslatorConstants.tableColumnWidth, index};
 					}
 				} else {
 					const value = attributeValue.trim();
