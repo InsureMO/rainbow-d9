@@ -25,11 +25,7 @@ export const N2Playground = () => {
 					]
 				}
 			},
-			mockData: async () => {
-				return {
-					test: 'test 6'
-				};
-			},
+			mockData: async () => DemoData,
 			externalDefsTypes: {
 				codes: DropdownOptionsWidgets.map($wt => ({
 					$wt, properties: ['options'], label: 'Retrieve available options from remote.'
