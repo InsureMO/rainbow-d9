@@ -6,14 +6,6 @@ export type MarkdownContent = string;
 
 export type OnContentChanged = (content?: string) => Promise<void>;
 
-export interface PlaygroundModuleUsage {
-	useN3?: boolean;
-	useN5?: boolean;
-	useN6?: boolean;
-	useN7?: boolean;
-	useN8?: boolean;
-}
-
 export interface PlaygroundSystemEndpointForHttp {
 	code: string;
 	name: string;
@@ -63,7 +55,6 @@ export interface PlaygroundBehavior {
 
 /** configuration definition */
 export type PlaygroundDef = ValueChangeableNodeDef & OmitHTMLProps<HTMLDivElement> & {
-	usage?: PlaygroundModuleUsage;
 	assistant?: PlaygroundModuleAssistant;
 	/** def file serializer, use yaml by default */
 	serializer?: FileDefSerializer;
@@ -76,7 +67,6 @@ export type PlaygroundProps = OmitNodeDef<PlaygroundDef> & WidgetProps;
 
 export interface EditorProps extends Required<PlaygroundBehavior> {
 	content?: string;
-	usage?: PlaygroundModuleUsage;
 	assistant?: PlaygroundModuleAssistant;
 	serializer: FileDefSerializer;
 	deserializer: FileDefDeserializer;

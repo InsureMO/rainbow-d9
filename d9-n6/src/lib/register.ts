@@ -1,7 +1,7 @@
 import {ExternalDefIndicator, NodeDef, registerWidget, Undefinable, VUtils} from '@rainbow-d9/n1';
 import {Semantic, Widget} from '@rainbow-d9/n3';
 import {Playground} from './playground';
-import {PlaygroundModuleAssistant, PlaygroundModuleUsage} from './types';
+import {PlaygroundModuleAssistant} from './types';
 
 export const PlaygroundCreateDefaultStepBuild: Widget.AttributeValueBuild<PlaygroundModuleAssistant['createDefaultStep'] | ExternalDefIndicator> = {
 	accept: (key: Widget.WidgetPropertyName) => key === 'defaultStep',
@@ -71,10 +71,6 @@ export abstract class AbstractPlaygroundTranslator extends Widget.SpecificWidget
 	public getAttributeNamesMapping(): Undefinable<Record<Widget.CustomAttributeName, Widget.WidgetPropertyName>> {
 		const type = this.getSupportedType();
 		return {
-			...(['useN3', 'useN5', 'useN6', 'useN7', 'useN8'] as Array<keyof PlaygroundModuleUsage>).reduce((mapping, key) => {
-				mapping[`${type}.${key}`] = `usage.${key}`;
-				return mapping;
-			}, {}),
 			[`${type}.defaultStep`]: 'assistant.createDefaultStep',
 			[`${type}.httpSystems`]: 'assistant.askSystemsForHttp',
 			[`${type}.typeOrmDatasources`]: 'assistant.askTypeOrmDatasources',

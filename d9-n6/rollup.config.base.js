@@ -1,11 +1,31 @@
 import babel from '@rollup/plugin-babel';
 import eslint from '@rollup/plugin-eslint';
+import {createFilter} from '@rollup/pluginutils';
 // import tslint from 'rollup-plugin-tslint';
 import typescript from 'rollup-plugin-typescript2';
-import * as md from 'vite-plugin-markdown';
 
 export const buildConfig = (lint) => {
 	let isCircularImportFound = false;
+	const markdownPlugin = () => {
+		const include = (void 0);
+		const exclude = (void 0);
+		const filter = createFilter(include, exclude);
+		return {
+			name: 'vite:transform-md',
+			enforce: 'pre',
+			async transform(code, id) {
+				if (/\.md$/.test(id)) {
+					// Filters the filesystem for files to include/exclude. Includes all files by default.
+
+					if (!filter(id)) {
+						return null;
+					}
+					return {code: `const markdown = ${JSON.stringify(code)};\nexport {markdown};`}
+				}
+				return null;
+			}
+		}
+	};
 	return {
 		input: './src/index.tsx',
 		output: [
@@ -16,7 +36,7 @@ export const buildConfig = (lint) => {
 			lint ? eslint({exclude: ['../node_modules/**', 'node_modules/**', 'src/**/*.md']}) : null,
 			// lint ? tslint({ exclude: ['../node_modules/**', 'node_modules/**'] }) : null,
 			typescript({clean: true}), babel({babelHelpers: "bundled"}),
-			md.plugin({mode: [md.Mode.MARKDOWN]})
+			markdownPlugin()
 		].filter(x => x != null),
 		onwarn(warning, defaultHandler) {
 			if (warning.code === 'CIRCULAR_DEPENDENCY') {
