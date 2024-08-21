@@ -2,6 +2,16 @@ import {ExternalDefIndicator, NodeDef, registerWidget, Undefinable, VUtils} from
 import {Semantic, Widget} from '@rainbow-d9/n3';
 import {ReactNode} from 'react';
 import {registerStepDef, StepNodeConfigurer} from './configurable-model';
+import {
+	EngineLabelFactory,
+	EngineLinkFactory,
+	EngineNodeFactory,
+	EnginePortFactory,
+	registerLabelFactory,
+	registerLinkFactory,
+	registerNodeFactory,
+	registerPortFactory
+} from './diagram';
 import {registerUseBadge, registerUseLabel} from './labels';
 import {Playground} from './playground';
 import {PlaygroundModuleAssistant} from './types';
@@ -102,9 +112,30 @@ export interface StepDef {
 	badgeOfUse?: ReactNode;
 }
 
-export const registerSteps = (options: StepDef) => {
-	const {configurer, labelOfUse, badgeOfUse} = options;
-	registerUseLabel(configurer.use, labelOfUse);
-	registerUseBadge(configurer.use, badgeOfUse);
-	registerStepDef(configurer);
+/**
+ * call this before anything rendering
+ */
+export const registerSteps = (...steps: Array<StepDef>) => {
+	(steps || []).forEach(({configurer, labelOfUse, badgeOfUse}) => {
+		registerUseLabel(configurer.use, labelOfUse);
+		registerUseBadge(configurer.use, badgeOfUse);
+		registerStepDef(configurer);
+	});
+};
+
+export interface DiagramFactories {
+	nodes?: Array<EngineNodeFactory>;
+	ports?: Array<EnginePortFactory>;
+	links?: Array<EngineLinkFactory>;
+	labels?: Array<EngineLabelFactory>;
+}
+
+/**
+ * call this before anything rendering
+ */
+export const registerDiagramFactories = (factories: DiagramFactories) => {
+	registerNodeFactory(...(factories.nodes ?? []));
+	registerPortFactory(...(factories.ports ?? []));
+	registerLinkFactory(...(factories.links ?? []));
+	registerLabelFactory(...(factories.labels ?? []));
 };

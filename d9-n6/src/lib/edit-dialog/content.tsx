@@ -157,7 +157,7 @@ export const StepDialogContent = (props: { model: StepNodeModel }) => {
 
 	const {step: def, file} = nodeModel;
 	// create a configurable model from step def, and put into state
-	const [model] = useState(findStepDef(def.use).prepare(def));
+	const [model] = useState<ConfigurableModel>(findStepDef(def.use).prepare(def));
 	const forceUpdate = useForceUpdate();
 
 	// find step defs for editing

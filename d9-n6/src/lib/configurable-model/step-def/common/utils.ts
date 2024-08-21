@@ -118,7 +118,7 @@ export const createSubNodesOfSingleRoute = (options: CreateSubNodesOfSingleRoute
 			})
 			: (node: StepNodeModel) => previousNode.next(node);
 		return createStepNode(step, model.file, {
-			type: StepNodeEntityType.NORMAL, handlers, assistant, subOf: step,
+			type: StepNodeEntityType.NORMAL, handlers, assistant, subOf: model.step,
 			previousNode, linkPrevious,
 			appendNode, appendLink
 		});
