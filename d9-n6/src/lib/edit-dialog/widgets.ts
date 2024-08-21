@@ -58,6 +58,7 @@ export const EditDialogLayoutControllerHandle = styled.div.attrs<{ opened: boole
         }
     }
 `;
+// noinspection CssUnusedSymbol
 export const EditDialogContentContainer = styled.div.attrs({[DOM_KEY_WIDGET]: 'o23-playground-edit-dialog-content'})`
     display: grid;
     position: relative;
@@ -285,9 +286,12 @@ export const EditDialogHelpDocOpenHandle = styled.div.attrs<{ opened: boolean }>
     z-index: 1;
     transition: left ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION}, opacity ${CssVars.TRANSITION_DURATION} calc(${CssVars.TRANSITION_DURATION} / 2) ${CssVars.TRANSITION_TIMING_FUNCTION};
 
-    &[data-opened=false] + div[data-w=o23-playground-edit-dialog-help-doc-content] {
-        filter: blur(2px);
-        opacity: 0.7;
+    &[data-opened=false] {
+        backdrop-filter: blur(1.5px);
+
+        + div[data-w=o23-playground-edit-dialog-help-doc-content] {
+            opacity: 0.7;
+        }
     }
 
     &[data-opened=true] + div[data-w=o23-playground-edit-dialog-help-doc-content] {
@@ -350,7 +354,7 @@ export const HelpDocContainer = styled.div.attrs<{ width?: number }>(
     padding: ${PlaygroundCssVars.EDIT_DIALOG_HELP_DOC_PADDING};
     min-width: var(--min-width);
     overflow: auto;
-    transition: opacity ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION}, filter ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION};
+    transition: opacity ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION};
 `;
 export const NavigatorElementsContainer = styled.div.attrs({
 	[DOM_KEY_WIDGET]: 'o23-playground-edit-dialog-navigator-elements',
