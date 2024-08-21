@@ -1,10 +1,5 @@
 import {Undefinable} from '@rainbow-d9/n1';
-import {
-	ConditionalPipelineStepDef,
-	FileDef,
-	PipelineStepDef,
-	StandardPipelineStepRegisterKey
-} from '../../../definition';
+import {FileDef, PipelineStepDef, RoutesPipelineStepDef, StandardPipelineStepRegisterKey} from '../../../definition';
 import {StepNodeModel} from '../../../diagram';
 import {
 	ConfigurableElement,
@@ -23,41 +18,45 @@ import {
 	RouteTestStepDefModel
 } from '../common';
 
-export interface ConditionalStepDefModel extends CommonStepDefModel {
-	use: StandardPipelineStepRegisterKey.CONDITIONAL_SETS;
+export interface RoutesStepDefModel extends CommonStepDefModel {
+	use: StandardPipelineStepRegisterKey.ROUTES_SETS;
 }
 
-export const ConditionalStepDefs =
-	CommonStepDefs.createStepNodeConfigurer<ConditionalPipelineStepDef, ConditionalStepDefModel>({
-		use: StandardPipelineStepRegisterKey.CONDITIONAL_SETS,
+export const RoutesStepDefs =
+	CommonStepDefs.createStepNodeConfigurer<RoutesPipelineStepDef, RoutesStepDefModel>({
+		use: StandardPipelineStepRegisterKey.ROUTES_SETS,
 		ports: [{key: 'steps', port: CommonStepDefs.prebuiltPorts.steps}],
-		createSubNodes: CommonStepDefs.createConditionalSubNodesAndEndNode,
-		helpDocs: HelpDocs.conditionalStep
+		createSubNodes: CommonStepDefs.createRoutesSubNodesAndEndNode,
+		helpDocs: HelpDocs.routesStep
 	});
-registerStepDef(ConditionalStepDefs);
+registerStepDef(RoutesStepDefs);
 
-const getParentDef = (model: StepNodeModel): ConditionalPipelineStepDef => {
-	return model.getSubOf() as ConditionalPipelineStepDef;
+const getParentDef = (model: StepNodeModel): RoutesPipelineStepDef => {
+	return model.getSubOf() as RoutesPipelineStepDef;
+};
+type ArrayElement<ArrayType extends readonly unknown[]> = ArrayType extends readonly (infer ElementType)[] ? ElementType : never;
+const getRouteOfParentDef = (model: StepNodeModel): ArrayElement<RoutesPipelineStepDef['routes']> => {
+	const parentDef = getParentDef(model);
+	return parentDef.routes?.find(route => route.steps?.[0] === model.step);
 };
 const shouldReConfigure = (model: StepNodeModel): boolean => {
 	if (!model.isFirstSubStep()) {
 		return false;
 	}
-	const parentDef = getParentDef(model);
-	return (parentDef.steps ?? [])[0] === model.step;
+	return getRouteOfParentDef(model) != null;
 };
 
-export const ConditionalStepCheckReconfigurer: StepDefsReconfigurer = {
+export const RoutesStepCheckReconfigurer: StepDefsReconfigurer = {
 	prepare: (prepare: StepNodeConfigurer['prepare'], model: StepNodeModel): Undefinable<StepNodeConfigurer['prepare']> => {
 		if (!shouldReConfigure(model)) {
 			return (void 0);
 		}
 
-		const parentDef = getParentDef(model);
+		const routeDef = getRouteOfParentDef(model);
 		return (def: PipelineStepDef): ConfigurableModel => {
 			const model = prepare(def) as RouteTestStepDefModel;
 			model.temporary = model.temporary ?? {};
-			model.temporary.check = parentDef.check;
+			model.temporary.check = routeDef.check;
 			return model;
 		};
 	},
@@ -66,11 +65,11 @@ export const ConditionalStepCheckReconfigurer: StepDefsReconfigurer = {
 			return (void 0);
 		}
 
-		const parentDef = getParentDef(model);
+		const routeDef = getRouteOfParentDef(model);
 		return (model: ConfigurableModel, def: PipelineStepDef, file: FileDef, options: ConfirmNodeOptions): ConfigChangesConfirmed => {
 			const ret = confirm(model, def, file, options);
-			// TODO VALIDATE CHECK OF CONDITIONAL STEP
-			parentDef.check = (model as RouteTestStepDefModel).temporary?.check;
+			// TODO VALIDATE CHECK OF ROUTE STEP
+			routeDef.check = (model as RouteTestStepDefModel).temporary?.check;
 			return ret;
 		};
 	},
@@ -82,11 +81,11 @@ export const ConditionalStepCheckReconfigurer: StepDefsReconfigurer = {
 		return CommonStepDefs.reconfigurePropertiesWithRouteCheck(properties, model);
 	}
 };
-registerStepDefsReconfigurers(ConditionalStepCheckReconfigurer);
+registerStepDefsReconfigurers(RoutesStepCheckReconfigurer);
 registerFirstSubStepPortContainerFinds((step, parent) => {
-	if (parent.use === StandardPipelineStepRegisterKey.CONDITIONAL_SETS
-		&& (parent as ConditionalPipelineStepDef).steps?.[0] === step) {
-		return FirstSubStepPortForRouteTest;
+	if (parent.use !== StandardPipelineStepRegisterKey.ROUTES_SETS) {
+		return (void 0);
 	}
-	return (void 0);
+	const found = (parent as RoutesPipelineStepDef).routes?.some(route => route.steps?.[0] === step);
+	return found ? FirstSubStepPortForRouteTest : (void 0);
 });

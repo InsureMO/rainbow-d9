@@ -138,6 +138,12 @@ export interface ConditionalPipelineStepDef extends SetsLikePipelineStepDef {
 	otherwise?: Array<PipelineStepDef>;
 }
 
+export interface RoutesPipelineStepDef extends AllInPipelineStepDef {
+	use: StandardPipelineStepRegisterKey.ROUTES_SETS;
+	routes?: Array<{ check?: string; steps?: Array<PipelineStepDef> }>;
+	otherwise?: Array<PipelineStepDef>;
+}
+
 export interface TypeOrmPipelineStepDef extends AllInPipelineStepDef {
 	datasource?: string;
 	transaction?: string;

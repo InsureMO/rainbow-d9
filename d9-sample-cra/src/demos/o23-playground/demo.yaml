@@ -23,6 +23,26 @@ steps:
     otherwise:
       - name: "Otherwise #1"
         use: snippet
+    $diagram:
+      $foldSubSteps: true
+  - name: Routes
+    use: routes
+    routes:
+      - check: $factor.type == 'T1'
+        steps:
+          - name: "Do for T1 #1"
+            use: snippet
+          - name: "Do for T1 #2"
+            use: snippet
+      - check: $factor.type == 'T2'
+        steps:
+          - name: "Do for T2 #1"
+            use: snippet
+    otherwise:
+      - name: Either T1 or T2
+        use: snippet
+    $diagram:
+      $foldSubSteps: true
   - name: Auth
     use: sets
     steps:

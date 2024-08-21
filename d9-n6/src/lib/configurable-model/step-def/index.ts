@@ -12,6 +12,7 @@ export * from './async-sets';
 export * from './each';
 export * from './parallel';
 export * from './conditional';
+export * from './routes';
 
 export * from './typeorm';
 

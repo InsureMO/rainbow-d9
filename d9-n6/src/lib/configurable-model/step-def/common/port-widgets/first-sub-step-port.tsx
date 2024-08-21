@@ -5,7 +5,7 @@ import {Undefinable} from '@rainbow-d9/n1';
 import {CssVars, DOM_KEY_WIDGET} from '@rainbow-d9/n2';
 import React, {FC, ReactNode} from 'react';
 import styled from 'styled-components';
-import {ConditionalPipelineStepDef, PipelineStepDef, StandardPipelineStepRegisterKey} from '../../../../definition';
+import {PipelineStepDef} from '../../../../definition';
 import {IncomingPortModel, StepNodeModel} from '../../../../diagram';
 import {RouteTest} from '../../../../icons';
 import {PlaygroundCssVars} from '../../../../widgets';
@@ -92,15 +92,7 @@ export const FirstSubStepPortForRouteTest = (props: { children: ReactNode }) => 
 	</FirstSubStepPortForRuleCheckContainer>;
 };
 
-const FirstSubStepPortContainerFinds: Array<FirstSubStepPortContainerFind> = [
-	(step, parent) => {
-		if (parent.use === StandardPipelineStepRegisterKey.CONDITIONAL_SETS
-			&& (parent as ConditionalPipelineStepDef).steps?.[0] === step) {
-			return FirstSubStepPortForRouteTest;
-		}
-		return (void 0);
-	}
-];
+const FirstSubStepPortContainerFinds: Array<FirstSubStepPortContainerFind> = [];
 export const registerFirstSubStepPortContainerFinds = (...finds: Array<FirstSubStepPortContainerFind>) => {
 	(finds || []).forEach(find => {
 		if (!FirstSubStepPortContainerFinds.includes(find)) {

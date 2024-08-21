@@ -6,9 +6,11 @@ import {
 	DownloadFile,
 	DownloadImage,
 	FitCanvas,
+	FoldAllNodes,
 	Max,
 	Min,
 	OriginSize,
+	UnfoldAllNodes,
 	UploadFile,
 	Window,
 	Zen,
@@ -54,7 +56,7 @@ export const Toolbar = (props: ToolbarProps) => {
 		};
 	}, []);
 	useEffect(() => {
-		const wrapper = ref.current.parentElement.parentElement as HTMLDivElement;
+		const wrapper = ref.current.parentElement as HTMLDivElement;
 		switch (true) {
 			case state.zen:
 				wrapper.setAttribute('data-diagram-work-mode', 'zen');
@@ -146,21 +148,28 @@ export const Toolbar = (props: ToolbarProps) => {
 		document.exitFullscreen && document.exitFullscreen();
 		setState({zen: false, max: false});
 	};
+	const onFoldAllNodesClicked = () => {
+	};
+	const onUnfoldAllNodesClicked = () => {
+	};
 
-	return <EditorToolbar ref={ref}>
+	return <EditorToolbar columns={state.zen ? 5 : 6} ref={ref}>
 		<EditorToolbarButton onClick={onZoomInClicked}><ZoomIn/></EditorToolbarButton>
 		<EditorToolbarButton onClick={onZoomOutClicked}><ZoomOut/></EditorToolbarButton>
 		<EditorToolbarButton onClick={onOriginSizeClicked}><OriginSize/></EditorToolbarButton>
 		<EditorToolbarButton onClick={onFitCanvasClicked}><FitCanvas/></EditorToolbarButton>
+		{state.max ? null : <EditorToolbarButton onClick={onMaxClicked}><Max/></EditorToolbarButton>}
+		{(state.max && !state.zen) ? <EditorToolbarButton onClick={onMinClicked}><Min/></EditorToolbarButton> : null}
+		{state.zen ? null : <EditorToolbarButton onClick={onZenClicked}><Zen/></EditorToolbarButton>}
+		{state.zen ? <EditorToolbarButton onClick={onWindowClicked}><Window/></EditorToolbarButton> : null}
+		<span data-absolute={state.zen}/>
+		<EditorToolbarButton onClick={onFoldAllNodesClicked}><FoldAllNodes/></EditorToolbarButton>
+		<EditorToolbarButton onClick={onUnfoldAllNodesClicked}><UnfoldAllNodes/></EditorToolbarButton>
 		{allowDownloadImage
 			? <EditorToolbarButton onClick={onDownloadImageClicked}><DownloadImage/></EditorToolbarButton> : null}
 		{allowDownloadFile
 			? <EditorToolbarButton onClick={onDownloadFileClicked}><DownloadFile/></EditorToolbarButton> : null}
 		{allowUploadFile
 			? <EditorToolbarButton onClick={onUploadFileClicked}><UploadFile/></EditorToolbarButton> : null}
-		{state.max ? null : <EditorToolbarButton onClick={onMaxClicked}><Max/></EditorToolbarButton>}
-		{(state.max && !state.zen) ? <EditorToolbarButton onClick={onMinClicked}><Min/></EditorToolbarButton> : null}
-		{state.zen ? null : <EditorToolbarButton onClick={onZenClicked}><Zen/></EditorToolbarButton>}
-		{state.zen ? <EditorToolbarButton onClick={onWindowClicked}><Window/></EditorToolbarButton> : null}
 	</EditorToolbar>;
 };

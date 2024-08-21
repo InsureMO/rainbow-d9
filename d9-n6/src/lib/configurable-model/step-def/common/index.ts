@@ -1,10 +1,17 @@
+import {Undefinable, VUtils} from '@rainbow-d9/n1';
 import {AllInPipelineStepDef, FileDef, PipelineStepDef} from '../../../definition';
-import {ConfigurableModel} from '../../../edit-dialog';
+import {StepNodeModel} from '../../../diagram';
+import {ConfigurableElement, ConfigurableModel} from '../../../edit-dialog';
+import {HelpDocs} from '../../../help-docs';
+import {Labels} from '../../../labels';
+import {PlaygroundCssVars} from '../../../widgets';
+import {createCheckOrMissBadge, createSnippetEditor} from '../../common';
 import {ConfigChangesConfirmed, ConfirmNodeOptions, StepNodeConfigurer} from '../../types';
 import {confirm} from './confirm';
 import {
 	createConditionalSubNodesAndEndNode,
 	createParallelSubNodesAndEndNode,
+	createRoutesSubNodesAndEndNode,
 	createSetsLikeSubNodesAndEndNode,
 	createSubNodes,
 	createSubNodesAndEndNode
@@ -13,6 +20,7 @@ import {discard} from './discard';
 import {
 	createMainContentElement,
 	createSwitchableSnippetElement,
+	ELEMENT_ANCHOR_USE,
 	elementErrorHandles,
 	elementFromInputGroup,
 	elementName,
@@ -32,7 +40,7 @@ import {
 } from './ports';
 import {prepare} from './prepare';
 import {switchUse} from './switch-use';
-import {CommonStepDefModel, CommonStepDefsType, CreateStepNodeConfigurerOptions} from './types';
+import {CommonStepDefModel, CommonStepDefsType, CreateStepNodeConfigurerOptions, RouteTestStepDefModel} from './types';
 
 export * from './types';
 export * from './utils';
@@ -70,7 +78,8 @@ export const CommonStepDefs: CommonStepDefsType = {
 		]
 	},
 	createSubNodes, createSubNodesAndEndNode,
-	createSetsLikeSubNodesAndEndNode, createParallelSubNodesAndEndNode, createConditionalSubNodesAndEndNode,
+	createSetsLikeSubNodesAndEndNode, createParallelSubNodesAndEndNode,
+	createConditionalSubNodesAndEndNode, createRoutesSubNodesAndEndNode,
 	findSubPorts,
 	// element create
 	createMainContentElement,
@@ -149,6 +158,33 @@ export const CommonStepDefs: CommonStepDefsType = {
 			findSubPorts: findSubPorts ?? CommonStepDefs.findSubPorts,
 			helpDocs
 		};
+	},
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
+	reconfigurePropertiesWithRouteCheck: (properties: Array<ConfigurableElement>, _model: StepNodeModel): Undefinable<Array<ConfigurableElement>> => {
+		const index = properties.findIndex(prop => prop.anchor === ELEMENT_ANCHOR_USE);
+		const beforeAndUse = properties.slice(0, index + 1);
+		const after = properties.slice(index + 1);
+		return [
+			...beforeAndUse,
+			{
+				code: 'route-test', label: Labels.StepRouteTest, anchor: 'route-test',
+				children: [{
+					code: 'route-check', label: Labels.StepRouteCheck, anchor: 'route-check',
+					badge: createCheckOrMissBadge<RouteTestStepDefModel>({check: model => VUtils.isNotBlank(model.temporary?.check)}),
+					editor: createSnippetEditor<RouteTestStepDefModel>({
+						getValue: model => model.temporary?.check,
+						setValue: (model, value) => {
+							model.temporary = model.temporary ?? {};
+							model.temporary.check = value;
+						},
+						height: PlaygroundCssVars.SNIPPET_ROUTE_CHECK_HEIGHT
+					}),
+					helpDoc: HelpDocs.stepRouteCheck
+				}],
+				group: true, collapsible: true
+			},
+			...after
+		];
 	}
 };
 

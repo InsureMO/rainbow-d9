@@ -84,10 +84,19 @@ export const EditorCanvasWrapper = styled.div.attrs<{
         height: 100%;
     }
 `;
-export const EditorToolbar = styled.div.attrs({[DOM_KEY_WIDGET]: 'o23-playground-editor-toolbar'})`
-    display: flex;
+// noinspection CssUnresolvedCustomProperty
+export const EditorToolbar = styled.div.attrs<{ columns: number }>(({columns}) => {
+	return {
+		[DOM_KEY_WIDGET]: 'o23-playground-editor-toolbar',
+		style: {
+			'--grid-columns': columns
+		}
+	};
+})<{ columns: number }>`
+    display: grid;
     position: absolute;
     align-items: center;
+    grid-template-columns: repeat(var(--grid-columns), 1fr);
     top: ${PlaygroundCssVars.EDITOR_TOOLBAR_GUTTER_SIZE};
     right: ${PlaygroundCssVars.EDITOR_TOOLBAR_GUTTER_SIZE};
     height: ${PlaygroundCssVars.EDITOR_TOOLBAR_HEIGHT};
@@ -95,14 +104,24 @@ export const EditorToolbar = styled.div.attrs({[DOM_KEY_WIDGET]: 'o23-playground
     border: ${PlaygroundCssVars.EDITOR_TOOLBAR_BORDER};
     background-color: ${CssVars.BACKGROUND_COLOR};
     overflow: hidden;
-    transition: border-color ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION};
+    opacity: 0.7;
+    transition: border-color ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION}, opacity ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION};
 
     &:hover {
+        opacity: 1;
         border-color: ${PlaygroundCssVars.EDITOR_TOOLBAR_BUTTON_ACTIVE_BACKGROUND_COLOR};
 
         > span[data-w=o23-playground-editor-toolbar-button]:not(:hover) {
             color: ${PlaygroundCssVars.EDITOR_TOOLBAR_BUTTON_ACTIVE_BACKGROUND_COLOR};
         }
+    }
+
+    > span[data-absolute=false] {
+        position: relative;
+    }
+
+    > span[data-absolute=true] {
+        position: absolute;
     }
 `;
 export const EditorToolbarButton = styled.span.attrs({[DOM_KEY_WIDGET]: 'o23-playground-editor-toolbar-button'})`
@@ -116,8 +135,16 @@ export const EditorToolbarButton = styled.span.attrs({[DOM_KEY_WIDGET]: 'o23-pla
     cursor: pointer;
     transition: color ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION}, background-color ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION};
 
-    &:not(:last-child) {
+    &:not(:last-child), &:not(:nth-child(6)) {
         border-right: ${PlaygroundCssVars.EDITOR_TOOLBAR_BORDER};
+    }
+
+    &:nth-child(-n + 6) {
+        border-bottom: ${PlaygroundCssVars.EDITOR_TOOLBAR_BORDER};
+    }
+
+    &:nth-child(8) {
+        border-left: ${PlaygroundCssVars.EDITOR_TOOLBAR_BORDER};
     }
 
     &:hover {

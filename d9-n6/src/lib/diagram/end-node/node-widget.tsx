@@ -22,7 +22,9 @@ export const EndNodeContainer = styled(NodeWrapper).attrs({
 		'--border': PlaygroundCssVars.NODE_END_BORDER,
 		'--background-color': PlaygroundCssVars.NODE_BACKGROUND
 	}
-})``;
+})`
+    cursor: default;
+`;
 export const EndNodeHeader = styled(NodeHeader).attrs({
 	[DOM_KEY_WIDGET]: 'o23-playground-end-node-header',
 	style: {

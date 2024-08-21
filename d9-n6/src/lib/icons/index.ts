@@ -21,6 +21,8 @@ export * from './snippet';
 export * from './steps';
 export * from './fold-sub-nodes';
 export * from './unfold-sub-nodes';
+export * from './fold-all-nodes';
+export * from './unfold-all-nodes';
 
 export * from './fit-canvas';
 export * from './origin-size';

@@ -4,6 +4,7 @@ import {
 	ConditionalPipelineStepDef,
 	PipelineStepDef,
 	PipelineStepDiagramDef,
+	RoutesPipelineStepDef,
 	SetsLikePipelineStepDef
 } from '../../../definition';
 import {HandledNodeModel, JoinEndNodeModel, StepNodeEntityType, StepNodeModel} from '../../../diagram';
@@ -158,8 +159,8 @@ export const shouldCreateSubNodes = (model: StepNodeModel): boolean => {
 	return true;
 };
 
-export const guardSubSteps = (property: string): ((model: StepNodeModel, options: CreateSubNodesOptions) => Array<PipelineStepDef>) => {
-	return (model: StepNodeModel, options: CreateSubNodesOptions): Array<PipelineStepDef> => {
+export const guardSubSteps = (property: string): ((model: Pick<StepNodeModel, 'step'>, options: CreateSubNodesOptions) => Array<PipelineStepDef>) => {
+	return (model: Pick<StepNodeModel, 'step'>, options: CreateSubNodesOptions): Array<PipelineStepDef> => {
 		const step = model.step as SetsLikePipelineStepDef;
 		const createDefaultStep = options.assistant.createDefaultStep;
 		const steps = step[property] ?? [];
@@ -240,6 +241,46 @@ export const createConditionalSubNodesAndEndNode: CommonStepDefsType['createCond
 				} else {
 					return [
 						stepsNode,
+						createSubNodesOfSingleRoute({
+							model, options,
+							askSteps: () => step.otherwise,
+							findPortFromModel: findStepsPortFromModel, createPortFromModel: createStepsPortFromModel,
+							askFirstLinkExtras: () => ({index: 1})
+						})
+					];
+				}
+			}
+		});
+	};
+
+export const createRoutesSubNodesAndEndNode: CommonStepDefsType['createRoutesSubNodesAndEndNode'] =
+	(model: StepNodeModel, options: CreateSubNodesOptions): Undefinable<HandledNodeModel> => {
+		return createSubNodesAndEndNode(model, {
+			...options,
+			createSpecificSubNodes: (model: StepNodeModel, options: CreateSubNodesOptions): Undefinable<Array<HandledNodeModel>> => {
+				const should = shouldCreateSubNodes(model);
+				if (!should) {
+					return (void 0);
+				}
+
+				const routeNodes = (model.step as RoutesPipelineStepDef).routes?.map(route => {
+					// fake route as a step def
+					const steps = guardSetsLikeSteps({step: route as PipelineStepDef}, options);
+					return createSubNodesOfSingleRoute({
+						model, options,
+						askSteps: () => steps,
+						findPortFromModel: findStepsPortFromModel, createPortFromModel: createStepsPortFromModel,
+						askFirstLinkExtras: () => ({index: 0})
+					});
+				});
+
+				const step = model.step as RoutesPipelineStepDef;
+				const otherwise = step.otherwise;
+				if (otherwise == null || otherwise.length === 0) {
+					return routeNodes;
+				} else {
+					return [
+						...routeNodes,
 						createSubNodesOfSingleRoute({
 							model, options,
 							askSteps: () => step.otherwise,

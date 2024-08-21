@@ -32,7 +32,9 @@ export const JoinEndNodeContainer = styled(NodeWrapper).attrs({
 		'--border': PlaygroundCssVars.NODE_JOIN_END_BORDER,
 		'--background-color': PlaygroundCssVars.NODE_BACKGROUND
 	}
-})``;
+})`
+    cursor: default;
+`;
 export const JoinEndNodeHeader = styled(NodeHeader).attrs({
 	[DOM_KEY_WIDGET]: 'o23-playground-join-end-node-header',
 	style: {
