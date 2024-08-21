@@ -1,7 +1,12 @@
 import {ExternalDefIndicator, NodeDef, registerWidget, Undefinable, VUtils} from '@rainbow-d9/n1';
 import {Semantic, Widget} from '@rainbow-d9/n3';
 import {ReactNode} from 'react';
-import {registerStepDef, StepNodeConfigurer} from './configurable-model';
+import {
+	FirstSubStepPortContainerFind,
+	registerFirstSubStepPortContainerFinds,
+	registerStepDef,
+	StepNodeConfigurer
+} from './configurable-model';
 import {
 	EngineLabelFactory,
 	EngineLinkFactory,
@@ -12,6 +17,7 @@ import {
 	registerNodeFactory,
 	registerPortFactory
 } from './diagram';
+import {registerStepDefsReconfigurers, StepDefsReconfigurer} from './edit-dialog';
 import {registerUseBadge, registerUseLabel} from './labels';
 import {Playground} from './playground';
 import {PlaygroundModuleAssistant} from './types';
@@ -138,4 +144,20 @@ export const registerDiagramFactories = (factories: DiagramFactories) => {
 	registerPortFactory(...(factories.ports ?? []));
 	registerLinkFactory(...(factories.links ?? []));
 	registerLabelFactory(...(factories.labels ?? []));
+};
+
+export interface PlaygroundConfig extends DiagramFactories {
+	firstSubStepPortContainerFinds?: Array<FirstSubStepPortContainerFind>;
+	stepDefsPropertiesConfigurers?: Array<StepDefsReconfigurer>;
+	steps?: Array<StepDef>;
+}
+
+/**
+ * initialize the playground
+ */
+export const initialize = (config: PlaygroundConfig) => {
+	registerDiagramFactories(config);
+	registerSteps(...(config.steps ?? []));
+	registerStepDefsReconfigurers(...(config.stepDefsPropertiesConfigurers ?? []));
+	registerFirstSubStepPortContainerFinds(...(config.firstSubStepPortContainerFinds ?? []));
 };

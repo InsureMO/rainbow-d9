@@ -101,10 +101,12 @@ const FirstSubStepPortContainerFinds: Array<FirstSubStepPortContainerFind> = [
 		return (void 0);
 	}
 ];
-export const registerFirstSubStepPortContainerFind = (find: FirstSubStepPortContainerFind) => {
-	if (!FirstSubStepPortContainerFinds.includes(find)) {
-		FirstSubStepPortContainerFinds.push(find);
-	}
+export const registerFirstSubStepPortContainerFinds = (...finds: Array<FirstSubStepPortContainerFind>) => {
+	(finds || []).forEach(find => {
+		if (!FirstSubStepPortContainerFinds.includes(find)) {
+			FirstSubStepPortContainerFinds.push(find);
+		}
+	});
 };
 export const findFirstSubStepPortContainer = (step: PipelineStepDef, parent: PipelineStepDef): FirstSubStepPortContainerFC => {
 	for (const find of FirstSubStepPortContainerFinds) {

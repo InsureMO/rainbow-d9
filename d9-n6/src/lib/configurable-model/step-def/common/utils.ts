@@ -91,7 +91,6 @@ export interface CreateSubNodesOfSingleRouteOptions {
 	options: CreateSubNodesOptions;
 	findPortFromModel: FindPortFromModel;
 	createPortFromModel: CreatePortFromModel;
-	askFirstLinkCreate?: (model: StepNodeModel) => CreateLinkFromParent;
 	askFirstLinkExtras?: AskFirstLinkExtras;
 }
 
@@ -102,14 +101,14 @@ export const createSubNodesOfSingleRoute = (options: CreateSubNodesOfSingleRoute
 	const {
 		model, askSteps,
 		options: {appendNode, appendLink, handlers, assistant},
-		findPortFromModel, createPortFromModel, askFirstLinkCreate, askFirstLinkExtras
+		findPortFromModel, createPortFromModel, askFirstLinkExtras
 	} = options;
 	const steps = askSteps();
 	if (steps == null || steps.length === 0) {
 		return (void 0);
 	}
 
-	const createLinkFromModel = (askFirstLinkCreate ?? askFirstLinkFromParentCreate)(model);
+	const createLinkFromModel = askFirstLinkFromParentCreate(model);
 	const previousNode: HandledNodeModel = model;
 	return (steps as Array<PipelineStepDef>).reduce((previousNode, step) => {
 		const linkPrevious = previousNode === model

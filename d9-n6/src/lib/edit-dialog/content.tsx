@@ -1,6 +1,7 @@
-import {useForceUpdate, useThrottler} from '@rainbow-d9/n1';
+import {Undefinable, useForceUpdate, useThrottler} from '@rainbow-d9/n1';
 import React, {Fragment, ReactNode, useEffect, useRef, useState} from 'react';
-import {findStepDef} from '../configurable-model';
+import {findStepDef, StepNodeConfigurer} from '../configurable-model';
+import {PipelineStepDef} from '../definition';
 import {StepNodeModel} from '../diagram';
 import {Accept, Back} from '../icons';
 import {Labels} from '../labels';
@@ -152,29 +153,89 @@ export const StepUseHandler = (props: { repaint: () => void }) => {
 
 	return <Fragment/>;
 };
-export const StepDialogContent = (props: { model: StepNodeModel }) => {
-	const {model: nodeModel} = props;
 
-	const {step: def, file} = nodeModel;
+export interface StepDefsReconfigurer<F extends PipelineStepDef = PipelineStepDef, M extends ConfigurableModel = ConfigurableModel> {
+	prepare: (prepare: StepNodeConfigurer<F, M>['prepare'], model: StepNodeModel) => Undefinable<StepNodeConfigurer<F, M>['prepare']>;
+	confirm: (confirm: StepNodeConfigurer<F, M>['confirm'], model: StepNodeModel) => Undefinable<StepNodeConfigurer<F, M>['confirm']>;
+	discard?: (discard: StepNodeConfigurer<F, M>['discard'], model: StepNodeModel) => Undefinable<StepNodeConfigurer<F, M>['discard']>;
+	/**
+	 * return undefined when not reconfigured
+	 */
+	properties: (properties: Array<ConfigurableElement>, model: StepNodeModel) => Undefinable<Array<ConfigurableElement>>;
+}
+
+const StepDefsReconfigurers: Array<StepDefsReconfigurer> = [];
+export const registerStepDefsReconfigurers = (...configurers: Array<StepDefsReconfigurer>) => {
+	(configurers || []).forEach(configurer => {
+		if (!StepDefsReconfigurers.includes(configurer)) {
+			StepDefsReconfigurers.push(configurer);
+		}
+	});
+};
+
+const reconfigureStepDefProperties = (properties: Array<ConfigurableElement>, model: StepNodeModel): Array<ConfigurableElement> => {
+	for (const reconfigurer of StepDefsReconfigurers) {
+		const reconfigured = reconfigurer.properties(properties, model);
+		if (reconfigured != null) {
+			return reconfigured;
+		}
+	}
+	return properties;
+};
+const reconfigureStepDefPrepare = <F extends PipelineStepDef = PipelineStepDef, M extends ConfigurableModel = ConfigurableModel>(prepare: StepNodeConfigurer<F, M>['prepare'], model: StepNodeModel): StepNodeConfigurer<F, M>['prepare'] => {
+	for (const reconfigurer of StepDefsReconfigurers) {
+		const reconfigured = reconfigurer.prepare(prepare, model);
+		if (reconfigured != null) {
+			return reconfigured;
+		}
+	}
+	return prepare;
+};
+const reconfigureStepDefConfirm = <F extends PipelineStepDef = PipelineStepDef, M extends ConfigurableModel = ConfigurableModel>(confirm: StepNodeConfigurer<F, M>['confirm'], model: StepNodeModel): StepNodeConfigurer<F, M>['confirm'] => {
+	for (const reconfigurer of StepDefsReconfigurers) {
+		const reconfigured = reconfigurer.confirm(confirm, model);
+		if (reconfigured != null) {
+			return reconfigured;
+		}
+	}
+	return confirm;
+};
+const reconfigureStepDefDiscard = <F extends PipelineStepDef = PipelineStepDef, M extends ConfigurableModel = ConfigurableModel>(discard: StepNodeConfigurer<F, M>['discard'], model: StepNodeModel): StepNodeConfigurer<F, M>['discard'] => {
+	for (const reconfigurer of StepDefsReconfigurers) {
+		const reconfigured = reconfigurer.discard(discard, model);
+		if (reconfigured != null) {
+			return reconfigured;
+		}
+	}
+	return discard;
+};
+
+export const StepDialogContent = (props: { model: StepNodeModel }) => {
+	const {model} = props;
+
+	const {step: def, file} = model;
 	// create a configurable model from step def, and put into state
-	const [model] = useState<ConfigurableModel>(findStepDef(def.use).prepare(def));
+	const [configurableModel] = useState<ConfigurableModel>(reconfigureStepDefPrepare(findStepDef(def.use).prepare, model)(def));
 	const forceUpdate = useForceUpdate();
 
 	// find step defs for editing
-	const {use} = model;
+	const {use} = configurableModel;
 	const StepDefs = findStepDef(use);
 
 	const onConfirm = (model: ConfigurableModel) => {
-		return StepDefs.confirm(model, def, file, {
-			handlers: nodeModel.handlers, assistant: nodeModel.assistant
+		return reconfigureStepDefConfirm(StepDefs.confirm, model)(model, def, file, {
+			handlers: model.handlers, assistant: model.assistant
 		});
 	};
-	const onDiscard = (model: ConfigurableModel) => StepDefs.discard(model);
+	const onDiscard = (model: ConfigurableModel) => {
+		reconfigureStepDefDiscard(StepDefs.discard, model)(model);
+	};
+	const elements = reconfigureStepDefProperties(StepDefs.properties, model);
 
-	return <DialogContent model={model}
-	                      helpDoc={StepDefs.helpDocs} elements={StepDefs.properties}
+	return <DialogContent model={configurableModel}
+	                      helpDoc={StepDefs.helpDocs} elements={elements}
 	                      confirm={onConfirm} discard={onDiscard}
-	                      assistant={nodeModel.assistant}>
+	                      assistant={model.assistant}>
 		<StepUseHandler repaint={forceUpdate}/>
 	</DialogContent>;
 };
