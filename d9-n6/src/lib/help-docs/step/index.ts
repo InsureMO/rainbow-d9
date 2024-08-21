@@ -6,12 +6,14 @@ import {markdown as stepFromInput} from './from-input.md';
 import {markdown as stepIOTransformer} from './io-transformer.md';
 import {markdown as stepMergeToRequest} from './merge.md';
 import {markdown as stepName} from './name.md';
+import {markdown as stepRouteCheck} from './route-check.md';
 import {markdown as stepToOutput} from './to-output.md';
 import {markdown as stepUncatchableErrorHandle} from './uncatchable-error-handle.md';
 import {markdown as stepUse} from './use.md';
 
 export const docs = {
 	stepName, stepUse,
+	stepRouteCheck,
 	stepFromInput, stepToOutput, stepMergeToRequest,
 	stepCatchableErrorHandle, stepUncatchableErrorHandle,
 	stepExposedErrorHandle, stepAnyErrorHandle,

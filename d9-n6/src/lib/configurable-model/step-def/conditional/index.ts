@@ -1,4 +1,4 @@
-import {Undefinable} from '@rainbow-d9/n1';
+import {Undefinable, VUtils} from '@rainbow-d9/n1';
 import {
 	ConditionalPipelineStepDef,
 	FileDef,
@@ -13,6 +13,9 @@ import {
 	StepDefsReconfigurer
 } from '../../../edit-dialog';
 import {HelpDocs} from '../../../help-docs';
+import {Labels} from '../../../labels';
+import {PlaygroundCssVars} from '../../../widgets';
+import {createCheckOrMissBadge, createSnippetEditor} from '../../common';
 import {ConfigChangesConfirmed, ConfirmNodeOptions, StepNodeConfigurer} from '../../types';
 import {registerStepDef} from '../all-step-defs';
 import {CommonStepDefModel, CommonStepDefs, RouteTestStepDefModel} from '../common';
@@ -36,7 +39,7 @@ const getParentDef = (model: StepNodeModel): ConditionalPipelineStepDef => {
 	return model.getSubOf() as ConditionalPipelineStepDef;
 };
 const shouldReConfigure = (model: StepNodeModel): boolean => {
-	if (model.isFirstSubStep()) {
+	if (!model.isFirstSubStep()) {
 		return false;
 	}
 	const parentDef = getParentDef(model);
@@ -75,15 +78,28 @@ export const ConditionalStepCheckReconfigurer: StepDefsReconfigurer = {
 			return (void 0);
 		}
 
-		// TODO
 		const index = properties.findIndex(prop => prop.anchor === ELEMENT_ANCHOR_USE);
 		const beforeAndUse = properties.slice(0, index + 1);
 		const after = properties.slice(index + 1);
 		return [
 			...beforeAndUse,
-			// {
-			//
-			// },
+			{
+				code: 'route-test', label: Labels.StepRouteTest, anchor: 'route-test',
+				children: [{
+					code: 'route-check', label: Labels.StepRouteCheck, anchor: 'route-check',
+					badge: createCheckOrMissBadge<RouteTestStepDefModel>({check: model => VUtils.isNotBlank(model.temporary?.check)}),
+					editor: createSnippetEditor<RouteTestStepDefModel>({
+						getValue: model => model.temporary?.check,
+						setValue: (model, value) => {
+							model.temporary = model.temporary ?? {};
+							model.temporary.check = value;
+						},
+						height: PlaygroundCssVars.SNIPPET_ROUTE_CHECK_HEIGHT
+					}),
+					helpDoc: HelpDocs.stepRouteCheck
+				}],
+				group: true, collapsible: true
+			},
 			...after
 		];
 	}

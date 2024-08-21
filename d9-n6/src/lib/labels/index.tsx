@@ -52,6 +52,8 @@ export const Labels = {
 	StepMergeReplace: <IntlLabel keys={['o23', 'step', 'merge-replace']} value="Replace Merge"/>,
 	StepMergeAsProperty: <IntlLabel keys={['o23', 'step', 'merge-as-property']} value="Merge As"/>,
 	StepMainContent: <IntlLabel keys={['o23', 'step', 'main-content']} value="Main Task"/>,
+	StepRouteTest: <IntlLabel keys={['o23', 'step', 'route-test']} value="Route Test"/>,
+	StepRouteCheck: <IntlLabel keys={['o23', 'step', 'route-check']} value="Check"/>,
 	StepSteps: <IntlLabel keys={['o23', 'step', 'sets', 'steps']} value="Sub Steps"/>,
 	StepHandleCatchableError: <IntlLabel keys={['o23', 'step', 'error-handles', 'catchable']}
 	                                     value="Catchable Errors"/>,

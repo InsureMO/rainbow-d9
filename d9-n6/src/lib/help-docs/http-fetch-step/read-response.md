@@ -8,3 +8,5 @@ Read HTTP response. The following parameters can be used during the build proces
 
 This function could return anything. It is important to note that the response body will only be read if the response status is in the
 normal range (`1xx`, `2xx`, `3xx`); otherwise, it will skip to the error handling.
+
+> It is an async function, so `await` is available inside.

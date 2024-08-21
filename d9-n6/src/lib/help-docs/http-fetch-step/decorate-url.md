@@ -9,3 +9,5 @@ Reprocess the endpoint URL read from the environment. The following parameters c
 
 Should return the final URL to be used for the HTTP request. If this snippet is not defined, then use the URL configured in
 the environment variables for access.
+
+> It is a sync function, so `await` is not available inside.

@@ -9,3 +9,5 @@ to a string. `null` and `undefined` essentially represent the absence of an HTTP
 is to use `$factor` as the HTTP body after processing it accordingly.
 
 > Regardless, this part can be configured, but in scenarios where the body is not used, the configured snippet will be ignored.
+
+> It is a sync function, so `await` is not available inside.
