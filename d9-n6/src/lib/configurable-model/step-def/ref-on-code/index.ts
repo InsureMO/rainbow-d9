@@ -7,14 +7,13 @@ import {
 	RefStepPipelineStepDef,
 	StandardPipelineStepRegisterKey
 } from '../../../definition';
-import {ConfigurableElementAnchor} from '../../../edit-dialog';
 import {HelpDocs} from '../../../help-docs';
 import {Labels} from '../../../labels';
 import {PlaygroundModuleAssistant} from '../../../types';
 import {createCheckOrMissBadge, createDropdownOnAssistantEditor, createPrePortOnAssistantWithKey} from '../../common';
 import {StepNodeConfigurer} from '../../types';
 import {registerStepDef} from '../all-step-defs';
-import {AndConfirmCommit, CommonStepDefModel, CommonStepDefs} from '../common';
+import {AndConfirmReturned, CommonStepDefModel, CommonStepDefs} from '../common';
 
 export interface RefOnCodeStepDefModel extends CommonStepDefModel {
 	code?: string;
@@ -36,8 +35,8 @@ export const createRefOnCodeStepDefs =
 			prepare: ['and', (def: F, model: M) => model.code = def.code],
 			switchUse: ['keep', ['code']],
 			// eslint-disable-next-line @typescript-eslint/no-unused-vars
-			confirm: ['and', (model: M, def: F, _file, _options): ConfigurableElementAnchor | AndConfirmCommit => {
-				// TODO VALIDATE REF CODE
+			confirm: ['and', (model: M, def: F, _file, _options): AndConfirmReturned => {
+				// TODO VALIDATE REF CODE OF REF ON CODE STEPS
 				return () => def.code = (model.code ?? '').trim();
 			}],
 			properties: [

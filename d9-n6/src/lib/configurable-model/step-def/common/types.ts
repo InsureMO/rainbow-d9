@@ -4,7 +4,7 @@ import {ReactNode} from 'react';
 import {AllInPipelineStepDef, FileDef, PipelineStepDef} from '../../../definition';
 import {HandledNodeModel, StepNodeModel} from '../../../diagram';
 import {ConfigurableElement, ConfigurableElementAnchor, ConfigurableModel} from '../../../edit-dialog';
-import {ConfirmNodeOptions, CreateSubNodesOptions, StepNodeConfigurer} from '../../types';
+import {ConfigChangesConfirmed, ConfirmNodeOptions, CreateSubNodesOptions, StepNodeConfigurer} from '../../types';
 
 export enum MergeType {
 	REPLACE, UNBOX, MERGE_AS_PROPERTY
@@ -32,6 +32,15 @@ export interface CommonStepDefModel extends ConfigurableModel, PipelineStepDef {
 		useErrorHandlesForUncatchable?: ErrorHandleType;
 		useErrorHandlesForExposed?: ErrorHandleType;
 		useErrorHandlesForAny?: ErrorHandleType;
+	};
+}
+
+/**
+ * any step def model with a route test check snippet
+ */
+export interface RouteTestStepDefModel extends CommonStepDefModel {
+	temporary?: CommonStepDefModel['temporary'] & {
+		check?: string;
 	};
 }
 
@@ -97,7 +106,8 @@ export interface SwitchableSnippetElementOptions<M extends CommonStepDefModel> {
 
 export type AndPrepare<F extends AllInPipelineStepDef, M extends CommonStepDefModel> = (def: F, model: M) => void;
 export type AndConfirmCommit = () => void;
-export type AndConfirm<F extends AllInPipelineStepDef, M extends CommonStepDefModel> = (model: M, def: F, file: FileDef, options: ConfirmNodeOptions) => ConfigurableElementAnchor | AndConfirmCommit;
+export type AndConfirmReturned = Array<ConfigurableElementAnchor> | AndConfirmCommit
+export type AndConfirm<F extends AllInPipelineStepDef, M extends CommonStepDefModel> = (model: M, def: F, file: FileDef, options: ConfirmNodeOptions) => AndConfirmReturned;
 
 export interface CreateStepNodeConfigurerOptions<F extends AllInPipelineStepDef, M extends CommonStepDefModel> {
 	use: F['use'];
@@ -120,7 +130,7 @@ export interface CommonStepDefsType
 	// actions
 	prepare: <F extends AllInPipelineStepDef, M extends CommonStepDefModel>(def: F, and?: AndPrepare<F, M>) => M;
 	switchUse: (model: ConfigurableModel, keptPropNames: Array<string>, originalUse: PipelineStepDef['use']) => void;
-	confirm: <F extends AllInPipelineStepDef, M extends CommonStepDefModel>(model: M, def: F, file: FileDef, options: ConfirmNodeOptions, and?: AndConfirm<F, M>) => ConfigurableElementAnchor | true;
+	confirm: <F extends AllInPipelineStepDef, M extends CommonStepDefModel>(model: M, def: F, file: FileDef, options: ConfirmNodeOptions, and?: AndConfirm<F, M>) => ConfigChangesConfirmed;
 	// nodes
 	createSubNodes: (node: StepNodeModel, options: CreateSubNodesOptions) => Undefinable<Array<HandledNodeModel>>;
 	createSubNodesAndEndNode: (node: StepNodeModel, options: CreateSubNodesAndEndNodeOptions) => Undefinable<HandledNodeModel>;

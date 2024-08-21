@@ -7,13 +7,13 @@ import {
 	PipelineStepDef,
 	StandardPipelineStepRegisterKey
 } from '../../../definition';
-import {ConfigurableElementAnchor, ConfigurableModel} from '../../../edit-dialog';
+import {ConfigurableModel} from '../../../edit-dialog';
 import {HelpDocs} from '../../../help-docs';
 import {Labels} from '../../../labels';
 import {createPrePortValueOrLabelWithKey} from '../../common';
 import {StepNodeConfigurer} from '../../types';
 import {registerStepDef} from '../all-step-defs';
-import {AndConfirmCommit, CommonStepDefs} from '../common';
+import {AndConfirmReturned, CommonStepDefs} from '../common';
 import {elementRemoteApi} from './element-remote-api';
 import {elementRemoteRequest} from './element-remote-request';
 import {elementRemoteResponse} from './element-remote-response';
@@ -94,7 +94,7 @@ if (handle == null) {
 			return model;
 		}],
 		// eslint-disable-next-line @typescript-eslint/no-unused-vars
-		confirm: ['and', (model: M, def: F, _file, _options): ConfigurableElementAnchor | AndConfirmCommit => {
+		confirm: ['and', (model: M, def: F, _file, _options): AndConfirmReturned => {
 			return () => {
 				def.system = VUtils.asUndefinedWhenBlank(model.system);
 				def.endpoint = VUtils.asUndefinedWhenBlank(model.endpoint);

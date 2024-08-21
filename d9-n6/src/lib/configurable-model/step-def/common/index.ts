@@ -1,6 +1,6 @@
 import {AllInPipelineStepDef, FileDef, PipelineStepDef} from '../../../definition';
-import {ConfigurableElementAnchor, ConfigurableModel} from '../../../edit-dialog';
-import {ConfirmNodeOptions, StepNodeConfigurer} from '../../types';
+import {ConfigurableModel} from '../../../edit-dialog';
+import {ConfigChangesConfirmed, ConfirmNodeOptions, StepNodeConfigurer} from '../../types';
 import {confirm} from './confirm';
 import {
 	createConditionalSubNodesAndEndNode,
@@ -123,12 +123,12 @@ export const CommonStepDefs: CommonStepDefsType = {
 					case 'replace':
 						return func;
 					case 'and':
-						return (model: M, def: F, file: FileDef, options: ConfirmNodeOptions): ConfigurableElementAnchor | true => {
+						return (model: M, def: F, file: FileDef, options: ConfirmNodeOptions): ConfigChangesConfirmed => {
 							return CommonStepDefs.confirm(model, def, file, options, func);
 						};
 					default:
 						console.warn(`No confirm defined for step[${use}], use default CommonStepDefs.confirm.`);
-						return (model: M, def: F, file: FileDef, options: ConfirmNodeOptions): ConfigurableElementAnchor | true => {
+						return (model: M, def: F, file: FileDef, options: ConfirmNodeOptions): ConfigChangesConfirmed => {
 							return CommonStepDefs.confirm(model, def, file, options);
 						};
 				}

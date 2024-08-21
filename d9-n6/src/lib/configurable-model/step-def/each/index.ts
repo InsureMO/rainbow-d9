@@ -1,11 +1,10 @@
 import {VUtils} from '@rainbow-d9/n1';
 import {EachPipelineStepDef, StandardPipelineStepRegisterKey} from '../../../definition';
-import {ConfigurableElementAnchor} from '../../../edit-dialog';
 import {HelpDocs} from '../../../help-docs';
 import {Labels} from '../../../labels';
 import {createCheckOrUseDefaultBadge, createStrEditor} from '../../common';
 import {registerStepDef} from '../all-step-defs';
-import {AndConfirmCommit, CommonStepDefModel, CommonStepDefs} from '../common';
+import {AndConfirmReturned, CommonStepDefModel, CommonStepDefs} from '../common';
 
 export interface EachStepDefModel extends CommonStepDefModel {
 	use: StandardPipelineStepRegisterKey.EACH_SETS;
@@ -22,8 +21,8 @@ export const EachStepDefs =
 		}],
 		switchUse: ['keep', ['originalContentName', 'itemName']],
 		// eslint-disable-next-line @typescript-eslint/no-unused-vars
-		confirm: ['and', (model, def, _file, options): ConfigurableElementAnchor | AndConfirmCommit => {
-			// TODO VALIDATE PROPERTIES
+		confirm: ['and', (model, def, _file, _options): AndConfirmReturned => {
+			// TODO VALIDATE PROPERTIES OF EACH STEP
 			return () => {
 				if (VUtils.isBlank(model.originalContentName)) {
 					delete def.originalContentName;

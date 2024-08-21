@@ -1,12 +1,11 @@
 import {VUtils} from '@rainbow-d9/n1';
 import {DelPropertyPipelineStepDef, StandardPipelineStepRegisterKey} from '../../../definition';
-import {ConfigurableElementAnchor} from '../../../edit-dialog';
 import {HelpDocs} from '../../../help-docs';
 import {Labels} from '../../../labels';
 import {createCheckOrMissBadge, createPrePortExistsWithKey, createStrEditor} from '../../common';
 import {StepNodeConfigurer} from '../../types';
 import {registerStepDef} from '../all-step-defs';
-import {AndConfirmCommit, CommonStepDefModel, CommonStepDefs} from '../common';
+import {AndConfirmReturned, CommonStepDefModel, CommonStepDefs} from '../common';
 
 export interface DelPropertyStepDefModel extends CommonStepDefModel {
 	use: StandardPipelineStepRegisterKey.DEL_PROPERTY | StandardPipelineStepRegisterKey.DELETE_PROPERTIES;
@@ -19,8 +18,8 @@ export const DelPropertyStepDefs =
 		prepare: ['and', (def, model) => model.property = def.property],
 		switchUse: ['keep', ['property']],
 		// eslint-disable-next-line @typescript-eslint/no-unused-vars
-		confirm: ['and', (model, def, _file, _options): ConfigurableElementAnchor | AndConfirmCommit => {
-			// TODO VALIDATE PROPERTY
+		confirm: ['and', (model, def, _file, _options): AndConfirmReturned => {
+			// TODO VALIDATE PROPERTY OF DEL PROPERTY STEP
 			return () => def.property = (model.property ?? '').trim();
 		}],
 		properties: [

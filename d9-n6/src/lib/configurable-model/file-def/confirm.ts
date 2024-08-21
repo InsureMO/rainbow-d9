@@ -1,13 +1,11 @@
 import {FileDef, isPipelineDef, PipelineFileDef, PipelineStepUseDef} from '../../definition';
 import {NodeHandlers} from '../../diagram';
-import {ConfigurableElementAnchor, ConfigurableModel} from '../../edit-dialog';
-import {FileNodeConfigurer} from '../types';
+import {ConfigurableModel} from '../../edit-dialog';
+import {ConfigChangesConfirmed, FileNodeConfigurer} from '../types';
 import {FileDefModel, PipelineFileDefModel, StepOrSetsFileDefModel} from './types';
 
-export const confirm: FileNodeConfigurer['confirm'] = (model: ConfigurableModel, def: FileDef, handlers: NodeHandlers): ConfigurableElementAnchor | true => {
-	// const originalType = def.type;
-	// const originalUse = (def as unknown as PipelineStepUseDef).use;
-
+export const confirm: FileNodeConfigurer['confirm'] = (model: ConfigurableModel, def: FileDef, handlers: NodeHandlers): ConfigChangesConfirmed => {
+	// TODO VALIDATE DEF FILE PROPERTIES
 	const edited = model as FileDefModel;
 	def.code = edited.code;
 	def.type = edited.type;

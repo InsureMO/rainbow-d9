@@ -8,8 +8,9 @@ import {CommonElementEditorStyles} from '../../../common';
 import {AllStepDefsAsArray, findStepDef} from '../../all-step-defs';
 import {CommonStepDefModel} from '../types';
 
+export const ELEMENT_ANCHOR_USE = 'use';
 export const elementUse: ConfigurableElement = {
-	code: 'use', label: Labels.Use, anchor: 'use',
+	code: ELEMENT_ANCHOR_USE, label: Labels.Use, anchor: ELEMENT_ANCHOR_USE,
 	badge: (model: CommonStepDefModel): ReactNode => askUseBadge(model.use),
 	editor: (props: ConfigurableElementEditorProps<CommonStepDefModel>) => {
 		const {model, onValueChanged} = props;

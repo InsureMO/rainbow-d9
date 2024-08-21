@@ -1,7 +1,6 @@
 import {VUtils} from '@rainbow-d9/n1';
 import {AllInPipelineStepDef, FileDef} from '../../../definition';
-import {ConfigurableElementAnchor} from '../../../edit-dialog';
-import {ConfirmNodeOptions} from '../../types';
+import {ConfigChangesConfirmed, ConfirmNodeOptions} from '../../types';
 import {
 	AndConfirm,
 	AndConfirmCommit,
@@ -14,10 +13,10 @@ import {
 export const confirm: CommonStepDefsType['confirm'] =
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	<F extends AllInPipelineStepDef, M extends CommonStepDefModel>(
-		model: M, def: F, file: FileDef, options: ConfirmNodeOptions, and?: AndConfirm<F, M>): ConfigurableElementAnchor | true => {
+		model: M, def: F, file: FileDef, options: ConfirmNodeOptions, and?: AndConfirm<F, M>): ConfigChangesConfirmed => {
 		const {assistant} = options;
 
-		// TODO VALIDATE ALL COMMON PROPERTIES
+		// TODO VALIDATE ALL COMMON PROPERTIES OF STEPS
 		// and
 		let resultOfAnd: true | ReturnType<AndConfirm<F, M>>;
 		if (and == null) {
@@ -27,7 +26,7 @@ export const confirm: CommonStepDefsType['confirm'] =
 		}
 
 		let commitOfAnd: AndConfirmCommit;
-		if (typeof resultOfAnd === 'string') {
+		if (Array.isArray(resultOfAnd)) {
 			// something incorrect, return anchor
 			return resultOfAnd;
 		} else if (resultOfAnd === true) {

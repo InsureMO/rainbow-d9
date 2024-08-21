@@ -1,6 +1,6 @@
 import {Undefinable, useForceUpdate, useThrottler} from '@rainbow-d9/n1';
 import React, {Fragment, ReactNode, useEffect, useRef, useState} from 'react';
-import {findStepDef, StepNodeConfigurer} from '../configurable-model';
+import {ConfigChangesConfirmed, findStepDef, StepNodeConfigurer} from '../configurable-model';
 import {PipelineStepDef} from '../definition';
 import {StepNodeModel} from '../diagram';
 import {Accept, Back} from '../icons';
@@ -13,7 +13,7 @@ import {LayoutController} from './layout-controller';
 import {DialogNavigator} from './navigator';
 import {DialogSpecific} from './specific';
 import {StateHolder} from './state-holder';
-import {ConfigurableElement, ConfigurableElementAnchor, ConfigurableModel} from './types';
+import {ConfigurableElement, ConfigurableModel} from './types';
 import {
 	EditDialogContentContainer,
 	EditDialogContentInitializer,
@@ -55,7 +55,7 @@ export interface DialogWorkAreaProps {
 	 * return anchor of first invalid element if there is any validation failure.
 	 * or returns undefined means successfully pass all validations, data was written back.
 	 */
-	confirm: (model: ConfigurableModel) => ConfigurableElementAnchor | true;
+	confirm: (model: ConfigurableModel) => ConfigChangesConfirmed;
 	/** discard change */
 	discard: (model: ConfigurableModel) => void;
 	model: ConfigurableModel;
@@ -69,11 +69,13 @@ export const DialogWorkArea = (props: DialogWorkAreaProps) => {
 	const {fire: fireDialog} = useEditDialogEventBus();
 
 	const onConfirmClicked = () => {
-		const anchor = confirm(model);
-		if (anchor === true) {
+		const anchors = confirm(model);
+		if (anchors === true) {
 			fire(PlaygroundEventTypes.HIDE_EDIT_DIALOG);
 		} else {
-			fireDialog(EditDialogEventTypes.LOCATE_ELEMENT, anchor);
+			//TODO TO SHOW ERROR MESSAGES FOR EACH INCORRECT ELEMENT
+			//  AND FIGURE OUT THE FIRST INCORRECT ONE TO LOCATE
+			fireDialog(EditDialogEventTypes.LOCATE_ELEMENT, anchors[0]);
 		}
 	};
 	const onDiscardClicked = () => {
@@ -104,7 +106,7 @@ export interface DialogContentProps {
 	helpDoc: MarkdownContent;
 	elements: Array<ConfigurableElement>;
 	/** write back, true means successfully */
-	confirm: (model: ConfigurableModel) => ConfigurableElementAnchor | true;
+	confirm: (model: ConfigurableModel) => ConfigChangesConfirmed;
 	/** discard change */
 	discard: (model: ConfigurableModel) => void;
 	assistant: Required<PlaygroundModuleAssistant>;
@@ -154,13 +156,13 @@ export const StepUseHandler = (props: { repaint: () => void }) => {
 	return <Fragment/>;
 };
 
+/**
+ * for all reconfigure functions, return null/undefined means no change, return a value means change
+ */
 export interface StepDefsReconfigurer<F extends PipelineStepDef = PipelineStepDef, M extends ConfigurableModel = ConfigurableModel> {
 	prepare: (prepare: StepNodeConfigurer<F, M>['prepare'], model: StepNodeModel) => Undefinable<StepNodeConfigurer<F, M>['prepare']>;
 	confirm: (confirm: StepNodeConfigurer<F, M>['confirm'], model: StepNodeModel) => Undefinable<StepNodeConfigurer<F, M>['confirm']>;
 	discard?: (discard: StepNodeConfigurer<F, M>['discard'], model: StepNodeModel) => Undefinable<StepNodeConfigurer<F, M>['discard']>;
-	/**
-	 * return undefined when not reconfigured
-	 */
 	properties: (properties: Array<ConfigurableElement>, model: StepNodeModel) => Undefinable<Array<ConfigurableElement>>;
 }
 
@@ -202,9 +204,11 @@ const reconfigureStepDefConfirm = <F extends PipelineStepDef = PipelineStepDef, 
 };
 const reconfigureStepDefDiscard = <F extends PipelineStepDef = PipelineStepDef, M extends ConfigurableModel = ConfigurableModel>(discard: StepNodeConfigurer<F, M>['discard'], model: StepNodeModel): StepNodeConfigurer<F, M>['discard'] => {
 	for (const reconfigurer of StepDefsReconfigurers) {
-		const reconfigured = reconfigurer.discard(discard, model);
-		if (reconfigured != null) {
-			return reconfigured;
+		if (reconfigurer.discard != null) {
+			const reconfigured = reconfigurer.discard(discard, model);
+			if (reconfigured != null) {
+				return reconfigured;
+			}
 		}
 	}
 	return discard;

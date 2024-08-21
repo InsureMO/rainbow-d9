@@ -6,9 +6,11 @@ import {ConfigurableElement, ConfigurableElementAnchor, ConfigurableModel} from 
 import {MarkdownContent, PlaygroundModuleAssistant} from '../types';
 import {StepPort} from './step-def';
 
+export type ConfigChangesConfirmed = Array<ConfigurableElementAnchor> | true;
+
 export interface FileNodeConfigurer<D extends FileDef = FileDef, M extends ConfigurableModel = ConfigurableModel> {
 	prepare: (def: D) => M;
-	confirm: (model: M, def: D, handlers: NodeHandlers) => ConfigurableElementAnchor | true;
+	confirm: (model: M, def: D, handlers: NodeHandlers) => ConfigChangesConfirmed;
 	discard: (model: M) => void;
 	elements: Array<ConfigurableElement>;
 }
@@ -32,7 +34,7 @@ export interface StepNodeConfigurer<F extends PipelineStepDef = PipelineStepDef,
 	/** use switched, use in given model is updated */
 	switchUse: (model: ConfigurableModel, originalUse: PipelineStepDef['use']) => ConfigurableModel;
 	/** confirm the changes from edit dialog */
-	confirm: (model: M, def: F, file: FileDef, options: ConfirmNodeOptions) => ConfigurableElementAnchor | true;
+	confirm: (model: M, def: F, file: FileDef, options: ConfirmNodeOptions) => ConfigChangesConfirmed;
 	/** discard the changes from edit dialog */
 	discard: (model: M) => void;
 	ports?: Array<{ key: string, port: StepPort }>;

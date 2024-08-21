@@ -9,18 +9,14 @@ import {
 	TypeOrmLoadOneBySqlPipelineStepDef,
 	TypeOrmSaveBySqlPipelineStepDef
 } from '../../../definition';
-import {
-	ConfigurableElementAnchor,
-	ConfigurableElementBadgeChecked,
-	ConfigurableElementBadgeMissed
-} from '../../../edit-dialog';
+import {ConfigurableElementBadgeChecked, ConfigurableElementBadgeMissed} from '../../../edit-dialog';
 import {HelpDocs} from '../../../help-docs';
 import {Labels} from '../../../labels';
 import {PlaygroundCssVars} from '../../../widgets';
 import {createPrePortExistsWithKey, createSelectableSqlEditor} from '../../common';
 import {ConfirmNodeOptions} from '../../types';
 import {registerStepDef} from '../all-step-defs';
-import {AndConfirmCommit} from '../common';
+import {AndConfirmReturned} from '../common';
 import {createTypeOrmWithAutonomousStepDefs} from './funcs';
 import {TypeOrmWithAutonomousStepDefModel} from './types';
 
@@ -65,8 +61,8 @@ const createTypeOrmBySqlPipelineStepDefs =
 			},
 			keepPropertiesOnUseSwitch: ['sql'],
 			// eslint-disable-next-line @typescript-eslint/no-unused-vars
-			andConfirm: (model, def, _file: FileDef, _options: ConfirmNodeOptions): ConfigurableElementAnchor | AndConfirmCommit => {
-				// TODO VALIDATE SQL
+			andConfirm: (model, def, _file: FileDef, _options: ConfirmNodeOptions): AndConfirmReturned => {
+				// TODO VALIDATE SQL OF TYPEORM SQL STEPS
 				return () => {
 					if (model.temporary?.sqlByParams === true) {
 						delete def.sql;

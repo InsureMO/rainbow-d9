@@ -1,12 +1,11 @@
 import {VUtils} from '@rainbow-d9/n1';
 import {SnippetPipelineStepDef, StandardPipelineStepRegisterKey} from '../../../definition';
-import {ConfigurableElementAnchor} from '../../../edit-dialog';
 import {HelpDocs} from '../../../help-docs';
 import {Labels} from '../../../labels';
 import {PlaygroundCssVars} from '../../../widgets';
 import {createCheckOrMissBadge, createPrePortExistsWithKey, createSnippetEditor} from '../../common';
 import {registerStepDef} from '../all-step-defs';
-import {AndConfirmCommit, CommonStepDefModel, CommonStepDefs} from '../common';
+import {AndConfirmReturned, CommonStepDefModel, CommonStepDefs} from '../common';
 
 export interface SnippetStepDefModel extends CommonStepDefModel {
 	use: StandardPipelineStepRegisterKey.SNIPPET;
@@ -19,8 +18,8 @@ export const SnippetStepDefs =
 		prepare: ['and', (def, model) => model.snippet = def.snippet],
 		switchUse: ['keep', ['snippet']],
 		// eslint-disable-next-line @typescript-eslint/no-unused-vars
-		confirm: ['and', (model, def, _file, _options): ConfigurableElementAnchor | AndConfirmCommit => {
-			// TODO VALIDATE PROPERTY
+		confirm: ['and', (model, def, _file, _options): AndConfirmReturned => {
+			// TODO VALIDATE SNIPPET OF SNIPPET STEP
 			return () => def.snippet = model.snippet;
 		}],
 		properties: [

@@ -1,7 +1,8 @@
+import {Nullable} from '@rainbow-d9/n1';
 import {FileDef, TypeOrmPipelineStepDef, TypeOrmWithAutonomousPipelineStepDef} from '../../../definition';
 import {ConfigurableElement, ConfigurableElementAnchor} from '../../../edit-dialog';
 import {ConfirmNodeOptions} from '../../types';
-import {AndConfirm, AndConfirmCommit, AndPrepare, CommonStepDefs, StepPort} from '../common';
+import {AndConfirm, AndConfirmCommit, AndConfirmReturned, AndPrepare, CommonStepDefs, StepPort} from '../common';
 import {elementDatasource} from './element-datasource';
 import {elementAutonomousOrTransaction} from './element-transaction';
 import {PortDatasource} from './port-datasource';
@@ -38,44 +39,46 @@ export const switchUse = ['datasource', 'transaction'];
 export const switchUseWithAutonomous = [...switchUse, 'autonomous'];
 
 export const confirm
-	= <F extends TypeOrmPipelineStepDef, M extends TypeOrmStepDefModel>(and?: (model: M, def: F, file: FileDef, options: ConfirmNodeOptions) => ConfigurableElementAnchor | AndConfirmCommit): AndConfirm<F, M> => {
-	return (model: M, def: F, file: FileDef, options: ConfirmNodeOptions): ConfigurableElementAnchor | AndConfirmCommit => {
-		// TODO VALIDATE PROPERTIES
-		let andCommit = null;
+	= <F extends TypeOrmPipelineStepDef, M extends TypeOrmStepDefModel>(and?: AndConfirm<F, M>): AndConfirm<F, M> => {
+	return (model: M, def: F, file: FileDef, options: ConfirmNodeOptions): AndConfirmReturned => {
+		// TODO VALIDATE PROPERTIES OF TYPEORM STEPS
+		const invalidAnchors: Array<ConfigurableElementAnchor> = [];
+		let andCommit: Nullable<AndConfirmReturned> = null;
 		if (and != null) {
 			// execute and function
 			andCommit = and(model, def, file, options);
-			if (typeof andCommit === 'string') {
-				return andCommit;
+			if (Array.isArray(andCommit)) {
+				return [...invalidAnchors, ...andCommit];
 			}
 		}
 		return () => {
 			def.datasource = model.datasource;
 			def.transaction = model.transaction;
 			if (andCommit != null) {
-				andCommit();
+				(andCommit as AndConfirmCommit)();
 			}
 		};
 	};
 };
 
 export const confirmWithAutonomous
-	= <F extends TypeOrmWithAutonomousPipelineStepDef, M extends TypeOrmWithAutonomousStepDefModel>(and?: (model: M, def: F, file: FileDef, options: ConfirmNodeOptions) => ConfigurableElementAnchor | AndConfirmCommit): AndConfirm<F, M> => {
-	return (model: M, def: F, file: FileDef, options: ConfirmNodeOptions): ConfigurableElementAnchor | AndConfirmCommit => {
-		return confirm((model: M, def: F, file: FileDef, options: ConfirmNodeOptions): ConfigurableElementAnchor | AndConfirmCommit => {
-			// TODO VALIDATE AUTONOMOUS
-			let andCommit = null;
+	= <F extends TypeOrmWithAutonomousPipelineStepDef, M extends TypeOrmWithAutonomousStepDefModel>(and?: AndConfirm<F, M>): AndConfirm<F, M> => {
+	return (model: M, def: F, file: FileDef, options: ConfirmNodeOptions): AndConfirmReturned => {
+		return confirm((model: M, def: F, file: FileDef, options: ConfirmNodeOptions): AndConfirmReturned => {
+			// TODO VALIDATE AUTONOMOUS OF TYPEORM STEPS WHICH CAN BE AUTONOMOUS
+			const invalidAnchors: Array<ConfigurableElementAnchor> = [];
+			let andCommit: Nullable<AndConfirmReturned> = null;
 			if (and != null) {
 				// execute and function
 				andCommit = and(model, def, file, options);
-				if (typeof andCommit === 'string') {
-					return andCommit;
+				if (Array.isArray(andCommit)) {
+					return [...invalidAnchors, ...andCommit];
 				}
 			}
 			return () => {
 				def.autonomous = model.autonomous;
 				if (andCommit != null) {
-					andCommit();
+					(andCommit as AndConfirmCommit)();
 				}
 			};
 		})(model, def, file, options);

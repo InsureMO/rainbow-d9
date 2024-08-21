@@ -1,6 +1,5 @@
 import {VUtils} from '@rainbow-d9/n1';
 import {ParallelPipelineStepDef, StandardPipelineStepRegisterKey} from '../../../definition';
-import {ConfigurableElementAnchor} from '../../../edit-dialog';
 import {HelpDocs} from '../../../help-docs';
 import {Labels} from '../../../labels';
 import {PlaygroundCssVars} from '../../../widgets';
@@ -12,7 +11,7 @@ import {
 	createYesOrNoBadge
 } from '../../common';
 import {registerStepDef} from '../all-step-defs';
-import {AndConfirmCommit, CommonStepDefModel, CommonStepDefs} from '../common';
+import {AndConfirmReturned, CommonStepDefModel, CommonStepDefs} from '../common';
 
 export interface ParallelStepDefModel extends CommonStepDefModel {
 	use: StandardPipelineStepRegisterKey.PARALLEL_SETS;
@@ -29,8 +28,8 @@ export const ParallelStepDefs =
 		}],
 		switchUse: ['keep', ['cloneData', 'race']],
 		// eslint-disable-next-line @typescript-eslint/no-unused-vars
-		confirm: ['and', (model, def, _file, _options): ConfigurableElementAnchor | AndConfirmCommit => {
-			// TODO VALIDATE PROPERTIES
+		confirm: ['and', (model, def, _file, _options): AndConfirmReturned => {
+			// TODO VALIDATE PROPERTIES OF PARALLEL STEP
 			return () => {
 				if (VUtils.isBlank(model.cloneData)) {
 					delete def.cloneData;

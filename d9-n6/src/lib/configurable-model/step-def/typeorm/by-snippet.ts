@@ -1,13 +1,12 @@
 import {VUtils} from '@rainbow-d9/n1';
 import {FileDef, StandardPipelineStepRegisterKey, TypeOrmBySnippetPipelineStepDef} from '../../../definition';
-import {ConfigurableElementAnchor} from '../../../edit-dialog';
 import {HelpDocs} from '../../../help-docs';
 import {Labels} from '../../../labels';
 import {PlaygroundCssVars} from '../../../widgets';
 import {createCheckOrMissBadge, createPrePortExistsWithKey, createSnippetEditor} from '../../common';
 import {ConfirmNodeOptions} from '../../types';
 import {registerStepDef} from '../all-step-defs';
-import {AndConfirmCommit} from '../common';
+import {AndConfirmReturned} from '../common';
 import {createTypeOrmWithAutonomousStepDefs} from './funcs';
 import {TypeOrmWithAutonomousStepDefModel} from './types';
 
@@ -22,8 +21,8 @@ export const TypeOrmBySnippetStepDefs =
 		andPrepare: (def, model) => model.snippet = def.snippet,
 		keepPropertiesOnUseSwitch: ['snippet'],
 		// eslint-disable-next-line @typescript-eslint/no-unused-vars
-		andConfirm: (model, def, _file: FileDef, _options: ConfirmNodeOptions): ConfigurableElementAnchor | AndConfirmCommit => {
-			// TODO VALIDATE SNIPPET
+		andConfirm: (model, def, _file: FileDef, _options: ConfirmNodeOptions): AndConfirmReturned => {
+			// TODO VALIDATE SNIPPET OF TYPEORM SNIPPET STEP
 			return () => def.snippet = model.snippet;
 		},
 		properties: [{
