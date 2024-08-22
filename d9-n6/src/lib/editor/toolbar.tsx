@@ -3,8 +3,10 @@ import React, {MutableRefObject, useEffect, useRef, useState} from 'react';
 import {DEFAULTS} from '../constants';
 import {FileDefSerializer} from '../definition';
 import {
+	CollapseToc,
 	DownloadFile,
 	DownloadImage,
+	ExpandToc,
 	FitCanvas,
 	FoldAllNodes,
 	Max,
@@ -20,7 +22,7 @@ import {
 import {PlaygroundEventTypes, usePlaygroundEventBus} from '../playground-event-bus';
 import {cloneDiagramNodes} from './diagram-utils';
 import {EditorKernelRefState} from './painter';
-import {EditorToolbar, EditorToolbarButton} from './widgets';
+import {EditorToolbar, EditorToolbarButton, EditorToolbarToc, EditorToolbarTocButton} from './widgets';
 
 export interface ToolbarProps {
 	stateRef: MutableRefObject<EditorKernelRefState>;
@@ -33,6 +35,7 @@ export interface ToolbarProps {
 export interface ToolbarState {
 	max: boolean;
 	zen: boolean;
+	tocExpanded: boolean;
 }
 
 export const Toolbar = (props: ToolbarProps) => {
@@ -43,11 +46,11 @@ export const Toolbar = (props: ToolbarProps) => {
 
 	const ref = useRef<HTMLDivElement>(null);
 	const {fire} = usePlaygroundEventBus();
-	const [state, setState] = useState<ToolbarState>({max: false, zen: false});
+	const [state, setState] = useState<ToolbarState>({max: false, zen: false, tocExpanded: false});
 	useEffect(() => {
 		const onFullScreenChanged = () => {
 			if (document.fullscreenElement == null) {
-				setState({zen: false, max: false});
+				setState(state => ({...state, zen: false, max: false}));
 			}
 		};
 		window.addEventListener('fullscreenchange', onFullScreenChanged);
@@ -143,13 +146,18 @@ export const Toolbar = (props: ToolbarProps) => {
 	};
 	const onMaxClicked = () => setState(state => ({...state, max: true}));
 	const onMinClicked = () => setState(state => ({...state, max: false}));
-	const onZenClicked = () => setState({zen: true, max: true});
+	const onZenClicked = () => setState(state => ({...state, zen: true, max: true}));
 	const onWindowClicked = () => {
 		document.exitFullscreen && document.exitFullscreen();
-		setState({zen: false, max: false});
+		setState(state => ({...state, zen: false, max: false}));
 	};
 	const onFoldAllNodesClicked = () => fire(PlaygroundEventTypes.FOLD_ALL_NODES);
 	const onUnfoldAllNodesClicked = () => fire(PlaygroundEventTypes.UNFOLD_ALL_NODES);
+	const onSwitchToc = (expanded: boolean) => () => setState(state => ({...state, tocExpanded: expanded}));
+
+	if (state.tocExpanded) {
+		// build toc
+	}
 
 	return <EditorToolbar columns={state.zen ? 5 : 6} ref={ref}>
 		<EditorToolbarButton onClick={onZoomInClicked}><ZoomIn/></EditorToolbarButton>
@@ -169,5 +177,10 @@ export const Toolbar = (props: ToolbarProps) => {
 			? <EditorToolbarButton onClick={onDownloadFileClicked}><DownloadFile/></EditorToolbarButton> : null}
 		{allowUploadFile
 			? <EditorToolbarButton onClick={onUploadFileClicked}><UploadFile/></EditorToolbarButton> : null}
+		<EditorToolbarToc>
+			{state.tocExpanded
+				? <EditorToolbarTocButton onClick={onSwitchToc(false)}><CollapseToc/></EditorToolbarTocButton>
+				: <EditorToolbarTocButton onClick={onSwitchToc(true)}><ExpandToc/></EditorToolbarTocButton>}
+		</EditorToolbarToc>
 	</EditorToolbar>;
 };

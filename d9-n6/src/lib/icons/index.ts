@@ -21,8 +21,6 @@ export * from './snippet';
 export * from './steps';
 export * from './fold-sub-nodes';
 export * from './unfold-sub-nodes';
-export * from './fold-all-nodes';
-export * from './unfold-all-nodes';
 
 export * from './fit-canvas';
 export * from './origin-size';
@@ -35,3 +33,7 @@ export * from './max';
 export * from './min';
 export * from './window';
 export * from './zen';
+export * from './fold-all-nodes';
+export * from './unfold-all-nodes';
+export * from './expand-toc';
+export * from './collapse-toc';

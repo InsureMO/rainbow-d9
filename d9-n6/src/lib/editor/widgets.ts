@@ -103,7 +103,7 @@ export const EditorToolbar = styled.div.attrs<{ columns: number }>(({columns}) =
     border-radius: ${PlaygroundCssVars.EDITOR_TOOLBAR_BORDER_RADIUS};
     border: ${PlaygroundCssVars.EDITOR_TOOLBAR_BORDER};
     background-color: ${CssVars.BACKGROUND_COLOR};
-    overflow: hidden;
+    overflow: visible;
     opacity: 0.7;
     transition: border-color ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION}, opacity ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION};
 
@@ -111,8 +111,26 @@ export const EditorToolbar = styled.div.attrs<{ columns: number }>(({columns}) =
         opacity: 1;
         border-color: ${PlaygroundCssVars.EDITOR_TOOLBAR_BUTTON_ACTIVE_BACKGROUND_COLOR};
 
-        > span[data-w=o23-playground-editor-toolbar-button]:not(:hover) {
-            color: ${PlaygroundCssVars.EDITOR_TOOLBAR_BUTTON_ACTIVE_BACKGROUND_COLOR};
+        > span[data-w=o23-playground-editor-toolbar-button] {
+            &:not(:nth-child(6n + 1)) {
+                border-left-color: ${PlaygroundCssVars.EDITOR_TOOLBAR_BUTTON_ACTIVE_BACKGROUND_COLOR};
+            }
+
+            &:nth-child(-n + 6) {
+                border-bottom-color: ${PlaygroundCssVars.EDITOR_TOOLBAR_BUTTON_ACTIVE_BACKGROUND_COLOR};
+            }
+
+            &:not(:hover) {
+                color: ${PlaygroundCssVars.EDITOR_TOOLBAR_BUTTON_ACTIVE_BACKGROUND_COLOR};
+            }
+        }
+
+        > div[data-w=o23-playground-editor-toolbar-toc] {
+            border-top-color: ${PlaygroundCssVars.EDITOR_TOOLBAR_BUTTON_ACTIVE_BACKGROUND_COLOR};
+
+            > span[data-w=o23-playground-editor-toolbar-toc-button]:not(:hover) {
+                color: ${PlaygroundCssVars.EDITOR_TOOLBAR_BUTTON_ACTIVE_BACKGROUND_COLOR};
+            }
         }
     }
 
@@ -122,6 +140,10 @@ export const EditorToolbar = styled.div.attrs<{ columns: number }>(({columns}) =
 
     > span[data-absolute=true] {
         position: absolute;
+    }
+
+    > div[data-w=o23-playground-editor-toolbar-toc] {
+        grid-column: 1 / span var(--grid-columns);
     }
 `;
 export const EditorToolbarButton = styled.span.attrs({[DOM_KEY_WIDGET]: 'o23-playground-editor-toolbar-button'})`
@@ -133,18 +155,14 @@ export const EditorToolbarButton = styled.span.attrs({[DOM_KEY_WIDGET]: 'o23-pla
     height: ${PlaygroundCssVars.EDITOR_TOOLBAR_BUTTON_HEIGHT};
     color: ${PlaygroundCssVars.EDITOR_TOOLBAR_BUTTON_COLOR};
     cursor: pointer;
-    transition: color ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION}, background-color ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION};
+    transition: color ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION}, background-color ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION}, border-color ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION};
 
-    &:not(:last-child), &:not(:nth-child(6)) {
-        border-right: ${PlaygroundCssVars.EDITOR_TOOLBAR_BORDER};
+    &:not(:nth-child(6n + 1)) {
+        border-left: ${PlaygroundCssVars.EDITOR_TOOLBAR_BORDER};
     }
 
     &:nth-child(-n + 6) {
         border-bottom: ${PlaygroundCssVars.EDITOR_TOOLBAR_BORDER};
-    }
-
-    &:nth-child(8) {
-        border-left: ${PlaygroundCssVars.EDITOR_TOOLBAR_BORDER};
     }
 
     &:hover {
@@ -159,6 +177,33 @@ export const EditorToolbarButton = styled.span.attrs({[DOM_KEY_WIDGET]: 'o23-pla
             height: calc(${PlaygroundCssVars.EDITOR_TOOLBAR_BUTTON_HEIGHT} / 3 * 2 - 2px);
             margin-top: 2px;
         }
+    }
+`;
+export const EditorToolbarToc = styled.div.attrs({[DOM_KEY_WIDGET]: 'o23-playground-editor-toolbar-toc'})`
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    height: ${PlaygroundCssVars.EDITOR_TOOLBAR_TOC_HEIGHT};
+    border-top: ${PlaygroundCssVars.EDITOR_TOOLBAR_BORDER};
+    border-radius: 0 0 ${PlaygroundCssVars.EDITOR_TOOLBAR_BORDER_RADIUS} ${PlaygroundCssVars.EDITOR_TOOLBAR_BORDER_RADIUS};
+    transition: border-color ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION};
+`;
+export const EditorToolbarTocButton = styled.span.attrs({[DOM_KEY_WIDGET]: 'o23-playground-editor-toolbar-toc-button'})`
+    display: flex;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    cursor: pointer;
+    transition: color ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION}, background-color ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION};
+
+    &:hover {
+        color: ${PlaygroundCssVars.EDITOR_TOOLBAR_BUTTON_ACTIVE_COLOR};
+        background-color: ${PlaygroundCssVars.EDITOR_TOOLBAR_BUTTON_ACTIVE_BACKGROUND_COLOR};
+    }
+
+    > svg {
+        height: ${PlaygroundCssVars.EDITOR_TOOLBAR_TOC_HEIGHT};
     }
 `;
 export const ParseError = styled.div.attrs({[DOM_KEY_WIDGET]: 'o23-playground-viewer-error'})`
