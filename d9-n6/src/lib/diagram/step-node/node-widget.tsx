@@ -110,6 +110,8 @@ export const StepNodeWidget = (props: StepNodeWidgetProps) => {
 	const onDoubleClicked = () => {
 		fire(PlaygroundEventTypes.SHOW_EDIT_DIALOG, <StepDialogContent model={node}/>);
 	};
+
+	const name = (def.name ?? '').trim() || Labels.StepNodeNoname;
 	const isFirstSubStep = node.isFirstSubStep();
 
 	return <StepNodeContainer onDoubleClick={onDoubleClicked} data-use={use}>
@@ -119,7 +121,7 @@ export const StepNodeWidget = (props: StepNodeWidgetProps) => {
 			: <PreviousStepPortWidget port={node.getPort(PreviousStepPortModel.NAME) as PreviousStepPortModel}
 			                          engine={engine}/>}
 		<StepNodeHeader data-use={use}>
-			<StepNodeTitle>{(def.name ?? '').trim() || Labels.StepNodeNoname}</StepNodeTitle>
+			<StepNodeTitle>{name}</StepNodeTitle>
 			<NodeTitleSpreader/>
 			<StepNodeSecondTitle>{askUseBadge(use)}</StepNodeSecondTitle>
 		</StepNodeHeader>

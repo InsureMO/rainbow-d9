@@ -180,13 +180,15 @@ export const EditorToolbarButton = styled.span.attrs({[DOM_KEY_WIDGET]: 'o23-pla
     }
 `;
 export const EditorToolbarToc = styled.div.attrs({[DOM_KEY_WIDGET]: 'o23-playground-editor-toolbar-toc'})`
-    display: flex;
+    display: grid;
     position: relative;
-    flex-direction: column;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr;
     height: ${PlaygroundCssVars.EDITOR_TOOLBAR_TOC_HEIGHT};
     border-top: ${PlaygroundCssVars.EDITOR_TOOLBAR_BORDER};
     border-radius: 0 0 ${PlaygroundCssVars.EDITOR_TOOLBAR_BORDER_RADIUS} ${PlaygroundCssVars.EDITOR_TOOLBAR_BORDER_RADIUS};
     transition: border-color ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION};
+    overflow: hidden;
 `;
 export const EditorToolbarTocButton = styled.span.attrs({[DOM_KEY_WIDGET]: 'o23-playground-editor-toolbar-toc-button'})`
     display: flex;
@@ -204,6 +206,75 @@ export const EditorToolbarTocButton = styled.span.attrs({[DOM_KEY_WIDGET]: 'o23-
 
     > svg {
         height: ${PlaygroundCssVars.EDITOR_TOOLBAR_TOC_HEIGHT};
+    }
+`;
+export const ToolbarTocContainer = styled.div.attrs({
+	[DOM_KEY_WIDGET]: 'o23-playground-editor-toolbar-toc-container',
+	'data-v-scroll': '',
+	'data-h-scroll': ''
+})`
+    display: flex;
+    position: absolute;
+    flex-direction: column;
+    top: calc(${PlaygroundCssVars.EDITOR_TOOLBAR_HEIGHT} + ${PlaygroundCssVars.EDITOR_TOOLBAR_GUTTER_SIZE} * 2);
+    right: ${PlaygroundCssVars.EDITOR_TOOLBAR_GUTTER_SIZE};
+    min-width: calc(${PlaygroundCssVars.EDITOR_TOOLBAR_BUTTON_WIDTH} * 6 + 2px);
+    max-width: max(33%, calc(${PlaygroundCssVars.EDITOR_TOOLBAR_BUTTON_WIDTH} * 6 + 2px));
+    max-height: calc(100% - ${PlaygroundCssVars.EDITOR_TOOLBAR_HEIGHT} - ${PlaygroundCssVars.EDITOR_TOOLBAR_GUTTER_SIZE} * 3);
+    border: ${PlaygroundCssVars.EDITOR_TOOLBAR_BORDER};
+    border-radius: ${PlaygroundCssVars.EDITOR_TOOLBAR_BORDER_RADIUS};
+    overflow: auto;
+    transition: border-color ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION}, max-height ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION};
+
+    &[data-first-paint=true] {
+        max-width: 0;
+        border: 0;
+    }
+
+    &:hover {
+        border-color: ${PlaygroundCssVars.EDITOR_TOOLBAR_BUTTON_ACTIVE_BACKGROUND_COLOR};
+
+        div[data-w=o23-playground-editor-toolbar-toc-item] {
+            opacity: 1;
+        }
+    }
+`;
+export const ToolbarTocItem = styled.div.attrs({[DOM_KEY_WIDGET]: 'o23-playground-editor-toolbar-toc-item'})`
+    display: flex;
+    position: relative;
+    align-items: center;
+    min-height: ${PlaygroundCssVars.EDITOR_TOOLBAR_TOC_HEIGHT};
+    height: ${PlaygroundCssVars.EDITOR_TOOLBAR_TOC_HEIGHT};
+    background-color: ${CssVars.BACKGROUND_COLOR};
+    opacity: 0.5;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: opacity ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION};
+
+    > span {
+        display: inline-flex;
+        position: relative;
+        align-items: center;
+        height: ${PlaygroundCssVars.EDITOR_TOOLBAR_TOC_HEIGHT};
+        transition: background-color ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION};
+    }
+
+    > span:first-child {
+        font-size: 0.8em;
+        opacity: 0.8;
+        padding-right: 6px;
+        padding-left: ${CssVars.INPUT_INDENT};
+    }
+
+    > span:last-child {
+        flex-grow: 1;
+        padding-right: ${CssVars.INPUT_INDENT};
+    }
+
+    &:hover {
+        > span {
+            background-color: ${CssVars.HOVER_COLOR};
+        }
     }
 `;
 export const ParseError = styled.div.attrs({[DOM_KEY_WIDGET]: 'o23-playground-viewer-error'})`

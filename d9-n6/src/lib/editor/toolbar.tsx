@@ -1,7 +1,9 @@
+import {useForceUpdate} from '@rainbow-d9/n1';
 import dom2image from 'dom-to-image';
-import React, {MutableRefObject, useEffect, useRef, useState} from 'react';
+import React, {MutableRefObject, ReactNode, useEffect, useRef, useState} from 'react';
 import {DEFAULTS} from '../constants';
-import {FileDefSerializer} from '../definition';
+import {FileDef, FileDefSerializer, isPipelineDef, PipelineStepDef} from '../definition';
+import {StepNodeEntityType} from '../diagram';
 import {
 	CollapseToc,
 	DownloadFile,
@@ -19,10 +21,99 @@ import {
 	ZoomIn,
 	ZoomOut
 } from '../icons';
+import {Labels} from '../labels';
 import {PlaygroundEventTypes, usePlaygroundEventBus} from '../playground-event-bus';
 import {cloneDiagramNodes} from './diagram-utils';
 import {EditorKernelRefState} from './painter';
-import {EditorToolbar, EditorToolbarButton, EditorToolbarToc, EditorToolbarTocButton} from './widgets';
+import {
+	EditorToolbar,
+	EditorToolbarButton,
+	EditorToolbarToc,
+	EditorToolbarTocButton,
+	ToolbarTocContainer,
+	ToolbarTocItem
+} from './widgets';
+
+export interface ToolbarTocProps {
+	expanded: boolean;
+	def: FileDef;
+}
+
+interface TocItem {
+	index: string;
+	label: ReactNode;
+	type: StepNodeEntityType;
+	def: FileDef | PipelineStepDef;
+}
+
+export const ToolbarToc = (props: Omit<ToolbarTocProps, 'expanded'>) => {
+	const {def} = props;
+	const ref = useRef<HTMLDivElement>(null);
+	const [firstPaint, setFirstPaint] = useState(true);
+	const forceUpdate = useForceUpdate();
+	useEffect(() => {
+		if (ref.current == null) {
+			return;
+		}
+		const editor = ref.current.parentElement.previousElementSibling as HTMLDivElement;
+		if (editor == null) {
+			return;
+		}
+		const resizeObserver = new ResizeObserver(() => {
+			forceUpdate();
+		});
+		resizeObserver.observe(editor);
+		return () => {
+			resizeObserver?.disconnect();
+		};
+	}, [forceUpdate]);
+	useEffect(() => {
+		setFirstPaint(false);
+	}, [firstPaint]);
+
+	const items: Array<TocItem> = [{label: def.code, index: '0.', type: StepNodeEntityType.START, def}];
+	const getSubSteps = (step: PipelineStepDef) => {
+		return (step as any).steps ?? [];
+	};
+	const buildItems = (steps: Array<PipelineStepDef>, indexPrefix: string) => {
+		steps.forEach((step, stepIndex) => {
+			const index = `${indexPrefix}${stepIndex + 1}.`;
+			items.push({
+				label: (step.name ?? '').trim() || Labels.StepNodeNoname, index,
+				type: StepNodeEntityType.NORMAL, def: step
+			});
+			buildItems(getSubSteps(step), index);
+		});
+	};
+	if (!isPipelineDef(def)) {
+		// step def, there is a virtual node
+		items.push({
+			label: ((def as unknown as PipelineStepDef).name ?? '').trim() || Labels.StepNodeNoname, index: '1.',
+			type: StepNodeEntityType.START, def
+		});
+		buildItems(getSubSteps(def as unknown as PipelineStepDef), '1.');
+	} else {
+		buildItems(getSubSteps(def as unknown as PipelineStepDef), '');
+	}
+
+	return <ToolbarTocContainer data-first-paint={firstPaint} ref={ref}>
+		{items.map((item) => {
+			return <ToolbarTocItem key={item.index}>
+				<span>{item.index}</span>
+				<span>{item.label}</span>
+			</ToolbarTocItem>;
+		})}
+	</ToolbarTocContainer>;
+};
+export const ToolbarTocWrapper = (props: ToolbarTocProps) => {
+	const {def, expanded} = props;
+
+	if (!expanded) {
+		return null;
+	}
+
+	return <ToolbarToc def={def}/>;
+};
 
 export interface ToolbarProps {
 	stateRef: MutableRefObject<EditorKernelRefState>;
@@ -155,32 +246,32 @@ export const Toolbar = (props: ToolbarProps) => {
 	const onUnfoldAllNodesClicked = () => fire(PlaygroundEventTypes.UNFOLD_ALL_NODES);
 	const onSwitchToc = (expanded: boolean) => () => setState(state => ({...state, tocExpanded: expanded}));
 
-	if (state.tocExpanded) {
-		// build toc
-	}
-
-	return <EditorToolbar columns={state.zen ? 5 : 6} ref={ref}>
-		<EditorToolbarButton onClick={onZoomInClicked}><ZoomIn/></EditorToolbarButton>
-		<EditorToolbarButton onClick={onZoomOutClicked}><ZoomOut/></EditorToolbarButton>
-		<EditorToolbarButton onClick={onOriginSizeClicked}><OriginSize/></EditorToolbarButton>
-		<EditorToolbarButton onClick={onFitCanvasClicked}><FitCanvas/></EditorToolbarButton>
-		{state.max ? null : <EditorToolbarButton onClick={onMaxClicked}><Max/></EditorToolbarButton>}
-		{(state.max && !state.zen) ? <EditorToolbarButton onClick={onMinClicked}><Min/></EditorToolbarButton> : null}
-		{state.zen ? null : <EditorToolbarButton onClick={onZenClicked}><Zen/></EditorToolbarButton>}
-		{state.zen ? <EditorToolbarButton onClick={onWindowClicked}><Window/></EditorToolbarButton> : null}
-		<span data-absolute={state.zen}/>
-		<EditorToolbarButton onClick={onFoldAllNodesClicked}><FoldAllNodes/></EditorToolbarButton>
-		<EditorToolbarButton onClick={onUnfoldAllNodesClicked}><UnfoldAllNodes/></EditorToolbarButton>
-		{allowDownloadImage
-			? <EditorToolbarButton onClick={onDownloadImageClicked}><DownloadImage/></EditorToolbarButton> : null}
-		{allowDownloadFile
-			? <EditorToolbarButton onClick={onDownloadFileClicked}><DownloadFile/></EditorToolbarButton> : null}
-		{allowUploadFile
-			? <EditorToolbarButton onClick={onUploadFileClicked}><UploadFile/></EditorToolbarButton> : null}
-		<EditorToolbarToc>
-			{state.tocExpanded
-				? <EditorToolbarTocButton onClick={onSwitchToc(false)}><CollapseToc/></EditorToolbarTocButton>
-				: <EditorToolbarTocButton onClick={onSwitchToc(true)}><ExpandToc/></EditorToolbarTocButton>}
-		</EditorToolbarToc>
-	</EditorToolbar>;
+	return <>
+		<EditorToolbar columns={state.zen ? 5 : 6} data-toc-expanded={state.tocExpanded} ref={ref}>
+			<EditorToolbarButton onClick={onZoomInClicked}><ZoomIn/></EditorToolbarButton>
+			<EditorToolbarButton onClick={onZoomOutClicked}><ZoomOut/></EditorToolbarButton>
+			<EditorToolbarButton onClick={onOriginSizeClicked}><OriginSize/></EditorToolbarButton>
+			<EditorToolbarButton onClick={onFitCanvasClicked}><FitCanvas/></EditorToolbarButton>
+			{state.max ? null : <EditorToolbarButton onClick={onMaxClicked}><Max/></EditorToolbarButton>}
+			{(state.max && !state.zen) ?
+				<EditorToolbarButton onClick={onMinClicked}><Min/></EditorToolbarButton> : null}
+			{state.zen ? null : <EditorToolbarButton onClick={onZenClicked}><Zen/></EditorToolbarButton>}
+			{state.zen ? <EditorToolbarButton onClick={onWindowClicked}><Window/></EditorToolbarButton> : null}
+			<span data-absolute={state.zen}/>
+			<EditorToolbarButton onClick={onFoldAllNodesClicked}><FoldAllNodes/></EditorToolbarButton>
+			<EditorToolbarButton onClick={onUnfoldAllNodesClicked}><UnfoldAllNodes/></EditorToolbarButton>
+			{allowDownloadImage
+				? <EditorToolbarButton onClick={onDownloadImageClicked}><DownloadImage/></EditorToolbarButton> : null}
+			{allowDownloadFile
+				? <EditorToolbarButton onClick={onDownloadFileClicked}><DownloadFile/></EditorToolbarButton> : null}
+			{allowUploadFile
+				? <EditorToolbarButton onClick={onUploadFileClicked}><UploadFile/></EditorToolbarButton> : null}
+			<EditorToolbarToc>
+				{state.tocExpanded
+					? <EditorToolbarTocButton onClick={onSwitchToc(false)}><CollapseToc/></EditorToolbarTocButton>
+					: <EditorToolbarTocButton onClick={onSwitchToc(true)}><ExpandToc/></EditorToolbarTocButton>}
+			</EditorToolbarToc>
+		</EditorToolbar>
+		<ToolbarTocWrapper expanded={state.tocExpanded} def={stateRef.current.def!}/>
+	</>;
 };
