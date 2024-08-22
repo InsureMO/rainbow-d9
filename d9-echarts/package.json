@@ -1,6 +1,6 @@
 {
 	"name": "@rainbow-d9/echarts",
-	"version": "1.1.40",
+	"version": "1.1.41",
 	"description": "Echarts",
 	"main": "index.cjs.js",
 	"module": "index.js",
@@ -21,8 +21,8 @@
 	},
 	"author": "Rainbow Team",
 	"dependencies": {
-		"@rainbow-d9/n2": "1.1.40",
-		"@rainbow-d9/n3": "1.1.40",
+		"@rainbow-d9/n2": "1.1.41",
+		"@rainbow-d9/n3": "1.1.41",
 		"echarts": "^5.4.3"
 	},
 	"devDependencies": {
