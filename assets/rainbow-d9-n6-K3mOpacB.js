@@ -4,14 +4,14 @@ var __publicField = (obj, key, value) => {
   __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
   return value;
 };
-import { a as color, y as EditorView, z as EditorState, A as basicSetup, B as keymap, C as indentWithTab, K as lintGutter, P as Compartment, Q as jsYaml, G as javascript, R as sql$1, S as dom2image } from "./vendor-yoJlfNSA.js";
-import { f as CssConstants, C as CssVars, I as IntlLabel, D as DOM_KEY_WIDGET, d as utils$2, g as UnwrappedCheckbox, h as UnwrappedDropdown, O as OptionItemSort, j as UnwrappedInput, k as UnwrappedCaption, l as UnwrappedTextarea, m as UnwrappedDecorateInput, n as UnwrappedCheckboxes, b as useGlobalHandlers } from "./rainbow-d9-n2-vYNKvkWP.js";
-import { R as React, r as reactExports, q as qe, W as We, P as PortModelAlignment, a as PortWidget, D as DefaultLinkModel, b as PortModel, N as NodeModel, C as CanvasWidget, c as DiagramEngine, d as NodeLayerFactory, L as LinkLayerFactory, S as SelectionBoxLayerFactory, e as DefaultLabelFactory, f as DefaultNodeFactory, g as DefaultLinkFactory, h as PathFindingLinkFactory, i as DefaultPortFactory, A as AbstractModelFactory, j as DiagramModel, k as State, l as SelectingState, m as AbstractReactFactory, n as LinkWidget, o as DefaultLinkPointWidget, p as DefaultLinkSegmentWidget } from "./react-base-ZsxyxDI8.js";
-import { V as VUtils, a as useThrottler, r as registerWidget, g as useCreateEventBus, e as useForceUpdate, M as MUtils, P as PPUtils } from "./rainbow-d9-n1-ScXZWsJb.js";
-import { i as index$1 } from "./rainbow-d9-n3-G4wzgFcW.js";
-import { M as Markdown } from "./react-markdown-8suPDezo.js";
-import { r as remarkGfm } from "./remark-mq8InfM0.js";
-import { S as SyntaxHighlighter, p as prism } from "./react-syntax-highlighter-84gtM2Pt.js";
+import { a as color, y as EditorView, z as EditorState, A as basicSetup, B as keymap, C as indentWithTab, K as lintGutter, P as Compartment, Q as jsYaml, G as javascript, R as sql$1, S as dom2image } from "./vendor-AYxgJK5h.js";
+import { f as CssConstants, C as CssVars, I as IntlLabel, D as DOM_KEY_WIDGET, d as utils$2, g as UnwrappedCheckbox, h as UnwrappedDropdown, O as OptionItemSort, j as UnwrappedInput, k as UnwrappedCaption, l as UnwrappedTextarea, m as UnwrappedDecorateInput, n as UnwrappedCheckboxes, b as useGlobalHandlers } from "./rainbow-d9-n2-Es3KsNOn.js";
+import { R as React, r as reactExports, q as qe, W as We, P as PortWidget, a as PortModelAlignment, D as DefaultLinkModel, b as PortModel, N as NodeModel, C as CanvasWidget, c as DiagramEngine, d as NodeLayerFactory, L as LinkLayerFactory, S as SelectionBoxLayerFactory, e as DefaultLabelFactory, f as DefaultNodeFactory, g as DefaultLinkFactory, h as PathFindingLinkFactory, i as DefaultPortFactory, j as DiagramModel, k as State, l as SelectingState, A as AbstractModelFactory, m as AbstractReactFactory, n as LinkWidget, o as DefaultLinkPointWidget, p as DefaultLinkSegmentWidget } from "./react-base-H_hYzlnU.js";
+import { V as VUtils, a as useThrottler, r as registerWidget, g as useCreateEventBus, e as useForceUpdate, M as MUtils, P as PPUtils } from "./rainbow-d9-n1-jgykuQAe.js";
+import { i as index$1 } from "./rainbow-d9-n3-wCmpehpP.js";
+import { M as Markdown } from "./react-markdown-EOs90UXN.js";
+import { r as remarkGfm } from "./remark-7OfRHmoy.js";
+import { S as SyntaxHighlighter, p as prism } from "./react-syntax-highlighter-pFyWiHjn.js";
 const EDITOR_BACKGROUND_BLOCK_SIZE = "var(--o23-playground-editor-background-block-size, 48px)";
 const EDITOR_BACKGROUND_LINE_COLOR = `var(--o23-playground-editor-background-line-color, ${color(CssConstants.PRIMARY_COLOR).alpha(0.08)})`;
 const EDITOR_ATTRIBUTE_BADGE_COLOR = "#9db6c6";
@@ -24,6 +24,8 @@ const NODE_STEP_SETS_COLOR = "#615cac";
 const NODE_ASYNC_SETS_STEP_COLOR = "#ff714b";
 const NODE_EACH_STEP_COLOR = "#c6a0d2";
 const NODE_PARALLEL_STEP_COLOR = "#4785ff";
+const NODE_CONDITIONAL_STEP_COLOR = "#d77c63";
+const NODE_ROUTES_STEP_COLOR = "#d77c63";
 const NODE_REF_PIPELINE_STEP_COLOR = "#b1062f";
 const NODE_REF_STEP_STEP_COLOR = "#b1062f";
 const NODE_TYPEORM_STEP_COLOR = "#bca18c";
@@ -34,6 +36,7 @@ const PORT_STEPS_COLOR = "#617ba0";
 const PORT_ERROR_HANDLES_COLOR = "#c13a92";
 const LINK_ERROR_HANDLES_COLOR = "#a97f98";
 const PORT_LAST_SUB_STEP_JOIN_COLOR = "#00618b";
+const PORT_ROUTE_TEST_COLOR = "#8454aa";
 const PRE_PORT_COLOR = "#87a55f";
 const POST_PORT_COLOR = "#c69dab";
 const PlaygroundCssVars = {
@@ -43,7 +46,7 @@ const PlaygroundCssVars = {
   EDITOR_BACKGROUND_SIZE: `var(--o23-playground-editor-background-size, ${EDITOR_BACKGROUND_BLOCK_SIZE} ${EDITOR_BACKGROUND_BLOCK_SIZE})`,
   EDITOR_BACKGROUND_POSITION: "var(--o23-playground-editor-background-position, -1px -1px)",
   EDITOR_ERROR_COLOR: `var(--o23-playground-editor-error-color, ${CssVars.DANGER_COLOR})`,
-  EDITOR_TOOLBAR_HEIGHT: "var(--o23-playground-editor-toolbar-height, 32px)",
+  EDITOR_TOOLBAR_HEIGHT: "var(--o23-playground-editor-toolbar-height, 92px)",
   EDITOR_TOOLBAR_GUTTER_SIZE: "var(--o23-playground-editor-toolbar-gutter-size, 8px)",
   EDITOR_TOOLBAR_BORDER: `var(--o23-playground-editor-toolbar-border, 1px solid ${CssVars.BORDER_COLOR})`,
   EDITOR_TOOLBAR_BORDER_RADIUS: `var(--o23-playground-editor-toolbar-border-radius, ${CssVars.BORDER_RADIUS})`,
@@ -52,6 +55,7 @@ const PlaygroundCssVars = {
   EDITOR_TOOLBAR_BUTTON_COLOR: `var(--o23-playground-editor-toolbar-button-color, ${CssVars.FONT_COLOR})`,
   EDITOR_TOOLBAR_BUTTON_ACTIVE_COLOR: `var(--o23-playground-editor-toolbar-button-active-color, ${CssVars.INVERT_COLOR})`,
   EDITOR_TOOLBAR_BUTTON_ACTIVE_BACKGROUND_COLOR: `var(--o23-playground-editor-toolbar-button-active-background-color, ${CssVars.PRIMARY_COLOR})`,
+  EDITOR_TOOLBAR_TOC_HEIGHT: "var(--o23-playground-editor-toolbar-toc-height, 30px)",
   EDITOR_MAX_Z_INDEX: `var(--o23-playground-editor-max-z-index, 9999)`,
   MARKDOWN_FONT_SIZE: "var(--o23-playground-markdown-font-size, 14px)",
   MARKDOWN_COLOR: `var(--o23-playground-markdown-color, ${CssVars.FONT_COLOR})`,
@@ -177,6 +181,10 @@ const PlaygroundCssVars = {
   NODE_PORT_FIRST_SUB_STEP_BORDER: `var(--o23-playground-port-first-sub-step-border, 1px solid ${color(PORT_FIRST_SUB_STEP_COLOR).darken(0.1).opaquer(0.5)})`,
   NODE_PORT_LAST_SUB_STEP_JOIN_BACKGROUND: `var(--o23-playground-port-last-sub-step-join-background, ${PORT_LAST_SUB_STEP_JOIN_COLOR})`,
   NODE_PORT_LAST_SUB_STEP_JOIN_BORDER: `var(--o23-playground-port-last-sub-step-join-border, 1px solid ${color(PORT_LAST_SUB_STEP_JOIN_COLOR).darken(0.1).opaquer(0.5)})`,
+  NODE_PORT_ROUTE_TEST_COLOR: `var(--o23-playground-port-route-test-color, ${CssVars.INVERT_COLOR})`,
+  NODE_PORT_ROUTE_TEST_BACKGROUND: `var(--o23-playground-port-route-test-background, ${PORT_ROUTE_TEST_COLOR})`,
+  NODE_PORT_ROUTE_TEST_BORDER: `var(--o23-playground-port-route-test-border, 1px solid ${color(PORT_ROUTE_TEST_COLOR).darken(0.1).opaquer(0.5)})`,
+  NODE_PORT_ROUTE_TEST_RADIUS: "var(--o23-playground-port-route-test-radius, 10px)",
   LINK_STROKE_LINECAP: "var(--o23-playground-link-stroke-linecap, round)",
   LINK_DEFAULT_STROKE_DASHARRAY: "var(--o23-playground-link-default-stroke-dasharray, unset)",
   LINK_DEFAULT_SELECTED_STROKE_DASHARRAY: "var(--o23-playground-link-default-selected-stroke-dasharray, 8 4)",
@@ -267,6 +275,10 @@ const PlaygroundCssVars = {
   NODE_STEP_EACH_TITLE_BACKGROUND: `var(--o23-playground-node-step-each-title-background, linear-gradient(135deg, ${NODE_EACH_STEP_COLOR} 0%, ${color(NODE_EACH_STEP_COLOR).alpha(0.7)} 70%, ${color(NODE_EACH_STEP_COLOR).alpha(0.5)} 100%))`,
   NODE_STEP_PARALLEL_BORDER: `var(--o23-playground-node-step-parallel-border, 2px solid ${NODE_PARALLEL_STEP_COLOR})`,
   NODE_STEP_PARALLEL_TITLE_BACKGROUND: `var(--o23-playground-node-step-parallel-title-background, linear-gradient(135deg, ${NODE_PARALLEL_STEP_COLOR} 0%, ${color(NODE_PARALLEL_STEP_COLOR).alpha(0.7)} 70%, ${color(NODE_PARALLEL_STEP_COLOR).alpha(0.5)} 100%))`,
+  NODE_STEP_CONDITIONAL_BORDER: `var(--o23-playground-node-step-conditional-border, 2px solid ${NODE_CONDITIONAL_STEP_COLOR})`,
+  NODE_STEP_CONDITIONAL_TITLE_BACKGROUND: `var(--o23-playground-node-step-conditional-title-background, linear-gradient(135deg, ${NODE_CONDITIONAL_STEP_COLOR} 0%, ${color(NODE_CONDITIONAL_STEP_COLOR).alpha(0.7)} 70%, ${color(NODE_CONDITIONAL_STEP_COLOR).alpha(0.5)} 100%))`,
+  NODE_STEP_ROUTES_BORDER: `var(--o23-playground-node-step-routes-border, 2px solid ${NODE_ROUTES_STEP_COLOR})`,
+  NODE_STEP_ROUTES_TITLE_BACKGROUND: `var(--o23-playground-node-step-routes-title-background, linear-gradient(135deg, ${NODE_ROUTES_STEP_COLOR} 0%, ${color(NODE_ROUTES_STEP_COLOR).alpha(0.7)} 70%, ${color(NODE_ROUTES_STEP_COLOR).alpha(0.5)} 100%))`,
   NODE_STEP_REF_PIPELINE_BORDER: `var(--o23-playground-node-step-ref-pipeline-border, 2px solid ${NODE_REF_PIPELINE_STEP_COLOR})`,
   NODE_STEP_REF_PIPELINE_TITLE_BACKGROUND: `var(--o23-playground-node-step-ref-pipeline-title-background, linear-gradient(135deg, ${NODE_REF_PIPELINE_STEP_COLOR} 0%, ${color(NODE_REF_PIPELINE_STEP_COLOR).alpha(0.7)} 70%, ${color(NODE_REF_PIPELINE_STEP_COLOR).alpha(0.5)} 100%))`,
   NODE_STEP_REF_STEP_BORDER: `var(--o23-playground-node-step-ref-step-border, 2px solid ${NODE_REF_STEP_STEP_COLOR})`,
@@ -294,6 +306,7 @@ const PlaygroundCssVars = {
   SNIPPET_HTTP_GENERATE_BODY_HEIGHT: "var(--o23-playground-snippet-http-generate-body-height, 200px)",
   SNIPPET_HTTP_READ_RESPONSE_HEIGHT: "var(--o23-playground-snippet-http-read-response-height, 200px)",
   SNIPPET_HTTP_RESPONSE_ERROR_HANDLES_HEIGHT: "var(--o23-playground-snippet-http-response-error-handles-height, 300px)",
+  SNIPPET_ROUTE_CHECK_HEIGHT: "var(--o23-playground-snippet-route-check-height, 200px)",
   SQL_HEIGHT: "var(--o23-playground-sql-height, 200px)"
 };
 const Accept = (props) => {
@@ -372,6 +385,13 @@ const PortIncorrect = (props) => {
     { ...props, "data-icon": "o23-port-incorrect", viewBox: "0 0 24 24", fill: "none", xmlns: "http://www.w3.org/2000/svg" },
     React.createElement("path", { opacity: "0.5", d: "M3 10.4167C3 7.21907 3 5.62028 3.37752 5.08241C3.75503 4.54454 5.25832 4.02996 8.26491 3.00079L8.83772 2.80472C10.405 2.26824 11.1886 2 12 2C12.8114 2 13.595 2.26824 15.1623 2.80472L15.7351 3.00079C18.7417 4.02996 20.245 4.54454 20.6225 5.08241C21 5.62028 21 7.21907 21 10.4167C21 10.8996 21 11.4234 21 11.9914C21 17.6294 16.761 20.3655 14.1014 21.5273C13.38 21.8424 13.0193 22 12 22C10.9807 22 10.62 21.8424 9.89856 21.5273C7.23896 20.3655 3 17.6294 3 11.9914C3 11.4234 3 10.8996 3 10.4167Z", stroke: "currentColor", strokeWidth: "1.5" }),
     React.createElement("path", { d: "M14.5 9.5L9.50002 14.5M9.5 9.49998L14.5 14.5", stroke: "currentColor", strokeWidth: "1.5", strokeLinecap: "round" })
+  );
+};
+const RouteTest = (props) => {
+  return React.createElement(
+    "svg",
+    { ...props, "data-icon": "o23-route-test", viewBox: "0 0 24 24", fill: "none", xmlns: "http://www.w3.org/2000/svg" },
+    React.createElement("path", { d: "M6.08913 13.2799H9.17913V20.4799C9.17913 22.1599 10.0891 22.4999 11.1991 21.2399L18.7691 12.6399C19.6991 11.5899 19.3091 10.7199 17.8991 10.7199H14.8091V3.5199C14.8091 1.8399 13.8991 1.4999 12.7891 2.7599L5.21913 11.3599C4.29913 12.4199 4.68913 13.2799 6.08913 13.2799Z", stroke: "currentColor", strokeWidth: "1.5", strokeMiterlimit: "10", strokeLinecap: "round", strokeLinejoin: "round" })
   );
 };
 const ElementChecked = (props) => {
@@ -553,6 +573,40 @@ const Zen = (props) => {
     React.createElement("path", { d: "M9.5 16L8.45827 17.389C8.42647 17.4314 8.41057 17.4526 8.39456 17.4728C8.13149 17.8053 7.76956 18.0456 7.36102 18.1591C7.33616 18.166 7.31042 18.1724 7.25902 18.1852L5.77423 18.5564C4.7315 18.8171 4 19.754 4 20.8288C4 21.4757 4.52435 22 5.17116 22H6.72727C7.32654 22 7.62617 22 7.917 21.9658C8.59721 21.8859 9.25375 21.667 9.84589 21.3229C10.0991 21.1757 10.3388 20.9959 10.8182 20.6364L11 20.5M11 20.5L13 19M11 20.5L13.5397 21.4524C14.1491 21.6809 14.4539 21.7952 14.7688 21.8688C14.9318 21.9069 15.0966 21.9368 15.2625 21.9583C15.5832 22 15.9087 22 16.5596 22H18.8288C19.4757 22 20 21.4757 20 20.8288C20 19.754 19.2685 18.8171 18.2258 18.5564L16.741 18.1852C16.6896 18.1724 16.6638 18.166 16.639 18.1591C16.2304 18.0456 15.8685 17.8053 15.6054 17.4728C15.5895 17.4526 15.5735 17.4313 15.5417 17.389L14.5 16", stroke: "currentColor", strokeWidth: "1.5", strokeLinecap: "round", strokeLinejoin: "round" })
   );
 };
+const FoldAllNodes = (props) => {
+  return React.createElement(
+    "svg",
+    { ...props, "data-icon": "o23-fold-all-nodes", viewBox: "0 0 24 24", fill: "none", xmlns: "http://www.w3.org/2000/svg" },
+    React.createElement("path", { d: "M2 12C2 7.28595 2 4.92893 3.46447 3.46447C4.92893 2 7.28595 2 12 2C16.714 2 19.0711 2 20.5355 3.46447C22 4.92893 22 7.28595 22 12C22 16.714 22 19.0711 20.5355 20.5355C19.0711 22 16.714 22 12 22C7.28595 22 4.92893 22 3.46447 20.5355C2 19.0711 2 16.714 2 12Z", stroke: "currentColor", strokeWidth: "1.5" }),
+    React.createElement("path", { opacity: "0.5", d: "M2 13H5.16026C6.06543 13 6.51802 13 6.91584 13.183C7.31367 13.3659 7.60821 13.7096 8.19729 14.3968L8.80271 15.1032C9.39179 15.7904 9.68633 16.1341 10.0842 16.317C10.482 16.5 10.9346 16.5 11.8397 16.5H12.1603C13.0654 16.5 13.518 16.5 13.9158 16.317C14.3137 16.1341 14.6082 15.7904 15.1973 15.1032L15.8027 14.3968C16.3918 13.7096 16.6863 13.3659 17.0842 13.183C17.482 13 17.9346 13 18.8397 13H22", stroke: "currentColor", strokeWidth: "1.5", strokeLinecap: "round" }),
+    React.createElement("path", { opacity: "0.5", d: "M8 7H16", stroke: "currentColor", strokeWidth: "1.5", strokeLinecap: "round" }),
+    React.createElement("path", { opacity: "0.5", d: "M10 10.5H14", stroke: "currentColor", strokeWidth: "1.5", strokeLinecap: "round" })
+  );
+};
+const UnfoldAllNodes = (props) => {
+  return React.createElement(
+    "svg",
+    { ...props, "data-icon": "o23-unfold-all-nodes", viewBox: "0 0 24 24", fill: "none", xmlns: "http://www.w3.org/2000/svg" },
+    React.createElement("path", { d: "M2 12C2 7.28595 2 4.92893 3.46447 3.46447C4.92893 2 7.28595 2 12 2C16.714 2 19.0711 2 20.5355 3.46447C22 4.92893 22 7.28595 22 12C22 16.714 22 19.0711 20.5355 20.5355C19.0711 22 16.714 22 12 22C7.28595 22 4.92893 22 3.46447 20.5355C2 19.0711 2 16.714 2 12Z", stroke: "currentColor", strokeWidth: "1.5" }),
+    React.createElement("path", { opacity: "0.5", d: "M4 14.25C3.58579 14.25 3.25 14.5858 3.25 15C3.25 15.4142 3.58579 15.75 4 15.75V14.25ZM20 15.75C20.4142 15.75 20.75 15.4142 20.75 15C20.75 14.5858 20.4142 14.25 20 14.25V15.75ZM14.5987 16.4013L14.0684 15.8709H14.0684L14.5987 16.4013ZM14.8284 16.1716L14.2981 15.6412V15.6412L14.8284 16.1716ZM9.15 16.25L8.59805 16.7578H8.59805L9.15 16.25ZM9.18546 16.2885L9.73741 15.7807H9.73741L9.18546 16.2885ZM10.2809 17.2877L9.94463 17.9581H9.94463L10.2809 17.2877ZM10.4692 17.3703L10.7348 16.6689H10.7348L10.4692 17.3703ZM13.5262 17.3082L13.2057 16.6301H13.2057L13.5262 17.3082ZM13.3458 17.3829L13.5987 18.089L13.5987 18.089L13.3458 17.3829ZM16.0631 15.1522L15.776 14.4593H15.776L16.0631 15.1522ZM7.87676 15.1477L8.15966 14.4531L8.15966 14.4531L7.87676 15.1477ZM7.97471 15.1907L7.65508 15.8692L7.65508 15.8692L7.97471 15.1907ZM4.25 15C4.25 15.4142 4.58579 15.75 5 15.75C5.41421 15.75 5.75 15.4142 5.75 15H4.25ZM18.25 15C18.25 15.4142 18.5858 15.75 19 15.75C19.4142 15.75 19.75 15.4142 19.75 15H18.25ZM4 15.75H6.30147V14.25H4V15.75ZM17.6569 15.75H20V14.25H17.6569V15.75ZM15.1291 16.9316L15.3588 16.7019L14.2981 15.6412L14.0684 15.8709L15.1291 16.9316ZM8.59805 16.7578L8.63351 16.7963L9.73741 15.7807L9.70195 15.7422L8.59805 16.7578ZM8.63351 16.7963C9.10743 17.3115 9.46605 17.718 9.94463 17.9581L10.6172 16.6173C10.4413 16.5291 10.2877 16.3789 9.73741 15.7807L8.63351 16.7963ZM11.9462 16.75C11.1333 16.75 10.9189 16.7387 10.7348 16.6689L10.2035 18.0717C10.7042 18.2613 11.2462 18.25 11.9462 18.25V16.75ZM9.94463 17.9581C10.0289 18.0004 10.1153 18.0383 10.2035 18.0717L10.7348 16.6689C10.6948 16.6538 10.6555 16.6365 10.6172 16.6173L9.94463 17.9581ZM14.0684 15.8709C13.5252 16.4141 13.3746 16.5503 13.2057 16.6301L13.8467 17.9863C14.3058 17.7693 14.6609 17.3998 15.1291 16.9316L14.0684 15.8709ZM11.9462 18.25C12.6083 18.25 13.1206 18.2602 13.5987 18.089L13.093 16.6768C12.9171 16.7398 12.7143 16.75 11.9462 16.75V18.25ZM13.2057 16.6301C13.1689 16.6475 13.1313 16.6631 13.093 16.6768L13.5987 18.089C13.683 18.0588 13.7658 18.0245 13.8467 17.9863L13.2057 16.6301ZM17.6569 14.25C16.9005 14.25 16.3135 14.2367 15.776 14.4593L16.3501 15.8451C16.5477 15.7633 16.7782 15.75 17.6569 15.75V14.25ZM15.3588 16.7019C15.9801 16.0806 16.1524 15.927 16.3501 15.8451L15.776 14.4593C15.2386 14.6819 14.8329 15.1065 14.2981 15.6412L15.3588 16.7019ZM6.30147 15.75C7.17044 15.75 7.39887 15.7629 7.59386 15.8423L8.15966 14.4531C7.62918 14.2371 7.04924 14.25 6.30147 14.25V15.75ZM9.70195 15.7422C9.19566 15.1919 8.81252 14.7564 8.29435 14.5122L7.65508 15.8692C7.84554 15.9589 8.00971 16.1183 8.59805 16.7578L9.70195 15.7422ZM7.59386 15.8423C7.6145 15.8507 7.63491 15.8597 7.65508 15.8692L8.29435 14.5122C8.24999 14.4913 8.20508 14.4716 8.15966 14.4531L7.59386 15.8423ZM6.5 12.75H17.5V11.25H6.5V12.75ZM17.5 12.75C17.9142 12.75 18.25 13.0858 18.25 13.5H19.75C19.75 12.2574 18.7426 11.25 17.5 11.25V12.75ZM5.75 13.5C5.75 13.0858 6.08579 12.75 6.5 12.75V11.25C5.25736 11.25 4.25 12.2574 4.25 13.5H5.75ZM6.5 9.75H17.5V8.25H6.5V9.75ZM17.5 9.75C17.9142 9.75 18.25 10.0858 18.25 10.5H19.75C19.75 9.25736 18.7426 8.25 17.5 8.25V9.75ZM5.75 10.5C5.75 10.0858 6.08579 9.75 6.5 9.75V8.25C5.25736 8.25 4.25 9.25736 4.25 10.5H5.75ZM5.75 10.5V7.5H4.25V10.5H5.75ZM6.5 6.75H17.5V5.25H6.5V6.75ZM18.25 7.5V10.5H19.75V7.5H18.25ZM17.5 6.75C17.9142 6.75 18.25 7.08579 18.25 7.5H19.75C19.75 6.25736 18.7426 5.25 17.5 5.25V6.75ZM5.75 7.5C5.75 7.08579 6.08579 6.75 6.5 6.75V5.25C5.25736 5.25 4.25 6.25736 4.25 7.5H5.75ZM5.75 15V13.5H4.25V15H5.75ZM18.25 13.5V15H19.75V13.5H18.25ZM5.75 13.5V10.5H4.25V13.5H5.75ZM18.25 10.5V13.5H19.75V10.5H18.25Z", fill: "currentColor" })
+  );
+};
+const ExpandToc = (props) => {
+  return React.createElement(
+    "svg",
+    { ...props, "data-icon": "o23-expand-toc", viewBox: "0 0 24 24", fill: "none", xmlns: "http://www.w3.org/2000/svg" },
+    React.createElement("path", { d: "M19 11L12 17L5 11", stroke: "currentColor", strokeWidth: "1.5", strokeLinecap: "round", strokeLinejoin: "round" }),
+    React.createElement("path", { opacity: "0.5", d: "M19 7L12 13L5 7", stroke: "currentColor", strokeWidth: "1.5", strokeLinecap: "round", strokeLinejoin: "round" })
+  );
+};
+const CollapseToc = (props) => {
+  return React.createElement(
+    "svg",
+    { ...props, "data-icon": "o23-collapse-toc", viewBox: "0 0 24 24", fill: "none", xmlns: "http://www.w3.org/2000/svg" },
+    React.createElement("path", { d: "M19 13L12 7L5 13", stroke: "currentColor", strokeWidth: "1.5", strokeLinecap: "round", strokeLinejoin: "round" }),
+    React.createElement("path", { opacity: "0.5", d: "M19 17L12 11L5 17", stroke: "currentColor", strokeWidth: "1.5", strokeLinecap: "round", strokeLinejoin: "round" })
+  );
+};
 const Labels = {
   ERROR: React.createElement(IntlLabel, { keys: ["o23", "error", "unknown"], value: "Something went wrong." }),
   NoContent: React.createElement(IntlLabel, { keys: ["o23", "error", "no-content"], value: "No content given." }),
@@ -594,6 +648,8 @@ const Labels = {
   StepMergeReplace: React.createElement(IntlLabel, { keys: ["o23", "step", "merge-replace"], value: "Replace Merge" }),
   StepMergeAsProperty: React.createElement(IntlLabel, { keys: ["o23", "step", "merge-as-property"], value: "Merge As" }),
   StepMainContent: React.createElement(IntlLabel, { keys: ["o23", "step", "main-content"], value: "Main Task" }),
+  StepRouteTest: React.createElement(IntlLabel, { keys: ["o23", "step", "route-test"], value: "Route Test" }),
+  StepRouteCheck: React.createElement(IntlLabel, { keys: ["o23", "step", "route-check"], value: "Check" }),
   StepSteps: React.createElement(IntlLabel, { keys: ["o23", "step", "sets", "steps"], value: "Sub Steps" }),
   StepHandleCatchableError: React.createElement(IntlLabel, { keys: ["o23", "step", "error-handles", "catchable"], value: "Catchable Errors" }),
   StepHandleUncatchableError: React.createElement(IntlLabel, { keys: ["o23", "step", "error-handles", "uncatchable"], value: "Uncatchable Errors" }),
@@ -616,6 +672,8 @@ const Labels = {
   StepUseAsyncSets: "Async Sets",
   StepUseEach: "Each",
   StepUseParallel: "Parallel",
+  StepUseConditional: "Conditional",
+  StepUseRoutes: "Routes",
   StepUseTypeormSnippet: "TypeOrm Snippet",
   StepUseTypeormBulkSave: "TypeOrm Bulk Save",
   StepUseTypeormSave: "TypeOrm Save",
@@ -901,6 +959,8 @@ var PlaygroundEventTypes;
   PlaygroundEventTypes2["REPAINT"] = "repaint";
   PlaygroundEventTypes2["ZOOM_TO"] = "zoom-to";
   PlaygroundEventTypes2["ZOOM_TO_FIT"] = "zoom-to-fit";
+  PlaygroundEventTypes2["FOLD_ALL_NODES"] = "fold-all-nodes";
+  PlaygroundEventTypes2["UNFOLD_ALL_NODES"] = "unfold-all-nodes";
 })(PlaygroundEventTypes || (PlaygroundEventTypes = {}));
 const Context$2 = reactExports.createContext({});
 Context$2.displayName = "PlaygroundEventBus";
@@ -1189,9 +1249,12 @@ const EditDialogHelpDocOpenHandle = qe.div.attrs(({ opened }) => {
     z-index: 1;
     transition: left ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION}, opacity ${CssVars.TRANSITION_DURATION} calc(${CssVars.TRANSITION_DURATION} / 2) ${CssVars.TRANSITION_TIMING_FUNCTION};
 
-    &[data-opened=false] + div[data-w=o23-playground-edit-dialog-help-doc-content] {
-        filter: blur(2px);
-        opacity: 0.7;
+    &[data-opened=false] {
+        backdrop-filter: blur(1.5px);
+
+        + div[data-w=o23-playground-edit-dialog-help-doc-content] {
+            opacity: 0.7;
+        }
     }
 
     &[data-opened=true] + div[data-w=o23-playground-edit-dialog-help-doc-content] {
@@ -1250,7 +1313,7 @@ const HelpDocContainer = qe.div.attrs(({ width }) => {
     padding: ${PlaygroundCssVars.EDIT_DIALOG_HELP_DOC_PADDING};
     min-width: var(--min-width);
     overflow: auto;
-    transition: opacity ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION}, filter ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION};
+    transition: opacity ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION};
 `;
 const NavigatorElementsContainer = qe.div.attrs({
   [DOM_KEY_WIDGET]: "o23-playground-edit-dialog-navigator-elements",
@@ -2095,11 +2158,11 @@ const DialogWorkArea = (props) => {
   const { fire } = usePlaygroundEventBus();
   const { fire: fireDialog } = useEditDialogEventBus();
   const onConfirmClicked = () => {
-    const anchor = confirm2(model);
-    if (anchor === true) {
+    const anchors = confirm2(model);
+    if (anchors === true) {
       fire(PlaygroundEventTypes.HIDE_EDIT_DIALOG);
     } else {
-      fireDialog(EditDialogEventTypes.LOCATE_ELEMENT, anchor);
+      fireDialog(EditDialogEventTypes.LOCATE_ELEMENT, anchors[0]);
     }
   };
   const onDiscardClicked = () => {
@@ -2159,23 +2222,72 @@ const StepUseHandler = (props) => {
   }, [on, off, repaint2]);
   return React.createElement(reactExports.Fragment, null);
 };
+const StepDefsReconfigurers = [];
+const registerStepDefsReconfigurers = (...configurers) => {
+  (configurers || []).forEach((configurer) => {
+    if (!StepDefsReconfigurers.includes(configurer)) {
+      StepDefsReconfigurers.push(configurer);
+    }
+  });
+};
+const reconfigureStepDefProperties = (properties, model) => {
+  for (const reconfigurer of StepDefsReconfigurers) {
+    const reconfigured = reconfigurer.properties(properties, model);
+    if (reconfigured != null) {
+      return reconfigured;
+    }
+  }
+  return properties;
+};
+const reconfigureStepDefPrepare = (prepare2, model) => {
+  for (const reconfigurer of StepDefsReconfigurers) {
+    const reconfigured = reconfigurer.prepare(prepare2, model);
+    if (reconfigured != null) {
+      return reconfigured;
+    }
+  }
+  return prepare2;
+};
+const reconfigureStepDefConfirm = (confirm2, model) => {
+  for (const reconfigurer of StepDefsReconfigurers) {
+    const reconfigured = reconfigurer.confirm(confirm2, model);
+    if (reconfigured != null) {
+      return reconfigured;
+    }
+  }
+  return confirm2;
+};
+const reconfigureStepDefDiscard = (discard2, model) => {
+  for (const reconfigurer of StepDefsReconfigurers) {
+    if (reconfigurer.discard != null) {
+      const reconfigured = reconfigurer.discard(discard2, model);
+      if (reconfigured != null) {
+        return reconfigured;
+      }
+    }
+  }
+  return discard2;
+};
 const StepDialogContent = (props) => {
-  const { model: nodeModel } = props;
-  const { step: def, file } = nodeModel;
-  const [model] = reactExports.useState(findStepDef(def.use).prepare(def));
+  const { model } = props;
+  const { step: def, file } = model;
+  const [configurableModel] = reactExports.useState(reconfigureStepDefPrepare(findStepDef(def.use).prepare, model)(def));
   const forceUpdate = useForceUpdate();
-  const { use } = model;
+  const { use } = configurableModel;
   const StepDefs = findStepDef(use);
   const onConfirm = (model2) => {
-    return StepDefs.confirm(model2, def, file, {
-      handlers: nodeModel.handlers,
-      assistant: nodeModel.assistant
+    return reconfigureStepDefConfirm(StepDefs.confirm, model2)(model2, def, file, {
+      handlers: model2.handlers,
+      assistant: model2.assistant
     });
   };
-  const onDiscard = (model2) => StepDefs.discard(model2);
+  const onDiscard = (model2) => {
+    reconfigureStepDefDiscard(StepDefs.discard, model2)(model2);
+  };
+  const elements = reconfigureStepDefProperties(StepDefs.properties, model);
   return React.createElement(
     DialogContent,
-    { model, helpDoc: StepDefs.helpDocs, elements: StepDefs.properties, confirm: onConfirm, discard: onDiscard, assistant: nodeModel.assistant },
+    { model: configurableModel, helpDoc: StepDefs.helpDocs, elements, confirm: onConfirm, discard: onDiscard, assistant: model.assistant },
     React.createElement(StepUseHandler, { repaint: forceUpdate })
   );
 };
@@ -2219,29 +2331,31 @@ const EditDialog = () => {
     React.createElement(EditDialogWrapper, null, state.content)
   );
 };
-const markdown$14 = "Handle any error thrown by current step. The following parameters can be used during the error handling process:\n\n- `$code`: Error code. Note that it is always `O01-99999` when using the `AnyError` handler.\n- `$error`: Error object itself,\n- `$factor`: The content portion of the request data, excluding context data,\n- `$request`: The entire request data, including both content and context,\n- `$helpers` or `$`: Data manipulation helpers.\n\n> It is an async function, so `await` is available inside.\n";
-const markdown$13 = "Handle `CatchableError` thrown by current step. The following parameters can be used during the error handling process:\n\n- `$code`: Error code. Note that it is always `O01-99999` when using the `AnyError` handler.\n- `$error`: Error object itself,\n- `$factor`: The content portion of the request data, excluding context data,\n- `$request`: The entire request data, including both content and context,\n- `$helpers` or `$`: Data manipulation helpers.\n\n> It is an async function, so `await` is available inside.\n";
-const markdown$12 = "### Error handling\n\nError handling is a critical part of any step. It is important to handle errors properly to ensure that your step is robust\nand reliable. `@rainbow-o23` provided a standard exception handling process, including the following four types of exceptions:\n\n- `CatchableError`: Catchable exception. Generally refers to exceptions thrown in pipeline steps expected to be caught and handled\n  externally,\n- `ExposedUncathableError`: Uncatchable exception which identified as exposed. Generally refers to exceptions thrown in pipeline steps not\n  expected to be handled additionally externally, and should be exposed to the caller,\n- `UncatchableError`: Uncatchable exception. Generally refers to exceptions thrown in pipeline steps not expected to be handled additionally\n  externally,\n- `AnyError`: Any exception. Generally refers to any exception thrown in pipeline steps.\n\nIt is important to note that exception handling is mutually exclusive. If an exception has already been caught by a handler, it will not be\ncaught by any other handlers. After throwing an exception, the pipeline steps will detect exception type in the above order. As long as the\nexception matches the catch type and the processor for that catch type has been defined, the defined processing logic will be entered. In\npractical scenarios, exception catching needs to be done according to requirements. Generally, there are some recommended practices:\n\n- Generally, `CatchableError` is expected to be caught and handled. For whether the pipeline step will throw this exception, please refer to\n  the corresponding step documentation,\n- In most pipeline steps, since custom snippet can be used to define logic (in addition to the step itself, can use snippet to\n  define the logic for `pick from input` and `write to output`), any type of exception can be thrown in these snippets, so whether or not\n  you need to catch it depends on the specific definition of the custom snippet for this step,\n- Generally speaking, `ExposedUncatchableError` and `UncatchableError` do not require further processing,\n- Also, can use `AnyError` to catch all types of exceptions, including `Node.js` standard exceptions\n\n`@rainbow-o23` provides two ways to handle exceptions, which will be demonstrated below.\n\n#### Using snippet\n\nUse snippet processing for handling error. The following parameters can be used during the error handling process:\n\n- `$code`: Error code. Note that it is always `O01-99999` when using the `AnyError` handler.\n- `$error`: Error object itself,\n- `$factor`: The content portion of the request data, excluding context data,\n- `$request`: The entire request data, including both content and context,\n- `$helpers` or `$`: Data manipulation helpers.\n\n> All handlers are async functions, so `await` is available inside.\n\nAfter handling the exception in the snippet, can either return normally, rethrow the original exception, or construct and throw a new\nexception. The following examples will provide some references:\n\n```ts\n// simply log the exception.\n$.$logger.error(`An exception[code=${$code}] caught.`, $error);\n\n// return normally\nreturn 'Everything is OK now.';\n\n// or check exception type, decide to rethrow or construct a new exception\nif ($.$errors.isCatchable($error)) {\n	// construct and throw a new exception\n	$.$errors.exposed({status: 500, code: $code, reason: $error.message});\n} else {\n	// rethrow the original exception\n	throw $error;\n}\n```\n\n> In most cases, special exception handling is not necessary, as `@rainbow-o23` will handle all exceptions consistently when returning to\n> the API caller.\n\n> When choosing to return normally, meaning no exception is thrown anymore, the returned data will go through the `write to output` process\n> and will be consistent with the normal logic of returning data in the pipeline steps. However, if an exception is thrown during\n> the `write to output` process, this exception will be thrown directly, no error handling on this situation.\n\nHere are some commonly used utility function examples for exception handling in `$helpers`. For detailed specifications, please refer to\nthe `@rainbow-o23` documentation.\n\n```ts\n// log exception\n$.$logger.log(`An exception[code=${$code}] caught.`, $error);\n$.$logger.warn(`An exception[code=${$code}] caught.`, $error);\n// If the log function has two or more parameters, and the last one is a string, then the last parameter will be used as the log category\n$.$logger.error(`An exception[code=${$code}] caught.`, $error, 'SomeLogCategory');\n\n// check error type\n// note exposed uncatchable error is also an uncatchable error\n// so if want to check exposed uncatchable error, should check it first\n$.$errors.isCatchable($error);       // check it is a catchable error\n$.$errors.isExposed($error);         // check it is an exposed uncatchable error\n$.$errors.isUncatchable($error);     // check it is an uncatchable error\n\n// construct a new error and rethrow it\n// for catchable\n$.$errors.catchable({code: $code, reason: 'I am catchable.'});\n// for exposed uncatchable, a status field is required\n// status is exactly following the HTTP status code, code is the error code, reason is the error message\n$.$error({status: 500, code: $code, reason: 'Unpredicated error occurred.'});\n$.$errors.exposed({status: 500, code: $code, reason: 'Unpredicated error occurred.'});\n// for uncatchable\n$.$errors.uncatchable({code: $code, reason: 'I am uncatchable.'});\n```\n\n#### Using sub-steps\n\nIn practice, if an exception requires additional handling and is not thrown after processing, it is recommended to configure this using\npipeline steps. When choosing to handle exceptions using pipeline steps, the format of the request data received by the step is as follows\n\n```ts\ninterface Data {\n	$code: string;        // error code \n	$error: Error;        // error itself \n	$factor: any;         // original factor data, return by the pick from input process\n	$request: any;        // original request data, with both input data and pipeline context\n}\n```\n\n";
-const markdown$11 = "Handle `ExposedUncatchableError` thrown by current step. The following parameters can be used during the error handling process:\n\n- `$code`: Error code. Note that it is always `O01-99999` when using the `AnyError` handler.\n- `$error`: Error object itself,\n- `$factor`: The content portion of the request data, excluding context data,\n- `$request`: The entire request data, including both content and context,\n- `$helpers` or `$`: Data manipulation helpers.\n\n> It is an async function, so `await` is available inside.\n";
-const markdown$10 = "Obtain a portion of the request data as the input for this step. Additional processing of the data can also be performed during this\nprocess. The following parameters can be used during the conversion process:\n\n- `$factor`: The content portion of the request data, excluding context data,\n- `$request`: The entire request data, including both content and context,\n- `$helpers` or `$`: Data manipulation helpers.\n\nThe returned data will be used as the real input data for this step. If no data is returned, there is no input data for this step.\n";
-const markdown$$ = "### Input and output\n\nUsually, when processing logic, we do not need all the memory contexts, but only need to extract certain fragments for processing and return\nthe processing results to the context for subsequent logic to continue processing. Therefore, `@rainbow-o23` provides a relevant\nimplementation, allowing pipeline steps to flexibly access the relevant memory data and write back the processed result data to the context\nin the required format.\n\n#### Pick from input\n\nUse the `Pick from input` property to define a JavaScript script. The returned data will be used as input data for this step. The script is\na function that takes the following parameters:\n\n- `$factor` represents the incoming data,\n- `$request` represents the original request data (including incoming data and a context), it is not recommended,\n- `$helpers` represents function supporting, and it has a shortcut `$`.\n\nHere is a simple example:\n\n```ts\n// incoming data\nconst incoming = {name: 'John', age: 23};\n\n// Only the age is needed as a parameter in the step processing, not the name.\n// Define a transformation script, so in the actual processing logic of the current step, only the age will be collected, and there won't be a field for the name attribute.\nreturn {age: $factor.age};\n```\n\n> `return` is not necessary. If the script is only one line (and has no line breaks), the system will consider the result of executing that\n> line as the result of the entire function.\n\n> It's important to note that whether modifications to memory data during processing will affect the original input data depends on how the\n> transformation is handled. Generally, if deep cloning is not performed, it will affect the data; otherwise, it will not.\n\n#### Write to output\n\nUse the `Write to output` property to define a script. The returned data will be used as output data for this step. The script is a function\nthat takes the following parameters:\n\n- `$result` represents the outgoing data,\n- `$request` represents the original request data (including incoming data and a context), it is not recommended,\n- `$helpers` represents function supporting, and it has a shortcut `$`.\n\nHere is a simple example:\n\n```ts\n// outgoing data\nconst outgoing = {name: 'John', age: 23};\n\n// The result data should only include age, not the name.\n// Define a transformation script, the age alone will be stored in memory for subsequent use.\nreturn {age: $result.age};\n```\n\n> `return` is not necessary. If the script is only one line (and has no line breaks), the system will consider the result of executing that\n> line as the result of the entire function.\n\n>\n\n#### Merge-back Strategy\n\nAfter processing the step logic and obtaining the returned data, you can also define how this returned data should be merged into the\ncontext of the entire pipeline. There are several ways to define this, all declared using the `Merge-back strategy` attribute:\n\n- Defined as `Replace`, it means the returned data will overwrite the original context and be used as the new context.\n- Defined as `Unbox and merge`, it means the returned data will be automatically unboxed and merged into the original context. In this\n  case, the returned data must be a JSON object and cannot be a primitive type or an array.\n- Defined as `As specific property`, it means the returned data will be merged into the original context under the specified name.\n\nHere is a simple example:\n\n```ts\n// context data\nlet context = {name: 'John', age: 0};\nconst result = {age: 23};\n\n// merge not defined, equivalent to\ncontext = result;\n// context is {age: 23}\n\n// merge is \"unbox and merge\", equivalent to\ncontext = {...context, ...result};\n// context is {name: 'John', age: 23}\n\n// merge is 'person', equivalent to\ncontext = {...context, person: result};\n// context is {name: 'John', age: 0, person: {age: 23}}\n```\n\n> Note that in the latter two cases, there is a possibility of name collision resulting in the original context being overwritten.\n> Therefore, it is necessary to have a clear understanding of the data structure in the context.\n\n#### Keep or clear\n\nIn the following `Write to output` scenarios, and in cases where merge-back strategy is specified as `Replace`:\n\n- Returning `null` or `undefined` (recommended to use `(void 0)` to represent `undefined`) indicates that the original request data will\n  continue to be used as the request data for the next step without any modifications.\n- Returning a flag created by `$helpers.$clearContextData()` to clear context data will be used as the request data for the next step, while\n  all other data is cleared.\n\n> Please note that \"without any modifications\" is a conceptual reference. If the data has already been altered by the logic executed in the\n> step, the data passed to the next step may not be identical to the input data of this step.\n";
-const markdown$_ = "Define the strategy for writing back step result data to memory:\n\n- `Replace`: means the returned data will overwrite the original context and be used as the new context.\n- `Unbox and merge`: means the returned data will be automatically unboxed and merged into the original context. In this\n  case, the returned data must be a JSON object and cannot be a primitive type or an array.\n- `As specific property`: means the returned data will be merged into the original context under the specified name.\n";
-const markdown$Z = "A brief name that indicates the purpose of the step.\n";
-const markdown$Y = "Write back the result of the step execution to memory for use as the request data in the next step. Additional processing of the data can\nalso be performed during this process. The following parameters can be used during the conversion process:\n\n- `$result`: Result data of the step execution,\n- `$request`: Entire request data, including both content and context,\n- `$helpers` or `$`: Data manipulation helpers.\n\nThe returned data will be written back to memory as the actual result data for this step.\n\n> How the step's returned data is written back to memory depends on the return result of this process and the chosen write-back strategy.\n> Please refer to the merge-back strategy documentation for details.\n";
-const markdown$X = "Handle `UncatchableError` thrown by current step. The following parameters can be used during the error handling process:\n\n- `$code`: Error code. Note that it is always `O01-99999` when using the `AnyError` handler.\n- `$error`: Error object itself,\n- `$factor`: The content portion of the request data, excluding context data,\n- `$request`: The entire request data, including both content and context,\n- `$helpers` or `$`: Data manipulation helpers.\n\n> It is an async function, so `await` is available inside.\n";
-const markdown$W = "The specified step definition is used. The logic executed by the system has already been predefined in the step definition. After specifying\nthe step definition, you will also need to specify the parameters required for that step definition.\n";
-const docs$g = {
-  stepName: markdown$Z,
-  stepUse: markdown$W,
-  stepFromInput: markdown$10,
-  stepToOutput: markdown$Y,
-  stepMergeToRequest: markdown$_,
-  stepCatchableErrorHandle: markdown$13,
-  stepUncatchableErrorHandle: markdown$X,
-  stepExposedErrorHandle: markdown$11,
-  stepAnyErrorHandle: markdown$14,
-  stepIOTransformer: markdown$$.replace(/\$/g, "$$$$"),
-  stepErrorHandles: markdown$12.replace(/\$/g, "$$$$")
+const markdown$17 = "Handle any error thrown by current step. The following parameters can be used during the error handling process:\n\n- `$code`: Error code. Note that it is always `O01-99999` when using the `AnyError` handler.\n- `$error`: Error object itself,\n- `$factor`: The content portion of the request data, excluding context data,\n- `$request`: The entire request data, including both content and context,\n- `$helpers` or `$`: Data manipulation helpers.\n\n> It is an async function, so `await` is available inside.\n";
+const markdown$16 = "Handle `CatchableError` thrown by current step. The following parameters can be used during the error handling process:\n\n- `$code`: Error code. Note that it is always `O01-99999` when using the `AnyError` handler.\n- `$error`: Error object itself,\n- `$factor`: The content portion of the request data, excluding context data,\n- `$request`: The entire request data, including both content and context,\n- `$helpers` or `$`: Data manipulation helpers.\n\n> It is an async function, so `await` is available inside.\n";
+const markdown$15 = "### Error handling\n\nError handling is a critical part of any step. It is important to handle errors properly to ensure that your step is robust\nand reliable. `@rainbow-o23` provided a standard exception handling process, including the following four types of exceptions:\n\n- `CatchableError`: Catchable exception. Generally refers to exceptions thrown in pipeline steps expected to be caught and handled\n  externally,\n- `ExposedUncathableError`: Uncatchable exception which identified as exposed. Generally refers to exceptions thrown in pipeline steps not\n  expected to be handled additionally externally, and should be exposed to the caller,\n- `UncatchableError`: Uncatchable exception. Generally refers to exceptions thrown in pipeline steps not expected to be handled additionally\n  externally,\n- `AnyError`: Any exception. Generally refers to any exception thrown in pipeline steps.\n\nIt is important to note that exception handling is mutually exclusive. If an exception has already been caught by a handler, it will not be\ncaught by any other handlers. After throwing an exception, the pipeline steps will detect exception type in the above order. As long as the\nexception matches the catch type and the processor for that catch type has been defined, the defined processing logic will be entered. In\npractical scenarios, exception catching needs to be done according to requirements. Generally, there are some recommended practices:\n\n- Generally, `CatchableError` is expected to be caught and handled. For whether the pipeline step will throw this exception, please refer to\n  the corresponding step documentation,\n- In most pipeline steps, since custom snippet can be used to define logic (in addition to the step itself, can use snippet to\n  define the logic for `pick from input` and `write to output`), any type of exception can be thrown in these snippets, so whether or not\n  you need to catch it depends on the specific definition of the custom snippet for this step,\n- Generally speaking, `ExposedUncatchableError` and `UncatchableError` do not require further processing,\n- Also, can use `AnyError` to catch all types of exceptions, including `Node.js` standard exceptions\n\n`@rainbow-o23` provides two ways to handle exceptions, which will be demonstrated below.\n\n#### Using snippet\n\nUse snippet processing for handling error. The following parameters can be used during the error handling process:\n\n- `$code`: Error code. Note that it is always `O01-99999` when using the `AnyError` handler.\n- `$error`: Error object itself,\n- `$factor`: The content portion of the request data, excluding context data,\n- `$request`: The entire request data, including both content and context,\n- `$helpers` or `$`: Data manipulation helpers.\n\n> All handlers are async functions, so `await` is available inside.\n\nAfter handling the exception in the snippet, can either return normally, rethrow the original exception, or construct and throw a new\nexception. The following examples will provide some references:\n\n```ts\n// simply log the exception.\n$.$logger.error(`An exception[code=${$code}] caught.`, $error);\n\n// return normally\nreturn 'Everything is OK now.';\n\n// or check exception type, decide to rethrow or construct a new exception\nif ($.$errors.isCatchable($error)) {\n	// construct and throw a new exception\n	$.$errors.exposed({status: 500, code: $code, reason: $error.message});\n} else {\n	// rethrow the original exception\n	throw $error;\n}\n```\n\n> In most cases, special exception handling is not necessary, as `@rainbow-o23` will handle all exceptions consistently when returning to\n> the API caller.\n\n> When choosing to return normally, meaning no exception is thrown anymore, the returned data will go through the `write to output` process\n> and will be consistent with the normal logic of returning data in the pipeline steps. However, if an exception is thrown during\n> the `write to output` process, this exception will be thrown directly, no error handling on this situation.\n\nHere are some commonly used utility function examples for exception handling in `$helpers`. For detailed specifications, please refer to\nthe `@rainbow-o23` documentation.\n\n```ts\n// log exception\n$.$logger.log(`An exception[code=${$code}] caught.`, $error);\n$.$logger.warn(`An exception[code=${$code}] caught.`, $error);\n// If the log function has two or more parameters, and the last one is a string, then the last parameter will be used as the log category\n$.$logger.error(`An exception[code=${$code}] caught.`, $error, 'SomeLogCategory');\n\n// check error type\n// note exposed uncatchable error is also an uncatchable error\n// so if want to check exposed uncatchable error, should check it first\n$.$errors.isCatchable($error);       // check it is a catchable error\n$.$errors.isExposed($error);         // check it is an exposed uncatchable error\n$.$errors.isUncatchable($error);     // check it is an uncatchable error\n\n// construct a new error and rethrow it\n// for catchable\n$.$errors.catchable({code: $code, reason: 'I am catchable.'});\n// for exposed uncatchable, a status field is required\n// status is exactly following the HTTP status code, code is the error code, reason is the error message\n$.$error({status: 500, code: $code, reason: 'Unpredicated error occurred.'});\n$.$errors.exposed({status: 500, code: $code, reason: 'Unpredicated error occurred.'});\n// for uncatchable\n$.$errors.uncatchable({code: $code, reason: 'I am uncatchable.'});\n```\n\n#### Using sub-steps\n\nIn practice, if an exception requires additional handling and is not thrown after processing, it is recommended to configure this using\npipeline steps. When choosing to handle exceptions using pipeline steps, the format of the request data received by the step is as follows\n\n```ts\ninterface Data {\n	$code: string;        // error code \n	$error: Error;        // error itself \n	$factor: any;         // original factor data, return by the pick from input process\n	$request: any;        // original request data, with both input data and pipeline context\n}\n```\n\n";
+const markdown$14 = "Handle `ExposedUncatchableError` thrown by current step. The following parameters can be used during the error handling process:\n\n- `$code`: Error code. Note that it is always `O01-99999` when using the `AnyError` handler.\n- `$error`: Error object itself,\n- `$factor`: The content portion of the request data, excluding context data,\n- `$request`: The entire request data, including both content and context,\n- `$helpers` or `$`: Data manipulation helpers.\n\n> It is an async function, so `await` is available inside.\n";
+const markdown$13 = "Obtain a portion of the request data as the input for this step. Additional processing of the data can also be performed during this\nprocess. The following parameters can be used during the conversion process:\n\n- `$factor`: The content portion of the request data, excluding context data,\n- `$request`: The entire request data, including both content and context,\n- `$helpers` or `$`: Data manipulation helpers.\n\nThe returned data will be used as the real input data for this step. If no data is returned, there is no input data for this step.\n\n> It is a sync function, so `await` is not available inside.\n";
+const markdown$12 = "### Input and output\n\nUsually, when processing logic, we do not need all the memory contexts, but only need to extract certain fragments for processing and return\nthe processing results to the context for subsequent logic to continue processing. Therefore, `@rainbow-o23` provides a relevant\nimplementation, allowing pipeline steps to flexibly access the relevant memory data and write back the processed result data to the context\nin the required format.\n\n#### Pick from input\n\nUse the `Pick from input` property to define a JavaScript script. The returned data will be used as input data for this step. The script is\na function that takes the following parameters:\n\n- `$factor` represents the incoming data,\n- `$request` represents the original request data (including incoming data and a context), it is not recommended,\n- `$helpers` represents function supporting, and it has a shortcut `$`.\n\nHere is a simple example:\n\n```ts\n// incoming data\nconst incoming = {name: 'John', age: 23};\n\n// Only the age is needed as a parameter in the step processing, not the name.\n// Define a transformation script, so in the actual processing logic of the current step, only the age will be collected, and there won't be a field for the name attribute.\nreturn {age: $factor.age};\n```\n\n> `return` is not necessary. If the script is only one line (and has no line breaks), the system will consider the result of executing that\n> line as the result of the entire function.\n\n> It's important to note that whether modifications to memory data during processing will affect the original input data depends on how the\n> transformation is handled. Generally, if deep cloning is not performed, it will affect the data; otherwise, it will not.\n\n#### Write to output\n\nUse the `Write to output` property to define a script. The returned data will be used as output data for this step. The script is a function\nthat takes the following parameters:\n\n- `$result` represents the outgoing data,\n- `$request` represents the original request data (including incoming data and a context), it is not recommended,\n- `$helpers` represents function supporting, and it has a shortcut `$`.\n\nHere is a simple example:\n\n```ts\n// outgoing data\nconst outgoing = {name: 'John', age: 23};\n\n// The result data should only include age, not the name.\n// Define a transformation script, the age alone will be stored in memory for subsequent use.\nreturn {age: $result.age};\n```\n\n> `return` is not necessary. If the script is only one line (and has no line breaks), the system will consider the result of executing that\n> line as the result of the entire function.\n\n>\n\n#### Merge-back Strategy\n\nAfter processing the step logic and obtaining the returned data, you can also define how this returned data should be merged into the\ncontext of the entire pipeline. There are several ways to define this, all declared using the `Merge-back strategy` attribute:\n\n- Defined as `Replace`, it means the returned data will overwrite the original context and be used as the new context.\n- Defined as `Unbox and merge`, it means the returned data will be automatically unboxed and merged into the original context. In this\n  case, the returned data must be a JSON object and cannot be a primitive type or an array.\n- Defined as `As specific property`, it means the returned data will be merged into the original context under the specified name.\n\nHere is a simple example:\n\n```ts\n// context data\nlet context = {name: 'John', age: 0};\nconst result = {age: 23};\n\n// merge not defined, equivalent to\ncontext = result;\n// context is {age: 23}\n\n// merge is \"unbox and merge\", equivalent to\ncontext = {...context, ...result};\n// context is {name: 'John', age: 23}\n\n// merge is 'person', equivalent to\ncontext = {...context, person: result};\n// context is {name: 'John', age: 0, person: {age: 23}}\n```\n\n> Note that in the latter two cases, there is a possibility of name collision resulting in the original context being overwritten.\n> Therefore, it is necessary to have a clear understanding of the data structure in the context.\n\n#### Keep or clear\n\nIn the following `Write to output` scenarios, and in cases where merge-back strategy is specified as `Replace`:\n\n- Returning `null` or `undefined` (recommended to use `(void 0)` to represent `undefined`) indicates that the original request data will\n  continue to be used as the request data for the next step without any modifications.\n- Returning a flag created by `$helpers.$clearContextData()` to clear context data will be used as the request data for the next step, while\n  all other data is cleared.\n\n> Please note that \"without any modifications\" is a conceptual reference. If the data has already been altered by the logic executed in the\n> step, the data passed to the next step may not be identical to the input data of this step.\n";
+const markdown$11 = "Define the strategy for writing back step result data to memory:\n\n- `Replace`: means the returned data will overwrite the original context and be used as the new context.\n- `Unbox and merge`: means the returned data will be automatically unboxed and merged into the original context. In this\n  case, the returned data must be a JSON object and cannot be a primitive type or an array.\n- `As specific property`: means the returned data will be merged into the original context under the specified name.\n";
+const markdown$10 = "A brief name that indicates the purpose of the step.\n";
+const markdown$$ = "Check if there is a need to execute the subsequent steps. Return `true` if necessary, otherwise skip to the next routing check or enter\n`otherwise` route. The following parameters can be used during the build process:\n\n- `$factor`: The content portion of the request data, excluding context data,\n- `$request`: The entire request data, including both content and context,\n- `$helpers` or `$`: Data manipulation helpers.\n\n> This check is performed before `Pick from input`.\n\n> Modifying memory data within this function is not recommended as it may lead to unpredictable data changes.\n\n> It is an async function, so `await` is available inside.\n";
+const markdown$_ = "Write back the result of the step execution to memory for use as the request data in the next step. Additional processing of the data can\nalso be performed during this process. The following parameters can be used during the conversion process:\n\n- `$result`: Result data of the step execution,\n- `$request`: Entire request data, including both content and context,\n- `$helpers` or `$`: Data manipulation helpers.\n\nThe returned data will be written back to memory as the actual result data for this step.\n\n> How the step's returned data is written back to memory depends on the return result of this process and the chosen write-back strategy.\n> Please refer to the merge-back strategy documentation for details.\n\n> It is a sync function, so `await` is not available inside.\n";
+const markdown$Z = "Handle `UncatchableError` thrown by current step. The following parameters can be used during the error handling process:\n\n- `$code`: Error code. Note that it is always `O01-99999` when using the `AnyError` handler.\n- `$error`: Error object itself,\n- `$factor`: The content portion of the request data, excluding context data,\n- `$request`: The entire request data, including both content and context,\n- `$helpers` or `$`: Data manipulation helpers.\n\n> It is an async function, so `await` is available inside.\n";
+const markdown$Y = "The specified step definition is used. The logic executed by the system has already been predefined in the step definition. After specifying\nthe step definition, you will also need to specify the parameters required for that step definition.\n";
+const docs$i = {
+  stepName: markdown$10,
+  stepUse: markdown$Y,
+  stepRouteCheck: markdown$$,
+  stepFromInput: markdown$13,
+  stepToOutput: markdown$_,
+  stepMergeToRequest: markdown$11,
+  stepCatchableErrorHandle: markdown$16,
+  stepUncatchableErrorHandle: markdown$Z,
+  stepExposedErrorHandle: markdown$14,
+  stepAnyErrorHandle: markdown$17,
+  stepIOTransformer: markdown$12.replace(/\$/g, "$$$$"),
+  stepErrorHandles: markdown$15.replace(/\$/g, "$$$$")
 };
 const addTocToStepDocs = (markdown2) => {
   const indexes = new Array(6).fill(0);
@@ -2274,118 +2388,126 @@ const mergeStepDocsFreely = (doc, replacements) => {
   return addTocToStepDocs(markdown2);
 };
 const mergeStepDocs = (doc, toc = true) => {
-  const markdown2 = doc.replace("${transformer}\n", docs$g.stepIOTransformer).replace("${errorHandles}\n", docs$g.stepErrorHandles);
+  const markdown2 = doc.replace("${transformer}\n", docs$i.stepIOTransformer).replace("${errorHandles}\n", docs$i.stepErrorHandles);
   return toc ? addTocToStepDocs(markdown2) : markdown2;
 };
 const mergeStepDocsAnd = (doc, replace, toc = true) => {
   doc = Object.keys(replace).reduce((doc2, key) => doc2.replace(key, replace[key]), doc);
   return mergeStepDocs(doc, toc);
 };
-const markdown$V = "### Async sets step\n\nThe async sets pipeline step includes a set of sub-step definitions, where all the actual processing logic is executed within the sub-steps,\nasynchronously. The input data for the first sub-step could be specified by `Pick from input`.\n\n> Note that the sub-steps are executed in sequence, asynchronous is relative to this async sets step. This also means that modifications to\n> memory within sub-steps cannot be directly reflected in the current process, so must handle it with caution. Generally, direct\n> modifications to input data or context data within sub-steps should be avoided unless it can be confirmed that the data will not be used\n> in the current process.\n\n#### Environment variables\n\nThis step does not use any environment variables.\n\n#### Step variables\n\nThis step has no other properties defined except for using the `steps` attribute to define sub-steps.\n\n#### Returning\n\nThis step does not return anything.\n\n${transformer}\n\n${errorHandles}\n";
+const markdown$X = "### Async sets step\n\nThe async sets pipeline step includes a set of sub-step definitions, where all the actual processing logic is executed within the sub-steps,\nasynchronously. The input data for the first sub-step could be specified by `Pick from input`.\n\n> Note that the sub-steps are executed in sequence, asynchronous is relative to this async sets step. This also means that modifications to\n> memory within sub-steps cannot be directly reflected in the current process, so must handle it with caution. Generally, direct\n> modifications to input data or context data within sub-steps should be avoided unless it can be confirmed that the data will not be used\n> in the current process.\n\n#### Environment variables\n\nThis step does not use any environment variables.\n\n#### Step variables\n\nThis step has no other properties defined except for using the `steps` attribute to define sub-steps.\n\n#### Returning\n\nThis step does not return anything.\n\n${transformer}\n\n${errorHandles}\n";
+const docs$h = {
+  asyncSetsStep: mergeStepDocs(markdown$X)
+};
+const markdown$W = "### Conditional step\n\nThe conditional pipeline step provides two routes. The first route has a check, and if the check passes, the set of steps defined for the\nfirst route is executed. If the check fails, it proceeds to the other (`otherwise`) route. The `otherwise` route is allowed to be absent.\n\n#### Environment variables\n\nThis step does not use any environment variables.\n\n#### Step variables\n\nDefine the `check` attribute, which is a JavaScript script that will ultimately be executed as a JavaScript function. This function\naccepts the following input parameters:\n\n- `$factor`: The content portion of the request data, excluding context data,\n- `$request`: The entire request data, including both content and context,\n- `$helpers` or `$`: Data manipulation helpers.\n\n> It is important to note that the `$factor` passed to `check` is provided by `Pick from input`, but `Pick from input` does not affect the\n> input parameters of the sub-steps (unless memory data is modified).\n\n#### Returning\n\nThe return data for this step is determined by the return data of the route executed at runtime.\n\n${transformer}\n\n${errorHandles}\n";
+const docs$g = {
+  conditionalStep: mergeStepDocs(markdown$W)
+};
+const markdown$V = "Delete specified property or properties from the input data. If there are multiple attributes, use `,` to connect them.\n\nFor example, if there is input data like `{a: 1, b: 2, c: 3}`, then with the following definition, you can retrieve the\ncorresponding value:\n\n| Property | After deletion  |\n|:---------|:----------------|\n| `a`      | `{b : 2, c: 3}` |\n| `a, b`   | `{c: 3}`        |\n\n> If the specified property name does not exist on the given data object, there will be no side effects.\n";
+const markdown$U = "### Delete property step\n\nThe delete property pipeline step remove the specified property name from input data.\n\n#### Environment variables\n\nThis step does not use any environment variables.\n\n#### Step variables\n\nDefine the `property` attribute to remove a specified property from the input data. Since property does not support multi-level data\nstructures, when removing a property from a non-top-level data object in the input data, should first use `Pick from input` to retrieve\nthe non-top-level object.\n\n#### Returning\n\nThis step does not return anything.\n\n${transformer}\n\n${errorHandles}\n";
 const docs$f = {
-  asyncSetsStep: mergeStepDocs(markdown$V)
+  stepDelPropertyProperty: markdown$V,
+  delPropertyStep: mergeStepDocs(markdown$U)
 };
-const markdown$U = "Delete specified property or properties from the input data. If there are multiple attributes, use `,` to connect them.\n\nFor example, if there is input data like `{a: 1, b: 2, c: 3}`, then with the following definition, you can retrieve the\ncorresponding value:\n\n| Property | After deletion  |\n|:---------|:----------------|\n| `a`      | `{b : 2, c: 3}` |\n| `a, b`   | `{c: 3}`        |\n\n> If the specified property name does not exist on the given data object, there will be no side effects.\n";
-const markdown$T = "### Delete property step\n\nThe delete property pipeline step remove the specified property name from input data.\n\n#### Environment variables\n\nThis step does not use any environment variables.\n\n#### Step variables\n\nDefine the `property` attribute to remove a specified property from the input data. Since property does not support multi-level data\nstructures, when removing a property from a non-top-level data object in the input data, should first use `Pick from input` to retrieve\nthe non-top-level object.\n\n#### Returning\n\nThis step does not return anything.\n\n${transformer}\n\n${errorHandles}\n";
+const markdown$T = "The variable name for obtaining the current round's input data in the sub-steps.  \n`$item` by default, and the value can be accessed through `$factor.$item`.\n";
+const markdown$S = "The variable name for obtaining original input data obtained in the sub-steps.\n`$content` by default, and the value can be accessed through `$factor.$content`.\n";
+const markdown$R = "### Each step\n\nThe each pipeline step includes a set of sub-step definitions, where all the actual processing logic is executed within the sub-steps. The\nsub-step set will be executed N times, where N is the length of the given sub-step input data array. For each execution of the sub-step set,\nthe input data are the array element at the current index and original input data itself.\n\n> Ensure that the input data is always an array; otherwise, the sub-steps cannot execute correctly. Additionally, if the given input\n> parameter is `null`, `undefined`, or an array with a length of 0, it will be returned directly without affecting the context data and\n> without executing the `Write to output` stage.\n\n#### Environment variables\n\nThis step does not use any environment variables.\n\n#### Step variables\n\n| Variable name       | Type   | Description                                                                                      |\n|---------------------|--------|--------------------------------------------------------------------------------------------------|\n| originalContentName | string | The name of the variable that contains the original input data. Optional, default is `$content`. |\n| itemName            | string | The name of the variable that contains the current item. Optional, default is `$item`.           |\n\nAt the same time, the step provides a semaphore to exit the loop, named `$semaphore`. Therefore, the format of the input data received by\nthe sub-steps is as follows:\n\n```ts\n// Assuming no parameters are specified, all defaults will be used.\ninterface Data {\n	$content: any;          // original input data\n	$item: any;             // item at the current index\n	$semaphore: Symbol;     // return this semaphore to break and exit the loop\n}\n\n// Assuming the parameters are specified as originalContentName=input, itemName=data\ninterface Data {\n	input: any;             // original input data\n	data: any;              // item at the current index\n	$semaphore: Symbol;     // return this semaphore to break and exit the loop\n}\n```\n\n#### Returning\n\nAn array containing the returns from all execution rounds, maintaining the same order as the given parameter array.\n\n> Typically, need to specify a merge property in the `Write to output` step for use in subsequent pipeline steps.\n\n${transformer}\n\n${errorHandles}\n";
 const docs$e = {
-  stepDelPropertyProperty: markdown$U,
-  delPropertyStep: mergeStepDocs(markdown$T)
+  stepEachItemName: markdown$T,
+  stepEachOriginalContentName: markdown$S,
+  eachStep: mergeStepDocs(markdown$R)
 };
-const markdown$S = "The variable name for obtaining the current round's input data in the sub-steps.  \n`$item` by default, and the value can be accessed through `$factor.$item`.\n";
-const markdown$R = "The variable name for obtaining original input data obtained in the sub-steps.\n`$content` by default, and the value can be accessed through `$factor.$content`.\n";
-const markdown$Q = "### Each step\n\nThe each pipeline step includes a set of sub-step definitions, where all the actual processing logic is executed within the sub-steps. The\nsub-step set will be executed N times, where N is the length of the given sub-step input data array. For each execution of the sub-step set,\nthe input data are the array element at the current index and original input data itself.\n\n> Ensure that the input data is always an array; otherwise, the sub-steps cannot execute correctly. Additionally, if the given input\n> parameter is `null`, `undefined`, or an array with a length of 0, it will be returned directly without affecting the context data and\n> without executing the `Write to output` stage.\n\n#### Environment variables\n\nThis step does not use any environment variables.\n\n#### Step variables\n\n| Variable name       | Type   | Description                                                                                      |\n|---------------------|--------|--------------------------------------------------------------------------------------------------|\n| originalContentName | string | The name of the variable that contains the original input data. Optional, default is `$content`. |\n| itemName            | string | The name of the variable that contains the current item. Optional, default is `$item`.           |\n\nAt the same time, the step provides a semaphore to exit the loop, named `$semaphore`. Therefore, the format of the input data received by\nthe sub-steps is as follows:\n\n```ts\n// Assuming no parameters are specified, all defaults will be used.\ninterface Data {\n	$content: any;          // original input data\n	$item: any;             // item at the current index\n	$semaphore: Symbol;     // return this semaphore to break and exit the loop\n}\n\n// Assuming the parameters are specified as originalContentName=input, itemName=data\ninterface Data {\n	input: any;             // original input data\n	data: any;              // item at the current index\n	$semaphore: Symbol;     // return this semaphore to break and exit the loop\n}\n```\n\n#### Returning\n\nAn array containing the returns from all execution rounds, maintaining the same order as the given parameter array.\n\n> Typically, need to specify a merge property in the `Write to output` step for use in subsequent pipeline steps.\n\n${transformer}\n\n${errorHandles}\n";
+const markdown$Q = "Retrieve the value of a specified property name from the input data. Property names can be connected with dots (`.`) to denote multiple\nhierarchical levels.\n\nFor example, if there is input data like `{a: {b: [{c: 3}, {c: 4}]}}`, then with the following definition, you can retrieve the\ncorresponding value:\n\n| Property | Value                   |\n|:---------|:------------------------|\n| `a`      | `{b: [{c: 3}, {c: 4}]}` |\n| `a.b`    | `[{c: 3}, {c: 4}]`      |\n| `a.b.c`  | `[3, 4]`                |\n\n> Please note that when attempting to retrieve a property value from `null`, `undefined`, or a primitive type (including `string`,\n> `number`, `boolean`, `symbol`, `bigint`), will always receive a `null`.\n";
+const markdown$P = "### Get property step\n\nThe get property pipeline step retrieves the value of the specified property name and finally returns the processed result to the memory\ncontext for further processing.\n\n#### Environment variables\n\nThis step does not use any environment variables.\n\n#### Step variables\n\nDefine the `property` attribute to retrieve the value from a specified position in the input data. The retrieval rules are as follows:\n\n- Property names can use dot (`.`) to connect, allowing access to values from nested objects.\n- Values based on `null` or `undefined` will return `null`.\n- Values based on any basic type (including `string`, `number`, `bigint`, `boolean`, `Symbol`) will return `null`.\n- If there are multiple levels of properties and one level's data is an array, the final result will be an array.\n\n#### Returning\n\nThe value of the specified property, can be any value.\n\n> Typically, need to specify a merge property in the `Write to output` step for use in subsequent pipeline steps.\n\n${transformer}\n\n${errorHandles}\n";
 const docs$d = {
-  stepEachItemName: markdown$S,
-  stepEachOriginalContentName: markdown$R,
-  eachStep: mergeStepDocs(markdown$Q)
+  stepGetPropertyProperty: markdown$Q,
+  getPropertyStep: mergeStepDocs(markdown$P)
 };
-const markdown$P = "Retrieve the value of a specified property name from the input data. Property names can be connected with dots (`.`) to denote multiple\nhierarchical levels.\n\nFor example, if there is input data like `{a: {b: [{c: 3}, {c: 4}]}}`, then with the following definition, you can retrieve the\ncorresponding value:\n\n| Property | Value                   |\n|:---------|:------------------------|\n| `a`      | `{b: [{c: 3}, {c: 4}]}` |\n| `a.b`    | `[{c: 3}, {c: 4}]`      |\n| `a.b.c`  | `[3, 4]`                |\n\n> Please note that when attempting to retrieve a property value from `null`, `undefined`, or a primitive type (including `string`,\n> `number`, `boolean`, `symbol`, `bigint`), will always receive a `null`.\n";
-const markdown$O = "### Get property step\n\nThe get property pipeline step retrieves the value of the specified property name and finally returns the processed result to the memory\ncontext for further processing.\n\n#### Environment variables\n\nThis step does not use any environment variables.\n\n#### Step variables\n\nDefine the `property` attribute to retrieve the value from a specified position in the input data. The retrieval rules are as follows:\n\n- Property names can use dot (`.`) to connect, allowing access to values from nested objects.\n- Values based on `null` or `undefined` will return `null`.\n- Values based on any basic type (including `string`, `number`, `bigint`, `boolean`, `Symbol`) will return `null`.\n- If there are multiple levels of properties and one level's data is an array, the final result will be an array.\n\n#### Returning\n\nThe value of the specified property, can be any value.\n\n> Typically, need to specify a merge property in the `Write to output` step for use in subsequent pipeline steps.\n\n${transformer}\n\n${errorHandles}\n";
-const docs$c = {
-  stepGetPropertyProperty: markdown$P,
-  getPropertyStep: mergeStepDocs(markdown$O)
-};
-const markdown$N = "Specify whether the HTTP request includes body content. Without explicitly specifying whether to use the HTTP body, requests other\nthan `GET` will default to using it, whereas the `GET` request will default to ignoring it.\n";
-const markdown$M = "Reprocess the endpoint URL read from the environment. The following parameters can be used during the decoration process:\n\n- `$endpointUrl`: The URL read from the environment based on the `System` and `Endpoint` definitions, can be a fully qualified URL\n  or just a\n  URL context or template,\n- `$factor`: The content portion of the request data, excluding context data,\n- `$request`: The entire request data, including both content and context,\n- `$helpers` or `$`: Data manipulation helpers.\n\nShould return the final URL to be used for the HTTP request. If this snippet is not defined, then use the URL configured in\nthe environment variables for access.\n";
-const markdown$L = "Remote HTTP service endpoint code. This code can represent a single API or a strongly related set of APIs, depending on how `Decorate URL`\nis used.\n";
-const markdown$K = "### Http fetch step\n\nThe http fetch pipeline step calls remote HTTP services through defined parameters, and can process the returned results and perform related\nerror handling.\n\n${http}\n";
-const markdown$J = "Build HTTP request body. The following parameters can be used during the build process:\n\n- `$factor`: The content portion of the request data, excluding context data,\n- `$request`: The entire request data, including both content and context,\n- `$helpers` or `$`: Data manipulation helpers.\n\nThis function could return anything. If the returned data is not `null`, `undefined`, and not a string, use `JSON.stringify` to convert it\nto a string. `null` and `undefined` essentially represent the absence of an HTTP body. If this snippet is not defined, the default behavior\nis to use `$factor` as the HTTP body after processing it accordingly.\n\n> Regardless, this part can be configured, but in scenarios where the body is not used, the configured snippet will be ignored.\n";
-const markdown$I = "Build HTTP request headers. The following parameters can be used during the build process:\n\n- `$factor`: The content portion of the request data, excluding context data,\n- `$request`: The entire request data, including both content and context,\n- `$helpers` or `$`: Data manipulation helpers.\n\nThis function should return an object (`Record<string, string>`) containing the headers to be used in the HTTP request. If the same key as\ndefined in the environment definition is used, the definition here takes precedence, and the headers in the environment definition will be\noverwritten. If this snippet is not defined, then use the headers in the environment definition.\n\n> Key of headers are NOT trimmed.\n";
-const markdown$H = "### Http get step\n\nThe http get pipeline step calls remote HTTP services through defined parameters, and can process the returned results and perform related\nerror handling. The Http method is `get`.\n\n${http}\n";
-const markdown$G = "#### Environment variables\n\nAll environment variable names depend on the definitions of the `System` and `Endpoint` step variables. For convenience, using the\nfollowing\ndefinitions, which will be used in the environment variables:\n\n- `SYSTEM`: corresponding to the value of `System`,\n- `ENDPOINT`: corresponding to the value of `Endpoint`.\n\nAssuming the value of `System` is `s1` and the value of `Endpoint` is `order`, a system parameter\nnamed `CFG_ENDPOINTS_{SYSTEM}_{ENDPOINT}_URL` would thus be `CFG_ENDPOINTS_S1_ORDER_URL`.\n\n> Note that the values of `System` and `Endpoint` will be converted to uppercase, and any `.` characters will be replaced\n> with `_`. Additionally, based on common practices for environment parameter definitions, the values for `System` and `Endpoint`\n> cannot include `-`, `=` or whitespace characters.\n\nThis step uses the following system environment variables definition:\n\n- `CFG_ENDPOINTS_{SYSTEM}_{ENDPOINT}_URL`: Definition of the endpoint’s URL. This URL can be a fully qualified URL or just a URL context\n  or template, depending on whether and how the `Decorate URL` step variable is used to modify and obtain the final effective access URL,\n- `CFG_ENDPOINTS_{SYSTEM}_GLOBAL_HEADERS`: HTTP request headers used in the step, which are global and will be used in all requests. Defined\n  using the string format `key1=value[;key2=value2...[;keyN=valueN]]`,\n- `CFG_ENDPOINTS_{SYSTEM}_{ENDPOINT}_HEADERS`: HTTP request headers used in the step. Defined using the string\n  format `key1=value[;key2=value2...[;keyN=valueN]]`. If the same key as defined in the global definition is used, the definition here takes\n  precedence, and the value in the global definition will be overwritten,\n- `CFG_ENDPOINTS_{SYSTEM}_GLOBAL_TIMEOUT`: Timeout for the HTTP request in seconds. If not defined, the default value is -1, which means no\n  timeout,\n- `CFG_ENDPOINTS_{SYSTEM}_{ENDPOINT}_TIMEOUT`: Timeout for the HTTP request in seconds. If not defined, use the global definition instead.\n\n> Key of headers are trimmed automatically.\n\n> The timeout definition only takes effect when there is no `timeout` defined in the step variables.\n\n#### Step variables\n\nMaking a remote HTTP call requires many parameter definitions, some of which are mandatory and some optional.\n\n##### `System`\n\nCode for accessing the remote system. Generally, a remote system provides a set of APIs. To facilitate the use of the same defined data in\ndifferent steps, the remote system needs to be defined in code first. This variable is mandatory and case-insensitive.\n\n##### `Endpoint`\n\nDefine an endpoint code for the remote system. This code can represent a single API or a strongly related set of APIs, depending on\nhow `Decorate URL` is used.\n\n##### `Decorate URL`\n\nThis variable is optional and can be used to decorate the URL of the endpoint. The value can be a JavaScript snippet that will be executed\nas a JavaScript function. This function accepts the following input parameters:\n\n- `$endpointUrl`: The URL read from the environment based on the `System` and `Endpoint` definitions, can be a fully qualified URL\n  or just a\n  URL context or template,\n- `$factor`: The content portion of the request data, excluding context data,\n- `$request`: The entire request data, including both content and context,\n- `$helpers` or `$`: Data manipulation helpers.\n\nThis function should return the final URL to be used for the HTTP request. If this snippet is not defined, then use the URL configured in\nthe environment variables for access.\n\n##### `Http method`\n\nThe HTTP method to be used for the request. This variable is mandatory and case-insensitive. It is optional, with a default value of `post`.\n\n##### `Timeout`\n\nThe timeout for the HTTP request, in seconds. If not defined, use the timeout configured in the environment variables. If none of these are\ndefined, use `-1` as default, which means no timeout.\n\n##### `Generate request headers`\n\nThis variable is optional and can be used to build the HTTP request headers. The value can be a JavaScript snippet that will be executed\nas a JavaScript function. This function accepts the following input parameters:\n\n- `$factor`: The content portion of the request data, excluding context data,\n- `$request`: The entire request data, including both content and context,\n- `$helpers` or `$`: Data manipulation helpers.\n\nThis function should return an object (`Record<string, string>`) containing the headers to be used in the HTTP request. If the same key as\ndefined in the environment definition is used, the definition here takes precedence, and the headers in the environment definition will be\noverwritten. If this snippet is not defined, then use the headers in the environment definition.\n\n> Key of headers are NOT trimmed.\n\n##### `Use request body`\n\nSpecify whether the HTTP request uses the HTTP body content. This variable is optional and follows these rules:\n\n- Not defined: For requests other than `GET`, use the HTTP body by default,\n- `true`: Always use the HTTP body, regardless of the request method,\n- `false`: Always avoid using the HTTP body, regardless of the request method.\n\n> How to generate the HTTP body content is referenced by the definition of the `generateBody` variable.\n\n##### `Generate request body`\n\nThis variable is optional and can be used to build the HTTP request body. The value can be a JavaScript snippet that will be executed\nas a JavaScript function. This function accepts the following input parameters:\n\n- `$factor`: The content portion of the request data, excluding context data,\n- `$request`: The entire request data, including both content and context,\n- `$helpers` or `$`: Data manipulation helpers.\n\nThis function could return anything. If the returned data is not `null`, `undefined`, and not a string, use `JSON.stringify` to convert it\nto a string. `null` and `undefined` essentially represent the absence of an HTTP body. If this snippet is not defined, the default behavior\nis to use `$factor` as the HTTP body after processing it accordingly.\n\n##### `Read response body`\n\nThis variable is optional and can be used to read the HTTP response. The value can be a JavaScript snippet that will be executed\nas a JavaScript function. This function accepts the following input parameters:\n\n- `$response`: The response (`Response`, check [node-fetch](https://www.npmjs.com/package/node-fetch) for more details) object from the HTTP\n  request,\n- `$factor`: The content portion of the request data, excluding context data,\n- `$request`: The entire request data, including both content and context,\n- `$helpers` or `$`: Data manipulation helpers.\n\nThis function could return anything, and the returned data will be used as output data of this step. If this snippet is not defined, the\nresponse should be read as JSON by `Response.json()`. It is important to note that the response body will only be read if the response\nstatus is in the normal range (`1xx`, `2xx`, `3xx`); otherwise, it will skip to the error handling.\n\n> It is an async function, so `await` is available inside.\n\n##### `Response error handling`\n\nError handling for different HTTP response statuses is generally implemented in a way that only `4xx` and `5xx` statuses trigger\nerror handling. Each exception handling snippet is designed for a specific status; if a status does not have a defined handler, a\ndefault `UncatchableError` will be thrown, with an error code of `O03-00010`. Error handling can either rethrow the original exception,\nwrap the exception and rethrow it, or return data normally. If data is returned normally, it will be used as the output data for this step.\n\nThere are two special cases:\n\n- If the request times out, the status is `600`,\n- If the exception is not caused by the request itself, such as an exception thrown due to a problem with a certain configuration logic,\n  then,\n	- If the exception type is `UncatchableError`, no further handling will be performed and the exception will be directly thrown to the\n	  outer layer,\n	- Otherwise, use the exception handler with status `000` for processing.\n\n> DO NOT rethrow an error that is not an `UncatchableError` from the error handler, as it will be caught again by the error handler with\n> status `000`, which could lead to confusion.\n\n> All handlers are async functions, so `await` is available inside.\n\n#### Returning\n\nThe step's return data is from the response of the HTTP request or error handling.\n\n> The returned data can still be further processed during the `Write to output` stage.\n\n${transformer}\n\n${errorHandles}\n";
-const markdown$F = "HTTP methods are generally defined as `POST` and `GET`. Other commonly used methods include `PUT`, `DELETE`, and `PATCH`. However, `OPTIONS`\nis typically reserved for standard purposes and is generally not recommended for actual data communication. For a comprehensive list of HTTP\nmethods, you can refer to the [MDN HTTP request methods](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods).\n";
-const markdown$E = "### Http post step\n\nThe http get pipeline step calls remote HTTP services through defined parameters, and can process the returned results and perform related\nerror handling. The Http method is `post`.\n\n${http}\n";
-const markdown$D = "Read HTTP response. The following parameters can be used during the build process:\n\n- `$response`: The response (`Response`, check [node-fetch](https://www.npmjs.com/package/node-fetch) for more details) object from the HTTP\n  request,\n- `$factor`: The content portion of the request data, excluding context data,\n- `$request`: The entire request data, including both content and context,\n- `$helpers` or `$`: Data manipulation helpers.\n\nThis function could return anything. It is important to note that the response body will only be read if the response status is in the\nnormal range (`1xx`, `2xx`, `3xx`); otherwise, it will skip to the error handling.\n";
-const markdown$C = "Error handling for different HTTP response statuses is generally implemented in a way that only `4xx` and `5xx` statuses trigger\nerror handling. Each exception handling snippet is designed for a specific status; if a status does not have a defined handler, a\ndefault `UncatchableError` will be thrown, with an error code of `O03-00010`. Error handling can either rethrow the original exception,\nwrap the exception and rethrow it, or return data normally. If data is returned normally, it will be used as the output data for this step.\n\nThere are two special cases:\n\n- If the request times out, the status is `600`,\n- If the exception is not caused by the request itself, such as an exception thrown due to a problem with a certain configuration logic,\n  then,\n	- If the exception type is `UncatchableError`, no further handling will be performed and the exception will be directly thrown to the\n	  outer layer,\n	- Otherwise, use the exception handler with status `000` for processing.\n\n> DO NOT rethrow an error that is not an `UncatchableError` from the error handler, as it will be caught again by the error handler with\n> status `000`, which could lead to confusion.\n\n> It is an async function, so `await` is available inside.\n";
-const markdown$B = "Remote HTTP service provider system code.\n\n";
-const markdown$A = "The timeout for the HTTP request, in seconds. If not defined, use the timeout configured in the environment variables. If none of these are\ndefined, use `-1` as default, which means no timeout.\n";
-const docs$b = (() => {
-  const httpDocs = mergeStepDocs(markdown$G, false);
+const markdown$O = "Specify whether the HTTP request includes body content. Without explicitly specifying whether to use the HTTP body, requests other\nthan `GET` will default to using it, whereas the `GET` request will default to ignoring it.\n";
+const markdown$N = "Reprocess the endpoint URL read from the environment. The following parameters can be used during the decoration process:\n\n- `$endpointUrl`: The URL read from the environment based on the `System` and `Endpoint` definitions, can be a fully qualified URL\n  or just a\n  URL context or template,\n- `$factor`: The content portion of the request data, excluding context data,\n- `$request`: The entire request data, including both content and context,\n- `$helpers` or `$`: Data manipulation helpers.\n\nShould return the final URL to be used for the HTTP request. If this snippet is not defined, then use the URL configured in\nthe environment variables for access.\n\n> It is a sync function, so `await` is not available inside.\n";
+const markdown$M = "Remote HTTP service endpoint code. This code can represent a single API or a strongly related set of APIs, depending on how `Decorate URL`\nis used.\n";
+const markdown$L = "### Http fetch step\n\nThe http fetch pipeline step calls remote HTTP services through defined parameters, and can process the returned results and perform related\nerror handling.\n\n${http}\n";
+const markdown$K = "Build HTTP request body. The following parameters can be used during the build process:\n\n- `$factor`: The content portion of the request data, excluding context data,\n- `$request`: The entire request data, including both content and context,\n- `$helpers` or `$`: Data manipulation helpers.\n\nThis function could return anything. If the returned data is not `null`, `undefined`, and not a string, use `JSON.stringify` to convert it\nto a string. `null` and `undefined` essentially represent the absence of an HTTP body. If this snippet is not defined, the default behavior\nis to use `$factor` as the HTTP body after processing it accordingly.\n\n> Regardless, this part can be configured, but in scenarios where the body is not used, the configured snippet will be ignored.\n\n> It is a sync function, so `await` is not available inside.\n";
+const markdown$J = "Build HTTP request headers. The following parameters can be used during the build process:\n\n- `$factor`: The content portion of the request data, excluding context data,\n- `$request`: The entire request data, including both content and context,\n- `$helpers` or `$`: Data manipulation helpers.\n\nThis function should return an object (`Record<string, string>`) containing the headers to be used in the HTTP request. If the same key as\ndefined in the environment definition is used, the definition here takes precedence, and the headers in the environment definition will be\noverwritten. If this snippet is not defined, then use the headers in the environment definition.\n\n> Key of headers are NOT trimmed.\n\n> It is a sync function, so `await` is not available inside.\n";
+const markdown$I = "### Http get step\n\nThe http get pipeline step calls remote HTTP services through defined parameters, and can process the returned results and perform related\nerror handling. The Http method is `get`.\n\n${http}\n";
+const markdown$H = "#### Environment variables\n\nAll environment variable names depend on the definitions of the `System` and `Endpoint` step variables. For convenience, using the\nfollowing\ndefinitions, which will be used in the environment variables:\n\n- `SYSTEM`: corresponding to the value of `System`,\n- `ENDPOINT`: corresponding to the value of `Endpoint`.\n\nAssuming the value of `System` is `s1` and the value of `Endpoint` is `order`, a system parameter\nnamed `CFG_ENDPOINTS_{SYSTEM}_{ENDPOINT}_URL` would thus be `CFG_ENDPOINTS_S1_ORDER_URL`.\n\n> Note that the values of `System` and `Endpoint` will be converted to uppercase, and any `.` characters will be replaced\n> with `_`. Additionally, based on common practices for environment parameter definitions, the values for `System` and `Endpoint`\n> cannot include `-`, `=` or whitespace characters.\n\nThis step uses the following system environment variables definition:\n\n- `CFG_ENDPOINTS_{SYSTEM}_{ENDPOINT}_URL`: Definition of the endpoint’s URL. This URL can be a fully qualified URL or just a URL context\n  or template, depending on whether and how the `Decorate URL` step variable is used to modify and obtain the final effective access URL,\n- `CFG_ENDPOINTS_{SYSTEM}_GLOBAL_HEADERS`: HTTP request headers used in the step, which are global and will be used in all requests. Defined\n  using the string format `key1=value[;key2=value2...[;keyN=valueN]]`,\n- `CFG_ENDPOINTS_{SYSTEM}_{ENDPOINT}_HEADERS`: HTTP request headers used in the step. Defined using the string\n  format `key1=value[;key2=value2...[;keyN=valueN]]`. If the same key as defined in the global definition is used, the definition here takes\n  precedence, and the value in the global definition will be overwritten,\n- `CFG_ENDPOINTS_{SYSTEM}_GLOBAL_TIMEOUT`: Timeout for the HTTP request in seconds. If not defined, the default value is -1, which means no\n  timeout,\n- `CFG_ENDPOINTS_{SYSTEM}_{ENDPOINT}_TIMEOUT`: Timeout for the HTTP request in seconds. If not defined, use the global definition instead.\n\n> Key of headers are trimmed automatically.\n\n> The timeout definition only takes effect when there is no `timeout` defined in the step variables.\n\n#### Step variables\n\nMaking a remote HTTP call requires many parameter definitions, some of which are mandatory and some optional.\n\n##### `System`\n\nCode for accessing the remote system. Generally, a remote system provides a set of APIs. To facilitate the use of the same defined data in\ndifferent steps, the remote system needs to be defined in code first. This variable is mandatory and case-insensitive.\n\n##### `Endpoint`\n\nDefine an endpoint code for the remote system. This code can represent a single API or a strongly related set of APIs, depending on\nhow `Decorate URL` is used.\n\n##### `Decorate URL`\n\nThis variable is optional and can be used to decorate the URL of the endpoint. The value can be a JavaScript snippet that will be executed\nas a JavaScript function. This function accepts the following input parameters:\n\n- `$endpointUrl`: The URL read from the environment based on the `System` and `Endpoint` definitions, can be a fully qualified URL\n  or just a\n  URL context or template,\n- `$factor`: The content portion of the request data, excluding context data,\n- `$request`: The entire request data, including both content and context,\n- `$helpers` or `$`: Data manipulation helpers.\n\nThis function should return the final URL to be used for the HTTP request. If this snippet is not defined, then use the URL configured in\nthe environment variables for access.\n\n##### `Http method`\n\nThe HTTP method to be used for the request. This variable is mandatory and case-insensitive. It is optional, with a default value of `post`.\n\n##### `Timeout`\n\nThe timeout for the HTTP request, in seconds. If not defined, use the timeout configured in the environment variables. If none of these are\ndefined, use `-1` as default, which means no timeout.\n\n##### `Generate request headers`\n\nThis variable is optional and can be used to build the HTTP request headers. The value can be a JavaScript snippet that will be executed\nas a JavaScript function. This function accepts the following input parameters:\n\n- `$factor`: The content portion of the request data, excluding context data,\n- `$request`: The entire request data, including both content and context,\n- `$helpers` or `$`: Data manipulation helpers.\n\nThis function should return an object (`Record<string, string>`) containing the headers to be used in the HTTP request. If the same key as\ndefined in the environment definition is used, the definition here takes precedence, and the headers in the environment definition will be\noverwritten. If this snippet is not defined, then use the headers in the environment definition.\n\n> Key of headers are NOT trimmed.\n\n##### `Use request body`\n\nSpecify whether the HTTP request uses the HTTP body content. This variable is optional and follows these rules:\n\n- Not defined: For requests other than `GET`, use the HTTP body by default,\n- `true`: Always use the HTTP body, regardless of the request method,\n- `false`: Always avoid using the HTTP body, regardless of the request method.\n\n> How to generate the HTTP body content is referenced by the definition of the `generateBody` variable.\n\n##### `Generate request body`\n\nThis variable is optional and can be used to build the HTTP request body. The value can be a JavaScript snippet that will be executed\nas a JavaScript function. This function accepts the following input parameters:\n\n- `$factor`: The content portion of the request data, excluding context data,\n- `$request`: The entire request data, including both content and context,\n- `$helpers` or `$`: Data manipulation helpers.\n\nThis function could return anything. If the returned data is not `null`, `undefined`, and not a string, use `JSON.stringify` to convert it\nto a string. `null` and `undefined` essentially represent the absence of an HTTP body. If this snippet is not defined, the default behavior\nis to use `$factor` as the HTTP body after processing it accordingly.\n\n##### `Read response body`\n\nThis variable is optional and can be used to read the HTTP response. The value can be a JavaScript snippet that will be executed\nas a JavaScript function. This function accepts the following input parameters:\n\n- `$response`: The response (`Response`, check [node-fetch](https://www.npmjs.com/package/node-fetch) for more details) object from the HTTP\n  request,\n- `$factor`: The content portion of the request data, excluding context data,\n- `$request`: The entire request data, including both content and context,\n- `$helpers` or `$`: Data manipulation helpers.\n\nThis function could return anything, and the returned data will be used as output data of this step. If this snippet is not defined, the\nresponse should be read as JSON by `Response.json()`. It is important to note that the response body will only be read if the response\nstatus is in the normal range (`1xx`, `2xx`, `3xx`); otherwise, it will skip to the error handling.\n\n> It is an async function, so `await` is available inside.\n\n##### `Response error handling`\n\nError handling for different HTTP response statuses is generally implemented in a way that only `4xx` and `5xx` statuses trigger\nerror handling. Each exception handling snippet is designed for a specific status; if a status does not have a defined handler, a\ndefault `UncatchableError` will be thrown, with an error code of `O03-00010`. Error handling can either rethrow the original exception,\nwrap the exception and rethrow it, or return data normally. If data is returned normally, it will be used as the output data for this step.\n\nThere are two special cases:\n\n- If the request times out, the status is `600`,\n- If the exception is not caused by the request itself, such as an exception thrown due to a problem with a certain configuration logic,\n  then,\n	- If the exception type is `UncatchableError`, no further handling will be performed and the exception will be directly thrown to the\n	  outer layer,\n	- Otherwise, use the exception handler with status `000` for processing.\n\n> DO NOT rethrow an error that is not an `UncatchableError` from the error handler, as it will be caught again by the error handler with\n> status `000`, which could lead to confusion.\n\n> All handlers are async functions, so `await` is available inside.\n\n#### Returning\n\nThe step's return data is from the response of the HTTP request or error handling.\n\n> The returned data can still be further processed during the `Write to output` stage.\n\n${transformer}\n\n${errorHandles}\n";
+const markdown$G = "HTTP methods are generally defined as `POST` and `GET`. Other commonly used methods include `PUT`, `DELETE`, and `PATCH`. However, `OPTIONS`\nis typically reserved for standard purposes and is generally not recommended for actual data communication. For a comprehensive list of HTTP\nmethods, you can refer to the [MDN HTTP request methods](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods).\n";
+const markdown$F = "### Http post step\n\nThe http get pipeline step calls remote HTTP services through defined parameters, and can process the returned results and perform related\nerror handling. The Http method is `post`.\n\n${http}\n";
+const markdown$E = "Read HTTP response. The following parameters can be used during the build process:\n\n- `$response`: The response (`Response`, check [node-fetch](https://www.npmjs.com/package/node-fetch) for more details) object from the HTTP\n  request,\n- `$factor`: The content portion of the request data, excluding context data,\n- `$request`: The entire request data, including both content and context,\n- `$helpers` or `$`: Data manipulation helpers.\n\nThis function could return anything. It is important to note that the response body will only be read if the response status is in the\nnormal range (`1xx`, `2xx`, `3xx`); otherwise, it will skip to the error handling.\n\n> It is an async function, so `await` is available inside.\n";
+const markdown$D = "Error handling for different HTTP response statuses is generally implemented in a way that only `4xx` and `5xx` statuses trigger\nerror handling. Each exception handling snippet is designed for a specific status; if a status does not have a defined handler, a\ndefault `UncatchableError` will be thrown, with an error code of `O03-00010`. Error handling can either rethrow the original exception,\nwrap the exception and rethrow it, or return data normally. If data is returned normally, it will be used as the output data for this step.\n\nThere are two special cases:\n\n- If the request times out, the status is `600`,\n- If the exception is not caused by the request itself, such as an exception thrown due to a problem with a certain configuration logic,\n  then,\n	- If the exception type is `UncatchableError`, no further handling will be performed and the exception will be directly thrown to the\n	  outer layer,\n	- Otherwise, use the exception handler with status `000` for processing.\n\n> DO NOT rethrow an error that is not an `UncatchableError` from the error handler, as it will be caught again by the error handler with\n> status `000`, which could lead to confusion.\n\n> It is an async function, so `await` is available inside.\n";
+const markdown$C = "Remote HTTP service provider system code.\n\n";
+const markdown$B = "The timeout for the HTTP request, in seconds. If not defined, use the timeout configured in the environment variables. If none of these are\ndefined, use `-1` as default, which means no timeout.\n";
+const docs$c = (() => {
+  const httpDocs = mergeStepDocs(markdown$H, false);
   return {
-    stepHttpSystem: markdown$B,
-    stepHttpEndpoint: markdown$L,
-    stepHttpDecorateUrl: markdown$M,
-    stepHttpMethod: markdown$F,
-    stepHttpTimeout: markdown$A,
-    stepHttpGenerateHeaders: markdown$I,
-    stepHttpBodyUsed: markdown$N,
-    stepHttpGenerateBody: markdown$J,
-    stepHttpReadResponse: markdown$D,
-    stepHttpResponseErrorHandles: markdown$C,
-    httpFetchStep: mergeStepDocsFreely(markdown$K, { "http": httpDocs }),
-    httpGetStep: mergeStepDocsFreely(markdown$H, { "http": httpDocs }),
-    httpPostStep: mergeStepDocsFreely(markdown$E, { "http": httpDocs })
+    stepHttpSystem: markdown$C,
+    stepHttpEndpoint: markdown$M,
+    stepHttpDecorateUrl: markdown$N,
+    stepHttpMethod: markdown$G,
+    stepHttpTimeout: markdown$B,
+    stepHttpGenerateHeaders: markdown$J,
+    stepHttpBodyUsed: markdown$O,
+    stepHttpGenerateBody: markdown$K,
+    stepHttpReadResponse: markdown$E,
+    stepHttpResponseErrorHandles: markdown$D,
+    httpFetchStep: mergeStepDocsFreely(markdown$L, { "http": httpDocs }),
+    httpGetStep: mergeStepDocsFreely(markdown$I, { "http": httpDocs }),
+    httpPostStep: mergeStepDocsFreely(markdown$F, { "http": httpDocs })
   };
 })();
-const markdown$z = "The return value of the function will be used as the input data for each sub-step, and this function will be executed before each sub-step.\nIf the return data contains shared memory data, modifications to this data in any sub-step may affect other sub-steps. The following\nparameters can be used during the clone process:\n\n- `$factor`: The content portion of the request data, excluding context data,\n- `$request`: The entire request data, including both content and context,\n- `$helpers` or `$`: Data manipulation helpers.\n";
-const markdown$y = "Check to receive only the result data of the first completed sub-step; otherwise, receive the result data of all sub-steps in the form of an\narray.\n";
-const markdown$x = "### Parallel sets step\n\nThe parallel sets pipeline step includes a set of sub-step definitions, where all the actual processing logic is executed within the\nsub-steps. Each substep is executed in parallel, and it can be specified whether to collect only the result of the first completed sub-step\nor to collect the results of all sub-steps.The input data for each sub-step is specified by `Pick from input`.\n\n> No matter how the collection of sub-step execution results is specified, if any sub-step throws an exception before the results are\n> collected, the entire parallel process is terminated. Note that the completion of a step does not necessarily mean that other\n> asynchronously executed substeps will be terminated. Please refer\n> to [Promise.race](https://tc39.es/ecma262/multipage/control-abstraction-objects.html#sec-promise.race) for more details.\n\n> The parallel step relies on the exception raised by the sub-step. If the sub-step encounters an exception and is caught and processed by\n> the exception handler without re-throwing an exception, it is considered to have ended normally.\n\n#### Environment variables\n\nThis step does not use any environment variables.\n\n#### Step variables\n\n| Variable name | Type    | Description                                                                                                                  |\n|---------------|---------|------------------------------------------------------------------------------------------------------------------------------|\n| cloneData     | snippet | Provide a snippet to copy data. The return value of this snippet will be used as the input data for each sub-step. Optional. |\n| race          | boolean | When set to `true`, only the result data of the first completed sub-step will be received. Optional, default is `false`.     |\n\n> If `cloneData` snippet is not provided, the input data for each sub-step will be the same memory data, which is shared among all\n> sub-steps. Therefore, any modification of this memory data by one sub-step may affect the other sub-steps.\n\n#### Returning\n\nUse the return from the first resolved sub-step as the return data. If defined to receive the results of all sub-steps, the data will be an\narray; otherwise, it will be the result data returned by the first completed sub-step.\n\n> It can still be further decorated during `Write to output` stage for the return data.\n\n${transformer}\n\n${errorHandles}\n";
+const markdown$A = "The return value of the function will be used as the input data for each sub-step, and this function will be executed before each sub-step.\nIf the return data contains shared memory data, modifications to this data in any sub-step may affect other sub-steps. The following\nparameters can be used during the clone process:\n\n- `$factor`: The content portion of the request data, excluding context data,\n- `$request`: The entire request data, including both content and context,\n- `$helpers` or `$`: Data manipulation helpers.\n\n> It is a sync function, so `await` is not available inside.\n";
+const markdown$z = "Check to receive only the result data of the first completed sub-step; otherwise, receive the result data of all sub-steps in the form of an\narray.\n";
+const markdown$y = "### Parallel sets step\n\nThe parallel sets pipeline step includes a set of sub-step definitions, where all the actual processing logic is executed within the\nsub-steps. Each substep is executed in parallel, and it can be specified whether to collect only the result of the first completed sub-step\nor to collect the results of all sub-steps.The input data for each sub-step is specified by `Pick from input`.\n\n> No matter how the collection of sub-step execution results is specified, if any sub-step throws an exception before the results are\n> collected, the entire parallel process is terminated. Note that the completion of a step does not necessarily mean that other\n> asynchronously executed substeps will be terminated. Please refer\n> to [Promise.race](https://tc39.es/ecma262/multipage/control-abstraction-objects.html#sec-promise.race) for more details.\n\n> The parallel step relies on the exception raised by the sub-step. If the sub-step encounters an exception and is caught and processed by\n> the exception handler without re-throwing an exception, it is considered to have ended normally.\n\n#### Environment variables\n\nThis step does not use any environment variables.\n\n#### Step variables\n\n| Variable name | Type    | Description                                                                                                                  |\n|---------------|---------|------------------------------------------------------------------------------------------------------------------------------|\n| cloneData     | snippet | Provide a snippet to copy data. The return value of this snippet will be used as the input data for each sub-step. Optional. |\n| race          | boolean | When set to `true`, only the result data of the first completed sub-step will be received. Optional, default is `false`.     |\n\n> If `cloneData` snippet is not provided, the input data for each sub-step will be the same memory data, which is shared among all\n> sub-steps. Therefore, any modification of this memory data by one sub-step may affect the other sub-steps.\n\n#### Returning\n\nUse the return from the first resolved sub-step as the return data. If defined to receive the results of all sub-steps, the data will be an\narray; otherwise, it will be the result data returned by the first completed sub-step.\n\n> It can still be further decorated during `Write to output` stage for the return data.\n\n${transformer}\n\n${errorHandles}\n";
+const docs$b = {
+  stepParallelRace: markdown$z,
+  stepParallelCloneData: markdown$A,
+  parallelStep: mergeStepDocs(markdown$y)
+};
+const markdown$x = "If using data from the request body, the data portion of the body must be in valid JSON format.\n\n> `GET` requests by default do not parse the request body, while other requests (methods) default to parsing the request body.\n";
+const markdown$w = "Used for locating configurations within the application, required fields, and must be globally unique.";
+const markdown$v = "Specify whether the current configuration is effective.\n\n> Note that configurations that are not effective will not be loaded when the application starts, so the effective status cannot be switched\n> at runtime.";
+const markdown$u = "Indicate whether the returned response is a file.\n";
+const markdown$t = "Specify the response headers to be outputted to the client, including names and values.\n\nThe syntax rules are as follows:\n\n- Use a colon to connect the name and value, for example `x-name: value`. Note that only the content before the first colon is considered\n  the name, and the remaining part is the value,\n- If multiple are needed, they should be written on multiple lines,\n- The spaces around the name and value will be automatically removed.\n";
+const markdown$s = "To accept uploaded files, multiple attributes are required:\n\n- Specify name: Each line represents a name. For multiple names, define them on separate lines,\n- Each name can specify a max count by appending a colon followed by a number after the name,\n	- `<= 0` indicates unlimited files for that name,\n	- `>= 1` indicates a maximum count,\n- Specify maximum file size: Use plain numbers for bytes, or append `k`, `K`, `m`, `M` for kilobytes and megabytes,\n- Specify file type [mime type](https://docs.nestjs.com/techniques/file-upload#file-validation): Separate multiple types with commas or\n  semicolons.\n\n> The maximum file size and file type specifications apply to all files.\n\n> When defining upload file parameters, due to HTTP protocol specifications requiring the use of Form Data, the `body` supports only\n> key-value pairs. Therefore, the parsed data forms a single-layer JSON object and no longer retains a multi-layered structure.\n";
+const markdown$r = "To specify receiving multiple request headers, use commas or semicolons as separators.\n";
+const markdown$q = "Only executed when the application starts, during which the system does not provide any parameters to the pipeline.\n";
+const markdown$p = "`GET` requests by default do not parse the request body, while other requests (methods) default to parsing the request body.\n";
+const markdown$o = "Parse parameters from the [route](https://docs.nestjs.com/controllers#route-parameters). For example, can parse the `name`\nand `age` parameters from `https://example.com/:name/:age`.\n\n> The parameter names are automatically synchronized here when modifying the `route` value.\n\n> Although parameters are defined in the `route`, it is still possible to ignore them here, but this is not the recommended approach. \n";
+const markdown$n = "## Overview\n\nThe core concept of `@rainbow-o23` is pipeline, where all logic is defined through pipeline and its steps. There are three different forms\nof\npipeline based on how it is defined:\n\n- Pipeline, which can optionally be exposed as an API. To differentiate, we generally refer to pipelines that are exposed as\n  APIs as `Pipeline as API`, and pipelines that are not exposed as APIs as `pipeline`. In all documents, we will use\n  this name to refer to it. If not specifically labeled as `as API`, it means that this pipeline has not been exposed as an API.\n- Step set, composed of a group of steps,\n- Step: based on the definition of a single step.\n\nIf defined as a pipeline and is exposed as an API, it does not allow other pipeline steps to call it, otherwise it does. Therefore, if\ncertain logic combinations can be reused, they should be defined as a pipeline/steps set/step.\n\n## Common attributes\n\nAll definitions should have the following attributes:\n\n- A `code` attribute for identification within the system, so the value of the `code` attribute is globally unique.\n- A `type` attribute is used to indicate the type of this definition, and the value of the `type` attribute must be one\n  of `pipeline`, `step-sets`, or `step`.\n- An `enabled` attribute is used to indicate whether this definition is effective, and the value of the `enabled` attribute must be\n  either `true` or `false`. If not defined, this definition is considered to be effective by default.\n\n## Pipeline as API\n\nIf the definition contains a `route` attribute and specifies a URI, it is considered to be published as an API. A pipeline published\nas an API includes all standard HTTP protocol elements:\n\n- `route`, URI of API. Excluding the scheme, domain name, and port in the URL, the application configuration can also specify the path\n  context,\n	- To facilitate the definition and parsing of data contained in the `route`, you can use `pathParams` for definition. `pathParams` can\n	  be a list of parameters, or you can use `true` to define receiving all valid path parameters. Please note that the definition of path\n	  parameters must conform to the [nestjs](https://docs.nestjs.com/controllers#route-parameters) standard.\n- `method`, supporting `get`, `post`, `put`, `patch`, and `delete`,\n- `headers`, a list of headers that need to be parsed, or `true` to parse all headers,\n- `queryParams`, a list of query parameters that need to be parsed, or `true` to parse all query parameters,\n- `body`, the content of the HTTP body is in JSON format. To better adapt to common practices of HTTP API usage:\n	- When `method` is specified as `get` and the `body` parameter is not explicitly set to `true`, the system defaults to ignoring the HTTP\n	  body content,\n	- When `method` is not specified as `get` and the `body` parameter is not explicitly set to `false`, the system defaults to parsing the\n	  HTTP body content,\n- `files`, a list of files that need to be parsed, or `true` to parse all files.\n\nThere are also some HTTP response definitions:\n\n- `exposeHeaders`, a set of headers that need to be pushed to the client,\n- `exposeFile`, indicating whether the response data is a file.\n\n## Pipeline\n\nIf the definition does not contain a `route` attribute, it is considered a pipeline. A pipeline can be called by other pipeline steps.\n\nA pipeline always includes at least one step, and its behavior is entirely determined by the steps defined within it.\n\nA pipeline also has a special property `initOnly`, which if declared as `true`, indicates that this pipeline will only be\nexecuted when the application starts, and the application will not provide any parameters during execution.\n\n## Step set\n\nStep set, as the name suggests, can define a set of steps. They can also define how their built-in steps are executed, typically in the\nfollowing ways:\n\n- Synchronous serial,\n- Asynchronous serial,\n- Synchronous parallel,\n- Conditional execution,\n- Loop execution (only for input data as an array),\n- Start a database transaction.\n\nBy combining the various types of step collections mentioned above, you can construct execution sequences suitable for different scenarios.\n\n## Step\n\nSteps can be any type of step definition, including step sets. Logically, a step set is a step which includes a set of sub steps, and\ndifferent step sets define the way their sub steps are executed. Steps are implemented by different standard step components for\ndifferent purposes. Here are some built-in standard steps:\n\n- Retrieve values from models or remove attributes,\n- Execute snippets,\n- Generate snowflake IDs,\n- Call predefined pipelines or steps,\n- Make remote HTTP API calls,\n- Read from or write to databases.\n\nAdditionally, you can also obtain the following steps support through the `@rainbow-o23` standard extension library:\n\n- Print PDF, Word, Excel, CSV,\n- Manipulate AWS S3 objects.\n\n> The latest step support can be found on [Github](https://github.com/InsureMO/rainbow-o23).\n";
+const markdown$m = "Parse parameters from the [URL Search](https://developer.mozilla.org/en-US/docs/Web/API/URL/searchParams). For example, can parse the `name`\nand `age` parameters from `https://example.com/?name=Jonathan%20Smith&age=18`.\n\nTo specify receiving multiple query parameters, use commas or semicolons as separators.\n";
+const markdown$l = "The route of the API, excluding the HTTP protocol scheme, domain name, and port parts. The context of the URL path can also be\nspecified via the system environment variable `CFG_APP_CONTEXT`.\n\n> It should start with `/`.\n\n`route` syntax can be referenced from [nestjs - routing](https://docs.nestjs.com/controllers#routing)\nand [nestjs - route parameters](https://docs.nestjs.com/controllers#route-parameters), as well\nas [express](https://expressjs.com/en/guide/routing.html). Generally, there are the following rules:\n\n- Use regex for matching, but it's not recommended.\n- Define parameters with `:` prefix, for example `:name`, ensuring parameter names conform to the regex pattern `[A-Za-z0-9_]`.\n- For parsing multiple parameters, use `/`, `.`, or `-` as separators. \n";
+const markdown$k = "- `Pipeline`: A predefined pipeline that can be invoked by other pipelines and can also be executed during application\n  initialization. If specified to execute during application initialization, it cannot be used at runtime, and the initialization is\n  parameterless.\n- `Pipelne as API`: A predefined pipeline exposed as an API, which cannot be invoked by other pipelines.\n- `Step Set`: A predefined set of steps that can be invoked by other pipelines.\n- `Step`: A predefined step that can be invoked by other pipelines.\n";
 const docs$a = {
-  stepParallelRace: markdown$y,
-  stepParallelCloneData: markdown$z,
-  parallelStep: mergeStepDocs(markdown$x)
+  pipeline: markdown$n,
+  pipelineCode: markdown$w,
+  pipelineEnabled: markdown$v,
+  pipelineType: markdown$k,
+  pipelineInitOnly: markdown$q,
+  pipelineRoute: markdown$l,
+  pipelineMethod: markdown$p,
+  pipelineHeaders: markdown$r,
+  pipelinePathParams: markdown$o,
+  pipelineQueryParams: markdown$m,
+  pipelineBody: markdown$x,
+  pipelineFiles: markdown$s,
+  pipelineExposeFile: markdown$u,
+  pipelineExposeHeaders: markdown$t
 };
-const markdown$w = "If using data from the request body, the data portion of the body must be in valid JSON format.\n\n> `GET` requests by default do not parse the request body, while other requests (methods) default to parsing the request body.\n";
-const markdown$v = "Used for locating configurations within the application, required fields, and must be globally unique.";
-const markdown$u = "Specify whether the current configuration is effective.\n\n> Note that configurations that are not effective will not be loaded when the application starts, so the effective status cannot be switched\n> at runtime.";
-const markdown$t = "Indicate whether the returned response is a file.\n";
-const markdown$s = "Specify the response headers to be outputted to the client, including names and values.\n\nThe syntax rules are as follows:\n\n- Use a colon to connect the name and value, for example `x-name: value`. Note that only the content before the first colon is considered\n  the name, and the remaining part is the value,\n- If multiple are needed, they should be written on multiple lines,\n- The spaces around the name and value will be automatically removed.\n";
-const markdown$r = "To accept uploaded files, multiple attributes are required:\n\n- Specify name: Each line represents a name. For multiple names, define them on separate lines,\n- Each name can specify a max count by appending a colon followed by a number after the name,\n	- `<= 0` indicates unlimited files for that name,\n	- `>= 1` indicates a maximum count,\n- Specify maximum file size: Use plain numbers for bytes, or append `k`, `K`, `m`, `M` for kilobytes and megabytes,\n- Specify file type [mime type](https://docs.nestjs.com/techniques/file-upload#file-validation): Separate multiple types with commas or\n  semicolons.\n\n> The maximum file size and file type specifications apply to all files.\n\n> When defining upload file parameters, due to HTTP protocol specifications requiring the use of Form Data, the `body` supports only\n> key-value pairs. Therefore, the parsed data forms a single-layer JSON object and no longer retains a multi-layered structure.\n";
-const markdown$q = "To specify receiving multiple request headers, use commas or semicolons as separators.\n";
-const markdown$p = "Only executed when the application starts, during which the system does not provide any parameters to the pipeline.\n";
-const markdown$o = "`GET` requests by default do not parse the request body, while other requests (methods) default to parsing the request body.\n";
-const markdown$n = "Parse parameters from the [route](https://docs.nestjs.com/controllers#route-parameters). For example, can parse the `name`\nand `age` parameters from `https://example.com/:name/:age`.\n\n> The parameter names are automatically synchronized here when modifying the `route` value.\n\n> Although parameters are defined in the `route`, it is still possible to ignore them here, but this is not the recommended approach. \n";
-const markdown$m = "## Overview\n\nThe core concept of `@rainbow-o23` is pipeline, where all logic is defined through pipeline and its steps. There are three different forms\nof\npipeline based on how it is defined:\n\n- Pipeline, which can optionally be exposed as an API. To differentiate, we generally refer to pipelines that are exposed as\n  APIs as `Pipeline as API`, and pipelines that are not exposed as APIs as `pipeline`. In all documents, we will use\n  this name to refer to it. If not specifically labeled as `as API`, it means that this pipeline has not been exposed as an API.\n- Step set, composed of a group of steps,\n- Step: based on the definition of a single step.\n\nIf defined as a pipeline and is exposed as an API, it does not allow other pipeline steps to call it, otherwise it does. Therefore, if\ncertain logic combinations can be reused, they should be defined as a pipeline/steps set/step.\n\n## Common attributes\n\nAll definitions should have the following attributes:\n\n- A `code` attribute for identification within the system, so the value of the `code` attribute is globally unique.\n- A `type` attribute is used to indicate the type of this definition, and the value of the `type` attribute must be one\n  of `pipeline`, `step-sets`, or `step`.\n- An `enabled` attribute is used to indicate whether this definition is effective, and the value of the `enabled` attribute must be\n  either `true` or `false`. If not defined, this definition is considered to be effective by default.\n\n## Pipeline as API\n\nIf the definition contains a `route` attribute and specifies a URI, it is considered to be published as an API. A pipeline published\nas an API includes all standard HTTP protocol elements:\n\n- `route`, URI of API. Excluding the scheme, domain name, and port in the URL, the application configuration can also specify the path\n  context,\n	- To facilitate the definition and parsing of data contained in the `route`, you can use `pathParams` for definition. `pathParams` can\n	  be a list of parameters, or you can use `true` to define receiving all valid path parameters. Please note that the definition of path\n	  parameters must conform to the [nestjs](https://docs.nestjs.com/controllers#route-parameters) standard.\n- `method`, supporting `get`, `post`, `put`, `patch`, and `delete`,\n- `headers`, a list of headers that need to be parsed, or `true` to parse all headers,\n- `queryParams`, a list of query parameters that need to be parsed, or `true` to parse all query parameters,\n- `body`, the content of the HTTP body is in JSON format. To better adapt to common practices of HTTP API usage:\n	- When `method` is specified as `get` and the `body` parameter is not explicitly set to `true`, the system defaults to ignoring the HTTP\n	  body content,\n	- When `method` is not specified as `get` and the `body` parameter is not explicitly set to `false`, the system defaults to parsing the\n	  HTTP body content,\n- `files`, a list of files that need to be parsed, or `true` to parse all files.\n\nThere are also some HTTP response definitions:\n\n- `exposeHeaders`, a set of headers that need to be pushed to the client,\n- `exposeFile`, indicating whether the response data is a file.\n\n## Pipeline\n\nIf the definition does not contain a `route` attribute, it is considered a pipeline. A pipeline can be called by other pipeline steps.\n\nA pipeline always includes at least one step, and its behavior is entirely determined by the steps defined within it.\n\nA pipeline also has a special property `initOnly`, which if declared as `true`, indicates that this pipeline will only be\nexecuted when the application starts, and the application will not provide any parameters during execution.\n\n## Step set\n\nStep set, as the name suggests, can define a set of steps. They can also define how their built-in steps are executed, typically in the\nfollowing ways:\n\n- Synchronous serial,\n- Asynchronous serial,\n- Synchronous parallel,\n- Conditional execution,\n- Loop execution (only for input data as an array),\n- Start a database transaction.\n\nBy combining the various types of step collections mentioned above, you can construct execution sequences suitable for different scenarios.\n\n## Step\n\nSteps can be any type of step definition, including step sets. Logically, a step set is a step which includes a set of sub steps, and\ndifferent step sets define the way their sub steps are executed. Steps are implemented by different standard step components for\ndifferent purposes. Here are some built-in standard steps:\n\n- Retrieve values from models or remove attributes,\n- Execute snippets,\n- Generate snowflake IDs,\n- Call predefined pipelines or steps,\n- Make remote HTTP API calls,\n- Read from or write to databases.\n\nAdditionally, you can also obtain the following steps support through the `@rainbow-o23` standard extension library:\n\n- Print PDF, Word, Excel, CSV,\n- Manipulate AWS S3 objects.\n\n> The latest step support can be found on [Github](https://github.com/InsureMO/rainbow-o23).\n";
-const markdown$l = "Parse parameters from the [URL Search](https://developer.mozilla.org/en-US/docs/Web/API/URL/searchParams). For example, can parse the `name`\nand `age` parameters from `https://example.com/?name=Jonathan%20Smith&age=18`.\n\nTo specify receiving multiple query parameters, use commas or semicolons as separators.\n";
-const markdown$k = "The route of the API, excluding the HTTP protocol scheme, domain name, and port parts. The context of the URL path can also be\nspecified via the system environment variable `CFG_APP_CONTEXT`.\n\n> It should start with `/`.\n\n`route` syntax can be referenced from [nestjs - routing](https://docs.nestjs.com/controllers#routing)\nand [nestjs - route parameters](https://docs.nestjs.com/controllers#route-parameters), as well\nas [express](https://expressjs.com/en/guide/routing.html). Generally, there are the following rules:\n\n- Use regex for matching, but it's not recommended.\n- Define parameters with `:` prefix, for example `:name`, ensuring parameter names conform to the regex pattern `[A-Za-z0-9_]`.\n- For parsing multiple parameters, use `/`, `.`, or `-` as separators. \n";
-const markdown$j = "- `Pipeline`: A predefined pipeline that can be invoked by other pipelines and can also be executed during application\n  initialization. If specified to execute during application initialization, it cannot be used at runtime, and the initialization is\n  parameterless.\n- `Pipelne as API`: A predefined pipeline exposed as an API, which cannot be invoked by other pipelines.\n- `Step Set`: A predefined set of steps that can be invoked by other pipelines.\n- `Step`: A predefined step that can be invoked by other pipelines.\n";
+const markdown$j = "Specify the unique code of the pipeline.\n";
+const markdown$i = "### Ref pipeline step\n\nThe ref pipeline step calls the specified pipeline to complete the corresponding logic processing.\n\n#### Environment variables\n\nThis step does not use any environment variables.\n\n#### Step variables\n\nDefine the `code` attribute to specify the pipeline that needs to be invoked At runtime, the pipeline definition needs to be guaranteed to\nbe loaded.\n\n#### Returning\n\nUse the return data from the called pipeline as the return data for this step.\n\n${transformer}\n\n${errorHandles}\n";
 const docs$9 = {
-  pipeline: markdown$m,
-  pipelineCode: markdown$v,
-  pipelineEnabled: markdown$u,
-  pipelineType: markdown$j,
-  pipelineInitOnly: markdown$p,
-  pipelineRoute: markdown$k,
-  pipelineMethod: markdown$o,
-  pipelineHeaders: markdown$q,
-  pipelinePathParams: markdown$n,
-  pipelineQueryParams: markdown$l,
-  pipelineBody: markdown$w,
-  pipelineFiles: markdown$r,
-  pipelineExposeFile: markdown$t,
-  pipelineExposeHeaders: markdown$s
+  stepRefPipelineCode: markdown$j,
+  refPipelineStep: mergeStepDocs(markdown$i)
 };
-const markdown$i = "Specify the unique code of the pipeline.\n";
-const markdown$h = "### Ref pipeline step\n\nThe ref pipeline step calls the specified pipeline to complete the corresponding logic processing.\n\n#### Environment variables\n\nThis step does not use any environment variables.\n\n#### Step variables\n\nDefine the `code` attribute to specify the pipeline that needs to be invoked At runtime, the pipeline definition needs to be guaranteed to\nbe loaded.\n\n#### Returning\n\nUse the return data from the called pipeline as the return data for this step.\n\n${transformer}\n\n${errorHandles}\n";
+const markdown$h = "Specify the unique code of the pipeline step.\n";
+const markdown$g = "### Ref step step\n\nThe ref pipeline step calls the specified pipeline step to complete the corresponding logic processing.\n\n#### Environment variables\n\nThis step does not use any environment variables.\n\n#### Step variables\n\nDefine the `code` attribute to specify the pipeline step that needs to be invoked At runtime, the pipeline step definition needs to be\nguaranteed to be loaded.\n\n#### Returning\n\nUse the return data from the called pipeline step as the return data for this step.\n\n${transformer}\n\n${errorHandles}\n";
 const docs$8 = {
-  stepRefPipelineCode: markdown$i,
-  refPipelineStep: mergeStepDocs(markdown$h)
+  stepRefStepCode: markdown$h,
+  refStepStep: mergeStepDocs(markdown$g)
 };
-const markdown$g = "Specify the unique code of the pipeline step.\n";
-const markdown$f = "### Ref step step\n\nThe ref pipeline step calls the specified pipeline step to complete the corresponding logic processing.\n\n#### Environment variables\n\nThis step does not use any environment variables.\n\n#### Step variables\n\nDefine the `code` attribute to specify the pipeline step that needs to be invoked At runtime, the pipeline step definition needs to be\nguaranteed to be loaded.\n\n#### Returning\n\nUse the return data from the called pipeline step as the return data for this step.\n\n${transformer}\n\n${errorHandles}\n";
+const markdown$f = "### Routes step\n\nThe routes pipeline step provides one or more conditional routes and one `otherwise` route. Each conditional route has a check, and if the\ncheck passes, the set of steps defined for that route is executed. If the check fails, it proceeds to the next conditional route or to the\n`otherwise` route when all conditional routes are not satisfied. The `otherwise` route is allowed to be absent.\n\n#### Environment variables\n\nThis step does not use any environment variables.\n\n#### Step variables\n\nDefine the `check` attribute for each route, which is a JavaScript script that will ultimately be executed as a JavaScript function. This\nfunction accepts the following input parameters:\n\n- `$factor`: The content portion of the request data, excluding context data,\n- `$request`: The entire request data, including both content and context,\n- `$helpers` or `$`: Data manipulation helpers.\n\n> It is important to note that the `$factor` passed to `check` is provided by `Pick from input`, but `Pick from input` does not affect the\n> input parameters of the sub-steps (unless memory data is modified).\n\n#### Returning\n\nThe return data for this step is determined by the return data of the route executed at runtime.\n\n${transformer}\n\n${errorHandles}\n";
 const docs$7 = {
-  stepRefStepCode: markdown$g,
-  refStepStep: mergeStepDocs(markdown$f)
+  routesStep: mergeStepDocs(markdown$f)
 };
 const markdown$e = "### Sets step\n\nThe sets pipeline step includes a set of sub-step definitions, where all the actual processing logic is executed within the sub-steps. The\ninput data for the first sub-step is specified by `Pick from input`.\n\n#### Environment variables\n\nThis step does not use any environment variables.\n\n#### Step variables\n\nThis step has no other properties defined except for using the `steps` attribute to define sub-steps.\n\n#### Returning\n\nUse the return from the final sub-step as the return data.\n\n> It can still be further decorated during `Write to output` stage for the return data.\n\n${transformer}\n\n${errorHandles}\n";
 const docs$6 = {
@@ -2437,23 +2559,25 @@ const docs = {
   typeOrmTransactionalStep: mergeStepDocsAnd(markdown, { "${typeorm}\n": docs$3.stepTypeOrm })
 };
 const HelpDocs = {
-  ...docs$9,
-  ...docs$g,
-  ...docs$5,
-  ...docs$c,
-  ...docs$e,
-  ...docs$4,
-  ...docs$b,
-  ...docs$6,
-  ...docs$f,
-  ...docs$d,
   ...docs$a,
+  ...docs$i,
+  ...docs$5,
+  ...docs$d,
+  ...docs$f,
+  ...docs$4,
+  ...docs$c,
+  ...docs$6,
+  ...docs$h,
+  ...docs$e,
+  ...docs$b,
+  ...docs$g,
+  ...docs$7,
   ...docs$3,
   ...docs$2,
   ...docs$1,
   ...docs,
-  ...docs$8,
-  ...docs$7
+  ...docs$9,
+  ...docs$8
 };
 const elementCode = {
   code: "code",
@@ -3109,7 +3233,7 @@ const StandardLinkWidget = (props) => {
       }
     }
   }
-  return React.createElement("g", { "data-default-link-test": link.getOptions().testName }, paths);
+  return React.createElement("g", { "data-default-link-test": link.getOptions().testName || "no-test-name" }, paths);
 };
 class StandardLinkFactory extends DefaultLinkFactory {
   constructor(type) {
@@ -3119,7 +3243,7 @@ class StandardLinkFactory extends DefaultLinkFactory {
     return React.createElement(StandardLinkWidget, { link: event.model, engine: this.engine });
   }
   generateLinkSegment(model, selected, path) {
-    return React.createElement(StandardLinkSegmentPath, { selected, dasharray: this.getLinkSegmentDasharray(), selectedDasharray: this.getLinkSegmentSelectedDasharray(), stroke: selected ? model.getOptions().selectedColor : model.getOptions().color, strokeWidth: model.getOptions().width, d: path });
+    return React.createElement(StandardLinkSegmentPath, { "data-link-type": this.getLinkDataW(), selected, dasharray: this.getLinkSegmentDasharray(), selectedDasharray: this.getLinkSegmentSelectedDasharray(), stroke: selected ? model.getOptions().selectedColor : model.getOptions().color, strokeWidth: model.getOptions().width, d: path });
   }
   getLinkSegmentDasharray() {
     return PlaygroundCssVars.LINK_DEFAULT_STROKE_DASHARRAY;
@@ -3149,7 +3273,10 @@ class EndOfMeJoinLinkFactory extends StandardLinkFactory {
     super(EndOfMeJoinLinkModel.TYPE);
   }
   generateModel(_event) {
-    return new EndOfMeJoinLinkModel();
+    throw new Error("DO NOT use EndOfMeJoinLinkFactory#generateModel.");
+  }
+  getLinkDataW() {
+    return "o23-playground-end-of-me-join-link";
   }
   getLinkSegmentDasharray() {
     return PlaygroundCssVars.LINK_END_OF_ME_JOIN_DASHARRAY;
@@ -3591,7 +3718,9 @@ const EndNodeContainer = qe(NodeWrapper).attrs({
     "--border": PlaygroundCssVars.NODE_END_BORDER,
     "--background-color": PlaygroundCssVars.NODE_BACKGROUND
   }
-})``;
+})`
+    cursor: default;
+`;
 const EndNodeHeader = qe(NodeHeader).attrs({
   [DOM_KEY_WIDGET]: "o23-playground-end-node-header",
   style: {
@@ -3704,8 +3833,8 @@ const _StepNodeModel = class _StepNodeModel extends HandledNodeModel {
   getSubOf() {
     return this.rest.subOf;
   }
-  asFirstSubStep(is) {
-    this.firstSubStep = is;
+  asFirstSubStep() {
+    this.firstSubStep = true;
   }
   isFirstSubStep() {
     return this.firstSubStep;
@@ -3818,7 +3947,9 @@ const JoinEndNodeContainer = qe(NodeWrapper).attrs({
     "--border": PlaygroundCssVars.NODE_JOIN_END_BORDER,
     "--background-color": PlaygroundCssVars.NODE_BACKGROUND
   }
-})``;
+})`
+    cursor: default;
+`;
 const JoinEndNodeHeader = qe(NodeHeader).attrs({
   [DOM_KEY_WIDGET]: "o23-playground-join-end-node-header",
   style: {
@@ -4110,7 +4241,8 @@ class StartNodeFactory extends AbstractReactFactory {
 const Factories = {
   ports: [],
   nodes: [],
-  links: []
+  links: [],
+  labels: []
 };
 const initEngine = (engine) => {
   const portFactories = engine.getPortFactories();
@@ -4136,6 +4268,8 @@ const initEngine = (engine) => {
   linkFactories.registerFactory(new EndOfMeJoinLinkFactory());
   linkFactories.registerFactory(new LastSubStepJoinLinkFactory());
   Factories.links.forEach((factory) => linkFactories.registerFactory(factory));
+  const labelFactories = engine.getLabelFactories();
+  Factories.labels.forEach((factory) => labelFactories.registerFactory(factory));
 };
 const createPrePortBool = (options) => {
   const { label, getValue, defaultAs = false, required = false } = options;
@@ -4843,7 +4977,7 @@ const confirm$1 = (model, def, file, options, and) => {
     resultOfAnd = and(model, def, file, options);
   }
   let commitOfAnd;
-  if (typeof resultOfAnd === "string") {
+  if (Array.isArray(resultOfAnd)) {
     return resultOfAnd;
   } else if (resultOfAnd === true) {
     commitOfAnd = VUtils.noop;
@@ -4895,10 +5029,1082 @@ const confirm$1 = (model, def, file, options, and) => {
   options.handlers.onChange();
   return true;
 };
+const START_X = 64;
+const START_Y = 64;
+const askStartNodePosition = (def) => {
+  var _a, _b;
+  const diagramDef = def;
+  if (((_a = diagramDef.$diagram) == null ? void 0 : _a.$startX) != null && ((_b = diagramDef.$diagram) == null ? void 0 : _b.$startY) != null) {
+    return { x: diagramDef.$diagram.$startX, y: diagramDef.$diagram.$startY, appointed: true };
+  } else {
+    return { x: START_X, y: START_Y, appointed: false };
+  }
+};
+const askEndNodePosition = (def) => {
+  var _a, _b;
+  const diagramDef = def;
+  if (((_a = diagramDef.$diagram) == null ? void 0 : _a.$endX) != null && ((_b = diagramDef.$diagram) == null ? void 0 : _b.$endY) != null) {
+    return { x: diagramDef.$diagram.$endX, y: diagramDef.$diagram.$endY, appointed: true };
+  } else {
+    return { x: START_X, y: START_Y, appointed: false };
+  }
+};
+const askStepNodePosition = (def) => {
+  var _a, _b, _c, _d, _e, _f;
+  if (isPipelineDef(def)) {
+    const diagramDef = def;
+    if (((_a = diagramDef.$diagram) == null ? void 0 : _a.$virtualStepX) != null && ((_b = diagramDef.$diagram) == null ? void 0 : _b.$virtualStepY) != null) {
+      return { x: diagramDef.$diagram.$virtualStepX, y: diagramDef.$diagram.$virtualStepY, appointed: true };
+    } else {
+      return { x: START_X, y: START_Y, appointed: false };
+    }
+  } else {
+    const diagramDef = def;
+    if (((_c = diagramDef.$diagram) == null ? void 0 : _c.$x) != null && ((_d = diagramDef.$diagram) == null ? void 0 : _d.$y) != null) {
+      return { x: (_e = diagramDef.$diagram) == null ? void 0 : _e.$x, y: (_f = diagramDef.$diagram) == null ? void 0 : _f.$y, appointed: true };
+    } else {
+      return { x: START_X, y: START_Y, appointed: false };
+    }
+  }
+};
+class CustomDiagramModel extends DiagramModel {
+  addLink(link) {
+    if (this.isLocked()) {
+      link.setLocked(true);
+    }
+    return super.addLink(link);
+  }
+  addNode(node) {
+    if (this.isLocked()) {
+      node.setLocked(true);
+    }
+    return super.addNode(node);
+  }
+}
+const createLockedDiagramModel = () => {
+  const model = new CustomDiagramModel();
+  model.setLocked(true);
+  return model;
+};
+const createDiagramNodes = (file, handlers) => {
+  const allNodes = [];
+  const allLinks = [];
+  const nodeHandlers = {
+    onChange: () => handlers.onContentChange(() => handlers.serialize(file))
+  };
+  const startNode = new StartNodeModel(file, { handlers: nodeHandlers, assistant: handlers.assistant });
+  setNodePosition(startNode, () => askStartNodePosition(file));
+  allNodes.push(startNode);
+  let previousNode = startNode;
+  if (isPipelineDef(file)) {
+    const steps = file.steps ?? [];
+    if (steps.length === 0) {
+      const step = handlers.assistant.createDefaultStep();
+      steps.push(step);
+      file.steps = steps;
+    }
+    previousNode = steps.reduce((previousNode2, step) => {
+      return createStepNode(step, file, {
+        type: StepNodeEntityType.NORMAL,
+        handlers: nodeHandlers,
+        assistant: handlers.assistant,
+        previousNode: previousNode2,
+        linkPrevious: (node) => previousNode2.next(node),
+        appendNode: (...nodes) => allNodes.push(...nodes),
+        appendLink: (...links) => allLinks.push(...links)
+      });
+    }, previousNode);
+  } else {
+    const step = file;
+    previousNode = createStepNode(step, file, {
+      type: StepNodeEntityType.START,
+      handlers: nodeHandlers,
+      assistant: handlers.assistant,
+      previousNode,
+      linkPrevious: (node) => previousNode.next(node),
+      appendNode: (...nodes) => allNodes.push(...nodes),
+      appendLink: (...links) => allLinks.push(...links)
+    });
+  }
+  const endNode = new EndNodeModel(file, nodeHandlers);
+  setNodePosition(endNode, () => askEndNodePosition(file));
+  allNodes.push(endNode);
+  const link = previousNode.next(endNode);
+  allLinks.push(link);
+  const model = createLockedDiagramModel();
+  model.setLocked(true);
+  model.addAll(...allNodes, ...allLinks);
+  return model;
+};
+const cloneDiagramNodes = (old) => {
+  const model = createLockedDiagramModel();
+  model.setLocked(true);
+  model.addAll(...old.getModels());
+  return model;
+};
+const buildGrid = (node, grid, x, y) => {
+  var _a;
+  let hasSubSteps = false;
+  if (node instanceof StepNodeModel) {
+    const { use } = node.step;
+    const ports = ((_a = findStepDef(use)) == null ? void 0 : _a.findSubPorts(node)) ?? [];
+    ports.map((port2) => ({ port: port2, links: Object.values(port2.getLinks()) })).filter(({ links }) => links.length !== 0).forEach(({ links }, portIndex) => {
+      links.sort((l1, l2) => {
+        var _a2, _b;
+        return (((_a2 = l1.getOptions().extras) == null ? void 0 : _a2.index) ?? 0) - (((_b = l2.getOptions().extras) == null ? void 0 : _b.index) ?? 0);
+      }).forEach((link, linkIndex) => {
+        y = y + (portIndex === 0 && linkIndex === 0 ? 0 : 1);
+        hasSubSteps = true;
+        const subNode = link.getTargetPort().getNode();
+        grid[x + 1] = grid[x + 1] ?? [];
+        grid[x + 1][y] = {
+          node: subNode,
+          x: subNode.getPosition().x,
+          y: subNode.getPosition().y,
+          maxWidth: -1,
+          maxHeight: -1,
+          top: -1,
+          left: -1
+        };
+        y = buildGrid(subNode, grid, x + 1, y);
+      });
+    });
+  }
+  const port = node.getPort(NextStepPortModel.NAME);
+  if (port != null) {
+    const links = port.getLinks();
+    const link = Object.values(links)[0];
+    const next = link.getTargetPort().getNode();
+    grid[x] = grid[x] ?? [];
+    if (hasSubSteps) {
+      grid[x][y + 1] = {
+        node: next,
+        x: next.getPosition().x,
+        y: next.getPosition().y,
+        maxWidth: -1,
+        maxHeight: -1,
+        top: -1,
+        left: -1
+      };
+      return buildGrid(next, grid, x, y + 1);
+    } else if (next instanceof JoinEndNodeModel) {
+      return y;
+    } else {
+      grid[x][y + 1] = {
+        node: next,
+        x: next.getPosition().x,
+        y: next.getPosition().y,
+        maxWidth: -1,
+        maxHeight: -1,
+        top: -1,
+        left: -1
+      };
+      return buildGrid(next, grid, x, y + 1);
+    }
+  } else {
+    return y;
+  }
+};
+const computeGrid = (grid, top, left, rowGap, columnGap) => {
+  let offsetX = left;
+  let offsetY = top;
+  const maxX = grid.length - 1;
+  const maxY = grid.reduce((max, column) => Math.max(max, column.length - 1), 0);
+  for (let x = 0; x <= maxX; x++) {
+    const column = grid[x];
+    new Array(maxY + 1).fill(1).forEach((v, y) => {
+      if (column[y] == null) {
+        column[y] = { x, y, maxWidth: -1, maxHeight: -1, top: -1, left: -1 };
+      }
+    });
+    const maxWidth = column.reduce((max, cell) => {
+      var _a;
+      return Math.max(max, ((_a = cell.node) == null ? void 0 : _a.width) ?? 0);
+    }, 0);
+    offsetX = offsetX + (x === 0 ? 0 : grid[x - 1][0].maxWidth + columnGap);
+    column.forEach((cell) => {
+      cell.maxWidth = maxWidth;
+      cell.left = cell.node == null ? offsetX + maxWidth / 2 : offsetX + (maxWidth - cell.node.width) / 2;
+    });
+  }
+  for (let y = 0; y <= maxY; y++) {
+    const row = grid.map((column) => column[y]);
+    const maxHeight = row.reduce((max, cell) => {
+      var _a;
+      return Math.max(max, ((_a = cell.node) == null ? void 0 : _a.height) ?? 0);
+    }, 0);
+    offsetY = offsetY + (y === 0 ? 0 : grid[0][y - 1].maxHeight + rowGap);
+    row.forEach((cell) => {
+      cell.maxHeight = maxHeight;
+      cell.top = cell.node == null ? offsetY + maxHeight / 2 : offsetY;
+    });
+  }
+  grid.forEach((column) => {
+    column.forEach((cell) => {
+      if (cell.node != null) {
+        cell.node.setPosition(cell.left, cell.top);
+      }
+    });
+  });
+};
+const createDiagramHandlers = (options) => {
+  const { serializer, assistant, replace, syncContentToStateRef, notifyContentChanged } = options;
+  return {
+    serialize: (def) => serializer.stringify(def),
+    assistant: {
+      createDefaultStep: (assistant == null ? void 0 : assistant.createDefaultStep) ?? DEFAULTS.createDefaultStep,
+      askTypeOrmDatasources: (assistant == null ? void 0 : assistant.askTypeOrmDatasources) ?? (() => []),
+      askSystemsForHttp: (assistant == null ? void 0 : assistant.askSystemsForHttp) ?? (() => []),
+      askRefPipelines: (assistant == null ? void 0 : assistant.askRefPipelines) ?? (() => []),
+      askRefSteps: (assistant == null ? void 0 : assistant.askRefSteps) ?? (() => [])
+    },
+    onContentChange: (serialize) => {
+      const content = syncContentToStateRef(serialize());
+      replace(() => {
+        notifyContentChanged(content);
+      }, 100);
+    }
+  };
+};
+const StepDefsFolders = [];
+const registerStepDefsFolders = (...folders) => {
+  (folders || []).forEach((folder2) => {
+    if (!StepDefsFolders.includes(folder2)) {
+      StepDefsFolders.push(folder2);
+    }
+  });
+};
+const switchAllNodesFolding = (file, fold) => {
+  const switchFolding = (step) => {
+    for (const folder2 of StepDefsFolders) {
+      if (folder2.accept(step)) {
+        folder2.switch(step, fold);
+        (folder2.askSubStep(step) ?? []).forEach((subStep) => switchFolding(subStep));
+        break;
+      }
+    }
+  };
+  if (isPipelineDef(file)) {
+    (file.steps ?? []).forEach((step) => switchFolding(step));
+  } else {
+    switchFolding(file);
+  }
+};
+const EditorWrapper = qe.div.attrs({
+  [DOM_KEY_WIDGET]: "o23-playground-editor",
+  "data-v-scroll": "",
+  "data-h-scroll": ""
+})`
+    display: block;
+    position: relative;
+    align-self: stretch;
+    background-image: ${PlaygroundCssVars.EDITOR_BACKGROUND_IMAGE};
+    background-size: ${PlaygroundCssVars.EDITOR_BACKGROUND_SIZE};
+    background-position: ${PlaygroundCssVars.EDITOR_BACKGROUND_POSITION};
+    overflow: auto;
+
+    &[data-diagram-status=paint],
+    &[data-diagram-status=paint-on-position] {
+        > div[data-w=o23-playground-canvas] > div.o23-playground-editor-content {
+            //opacity: 0;
+            user-select: none;
+            pointer-events: none;
+
+            div.node, div.node * {
+                user-select: none;
+                pointer-events: none;
+                cursor: default;
+            }
+        }
+    }
+
+    &[data-diagram-locked=true] {
+        > div[data-w=o23-playground-canvas] > div.o23-playground-editor-content {
+            cursor: default;
+
+            div.node {
+                cursor: pointer;
+            }
+        }
+    }
+
+    > div.o23-playground-editor-content-backend {
+        position: absolute;
+        left: 100%;
+        // Width is necessary; 
+        // otherwise, it will cause the node width to be rendered incorrectly,
+        // ultimately resulting in the connections not being straight.
+        min-width: 100%;
+        //opacity: 0;
+        user-select: none;
+        pointer-events: none;
+    }
+`;
+const BackendCanvasWrapper = qe.div.attrs({ [DOM_KEY_WIDGET]: "o23-playground-backend-canvas" })`
+    display: block;
+    position: absolute;
+    width: 100%;
+    pointer-events: none;
+    opacity: 0;
+`;
+const EditorCanvasWrapper = qe.div.attrs(({ canvasWidth, canvasHeight, canvasZoom }) => {
+  return {
+    [DOM_KEY_WIDGET]: "o23-playground-canvas",
+    style: {
+      "--canvas-width": utils$2.toCssSize(canvasWidth),
+      "--canvas-height": utils$2.toCssSize(canvasHeight),
+      "--canvas-zoom": canvasZoom ?? 1
+    }
+  };
+})`
+    display: block;
+    position: relative;
+    min-width: 100%;
+    min-height: 100%;
+    width: calc(var(--canvas-width) * var(--canvas-zoom));
+    height: calc(var(--canvas-height) * var(--canvas-zoom));
+    overflow: hidden;
+
+    > div.o23-playground-editor-content {
+        width: 100%;
+        height: 100%;
+    }
+`;
+const EditorToolbar = qe.div.attrs(({ columns }) => {
+  return {
+    [DOM_KEY_WIDGET]: "o23-playground-editor-toolbar",
+    style: {
+      "--grid-columns": columns
+    }
+  };
+})`
+    display: grid;
+    position: absolute;
+    align-items: center;
+    grid-template-columns: repeat(var(--grid-columns), 1fr);
+    top: ${PlaygroundCssVars.EDITOR_TOOLBAR_GUTTER_SIZE};
+    right: ${PlaygroundCssVars.EDITOR_TOOLBAR_GUTTER_SIZE};
+    height: ${PlaygroundCssVars.EDITOR_TOOLBAR_HEIGHT};
+    border-radius: ${PlaygroundCssVars.EDITOR_TOOLBAR_BORDER_RADIUS};
+    border: ${PlaygroundCssVars.EDITOR_TOOLBAR_BORDER};
+    background-color: ${CssVars.BACKGROUND_COLOR};
+    overflow: visible;
+    opacity: 0.7;
+    transition: border-color ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION}, opacity ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION};
+
+    &:hover {
+        opacity: 1;
+        border-color: ${PlaygroundCssVars.EDITOR_TOOLBAR_BUTTON_ACTIVE_BACKGROUND_COLOR};
+
+        > span[data-w=o23-playground-editor-toolbar-button] {
+            &:not(:nth-child(6n + 1)) {
+                border-left-color: ${PlaygroundCssVars.EDITOR_TOOLBAR_BUTTON_ACTIVE_BACKGROUND_COLOR};
+            }
+
+            &:nth-child(-n + 6) {
+                border-bottom-color: ${PlaygroundCssVars.EDITOR_TOOLBAR_BUTTON_ACTIVE_BACKGROUND_COLOR};
+            }
+
+            &:not(:hover) {
+                color: ${PlaygroundCssVars.EDITOR_TOOLBAR_BUTTON_ACTIVE_BACKGROUND_COLOR};
+            }
+        }
+
+        > div[data-w=o23-playground-editor-toolbar-toc] {
+            border-top-color: ${PlaygroundCssVars.EDITOR_TOOLBAR_BUTTON_ACTIVE_BACKGROUND_COLOR};
+
+            > span[data-w=o23-playground-editor-toolbar-toc-button]:not(:hover) {
+                color: ${PlaygroundCssVars.EDITOR_TOOLBAR_BUTTON_ACTIVE_BACKGROUND_COLOR};
+            }
+        }
+    }
+
+    > span[data-absolute=false] {
+        position: relative;
+    }
+
+    > span[data-absolute=true] {
+        position: absolute;
+    }
+
+    > div[data-w=o23-playground-editor-toolbar-toc] {
+        grid-column: 1 / span var(--grid-columns);
+    }
+`;
+const EditorToolbarButton = qe.span.attrs({ [DOM_KEY_WIDGET]: "o23-playground-editor-toolbar-button" })`
+    display: flex;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+    width: ${PlaygroundCssVars.EDITOR_TOOLBAR_BUTTON_WIDTH};
+    height: ${PlaygroundCssVars.EDITOR_TOOLBAR_BUTTON_HEIGHT};
+    color: ${PlaygroundCssVars.EDITOR_TOOLBAR_BUTTON_COLOR};
+    cursor: pointer;
+    transition: color ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION}, background-color ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION}, border-color ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION};
+
+    &:not(:nth-child(6n + 1)) {
+        border-left: ${PlaygroundCssVars.EDITOR_TOOLBAR_BORDER};
+    }
+
+    &:nth-child(-n + 6) {
+        border-bottom: ${PlaygroundCssVars.EDITOR_TOOLBAR_BORDER};
+    }
+
+    &:hover {
+        color: ${PlaygroundCssVars.EDITOR_TOOLBAR_BUTTON_ACTIVE_COLOR};
+        background-color: ${PlaygroundCssVars.EDITOR_TOOLBAR_BUTTON_ACTIVE_BACKGROUND_COLOR};
+    }
+
+    > svg {
+        height: calc(${PlaygroundCssVars.EDITOR_TOOLBAR_BUTTON_HEIGHT} / 3 * 2);
+
+        &[data-icon=o23-origin-size] {
+            height: calc(${PlaygroundCssVars.EDITOR_TOOLBAR_BUTTON_HEIGHT} / 3 * 2 - 2px);
+            margin-top: 2px;
+        }
+    }
+`;
+const EditorToolbarToc = qe.div.attrs({ [DOM_KEY_WIDGET]: "o23-playground-editor-toolbar-toc" })`
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    height: ${PlaygroundCssVars.EDITOR_TOOLBAR_TOC_HEIGHT};
+    border-top: ${PlaygroundCssVars.EDITOR_TOOLBAR_BORDER};
+    border-radius: 0 0 ${PlaygroundCssVars.EDITOR_TOOLBAR_BORDER_RADIUS} ${PlaygroundCssVars.EDITOR_TOOLBAR_BORDER_RADIUS};
+    transition: border-color ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION};
+`;
+const EditorToolbarTocButton = qe.span.attrs({ [DOM_KEY_WIDGET]: "o23-playground-editor-toolbar-toc-button" })`
+    display: flex;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    cursor: pointer;
+    transition: color ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION}, background-color ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION};
+
+    &:hover {
+        color: ${PlaygroundCssVars.EDITOR_TOOLBAR_BUTTON_ACTIVE_COLOR};
+        background-color: ${PlaygroundCssVars.EDITOR_TOOLBAR_BUTTON_ACTIVE_BACKGROUND_COLOR};
+    }
+
+    > svg {
+        height: ${PlaygroundCssVars.EDITOR_TOOLBAR_TOC_HEIGHT};
+    }
+`;
+const ParseError = qe.div.attrs({ [DOM_KEY_WIDGET]: "o23-playground-viewer-error" })`
+    display: flex;
+    position: relative;
+    align-items: center;
+    padding: 16px 32px;
+    color: ${PlaygroundCssVars.EDITOR_ERROR_COLOR};
+    font-size: 1.5em;
+    font-style: italic;
+    font-weight: 500;
+`;
+class ErrorBoundary extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { content: props.content, hasError: false };
+  }
+  static getDerivedStateFromError(error) {
+    console.log(error);
+    return { hasError: true, error };
+  }
+  componentDidCatch(_error, _errorInfo) {
+  }
+  componentDidUpdate(_prevProps, prevState) {
+    if (prevState.content !== this.props.content) {
+      this.setState({ content: this.props.content, hasError: false });
+    }
+  }
+  render() {
+    if (this.state.hasError) {
+      return React.createElement(ParseError, null, Labels.ERROR);
+    }
+    return this.props.children;
+  }
+}
+var EditorKernelDiagramStatus;
+(function(EditorKernelDiagramStatus2) {
+  EditorKernelDiagramStatus2["IGNORED"] = "ignored";
+  EditorKernelDiagramStatus2["PAINT"] = "paint";
+  EditorKernelDiagramStatus2["PAINT_ON_POSITION"] = "paint-on-position";
+  EditorKernelDiagramStatus2["IN_SERVICE"] = "in-service";
+})(EditorKernelDiagramStatus || (EditorKernelDiagramStatus = {}));
+const parseContent = (parser, content) => {
+  const def = parser.parse(content ?? "");
+  if (VUtils.isBlank(def.type)) {
+    def.type = "pipeline";
+  }
+  return def;
+};
+const createDiagramModel = (options) => {
+  const { def, serializer, assistant, replace, writeContentToState, onContentChanged } = options;
+  const handlers = createDiagramHandlers({
+    serializer,
+    assistant,
+    replace,
+    syncContentToStateRef: (content) => {
+      writeContentToState(content);
+      return content;
+    },
+    notifyContentChanged: onContentChanged
+  });
+  return createDiagramNodes(def, handlers);
+};
+class DiagramState extends State {
+  constructor() {
+    super({ name: "default-diagrams" });
+    this.childStates = [new SelectingState()];
+  }
+}
+const createDiagramEngine = () => {
+  const engine = new DiagramEngine({
+    registerDefaultPanAndZoomCanvasAction: false,
+    registerDefaultZoomCanvasAction: false
+  });
+  engine.getLayerFactories().registerFactory(new NodeLayerFactory());
+  engine.getLayerFactories().registerFactory(new LinkLayerFactory());
+  engine.getLayerFactories().registerFactory(new SelectionBoxLayerFactory());
+  engine.getLabelFactories().registerFactory(new DefaultLabelFactory());
+  engine.getNodeFactories().registerFactory(new DefaultNodeFactory());
+  engine.getLinkFactories().registerFactory(new DefaultLinkFactory());
+  engine.getLinkFactories().registerFactory(new PathFindingLinkFactory());
+  engine.getPortFactories().registerFactory(new DefaultPortFactory());
+  engine.getStateMachine().pushState(new DiagramState());
+  initEngine(engine);
+  const model = createLockedDiagramModel();
+  model.setLocked(true);
+  engine.setModel(model);
+  return engine;
+};
+const firstPaint = (options) => {
+  const { content, serializer, deserializer, assistant, replace, writeContentToState, onContentChanged } = options;
+  const engine = createDiagramEngine();
+  const engineBackend = createDiagramEngine();
+  try {
+    const def = parseContent(deserializer, content ?? "");
+    const model = createDiagramModel({
+      def,
+      serializer,
+      assistant,
+      replace,
+      writeContentToState,
+      onContentChanged
+    });
+    engineBackend.setModel(model);
+    return {
+      engine,
+      engineBackend,
+      content,
+      def,
+      serializer,
+      deserializer,
+      diagramStatus: EditorKernelDiagramStatus.PAINT
+    };
+  } catch (e) {
+    console.error(e);
+    engine.setModel(createLockedDiagramModel());
+    return {
+      engine,
+      engineBackend,
+      content,
+      serializer,
+      deserializer,
+      message: e.message,
+      diagramStatus: EditorKernelDiagramStatus.IGNORED
+    };
+  }
+};
+const paintErrorDiagram = (options) => {
+  const { error, stateRef, content, serializer, deserializer } = options;
+  console.error(error);
+  stateRef.current.content = content;
+  stateRef.current.serializer = serializer;
+  stateRef.current.deserializer = deserializer;
+  delete stateRef.current.def;
+  stateRef.current.engine.setModel(createLockedDiagramModel());
+  stateRef.current.engineBackend.setModel(createLockedDiagramModel());
+  stateRef.current.message = error.message;
+  stateRef.current.diagramStatus = EditorKernelDiagramStatus.IGNORED;
+  stateRef.current.canvasZoom = 1;
+  delete stateRef.current.canvasWidth;
+  delete stateRef.current.canvasHeight;
+};
+const computeCanvasSize = (model) => {
+  return (model.getNodes() ?? []).reduce((size, node) => {
+    if (node instanceof EndNodeModel) {
+      size.height = node.getY() + node.height + DEFAULTS.diagram.startTop;
+    }
+    const right = node.getX() + node.width + DEFAULTS.diagram.startLeft;
+    if (size.width == null || right > size.width) {
+      size.width = right;
+    }
+    return size;
+  }, {});
+};
+const paint = (options) => {
+  const { stateRef, replace, onStateContentChanged, onContentChanged } = options;
+  const content = options.content();
+  const serializer = options.serializer();
+  const deserializer = options.deserializer();
+  const assistant = options.assistant();
+  try {
+    const def = parseContent(deserializer, content ?? "");
+    const model = createDiagramModel({
+      def,
+      serializer,
+      assistant,
+      replace,
+      writeContentToState: (content2) => {
+        stateRef.current.content = content2;
+        (async () => await onStateContentChanged())();
+      },
+      onContentChanged
+    });
+    stateRef.current.content = content;
+    stateRef.current.serializer = serializer;
+    stateRef.current.deserializer = deserializer;
+    stateRef.current.def = def;
+    stateRef.current.canvasZoom = 1;
+    const { width, height } = computeCanvasSize(model);
+    stateRef.current.canvasWidth = width;
+    stateRef.current.canvasHeight = height;
+    stateRef.current.engineBackend.setModel(model);
+    delete stateRef.current.message;
+    stateRef.current.diagramStatus = EditorKernelDiagramStatus.PAINT;
+  } catch (e) {
+    paintErrorDiagram({ error: e, stateRef, content, serializer, deserializer });
+  }
+};
+const repaint = (options) => {
+  const { stateRef, replace, onStateContentChanged, onContentChanged } = options;
+  const def = stateRef.current.def;
+  const serializer = stateRef.current.serializer;
+  const assistant = options.assistant();
+  try {
+    const model = createDiagramModel({
+      def,
+      serializer,
+      assistant,
+      replace,
+      writeContentToState: (content) => {
+        stateRef.current.content = content;
+        (async () => await onStateContentChanged())();
+      },
+      onContentChanged
+    });
+    stateRef.current.engineBackend.setModel(model);
+    stateRef.current.diagramStatus = EditorKernelDiagramStatus.PAINT_ON_POSITION;
+  } catch (e) {
+    paintErrorDiagram({
+      error: e,
+      stateRef,
+      content: stateRef.current.content,
+      serializer: stateRef.current.serializer,
+      deserializer: stateRef.current.deserializer
+    });
+  }
+};
+const usePaint = (stateRef) => {
+  const forceUpdate = useForceUpdate();
+  reactExports.useEffect(() => {
+    if (![
+      EditorKernelDiagramStatus.PAINT,
+      EditorKernelDiagramStatus.PAINT_ON_POSITION
+    ].includes(stateRef.current.diagramStatus)) {
+      return;
+    }
+    const backendModel = stateRef.current.engineBackend.getModel();
+    const grid = [];
+    const nodes = backendModel.getNodes();
+    const startNode = nodes.find((node) => node instanceof StartNodeModel);
+    grid[0] = grid[0] ?? [];
+    grid[0][0] = {
+      node: startNode,
+      x: startNode.getPosition().x,
+      y: startNode.getPosition().y,
+      maxWidth: -1,
+      maxHeight: -1,
+      top: -1,
+      left: -1
+    };
+    buildGrid(startNode, grid, 0, 0);
+    const { startTop, startLeft, rowGap, columnGap } = DEFAULTS.diagram;
+    computeGrid(grid, startTop, startLeft, rowGap, columnGap);
+    const newModel = cloneDiagramNodes(backendModel);
+    newModel.setZoomLevel((stateRef.current.canvasZoom ?? 1) * 100);
+    const { width, height } = computeCanvasSize(newModel);
+    stateRef.current.canvasWidth = width;
+    stateRef.current.canvasHeight = height;
+    stateRef.current.engine.setModel(newModel);
+    stateRef.current.engineBackend.setModel(createLockedDiagramModel());
+    stateRef.current.diagramStatus = EditorKernelDiagramStatus.IN_SERVICE;
+    forceUpdate();
+  }, [forceUpdate, stateRef, stateRef.current.diagramStatus]);
+};
+const Toolbar = (props) => {
+  const { stateRef, serializer, allowUploadFile, allowDownloadFile, allowDownloadImage } = props;
+  const ref = reactExports.useRef(null);
+  const { fire } = usePlaygroundEventBus();
+  const [state, setState] = reactExports.useState({ max: false, zen: false, tocExpanded: false });
+  reactExports.useEffect(() => {
+    const onFullScreenChanged = () => {
+      if (document.fullscreenElement == null) {
+        setState((state2) => ({ ...state2, zen: false, max: false }));
+      }
+    };
+    window.addEventListener("fullscreenchange", onFullScreenChanged);
+    return () => {
+      window.removeEventListener("fullscreenchange", onFullScreenChanged);
+    };
+  }, []);
+  reactExports.useEffect(() => {
+    const wrapper = ref.current.parentElement;
+    switch (true) {
+      case state.zen:
+        wrapper.setAttribute("data-diagram-work-mode", "zen");
+        document.documentElement.requestFullscreen && document.documentElement.requestFullscreen({ navigationUI: "hide" });
+        break;
+      case state.max:
+        wrapper.setAttribute("data-diagram-work-mode", "max");
+        break;
+      case !state.max:
+        wrapper.removeAttribute("data-diagram-work-mode");
+        if (document.fullscreenElement != null) {
+          document.exitFullscreen && document.exitFullscreen();
+        }
+        break;
+    }
+  }, [state.max, state.zen]);
+  const onZoomInClicked = () => {
+    fire(PlaygroundEventTypes.ZOOM_TO, (stateRef.current.canvasZoom ?? 1) + 0.05);
+  };
+  const onZoomOutClicked = () => {
+    fire(PlaygroundEventTypes.ZOOM_TO, Math.max(stateRef.current.canvasZoom ?? 1, 0.1) - 0.05);
+  };
+  const onOriginSizeClicked = () => {
+    fire(PlaygroundEventTypes.ZOOM_TO, 1);
+  };
+  const onFitCanvasClicked = () => {
+    fire(PlaygroundEventTypes.ZOOM_TO_FIT);
+  };
+  const onDownloadImageClicked = async () => {
+    var _a;
+    const backendModel = stateRef.current.engineBackend.getModel();
+    stateRef.current.engineBackend.setModel(cloneDiagramNodes(stateRef.current.engine.getModel()));
+    await stateRef.current.engineBackend.repaintCanvas(true);
+    const node = ref.current.parentElement.querySelector("div.o23-playground-editor-content-backend");
+    const { width, height } = Array.from(node.lastElementChild.children).reduce(({ width: width2, height: height2 }, child) => {
+      const { width: childWidth, height: childHeight } = child.getBoundingClientRect();
+      return {
+        width: Math.max(width2, childWidth + parseInt(child.style.left)),
+        height: Math.max(height2, childHeight + parseInt(child.style.top))
+      };
+    }, { width: 0, height: 0 });
+    node.style.width = `${width + DEFAULTS.diagram.startLeft}px`;
+    node.style.height = `${height + DEFAULTS.diagram.startTop}px`;
+    const dataUrl = await dom2image.toPng(node, { quality: 1, bgcolor: "white" });
+    const link = document.createElement("a");
+    link.download = `${((_a = stateRef.current.def) == null ? void 0 : _a.code) || "no-code"}-diagram.png`;
+    link.href = dataUrl;
+    link.click();
+    node.style.width = "";
+    node.style.height = "";
+    stateRef.current.engineBackend.setModel(backendModel);
+  };
+  const onDownloadFileClicked = async () => {
+    var _a;
+    const link = document.createElement("a");
+    link.download = `${((_a = stateRef.current.def) == null ? void 0 : _a.code) || "no-code"}-config.${serializer.extname()}`;
+    link.href = "data:text/plain;charset=UTF-8," + encodeURIComponent(serializer.stringify(stateRef.current.def));
+    link.click();
+  };
+  const onUploadFileClicked = async () => {
+    const file = document.createElement("input");
+    file.setAttribute("type", "file");
+    file.setAttribute("accept", ".yml,.yaml");
+    file.setAttribute("multiple", "false");
+    file.addEventListener("change", () => {
+      if (file.files.length == 1) {
+        const reader = new FileReader();
+        reader.onload = () => {
+          const content = reader.result;
+          fire(PlaygroundEventTypes.RESET_CONTENT, content);
+        };
+        reader.readAsText(file.files[0]);
+      }
+    });
+    file.click();
+  };
+  const onMaxClicked = () => setState((state2) => ({ ...state2, max: true }));
+  const onMinClicked = () => setState((state2) => ({ ...state2, max: false }));
+  const onZenClicked = () => setState((state2) => ({ ...state2, zen: true, max: true }));
+  const onWindowClicked = () => {
+    document.exitFullscreen && document.exitFullscreen();
+    setState((state2) => ({ ...state2, zen: false, max: false }));
+  };
+  const onFoldAllNodesClicked = () => fire(PlaygroundEventTypes.FOLD_ALL_NODES);
+  const onUnfoldAllNodesClicked = () => fire(PlaygroundEventTypes.UNFOLD_ALL_NODES);
+  const onSwitchToc = (expanded) => () => setState((state2) => ({ ...state2, tocExpanded: expanded }));
+  if (state.tocExpanded)
+    ;
+  return React.createElement(
+    EditorToolbar,
+    { columns: state.zen ? 5 : 6, ref },
+    React.createElement(
+      EditorToolbarButton,
+      { onClick: onZoomInClicked },
+      React.createElement(ZoomIn, null)
+    ),
+    React.createElement(
+      EditorToolbarButton,
+      { onClick: onZoomOutClicked },
+      React.createElement(ZoomOut, null)
+    ),
+    React.createElement(
+      EditorToolbarButton,
+      { onClick: onOriginSizeClicked },
+      React.createElement(OriginSize, null)
+    ),
+    React.createElement(
+      EditorToolbarButton,
+      { onClick: onFitCanvasClicked },
+      React.createElement(FitCanvas, null)
+    ),
+    state.max ? null : React.createElement(
+      EditorToolbarButton,
+      { onClick: onMaxClicked },
+      React.createElement(Max, null)
+    ),
+    state.max && !state.zen ? React.createElement(
+      EditorToolbarButton,
+      { onClick: onMinClicked },
+      React.createElement(Min, null)
+    ) : null,
+    state.zen ? null : React.createElement(
+      EditorToolbarButton,
+      { onClick: onZenClicked },
+      React.createElement(Zen, null)
+    ),
+    state.zen ? React.createElement(
+      EditorToolbarButton,
+      { onClick: onWindowClicked },
+      React.createElement(Window, null)
+    ) : null,
+    React.createElement("span", { "data-absolute": state.zen }),
+    React.createElement(
+      EditorToolbarButton,
+      { onClick: onFoldAllNodesClicked },
+      React.createElement(FoldAllNodes, null)
+    ),
+    React.createElement(
+      EditorToolbarButton,
+      { onClick: onUnfoldAllNodesClicked },
+      React.createElement(UnfoldAllNodes, null)
+    ),
+    allowDownloadImage ? React.createElement(
+      EditorToolbarButton,
+      { onClick: onDownloadImageClicked },
+      React.createElement(DownloadImage, null)
+    ) : null,
+    allowDownloadFile ? React.createElement(
+      EditorToolbarButton,
+      { onClick: onDownloadFileClicked },
+      React.createElement(DownloadFile, null)
+    ) : null,
+    allowUploadFile ? React.createElement(
+      EditorToolbarButton,
+      { onClick: onUploadFileClicked },
+      React.createElement(UploadFile, null)
+    ) : null,
+    React.createElement(EditorToolbarToc, null, state.tocExpanded ? React.createElement(
+      EditorToolbarTocButton,
+      { onClick: onSwitchToc(false) },
+      React.createElement(CollapseToc, null)
+    ) : React.createElement(
+      EditorToolbarTocButton,
+      { onClick: onSwitchToc(true) },
+      React.createElement(ExpandToc, null)
+    ))
+  );
+};
+const CanvasWrapper = (props) => {
+  const { width, height, zoom: askZoom, zoomTo, children } = props;
+  const ref = reactExports.useRef(null);
+  const { on, off } = usePlaygroundEventBus();
+  const forceUpdate = useForceUpdate();
+  reactExports.useEffect(() => {
+    const onZoomTo = (zoom2) => {
+      zoomTo(zoom2);
+      forceUpdate();
+    };
+    const onZoomToFit = () => {
+      if (ref.current == null) {
+        return;
+      }
+      const parent = ref.current.parentElement;
+      const { width: parentWidth, height: parentHeight } = parent.getBoundingClientRect();
+      const zoom2 = Math.min(parentWidth / (width ?? parentWidth), parentHeight / (height ?? parentHeight));
+      onZoomTo(zoom2);
+    };
+    on(PlaygroundEventTypes.ZOOM_TO, onZoomTo);
+    on(PlaygroundEventTypes.ZOOM_TO_FIT, onZoomToFit);
+    return () => {
+      off(PlaygroundEventTypes.ZOOM_TO, onZoomTo);
+      off(PlaygroundEventTypes.ZOOM_TO_FIT, onZoomToFit);
+    };
+  }, [on, off, forceUpdate, width, height, zoomTo]);
+  let zoom = askZoom();
+  if (zoom === 1) {
+    zoom = void 0;
+  }
+  return React.createElement(EditorCanvasWrapper, { canvasWidth: width, canvasHeight: height, canvasZoom: zoom, ref }, children);
+};
+const EditorKernel = (props) => {
+  const { content, assistant, serializer, deserializer, allowUploadFile, allowDownloadFile, allowDownloadImage } = props;
+  const wrapperRef = reactExports.useRef(null);
+  const { on, off, fire } = usePlaygroundEventBus();
+  const { replace } = useThrottler();
+  const stateRef = reactExports.useRef(firstPaint({
+    content,
+    serializer,
+    deserializer,
+    assistant,
+    replace,
+    writeContentToState: (content2) => {
+      stateRef.current.content = content2;
+      (async () => {
+        fire(PlaygroundEventTypes.REPAINT);
+      })();
+    },
+    onContentChanged: (content2) => {
+      fire(PlaygroundEventTypes.CONTENT_CHANGED, content2);
+    }
+  }));
+  const forceUpdate = useForceUpdate();
+  reactExports.useEffect(() => {
+    if (serializer === stateRef.current.serializer && deserializer === stateRef.current.deserializer && content === stateRef.current.content) {
+      return;
+    }
+    paint({
+      serializer: () => serializer,
+      deserializer: () => deserializer,
+      assistant: () => assistant,
+      content: () => content,
+      stateRef,
+      replace,
+      onStateContentChanged: async () => {
+        fire(PlaygroundEventTypes.REPAINT);
+      },
+      onContentChanged: (content2) => {
+        fire(PlaygroundEventTypes.CONTENT_CHANGED, content2);
+      }
+    });
+    forceUpdate();
+  }, [fire, replace, forceUpdate, serializer, deserializer, assistant, content]);
+  reactExports.useEffect(() => {
+    const onRepaint = () => {
+      repaint({
+        assistant: () => assistant,
+        stateRef,
+        replace,
+        onStateContentChanged: async () => {
+          fire(PlaygroundEventTypes.REPAINT);
+        },
+        onContentChanged: (content2) => {
+          fire(PlaygroundEventTypes.CONTENT_CHANGED, content2);
+        }
+      });
+      forceUpdate();
+    };
+    const switchFolding = (fold) => {
+      switchAllNodesFolding(stateRef.current.def, fold);
+      onRepaint();
+    };
+    const onFoldAllNodes = () => switchFolding(true);
+    const onUnfoldAllNodes = () => switchFolding(false);
+    on(PlaygroundEventTypes.REPAINT, onRepaint);
+    on(PlaygroundEventTypes.FOLD_ALL_NODES, onFoldAllNodes);
+    on(PlaygroundEventTypes.UNFOLD_ALL_NODES, onUnfoldAllNodes);
+    return () => {
+      off(PlaygroundEventTypes.REPAINT, onRepaint);
+      off(PlaygroundEventTypes.FOLD_ALL_NODES, onFoldAllNodes);
+      off(PlaygroundEventTypes.UNFOLD_ALL_NODES, onUnfoldAllNodes);
+    };
+  }, [on, off, fire, replace, forceUpdate, assistant]);
+  usePaint(stateRef);
+  if (VUtils.isNotBlank(stateRef.current.message)) {
+    return React.createElement(
+      EditorWrapper,
+      { "data-diagram-status": EditorKernelDiagramStatus.IGNORED },
+      React.createElement(ParseError, null, stateRef.current.message)
+    );
+  } else if (VUtils.isBlank(stateRef.current.content)) {
+    return React.createElement(
+      EditorWrapper,
+      { "data-diagram-status": EditorKernelDiagramStatus.IGNORED },
+      React.createElement(ParseError, null, Labels.NoContent)
+    );
+  } else if (stateRef.current.def == null) {
+    return React.createElement(
+      EditorWrapper,
+      { "data-diagram-status": EditorKernelDiagramStatus.IGNORED },
+      React.createElement(ParseError, null, Labels.NoDefParsed)
+    );
+  }
+  const askZoom = () => stateRef.current.canvasZoom;
+  const zoomTo = (zoom) => {
+    stateRef.current.canvasZoom = zoom;
+    stateRef.current.engine.getModel().setZoomLevel(zoom * 100);
+    stateRef.current.engine.repaintCanvas();
+  };
+  try {
+    return React.createElement(
+      React.Fragment,
+      null,
+      React.createElement(
+        EditorWrapper,
+        { "data-diagram-status": stateRef.current.diagramStatus, "data-diagram-locked": stateRef.current.engine.getModel().isLocked(), ref: wrapperRef },
+        React.createElement(
+          ErrorBoundary,
+          { content },
+          React.createElement(
+            BackendCanvasWrapper,
+            null,
+            React.createElement(CanvasWidget, { engine: stateRef.current.engineBackend, className: "o23-playground-editor-content-backend" })
+          ),
+          React.createElement(
+            CanvasWrapper,
+            { width: stateRef.current.canvasWidth, height: stateRef.current.canvasHeight, zoom: askZoom, zoomTo },
+            React.createElement(CanvasWidget, { engine: stateRef.current.engine, className: "o23-playground-editor-content" })
+          )
+        )
+      ),
+      React.createElement(Toolbar, { stateRef, serializer, allowUploadFile, allowDownloadFile, allowDownloadImage })
+    );
+  } catch (error) {
+    return React.createElement(
+      EditorWrapper,
+      { "data-diagram-status": EditorKernelDiagramStatus.IGNORED, ref: wrapperRef },
+      React.createElement(ParseError, null, error.message || Labels.ParseError)
+    );
+  }
+};
+const Editor = (props) => {
+  return React.createElement(EditorKernel, { ...props });
+};
 const Defs = {};
 const AllStepDefsAsArray = () => Object.values(Defs);
 const registerStepDef = (def) => {
   Defs[def.use] = def;
+  registerStepDefsFolders(def.folder);
+  if (def.reconfigurer != null) {
+    registerStepDefsReconfigurers(def.reconfigurer);
+  }
+  if (def.firstSubStepPortContainerFind != null) {
+    registerFirstSubStepPortContainerFinds(def.firstSubStepPortContainerFind);
+  }
 };
 const findStepDef = (use) => {
   return Defs[use];
@@ -4989,7 +6195,10 @@ class StepsLinkFactory extends StandardLinkFactory {
     super(StepsLinkModel.TYPE);
   }
   generateModel(_event) {
-    return new StepsLinkModel();
+    throw new Error("DO NOT use StepsLinkFactory#generateModel.");
+  }
+  getLinkDataW() {
+    return "o23-playground-steps-link";
   }
   getLinkSegmentDasharray() {
     return PlaygroundCssVars.LINK_STEPS_DASHARRAY;
@@ -5011,7 +6220,10 @@ class ErrorHandlesLinkFactory extends StandardLinkFactory {
     super(ErrorHandlesLinkModel.TYPE);
   }
   generateModel(_event) {
-    return new ErrorHandlesLinkModel();
+    throw new Error("DO NOT use ErrorHandlesLinkFactory#generateModel.");
+  }
+  getLinkDataW() {
+    return "o23-playground-error-handles-link";
   }
   getLinkSegmentDasharray() {
     return PlaygroundCssVars.LINK_ERROR_HANDLES_DASHARRAY;
@@ -5105,7 +6317,10 @@ class LastSubStepJoinLinkFactory extends StandardLinkFactory {
     super(LastSubStepJoinLinkModel.TYPE);
   }
   generateModel(_event) {
-    return new LastSubStepJoinLinkModel();
+    throw new Error("DO NOT use LastSubStepJoinLinkFactory#generateModel.");
+  }
+  getLinkDataW() {
+    return "o23-playground-last-sub-step-join-link";
   }
   getLinkSegmentDasharray() {
     return PlaygroundCssVars.LINK_LAST_SUB_STEP_JOIN_DASHARRAY;
@@ -5256,10 +6471,66 @@ const FirstSubStepPortContainer = qe.div.attrs({ [DOM_KEY_WIDGET]: "o23-playgrou
         height: 100%;
     }
 `;
+const FirstSubStepPortForRuleCheckContainer = qe.div.attrs({ [DOM_KEY_WIDGET]: "o23-playground-route-test-port" })`
+    display: flex;
+    position: absolute;
+    align-items: center;
+    justify-content: center;
+    top: calc(${CssVars.INPUT_HEIGHT} / 2 - ${PlaygroundCssVars.NODE_PORT_ROUTE_TEST_RADIUS});
+    left: calc(-1 * (${PlaygroundCssVars.NODE_PORT_ROUTE_TEST_RADIUS} * 2 + ${PlaygroundCssVars.NODE_BORDER_WIDTH}));
+    width: calc(${PlaygroundCssVars.NODE_PORT_ROUTE_TEST_RADIUS} * 2);
+    height: calc(${PlaygroundCssVars.NODE_PORT_ROUTE_TEST_RADIUS} * 2);
+    background-color: ${PlaygroundCssVars.NODE_PORT_ROUTE_TEST_BACKGROUND};
+    border: ${PlaygroundCssVars.NODE_PORT_ROUTE_TEST_BORDER};
+    border-top-left-radius: ${PlaygroundCssVars.NODE_PORT_ROUTE_TEST_RADIUS};
+    border-bottom-left-radius: ${PlaygroundCssVars.NODE_PORT_ROUTE_TEST_RADIUS};
+    padding-left: calc(${PlaygroundCssVars.NODE_PORT_ROUTE_TEST_RADIUS} * 0.3);
+
+    > svg {
+        width: calc(${PlaygroundCssVars.NODE_PORT_ROUTE_TEST_RADIUS} * 1.4);
+        height: calc(${PlaygroundCssVars.NODE_PORT_ROUTE_TEST_RADIUS} * 1.4);
+        color: ${PlaygroundCssVars.NODE_PORT_ROUTE_TEST_COLOR};
+    }
+
+    > div:last-child {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 0;
+        height: 100%;
+    }
+`;
+const FirstSubStepPortForRouteTest = (props) => {
+  const { children } = props;
+  return React.createElement(
+    FirstSubStepPortForRuleCheckContainer,
+    null,
+    React.createElement(RouteTest, null),
+    children
+  );
+};
+const FirstSubStepPortContainerFinds = [];
+const registerFirstSubStepPortContainerFinds = (...finds) => {
+  (finds || []).forEach((find) => {
+    if (!FirstSubStepPortContainerFinds.includes(find)) {
+      FirstSubStepPortContainerFinds.push(find);
+    }
+  });
+};
+const findFirstSubStepPortContainer = (step, parent) => {
+  for (const find of FirstSubStepPortContainerFinds) {
+    const C = find(step, parent);
+    if (C != null) {
+      return C;
+    }
+  }
+  return FirstSubStepPortContainer;
+};
 const FirstSubStepPortWidget = (props) => {
   const { port, engine } = props;
+  const C = findFirstSubStepPortContainer(port.getParent().step, Object.values(port.getLinks())[0].getSourcePort().getNode().step);
   return React.createElement(
-    FirstSubStepPortContainer,
+    C,
     null,
     React.createElement(PortWidget, { port, engine })
   );
@@ -5562,944 +6833,6 @@ const PortMerge = (props) => {
     return React.createElement(PostPort, { label: Labels.StepMergeAsProperty, required: false, defined: true, all: true, allAsGiven: merge.trim() });
   }
 };
-const EditorWrapper = qe.div.attrs({
-  [DOM_KEY_WIDGET]: "o23-playground-editor",
-  "data-v-scroll": "",
-  "data-h-scroll": ""
-})`
-    display: block;
-    position: relative;
-    align-self: stretch;
-    background-image: ${PlaygroundCssVars.EDITOR_BACKGROUND_IMAGE};
-    background-size: ${PlaygroundCssVars.EDITOR_BACKGROUND_SIZE};
-    background-position: ${PlaygroundCssVars.EDITOR_BACKGROUND_POSITION};
-    overflow: auto;
-
-    &[data-diagram-status=paint],
-    &[data-diagram-status=paint-on-position] {
-        > div[data-w=o23-playground-canvas] > div.o23-playground-editor-content {
-            //opacity: 0;
-            user-select: none;
-            pointer-events: none;
-
-            div.node, div.node * {
-                user-select: none;
-                pointer-events: none;
-                cursor: default;
-            }
-        }
-    }
-
-    &[data-diagram-locked=true] {
-        > div[data-w=o23-playground-canvas] > div.o23-playground-editor-content {
-            cursor: default;
-
-            div.node {
-                cursor: pointer;
-            }
-        }
-    }
-
-    > div.o23-playground-editor-content-backend {
-        position: absolute;
-        left: 100%;
-        // Width is necessary; 
-        // otherwise, it will cause the node width to be rendered incorrectly,
-        // ultimately resulting in the connections not being straight.
-        min-width: 100%;
-        //opacity: 0;
-        user-select: none;
-        pointer-events: none;
-    }
-`;
-const BackendCanvasWrapper = qe.div.attrs({ [DOM_KEY_WIDGET]: "o23-playground-backend-canvas" })`
-    display: block;
-    position: absolute;
-    width: 100%;
-    pointer-events: none;
-    opacity: 0;
-`;
-const EditorCanvasWrapper = qe.div.attrs(({ canvasWidth, canvasHeight, canvasZoom }) => {
-  return {
-    [DOM_KEY_WIDGET]: "o23-playground-canvas",
-    style: {
-      "--canvas-width": utils$2.toCssSize(canvasWidth),
-      "--canvas-height": utils$2.toCssSize(canvasHeight),
-      "--canvas-zoom": canvasZoom
-    }
-  };
-})`
-    display: block;
-    position: relative;
-    min-width: 100%;
-    min-height: 100%;
-    width: calc(var(--canvas-width) * var(--canvas-zoom));
-    height: calc(var(--canvas-height) * var(--canvas-zoom));
-    overflow: hidden;
-
-    > div.o23-playground-editor-content {
-        width: var(--canvas-width, 0);
-        height: var(--canvas-height, 0);
-        //> svg, > div {
-        //    transform-origin: top left;
-        //}
-    }
-`;
-const EditorToolbar = qe.div.attrs({ [DOM_KEY_WIDGET]: "o23-playground-editor-toolbar" })`
-    display: flex;
-    position: absolute;
-    align-items: center;
-    top: ${PlaygroundCssVars.EDITOR_TOOLBAR_GUTTER_SIZE};
-    right: ${PlaygroundCssVars.EDITOR_TOOLBAR_GUTTER_SIZE};
-    height: ${PlaygroundCssVars.EDITOR_TOOLBAR_HEIGHT};
-    border-radius: ${PlaygroundCssVars.EDITOR_TOOLBAR_BORDER_RADIUS};
-    border: ${PlaygroundCssVars.EDITOR_TOOLBAR_BORDER};
-    background-color: ${CssVars.BACKGROUND_COLOR};
-    overflow: hidden;
-    transition: border-color ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION};
-
-    &:hover {
-        border-color: ${PlaygroundCssVars.EDITOR_TOOLBAR_BUTTON_ACTIVE_BACKGROUND_COLOR};
-
-        > span[data-w=o23-playground-editor-toolbar-button]:not(:hover) {
-            color: ${PlaygroundCssVars.EDITOR_TOOLBAR_BUTTON_ACTIVE_BACKGROUND_COLOR};
-        }
-    }
-`;
-const EditorToolbarButton = qe.span.attrs({ [DOM_KEY_WIDGET]: "o23-playground-editor-toolbar-button" })`
-    display: flex;
-    position: relative;
-    align-items: center;
-    justify-content: center;
-    width: ${PlaygroundCssVars.EDITOR_TOOLBAR_BUTTON_WIDTH};
-    height: ${PlaygroundCssVars.EDITOR_TOOLBAR_BUTTON_HEIGHT};
-    color: ${PlaygroundCssVars.EDITOR_TOOLBAR_BUTTON_COLOR};
-    cursor: pointer;
-    transition: color ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION}, background-color ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION};
-
-    &:not(:last-child) {
-        border-right: ${PlaygroundCssVars.EDITOR_TOOLBAR_BORDER};
-    }
-
-    &:hover {
-        color: ${PlaygroundCssVars.EDITOR_TOOLBAR_BUTTON_ACTIVE_COLOR};
-        background-color: ${PlaygroundCssVars.EDITOR_TOOLBAR_BUTTON_ACTIVE_BACKGROUND_COLOR};
-    }
-
-    > svg {
-        height: calc(${PlaygroundCssVars.EDITOR_TOOLBAR_BUTTON_HEIGHT} / 3 * 2);
-
-        &[data-icon=o23-origin-size] {
-            height: calc(${PlaygroundCssVars.EDITOR_TOOLBAR_BUTTON_HEIGHT} / 3 * 2 - 2px);
-            margin-top: 2px;
-        }
-    }
-`;
-const ParseError = qe.div.attrs({ [DOM_KEY_WIDGET]: "o23-playground-viewer-error" })`
-    display: flex;
-    position: relative;
-    align-items: center;
-    padding: 16px 32px;
-    color: ${PlaygroundCssVars.EDITOR_ERROR_COLOR};
-    font-size: 1.5em;
-    font-style: italic;
-    font-weight: 500;
-`;
-class ErrorBoundary extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { content: props.content, hasError: false };
-  }
-  static getDerivedStateFromError(error) {
-    console.log(error);
-    return { hasError: true, error };
-  }
-  componentDidCatch(_error, _errorInfo) {
-  }
-  componentDidUpdate(_prevProps, prevState) {
-    if (prevState.content !== this.props.content) {
-      this.setState({ content: this.props.content, hasError: false });
-    }
-  }
-  render() {
-    if (this.state.hasError) {
-      return React.createElement(ParseError, null, Labels.ERROR);
-    }
-    return this.props.children;
-  }
-}
-const START_X = 64;
-const START_Y = 64;
-const askStartNodePosition = (def) => {
-  var _a, _b, _c, _d;
-  const diagramDef = def;
-  if (((_b = (_a = diagramDef.$diagram) == null ? void 0 : _a.$start) == null ? void 0 : _b.$x) != null && ((_d = (_c = diagramDef.$diagram) == null ? void 0 : _c.$start) == null ? void 0 : _d.$y) != null) {
-    return { x: diagramDef.$diagram.$start.$x, y: diagramDef.$diagram.$start.$y, appointed: true };
-  } else {
-    return { x: START_X, y: START_Y, appointed: false };
-  }
-};
-const askEndNodePosition = (def) => {
-  var _a, _b, _c, _d;
-  const diagramDef = def;
-  if (((_b = (_a = diagramDef.$diagram) == null ? void 0 : _a.$end) == null ? void 0 : _b.$x) != null && ((_d = (_c = diagramDef.$diagram) == null ? void 0 : _c.$end) == null ? void 0 : _d.$y) != null) {
-    return { x: diagramDef.$diagram.$end.$x, y: diagramDef.$diagram.$end.$y, appointed: true };
-  } else {
-    return { x: START_X, y: START_Y, appointed: false };
-  }
-};
-const askStepNodePosition = (def) => {
-  var _a, _b, _c, _d, _e, _f, _g, _h;
-  if (isPipelineDef(def)) {
-    const diagramDef = def;
-    if (((_b = (_a = diagramDef.$diagram) == null ? void 0 : _a.$virtualStep) == null ? void 0 : _b.$x) != null && ((_d = (_c = diagramDef.$diagram) == null ? void 0 : _c.$virtualStep) == null ? void 0 : _d.$y) != null) {
-      return { x: diagramDef.$diagram.$virtualStep.$x, y: diagramDef.$diagram.$virtualStep.$y, appointed: true };
-    } else {
-      return { x: START_X, y: START_Y, appointed: false };
-    }
-  } else {
-    const diagramDef = def;
-    if (((_e = diagramDef.$diagram) == null ? void 0 : _e.$x) != null && ((_f = diagramDef.$diagram) == null ? void 0 : _f.$y) != null) {
-      return { x: (_g = diagramDef.$diagram) == null ? void 0 : _g.$x, y: (_h = diagramDef.$diagram) == null ? void 0 : _h.$y, appointed: true };
-    } else {
-      return { x: START_X, y: START_Y, appointed: false };
-    }
-  }
-};
-class CustomDiagramModel extends DiagramModel {
-  addLink(link) {
-    if (this.isLocked()) {
-      link.setLocked(true);
-    }
-    return super.addLink(link);
-  }
-  addNode(node) {
-    if (this.isLocked()) {
-      node.setLocked(true);
-    }
-    return super.addNode(node);
-  }
-}
-const createLockedDiagramModel = () => {
-  const model = new CustomDiagramModel();
-  model.setLocked(true);
-  return model;
-};
-const createDiagramNodes = (file, handlers) => {
-  const allNodes = [];
-  const allLinks = [];
-  const nodeHandlers = {
-    onChange: () => handlers.onContentChange(() => handlers.serialize(file))
-  };
-  const startNode = new StartNodeModel(file, { handlers: nodeHandlers, assistant: handlers.assistant });
-  setNodePosition(startNode, () => askStartNodePosition(file));
-  allNodes.push(startNode);
-  let previousNode = startNode;
-  if (isPipelineDef(file)) {
-    const steps = file.steps ?? [];
-    if (steps.length === 0) {
-      const step = handlers.assistant.createDefaultStep();
-      steps.push(step);
-      file.steps = steps;
-    }
-    previousNode = steps.reduce((previousNode2, step) => {
-      return createStepNode(step, file, {
-        type: StepNodeEntityType.NORMAL,
-        handlers: nodeHandlers,
-        assistant: handlers.assistant,
-        previousNode: previousNode2,
-        linkPrevious: (node) => previousNode2.next(node),
-        appendNode: (...nodes) => allNodes.push(...nodes),
-        appendLink: (...links) => allLinks.push(...links)
-      });
-    }, previousNode);
-  } else {
-    const step = file;
-    previousNode = createStepNode(step, file, {
-      type: StepNodeEntityType.START,
-      handlers: nodeHandlers,
-      assistant: handlers.assistant,
-      previousNode,
-      linkPrevious: (node) => previousNode.next(node),
-      appendNode: (...nodes) => allNodes.push(...nodes),
-      appendLink: (...links) => allLinks.push(...links)
-    });
-  }
-  const endNode = new EndNodeModel(file, nodeHandlers);
-  setNodePosition(endNode, () => askEndNodePosition(file));
-  allNodes.push(endNode);
-  const link = previousNode.next(endNode);
-  allLinks.push(link);
-  const model = createLockedDiagramModel();
-  model.setLocked(true);
-  model.addAll(...allNodes, ...allLinks);
-  return model;
-};
-const cloneDiagramNodes = (old) => {
-  const model = createLockedDiagramModel();
-  model.setLocked(true);
-  model.addAll(...old.getModels());
-  return model;
-};
-const buildGrid = (node, grid, x, y) => {
-  var _a;
-  let hasSubSteps = false;
-  if (node instanceof StepNodeModel) {
-    const { use } = node.step;
-    const ports = ((_a = findStepDef(use)) == null ? void 0 : _a.findSubPorts(node)) ?? [];
-    ports.map((port2) => ({ port: port2, links: Object.values(port2.getLinks()) })).filter(({ links }) => links.length !== 0).forEach(({ links }, portIndex) => {
-      links.sort((l1, l2) => {
-        var _a2, _b;
-        return (((_a2 = l1.getOptions().extras) == null ? void 0 : _a2.index) ?? 0) - (((_b = l2.getOptions().extras) == null ? void 0 : _b.index) ?? 0);
-      }).forEach((link, linkIndex) => {
-        y = y + (portIndex === 0 && linkIndex === 0 ? 0 : 1);
-        hasSubSteps = true;
-        const subNode = link.getTargetPort().getNode();
-        grid[x + 1] = grid[x + 1] ?? [];
-        grid[x + 1][y] = {
-          node: subNode,
-          x: subNode.getPosition().x,
-          y: subNode.getPosition().y,
-          maxWidth: -1,
-          maxHeight: -1,
-          top: -1,
-          left: -1
-        };
-        y = buildGrid(subNode, grid, x + 1, y);
-      });
-    });
-  }
-  const port = node.getPort(NextStepPortModel.NAME);
-  if (port != null) {
-    const links = port.getLinks();
-    const link = Object.values(links)[0];
-    const next = link.getTargetPort().getNode();
-    grid[x] = grid[x] ?? [];
-    if (hasSubSteps) {
-      grid[x][y + 1] = {
-        node: next,
-        x: next.getPosition().x,
-        y: next.getPosition().y,
-        maxWidth: -1,
-        maxHeight: -1,
-        top: -1,
-        left: -1
-      };
-      return buildGrid(next, grid, x, y + 1);
-    } else if (next instanceof JoinEndNodeModel) {
-      return y;
-    } else {
-      grid[x][y + 1] = {
-        node: next,
-        x: next.getPosition().x,
-        y: next.getPosition().y,
-        maxWidth: -1,
-        maxHeight: -1,
-        top: -1,
-        left: -1
-      };
-      return buildGrid(next, grid, x, y + 1);
-    }
-  } else {
-    return y;
-  }
-};
-const computeGrid = (grid, top, left, rowGap, columnGap) => {
-  let offsetX = left;
-  let offsetY = top;
-  const maxX = grid.length - 1;
-  const maxY = grid.reduce((max, column) => Math.max(max, column.length - 1), 0);
-  for (let x = 0; x <= maxX; x++) {
-    const column = grid[x];
-    new Array(maxY + 1).fill(1).forEach((v, y) => {
-      if (column[y] == null) {
-        column[y] = { x, y, maxWidth: -1, maxHeight: -1, top: -1, left: -1 };
-      }
-    });
-    const maxWidth = column.reduce((max, cell) => {
-      var _a;
-      return Math.max(max, ((_a = cell.node) == null ? void 0 : _a.width) ?? 0);
-    }, 0);
-    offsetX = offsetX + (x === 0 ? 0 : grid[x - 1][0].maxWidth + columnGap);
-    column.forEach((cell) => {
-      cell.maxWidth = maxWidth;
-      cell.left = cell.node == null ? offsetX + maxWidth / 2 : offsetX + (maxWidth - cell.node.width) / 2;
-    });
-  }
-  for (let y = 0; y <= maxY; y++) {
-    const row = grid.map((column) => column[y]);
-    const maxHeight = row.reduce((max, cell) => {
-      var _a;
-      return Math.max(max, ((_a = cell.node) == null ? void 0 : _a.height) ?? 0);
-    }, 0);
-    offsetY = offsetY + (y === 0 ? 0 : grid[0][y - 1].maxHeight + rowGap);
-    row.forEach((cell) => {
-      cell.maxHeight = maxHeight;
-      cell.top = cell.node == null ? offsetY + maxHeight / 2 : offsetY;
-    });
-  }
-  grid.forEach((column) => {
-    column.forEach((cell) => {
-      if (cell.node != null) {
-        cell.node.setPosition(cell.left, cell.top);
-      }
-    });
-  });
-};
-const createDiagramHandlers = (options) => {
-  const { serializer, assistant, replace, syncContentToStateRef, notifyContentChanged } = options;
-  return {
-    serialize: (def) => serializer.stringify(def),
-    assistant: {
-      createDefaultStep: (assistant == null ? void 0 : assistant.createDefaultStep) ?? DEFAULTS.createDefaultStep,
-      askTypeOrmDatasources: (assistant == null ? void 0 : assistant.askTypeOrmDatasources) ?? (() => []),
-      askSystemsForHttp: (assistant == null ? void 0 : assistant.askSystemsForHttp) ?? (() => []),
-      askRefPipelines: (assistant == null ? void 0 : assistant.askRefPipelines) ?? (() => []),
-      askRefSteps: (assistant == null ? void 0 : assistant.askRefSteps) ?? (() => [])
-    },
-    onContentChange: (serialize) => {
-      const content = syncContentToStateRef(serialize());
-      replace(() => {
-        notifyContentChanged(content);
-      }, 100);
-    }
-  };
-};
-var EditorKernelDiagramStatus;
-(function(EditorKernelDiagramStatus2) {
-  EditorKernelDiagramStatus2["IGNORED"] = "ignored";
-  EditorKernelDiagramStatus2["PAINT"] = "paint";
-  EditorKernelDiagramStatus2["PAINT_ON_POSITION"] = "paint-on-position";
-  EditorKernelDiagramStatus2["IN_SERVICE"] = "in-service";
-})(EditorKernelDiagramStatus || (EditorKernelDiagramStatus = {}));
-const parseContent = (parser, content) => {
-  const def = parser.parse(content ?? "");
-  if (VUtils.isBlank(def.type)) {
-    def.type = "pipeline";
-  }
-  return def;
-};
-const createDiagramModel = (options) => {
-  const { def, serializer, assistant, replace, writeContentToState, onContentChanged } = options;
-  const handlers = createDiagramHandlers({
-    serializer,
-    assistant,
-    replace,
-    syncContentToStateRef: (content) => {
-      writeContentToState(content);
-      return content;
-    },
-    notifyContentChanged: onContentChanged
-  });
-  return createDiagramNodes(def, handlers);
-};
-class DiagramState extends State {
-  constructor() {
-    super({ name: "default-diagrams" });
-    this.childStates = [new SelectingState()];
-  }
-}
-const createDiagramEngine = () => {
-  const engine = new DiagramEngine({
-    registerDefaultPanAndZoomCanvasAction: false,
-    registerDefaultZoomCanvasAction: false
-  });
-  engine.getLayerFactories().registerFactory(new NodeLayerFactory());
-  engine.getLayerFactories().registerFactory(new LinkLayerFactory());
-  engine.getLayerFactories().registerFactory(new SelectionBoxLayerFactory());
-  engine.getLabelFactories().registerFactory(new DefaultLabelFactory());
-  engine.getNodeFactories().registerFactory(new DefaultNodeFactory());
-  engine.getLinkFactories().registerFactory(new DefaultLinkFactory());
-  engine.getLinkFactories().registerFactory(new PathFindingLinkFactory());
-  engine.getPortFactories().registerFactory(new DefaultPortFactory());
-  engine.getStateMachine().pushState(new DiagramState());
-  initEngine(engine);
-  const model = createLockedDiagramModel();
-  model.setLocked(true);
-  engine.setModel(model);
-  return engine;
-};
-const firstPaint = (options) => {
-  const { content, serializer, deserializer, assistant, replace, writeContentToState, onContentChanged } = options;
-  const engine = createDiagramEngine();
-  const engineBackend = createDiagramEngine();
-  try {
-    const def = parseContent(deserializer, content ?? "");
-    const model = createDiagramModel({
-      def,
-      serializer,
-      assistant,
-      replace,
-      writeContentToState,
-      onContentChanged
-    });
-    engineBackend.setModel(model);
-    return {
-      engine,
-      engineBackend,
-      content,
-      def,
-      serializer,
-      deserializer,
-      diagramStatus: EditorKernelDiagramStatus.PAINT
-    };
-  } catch (e) {
-    console.error(e);
-    engine.setModel(createLockedDiagramModel());
-    return {
-      engine,
-      engineBackend,
-      content,
-      serializer,
-      deserializer,
-      message: e.message,
-      diagramStatus: EditorKernelDiagramStatus.IGNORED
-    };
-  }
-};
-const paintErrorDiagram = (options) => {
-  const { error, stateRef, content, serializer, deserializer } = options;
-  console.error(error);
-  stateRef.current.content = content;
-  stateRef.current.serializer = serializer;
-  stateRef.current.deserializer = deserializer;
-  delete stateRef.current.def;
-  stateRef.current.engine.setModel(createLockedDiagramModel());
-  stateRef.current.engineBackend.setModel(createLockedDiagramModel());
-  stateRef.current.message = error.message;
-  stateRef.current.diagramStatus = EditorKernelDiagramStatus.IGNORED;
-  stateRef.current.canvasZoom = 1;
-  delete stateRef.current.canvasWidth;
-  delete stateRef.current.canvasHeight;
-};
-const computeCanvasSize = (model) => {
-  return (model.getNodes() ?? []).reduce((size, node) => {
-    if (node instanceof EndNodeModel) {
-      size.height = node.getY() + node.height + DEFAULTS.diagram.startTop;
-    }
-    const right = node.getX() + node.width + DEFAULTS.diagram.startLeft;
-    if (size.width == null || right > size.width) {
-      size.width = right;
-    }
-    return size;
-  }, {});
-};
-const paint = (options) => {
-  const { stateRef, replace, onStateContentChanged, onContentChanged } = options;
-  const content = options.content();
-  const serializer = options.serializer();
-  const deserializer = options.deserializer();
-  const assistant = options.assistant();
-  try {
-    const def = parseContent(deserializer, content ?? "");
-    const model = createDiagramModel({
-      def,
-      serializer,
-      assistant,
-      replace,
-      writeContentToState: (content2) => {
-        stateRef.current.content = content2;
-        (async () => await onStateContentChanged())();
-      },
-      onContentChanged
-    });
-    stateRef.current.content = content;
-    stateRef.current.serializer = serializer;
-    stateRef.current.deserializer = deserializer;
-    stateRef.current.def = def;
-    stateRef.current.canvasZoom = 1;
-    const { width, height } = computeCanvasSize(model);
-    stateRef.current.canvasWidth = width;
-    stateRef.current.canvasHeight = height;
-    stateRef.current.engineBackend.setModel(model);
-    delete stateRef.current.message;
-    stateRef.current.diagramStatus = EditorKernelDiagramStatus.PAINT;
-  } catch (e) {
-    paintErrorDiagram({ error: e, stateRef, content, serializer, deserializer });
-  }
-};
-const repaint = (options) => {
-  const { stateRef, replace, onStateContentChanged, onContentChanged } = options;
-  const def = stateRef.current.def;
-  const serializer = stateRef.current.serializer;
-  const assistant = options.assistant();
-  try {
-    const model = createDiagramModel({
-      def,
-      serializer,
-      assistant,
-      replace,
-      writeContentToState: (content) => {
-        stateRef.current.content = content;
-        (async () => await onStateContentChanged())();
-      },
-      onContentChanged
-    });
-    stateRef.current.engineBackend.setModel(model);
-    stateRef.current.diagramStatus = EditorKernelDiagramStatus.PAINT_ON_POSITION;
-  } catch (e) {
-    paintErrorDiagram({
-      error: e,
-      stateRef,
-      content: stateRef.current.content,
-      serializer: stateRef.current.serializer,
-      deserializer: stateRef.current.deserializer
-    });
-  }
-};
-const usePaint = (stateRef) => {
-  const forceUpdate = useForceUpdate();
-  reactExports.useEffect(() => {
-    if (![
-      EditorKernelDiagramStatus.PAINT,
-      EditorKernelDiagramStatus.PAINT_ON_POSITION
-    ].includes(stateRef.current.diagramStatus)) {
-      return;
-    }
-    const backendModel = stateRef.current.engineBackend.getModel();
-    const grid = [];
-    const nodes = backendModel.getNodes();
-    const startNode = nodes.find((node) => node instanceof StartNodeModel);
-    grid[0] = grid[0] ?? [];
-    grid[0][0] = {
-      node: startNode,
-      x: startNode.getPosition().x,
-      y: startNode.getPosition().y,
-      maxWidth: -1,
-      maxHeight: -1,
-      top: -1,
-      left: -1
-    };
-    buildGrid(startNode, grid, 0, 0);
-    const { startTop, startLeft, rowGap, columnGap } = DEFAULTS.diagram;
-    computeGrid(grid, startTop, startLeft, rowGap, columnGap);
-    const newModel = cloneDiagramNodes(backendModel);
-    newModel.setZoomLevel((stateRef.current.canvasZoom ?? 1) * 100);
-    const { width, height } = computeCanvasSize(newModel);
-    stateRef.current.canvasWidth = width;
-    stateRef.current.canvasHeight = height;
-    stateRef.current.engine.setModel(newModel);
-    stateRef.current.engineBackend.setModel(createLockedDiagramModel());
-    stateRef.current.diagramStatus = EditorKernelDiagramStatus.IN_SERVICE;
-    forceUpdate();
-  }, [forceUpdate, stateRef, stateRef.current.diagramStatus]);
-};
-const Toolbar = (props) => {
-  const { stateRef, serializer, allowUploadFile, allowDownloadFile, allowDownloadImage } = props;
-  const ref = reactExports.useRef(null);
-  const { fire } = usePlaygroundEventBus();
-  const [state, setState] = reactExports.useState({ max: false, zen: false });
-  reactExports.useEffect(() => {
-    const onFullScreenChanged = () => {
-      if (document.fullscreenElement == null) {
-        setState({ zen: false, max: false });
-      }
-    };
-    window.addEventListener("fullscreenchange", onFullScreenChanged);
-    return () => {
-      window.removeEventListener("fullscreenchange", onFullScreenChanged);
-    };
-  }, []);
-  reactExports.useEffect(() => {
-    const wrapper = ref.current.parentElement.parentElement;
-    switch (true) {
-      case state.zen:
-        wrapper.setAttribute("data-diagram-work-mode", "zen");
-        document.documentElement.requestFullscreen && document.documentElement.requestFullscreen({ navigationUI: "hide" });
-        break;
-      case state.max:
-        wrapper.setAttribute("data-diagram-work-mode", "max");
-        break;
-      case !state.max:
-        wrapper.removeAttribute("data-diagram-work-mode");
-        if (document.fullscreenElement != null) {
-          document.exitFullscreen && document.exitFullscreen();
-        }
-        break;
-    }
-  }, [state.max, state.zen]);
-  const onZoomInClicked = () => {
-    fire(PlaygroundEventTypes.ZOOM_TO, (stateRef.current.canvasZoom ?? 1) + 0.05);
-  };
-  const onZoomOutClicked = () => {
-    fire(PlaygroundEventTypes.ZOOM_TO, Math.max(stateRef.current.canvasZoom ?? 1, 0.1) - 0.05);
-  };
-  const onOriginSizeClicked = () => {
-    fire(PlaygroundEventTypes.ZOOM_TO, 1);
-  };
-  const onFitCanvasClicked = () => {
-    fire(PlaygroundEventTypes.ZOOM_TO_FIT);
-  };
-  const onDownloadImageClicked = async () => {
-    var _a;
-    const backendModel = stateRef.current.engineBackend.getModel();
-    stateRef.current.engineBackend.setModel(cloneDiagramNodes(stateRef.current.engine.getModel()));
-    await stateRef.current.engineBackend.repaintCanvas(true);
-    const node = ref.current.parentElement.querySelector("div.o23-playground-editor-content-backend");
-    const { width, height } = Array.from(node.lastElementChild.children).reduce(({ width: width2, height: height2 }, child) => {
-      const { width: childWidth, height: childHeight } = child.getBoundingClientRect();
-      return {
-        width: Math.max(width2, childWidth + parseInt(child.style.left)),
-        height: Math.max(height2, childHeight + parseInt(child.style.top))
-      };
-    }, { width: 0, height: 0 });
-    node.style.width = `${width + DEFAULTS.diagram.startLeft}px`;
-    node.style.height = `${height + DEFAULTS.diagram.startTop}px`;
-    const dataUrl = await dom2image.toPng(node, { quality: 1, bgcolor: "white" });
-    const link = document.createElement("a");
-    link.download = `${((_a = stateRef.current.def) == null ? void 0 : _a.code) || "no-code"}-diagram.png`;
-    link.href = dataUrl;
-    link.click();
-    node.style.width = "";
-    node.style.height = "";
-    stateRef.current.engineBackend.setModel(backendModel);
-  };
-  const onDownloadFileClicked = async () => {
-    var _a;
-    const link = document.createElement("a");
-    link.download = `${((_a = stateRef.current.def) == null ? void 0 : _a.code) || "no-code"}-config.${serializer.extname()}`;
-    link.href = "data:text/plain;charset=UTF-8," + encodeURIComponent(serializer.stringify(stateRef.current.def));
-    link.click();
-  };
-  const onUploadFileClicked = async () => {
-    const file = document.createElement("input");
-    file.setAttribute("type", "file");
-    file.setAttribute("accept", ".yml,.yaml");
-    file.setAttribute("multiple", "false");
-    file.addEventListener("change", () => {
-      if (file.files.length == 1) {
-        const reader = new FileReader();
-        reader.onload = () => {
-          const content = reader.result;
-          fire(PlaygroundEventTypes.RESET_CONTENT, content);
-        };
-        reader.readAsText(file.files[0]);
-      }
-    });
-    file.click();
-  };
-  const onMaxClicked = () => setState((state2) => ({ ...state2, max: true }));
-  const onMinClicked = () => setState((state2) => ({ ...state2, max: false }));
-  const onZenClicked = () => setState({ zen: true, max: true });
-  const onWindowClicked = () => {
-    document.exitFullscreen && document.exitFullscreen();
-    setState({ zen: false, max: false });
-  };
-  return React.createElement(
-    EditorToolbar,
-    { ref },
-    React.createElement(
-      EditorToolbarButton,
-      { onClick: onZoomInClicked },
-      React.createElement(ZoomIn, null)
-    ),
-    React.createElement(
-      EditorToolbarButton,
-      { onClick: onZoomOutClicked },
-      React.createElement(ZoomOut, null)
-    ),
-    React.createElement(
-      EditorToolbarButton,
-      { onClick: onOriginSizeClicked },
-      React.createElement(OriginSize, null)
-    ),
-    React.createElement(
-      EditorToolbarButton,
-      { onClick: onFitCanvasClicked },
-      React.createElement(FitCanvas, null)
-    ),
-    allowDownloadImage ? React.createElement(
-      EditorToolbarButton,
-      { onClick: onDownloadImageClicked },
-      React.createElement(DownloadImage, null)
-    ) : null,
-    allowDownloadFile ? React.createElement(
-      EditorToolbarButton,
-      { onClick: onDownloadFileClicked },
-      React.createElement(DownloadFile, null)
-    ) : null,
-    allowUploadFile ? React.createElement(
-      EditorToolbarButton,
-      { onClick: onUploadFileClicked },
-      React.createElement(UploadFile, null)
-    ) : null,
-    state.max ? null : React.createElement(
-      EditorToolbarButton,
-      { onClick: onMaxClicked },
-      React.createElement(Max, null)
-    ),
-    state.max && !state.zen ? React.createElement(
-      EditorToolbarButton,
-      { onClick: onMinClicked },
-      React.createElement(Min, null)
-    ) : null,
-    state.zen ? null : React.createElement(
-      EditorToolbarButton,
-      { onClick: onZenClicked },
-      React.createElement(Zen, null)
-    ),
-    state.zen ? React.createElement(
-      EditorToolbarButton,
-      { onClick: onWindowClicked },
-      React.createElement(Window, null)
-    ) : null
-  );
-};
-const CanvasWrapper = (props) => {
-  const { width, height, zoom: askZoom, zoomTo, children } = props;
-  const ref = reactExports.useRef(null);
-  const { on, off } = usePlaygroundEventBus();
-  const forceUpdate = useForceUpdate();
-  reactExports.useEffect(() => {
-    const onZoomTo = (zoom2) => {
-      zoomTo(zoom2);
-      forceUpdate();
-    };
-    const onZoomToFit = () => {
-      if (ref.current == null) {
-        return;
-      }
-      const parent = ref.current.parentElement;
-      const { width: parentWidth, height: parentHeight } = parent.getBoundingClientRect();
-      const zoom2 = Math.min(parentWidth / (width ?? parentWidth), parentHeight / (height ?? parentHeight));
-      onZoomTo(zoom2);
-    };
-    on(PlaygroundEventTypes.ZOOM_TO, onZoomTo);
-    on(PlaygroundEventTypes.ZOOM_TO_FIT, onZoomToFit);
-    return () => {
-      off(PlaygroundEventTypes.ZOOM_TO, onZoomTo);
-      off(PlaygroundEventTypes.ZOOM_TO_FIT, onZoomToFit);
-    };
-  }, [on, off, forceUpdate, width, height, zoomTo]);
-  let zoom = askZoom();
-  if (zoom === 1) {
-    zoom = void 0;
-  }
-  return React.createElement(EditorCanvasWrapper, { canvasWidth: width, canvasHeight: height, canvasZoom: zoom, ref }, children);
-};
-const EditorKernel = (props) => {
-  const { content, assistant, serializer, deserializer, allowUploadFile, allowDownloadFile, allowDownloadImage } = props;
-  const wrapperRef = reactExports.useRef(null);
-  const { on, off, fire } = usePlaygroundEventBus();
-  const { replace } = useThrottler();
-  const stateRef = reactExports.useRef(firstPaint({
-    content,
-    serializer,
-    deserializer,
-    assistant,
-    replace,
-    writeContentToState: (content2) => {
-      stateRef.current.content = content2;
-      (async () => {
-        fire(PlaygroundEventTypes.REPAINT);
-      })();
-    },
-    onContentChanged: (content2) => {
-      fire(PlaygroundEventTypes.CONTENT_CHANGED, content2);
-    }
-  }));
-  const forceUpdate = useForceUpdate();
-  reactExports.useEffect(() => {
-    if (serializer === stateRef.current.serializer && deserializer === stateRef.current.deserializer && content === stateRef.current.content) {
-      return;
-    }
-    paint({
-      serializer: () => serializer,
-      deserializer: () => deserializer,
-      assistant: () => assistant,
-      content: () => content,
-      stateRef,
-      replace,
-      onStateContentChanged: async () => {
-        fire(PlaygroundEventTypes.REPAINT);
-      },
-      onContentChanged: (content2) => {
-        fire(PlaygroundEventTypes.CONTENT_CHANGED, content2);
-      }
-    });
-    forceUpdate();
-  }, [fire, replace, forceUpdate, serializer, deserializer, assistant, content]);
-  reactExports.useEffect(() => {
-    const onRepaint = () => {
-      repaint({
-        assistant: () => assistant,
-        stateRef,
-        replace,
-        onStateContentChanged: async () => {
-          fire(PlaygroundEventTypes.REPAINT);
-        },
-        onContentChanged: (content2) => {
-          fire(PlaygroundEventTypes.CONTENT_CHANGED, content2);
-        }
-      });
-      forceUpdate();
-    };
-    on(PlaygroundEventTypes.REPAINT, onRepaint);
-    return () => {
-      off(PlaygroundEventTypes.REPAINT, onRepaint);
-    };
-  }, [on, off, fire, replace, forceUpdate, assistant]);
-  usePaint(stateRef);
-  if (VUtils.isNotBlank(stateRef.current.message)) {
-    return React.createElement(
-      EditorWrapper,
-      { "data-diagram-status": EditorKernelDiagramStatus.IGNORED },
-      React.createElement(ParseError, null, stateRef.current.message)
-    );
-  } else if (VUtils.isBlank(stateRef.current.content)) {
-    return React.createElement(
-      EditorWrapper,
-      { "data-diagram-status": EditorKernelDiagramStatus.IGNORED },
-      React.createElement(ParseError, null, Labels.NoContent)
-    );
-  } else if (stateRef.current.def == null) {
-    return React.createElement(
-      EditorWrapper,
-      { "data-diagram-status": EditorKernelDiagramStatus.IGNORED },
-      React.createElement(ParseError, null, Labels.NoDefParsed)
-    );
-  }
-  const askZoom = () => stateRef.current.canvasZoom;
-  const zoomTo = (zoom) => {
-    stateRef.current.canvasZoom = zoom;
-    stateRef.current.engine.getModel().setZoomLevel(zoom * 100);
-    stateRef.current.engine.repaintCanvas();
-  };
-  try {
-    return React.createElement(
-      React.Fragment,
-      null,
-      React.createElement(
-        EditorWrapper,
-        { "data-diagram-status": stateRef.current.diagramStatus, "data-diagram-locked": stateRef.current.engine.getModel().isLocked(), ref: wrapperRef },
-        React.createElement(
-          ErrorBoundary,
-          { content },
-          React.createElement(
-            BackendCanvasWrapper,
-            null,
-            React.createElement(CanvasWidget, { engine: stateRef.current.engineBackend, className: "o23-playground-editor-content-backend" })
-          ),
-          React.createElement(
-            CanvasWrapper,
-            { width: stateRef.current.canvasWidth, height: stateRef.current.canvasHeight, zoom: askZoom, zoomTo },
-            React.createElement(CanvasWidget, { engine: stateRef.current.engine, className: "o23-playground-editor-content" })
-          )
-        )
-      ),
-      React.createElement(Toolbar, { stateRef, serializer, allowUploadFile, allowDownloadFile, allowDownloadImage })
-    );
-  } catch (error) {
-    return React.createElement(
-      EditorWrapper,
-      { "data-diagram-status": EditorKernelDiagramStatus.IGNORED, ref: wrapperRef },
-      React.createElement(ParseError, null, error.message || Labels.ParseError)
-    );
-  }
-};
-const Editor = (props) => {
-  return React.createElement(EditorKernel, { ...props });
-};
 const setNodePosition = (node, position) => {
   const { x, y, appointed } = position();
   node.setPosition(x, y);
@@ -6515,23 +6848,29 @@ const createStepNode = (step, file, options) => {
   const endOfSub = DEFAULTS.createSubStepNodes(node, { appendNode, appendLink, handlers, assistant });
   return endOfSub == null ? node : endOfSub;
 };
-const createLinkFromParent = (model) => {
-  return (node, findPortFromModel, createPortFromModel, askLinkExtras) => {
-    let sourcePort = findPortFromModel();
+const askFirstLinkCreate = (model, createLink) => {
+  return (options) => {
+    const { node, findPortFromModel, createPortFromModel, askLinkExtras } = options;
+    let sourcePort = findPortFromModel(model);
     if (sourcePort == null) {
-      sourcePort = createPortFromModel();
+      sourcePort = createPortFromModel(model);
       model.addPort(sourcePort);
     }
-    const link = sourcePort.createOutgoingLinkModel(askLinkExtras == null ? void 0 : askLinkExtras());
+    const link = createLink(sourcePort, askLinkExtras);
     let targetPort = node.getPort(FirstSubStepPortModel.NAME);
     if (targetPort == null) {
       targetPort = new FirstSubStepPortModel();
       node.addPort(targetPort);
     }
     link.setTargetPort(targetPort);
-    node.asFirstSubStep(true);
+    node.asFirstSubStep();
     return link;
   };
+};
+const askFirstLinkFromParentCreate = (model) => {
+  return askFirstLinkCreate(model, (sourcePort, askLinkExtras) => {
+    return sourcePort.createOutgoingLinkModel(askLinkExtras == null ? void 0 : askLinkExtras());
+  });
 };
 const createSubNodesOfSingleRoute = (options) => {
   const { model, askSteps, options: { appendNode, appendLink, handlers, assistant }, findPortFromModel, createPortFromModel, askFirstLinkExtras } = options;
@@ -6539,15 +6878,20 @@ const createSubNodesOfSingleRoute = (options) => {
   if (steps == null || steps.length === 0) {
     return void 0;
   }
-  const createLinkFromModel = createLinkFromParent(model);
+  const createLinkFromModel = askFirstLinkFromParentCreate(model);
   const previousNode = model;
   return steps.reduce((previousNode2, step) => {
-    const linkPrevious = previousNode2 === model ? (node) => createLinkFromModel(node, findPortFromModel, createPortFromModel, askFirstLinkExtras) : (node) => previousNode2.next(node);
+    const linkPrevious = previousNode2 === model ? (node) => createLinkFromModel({
+      node,
+      findPortFromModel,
+      createPortFromModel,
+      askLinkExtras: askFirstLinkExtras
+    }) : (node) => previousNode2.next(node);
     return createStepNode(step, model.file, {
       type: StepNodeEntityType.NORMAL,
       handlers,
       assistant,
-      subOf: step,
+      subOf: model.step,
       previousNode: previousNode2,
       linkPrevious,
       appendNode,
@@ -6569,9 +6913,9 @@ const createErrorHandlesSubNodes = (step, model, options) => {
       const diagram = step.$diagram;
       const hideSteps = (diagram == null ? void 0 : diagram[`$fold${name.charAt(0).toUpperCase() + name.slice(1)}`]) ?? false;
       if (hideSteps) {
-        let sourcePort = findPortFromModel();
+        let sourcePort = findPortFromModel(model);
         if (sourcePort == null) {
-          sourcePort = createPortFromModel();
+          sourcePort = createPortFromModel(model);
           model.addPort(sourcePort);
         }
         return void 0;
@@ -6586,22 +6930,22 @@ const createErrorHandlesSubNodes = (step, model, options) => {
   return [
     {
       name: "catchable",
-      findPortFromModel: () => model.getPort(CatchableErrorHandlePortModel.NAME),
+      findPortFromModel: (model2) => model2.getPort(CatchableErrorHandlePortModel.NAME),
       createPortFromModel: () => new CatchableErrorHandlePortModel()
     },
     {
       name: "exposed",
-      findPortFromModel: () => model.getPort(ExposedErrorHandlePortModel.NAME),
+      findPortFromModel: (model2) => model2.getPort(ExposedErrorHandlePortModel.NAME),
       createPortFromModel: () => new ExposedErrorHandlePortModel()
     },
     {
       name: "uncatchable",
-      findPortFromModel: () => model.getPort(UncatchableErrorHandlePortModel.NAME),
+      findPortFromModel: (model2) => model2.getPort(UncatchableErrorHandlePortModel.NAME),
       createPortFromModel: () => new UncatchableErrorHandlePortModel()
     },
     {
       name: "any",
-      findPortFromModel: () => model.getPort(AnyErrorHandlePortModel.NAME),
+      findPortFromModel: (model2) => model2.getPort(AnyErrorHandlePortModel.NAME),
       createPortFromModel: () => new AnyErrorHandlePortModel()
     }
   ].map(({ name, findPortFromModel, createPortFromModel }) => {
@@ -6652,73 +6996,160 @@ const createSubNodesAndEndNode = (model, options) => {
   appendLink(directLink);
   return endNode;
 };
+const findStepsPortFromModel = (model) => model.getPort(StepsPortName);
+const createStepsPortFromModel = (model) => {
+  const portModel = new StepsPortModel(StepsPortName);
+  model.addPort(portModel);
+  return portModel;
+};
+const findOrCreateStepsPortFromModel = (model) => {
+  const portModel = findStepsPortFromModel(model);
+  if (portModel == null) {
+    return createStepsPortFromModel(model);
+  } else {
+    return portModel;
+  }
+};
+const shouldCreateSubNodes = (model) => {
+  const step = model.step;
+  const diagram = step.$diagram;
+  const hideSteps = (diagram == null ? void 0 : diagram.$foldSubSteps) ?? false;
+  if (hideSteps) {
+    findOrCreateStepsPortFromModel(model);
+    return false;
+  }
+  return true;
+};
+const guardSubSteps = (property) => {
+  return (model, options) => {
+    const step = model.step;
+    const createDefaultStep = options.assistant.createDefaultStep;
+    const steps = step[property] ?? [];
+    if (steps.length === 0) {
+      const defaultFirstStep = createDefaultStep();
+      steps.push(defaultFirstStep);
+      step[property] = steps;
+    }
+    return steps;
+  };
+};
+const guardSetsLikeSteps = guardSubSteps("steps");
 const createSetsLikeSubNodesAndEndNode = (model, options) => {
   return createSubNodesAndEndNode(model, {
     ...options,
-    createSpecificSubNodes: (_node, options2) => {
-      const step = model.step;
-      const diagram = step.$diagram;
-      const hideSteps = (diagram == null ? void 0 : diagram.$foldSubSteps) ?? false;
-      if (hideSteps) {
-        let sourcePort = model.getPort(StepsPortName);
-        if (sourcePort == null) {
-          sourcePort = new StepsPortModel(StepsPortName);
-          model.addPort(sourcePort);
-        }
+    createSpecificSubNodes: (model2, options2) => {
+      const should = shouldCreateSubNodes(model2);
+      if (!should) {
         return void 0;
       }
-      const createDefaultStep = options2.assistant.createDefaultStep;
-      const lastNodeOfSteps = createSubNodesOfSingleRoute({
-        model,
-        options: options2,
-        askSteps: () => {
-          const steps = step.steps ?? [];
-          if (steps.length === 0) {
-            const defaultFirstStep = createDefaultStep();
-            steps.push(defaultFirstStep);
-            step.steps = steps;
-          }
-          return steps;
-        },
-        findPortFromModel: () => model.getPort(StepsPortName),
-        createPortFromModel: () => new StepsPortModel(StepsPortName)
-      });
-      return [lastNodeOfSteps];
+      const steps = guardSetsLikeSteps(model2, options2);
+      return [
+        createSubNodesOfSingleRoute({
+          model: model2,
+          options: options2,
+          askSteps: () => steps,
+          findPortFromModel: findStepsPortFromModel,
+          createPortFromModel: createStepsPortFromModel
+        })
+      ];
     }
   });
 };
 const createParallelSubNodesAndEndNode = (model, options) => {
   return createSubNodesAndEndNode(model, {
     ...options,
-    createSpecificSubNodes: (_node, options2) => {
-      const step = model.step;
-      const diagram = step.$diagram;
-      const hideSteps = (diagram == null ? void 0 : diagram.$foldSubSteps) ?? false;
-      if (hideSteps) {
-        let sourcePort = model.getPort(StepsPortName);
-        if (sourcePort == null) {
-          sourcePort = new StepsPortModel(StepsPortName);
-          model.addPort(sourcePort);
-        }
+    createSpecificSubNodes: (model2, options2) => {
+      const should = shouldCreateSubNodes(model2);
+      if (!should) {
         return void 0;
       }
-      const createDefaultStep = options2.assistant.createDefaultStep;
-      const steps = step.steps ?? [];
-      if (steps.length === 0) {
-        const defaultFirstStep = createDefaultStep();
-        steps.push(defaultFirstStep);
-        step.steps = steps;
-      }
-      return steps.map((step2, stepIndex) => {
+      return guardSetsLikeSteps(model2, options2).map((step, stepIndex) => {
         return createSubNodesOfSingleRoute({
-          model,
+          model: model2,
           options: options2,
-          askSteps: () => [step2],
-          findPortFromModel: () => model.getPort(StepsPortName),
-          createPortFromModel: () => new StepsPortModel(StepsPortName),
+          askSteps: () => [step],
+          findPortFromModel: findStepsPortFromModel,
+          createPortFromModel: createStepsPortFromModel,
           askFirstLinkExtras: () => ({ index: stepIndex })
         });
       });
+    }
+  });
+};
+const createConditionalSubNodesAndEndNode = (model, options) => {
+  return createSubNodesAndEndNode(model, {
+    ...options,
+    createSpecificSubNodes: (model2, options2) => {
+      const should = shouldCreateSubNodes(model2);
+      if (!should) {
+        return void 0;
+      }
+      const steps = guardSetsLikeSteps(model2, options2);
+      const stepsNode = createSubNodesOfSingleRoute({
+        model: model2,
+        options: options2,
+        askSteps: () => steps,
+        findPortFromModel: findStepsPortFromModel,
+        createPortFromModel: createStepsPortFromModel,
+        askFirstLinkExtras: () => ({ index: 0 })
+      });
+      const step = model2.step;
+      const otherwise = step.otherwise;
+      if (otherwise == null || otherwise.length === 0) {
+        return [stepsNode];
+      } else {
+        return [
+          stepsNode,
+          createSubNodesOfSingleRoute({
+            model: model2,
+            options: options2,
+            askSteps: () => step.otherwise,
+            findPortFromModel: findStepsPortFromModel,
+            createPortFromModel: createStepsPortFromModel,
+            askFirstLinkExtras: () => ({ index: 1 })
+          })
+        ];
+      }
+    }
+  });
+};
+const createRoutesSubNodesAndEndNode = (model, options) => {
+  return createSubNodesAndEndNode(model, {
+    ...options,
+    createSpecificSubNodes: (model2, options2) => {
+      var _a;
+      const should = shouldCreateSubNodes(model2);
+      if (!should) {
+        return void 0;
+      }
+      const routeNodes = (_a = model2.step.routes) == null ? void 0 : _a.map((route) => {
+        const steps = guardSetsLikeSteps({ step: route }, options2);
+        return createSubNodesOfSingleRoute({
+          model: model2,
+          options: options2,
+          askSteps: () => steps,
+          findPortFromModel: findStepsPortFromModel,
+          createPortFromModel: createStepsPortFromModel,
+          askFirstLinkExtras: () => ({ index: 0 })
+        });
+      });
+      const step = model2.step;
+      const otherwise = step.otherwise;
+      if (otherwise == null || otherwise.length === 0) {
+        return routeNodes;
+      } else {
+        return [
+          ...routeNodes,
+          createSubNodesOfSingleRoute({
+            model: model2,
+            options: options2,
+            askSteps: () => step.otherwise,
+            findPortFromModel: findStepsPortFromModel,
+            createPortFromModel: createStepsPortFromModel,
+            askFirstLinkExtras: () => ({ index: 1 })
+          })
+        ];
+      }
     }
   });
 };
@@ -6744,10 +7175,11 @@ const elementName = {
   },
   helpDoc: HelpDocs.stepName
 };
+const ELEMENT_ANCHOR_USE = "use";
 const elementUse = {
-  code: "use",
+  code: ELEMENT_ANCHOR_USE,
   label: Labels.Use,
-  anchor: "use",
+  anchor: ELEMENT_ANCHOR_USE,
   badge: (model) => askUseBadge(model.use),
   editor: (props) => {
     const { model, onValueChanged } = props;
@@ -7020,6 +7452,21 @@ const findSubPorts = (model) => {
     model.getPort(AnyErrorHandlePortModel.NAME)
   ].filter((port) => port != null);
 };
+const folder = {
+  accept: () => true,
+  switch: (step, fold) => {
+    step.$diagram = step.$diagram ?? {};
+    step.$diagram.$foldCatchable = fold;
+    step.$diagram.$foldUncatchable = fold;
+    step.$diagram.$foldExposed = fold;
+    step.$diagram.$foldAny = fold;
+  },
+  askSubStep: (step) => {
+    const { errorHandles: { catchable, uncatchable, exposed, any } = {} } = step;
+    const subSteps = [catchable, uncatchable, exposed, any].filter((x) => x != null && typeof x !== "string").map((x) => x).flat();
+    return subSteps.length === 0 ? void 0 : subSteps;
+  }
+};
 const prepare$1 = (def, and) => {
   const model = {
     name: def.name,
@@ -7081,6 +7528,7 @@ const CommonStepDefs = {
   switchUse: switchUse$1,
   confirm: confirm$1,
   discard,
+  folder,
   properties: {
     name: elementName,
     use: elementUse,
@@ -7117,11 +7565,21 @@ const CommonStepDefs = {
   createSubNodesAndEndNode,
   createSetsLikeSubNodesAndEndNode,
   createParallelSubNodesAndEndNode,
+  createConditionalSubNodesAndEndNode,
+  createRoutesSubNodesAndEndNode,
   findSubPorts,
+  switchFoldWhenSubNodesExist: (step, fold) => {
+    step.$diagram = step.$diagram ?? {};
+    step.$diagram.$foldSubSteps = fold;
+  },
+  askSubSteps: (step) => {
+    const subSteps = step.steps ?? [];
+    return subSteps.length === 0 ? void 0 : subSteps;
+  },
   createMainContentElement,
   createSwitchableSnippetElement,
   createStepNodeConfigurer: (options) => {
-    const { use, prepare: prepare2, switchUse: switchUse2, confirm: confirm2, discard: discard2, properties, ports, createSubNodes: createSubNodes2, findSubPorts: findSubPorts2, helpDocs } = options;
+    const { use, prepare: prepare2, switchUse: switchUse2, confirm: confirm2, discard: discard2, folder: folder2, properties, ports, createSubNodes: createSubNodes2, findSubPorts: findSubPorts2, helpDocs, reconfigurer, firstSubStepPortContainerFind } = options;
     return {
       use,
       prepare: (() => {
@@ -7171,6 +7629,20 @@ const CommonStepDefs = {
         }
       })(),
       discard: discard2 ?? CommonStepDefs.discard,
+      folder: (() => {
+        const { switch: switchFold, askSubStep } = folder2 ?? {};
+        return {
+          accept: (step) => step.use === use,
+          switch: (step, fold) => {
+            CommonStepDefs.folder.switch(step, fold);
+            switchFold == null ? void 0 : switchFold(step, fold);
+          },
+          askSubStep: (step) => {
+            const subSteps = [...(askSubStep == null ? void 0 : askSubStep(step)) ?? [], ...CommonStepDefs.folder.askSubStep(step) ?? []];
+            return subSteps.length === 0 ? void 0 : subSteps;
+          }
+        };
+      })(),
       properties: [
         ...CommonStepDefs.properties.leadingGroup,
         ...properties ?? [],
@@ -7184,8 +7656,47 @@ const CommonStepDefs = {
       ],
       createSubNodes: createSubNodes2 ?? CommonStepDefs.createSubNodesAndEndNode,
       findSubPorts: findSubPorts2 ?? CommonStepDefs.findSubPorts,
-      helpDocs
+      helpDocs,
+      reconfigurer,
+      firstSubStepPortContainerFind
     };
+  },
+  reconfigurePropertiesWithRouteCheck: (properties, _model) => {
+    const index = properties.findIndex((prop) => prop.anchor === ELEMENT_ANCHOR_USE);
+    const beforeAndUse = properties.slice(0, index + 1);
+    const after = properties.slice(index + 1);
+    return [
+      ...beforeAndUse,
+      {
+        code: "route-test",
+        label: Labels.StepRouteTest,
+        anchor: "route-test",
+        children: [{
+          code: "route-check",
+          label: Labels.StepRouteCheck,
+          anchor: "route-check",
+          badge: createCheckOrMissBadge({ check: (model) => {
+            var _a;
+            return VUtils.isNotBlank((_a = model.temporary) == null ? void 0 : _a.check);
+          } }),
+          editor: createSnippetEditor({
+            getValue: (model) => {
+              var _a;
+              return (_a = model.temporary) == null ? void 0 : _a.check;
+            },
+            setValue: (model, value) => {
+              model.temporary = model.temporary ?? {};
+              model.temporary.check = value;
+            },
+            height: PlaygroundCssVars.SNIPPET_ROUTE_CHECK_HEIGHT
+          }),
+          helpDoc: HelpDocs.stepRouteCheck
+        }],
+        group: true,
+        collapsible: true
+      },
+      ...after
+    ];
   }
 };
 const SnippetStepDefs = CommonStepDefs.createStepNodeConfigurer({
@@ -7695,7 +8206,10 @@ createHttpStepDefs({
 });
 const SetsStepDefs = CommonStepDefs.createStepNodeConfigurer({
   use: StandardPipelineStepRegisterKey.SETS,
-  switchUse: ["keep", ["steps"]],
+  folder: {
+    switch: CommonStepDefs.switchFoldWhenSubNodesExist,
+    askSubStep: CommonStepDefs.askSubSteps
+  },
   ports: [{ key: "steps", port: CommonStepDefs.prebuiltPorts.steps }],
   createSubNodes: CommonStepDefs.createSetsLikeSubNodesAndEndNode,
   helpDocs: HelpDocs.setsStep
@@ -7703,7 +8217,10 @@ const SetsStepDefs = CommonStepDefs.createStepNodeConfigurer({
 registerStepDef(SetsStepDefs);
 const AsyncSetsStepDefs = CommonStepDefs.createStepNodeConfigurer({
   use: StandardPipelineStepRegisterKey.ASYNC_SETS,
-  switchUse: ["keep", ["steps"]],
+  folder: {
+    switch: CommonStepDefs.switchFoldWhenSubNodesExist,
+    askSubStep: CommonStepDefs.askSubSteps
+  },
   ports: [{ key: "steps", port: CommonStepDefs.prebuiltPorts.steps }],
   createSubNodes: CommonStepDefs.createSetsLikeSubNodesAndEndNode,
   helpDocs: HelpDocs.asyncSetsStep
@@ -7715,8 +8232,8 @@ const EachStepDefs = CommonStepDefs.createStepNodeConfigurer({
     model.originalContentName = def.originalContentName;
     model.itemName = def.itemName;
   }],
-  switchUse: ["keep", ["originalContentName", "itemName", "steps"]],
-  confirm: ["and", (model, def, _file, options) => {
+  switchUse: ["keep", ["originalContentName", "itemName"]],
+  confirm: ["and", (model, def, _file, _options) => {
     return () => {
       if (VUtils.isBlank(model.originalContentName)) {
         delete def.originalContentName;
@@ -7730,6 +8247,10 @@ const EachStepDefs = CommonStepDefs.createStepNodeConfigurer({
       }
     };
   }],
+  folder: {
+    switch: CommonStepDefs.switchFoldWhenSubNodesExist,
+    askSubStep: CommonStepDefs.askSubSteps
+  },
   properties: [
     CommonStepDefs.createMainContentElement({
       code: "original-content-name",
@@ -7766,7 +8287,7 @@ const ParallelStepDefs = CommonStepDefs.createStepNodeConfigurer({
     model.cloneData = def.cloneData;
     model.race = def.race;
   }],
-  switchUse: ["keep", ["cloneData", "race", "steps"]],
+  switchUse: ["keep", ["cloneData", "race"]],
   confirm: ["and", (model, def, _file, _options) => {
     return () => {
       if (VUtils.isBlank(model.cloneData)) {
@@ -7781,6 +8302,10 @@ const ParallelStepDefs = CommonStepDefs.createStepNodeConfigurer({
       }
     };
   }],
+  folder: {
+    switch: CommonStepDefs.switchFoldWhenSubNodesExist,
+    askSubStep: CommonStepDefs.askSubSteps
+  },
   properties: [
     CommonStepDefs.createMainContentElement({
       code: "race",
@@ -7823,6 +8348,148 @@ const ParallelStepDefs = CommonStepDefs.createStepNodeConfigurer({
   helpDocs: HelpDocs.parallelStep
 });
 registerStepDef(ParallelStepDefs);
+const getParentDef$1 = (model) => {
+  return model.getSubOf();
+};
+const shouldReConfigure$1 = (model) => {
+  if (!model.isFirstSubStep()) {
+    return false;
+  }
+  const parentDef = getParentDef$1(model);
+  return (parentDef.steps ?? [])[0] === model.step;
+};
+const ConditionalStepCheckReconfigurer = {
+  prepare: (prepare2, model) => {
+    if (!shouldReConfigure$1(model)) {
+      return void 0;
+    }
+    const parentDef = getParentDef$1(model);
+    return (def) => {
+      const model2 = prepare2(def);
+      model2.temporary = model2.temporary ?? {};
+      model2.temporary.check = parentDef.check;
+      return model2;
+    };
+  },
+  confirm: (confirm2, model) => {
+    if (!shouldReConfigure$1(model)) {
+      return void 0;
+    }
+    const parentDef = getParentDef$1(model);
+    return (model2, def, file, options) => {
+      var _a;
+      const ret = confirm2(model2, def, file, options);
+      parentDef.check = (_a = model2.temporary) == null ? void 0 : _a.check;
+      return ret;
+    };
+  },
+  properties: (properties, model) => {
+    if (!shouldReConfigure$1(model)) {
+      return void 0;
+    }
+    return CommonStepDefs.reconfigurePropertiesWithRouteCheck(properties, model);
+  }
+};
+const ConditionalStepDefs = CommonStepDefs.createStepNodeConfigurer({
+  use: StandardPipelineStepRegisterKey.CONDITIONAL_SETS,
+  folder: {
+    switch: CommonStepDefs.switchFoldWhenSubNodesExist,
+    askSubStep: (step) => {
+      const subSteps = [...step.steps ?? [], ...step.otherwise ?? []];
+      return subSteps.length === 0 ? void 0 : subSteps;
+    }
+  },
+  ports: [{ key: "steps", port: CommonStepDefs.prebuiltPorts.steps }],
+  createSubNodes: CommonStepDefs.createConditionalSubNodesAndEndNode,
+  helpDocs: HelpDocs.conditionalStep,
+  reconfigurer: ConditionalStepCheckReconfigurer,
+  firstSubStepPortContainerFind: (step, parent) => {
+    var _a;
+    if (parent.use === StandardPipelineStepRegisterKey.CONDITIONAL_SETS && ((_a = parent.steps) == null ? void 0 : _a[0]) === step) {
+      return FirstSubStepPortForRouteTest;
+    }
+    return void 0;
+  }
+});
+registerStepDef(ConditionalStepDefs);
+const getParentDef = (model) => {
+  return model.getSubOf();
+};
+const getRouteOfParentDef = (model) => {
+  var _a;
+  const parentDef = getParentDef(model);
+  return (_a = parentDef.routes) == null ? void 0 : _a.find((route) => {
+    var _a2;
+    return ((_a2 = route.steps) == null ? void 0 : _a2[0]) === model.step;
+  });
+};
+const shouldReConfigure = (model) => {
+  if (!model.isFirstSubStep()) {
+    return false;
+  }
+  return getRouteOfParentDef(model) != null;
+};
+const RoutesStepCheckReconfigurer = {
+  prepare: (prepare2, model) => {
+    if (!shouldReConfigure(model)) {
+      return void 0;
+    }
+    const routeDef = getRouteOfParentDef(model);
+    return (def) => {
+      const model2 = prepare2(def);
+      model2.temporary = model2.temporary ?? {};
+      model2.temporary.check = routeDef.check;
+      return model2;
+    };
+  },
+  confirm: (confirm2, model) => {
+    if (!shouldReConfigure(model)) {
+      return void 0;
+    }
+    const routeDef = getRouteOfParentDef(model);
+    return (model2, def, file, options) => {
+      var _a;
+      const ret = confirm2(model2, def, file, options);
+      routeDef.check = (_a = model2.temporary) == null ? void 0 : _a.check;
+      return ret;
+    };
+  },
+  properties: (properties, model) => {
+    if (!shouldReConfigure(model)) {
+      return void 0;
+    }
+    return CommonStepDefs.reconfigurePropertiesWithRouteCheck(properties, model);
+  }
+};
+const RoutesStepDefs = CommonStepDefs.createStepNodeConfigurer({
+  use: StandardPipelineStepRegisterKey.ROUTES_SETS,
+  folder: {
+    switch: CommonStepDefs.switchFoldWhenSubNodesExist,
+    askSubStep: (step) => {
+      const subSteps = [
+        ...(step.routes ?? []).map((route) => route.steps ?? []).flat(),
+        ...step.otherwise ?? []
+      ];
+      return subSteps.length === 0 ? void 0 : subSteps;
+    }
+  },
+  ports: [{ key: "steps", port: CommonStepDefs.prebuiltPorts.steps }],
+  createSubNodes: CommonStepDefs.createRoutesSubNodesAndEndNode,
+  helpDocs: HelpDocs.routesStep,
+  reconfigurer: RoutesStepCheckReconfigurer,
+  firstSubStepPortContainerFind: (step, parent) => {
+    var _a;
+    if (parent.use !== StandardPipelineStepRegisterKey.ROUTES_SETS) {
+      return void 0;
+    }
+    const found = (_a = parent.routes) == null ? void 0 : _a.some((route) => {
+      var _a2;
+      return ((_a2 = route.steps) == null ? void 0 : _a2[0]) === step;
+    });
+    return found ? FirstSubStepPortForRouteTest : void 0;
+  }
+});
+registerStepDef(RoutesStepDefs);
 const askDatasourceOptions = (assistant) => (assistant.askTypeOrmDatasources() ?? []).map((datasource) => {
   return { value: datasource.code, label: VUtils.blankThen(datasource.name, datasource.code) };
 });
@@ -8053,11 +8720,12 @@ const switchUse = ["datasource", "transaction"];
 const switchUseWithAutonomous = [...switchUse, "autonomous"];
 const confirm = (and) => {
   return (model, def, file, options) => {
+    const invalidAnchors = [];
     let andCommit = null;
     if (and != null) {
       andCommit = and(model, def, file, options);
-      if (typeof andCommit === "string") {
-        return andCommit;
+      if (Array.isArray(andCommit)) {
+        return [...invalidAnchors, ...andCommit];
       }
     }
     return () => {
@@ -8072,11 +8740,12 @@ const confirm = (and) => {
 const confirmWithAutonomous = (and) => {
   return (model, def, file, options) => {
     return confirm((model2, def2, file2, options2) => {
+      const invalidAnchors = [];
       let andCommit = null;
       if (and != null) {
         andCommit = and(model2, def2, file2, options2);
-        if (typeof andCommit === "string") {
-          return andCommit;
+        if (Array.isArray(andCommit)) {
+          return [...invalidAnchors, ...andCommit];
         }
       }
       return () => {
@@ -8215,8 +8884,12 @@ createTypeOrmBySqlPipelineStepDefs({
 const TypeOrmTransactionalStepDefs = CommonStepDefs.createStepNodeConfigurer({
   use: StandardPipelineStepRegisterKey.TYPEORM_TRANSACTIONAL,
   prepare: ["and", prepare()],
-  switchUse: ["keep", [...switchUse, "steps"]],
+  switchUse: ["keep", switchUse],
   confirm: ["and", confirm()],
+  folder: {
+    switch: CommonStepDefs.switchFoldWhenSubNodesExist,
+    askSubStep: CommonStepDefs.askSubSteps
+  },
   properties: [CommonStepDefs.createMainContentElement(elementDatasource, elementTransaction)],
   ports: [
     { key: "datasource", port: PortDatasource },
@@ -8367,7 +9040,7 @@ const PlaygroundWrapper = qe.div.attrs(() => {
     }
 `;
 const PlaygroundDelegate = (props) => {
-  const { $pp, $wrapped, usage, assistant, serializer, deserializer, allowUploadFile = false, allowDownloadFile = true, allowDownloadImage = true, ...rest } = props;
+  const { $pp, $wrapped, assistant, serializer, deserializer, allowUploadFile = false, allowDownloadFile = true, allowDownloadImage = true, ...rest } = props;
   const { $p2r, $onValueChange, $avs: { $disabled, $visible } } = $wrapped;
   const ref = reactExports.useRef(null);
   const globalHandlers = useGlobalHandlers();
@@ -8405,7 +9078,7 @@ const PlaygroundDelegate = (props) => {
     { ...rest, "data-disabled": $disabled, "data-visible": $visible, id: PPUtils.asId(PPUtils.absolute($p2r, $pp), props.id), ref },
     React.createElement(EditDialog, null),
     React.createElement(PlaygroundBridge, { content, onContentChanged }),
-    React.createElement(Editor, { content, usage, assistant, serializer: state.serializer, deserializer: state.deserializer, allowUploadFile, allowDownloadFile, allowDownloadImage })
+    React.createElement(Editor, { content, assistant, serializer: state.serializer, deserializer: state.deserializer, allowUploadFile, allowDownloadFile, allowDownloadImage })
   );
 };
 const Playground = (props) => {
@@ -8479,10 +9152,6 @@ class AbstractPlaygroundTranslator extends index$1.SpecificWidgetTranslator {
   getAttributeNamesMapping() {
     const type = this.getSupportedType();
     return {
-      ...["useN3", "useN5", "useN6", "useN7", "useN8"].reduce((mapping, key) => {
-        mapping[`${type}.${key}`] = `usage.${key}`;
-        return mapping;
-      }, {}),
       [`${type}.defaultStep`]: "assistant.createDefaultStep",
       [`${type}.httpSystems`]: "assistant.askSystemsForHttp",
       [`${type}.typeOrmDatasources`]: "assistant.askTypeOrmDatasources",

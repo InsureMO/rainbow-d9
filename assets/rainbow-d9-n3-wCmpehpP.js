@@ -4,10 +4,10 @@ var __publicField = (obj, key, value) => {
   __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
   return value;
 };
-import { c as createLogger, N as NUtils, V as VUtils, k as MonitorNodeAttributes, l as Reaction, E as ExternalDefIndicator, P as PPUtils } from "./rainbow-d9-n1-ScXZWsJb.js";
-import { O as OptionItemSort, R as REACTION_REFRESH_OPTIONS, c as GlobalEventPrefix } from "./rainbow-d9-n2-vYNKvkWP.js";
-import { f as fromMarkdown, g as gfmTableFromMarkdown, a as gfmStrikethroughFromMarkdown, b as gfmFootnoteFromMarkdown, c as gfmTaskListItemFromMarkdown, d as frontmatterFromMarkdown } from "./mdast-vrS0zRVA.js";
-import { g as gfmTable, h as gfmStrikethrough, i as gfmFootnote, j as gfmTaskListItem, k as frontmatter } from "./micromark-LTfBN0hH.js";
+import { c as createLogger, N as NUtils, V as VUtils, k as MonitorNodeAttributes, l as Reaction, E as ExternalDefIndicator, P as PPUtils } from "./rainbow-d9-n1-jgykuQAe.js";
+import { O as OptionItemSort, R as REACTION_REFRESH_OPTIONS, c as GlobalEventPrefix } from "./rainbow-d9-n2-Es3KsNOn.js";
+import { f as fromMarkdown, g as gfmTableFromMarkdown, a as gfmStrikethroughFromMarkdown, b as gfmFootnoteFromMarkdown, c as gfmTaskListItemFromMarkdown, d as frontmatterFromMarkdown } from "./mdast-HttiSqu0.js";
+import { g as gfmTable, h as gfmStrikethrough, i as gfmFootnote, j as gfmTaskListItem, k as frontmatter } from "./micromark-TccJ4qLc.js";
 const AsyncFunction = Object.getPrototypeOf(async function() {
 }).constructor;
 var ParsedNodeType;
@@ -2996,11 +2996,11 @@ class SpecificWidgetTranslator {
     return def;
   }
 }
-const ArrayElementAddedBuild = createAsyncSnippetBuild("$array.elementAdded", ["options"]);
-const ArrayCreateElementBuild = createAsyncSnippetBuild("$array.createElement", ["options"]);
-const ArrayCouldAddElementBuild = createAsyncSnippetBuild("$array.couldAddElement", ["options"]);
-const ArrayElementRemovedBuild = createAsyncSnippetBuild("$array.elementRemoved", ["options"]);
-const ArrayCouldRemoveElementBuild = createAsyncSnippetBuild("$array.couldRemoveElement", ["options"]);
+const ArrayElementAddedBuild = createAsyncSnippetBuild("$array.elementAdded", ["options", "handlers"]);
+const ArrayCreateElementBuild = createAsyncSnippetBuild("$array.createElement", ["options", "handlers"]);
+const ArrayCouldAddElementBuild = createAsyncSnippetBuild("$array.couldAddElement", ["options", "handlers"]);
+const ArrayElementRemovedBuild = createAsyncSnippetBuild("$array.elementRemoved", ["options", "handlers"]);
+const ArrayCouldRemoveElementBuild = createAsyncSnippetBuild("$array.couldRemoveElement", ["options", "handlers"]);
 class SpecificArrayWidgetTranslator extends SpecificWidgetTranslator {
   buildDefaultAttributeNamesMapping(additional) {
     const keys = [

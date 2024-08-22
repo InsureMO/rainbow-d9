@@ -1,6 +1,6 @@
 import { g as getDefaultExportFromCjs, c as commonjsGlobal } from "./babel-wuJLZiHY.js";
 import { s as stringifyPosition, p as pointStart } from "./unist-QXG10VXN.js";
-import { t as hastToReact } from "./react-base-ZsxyxDI8.js";
+import { t as hastToReact } from "./react-base-H_hYzlnU.js";
 function _mergeNamespaces(n2, m2) {
   for (var i2 = 0; i2 < m2.length; i2++) {
     const e2 = m2[i2];
@@ -26136,7 +26136,7 @@ const defaultKeymap = /* @__PURE__ */ [
   { key: "Alt-A", run: toggleBlockComment }
 ].concat(standardKeymap);
 const indentWithTab = { key: "Tab", run: indentMore, shift: indentLess };
-var define_process_env_default = { GITHUB_STATE: "/home/runner/work/_temp/_runner_file_commands/save_state_54262121-8cc0-4465-b6ba-a3ec2c523911", npm_package_scripts_build_n5_ci: "cd ./d9-n5 && yarn build-ci", npm_package_scripts_build_sample_cra: "cd ./d9-sample-cra && yarn build", STATS_TRP: "true", DEPLOYMENT_BASEPATH: "/opt/runner", DOTNET_NOLOGO: "1", npm_package_scripts_build_n6_ci: "cd ./d9-n6 && yarn build-ci", npm_package_dependencies__vitejs_plugin_react: "^4.2.1", USER: "runner", npm_config_version_commit_hooks: "true", npm_config_user_agent: "yarn/1.22.21 npm/? node/v18.20.4 linux x64", npm_package_dependencies__types_jest: "^29.5.4", CI: "true", npm_config_bin_links: "true", npm_package_bugs_url: "https://github.com/InsureMO/rainbow-d9/issues", npm_config_wrap_output: "", RUNNER_ENVIRONMENT: "github-hosted", GITHUB_ENV: "/home/runner/work/_temp/_runner_file_commands/set_env_54262121-8cc0-4465-b6ba-a3ec2c523911", PIPX_HOME: "/opt/pipx", npm_node_execpath: "/opt/hostedtoolcache/node/18.20.4/x64/bin/node", npm_package_scripts_build_thai_all_ci: "yarn build-thai-plan-selection-ci", npm_config_init_version: "1.0.0", npm_package_devDependencies_gh_pages: "^6.1.1", npm_package_dependencies__babel_plugin_proposal_private_property_in_object: "^7.21.11", JAVA_HOME_8_X64: "/usr/lib/jvm/temurin-8-jdk-amd64", SHLVL: "1", HOME: "/home/runner", OLDPWD: "/home/runner/work/rainbow-d9/rainbow-d9", npm_package_browserslist_production_0: ">0.2%", RUNNER_TEMP: "/home/runner/work/_temp", GITHUB_EVENT_PATH: "/home/runner/work/_temp/_github_workflow/event.json", npm_package_scripts_build_all: "yarn build-n123 && yarn build-n5 && yarn build-n6 && yarn build-echarts && yarn build-thai-all", npm_package_browserslist_production_1: "not dead", npm_package_dependencies_react_syntax_highlighter: "^15.5.0", JAVA_HOME_11_X64: "/usr/lib/jvm/temurin-11-jdk-amd64", PIPX_BIN_DIR: "/opt/pipx_bin", GITHUB_REPOSITORY_OWNER: "InsureMO", npm_package_volta_node: "22.2.0", npm_config_init_license: "MIT", npm_package_browserslist_production_2: "not op_mini all", GRADLE_HOME: "/usr/share/gradle-8.9", ANDROID_NDK_LATEST_HOME: "/usr/local/lib/android/sdk/ndk/27.0.12077973", JAVA_HOME_21_X64: "/usr/lib/jvm/temurin-21-jdk-amd64", STATS_RDCL: "true", GITHUB_RETENTION_DAYS: "90", YARN_WRAP_OUTPUT: "false", npm_package_scripts_build_thai_plan_selection_ci: "cd ./d9-thai-plan-selection && yarn build-ci", npm_package_scripts_build_n1: "cd ./d9-n1 && yarn build", npm_config_version_tag_prefix: "v", npm_package_dependencies__rainbow_d9_n2: "1.1.40-alpha.2", GITHUB_REPOSITORY_OWNER_ID: "38915232", POWERSHELL_DISTRIBUTION_CHANNEL: "GitHub-Actions-ubuntu22", AZURE_EXTENSION_DIR: "/opt/az/azcliextensions", GITHUB_HEAD_REF: "", npm_package_scripts_build_n2: "cd ./d9-n2 && yarn build", npm_package_dependencies__types_styled_components: "^5.1.34", npm_package_dependencies__rainbow_d9_n3: "1.1.40-alpha.2", npm_package_dependencies__rainbow_d9_echarts: "1.1.40-alpha.2", SYSTEMD_EXEC_PID: "596", npm_package_scripts_build_echarts: "cd ./d9-echarts && yarn build", npm_package_scripts_build_n3: "cd ./d9-n3 && yarn build", GITHUB_GRAPHQL_URL: "https://api.github.com/graphql", npm_package_description: "Assume the following envs are ready, otherwise contact the tech guy.", npm_package_scripts_predeploy: "npm run build", npm_package_dependencies__rainbow_d9_n5: "1.1.40-alpha.2", GOROOT_1_20_X64: "/opt/hostedtoolcache/go/1.20.14/x64", NVM_DIR: "/home/runner/.nvm", npm_package_readmeFilename: "README.md", npm_package_scripts_build_n5: "cd ./d9-n5 && yarn build", npm_package_dependencies__types_react: "^18.2.21", npm_package_dependencies__testing_library_react: "^13.4.0", npm_package_dependencies__rainbow_d9_n6: "1.1.40-alpha.2", DOTNET_SKIP_FIRST_TIME_EXPERIENCE: "1", GOROOT_1_21_X64: "/opt/hostedtoolcache/go/1.21.13/x64", JAVA_HOME_17_X64: "/usr/lib/jvm/temurin-17-jdk-amd64", ImageVersion: "20240811.1.0", npm_package_scripts_build_n6: "cd ./d9-n6 && yarn build", RUNNER_OS: "Linux", GITHUB_API_URL: "https://api.github.com", GOROOT_1_22_X64: "/opt/hostedtoolcache/go/1.22.6/x64", SWIFT_PATH: "/usr/share/swift/usr/bin", npm_package_type: "module", RUNNER_USER: "runner", STATS_V3PS: "true", CHROMEWEBDRIVER: "/usr/local/share/chromedriver-linux64", JOURNAL_STREAM: "8:20546", GITHUB_WORKFLOW: "Publish to NPM", _: "/opt/hostedtoolcache/node/18.20.4/x64/bin/yarn", npm_package_private: "true", npm_package_dependencies_remark_gfm: "4.0.0", npm_package_scripts_build_thai_all: "yarn build-thai-plan-selection", npm_config_registry: "https://registry.yarnpkg.com", ACTIONS_RUNNER_ACTION_ARCHIVE_CACHE: "/opt/actionarchivecache", STATS_D: "true", GITHUB_RUN_ID: "10464820376", STATS_VMFE: "true", npm_package_workspaces_0: "d9-n1", GITHUB_REF_TYPE: "tag", BOOTSTRAP_HASKELL_NONINTERACTIVE: "1", GITHUB_WORKFLOW_SHA: "d90f903e42859906a02168e45d5569778d9cd93f", GITHUB_BASE_REF: "", ImageOS: "ubuntu22", npm_package_scripts_build_n123_ci: "yarn build-n1-ci && yarn build-n2-ci && yarn build-n3-ci", npm_package_workspaces_1: "d9-n2", npm_config_ignore_scripts: "", npm_package_scripts_start: "vite", npm_package_dependencies_github_markdown_css: "^5.5.0", STATS_BLT: "true", GITHUB_WORKFLOW_REF: "InsureMO/rainbow-d9/.github/workflows/release.yml@refs/tags/r-1.1.40", PERFLOG_LOCATION_SETTING: "RUNNER_PERFLOG", GITHUB_ACTION_REPOSITORY: "", npm_package_workspaces_2: "d9-n3", npm_package_browserslist_development_0: "last 1 chrome version", PATH: "/tmp/yarn--1724125244961-0.7556904606076811:/home/runner/work/rainbow-d9/rainbow-d9/d9-sample-cra/node_modules/.bin:/home/runner/.config/yarn/link/node_modules/.bin:/home/runner/work/rainbow-d9/rainbow-d9/node_modules/.bin:/opt/hostedtoolcache/node/18.20.4/x64/libexec/lib/node_modules/npm/bin/node-gyp-bin:/opt/hostedtoolcache/node/18.20.4/x64/lib/node_modules/npm/bin/node-gyp-bin:/opt/hostedtoolcache/node/18.20.4/x64/bin/node_modules/npm/bin/node-gyp-bin:/tmp/yarn--1724125244768-0.486512605224074:/home/runner/work/rainbow-d9/rainbow-d9/node_modules/.bin:/home/runner/.config/yarn/link/node_modules/.bin:/home/runner/work/rainbow-d9/rainbow-d9/node_modules/.bin:/opt/hostedtoolcache/node/18.20.4/x64/libexec/lib/node_modules/npm/bin/node-gyp-bin:/opt/hostedtoolcache/node/18.20.4/x64/lib/node_modules/npm/bin/node-gyp-bin:/opt/hostedtoolcache/node/18.20.4/x64/bin/node_modules/npm/bin/node-gyp-bin:/opt/hostedtoolcache/node/18.20.4/x64/bin:/snap/bin:/home/runner/.local/bin:/opt/pipx_bin:/home/runner/.cargo/bin:/home/runner/.config/composer/vendor/bin:/usr/local/.ghcup/bin:/home/runner/.dotnet/tools:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin", NODE: "/opt/hostedtoolcache/node/18.20.4/x64/bin/node", ANT_HOME: "/usr/share/ant", DOTNET_MULTILEVEL_LOOKUP: "0", RUNNER_TRACKING_ID: "github_3a73c083-fa34-4272-9f36-0c325edfb16e", INVOCATION_ID: "47e7f15649054110a7c582b3913bc883", RUNNER_TOOL_CACHE: "/opt/hostedtoolcache", npm_package_name: "@rainbow-d9/sample-cra", npm_package_workspaces_3: "d9-n5", npm_package_browserslist_development_1: "last 1 firefox version", npm_package_repository_type: "git", npm_package_dependencies__types_react_syntax_highlighter: "^15.5.11", npm_package_dependencies__rainbow_d9_thai_plan_selection: "1.1.40-alpha.2", GITHUB_ACTION: "__run_5", GITHUB_RUN_NUMBER: "140", GITHUB_TRIGGERING_ACTOR: "bradwoo8621", RUNNER_ARCH: "X64", XDG_RUNTIME_DIR: "/run/user/1001", AGENT_TOOLSDIRECTORY: "/opt/hostedtoolcache", npm_package_scripts_build_thai_plan_selection: "cd ./d9-thai-plan-selection && yarn build", npm_package_workspaces_4: "d9-n6", npm_package_browserslist_development_2: "last 1 safari version", npm_package_workspaces_5: "d9-echarts", LANG: "C.UTF-8", VCPKG_INSTALLATION_ROOT: "/usr/local/share/vcpkg", npm_package_workspaces_6: "d9-thai-plan-selection", npm_package_dependencies_react_dom: "^18.2.0", CONDA: "/usr/share/miniconda", RUNNER_NAME: "GitHub Actions 18", XDG_CONFIG_HOME: "/home/runner/.config", STATS_VMD: "true", GITHUB_REF_NAME: "r-1.1.40", GITHUB_REPOSITORY: "InsureMO/rainbow-d9", STATS_D_D: "true", npm_lifecycle_script: "vite build", npm_package_workspaces_7: "d9-sample-cra", npm_package_eslintConfig_extends_0: "react-app", npm_package_dependencies_react_markdown: "9.0.1", npm_package_dependencies__types_node: "^20.5.3", STATS_UE: "true", ANDROID_NDK_ROOT: "/usr/local/lib/android/sdk/ndk/27.0.12077973", GITHUB_ACTION_REF: "", DEBIAN_FRONTEND: "noninteractive", npm_package_scripts_build_sample_cra_ci: "cd ./d9-sample-cra && yarn build", npm_config_version_git_message: "v%s", npm_package_eslintConfig_extends_1: "react-app/jest", GITHUB_REPOSITORY_ID: "704514093", GITHUB_ACTIONS: "true", npm_lifecycle_event: "build", npm_package_version: "1.1.40-alpha.2", npm_package_repository_url: "git+https://github.com/InsureMO/rainbow-d9.git", npm_package_dependencies__testing_library_jest_dom: "^5.17.0", npm_package_dependencies__rollup_pluginutils: "^5.1.0", GITHUB_REF_PROTECTED: "false", npm_config_argv: '{"remain":[],"cooked":["run","build-sample-cra"],"original":["build-sample-cra"]}', npm_package_volta_yarn: "1.22.21", npm_package_scripts_build: "vite build", npm_package_dependencies__testing_library_user_event: "^13.5.0", GITHUB_WORKSPACE: "/home/runner/work/rainbow-d9/rainbow-d9", ACCEPT_EULA: "Y", GITHUB_JOB: "create-sample-pages", RUNNER_PERFLOG: "/home/runner/perflog", npm_package_dependencies_vite: "^5.0.13", GITHUB_SHA: "d90f903e42859906a02168e45d5569778d9cd93f", GITHUB_RUN_ATTEMPT: "1", npm_config_version_git_tag: "true", npm_config_version_git_sign: "", GITHUB_REF: "refs/tags/r-1.1.40", GITHUB_ACTOR: "bradwoo8621", ANDROID_SDK_ROOT: "/usr/local/lib/android/sdk", npm_package_license: "MIT", npm_config_strict_ssl: "true", LEIN_HOME: "/usr/local/lib/lein", npm_package_scripts_build_n123: "yarn build-n1 && yarn build-n2 && yarn build-n3", GITHUB_PATH: "/home/runner/work/_temp/_runner_file_commands/add_path_54262121-8cc0-4465-b6ba-a3ec2c523911", JAVA_HOME: "/usr/lib/jvm/temurin-11-jdk-amd64", PWD: "/home/runner/work/rainbow-d9/rainbow-d9/d9-sample-cra", GITHUB_ACTOR_ID: "2330098", RUNNER_WORKSPACE: "/home/runner/work/rainbow-d9", npm_execpath: "/opt/hostedtoolcache/node/18.20.4/x64/lib/node_modules/yarn/bin/yarn.js", npm_package_scripts_build_all_ci: "yarn build-n123-ci && yarn build-n5-ci && yarn build-n6-ci && yarn build-echarts-ci && yarn build-thai-all-ci", HOMEBREW_CLEANUP_PERIODIC_FULL_DAYS: "3650", GITHUB_EVENT_NAME: "push", HOMEBREW_NO_AUTO_UPDATE: "1", ANDROID_HOME: "/usr/local/lib/android/sdk", GITHUB_SERVER_URL: "https://github.com", GECKOWEBDRIVER: "/usr/local/share/gecko_driver", LEIN_JAR: "/usr/local/lib/lein/self-installs/leiningen-2.11.2-standalone.jar", GHCUP_INSTALL_BASE_PREFIX: "/usr/local", GITHUB_OUTPUT: "/home/runner/work/_temp/_runner_file_commands/set_output_54262121-8cc0-4465-b6ba-a3ec2c523911", npm_package_author_name: "Rainbow Team", EDGEWEBDRIVER: "/usr/local/share/edge_driver", STATS_EXT: "true", npm_package_scripts_build_n1_ci: "cd ./d9-n1 && yarn build-ci", npm_config_save_prefix: "^", npm_config_ignore_optional: "", ANDROID_NDK: "/usr/local/lib/android/sdk/ndk/27.0.12077973", SGX_AESM_ADDR: "1", CHROME_BIN: "/usr/bin/google-chrome", npm_package_scripts_build_n2_ci: "cd ./d9-n2 && yarn build-ci", npm_package_scripts_deploy: "gh-pages -d build", npm_package_scripts_preview: "vite preview", SELENIUM_JAR_PATH: "/usr/share/java/selenium-server.jar", STATS_EXTP: "https://provjobdsettingscdn.blob.core.windows.net/settings/provjobdsettings-0.5.181+6/provjobd.data", npm_package_scripts_build_echarts_ci: "cd ./d9-echarts && yarn build-ci", npm_package_scripts_build_n3_ci: "cd ./d9-n3 && yarn build-ci", npm_package_dependencies_web_vitals: "^2.1.4", npm_package_dependencies_typescript: "^5.1.6", INIT_CWD: "/home/runner/work/rainbow-d9/rainbow-d9", ANDROID_NDK_HOME: "/usr/local/lib/android/sdk/ndk/27.0.12077973", GITHUB_STEP_SUMMARY: "/home/runner/work/_temp/_runner_file_commands/step_summary_54262121-8cc0-4465-b6ba-a3ec2c523911", npm_package_dependencies_react: "^18.2.0", npm_package_dependencies__types_react_dom: "^18.2.7", NODE_ENV: "production" };
+var define_process_env_default = { GITHUB_STATE: "/home/runner/work/_temp/_runner_file_commands/save_state_a8da9736-7d97-4847-aebc-cda6386afcd8", npm_package_scripts_build_n5_ci: "cd ./d9-n5 && yarn build-ci", npm_package_scripts_build_sample_cra: "cd ./d9-sample-cra && yarn build", STATS_TRP: "true", DEPLOYMENT_BASEPATH: "/opt/runner", DOTNET_NOLOGO: "1", npm_package_scripts_build_n6_ci: "cd ./d9-n6 && yarn build-ci", npm_package_dependencies__vitejs_plugin_react: "^4.2.1", USER: "runner", npm_config_version_commit_hooks: "true", npm_config_user_agent: "yarn/1.22.21 npm/? node/v18.20.4 linux x64", npm_package_dependencies__types_jest: "^29.5.4", CI: "true", npm_config_bin_links: "true", npm_package_bugs_url: "https://github.com/InsureMO/rainbow-d9/issues", npm_config_wrap_output: "", RUNNER_ENVIRONMENT: "github-hosted", GITHUB_ENV: "/home/runner/work/_temp/_runner_file_commands/set_env_a8da9736-7d97-4847-aebc-cda6386afcd8", PIPX_HOME: "/opt/pipx", npm_node_execpath: "/opt/hostedtoolcache/node/18.20.4/x64/bin/node", npm_package_scripts_build_thai_all_ci: "yarn build-thai-plan-selection-ci", npm_config_init_version: "1.0.0", npm_package_devDependencies_gh_pages: "^6.1.1", npm_package_dependencies__babel_plugin_proposal_private_property_in_object: "^7.21.11", JAVA_HOME_8_X64: "/usr/lib/jvm/temurin-8-jdk-amd64", SHLVL: "1", HOME: "/home/runner", OLDPWD: "/home/runner/work/rainbow-d9/rainbow-d9", npm_package_browserslist_production_0: ">0.2%", RUNNER_TEMP: "/home/runner/work/_temp", GITHUB_EVENT_PATH: "/home/runner/work/_temp/_github_workflow/event.json", npm_package_scripts_build_all: "yarn build-n123 && yarn build-n5 && yarn build-n6 && yarn build-echarts && yarn build-thai-all", npm_package_browserslist_production_1: "not dead", npm_package_dependencies_react_syntax_highlighter: "^15.5.0", JAVA_HOME_11_X64: "/usr/lib/jvm/temurin-11-jdk-amd64", PIPX_BIN_DIR: "/opt/pipx_bin", GITHUB_REPOSITORY_OWNER: "InsureMO", npm_package_volta_node: "22.2.0", npm_config_init_license: "MIT", npm_package_browserslist_production_2: "not op_mini all", GRADLE_HOME: "/usr/share/gradle-8.10", ANDROID_NDK_LATEST_HOME: "/usr/local/lib/android/sdk/ndk/27.0.12077973", JAVA_HOME_21_X64: "/usr/lib/jvm/temurin-21-jdk-amd64", STATS_RDCL: "true", GITHUB_RETENTION_DAYS: "90", YARN_WRAP_OUTPUT: "false", npm_package_scripts_build_thai_plan_selection_ci: "cd ./d9-thai-plan-selection && yarn build-ci", npm_package_scripts_build_n1: "cd ./d9-n1 && yarn build", npm_config_version_tag_prefix: "v", npm_package_dependencies__rainbow_d9_n2: "1.1.40", GITHUB_REPOSITORY_OWNER_ID: "38915232", POWERSHELL_DISTRIBUTION_CHANNEL: "GitHub-Actions-ubuntu22", AZURE_EXTENSION_DIR: "/opt/az/azcliextensions", GITHUB_HEAD_REF: "", npm_package_scripts_build_n2: "cd ./d9-n2 && yarn build", npm_package_dependencies__types_styled_components: "^5.1.34", npm_package_dependencies__rainbow_d9_n3: "1.1.40", npm_package_dependencies__rainbow_d9_echarts: "1.1.40", SYSTEMD_EXEC_PID: "595", npm_package_scripts_build_echarts: "cd ./d9-echarts && yarn build", npm_package_scripts_build_n3: "cd ./d9-n3 && yarn build", GITHUB_GRAPHQL_URL: "https://api.github.com/graphql", npm_package_description: "Assume the following envs are ready, otherwise contact the tech guy.", npm_package_scripts_predeploy: "npm run build", npm_package_dependencies__rainbow_d9_n5: "1.1.40", GOROOT_1_20_X64: "/opt/hostedtoolcache/go/1.20.14/x64", NVM_DIR: "/home/runner/.nvm", npm_package_readmeFilename: "README.md", npm_package_scripts_build_n5: "cd ./d9-n5 && yarn build", npm_package_dependencies__types_react: "^18.2.21", npm_package_dependencies__testing_library_react: "^13.4.0", npm_package_dependencies__rainbow_d9_n6: "1.1.40", DOTNET_SKIP_FIRST_TIME_EXPERIENCE: "1", GOROOT_1_21_X64: "/opt/hostedtoolcache/go/1.21.13/x64", JAVA_HOME_17_X64: "/usr/lib/jvm/temurin-17-jdk-amd64", ImageVersion: "20240818.1.0", npm_package_scripts_build_n6: "cd ./d9-n6 && yarn build", RUNNER_OS: "Linux", GITHUB_API_URL: "https://api.github.com", GOROOT_1_22_X64: "/opt/hostedtoolcache/go/1.22.6/x64", SWIFT_PATH: "/usr/share/swift/usr/bin", npm_package_type: "module", RUNNER_USER: "runner", STATS_V3PS: "true", CHROMEWEBDRIVER: "/usr/local/share/chromedriver-linux64", JOURNAL_STREAM: "8:20492", GITHUB_WORKFLOW: "Publish to NPM", _: "/opt/hostedtoolcache/node/18.20.4/x64/bin/yarn", npm_package_private: "true", npm_package_dependencies_remark_gfm: "4.0.0", npm_package_scripts_build_thai_all: "yarn build-thai-plan-selection", npm_config_registry: "https://registry.yarnpkg.com", ACTIONS_RUNNER_ACTION_ARCHIVE_CACHE: "/opt/actionarchivecache", STATS_D: "true", GITHUB_RUN_ID: "10504000015", STATS_VMFE: "true", npm_package_workspaces_0: "d9-n1", GITHUB_REF_TYPE: "tag", BOOTSTRAP_HASKELL_NONINTERACTIVE: "1", GITHUB_WORKFLOW_SHA: "436c142c27be7891de0a05954d5e2a7f758ca2ba", GITHUB_BASE_REF: "", ImageOS: "ubuntu22", npm_package_scripts_build_n123_ci: "yarn build-n1-ci && yarn build-n2-ci && yarn build-n3-ci", npm_package_workspaces_1: "d9-n2", npm_config_ignore_scripts: "", npm_package_scripts_start: "vite", npm_package_dependencies_github_markdown_css: "^5.5.0", GITHUB_WORKFLOW_REF: "InsureMO/rainbow-d9/.github/workflows/release.yml@refs/tags/r-1.1.41", PERFLOG_LOCATION_SETTING: "RUNNER_PERFLOG", GITHUB_ACTION_REPOSITORY: "", npm_package_workspaces_2: "d9-n3", npm_package_browserslist_development_0: "last 1 chrome version", PATH: "/tmp/yarn--1724313383110-0.9201294766566288:/home/runner/work/rainbow-d9/rainbow-d9/d9-sample-cra/node_modules/.bin:/home/runner/.config/yarn/link/node_modules/.bin:/home/runner/work/rainbow-d9/rainbow-d9/node_modules/.bin:/opt/hostedtoolcache/node/18.20.4/x64/libexec/lib/node_modules/npm/bin/node-gyp-bin:/opt/hostedtoolcache/node/18.20.4/x64/lib/node_modules/npm/bin/node-gyp-bin:/opt/hostedtoolcache/node/18.20.4/x64/bin/node_modules/npm/bin/node-gyp-bin:/tmp/yarn--1724313382919-0.4098517121047005:/home/runner/work/rainbow-d9/rainbow-d9/node_modules/.bin:/home/runner/.config/yarn/link/node_modules/.bin:/home/runner/work/rainbow-d9/rainbow-d9/node_modules/.bin:/opt/hostedtoolcache/node/18.20.4/x64/libexec/lib/node_modules/npm/bin/node-gyp-bin:/opt/hostedtoolcache/node/18.20.4/x64/lib/node_modules/npm/bin/node-gyp-bin:/opt/hostedtoolcache/node/18.20.4/x64/bin/node_modules/npm/bin/node-gyp-bin:/opt/hostedtoolcache/node/18.20.4/x64/bin:/snap/bin:/home/runner/.local/bin:/opt/pipx_bin:/home/runner/.cargo/bin:/home/runner/.config/composer/vendor/bin:/usr/local/.ghcup/bin:/home/runner/.dotnet/tools:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin", NODE: "/opt/hostedtoolcache/node/18.20.4/x64/bin/node", ANT_HOME: "/usr/share/ant", DOTNET_MULTILEVEL_LOOKUP: "0", RUNNER_TRACKING_ID: "github_48cbc911-03e3-4b30-ac6a-625eb9307458", INVOCATION_ID: "41ce198b2dc648c388f6ff508a4d4991", RUNNER_TOOL_CACHE: "/opt/hostedtoolcache", npm_package_name: "@rainbow-d9/sample-cra", npm_package_workspaces_3: "d9-n5", npm_package_browserslist_development_1: "last 1 firefox version", npm_package_repository_type: "git", npm_package_dependencies__types_react_syntax_highlighter: "^15.5.11", npm_package_dependencies__rainbow_d9_thai_plan_selection: "1.1.40", GITHUB_ACTION: "__run_5", GITHUB_RUN_NUMBER: "141", GITHUB_TRIGGERING_ACTOR: "bradwoo8621", RUNNER_ARCH: "X64", XDG_RUNTIME_DIR: "/run/user/1001", AGENT_TOOLSDIRECTORY: "/opt/hostedtoolcache", npm_package_scripts_build_thai_plan_selection: "cd ./d9-thai-plan-selection && yarn build", npm_package_workspaces_4: "d9-n6", npm_package_browserslist_development_2: "last 1 safari version", npm_package_workspaces_5: "d9-echarts", LANG: "C.UTF-8", VCPKG_INSTALLATION_ROOT: "/usr/local/share/vcpkg", npm_package_workspaces_6: "d9-thai-plan-selection", npm_package_dependencies_react_dom: "^18.2.0", CONDA: "/usr/share/miniconda", RUNNER_NAME: "GitHub Actions 3", XDG_CONFIG_HOME: "/home/runner/.config", STATS_VMD: "true", GITHUB_REF_NAME: "r-1.1.41", GITHUB_REPOSITORY: "InsureMO/rainbow-d9", STATS_D_D: "true", npm_lifecycle_script: "vite build", npm_package_workspaces_7: "d9-sample-cra", npm_package_eslintConfig_extends_0: "react-app", npm_package_dependencies_react_markdown: "9.0.1", npm_package_dependencies__types_node: "^20.5.3", STATS_UE: "true", ANDROID_NDK_ROOT: "/usr/local/lib/android/sdk/ndk/27.0.12077973", GITHUB_ACTION_REF: "", DEBIAN_FRONTEND: "noninteractive", npm_package_scripts_build_sample_cra_ci: "cd ./d9-sample-cra && yarn build", npm_config_version_git_message: "v%s", npm_package_eslintConfig_extends_1: "react-app/jest", GITHUB_REPOSITORY_ID: "704514093", GITHUB_ACTIONS: "true", npm_lifecycle_event: "build", npm_package_version: "1.1.40", npm_package_repository_url: "git+https://github.com/InsureMO/rainbow-d9.git", npm_package_dependencies__testing_library_jest_dom: "^5.17.0", npm_package_dependencies__rollup_pluginutils: "^5.1.0", GITHUB_REF_PROTECTED: "false", npm_config_argv: '{"remain":[],"cooked":["run","build-sample-cra"],"original":["build-sample-cra"]}', npm_package_volta_yarn: "1.22.21", npm_package_scripts_build: "vite build", npm_package_dependencies__testing_library_user_event: "^13.5.0", GITHUB_WORKSPACE: "/home/runner/work/rainbow-d9/rainbow-d9", ACCEPT_EULA: "Y", GITHUB_JOB: "create-sample-pages", RUNNER_PERFLOG: "/home/runner/perflog", npm_package_dependencies_vite: "^5.0.13", GITHUB_SHA: "436c142c27be7891de0a05954d5e2a7f758ca2ba", GITHUB_RUN_ATTEMPT: "1", npm_config_version_git_tag: "true", npm_config_version_git_sign: "", GITHUB_REF: "refs/tags/r-1.1.41", GITHUB_ACTOR: "bradwoo8621", ANDROID_SDK_ROOT: "/usr/local/lib/android/sdk", npm_package_license: "MIT", npm_config_strict_ssl: "true", LEIN_HOME: "/usr/local/lib/lein", npm_package_scripts_build_n123: "yarn build-n1 && yarn build-n2 && yarn build-n3", GITHUB_PATH: "/home/runner/work/_temp/_runner_file_commands/add_path_a8da9736-7d97-4847-aebc-cda6386afcd8", JAVA_HOME: "/usr/lib/jvm/temurin-11-jdk-amd64", PWD: "/home/runner/work/rainbow-d9/rainbow-d9/d9-sample-cra", GITHUB_ACTOR_ID: "2330098", RUNNER_WORKSPACE: "/home/runner/work/rainbow-d9", npm_execpath: "/opt/hostedtoolcache/node/18.20.4/x64/lib/node_modules/yarn/bin/yarn.js", npm_package_scripts_build_all_ci: "yarn build-n123-ci && yarn build-n5-ci && yarn build-n6-ci && yarn build-echarts-ci && yarn build-thai-all-ci", HOMEBREW_CLEANUP_PERIODIC_FULL_DAYS: "3650", GITHUB_EVENT_NAME: "push", HOMEBREW_NO_AUTO_UPDATE: "1", ANDROID_HOME: "/usr/local/lib/android/sdk", GITHUB_SERVER_URL: "https://github.com", GECKOWEBDRIVER: "/usr/local/share/gecko_driver", LEIN_JAR: "/usr/local/lib/lein/self-installs/leiningen-2.11.2-standalone.jar", GHCUP_INSTALL_BASE_PREFIX: "/usr/local", GITHUB_OUTPUT: "/home/runner/work/_temp/_runner_file_commands/set_output_a8da9736-7d97-4847-aebc-cda6386afcd8", npm_package_author_name: "Rainbow Team", EDGEWEBDRIVER: "/usr/local/share/edge_driver", STATS_EXT: "true", npm_package_scripts_build_n1_ci: "cd ./d9-n1 && yarn build-ci", npm_config_save_prefix: "^", npm_config_ignore_optional: "", ANDROID_NDK: "/usr/local/lib/android/sdk/ndk/27.0.12077973", SGX_AESM_ADDR: "1", CHROME_BIN: "/usr/bin/google-chrome", npm_package_scripts_build_n2_ci: "cd ./d9-n2 && yarn build-ci", npm_package_scripts_deploy: "gh-pages -d build", npm_package_scripts_preview: "vite preview", SELENIUM_JAR_PATH: "/usr/share/java/selenium-server.jar", STATS_EXTP: "https://provjobdsettingscdn.blob.core.windows.net/settings/provjobdsettings-0.5.181+6/provjobd.data", npm_package_scripts_build_echarts_ci: "cd ./d9-echarts && yarn build-ci", npm_package_scripts_build_n3_ci: "cd ./d9-n3 && yarn build-ci", npm_package_dependencies_web_vitals: "^2.1.4", npm_package_dependencies_typescript: "^5.1.6", INIT_CWD: "/home/runner/work/rainbow-d9/rainbow-d9", ANDROID_NDK_HOME: "/usr/local/lib/android/sdk/ndk/27.0.12077973", GITHUB_STEP_SUMMARY: "/home/runner/work/_temp/_runner_file_commands/step_summary_a8da9736-7d97-4847-aebc-cda6386afcd8", npm_package_dependencies_react: "^18.2.0", npm_package_dependencies__types_react_dom: "^18.2.7", NODE_ENV: "production" };
 let Stack$4 = class Stack {
   /**
   @internal
@@ -43349,6 +43349,602 @@ function ccount(value, character2) {
   }
   return count2;
 }
+const whitespace$1 = 36, LineComment = 1, BlockComment = 2, String$1 = 3, Number$1 = 4, Bool = 5, Null = 6, ParenL = 7, ParenR = 8, BraceL = 9, BraceR = 10, BracketL = 11, BracketR = 12, Semi = 13, Dot = 14, Operator = 15, Punctuation = 16, SpecialVar = 17, Identifier = 18, QuotedIdentifier = 19, Keyword = 20, Type = 21, Bits = 22, Bytes = 23, Builtin = 24;
+function isAlpha(ch) {
+  return ch >= 65 && ch <= 90 || ch >= 97 && ch <= 122 || ch >= 48 && ch <= 57;
+}
+function isHexDigit(ch) {
+  return ch >= 48 && ch <= 57 || ch >= 97 && ch <= 102 || ch >= 65 && ch <= 70;
+}
+function readLiteral(input, endQuote, backslashEscapes) {
+  for (let escaped = false; ; ) {
+    if (input.next < 0)
+      return;
+    if (input.next == endQuote && !escaped) {
+      input.advance();
+      return;
+    }
+    escaped = backslashEscapes && !escaped && input.next == 92;
+    input.advance();
+  }
+}
+function readDoubleDollarLiteral(input, tag) {
+  scan:
+    for (; ; ) {
+      if (input.next < 0)
+        return console.log("exit at end", input.pos);
+      if (input.next == 36) {
+        input.advance();
+        for (let i2 = 0; i2 < tag.length; i2++) {
+          if (input.next != tag.charCodeAt(i2))
+            continue scan;
+          input.advance();
+        }
+        if (input.next == 36) {
+          input.advance();
+          return;
+        }
+      } else {
+        input.advance();
+      }
+    }
+}
+function readPLSQLQuotedLiteral(input, openDelim) {
+  let matchingDelim = "[{<(".indexOf(String.fromCharCode(openDelim));
+  let closeDelim = matchingDelim < 0 ? openDelim : "]}>)".charCodeAt(matchingDelim);
+  for (; ; ) {
+    if (input.next < 0)
+      return;
+    if (input.next == closeDelim && input.peek(1) == 39) {
+      input.advance(2);
+      return;
+    }
+    input.advance();
+  }
+}
+function readWord(input, result) {
+  for (; ; ) {
+    if (input.next != 95 && !isAlpha(input.next))
+      break;
+    if (result != null)
+      result += String.fromCharCode(input.next);
+    input.advance();
+  }
+  return result;
+}
+function readWordOrQuoted(input) {
+  if (input.next == 39 || input.next == 34 || input.next == 96) {
+    let quote = input.next;
+    input.advance();
+    readLiteral(input, quote, false);
+  } else {
+    readWord(input);
+  }
+}
+function readBits(input, endQuote) {
+  while (input.next == 48 || input.next == 49)
+    input.advance();
+  if (endQuote && input.next == endQuote)
+    input.advance();
+}
+function readNumber(input, sawDot) {
+  for (; ; ) {
+    if (input.next == 46) {
+      if (sawDot)
+        break;
+      sawDot = true;
+    } else if (input.next < 48 || input.next > 57) {
+      break;
+    }
+    input.advance();
+  }
+  if (input.next == 69 || input.next == 101) {
+    input.advance();
+    if (input.next == 43 || input.next == 45)
+      input.advance();
+    while (input.next >= 48 && input.next <= 57)
+      input.advance();
+  }
+}
+function eol(input) {
+  while (!(input.next < 0 || input.next == 10))
+    input.advance();
+}
+function inString(ch, str2) {
+  for (let i2 = 0; i2 < str2.length; i2++)
+    if (str2.charCodeAt(i2) == ch)
+      return true;
+  return false;
+}
+const Space = " 	\r\n";
+function keywords(keywords2, types2, builtin) {
+  let result = /* @__PURE__ */ Object.create(null);
+  result["true"] = result["false"] = Bool;
+  result["null"] = result["unknown"] = Null;
+  for (let kw of keywords2.split(" "))
+    if (kw)
+      result[kw] = Keyword;
+  for (let tp of types2.split(" "))
+    if (tp)
+      result[tp] = Type;
+  for (let kw of (builtin || "").split(" "))
+    if (kw)
+      result[kw] = Builtin;
+  return result;
+}
+const SQLTypes = "array binary bit boolean char character clob date decimal double float int integer interval large national nchar nclob numeric object precision real smallint time timestamp varchar varying ";
+const SQLKeywords = "absolute action add after all allocate alter and any are as asc assertion at authorization before begin between both breadth by call cascade cascaded case cast catalog check close collate collation column commit condition connect connection constraint constraints constructor continue corresponding count create cross cube current current_date current_default_transform_group current_transform_group_for_type current_path current_role current_time current_timestamp current_user cursor cycle data day deallocate declare default deferrable deferred delete depth deref desc describe descriptor deterministic diagnostics disconnect distinct do domain drop dynamic each else elseif end end-exec equals escape except exception exec execute exists exit external fetch first for foreign found from free full function general get global go goto grant group grouping handle having hold hour identity if immediate in indicator initially inner inout input insert intersect into is isolation join key language last lateral leading leave left level like limit local localtime localtimestamp locator loop map match method minute modifies module month names natural nesting new next no none not of old on only open option or order ordinality out outer output overlaps pad parameter partial path prepare preserve primary prior privileges procedure public read reads recursive redo ref references referencing relative release repeat resignal restrict result return returns revoke right role rollback rollup routine row rows savepoint schema scroll search second section select session session_user set sets signal similar size some space specific specifictype sql sqlexception sqlstate sqlwarning start state static system_user table temporary then timezone_hour timezone_minute to trailing transaction translation treat trigger under undo union unique unnest until update usage user using value values view when whenever where while with without work write year zone ";
+const defaults = {
+  backslashEscapes: false,
+  hashComments: false,
+  spaceAfterDashes: false,
+  slashComments: false,
+  doubleQuotedStrings: false,
+  doubleDollarQuotedStrings: false,
+  unquotedBitLiterals: false,
+  treatBitsAsBytes: false,
+  charSetCasts: false,
+  plsqlQuotingMechanism: false,
+  operatorChars: "*+-%<>!=&|~^/",
+  specialVar: "?",
+  identifierQuotes: '"',
+  caseInsensitiveIdentifiers: false,
+  words: /* @__PURE__ */ keywords(SQLKeywords, SQLTypes)
+};
+function dialect(spec, kws, types2, builtin) {
+  let dialect2 = {};
+  for (let prop in defaults)
+    dialect2[prop] = (spec.hasOwnProperty(prop) ? spec : defaults)[prop];
+  if (kws)
+    dialect2.words = keywords(kws, types2 || "", builtin);
+  return dialect2;
+}
+function tokensFor(d2) {
+  return new ExternalTokenizer((input) => {
+    var _a2;
+    let { next: next2 } = input;
+    input.advance();
+    if (inString(next2, Space)) {
+      while (inString(input.next, Space))
+        input.advance();
+      input.acceptToken(whitespace$1);
+    } else if (next2 == 36 && d2.doubleDollarQuotedStrings) {
+      let tag = readWord(input, "");
+      if (input.next == 36) {
+        input.advance();
+        readDoubleDollarLiteral(input, tag);
+        input.acceptToken(String$1);
+      }
+    } else if (next2 == 39 || next2 == 34 && d2.doubleQuotedStrings) {
+      readLiteral(input, next2, d2.backslashEscapes);
+      input.acceptToken(String$1);
+    } else if (next2 == 35 && d2.hashComments || next2 == 47 && input.next == 47 && d2.slashComments) {
+      eol(input);
+      input.acceptToken(LineComment);
+    } else if (next2 == 45 && input.next == 45 && (!d2.spaceAfterDashes || input.peek(1) == 32)) {
+      eol(input);
+      input.acceptToken(LineComment);
+    } else if (next2 == 47 && input.next == 42) {
+      input.advance();
+      for (let depth = 1; ; ) {
+        let cur2 = input.next;
+        if (input.next < 0)
+          break;
+        input.advance();
+        if (cur2 == 42 && input.next == 47) {
+          depth--;
+          input.advance();
+          if (!depth)
+            break;
+        } else if (cur2 == 47 && input.next == 42) {
+          depth++;
+          input.advance();
+        }
+      }
+      input.acceptToken(BlockComment);
+    } else if ((next2 == 101 || next2 == 69) && input.next == 39) {
+      input.advance();
+      readLiteral(input, 39, true);
+      input.acceptToken(String$1);
+    } else if ((next2 == 110 || next2 == 78) && input.next == 39 && d2.charSetCasts) {
+      input.advance();
+      readLiteral(input, 39, d2.backslashEscapes);
+      input.acceptToken(String$1);
+    } else if (next2 == 95 && d2.charSetCasts) {
+      for (let i2 = 0; ; i2++) {
+        if (input.next == 39 && i2 > 1) {
+          input.advance();
+          readLiteral(input, 39, d2.backslashEscapes);
+          input.acceptToken(String$1);
+          break;
+        }
+        if (!isAlpha(input.next))
+          break;
+        input.advance();
+      }
+    } else if (d2.plsqlQuotingMechanism && (next2 == 113 || next2 == 81) && input.next == 39 && input.peek(1) > 0 && !inString(input.peek(1), Space)) {
+      let openDelim = input.peek(1);
+      input.advance(2);
+      readPLSQLQuotedLiteral(input, openDelim);
+      input.acceptToken(String$1);
+    } else if (next2 == 40) {
+      input.acceptToken(ParenL);
+    } else if (next2 == 41) {
+      input.acceptToken(ParenR);
+    } else if (next2 == 123) {
+      input.acceptToken(BraceL);
+    } else if (next2 == 125) {
+      input.acceptToken(BraceR);
+    } else if (next2 == 91) {
+      input.acceptToken(BracketL);
+    } else if (next2 == 93) {
+      input.acceptToken(BracketR);
+    } else if (next2 == 59) {
+      input.acceptToken(Semi);
+    } else if (d2.unquotedBitLiterals && next2 == 48 && input.next == 98) {
+      input.advance();
+      readBits(input);
+      input.acceptToken(Bits);
+    } else if ((next2 == 98 || next2 == 66) && (input.next == 39 || input.next == 34)) {
+      const quoteStyle = input.next;
+      input.advance();
+      if (d2.treatBitsAsBytes) {
+        readLiteral(input, quoteStyle, d2.backslashEscapes);
+        input.acceptToken(Bytes);
+      } else {
+        readBits(input, quoteStyle);
+        input.acceptToken(Bits);
+      }
+    } else if (next2 == 48 && (input.next == 120 || input.next == 88) || (next2 == 120 || next2 == 88) && input.next == 39) {
+      let quoted = input.next == 39;
+      input.advance();
+      while (isHexDigit(input.next))
+        input.advance();
+      if (quoted && input.next == 39)
+        input.advance();
+      input.acceptToken(Number$1);
+    } else if (next2 == 46 && input.next >= 48 && input.next <= 57) {
+      readNumber(input, true);
+      input.acceptToken(Number$1);
+    } else if (next2 == 46) {
+      input.acceptToken(Dot);
+    } else if (next2 >= 48 && next2 <= 57) {
+      readNumber(input, false);
+      input.acceptToken(Number$1);
+    } else if (inString(next2, d2.operatorChars)) {
+      while (inString(input.next, d2.operatorChars))
+        input.advance();
+      input.acceptToken(Operator);
+    } else if (inString(next2, d2.specialVar)) {
+      if (input.next == next2)
+        input.advance();
+      readWordOrQuoted(input);
+      input.acceptToken(SpecialVar);
+    } else if (inString(next2, d2.identifierQuotes)) {
+      readLiteral(input, next2, false);
+      input.acceptToken(QuotedIdentifier);
+    } else if (next2 == 58 || next2 == 44) {
+      input.acceptToken(Punctuation);
+    } else if (isAlpha(next2)) {
+      let word = readWord(input, String.fromCharCode(next2));
+      input.acceptToken(input.next == 46 || input.peek(-word.length - 1) == 46 ? Identifier : (_a2 = d2.words[word.toLowerCase()]) !== null && _a2 !== void 0 ? _a2 : Identifier);
+    }
+  });
+}
+const tokens = /* @__PURE__ */ tokensFor(defaults);
+const parser$1 = /* @__PURE__ */ LRParser.deserialize({
+  version: 14,
+  states: "%vQ]QQOOO#wQRO'#DSO$OQQO'#CwO%eQQO'#CxO%lQQO'#CyO%sQQO'#CzOOQQ'#DS'#DSOOQQ'#C}'#C}O'UQRO'#C{OOQQ'#Cv'#CvOOQQ'#C|'#C|Q]QQOOQOQQOOO'`QQO'#DOO(xQRO,59cO)PQQO,59cO)UQQO'#DSOOQQ,59d,59dO)cQQO,59dOOQQ,59e,59eO)jQQO,59eOOQQ,59f,59fO)qQQO,59fOOQQ-E6{-E6{OOQQ,59b,59bOOQQ-E6z-E6zOOQQ,59j,59jOOQQ-E6|-E6|O+VQRO1G.}O+^QQO,59cOOQQ1G/O1G/OOOQQ1G/P1G/POOQQ1G/Q1G/QP+kQQO'#C}O+rQQO1G.}O)PQQO,59cO,PQQO'#Cw",
+  stateData: ",[~OtOSPOSQOS~ORUOSUOTUOUUOVROXSOZTO]XO^QO_UO`UOaPObPOcPOdUOeUOfUOgUOhUO~O^]ORvXSvXTvXUvXVvXXvXZvX]vX_vX`vXavXbvXcvXdvXevXfvXgvXhvX~OsvX~P!jOa_Ob_Oc_O~ORUOSUOTUOUUOVROXSOZTO^tO_UO`UOa`Ob`Oc`OdUOeUOfUOgUOhUO~OWaO~P$ZOYcO~P$ZO[eO~P$ZORUOSUOTUOUUOVROXSOZTO^QO_UO`UOaPObPOcPOdUOeUOfUOgUOhUO~O]hOsoX~P%zOajObjOcjO~O^]ORkaSkaTkaUkaVkaXkaZka]ka_ka`kaakabkackadkaekafkagkahka~Oska~P'kO^]O~OWvXYvX[vX~P!jOWnO~P$ZOYoO~P$ZO[pO~P$ZO^]ORkiSkiTkiUkiVkiXkiZki]ki_ki`kiakibkickidkiekifkigkihki~Oski~P)xOWkaYka[ka~P'kO]hO~P$ZOWkiYki[ki~P)xOasObsOcsO~O",
+  goto: "#hwPPPPPPPPPPPPPPPPPPPPPPPPPPx||||!Y!^!d!xPPP#[TYOZeUORSTWZbdfqT[OZQZORiZSWOZQbRQdSQfTZgWbdfqQ^PWk^lmrQl_Qm`RrseVORSTWZbdfq",
+  nodeNames: "⚠ LineComment BlockComment String Number Bool Null ( ) { } [ ] ; . Operator Punctuation SpecialVar Identifier QuotedIdentifier Keyword Type Bits Bytes Builtin Script Statement CompositeIdentifier Parens Braces Brackets Statement",
+  maxTerm: 38,
+  nodeProps: [
+    ["isolate", -4, 1, 2, 3, 19, ""]
+  ],
+  skippedNodes: [0, 1, 2],
+  repeatNodeCount: 3,
+  tokenData: "RORO",
+  tokenizers: [0, tokens],
+  topRules: { "Script": [0, 25] },
+  tokenPrec: 0
+});
+function tokenBefore(tree) {
+  let cursor = tree.cursor().moveTo(tree.from, -1);
+  while (/Comment/.test(cursor.name))
+    cursor.moveTo(cursor.from, -1);
+  return cursor.node;
+}
+function idName(doc2, node2) {
+  let text2 = doc2.sliceString(node2.from, node2.to);
+  let quoted = /^([`'"])(.*)\1$/.exec(text2);
+  return quoted ? quoted[2] : text2;
+}
+function plainID(node2) {
+  return node2 && (node2.name == "Identifier" || node2.name == "QuotedIdentifier");
+}
+function pathFor(doc2, id2) {
+  if (id2.name == "CompositeIdentifier") {
+    let path2 = [];
+    for (let ch = id2.firstChild; ch; ch = ch.nextSibling)
+      if (plainID(ch))
+        path2.push(idName(doc2, ch));
+    return path2;
+  }
+  return [idName(doc2, id2)];
+}
+function parentsFor(doc2, node2) {
+  for (let path2 = []; ; ) {
+    if (!node2 || node2.name != ".")
+      return path2;
+    let name2 = tokenBefore(node2);
+    if (!plainID(name2))
+      return path2;
+    path2.unshift(idName(doc2, name2));
+    node2 = tokenBefore(name2);
+  }
+}
+function sourceContext(state, startPos) {
+  let pos = syntaxTree(state).resolveInner(startPos, -1);
+  let aliases = getAliases(state.doc, pos);
+  if (pos.name == "Identifier" || pos.name == "QuotedIdentifier" || pos.name == "Keyword") {
+    return {
+      from: pos.from,
+      quoted: pos.name == "QuotedIdentifier" ? state.doc.sliceString(pos.from, pos.from + 1) : null,
+      parents: parentsFor(state.doc, tokenBefore(pos)),
+      aliases
+    };
+  }
+  if (pos.name == ".") {
+    return { from: startPos, quoted: null, parents: parentsFor(state.doc, pos), aliases };
+  } else {
+    return { from: startPos, quoted: null, parents: [], empty: true, aliases };
+  }
+}
+const EndFrom = /* @__PURE__ */ new Set(/* @__PURE__ */ "where group having order union intersect except all distinct limit offset fetch for".split(" "));
+function getAliases(doc2, at) {
+  let statement;
+  for (let parent = at; !statement; parent = parent.parent) {
+    if (!parent)
+      return null;
+    if (parent.name == "Statement")
+      statement = parent;
+  }
+  let aliases = null;
+  for (let scan = statement.firstChild, sawFrom = false, prevID = null; scan; scan = scan.nextSibling) {
+    let kw = scan.name == "Keyword" ? doc2.sliceString(scan.from, scan.to).toLowerCase() : null;
+    let alias = null;
+    if (!sawFrom) {
+      sawFrom = kw == "from";
+    } else if (kw == "as" && prevID && plainID(scan.nextSibling)) {
+      alias = idName(doc2, scan.nextSibling);
+    } else if (kw && EndFrom.has(kw)) {
+      break;
+    } else if (prevID && plainID(scan)) {
+      alias = idName(doc2, scan);
+    }
+    if (alias) {
+      if (!aliases)
+        aliases = /* @__PURE__ */ Object.create(null);
+      aliases[alias] = pathFor(doc2, prevID);
+    }
+    prevID = /Identifier$/.test(scan.name) ? scan : null;
+  }
+  return aliases;
+}
+function maybeQuoteCompletions(quote, completions) {
+  if (!quote)
+    return completions;
+  return completions.map((c2) => Object.assign(Object.assign({}, c2), { label: c2.label[0] == quote ? c2.label : quote + c2.label + quote, apply: void 0 }));
+}
+const Span = /^\w*$/, QuotedSpan = /^[`'"]?\w*[`'"]?$/;
+function isSelfTag(namespace) {
+  return namespace.self && typeof namespace.self.label == "string";
+}
+class CompletionLevel {
+  constructor(idQuote, idCaseInsensitive) {
+    this.idQuote = idQuote;
+    this.idCaseInsensitive = idCaseInsensitive;
+    this.list = [];
+    this.children = void 0;
+  }
+  child(name2) {
+    let children = this.children || (this.children = /* @__PURE__ */ Object.create(null));
+    let found = children[name2];
+    if (found)
+      return found;
+    if (name2 && !this.list.some((c2) => c2.label == name2))
+      this.list.push(nameCompletion(name2, "type", this.idQuote, this.idCaseInsensitive));
+    return children[name2] = new CompletionLevel(this.idQuote, this.idCaseInsensitive);
+  }
+  maybeChild(name2) {
+    return this.children ? this.children[name2] : null;
+  }
+  addCompletion(option) {
+    let found = this.list.findIndex((o2) => o2.label == option.label);
+    if (found > -1)
+      this.list[found] = option;
+    else
+      this.list.push(option);
+  }
+  addCompletions(completions) {
+    for (let option of completions)
+      this.addCompletion(typeof option == "string" ? nameCompletion(option, "property", this.idQuote, this.idCaseInsensitive) : option);
+  }
+  addNamespace(namespace) {
+    if (Array.isArray(namespace)) {
+      this.addCompletions(namespace);
+    } else if (isSelfTag(namespace)) {
+      this.addNamespace(namespace.children);
+    } else {
+      this.addNamespaceObject(namespace);
+    }
+  }
+  addNamespaceObject(namespace) {
+    for (let name2 of Object.keys(namespace)) {
+      let children = namespace[name2], self2 = null;
+      let parts = name2.replace(/\\?\./g, (p2) => p2 == "." ? "\0" : p2).split("\0");
+      let scope = this;
+      if (isSelfTag(children)) {
+        self2 = children.self;
+        children = children.children;
+      }
+      for (let i2 = 0; i2 < parts.length; i2++) {
+        if (self2 && i2 == parts.length - 1)
+          scope.addCompletion(self2);
+        scope = scope.child(parts[i2].replace(/\\\./g, "."));
+      }
+      scope.addNamespace(children);
+    }
+  }
+}
+function nameCompletion(label, type2, idQuote, idCaseInsensitive) {
+  if (new RegExp("^[a-z_][a-z_\\d]*$", idCaseInsensitive ? "i" : "").test(label))
+    return { label, type: type2 };
+  return { label, type: type2, apply: idQuote + label + idQuote };
+}
+function completeFromSchema(schema2, tables, schemas, defaultTableName, defaultSchemaName, dialect2) {
+  var _a2;
+  let idQuote = ((_a2 = dialect2 === null || dialect2 === void 0 ? void 0 : dialect2.spec.identifierQuotes) === null || _a2 === void 0 ? void 0 : _a2[0]) || '"';
+  let top2 = new CompletionLevel(idQuote, !!(dialect2 === null || dialect2 === void 0 ? void 0 : dialect2.spec.caseInsensitiveIdentifiers));
+  let defaultSchema = defaultSchemaName ? top2.child(defaultSchemaName) : null;
+  top2.addNamespace(schema2);
+  if (tables)
+    (defaultSchema || top2).addCompletions(tables);
+  if (schemas)
+    top2.addCompletions(schemas);
+  if (defaultSchema)
+    top2.addCompletions(defaultSchema.list);
+  if (defaultTableName)
+    top2.addCompletions((defaultSchema || top2).child(defaultTableName).list);
+  return (context) => {
+    let { parents, from: from2, quoted, empty: empty2, aliases } = sourceContext(context.state, context.pos);
+    if (empty2 && !context.explicit)
+      return null;
+    if (aliases && parents.length == 1)
+      parents = aliases[parents[0]] || parents;
+    let level = top2;
+    for (let name2 of parents) {
+      while (!level.children || !level.children[name2]) {
+        if (level == top2 && defaultSchema)
+          level = defaultSchema;
+        else if (level == defaultSchema && defaultTableName)
+          level = level.child(defaultTableName);
+        else
+          return null;
+      }
+      let next2 = level.maybeChild(name2);
+      if (!next2)
+        return null;
+      level = next2;
+    }
+    let quoteAfter = quoted && context.state.sliceDoc(context.pos, context.pos + 1) == quoted;
+    let options = level.list;
+    if (level == top2 && aliases)
+      options = options.concat(Object.keys(aliases).map((name2) => ({ label: name2, type: "constant" })));
+    return {
+      from: from2,
+      to: quoteAfter ? context.pos + 1 : void 0,
+      options: maybeQuoteCompletions(quoted, options),
+      validFor: quoted ? QuotedSpan : Span
+    };
+  };
+}
+function completeKeywords(keywords2, upperCase) {
+  let completions = Object.keys(keywords2).map((keyword2) => ({
+    label: upperCase ? keyword2.toUpperCase() : keyword2,
+    type: keywords2[keyword2] == Type ? "type" : keywords2[keyword2] == Keyword ? "keyword" : "variable",
+    boost: -1
+  }));
+  return ifNotIn(["QuotedIdentifier", "SpecialVar", "String", "LineComment", "BlockComment", "."], completeFromList(completions));
+}
+let parser = /* @__PURE__ */ parser$1.configure({
+  props: [
+    /* @__PURE__ */ indentNodeProp.add({
+      Statement: /* @__PURE__ */ continuedIndent()
+    }),
+    /* @__PURE__ */ foldNodeProp.add({
+      Statement(tree, state) {
+        return { from: Math.min(tree.from + 100, state.doc.lineAt(tree.from).to), to: tree.to };
+      },
+      BlockComment(tree) {
+        return { from: tree.from + 2, to: tree.to - 2 };
+      }
+    }),
+    /* @__PURE__ */ styleTags({
+      Keyword: tags$1.keyword,
+      Type: tags$1.typeName,
+      Builtin: /* @__PURE__ */ tags$1.standard(tags$1.name),
+      Bits: tags$1.number,
+      Bytes: tags$1.string,
+      Bool: tags$1.bool,
+      Null: tags$1.null,
+      Number: tags$1.number,
+      String: tags$1.string,
+      Identifier: tags$1.name,
+      QuotedIdentifier: /* @__PURE__ */ tags$1.special(tags$1.string),
+      SpecialVar: /* @__PURE__ */ tags$1.special(tags$1.name),
+      LineComment: tags$1.lineComment,
+      BlockComment: tags$1.blockComment,
+      Operator: tags$1.operator,
+      "Semi Punctuation": tags$1.punctuation,
+      "( )": tags$1.paren,
+      "{ }": tags$1.brace,
+      "[ ]": tags$1.squareBracket
+    })
+  ]
+});
+class SQLDialect {
+  constructor(dialect2, language2, spec) {
+    this.dialect = dialect2;
+    this.language = language2;
+    this.spec = spec;
+  }
+  /**
+  Returns the language for this dialect as an extension.
+  */
+  get extension() {
+    return this.language.extension;
+  }
+  /**
+  Define a new dialect.
+  */
+  static define(spec) {
+    let d2 = dialect(spec, spec.keywords, spec.types, spec.builtin);
+    let language2 = LRLanguage.define({
+      name: "sql",
+      parser: parser.configure({
+        tokenizers: [{ from: tokens, to: tokensFor(d2) }]
+      }),
+      languageData: {
+        commentTokens: { line: "--", block: { open: "/*", close: "*/" } },
+        closeBrackets: { brackets: ["(", "[", "{", "'", '"', "`"] }
+      }
+    });
+    return new SQLDialect(d2, language2, spec);
+  }
+}
+function keywordCompletionSource(dialect2, upperCase = false) {
+  return completeKeywords(dialect2.dialect.words, upperCase);
+}
+function keywordCompletion(dialect2, upperCase = false) {
+  return dialect2.language.data.of({
+    autocomplete: keywordCompletionSource(dialect2, upperCase)
+  });
+}
+function schemaCompletionSource(config2) {
+  return config2.schema ? completeFromSchema(config2.schema, config2.tables, config2.schemas, config2.defaultTable, config2.defaultSchema, config2.dialect || StandardSQL) : () => null;
+}
+function schemaCompletion(config2) {
+  return config2.schema ? (config2.dialect || StandardSQL).language.data.of({
+    autocomplete: schemaCompletionSource(config2)
+  }) : [];
+}
+function sql(config2 = {}) {
+  let lang = config2.dialect || StandardSQL;
+  return new LanguageSupport(lang.language, [schemaCompletion(config2), keywordCompletion(lang, !!config2.upperCaseKeywords)]);
+}
+const StandardSQL = /* @__PURE__ */ SQLDialect.define({});
 function isObject$9(value) {
   var type2 = typeof value;
   return value != null && (type2 == "object" || type2 == "function");
@@ -45550,7 +46146,7 @@ function dealloc(value) {
 function delimit(type2) {
   return trim(slice$1(position$2 - 1, delimiter(type2 === 91 ? type2 + 2 : type2 === 40 ? type2 + 1 : type2)));
 }
-function whitespace$1(type2) {
+function whitespace(type2) {
   while (character = peek())
     if (character < 33)
       next();
@@ -45633,7 +46229,7 @@ function parse(value, root2, parent, rule, rules, rulesets, pseudo, points, decl
       case 10:
       case 13:
       case 32:
-        characters2 += whitespace$1(previous);
+        characters2 += whitespace(previous);
         break;
       case 92:
         characters2 += escaping(caret() - 1, 7);
@@ -53356,602 +53952,6 @@ var domToImage = { exports: {} };
 })(domToImage);
 var domToImageExports = domToImage.exports;
 const dom2image = /* @__PURE__ */ getDefaultExportFromCjs(domToImageExports);
-const whitespace = 36, LineComment = 1, BlockComment = 2, String$1 = 3, Number$1 = 4, Bool = 5, Null = 6, ParenL = 7, ParenR = 8, BraceL = 9, BraceR = 10, BracketL = 11, BracketR = 12, Semi = 13, Dot = 14, Operator = 15, Punctuation = 16, SpecialVar = 17, Identifier = 18, QuotedIdentifier = 19, Keyword = 20, Type = 21, Bits = 22, Bytes = 23, Builtin = 24;
-function isAlpha(ch) {
-  return ch >= 65 && ch <= 90 || ch >= 97 && ch <= 122 || ch >= 48 && ch <= 57;
-}
-function isHexDigit(ch) {
-  return ch >= 48 && ch <= 57 || ch >= 97 && ch <= 102 || ch >= 65 && ch <= 70;
-}
-function readLiteral(input, endQuote, backslashEscapes) {
-  for (let escaped = false; ; ) {
-    if (input.next < 0)
-      return;
-    if (input.next == endQuote && !escaped) {
-      input.advance();
-      return;
-    }
-    escaped = backslashEscapes && !escaped && input.next == 92;
-    input.advance();
-  }
-}
-function readDoubleDollarLiteral(input, tag) {
-  scan:
-    for (; ; ) {
-      if (input.next < 0)
-        return console.log("exit at end", input.pos);
-      if (input.next == 36) {
-        input.advance();
-        for (let i2 = 0; i2 < tag.length; i2++) {
-          if (input.next != tag.charCodeAt(i2))
-            continue scan;
-          input.advance();
-        }
-        if (input.next == 36) {
-          input.advance();
-          return;
-        }
-      } else {
-        input.advance();
-      }
-    }
-}
-function readPLSQLQuotedLiteral(input, openDelim) {
-  let matchingDelim = "[{<(".indexOf(String.fromCharCode(openDelim));
-  let closeDelim = matchingDelim < 0 ? openDelim : "]}>)".charCodeAt(matchingDelim);
-  for (; ; ) {
-    if (input.next < 0)
-      return;
-    if (input.next == closeDelim && input.peek(1) == 39) {
-      input.advance(2);
-      return;
-    }
-    input.advance();
-  }
-}
-function readWord(input, result) {
-  for (; ; ) {
-    if (input.next != 95 && !isAlpha(input.next))
-      break;
-    if (result != null)
-      result += String.fromCharCode(input.next);
-    input.advance();
-  }
-  return result;
-}
-function readWordOrQuoted(input) {
-  if (input.next == 39 || input.next == 34 || input.next == 96) {
-    let quote = input.next;
-    input.advance();
-    readLiteral(input, quote, false);
-  } else {
-    readWord(input);
-  }
-}
-function readBits(input, endQuote) {
-  while (input.next == 48 || input.next == 49)
-    input.advance();
-  if (endQuote && input.next == endQuote)
-    input.advance();
-}
-function readNumber(input, sawDot) {
-  for (; ; ) {
-    if (input.next == 46) {
-      if (sawDot)
-        break;
-      sawDot = true;
-    } else if (input.next < 48 || input.next > 57) {
-      break;
-    }
-    input.advance();
-  }
-  if (input.next == 69 || input.next == 101) {
-    input.advance();
-    if (input.next == 43 || input.next == 45)
-      input.advance();
-    while (input.next >= 48 && input.next <= 57)
-      input.advance();
-  }
-}
-function eol(input) {
-  while (!(input.next < 0 || input.next == 10))
-    input.advance();
-}
-function inString(ch, str2) {
-  for (let i2 = 0; i2 < str2.length; i2++)
-    if (str2.charCodeAt(i2) == ch)
-      return true;
-  return false;
-}
-const Space = " 	\r\n";
-function keywords(keywords2, types2, builtin) {
-  let result = /* @__PURE__ */ Object.create(null);
-  result["true"] = result["false"] = Bool;
-  result["null"] = result["unknown"] = Null;
-  for (let kw of keywords2.split(" "))
-    if (kw)
-      result[kw] = Keyword;
-  for (let tp of types2.split(" "))
-    if (tp)
-      result[tp] = Type;
-  for (let kw of (builtin || "").split(" "))
-    if (kw)
-      result[kw] = Builtin;
-  return result;
-}
-const SQLTypes = "array binary bit boolean char character clob date decimal double float int integer interval large national nchar nclob numeric object precision real smallint time timestamp varchar varying ";
-const SQLKeywords = "absolute action add after all allocate alter and any are as asc assertion at authorization before begin between both breadth by call cascade cascaded case cast catalog check close collate collation column commit condition connect connection constraint constraints constructor continue corresponding count create cross cube current current_date current_default_transform_group current_transform_group_for_type current_path current_role current_time current_timestamp current_user cursor cycle data day deallocate declare default deferrable deferred delete depth deref desc describe descriptor deterministic diagnostics disconnect distinct do domain drop dynamic each else elseif end end-exec equals escape except exception exec execute exists exit external fetch first for foreign found from free full function general get global go goto grant group grouping handle having hold hour identity if immediate in indicator initially inner inout input insert intersect into is isolation join key language last lateral leading leave left level like limit local localtime localtimestamp locator loop map match method minute modifies module month names natural nesting new next no none not of old on only open option or order ordinality out outer output overlaps pad parameter partial path prepare preserve primary prior privileges procedure public read reads recursive redo ref references referencing relative release repeat resignal restrict result return returns revoke right role rollback rollup routine row rows savepoint schema scroll search second section select session session_user set sets signal similar size some space specific specifictype sql sqlexception sqlstate sqlwarning start state static system_user table temporary then timezone_hour timezone_minute to trailing transaction translation treat trigger under undo union unique unnest until update usage user using value values view when whenever where while with without work write year zone ";
-const defaults = {
-  backslashEscapes: false,
-  hashComments: false,
-  spaceAfterDashes: false,
-  slashComments: false,
-  doubleQuotedStrings: false,
-  doubleDollarQuotedStrings: false,
-  unquotedBitLiterals: false,
-  treatBitsAsBytes: false,
-  charSetCasts: false,
-  plsqlQuotingMechanism: false,
-  operatorChars: "*+-%<>!=&|~^/",
-  specialVar: "?",
-  identifierQuotes: '"',
-  caseInsensitiveIdentifiers: false,
-  words: /* @__PURE__ */ keywords(SQLKeywords, SQLTypes)
-};
-function dialect(spec, kws, types2, builtin) {
-  let dialect2 = {};
-  for (let prop in defaults)
-    dialect2[prop] = (spec.hasOwnProperty(prop) ? spec : defaults)[prop];
-  if (kws)
-    dialect2.words = keywords(kws, types2 || "", builtin);
-  return dialect2;
-}
-function tokensFor(d2) {
-  return new ExternalTokenizer((input) => {
-    var _a2;
-    let { next: next2 } = input;
-    input.advance();
-    if (inString(next2, Space)) {
-      while (inString(input.next, Space))
-        input.advance();
-      input.acceptToken(whitespace);
-    } else if (next2 == 36 && d2.doubleDollarQuotedStrings) {
-      let tag = readWord(input, "");
-      if (input.next == 36) {
-        input.advance();
-        readDoubleDollarLiteral(input, tag);
-        input.acceptToken(String$1);
-      }
-    } else if (next2 == 39 || next2 == 34 && d2.doubleQuotedStrings) {
-      readLiteral(input, next2, d2.backslashEscapes);
-      input.acceptToken(String$1);
-    } else if (next2 == 35 && d2.hashComments || next2 == 47 && input.next == 47 && d2.slashComments) {
-      eol(input);
-      input.acceptToken(LineComment);
-    } else if (next2 == 45 && input.next == 45 && (!d2.spaceAfterDashes || input.peek(1) == 32)) {
-      eol(input);
-      input.acceptToken(LineComment);
-    } else if (next2 == 47 && input.next == 42) {
-      input.advance();
-      for (let depth = 1; ; ) {
-        let cur2 = input.next;
-        if (input.next < 0)
-          break;
-        input.advance();
-        if (cur2 == 42 && input.next == 47) {
-          depth--;
-          input.advance();
-          if (!depth)
-            break;
-        } else if (cur2 == 47 && input.next == 42) {
-          depth++;
-          input.advance();
-        }
-      }
-      input.acceptToken(BlockComment);
-    } else if ((next2 == 101 || next2 == 69) && input.next == 39) {
-      input.advance();
-      readLiteral(input, 39, true);
-      input.acceptToken(String$1);
-    } else if ((next2 == 110 || next2 == 78) && input.next == 39 && d2.charSetCasts) {
-      input.advance();
-      readLiteral(input, 39, d2.backslashEscapes);
-      input.acceptToken(String$1);
-    } else if (next2 == 95 && d2.charSetCasts) {
-      for (let i2 = 0; ; i2++) {
-        if (input.next == 39 && i2 > 1) {
-          input.advance();
-          readLiteral(input, 39, d2.backslashEscapes);
-          input.acceptToken(String$1);
-          break;
-        }
-        if (!isAlpha(input.next))
-          break;
-        input.advance();
-      }
-    } else if (d2.plsqlQuotingMechanism && (next2 == 113 || next2 == 81) && input.next == 39 && input.peek(1) > 0 && !inString(input.peek(1), Space)) {
-      let openDelim = input.peek(1);
-      input.advance(2);
-      readPLSQLQuotedLiteral(input, openDelim);
-      input.acceptToken(String$1);
-    } else if (next2 == 40) {
-      input.acceptToken(ParenL);
-    } else if (next2 == 41) {
-      input.acceptToken(ParenR);
-    } else if (next2 == 123) {
-      input.acceptToken(BraceL);
-    } else if (next2 == 125) {
-      input.acceptToken(BraceR);
-    } else if (next2 == 91) {
-      input.acceptToken(BracketL);
-    } else if (next2 == 93) {
-      input.acceptToken(BracketR);
-    } else if (next2 == 59) {
-      input.acceptToken(Semi);
-    } else if (d2.unquotedBitLiterals && next2 == 48 && input.next == 98) {
-      input.advance();
-      readBits(input);
-      input.acceptToken(Bits);
-    } else if ((next2 == 98 || next2 == 66) && (input.next == 39 || input.next == 34)) {
-      const quoteStyle = input.next;
-      input.advance();
-      if (d2.treatBitsAsBytes) {
-        readLiteral(input, quoteStyle, d2.backslashEscapes);
-        input.acceptToken(Bytes);
-      } else {
-        readBits(input, quoteStyle);
-        input.acceptToken(Bits);
-      }
-    } else if (next2 == 48 && (input.next == 120 || input.next == 88) || (next2 == 120 || next2 == 88) && input.next == 39) {
-      let quoted = input.next == 39;
-      input.advance();
-      while (isHexDigit(input.next))
-        input.advance();
-      if (quoted && input.next == 39)
-        input.advance();
-      input.acceptToken(Number$1);
-    } else if (next2 == 46 && input.next >= 48 && input.next <= 57) {
-      readNumber(input, true);
-      input.acceptToken(Number$1);
-    } else if (next2 == 46) {
-      input.acceptToken(Dot);
-    } else if (next2 >= 48 && next2 <= 57) {
-      readNumber(input, false);
-      input.acceptToken(Number$1);
-    } else if (inString(next2, d2.operatorChars)) {
-      while (inString(input.next, d2.operatorChars))
-        input.advance();
-      input.acceptToken(Operator);
-    } else if (inString(next2, d2.specialVar)) {
-      if (input.next == next2)
-        input.advance();
-      readWordOrQuoted(input);
-      input.acceptToken(SpecialVar);
-    } else if (inString(next2, d2.identifierQuotes)) {
-      readLiteral(input, next2, false);
-      input.acceptToken(QuotedIdentifier);
-    } else if (next2 == 58 || next2 == 44) {
-      input.acceptToken(Punctuation);
-    } else if (isAlpha(next2)) {
-      let word = readWord(input, String.fromCharCode(next2));
-      input.acceptToken(input.next == 46 || input.peek(-word.length - 1) == 46 ? Identifier : (_a2 = d2.words[word.toLowerCase()]) !== null && _a2 !== void 0 ? _a2 : Identifier);
-    }
-  });
-}
-const tokens = /* @__PURE__ */ tokensFor(defaults);
-const parser$1 = /* @__PURE__ */ LRParser.deserialize({
-  version: 14,
-  states: "%vQ]QQOOO#wQRO'#DSO$OQQO'#CwO%eQQO'#CxO%lQQO'#CyO%sQQO'#CzOOQQ'#DS'#DSOOQQ'#C}'#C}O'UQRO'#C{OOQQ'#Cv'#CvOOQQ'#C|'#C|Q]QQOOQOQQOOO'`QQO'#DOO(xQRO,59cO)PQQO,59cO)UQQO'#DSOOQQ,59d,59dO)cQQO,59dOOQQ,59e,59eO)jQQO,59eOOQQ,59f,59fO)qQQO,59fOOQQ-E6{-E6{OOQQ,59b,59bOOQQ-E6z-E6zOOQQ,59j,59jOOQQ-E6|-E6|O+VQRO1G.}O+^QQO,59cOOQQ1G/O1G/OOOQQ1G/P1G/POOQQ1G/Q1G/QP+kQQO'#C}O+rQQO1G.}O)PQQO,59cO,PQQO'#Cw",
-  stateData: ",[~OtOSPOSQOS~ORUOSUOTUOUUOVROXSOZTO]XO^QO_UO`UOaPObPOcPOdUOeUOfUOgUOhUO~O^]ORvXSvXTvXUvXVvXXvXZvX]vX_vX`vXavXbvXcvXdvXevXfvXgvXhvX~OsvX~P!jOa_Ob_Oc_O~ORUOSUOTUOUUOVROXSOZTO^tO_UO`UOa`Ob`Oc`OdUOeUOfUOgUOhUO~OWaO~P$ZOYcO~P$ZO[eO~P$ZORUOSUOTUOUUOVROXSOZTO^QO_UO`UOaPObPOcPOdUOeUOfUOgUOhUO~O]hOsoX~P%zOajObjOcjO~O^]ORkaSkaTkaUkaVkaXkaZka]ka_ka`kaakabkackadkaekafkagkahka~Oska~P'kO^]O~OWvXYvX[vX~P!jOWnO~P$ZOYoO~P$ZO[pO~P$ZO^]ORkiSkiTkiUkiVkiXkiZki]ki_ki`kiakibkickidkiekifkigkihki~Oski~P)xOWkaYka[ka~P'kO]hO~P$ZOWkiYki[ki~P)xOasObsOcsO~O",
-  goto: "#hwPPPPPPPPPPPPPPPPPPPPPPPPPPx||||!Y!^!d!xPPP#[TYOZeUORSTWZbdfqT[OZQZORiZSWOZQbRQdSQfTZgWbdfqQ^PWk^lmrQl_Qm`RrseVORSTWZbdfq",
-  nodeNames: "⚠ LineComment BlockComment String Number Bool Null ( ) { } [ ] ; . Operator Punctuation SpecialVar Identifier QuotedIdentifier Keyword Type Bits Bytes Builtin Script Statement CompositeIdentifier Parens Braces Brackets Statement",
-  maxTerm: 38,
-  nodeProps: [
-    ["isolate", -4, 1, 2, 3, 19, ""]
-  ],
-  skippedNodes: [0, 1, 2],
-  repeatNodeCount: 3,
-  tokenData: "RORO",
-  tokenizers: [0, tokens],
-  topRules: { "Script": [0, 25] },
-  tokenPrec: 0
-});
-function tokenBefore(tree) {
-  let cursor = tree.cursor().moveTo(tree.from, -1);
-  while (/Comment/.test(cursor.name))
-    cursor.moveTo(cursor.from, -1);
-  return cursor.node;
-}
-function idName(doc2, node2) {
-  let text2 = doc2.sliceString(node2.from, node2.to);
-  let quoted = /^([`'"])(.*)\1$/.exec(text2);
-  return quoted ? quoted[2] : text2;
-}
-function plainID(node2) {
-  return node2 && (node2.name == "Identifier" || node2.name == "QuotedIdentifier");
-}
-function pathFor(doc2, id2) {
-  if (id2.name == "CompositeIdentifier") {
-    let path2 = [];
-    for (let ch = id2.firstChild; ch; ch = ch.nextSibling)
-      if (plainID(ch))
-        path2.push(idName(doc2, ch));
-    return path2;
-  }
-  return [idName(doc2, id2)];
-}
-function parentsFor(doc2, node2) {
-  for (let path2 = []; ; ) {
-    if (!node2 || node2.name != ".")
-      return path2;
-    let name2 = tokenBefore(node2);
-    if (!plainID(name2))
-      return path2;
-    path2.unshift(idName(doc2, name2));
-    node2 = tokenBefore(name2);
-  }
-}
-function sourceContext(state, startPos) {
-  let pos = syntaxTree(state).resolveInner(startPos, -1);
-  let aliases = getAliases(state.doc, pos);
-  if (pos.name == "Identifier" || pos.name == "QuotedIdentifier" || pos.name == "Keyword") {
-    return {
-      from: pos.from,
-      quoted: pos.name == "QuotedIdentifier" ? state.doc.sliceString(pos.from, pos.from + 1) : null,
-      parents: parentsFor(state.doc, tokenBefore(pos)),
-      aliases
-    };
-  }
-  if (pos.name == ".") {
-    return { from: startPos, quoted: null, parents: parentsFor(state.doc, pos), aliases };
-  } else {
-    return { from: startPos, quoted: null, parents: [], empty: true, aliases };
-  }
-}
-const EndFrom = /* @__PURE__ */ new Set(/* @__PURE__ */ "where group having order union intersect except all distinct limit offset fetch for".split(" "));
-function getAliases(doc2, at) {
-  let statement;
-  for (let parent = at; !statement; parent = parent.parent) {
-    if (!parent)
-      return null;
-    if (parent.name == "Statement")
-      statement = parent;
-  }
-  let aliases = null;
-  for (let scan = statement.firstChild, sawFrom = false, prevID = null; scan; scan = scan.nextSibling) {
-    let kw = scan.name == "Keyword" ? doc2.sliceString(scan.from, scan.to).toLowerCase() : null;
-    let alias = null;
-    if (!sawFrom) {
-      sawFrom = kw == "from";
-    } else if (kw == "as" && prevID && plainID(scan.nextSibling)) {
-      alias = idName(doc2, scan.nextSibling);
-    } else if (kw && EndFrom.has(kw)) {
-      break;
-    } else if (prevID && plainID(scan)) {
-      alias = idName(doc2, scan);
-    }
-    if (alias) {
-      if (!aliases)
-        aliases = /* @__PURE__ */ Object.create(null);
-      aliases[alias] = pathFor(doc2, prevID);
-    }
-    prevID = /Identifier$/.test(scan.name) ? scan : null;
-  }
-  return aliases;
-}
-function maybeQuoteCompletions(quote, completions) {
-  if (!quote)
-    return completions;
-  return completions.map((c2) => Object.assign(Object.assign({}, c2), { label: c2.label[0] == quote ? c2.label : quote + c2.label + quote, apply: void 0 }));
-}
-const Span = /^\w*$/, QuotedSpan = /^[`'"]?\w*[`'"]?$/;
-function isSelfTag(namespace) {
-  return namespace.self && typeof namespace.self.label == "string";
-}
-class CompletionLevel {
-  constructor(idQuote, idCaseInsensitive) {
-    this.idQuote = idQuote;
-    this.idCaseInsensitive = idCaseInsensitive;
-    this.list = [];
-    this.children = void 0;
-  }
-  child(name2) {
-    let children = this.children || (this.children = /* @__PURE__ */ Object.create(null));
-    let found = children[name2];
-    if (found)
-      return found;
-    if (name2 && !this.list.some((c2) => c2.label == name2))
-      this.list.push(nameCompletion(name2, "type", this.idQuote, this.idCaseInsensitive));
-    return children[name2] = new CompletionLevel(this.idQuote, this.idCaseInsensitive);
-  }
-  maybeChild(name2) {
-    return this.children ? this.children[name2] : null;
-  }
-  addCompletion(option) {
-    let found = this.list.findIndex((o2) => o2.label == option.label);
-    if (found > -1)
-      this.list[found] = option;
-    else
-      this.list.push(option);
-  }
-  addCompletions(completions) {
-    for (let option of completions)
-      this.addCompletion(typeof option == "string" ? nameCompletion(option, "property", this.idQuote, this.idCaseInsensitive) : option);
-  }
-  addNamespace(namespace) {
-    if (Array.isArray(namespace)) {
-      this.addCompletions(namespace);
-    } else if (isSelfTag(namespace)) {
-      this.addNamespace(namespace.children);
-    } else {
-      this.addNamespaceObject(namespace);
-    }
-  }
-  addNamespaceObject(namespace) {
-    for (let name2 of Object.keys(namespace)) {
-      let children = namespace[name2], self2 = null;
-      let parts = name2.replace(/\\?\./g, (p2) => p2 == "." ? "\0" : p2).split("\0");
-      let scope = this;
-      if (isSelfTag(children)) {
-        self2 = children.self;
-        children = children.children;
-      }
-      for (let i2 = 0; i2 < parts.length; i2++) {
-        if (self2 && i2 == parts.length - 1)
-          scope.addCompletion(self2);
-        scope = scope.child(parts[i2].replace(/\\\./g, "."));
-      }
-      scope.addNamespace(children);
-    }
-  }
-}
-function nameCompletion(label, type2, idQuote, idCaseInsensitive) {
-  if (new RegExp("^[a-z_][a-z_\\d]*$", idCaseInsensitive ? "i" : "").test(label))
-    return { label, type: type2 };
-  return { label, type: type2, apply: idQuote + label + idQuote };
-}
-function completeFromSchema(schema2, tables, schemas, defaultTableName, defaultSchemaName, dialect2) {
-  var _a2;
-  let idQuote = ((_a2 = dialect2 === null || dialect2 === void 0 ? void 0 : dialect2.spec.identifierQuotes) === null || _a2 === void 0 ? void 0 : _a2[0]) || '"';
-  let top2 = new CompletionLevel(idQuote, !!(dialect2 === null || dialect2 === void 0 ? void 0 : dialect2.spec.caseInsensitiveIdentifiers));
-  let defaultSchema = defaultSchemaName ? top2.child(defaultSchemaName) : null;
-  top2.addNamespace(schema2);
-  if (tables)
-    (defaultSchema || top2).addCompletions(tables);
-  if (schemas)
-    top2.addCompletions(schemas);
-  if (defaultSchema)
-    top2.addCompletions(defaultSchema.list);
-  if (defaultTableName)
-    top2.addCompletions((defaultSchema || top2).child(defaultTableName).list);
-  return (context) => {
-    let { parents, from: from2, quoted, empty: empty2, aliases } = sourceContext(context.state, context.pos);
-    if (empty2 && !context.explicit)
-      return null;
-    if (aliases && parents.length == 1)
-      parents = aliases[parents[0]] || parents;
-    let level = top2;
-    for (let name2 of parents) {
-      while (!level.children || !level.children[name2]) {
-        if (level == top2 && defaultSchema)
-          level = defaultSchema;
-        else if (level == defaultSchema && defaultTableName)
-          level = level.child(defaultTableName);
-        else
-          return null;
-      }
-      let next2 = level.maybeChild(name2);
-      if (!next2)
-        return null;
-      level = next2;
-    }
-    let quoteAfter = quoted && context.state.sliceDoc(context.pos, context.pos + 1) == quoted;
-    let options = level.list;
-    if (level == top2 && aliases)
-      options = options.concat(Object.keys(aliases).map((name2) => ({ label: name2, type: "constant" })));
-    return {
-      from: from2,
-      to: quoteAfter ? context.pos + 1 : void 0,
-      options: maybeQuoteCompletions(quoted, options),
-      validFor: quoted ? QuotedSpan : Span
-    };
-  };
-}
-function completeKeywords(keywords2, upperCase) {
-  let completions = Object.keys(keywords2).map((keyword2) => ({
-    label: upperCase ? keyword2.toUpperCase() : keyword2,
-    type: keywords2[keyword2] == Type ? "type" : keywords2[keyword2] == Keyword ? "keyword" : "variable",
-    boost: -1
-  }));
-  return ifNotIn(["QuotedIdentifier", "SpecialVar", "String", "LineComment", "BlockComment", "."], completeFromList(completions));
-}
-let parser = /* @__PURE__ */ parser$1.configure({
-  props: [
-    /* @__PURE__ */ indentNodeProp.add({
-      Statement: /* @__PURE__ */ continuedIndent()
-    }),
-    /* @__PURE__ */ foldNodeProp.add({
-      Statement(tree, state) {
-        return { from: Math.min(tree.from + 100, state.doc.lineAt(tree.from).to), to: tree.to };
-      },
-      BlockComment(tree) {
-        return { from: tree.from + 2, to: tree.to - 2 };
-      }
-    }),
-    /* @__PURE__ */ styleTags({
-      Keyword: tags$1.keyword,
-      Type: tags$1.typeName,
-      Builtin: /* @__PURE__ */ tags$1.standard(tags$1.name),
-      Bits: tags$1.number,
-      Bytes: tags$1.string,
-      Bool: tags$1.bool,
-      Null: tags$1.null,
-      Number: tags$1.number,
-      String: tags$1.string,
-      Identifier: tags$1.name,
-      QuotedIdentifier: /* @__PURE__ */ tags$1.special(tags$1.string),
-      SpecialVar: /* @__PURE__ */ tags$1.special(tags$1.name),
-      LineComment: tags$1.lineComment,
-      BlockComment: tags$1.blockComment,
-      Operator: tags$1.operator,
-      "Semi Punctuation": tags$1.punctuation,
-      "( )": tags$1.paren,
-      "{ }": tags$1.brace,
-      "[ ]": tags$1.squareBracket
-    })
-  ]
-});
-class SQLDialect {
-  constructor(dialect2, language2, spec) {
-    this.dialect = dialect2;
-    this.language = language2;
-    this.spec = spec;
-  }
-  /**
-  Returns the language for this dialect as an extension.
-  */
-  get extension() {
-    return this.language.extension;
-  }
-  /**
-  Define a new dialect.
-  */
-  static define(spec) {
-    let d2 = dialect(spec, spec.keywords, spec.types, spec.builtin);
-    let language2 = LRLanguage.define({
-      name: "sql",
-      parser: parser.configure({
-        tokenizers: [{ from: tokens, to: tokensFor(d2) }]
-      }),
-      languageData: {
-        commentTokens: { line: "--", block: { open: "/*", close: "*/" } },
-        closeBrackets: { brackets: ["(", "[", "{", "'", '"', "`"] }
-      }
-    });
-    return new SQLDialect(d2, language2, spec);
-  }
-}
-function keywordCompletionSource(dialect2, upperCase = false) {
-  return completeKeywords(dialect2.dialect.words, upperCase);
-}
-function keywordCompletion(dialect2, upperCase = false) {
-  return dialect2.language.data.of({
-    autocomplete: keywordCompletionSource(dialect2, upperCase)
-  });
-}
-function schemaCompletionSource(config2) {
-  return config2.schema ? completeFromSchema(config2.schema, config2.tables, config2.schemas, config2.defaultTable, config2.defaultSchema, config2.dialect || StandardSQL) : () => null;
-}
-function schemaCompletion(config2) {
-  return config2.schema ? (config2.dialect || StandardSQL).language.data.of({
-    autocomplete: schemaCompletionSource(config2)
-  }) : [];
-}
-function sql(config2 = {}) {
-  let lang = config2.dialect || StandardSQL;
-  return new LanguageSupport(lang.language, [schemaCompletion(config2), keywordCompletion(lang, !!config2.upperCaseKeywords)]);
-}
-const StandardSQL = /* @__PURE__ */ SQLDialect.define({});
 var e, t, n, i, r = function(e2, t2) {
   return { name: e2, value: void 0 === t2 ? -1 : t2, delta: 0, entries: [], id: "v2-".concat(Date.now(), "-").concat(Math.floor(8999999999999 * Math.random()) + 1e12) };
 }, a = function(e2, t2) {
