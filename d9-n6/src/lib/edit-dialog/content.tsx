@@ -157,12 +157,13 @@ export const StepUseHandler = (props: { repaint: () => void }) => {
 };
 
 /**
- * for all reconfigure functions, return null/undefined means no change, return a value means change
+ * for all reconfigure functions, return null/undefined means no change, return a value means change.
+ * the first returns not null/undefined is efficient.
  */
-export interface StepDefsReconfigurer<F extends PipelineStepDef = PipelineStepDef, M extends ConfigurableModel = ConfigurableModel> {
-	prepare: (prepare: StepNodeConfigurer<F, M>['prepare'], model: StepNodeModel) => Undefinable<StepNodeConfigurer<F, M>['prepare']>;
-	confirm: (confirm: StepNodeConfigurer<F, M>['confirm'], model: StepNodeModel) => Undefinable<StepNodeConfigurer<F, M>['confirm']>;
-	discard?: (discard: StepNodeConfigurer<F, M>['discard'], model: StepNodeModel) => Undefinable<StepNodeConfigurer<F, M>['discard']>;
+export interface StepDefsReconfigurer {
+	prepare: (prepare: StepNodeConfigurer['prepare'], model: StepNodeModel) => Undefinable<StepNodeConfigurer['prepare']>;
+	confirm: (confirm: StepNodeConfigurer['confirm'], model: StepNodeModel) => Undefinable<StepNodeConfigurer['confirm']>;
+	discard?: (discard: StepNodeConfigurer['discard'], model: StepNodeModel) => Undefinable<StepNodeConfigurer['discard']>;
 	properties: (properties: Array<ConfigurableElement>, model: StepNodeModel) => Undefinable<Array<ConfigurableElement>>;
 }
 

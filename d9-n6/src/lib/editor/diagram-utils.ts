@@ -1,4 +1,5 @@
 import {DiagramModel, LinkModel, NodeModel} from '@projectstorm/react-diagrams';
+import {Undefinable} from '@rainbow-d9/n1';
 import {createStepNode, findStepDef, setNodePosition} from '../configurable-model';
 import {DEFAULTS} from '../constants';
 import {
@@ -38,16 +39,16 @@ export interface DiagramNodePosition {
 
 export const askStartNodePosition = (def: FileDef): DiagramNodePosition => {
 	const diagramDef = def as FileDiagramDef;
-	if (diagramDef.$diagram?.$start?.$x != null && diagramDef.$diagram?.$start?.$y != null) {
-		return {x: diagramDef.$diagram.$start.$x, y: diagramDef.$diagram.$start.$y, appointed: true};
+	if (diagramDef.$diagram?.$startX != null && diagramDef.$diagram?.$startY != null) {
+		return {x: diagramDef.$diagram.$startX, y: diagramDef.$diagram.$startY, appointed: true};
 	} else {
 		return {x: START_X, y: START_Y, appointed: false};
 	}
 };
 export const askEndNodePosition = (def: FileDef): DiagramNodePosition => {
 	const diagramDef = def as FileDiagramDef;
-	if (diagramDef.$diagram?.$end?.$x != null && diagramDef.$diagram?.$end?.$y != null) {
-		return {x: diagramDef.$diagram.$end.$x, y: diagramDef.$diagram.$end.$y, appointed: true};
+	if (diagramDef.$diagram?.$endX != null && diagramDef.$diagram?.$endY != null) {
+		return {x: diagramDef.$diagram.$endX, y: diagramDef.$diagram.$endY, appointed: true};
 	} else {
 		return {x: START_X, y: START_Y, appointed: false};
 	}
@@ -56,8 +57,8 @@ export const askStepNodePosition = (def: PipelineStepDef): DiagramNodePosition =
 	if (isPipelineDef(def as unknown as FileDef)) {
 		// step def might be possibly disguised by file def
 		const diagramDef = def as unknown as FileDiagramDef;
-		if (diagramDef.$diagram?.$virtualStep?.$x != null && diagramDef.$diagram?.$virtualStep?.$y != null) {
-			return {x: diagramDef.$diagram.$virtualStep.$x, y: diagramDef.$diagram.$virtualStep.$y, appointed: true};
+		if (diagramDef.$diagram?.$virtualStepX != null && diagramDef.$diagram?.$virtualStepY != null) {
+			return {x: diagramDef.$diagram.$virtualStepX, y: diagramDef.$diagram.$virtualStepY, appointed: true};
 		} else {
 			return {x: START_X, y: START_Y, appointed: false};
 		}
@@ -299,4 +300,39 @@ export const createDiagramHandlers = (options: {
 			}, 100);
 		}
 	};
+};
+
+/**
+ * for all reconfigure functions, return null/undefined means no change, return a value means change
+ */
+export interface StepDefsFolder<F extends PipelineStepDef = PipelineStepDef> {
+	accept: (step: F) => boolean;
+	switch: (step: PipelineStepDiagramDef, fold: boolean) => void;
+	askSubStep: (step: F) => Undefinable<Array<PipelineStepDef>>;
+}
+
+const StepDefsFolders: Array<StepDefsFolder> = [];
+export const registerStepDefsFolders = (...folders: Array<StepDefsFolder>) => {
+	(folders || []).forEach(folder => {
+		if (!StepDefsFolders.includes(folder)) {
+			StepDefsFolders.push(folder);
+		}
+	});
+};
+
+export const switchAllNodesFolding = (file: FileDef, fold: boolean) => {
+	const switchFolding = (step: PipelineStepDiagramDef) => {
+		for (const folder of StepDefsFolders) {
+			if (folder.accept(step)) {
+				folder.switch(step, fold);
+				(folder.askSubStep(step) ?? []).forEach(subStep => switchFolding(subStep as PipelineStepDiagramDef));
+				break;
+			}
+		}
+	};
+	if (isPipelineDef(file)) {
+		(file.steps ?? []).forEach(step => switchFolding(step as PipelineStepDiagramDef));
+	} else {
+		switchFolding(file as unknown as PipelineStepDiagramDef);
+	}
 };

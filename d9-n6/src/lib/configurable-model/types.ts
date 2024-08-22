@@ -2,9 +2,10 @@ import {LinkModel, NodeModel, PortModel} from '@projectstorm/react-diagrams';
 import {Undefinable} from '@rainbow-d9/n1';
 import {FileDef, PipelineStepDef, PipelineStepRegisterKey} from '../definition';
 import {HandledNodeModel, NodeHandlers, StepNodeModel} from '../diagram';
-import {ConfigurableElement, ConfigurableElementAnchor, ConfigurableModel} from '../edit-dialog';
+import {ConfigurableElement, ConfigurableElementAnchor, ConfigurableModel, StepDefsReconfigurer} from '../edit-dialog';
+import {StepDefsFolder} from '../editor';
 import {MarkdownContent, PlaygroundModuleAssistant} from '../types';
-import {StepPort} from './step-def';
+import {FirstSubStepPortContainerFind, StepPort} from './step-def';
 
 export type ConfigChangesConfirmed = Array<ConfigurableElementAnchor> | true;
 
@@ -44,4 +45,9 @@ export interface StepNodeConfigurer<F extends PipelineStepDef = PipelineStepDef,
 	/** port for sub-steps must be the first one of returning array */
 	findSubPorts: (node: StepNodeModel) => Undefinable<Array<PortModel>>;
 	helpDocs: MarkdownContent;
+	folder: StepDefsFolder<F>;
+	/** reconfigurer */
+	reconfigurer?: StepDefsReconfigurer;
+	/** first sub step port container finder */
+	firstSubStepPortContainerFind?: FirstSubStepPortContainerFind;
 }

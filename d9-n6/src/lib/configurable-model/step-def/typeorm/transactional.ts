@@ -19,6 +19,10 @@ export const TypeOrmTransactionalStepDefs =
 		prepare: ['and', prepare()],
 		switchUse: ['keep', switchUse],
 		confirm: ['and', confirm()],
+		folder: {
+			switch: CommonStepDefs.switchFoldWhenSubNodesExist,
+			askSubStep: CommonStepDefs.askSubSteps
+		},
 		properties: [CommonStepDefs.createMainContentElement(elementDatasource, elementTransaction)],
 		ports: [
 			{key: 'datasource', port: PortDatasource},

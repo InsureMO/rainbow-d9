@@ -1,9 +1,16 @@
 import {DiagramEngine} from '@projectstorm/react-diagrams-core';
 import {Undefinable} from '@rainbow-d9/n1';
 import {ReactNode} from 'react';
-import {AllInPipelineStepDef, FileDef, PipelineStepDef} from '../../../definition';
+import {
+	AllInPipelineStepDef,
+	FileDef,
+	PipelineStepDef,
+	PipelineStepDiagramDef,
+	SetsLikePipelineStepDef
+} from '../../../definition';
 import {HandledNodeModel, StepNodeModel} from '../../../diagram';
 import {ConfigurableElement, ConfigurableElementAnchor, ConfigurableModel} from '../../../edit-dialog';
+import {StepDefsFolder} from '../../../editor';
 import {ConfigChangesConfirmed, ConfirmNodeOptions, CreateSubNodesOptions, StepNodeConfigurer} from '../../types';
 
 export enum MergeType {
@@ -110,6 +117,7 @@ export type AndConfirmReturned = Array<ConfigurableElementAnchor> | AndConfirmCo
 export type AndConfirm<F extends AllInPipelineStepDef, M extends CommonStepDefModel> = (model: M, def: F, file: FileDef, options: ConfirmNodeOptions) => AndConfirmReturned;
 
 export interface CreateStepNodeConfigurerOptions<F extends AllInPipelineStepDef, M extends CommonStepDefModel> {
+	// for myself
 	use: F['use'];
 	prepare?: ['replace', StepNodeConfigurer<F, M>['prepare']] | ['and', AndPrepare<F, M>];
 	switchUse?: ['replace', StepNodeConfigurer<F, M>['switchUse']] | ['keep', Array<string>];
@@ -120,6 +128,11 @@ export interface CreateStepNodeConfigurerOptions<F extends AllInPipelineStepDef,
 	createSubNodes?: StepNodeConfigurer<F, M>['createSubNodes'];
 	findSubPorts?: StepNodeConfigurer<F, M>['findSubPorts'];
 	helpDocs: string;
+	/** cares about  */
+	folder?: Partial<Omit<StepNodeConfigurer<F, M>['folder'], 'accept'>>;
+	// configurations impact all nodes
+	reconfigurer?: StepNodeConfigurer<F, M>['reconfigurer'];
+	firstSubStepPortContainerFind?: StepNodeConfigurer<F, M>['firstSubStepPortContainerFind'];
 }
 
 export interface CommonStepDefsType
@@ -131,6 +144,7 @@ export interface CommonStepDefsType
 	prepare: <F extends AllInPipelineStepDef, M extends CommonStepDefModel>(def: F, and?: AndPrepare<F, M>) => M;
 	switchUse: (model: ConfigurableModel, keptPropNames: Array<string>, originalUse: PipelineStepDef['use']) => void;
 	confirm: <F extends AllInPipelineStepDef, M extends CommonStepDefModel>(model: M, def: F, file: FileDef, options: ConfirmNodeOptions, and?: AndConfirm<F, M>) => ConfigChangesConfirmed;
+	folder: StepDefsFolder;
 	// nodes
 	createSubNodes: (node: StepNodeModel, options: CreateSubNodesOptions) => Undefinable<Array<HandledNodeModel>>;
 	createSubNodesAndEndNode: (node: StepNodeModel, options: CreateSubNodesAndEndNodeOptions) => Undefinable<HandledNodeModel>;
@@ -138,6 +152,8 @@ export interface CommonStepDefsType
 	createParallelSubNodesAndEndNode: (model: StepNodeModel, options: CreateSubNodesOptions) => Undefinable<HandledNodeModel>;
 	createConditionalSubNodesAndEndNode: (model: StepNodeModel, options: CreateSubNodesOptions) => Undefinable<HandledNodeModel>;
 	createRoutesSubNodesAndEndNode: (model: StepNodeModel, options: CreateSubNodesOptions) => Undefinable<HandledNodeModel>;
+	switchFoldWhenSubNodesExist: (step: PipelineStepDiagramDef, fold: boolean) => void;
+	askSubSteps: (step: SetsLikePipelineStepDef) => Undefinable<Array<PipelineStepDef>>;
 	// elements
 	createMainContentElement: (...children: Array<ConfigurableElement>) => ConfigurableElement;
 	createSwitchableSnippetElement: <M extends CommonStepDefModel>(options: SwitchableSnippetElementOptions<M>) => ConfigurableElement;

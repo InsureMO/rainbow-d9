@@ -4,6 +4,7 @@ import React, {ReactNode, useEffect, useRef} from 'react';
 import {Labels} from '../labels';
 import {PlaygroundEventTypes, usePlaygroundEventBus} from '../playground-event-bus';
 import {EditorProps} from '../types';
+import {switchAllNodesFolding} from './diagram-utils';
 import {ErrorBoundary} from './error-boundary';
 import {EditorKernelDiagramStatus, EditorKernelRefState, firstPaint, paint, repaint, usePaint} from './painter';
 import {Toolbar} from './toolbar';
@@ -112,9 +113,19 @@ export const EditorKernel = (props: EditorProps) => {
 			});
 			forceUpdate();
 		};
+		const switchFolding = (fold: boolean) => {
+			switchAllNodesFolding(stateRef.current.def!, fold);
+			onRepaint();
+		};
+		const onFoldAllNodes = () => switchFolding(true);
+		const onUnfoldAllNodes = () => switchFolding(false);
 		on(PlaygroundEventTypes.REPAINT, onRepaint);
+		on(PlaygroundEventTypes.FOLD_ALL_NODES, onFoldAllNodes);
+		on(PlaygroundEventTypes.UNFOLD_ALL_NODES, onUnfoldAllNodes);
 		return () => {
 			off(PlaygroundEventTypes.REPAINT, onRepaint);
+			off(PlaygroundEventTypes.FOLD_ALL_NODES, onFoldAllNodes);
+			off(PlaygroundEventTypes.UNFOLD_ALL_NODES, onUnfoldAllNodes);
 		};
 	}, [on, off, fire, replace, forceUpdate, assistant]);
 	usePaint(stateRef);

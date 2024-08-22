@@ -52,6 +52,9 @@ export const FirstSubStepPortContainer = styled.div.attrs({[DOM_KEY_WIDGET]: 'o2
 `;
 
 export type FirstSubStepPortContainerFC = FC<{ children: ReactNode }>;
+/**
+ * the first find which returns not null/undefined is efficient
+ */
 export type FirstSubStepPortContainerFind = (step: PipelineStepDef, parent: PipelineStepDef) => Undefinable<FirstSubStepPortContainerFC>;
 
 export const FirstSubStepPortForRuleCheckContainer = styled.div.attrs({[DOM_KEY_WIDGET]: 'o23-playground-route-test-port'})`

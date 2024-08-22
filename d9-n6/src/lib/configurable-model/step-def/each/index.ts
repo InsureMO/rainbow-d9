@@ -36,6 +36,10 @@ export const EachStepDefs =
 				}
 			};
 		}],
+		folder: {
+			switch: CommonStepDefs.switchFoldWhenSubNodesExist,
+			askSubStep: CommonStepDefs.askSubSteps
+		},
 		properties: [
 			CommonStepDefs.createMainContentElement({
 				code: 'original-content-name', label: Labels.StepEachOriginalContentName,

@@ -1,35 +1,15 @@
 import {Undefinable} from '@rainbow-d9/n1';
 import {FileDef, PipelineStepDef, RoutesPipelineStepDef, StandardPipelineStepRegisterKey} from '../../../definition';
 import {StepNodeModel} from '../../../diagram';
-import {
-	ConfigurableElement,
-	ConfigurableModel,
-	registerStepDefsReconfigurers,
-	StepDefsReconfigurer
-} from '../../../edit-dialog';
+import {ConfigurableElement, ConfigurableModel, StepDefsReconfigurer} from '../../../edit-dialog';
 import {HelpDocs} from '../../../help-docs';
 import {ConfigChangesConfirmed, ConfirmNodeOptions, StepNodeConfigurer} from '../../types';
 import {registerStepDef} from '../all-step-defs';
-import {
-	CommonStepDefModel,
-	CommonStepDefs,
-	FirstSubStepPortForRouteTest,
-	registerFirstSubStepPortContainerFinds,
-	RouteTestStepDefModel
-} from '../common';
+import {CommonStepDefModel, CommonStepDefs, FirstSubStepPortForRouteTest, RouteTestStepDefModel} from '../common';
 
 export interface RoutesStepDefModel extends CommonStepDefModel {
 	use: StandardPipelineStepRegisterKey.ROUTES_SETS;
 }
-
-export const RoutesStepDefs =
-	CommonStepDefs.createStepNodeConfigurer<RoutesPipelineStepDef, RoutesStepDefModel>({
-		use: StandardPipelineStepRegisterKey.ROUTES_SETS,
-		ports: [{key: 'steps', port: CommonStepDefs.prebuiltPorts.steps}],
-		createSubNodes: CommonStepDefs.createRoutesSubNodesAndEndNode,
-		helpDocs: HelpDocs.routesStep
-	});
-registerStepDef(RoutesStepDefs);
 
 const getParentDef = (model: StepNodeModel): RoutesPipelineStepDef => {
 	return model.getSubOf() as RoutesPipelineStepDef;
@@ -81,11 +61,30 @@ export const RoutesStepCheckReconfigurer: StepDefsReconfigurer = {
 		return CommonStepDefs.reconfigurePropertiesWithRouteCheck(properties, model);
 	}
 };
-registerStepDefsReconfigurers(RoutesStepCheckReconfigurer);
-registerFirstSubStepPortContainerFinds((step, parent) => {
-	if (parent.use !== StandardPipelineStepRegisterKey.ROUTES_SETS) {
-		return (void 0);
-	}
-	const found = (parent as RoutesPipelineStepDef).routes?.some(route => route.steps?.[0] === step);
-	return found ? FirstSubStepPortForRouteTest : (void 0);
-});
+
+export const RoutesStepDefs =
+	CommonStepDefs.createStepNodeConfigurer<RoutesPipelineStepDef, RoutesStepDefModel>({
+		use: StandardPipelineStepRegisterKey.ROUTES_SETS,
+		folder: {
+			switch: CommonStepDefs.switchFoldWhenSubNodesExist,
+			askSubStep: (step: RoutesPipelineStepDef) => {
+				const subSteps = [
+					...(step.routes ?? []).map(route => route.steps ?? []).flat(),
+					...(step.otherwise ?? [])
+				];
+				return subSteps.length === 0 ? (void 0) : subSteps;
+			}
+		},
+		ports: [{key: 'steps', port: CommonStepDefs.prebuiltPorts.steps}],
+		createSubNodes: CommonStepDefs.createRoutesSubNodesAndEndNode,
+		helpDocs: HelpDocs.routesStep,
+		reconfigurer: RoutesStepCheckReconfigurer,
+		firstSubStepPortContainerFind: (step, parent) => {
+			if (parent.use !== StandardPipelineStepRegisterKey.ROUTES_SETS) {
+				return (void 0);
+			}
+			const found = (parent as RoutesPipelineStepDef).routes?.some(route => route.steps?.[0] === step);
+			return found ? FirstSubStepPortForRouteTest : (void 0);
+		}
+	});
+registerStepDef(RoutesStepDefs);

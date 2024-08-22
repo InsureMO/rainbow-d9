@@ -10,6 +10,10 @@ export interface AsyncSetsStepDefModel extends CommonStepDefModel {
 export const AsyncSetsStepDefs =
 	CommonStepDefs.createStepNodeConfigurer<AsyncSetsPipelineStepDef, AsyncSetsStepDefModel>({
 		use: StandardPipelineStepRegisterKey.ASYNC_SETS,
+		folder: {
+			switch: CommonStepDefs.switchFoldWhenSubNodesExist,
+			askSubStep: CommonStepDefs.askSubSteps
+		},
 		ports: [{key: 'steps', port: CommonStepDefs.prebuiltPorts.steps}],
 		createSubNodes: CommonStepDefs.createSetsLikeSubNodesAndEndNode,
 		helpDocs: HelpDocs.asyncSetsStep

@@ -148,10 +148,8 @@ export const Toolbar = (props: ToolbarProps) => {
 		document.exitFullscreen && document.exitFullscreen();
 		setState({zen: false, max: false});
 	};
-	const onFoldAllNodesClicked = () => {
-	};
-	const onUnfoldAllNodesClicked = () => {
-	};
+	const onFoldAllNodesClicked = () => fire(PlaygroundEventTypes.FOLD_ALL_NODES);
+	const onUnfoldAllNodesClicked = () => fire(PlaygroundEventTypes.UNFOLD_ALL_NODES);
 
 	return <EditorToolbar columns={state.zen ? 5 : 6} ref={ref}>
 		<EditorToolbarButton onClick={onZoomInClicked}><ZoomIn/></EditorToolbarButton>

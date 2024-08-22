@@ -1,7 +1,14 @@
 import {Undefinable, VUtils} from '@rainbow-d9/n1';
-import {AllInPipelineStepDef, FileDef, PipelineStepDef} from '../../../definition';
+import {
+	AllInPipelineStepDef,
+	FileDef,
+	PipelineStepDef,
+	PipelineStepDiagramDef,
+	SetsLikePipelineStepDef
+} from '../../../definition';
 import {StepNodeModel} from '../../../diagram';
 import {ConfigurableElement, ConfigurableModel} from '../../../edit-dialog';
+import {StepDefsFolder} from '../../../editor';
 import {HelpDocs} from '../../../help-docs';
 import {Labels} from '../../../labels';
 import {PlaygroundCssVars} from '../../../widgets';
@@ -28,6 +35,7 @@ import {
 	elementUse
 } from './elements';
 import {findSubPorts} from './find-sub-ports';
+import {folder} from './folder';
 import {
 	PortAnyError,
 	PortCatchableError,
@@ -50,7 +58,7 @@ export * from './port-widgets';
 export * from './ports';
 
 export const CommonStepDefs: CommonStepDefsType = {
-	prepare, switchUse, confirm, discard,
+	prepare, switchUse, confirm, discard, folder,
 	properties: {
 		name: elementName, use: elementUse,
 		fromInput: elementFromInputGroup, toOutput: elementToOutputGroup,
@@ -81,6 +89,14 @@ export const CommonStepDefs: CommonStepDefsType = {
 	createSetsLikeSubNodesAndEndNode, createParallelSubNodesAndEndNode,
 	createConditionalSubNodesAndEndNode, createRoutesSubNodesAndEndNode,
 	findSubPorts,
+	switchFoldWhenSubNodesExist: (step: PipelineStepDiagramDef, fold: boolean) => {
+		step.$diagram = step.$diagram ?? {};
+		step.$diagram.$foldSubSteps = fold;
+	},
+	askSubSteps: (step: SetsLikePipelineStepDef) => {
+		const subSteps = step.steps ?? [];
+		return subSteps.length === 0 ? (void 0) : subSteps;
+	},
 	// element create
 	createMainContentElement,
 	createSwitchableSnippetElement,
@@ -88,10 +104,11 @@ export const CommonStepDefs: CommonStepDefsType = {
 	createStepNodeConfigurer: <F extends AllInPipelineStepDef, M extends CommonStepDefModel>(options: CreateStepNodeConfigurerOptions<F, M>): StepNodeConfigurer<F, M> => {
 		const {
 			use,
-			prepare, switchUse, confirm, discard,
+			prepare, switchUse, confirm, discard, folder,
 			properties, ports,
 			createSubNodes, findSubPorts,
-			helpDocs
+			helpDocs,
+			reconfigurer, firstSubStepPortContainerFind
 		} = options;
 
 		return {
@@ -143,6 +160,20 @@ export const CommonStepDefs: CommonStepDefsType = {
 				}
 			})(),
 			discard: discard ?? CommonStepDefs.discard,
+			folder: (() => {
+				const {switch: switchFold, askSubStep} = folder ?? {};
+				return {
+					accept: (step: F) => step.use === use,
+					switch: (step: PipelineStepDiagramDef, fold: boolean) => {
+						CommonStepDefs.folder.switch(step, fold);
+						switchFold?.(step, fold);
+					},
+					askSubStep: (step: F) => {
+						const subSteps = [...(askSubStep?.(step) ?? []), ...(CommonStepDefs.folder.askSubStep(step) ?? [])];
+						return subSteps.length === 0 ? (void 0) : subSteps;
+					}
+				} as StepDefsFolder;
+			})(),
 			properties: [
 				...CommonStepDefs.properties.leadingGroup,
 				...(properties ?? []),
@@ -156,7 +187,9 @@ export const CommonStepDefs: CommonStepDefsType = {
 			],
 			createSubNodes: createSubNodes ?? CommonStepDefs.createSubNodesAndEndNode,
 			findSubPorts: findSubPorts ?? CommonStepDefs.findSubPorts,
-			helpDocs
+			helpDocs,
+			reconfigurer: reconfigurer,
+			firstSubStepPortContainerFind: firstSubStepPortContainerFind
 		};
 	},
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars

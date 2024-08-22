@@ -43,6 +43,10 @@ export const ParallelStepDefs =
 				}
 			};
 		}],
+		folder: {
+			switch: CommonStepDefs.switchFoldWhenSubNodesExist,
+			askSubStep: CommonStepDefs.askSubSteps
+		},
 		properties: [
 			CommonStepDefs.createMainContentElement({
 				code: 'race', label: Labels.StepParallelRace, anchor: 'race',
