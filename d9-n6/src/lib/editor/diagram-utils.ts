@@ -302,13 +302,22 @@ export const createDiagramHandlers = (options: {
 	};
 };
 
+export type SubStepsCategoryKey =
+	'steps'
+	| 'if' | `if-${number}` | 'otherwise'
+	| 'catchable' | 'uncatchable' | 'exposed' | 'any'
+	| string;
+export type SubStepsWithCategory = Undefinable<Record<SubStepsCategoryKey, Array<PipelineStepDef>>>
+
 /**
  * for all reconfigure functions, return null/undefined means no change, return a value means change
  */
 export interface StepDefsFolder<F extends PipelineStepDef = PipelineStepDef> {
 	accept: (step: F) => boolean;
 	switch: (step: PipelineStepDiagramDef, fold: boolean) => void;
-	askSubStep: (step: F) => Undefinable<Array<PipelineStepDef>>;
+	askSubSteps: (step: F) => Undefinable<Array<PipelineStepDef>>;
+	askSubStepsWithCategory: (step: F) => SubStepsWithCategory;
+
 }
 
 const StepDefsFolders: Array<StepDefsFolder> = [];
@@ -325,7 +334,7 @@ export const switchAllNodesFolding = (file: FileDef, fold: boolean) => {
 		for (const folder of StepDefsFolders) {
 			if (folder.accept(step)) {
 				folder.switch(step, fold);
-				(folder.askSubStep(step) ?? []).forEach(subStep => switchFolding(subStep as PipelineStepDiagramDef));
+				(folder.askSubSteps(step) ?? []).forEach(subStep => switchFolding(subStep as PipelineStepDiagramDef));
 				break;
 			}
 		}
@@ -335,4 +344,14 @@ export const switchAllNodesFolding = (file: FileDef, fold: boolean) => {
 	} else {
 		switchFolding(file as unknown as PipelineStepDiagramDef);
 	}
+};
+
+export const findSubStepsWithCategory = (step: PipelineStepDef): SubStepsWithCategory => {
+	for (const folder of StepDefsFolders) {
+		if (folder.accept(step)) {
+			return folder.askSubStepsWithCategory(step);
+		}
+	}
+
+	return (void 0);
 };

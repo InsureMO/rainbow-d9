@@ -67,12 +67,25 @@ export const RoutesStepDefs =
 		use: StandardPipelineStepRegisterKey.ROUTES_SETS,
 		folder: {
 			switch: CommonStepDefs.switchFoldWhenSubNodesExist,
-			askSubStep: (step: RoutesPipelineStepDef) => {
+			askSubSteps: (step: RoutesPipelineStepDef) => {
 				const subSteps = [
 					...(step.routes ?? []).map(route => route.steps ?? []).flat(),
 					...(step.otherwise ?? [])
 				];
 				return subSteps.length === 0 ? (void 0) : subSteps;
+			},
+			askSubStepsWithCategory: (step: RoutesPipelineStepDef) => {
+				const found = (step.routes ?? []).reduce((acc, route, index) => {
+					acc[`if-${index + 1}`] = route.steps ?? [];
+					return acc;
+				}, {otherwise: step.otherwise ?? []});
+				Object.keys(found).forEach(key => {
+					if (found[key].length === 0) {
+						delete found[key];
+					}
+				});
+
+				return Object.keys(found).length === 0 ? (void 0) : found;
 			}
 		},
 		ports: [{key: 'steps', port: CommonStepDefs.prebuiltPorts.steps}],

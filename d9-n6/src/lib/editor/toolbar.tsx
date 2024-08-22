@@ -23,7 +23,7 @@ import {
 } from '../icons';
 import {Labels} from '../labels';
 import {PlaygroundEventTypes, usePlaygroundEventBus} from '../playground-event-bus';
-import {cloneDiagramNodes} from './diagram-utils';
+import {cloneDiagramNodes, findSubStepsWithCategory} from './diagram-utils';
 import {EditorKernelRefState} from './painter';
 import {
 	EditorToolbar,
@@ -72,8 +72,24 @@ export const ToolbarToc = (props: Omit<ToolbarTocProps, 'expanded'>) => {
 	}, [firstPaint]);
 
 	const items: Array<TocItem> = [{label: def.code, index: '0.', type: StepNodeEntityType.START, def}];
-	const getSubSteps = (step: PipelineStepDef) => {
-		return (step as any).steps ?? [];
+	const buildItemsOfStep = (step: PipelineStepDef, indexPrefix: string) => {
+		const subStepsWithCategory = findSubStepsWithCategory(step) ?? {};
+		if (subStepsWithCategory.steps != null) {
+			buildItems(subStepsWithCategory.steps, indexPrefix);
+		}
+		Object.keys(subStepsWithCategory)
+			.filter(key => !['steps', 'otherwise', 'catchable', 'uncatchable', 'exposed', 'any'].includes(key))
+			.sort()
+			.forEach(key => {
+				if (subStepsWithCategory[key] != null) {
+					buildItems(subStepsWithCategory[key], `${indexPrefix}${key}.`);
+				}
+			});
+		['otherwise', 'catchable', 'uncatchable', 'exposed', 'any'].forEach(key => {
+			if (subStepsWithCategory[key] != null) {
+				buildItems(subStepsWithCategory[key], `${indexPrefix}${key}.`);
+			}
+		});
 	};
 	const buildItems = (steps: Array<PipelineStepDef>, indexPrefix: string) => {
 		steps.forEach((step, stepIndex) => {
@@ -82,7 +98,7 @@ export const ToolbarToc = (props: Omit<ToolbarTocProps, 'expanded'>) => {
 				label: (step.name ?? '').trim() || Labels.StepNodeNoname, index,
 				type: StepNodeEntityType.NORMAL, def: step
 			});
-			buildItems(getSubSteps(step), index);
+			buildItemsOfStep(step, index);
 		});
 	};
 	if (!isPipelineDef(def)) {
@@ -91,9 +107,9 @@ export const ToolbarToc = (props: Omit<ToolbarTocProps, 'expanded'>) => {
 			label: ((def as unknown as PipelineStepDef).name ?? '').trim() || Labels.StepNodeNoname, index: '1.',
 			type: StepNodeEntityType.START, def
 		});
-		buildItems(getSubSteps(def as unknown as PipelineStepDef), '1.');
+		buildItemsOfStep(def as unknown as PipelineStepDef, '1.');
 	} else {
-		buildItems(getSubSteps(def as unknown as PipelineStepDef), '');
+		buildItems(def.steps ?? [], '');
 	}
 
 	return <ToolbarTocContainer data-first-paint={firstPaint} ref={ref}>

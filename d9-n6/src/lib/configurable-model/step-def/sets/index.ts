@@ -12,7 +12,8 @@ export const SetsStepDefs =
 		use: StandardPipelineStepRegisterKey.SETS,
 		folder: {
 			switch: CommonStepDefs.switchFoldWhenSubNodesExist,
-			askSubStep: CommonStepDefs.askSubSteps
+			askSubSteps: CommonStepDefs.askSubSteps,
+			askSubStepsWithCategory: CommonStepDefs.askSubStepsWithCategory
 		},
 		ports: [{key: 'steps', port: CommonStepDefs.prebuiltPorts.steps}],
 		createSubNodes: CommonStepDefs.createSetsLikeSubNodesAndEndNode,

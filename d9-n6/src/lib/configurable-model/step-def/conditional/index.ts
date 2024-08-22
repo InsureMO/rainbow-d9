@@ -68,9 +68,20 @@ export const ConditionalStepDefs =
 		use: StandardPipelineStepRegisterKey.CONDITIONAL_SETS,
 		folder: {
 			switch: CommonStepDefs.switchFoldWhenSubNodesExist,
-			askSubStep: (step: ConditionalPipelineStepDef) => {
+			askSubSteps: (step: ConditionalPipelineStepDef) => {
 				const subSteps = [...(step.steps ?? []), ...(step.otherwise ?? [])];
 				return subSteps.length === 0 ? (void 0) : subSteps;
+			},
+			askSubStepsWithCategory: (step: ConditionalPipelineStepDef) => {
+				const {steps = [], otherwise = []} = step;
+				const found = {'if': steps, otherwise};
+				Object.keys(found).forEach(key => {
+					if (found[key].length === 0) {
+						delete found[key];
+					}
+				});
+
+				return Object.keys(found).length === 0 ? (void 0) : found;
 			}
 		},
 		ports: [{key: 'steps', port: CommonStepDefs.prebuiltPorts.steps}],

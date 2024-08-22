@@ -97,6 +97,10 @@ export const CommonStepDefs: CommonStepDefsType = {
 		const subSteps = step.steps ?? [];
 		return subSteps.length === 0 ? (void 0) : subSteps;
 	},
+	askSubStepsWithCategory: (step: SetsLikePipelineStepDef) => {
+		const steps = step.steps ?? [];
+		return steps.length === 0 ? (void 0) : {steps};
+	},
 	// element create
 	createMainContentElement,
 	createSwitchableSnippetElement,
@@ -160,19 +164,23 @@ export const CommonStepDefs: CommonStepDefsType = {
 				}
 			})(),
 			discard: discard ?? CommonStepDefs.discard,
-			folder: (() => {
-				const {switch: switchFold, askSubStep} = folder ?? {};
+			folder: ((): StepDefsFolder => {
+				const {switch: switchFold, askSubSteps, askSubStepsWithCategory} = folder ?? {};
 				return {
 					accept: (step: F) => step.use === use,
 					switch: (step: PipelineStepDiagramDef, fold: boolean) => {
 						CommonStepDefs.folder.switch(step, fold);
 						switchFold?.(step, fold);
 					},
-					askSubStep: (step: F) => {
-						const subSteps = [...(askSubStep?.(step) ?? []), ...(CommonStepDefs.folder.askSubStep(step) ?? [])];
+					askSubSteps: (step: F) => {
+						const subSteps = [...(askSubSteps?.(step) ?? []), ...(CommonStepDefs.folder.askSubSteps(step) ?? [])];
 						return subSteps.length === 0 ? (void 0) : subSteps;
+					},
+					askSubStepsWithCategory: (step: F) => {
+						const found = CommonStepDefs.folder.askSubStepsWithCategory(step);
+						return {...(found ?? {}), ...(askSubStepsWithCategory?.(step) ?? {})};
 					}
-				} as StepDefsFolder;
+				};
 			})(),
 			properties: [
 				...CommonStepDefs.properties.leadingGroup,

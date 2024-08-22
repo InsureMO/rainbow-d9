@@ -10,7 +10,7 @@ import {
 } from '../../../definition';
 import {HandledNodeModel, StepNodeModel} from '../../../diagram';
 import {ConfigurableElement, ConfigurableElementAnchor, ConfigurableModel} from '../../../edit-dialog';
-import {StepDefsFolder} from '../../../editor';
+import {StepDefsFolder, SubStepsWithCategory} from '../../../editor';
 import {ConfigChangesConfirmed, ConfirmNodeOptions, CreateSubNodesOptions, StepNodeConfigurer} from '../../types';
 
 export enum MergeType {
@@ -154,6 +154,7 @@ export interface CommonStepDefsType
 	createRoutesSubNodesAndEndNode: (model: StepNodeModel, options: CreateSubNodesOptions) => Undefinable<HandledNodeModel>;
 	switchFoldWhenSubNodesExist: (step: PipelineStepDiagramDef, fold: boolean) => void;
 	askSubSteps: (step: SetsLikePipelineStepDef) => Undefinable<Array<PipelineStepDef>>;
+	askSubStepsWithCategory: (step: SetsLikePipelineStepDef) => SubStepsWithCategory;
 	// elements
 	createMainContentElement: (...children: Array<ConfigurableElement>) => ConfigurableElement;
 	createSwitchableSnippetElement: <M extends CommonStepDefModel>(options: SwitchableSnippetElementOptions<M>) => ConfigurableElement;
