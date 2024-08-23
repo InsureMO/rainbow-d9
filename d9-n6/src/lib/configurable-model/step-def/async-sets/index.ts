@@ -13,7 +13,8 @@ export const AsyncSetsStepDefs =
 		folder: {
 			switch: CommonStepDefs.switchFoldWhenSubNodesExist,
 			askSubSteps: CommonStepDefs.askSubSteps,
-			askSubStepsWithCategory: CommonStepDefs.askSubStepsWithCategory
+			askSubStepsWithCategory: CommonStepDefs.askSubStepsWithCategory,
+			tryToRevealSubStep: CommonStepDefs.tryToRevealSubSteps
 		},
 		ports: [{key: 'steps', port: CommonStepDefs.prebuiltPorts.steps}],
 		createSubNodes: CommonStepDefs.createSetsLikeSubNodesAndEndNode,

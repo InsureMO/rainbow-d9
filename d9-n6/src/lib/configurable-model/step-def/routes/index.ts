@@ -86,6 +86,14 @@ export const RoutesStepDefs =
 				});
 
 				return Object.keys(found).length === 0 ? (void 0) : found;
+			},
+			tryToRevealSubStep: (step: RoutesPipelineStepDef, subStep: PipelineStepDef): boolean => {
+				return CommonStepDefs.tryToRevealSubSteps<RoutesPipelineStepDef>(step, subStep, (step) => {
+					return [
+						...(step.routes ?? []).map(route => route.steps ?? []).flat(),
+						...(step.otherwise ?? [])
+					];
+				});
 			}
 		},
 		ports: [{key: 'steps', port: CommonStepDefs.prebuiltPorts.steps}],

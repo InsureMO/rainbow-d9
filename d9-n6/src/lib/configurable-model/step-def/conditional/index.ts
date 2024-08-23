@@ -82,6 +82,11 @@ export const ConditionalStepDefs =
 				});
 
 				return Object.keys(found).length === 0 ? (void 0) : found;
+			},
+			tryToRevealSubStep: (step: ConditionalPipelineStepDef, subStep: PipelineStepDef): boolean => {
+				return CommonStepDefs.tryToRevealSubSteps<ConditionalPipelineStepDef>(step, subStep, (step) => {
+					return [...(step.steps ?? []), ...(step.otherwise ?? [])];
+				});
 			}
 		},
 		ports: [{key: 'steps', port: CommonStepDefs.prebuiltPorts.steps}],

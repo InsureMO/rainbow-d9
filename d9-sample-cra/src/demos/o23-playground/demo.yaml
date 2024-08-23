@@ -74,7 +74,7 @@ steps:
         endpoint: checkToken
     $diagram:
       $foldSubSteps: true
-  - name: TypeORM
+  - name: TypeORM Trans T1
     use: typeorm-transactional
     datasource: db-data
     transaction: t1
@@ -87,7 +87,7 @@ steps:
         use: typeorm-bulk-save
         datasource: db-data
         transaction: t1
-      - name: TypeORM
+      - name: TypeORM Trans T2
         use: typeorm-transactional
         datasource: db-data
         transaction: t2

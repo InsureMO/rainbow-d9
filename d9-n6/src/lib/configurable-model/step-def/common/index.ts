@@ -8,7 +8,7 @@ import {
 } from '../../../definition';
 import {StepNodeModel} from '../../../diagram';
 import {ConfigurableElement, ConfigurableModel} from '../../../edit-dialog';
-import {StepDefsFolder} from '../../../editor';
+import {askSubSteps, StepDefsFolder, tryToRevealSubStep} from '../../../editor';
 import {HelpDocs} from '../../../help-docs';
 import {Labels} from '../../../labels';
 import {PlaygroundCssVars} from '../../../widgets';
@@ -101,14 +101,19 @@ export const CommonStepDefs: CommonStepDefsType = {
 		const steps = step.steps ?? [];
 		return steps.length === 0 ? (void 0) : {steps};
 	},
-	tryToRevealSubSteps: (step: SetsLikePipelineStepDef, subStep: PipelineStepDef): boolean => {
-		const steps = step.steps ?? [];
+	tryToRevealSubSteps: <F extends AllInPipelineStepDef>(step: F, subStep: PipelineStepDef, findSubSteps?: (step: F) => Undefinable<Array<PipelineStepDef>>): boolean => {
+		const steps = (findSubSteps == null ? (step as unknown as SetsLikePipelineStepDef).steps : findSubSteps(step)) ?? [];
 		if (steps.includes(subStep)) {
 			const def = step as PipelineStepDiagramDef;
 			def.$diagram = {...(def.$diagram ?? {}), $foldSubSteps: false};
 			return true;
 		} else {
-			return false;
+			const revealed = steps.some(step => (askSubSteps(step) ?? []).some(step => tryToRevealSubStep(step, subStep)));
+			if (revealed) {
+				const def = step as PipelineStepDiagramDef;
+				def.$diagram = {...(def.$diagram ?? {}), $foldSubSteps: false};
+			}
+			return revealed;
 		}
 	},
 	// element create

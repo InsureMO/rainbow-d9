@@ -39,7 +39,8 @@ export const EachStepDefs =
 		folder: {
 			switch: CommonStepDefs.switchFoldWhenSubNodesExist,
 			askSubSteps: CommonStepDefs.askSubSteps,
-			askSubStepsWithCategory: CommonStepDefs.askSubStepsWithCategory
+			askSubStepsWithCategory: CommonStepDefs.askSubStepsWithCategory,
+			tryToRevealSubStep: CommonStepDefs.tryToRevealSubSteps
 		},
 		properties: [
 			CommonStepDefs.createMainContentElement({
