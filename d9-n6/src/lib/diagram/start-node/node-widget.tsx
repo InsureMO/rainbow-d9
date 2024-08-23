@@ -241,7 +241,10 @@ export const StartNodeWidget = (props: StartNodeWidgetProps) => {
 	const {on, off, fire} = usePlaygroundEventBus();
 	useEffect(() => {
 		const onLocate = () => {
-			ref.current?.scrollIntoView({behavior: 'smooth', block: 'center', inline: 'center'});
+			if (ref.current?.closest('div.o23-playground-editor-content') != null) {
+				// since there is an editor-content-backend
+				ref.current?.scrollIntoView({behavior: 'smooth', block: 'center', inline: 'center'});
+			}
 		};
 		on(PlaygroundEventTypes.DO_LOCATE_FILE_NODE, onLocate);
 		return () => {

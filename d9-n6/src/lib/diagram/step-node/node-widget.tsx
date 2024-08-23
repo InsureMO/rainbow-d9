@@ -109,7 +109,10 @@ export const StepNodeWidget = (props: StepNodeWidgetProps) => {
 			if (node.step !== step) {
 				return;
 			}
-			ref.current?.scrollIntoView({behavior: 'smooth', block: 'center', inline: 'center'});
+			if (ref.current?.closest('div.o23-playground-editor-content') != null) {
+				// since there is an editor-content-backend
+				ref.current?.scrollIntoView({behavior: 'smooth', block: 'center', inline: 'center'});
+			}
 		};
 		on(PlaygroundEventTypes.DO_LOCATE_STEP_NODE, onLocate);
 		return () => {
