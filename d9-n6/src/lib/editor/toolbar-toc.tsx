@@ -63,7 +63,7 @@ export const ToolbarToc = (props: Omit<ToolbarTocProps, 'expanded'>) => {
 					buildItems(subStepsWithCategory[key], `${indexPrefix}${key}.`);
 				}
 			});
-		['otherwise', 'catchable', 'uncatchable', 'exposed', 'any'].forEach(key => {
+		['otherwise', 'catchable', 'exposed', 'uncatchable', 'any'].forEach(key => {
 			if (subStepsWithCategory[key] != null) {
 				buildItems(subStepsWithCategory[key], `${indexPrefix}${key}.`);
 			}
