@@ -1,5 +1,5 @@
 import {AllInPipelineStepDef, PipelineStepDef, PipelineStepDiagramDef} from '../../../definition';
-import {askSubSteps, StepDefsFolder, SubStepsWithCategory, tryToRevealSubStep} from '../../../editor';
+import {StepDefsFolder, SubStepsWithCategory, tryToRevealSubStep} from '../../../editor';
 
 export const folder: StepDefsFolder = {
 	accept: (): boolean => true,
@@ -43,13 +43,13 @@ export const folder: StepDefsFolder = {
 				}
 			},
 			{
-				handle: uncatchable, reveal: (step: PipelineStepDiagramDef) => {
-					step.$diagram = {...(step.$diagram ?? {}), $foldUncatchable: false};
+				handle: exposed, reveal: (step: PipelineStepDiagramDef) => {
+					step.$diagram = {...(step.$diagram ?? {}), $foldExposed: false};
 				}
 			},
 			{
-				handle: exposed, reveal: (step: PipelineStepDiagramDef) => {
-					step.$diagram = {...(step.$diagram ?? {}), $foldExposed: false};
+				handle: uncatchable, reveal: (step: PipelineStepDiagramDef) => {
+					step.$diagram = {...(step.$diagram ?? {}), $foldUncatchable: false};
 				}
 			},
 			{
@@ -65,7 +65,7 @@ export const folder: StepDefsFolder = {
 					reveal(step);
 					return true;
 				} else {
-					const revealed = steps.some(step => (askSubSteps(step) ?? []).some(step => tryToRevealSubStep(step, subStep)));
+					const revealed = steps.some(step => tryToRevealSubStep(step, subStep));
 					if (revealed) {
 						reveal(step);
 					}

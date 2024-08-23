@@ -1,7 +1,7 @@
 import {useForceUpdate} from '@rainbow-d9/n1';
 import React, {MutableRefObject, ReactNode, useEffect, useRef, useState} from 'react';
 import {FileDef, isPipelineDef, PipelineStepDef} from '../definition';
-import {StepNodeEntityType} from '../diagram';
+import {StepNodeEntityType, StepNodeModel} from '../diagram';
 import {Labels} from '../labels';
 import {PlaygroundEventTypes, usePlaygroundEventBus} from '../playground-event-bus';
 import {findSubStepsWithCategory, tryToRevealStep} from './diagram-utils';
@@ -97,6 +97,12 @@ export const ToolbarToc = (props: Omit<ToolbarTocProps, 'expanded'>) => {
 		const {type, def: step} = item;
 		if (type === 'file') {
 			fire(PlaygroundEventTypes.LOCATE_FILE_NODE);
+			return;
+		}
+		const node = stateRef.current.engine.getModel().getNodes()?.find(node => node instanceof StepNodeModel && node.step === step);
+		if (node != null) {
+			// node maybe already rendered
+			fire(PlaygroundEventTypes.DO_LOCATE_STEP_NODE, step as unknown as PipelineStepDef);
 		} else {
 			tryToRevealStep(def, step as unknown as PipelineStepDef);
 			fire(PlaygroundEventTypes.LOCATE_STEP_NODE, step as unknown as PipelineStepDef);

@@ -8,7 +8,7 @@ import {
 } from '../../../definition';
 import {StepNodeModel} from '../../../diagram';
 import {ConfigurableElement, ConfigurableModel} from '../../../edit-dialog';
-import {askSubSteps, StepDefsFolder, tryToRevealSubStep} from '../../../editor';
+import {StepDefsFolder, tryToRevealSubStep} from '../../../editor';
 import {HelpDocs} from '../../../help-docs';
 import {Labels} from '../../../labels';
 import {PlaygroundCssVars} from '../../../widgets';
@@ -108,7 +108,7 @@ export const CommonStepDefs: CommonStepDefsType = {
 			def.$diagram = {...(def.$diagram ?? {}), $foldSubSteps: false};
 			return true;
 		} else {
-			const revealed = steps.some(step => (askSubSteps(step) ?? []).some(step => tryToRevealSubStep(step, subStep)));
+			const revealed = steps.some(step => tryToRevealSubStep(step, subStep));
 			if (revealed) {
 				const def = step as PipelineStepDiagramDef;
 				def.$diagram = {...(def.$diagram ?? {}), $foldSubSteps: false};
@@ -140,7 +140,7 @@ export const CommonStepDefs: CommonStepDefsType = {
 					case 'and':
 						return (def: F): M => CommonStepDefs.prepare(def, func);
 					default:
-						console.warn(`No prepare defined for step[${use}], use default CommonStepDefs.prepare.`);
+						console.debug(`No prepare defined for step[${use}], use default CommonStepDefs.prepare.`);
 						return (def: F): M => CommonStepDefs.prepare(def);
 				}
 			})(),
@@ -155,7 +155,7 @@ export const CommonStepDefs: CommonStepDefsType = {
 							return model;
 						};
 					default:
-						console.warn(`No switchUse defined for step[${use}], use default CommonStepDefs.switchUse.`);
+						console.debug(`No switchUse defined for step[${use}], use default CommonStepDefs.switchUse.`);
 						return (model: ConfigurableModel, originalUse: PipelineStepDef['use']): ConfigurableModel => {
 							CommonStepDefs.switchUse(model, [], originalUse);
 							return model;
@@ -172,7 +172,7 @@ export const CommonStepDefs: CommonStepDefsType = {
 							return CommonStepDefs.confirm(model, def, file, options, func);
 						};
 					default:
-						console.warn(`No confirm defined for step[${use}], use default CommonStepDefs.confirm.`);
+						console.debug(`No confirm defined for step[${use}], use default CommonStepDefs.confirm.`);
 						return (model: M, def: F, file: FileDef, options: ConfirmNodeOptions): ConfigChangesConfirmed => {
 							return CommonStepDefs.confirm(model, def, file, options);
 						};
