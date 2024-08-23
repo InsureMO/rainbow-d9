@@ -1,7 +1,7 @@
 import {DiagramEngine} from '@projectstorm/react-diagrams';
 import {Undefinable, VUtils} from '@rainbow-d9/n1';
 import {DOM_KEY_WIDGET} from '@rainbow-d9/n2';
-import React from 'react';
+import React, {useEffect, useRef} from 'react';
 import styled from 'styled-components';
 import {FileDefs} from '../../configurable-model';
 import {isPipelineDef, isStepSetsDef, PipelineFileDef} from '../../definition';
@@ -237,8 +237,17 @@ export const InitOnlyPortWidget = (props: { def: PipelineFileDef }) => {
 export const StartNodeWidget = (props: StartNodeWidgetProps) => {
 	const {node, engine} = props;
 
-	const {fire} = usePlaygroundEventBus();
-	// const forceUpdate = useForceUpdate();
+	const ref = useRef<HTMLDivElement>(null);
+	const {on, off, fire} = usePlaygroundEventBus();
+	useEffect(() => {
+		const onLocate = () => {
+			ref.current?.scrollIntoView({behavior: 'smooth', block: 'center', inline: 'center'});
+		};
+		on(PlaygroundEventTypes.DO_LOCATE_FILE_NODE, onLocate);
+		return () => {
+			off(PlaygroundEventTypes.DO_LOCATE_FILE_NODE, onLocate);
+		};
+	}, [on, off]);
 
 	const def = node.def;
 
@@ -292,7 +301,7 @@ export const StartNodeWidget = (props: StartNodeWidgetProps) => {
 		body = <InitOnlyPortWidget def={def as PipelineFileDef}/>;
 	}
 
-	return <StartNodeContainer onDoubleClick={onDoubleClicked}>
+	return <StartNodeContainer onDoubleClick={onDoubleClicked} ref={ref}>
 		<StartNodeHeader>
 			<StartNodeTitle>
 				{VUtils.isNotBlank(def.code)

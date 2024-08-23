@@ -317,7 +317,10 @@ export interface StepDefsFolder<F extends PipelineStepDef = PipelineStepDef> {
 	switch: (step: PipelineStepDiagramDef, fold: boolean) => void;
 	askSubSteps: (step: F) => Undefinable<Array<PipelineStepDef>>;
 	askSubStepsWithCategory: (step: F) => SubStepsWithCategory;
-
+	/**
+	 * return true when given sub step belongs to given step, and it is revealed (it should be if belongs to is true)
+	 */
+	tryToRevealSubStep: (step: F, subStep: PipelineStepDef) => boolean;
 }
 
 const StepDefsFolders: Array<StepDefsFolder> = [];
@@ -329,6 +332,14 @@ export const registerStepDefsFolders = (...folders: Array<StepDefsFolder>) => {
 	});
 };
 
+export const askSubSteps = (step: PipelineStepDef): Undefinable<Array<PipelineStepDef>> => {
+	for (const folder of StepDefsFolders) {
+		if (folder.accept(step)) {
+			return folder.askSubSteps(step);
+		}
+	}
+	return (void 0);
+};
 export const switchAllNodesFolding = (file: FileDef, fold: boolean) => {
 	const switchFolding = (step: PipelineStepDiagramDef) => {
 		for (const folder of StepDefsFolders) {
@@ -354,4 +365,26 @@ export const findSubStepsWithCategory = (step: PipelineStepDef): SubStepsWithCat
 	}
 
 	return (void 0);
+};
+
+export const tryToRevealSubStep = (step: PipelineStepDef, subStep: PipelineStepDef): boolean => {
+	for (const folder of StepDefsFolders) {
+		if (folder.accept(step)) {
+			return folder.tryToRevealSubStep(step, subStep);
+		}
+	}
+	return false;
+};
+export const tryToRevealStep = (file: FileDef, step: PipelineStepDef): boolean => {
+	if (isPipelineDef(file)) {
+		const steps = file.steps ?? [];
+		if (steps.includes(step)) {
+			// step is at top level, do nothing
+			return true;
+		} else {
+			return steps.some(s => tryToRevealSubStep(s, step));
+		}
+	} else {
+		return tryToRevealSubStep(file as unknown as PipelineStepDef, step);
+	}
 };

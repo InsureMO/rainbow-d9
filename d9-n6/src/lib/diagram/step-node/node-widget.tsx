@@ -1,8 +1,9 @@
 import {DiagramEngine} from '@projectstorm/react-diagrams';
 import {DOM_KEY_WIDGET} from '@rainbow-d9/n2';
-import React from 'react';
+import React, {useEffect, useRef} from 'react';
 import styled from 'styled-components';
 import {findStepDef, FirstSubStepPortModel, FirstSubStepPortWidget} from '../../configurable-model';
+import {PipelineStepDef} from '../../definition';
 import {StepDialogContent} from '../../edit-dialog';
 import {askUseBadge, Labels} from '../../labels';
 import {PlaygroundEventTypes, usePlaygroundEventBus} from '../../playground-event-bus';
@@ -101,7 +102,20 @@ export const StepNodeBody = styled(NodeBody).attrs({
 export const StepNodeWidget = (props: StepNodeWidgetProps) => {
 	const {node, engine} = props;
 
-	const {fire} = usePlaygroundEventBus();
+	const ref = useRef<HTMLDivElement>(null);
+	const {on, off, fire} = usePlaygroundEventBus();
+	useEffect(() => {
+		const onLocate = (step: PipelineStepDef) => {
+			if (node.step !== step) {
+				return;
+			}
+			ref.current?.scrollIntoView({behavior: 'smooth', block: 'center', inline: 'center'});
+		};
+		on(PlaygroundEventTypes.DO_LOCATE_STEP_NODE, onLocate);
+		return () => {
+			off(PlaygroundEventTypes.DO_LOCATE_STEP_NODE, onLocate);
+		};
+	}, [on, off, node.step]);
 
 	const {step: def, file} = node;
 	const {use} = def;
@@ -114,7 +128,7 @@ export const StepNodeWidget = (props: StepNodeWidgetProps) => {
 	const name = (def.name ?? '').trim() || Labels.StepNodeNoname;
 	const isFirstSubStep = node.isFirstSubStep();
 
-	return <StepNodeContainer onDoubleClick={onDoubleClicked} data-use={use}>
+	return <StepNodeContainer onDoubleClick={onDoubleClicked} data-use={use} ref={ref}>
 		{isFirstSubStep
 			? <FirstSubStepPortWidget port={node.getPort(FirstSubStepPortModel.NAME) as FirstSubStepPortModel}
 			                          engine={engine}/>

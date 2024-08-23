@@ -1,5 +1,6 @@
 import {useCreateEventBus} from '@rainbow-d9/n1';
 import React, {createContext, ReactNode, useContext} from 'react';
+import {PipelineStepDef} from './definition';
 
 export enum PlaygroundEventTypes {
 	CONTENT_CHANGED = 'content-changed',
@@ -10,7 +11,10 @@ export enum PlaygroundEventTypes {
 
 	REPAINT = 'repaint',
 	ZOOM_TO = 'zoom-to', ZOOM_TO_FIT = 'zoom-to-fit',
-	FOLD_ALL_NODES = 'fold-all-nodes', UNFOLD_ALL_NODES = 'unfold-all-nodes'
+	FOLD_ALL_NODES = 'fold-all-nodes', UNFOLD_ALL_NODES = 'unfold-all-nodes',
+	LOCATE_FILE_NODE = 'locate-file-node', DO_LOCATE_FILE_NODE = 'do-locate-file-node',
+	LOCATE_STEP_NODE = 'locate-step-node', REPAINT_AND_LOCATE_STEP_NODE = 'repaint-and-locate-step-node',
+	DO_LOCATE_STEP_NODE = 'do-locate-step-node'
 }
 
 export interface PlaygroundEventBus {
@@ -73,6 +77,36 @@ export interface PlaygroundEventBus {
 	on(type: PlaygroundEventTypes.UNFOLD_ALL_NODES, listener: () => void): this;
 
 	off(type: PlaygroundEventTypes.UNFOLD_ALL_NODES, listener: () => void): this;
+
+	fire(type: PlaygroundEventTypes.LOCATE_FILE_NODE): this;
+
+	on(type: PlaygroundEventTypes.LOCATE_FILE_NODE, listener: () => void): this;
+
+	off(type: PlaygroundEventTypes.LOCATE_FILE_NODE, listener: () => void): this;
+
+	fire(type: PlaygroundEventTypes.DO_LOCATE_FILE_NODE): this;
+
+	on(type: PlaygroundEventTypes.DO_LOCATE_FILE_NODE, listener: () => void): this;
+
+	off(type: PlaygroundEventTypes.DO_LOCATE_FILE_NODE, listener: () => void): this;
+
+	fire(type: PlaygroundEventTypes.LOCATE_STEP_NODE, step: PipelineStepDef): this;
+
+	on(type: PlaygroundEventTypes.LOCATE_STEP_NODE, listener: (step: PipelineStepDef) => void): this;
+
+	off(type: PlaygroundEventTypes.LOCATE_STEP_NODE, listener: (step: PipelineStepDef) => void): this;
+
+	fire(type: PlaygroundEventTypes.REPAINT_AND_LOCATE_STEP_NODE, step: PipelineStepDef): this;
+
+	on(type: PlaygroundEventTypes.REPAINT_AND_LOCATE_STEP_NODE, listener: (step: PipelineStepDef) => void): this;
+
+	off(type: PlaygroundEventTypes.REPAINT_AND_LOCATE_STEP_NODE, listener: (step: PipelineStepDef) => void): this;
+
+	fire(type: PlaygroundEventTypes.DO_LOCATE_STEP_NODE, step: PipelineStepDef): this;
+
+	on(type: PlaygroundEventTypes.DO_LOCATE_STEP_NODE, listener: (step: PipelineStepDef) => void): this;
+
+	off(type: PlaygroundEventTypes.DO_LOCATE_STEP_NODE, listener: (step: PipelineStepDef) => void): this;
 }
 
 const Context = createContext<PlaygroundEventBus>({} as PlaygroundEventBus);

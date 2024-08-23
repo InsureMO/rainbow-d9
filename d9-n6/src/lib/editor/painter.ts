@@ -53,6 +53,8 @@ export interface EditorKernelRefState {
 	canvasZoom?: number;
 }
 
+export type PostRepaintAction = () => void;
+
 export const parseContent = (parser: FileDefDeserializer, content?: MarkdownContent): FileDef => {
 	const def = parser.parse(content ?? '');
 	// guard
@@ -285,7 +287,7 @@ export const repaint = (options: RepaintOptions) => {
 	}
 };
 
-export const usePaint = (stateRef: MutableRefObject<EditorKernelRefState>) => {
+export const usePaint = (stateRef: MutableRefObject<EditorKernelRefState>, postPaintActions: MutableRefObject<Array<PostRepaintAction>>) => {
 	const forceUpdate = useForceUpdate();
 	useEffect(() => {
 		// compute the node positions, run when status is PAINT, and set status to IN_SERVICE when finished
@@ -323,4 +325,12 @@ export const usePaint = (stateRef: MutableRefObject<EditorKernelRefState>) => {
 		stateRef.current.diagramStatus = EditorKernelDiagramStatus.IN_SERVICE;
 		forceUpdate();
 	}, [forceUpdate, stateRef, stateRef.current.diagramStatus]);
+	useEffect(() => {
+		if (stateRef.current.diagramStatus !== EditorKernelDiagramStatus.IN_SERVICE) {
+			return;
+		}
+		const actions = [...postPaintActions.current];
+		postPaintActions.current = [];
+		actions.forEach(action => action());
+	}, [stateRef, stateRef.current.diagramStatus, postPaintActions]);
 };

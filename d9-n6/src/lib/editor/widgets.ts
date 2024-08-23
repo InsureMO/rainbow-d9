@@ -84,6 +84,15 @@ export const EditorCanvasWrapper = styled.div.attrs<{
         height: 100%;
     }
 `;
+export const NodeLocatorNeedle = styled.div.attrs({[DOM_KEY_WIDGET]: 'o23-playground-editor-node-locator'})`
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 0;
+    pointer-events: none;
+`;
 // noinspection CssUnresolvedCustomProperty
 export const EditorToolbar = styled.div.attrs<{ columns: number }>(({columns}) => {
 	return {
@@ -208,7 +217,7 @@ export const EditorToolbarTocButton = styled.span.attrs({[DOM_KEY_WIDGET]: 'o23-
         height: ${PlaygroundCssVars.EDITOR_TOOLBAR_TOC_HEIGHT};
     }
 `;
-export const ToolbarTocContainer = styled.div.attrs({
+export const EditorToolbarTocContainer = styled.div.attrs({
 	[DOM_KEY_WIDGET]: 'o23-playground-editor-toolbar-toc-container',
 	'data-v-scroll': '',
 	'data-h-scroll': ''
@@ -239,7 +248,7 @@ export const ToolbarTocContainer = styled.div.attrs({
         }
     }
 `;
-export const ToolbarTocItem = styled.div.attrs({[DOM_KEY_WIDGET]: 'o23-playground-editor-toolbar-toc-item'})`
+export const EditorToolbarTocItem = styled.div.attrs({[DOM_KEY_WIDGET]: 'o23-playground-editor-toolbar-toc-item'})`
     display: flex;
     position: relative;
     align-items: center;

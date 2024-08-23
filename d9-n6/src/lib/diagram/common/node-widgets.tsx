@@ -1,5 +1,5 @@
 import {CssVars, DOM_KEY_WIDGET, UnwrappedCaption} from '@rainbow-d9/n2';
-import React, {DetailedHTMLProps, HTMLAttributes} from 'react';
+import React, {DetailedHTMLProps, ForwardedRef, forwardRef, HTMLAttributes} from 'react';
 import styled from 'styled-components';
 import {PlaygroundCssVars} from '../../widgets';
 
@@ -76,10 +76,10 @@ export const NodeBody = styled.div`
 export interface NodeWrapperProps extends Omit<DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'ref'> {
 }
 
-export const NodeWrapper = (props: NodeWrapperProps) => {
+export const NodeWrapper = forwardRef((props: NodeWrapperProps, ref: ForwardedRef<HTMLDivElement>) => {
 	const {children, ...rest} = props;
 
-	return <NodeContainer {...rest}>
+	return <NodeContainer {...rest} ref={ref}>
 		{children}
 	</NodeContainer>;
-};
+});

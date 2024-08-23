@@ -155,6 +155,7 @@ export interface CommonStepDefsType
 	switchFoldWhenSubNodesExist: (step: PipelineStepDiagramDef, fold: boolean) => void;
 	askSubSteps: (step: SetsLikePipelineStepDef) => Undefinable<Array<PipelineStepDef>>;
 	askSubStepsWithCategory: (step: SetsLikePipelineStepDef) => SubStepsWithCategory;
+	tryToRevealSubSteps: (step: SetsLikePipelineStepDef, subStep: PipelineStepDef) => boolean;
 	// elements
 	createMainContentElement: (...children: Array<ConfigurableElement>) => ConfigurableElement;
 	createSwitchableSnippetElement: <M extends CommonStepDefModel>(options: SwitchableSnippetElementOptions<M>) => ConfigurableElement;

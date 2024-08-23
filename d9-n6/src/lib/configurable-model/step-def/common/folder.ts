@@ -1,5 +1,5 @@
 import {AllInPipelineStepDef, PipelineStepDef, PipelineStepDiagramDef} from '../../../definition';
-import {StepDefsFolder, SubStepsWithCategory} from '../../../editor';
+import {askSubSteps, StepDefsFolder, SubStepsWithCategory, tryToRevealSubStep} from '../../../editor';
 
 export const folder: StepDefsFolder = {
 	accept: (): boolean => true,
@@ -33,5 +33,44 @@ export const folder: StepDefsFolder = {
 		});
 
 		return Object.keys(found).length === 0 ? (void 0) : found;
+	},
+	tryToRevealSubStep: (step: PipelineStepDef, subStep: PipelineStepDef): boolean => {
+		const {errorHandles: {catchable, uncatchable, exposed, any} = {}} = step as AllInPipelineStepDef;
+		return [
+			{
+				handle: catchable, reveal: (step: PipelineStepDiagramDef) => {
+					step.$diagram = {...(step.$diagram ?? {}), $foldCatchable: false};
+				}
+			},
+			{
+				handle: uncatchable, reveal: (step: PipelineStepDiagramDef) => {
+					step.$diagram = {...(step.$diagram ?? {}), $foldUncatchable: false};
+				}
+			},
+			{
+				handle: exposed, reveal: (step: PipelineStepDiagramDef) => {
+					step.$diagram = {...(step.$diagram ?? {}), $foldExposed: false};
+				}
+			},
+			{
+				handle: any, reveal: (step: PipelineStepDiagramDef) => {
+					step.$diagram = {...(step.$diagram ?? {}), $foldAny: false};
+				}
+			}
+		]
+			.filter(({handle}) => handle != null && typeof handle !== 'string')
+			.some(({handle, reveal}) => {
+				const steps = handle as Array<PipelineStepDef>;
+				if (steps.includes(subStep)) {
+					reveal(step);
+					return true;
+				} else {
+					const revealed = steps.some(step => (askSubSteps(step) ?? []).some(step => tryToRevealSubStep(step, subStep)));
+					if (revealed) {
+						reveal(step);
+					}
+					return revealed;
+				}
+			});
 	}
 };

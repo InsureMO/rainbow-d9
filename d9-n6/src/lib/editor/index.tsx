@@ -10,3 +10,5 @@ export * from './widgets';
 export * from './diagram-utils';
 export * from './painter';
 export * from './kernel';
+export * from './toolbar-toc';
+export * from './toolbar';

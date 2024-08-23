@@ -1,12 +1,22 @@
 import {CanvasWidget} from '@projectstorm/react-canvas-core';
 import {Undefinable, useForceUpdate, useThrottler, VUtils} from '@rainbow-d9/n1';
 import React, {ReactNode, useEffect, useRef} from 'react';
+import {PipelineStepDef} from '../definition';
 import {Labels} from '../labels';
 import {PlaygroundEventTypes, usePlaygroundEventBus} from '../playground-event-bus';
 import {EditorProps} from '../types';
 import {switchAllNodesFolding} from './diagram-utils';
 import {ErrorBoundary} from './error-boundary';
-import {EditorKernelDiagramStatus, EditorKernelRefState, firstPaint, paint, repaint, usePaint} from './painter';
+import {NodeLocator} from './node-locator';
+import {
+	EditorKernelDiagramStatus,
+	EditorKernelRefState,
+	firstPaint,
+	paint,
+	PostRepaintAction,
+	repaint,
+	usePaint
+} from './painter';
 import {Toolbar} from './toolbar';
 import {BackendCanvasWrapper, EditorCanvasWrapper, EditorWrapper, ParseError} from './widgets';
 
@@ -66,6 +76,7 @@ export const EditorKernel = (props: EditorProps) => {
 	const wrapperRef = useRef<HTMLDivElement>(null);
 	const {on, off, fire} = usePlaygroundEventBus();
 	const {replace} = useThrottler();
+	const postPaintActions = useRef<Array<PostRepaintAction>>([]);
 	const stateRef = useRef<EditorKernelRefState>(firstPaint({
 		content, serializer, deserializer, assistant, replace,
 		writeContentToState: (content?: string) => {
@@ -113,6 +124,12 @@ export const EditorKernel = (props: EditorProps) => {
 			});
 			forceUpdate();
 		};
+		const onRepaintAndLocateStepNode = (step: PipelineStepDef) => {
+			postPaintActions.current.push(() => {
+				fire(PlaygroundEventTypes.DO_LOCATE_STEP_NODE, step);
+			});
+			onRepaint();
+		};
 		const switchFolding = (fold: boolean) => {
 			switchAllNodesFolding(stateRef.current.def!, fold);
 			onRepaint();
@@ -120,15 +137,17 @@ export const EditorKernel = (props: EditorProps) => {
 		const onFoldAllNodes = () => switchFolding(true);
 		const onUnfoldAllNodes = () => switchFolding(false);
 		on(PlaygroundEventTypes.REPAINT, onRepaint);
+		on(PlaygroundEventTypes.REPAINT_AND_LOCATE_STEP_NODE, onRepaintAndLocateStepNode);
 		on(PlaygroundEventTypes.FOLD_ALL_NODES, onFoldAllNodes);
 		on(PlaygroundEventTypes.UNFOLD_ALL_NODES, onUnfoldAllNodes);
 		return () => {
 			off(PlaygroundEventTypes.REPAINT, onRepaint);
+			off(PlaygroundEventTypes.REPAINT_AND_LOCATE_STEP_NODE, onRepaintAndLocateStepNode);
 			off(PlaygroundEventTypes.FOLD_ALL_NODES, onFoldAllNodes);
 			off(PlaygroundEventTypes.UNFOLD_ALL_NODES, onUnfoldAllNodes);
 		};
 	}, [on, off, fire, replace, forceUpdate, assistant]);
-	usePaint(stateRef);
+	usePaint(stateRef, postPaintActions);
 
 	if (VUtils.isNotBlank(stateRef.current.message)) {
 		return <EditorWrapper data-diagram-status={EditorKernelDiagramStatus.IGNORED}>
@@ -166,6 +185,7 @@ export const EditorKernel = (props: EditorProps) => {
 					</BackendCanvasWrapper>
 					<CanvasWrapper width={stateRef.current.canvasWidth} height={stateRef.current.canvasHeight}
 					               zoom={askZoom} zoomTo={zoomTo}>
+						<NodeLocator stateRef={stateRef}/>
 						<CanvasWidget engine={stateRef.current.engine} className="o23-playground-editor-content"/>
 					</CanvasWrapper>
 				</ErrorBoundary>

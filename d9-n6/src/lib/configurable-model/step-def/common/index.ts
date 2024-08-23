@@ -101,6 +101,16 @@ export const CommonStepDefs: CommonStepDefsType = {
 		const steps = step.steps ?? [];
 		return steps.length === 0 ? (void 0) : {steps};
 	},
+	tryToRevealSubSteps: (step: SetsLikePipelineStepDef, subStep: PipelineStepDef): boolean => {
+		const steps = step.steps ?? [];
+		if (steps.includes(subStep)) {
+			const def = step as PipelineStepDiagramDef;
+			def.$diagram = {...(def.$diagram ?? {}), $foldSubSteps: false};
+			return true;
+		} else {
+			return false;
+		}
+	},
 	// element create
 	createMainContentElement,
 	createSwitchableSnippetElement,
@@ -165,7 +175,7 @@ export const CommonStepDefs: CommonStepDefsType = {
 			})(),
 			discard: discard ?? CommonStepDefs.discard,
 			folder: ((): StepDefsFolder => {
-				const {switch: switchFold, askSubSteps, askSubStepsWithCategory} = folder ?? {};
+				const {switch: switchFold, askSubSteps, askSubStepsWithCategory, tryToRevealSubStep} = folder ?? {};
 				return {
 					accept: (step: F) => step.use === use,
 					switch: (step: PipelineStepDiagramDef, fold: boolean) => {
@@ -179,6 +189,13 @@ export const CommonStepDefs: CommonStepDefsType = {
 					askSubStepsWithCategory: (step: F) => {
 						const found = CommonStepDefs.folder.askSubStepsWithCategory(step);
 						return {...(found ?? {}), ...(askSubStepsWithCategory?.(step) ?? {})};
+					},
+					tryToRevealSubStep: (step: F, subStep: PipelineStepDef): boolean => {
+						const revealed = CommonStepDefs.folder.tryToRevealSubStep(step, subStep);
+						if (revealed) {
+							return true;
+						}
+						return tryToRevealSubStep?.(step, subStep) ?? false;
 					}
 				};
 			})(),
