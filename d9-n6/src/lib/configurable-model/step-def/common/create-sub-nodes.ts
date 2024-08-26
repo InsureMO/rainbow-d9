@@ -263,18 +263,20 @@ export const createRoutesSubNodesAndEndNode: CommonStepDefsType['createRoutesSub
 					return (void 0);
 				}
 
-				const routeNodes = (model.step as RoutesPipelineStepDef).routes?.map(route => {
+				const step = model.step as RoutesPipelineStepDef;
+				// create a route when there is no route, and steps for this route will be guarded in loop
+				step.routes = step.routes ?? [{}];
+				const routeNodes = step.routes.map((route, routeIndex) => {
 					// fake route as a step def
 					const steps = guardSetsLikeSteps({step: route as PipelineStepDef}, options);
 					return createSubNodesOfSingleRoute({
 						model, options,
 						askSteps: () => steps,
 						findPortFromModel: findStepsPortFromModel, createPortFromModel: createStepsPortFromModel,
-						askFirstLinkExtras: () => ({index: 0})
+						askFirstLinkExtras: () => ({index: routeIndex})
 					});
 				});
 
-				const step = model.step as RoutesPipelineStepDef;
 				const otherwise = step.otherwise;
 				if (otherwise == null || otherwise.length === 0) {
 					return routeNodes;
@@ -285,7 +287,7 @@ export const createRoutesSubNodesAndEndNode: CommonStepDefsType['createRoutesSub
 							model, options,
 							askSteps: () => step.otherwise,
 							findPortFromModel: findStepsPortFromModel, createPortFromModel: createStepsPortFromModel,
-							askFirstLinkExtras: () => ({index: 1})
+							askFirstLinkExtras: () => ({index: step.routes.length})
 						})
 					];
 				}

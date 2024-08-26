@@ -1,4 +1,4 @@
-import {Undefinable} from '@rainbow-d9/n1';
+import {Undefinable, VUtils} from '@rainbow-d9/n1';
 import yaml from 'js-yaml';
 import {FileDef} from './file-def-types';
 
@@ -14,6 +14,35 @@ export abstract class FileDefSerializer {
 
 	public constructor(options?: DefSaverOptions) {
 		this._redress = options?.redress;
+	}
+
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	protected redressValues(given: any): any {
+		if (given == null) {
+			return given;
+		} else if (VUtils.isPrimitive(given)) {
+			return given;
+		} else if (Array.isArray(given)) {
+			return given.map(item => this.redressValues(item));
+		} else {
+			return Object.keys(given).reduce((redressed, key) => {
+				const value = given[key];
+				if (value == null || (typeof value === 'string' && VUtils.isBlank(value))) {
+					// ignore this value
+				} else if (key.startsWith('$fold') && key.length > 5 && value !== true) {
+					// $foldXXX is not true, ignore this value since default value is false
+				} else if (key === '$diagram' && Object.keys(value).length === 0) {
+					// no value for $diagram, ignore this
+				} else if (VUtils.isPrimitive(value)) {
+					redressed[key] = value;
+				} else if (Array.isArray(value)) {
+					redressed[key] = value.map(item => this.redressValues(item));
+				} else {
+					redressed[key] = this.redressValues(value);
+				}
+				return redressed;
+			}, {});
+		}
 	}
 
 	protected camelToDash(key: string): string {
@@ -45,7 +74,7 @@ export abstract class FileDefSerializer {
 		if (this._redress) {
 			given = this._redress(given);
 		}
-		return this.redressKeyCase(given);
+		return this.redressKeyCase(this.redressValues(given));
 	}
 
 	protected abstract doStringify(def: FileDef): string;
@@ -61,7 +90,36 @@ export abstract class FileDefSerializer {
 export class YamlDefSaver extends FileDefSerializer {
 	public doStringify(def: FileDef): string {
 		try {
-			return yaml.dump(def);
+			const keyIndexes = [
+				'code', 'type', 'init-only', 'enabled',
+				'route', 'method', 'headers', 'path-params', 'query-params', 'body', 'files', 'expose-headers', 'expose-file',
+				'name', 'use',
+				'datasource', 'transaction', 'autonomous',
+				'check', 'routes', 'steps', 'otherwise'
+			];
+			return yaml.dump(def, {
+				// eslint-disable-next-line @typescript-eslint/no-explicit-any
+				sortKeys: (a: any, b: any) => {
+					if (a.startsWith('$') && !b.startsWith('$')) {
+						return 1;
+					} else if (!a.startsWith('$') && b.startsWith('$')) {
+						return -1;
+					} else {
+						const aIndex = keyIndexes.indexOf(a);
+						const bIndex = keyIndexes.indexOf(b);
+						if (aIndex === -1 && bIndex === -1) {
+							return a.localeCompare(b);
+						} else if (aIndex === -1) {
+							return 1;
+						} else if (bIndex === -1) {
+							return -1;
+						} else {
+							return aIndex - bIndex;
+						}
+					}
+				},
+				lineWidth: 120
+			});
 		} catch (e) {
 			console.group('Failed to dump O23 definition to yaml content.');
 			console.error(e);
