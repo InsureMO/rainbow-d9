@@ -216,11 +216,11 @@ const reconfigureStepDefDiscard = <F extends PipelineStepDef = PipelineStepDef, 
 };
 
 export const StepDialogContent = (props: { model: StepNodeModel }) => {
-	const {model} = props;
+	const {model: nodeModel} = props;
 
-	const {step: def, file} = model;
+	const {step: def, file} = nodeModel;
 	// create a configurable model from step def, and put into state
-	const [configurableModel] = useState<ConfigurableModel>(reconfigureStepDefPrepare(findStepDef(def.use).prepare, model)(def));
+	const [configurableModel] = useState<ConfigurableModel>(reconfigureStepDefPrepare(findStepDef(def.use).prepare, nodeModel)(def));
 	const forceUpdate = useForceUpdate();
 
 	// find step defs for editing
@@ -228,19 +228,19 @@ export const StepDialogContent = (props: { model: StepNodeModel }) => {
 	const StepDefs = findStepDef(use);
 
 	const onConfirm = (model: ConfigurableModel) => {
-		return reconfigureStepDefConfirm(StepDefs.confirm, model)(model, def, file, {
-			handlers: model.handlers, assistant: model.assistant
+		return reconfigureStepDefConfirm(StepDefs.confirm, nodeModel)(model, def, file, {
+			handlers: nodeModel.handlers, assistant: nodeModel.assistant
 		});
 	};
 	const onDiscard = (model: ConfigurableModel) => {
-		reconfigureStepDefDiscard(StepDefs.discard, model)(model);
+		reconfigureStepDefDiscard(StepDefs.discard, nodeModel)(model);
 	};
-	const elements = reconfigureStepDefProperties(StepDefs.properties, model);
+	const elements = reconfigureStepDefProperties(StepDefs.properties, nodeModel);
 
 	return <DialogContent model={configurableModel}
 	                      helpDoc={StepDefs.helpDocs} elements={elements}
 	                      confirm={onConfirm} discard={onDiscard}
-	                      assistant={model.assistant}>
+	                      assistant={nodeModel.assistant}>
 		<StepUseHandler repaint={forceUpdate}/>
 	</DialogContent>;
 };

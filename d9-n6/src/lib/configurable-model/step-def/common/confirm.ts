@@ -65,9 +65,20 @@ export const confirm: CommonStepDefsType['confirm'] =
 		const confirmErrorHandling = (name: 'catchable' | 'uncatchable' | 'exposed' | 'any', use?: ErrorHandleType) => {
 			def.errorHandles = def.errorHandles ?? {};
 			if (use === ErrorHandleType.STEPS) {
-				// steps, the original handles might be steps also, then do nothing
-				// otherwise, replace the error handles with one new step
-				if (def.errorHandles[name] != null && !Array.isArray(def.errorHandles[name])) {
+				// steps,
+				if (def.errorHandles[name] == null) {
+					// original handle is not declared, create a default step
+					def.errorHandles[name] = [assistant.createDefaultStep()];
+				} else if (Array.isArray(def.errorHandles[name])) {
+					// original handle is declared as sub steps, check length
+					if (def.errorHandles[name].length === 0) {
+						// empty, create a default step
+						def.errorHandles[name] = [assistant.createDefaultStep()];
+					} else {
+						// do nothing
+					}
+				} else {
+					// original by snippet, replace it with a default step
 					def.errorHandles[name] = [assistant.createDefaultStep()];
 				}
 			} else if (use === ErrorHandleType.SNIPPET) {
