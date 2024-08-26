@@ -1,5 +1,5 @@
 import {VUtils} from '@rainbow-d9/n1';
-import {AllInPipelineStepDef, FileDef} from '../../../definition';
+import {AllInPipelineStepDef, FileDef, PipelineStepDiagramDef} from '../../../definition';
 import {ConfigChangesConfirmed, ConfirmNodeOptions} from '../../types';
 import {findStepDef} from '../all-step-defs';
 import {
@@ -133,7 +133,10 @@ export const confirm: CommonStepDefsType['confirm'] =
 			}
 		};
 		Object.keys(def).forEach(key => survival(def, key, key));
-
+		const diagramDef = def as PipelineStepDiagramDef;
+		if (Object.keys(diagramDef.$diagram ?? {}).length === 0) {
+			delete diagramDef.$diagram;
+		}
 		// trigger change
 		options.handlers.onChange();
 
