@@ -48,10 +48,10 @@ steps:
     steps:
       - name: Authenticate
         use: ref-pipeline
-        code: auth-by-token
+        ref: auth-by-token
       - name: Authorize
         use: ref-step
-        code: ask-permissions
+        ref: ask-permissions
     $diagram:
       $foldSubSteps: true
   - name: Prepare Data

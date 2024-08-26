@@ -127,6 +127,13 @@ if (handle == null) {
 				}
 			};
 		}],
+		survivalAfterConfirm: ['and', (_def: HttpPipelineStepDef, property: string) => {
+			return [
+				'system', 'endpoint', 'decorateUrl', 'method', 'timeout',
+				'generateHeaders', 'bodyUsed', 'generateBody',
+				'readResponse', 'responseErrorHandles'
+			].includes(property);
+		}],
 		properties: [
 			elementRemoteApi,
 			elementRemoteRequest,

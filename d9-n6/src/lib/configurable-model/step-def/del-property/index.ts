@@ -22,6 +22,9 @@ export const DelPropertyStepDefs =
 			// TODO VALIDATE PROPERTY OF DEL PROPERTY STEP
 			return () => def.property = (model.property ?? '').trim();
 		}],
+		survivalAfterConfirm: ['and', (_def: DelPropertyPipelineStepDef, property: string) => {
+			return ['property'].includes(property);
+		}],
 		properties: [
 			CommonStepDefs.createMainContentElement({
 				code: 'property', label: Labels.StepDelPropertyProperty, anchor: 'property',

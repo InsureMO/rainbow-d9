@@ -310,7 +310,7 @@ export type SubStepsCategoryKey =
 export type SubStepsWithCategory = Undefinable<Record<SubStepsCategoryKey, Array<PipelineStepDef>>>
 
 /**
- * for all reconfigure functions, return null/undefined means no change, return a value means change
+ * for all folding functions, return null/undefined means no change, return a value means change
  */
 export interface StepDefsFolder<F extends PipelineStepDef = PipelineStepDef> {
 	accept: (step: F) => boolean;

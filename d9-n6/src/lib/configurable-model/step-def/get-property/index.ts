@@ -21,6 +21,9 @@ export const GetPropertyStepDefs =
 			// TODO VALIDATE PROPERTY OF GET PROPERTY STEP
 			return () => def.property = (model.property ?? '').trim();
 		}],
+		survivalAfterConfirm: ['and', (_def: GetPropertyPipelineStepDef, property: string) => {
+			return ['property'].includes(property);
+		}],
 		properties: [
 			CommonStepDefs.createMainContentElement({
 				code: 'property', label: Labels.StepGetPropertyProperty, anchor: 'property',

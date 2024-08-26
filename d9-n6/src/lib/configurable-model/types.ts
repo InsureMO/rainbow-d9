@@ -36,6 +36,8 @@ export interface StepNodeConfigurer<F extends PipelineStepDef = PipelineStepDef,
 	switchUse: (model: ConfigurableModel, originalUse: PipelineStepDef['use']) => ConfigurableModel;
 	/** confirm the changes from edit dialog */
 	confirm: (model: M, def: F, file: FileDef, options: ConfirmNodeOptions) => ConfigChangesConfirmed;
+	/** property could concatenated by "." */
+	survivalAfterConfirm: (def: F, property: string) => boolean;
 	/** discard the changes from edit dialog */
 	discard: (model: M) => void;
 	ports?: Array<{ key: string, port: StepPort }>;

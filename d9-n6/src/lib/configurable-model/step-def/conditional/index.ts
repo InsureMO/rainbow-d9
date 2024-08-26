@@ -24,7 +24,7 @@ const shouldReConfigure = (model: StepNodeModel): boolean => {
 		return false;
 	}
 	const parentDef = getParentDef(model);
-	return (parentDef.steps ?? [])[0] === model.step;
+	return parentDef.use === StandardPipelineStepRegisterKey.CONDITIONAL_SETS && (parentDef.steps ?? [])[0] === model.step;
 };
 
 export const ConditionalStepCheckReconfigurer: StepDefsReconfigurer = {
@@ -66,6 +66,12 @@ export const ConditionalStepCheckReconfigurer: StepDefsReconfigurer = {
 export const ConditionalStepDefs =
 	CommonStepDefs.createStepNodeConfigurer<ConditionalPipelineStepDef, ConditionalStepDefModel>({
 		use: StandardPipelineStepRegisterKey.CONDITIONAL_SETS,
+		survivalAfterConfirm: ['and', (_def: ConditionalPipelineStepDef, property: string) => {
+			return [
+				'check', 'steps', 'steps.*', 'otherwise', 'otherwise.*',
+				'$diagram.$foldSubSteps'
+			].includes(property);
+		}],
 		folder: {
 			switch: CommonStepDefs.switchFoldWhenSubNodesExist,
 			askSubSteps: (step: ConditionalPipelineStepDef) => {
@@ -94,11 +100,11 @@ export const ConditionalStepDefs =
 		helpDocs: HelpDocs.conditionalStep,
 		reconfigurer: ConditionalStepCheckReconfigurer,
 		firstSubStepPortContainerFind: (step, parent) => {
-			if (parent.use === StandardPipelineStepRegisterKey.CONDITIONAL_SETS
-				&& (parent as ConditionalPipelineStepDef).steps?.[0] === step) {
-				return FirstSubStepPortForRouteTest;
+			if (parent.use !== StandardPipelineStepRegisterKey.CONDITIONAL_SETS) {
+				return (void 0);
 			}
-			return (void 0);
+			const found = (parent as ConditionalPipelineStepDef).steps?.[0] === step;
+			return found ? FirstSubStepPortForRouteTest : (void 0);
 		}
 	});
 registerStepDef(ConditionalStepDefs);

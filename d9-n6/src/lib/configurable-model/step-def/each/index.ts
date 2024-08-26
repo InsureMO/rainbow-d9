@@ -36,6 +36,9 @@ export const EachStepDefs =
 				}
 			};
 		}],
+		survivalAfterConfirm: ['and', (_def: EachPipelineStepDef, property: string) => {
+			return ['originalContentName', 'itemName', 'steps', 'steps.*', '$diagram.$foldSubSteps'].includes(property);
+		}],
 		folder: {
 			switch: CommonStepDefs.switchFoldWhenSubNodesExist,
 			askSubSteps: CommonStepDefs.askSubSteps,

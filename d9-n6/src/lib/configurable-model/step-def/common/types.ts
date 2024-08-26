@@ -115,6 +115,7 @@ export type AndPrepare<F extends AllInPipelineStepDef, M extends CommonStepDefMo
 export type AndConfirmCommit = () => void;
 export type AndConfirmReturned = Array<ConfigurableElementAnchor> | AndConfirmCommit
 export type AndConfirm<F extends AllInPipelineStepDef, M extends CommonStepDefModel> = (model: M, def: F, file: FileDef, options: ConfirmNodeOptions) => AndConfirmReturned;
+export type AndSurvival<F extends AllInPipelineStepDef> = (def: F, property: string) => boolean;
 
 export interface CreateStepNodeConfigurerOptions<F extends AllInPipelineStepDef, M extends CommonStepDefModel> {
 	// for myself
@@ -122,6 +123,7 @@ export interface CreateStepNodeConfigurerOptions<F extends AllInPipelineStepDef,
 	prepare?: ['replace', StepNodeConfigurer<F, M>['prepare']] | ['and', AndPrepare<F, M>];
 	switchUse?: ['replace', StepNodeConfigurer<F, M>['switchUse']] | ['keep', Array<string>];
 	confirm?: ['replace', StepNodeConfigurer<F, M>['confirm']] | ['and', AndConfirm<F, M>];
+	survivalAfterConfirm?: ['replace', StepNodeConfigurer<F, M>['survivalAfterConfirm']] | ['and', AndSurvival<F>];
 	discard?: StepNodeConfigurer<F, M>['discard'];
 	properties?: Array<ConfigurableElement>;
 	ports?: Array<{ key: string, port: StepPort }>;
@@ -144,6 +146,7 @@ export interface CommonStepDefsType
 	prepare: <F extends AllInPipelineStepDef, M extends CommonStepDefModel>(def: F, and?: AndPrepare<F, M>) => M;
 	switchUse: (model: ConfigurableModel, keptPropNames: Array<string>, originalUse: PipelineStepDef['use']) => void;
 	confirm: <F extends AllInPipelineStepDef, M extends CommonStepDefModel>(model: M, def: F, file: FileDef, options: ConfirmNodeOptions, and?: AndConfirm<F, M>) => ConfigChangesConfirmed;
+	survivalAfterConfirm: <F extends AllInPipelineStepDef>(def: F, property: string) => boolean;
 	folder: StepDefsFolder;
 	// nodes
 	createSubNodes: (node: StepNodeModel, options: CreateSubNodesOptions) => Undefinable<Array<HandledNodeModel>>;

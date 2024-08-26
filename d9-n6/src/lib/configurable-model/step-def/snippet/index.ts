@@ -22,6 +22,9 @@ export const SnippetStepDefs =
 			// TODO VALIDATE SNIPPET OF SNIPPET STEP
 			return () => def.snippet = model.snippet;
 		}],
+		survivalAfterConfirm: ['and', (_def: SnippetPipelineStepDef, property: string) => {
+			return ['snippet'].includes(property);
+		}],
 		properties: [
 			CommonStepDefs.createMainContentElement({
 				code: 'snippet', label: Labels.StepSnippetSnippet, anchor: 'snippet',

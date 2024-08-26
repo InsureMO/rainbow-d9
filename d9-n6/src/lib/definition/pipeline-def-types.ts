@@ -95,7 +95,6 @@ export interface HttpPipelineStepDef extends AllInPipelineStepDef {
 
 export interface HttpFetchPipelineStepDef extends HttpPipelineStepDef {
 	use: StandardPipelineStepRegisterKey.HTTP_FETCH;
-	responseErrorHandles?: { [key: string]: string; };
 }
 
 export interface HttpGetPipelineStepDef extends HttpPipelineStepDef {
@@ -105,7 +104,7 @@ export interface HttpGetPipelineStepDef extends HttpPipelineStepDef {
 
 export interface HttpPostPipelineStepDef extends HttpPipelineStepDef {
 	use: StandardPipelineStepRegisterKey.HTTP_POST;
-	method: 'get';
+	method: 'post';
 }
 
 export interface SetsLikePipelineStepDef extends AllInPipelineStepDef {
@@ -183,7 +182,7 @@ export interface TypeOrmTransactionalPipelineStepDef extends TypeOrmPipelineStep
 }
 
 export interface RefOnCodePipelineStepDef extends AllInPipelineStepDef {
-	code?: string;
+	ref?: string;
 }
 
 export interface RefPipelinePipelineStepDef extends RefOnCodePipelineStepDef {

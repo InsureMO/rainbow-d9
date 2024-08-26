@@ -28,7 +28,7 @@ export abstract class FileDefSerializer {
 			return given.map(item => this.redressKeyCase(item));
 		} else if (typeof given === 'object') {
 			return Object.keys(given).reduce((redressed, key) => {
-				if (key.indexOf('-') !== -1) {
+				if (key.indexOf('-') === -1) {
 					redressed[this.camelToDash(key)] = this.redressKeyCase(given[key]);
 				} else {
 					redressed[key] = this.redressKeyCase(given[key]);

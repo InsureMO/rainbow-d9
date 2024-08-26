@@ -74,6 +74,7 @@ const createTypeOrmBySqlPipelineStepDefs =
 					}
 				};
 			},
+			survivalProperties: ['sql'],
 			properties: [{
 				code: 'sql', label: Labels.StepTypeOrmSql, anchor: 'sql',
 				badge: (model: M): ReactNode => {

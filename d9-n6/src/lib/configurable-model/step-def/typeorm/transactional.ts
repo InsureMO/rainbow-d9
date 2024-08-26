@@ -19,6 +19,9 @@ export const TypeOrmTransactionalStepDefs =
 		prepare: ['and', prepare()],
 		switchUse: ['keep', switchUse],
 		confirm: ['and', confirm()],
+		survivalAfterConfirm: ['and', (_def: TypeOrmTransactionalPipelineStepDef, property: string) => {
+			return switchUse.includes(property);
+		}],
 		folder: {
 			switch: CommonStepDefs.switchFoldWhenSubNodesExist,
 			askSubSteps: CommonStepDefs.askSubSteps,

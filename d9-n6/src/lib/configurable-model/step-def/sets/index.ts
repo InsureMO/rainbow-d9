@@ -10,6 +10,9 @@ export interface SetsStepDefModel extends CommonStepDefModel {
 export const SetsStepDefs =
 	CommonStepDefs.createStepNodeConfigurer<SetsPipelineStepDef, SetsStepDefModel>({
 		use: StandardPipelineStepRegisterKey.SETS,
+		survivalAfterConfirm: ['and', (_def: SetsPipelineStepDef, property: string) => {
+			return ['steps', 'steps.*', '$diagram.$foldSubSteps'].includes(property);
+		}],
 		folder: {
 			switch: CommonStepDefs.switchFoldWhenSubNodesExist,
 			askSubSteps: CommonStepDefs.askSubSteps,

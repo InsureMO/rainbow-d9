@@ -47,6 +47,7 @@ import {
 	PortUncatchableError
 } from './ports';
 import {prepare} from './prepare';
+import {survivalAfterConfirm} from './survival-after-confirm';
 import {switchUse} from './switch-use';
 import {CommonStepDefModel, CommonStepDefsType, CreateStepNodeConfigurerOptions, RouteTestStepDefModel} from './types';
 
@@ -58,7 +59,7 @@ export * from './port-widgets';
 export * from './ports';
 
 export const CommonStepDefs: CommonStepDefsType = {
-	prepare, switchUse, confirm, discard, folder,
+	prepare, switchUse, confirm, survivalAfterConfirm, discard, folder,
 	properties: {
 		name: elementName, use: elementUse,
 		fromInput: elementFromInputGroup, toOutput: elementToOutputGroup,
@@ -123,7 +124,7 @@ export const CommonStepDefs: CommonStepDefsType = {
 	createStepNodeConfigurer: <F extends AllInPipelineStepDef, M extends CommonStepDefModel>(options: CreateStepNodeConfigurerOptions<F, M>): StepNodeConfigurer<F, M> => {
 		const {
 			use,
-			prepare, switchUse, confirm, discard, folder,
+			prepare, switchUse, confirm, survivalAfterConfirm, discard, folder,
 			properties, ports,
 			createSubNodes, findSubPorts,
 			helpDocs,
@@ -175,6 +176,27 @@ export const CommonStepDefs: CommonStepDefsType = {
 						console.debug(`No confirm defined for step[${use}], use default CommonStepDefs.confirm.`);
 						return (model: M, def: F, file: FileDef, options: ConfirmNodeOptions): ConfigChangesConfirmed => {
 							return CommonStepDefs.confirm(model, def, file, options);
+						};
+				}
+			})(),
+			survivalAfterConfirm: (() => {
+				const [key, func] = survivalAfterConfirm ?? [];
+				switch (key) {
+					case 'replace':
+						return func;
+					case 'and':
+						return (def: F, property: string): boolean => {
+							const survival = CommonStepDefs.survivalAfterConfirm(def, property);
+							if (!survival) {
+								return func(def, property);
+							} else {
+								return survival;
+							}
+						};
+					default:
+						console.debug(`No survivalAfterConfirm defined for step[${use}], use default CommonStepDefs.survivalAfterConfirm.`);
+						return (def: F, property: string): boolean => {
+							return CommonStepDefs.survivalAfterConfirm(def, property);
 						};
 				}
 			})(),

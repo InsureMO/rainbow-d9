@@ -15,8 +15,11 @@ const getParentDef = (model: StepNodeModel): RoutesPipelineStepDef => {
 	return model.getSubOf() as RoutesPipelineStepDef;
 };
 type ArrayElement<ArrayType extends readonly unknown[]> = ArrayType extends readonly (infer ElementType)[] ? ElementType : never;
-const getRouteOfParentDef = (model: StepNodeModel): ArrayElement<RoutesPipelineStepDef['routes']> => {
+const getRouteOfParentDef = (model: StepNodeModel): Undefinable<ArrayElement<RoutesPipelineStepDef['routes']>> => {
 	const parentDef = getParentDef(model);
+	if (parentDef.use !== StandardPipelineStepRegisterKey.ROUTES_SETS) {
+		return (void 0);
+	}
 	return parentDef.routes?.find(route => route.steps?.[0] === model.step);
 };
 const shouldReConfigure = (model: StepNodeModel): boolean => {
@@ -65,6 +68,13 @@ export const RoutesStepCheckReconfigurer: StepDefsReconfigurer = {
 export const RoutesStepDefs =
 	CommonStepDefs.createStepNodeConfigurer<RoutesPipelineStepDef, RoutesStepDefModel>({
 		use: StandardPipelineStepRegisterKey.ROUTES_SETS,
+		survivalAfterConfirm: ['and', (_def: RoutesPipelineStepDef, property: string) => {
+			return [
+				'routes', 'routes.check', 'routes.steps', 'routes.steps.*',
+				'otherwise', 'otherwise.*',
+				'$diagram.$foldSubSteps'
+			].includes(property);
+		}],
 		folder: {
 			switch: CommonStepDefs.switchFoldWhenSubNodesExist,
 			askSubSteps: (step: RoutesPipelineStepDef) => {

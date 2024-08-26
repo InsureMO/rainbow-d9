@@ -90,6 +90,7 @@ export interface CreateTypeOrmWithAutonomousStepDefsOptions<F extends TypeOrmWit
 	andPrepare?: AndPrepare<F, M>;
 	keepPropertiesOnUseSwitch?: Array<string>;
 	andConfirm?: AndConfirm<F, M>;
+	survivalProperties: Array<string>;
 	properties?: Array<ConfigurableElement>;
 	ports?: Array<{ key: string, port: StepPort }>;
 	helpDocs: string;
@@ -98,7 +99,7 @@ export interface CreateTypeOrmWithAutonomousStepDefsOptions<F extends TypeOrmWit
 export const createTypeOrmWithAutonomousStepDefs =
 	<F extends TypeOrmWithAutonomousPipelineStepDef, M extends TypeOrmWithAutonomousStepDefModel>(options: CreateTypeOrmWithAutonomousStepDefsOptions<F, M>) => {
 		const {
-			use, andPrepare, keepPropertiesOnUseSwitch, andConfirm,
+			use, andPrepare, keepPropertiesOnUseSwitch, andConfirm, survivalProperties,
 			properties, ports = [], helpDocs
 		} = options;
 
@@ -107,6 +108,9 @@ export const createTypeOrmWithAutonomousStepDefs =
 			prepare: ['and', prepareWithAutonomous(andPrepare)],
 			switchUse: ['keep', [...switchUseWithAutonomous, ...(keepPropertiesOnUseSwitch ?? [])]],
 			confirm: ['and', confirmWithAutonomous(andConfirm)],
+			survivalAfterConfirm: ['and', (_def: TypeOrmWithAutonomousPipelineStepDef, property: string) => {
+				return [...switchUseWithAutonomous, ...survivalProperties].includes(property);
+			}],
 			properties: [CommonStepDefs.createMainContentElement(elementDatasource, elementAutonomousOrTransaction, ...(properties ?? []))],
 			ports: [
 				{key: 'datasource', port: PortDatasource},

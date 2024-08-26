@@ -16,7 +16,7 @@ import {registerStepDef} from '../all-step-defs';
 import {AndConfirmReturned, CommonStepDefModel, CommonStepDefs} from '../common';
 
 export interface RefOnCodeStepDefModel extends CommonStepDefModel {
-	code?: string;
+	ref?: string;
 }
 
 export interface CreateRefOnCodeStepDefsOptions<F extends RefOnCodePipelineStepDef> {
@@ -32,20 +32,23 @@ export const createRefOnCodeStepDefs =
 		const {use, label, askRefOptions, elementCodeHelpDoc, stepHelpDoc} = options;
 		return CommonStepDefs.createStepNodeConfigurer<F, M>({
 			use,
-			prepare: ['and', (def: F, model: M) => model.code = def.code],
-			switchUse: ['keep', ['code']],
+			prepare: ['and', (def: F, model: M) => model.ref = def.ref],
+			switchUse: ['keep', ['ref']],
 			// eslint-disable-next-line @typescript-eslint/no-unused-vars
 			confirm: ['and', (model: M, def: F, _file, _options): AndConfirmReturned => {
 				// TODO VALIDATE REF CODE OF REF ON CODE STEPS
-				return () => def.code = (model.code ?? '').trim();
+				return () => def.ref = (model.ref ?? '').trim();
+			}],
+			survivalAfterConfirm: ['and', (_def: F, property: string) => {
+				return ['ref'].includes(property);
 			}],
 			properties: [
 				CommonStepDefs.createMainContentElement({
-					code: 'code', label, anchor: 'code',
-					badge: createCheckOrMissBadge<RefOnCodeStepDefModel>({check: model => VUtils.isNotBlank(model.code)}),
+					code: 'ref', label, anchor: 'ref',
+					badge: createCheckOrMissBadge<RefOnCodeStepDefModel>({check: model => VUtils.isNotBlank(model.ref)}),
 					editor: createDropdownOnAssistantEditor<RefOnCodeStepDefModel, string>({
-						getValue: model => model.code,
-						setValue: (model, value) => model.code = value,
+						getValue: model => model.ref,
+						setValue: (model, value) => model.ref = value,
 						askOptions: askRefOptions
 					}),
 					helpDoc: elementCodeHelpDoc
@@ -53,8 +56,8 @@ export const createRefOnCodeStepDefs =
 			],
 			ports: [
 				createPrePortOnAssistantWithKey({
-					key: 'code', label,
-					getValue: model => model.code,
+					key: 'ref', label,
+					getValue: model => model.ref,
 					askOptions: askRefOptions
 				})
 			],

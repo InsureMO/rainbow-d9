@@ -25,6 +25,7 @@ export const TypeOrmBySnippetStepDefs =
 			// TODO VALIDATE SNIPPET OF TYPEORM SNIPPET STEP
 			return () => def.snippet = model.snippet;
 		},
+		survivalProperties: ['snippet'],
 		properties: [{
 			code: 'snippet', label: Labels.StepTypeOrmSnippet, anchor: 'snippet',
 			badge: createCheckOrMissBadge<TypeOrmBySnippetStepDefModel>({check: model => VUtils.isNotBlank(model.snippet)}),

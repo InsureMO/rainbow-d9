@@ -28,6 +28,7 @@ export const prepare: CommonStepDefsType['prepare'] =
 			} else if (Array.isArray(handle)) {
 				model.temporary[flagName] = ErrorHandleType.STEPS;
 			} else {
+				model.errorHandles = {...(model.errorHandles ?? {}), [name]: handle};
 				model.temporary[flagName] = ErrorHandleType.SNIPPET;
 			}
 		};

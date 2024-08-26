@@ -43,6 +43,9 @@ export const ParallelStepDefs =
 				}
 			};
 		}],
+		survivalAfterConfirm: ['and', (_def: ParallelPipelineStepDef, property: string) => {
+			return ['cloneData', 'race', 'steps', 'steps.*', '$diagram.$foldSubSteps'].includes(property);
+		}],
 		folder: {
 			switch: CommonStepDefs.switchFoldWhenSubNodesExist,
 			askSubSteps: CommonStepDefs.askSubSteps,

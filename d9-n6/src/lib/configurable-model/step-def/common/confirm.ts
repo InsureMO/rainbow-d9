@@ -1,6 +1,7 @@
 import {VUtils} from '@rainbow-d9/n1';
 import {AllInPipelineStepDef, FileDef} from '../../../definition';
 import {ConfigChangesConfirmed, ConfirmNodeOptions} from '../../types';
+import {findStepDef} from '../all-step-defs';
 import {
 	AndConfirm,
 	AndConfirmCommit,
@@ -93,8 +94,46 @@ export const confirm: CommonStepDefsType['confirm'] =
 		confirmErrorHandling('uncatchable', model.temporary?.useErrorHandlesForUncatchable);
 		confirmErrorHandling('exposed', model.temporary?.useErrorHandlesForExposed);
 		confirmErrorHandling('any', model.temporary?.useErrorHandlesForAny);
+		if (Object.keys(def.errorHandles ?? {}).length === 0) {
+			delete def.errorHandles;
+		}
 
 		commitOfAnd();
+		const defs = findStepDef(def.use);
+		// eslint-disable-next-line @typescript-eslint/no-explicit-any
+		const survival = (holder: any, fullQualifiedProperty: string, property: string) => {
+			const data = holder[property];
+			if (data == null) {
+				delete holder[property];
+			} else if (typeof data === 'string' && VUtils.isBlank(data)) {
+				delete holder[property];
+			} else if (!defs.survivalAfterConfirm(def, fullQualifiedProperty)) {
+				delete holder[property];
+			} else if (VUtils.isPrimitive(data)) {
+				// survival, do nothing
+			} else if (defs.survivalAfterConfirm(def, `${fullQualifiedProperty}.*`)) {
+				// all children of this object/array are survival, do nothing
+			} else if (Array.isArray(data)) {
+				// never occurs, survival, do nothing
+				// eslint-disable-next-line @typescript-eslint/no-explicit-any
+				const each = (data: Array<any>) => {
+					data.forEach(item => {
+						if (item == null || VUtils.isPrimitive(item)) {
+							// do nothing
+						} else if (Array.isArray(item)) {
+							each(item);
+						} else {
+							Object.keys(item).forEach(key => survival(item, `${fullQualifiedProperty}.${key}`, key));
+						}
+					});
+				};
+				each(data);
+			} else {
+				Object.keys(data).forEach(key => survival(data, `${fullQualifiedProperty}.${key}`, key));
+			}
+		};
+		Object.keys(def).forEach(key => survival(def, key, key));
+
 		// trigger change
 		options.handlers.onChange();
 

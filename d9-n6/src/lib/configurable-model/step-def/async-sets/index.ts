@@ -10,6 +10,9 @@ export interface AsyncSetsStepDefModel extends CommonStepDefModel {
 export const AsyncSetsStepDefs =
 	CommonStepDefs.createStepNodeConfigurer<AsyncSetsPipelineStepDef, AsyncSetsStepDefModel>({
 		use: StandardPipelineStepRegisterKey.ASYNC_SETS,
+		survivalAfterConfirm: ['and', (_def: AsyncSetsPipelineStepDef, property: string) => {
+			return ['steps', 'steps.*', '$diagram.$foldSubSteps'].includes(property);
+		}],
 		folder: {
 			switch: CommonStepDefs.switchFoldWhenSubNodesExist,
 			askSubSteps: CommonStepDefs.askSubSteps,
