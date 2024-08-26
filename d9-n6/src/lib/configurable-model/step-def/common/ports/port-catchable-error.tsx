@@ -13,11 +13,16 @@ export const PortCatchableError = (props: StepPortProps) => {
 	if (!exists) {
 		return null;
 	}
+	// when in repaint, port maybe ready in backend engine, but not available in engine
+	// therefore check the port is available or not first
+	// typically error handle switched from snippet to sub steps, or vice versa
+	const port = node.getPort(CatchableErrorHandlePortModel.NAME) as CatchableErrorHandlePortModel;
+	if (port == null) {
+		return null;
+	}
 
 	return <PostPort label={Labels.StepHandleCatchableError} required={false} defined={true}
 	                 data-role="catchable-error">
-		<CatchableErrorHandlePortWidget
-			port={node.getPort(CatchableErrorHandlePortModel.NAME) as CatchableErrorHandlePortModel}
-			engine={engine}/>
+		<CatchableErrorHandlePortWidget port={port} engine={engine}/>
 	</PostPort>;
 };

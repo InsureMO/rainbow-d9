@@ -50,6 +50,7 @@ export const Labels = {
 	StepToOutput: <IntlLabel keys={['o23', 'step', 'to-output']} value="Write To Output"/>,
 	StepMerge: <IntlLabel keys={['o23', 'step', 'merge']} value="Merge-back strategy"/>,
 	StepMergeReplace: <IntlLabel keys={['o23', 'step', 'merge-replace']} value="Replace Merge"/>,
+	StepMergeUnbox: <IntlLabel keys={['o23', 'step', 'merge-replace']} value="Unbox Merge"/>,
 	StepMergeAsProperty: <IntlLabel keys={['o23', 'step', 'merge-as-property']} value="Merge As"/>,
 	StepMainContent: <IntlLabel keys={['o23', 'step', 'main-content']} value="Main Task"/>,
 	StepRouteTest: <IntlLabel keys={['o23', 'step', 'route-test']} value="Route Test"/>,

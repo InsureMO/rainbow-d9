@@ -57,7 +57,10 @@ const createTypeOrmBySqlPipelineStepDefs =
 			andPrepare: (def, model) => {
 				model.sql = def.sql;
 				model.temporary = model.temporary || {};
-				model.temporary.sqlByParams = VUtils.isBlank(model.sql);
+				if (VUtils.isBlank(model.sql) || model.sql === '@ignore') {
+					model.temporary.sqlByParams;
+					delete model.sql;
+				}
 			},
 			keepPropertiesOnUseSwitch: ['sql'],
 			// eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -65,7 +68,7 @@ const createTypeOrmBySqlPipelineStepDefs =
 				// TODO VALIDATE SQL OF TYPEORM SQL STEPS
 				return () => {
 					if (model.temporary?.sqlByParams === true) {
-						delete def.sql;
+						def.sql = '@ignore';
 					} else {
 						def.sql = model.sql;
 					}

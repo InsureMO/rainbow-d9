@@ -14,9 +14,15 @@ export const PortExposedError = (props: StepPortProps) => {
 		return null;
 	}
 
+	// when in repaint, port maybe ready in backend engine, but not available in engine
+	// therefore check the port is available or not first
+	// typically error handle switched from snippet to sub steps, or vice versa
+	const port = node.getPort(ExposedErrorHandlePortModel.NAME) as ExposedErrorHandlePortModel;
+	if (port == null) {
+		return null;
+	}
+
 	return <PostPort label={Labels.StepHandleExposedError} required={false} defined={true} data-role="exposed-error">
-		<ExposedErrorHandlePortWidget
-			port={node.getPort(ExposedErrorHandlePortModel.NAME) as ExposedErrorHandlePortModel}
-			engine={engine}/>
+		<ExposedErrorHandlePortWidget port={port} engine={engine}/>
 	</PostPort>;
 };
