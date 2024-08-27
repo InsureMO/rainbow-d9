@@ -4,6 +4,7 @@ import {DiagramEngine} from '@projectstorm/react-diagrams-core';
 import {
 	AnyErrorHandlePortFactory,
 	CatchableErrorHandlePortFactory,
+	EndOfMeJoinLinkFactory,
 	ErrorHandlesLinkFactory,
 	ExposedErrorHandlePortFactory,
 	FirstSubStepPortFactory,
@@ -13,7 +14,6 @@ import {
 	StepsPortFactory,
 	UncatchableErrorHandlePortFactory
 } from '../configurable-model';
-import {EndOfMeJoinLinkFactory} from '../configurable-model/step-def/common/links/link-end-of-me-join';
 import {NextStepPortFactory, PreviousStepPortFactory} from './common';
 import {EndNodeFactory} from './end-node';
 import {JoinEndNodeFactory} from './join-end-node';

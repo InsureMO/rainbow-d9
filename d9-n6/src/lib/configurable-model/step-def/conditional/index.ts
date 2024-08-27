@@ -10,7 +10,13 @@ import {ConfigurableElement, ConfigurableModel, StepDefsReconfigurer} from '../.
 import {HelpDocs} from '../../../help-docs';
 import {ConfigChangesConfirmed, ConfirmNodeOptions, StepNodeConfigurer} from '../../types';
 import {registerStepDef} from '../all-step-defs';
-import {CommonStepDefModel, CommonStepDefs, FirstSubStepPortForRouteTest, RouteTestStepDefModel} from '../common';
+import {
+	AndConfirmReturned,
+	CommonStepDefModel,
+	CommonStepDefs,
+	FirstSubStepPortForRouteTest,
+	RouteTestStepDefModel
+} from '../common';
 
 export interface ConditionalStepDefModel extends CommonStepDefModel {
 	use: StandardPipelineStepRegisterKey.CONDITIONAL_SETS;
@@ -66,6 +72,11 @@ export const ConditionalStepCheckReconfigurer: StepDefsReconfigurer = {
 export const ConditionalStepDefs =
 	CommonStepDefs.createStepNodeConfigurer<ConditionalPipelineStepDef, ConditionalStepDefModel>({
 		use: StandardPipelineStepRegisterKey.CONDITIONAL_SETS,
+		confirm: ['and', (_model, def, _file, options): AndConfirmReturned => {
+			return () => {
+				CommonStepDefs.confirmConditionalPipelineStep(def, options);
+			};
+		}],
 		survivalAfterConfirm: ['and', (_def: ConditionalPipelineStepDef, property: string) => {
 			return [
 				'check', 'steps', 'steps.*', 'otherwise', 'otherwise.*',

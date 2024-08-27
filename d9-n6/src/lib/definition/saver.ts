@@ -27,8 +27,15 @@ export abstract class FileDefSerializer {
 		} else {
 			return Object.keys(given).reduce((redressed, key) => {
 				const value = given[key];
-				if (value == null || (typeof value === 'string' && VUtils.isBlank(value))) {
+				if (value == null) {
 					// ignore this value
+				} else if (typeof value === 'string') {
+					if (VUtils.isBlank(value)) {
+						// ignore this value
+					} else {
+						// for snippet, replace tab with 2 spaces
+						redressed[key] = value.replace(/\t/g, '  ');
+					}
 				} else if (key.startsWith('$fold') && key.length > 5 && value !== true) {
 					// $foldXXX is not true, ignore this value since default value is false
 				} else if (key === '$diagram' && Object.keys(value).length === 0) {

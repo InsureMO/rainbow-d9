@@ -21,9 +21,10 @@ export const EachStepDefs =
 		}],
 		switchUse: ['keep', ['originalContentName', 'itemName']],
 		// eslint-disable-next-line @typescript-eslint/no-unused-vars
-		confirm: ['and', (model, def, _file, _options): AndConfirmReturned => {
+		confirm: ['and', (model, def, _file, options): AndConfirmReturned => {
 			// TODO VALIDATE PROPERTIES OF EACH STEP
 			return () => {
+				CommonStepDefs.confirmSetsLikePipelineStep(def, options);
 				if (VUtils.isBlank(model.originalContentName)) {
 					delete def.originalContentName;
 				} else {

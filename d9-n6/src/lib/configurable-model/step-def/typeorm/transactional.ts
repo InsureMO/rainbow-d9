@@ -1,7 +1,7 @@
 import {StandardPipelineStepRegisterKey, TypeOrmTransactionalPipelineStepDef} from '../../../definition';
 import {HelpDocs} from '../../../help-docs';
 import {registerStepDef} from '../all-step-defs';
-import {CommonStepDefs} from '../common';
+import {AndConfirmReturned, CommonStepDefs} from '../common';
 import {elementDatasource} from './element-datasource';
 import {elementTransaction} from './element-transaction';
 import {confirm, prepare, switchUse} from './funcs';
@@ -18,7 +18,11 @@ export const TypeOrmTransactionalStepDefs =
 		use: StandardPipelineStepRegisterKey.TYPEORM_TRANSACTIONAL,
 		prepare: ['and', prepare()],
 		switchUse: ['keep', switchUse],
-		confirm: ['and', confirm()],
+		confirm: ['and', confirm((_model, def, _file, options): AndConfirmReturned => {
+			return () => {
+				CommonStepDefs.confirmSetsLikePipelineStep(def, options);
+			};
+		})],
 		survivalAfterConfirm: ['and', (_def: TypeOrmTransactionalPipelineStepDef, property: string) => {
 			return switchUse.includes(property);
 		}],

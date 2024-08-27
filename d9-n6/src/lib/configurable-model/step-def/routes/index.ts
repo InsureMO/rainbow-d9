@@ -5,7 +5,13 @@ import {ConfigurableElement, ConfigurableModel, StepDefsReconfigurer} from '../.
 import {HelpDocs} from '../../../help-docs';
 import {ConfigChangesConfirmed, ConfirmNodeOptions, StepNodeConfigurer} from '../../types';
 import {registerStepDef} from '../all-step-defs';
-import {CommonStepDefModel, CommonStepDefs, FirstSubStepPortForRouteTest, RouteTestStepDefModel} from '../common';
+import {
+	AndConfirmReturned,
+	CommonStepDefModel,
+	CommonStepDefs,
+	FirstSubStepPortForRouteTest,
+	RouteTestStepDefModel
+} from '../common';
 
 export interface RoutesStepDefModel extends CommonStepDefModel {
 	use: StandardPipelineStepRegisterKey.ROUTES_SETS;
@@ -68,6 +74,11 @@ export const RoutesStepCheckReconfigurer: StepDefsReconfigurer = {
 export const RoutesStepDefs =
 	CommonStepDefs.createStepNodeConfigurer<RoutesPipelineStepDef, RoutesStepDefModel>({
 		use: StandardPipelineStepRegisterKey.ROUTES_SETS,
+		confirm: ['and', (_model, def, _file, options): AndConfirmReturned => {
+			return () => {
+				CommonStepDefs.confirmRoutesPipelineStep(def, options);
+			};
+		}],
 		survivalAfterConfirm: ['and', (_def: RoutesPipelineStepDef, property: string) => {
 			return [
 				'routes', 'routes.check', 'routes.steps', 'routes.steps.*',

@@ -14,7 +14,12 @@ import {Labels} from '../../../labels';
 import {PlaygroundCssVars} from '../../../widgets';
 import {createCheckOrMissBadge, createSnippetEditor} from '../../common';
 import {ConfigChangesConfirmed, ConfirmNodeOptions, StepNodeConfigurer} from '../../types';
-import {confirm} from './confirm';
+import {
+	confirm,
+	confirmConditionalPipelineStep,
+	confirmRoutesPipelineStep,
+	confirmSetsLikePipelineStep
+} from './confirm';
 import {
 	createConditionalSubNodesAndEndNode,
 	createParallelSubNodesAndEndNode,
@@ -89,6 +94,7 @@ export const CommonStepDefs: CommonStepDefsType = {
 	createSubNodes, createSubNodesAndEndNode,
 	createSetsLikeSubNodesAndEndNode, createParallelSubNodesAndEndNode,
 	createConditionalSubNodesAndEndNode, createRoutesSubNodesAndEndNode,
+	confirmSetsLikePipelineStep, confirmConditionalPipelineStep, confirmRoutesPipelineStep,
 	findSubPorts,
 	switchFoldWhenSubNodesExist: (step: PipelineStepDiagramDef, fold: boolean) => {
 		step.$diagram = step.$diagram ?? {};

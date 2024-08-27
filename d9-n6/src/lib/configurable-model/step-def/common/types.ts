@@ -3,9 +3,11 @@ import {Undefinable} from '@rainbow-d9/n1';
 import {ReactNode} from 'react';
 import {
 	AllInPipelineStepDef,
+	ConditionalPipelineStepDef,
 	FileDef,
 	PipelineStepDef,
 	PipelineStepDiagramDef,
+	RoutesPipelineStepDef,
 	SetsLikePipelineStepDef
 } from '../../../definition';
 import {HandledNodeModel, StepNodeModel} from '../../../diagram';
@@ -155,6 +157,9 @@ export interface CommonStepDefsType
 	createParallelSubNodesAndEndNode: (model: StepNodeModel, options: CreateSubNodesOptions) => Undefinable<HandledNodeModel>;
 	createConditionalSubNodesAndEndNode: (model: StepNodeModel, options: CreateSubNodesOptions) => Undefinable<HandledNodeModel>;
 	createRoutesSubNodesAndEndNode: (model: StepNodeModel, options: CreateSubNodesOptions) => Undefinable<HandledNodeModel>;
+	confirmSetsLikePipelineStep: (def: SetsLikePipelineStepDef, options: ConfirmNodeOptions) => void;
+	confirmConditionalPipelineStep: (def: ConditionalPipelineStepDef, options: ConfirmNodeOptions) => void;
+	confirmRoutesPipelineStep: (def: RoutesPipelineStepDef, options: ConfirmNodeOptions) => void;
 	switchFoldWhenSubNodesExist: (step: PipelineStepDiagramDef, fold: boolean) => void;
 	askSubSteps: (step: SetsLikePipelineStepDef) => Undefinable<Array<PipelineStepDef>>;
 	askSubStepsWithCategory: (step: SetsLikePipelineStepDef) => SubStepsWithCategory;

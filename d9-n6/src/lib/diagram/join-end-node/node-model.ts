@@ -1,7 +1,6 @@
 import {LinkModel, NodeModel, NodeModelGenerics} from '@projectstorm/react-diagrams';
 import {Undefinable} from '@rainbow-d9/n1';
-import {LastSubStepJoinPortModel} from '../../configurable-model';
-import {EndOfMeJoinLinkModel} from '../../configurable-model/step-def/common/links/link-end-of-me-join';
+import {EndOfMeJoinLinkModel, LastSubStepJoinPortModel} from '../../configurable-model';
 import {FileDef, PipelineStepDef} from '../../definition';
 import {NextStepPortModel, PreviousStepPortModel} from '../common';
 import {HandledNodeModel} from '../node-handlers';

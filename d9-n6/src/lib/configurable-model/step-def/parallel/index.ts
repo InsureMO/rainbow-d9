@@ -31,6 +31,7 @@ export const ParallelStepDefs =
 		confirm: ['and', (model, def, _file, _options): AndConfirmReturned => {
 			// TODO VALIDATE PROPERTIES OF PARALLEL STEP
 			return () => {
+				CommonStepDefs.confirmSetsLikePipelineStep(def, _options);
 				if (VUtils.isBlank(model.cloneData)) {
 					delete def.cloneData;
 				} else {
