@@ -137,7 +137,7 @@ export class YamlDefSaver extends FileDefSerializer {
 						}
 					}
 				},
-				lineWidth: -1
+				lineWidth: 120
 			});
 		} catch (e) {
 			console.group('Failed to dump O23 definition to yaml content.');

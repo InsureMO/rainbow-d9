@@ -11,3 +11,6 @@ export const trim = (value: any) => {
 		return value;
 	}
 };
+
+export const indent = '  ';
+export const indentN = (times: number) => indent.repeat(times);

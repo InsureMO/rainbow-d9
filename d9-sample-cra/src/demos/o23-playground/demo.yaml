@@ -179,7 +179,9 @@ steps:
     steps:
       - name: Write log
         use: snippet
-        snippet: $.$logger.log('Data received.', $factor, 'test-log');
+        snippet: |-
+          $.$logger.log('a');
+          $.$logger.log('b');
       - name: Write validation results to log
         use: each
         from-input: return $factor.results;

@@ -1,4 +1,5 @@
 import {indentWithTab} from '@codemirror/commands';
+import {indentUnit} from '@codemirror/language';
 import {lintGutter} from '@codemirror/lint';
 import {Compartment, EditorState as CodeMirrorState, EditorStateConfig} from '@codemirror/state';
 import {EditorView, keymap} from '@codemirror/view';
@@ -28,6 +29,7 @@ export const useInitCodeEditor = <S extends CodeEditorState>(options: UseInitCod
 				doc: '',
 				extensions: [
 					basicSetup,
+					indentUnit.of('  '),
 					keymap.of([indentWithTab]),
 					lintGutter(),
 					createCodeMirrorExtensions(),

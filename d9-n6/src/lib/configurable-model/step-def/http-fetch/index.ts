@@ -10,7 +10,7 @@ import {
 import {ConfigurableModel} from '../../../edit-dialog';
 import {HelpDocs} from '../../../help-docs';
 import {Labels} from '../../../labels';
-import {createPrePortValueOrLabelWithKey} from '../../common';
+import {createPrePortValueOrLabelWithKey, indent, indentN} from '../../common';
 import {StepNodeConfigurer} from '../../types';
 import {registerStepDef} from '../all-step-defs';
 import {AndConfirmReturned, CommonStepDefs} from '../common';
@@ -55,8 +55,8 @@ const createHttpStepDefs = <F extends HttpPipelineStepDef, M extends HttpStepDef
 							return '';
 						}
 
-						snippet = snippet.split('\n').map((line: string) => `\t\t${line}`).join('\n');
-						return `\t'${code}': async () => {\n${snippet}\n\t}`;
+						snippet = snippet.split('\n').map((line: string) => `${indentN(2)}${line}`).join('\n');
+						return `${indent}'${code}': async () => {\n${snippet}\n${indent}}`;
 					});
 					model.responseErrorHandles = `const handlers = {
 ${handlers}
@@ -64,12 +64,12 @@ ${handlers}
 const {$errorCode} = $options;
 const handle = handlers[$errorCode];
 if (handle == null) {
-	$.$errors.uncatchable({
-		code: 'O03-00010', 
-		reason: \`Error[\${options.$errorCode}] caught when fetch data from remote[\${options.$url}].\`
-	});
+${indent}$.$errors.uncatchable({
+${indentN(2)}code: 'O03-00010',
+${indentN(2)}reason: \`Error[\${options.$errorCode}] caught when fetch data from remote[\${options.$url}].\`
+${indent}});
 } else {
-	return await handle();
+${indent}return await handle();
 }
 `;
 				}

@@ -58,8 +58,9 @@ export const buildConfig = (lint) => {
 			'@projectstorm/react-diagrams-defaults', '@projectstorm/react-diagrams-routing',
 			'@projectstorm/react-canvas-core', '@projectstorm/react-diagrams-core', '@projectstorm/react-diagrams',
 			'dom-to-image',
-			'@codemirror/commands', '@codemirror/lang-javascript', '@codemirror/lang-sql', '@codemirror/lint', '@codemirror/state',
+			'@codemirror/commands', '@codemirror/lint', '@codemirror/state',
 			'@codemirror/view', 'codemirror',
+			'@codemirror/language', '@codemirror/lang-javascript', '@codemirror/lang-sql',
 			'@rainbow-d9/n1', '@rainbow-d9/n2', '@rainbow-d9/n3'
 		]
 	};
