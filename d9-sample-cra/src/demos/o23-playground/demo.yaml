@@ -63,6 +63,7 @@ steps:
         endpoint: askProductCodes
         responseErrorHandles:
           400: |-
+            $.$logger.log('HTTP status 400 detected.', options.$factor, 'test-log');
             $.$errors.uncatchable({code: '000', reason: ''});
       - name: Prepare Codes 2
         use: http-get
@@ -178,7 +179,7 @@ steps:
     steps:
       - name: Write log
         use: snippet
-        snippet: $.$logger.log('Data received.', $factor);
+        snippet: $.$logger.log('Data received.', $factor, 'test-log');
       - name: Write validation results to log
         use: each
         from-input: return $factor.results;
@@ -186,6 +187,6 @@ steps:
         steps:
           - name: Write validation result to log
             use: snippet
-            snippet: $.$logger.log('Invalid thing detected.', $factor.result);
+            snippet: $.$logger.log('Invalid thing detected.', $factor.result, 'test-log');
     $diagram:
       $foldSubSteps: true

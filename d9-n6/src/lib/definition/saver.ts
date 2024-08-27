@@ -90,13 +90,14 @@ export abstract class FileDefSerializer {
 export class YamlDefSaver extends FileDefSerializer {
 	public doStringify(def: FileDef): string {
 		try {
-			const keyIndexes = [
+			const leadIndexes = [
 				'code', 'type', 'init-only', 'enabled',
 				'route', 'method', 'headers', 'path-params', 'query-params', 'body', 'files', 'expose-headers', 'expose-file',
-				'name', 'use',
+				'name', 'use', 'from-input',
 				'datasource', 'transaction', 'autonomous',
 				'check', 'routes', 'steps', 'otherwise'
 			];
+			const tailIndexes = ['to-output', 'merge', 'error-handles'];
 			return yaml.dump(def, {
 				// eslint-disable-next-line @typescript-eslint/no-explicit-any
 				sortKeys: (a: any, b: any) => {
@@ -105,20 +106,38 @@ export class YamlDefSaver extends FileDefSerializer {
 					} else if (!a.startsWith('$') && b.startsWith('$')) {
 						return -1;
 					} else {
-						const aIndex = keyIndexes.indexOf(a);
-						const bIndex = keyIndexes.indexOf(b);
-						if (aIndex === -1 && bIndex === -1) {
-							return a.localeCompare(b);
-						} else if (aIndex === -1) {
+						const alIndex = leadIndexes.indexOf(a);
+						const blIndex = leadIndexes.indexOf(b);
+						const atIndex = tailIndexes.indexOf(a);
+						const btIndex = tailIndexes.indexOf(b);
+						if (alIndex === -1 && blIndex === -1) {
+							// neither in lead
+							if (atIndex === -1 && btIndex === -1) {
+								// neither in tail, compare normally
+								return a.localeCompare(b);
+							} else if (atIndex === -1) {
+								// b in tail, a does not, a is less
+								return -1;
+							} else if (btIndex === -1) {
+								// a in tail, b does not, b is less
+								return 1;
+							} else {
+								// both in tail, compare index
+								return atIndex - btIndex;
+							}
+						} else if (alIndex === -1) {
+							// b in lead, a does not, b is less
 							return 1;
-						} else if (bIndex === -1) {
+						} else if (blIndex === -1) {
+							// a in lead, b does not, a is less
 							return -1;
 						} else {
-							return aIndex - bIndex;
+							// both in lead, compare index
+							return alIndex - blIndex;
 						}
 					}
 				},
-				lineWidth: 120
+				lineWidth: -1
 			});
 		} catch (e) {
 			console.group('Failed to dump O23 definition to yaml content.');
