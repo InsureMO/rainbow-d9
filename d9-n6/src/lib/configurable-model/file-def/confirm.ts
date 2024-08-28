@@ -72,10 +72,10 @@ export const confirm: FileNodeConfigurer['confirm'] = (model: ConfigurableModel,
 			if (stepDef.use === StandardPipelineStepRegisterKey.SETS
 				&& VUtils.isBlank(stepDef.fromInput)
 				&& VUtils.isBlank(stepDef.toOutput) && VUtils.isBlank(stepDef.merge)
-				&& stepDef.errorHandles != null) {
-				// no other attribute exists but steps
-				// ignore the name, use its steps as pipeline steps directly
-				// therefore the name is not needed
+				&& stepDef.errorHandles == null) {
+				// a sets step with no other attribute exists but steps
+				// then ignore the name, use its steps as pipeline steps directly
+				// the name is not needed
 				delete stepDef.name;
 			} else {
 				const keysOfPipeline = ['code', 'type', 'enabled', ...KeysOfApiPipeline, ...KeysOfNonApiPipeline];
@@ -105,6 +105,16 @@ export const confirm: FileNodeConfigurer['confirm'] = (model: ConfigurableModel,
 					sets.use = StandardPipelineStepRegisterKey.SETS;
 					sets.steps = [defaultDef];
 				}
+			} else if (steps.length === 1 && steps[0].use === StandardPipelineStepRegisterKey.SETS
+				&& VUtils.isBlank((steps[0] as unknown as AllInPipelineStepDef).fromInput)
+				&& VUtils.isBlank((steps[0] as unknown as AllInPipelineStepDef).toOutput)
+				&& VUtils.isBlank((steps[0] as unknown as AllInPipelineStepDef).merge)
+				&& (steps[0] as unknown as AllInPipelineStepDef).errorHandles == null) {
+				// only one step, which is a sets step, with no other attribute exists but steps
+				// then ignore the name, use its steps as file's steps
+				const sets = def as unknown as SetsPipelineStepDef;
+				sets.use = StandardPipelineStepRegisterKey.SETS;
+				sets.steps = (steps[0] as SetsPipelineStepDef).steps;
 			} else {
 				// copy steps to a sets step
 				const sets = def as unknown as SetsPipelineStepDef;

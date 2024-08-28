@@ -78,4 +78,4 @@ export interface ApiPipelineFileDef {
 
 export const KeysOfApiPipeline = ['route', 'method', 'headers', 'pathParams', 'queryParams', 'body', 'files', 'exposeHeaders', 'exposeFile'];
 export const KeysOfNonApiPipeline = ['initOnly'];
-export const KeysOfPipeline = ['code', 'type', 'enabled', ...KeysOfApiPipeline, ...KeysOfNonApiPipeline, '$diagram'];
+export const KeysOfPipeline = ['code', 'type', 'enabled', ...KeysOfApiPipeline, ...KeysOfNonApiPipeline, 'steps', '$diagram'];
