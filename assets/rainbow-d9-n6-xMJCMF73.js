@@ -4,14 +4,14 @@ var __publicField = (obj, key, value) => {
   __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
   return value;
 };
-import { a as color, y as EditorView, z as EditorState, A as basicSetup, P as indentUnit, B as keymap, C as indentWithTab, K as lintGutter, Q as Compartment, R as jsYaml, G as javascript, S as sql$1, U as dom2image } from "./vendor-6cSj-Dee.js";
-import { f as CssConstants, C as CssVars, I as IntlLabel, D as DOM_KEY_WIDGET, d as utils$2, g as UnwrappedCheckbox, h as UnwrappedDropdown, O as OptionItemSort, j as UnwrappedInput, k as UnwrappedCaption, l as UnwrappedTextarea, m as UnwrappedDecorateInput, n as UnwrappedCheckboxes, b as useGlobalHandlers } from "./rainbow-d9-n2-hr7tbbzR.js";
-import { R as React, r as reactExports, q as qe, W as We, D as DefaultLinkModel, P as PortWidget, a as PortModelAlignment, b as PortModel, N as NodeModel, C as CanvasWidget, c as DiagramEngine, d as NodeLayerFactory, L as LinkLayerFactory, S as SelectionBoxLayerFactory, e as DefaultLabelFactory, f as DefaultNodeFactory, g as DefaultLinkFactory, h as PathFindingLinkFactory, i as DefaultPortFactory, j as DiagramModel, k as State, l as SelectingState, A as AbstractModelFactory, m as AbstractReactFactory, n as LinkWidget, o as DefaultLinkPointWidget, p as DefaultLinkSegmentWidget } from "./react-base-XE4CTenU.js";
-import { V as VUtils, a as useThrottler, r as registerWidget, g as useCreateEventBus, e as useForceUpdate, M as MUtils, P as PPUtils } from "./rainbow-d9-n1-Ip5VQeTC.js";
-import { i as index$1 } from "./rainbow-d9-n3-IthVT44H.js";
-import { M as Markdown } from "./react-markdown-vxi8YBqm.js";
-import { r as remarkGfm } from "./remark-Qk2CEyYS.js";
-import { S as SyntaxHighlighter, p as prism } from "./react-syntax-highlighter-srAtOtuO.js";
+import { a as color, y as EditorView, z as EditorState, A as basicSetup, P as indentUnit, B as keymap, C as indentWithTab, K as lintGutter, Q as Compartment, R as jsYaml, G as javascript, S as sql$1, U as dom2image } from "./vendor-wec729Ka.js";
+import { f as CssConstants, C as CssVars, I as IntlLabel, D as DOM_KEY_WIDGET, d as utils$2, g as UnwrappedCheckbox, h as UnwrappedDropdown, O as OptionItemSort, j as UnwrappedInput, k as UnwrappedCaption, l as UnwrappedTextarea, m as UnwrappedDecorateInput, n as UnwrappedCheckboxes, b as useGlobalHandlers } from "./rainbow-d9-n2-wUHl4Xi4.js";
+import { R as React, r as reactExports, q as qe, W as We, D as DefaultLinkModel, P as PortWidget, a as PortModelAlignment, b as PortModel, N as NodeModel, C as CanvasWidget, c as DiagramEngine, d as NodeLayerFactory, L as LinkLayerFactory, S as SelectionBoxLayerFactory, e as DefaultLabelFactory, f as DefaultNodeFactory, g as DefaultLinkFactory, h as PathFindingLinkFactory, i as DefaultPortFactory, j as DiagramModel, k as State, l as SelectingState, A as AbstractModelFactory, m as AbstractReactFactory, n as LinkWidget, o as DefaultLinkPointWidget, p as DefaultLinkSegmentWidget } from "./react-base-0_S0QDSQ.js";
+import { V as VUtils, a as useThrottler, r as registerWidget, g as useCreateEventBus, e as useForceUpdate, M as MUtils, P as PPUtils } from "./rainbow-d9-n1-DwWtjZsq.js";
+import { i as index$1 } from "./rainbow-d9-n3-Vs8Z5VHU.js";
+import { M as Markdown } from "./react-markdown-9GNfab29.js";
+import { r as remarkGfm } from "./remark-l9XmH0w-.js";
+import { S as SyntaxHighlighter, p as prism } from "./react-syntax-highlighter-4cIx4GxL.js";
 const EDITOR_BACKGROUND_BLOCK_SIZE = "var(--o23-playground-editor-background-block-size, 48px)";
 const EDITOR_BACKGROUND_LINE_COLOR = `var(--o23-playground-editor-background-line-color, ${color(CssConstants.PRIMARY_COLOR).alpha(0.08)})`;
 const EDITOR_ATTRIBUTE_BADGE_COLOR = "#9db6c6";
@@ -856,6 +856,10 @@ var StandardPipelineStepRegisterKey;
   StandardPipelineStepRegisterKey2["REF_PIPELINE"] = "ref-pipeline";
   StandardPipelineStepRegisterKey2["REF_STEP"] = "ref-step";
 })(StandardPipelineStepRegisterKey || (StandardPipelineStepRegisterKey = {}));
+const DiagramKeysOfStep = ["$x", "$y", "$foldAny", "$foldCatchable", "$foldUncatchable", "$foldExposed", "$foldAny"];
+const KeysOfApiPipeline = ["route", "method", "headers", "pathParams", "queryParams", "body", "files", "exposeHeaders", "exposeFile"];
+const KeysOfNonApiPipeline = ["initOnly"];
+const KeysOfPipeline = ["code", "type", "enabled", ...KeysOfApiPipeline, ...KeysOfNonApiPipeline, "steps", "$diagram"];
 class FileDefDeserializer {
   constructor(options) {
     __publicField(this, "_redress");
@@ -1053,30 +1057,31 @@ const isPipelineDef = (def) => def.type === "pipeline";
 const isStepSetsDef = (def) => def.type === "step-sets";
 const isStepDef = (def) => def.type === "step";
 const isFileDef = (def) => isPipelineDef(def) || isStepSetsDef(def) || isStepDef(def);
-const confirm$2 = (model, def, handlers) => {
+const confirm$2 = (model, def, options) => {
+  const { handlers, assistant } = options;
   const edited = model;
   def.code = edited.code;
   def.type = edited.type;
   def.enabled = edited.enabled;
   const deleteApiAttrs = (given) => {
     const def2 = given;
-    delete def2.route;
-    delete def2.method;
-    delete def2.headers;
-    delete def2.pathParams;
-    delete def2.queryParams;
-    delete def2.body;
-    delete def2.files;
-    delete def2.exposeHeaders;
-    delete def2.exposeFile;
+    KeysOfApiPipeline.forEach((key) => delete def2[key]);
   };
   const deleteNonApiAttrs = (given) => {
     const def2 = given;
-    delete def2.initOnly;
+    KeysOfNonApiPipeline.forEach((key) => delete def2[key]);
   };
   const deleteNonPipelineAttrs = (given) => {
     const def2 = given;
-    delete def2.use;
+    Object.keys(def2).forEach((key) => {
+      if (!KeysOfPipeline.includes(key)) {
+        delete def2[key];
+      }
+    });
+    const diagramDef = given;
+    if (diagramDef.$diagram != null) {
+      DiagramKeysOfStep.forEach((key) => delete diagramDef.$diagram[key]);
+    }
   };
   if (isPipelineDef(def)) {
     const editedDef = edited;
@@ -1095,11 +1100,46 @@ const confirm$2 = (model, def, handlers) => {
       def.initOnly = editedDef.initOnly === true;
       deleteApiAttrs(def);
     }
+    if (!VUtils.isBlank(def.use)) {
+      const stepDef = def;
+      if (stepDef.use === StandardPipelineStepRegisterKey.SETS && VUtils.isBlank(stepDef.fromInput) && VUtils.isBlank(stepDef.toOutput) && VUtils.isBlank(stepDef.merge) && stepDef.errorHandles == null) {
+        delete stepDef.name;
+      } else {
+        const keysOfPipeline = ["code", "type", "enabled", ...KeysOfApiPipeline, ...KeysOfNonApiPipeline];
+        const step = Object.keys(def).reduce((acc, key) => {
+          if (!keysOfPipeline.includes(key)) {
+            acc[key] = def[key];
+          }
+          return acc;
+        }, {});
+        def.steps = [step];
+      }
+    }
     deleteNonPipelineAttrs(def);
   } else {
-    def.use = edited.use;
     deleteApiAttrs(def);
     deleteNonApiAttrs(def);
+    if (VUtils.isBlank(def.use)) {
+      const steps = def.steps ?? [];
+      if (steps.length === 0) {
+        const defaultDef = assistant.createDefaultStep();
+        if (def.type === "step") {
+          Object.keys(defaultDef).forEach((key) => def[key] = defaultDef[key]);
+        } else {
+          const sets = def;
+          sets.use = StandardPipelineStepRegisterKey.SETS;
+          sets.steps = [defaultDef];
+        }
+      } else if (steps.length === 1 && steps[0].use === StandardPipelineStepRegisterKey.SETS && VUtils.isBlank(steps[0].fromInput) && VUtils.isBlank(steps[0].toOutput) && VUtils.isBlank(steps[0].merge) && steps[0].errorHandles == null) {
+        const sets = def;
+        sets.use = StandardPipelineStepRegisterKey.SETS;
+        sets.steps = steps[0].steps;
+      } else {
+        const sets = def;
+        sets.use = StandardPipelineStepRegisterKey.SETS;
+        sets.steps = steps;
+      }
+    }
   }
   handlers.onChange();
   return true;
@@ -2179,8 +2219,8 @@ const DialogSpecificElementWrapper = (props) => {
     setCollapsed(!collapsed);
     fireElement(DialogSpecificElementEventTypes.COLLAPSE);
   };
-  const onValueChanged = (repaint2 = true) => {
-    if (repaint2) {
+  const onValueChanged = (repaint = true) => {
+    if (repaint) {
       forceUpdate();
     }
     fire(EditDialogEventTypes.ELEMENT_VALUE_CHANGED, anchor);
@@ -2368,19 +2408,19 @@ const DialogContent = (props) => {
   );
 };
 const StepUseHandler = (props) => {
-  const { repaint: repaint2 } = props;
+  const { repaint } = props;
   const { on, off } = useEditDialogEventBus();
   reactExports.useEffect(() => {
     const onElementValueChanged = (anchor) => {
       if (anchor === "use") {
-        repaint2();
+        repaint();
       }
     };
     on(EditDialogEventTypes.ELEMENT_VALUE_CHANGED, onElementValueChanged);
     return () => {
       off(EditDialogEventTypes.ELEMENT_VALUE_CHANGED, onElementValueChanged);
     };
-  }, [on, off, repaint2]);
+  }, [on, off, repaint]);
   return React.createElement(reactExports.Fragment, null);
 };
 const StepDialogContent = (props) => {
@@ -4367,7 +4407,7 @@ const StartNodeWidget = (props) => {
     }
   })();
   const onConfirm = (model) => {
-    return FileDefs.confirm(model, def, node.handlers);
+    return FileDefs.confirm(model, def, { handlers: node.handlers, assistant: node.assistant });
   };
   const onDiscard = (model) => FileDefs.discard(model);
   const onDoubleClicked = () => {
@@ -5126,9 +5166,6 @@ const prepare$2 = (def) => {
       pipelineModel.api = false;
       pipelineModel.initOnly = pipeline.initOnly;
     }
-  } else {
-    const step = def;
-    model.use = step.use;
   }
   return model;
 };
@@ -5420,6 +5457,268 @@ const tryToRevealStep = (file, step) => {
     return tryToRevealSubStep(file, step);
   }
 };
+var EditorKernelDiagramStatus;
+(function(EditorKernelDiagramStatus2) {
+  EditorKernelDiagramStatus2["IGNORED"] = "ignored";
+  EditorKernelDiagramStatus2["PAINT"] = "paint";
+  EditorKernelDiagramStatus2["PAINT_ON_POSITION"] = "paint-on-position";
+  EditorKernelDiagramStatus2["ALL_CANVAS_READY"] = "canvas-model-ready";
+  EditorKernelDiagramStatus2["IN_SERVICE"] = "in-service";
+})(EditorKernelDiagramStatus || (EditorKernelDiagramStatus = {}));
+const parseContent = (parser, content) => {
+  const def = parser.parse(content ?? "");
+  if (VUtils.isBlank(def.type)) {
+    def.type = "pipeline";
+  }
+  return def;
+};
+const createDiagramModel = (options) => {
+  const { def, serializer, assistant, replace, writeContentToState, onContentChanged } = options;
+  const handlers = createDiagramHandlers({
+    serializer,
+    assistant,
+    replace,
+    syncContentToStateRef: (content) => {
+      writeContentToState(content);
+      return content;
+    },
+    notifyContentChanged: onContentChanged
+  });
+  return createDiagramNodes(def, handlers);
+};
+class DiagramState extends State {
+  constructor() {
+    super({ name: "default-diagrams" });
+    this.childStates = [new SelectingState()];
+  }
+}
+const createDiagramEngine = () => {
+  const engine = new DiagramEngine({
+    registerDefaultPanAndZoomCanvasAction: false,
+    registerDefaultZoomCanvasAction: false
+  });
+  engine.getLayerFactories().registerFactory(new NodeLayerFactory());
+  engine.getLayerFactories().registerFactory(new LinkLayerFactory());
+  engine.getLayerFactories().registerFactory(new SelectionBoxLayerFactory());
+  engine.getLabelFactories().registerFactory(new DefaultLabelFactory());
+  engine.getNodeFactories().registerFactory(new DefaultNodeFactory());
+  engine.getLinkFactories().registerFactory(new DefaultLinkFactory());
+  engine.getLinkFactories().registerFactory(new PathFindingLinkFactory());
+  engine.getPortFactories().registerFactory(new DefaultPortFactory());
+  engine.getStateMachine().pushState(new DiagramState());
+  initEngine(engine);
+  const model = createLockedDiagramModel();
+  model.setLocked(true);
+  engine.setModel(model);
+  return engine;
+};
+const firstPaint = (options) => {
+  const { content, serializer, deserializer, assistant, replace, writeContentToState, onContentChanged } = options;
+  const engine = createDiagramEngine();
+  const engineBackend = createDiagramEngine();
+  try {
+    const def = parseContent(deserializer, content ?? "");
+    const model = createDiagramModel({
+      def,
+      serializer,
+      assistant,
+      replace,
+      writeContentToState,
+      onContentChanged
+    });
+    engineBackend.setModel(model);
+    return {
+      engine,
+      engineBackend,
+      content,
+      def,
+      serializer,
+      deserializer,
+      diagramStatus: EditorKernelDiagramStatus.PAINT
+    };
+  } catch (e) {
+    console.error(e);
+    engine.setModel(createLockedDiagramModel());
+    return {
+      engine,
+      engineBackend,
+      content,
+      serializer,
+      deserializer,
+      message: e.message,
+      diagramStatus: EditorKernelDiagramStatus.IGNORED
+    };
+  }
+};
+const paintErrorDiagram = (options) => {
+  const { error, stateRef, content, serializer, deserializer } = options;
+  console.error(error);
+  stateRef.current.content = content;
+  stateRef.current.serializer = serializer;
+  stateRef.current.deserializer = deserializer;
+  delete stateRef.current.def;
+  stateRef.current.engine.setModel(createLockedDiagramModel());
+  stateRef.current.engineBackend.setModel(createLockedDiagramModel());
+  stateRef.current.message = error.message;
+  stateRef.current.diagramStatus = EditorKernelDiagramStatus.IGNORED;
+  stateRef.current.canvasZoom = 1;
+  delete stateRef.current.canvasWidth;
+  delete stateRef.current.canvasHeight;
+};
+const computeCanvasSize = (model) => {
+  return (model.getNodes() ?? []).reduce((size, node) => {
+    if (node instanceof EndNodeModel) {
+      size.height = node.getY() + node.height + DEFAULTS.diagram.startTop;
+    }
+    const right = node.getX() + node.width + DEFAULTS.diagram.startLeft;
+    if (size.width == null || right > size.width) {
+      size.width = right;
+    }
+    return size;
+  }, {});
+};
+const paint = (options) => {
+  const { stateRef, replace, onStateContentChanged, onContentChanged } = options;
+  const content = options.content();
+  const serializer = options.serializer();
+  const deserializer = options.deserializer();
+  const assistant = options.assistant();
+  try {
+    const def = parseContent(deserializer, content ?? "");
+    const model = createDiagramModel({
+      def,
+      serializer,
+      assistant,
+      replace,
+      writeContentToState: (content2) => {
+        stateRef.current.content = content2;
+        (async () => await onStateContentChanged())();
+      },
+      onContentChanged
+    });
+    stateRef.current.content = content;
+    stateRef.current.serializer = serializer;
+    stateRef.current.deserializer = deserializer;
+    stateRef.current.def = def;
+    stateRef.current.canvasZoom = 1;
+    const { width, height } = computeCanvasSize(model);
+    stateRef.current.canvasWidth = width;
+    stateRef.current.canvasHeight = height;
+    stateRef.current.engineBackend.setModel(model);
+    delete stateRef.current.message;
+    stateRef.current.diagramStatus = EditorKernelDiagramStatus.PAINT;
+  } catch (e) {
+    paintErrorDiagram({ error: e, stateRef, content, serializer, deserializer });
+  }
+};
+const repaintBackend = (options) => {
+  const { stateRef, replace, onStateContentChanged, onContentChanged } = options;
+  const def = stateRef.current.def;
+  const serializer = stateRef.current.serializer;
+  const assistant = options.assistant();
+  try {
+    const model = createDiagramModel({
+      def,
+      serializer,
+      assistant,
+      replace,
+      writeContentToState: (content) => {
+        stateRef.current.content = content;
+        (async () => await onStateContentChanged())();
+      },
+      onContentChanged
+    });
+    stateRef.current.engineBackend.setModel(model);
+    stateRef.current.diagramStatus = EditorKernelDiagramStatus.PAINT_ON_POSITION;
+  } catch (e) {
+    paintErrorDiagram({
+      error: e,
+      stateRef,
+      content: stateRef.current.content,
+      serializer: stateRef.current.serializer,
+      deserializer: stateRef.current.deserializer
+    });
+  }
+};
+const useComputePositions = (options) => {
+  const { stateRef, afterPositionComputed } = options;
+  const { fire } = usePlaygroundEventBus();
+  reactExports.useEffect(() => {
+    const computePositions = () => {
+      const backendModel = stateRef.current.engineBackend.getModel();
+      const grid = [];
+      const nodes = backendModel.getNodes();
+      const startNode = nodes.find((node) => node instanceof StartNodeModel);
+      grid[0] = grid[0] ?? [];
+      grid[0][0] = {
+        node: startNode,
+        x: startNode.getPosition().x,
+        y: startNode.getPosition().y,
+        maxWidth: -1,
+        maxHeight: -1,
+        top: -1,
+        left: -1
+      };
+      buildGrid(startNode, grid, 0, 0);
+      const { startTop, startLeft, rowGap, columnGap } = DEFAULTS.diagram;
+      computeGrid(grid, startTop, startLeft, rowGap, columnGap);
+      const newModel = cloneDiagramNodes(backendModel);
+      newModel.setZoomLevel((stateRef.current.canvasZoom ?? 1) * 100);
+      const { width, height } = computeCanvasSize(newModel);
+      stateRef.current.canvasWidth = width;
+      stateRef.current.canvasHeight = height;
+      stateRef.current.engine.setModel(newModel);
+      stateRef.current.engineBackend.setModel(createLockedDiagramModel());
+      stateRef.current.diagramStatus = EditorKernelDiagramStatus.ALL_CANVAS_READY;
+      afterPositionComputed();
+    };
+    if (stateRef.current.diagramStatus === EditorKernelDiagramStatus.PAINT || stateRef.current.diagramStatus === EditorKernelDiagramStatus.PAINT_ON_POSITION) {
+      computePositions();
+    }
+  }, [fire, stateRef, stateRef.current.diagramStatus, afterPositionComputed]);
+};
+const useRepaintBackend = (options) => {
+  const { stateRef, postPaintActions, assistant } = options;
+  const { on, off, fire } = usePlaygroundEventBus();
+  const { replace } = useThrottler();
+  const forceUpdate = useForceUpdate();
+  reactExports.useEffect(() => {
+    const onRepaintBackend = () => {
+      repaintBackend({
+        assistant: () => assistant,
+        stateRef,
+        replace,
+        onStateContentChanged: async () => {
+          fire(PlaygroundEventTypes.REPAINT);
+        },
+        onContentChanged: (content) => {
+          fire(PlaygroundEventTypes.CONTENT_CHANGED, content);
+        }
+      });
+      forceUpdate();
+    };
+    const onRepaintAndLocateStepNode = (step) => {
+      postPaintActions.current.push([PlaygroundEventTypes.DO_LOCATE_STEP_NODE, step]);
+      onRepaintBackend();
+    };
+    const switchFolding = (fold) => {
+      switchAllNodesFolding(stateRef.current.def, fold);
+      onRepaintBackend();
+    };
+    const onFoldAllNodes = () => switchFolding(true);
+    const onUnfoldAllNodes = () => switchFolding(false);
+    on(PlaygroundEventTypes.REPAINT, onRepaintBackend);
+    on(PlaygroundEventTypes.REPAINT_AND_LOCATE_STEP_NODE, onRepaintAndLocateStepNode);
+    on(PlaygroundEventTypes.FOLD_ALL_NODES, onFoldAllNodes);
+    on(PlaygroundEventTypes.UNFOLD_ALL_NODES, onUnfoldAllNodes);
+    return () => {
+      off(PlaygroundEventTypes.REPAINT, onRepaintBackend);
+      off(PlaygroundEventTypes.REPAINT_AND_LOCATE_STEP_NODE, onRepaintAndLocateStepNode);
+      off(PlaygroundEventTypes.FOLD_ALL_NODES, onFoldAllNodes);
+      off(PlaygroundEventTypes.UNFOLD_ALL_NODES, onUnfoldAllNodes);
+    };
+  }, [on, off, fire, replace, forceUpdate, stateRef, postPaintActions, assistant]);
+};
 const EditorWrapper = qe.div.attrs({
   [DOM_KEY_WIDGET]: "o23-playground-editor",
   "data-v-scroll": "",
@@ -5433,20 +5732,6 @@ const EditorWrapper = qe.div.attrs({
     background-position: ${PlaygroundCssVars.EDITOR_BACKGROUND_POSITION};
     overflow: auto;
 
-    &[data-diagram-status=paint],
-    &[data-diagram-status=paint-on-position] {
-        > div[data-w=o23-playground-canvas] > div.o23-playground-editor-content {
-            //opacity: 0;
-            user-select: none;
-            pointer-events: none;
-
-            div.node, div.node * {
-                user-select: none;
-                pointer-events: none;
-                cursor: default;
-            }
-        }
-    }
 
     &[data-diagram-locked=true] {
         > div[data-w=o23-playground-canvas] > div.o23-playground-editor-content {
@@ -5476,8 +5761,23 @@ const BackendCanvasWrapper = qe.div.attrs({ [DOM_KEY_WIDGET]: "o23-playground-ba
     width: 100%;
     pointer-events: none;
     opacity: 0;
+
+    &[data-diagram-status=paint],
+    &[data-diagram-status=paint-on-position] {
+        + div[data-w=o23-playground-canvas] > div.o23-playground-editor-content {
+            //opacity: 0;
+            user-select: none;
+            pointer-events: none;
+
+            div.node, div.node * {
+                user-select: none;
+                pointer-events: none;
+                cursor: default;
+            }
+        }
+    }
 `;
-const EditorCanvasWrapper = qe.div.attrs(({ canvasWidth, canvasHeight, canvasZoom }) => {
+const FrontendCanvasWrapper = qe.div.attrs(({ canvasWidth, canvasHeight, canvasZoom }) => {
   return {
     [DOM_KEY_WIDGET]: "o23-playground-canvas",
     style: {
@@ -5711,6 +6011,16 @@ const ParseError = qe.div.attrs({ [DOM_KEY_WIDGET]: "o23-playground-viewer-error
     font-style: italic;
     font-weight: 500;
 `;
+const BackendCanvas = (props) => {
+  const { stateRef, postPaintActions, assistant, afterPositionComputed } = props;
+  useComputePositions({ stateRef, afterPositionComputed });
+  useRepaintBackend({ stateRef, postPaintActions, assistant });
+  return React.createElement(
+    BackendCanvasWrapper,
+    { "data-diagram-status": stateRef.current.diagramStatus },
+    React.createElement(CanvasWidget, { engine: stateRef.current.engineBackend, className: "o23-playground-editor-content-backend" })
+  );
+};
 class ErrorBoundary extends React.Component {
   constructor(props) {
     super(props);
@@ -5754,232 +6064,100 @@ const NodeLocator = (props) => {
   }, [on, off, fire, stateRef]);
   return React.createElement(NodeLocatorNeedle, { ref });
 };
-var EditorKernelDiagramStatus;
-(function(EditorKernelDiagramStatus2) {
-  EditorKernelDiagramStatus2["IGNORED"] = "ignored";
-  EditorKernelDiagramStatus2["PAINT"] = "paint";
-  EditorKernelDiagramStatus2["PAINT_ON_POSITION"] = "paint-on-position";
-  EditorKernelDiagramStatus2["IN_SERVICE"] = "in-service";
-})(EditorKernelDiagramStatus || (EditorKernelDiagramStatus = {}));
-const parseContent = (parser, content) => {
-  const def = parser.parse(content ?? "");
-  if (VUtils.isBlank(def.type)) {
-    def.type = "pipeline";
-  }
-  return def;
-};
-const createDiagramModel = (options) => {
-  const { def, serializer, assistant, replace, writeContentToState, onContentChanged } = options;
-  const handlers = createDiagramHandlers({
-    serializer,
-    assistant,
-    replace,
-    syncContentToStateRef: (content) => {
-      writeContentToState(content);
-      return content;
-    },
-    notifyContentChanged: onContentChanged
-  });
-  return createDiagramNodes(def, handlers);
-};
-class DiagramState extends State {
-  constructor() {
-    super({ name: "default-diagrams" });
-    this.childStates = [new SelectingState()];
-  }
-}
-const createDiagramEngine = () => {
-  const engine = new DiagramEngine({
-    registerDefaultPanAndZoomCanvasAction: false,
-    registerDefaultZoomCanvasAction: false
-  });
-  engine.getLayerFactories().registerFactory(new NodeLayerFactory());
-  engine.getLayerFactories().registerFactory(new LinkLayerFactory());
-  engine.getLayerFactories().registerFactory(new SelectionBoxLayerFactory());
-  engine.getLabelFactories().registerFactory(new DefaultLabelFactory());
-  engine.getNodeFactories().registerFactory(new DefaultNodeFactory());
-  engine.getLinkFactories().registerFactory(new DefaultLinkFactory());
-  engine.getLinkFactories().registerFactory(new PathFindingLinkFactory());
-  engine.getPortFactories().registerFactory(new DefaultPortFactory());
-  engine.getStateMachine().pushState(new DiagramState());
-  initEngine(engine);
-  const model = createLockedDiagramModel();
-  model.setLocked(true);
-  engine.setModel(model);
-  return engine;
-};
-const firstPaint = (options) => {
-  const { content, serializer, deserializer, assistant, replace, writeContentToState, onContentChanged } = options;
-  const engine = createDiagramEngine();
-  const engineBackend = createDiagramEngine();
-  try {
-    const def = parseContent(deserializer, content ?? "");
-    const model = createDiagramModel({
-      def,
-      serializer,
-      assistant,
-      replace,
-      writeContentToState,
-      onContentChanged
-    });
-    engineBackend.setModel(model);
-    return {
-      engine,
-      engineBackend,
-      content,
-      def,
-      serializer,
-      deserializer,
-      diagramStatus: EditorKernelDiagramStatus.PAINT
-    };
-  } catch (e) {
-    console.error(e);
-    engine.setModel(createLockedDiagramModel());
-    return {
-      engine,
-      engineBackend,
-      content,
-      serializer,
-      deserializer,
-      message: e.message,
-      diagramStatus: EditorKernelDiagramStatus.IGNORED
-    };
-  }
-};
-const paintErrorDiagram = (options) => {
-  const { error, stateRef, content, serializer, deserializer } = options;
-  console.error(error);
-  stateRef.current.content = content;
-  stateRef.current.serializer = serializer;
-  stateRef.current.deserializer = deserializer;
-  delete stateRef.current.def;
-  stateRef.current.engine.setModel(createLockedDiagramModel());
-  stateRef.current.engineBackend.setModel(createLockedDiagramModel());
-  stateRef.current.message = error.message;
-  stateRef.current.diagramStatus = EditorKernelDiagramStatus.IGNORED;
-  stateRef.current.canvasZoom = 1;
-  delete stateRef.current.canvasWidth;
-  delete stateRef.current.canvasHeight;
-};
-const computeCanvasSize = (model) => {
-  return (model.getNodes() ?? []).reduce((size, node) => {
-    if (node instanceof EndNodeModel) {
-      size.height = node.getY() + node.height + DEFAULTS.diagram.startTop;
-    }
-    const right = node.getX() + node.width + DEFAULTS.diagram.startLeft;
-    if (size.width == null || right > size.width) {
-      size.width = right;
-    }
-    return size;
-  }, {});
-};
-const paint = (options) => {
-  const { stateRef, replace, onStateContentChanged, onContentChanged } = options;
-  const content = options.content();
-  const serializer = options.serializer();
-  const deserializer = options.deserializer();
-  const assistant = options.assistant();
-  try {
-    const def = parseContent(deserializer, content ?? "");
-    const model = createDiagramModel({
-      def,
-      serializer,
-      assistant,
-      replace,
-      writeContentToState: (content2) => {
-        stateRef.current.content = content2;
-        (async () => await onStateContentChanged())();
-      },
-      onContentChanged
-    });
-    stateRef.current.content = content;
-    stateRef.current.serializer = serializer;
-    stateRef.current.deserializer = deserializer;
-    stateRef.current.def = def;
-    stateRef.current.canvasZoom = 1;
-    const { width, height } = computeCanvasSize(model);
-    stateRef.current.canvasWidth = width;
-    stateRef.current.canvasHeight = height;
-    stateRef.current.engineBackend.setModel(model);
-    delete stateRef.current.message;
-    stateRef.current.diagramStatus = EditorKernelDiagramStatus.PAINT;
-  } catch (e) {
-    paintErrorDiagram({ error: e, stateRef, content, serializer, deserializer });
-  }
-};
-const repaint = (options) => {
-  const { stateRef, replace, onStateContentChanged, onContentChanged } = options;
-  const def = stateRef.current.def;
-  const serializer = stateRef.current.serializer;
-  const assistant = options.assistant();
-  try {
-    const model = createDiagramModel({
-      def,
-      serializer,
-      assistant,
-      replace,
-      writeContentToState: (content) => {
-        stateRef.current.content = content;
-        (async () => await onStateContentChanged())();
-      },
-      onContentChanged
-    });
-    stateRef.current.engineBackend.setModel(model);
-    stateRef.current.diagramStatus = EditorKernelDiagramStatus.PAINT_ON_POSITION;
-  } catch (e) {
-    paintErrorDiagram({
-      error: e,
-      stateRef,
-      content: stateRef.current.content,
-      serializer: stateRef.current.serializer,
-      deserializer: stateRef.current.deserializer
-    });
-  }
-};
-const usePaint = (stateRef, postPaintActions) => {
+const FrontendCanvas = (props) => {
+  const { stateRef, postPaintActions } = props;
+  const ref = reactExports.useRef(null);
+  const { on, off } = usePlaygroundEventBus();
   const forceUpdate = useForceUpdate();
   reactExports.useEffect(() => {
-    if (stateRef.current.diagramStatus !== EditorKernelDiagramStatus.IN_SERVICE) {
-      return;
-    }
-    const actions = [...postPaintActions.current];
-    postPaintActions.current = [];
-    actions.forEach((action) => action());
-  }, [stateRef, stateRef.current.diagramStatus, postPaintActions]);
-  reactExports.useEffect(() => {
-    if (![
-      EditorKernelDiagramStatus.PAINT,
-      EditorKernelDiagramStatus.PAINT_ON_POSITION
-    ].includes(stateRef.current.diagramStatus)) {
-      return;
-    }
-    const backendModel = stateRef.current.engineBackend.getModel();
-    const grid = [];
-    const nodes = backendModel.getNodes();
-    const startNode = nodes.find((node) => node instanceof StartNodeModel);
-    grid[0] = grid[0] ?? [];
-    grid[0][0] = {
-      node: startNode,
-      x: startNode.getPosition().x,
-      y: startNode.getPosition().y,
-      maxWidth: -1,
-      maxHeight: -1,
-      top: -1,
-      left: -1
+    const zoomTo = (zoom2) => {
+      stateRef.current.canvasZoom = zoom2;
+      stateRef.current.engine.getModel().setZoomLevel(zoom2 * 100);
+      stateRef.current.engine.repaintCanvas();
     };
-    buildGrid(startNode, grid, 0, 0);
-    const { startTop, startLeft, rowGap, columnGap } = DEFAULTS.diagram;
-    computeGrid(grid, startTop, startLeft, rowGap, columnGap);
-    const newModel = cloneDiagramNodes(backendModel);
-    newModel.setZoomLevel((stateRef.current.canvasZoom ?? 1) * 100);
-    const { width, height } = computeCanvasSize(newModel);
-    stateRef.current.canvasWidth = width;
-    stateRef.current.canvasHeight = height;
-    stateRef.current.engine.setModel(newModel);
-    stateRef.current.engineBackend.setModel(createLockedDiagramModel());
-    stateRef.current.diagramStatus = EditorKernelDiagramStatus.IN_SERVICE;
+    const onZoomTo = (zoom2) => {
+      zoomTo(zoom2);
+      forceUpdate();
+    };
+    const onZoomToFit = () => {
+      if (ref.current == null) {
+        return;
+      }
+      const parent = ref.current.parentElement;
+      const { width: parentWidth, height: parentHeight } = parent.getBoundingClientRect();
+      const zoom2 = Math.min(parentWidth / (stateRef.current.canvasWidth ?? parentWidth), parentHeight / (stateRef.current.canvasHeight ?? parentHeight));
+      onZoomTo(zoom2);
+    };
+    on(PlaygroundEventTypes.ZOOM_TO, onZoomTo);
+    on(PlaygroundEventTypes.ZOOM_TO_FIT, onZoomToFit);
+    return () => {
+      off(PlaygroundEventTypes.ZOOM_TO, onZoomTo);
+      off(PlaygroundEventTypes.ZOOM_TO_FIT, onZoomToFit);
+    };
+  }, [on, off, forceUpdate, stateRef]);
+  const askZoom = () => stateRef.current.canvasZoom;
+  let zoom = askZoom();
+  if (zoom === 1) {
+    zoom = void 0;
+  }
+  const handle = stateRef.current.engine.registerListener({
+    rendered: () => {
+      if (stateRef.current.diagramStatus === EditorKernelDiagramStatus.IN_SERVICE) {
+        const actions = [...postPaintActions.current];
+        postPaintActions.current.length = 0;
+        actions.forEach((action) => {
+          var _a, _b;
+          if (Array.isArray(action)) {
+            switch (action[0]) {
+              case PlaygroundEventTypes.DO_LOCATE_STEP_NODE: {
+                const step = action[1];
+                const node = (_a = stateRef.current.engine.getModel().getNodes()) == null ? void 0 : _a.find((node2) => node2 instanceof StepNodeModel && node2.step === step);
+                (_b = ref.current.querySelector(`div[data-nodeid="${node.getID()}"]`)) == null ? void 0 : _b.scrollIntoView({
+                  behavior: "smooth",
+                  block: "center",
+                  inline: "center"
+                });
+                break;
+              }
+            }
+          }
+        });
+      }
+      handle.deregister();
+    }
+  });
+  return React.createElement(
+    FrontendCanvasWrapper,
+    { canvasWidth: stateRef.current.canvasWidth, canvasHeight: stateRef.current.canvasHeight, canvasZoom: zoom, ref },
+    React.createElement(NodeLocator, { stateRef }),
+    React.createElement(CanvasWidget, { engine: stateRef.current.engine, className: "o23-playground-editor-content" })
+  );
+};
+const useForceRepaint = (options) => {
+  const { content, serializer, deserializer, stateRef, assistant } = options;
+  const { fire } = usePlaygroundEventBus();
+  const { replace } = useThrottler();
+  const forceUpdate = useForceUpdate();
+  reactExports.useEffect(() => {
+    if (serializer === stateRef.current.serializer && deserializer === stateRef.current.deserializer && content === stateRef.current.content) {
+      return;
+    }
+    paint({
+      serializer: () => serializer,
+      deserializer: () => deserializer,
+      assistant: () => assistant,
+      content: () => content,
+      stateRef,
+      replace,
+      onStateContentChanged: async () => {
+        fire(PlaygroundEventTypes.REPAINT);
+      },
+      onContentChanged: (content2) => {
+        fire(PlaygroundEventTypes.CONTENT_CHANGED, content2);
+      }
+    });
     forceUpdate();
-  }, [forceUpdate, stateRef, stateRef.current.diagramStatus]);
+  }, [fire, replace, forceUpdate, content, serializer, deserializer, stateRef, assistant]);
 };
 const ToolbarToc = (props) => {
   const { stateRef } = props;
@@ -6267,42 +6445,10 @@ const Toolbar = (props) => {
     React.createElement(ToolbarTocWrapper, { expanded: state.tocExpanded, stateRef })
   );
 };
-const CanvasWrapper = (props) => {
-  const { width, height, zoom: askZoom, zoomTo, children } = props;
-  const ref = reactExports.useRef(null);
-  const { on, off } = usePlaygroundEventBus();
-  const forceUpdate = useForceUpdate();
-  reactExports.useEffect(() => {
-    const onZoomTo = (zoom2) => {
-      zoomTo(zoom2);
-      forceUpdate();
-    };
-    const onZoomToFit = () => {
-      if (ref.current == null) {
-        return;
-      }
-      const parent = ref.current.parentElement;
-      const { width: parentWidth, height: parentHeight } = parent.getBoundingClientRect();
-      const zoom2 = Math.min(parentWidth / (width ?? parentWidth), parentHeight / (height ?? parentHeight));
-      onZoomTo(zoom2);
-    };
-    on(PlaygroundEventTypes.ZOOM_TO, onZoomTo);
-    on(PlaygroundEventTypes.ZOOM_TO_FIT, onZoomToFit);
-    return () => {
-      off(PlaygroundEventTypes.ZOOM_TO, onZoomTo);
-      off(PlaygroundEventTypes.ZOOM_TO_FIT, onZoomToFit);
-    };
-  }, [on, off, forceUpdate, width, height, zoomTo]);
-  let zoom = askZoom();
-  if (zoom === 1) {
-    zoom = void 0;
-  }
-  return React.createElement(EditorCanvasWrapper, { canvasWidth: width, canvasHeight: height, canvasZoom: zoom, ref }, children);
-};
 const EditorKernel = (props) => {
   const { content, assistant, serializer, deserializer, allowUploadFile, allowDownloadFile, allowDownloadImage } = props;
   const wrapperRef = reactExports.useRef(null);
-  const { on, off, fire } = usePlaygroundEventBus();
+  const { fire } = usePlaygroundEventBus();
   const { replace } = useThrottler();
   const postPaintActions = reactExports.useRef([]);
   const stateRef = reactExports.useRef(firstPaint({
@@ -6321,66 +6467,12 @@ const EditorKernel = (props) => {
       fire(PlaygroundEventTypes.CONTENT_CHANGED, content2);
     }
   }));
+  useForceRepaint({ content, serializer, deserializer, stateRef, assistant });
   const forceUpdate = useForceUpdate();
-  reactExports.useEffect(() => {
-    if (serializer === stateRef.current.serializer && deserializer === stateRef.current.deserializer && content === stateRef.current.content) {
-      return;
-    }
-    paint({
-      serializer: () => serializer,
-      deserializer: () => deserializer,
-      assistant: () => assistant,
-      content: () => content,
-      stateRef,
-      replace,
-      onStateContentChanged: async () => {
-        fire(PlaygroundEventTypes.REPAINT);
-      },
-      onContentChanged: (content2) => {
-        fire(PlaygroundEventTypes.CONTENT_CHANGED, content2);
-      }
-    });
+  const [afterPositionComputed] = reactExports.useState(() => () => {
+    stateRef.current.diagramStatus = EditorKernelDiagramStatus.IN_SERVICE;
     forceUpdate();
-  }, [fire, replace, forceUpdate, serializer, deserializer, assistant, content]);
-  reactExports.useEffect(() => {
-    const onRepaint = () => {
-      repaint({
-        assistant: () => assistant,
-        stateRef,
-        replace,
-        onStateContentChanged: async () => {
-          fire(PlaygroundEventTypes.REPAINT);
-        },
-        onContentChanged: (content2) => {
-          fire(PlaygroundEventTypes.CONTENT_CHANGED, content2);
-        }
-      });
-      forceUpdate();
-    };
-    const onRepaintAndLocateStepNode = (step) => {
-      postPaintActions.current.push(() => {
-        fire(PlaygroundEventTypes.DO_LOCATE_STEP_NODE, step);
-      });
-      onRepaint();
-    };
-    const switchFolding = (fold) => {
-      switchAllNodesFolding(stateRef.current.def, fold);
-      onRepaint();
-    };
-    const onFoldAllNodes = () => switchFolding(true);
-    const onUnfoldAllNodes = () => switchFolding(false);
-    on(PlaygroundEventTypes.REPAINT, onRepaint);
-    on(PlaygroundEventTypes.REPAINT_AND_LOCATE_STEP_NODE, onRepaintAndLocateStepNode);
-    on(PlaygroundEventTypes.FOLD_ALL_NODES, onFoldAllNodes);
-    on(PlaygroundEventTypes.UNFOLD_ALL_NODES, onUnfoldAllNodes);
-    return () => {
-      off(PlaygroundEventTypes.REPAINT, onRepaint);
-      off(PlaygroundEventTypes.REPAINT_AND_LOCATE_STEP_NODE, onRepaintAndLocateStepNode);
-      off(PlaygroundEventTypes.FOLD_ALL_NODES, onFoldAllNodes);
-      off(PlaygroundEventTypes.UNFOLD_ALL_NODES, onUnfoldAllNodes);
-    };
-  }, [on, off, fire, replace, forceUpdate, assistant]);
-  usePaint(stateRef, postPaintActions);
+  });
   if (VUtils.isNotBlank(stateRef.current.message)) {
     return React.createElement(
       EditorWrapper,
@@ -6400,33 +6492,18 @@ const EditorKernel = (props) => {
       React.createElement(ParseError, null, Labels.NoDefParsed)
     );
   }
-  const askZoom = () => stateRef.current.canvasZoom;
-  const zoomTo = (zoom) => {
-    stateRef.current.canvasZoom = zoom;
-    stateRef.current.engine.getModel().setZoomLevel(zoom * 100);
-    stateRef.current.engine.repaintCanvas();
-  };
   try {
     return React.createElement(
       React.Fragment,
       null,
       React.createElement(
         EditorWrapper,
-        { "data-diagram-status": stateRef.current.diagramStatus, "data-diagram-locked": stateRef.current.engine.getModel().isLocked(), ref: wrapperRef },
+        { "data-diagram-locked": stateRef.current.engine.getModel().isLocked(), ref: wrapperRef },
         React.createElement(
           ErrorBoundary,
           { content },
-          React.createElement(
-            BackendCanvasWrapper,
-            null,
-            React.createElement(CanvasWidget, { engine: stateRef.current.engineBackend, className: "o23-playground-editor-content-backend" })
-          ),
-          React.createElement(
-            CanvasWrapper,
-            { width: stateRef.current.canvasWidth, height: stateRef.current.canvasHeight, zoom: askZoom, zoomTo },
-            React.createElement(NodeLocator, { stateRef }),
-            React.createElement(CanvasWidget, { engine: stateRef.current.engine, className: "o23-playground-editor-content" })
-          )
+          React.createElement(BackendCanvas, { stateRef, postPaintActions, assistant, afterPositionComputed }),
+          React.createElement(FrontendCanvas, { stateRef, postPaintActions })
         )
       ),
       React.createElement(Toolbar, { stateRef, serializer, allowUploadFile, allowDownloadFile, allowDownloadImage })
@@ -10266,6 +10343,9 @@ const PlaygroundDelegate = (props) => {
     };
   });
   reactExports.useEffect(() => {
+    if ((serializer == null || serializer !== state.serializer) && (deserializer == null || deserializer !== state.deserializer)) {
+      return;
+    }
     setState((state2) => {
       return {
         ...state2,
@@ -10273,7 +10353,7 @@ const PlaygroundDelegate = (props) => {
         deserializer: deserializer ?? state2.deserializer
       };
     });
-  }, [serializer, deserializer]);
+  }, [serializer, deserializer, state.serializer, state.deserializer]);
   reactExports.useEffect(() => {
     const onResetContent = async (content2) => {
       await $onValueChange(content2, true, { global: globalHandlers });
