@@ -238,22 +238,22 @@ export const StepNodeWidget = (props: StepNodeWidgetProps) => {
 	};
 	const operators = reconfigureStepDefOperators(StepDefs.operators, node)(node, def);
 	const onPrependStepClicked = () => {
-		operators.prependStep?.(node, def, {handlers: node.handlers, assistant: node.assistant});
+		operators.prependStep?.(node, def);
 	};
 	const onAppendStepClicked = () => {
-		operators.appendStep?.(node, def, {handlers: node.handlers, assistant: node.assistant});
+		operators.appendStep?.(node, def);
 	};
 	const onRemoveStepClicked = () => {
-		operators.remove?.(node, def, {handlers: node.handlers, assistant: node.assistant});
+		operators.remove?.(node, def);
 	};
 	const onPrependRouteClicked = () => {
-		operators.prependRoute?.(node, def, {handlers: node.handlers, assistant: node.assistant});
+		operators.prependRoute?.(node, def);
 	};
 	const onAppendRouteClicked = () => {
-		operators.appendRoute?.(node, def, {handlers: node.handlers, assistant: node.assistant});
+		operators.appendRoute?.(node, def);
 	};
 	const onAddOtherwiseClicked = () => {
-		operators.addOtherwise?.(node, def, {handlers: node.handlers, assistant: node.assistant});
+		operators.addOtherwise?.(node, def);
 	};
 
 	const name = (def.name ?? '').trim() || Labels.StepNodeNoname;

@@ -19,7 +19,6 @@ import {
 	ConfigChangesConfirmed,
 	ConfirmNodeOptions,
 	NodeOperators,
-	OperateNodeOptions,
 	StepDefsOperators,
 	StepNodeConfigurer
 } from '../../types';
@@ -64,6 +63,7 @@ import {prepare} from './prepare';
 import {survivalAfterConfirm} from './survival-after-confirm';
 import {switchUse} from './switch-use';
 import {CommonStepDefModel, CommonStepDefsType, CreateStepNodeConfigurerOptions, RouteTestStepDefModel} from './types';
+import {createNodeOperatorsForStep} from './utils';
 
 export * from './types';
 export * from './utils';
@@ -252,39 +252,7 @@ export const CommonStepDefs: CommonStepDefsType = {
 					if (!steps.includes(def)) {
 						return {};
 					}
-					const operators: NodeOperators<F> = {};
-					operators.prependStep = (node: StepNodeModel, def: F, options: OperateNodeOptions) => {
-						const parentDef = node.getSubOf() as SetsLikePipelineStepDef | PipelineFileDef;
-						const steps = parentDef.steps ?? [];
-						const index = steps.indexOf(def);
-						if (index === 0) {
-							steps.unshift(node.assistant.createDefaultStep());
-						} else {
-							steps.splice(index - 1, 0, node.assistant.createDefaultStep());
-						}
-						options.handlers.onChange();
-					};
-					operators.appendStep = (node: StepNodeModel, def: F, options: OperateNodeOptions) => {
-						const parentDef = node.getSubOf() as SetsLikePipelineStepDef | PipelineFileDef;
-						const steps = parentDef.steps ?? [];
-						const index = steps.indexOf(def);
-						if (index === steps.length - 1) {
-							steps.push(node.assistant.createDefaultStep());
-						} else {
-							steps.splice(index + 1, 0, node.assistant.createDefaultStep());
-						}
-						options.handlers.onChange();
-					};
-					if (steps.length > 1) {
-						operators.remove = (node: StepNodeModel, def: F, options: OperateNodeOptions) => {
-							const parentDef = node.getSubOf() as SetsLikePipelineStepDef | PipelineFileDef;
-							const steps = parentDef.steps ?? [];
-							steps.splice(steps.indexOf(def), 1);
-							options.handlers.onChange();
-						};
-					}
-
-					return operators;
+					return createNodeOperatorsForStep(steps, false);
 				};
 			})(),
 			properties: [

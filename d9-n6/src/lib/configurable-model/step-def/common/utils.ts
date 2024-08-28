@@ -13,7 +13,7 @@ import {
 } from '../../../diagram';
 import {askStepNodePosition, DiagramNodePosition} from '../../../editor';
 import {PlaygroundModuleAssistant} from '../../../types';
-import {CreateSubNodesOptions} from '../../types';
+import {CreateSubNodesOptions, NodeOperators} from '../../types';
 import {FirstSubStepPortModel} from './port-widgets';
 
 export const setNodePosition = (node: HandledNodeModel, position: () => DiagramNodePosition) => {
@@ -124,3 +124,34 @@ export const createSubNodesOfSingleRoute = (options: CreateSubNodesOfSingleRoute
 		});
 	}, previousNode);
 };
+
+export const createNodeOperatorsForStep =
+	<F extends PipelineStepDef>(steps: Array<PipelineStepDef>, removeAnyway: boolean, operators?: NodeOperators<F>): Pick<NodeOperators<F>, 'prependStep' | 'appendStep' | 'remove'> => {
+		operators = operators ?? {};
+		operators.prependStep = (node: StepNodeModel, def: F) => {
+			const index = steps.indexOf(def);
+			if (index === 0) {
+				steps.unshift(node.assistant.createDefaultStep());
+			} else {
+				steps.splice(index, 0, node.assistant.createDefaultStep());
+			}
+			node.handlers.onChange();
+		};
+		operators.appendStep = (node: StepNodeModel, def: F) => {
+			const index = steps.indexOf(def);
+			if (index === steps.length - 1) {
+				steps.push(node.assistant.createDefaultStep());
+			} else {
+				steps.splice(index + 1, 0, node.assistant.createDefaultStep());
+			}
+			node.handlers.onChange();
+		};
+		if (removeAnyway || steps.length > 1) {
+			operators.remove = (node: StepNodeModel, def: F) => {
+				steps.splice(steps.indexOf(def), 1);
+				node.handlers.onChange();
+			};
+		}
+
+		return operators;
+	};

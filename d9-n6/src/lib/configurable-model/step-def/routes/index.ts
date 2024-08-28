@@ -1,14 +1,22 @@
 import {Undefinable} from '@rainbow-d9/n1';
-import {FileDef, PipelineStepDef, RoutesPipelineStepDef, StandardPipelineStepRegisterKey} from '../../../definition';
+import {
+	AllInPipelineStepDef,
+	FileDef,
+	isFileDef,
+	PipelineStepDef,
+	RoutesPipelineStepDef,
+	StandardPipelineStepRegisterKey
+} from '../../../definition';
 import {StepNodeModel} from '../../../diagram';
 import {ConfigurableElement, ConfigurableModel} from '../../../edit-dialog';
 import {HelpDocs} from '../../../help-docs';
-import {ConfigChangesConfirmed, ConfirmNodeOptions, StepNodeConfigurer} from '../../types';
+import {ConfigChangesConfirmed, ConfirmNodeOptions, NodeOperators, StepNodeConfigurer} from '../../types';
 import {registerStepDef} from '../all-step-defs';
 import {
 	AndConfirmReturned,
 	CommonStepDefModel,
 	CommonStepDefs,
+	createNodeOperatorsForStep,
 	FirstSubStepPortForOtherwise,
 	FirstSubStepPortForRouteTest,
 	RouteTestStepDefModel
@@ -70,6 +78,92 @@ export const RoutesStepCheckReconfigurer: StepDefsReconfigurer = {
 		}
 
 		return CommonStepDefs.reconfigurePropertiesWithRouteCheck(properties, model);
+	},
+	operators: (operators: StepNodeConfigurer['operators'], node: StepNodeModel): Undefinable<StepNodeConfigurer['operators']> => {
+		if (isFileDef(node.step) || isFileDef(node.getSubOf())) {
+			// top level, do nothing
+			return (void 0);
+		}
+		const parentDef = node.getSubOf() as PipelineStepDef;
+		if (parentDef.use !== StandardPipelineStepRegisterKey.ROUTES_SETS) {
+			// parent is not routes, do nothing
+			return (void 0);
+		}
+		return <F extends AllInPipelineStepDef>(node: StepNodeModel, def: F): NodeOperators<F> => {
+			const computed = operators(node, def);
+			const parentDef = node.getSubOf() as RoutesPipelineStepDef;
+			const routes = parentDef.routes ?? [];
+			// find route which include given step
+			const route = routes.find(route => (route.steps ?? []).includes(def));
+			const otherwise = parentDef.otherwise ?? [];
+			// if given node is one of route steps
+			if (route != null) {
+				// can do prepend/append/remove step
+				const steps = route.steps;
+				// override remove function
+				if (routes.length > 1) {
+					// more than one route, can remove step anyway
+					createNodeOperatorsForStep(steps, true, computed);
+					// override route, when there is no step on route, remove route as well
+					computed.remove = (node: StepNodeModel, def: F) => {
+						// remove step first
+						steps.splice(steps.indexOf(def), 1);
+						if (steps.length === 0) {
+							// remove route if no step left
+							const index = routes.indexOf(route);
+							routes.splice(index, 1);
+							node.handlers.onChange();
+						}
+					};
+				} else {
+					// last step of last route cannot be removed
+					createNodeOperatorsForStep(steps, false, computed);
+				}
+				if (node.isFirstSubStep()) {
+					// can prepend/append route anyway
+					// eslint-disable-next-line @typescript-eslint/no-unused-vars
+					computed.prependRoute = (node: StepNodeModel, _def: F) => {
+						const index = routes.indexOf(route);
+						if (index === 0) {
+							routes.unshift({steps: [node.assistant.createDefaultStep()]});
+						} else {
+							routes.splice(index, 0, {steps: [node.assistant.createDefaultStep()]});
+						}
+						node.handlers.onChange();
+					};
+					// eslint-disable-next-line @typescript-eslint/no-unused-vars
+					computed.appendRoute = (node: StepNodeModel, _def: F) => {
+						const index = routes.indexOf(route);
+						if (index === steps.length - 1) {
+							routes.push({steps: [node.assistant.createDefaultStep()]});
+						} else {
+							routes.splice(index + 1, 0, {steps: [node.assistant.createDefaultStep()]});
+						}
+						node.handlers.onChange();
+					};
+					if (otherwise.length === 0) {
+						// if otherwise not exists, can do add otherwise
+						// eslint-disable-next-line @typescript-eslint/no-unused-vars
+						computed.addOtherwise = (node: StepNodeModel, _def: F) => {
+							parentDef.otherwise = [node.assistant.createDefaultStep()];
+							node.handlers.onChange();
+						};
+					}
+				}
+			} else if (otherwise.includes(def)) {
+				// if given node is one of otherwise steps, can do prepend/append/remove step
+				// otherwise can be removed anyway
+				createNodeOperatorsForStep(otherwise, true, computed);
+				// can prepend route
+				// eslint-disable-next-line @typescript-eslint/no-unused-vars
+				computed.prependRoute = (node: StepNodeModel, _def: F) => {
+					routes.push({steps: [node.assistant.createDefaultStep()]});
+					parentDef.routes = routes;
+					node.handlers.onChange();
+				};
+			}
+			return computed;
+		};
 	}
 };
 

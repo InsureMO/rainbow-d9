@@ -37,12 +37,12 @@ export interface OperateNodeOptions {
  * if operation can be performed on given node, then provide the corresponding operation function
  */
 export interface NodeOperators<F extends PipelineStepDef = PipelineStepDef> {
-	remove?: (node: StepNodeModel, def: F, options: OperateNodeOptions) => void;
-	prependStep?: (node: StepNodeModel, def: F, options: OperateNodeOptions) => void;
-	appendStep?: (node: StepNodeModel, def: F, options: OperateNodeOptions) => void;
-	prependRoute?: (node: StepNodeModel, def: F, options: OperateNodeOptions) => void;
-	appendRoute?: (node: StepNodeModel, def: F, options: OperateNodeOptions) => void;
-	addOtherwise?: (node: StepNodeModel, def: F, options: OperateNodeOptions) => void;
+	remove?: (node: StepNodeModel, def: F) => void;
+	prependStep?: (node: StepNodeModel, def: F) => void;
+	appendStep?: (node: StepNodeModel, def: F) => void;
+	prependRoute?: (node: StepNodeModel, def: F) => void;
+	appendRoute?: (node: StepNodeModel, def: F) => void;
+	addOtherwise?: (node: StepNodeModel, def: F) => void;
 }
 
 export type StepDefsOperators<F extends PipelineStepDef = PipelineStepDef> = (node: StepNodeModel, def: F) => NodeOperators<F>

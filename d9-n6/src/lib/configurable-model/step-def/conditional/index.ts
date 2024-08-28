@@ -1,19 +1,22 @@
 import {Undefinable} from '@rainbow-d9/n1';
 import {
+	AllInPipelineStepDef,
 	ConditionalPipelineStepDef,
 	FileDef,
+	isFileDef,
 	PipelineStepDef,
 	StandardPipelineStepRegisterKey
 } from '../../../definition';
 import {StepNodeModel} from '../../../diagram';
 import {ConfigurableElement, ConfigurableModel} from '../../../edit-dialog';
 import {HelpDocs} from '../../../help-docs';
-import {ConfigChangesConfirmed, ConfirmNodeOptions, StepNodeConfigurer} from '../../types';
+import {ConfigChangesConfirmed, ConfirmNodeOptions, NodeOperators, StepNodeConfigurer} from '../../types';
 import {registerStepDef} from '../all-step-defs';
 import {
 	AndConfirmReturned,
 	CommonStepDefModel,
 	CommonStepDefs,
+	createNodeOperatorsForStep,
 	FirstSubStepPortForOtherwise,
 	FirstSubStepPortForRouteTest,
 	RouteTestStepDefModel
@@ -68,6 +71,37 @@ export const ConditionalStepCheckReconfigurer: StepDefsReconfigurer = {
 		}
 
 		return CommonStepDefs.reconfigurePropertiesWithRouteCheck(properties, model);
+	},
+	operators: (operators: StepNodeConfigurer['operators'], node: StepNodeModel): Undefinable<StepNodeConfigurer['operators']> => {
+		if (isFileDef(node.step) || isFileDef(node.getSubOf())) {
+			// top level, do nothing
+			return (void 0);
+		}
+		const parentDef = node.getSubOf() as PipelineStepDef;
+		if (parentDef.use !== StandardPipelineStepRegisterKey.CONDITIONAL_SETS) {
+			// parent is not conditional, do nothing
+			return (void 0);
+		}
+		return <F extends AllInPipelineStepDef>(node: StepNodeModel, def: F): NodeOperators<F> => {
+			const computed = operators(node, def);
+			const parentDef = node.getSubOf() as ConditionalPipelineStepDef;
+			const steps = parentDef.steps ?? [];
+			const otherwise = parentDef.otherwise ?? [];
+			if (steps.includes(def) && node.isFirstSubStep() && otherwise.length === 0) {
+				// if given node is one of check steps, and otherwise not exists, can do add otherwise
+				// prepend/append step already be handled in common logic
+				// eslint-disable-next-line @typescript-eslint/no-unused-vars
+				computed.addOtherwise = (node: StepNodeModel, _def: F) => {
+					parentDef.otherwise = [node.assistant.createDefaultStep()];
+					node.handlers.onChange();
+				};
+			} else if (otherwise.includes(def)) {
+				// if given node is one of otherwise steps, can do prepend/append/remove step
+				// otherwise can be removed anyway
+				createNodeOperatorsForStep(otherwise, true, computed);
+			}
+			return computed;
+		};
 	}
 };
 
