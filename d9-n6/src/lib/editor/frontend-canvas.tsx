@@ -1,6 +1,7 @@
 import {CanvasWidget} from '@projectstorm/react-canvas-core';
 import {useForceUpdate} from '@rainbow-d9/n1';
 import React, {MutableRefObject, useEffect, useRef} from 'react';
+import {StepNodeModel} from '../diagram';
 import {PlaygroundEventTypes, usePlaygroundEventBus} from '../playground-event-bus';
 import {NodeLocator} from './node-locator';
 import {EditorKernelDiagramStatus, EditorKernelRefState, PostRepaintAction} from './painter';
@@ -60,12 +61,24 @@ export const FrontendCanvas = (props: FrontendCanvasProps) => {
 				// node model already in engine, and rendered,
 				// but the node widget doesn't register its listener on handle locate node event,
 				// since the register is in effect life-cycle of node widget
-				// so delay 100ms to wait all listeners registered
-				setTimeout(() => {
-					const actions = [...postPaintActions.current];
-					postPaintActions.current.length = 0;
-					actions.forEach(action => action());
-				}, 100);
+				const actions = [...postPaintActions.current];
+				postPaintActions.current.length = 0;
+				actions.forEach(action => {
+					if (Array.isArray(action)) {
+						switch (action[0]) {
+							case PlaygroundEventTypes.DO_LOCATE_STEP_NODE: {
+								const step = action[1];
+								const node = stateRef.current.engine.getModel().getNodes()?.find(node => node instanceof StepNodeModel && node.step === step);
+								ref.current.querySelector(`div[data-nodeid="${node.getID()}"]`)?.scrollIntoView({
+									behavior: 'smooth', block: 'center', inline: 'center'
+								});
+								break;
+							}
+							default:
+							// do nothing
+						}
+					}
+				});
 			}
 			handle.deregister();
 		}

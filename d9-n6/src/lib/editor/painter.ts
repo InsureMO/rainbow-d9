@@ -11,8 +11,9 @@ import {PathFindingLinkFactory} from '@projectstorm/react-diagrams-routing';
 import {ThrottlerFunctions, Undefinable, VUtils} from '@rainbow-d9/n1';
 import {MutableRefObject} from 'react';
 import {DEFAULTS} from '../constants';
-import {FileDef, FileDefDeserializer, FileDefSerializer} from '../definition';
+import {FileDef, FileDefDeserializer, FileDefSerializer, PipelineStepDef} from '../definition';
 import {EndNodeModel, initEngine} from '../diagram';
+import {PlaygroundEventTypes} from '../playground-event-bus';
 import {MarkdownContent, PlaygroundModuleAssistant} from '../types';
 import {createDiagramHandlers, createDiagramNodes, createLockedDiagramModel} from './diagram-utils';
 
@@ -46,7 +47,8 @@ export interface EditorKernelRefState {
 	canvasZoom?: number;
 }
 
-export type PostRepaintAction = () => void;
+export type PostRepaintActionLocateNode = [PlaygroundEventTypes.DO_LOCATE_STEP_NODE, PipelineStepDef];
+export type PostRepaintAction = PostRepaintActionLocateNode;
 
 export const parseContent = (parser: FileDefDeserializer, content?: MarkdownContent): FileDef => {
 	const def = parser.parse(content ?? '');

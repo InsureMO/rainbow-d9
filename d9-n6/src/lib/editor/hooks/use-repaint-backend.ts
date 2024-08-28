@@ -36,9 +36,7 @@ export const useRepaintBackend = (options: UseRepaintBackendOptions) => {
 			forceUpdate();
 		};
 		const onRepaintAndLocateStepNode = (step: PipelineStepDef) => {
-			postPaintActions.current.push(() => {
-				fire(PlaygroundEventTypes.DO_LOCATE_STEP_NODE, step);
-			});
+			postPaintActions.current.push([PlaygroundEventTypes.DO_LOCATE_STEP_NODE, step]);
 			onRepaintBackend();
 		};
 		const switchFolding = (fold: boolean) => {
