@@ -6,7 +6,6 @@ import {EditorProps} from '../types';
 import {BackendCanvas} from './backend-canvas';
 import {ErrorBoundary} from './error-boundary';
 import {FrontendCanvas} from './frontend-canvas';
-import {useCanvasInService} from './hooks/use-canvas-in-service';
 import {useForceRepaint} from './hooks/use-force-repaint';
 import {EditorKernelDiagramStatus, EditorKernelRefState, firstPaint, PostRepaintAction} from './painter';
 import {Toolbar} from './toolbar';
@@ -37,7 +36,6 @@ export const EditorKernel = (props: EditorProps) => {
 	}));
 	useForceRepaint({content, serializer, deserializer, stateRef, assistant});
 	// before repaint kernel, since it depends diagram status
-	useCanvasInService({stateRef, postPaintActions});
 	const forceUpdate = useForceUpdate();
 	const [afterPositionComputed] = useState<() => void>(() => () => {
 		stateRef.current.diagramStatus = EditorKernelDiagramStatus.IN_SERVICE;
@@ -68,7 +66,7 @@ export const EditorKernel = (props: EditorProps) => {
 				<ErrorBoundary content={content}>
 					<BackendCanvas stateRef={stateRef} postPaintActions={postPaintActions} assistant={assistant}
 					               afterPositionComputed={afterPositionComputed}/>
-					<FrontendCanvas stateRef={stateRef}/>
+					<FrontendCanvas stateRef={stateRef} postPaintActions={postPaintActions}/>
 				</ErrorBoundary>
 			</EditorWrapper>
 			<Toolbar stateRef={stateRef} serializer={serializer}

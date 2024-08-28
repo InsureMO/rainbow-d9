@@ -1,17 +1,30 @@
 import {CanvasWidget} from '@projectstorm/react-canvas-core';
 import {useForceUpdate} from '@rainbow-d9/n1';
-import React, {MutableRefObject, useEffect, useRef} from 'react';
+import React, {Fragment, MutableRefObject, useEffect, useRef} from 'react';
 import {PlaygroundEventTypes, usePlaygroundEventBus} from '../playground-event-bus';
 import {NodeLocator} from './node-locator';
-import {EditorKernelRefState} from './painter';
+import {EditorKernelDiagramStatus, EditorKernelRefState, PostRepaintAction} from './painter';
 import {FrontendCanvasWrapper} from './widgets';
 
-export interface EditCanvasProps {
+export interface FrontendCanvasProps {
 	stateRef: MutableRefObject<EditorKernelRefState>;
+	postPaintActions: MutableRefObject<Array<PostRepaintAction>>;
 }
 
-export const FrontendCanvas = (props: EditCanvasProps) => {
-	const {stateRef} = props;
+export const PostPaintActionsConsumer = (props: FrontendCanvasProps) => {
+	const {stateRef, postPaintActions} = props;
+
+	// all canvas in service, execute post paint actions
+	if (stateRef.current.diagramStatus === EditorKernelDiagramStatus.IN_SERVICE) {
+		const actions = [...postPaintActions.current];
+		postPaintActions.current = [];
+		actions.forEach(action => action());
+	}
+
+	return <Fragment/>;
+};
+export const FrontendCanvas = (props: FrontendCanvasProps) => {
+	const {stateRef, postPaintActions} = props;
 
 	const ref = useRef<HTMLDivElement>(null);
 	const {on, off} = usePlaygroundEventBus();
@@ -55,5 +68,6 @@ export const FrontendCanvas = (props: EditCanvasProps) => {
 	                              canvasZoom={zoom} ref={ref}>
 		<NodeLocator stateRef={stateRef}/>
 		<CanvasWidget engine={stateRef.current.engine} className="o23-playground-editor-content"/>
+		<PostPaintActionsConsumer stateRef={stateRef} postPaintActions={postPaintActions}/>
 	</FrontendCanvasWrapper>;
 };
