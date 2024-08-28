@@ -4,6 +4,8 @@ import color from 'color';
 const EDITOR_BACKGROUND_BLOCK_SIZE = 'var(--o23-playground-editor-background-block-size, 48px)';
 const EDITOR_BACKGROUND_LINE_COLOR = `var(--o23-playground-editor-background-line-color, ${color(CssConstants.PRIMARY_COLOR).alpha(0.08)})`;
 const EDITOR_ATTRIBUTE_BADGE_COLOR = '#9db6c6';
+const TOOLBAR_BUTTON_ACTIVE_BACKGROUND_COLOR = '#7596bf';
+const STEP_OPERATOR_COLOR = '#7596bf';
 const NODE_START_COLOR = '#ffb56b';
 const NODE_END_COLOR = '#e0b35f';
 const NODE_JOIN_END_COLOR = '#c4c2bf';
@@ -22,7 +24,6 @@ const NEXT_STEP_PORT_COLOR = '#a3ab5b';
 const PREVIOUS_STEP_PORT_COLOR = '#8454aa';
 const PORT_FIRST_SUB_STEP_COLOR = '#8454aa';
 const PORT_STEPS_COLOR = '#617ba0';
-// const LINK_STEPS_COLOR = '#7c8ba2';
 const PORT_ERROR_HANDLES_COLOR = '#c13a92';
 const LINK_ERROR_HANDLES_COLOR = '#a97f98';
 const PORT_LAST_SUB_STEP_JOIN_COLOR = '#00618b';
@@ -45,7 +46,7 @@ export const PlaygroundCssVars = {
 	EDITOR_TOOLBAR_BUTTON_WIDTH: `var(--o23-playground-editor-toolbar-button-size, 32px)`,
 	EDITOR_TOOLBAR_BUTTON_COLOR: `var(--o23-playground-editor-toolbar-button-color, ${CssVars.FONT_COLOR})`,
 	EDITOR_TOOLBAR_BUTTON_ACTIVE_COLOR: `var(--o23-playground-editor-toolbar-button-active-color, ${CssVars.INVERT_COLOR})`,
-	EDITOR_TOOLBAR_BUTTON_ACTIVE_BACKGROUND_COLOR: `var(--o23-playground-editor-toolbar-button-active-background-color, ${CssVars.PRIMARY_COLOR})`,
+	EDITOR_TOOLBAR_BUTTON_ACTIVE_BACKGROUND_COLOR: `var(--o23-playground-editor-toolbar-button-active-background-color, ${TOOLBAR_BUTTON_ACTIVE_BACKGROUND_COLOR})`,
 	EDITOR_TOOLBAR_TOC_HEIGHT: 'var(--o23-playground-editor-toolbar-toc-height, 30px)',
 	EDITOR_MAX_Z_INDEX: `var(--o23-playground-editor-max-z-index, 9999)`,
 	// markdown
@@ -267,9 +268,9 @@ export const PlaygroundCssVars = {
 	NODE_STEP_BODY_PADDING: 'var(--o23-playground-node-step-body-padding, 8px 0)',
 	NODE_STEP_OPERATORS_HEIGHT: 'var(--o23-playground-node-step-operators-height, 32px)',
 	NODE_STEP_OPERATOR_HEIGHT: 'var(--o23-playground-node-step-operator-height, 24px)',
-	NODE_STEP_OPERATOR_COLOR: `var(--o23-playground-node-step-operator-color, ${CssVars.PRIMARY_COLOR})`,
+	NODE_STEP_OPERATOR_COLOR: `var(--o23-playground-node-step-operator-color, ${STEP_OPERATOR_COLOR})`,
 	NODE_STEP_OPERATOR_DANGER_COLOR: `var(--o23-playground-node-step-operator-border-danger-color, ${CssVars.DANGER_COLOR})`,
-	NODE_STEP_OPERATOR_BORDER: `var(--o23-playground-node-step-operator-border, 1px solid ${CssVars.PRIMARY_COLOR})`,
+	NODE_STEP_OPERATOR_BORDER: `var(--o23-playground-node-step-operator-border, 1px solid ${STEP_OPERATOR_COLOR})`,
 	NODE_STEP_OPERATOR_BORDER_RADIUS: 'var(--o23-playground-node-step-operator-border-radius, 12px)',
 	NODE_STEP_HTTP_FETCH_BORDER: `var(--o23-playground-node-step-http-fetch-border, 2px solid ${NODE_STEP_HTTP_COLOR})`,
 	NODE_STEP_HTTP_FETCH_TITLE_BACKGROUND: `var(--o23-playground-node-step-http-fetch-title-background, linear-gradient(135deg, ${NODE_STEP_HTTP_COLOR} 0%, ${color(NODE_STEP_HTTP_COLOR).alpha(0.7)} 70%, ${color(NODE_STEP_HTTP_COLOR).alpha(0.5)} 100%))`,
