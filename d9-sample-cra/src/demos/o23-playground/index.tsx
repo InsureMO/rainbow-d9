@@ -2,9 +2,9 @@ import {StandaloneRoot} from '@rainbow-d9/n1';
 import {$d9n2, GlobalRoot} from '@rainbow-d9/n2';
 import {PlaygroundModuleAssistant} from '@rainbow-d9/n6';
 import {useDemoMarkdown} from '../use-demo-markdown';
+import {yaml as DemoYaml} from './demo-step.yaml';
 import DemoData from './demo.json';
 import {markdown as DemoContent} from './demo.md';
-import {yaml as DemoYaml} from './demo.yaml';
 
 $d9n2.intl.labels['en-US'] = {
 	...($d9n2.intl.labels['en-US'] ?? {}),

@@ -1,8 +1,15 @@
 import {VUtils} from '@rainbow-d9/n1';
 import {
+	AllInPipelineStepDef,
+	DiagramKeysOfStep,
 	FileDef,
 	isPipelineDef,
+	KeysOfApiPipeline,
+	KeysOfNonApiPipeline,
+	KeysOfPipeline,
 	PipelineFileDef,
+	PipelineStepDef,
+	PipelineStepDiagramDef,
 	PipelineStepUseDef,
 	SetsPipelineStepDef,
 	StandardPipelineStepRegisterKey
@@ -21,25 +28,24 @@ export const confirm: FileNodeConfigurer['confirm'] = (model: ConfigurableModel,
 
 	const deleteApiAttrs = (given: FileDef) => {
 		const def = given as PipelineFileDef;
-		delete def.route;
-		delete def.method;
-		delete def.headers;
-		delete def.pathParams;
-		delete def.queryParams;
-		delete def.body;
-		delete def.files;
-		delete def.exposeHeaders;
-		delete def.exposeFile;
+		KeysOfApiPipeline.forEach(key => delete def[key]);
 	};
 	const deleteNonApiAttrs = (given: FileDef) => {
 		const def = given as PipelineFileDef;
-		delete def.initOnly;
+		KeysOfNonApiPipeline.forEach(key => delete def[key]);
 	};
-	// eslint-disable-next-line @typescript-eslint/no-unused-vars
-	const deleteNonPipelineAttrs = (_given: FileDef) => {
-		// const def = given as unknown as PipelineStepUseDef;
+	const deleteNonPipelineAttrs = (given: FileDef) => {
+		const def = given as unknown as PipelineStepUseDef;
 		// do not delete use, since repaint double buffer will use this attribute
-		// delete def.use;
+		Object.keys(def).forEach(key => {
+			if (!KeysOfPipeline.includes(key)) {
+				delete def[key];
+			}
+		});
+		const diagramDef = given as unknown as PipelineStepDiagramDef;
+		if (diagramDef.$diagram != null) {
+			DiagramKeysOfStep.forEach(key => delete diagramDef.$diagram[key]);
+		}
 	};
 
 	if (isPipelineDef(def)) {
@@ -59,11 +65,30 @@ export const confirm: FileNodeConfigurer['confirm'] = (model: ConfigurableModel,
 			def.initOnly = editedDef.initOnly === true;
 			deleteApiAttrs(def);
 		}
-		deleteNonPipelineAttrs(def);
 		if (!VUtils.isBlank((def as unknown as PipelineStepUseDef).use)) {
 			// could be switched from step/step-sets to pipeline
-
+			// copy properties which not for pipeline, as a step
+			const stepDef = def as unknown as AllInPipelineStepDef;
+			if (stepDef.use === StandardPipelineStepRegisterKey.SETS
+				&& VUtils.isBlank(stepDef.fromInput)
+				&& VUtils.isBlank(stepDef.toOutput) && VUtils.isBlank(stepDef.merge)
+				&& stepDef.errorHandles != null) {
+				// no other attribute exists but steps
+				// ignore the name, use its steps as pipeline steps directly
+				// therefore the name is not needed
+				delete stepDef.name;
+			} else {
+				const keysOfPipeline = ['code', 'type', 'enabled', ...KeysOfApiPipeline, ...KeysOfNonApiPipeline];
+				const step = Object.keys(def).reduce((acc, key) => {
+					if (!keysOfPipeline.includes(key)) {
+						acc[key] = def[key];
+					}
+					return acc;
+				}, {});
+				def.steps = [step as PipelineStepDef];
+			}
 		}
+		deleteNonPipelineAttrs(def);
 	} else {
 		deleteApiAttrs(def);
 		deleteNonApiAttrs(def);

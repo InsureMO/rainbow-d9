@@ -4,7 +4,7 @@ import {ConfigurableModel} from '../../edit-dialog';
 export interface FileDefModel extends ConfigurableModel, FileDef {
 }
 
-export interface PipelineFileDefModel extends FileDefModel, PipelineFileDef {
+export interface PipelineFileDefModel extends FileDefModel, Omit<PipelineFileDef, 'steps'> {
 	type: PipelineFileDef['type'];
 	api: boolean;
 	temporary?: {

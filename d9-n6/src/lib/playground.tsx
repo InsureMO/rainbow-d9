@@ -75,6 +75,11 @@ export const PlaygroundDelegate = (props: PlaygroundProps) => {
 		};
 	});
 	useEffect(() => {
+		if ((serializer == null || serializer !== state.serializer)
+			&& (deserializer == null || deserializer !== state.deserializer)) {
+			// no need to replace
+			return;
+		}
 		setState(state => {
 			return {
 				...state,
@@ -82,7 +87,7 @@ export const PlaygroundDelegate = (props: PlaygroundProps) => {
 				deserializer: deserializer ?? state.deserializer
 			};
 		});
-	}, [serializer, deserializer]);
+	}, [serializer, deserializer, state.serializer, state.deserializer]);
 	useEffect(() => {
 		const onResetContent = async (content: string) => {
 			await $onValueChange(content, true, {global: globalHandlers});

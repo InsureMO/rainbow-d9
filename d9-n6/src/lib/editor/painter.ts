@@ -8,21 +8,13 @@ import {
 	DefaultPortFactory
 } from '@projectstorm/react-diagrams-defaults';
 import {PathFindingLinkFactory} from '@projectstorm/react-diagrams-routing';
-import {ThrottlerFunctions, Undefinable, useForceUpdate, VUtils} from '@rainbow-d9/n1';
-import {MutableRefObject, useEffect} from 'react';
+import {ThrottlerFunctions, Undefinable, VUtils} from '@rainbow-d9/n1';
+import {MutableRefObject} from 'react';
 import {DEFAULTS} from '../constants';
 import {FileDef, FileDefDeserializer, FileDefSerializer} from '../definition';
-import {EndNodeModel, initEngine, StartNodeModel} from '../diagram';
+import {EndNodeModel, initEngine} from '../diagram';
 import {MarkdownContent, PlaygroundModuleAssistant} from '../types';
-import {
-	buildGrid,
-	cloneDiagramNodes,
-	computeGrid,
-	createDiagramHandlers,
-	createDiagramNodes,
-	createLockedDiagramModel,
-	GridCell
-} from './diagram-utils';
+import {createDiagramHandlers, createDiagramNodes, createLockedDiagramModel} from './diagram-utils';
 
 export enum EditorKernelDiagramStatus {
 	IGNORED = 'ignored',
@@ -30,6 +22,7 @@ export enum EditorKernelDiagramStatus {
 	PAINT = 'paint',
 	// paint, keep palette offset and scale
 	PAINT_ON_POSITION = 'paint-on-position',
+	ALL_CANVAS_READY = 'canvas-model-ready',
 	IN_SERVICE = 'in-service'
 }
 
@@ -257,7 +250,7 @@ export interface RepaintOptions {
 	onContentChanged: (content?: string) => void;
 }
 
-export const repaint = (options: RepaintOptions) => {
+export const repaintBackend = (options: RepaintOptions) => {
 	const {stateRef, replace, onStateContentChanged, onContentChanged} = options;
 
 	const def = stateRef.current.def;
@@ -285,55 +278,4 @@ export const repaint = (options: RepaintOptions) => {
 			serializer: stateRef.current.serializer, deserializer: stateRef.current.deserializer
 		});
 	}
-};
-
-export const usePaint = (stateRef: MutableRefObject<EditorKernelRefState>, postPaintActions: MutableRefObject<Array<PostRepaintAction>>) => {
-	const forceUpdate = useForceUpdate();
-	// this effect handler must be before at next one,
-	// since diagram status is changed in the next effect handler
-	// and will trigger this effect handler
-	useEffect(() => {
-		if (stateRef.current.diagramStatus !== EditorKernelDiagramStatus.IN_SERVICE) {
-			return;
-		}
-		const actions = [...postPaintActions.current];
-		postPaintActions.current = [];
-		actions.forEach(action => action());
-	}, [stateRef, stateRef.current.diagramStatus, postPaintActions]);
-	useEffect(() => {
-		// compute the node positions, run when status is PAINT, and set status to IN_SERVICE when finished
-		if (![
-			EditorKernelDiagramStatus.PAINT, EditorKernelDiagramStatus.PAINT_ON_POSITION
-		].includes(stateRef.current.diagramStatus)) {
-			return;
-		}
-
-		const backendModel = stateRef.current.engineBackend.getModel();
-		// re-calculate node positions
-		const grid: Array<Array<GridCell>> = [];
-		const nodes = backendModel.getNodes();
-		const startNode = nodes.find(node => node instanceof StartNodeModel);
-		grid[0] = grid[0] ?? [];
-		grid[0][0] = {
-			node: startNode, x: startNode.getPosition().x, y: startNode.getPosition().y,
-			maxWidth: -1, maxHeight: -1, top: -1, left: -1
-		};
-		// [0, 0] is hold by start node
-		buildGrid(startNode, grid, 0, 0);
-		const {startTop, startLeft, rowGap, columnGap} = DEFAULTS.diagram;
-		computeGrid(grid, startTop, startLeft, rowGap, columnGap);
-		// must reset model, otherwise links might not be repositioned, don't know why.
-		const newModel = cloneDiagramNodes(backendModel);
-		// leave canvas zoom as it is, but need to copy it to the new model
-		newModel.setZoomLevel((stateRef.current.canvasZoom ?? 1) * 100);
-		// reset size only
-		const {width, height} = computeCanvasSize(newModel);
-		stateRef.current.canvasWidth = width;
-		stateRef.current.canvasHeight = height;
-		stateRef.current.engine.setModel(newModel);
-		// clear backend model to save dom performance
-		stateRef.current.engineBackend.setModel(createLockedDiagramModel());
-		stateRef.current.diagramStatus = EditorKernelDiagramStatus.IN_SERVICE;
-		forceUpdate();
-	}, [forceUpdate, stateRef, stateRef.current.diagramStatus]);
 };

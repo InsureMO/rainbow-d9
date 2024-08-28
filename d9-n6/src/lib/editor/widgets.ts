@@ -14,20 +14,6 @@ export const EditorWrapper = styled.div.attrs({
     background-position: ${PlaygroundCssVars.EDITOR_BACKGROUND_POSITION};
     overflow: auto;
 
-    &[data-diagram-status=paint],
-    &[data-diagram-status=paint-on-position] {
-        > div[data-w=o23-playground-canvas] > div.o23-playground-editor-content {
-            //opacity: 0;
-            user-select: none;
-            pointer-events: none;
-
-            div.node, div.node * {
-                user-select: none;
-                pointer-events: none;
-                cursor: default;
-            }
-        }
-    }
 
     &[data-diagram-locked=true] {
         > div[data-w=o23-playground-canvas] > div.o23-playground-editor-content {
@@ -51,15 +37,31 @@ export const EditorWrapper = styled.div.attrs({
         pointer-events: none;
     }
 `;
+// noinspection CssUnusedSymbol
 export const BackendCanvasWrapper = styled.div.attrs({[DOM_KEY_WIDGET]: 'o23-playground-backend-canvas'})`
     display: block;
     position: absolute;
     width: 100%;
     pointer-events: none;
     opacity: 0;
+
+    &[data-diagram-status=paint],
+    &[data-diagram-status=paint-on-position] {
+        + div[data-w=o23-playground-canvas] > div.o23-playground-editor-content {
+            //opacity: 0;
+            user-select: none;
+            pointer-events: none;
+
+            div.node, div.node * {
+                user-select: none;
+                pointer-events: none;
+                cursor: default;
+            }
+        }
+    }
 `;
 // noinspection CssUnresolvedCustomProperty, CssUnusedSymbol
-export const EditorCanvasWrapper = styled.div.attrs<{
+export const FrontendCanvasWrapper = styled.div.attrs<{
 	canvasWidth?: number | string; canvasHeight?: number | string; canvasZoom?: number
 }>(({canvasWidth, canvasHeight, canvasZoom}) => {
 	return {

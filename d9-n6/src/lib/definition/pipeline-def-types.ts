@@ -61,6 +61,8 @@ export interface PipelineStepDiagramDef extends PipelineStepDef {
 	$diagram?: PipelineStepDiagramDetails;
 }
 
+export const DiagramKeysOfStep = ['$x', '$y', '$foldAny', '$foldCatchable', '$foldUncatchable', '$foldExposed', '$foldAny'];
+
 export interface SnippetPipelineStepDef extends AllInPipelineStepDef {
 	use: StandardPipelineStepRegisterKey.SNIPPET;
 	snippet?: string;

@@ -1,7 +1,6 @@
 import {Undefinable, VUtils} from '@rainbow-d9/n1';
 import yaml from 'js-yaml';
-import {FileDef, PipelineStepUseDef} from './file-def-types';
-import {isPipelineDef} from './utils';
+import {FileDef} from './file-def-types';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type DefExternalSaverRedress = (given: any) => any
@@ -88,10 +87,6 @@ export abstract class FileDefSerializer {
 	protected abstract doStringify(def: FileDef): string;
 
 	public stringify(def: FileDef): string {
-		if (isPipelineDef(def)) {
-			// delete use attribute
-			delete (def as unknown as PipelineStepUseDef).use;
-		}
 		const redressed = this.redressDef(def);
 		return this.doStringify(redressed);
 	}

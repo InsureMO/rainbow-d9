@@ -2,4 +2,7 @@ code: ApiTest
 type: step
 enabled: false
 name: "Check Pass #1"
-use: snippet
+use: sets
+steps:
+  - name: abc
+    use: snippet
