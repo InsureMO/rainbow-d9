@@ -1,6 +1,6 @@
 import {CanvasWidget} from '@projectstorm/react-canvas-core';
 import {useForceUpdate} from '@rainbow-d9/n1';
-import React, {Fragment, MutableRefObject, useEffect, useRef} from 'react';
+import React, {MutableRefObject, useEffect, useRef} from 'react';
 import {PlaygroundEventTypes, usePlaygroundEventBus} from '../playground-event-bus';
 import {NodeLocator} from './node-locator';
 import {EditorKernelDiagramStatus, EditorKernelRefState, PostRepaintAction} from './painter';
@@ -11,18 +11,6 @@ export interface FrontendCanvasProps {
 	postPaintActions: MutableRefObject<Array<PostRepaintAction>>;
 }
 
-export const PostPaintActionsConsumer = (props: FrontendCanvasProps) => {
-	const {stateRef, postPaintActions} = props;
-
-	// all canvas in service, execute post paint actions
-	if (stateRef.current.diagramStatus === EditorKernelDiagramStatus.IN_SERVICE) {
-		const actions = [...postPaintActions.current];
-		postPaintActions.current = [];
-		actions.forEach(action => action());
-	}
-
-	return <Fragment/>;
-};
 export const FrontendCanvas = (props: FrontendCanvasProps) => {
 	const {stateRef, postPaintActions} = props;
 
@@ -63,11 +51,26 @@ export const FrontendCanvas = (props: FrontendCanvasProps) => {
 	if (zoom === 1) {
 		zoom = (void 0);
 	}
+	// register rendered listener each time, and deregister after listened
+	// since the node widget life-cycle is not
+	const handle = stateRef.current.engine.registerListener({
+		rendered: () => {
+			// all canvas in service, execute post paint actions
+			if (stateRef.current.diagramStatus === EditorKernelDiagramStatus.IN_SERVICE) {
+				setTimeout(() => {
+					const actions = [...postPaintActions.current];
+					postPaintActions.current = [];
+					actions.forEach(action => action());
+				}, 100);
+			}
+			handle.deregister();
+		}
+	});
+
 	return <FrontendCanvasWrapper canvasWidth={stateRef.current.canvasWidth}
 	                              canvasHeight={stateRef.current.canvasHeight}
 	                              canvasZoom={zoom} ref={ref}>
 		<NodeLocator stateRef={stateRef}/>
 		<CanvasWidget engine={stateRef.current.engine} className="o23-playground-editor-content"/>
-		<PostPaintActionsConsumer stateRef={stateRef} postPaintActions={postPaintActions}/>
 	</FrontendCanvasWrapper>;
 };
