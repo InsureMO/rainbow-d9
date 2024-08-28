@@ -1,15 +1,8 @@
 import {VUtils} from '@rainbow-d9/n1';
-import {
-	ApiMultipleNamedFiles,
-	ApiNonameOrNamedFiles,
-	FileDef,
-	isPipelineDef,
-	PipelineFileDef,
-	PipelineStepUseDef
-} from '../../definition';
+import {ApiMultipleNamedFiles, ApiNonameOrNamedFiles, FileDef, isPipelineDef, PipelineFileDef} from '../../definition';
 import {ConfigurableModel} from '../../edit-dialog';
 import {FileNodeConfigurer} from '../types';
-import {FileDefModel, PipelineFileDefModel, StepOrSetsFileDefModel} from './types';
+import {FileDefModel, PipelineFileDefModel} from './types';
 
 export const prepare: FileNodeConfigurer['prepare'] = (def: FileDef): ConfigurableModel => {
 	const model: FileDefModel = {
@@ -94,9 +87,6 @@ export const prepare: FileNodeConfigurer['prepare'] = (def: FileDef): Configurab
 			pipelineModel.api = false;
 			pipelineModel.initOnly = pipeline.initOnly;
 		}
-	} else {
-		const step = def as unknown as PipelineStepUseDef;
-		(model as StepOrSetsFileDefModel).use = step.use;
 	}
 	return model;
 };

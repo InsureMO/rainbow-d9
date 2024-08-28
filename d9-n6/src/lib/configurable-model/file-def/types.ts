@@ -1,10 +1,4 @@
-import {
-	FileDef,
-	PipelineFileDef,
-	PipelineStepFileDef,
-	PipelineStepSetsFileDef,
-	PipelineStepUseDef
-} from '../../definition';
+import {FileDef, PipelineFileDef, PipelineStepFileDef, PipelineStepSetsFileDef} from '../../definition';
 import {ConfigurableModel} from '../../edit-dialog';
 
 export interface FileDefModel extends ConfigurableModel, FileDef {
@@ -28,6 +22,6 @@ export interface PipelineFileDefModel extends FileDefModel, PipelineFileDef {
 	};
 }
 
-export interface StepOrSetsFileDefModel extends FileDefModel, PipelineStepUseDef {
+export interface StepOrSetsFileDefModel extends FileDefModel {
 	type: PipelineStepFileDef['type'] | PipelineStepSetsFileDef['type'];
 }

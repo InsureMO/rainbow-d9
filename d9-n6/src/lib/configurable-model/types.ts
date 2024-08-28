@@ -9,9 +9,14 @@ import {FirstSubStepPortContainerFind, StepDefsReconfigurer, StepPort} from './s
 
 export type ConfigChangesConfirmed = Array<ConfigurableElementAnchor> | true;
 
+export interface FileNodeConfirmOptions {
+	handlers: NodeHandlers;
+	assistant: Required<PlaygroundModuleAssistant>;
+}
+
 export interface FileNodeConfigurer<D extends FileDef = FileDef, M extends ConfigurableModel = ConfigurableModel> {
 	prepare: (def: D) => M;
-	confirm: (model: M, def: D, handlers: NodeHandlers) => ConfigChangesConfirmed;
+	confirm: (model: M, def: D, options: FileNodeConfirmOptions) => ConfigChangesConfirmed;
 	discard: (model: M) => void;
 	elements: Array<ConfigurableElement>;
 }

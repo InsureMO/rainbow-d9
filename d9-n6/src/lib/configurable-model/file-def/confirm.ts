@@ -1,10 +1,18 @@
-import {FileDef, isPipelineDef, PipelineFileDef, PipelineStepUseDef} from '../../definition';
-import {NodeHandlers} from '../../diagram';
+import {VUtils} from '@rainbow-d9/n1';
+import {
+	FileDef,
+	isPipelineDef,
+	PipelineFileDef,
+	PipelineStepUseDef,
+	SetsPipelineStepDef,
+	StandardPipelineStepRegisterKey
+} from '../../definition';
 import {ConfigurableModel} from '../../edit-dialog';
-import {ConfigChangesConfirmed, FileNodeConfigurer} from '../types';
-import {FileDefModel, PipelineFileDefModel, StepOrSetsFileDefModel} from './types';
+import {ConfigChangesConfirmed, FileNodeConfigurer, FileNodeConfirmOptions} from '../types';
+import {FileDefModel, PipelineFileDefModel} from './types';
 
-export const confirm: FileNodeConfigurer['confirm'] = (model: ConfigurableModel, def: FileDef, handlers: NodeHandlers): ConfigChangesConfirmed => {
+export const confirm: FileNodeConfigurer['confirm'] = (model: ConfigurableModel, def: FileDef, options: FileNodeConfirmOptions): ConfigChangesConfirmed => {
+	const {handlers, assistant} = options;
 	// TODO VALIDATE DEF FILE PROPERTIES
 	const edited = model as FileDefModel;
 	def.code = edited.code;
@@ -27,9 +35,11 @@ export const confirm: FileNodeConfigurer['confirm'] = (model: ConfigurableModel,
 		const def = given as PipelineFileDef;
 		delete def.initOnly;
 	};
-	const deleteNonPipelineAttrs = (given: FileDef) => {
-		const def = given as unknown as PipelineStepUseDef;
-		delete def.use;
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
+	const deleteNonPipelineAttrs = (_given: FileDef) => {
+		// const def = given as unknown as PipelineStepUseDef;
+		// do not delete use, since repaint double buffer will use this attribute
+		// delete def.use;
 	};
 
 	if (isPipelineDef(def)) {
@@ -50,10 +60,36 @@ export const confirm: FileNodeConfigurer['confirm'] = (model: ConfigurableModel,
 			deleteApiAttrs(def);
 		}
 		deleteNonPipelineAttrs(def);
+		if (!VUtils.isBlank((def as unknown as PipelineStepUseDef).use)) {
+			// could be switched from step/step-sets to pipeline
+
+		}
 	} else {
-		(def as unknown as PipelineStepUseDef).use = (edited as StepOrSetsFileDefModel).use;
 		deleteApiAttrs(def);
 		deleteNonApiAttrs(def);
+		if (VUtils.isBlank((def as unknown as PipelineStepUseDef).use)) {
+			// could be switched from pipeline to step/step-sets
+			const steps = (def as PipelineFileDef).steps ?? [];
+			if (steps.length === 0) {
+				const defaultDef = assistant.createDefaultStep();
+				if (def.type === 'step') {
+					// copy default step to file def
+					Object.keys(defaultDef).forEach(key => def[key] = defaultDef[key]);
+				} else {
+					const sets = def as unknown as SetsPipelineStepDef;
+					sets.use = StandardPipelineStepRegisterKey.SETS;
+					sets.steps = [defaultDef];
+				}
+			} else {
+				// copy steps to a sets step
+				const sets = def as unknown as SetsPipelineStepDef;
+				sets.use = StandardPipelineStepRegisterKey.SETS;
+				sets.steps = steps;
+			}
+		} else {
+			// switched from step to step-sets or opposite,
+			// since the two are logically equivalent, there is no need to do anything.
+		}
 	}
 	handlers.onChange();
 	return true;

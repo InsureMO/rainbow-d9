@@ -276,7 +276,7 @@ export const StartNodeWidget = (props: StartNodeWidgetProps) => {
 	})();
 
 	const onConfirm = (model: ConfigurableModel) => {
-		return FileDefs.confirm(model, def, node.handlers);
+		return FileDefs.confirm(model, def, {handlers: node.handlers, assistant: node.assistant});
 	};
 	const onDiscard = (model: ConfigurableModel) => FileDefs.discard(model);
 	const onDoubleClicked = () => {
