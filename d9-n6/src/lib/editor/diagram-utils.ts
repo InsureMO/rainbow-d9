@@ -54,21 +54,11 @@ export const askEndNodePosition = (def: FileDef): DiagramNodePosition => {
 	}
 };
 export const askStepNodePosition = (def: PipelineStepDef): DiagramNodePosition => {
-	if (isPipelineDef(def as unknown as FileDef)) {
-		// step def might be possibly disguised by file def
-		const diagramDef = def as unknown as FileDiagramDef;
-		if (diagramDef.$diagram?.$virtualStepX != null && diagramDef.$diagram?.$virtualStepY != null) {
-			return {x: diagramDef.$diagram.$virtualStepX, y: diagramDef.$diagram.$virtualStepY, appointed: true};
-		} else {
-			return {x: START_X, y: START_Y, appointed: false};
-		}
+	const diagramDef = def as PipelineStepDiagramDef;
+	if (diagramDef.$diagram?.$x != null && diagramDef.$diagram?.$y != null) {
+		return {x: diagramDef.$diagram?.$x, y: diagramDef.$diagram?.$y, appointed: true};
 	} else {
-		const diagramDef = def as PipelineStepDiagramDef;
-		if (diagramDef.$diagram?.$x != null && diagramDef.$diagram?.$y != null) {
-			return {x: diagramDef.$diagram?.$x, y: diagramDef.$diagram?.$y, appointed: true};
-		} else {
-			return {x: START_X, y: START_Y, appointed: false};
-		}
+		return {x: START_X, y: START_Y, appointed: false};
 	}
 };
 
@@ -119,7 +109,8 @@ export const createDiagramNodes = (file: FileDef, handlers: DiagramHandlers): Di
 		}
 		previousNode = steps.reduce((previousNode, step) => {
 			return createStepNode(step, file, {
-				type: StepNodeEntityType.NORMAL, handlers: nodeHandlers, assistant: handlers.assistant,
+				type: StepNodeEntityType.NORMAL, subOf: file,
+				handlers: nodeHandlers, assistant: handlers.assistant,
 				previousNode, linkPrevious: (node) => previousNode.next(node),
 				appendNode: (...nodes) => allNodes.push(...nodes),
 				appendLink: (...links) => allLinks.push(...links)
@@ -130,7 +121,8 @@ export const createDiagramNodes = (file: FileDef, handlers: DiagramHandlers): Di
 		// create a virtual node to represent, treat file def as step def
 		const step = file as unknown as PipelineStepDef;
 		previousNode = createStepNode(step, file, {
-			type: StepNodeEntityType.START, handlers: nodeHandlers, assistant: handlers.assistant,
+			type: StepNodeEntityType.VIRTUAL, subOf: file,
+			handlers: nodeHandlers, assistant: handlers.assistant,
 			previousNode, linkPrevious: (node) => previousNode.next(node),
 			appendNode: (...nodes) => allNodes.push(...nodes),
 			appendLink: (...links) => allLinks.push(...links)

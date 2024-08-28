@@ -7,7 +7,7 @@ import React, {FC, ReactNode} from 'react';
 import styled from 'styled-components';
 import {PipelineStepDef} from '../../../../definition';
 import {IncomingPortModel, StepNodeModel} from '../../../../diagram';
-import {RouteTest} from '../../../../icons';
+import {Otherwise, RouteTest} from '../../../../icons';
 import {PlaygroundCssVars} from '../../../../widgets';
 
 export class FirstSubStepPortModel extends IncomingPortModel {
@@ -93,6 +93,43 @@ export const FirstSubStepPortForRouteTest = (props: { children: ReactNode }) => 
 		<RouteTest/>
 		{children}
 	</FirstSubStepPortForRuleCheckContainer>;
+};
+export const FirstSubStepPortForOtherwiseContainer = styled.div.attrs({[DOM_KEY_WIDGET]: 'o23-playground-otherwise-port'})`
+    display: flex;
+    position: absolute;
+    align-items: center;
+    justify-content: center;
+    top: calc(${CssVars.INPUT_HEIGHT} / 2 - ${PlaygroundCssVars.NODE_PORT_OTHERWISE_RADIUS});
+    left: calc(-1 * (${PlaygroundCssVars.NODE_PORT_OTHERWISE_RADIUS} * 2 + ${PlaygroundCssVars.NODE_BORDER_WIDTH}));
+    width: calc(${PlaygroundCssVars.NODE_PORT_OTHERWISE_RADIUS} * 2);
+    height: calc(${PlaygroundCssVars.NODE_PORT_OTHERWISE_RADIUS} * 2);
+    background-color: ${PlaygroundCssVars.NODE_PORT_OTHERWISE_BACKGROUND};
+    border: ${PlaygroundCssVars.NODE_PORT_OTHERWISE_BORDER};
+    border-top-left-radius: ${PlaygroundCssVars.NODE_PORT_OTHERWISE_RADIUS};
+    border-bottom-left-radius: ${PlaygroundCssVars.NODE_PORT_OTHERWISE_RADIUS};
+    padding-left: calc(${PlaygroundCssVars.NODE_PORT_OTHERWISE_RADIUS} * 0.3);
+
+    > svg {
+        width: calc(${PlaygroundCssVars.NODE_PORT_OTHERWISE_RADIUS} * 1.3);
+        height: calc(${PlaygroundCssVars.NODE_PORT_OTHERWISE_RADIUS} * 1.3);
+        color: ${PlaygroundCssVars.NODE_PORT_OTHERWISE_COLOR};
+    }
+
+    > div:last-child {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 0;
+        height: 100%;
+    }
+`;
+export const FirstSubStepPortForOtherwise = (props: { children: ReactNode }) => {
+	const {children} = props;
+
+	return <FirstSubStepPortForOtherwiseContainer>
+		<Otherwise/>
+		{children}
+	</FirstSubStepPortForOtherwiseContainer>;
 };
 
 const FirstSubStepPortContainerFinds: Array<FirstSubStepPortContainerFind> = [];

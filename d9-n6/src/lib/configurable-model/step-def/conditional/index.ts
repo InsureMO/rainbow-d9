@@ -6,7 +6,7 @@ import {
 	StandardPipelineStepRegisterKey
 } from '../../../definition';
 import {StepNodeModel} from '../../../diagram';
-import {ConfigurableElement, ConfigurableModel, StepDefsReconfigurer} from '../../../edit-dialog';
+import {ConfigurableElement, ConfigurableModel} from '../../../edit-dialog';
 import {HelpDocs} from '../../../help-docs';
 import {ConfigChangesConfirmed, ConfirmNodeOptions, StepNodeConfigurer} from '../../types';
 import {registerStepDef} from '../all-step-defs';
@@ -14,9 +14,11 @@ import {
 	AndConfirmReturned,
 	CommonStepDefModel,
 	CommonStepDefs,
+	FirstSubStepPortForOtherwise,
 	FirstSubStepPortForRouteTest,
 	RouteTestStepDefModel
 } from '../common';
+import {StepDefsReconfigurer} from '../step-def-reconfigurer';
 
 export interface ConditionalStepDefModel extends CommonStepDefModel {
 	use: StandardPipelineStepRegisterKey.CONDITIONAL_SETS;
@@ -114,8 +116,12 @@ export const ConditionalStepDefs =
 			if (parent.use !== StandardPipelineStepRegisterKey.CONDITIONAL_SETS) {
 				return (void 0);
 			}
-			const found = (parent as ConditionalPipelineStepDef).steps?.[0] === step;
-			return found ? FirstSubStepPortForRouteTest : (void 0);
+			const isRouteTest = (parent as ConditionalPipelineStepDef).steps?.[0] === step;
+			if (isRouteTest) {
+				return FirstSubStepPortForRouteTest;
+			}
+			const isOtherwise = (parent as ConditionalPipelineStepDef).otherwise?.[0] === step;
+			return isOtherwise ? FirstSubStepPortForOtherwise : (void 0);
 		}
 	});
 registerStepDef(ConditionalStepDefs);

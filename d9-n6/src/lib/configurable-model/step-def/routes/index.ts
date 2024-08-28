@@ -1,7 +1,7 @@
 import {Undefinable} from '@rainbow-d9/n1';
 import {FileDef, PipelineStepDef, RoutesPipelineStepDef, StandardPipelineStepRegisterKey} from '../../../definition';
 import {StepNodeModel} from '../../../diagram';
-import {ConfigurableElement, ConfigurableModel, StepDefsReconfigurer} from '../../../edit-dialog';
+import {ConfigurableElement, ConfigurableModel} from '../../../edit-dialog';
 import {HelpDocs} from '../../../help-docs';
 import {ConfigChangesConfirmed, ConfirmNodeOptions, StepNodeConfigurer} from '../../types';
 import {registerStepDef} from '../all-step-defs';
@@ -9,9 +9,11 @@ import {
 	AndConfirmReturned,
 	CommonStepDefModel,
 	CommonStepDefs,
+	FirstSubStepPortForOtherwise,
 	FirstSubStepPortForRouteTest,
 	RouteTestStepDefModel
 } from '../common';
+import {StepDefsReconfigurer} from '../step-def-reconfigurer';
 
 export interface RoutesStepDefModel extends CommonStepDefModel {
 	use: StandardPipelineStepRegisterKey.ROUTES_SETS;
@@ -125,8 +127,12 @@ export const RoutesStepDefs =
 			if (parent.use !== StandardPipelineStepRegisterKey.ROUTES_SETS) {
 				return (void 0);
 			}
-			const found = (parent as RoutesPipelineStepDef).routes?.some(route => route.steps?.[0] === step);
-			return found ? FirstSubStepPortForRouteTest : (void 0);
+			const isRouteTest = (parent as RoutesPipelineStepDef).routes?.some(route => route.steps?.[0] === step);
+			if (isRouteTest) {
+				return FirstSubStepPortForRouteTest;
+			}
+			const isOtherwise = (parent as RoutesPipelineStepDef).otherwise?.[0] === step;
+			return isOtherwise ? FirstSubStepPortForOtherwise : (void 0);
 		}
 	});
 registerStepDef(RoutesStepDefs);

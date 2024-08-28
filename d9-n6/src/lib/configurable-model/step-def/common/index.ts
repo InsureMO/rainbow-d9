@@ -2,6 +2,8 @@ import {Undefinable, VUtils} from '@rainbow-d9/n1';
 import {
 	AllInPipelineStepDef,
 	FileDef,
+	isFileDef,
+	PipelineFileDef,
 	PipelineStepDef,
 	PipelineStepDiagramDef,
 	SetsLikePipelineStepDef
@@ -13,7 +15,14 @@ import {HelpDocs} from '../../../help-docs';
 import {Labels} from '../../../labels';
 import {PlaygroundCssVars} from '../../../widgets';
 import {createCheckOrMissBadge, createSnippetEditor} from '../../common';
-import {ConfigChangesConfirmed, ConfirmNodeOptions, StepNodeConfigurer} from '../../types';
+import {
+	ConfigChangesConfirmed,
+	ConfirmNodeOptions,
+	NodeOperators,
+	OperateNodeOptions,
+	StepDefsOperators,
+	StepNodeConfigurer
+} from '../../types';
 import {
 	confirm,
 	confirmConditionalPipelineStep,
@@ -232,6 +241,52 @@ export const CommonStepDefs: CommonStepDefsType = {
 					}
 				};
 			})(),
+			operators: ((): StepDefsOperators<F> => {
+				return (node: StepNodeModel, def: F): NodeOperators<F> => {
+					if (isFileDef(node.step)) {
+						// cannot do anything, return directly
+						return {};
+					}
+					const parentDef = node.getSubOf() as SetsLikePipelineStepDef | PipelineFileDef;
+					const steps = parentDef.steps ?? [];
+					if (!steps.includes(def)) {
+						return {};
+					}
+					const operators: NodeOperators<F> = {};
+					operators.prependStep = (node: StepNodeModel, def: F, options: OperateNodeOptions) => {
+						const parentDef = node.getSubOf() as SetsLikePipelineStepDef | PipelineFileDef;
+						const steps = parentDef.steps ?? [];
+						const index = steps.indexOf(def);
+						if (index === 0) {
+							steps.unshift(node.assistant.createDefaultStep());
+						} else {
+							steps.splice(index - 1, 0, node.assistant.createDefaultStep());
+						}
+						options.handlers.onChange();
+					};
+					operators.appendStep = (node: StepNodeModel, def: F, options: OperateNodeOptions) => {
+						const parentDef = node.getSubOf() as SetsLikePipelineStepDef | PipelineFileDef;
+						const steps = parentDef.steps ?? [];
+						const index = steps.indexOf(def);
+						if (index === steps.length - 1) {
+							steps.push(node.assistant.createDefaultStep());
+						} else {
+							steps.splice(index + 1, 0, node.assistant.createDefaultStep());
+						}
+						options.handlers.onChange();
+					};
+					if (steps.length > 1) {
+						operators.remove = (node: StepNodeModel, def: F, options: OperateNodeOptions) => {
+							const parentDef = node.getSubOf() as SetsLikePipelineStepDef | PipelineFileDef;
+							const steps = parentDef.steps ?? [];
+							steps.splice(steps.indexOf(def), 1);
+							options.handlers.onChange();
+						};
+					}
+
+					return operators;
+				};
+			})(),
 			properties: [
 				...CommonStepDefs.properties.leadingGroup,
 				...(properties ?? []),
@@ -246,8 +301,8 @@ export const CommonStepDefs: CommonStepDefsType = {
 			createSubNodes: createSubNodes ?? CommonStepDefs.createSubNodesAndEndNode,
 			findSubPorts: findSubPorts ?? CommonStepDefs.findSubPorts,
 			helpDocs,
-			reconfigurer: reconfigurer,
-			firstSubStepPortContainerFind: firstSubStepPortContainerFind
+			reconfigurer,
+			firstSubStepPortContainerFind
 		};
 	},
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars

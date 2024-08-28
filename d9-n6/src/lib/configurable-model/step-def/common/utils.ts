@@ -8,7 +8,8 @@ import {
 	NodeHandlers,
 	OutgoingPortModel,
 	StepNodeEntityType,
-	StepNodeModel
+	StepNodeModel,
+	StepNodeModelOptions
 } from '../../../diagram';
 import {askStepNodePosition, DiagramNodePosition} from '../../../editor';
 import {PlaygroundModuleAssistant} from '../../../types';
@@ -22,8 +23,8 @@ export const setNodePosition = (node: HandledNodeModel, position: () => DiagramN
 };
 
 export interface StepNodeCreationOptions {
-	type: StepNodeEntityType;
-	subOf?: PipelineStepDef;
+	type: StepNodeModelOptions['type'];
+	subOf: StepNodeModelOptions['subOf'];
 	handlers: NodeHandlers;
 	assistant: Required<PlaygroundModuleAssistant>;
 	previousNode: HandledNodeModel;

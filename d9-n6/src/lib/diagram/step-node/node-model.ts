@@ -1,12 +1,11 @@
 import {NodeModelGenerics} from '@projectstorm/react-diagrams';
-import {Undefinable} from '@rainbow-d9/n1';
 import {FileDef, PipelineStepDef} from '../../definition';
 import {PlaygroundModuleAssistant} from '../../types';
 import {NextStepPortModel, PreviousStepPortModel} from '../common';
 import {HandledNodeModel, NodeHandlers} from '../node-handlers';
 
 export enum StepNodeEntityType {
-	START = 'start',        // file is step-sets or step, use a virtual step to represent it
+	VIRTUAL = 'virtual',    // file is step-sets or step, use a virtual step to represent it
 	NORMAL = 'normal',      // normal step
 	JOIN_END = 'join-end',  // join end step, virtual step to end sub steps
 }
@@ -17,9 +16,9 @@ export interface StepNodeModelGenerics {
 }
 
 export interface StepNodeModelOptions {
-	type: StepNodeEntityType;
+	type: StepNodeEntityType.VIRTUAL | StepNodeEntityType.NORMAL;
 	// is sub step of some step
-	subOf?: PipelineStepDef;
+	subOf: PipelineStepDef | FileDef;
 	handlers: NodeHandlers;
 	assistant: Required<PlaygroundModuleAssistant>;
 }
@@ -41,11 +40,16 @@ export class StepNodeModel extends HandledNodeModel<NodeModelGenerics & StepNode
 		this.addPort(new NextStepPortModel());
 	}
 
-	public getEntityType() {
+	public getEntityType(): StepNodeModelOptions['type'] {
 		return this.rest.type;
 	}
 
-	public getSubOf(): Undefinable<PipelineStepDef> {
+	/**
+	 * when step is file itself, parent is file itself
+	 * when step is top level, parent is file itself
+	 * otherwise, parent is step which contains this step
+	 */
+	public getSubOf(): StepNodeModelOptions['subOf'] {
 		return this.rest.subOf;
 	}
 

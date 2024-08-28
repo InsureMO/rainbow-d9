@@ -19,3 +19,4 @@ export * from './typeorm';
 export * from './ref-on-code';
 
 export * from './all-step-defs';
+export * from './step-def-reconfigurer';

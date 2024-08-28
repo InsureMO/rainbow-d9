@@ -27,6 +27,7 @@ const PORT_ERROR_HANDLES_COLOR = '#c13a92';
 const LINK_ERROR_HANDLES_COLOR = '#a97f98';
 const PORT_LAST_SUB_STEP_JOIN_COLOR = '#00618b';
 const PORT_ROUTE_TEST_COLOR = '#8454aa';
+const PORT_OTHERWISE_COLOR = '#b352b3';
 const PRE_PORT_COLOR = '#87a55f';
 const POST_PORT_COLOR = '#c69dab';
 export const PlaygroundCssVars = {
@@ -154,7 +155,7 @@ export const PlaygroundCssVars = {
 	NODE_BACKGROUND: `var(--o23-playground-node-background, ${CssVars.BACKGROUND_COLOR})`,
 	NODE_TITLE_PADDING: 'var(--o23-playground-node-title-padding, 0 10px)',
 	NODE_TITLE_SPREADER_MIN_WIDTH: 'var(--o23-playground-node-title-spreader-min-width, 40px)',
-	NODE_MIN_WIDTH: 'var(--o23-playground-node-min-width, 160px)',
+	NODE_MIN_WIDTH: 'var(--o23-playground-node-min-width, 200px)',
 	NODE_MAX_WIDTH: `var(--o23-playground-node-max-width, unset)`,
 	NODE_ICON_SIZE: 'var(--o23-playground-node-icon-size, 14px)',
 	NODE_PORT_HEIGHT: 'var(--o23-playground-node-port-height, 24px)',
@@ -177,7 +178,11 @@ export const PlaygroundCssVars = {
 	NODE_PORT_ROUTE_TEST_COLOR: `var(--o23-playground-port-route-test-color, ${CssVars.INVERT_COLOR})`,
 	NODE_PORT_ROUTE_TEST_BACKGROUND: `var(--o23-playground-port-route-test-background, ${PORT_ROUTE_TEST_COLOR})`,
 	NODE_PORT_ROUTE_TEST_BORDER: `var(--o23-playground-port-route-test-border, 1px solid ${color(PORT_ROUTE_TEST_COLOR).darken(0.1).opaquer(0.5)})`,
-	NODE_PORT_ROUTE_TEST_RADIUS: 'var(--o23-playground-port-route-test-radius, 10px)',
+	NODE_PORT_ROUTE_TEST_RADIUS: 'var(--o23-playground-port-otherwise-radius, 10px)',
+	NODE_PORT_OTHERWISE_COLOR: `var(--o23-playground-port-otherwise-color, ${CssVars.INVERT_COLOR})`,
+	NODE_PORT_OTHERWISE_BACKGROUND: `var(--o23-playground-port-otherwise-background, ${PORT_OTHERWISE_COLOR})`,
+	NODE_PORT_OTHERWISE_BORDER: `var(--o23-playground-port-otherwise-border, 1px solid ${color(PORT_OTHERWISE_COLOR).darken(0.1).opaquer(0.5)})`,
+	NODE_PORT_OTHERWISE_RADIUS: 'var(--o23-playground-port-otherwise-radius, 10px)',
 	LINK_STROKE_LINECAP: 'var(--o23-playground-link-stroke-linecap, round)',
 	LINK_DEFAULT_STROKE_DASHARRAY: 'var(--o23-playground-link-default-stroke-dasharray, unset)',
 	LINK_DEFAULT_SELECTED_STROKE_DASHARRAY: 'var(--o23-playground-link-default-selected-stroke-dasharray, 8 4)',
@@ -260,6 +265,12 @@ export const PlaygroundCssVars = {
 	NODE_STEP_TITLE_BACKGROUND: `var(--o23-playground-node-step-title-background, linear-gradient(135deg, ${NODE_STEP_COLOR} 0%, ${color(NODE_STEP_COLOR).alpha(0.7)} 70%, ${color(NODE_STEP_COLOR).alpha(0.5)} 100%))`,
 	NODE_STEP_BODY_HEIGHT: 'var(--o23-playground-node-step-body-height, 32px)',
 	NODE_STEP_BODY_PADDING: 'var(--o23-playground-node-step-body-padding, 8px 0)',
+	NODE_STEP_OPERATORS_HEIGHT: 'var(--o23-playground-node-step-operators-height, 32px)',
+	NODE_STEP_OPERATOR_HEIGHT: 'var(--o23-playground-node-step-operator-height, 24px)',
+	NODE_STEP_OPERATOR_COLOR: `var(--o23-playground-node-step-operator-color, ${CssVars.PRIMARY_COLOR})`,
+	NODE_STEP_OPERATOR_DANGER_COLOR: `var(--o23-playground-node-step-operator-border-danger-color, ${CssVars.DANGER_COLOR})`,
+	NODE_STEP_OPERATOR_BORDER: `var(--o23-playground-node-step-operator-border, 1px solid ${CssVars.PRIMARY_COLOR})`,
+	NODE_STEP_OPERATOR_BORDER_RADIUS: 'var(--o23-playground-node-step-operator-border-radius, 12px)',
 	NODE_STEP_HTTP_FETCH_BORDER: `var(--o23-playground-node-step-http-fetch-border, 2px solid ${NODE_STEP_HTTP_COLOR})`,
 	NODE_STEP_HTTP_FETCH_TITLE_BACKGROUND: `var(--o23-playground-node-step-http-fetch-title-background, linear-gradient(135deg, ${NODE_STEP_HTTP_COLOR} 0%, ${color(NODE_STEP_HTTP_COLOR).alpha(0.7)} 70%, ${color(NODE_STEP_HTTP_COLOR).alpha(0.5)} 100%))`,
 	NODE_STEP_HTTP_GET_BORDER: `var(--o23-playground-node-step-http-fetch-border, 2px solid ${NODE_STEP_HTTP_COLOR})`,

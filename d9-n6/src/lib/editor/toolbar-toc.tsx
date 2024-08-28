@@ -83,7 +83,7 @@ export const ToolbarToc = (props: Omit<ToolbarTocProps, 'expanded'>) => {
 		// step def, there is a virtual node
 		items.push({
 			label: ((def as unknown as PipelineStepDef).name ?? '').trim() || Labels.StepNodeNoname, index: '1.',
-			type: StepNodeEntityType.START, def
+			type: StepNodeEntityType.VIRTUAL, def
 		});
 		buildItemsOfStep(def as unknown as PipelineStepDef, '1.');
 	} else {

@@ -1,5 +1,5 @@
 import {VUtils} from '@rainbow-d9/n1';
-import {AllInPipelineStepDef, isPipelineDef, PipelineStepDiagramDef} from '../../../definition';
+import {AllInPipelineStepDef, isFileDef, PipelineStepDiagramDef} from '../../../definition';
 import {CommonStepDefsType} from './types';
 
 const survivalOfPipeline = {
@@ -12,9 +12,7 @@ const survivalOfPipeline = {
 	'$diagram.$startX': true,
 	'$diagram.$startY': true,
 	'$diagram.$endX': true,
-	'$diagram.$endY': true,
-	'$diagram.$virtualStepX': true,
-	'$diagram.$virtualStepY': true
+	'$diagram.$endY': true
 };
 const survivalOfStep = {
 	name: true,
@@ -37,10 +35,7 @@ const survivalOfStep = {
 	'$diagram.$foldAny': <F extends AllInPipelineStepDef & PipelineStepDiagramDef>(def: F) => Array.isArray(def.errorHandles?.any) && def.$diagram?.$foldAny === true
 };
 export const survivalAfterConfirm: CommonStepDefsType['survivalAfterConfirm'] = <F extends AllInPipelineStepDef>(def: F, property: string): boolean => {
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	const pipeline = isPipelineDef(def as any);
-
-	if (pipeline) {
+	if (isFileDef(def)) {
 		return survivalOfPipeline[property] === true || survivalOfPipeline[property]?.(def) === true
 			|| survivalOfStep[property] === true || survivalOfStep[property]?.(def) === true;
 	} else {

@@ -16,8 +16,6 @@ export interface FileDiagramDetails {
 	$startY?: number;
 	$endX?: number;
 	$endY?: number;
-	$virtualStepX?: number;
-	$virtualStepY?: number;
 }
 
 export interface FileDiagramDef extends FileDef {

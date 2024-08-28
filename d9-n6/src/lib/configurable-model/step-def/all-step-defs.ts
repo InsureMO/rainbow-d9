@@ -1,8 +1,8 @@
 import {Undefinable} from '@rainbow-d9/n1';
-import {registerStepDefsReconfigurers} from '../../edit-dialog';
 import {registerStepDefsFolders} from '../../editor';
 import {StepNodeConfigurer} from '../types';
 import {registerFirstSubStepPortContainerFinds} from './common';
+import {registerStepDefsReconfigurers} from './step-def-reconfigurer';
 
 const Defs: Record<string, Readonly<StepNodeConfigurer>> = {};
 

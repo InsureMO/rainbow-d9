@@ -12,6 +12,7 @@ export * from './port-warn';
 export * from './port-incorrect';
 
 export * from './route-test';
+export * from './otherwise';
 
 export * from './element-checked';
 export * from './element-missed';
@@ -21,6 +22,9 @@ export * from './snippet';
 export * from './steps';
 export * from './fold-sub-nodes';
 export * from './unfold-sub-nodes';
+export * from './insert-step';
+export * from './remove-step';
+export * from './insert-route';
 
 export * from './fit-canvas';
 export * from './origin-size';

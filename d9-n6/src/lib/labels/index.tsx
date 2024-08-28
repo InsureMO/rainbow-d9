@@ -8,6 +8,13 @@ export const Labels = {
 	NoDefParsed: <IntlLabel keys={['o23', 'error', 'no-def']} value="No definition parsed."/>,
 	ParseError: <IntlLabel keys={['o23', 'error', 'parse']} value="Parse error occurred."/>,
 
+	PrependStep: <IntlLabel keys={['o23', 'node', 'prepend-step']} value="Prepend Step"/>,
+	AppendStep: <IntlLabel keys={['o23', 'node', 'append-step']} value="Append Step"/>,
+	RemoveStep: <IntlLabel keys={['o23', 'node', 'remove-step']} value="Remove Step"/>,
+	PrependRoute: <IntlLabel keys={['o23', 'node', 'prepend-route']} value="Prepend Route"/>,
+	AppendRoute: <IntlLabel keys={['o23', 'node', 'append-route']} value="Append Route"/>,
+	AddOtherwise: <IntlLabel keys={['o23', 'node', 'add-otherwise']} value="Add Otherwise"/>,
+
 	EndNodeTitle: <IntlLabel keys={['o23', 'node', 'end']} value="End"/>,
 	StepNodeNoname: <IntlLabel keys={['o23', 'node', 'step', 'noname']} value="[Noname]"/>,
 

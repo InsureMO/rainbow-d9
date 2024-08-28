@@ -1,14 +1,22 @@
 import {LinkModel, NodeModel, NodeModelGenerics} from '@projectstorm/react-diagrams';
-import {Undefinable} from '@rainbow-d9/n1';
 import {EndOfMeJoinLinkModel, LastSubStepJoinPortModel} from '../../configurable-model';
 import {FileDef, PipelineStepDef} from '../../definition';
+import {PlaygroundModuleAssistant} from '../../types';
 import {NextStepPortModel, PreviousStepPortModel} from '../common';
-import {HandledNodeModel} from '../node-handlers';
-import {StepNodeModelOptions} from '../step-node';
+import {HandledNodeModel, NodeHandlers} from '../node-handlers';
+import {StepNodeEntityType} from '../step-node';
 
 export interface JoinEndNodeModelGenerics {
 	IN: PreviousStepPortModel;
 	OUT: NextStepPortModel;
+}
+
+export interface JoinEndModelOptions {
+	type: StepNodeEntityType.JOIN_END;
+	// is sub step of some step
+	subOf: PipelineStepDef;
+	handlers: NodeHandlers;
+	assistant: Required<PlaygroundModuleAssistant>;
 }
 
 export class JoinEndNodeModel extends HandledNodeModel<NodeModelGenerics & JoinEndNodeModelGenerics> {
@@ -16,7 +24,7 @@ export class JoinEndNodeModel extends HandledNodeModel<NodeModelGenerics & JoinE
 
 	public constructor(public readonly step: PipelineStepDef,
 	                   public readonly file: FileDef,
-	                   private readonly rest: StepNodeModelOptions) {
+	                   private readonly rest: JoinEndModelOptions) {
 		super({type: JoinEndNodeModel.TYPE}, rest.handlers);
 		// always have a port which link from previous step or start node
 		this.addPort(new PreviousStepPortModel());
@@ -26,11 +34,11 @@ export class JoinEndNodeModel extends HandledNodeModel<NodeModelGenerics & JoinE
 		this.addPort(new NextStepPortModel());
 	}
 
-	public getEntityType() {
+	public getEntityType(): JoinEndModelOptions['type'] {
 		return this.rest.type;
 	}
 
-	public getSubOf(): Undefinable<PipelineStepDef> {
+	public getSubOf(): JoinEndModelOptions['subOf'] {
 		return this.rest.subOf;
 	}
 

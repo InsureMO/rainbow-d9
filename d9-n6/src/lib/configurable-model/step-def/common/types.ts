@@ -140,7 +140,7 @@ export interface CreateStepNodeConfigurerOptions<F extends AllInPipelineStepDef,
 }
 
 export interface CommonStepDefsType
-	extends Omit<StepNodeConfigurer<AllInPipelineStepDef, CommonStepDefModel>, 'prepare' | 'switchUse' | 'confirm' | 'use' | 'properties' | 'ports' | 'createSubNodes' | 'helpDocs'> {
+	extends Omit<StepNodeConfigurer<AllInPipelineStepDef, CommonStepDefModel>, 'prepare' | 'switchUse' | 'confirm' | 'use' | 'properties' | 'ports' | 'createSubNodes' | 'helpDocs' | 'operators'> {
 	properties: CommonStepDefsProperties;
 	ports: CommonStepDefsPorts;
 	prebuiltPorts: PrebuiltStepDefsPorts;

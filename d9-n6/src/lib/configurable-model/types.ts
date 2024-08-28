@@ -2,10 +2,10 @@ import {LinkModel, NodeModel, PortModel} from '@projectstorm/react-diagrams';
 import {Undefinable} from '@rainbow-d9/n1';
 import {FileDef, PipelineStepDef, PipelineStepRegisterKey} from '../definition';
 import {HandledNodeModel, NodeHandlers, StepNodeModel} from '../diagram';
-import {ConfigurableElement, ConfigurableElementAnchor, ConfigurableModel, StepDefsReconfigurer} from '../edit-dialog';
+import {ConfigurableElement, ConfigurableElementAnchor, ConfigurableModel} from '../edit-dialog';
 import {StepDefsFolder} from '../editor';
 import {MarkdownContent, PlaygroundModuleAssistant} from '../types';
-import {FirstSubStepPortContainerFind, StepPort} from './step-def';
+import {FirstSubStepPortContainerFind, StepDefsReconfigurer, StepPort} from './step-def';
 
 export type ConfigChangesConfirmed = Array<ConfigurableElementAnchor> | true;
 
@@ -28,6 +28,25 @@ export interface ConfirmNodeOptions {
 	assistant: Required<PlaygroundModuleAssistant>;
 }
 
+export interface OperateNodeOptions {
+	handlers: NodeHandlers;
+	assistant: Required<PlaygroundModuleAssistant>;
+}
+
+/**
+ * if operation can be performed on given node, then provide the corresponding operation function
+ */
+export interface NodeOperators<F extends PipelineStepDef = PipelineStepDef> {
+	remove?: (node: StepNodeModel, def: F, options: OperateNodeOptions) => void;
+	prependStep?: (node: StepNodeModel, def: F, options: OperateNodeOptions) => void;
+	appendStep?: (node: StepNodeModel, def: F, options: OperateNodeOptions) => void;
+	prependRoute?: (node: StepNodeModel, def: F, options: OperateNodeOptions) => void;
+	appendRoute?: (node: StepNodeModel, def: F, options: OperateNodeOptions) => void;
+	addOtherwise?: (node: StepNodeModel, def: F, options: OperateNodeOptions) => void;
+}
+
+export type StepDefsOperators<F extends PipelineStepDef = PipelineStepDef> = (node: StepNodeModel, def: F) => NodeOperators<F>
+
 export interface StepNodeConfigurer<F extends PipelineStepDef = PipelineStepDef, M extends ConfigurableModel = ConfigurableModel> {
 	use: PipelineStepRegisterKey;
 	/** prepare configurable model for popup edit dialog */
@@ -48,6 +67,7 @@ export interface StepNodeConfigurer<F extends PipelineStepDef = PipelineStepDef,
 	findSubPorts: (node: StepNodeModel) => Undefinable<Array<PortModel>>;
 	helpDocs: MarkdownContent;
 	folder: StepDefsFolder<F>;
+	operators: StepDefsOperators<F>;
 	/** reconfigurer */
 	reconfigurer?: StepDefsReconfigurer;
 	/** first sub step port container finder */
