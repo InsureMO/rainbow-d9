@@ -57,9 +57,13 @@ export const FrontendCanvas = (props: FrontendCanvasProps) => {
 		rendered: () => {
 			// all canvas in service, execute post paint actions
 			if (stateRef.current.diagramStatus === EditorKernelDiagramStatus.IN_SERVICE) {
+				// node model already in engine, and rendered,
+				// but the node widget doesn't register its listener on handle locate node event,
+				// since the register is in effect life-cycle of node widget
+				// so delay 100ms to wait all listeners registered
 				setTimeout(() => {
 					const actions = [...postPaintActions.current];
-					postPaintActions.current = [];
+					postPaintActions.current.length = 0;
 					actions.forEach(action => action());
 				}, 100);
 			}
