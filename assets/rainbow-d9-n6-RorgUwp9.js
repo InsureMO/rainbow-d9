@@ -4,14 +4,14 @@ var __publicField = (obj, key, value) => {
   __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
   return value;
 };
-import { a as color, y as EditorView, z as EditorState, A as basicSetup, P as indentUnit, B as keymap, C as indentWithTab, K as lintGutter, Q as Compartment, R as jsYaml, G as javascript, S as sql$1, U as dom2image } from "./vendor-ox88ah_E.js";
-import { f as CssConstants, C as CssVars, I as IntlLabel, D as DOM_KEY_WIDGET, d as utils$2, g as UnwrappedCheckbox, h as UnwrappedDropdown, O as OptionItemSort, j as UnwrappedInput, k as UnwrappedCaption, l as UnwrappedTextarea, m as UnwrappedDecorateInput, n as UnwrappedCheckboxes, b as useGlobalHandlers } from "./rainbow-d9-n2-t_OfaVx6.js";
-import { R as React, r as reactExports, q as qe, W as We, D as DefaultLinkModel, P as PortWidget, a as PortModelAlignment, b as PortModel, N as NodeModel, C as CanvasWidget, c as DiagramEngine, d as NodeLayerFactory, L as LinkLayerFactory, S as SelectionBoxLayerFactory, e as DefaultLabelFactory, f as DefaultNodeFactory, g as DefaultLinkFactory, h as PathFindingLinkFactory, i as DefaultPortFactory, j as DiagramModel, k as State, l as SelectingState, A as AbstractModelFactory, m as AbstractReactFactory, n as LinkWidget, o as DefaultLinkPointWidget, p as DefaultLinkSegmentWidget } from "./react-base-jVo1UZ91.js";
-import { V as VUtils, a as useThrottler, r as registerWidget, g as useCreateEventBus, e as useForceUpdate, M as MUtils, P as PPUtils } from "./rainbow-d9-n1-n4YeWivf.js";
-import { i as index$1 } from "./rainbow-d9-n3-un_Y9ySk.js";
-import { M as Markdown } from "./react-markdown-FRJ7K5w9.js";
-import { r as remarkGfm } from "./remark-UaeCRSuV.js";
-import { S as SyntaxHighlighter, p as prism } from "./react-syntax-highlighter-WR--4J2P.js";
+import { a as color, y as EditorView, z as EditorState, A as basicSetup, P as indentUnit, B as keymap, C as indentWithTab, K as lintGutter, Q as Compartment, R as jsYaml, G as javascript, S as sql$1, U as dom2image } from "./vendor-IN_V4Ne7.js";
+import { f as CssConstants, C as CssVars, I as IntlLabel, D as DOM_KEY_WIDGET, d as utils$2, g as UnwrappedCheckbox, h as UnwrappedDropdown, O as OptionItemSort, j as UnwrappedInput, k as UnwrappedCaption, l as UnwrappedTextarea, m as UnwrappedDecorateInput, n as UnwrappedCheckboxes, b as useGlobalHandlers } from "./rainbow-d9-n2-UXPLIn0T.js";
+import { R as React, r as reactExports, q as qe, W as We, D as DefaultLinkModel, P as PortWidget, a as PortModelAlignment, b as PortModel, N as NodeModel, C as CanvasWidget, c as DiagramEngine, d as NodeLayerFactory, L as LinkLayerFactory, S as SelectionBoxLayerFactory, e as DefaultLabelFactory, f as DefaultNodeFactory, g as DefaultLinkFactory, h as PathFindingLinkFactory, i as DefaultPortFactory, j as DiagramModel, k as State, l as SelectingState, A as AbstractModelFactory, m as AbstractReactFactory, n as LinkWidget, o as DefaultLinkPointWidget, p as DefaultLinkSegmentWidget } from "./react-base-7-SwU6nB.js";
+import { V as VUtils, a as useThrottler, r as registerWidget, g as useCreateEventBus, e as useForceUpdate, M as MUtils, P as PPUtils } from "./rainbow-d9-n1-76aA7djH.js";
+import { i as index$1 } from "./rainbow-d9-n3-929utK20.js";
+import { M as Markdown } from "./react-markdown-VXHRFK8H.js";
+import { r as remarkGfm } from "./remark-W7EeR-HQ.js";
+import { S as SyntaxHighlighter, p as prism } from "./react-syntax-highlighter-N5rOjLRF.js";
 const EDITOR_BACKGROUND_BLOCK_SIZE = "var(--o23-playground-editor-background-block-size, 48px)";
 const EDITOR_BACKGROUND_LINE_COLOR = `var(--o23-playground-editor-background-line-color, ${color(CssConstants.PRIMARY_COLOR).alpha(0.08)})`;
 const EDITOR_ATTRIBUTE_BADGE_COLOR = "#9db6c6";
@@ -164,7 +164,7 @@ const PlaygroundCssVars = {
   NODE_BACKGROUND: `var(--o23-playground-node-background, ${CssVars.BACKGROUND_COLOR})`,
   NODE_TITLE_PADDING: "var(--o23-playground-node-title-padding, 0 10px)",
   NODE_TITLE_SPREADER_MIN_WIDTH: "var(--o23-playground-node-title-spreader-min-width, 40px)",
-  NODE_MIN_WIDTH: "var(--o23-playground-node-min-width, 220px)",
+  NODE_MIN_WIDTH: "var(--o23-playground-node-min-width, 250px)",
   NODE_MAX_WIDTH: `var(--o23-playground-node-max-width, unset)`,
   NODE_ICON_SIZE: "var(--o23-playground-node-icon-size, 14px)",
   NODE_PORT_HEIGHT: "var(--o23-playground-node-port-height, 24px)",
