@@ -4,14 +4,14 @@ var __publicField = (obj, key, value) => {
   __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
   return value;
 };
-import { a as color, y as EditorView, z as EditorState, A as basicSetup, P as indentUnit, B as keymap, C as indentWithTab, K as lintGutter, Q as Compartment, R as jsYaml, G as javascript, S as sql$1, U as dom2image } from "./vendor-wec729Ka.js";
-import { f as CssConstants, C as CssVars, I as IntlLabel, D as DOM_KEY_WIDGET, d as utils$2, g as UnwrappedCheckbox, h as UnwrappedDropdown, O as OptionItemSort, j as UnwrappedInput, k as UnwrappedCaption, l as UnwrappedTextarea, m as UnwrappedDecorateInput, n as UnwrappedCheckboxes, b as useGlobalHandlers } from "./rainbow-d9-n2-wUHl4Xi4.js";
-import { R as React, r as reactExports, q as qe, W as We, D as DefaultLinkModel, P as PortWidget, a as PortModelAlignment, b as PortModel, N as NodeModel, C as CanvasWidget, c as DiagramEngine, d as NodeLayerFactory, L as LinkLayerFactory, S as SelectionBoxLayerFactory, e as DefaultLabelFactory, f as DefaultNodeFactory, g as DefaultLinkFactory, h as PathFindingLinkFactory, i as DefaultPortFactory, j as DiagramModel, k as State, l as SelectingState, A as AbstractModelFactory, m as AbstractReactFactory, n as LinkWidget, o as DefaultLinkPointWidget, p as DefaultLinkSegmentWidget } from "./react-base-0_S0QDSQ.js";
-import { V as VUtils, a as useThrottler, r as registerWidget, g as useCreateEventBus, e as useForceUpdate, M as MUtils, P as PPUtils } from "./rainbow-d9-n1-DwWtjZsq.js";
-import { i as index$1 } from "./rainbow-d9-n3-Vs8Z5VHU.js";
-import { M as Markdown } from "./react-markdown-9GNfab29.js";
-import { r as remarkGfm } from "./remark-l9XmH0w-.js";
-import { S as SyntaxHighlighter, p as prism } from "./react-syntax-highlighter-4cIx4GxL.js";
+import { a as color, y as EditorView, z as EditorState, A as basicSetup, P as indentUnit, B as keymap, C as indentWithTab, K as lintGutter, Q as Compartment, R as jsYaml, G as javascript, S as sql$1, U as dom2image } from "./vendor-ox88ah_E.js";
+import { f as CssConstants, C as CssVars, I as IntlLabel, D as DOM_KEY_WIDGET, d as utils$2, g as UnwrappedCheckbox, h as UnwrappedDropdown, O as OptionItemSort, j as UnwrappedInput, k as UnwrappedCaption, l as UnwrappedTextarea, m as UnwrappedDecorateInput, n as UnwrappedCheckboxes, b as useGlobalHandlers } from "./rainbow-d9-n2-t_OfaVx6.js";
+import { R as React, r as reactExports, q as qe, W as We, D as DefaultLinkModel, P as PortWidget, a as PortModelAlignment, b as PortModel, N as NodeModel, C as CanvasWidget, c as DiagramEngine, d as NodeLayerFactory, L as LinkLayerFactory, S as SelectionBoxLayerFactory, e as DefaultLabelFactory, f as DefaultNodeFactory, g as DefaultLinkFactory, h as PathFindingLinkFactory, i as DefaultPortFactory, j as DiagramModel, k as State, l as SelectingState, A as AbstractModelFactory, m as AbstractReactFactory, n as LinkWidget, o as DefaultLinkPointWidget, p as DefaultLinkSegmentWidget } from "./react-base-jVo1UZ91.js";
+import { V as VUtils, a as useThrottler, r as registerWidget, g as useCreateEventBus, e as useForceUpdate, M as MUtils, P as PPUtils } from "./rainbow-d9-n1-n4YeWivf.js";
+import { i as index$1 } from "./rainbow-d9-n3-un_Y9ySk.js";
+import { M as Markdown } from "./react-markdown-FRJ7K5w9.js";
+import { r as remarkGfm } from "./remark-UaeCRSuV.js";
+import { S as SyntaxHighlighter, p as prism } from "./react-syntax-highlighter-WR--4J2P.js";
 const EDITOR_BACKGROUND_BLOCK_SIZE = "var(--o23-playground-editor-background-block-size, 48px)";
 const EDITOR_BACKGROUND_LINE_COLOR = `var(--o23-playground-editor-background-line-color, ${color(CssConstants.PRIMARY_COLOR).alpha(0.08)})`;
 const EDITOR_ATTRIBUTE_BADGE_COLOR = "#9db6c6";
@@ -164,7 +164,7 @@ const PlaygroundCssVars = {
   NODE_BACKGROUND: `var(--o23-playground-node-background, ${CssVars.BACKGROUND_COLOR})`,
   NODE_TITLE_PADDING: "var(--o23-playground-node-title-padding, 0 10px)",
   NODE_TITLE_SPREADER_MIN_WIDTH: "var(--o23-playground-node-title-spreader-min-width, 40px)",
-  NODE_MIN_WIDTH: "var(--o23-playground-node-min-width, 200px)",
+  NODE_MIN_WIDTH: "var(--o23-playground-node-min-width, 220px)",
   NODE_MAX_WIDTH: `var(--o23-playground-node-max-width, unset)`,
   NODE_ICON_SIZE: "var(--o23-playground-node-icon-size, 14px)",
   NODE_PORT_HEIGHT: "var(--o23-playground-node-port-height, 24px)",
@@ -505,16 +505,12 @@ const RemoveStep = (props) => {
   return React.createElement(
     "svg",
     { ...props, "data-icon": "o23-remove-step", viewBox: "0 0 24 24", fill: "none", xmlns: "http://www.w3.org/2000/svg" },
-    React.createElement(
-      "g",
-      { opacity: "0.4" },
-      React.createElement("path", { d: "M3.16992 7.43994L11.9999 12.5499L20.7699 7.46991", stroke: "currentColor", strokeWidth: "1.5", strokeLinecap: "round", strokeLinejoin: "round" }),
-      React.createElement("path", { d: "M12 21.61V12.54", stroke: "currentColor", strokeWidth: "1.5", strokeLinecap: "round", strokeLinejoin: "round" }),
-      React.createElement("path", { d: "M21.6106 9.17V14.83C21.6106 14.88 21.6106 14.92 21.6006 14.97C20.9006 14.36 20.0006 14 19.0006 14C18.0606 14 17.1906 14.33 16.5006 14.88C15.5806 15.61 15.0006 16.74 15.0006 18C15.0006 18.75 15.2106 19.46 15.5806 20.06C15.6706 20.22 15.7806 20.37 15.9006 20.51L14.0706 21.52C12.9306 22.16 11.0706 22.16 9.9306 21.52L4.59061 18.56C3.38061 17.89 2.39062 16.21 2.39062 14.83V9.17C2.39062 7.79 3.38061 6.11002 4.59061 5.44002L9.9306 2.48C11.0706 1.84 12.9306 1.84 14.0706 2.48L19.4106 5.44002C20.6206 6.11002 21.6106 7.79 21.6106 9.17Z", stroke: "currentColor", strokeWidth: "1.5", strokeLinecap: "round", strokeLinejoin: "round" })
-    ),
-    React.createElement("path", { d: "M23 18C23 18.75 22.79 19.46 22.42 20.06C22.21 20.42 21.94 20.74 21.63 21C20.93 21.63 20.01 22 19 22C17.54 22 16.27 21.22 15.58 20.06C15.21 19.46 15 18.75 15 18C15 16.74 15.58 15.61 16.5 14.88C17.19 14.33 18.06 14 19 14C21.21 14 23 15.79 23 18Z", stroke: "currentColor", strokeWidth: "1.5", strokeMiterlimit: "10", strokeLinecap: "round", strokeLinejoin: "round" }),
-    React.createElement("path", { d: "M20.0692 19.0402L17.9492 16.9302", stroke: "currentColor", strokeWidth: "1.5", strokeMiterlimit: "10", strokeLinecap: "round", strokeLinejoin: "round" }),
-    React.createElement("path", { d: "M20.0497 16.96L17.9297 19.0699", stroke: "currentColor", strokeWidth: "1.5", strokeMiterlimit: "10", strokeLinecap: "round", strokeLinejoin: "round" })
+    React.createElement("path", { d: "M2 15.3V9C2 5.5 4 4 7 4H17C20 4 22 5.5 22 9V15C22 18.5 20 20 17 20H8.5", stroke: "currentColor", strokeWidth: "1.5", strokeMiterlimit: "10", strokeLinecap: "round", strokeLinejoin: "round" }),
+    React.createElement("path", { opacity: "0.4", d: "M12 14.5C13.3807 14.5 14.5 13.3807 14.5 12C14.5 10.6193 13.3807 9.5 12 9.5C10.6193 9.5 9.5 10.6193 9.5 12C9.5 13.3807 10.6193 14.5 12 14.5Z", stroke: "currentColor", strokeWidth: "1.5", strokeMiterlimit: "10", strokeLinecap: "round", strokeLinejoin: "round" }),
+    React.createElement("path", { opacity: "0.4", d: "M18.5 9.5V14.5", stroke: "currentColor", strokeWidth: "1.5", strokeMiterlimit: "10", strokeLinecap: "round", strokeLinejoin: "round" }),
+    React.createElement("path", { d: "M9 18C9 18.75 8.78998 19.46 8.41998 20.06C7.72998 21.22 6.46 22 5 22C3.54 22 2.27002 21.22 1.58002 20.06C1.21002 19.46 1 18.75 1 18C1 15.79 2.79 14 5 14C7.21 14 9 15.79 9 18Z", stroke: "currentColor", strokeWidth: "1.5", strokeMiterlimit: "10", strokeLinecap: "round", strokeLinejoin: "round" }),
+    React.createElement("path", { d: "M6.06897 19.0402L3.95898 16.9302", stroke: "currentColor", strokeWidth: "1.5", strokeMiterlimit: "10", strokeLinecap: "round", strokeLinejoin: "round" }),
+    React.createElement("path", { d: "M6.03967 16.96L3.92969 19.0699", stroke: "currentColor", strokeWidth: "1.5", strokeMiterlimit: "10", strokeLinecap: "round", strokeLinejoin: "round" })
   );
 };
 const InsertRoute = (props) => {
@@ -525,6 +521,19 @@ const InsertRoute = (props) => {
     React.createElement("path", { opacity: "0.4", d: "M8.5 4H1.5", stroke: "currentColor", strokeWidth: "1.5", strokeMiterlimit: "10", strokeLinecap: "round", strokeLinejoin: "round" }),
     React.createElement("path", { opacity: "0.4", d: "M7.5 20H1.5", stroke: "currentColor", strokeWidth: "1.5", strokeMiterlimit: "10", strokeLinecap: "round", strokeLinejoin: "round" }),
     React.createElement("path", { opacity: "0.4", d: "M4.5 12H1.5", stroke: "currentColor", strokeWidth: "1.5", strokeMiterlimit: "10", strokeLinecap: "round", strokeLinejoin: "round" })
+  );
+};
+const RemoveRoute = (props) => {
+  return React.createElement(
+    "svg",
+    { ...props, "data-icon": "o23-remove-route", viewBox: "0 0 24 24", fill: "none", xmlns: "http://www.w3.org/2000/svg" },
+    React.createElement("path", { d: "M18.04 13.55C17.62 13.96 17.38 14.55 17.44 15.18C17.53 16.26 18.52 17.05 19.6 17.05H21.5V18.24C21.5 20.31 19.81 22 17.74 22H7.63C7.94 21.74 8.21 21.42 8.42 21.06C8.79 20.46 9 19.75 9 19C9 16.79 7.21 15 5 15C4.06 15 3.19 15.33 2.5 15.88V11.51C2.5 9.44001 4.19 7.75 6.26 7.75H17.74C19.81 7.75 21.5 9.44001 21.5 11.51V12.95H19.48C18.92 12.95 18.41 13.17 18.04 13.55Z", stroke: "currentColor", strokeWidth: "1.5", strokeLinecap: "round", strokeLinejoin: "round" }),
+    React.createElement("path", { opacity: "0.4", d: "M2.5 12.4098V7.83986C2.5 6.64986 3.23 5.58982 4.34 5.16982L12.28 2.16982C13.52 1.69982 14.85 2.61985 14.85 3.94985V7.74983", stroke: "currentColor", strokeWidth: "1.5", strokeLinecap: "round", strokeLinejoin: "round" }),
+    React.createElement("path", { d: "M22.5608 13.9702V16.0302C22.5608 16.5802 22.1208 17.0302 21.5608 17.0502H19.6008C18.5208 17.0502 17.5308 16.2602 17.4408 15.1802C17.3808 14.5502 17.6208 13.9602 18.0408 13.5502C18.4108 13.1702 18.9208 12.9502 19.4808 12.9502H21.5608C22.1208 12.9702 22.5608 13.4202 22.5608 13.9702Z", stroke: "currentColor", strokeWidth: "1.5", strokeLinecap: "round", strokeLinejoin: "round" }),
+    React.createElement("path", { opacity: "0.4", d: "M7 12H14", stroke: "currentColor", strokeWidth: "1.5", strokeLinecap: "round", strokeLinejoin: "round" }),
+    React.createElement("path", { d: "M9 19C9 19.75 8.79 20.46 8.42 21.06C8.21 21.42 7.94 21.74 7.63 22C6.93 22.63 6.01 23 5 23C3.54 23 2.27 22.22 1.58 21.06C1.21 20.46 1 19.75 1 19C1 17.74 1.58 16.61 2.5 15.88C3.19 15.33 4.06 15 5 15C7.21 15 9 16.79 9 19Z", stroke: "currentColor", strokeWidth: "1.5", strokeMiterlimit: "10", strokeLinecap: "round", strokeLinejoin: "round" }),
+    React.createElement("path", { d: "M6.06922 20.0402L3.94922 17.9302", stroke: "currentColor", strokeWidth: "1.5", strokeMiterlimit: "10", strokeLinecap: "round", strokeLinejoin: "round" }),
+    React.createElement("path", { d: "M6.04969 17.96L3.92969 20.0699", stroke: "currentColor", strokeWidth: "1.5", strokeMiterlimit: "10", strokeLinecap: "round", strokeLinejoin: "round" })
   );
 };
 const FitCanvas = (props) => {
@@ -674,7 +683,9 @@ const Labels = {
   RemoveStep: React.createElement(IntlLabel, { keys: ["o23", "node", "remove-step"], value: "Remove Step" }),
   PrependRoute: React.createElement(IntlLabel, { keys: ["o23", "node", "prepend-route"], value: "Prepend Route" }),
   AppendRoute: React.createElement(IntlLabel, { keys: ["o23", "node", "append-route"], value: "Append Route" }),
+  RemoveRoute: React.createElement(IntlLabel, { keys: ["o23", "node", "remove-route"], value: "Remove Route" }),
   AddOtherwise: React.createElement(IntlLabel, { keys: ["o23", "node", "add-otherwise"], value: "Add Otherwise" }),
+  RemoveOtherwise: React.createElement(IntlLabel, { keys: ["o23", "node", "remove-otherwise"], value: "Remove Otherwise" }),
   EndNodeTitle: React.createElement(IntlLabel, { keys: ["o23", "node", "end"], value: "End" }),
   StepNodeNoname: React.createElement(IntlLabel, { keys: ["o23", "node", "step", "noname"], value: "[Noname]" }),
   HelpDesk: React.createElement(IntlLabel, { keys: ["o23", "dialog", "docs", "title"], value: "Help Desk" }),
@@ -3968,10 +3979,23 @@ const StepNodeOperator = qe.div.attrs({ [DOM_KEY_WIDGET]: "o23-playground-step-n
         border-bottom-right-radius: ${PlaygroundCssVars.NODE_STEP_OPERATOR_BORDER_RADIUS};
     }
 
+    &[data-remove-route],
+    &[data-remove-otherwise],
     &[data-remove-step] {
         color: ${PlaygroundCssVars.NODE_STEP_OPERATOR_DANGER_COLOR};
         border-radius: ${PlaygroundCssVars.NODE_STEP_OPERATOR_BORDER_RADIUS};
         border-color: ${PlaygroundCssVars.NODE_STEP_OPERATOR_DANGER_COLOR};
+    }
+
+    &[data-remove-route]:not(:last-child),
+    &[data-remove-otherwise]:not(:last-child) {
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+
+        + div[data-w=o23-playground-step-node-operator] {
+            border-top-left-radius: 0;
+            border-bottom-left-radius: 0;
+        }
     }
 
     &:first-child {
@@ -3984,6 +4008,8 @@ const StepNodeOperator = qe.div.attrs({ [DOM_KEY_WIDGET]: "o23-playground-step-n
         background-color: ${PlaygroundCssVars.NODE_STEP_OPERATOR_COLOR};;
         z-index: 1;
 
+        &[data-remove-route],
+        &[data-remove-otherwise],
         &[data-remove-step] {
             background-color: ${PlaygroundCssVars.NODE_STEP_OPERATOR_DANGER_COLOR};
         }
@@ -4065,9 +4091,17 @@ const StepNodeWidget = (props) => {
     var _a;
     (_a = operators.appendRoute) == null ? void 0 : _a.call(operators, node, def);
   };
+  const onRemoveRouteClicked = () => {
+    var _a;
+    (_a = operators.removeRoute) == null ? void 0 : _a.call(operators, node, def);
+  };
   const onAddOtherwiseClicked = () => {
     var _a;
     (_a = operators.addOtherwise) == null ? void 0 : _a.call(operators, node, def);
+  };
+  const onRemoveOtherwiseClicked = () => {
+    var _a;
+    (_a = operators.removeOtherwise) == null ? void 0 : _a.call(operators, node, def);
   };
   const name = (def.name ?? "").trim() || Labels.StepNodeNoname;
   const isFirstSubStep = node.isFirstSubStep();
@@ -4076,7 +4110,9 @@ const StepNodeWidget = (props) => {
   const canRemoveStep = operators.remove != null;
   const canPrependRoute = operators.prependRoute != null;
   const canAppendRoute = operators.appendRoute != null;
+  const canRemoveRoute = operators.removeRoute != null;
   const canAddOtherwise = operators.addOtherwise != null;
+  const canRemoveOtherwise = operators.removeOtherwise != null;
   return React.createElement(
     StepNodeContainer,
     { onDoubleClick: onDoubleClicked, "data-use": use, ref },
@@ -4108,6 +4144,18 @@ const StepNodeWidget = (props) => {
         React.createElement("span", null, Labels.PrependStep)
       ) : null,
       React.createElement("span", null),
+      canRemoveRoute ? React.createElement(
+        StepNodeOperator,
+        { "data-remove-route": true, onClick: onRemoveRouteClicked },
+        React.createElement(RemoveRoute, null),
+        React.createElement("span", null, Labels.RemoveRoute)
+      ) : null,
+      canRemoveOtherwise ? React.createElement(
+        StepNodeOperator,
+        { "data-remove-otherwise": true, onClick: onRemoveOtherwiseClicked },
+        React.createElement(RemoveRoute, null),
+        React.createElement("span", null, Labels.RemoveOtherwise)
+      ) : null,
       canRemoveStep ? React.createElement(
         StepNodeOperator,
         { "data-remove-step": true, onClick: onRemoveStepClicked },
@@ -9512,6 +9560,15 @@ const ConditionalStepCheckReconfigurer = {
         };
       } else if (otherwise.includes(def)) {
         createNodeOperatorsForStep(otherwise, true, computed);
+        if (otherwise[0] === def) {
+          computed.removeOtherwise = (node3, _def) => {
+            delete parentDef2.otherwise;
+            node3.handlers.onChange();
+          };
+        }
+        if (otherwise.length === 1) {
+          delete computed.remove;
+        }
       }
       return computed;
     };
@@ -9643,14 +9700,6 @@ const RoutesStepCheckReconfigurer = {
         const steps = route.steps;
         if (routes.length > 1) {
           createNodeOperatorsForStep(steps, true, computed);
-          computed.remove = (node3, def2) => {
-            steps.splice(steps.indexOf(def2), 1);
-            if (steps.length === 0) {
-              const index = routes.indexOf(route);
-              routes.splice(index, 1);
-              node3.handlers.onChange();
-            }
-          };
         } else {
           createNodeOperatorsForStep(steps, false, computed);
         }
@@ -9679,6 +9728,16 @@ const RoutesStepCheckReconfigurer = {
               node3.handlers.onChange();
             };
           }
+          if (routes.length > 1) {
+            computed.removeRoute = (node3, _def) => {
+              const index = routes.indexOf(route);
+              routes.splice(index, 1);
+              node3.handlers.onChange();
+            };
+            if (steps.length === 1) {
+              delete computed.remove;
+            }
+          }
         }
       } else if (otherwise.includes(def)) {
         createNodeOperatorsForStep(otherwise, true, computed);
@@ -9687,6 +9746,15 @@ const RoutesStepCheckReconfigurer = {
           parentDef2.routes = routes;
           node3.handlers.onChange();
         };
+        if (otherwise[0] === def) {
+          computed.removeOtherwise = (node3, _def) => {
+            delete parentDef2.otherwise;
+            node3.handlers.onChange();
+          };
+        }
+        if (otherwise.length === 1) {
+          delete computed.remove;
+        }
       }
       return computed;
     };
