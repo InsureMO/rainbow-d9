@@ -3,21 +3,20 @@ import React, {SVGProps} from 'react';
 export const RemoveStep = (props: Omit<SVGProps<SVGSVGElement>, 'xmlns' | 'viewBox'>) => {
 	return <svg {...props} data-icon="o23-remove-step" viewBox="0 0 24 24" fill="none"
 	            xmlns="http://www.w3.org/2000/svg">
-		<g opacity="0.4">
-			<path d="M3.16992 7.43994L11.9999 12.5499L20.7699 7.46991" stroke="currentColor" strokeWidth="1.5"
-			      strokeLinecap="round" strokeLinejoin="round"/>
-			<path d="M12 21.61V12.54" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"
-			      strokeLinejoin="round"/>
-			<path
-				d="M21.6106 9.17V14.83C21.6106 14.88 21.6106 14.92 21.6006 14.97C20.9006 14.36 20.0006 14 19.0006 14C18.0606 14 17.1906 14.33 16.5006 14.88C15.5806 15.61 15.0006 16.74 15.0006 18C15.0006 18.75 15.2106 19.46 15.5806 20.06C15.6706 20.22 15.7806 20.37 15.9006 20.51L14.0706 21.52C12.9306 22.16 11.0706 22.16 9.9306 21.52L4.59061 18.56C3.38061 17.89 2.39062 16.21 2.39062 14.83V9.17C2.39062 7.79 3.38061 6.11002 4.59061 5.44002L9.9306 2.48C11.0706 1.84 12.9306 1.84 14.0706 2.48L19.4106 5.44002C20.6206 6.11002 21.6106 7.79 21.6106 9.17Z"
-				stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-		</g>
-		<path
-			d="M23 18C23 18.75 22.79 19.46 22.42 20.06C22.21 20.42 21.94 20.74 21.63 21C20.93 21.63 20.01 22 19 22C17.54 22 16.27 21.22 15.58 20.06C15.21 19.46 15 18.75 15 18C15 16.74 15.58 15.61 16.5 14.88C17.19 14.33 18.06 14 19 14C21.21 14 23 15.79 23 18Z"
-			stroke="currentColor" strokeWidth="1.5" strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round"/>
-		<path d="M20.0692 19.0402L17.9492 16.9302" stroke="currentColor" strokeWidth="1.5" strokeMiterlimit="10"
+		<path d="M2 15.3V9C2 5.5 4 4 7 4H17C20 4 22 5.5 22 9V15C22 18.5 20 20 17 20H8.5" stroke="currentColor"
+		      strokeWidth="1.5" strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round"/>
+		<path opacity="0.4"
+		      d="M12 14.5C13.3807 14.5 14.5 13.3807 14.5 12C14.5 10.6193 13.3807 9.5 12 9.5C10.6193 9.5 9.5 10.6193 9.5 12C9.5 13.3807 10.6193 14.5 12 14.5Z"
+		      stroke="currentColor" strokeWidth="1.5" strokeMiterlimit="10" strokeLinecap="round"
+		      strokeLinejoin="round"/>
+		<path opacity="0.4" d="M18.5 9.5V14.5" stroke="currentColor" strokeWidth="1.5" strokeMiterlimit="10"
 		      strokeLinecap="round" strokeLinejoin="round"/>
-		<path d="M20.0497 16.96L17.9297 19.0699" stroke="currentColor" strokeWidth="1.5" strokeMiterlimit="10"
+		<path
+			d="M9 18C9 18.75 8.78998 19.46 8.41998 20.06C7.72998 21.22 6.46 22 5 22C3.54 22 2.27002 21.22 1.58002 20.06C1.21002 19.46 1 18.75 1 18C1 15.79 2.79 14 5 14C7.21 14 9 15.79 9 18Z"
+			stroke="currentColor" strokeWidth="1.5" strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round"/>
+		<path d="M6.06897 19.0402L3.95898 16.9302" stroke="currentColor" strokeWidth="1.5" strokeMiterlimit="10"
+		      strokeLinecap="round" strokeLinejoin="round"/>
+		<path d="M6.03967 16.96L3.92969 19.0699" stroke="currentColor" strokeWidth="1.5" strokeMiterlimit="10"
 		      strokeLinecap="round" strokeLinejoin="round"/>
 	</svg>;
 };

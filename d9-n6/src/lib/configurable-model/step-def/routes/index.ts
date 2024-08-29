@@ -104,17 +104,6 @@ export const RoutesStepCheckReconfigurer: StepDefsReconfigurer = {
 				if (routes.length > 1) {
 					// more than one route, can remove step anyway
 					createNodeOperatorsForStep(steps, true, computed);
-					// override route, when there is no step on route, remove route as well
-					computed.remove = (node: StepNodeModel, def: F) => {
-						// remove step first
-						steps.splice(steps.indexOf(def), 1);
-						if (steps.length === 0) {
-							// remove route if no step left
-							const index = routes.indexOf(route);
-							routes.splice(index, 1);
-							node.handlers.onChange();
-						}
-					};
 				} else {
 					// last step of last route cannot be removed
 					createNodeOperatorsForStep(steps, false, computed);
@@ -149,6 +138,21 @@ export const RoutesStepCheckReconfigurer: StepDefsReconfigurer = {
 							node.handlers.onChange();
 						};
 					}
+					if (routes.length > 1) {
+						// there are more than 1 route, so remove route is available
+						// eslint-disable-next-line @typescript-eslint/no-unused-vars
+						computed.removeRoute = (node: StepNodeModel, _def: F) => {
+							// remove route if no step left
+							const index = routes.indexOf(route);
+							routes.splice(index, 1);
+							node.handlers.onChange();
+						};
+						if (steps.length === 1) {
+							// only one step in route, since remove step equals remove route
+							// and because of remove route exists, therefore delete remove step
+							delete computed.remove;
+						}
+					}
 				}
 			} else if (otherwise.includes(def)) {
 				// if given node is one of otherwise steps, can do prepend/append/remove step
@@ -161,6 +165,19 @@ export const RoutesStepCheckReconfigurer: StepDefsReconfigurer = {
 					parentDef.routes = routes;
 					node.handlers.onChange();
 				};
+				if (otherwise[0] === def) {
+					// otherwise can be removed anyway for first step of otherwise
+					// eslint-disable-next-line @typescript-eslint/no-unused-vars
+					computed.removeOtherwise = (node: StepNodeModel, _def: F) => {
+						delete parentDef.otherwise;
+						node.handlers.onChange();
+					};
+				}
+				if (otherwise.length === 1) {
+					// only one step in otherwise, since remove step equals remove otherwise
+					// and because of remove otherwise exists, therefore delete remove step
+					delete computed.remove;
+				}
 			}
 			return computed;
 		};

@@ -13,7 +13,9 @@ export const Labels = {
 	RemoveStep: <IntlLabel keys={['o23', 'node', 'remove-step']} value="Remove Step"/>,
 	PrependRoute: <IntlLabel keys={['o23', 'node', 'prepend-route']} value="Prepend Route"/>,
 	AppendRoute: <IntlLabel keys={['o23', 'node', 'append-route']} value="Append Route"/>,
+	RemoveRoute: <IntlLabel keys={['o23', 'node', 'remove-route']} value="Remove Route"/>,
 	AddOtherwise: <IntlLabel keys={['o23', 'node', 'add-otherwise']} value="Add Otherwise"/>,
+	RemoveOtherwise: <IntlLabel keys={['o23', 'node', 'remove-otherwise']} value="Remove Otherwise"/>,
 
 	EndNodeTitle: <IntlLabel keys={['o23', 'node', 'end']} value="End"/>,
 	StepNodeNoname: <IntlLabel keys={['o23', 'node', 'step', 'noname']} value="[Noname]"/>,

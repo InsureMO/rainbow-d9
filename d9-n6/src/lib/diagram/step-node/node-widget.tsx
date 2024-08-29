@@ -10,7 +10,7 @@ import {
 } from '../../configurable-model';
 import {PipelineStepDef} from '../../definition';
 import {StepDialogContent} from '../../edit-dialog';
-import {InsertRoute, InsertStep, Otherwise, RemoveStep} from '../../icons';
+import {InsertRoute, InsertStep, Otherwise, RemoveRoute, RemoveStep} from '../../icons';
 import {askUseBadge, Labels} from '../../labels';
 import {PlaygroundEventTypes, usePlaygroundEventBus} from '../../playground-event-bus';
 import {PlaygroundCssVars} from '../../widgets';
@@ -156,10 +156,23 @@ export const StepNodeOperator = styled.div.attrs({[DOM_KEY_WIDGET]: 'o23-playgro
         border-bottom-right-radius: ${PlaygroundCssVars.NODE_STEP_OPERATOR_BORDER_RADIUS};
     }
 
+    &[data-remove-route],
+    &[data-remove-otherwise],
     &[data-remove-step] {
         color: ${PlaygroundCssVars.NODE_STEP_OPERATOR_DANGER_COLOR};
         border-radius: ${PlaygroundCssVars.NODE_STEP_OPERATOR_BORDER_RADIUS};
         border-color: ${PlaygroundCssVars.NODE_STEP_OPERATOR_DANGER_COLOR};
+    }
+
+    &[data-remove-route]:not(:last-child),
+    &[data-remove-otherwise]:not(:last-child) {
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+
+        + div[data-w=o23-playground-step-node-operator] {
+            border-top-left-radius: 0;
+            border-bottom-left-radius: 0;
+        }
     }
 
     &:first-child {
@@ -172,6 +185,8 @@ export const StepNodeOperator = styled.div.attrs({[DOM_KEY_WIDGET]: 'o23-playgro
         background-color: ${PlaygroundCssVars.NODE_STEP_OPERATOR_COLOR};;
         z-index: 1;
 
+        &[data-remove-route],
+        &[data-remove-otherwise],
         &[data-remove-step] {
             background-color: ${PlaygroundCssVars.NODE_STEP_OPERATOR_DANGER_COLOR};
         }
@@ -252,8 +267,14 @@ export const StepNodeWidget = (props: StepNodeWidgetProps) => {
 	const onAppendRouteClicked = () => {
 		operators.appendRoute?.(node, def);
 	};
+	const onRemoveRouteClicked = () => {
+		operators.removeRoute?.(node, def);
+	};
 	const onAddOtherwiseClicked = () => {
 		operators.addOtherwise?.(node, def);
+	};
+	const onRemoveOtherwiseClicked = () => {
+		operators.removeOtherwise?.(node, def);
 	};
 
 	const name = (def.name ?? '').trim() || Labels.StepNodeNoname;
@@ -263,7 +284,9 @@ export const StepNodeWidget = (props: StepNodeWidgetProps) => {
 	const canRemoveStep = operators.remove != null;
 	const canPrependRoute = operators.prependRoute != null;
 	const canAppendRoute = operators.appendRoute != null;
+	const canRemoveRoute = operators.removeRoute != null;
 	const canAddOtherwise = operators.addOtherwise != null;
+	const canRemoveOtherwise = operators.removeOtherwise != null;
 
 	return <StepNodeContainer onDoubleClick={onDoubleClicked} data-use={use} ref={ref}>
 		{isFirstSubStep
@@ -292,6 +315,14 @@ export const StepNodeWidget = (props: StepNodeWidgetProps) => {
 				<span>{Labels.PrependStep}</span>
 			</StepNodeOperator> : null}
 			<span/>
+			{canRemoveRoute ? <StepNodeOperator data-remove-route onClick={onRemoveRouteClicked}>
+				<RemoveRoute/>
+				<span>{Labels.RemoveRoute}</span>
+			</StepNodeOperator> : null}
+			{canRemoveOtherwise ? <StepNodeOperator data-remove-otherwise onClick={onRemoveOtherwiseClicked}>
+				<RemoveRoute/>
+				<span>{Labels.RemoveOtherwise}</span>
+			</StepNodeOperator> : null}
 			{canRemoveStep ? <StepNodeOperator data-remove-step onClick={onRemoveStepClicked}>
 				<RemoveStep/>
 				<span>{Labels.RemoveStep}</span>

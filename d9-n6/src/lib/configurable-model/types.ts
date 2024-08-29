@@ -47,7 +47,9 @@ export interface NodeOperators<F extends PipelineStepDef = PipelineStepDef> {
 	appendStep?: (node: StepNodeModel, def: F) => void;
 	prependRoute?: (node: StepNodeModel, def: F) => void;
 	appendRoute?: (node: StepNodeModel, def: F) => void;
+	removeRoute?: (node: StepNodeModel, def: F) => void;
 	addOtherwise?: (node: StepNodeModel, def: F) => void;
+	removeOtherwise?: (node: StepNodeModel, def: F) => void;
 }
 
 export type StepDefsOperators<F extends PipelineStepDef = PipelineStepDef> = (node: StepNodeModel, def: F) => NodeOperators<F>

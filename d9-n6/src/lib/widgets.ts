@@ -156,7 +156,7 @@ export const PlaygroundCssVars = {
 	NODE_BACKGROUND: `var(--o23-playground-node-background, ${CssVars.BACKGROUND_COLOR})`,
 	NODE_TITLE_PADDING: 'var(--o23-playground-node-title-padding, 0 10px)',
 	NODE_TITLE_SPREADER_MIN_WIDTH: 'var(--o23-playground-node-title-spreader-min-width, 40px)',
-	NODE_MIN_WIDTH: 'var(--o23-playground-node-min-width, 200px)',
+	NODE_MIN_WIDTH: 'var(--o23-playground-node-min-width, 220px)',
 	NODE_MAX_WIDTH: `var(--o23-playground-node-max-width, unset)`,
 	NODE_ICON_SIZE: 'var(--o23-playground-node-icon-size, 14px)',
 	NODE_PORT_HEIGHT: 'var(--o23-playground-node-port-height, 24px)',

@@ -87,9 +87,9 @@ export const ConditionalStepCheckReconfigurer: StepDefsReconfigurer = {
 			const parentDef = node.getSubOf() as ConditionalPipelineStepDef;
 			const steps = parentDef.steps ?? [];
 			const otherwise = parentDef.otherwise ?? [];
+			// prepend/append step already be handled in common logic
 			if (steps.includes(def) && node.isFirstSubStep() && otherwise.length === 0) {
 				// if given node is one of check steps, and otherwise not exists, can do add otherwise
-				// prepend/append step already be handled in common logic
 				// eslint-disable-next-line @typescript-eslint/no-unused-vars
 				computed.addOtherwise = (node: StepNodeModel, _def: F) => {
 					parentDef.otherwise = [node.assistant.createDefaultStep()];
@@ -99,6 +99,19 @@ export const ConditionalStepCheckReconfigurer: StepDefsReconfigurer = {
 				// if given node is one of otherwise steps, can do prepend/append/remove step
 				// otherwise can be removed anyway
 				createNodeOperatorsForStep(otherwise, true, computed);
+				if (otherwise[0] === def) {
+					// otherwise can be removed anyway for first step of otherwise
+					// eslint-disable-next-line @typescript-eslint/no-unused-vars
+					computed.removeOtherwise = (node: StepNodeModel, _def: F) => {
+						delete parentDef.otherwise;
+						node.handlers.onChange();
+					};
+				}
+				if (otherwise.length === 1) {
+					// only one step in otherwise, since remove step equals remove otherwise
+					// and because of remove otherwise exists, therefore delete remove step
+					delete computed.remove;
+				}
 			}
 			return computed;
 		};

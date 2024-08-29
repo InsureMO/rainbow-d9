@@ -25,6 +25,7 @@ export * from './unfold-sub-nodes';
 export * from './insert-step';
 export * from './remove-step';
 export * from './insert-route';
+export * from './remove-route';
 
 export * from './fit-canvas';
 export * from './origin-size';
