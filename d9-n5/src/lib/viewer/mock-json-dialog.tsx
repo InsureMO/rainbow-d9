@@ -236,7 +236,7 @@ export const MockJsonDialog = (props: MockJsonDialogProps) => {
 					{Labels.ConfirmAndRefresh}
 				</UnwrappedButton>
 				<UnwrappedButton ink={ButtonInk.WAIVE} onClick={onHide}>
-					{Labels.Cancel};
+					{Labels.Cancel}
 				</UnwrappedButton>
 			</MockJsonDialogFooter>
 		</MockJsonDialogWrapper>
