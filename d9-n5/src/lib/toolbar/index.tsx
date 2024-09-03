@@ -10,6 +10,8 @@ import {PlaygroundCssVars} from '../widgets';
 export interface ToolbarProps {
 	groups: Array<PlaygroundWidgetGroup>;
 	widgets: Array<PlaygroundWidget>;
+	maxMode?: boolean;
+	zenMode?: boolean;
 }
 
 // noinspection CssUnresolvedCustomProperty
@@ -185,10 +187,12 @@ export interface PrimaryBarState {
 
 export interface PrimaryBarProps {
 	groups: ToolbarProps['groups'];
+	maxMode?: boolean;
+	zenMode?: boolean;
 }
 
 export const PrimaryBar = (props: PrimaryBarProps) => {
-	const {groups} = props;
+	const {groups, maxMode = true, zenMode = true} = props;
 
 	const {fire} = usePlaygroundEventBus();
 	const [state, setState] = useState<PrimaryBarState>({
@@ -264,16 +268,27 @@ export const PrimaryBar = (props: PrimaryBarProps) => {
 			: <ToolbarButton icon={PlaygroundIcons.SHOW_LOCATOR} tooltip="Show Widget Locator"
 			                 click={onShowLocatorClicked}/>}
 		<ToolbarButton icon={PlaygroundIcons.JSON} tooltip="Mock JSON" click={onMockJsonClicked}/>
-		<ToolbarSeparator/>
-		{!state.zen && state.maximized
-			? <ToolbarButton icon={PlaygroundIcons.MINIMIZE} tooltip="Quit Maximization" click={onMinClicked}/>
+		{(maxMode || zenMode)
+			? <>
+				<ToolbarSeparator/>
+				{maxMode
+					? (!state.zen && state.maximized
+						? <ToolbarButton icon={PlaygroundIcons.MINIMIZE} tooltip="Quit Maximization"
+						                 click={onMinClicked}/>
+						: null)
+					: null}
+				{maxMode
+					? (!state.zen && !state.maximized
+						? <ToolbarButton icon={PlaygroundIcons.MAXIMIZE} tooltip="Maximize" click={onMaxClicked}/>
+						: null)
+					: null}
+				{zenMode
+					? (state.zen
+						? <ToolbarButton icon={PlaygroundIcons.WINDOW} tooltip="Quit Zen Mode" click={onWindowClicked}/>
+						: <ToolbarButton icon={PlaygroundIcons.ZEN} tooltip="Zen Mode" click={onZenClicked}/>)
+					: null}
+			</>
 			: null}
-		{!state.zen && !state.maximized
-			? <ToolbarButton icon={PlaygroundIcons.MAXIMIZE} tooltip="Maximize" click={onMaxClicked}/>
-			: null}
-		{state.zen
-			? <ToolbarButton icon={PlaygroundIcons.WINDOW} tooltip="Quit Zen Mode" click={onWindowClicked}/>
-			: <ToolbarButton icon={PlaygroundIcons.ZEN} tooltip="Zen Mode" click={onZenClicked}/>}
 	</PrimaryToolbar>;
 };
 
@@ -322,7 +337,7 @@ export const SecondaryBar = (props: SecondaryBarProps) => {
 };
 
 export const Toolbar = (props: ToolbarProps) => {
-	const {groups, widgets} = props;
+	const {groups, widgets, maxMode, zenMode} = props;
 	const buttons = widgets.reduce((buttons, widget) => {
 		const {$wt, $key, icon, tooltip, group, notInToolbar} = widget;
 		if (notInToolbar) {
@@ -339,7 +354,7 @@ export const Toolbar = (props: ToolbarProps) => {
 	}, {} as Record<PlaygroundWidgetGroupKey | string, Array<WidgetButton>>);
 
 	return <ToolbarWrapper>
-		<PrimaryBar groups={groups}/>
+		<PrimaryBar groups={groups} maxMode={maxMode} zenMode={zenMode}/>
 		<SecondaryBar groups={groups} buttons={buttons}/>
 	</ToolbarWrapper>;
 };

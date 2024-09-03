@@ -60,7 +60,7 @@ export const PlaygroundDelegate = (props: PlaygroundProps) => {
 		mockData,
 		externalDefs, externalDefsTypes,
 		widgets, usage: {useN2 = true, useCharts = false} = {} as PlaygroundWidgetUsage,
-		minViewerWidth,
+		minViewerWidth, maxMode, zenMode,
 		...rest
 	} = props;
 	const {$p2r, $onValueChange, $avs: {$disabled, $visible}} = $wrapped;
@@ -93,7 +93,8 @@ export const PlaygroundDelegate = (props: PlaygroundProps) => {
 	                          id={PPUtils.asId(PPUtils.absolute($p2r, $pp), props.id)}
 	                          ref={ref}>
 		<PlaygroundBridge content={content} onContentChanged={onContentChanged}/>
-		<Toolbar groups={availableWidgets.groups} widgets={availableWidgets.widgets}/>
+		<Toolbar groups={availableWidgets.groups} widgets={availableWidgets.widgets}
+		         maxMode={maxMode} zenMode={zenMode}/>
 		<Editor content={content}
 		        externalDefsTypes={initializedExternalDefsTypes} widgets={availableWidgets}/>
 		<Help/>

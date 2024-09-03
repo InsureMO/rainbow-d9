@@ -120,6 +120,8 @@ export type PlaygroundDef = ValueChangeableNodeDef & OmitHTMLProps<HTMLDivElemen
 	widgets?: PlaygroundWidgets;
 	usage?: PlaygroundWidgetUsage;
 	minViewerWidth?: number;
+	maxMode?: boolean;
+	zenMode?: boolean;
 };
 
 /** widget definition, with html attributes */
