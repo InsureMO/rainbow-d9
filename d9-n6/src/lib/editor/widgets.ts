@@ -123,12 +123,8 @@ export const EditorToolbar = styled.div.attrs<{ columns: number }>(({columns}) =
         border-color: ${PlaygroundCssVars.EDITOR_TOOLBAR_BUTTON_ACTIVE_BACKGROUND_COLOR};
 
         > span[data-w=o23-playground-editor-toolbar-button] {
-            &:not(:nth-child(6n + 1)) {
+            &:not(:first-child) {
                 border-left-color: ${PlaygroundCssVars.EDITOR_TOOLBAR_BUTTON_ACTIVE_BACKGROUND_COLOR};
-            }
-
-            &:nth-child(-n + 6) {
-                border-bottom-color: ${PlaygroundCssVars.EDITOR_TOOLBAR_BUTTON_ACTIVE_BACKGROUND_COLOR};
             }
 
             &:not(:hover) {
@@ -137,20 +133,10 @@ export const EditorToolbar = styled.div.attrs<{ columns: number }>(({columns}) =
         }
 
         > div[data-w=o23-playground-editor-toolbar-toc] {
-            border-top-color: ${PlaygroundCssVars.EDITOR_TOOLBAR_BUTTON_ACTIVE_BACKGROUND_COLOR};
-
             > span[data-w=o23-playground-editor-toolbar-toc-button]:not(:hover) {
                 color: ${PlaygroundCssVars.EDITOR_TOOLBAR_BUTTON_ACTIVE_BACKGROUND_COLOR};
             }
         }
-    }
-
-    > span[data-absolute=false] {
-        position: relative;
-    }
-
-    > span[data-absolute=true] {
-        position: absolute;
     }
 
     > div[data-w=o23-playground-editor-toolbar-toc] {
@@ -165,15 +151,12 @@ export const EditorToolbarButton = styled.span.attrs({[DOM_KEY_WIDGET]: 'o23-pla
     width: ${PlaygroundCssVars.EDITOR_TOOLBAR_BUTTON_WIDTH};
     height: ${PlaygroundCssVars.EDITOR_TOOLBAR_BUTTON_HEIGHT};
     color: ${PlaygroundCssVars.EDITOR_TOOLBAR_BUTTON_COLOR};
+    border-bottom: ${PlaygroundCssVars.EDITOR_TOOLBAR_BORDER};
     cursor: pointer;
     transition: color ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION}, background-color ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION}, border-color ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION};
 
-    &:not(:nth-child(6n + 1)) {
+    &:not(:first-child) {
         border-left: ${PlaygroundCssVars.EDITOR_TOOLBAR_BORDER};
-    }
-
-    &:nth-child(-n + 6) {
-        border-bottom: ${PlaygroundCssVars.EDITOR_TOOLBAR_BORDER};
     }
 
     &:hover {
@@ -196,7 +179,6 @@ export const EditorToolbarToc = styled.div.attrs({[DOM_KEY_WIDGET]: 'o23-playgro
     grid-template-columns: 1fr;
     grid-template-rows: auto 1fr;
     height: ${PlaygroundCssVars.EDITOR_TOOLBAR_TOC_HEIGHT};
-    border-top: ${PlaygroundCssVars.EDITOR_TOOLBAR_BORDER};
     border-radius: 0 0 ${PlaygroundCssVars.EDITOR_TOOLBAR_BORDER_RADIUS} ${PlaygroundCssVars.EDITOR_TOOLBAR_BORDER_RADIUS};
     transition: border-color ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION};
     overflow: hidden;
@@ -219,17 +201,23 @@ export const EditorToolbarTocButton = styled.span.attrs({[DOM_KEY_WIDGET]: 'o23-
         height: ${PlaygroundCssVars.EDITOR_TOOLBAR_TOC_HEIGHT};
     }
 `;
-export const EditorToolbarTocContainer = styled.div.attrs({
-	[DOM_KEY_WIDGET]: 'o23-playground-editor-toolbar-toc-container',
-	'data-v-scroll': '',
-	'data-h-scroll': ''
-})`
+// noinspection CssUnresolvedCustomProperty
+export const EditorToolbarTocContainer = styled.div.attrs<{ buttons: number }>(({buttons}) => {
+	return {
+		[DOM_KEY_WIDGET]: 'o23-playground-editor-toolbar-toc-container',
+		'data-v-scroll': '',
+		'data-h-scroll': '',
+		style: {
+			'--buttons': buttons
+		}
+	};
+})<{ buttons: number }>`
     display: flex;
     position: absolute;
     flex-direction: column;
     top: calc(${PlaygroundCssVars.EDITOR_TOOLBAR_HEIGHT} + ${PlaygroundCssVars.EDITOR_TOOLBAR_GUTTER_SIZE} * 2);
     right: ${PlaygroundCssVars.EDITOR_TOOLBAR_GUTTER_SIZE};
-    min-width: calc(${PlaygroundCssVars.EDITOR_TOOLBAR_BUTTON_WIDTH} * 6 + 2px);
+    min-width: calc(${PlaygroundCssVars.EDITOR_TOOLBAR_BUTTON_WIDTH} * var(--buttons) + 2px);
     max-width: max(33%, calc(${PlaygroundCssVars.EDITOR_TOOLBAR_BUTTON_WIDTH} * 6 + 2px));
     max-height: calc(100% - ${PlaygroundCssVars.EDITOR_TOOLBAR_HEIGHT} - ${PlaygroundCssVars.EDITOR_TOOLBAR_GUTTER_SIZE} * 3);
     border: ${PlaygroundCssVars.EDITOR_TOOLBAR_BORDER};

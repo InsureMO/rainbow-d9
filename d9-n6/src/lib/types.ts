@@ -51,6 +51,8 @@ export interface PlaygroundBehavior {
 	allowUploadFile?: boolean;
 	allowDownloadFile?: boolean;
 	allowDownloadImage?: boolean;
+	maxMode?: boolean;
+	zenMode?: boolean;
 }
 
 /** configuration definition */

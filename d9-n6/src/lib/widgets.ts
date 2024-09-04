@@ -38,7 +38,7 @@ export const PlaygroundCssVars = {
 	EDITOR_BACKGROUND_SIZE: `var(--o23-playground-editor-background-size, ${EDITOR_BACKGROUND_BLOCK_SIZE} ${EDITOR_BACKGROUND_BLOCK_SIZE})`,
 	EDITOR_BACKGROUND_POSITION: 'var(--o23-playground-editor-background-position, -1px -1px)',
 	EDITOR_ERROR_COLOR: `var(--o23-playground-editor-error-color, ${CssVars.DANGER_COLOR})`,
-	EDITOR_TOOLBAR_HEIGHT: 'var(--o23-playground-editor-toolbar-height, 92px)',
+	EDITOR_TOOLBAR_HEIGHT: 'var(--o23-playground-editor-toolbar-height, 62px)',
 	EDITOR_TOOLBAR_GUTTER_SIZE: 'var(--o23-playground-editor-toolbar-gutter-size, 8px)',
 	EDITOR_TOOLBAR_BORDER: `var(--o23-playground-editor-toolbar-border, 1px solid ${CssVars.BORDER_COLOR})`,
 	EDITOR_TOOLBAR_BORDER_RADIUS: `var(--o23-playground-editor-toolbar-border-radius, ${CssVars.BORDER_RADIUS})`,

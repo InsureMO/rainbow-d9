@@ -10,6 +10,7 @@ import {EditorToolbarTocContainer, EditorToolbarTocItem} from './widgets';
 
 export interface ToolbarTocProps {
 	expanded: boolean;
+	buttons: number;
 	stateRef: MutableRefObject<EditorKernelRefState>;
 }
 
@@ -21,7 +22,7 @@ interface TocItem {
 }
 
 export const ToolbarToc = (props: Omit<ToolbarTocProps, 'expanded'>) => {
-	const {stateRef} = props;
+	const {stateRef, buttons} = props;
 	const def = stateRef.current.def!;
 
 	const ref = useRef<HTMLDivElement>(null);
@@ -109,7 +110,7 @@ export const ToolbarToc = (props: Omit<ToolbarTocProps, 'expanded'>) => {
 		}
 	};
 
-	return <EditorToolbarTocContainer data-first-paint={firstPaint} ref={ref}>
+	return <EditorToolbarTocContainer data-first-paint={firstPaint} buttons={buttons} ref={ref}>
 		{items.map((item) => {
 			return <EditorToolbarTocItem onClick={onItemClick(item)} key={item.index}>
 				<span>{item.index}</span>
@@ -119,11 +120,11 @@ export const ToolbarToc = (props: Omit<ToolbarTocProps, 'expanded'>) => {
 	</EditorToolbarTocContainer>;
 };
 export const ToolbarTocWrapper = (props: ToolbarTocProps) => {
-	const {stateRef, expanded} = props;
+	const {stateRef, expanded, buttons} = props;
 
 	if (!expanded) {
 		return null;
 	}
 
-	return <ToolbarToc stateRef={stateRef}/>;
+	return <ToolbarToc stateRef={stateRef} buttons={buttons}/>;
 };

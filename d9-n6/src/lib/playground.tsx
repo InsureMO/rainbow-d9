@@ -61,6 +61,7 @@ export const PlaygroundDelegate = (props: PlaygroundProps) => {
 		$pp, $wrapped,
 		assistant, serializer, deserializer,
 		allowUploadFile = false, allowDownloadFile = true, allowDownloadImage = true,
+		maxMode = true, zenMode = true,
 		...rest
 	} = props;
 	const {$p2r, $onValueChange, $avs: {$disabled, $visible}} = $wrapped;
@@ -111,7 +112,8 @@ export const PlaygroundDelegate = (props: PlaygroundProps) => {
 		<Editor content={content} assistant={assistant}
 		        serializer={state.serializer} deserializer={state.deserializer}
 		        allowUploadFile={allowUploadFile} allowDownloadFile={allowDownloadFile}
-		        allowDownloadImage={allowDownloadImage}/>
+		        allowDownloadImage={allowDownloadImage}
+		        maxMode={maxMode} zenMode={zenMode}/>
 	</PlaygroundWrapper>;
 };
 

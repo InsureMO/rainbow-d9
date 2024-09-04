@@ -15,7 +15,7 @@ export const EditorKernel = (props: EditorProps) => {
 	const {
 		content, assistant,
 		serializer, deserializer,
-		allowUploadFile, allowDownloadFile, allowDownloadImage
+		allowUploadFile, allowDownloadFile, allowDownloadImage, maxMode, zenMode
 	} = props;
 
 	const wrapperRef = useRef<HTMLDivElement>(null);
@@ -71,7 +71,7 @@ export const EditorKernel = (props: EditorProps) => {
 			</EditorWrapper>
 			<Toolbar stateRef={stateRef} serializer={serializer}
 			         allowUploadFile={allowUploadFile} allowDownloadFile={allowDownloadFile}
-			         allowDownloadImage={allowDownloadImage}/>
+			         allowDownloadImage={allowDownloadImage} maxMode={maxMode} zenMode={zenMode}/>
 		</>;
 	} catch (error) {
 		return <EditorWrapper data-diagram-status={EditorKernelDiagramStatus.IGNORED} ref={wrapperRef}>

@@ -31,6 +31,8 @@ export interface ToolbarProps {
 	allowUploadFile: boolean;
 	allowDownloadFile: boolean;
 	allowDownloadImage: boolean;
+	maxMode: boolean;
+	zenMode: boolean;
 }
 
 export interface ToolbarState {
@@ -42,7 +44,7 @@ export interface ToolbarState {
 export const Toolbar = (props: ToolbarProps) => {
 	const {
 		stateRef, serializer,
-		allowUploadFile, allowDownloadFile, allowDownloadImage
+		allowUploadFile, allowDownloadFile, allowDownloadImage, maxMode, zenMode
 	} = props;
 
 	const ref = useRef<HTMLDivElement>(null);
@@ -156,18 +158,14 @@ export const Toolbar = (props: ToolbarProps) => {
 	const onUnfoldAllNodesClicked = () => fire(PlaygroundEventTypes.UNFOLD_ALL_NODES);
 	const onSwitchToc = (expanded: boolean) => () => setState(state => ({...state, tocExpanded: expanded}));
 
+	const columns = 11 - ((!zenMode || state.zen) ? 1 : 0) - ((!maxMode) ? 1 : 0)
+		- ((!allowDownloadFile) ? 1 : 0) - ((!allowDownloadImage) ? 1 : 0) - ((!allowUploadFile) ? 1 : 0);
 	return <>
-		<EditorToolbar columns={state.zen ? 5 : 6} data-toc-expanded={state.tocExpanded} ref={ref}>
+		<EditorToolbar columns={columns} data-toc-expanded={state.tocExpanded} ref={ref}>
 			<EditorToolbarButton onClick={onZoomInClicked}><ZoomIn/></EditorToolbarButton>
 			<EditorToolbarButton onClick={onZoomOutClicked}><ZoomOut/></EditorToolbarButton>
 			<EditorToolbarButton onClick={onOriginSizeClicked}><OriginSize/></EditorToolbarButton>
 			<EditorToolbarButton onClick={onFitCanvasClicked}><FitCanvas/></EditorToolbarButton>
-			{state.max ? null : <EditorToolbarButton onClick={onMaxClicked}><Max/></EditorToolbarButton>}
-			{(state.max && !state.zen) ?
-				<EditorToolbarButton onClick={onMinClicked}><Min/></EditorToolbarButton> : null}
-			{state.zen ? null : <EditorToolbarButton onClick={onZenClicked}><Zen/></EditorToolbarButton>}
-			{state.zen ? <EditorToolbarButton onClick={onWindowClicked}><Window/></EditorToolbarButton> : null}
-			<span data-absolute={state.zen}/>
 			<EditorToolbarButton onClick={onFoldAllNodesClicked}><FoldAllNodes/></EditorToolbarButton>
 			<EditorToolbarButton onClick={onUnfoldAllNodesClicked}><UnfoldAllNodes/></EditorToolbarButton>
 			{allowDownloadImage
@@ -176,12 +174,25 @@ export const Toolbar = (props: ToolbarProps) => {
 				? <EditorToolbarButton onClick={onDownloadFileClicked}><DownloadFile/></EditorToolbarButton> : null}
 			{allowUploadFile
 				? <EditorToolbarButton onClick={onUploadFileClicked}><UploadFile/></EditorToolbarButton> : null}
+			{maxMode
+				? (state.max ? null : <EditorToolbarButton onClick={onMaxClicked}><Max/></EditorToolbarButton>)
+				: null}
+			{maxMode
+				? ((state.max && !state.zen) ?
+					<EditorToolbarButton onClick={onMinClicked}><Min/></EditorToolbarButton> : null)
+				: null}
+			{zenMode
+				? (state.zen ? null : <EditorToolbarButton onClick={onZenClicked}><Zen/></EditorToolbarButton>)
+				: null}
+			{zenMode
+				? (state.zen ? <EditorToolbarButton onClick={onWindowClicked}><Window/></EditorToolbarButton> : null)
+				: null}
 			<EditorToolbarToc>
 				{state.tocExpanded
 					? <EditorToolbarTocButton onClick={onSwitchToc(false)}><CollapseToc/></EditorToolbarTocButton>
 					: <EditorToolbarTocButton onClick={onSwitchToc(true)}><ExpandToc/></EditorToolbarTocButton>}
 			</EditorToolbarToc>
 		</EditorToolbar>
-		<ToolbarTocWrapper expanded={state.tocExpanded} stateRef={stateRef}/>
+		<ToolbarTocWrapper expanded={state.tocExpanded} buttons={columns} stateRef={stateRef}/>
 	</>;
 };
