@@ -20,6 +20,7 @@ export enum RootEventTypes {
 	REGISTER_VALIDATABLE = 'register-validatable',
 	UNREGISTER_VALIDATABLE = 'unregister-validatable',
 	DEVICE_CHANGED = 'device-changed',
+	THEME_CHANGED = 'theme-changed'
 }
 
 export interface ValidatedOptions<R extends BaseModel, M extends PropValue, V extends PropValue> extends ValidationResult {
@@ -33,40 +34,26 @@ export interface ValidatedOptions<R extends BaseModel, M extends PropValue, V ex
 
 export interface RootEventBus {
 	fire(type: RootEventTypes.VALUE_CHANGED, absolutePath: PropertyPath, from: PropValue, to: PropValue): this;
-
 	on(type: RootEventTypes.VALUE_CHANGED, listener: (absolutePath: PropertyPath, from: PropValue, to: PropValue) => void): this;
-
 	off(type: RootEventTypes.VALUE_CHANGED, listener: (absolutePath: PropertyPath, from: PropValue, to: PropValue) => void): this;
-
 	fire(type: RootEventTypes.VALIDATE, scopes: Array<NodeValidationScope>, onValidated: (validated: ValidatedSet) => void): this;
-
 	on(type: RootEventTypes.VALIDATE, listener: (scopes: Array<NodeValidationScope>, onValidated: (validated: ValidatedSet) => void) => void): this;
-
 	off(type: RootEventTypes.VALIDATE, listener: (scopes: Array<NodeValidationScope>, onValidated: (validated: ValidatedSet) => void) => void): this;
-
 	fire<R extends BaseModel, M extends PropValue, V extends PropValue>(type: RootEventTypes.VALIDATED, options: ValidatedOptions<R, M, V>): this;
-
 	on<R extends BaseModel, M extends PropValue, V extends PropValue>(type: RootEventTypes.VALIDATED, listener: (options: ValidatedOptions<R, M, V>) => void): this;
-
 	off<R extends BaseModel, M extends PropValue, V extends PropValue>(type: RootEventTypes.VALIDATED, listener: (options: ValidatedOptions<R, M, V>) => void): this;
-
 	fire(type: RootEventTypes.REGISTER_VALIDATABLE, uniqueId: NodeUniqueKey, scopes: Array<NodeValidationScope>, validate: () => Promise<Validated>): this;
-
 	on(type: RootEventTypes.REGISTER_VALIDATABLE, listener: (uniqueId: NodeUniqueKey, scopes: Array<NodeValidationScope>, validate: () => Promise<Validated>) => void): this;
-
 	off(type: RootEventTypes.REGISTER_VALIDATABLE, listener: (uniqueId: NodeUniqueKey, scopes: Array<NodeValidationScope>, validate: () => Promise<Validated>) => void): this;
-
 	fire(type: RootEventTypes.UNREGISTER_VALIDATABLE, uniqueId: NodeUniqueKey): this;
-
 	on(type: RootEventTypes.UNREGISTER_VALIDATABLE, listener: (uniqueId: NodeUniqueKey) => void): this;
-
 	off(type: RootEventTypes.UNREGISTER_VALIDATABLE, listener: (uniqueId: NodeUniqueKey) => void): this;
-
 	fire(type: RootEventTypes.DEVICE_CHANGED, tags: DeviceTags): this;
-
 	on(type: RootEventTypes.DEVICE_CHANGED, listener: (tags: DeviceTags) => void): this;
-
 	off(type: RootEventTypes.DEVICE_CHANGED, listener: (tags: DeviceTags) => void): this;
+	fire(type: RootEventTypes.THEME_CHANGED, theme: string): this;
+	on(type: RootEventTypes.THEME_CHANGED, listener: (theme: string) => void): this;
+	off(type: RootEventTypes.THEME_CHANGED, listener: (theme: string) => void): this;
 }
 
 const Context = createContext<RootEventBus>({} as RootEventBus);
