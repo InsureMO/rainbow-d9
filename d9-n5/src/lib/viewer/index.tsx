@@ -8,7 +8,7 @@ import {MockJsonDialog} from './mock-json-dialog';
 import {ParseError, ViewerWrapper} from './widgets';
 
 export const Viewer = (props: ViewerProps) => {
-	const {minViewerWidth, mockData} = props;
+	const {minViewerWidth, mockData, decorator} = props;
 
 	const {on, off} = usePlaygroundEventBus();
 	const {replace} = useThrottler();
@@ -25,13 +25,13 @@ export const Viewer = (props: ViewerProps) => {
 
 	if (VUtils.isBlank(content)) {
 		return <ViewerWrapper minViewerWidth={minViewerWidth}>
-			<MockJsonDialog mockData={mockData}/>
+			<MockJsonDialog mockData={mockData} decorator={decorator}/>
 			<ParseError>{Labels.NoContentGiven}</ParseError>
 		</ViewerWrapper>;
 	}
 
 	return <>
-		<MockJsonDialog mockData={mockData}/>
+		<MockJsonDialog mockData={mockData} decorator={decorator}/>
 		<ViewerKernel {...props} content={content}/>
 	</>;
 };

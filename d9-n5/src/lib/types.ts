@@ -1,3 +1,4 @@
+import {Extension} from '@codemirror/state';
 import {
 	BaseModel,
 	ExternalDefKey,
@@ -111,6 +112,11 @@ export interface PlaygroundWidgetUsage {
 	useCharts?: boolean;
 }
 
+export interface PlaygroundDecorator {
+	/** only for editor and json dialog */
+	theme?: (theme?: string) => Extension;
+}
+
 /** configuration definition */
 export type PlaygroundDef = ValueChangeableNodeDef & OmitHTMLProps<HTMLDivElement> & {
 	mockData?: BaseModel | (() => Promise<BaseModel>);
@@ -122,6 +128,7 @@ export type PlaygroundDef = ValueChangeableNodeDef & OmitHTMLProps<HTMLDivElemen
 	minViewerWidth?: number;
 	maxMode?: boolean;
 	zenMode?: boolean;
+	decorator?: PlaygroundDecorator;
 };
 
 /** widget definition, with html attributes */
@@ -131,12 +138,14 @@ export interface EditorProps {
 	content?: string;
 	externalDefsTypes?: ExternalDefsTypes;
 	widgets: Required<PlaygroundWidgets>;
+	decorator?: PlaygroundDecorator;
 }
 
 export interface ViewerProps {
 	mockData: BaseModel;
 	externalDefs?: ExternalDefs;
 	minViewerWidth?: number;
+	decorator?: PlaygroundDecorator;
 }
 
 /** Section configuration definition */

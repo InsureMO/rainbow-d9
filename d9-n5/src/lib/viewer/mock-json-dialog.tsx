@@ -1,15 +1,17 @@
 import {indentWithTab} from '@codemirror/commands';
 import {json, jsonParseLinter} from '@codemirror/lang-json';
 import {linter, lintGutter} from '@codemirror/lint';
-import {EditorState as CodeMirrorState} from '@codemirror/state';
+import {Compartment, EditorState as CodeMirrorState} from '@codemirror/state';
 import {EditorView, keymap} from '@codemirror/view';
 import {BaseModel} from '@rainbow-d9/n1';
 import {ButtonInk, CssVars, DOM_KEY_WIDGET, toIntlLabel, UnwrappedButton} from '@rainbow-d9/n2';
 import {basicSetup} from 'codemirror';
 import React, {ReactNode, useEffect, useRef, useState} from 'react';
 import styled from 'styled-components';
+import {createTheme, useTheme} from '../hooks/use-theme';
 import {Labels} from '../labels';
 import {PlaygroundEventTypes, usePlaygroundEventBus} from '../playground-event-bus';
+import {PlaygroundDecorator} from '../types';
 import {PlaygroundCssVars} from '../widgets';
 
 export const MockJsonDialogContainer = styled.div.attrs<{ visible: boolean }>(({visible}) => {
@@ -109,17 +111,19 @@ export const MockJsonDialogFooter = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-play
 
 export interface MockJsonDialogProps {
 	mockData: BaseModel;
+	decorator?: PlaygroundDecorator;
 }
 
 export interface MockJsonDialogState {
 	visible: boolean;
 	editor?: EditorView;
+	themeListener?: Compartment;
 	reason?: ReactNode;
 	copied: boolean;
 }
 
 export const MockJsonDialog = (props: MockJsonDialogProps) => {
-	const {mockData} = props;
+	const {mockData, decorator: {theme} = {}} = props;
 
 	const ref = useRef<HTMLDivElement>(null);
 	const {on, off, fire} = usePlaygroundEventBus();
@@ -129,6 +133,7 @@ export const MockJsonDialog = (props: MockJsonDialogProps) => {
 			return;
 		}
 
+		const {extension: changeableThemeExtension, listener: themeListener} = createTheme(theme);
 		const editor = new EditorView({
 			state: CodeMirrorState.create({
 				doc: '',
@@ -137,15 +142,18 @@ export const MockJsonDialog = (props: MockJsonDialogProps) => {
 					keymap.of([indentWithTab]),
 					json(),
 					lintGutter(),
-					linter(jsonParseLinter())
+					linter(jsonParseLinter()),
+					...changeableThemeExtension
 				]
 			}),
 			parent: ref.current
 		});
-		setState(state => ({...state, editor}));
+
+		setState(state => ({...state, editor, themeListener}));
 		return () => {
 			editor.destroy();
 		};
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 	useEffect(() => {
 		const show = () => {
@@ -176,6 +184,7 @@ export const MockJsonDialog = (props: MockJsonDialogProps) => {
 			}, 5000);
 		}
 	}, [state.copied]);
+	useTheme({theme, editor: state.editor, listener: state.themeListener});
 
 	const onCopyToClipboard = async () => {
 		const json = state.editor.state.doc.toString();

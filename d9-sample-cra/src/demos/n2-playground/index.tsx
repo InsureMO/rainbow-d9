@@ -1,6 +1,15 @@
-import {ContainerDef, ExternalDefIndicator, ExternalDefs, StandaloneRoot} from '@rainbow-d9/n1';
-import {DropdownOption, GlobalRoot} from '@rainbow-d9/n2';
-import {ExternalDefsTypes, PlaygroundDef} from '@rainbow-d9/n5';
+import {
+	BridgeEventBusProvider,
+	BridgeToRootEventTypes,
+	ContainerDef,
+	ExternalDefIndicator,
+	ExternalDefs,
+	StandaloneRoot,
+	useBridgeEventBus
+} from '@rainbow-d9/n1';
+import {ButtonBarAlignment, DropdownOption, GlobalRoot, UnwrappedButton, UnwrappedButtonBar} from '@rainbow-d9/n2';
+import {ExternalDefsTypes, PlaygroundDecorator, PlaygroundDef} from '@rainbow-d9/n5';
+import {vscodeDark, vscodeLight} from '@uiw/codemirror-theme-vscode';
 import {useDemoMarkdown} from '../use-demo-markdown';
 import DemoData from './demo.json';
 import {markdown as DemoContent} from './demo.md';
@@ -35,7 +44,12 @@ export const N2Playground = () => {
 						$wt, properties: ['options'], label: 'Gender options.'
 					}))
 				}
-			} as ExternalDefsTypes
+			} as ExternalDefsTypes,
+			decorator: {
+				theme: (theme?: string) => {
+					return theme === 'dark' ? vscodeDark : vscodeLight;
+				}
+			} as PlaygroundDecorator
 		}
 	};
 
@@ -91,9 +105,25 @@ export const N2Playground = () => {
 	(((def as ContainerDef).$nodes[0] as ContainerDef).$nodes[0] as PlaygroundDef).mockData = new ExternalDefIndicator('playground.mockData');
 
 	return <GlobalRoot>
-		<StandaloneRoot {...def} $root={DemoData} externalDefs={externalDefs}/>
+		<BridgeEventBusProvider>
+			<ThemeSwitcher/>
+			<StandaloneRoot {...def} $root={DemoData} externalDefs={externalDefs}/>
+		</BridgeEventBusProvider>
 	</GlobalRoot>;
 };
 
+const ThemeSwitcher = () => {
+	const {fire} = useBridgeEventBus();
+	const onLightClicked = () => fire(BridgeToRootEventTypes.THEME_CHANGED, 'light');
+	const onDarkClicked = () => fire(BridgeToRootEventTypes.THEME_CHANGED, 'dark');
+
+	// @ts-ignore
+	return <UnwrappedButtonBar alignment={ButtonBarAlignment.CENTER}>
+		{/** @ts-ignore */}
+		<UnwrappedButton onClick={onLightClicked}>Light</UnwrappedButton>
+		{/** @ts-ignore */}
+		<UnwrappedButton onClick={onDarkClicked}>Dark</UnwrappedButton>
+	</UnwrappedButtonBar>;
+};
 export const PlaygroundData = DemoData;
 export const PlaygroundMarkdown = DemoContent;

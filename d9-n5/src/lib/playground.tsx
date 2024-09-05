@@ -60,7 +60,7 @@ export const PlaygroundDelegate = (props: PlaygroundProps) => {
 		mockData,
 		externalDefs, externalDefsTypes,
 		widgets, usage: {useN2 = true, useCharts = false} = {} as PlaygroundWidgetUsage,
-		minViewerWidth, maxMode, zenMode,
+		minViewerWidth, maxMode, zenMode, decorator,
 		...rest
 	} = props;
 	const {$p2r, $onValueChange, $avs: {$disabled, $visible}} = $wrapped;
@@ -96,10 +96,12 @@ export const PlaygroundDelegate = (props: PlaygroundProps) => {
 		<Toolbar groups={availableWidgets.groups} widgets={availableWidgets.widgets}
 		         maxMode={maxMode} zenMode={zenMode}/>
 		<Editor content={content}
-		        externalDefsTypes={initializedExternalDefsTypes} widgets={availableWidgets}/>
+		        externalDefsTypes={initializedExternalDefsTypes} widgets={availableWidgets}
+		        decorator={decorator}/>
 		<Help/>
 		<Viewer mockData={initializedMockData!} externalDefs={initializedExternalDefs}
-		        minViewerWidth={minViewerWidth}/>
+		        minViewerWidth={minViewerWidth}
+		        decorator={decorator}/>
 		<Slider resizeTo={resizeTo}/>
 	</PlaygroundWrapper>;
 };

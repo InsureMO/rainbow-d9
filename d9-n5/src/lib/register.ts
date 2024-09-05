@@ -1,7 +1,7 @@
 import {NodeDef, registerWidget, Undefinable, VUtils} from '@rainbow-d9/n1';
 import {Widget} from '@rainbow-d9/n3';
 import {Playground} from './playground';
-import {PlaygroundDef, PlaygroundWidgetUsage} from './types';
+import {PlaygroundDecorator, PlaygroundDef} from './types';
 import {PLAYGROUND_WIDGET_WRAPPER, PlaygroundWidgetWrapper} from './widget-wrapper';
 
 Widget.ValidatorUtils.registerRegexps({'abc': /^abc$/});
@@ -9,6 +9,7 @@ Widget.ValidatorUtils.registerRegexps({'abc': /^abc$/});
 export const PlaygroundMockDataBuild = Widget.createAsyncSnippetBuild<PlaygroundDef, 'mockData'>('mockData', []);
 export const PlaygroundExternalDefsBuild = Widget.createAsyncSnippetBuild<PlaygroundDef, 'externalDefs'>('externalDefs', []);
 export const PlaygroundExternalDefsTypesBuild = Widget.createAsyncSnippetBuild<PlaygroundDef, 'externalDefsTypes'>('externalDefsTypes', []);
+export const PlaygroundThemeBuild = Widget.createAsyncSnippetBuild<PlaygroundDecorator, 'theme'>('theme', ['theme']);
 
 export abstract class AbstractPlaygroundTranslator extends Widget.SpecificWidgetTranslator<string> {
 	public beautifyProperties<Def extends NodeDef>(def: Partial<Def>): Def {
@@ -24,16 +25,18 @@ export abstract class AbstractPlaygroundTranslator extends Widget.SpecificWidget
 		return [
 			PlaygroundMockDataBuild,
 			PlaygroundExternalDefsBuild,
-			PlaygroundExternalDefsTypesBuild
+			PlaygroundExternalDefsTypesBuild,
+			PlaygroundThemeBuild
 		];
 	}
 
 	public getAttributeNamesMapping(): Undefinable<Record<Widget.CustomAttributeName, Widget.WidgetPropertyName>> {
-		const keys: Array<keyof PlaygroundWidgetUsage> = ['useN2', 'useCharts'];
-		return keys.reduce((mapping, key) => {
-			mapping[`${this.getSupportedType()}.${key}`] = `usage.${key}`;
-			return mapping;
-		}, {});
+		const type = this.getSupportedType();
+		return {
+			[`${type}.useN2`]: 'usage.useN2',
+			[`${type}.useCharts`]: 'usage.useCharts',
+			[`${type}.theme`]: 'decorator.theme'
+		};
 	}
 }
 

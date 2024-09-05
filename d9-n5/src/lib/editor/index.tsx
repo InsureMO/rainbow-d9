@@ -1,11 +1,12 @@
 import {indentWithTab} from '@codemirror/commands';
 import {javascript} from '@codemirror/lang-javascript';
 import {markdown, markdownLanguage} from '@codemirror/lang-markdown';
-import {EditorState as CodeMirrorState} from '@codemirror/state';
+import {Compartment, EditorState as CodeMirrorState} from '@codemirror/state';
 import {EditorView, keymap, ViewUpdate} from '@codemirror/view';
 import {WidgetType} from '@rainbow-d9/n1';
 import {basicSetup} from 'codemirror';
 import React, {useEffect, useRef, useState} from 'react';
+import {createTheme, useTheme} from '../hooks/use-theme';
 import {PlaygroundEventTypes, usePlaygroundEventBus} from '../playground-event-bus';
 import {EditorProps, PlaygroundWidgetGroupKey} from '../types';
 import {
@@ -22,13 +23,14 @@ import {EditorPanel, EditorWrapper} from './widgets';
 export interface EditorState {
 	size?: number;
 	editor?: EditorView;
+	themeListener?: Compartment;
 	editorBadge: boolean;
 }
 
 export const Editor = (props: EditorProps) => {
 	const {
 		content,
-		externalDefsTypes, widgets,
+		externalDefsTypes, widgets, decorator: {theme} = {},
 		...rest
 	} = props;
 
@@ -40,6 +42,7 @@ export const Editor = (props: EditorProps) => {
 			return;
 		}
 
+		const {extension: changeableThemeExtension, listener: themeListener} = createTheme(theme);
 		const editor = new EditorView({
 			state: CodeMirrorState.create({
 				doc: '',
@@ -54,6 +57,7 @@ export const Editor = (props: EditorProps) => {
 					}),
 					...createWidgetLinter({widgets, externalDefsTypes: externalDefsTypes ?? {}}),
 					WidgetDeclarationIconPlugin,
+					...changeableThemeExtension,
 					EditorView.updateListener.of((view: ViewUpdate) => {
 						if (view.docChanged) {
 							const doc = view.state.doc;
@@ -65,10 +69,11 @@ export const Editor = (props: EditorProps) => {
 			}),
 			parent: ref.current
 		});
-		setState(state => ({...state, editor}));
+		setState(state => ({...state, editor, themeListener}));
 		return () => {
 			editor.destroy();
 		};
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [fire, widgets, externalDefsTypes]);
 	useEffect(() => {
 		if (state.editor == null) {
@@ -228,6 +233,7 @@ export const Editor = (props: EditorProps) => {
 			off(PlaygroundEventTypes.INSERT_WIDGET_TEMPLATE, onInsertWidgetTemplate);
 		};
 	}, [on, off, fire, state.editor, widgets.widgets]);
+	useTheme({theme, editor: state.editor, listener: state.themeListener});
 
 	return <>
 		<WidgetTemplateDialog widgets={widgets}/>
