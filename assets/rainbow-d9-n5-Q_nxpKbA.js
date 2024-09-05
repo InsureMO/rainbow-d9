@@ -4,11 +4,11 @@ var __publicField = (obj, key, value) => {
   __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
   return value;
 };
-import { i as index$2, I as IntlLabel, D as DOM_KEY_WIDGET, C as CssVars, d as utils$2, b as useGlobalHandlers, t as toIntlLabel, U as UnwrappedButton, B as ButtonInk, e as ButtonFill } from "./rainbow-d9-n2--Bk5Qy5v.js";
-import { R as React, r as reactExports, q as qe } from "./react-base-Z1gRHTGG.js";
-import { V as VUtils, r as registerWidget, g as useCreateEventBus, M as MUtils, P as PPUtils, a as useThrottler, u as useRootEventBus, R as RootEventTypes, e as useForceUpdate, S as StandaloneRoot, m as ExternalDefMismatchIndicator } from "./rainbow-d9-n1-88ursp9F.js";
-import { T as Tag, r as tags, V as ViewPlugin, u as syntaxTree, H as HighlightStyle, v as defaultHighlightStyle, w as syntaxHighlighting, x as styleTags, D as Decoration, I as InlineContext, W as WidgetType, y as EditorView, z as EditorState, A as basicSetup, B as keymap, C as indentWithTab, F as markdown, G as javascript, J as markdownLanguage, K as lintGutter, L as linter, N as json, O as Compartment, P as jsonParseLinter } from "./vendor-ZfeLJAN2.js";
-import { a as index, b as index$2$1, i as index$1, p as parseDoc } from "./rainbow-d9-n3-lLxtMVrh.js";
+import { i as index$2, I as IntlLabel, D as DOM_KEY_WIDGET, C as CssVars, d as utils$2, b as useGlobalHandlers, t as toIntlLabel, U as UnwrappedButton, B as ButtonInk, e as ButtonFill } from "./rainbow-d9-n2-MFVsxnoK.js";
+import { R as React, r as reactExports, q as qe } from "./react-base-IBs3ZG0N.js";
+import { V as VUtils, r as registerWidget, g as useCreateEventBus, M as MUtils, P as PPUtils, a as useThrottler, u as useRootEventBus, R as RootEventTypes, e as useForceUpdate, S as StandaloneRoot, m as ExternalDefMismatchIndicator } from "./rainbow-d9-n1-7UJE-PMv.js";
+import { T as Tag, r as tags, V as ViewPlugin, u as syntaxTree, H as HighlightStyle, v as defaultHighlightStyle, w as syntaxHighlighting, x as styleTags, D as Decoration, I as InlineContext, W as WidgetType, y as EditorView, z as EditorState, A as basicSetup, B as keymap, C as indentWithTab, F as markdown, G as javascript, J as markdownLanguage, K as lintGutter, L as linter, N as json, O as Compartment, P as jsonParseLinter } from "./vendor-zxjJr8CJ.js";
+import { a as index, b as index$2$1, i as index$1, p as parseDoc } from "./rainbow-d9-n3-0eTMBa5Q.js";
 var PlaygroundWidgetGroupKey;
 (function(PlaygroundWidgetGroupKey2) {
   PlaygroundWidgetGroupKey2["CONTAINERS"] = "container-group";
@@ -17,39 +17,63 @@ var PlaygroundWidgetGroupKey;
   PlaygroundWidgetGroupKey2["DISPLAY"] = "display-group";
   PlaygroundWidgetGroupKey2["NOT_CARE"] = "not-care";
 })(PlaygroundWidgetGroupKey || (PlaygroundWidgetGroupKey = {}));
-const PlaygroundCssVars = {
-  Z_INDEX: 9999999,
-  TOOLBAR_BACKGROUND_COLOR: `var(--d9-playground-toolbar-background-color, ${CssVars.BACKGROUND_COLOR})`,
-  TOOLBAR_BUTTON_SIZE: "var(--d9-playground-toolbar-button-size, 30px)",
-  TOOLBAR_BUTTON_ACTIVE_COLOR: `var(--d9-playground-toolbar-button-active-color, ${CssVars.PRIMARY_COLOR})`,
-  TOOLBAR_BUTTON_HOVER_COLOR: `var(--d9-playground-toolbar-hover-color, ${CssVars.HOVER_COLOR})`,
-  TOOLBAR_TOOLTIP_BACKGROUND_COLOR: `var(--d9-playground-toolbar-tooltip-background-color, ${CssVars.BACKGROUND_COLOR})`,
-  TOOLBAR_TOOLTIP_SHADOW: `var(--d9-playground-toolbar-tooltip-shadow, ${CssVars.WAIVE_HOVER_SHADOW})`,
-  SLIDER_BACKGROUND_COLOR: `var(--d9-playground-slider-background-color, ${CssVars.HOVER_COLOR})`,
-  WIDGET_DECLARATION_INSTRUCTION_COLOR: "var(--d9-playground-widget-declaration-instruction-color, rgb(134, 54, 153))",
-  WIDGET_DECLARATION_SPLITTER_COLOR: "var(--d9-playground-widget-declaration-splitter-color, rgb(85, 85, 85, 0.7))",
-  WIDGET_DECLARATION_TYPE_COLOR: "var(--d9-playground-widget-declaration-type-color, rgb(134, 54, 153))",
-  WIDGET_DECLARATION_HEADLINE_COLOR: "var(--d9-playground-widget-declaration-headline-color, rgb(55, 122, 41))",
-  WIDGET_DECLARATION_PROPERTY_COLOR: "var(--d9-playground-widget-declaration-property-color, rgb(70, 141, 142))",
-  WIDGET_DECLARATION_ID_COLOR: "var(--d9-playground-widget-declaration-id-color, rgb(70, 141, 142))",
-  WIDGET_DECLARATION_FLAG_COLOR: "var(--d9-playground-widget-declaration-flag-color, rgb(114, 113, 64))",
-  WIDGET_DECLARATION_ATTR_NAME_COLOR: "var(--d9-playground-widget-declaration-attr-name-color, rgb(79, 148, 149))",
-  WIDGET_DECLARATION_ATTR_VALUE_ICON_COLOR: "var(--d9-playground-widget-declaration-attr-name-color, rgb(55, 122, 41))",
-  WIDGET_DECLARATION_ATTR_VALUE_STR_COLOR: "var(--d9-playground-widget-declaration-attr-name-color, rgb(55, 122, 41))",
-  WIDGET_DECLARATION_ATTR_VALUE_EXT_COLOR: "var(--d9-playground-widget-declaration-attr-name-color, rgb(10, 56, 172))",
-  VIEWER_ERROR_COLOR: `var(--d9-playground-viewer-error-color, ${CssVars.DANGER_COLOR})`,
-  TEMPLATE_DIALOG_WIDTH: "var(--d9-playground-template-dialog-width, 70vw)",
-  TEMPLATE_DIALOG_HEIGHT: "var(--d9-playground-template-dialog-height, 60vh)",
-  TEMPLATE_DIALOG_MARGIN_TOP: "var(--d9-playground-template-dialog-margin-top, min(10vh, calc(20vh - 60px)))",
-  TEMPLATE_DIALOG_MARGIN_LEFT: "var(--d9-playground-template-dialog-margin-left, 15vw)",
-  TEMPLATE_DIALOG_PADDING: "var(--d9-playground-template-dialog-padding, 32px 32px 16px)",
-  TEMPLATE_DIALOG_BODY_MARGIN_BOTTOM: "var(--d9-playground-template-dialog-margin-bottom, 16px)",
-  WIDGET_WRAPPER_Z_INDEX: 2e9,
-  WIDGET_WRAPPER_BORDER_RADIUS: "var(--d9-playground-ww-border-radius, 4px)",
-  WIDGET_WRAPPER_SHADOW: "var(--d9-playground-ww-shadow, 0 0 5px 2px rgba(0,0,0,0.2))",
-  WIDGET_WRAPPER_TOOLBAR_COLOR: "var(--d9-playground-ww-toolbar-color, rgba(0,0,0,0.4))",
-  WIDGET_WRAPPER_TOOLBAR_FILTER: "var(--d9-playground-ww-toolbar-filter, drop-shadow(2px 4px 6px black))"
+const PlaygroundCssConstants = {
+  BACKGROUND_COLOR: CssVars.BACKGROUND_COLOR,
+  HOVER_COLOR: CssVars.HOVER_COLOR,
+  DANGER_COLOR: CssVars.DANGER_COLOR,
+  BUTTON_ACTIVE_COLOR: CssVars.PRIMARY_COLOR,
+  TOOLTIP_SHADOW: CssVars.WAIVE_HOVER_SHADOW,
+  WIDGET_DECLARATION_INSTRUCTION_COLOR: "rgb(134, 54, 153)",
+  WIDGET_DECLARATION_SPLITTER_COLOR: "rgb(85, 85, 85, 0.7)",
+  WIDGET_DECLARATION_TYPE_COLOR: "rgb(134, 54, 153)",
+  WIDGET_DECLARATION_HEADLINE_COLOR: "rgb(55, 122, 41)",
+  WIDGET_DECLARATION_PROPERTY_COLOR: "rgb(70, 141, 142)",
+  WIDGET_DECLARATION_ID_COLOR: "rgb(70, 141, 142)",
+  WIDGET_DECLARATION_FLAG_COLOR: "rgb(114, 113, 64)",
+  WIDGET_DECLARATION_ATTR_NAME_COLOR: "rgb(79, 148, 149)",
+  WIDGET_DECLARATION_ATTR_VALUE_ICON_COLOR: "rgb(55, 122, 41)",
+  WIDGET_DECLARATION_ATTR_VALUE_STR_COLOR: "rgb(55, 122, 41)",
+  WIDGET_DECLARATION_ATTR_VALUE_EXT_COLOR: "rgb(10, 56, 172)",
+  WIDGET_WRAPPER_SHADOW: "0 0 5px 2px rgba(0,0,0,0.2)",
+  WIDGET_WRAPPER_TOOLBAR_COLOR: "rgba(0,0,0,0.4)",
+  WIDGET_WRAPPER_TOOLBAR_FILTER: "drop-shadow(2px 4px 6px rgb(0,0,0))"
 };
+const createPlaygroundCssVars = (variables) => {
+  return {
+    Z_INDEX: 9999999,
+    TOOLBAR_BACKGROUND_COLOR: `var(--d9-playground-toolbar-background-color, ${variables.BACKGROUND_COLOR})`,
+    TOOLBAR_BUTTON_SIZE: "var(--d9-playground-toolbar-button-size, 30px)",
+    TOOLBAR_BUTTON_ACTIVE_COLOR: `var(--d9-playground-toolbar-button-active-color, ${variables.BUTTON_ACTIVE_COLOR})`,
+    TOOLBAR_BUTTON_HOVER_COLOR: `var(--d9-playground-toolbar-hover-color, ${variables.HOVER_COLOR})`,
+    TOOLBAR_TOOLTIP_BACKGROUND_COLOR: `var(--d9-playground-toolbar-tooltip-background-color, ${variables.BACKGROUND_COLOR})`,
+    TOOLBAR_TOOLTIP_SHADOW: `var(--d9-playground-toolbar-tooltip-shadow, ${variables.TOOLTIP_SHADOW})`,
+    SLIDER_BACKGROUND_COLOR: `var(--d9-playground-slider-background-color, ${variables.HOVER_COLOR})`,
+    WIDGET_DECLARATION_INSTRUCTION_COLOR: `var(--d9-playground-widget-declaration-instruction-color, ${variables.WIDGET_DECLARATION_INSTRUCTION_COLOR})`,
+    WIDGET_DECLARATION_SPLITTER_COLOR: `var(--d9-playground-widget-declaration-splitter-color, ${variables.WIDGET_DECLARATION_SPLITTER_COLOR})`,
+    WIDGET_DECLARATION_TYPE_COLOR: `var(--d9-playground-widget-declaration-type-color, ${variables.WIDGET_DECLARATION_TYPE_COLOR})`,
+    WIDGET_DECLARATION_HEADLINE_COLOR: `var(--d9-playground-widget-declaration-headline-color, ${variables.WIDGET_DECLARATION_HEADLINE_COLOR})`,
+    WIDGET_DECLARATION_PROPERTY_COLOR: `var(--d9-playground-widget-declaration-property-color, ${variables.WIDGET_DECLARATION_PROPERTY_COLOR})`,
+    WIDGET_DECLARATION_ID_COLOR: `var(--d9-playground-widget-declaration-id-color, ${variables.WIDGET_DECLARATION_ID_COLOR})`,
+    WIDGET_DECLARATION_FLAG_COLOR: `var(--d9-playground-widget-declaration-flag-color, ${variables.WIDGET_DECLARATION_FLAG_COLOR})`,
+    WIDGET_DECLARATION_ATTR_NAME_COLOR: `var(--d9-playground-widget-declaration-attr-name-color, ${variables.WIDGET_DECLARATION_ATTR_NAME_COLOR})`,
+    WIDGET_DECLARATION_ATTR_VALUE_ICON_COLOR: `var(--d9-playground-widget-declaration-attr-name-color, ${variables.WIDGET_DECLARATION_ATTR_VALUE_ICON_COLOR})`,
+    WIDGET_DECLARATION_ATTR_VALUE_STR_COLOR: `var(--d9-playground-widget-declaration-attr-name-color, ${variables.WIDGET_DECLARATION_ATTR_VALUE_STR_COLOR})`,
+    WIDGET_DECLARATION_ATTR_VALUE_EXT_COLOR: `var(--d9-playground-widget-declaration-attr-name-color, ${variables.WIDGET_DECLARATION_ATTR_VALUE_EXT_COLOR})`,
+    VIEWER_ERROR_COLOR: `var(--d9-playground-viewer-error-color, ${variables.DANGER_COLOR})`,
+    TEMPLATE_DIALOG_WIDTH: "var(--d9-playground-template-dialog-width, 70vw)",
+    TEMPLATE_DIALOG_HEIGHT: "var(--d9-playground-template-dialog-height, 60vh)",
+    TEMPLATE_DIALOG_MARGIN_TOP: "var(--d9-playground-template-dialog-margin-top, min(10vh, calc(20vh - 60px)))",
+    TEMPLATE_DIALOG_MARGIN_LEFT: "var(--d9-playground-template-dialog-margin-left, 15vw)",
+    TEMPLATE_DIALOG_PADDING: "var(--d9-playground-template-dialog-padding, 32px 32px 16px)",
+    TEMPLATE_DIALOG_BODY_MARGIN_BOTTOM: "var(--d9-playground-template-dialog-margin-bottom, 16px)",
+    WIDGET_WRAPPER_Z_INDEX: 2e9,
+    WIDGET_WRAPPER_BORDER_RADIUS: "var(--d9-playground-ww-border-radius, 4px)",
+    WIDGET_WRAPPER_SHADOW: `var(--d9-playground-ww-shadow, ${variables.WIDGET_WRAPPER_SHADOW})`,
+    WIDGET_WRAPPER_TOOLBAR_COLOR: `var(--d9-playground-ww-toolbar-color, ${variables.WIDGET_WRAPPER_TOOLBAR_COLOR})`,
+    WIDGET_WRAPPER_TOOLBAR_FILTER: `var(--d9-playground-ww-toolbar-filter, ${variables.WIDGET_WRAPPER_TOOLBAR_FILTER})`
+  };
+};
+const PlaygroundCssVars = createPlaygroundCssVars(PlaygroundCssConstants);
 const BoxIcon = (props) => {
   return React.createElement(
     "svg",
@@ -4632,6 +4656,71 @@ const Viewer = (props) => {
     React.createElement(ViewerKernel, { ...props, content })
   );
 };
+const SideSlider = qe.div.attrs(({ active, left }) => {
+  return {
+    [DOM_KEY_WIDGET]: "d9-playground-side-slider",
+    style: {
+      left: active ? 0 : utils$2.toCssSize(left),
+      width: active ? "100%" : void 0,
+      "--handle-left": active ? utils$2.toCssSize(left) : 0
+    }
+  };
+})`
+    display: block;
+    position: absolute;
+    top: 0;
+    height: 100%;
+    cursor: ew-resize;
+    z-index: 1;
+
+    &:before {
+        content: '';
+        display: block;
+        position: absolute;
+        top: 0;
+        left: var(--handle-left);
+        width: 7px;
+        height: 100%;
+        transition: background-color 300ms ease-in-out;
+    }
+
+    &:hover {
+        &:before {
+            background-color: ${PlaygroundCssVars.SLIDER_BACKGROUND_COLOR};
+        }
+    }
+`;
+const Slider = (props) => {
+  const { resizeTo } = props;
+  const ref = reactExports.useRef(null);
+  const [state, setState] = reactExports.useState({ active: false });
+  reactExports.useEffect(() => {
+    if (ref.current == null) {
+      return;
+    }
+    const { width: editorWidth } = ref.current.parentElement.querySelector("div[data-w=d9-playground-editor]").getBoundingClientRect();
+    setState((state2) => ({ ...state2, left: editorWidth + 81 }));
+  }, []);
+  const onMouseDown = (event) => {
+    if (event.button === 0) {
+      const { screenX: startX } = event;
+      setState((state2) => ({ ...state2, active: true, startX }));
+    }
+  };
+  const onMouseUp = (_event) => {
+    setState((state2) => ({ ...state2, active: false }));
+  };
+  const onMouseMove = (event) => {
+    if (!state.active) {
+      return;
+    }
+    const { screenX } = event;
+    const newWidth = Math.min(800, Math.max(200, state.left - 81 - state.startX + screenX));
+    resizeTo(newWidth);
+    setState((state2) => ({ ...state2, startX: screenX, left: newWidth + 81 }));
+  };
+  return React.createElement(SideSlider, { active: state.active, left: state.left ?? 0, onMouseDown, onMouseUp, onMouseMove, ref });
+};
 const PlaygroundBridge = (props) => {
   const { content, onContentChanged } = props;
   const { on, off } = usePlaygroundEventBus();
@@ -4747,71 +4836,6 @@ const useInitialize = (options) => {
     externalDefs: externalDefRef.current,
     externalDefsTypes: externalDefsTypesRef.current
   };
-};
-const SideSlider = qe.div.attrs(({ active, left }) => {
-  return {
-    [DOM_KEY_WIDGET]: "d9-playground-side-slider",
-    style: {
-      left: active ? 0 : utils$2.toCssSize(left),
-      width: active ? "100%" : void 0,
-      "--handle-left": active ? utils$2.toCssSize(left) : 0
-    }
-  };
-})`
-    display: block;
-    position: absolute;
-    top: 0;
-    height: 100%;
-    cursor: ew-resize;
-    z-index: 1;
-
-    &:before {
-        content: '';
-        display: block;
-        position: absolute;
-        top: 0;
-        left: var(--handle-left);
-        width: 7px;
-        height: 100%;
-        transition: background-color 300ms ease-in-out;
-    }
-
-    &:hover {
-        &:before {
-            background-color: ${PlaygroundCssVars.SLIDER_BACKGROUND_COLOR};
-        }
-    }
-`;
-const Slider = (props) => {
-  const { resizeTo } = props;
-  const ref = reactExports.useRef(null);
-  const [state, setState] = reactExports.useState({ active: false });
-  reactExports.useEffect(() => {
-    if (ref.current == null) {
-      return;
-    }
-    const { width: editorWidth } = ref.current.parentElement.querySelector("div[data-w=d9-playground-editor]").getBoundingClientRect();
-    setState((state2) => ({ ...state2, left: editorWidth + 81 }));
-  }, []);
-  const onMouseDown = (event) => {
-    if (event.button === 0) {
-      const { screenX: startX } = event;
-      setState((state2) => ({ ...state2, active: true, startX }));
-    }
-  };
-  const onMouseUp = (_event) => {
-    setState((state2) => ({ ...state2, active: false }));
-  };
-  const onMouseMove = (event) => {
-    if (!state.active) {
-      return;
-    }
-    const { screenX } = event;
-    const newWidth = Math.min(800, Math.max(200, state.left - 81 - state.startX + screenX));
-    resizeTo(newWidth);
-    setState((state2) => ({ ...state2, startX: screenX, left: newWidth + 81 }));
-  };
-  return React.createElement(SideSlider, { active: state.active, left: state.left ?? 0, onMouseDown, onMouseUp, onMouseMove, ref });
 };
 const PlaygroundWrapper = qe.div.attrs(() => {
   return {
