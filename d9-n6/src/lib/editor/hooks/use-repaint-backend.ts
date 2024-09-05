@@ -2,7 +2,7 @@ import {useForceUpdate, useThrottler} from '@rainbow-d9/n1';
 import {MutableRefObject, useEffect} from 'react';
 import {PipelineStepDef} from '../../definition';
 import {PlaygroundEventTypes, usePlaygroundEventBus} from '../../playground-event-bus';
-import {PlaygroundModuleAssistant} from '../../types';
+import {PlaygroundDecorator, PlaygroundModuleAssistant} from '../../types';
 import {switchAllNodesFolding} from '../diagram-utils';
 import {EditorKernelRefState, PostRepaintAction, repaintBackend} from '../painter';
 
@@ -10,13 +10,14 @@ export interface UseRepaintBackendOptions {
 	stateRef: MutableRefObject<EditorKernelRefState>;
 	postPaintActions: MutableRefObject<Array<PostRepaintAction>>;
 	assistant?: PlaygroundModuleAssistant;
+	decorator?: PlaygroundDecorator;
 }
 
 /**
  * handle all events which will lead to repaint backend, which can get size of all nodes
  */
 export const useRepaintBackend = (options: UseRepaintBackendOptions) => {
-	const {stateRef, postPaintActions, assistant} = options;
+	const {stateRef, postPaintActions, assistant, decorator} = options;
 
 	const {on, off, fire} = usePlaygroundEventBus();
 	const {replace} = useThrottler();
@@ -25,7 +26,8 @@ export const useRepaintBackend = (options: UseRepaintBackendOptions) => {
 		// repaint on somewhere call REPAINT
 		const onRepaintBackend = () => {
 			repaintBackend({
-				assistant: () => assistant, stateRef, replace,
+				assistant: () => assistant, decorator: () => decorator,
+				stateRef, replace,
 				onStateContentChanged: async () => {
 					fire(PlaygroundEventTypes.REPAINT);
 				},
@@ -55,5 +57,5 @@ export const useRepaintBackend = (options: UseRepaintBackendOptions) => {
 			off(PlaygroundEventTypes.FOLD_ALL_NODES, onFoldAllNodes);
 			off(PlaygroundEventTypes.UNFOLD_ALL_NODES, onUnfoldAllNodes);
 		};
-	}, [on, off, fire, replace, forceUpdate, stateRef, postPaintActions, assistant]);
+	}, [on, off, fire, replace, forceUpdate, stateRef, postPaintActions, assistant, decorator]);
 };

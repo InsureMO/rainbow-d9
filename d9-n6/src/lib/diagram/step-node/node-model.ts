@@ -1,6 +1,7 @@
 import {NodeModelGenerics} from '@projectstorm/react-diagrams';
+import {Undefinable} from '@rainbow-d9/n1';
 import {FileDef, PipelineStepDef} from '../../definition';
-import {PlaygroundModuleAssistant} from '../../types';
+import {PlaygroundDecorator, PlaygroundModuleAssistant} from '../../types';
 import {NextStepPortModel, PreviousStepPortModel} from '../common';
 import {HandledNodeModel, NodeHandlers} from '../node-handlers';
 
@@ -21,12 +22,14 @@ export interface StepNodeModelOptions {
 	subOf: PipelineStepDef | FileDef;
 	handlers: NodeHandlers;
 	assistant: Required<PlaygroundModuleAssistant>;
+	decorator?: PlaygroundDecorator;
 }
 
 export class StepNodeModel extends HandledNodeModel<NodeModelGenerics & StepNodeModelGenerics> {
 	public static readonly TYPE = 'step-node';
 
 	public readonly assistant: Required<PlaygroundModuleAssistant>;
+	public readonly decorator: Undefinable<PlaygroundDecorator>;
 	private firstSubStep = false;
 
 	public constructor(public readonly step: PipelineStepDef,
@@ -34,6 +37,7 @@ export class StepNodeModel extends HandledNodeModel<NodeModelGenerics & StepNode
 	                   private readonly rest: StepNodeModelOptions) {
 		super({type: StepNodeModel.TYPE}, rest.handlers);
 		this.assistant = rest.assistant;
+		this.decorator = rest.decorator;
 		// always have a port which link from previous step or start node
 		this.addPort(new PreviousStepPortModel());
 		// always have a port which link to next step or end node

@@ -4,7 +4,7 @@ import {FileDef, PipelineStepDef, PipelineStepRegisterKey} from '../definition';
 import {HandledNodeModel, NodeHandlers, StepNodeModel} from '../diagram';
 import {ConfigurableElement, ConfigurableElementAnchor, ConfigurableModel} from '../edit-dialog';
 import {StepDefsFolder} from '../editor';
-import {MarkdownContent, PlaygroundModuleAssistant} from '../types';
+import {MarkdownContent, PlaygroundDecorator, PlaygroundModuleAssistant} from '../types';
 import {FirstSubStepPortContainerFind, StepDefsReconfigurer, StepPort} from './step-def';
 
 export type ConfigChangesConfirmed = Array<ConfigurableElementAnchor> | true;
@@ -26,6 +26,7 @@ export interface CreateSubNodesOptions {
 	appendLink: (...links: Array<LinkModel>) => void;
 	handlers: NodeHandlers;
 	assistant: Required<PlaygroundModuleAssistant>;
+	decorator?: PlaygroundDecorator;
 }
 
 export interface ConfirmNodeOptions {

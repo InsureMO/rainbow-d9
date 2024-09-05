@@ -2,6 +2,7 @@ import {PropValue} from '@rainbow-d9/n1';
 import {DropdownOptions, UnwrappedDropdown} from '@rainbow-d9/n2';
 import React, {FC} from 'react';
 import {ConfigurableElementEditorProps} from '../../../edit-dialog';
+import {PlaygroundDecorator} from '../../../types';
 import {JsEditor} from '../js-editor';
 import {SqlEditor} from '../sql-editor';
 import {CommonElementEditorStyles} from '../styles';
@@ -12,6 +13,7 @@ export interface SelectableCodeEditorProps {
 	height?: number | string;
 	snippet?: string;
 	onChange: (snippet: string) => Promise<void>;
+	decorator?: PlaygroundDecorator;
 }
 
 export type SelectableCodeEditor = FC<SelectableCodeEditorProps>;
@@ -35,8 +37,7 @@ export const createSelectableCodeEditor = <M, FV>(options: SelectableCodeEditorO
 	} = options;
 
 	return (props: ConfigurableElementEditorProps<M>) => {
-
-		const {model, onValueChanged} = props;
+		const {model, onValueChanged, decorator} = props;
 		const onValueChange = (value: PropValue) => {
 			saveFlag(model, value as FV);
 			onValueChanged();
@@ -56,7 +57,8 @@ export const createSelectableCodeEditor = <M, FV>(options: SelectableCodeEditorO
 			                   onValueChange={onValueChange} options={flagCandidates}
 			                   clearable={false} filterable={false} style={CommonElementEditorStyles.dropdown}/>
 			<CodeEditor snippet={snippet} onChange={onSnippetChange}
-			            visible={isSnippetAvailable(flag)} height={editorHeight}/>
+			            visible={isSnippetAvailable(flag)} height={editorHeight}
+			            decorator={decorator}/>
 		</VerticalLinesEditor>;
 	};
 };

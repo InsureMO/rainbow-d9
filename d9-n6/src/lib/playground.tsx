@@ -59,7 +59,7 @@ export interface PlaygroundDelegateState {
 export const PlaygroundDelegate = (props: PlaygroundProps) => {
 	const {
 		$pp, $wrapped,
-		assistant, serializer, deserializer,
+		assistant, decorator, serializer, deserializer,
 		allowUploadFile = false, allowDownloadFile = true, allowDownloadImage = true,
 		maxMode = true, zenMode = true,
 		...rest
@@ -109,7 +109,7 @@ export const PlaygroundDelegate = (props: PlaygroundProps) => {
 	                          ref={ref}>
 		<EditDialog/>
 		<PlaygroundBridge content={content} onContentChanged={onContentChanged}/>
-		<Editor content={content} assistant={assistant}
+		<Editor content={content} assistant={assistant} decorator={decorator}
 		        serializer={state.serializer} deserializer={state.deserializer}
 		        allowUploadFile={allowUploadFile} allowDownloadFile={allowDownloadFile}
 		        allowDownloadImage={allowDownloadImage}

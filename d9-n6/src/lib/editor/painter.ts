@@ -14,7 +14,7 @@ import {DEFAULTS} from '../constants';
 import {FileDef, FileDefDeserializer, FileDefSerializer, PipelineStepDef} from '../definition';
 import {EndNodeModel, initEngine} from '../diagram';
 import {PlaygroundEventTypes} from '../playground-event-bus';
-import {MarkdownContent, PlaygroundModuleAssistant} from '../types';
+import {MarkdownContent, PlaygroundDecorator, PlaygroundModuleAssistant} from '../types';
 import {createDiagramHandlers, createDiagramNodes, createLockedDiagramModel} from './diagram-utils';
 
 export enum EditorKernelDiagramStatus {
@@ -63,17 +63,18 @@ export const createDiagramModel = (options: {
 	def: FileDef;
 	serializer: FileDefSerializer;
 	assistant?: PlaygroundModuleAssistant;
+	decorator?: PlaygroundDecorator;
 	replace: ThrottlerFunctions['replace'];
 	writeContentToState: (content: string) => void;
 	onContentChanged: (content: string) => void;
 }) => {
 	const {
 		def,
-		serializer, assistant, replace,
+		serializer, assistant, decorator, replace,
 		writeContentToState, onContentChanged
 	} = options;
 	const handlers = createDiagramHandlers({
-		serializer, assistant, replace,
+		serializer, assistant, decorator, replace,
 		syncContentToStateRef: (content: string) => {
 			writeContentToState(content);
 			return content;
@@ -121,6 +122,7 @@ export interface FirstPaintOptions {
 	serializer: FileDefSerializer;
 	deserializer: FileDefDeserializer;
 	assistant?: PlaygroundModuleAssistant;
+	decorator?: PlaygroundDecorator;
 	replace: ThrottlerFunctions['replace'];
 	writeContentToState: (content: string) => void;
 	onContentChanged: (content?: string) => void;
@@ -129,7 +131,7 @@ export interface FirstPaintOptions {
 export const firstPaint = (options: FirstPaintOptions): EditorKernelRefState => {
 	const {
 		content,
-		serializer, deserializer, assistant,
+		serializer, deserializer, assistant, decorator,
 		replace, writeContentToState, onContentChanged
 	} = options;
 
@@ -139,7 +141,7 @@ export const firstPaint = (options: FirstPaintOptions): EditorKernelRefState => 
 		// first round
 		const def = parseContent(deserializer, content ?? '');
 		const model = createDiagramModel({
-			def, serializer, assistant, replace, writeContentToState, onContentChanged
+			def, serializer, assistant, decorator, replace, writeContentToState, onContentChanged
 		});
 		engineBackend.setModel(model);
 		return {
@@ -162,6 +164,7 @@ export interface PaintOptions {
 	serializer: () => FileDefSerializer;
 	deserializer: () => FileDefDeserializer;
 	assistant: () => Undefinable<PlaygroundModuleAssistant>;
+	decorator: () => Undefinable<PlaygroundDecorator>;
 	stateRef: MutableRefObject<EditorKernelRefState>;
 	replace: ThrottlerFunctions['replace'];
 	onStateContentChanged: () => Promise<void>;
@@ -215,12 +218,13 @@ export const paint = (options: PaintOptions) => {
 	const serializer = options.serializer();
 	const deserializer = options.deserializer();
 	const assistant = options.assistant();
+	const decorator = options.decorator();
 
 	try {
 		const def = parseContent(deserializer, content ?? '');
 		const model = createDiagramModel({
 			def,
-			serializer, assistant, replace,
+			serializer, assistant, decorator, replace,
 			writeContentToState: (content: string) => {
 				stateRef.current.content = content;
 				(async () => await onStateContentChanged())();
@@ -244,25 +248,27 @@ export const paint = (options: PaintOptions) => {
 	}
 };
 
-export interface RepaintOptions {
+export interface RepaintBackendOptions {
 	assistant: () => Undefinable<PlaygroundModuleAssistant>;
+	decorator: () => Undefinable<PlaygroundDecorator>;
 	stateRef: MutableRefObject<EditorKernelRefState>;
 	replace: ThrottlerFunctions['replace'];
 	onStateContentChanged: () => Promise<void>;
 	onContentChanged: (content?: string) => void;
 }
 
-export const repaintBackend = (options: RepaintOptions) => {
+export const repaintBackend = (options: RepaintBackendOptions) => {
 	const {stateRef, replace, onStateContentChanged, onContentChanged} = options;
 
 	const def = stateRef.current.def;
 	const serializer = stateRef.current.serializer;
 	const assistant = options.assistant();
+	const decorator = options.decorator();
 
 	try {
 		const model = createDiagramModel({
 			def,
-			serializer, assistant, replace,
+			serializer, assistant, decorator, replace,
 			writeContentToState: (content: string) => {
 				stateRef.current.content = content;
 				(async () => await onStateContentChanged())();

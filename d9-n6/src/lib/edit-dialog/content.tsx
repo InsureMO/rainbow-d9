@@ -12,7 +12,7 @@ import {StepNodeModel} from '../diagram';
 import {Accept, Back} from '../icons';
 import {Labels} from '../labels';
 import {PlaygroundEventTypes, usePlaygroundEventBus} from '../playground-event-bus';
-import {MarkdownContent, PlaygroundModuleAssistant} from '../types';
+import {MarkdownContent, PlaygroundDecorator, PlaygroundModuleAssistant} from '../types';
 import {EditDialogEventBusProvider, EditDialogEventTypes, useEditDialogEventBus} from './edit-dialog-event-bus';
 import {DialogHelpDesk} from './help-desk';
 import {LayoutController} from './layout-controller';
@@ -66,10 +66,11 @@ export interface DialogWorkAreaProps {
 	discard: (model: ConfigurableModel) => void;
 	model: ConfigurableModel;
 	assistant: Required<PlaygroundModuleAssistant>;
+	decorator?: PlaygroundDecorator;
 }
 
 export const DialogWorkArea = (props: DialogWorkAreaProps) => {
-	const {helpDoc, elements, confirm, discard, model, assistant} = props;
+	const {helpDoc, elements, confirm, discard, model, assistant, decorator} = props;
 
 	const {fire} = usePlaygroundEventBus();
 	const {fire: fireDialog} = useEditDialogEventBus();
@@ -101,7 +102,7 @@ export const DialogWorkArea = (props: DialogWorkAreaProps) => {
 			</EditorDialogCloseButton>
 		</EditorDialogCloser>
 		<DialogHelpDesk helpDoc={helpDoc}/>
-		<DialogSpecific elements={elements} model={model} assistant={assistant}/>
+		<DialogSpecific elements={elements} model={model} assistant={assistant} decorator={decorator}/>
 		<DialogNavigator elements={elements} model={model}/>
 	</EditDialogContentContainer>;
 
@@ -116,6 +117,7 @@ export interface DialogContentProps {
 	/** discard change */
 	discard: (model: ConfigurableModel) => void;
 	assistant: Required<PlaygroundModuleAssistant>;
+	decorator?: PlaygroundDecorator;
 	children?: ReactNode;
 }
 
@@ -127,7 +129,7 @@ export const DialogContent = (props: DialogContentProps) => {
 	const {
 		model,
 		helpDoc, elements,
-		confirm, discard, assistant,
+		confirm, discard, assistant, decorator,
 		children
 	} = props;
 
@@ -138,7 +140,7 @@ export const DialogContent = (props: DialogContentProps) => {
 		<StateHolder/>
 		<LayoutController/>
 		<DialogWorkArea helpDoc={helpDoc} elements={elements} confirm={confirm} discard={discard} model={state.model}
-		                assistant={assistant}/>
+		                assistant={assistant} decorator={decorator}/>
 		<DialogContentInitializer/>
 	</EditDialogEventBusProvider>;
 };
@@ -187,7 +189,7 @@ export const StepDialogContent = (props: { model: StepNodeModel }) => {
 	return <DialogContent model={configurableModel}
 	                      helpDoc={StepDefs.helpDocs} elements={elements}
 	                      confirm={onConfirm} discard={onDiscard}
-	                      assistant={nodeModel.assistant}>
+	                      assistant={nodeModel.assistant} decorator={nodeModel.decorator}>
 		<StepUseHandler repaint={forceUpdate}/>
 	</DialogContent>;
 };

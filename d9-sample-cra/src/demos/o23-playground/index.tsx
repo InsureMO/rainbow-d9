@@ -1,6 +1,9 @@
-import {StandaloneRoot} from '@rainbow-d9/n1';
+import {BridgeEventBusProvider, StandaloneRoot} from '@rainbow-d9/n1';
 import {$d9n2, GlobalRoot} from '@rainbow-d9/n2';
+import {PlaygroundDecorator} from '@rainbow-d9/n5';
 import {PlaygroundModuleAssistant} from '@rainbow-d9/n6';
+import {vscodeDark, vscodeLight} from '@uiw/codemirror-theme-vscode';
+import {ThemeSwitcher} from '../theme-switcher';
 import {useDemoMarkdown} from '../use-demo-markdown';
 import DemoData from './demo.json';
 import {markdown as DemoContent} from './demo.md';
@@ -50,10 +53,23 @@ export const O23Playground = () => {
 				{code: 'ask-roles', name: 'Ask user roles'},
 				{code: 'ask-permissions', name: 'Ask user permissions'}
 			];
-		}) as PlaygroundModuleAssistant['askRefSteps']
+		}) as PlaygroundModuleAssistant['askRefSteps'],
+		decorator: {
+			theme: (() => {
+				let current = 'light';
+				return (theme?: string) => {
+					current = theme ?? current;
+					// return vscodeDark;
+					return current === 'dark' ? vscodeDark : vscodeLight;
+				};
+			})()
+		} as PlaygroundDecorator
 	};
 	return <GlobalRoot>
-		<StandaloneRoot {...def} $root={DemoData} externalDefs={externalDefs}/>
+		<BridgeEventBusProvider>
+			<ThemeSwitcher/>
+			<StandaloneRoot {...def} $root={DemoData} externalDefs={externalDefs}/>
+		</BridgeEventBusProvider>
 	</GlobalRoot>;
 };
 

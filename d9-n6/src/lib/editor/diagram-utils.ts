@@ -20,11 +20,12 @@ import {
 	StepNodeEntityType,
 	StepNodeModel
 } from '../diagram';
-import {PlaygroundModuleAssistant} from '../types';
+import {PlaygroundDecorator, PlaygroundModuleAssistant} from '../types';
 
 export interface DiagramHandlers {
 	serialize: (def: FileDef) => string;
 	assistant: Required<PlaygroundModuleAssistant>;
+	decorator?: PlaygroundDecorator;
 	onContentChange: (serialize: () => string) => void;
 }
 
@@ -93,7 +94,9 @@ export const createDiagramNodes = (file: FileDef, handlers: DiagramHandlers): Di
 		onChange: () => handlers.onContentChange(() => handlers.serialize(file))
 	};
 
-	const startNode = new StartNodeModel(file, {handlers: nodeHandlers, assistant: handlers.assistant});
+	const startNode = new StartNodeModel(file, {
+		handlers: nodeHandlers, assistant: handlers.assistant, decorator: handlers.decorator
+	});
 	setNodePosition(startNode, () => askStartNodePosition(file));
 	allNodes.push(startNode);
 
@@ -110,7 +113,7 @@ export const createDiagramNodes = (file: FileDef, handlers: DiagramHandlers): Di
 		previousNode = steps.reduce((previousNode, step) => {
 			return createStepNode(step, file, {
 				type: StepNodeEntityType.NORMAL, subOf: file,
-				handlers: nodeHandlers, assistant: handlers.assistant,
+				handlers: nodeHandlers, assistant: handlers.assistant, decorator: handlers.decorator,
 				previousNode, linkPrevious: (node) => previousNode.next(node),
 				appendNode: (...nodes) => allNodes.push(...nodes),
 				appendLink: (...links) => allLinks.push(...links)
@@ -122,7 +125,7 @@ export const createDiagramNodes = (file: FileDef, handlers: DiagramHandlers): Di
 		const step = file as unknown as PipelineStepDef;
 		previousNode = createStepNode(step, file, {
 			type: StepNodeEntityType.VIRTUAL, subOf: file,
-			handlers: nodeHandlers, assistant: handlers.assistant,
+			handlers: nodeHandlers, assistant: handlers.assistant, decorator: handlers.decorator,
 			previousNode, linkPrevious: (node) => previousNode.next(node),
 			appendNode: (...nodes) => allNodes.push(...nodes),
 			appendLink: (...links) => allLinks.push(...links)
@@ -267,11 +270,12 @@ export const computeGrid = (grid: Array<Array<GridCell>>, top: number, left: num
 export const createDiagramHandlers = (options: {
 	serializer: FileDefSerializer;
 	assistant?: PlaygroundModuleAssistant;
+	decorator?: PlaygroundDecorator;
 	replace: (func: () => void, timeout: number) => void;
 	syncContentToStateRef: (content: string) => string;
 	notifyContentChanged: (content: string) => void;
 }): DiagramHandlers => {
-	const {serializer, assistant, replace, syncContentToStateRef, notifyContentChanged} = options;
+	const {serializer, assistant, decorator, replace, syncContentToStateRef, notifyContentChanged} = options;
 
 	return {
 		serialize: (def: FileDef) => serializer.stringify(def),
@@ -282,6 +286,7 @@ export const createDiagramHandlers = (options: {
 			askRefPipelines: assistant?.askRefPipelines ?? (() => []),
 			askRefSteps: assistant?.askRefSteps ?? (() => [])
 		},
+		decorator,
 		onContentChange: (serialize: () => string) => {
 			// sync to state ref first, in case somewhere outside force update widget
 			// need to compare the content with state ref

@@ -14,12 +14,13 @@ export const createSnippetEditor = <M extends CommonStepDefModel>(options: Creat
 	const {getValue, setValue, height} = options;
 
 	return (props: ConfigurableElementEditorProps<M>) => {
-		const {model, onValueChanged} = props;
+		const {model, onValueChanged, decorator} = props;
 
 		const onValueChange = async (snippet: string) => {
 			setValue(model, snippet);
 			onValueChanged(false);
 		};
-		return <JsEditor snippet={getValue(model)} onChange={onValueChange} height={height}/>;
+		return <JsEditor snippet={getValue(model)} onChange={onValueChange} height={height}
+		                 decorator={decorator}/>;
 	};
 };

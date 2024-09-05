@@ -285,7 +285,7 @@ export const StartNodeWidget = (props: StartNodeWidgetProps) => {
 			<DialogContent helpDoc={HelpDocs.pipeline}
 			               model={model} confirm={onConfirm} discard={onDiscard}
 			               elements={FileDefs.elements}
-			               assistant={node.assistant}/>);
+			               assistant={node.assistant} decorator={node.decorator}/>);
 	};
 
 	let body = (void 0);

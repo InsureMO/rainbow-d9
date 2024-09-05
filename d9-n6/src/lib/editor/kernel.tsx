@@ -13,7 +13,7 @@ import {EditorWrapper, ParseError} from './widgets';
 
 export const EditorKernel = (props: EditorProps) => {
 	const {
-		content, assistant,
+		content, assistant, decorator,
 		serializer, deserializer,
 		allowUploadFile, allowDownloadFile, allowDownloadImage, maxMode, zenMode
 	} = props;
@@ -23,7 +23,7 @@ export const EditorKernel = (props: EditorProps) => {
 	const {replace} = useThrottler();
 	const postPaintActions = useRef<Array<PostRepaintAction>>([]);
 	const stateRef = useRef<EditorKernelRefState>(firstPaint({
-		content, serializer, deserializer, assistant, replace,
+		content, serializer, deserializer, assistant, decorator, replace,
 		writeContentToState: (content?: string) => {
 			stateRef.current.content = content;
 			(async () => {
@@ -34,7 +34,7 @@ export const EditorKernel = (props: EditorProps) => {
 			fire(PlaygroundEventTypes.CONTENT_CHANGED, content);
 		}
 	}));
-	useForceRepaint({content, serializer, deserializer, stateRef, assistant});
+	useForceRepaint({content, serializer, deserializer, stateRef, assistant, decorator});
 	// before repaint kernel, since it depends diagram status
 	const forceUpdate = useForceUpdate();
 	const [afterPositionComputed] = useState<() => void>(() => () => {
@@ -64,7 +64,8 @@ export const EditorKernel = (props: EditorProps) => {
 				 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 				 @ts-ignore */}
 				<ErrorBoundary content={content}>
-					<BackendCanvas stateRef={stateRef} postPaintActions={postPaintActions} assistant={assistant}
+					<BackendCanvas stateRef={stateRef} postPaintActions={postPaintActions}
+					               assistant={assistant} decorator={decorator}
 					               afterPositionComputed={afterPositionComputed}/>
 					<FrontendCanvas stateRef={stateRef} postPaintActions={postPaintActions}/>
 				</ErrorBoundary>

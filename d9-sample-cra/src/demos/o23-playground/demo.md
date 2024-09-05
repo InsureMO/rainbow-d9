@@ -8,3 +8,4 @@
 	- typeOrmDatasources: @ext.typeOrmDatasources
 	- refPipelines: @ext.refPipelines
 	- refSteps: @ext.refSteps
+	- theme: @ext.decorator.theme

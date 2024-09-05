@@ -1,3 +1,4 @@
+import {Extension} from '@codemirror/state';
 import {MonitorNodeDef, ValueChangeableNodeDef, WidgetProps} from '@rainbow-d9/n1';
 import {OmitHTMLProps, OmitNodeDef} from '@rainbow-d9/n2';
 import {FileDefDeserializer, FileDefSerializer, PipelineStepDef} from './definition';
@@ -47,6 +48,11 @@ export interface PlaygroundModuleAssistant {
 	askRefSteps?: () => Array<PlaygroundRefStep>;
 }
 
+export interface PlaygroundDecorator {
+	/** only for editor and json dialog */
+	theme?: (theme?: string) => Extension;
+}
+
 export interface PlaygroundBehavior {
 	allowUploadFile?: boolean;
 	allowDownloadFile?: boolean;
@@ -58,6 +64,7 @@ export interface PlaygroundBehavior {
 /** configuration definition */
 export type PlaygroundDef = ValueChangeableNodeDef & OmitHTMLProps<HTMLDivElement> & {
 	assistant?: PlaygroundModuleAssistant;
+	decorator?: PlaygroundDecorator;
 	/** def file serializer, use yaml by default */
 	serializer?: FileDefSerializer;
 	/** def file deserializer, use yaml by default */
@@ -70,6 +77,7 @@ export type PlaygroundProps = OmitNodeDef<PlaygroundDef> & WidgetProps;
 export interface EditorProps extends Required<PlaygroundBehavior> {
 	content?: string;
 	assistant?: PlaygroundModuleAssistant;
+	decorator?: PlaygroundDecorator;
 	serializer: FileDefSerializer;
 	deserializer: FileDefDeserializer;
 }

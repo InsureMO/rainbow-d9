@@ -2,6 +2,7 @@
 import {javascript} from '@codemirror/lang-javascript';
 // import globals from 'globals';
 import React, {useState} from 'react';
+import {PlaygroundDecorator} from '../../../types';
 import {CodeEditorState, useHandleCodeChange, useInitCodeContent, useInitCodeEditor} from '../code-editor';
 import {JsEditorContainer} from './widgets';
 
@@ -29,6 +30,7 @@ export interface JsEditorProps {
 	snippet?: string;
 	onChange: (snippet: string) => Promise<void>;
 	placeholder?: string;
+	decorator?: PlaygroundDecorator;
 }
 
 const createCodeMirrorExtensions = () => {
@@ -57,12 +59,10 @@ const createCodeMirrorExtensions = () => {
 	];
 };
 export const JsEditor = (props: JsEditorProps) => {
-	const {visible = true, height, snippet, onChange} = props;
+	const {visible = true, height, snippet, onChange, decorator} = props;
 
 	const [state, setState] = useState<CodeEditorState>({});
-	const {ref} = useInitCodeEditor({
-		setState, createCodeMirrorExtensions
-	});
+	const {ref} = useInitCodeEditor({state, setState, createCodeMirrorExtensions, decorator});
 	useInitCodeContent({editor: state.editor, code: snippet});
 	useHandleCodeChange({...state, onChange});
 

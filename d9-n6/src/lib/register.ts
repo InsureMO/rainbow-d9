@@ -14,7 +14,7 @@ import {
 } from './diagram';
 import {registerUseBadge, registerUseLabel} from './labels';
 import {Playground} from './playground';
-import {PlaygroundModuleAssistant} from './types';
+import {PlaygroundDecorator, PlaygroundModuleAssistant} from './types';
 
 export const PlaygroundCreateDefaultStepBuild: Widget.AttributeValueBuild<PlaygroundModuleAssistant['createDefaultStep'] | ExternalDefIndicator> = {
 	accept: (key: Widget.WidgetPropertyName) => key === 'defaultStep',
@@ -61,6 +61,7 @@ export const PlaygroundAskRefStepsBuild: Widget.AttributeValueBuild<PlaygroundMo
 		return Widget.createSyncSnippetBuild<PlaygroundModuleAssistant, 'askRefSteps'>('askRefSteps', []).build(value, list);
 	}
 };
+export const PlaygroundThemeBuild = Widget.createSyncSnippetBuild<PlaygroundDecorator, 'theme'>('theme', ['theme']);
 
 export abstract class AbstractPlaygroundTranslator extends Widget.SpecificWidgetTranslator<string> {
 	public beautifyProperties<Def extends NodeDef>(def: Partial<Def>): Def {
@@ -77,7 +78,8 @@ export abstract class AbstractPlaygroundTranslator extends Widget.SpecificWidget
 			PlaygroundCreateDefaultStepBuild,
 			PlaygroundAskSystemsForHttpBuild,
 			PlaygroundAskTypeOrmDatasourcesBuild,
-			PlaygroundAskRefPipelinesBuild, PlaygroundAskRefStepsBuild
+			PlaygroundAskRefPipelinesBuild, PlaygroundAskRefStepsBuild,
+			PlaygroundThemeBuild
 		];
 	}
 
@@ -88,7 +90,8 @@ export abstract class AbstractPlaygroundTranslator extends Widget.SpecificWidget
 			[`${type}.httpSystems`]: 'assistant.askSystemsForHttp',
 			[`${type}.typeOrmDatasources`]: 'assistant.askTypeOrmDatasources',
 			[`${type}.refPipelines`]: 'assistant.askRefPipelines',
-			[`${type}.refSteps`]: 'assistant.askRefSteps'
+			[`${type}.refSteps`]: 'assistant.askRefSteps',
+			[`${type}.theme`]: 'decorator.theme'
 		};
 	}
 }

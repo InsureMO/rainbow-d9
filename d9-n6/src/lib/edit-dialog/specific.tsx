@@ -2,7 +2,7 @@ import {useForceUpdate, VUtils} from '@rainbow-d9/n1';
 import React, {Fragment, useEffect, useRef, useState} from 'react';
 import {Collapse, ElementHelp, Expand} from '../icons';
 import {Labels} from '../labels';
-import {PlaygroundModuleAssistant} from '../types';
+import {PlaygroundDecorator, PlaygroundModuleAssistant} from '../types';
 import {EditDialogEventTypes, useEditDialogEventBus} from './edit-dialog-event-bus';
 import {HelpDoc} from './help-doc';
 import {useElementVisible} from './hooks';
@@ -32,6 +32,7 @@ export interface DialogSpecificElementProps {
 	model: ConfigurableModel;
 	visible: boolean;
 	assistant: Required<PlaygroundModuleAssistant>;
+	decorator?: PlaygroundDecorator;
 }
 
 export interface DialogSpecificElementWrapperProps extends DialogSpecificElementProps {
@@ -39,7 +40,7 @@ export interface DialogSpecificElementWrapperProps extends DialogSpecificElement
 }
 
 export const DialogSpecificElementWrapper = (props: DialogSpecificElementWrapperProps) => {
-	const {element, model, visible = true, assistant, askParentExpand} = props;
+	const {element, model, visible = true, assistant, decorator, askParentExpand} = props;
 	const {
 		anchor, label, editor: Editor, helpDoc,
 		group, collapsible = false
@@ -127,7 +128,7 @@ export const DialogSpecificElementWrapper = (props: DialogSpecificElementWrapper
 			? <SpecificElementEditorPlaceholder data-visible={visible}/>
 			: null}
 		{(!group && Editor != null)
-			? <Editor model={model} onValueChanged={onValueChanged} assistant={assistant}/>
+			? <Editor model={model} onValueChanged={onValueChanged} assistant={assistant} decorator={decorator}/>
 			: null}
 		{hasHelpDoc
 			? <SpecificElementHelpDoc data-visible={visible && showHelp}>
@@ -154,7 +155,7 @@ export const DialogSpecificElementInitExpand = (props: { element: ConfigurableEl
 };
 
 export const DialogSpecificElement = (props: DialogSpecificElementProps) => {
-	const {element, model, assistant} = props;
+	const {element, model, assistant, decorator} = props;
 
 	const {on, off, fire} = useDialogSpecificElementEventBus();
 	const [visible, setVisible] = useState(props.visible ?? true);
@@ -181,7 +182,7 @@ export const DialogSpecificElement = (props: DialogSpecificElementProps) => {
 			? element.children
 				.map((child) => {
 					return <DialogSpecificElement element={child} model={model} visible={visible}
-					                              assistant={assistant}
+					                              assistant={assistant} decorator={decorator}
 					                              key={child.code}/>;
 				})
 			: null}
@@ -193,17 +194,18 @@ export interface DialogSpecificProps {
 	elements: Array<ConfigurableElement>;
 	model: ConfigurableModel;
 	assistant: Required<PlaygroundModuleAssistant>;
+	decorator?: PlaygroundDecorator;
 }
 
 export const DialogSpecificElements = (props: DialogSpecificProps) => {
-	const {elements, model, assistant} = props;
+	const {elements, model, assistant, decorator} = props;
 
 	return <SpecificElementsContainer>
 		{elements
 			.map((element) => {
 				// top level, always visible
 				return <DialogSpecificElement element={element} model={model} visible={true}
-				                              assistant={assistant}
+				                              assistant={assistant} decorator={decorator}
 				                              key={element.code}/>;
 			})}
 	</SpecificElementsContainer>;

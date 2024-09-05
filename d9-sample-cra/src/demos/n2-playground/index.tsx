@@ -1,15 +1,8 @@
-import {
-	BridgeEventBusProvider,
-	BridgeToRootEventTypes,
-	ContainerDef,
-	ExternalDefIndicator,
-	ExternalDefs,
-	StandaloneRoot,
-	useBridgeEventBus
-} from '@rainbow-d9/n1';
-import {ButtonBarAlignment, DropdownOption, GlobalRoot, UnwrappedButton, UnwrappedButtonBar} from '@rainbow-d9/n2';
+import {BridgeEventBusProvider, ContainerDef, ExternalDefIndicator, ExternalDefs, StandaloneRoot} from '@rainbow-d9/n1';
+import {DropdownOption, GlobalRoot} from '@rainbow-d9/n2';
 import {ExternalDefsTypes, PlaygroundDecorator, PlaygroundDef} from '@rainbow-d9/n5';
 import {vscodeDark, vscodeLight} from '@uiw/codemirror-theme-vscode';
+import {ThemeSwitcher} from '../theme-switcher';
 import {useDemoMarkdown} from '../use-demo-markdown';
 import DemoData from './demo.json';
 import {markdown as DemoContent} from './demo.md';
@@ -112,18 +105,5 @@ export const N2Playground = () => {
 	</GlobalRoot>;
 };
 
-const ThemeSwitcher = () => {
-	const {fire} = useBridgeEventBus();
-	const onLightClicked = () => fire(BridgeToRootEventTypes.THEME_CHANGED, 'light');
-	const onDarkClicked = () => fire(BridgeToRootEventTypes.THEME_CHANGED, 'dark');
-
-	// @ts-ignore
-	return <UnwrappedButtonBar alignment={ButtonBarAlignment.CENTER}>
-		{/** @ts-ignore */}
-		<UnwrappedButton onClick={onLightClicked}>Light</UnwrappedButton>
-		{/** @ts-ignore */}
-		<UnwrappedButton onClick={onDarkClicked}>Dark</UnwrappedButton>
-	</UnwrappedButtonBar>;
-};
 export const PlaygroundData = DemoData;
 export const PlaygroundMarkdown = DemoContent;

@@ -9,7 +9,7 @@ Widget.ValidatorUtils.registerRegexps({'abc': /^abc$/});
 export const PlaygroundMockDataBuild = Widget.createAsyncSnippetBuild<PlaygroundDef, 'mockData'>('mockData', []);
 export const PlaygroundExternalDefsBuild = Widget.createAsyncSnippetBuild<PlaygroundDef, 'externalDefs'>('externalDefs', []);
 export const PlaygroundExternalDefsTypesBuild = Widget.createAsyncSnippetBuild<PlaygroundDef, 'externalDefsTypes'>('externalDefsTypes', []);
-export const PlaygroundThemeBuild = Widget.createAsyncSnippetBuild<PlaygroundDecorator, 'theme'>('theme', ['theme']);
+export const PlaygroundThemeBuild = Widget.createSyncSnippetBuild<PlaygroundDecorator, 'theme'>('theme', ['theme']);
 
 export abstract class AbstractPlaygroundTranslator extends Widget.SpecificWidgetTranslator<string> {
 	public beautifyProperties<Def extends NodeDef>(def: Partial<Def>): Def {
