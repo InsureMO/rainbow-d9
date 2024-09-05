@@ -1,4 +1,4 @@
-import { i as immutable, h as hastUtilParseSelector } from "./vendor-IN_V4Ne7.js";
+import { i as immutable, h as hastUtilParseSelector } from "./vendor-ZfeLJAN2.js";
 var schema$1 = Schema$2;
 var proto$1 = Schema$2.prototype;
 proto$1.space = null;

@@ -4,8 +4,8 @@ var __publicField = (obj, key, value) => {
   __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
   return value;
 };
-import { b as buffer, n as nanoid, E as EventEmitter } from "./vendor-IN_V4Ne7.js";
-import { r as reactExports, R as React } from "./react-base-7-SwU6nB.js";
+import { b as buffer, n as nanoid, E as EventEmitter } from "./vendor-ZfeLJAN2.js";
+import { r as reactExports, R as React } from "./react-base-Z1gRHTGG.js";
 const VUtils = {
   isEmpty: (v) => v == null || typeof v === "string" && v.length === 0,
   isNotEmpty: (v) => (v ?? "") !== "",
@@ -570,6 +570,7 @@ var RootEventTypes;
   RootEventTypes2["REGISTER_VALIDATABLE"] = "register-validatable";
   RootEventTypes2["UNREGISTER_VALIDATABLE"] = "unregister-validatable";
   RootEventTypes2["DEVICE_CHANGED"] = "device-changed";
+  RootEventTypes2["THEME_CHANGED"] = "theme-changed";
 })(RootEventTypes || (RootEventTypes = {}));
 const Context$4 = reactExports.createContext({});
 Context$4.displayName = "EventBus";
@@ -866,6 +867,7 @@ var BridgeToRootEventTypes;
   BridgeToRootEventTypes2["PERFORM_VALIDATE"] = "perform-validate";
   BridgeToRootEventTypes2["LISTEN_VALUE_CHANGED"] = "listen-value-changed";
   BridgeToRootEventTypes2["LISTEN_VALIDATED"] = "listen-validated";
+  BridgeToRootEventTypes2["THEME_CHANGED"] = "theme-changed";
 })(BridgeToRootEventTypes || (BridgeToRootEventTypes = {}));
 const RootToBridgeUndercover = () => {
   const bridge = useBridgeEventBus();
@@ -888,13 +890,18 @@ const RootToBridgeUndercover = () => {
     const onValueChanged = (absolutePath, from, to) => {
       bridge.fire(BridgeToRootEventTypes.LISTEN_VALUE_CHANGED, { absolutePath, from, to });
     };
+    const onThemeChanged = (args) => {
+      root.fire(RootEventTypes.THEME_CHANGED, args);
+    };
     bridge.on(BridgeToRootEventTypes.NOTIFY_VALUE_CHANGED, onNotifyValueChanged);
     bridge.on(BridgeToRootEventTypes.PERFORM_VALIDATE, onValidateRequest);
+    bridge.on(BridgeToRootEventTypes.THEME_CHANGED, onThemeChanged);
     root.on(RootEventTypes.VALIDATED, onValidated);
     root.on(RootEventTypes.VALUE_CHANGED, onValueChanged);
     return () => {
       bridge.off(BridgeToRootEventTypes.NOTIFY_VALUE_CHANGED, onNotifyValueChanged);
       bridge.off(BridgeToRootEventTypes.PERFORM_VALIDATE, onValidateRequest);
+      bridge.off(BridgeToRootEventTypes.THEME_CHANGED, onThemeChanged);
       root.off(RootEventTypes.VALIDATED, onValidated);
       root.off(RootEventTypes.VALUE_CHANGED, onValueChanged);
     };

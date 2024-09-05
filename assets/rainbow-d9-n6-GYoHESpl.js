@@ -4,14 +4,14 @@ var __publicField = (obj, key, value) => {
   __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
   return value;
 };
-import { a as color, y as EditorView, z as EditorState, A as basicSetup, P as indentUnit, B as keymap, C as indentWithTab, K as lintGutter, Q as Compartment, R as jsYaml, G as javascript, S as sql$1, U as dom2image } from "./vendor-IN_V4Ne7.js";
-import { f as CssConstants, C as CssVars, I as IntlLabel, D as DOM_KEY_WIDGET, d as utils$2, g as UnwrappedCheckbox, h as UnwrappedDropdown, O as OptionItemSort, j as UnwrappedInput, k as UnwrappedCaption, l as UnwrappedTextarea, m as UnwrappedDecorateInput, n as UnwrappedCheckboxes, b as useGlobalHandlers } from "./rainbow-d9-n2-UXPLIn0T.js";
-import { R as React, r as reactExports, q as qe, W as We, D as DefaultLinkModel, P as PortWidget, a as PortModelAlignment, b as PortModel, N as NodeModel, C as CanvasWidget, c as DiagramEngine, d as NodeLayerFactory, L as LinkLayerFactory, S as SelectionBoxLayerFactory, e as DefaultLabelFactory, f as DefaultNodeFactory, g as DefaultLinkFactory, h as PathFindingLinkFactory, i as DefaultPortFactory, j as DiagramModel, k as State, l as SelectingState, A as AbstractModelFactory, m as AbstractReactFactory, n as LinkWidget, o as DefaultLinkPointWidget, p as DefaultLinkSegmentWidget } from "./react-base-7-SwU6nB.js";
-import { V as VUtils, a as useThrottler, r as registerWidget, g as useCreateEventBus, e as useForceUpdate, M as MUtils, P as PPUtils } from "./rainbow-d9-n1-76aA7djH.js";
-import { i as index$1 } from "./rainbow-d9-n3-929utK20.js";
-import { M as Markdown } from "./react-markdown-VXHRFK8H.js";
-import { r as remarkGfm } from "./remark-W7EeR-HQ.js";
-import { S as SyntaxHighlighter, p as prism } from "./react-syntax-highlighter-N5rOjLRF.js";
+import { a as color, y as EditorView, z as EditorState, A as basicSetup, Q as indentUnit, B as keymap, C as indentWithTab, K as lintGutter, O as Compartment, R as jsYaml, G as javascript, S as sql$1, U as dom2image } from "./vendor-ZfeLJAN2.js";
+import { f as CssConstants, C as CssVars, I as IntlLabel, D as DOM_KEY_WIDGET, d as utils$2, g as UnwrappedCheckbox, h as UnwrappedDropdown, O as OptionItemSort, j as UnwrappedInput, k as UnwrappedCaption, l as UnwrappedTextarea, m as UnwrappedDecorateInput, n as UnwrappedCheckboxes, b as useGlobalHandlers } from "./rainbow-d9-n2--Bk5Qy5v.js";
+import { R as React, r as reactExports, q as qe, W as We, D as DefaultLinkModel, P as PortWidget, a as PortModelAlignment, b as PortModel, N as NodeModel, C as CanvasWidget, c as DiagramEngine, d as NodeLayerFactory, L as LinkLayerFactory, S as SelectionBoxLayerFactory, e as DefaultLabelFactory, f as DefaultNodeFactory, g as DefaultLinkFactory, h as PathFindingLinkFactory, i as DefaultPortFactory, j as DiagramModel, k as State, l as SelectingState, A as AbstractModelFactory, m as AbstractReactFactory, n as LinkWidget, o as DefaultLinkPointWidget, p as DefaultLinkSegmentWidget } from "./react-base-Z1gRHTGG.js";
+import { V as VUtils, a as useThrottler, r as registerWidget, g as useCreateEventBus, u as useRootEventBus, R as RootEventTypes, e as useForceUpdate, M as MUtils, P as PPUtils } from "./rainbow-d9-n1-88ursp9F.js";
+import { i as index$1 } from "./rainbow-d9-n3-lLxtMVrh.js";
+import { M as Markdown } from "./react-markdown-fAk5BL48.js";
+import { r as remarkGfm } from "./remark-ZEDElOi6.js";
+import { S as SyntaxHighlighter, p as prism } from "./react-syntax-highlighter-kBK4Rclq.js";
 const EDITOR_BACKGROUND_BLOCK_SIZE = "var(--o23-playground-editor-background-block-size, 48px)";
 const EDITOR_BACKGROUND_LINE_COLOR = `var(--o23-playground-editor-background-line-color, ${color(CssConstants.PRIMARY_COLOR).alpha(0.08)})`;
 const EDITOR_ATTRIBUTE_BADGE_COLOR = "#9db6c6";
@@ -49,7 +49,7 @@ const PlaygroundCssVars = {
   EDITOR_BACKGROUND_SIZE: `var(--o23-playground-editor-background-size, ${EDITOR_BACKGROUND_BLOCK_SIZE} ${EDITOR_BACKGROUND_BLOCK_SIZE})`,
   EDITOR_BACKGROUND_POSITION: "var(--o23-playground-editor-background-position, -1px -1px)",
   EDITOR_ERROR_COLOR: `var(--o23-playground-editor-error-color, ${CssVars.DANGER_COLOR})`,
-  EDITOR_TOOLBAR_HEIGHT: "var(--o23-playground-editor-toolbar-height, 92px)",
+  EDITOR_TOOLBAR_HEIGHT: "var(--o23-playground-editor-toolbar-height, 62px)",
   EDITOR_TOOLBAR_GUTTER_SIZE: "var(--o23-playground-editor-toolbar-gutter-size, 8px)",
   EDITOR_TOOLBAR_BORDER: `var(--o23-playground-editor-toolbar-border, 1px solid ${CssVars.BORDER_COLOR})`,
   EDITOR_TOOLBAR_BORDER_RADIUS: `var(--o23-playground-editor-toolbar-border-radius, ${CssVars.BORDER_RADIUS})`,
@@ -2180,7 +2180,7 @@ const DialogSpecificElementEventBusProvider = (props) => {
 };
 const useDialogSpecificElementEventBus = () => reactExports.useContext(Context);
 const DialogSpecificElementWrapper = (props) => {
-  const { element, model, visible = true, assistant, askParentExpand } = props;
+  const { element, model, visible = true, assistant, decorator, askParentExpand } = props;
   const { anchor, label, editor: Editor2, helpDoc, group, collapsible = false } = element;
   const ref = reactExports.useRef(null);
   const { on, off, fire } = useEditDialogEventBus();
@@ -2260,7 +2260,7 @@ const DialogSpecificElementWrapper = (props) => {
       React.createElement(Collapse, null)
     )) : null,
     group && !collapsible ? React.createElement(SpecificElementEditorPlaceholder, { "data-visible": visible }) : null,
-    !group && Editor2 != null ? React.createElement(Editor2, { model, onValueChanged, assistant }) : null,
+    !group && Editor2 != null ? React.createElement(Editor2, { model, onValueChanged, assistant, decorator }) : null,
     hasHelpDoc ? React.createElement(
       SpecificElementHelpDoc,
       { "data-visible": visible && showHelp },
@@ -2280,7 +2280,7 @@ const DialogSpecificElementInitExpand = (props) => {
   return React.createElement(reactExports.Fragment, null);
 };
 const DialogSpecificElement = (props) => {
-  const { element, model, assistant } = props;
+  const { element, model, assistant, decorator } = props;
   const { on, off, fire } = useDialogSpecificElementEventBus();
   const [visible, setVisible] = reactExports.useState(props.visible ?? true);
   reactExports.useEffect(() => {
@@ -2303,15 +2303,15 @@ const DialogSpecificElement = (props) => {
     null,
     React.createElement(DialogSpecificElementWrapper, { ...props, visible, askParentExpand }),
     element.children != null ? element.children.map((child) => {
-      return React.createElement(DialogSpecificElement, { element: child, model, visible, assistant, key: child.code });
+      return React.createElement(DialogSpecificElement, { element: child, model, visible, assistant, decorator, key: child.code });
     }) : null,
     React.createElement(DialogSpecificElementInitExpand, { element })
   );
 };
 const DialogSpecificElements = (props) => {
-  const { elements, model, assistant } = props;
+  const { elements, model, assistant, decorator } = props;
   return React.createElement(SpecificElementsContainer, null, elements.map((element) => {
-    return React.createElement(DialogSpecificElement, { element, model, visible: true, assistant, key: element.code });
+    return React.createElement(DialogSpecificElement, { element, model, visible: true, assistant, decorator, key: element.code });
   }));
 };
 const DialogSpecific = (props) => {
@@ -2366,7 +2366,7 @@ const DialogContentInitializer = () => {
   return React.createElement(EditDialogContentInitializer, { ref });
 };
 const DialogWorkArea = (props) => {
-  const { helpDoc, elements, confirm: confirm2, discard: discard2, model, assistant } = props;
+  const { helpDoc, elements, confirm: confirm2, discard: discard2, model, assistant, decorator } = props;
   const { fire } = usePlaygroundEventBus();
   const { fire: fireDialog } = useEditDialogEventBus();
   const onConfirmClicked = () => {
@@ -2401,12 +2401,12 @@ const DialogWorkArea = (props) => {
       )
     ),
     React.createElement(DialogHelpDesk, { helpDoc }),
-    React.createElement(DialogSpecific, { elements, model, assistant }),
+    React.createElement(DialogSpecific, { elements, model, assistant, decorator }),
     React.createElement(DialogNavigator, { elements, model })
   );
 };
 const DialogContent = (props) => {
-  const { model, helpDoc, elements, confirm: confirm2, discard: discard2, assistant, children } = props;
+  const { model, helpDoc, elements, confirm: confirm2, discard: discard2, assistant, decorator, children } = props;
   const [state] = reactExports.useState({ model });
   return React.createElement(
     EditDialogEventBusProvider,
@@ -2414,7 +2414,7 @@ const DialogContent = (props) => {
     children,
     React.createElement(StateHolder, null),
     React.createElement(LayoutController, null),
-    React.createElement(DialogWorkArea, { helpDoc, elements, confirm: confirm2, discard: discard2, model: state.model, assistant }),
+    React.createElement(DialogWorkArea, { helpDoc, elements, confirm: confirm2, discard: discard2, model: state.model, assistant, decorator }),
     React.createElement(DialogContentInitializer, null)
   );
 };
@@ -2453,7 +2453,7 @@ const StepDialogContent = (props) => {
   const elements = reconfigureStepDefProperties(StepDefs.properties, nodeModel);
   return React.createElement(
     DialogContent,
-    { model: configurableModel, helpDoc: StepDefs.helpDocs, elements, confirm: onConfirm, discard: onDiscard, assistant: nodeModel.assistant },
+    { model: configurableModel, helpDoc: StepDefs.helpDocs, elements, confirm: onConfirm, discard: onDiscard, assistant: nodeModel.assistant, decorator: nodeModel.decorator },
     React.createElement(StepUseHandler, { repaint: forceUpdate })
   );
 };
@@ -2861,14 +2861,42 @@ const createCheckOrIgnoreBadge = (options) => createCheckOrAnotherBadge({ ...opt
 const createYesOrNoBadge = (options) => createOneOrAnotherBadge({ ...options, one: React.createElement(ConfigurableElementBadgeYes, null), another: React.createElement(ConfigurableElementBadgeNo, null) });
 const createValueOrAnotherBadge = (options) => (model) => options.check(model) ? options.one(model) : options.another;
 const createValueOrMissBadge = (options) => createValueOrAnotherBadge({ ...options, another: React.createElement(ConfigurableElementBadgeMissed, null) });
+const createTheme = (theme) => {
+  const themeListener = new Compartment();
+  const themeExtension = theme == null ? void 0 : theme();
+  const changeableThemeExtension = themeExtension == null ? [] : [themeListener.of(themeExtension)];
+  return {
+    extension: changeableThemeExtension,
+    listener: themeListener
+  };
+};
+const useTheme = (options) => {
+  const { theme, editor, listener } = options;
+  const rootEventBus = useRootEventBus();
+  reactExports.useEffect(() => {
+    var _a;
+    if (editor == null || listener == null || theme == null) {
+      return;
+    }
+    const onThemeChanged = (newTheme) => {
+      editor.dispatch({ effects: listener.reconfigure(theme(newTheme)) });
+    };
+    (_a = rootEventBus == null ? void 0 : rootEventBus.on) == null ? void 0 : _a.call(rootEventBus, RootEventTypes.THEME_CHANGED, onThemeChanged);
+    return () => {
+      var _a2;
+      (_a2 = rootEventBus == null ? void 0 : rootEventBus.off) == null ? void 0 : _a2.call(rootEventBus, RootEventTypes.THEME_CHANGED, onThemeChanged);
+    };
+  }, [rootEventBus == null ? void 0 : rootEventBus.on, rootEventBus == null ? void 0 : rootEventBus.off, theme, editor, listener]);
+};
 const useInitCodeEditor = (options) => {
-  const { setState, createCodeMirrorExtensions: createCodeMirrorExtensions2 } = options;
+  const { state, setState, createCodeMirrorExtensions: createCodeMirrorExtensions2, decorator: { theme } = {} } = options;
   const ref = reactExports.useRef(null);
   reactExports.useEffect(() => {
     if (ref.current == null) {
       return;
     }
     const changeListener = new Compartment();
+    const { extension: changeableThemeExtension, listener: themeListener } = createTheme(theme);
     const editor = new EditorView({
       state: EditorState.create({
         doc: "",
@@ -2878,16 +2906,18 @@ const useInitCodeEditor = (options) => {
           keymap.of([indentWithTab]),
           lintGutter(),
           createCodeMirrorExtensions2(),
-          changeListener.of(EditorView.updateListener.of(VUtils.noop))
+          changeListener.of(EditorView.updateListener.of(VUtils.noop)),
+          ...changeableThemeExtension
         ]
       }),
       parent: ref.current
     });
-    setState((state) => ({ ...state, editor, changeListener }));
+    setState((state2) => ({ ...state2, editor, changeListener, themeListener }));
     return () => {
       editor.destroy();
     };
   }, [setState, createCodeMirrorExtensions2]);
+  useTheme({ theme, editor: state.editor, listener: state.themeListener });
   return { ref };
 };
 const useInitCodeContent = (options) => {
@@ -3068,12 +3098,9 @@ const createCodeMirrorExtensions$1 = () => {
   ];
 };
 const JsEditor = (props) => {
-  const { visible = true, height, snippet, onChange } = props;
+  const { visible = true, height, snippet, onChange, decorator } = props;
   const [state, setState] = reactExports.useState({});
-  const { ref } = useInitCodeEditor({
-    setState,
-    createCodeMirrorExtensions: createCodeMirrorExtensions$1
-  });
+  const { ref } = useInitCodeEditor({ state, setState, createCodeMirrorExtensions: createCodeMirrorExtensions$1, decorator });
   useInitCodeContent({ editor: state.editor, code: snippet });
   useHandleCodeChange({ ...state, onChange });
   return React.createElement(JsEditorContainer, { "data-visible": visible, "data-height": height, ref });
@@ -3221,12 +3248,9 @@ const SqlEditorContainer = qe.div.attrs(({ "data-height": height }) => {
 `;
 const createCodeMirrorExtensions = () => sql$1();
 const SqlEditor = (props) => {
-  const { visible = true, height, snippet, onChange } = props;
+  const { visible = true, height, snippet, onChange, decorator } = props;
   const [state, setState] = reactExports.useState({});
-  const { ref } = useInitCodeEditor({
-    setState,
-    createCodeMirrorExtensions
-  });
+  const { ref } = useInitCodeEditor({ state, setState, createCodeMirrorExtensions, decorator });
   useInitCodeContent({ editor: state.editor, code: snippet });
   useHandleCodeChange({ ...state, onChange });
   return React.createElement(SqlEditorContainer, { "data-visible": visible, "data-height": height, ref });
@@ -3260,18 +3284,18 @@ const createStrEditor = (options) => {
 const createSnippetEditor = (options) => {
   const { getValue, setValue, height } = options;
   return (props) => {
-    const { model, onValueChanged } = props;
+    const { model, onValueChanged, decorator } = props;
     const onValueChange = async (snippet) => {
       setValue(model, snippet);
       onValueChanged(false);
     };
-    return React.createElement(JsEditor, { snippet: getValue(model), onChange: onValueChange, height });
+    return React.createElement(JsEditor, { snippet: getValue(model), onChange: onValueChange, height, decorator });
   };
 };
 const createSelectableCodeEditor = (options) => {
   const { findFlag, saveFlag, findSnippet, saveSnippet, flagCandidates, isSnippetAvailable, height: editorHeight, editor: CodeEditor } = options;
   return (props) => {
-    const { model, onValueChanged } = props;
+    const { model, onValueChanged, decorator } = props;
     const onValueChange = (value) => {
       saveFlag(model, value);
       onValueChanged();
@@ -3286,7 +3310,7 @@ const createSelectableCodeEditor = (options) => {
       VerticalLinesEditor,
       null,
       React.createElement(UnwrappedDropdown, { value: flag, onValueChange, options: flagCandidates, clearable: false, filterable: false, style: CommonElementEditorStyles.dropdown }),
-      React.createElement(CodeEditor, { snippet, onChange: onSnippetChange, visible: isSnippetAvailable(flag), height: editorHeight })
+      React.createElement(CodeEditor, { snippet, onChange: onSnippetChange, visible: isSnippetAvailable(flag), height: editorHeight, decorator })
     );
   };
 };
@@ -3846,11 +3870,13 @@ const _StepNodeModel = class _StepNodeModel extends HandledNodeModel {
     __publicField(this, "file");
     __publicField(this, "rest");
     __publicField(this, "assistant");
+    __publicField(this, "decorator");
     __publicField(this, "firstSubStep", false);
     this.step = step;
     this.file = file;
     this.rest = rest;
     this.assistant = rest.assistant;
+    this.decorator = rest.decorator;
     this.addPort(new PreviousStepPortModel());
     this.addPort(new NextStepPortModel());
   }
@@ -4258,9 +4284,11 @@ const _StartNodeModel = class _StartNodeModel extends HandledNodeModel {
     __publicField(this, "def");
     __publicField(this, "rest");
     __publicField(this, "assistant");
+    __publicField(this, "decorator");
     this.def = def;
     this.rest = rest;
     this.assistant = rest.assistant;
+    this.decorator = rest.decorator;
     this.addPort(new NextStepPortModel());
   }
 };
@@ -4460,7 +4488,7 @@ const StartNodeWidget = (props) => {
   const onDiscard = (model) => FileDefs.discard(model);
   const onDoubleClicked = () => {
     const model = FileDefs.prepare(def);
-    fire(PlaygroundEventTypes.SHOW_EDIT_DIALOG, React.createElement(DialogContent, { helpDoc: HelpDocs.pipeline, model, confirm: onConfirm, discard: onDiscard, elements: FileDefs.elements, assistant: node.assistant }));
+    fire(PlaygroundEventTypes.SHOW_EDIT_DIALOG, React.createElement(DialogContent, { helpDoc: HelpDocs.pipeline, model, confirm: onConfirm, discard: onDiscard, elements: FileDefs.elements, assistant: node.assistant, decorator: node.decorator }));
   };
   let body = void 0;
   if (isApi) {
@@ -5277,7 +5305,11 @@ const createDiagramNodes = (file, handlers) => {
   const nodeHandlers = {
     onChange: () => handlers.onContentChange(() => handlers.serialize(file))
   };
-  const startNode = new StartNodeModel(file, { handlers: nodeHandlers, assistant: handlers.assistant });
+  const startNode = new StartNodeModel(file, {
+    handlers: nodeHandlers,
+    assistant: handlers.assistant,
+    decorator: handlers.decorator
+  });
   setNodePosition(startNode, () => askStartNodePosition(file));
   allNodes.push(startNode);
   let previousNode = startNode;
@@ -5294,6 +5326,7 @@ const createDiagramNodes = (file, handlers) => {
         subOf: file,
         handlers: nodeHandlers,
         assistant: handlers.assistant,
+        decorator: handlers.decorator,
         previousNode: previousNode2,
         linkPrevious: (node) => previousNode2.next(node),
         appendNode: (...nodes) => allNodes.push(...nodes),
@@ -5307,6 +5340,7 @@ const createDiagramNodes = (file, handlers) => {
       subOf: file,
       handlers: nodeHandlers,
       assistant: handlers.assistant,
+      decorator: handlers.decorator,
       previousNode,
       linkPrevious: (node) => previousNode.next(node),
       appendNode: (...nodes) => allNodes.push(...nodes),
@@ -5435,7 +5469,7 @@ const computeGrid = (grid, top, left, rowGap, columnGap) => {
   });
 };
 const createDiagramHandlers = (options) => {
-  const { serializer, assistant, replace, syncContentToStateRef, notifyContentChanged } = options;
+  const { serializer, assistant, decorator, replace, syncContentToStateRef, notifyContentChanged } = options;
   return {
     serialize: (def) => serializer.stringify(def),
     assistant: {
@@ -5445,6 +5479,7 @@ const createDiagramHandlers = (options) => {
       askRefPipelines: (assistant == null ? void 0 : assistant.askRefPipelines) ?? (() => []),
       askRefSteps: (assistant == null ? void 0 : assistant.askRefSteps) ?? (() => [])
     },
+    decorator,
     onContentChange: (serialize) => {
       const content = syncContentToStateRef(serialize());
       replace(() => {
@@ -5521,10 +5556,11 @@ const parseContent = (parser, content) => {
   return def;
 };
 const createDiagramModel = (options) => {
-  const { def, serializer, assistant, replace, writeContentToState, onContentChanged } = options;
+  const { def, serializer, assistant, decorator, replace, writeContentToState, onContentChanged } = options;
   const handlers = createDiagramHandlers({
     serializer,
     assistant,
+    decorator,
     replace,
     syncContentToStateRef: (content) => {
       writeContentToState(content);
@@ -5561,7 +5597,7 @@ const createDiagramEngine = () => {
   return engine;
 };
 const firstPaint = (options) => {
-  const { content, serializer, deserializer, assistant, replace, writeContentToState, onContentChanged } = options;
+  const { content, serializer, deserializer, assistant, decorator, replace, writeContentToState, onContentChanged } = options;
   const engine = createDiagramEngine();
   const engineBackend = createDiagramEngine();
   try {
@@ -5570,6 +5606,7 @@ const firstPaint = (options) => {
       def,
       serializer,
       assistant,
+      decorator,
       replace,
       writeContentToState,
       onContentChanged
@@ -5631,12 +5668,14 @@ const paint = (options) => {
   const serializer = options.serializer();
   const deserializer = options.deserializer();
   const assistant = options.assistant();
+  const decorator = options.decorator();
   try {
     const def = parseContent(deserializer, content ?? "");
     const model = createDiagramModel({
       def,
       serializer,
       assistant,
+      decorator,
       replace,
       writeContentToState: (content2) => {
         stateRef.current.content = content2;
@@ -5664,11 +5703,13 @@ const repaintBackend = (options) => {
   const def = stateRef.current.def;
   const serializer = stateRef.current.serializer;
   const assistant = options.assistant();
+  const decorator = options.decorator();
   try {
     const model = createDiagramModel({
       def,
       serializer,
       assistant,
+      decorator,
       replace,
       writeContentToState: (content) => {
         stateRef.current.content = content;
@@ -5726,7 +5767,7 @@ const useComputePositions = (options) => {
   }, [fire, stateRef, stateRef.current.diagramStatus, afterPositionComputed]);
 };
 const useRepaintBackend = (options) => {
-  const { stateRef, postPaintActions, assistant } = options;
+  const { stateRef, postPaintActions, assistant, decorator } = options;
   const { on, off, fire } = usePlaygroundEventBus();
   const { replace } = useThrottler();
   const forceUpdate = useForceUpdate();
@@ -5734,6 +5775,7 @@ const useRepaintBackend = (options) => {
     const onRepaintBackend = () => {
       repaintBackend({
         assistant: () => assistant,
+        decorator: () => decorator,
         stateRef,
         replace,
         onStateContentChanged: async () => {
@@ -5765,7 +5807,7 @@ const useRepaintBackend = (options) => {
       off(PlaygroundEventTypes.FOLD_ALL_NODES, onFoldAllNodes);
       off(PlaygroundEventTypes.UNFOLD_ALL_NODES, onUnfoldAllNodes);
     };
-  }, [on, off, fire, replace, forceUpdate, stateRef, postPaintActions, assistant]);
+  }, [on, off, fire, replace, forceUpdate, stateRef, postPaintActions, assistant, decorator]);
 };
 const EditorWrapper = qe.div.attrs({
   [DOM_KEY_WIDGET]: "o23-playground-editor",
@@ -5884,12 +5926,8 @@ const EditorToolbar = qe.div.attrs(({ columns }) => {
         border-color: ${PlaygroundCssVars.EDITOR_TOOLBAR_BUTTON_ACTIVE_BACKGROUND_COLOR};
 
         > span[data-w=o23-playground-editor-toolbar-button] {
-            &:not(:nth-child(6n + 1)) {
+            &:not(:first-child) {
                 border-left-color: ${PlaygroundCssVars.EDITOR_TOOLBAR_BUTTON_ACTIVE_BACKGROUND_COLOR};
-            }
-
-            &:nth-child(-n + 6) {
-                border-bottom-color: ${PlaygroundCssVars.EDITOR_TOOLBAR_BUTTON_ACTIVE_BACKGROUND_COLOR};
             }
 
             &:not(:hover) {
@@ -5898,20 +5936,10 @@ const EditorToolbar = qe.div.attrs(({ columns }) => {
         }
 
         > div[data-w=o23-playground-editor-toolbar-toc] {
-            border-top-color: ${PlaygroundCssVars.EDITOR_TOOLBAR_BUTTON_ACTIVE_BACKGROUND_COLOR};
-
             > span[data-w=o23-playground-editor-toolbar-toc-button]:not(:hover) {
                 color: ${PlaygroundCssVars.EDITOR_TOOLBAR_BUTTON_ACTIVE_BACKGROUND_COLOR};
             }
         }
-    }
-
-    > span[data-absolute=false] {
-        position: relative;
-    }
-
-    > span[data-absolute=true] {
-        position: absolute;
     }
 
     > div[data-w=o23-playground-editor-toolbar-toc] {
@@ -5926,15 +5954,12 @@ const EditorToolbarButton = qe.span.attrs({ [DOM_KEY_WIDGET]: "o23-playground-ed
     width: ${PlaygroundCssVars.EDITOR_TOOLBAR_BUTTON_WIDTH};
     height: ${PlaygroundCssVars.EDITOR_TOOLBAR_BUTTON_HEIGHT};
     color: ${PlaygroundCssVars.EDITOR_TOOLBAR_BUTTON_COLOR};
+    border-bottom: ${PlaygroundCssVars.EDITOR_TOOLBAR_BORDER};
     cursor: pointer;
     transition: color ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION}, background-color ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION}, border-color ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION};
 
-    &:not(:nth-child(6n + 1)) {
+    &:not(:first-child) {
         border-left: ${PlaygroundCssVars.EDITOR_TOOLBAR_BORDER};
-    }
-
-    &:nth-child(-n + 6) {
-        border-bottom: ${PlaygroundCssVars.EDITOR_TOOLBAR_BORDER};
     }
 
     &:hover {
@@ -5957,7 +5982,6 @@ const EditorToolbarToc = qe.div.attrs({ [DOM_KEY_WIDGET]: "o23-playground-editor
     grid-template-columns: 1fr;
     grid-template-rows: auto 1fr;
     height: ${PlaygroundCssVars.EDITOR_TOOLBAR_TOC_HEIGHT};
-    border-top: ${PlaygroundCssVars.EDITOR_TOOLBAR_BORDER};
     border-radius: 0 0 ${PlaygroundCssVars.EDITOR_TOOLBAR_BORDER_RADIUS} ${PlaygroundCssVars.EDITOR_TOOLBAR_BORDER_RADIUS};
     transition: border-color ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION};
     overflow: hidden;
@@ -5980,17 +6004,22 @@ const EditorToolbarTocButton = qe.span.attrs({ [DOM_KEY_WIDGET]: "o23-playground
         height: ${PlaygroundCssVars.EDITOR_TOOLBAR_TOC_HEIGHT};
     }
 `;
-const EditorToolbarTocContainer = qe.div.attrs({
-  [DOM_KEY_WIDGET]: "o23-playground-editor-toolbar-toc-container",
-  "data-v-scroll": "",
-  "data-h-scroll": ""
+const EditorToolbarTocContainer = qe.div.attrs(({ buttons }) => {
+  return {
+    [DOM_KEY_WIDGET]: "o23-playground-editor-toolbar-toc-container",
+    "data-v-scroll": "",
+    "data-h-scroll": "",
+    style: {
+      "--buttons": buttons
+    }
+  };
 })`
     display: flex;
     position: absolute;
     flex-direction: column;
     top: calc(${PlaygroundCssVars.EDITOR_TOOLBAR_HEIGHT} + ${PlaygroundCssVars.EDITOR_TOOLBAR_GUTTER_SIZE} * 2);
     right: ${PlaygroundCssVars.EDITOR_TOOLBAR_GUTTER_SIZE};
-    min-width: calc(${PlaygroundCssVars.EDITOR_TOOLBAR_BUTTON_WIDTH} * 6 + 2px);
+    min-width: calc(${PlaygroundCssVars.EDITOR_TOOLBAR_BUTTON_WIDTH} * var(--buttons) + 2px);
     max-width: max(33%, calc(${PlaygroundCssVars.EDITOR_TOOLBAR_BUTTON_WIDTH} * 6 + 2px));
     max-height: calc(100% - ${PlaygroundCssVars.EDITOR_TOOLBAR_HEIGHT} - ${PlaygroundCssVars.EDITOR_TOOLBAR_GUTTER_SIZE} * 3);
     border: ${PlaygroundCssVars.EDITOR_TOOLBAR_BORDER};
@@ -6060,9 +6089,9 @@ const ParseError = qe.div.attrs({ [DOM_KEY_WIDGET]: "o23-playground-viewer-error
     font-weight: 500;
 `;
 const BackendCanvas = (props) => {
-  const { stateRef, postPaintActions, assistant, afterPositionComputed } = props;
+  const { stateRef, postPaintActions, assistant, decorator, afterPositionComputed } = props;
   useComputePositions({ stateRef, afterPositionComputed });
-  useRepaintBackend({ stateRef, postPaintActions, assistant });
+  useRepaintBackend({ stateRef, postPaintActions, assistant, decorator });
   return React.createElement(
     BackendCanvasWrapper,
     { "data-diagram-status": stateRef.current.diagramStatus },
@@ -6182,7 +6211,7 @@ const FrontendCanvas = (props) => {
   );
 };
 const useForceRepaint = (options) => {
-  const { content, serializer, deserializer, stateRef, assistant } = options;
+  const { content, serializer, deserializer, stateRef, assistant, decorator } = options;
   const { fire } = usePlaygroundEventBus();
   const { replace } = useThrottler();
   const forceUpdate = useForceUpdate();
@@ -6194,6 +6223,7 @@ const useForceRepaint = (options) => {
       serializer: () => serializer,
       deserializer: () => deserializer,
       assistant: () => assistant,
+      decorator: () => decorator,
       content: () => content,
       stateRef,
       replace,
@@ -6205,10 +6235,10 @@ const useForceRepaint = (options) => {
       }
     });
     forceUpdate();
-  }, [fire, replace, forceUpdate, content, serializer, deserializer, stateRef, assistant]);
+  }, [fire, replace, forceUpdate, content, serializer, deserializer, stateRef, assistant, decorator]);
 };
 const ToolbarToc = (props) => {
-  const { stateRef } = props;
+  const { stateRef, buttons } = props;
   const def = stateRef.current.def;
   const ref = reactExports.useRef(null);
   const { fire } = usePlaygroundEventBus();
@@ -6288,7 +6318,7 @@ const ToolbarToc = (props) => {
       fire(PlaygroundEventTypes.LOCATE_STEP_NODE, step);
     }
   };
-  return React.createElement(EditorToolbarTocContainer, { "data-first-paint": firstPaint2, ref }, items.map((item) => {
+  return React.createElement(EditorToolbarTocContainer, { "data-first-paint": firstPaint2, buttons, ref }, items.map((item) => {
     return React.createElement(
       EditorToolbarTocItem,
       { onClick: onItemClick(item), key: item.index },
@@ -6298,14 +6328,14 @@ const ToolbarToc = (props) => {
   }));
 };
 const ToolbarTocWrapper = (props) => {
-  const { stateRef, expanded } = props;
+  const { stateRef, expanded, buttons } = props;
   if (!expanded) {
     return null;
   }
-  return React.createElement(ToolbarToc, { stateRef });
+  return React.createElement(ToolbarToc, { stateRef, buttons });
 };
 const Toolbar = (props) => {
-  const { stateRef, serializer, allowUploadFile, allowDownloadFile, allowDownloadImage } = props;
+  const { stateRef, serializer, allowUploadFile, allowDownloadFile, allowDownloadImage, maxMode, zenMode } = props;
   const ref = reactExports.useRef(null);
   const { fire } = usePlaygroundEventBus();
   const [state, setState] = reactExports.useState({ max: false, zen: false, tocExpanded: false });
@@ -6408,12 +6438,13 @@ const Toolbar = (props) => {
   const onFoldAllNodesClicked = () => fire(PlaygroundEventTypes.FOLD_ALL_NODES);
   const onUnfoldAllNodesClicked = () => fire(PlaygroundEventTypes.UNFOLD_ALL_NODES);
   const onSwitchToc = (expanded) => () => setState((state2) => ({ ...state2, tocExpanded: expanded }));
+  const columns = 11 - (!zenMode || state.zen ? 1 : 0) - (!maxMode ? 1 : 0) - (!allowDownloadFile ? 1 : 0) - (!allowDownloadImage ? 1 : 0) - (!allowUploadFile ? 1 : 0);
   return React.createElement(
     React.Fragment,
     null,
     React.createElement(
       EditorToolbar,
-      { columns: state.zen ? 5 : 6, "data-toc-expanded": state.tocExpanded, ref },
+      { columns, "data-toc-expanded": state.tocExpanded, ref },
       React.createElement(
         EditorToolbarButton,
         { onClick: onZoomInClicked },
@@ -6434,27 +6465,6 @@ const Toolbar = (props) => {
         { onClick: onFitCanvasClicked },
         React.createElement(FitCanvas, null)
       ),
-      state.max ? null : React.createElement(
-        EditorToolbarButton,
-        { onClick: onMaxClicked },
-        React.createElement(Max, null)
-      ),
-      state.max && !state.zen ? React.createElement(
-        EditorToolbarButton,
-        { onClick: onMinClicked },
-        React.createElement(Min, null)
-      ) : null,
-      state.zen ? null : React.createElement(
-        EditorToolbarButton,
-        { onClick: onZenClicked },
-        React.createElement(Zen, null)
-      ),
-      state.zen ? React.createElement(
-        EditorToolbarButton,
-        { onClick: onWindowClicked },
-        React.createElement(Window, null)
-      ) : null,
-      React.createElement("span", { "data-absolute": state.zen }),
       React.createElement(
         EditorToolbarButton,
         { onClick: onFoldAllNodesClicked },
@@ -6480,6 +6490,26 @@ const Toolbar = (props) => {
         { onClick: onUploadFileClicked },
         React.createElement(UploadFile, null)
       ) : null,
+      maxMode ? state.max ? null : React.createElement(
+        EditorToolbarButton,
+        { onClick: onMaxClicked },
+        React.createElement(Max, null)
+      ) : null,
+      maxMode ? state.max && !state.zen ? React.createElement(
+        EditorToolbarButton,
+        { onClick: onMinClicked },
+        React.createElement(Min, null)
+      ) : null : null,
+      zenMode ? state.zen ? null : React.createElement(
+        EditorToolbarButton,
+        { onClick: onZenClicked },
+        React.createElement(Zen, null)
+      ) : null,
+      zenMode ? state.zen ? React.createElement(
+        EditorToolbarButton,
+        { onClick: onWindowClicked },
+        React.createElement(Window, null)
+      ) : null : null,
       React.createElement(EditorToolbarToc, null, state.tocExpanded ? React.createElement(
         EditorToolbarTocButton,
         { onClick: onSwitchToc(false) },
@@ -6490,11 +6520,11 @@ const Toolbar = (props) => {
         React.createElement(ExpandToc, null)
       ))
     ),
-    React.createElement(ToolbarTocWrapper, { expanded: state.tocExpanded, stateRef })
+    React.createElement(ToolbarTocWrapper, { expanded: state.tocExpanded, buttons: columns, stateRef })
   );
 };
 const EditorKernel = (props) => {
-  const { content, assistant, serializer, deserializer, allowUploadFile, allowDownloadFile, allowDownloadImage } = props;
+  const { content, assistant, decorator, serializer, deserializer, allowUploadFile, allowDownloadFile, allowDownloadImage, maxMode, zenMode } = props;
   const wrapperRef = reactExports.useRef(null);
   const { fire } = usePlaygroundEventBus();
   const { replace } = useThrottler();
@@ -6504,6 +6534,7 @@ const EditorKernel = (props) => {
     serializer,
     deserializer,
     assistant,
+    decorator,
     replace,
     writeContentToState: (content2) => {
       stateRef.current.content = content2;
@@ -6515,7 +6546,7 @@ const EditorKernel = (props) => {
       fire(PlaygroundEventTypes.CONTENT_CHANGED, content2);
     }
   }));
-  useForceRepaint({ content, serializer, deserializer, stateRef, assistant });
+  useForceRepaint({ content, serializer, deserializer, stateRef, assistant, decorator });
   const forceUpdate = useForceUpdate();
   const [afterPositionComputed] = reactExports.useState(() => () => {
     stateRef.current.diagramStatus = EditorKernelDiagramStatus.IN_SERVICE;
@@ -6550,11 +6581,11 @@ const EditorKernel = (props) => {
         React.createElement(
           ErrorBoundary,
           { content },
-          React.createElement(BackendCanvas, { stateRef, postPaintActions, assistant, afterPositionComputed }),
+          React.createElement(BackendCanvas, { stateRef, postPaintActions, assistant, decorator, afterPositionComputed }),
           React.createElement(FrontendCanvas, { stateRef, postPaintActions })
         )
       ),
-      React.createElement(Toolbar, { stateRef, serializer, allowUploadFile, allowDownloadFile, allowDownloadImage })
+      React.createElement(Toolbar, { stateRef, serializer, allowUploadFile, allowDownloadFile, allowDownloadImage, maxMode, zenMode })
     );
   } catch (error) {
     return React.createElement(
@@ -7721,13 +7752,13 @@ const setNodePosition = (node, position) => {
   node.setPositionAppointed(appointed);
 };
 const createStepNode = (step, file, options) => {
-  const { type, subOf, handlers, assistant, linkPrevious, appendNode, appendLink } = options;
-  const node = new StepNodeModel(step, file, { type, subOf, handlers, assistant });
+  const { type, subOf, handlers, assistant, decorator, linkPrevious, appendNode, appendLink } = options;
+  const node = new StepNodeModel(step, file, { type, subOf, handlers, assistant, decorator });
   setNodePosition(node, () => askStepNodePosition(step));
   appendNode(node);
   const link = linkPrevious(node);
   appendLink(link);
-  const endOfSub = DEFAULTS.createSubStepNodes(node, { appendNode, appendLink, handlers, assistant });
+  const endOfSub = DEFAULTS.createSubStepNodes(node, { appendNode, appendLink, handlers, assistant, decorator });
   return endOfSub == null ? node : endOfSub;
 };
 const askFirstLinkCreate = (model, createLink) => {
@@ -7755,7 +7786,7 @@ const askFirstLinkFromParentCreate = (model) => {
   });
 };
 const createSubNodesOfSingleRoute = (options) => {
-  const { model, askSteps, options: { appendNode, appendLink, handlers, assistant }, findPortFromModel, createPortFromModel, askFirstLinkExtras } = options;
+  const { model, askSteps, options: { appendNode, appendLink, handlers, assistant, decorator }, findPortFromModel, createPortFromModel, askFirstLinkExtras } = options;
   const steps = askSteps();
   if (steps == null || steps.length === 0) {
     return void 0;
@@ -7773,6 +7804,7 @@ const createSubNodesOfSingleRoute = (options) => {
       type: StepNodeEntityType.NORMAL,
       handlers,
       assistant,
+      decorator,
       subOf: model.step,
       previousNode: previousNode2,
       linkPrevious,
@@ -10399,7 +10431,7 @@ const PlaygroundWrapper = qe.div.attrs(() => {
     }
 `;
 const PlaygroundDelegate = (props) => {
-  const { $pp, $wrapped, assistant, serializer, deserializer, allowUploadFile = false, allowDownloadFile = true, allowDownloadImage = true, ...rest } = props;
+  const { $pp, $wrapped, assistant, decorator, serializer, deserializer, allowUploadFile = false, allowDownloadFile = true, allowDownloadImage = true, maxMode = true, zenMode = true, ...rest } = props;
   const { $p2r, $onValueChange, $avs: { $disabled, $visible } } = $wrapped;
   const ref = reactExports.useRef(null);
   const globalHandlers = useGlobalHandlers();
@@ -10440,7 +10472,7 @@ const PlaygroundDelegate = (props) => {
     { ...rest, "data-disabled": $disabled, "data-visible": $visible, id: PPUtils.asId(PPUtils.absolute($p2r, $pp), props.id), ref },
     React.createElement(EditDialog, null),
     React.createElement(PlaygroundBridge, { content, onContentChanged }),
-    React.createElement(Editor, { content, assistant, serializer: state.serializer, deserializer: state.deserializer, allowUploadFile, allowDownloadFile, allowDownloadImage })
+    React.createElement(Editor, { content, assistant, decorator, serializer: state.serializer, deserializer: state.deserializer, allowUploadFile, allowDownloadFile, allowDownloadImage, maxMode, zenMode })
   );
 };
 const Playground = (props) => {
@@ -10495,6 +10527,7 @@ const PlaygroundAskRefStepsBuild = {
     return index$1.createSyncSnippetBuild("askRefSteps", []).build(value, list);
   }
 };
+const PlaygroundThemeBuild = index$1.createSyncSnippetBuild("theme", ["theme"]);
 class AbstractPlaygroundTranslator extends index$1.SpecificWidgetTranslator {
   beautifyProperties(def) {
     return super.beautifyProperties(this.beautifyColumnSpan(def, 12));
@@ -10508,7 +10541,8 @@ class AbstractPlaygroundTranslator extends index$1.SpecificWidgetTranslator {
       PlaygroundAskSystemsForHttpBuild,
       PlaygroundAskTypeOrmDatasourcesBuild,
       PlaygroundAskRefPipelinesBuild,
-      PlaygroundAskRefStepsBuild
+      PlaygroundAskRefStepsBuild,
+      PlaygroundThemeBuild
     ];
   }
   getAttributeNamesMapping() {
@@ -10518,7 +10552,8 @@ class AbstractPlaygroundTranslator extends index$1.SpecificWidgetTranslator {
       [`${type}.httpSystems`]: "assistant.askSystemsForHttp",
       [`${type}.typeOrmDatasources`]: "assistant.askTypeOrmDatasources",
       [`${type}.refPipelines`]: "assistant.askRefPipelines",
-      [`${type}.refSteps`]: "assistant.askRefSteps"
+      [`${type}.refSteps`]: "assistant.askRefSteps",
+      [`${type}.theme`]: "decorator.theme"
     };
   }
 }

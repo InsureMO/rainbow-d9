@@ -4,11 +4,11 @@ var __publicField = (obj, key, value) => {
   __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
   return value;
 };
-import { i as index$2, I as IntlLabel, D as DOM_KEY_WIDGET, C as CssVars, d as utils$2, b as useGlobalHandlers, t as toIntlLabel, U as UnwrappedButton, B as ButtonInk, e as ButtonFill } from "./rainbow-d9-n2-UXPLIn0T.js";
-import { R as React, r as reactExports, q as qe } from "./react-base-7-SwU6nB.js";
-import { V as VUtils, r as registerWidget, g as useCreateEventBus, M as MUtils, P as PPUtils, a as useThrottler, e as useForceUpdate, S as StandaloneRoot, m as ExternalDefMismatchIndicator } from "./rainbow-d9-n1-76aA7djH.js";
-import { T as Tag, r as tags, V as ViewPlugin, u as syntaxTree, H as HighlightStyle, v as defaultHighlightStyle, w as syntaxHighlighting, x as styleTags, D as Decoration, I as InlineContext, W as WidgetType, y as EditorView, z as EditorState, A as basicSetup, B as keymap, C as indentWithTab, F as markdown, G as javascript, J as markdownLanguage, K as lintGutter, L as linter, N as json, O as jsonParseLinter } from "./vendor-IN_V4Ne7.js";
-import { a as index, b as index$2$1, i as index$1, p as parseDoc } from "./rainbow-d9-n3-929utK20.js";
+import { i as index$2, I as IntlLabel, D as DOM_KEY_WIDGET, C as CssVars, d as utils$2, b as useGlobalHandlers, t as toIntlLabel, U as UnwrappedButton, B as ButtonInk, e as ButtonFill } from "./rainbow-d9-n2--Bk5Qy5v.js";
+import { R as React, r as reactExports, q as qe } from "./react-base-Z1gRHTGG.js";
+import { V as VUtils, r as registerWidget, g as useCreateEventBus, M as MUtils, P as PPUtils, a as useThrottler, u as useRootEventBus, R as RootEventTypes, e as useForceUpdate, S as StandaloneRoot, m as ExternalDefMismatchIndicator } from "./rainbow-d9-n1-88ursp9F.js";
+import { T as Tag, r as tags, V as ViewPlugin, u as syntaxTree, H as HighlightStyle, v as defaultHighlightStyle, w as syntaxHighlighting, x as styleTags, D as Decoration, I as InlineContext, W as WidgetType, y as EditorView, z as EditorState, A as basicSetup, B as keymap, C as indentWithTab, F as markdown, G as javascript, J as markdownLanguage, K as lintGutter, L as linter, N as json, O as Compartment, P as jsonParseLinter } from "./vendor-ZfeLJAN2.js";
+import { a as index, b as index$2$1, i as index$1, p as parseDoc } from "./rainbow-d9-n3-lLxtMVrh.js";
 var PlaygroundWidgetGroupKey;
 (function(PlaygroundWidgetGroupKey2) {
   PlaygroundWidgetGroupKey2["CONTAINERS"] = "container-group";
@@ -828,7 +828,7 @@ const ToolbarButton = (props) => {
 };
 const PrimaryBar = (props) => {
   var _a;
-  const { groups } = props;
+  const { groups, maxMode = true, zenMode = true } = props;
   const { fire } = usePlaygroundEventBus();
   const [state, setState] = reactExports.useState({
     editorBadge: false,
@@ -897,10 +897,14 @@ const PrimaryBar = (props) => {
     state.editorBadge ? React.createElement(ToolbarButton, { icon: PlaygroundIcons.HIDE_EDITOR_BADGE, tooltip: "Hide Editor Badge", click: onHideBadgeClicked }) : React.createElement(ToolbarButton, { icon: PlaygroundIcons.SHOW_EDITOR_BADGE, tooltip: "Show Editor Badge", click: onShowBadgeClicked }),
     state.locator ? React.createElement(ToolbarButton, { icon: PlaygroundIcons.HIDE_LOCATOR, tooltip: "Hide Widget Locator", click: onHideLocatorClicked }) : React.createElement(ToolbarButton, { icon: PlaygroundIcons.SHOW_LOCATOR, tooltip: "Show Widget Locator", click: onShowLocatorClicked }),
     React.createElement(ToolbarButton, { icon: PlaygroundIcons.JSON, tooltip: "Mock JSON", click: onMockJsonClicked }),
-    React.createElement(ToolbarSeparator, null),
-    !state.zen && state.maximized ? React.createElement(ToolbarButton, { icon: PlaygroundIcons.MINIMIZE, tooltip: "Quit Maximization", click: onMinClicked }) : null,
-    !state.zen && !state.maximized ? React.createElement(ToolbarButton, { icon: PlaygroundIcons.MAXIMIZE, tooltip: "Maximize", click: onMaxClicked }) : null,
-    state.zen ? React.createElement(ToolbarButton, { icon: PlaygroundIcons.WINDOW, tooltip: "Quit Zen Mode", click: onWindowClicked }) : React.createElement(ToolbarButton, { icon: PlaygroundIcons.ZEN, tooltip: "Zen Mode", click: onZenClicked })
+    maxMode || zenMode ? React.createElement(
+      React.Fragment,
+      null,
+      React.createElement(ToolbarSeparator, null),
+      maxMode ? !state.zen && state.maximized ? React.createElement(ToolbarButton, { icon: PlaygroundIcons.MINIMIZE, tooltip: "Quit Maximization", click: onMinClicked }) : null : null,
+      maxMode ? !state.zen && !state.maximized ? React.createElement(ToolbarButton, { icon: PlaygroundIcons.MAXIMIZE, tooltip: "Maximize", click: onMaxClicked }) : null : null,
+      zenMode ? state.zen ? React.createElement(ToolbarButton, { icon: PlaygroundIcons.WINDOW, tooltip: "Quit Zen Mode", click: onWindowClicked }) : React.createElement(ToolbarButton, { icon: PlaygroundIcons.ZEN, tooltip: "Zen Mode", click: onZenClicked }) : null
+    ) : null
   );
 };
 const SecondaryBar = (props) => {
@@ -928,7 +932,7 @@ const SecondaryBar = (props) => {
   }));
 };
 const Toolbar = (props) => {
-  const { groups, widgets } = props;
+  const { groups, widgets, maxMode, zenMode } = props;
   const buttons = widgets.reduce((buttons2, widget) => {
     const { $wt, $key, icon, tooltip, group, notInToolbar } = widget;
     if (notInToolbar)
@@ -948,9 +952,36 @@ const Toolbar = (props) => {
   return React.createElement(
     ToolbarWrapper,
     null,
-    React.createElement(PrimaryBar, { groups }),
+    React.createElement(PrimaryBar, { groups, maxMode, zenMode }),
     React.createElement(SecondaryBar, { groups, buttons })
   );
+};
+const createTheme = (theme) => {
+  const themeListener = new Compartment();
+  const themeExtension = theme == null ? void 0 : theme();
+  const changeableThemeExtension = themeExtension == null ? [] : [themeListener.of(themeExtension)];
+  return {
+    extension: changeableThemeExtension,
+    listener: themeListener
+  };
+};
+const useTheme = (options) => {
+  const { theme, editor, listener } = options;
+  const rootEventBus = useRootEventBus();
+  reactExports.useEffect(() => {
+    var _a;
+    if (editor == null || listener == null || theme == null) {
+      return;
+    }
+    const onThemeChanged = (newTheme) => {
+      editor.dispatch({ effects: listener.reconfigure(theme(newTheme)) });
+    };
+    (_a = rootEventBus == null ? void 0 : rootEventBus.on) == null ? void 0 : _a.call(rootEventBus, RootEventTypes.THEME_CHANGED, onThemeChanged);
+    return () => {
+      var _a2;
+      (_a2 = rootEventBus == null ? void 0 : rootEventBus.off) == null ? void 0 : _a2.call(rootEventBus, RootEventTypes.THEME_CHANGED, onThemeChanged);
+    };
+  }, [rootEventBus == null ? void 0 : rootEventBus.on, rootEventBus == null ? void 0 : rootEventBus.off, theme, editor, listener]);
 };
 const HeadingMarkTag = Tag.define();
 const ListMarkTag = Tag.define();
@@ -3854,7 +3885,7 @@ const EditorPanel = qe.div.attrs({ [DOM_KEY_WIDGET]: "d9-playground-editor-panel
     ${createEditorStyles({ badge: true })}
 `;
 const Editor = (props) => {
-  const { content, externalDefsTypes, widgets, ...rest } = props;
+  const { content, externalDefsTypes, widgets, decorator: { theme } = {}, ...rest } = props;
   const ref = reactExports.useRef(null);
   const { on, off, fire } = usePlaygroundEventBus();
   const [state, setState] = reactExports.useState({ editorBadge: false });
@@ -3862,6 +3893,7 @@ const Editor = (props) => {
     if (ref.current == null) {
       return;
     }
+    const { extension: changeableThemeExtension, listener: themeListener } = createTheme(theme);
     const editor = new EditorView({
       state: EditorState.create({
         doc: "",
@@ -3877,6 +3909,7 @@ const Editor = (props) => {
           }),
           ...createWidgetLinter({ widgets, externalDefsTypes: externalDefsTypes ?? {} }),
           WidgetDeclarationIconPlugin,
+          ...changeableThemeExtension,
           EditorView.updateListener.of((view) => {
             if (view.docChanged) {
               const doc = view.state.doc;
@@ -3888,7 +3921,7 @@ const Editor = (props) => {
       }),
       parent: ref.current
     });
-    setState((state2) => ({ ...state2, editor }));
+    setState((state2) => ({ ...state2, editor, themeListener }));
     return () => {
       editor.destroy();
     };
@@ -4029,6 +4062,7 @@ const Editor = (props) => {
       off(PlaygroundEventTypes.INSERT_WIDGET_TEMPLATE, onInsertWidgetTemplate);
     };
   }, [on, off, fire, state.editor, widgets.widgets]);
+  useTheme({ theme, editor: state.editor, listener: state.themeListener });
   return React.createElement(
     React.Fragment,
     null,
@@ -4451,7 +4485,7 @@ const MockJsonDialogFooter = qe.div.attrs({ [DOM_KEY_WIDGET]: "d9-playground-moc
     }
 `;
 const MockJsonDialog = (props) => {
-  const { mockData } = props;
+  const { mockData, decorator: { theme } = {} } = props;
   const ref = reactExports.useRef(null);
   const { on, off, fire } = usePlaygroundEventBus();
   const [state, setState] = reactExports.useState({ visible: false, copied: false });
@@ -4459,6 +4493,7 @@ const MockJsonDialog = (props) => {
     if (ref.current == null) {
       return;
     }
+    const { extension: changeableThemeExtension, listener: themeListener } = createTheme(theme);
     const editor = new EditorView({
       state: EditorState.create({
         doc: "",
@@ -4467,12 +4502,13 @@ const MockJsonDialog = (props) => {
           keymap.of([indentWithTab]),
           json(),
           lintGutter(),
-          linter(jsonParseLinter())
+          linter(jsonParseLinter()),
+          ...changeableThemeExtension
         ]
       }),
       parent: ref.current
     });
-    setState((state2) => ({ ...state2, editor }));
+    setState((state2) => ({ ...state2, editor, themeListener }));
     return () => {
       editor.destroy();
     };
@@ -4504,6 +4540,7 @@ const MockJsonDialog = (props) => {
       }, 5e3);
     }
   }, [state.copied]);
+  useTheme({ theme, editor: state.editor, listener: state.themeListener });
   const onCopyToClipboard = async () => {
     const json2 = state.editor.state.doc.toString();
     await navigator.clipboard.writeText(json2);
@@ -4561,18 +4598,13 @@ const MockJsonDialog = (props) => {
         state.copied ? React.createElement(UnwrappedButton, { ink: ButtonInk.SUCCESS, onClick: onCopyToClipboard }, Labels.CopiedToClipboard) : React.createElement(UnwrappedButton, { ink: ButtonInk.PRIMARY, onClick: onCopyToClipboard }, Labels.CopyToClipboard),
         React.createElement(UnwrappedButton, { ink: ButtonInk.PRIMARY, onClick: onDownload }, Labels.Download),
         React.createElement(UnwrappedButton, { ink: ButtonInk.PRIMARY, onClick: onConfirm }, Labels.ConfirmAndRefresh),
-        React.createElement(
-          UnwrappedButton,
-          { ink: ButtonInk.WAIVE, onClick: onHide },
-          Labels.Cancel,
-          ";"
-        )
+        React.createElement(UnwrappedButton, { ink: ButtonInk.WAIVE, onClick: onHide }, Labels.Cancel)
       )
     )
   );
 };
 const Viewer = (props) => {
-  const { minViewerWidth, mockData } = props;
+  const { minViewerWidth, mockData, decorator } = props;
   const { on, off } = usePlaygroundEventBus();
   const { replace } = useThrottler();
   const [content, setContent] = reactExports.useState("");
@@ -4589,14 +4621,14 @@ const Viewer = (props) => {
     return React.createElement(
       ViewerWrapper,
       { minViewerWidth },
-      React.createElement(MockJsonDialog, { mockData }),
+      React.createElement(MockJsonDialog, { mockData, decorator }),
       React.createElement(ParseError, null, Labels.NoContentGiven)
     );
   }
   return React.createElement(
     React.Fragment,
     null,
-    React.createElement(MockJsonDialog, { mockData }),
+    React.createElement(MockJsonDialog, { mockData, decorator }),
     React.createElement(ViewerKernel, { ...props, content })
   );
 };
@@ -4820,7 +4852,7 @@ const PlaygroundWrapper = qe.div.attrs(() => {
     }
 `;
 const PlaygroundDelegate = (props) => {
-  const { $pp, $wrapped, mockData, externalDefs, externalDefsTypes, widgets, usage: { useN2 = true, useCharts = false } = {}, minViewerWidth, ...rest } = props;
+  const { $pp, $wrapped, mockData, externalDefs, externalDefsTypes, widgets, usage: { useN2 = true, useCharts = false } = {}, minViewerWidth, maxMode, zenMode, decorator, ...rest } = props;
   const { $p2r, $onValueChange, $avs: { $disabled, $visible } } = $wrapped;
   const ref = reactExports.useRef(null);
   const globalHandlers = useGlobalHandlers();
@@ -4842,10 +4874,10 @@ const PlaygroundDelegate = (props) => {
     PlaygroundWrapper,
     { ...rest, "data-disabled": $disabled, "data-visible": $visible, "data-zen": zen, "data-maximized": maximized, id: PPUtils.asId(PPUtils.absolute($p2r, $pp), props.id), ref },
     React.createElement(PlaygroundBridge, { content, onContentChanged }),
-    React.createElement(Toolbar, { groups: availableWidgets.groups, widgets: availableWidgets.widgets }),
-    React.createElement(Editor, { content, externalDefsTypes: initializedExternalDefsTypes, widgets: availableWidgets }),
+    React.createElement(Toolbar, { groups: availableWidgets.groups, widgets: availableWidgets.widgets, maxMode, zenMode }),
+    React.createElement(Editor, { content, externalDefsTypes: initializedExternalDefsTypes, widgets: availableWidgets, decorator }),
     React.createElement(Help, null),
-    React.createElement(Viewer, { mockData: initializedMockData, externalDefs: initializedExternalDefs, minViewerWidth }),
+    React.createElement(Viewer, { mockData: initializedMockData, externalDefs: initializedExternalDefs, minViewerWidth, decorator }),
     React.createElement(Slider, { resizeTo })
   );
 };
@@ -4860,6 +4892,7 @@ index$1.ValidatorUtils.registerRegexps({ "abc": /^abc$/ });
 const PlaygroundMockDataBuild = index$1.createAsyncSnippetBuild("mockData", []);
 const PlaygroundExternalDefsBuild = index$1.createAsyncSnippetBuild("externalDefs", []);
 const PlaygroundExternalDefsTypesBuild = index$1.createAsyncSnippetBuild("externalDefsTypes", []);
+const PlaygroundThemeBuild = index$1.createSyncSnippetBuild("theme", ["theme"]);
 class AbstractPlaygroundTranslator extends index$1.SpecificWidgetTranslator {
   beautifyProperties(def) {
     return super.beautifyProperties(this.beautifyColumnSpan(def, 12));
@@ -4871,15 +4904,17 @@ class AbstractPlaygroundTranslator extends index$1.SpecificWidgetTranslator {
     return [
       PlaygroundMockDataBuild,
       PlaygroundExternalDefsBuild,
-      PlaygroundExternalDefsTypesBuild
+      PlaygroundExternalDefsTypesBuild,
+      PlaygroundThemeBuild
     ];
   }
   getAttributeNamesMapping() {
-    const keys = ["useN2", "useCharts"];
-    return keys.reduce((mapping, key) => {
-      mapping[`${this.getSupportedType()}.${key}`] = `usage.${key}`;
-      return mapping;
-    }, {});
+    const type = this.getSupportedType();
+    return {
+      [`${type}.useN2`]: "usage.useN2",
+      [`${type}.useCharts`]: "usage.useCharts",
+      [`${type}.theme`]: "decorator.theme"
+    };
   }
 }
 const registerPlayground = (widgetHelper, widgetType) => {
