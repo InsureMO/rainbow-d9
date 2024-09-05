@@ -20,6 +20,8 @@ import {WidgetTemplateDialog} from './template-dialog';
 import {beautifyTemplate} from './utils';
 import {EditorPanel, EditorWrapper} from './widgets';
 
+export * from './widgets';
+
 export interface EditorState {
 	size?: number;
 	editor?: EditorView;

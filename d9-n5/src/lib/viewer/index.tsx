@@ -7,6 +7,9 @@ import {ViewerKernel} from './kernel';
 import {MockJsonDialog} from './mock-json-dialog';
 import {ParseError, ViewerWrapper} from './widgets';
 
+export * from './widgets';
+export * from './kernel';
+
 export const Viewer = (props: ViewerProps) => {
 	const {minViewerWidth, mockData, decorator} = props;
 
