@@ -1,8 +1,15 @@
-import {BridgeEventBusProvider, StandaloneRoot} from '@rainbow-d9/n1';
+import {
+	BridgeEventBusProvider,
+	BridgeEventListener,
+	BridgeToRootEventTypes,
+	StandaloneRoot,
+	useBridgeEventBus
+} from '@rainbow-d9/n1';
 import {$d9n2, GlobalRoot} from '@rainbow-d9/n2';
 import {PlaygroundDecorator} from '@rainbow-d9/n5';
 import {PlaygroundModuleAssistant} from '@rainbow-d9/n6';
 import {vscodeDark, vscodeLight} from '@uiw/codemirror-theme-vscode';
+import {Fragment, MutableRefObject, useEffect, useRef} from 'react';
 import {ThemeSwitcher} from '../theme-switcher';
 import {useDemoMarkdown} from '../use-demo-markdown';
 import DemoData from './demo.json';
@@ -19,8 +26,25 @@ $d9n2.intl.labels['en-US'] = {
 };
 DemoData.yaml = DemoYaml;
 
+const ThemeStateListener = (props: { theme: MutableRefObject<string> }) => {
+	const {theme} = props;
+
+	const {on, off} = useBridgeEventBus();
+	useEffect(() => {
+		const onThemeChanged: BridgeEventListener<string> = (args) => {
+			theme.current = args;
+		};
+		on(BridgeToRootEventTypes.THEME_CHANGED, onThemeChanged);
+		return () => {
+			off(BridgeToRootEventTypes.THEME_CHANGED, onThemeChanged);
+		};
+	}, [on, off]);
+	return <Fragment/>;
+};
+
 export const O23Playground = () => {
 	const def = useDemoMarkdown(DemoContent);
+	const themeRef = useRef<string>('light');
 	const externalDefs = {
 		httpSystems: (() => {
 			return [
@@ -55,18 +79,14 @@ export const O23Playground = () => {
 			];
 		}) as PlaygroundModuleAssistant['askRefSteps'],
 		decorator: {
-			theme: (() => {
-				let current = 'light';
-				return (theme?: string) => {
-					current = theme ?? current;
-					// return vscodeDark;
-					return current === 'dark' ? vscodeDark : vscodeLight;
-				};
-			})()
+			theme: (theme?: string) => {
+				return (theme || themeRef.current) === 'dark' ? vscodeDark : vscodeLight;
+			}
 		} as PlaygroundDecorator
 	};
 	return <GlobalRoot>
 		<BridgeEventBusProvider>
+			<ThemeStateListener theme={themeRef}/>
 			<ThemeSwitcher/>
 			<StandaloneRoot {...def} $root={DemoData} externalDefs={externalDefs}/>
 		</BridgeEventBusProvider>
