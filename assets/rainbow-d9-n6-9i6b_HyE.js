@@ -4,14 +4,14 @@ var __publicField = (obj, key, value) => {
   __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
   return value;
 };
-import { a as color, y as EditorView, z as EditorState, A as basicSetup, Q as indentUnit, B as keymap, C as indentWithTab, K as lintGutter, O as Compartment, R as jsYaml, G as javascript, S as sql$1, U as dom2image } from "./vendor-zxjJr8CJ.js";
-import { C as CssVars, f as CssConstants, I as IntlLabel, D as DOM_KEY_WIDGET, d as utils$2, g as UnwrappedCheckbox, h as UnwrappedDropdown, O as OptionItemSort, j as UnwrappedInput, k as UnwrappedCaption, l as UnwrappedTextarea, m as UnwrappedDecorateInput, n as UnwrappedCheckboxes, b as useGlobalHandlers } from "./rainbow-d9-n2-MFVsxnoK.js";
-import { R as React, r as reactExports, q as qe, W as We, D as DefaultLinkModel, P as PortWidget, a as PortModelAlignment, b as PortModel, N as NodeModel, C as CanvasWidget, c as DiagramEngine, d as NodeLayerFactory, L as LinkLayerFactory, S as SelectionBoxLayerFactory, e as DefaultLabelFactory, f as DefaultNodeFactory, g as DefaultLinkFactory, h as PathFindingLinkFactory, i as DefaultPortFactory, j as DiagramModel, k as State, l as SelectingState, A as AbstractModelFactory, m as AbstractReactFactory, n as LinkWidget, o as DefaultLinkPointWidget, p as DefaultLinkSegmentWidget } from "./react-base-IBs3ZG0N.js";
-import { V as VUtils, a as useThrottler, r as registerWidget, g as useCreateEventBus, u as useRootEventBus, R as RootEventTypes, e as useForceUpdate, M as MUtils, P as PPUtils } from "./rainbow-d9-n1-7UJE-PMv.js";
-import { i as index$1 } from "./rainbow-d9-n3-0eTMBa5Q.js";
-import { M as Markdown } from "./react-markdown-ZQsE55GI.js";
-import { r as remarkGfm } from "./remark-WB2p2Zwl.js";
-import { S as SyntaxHighlighter, p as prism } from "./react-syntax-highlighter-7YZFxY-z.js";
+import { a as color, y as EditorView, z as EditorState, A as basicSetup, Q as indentUnit, B as keymap, C as indentWithTab, K as lintGutter, O as Compartment, R as jsYaml, G as javascript, S as sql$1, U as dom2image } from "./vendor-Bm3-2hBp.js";
+import { C as CssVars, f as CssConstants, I as IntlLabel, D as DOM_KEY_WIDGET, d as utils$2, g as UnwrappedCheckbox, h as UnwrappedDropdown, O as OptionItemSort, j as UnwrappedInput, k as UnwrappedCaption, l as UnwrappedTextarea, m as UnwrappedDecorateInput, n as UnwrappedCheckboxes, b as useGlobalHandlers } from "./rainbow-d9-n2-47WntGD6.js";
+import { R as React, r as reactExports, q as qe, W as We, D as DefaultLinkModel, P as PortWidget, a as PortModelAlignment, b as PortModel, N as NodeModel, C as CanvasWidget, c as DiagramEngine, d as NodeLayerFactory, L as LinkLayerFactory, S as SelectionBoxLayerFactory, e as DefaultLabelFactory, f as DefaultNodeFactory, g as DefaultLinkFactory, h as PathFindingLinkFactory, i as DefaultPortFactory, j as DiagramModel, k as State, l as SelectingState, A as AbstractModelFactory, m as AbstractReactFactory, n as LinkWidget, o as DefaultLinkPointWidget, p as DefaultLinkSegmentWidget } from "./react-base-m4feaLXG.js";
+import { V as VUtils, a as useThrottler, r as registerWidget, g as useCreateEventBus, u as useRootEventBus, R as RootEventTypes, e as useForceUpdate, M as MUtils, P as PPUtils } from "./rainbow-d9-n1-5ABrxvpf.js";
+import { i as index$1 } from "./rainbow-d9-n3-hgIvMJdn.js";
+import { M as Markdown } from "./react-markdown-gZETaoDn.js";
+import { r as remarkGfm } from "./remark-bFswqQBA.js";
+import { S as SyntaxHighlighter, p as prism } from "./react-syntax-highlighter-xtCpj_Df.js";
 const PlaygroundCssConstants = {
   BACKGROUND_COLOR: CssVars.BACKGROUND_COLOR,
   FONT_COLOR: CssVars.FONT_COLOR,
@@ -6417,7 +6417,7 @@ const Toolbar = (props) => {
     }, { width: 0, height: 0 });
     node.style.width = `${width + DEFAULTS.diagram.startLeft}px`;
     node.style.height = `${height + DEFAULTS.diagram.startTop}px`;
-    const dataUrl = await dom2image.toPng(node, { quality: 1, bgcolor: "white" });
+    const dataUrl = await dom2image.toPng(node, { quality: 1, bgcolor: "transparent" });
     const link = document.createElement("a");
     link.download = `${((_a = stateRef.current.def) == null ? void 0 : _a.code) || "no-code"}-diagram.png`;
     link.href = dataUrl;
