@@ -112,7 +112,7 @@ export const Toolbar = (props: ToolbarProps) => {
 		// svgNode.style.transform = '';
 		// divNode.style.transform = '';
 		// noinspection SpellCheckingInspection
-		const dataUrl = await dom2image.toPng(node, {quality: 1, bgcolor: 'white'});
+		const dataUrl = await dom2image.toPng(node, {quality: 1, bgcolor: 'transparent'});
 		// svgNode.style.transform = transform;
 		// divNode.style.transform = transform;
 		// node.style.overflow = '';
