@@ -4,14 +4,14 @@ var __publicField = (obj, key, value) => {
   __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
   return value;
 };
-import { a as color, y as EditorView, z as EditorState, A as basicSetup, Q as indentUnit, B as keymap, C as indentWithTab, K as lintGutter, O as Compartment, R as jsYaml, G as javascript, S as sql$1, U as dom2image } from "./vendor-KCMozh_E.js";
-import { C as CssVars, f as CssConstants, I as IntlLabel, D as DOM_KEY_WIDGET, d as utils$2, g as UnwrappedCheckbox, h as UnwrappedDropdown, O as OptionItemSort, j as UnwrappedInput, k as UnwrappedCaption, l as UnwrappedTextarea, m as UnwrappedDecorateInput, n as UnwrappedCheckboxes, b as useGlobalHandlers } from "./rainbow-d9-n2-apdSMFDV.js";
-import { R as React, r as reactExports, q as qe, W as We, D as DefaultLinkModel, P as PortWidget, a as PortModelAlignment, b as PortModel, N as NodeModel, C as CanvasWidget, c as DiagramEngine, d as NodeLayerFactory, L as LinkLayerFactory, S as SelectionBoxLayerFactory, e as DefaultLabelFactory, f as DefaultNodeFactory, g as DefaultLinkFactory, h as PathFindingLinkFactory, i as DefaultPortFactory, j as DiagramModel, k as State, l as SelectingState, A as AbstractModelFactory, m as AbstractReactFactory, n as LinkWidget, o as DefaultLinkPointWidget, p as DefaultLinkSegmentWidget } from "./react-base-GsLdKOD0.js";
-import { V as VUtils, a as useThrottler, r as registerWidget, g as useCreateEventBus, u as useRootEventBus, R as RootEventTypes, e as useForceUpdate, M as MUtils, P as PPUtils } from "./rainbow-d9-n1-YJTQJf2e.js";
-import { i as index$1 } from "./rainbow-d9-n3-wSq2reC3.js";
-import { M as Markdown } from "./react-markdown-TPMigQ1v.js";
-import { r as remarkGfm } from "./remark-Pva9uu6S.js";
-import { S as SyntaxHighlighter, p as prism } from "./react-syntax-highlighter-zpy2Fnot.js";
+import { a as color, y as EditorView, z as EditorState, A as basicSetup, Q as indentUnit, B as keymap, C as indentWithTab, K as lintGutter, O as Compartment, R as jsYaml, G as javascript, S as sql$1, U as dom2image } from "./vendor-FCb3oBSf.js";
+import { C as CssVars, f as CssConstants, I as IntlLabel, D as DOM_KEY_WIDGET, d as utils$2, g as UnwrappedCheckbox, h as UnwrappedDropdown, O as OptionItemSort, j as UnwrappedInput, k as UnwrappedCaption, l as UnwrappedTextarea, m as UnwrappedDecorateInput, n as UnwrappedCheckboxes, b as useGlobalHandlers } from "./rainbow-d9-n2-k4Dt70rQ.js";
+import { R as React, r as reactExports, q as qe, W as We, D as DefaultLinkModel, P as PortWidget, a as PortModelAlignment, b as PortModel, N as NodeModel, C as CanvasWidget, c as DiagramEngine, d as NodeLayerFactory, L as LinkLayerFactory, S as SelectionBoxLayerFactory, e as DefaultLabelFactory, f as DefaultNodeFactory, g as DefaultLinkFactory, h as PathFindingLinkFactory, i as DefaultPortFactory, j as DiagramModel, k as State, l as SelectingState, A as AbstractModelFactory, m as AbstractReactFactory, n as LinkWidget, o as DefaultLinkPointWidget, p as DefaultLinkSegmentWidget } from "./react-base-5EfQJmYR.js";
+import { V as VUtils, a as useThrottler, r as registerWidget, g as useCreateEventBus, u as useRootEventBus, R as RootEventTypes, e as useForceUpdate, M as MUtils, P as PPUtils } from "./rainbow-d9-n1-vYwVa9YS.js";
+import { i as index$1 } from "./rainbow-d9-n3-nbuKGzYH.js";
+import { M as Markdown } from "./react-markdown-dUUN_Lwi.js";
+import { r as remarkGfm } from "./remark-Xh596JfA.js";
+import { S as SyntaxHighlighter, p as prism } from "./react-syntax-highlighter-mXbRp5cG.js";
 const PlaygroundCssConstants = {
   BACKGROUND_COLOR: CssVars.BACKGROUND_COLOR,
   FONT_COLOR: CssVars.FONT_COLOR,
@@ -343,8 +343,8 @@ const createPlaygroundCssVars = (variables) => {
     SNIPPET_HTTP_RESPONSE_ERROR_HANDLES_HEIGHT: "var(--o23-playground-snippet-http-response-error-handles-height, 300px)",
     SNIPPET_ROUTE_CHECK_HEIGHT: "var(--o23-playground-snippet-route-check-height, 200px)",
     SQL_HEIGHT: "var(--o23-playground-sql-height, 200px)",
-    CODE_MIRROR_SEARCH_PANEL_BACKGROUND_COLOR: `var(--d9-playground-cm-search-panel-background-color, ${variables.CODE_MIRROR_SEARCH_PANEL_BACKGROUND_COLOR})`,
-    CODE_MIRROR_SEARCH_PANEL_BUTTON_BACKGROUND_COLOR: `var(--d9-playground-cm-search-panel-button-background-color, ${variables.CODE_MIRROR_SEARCH_PANEL_BUTTON_BACKGROUND_COLOR})`
+    CODE_MIRROR_SEARCH_PANEL_BACKGROUND_COLOR: `var(--o23-playground-cm-search-panel-background-color, ${variables.CODE_MIRROR_SEARCH_PANEL_BACKGROUND_COLOR})`,
+    CODE_MIRROR_SEARCH_PANEL_BUTTON_BACKGROUND_COLOR: `var(--o23-playground-cm-search-panel-button-background-color, ${variables.CODE_MIRROR_SEARCH_PANEL_BUTTON_BACKGROUND_COLOR})`
   };
 };
 const PlaygroundCssVars = createPlaygroundCssVars(PlaygroundCssConstants);
