@@ -48,7 +48,9 @@ export const PlaygroundCssConstants = {
 	PORT_ROUTE_TEST_COLOR: '#8454aa',
 	PORT_OTHERWISE_COLOR: '#b352b3',
 	PRE_PORT_COLOR: '#87a55f',
-	POST_PORT_COLOR: '#c69dab'
+	POST_PORT_COLOR: '#c69dab',
+	CODE_MIRROR_SEARCH_PANEL_BACKGROUND_COLOR: CssVars.BACKGROUND_COLOR,
+	CODE_MIRROR_SEARCH_PANEL_BUTTON_BACKGROUND_COLOR: 'transparent'
 };
 export const createPlaygroundCssVars = (variables: typeof PlaygroundCssConstants) => {
 	return {
@@ -339,7 +341,9 @@ export const createPlaygroundCssVars = (variables: typeof PlaygroundCssConstants
 		SNIPPET_HTTP_READ_RESPONSE_HEIGHT: 'var(--o23-playground-snippet-http-read-response-height, 200px)',
 		SNIPPET_HTTP_RESPONSE_ERROR_HANDLES_HEIGHT: 'var(--o23-playground-snippet-http-response-error-handles-height, 300px)',
 		SNIPPET_ROUTE_CHECK_HEIGHT: 'var(--o23-playground-snippet-route-check-height, 200px)',
-		SQL_HEIGHT: 'var(--o23-playground-sql-height, 200px)'
+		SQL_HEIGHT: 'var(--o23-playground-sql-height, 200px)',
+		CODE_MIRROR_SEARCH_PANEL_BACKGROUND_COLOR: `var(--d9-playground-cm-search-panel-background-color, ${variables.CODE_MIRROR_SEARCH_PANEL_BACKGROUND_COLOR})`,
+		CODE_MIRROR_SEARCH_PANEL_BUTTON_BACKGROUND_COLOR: `var(--d9-playground-cm-search-panel-button-background-color, ${variables.CODE_MIRROR_SEARCH_PANEL_BUTTON_BACKGROUND_COLOR})`
 	};
 };
 export const PlaygroundCssVars: ReturnType<typeof createPlaygroundCssVars> = createPlaygroundCssVars(PlaygroundCssConstants);

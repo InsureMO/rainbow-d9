@@ -19,7 +19,9 @@ export const PlaygroundCssConstants = {
 	WIDGET_DECLARATION_ATTR_VALUE_EXT_COLOR: 'rgb(10, 56, 172)',
 	WIDGET_WRAPPER_SHADOW: '0 0 5px 2px rgba(0,0,0,0.2)',
 	WIDGET_WRAPPER_TOOLBAR_COLOR: 'rgba(0,0,0,0.4)',
-	WIDGET_WRAPPER_TOOLBAR_FILTER: 'drop-shadow(2px 4px 6px rgb(0,0,0))'
+	WIDGET_WRAPPER_TOOLBAR_FILTER: 'drop-shadow(2px 4px 6px rgb(0,0,0))',
+	CODE_MIRROR_SEARCH_PANEL_BACKGROUND_COLOR: CssVars.BACKGROUND_COLOR,
+	CODE_MIRROR_SEARCH_PANEL_BUTTON_BACKGROUND_COLOR: 'transparent'
 };
 export const createPlaygroundCssVars = (variables: typeof PlaygroundCssConstants) => {
 	return {
@@ -53,7 +55,9 @@ export const createPlaygroundCssVars = (variables: typeof PlaygroundCssConstants
 		WIDGET_WRAPPER_BORDER_RADIUS: 'var(--d9-playground-ww-border-radius, 4px)',
 		WIDGET_WRAPPER_SHADOW: `var(--d9-playground-ww-shadow, ${variables.WIDGET_WRAPPER_SHADOW})`,
 		WIDGET_WRAPPER_TOOLBAR_COLOR: `var(--d9-playground-ww-toolbar-color, ${variables.WIDGET_WRAPPER_TOOLBAR_COLOR})`,
-		WIDGET_WRAPPER_TOOLBAR_FILTER: `var(--d9-playground-ww-toolbar-filter, ${variables.WIDGET_WRAPPER_TOOLBAR_FILTER})`
+		WIDGET_WRAPPER_TOOLBAR_FILTER: `var(--d9-playground-ww-toolbar-filter, ${variables.WIDGET_WRAPPER_TOOLBAR_FILTER})`,
+		CODE_MIRROR_SEARCH_PANEL_BACKGROUND_COLOR: `var(--d9-playground-cm-search-panel-background-color, ${variables.CODE_MIRROR_SEARCH_PANEL_BACKGROUND_COLOR})`,
+		CODE_MIRROR_SEARCH_PANEL_BUTTON_BACKGROUND_COLOR: `var(--d9-playground-cm-search-panel-button-background-color, ${variables.CODE_MIRROR_SEARCH_PANEL_BUTTON_BACKGROUND_COLOR})`
 	};
 };
 

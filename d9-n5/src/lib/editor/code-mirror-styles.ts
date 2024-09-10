@@ -245,25 +245,32 @@ export const createEditorStyles = (options: { badge: boolean }) => {
         grid-column-gap: 8px;
         grid-template-rows: auto auto auto;
         grid-row-gap: 8px;
+        background-color: ${PlaygroundCssVars.CODE_MIRROR_SEARCH_PANEL_BACKGROUND_COLOR};
 
         > * {
             margin: 0;
+            &:first-child, &:nth-child(2), &:nth-child(3), &:nth-child(4) {
+                grid-row: 1;
+            }
+            &:nth-child(5), &:nth-child(6), &:nth-child(7) {
+                grid-row: 2;
+            }
+            &:nth-child(9), &:nth-child(10), &:nth-child(11), &:nth-child(12) {
+                grid-row: 3;
+            }
         }
 
         > input {
             grid-column: span 3;
-
-            &:not(:first-child) {
-                grid-row: 3;
-
-                ~ * {
-                    grid-row: 3;
-                }
-            }
+            color: ${CssVars.FONT_COLOR};
+            border: ${CssVars.BORDER};
+            border-radius: ${CssVars.BORDER_RADIUS};
         }
 
         > button {
             background-image: none;
+            background-color: ${PlaygroundCssVars.CODE_MIRROR_SEARCH_PANEL_BUTTON_BACKGROUND_COLOR};
+            color: ${CssVars.FONT_COLOR};
             border: ${CssVars.BORDER};
             border-radius: ${CssVars.BORDER_RADIUS};
             text-transform: capitalize;
@@ -278,6 +285,7 @@ export const createEditorStyles = (options: { badge: boolean }) => {
             display: flex;
             position: relative;
             align-items: center;
+            color: ${CssVars.FONT_COLOR};
             text-transform: capitalize;
 
             &:nth-child(7) {
