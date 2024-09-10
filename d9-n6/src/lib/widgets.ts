@@ -342,8 +342,8 @@ export const createPlaygroundCssVars = (variables: typeof PlaygroundCssConstants
 		SNIPPET_HTTP_RESPONSE_ERROR_HANDLES_HEIGHT: 'var(--o23-playground-snippet-http-response-error-handles-height, 300px)',
 		SNIPPET_ROUTE_CHECK_HEIGHT: 'var(--o23-playground-snippet-route-check-height, 200px)',
 		SQL_HEIGHT: 'var(--o23-playground-sql-height, 200px)',
-		CODE_MIRROR_SEARCH_PANEL_BACKGROUND_COLOR: `var(--d9-playground-cm-search-panel-background-color, ${variables.CODE_MIRROR_SEARCH_PANEL_BACKGROUND_COLOR})`,
-		CODE_MIRROR_SEARCH_PANEL_BUTTON_BACKGROUND_COLOR: `var(--d9-playground-cm-search-panel-button-background-color, ${variables.CODE_MIRROR_SEARCH_PANEL_BUTTON_BACKGROUND_COLOR})`
+		CODE_MIRROR_SEARCH_PANEL_BACKGROUND_COLOR: `var(--o23-playground-cm-search-panel-background-color, ${variables.CODE_MIRROR_SEARCH_PANEL_BACKGROUND_COLOR})`,
+		CODE_MIRROR_SEARCH_PANEL_BUTTON_BACKGROUND_COLOR: `var(--o23-playground-cm-search-panel-button-background-color, ${variables.CODE_MIRROR_SEARCH_PANEL_BUTTON_BACKGROUND_COLOR})`
 	};
 };
 export const PlaygroundCssVars: ReturnType<typeof createPlaygroundCssVars> = createPlaygroundCssVars(PlaygroundCssConstants);
