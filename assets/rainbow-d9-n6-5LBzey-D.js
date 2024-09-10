@@ -4,14 +4,14 @@ var __publicField = (obj, key, value) => {
   __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
   return value;
 };
-import { a as color, y as EditorView, z as EditorState, A as basicSetup, Q as indentUnit, B as keymap, C as indentWithTab, K as lintGutter, O as Compartment, R as jsYaml, G as javascript, S as sql$1, U as dom2image } from "./vendor-Bm3-2hBp.js";
-import { C as CssVars, f as CssConstants, I as IntlLabel, D as DOM_KEY_WIDGET, d as utils$2, g as UnwrappedCheckbox, h as UnwrappedDropdown, O as OptionItemSort, j as UnwrappedInput, k as UnwrappedCaption, l as UnwrappedTextarea, m as UnwrappedDecorateInput, n as UnwrappedCheckboxes, b as useGlobalHandlers } from "./rainbow-d9-n2-47WntGD6.js";
-import { R as React, r as reactExports, q as qe, W as We, D as DefaultLinkModel, P as PortWidget, a as PortModelAlignment, b as PortModel, N as NodeModel, C as CanvasWidget, c as DiagramEngine, d as NodeLayerFactory, L as LinkLayerFactory, S as SelectionBoxLayerFactory, e as DefaultLabelFactory, f as DefaultNodeFactory, g as DefaultLinkFactory, h as PathFindingLinkFactory, i as DefaultPortFactory, j as DiagramModel, k as State, l as SelectingState, A as AbstractModelFactory, m as AbstractReactFactory, n as LinkWidget, o as DefaultLinkPointWidget, p as DefaultLinkSegmentWidget } from "./react-base-m4feaLXG.js";
-import { V as VUtils, a as useThrottler, r as registerWidget, g as useCreateEventBus, u as useRootEventBus, R as RootEventTypes, e as useForceUpdate, M as MUtils, P as PPUtils } from "./rainbow-d9-n1-5ABrxvpf.js";
-import { i as index$1 } from "./rainbow-d9-n3-hgIvMJdn.js";
-import { M as Markdown } from "./react-markdown-gZETaoDn.js";
-import { r as remarkGfm } from "./remark-bFswqQBA.js";
-import { S as SyntaxHighlighter, p as prism } from "./react-syntax-highlighter-xtCpj_Df.js";
+import { a as color, y as EditorView, z as EditorState, A as basicSetup, Q as indentUnit, B as keymap, C as indentWithTab, K as lintGutter, O as Compartment, R as jsYaml, G as javascript, S as sql$1, U as dom2image } from "./vendor-KCMozh_E.js";
+import { C as CssVars, f as CssConstants, I as IntlLabel, D as DOM_KEY_WIDGET, d as utils$2, g as UnwrappedCheckbox, h as UnwrappedDropdown, O as OptionItemSort, j as UnwrappedInput, k as UnwrappedCaption, l as UnwrappedTextarea, m as UnwrappedDecorateInput, n as UnwrappedCheckboxes, b as useGlobalHandlers } from "./rainbow-d9-n2-apdSMFDV.js";
+import { R as React, r as reactExports, q as qe, W as We, D as DefaultLinkModel, P as PortWidget, a as PortModelAlignment, b as PortModel, N as NodeModel, C as CanvasWidget, c as DiagramEngine, d as NodeLayerFactory, L as LinkLayerFactory, S as SelectionBoxLayerFactory, e as DefaultLabelFactory, f as DefaultNodeFactory, g as DefaultLinkFactory, h as PathFindingLinkFactory, i as DefaultPortFactory, j as DiagramModel, k as State, l as SelectingState, A as AbstractModelFactory, m as AbstractReactFactory, n as LinkWidget, o as DefaultLinkPointWidget, p as DefaultLinkSegmentWidget } from "./react-base-GsLdKOD0.js";
+import { V as VUtils, a as useThrottler, r as registerWidget, g as useCreateEventBus, u as useRootEventBus, R as RootEventTypes, e as useForceUpdate, M as MUtils, P as PPUtils } from "./rainbow-d9-n1-YJTQJf2e.js";
+import { i as index$1 } from "./rainbow-d9-n3-wSq2reC3.js";
+import { M as Markdown } from "./react-markdown-TPMigQ1v.js";
+import { r as remarkGfm } from "./remark-Pva9uu6S.js";
+import { S as SyntaxHighlighter, p as prism } from "./react-syntax-highlighter-zpy2Fnot.js";
 const PlaygroundCssConstants = {
   BACKGROUND_COLOR: CssVars.BACKGROUND_COLOR,
   FONT_COLOR: CssVars.FONT_COLOR,
@@ -59,7 +59,9 @@ const PlaygroundCssConstants = {
   PORT_ROUTE_TEST_COLOR: "#8454aa",
   PORT_OTHERWISE_COLOR: "#b352b3",
   PRE_PORT_COLOR: "#87a55f",
-  POST_PORT_COLOR: "#c69dab"
+  POST_PORT_COLOR: "#c69dab",
+  CODE_MIRROR_SEARCH_PANEL_BACKGROUND_COLOR: CssVars.BACKGROUND_COLOR,
+  CODE_MIRROR_SEARCH_PANEL_BUTTON_BACKGROUND_COLOR: "transparent"
 };
 const createPlaygroundCssVars = (variables) => {
   return {
@@ -340,7 +342,9 @@ const createPlaygroundCssVars = (variables) => {
     SNIPPET_HTTP_READ_RESPONSE_HEIGHT: "var(--o23-playground-snippet-http-read-response-height, 200px)",
     SNIPPET_HTTP_RESPONSE_ERROR_HANDLES_HEIGHT: "var(--o23-playground-snippet-http-response-error-handles-height, 300px)",
     SNIPPET_ROUTE_CHECK_HEIGHT: "var(--o23-playground-snippet-route-check-height, 200px)",
-    SQL_HEIGHT: "var(--o23-playground-sql-height, 200px)"
+    SQL_HEIGHT: "var(--o23-playground-sql-height, 200px)",
+    CODE_MIRROR_SEARCH_PANEL_BACKGROUND_COLOR: `var(--d9-playground-cm-search-panel-background-color, ${variables.CODE_MIRROR_SEARCH_PANEL_BACKGROUND_COLOR})`,
+    CODE_MIRROR_SEARCH_PANEL_BUTTON_BACKGROUND_COLOR: `var(--d9-playground-cm-search-panel-button-background-color, ${variables.CODE_MIRROR_SEARCH_PANEL_BUTTON_BACKGROUND_COLOR})`
   };
 };
 const PlaygroundCssVars = createPlaygroundCssVars(PlaygroundCssConstants);
@@ -2973,14 +2977,7 @@ const useHandleCodeChange = (options) => {
     });
   }, [replace, editor, changeListener, onChange, delay]);
 };
-const JsEditorContainer = qe.div.attrs(({ "data-height": height }) => {
-  return {
-    [DOM_KEY_WIDGET]: "o23-playground-js-editor",
-    style: {
-      "--height": utils$2.toCssSize(height ?? 300)
-    }
-  };
-})`
+const EditorContainer = qe.div`
     display: block;
     position: relative;
     width: 100%;
@@ -3039,25 +3036,35 @@ const JsEditorContainer = qe.div.attrs(({ "data-height": height }) => {
             grid-column-gap: 8px;
             grid-template-rows: auto auto auto;
             grid-row-gap: 8px;
+            background-color: ${PlaygroundCssVars.CODE_MIRROR_SEARCH_PANEL_BACKGROUND_COLOR};
 
             > * {
                 margin: 0;
+
+                &:first-child, &:nth-child(2), &:nth-child(3), &:nth-child(4) {
+                    grid-row: 1;
+                }
+
+                &:nth-child(5), &:nth-child(6), &:nth-child(7) {
+                    grid-row: 2;
+                }
+
+                &:nth-child(9), &:nth-child(10), &:nth-child(11), &:nth-child(12) {
+                    grid-row: 3;
+                }
             }
 
             > input {
                 grid-column: span 3;
-
-                &:not(:first-child) {
-                    grid-row: 3;
-
-                    ~ * {
-                        grid-row: 3;
-                    }
-                }
+                color: ${CssVars.FONT_COLOR};
+                border: ${CssVars.BORDER};
+                border-radius: ${CssVars.BORDER_RADIUS};
             }
 
             > button {
                 background-image: none;
+                background-color: ${PlaygroundCssVars.CODE_MIRROR_SEARCH_PANEL_BUTTON_BACKGROUND_COLOR};
+                color: ${CssVars.FONT_COLOR};
                 border: ${CssVars.BORDER};
                 border-radius: ${CssVars.BORDER_RADIUS};
                 text-transform: capitalize;
@@ -3072,6 +3079,7 @@ const JsEditorContainer = qe.div.attrs(({ "data-height": height }) => {
                 display: flex;
                 position: relative;
                 align-items: center;
+                color: ${CssVars.FONT_COLOR};
                 text-transform: capitalize;
 
                 &:nth-child(7) {
@@ -3114,6 +3122,14 @@ const JsEditorContainer = qe.div.attrs(({ "data-height": height }) => {
         }
     }
 `;
+const JsEditorContainer = qe(EditorContainer).attrs(({ "data-height": height }) => {
+  return {
+    [DOM_KEY_WIDGET]: "o23-playground-js-editor",
+    style: {
+      "--height": utils$2.toCssSize(height ?? 300)
+    }
+  };
+})``;
 const createCodeMirrorExtensions$1 = () => {
   return [
     javascript()
@@ -3127,147 +3143,14 @@ const JsEditor = (props) => {
   useHandleCodeChange({ ...state, onChange });
   return React.createElement(JsEditorContainer, { "data-visible": visible, "data-height": height, ref });
 };
-const SqlEditorContainer = qe.div.attrs(({ "data-height": height }) => {
+const SqlEditorContainer = qe(EditorContainer).attrs(({ "data-height": height }) => {
   return {
     [DOM_KEY_WIDGET]: "o23-playground-sql-editor",
     style: {
       "--height": utils$2.toCssSize(height ?? 300)
     }
   };
-})`
-    display: block;
-    position: relative;
-    width: 100%;
-    height: var(--height);
-    min-height: var(--height);
-    max-height: var(--height);
-    border: ${PlaygroundCssVars.SNIPPET_BORDER};
-    border-radius: ${PlaygroundCssVars.SNIPPET_BORDER_RADIUS};
-    overflow: hidden;
-
-    &[data-visible=false] {
-        display: none;
-    }
-
-    > div.cm-editor {
-        height: 100%;
-
-        &.cm-focused {
-            outline: none;
-        }
-
-        > div.cm-scroller {
-            overflow-x: auto;
-            overflow-y: scroll;
-
-            &::-webkit-scrollbar {
-                background-color: transparent;
-                height: ${CssVars.SCROLL_HEIGHT};
-                width: ${CssVars.SCROLL_WIDTH};
-            }
-
-            &::-webkit-scrollbar-track {
-                background-color: ${CssVars.SCROLL_TRACK_COLOR};
-                border-radius: ${CssVars.SCROLL_BORDER_RADIUS};
-            }
-
-            &::-webkit-scrollbar-thumb {
-                background-color: ${CssVars.SCROLL_THUMB_COLOR};
-                border-radius: ${CssVars.SCROLL_BORDER_RADIUS};
-            }
-        }
-
-        div.cm-line {
-        }
-
-        div.cm-panels.cm-panels-bottom {
-            border-top: ${CssVars.BORDER};
-            border-right: ${CssVars.BORDER};
-        }
-
-        div.cm-search.cm-panel {
-            /** beautify search panel */
-            display: grid;
-            position: relative;
-            grid-template-columns: auto auto 1fr auto auto auto;
-            grid-column-gap: 8px;
-            grid-template-rows: auto auto auto;
-            grid-row-gap: 8px;
-
-            > * {
-                margin: 0;
-            }
-
-            > input {
-                grid-column: span 3;
-
-                &:not(:first-child) {
-                    grid-row: 3;
-
-                    ~ * {
-                        grid-row: 3;
-                    }
-                }
-            }
-
-            > button {
-                background-image: none;
-                border: ${CssVars.BORDER};
-                border-radius: ${CssVars.BORDER_RADIUS};
-                text-transform: capitalize;
-                cursor: pointer;
-
-                &:last-child {
-                    padding: 0 8px;
-                }
-            }
-
-            > label {
-                display: flex;
-                position: relative;
-                align-items: center;
-                text-transform: capitalize;
-
-                &:nth-child(7) {
-                    grid-column: span 4;
-                }
-
-                > input {
-                    margin: 0 4px 0 0;
-                }
-            }
-
-            > br {
-                display: none;
-            }
-        }
-
-        div.cm-tooltip-autocomplete {
-            > ul {
-                &::-webkit-scrollbar {
-                    background-color: transparent;
-                    height: ${CssVars.SCROLL_HEIGHT};
-                    width: ${CssVars.SCROLL_WIDTH};
-                }
-
-                &::-webkit-scrollbar-track {
-                    background-color: ${CssVars.SCROLL_TRACK_COLOR};
-                    border-radius: ${CssVars.SCROLL_BORDER_RADIUS};
-                }
-
-                &::-webkit-scrollbar-thumb {
-                    background-color: ${CssVars.SCROLL_THUMB_COLOR};
-                    border-radius: ${CssVars.SCROLL_BORDER_RADIUS};
-                }
-            }
-
-            span.cm-completionLabel {
-                font-weight: 600;
-                margin-right: 16px;
-            }
-        }
-    }
-`;
+})``;
 const createCodeMirrorExtensions = () => sql$1();
 const SqlEditor = (props) => {
   const { visible = true, height, snippet, onChange, decorator } = props;

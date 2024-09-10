@@ -1,4 +1,4 @@
-import { d as decodeNamedCharacterReference, f as fault } from "./vendor-Bm3-2hBp.js";
+import { d as decodeNamedCharacterReference, f as fault } from "./vendor-KCMozh_E.js";
 function splice(list2, start, remove, items) {
   const end = list2.length;
   let chunkStart = 0;
