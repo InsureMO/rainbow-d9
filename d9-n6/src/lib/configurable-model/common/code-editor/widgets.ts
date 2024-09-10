@@ -44,6 +44,12 @@ export const EditorContainer = styled.div`
                 background-color: ${CssVars.SCROLL_THUMB_COLOR};
                 border-radius: ${CssVars.SCROLL_BORDER_RADIUS};
             }
+
+            > div.cm-content {
+                > div.cm-line.cm-activeLine {
+                    background-color: ${PlaygroundCssVars.CODE_MIRROR_ACTIVE_LINE_BACKGROUND_COLOR};
+                }
+            }
         }
 
         div.cm-line {
@@ -107,6 +113,7 @@ export const EditorContainer = styled.div`
                 align-items: center;
                 color: ${CssVars.FONT_COLOR};
                 text-transform: capitalize;
+                justify-self: start;
 
                 &:nth-child(7) {
                     grid-column: span 4;
