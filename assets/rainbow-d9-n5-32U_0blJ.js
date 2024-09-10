@@ -4,11 +4,11 @@ var __publicField = (obj, key, value) => {
   __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
   return value;
 };
-import { i as index$2, I as IntlLabel, D as DOM_KEY_WIDGET, C as CssVars, d as utils$2, b as useGlobalHandlers, t as toIntlLabel, U as UnwrappedButton, B as ButtonInk, e as ButtonFill } from "./rainbow-d9-n2-k4Dt70rQ.js";
-import { R as React, r as reactExports, q as qe } from "./react-base-5EfQJmYR.js";
-import { V as VUtils, r as registerWidget, g as useCreateEventBus, M as MUtils, P as PPUtils, a as useThrottler, u as useRootEventBus, R as RootEventTypes, e as useForceUpdate, S as StandaloneRoot, m as ExternalDefMismatchIndicator } from "./rainbow-d9-n1-vYwVa9YS.js";
-import { T as Tag, r as tags, V as ViewPlugin, u as syntaxTree, H as HighlightStyle, v as defaultHighlightStyle, w as syntaxHighlighting, x as styleTags, D as Decoration, I as InlineContext, W as WidgetType, y as EditorView, z as EditorState, A as basicSetup, B as keymap, C as indentWithTab, F as markdown, G as javascript, J as markdownLanguage, K as lintGutter, L as linter, N as json, O as Compartment, P as jsonParseLinter } from "./vendor-FCb3oBSf.js";
-import { a as index, b as index$2$1, i as index$1, p as parseDoc } from "./rainbow-d9-n3-nbuKGzYH.js";
+import { i as index$2, I as IntlLabel, D as DOM_KEY_WIDGET, C as CssVars, d as utils$2, b as useGlobalHandlers, t as toIntlLabel, U as UnwrappedButton, B as ButtonInk, e as ButtonFill } from "./rainbow-d9-n2-BnFRtrLv.js";
+import { R as React, r as reactExports, q as qe } from "./react-base-AhhbNiuG.js";
+import { V as VUtils, r as registerWidget, g as useCreateEventBus, M as MUtils, P as PPUtils, a as useThrottler, u as useRootEventBus, R as RootEventTypes, e as useForceUpdate, S as StandaloneRoot, m as ExternalDefMismatchIndicator } from "./rainbow-d9-n1-SYKQnpbK.js";
+import { T as Tag, r as tags, V as ViewPlugin, u as syntaxTree, H as HighlightStyle, v as defaultHighlightStyle, w as syntaxHighlighting, x as styleTags, D as Decoration, I as InlineContext, W as WidgetType, y as EditorView, z as EditorState, A as basicSetup, B as keymap, C as indentWithTab, F as markdown, G as javascript, J as markdownLanguage, K as lintGutter, L as linter, N as json, O as Compartment, P as jsonParseLinter } from "./vendor-bjcll6YY.js";
+import { a as index, b as index$2$1, i as index$1, p as parseDoc } from "./rainbow-d9-n3-wNwP7Ogv.js";
 var PlaygroundWidgetGroupKey;
 (function(PlaygroundWidgetGroupKey2) {
   PlaygroundWidgetGroupKey2["CONTAINERS"] = "container-group";
@@ -38,7 +38,8 @@ const PlaygroundCssConstants = {
   WIDGET_WRAPPER_TOOLBAR_COLOR: "rgba(0,0,0,0.4)",
   WIDGET_WRAPPER_TOOLBAR_FILTER: "drop-shadow(2px 4px 6px rgb(0,0,0))",
   CODE_MIRROR_SEARCH_PANEL_BACKGROUND_COLOR: CssVars.BACKGROUND_COLOR,
-  CODE_MIRROR_SEARCH_PANEL_BUTTON_BACKGROUND_COLOR: "transparent"
+  CODE_MIRROR_SEARCH_PANEL_BUTTON_BACKGROUND_COLOR: "transparent",
+  CODE_MIRROR_ACTIVE_LINE_BACKGROUND_COLOR: "rgba(0,0,0,0.06)"
 };
 const createPlaygroundCssVars = (variables) => {
   return {
@@ -74,7 +75,8 @@ const createPlaygroundCssVars = (variables) => {
     WIDGET_WRAPPER_TOOLBAR_COLOR: `var(--d9-playground-ww-toolbar-color, ${variables.WIDGET_WRAPPER_TOOLBAR_COLOR})`,
     WIDGET_WRAPPER_TOOLBAR_FILTER: `var(--d9-playground-ww-toolbar-filter, ${variables.WIDGET_WRAPPER_TOOLBAR_FILTER})`,
     CODE_MIRROR_SEARCH_PANEL_BACKGROUND_COLOR: `var(--d9-playground-cm-search-panel-background-color, ${variables.CODE_MIRROR_SEARCH_PANEL_BACKGROUND_COLOR})`,
-    CODE_MIRROR_SEARCH_PANEL_BUTTON_BACKGROUND_COLOR: `var(--d9-playground-cm-search-panel-button-background-color, ${variables.CODE_MIRROR_SEARCH_PANEL_BUTTON_BACKGROUND_COLOR})`
+    CODE_MIRROR_SEARCH_PANEL_BUTTON_BACKGROUND_COLOR: `var(--d9-playground-cm-search-panel-button-background-color, ${variables.CODE_MIRROR_SEARCH_PANEL_BUTTON_BACKGROUND_COLOR})`,
+    CODE_MIRROR_ACTIVE_LINE_BACKGROUND_COLOR: `var(--d9-playground-cm-active-line-background-color, ${variables.CODE_MIRROR_ACTIVE_LINE_BACKGROUND_COLOR})`
   };
 };
 const PlaygroundCssVars = createPlaygroundCssVars(PlaygroundCssConstants);
@@ -3462,6 +3464,12 @@ const createEditorStyles = (options) => {
             background-color: ${CssVars.SCROLL_THUMB_COLOR};
             border-radius: ${CssVars.SCROLL_BORDER_RADIUS};
         }
+        
+        > div.cm-content {
+            > div.cm-line.cm-activeLine {
+                background-color: ${PlaygroundCssVars.CODE_MIRROR_ACTIVE_LINE_BACKGROUND_COLOR};
+            }
+        }
     }
 
     div.cm-line {
@@ -3645,6 +3653,7 @@ const createEditorStyles = (options) => {
             align-items: center;
             color: ${CssVars.FONT_COLOR};
             text-transform: capitalize;
+            justify-self: start;
 
             &:nth-child(7) {
                 grid-column: span 4;
