@@ -6,26 +6,33 @@ import typescript from 'rollup-plugin-typescript2';
 
 export const buildConfig = (lint) => {
 	let isCircularImportFound = false;
-	const markdownPlugin = () => {
-		const include = (void 0);
-		const exclude = (void 0);
-		const filter = createFilter(include, exclude);
-		return {
-			name: 'vite:transform-md',
-			enforce: 'pre',
-			async transform(code, id) {
-				if (/\.md$/.test(id)) {
-					// Filters the filesystem for files to include/exclude. Includes all files by default.
+	const createRawFilePlugin = (name, test, toCode) => {
+		return () => {
+			const include = (void 0);
+			const exclude = (void 0);
+			const filter = createFilter(include, exclude);
+			return {
+				name,
+				enforce: 'pre',
+				async transform(code, id) {
+					if (test(id)) {
+						// Filters the filesystem for files to include/exclude. Includes all files by default.
 
-					if (!filter(id)) {
-						return null;
+						if (!filter(id)) {
+							return null;
+						}
+						return {code: toCode(JSON.stringify(code))}
 					}
-					return {code: `const markdown = ${JSON.stringify(code)};\nexport {markdown};`}
+					return null;
 				}
-				return null;
 			}
 		}
-	};
+	}
+	const markdownPlugin = createRawFilePlugin(
+		'vite:transform-md', id => /\.md$/.test(id), content => `const markdown = ${content};\nexport {markdown};`)
+	const dtsPlugin = createRawFilePlugin(
+		'vite:transform-dts', id => /\.dts$/.test(id), content => `const dts = ${content};\nexport {dts};`)
+
 	return {
 		input: './src/index.tsx',
 		output: [
@@ -33,10 +40,11 @@ export const buildConfig = (lint) => {
 			{format: 'cjs', file: './index.cjs.js'}
 		],
 		plugins: [
-			lint ? eslint({exclude: ['../node_modules/**', 'node_modules/**', 'src/**/*.md']}) : null,
+			lint ? eslint({exclude: ['../node_modules/**', 'node_modules/**', 'src/**/*.md', 'src/**/*.dts']}) : null,
 			// lint ? tslint({ exclude: ['../node_modules/**', 'node_modules/**'] }) : null,
 			typescript({clean: true}), babel({babelHelpers: "bundled"}),
-			markdownPlugin()
+			markdownPlugin(),
+			dtsPlugin()
 		].filter(x => x != null),
 		onwarn(warning, defaultHandler) {
 			if (warning.code === 'CIRCULAR_DEPENDENCY') {
@@ -49,6 +57,7 @@ export const buildConfig = (lint) => {
 			}
 		},
 		external: [
+			'typescript',
 			'react', 'react-dom', 'styled-components',
 			'nanoid', 'color', 'js-yaml',
 			'react-markdown', 'remark-gfm',
@@ -59,8 +68,9 @@ export const buildConfig = (lint) => {
 			'@projectstorm/react-canvas-core', '@projectstorm/react-diagrams-core', '@projectstorm/react-diagrams',
 			'dom-to-image',
 			'@codemirror/commands', '@codemirror/lint', '@codemirror/state',
-			'@codemirror/view', 'codemirror',
+			'@codemirror/view', '@codemirror/autocomplete', 'codemirror',
 			'@codemirror/language', '@codemirror/lang-javascript', '@codemirror/lang-sql',
+			'@valtown/codemirror-ts',
 			'@rainbow-d9/n1', '@rainbow-d9/n2', '@rainbow-d9/n3'
 		]
 	};

@@ -29,7 +29,7 @@
 		"react-markdown": "9.0.1",
 		"react-syntax-highlighter": "^15.5.0",
 		"remark-gfm": "4.0.0",
-		"typescript": "^5.1.6",
+		"typescript": "4.9.5",
 		"vite": "^5.0.13",
 		"web-vitals": "^2.1.4"
 	},

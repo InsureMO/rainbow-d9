@@ -1,7 +1,8 @@
 declare module '*.md' {
-	// When "Mode.MARKDOWN" is requested
 	const markdown: string;
-
-	// Modify below per your usage
 	export {markdown};
+}
+declare module '*.dts' {
+	const dts: string;
+	export {dts};
 }
