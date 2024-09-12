@@ -1,7 +1,11 @@
 import {autocompletion} from '@codemirror/autocomplete';
 import {Extension} from '@codemirror/state';
-import {tsAutocomplete, tsFacet, tsHover, tsLinter, tsSync} from '@valtown/codemirror-ts';
 import {createSystem, createVirtualTypeScriptEnvironment, DtsMap} from '../vfs';
+import {tsAutocomplete} from './autocomplete';
+import {tsFacet} from './facet';
+import {tsHover} from './hover';
+import {tsLinter} from './lint';
+import {tsSync} from './sync';
 
 export enum DiagnosticCodes {
 	C1118 = 1118, //A_return_statement_can_only_be_used_within_a_function_body_1108
@@ -44,4 +48,3 @@ export const createCodeMirrorJavascriptExtensions = (options: CreateCodeMirrorJa
 		];
 	};
 };
-

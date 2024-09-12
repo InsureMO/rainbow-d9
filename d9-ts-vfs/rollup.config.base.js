@@ -56,8 +56,8 @@ export const buildConfig = (lint) => {
 		external: [
 			'typescript',
 			'react', 'react-dom', 'styled-components',
-			'@codemirror/state', '@codemirror/autocomplete',
-			'@valtown/codemirror-ts'
+			'@codemirror/view', '@codemirror/state', '@codemirror/lint', '@codemirror/autocomplete',
+			'comlink'
 		]
 	};
 };
