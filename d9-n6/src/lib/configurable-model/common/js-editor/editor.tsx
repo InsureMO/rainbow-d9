@@ -1,10 +1,8 @@
 // import * as eslint from 'eslint-linter-browserify';
-import {autocompletion} from '@codemirror/autocomplete';
 import {javascript} from '@codemirror/lang-javascript';
-import {tsAutocomplete, tsFacet, tsHover, tsLinter, tsSync} from '@valtown/codemirror-ts';
+import {createCodeMirrorTs562Es2022Extensions} from '@rainbow-d9/ts-vfs';
 import React, {useState} from 'react';
 import {PlaygroundDecorator} from '../../../types';
-import {ALL_FILES_MAP, createSystem, createVirtualTypeScriptEnvironment} from '../../../typescript-vfs';
 import {CodeEditorState, useHandleCodeChange, useInitCodeContent, useInitCodeEditor} from '../code-editor';
 import {JsEditorContainer} from './widgets';
 
@@ -18,17 +16,9 @@ export interface JsEditorProps {
 }
 
 const createCodeMirrorExtensions = () => {
-	const system = createSystem(ALL_FILES_MAP);
-	const compilerOpts = {};
-	const env = createVirtualTypeScriptEnvironment(system, [], compilerOpts);
-	const path = 'index.ts';
 	return [
 		javascript({jsx: false, typescript: false}),
-		tsFacet.of({env, path}),
-		tsSync(),
-		tsLinter(),
-		autocompletion({override: [tsAutocomplete()]}),
-		tsHover()
+		...createCodeMirrorTs562Es2022Extensions()
 	];
 };
 export const JsEditor = (props: JsEditorProps) => {

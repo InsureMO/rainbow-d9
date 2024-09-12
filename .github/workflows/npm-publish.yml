@@ -47,6 +47,17 @@ jobs:
       #          npm_token: ${{ secrets.NPM_TOKEN }}
       #        if: ${{ env.npm_token != '' }}
       #        run: echo "echo the secret \"NPM_TOKEN\" has been created."
+      - name: "Publish @d9/ts-vfs"
+        id: publish-ts-vfs
+        uses: JS-DevTools/npm-publish@v2
+        with:
+          tag: ${{ inputs.lane }}
+          token: ${{ secrets.NPM_TOKEN }}
+          access: public
+          package: ./d9-ts-vfs
+      #          dry-run: true
+      - run: |
+          echo "Package ${{ steps.publish-ts-vfs.outputs.id }} published to lane [${{ steps.publish-ts-vfs.outputs.tag }}]"
       - name: "Publish @d9/n1"
         id: publish-n1
         uses: JS-DevTools/npm-publish@v2

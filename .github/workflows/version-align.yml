@@ -30,6 +30,12 @@ jobs:
         uses: actions/checkout@v3
         with:
           ref: ${{ inputs.ref }}
+      - name: Change Version of d9-ts-vfs
+        uses: ./.github/actions/change-node-version/
+        id: change-node-version-d9-ts-vfs
+        with:
+          module-name: d9-ts-vfs
+          target-version: ${{ inputs.version }}
       - name: Change Version of d9-n1
         uses: ./.github/actions/change-node-version/
         id: change-node-version-d9-n1

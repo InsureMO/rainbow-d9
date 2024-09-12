@@ -1,6 +1,7 @@
 {
 	"private": true,
 	"workspaces": [
+		"d9-ts-vfs",
 		"d9-n1",
 		"d9-n2",
 		"d9-n3",
@@ -11,6 +12,7 @@
 		"d9-sample-cra"
 	],
 	"scripts": {
+		"build-ts-vfs": "cd ./d9-ts-vfs && yarn build",
 		"build-n1": "cd ./d9-n1 && yarn build",
 		"build-n2": "cd ./d9-n2 && yarn build",
 		"build-n3": "cd ./d9-n3 && yarn build",
@@ -21,7 +23,8 @@
 		"build-thai-plan-selection": "cd ./d9-thai-plan-selection && yarn build",
 		"build-thai-all": "yarn build-thai-plan-selection",
 		"build-sample-cra": "cd ./d9-sample-cra && yarn build",
-		"build-all": "yarn build-n123 && yarn build-n5 && yarn build-n6 && yarn build-echarts && yarn build-thai-all",
+		"build-all": "yarn build-ts-vfs && yarn build-n123 && yarn build-n5 && yarn build-n6 && yarn build-echarts && yarn build-thai-all",
+		"build-ts-vfs-ci": "cd ./d9-ts-vfs && yarn build-ci",
 		"build-n1-ci": "cd ./d9-n1 && yarn build-ci",
 		"build-n2-ci": "cd ./d9-n2 && yarn build-ci",
 		"build-n3-ci": "cd ./d9-n3 && yarn build-ci",
@@ -32,7 +35,7 @@
 		"build-thai-plan-selection-ci": "cd ./d9-thai-plan-selection && yarn build-ci",
 		"build-thai-all-ci": "yarn build-thai-plan-selection-ci",
 		"build-sample-cra-ci": "cd ./d9-sample-cra && yarn build",
-		"build-all-ci": "yarn build-n123-ci && yarn build-n5-ci && yarn build-n6-ci && yarn build-echarts-ci && yarn build-thai-all-ci"
+		"build-all-ci": "yarn build-ts-vfs-ci && yarn build-n123-ci && yarn build-n5-ci && yarn build-n6-ci && yarn build-echarts-ci && yarn build-thai-all-ci"
 	},
 	"volta": {
 		"node": "22.2.0",
