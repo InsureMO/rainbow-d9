@@ -11,9 +11,19 @@ export const createDTSMap = (files: Record<string, string>): DtsMap => {
 	}
 	return map;
 };
-
 /**
- * less than 2018, which are es2017, es2016, es2015 (es6), es5, es3 (lib)
+ * lib (full version of es5)
+ */
+export const createEs5DTSMapWithDOM = (files: Record<string, string>): DtsMap => {
+	return createDTSMap({
+		...files,
+		'/lib.dom.d.ts': dom,
+		'/lib.webworker.importscripts.d.ts': webWorkerImportScripts,
+		'/lib.scripthost.d.ts': scriptHost
+	});
+};
+/**
+ * less than 2018, which are es2017, es2016, es6 (full version of es2015)
  */
 export const createDTSMapWithDOMLtEs2018 = (files: Record<string, string>): DtsMap => {
 	return createDTSMap({
