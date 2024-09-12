@@ -1,15 +1,35 @@
 import {autocompletion} from '@codemirror/autocomplete';
+import {Extension} from '@codemirror/state';
 import {tsAutocomplete, tsFacet, tsHover, tsLinter, tsSync} from '@valtown/codemirror-ts';
 import {createSystem, createVirtualTypeScriptEnvironment, DtsMap} from '../vfs';
 
-export interface CreateCoeMirrorJavascriptExtensionsOptions {
+export enum DiagnosticCodes {
+	C1118 = 1118, //A_return_statement_can_only_be_used_within_a_function_body_1108
+	C1375 = 1375, // await_expressions_are_only_allowed_at_the_top_level_of_a_file_when_that_file_is_a_module_but_this_fi_1375
+}
+
+export interface CreateCodeMirrorJavascriptExtensionsOptions {
 	files: DtsMap;
 }
 
-export const createCodeMirrorJavascriptExtensions = (options: CreateCoeMirrorJavascriptExtensionsOptions) => {
+export type CodeMirrorJavascriptExtensionsCreateFunc = (options?: CodeMirrorJavascriptExtensionsOptions) => Array<Extension>;
+
+export interface CodeMirrorJavascriptExtensionsOptions {
+	diagnosticCodesToIgnore?: DiagnosticCodes[];
+}
+
+export const defaultCodeMirrorJavascriptExtensionsOptions = (): CodeMirrorJavascriptExtensionsOptions => {
+	return {
+		diagnosticCodesToIgnore: [DiagnosticCodes.C1118, DiagnosticCodes.C1375]
+	};
+};
+
+export const createCodeMirrorJavascriptExtensions = (options: CreateCodeMirrorJavascriptExtensionsOptions): CodeMirrorJavascriptExtensionsCreateFunc => {
 	const {files} = options;
 
-	return () => {
+	return (options: CodeMirrorJavascriptExtensionsOptions = defaultCodeMirrorJavascriptExtensionsOptions()): Array<Extension> => {
+		const {diagnosticCodesToIgnore} = options;
+
 		const system = createSystem(files);
 		const compilerOpts = {};
 		const env = createVirtualTypeScriptEnvironment(system, [], compilerOpts);
@@ -18,9 +38,10 @@ export const createCodeMirrorJavascriptExtensions = (options: CreateCoeMirrorJav
 		return [
 			tsFacet.of({env, path}),
 			tsSync(),
-			tsLinter(),
+			tsLinter({diagnosticCodesToIgnore}),
 			autocompletion({override: [tsAutocomplete()]}),
 			tsHover()
 		];
 	};
 };
+

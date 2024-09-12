@@ -1,4 +1,3 @@
-// import * as eslint from 'eslint-linter-browserify';
 import {javascript} from '@codemirror/lang-javascript';
 import {createCodeMirrorTs562Es2022Extensions} from '@rainbow-d9/ts-vfs';
 import React, {useState} from 'react';
