@@ -1,5 +1,6 @@
 import {autocompletion} from '@codemirror/autocomplete';
 import {Extension} from '@codemirror/state';
+import {CompilerOptions} from 'typescript';
 import {createSystem, createVirtualTypeScriptEnvironment, DtsMap} from '../vfs';
 import {tsAutocomplete} from './autocomplete';
 import {tsFacet} from './facet';
@@ -14,6 +15,7 @@ export enum DiagnosticCodes {
 
 export interface CreateCodeMirrorJavascriptExtensionsOptions {
 	files: DtsMap;
+	compilerOpts?: CompilerOptions;
 }
 
 export type CodeMirrorJavascriptExtensionsCreateFunc = (options?: CodeMirrorJavascriptExtensionsOptions) => Array<Extension>;
@@ -29,13 +31,13 @@ export const defaultCodeMirrorJavascriptExtensionsOptions = (): CodeMirrorJavasc
 };
 
 export const createCodeMirrorJavascriptExtensions = (options: CreateCodeMirrorJavascriptExtensionsOptions): CodeMirrorJavascriptExtensionsCreateFunc => {
-	const {files} = options;
+	const {files, compilerOpts: fixedCompilerOptions} = options;
 
 	return (options: CodeMirrorJavascriptExtensionsOptions = defaultCodeMirrorJavascriptExtensionsOptions()): Array<Extension> => {
 		const {diagnosticCodesToIgnore} = options;
 
 		const system = createSystem(files);
-		const compilerOpts = {};
+		const compilerOpts = fixedCompilerOptions ?? {};
 		const env = createVirtualTypeScriptEnvironment(system, [], compilerOpts);
 		const path = 'index.ts';
 
