@@ -3,7 +3,12 @@ import {FileDef, StandardPipelineStepRegisterKey, TypeOrmBySnippetPipelineStepDe
 import {HelpDocs} from '../../../help-docs';
 import {Labels} from '../../../labels';
 import {PlaygroundCssVars} from '../../../widgets';
-import {createCheckOrMissBadge, createPrePortExistsWithKey, createSnippetEditor} from '../../common';
+import {
+	createCheckOrMissBadge,
+	createPrePortExistsWithKey,
+	createSnippetEditor,
+	JsEditorExtensionType
+} from '../../common';
 import {ConfirmNodeOptions} from '../../types';
 import {registerStepDef} from '../all-step-defs';
 import {AndConfirmReturned} from '../common';
@@ -30,6 +35,7 @@ export const TypeOrmBySnippetStepDefs =
 			code: 'snippet', label: Labels.StepTypeOrmSnippet, anchor: 'snippet',
 			badge: createCheckOrMissBadge<TypeOrmBySnippetStepDefModel>({check: model => VUtils.isNotBlank(model.snippet)}),
 			editor: createSnippetEditor<TypeOrmBySnippetStepDefModel>({
+				extensionType: JsEditorExtensionType.TYPEORM_SNIPPET,
 				getValue: model => model.snippet,
 				setValue: (model, value) => model.snippet = value,
 				height: PlaygroundCssVars.SNIPPET_HEIGHT

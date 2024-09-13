@@ -3,7 +3,12 @@ import {SnippetPipelineStepDef, StandardPipelineStepRegisterKey} from '../../../
 import {HelpDocs} from '../../../help-docs';
 import {Labels} from '../../../labels';
 import {PlaygroundCssVars} from '../../../widgets';
-import {createCheckOrMissBadge, createPrePortExistsWithKey, createSnippetEditor} from '../../common';
+import {
+	createCheckOrMissBadge,
+	createPrePortExistsWithKey,
+	createSnippetEditor,
+	JsEditorExtensionType
+} from '../../common';
 import {registerStepDef} from '../all-step-defs';
 import {AndConfirmReturned, CommonStepDefModel, CommonStepDefs} from '../common';
 
@@ -30,6 +35,7 @@ export const SnippetStepDefs =
 				code: 'snippet', label: Labels.StepSnippetSnippet, anchor: 'snippet',
 				badge: createCheckOrMissBadge<SnippetStepDefModel>({check: model => VUtils.isNotBlank(model.snippet)}),
 				editor: createSnippetEditor<SnippetStepDefModel>({
+					extensionType: JsEditorExtensionType.SNIPPET,
 					getValue: model => model.snippet,
 					setValue: (model, value) => model.snippet = value,
 					height: PlaygroundCssVars.SNIPPET_HEIGHT

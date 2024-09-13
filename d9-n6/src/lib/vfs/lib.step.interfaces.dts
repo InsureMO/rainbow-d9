@@ -1,0 +1,13 @@
+declare namespace O23 {
+	type PipelineStepPayload = any;
+
+	interface PipelineStepContext {
+		traceId?: string;
+	}
+
+	interface PipelineStepData<C = PipelineStepPayload, CTX = PipelineStepContext> {
+		/** this is runtime context */
+		$context?: CTX;
+		content: C;
+	}
+}

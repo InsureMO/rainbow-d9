@@ -9,6 +9,7 @@ import ts, {
 	LanguageService,
 	LanguageServiceHost,
 	ModuleKind,
+	ModuleResolutionKind,
 	ScriptSnapshot,
 	ScriptTarget,
 	SourceFile,
@@ -106,11 +107,11 @@ const defaultCompilerOptions = (): CompilerOptions => {
 		jsx: JsxEmit.None,   // no jsx
 		strict: true,
 		esModuleInterop: true,
-		module: ModuleKind.None,   // no module allowed
+		module: ModuleKind.ES2022,   // default use 2022, which supported since node 16
 		suppressOutputPathCheck: true,
 		skipLibCheck: true,
 		skipDefaultLibCheck: true,
-		// moduleResolution: ModuleResolutionKind.Node16
+		moduleResolution: ModuleResolutionKind.Node16 // default use node 16
 	};
 };
 // "/DOM.d.ts" => "/lib.dom.d.ts"

@@ -8,7 +8,8 @@ import {
 	createCheckOrIgnoreBadge,
 	createPrePortBoolWithKey,
 	createSnippetEditor,
-	createYesOrNoBadge
+	createYesOrNoBadge,
+	JsEditorExtensionType
 } from '../../common';
 import {registerStepDef} from '../all-step-defs';
 import {AndConfirmReturned, CommonStepDefModel, CommonStepDefs} from '../common';
@@ -72,6 +73,7 @@ export const ParallelStepDefs =
 				code: 'clone-data', label: Labels.StepParallelCloneData, anchor: 'clone-data',
 				badge: createCheckOrIgnoreBadge<ParallelStepDefModel>({check: model => VUtils.isNotBlank(model.snippet)}),
 				editor: createSnippetEditor<ParallelStepDefModel>({
+					extensionType: JsEditorExtensionType.PARALLEL_CLONE_DATA,
 					getValue: model => model.cloneData,
 					setValue: (model, value) => model.cloneData = value,
 					height: PlaygroundCssVars.SNIPPET_PARALLEL_CLONE_DATA_HEIGHT

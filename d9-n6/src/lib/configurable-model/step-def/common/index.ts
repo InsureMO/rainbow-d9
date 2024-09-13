@@ -14,7 +14,7 @@ import {StepDefsFolder, tryToRevealSubStep} from '../../../editor';
 import {HelpDocs} from '../../../help-docs';
 import {Labels} from '../../../labels';
 import {PlaygroundCssVars} from '../../../widgets';
-import {createCheckOrMissBadge, createSnippetEditor} from '../../common';
+import {createCheckOrMissBadge, createSnippetEditor, JsEditorExtensionType} from '../../common';
 import {
 	ConfigChangesConfirmed,
 	ConfirmNodeOptions,
@@ -286,6 +286,7 @@ export const CommonStepDefs: CommonStepDefsType = {
 					code: 'route-check', label: Labels.StepRouteCheck, anchor: 'route-check',
 					badge: createCheckOrMissBadge<RouteTestStepDefModel>({check: model => VUtils.isNotBlank(model.temporary?.check)}),
 					editor: createSnippetEditor<RouteTestStepDefModel>({
+						extensionType: JsEditorExtensionType.ROUTE_CHECK,
 						getValue: model => model.temporary?.check,
 						setValue: (model, value) => {
 							model.temporary = model.temporary ?? {};

@@ -1,4 +1,4 @@
-import {ScriptTarget} from 'typescript';
+import {ModuleKind, ScriptTarget} from 'typescript';
 import {DtsMapExtend, VFS_TS_562_ES2022, VFS_TS_562_ESNEXT} from '../vfs';
 import {CodeMirrorJavascriptExtensionsOptions, createCodeMirrorJavascriptExtensions} from './js-extensions';
 
@@ -6,7 +6,7 @@ export interface TargetedCodeMirrorJavascriptExtensionsOptions extends CodeMirro
 	extend?: DtsMapExtend;
 }
 
-export const createCodeMirrorTs562Es2022Extensions = (options?: TargetedCodeMirrorJavascriptExtensionsOptions) => {
+export const createCodeMirrorTs562Es2022Extensions = (options: TargetedCodeMirrorJavascriptExtensionsOptions = {}) => {
 	const {extend, ...rest} = options;
 	const create = createCodeMirrorJavascriptExtensions({
 		files: VFS_TS_562_ES2022({extend})
@@ -14,11 +14,11 @@ export const createCodeMirrorTs562Es2022Extensions = (options?: TargetedCodeMirr
 	return create(rest);
 };
 
-export const createCodeMirrorTs562EsnextExtensions = (options?: TargetedCodeMirrorJavascriptExtensionsOptions) => {
+export const createCodeMirrorTs562EsnextExtensions = (options: TargetedCodeMirrorJavascriptExtensionsOptions = {}) => {
 	const {extend, ...rest} = options;
 	const create = createCodeMirrorJavascriptExtensions({
 		files: VFS_TS_562_ESNEXT({extend}),
-		compilerOpts: {target: ScriptTarget.ESNext}
+		compilerOpts: {target: ScriptTarget.ESNext, module: ModuleKind.ESNext}
 	});
 	return create(rest);
 };

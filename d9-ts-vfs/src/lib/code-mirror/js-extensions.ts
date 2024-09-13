@@ -9,8 +9,10 @@ import {tsLinter} from './lint';
 import {tsSync} from './sync';
 
 export enum DiagnosticCodes {
-	C1118 = 1108, //A_return_statement_can_only_be_used_within_a_function_body_1108
-	C1375 = 1375, // await_expressions_are_only_allowed_at_the_top_level_of_a_file_when_that_file_is_a_module_but_this_fi_1375
+	/** A_return_statement_can_only_be_used_within_a_function_body_1108 */
+	C1118 = 1108,
+	/** await_expressions_are_only_allowed_at_the_top_level_of_a_file_when_that_file_is_a_module_but_this_fi_1375 */
+	C1375 = 1375,
 }
 
 export interface CreateCodeMirrorJavascriptExtensionsOptions {

@@ -1,0 +1,14 @@
+declare namespace O23 {
+	type HttpErrorCode = `${0 | 4 | 5 | 6}${0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9}${0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9}`;
+
+	interface HttpErrorHandleOptions<In = any, InFragment = any> {
+		$errorCode: HttpErrorCode;
+		$url: string;
+		$response?: Response;
+		$factor: InFragment;
+		// @ts-ignore
+		$request: PipelineStepData<In>;
+	}
+}
+
+declare var options: O23.HttpErrorHandleOptions;
