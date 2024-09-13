@@ -10,4 +10,4 @@ overwritten. If this snippet is not defined, then use the headers in the environ
 
 > Key of headers are NOT trimmed.
 
-> It is a sync function, so `await` is not available inside.
+> It is an async function, so `await` is available inside.

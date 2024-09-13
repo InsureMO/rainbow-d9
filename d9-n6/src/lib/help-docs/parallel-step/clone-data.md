@@ -6,4 +6,4 @@ parameters can be used during the clone process:
 - `$request`: The entire request data, including both content and context,
 - `$helpers` or `$`: Data manipulation helpers.
 
-> It is a sync function, so `await` is not available inside.
+> It is an async function, so `await` is available inside.

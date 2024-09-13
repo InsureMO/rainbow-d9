@@ -7,4 +7,4 @@ process. The following parameters can be used during the conversion process:
 
 The returned data will be used as the real input data for this step. If no data is returned, there is no input data for this step.
 
-> It is a sync function, so `await` is not available inside.
+> It is an async function, so `await` is available inside.

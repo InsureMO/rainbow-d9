@@ -10,4 +10,4 @@ The returned data will be written back to memory as the actual result data for t
 > How the step's returned data is written back to memory depends on the return result of this process and the chosen write-back strategy.
 > Please refer to the merge-back strategy documentation for details.
 
-> It is a sync function, so `await` is not available inside.
+> It is an async function, so `await` is available inside.
