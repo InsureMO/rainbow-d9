@@ -1,5 +1,5 @@
 import {javascript} from '@codemirror/lang-javascript';
-import {createCodeMirrorTs562Es2022Extensions} from '@rainbow-d9/ts-vfs';
+import {createCodeMirrorTs562Es2022Extensions, DtsMapExtend} from '@rainbow-d9/ts-vfs';
 import React, {useState} from 'react';
 import {PlaygroundDecorator} from '../../../types';
 import {CodeEditorState, useHandleCodeChange, useInitCodeContent, useInitCodeEditor} from '../code-editor';
@@ -17,7 +17,7 @@ export interface JsEditorProps {
 const createCodeMirrorExtensions = () => {
 	return [
 		javascript({jsx: false, typescript: false}),
-		...createCodeMirrorTs562Es2022Extensions()
+		...createCodeMirrorTs562Es2022Extensions({extend: DtsMapExtend.O23})
 	];
 };
 export const JsEditor = (props: JsEditorProps) => {

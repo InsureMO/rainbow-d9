@@ -11,14 +11,14 @@ import {dts as es2015Symbol} from './dts-files/lib.es2015.symbol.dts';
 import {dts as es2015SymbolWellKnown} from './dts-files/lib.es2015.symbol.wellknown.dts';
 import {dts as es6} from './dts-files/lib.es6.dts';
 import {VFS_TS_562_ES5_FILES} from './dts-ts-562-es5';
-import {DtsMap} from './types';
+import {DtsMap, DtsMapOptions, LibDtsMapOptions} from './types';
 import {createDTSMap, createDTSMapWithDOMLtEs2018} from './utils';
 
-export const VFS_TS_562_ES2015_FILES = (full: boolean): Record<string, string> => {
+export const VFS_TS_562_ES2015_FILES = (options: LibDtsMapOptions): Record<string, string> => {
 	return {
-		...VFS_TS_562_ES5_FILES(full),
+		...VFS_TS_562_ES5_FILES(options),
 		// es6 is entry point, use es2015 to avoid unnecessary declarations
-		'/lib.es6.d.ts': full ? es6 : es2015,
+		'/lib.es6.d.ts': options.full ? es6 : es2015,
 		'/lib.es2015.collection.d.ts': es2015Collection,
 		'/lib.es2015.core.d.ts': es2015Core,
 		'/lib.es2015.d.ts': es2015,
@@ -35,5 +35,9 @@ export const VFS_TS_562_ES6_FILES = VFS_TS_562_ES2015_FILES;
 /**
  * typescript 5.6.2, es2015, es6
  */
-export const VFS_TS_562_ES2015 = (): DtsMap => createDTSMap(VFS_TS_562_ES2015_FILES(false));
-export const VFS_TS_562_ES6 = (): DtsMap => createDTSMapWithDOMLtEs2018(VFS_TS_562_ES2015_FILES(true));
+export const VFS_TS_562_ES2015 = (options?: DtsMapOptions): DtsMap => {
+	return createDTSMap(VFS_TS_562_ES2015_FILES({...options, full: false}));
+};
+export const VFS_TS_562_ES6 = (options?: DtsMapOptions): DtsMap => {
+	return createDTSMapWithDOMLtEs2018(VFS_TS_562_ES2015_FILES({...options, full: true}));
+};

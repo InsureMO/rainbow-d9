@@ -4,14 +4,14 @@ import {dts as es2016} from './dts-files/lib.es2016.dts';
 import {dts as es2016Full} from './dts-files/lib.es2016.full.dts';
 import {dts as es2016Intl} from './dts-files/lib.es2016.intl.dts';
 import {VFS_TS_562_ES2015_FILES} from './dts-ts-562-es2015';
-import {DtsMap} from './types';
+import {DtsMap, DtsMapOptions, LibDtsMapOptions} from './types';
 import {createDTSMap, createDTSMapWithDOMLtEs2018} from './utils';
 
-export const VFS_TS_562_ES2016_FILES = (full: boolean): Record<string, string> => {
+export const VFS_TS_562_ES2016_FILES = (options: LibDtsMapOptions): Record<string, string> => {
 	return {
-		...VFS_TS_562_ES2015_FILES(full),
+		...VFS_TS_562_ES2015_FILES(options),
 		'/lib.es2016.array.include.d.ts': es2016ArrayInclude,
-		'/lib.es2016.d.ts': full ? es2016Full : es2016,
+		'/lib.es2016.d.ts': options.full ? es2016Full : es2016,
 		// es2016.full is entry point, use es2016 to avoid unnecessary declarations
 		'/lib.es2016.full.d.ts': es2016,
 		'/lib.es2016.intl.d.ts': es2016Intl
@@ -20,5 +20,9 @@ export const VFS_TS_562_ES2016_FILES = (full: boolean): Record<string, string> =
 /**
  * typescript 5.6.2, es2016
  */
-export const VFS_TS_562_ES2016 = (): DtsMap => createDTSMap(VFS_TS_562_ES2016_FILES(false));
-export const VFS_TS_562_ES2016_FULL = (): DtsMap => createDTSMapWithDOMLtEs2018(VFS_TS_562_ES2016_FILES(true));
+export const VFS_TS_562_ES2016 = (options?: DtsMapOptions): DtsMap => {
+	return createDTSMap(VFS_TS_562_ES2016_FILES({...options, full: false}));
+}
+export const VFS_TS_562_ES2016_FULL = (options?: DtsMapOptions): DtsMap => {
+	return createDTSMapWithDOMLtEs2018(VFS_TS_562_ES2016_FILES({...options, full: true}));
+};

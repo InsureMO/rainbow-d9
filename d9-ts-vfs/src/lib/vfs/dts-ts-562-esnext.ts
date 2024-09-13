@@ -12,19 +12,19 @@ import {dts as esnextPromise} from './dts-files/lib.esnext.promise.dts';
 import {dts as esnextRegexp} from './dts-files/lib.esnext.regexp.dts';
 import {dts as esnextString} from './dts-files/lib.esnext.string.dts';
 import {VFS_TS_562_ES2023_FILES} from './dts-ts-562-es2023';
-import {DtsMap} from './types';
+import {DtsMap, DtsMapOptions, LibDtsMapOptions} from './types';
 import {createDTSMap, createDTSMapWithDOMGteEs2018} from './utils';
 
-export const VFS_TS_562_ESNEXT_FILES = (full: boolean): Record<string, string> => {
+export const VFS_TS_562_ESNEXT_FILES = (options: LibDtsMapOptions): Record<string, string> => {
 	return {
-		...VFS_TS_562_ES2023_FILES(full),
+		...VFS_TS_562_ES2023_FILES(options),
 		'/lib.esnext.array.d.ts': esnextArray,
 		'/lib.esnext.collection.d.ts': esnextCollection,
 		'/lib.esnext.decorators.d.ts': esnextDecorators,
 		'/lib.esnext.disposable.d.ts': esnextDisposable,
 		'/lib.esnext.d.ts': esnext,
 		// esnext.full is entry point, use esnext to avoid unnecessary declarations
-		'/lib.esnext.full.d.ts': full ? esnextFull : esnext,
+		'/lib.esnext.full.d.ts': options.full ? esnextFull : esnext,
 		'/lib.esnext.intl.d.ts': esnextIntl,
 		'/lib.esnext.iterator.d.ts': esnextIterator,
 		'/lib.esnext.object.d.ts': esnextObject,
@@ -36,5 +36,9 @@ export const VFS_TS_562_ESNEXT_FILES = (full: boolean): Record<string, string> =
 /**
  * typescript 5.6.2, esnext
  */
-export const VFS_TS_562_ESNEXT = (): DtsMap => createDTSMap(VFS_TS_562_ESNEXT_FILES(false));
-export const VFS_TS_562_ESNEXT_FULL = (): DtsMap => createDTSMapWithDOMGteEs2018(VFS_TS_562_ESNEXT_FILES(true));
+export const VFS_TS_562_ESNEXT = (options?: DtsMapOptions): DtsMap => {
+	return createDTSMap(VFS_TS_562_ESNEXT_FILES({...options, full: false}));
+};
+export const VFS_TS_562_ESNEXT_FULL = (options?: DtsMapOptions): DtsMap => {
+	return createDTSMapWithDOMGteEs2018(VFS_TS_562_ESNEXT_FILES({...options, full: true}));
+};

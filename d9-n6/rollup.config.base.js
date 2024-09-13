@@ -71,7 +71,7 @@ export const buildConfig = (lint) => {
 			'@codemirror/view', '@codemirror/autocomplete', 'codemirror',
 			'@codemirror/language', '@codemirror/lang-javascript', '@codemirror/lang-sql',
 			'@valtown/codemirror-ts',
-			'@rainbow-d9/n1', '@rainbow-d9/n2', '@rainbow-d9/n3'
+			'@rainbow-d9/n1', '@rainbow-d9/n2', '@rainbow-d9/n3', '@rainbow-d9/ts-vfs'
 		]
 	};
 };

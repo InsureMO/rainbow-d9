@@ -153,5 +153,41 @@ export const EditorContainer = styled.div`
                 margin-right: 16px;
             }
         }
+
+        .cm-completionIcon-class:after {
+            content: '𝐶'
+        }
+
+        .cm-completionIcon-interface :after {
+            content: '𝑖'
+        }
+
+        .cm-completionIcon-variable:after {
+            content: '𝑥'
+        }
+
+        .cm-completionIcon-constant:after {
+            content: '𝑐'
+        }
+
+        .cm-completionIcon-type:after {
+            content: '𝑡'
+        }
+
+        .cm-completionIcon-enum:after {
+            content: '𝑒'
+        }
+
+        .cm-completionIcon-property:after {
+            content: '𝑝'
+        }
+
+        .cm-completionIcon-keyword:after {
+            content: '𝑘'
+        }
+
+        .cm-completionIcon-namespace:after {
+            content: '𝑛'
+        }
     }
 `;
