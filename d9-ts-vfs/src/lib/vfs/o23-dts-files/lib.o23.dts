@@ -1,0 +1,115 @@
+declare namespace O23 {
+	type Undefinable<T> = T | undefined;
+	type DateTime = string;
+
+	interface Config {
+		/** get string value of given name */
+		getString(name: string, defaultValue?: string): Undefinable<string>;
+		/** get boolean value of given name */
+		getBoolean(name: string, defaultValue?: boolean): Undefinable<boolean>;
+		/** get number value of given name */
+		getNumber(name: string, defaultValue?: number): Undefinable<number>;
+		/** get json object of given name */
+		getJson<R>(name: string, defaultValue?: R): Undefinable<R>;
+	}
+
+	interface Logger {
+		/** Write a 'log' level log.  */
+		log(message: any, ...optionalParams: any[]): void;
+		/** Write an 'error' level log.  */
+		error(message: any, ...optionalParams: any[]): void;
+		/** Write a 'warn' level log.  */
+		warn(message: any, ...optionalParams: any[]): void;
+		/** Write a 'debug' level log.  */
+		debug?(message: any, ...optionalParams: any[]): void;
+		/** Write a 'verbose' level log.  */
+		verbose?(message: any, ...optionalParams: any[]): void;
+	}
+
+	interface PipelineStepDateHelper {
+		/**
+		 * Get current datetime on configured format by CFG_FORMAT_DATETIME, default is 'YYYY-MM-DD HH:mm:ss'.
+		 */
+		now(): DateTime;
+		dayjs(): dayjs.DayjsFn;
+	}
+
+	type PipelineStepMathHelper = mathjs.MathJsInstance;
+
+	interface PipelineStepErrorOptions {
+		// exactly same as http status
+		status: number;
+		code: string;
+		reason: string;
+	}
+
+	interface CatchableError extends Error {
+		getCode(): string;
+	}
+
+	interface UncatchableError extends Error {
+		getCode(): string;
+	}
+
+	interface ExposedUncatchableError extends UncatchableError {
+		getStatus(): number;
+	}
+
+	interface PipelineStepFileOptions {
+		name?: string;
+		type?: string;
+		content: string | Buffer;
+	}
+
+	interface PipelineStepFile {
+		$file: Symbol;
+		name?: string;
+		type?: string;
+		content: Buffer;
+	}
+
+	interface PipelineStepHelpers {
+		$config?: Config;
+		$logger?: Logger;
+		$date: PipelineStepDateHelper;
+		$math: PipelineStepMathHelper;
+		$nano: (size?: number) => string;
+		$ascii: (size?: number) => string;
+		/** create an exposed uncatchable error*/
+		$error: (options: PipelineStepErrorOptions) => never;
+		$errorCodes: Readonly<Record<string, string>>;
+		$errors: {
+			catchable: (options: Omit<PipelineStepErrorOptions, 'status'>) => never;
+			isCatchable: (e: any) => e is CatchableError;
+			exposed: (options: PipelineStepErrorOptions) => never;
+			isExposed: (e: any) => e is ExposedUncatchableError;
+			uncatchable: (options: Omit<PipelineStepErrorOptions, 'status'>) => never;
+			isUncatchable: (e: any) => e is UncatchableError;
+		};
+		/** Create a file */
+		$file: (options: PipelineStepFileOptions) => PipelineStepFile;
+		/** Create a symbol. When this symbol is used as a return value in a pipeline, it will be marked by the system as not requiring any return. */
+		$clearContextData: () => Symbol;
+		/**
+		 * Check given value is empty or not.
+		 * undefined, null, empty array, empty array likes, empty string, empty Map, empty Set, object with no keys.
+		 */
+		isEmpty: (value: any) => boolean;
+		/** Opposite of isEmpty */
+		isNotEmpty: (value: any) => boolean;
+		/**
+		 * Check given value is blank or not.
+		 * undefined, null, blank string.
+		 */
+		isBlank: (value: any) => boolean;
+		/** Opposite of isNotBlank */
+		isNotBlank: (value: any) => boolean;
+		/**
+		 * Trim given value, only available for undefined, null and string, otherwise raise an UncatchableError.
+		 */
+		trim: (value: any) => string;
+	}
+}
+
+declare var $helpers: O23.PipelineStepHelpers;
+declare var $: O23.PipelineStepHelpers;

@@ -5,8 +5,12 @@ import ts, {
 	CompilerHost,
 	CompilerOptions,
 	CustomTransformers,
+	JsxEmit,
 	LanguageService,
 	LanguageServiceHost,
+	ModuleKind,
+	ScriptSnapshot,
+	ScriptTarget,
 	SourceFile,
 	System,
 	TextSpan
@@ -98,15 +102,15 @@ const notImplemented = (methodName: string): never => {
 const defaultCompilerOptions = (): CompilerOptions => {
 	return {
 		...ts.getDefaultCompilerOptions(),
-		target: ts.ScriptTarget.ES2022, // default use 2022, which supported since node 16
-		jsx: ts.JsxEmit.None,   // no jsx
+		target: ScriptTarget.ES2022, // default use 2022, which supported since node 16
+		jsx: JsxEmit.None,   // no jsx
 		strict: true,
 		esModuleInterop: true,
-		module: ts.ModuleKind.ES2022,   // use es2022 when no target given
+		module: ModuleKind.None,   // no module allowed
 		suppressOutputPathCheck: true,
 		skipLibCheck: true,
 		skipDefaultLibCheck: true,
-		moduleResolution: ts.ModuleResolutionKind.Node16
+		// moduleResolution: ModuleResolutionKind.Node16
 	};
 };
 // "/DOM.d.ts" => "/lib.dom.d.ts"
@@ -234,7 +238,7 @@ export const createVirtualLanguageServiceHost = (
 		getScriptSnapshot: fileName => {
 			const contents = sys.readFile(fileName);
 			if (contents && typeof contents === 'string') {
-				return ts.ScriptSnapshot.fromString(contents);
+				return ScriptSnapshot.fromString(contents);
 			}
 			return;
 		},
