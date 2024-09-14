@@ -1,6 +1,6 @@
 {
 	"name": "@rainbow-d9/thai-plan-selection",
-	"version": "1.1.44-alpha.8",
+	"version": "1.2.0",
 	"description": "Plans selection, thailand",
 	"main": "index.cjs.js",
 	"module": "index.js",
@@ -21,8 +21,8 @@
 	},
 	"author": "Rainbow Team",
 	"dependencies": {
-		"@rainbow-d9/n2": "1.1.44-alpha.8",
-		"@rainbow-d9/n3": "1.1.44-alpha.8"
+		"@rainbow-d9/n2": "1.2.0",
+		"@rainbow-d9/n3": "1.2.0"
 	},
 	"devDependencies": {
 		"@babel/core": "^7.20.5",
