@@ -57,24 +57,25 @@ declare namespace O23 {
 		getStatus(): number;
 	}
 
+	// TODO need to import nodejs Buffer
+	type NodeJSBuffer = any;
+
 	interface PipelineStepFileOptions {
 		name?: string;
 		type?: string;
-		// TODO need dts for Buffer
-		content: string | Buffer;
+		content: string | NodeJSBuffer;
 	}
 
 	interface PipelineStepFile {
 		$file: Symbol;
 		name?: string;
 		type?: string;
-		// TODO need dts for Buffer
-		content: Buffer;
+		content: NodeJSBuffer;
 	}
 
 	interface PipelineStepHelpers {
-		$config?: Config;
-		$logger?: Logger;
+		$config: Config;
+		$logger: Logger;
 		$date: PipelineStepDateHelper;
 		$math: PipelineStepMathHelper;
 		$nano: (size?: number) => string;

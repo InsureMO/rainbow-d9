@@ -2,6 +2,7 @@ import {sql} from '@codemirror/lang-sql';
 import React, {useState} from 'react';
 import {PlaygroundDecorator} from '../../../types';
 import {CodeEditorState, useHandleCodeChange, useInitCodeContent, useInitCodeEditor} from '../code-editor';
+import {CodeEditorWrapper} from '../code-editor-wrapper';
 import {SqlEditorContainer} from './widgets';
 
 export interface SqlEditorProps {
@@ -22,5 +23,7 @@ export const SqlEditor = (props: SqlEditorProps) => {
 	useInitCodeContent({editor: state.editor, code: snippet});
 	useHandleCodeChange({...state, onChange});
 
-	return <SqlEditorContainer data-visible={visible} data-height={height} ref={ref}/>;
+	return <CodeEditorWrapper data-visible={visible}>
+		<SqlEditorContainer data-visible={visible} data-height={height} ref={ref}/>
+	</CodeEditorWrapper>;
 };

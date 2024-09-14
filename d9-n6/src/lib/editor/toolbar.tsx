@@ -133,7 +133,7 @@ export const Toolbar = (props: ToolbarProps) => {
 	const onUploadFileClicked = async () => {
 		const file = document.createElement('input');
 		file.setAttribute('type', 'file');
-		file.setAttribute('accept', '.yml,.yaml');
+		file.setAttribute('accept', '.yml,.yaml,.o23');
 		file.setAttribute('multiple', 'false');
 		file.addEventListener('change', () => {
 			if (file.files.length == 1) {
@@ -160,6 +160,7 @@ export const Toolbar = (props: ToolbarProps) => {
 
 	const columns = 11 - ((!zenMode || state.zen) ? 1 : 0) - ((!maxMode) ? 1 : 0)
 		- ((!allowDownloadFile) ? 1 : 0) - ((!allowDownloadImage) ? 1 : 0) - ((!allowUploadFile) ? 1 : 0);
+
 	return <>
 		<EditorToolbar columns={columns} data-toc-expanded={state.tocExpanded} ref={ref}>
 			<EditorToolbarButton onClick={onZoomInClicked}><ZoomIn/></EditorToolbarButton>

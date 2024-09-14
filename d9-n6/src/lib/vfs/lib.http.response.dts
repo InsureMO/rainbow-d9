@@ -6,11 +6,13 @@ declare namespace O23 {
 		text(): Promise<string>;
 	}
 
+	// TODO need dts for NodeJS.ReadableStream
+	type NodeJSReadableStream = any;
+
 	interface Body {
 		arrayBuffer(): Promise<ArrayBuffer>;
 		blob(): Promise<Blob>;
-		// TODO need dts for NodeJS.ReadableStream
-		body: NodeJS.ReadableStream;
+		body: NodeJSReadableStream;
 		bodyUsed: boolean;
 		buffer(): Promise<Buffer>;
 		json(): Promise<any>;

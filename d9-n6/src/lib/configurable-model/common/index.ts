@@ -3,6 +3,7 @@ export * from './styles';
 export * from './not-available-dropdown-option';
 export * from './check-and-value-editor';
 export * from './vertical-lines-editor';
+export * from './code-editor-wrapper';
 
 export * from './badges';
 export * from './js-editor';

@@ -63,7 +63,7 @@ steps:
         endpoint: askProductCodes
         responseErrorHandles:
           400: |-
-            $.$logger.log('HTTP status 400 detected.', options.$factor, 'test-log');
+            $.$logger.log('HTTP status 400 detected.', $options.$factor, 'test-log');
             $.$errors.uncatchable({code: '000', reason: ''});
       - name: Prepare Codes 2
         use: http-get

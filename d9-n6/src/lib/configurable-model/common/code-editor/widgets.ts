@@ -45,6 +45,10 @@ export const EditorContainer = styled.div`
                 border-radius: ${CssVars.SCROLL_BORDER_RADIUS};
             }
 
+            > div.cm-gutters {
+                border-right: ${CssVars.BORDER};
+            }
+
             > div.cm-content {
                 > div.cm-line.cm-activeLine {
                     background-color: ${PlaygroundCssVars.CODE_MIRROR_ACTIVE_LINE_BACKGROUND_COLOR};

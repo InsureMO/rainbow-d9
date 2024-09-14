@@ -9,6 +9,7 @@ import React, {useState} from 'react';
 import {PlaygroundDecorator} from '../../../types';
 import {DTS} from '../../../vfs';
 import {CodeEditorState, useHandleCodeChange, useInitCodeContent, useInitCodeEditor} from '../code-editor';
+import {CodeEditorWrapper} from '../code-editor-wrapper';
 import {JsEditorContainer} from './widgets';
 
 export enum JsEditorExtensionType {
@@ -150,5 +151,7 @@ export const JsEditor = (props: JsEditorProps) => {
 	useInitCodeContent({editor: state.editor, code: snippet});
 	useHandleCodeChange({...state, onChange});
 
-	return <JsEditorContainer data-visible={visible} data-height={height} ref={ref}/>;
+	return <CodeEditorWrapper data-visible={visible}>
+		<JsEditorContainer data-visible={visible} data-height={height} ref={ref}/>
+	</CodeEditorWrapper>;
 };

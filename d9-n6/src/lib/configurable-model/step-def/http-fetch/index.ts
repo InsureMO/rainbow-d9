@@ -66,7 +66,7 @@ const handle = handlers[$errorCode];
 if (handle == null) {
 ${indent}$.$errors.uncatchable({
 ${indentN(2)}code: 'O03-00010',
-${indentN(2)}reason: \`Error[\${options.$errorCode}] caught when fetch data from remote[\${options.$url}].\`
+${indentN(2)}reason: \`Error[\${$options.$errorCode}] caught when fetch data from remote[\${$options.$url}].\`
 ${indent}});
 } else {
 ${indent}return await handle();

@@ -1,5 +1,5 @@
 declare namespace O23 {
-	interface ErrorHandleOptions<In, InFragment, E extends Error = Error> {
+	interface ErrorHandleOptions<In = any, InFragment = any, E extends Error = Error> {
 		$code: string;
 		$error: E;
 		$factor: InFragment;
