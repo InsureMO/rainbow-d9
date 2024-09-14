@@ -12,7 +12,7 @@ export const createSwitchableSnippetElement = <M extends CommonStepDefModel>(opt
 	const {
 		code, label, anchor,
 		property, temporaryProperty,
-		notAvailableBadge, ignoreCandidateLabel, snippetHeight,
+		notAvailableBadge, ignoreCandidateLabel, extensionType, snippetHeight,
 		helpDoc
 	} = options;
 	return {
@@ -44,6 +44,7 @@ export const createSwitchableSnippetElement = <M extends CommonStepDefModel>(opt
 				{value: false, label: Labels.StepVariableUseSnippet}
 			],
 			isSnippetAvailable: (value) => value === false,
+			extensionType,
 			height: snippetHeight
 		}),
 		helpDoc

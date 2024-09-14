@@ -64,7 +64,7 @@ export const createSelectableCodeEditor = <M, FV>(options: SelectableCodeEditorO
 	};
 };
 
-export type MoreOnJsEditor = { extensionType?: JsEditorExtensionType; };
+export type MoreOnJsEditor = { extensionType: JsEditorExtensionType; };
 export type SelectableJsEditorOptions<M, FV> = Omit<SelectableCodeEditorOptions<M, FV>, 'editor'> & MoreOnJsEditor;
 export const createSelectableSnippetEditor = <M, FV>(options: SelectableJsEditorOptions<M, FV>) => {
 	return createSelectableCodeEditor({...options, editor: JsEditor});
