@@ -31,7 +31,7 @@ type EditorNames =
 	{ flag: 'fromInputAsIs', snippet: 'fromInput', extensionType: JsEditorExtensionType.FROM_INPUT }
 	| { flag: 'toOutputAsIs', snippet: 'toOutput', extensionType: JsEditorExtensionType.TO_OUTPUT };
 const createEditor = (names: EditorNames) => {
-	const {flag, snippet} = names;
+	const {flag, snippet, extensionType} = names;
 	return createSelectableSnippetEditor<CommonStepDefModel, boolean>({
 		findFlag: (model) => model.temporary?.[flag] ?? true,
 		saveFlag: (model, value) => {
@@ -46,6 +46,7 @@ const createEditor = (names: EditorNames) => {
 			{value: false, label: Labels.StepIOTransformerSnippet}
 		],
 		isSnippetAvailable: (value) => value === false,
+		extensionType,
 		height: PlaygroundCssVars.SNIPPET_IO_TRANSFORMER_HEIGHT
 	});
 };
