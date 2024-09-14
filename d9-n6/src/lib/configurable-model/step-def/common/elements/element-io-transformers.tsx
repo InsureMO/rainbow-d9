@@ -10,7 +10,12 @@ import {
 import {HelpDocs} from '../../../../help-docs';
 import {Labels} from '../../../../labels';
 import {PlaygroundCssVars} from '../../../../widgets';
-import {CommonElementEditorStyles, createSelectableSnippetEditor, VerticalLinesEditor} from '../../../common';
+import {
+	CommonElementEditorStyles,
+	createSelectableSnippetEditor,
+	JsEditorExtensionType,
+	VerticalLinesEditor
+} from '../../../common';
 import {CommonStepDefModel, MergeType} from '../types';
 
 const createBadge = (name: 'fromInputAsIs' | 'toOutputAsIs') => {
@@ -23,8 +28,8 @@ const createBadge = (name: 'fromInputAsIs' | 'toOutputAsIs') => {
 	};
 };
 type EditorNames =
-	{ flag: 'fromInputAsIs', snippet: 'fromInput' }
-	| { flag: 'toOutputAsIs', snippet: 'toOutput' };
+	{ flag: 'fromInputAsIs', snippet: 'fromInput', extensionType: JsEditorExtensionType.FROM_INPUT }
+	| { flag: 'toOutputAsIs', snippet: 'toOutput', extensionType: JsEditorExtensionType.TO_OUTPUT };
 const createEditor = (names: EditorNames) => {
 	const {flag, snippet} = names;
 	return createSelectableSnippetEditor<CommonStepDefModel, boolean>({
@@ -48,7 +53,9 @@ const createEditor = (names: EditorNames) => {
 export const elementFromInput: ConfigurableElement = {
 	code: 'from-input', label: Labels.StepIOTransformer, anchor: 'from-input',
 	badge: createBadge('fromInputAsIs'),
-	editor: createEditor({flag: 'fromInputAsIs', snippet: 'fromInput'}),
+	editor: createEditor({
+		flag: 'fromInputAsIs', snippet: 'fromInput', extensionType: JsEditorExtensionType.FROM_INPUT
+	}),
 	helpDoc: HelpDocs.stepFromInput
 };
 export const elementFromInputGroup: ConfigurableElement = {
@@ -59,7 +66,9 @@ export const elementFromInputGroup: ConfigurableElement = {
 export const elementToOutput: ConfigurableElement = {
 	code: 'to-output', label: Labels.StepIOTransformer, anchor: 'to-output',
 	badge: createBadge('toOutputAsIs'),
-	editor: createEditor({flag: 'toOutputAsIs', snippet: 'toOutput'}),
+	editor: createEditor({
+		flag: 'toOutputAsIs', snippet: 'toOutput', extensionType: JsEditorExtensionType.TO_OUTPUT
+	}),
 	helpDoc: HelpDocs.stepToOutput
 };
 const MergeToRequestEditor = (props: ConfigurableElementEditorProps<CommonStepDefModel>) => {

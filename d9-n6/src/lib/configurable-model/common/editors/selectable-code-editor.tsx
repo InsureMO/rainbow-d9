@@ -3,7 +3,7 @@ import {DropdownOptions, UnwrappedDropdown} from '@rainbow-d9/n2';
 import React, {FC} from 'react';
 import {ConfigurableElementEditorProps} from '../../../edit-dialog';
 import {PlaygroundDecorator} from '../../../types';
-import {JsEditor} from '../js-editor';
+import {JsEditor, JsEditorExtensionType} from '../js-editor';
 import {SqlEditor} from '../sql-editor';
 import {CommonElementEditorStyles} from '../styles';
 import {VerticalLinesEditor} from '../vertical-lines-editor';
@@ -33,7 +33,7 @@ export const createSelectableCodeEditor = <M, FV>(options: SelectableCodeEditorO
 	const {
 		findFlag, saveFlag, findSnippet, saveSnippet,
 		flagCandidates, isSnippetAvailable, height: editorHeight,
-		editor: CodeEditor
+		editor: CodeEditor, ...rest
 	} = options;
 
 	return (props: ConfigurableElementEditorProps<M>) => {
@@ -58,14 +58,19 @@ export const createSelectableCodeEditor = <M, FV>(options: SelectableCodeEditorO
 			                   clearable={false} filterable={false} style={CommonElementEditorStyles.dropdown}/>
 			<CodeEditor snippet={snippet} onChange={onSnippetChange}
 			            visible={isSnippetAvailable(flag)} height={editorHeight}
+			            {...rest}
 			            decorator={decorator}/>
 		</VerticalLinesEditor>;
 	};
 };
 
-export const createSelectableSnippetEditor = <M, FV>(options: Omit<SelectableCodeEditorOptions<M, FV>, 'editor'>) => {
+export type MoreOnJsEditor = { extensionType?: JsEditorExtensionType; };
+export type SelectableJsEditorOptions<M, FV> = Omit<SelectableCodeEditorOptions<M, FV>, 'editor'> & MoreOnJsEditor;
+export const createSelectableSnippetEditor = <M, FV>(options: SelectableJsEditorOptions<M, FV>) => {
 	return createSelectableCodeEditor({...options, editor: JsEditor});
 };
-export const createSelectableSqlEditor = <M, FV>(options: Omit<SelectableCodeEditorOptions<M, FV>, 'editor'>) => {
+
+export type SelectableSqlEditorOptions<M, FV> = Omit<SelectableCodeEditorOptions<M, FV>, 'editor'>;
+export const createSelectableSqlEditor = <M, FV>(options: SelectableSqlEditorOptions<M, FV>) => {
 	return createSelectableCodeEditor({...options, editor: SqlEditor});
 };

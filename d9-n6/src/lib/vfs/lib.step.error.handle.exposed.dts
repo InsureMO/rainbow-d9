@@ -1,0 +1,2 @@
+// @ts-ignore
+declare var $options: O23.ErrorHandleOptions<In, InFragment, O23.ExposedUncatchableError>;

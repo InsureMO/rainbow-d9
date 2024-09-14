@@ -13,6 +13,7 @@ import {
 import {HandledNodeModel, StepNodeModel} from '../../../diagram';
 import {ConfigurableElement, ConfigurableElementAnchor, ConfigurableModel} from '../../../edit-dialog';
 import {StepDefsFolder, SubStepsWithCategory} from '../../../editor';
+import {JsEditorExtensionType} from '../../common';
 import {ConfigChangesConfirmed, ConfirmNodeOptions, CreateSubNodesOptions, StepNodeConfigurer} from '../../types';
 
 export enum MergeType {
@@ -109,6 +110,7 @@ export interface SwitchableSnippetElementOptions<M extends CommonStepDefModel> {
 	temporaryProperty: keyof M['temporary'];
 	notAvailableBadge?: ReactNode;
 	ignoreCandidateLabel: ReactNode;
+	extensionType: JsEditorExtensionType;
 	snippetHeight?: string | number;
 	helpDoc?: string;
 }

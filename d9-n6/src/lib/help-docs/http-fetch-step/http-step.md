@@ -143,6 +143,11 @@ There are two special cases:
 > DO NOT rethrow an error that is not an `UncatchableError` from the error handler, as it will be caught again by the error handler with
 > status `000`, which could lead to confusion.
 
+The following parameters can be used during the build process:
+
+- `$options`: The content portion of `$errorCode`, `$url`, `$factor`, `$request`, `$response` data,
+- `$helpers` or `$`: Data manipulation helpers.
+
 > All handlers are async functions, so `await` is available inside.
 
 #### Returning

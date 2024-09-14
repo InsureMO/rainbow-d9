@@ -8,7 +8,7 @@ import {
 import {HelpDocs} from '../../../../help-docs';
 import {Labels} from '../../../../labels';
 import {PlaygroundCssVars} from '../../../../widgets';
-import {createSelectableSnippetEditor} from '../../../common';
+import {createSelectableSnippetEditor, JsEditorExtensionType} from '../../../common';
 import {CommonStepDefModel, ErrorHandleType} from '../types';
 
 const createBadge = (name: 'useErrorHandlesForCatchable' | 'useErrorHandlesForUncatchable' | 'useErrorHandlesForExposed' | 'useErrorHandlesForAny') => {
@@ -25,12 +25,21 @@ const createBadge = (name: 'useErrorHandlesForCatchable' | 'useErrorHandlesForUn
 	};
 };
 type EditorNames =
-	{ flag: 'useErrorHandlesForCatchable', snippet: 'catchable' }
-	| { flag: 'useErrorHandlesForUncatchable', snippet: 'uncatchable' }
-	| { flag: 'useErrorHandlesForExposed', snippet: 'exposed' }
-	| { flag: 'useErrorHandlesForAny', snippet: 'any' };
+	{
+		flag: 'useErrorHandlesForCatchable', snippet: 'catchable',
+		extensionType: JsEditorExtensionType.CATCHABLE_ERROR_HANDLE
+	} |
+	{
+		flag: 'useErrorHandlesForUncatchable', snippet: 'uncatchable',
+		extensionType: JsEditorExtensionType.UNCATCHABLE_ERROR_HANDLE
+	} |
+	{
+		flag: 'useErrorHandlesForExposed', snippet: 'exposed',
+		extensionType: JsEditorExtensionType.EXPOSED_ERROR_HANDLE
+	} |
+	{ flag: 'useErrorHandlesForAny', snippet: 'any', extensionType: JsEditorExtensionType.ANY_ERROR_HANDLE };
 const createEditor = (names: EditorNames) => {
-	const {flag, snippet} = names;
+	const {flag, snippet, extensionType} = names;
 	return createSelectableSnippetEditor<CommonStepDefModel, ErrorHandleType>({
 		findFlag: (model) => model.temporary?.[flag] ?? ErrorHandleType.NONE,
 		saveFlag: (model, value) => {
@@ -49,6 +58,7 @@ const createEditor = (names: EditorNames) => {
 			{value: ErrorHandleType.STEPS, label: Labels.StepErrorHandleTypeSteps}
 		],
 		isSnippetAvailable: (value) => value === ErrorHandleType.SNIPPET,
+		extensionType,
 		height: PlaygroundCssVars.SNIPPET_ERROR_HANDLES_HEIGHT
 	});
 };
@@ -56,25 +66,37 @@ const createEditor = (names: EditorNames) => {
 export const elementCatchableErrorHandle: ConfigurableElement = {
 	code: 'catchable-error-handle', label: Labels.CatchableErrorHandle, anchor: 'catchable-error-handle',
 	badge: createBadge('useErrorHandlesForCatchable'),
-	editor: createEditor({flag: 'useErrorHandlesForCatchable', snippet: 'catchable'}),
+	editor: createEditor({
+		flag: 'useErrorHandlesForCatchable', snippet: 'catchable',
+		extensionType: JsEditorExtensionType.CATCHABLE_ERROR_HANDLE
+	}),
 	helpDoc: HelpDocs.stepCatchableErrorHandle
 };
 export const elementUncatchableErrorHandle: ConfigurableElement = {
 	code: 'uncatchable-error-handle', label: Labels.UncatchableErrorHandle, anchor: 'uncatchable-error-handle',
 	badge: createBadge('useErrorHandlesForUncatchable'),
-	editor: createEditor({flag: 'useErrorHandlesForUncatchable', snippet: 'uncatchable'}),
+	editor: createEditor({
+		flag: 'useErrorHandlesForUncatchable', snippet: 'uncatchable',
+		extensionType: JsEditorExtensionType.UNCATCHABLE_ERROR_HANDLE
+	}),
 	helpDoc: HelpDocs.stepUncatchableErrorHandle
 };
 export const elementExposedErrorHandle: ConfigurableElement = {
 	code: 'exposed-error-handle', label: Labels.ExposedErrorHandle, anchor: 'exposed-error-handle',
 	badge: createBadge('useErrorHandlesForExposed'),
-	editor: createEditor({flag: 'useErrorHandlesForExposed', snippet: 'exposed'}),
+	editor: createEditor({
+		flag: 'useErrorHandlesForExposed', snippet: 'exposed',
+		extensionType: JsEditorExtensionType.EXPOSED_ERROR_HANDLE
+	}),
 	helpDoc: HelpDocs.stepExposedErrorHandle
 };
 export const elementAnyErrorHandle: ConfigurableElement = {
 	code: 'any-error-handle', label: Labels.AnyErrorHandle, anchor: 'any-error-handle',
 	badge: createBadge('useErrorHandlesForAny'),
-	editor: createEditor({flag: 'useErrorHandlesForAny', snippet: 'any'}),
+	editor: createEditor({
+		flag: 'useErrorHandlesForAny', snippet: 'any',
+		extensionType: JsEditorExtensionType.ANY_ERROR_HANDLE
+	}),
 	helpDoc: HelpDocs.stepAnyErrorHandle
 };
 
