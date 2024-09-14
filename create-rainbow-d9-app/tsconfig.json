@@ -1,0 +1,36 @@
+{
+	"compilerOptions": {
+		"baseUrl": ".",
+		"outDir": "./dist",
+		"declarationDir": "./lib",
+		"module": "ESNext",
+		"target": "ESNext",
+		"moduleResolution": "node",
+		"sourceMap": true,
+		// create d.ts file
+		"declaration": true,
+		"removeComments": true,
+		"noImplicitAny": false,
+		"allowSyntheticDefaultImports": true,
+		"allowUnreachableCode": true,
+		"allowUnusedLabels": false,
+		"alwaysStrict": true,
+		"allowJs": true,
+		"experimentalDecorators": true,
+		"lib": [
+			"es5",
+			"es2015",
+			"es2016",
+			"es2017",
+			"es2018",
+			"dom"
+		]
+	},
+	"include": [
+		"src/**/*"
+	],
+	"exclude": [
+		"node_modules",
+		"dist"
+	]
+}

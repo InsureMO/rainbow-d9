@@ -9,7 +9,8 @@
 		"d9-n6",
 		"d9-echarts",
 		"d9-thai-plan-selection",
-		"d9-sample-cra"
+		"d9-sample-cra",
+		"create-rainbow-d9-app"
 	],
 	"scripts": {
 		"build-ts-vfs": "cd ./d9-ts-vfs && yarn build",
