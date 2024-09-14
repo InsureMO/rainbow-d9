@@ -1,8 +1,40 @@
 /** copy from @valtown/codemirror-ts */
+import {syntaxTree} from '@codemirror/language';
 import {Diagnostic as CMLintDiagnostic} from '@codemirror/lint';
+import {EditorView} from '@codemirror/view';
 import {Diagnostic, DiagnosticWithLocation} from 'typescript';
 import {VirtualTypeScriptEnvironment} from '../../vfs';
 import {convertTSDiagnosticToCM, isDiagnosticWithLocation} from './utils.js';
+
+export const getLintsOnImpExp = (view: EditorView) => {
+	const diagnostics: Array<CMLintDiagnostic> = [];
+	const tree = syntaxTree(view.state);
+	tree.cursor().iterate(node => {
+		switch (node.name) {
+			case 'DynamicImport':
+				diagnostics.push({
+					from: node.from, to: node.to,
+					severity: 'error', message: 'Dynamic import is not allowed.'
+				});
+				break;
+			case 'ImportDeclaration':
+				diagnostics.push({
+					from: node.from, to: node.to,
+					severity: 'error', message: 'Import declaration is not allowed.'
+				});
+				break;
+			case 'ExportDeclaration':
+				diagnostics.push({
+					from: node.from, to: node.to,
+					severity: 'error', message: 'Export declaration is not allowed.'
+				});
+				break;
+			default:
+				break;
+		}
+	});
+	return diagnostics;
+};
 
 export interface GetLintsOptions {
 	env: VirtualTypeScriptEnvironment;
@@ -17,7 +49,7 @@ export interface GetLintsOptions {
  * This is used by tsLinter and tsLinterWorker,
  * but you can use it directly to power other UI.
  */
-export const getLints = (options: GetLintsOptions): Array<CMLintDiagnostic> => {
+export const getLintsFromVfs = (options: GetLintsOptions): Array<CMLintDiagnostic> => {
 	const {env, path, diagnosticCodesToIgnore} = options;
 	// Don't crash if the relevant file isn't created yet.
 	const exists = env.getSourceFile(path);

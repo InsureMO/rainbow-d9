@@ -2,7 +2,7 @@
 import {Diagnostic, linter} from '@codemirror/lint';
 import {EditorView} from '@codemirror/view';
 import {tsFacet} from '../facet';
-import {getLints} from './get-lints';
+import {getLintsFromVfs, getLintsOnImpExp} from './get-lints';
 
 export interface TsLinterOptions {
 	diagnosticCodesToIgnore?: Array<number>;
@@ -18,11 +18,15 @@ export const tsLinter = (options?: TsLinterOptions) => {
 	const {diagnosticCodesToIgnore} = options || {};
 
 	return linter(async (view: EditorView): Promise<readonly Diagnostic[]> => {
+		const diagnostics = getLintsOnImpExp(view);
 		const config = view.state.facet(tsFacet);
 		if (config == null) {
-			return [];
+			return diagnostics;
 		} else {
-			return getLints({...config, diagnosticCodesToIgnore: diagnosticCodesToIgnore || []});
+			return [
+				...diagnostics,
+				...getLintsFromVfs({...config, diagnosticCodesToIgnore: diagnosticCodesToIgnore || []})
+			];
 		}
 	});
 };

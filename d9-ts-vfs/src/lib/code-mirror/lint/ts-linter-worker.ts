@@ -1,6 +1,6 @@
 import {Diagnostic, linter} from '@codemirror/lint';
 import {EditorView} from '@codemirror/view';
-import {tsFacetWorker} from '../index.js';
+import {getLintsOnImpExp, tsFacetWorker} from '../index.js';
 import {TsLinterOptions} from './ts-linter';
 
 /**
@@ -14,11 +14,14 @@ export const tsLinterWorker = (options?: TsLinterOptions) => {
 
 	return linter(async (view: EditorView): Promise<readonly Diagnostic[]> => {
 		const config = view.state.facet(tsFacetWorker);
+		const diagnostics = getLintsOnImpExp(view);
 		return config
-			? config.worker.getLints({
-				path: config.path,
-				diagnosticCodesToIgnore: diagnosticCodesToIgnore || []
-			})
-			: [];
+			? [
+				...diagnostics,
+				...(await config.worker.getLints({
+					path: config.path, diagnosticCodesToIgnore: diagnosticCodesToIgnore || []
+				}))
+			]
+			: diagnostics;
 	});
 };

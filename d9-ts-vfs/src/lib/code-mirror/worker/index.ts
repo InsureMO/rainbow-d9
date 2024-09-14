@@ -4,7 +4,7 @@ import {type Remote} from 'comlink';
 import {VirtualTypeScriptEnvironment} from '../../vfs';
 import {getAutocompletion, GetAutocompletionOptions} from '../autocomplete';
 import {getHover, GetHoverOptions, HoverInfo} from '../hover';
-import {getLints, GetLintsOptions} from '../lint';
+import {getLintsFromVfs, GetLintsOptions} from '../lint';
 import {createOrUpdateFile} from '../sync';
 
 /**
@@ -43,7 +43,7 @@ export const createWorker = (initializer: () => VirtualTypeScriptEnvironment | P
 				return [];
 			} else {
 				const {path, diagnosticCodesToIgnore} = options;
-				return getLints({env, path, diagnosticCodesToIgnore});
+				return getLintsFromVfs({env, path, diagnosticCodesToIgnore});
 			}
 		},
 		getAutocompletion(options: Pick<GetAutocompletionOptions, 'path' | 'context'>) {
