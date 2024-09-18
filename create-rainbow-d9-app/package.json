@@ -7,9 +7,9 @@
 	},
 	"scripts": {
 		"build": "rollup -c",
-		"build:ci": "rollup -c rollup.config.ci.cjs",
+		"build-ci": "rollup -c rollup.config.ci.cjs",
 		"test": "yarn build && node index.js test",
-		"test-mute": "yarn build && node index.js test --fix-name --default-desc --package-manager=yarn --use-ds-defaults --plugin-print --plugin-aws-s3",
+		"test-mute": "yarn build && node index.js test --fix-name --default-desc --package-manager=yarn",
 		"help": "yarn build && node index.js --help"
 	},
 	"keywords": [
@@ -48,8 +48,9 @@
 		"@types/validate-npm-package-name": "^4.0.2",
 		"@typescript-eslint/eslint-plugin": "^5.46.0",
 		"@typescript-eslint/parser": "^5.46.0",
-		"eslint": "^8.29.0",
+		"eslint": "^8.33.0",
 		"rollup": "^3.7.0",
+		"rollup-plugin-copy": "^3.5.0",
 		"rollup-plugin-delete": "^2.0.0",
 		"rollup-plugin-tslint": "^0.2.2",
 		"rollup-plugin-typescript2": "^0.34.1",
