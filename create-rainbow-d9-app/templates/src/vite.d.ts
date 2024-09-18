@@ -1,15 +1,19 @@
+import {ModelUtilsType, PropertyPathUtilsType, ValueUtilsType} from '@rainbow-d9/n1';
+
 declare module '*.md' {
-	// When "Mode.MARKDOWN" is requested
 	const markdown: string;
 	export {markdown};
 }
 
-declare module '*.yaml' {
-	const yaml: string;
-	export {yaml};
+declare module '*.d9' {
+	const markdown: string;
+	export {markdown};
 }
 
-declare module '*.yml' {
-	const yaml: string;
-	export {yaml};
+declare global {
+	interface Window {
+		PPUtils: PropertyPathUtilsType;
+		VUtils: ValueUtilsType;
+		MUtils: ModelUtilsType;
+	}
 }
