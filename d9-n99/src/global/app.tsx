@@ -3,12 +3,16 @@
  */
 import './envs';
 import {AppEventBusProvider} from './app-event-bus';
-import {GlobalStyles} from './global-styles';
+import {AppFrame} from './frame';
+import {AppGlobalStyles} from './global-styles';
+import {I18NHandler} from './i18n-handler';
 import {ThemeHandler} from './theme-handler';
 
 export const App = () => {
 	return <AppEventBusProvider>
-		<GlobalStyles/>
+		<AppGlobalStyles/>
 		<ThemeHandler/>
+		<I18NHandler/>
+		<AppFrame/>
 	</AppEventBusProvider>;
 };

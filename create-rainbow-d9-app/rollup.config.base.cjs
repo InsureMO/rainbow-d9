@@ -15,6 +15,7 @@ exports.buildConfig = (lint) => {
 			// lint ? tslint({exclude: ['../node_modules/**', 'node_modules/**']}) : null,
 			typescript({clean: true}),
 			babel({babelHelpers: 'bundled'}),
+			del({targets: 'templates/*', hook: 'buildEnd'}),
 			del({targets: 'lib', hook: 'writeBundle'}),
 			del({targets: 'index.d.ts', hook: 'writeBundle'}),
 			copy({
