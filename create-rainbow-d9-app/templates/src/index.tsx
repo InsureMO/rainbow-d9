@@ -1,5 +1,5 @@
 import ReactDOM from 'react-dom/client';
-import {App} from './app';
+import {App} from './entrypoint/app.tsx';
 import reportWebVitals from './report-web-vitals';
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
