@@ -3,7 +3,7 @@ import {useEffect, useState} from 'react';
 import styled from 'styled-components';
 import {isBannerEnabled, isSideMenuEnabled, isSideMenuFold} from '../utils';
 import {AppEventTypes, useAppEventBus} from './app-event-bus';
-import {ExternalMessage, ExternalMessageType, SwitchBannerMessage, SwitchSideMenuMessage} from './types';
+import {ExternalMessage, ExternalMessageType, SwitchFeatureMessage} from './types';
 
 // noinspection CssUnresolvedCustomProperty
 const LayoutController = styled.div.attrs({[DOM_KEY_WIDGET]: 'app-frame-layout-controller'})`
@@ -61,23 +61,36 @@ export const AppFrameLayoutController = () => {
 		const onAskBannerEnabled = (onReply: (enabled: boolean) => void) => {
 			onReply(state.bannerEnabled);
 		};
+		type SwitchFeatureOptions = { data: SwitchFeatureMessage } & (
+			{ prop: 'sideMenuEnabled'; event: AppEventTypes.SWITCH_SIDE_MENU_ENABLED }
+			| { prop: 'bannerEnabled', event: AppEventTypes.SWITCH_BANNER_ENABLED }
+			)
+
+		const switchFeature = (options: SwitchFeatureOptions) => {
+			const {data, prop, event} = options;
+			// noinspection PointlessBooleanExpressionJS
+			const enabled = !!(data.enabled ?? false);
+			setState(state => ({...state, [prop]: enabled}));
+			// @ts-ignore
+			fire(event, enabled);
+		};
 		const onMessage = (event: MessageEvent<ExternalMessage>) => {
 			const {data} = event;
 			switch (data.type) {
 				case ExternalMessageType.SWITCH_SIDE_MENU: {
 					// window.postMessage({type: 'switch-side-menu', enabled: false})
-					// noinspection PointlessBooleanExpressionJS
-					const enabled = !!((data as SwitchSideMenuMessage).enabled ?? false);
-					setState(state => ({...state, sideMenuEnabled: enabled}));
-					fire(AppEventTypes.SWITCH_SIDE_MENU_ENABLED, enabled);
+					switchFeature({
+						data: data as SwitchFeatureMessage,
+						prop: 'sideMenuEnabled', event: AppEventTypes.SWITCH_SIDE_MENU_ENABLED
+					});
 					break;
 				}
 				case ExternalMessageType.SWITCH_BANNER: {
 					// window.postMessage({type: 'switch-banner', enabled: false})
-					// noinspection PointlessBooleanExpressionJS
-					const enabled = !!((data as SwitchBannerMessage).enabled ?? false);
-					setState(state => ({...state, bannerEnabled: enabled}));
-					fire(AppEventTypes.SWITCH_BANNER_ENABLED, enabled);
+					switchFeature({
+						data: data as SwitchFeatureMessage,
+						prop: 'bannerEnabled', event: AppEventTypes.SWITCH_BANNER_ENABLED
+					});
 					break;
 				}
 				default:

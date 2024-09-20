@@ -17,12 +17,14 @@ export interface ExternalMessage {
 	type: ExternalMessageType;
 }
 
-export interface SwitchSideMenuMessage extends ExternalMessage {
-	type: ExternalMessageType.SWITCH_SIDE_MENU;
+export interface SwitchFeatureMessage extends ExternalMessage {
 	enabled: boolean;
 }
 
-export interface SwitchBannerMessage extends ExternalMessage {
+export interface SwitchSideMenuMessage extends SwitchFeatureMessage {
+	type: ExternalMessageType.SWITCH_SIDE_MENU;
+}
+
+export interface SwitchBannerMessage extends SwitchFeatureMessage {
 	type: ExternalMessageType.SWITCH_BANNER;
-	enabled: boolean;
 }
