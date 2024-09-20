@@ -79,10 +79,11 @@ export const AppFrameLayoutController = () => {
 			switch (data.type) {
 				case ExternalMessageType.SWITCH_SIDE_MENU: {
 					// window.postMessage({type: 'switch-side-menu', enabled: false})
-					switchFeature({
-						data: data as SwitchFeatureMessage,
-						prop: 'sideMenuEnabled', event: AppEventTypes.SWITCH_SIDE_MENU_ENABLED
-					});
+					// noinspection PointlessBooleanExpressionJS
+					const enabled = !!((data as SwitchFeatureMessage).enabled ?? false);
+					// retrieve side menu fold from api, make sure it is same as side menu internal state
+					setState(state => ({...state, sideMenuEnabled: enabled, sideMenuFold: isSideMenuFold()}));
+					fire(AppEventTypes.SWITCH_SIDE_MENU_ENABLED, enabled);
 					break;
 				}
 				case ExternalMessageType.SWITCH_BANNER: {

@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import FoldMenu from '../assets/double-alt-arrow-left.svg?react';
 import Logo from '../assets/logo.svg?react';
 import {AppEventTypes, useAppEventBus} from '../global';
-import {isSideMenuFold} from '../utils';
+import {isSideMenuFold, setSideMenuFold} from '../utils';
 
 // noinspection CssUnresolvedCustomProperty,CssNoGenericFontName
 const Header = styled.div.attrs({[DOM_KEY_WIDGET]: 'app-side-menu-header'})`
@@ -99,6 +99,7 @@ export const SideMenuHeader = () => {
 			if (!state.fold) {
 				return;
 			}
+			setSideMenuFold(false);
 			setState(state => ({...state, fold: false}));
 			fire(AppEventTypes.SWITCH_SIDE_MENU_FOLD, false);
 		};
@@ -106,6 +107,7 @@ export const SideMenuHeader = () => {
 			if (!state.foldOnHandsOff) {
 				return;
 			}
+			setSideMenuFold(true);
 			setState(state => ({...state, fold: true}));
 			fire(AppEventTypes.SWITCH_SIDE_MENU_FOLD, true);
 		};
@@ -119,9 +121,11 @@ export const SideMenuHeader = () => {
 
 	const onFoldSwitchClick = () => {
 		if (state.foldOnHandsOff) {
+			setSideMenuFold(false);
 			setState({fold: false, foldOnHandsOff: false});
 			fire(AppEventTypes.SWITCH_SIDE_MENU_FOLD, false);
 		} else {
+			setSideMenuFold(true);
 			setState({fold: true, foldOnHandsOff: true});
 			fire(AppEventTypes.SWITCH_SIDE_MENU_FOLD, true);
 		}
