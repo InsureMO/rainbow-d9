@@ -1,6 +1,7 @@
 import {DOM_KEY_WIDGET, GlobalEventBusProvider} from '@rainbow-d9/n2';
+import {useEffect, useState} from 'react';
 import styled from 'styled-components';
-import {I18NAndD9N2Bridge} from '../global';
+import {AppEventTypes, I18NAndD9N2Bridge, useAppEventBus} from '../global';
 
 // noinspection CssUnresolvedCustomProperty
 const Container = styled.div.attrs({[DOM_KEY_WIDGET]: 'app-banner'})`
@@ -16,11 +17,34 @@ const Container = styled.div.attrs({[DOM_KEY_WIDGET]: 'app-banner'})`
     transition: margin-left 0.3s ease-in-out, width 0.3s ease-in-out, min-width 0.3s ease-in-out;
 `;
 
-export const Banner = () => {
+export const BannerContainer = () => {
 	return <GlobalEventBusProvider>
 		<I18NAndD9N2Bridge/>
 		<Container>
 
 		</Container>
 	</GlobalEventBusProvider>;
+};
+
+export const Banner = () => {
+	const {on, off, fire} = useAppEventBus();
+	const [enabled, setEnabled] = useState(false);
+	useEffect(() => {
+		const onSwitchBannerEnabled = (enabled: boolean) => setEnabled(enabled);
+		on(AppEventTypes.SWITCH_BANNER_ENABLED, onSwitchBannerEnabled);
+		return () => {
+			off(AppEventTypes.SWITCH_BANNER_ENABLED, onSwitchBannerEnabled);
+		};
+	}, [on, off]);
+	useEffect(() => {
+		fire(AppEventTypes.ASK_BANNER_ENABLED, (enabled: boolean) => {
+			setEnabled(enabled);
+		});
+	}, []);
+
+	if (!enabled) {
+		return null;
+	}
+
+	return <BannerContainer/>;
 };
