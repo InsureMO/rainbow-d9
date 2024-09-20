@@ -6,10 +6,12 @@ import {SideMenuHeader} from './header';
 // noinspection CssUnresolvedCustomProperty
 const Container = styled.div.attrs({[DOM_KEY_WIDGET]: 'app-side-menu'})`
     display: flex;
-    position: relative;
+    position: fixed;
     flex-direction: column;
+    top: 0;
+    left: 0;
+    height: 100vh;
     min-height: 100vh;
-    width: var(--app-side-menu-width);
     background: var(--app-side-menu-background);
     box-shadow: var(--app-side-menu-shadow);
     z-index: var(--app-side-menu-z-index);

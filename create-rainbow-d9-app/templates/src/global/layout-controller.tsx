@@ -10,11 +10,30 @@ const LayoutController = styled.div.attrs({[DOM_KEY_WIDGET]: 'app-frame-layout-c
     position: relative;
 
     + div[data-w=app-frame] {
-        grid-template-columns: auto 1fr auto;
     }
 
-    &[data-side-menu-fold=true] + div[data-w=app-frame] > div[data-w=app-side-menu] {
-        width: var(--app-side-menu-fold-width);
+    &[data-side-menu-fold=true] + div[data-w=app-frame] {
+        > div[data-w=app-banner] {
+            margin-left: var(--app-side-menu-fold-width);
+            width: calc(100vw - var(--app-side-menu-fold-width));
+            min-width: calc(100vw - var(--app-side-menu-fold-width));
+        }
+
+        > div[data-w=app-side-menu] {
+            width: var(--app-side-menu-fold-width);
+        }
+    }
+
+    &[data-side-menu-fold=false] + div[data-w=app-frame] {
+        > div[data-w=app-banner] {
+            margin-left: var(--app-side-menu-width);
+            width: calc(100vw - var(--app-side-menu-width));
+            min-width: calc(100vw - var(--app-side-menu-width));
+        }
+
+        > div[data-w=app-side-menu] {
+            width: var(--app-side-menu-width);
+        }
     }
 `;
 

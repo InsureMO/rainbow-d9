@@ -1,5 +1,5 @@
 import {DOM_KEY_WIDGET, IntlLabel} from '@rainbow-d9/n2';
-import {useState} from 'react';
+import {useEffect, useRef, useState} from 'react';
 import styled from 'styled-components';
 import FoldMenu from '../assets/double-alt-arrow-left.svg?react';
 import Logo from '../assets/logo.svg?react';
@@ -15,12 +15,6 @@ const Header = styled.div.attrs({[DOM_KEY_WIDGET]: 'app-side-menu-header'})`
     height: var(--app-side-menu-header-height);
     padding-right: var(--app-side-menu-padding);
     border-bottom: var(--app-side-menu-header-bottom-border);
-
-    &[data-fold=true] {
-        > span:first-child {
-            cursor: pointer;
-        }
-    }
 
     > span:first-child {
         display: flex;
@@ -84,25 +78,58 @@ const Header = styled.div.attrs({[DOM_KEY_WIDGET]: 'app-side-menu-header'})`
     }
 `;
 
+interface SideMenuHeaderState {
+	fold: boolean; // is fold or not, could be unfolded when mouse hover
+	foldOnHandsOff: boolean; // is folded or not
+}
+
 export const SideMenuHeader = () => {
 	const {fire} = useAppEventBus();
-	const [fold, setFold] = useState(isSideMenuFold());
-
-	const onUnfoldClick = () => {
-		if (fold) {
+	const ref = useRef<HTMLDivElement>(null);
+	const [state, setState] = useState<SideMenuHeaderState>(() => {
+		const fold = isSideMenuFold();
+		// initial same
+		return {fold, foldOnHandsOff: fold};
+	});
+	useEffect(() => {
+		if (ref.current == null) {
 			return;
 		}
-		setFold(false);
-		fire(AppEventTypes.SWITCH_SIDE_MENU_FOLD, false);
-	};
-	const onFoldClick = () => {
-		setFold(true);
-		fire(AppEventTypes.SWITCH_SIDE_MENU_FOLD, true);
+		const onMouseEnter = () => {
+			if (!state.fold) {
+				return;
+			}
+			setState(state => ({...state, fold: false}));
+			fire(AppEventTypes.SWITCH_SIDE_MENU_FOLD, false);
+		};
+		const onMouseLeave = () => {
+			if (!state.foldOnHandsOff) {
+				return;
+			}
+			setState(state => ({...state, fold: true}));
+			fire(AppEventTypes.SWITCH_SIDE_MENU_FOLD, true);
+		};
+		ref.current.parentElement!.addEventListener('mouseenter', onMouseEnter);
+		ref.current.parentElement!.addEventListener('mouseleave', onMouseLeave);
+		return () => {
+			ref.current?.parentElement?.removeEventListener('mouseenter', onMouseEnter);
+			ref.current?.parentElement?.removeEventListener('mouseleave', onMouseLeave);
+		};
+	}, [fire, state.fold, state.foldOnHandsOff]);
+
+	const onFoldSwitchClick = () => {
+		if (state.foldOnHandsOff) {
+			setState({fold: false, foldOnHandsOff: false});
+			fire(AppEventTypes.SWITCH_SIDE_MENU_FOLD, false);
+		} else {
+			setState({fold: true, foldOnHandsOff: true});
+			fire(AppEventTypes.SWITCH_SIDE_MENU_FOLD, true);
+		}
 	};
 
-	return <Header data-fold={fold}>
-		<span onClick={onUnfoldClick}><Logo/></span>
+	return <Header data-fold={state.fold} data-fold-on-hands-off={state.foldOnHandsOff} ref={ref}>
+		<span><Logo/></span>
 		<span><IntlLabel keys={['app.name']} value="n99"/></span>
-		<span onClick={onFoldClick} data-fold={fold}><FoldMenu/></span>
+		<span onClick={onFoldSwitchClick} data-fold={state.foldOnHandsOff}><FoldMenu/></span>
 	</Header>;
 };
