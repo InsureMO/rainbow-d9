@@ -13,11 +13,11 @@ export interface EndNodeWidgetProps {
 	engine: DiagramEngine;
 }
 
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
 export const EndNodeContainer = styled(NodeWrapper).attrs({
 	[DOM_KEY_WIDGET]: 'o23-playground-end-node',
 	style: {
+		// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+		// @ts-ignore
 		'--border-radius': PlaygroundCssVars.NODE_BORDER_RADIUS,
 		'--border': PlaygroundCssVars.NODE_END_BORDER,
 		'--background-color': PlaygroundCssVars.NODE_BACKGROUND
@@ -35,11 +35,11 @@ export const EndNodeHeader = styled(NodeHeader).attrs({
 		'--padding': PlaygroundCssVars.NODE_TITLE_PADDING
 	}
 })``;
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
 export const EndNodeTitle = styled(NodeTitle).attrs({
 	[DOM_KEY_WIDGET]: 'o23-playground-end-node-title',
 	style: {
+		// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+		// @ts-ignore
 		'--color': PlaygroundCssVars.NODE_END_TITLE_COLOR,
 		'--font-size': PlaygroundCssVars.NODE_END_TITLE_FONT_SIZE,
 		'--font-weight': PlaygroundCssVars.NODE_END_TITLE_FONT_WEIGHT

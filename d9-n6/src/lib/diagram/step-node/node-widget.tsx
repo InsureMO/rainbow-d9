@@ -34,9 +34,9 @@ export interface StepNodeWidgetProps {
 	engine: DiagramEngine;
 }
 
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
 export const StepNodeContainer = styled(NodeWrapper).attrs(
+	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+	// @ts-ignore
 	({'data-use': use}) => {
 		return {
 			[DOM_KEY_WIDGET]: 'o23-playground-step-node',
@@ -67,11 +67,11 @@ export const StepNodeHeader = styled(NodeHeader).attrs<{ 'data-use'?: string }>(
 			}
 		};
 	})``;
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
 export const StepNodeTitle = styled(NodeTitle).attrs({
 	[DOM_KEY_WIDGET]: 'o23-playground-step-node-title',
 	style: {
+		// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+		// @ts-ignore
 		'--color': PlaygroundCssVars.NODE_STEP_TITLE_COLOR,
 		'--font-size': PlaygroundCssVars.NODE_STEP_TITLE_FONT_SIZE,
 		'--font-weight': PlaygroundCssVars.NODE_STEP_TITLE_FONT_WEIGHT
@@ -80,6 +80,8 @@ export const StepNodeTitle = styled(NodeTitle).attrs({
 export const StepNodeSecondTitle = styled(NodeSecondTitle).attrs({
 	[DOM_KEY_WIDGET]: 'o23-playground-step-node-second-title',
 	style: {
+		// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+		// @ts-ignore
 		'--color': PlaygroundCssVars.NODE_START_TITLE_COLOR,
 		'--font-size': PlaygroundCssVars.NODE_START_SECOND_TITLE_FONT_SIZE,
 		'--font-weight': PlaygroundCssVars.NODE_START_SECOND_TITLE_FONT_WEIGHT

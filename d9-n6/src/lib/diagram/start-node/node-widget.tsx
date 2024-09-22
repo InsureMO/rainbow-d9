@@ -29,11 +29,11 @@ export interface StartNodeWidgetProps {
 	engine: DiagramEngine;
 }
 
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
 export const StartNodeContainer = styled(NodeWrapper).attrs({
 	[DOM_KEY_WIDGET]: 'o23-playground-start-node',
 	style: {
+		// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+		// @ts-ignore
 		'--border-radius': PlaygroundCssVars.NODE_BORDER_RADIUS,
 		'--border': PlaygroundCssVars.NODE_START_BORDER,
 		'--background-color': PlaygroundCssVars.NODE_BACKGROUND
@@ -52,6 +52,8 @@ export const StartNodeHeader = styled(NodeHeader).attrs({
 export const StartNodeTitle = styled(NodeTitle).attrs({
 	[DOM_KEY_WIDGET]: 'o23-playground-start-node-title',
 	style: {
+		// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+		// @ts-ignore
 		'--color': PlaygroundCssVars.NODE_START_TITLE_COLOR,
 		'--font-size': PlaygroundCssVars.NODE_START_TITLE_FONT_SIZE,
 		'--font-weight': PlaygroundCssVars.NODE_START_TITLE_FONT_WEIGHT
@@ -60,6 +62,8 @@ export const StartNodeTitle = styled(NodeTitle).attrs({
 export const StartNodeSecondTitle = styled(NodeSecondTitle).attrs({
 	[DOM_KEY_WIDGET]: 'o23-playground-start-node-second-title',
 	style: {
+		// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+		// @ts-ignore
 		'--color': PlaygroundCssVars.NODE_START_TITLE_COLOR,
 		'--font-size': PlaygroundCssVars.NODE_START_SECOND_TITLE_FONT_SIZE,
 		'--font-weight': PlaygroundCssVars.NODE_START_SECOND_TITLE_FONT_WEIGHT
