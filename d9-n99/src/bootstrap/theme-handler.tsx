@@ -1,4 +1,5 @@
 import {useEffect, useState} from 'react';
+import {ThemeCode, ThemeKind, toKind} from '../global-settings';
 import {
 	getDefaultDarkThemeCode,
 	getDefaultLightThemeCode,
@@ -8,33 +9,27 @@ import {
 	isThemeFollowSystemEnabled
 } from '../utils';
 import {AppEventTypes, useAppEventBus} from './app-event-bus';
-import {ThemeCode, ThemeKind} from './types';
 
 export interface ThemeState {
 	code: ThemeCode;
 	kind: ThemeKind;
 }
 
-/**
- * get theme kind from theme code
- */
-const toKind = (code: ThemeCode) => {
-	switch (true) {
-		case code.toLowerCase().includes('dark'):
-			return ThemeKind.DARK;
-		case code.toLowerCase().includes('light'):
-		default:
-			return ThemeKind.LIGHT;
-	}
+const matchPrefersTheme = () => window.matchMedia('(prefers-color-scheme: dark)');
+const getThemeCodeBySystem = (matcher?: MediaQueryListEvent | MediaQueryList) => {
+	return (matcher ?? matchPrefersTheme()).matches ? getDefaultDarkThemeCode() : getDefaultLightThemeCode();
 };
-
 export const ThemeHandler = () => {
 	const {on, off, fire} = useAppEventBus();
 	const [state, setState] = useState<ThemeState>(() => {
-		// use default theme code or by media query detection
-		const code = getDefaultThemeCode()
+		let code;
+		if (isThemeFollowSystemEnabled() && isThemeFollowSystem()) {
+			// detect when theme follows system
+			code = getThemeCodeBySystem();
+		} else {
 			// when default theme code not settings, detect system prefers
-			|| (window.matchMedia('(prefers-color-scheme: dark)').matches ? getDefaultDarkThemeCode() : getDefaultLightThemeCode());
+			code = getDefaultThemeCode() || getThemeCodeBySystem();
+		}
 		return {code, kind: toKind(code)};
 	});
 	useEffect(() => {
@@ -46,16 +41,16 @@ export const ThemeHandler = () => {
 			};
 			const onChangeThemeBySystem = () => {
 				if (isThemeFollowSystemEnabled() && isThemeFollowSystem()) {
-					const code = window.matchMedia('(prefers-color-scheme: dark)').matches ? getDefaultDarkThemeCode() : getDefaultLightThemeCode();
+					const code = getThemeCodeBySystem();
 					onChangeTheme(code);
 				}
 			};
 			// listen to browser theme event
-			const themeMedia = window.matchMedia('(prefers-color-scheme: dark)');
+			const themeMedia = matchPrefersTheme();
 			const onThemeMediaChange = (event: MediaQueryListEvent) => {
 				if (isThemeFollowSystemEnabled() && isThemeFollowSystem()) {
 					// only effective when theme follows system
-					const code = event.matches ? getDefaultDarkThemeCode() : getDefaultLightThemeCode();
+					const code = getThemeCodeBySystem(event);
 					onChangeTheme(code);
 				}
 			};

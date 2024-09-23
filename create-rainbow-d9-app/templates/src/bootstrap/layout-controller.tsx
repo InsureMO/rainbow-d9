@@ -1,9 +1,16 @@
 import {DOM_KEY_WIDGET} from '@rainbow-d9/n2';
 import {useEffect, useState} from 'react';
 import styled from 'styled-components';
-import {isBannerEnabled, isSideMenuEnabled, isSideMenuFold} from '../utils';
+import {isBannerEnabled, isSideMenuEnabled, isSideMenuFold, isThemeSwitcherEnabled} from '../utils';
 import {AppEventTypes, useAppEventBus} from './app-event-bus';
-import {ExternalMessage, ExternalMessageType, SwitchFeatureMessage} from './types';
+import {
+	ExternalMessage,
+	ExternalMessageType,
+	SwitchBannerMessage,
+	SwitchFeatureMessage,
+	SwitchSideMenuMessage,
+	SwitchThemeSwitchMessage
+} from './types';
 
 // noinspection CssUnresolvedCustomProperty
 const LayoutController = styled.div.attrs({[DOM_KEY_WIDGET]: 'app-frame-layout-controller'})`
@@ -42,6 +49,7 @@ interface LayoutControllerState {
 	sideMenuEnabled: boolean;
 	sideMenuFold: boolean;
 	bannerEnabled: boolean;
+	themeSwitcherEnabled: boolean;
 }
 
 export const AppFrameLayoutController = () => {
@@ -49,7 +57,8 @@ export const AppFrameLayoutController = () => {
 	const [state, setState] = useState<LayoutControllerState>({
 		sideMenuEnabled: isSideMenuEnabled(),
 		sideMenuFold: isSideMenuFold(),
-		bannerEnabled: isBannerEnabled()
+		bannerEnabled: isBannerEnabled(),
+		themeSwitcherEnabled: isThemeSwitcherEnabled()
 	});
 	useEffect(() => {
 		const onAskSideMenuEnabled = (onReply: (enabled: boolean) => void) => {
@@ -61,9 +70,13 @@ export const AppFrameLayoutController = () => {
 		const onAskBannerEnabled = (onReply: (enabled: boolean) => void) => {
 			onReply(state.bannerEnabled);
 		};
+		const onAskThemeSwitchEnabled = (onReply: (enabled: boolean) => void) => {
+			onReply(state.themeSwitcherEnabled);
+		};
 		type SwitchFeatureOptions = { data: SwitchFeatureMessage } & (
 			{ prop: 'sideMenuEnabled'; event: AppEventTypes.SWITCH_SIDE_MENU_ENABLED }
 			| { prop: 'bannerEnabled', event: AppEventTypes.SWITCH_BANNER_ENABLED }
+			| { prop: 'themeSwitcherEnabled', event: AppEventTypes.SWITCH_THEME_SWITCHER_ENABLED }
 			)
 
 		const switchFeature = (options: SwitchFeatureOptions) => {
@@ -80,7 +93,7 @@ export const AppFrameLayoutController = () => {
 				case ExternalMessageType.SWITCH_SIDE_MENU: {
 					// window.postMessage({type: 'switch-side-menu', enabled: false})
 					// noinspection PointlessBooleanExpressionJS
-					const enabled = !!((data as SwitchFeatureMessage).enabled ?? false);
+					const enabled = !!((data as SwitchSideMenuMessage).enabled ?? false);
 					// retrieve side menu fold from api, make sure it is same as side menu internal state
 					setState(state => ({...state, sideMenuEnabled: enabled, sideMenuFold: isSideMenuFold()}));
 					fire(AppEventTypes.SWITCH_SIDE_MENU_ENABLED, enabled);
@@ -89,8 +102,16 @@ export const AppFrameLayoutController = () => {
 				case ExternalMessageType.SWITCH_BANNER: {
 					// window.postMessage({type: 'switch-banner', enabled: false})
 					switchFeature({
-						data: data as SwitchFeatureMessage,
+						data: data as SwitchBannerMessage,
 						prop: 'bannerEnabled', event: AppEventTypes.SWITCH_BANNER_ENABLED
+					});
+					break;
+				}
+				case ExternalMessageType.SWITCH_THEME_SWITCHER: {
+					// window.postMessage({type: 'switch-theme-switcher', enabled: false})
+					switchFeature({
+						data: data as SwitchThemeSwitchMessage,
+						prop: 'themeSwitcherEnabled', event: AppEventTypes.SWITCH_THEME_SWITCHER_ENABLED
 					});
 					break;
 				}
@@ -101,11 +122,13 @@ export const AppFrameLayoutController = () => {
 		on(AppEventTypes.ASK_SIDE_MENU_ENABLED, onAskSideMenuEnabled);
 		on(AppEventTypes.SWITCH_SIDE_MENU_FOLD, onSwitchSideMenuFold);
 		on(AppEventTypes.ASK_BANNER_ENABLED, onAskBannerEnabled);
+		on(AppEventTypes.ASK_THEME_SWITCHER_ENABLED, onAskThemeSwitchEnabled);
 		window.addEventListener('message', onMessage);
 		return () => {
 			off(AppEventTypes.ASK_SIDE_MENU_ENABLED, onAskSideMenuEnabled);
 			off(AppEventTypes.SWITCH_SIDE_MENU_FOLD, onSwitchSideMenuFold);
 			off(AppEventTypes.ASK_BANNER_ENABLED, onAskBannerEnabled);
+			off(AppEventTypes.ASK_THEME_SWITCHER_ENABLED, onAskThemeSwitchEnabled);
 			window.removeEventListener('message', onMessage);
 		};
 	}, [on, off, fire]);

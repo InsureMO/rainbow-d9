@@ -1,6 +1,14 @@
-import {createCssVars as createN2CssVars, CssConstants as N2CssConstants} from '@rainbow-d9/n2';
-import {createGlobalStyle} from 'styled-components';
-import '../assets/fonts.css';
+import {createCssVars as createN2CssVars, CssConstants as N2CssConstants, IntlLabel} from '@rainbow-d9/n2';
+import {ReactNode} from 'react';
+import DarkIcon from '../assets/dark-theme.svg?react';
+import LightIcon from '../assets/light-theme.svg?react';
+
+export type ThemeCode = string;
+
+export enum ThemeKind {
+	LIGHT = 'light',
+	DARK = 'dark',
+}
 
 const createCss = (theme: Record<string, string | number>) => {
 	return Object.keys(theme)
@@ -12,8 +20,7 @@ const createCss = (theme: Record<string, string | number>) => {
 		.map(([p1, p2]) => [p1.substring(4), p2.slice(0, -1)])
 		.map(([key, value]) => `${key}: ${value};`).join('\n');
 };
-
-const createThemeStyles = () => {
+const createN2ThemeStyles = () => {
 	const N2LightConstants = {
 		...N2CssConstants,
 		FONT_FAMILY: '"Roboto"',
@@ -61,7 +68,6 @@ const createThemeStyles = () => {
 		n2Dark: createCss({ACTIVE_COLOR: 'var(--d9-active-color, rgb(118,123,132))', ...N2DarkTheme})
 	};
 };
-
 const createAppThemeStyles = () => {
 	const AppCssConstants = {
 		bannerBackground: 'rgb(255, 255, 255)',
@@ -144,9 +150,8 @@ const createAppThemeStyles = () => {
 		appDark: createCss(createAppCssVars(AppDarkCssConstants))
 	};
 };
-
-export const AppGlobalStyles = (() => {
-	const {n2Light, n2Dark} = createThemeStyles();
+export const createThemeStyles = () => {
+	const {n2Light, n2Dark} = createN2ThemeStyles();
 	const {appLight, appDark} = createAppThemeStyles();
 
 	const createStyles = (tag: string, n2: string, app: string) => {
@@ -165,45 +170,47 @@ export const AppGlobalStyles = (() => {
 	 * 1. to change light and dark styles,
 	 * 2. or add more themes by using [data-theme-code=xxx] tag
 	 */
-	const themeStyles = [
+	return [
 		createStyles('[data-theme-kind=light]', n2Light, appLight),
 		createStyles('[data-theme-kind=dark]', n2Dark, appDark)
 	].join('\n');
+};
 
-	// noinspection CssUnresolvedCustomProperty,CssNoGenericFontName
-	return createGlobalStyle`
-        *, *:before, *:after {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+export interface AppTheme {
+	code: ThemeCode;
+	kind: ThemeKind;
+	icon: ReactNode;
+	text: ReactNode;
+	active: (code: ThemeCode, kind: ThemeKind) => boolean;
+}
 
-        *:focus-visible {
-            outline: none;
-        }
-
-        html {
-            width: 100%;
-        }
-
-        body {
-            margin: 0;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-            position: relative;
-            overflow-x: hidden;
-            width: 100%;
-        }
-
-        *, *:before, *:after {
-            box-sizing: border-box;
-        }
-
-        ${themeStyles}
-        html[data-touchable=true] {
-            div[data-w=app-frame] {
-                // TODO put responsive styles here
-            }
-        }
-	`;
-})();
+export const askAvailableThemes = (): Array<AppTheme> => {
+	return [
+		{
+			code: 'light', kind: ThemeKind.LIGHT,
+			icon: <LightIcon/>, text: <IntlLabel keys={['theme.light']} value="Light"/>,
+			active: (_code: ThemeCode, kind: ThemeKind) => kind !== ThemeKind.DARK
+		},
+		{
+			code: 'dark', kind: ThemeKind.DARK,
+			icon: <DarkIcon/>, text: <IntlLabel keys={['theme.dark']} value="Dark"/>,
+			active: (_code: ThemeCode, kind: ThemeKind) => kind === ThemeKind.DARK
+		}
+	];
+};
+/**
+ * get theme kind from theme code
+ */
+export const toKind = (code: ThemeCode) => {
+	const theme = askAvailableThemes().find(theme => theme.code === code);
+	if (theme != null) {
+		return theme.kind;
+	}
+	switch (true) {
+		case code.toLowerCase().includes('dark'):
+			return ThemeKind.DARK;
+		case code.toLowerCase().includes('light'):
+		default:
+			return ThemeKind.LIGHT;
+	}
+};

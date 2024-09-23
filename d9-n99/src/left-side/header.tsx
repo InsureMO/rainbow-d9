@@ -3,7 +3,7 @@ import {useEffect, useRef, useState} from 'react';
 import styled from 'styled-components';
 import FoldMenu from '../assets/double-alt-arrow-left.svg?react';
 import Logo from '../assets/logo.svg?react';
-import {AppEventTypes, useAppEventBus} from '../global';
+import {AppEventTypes, useAppEventBus} from '../bootstrap';
 import {isSideMenuFold, setSideMenuFold} from '../utils';
 
 // noinspection CssUnresolvedCustomProperty,CssNoGenericFontName

@@ -1,7 +1,7 @@
 import {DOM_KEY_WIDGET, GlobalEventBusProvider} from '@rainbow-d9/n2';
 import {useEffect, useState} from 'react';
 import styled from 'styled-components';
-import {AppEventTypes, I18NAndD9N2Bridge, useAppEventBus} from '../global';
+import {AppEventTypes, I18NAndD9N2Bridge, useAppEventBus} from '../bootstrap';
 import {I18NSwitcher} from './i18n-switcher';
 import {ThemeSwitcher} from './theme-switcher';
 import {UserProfile} from './user-profile';

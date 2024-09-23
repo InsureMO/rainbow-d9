@@ -1,16 +1,10 @@
-export type ThemeCode = string;
-
-export enum ThemeKind {
-	LIGHT = 'light',
-	DARK = 'dark',
-}
-
 /** lang code must follow javascript standard */
 export type LangCode = string;
 
 export enum ExternalMessageType {
 	SWITCH_SIDE_MENU = 'switch-side-menu',
-	SWITCH_BANNER = 'switch-banner'
+	SWITCH_BANNER = 'switch-banner',
+	SWITCH_THEME_SWITCHER = 'switch-theme-switcher',
 }
 
 export interface ExternalMessage {
@@ -27,4 +21,8 @@ export interface SwitchSideMenuMessage extends SwitchFeatureMessage {
 
 export interface SwitchBannerMessage extends SwitchFeatureMessage {
 	type: ExternalMessageType.SWITCH_BANNER;
+}
+
+export interface SwitchThemeSwitchMessage extends SwitchFeatureMessage {
+	type: ExternalMessageType.SWITCH_THEME_SWITCHER;
 }

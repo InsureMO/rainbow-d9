@@ -1,7 +1,7 @@
 import {DOM_KEY_WIDGET, GlobalEventBusProvider} from '@rainbow-d9/n2';
 import {useEffect, useState} from 'react';
 import styled from 'styled-components';
-import {AppEventTypes, I18NAndD9N2Bridge, useAppEventBus} from '../global';
+import {AppEventTypes, I18NAndD9N2Bridge, useAppEventBus} from '../bootstrap';
 import {SideMenuHeader} from './header';
 
 // noinspection CssUnresolvedCustomProperty

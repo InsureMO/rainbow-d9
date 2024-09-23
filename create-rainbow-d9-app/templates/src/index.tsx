@@ -1,5 +1,5 @@
 import ReactDOM from 'react-dom/client';
-import {App} from './global';
+import {App} from './bootstrap';
 import reportWebVitals from './report-web-vitals';
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
