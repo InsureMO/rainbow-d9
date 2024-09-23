@@ -166,8 +166,8 @@ export const createThemeStyles = () => {
 		}`;
 	};
 	/**
-	 * default light and dark themes are provided.
-	 * 1. to change light and dark styles,
+	 * default light and dark themes are provided, you can
+	 * 1. to change light and dark styles by modifying above,
 	 * 2. or add more themes by using [data-theme-code=xxx] tag
 	 */
 	return [
@@ -184,6 +184,9 @@ export interface AppTheme {
 	active: (code: ThemeCode, kind: ThemeKind) => boolean;
 }
 
+/**
+ * available themes, using in theme switcher
+ */
 export const askAvailableThemes = (): Array<AppTheme> => {
 	return [
 		{
