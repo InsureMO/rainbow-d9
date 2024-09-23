@@ -3,6 +3,7 @@ export const isThemeEnabled = () => import.meta.env.VITE_THEME_ENABLED === 'true
 export const getDefaultThemeCode = () => import.meta.env.VITE_THEME_DEFAULT_CODE;
 export const getDefaultLightThemeCode = () => import.meta.env.VITE_THEME_DEFAULT_LIGHT || 'light';
 export const getDefaultDarkThemeCode = () => import.meta.env.VITE_THEME_DEFAULT_DARK || 'dark';
+export const isThemeFollowSystemEnabled = () => import.meta.env.VITE_THEME_FOLLOW_SYSTEM === 'true';
 
 export const isI18NEnabled = () => import.meta.env.VITE_I18N_ENABLED === 'true';
 export const getDefaultLangCode = () => import.meta.env.VITE_I18N_DEFAULT_CODE || navigator.language || 'en-US';

@@ -2,15 +2,19 @@ import {DOM_KEY_WIDGET, GlobalEventBusProvider} from '@rainbow-d9/n2';
 import {useEffect, useState} from 'react';
 import styled from 'styled-components';
 import {AppEventTypes, I18NAndD9N2Bridge, useAppEventBus} from '../global';
+import {I18NSwitcher} from './i18n-switcher';
+import {ThemeSwitcher} from './theme-switcher';
+import {UserProfile} from './user-profile';
 
 // noinspection CssUnresolvedCustomProperty
 const Container = styled.div.attrs({[DOM_KEY_WIDGET]: 'app-banner'})`
-    display: grid;
+    display: flex;
     position: fixed;
     margin-left: 0;
     width: 100vw;
     min-width: 100vw;
     height: var(--app-banner-height);
+    padding: var(--app-banner-padding);
     background: var(--app-banner-background);
     box-shadow: var(--app-banner-shadow);
     z-index: var(--app-banner-z-index);
@@ -21,7 +25,9 @@ export const BannerContainer = () => {
 	return <GlobalEventBusProvider>
 		<I18NAndD9N2Bridge/>
 		<Container>
-
+			<I18NSwitcher/>
+			<ThemeSwitcher/>
+			<UserProfile/>
 		</Container>
 	</GlobalEventBusProvider>;
 };

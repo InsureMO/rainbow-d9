@@ -3,7 +3,8 @@ import {createContext, ReactNode, useContext} from 'react';
 import {LangCode, ThemeCode, ThemeKind} from './types';
 
 export enum AppEventTypes {
-	CHANGE_THEME = 'change-theme', THEME_CHANGED = 'theme-changed',
+	CHANGE_THEME = 'change-theme', CHANGE_THEME_BY_SYSTEM = 'change-theme-by-system',
+	THEME_CHANGED = 'theme-changed', ASK_THEME = 'ask-theme',
 	CHANGE_LANG = 'change-lang', LANG_CHANGED = 'lang-changed',
 	SWITCH_SIDE_MENU_ENABLED = 'switch-side-menu-enabled',
 	ASK_SIDE_MENU_ENABLED = 'ask-side-menu-enabled',
@@ -16,9 +17,15 @@ export interface AppEventBus {
 	fire(type: AppEventTypes.CHANGE_THEME, themeCode: ThemeCode): this;
 	on(type: AppEventTypes.CHANGE_THEME, listener: (themeCode: ThemeCode) => void): this;
 	off(type: AppEventTypes.CHANGE_THEME, listener: (themeCode: ThemeCode) => void): this;
+	fire(type: AppEventTypes.CHANGE_THEME_BY_SYSTEM): this;
+	on(type: AppEventTypes.CHANGE_THEME_BY_SYSTEM, listener: () => void): this;
+	off(type: AppEventTypes.CHANGE_THEME_BY_SYSTEM, listener: () => void): this;
 	fire(type: AppEventTypes.THEME_CHANGED, themeCode: ThemeCode, themeKind: ThemeKind): this;
 	on(type: AppEventTypes.THEME_CHANGED, listener: (themeCode: ThemeCode, themeKind: ThemeKind) => void): this;
 	off(type: AppEventTypes.THEME_CHANGED, listener: (themeCode: ThemeCode, themeKind: ThemeKind) => void): this;
+	fire(type: AppEventTypes.ASK_THEME, onReply: (themeCode: ThemeCode, themeKind: ThemeKind) => void): this;
+	on(type: AppEventTypes.ASK_THEME, listener: (onReply: (themeCode: ThemeCode, themeKind: ThemeKind) => void) => void): this;
+	off(type: AppEventTypes.ASK_THEME, listener: (onReply: (themeCode: ThemeCode, themeKind: ThemeKind) => void) => void): this;
 	fire(type: AppEventTypes.CHANGE_LANG, langCode: LangCode): this;
 	on(type: AppEventTypes.CHANGE_LANG, listener: (langCode: LangCode) => void): this;
 	off(type: AppEventTypes.CHANGE_LANG, listener: (langCode: LangCode) => void): this;

@@ -12,13 +12,12 @@ const Container = styled.div.attrs({[DOM_KEY_WIDGET]: 'app-frame'})`
 `;
 
 export const AppFrame = () => {
-
 	return <>
 		{/** controller for control the layout of frame */}
 		<AppFrameLayoutController/>
 		<Container>
-			<Banner/>
 			<SideMenu/>
+			<Banner/>
 		</Container>
 	</>;
 };
