@@ -2,6 +2,7 @@ import {DOM_KEY_WIDGET, GlobalEventBusProvider} from '@rainbow-d9/n2';
 import {useEffect, useState} from 'react';
 import styled from 'styled-components';
 import {AppEventTypes, I18NAndD9N2Bridge, useAppEventBus} from '../bootstrap';
+import {isAuthenticated} from '../services';
 import {I18NSwitcher} from './i18n-switcher';
 import {ThemeSwitcher} from './theme-switcher';
 import {UserProfile} from './user-profile';
@@ -19,12 +20,21 @@ const Container = styled.div.attrs({[DOM_KEY_WIDGET]: 'app-banner'})`
     box-shadow: var(--app-banner-shadow);
     z-index: var(--app-banner-z-index);
     transition: margin-left 0.3s ease-in-out, width 0.3s ease-in-out, min-width 0.3s ease-in-out;
+
+    > span[data-type=space-grabber] {
+        flex-grow: 1;
+
+        &[data-authenticated=true] {
+            display: none;
+        }
+    }
 `;
 
 export const BannerContainer = () => {
 	return <GlobalEventBusProvider>
 		<I18NAndD9N2Bridge/>
 		<Container>
+			<span data-type="space-grabber" data-authenticated={isAuthenticated()}/>
 			<I18NSwitcher/>
 			<ThemeSwitcher/>
 			<UserProfile/>

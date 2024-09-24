@@ -2,6 +2,7 @@ import {DOM_KEY_WIDGET, GlobalEventBusProvider} from '@rainbow-d9/n2';
 import {useEffect, useState} from 'react';
 import styled from 'styled-components';
 import {AppEventTypes, I18NAndD9N2Bridge, useAppEventBus} from '../bootstrap';
+import {SideMenuBody} from './body';
 import {SideMenuHeader} from './header';
 
 // noinspection CssUnresolvedCustomProperty
@@ -26,6 +27,7 @@ const SideMenuContainer = () => {
 		<I18NAndD9N2Bridge/>
 		<Container>
 			<SideMenuHeader/>
+			<SideMenuBody/>
 		</Container>
 	</GlobalEventBusProvider>;
 };

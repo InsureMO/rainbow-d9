@@ -1,13 +1,13 @@
 import {DOM_KEY_WIDGET, IntlLabel} from '@rainbow-d9/n2';
 import {useEffect, useRef, useState} from 'react';
 import styled from 'styled-components';
-import FoldMenu from '../assets/double-alt-arrow-left.svg?react';
+import FoldMenu from '../assets/double-arrow-left.svg?react';
 import Logo from '../assets/logo.svg?react';
 import {AppEventTypes, useAppEventBus} from '../bootstrap';
 import {isSideMenuFold, setSideMenuFold} from '../utils';
 
 // noinspection CssUnresolvedCustomProperty,CssNoGenericFontName
-const Header = styled.div.attrs({[DOM_KEY_WIDGET]: 'app-side-menu-header'})`
+const Container = styled.div.attrs({[DOM_KEY_WIDGET]: 'app-side-menu-header'})`
     display: grid;
     position: relative;
     grid-template-columns: var(--app-side-menu-header-height) 1fr auto;
@@ -131,9 +131,9 @@ export const SideMenuHeader = () => {
 		}
 	};
 
-	return <Header data-fold={state.fold} data-fold-on-hands-off={state.foldOnHandsOff} ref={ref}>
+	return <Container data-fold={state.fold} data-fold-on-hands-off={state.foldOnHandsOff} ref={ref}>
 		<span><Logo/></span>
 		<span><IntlLabel keys={['app.name']} value="n99"/></span>
 		<span onClick={onFoldSwitchClick} data-fold={state.foldOnHandsOff}><FoldMenu/></span>
-	</Header>;
+	</Container>;
 };

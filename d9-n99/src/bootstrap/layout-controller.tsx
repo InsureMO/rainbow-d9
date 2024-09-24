@@ -36,6 +36,19 @@ const LayoutController = styled.div.attrs({[DOM_KEY_WIDGET]: 'app-frame-layout-c
 
         > div[data-w=app-side-menu] {
             width: var(--app-side-menu-fold-width);
+
+            > div[data-w=app-side-menu-body] {
+                padding: var(--app-side-menu-fold-body-padding);
+
+                span[data-w=app-side-menu-group-label],
+                span[data-w=app-side-menu-item-label] {
+                    span[data-type=text],
+                    span[data-type=arrow] {
+                        opacity: 0;
+                        transition: opacity 0.3s ease-in-out;
+                    }
+                }
+            }
         }
     }
 
