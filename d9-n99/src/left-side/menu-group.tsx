@@ -1,5 +1,6 @@
+import {useThrottler} from '@rainbow-d9/n1';
 import {DOM_KEY_WIDGET} from '@rainbow-d9/n2';
-import {useState} from 'react';
+import {useEffect, useRef, useState} from 'react';
 import styled from 'styled-components';
 import ArrowIcon from '../assets/single-arrow-down.svg?react';
 import {AppMenuGroup, isMenuGroup, isMenuItem} from '../global-settings';
@@ -14,25 +15,6 @@ const Container = styled.div.attrs({[DOM_KEY_WIDGET]: 'app-side-menu-group'})`
     display: flex;
     position: relative;
     flex-direction: column;
-    flex-grow: 1;
-
-    &[data-expanded=true] {
-        > span[data-w=app-side-menu-group-label] {
-            > span[data-type=arrow] > svg {
-                transform: rotateX(180deg);
-            }
-        }
-
-        > div[data-w=app-side-menu-group-items] {
-            max-height: unset;
-        }
-    }
-
-    &[data-expanded=false] {
-        > div[data-w=app-side-menu-group-items] {
-            max-height: 0;
-        }
-    }
 `;
 // noinspection CssUnresolvedCustomProperty
 const Label = styled.span.attrs<{ level: number }>(({level}) => {
@@ -54,7 +36,15 @@ const Label = styled.span.attrs<{ level: number }>(({level}) => {
     padding-left: calc(var(--menu-level) * var(--app-side-menu-level-indent));
     white-space: nowrap;
     cursor: pointer;
-    transition: background 0.3s ease-in-out;
+    transition: background .3s ease-in-out, padding .3s ease-in-out;
+
+    &[data-expanded=hiding],
+    &[data-expanded=showing],
+    &[data-expanded=show] {
+        > span[data-type=arrow] > svg {
+            transform: rotateX(180deg);
+        }
+    }
 
     &:hover {
         background: var(--app-side-menu-group-label-hover-background);
@@ -85,7 +75,7 @@ const Label = styled.span.attrs<{ level: number }>(({level}) => {
         > svg {
             height: var(--app-side-menu-icon-size);
             width: var(--app-side-menu-icon-size);
-            transition: color 0.3s ease-in-out;
+            transition: color .3s ease-in-out;
         }
     }
 
@@ -94,33 +84,79 @@ const Label = styled.span.attrs<{ level: number }>(({level}) => {
         position: relative;
         align-items: center;
         flex-grow: 1;
-        transition: color 0.3s ease-in-out;
+        margin-left: var(--app-side-menu-text-indent);
+        transition: color .3s ease-in-out;
     }
 
     > span[data-type=arrow] {
         > svg {
             height: calc(var(--app-side-menu-icon-size) * 0.8);
             width: calc(var(--app-side-menu-icon-size) * 0.8);
-            transition: transform 0.3s ease-in-out, color 0.3s ease-in-out;
+            transition: transform .3s ease-in-out, color .3s ease-in-out;
         }
     }
 `;
 
-const Items = styled.div.attrs({[DOM_KEY_WIDGET]: 'app-side-menu-group-items'})`
+// noinspection CssUnresolvedCustomProperty
+const Items = styled.div.attrs<{ height: number }>(({height}) => {
+	return {
+		[DOM_KEY_WIDGET]: 'app-side-menu-group-items',
+		style: {
+			'--menu-items-height': `${height}px`
+		}
+	};
+})<{ height: number }>`
     display: flex;
     position: relative;
     flex-direction: column;
     overflow: hidden;
+    transition: max-height .3s ease-in-out;
+
+    &[data-expanded=hide] {
+        max-height: 0;
+    }
+
+    &[data-expanded=showing],
+    &[data-expanded=hiding] {
+        max-height: var(--menu-items-height);
+    }
+
+    &[data-expanded=show] {
+        max-height: unset;
+    }
 `;
 
+enum ExpandState {
+	HIDE = 'hide', HIDING = 'hiding', SHOWING = 'showing', SHOW = 'show'
+}
+
 interface MenuGroupState {
-	expanded: boolean;
+	expanded: ExpandState;
+	height: number;
 }
 
 export const MenuGroup = (props: MenuGroupProps) => {
 	const {icon, text, items, level} = props;
 
-	const [state, setState] = useState<MenuGroupState>({expanded: false});
+	const ref = useRef<HTMLDivElement>(null);
+	const itemsRef = useRef<HTMLDivElement>(null);
+	const {replace, clear} = useThrottler();
+	const [state, setState] = useState<MenuGroupState>({expanded: ExpandState.HIDE, height: 0});
+	useEffect(() => {
+		if (state.expanded === ExpandState.SHOWING) {
+			// animation ends after 300ms
+			replace(() => {
+				setState(state => ({...state, expanded: ExpandState.SHOW, height: 0}));
+			}, 310);
+		} else if (state.expanded === ExpandState.HIDING) {
+			// animation starts after 10ms
+			replace(() => {
+				setState(state => ({...state, expanded: ExpandState.HIDE, height: 0}));
+			}, 10);
+		} else if (state.expanded === ExpandState.SHOW) {
+			ref.current?.scrollIntoView({behavior: 'smooth', block: 'nearest'});
+		}
+	}, [state.expanded]);
 
 	if (items == null || items.length === 0) {
 		// no menu item, there is no need to show this group
@@ -128,16 +164,22 @@ export const MenuGroup = (props: MenuGroupProps) => {
 	}
 
 	const onGroupLabelClicked = () => {
-		setState({expanded: !state.expanded});
+		const height = itemsRef.current!.scrollHeight;
+		if (state.expanded === ExpandState.HIDE) {
+			setState(state => ({...state, expanded: ExpandState.SHOWING, height}));
+		} else {
+			clear(false);
+			setState(state => ({...state, expanded: ExpandState.HIDING, height}));
+		}
 	};
 
-	return <Container data-expanded={state.expanded}>
-		<Label level={level} onClick={onGroupLabelClicked}>
+	return <Container data-expanded={state.expanded} ref={ref}>
+		<Label level={level} data-expanded={state.expanded} onClick={onGroupLabelClicked}>
 			<span data-type="icon">{icon}</span>
 			<span data-type="text">{text}</span>
 			<span data-type="arrow"><ArrowIcon/></span>
 		</Label>
-		<Items>
+		<Items data-expanded={state.expanded} height={state.height} ref={itemsRef}>
 			{items.map(menu => {
 				if (isMenuGroup(menu)) {
 					return <MenuGroup key={menu.code} {...menu} level={level + 1}/>;

@@ -1,17 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?><!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
 <svg width="800px" height="800px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M8 22H16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-    <path opacity="0.5" d="M5 19H19" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
-          stroke-linejoin="round"/>
-    <path d="M2 16H22" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-    <path opacity="0.5"
-          d="M12 6C8.68629 6 6 8.68629 6 12C6 13.5217 6.56645 14.911 7.5 15.9687H16.5C17.4335 14.911 18 13.5217 18 12C18 8.68629 15.3137 6 12 6Z"
-          stroke="currentColor" stroke-width="1.5"/>
-    <path opacity="0.5" d="M12 2V3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-    <path opacity="0.5" d="M22 12L21 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-    <path opacity="0.5" d="M3 12L2 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-    <path opacity="0.5" d="M19.0708 4.92969L18.678 5.32252" stroke="currentColor" stroke-width="1.5"
+    <circle cx="12" cy="12" r="5" stroke="currentColor" stroke-width="1.5"/>
+    <path d="M12 2V4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+    <path d="M12 20V22" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+    <path d="M4 12L2 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+    <path d="M22 12L20 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+    <path opacity="0.5" d="M19.7778 4.22266L17.5558 6.25424" stroke="currentColor" stroke-width="1.5"
           stroke-linecap="round"/>
-    <path opacity="0.5" d="M5.32178 5.32227L4.92894 4.92943" stroke="currentColor" stroke-width="1.5"
+    <path opacity="0.5" d="M4.22217 4.22266L6.44418 6.25424" stroke="currentColor" stroke-width="1.5"
+          stroke-linecap="round"/>
+    <path opacity="0.5" d="M6.44434 17.5557L4.22211 19.7779" stroke="currentColor" stroke-width="1.5"
+          stroke-linecap="round"/>
+    <path opacity="0.5" d="M19.7778 19.7773L17.5558 17.5551" stroke="currentColor" stroke-width="1.5"
           stroke-linecap="round"/>
 </svg>

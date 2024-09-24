@@ -146,7 +146,7 @@ export const BannerButton = styled.div.attrs({[DOM_KEY_WIDGET]: 'app-banner-butt
     width: var(--app-banner-button-size);
     border-radius: var(--app-banner-button-border-radius);
     cursor: pointer;
-    transition: background 0.3s ease-in-out;
+    transition: background .3s ease-in-out;
 
     &:hover {
         background: var(--app-banner-button-hover-background);
@@ -159,7 +159,7 @@ export const BannerButton = styled.div.attrs({[DOM_KEY_WIDGET]: 'app-banner-butt
     > svg {
         height: calc(var(--app-banner-button-size) * 0.6);
         width: calc(var(--app-banner-button-size) * 0.6);
-        transition: color 0.3s ease-in-out;
+        transition: color .3s ease-in-out;
     }
 
     > span[data-type=lang-emoji] {
@@ -209,7 +209,7 @@ const BannerButtonMenuItemContainer = styled.div.attrs({[DOM_KEY_WIDGET]: 'app-b
     border-radius: var(--app-banner-button-menu-item-border-radius);
     white-space: nowrap;
     cursor: pointer;
-    transition: color 0.3s ease-in-out, background 0.3s ease-in-out;
+    transition: color .3s ease-in-out, background .3s ease-in-out;
 
     &[data-active=true] {
         color: var(--app-banner-button-menu-item-active-color);

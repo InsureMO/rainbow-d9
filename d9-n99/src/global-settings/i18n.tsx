@@ -37,12 +37,11 @@ const {'en-US': enUs, 'zh-CN': zhCN, ...rest} = $d9n2.intl.labels;
 $d9n2.intl.labels = {
 	'en-US': {
 		...enUs,
-		app: {name: getAppName()},
-		theme: {light: 'Light', dark: 'Dark', system: 'Follow System'},
-		i18n: {'en-US': 'English', 'zh-CN': 'Simplified Chinese'}
+		app: {name: getAppName()}
 	},
 	'zh-CN': {
 		...zhCN,
+		// d9 n2
 		alert: {confirm: '确认'},
 		dialog: {confirm: '是', discard: '否'},
 		options: {noAvailable: '没有可选项.', noMatched: '没有匹配项.'},
@@ -75,9 +74,11 @@ $d9n2.intl.labels = {
 			page: '第', of: '页, 共', pages: '页,', afterSize: '条每页,',
 			total: '公', unknownItemCount: '???', items: '条.'
 		},
+		// n99 app
 		app: {name: '前端'},
 		theme: {light: '白天', dark: '黑夜', system: '跟随系统'},
-		i18n: {'en-US': '英文', 'zh-CN': '简体中文'}
+		i18n: {'en-US': '英文', 'zh-CN': '简体中文'},
+		menus: {preferences: '使用偏好', language: '语言', theme: '颜色主题'}
 	},
 	...rest
 };

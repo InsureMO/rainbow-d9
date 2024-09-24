@@ -19,7 +19,7 @@ const Container = styled.div.attrs({[DOM_KEY_WIDGET]: 'app-banner'})`
     background: var(--app-banner-background);
     box-shadow: var(--app-banner-shadow);
     z-index: var(--app-banner-z-index);
-    transition: margin-left 0.3s ease-in-out, width 0.3s ease-in-out, min-width 0.3s ease-in-out;
+    transition: margin-left .3s ease-in-out, width .3s ease-in-out, min-width .3s ease-in-out;
 
     > span[data-type=space-grabber] {
         flex-grow: 1;

@@ -146,6 +146,7 @@ const createAppThemeStyles = () => {
 			'side-menu-body-padding': 'var(--app-side-menu-body-padding, 4px 12px)',
 			'side-menu-fold-body-padding': 'var(--app-side-menu-fold-body-padding, 4px 12px 4px 18px)',
 			'side-menu-icon-size': 'var(--app-side-menu-icon-size, 20px)',
+			'side-menu-text-indent': 'var(--app-side-menu-text-indent, 6px)',
 			'side-menu-level-indent': 'var(--app-side-menu-level-indent, 8px)',
 			'side-menu-group-border-radius': 'var(--app-side-menu-group-border-radius, 8px)',
 			'side-menu-group-label-height': 'var(--app-side-menu-group-label-height, 40px)',
@@ -184,15 +185,44 @@ export const createThemeStyles = () => {
 	const {appLight, appDark} = createAppThemeStyles();
 
 	const createStyles = (tag: string, n2: string, app: string) => {
-		return `div${tag} ~ * {
-			${n2};
-		    font-family: var(--d9-font-family);
-		    font-size: var(--d9-font-size);
-		    color: var(--d9-font-color);
-		}
-		div${tag} ~ div[data-w=app-frame] {
-			${app};
-		}`;
+		return `
+div${tag} ~ * {
+	${n2};
+	font-family: var(--d9-font-family);
+	font-size: var(--d9-font-size);
+	color: var(--d9-font-color);
+	// div[data-h-scroll],
+	// div[data-v-scroll] {
+	// 	&::-webkit-scrollbar {
+	// 		background-color: transparent;
+	// 		height: var(--d9-scroll-height);
+	// 		width: var(--d9-scroll-width)
+	// 	}
+	// 	&::-webkit-scrollbar-track {
+	// 		background-color: var(--d9-scroll-track-color);
+	// 		border-radius: var(--d9-scroll-border-radius);
+	// 	}
+	// 	&::-webkit-scrollbar-thumb {
+	// 		background-color: var(--d9-scroll-thumb-color);
+	// 		border-radius: var(--d9-scroll-border-radius);
+	// 	}
+	// }
+	svg[data-icon=dark-theme] {
+		transform: scale(0.85);
+		transform-origin: center;
+	}
+	svg[data-icon=system-theme] {
+		transform: scale(0.9);
+		transform-origin: center;
+	}
+	svg[data-icon=theme] {
+		transform: scale(0.9) translateY(-2px);
+		transform-origin: center;
+	}
+}
+div${tag} ~ div[data-w=app-frame] {
+	${app};
+}`;
 	};
 	/**
 	 * default light and dark themes are provided, you can

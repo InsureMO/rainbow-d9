@@ -5,13 +5,14 @@ import {MenuGroup} from './menu-group';
 import {MenuItem} from './menu-item';
 
 // noinspection CssUnresolvedCustomProperty
-const Container = styled.div.attrs({[DOM_KEY_WIDGET]: 'app-side-menu-body'})`
+const Container = styled.div.attrs({[DOM_KEY_WIDGET]: 'app-side-menu-body', 'data-h-scroll': '', 'data-v-scroll': ''})`
     display: flex;
     position: relative;
     flex-direction: column;
     flex-grow: 1;
     padding: var(--app-side-menu-body-padding);
     transition: padding .3s ease-in-out;
+    overflow: auto;
 `;
 
 export const SideMenuBody = () => {

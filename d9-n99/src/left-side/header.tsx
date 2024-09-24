@@ -13,6 +13,7 @@ const Container = styled.div.attrs({[DOM_KEY_WIDGET]: 'app-side-menu-header'})`
     grid-template-columns: var(--app-side-menu-header-height) 1fr auto;
     align-items: center;
     height: var(--app-side-menu-header-height);
+    min-height: var(--app-side-menu-header-height);
     padding-right: var(--app-side-menu-padding);
     border-bottom: var(--app-side-menu-header-bottom-border);
 
@@ -73,7 +74,7 @@ const Container = styled.div.attrs({[DOM_KEY_WIDGET]: 'app-side-menu-header'})`
             height: 60%;
             width: 75%;
             color: var(--app-side-menu-header-fold-button-color);
-            transition: transform 0.3s ease-in-out, color 0.3s ease-in-out;
+            transition: transform .3s ease-in-out, color .3s ease-in-out;
         }
     }
 `;

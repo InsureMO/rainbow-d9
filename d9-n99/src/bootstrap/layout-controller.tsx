@@ -42,10 +42,12 @@ const LayoutController = styled.div.attrs({[DOM_KEY_WIDGET]: 'app-frame-layout-c
 
                 span[data-w=app-side-menu-group-label],
                 span[data-w=app-side-menu-item-label] {
+                    padding-left: 0;
+
                     span[data-type=text],
                     span[data-type=arrow] {
                         opacity: 0;
-                        transition: opacity 0.3s ease-in-out;
+                        transition: opacity .3s ease-in-out;
                     }
                 }
             }

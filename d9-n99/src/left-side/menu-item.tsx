@@ -33,7 +33,7 @@ const Label = styled.span.attrs<{ level: number }>(({level}) => {
     padding-left: calc(var(--menu-level) * var(--app-side-menu-level-indent));
     white-space: nowrap;
     cursor: pointer;
-    transition: background 0.3s ease-in-out;
+    transition: background .3s ease-in-out, padding .3s ease-in-out;
 
     &:hover {
         background: var(--app-side-menu-item-label-hover-background);
@@ -62,7 +62,7 @@ const Label = styled.span.attrs<{ level: number }>(({level}) => {
         > svg {
             height: var(--app-side-menu-icon-size);
             width: var(--app-side-menu-icon-size);
-            transition: color 0.3s ease-in-out;
+            transition: color .3s ease-in-out;
         }
     }
 
@@ -71,7 +71,8 @@ const Label = styled.span.attrs<{ level: number }>(({level}) => {
         position: relative;
         align-items: center;
         flex-grow: 1;
-        transition: color 0.3s ease-in-out;
+        margin-left: var(--app-side-menu-text-indent);
+        transition: color .3s ease-in-out;
     }
 `;
 

@@ -17,7 +17,7 @@ const Container = styled.div.attrs({[DOM_KEY_WIDGET]: 'app-side-menu'})`
     background: var(--app-side-menu-background);
     box-shadow: var(--app-side-menu-shadow);
     z-index: var(--app-side-menu-z-index);
-    transition: width 0.3s ease-in-out;
+    transition: width .3s ease-in-out;
     overflow: hidden;
 `;
 
