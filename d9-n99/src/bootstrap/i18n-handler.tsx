@@ -11,7 +11,11 @@ interface I18NState {
 export const I18NHandler = () => {
 	const {on, off, fire} = useAppEventBus();
 	const [state, setState] = useState<I18NState>(() => {
-		return {code: getLangCode() || getDefaultLangCode()};
+		const code = getLangCode() || getDefaultLangCode();
+		if ($d9n2.intl.language !== code) {
+			$d9n2.intl.language = code;
+		}
+		return {code};
 	});
 	useEffect(() => {
 		if (isI18NEnabled()) {

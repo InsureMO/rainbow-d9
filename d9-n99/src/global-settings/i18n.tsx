@@ -76,7 +76,7 @@ $d9n2.intl.labels = {
 		},
 		// n99 app
 		app: {name: '前端'},
-		theme: {light: '白天', dark: '黑夜', system: '跟随系统'},
+		theme: {light: '浅色主题', dark: '深色主题', system: '跟随系统'},
 		i18n: {'en-US': '英文', 'zh-CN': '简体中文'},
 		menus: {preferences: '使用偏好', language: '语言', theme: '颜色主题'}
 	},
