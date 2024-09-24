@@ -24,9 +24,16 @@ Assume the following envs are ready, otherwise contact the tech guy.
 | VITE_DISABLE_I18N_SWITCHER  | `false`    | Y        | Disable the i18n switcher, it is side-menu-related and banner-related. Even if set to `true`, the menu can still be enabled by `message`.                                                                                                                                                                     |
 | VITE_DISABLE_USER_PROFILE   | `false`    | Y        | Disable the user profile, it is side-menu-related and banner-related. Even if set to `true`, the menu can still be enabled by `message`.                                                                                                                                                                      |
 
+> Please ensure that all set theme codes and language codes are supported by the application, as the application will not perform any
+> validation or error handling at runtime. Modify the `/src/utils/env-utils.ts` file to add your own validation.
+
 ## Build your own themes
 
 Modify the `src/global-settings/theme.tsx` file according to the comments.
+
+## Build your own languages
+
+Modify the `src/global-settings/i18n.tsx` file according to the comments.
 
 # Runtime
 
@@ -41,6 +48,9 @@ The content stored in Local Storage is valid only for the current browser and is
 | `d9-n99-side-menu-fold` | `true/false`           | The fold status of the side menu.                               |
 | `d9-n99-theme`          | `system` or theme code | Theme code or whether the theme follows the system preferences. |
 | `d9-n99-language`       | language code          | Language code.                                                  |
+
+> Please ensure that all theme codes and language codes in storage are supported by the application, as the application will not perform any
+> validation or error handling at runtime. Modify the `/src/utils/storage-utils.ts` file to add your own validation.
 
 ## Messages
 
