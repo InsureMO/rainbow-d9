@@ -32,12 +32,15 @@ Modify the `src/global-settings/theme.tsx` file according to the comments.
 
 ## Local storage
 
+The content stored in Local Storage is valid only for the current browser and is independent of the user.
+
 `d9-n99-` could be modified to any prefix you like, at `/src/utils/storage-utils.ts`.
 
 | Name                    | Values                 | Description                                                     |
 |-------------------------|------------------------|-----------------------------------------------------------------|
 | `d9-n99-side-menu-fold` | `true/false`           | The fold status of the side menu.                               |
 | `d9-n99-theme`          | `system` or theme code | Theme code or whether the theme follows the system preferences. |
+| `d9-n99-language`       | language code          | Language code.                                                  |
 
 ## Messages
 

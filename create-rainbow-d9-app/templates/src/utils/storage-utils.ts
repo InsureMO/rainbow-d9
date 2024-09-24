@@ -1,4 +1,4 @@
-import {ThemeCode} from '../global-settings';
+import {LangCode, ThemeCode} from '../global-settings';
 
 const STORAGE_PREFIX = 'd9-n99-';
 const SIDE_MENU_FOLD_KEY = `${STORAGE_PREFIX}side-menu-fold`;
@@ -10,3 +10,7 @@ export const isThemeFollowSystem = () => localStorage.getItem(THEME_KEY) === 'sy
 export const setThemeFollowSystem = () => localStorage.setItem(THEME_KEY, 'system');
 export const getThemeCode = (): ThemeCode | undefined => ((localStorage.getItem(THEME_KEY) as ThemeCode) ?? '').trim() || (void 0);
 export const setThemeCode = (code: ThemeCode) => localStorage.setItem(THEME_KEY, code);
+
+const LANGUAGE_KEY = `${STORAGE_PREFIX}language`;
+export const getLangCode = (): LangCode | undefined => ((localStorage.getItem(LANGUAGE_KEY) as LangCode) ?? '').trim() || (void 0);
+export const setLangCode = (code: LangCode) => localStorage.setItem(LANGUAGE_KEY, code);

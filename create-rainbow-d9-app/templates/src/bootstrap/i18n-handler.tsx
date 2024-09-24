@@ -1,7 +1,7 @@
 import {$d9n2, GlobalEventTypes, useGlobalEventBus} from '@rainbow-d9/n2';
 import {Fragment, useEffect, useState} from 'react';
 import {LangCode} from '../global-settings';
-import {getDefaultLangCode, isI18NEnabled} from '../utils';
+import {getDefaultLangCode, getLangCode, isI18NEnabled, setLangCode} from '../utils';
 import {AppEventTypes, useAppEventBus} from './app-event-bus';
 
 interface I18NState {
@@ -11,7 +11,7 @@ interface I18NState {
 export const I18NHandler = () => {
 	const {on, off, fire} = useAppEventBus();
 	const [state, setState] = useState<I18NState>(() => {
-		return {code: getDefaultLangCode()};
+		return {code: getLangCode() || getDefaultLangCode()};
 	});
 	useEffect(() => {
 		if (isI18NEnabled()) {
@@ -20,6 +20,7 @@ export const I18NHandler = () => {
 					setState({code: code});
 					document.documentElement.lang = code;
 					$d9n2.intl.language = code;
+					setLangCode(code);
 					fire(AppEventTypes.LANG_CHANGED, code);
 				}
 			};
