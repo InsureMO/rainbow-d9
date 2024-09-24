@@ -1,13 +1,20 @@
 import {DOM_KEY_WIDGET} from '@rainbow-d9/n2';
 import {useEffect, useState} from 'react';
 import styled from 'styled-components';
-import {isBannerEnabled, isSideMenuEnabled, isSideMenuFold, isThemeSwitcherEnabled} from '../utils';
+import {
+	isBannerEnabled,
+	isI18NSwitcherEnabled,
+	isSideMenuEnabled,
+	isSideMenuFold,
+	isThemeSwitcherEnabled
+} from '../utils';
 import {AppEventTypes, useAppEventBus} from './app-event-bus';
 import {
 	ExternalMessage,
 	ExternalMessageType,
 	SwitchBannerMessage,
 	SwitchFeatureMessage,
+	SwitchI18NSwitchMessage,
 	SwitchSideMenuMessage,
 	SwitchThemeSwitchMessage
 } from './types';
@@ -50,6 +57,7 @@ interface LayoutControllerState {
 	sideMenuFold: boolean;
 	bannerEnabled: boolean;
 	themeSwitcherEnabled: boolean;
+	i18nSwitcherEnabled: boolean;
 }
 
 export const AppFrameLayoutController = () => {
@@ -58,7 +66,8 @@ export const AppFrameLayoutController = () => {
 		sideMenuEnabled: isSideMenuEnabled(),
 		sideMenuFold: isSideMenuFold(),
 		bannerEnabled: isBannerEnabled(),
-		themeSwitcherEnabled: isThemeSwitcherEnabled()
+		themeSwitcherEnabled: isThemeSwitcherEnabled(),
+		i18nSwitcherEnabled: isI18NSwitcherEnabled()
 	});
 	useEffect(() => {
 		const onAskSideMenuEnabled = (onReply: (enabled: boolean) => void) => {
@@ -70,13 +79,17 @@ export const AppFrameLayoutController = () => {
 		const onAskBannerEnabled = (onReply: (enabled: boolean) => void) => {
 			onReply(state.bannerEnabled);
 		};
-		const onAskThemeSwitchEnabled = (onReply: (enabled: boolean) => void) => {
+		const onAskThemeSwitcherEnabled = (onReply: (enabled: boolean) => void) => {
 			onReply(state.themeSwitcherEnabled);
+		};
+		const onAskI18NSwitcherEnabled = (onReply: (enabled: boolean) => void) => {
+			onReply(state.i18nSwitcherEnabled);
 		};
 		type SwitchFeatureOptions = { data: SwitchFeatureMessage } & (
 			{ prop: 'sideMenuEnabled'; event: AppEventTypes.SWITCH_SIDE_MENU_ENABLED }
 			| { prop: 'bannerEnabled', event: AppEventTypes.SWITCH_BANNER_ENABLED }
 			| { prop: 'themeSwitcherEnabled', event: AppEventTypes.SWITCH_THEME_SWITCHER_ENABLED }
+			| { prop: 'i18nSwitcherEnabled', event: AppEventTypes.SWITCH_I18N_SWITCHER_ENABLED }
 			)
 
 		const switchFeature = (options: SwitchFeatureOptions) => {
@@ -115,6 +128,14 @@ export const AppFrameLayoutController = () => {
 					});
 					break;
 				}
+				case ExternalMessageType.SWITCH_I18N_SWITCHER: {
+					// window.postMessage({type: 'switch-i18n-switcher', enabled: false})
+					switchFeature({
+						data: data as SwitchI18NSwitchMessage,
+						prop: 'i18nSwitcherEnabled', event: AppEventTypes.SWITCH_I18N_SWITCHER_ENABLED
+					});
+					break;
+				}
 				default:
 					break;
 			}
@@ -122,13 +143,15 @@ export const AppFrameLayoutController = () => {
 		on(AppEventTypes.ASK_SIDE_MENU_ENABLED, onAskSideMenuEnabled);
 		on(AppEventTypes.SWITCH_SIDE_MENU_FOLD, onSwitchSideMenuFold);
 		on(AppEventTypes.ASK_BANNER_ENABLED, onAskBannerEnabled);
-		on(AppEventTypes.ASK_THEME_SWITCHER_ENABLED, onAskThemeSwitchEnabled);
+		on(AppEventTypes.ASK_THEME_SWITCHER_ENABLED, onAskThemeSwitcherEnabled);
+		on(AppEventTypes.ASK_I18N_SWITCHER_ENABLED, onAskI18NSwitcherEnabled);
 		window.addEventListener('message', onMessage);
 		return () => {
 			off(AppEventTypes.ASK_SIDE_MENU_ENABLED, onAskSideMenuEnabled);
 			off(AppEventTypes.SWITCH_SIDE_MENU_FOLD, onSwitchSideMenuFold);
 			off(AppEventTypes.ASK_BANNER_ENABLED, onAskBannerEnabled);
-			off(AppEventTypes.ASK_THEME_SWITCHER_ENABLED, onAskThemeSwitchEnabled);
+			off(AppEventTypes.ASK_THEME_SWITCHER_ENABLED, onAskThemeSwitcherEnabled);
+			off(AppEventTypes.ASK_I18N_SWITCHER_ENABLED, onAskI18NSwitcherEnabled);
 			window.removeEventListener('message', onMessage);
 		};
 	}, [on, off, fire]);

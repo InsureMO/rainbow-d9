@@ -4,9 +4,12 @@ import {
 	getDefaultDarkThemeCode,
 	getDefaultLightThemeCode,
 	getDefaultThemeCode,
+	getThemeCode,
 	isThemeEnabled,
 	isThemeFollowSystem,
-	isThemeFollowSystemEnabled
+	isThemeFollowSystemEnabled,
+	setThemeCode,
+	setThemeFollowSystem
 } from '../utils';
 import {AppEventTypes, useAppEventBus} from './app-event-bus';
 
@@ -28,21 +31,28 @@ export const ThemeHandler = () => {
 			code = getThemeCodeBySystem();
 		} else {
 			// when default theme code not settings, detect system prefers
-			code = getDefaultThemeCode() || getThemeCodeBySystem();
+			code = getThemeCode() || getDefaultThemeCode() || getThemeCodeBySystem();
 		}
 		return {code, kind: toKind(code)};
 	});
 	useEffect(() => {
 		if (isThemeEnabled()) {
-			const onChangeTheme = (code: ThemeCode) => {
+			const changeTheme = (code: ThemeCode, followSystem: boolean) => {
 				const kind = toKind(code);
 				setState({code, kind});
+				console.log(followSystem);
+				if (followSystem) {
+					setThemeFollowSystem();
+				} else {
+					setThemeCode(code);
+				}
 				fire(AppEventTypes.THEME_CHANGED, code, kind);
 			};
+			const onChangeTheme = (code: ThemeCode) => changeTheme(code, false);
 			const onChangeThemeBySystem = () => {
-				if (isThemeFollowSystemEnabled() && isThemeFollowSystem()) {
+				if (isThemeFollowSystemEnabled()) {
 					const code = getThemeCodeBySystem();
-					onChangeTheme(code);
+					changeTheme(code, true);
 				}
 			};
 			// listen to browser theme event
@@ -51,7 +61,7 @@ export const ThemeHandler = () => {
 				if (isThemeFollowSystemEnabled() && isThemeFollowSystem()) {
 					// only effective when theme follows system
 					const code = getThemeCodeBySystem(event);
-					onChangeTheme(code);
+					changeTheme(code, true);
 				}
 			};
 			themeMedia.addEventListener('change', onThemeMediaChange);

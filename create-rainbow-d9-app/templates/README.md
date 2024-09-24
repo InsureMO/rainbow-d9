@@ -34,10 +34,10 @@ Modify the `src/global-settings/theme.tsx` file according to the comments.
 
 `d9-n99-` could be modified to any prefix you like, at `/src/utils/storage-utils.ts`.
 
-| Name                         | Values       | Description                                       |
-|------------------------------|--------------|---------------------------------------------------|
-| `d9-n99-side-menu-fold`      | `true/false` | The fold status of the side menu.                 |
-| `d9-n99-theme-follow-system` | `true/false` | Whether the theme follows the system preferences. |
+| Name                    | Values                 | Description                                                     |
+|-------------------------|------------------------|-----------------------------------------------------------------|
+| `d9-n99-side-menu-fold` | `true/false`           | The fold status of the side menu.                               |
+| `d9-n99-theme`          | `system` or theme code | Theme code or whether the theme follows the system preferences. |
 
 ## Messages
 
@@ -50,4 +50,6 @@ postMessage({type: 'switch-side-menu', enabled: false});
 postMessage({type: 'switch-banner', enabled: false});
 // switch theme switcher, could be true/false
 postMessage({type: 'switch-theme-switcher', enabled: false});
+// switch i18n switcher, could be true/false
+postMessage({type: 'switch-i18n-switcher', enabled: false});
 ```

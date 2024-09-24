@@ -5,7 +5,7 @@ import LightIcon from '../assets/light-theme.svg?react';
 import SystemThemeIcon from '../assets/system-theme.svg?react';
 import {AppEventTypes, ThemeState, useAppEventBus} from '../bootstrap';
 import {askAvailableThemes, ThemeCode, ThemeKind} from '../global-settings';
-import {isThemeFollowSystem, isThemeFollowSystemEnabled, setThemeFollowSystem} from '../utils';
+import {isThemeFollowSystem, isThemeFollowSystemEnabled} from '../utils';
 import {BannerButton, BannerButtonBase, BannerButtonMenu, BannerButtonMenuItem} from './banner-button-base';
 
 interface ThemeSwitcherState extends Partial<ThemeState> {
@@ -37,11 +37,9 @@ const ThemeSwitcherContainer = () => {
 	}
 
 	const switchThemeTo = (code: ThemeCode) => () => {
-		setThemeFollowSystem(false);
 		fire(AppEventTypes.CHANGE_THEME, code);
 	};
 	const switchToSystem = () => {
-		setThemeFollowSystem(true);
 		fire(AppEventTypes.CHANGE_THEME_BY_SYSTEM);
 	};
 	const couldThemeFollowSystem = isThemeFollowSystemEnabled();
@@ -72,10 +70,10 @@ export const ThemeSwitcher = () => {
 	const {on, off, fire} = useAppEventBus();
 	const [enabled, setEnabled] = useState(false);
 	useEffect(() => {
-		const onSwitchBannerEnabled = (enabled: boolean) => setEnabled(enabled);
-		on(AppEventTypes.SWITCH_THEME_SWITCHER_ENABLED, onSwitchBannerEnabled);
+		const onSwitchThemeEnabled = (enabled: boolean) => setEnabled(enabled);
+		on(AppEventTypes.SWITCH_THEME_SWITCHER_ENABLED, onSwitchThemeEnabled);
 		return () => {
-			off(AppEventTypes.SWITCH_THEME_SWITCHER_ENABLED, onSwitchBannerEnabled);
+			off(AppEventTypes.SWITCH_THEME_SWITCHER_ENABLED, onSwitchThemeEnabled);
 		};
 	}, [on, off]);
 	useEffect(() => {

@@ -16,7 +16,8 @@ interface BannerButtonBaseState {
 	visible: BannerMenuVisibleState;
 }
 
-const Container = styled.div`
+// noinspection CssUnresolvedCustomProperty
+const Container = styled.div.attrs({'data-type': 'banner-button'})`
     display: flex;
     position: relative;
     align-items: center;
@@ -50,6 +51,11 @@ const Container = styled.div`
         top: 100%;
         right: 0;
         transition: opacity .3s ease-in-out, margin-top .3s ease-in-out;
+    }
+
+
+    + div[data-type=banner-button] {
+        margin-left: var(--app-banner-button-gap);
     }
 `;
 
@@ -155,6 +161,11 @@ export const BannerButton = styled.div.attrs({[DOM_KEY_WIDGET]: 'app-banner-butt
         width: calc(var(--app-banner-button-size) * 0.6);
         transition: color 0.3s ease-in-out;
     }
+
+    > span[data-type=lang-emoji] {
+        font-size: var(--app-banner-button-lang-emoji-size);
+        margin: var(--app-banner-button-lang-emoji-margin);
+    }
 `;
 
 // noinspection CssUnresolvedCustomProperty
@@ -196,6 +207,7 @@ const BannerButtonMenuItemContainer = styled.div.attrs({[DOM_KEY_WIDGET]: 'app-b
     height: var(--app-banner-button-menu-item-height);
     padding: var(--app-banner-button-menu-item-padding);
     border-radius: var(--app-banner-button-menu-item-border-radius);
+    white-space: nowrap;
     cursor: pointer;
     transition: color 0.3s ease-in-out, background 0.3s ease-in-out;
 
@@ -212,6 +224,11 @@ const BannerButtonMenuItemContainer = styled.div.attrs({[DOM_KEY_WIDGET]: 'app-b
     > svg:first-child {
         height: calc(var(--app-banner-button-menu-item-icon-size) * 0.6);
         width: calc(var(--app-banner-button-menu-item-icon-size) * 0.6);
+    }
+
+    > span[data-type=lang-emoji]:first-child {
+        font-size: var(--app-banner-button-menu-item-lang-emoji-size);
+        margin: var(--app-banner-button-menu-item-lang-emoji-margin);
     }
 
     > span:last-child {

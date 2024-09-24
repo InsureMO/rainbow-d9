@@ -1,17 +1,8 @@
 import {$d9n2, GlobalEventTypes, useGlobalEventBus} from '@rainbow-d9/n2';
 import {Fragment, useEffect, useState} from 'react';
-import {getAppName, getDefaultLangCode, isI18NEnabled} from '../utils';
+import {LangCode} from '../global-settings';
+import {getDefaultLangCode, isI18NEnabled} from '../utils';
 import {AppEventTypes, useAppEventBus} from './app-event-bus';
-import {LangCode} from './types';
-
-// default use en-US, language code must follow javascript standard
-// add your own language labels here
-$d9n2.intl.labels = {
-	...$d9n2.intl.labels,
-	'en-US': {
-		app: {name: getAppName()}
-	}
-};
 
 interface I18NState {
 	code: LangCode;
@@ -28,6 +19,7 @@ export const I18NHandler = () => {
 				if (state.code != code) {
 					setState({code: code});
 					document.documentElement.lang = code;
+					$d9n2.intl.language = code;
 					fire(AppEventTypes.LANG_CHANGED, code);
 				}
 			};
@@ -37,6 +29,15 @@ export const I18NHandler = () => {
 			};
 		}
 	}, [on, off, fire, state.code]);
+	useEffect(() => {
+		const onAskLang = (onReply: (code: LangCode) => void) => {
+			onReply(state.code);
+		};
+		on(AppEventTypes.ASK_LANG, onAskLang);
+		return () => {
+			off(AppEventTypes.ASK_LANG, onAskLang);
+		};
+	}, [on, off, state.code]);
 
 	return <Fragment/>;
 };
