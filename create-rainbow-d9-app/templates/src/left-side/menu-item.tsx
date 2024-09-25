@@ -1,5 +1,6 @@
 import {DOM_KEY_WIDGET} from '@rainbow-d9/n2';
 import styled from 'styled-components';
+import {useAppEventBus} from '../bootstrap';
 import {AppMenuItem} from '../global-settings';
 
 interface MenuItemProps extends AppMenuItem {
@@ -77,9 +78,11 @@ const Label = styled.span.attrs<{ level: number }>(({level}) => {
 `;
 
 export const MenuItem = (props: MenuItemProps) => {
-	const {icon, text, level} = props;
+	const {icon, text, level, click} = props;
 
-	const onLabelClicked = () => {
+	const {fire} = useAppEventBus();
+	const onLabelClicked = async () => {
+		await click(fire);
 	};
 
 	return <Container>

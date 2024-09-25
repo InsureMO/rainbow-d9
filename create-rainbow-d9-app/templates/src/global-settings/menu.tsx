@@ -4,7 +4,9 @@ import LanguageIcon from '../assets/language.svg?react';
 import SettingsIcon from '../assets/settings.svg?react';
 import SystemThemeIcon from '../assets/system-theme.svg?react';
 import ThemeIcon from '../assets/theme.svg?react';
+import {AppEventBus, AppEventTypes} from '../bootstrap/app-event-bus';
 import {askAvailableLanguages} from './i18n';
+import {LanguageLabel, ThemeLabel} from './menu-widgets';
 import {askAvailableThemes} from './theme';
 
 export enum AppMenuType {
@@ -25,6 +27,7 @@ export interface AppMenuGroup extends AppMenu {
 
 export interface AppMenuItem extends AppMenu {
 	type: AppMenuType.ITEM;
+	click: (fire: AppEventBus['fire']) => Promise<void>;
 }
 
 export enum PrebuiltAppMenuCode {
@@ -48,7 +51,13 @@ export const askMenus = (): Array<AppMenuGroup | AppMenuItem> => {
 					code: PrebuiltAppMenuCode.LANGUAGES, type: AppMenuType.GROUP,
 					icon: <LanguageIcon/>, text: <IntlLabel keys={['menus.language']} value="Language"/>,
 					items: askAvailableLanguages().map(lang => {
-						return {code: lang.code, type: AppMenuType.ITEM, icon: lang.icon, text: lang.text};
+						return {
+							code: lang.code, type: AppMenuType.ITEM,
+							icon: lang.icon, text: <LanguageLabel {...lang}/>,
+							click: async (fire) => {
+								fire(AppEventTypes.CHANGE_LANG, lang.code);
+							}
+						};
 					})
 				},
 				{
@@ -56,11 +65,22 @@ export const askMenus = (): Array<AppMenuGroup | AppMenuItem> => {
 					icon: <ThemeIcon/>, text: <IntlLabel keys={['menus.theme']} value="Color Theme"/>,
 					items: [
 						...askAvailableThemes().map<AppMenuItem>(theme => {
-							return {code: theme.code, type: AppMenuType.ITEM, icon: theme.icon, text: theme.text};
+							return {
+								code: theme.code, type: AppMenuType.ITEM,
+								icon: theme.icon, text: <ThemeLabel {...theme}/>,
+								click: async (fire) => {
+									fire(AppEventTypes.CHANGE_THEME, theme.code);
+								}
+							};
 						}),
 						{
 							code: PrebuiltAppMenuCode.SYSTEM_THEME, type: AppMenuType.ITEM,
-							icon: <SystemThemeIcon/>, text: <IntlLabel keys={['theme.system']} value="System"/>
+							icon: <SystemThemeIcon/>,
+							text: <ThemeLabel code={PrebuiltAppMenuCode.SYSTEM_THEME}
+							                  text={<IntlLabel keys={['theme.system']} value="System"/>}/>,
+							click: async (fire) => {
+								fire(AppEventTypes.CHANGE_THEME_BY_SYSTEM);
+							}
 						}
 					]
 				}
