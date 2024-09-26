@@ -18,7 +18,7 @@ const Container = styled.div.attrs({[DOM_KEY_WIDGET]: 'app-banner'})`
     height: var(--app-banner-height);
     padding: var(--app-banner-padding);
     background: var(--app-banner-background);
-    box-shadow: var(--app-banner-shadow);
+    border-bottom: var(--app-banner-bottom-border);
     z-index: var(--app-banner-z-index);
     transition: margin-left .3s ease-in-out, width .3s ease-in-out, min-width .3s ease-in-out;
 

@@ -71,11 +71,11 @@ const createN2ThemeStyles = () => {
 const createAppThemeStyles = () => {
 	const AppCssConstants = {
 		bannerBackground: 'rgb(255, 255, 255)',
-		bannerShadow: 'rgba(82, 63, 105, 0.05) 0px 10px 30px 0px',
+		bannerBottomBorderColor: 'rgb(231, 232, 233)',
 		bannerButtonHoverColor: 'var(--d9-primary-color)',
 		bannerButtonHoverBackground: 'var(--d9-hover-color)',
 		bannerButtonMenuBackground: 'rgb(255, 255, 255)',
-		bannerButtonMenuShadow: 'rgba(82, 63, 105, 0.2) 0 10px 30px 5px',
+		bannerButtonMenuShadow: '0px 10px 30px 5px rgba(82, 63, 105, 0.2)',
 		buttonMenuItemActiveColor: 'var(--d9-primary-color)',
 		buttonMenuItemActiveBackground: 'var(--d9-active-color)',
 		buttonMenuItemHoverColor: 'var(--d9-primary-color)',
@@ -153,7 +153,7 @@ const createAppThemeStyles = () => {
 			'banner-height': `var(--app-banner-height, 72px)`,
 			'banner-padding': `var(--app-banner-padding, 0 32px)`,
 			'banner-background': `var(--app-banner-background, ${variables.bannerBackground})`,
-			'banner-shadow': `var(--app-banner-shadow, ${variables.bannerShadow}`,
+			'banner-bottom-border': `var(--app-banner-bottom-border, 1px solid ${variables.bannerBottomBorderColor})`,
 			'banner-z-index': `var(--app-banner-z-index, 10)`,
 			'banner-button-size': `var(--app-banner-button-size, 40px)`,
 			'banner-button-gap': 'var(--app-banner-button-gap, 4px)',
@@ -186,14 +186,14 @@ const createAppThemeStyles = () => {
 	};
 	const AppDarkCssConstants = {
 		...AppCssConstants,
+		bannerBackground: 'rgb(21, 23, 28)',
+		bannerBottomBorderColor: 'rgb(38, 39, 47)',
+		bannerButtonMenuBackground: 'rgb(21, 23, 28)',
+		bannerButtonMenuShadow: '0px 10px 30px 5px rgba(173, 192, 150, 0.2)',
 		sideMenuUnauthenticatedBackground: 'rgb(21, 23, 28)',
 		sideMenuHeaderLogoUnauthenticatedBackground: 'rgb(255, 255, 255)',
 		sideMenuHeaderTextUnauthenticatedColor: 'rgb(255, 255, 255)',
 		sideMenuHeaderBottomBorderColor: 'rgb(38, 39, 47)',
-		bannerBackground: 'rgb(21, 23, 28)',
-		bannerShadow: 'rgba(82, 63, 105, 0.05) 0px 10px 30px 0px',
-		bannerButtonMenuBackground: 'rgb(21, 23, 28)',
-		bannerButtonMenuShadow: 'rgba(82, 63, 105, 0.2) 0 10px 30px 5px',
 		workAreaBackground: 'rgb(15, 16, 20)'
 	};
 	return {

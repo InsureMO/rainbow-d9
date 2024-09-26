@@ -92,13 +92,17 @@ const LayoutController = styled.div.attrs({[DOM_KEY_WIDGET]: 'app-frame-layout-c
             min-height: var(--app-banner-height);
             max-height: var(--app-banner-height);
             background: var(--app-side-menu-unauthenticated-background);
-            box-shadow: var(--app-banner-shadow);
+            box-shadow: none;
 
             > div[data-w=app-side-menu-header] {
-                border-bottom-color: transparent;
+                border-bottom: var(--app-banner-bottom-border);
 
                 > span[data-type=icon] {
                     background: var(--app-side-menu-header-logo-unauthenticated-background);
+                }
+
+                > span[data-type=text] {
+                    color: var(--app-side-menu-header-text-unauthenticated-color);
                 }
 
                 > span[data-type=fold-button] {
