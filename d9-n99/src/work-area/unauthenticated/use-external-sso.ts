@@ -28,6 +28,11 @@ export const useExternalSSO = () => {
 						}
 					}
 					isNotBlank(langCode) && fire(AppEventTypes.CHANGE_LANG, langCode!);
+					// on unauthenticated, the side menu/banner/theme switcher/i18n switcher enablement, side menu fold are all unknown
+					// if send event to enable switcher or side menu fold,
+					// maybe there is no listener on the other side since side menu or banner is not rendered at all.
+					// so the state of enablement and fold need to be sent to central first.
+					// after the center persist these states, then use callback function to navigate and fire authenticated changed event.
 					fire(AppEventTypes.SWITCH_SIDE_MENU_AND_BANNER_ENABLED, {
 						sideMenuEnabled, bannerEnabled, sideMenuFold, themeSwitcherEnabled, i18nSwitcherEnabled
 					}, () => {

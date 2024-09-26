@@ -85,7 +85,7 @@ interface SideMenuHeaderState {
 }
 
 export const SideMenuHeader = () => {
-	const {fire} = useAppEventBus();
+	const {on, off, fire} = useAppEventBus();
 	const ref = useRef<HTMLDivElement>(null);
 	const [state, setState] = useState<SideMenuHeaderState>(() => {
 		return {initialized: false, fold: false, foldOnHandsOff: false};
@@ -122,6 +122,20 @@ export const SideMenuHeader = () => {
 			});
 		}
 	}, []);
+	useEffect(() => {
+		// the fold is kept in header state,
+		// even side menu already monitors authentication state, the fold state can be synchronized to here automatically,
+		// therefore monitor the authentication state here to refresh the fold state
+		const onAuthenticatedChanged = () => {
+			fire(AppEventTypes.ASK_SIDE_MENU_FOLD, (fold: boolean) => {
+				setState({initialized: true, fold, foldOnHandsOff: fold});
+			});
+		};
+		on(AppEventTypes.AUTHENTICATED_CHANGED, onAuthenticatedChanged);
+		return () => {
+			off(AppEventTypes.AUTHENTICATED_CHANGED, onAuthenticatedChanged);
+		};
+	}, [on, off]);
 
 	if (!state.initialized) {
 		return null;

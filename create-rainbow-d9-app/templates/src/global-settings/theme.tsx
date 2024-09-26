@@ -116,7 +116,7 @@ const createAppThemeStyles = () => {
 			'side-menu-header-logo-background': `var(--app-side-menu-header-logo-background, ${variables.sideMenuHeaderLogoBackground})`,
 			'side-menu-header-logo-unauthenticated-background': `var(--app-side-menu-header-logo-unauthenticated-background, ${variables.sideMenuHeaderLogoUnauthenticatedBackground})`,
 			'side-menu-header-text-color': `var(--app-side-menu-header-text-color, ${variables.sideMenuHeaderTextColor})`,
-			'side-menu-header-text-unauthenticated-color': `var(--app-side-menu-header-text-color, ${variables.sideMenuHeaderTextUnauthenticatedColor})`,
+			'side-menu-header-text-unauthenticated-color': `var(--app-side-menu-header-text-unauthenticated-color, ${variables.sideMenuHeaderTextUnauthenticatedColor})`,
 			'side-menu-header-font-family': `var(--app-side-menu-header-font-family, "Oswald")`,
 			'side-menu-header-font-size': `var(--app-side-menu-header-font-size, 1.6em)`,
 			'side-menu-header-font-weight': `var(--app-side-menu-header-font-weight, bold)`,
