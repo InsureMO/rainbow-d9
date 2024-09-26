@@ -11,6 +11,7 @@ import {UserProfile} from './user-profile';
 const Container = styled.div.attrs({[DOM_KEY_WIDGET]: 'app-banner'})`
     display: flex;
     position: fixed;
+    top: 0;
     margin-left: 0;
     width: 100vw;
     min-width: 100vw;

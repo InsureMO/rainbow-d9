@@ -2,6 +2,8 @@ import {DOM_KEY_WIDGET, GlobalEventBusProvider} from '@rainbow-d9/n2';
 import {useEffect, useState} from 'react';
 import styled from 'styled-components';
 import {AppEventTypes, I18NAndD9N2Bridge, useAppEventBus} from '../bootstrap';
+import {isAuthenticated} from '../services';
+import {isSideMenuEnableOnAuth} from '../utils';
 import {SideMenuBody} from './body';
 import {SideMenuHeader} from './header';
 
@@ -22,12 +24,16 @@ const Container = styled.div.attrs({[DOM_KEY_WIDGET]: 'app-side-menu'})`
 `;
 
 const SideMenuContainer = () => {
+	const sideMenuEnableOnAuth = isSideMenuEnableOnAuth();
+	const authenticated = isAuthenticated();
+	const showUnauthenticated = sideMenuEnableOnAuth && !authenticated;
+
 	// wrapped by global event bus provider, which supports i18n
 	return <GlobalEventBusProvider>
 		<I18NAndD9N2Bridge/>
-		<Container>
+		<Container data-unauthenticated={showUnauthenticated}>
 			<SideMenuHeader/>
-			<SideMenuBody/>
+			{showUnauthenticated ? null : <SideMenuBody/>}
 		</Container>
 	</GlobalEventBusProvider>;
 };

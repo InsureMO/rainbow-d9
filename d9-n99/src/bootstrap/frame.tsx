@@ -2,6 +2,7 @@ import {DOM_KEY_WIDGET} from '@rainbow-d9/n2';
 import styled from 'styled-components';
 import {Banner} from '../header';
 import {SideMenu} from '../left-side';
+import {WorkArea} from '../work-area';
 import {AppFrameLayoutController} from './layout-controller';
 
 const Container = styled.div.attrs({[DOM_KEY_WIDGET]: 'app-frame'})`
@@ -18,6 +19,7 @@ export const AppFrame = () => {
 		<Container>
 			<SideMenu/>
 			<Banner/>
+			<WorkArea/>
 		</Container>
 	</>;
 };

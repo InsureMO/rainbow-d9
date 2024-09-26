@@ -17,7 +17,7 @@ const Container = styled.div.attrs({[DOM_KEY_WIDGET]: 'app-side-menu-header'})`
     padding-right: var(--app-side-menu-padding);
     border-bottom: var(--app-side-menu-header-bottom-border);
 
-    > span:first-child {
+    > span[data-type=icon] {
         display: flex;
         position: relative;
         align-items: center;
@@ -26,7 +26,7 @@ const Container = styled.div.attrs({[DOM_KEY_WIDGET]: 'app-side-menu-header'})`
         height: calc(var(--app-side-menu-header-height) * 0.5);
         width: calc(var(--app-side-menu-header-height) * 0.5);
         border-radius: calc(var(--app-side-menu-header-height) * 0.5 / 3);
-        background: white;
+        background: var(--app-side-menu-header-logo-background);
 
         > svg {
             // LOGO
@@ -38,7 +38,7 @@ const Container = styled.div.attrs({[DOM_KEY_WIDGET]: 'app-side-menu-header'})`
         }
     }
 
-    > span:nth-child(2) {
+    > span[data-type=text] {
         display: block;
         position: relative;
         align-items: center;
@@ -51,7 +51,7 @@ const Container = styled.div.attrs({[DOM_KEY_WIDGET]: 'app-side-menu-header'})`
         overflow: hidden;
     }
 
-    > span:last-child {
+    > span[data-type=fold-button] {
         display: flex;
         position: relative;
         align-items: center;
@@ -133,8 +133,8 @@ export const SideMenuHeader = () => {
 	};
 
 	return <Container data-fold={state.fold} data-fold-on-hands-off={state.foldOnHandsOff} ref={ref}>
-		<span><Logo/></span>
-		<span><IntlLabel keys={['app.name']} value="n99"/></span>
-		<span onClick={onFoldSwitchClick} data-fold={state.foldOnHandsOff}><FoldMenu/></span>
+		<span data-type="icon"><Logo/></span>
+		<span data-type="text"><IntlLabel keys={['app.name']} value="n99"/></span>
+		<span data-type="fold-button" onClick={onFoldSwitchClick} data-fold={state.foldOnHandsOff}><FoldMenu/></span>
 	</Container>;
 };

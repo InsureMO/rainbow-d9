@@ -25,15 +25,12 @@ const LayoutController = styled.div.attrs({[DOM_KEY_WIDGET]: 'app-frame-layout-c
     position: relative;
 
     + div[data-w=app-frame] {
+        > div[data-w=app-banner] + div[data-w=app-work-area] {
+            margin-top: var(--app-banner-height);
+        }
     }
 
     &[data-side-menu-enabled=true][data-side-menu-fold=true] + div[data-w=app-frame] {
-        > div[data-w=app-banner] {
-            margin-left: var(--app-side-menu-fold-width);
-            width: calc(100vw - var(--app-side-menu-fold-width));
-            min-width: calc(100vw - var(--app-side-menu-fold-width));
-        }
-
         > div[data-w=app-side-menu] {
             width: var(--app-side-menu-fold-width);
 
@@ -52,17 +49,63 @@ const LayoutController = styled.div.attrs({[DOM_KEY_WIDGET]: 'app-frame-layout-c
                 }
             }
         }
+
+        > div[data-w=app-banner] {
+            margin-left: var(--app-side-menu-fold-width);
+            width: calc(100vw - var(--app-side-menu-fold-width));
+            min-width: calc(100vw - var(--app-side-menu-fold-width));
+        }
+
+        > div[data-w=app-work-area] {
+            margin-left: var(--app-side-menu-fold-width);
+            width: calc(100vw - var(--app-side-menu-fold-width));
+            min-width: calc(100vw - var(--app-side-menu-fold-width));
+        }
     }
 
     &[data-side-menu-enabled=true][data-side-menu-fold=false] + div[data-w=app-frame] {
+        > div[data-w=app-side-menu] {
+            width: var(--app-side-menu-width);
+        }
+
         > div[data-w=app-banner] {
             margin-left: var(--app-side-menu-width);
             width: calc(100vw - var(--app-side-menu-width));
             min-width: calc(100vw - var(--app-side-menu-width));
         }
 
-        > div[data-w=app-side-menu] {
-            width: var(--app-side-menu-width);
+        > div[data-w=app-work-area] {
+            margin-left: var(--app-side-menu-width);
+            width: calc(100vw - var(--app-side-menu-width));
+            min-width: calc(100vw - var(--app-side-menu-width));
+        }
+    }
+
+    &[data-side-menu-enabled=true][data-side-menu-fold] + div[data-w=app-frame] {
+        > div[data-w=app-side-menu][data-unauthenticated=true] {
+            height: var(--app-banner-height);
+            min-height: var(--app-banner-height);
+            max-height: var(--app-banner-height);
+            background: var(--app-side-menu-unauthenticated-background);
+            box-shadow: var(--app-banner-shadow);
+
+            > div[data-w=app-side-menu-header] {
+                border-bottom-color: transparent;
+
+                > span[data-type=icon] {
+                    background: var(--app-side-menu-header-logo-unauthenticated-background);
+                }
+
+                > span[data-type=fold-button] {
+                    display: none;
+                }
+            }
+
+            ~ div[data-w=app-work-area] {
+                margin-left: 0;
+                width: 100vw;
+                min-width: 100vw;
+            }
         }
     }
 `;
