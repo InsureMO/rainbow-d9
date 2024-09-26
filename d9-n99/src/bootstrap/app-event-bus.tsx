@@ -17,6 +17,7 @@ export enum AppEventTypes {
 	SWITCH_I18N_SWITCHER_ENABLED = 'switch-i18n-switcher-enabled',
 	ASK_I18N_SWITCHER_ENABLED = 'ask-i18n-switcher-enabled',
 	SWITCH_SIDE_MENU_AND_BANNER_ENABLED = 'switch-side-menu-and-banner-enabled',
+	AUTHENTICATED_CHANGED = 'authenticated-changed'
 }
 
 export interface SideMenuAndBannerEnablement {
@@ -79,9 +80,12 @@ export interface AppEventBus {
 	fire(type: AppEventTypes.ASK_I18N_SWITCHER_ENABLED, onReply: (enabled: boolean) => void): this;
 	on(type: AppEventTypes.ASK_I18N_SWITCHER_ENABLED, listener: (onReply: (enabled: boolean) => void) => void): this;
 	off(type: AppEventTypes.ASK_I18N_SWITCHER_ENABLED, listener: (onReply: (enabled: boolean) => void) => void): this;
-	fire(type: AppEventTypes.SWITCH_SIDE_MENU_AND_BANNER_ENABLED, enabled: SideMenuAndBannerEnablement): this;
-	on(type: AppEventTypes.SWITCH_SIDE_MENU_AND_BANNER_ENABLED, listener: (enabled: SideMenuAndBannerEnablement) => void): this;
-	off(type: AppEventTypes.SWITCH_SIDE_MENU_AND_BANNER_ENABLED, listener: (enabled: SideMenuAndBannerEnablement) => void): this;
+	fire(type: AppEventTypes.SWITCH_SIDE_MENU_AND_BANNER_ENABLED, enabled: SideMenuAndBannerEnablement, switched?: () => void): this;
+	on(type: AppEventTypes.SWITCH_SIDE_MENU_AND_BANNER_ENABLED, listener: (enabled: SideMenuAndBannerEnablement, switched?: () => void) => void): this;
+	off(type: AppEventTypes.SWITCH_SIDE_MENU_AND_BANNER_ENABLED, listener: (enabled: SideMenuAndBannerEnablement, switched?: () => void) => void): this;
+	fire(type: AppEventTypes.AUTHENTICATED_CHANGED): this;
+	on(type: AppEventTypes.AUTHENTICATED_CHANGED, listener: () => void): this;
+	off(type: AppEventTypes.AUTHENTICATED_CHANGED, listener: () => void): this;
 }
 
 const Context = createContext<AppEventBus>({} as AppEventBus);

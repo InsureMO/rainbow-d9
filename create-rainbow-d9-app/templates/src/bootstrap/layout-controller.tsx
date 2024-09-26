@@ -22,6 +22,7 @@ import {
 	SwitchSideMenuMessage,
 	SwitchThemeSwitchMessage
 } from './types';
+import {useAuthenticatedChanged} from './use-authenticated-changed';
 
 // noinspection CssUnresolvedCustomProperty
 const LayoutController = styled.div.attrs({[DOM_KEY_WIDGET]: 'app-frame-layout-controller'})`
@@ -189,7 +190,7 @@ export const AppFrameLayoutController = () => {
 		const onAskI18NSwitcherEnabled = (onReply: (enabled: boolean) => void) => {
 			onReply(state.current.i18nSwitcherEnabled);
 		};
-		const onSwitchSideMenuAndBannerEnabled = (enablement: SideMenuAndBannerEnablement) => {
+		const onSwitchSideMenuAndBannerEnabled = (enablement: SideMenuAndBannerEnablement, switched?: () => void) => {
 			let changed = false;
 			// theme and i18n switcher must be set first.
 			// in case the side menu or banner is enabled already, fire event to notify switch switcher
@@ -223,6 +224,7 @@ export const AppFrameLayoutController = () => {
 			if (changed) {
 				forceUpdate();
 			}
+			switched?.();
 		};
 		type SwitchFeatureOptions = { data: SwitchFeatureMessage } & (
 			{ prop: 'sideMenuEnabled'; event: AppEventTypes.SWITCH_SIDE_MENU_ENABLED }
@@ -309,6 +311,7 @@ export const AppFrameLayoutController = () => {
 			window.removeEventListener('message', onMessage);
 		};
 	}, [on, off, fire, forceUpdate]);
+	useAuthenticatedChanged();
 
 	const sideMenuBodyEnableOnAuthOnly = isSideMenuBodyEnabledOnAuthOnly();
 	const authenticated = isAuthenticated();

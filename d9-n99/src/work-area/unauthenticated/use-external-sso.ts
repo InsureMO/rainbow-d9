@@ -30,8 +30,10 @@ export const useExternalSSO = () => {
 					isNotBlank(langCode) && fire(AppEventTypes.CHANGE_LANG, langCode!);
 					fire(AppEventTypes.SWITCH_SIDE_MENU_AND_BANNER_ENABLED, {
 						sideMenuEnabled, bannerEnabled, sideMenuFold, themeSwitcherEnabled, i18nSwitcherEnabled
+					}, () => {
+						navigate(location || getHomeRoute(), {replace: true});
+						fire(AppEventTypes.AUTHENTICATED_CHANGED);
 					});
-					navigate(location || getHomeRoute(), {replace: true});
 					break;
 				}
 				default:
