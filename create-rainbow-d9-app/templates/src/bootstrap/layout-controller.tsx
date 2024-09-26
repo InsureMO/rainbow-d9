@@ -2,9 +2,11 @@ import {useForceUpdate} from '@rainbow-d9/n1';
 import {DOM_KEY_WIDGET} from '@rainbow-d9/n2';
 import {useEffect, useRef} from 'react';
 import styled from 'styled-components';
+import {isAuthenticated} from '../services';
 import {
 	isBannerEnabled,
 	isI18NSwitcherEnabled,
+	isSideMenuBodyEnabledOnAuthOnly,
 	isSideMenuEnabled,
 	isSideMenuFold,
 	isThemeSwitcherEnabled,
@@ -149,7 +151,18 @@ export const AppFrameLayoutController = () => {
 			}
 		};
 		const onAskSideMenuFold = (onReply: (fold: boolean) => void) => {
-			onReply(state.current.sideMenuFold);
+			if (state.current.sideMenuFold) {
+				const sideMenuBodyEnableOnAuthOnly = isSideMenuBodyEnabledOnAuthOnly();
+				const authenticated = isAuthenticated();
+				if (sideMenuBodyEnableOnAuthOnly && !authenticated) {
+					// show side menu when not authenticated
+					onReply(false);
+				} else {
+					onReply(state.current.sideMenuFold);
+				}
+			} else {
+				onReply(state.current.sideMenuFold);
+			}
 		};
 		const onSwitchBannerEnabled = (enabled: boolean) => {
 			if (state.current.bannerEnabled !== enabled) {
@@ -297,7 +310,11 @@ export const AppFrameLayoutController = () => {
 		};
 	}, [on, off, fire, forceUpdate]);
 
+	const sideMenuBodyEnableOnAuthOnly = isSideMenuBodyEnabledOnAuthOnly();
+	const authenticated = isAuthenticated();
+	const sideMenuFold = (sideMenuBodyEnableOnAuthOnly && !authenticated) ? false : state.current.sideMenuFold;
+
 	return <LayoutController data-side-menu-enabled={state.current.sideMenuEnabled}
-	                         data-side-menu-fold={state.current.sideMenuFold}
+	                         data-side-menu-fold={sideMenuFold}
 	                         data-banner-enabled={state.current.bannerEnabled}/>;
 };

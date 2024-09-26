@@ -3,7 +3,7 @@ import {useEffect, useState} from 'react';
 import styled from 'styled-components';
 import {AppEventTypes, I18NAndD9N2Bridge, useAppEventBus} from '../bootstrap';
 import {isAuthenticated} from '../services';
-import {isSideMenuEnableOnAuth} from '../utils';
+import {isSideMenuBodyEnabledOnAuthOnly} from '../utils';
 import {SideMenuBody} from './body';
 import {SideMenuHeader} from './header';
 
@@ -24,9 +24,9 @@ const Container = styled.div.attrs({[DOM_KEY_WIDGET]: 'app-side-menu'})`
 `;
 
 const SideMenuContainer = () => {
-	const sideMenuEnableOnAuth = isSideMenuEnableOnAuth();
+	const sideMenuBodyEnableOnAuthOnly = isSideMenuBodyEnabledOnAuthOnly();
 	const authenticated = isAuthenticated();
-	const showUnauthenticated = sideMenuEnableOnAuth && !authenticated;
+	const showUnauthenticated = sideMenuBodyEnableOnAuthOnly && !authenticated;
 
 	// wrapped by global event bus provider, which supports i18n
 	return <GlobalEventBusProvider>

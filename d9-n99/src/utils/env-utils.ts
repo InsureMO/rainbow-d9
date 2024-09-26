@@ -15,7 +15,7 @@ export const isBannerEnabled = () => import.meta.env.VITE_DISABLE_BANNER !== 'tr
 export const isThemeSwitcherEnabled = () => isThemeEnabled() && import.meta.env.VITE_DISABLE_THEME_SWITCHER !== 'true';
 export const isI18NSwitcherEnabled = () => isI18NEnabled() && import.meta.env.VITE_DISABLE_I18N_SWITCHER !== 'true';
 export const isUserProfileEnabled = () => import.meta.env.VITE_DISABLE_USER_PROFILE !== 'true';
-export const isSideMenuEnableOnAuth = () => import.meta.env.VITE_SIDE_MENU_ENABLE_ON_AUTH !== 'false';
+export const isSideMenuBodyEnabledOnAuthOnly = () => import.meta.env.VITE_SIDE_MENU_BODY_ENABLED_ON_AUTH_ONLY !== 'false';
 // routes
 export const getBaseContext = (): string | undefined => import.meta.env.BASE_URL || (void 0);
 export const getHomeRoute = (): string => import.meta.env.VITE_HOME_PAGE || '/home';
