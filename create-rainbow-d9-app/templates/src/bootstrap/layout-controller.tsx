@@ -1,14 +1,16 @@
+import {useForceUpdate} from '@rainbow-d9/n1';
 import {DOM_KEY_WIDGET} from '@rainbow-d9/n2';
-import {useEffect, useState} from 'react';
+import {useEffect, useRef} from 'react';
 import styled from 'styled-components';
 import {
 	isBannerEnabled,
 	isI18NSwitcherEnabled,
 	isSideMenuEnabled,
 	isSideMenuFold,
-	isThemeSwitcherEnabled
+	isThemeSwitcherEnabled,
+	setSideMenuFold
 } from '../utils';
-import {AppEventTypes, useAppEventBus} from './app-event-bus';
+import {AppEventTypes, SideMenuAndBannerEnablement, useAppEventBus} from './app-event-bus';
 import {
 	ExternalMessage,
 	ExternalMessageType,
@@ -105,6 +107,7 @@ const LayoutController = styled.div.attrs({[DOM_KEY_WIDGET]: 'app-frame-layout-c
                 margin-left: 0;
                 width: 100vw;
                 min-width: 100vw;
+                transition: none;
             }
         }
     }
@@ -120,28 +123,93 @@ interface LayoutControllerState {
 
 export const AppFrameLayoutController = () => {
 	const {on, off, fire} = useAppEventBus();
-	const [state, setState] = useState<LayoutControllerState>({
+	const state = useRef<LayoutControllerState>({
 		sideMenuEnabled: isSideMenuEnabled(),
 		sideMenuFold: isSideMenuFold(),
 		bannerEnabled: isBannerEnabled(),
 		themeSwitcherEnabled: isThemeSwitcherEnabled(),
 		i18nSwitcherEnabled: isI18NSwitcherEnabled()
 	});
+	const forceUpdate = useForceUpdate();
 	useEffect(() => {
+		const onSwitchSideMenuEnabled = (enabled: boolean) => {
+			if (state.current.sideMenuEnabled !== enabled) {
+				state.current.sideMenuEnabled = enabled;
+				forceUpdate();
+			}
+		};
 		const onAskSideMenuEnabled = (onReply: (enabled: boolean) => void) => {
-			onReply(state.sideMenuEnabled);
+			onReply(state.current.sideMenuEnabled);
 		};
 		const onSwitchSideMenuFold = (fold: boolean) => {
-			setState(state => ({...state, sideMenuFold: fold}));
+			if (state.current.sideMenuFold !== fold) {
+				setSideMenuFold(fold);
+				state.current.sideMenuFold = fold;
+				forceUpdate();
+			}
+		};
+		const onAskSideMenuFold = (onReply: (fold: boolean) => void) => {
+			onReply(state.current.sideMenuFold);
+		};
+		const onSwitchBannerEnabled = (enabled: boolean) => {
+			if (state.current.bannerEnabled !== enabled) {
+				state.current.bannerEnabled = enabled;
+				forceUpdate();
+			}
 		};
 		const onAskBannerEnabled = (onReply: (enabled: boolean) => void) => {
-			onReply(state.bannerEnabled);
+			onReply(state.current.bannerEnabled);
+		};
+		const onSwitchThemeSwitcherEnabled = (enabled: boolean) => {
+			if (state.current.themeSwitcherEnabled !== enabled) {
+				state.current.themeSwitcherEnabled = enabled;
+			}
 		};
 		const onAskThemeSwitcherEnabled = (onReply: (enabled: boolean) => void) => {
-			onReply(state.themeSwitcherEnabled);
+			onReply(state.current.themeSwitcherEnabled);
+		};
+		const onSwitchI18NSwitcherEnabled = (enabled: boolean) => {
+			if (state.current.i18nSwitcherEnabled !== enabled) {
+				state.current.i18nSwitcherEnabled = enabled;
+			}
 		};
 		const onAskI18NSwitcherEnabled = (onReply: (enabled: boolean) => void) => {
-			onReply(state.i18nSwitcherEnabled);
+			onReply(state.current.i18nSwitcherEnabled);
+		};
+		const onSwitchSideMenuAndBannerEnabled = (enablement: SideMenuAndBannerEnablement) => {
+			let changed = false;
+			// theme and i18n switcher must be set first.
+			// in case the side menu or banner is enabled already, fire event to notify switch switcher
+			// in case the side menu or banner is disabled, no listener on switcher switching, but the state is set first
+			// and when the side menu or banner is enabled, the switcher renderer will check the state and render accordingly
+			if (enablement.themeSwitcherEnabled != null && state.current.themeSwitcherEnabled !== enablement.themeSwitcherEnabled) {
+				state.current.themeSwitcherEnabled = enablement.themeSwitcherEnabled;
+				changed = true;
+				fire(AppEventTypes.SWITCH_THEME_SWITCHER_ENABLED, enablement.themeSwitcherEnabled);
+			}
+			if (enablement.i18nSwitcherEnabled != null && state.current.i18nSwitcherEnabled !== enablement.i18nSwitcherEnabled) {
+				state.current.i18nSwitcherEnabled = enablement.i18nSwitcherEnabled;
+				changed = true;
+				fire(AppEventTypes.SWITCH_I18N_SWITCHER_ENABLED, enablement.i18nSwitcherEnabled);
+			}
+			// same for side menu fold, must be set before side menu enabled
+			if (enablement.sideMenuFold != null && state.current.sideMenuFold !== enablement.sideMenuFold) {
+				state.current.sideMenuFold = enablement.sideMenuFold;
+				changed = true;
+			}
+			if (enablement.sideMenuEnabled != null && state.current.sideMenuEnabled !== enablement.sideMenuEnabled) {
+				state.current.sideMenuEnabled = enablement.sideMenuEnabled;
+				changed = true;
+				fire(AppEventTypes.SWITCH_SIDE_MENU_ENABLED, enablement.sideMenuEnabled);
+			}
+			if (enablement.bannerEnabled != null && state.current.bannerEnabled !== enablement.bannerEnabled) {
+				state.current.bannerEnabled = enablement.bannerEnabled;
+				changed = true;
+				fire(AppEventTypes.SWITCH_BANNER_ENABLED, enablement.bannerEnabled);
+			}
+			if (changed) {
+				forceUpdate();
+			}
 		};
 		type SwitchFeatureOptions = { data: SwitchFeatureMessage } & (
 			{ prop: 'sideMenuEnabled'; event: AppEventTypes.SWITCH_SIDE_MENU_ENABLED }
@@ -154,7 +222,8 @@ export const AppFrameLayoutController = () => {
 			const {data, prop, event} = options;
 			// noinspection PointlessBooleanExpressionJS
 			const enabled = !!(data.enabled ?? false);
-			setState(state => ({...state, [prop]: enabled}));
+			state.current[prop] = enabled;
+			forceUpdate();
 			// @ts-ignore
 			fire(event, enabled);
 		};
@@ -166,7 +235,9 @@ export const AppFrameLayoutController = () => {
 					// noinspection PointlessBooleanExpressionJS
 					const enabled = !!((data as SwitchSideMenuMessage).enabled ?? false);
 					// retrieve side menu fold from api, make sure it is same as side menu internal state
-					setState(state => ({...state, sideMenuEnabled: enabled, sideMenuFold: isSideMenuFold()}));
+					state.current.sideMenuEnabled = enabled;
+					state.current.sideMenuFold = isSideMenuFold();
+					forceUpdate();
 					fire(AppEventTypes.SWITCH_SIDE_MENU_ENABLED, enabled);
 					break;
 				}
@@ -198,22 +269,35 @@ export const AppFrameLayoutController = () => {
 					break;
 			}
 		};
+		on(AppEventTypes.SWITCH_SIDE_MENU_ENABLED, onSwitchSideMenuEnabled);
 		on(AppEventTypes.ASK_SIDE_MENU_ENABLED, onAskSideMenuEnabled);
 		on(AppEventTypes.SWITCH_SIDE_MENU_FOLD, onSwitchSideMenuFold);
+		on(AppEventTypes.ASK_SIDE_MENU_FOLD, onAskSideMenuFold);
+		on(AppEventTypes.SWITCH_BANNER_ENABLED, onSwitchBannerEnabled);
 		on(AppEventTypes.ASK_BANNER_ENABLED, onAskBannerEnabled);
+		on(AppEventTypes.SWITCH_THEME_SWITCHER_ENABLED, onSwitchThemeSwitcherEnabled);
 		on(AppEventTypes.ASK_THEME_SWITCHER_ENABLED, onAskThemeSwitcherEnabled);
+		on(AppEventTypes.SWITCH_I18N_SWITCHER_ENABLED, onSwitchI18NSwitcherEnabled);
 		on(AppEventTypes.ASK_I18N_SWITCHER_ENABLED, onAskI18NSwitcherEnabled);
+		on(AppEventTypes.SWITCH_SIDE_MENU_AND_BANNER_ENABLED, onSwitchSideMenuAndBannerEnabled);
 		window.addEventListener('message', onMessage);
 		return () => {
+			off(AppEventTypes.SWITCH_SIDE_MENU_ENABLED, onSwitchSideMenuEnabled);
 			off(AppEventTypes.ASK_SIDE_MENU_ENABLED, onAskSideMenuEnabled);
 			off(AppEventTypes.SWITCH_SIDE_MENU_FOLD, onSwitchSideMenuFold);
+			off(AppEventTypes.ASK_SIDE_MENU_FOLD, onAskSideMenuFold);
+			off(AppEventTypes.SWITCH_BANNER_ENABLED, onSwitchBannerEnabled);
 			off(AppEventTypes.ASK_BANNER_ENABLED, onAskBannerEnabled);
+			off(AppEventTypes.SWITCH_THEME_SWITCHER_ENABLED, onSwitchThemeSwitcherEnabled);
 			off(AppEventTypes.ASK_THEME_SWITCHER_ENABLED, onAskThemeSwitcherEnabled);
+			off(AppEventTypes.SWITCH_I18N_SWITCHER_ENABLED, onSwitchI18NSwitcherEnabled);
 			off(AppEventTypes.ASK_I18N_SWITCHER_ENABLED, onAskI18NSwitcherEnabled);
+			off(AppEventTypes.SWITCH_SIDE_MENU_AND_BANNER_ENABLED, onSwitchSideMenuAndBannerEnabled);
 			window.removeEventListener('message', onMessage);
 		};
-	}, [on, off, fire]);
+	}, [on, off, fire, forceUpdate]);
 
-	return <LayoutController data-side-menu-enabled={state.sideMenuEnabled} data-side-menu-fold={state.sideMenuFold}
-	                         data-banner-enabled={state.bannerEnabled}/>;
+	return <LayoutController data-side-menu-enabled={state.current.sideMenuEnabled}
+	                         data-side-menu-fold={state.current.sideMenuFold}
+	                         data-banner-enabled={state.current.bannerEnabled}/>;
 };

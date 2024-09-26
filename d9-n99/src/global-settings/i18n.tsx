@@ -78,7 +78,13 @@ $d9n2.intl.labels = {
 		app: {name: '前端'},
 		theme: {light: '浅色主题', dark: '深色主题', system: '跟随系统'},
 		i18n: {'en-US': '英文', 'zh-CN': '简体中文'},
-		menus: {preferences: '使用偏好', language: '语言', theme: '颜色主题'}
+		menus: {preferences: '使用偏好', language: '语言', theme: '颜色主题'},
+		page: {
+			authentication: {
+				'no-auth-enabled': '未启用登录页, 修改/src/work-area/unauthenticated/no-authentication.tsx实现自定义SSO.'
+			},
+			home: '首页, 修改/src/work-area/home/index.tsx实现自定义渲染行为.'
+		}
 	},
 	...rest
 };

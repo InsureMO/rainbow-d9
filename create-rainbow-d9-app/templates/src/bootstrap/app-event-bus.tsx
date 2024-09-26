@@ -9,12 +9,22 @@ export enum AppEventTypes {
 	SWITCH_SIDE_MENU_ENABLED = 'switch-side-menu-enabled',
 	ASK_SIDE_MENU_ENABLED = 'ask-side-menu-enabled',
 	SWITCH_SIDE_MENU_FOLD = 'switch-side-menu-fold',
+	ASK_SIDE_MENU_FOLD = 'ask-side-menu-fold',
 	SWITCH_BANNER_ENABLED = 'switch-banner-enabled',
 	ASK_BANNER_ENABLED = 'ask-banner-enabled',
 	SWITCH_THEME_SWITCHER_ENABLED = 'switch-theme-switcher-enabled',
 	ASK_THEME_SWITCHER_ENABLED = 'ask-theme-switcher-enabled',
 	SWITCH_I18N_SWITCHER_ENABLED = 'switch-i18n-switcher-enabled',
-	ASK_I18N_SWITCHER_ENABLED = 'ask-i18n-switcher-enabled'
+	ASK_I18N_SWITCHER_ENABLED = 'ask-i18n-switcher-enabled',
+	SWITCH_SIDE_MENU_AND_BANNER_ENABLED = 'switch-side-menu-and-banner-enabled',
+}
+
+export interface SideMenuAndBannerEnablement {
+	sideMenuEnabled?: boolean;
+	sideMenuFold?: boolean;
+	bannerEnabled?: boolean;
+	themeSwitcherEnabled?: boolean;
+	i18nSwitcherEnabled?: boolean;
 }
 
 export interface AppEventBus {
@@ -48,6 +58,9 @@ export interface AppEventBus {
 	fire(type: AppEventTypes.SWITCH_SIDE_MENU_FOLD, fold: boolean): this;
 	on(type: AppEventTypes.SWITCH_SIDE_MENU_FOLD, listener: (fold: boolean) => void): this;
 	off(type: AppEventTypes.SWITCH_SIDE_MENU_FOLD, listener: (fold: boolean) => void): this;
+	fire(type: AppEventTypes.ASK_SIDE_MENU_FOLD, onReply: (fold: boolean) => void): this;
+	on(type: AppEventTypes.ASK_SIDE_MENU_FOLD, listener: (onReply: (fold: boolean) => void) => void): this;
+	off(type: AppEventTypes.ASK_SIDE_MENU_FOLD, listener: (onReply: (fold: boolean) => void) => void): this;
 	fire(type: AppEventTypes.SWITCH_BANNER_ENABLED, enabled: boolean): this;
 	on(type: AppEventTypes.SWITCH_BANNER_ENABLED, listener: (enabled: boolean) => void): this;
 	off(type: AppEventTypes.SWITCH_BANNER_ENABLED, listener: (enabled: boolean) => void): this;
@@ -66,6 +79,9 @@ export interface AppEventBus {
 	fire(type: AppEventTypes.ASK_I18N_SWITCHER_ENABLED, onReply: (enabled: boolean) => void): this;
 	on(type: AppEventTypes.ASK_I18N_SWITCHER_ENABLED, listener: (onReply: (enabled: boolean) => void) => void): this;
 	off(type: AppEventTypes.ASK_I18N_SWITCHER_ENABLED, listener: (onReply: (enabled: boolean) => void) => void): this;
+	fire(type: AppEventTypes.SWITCH_SIDE_MENU_AND_BANNER_ENABLED, enabled: SideMenuAndBannerEnablement): this;
+	on(type: AppEventTypes.SWITCH_SIDE_MENU_AND_BANNER_ENABLED, listener: (enabled: SideMenuAndBannerEnablement) => void): this;
+	off(type: AppEventTypes.SWITCH_SIDE_MENU_AND_BANNER_ENABLED, listener: (enabled: SideMenuAndBannerEnablement) => void): this;
 }
 
 const Context = createContext<AppEventBus>({} as AppEventBus);

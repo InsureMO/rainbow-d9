@@ -105,6 +105,7 @@ const createAppThemeStyles = () => {
 	};
 	const createAppCssVars = (variables: typeof AppCssConstants) => {
 		return {
+			// side menu
 			'side-menu-width': `var(--app-side-menu-width, 320px)`,
 			'side-menu-fold-width': `var(--app-side-menu-fold-width, 72px)`,
 			'side-menu-shadow': `var(--app-side-menu-shadow, ${variables.sideMenuShadow})`,
@@ -144,11 +145,11 @@ const createAppThemeStyles = () => {
 			'side-menu-item-label-font-weight': `var(--app-side-menu-item-label-font-weight, 400)`,
 			'side-menu-item-label-hover-color': `var(--app-side-menu-item-label-hover-color, ${variables.sideMenuItemLabelHoverColor})`,
 			'side-menu-item-label-hover-background': `var(--app-side-menu-item-label-hover-background, ${variables.sideMenuItemLabelHoverBackground})`,
-
+			// logo
 			'logo-color': `var(--app-logo-color, ${variables.logoColor})`,
 			'logo-color-2': `var(--app-logo-color-2, ${variables.logoColor2})`,
 			'logo-color-3': `var(--app-logo-color-3, ${variables.logoColor3})`,
-
+			// banner
 			'banner-height': `var(--app-banner-height, 72px)`,
 			'banner-padding': `var(--app-banner-padding, 0 32px)`,
 			'banner-background': `var(--app-banner-background, ${variables.bannerBackground})`,
@@ -176,8 +177,11 @@ const createAppThemeStyles = () => {
 			'banner-button-menu-item-hover-background': `var(--app-banner-button-menu-item-hover-background, ${variables.buttonMenuItemHoverBackground})`,
 			'banner-button-menu-item-lang-emoji-size': 'var(--app-banner-button-menu-item-lang-emoji-size, 20px)',
 			'banner-button-menu-item-lang-emoji-margin': 'var(--app-banner-button-menu-item-lang-emoji-margin, 0)',
-
-			'work-area-background': `var(--app-work-area-background, ${variables.workAreaBackground})`
+			// work area
+			'work-area-background': `var(--app-work-area-background, ${variables.workAreaBackground})`,
+			// pages, authentication
+			'no-authentication-font-size': 'var(--page-no-authentication-font-size, 24px)',
+			'home-font-size': 'var(--page-home-font-size, 24px)'
 		};
 	};
 	const AppDarkCssConstants = {

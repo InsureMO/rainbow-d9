@@ -1,6 +1,9 @@
-import {DOM_KEY_WIDGET, GlobalEventBusProvider} from '@rainbow-d9/n2';
+import {DOM_KEY_WIDGET} from '@rainbow-d9/n2';
+import {BrowserRouter, Route, Routes} from 'react-router-dom';
 import styled from 'styled-components';
-import {I18NAndD9N2Bridge} from '../bootstrap';
+import {getBaseContext, getUnauthenticatedRoute} from '../utils';
+import {Authenticated} from './authenticated';
+import {Unauthenticated} from './unauthenticated';
 
 // noinspection CssUnresolvedCustomProperty
 const Container = styled.div.attrs({[DOM_KEY_WIDGET]: 'app-work-area'})`
@@ -15,12 +18,14 @@ const Container = styled.div.attrs({[DOM_KEY_WIDGET]: 'app-work-area'})`
 `;
 
 const WorkAreaContainer = () => {
-	// wrapped by global event bus provider, which supports i18n
-	return <GlobalEventBusProvider>
-		<I18NAndD9N2Bridge/>
-		<Container>
-		</Container>
-	</GlobalEventBusProvider>;
+	return <Container>
+		<BrowserRouter basename={getBaseContext()}>
+			<Routes>
+				<Route path={getUnauthenticatedRoute()} element={<Unauthenticated/>}/>
+				<Route path="*" element={<Authenticated/>}/>
+			</Routes>
+		</BrowserRouter>
+	</Container>;
 };
 
 export const WorkArea = () => {

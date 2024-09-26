@@ -40,7 +40,6 @@ export const ThemeHandler = () => {
 			const changeTheme = (code: ThemeCode, followSystem: boolean) => {
 				const kind = toKind(code);
 				setState({code, kind});
-				console.log(followSystem);
 				if (followSystem) {
 					setThemeFollowSystem();
 				} else {

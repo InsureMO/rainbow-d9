@@ -5,6 +5,7 @@ import SettingsIcon from '../assets/settings.svg?react';
 import SystemThemeIcon from '../assets/system-theme.svg?react';
 import ThemeIcon from '../assets/theme.svg?react';
 import {AppEventBus, AppEventTypes} from '../bootstrap/app-event-bus';
+import {isThemeFollowSystemEnabled} from '../utils';
 import {askAvailableLanguages} from './i18n';
 import {LanguageLabel, ThemeLabel} from './menu-widgets';
 import {askAvailableThemes} from './theme';
@@ -43,6 +44,7 @@ export enum PrebuiltAppMenuCode {
 export const askMenus = (): Array<AppMenuGroup | AppMenuItem> => {
 	return [
 		// do not change the codes of the items, the language and theme switcher will use them
+		// TODO preferences menu should have more items beyonds languages and themes
 		{
 			code: PrebuiltAppMenuCode.PREFERENCES, type: AppMenuType.GROUP,
 			icon: <SettingsIcon/>, text: <IntlLabel keys={['menus.preferences']} value="Preferences"/>,
@@ -73,7 +75,7 @@ export const askMenus = (): Array<AppMenuGroup | AppMenuItem> => {
 								}
 							};
 						}),
-						{
+						...(isThemeFollowSystemEnabled() ? [{
 							code: PrebuiltAppMenuCode.SYSTEM_THEME, type: AppMenuType.ITEM,
 							icon: <SystemThemeIcon/>,
 							text: <ThemeLabel code={PrebuiltAppMenuCode.SYSTEM_THEME}
@@ -81,7 +83,7 @@ export const askMenus = (): Array<AppMenuGroup | AppMenuItem> => {
 							click: async (fire) => {
 								fire(AppEventTypes.CHANGE_THEME_BY_SYSTEM);
 							}
-						}
+						} as AppMenuItem] : [] as Array<AppMenuItem>)
 					]
 				}
 			]

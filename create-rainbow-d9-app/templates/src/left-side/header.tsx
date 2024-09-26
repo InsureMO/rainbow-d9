@@ -4,7 +4,6 @@ import styled from 'styled-components';
 import FoldMenu from '../assets/double-arrow-left.svg?react';
 import Logo from '../assets/logo.svg?react';
 import {AppEventTypes, useAppEventBus} from '../bootstrap';
-import {isSideMenuFold, setSideMenuFold} from '../utils';
 
 // noinspection CssUnresolvedCustomProperty,CssNoGenericFontName
 const Container = styled.div.attrs({[DOM_KEY_WIDGET]: 'app-side-menu-header'})`
@@ -80,6 +79,7 @@ const Container = styled.div.attrs({[DOM_KEY_WIDGET]: 'app-side-menu-header'})`
 `;
 
 interface SideMenuHeaderState {
+	initialized: boolean;
 	fold: boolean; // is fold or not, could be unfolded when mouse hover
 	foldOnHandsOff: boolean; // is folded or not
 }
@@ -88,9 +88,7 @@ export const SideMenuHeader = () => {
 	const {fire} = useAppEventBus();
 	const ref = useRef<HTMLDivElement>(null);
 	const [state, setState] = useState<SideMenuHeaderState>(() => {
-		const fold = isSideMenuFold();
-		// initial same
-		return {fold, foldOnHandsOff: fold};
+		return {initialized: false, fold: false, foldOnHandsOff: false};
 	});
 	useEffect(() => {
 		if (ref.current == null) {
@@ -100,7 +98,6 @@ export const SideMenuHeader = () => {
 			if (!state.fold) {
 				return;
 			}
-			setSideMenuFold(false);
 			setState(state => ({...state, fold: false}));
 			fire(AppEventTypes.SWITCH_SIDE_MENU_FOLD, false);
 		};
@@ -108,7 +105,6 @@ export const SideMenuHeader = () => {
 			if (!state.foldOnHandsOff) {
 				return;
 			}
-			setSideMenuFold(true);
 			setState(state => ({...state, fold: true}));
 			fire(AppEventTypes.SWITCH_SIDE_MENU_FOLD, true);
 		};
@@ -119,15 +115,24 @@ export const SideMenuHeader = () => {
 			ref.current?.parentElement?.removeEventListener('mouseleave', onMouseLeave);
 		};
 	}, [fire, state.fold, state.foldOnHandsOff]);
+	useEffect(() => {
+		if (!state.initialized) {
+			fire(AppEventTypes.ASK_SIDE_MENU_FOLD, (fold: boolean) => {
+				setState({initialized: true, fold, foldOnHandsOff: fold});
+			});
+		}
+	}, []);
+
+	if (!state.initialized) {
+		return null;
+	}
 
 	const onFoldSwitchClick = () => {
 		if (state.foldOnHandsOff) {
-			setSideMenuFold(false);
-			setState({fold: false, foldOnHandsOff: false});
+			setState(state => ({...state, fold: false, foldOnHandsOff: false}));
 			fire(AppEventTypes.SWITCH_SIDE_MENU_FOLD, false);
 		} else {
-			setSideMenuFold(true);
-			setState({fold: true, foldOnHandsOff: true});
+			setState(state => ({...state, fold: true, foldOnHandsOff: true}));
 			fire(AppEventTypes.SWITCH_SIDE_MENU_FOLD, true);
 		}
 	};

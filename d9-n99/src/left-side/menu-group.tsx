@@ -3,7 +3,8 @@ import {DOM_KEY_WIDGET} from '@rainbow-d9/n2';
 import {useEffect, useRef, useState} from 'react';
 import styled from 'styled-components';
 import ArrowIcon from '../assets/single-arrow-down.svg?react';
-import {AppMenuGroup, isMenuGroup, isMenuItem} from '../global-settings';
+import {AppEventTypes, useAppEventBus} from '../bootstrap';
+import {AppMenuGroup, isMenuGroup, isMenuItem, PrebuiltAppMenuCode} from '../global-settings';
 import {MenuItem} from './menu-item';
 
 interface MenuGroupProps extends AppMenuGroup {
@@ -131,17 +132,19 @@ enum ExpandState {
 }
 
 interface MenuGroupState {
+	enabled: boolean;
 	expanded: ExpandState;
 	height: number;
 }
 
 export const MenuGroup = (props: MenuGroupProps) => {
-	const {icon, text, items, level} = props;
+	const {code, icon, text, items, level} = props;
 
 	const ref = useRef<HTMLDivElement>(null);
 	const itemsRef = useRef<HTMLDivElement>(null);
+	const {on, off, fire} = useAppEventBus();
 	const {replace, clear} = useThrottler();
-	const [state, setState] = useState<MenuGroupState>({expanded: ExpandState.HIDE, height: 0});
+	const [state, setState] = useState<MenuGroupState>({enabled: false, expanded: ExpandState.HIDE, height: 0});
 	useEffect(() => {
 		if (state.expanded === ExpandState.SHOWING) {
 			// animation ends after 300ms
@@ -157,8 +160,51 @@ export const MenuGroup = (props: MenuGroupProps) => {
 			ref.current?.scrollIntoView({behavior: 'smooth', block: 'nearest'});
 		}
 	}, [state.expanded]);
+	useEffect(() => {
+		switch (code) {
+			case PrebuiltAppMenuCode.THEMES: {
+				const onSwitchThemeSwitcherEnabled = (enabled: boolean) => {
+					setState(state => ({...state, enabled}));
+				};
+				on(AppEventTypes.SWITCH_THEME_SWITCHER_ENABLED, onSwitchThemeSwitcherEnabled);
+				return () => {
+					off(AppEventTypes.SWITCH_THEME_SWITCHER_ENABLED, onSwitchThemeSwitcherEnabled);
+				};
+			}
+			case PrebuiltAppMenuCode.LANGUAGES: {
+				const onSwitchI18NSwitcherEnabled = (enabled: boolean) => {
+					setState(state => ({...state, enabled}));
+				};
+				on(AppEventTypes.SWITCH_I18N_SWITCHER_ENABLED, onSwitchI18NSwitcherEnabled);
+				return () => {
+					off(AppEventTypes.SWITCH_I18N_SWITCHER_ENABLED, onSwitchI18NSwitcherEnabled);
+				};
+			}
+			default:
+				setState(state => ({...state, enabled: true}));
+				break;
+		}
+	}, [on, off]);
+	useEffect(() => {
+		switch (code) {
+			case PrebuiltAppMenuCode.THEMES: {
+				fire(AppEventTypes.ASK_THEME_SWITCHER_ENABLED, (enabled: boolean) => {
+					setState(state => ({...state, enabled}));
+				});
+				break;
+			}
+			case PrebuiltAppMenuCode.LANGUAGES: {
+				fire(AppEventTypes.ASK_I18N_SWITCHER_ENABLED, (enabled: boolean) => {
+					setState(state => ({...state, enabled}));
+				});
+				break;
+			}
+			default:
+				break;
+		}
+	}, []);
 
-	if (items == null || items.length === 0) {
+	if (!state.enabled || items == null || items.length === 0) {
 		// no menu item, there is no need to show this group
 		return null;
 	}
