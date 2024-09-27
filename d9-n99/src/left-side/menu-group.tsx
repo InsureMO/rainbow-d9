@@ -16,6 +16,10 @@ const Container = styled.div.attrs({[DOM_KEY_WIDGET]: 'app-side-menu-group'})`
     display: flex;
     position: relative;
     flex-direction: column;
+
+    &[data-visible=false] {
+        display: none;
+    }
 `;
 // noinspection CssUnresolvedCustomProperty
 const Label = styled.span.attrs<{ level: number }>(({level}) => {
@@ -133,6 +137,7 @@ enum ExpandState {
 
 interface MenuGroupState {
 	enabled: boolean;
+	visible: boolean;
 	expanded: ExpandState;
 	height: number;
 }
@@ -144,7 +149,12 @@ export const MenuGroup = (props: MenuGroupProps) => {
 	const itemsRef = useRef<HTMLDivElement>(null);
 	const {on, off, fire} = useAppEventBus();
 	const {replace, clear} = useThrottler();
-	const [state, setState] = useState<MenuGroupState>({enabled: false, expanded: ExpandState.HIDE, height: 0});
+	const [state, setState] = useState<MenuGroupState>({
+		enabled: false,
+		visible: true,
+		expanded: ExpandState.HIDE,
+		height: 0
+	});
 	useEffect(() => {
 		if (state.expanded === ExpandState.SHOWING) {
 			// animation ends after 300ms
@@ -203,10 +213,30 @@ export const MenuGroup = (props: MenuGroupProps) => {
 				break;
 		}
 	}, []);
+	useEffect(() => {
+		// check visibility after each render
+		if (!state.enabled || items == null || items.length === 0) {
+			// no need to check, it is invisible
+			return;
+		}
+		let hasVisibleItem = false;
+		for (const child of (itemsRef.current?.children ?? [])) {
+			const visible = child.getAttribute('data-visible');
+			if (visible !== 'false') {
+				hasVisibleItem = true;
+			}
+		}
+		if (hasVisibleItem && !state.visible) {
+			setState(state => ({...state, visible: true}));
+		} else if (!hasVisibleItem && state.visible) {
+			setState(state => ({...state, visible: false, expanded: ExpandState.HIDE, height: 0}));
+		}
+	});
 
 	if (!state.enabled || items == null || items.length === 0) {
 		// no menu item, there is no need to show this group
-		return null;
+		return <Container data-expanded={false} data-visible={false} ref={ref}>
+		</Container>;
 	}
 
 	const onGroupLabelClicked = () => {
@@ -219,7 +249,7 @@ export const MenuGroup = (props: MenuGroupProps) => {
 		}
 	};
 
-	return <Container data-expanded={state.expanded} ref={ref}>
+	return <Container data-expanded={state.expanded} data-visible={state.visible} ref={ref}>
 		<Label level={level} data-expanded={state.expanded} onClick={onGroupLabelClicked}>
 			<span data-type="icon">{icon}</span>
 			<span data-type="text">{text}</span>

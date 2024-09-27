@@ -85,7 +85,7 @@ export const MenuItem = (props: MenuItemProps) => {
 		await click(fire);
 	};
 
-	return <Container>
+	return <Container data-visible={true}>
 		<Label level={level} onClick={onLabelClicked}>
 			<span data-type="icon">{icon}</span>
 			<span data-type="text">{text}</span>
