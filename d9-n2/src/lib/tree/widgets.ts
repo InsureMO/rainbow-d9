@@ -59,6 +59,7 @@ export const TreeSearchInput = styled(UnwrappedDecorateInput)`
         > svg {
             opacity: 0.3;
             height: calc(${CssVars.FONT_SIZE} * 0.9);
+            width: calc(${CssVars.FONT_SIZE} * 0.9);
         }
     }
 
@@ -218,6 +219,7 @@ export const TreeNodeOperators = styled.div.attrs<{ top: number; right: number }
 
             > svg {
                 height: calc(${CssVars.FONT_SIZE} * 0.8);
+                width: calc(${CssVars.FONT_SIZE} * 0.8);
             }
         }
     }

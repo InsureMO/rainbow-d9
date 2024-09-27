@@ -445,6 +445,7 @@ const Decorator = styled.span`
 
     > svg {
         height: calc((${CssVars.FONT_SIZE}) * 1.2);
+        width: calc((${CssVars.FONT_SIZE}) * 1.2);
     }
 `;
 const LeadDecorator = styled(Decorator).attrs({

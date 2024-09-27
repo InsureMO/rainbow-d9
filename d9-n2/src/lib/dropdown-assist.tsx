@@ -679,6 +679,7 @@ export const OptionFilter = styled.div.attrs<Omit<DropdownPopupState, 'active'> 
 
         > svg {
             height: ${CssVars.FONT_SIZE};
+            width: ${CssVars.FONT_SIZE};
         }
     }
 

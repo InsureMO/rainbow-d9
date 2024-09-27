@@ -96,6 +96,7 @@ const MultiDropdownLabel = styled(DropdownLabel)`
 
         > svg {
             height: calc(${CssVars.INPUT_HEIGHT} * 2 / 5);
+            width: calc(${CssVars.INPUT_HEIGHT} * 2 / 5);
             fill: ${CssVars.DANGER_COLOR};
         }
     }
@@ -139,6 +140,7 @@ const MultiOption = styled.span.attrs({[DOM_KEY_WIDGET]: 'd9-multi-dropdown-opti
     > svg:last-child {
         fill: ${CssVars.PRIMARY_COLOR};
         height: calc(${CssVars.INPUT_HEIGHT} / 3);
+        width: calc(${CssVars.INPUT_HEIGHT} / 3);
         min-width: calc(${CssVars.INPUT_HEIGHT} / 3);
         margin-left: 8px;
         margin-right: calc(${CssVars.INPUT_INDENT} * -1 + 12px);

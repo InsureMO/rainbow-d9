@@ -84,6 +84,7 @@ const ASectionExpander = styled.div.attrs<{ expanded: boolean }>(
     }
 
     > svg {
+        height: calc(${CssVars.SECTION_HEADER_HEIGHT} * 0.3);
         width: calc(${CssVars.SECTION_HEADER_HEIGHT} * 0.3);
         fill: ${CssVars.FONT_COLOR};
         opacity: 0.5;

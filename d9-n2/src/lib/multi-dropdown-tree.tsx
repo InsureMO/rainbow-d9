@@ -107,6 +107,7 @@ const MultiDropdownTreeLabel = styled(DropdownLabel)`
 
         > svg {
             height: calc(${CssVars.INPUT_HEIGHT} * 2 / 5);
+            width: calc(${CssVars.INPUT_HEIGHT} * 2 / 5);
             fill: ${CssVars.DANGER_COLOR};
         }
     }
