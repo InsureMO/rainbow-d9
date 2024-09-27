@@ -32,6 +32,7 @@ export const Container = styled.div.attrs({[DOM_KEY_WIDGET]: 'page-authenticatio
                     > span[data-type=icon][data-for=code2fa],
                     > div[data-w=d9-deco-input][data-di-for=code2fa] {
                         left: 110%;
+                        //opacity: 0;
                         pointer-events: none;
                     }
                 }
@@ -42,7 +43,7 @@ export const Container = styled.div.attrs({[DOM_KEY_WIDGET]: 'page-authenticatio
                     > span[data-type=icon][data-for=pwd],
                     > div[data-w=d9-deco-input][data-di-for=pwd] {
                         left: -110%;
-                        opacity: 0;
+                        //opacity: 0;
                         pointer-events: none;
                     }
                 }
@@ -63,7 +64,20 @@ export const Container = styled.div.attrs({[DOM_KEY_WIDGET]: 'page-authenticatio
             }
 
             > div[data-w=d9-section-body] {
-                grid-row-gap: calc(var(--input-height) / 2);
+                grid-template-rows: auto calc(var(--input-height) * 1.5) calc(var(--input-height) * 1.5) auto;
+
+                > span[data-w=d9-caption] {
+                    --grid-column: span 12;
+                    color: var(--d9-danger-color);
+                    height: calc(var(--input-height) * 0.5);
+                    font-size: calc(var(--font-size) * 0.7);
+                    margin-bottom: calc(var(--input-height) / 2);
+
+                    &:empty {
+                        height: 0;
+                        margin-bottom: 0;
+                    }
+                }
 
                 > span[data-type=icon] {
                     display: flex;
@@ -72,7 +86,7 @@ export const Container = styled.div.attrs({[DOM_KEY_WIDGET]: 'page-authenticatio
                     height: var(--input-height);
                     width: var(--input-height);
                     left: calc(var(--input-height) / 4);
-                    transition: color .3s ease-in-out;
+                    transition: color .3s ease-in-out, left .3s ease-in-out, opacity .3s ease-in-out;
                     z-index: 1;
 
                     &[data-for=username] {
@@ -82,7 +96,6 @@ export const Container = styled.div.attrs({[DOM_KEY_WIDGET]: 'page-authenticatio
                     &[data-for=pwd],
                     &[data-for=code2fa] {
                         grid-row: 3;
-                        transition: left .3s ease-in-out, opacity .3s ease-in-out;
                     }
 
                     > svg {
@@ -92,13 +105,18 @@ export const Container = styled.div.attrs({[DOM_KEY_WIDGET]: 'page-authenticatio
                 }
 
                 > div[data-w=d9-deco-input] {
+                    position: absolute;
                     --grid-column: 1 / span 12;
                     height: var(--input-height);
+
+                    &[data-di-for=username] {
+                        grid-row: 2;
+                    }
 
                     &[data-di-for=pwd],
                     &[data-di-for=code2fa] {
                         grid-row: 3;
-                        transition: left .3s ease-in-out, opacity .3s ease-in-out;
+                        transition: left 30s ease-in-out, opacity .3s ease-in-out;
                     }
 
                     &[data-disabled=false]:hover + span[data-type=icon],
@@ -114,18 +132,8 @@ export const Container = styled.div.attrs({[DOM_KEY_WIDGET]: 'page-authenticatio
                     }
                 }
 
-                > span[data-w=d9-caption] {
-                    --grid-column: span 12;
-                    color: var(--d9-danger-color);
-                    height: calc(var(--input-height) * 0.5);
-                    font-size: calc(var(--font-size) * 0.7);
-
-                    &:empty {
-                        height: 0;
-                    }
-                }
-
                 > button[data-w=d9-button] {
+                    grid-row: 4;
                     height: calc(var(--input-height) * 0.8);
                     font-size: var(--font-size);
 

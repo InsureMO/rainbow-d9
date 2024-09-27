@@ -15,7 +15,7 @@ import {useNavigate} from 'react-router-dom';
 import Code from '../../assets/2fa-code.svg?react';
 import Pwd from '../../assets/password.svg?react';
 import User from '../../assets/user.svg?react';
-import {I18NAndD9N2Bridge} from '../../bootstrap';
+import {AppEventTypes, I18NAndD9N2Bridge, useAppEventBus} from '../../bootstrap';
 import {authenticate, authenticate2FA} from '../../services';
 import {getHomeRoute, isAuthentication2FAEnabled} from '../../utils';
 import {useExternalSSO} from './use-external-sso';
@@ -50,6 +50,7 @@ export const Authentication = () => {
 	const pwdRef = useRef<HTMLDivElement>(null);
 	const codeRef = useRef<HTMLDivElement>(null);
 	const navigate = useNavigate();
+	const {fire} = useAppEventBus();
 	const [state, setState] = useState<AuthenticationState>({mode: Mode.PWD, error: false, authenticating: false});
 	// also could be authed by external SSO as well
 	useExternalSSO();
@@ -141,6 +142,7 @@ export const Authentication = () => {
 							setTimeout(() => codeRef.current?.querySelector('input')?.focus(), 30);
 						} else {
 							navigate(getHomeRoute(), {replace: true});
+							fire(AppEventTypes.AUTHENTICATED_CHANGED);
 						}
 					}
 				}
@@ -155,7 +157,10 @@ export const Authentication = () => {
 						username: model.username!, code2fa: model.code2fa!
 					}), <IntlLabel keys={['page.authentication.failed2fa']}
 					               value="Authentication failed, check authentication code please."/>);
-					success && navigate(getHomeRoute(), {replace: true});
+					if (success) {
+						navigate(getHomeRoute(), {replace: true});
+						fire(AppEventTypes.AUTHENTICATED_CHANGED);
+					}
 				}
 				break;
 			}
@@ -166,6 +171,8 @@ export const Authentication = () => {
 		setState(state => ({
 			...state, mode: Mode.PWD, error: false, message: (void 0), authenticating: false
 		}));
+		// wait for re-render, pwd input is disabled now
+		setTimeout(() => pwdRef.current?.querySelector('input')?.focus(), 30);
 	};
 
 	return <GlobalRoot>

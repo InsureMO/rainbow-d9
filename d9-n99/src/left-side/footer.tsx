@@ -20,12 +20,8 @@ const Container = styled.div.attrs({[DOM_KEY_WIDGET]: 'app-side-menu-footer'})`
     > button[data-w=d9-button] {
         width: 100%;
 
-        > span[data-w=d9-deco-lead] {
-            margin-left: calc((var(--d9-font-size, 14px)) * -1.2);
-
-            > svg {
-                width: calc((var(--d9-font-size, 14px)) * 1.2);
-            }
+        > span[data-role=text] {
+            margin-left: calc((var(--d9-font-size, 14px)) * 1.4);
         }
     }
 `;
@@ -53,7 +49,7 @@ export const SideMenuFooter = () => {
 	};
 	return <Container>
 		<UnwrappedButton
-			leads={[<LogoutIcon/>]}
+			tails={[<LogoutIcon/>]}
 			onClick={onLogoutClick}>
 			<IntlLabel keys={['actions.logout.label']} value="Logout"/>
 		</UnwrappedButton>

@@ -23,3 +23,5 @@ export const getUnauthenticatedRoute = (): string => import.meta.env.VITE_UNAUTH
 // authentication
 export const isAuthenticationEnabled = () => import.meta.env.VITE_AUTHENTICATION_ENABLED !== 'false';
 export const isAuthentication2FAEnabled = () => isAuthenticationEnabled() && import.meta.env.VITE_AUTHENTICATION_2FA_ENABLED === 'true';
+// mock
+export const isMockEnabled = () => import.meta.env.VITE_MOCK_ENABLED === 'true';

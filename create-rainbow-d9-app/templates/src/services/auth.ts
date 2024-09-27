@@ -1,4 +1,5 @@
 import {ReactNode} from 'react';
+import {mock, mockAuthenticate, mockAuthenticate2FA} from '../mock-services';
 import {getAuthentication} from '../utils';
 
 export interface Authentication {
@@ -16,10 +17,22 @@ export interface AuthenticateResult {
 	message?: ReactNode;
 }
 
-export const authenticate = async (auth: { username: string; password: string }): Promise<AuthenticateResult> => {
-	return {success: true};
-};
+export interface AuthenticateByPwd {
+	username: string;
+	password: string;
+}
 
-export const authenticate2FA = async (auth: { username: string; code2fa: string }): Promise<AuthenticateResult> => {
-	return {success: true};
-};
+export const authenticate = mock(async (_auth: AuthenticateByPwd): Promise<AuthenticateResult> => {
+	// TODO authenticate
+	return {success: false};
+}).by(mockAuthenticate);
+
+export interface AuthenticateBy2FA {
+	username: string;
+	code2fa: string;
+}
+
+export const authenticate2FA = mock(async (_auth: AuthenticateBy2FA): Promise<AuthenticateResult> => {
+	// TODO authenticate 2fa
+	return {success: false};
+}).by(mockAuthenticate2FA);
