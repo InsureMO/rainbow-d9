@@ -1,10 +1,11 @@
-import {DOM_KEY_WIDGET, GlobalEventBusProvider} from '@rainbow-d9/n2';
+import {DOM_KEY_WIDGET, GlobalRoot} from '@rainbow-d9/n2';
 import {useEffect, useState} from 'react';
 import styled from 'styled-components';
 import {AppEventTypes, I18NAndD9N2Bridge, useAppEventBus, useAuthenticatedChanged} from '../bootstrap';
 import {isAuthenticated} from '../services';
 import {isSideMenuBodyEnabledOnAuthOnly} from '../utils';
 import {SideMenuBody} from './body';
+import {SideMenuFooter} from './footer';
 import {SideMenuHeader} from './header';
 
 // noinspection CssUnresolvedCustomProperty
@@ -31,13 +32,14 @@ const SideMenuContainer = () => {
 	const showUnauthenticated = sideMenuBodyEnableOnAuthOnly && !authenticated;
 
 	// wrapped by global event bus provider, which supports i18n
-	return <GlobalEventBusProvider>
+	return <GlobalRoot>
 		<I18NAndD9N2Bridge/>
 		<Container data-unauthenticated={showUnauthenticated}>
 			<SideMenuHeader/>
 			{showUnauthenticated ? null : <SideMenuBody/>}
+			{showUnauthenticated ? null : <SideMenuFooter/>}
 		</Container>
-	</GlobalEventBusProvider>;
+	</GlobalRoot>;
 };
 
 export const SideMenu = () => {

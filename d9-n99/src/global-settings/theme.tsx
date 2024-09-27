@@ -64,8 +64,16 @@ const createN2ThemeStyles = () => {
 	const N2DarkTheme = createN2CssVars(N2DarkConstants);
 
 	return {
-		n2Light: createCss({ACTIVE_COLOR: 'var(--d9-active-color, rgb(218,223,232))', ...N2LightTheme}),
-		n2Dark: createCss({ACTIVE_COLOR: 'var(--d9-active-color, rgb(118,123,132))', ...N2DarkTheme})
+		n2Light: createCss({
+			ACTIVE_COLOR: 'var(--d9-active-color, rgb(218,223,232))',
+			...N2LightTheme,
+			FONT_VARIANT: 'var(--d9-font-variant, none)'
+		}),
+		n2Dark: createCss({
+			ACTIVE_COLOR: 'var(--d9-active-color, rgb(118,123,132))',
+			...N2DarkTheme,
+			FONT_VARIANT: 'var(--d9-font-variant, none)'
+		})
 	};
 };
 const createAppThemeStyles = () => {
@@ -145,6 +153,7 @@ const createAppThemeStyles = () => {
 			'side-menu-item-label-font-weight': `var(--app-side-menu-item-label-font-weight, 400)`,
 			'side-menu-item-label-hover-color': `var(--app-side-menu-item-label-hover-color, ${variables.sideMenuItemLabelHoverColor})`,
 			'side-menu-item-label-hover-background': `var(--app-side-menu-item-label-hover-background, ${variables.sideMenuItemLabelHoverBackground})`,
+			'side-menu-footer-padding': 'var(--app-side-menu-footer-padding, 8px 12px 12px)',
 			// logo
 			'logo-color': `var(--app-logo-color, ${variables.logoColor})`,
 			'logo-color-2': `var(--app-logo-color-2, ${variables.logoColor2})`,
@@ -180,6 +189,13 @@ const createAppThemeStyles = () => {
 			// work area
 			'work-area-background': `var(--app-work-area-background, ${variables.workAreaBackground})`,
 			// pages, authentication
+			'authentication-min-width': 'var(--page-authentication-min-width, min(60vw, 600px))',
+			'authentication-border': 'var(--page-authentication-border, var(--d9-border))',
+			'authentication-border-radius': 'var(--page-authentication-border-radius, 12px)',
+			'authentication-padding': 'var(--page-authentication-padding, 16px 32px)',
+			'authentication-title-font-family': 'var(--page-authentication-title-font-family, "Oswald")',
+			'authentication-title-font-size': 'var(--page-authentication-title-font-size, 20px)',
+			'authentication-title-font-weight': 'var(--page-authentication-title-font-weight, 400)',
 			'no-authentication-font-size': 'var(--page-no-authentication-font-size, 24px)',
 			'home-font-size': 'var(--page-home-font-size, 24px)'
 		};

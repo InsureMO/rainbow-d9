@@ -37,3 +37,6 @@ export const getAuthentication = (): Authentication | undefined => {
 export const setAuthentication = (auth: Authentication) => {
 	sessionStorage.setItem(AUTH_KEY, btoa(JSON.stringify(auth)));
 };
+export const clearAuthentication = () => {
+	sessionStorage.removeItem(AUTH_KEY);
+};

@@ -14,7 +14,7 @@ export const NoAuthentication = () => {
 
 	return <GlobalRoot>
 		<I18NAndD9N2Bridge/>
-		<Container>
+		<Container data-w="page-no-authentication">
 			<div data-type="no-authentication">
 				<IntlLabel keys={['page.authentication.no-auth-enabled']}
 				           value="No authentication enabled, modify /src/work-area/unauthenticated/no-authentication.tsx to implement SSO."/>

@@ -22,3 +22,4 @@ export const getHomeRoute = (): string => import.meta.env.VITE_HOME_PAGE || '/ho
 export const getUnauthenticatedRoute = (): string => import.meta.env.VITE_UNAUTHENTICATED_PAGE || '/unauthenticated';
 // authentication
 export const isAuthenticationEnabled = () => import.meta.env.VITE_AUTHENTICATION_ENABLED !== 'false';
+export const isAuthentication2FAEnabled = () => isAuthenticationEnabled() && import.meta.env.VITE_AUTHENTICATION_2FA_ENABLED === 'true';
