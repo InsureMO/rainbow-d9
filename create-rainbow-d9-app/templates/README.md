@@ -34,9 +34,9 @@ Assume the following envs are ready, otherwise contact the tech guy.
 
 ## Build your own
 
-- [Themes](src/global-settings/theme.tsx)
-- [Languages](src/global-settings/i18n.tsx)
-- [Side menus](src/global-settings/menu.tsx)
+- [Themes](src/global-settings/theme)
+- [Languages](src/global-settings/i18n)
+- [Side menus](src/global-settings/menu)
 - [Authentication page](src/work-area/unauthenticated/authentication.tsx)
 - [No authentication page](src/work-area/unauthenticated/no-authentication.tsx)
 - [Home page](src/work-area/home/index.tsx)

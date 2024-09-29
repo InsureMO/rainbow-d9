@@ -23,12 +23,6 @@ const Container = styled.div.attrs({[DOM_KEY_WIDGET]: 'app-side-menu-footer'})`
         > span[data-role=text] {
             margin-left: calc((var(--d9-font-size, 14px)) * 1.4);
         }
-
-        > span[data-w=d9-deco-tail] {
-            > svg {
-                width: 100%;
-            }
-        }
     }
 `;
 

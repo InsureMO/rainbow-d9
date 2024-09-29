@@ -27,7 +27,7 @@ export const Home = () => {
 		<Container>
 			<div data-type="home">
 				<IntlLabel keys={['page.home']}
-				           value="Home page, modify /src/work-area/home/index.tsx change the rendering behavior."/>
+				           value="Home page, modify /src/work-area/home/index.ts change the rendering behavior."/>
 			</div>
 		</Container>
 	</GlobalRoot>;
