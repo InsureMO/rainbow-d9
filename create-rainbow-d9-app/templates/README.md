@@ -32,15 +32,6 @@ Assume the following envs are ready, otherwise contact the tech guy.
 > Please ensure that all set theme codes and language codes are supported by the application, as the application will not perform any
 > validation or error handling at runtime. Modify the `/src/utils/env-utils.ts` file to add your own validation.
 
-## Build your own
-
-- [Themes](src/global-settings/theme)
-- [Languages](src/global-settings/i18n)
-- [Side menus](src/global-settings/menu)
-- [Authentication page](src/work-area/unauthenticated/authentication.tsx)
-- [No authentication page](src/work-area/unauthenticated/no-authentication.tsx)
-- [Home page](src/work-area/home/index.tsx)
-
 # Runtime
 
 ## Local storage
@@ -82,3 +73,48 @@ postMessage({type: 'switch-theme-switcher', enabled: false});
 // switch i18n switcher, could be true/false
 postMessage({type: 'switch-i18n-switcher', enabled: false});
 ```
+
+# Build your own
+
+## Themes
+
+All the content can be found at [src/global-settings/theme](src/global-settings/theme).
+
+- `@rainbow-d9/n2` theme override: `src/global-settings/theme/n2-theme.ts`,
+- Application theme: `src/global-settings/theme/app-theme.ts`.
+
+The application already provides two styles, light and dark, which match the system. Normally, it is sufficient to modify the styles of
+these two themes. On the other hand, to provide more styles or modify existing styles, please follow the steps below:
+
+- Modify the two theme definitions (as above) to ensure they support the changes made,
+- Modify the [custom settings](src/global-settings/theme/custom-settings.tsx),
+	- Ensure your theme is categorized as light or dark,
+	- Construct available theme list, which will be used for page menu and banner display.
+- Modify environment variables: default theme code, default light code and default dark code.
+
+## Languages
+
+All the content can be found at [src/global-settings/i18n](src/global-settings/i18n).
+
+- `en-US` language override: `src/global-settings/i18n/en-US.ts`,
+- `zh-CN`: `src/global-settings/i18n/zh-CN.ts`.
+
+If additional internationalization content is needed, please modify the above file content. Or to add or modify internationalization
+support, please follow the steps below:
+
+- In addition to `en-US`, which is the default language for `rainbow-d9`, all others are custom languages. Please add a language file based
+  on the content of `zh-CN`.
+- Modify the [custom settings](src/global-settings/i18n/custom-settings.tsx),
+	- Construct available language list, which will be used for page menu and banner display.
+
+## Side menu
+
+All the content can be found at [src/global-settings/menu](src/global-settings/menu).
+
+Modify the [custom settings](src/global-settings/i18n/custom-settings.tsx) to build menus.
+
+## Default pages
+
+- [Authentication page](src/work-area/unauthenticated/authentication.tsx)
+- [No authentication page](src/work-area/unauthenticated/no-authentication.tsx)
+- [Home page](src/work-area/home/index.tsx)

@@ -1,7 +1,8 @@
+import {VUtils} from '@rainbow-d9/n1';
 import {IntlLabel} from '@rainbow-d9/n2';
 import DarkIcon from '../../assets/dark-theme.svg?react';
 import LightIcon from '../../assets/light-theme.svg?react';
-import {buildAvailableThemes} from './custom-settings';
+import {buildAvailableThemes, customToKind} from './custom-settings';
 import {AppTheme, ThemeCode, ThemeKind} from './types';
 
 /**
@@ -29,6 +30,10 @@ export const toKind = (code: ThemeCode) => {
 	const theme = askAvailableThemes().find(theme => theme.code === code);
 	if (theme != null) {
 		return theme.kind;
+	}
+	const kind = customToKind(code);
+	if (VUtils.isNotBlank(kind)) {
+		return kind;
 	}
 	switch (true) {
 		case code.toLowerCase().includes('dark'):

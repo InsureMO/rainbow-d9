@@ -1,5 +1,5 @@
 import {$d9n2, IntlLabel} from '@rainbow-d9/n2';
-import {buildAvailableLanguages} from './custom-settings';
+import {buildAvailableLanguages, buildIntlLabels} from './custom-settings';
 import {intlForAppEnUS} from './en-US';
 import {AppLanguage, LangCode} from './types';
 import {intlForAppZhCN, intlForN2ZhCN} from './zh-CN';
@@ -24,7 +24,9 @@ export const askAvailableLanguages = (): Array<AppLanguage> => {
 // add your own language labels here
 const {'en-US': enUs, 'zh-CN': zhCN, ...rest} = $d9n2.intl.labels;
 $d9n2.intl.labels = {
-	'en-US': {...enUs, ...intlForAppEnUS},
-	'zh-CN': {...zhCN, ...intlForN2ZhCN, ...intlForAppZhCN},
+	...buildIntlLabels({
+		'en-US': {...enUs, ...intlForAppEnUS},
+		'zh-CN': {...zhCN, ...intlForN2ZhCN, ...intlForAppZhCN}
+	}),
 	...rest
 };
