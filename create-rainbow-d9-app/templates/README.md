@@ -117,4 +117,4 @@ Modify the [custom settings](src/global-settings/i18n/custom-settings.tsx) to bu
 
 - [Authentication page](src/work-area/unauthenticated/authentication.tsx)
 - [No authentication page](src/work-area/unauthenticated/no-authentication.tsx)
-- [Home page](src/work-area/home/index.tsx)
+- [Home page](src/pages/home/page.tsx)

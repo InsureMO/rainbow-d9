@@ -21,13 +21,13 @@ const Container = styled.div.attrs({[DOM_KEY_WIDGET]: 'page-home'})`
     }
 `;
 
-export const Home = () => {
+export default () => {
 	return <GlobalRoot>
 		<I18NAndD9N2Bridge/>
 		<Container>
 			<div data-type="home">
 				<IntlLabel keys={['page.home']}
-				           value="Home page, modify /src/work-area/home/index.ts change the rendering behavior."/>
+				           value="Home page, modify src/pages/home/page.tsx change the rendering behavior."/>
 			</div>
 		</Container>
 	</GlobalRoot>;

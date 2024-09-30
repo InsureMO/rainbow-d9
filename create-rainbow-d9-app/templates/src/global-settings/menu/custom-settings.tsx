@@ -6,9 +6,11 @@ export const buildPreferencesMenuGroup = (preferences: AppMenuGroup, ...items: A
 };
 
 export const buildMenus = (options: {
+	beforeAll?: Array<AppMenuItem>,
 	preferences: AppMenuGroup
 }): Array<AppMenuItem | AppMenuGroup> => {
 	return [
+		...(options.beforeAll ?? []),
 		options.preferences
 	];
 };

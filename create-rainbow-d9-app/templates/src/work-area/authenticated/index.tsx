@@ -1,9 +1,9 @@
 import {Fragment, useEffect} from 'react';
 import {Navigate, Route, Routes, useNavigate} from 'react-router-dom';
 import {AppEventTypes, useAppEventBus} from '../../bootstrap';
+import {EntryPointPage, PageRegistrar} from '../../pages';
 import {isAuthenticated} from '../../services';
 import {getUnauthenticatedRoute} from '../../utils';
-import {Home} from '../home';
 
 const AuthenticationChangeHandler = () => {
 	const navigate = useNavigate();
@@ -23,6 +23,21 @@ const AuthenticationChangeHandler = () => {
 	return <Fragment/>;
 };
 
+const RouteSwitcher = () => {
+	const navigate = useNavigate();
+	const {on, off} = useAppEventBus();
+	useEffect(() => {
+		const onNavigatorTo = (route: string) => {
+			navigate(route);
+		};
+		on(AppEventTypes.NAVIGATE_TO, onNavigatorTo);
+		return () => {
+			off(AppEventTypes.NAVIGATE_TO, onNavigatorTo);
+		};
+	}, [on, off]);
+	return <Fragment/>;
+};
+
 export const Authenticated = () => {
 	if (!isAuthenticated()) {
 		return <Navigate to={getUnauthenticatedRoute()} replace={true}/>;
@@ -31,8 +46,13 @@ export const Authenticated = () => {
 	return <>
 		<AuthenticationChangeHandler/>
 		<Routes>
-			<Route path="/*" element={<Home/>}/>
+			{PageRegistrar.all().map(page => {
+				const Renderer = page.renderer;
+				return <Route path={page.route} element={<Renderer/>} key={page.code}/>;
+			})}
+			<Route path="/*" element={<EntryPointPage.renderer/>}/>
 		</Routes>
+		<RouteSwitcher/>
 	</>;
 };
 

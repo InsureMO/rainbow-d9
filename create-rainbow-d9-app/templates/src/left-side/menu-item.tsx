@@ -12,7 +12,6 @@ const Container = styled.div.attrs({[DOM_KEY_WIDGET]: 'app-side-menu-item'})`
     display: flex;
     position: relative;
     flex-direction: column;
-    flex-grow: 1;
 `;
 // noinspection CssUnresolvedCustomProperty
 const Label = styled.span.attrs<{ level: number }>(({level}) => {

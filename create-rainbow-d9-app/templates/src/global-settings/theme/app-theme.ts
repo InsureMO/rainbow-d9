@@ -72,7 +72,7 @@ export const createAppThemeStyles = (): AppThemeStyle => {
 			'side-menu-group-label-hover-color': `var(--app-side-menu-group-label-hover-color, ${variables.sideMenuGroupLabelHoverColor})`,
 			'side-menu-group-label-hover-background': `var(--app-side-menu-group-label-hover-background, ${variables.sideMenuGroupLabelHoverBackground})`,
 			'side-menu-item-border-radius': 'var(--app-side-menu-item-border-radius, 8px)',
-			'side-menu-item-label-height': 'var(--app-side-menu-item-label-height, 32px)',
+			'side-menu-item-label-height': 'var(--app-side-menu-item-label-height, 36px)',
 			'side-menu-item-label-color': `var(--app-side-menu-item-label-color, ${variables.sideMenuItemLabelColor})`,
 			'side-menu-item-label-font-size': `var(--app-side-menu-item-label-font-size, 1em)`,
 			'side-menu-item-label-font-weight': `var(--app-side-menu-item-label-font-weight, 400)`,

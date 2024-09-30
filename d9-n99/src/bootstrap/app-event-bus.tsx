@@ -17,7 +17,8 @@ export enum AppEventTypes {
 	SWITCH_I18N_SWITCHER_ENABLED = 'switch-i18n-switcher-enabled',
 	ASK_I18N_SWITCHER_ENABLED = 'ask-i18n-switcher-enabled',
 	SWITCH_SIDE_MENU_AND_BANNER_ENABLED = 'switch-side-menu-and-banner-enabled',
-	AUTHENTICATED_CHANGED = 'authenticated-changed'
+	AUTHENTICATED_CHANGED = 'authenticated-changed',
+	NAVIGATE_TO = 'navigate-to',
 }
 
 export interface SideMenuAndBannerEnablement {
@@ -86,6 +87,9 @@ export interface AppEventBus {
 	fire(type: AppEventTypes.AUTHENTICATED_CHANGED): this;
 	on(type: AppEventTypes.AUTHENTICATED_CHANGED, listener: () => void): this;
 	off(type: AppEventTypes.AUTHENTICATED_CHANGED, listener: () => void): this;
+	fire(type: AppEventTypes.NAVIGATE_TO, route: string): this;
+	on(type: AppEventTypes.NAVIGATE_TO, listener: (route: string) => void): this;
+	off(type: AppEventTypes.NAVIGATE_TO, listener: (route: string) => void): this;
 }
 
 const Context = createContext<AppEventBus>({} as AppEventBus);
