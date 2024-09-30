@@ -1,6 +1,5 @@
 import {ContainerDef, NodeDef, Undefinable, VUtils} from '@rainbow-d9/n1';
 import {PaginationDef, TableDef, TableHeaderDef, TableRowButtonDef} from '@rainbow-d9/n2';
-import {PLAYGROUND_WIDGET_WRAPPER} from '@rainbow-d9/n5';
 import {PreparsedListItem} from '../ast';
 import {ParsedNodeType} from '../node-types';
 import {ParsedList, ParsedListItemAttributePair, ParsedListItemKind, SemanticUtils, WidgetFlag} from '../semantic';
@@ -164,15 +163,15 @@ export class N2TableTranslator extends SpecificArrayWidgetTranslator<N2WidgetTyp
 		const {$nodes} = defs;
 		defs.rowOperators = (($nodes ?? [])
 			.find(node => {
-				return node.$wt === N2WidgetType.TABLE_ROW_OPERATORS || node.$wt === `${N2WidgetType.TABLE_ROW_OPERATORS}.${PLAYGROUND_WIDGET_WRAPPER}`;
+				return node.$wt === N2WidgetType.TABLE_ROW_OPERATORS || node.$wt.startsWith(`${N2WidgetType.TABLE_ROW_OPERATORS}.`);
 			}) as ContainerDef)?.$nodes as Array<TableRowButtonDef>;
 		defs.pageable = (($nodes ?? [])
 			.find(node => {
-				return node.$wt === N2WidgetType.PAGINATION || node.$wt === `${N2WidgetType.PAGINATION}.${PLAYGROUND_WIDGET_WRAPPER}`;
+				return node.$wt === N2WidgetType.PAGINATION || node.$wt.startsWith(`${N2WidgetType.PAGINATION}.`);
 			}) as ContainerDef) as PaginationDef;
 		defs.$nodes = ($nodes ?? []).filter(node => {
-			return node.$wt !== N2WidgetType.TABLE_ROW_OPERATORS && node.$wt !== `${N2WidgetType.TABLE_ROW_OPERATORS}.${PLAYGROUND_WIDGET_WRAPPER}`
-				&& node.$wt !== N2WidgetType.PAGINATION && node.$wt !== `${N2WidgetType.PAGINATION}.${PLAYGROUND_WIDGET_WRAPPER}`;
+			return node.$wt !== N2WidgetType.TABLE_ROW_OPERATORS && !node.$wt.startsWith(`${N2WidgetType.TABLE_ROW_OPERATORS}.`)
+				&& node.$wt !== N2WidgetType.PAGINATION && !node.$wt.startsWith(`${N2WidgetType.PAGINATION}.`);
 		});
 		return defs as unknown as Def;
 	}
