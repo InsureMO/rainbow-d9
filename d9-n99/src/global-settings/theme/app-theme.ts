@@ -113,7 +113,9 @@ export const createAppThemeStyles = (): AppThemeStyle => {
 			'banner-button-menu-item-lang-emoji-margin': 'var(--app-banner-button-menu-item-lang-emoji-margin, 0)',
 			// work area
 			'work-area-background': `var(--app-work-area-background, ${variables.workAreaBackground})`,
-			// pages, authentication
+			// page, standard
+			'page-padding': 'var(--app-page-padding, 32px)',
+			// page, authentication
 			'authentication-min-width': 'var(--page-authentication-min-width, min(60vw, 600px))',
 			'authentication-border': 'var(--page-authentication-border, var(--d9-border))',
 			'authentication-border-radius': 'var(--page-authentication-border-radius, 12px)',
@@ -122,6 +124,7 @@ export const createAppThemeStyles = (): AppThemeStyle => {
 			'authentication-title-font-size': 'var(--page-authentication-title-font-size, 20px)',
 			'authentication-title-font-weight': 'var(--page-authentication-title-font-weight, 400)',
 			'no-authentication-font-size': 'var(--page-no-authentication-font-size, 24px)',
+			// page, home
 			'home-font-size': 'var(--page-home-font-size, 24px)'
 		};
 	};

@@ -1,3 +1,5 @@
+import {ObjectPropValue} from '@rainbow-d9/n1';
+import {ParsedNodeDef} from '@rainbow-d9/n3';
 import {FC} from 'react';
 
 export interface AppPage {
@@ -13,4 +15,11 @@ export interface AppPage {
 	 */
 	menuItemCode?: string;
 	renderer: FC;
+}
+
+export type D9PageUIConfig = Omit<ParsedNodeDef, 'exportKey'>;
+
+export interface D9PageState {
+	$config: D9PageUIConfig;
+	$root: ObjectPropValue;
 }

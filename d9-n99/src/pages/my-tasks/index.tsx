@@ -1,9 +1,9 @@
-import {FC, lazy} from 'react';
+import {lazy} from 'react';
 import {LazyPageWrapper} from '../lazy-page-wrapper';
 import {PageRegistrar} from '../registrar';
 import {AppPage} from '../types';
 
-const MyTasksIndex: FC = LazyPageWrapper(lazy(() => import('./page')));
+const MyTasksIndex = LazyPageWrapper(lazy(() => import('./page')));
 
 export const MyTasksPage: AppPage = {
 	code: 'my-tasks',

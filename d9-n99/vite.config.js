@@ -24,12 +24,33 @@ export default ({mode}) => {
 			}
 		}
 	};
+	const d9MarkdownPlugin = () => {
+		const include = (void 0);
+		const exclude = (void 0);
+		const filter = createFilter(include, exclude);
+		return {
+			name: 'vite:transform-d9',
+			enforce: 'pre',
+			async transform(code, id) {
+				if (/\.d9$/.test(id)) {
+					// Filters the filesystem for files to include/exclude. Includes all files by default.
+
+					if (!filter(id)) {
+						return null;
+					}
+					return {code: `const markdown = ${JSON.stringify(code)};\nexport {markdown};`}
+				}
+				return null;
+			}
+		}
+	};
+
 	return defineConfig({
 		define: {
 			'process.env': {...process.env, ...loadEnv(mode, process.cwd())}
 		},
 		plugins: [
-			markdownPlugin(),
+			markdownPlugin(), d9MarkdownPlugin(),
 			react(),
 			svgr()
 		],

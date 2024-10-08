@@ -1,0 +1,10 @@
+# Page
+
+## Section::
+
+- Dropdown::Category::category
+	- options: @ext.codes.taskCategories
+	- please: Any
+- Dropdown::Priority::priority
+	- options: @ext.codes.taskPriorities
+	- please: Any
