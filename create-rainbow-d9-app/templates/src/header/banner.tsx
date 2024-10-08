@@ -3,6 +3,7 @@ import {useEffect, useState} from 'react';
 import styled from 'styled-components';
 import {AppEventTypes, I18NAndD9N2Bridge, useAppEventBus, useAuthenticatedChanged} from '../bootstrap';
 import {isAuthenticated} from '../services';
+import {isBannerSpaceGrabberEnabled} from '../utils';
 import {I18NSwitcher} from './i18n-switcher';
 import {LogoutButton} from './logout-button';
 import {ThemeSwitcher} from './theme-switcher';
@@ -26,7 +27,7 @@ const Container = styled.div.attrs({[DOM_KEY_WIDGET]: 'app-banner'})`
     > span[data-type=space-grabber] {
         flex-grow: 1;
 
-        &[data-authenticated=true] {
+        &[data-visible=false] {
             display: none;
         }
     }
@@ -38,7 +39,7 @@ export const BannerContainer = () => {
 	return <GlobalRoot>
 		<I18NAndD9N2Bridge/>
 		<Container>
-			<span data-type="space-grabber" data-authenticated={isAuthenticated()}/>
+			<span data-type="space-grabber" data-visible={isBannerSpaceGrabberEnabled() || !isAuthenticated()}/>
 			<I18NSwitcher/>
 			<ThemeSwitcher/>
 			<UserProfile/>

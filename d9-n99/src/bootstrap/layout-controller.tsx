@@ -31,7 +31,7 @@ const LayoutController = styled.div.attrs({[DOM_KEY_WIDGET]: 'app-frame-layout-c
 
     + div[data-w=app-frame] {
         > div[data-w=app-banner] + div[data-w=app-work-area] {
-            margin-top: var(--app-banner-height);
+            padding-top: var(--app-banner-height);
         }
     }
 
