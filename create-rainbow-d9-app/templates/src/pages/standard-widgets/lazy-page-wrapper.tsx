@@ -44,7 +44,7 @@ export interface PreloadedPageProps<AssistantData = any> extends PreloaderFuncOp
 	/** init root model */
 	initRootModel?: ObjectPropValue;
 	/** assistant data for ui usage, could be anything */
-	assistantData?: PreloaderFunc<AssistantData>;
+	assistantData?: AssistantData;
 }
 
 export type PreloaderFunc<T> = (options: PreloaderFuncOptions) => Promise<T>;
@@ -82,8 +82,9 @@ export interface PagePropsApartPreloader<AssistantData = any> extends PagePropsA
 	orderBy?: Array<Array<keyof PagePropsApartPreloaderFuncs>>;
 }
 
-export type PagePropsWholePreloader = () => Promise<PreloadedPageProps>;
-export type PagePropsPreloader = PagePropsApartPreloader | PagePropsWholePreloader;
+export type PagePropsWholePreloader<AssistantData = any> = () => Promise<PreloadedPageProps<AssistantData>>;
+export type PagePropsPreloader<AssistantData = any> =
+	PagePropsApartPreloader<AssistantData> | PagePropsWholePreloader<AssistantData>;
 
 export interface PreloadedLazyPageWrapperState extends PreloadedPageProps {
 	initialized: boolean;
@@ -100,7 +101,10 @@ const wrap = <T = any>(preloader?: PreloaderFunc<T>): { run: PreloaderFunc<T> | 
 	}
 };
 
-export const PreloadedLazyPageWrapper = (LazyComponent: LazyExoticComponent<(props: PreloadedPageProps) => JSX.Element>, preloader: PagePropsPreloader): (() => JSX.Element) => {
+export const PreloadedLazyPageWrapper = <AssistantData = any>(
+	LazyComponent: LazyExoticComponent<(props: PreloadedPageProps<AssistantData>) => JSX.Element>,
+	preloader: PagePropsPreloader<AssistantData>
+): (() => JSX.Element) => {
 	return () => {
 		const location = useLocation();
 		const pathParams = useParams();
@@ -133,8 +137,9 @@ export const PreloadedLazyPageWrapper = (LazyComponent: LazyExoticComponent<(pro
 						const orderBy: Exclude<PagePropsApartPreloader['orderBy'], undefined> = preloader.orderBy ?? [['ui', 'initRootModel', 'assistantData']];
 						await orderBy.reduce<Promise<PreloaderFuncOptions>>(async (options, keys) => {
 							const thisOptions = await options;
-							await Promise.all(keys.map(async (key) => {
+							await Promise.all(keys.map(async key => {
 								// shallow clone to make sure each preloader function has its own copy
+								// @ts-ignore
 								props[key] = await wrap(preloader[key]).run({...thisOptions});
 							}));
 							return props;

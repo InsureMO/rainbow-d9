@@ -40,7 +40,8 @@ export const intlForAppZhCN = {
 	menus: {
 		preferences: '使用偏好', language: '语言', theme: '颜色主题',
 		// default menus, remove if not needed
-		home: '首页', 'my-tasks': '待办事项'
+		home: '首页',
+		tasks: '任务', 'tasks-1': '任务 - 自治方式', 'tasks-2': '任务 - 预加载'
 	},
 	dropdown: {
 		placeholder: {all: '所有...', any: '任何...'}

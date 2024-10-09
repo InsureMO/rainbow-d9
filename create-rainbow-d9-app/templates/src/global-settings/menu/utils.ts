@@ -8,12 +8,16 @@ export const isMenuItem = (menu: AppMenu): menu is AppMenuItem => menu.type === 
 export const buildMenuItemForRoute = (item: Omit<AppMenuItem, 'type' | 'click'>): AppMenuItem => {
 	const page = PageRegistrar.findPageByMenuCode(item.code);
 	if (page == null) {
-		throw new Error(`Page not found by menu code[${item.code}].`);
+		console.error(`Page not found by menu code[${item.code}].`);
 	}
 
 	return {
 		...item, type: AppMenuType.ITEM, click: async (fire) => {
-			fire(AppEventTypes.NAVIGATE_TO, page.route);
+			if (page == null) {
+				console.error(`Page not found by menu code[${item.code}].`);
+			} else {
+				fire(AppEventTypes.NAVIGATE_TO, page.route);
+			}
 		}
 	};
 };

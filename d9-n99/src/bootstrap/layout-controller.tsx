@@ -53,6 +53,19 @@ const LayoutController = styled.div.attrs({[DOM_KEY_WIDGET]: 'app-frame-layout-c
                     }
                 }
             }
+
+            > div[data-w=app-side-menu-footer] {
+                > button[data-id=app-side-menu-logout] {
+                    padding: 0;
+
+                    > span[data-role=text] {
+                        margin-left: 0;
+                        width: 0;
+                        opacity: 0;
+                        transition: all .3s ease-in-out;
+                    }
+                }
+            }
         }
 
         > div[data-w=app-banner] {

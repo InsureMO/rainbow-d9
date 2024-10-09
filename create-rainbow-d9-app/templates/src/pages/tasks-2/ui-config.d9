@@ -1,0 +1,10 @@
+# Page
+
+## Section::tasks-2.criteria.title::criteria
+
+- Dropdown::tasks-2.criteria.category::category
+	- options: @ext.codes.taskCategories
+	- please: dropdown.placeholder.all
+- Dropdown::tasks-2.criteria.priority::priority
+	- options: @ext.codes.taskPriorities
+	- please: dropdown.placeholder.any

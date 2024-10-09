@@ -49,6 +49,7 @@ export const SideMenuFooter = () => {
 	};
 	return <Container>
 		<UnwrappedButton
+			data-id="app-side-menu-logout"
 			tails={[<LogoutIcon/>]}
 			onClick={onLogoutClick}>
 			<IntlLabel keys={['actions.logout.label']} value="Logout"/>

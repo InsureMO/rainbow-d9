@@ -1,6 +1,6 @@
 import {registerPageIntlLabels} from '../../global-settings';
 
-registerPageIntlLabels('my-tasks')
+registerPageIntlLabels('tasks-2')
 	.lang('en-US')
 	.labels({
 		criteria: {title: 'Filter by...', category: 'Category', priority: 'Priority'}

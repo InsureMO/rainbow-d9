@@ -1,7 +1,9 @@
+// sample pages, remove them if not needed
 import './home';
-import './my-tasks';
+import './tasks-1';
+import './tasks-2';
 
+// export
 export * from './types';
-export * from './standard-widgets/lazy-page-wrapper.tsx';
 export * from './entrypoint-page';
 export * from './registrar';

@@ -24,5 +24,10 @@ export const getUnauthenticatedRoute = (): string => import.meta.env.VITE_UNAUTH
 // authentication
 export const isAuthenticationEnabled = () => import.meta.env.VITE_AUTHENTICATION_ENABLED !== 'false';
 export const isAuthentication2FAEnabled = () => isAuthenticationEnabled() && import.meta.env.VITE_AUTHENTICATION_2FA_ENABLED === 'true';
+// data, remote
+export const isForceServiceUrlPrefix = () => import.meta.env.VITE_FORCE_SERVICE_URL_PREFIX === 'true';
+export const getServiceUrlPrefix = () => import.meta.env.VITE_SERVICE_URL_PREFIX || '/';
+export const getServiceUrlContext = () => import.meta.env.VITE_SERVICE_CONTEXT || '/';
+export const getDefaultPageSize = () => Number(import.meta.env.VITE_DEFAULT_PAGE_SIZE) || 20;
 // mock
 export const isMockEnabled = () => import.meta.env.VITE_MOCK_ENABLED === 'true';
