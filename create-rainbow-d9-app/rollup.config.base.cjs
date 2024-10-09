@@ -20,7 +20,7 @@ exports.buildConfig = (lint) => {
 			del({targets: 'index.d.ts', hook: 'writeBundle'}),
 			copy({
 				targets: [
-					{src: '../d9-n99/public/*', dest: 'templates/envs'},
+					{src: '../d9-n99/public/*', dest: 'templates/public'},
 					{src: '../d9-n99/src/*', dest: 'templates/src'},
 					{src: '../d9-n99/.env', dest: 'templates'},
 					{src: '../d9-n99/.eslintrc.cjs', dest: 'templates'},
