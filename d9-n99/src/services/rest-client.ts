@@ -113,7 +113,7 @@ const request = async <B>(options: {
 				// eslint-disable-next-line
 				throw {status: 0, message: 'Client error.'};
 			}
-			if (VUtils.isNotBlank(data.responseCode) && data.responseCode !== ResponseReturnCode.SUCCESS) {
+			if (VUtils.isNotBlank(data.returnCode) && data.returnCode !== ResponseReturnCode.SUCCESS) {
 				// eslint-disable-next-line
 				throw {status: 500, message: 'Internal server error.'};
 			} else {
@@ -163,12 +163,12 @@ const request = async <B>(options: {
 	}
 };
 
-export const get = async <B>(options: { api: string; search?: Record<string, any>; auth?: boolean }): Promise<B> => {
+const get = async <B>(options: { api: string; search?: Record<string, any>; auth?: boolean }): Promise<B> => {
 	const {api, search, auth} = options;
 	return (await request({api, method: 'GET', search, auth})).body as B;
 };
 
-export const post = async <B>(options: {
+const post = async <B>(options: {
 	api: string;
 	headers?: Record<string, string>;
 	search?: Record<string, any>;
@@ -179,7 +179,7 @@ export const post = async <B>(options: {
 	return (await request({api, method: 'POST', headers, search, auth, data})).body as B;
 };
 
-export const postRaw = async <R>(options: {
+const postRaw = async <R>(options: {
 	api: string;
 	headers?: Record<string, string>;
 	search?: Record<string, any>;
@@ -190,7 +190,7 @@ export const postRaw = async <R>(options: {
 	return (await request({api, method: 'POST', headers, search, auth, data})) as R;
 };
 
-export const page = async <I>(options: {
+const page = async <I>(options: {
 	api: string;
 	search?: Record<string, any>;
 	auth?: boolean;
@@ -204,4 +204,20 @@ export const page = async <I>(options: {
 	})).body as Page<I>;
 };
 
-export const APIS = {};
+const APIS = {
+	AUTH_BY_PWD: 'auth/by-pwd',
+	AUTH_BY_2FA: 'auth/by-2fa'
+};
+
+export class RestClient {
+	private constructor() {
+	}
+
+	static get = get;
+	static post = post;
+	static postRaw = postRaw;
+	static page = page;
+	static APIS: Readonly<typeof APIS> = APIS;
+}
+
+export const RC = RestClient;

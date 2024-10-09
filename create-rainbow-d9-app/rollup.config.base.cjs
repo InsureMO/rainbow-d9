@@ -23,6 +23,7 @@ exports.buildConfig = (lint) => {
 					{src: '../d9-n99/public/*', dest: 'templates/public'},
 					{src: '../d9-n99/src/*', dest: 'templates/src'},
 					{src: '../d9-n99/.env', dest: 'templates'},
+					{src: '../d9-n99/.env.local', dest: 'templates'},
 					{src: '../d9-n99/.eslintrc.cjs', dest: 'templates'},
 					{src: '../d9-n99/index.html', dest: 'templates'},
 					{src: '../d9-n99/package.json', dest: 'templates'},
