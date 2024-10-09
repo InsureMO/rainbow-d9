@@ -1,6 +1,6 @@
 import {lazy} from 'react';
-import {LazyPageWrapper} from '../lazy-page-wrapper';
 import {PageRegistrar} from '../registrar';
+import {LazyPageWrapper} from '../standard-widgets';
 import {AppPage} from '../types';
 import './intl-labels';
 

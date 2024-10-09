@@ -38,8 +38,9 @@ export const intlForAppZhCN = {
 	theme: {light: '浅色主题', dark: '深色主题', system: '跟随系统'},
 	i18n: {'en-US': '英文', 'zh-CN': '简体中文'},
 	menus: {
-		home: '首页', 'my-tasks': '待办事项',
-		preferences: '使用偏好', language: '语言', theme: '颜色主题'
+		preferences: '使用偏好', language: '语言', theme: '颜色主题',
+		// default menus, remove if not needed
+		home: '首页', 'my-tasks': '待办事项'
 	},
 	dropdown: {
 		placeholder: {all: '所有...', any: '任何...'}

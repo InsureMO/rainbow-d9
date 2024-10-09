@@ -1,7 +1,7 @@
 import {FC, lazy} from 'react';
 import {getHomeRoute} from '../../utils';
-import {LazyPageWrapper} from '../lazy-page-wrapper';
 import {PageRegistrar} from '../registrar';
+import {LazyPageWrapper} from '../standard-widgets/lazy-page-wrapper.tsx';
 import {AppPage} from '../types';
 
 const HomeIndex: FC = LazyPageWrapper(lazy(() => import('./page')));
