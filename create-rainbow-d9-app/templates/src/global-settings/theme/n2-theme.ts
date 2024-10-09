@@ -44,17 +44,26 @@ export const createN2ThemeStyles = (): AppThemeStyle => {
 	};
 	// @ts-ignore
 	const N2DarkTheme = createN2CssVars(N2DarkConstants);
+	const CommonOverrideStyles = {
+		FONT_VARIANT: 'var(--d9-font-variant, none)',
+		CAPTION_FONT_FAMILY: 'var(--d9-caption-font-family, "Roboto")',
+		SECTION_HEADER_TITLE_FONT_SIZE: 'var(--d9-section-header-title-font-size, 18px)',
+		SECTION_HEADER_TITLE_FONT_WEIGHT: 'var(--d9-section-header-title-font-weight, 400)',
+		SECTION_HEADER_BORDER: 'var(--d9-section-header-border, var(--d9-border))'
+	};
 
 	return {
 		light: createCss({
 			ACTIVE_COLOR: 'var(--d9-active-color, rgb(218,223,232))',
 			...N2LightTheme,
-			FONT_VARIANT: 'var(--d9-font-variant, none)'
+			// override part of N2 theme
+			...CommonOverrideStyles
 		}),
 		dark: createCss({
 			ACTIVE_COLOR: 'var(--d9-active-color, rgb(118,123,132))',
 			...N2DarkTheme,
-			FONT_VARIANT: 'var(--d9-font-variant, none)'
+			// override part of N2 theme
+			...CommonOverrideStyles
 		})
 	};
 };

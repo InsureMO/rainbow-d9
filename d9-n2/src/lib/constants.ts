@@ -6,7 +6,7 @@ export const DOM_ID_WIDGET = 'data-wid';
 export const ICON_PREFIX = '$icons.';
 
 export const CssConstants = {
-	FONT_FAMILY: 'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Tahoma", "Verdana", "Arial"',
+	FONT_FAMILY: '"system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Tahoma, Verdana, Arial"',
 	FONT_COLOR: 'rgb(102,102,102)',
 	BG_COLOR: 'rgb(255,255,255)',
 	PRIMARY_COLOR: 'rgb(13,110,253)',

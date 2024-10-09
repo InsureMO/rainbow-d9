@@ -1,3 +1,5 @@
 {
-	"priority": "high"
+	"criteria": {
+		"priority": "high"
+	}
 }

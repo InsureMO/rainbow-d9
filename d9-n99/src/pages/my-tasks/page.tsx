@@ -9,6 +9,7 @@ import InitRootModel from './init-root.json';
 import {markdown} from './ui-config.d9';
 
 type CodesNames = 'taskCategories' | 'taskPriorities';
+
 export default () => {
 	const [state] = useState<D9PageState>(() => {
 		return {

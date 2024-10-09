@@ -1,10 +1,10 @@
 # Page
 
-## Section::
+## Section::my-tasks.criteria.title::criteria
 
-- Dropdown::Category::category
+- Dropdown::my-tasks.criteria.category::category
 	- options: @ext.codes.taskCategories
-	- please: Any
-- Dropdown::Priority::priority
+	- please: dropdown.placeholder.all
+- Dropdown::my-tasks.criteria.priority::priority
 	- options: @ext.codes.taskPriorities
-	- please: Any
+	- please: dropdown.placeholder.any

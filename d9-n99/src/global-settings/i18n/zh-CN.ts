@@ -41,6 +41,9 @@ export const intlForAppZhCN = {
 		home: '首页', 'my-tasks': '待办事项',
 		preferences: '使用偏好', language: '语言', theme: '颜色主题'
 	},
+	dropdown: {
+		placeholder: {all: '所有...', any: '任何...'}
+	},
 	page: {
 		authentication: {
 			title: '欢迎',

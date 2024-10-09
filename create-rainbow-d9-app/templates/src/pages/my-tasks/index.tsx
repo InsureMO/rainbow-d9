@@ -2,6 +2,7 @@ import {lazy} from 'react';
 import {LazyPageWrapper} from '../lazy-page-wrapper';
 import {PageRegistrar} from '../registrar';
 import {AppPage} from '../types';
+import './intl-labels';
 
 const MyTasksIndex = LazyPageWrapper(lazy(() => import('./page')));
 

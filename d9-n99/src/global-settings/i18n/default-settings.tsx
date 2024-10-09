@@ -1,4 +1,4 @@
-import {$d9n2, IntlLabel} from '@rainbow-d9/n2';
+import {$d9n2, $D9N2I18NLabels, IntlLabel} from '@rainbow-d9/n2';
 import {buildAvailableLanguages, buildIntlLabels} from './custom-settings';
 import {intlForAppEnUS} from './en-US';
 import {AppLanguage, LangCode} from './types';
@@ -30,3 +30,40 @@ $d9n2.intl.labels = {
 	}),
 	...rest
 };
+
+/**
+ * be careful, don't replace the exists labels unless you know what you are doing
+ */
+const registerIntlLabels = (pageKey: string, lang: LangCode, labels: $D9N2I18NLabels) => {
+	let pack = $d9n2.intl.labels[lang];
+	if (pack == null) {
+		pack = {};
+		$d9n2.intl.labels[lang] = pack;
+	}
+	pack[pageKey] = labels;
+};
+
+class IntlLabelsRegistrarForPageAndLang {
+	constructor(private forPage: IntlLabelsRegistrarForPage, private langCode: LangCode) {
+	}
+
+	public labels(labels: $D9N2I18NLabels) {
+		registerIntlLabels(this.forPage.pageKey, this.langCode, labels);
+		return this.forPage;
+	}
+}
+
+class IntlLabelsRegistrarForPage {
+	constructor(public pageKey: string) {
+	}
+
+	public lang(langCode: LangCode) {
+		return new IntlLabelsRegistrarForPageAndLang(this, langCode);
+	}
+}
+
+export const registerPageIntlLabels = (pageKey: string): IntlLabelsRegistrarForPage => {
+	return new IntlLabelsRegistrarForPage(pageKey);
+};
+
+
