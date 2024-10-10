@@ -1,5 +1,5 @@
 import {useThrottler} from '@rainbow-d9/n1';
-import {DOM_KEY_WIDGET} from '@rainbow-d9/n2';
+import {DOM_KEY_WIDGET, toIntlLabel} from '@rainbow-d9/n2';
 import {useEffect, useRef, useState} from 'react';
 import styled from 'styled-components';
 import ArrowIcon from '../assets/single-arrow-down.svg?react';
@@ -252,7 +252,7 @@ export const MenuGroup = (props: MenuGroupProps) => {
 	return <Container data-expanded={state.expanded} data-visible={state.visible} ref={ref}>
 		<Label level={level} data-expanded={state.expanded} onClick={onGroupLabelClicked}>
 			<span data-type="icon">{icon}</span>
-			<span data-type="text">{text}</span>
+			<span data-type="text">{toIntlLabel(text)}</span>
 			<span data-type="arrow"><ArrowIcon/></span>
 		</Label>
 		<Items data-expanded={state.expanded} height={state.height} ref={itemsRef}>

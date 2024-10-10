@@ -1,11 +1,8 @@
-import {useForceUpdate, VUtils} from '@rainbow-d9/n1';
-
-// noinspection CssUnresolvedCustomProperty
+import {VUtils} from '@rainbow-d9/n1';
 import {DOM_KEY_WIDGET, toIntlLabel} from '@rainbow-d9/n2';
 import {useEffect, useState} from 'react';
 import styled from 'styled-components';
-import {AppEventTypes, useAppEventBus} from '../bootstrap';
-import {BannerBreadcrumb} from '../bootstrap/app-event-bus';
+import {AppEventTypes, BannerBreadcrumb, useAppEventBus, useAuthenticatedChanged} from '../bootstrap';
 import {isAuthenticated} from '../services';
 import {isBannerBreadcrumbEnabled} from '../utils';
 
@@ -72,18 +69,13 @@ interface BreadcrumbState extends Partial<BannerBreadcrumb> {
 export const Breadcrumb = () => {
 	const {on, off, fire} = useAppEventBus();
 	const [state, setState] = useState<BreadcrumbState>({exists: false});
-	const forceUpdate = useForceUpdate();
+	useAuthenticatedChanged();
 	useEffect(() => {
-		const onAuthenticatedChanged = () => {
-			forceUpdate();
-		};
 		const onBreadcrumbChanged = (breadcrumb?: BannerBreadcrumb) => {
 			setState({exists: !!breadcrumb, ...breadcrumb});
 		};
-		on(AppEventTypes.AUTHENTICATED_CHANGED, onAuthenticatedChanged);
 		on(AppEventTypes.BREADCRUMB_CHANGED, onBreadcrumbChanged);
 		return () => {
-			off(AppEventTypes.AUTHENTICATED_CHANGED, onAuthenticatedChanged);
 			off(AppEventTypes.BREADCRUMB_CHANGED, onBreadcrumbChanged);
 		};
 	}, []);

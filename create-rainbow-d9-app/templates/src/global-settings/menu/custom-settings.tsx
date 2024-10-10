@@ -1,8 +1,4 @@
-import {IntlLabel} from '@rainbow-d9/n2';
-import HomeIcon from '../../assets/home.svg?react';
-import TasksIcon from '../../assets/tasks.svg?react';
-import {AppMenuGroup, AppMenuItem, AppMenuType} from './types';
-import {buildMenuItemForRoute} from './utils';
+import {AppMenuGroup, AppMenuItem} from './types';
 
 export const buildPreferencesMenuGroup = (preferences: AppMenuGroup, ...items: Array<AppMenuItem | AppMenuGroup>): AppMenuGroup => {
 	preferences.items = items ?? [];
@@ -10,33 +6,35 @@ export const buildPreferencesMenuGroup = (preferences: AppMenuGroup, ...items: A
 	return preferences;
 };
 
-const buildSampleMenus = () => {
-	return [
-		buildMenuItemForRoute({
-			code: 'home', icon: <HomeIcon/>, text: <IntlLabel keys={['menus.home']} value={'Home'}/>
-		}),
-		{
-			code: 'tasks', type: AppMenuType.GROUP,
-			icon: <TasksIcon/>, text: <IntlLabel keys={['menus.tasks']} value="Tasks"/>,
-			items: [
-				buildMenuItemForRoute({
-					code: 'tasks-1',
-					icon: <TasksIcon/>, text: <IntlLabel keys={['menus.tasks-1']} value={'Tasks - Self-governed'}/>
-				}),
-				buildMenuItemForRoute({
-					code: 'tasks-2',
-					icon: <TasksIcon/>, text: <IntlLabel keys={['menus.tasks-2']} value={'Tasks - Preload'}/>
-				})
-			]
-		} as AppMenuGroup
-	];
-};
+class MenuRegistrar {
+	private static menus: Array<[AppMenuItem | AppMenuGroup, number]> = [];
+
+	private constructor() {
+	}
+
+	public static register(menu: AppMenuItem | AppMenuGroup, index: number) {
+		const foundIndex = MenuRegistrar.menus.findIndex(([exists]) => exists.code === menu.code);
+		if (foundIndex !== -1) {
+			MenuRegistrar.menus.splice(foundIndex, 1, [menu, index]);
+		} else {
+			MenuRegistrar.menus.push([menu, index]);
+		}
+	}
+
+	public static getMenus(): Array<AppMenuItem | AppMenuGroup> {
+		return MenuRegistrar.menus
+			.sort(([, index1], [, index2]) => index1 - index2)
+			.map(([menu]) => menu);
+	}
+}
+
+export const Menus = {register: MenuRegistrar.register};
 
 export const buildMenus = (options: {
 	preferences: AppMenuGroup
 }): Array<AppMenuItem | AppMenuGroup> => {
 	return [
-		...buildSampleMenus(),
+		...MenuRegistrar.getMenus(),
 		options.preferences
 	];
 };

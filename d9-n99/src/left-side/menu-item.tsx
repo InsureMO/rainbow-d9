@@ -1,4 +1,4 @@
-import {DOM_KEY_WIDGET} from '@rainbow-d9/n2';
+import {DOM_KEY_WIDGET, toIntlLabel} from '@rainbow-d9/n2';
 import styled from 'styled-components';
 import {useAppEventBus} from '../bootstrap';
 import {AppMenuItem} from '../global-settings';
@@ -87,7 +87,7 @@ export const MenuItem = (props: MenuItemProps) => {
 	return <Container data-visible={true}>
 		<Label level={level} onClick={onLabelClicked}>
 			<span data-type="icon">{icon}</span>
-			<span data-type="text">{text}</span>
+			<span data-type="text">{toIntlLabel(text)}</span>
 		</Label>
 	</Container>;
 };

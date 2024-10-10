@@ -3,7 +3,7 @@ import {AlertLabel, GlobalEventBus, GlobalEventTypes, GlobalRoot, IntlLabel, use
 import {parseDoc} from '@rainbow-d9/n3';
 import {JSX, useEffect, useState} from 'react';
 import {I18NAndD9N2Bridge} from '../../bootstrap';
-import {D9PageState} from '../types';
+import {D9PageState} from '../../global-settings/pages/types.ts';
 import {StandardPageWrapper} from './standard-page-wrapper';
 
 export type D9PageExternalDefsCreatorGlobalEventBus = Omit<GlobalEventBus, 'on' | 'off'>

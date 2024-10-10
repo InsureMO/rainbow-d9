@@ -205,14 +205,18 @@ const page = async <I>(options: {
 };
 
 const APIS = {
+	// auth services
 	AUTH_BY_PWD: 'auth/by-pwd',
-	AUTH_BY_2FA: 'auth/by-2fa'
+	AUTH_BY_2FA: 'auth/by-2fa',
+	// fundamental services
+	ASK_CODE_TABLE: 'ask/code-table/:code'
 };
 
 export class RestClient {
 	private constructor() {
 	}
 
+	static buildApi = buildApi;
 	static get = get;
 	static post = post;
 	static postRaw = postRaw;

@@ -1,7 +1,8 @@
 import {Fragment, useEffect} from 'react';
 import {Navigate, Route, Routes, useNavigate} from 'react-router-dom';
 import {AppEventTypes, useAppEventBus} from '../../bootstrap';
-import {EntryPointPage, PageRegistrar} from '../../pages';
+import {PageRegistrar} from '../../global-settings';
+import {EntryPointPage} from '../../pages';
 import {isAuthenticated} from '../../services';
 import {getUnauthenticatedRoute} from '../../utils';
 import {BreadcrumbCorrespondent} from './breadcrumb-correspondent';

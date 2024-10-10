@@ -1,5 +1,5 @@
 import {ReactNode} from 'react';
-import {AppEventBus} from '../../bootstrap/app-event-bus';
+import {AppEventBus} from '../../bootstrap';
 
 export enum AppMenuType {
 	GROUP = 'group', ITEM = 'item'
