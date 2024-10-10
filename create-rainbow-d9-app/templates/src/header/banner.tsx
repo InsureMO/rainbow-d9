@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import {AppEventTypes, I18NAndD9N2Bridge, useAppEventBus, useAuthenticatedChanged} from '../bootstrap';
 import {isAuthenticated} from '../services';
 import {isBannerSpaceGrabberEnabled} from '../utils';
+import {Breadcrumb} from './breadcrumb';
 import {I18NSwitcher} from './i18n-switcher';
 import {LogoutButton} from './logout-button';
 import {ThemeSwitcher} from './theme-switcher';
@@ -39,6 +40,7 @@ export const BannerContainer = () => {
 	return <GlobalRoot>
 		<I18NAndD9N2Bridge/>
 		<Container>
+			<Breadcrumb/>
 			<span data-type="space-grabber" data-visible={isBannerSpaceGrabberEnabled() || !isAuthenticated()}/>
 			<I18NSwitcher/>
 			<ThemeSwitcher/>

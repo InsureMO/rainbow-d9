@@ -10,6 +10,10 @@ export const Tasks1Page: AppPage = {
 	code: 'tasks-1',
 	route: '/tasks-1',
 	menuItemCode: 'tasks-1',
+	breadcrumb: {
+		title: 'Tasks - Self-governed',
+		locations: ['Home', 'Tasks']
+	},
 	renderer: Tasks1Index
 };
 

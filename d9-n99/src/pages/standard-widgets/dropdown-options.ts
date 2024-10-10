@@ -13,7 +13,9 @@ export const createDropdownOptionsProvider = <Keys extends string = string>(stat
 			if (staticProvider?.[prop] != null) {
 				return staticProvider[prop];
 			}
-			return () => Promise.resolve({items: []});
+			return async () => {
+
+			};
 		}
 	});
 };

@@ -38,6 +38,10 @@ export const Tasks2Page: AppPage = {
 	code: 'tasks-2',
 	route: '/tasks-2',
 	menuItemCode: 'tasks-2',
+	breadcrumb: {
+		title: 'Tasks - Preload',
+		locations: ['Home']
+	},
 	renderer: Tasks2Index
 };
 

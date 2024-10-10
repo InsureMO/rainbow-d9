@@ -12,6 +12,7 @@ export const getDefaultLangCode = () => import.meta.env.VITE_I18N_DEFAULT_CODE |
 // side menu and banner
 export const isSideMenuEnabled = () => import.meta.env.VITE_DISABLE_SIDE_MENU !== 'true';
 export const isBannerEnabled = () => import.meta.env.VITE_DISABLE_BANNER !== 'true';
+export const isBannerBreadcrumbEnabled = () => import.meta.env.VITE_DISABLE_BREADCRUMB !== 'true';
 export const isThemeSwitcherEnabled = () => isThemeEnabled() && import.meta.env.VITE_DISABLE_THEME_SWITCHER !== 'true';
 export const isI18NSwitcherEnabled = () => isI18NEnabled() && import.meta.env.VITE_DISABLE_I18N_SWITCHER !== 'true';
 export const isUserProfileEnabled = () => import.meta.env.VITE_DISABLE_USER_PROFILE !== 'true';

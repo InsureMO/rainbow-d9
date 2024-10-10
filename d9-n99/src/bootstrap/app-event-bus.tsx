@@ -19,6 +19,8 @@ export enum AppEventTypes {
 	SWITCH_SIDE_MENU_AND_BANNER_ENABLED = 'switch-side-menu-and-banner-enabled',
 	AUTHENTICATED_CHANGED = 'authenticated-changed',
 	NAVIGATE_TO = 'navigate-to',
+	BREADCRUMB_CHANGED = 'breadcrumb-changed',
+	ASK_BREADCRUMB = 'ask-breadcrumb',
 }
 
 export interface SideMenuAndBannerEnablement {
@@ -27,6 +29,11 @@ export interface SideMenuAndBannerEnablement {
 	bannerEnabled?: boolean;
 	themeSwitcherEnabled?: boolean;
 	i18nSwitcherEnabled?: boolean;
+}
+
+export interface BannerBreadcrumb {
+	title: string | ReactNode;
+	locations: Array<string | ReactNode>;
 }
 
 export interface AppEventBus {
@@ -90,6 +97,12 @@ export interface AppEventBus {
 	fire(type: AppEventTypes.NAVIGATE_TO, route: string): this;
 	on(type: AppEventTypes.NAVIGATE_TO, listener: (route: string) => void): this;
 	off(type: AppEventTypes.NAVIGATE_TO, listener: (route: string) => void): this;
+	fire(type: AppEventTypes.BREADCRUMB_CHANGED, breadcrumb?: BannerBreadcrumb): this;
+	on(type: AppEventTypes.BREADCRUMB_CHANGED, listener: (breadcrumb?: BannerBreadcrumb) => void): this;
+	off(type: AppEventTypes.BREADCRUMB_CHANGED, listener: (breadcrumb?: BannerBreadcrumb) => void): this;
+	fire(type: AppEventTypes.ASK_BREADCRUMB, onReply: (breadcrumb?: BannerBreadcrumb) => void): this;
+	on(type: AppEventTypes.ASK_BREADCRUMB, listener: (onReply: (breadcrumb?: BannerBreadcrumb) => void) => void): this;
+	off(type: AppEventTypes.ASK_BREADCRUMB, listener: (onReply: (breadcrumb?: BannerBreadcrumb) => void) => void): this;
 }
 
 const Context = createContext<AppEventBus>({} as AppEventBus);

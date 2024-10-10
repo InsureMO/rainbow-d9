@@ -36,6 +36,7 @@ export const D9Page = (props: D9PageProps) => {
 		ui, initRootModel = {}, initRootModelAsIs = false, externalDefs = {},
 		alert: Alert, dialog: Dialog, yesNoDialog: YesNoDialog, tip: Tip, remoteRequest: RemoteRequest
 	} = props;
+
 	const [state] = useState<D9PageState>(() => {
 		return {
 			$config: parseDoc(ui),

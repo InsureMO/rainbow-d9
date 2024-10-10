@@ -4,6 +4,7 @@ import {AppEventTypes, useAppEventBus} from '../../bootstrap';
 import {EntryPointPage, PageRegistrar} from '../../pages';
 import {isAuthenticated} from '../../services';
 import {getUnauthenticatedRoute} from '../../utils';
+import {BreadcrumbCorrespondent} from './breadcrumb-correspondent';
 
 const AuthenticationChangeHandler = () => {
 	const navigate = useNavigate();
@@ -47,10 +48,9 @@ export const Authenticated = () => {
 		<AuthenticationChangeHandler/>
 		<Routes>
 			{PageRegistrar.all().map(page => {
-				const Renderer = page.renderer;
-				return <Route path={page.route} element={<Renderer/>} key={page.code}/>;
+				return <Route path={page.route} element={<BreadcrumbCorrespondent {...page}/>} key={page.code}/>;
 			})}
-			<Route path="/*" element={<EntryPointPage.renderer/>}/>
+			<Route path="/*" element={<BreadcrumbCorrespondent {...EntryPointPage}/>}/>
 		</Routes>
 		<RouteSwitcher/>
 	</>;

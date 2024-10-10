@@ -1,6 +1,7 @@
 import {ObjectPropValue} from '@rainbow-d9/n1';
 import {ParsedNodeDef} from '@rainbow-d9/n3';
 import {FC} from 'react';
+import {BannerBreadcrumb} from '../bootstrap/app-event-bus';
 
 export interface AppPage {
 	/** code of the page, unique */
@@ -14,6 +15,10 @@ export interface AppPage {
 	 * 3. one menu item can be linked to one page only.
 	 */
 	menuItemCode?: string;
+	/**
+	 * If the banner breadcrumb is open, it must be provided; otherwise, it will cause incorrect rendering of the path position.
+	 */
+	breadcrumb?: BannerBreadcrumb;
 	renderer: FC;
 }
 
