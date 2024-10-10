@@ -1,6 +1,10 @@
 import {lazy} from 'react';
 import {PageRegistrar} from '../registrar';
-import {createDropdownOptionsProvider, PreloadedLazyPageWrapper} from '../standard-widgets';
+import {
+	createDropdownOptionsProvider,
+	D9PageExternalDefsCreatorGlobalEventBus,
+	PreloadedLazyPageWrapper
+} from '../standard-widgets';
 import {AppPage} from '../types';
 import './intl-labels';
 import InitRootModel from './init-root.json';
@@ -15,20 +19,22 @@ const Tasks2Index = PreloadedLazyPageWrapper<AssistantData>(lazy(() => import('.
 	ui: async () => markdown,
 	initRootModel: async () => JSON.parse(JSON.stringify(InitRootModel)),
 	assistantData: async () => {
-		return {
-			externalDefs: {
-				codes: createDropdownOptionsProvider<CodesNames>({
-					taskCategories: [
-						{label: 'Policy', value: 'policy'},
-						{label: 'Claim', value: 'claim'}
-					],
-					taskPriorities: [
-						{label: 'High', value: 'high'},
-						{label: 'Medium', value: 'medium'},
-						{label: 'Low', value: 'low'}
-					]
-				})
-			}
+		return async (global: D9PageExternalDefsCreatorGlobalEventBus) => {
+			return {
+				externalDefs: {
+					codes: createDropdownOptionsProvider<CodesNames>(global, {
+						taskCategories: [
+							{label: 'Policy', value: 'policy'},
+							{label: 'Claim', value: 'claim'}
+						],
+						taskPriorities: [
+							{label: 'High', value: 'high'},
+							{label: 'Medium', value: 'medium'},
+							{label: 'Low', value: 'low'}
+						]
+					})
+				}
+			};
 		};
 	}
 	// orderBy: [['ui', 'initRootModel', 'assistantData']]

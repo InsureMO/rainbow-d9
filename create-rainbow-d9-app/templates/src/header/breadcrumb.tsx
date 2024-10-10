@@ -70,7 +70,7 @@ interface BreadcrumbState extends Partial<BannerBreadcrumb> {
 }
 
 export const Breadcrumb = () => {
-	const {on, off} = useAppEventBus();
+	const {on, off, fire} = useAppEventBus();
 	const [state, setState] = useState<BreadcrumbState>({exists: false});
 	const forceUpdate = useForceUpdate();
 	useEffect(() => {
@@ -87,6 +87,15 @@ export const Breadcrumb = () => {
 			off(AppEventTypes.BREADCRUMB_CHANGED, onBreadcrumbChanged);
 		};
 	}, []);
+	useEffect(() => {
+		if (!state.exists) {
+			fire(AppEventTypes.ASK_BREADCRUMB, (breadcrumb?: BannerBreadcrumb) => {
+				if (breadcrumb != null) {
+					setState({exists: true, ...breadcrumb});
+				}
+			});
+		}
+	}, [state.exists]);
 
 	if (!isBannerBreadcrumbEnabled() || !isAuthenticated() || !state.exists) {
 		return null;

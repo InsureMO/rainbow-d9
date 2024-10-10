@@ -4,6 +4,7 @@ import {JSX, LazyExoticComponent, Suspense, useEffect, useState} from 'react';
 import {useLocation, useParams} from 'react-router';
 import {Params, useSearchParams} from 'react-router-dom';
 import styled from 'styled-components';
+import {D9PageExternalDefsCreatorGlobalEventBus} from './d9-page';
 
 // noinspection CssUnresolvedCustomProperty
 const Container = styled.div.attrs({[DOM_KEY_WIDGET]: 'page-lazy-loading'})`
@@ -44,7 +45,7 @@ export interface PreloadedPageProps<AssistantData = any> extends PreloaderFuncOp
 	/** init root model */
 	initRootModel?: ObjectPropValue;
 	/** assistant data for ui usage, could be anything */
-	assistantData?: AssistantData;
+	assistantData?: (global: D9PageExternalDefsCreatorGlobalEventBus) => Promise<AssistantData>;
 }
 
 export type PreloaderFunc<T> = (options: PreloaderFuncOptions) => Promise<T>;
@@ -55,7 +56,7 @@ export interface PagePropsApartPreloaderFuncs<AssistantData = any> {
 	/** get initial root model */
 	initRootModel?: PreloaderFunc<ObjectPropValue>;
 	/** get assistant data for ui usage, could be anything */
-	assistantData?: PreloaderFunc<AssistantData>;
+	assistantData?: PreloaderFunc<(global: D9PageExternalDefsCreatorGlobalEventBus) => Promise<AssistantData>>;
 }
 
 /**
