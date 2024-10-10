@@ -1,6 +1,6 @@
 {
 	"name": "@rainbow-d9/ts-vfs",
-	"version": "1.2.1",
+	"version": "1.2.2-alpha.1",
 	"description": "typescript vfs for playgrounds, and code mirror support",
 	"main": "index.cjs.js",
 	"module": "index.js",
