@@ -22,11 +22,11 @@
 	],
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/InsureMO/rainbow-o23.git"
+		"url": "git+https://github.com/InsureMO/rainbow-d9.git"
 	},
 	"license": "MIT",
 	"bugs": {
-		"url": "https://github.com/InsureMO/rainbow-o23/issues"
+		"url": "https://github.com/InsureMO/rainbow-d9/issues"
 	},
 	"dependencies": {
 		"@types/prompts": "^2.4.9",

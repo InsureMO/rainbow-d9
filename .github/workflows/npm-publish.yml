@@ -135,3 +135,25 @@ jobs:
       #          dry-run: true
       - run: |
           echo "Package ${{ steps.publish-thai-plan-selection.outputs.id }} published to lane [${{ steps.publish-thai-plan-selection.outputs.tag }}]"
+      - name: "Publish @d9/n99"
+        id: publish-n99
+        uses: JS-DevTools/npm-publish@v2
+        with:
+          tag: ${{ inputs.lane }}
+          token: ${{ secrets.NPM_TOKEN }}
+          access: public
+          package: ./d9-n99
+      #          dry-run: true
+      - run: |
+          echo "Package ${{ steps.publish-n99.outputs.id }} published to lane [${{ steps.publish-n99.outputs.tag }}]"
+      - name: "Publish create-rainbow-d9-app"
+        id: publish-create-rainbow-d9-app
+        uses: JS-DevTools/npm-publish@v2
+        with:
+          tag: ${{ inputs.lane }}
+          token: ${{ secrets.NPM_TOKEN }}
+          access: public
+          package: ./create-rainbow-d9-app
+      #          dry-run: true
+      - run: |
+          echo "Package ${{ steps.publish-create-rainbow-d9-app.outputs.id }} published to lane [${{ steps.publish-create-rainbow-d9-app.outputs.tag }}]"
