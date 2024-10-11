@@ -44,6 +44,10 @@ export const APagination = styled.div.attrs(
             margin-left: 0.6em;
             margin-right: 0.3em;
         }
+
+        > span:empty + div[data-w=d9-dropdown] {
+            margin-left: 0;
+        }
     }
 
     > div[data-page-buttons=true] {
