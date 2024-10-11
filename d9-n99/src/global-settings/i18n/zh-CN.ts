@@ -43,7 +43,21 @@ export const intlForAppZhCN = {
 	dropdown: {
 		placeholder: {all: '所有...', any: '任何...'}
 	},
+	biz: {
+		'policy-no': '保单号',
+		'insured-name': '被保人姓名', 'id-no': '证件号码', gender: '性别'
+	},
 	page: {
+		common: {
+			title: {
+				fuzzy: '模糊查询',
+				advanced: '高级查询'
+			},
+			button: {
+				'show-advanced-search': '使用高级查询', 'hide-advanced-search': '隐藏高级查询',
+				search: '开始查找', 'reset-criteria': '重置条件'
+			}
+		},
 		authentication: {
 			title: '欢迎',
 			username: {placeholder: '用户名', required: '请填写用户名.'},

@@ -1,6 +1,6 @@
 # Page
 
-## Section::::criteria
+## Section::page.common.title.fuzzy::criteria
 
 - data-next-to-banner
 
@@ -11,7 +11,52 @@
 	- data-di-eat-tails
 	- onKeyUp: @ext.keywords.keyup
 - Button::::
-	- text: claim-registration.criteria.advanced-search
+	- text: page.common.button.show-advanced-search
 	- ink: primary
 	- fill: link
 	- data-fit-link
+	- click: @ext.advancedSearch.click
+	- visible:
+		- on: /control.advancedSearchEnabled
+		- handle:
+		  ```ts
+		  return root.control.advancedSearchEnabled === false;
+		  ```
+- Button::::
+	- text: page.common.button.hide-advanced-search
+	- ink: primary
+	- fill: link
+	- data-fit-link
+	- click: @ext.advancedSearch.click
+	- visible:
+		- on: /control.advancedSearchEnabled
+		- handle:
+		  ```ts
+		  return root.control.advancedSearchEnabled === true;
+		  ```
+
+## Section::page.common.title.advanced::criteria
+
+- visible:
+	- on: control.advancedSearchEnabled
+	- handle:
+	  ```ts
+	  return model.control.advancedSearchEnabled === true;
+	  ```
+- repaint:
+	- on: criteria
+
+- Input::biz.policy-no::policyNo
+- Input::biz.insured-name::insuredName
+- DecoInput::biz.id-no::idNo
+- Dropdown::biz.gender::gender
+	- options: @ext.codes.gender
+	- please: dropdown.placeholder.any
+- ButtonBar::
+	- Button::
+		- text: page.common.button.search
+		- click: @ext.search.click
+	- Button::
+		- text: page.common.button.reset-criteria
+		- ink: waive
+		- click: @ext.reset.click

@@ -1,5 +1,6 @@
 {
-	"criteria": {
-		"priority": "high"
-	}
+	"control": {
+		"advancedSearchEnabled": false
+	},
+	"criteria": {}
 }

@@ -6,6 +6,14 @@ import {AppMenuGroup, AppMenuType, buildMenuItemForRoute, Menus, registerPageInt
 import './registration';
 import './acceptance';
 import './evaluation';
+import {registerMockCodeTables} from '../../mock-services';
+
+registerMockCodeTables({
+	gender: [
+		{label: 'Male', value: 'M'},
+		{label: 'Female', value: 'F'}
+	]
+});
 
 // for menu group
 registerPageIntlLabels('claim')
