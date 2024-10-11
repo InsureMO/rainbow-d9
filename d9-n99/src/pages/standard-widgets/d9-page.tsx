@@ -1,13 +1,38 @@
-import {ExternalDefs, NodeDef, ObjectPropValue, StandaloneRoot} from '@rainbow-d9/n1';
-import {AlertLabel, GlobalEventBus, GlobalEventTypes, GlobalRoot, IntlLabel, useGlobalEventBus} from '@rainbow-d9/n2';
+import {ExternalDefs, NodeDef, ObjectPropValue, RootEventTypes, StandaloneRoot, useRootEventBus} from '@rainbow-d9/n1';
+import {useCreateEventBus} from '@rainbow-d9/n1/src';
+import {AlertLabel, GlobalHandlers, GlobalRoot, IntlLabel, useGlobalHandlers} from '@rainbow-d9/n2';
 import {parseDoc} from '@rainbow-d9/n3';
-import {JSX, useEffect, useState} from 'react';
+import {createContext, Fragment, JSX, ReactNode, useContext, useEffect, useState} from 'react';
 import {I18NAndD9N2Bridge} from '../../bootstrap';
 import {D9PageState} from '../../global-settings';
 import {StandardPageWrapper} from './standard-page-wrapper';
 
-export type D9PageExternalDefsCreatorGlobalEventBus = Omit<GlobalEventBus, 'on' | 'off'>
-export type D9PageExternalDefsCreator = (global: D9PageExternalDefsCreatorGlobalEventBus) => Promise<ExternalDefs>;
+enum PageToRootEventBusTypes {
+	TO_ROOT = 'to-root'
+}
+
+interface PageToRootEventBus {
+	on(type: PageToRootEventBusTypes.TO_ROOT, listener: (rootEventTypes: RootEventTypes, ...args: any[]) => void): this;
+	off(type: PageToRootEventBusTypes.TO_ROOT, listener: (rootEventTypes: RootEventTypes, ...args: any[]) => void): this;
+	fire(type: PageToRootEventBusTypes.TO_ROOT, rootEventTypes: RootEventTypes, ...args: any[]): this;
+}
+
+const PageToRootContext = createContext<PageToRootEventBus>({} as PageToRootEventBus);
+PageToRootContext.displayName = 'PageToRootEventBus';
+
+export const PageToRootEventBusProvider = (props: { children?: ReactNode }) => {
+	const {children} = props;
+
+	const bus = useCreateEventBus<PageToRootEventBus>('app-page-to-root');
+
+	return <PageToRootContext.Provider value={bus}>
+		{children}
+	</PageToRootContext.Provider>;
+};
+
+export const usePageToRootEventBus = () => useContext(PageToRootContext);
+
+export type D9PageExternalDefsCreator = (global: GlobalHandlers) => Promise<ExternalDefs>;
 
 /**
  * when the global widget is replaced by given, make sure the given widget handles the corresponding global events.
@@ -40,17 +65,28 @@ interface D9ExternalDefsInitializerState {
 }
 
 const useD9ExternalDefsInitializer = (create?: D9PageExternalDefsCreator) => {
-	const {fire} = useGlobalEventBus();
+	// this hook is outside of root event bus, which means the property root undefined
+	// now have to build a bridge to pass root event bus to the external defs creator
+	const globalHandlers = useGlobalHandlers();
+	const {fire} = usePageToRootEventBus();
 	const [state, setState] = useState<D9ExternalDefsInitializerState>({initialized: false});
 
 	useEffect(() => {
 		if (create != null) {
 			(async () => {
 				try {
-					setState({initialized: true, defs: await create({fire})});
+					setState({
+						initialized: true,
+						defs: await create({
+							...globalHandlers,
+							// delegate to root event bus
+							// @ts-ignore
+							root: {fire: (type: RootEventTypes, ...args: any[]) => fire(PageToRootEventBusTypes.TO_ROOT, type, ...args)}
+						})
+					});
 				} catch (e) {
 					console.error(e);
-					fire(GlobalEventTypes.SHOW_ALERT, <AlertLabel>
+					await globalHandlers.alert.show(<AlertLabel>
 						<IntlLabel keys={[]} value="Failed to load external defs for d9 page."/>
 					</AlertLabel>);
 				}
@@ -69,7 +105,25 @@ interface D9PageContentProps {
 	externalDefs?: D9PageExternalDefsCreator;
 }
 
-export const D9PageContent = (props: D9PageContentProps) => {
+/** bridge from page to root */
+const PageToRootEventBridge = () => {
+	const {on, off} = usePageToRootEventBus();
+	const {fire} = useRootEventBus();
+	useEffect(() => {
+		// delegate to root event bus
+		const onToRoot = (type: RootEventTypes, ...args: any[]) => {
+			// @ts-ignore
+			fire(type, ...args);
+		};
+		on(PageToRootEventBusTypes.TO_ROOT, onToRoot);
+		return () => {
+			off(PageToRootEventBusTypes.TO_ROOT, onToRoot);
+		};
+	}, []);
+	return <Fragment/>;
+};
+
+const D9PageContent = (props: D9PageContentProps) => {
 	const {pageDefs, rootModel, externalDefs: externalDefsCreate} = props;
 
 	const externalDefs = useD9ExternalDefsInitializer(externalDefsCreate);
@@ -78,7 +132,9 @@ export const D9PageContent = (props: D9PageContentProps) => {
 	}
 
 	return <StandardPageWrapper>
-		<StandaloneRoot {...pageDefs} $root={rootModel} externalDefs={externalDefs.defs}/>
+		<StandaloneRoot {...pageDefs} $root={rootModel} externalDefs={externalDefs.defs}>
+			<PageToRootEventBridge/>
+		</StandaloneRoot>
 	</StandardPageWrapper>;
 };
 
@@ -105,17 +161,19 @@ export const D9Page = (props: D9PageProps) => {
 		}
 	}
 
-	return <GlobalRoot avoidDefaultAlert={(Alert != null) || (void 0)}
-	                   avoidDefaultDialog={(Dialog != null) || (void 0)}
-	                   avoidDefaultYesNoDialog={(YesNoDialog != null) || (void 0)}
-	                   avoidDefaultTips={(Tip != null) || (void 0)}
-	                   avoidDefaultRemoteRequest={(RemoteRequest != null) || (void 0)}>
-		{Alert && <Alert/>}
-		{Dialog && <Dialog/>}
-		{YesNoDialog && <YesNoDialog/>}
-		{Tip && <Tip/>}
-		{RemoteRequest && <RemoteRequest/>}
-		<I18NAndD9N2Bridge/>
-		<D9PageContent pageDefs={state.$config.node} rootModel={state.$root} externalDefs={externalDefs}/>
-	</GlobalRoot>;
+	return <PageToRootEventBusProvider>
+		<GlobalRoot avoidDefaultAlert={(Alert != null) || (void 0)}
+		            avoidDefaultDialog={(Dialog != null) || (void 0)}
+		            avoidDefaultYesNoDialog={(YesNoDialog != null) || (void 0)}
+		            avoidDefaultTips={(Tip != null) || (void 0)}
+		            avoidDefaultRemoteRequest={(RemoteRequest != null) || (void 0)}>
+			{Alert && <Alert/>}
+			{Dialog && <Dialog/>}
+			{YesNoDialog && <YesNoDialog/>}
+			{Tip && <Tip/>}
+			{RemoteRequest && <RemoteRequest/>}
+			<I18NAndD9N2Bridge/>
+			<D9PageContent pageDefs={state.$config.node} rootModel={state.$root} externalDefs={externalDefs}/>
+		</GlobalRoot>
+	</PageToRootEventBusProvider>;
 };

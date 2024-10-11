@@ -8,8 +8,9 @@
 	- pos: 6
 	- placeholder: claim-registration.criteria.keywords.placeholder
 	- tails: $icons.search
-	- data-di-eat-tails
+	- $fc, data-di-eat-tails, data-hide-caption
 	- onKeyUp: @ext.keywords.keyup
+	- length: 3..; At least 3 characters.
 - Button::::
 	- text: page.common.button.show-advanced-search
 	- ink: primary
@@ -22,9 +23,8 @@
 		  ```ts
 		  return root.control.advancedSearchEnabled === false;
 		  ```
-- Button::::
+- Button::
 	- text: page.common.button.hide-advanced-search
-	- ink: primary
 	- fill: link
 	- data-fit-link
 	- click: @ext.advancedSearch.click
@@ -53,6 +53,7 @@
 	- options: @ext.codes.gender
 	- please: dropdown.placeholder.any
 - ButtonBar::
+	- data-narrow-up-in-search
 	- Button::
 		- text: page.common.button.search
 		- click: @ext.search.click
@@ -60,3 +61,45 @@
 		- text: page.common.button.reset-criteria
 		- ink: waive
 		- click: @ext.reset.click
+
+## Table::
+
+- data-next-to-search
+- property: results
+- !expandable, !addable, !removable
+- omitDefaultRowOperators
+- operatorsColumnWidth: 100
+- repaint:
+	- on: results
+
+- headers:
+	- biz.insured-name: 1fr
+	- biz.gender: 80
+	- biz.id-type: 120
+	- biz.id-no: 130
+	- biz.dob: 130
+	- claim-registration.results.related-policies: 200
+	- claim-registration.results.ongoing-claims: 200
+- Label::::insuredName
+- Dropdown::::gender
+	- data-as-label
+	- disabled: true
+	- options: @ext.codes.gender
+- Dropdown::::idType
+	- data-as-label
+	- disabled: true
+	- options: @ext.codes.idType
+- Label::::idNo
+- Label::::dob
+- Label::::relatedPolicyNos
+- Label::::ongoingClaimNos
+- RowOperators::
+	- Button::
+		- text: Register
+		- fill: link
+		- click: @ext.register.click
+		- data-text-row-operator
+- Pagination::::page
+	- freeWalk
+	- maxButtons: 7
+	- valueChanged: @ext.onPageChanged

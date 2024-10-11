@@ -2,5 +2,29 @@
 	"control": {
 		"advancedSearchEnabled": false
 	},
-	"criteria": {}
+	"criteria": {},
+	"results": [
+		{
+			"customerId": "10000",
+			"insuredName": "John Doe",
+			"gender": "M",
+			"idType": "IDCard",
+			"idNo": "I123456789",
+			"dob": "01/01/1980",
+			"relatedPolicyNos": [
+				"P12345678901",
+				"P12345678902"
+			],
+			"ongoingClaimNos": [
+				"C12345678901",
+				"C12345678902"
+			]
+		}
+	],
+	"page": {
+		"pageSize": 10,
+		"pageNumber": 1,
+		"itemCount": 9,
+		"pageCount": 1
+	}
 }

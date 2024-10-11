@@ -18,6 +18,31 @@ const Container = styled.div.attrs({[DOM_KEY_WIDGET]: 'app-frame'})`
         }
     }
 
+    div[data-w=d9-button-bar] {
+        &[data-narrow-up-in-search] {
+            margin-top: var(--app-page-narrow-up-in-search-margin);
+        }
+    }
+
+    div[data-w=d9-form-cell] {
+        &[data-hide-caption] > span[data-r=d9-fc-caption] {
+            display: none;
+        }
+    }
+
+    div[data-w=d9-dropdown] {
+        &[data-as-label][disabled],
+        &[data-as-label][data-disabled=true] {
+            border-color: transparent;
+            background-color: transparent;
+
+            &:hover, &:focus-within {
+                border-color: transparent;
+                box-shadow: none;
+            }
+        }
+    }
+
     button[data-w=d9-button] {
         &[data-fit-link] {
             padding: 0;
@@ -33,7 +58,7 @@ const Container = styled.div.attrs({[DOM_KEY_WIDGET]: 'app-frame'})`
             }
         }
 
-        &[data-di-eat-tails] {
+        &[data-di-eat-leads], &[data-di-eat-tails], &[data-di-eat-both] {
             border: var(--d9-border);
             border-radius: var(--d9-border-radius);
             transition: box-shadow var(--d9-transition-duration) var(--d9-transition-timing-function), border-color var(--d9-transition-duration) var(--d9-transition-timing-function);
@@ -52,14 +77,30 @@ const Container = styled.div.attrs({[DOM_KEY_WIDGET]: 'app-frame'})`
                     box-shadow: none;
                 }
             }
+        }
 
-            > span[data-w=d9-deco-tail] {
-                border: 0;
-            }
+        &[data-di-eat-both] > span[data-w=d9-deco-lead],
+        &[data-di-eat-leads] > span[data-w=d9-deco-lead],
+        &[data-di-eat-both] > span[data-w=d9-deco-tail],
+        &[data-di-eat-tails] > span[data-w=d9-deco-tail] {
+            border: 0;
         }
 
         svg[data-icon=search] {
             transform: scale(0.7);
+        }
+    }
+
+    div[data-w=d9-table] {
+        &[data-next-to-search] {
+            margin-top: var(--app-page-next-to-search-margin);
+        }
+
+        div[data-w=d9-table-row-operators] {
+            > button[data-w=d9-button][data-role=d9-table-row-operator][data-text-row-operator] {
+                width: unset;
+                padding: 0 8px;
+            }
         }
     }
 `;

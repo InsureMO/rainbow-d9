@@ -12,6 +12,9 @@ registerMockCodeTables({
 	gender: [
 		{label: 'Male', value: 'M'},
 		{label: 'Female', value: 'F'}
+	],
+	idType: [
+		{label: 'Identity Card', value: 'IDCard'}
 	]
 });
 

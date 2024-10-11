@@ -7,7 +7,8 @@ export const intlForAppEnUS = {
 	},
 	biz: {
 		'policy-no': 'Policy No.',
-		'insured-name': 'Insured Name', 'id-no': 'ID Number', gender: 'Gender'
+		'insured-name': 'Insured Name',
+		'id-type': 'ID Type', 'id-no': 'ID Number', gender: 'Gender', dob: 'DOB'
 	},
 	page: {
 		common: {

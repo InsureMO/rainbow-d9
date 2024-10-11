@@ -36,7 +36,7 @@ export const createAppThemeStyles = (): AppThemeStyle => {
 		logoColor2: 'rgb(62, 151, 255)',
 		logoColor3: 'rgb(222, 30, 14)',
 
-		workAreaBackground: 'rgb(249, 249, 249)'
+		workAreaBackground: 'var(--d9-background-color)'
 	};
 	const createAppCssVars = (variables: typeof AppCssConstants) => {
 		return {
@@ -127,6 +127,8 @@ export const createAppThemeStyles = (): AppThemeStyle => {
 			// page, standard
 			'page-padding': 'var(--app-page-padding, 8px 32px 32px)',
 			'page-next-to-banner-margin': 'var(--app-page-next-to-banner-margin, 16px)',
+			'page-narrow-up-in-search-margin': 'var(--app-page-narrow-up-in-search-margin, -16px)',
+			'page-next-to-search-margin': 'var(--app-page-next-to-search-margin, 16px)',
 			// page, authentication
 			'authentication-min-width': 'var(--page-authentication-min-width, min(60vw, 600px))',
 			'authentication-border': 'var(--page-authentication-border, var(--d9-border))',

@@ -1,3 +1,4 @@
+export * from './data-client';
 export * from './dropdown-options';
 
 export * from './standard-page-wrapper';

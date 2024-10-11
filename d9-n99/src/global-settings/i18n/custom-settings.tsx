@@ -1,4 +1,4 @@
-import {$D9N2I18NLabels, $D9N2LanguagePacks} from '@rainbow-d9/n2/src';
+import {$D9N2I18NLabels, $D9N2LanguagePacks} from '@rainbow-d9/n2';
 import {AppLanguage} from './types';
 
 /**

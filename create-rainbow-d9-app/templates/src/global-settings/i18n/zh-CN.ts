@@ -45,7 +45,7 @@ export const intlForAppZhCN = {
 	},
 	biz: {
 		'policy-no': '保单号',
-		'insured-name': '被保人姓名', 'id-no': '证件号码', gender: '性别'
+		'insured-name': '被保人姓名', 'id-type': '证件类型', 'id-no': '证件号码', gender: '性别', dob: '出生日期'
 	},
 	page: {
 		common: {

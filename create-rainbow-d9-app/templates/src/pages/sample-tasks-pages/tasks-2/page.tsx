@@ -1,4 +1,5 @@
-import {D9Page, D9PageExternalDefsCreatorGlobalEventBus, PreloadedPageProps} from '../../standard-widgets';
+import {GlobalHandlers} from '@rainbow-d9/n2';
+import {D9Page, PreloadedPageProps} from '../../standard-widgets';
 import {AssistantData} from './types';
 
 export default (props: PreloadedPageProps<AssistantData>) => {
@@ -6,16 +7,16 @@ export default (props: PreloadedPageProps<AssistantData>) => {
 
 	// make sure the assistant data retriever is called only once
 	let assistantData: AssistantData;
-	const doAskAssistantData = async (global: D9PageExternalDefsCreatorGlobalEventBus) => {
+	const doAskAssistantData = async (globalHandlers: GlobalHandlers) => {
 		if (assistantData == null || askAssistantData != null) {
-			assistantData = await askAssistantData!(global);
+			assistantData = await askAssistantData!(globalHandlers);
 		}
 	};
 	// build an external defs creator function
 	const externalDefs = askAssistantData == null
 		? (void 0)
-		: async (global: D9PageExternalDefsCreatorGlobalEventBus) => {
-			await doAskAssistantData(global);
+		: async (globalHandlers: GlobalHandlers) => {
+			await doAskAssistantData(globalHandlers);
 			const {externalDefs} = assistantData;
 			return externalDefs;
 		};
