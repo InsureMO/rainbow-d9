@@ -76,6 +76,7 @@
 - operatorsColumnWidth: 100
 - repaint:
 	- on: results
+- getElementKey: @ext.getElementKey
 
 - headers:
 	- biz.insured-name: 1fr
