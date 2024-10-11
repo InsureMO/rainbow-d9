@@ -46,7 +46,7 @@ const askMockData = async (pageNumber: number = 1, pageSize: number = 10) => {
 		setTimeout(() => {
 			resolve({
 				pageNumber, pageSize, pageCount: 10, itemCount: 95,
-				data: new Array(10).fill(1).map(() => ({...baseItem}))
+				data: new Array(pageNumber === 10 ? 5 : 10).fill(1).map(() => ({...baseItem}))
 			});
 		}, 300);
 	});

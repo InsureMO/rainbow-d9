@@ -48,7 +48,12 @@
 
 - Input::biz.policy-no::policyNo
 - Input::biz.insured-name::insuredName
-- DecoInput::biz.id-no::idNo
+- Box::biz.id-no
+	- data-type-input-box
+	- Dropdown::::idType
+		- options: @ext.codes.idType
+		- please: dropdown.placeholder.any
+	- Input::::idNo
 - Dropdown::biz.gender::gender
 	- options: @ext.codes.gender
 	- please: dropdown.placeholder.any
@@ -64,7 +69,7 @@
 
 ## Table::
 
-- data-next-to-search
+- data-next-to-search, data-operators-hover-only
 - property: results
 - !expandable, !addable, !removable
 - omitDefaultRowOperators

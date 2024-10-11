@@ -12,6 +12,31 @@ const Container = styled.div.attrs({[DOM_KEY_WIDGET]: 'app-frame'})`
     min-width: 100vw;
     min-height: 100vh;
 
+    div[data-w=d9-box] {
+        &[data-type-input-box] {
+            display: flex;
+            align-items: center;
+
+            > *:hover {
+                z-index: 1;
+            }
+
+            > *:first-child {
+                width: auto;
+                border-bottom-right-radius: 0;
+                border-top-right-radius: 0;
+            }
+
+            > *:last-child {
+                flex-grow: 1;
+                width: auto;
+                border-bottom-left-radius: 0;
+                border-top-left-radius: 0;
+                margin-left: -1px;
+            }
+        }
+    }
+
     div[data-w=d9-section] {
         &[data-next-to-banner] {
             margin-top: var(--app-page-next-to-banner-margin);
@@ -54,7 +79,7 @@ const Container = styled.div.attrs({[DOM_KEY_WIDGET]: 'app-frame'})`
         &:hover {
             > span[data-w=d9-deco-tail] > svg {
                 fill: var(--d9-primary-color);
-                transition: fill var(--d9-transition-duration) var(--d9-transition-timing-function)
+                transition: fill var(--d9-transition-duration) var(--d9-transition-timing-function);
             }
         }
 
@@ -94,6 +119,25 @@ const Container = styled.div.attrs({[DOM_KEY_WIDGET]: 'app-frame'})`
     div[data-w=d9-table] {
         &[data-next-to-search] {
             margin-top: var(--app-page-next-to-search-margin);
+        }
+
+        &[data-operators-hover-only] {
+            div[data-w=d9-table-row-operators] > button {
+                pointer-events: none;
+                opacity: 0;
+                transition: all var(--d9-transition-duration) var(--d9-transition-timing-function);
+            }
+
+            div[data-w=d9-table-row-operators]:hover > button,
+            div[data-w=d9-table-row-cell]:hover ~ div[data-w=d9-table-row-operators] > button {
+                pointer-events: auto;
+                opacity: 1;
+            }
+
+            div[data-w=d9-table-row-cell]:hover ~ div[data-w=d9-table-row-operators] ~ div[data-w=d9-table-row-operators] > button {
+                pointer-events: none;
+                opacity: 0;
+            }
         }
 
         div[data-w=d9-table-row-operators] {

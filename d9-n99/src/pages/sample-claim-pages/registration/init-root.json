@@ -2,7 +2,8 @@
 	"control": {
 		"advancedSearchEnabled": false
 	},
-	"criteria": {},
+	"criteria": {
+	},
 	"results": [
 		{
 			"customerId": "10000",
