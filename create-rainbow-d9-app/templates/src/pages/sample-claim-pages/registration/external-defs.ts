@@ -13,6 +13,7 @@ export const createExternalDefsCreator = (rootModelRef: MutableRefObject<any>) =
 		return {
 			codes: createDropdownOptionsProvider(globalHandlers),
 			keywords: {
+				// keywords enter to trigger search
 				keyup: onEnterPressed(async (value?: string) => {
 					if (VUtils.isBlank(value) || value!.trim().length < 3) {
 						return;
@@ -31,6 +32,7 @@ export const createExternalDefsCreator = (rootModelRef: MutableRefObject<any>) =
 				})
 			},
 			advancedSearch: {
+				// advance search link click, to show/hide the advanced search section
 				click: async (options: ButtonClickOptions<BaseModel, PropValue>) => {
 					const root = options.root as unknown as RootModel;
 					const enabled = root.control.advancedSearchEnabled;
@@ -40,8 +42,8 @@ export const createExternalDefsCreator = (rootModelRef: MutableRefObject<any>) =
 				}
 			},
 			search: {
+				// click the search button of advanced search section
 				click: async (options: ButtonClickOptions<BaseModel, PropValue>) => {
-					// do search
 					const root = options.root as unknown as RootModel;
 					const {keywords, ...criteria} = root.criteria;
 					const {
@@ -56,6 +58,7 @@ export const createExternalDefsCreator = (rootModelRef: MutableRefObject<any>) =
 				}
 			},
 			reset: {
+				// click the reset button of advanced search section
 				click: async (options: ButtonClickOptions<BaseModel, PropValue>) => {
 					const model = options.model as unknown as RootModel['criteria'];
 					const old = {...model} as PropValue;

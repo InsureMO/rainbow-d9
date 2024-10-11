@@ -1,6 +1,11 @@
 import {ButtonFill, UnwrappedCaption} from '@rainbow-d9/n2';
 import {ResultItem} from './types';
 
+// change the relatedPolicyNos, ongoingClaimNos in item model
+// from string array
+// to react component
+// make sure it can be rendered in label, and a clickable caption, and as vertical list
+
 const RelatedPolicy = (props: { policyNo: string }) => {
 	const {policyNo} = props;
 	const onClick = () => alert(policyNo);
