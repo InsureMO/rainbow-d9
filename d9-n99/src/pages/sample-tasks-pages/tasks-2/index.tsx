@@ -1,6 +1,7 @@
 import {lazy} from 'react';
 import {AppPage, PageRegistrar} from '../../../global-settings';
 import './intl-labels';
+import {registerMockCodeTables} from '../../../mock-services';
 import {
 	createDropdownOptionsProvider,
 	D9PageExternalDefsCreatorGlobalEventBus,
@@ -9,6 +10,19 @@ import {
 import InitRootModel from './init-root.json';
 import {AssistantData, CodesNames} from './types';
 import {markdown} from './ui-config.d9';
+
+// register mock code tables, it is shared by whole application
+registerMockCodeTables({
+	taskCategories: [
+		{label: 'Policy', value: 'policy'},
+		{label: 'Claim', value: 'claim'}
+	],
+	taskPriorities: [
+		{label: 'High', value: 'high'},
+		{label: 'Medium', value: 'medium'},
+		{label: 'Low', value: 'low'}
+	]
+});
 
 const Tasks2Index = PreloadedLazyPageWrapper<AssistantData>(lazy(() => import('./page')), {
 	useLocation: true,
@@ -20,19 +34,8 @@ const Tasks2Index = PreloadedLazyPageWrapper<AssistantData>(lazy(() => import('.
 	assistantData: async () => {
 		return async (global: D9PageExternalDefsCreatorGlobalEventBus) => {
 			return {
-				externalDefs: {
-					codes: createDropdownOptionsProvider<CodesNames>(global, {
-						taskCategories: [
-							{label: 'Policy', value: 'policy'},
-							{label: 'Claim', value: 'claim'}
-						],
-						taskPriorities: [
-							{label: 'High', value: 'high'},
-							{label: 'Medium', value: 'medium'},
-							{label: 'Low', value: 'low'}
-						]
-					})
-				}
+				// no static provider, use mock code tables
+				externalDefs: {codes: createDropdownOptionsProvider<CodesNames>(global)}
 			};
 		};
 	}

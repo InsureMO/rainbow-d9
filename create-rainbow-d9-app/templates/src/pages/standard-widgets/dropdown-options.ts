@@ -1,6 +1,6 @@
 import {BaseModel, PropValue} from '@rainbow-d9/n1';
 import {DropdownDef, DropdownOptions, GlobalEventHandlers, GlobalEventTypes, ModelCarrier} from '@rainbow-d9/n2';
-import {RC} from '../../services';
+import {askCodeTableByCode} from '../../services';
 import {D9PageExternalDefsCreatorGlobalEventBus} from './d9-page';
 
 export type StaticDropdownOptionsProvider<Keys extends string = string> = {
@@ -23,11 +23,7 @@ export const createDropdownOptionsProvider =
 				return async () => {
 					return new Promise<DropdownOptions>(resolve => {
 						global.fire(GlobalEventTypes.INVOKE_REMOTE_REQUEST,
-							async () => {
-								// TODO should use service function instead,
-								//  currently no service function for this, call RC directly
-								return await RC.get<DropdownOptions>({api: RC.buildApi(RC.APIS.ASK_CODE_TABLE, {code: prop})});
-							},
+							async () => await askCodeTableByCode(prop),
 							(options) => resolve(options),
 							// TODO use empty array instead, but how to present the error?
 							() => resolve([]));

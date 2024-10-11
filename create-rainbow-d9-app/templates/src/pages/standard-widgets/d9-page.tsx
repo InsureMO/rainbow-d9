@@ -1,9 +1,9 @@
-import {ExternalDefs, ObjectPropValue, StandaloneRoot} from '@rainbow-d9/n1';
+import {ExternalDefs, NodeDef, ObjectPropValue, StandaloneRoot} from '@rainbow-d9/n1';
 import {AlertLabel, GlobalEventBus, GlobalEventTypes, GlobalRoot, IntlLabel, useGlobalEventBus} from '@rainbow-d9/n2';
 import {parseDoc} from '@rainbow-d9/n3';
 import {JSX, useEffect, useState} from 'react';
 import {I18NAndD9N2Bridge} from '../../bootstrap';
-import {D9PageState} from '../../global-settings/pages/types.ts';
+import {D9PageState} from '../../global-settings';
 import {StandardPageWrapper} from './standard-page-wrapper';
 
 export type D9PageExternalDefsCreatorGlobalEventBus = Omit<GlobalEventBus, 'on' | 'off'>
@@ -40,17 +40,17 @@ interface D9ExternalDefsInitializerState {
 }
 
 const useD9ExternalDefsInitializer = (create?: D9PageExternalDefsCreator) => {
-	const global = useGlobalEventBus();
+	const {fire} = useGlobalEventBus();
 	const [state, setState] = useState<D9ExternalDefsInitializerState>({initialized: false});
 
 	useEffect(() => {
 		if (create != null) {
 			(async () => {
 				try {
-					setState({initialized: true, defs: await create(global)});
+					setState({initialized: true, defs: await create({fire})});
 				} catch (e) {
 					console.error(e);
-					global.fire(GlobalEventTypes.SHOW_ALERT, <AlertLabel>
+					fire(GlobalEventTypes.SHOW_ALERT, <AlertLabel>
 						<IntlLabel keys={[]} value="Failed to load external defs for d9 page."/>
 					</AlertLabel>);
 				}
@@ -63,13 +63,31 @@ const useD9ExternalDefsInitializer = (create?: D9PageExternalDefsCreator) => {
 	return state;
 };
 
+interface D9PageContentProps {
+	pageDefs: NodeDef;
+	rootModel: ObjectPropValue;
+	externalDefs?: D9PageExternalDefsCreator;
+}
+
+export const D9PageContent = (props: D9PageContentProps) => {
+	const {pageDefs, rootModel, externalDefs: externalDefsCreate} = props;
+
+	const externalDefs = useD9ExternalDefsInitializer(externalDefsCreate);
+	if (!externalDefs.initialized) {
+		return null;
+	}
+
+	return <StandardPageWrapper>
+		<StandaloneRoot {...pageDefs} $root={rootModel} externalDefs={externalDefs.defs}/>
+	</StandardPageWrapper>;
+};
+
 export const D9Page = (props: D9PageProps) => {
 	const {
-		ui, initRootModel = {}, initRootModelAsIs = false, externalDefs: externalDefsCreate,
+		ui, initRootModel = {}, initRootModelAsIs = false, externalDefs,
 		alert: Alert, dialog: Dialog, yesNoDialog: YesNoDialog, tip: Tip, remoteRequest: RemoteRequest
 	} = props;
 
-	const externalDefs = useD9ExternalDefsInitializer(externalDefsCreate);
 	const [state] = useState<D9PageState>(() => {
 		return {
 			$config: parseDoc(ui),
@@ -86,9 +104,6 @@ export const D9Page = (props: D9PageProps) => {
 			return <div>{error}</div>;
 		}
 	}
-	if (!externalDefs.initialized) {
-		return null;
-	}
 
 	return <GlobalRoot avoidDefaultAlert={(Alert != null) || (void 0)}
 	                   avoidDefaultDialog={(Dialog != null) || (void 0)}
@@ -101,8 +116,6 @@ export const D9Page = (props: D9PageProps) => {
 		{Tip && <Tip/>}
 		{RemoteRequest && <RemoteRequest/>}
 		<I18NAndD9N2Bridge/>
-		<StandardPageWrapper>
-			<StandaloneRoot {...state.$config.node} $root={state.$root} externalDefs={externalDefs.defs}/>
-		</StandardPageWrapper>
+		<D9PageContent pageDefs={state.$config.node} rootModel={state.$root} externalDefs={externalDefs}/>
 	</GlobalRoot>;
 };

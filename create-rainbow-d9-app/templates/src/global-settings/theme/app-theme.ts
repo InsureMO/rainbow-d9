@@ -126,6 +126,7 @@ export const createAppThemeStyles = (): AppThemeStyle => {
 			'work-area-background': `var(--app-work-area-background, ${variables.workAreaBackground})`,
 			// page, standard
 			'page-padding': 'var(--app-page-padding, 8px 32px 32px)',
+			'page-next-to-banner-margin': 'var(--app-page-next-to-banner-margin, 16px)',
 			// page, authentication
 			'authentication-min-width': 'var(--page-authentication-min-width, min(60vw, 600px))',
 			'authentication-border': 'var(--page-authentication-border, var(--d9-border))',

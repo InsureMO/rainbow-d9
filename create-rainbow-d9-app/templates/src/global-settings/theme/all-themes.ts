@@ -40,6 +40,10 @@ div${tag} ~ * {
 		transform: scale(0.9) translateY(-2px);
 		transform-origin: center;
 	}
+	svg[data-icon=search] {
+		transform: scale(0.8);
+		transform-origin: center;
+	}
 }
 div${tag} ~ div[data-w=app-frame] {
 	${app};

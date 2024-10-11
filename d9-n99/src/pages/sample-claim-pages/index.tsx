@@ -10,7 +10,7 @@ import './evaluation';
 // for menu group
 registerPageIntlLabels('claim')
 	.lang('en-US')
-	.labels({title: 'Claim', menu: {label: 'Tasks'}})
+	.labels({title: 'Claim', menu: {label: 'Claim'}})
 	.lang('zh-CN')
 	.labels({title: '理赔', menu: {label: '理赔'}});
 

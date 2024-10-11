@@ -1,23 +1,20 @@
-import {createDropdownOptionsProvider, D9Page, D9PageExternalDefsCreatorGlobalEventBus} from '../../standard-widgets';
+import {VUtils} from '@rainbow-d9/n1';
+import {D9Page, D9PageExternalDefsCreatorGlobalEventBus} from '../../standard-widgets';
+import {onEnterPressed} from '../../utils';
 import InitRootModel from './init-root.json';
 import {markdown} from './ui-config.d9';
 
-type CodesNames = 'taskCategories' | 'taskPriorities';
-
 export default () => {
-	const externalDefs = async (global: D9PageExternalDefsCreatorGlobalEventBus) => {
+	const externalDefs = async (_global: D9PageExternalDefsCreatorGlobalEventBus) => {
 		return {
-			codes: createDropdownOptionsProvider<CodesNames>(global, {
-				taskCategories: [
-					{label: 'Policy', value: 'policy'},
-					{label: 'Claim', value: 'claim'}
-				],
-				taskPriorities: [
-					{label: 'High', value: 'high'},
-					{label: 'Medium', value: 'medium'},
-					{label: 'Low', value: 'low'}
-				]
-			})
+			keywords: {
+				keyup: onEnterPressed(async (value?: string) => {
+					if (VUtils.isBlank(value)) {
+						return;
+					}
+					// invoke the event bus
+				})
+			}
 		};
 	};
 

@@ -5,11 +5,17 @@ registerPageIntlLabels('claim-registration')
 	.labels({
 		title: 'Claim - Registration',
 		menu: {label: 'Registration'},
-		criteria: {title: 'Filter by...', category: 'Category', priority: 'Priority'}
+		criteria: {
+			keywords: {placeholder: 'Registration No., Policy No., Insured Name, etc.'},
+			'advanced-search': 'Advanced Search'
+		}
 	})
 	.lang('zh-CN')
 	.labels({
 		title: '理赔报案',
 		menu: {label: '理赔报案'},
-		criteria: {title: '条件过滤...', category: '分类', priority: '优先级'}
+		criteria: {
+			keywords: {placeholder: '报案号, 保单号, 被保人, 等.'},
+			'advanced-search': '高级搜索'
+		}
 	});

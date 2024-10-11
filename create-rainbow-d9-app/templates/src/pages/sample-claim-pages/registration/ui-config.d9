@@ -1,10 +1,17 @@
 # Page
 
-## Section::tasks-1.criteria.title::criteria
+## Section::::criteria
 
-- Dropdown::tasks-1.criteria.category::category
-	- options: @ext.codes.taskCategories
-	- please: dropdown.placeholder.all
-- Dropdown::tasks-1.criteria.priority::priority
-	- options: @ext.codes.taskPriorities
-	- please: dropdown.placeholder.any
+- data-next-to-banner
+
+- DecoInput::::keywords
+	- pos: 6
+	- placeholder: claim-registration.criteria.keywords.placeholder
+	- tails: $icons.search
+	- data-di-eat-tails
+	- onKeyUp: @ext.keywords.keyup
+- Button::::
+	- text: claim-registration.criteria.advanced-search
+	- ink: primary
+	- fill: link
+	- data-fit-link

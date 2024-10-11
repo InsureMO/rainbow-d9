@@ -33,10 +33,5 @@ export const AppGlobalStyles = (() => {
         }
 
         ${createThemeStyles()}
-        html[data-touchable=true] {
-            div[data-w=app-frame] {
-                // TODO put responsive styles here
-            }
-        }
 	`;
 })();
