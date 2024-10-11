@@ -99,14 +99,15 @@ export const buildWatches = (def: NodeDef): Watches => {
 	}, {} as Watches);
 };
 
-export const getArrayElementKey = (keys: Array<[BaseModel, string]>, getElementKey?: (element: BaseModel) => string) => (element: BaseModel) => {
+export const getArrayElementKey = (keys: Array<[BaseModel, string]>, getElementKey?: (element: BaseModel, index: number) => string) => (element: BaseModel, index: number) => {
 	if (getElementKey != null) {
-		return getElementKey(element);
+		return getElementKey(element, index);
 	} else {
 		const found = keys.find(([data]) => data === element);
 		if (found != null) {
 			return found[1];
 		} else {
+			// TODO, seems meaningless, use index as key is enough
 			const key = NUtils.generateReactKey();
 			keys.push([element, key]);
 			return key;

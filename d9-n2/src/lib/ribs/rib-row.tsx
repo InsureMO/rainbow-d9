@@ -24,7 +24,7 @@ export const RibRow = (props: Omit<RibsProps, '$array'> & { $array: EnhancedProp
 		}
 		return false;
 	});
-	const rowMarker = getElementKey != null ? getElementKey($wrapped.$model as ObjectPropValue) : (void 0);
+	const rowMarker = getElementKey != null ? getElementKey($wrapped.$model as ObjectPropValue, elementIndex) : (void 0);
 	useEffect(() => {
 		const onCustomEvent = (_: string, prefix: string, clipped: string) => {
 			if (clipped !== `${marker}-${rowMarker ?? elementIndex}`) {

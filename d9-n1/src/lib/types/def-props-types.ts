@@ -176,7 +176,7 @@ export interface ArrayUsedDef {
 	 * if there is no stable element key, leave this property ignored (do not pass).
 	 * then array container will generate a unique key and bind with element, keep them in state.
 	 */
-	getElementKey?: <R extends BaseModel>(row: R) => string;
+	getElementKey?: <R extends BaseModel>(row: R, index: number) => string;
 }
 
 export interface ArrayContainerDef extends ContainerDef {

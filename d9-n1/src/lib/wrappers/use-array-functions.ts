@@ -26,8 +26,16 @@ export const useArrayFunctions = (options: {
 	if ($array != null && !Array.isArray($array)) {
 		N1Logger.error('Data model must be an array or null.', 'ArrayFunctionsHook');
 		elements = [] as Array<BaseModel>;
+		// clear keys
+		keys.length = 0;
 	} else {
 		elements = ($array || []) as Array<BaseModel>;
+		// clear keys if cached element is not in elements anymore
+		for (let index = keys.length - 1; index >= 0; index--) {
+			if (!elements.includes(keys[index][0])) {
+				keys.splice(index, 1);
+			}
+		}
 	}
 
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any

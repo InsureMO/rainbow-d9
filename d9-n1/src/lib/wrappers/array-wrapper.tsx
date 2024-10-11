@@ -50,7 +50,7 @@ export const ArrayWrapper = (props: ArrayWrapperProps) => {
 				<NoData $wrapped={$wrapped} $array={enhancedForArray} {...rest} key="$$no-data$$"/> : null,
 			// eslint-disable-next-line @typescript-eslint/no-explicit-any
 			...elements.map((elementModel: any, index: number) => {
-				const key = getElementKey(elementModel);
+				const key = getElementKey(elementModel, index);
 				N1Logger.debug(`Array element[key=${key}, path=${$p2r}].`, elementModel, 'ArrayWrapper');
 				return <ArrayElement elements={elements} elementModel={elementModel} index={index}
 				                     $wrapped={$wrapped} $arrayP2r={$arrayP2r} $array={enhancedForArray}
