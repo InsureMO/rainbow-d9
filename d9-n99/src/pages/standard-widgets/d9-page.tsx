@@ -1,5 +1,12 @@
-import {ExternalDefs, NodeDef, ObjectPropValue, RootEventTypes, StandaloneRoot, useRootEventBus} from '@rainbow-d9/n1';
-import {useCreateEventBus} from '@rainbow-d9/n1/src';
+import {
+	ExternalDefs,
+	NodeDef,
+	ObjectPropValue,
+	RootEventTypes,
+	StandaloneRoot,
+	useCreateEventBus,
+	useRootEventBus
+} from '@rainbow-d9/n1';
 import {AlertLabel, GlobalHandlers, GlobalRoot, IntlLabel, useGlobalHandlers} from '@rainbow-d9/n2';
 import {parseDoc} from '@rainbow-d9/n3';
 import {createContext, Fragment, JSX, ReactNode, useContext, useEffect, useState} from 'react';

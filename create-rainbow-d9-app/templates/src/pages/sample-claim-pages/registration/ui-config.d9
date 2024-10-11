@@ -69,7 +69,7 @@
 
 ## Table::
 
-- data-next-to-search, data-operators-hover-only
+- data-next-to-search, data-operators-hover-only, data-fat-row
 - property: results
 - !expandable, !addable, !removable
 - omitDefaultRowOperators
@@ -97,7 +97,9 @@
 - Label::::idNo
 - Label::::dob
 - Label::::relatedPolicyNos
+	- data-vertical-list
 - Label::::ongoingClaimNos
+	- data-vertical-list
 - RowOperators::
 	- Button::
 		- text: Register

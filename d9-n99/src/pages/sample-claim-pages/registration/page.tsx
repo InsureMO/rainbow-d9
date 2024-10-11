@@ -1,5 +1,5 @@
 import {BaseModel, ObjectPropValue, PropValue, RootEventTypes, VUtils} from '@rainbow-d9/n1';
-import {ButtonClickOptions, GlobalHandlers, PaginationData} from '@rainbow-d9/n2';
+import {ButtonClickOptions, ButtonFill, GlobalHandlers, PaginationData, UnwrappedCaption} from '@rainbow-d9/n2';
 import {useRef} from 'react';
 import {Page} from '../../../services';
 import {createDropdownOptionsProvider, D9Page, DC} from '../../standard-widgets';
@@ -61,6 +61,37 @@ const askInsuredList = async (_criteria: Omit<Criteria, 'keywords'>, pageNumber:
 	return await askMockData(pageNumber, pageSize);
 };
 
+const RelatedPolicy = (props: { policyNo: string }) => {
+	const {policyNo} = props;
+	const onClick = () => alert(policyNo);
+	return <UnwrappedCaption data-fill={ButtonFill.LINK} click={onClick}>{policyNo}</UnwrappedCaption>;
+};
+const RelatedClaim = (props: { claimNo: string }) => {
+	const {claimNo} = props;
+	const onClick = () => alert(claimNo);
+	return <UnwrappedCaption data-fill={ButtonFill.LINK} click={onClick}>{claimNo}</UnwrappedCaption>;
+};
+const wrapResults = (results?: Array<ResultItem>) => {
+	if (results == null || results.length === 0) {
+		return [];
+	}
+	const wrapped = results.map(item => {
+		const {relatedPolicyNos, ongoingClaimNos, ...rest} = item;
+		return {
+			...rest,
+			relatedPolicyNos: relatedPolicyNos?.map(policyNo => {
+				return <RelatedPolicy policyNo={policyNo} key={policyNo}/>;
+			}),
+			ongoingClaimNos: ongoingClaimNos?.map(claimNo => {
+				return <RelatedClaim claimNo={claimNo} key={claimNo}/>;
+			})
+		};
+	});
+	results.length = 0;
+	results.push(...wrapped as unknown as Array<ResultItem>);
+	return results;
+};
+
 export default () => {
 	// build a ref to keep the root model
 	const rootModelRef = useRef<RootModel>(JSON.parse(JSON.stringify(InitRootModel)));
@@ -77,7 +108,7 @@ export default () => {
 					const {
 						data, ...page
 					} = await (DC.with(globalHandlers).use(async () => await askInsuredListByKeywords(keywords ?? '')).ask());
-					root.results = data;
+					root.results = wrapResults(data);
 					root.page = page;
 					root.resultsCriteria = {keywords};
 					root.resultsUseKeywords = true;
@@ -102,7 +133,7 @@ export default () => {
 					const {
 						data, ...page
 					} = await (DC.with(globalHandlers).use(async () => await askInsuredList(criteria)).ask());
-					root.results = data;
+					root.results = wrapResults(data);
 					root.page = page;
 					root.resultsCriteria = criteria;
 					root.resultsUseKeywords = false;
@@ -125,7 +156,7 @@ export default () => {
 			},
 			register: {
 				click: async (_options: ButtonClickOptions<BaseModel, PropValue>) => {
-					// do register
+					// TODO do register
 				}
 			},
 			onPageChanged: async (options: { newValue: PaginationData }) => {
@@ -141,7 +172,7 @@ export default () => {
 					result = await (DC.with(globalHandlers).use(async () => await askInsuredList(criteria, pageNumber, pageSize)).ask());
 				}
 				const {data, ...page} = result;
-				root.results = data;
+				root.results = wrapResults(data);
 				root.page = page;
 			}
 		};
