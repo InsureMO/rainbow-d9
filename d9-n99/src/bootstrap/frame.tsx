@@ -102,6 +102,11 @@ const Container = styled.div.attrs({[DOM_KEY_WIDGET]: 'app-frame'})`
     }
 
     span[data-w=d9-caption] {
+        &[data-as-section-title] {
+            font-size: var(--d9-section-header-title-font-size);
+            font-weight: var(--d9-section-header-title-font-weight);
+        }
+
         &[data-vertical-list] {
             flex-direction: column;
             height: auto;

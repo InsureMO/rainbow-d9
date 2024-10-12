@@ -18,9 +18,15 @@ export const createExternalDefsCreator = (_rootModelRef: MutableRefObject<any>, 
 				channelsForClaimRegistration: assistantData.submissionChannelOptions
 			}),
 			'change-insured': {
-				// click the reset button of advanced search section
 				click: async (_options: ButtonClickOptions<BaseModel, PropValue>) => {
 					// do change insured
+					alert('Change insured button clicked.');
+				}
+			},
+			'search-reporter': {
+				click: async (_options: ButtonClickOptions<BaseModel, PropValue>) => {
+					// do change insured
+					alert('Search reporter button clicked.');
 				}
 			},
 			relationshipChanged: async (options: ValueChangedOptions<string>): Promise<void> => {

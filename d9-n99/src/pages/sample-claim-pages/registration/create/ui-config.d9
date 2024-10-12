@@ -24,7 +24,19 @@
 	- disabled
 	- pos: 6
 
-## Section::claim-registration.insured.title::data.insured
+## Section::::data.insured
+
+- label: Box
+	- data-space-grabber
+	- Caption::claim-registration.insured.title
+		- data-as-section-title
+	- Box::
+		- data-space-grabber
+	- Button::
+		- text: claim-registration.action.change-insured
+		- click: @ext.change-insured.click
+		- fill: link
+		- data-fit-link
 
 - Input::biz.insured-name::name
 	- disabled
@@ -41,12 +53,6 @@
 	- options: @ext.codes.gender
 - Input::biz.dob::dob
 	- disabled
-
-- ButtonBar::
-	- data-narrow-up-in-search
-	- Button::
-		- text: claim-registration.action.change-insured
-		- click: @ext.change-insured.click
 
 ## Section::claim-registration.claim.title::data.claim
 
@@ -74,6 +80,18 @@
 	- pos: 12
 
 ## Section::claim-registration.reporter.title::data.reporter
+
+- label: Box
+	- data-space-grabber
+	- Caption::claim-registration.reporter.title
+		- data-as-section-title
+	- Box::
+		- data-space-grabber
+	- Button::
+		- text: claim-registration.action.search-reporter
+		- click: @ext.search-reporter.click
+		- fill: link
+		- data-fit-link
 
 - Dropdown::claim-registration.reporter.relationship::relationship
 	- options: @ext.codes.relationshipWithInsured

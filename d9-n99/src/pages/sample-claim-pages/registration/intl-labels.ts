@@ -31,7 +31,11 @@ registerPageIntlLabels('claim-registration')
 			'notification-method': 'Notification Method', 'handling-producer': 'Handling Producer',
 			'producer-mobile': 'Producer Mobile No.', 'producer-email': 'Producer Email'
 		},
-		action: {register: 'Register', 'change-insured': 'Change Insured', comment: 'Comment'}
+		action: {
+			register: 'Register',
+			'change-insured': 'Change Insured', 'search-reporter': 'Search Reporter',
+			comment: 'Comment'
+		}
 	})
 	.lang('zh-CN')
 	.labels({
@@ -63,5 +67,9 @@ registerPageIntlLabels('claim-registration')
 			'notification-method': '通知方式', 'handling-producer': '理赔专员',
 			'producer-mobile': '专员手机号码', 'producer-email': '专员电子邮箱'
 		},
-		action: {register: '报案', 'change-insured': '重新选择被保人', comment: '备注'}
+		action: {
+			register: '报案',
+			'change-insured': '重新选择被保人', 'search-reporter': '查找报案人',
+			comment: '备注'
+		}
 	});
