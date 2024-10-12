@@ -49,7 +49,14 @@ export const createN2ThemeStyles = (): AppThemeStyle => {
 		CAPTION_FONT_FAMILY: 'var(--d9-caption-font-family, "Roboto")',
 		SECTION_HEADER_TITLE_FONT_SIZE: 'var(--d9-section-header-title-font-size, 18px)',
 		SECTION_HEADER_TITLE_FONT_WEIGHT: 'var(--d9-section-header-title-font-weight, 400)',
-		SECTION_HEADER_BORDER: 'var(--d9-section-header-border, var(--d9-border))'
+		SECTION_HEADER_BORDER: 'var(--d9-section-header-border, var(--d9-border))',
+		// add definitions for button bar padding, for further usage
+		BUTTON_BAR_PADDING_TB: 'var(--d9-button-bar-padding-tb, 8px)',
+		// add definitions for dialog padding, for further usage
+		DIALOG_PADDING_TOP: 'var(--d9-dialog-padding-top, 32px)',
+		DIALOG_PADDING_LR: 'var(--d9-dialog-padding-lr, 32px)',
+		DIALOG_PADDING_BOTTOM: 'var(--d9-dialog-padding-bottom, 16px)',
+		DIALOG_PADDING: 'var(--d9-dialog-padding, var(--d9-dialog-padding-top) var(--d9-dialog-padding-lr) var(--d9-dialog-padding-bottom))'
 	};
 
 	return {

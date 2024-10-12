@@ -47,8 +47,8 @@ const Container = styled.div.attrs({[DOM_KEY_WIDGET]: 'app-frame'})`
             display: flex;
             align-items: center;
 
-            > *:hover {
-                z-index: 1;
+            > *:hover + * {
+                z-index: 10;
             }
 
             > *:first-child {

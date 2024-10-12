@@ -142,6 +142,9 @@ export const createAppThemeStyles = (): AppThemeStyle => {
 			'page-bottom-bar-background-color': `var(--app-page-bottom-bar-background-color, ${variables.pageBottomBarBackground})`,
 			'page-bottom-bar-padding': 'var(--app-page-bottom-bar-padding, 8px 32px)',
 			'page-bottom-bar-z-index': 'var(--app-page-bottom-bar-z-index, 9)',
+			// dialog
+			'dialog-largest-height': 'var(--app-dialog-largest-height, 80vh)',
+			'dialog-largest-width': 'var(--app-dialog-largest-width, 80vw)',
 			// page, authentication
 			'authentication-min-width': 'var(--page-authentication-min-width, min(60vw, 600px))',
 			'authentication-border': 'var(--page-authentication-border, var(--d9-border))',

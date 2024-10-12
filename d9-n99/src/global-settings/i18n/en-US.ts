@@ -16,12 +16,12 @@ export const intlForAppEnUS = {
 	page: {
 		common: {
 			title: {
-				fuzzy: 'Fuzzy Search',
-				advanced: 'Advanced Search'
+				search: 'Search', fuzzy: 'Fuzzy Search', advanced: 'Advanced Search'
 			},
 			button: {
 				'show-advanced-search': 'Show Advanced Search', 'hide-advanced-search': 'Hide Advanced Search',
-				search: 'Search', 'reset-criteria': 'Reset', save: 'Save', submit: 'Submit'
+				search: 'Search', 'reset-criteria': 'Reset',
+				save: 'Save', submit: 'Submit', discard: 'Discard', cancel: 'Cancel'
 			}
 		},
 		authentication: {

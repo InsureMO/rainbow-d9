@@ -14,6 +14,13 @@ const Container = styled.div.attrs({[DOM_KEY_WIDGET]: 'app-work-area'})`
     min-height: 100vh;
     background: var(--app-work-area-background);
     transition: margin-left .3s ease-in-out, width .3s ease-in-out, min-width .3s ease-in-out;
+
+    > div[data-w=dialog] > div[data-w=dialog-wrapper] {
+        > div[data-w=page-standard-wrapper] {
+            padding: 0;
+            min-height: calc(100% - var(--d9-input-height) - var(--d9-button-bar-padding-tb) * 2);
+        }
+    }
 `;
 
 const WorkAreaContainer = () => {

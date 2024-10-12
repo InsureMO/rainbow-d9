@@ -200,3 +200,26 @@ export const D9Page = (props: D9PageProps) => {
 		</GlobalRoot>
 	</PageToRootEventBusProvider>;
 };
+
+export const D9Dialog = (props: Pick<D9PageProps, 'ui' | 'initRootModel' | 'initRootModelAsIs' | 'externalDefs'>) => {
+	const {ui, initRootModel = {}, initRootModelAsIs = false, externalDefs} = props;
+
+	const [state] = useState<D9PageState>(() => {
+		return {
+			$config: parseDoc(ui),
+			// deep clone it
+			$root: initRootModelAsIs ? initRootModel : JSON.parse(JSON.stringify(initRootModel))
+		};
+	});
+	const {success, error} = state.$config;
+
+	if (!success) {
+		if (error instanceof Error) {
+			return <div>{error.message}</div>;
+		} else {
+			return <div>{error}</div>;
+		}
+	}
+
+	return <D9PageContent pageDefs={state.$config.node} rootModel={state.$root} externalDefs={externalDefs}/>;
+};

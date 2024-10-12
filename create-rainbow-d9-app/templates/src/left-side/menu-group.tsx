@@ -239,7 +239,7 @@ export const MenuGroup = (props: MenuGroupProps) => {
 		</Container>;
 	}
 
-	const onGroupLabelClicked = () => {
+	const onGroupLabelClick = () => {
 		const height = itemsRef.current!.scrollHeight;
 		if (state.expanded === ExpandState.HIDE) {
 			setState(state => ({...state, expanded: ExpandState.SHOWING, height}));
@@ -250,7 +250,7 @@ export const MenuGroup = (props: MenuGroupProps) => {
 	};
 
 	return <Container data-expanded={state.expanded} data-visible={state.visible} ref={ref}>
-		<Label level={level} data-expanded={state.expanded} onClick={onGroupLabelClicked}>
+		<Label level={level} data-expanded={state.expanded} onClick={onGroupLabelClick}>
 			<span data-type="icon">{icon}</span>
 			<span data-type="text">{toIntlLabel(text)}</span>
 			<span data-type="arrow"><ArrowIcon/></span>

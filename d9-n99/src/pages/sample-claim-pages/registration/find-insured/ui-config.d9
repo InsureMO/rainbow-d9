@@ -3,6 +3,12 @@
 ## Section::page.common.title.fuzzy::criteria
 
 - data-next-to-banner
+- visible:
+	- on: /control.advancedSearchEnabled
+	- handle:
+	  ```ts
+	  return root.control.fuzzySearchEnabled === true;
+	  ```
 
 - DecoInput::::keywords
 	- pos: 6

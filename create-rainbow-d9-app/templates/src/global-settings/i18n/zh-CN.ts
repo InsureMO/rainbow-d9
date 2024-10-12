@@ -53,12 +53,12 @@ export const intlForAppZhCN = {
 	page: {
 		common: {
 			title: {
-				fuzzy: '模糊查询',
-				advanced: '高级查询'
+				search: '查询', fuzzy: '模糊查询', advanced: '高级查询'
 			},
 			button: {
 				'show-advanced-search': '使用高级查询', 'hide-advanced-search': '隐藏高级查询',
-				search: '开始查找', 'reset-criteria': '重置条件', save: '暂存', submit: '提交'
+				search: '开始查找', 'reset-criteria': '重置条件',
+				save: '暂存', submit: '提交', discard: '放弃', cancel: '取消'
 			}
 		},
 		authentication: {

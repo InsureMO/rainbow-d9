@@ -1,5 +1,6 @@
 {
 	"control": {
+		"fuzzySearchEnabled": true,
 		"advancedSearchEnabled": false
 	},
 	"criteria": {

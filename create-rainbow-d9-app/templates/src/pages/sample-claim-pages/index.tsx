@@ -15,7 +15,11 @@ registerMockCodeTables({
 	],
 	idType: [
 		{label: 'Identity Card', value: 'idCard'},
-		{label: 'Passport', value: 'passport'}
+		{label: 'Passport', value: 'passport'},
+		{label: 'Driving License', value: 'drivingLicense'},
+		{label: 'Military ID', value: 'militaryId'},
+		{label: 'Officer ID', value: 'officerId'},
+		{label: 'Others', value: 'others'}
 	],
 	registrationStatus: [
 		{label: 'Draft', value: 'draft'},

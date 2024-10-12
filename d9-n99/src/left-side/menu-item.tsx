@@ -80,12 +80,12 @@ export const MenuItem = (props: MenuItemProps) => {
 	const {icon, text, level, click} = props;
 
 	const {fire} = useAppEventBus();
-	const onLabelClicked = async () => {
+	const onLabelClick = async () => {
 		await click(fire);
 	};
 
 	return <Container data-visible={true}>
-		<Label level={level} onClick={onLabelClicked}>
+		<Label level={level} onClick={onLabelClick}>
 			<span data-type="icon">{icon}</span>
 			<span data-type="text">{toIntlLabel(text)}</span>
 		</Label>

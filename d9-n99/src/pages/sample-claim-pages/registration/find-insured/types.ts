@@ -22,7 +22,8 @@ export interface ResultItem {
 
 export interface RootModel {
 	control: {
-		advancedSearchEnabled: boolean
+		fuzzySearchEnabled: boolean;
+		advancedSearchEnabled: boolean;
 	};
 	criteria: Criteria;
 	results: Array<ResultItem>;
