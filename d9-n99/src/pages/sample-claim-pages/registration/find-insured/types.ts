@@ -1,4 +1,4 @@
-import {Page} from '../../../services';
+import {Page} from '../../../../services';
 
 export interface Criteria {
 	keywords?: string;

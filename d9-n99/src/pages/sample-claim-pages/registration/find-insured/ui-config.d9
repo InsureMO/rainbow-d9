@@ -103,7 +103,7 @@
 	- data-vertical-list
 - RowOperators::
 	- Button::
-		- text: Register
+		- text: claim-registration.action.register
 		- fill: link
 		- click: @ext.register.click
 		- data-text-row-operator

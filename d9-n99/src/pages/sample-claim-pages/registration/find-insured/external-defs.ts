@@ -1,9 +1,9 @@
 import {BaseModel, PropValue, RootEventTypes, VUtils} from '@rainbow-d9/n1';
 import {ButtonClickOptions, GlobalHandlers, PaginationData} from '@rainbow-d9/n2';
 import {MutableRefObject} from 'react';
-import {Page} from '../../../services';
-import {createDropdownOptionsProvider, DC} from '../../standard-widgets';
-import {onEnterPressed} from '../../utils';
+import {Page} from '../../../../services';
+import {createDropdownOptionsProvider, DC} from '../../../standard-widgets';
+import {onEnterPressed} from '../../../utils';
 import {askInsuredList, askInsuredListByKeywords} from './mock-services';
 import {wrapResults} from './results-wrapper';
 import {ResultItem, RootModel} from './types';

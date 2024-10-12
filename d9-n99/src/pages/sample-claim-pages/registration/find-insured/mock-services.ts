@@ -1,4 +1,4 @@
-import {Page} from '../../../services';
+import {Page} from '../../../../services';
 import {Criteria, ResultItem} from './types';
 
 const baseItem: ResultItem = {

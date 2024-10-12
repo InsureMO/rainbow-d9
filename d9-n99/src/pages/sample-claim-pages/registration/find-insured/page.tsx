@@ -1,6 +1,6 @@
 import {ObjectPropValue} from '@rainbow-d9/n1';
 import {useRef} from 'react';
-import {D9Page} from '../../standard-widgets';
+import {D9Page} from '../../../standard-widgets';
 import {createExternalDefsCreator} from './external-defs';
 import InitRootModel from './init-root.json';
 import {RootModel} from './types';
