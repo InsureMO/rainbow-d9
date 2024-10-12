@@ -27,7 +27,7 @@ export const createExternalDefsCreator = (rootModelRef: MutableRefObject<any>): 
 					const {keywords} = root.criteria;
 					const {
 						data, ...page
-					} = await (DC.with(globalHandlers).use(async () => await askInsuredListByKeywords(keywords ?? '')).ask());
+					} = await DC.with(globalHandlers).use(async () => await askInsuredListByKeywords(keywords ?? '')).ask();
 					root.results = wrapResults(data);
 					root.page = page;
 					root.resultsCriteria = {keywords};
@@ -53,7 +53,7 @@ export const createExternalDefsCreator = (rootModelRef: MutableRefObject<any>): 
 					const {keywords, ...criteria} = root.criteria;
 					const {
 						data, ...page
-					} = await (DC.with(globalHandlers).use(async () => await askInsuredList(criteria)).ask());
+					} = await DC.with(globalHandlers).use(async () => await askInsuredList(criteria)).ask();
 					root.results = wrapResults(data);
 					root.page = page;
 					root.resultsCriteria = criteria;
@@ -96,9 +96,9 @@ export const createExternalDefsCreator = (rootModelRef: MutableRefObject<any>): 
 				const {keywords, ...criteria} = root.resultsCriteria ?? root.criteria;
 				let result: Page<ResultItem>;
 				if (root.resultsUseKeywords) {
-					result = await (DC.with(globalHandlers).use(async () => await askInsuredListByKeywords(keywords ?? '', pageNumber, pageSize)).ask());
+					result = await DC.with(globalHandlers).use(async () => await askInsuredListByKeywords(keywords ?? '', pageNumber, pageSize)).ask();
 				} else {
-					result = await (DC.with(globalHandlers).use(async () => await askInsuredList(criteria, pageNumber, pageSize)).ask());
+					result = await DC.with(globalHandlers).use(async () => await askInsuredList(criteria, pageNumber, pageSize)).ask();
 				}
 				const {data, ...page} = result;
 				root.results = wrapResults(data);

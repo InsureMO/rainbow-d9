@@ -1,20 +1,45 @@
-import {ObjectPropValue} from '@rainbow-d9/n1';
+import {ObjectPropValue, VUtils} from '@rainbow-d9/n1';
+import {DropdownOptions, GlobalHandlers} from '@rainbow-d9/n2';
 import {lazy} from 'react';
 import {AppPage, PageRegistrar} from '../../../../global-settings';
 import {loadFromSessionAndBurn} from '../../../../utils';
-import {PreloadedLazyPageWrapper} from '../../../standard-widgets';
+import {DC, PreloadedLazyPageWrapper, PreloadedPageProps, PreloaderFuncOptions} from '../../../standard-widgets';
 import InitRootModel from './init-root.json';
-import {Insured, RootModel} from './types';
+import {askSubmissionChannel, createClaimRegistrationCase} from './mock-services';
+import {AssistantData, Insured, RootModel} from './types';
 
-const ClaimRegistrationCreateIndex = PreloadedLazyPageWrapper(lazy(() => import('./page')), {
+const ClaimRegistrationCreateIndex = PreloadedLazyPageWrapper<AssistantData>(lazy(() => import('./page')), {
 	usePathParams: true,
-	initRootModel: async (options) => {
+	/** initialize root model */
+	initRootModel: async (options: PreloaderFuncOptions) => {
 		const {key = ''} = options.pathParams ?? {};
-		const insured: Insured | undefined = loadFromSessionAndBurn(key);
+		const insured: (Omit<Insured, 'name'> & { insuredName?: string }) | undefined = loadFromSessionAndBurn(key);
 		const rootModel: RootModel = JSON.parse(JSON.stringify(InitRootModel));
-		rootModel.data = {insured};
+		// create registration case
+		rootModel.data = await createClaimRegistrationCase(insured);
 		return rootModel as unknown as ObjectPropValue;
-	}
+	},
+	/** run after root model initialized, to load submission channel */
+	assistantData: async (options: PreloaderFuncOptions & Pick<PreloadedPageProps, 'initRootModel'>) => {
+		const rootModel = options.initRootModel as unknown as RootModel;
+		return async (globalHandlers: GlobalHandlers) => {
+			const submissionChannelOptions: DropdownOptions = [];
+			const {manualSubmit = false, submissionChannelId} = rootModel.data ?? {};
+			if (!manualSubmit && VUtils.isNotBlank(submissionChannelId)) {
+				try {
+					const {
+						channelId, name
+					} = await DC.with(globalHandlers).use(async () => await askSubmissionChannel(submissionChannelId!)).ask();
+					submissionChannelOptions.push({label: name, value: channelId});
+				} catch (e) {
+					console.groupCollapsed(`Failed to get submission channel by id[${submissionChannelId}].`);
+					console.error(e);
+				}
+			}
+			return {submissionChannelOptions};
+		};
+	},
+	orderBy: [['initRootModel'], ['assistantData']]
 });
 
 const ClaimRegistrationCreatePage: AppPage = {

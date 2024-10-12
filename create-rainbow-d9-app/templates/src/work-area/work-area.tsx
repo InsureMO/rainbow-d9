@@ -11,7 +11,6 @@ const Container = styled.div.attrs({[DOM_KEY_WIDGET]: 'app-work-area'})`
     position: relative;
     width: 100vw;
     min-width: 100vw;
-    height: 100vh;
     min-height: 100vh;
     background: var(--app-work-area-background);
     transition: margin-left .3s ease-in-out, width .3s ease-in-out, min-width .3s ease-in-out;

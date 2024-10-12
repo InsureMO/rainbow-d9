@@ -88,12 +88,10 @@
 	- claim-registration.results.ongoing-claims: 200
 - Label::::insuredName
 - Dropdown::::gender
-	- data-as-label
-	- disabled: true
+	- data-as-label, disabled
 	- options: @ext.codes.gender
 - Dropdown::::idType
-	- data-as-label
-	- disabled: true
+	- data-as-label, disabled
 	- options: @ext.codes.idType
 - Label::::idNo
 - Label::::dob

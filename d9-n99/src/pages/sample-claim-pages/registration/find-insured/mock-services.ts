@@ -7,7 +7,7 @@ const baseItem: ResultItem = {
 	customerId: '10000',
 	insuredName: 'John Doe',
 	gender: 'M',
-	idType: 'IDCard',
+	idType: 'idCard',
 	idNo: 'I123456789',
 	dob: '01/01/1980',
 	relatedPolicyNos: ['P12345678901', 'P12345678902'],

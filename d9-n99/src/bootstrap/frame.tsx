@@ -5,7 +5,7 @@ import {SideMenu} from '../left-side';
 import {WorkArea} from '../work-area';
 import {AppFrameLayoutController} from './layout-controller';
 
-// noinspection CssUnresolvedCustomProperty
+// noinspection CssUnresolvedCustomProperty,CssNoGenericFontName
 const Container = styled.div.attrs({[DOM_KEY_WIDGET]: 'app-frame'})`
     display: block;
     position: relative;
@@ -13,6 +13,36 @@ const Container = styled.div.attrs({[DOM_KEY_WIDGET]: 'app-frame'})`
     min-height: 100vh;
 
     div[data-w=d9-box] {
+        &[data-space-grabber] {
+            flex-grow: 1;
+        }
+
+        &[data-fix-title] {
+            position: fixed;
+            background-color: var(--app-work-area-background);
+            margin: var(--app-page-fix-title-box-margin);
+            padding: var(--app-page-fix-title-box-padding);
+            height: var(--app-page-fix-title-box-height);
+            width: 100%;
+            z-index: var(--app-page-fix-title-box-z-index);
+
+            > span[data-w=d9-caption] {
+                font-family: var(--app-page-fix-title-box-font-family);
+                font-size: var(--app-page-fix-title-box-font-size);
+                font-weight: var(--app-page-fix-title-box-font-weight);
+                color: var(--app-page-fix-title-box-font-color);
+                height: unset;
+
+                &:not(:first-child) {
+                    margin-left: var(--app-page-fix-title-box-spacing);
+                }
+            }
+
+            + div {
+                margin-top: var(--app-page-fix-title-box-height);
+            }
+        }
+
         &[data-type-input-box] {
             display: flex;
             align-items: center;
@@ -47,11 +77,27 @@ const Container = styled.div.attrs({[DOM_KEY_WIDGET]: 'app-frame'})`
         &[data-narrow-up-in-search] {
             margin-top: var(--app-page-narrow-up-in-search-margin);
         }
+
+        &[data-fix-bottom] {
+            position: fixed;
+            bottom: 0;
+            right: 0;
+            background-color: var(--app-page-bottom-bar-background-color);
+            padding: var(--app-page-bottom-bar-padding);
+            border-radius: 0;
+            z-index: var(--app-page-bottom-bar-z-index);
+        }
     }
 
     div[data-w=d9-form-cell] {
         &[data-hide-caption] > span[data-r=d9-fc-caption] {
             display: none;
+        }
+
+        &[data-required=true]:not([data-hide-asterisk]) > span[data-r=d9-fc-caption]::after {
+            content: '*';
+            color: var(--d9-danger-color);
+            margin-left: 4px;
         }
     }
 
@@ -83,6 +129,12 @@ const Container = styled.div.attrs({[DOM_KEY_WIDGET]: 'app-frame'})`
             &:hover, &:focus-within {
                 border-color: transparent;
                 box-shadow: none;
+            }
+        }
+
+        &[data-normal-placeholder] {
+            > span[data-w=d9-dropdown-label][data-please=true] {
+                color: var(--d9-font-color);
             }
         }
     }

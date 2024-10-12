@@ -1,2 +1,151 @@
 # Page
 
+## Box::
+
+- data-fix-title
+- pos: 12
+
+- Caption::claim-registration.case-no
+	- !$fc
+- Label::::data.caseNo
+
+## Section::::data
+
+- Input::claim-registration.reg-no::registrationNo
+	- disabled
+- Dropdown::claim-registration.status::status
+	- options: @ext.codes.registrationStatus
+	- please: dropdown.placeholder.unknown
+	- disabled
+- Dropdown::claim-registration.submission-channel::submissionChannelId
+	- data-normal-placeholder
+	- options: @ext.codes.channelsForClaimRegistration
+	- please: claim-registration.manual-register
+	- disabled
+	- pos: 6
+
+## Section::claim-registration.insured.title::data.insured
+
+- Input::biz.insured-name::name
+	- disabled
+- Box::biz.id-no
+	- data-type-input-box
+	- Dropdown::::idType
+		- disabled
+		- options: @ext.codes.idType
+		- please: dropdown.placeholder.unknown
+	- Input::::idNo
+		- disabled
+- Dropdown::biz.gender::gender
+	- disabled
+	- options: @ext.codes.gender
+- Input::biz.dob::dob
+	- disabled
+
+- ButtonBar::
+	- data-narrow-up-in-search
+	- Button::
+		- text: claim-registration.action.change-insured
+		- click: @ext.change-insured.click
+
+## Section::claim-registration.claim.title::data.claim
+
+- MultiDropdown::claim-registration.claim.type::type
+	- options: @ext.codes.claimType
+	- please: dropdown.placeholder.please-select
+	- required
+	- pos: 9
+- Box::
+- Date::claim-registration.claim.notification-date::notificationDate
+	- required
+- Date::claim-registration.claim.event-date::eventDate
+	- required
+- Dropdown::claim-registration.claim.nature::nature
+	- options: @ext.codes.claimNature
+	- please: dropdown.placeholder.please-select
+	- required
+- Input::claim-registration.claim.incident-code::incidentCode
+- Dropdown::claim-registration.claim.case-classification::caseClassification
+	- options: @ext.codes.caseClassification
+- Input::claim-registration.claim.previous-case-no::previousCaseNo
+- Input::claim-registration.claim.diagnosis-code::diagnosisCode
+	- pos: 6
+- Textarea::claim-registration.claim.details::details
+	- pos: 12
+
+## Section::claim-registration.reporter.title::data.reporter
+
+- Dropdown::claim-registration.reporter.relationship::relationship
+	- options: @ext.codes.relationshipWithInsured
+	- please: dropdown.placeholder.please-select
+	- valueChanged: @ext.relationshipChanged
+- Dropdown::claim-registration.reporter.via::via
+	- options: @ext.codes.reportVia
+	- please: dropdown.placeholder.please-select
+- Input::claim-registration.reporter.name::name
+	- disabled:
+		- on: relationship
+		- handle:
+		  ```ts
+		  return model.relationship === 'self';
+		  ```
+- Box::
+- Dropdown::biz.id-type::idType
+	- options: @ext.codes.idType
+	- disabled:
+		- on: relationship
+		- handle:
+		  ```ts
+		  return model.relationship === 'self';
+		  ```
+- Dropdown::claim-registration.reporter.type-of-pass::typeOfPass
+	- options: @ext.codes.typeOfPass
+	- please: dropdown.placeholder.please-select
+	- disabled:
+		- on: idType
+		- handle:
+		  ```ts
+		  return model.idType !== 'passport';
+		  ```
+- Input::biz.id-no::idNo
+	- disabled:
+		- on: relationship
+		- handle:
+		  ```ts
+		  return model.relationship === 'self';
+		  ```
+- Box::
+- Input::biz.address1::address1
+	- pos: 9
+- Input::biz.postcode::postcode
+- Input::biz.address2::address2
+	- pos: 4
+- Input::biz.address3::address3
+	- pos: 4
+- Input::biz.address4::address4
+	- pos: 4
+- Input::biz.mobile::mobile
+- Input::biz.email::email
+- Dropdown::claim-registration.reporter.notification-method::notificationMethod
+	- options: @ext.codes.notificationMethod
+- Input::claim-registration.reporter.handling-producer::handlingProducer
+	- pos: 6
+- Input::claim-registration.reporter.producer-mobile::producerMobile
+- Input::claim-registration.reporter.producer-email::producerEmail
+
+## ButtonBar::
+
+- data-fix-bottom
+
+- Button::
+	- text: claim-registration.action.comment
+	- click: @ext.comment.click
+	- ink: info
+- Box::
+	- data-space-grabber
+- Button::
+	- text: page.common.button.save
+	- click: @ext.save.click
+- Button::
+	- text: page.common.button.submit
+	- click: @ext.submit.click

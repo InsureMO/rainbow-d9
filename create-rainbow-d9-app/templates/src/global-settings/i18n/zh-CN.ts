@@ -41,11 +41,14 @@ export const intlForAppZhCN = {
 		preferences: '使用偏好', language: '语言', theme: '颜色主题'
 	},
 	dropdown: {
-		placeholder: {all: '所有...', any: '任何...'}
+		placeholder: {'please-select': '请选择...', all: '所有...', any: '任何...', unknown: '未知'}
 	},
 	biz: {
 		'policy-no': '保单号',
-		'insured-name': '被保人姓名', 'id-type': '证件类型', 'id-no': '证件号码', gender: '性别', dob: '出生日期'
+		'insured-name': '被保人姓名', 'id-type': '证件类型', 'id-no': '证件号码', gender: '性别', dob: '出生日期',
+		postcode: '邮政编码', mobile: '手机号码', email: '电子邮箱',
+		address1: '地址栏 #1', address2: '地址栏 #2',
+		address3: '地址栏 #3', address4: '地址栏 #4'
 	},
 	page: {
 		common: {
@@ -55,7 +58,7 @@ export const intlForAppZhCN = {
 			},
 			button: {
 				'show-advanced-search': '使用高级查询', 'hide-advanced-search': '隐藏高级查询',
-				search: '开始查找', 'reset-criteria': '重置条件'
+				search: '开始查找', 'reset-criteria': '重置条件', save: '暂存', submit: '提交'
 			}
 		},
 		authentication: {
@@ -70,6 +73,11 @@ export const intlForAppZhCN = {
 		},
 		lazy: '正在加载页面, 请稍候...',
 		home: '首页, 修改/src/work-area/home/index.tsx实现自定义渲染行为.'
+	},
+	validation: {
+		input: {
+			failed: '输入信息有误, 请检查后再操作.'
+		}
 	},
 	actions: {
 		logout: {

@@ -1,4 +1,5 @@
 export * from './data-client';
+export * from './page-validator';
 export * from './dropdown-options';
 
 export * from './standard-page-wrapper';

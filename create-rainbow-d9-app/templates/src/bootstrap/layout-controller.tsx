@@ -78,6 +78,11 @@ const LayoutController = styled.div.attrs({[DOM_KEY_WIDGET]: 'app-frame-layout-c
             margin-left: var(--app-side-menu-fold-width);
             width: calc(100vw - var(--app-side-menu-fold-width));
             min-width: calc(100vw - var(--app-side-menu-fold-width));
+
+            div[data-w=d9-button-bar][data-fix-bottom] {
+                left: var(--app-side-menu-fold-width);
+                transition: left var(--d9-transition-duration) var(--d9-transition-timing-function);
+            }
         }
     }
 
@@ -96,6 +101,11 @@ const LayoutController = styled.div.attrs({[DOM_KEY_WIDGET]: 'app-frame-layout-c
             margin-left: var(--app-side-menu-width);
             width: calc(100vw - var(--app-side-menu-width));
             min-width: calc(100vw - var(--app-side-menu-width));
+
+            div[data-w=d9-button-bar][data-fix-bottom] {
+                left: var(--app-side-menu-width);
+                transition: left var(--d9-transition-duration) var(--d9-transition-timing-function);
+            }
         }
     }
 

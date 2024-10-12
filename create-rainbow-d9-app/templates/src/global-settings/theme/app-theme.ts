@@ -16,7 +16,7 @@ export const createAppThemeStyles = (): AppThemeStyle => {
 		buttonMenuItemHoverColor: 'var(--d9-primary-color)',
 		buttonMenuItemHoverBackground: 'var(--d9-hover-color)',
 		sideMenuShadow: '0px 0px 35px 0px rgba(154, 161, 171, 0.15)',
-		sideMenuBackground: 'rgb(21, 23, 28)',
+		sideMenuBackground: 'rgb(31,33,38)',
 		sideMenuUnauthenticatedBackground: 'rgb(255, 255, 255)',
 		sideMenuHeaderLogoBackground: 'rgb(255,255,255)',
 		sideMenuHeaderLogoUnauthenticatedBackground: 'rgb(21, 23, 28)',
@@ -36,7 +36,8 @@ export const createAppThemeStyles = (): AppThemeStyle => {
 		logoColor2: 'rgb(62, 151, 255)',
 		logoColor3: 'rgb(222, 30, 14)',
 
-		workAreaBackground: 'var(--d9-background-color)'
+		workAreaBackground: 'var(--d9-background-color)',
+		pageBottomBarBackground: 'rgb(241,239,239)'
 	};
 	const createAppCssVars = (variables: typeof AppCssConstants) => {
 		return {
@@ -129,6 +130,18 @@ export const createAppThemeStyles = (): AppThemeStyle => {
 			'page-next-to-banner-margin': 'var(--app-page-next-to-banner-margin, 16px)',
 			'page-narrow-up-in-search-margin': 'var(--app-page-narrow-up-in-search-margin, -16px)',
 			'page-next-to-search-margin': 'var(--app-page-next-to-search-margin, 16px)',
+			'page-fix-title-box-margin': 'var(--app-page-fix-title-box-margin, -8px 0 0)',
+			'page-fix-title-box-padding': 'var(--app-page-fix-title-box-padding, 8px 0 0)',
+			'page-fix-title-box-height': 'var(--app-page-fix-title-box-height, 56px)',
+			'page-fix-title-box-z-index': 'var(--app-page-fix-title-box-z-index, 9)',
+			'page-fix-title-box-font-family': 'var(--app-page-fix-title-box-font-family, "Oswald")',
+			'page-fix-title-box-font-size': 'var(--app-page-fix-title-box-font-size, 24px)',
+			'page-fix-title-box-font-weight': 'var(--app-page-fix-title-box-font-weight, 400)',
+			'page-fix-title-box-color': 'var(--app-page-fix-title-box-color, var(--d9-font-color))',
+			'page-fix-title-box-spacing': 'var(--app-page-fix-title-box-spacing, 8px)',
+			'page-bottom-bar-background-color': `var(--app-page-bottom-bar-background-color, ${variables.pageBottomBarBackground})`,
+			'page-bottom-bar-padding': 'var(--app-page-bottom-bar-padding, 8px 32px)',
+			'page-bottom-bar-z-index': 'var(--app-page-bottom-bar-z-index, 9)',
 			// page, authentication
 			'authentication-min-width': 'var(--page-authentication-min-width, min(60vw, 600px))',
 			'authentication-border': 'var(--page-authentication-border, var(--d9-border))',
@@ -144,15 +157,18 @@ export const createAppThemeStyles = (): AppThemeStyle => {
 	};
 	const AppDarkCssConstants = {
 		...AppCssConstants,
-		bannerBackground: 'rgb(21, 23, 28)',
+		bannerBackground: 'rgb(31,33,38)',
+		bannerBreadcrumbTitleColor: 'rgba(255,255,255,0.8)',
+		bannerBreadcrumbLocationColor: 'rgba(255,255,255,0.4)',
 		bannerBottomBorderColor: 'rgb(38, 39, 47)',
 		bannerButtonMenuBackground: 'rgb(21, 23, 28)',
 		bannerButtonMenuShadow: '0px 10px 30px 5px rgba(173, 192, 150, 0.2)',
-		sideMenuUnauthenticatedBackground: 'rgb(21, 23, 28)',
+		sideMenuUnauthenticatedBackground: 'rgb(31,33,38)',
 		sideMenuHeaderLogoUnauthenticatedBackground: 'rgb(255, 255, 255)',
 		sideMenuHeaderTextUnauthenticatedColor: 'rgb(255, 255, 255)',
 		sideMenuHeaderBottomBorderColor: 'rgb(38, 39, 47)',
-		workAreaBackground: 'rgb(15, 16, 20)'
+		workAreaBackground: 'rgb(15, 16, 20)',
+		pageBottomBarBackground: 'rgb(31,33,38)'
 	};
 	return {
 		light: createCss(createAppCssVars(AppCssConstants)),
