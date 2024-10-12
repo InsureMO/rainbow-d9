@@ -2,10 +2,9 @@ import {ObjectPropValue, VUtils} from '@rainbow-d9/n1';
 import {DropdownOptions, GlobalHandlers} from '@rainbow-d9/n2';
 import {lazy} from 'react';
 import {AppPage, PageRegistrar} from '../../../../global-settings';
-import {loadFromSessionAndBurn} from '../../../../utils';
 import {DC, PreloadedLazyPageWrapper, PreloadedPageProps, PreloaderFuncOptions} from '../../../standard-widgets';
 import InitRootModel from './init-root.json';
-import {askSubmissionChannel, createClaimRegistrationCase} from './mock-services';
+import {askSubmissionChannel, createClaimRegistrationCase, loadRegistrationData} from './mock-services';
 import {AssistantData, Insured, RootModel} from './types';
 
 const ClaimRegistrationCreateIndex = PreloadedLazyPageWrapper<AssistantData>(lazy(() => import('./page')), {
@@ -13,7 +12,8 @@ const ClaimRegistrationCreateIndex = PreloadedLazyPageWrapper<AssistantData>(laz
 	/** initialize root model */
 	initRootModel: async (options: PreloaderFuncOptions) => {
 		const {key = ''} = options.pathParams ?? {};
-		const insured: (Omit<Insured, 'name'> & { insuredName?: string }) | undefined = loadFromSessionAndBurn(key);
+		const insured: Insured | undefined = loadRegistrationData(key);
+		// clone
 		const rootModel: RootModel = JSON.parse(JSON.stringify(InitRootModel));
 		// create registration case
 		rootModel.data = await createClaimRegistrationCase(insured);
