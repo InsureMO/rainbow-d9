@@ -5,7 +5,7 @@ import './intl-labels';
 
 const Tasks1Index = LazyPageWrapper(lazy(() => import('./page')));
 
-export const Tasks1Page: AppPage = {
+const Tasks1Page: AppPage = {
 	code: 'tasks-1',
 	route: '/tasks-1',
 	menuItemCode: 'tasks-1',

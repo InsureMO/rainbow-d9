@@ -10,6 +10,7 @@ import {
 import {AlertLabel, GlobalHandlers, GlobalRoot, IntlLabel, useGlobalHandlers} from '@rainbow-d9/n2';
 import {parseDoc} from '@rainbow-d9/n3';
 import {createContext, Fragment, JSX, ReactNode, useContext, useEffect, useState} from 'react';
+import {useNavigate} from 'react-router-dom';
 import {I18NAndD9N2Bridge} from '../../bootstrap';
 import {D9PageState} from '../../global-settings';
 import {StandardPageWrapper} from './standard-page-wrapper';
@@ -39,7 +40,16 @@ export const PageToRootEventBusProvider = (props: { children?: ReactNode }) => {
 
 export const usePageToRootEventBus = () => useContext(PageToRootContext);
 
-export type D9PageExternalDefsCreator = (global: GlobalHandlers) => Promise<ExternalDefs>;
+export interface D9PageExternalDefsCreatorOptionsNavigator {
+	to: (to: string) => void;
+	replace: (to: string) => void;
+}
+
+export interface D9PageExternalDefsCreatorOptions extends GlobalHandlers {
+	navigate: D9PageExternalDefsCreatorOptionsNavigator;
+}
+
+export type D9PageExternalDefsCreator = (global: D9PageExternalDefsCreatorOptions) => Promise<ExternalDefs>;
 
 /**
  * when the global widget is replaced by given, make sure the given widget handles the corresponding global events.
@@ -75,6 +85,7 @@ const useD9ExternalDefsInitializer = (create?: D9PageExternalDefsCreator) => {
 	// this hook is outside of root event bus, which means the property root undefined
 	// now have to build a bridge to pass root event bus to the external defs creator
 	const globalHandlers = useGlobalHandlers();
+	const navigate = useNavigate();
 	const {fire} = usePageToRootEventBus();
 	const [state, setState] = useState<D9ExternalDefsInitializerState>({initialized: false});
 
@@ -88,7 +99,12 @@ const useD9ExternalDefsInitializer = (create?: D9PageExternalDefsCreator) => {
 							...globalHandlers,
 							// delegate to root event bus
 							// @ts-ignore
-							root: {fire: (type: RootEventTypes, ...args: any[]) => fire(PageToRootEventBusTypes.TO_ROOT, type, ...args)}
+							root: {fire: (type: RootEventTypes, ...args: any[]) => fire(PageToRootEventBusTypes.TO_ROOT, type, ...args)},
+							// attach navigate functions
+							navigate: {
+								to: (to: string) => navigate(to, {replace: false}),
+								replace: (to: string) => navigate(to, {replace: true})
+							}
 						})
 					});
 				} catch (e) {

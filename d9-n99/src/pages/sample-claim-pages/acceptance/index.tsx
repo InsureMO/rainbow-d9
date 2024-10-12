@@ -5,7 +5,7 @@ import './intl-labels';
 
 const ClaimAcceptanceIndex = LazyPageWrapper(lazy(() => import('./page')));
 
-export const ClaimAcceptancePage: AppPage = {
+const ClaimAcceptancePage: AppPage = {
 	code: 'claim-acceptance',
 	route: '/claim/acceptance',
 	menuItemCode: 'claim-acceptance',

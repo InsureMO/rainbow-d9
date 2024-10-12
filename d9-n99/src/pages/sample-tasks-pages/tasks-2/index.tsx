@@ -39,7 +39,7 @@ const Tasks2Index = PreloadedLazyPageWrapper<AssistantData>(lazy(() => import('.
 	// orderBy: [['ui', 'initRootModel', 'assistantData']]
 });
 
-export const Tasks2Page: AppPage = {
+const Tasks2Page: AppPage = {
 	code: 'tasks-2',
 	route: '/tasks-2',
 	menuItemCode: 'tasks-2',

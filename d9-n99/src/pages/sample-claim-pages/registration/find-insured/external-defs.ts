@@ -1,15 +1,20 @@
 import {BaseModel, PropValue, RootEventTypes, VUtils} from '@rainbow-d9/n1';
-import {ButtonClickOptions, GlobalHandlers, PaginationData} from '@rainbow-d9/n2';
+import {ButtonClickOptions, PaginationData} from '@rainbow-d9/n2';
 import {MutableRefObject} from 'react';
 import {Page} from '../../../../services';
-import {createDropdownOptionsProvider, DC} from '../../../standard-widgets';
+import {
+	createDropdownOptionsProvider,
+	D9PageExternalDefsCreator,
+	D9PageExternalDefsCreatorOptions,
+	DC
+} from '../../../standard-widgets';
 import {onEnterPressed} from '../../../utils';
-import {askInsuredList, askInsuredListByKeywords} from './mock-services';
+import {askInsuredList, askInsuredListByKeywords, saveRegistrationData} from './mock-services';
 import {wrapResults} from './results-wrapper';
 import {ResultItem, RootModel} from './types';
 
-export const createExternalDefsCreator = (rootModelRef: MutableRefObject<any>) => {
-	return async (globalHandlers: GlobalHandlers) => {
+export const createExternalDefsCreator = (rootModelRef: MutableRefObject<any>): D9PageExternalDefsCreator => {
+	return async (globalHandlers: D9PageExternalDefsCreatorOptions) => {
 		return {
 			codes: createDropdownOptionsProvider(globalHandlers),
 			keywords: {
@@ -72,8 +77,12 @@ export const createExternalDefsCreator = (rootModelRef: MutableRefObject<any>) =
 				}
 			},
 			register: {
-				click: async (_options: ButtonClickOptions<BaseModel, PropValue>) => {
-					// TODO do register
+				click: async (options: ButtonClickOptions<BaseModel, PropValue>) => {
+					// capture the data, save to session storage
+					const item = options.model as unknown as ResultItem;
+					const {relatedPolicyNos, ongoingClaimNos, ...data} = item;
+					const key = await saveRegistrationData(data);
+					globalHandlers.navigate.to(`/claim/registration/create/${key}`);
 				}
 			},
 			// key of element for rendering, use static key based on index to avoid flickering

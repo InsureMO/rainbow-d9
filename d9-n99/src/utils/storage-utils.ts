@@ -3,6 +3,27 @@ import {Authentication} from '../services';
 import {isBlank} from './data-utils';
 
 const STORAGE_PREFIX = 'd9-n99-';
+export const saveToSession = (key: string, data: any, burnAfterSeconds?: number) => {
+	sessionStorage.setItem(`${STORAGE_PREFIX}${key}`, btoa(JSON.stringify(data)));
+	if (burnAfterSeconds != null) {
+		setTimeout(() => {
+			sessionStorage.removeItem(`${STORAGE_PREFIX}${key}`);
+		}, burnAfterSeconds * 1000);
+	}
+};
+export const loadFromSession = <D>(key: string): D | undefined => {
+	const data = sessionStorage.getItem(`${STORAGE_PREFIX}${key}`);
+	if (data == null) {
+		return (void 0);
+	}
+	return JSON.parse(atob(data));
+};
+export const loadFromSessionAndBurn = <D>(key: string): D | undefined => {
+	const loaded = loadFromSession<D>(key);
+	sessionStorage.removeItem(`${STORAGE_PREFIX}${key}`);
+	return loaded;
+};
+
 const SIDE_MENU_FOLD_KEY = `${STORAGE_PREFIX}side-menu-fold`;
 export const isSideMenuFold = () => localStorage.getItem(SIDE_MENU_FOLD_KEY) === 'true';
 export const setSideMenuFold = (fold: boolean) => localStorage.setItem(SIDE_MENU_FOLD_KEY, fold ? 'true' : 'false');

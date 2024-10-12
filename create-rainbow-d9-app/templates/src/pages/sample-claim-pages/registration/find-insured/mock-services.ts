@@ -1,4 +1,6 @@
+import {VUtils} from '@rainbow-d9/n1';
 import {Page} from '../../../../services';
+import {saveToSession} from '../../../../utils';
 import {Criteria, ResultItem} from './types';
 
 const baseItem: ResultItem = {
@@ -35,4 +37,10 @@ export const askInsuredListByKeywords = async (_keywords: string, pageNumber: nu
 };
 export const askInsuredList = async (_criteria: Omit<Criteria, 'keywords'>, pageNumber: number = 1, pageSize: number = 10): Promise<Page<ResultItem>> => {
 	return await askMockData(pageNumber, pageSize);
+};
+
+export const saveRegistrationData = async (data: Omit<ResultItem, 'relatedPolicyNos' | 'ongoingClaimNos'>) => {
+	const key = VUtils.generateUniqueId();
+	saveToSession(key, data, 60);
+	return key;
 };

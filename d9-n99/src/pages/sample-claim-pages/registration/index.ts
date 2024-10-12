@@ -1,3 +1,4 @@
 import './intl-labels';
 
-export * from './find-insured';
+import './find-insured';
+import './create';

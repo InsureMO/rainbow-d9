@@ -5,6 +5,7 @@ registerPageIntlLabels('claim-registration')
 	.labels({
 		title: 'Registration',
 		'find-insured': {title: 'Claim - Registration - Find Insured'},
+		create: {title: 'Claim - Registration - Create'},
 		menu: {label: 'Registration'},
 		criteria: {
 			keywords: {placeholder: 'Enter to trigger search, could be registration No., policy No. or insured name.'}
@@ -18,6 +19,7 @@ registerPageIntlLabels('claim-registration')
 	.labels({
 		title: '理赔报案',
 		'find-insured': {title: '理赔报案 - 查找被保人'},
+		create: {title: '理赔报案 - 创建报案'},
 		menu: {label: '理赔报案'},
 		criteria: {
 			keywords: {placeholder: '根据报案号, 保单号或被保人搜索. 回车开始搜索.'}

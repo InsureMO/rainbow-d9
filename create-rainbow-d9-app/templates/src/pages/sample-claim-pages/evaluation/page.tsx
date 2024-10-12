@@ -1,12 +1,11 @@
-import {GlobalHandlers} from '@rainbow-d9/n2';
-import {createDropdownOptionsProvider, D9Page} from '../../standard-widgets';
+import {createDropdownOptionsProvider, D9Page, D9PageExternalDefsCreatorOptions} from '../../standard-widgets';
 import InitRootModel from './init-root.json';
 import {markdown} from './ui-config.d9';
 
 type CodesNames = 'taskCategories' | 'taskPriorities';
 
 export default () => {
-	const externalDefs = async (globalHandlers: GlobalHandlers) => {
+	const externalDefs = async (globalHandlers: D9PageExternalDefsCreatorOptions) => {
 		return {
 			codes: createDropdownOptionsProvider<CodesNames>(globalHandlers, {
 				taskCategories: [
