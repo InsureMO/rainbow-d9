@@ -51,6 +51,7 @@
 	- Input::::idNo
 		- disabled
 - Dropdown::biz.gender::gender
+	- disabled
 	- options: @ext.codes.gender
 - Input::biz.dob::dob
 	- disabled
