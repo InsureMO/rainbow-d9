@@ -16,7 +16,7 @@ export const createClaimRegistrationCase = async (insured?: Insured): Promise<Da
 		caseNo: `${Math.floor(Math.random() * 1000000000000)}`,
 		manualSubmit: true,
 		status: 'draft',
-		insured,
+		insured: insured ?? {},
 		claim: {}, reporter: {notificationMethod: 'email'}
 	};
 };

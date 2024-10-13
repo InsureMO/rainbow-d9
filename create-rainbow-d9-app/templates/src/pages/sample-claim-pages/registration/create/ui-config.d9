@@ -37,6 +37,8 @@
 		- click: @ext.change-insured.click
 		- fill: link
 		- data-fit-link
+- repaint:
+	- on: data.insured
 
 - Input::biz.insured-name::name
 	- disabled
@@ -49,7 +51,6 @@
 	- Input::::idNo
 		- disabled
 - Dropdown::biz.gender::gender
-	- disabled
 	- options: @ext.codes.gender
 - Input::biz.dob::dob
 	- disabled
@@ -92,6 +93,8 @@
 		- click: @ext.search-reporter.click
 		- fill: link
 		- data-fit-link
+- repaint:
+	- on: data.reporter
 
 - Dropdown::claim-registration.reporter.relationship::relationship
 	- options: @ext.codes.relationshipWithInsured

@@ -20,7 +20,7 @@ import {
 import {ClaimRegistrationFindInsuredDialog} from '../find-insured/page-as-dialog';
 import {AssistantData, RootModel} from './types';
 
-// 80vh - 32px - 178px - 16px - 36px - 2px - 44px - 48px - 16px
+// 178px is height of search section
 // noinspection CssUnresolvedCustomProperty
 const LayoutController = styled.div.attrs({[DOM_KEY_WIDGET]: 'dialog-layout-controller'})`
     display: none;
@@ -44,14 +44,35 @@ export const createExternalDefsCreator = (_rootModelRef: MutableRefObject<any>, 
 				channelsForClaimRegistration: assistantData.submissionChannelOptions
 			}),
 			'change-insured': {
-				click: async (_options: ButtonClickOptions<BaseModel, PropValue>) => {
+				click: async (options: ButtonClickOptions<BaseModel, PropValue>) => {
 					const onCancelClick = () => {
+						globalHandlers.dialog.hide();
+					};
+					const onRegister = async (data: Parameters<Parameters<typeof ClaimRegistrationFindInsuredDialog>[0]['register']>[0]) => {
+						const root = options.root as unknown as RootModel;
+						const insured = root.data.insured!;
+						insured.customerId = data.customerId;
+						insured.name = data.insuredName;
+						insured.idType = data.idType;
+						insured.idNo = data.idNo;
+						insured.dob = data.dob;
+						insured.gender = data.gender;
+						globalHandlers.root!.fire(RootEventTypes.VALUE_CHANGED, '/data.insured', insured as unknown as PropValue, insured as unknown as PropValue);
+						const reporter = root.data.reporter!;
+						if (reporter.relationship === 'self') {
+							// also sync to reporter when it is declared as self, which means reporter is insured himself/herself
+							reporter.idType = insured.idType;
+							reporter.idNo = insured.idNo;
+							reporter.name = insured.name;
+							// notify
+							globalHandlers.root!.fire(RootEventTypes.VALUE_CHANGED, '/data.reporter', reporter as unknown as PropValue, reporter as unknown as PropValue);
+						}
 						globalHandlers.dialog.hide();
 					};
 					// do change insured
 					globalHandlers.dialog.show(<>
 						<LayoutController/>
-						<ClaimRegistrationFindInsuredDialog/>
+						<ClaimRegistrationFindInsuredDialog register={onRegister}/>
 						<UnwrappedButtonBar>
 							<UnwrappedButton ink={ButtonInk.WAIVE} onClick={onCancelClick}>
 								<IntlLabel keys={['page.common.button.cancel']} value="Cancel"/>

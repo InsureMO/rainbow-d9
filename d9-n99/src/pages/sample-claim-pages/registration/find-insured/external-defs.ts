@@ -13,7 +13,9 @@ import {askInsuredList, askInsuredListByKeywords, saveRegistrationData} from './
 import {wrapResults} from './results-wrapper';
 import {ResultItem, RootModel} from './types';
 
-export const createExternalDefsCreator = (rootModelRef: MutableRefObject<any>): D9PageExternalDefsCreator => {
+export type RegisterAction = (data: Omit<ResultItem, 'relatedPolicyNos' | 'ongoingClaimNos'>, globalHandlers: D9PageExternalDefsCreatorOptions) => Promise<void>;
+
+export const createExternalDefsCreator = (rootModelRef: MutableRefObject<any>, register?: RegisterAction): D9PageExternalDefsCreator => {
 	return async (globalHandlers: D9PageExternalDefsCreatorOptions) => {
 		return {
 			codes: createDropdownOptionsProvider(globalHandlers),
@@ -81,8 +83,13 @@ export const createExternalDefsCreator = (rootModelRef: MutableRefObject<any>): 
 					// capture the data, save to session storage
 					const item = options.model as unknown as ResultItem;
 					const {relatedPolicyNos, ongoingClaimNos, ...data} = item;
-					const key = await saveRegistrationData(data);
-					globalHandlers.navigate.to(`/claim/registration/create/${key}`);
+					if (register != null) {
+						// use given one
+						await register(data, globalHandlers);
+					} else {
+						const key = await saveRegistrationData(data);
+						globalHandlers.navigate.to(`/claim/registration/create/${key}`);
+					}
 				}
 			},
 			// key of element for rendering, use static key based on index to avoid flickering
