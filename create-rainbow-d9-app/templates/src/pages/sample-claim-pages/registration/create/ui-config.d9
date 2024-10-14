@@ -1,28 +1,15 @@
-# Page
+# Page::claim-registration-insured
 
 ## Box::
 
 - data-fix-title
 - pos: 12
 
-- Caption::claim.reg.title
+- Caption::claim.registration.case-no
 	- !$fc
 - Label::::data.caseNo
 
-## Section::::data
-
-- Input::claim.reg.reg-no::registrationNo
-	- disabled
-- Dropdown::claim.reg.status::status
-	- options: @ext.codes.registrationStatus
-	- please: dropdown.placeholder.unknown
-	- disabled
-- Dropdown::claim.reg.submission-channel::submissionChannelId
-	- data-normal-placeholder
-	- options: @ext.codes.channelsForClaimRegistration
-	- please: claim.reg.manual-register
-	- disabled
-	- pos: 6
+- Box::$$registration-base-section
 - Box::
 	- data-as-button-bar, data-sparse
 	- pos: 12
@@ -33,136 +20,11 @@
 		- click: @ext.ans.images.click
 		- data-fit-link
 
-## Section::::data.insured
+- Box::$$insured-base-section
 
-- label: Box
-	- data-space-grabber
-	- Caption::claim.insured.title
-		- data-as-section-title
-	- Box::
-		- data-space-grabber
-	- Button::
-		- text: claim.action.change-insured
-		- click: @ext.change-insured.click
-		- fill: link
-		- data-fit-link
-- repaint:
-	- on: data.insured
+- Box::$$claim-base-section
 
-- Input::biz.insured-name::name
-	- disabled
-- Box::biz.id-no
-	- data-type-input-box
-	- Dropdown::::idType
-		- disabled
-		- options: @ext.codes.idType
-		- please: dropdown.placeholder.unknown
-	- Input::::idNo
-		- disabled
-- Dropdown::biz.gender::gender
-	- disabled
-	- options: @ext.codes.gender
-- Input::biz.dob::dob
-	- disabled
-
-## Section::claim.claim.title::data.claim
-
-- MultiDropdown::claim.claim.type::type
-	- options: @ext.codes.claimType
-	- please: dropdown.placeholder.please-select
-	- required
-	- pos: 9
-- Box::
-- Date::claim.claim.notification-date::notificationDate
-	- required
-- Date::claim.claim.event-date::eventDate
-	- required
-- Dropdown::claim.claim.nature::nature
-	- options: @ext.codes.claimNature
-	- please: dropdown.placeholder.please-select
-	- required
-- Input::claim.claim.incident-code::incidentCode
-- Dropdown::claim.claim.case-classification::caseClassification
-	- options: @ext.codes.caseClassification
-- Input::claim.claim.previous-case-no::previousCaseNo
-- Input::claim.claim.diagnosis-code::diagnosisCode
-	- pos: 6
-- Textarea::claim.claim.details::details
-	- pos: 12
-
-## Section::claim.reporter.title::data.reporter
-
-- label: Box
-	- data-space-grabber
-	- Caption::claim.reporter.title
-		- data-as-section-title
-	- Box::
-		- data-space-grabber
-	- Button::
-		- text: claim.action.search-reporter
-		- click: @ext.search-reporter.click
-		- fill: link
-		- data-fit-link
-- repaint:
-	- on: data.reporter
-
-- Dropdown::claim.reporter.relationship::relationship
-	- options: @ext.codes.relationshipWithInsured
-	- please: dropdown.placeholder.please-select
-	- valueChanged: @ext.relationshipChanged
-- Dropdown::claim.reporter.via::via
-	- options: @ext.codes.reportVia
-	- please: dropdown.placeholder.please-select
-- Input::claim.reporter.name::name
-	- disabled:
-		- on: relationship
-		- handle:
-		  ```ts
-		  return model.relationship === 'self';
-		  ```
-- Box::
-- Dropdown::biz.id-type::idType
-	- options: @ext.codes.idType
-	- disabled:
-		- on: relationship
-		- handle:
-		  ```ts
-		  return model.relationship === 'self';
-		  ```
-- Dropdown::claim.reporter.type-of-pass::typeOfPass
-	- options: @ext.codes.typeOfPass
-	- please: dropdown.placeholder.please-select
-	- disabled:
-		- on: idType, relationship
-		- handle:
-		  ```ts
-		  return model.relationship === 'self' || model.idType !== 'passport';
-		  ```
-- Input::biz.id-no::idNo
-	- disabled:
-		- on: relationship
-		- handle:
-		  ```ts
-		  return model.relationship === 'self';
-		  ```
-- Box::
-- Input::biz.address1::address1
-	- pos: 9
-- Input::biz.postcode::postcode
-- Input::biz.address2::address2
-	- pos: 4
-- Input::biz.address3::address3
-	- pos: 4
-- Input::biz.address4::address4
-	- pos: 4
-- Input::biz.mobile::mobile
-- Input::biz.email::email
-- Dropdown::claim.reporter.notification-method::notificationMethod
-	- options: @ext.codes.notificationMethod
-- Input::claim.reporter.handling-producer::handlingProducer
-	- pos: 6
-- Input::claim.reporter.producer-mobile::producerMobile
-- Input::claim.reporter.producer-email::producerEmail
+- Box::$$reporter-base-section
 
 ## ButtonBar::
 

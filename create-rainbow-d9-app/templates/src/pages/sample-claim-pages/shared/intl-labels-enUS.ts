@@ -1,10 +1,10 @@
 export const enUSIntlLabels = {
 	title: 'Claim', menu: {label: 'Claim'},
 	registration: {
-		menu: {label: 'Registration'},
-		title: 'Registration',
+		menu: {label: 'Registration'}, title: 'Registration',
 		'find-insured': {title: 'Claim - Registration - Find Insured'},
 		create: {title: 'Claim - Registration - Create'},
+		'case-no': 'Registration of Case No.:',
 		criteria: {
 			keywords: {placeholder: 'Enter to trigger search, could be registration No., policy No. or insured name.'}
 		},
@@ -12,13 +12,14 @@ export const enUSIntlLabels = {
 		action: {register: 'Register'}
 	},
 	acceptance: {
-		menu: {label: 'Acceptance'}, title: 'Acceptance'
+		menu: {label: 'Acceptance'}, title: 'Acceptance',
+		find: {title: 'Claim - Acceptance - Find'},
+		'claim-entry': {title: 'Claim - Acceptance - Claim Entry', 'case-no': 'Claim Entry of Case No.:'}
 	},
 	evaluation: {
 		menu: {label: 'Evaluation'}, title: 'Evaluation'
 	},
 	reg: {
-		title: 'Registration of Case No.:',
 		'case-no': 'Case No.', 'reg-no': 'Registration No.',
 		'submission-channel': 'Submission Channel',
 		'manual-register': 'Manual Registration',

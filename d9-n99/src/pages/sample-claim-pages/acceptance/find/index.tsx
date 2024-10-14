@@ -2,18 +2,18 @@ import {lazy} from 'react';
 import {AppPage, PageRegistrar} from '../../../../global-settings';
 import {LazyPageWrapper} from '../../../standard-widgets';
 
-const ClaimAcceptanceIndex = LazyPageWrapper(lazy(() => import('./page')));
+const ClaimAcceptanceFindIndex = LazyPageWrapper(lazy(() => import('./page')));
 
-const ClaimAcceptancePage: AppPage = {
-	code: 'claim-acceptance',
-	route: '/claim/acceptance',
+const ClaimAcceptanceFindPage: AppPage = {
+	code: 'claim-acceptance-find',
+	route: '/claim/acceptance/find',
 	menuItemCode: 'claim-acceptance',
 	breadcrumb: {
-		title: 'claim.acceptance.title',
-		locations: ['home.title', 'claim.title']
+		title: 'claim.acceptance..find.title',
+		locations: ['home.title', 'claim.title', 'claim.acceptance.title']
 	},
-	renderer: ClaimAcceptanceIndex
+	renderer: ClaimAcceptanceFindIndex
 };
 
 // register
-PageRegistrar.register(ClaimAcceptancePage);
+PageRegistrar.register(ClaimAcceptanceFindPage);

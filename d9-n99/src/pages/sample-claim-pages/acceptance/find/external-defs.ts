@@ -46,7 +46,7 @@ export const createExternalDefsCreator = (rootModelRef: MutableRefObject<any>): 
 				click: async (options: ButtonClickOptions<BaseModel, PropValue>) => {
 					// capture the data, save to session storage
 					const item = options.model as unknown as ResultItem;
-					globalHandlers.navigate.to(`/claim/acceptance/work-on/${item.registrationId}`);
+					globalHandlers.navigate.to(`/claim/acceptance/claim-entry/${item.registrationId}`);
 				}
 			},
 			// key of element for rendering, use static key based on index to avoid flickering

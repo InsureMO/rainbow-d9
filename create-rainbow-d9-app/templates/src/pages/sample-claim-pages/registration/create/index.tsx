@@ -3,12 +3,21 @@ import {DropdownOptions, GlobalHandlers} from '@rainbow-d9/n2';
 import {lazy} from 'react';
 import {AppPage, PageRegistrar} from '../../../../global-settings';
 import {DC, PreloadedLazyPageWrapper, PreloadedPageProps, PreloaderFuncOptions} from '../../../standard-widgets';
+import {SharedMarkdown, SharedServices} from '../../shared';
 import InitRootModel from './init-root.json';
-import {askSubmissionChannel, createClaimRegistrationCase, loadRegistrationData} from './mock-services';
+import {createClaimRegistrationCase, loadRegistrationData} from './mock-services';
 import {AssistantData, Insured, RootModel} from './types';
+import {markdown} from './ui-config.d9';
 
 const ClaimRegistrationCreateIndex = PreloadedLazyPageWrapper<AssistantData>(lazy(() => import('./page')), {
 	usePathParams: true,
+	ui: async (_options: PreloaderFuncOptions): Promise<string> => {
+		return markdown
+			.replace('- Box::$$registration-base-section', SharedMarkdown.registrationBaseSection)
+			.replace('- Box::$$insured-base-section', SharedMarkdown.insuredBaseSection)
+			.replace('- Box::$$claim-base-section', SharedMarkdown.claimBaseSection)
+			.replace('- Box::$$reporter-base-section', SharedMarkdown.reporterBaseSection);
+	},
 	/** initialize root model */
 	initRootModel: async (options: PreloaderFuncOptions) => {
 		const {key = ''} = options.pathParams ?? {};
@@ -29,7 +38,7 @@ const ClaimRegistrationCreateIndex = PreloadedLazyPageWrapper<AssistantData>(laz
 				try {
 					const {
 						channelId, name
-					} = await DC.with(globalHandlers).use(async () => await askSubmissionChannel(submissionChannelId!)).ask();
+					} = await DC.with(globalHandlers).use(async () => await SharedServices.askSubmissionChannel(submissionChannelId!)).ask();
 					submissionChannelOptions.push({label: name, value: channelId});
 				} catch (e) {
 					console.groupCollapsed(`Failed to get submission channel by id[${submissionChannelId}].`);
@@ -39,7 +48,7 @@ const ClaimRegistrationCreateIndex = PreloadedLazyPageWrapper<AssistantData>(laz
 			return {submissionChannelOptions};
 		};
 	},
-	orderBy: [['initRootModel'], ['assistantData']]
+	orderBy: [['ui', 'initRootModel'], ['assistantData']]
 });
 
 const ClaimRegistrationCreatePage: AppPage = {

@@ -1,0 +1,73 @@
+## Section::claim.reporter.title::data.reporter
+
+- label: Box
+	- data-space-grabber
+	- Caption::claim.reporter.title
+		- data-as-section-title
+	- Box::
+		- data-space-grabber
+	- Button::
+		- text: claim.action.search-reporter
+		- click: @ext.search-reporter.click
+		- fill: link
+		- data-fit-link
+- repaint:
+	- on: data.reporter
+
+- Dropdown::claim.reporter.relationship::relationship
+	- options: @ext.codes.relationshipWithInsured
+	- please: dropdown.placeholder.please-select
+	- valueChanged: @ext.relationshipChanged
+- Dropdown::claim.reporter.via::via
+	- options: @ext.codes.reportVia
+	- please: dropdown.placeholder.please-select
+- Input::claim.reporter.name::name
+	- disabled:
+		- on: relationship
+		- handle:
+		  ```ts
+		  return model.relationship === 'self';
+		  ```
+- Box::
+- Dropdown::biz.id-type::idType
+	- options: @ext.codes.idType
+	- disabled:
+		- on: relationship
+		- handle:
+		  ```ts
+		  return model.relationship === 'self';
+		  ```
+- Dropdown::claim.reporter.type-of-pass::typeOfPass
+	- options: @ext.codes.typeOfPass
+	- please: dropdown.placeholder.please-select
+	- disabled:
+		- on: idType, relationship
+		- handle:
+		  ```ts
+		  return model.relationship === 'self' || model.idType !== 'passport';
+		  ```
+- Input::biz.id-no::idNo
+	- disabled:
+		- on: relationship
+		- handle:
+		  ```ts
+		  return model.relationship === 'self';
+		  ```
+- Box::
+- Input::biz.address1::address1
+	- pos: 9
+- Input::biz.postcode::postcode
+- Input::biz.address2::address2
+	- pos: 4
+- Input::biz.address3::address3
+	- pos: 4
+- Input::biz.address4::address4
+	- pos: 4
+- Input::biz.mobile::mobile
+- Input::biz.email::email
+- Dropdown::claim.reporter.notification-method::notificationMethod
+	- options: @ext.codes.notificationMethod
+- Input::claim.reporter.handling-producer::handlingProducer
+	- pos: 6
+- Input::claim.reporter.producer-mobile::producerMobile
+- Input::claim.reporter.producer-email::producerEmail

@@ -1,0 +1,24 @@
+## Section::claim.claim.title::data.claim
+
+- MultiDropdown::claim.claim.type::type
+	- options: @ext.codes.claimType
+	- please: dropdown.placeholder.please-select
+	- required
+	- pos: 9
+- Box::
+- Date::claim.claim.notification-date::notificationDate
+	- required
+- Date::claim.claim.event-date::eventDate
+	- required
+- Dropdown::claim.claim.nature::nature
+	- options: @ext.codes.claimNature
+	- please: dropdown.placeholder.please-select
+	- required
+- Input::claim.claim.incident-code::incidentCode
+- Dropdown::claim.claim.case-classification::caseClassification
+	- options: @ext.codes.caseClassification
+- Input::claim.claim.previous-case-no::previousCaseNo
+- Input::claim.claim.diagnosis-code::diagnosisCode
+	- pos: 6
+- Textarea::claim.claim.details::details
+	- pos: 12

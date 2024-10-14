@@ -1,10 +1,9 @@
 export const zhCNIntlLabels = {
 	title: '理赔', menu: {label: '理赔'},
 	registration: {
-		menu: {label: '理赔报案'},
-		title: '理赔报案',
-		'find-insured': {title: '理赔报案 - 查找被保人'},
-		create: {title: '理赔报案 - 创建报案'},
+		menu: {label: '理赔报案'}, title: '理赔报案',
+		'find-insured': {title: '理赔报案 - 查找被保人'}, create: {title: '理赔报案 - 创建报案'},
+		'case-no': '报案 - 案件号:',
 		criteria: {
 			keywords: {placeholder: '根据报案号, 保单号或被保人搜索. 回车开始搜索.'}
 		},
@@ -12,13 +11,14 @@ export const zhCNIntlLabels = {
 		action: {register: '报案'}
 	},
 	acceptance: {
-		menu: {label: '理赔受理'}, title: '理赔受理'
+		menu: {label: '理赔受理'}, title: '理赔受理',
+		find: {title: '理赔受理 - 查找案件'},
+		'claim-entry': {title: '理赔受理 - 案件信息录入', 'case-no': '受理 - 案件号:'}
 	},
 	evaluation: {
 		menu: {label: '理赔评估'}, title: '理赔评估'
 	},
 	reg: {
-		title: '报案案件号:',
 		'case-no': '报案案件号', 'reg-no': '报案号',
 		'submission-channel': '报案渠道',
 		'manual-register': '手工记录',

@@ -3,13 +3,13 @@ import {DropdownOptions, GlobalHandlers} from '@rainbow-d9/n2';
 import {lazy} from 'react';
 import {AppPage, PageRegistrar} from '../../../../global-settings';
 import {DC, PreloadedLazyPageWrapper, PreloadedPageProps, PreloaderFuncOptions} from '../../../standard-widgets';
+import InitRootModel from '../../registration/create/init-root.json';
 import {SharedMarkdown, SharedServices} from '../../shared';
-import InitRootModel from './init-root.json';
-import {createClaimRegistrationCase, loadRegistrationData} from './mock-services';
-import {AssistantData, Insured, RootModel} from './types';
+import {loadRegistrationData} from './mock-services';
+import {AssistantData, RootModel} from './types';
 import {markdown} from './ui-config.d9';
 
-const ClaimRegistrationCreateIndex = PreloadedLazyPageWrapper<AssistantData>(lazy(() => import('./page')), {
+const ClaimAcceptanceClaimEntryIndex = PreloadedLazyPageWrapper<AssistantData>(lazy(() => import('./page')), {
 	usePathParams: true,
 	ui: async (_options: PreloaderFuncOptions): Promise<string> => {
 		return markdown
@@ -20,12 +20,12 @@ const ClaimRegistrationCreateIndex = PreloadedLazyPageWrapper<AssistantData>(laz
 	},
 	/** initialize root model */
 	initRootModel: async (options: PreloaderFuncOptions) => {
-		const {key = ''} = options.pathParams ?? {};
-		const insured: Insured | undefined = loadRegistrationData(key);
+		const {registrationId = ''} = options.pathParams ?? {};
+		const data = await loadRegistrationData(registrationId);
 		// clone
 		const rootModel: RootModel = JSON.parse(JSON.stringify(InitRootModel));
 		// create registration case
-		rootModel.data = await createClaimRegistrationCase(insured);
+		rootModel.data = data;
 		return rootModel as unknown as ObjectPropValue;
 	},
 	/** run after root model initialized, to load submission channel */
@@ -51,15 +51,15 @@ const ClaimRegistrationCreateIndex = PreloadedLazyPageWrapper<AssistantData>(laz
 	orderBy: [['ui', 'initRootModel'], ['assistantData']]
 });
 
-const ClaimRegistrationCreatePage: AppPage = {
-	code: 'claim-registration-create',
-	route: '/claim/registration/create/:key',
+const ClaimAcceptanceClaimEntryPage: AppPage = {
+	code: 'claim-acceptance',
+	route: '/claim/acceptance/claim-entry/:registrationId',
 	breadcrumb: {
-		title: 'claim.registration.create.title',
-		locations: ['home.title', 'claim.title', 'claim.registration.title']
+		title: 'claim.acceptance.claim-entry.title',
+		locations: ['home.title', 'claim.title', 'claim.acceptance.title']
 	},
-	renderer: ClaimRegistrationCreateIndex
+	renderer: ClaimAcceptanceClaimEntryIndex
 };
 
 // register
-PageRegistrar.register(ClaimRegistrationCreatePage);
+PageRegistrar.register(ClaimAcceptanceClaimEntryPage);

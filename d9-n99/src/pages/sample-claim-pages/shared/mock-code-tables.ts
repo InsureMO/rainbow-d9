@@ -16,6 +16,7 @@ registerMockCodeTables({
 	registrationStatus: [
 		{label: 'Draft', value: 'draft'},
 		{label: 'Submitted', value: 'submitted'},
+		{label: 'Acceptance in progress', value: 'progress'},
 		{label: 'Accepted', value: 'accepted'},
 		{label: 'Rejected', value: 'rejected'}
 	],

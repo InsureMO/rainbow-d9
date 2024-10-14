@@ -1,0 +1,14 @@
+## Section::::data
+
+- Input::claim.reg.reg-no::registrationNo
+	- disabled
+- Dropdown::claim.reg.status::status
+	- options: @ext.codes.registrationStatus
+	- please: dropdown.placeholder.unknown
+	- disabled
+- Dropdown::claim.reg.submission-channel::submissionChannelId
+	- data-normal-placeholder
+	- options: @ext.codes.channelsForClaimRegistration
+	- please: claim.reg.manual-register
+	- disabled
+	- pos: 6

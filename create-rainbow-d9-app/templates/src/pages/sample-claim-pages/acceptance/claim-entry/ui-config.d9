@@ -1,11 +1,11 @@
-# Page::claim-registration-insured
+# Page::claim-acceptance-claim-entry
 
 ## Box::
 
 - data-fix-title
 - pos: 12
 
-- Caption::claim.registration.case-no
+- Caption::claim.acceptance.claim-entry.case-no
 	- !$fc
 - Label::::data.caseNo
 
