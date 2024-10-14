@@ -50,13 +50,17 @@
 	- headers:
 		- column:
 			- label: Checkbox
-				- property:: /data.control.claimIssuesAllSelected
+				- property: control.claimIssuesAllSelected
+				- valueChanged: @ext.claim-issue.all-selected-changed
+				- repaint:
+					- on: control.claimIssuesAllSelected
 			- width: 48
 		- claim.claim-issue.type: 2fr
 		- claim.claim-issue.raised: 1fr
 		- claim.claim-issue.last-updated: 1fr
 		- claim.claim-issue.status: 100
 	- Checkbox::::selected
+		- valueChanged: @ext.claim-issue.row-selected-changed
 	- Dropdown::::type
 		- disabled, data-as-label
 		- options: @ext.codes.claimIssueType

@@ -1,4 +1,5 @@
-import {BaseModel, PropValue} from '@rainbow-d9/n1';
+import {BaseModel, PropValue, RootEventTypes} from '@rainbow-d9/n1';
+import {ValueChangedOptions} from '@rainbow-d9/n1/src';
 import {ButtonClickOptions, GlobalHandlers} from '@rainbow-d9/n2';
 import {MutableRefObject} from 'react';
 import {createDropdownOptionsProvider, D9PageExternalDefsCreatorOptions, validatePage} from '../../../standard-widgets';
@@ -38,6 +39,28 @@ export const createExternalDefsCreator = (_rootModelRef: MutableRefObject<any>, 
 				}
 			},
 			'claim-issue': {
+				'all-selected-changed': async (options: ValueChangedOptions<boolean>): Promise<void> => {
+					const {root, newValue, oldValue} = options;
+					if (newValue === oldValue) {
+						return;
+					}
+					const claimIssues = (root as unknown as RootModel).data.claimIssues ?? [];
+					claimIssues.forEach(issue => issue.selected = newValue);
+					// notify
+					globalHandlers.root!.fire(RootEventTypes.VALUE_CHANGED, '/data.claimIssues', claimIssues as unknown as PropValue, claimIssues as unknown as PropValue);
+				},
+				'row-selected-changed': async (options: ValueChangedOptions<boolean>): Promise<void> => {
+					const {root: $root, newValue, oldValue} = options;
+					if (newValue === oldValue) {
+						return;
+					}
+					const root = $root as unknown as RootModel;
+					const claimIssues = root.data.claimIssues ?? [];
+					const allSelected = claimIssues.every(issue => issue.selected);
+					root.control.claimIssuesAllSelected = allSelected;
+					// notify
+					globalHandlers.root!.fire(RootEventTypes.VALUE_CHANGED, '/control.claimIssuesAllSelected', allSelected, allSelected);
+				},
 				// key of element for rendering, use static key based on index to avoid flickering
 				getElementKey: (_element: Claim.ClaimIssue, index: number) => `item-${index}`,
 				close: {

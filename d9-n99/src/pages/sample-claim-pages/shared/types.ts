@@ -56,6 +56,8 @@ export namespace Claim {
 
 	export interface ClaimIssue {
 		issueId?: string;
+		/** this is a control property, never submit to server side */
+		selected?: boolean;
 		type?: string;
 		generatedAt?: string;
 		generatedBy?: string;

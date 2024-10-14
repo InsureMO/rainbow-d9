@@ -20,6 +20,10 @@ const askMockRegistrationData = () => {
 		additional: {directBillingIndicator: 'N'},
 		reporter: {notificationMethod: 'email'},
 		claimIssues: [{
+			type: 'miss-doc', generatedAt: '13/10/2024', generatedBy: 'system',
+			lastUpdatedAt: '13/10/2024', lastUpdatedBy: 'system',
+			status: 'open'
+		}, {
 			type: 'miss-doc', generatedAt: '14/10/2024', generatedBy: 'system',
 			lastUpdatedAt: '14/10/2024', lastUpdatedBy: 'system',
 			status: 'open'
