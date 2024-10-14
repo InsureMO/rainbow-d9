@@ -17,8 +17,9 @@ export const enUSIntlLabels = {
 	evaluation: {
 		menu: {label: 'Evaluation'}, title: 'Evaluation'
 	},
-	'case-reg': {
-		'case-no': 'Registration of Case No.:', 'reg-no': 'Registration No.',
+	reg: {
+		title: 'Registration of Case No.:',
+		'case-no': 'Case No.', 'reg-no': 'Registration No.',
 		'submission-channel': 'Submission Channel',
 		'manual-register': 'Manual Registration',
 		status: 'Case Status'

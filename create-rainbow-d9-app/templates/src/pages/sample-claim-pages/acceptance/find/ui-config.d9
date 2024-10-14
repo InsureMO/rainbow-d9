@@ -1,0 +1,59 @@
+# Page
+
+## Section::page.common.title.search::criteria
+
+- visible:
+	- on: control.advancedSearchEnabled
+	- handle:
+	  ```ts
+	  return model.control.advancedSearchEnabled === true;
+	  ```
+- repaint:
+	- on: criteria
+
+- Input::biz.policy-no::policyNo
+- Input::claim.reg.case-no::caseNo
+- Input::claim.reg.reg-no::registrationNo
+- Input::biz.insured-name::insuredName
+- ButtonBar::
+	- data-narrow-up-in-search
+	- Button::
+		- text: page.common.button.search
+		- click: @ext.search.click
+	- Button::
+		- text: page.common.button.reset-criteria
+		- ink: waive
+		- click: @ext.reset.click
+
+## Table::
+
+- data-next-to-search, data-operators-hover-only
+- property: results
+- !expandable, !addable, !removable
+- omitDefaultRowOperators
+- operatorsColumnWidth: 100
+- repaint:
+	- on: results
+- getElementKey: @ext.getElementKey
+
+- headers:
+	- claim.reg.case-no: 150
+	- claim.reg.reg-no: 150
+	- biz.policy-no: 150
+	- claim.reg.status: 1fr
+- Label::::caseNo
+- Label::::registrationNo
+- Label::::policyNo
+- Dropdown::::status
+	- data-as-label, disabled
+	- options: @ext.codes.registrationStatus
+- RowOperators::
+	- Button::
+		- text: page.common.button.work-on
+		- fill: link
+		- click: @ext.work-on.click
+		- data-text-row-operator
+- Pagination::::page
+	- freeWalk
+	- maxButtons: 7
+	- valueChanged: @ext.onPageChanged

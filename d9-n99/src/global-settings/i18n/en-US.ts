@@ -21,7 +21,8 @@ export const intlForAppEnUS = {
 			button: {
 				'show-advanced-search': 'Show Advanced Search', 'hide-advanced-search': 'Hide Advanced Search',
 				search: 'Search', 'reset-criteria': 'Reset',
-				save: 'Save', submit: 'Submit', discard: 'Discard', cancel: 'Cancel'
+				save: 'Save', submit: 'Submit', discard: 'Discard', cancel: 'Cancel',
+				'work-on': 'Work on'
 			}
 		},
 		authentication: {

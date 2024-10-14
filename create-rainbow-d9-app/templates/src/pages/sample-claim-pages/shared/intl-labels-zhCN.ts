@@ -17,8 +17,9 @@ export const zhCNIntlLabels = {
 	evaluation: {
 		menu: {label: '理赔评估'}, title: '理赔评估'
 	},
-	'case-reg': {
-		'case-no': '报案案件号:', 'reg-no': '报案号',
+	reg: {
+		title: '报案案件号:',
+		'case-no': '报案案件号', 'reg-no': '报案号',
 		'submission-channel': '报案渠道',
 		'manual-register': '手工记录',
 		status: '处理状态'

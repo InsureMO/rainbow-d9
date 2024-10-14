@@ -1,0 +1,14 @@
+{
+	"control": {
+		"advancedSearchEnabled": true
+	},
+	"criteria": {
+	},
+	"results": null,
+	"page": {
+		"pageSize": 10,
+		"pageNumber": 1,
+		"itemCount": 9,
+		"pageCount": 1
+	}
+}

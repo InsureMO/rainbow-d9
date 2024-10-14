@@ -5,22 +5,22 @@
 - data-fix-title
 - pos: 12
 
-- Caption::claim.case-reg.case-no
+- Caption::claim.reg.title
 	- !$fc
 - Label::::data.caseNo
 
 ## Section::::data
 
-- Input::claim.case-reg.reg-no::registrationNo
+- Input::claim.reg.reg-no::registrationNo
 	- disabled
-- Dropdown::claim.case-reg.status::status
+- Dropdown::claim.reg.status::status
 	- options: @ext.codes.registrationStatus
 	- please: dropdown.placeholder.unknown
 	- disabled
-- Dropdown::claim.case-reg.submission-channel::submissionChannelId
+- Dropdown::claim.reg.submission-channel::submissionChannelId
 	- data-normal-placeholder
 	- options: @ext.codes.channelsForClaimRegistration
-	- please: claim.case-reg.manual-register
+	- please: claim.reg.manual-register
 	- disabled
 	- pos: 6
 - Box::

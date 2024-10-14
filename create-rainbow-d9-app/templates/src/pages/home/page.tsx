@@ -9,7 +9,7 @@ const Container = styled.div.attrs({[DOM_KEY_WIDGET]: 'page-home'})`
     grid-template-columns: 1fr auto 1fr;
     grid-template-rows: 7fr auto 10fr;
     width: 100%;
-    height: 100%;
+    height: 100vh;
 
     > div {
         grid-column: 2;
