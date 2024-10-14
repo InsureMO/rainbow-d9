@@ -34,7 +34,13 @@ const ClaimAcceptanceClaimEntryIndex = PreloadedLazyPageWrapper<AssistantData>(l
 					...rootModel.data.claimIssues.map(issue => issue.generatedBy),
 					...rootModel.data.claimIssues.map(issue => issue.lastUpdatedBy),
 					...rootModel.data.queryLetters.map(letter => letter.generatedBy),
-					...rootModel.data.queryLetters.map(letter => letter.lastUpdatedBy)
+					...rootModel.data.queryLetters.map(letter => letter.lastUpdatedBy),
+					...rootModel.data.internalQueries.map(letter => letter.assignee),
+					...rootModel.data.internalQueries.map(letter => letter.generatedBy),
+					...rootModel.data.internalQueries.map(letter => letter.lastUpdatedBy),
+					...rootModel.data.escalations.map(letter => letter.escalatedTo),
+					...rootModel.data.escalations.map(letter => letter.generatedBy),
+					...rootModel.data.escalations.map(letter => letter.lastUpdatedBy)
 					// @ts-ignore
 				].filter<string>(x => x != null))])
 			]);

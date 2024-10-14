@@ -2,7 +2,8 @@ export const zhCNIntlLabels = {
 	title: '理赔', menu: {label: '理赔'},
 	registration: {
 		menu: {label: '理赔报案'}, title: '理赔报案',
-		'find-insured': {title: '理赔报案 - 查找被保人'}, create: {title: '理赔报案 - 创建报案'},
+		'find-insured': {title: '理赔报案 - 查找被保人'},
+		create: {title: '理赔报案 - 创建报案'},
 		'case-no': '报案 - 案件号:',
 		criteria: {
 			keywords: {placeholder: '根据报案号, 保单号或被保人搜索. 回车开始搜索.'}
@@ -17,7 +18,6 @@ export const zhCNIntlLabels = {
 		'policy-acceptance': {
 			title: '理赔受理 - 受理处理', 'case-no': '受理处理 - 案件号::'
 		}
-
 	},
 	evaluation: {
 		menu: {label: '理赔评估'}, title: '理赔评估'
@@ -60,6 +60,22 @@ export const zhCNIntlLabels = {
 		'producer-mobile': '专员手机号码', 'producer-email': '专员电子邮箱'
 	},
 	'actions-and-supporting': '操作与支持:',
+	'claim-issue': {
+		title: '案件问题', type: '问题', raised: '创建于', 'last-updated': '最后修改于', status: '状态'
+	},
+	'query-letter': {
+		title: '问题问卷', 'doc-no': '问卷号码', 'doc-name': '问卷名称', due: '截止日期',
+		raised: '创建于', 'last-updated': '最后修改于', status: '状态'
+	},
+	'internal-query': {
+		title: '内部问卷', 'query-no': '问卷号码', 'query-type': '类型', 'query-title': '标题',
+		assignee: '已指派', due: '截止日期',
+		raised: '创建于', 'last-updated': '最后修改于', status: '状态'
+	},
+	'escalation': {
+		title: '案件升级', to: '指派至', due: '截止日期',
+		raised: '指派于', 'last-updated': '最后修改于', status: '状态'
+	},
 	action: {
 		image: '影像资料', 'doc-checklist': '书面资料', 'medical-bill': '医疗账单', history: '理赔历史',
 		'edit-case': '编辑报案信息', 'accept-policy': '受理规定检查',
@@ -67,7 +83,7 @@ export const zhCNIntlLabels = {
 		'add-claim-issue': '添加问题',
 		'generate-issues-as-internal-query': '产制内部问卷',
 		'generate-issues-as-query-letter': '产制问卷',
-		reply: '回复', reminder: '提醒',
+		reply: '回复', reminder: '提醒', withdraw: '撤回',
 		comment: '建议',
 		investigation: '调查', 'escalation': '案件升级', 'reload-policy': '重新加载政策'
 	}

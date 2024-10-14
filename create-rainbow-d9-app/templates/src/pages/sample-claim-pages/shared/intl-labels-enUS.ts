@@ -68,10 +68,13 @@ export const enUSIntlLabels = {
 		raised: 'Generated', 'last-updated': 'Last Updated', status: 'Status'
 	},
 	'internal-query': {
-		title: 'Internal Query'
+		title: 'Internal Query', 'query-no': 'Query No.', 'query-type': 'Type', 'query-title': 'Title',
+		assignee: 'Assignee', due: 'Due Date',
+		raised: 'Generated', 'last-updated': 'Last Updated', status: 'Status'
 	},
 	'escalation': {
-		title: 'Escalation'
+		title: 'Escalation', to: 'Escalated To', due: 'Due Date',
+		raised: 'Escalated', 'last-updated': 'Last Updated', status: 'Status'
 	},
 	'investigation': {
 		title: 'Investigation'
@@ -83,7 +86,7 @@ export const enUSIntlLabels = {
 		'add-claim-issue': 'Add a Manual Issue',
 		'generate-issues-as-internal-query': 'Generate Internal Query',
 		'generate-issues-as-query-letter': 'Generate Query Letter',
-		reply: 'Reply', reminder: 'Reminder',
+		reply: 'Reply', reminder: 'Reminder', withdraw: 'Withdraw',
 		comment: 'Comment',
 		investigation: 'Investigation', 'escalation': 'Escalation', 'reload-policy': 'Reload Policy'
 	}

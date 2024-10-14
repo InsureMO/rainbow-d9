@@ -55,5 +55,16 @@ registerMockCodeTables({
 	queryLetterStatus: [
 		{label: 'Open', value: 'open'},
 		{label: 'Closed', value: 'closed'}
+	],
+	internalQueryType: [
+		{label: 'Task', value: 'task'}
+	],
+	internalQueryStatus: [
+		{label: 'Open', value: 'open'},
+		{label: 'Closed', value: 'closed'}
+	],
+	escalationStatus: [
+		{label: 'Open', value: 'open'},
+		{label: 'Closed', value: 'closed'}
 	]
 });

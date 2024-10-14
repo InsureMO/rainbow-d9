@@ -83,11 +83,32 @@ export namespace Claim {
 	export type QueryLetters = Array<QueryLetter>;
 
 	export interface InternalQuery {
+		queryId?: string;
+		queryNo?: string;
+		type?: string;
+		title?: string;
+		assignee?: string;
+		/** this is a shadow property for ui, never submit to server side */
+		assigneeDepartment?: string;
+		generatedAt?: string;
+		generatedBy?: string;
+		dueDate?: string;
+		lastUpdatedAt?: string;
+		lastUpdatedBy?: string;
+		status?: string;
 	}
 
 	export type InternalQueries = Array<InternalQuery>;
 
 	export interface Escalation {
+		escalationId?: string;
+		escalatedTo?: string;
+		generatedAt?: string;
+		generatedBy?: string;
+		dueDate?: string;
+		lastUpdatedAt?: string;
+		lastUpdatedBy?: string;
+		status?: string;
 	}
 
 	export type Escalations = Array<Escalation>;

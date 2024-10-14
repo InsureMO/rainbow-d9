@@ -14,7 +14,7 @@ export interface Data {
 	reporter: Claim.Reporter;
 	claimIssues: Claim.ClaimIssues;
 	queryLetters: Claim.QueryLetters;
-	internalLetters: Claim.InternalQueries;
+	internalQueries: Claim.InternalQueries;
 	escalations: Claim.Escalations;
 	investigations: Claim.Investigations;
 }

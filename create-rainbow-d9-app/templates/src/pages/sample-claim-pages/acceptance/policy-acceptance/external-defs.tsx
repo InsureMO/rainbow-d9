@@ -91,7 +91,7 @@ export const createExternalDefsCreator = (_rootModelRef: MutableRefObject<any>, 
 			},
 			'query-letter': {
 				// key of element for rendering, use static key based on index to avoid flickering
-				getElementKey: (_element: Claim.ClaimIssue, index: number) => `item-${index}`,
+				getElementKey: (_element: Claim.QueryLetter, index: number) => `item-${index}`,
 				reply: {
 					click: async (_options: ButtonClickOptions<BaseModel, PropValue>) => {
 						alert('Query letter reply button clicked.');
@@ -106,6 +106,37 @@ export const createExternalDefsCreator = (_rootModelRef: MutableRefObject<any>, 
 					click: async (_options: ButtonClickOptions<BaseModel, PropValue>) => {
 						alert('Query letter reminder button clicked.');
 					}
+				}
+			},
+			'internal-query': {
+				// key of element for rendering, use static key based on index to avoid flickering
+				getElementKey: (_element: Claim.InternalQuery, index: number) => `item-${index}`,
+				view: {
+					click: async (_options: ButtonClickOptions<BaseModel, PropValue>) => {
+						alert('Internal query view button clicked.');
+					}
+				},
+				withdraw: {
+					click: async (_options: ButtonClickOptions<BaseModel, PropValue>) => {
+						alert('Internal query withdraw button clicked.');
+					}
+				}
+			},
+			escalation: {
+				// key of element for rendering, use static key based on index to avoid flickering
+				getElementKey: (_element: Claim.Escalation, index: number) => `item-${index}`,
+				view: {
+					click: async (_options: ButtonClickOptions<BaseModel, PropValue>) => {
+						alert('Escalation view button clicked.');
+					}
+				},
+				withdraw: {
+					click: async (_options: ButtonClickOptions<BaseModel, PropValue>) => {
+						alert('Escalation withdraw button clicked.');
+					}
+				},
+				click: async (_options: ButtonClickOptions<BaseModel, PropValue>) => {
+					alert('Escalation button clicked.');
 				}
 			},
 			comment: {
@@ -127,7 +158,6 @@ export const createExternalDefsCreator = (_rootModelRef: MutableRefObject<any>, 
 				}
 			},
 			'investigation': {},
-			'escalation': {},
 			'reload-policy': {},
 			submit: {
 				click: async (_options: ButtonClickOptions<BaseModel, PropValue>) => {

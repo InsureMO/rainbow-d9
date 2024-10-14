@@ -8,7 +8,7 @@ export const saveRegistrationData = async (data: Partial<Data>): Promise<string>
 	return key;
 };
 
-const askMockRegistrationData = () => {
+const askMockRegistrationData = (): Data => {
 	return {
 		registrationId: `${Math.floor(Math.random() * 1000000000000)}`,
 		caseNo: `${Math.floor(Math.random() * 1000000000000)}`,
@@ -36,8 +36,23 @@ const askMockRegistrationData = () => {
 			lastUpdatedAt: '14/10/2024', lastUpdatedBy: 'system',
 			status: 'open'
 		}],
-		internalLetters: [],
-		escalations: [],
+		internalQueries: [{
+			queryNo: '101',
+			type: 'task',
+			title: 'Please life assured.',
+			assignee: 'system',
+			generatedAt: '14/10/2024', generatedBy: 'system',
+			dueDate: '24/10/2024',
+			lastUpdatedAt: '14/10/2024', lastUpdatedBy: 'system',
+			status: 'open'
+		}],
+		escalations: [{
+			escalatedTo: 'system',
+			generatedAt: '14/10/2024', generatedBy: 'system',
+			dueDate: '24/10/2024',
+			lastUpdatedAt: '14/10/2024', lastUpdatedBy: 'system',
+			status: 'open'
+		}],
 		investigations: []
 	};
 };

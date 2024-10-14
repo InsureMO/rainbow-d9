@@ -165,9 +165,109 @@
 
 - collapsible
 
+- Table::
+	- property: data.internalQueries
+	- !expandable, !addable, !removable
+	- omitDefaultRowOperators
+	- operatorsColumnWidth: 120
+	- repaint:
+		- on: data.internalQueries
+	- getElementKey: @ext.internal-query.getElementKey
+	- headers:
+		- claim.internal-query.query-no: 100
+		- claim.internal-query.query-type: 150
+		- claim.internal-query.query-title: 2fr
+		- claim.internal-query.assignee: 1fr
+		- claim.internal-query.raised: 1fr
+		- claim.internal-query.due: 120
+		- claim.internal-query.last-updated: 1fr
+		- claim.internal-query.status: 100
+	- Label::::queryNo
+	- Dropdown::::type
+		- disabled, data-as-label
+		- options: @ext.codes.internalQueryType
+	- Label::::title
+	- Box::
+		- data-sb-from-somewhere, data-as-table-cell
+		- Dropdown::::assignee
+			- disabled, data-as-label
+			- options: @ext.codes.users
+	- Box::
+		- data-done-by-sb, data-as-table-cell
+		- Label::::generatedAt
+		- Dropdown::::generatedBy
+			- disabled, data-as-label
+			- options: @ext.codes.users
+	- Label::::dueDate
+	- Box::
+		- data-done-by-sb, data-as-table-cell
+		- Label::::lastUpdatedAt
+		- Dropdown::::lastUpdatedBy
+			- disabled, data-as-label
+			- options: @ext.codes.users
+	- Dropdown::::status
+		- disabled, data-as-label
+		- options: @ext.codes.internalQueryStatus
+	- RowOperators::
+		- Button::
+			- text: page.common.button.view
+			- fill: link
+			- click: @ext.internal-query.view.click
+			- data-text-row-operator, data-fit-link
+		- Button::
+			- text: claim.action.withdraw
+			- fill: link
+			- click: @ext.internal-query.withdraw.click
+			- data-text-row-operator, data-fit-link
+
 ## Section::claim.escalation.title
 
 - collapsible
+
+- Table::
+	- property: data.escalations
+	- !expandable, !addable, !removable
+	- omitDefaultRowOperators
+	- operatorsColumnWidth: 120
+	- repaint:
+		- on: data.escalations
+	- getElementKey: @ext.escalation.getElementKey
+	- headers:
+		- claim.escalation.to: 1fr
+		- claim.escalation.raised: 1fr
+		- claim.escalation.due: 120
+		- claim.escalation.last-updated: 1fr
+		- claim.escalation.status: 100
+	- Dropdown::::escalatedTo
+		- disabled, data-as-label
+		- options: @ext.codes.users
+	- Box::
+		- data-done-by-sb, data-as-table-cell
+		- Label::::generatedAt
+		- Dropdown::::generatedBy
+			- disabled, data-as-label
+			- options: @ext.codes.users
+	- Label::::dueDate
+	- Box::
+		- data-done-by-sb, data-as-table-cell
+		- Label::::lastUpdatedAt
+		- Dropdown::::lastUpdatedBy
+			- disabled, data-as-label
+			- options: @ext.codes.users
+	- Dropdown::::status
+		- disabled, data-as-label
+		- options: @ext.codes.escalationStatus
+	- RowOperators::
+		- Button::
+			- text: page.common.button.view
+			- fill: link
+			- click: @ext.escalation.view.click
+			- data-text-row-operator, data-fit-link
+		- Button::
+			- text: claim.action.withdraw
+			- fill: link
+			- click: @ext.escalation.withdraw.click
+			- data-text-row-operator, data-fit-link
 
 ## Section::claim.investigation.title
 
