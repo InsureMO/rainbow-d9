@@ -64,7 +64,11 @@ registerMockCodeTables({
 		{label: 'Closed', value: 'closed'}
 	],
 	escalationStatus: [
-		{label: 'Open', value: 'open'},
+		{label: 'Waiting for Reply', value: 'wait'},
+		{label: 'Closed', value: 'closed'}
+	],
+	investigationStatus: [
+		{label: 'Waiting for Reply', value: 'wait'},
 		{label: 'Closed', value: 'closed'}
 	]
 });

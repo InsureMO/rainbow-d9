@@ -88,8 +88,6 @@ export namespace Claim {
 		type?: string;
 		title?: string;
 		assignee?: string;
-		/** this is a shadow property for ui, never submit to server side */
-		assigneeDepartment?: string;
 		generatedAt?: string;
 		generatedBy?: string;
 		dueDate?: string;
@@ -103,8 +101,8 @@ export namespace Claim {
 	export interface Escalation {
 		escalationId?: string;
 		escalatedTo?: string;
-		generatedAt?: string;
-		generatedBy?: string;
+		escalatedAt?: string;
+		escalatedBy?: string;
 		dueDate?: string;
 		lastUpdatedAt?: string;
 		lastUpdatedBy?: string;
@@ -114,6 +112,14 @@ export namespace Claim {
 	export type Escalations = Array<Escalation>;
 
 	export interface Investigation {
+		investigationId?: string;
+		submittedTo?: string;
+		submittedAt?: string;
+		submittedBy?: string;
+		dueDate?: string;
+		lastUpdatedAt?: string;
+		lastUpdatedBy?: string;
+		status?: string;
 	}
 
 	export type Investigations = Array<Investigation>;

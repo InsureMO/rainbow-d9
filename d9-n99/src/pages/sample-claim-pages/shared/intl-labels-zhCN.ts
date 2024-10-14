@@ -76,15 +76,19 @@ export const zhCNIntlLabels = {
 		title: '案件升级', to: '指派至', due: '截止日期',
 		raised: '指派于', 'last-updated': '最后修改于', status: '状态'
 	},
+	'investigation': {
+		title: '案件调查', to: '提交至', due: '截止日期',
+		raised: '提交于', 'last-updated': '最后修改于', status: '状态'
+	},
 	action: {
 		image: '影像资料', 'doc-checklist': '书面资料', 'medical-bill': '医疗账单', history: '理赔历史',
-		'edit-case': '编辑报案信息', 'accept-policy': '受理规定检查',
+		'edit-case': '编辑报案信息', 'accept-policy': '选择保单',
 		'change-insured': '更改被保人信息', 'search-reporter': '查找报案人信息',
 		'add-claim-issue': '添加问题',
 		'generate-issues-as-internal-query': '产制内部问卷',
 		'generate-issues-as-query-letter': '产制问卷',
 		reply: '回复', reminder: '提醒', withdraw: '撤回',
 		comment: '建议',
-		investigation: '调查', 'escalation': '案件升级', 'reload-policy': '重新加载政策'
+		investigation: '案件调查', 'escalation': '案件升级', 'reload-policy': '重新加载保单'
 	}
 };

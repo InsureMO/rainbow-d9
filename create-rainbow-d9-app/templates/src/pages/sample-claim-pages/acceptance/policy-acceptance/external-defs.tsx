@@ -14,7 +14,7 @@ export const createExternalDefsCreator = (_rootModelRef: MutableRefObject<any>, 
 		return {
 			codes: createDropdownOptionsProvider(globalHandlers, {
 				channelsForClaimRegistration: assistantData.submissionChannelOptions,
-				users: assistantData.userOptions
+				users: assistantData.userOptions, userDepartments: assistantData.userDepartmentOptions
 			}),
 			ans: {
 				images: {
@@ -139,6 +139,23 @@ export const createExternalDefsCreator = (_rootModelRef: MutableRefObject<any>, 
 					alert('Escalation button clicked.');
 				}
 			},
+			investigation: {
+				// key of element for rendering, use static key based on index to avoid flickering
+				getElementKey: (_element: Claim.Investigation, index: number) => `item-${index}`,
+				view: {
+					click: async (_options: ButtonClickOptions<BaseModel, PropValue>) => {
+						alert('Investigation view button clicked.');
+					}
+				},
+				withdraw: {
+					click: async (_options: ButtonClickOptions<BaseModel, PropValue>) => {
+						alert('Investigation withdraw button clicked.');
+					}
+				},
+				click: async (_options: ButtonClickOptions<BaseModel, PropValue>) => {
+					alert('Investigation button clicked.');
+				}
+			},
 			comment: {
 				click: async (_options: ButtonClickOptions<BaseModel, PropValue>) => {
 					alert('Comment button clicked.');
@@ -157,7 +174,6 @@ export const createExternalDefsCreator = (_rootModelRef: MutableRefObject<any>, 
 					}
 				}
 			},
-			'investigation': {},
 			'reload-policy': {},
 			submit: {
 				click: async (_options: ButtonClickOptions<BaseModel, PropValue>) => {

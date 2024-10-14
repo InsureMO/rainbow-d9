@@ -12,6 +12,12 @@ const Container = styled.div.attrs({[DOM_KEY_WIDGET]: 'app-frame'})`
     min-width: 100vw;
     min-height: 100vh;
 
+    div[data-w=d9-page] {
+        &[data-fix-bottom-button-bar] {
+            padding-bottom: var(--app-page-bottom-bar-height);
+        }
+    }
+
     div[data-w=d9-box] {
         &[data-space-grabber] {
             flex-grow: 1;
@@ -80,20 +86,27 @@ const Container = styled.div.attrs({[DOM_KEY_WIDGET]: 'app-frame'})`
             }
         }
 
-        &[data-done-by-sb] {
-            gap: 8px;
-
-            > span[data-w=d9-caption]:first-child:not(:empty):after {
-                content: '@';
-                font-size: 0.8em;
-                opacity: 0.8;
-                margin-left: 8px;
-                margin-top: -2px;
+        &[data-done-at] {
+            > div[data-w=d9-dropdown]:first-child {
+                width: unset;
+                padding: 0;
             }
 
+            > span[data-w=d9-caption]:last-child:not(:empty):before {
+                content: ',';
+                margin-right: 4px;
+            }
+        }
+
+        &[data-sb-from-dept] {
             > div[data-w=d9-dropdown] {
                 width: unset;
                 padding: 0;
+            }
+
+            > div[data-w=d9-dropdown]:last-child:before {
+                content: ',';
+                margin-right: 4px;
             }
         }
     }
@@ -115,6 +128,7 @@ const Container = styled.div.attrs({[DOM_KEY_WIDGET]: 'app-frame'})`
             right: 0;
             background-color: var(--app-page-bottom-bar-background-color);
             padding: var(--app-page-bottom-bar-padding);
+            height: var(--app-page-bottom-bar-height);
             border-radius: 0;
             z-index: var(--app-page-bottom-bar-z-index);
         }
@@ -159,11 +173,10 @@ const Container = styled.div.attrs({[DOM_KEY_WIDGET]: 'app-frame'})`
     div[data-w=d9-dropdown] {
         &[data-as-label][disabled],
         &[data-as-label][data-disabled=true] {
-            border-color: transparent;
+            border: 0;
             background-color: transparent;
 
             &:hover, &:focus-within {
-                border-color: transparent;
                 box-shadow: none;
             }
         }

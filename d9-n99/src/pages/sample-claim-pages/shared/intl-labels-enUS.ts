@@ -77,7 +77,8 @@ export const enUSIntlLabels = {
 		raised: 'Escalated', 'last-updated': 'Last Updated', status: 'Status'
 	},
 	'investigation': {
-		title: 'Investigation'
+		title: 'Investigation', to: 'Submitted To', due: 'Due Date',
+		raised: 'Submitted', 'last-updated': 'Last Updated', status: 'Status'
 	},
 	action: {
 		image: 'Image', 'doc-checklist': 'Document Checklist', 'medical-bill': 'Medical Bill', history: 'History',

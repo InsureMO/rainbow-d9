@@ -29,4 +29,5 @@ export interface RootModel {
 export interface AssistantData {
 	submissionChannelOptions: DropdownOptions;
 	userOptions: DropdownOptions;
+	userDepartmentOptions: DropdownOptions;
 }

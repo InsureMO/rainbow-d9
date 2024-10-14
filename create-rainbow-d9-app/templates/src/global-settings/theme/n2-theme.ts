@@ -18,7 +18,7 @@ export const createN2ThemeStyles = (): AppThemeStyle => {
 	const N2DarkConstants = {
 		...N2LightConstants,
 		FONT_COLOR: 'rgb(204,204,204)',
-		BG_COLOR: 'rgb(34,34,34)',
+		BG_COLOR: 'rgb(15, 16, 20)',
 		PRIMARY_COLOR: 'rgb(102,165,255)',
 		DANGER_COLOR: 'rgb(255,87,92)',
 		SUCCESS_COLOR: 'rgb(40,167,69)',
@@ -26,7 +26,7 @@ export const createN2ThemeStyles = (): AppThemeStyle => {
 		INFO_COLOR: 'rgb(85,183,194)',
 		WAIVE_COLOR: 'rgb(102,102,102)',
 		HOVER_COLOR: 'rgb(78,83,92)',
-		INVERT_COLOR: 'rgb(34,34,34)',
+		INVERT_COLOR: 'rgb(15, 16, 20)',
 		DISABLE_COLOR: 'rgb(51,51,51)',
 		PLACEHOLDER_COLOR: 'rgb(128,128,128)',
 		BORDER_COLOR: 'rgb(77,77,77)',
@@ -50,6 +50,7 @@ export const createN2ThemeStyles = (): AppThemeStyle => {
 		SECTION_HEADER_TITLE_FONT_SIZE: 'var(--d9-section-header-title-font-size, 18px)',
 		SECTION_HEADER_TITLE_FONT_WEIGHT: 'var(--d9-section-header-title-font-weight, 400)',
 		SECTION_HEADER_BORDER: 'var(--d9-section-header-border, var(--d9-border))',
+		TABLE_HEADER_BORDER: 'var(--d9-table-header-border, var(--d9-border))',
 		// add definitions for button bar padding, for further usage
 		BUTTON_BAR_PADDING_TB: 'var(--d9-button-bar-padding-tb, 8px)',
 		// add definitions for dialog padding, for further usage
@@ -64,13 +65,17 @@ export const createN2ThemeStyles = (): AppThemeStyle => {
 			ACTIVE_COLOR: 'var(--d9-active-color, rgb(218,223,232))',
 			...N2LightTheme,
 			// override part of N2 theme
-			...CommonOverrideStyles
+			...CommonOverrideStyles,
+			TABLE_HEADER_BACKGROUND_COLOR: 'var(--d9-table-header-background-color, rgb(242, 245, 246))',
+			TABLE_ODD_ROW_BACKGROUND_COLOR: 'var(--d9-table-odd-row-background-color, rgba(242, 243, 244, 0.7))'
 		}),
 		dark: createCss({
 			ACTIVE_COLOR: 'var(--d9-active-color, rgb(118,123,132))',
 			...N2DarkTheme,
 			// override part of N2 theme
-			...CommonOverrideStyles
+			...CommonOverrideStyles,
+			TABLE_HEADER_BACKGROUND_COLOR: 'var(--d9-table-header-background-color, rgb(30,30,30))',
+			TABLE_ODD_ROW_BACKGROUND_COLOR: 'var(--d9-table-odd-row-background-color, rgba(35,36,40,0.9))'
 		})
 	};
 };

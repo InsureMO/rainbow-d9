@@ -28,23 +28,29 @@ const ClaimAcceptanceClaimEntryIndex = PreloadedLazyPageWrapper<AssistantData>(l
 	assistantData: async (options: PreloaderFuncOptions & Pick<PreloadedPageProps, 'initRootModel'>) => {
 		const rootModel = options.initRootModel as unknown as RootModel;
 		return async (globalHandlers: GlobalHandlers) => {
-			const [submissionChannelOptions, userOptions] = await Promise.all([
+			const [
+				submissionChannelOptions,
+				{users: userOptions, departments: userDepartmentOptions}
+			] = await Promise.all([
 				await SharedServices.askSubmissionChannelOptions(globalHandlers, rootModel.data),
-				await SharedServices.askUserOptions(globalHandlers, [...new Set([
+				await SharedServices.askUserAndDepartmentOptions(globalHandlers, [...new Set([
 					...rootModel.data.claimIssues.map(issue => issue.generatedBy),
 					...rootModel.data.claimIssues.map(issue => issue.lastUpdatedBy),
 					...rootModel.data.queryLetters.map(letter => letter.generatedBy),
 					...rootModel.data.queryLetters.map(letter => letter.lastUpdatedBy),
-					...rootModel.data.internalQueries.map(letter => letter.assignee),
-					...rootModel.data.internalQueries.map(letter => letter.generatedBy),
-					...rootModel.data.internalQueries.map(letter => letter.lastUpdatedBy),
-					...rootModel.data.escalations.map(letter => letter.escalatedTo),
-					...rootModel.data.escalations.map(letter => letter.generatedBy),
-					...rootModel.data.escalations.map(letter => letter.lastUpdatedBy)
+					...rootModel.data.internalQueries.map(query => query.assignee),
+					...rootModel.data.internalQueries.map(query => query.generatedBy),
+					...rootModel.data.internalQueries.map(query => query.lastUpdatedBy),
+					...rootModel.data.escalations.map(escalation => escalation.escalatedTo),
+					...rootModel.data.escalations.map(escalation => escalation.escalatedBy),
+					...rootModel.data.escalations.map(escalation => escalation.lastUpdatedBy),
+					...rootModel.data.investigations.map(investigation => investigation.submittedTo),
+					...rootModel.data.investigations.map(investigation => investigation.submittedBy),
+					...rootModel.data.investigations.map(investigation => investigation.lastUpdatedBy)
 					// @ts-ignore
 				].filter<string>(x => x != null))])
 			]);
-			return {submissionChannelOptions, userOptions};
+			return {submissionChannelOptions, userOptions, userDepartmentOptions};
 		};
 	},
 	orderBy: [['ui', 'initRootModel'], ['assistantData']]

@@ -40,7 +40,7 @@ const askMockRegistrationData = (): Data => {
 			queryNo: '101',
 			type: 'task',
 			title: 'Please life assured.',
-			assignee: 'system',
+			assignee: 'Chris',
 			generatedAt: '14/10/2024', generatedBy: 'system',
 			dueDate: '24/10/2024',
 			lastUpdatedAt: '14/10/2024', lastUpdatedBy: 'system',
@@ -48,12 +48,18 @@ const askMockRegistrationData = (): Data => {
 		}],
 		escalations: [{
 			escalatedTo: 'system',
-			generatedAt: '14/10/2024', generatedBy: 'system',
+			escalatedAt: '14/10/2024', escalatedBy: 'system',
 			dueDate: '24/10/2024',
 			lastUpdatedAt: '14/10/2024', lastUpdatedBy: 'system',
-			status: 'open'
+			status: 'wait'
 		}],
-		investigations: []
+		investigations: [{
+			submittedTo: 'David',
+			submittedAt: '14/10/2024', submittedBy: 'system',
+			dueDate: '24/10/2024',
+			lastUpdatedAt: '14/10/2024', lastUpdatedBy: 'system',
+			status: 'wait'
+		}]
 	};
 };
 export const loadRegistrationData = async (keyOrRegistrationId: string): Promise<Data> => {
