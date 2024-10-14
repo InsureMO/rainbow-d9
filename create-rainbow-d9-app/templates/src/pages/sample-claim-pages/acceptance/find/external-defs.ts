@@ -8,7 +8,7 @@ import {
 	D9PageExternalDefsCreatorOptions,
 	DC
 } from '../../../standard-widgets';
-import {askRegistrationList} from './mock-services';
+import {askRegistrationList, saveRegistrationData} from './mock-services';
 import {ResultItem, RootModel} from './types';
 
 export const createExternalDefsCreator = (rootModelRef: MutableRefObject<any>): D9PageExternalDefsCreator => {
@@ -46,7 +46,8 @@ export const createExternalDefsCreator = (rootModelRef: MutableRefObject<any>): 
 				click: async (options: ButtonClickOptions<BaseModel, PropValue>) => {
 					// capture the data, save to session storage
 					const item = options.model as unknown as ResultItem;
-					globalHandlers.navigate.to(`/claim/acceptance/claim-entry/${item.registrationId}`);
+					const key = await saveRegistrationData(item.registrationId);
+					globalHandlers.navigate.to(`/claim/acceptance/claim-entry/${key}`);
 				}
 			},
 			// key of element for rendering, use static key based on index to avoid flickering

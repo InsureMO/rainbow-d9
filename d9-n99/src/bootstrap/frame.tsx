@@ -17,6 +17,10 @@ const Container = styled.div.attrs({[DOM_KEY_WIDGET]: 'app-frame'})`
             flex-grow: 1;
         }
 
+        &[data-as-table-cell] {
+            width: 100%;
+        }
+
         &[data-fix-title] {
             position: fixed;
             background-color: var(--app-work-area-background);
@@ -73,6 +77,23 @@ const Container = styled.div.attrs({[DOM_KEY_WIDGET]: 'app-frame'})`
 
             &[data-sparse] {
                 gap: calc(var(--app-page-button-bar-spacing) * 2);
+            }
+        }
+
+        &[data-done-by-sb] {
+            gap: 8px;
+
+            > span[data-w=d9-caption]:first-child:not(:empty):after {
+                content: '@';
+                font-size: 0.8em;
+                opacity: 0.8;
+                margin-left: 8px;
+                margin-top: -2px;
+            }
+
+            > div[data-w=d9-dropdown] {
+                width: unset;
+                padding: 0;
             }
         }
     }
@@ -249,6 +270,10 @@ const Container = styled.div.attrs({[DOM_KEY_WIDGET]: 'app-frame'})`
             > button[data-w=d9-button][data-role=d9-table-row-operator][data-text-row-operator] {
                 width: unset;
                 padding: 0 8px;
+
+                &[data-fit-link] {
+                    padding: 0;
+                }
             }
         }
     }

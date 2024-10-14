@@ -19,9 +19,9 @@ export const createExternalDefsCreator = (_rootModelRef: MutableRefObject<any>, 
 				channelsForClaimRegistration: assistantData.submissionChannelOptions
 			}),
 			ans: {
-				images: {
+				image: {
 					click: async (_options: ButtonClickOptions<BaseModel, PropValue>) => {
-						alert('Images button clicked.');
+						alert('Image button clicked.');
 					}
 				}
 			},

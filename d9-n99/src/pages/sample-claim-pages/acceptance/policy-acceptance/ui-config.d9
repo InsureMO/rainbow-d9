@@ -1,0 +1,202 @@
+# Page::claim-acceptance-claim-entry
+
+## Box::
+
+- data-fix-title
+- pos: 12
+
+- Caption::claim.acceptance.policy-acceptance.case-no
+	- !$fc
+- Label::::data.caseNo
+
+- Box::$$registration-base-section
+- Box::
+	- data-as-button-bar, data-sparse
+	- pos: 12
+	- Caption::claim.actions-and-supporting
+	- Button::
+		- text: claim.action.image
+		- fill: link
+		- click: @ext.ans.image.click
+		- data-fit-link
+	- Button::
+		- text: claim.action.doc-checklist
+		- fill: link
+		- click: @ext.ans.doc-checklist.click
+		- data-fit-link
+	- Button::
+		- text: claim.action.medical-bill
+		- fill: link
+		- click: @ext.ans.medical-bill.click
+		- data-fit-link
+	- Button::
+		- text: claim.action.history
+		- fill: link
+		- click: @ext.ans.history.click
+		- data-fit-link
+
+## Section::claim.claim-issue.title
+
+- collapsible
+
+- Table::
+	- property: data.claimIssues
+	- !expandable, !addable, !removable
+	- omitDefaultRowOperators
+	- operatorsColumnWidth: 140
+	- repaint:
+		- on: data.claimIssues
+	- getElementKey: @ext.claim-issue.getElementKey
+	- headers:
+		- column:
+			- label: Checkbox
+				- property:: /data.control.claimIssuesAllSelected
+			- width: 48
+		- claim.claim-issue.type: 2fr
+		- claim.claim-issue.raised: 1fr
+		- claim.claim-issue.last-updated: 1fr
+		- claim.claim-issue.status: 100
+	- Checkbox::::selected
+	- Dropdown::::type
+		- disabled, data-as-label
+		- options: @ext.codes.claimIssueType
+	- Box::
+		- data-done-by-sb, data-as-table-cell
+		- Label::::generatedAt
+		- Dropdown::::generatedBy
+			- disabled, data-as-label
+			- options: @ext.codes.users
+	- Box::
+		- data-done-by-sb, data-as-table-cell
+		- Label::::lastUpdatedAt
+		- Dropdown::::lastUpdatedBy
+			- disabled, data-as-label
+			- options: @ext.codes.users
+	- Dropdown::::status
+		- disabled, data-as-label
+		- options: @ext.codes.claimIssueStatus
+	- RowOperators::
+		- Button::
+			- text: page.common.button.close
+			- fill: link
+			- click: @ext.claim-issue.close.click
+			- data-text-row-operator, data-fit-link
+		- Button::
+			- text: page.common.button.delete
+			- fill: link
+			- ink: danger
+			- click: @ext.claim-issue.delete.click
+			- data-text-row-operator, data-fit-link
+
+- ButtonBar::
+	- Button::
+		- text: claim.action.generate-issues-as-internal-query
+		- click: @ext.claim-issue.generate-internal-query.click
+		- fill: plain
+	- Button::
+		- text: claim.action.generate-issues-as-query-letter
+		- click: @ext.claim-issue.generate-query-letter.click
+		- fill: plain
+	- Box::
+		- data-space-grabber
+	- Button::
+		- text: claim.action.add-claim-issue
+		- click: @ext.claim-issue.add.click
+
+## Section::claim.query-letter.title
+
+- collapsible
+
+- Table::
+	- property: data.queryLetters
+	- !expandable, !addable, !removable
+	- omitDefaultRowOperators
+	- operatorsColumnWidth: 160
+	- repaint:
+		- on: data.queryLetters
+	- getElementKey: @ext.query-letter.getElementKey
+	- headers:
+		- claim.query-letter.doc-no: 100
+		- claim.query-letter.doc-name: 2fr
+		- claim.query-letter.raised: 1fr
+		- claim.query-letter.due: 120
+		- claim.query-letter.last-updated: 1fr
+		- claim.query-letter.status: 100
+	- Label::::docNo
+	- Label::::docName
+	- Box::
+		- data-done-by-sb, data-as-table-cell
+		- Label::::generatedAt
+		- Dropdown::::generatedBy
+			- disabled, data-as-label
+			- options: @ext.codes.users
+	- Label::::dueDate
+	- Box::
+		- data-done-by-sb, data-as-table-cell
+		- Label::::lastUpdatedAt
+		- Dropdown::::lastUpdatedBy
+			- disabled, data-as-label
+			- options: @ext.codes.users
+	- Dropdown::::status
+		- disabled, data-as-label
+		- options: @ext.codes.queryLetterStatus
+	- RowOperators::
+		- Button::
+			- text: claim.action.reply
+			- fill: link
+			- click: @ext.query-letter.reply.click
+			- data-text-row-operator, data-fit-link
+		- Button::
+			- text: page.common.button.edit
+			- fill: link
+			- click: @ext.query-letter.edit.click
+			- data-text-row-operator, data-fit-link
+		- Button::
+			- text: claim.action.reminder
+			- fill: link
+			- click: @ext.query-letter.reminder.click
+			- data-text-row-operator, data-fit-link
+
+## Section::claim.internal-query.title
+
+- collapsible
+
+## Section::claim.escalation.title
+
+- collapsible
+
+## Section::claim.investigation.title
+
+- collapsible
+
+## ButtonBar::
+
+- data-fix-bottom
+
+- Button::
+	- text: claim.action.comment
+	- click: @ext.comment.click
+	- ink: info
+- Box::
+	- data-space-grabber
+- Button::
+	- text: page.common.button.previous
+	- click: @ext.previous.click
+	- fill: plain
+	- ink: waive
+- Button::
+	- text: claim.action.investigation
+	- click: @ext.investigation.click
+	- fill: plain
+- Button::
+	- text: claim.action.escalation
+	- click: @ext.escalation.click
+	- fill: plain
+- Button::
+	- text: claim.action.reload-policy
+	- click: @ext.reload-policy.click
+	- fill: plain
+- Button::
+	- text: page.common.button.submit
+	- click: @ext.submit.click
+

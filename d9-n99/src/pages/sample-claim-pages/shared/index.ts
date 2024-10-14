@@ -1,4 +1,5 @@
 import {registerPageIntlLabels} from '../../../global-settings';
+import {markdown as additionalBaseSection} from './additional-base-section.d9';
 import {markdown as claimBaseSection} from './claim-base-section.d9';
 import {markdown as insuredBaseSection} from './insured-base-section.d9';
 import {enUSIntlLabels} from './intl-labels-enUS';
@@ -12,8 +13,9 @@ registerPageIntlLabels('claim')
 	.lang('en-US').labels(enUSIntlLabels)
 	.lang('zh-CN').labels(zhCNIntlLabels);
 
+export * from './types';
 export const SharedMarkdown = {
-	registrationBaseSection, insuredBaseSection, claimBaseSection, reporterBaseSection
+	registrationBaseSection, insuredBaseSection, claimBaseSection, additionalBaseSection, reporterBaseSection
 };
 
 export const SharedServices = Services;

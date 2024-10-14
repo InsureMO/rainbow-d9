@@ -4,10 +4,10 @@ import {MutableRefObject} from 'react';
 import {
 	createDropdownOptionsProvider,
 	D9PageExternalDefsCreatorOptions,
-	doValidatePage,
-	validatePage
+	doValidatePage
 } from '../../../standard-widgets';
 import {findInsured, FoundInsured} from '../../registration/find-insured/page-as-dialog';
+import {saveRegistrationData} from './mock-services';
 import {AssistantData, RootModel} from './types';
 
 export const createExternalDefsCreator = (_rootModelRef: MutableRefObject<any>, askAssistantData: (globalHandlers: GlobalHandlers) => Promise<AssistantData>) => {
@@ -21,7 +21,22 @@ export const createExternalDefsCreator = (_rootModelRef: MutableRefObject<any>, 
 			ans: {
 				images: {
 					click: async (_options: ButtonClickOptions<BaseModel, PropValue>) => {
-						alert('Images button clicked.');
+						alert('Image button clicked.');
+					}
+				},
+				'doc-checklist': {
+					click: async (_options: ButtonClickOptions<BaseModel, PropValue>) => {
+						alert('Document checklist button clicked.');
+					}
+				},
+				'medical-bill': {
+					click: async (_options: ButtonClickOptions<BaseModel, PropValue>) => {
+						alert('Medical bill button clicked.');
+					}
+				},
+				history: {
+					click: async (_options: ButtonClickOptions<BaseModel, PropValue>) => {
+						alert('History button clicked.');
 					}
 				}
 			},
@@ -85,12 +100,13 @@ export const createExternalDefsCreator = (_rootModelRef: MutableRefObject<any>, 
 					}
 				}
 			},
-			submit: {
-				click: async (_options: ButtonClickOptions<BaseModel, PropValue>) => {
+			next: {
+				click: async (options: ButtonClickOptions<BaseModel, PropValue>) => {
 					// callback, never reject, therefore no need to catch
-					await validatePage(globalHandlers, async () => {
-						alert('Pass the validation.');
-					});
+					// await validatePage(globalHandlers, async () => {
+					const key = await saveRegistrationData((options.root as unknown as RootModel).data);
+					globalHandlers.navigate.to(`/claim/acceptance/policy-acceptance/${key}`);
+					// });
 				}
 			}
 		};

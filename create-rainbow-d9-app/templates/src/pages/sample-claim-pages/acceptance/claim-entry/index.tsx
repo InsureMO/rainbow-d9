@@ -1,10 +1,10 @@
-import {ObjectPropValue, VUtils} from '@rainbow-d9/n1';
+import {ObjectPropValue} from '@rainbow-d9/n1';
 import {DropdownOptions, GlobalHandlers} from '@rainbow-d9/n2';
 import {lazy} from 'react';
 import {AppPage, PageRegistrar} from '../../../../global-settings';
-import {DC, PreloadedLazyPageWrapper, PreloadedPageProps, PreloaderFuncOptions} from '../../../standard-widgets';
-import InitRootModel from '../../registration/create/init-root.json';
+import {PreloadedLazyPageWrapper, PreloadedPageProps, PreloaderFuncOptions} from '../../../standard-widgets';
 import {SharedMarkdown, SharedServices} from '../../shared';
+import InitRootModel from './init-root.json';
 import {loadRegistrationData} from './mock-services';
 import {AssistantData, RootModel} from './types';
 import {markdown} from './ui-config.d9';
@@ -16,12 +16,13 @@ const ClaimAcceptanceClaimEntryIndex = PreloadedLazyPageWrapper<AssistantData>(l
 			.replace('- Box::$$registration-base-section', SharedMarkdown.registrationBaseSection)
 			.replace('- Box::$$insured-base-section', SharedMarkdown.insuredBaseSection)
 			.replace('- Box::$$claim-base-section', SharedMarkdown.claimBaseSection)
+			.replace('- Box::$$additional-base-section', SharedMarkdown.additionalBaseSection)
 			.replace('- Box::$$reporter-base-section', SharedMarkdown.reporterBaseSection);
 	},
 	/** initialize root model */
 	initRootModel: async (options: PreloaderFuncOptions) => {
-		const {registrationId = ''} = options.pathParams ?? {};
-		const data = await loadRegistrationData(registrationId);
+		const {keyOrRegistrationId = ''} = options.pathParams ?? {};
+		const data = await loadRegistrationData(keyOrRegistrationId);
 		// clone
 		const rootModel: RootModel = JSON.parse(JSON.stringify(InitRootModel));
 		// create registration case
@@ -32,19 +33,7 @@ const ClaimAcceptanceClaimEntryIndex = PreloadedLazyPageWrapper<AssistantData>(l
 	assistantData: async (options: PreloaderFuncOptions & Pick<PreloadedPageProps, 'initRootModel'>) => {
 		const rootModel = options.initRootModel as unknown as RootModel;
 		return async (globalHandlers: GlobalHandlers) => {
-			const submissionChannelOptions: DropdownOptions = [];
-			const {manualSubmit = false, submissionChannelId} = rootModel.data ?? {};
-			if (!manualSubmit && VUtils.isNotBlank(submissionChannelId)) {
-				try {
-					const {
-						channelId, name
-					} = await DC.with(globalHandlers).use(async () => await SharedServices.askSubmissionChannel(submissionChannelId!)).ask();
-					submissionChannelOptions.push({label: name, value: channelId});
-				} catch (e) {
-					console.groupCollapsed(`Failed to get submission channel by id[${submissionChannelId}].`);
-					console.error(e);
-				}
-			}
+			const submissionChannelOptions: DropdownOptions = await SharedServices.askSubmissionChannelOptions(globalHandlers, rootModel.data);
 			return {submissionChannelOptions};
 		};
 	},
@@ -52,8 +41,8 @@ const ClaimAcceptanceClaimEntryIndex = PreloadedLazyPageWrapper<AssistantData>(l
 });
 
 const ClaimAcceptanceClaimEntryPage: AppPage = {
-	code: 'claim-acceptance',
-	route: '/claim/acceptance/claim-entry/:registrationId',
+	code: 'claim-acceptance-claim-entry',
+	route: '/claim/acceptance/claim-entry/:keyOrRegistrationId',
 	breadcrumb: {
 		title: 'claim.acceptance.claim-entry.title',
 		locations: ['home.title', 'claim.title', 'claim.acceptance.title']

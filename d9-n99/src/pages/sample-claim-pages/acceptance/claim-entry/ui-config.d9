@@ -15,14 +15,31 @@
 	- pos: 12
 	- Caption::claim.actions-and-supporting
 	- Button::
-		- text: claim.action.images
+		- text: claim.action.image
 		- fill: link
-		- click: @ext.ans.images.click
+		- click: @ext.ans.image.click
+		- data-fit-link
+	- Button::
+		- text: claim.action.doc-checklist
+		- fill: link
+		- click: @ext.ans.doc-checklist.click
+		- data-fit-link
+	- Button::
+		- text: claim.action.medical-bill
+		- fill: link
+		- click: @ext.ans.medical-bill.click
+		- data-fit-link
+	- Button::
+		- text: claim.action.history
+		- fill: link
+		- click: @ext.ans.history.click
 		- data-fit-link
 
 - Box::$$insured-base-section
 
 - Box::$$claim-base-section
+
+- Box::$$additional-base-section
 
 - Box::$$reporter-base-section
 
@@ -39,6 +56,8 @@
 - Button::
 	- text: page.common.button.save
 	- click: @ext.save.click
+	- fill: plain
 - Button::
-	- text: page.common.button.submit
-	- click: @ext.submit.click
+	- text: page.common.button.next
+	- click: @ext.next.click
+

@@ -15,9 +15,9 @@
 	- pos: 12
 	- Caption::claim.actions-and-supporting
 	- Button::
-		- text: claim.action.images
+		- text: claim.action.image
 		- fill: link
-		- click: @ext.ans.images.click
+		- click: @ext.ans.image.click
 		- data-fit-link
 
 - Box::$$insured-base-section
@@ -39,6 +39,7 @@
 - Button::
 	- text: page.common.button.save
 	- click: @ext.save.click
+	- fill: plain
 - Button::
 	- text: page.common.button.submit
 	- click: @ext.submit.click

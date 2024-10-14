@@ -39,7 +39,7 @@ export const askInsuredList = async (_criteria: Omit<Criteria, 'keywords'>, page
 	return await askMockData(pageNumber, pageSize);
 };
 
-export const saveRegistrationData = async (data: Omit<ResultItem, 'relatedPolicyNos' | 'ongoingClaimNos'>) => {
+export const saveRegistrationData = async (data: Omit<ResultItem, 'relatedPolicyNos' | 'ongoingClaimNos'>): Promise<string> => {
 	const key = VUtils.generateUniqueId();
 	saveToSession(key, data, 60);
 	return key;

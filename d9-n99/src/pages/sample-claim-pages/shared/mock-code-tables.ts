@@ -26,6 +26,15 @@ registerMockCodeTables({
 		{label: 'Health', value: 'health'},
 		{label: 'Medical', value: 'medical'}
 	],
+	// actualWardLevel: [],
+	voluntaryWardUpgrade: [
+		{label: 'Yes', value: 'Y'},
+		{label: 'No', value: 'N'}
+	],
+	directBillingIndicator: [
+		{label: 'Yes', value: 'Y'},
+		{label: 'No', value: 'N'}
+	],
 	relationshipWithInsured: [
 		{label: 'Self', value: 'self'},
 		{label: 'Spouse', value: 'spouse'},
@@ -35,5 +44,16 @@ registerMockCodeTables({
 	notificationMethod: [
 		{label: 'Email', value: 'email'},
 		{label: 'SMS', value: 'sms'}
+	],
+	claimIssueType: [
+		{label: 'Missing Document', value: 'miss-doc'}
+	],
+	claimIssueStatus: [
+		{label: 'Open', value: 'open'},
+		{label: 'Closed', value: 'closed'}
+	],
+	queryLetterStatus: [
+		{label: 'Open', value: 'open'},
+		{label: 'Closed', value: 'closed'}
 	]
 });

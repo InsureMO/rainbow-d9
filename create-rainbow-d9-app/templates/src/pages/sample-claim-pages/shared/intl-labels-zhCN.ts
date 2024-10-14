@@ -13,7 +13,11 @@ export const zhCNIntlLabels = {
 	acceptance: {
 		menu: {label: '理赔受理'}, title: '理赔受理',
 		find: {title: '理赔受理 - 查找案件'},
-		'claim-entry': {title: '理赔受理 - 案件信息录入', 'case-no': '受理 - 案件号:'}
+		'claim-entry': {title: '理赔受理 - 案件信息录入', 'case-no': '案件信息录入 - 案件号:'},
+		'policy-acceptance': {
+			title: '理赔受理 - 受理处理', 'case-no': '受理处理 - 案件号::'
+		}
+
 	},
 	evaluation: {
 		menu: {label: '理赔评估'}, title: '理赔评估'
@@ -29,7 +33,25 @@ export const zhCNIntlLabels = {
 		title: '理赔信息', type: '理赔类型', 'notification-date': '通知日期',
 		'event-date': '发生日期', nature: '理赔性质', 'incident-code': '事件代码',
 		'case-classification': '案件分类', 'previous-case-no': '上次案件号',
-		'diagnosis-code': '诊断编码', details: '事件说明'
+		'diagnosis-code': '诊断编码', details: '事件说明',
+		'type-required': '请选择理赔类型.',
+		'notification-date-required': '请填写通知日期.',
+		'event-date-required': '请填写发生日期.',
+		'nature-required': '请选择理赔性质.'
+	},
+	additional: {
+		title: '附加信息',
+		'hospital-code': '医院代码',
+		'admission-date': '入院日期',
+		'discharge-date': '出院日期',
+		'treat-place': '治疗地点',
+		'foreign-hospital': '外国医院',
+		'doctor-code': '医生代码',
+		'unknown-pre-existing-conditions': '未知已存在疾病',
+		'chronic-disease': '慢性病',
+		'actual-ward-level': '实际病房等级',
+		'voluntary-ward-upgrade': '自愿病房升级',
+		'direct-billing-indicator': '是否直接结算?'
 	},
 	reporter: {
 		title: '报案人信息', relationship: '与被保人关系', via: '报案方式',
@@ -39,9 +61,14 @@ export const zhCNIntlLabels = {
 	},
 	'actions-and-supporting': '操作与支持:',
 	action: {
-		images: '影像资料', 'doc-checklist': '书面资料', 'medical-bill': '医疗账单', history: '理赔历史',
+		image: '影像资料', 'doc-checklist': '书面资料', 'medical-bill': '医疗账单', history: '理赔历史',
 		'edit-case': '编辑报案信息', 'accept-policy': '受理规定检查',
 		'change-insured': '更改被保人信息', 'search-reporter': '查找报案人信息',
-		comment: 'Comment'
+		'add-claim-issue': '添加问题',
+		'generate-issues-as-internal-query': '产制内部问卷',
+		'generate-issues-as-query-letter': '产制问卷',
+		reply: '回复', reminder: '提醒',
+		comment: '建议',
+		investigation: '调查', 'escalation': '案件升级', 'reload-policy': '重新加载政策'
 	}
 };

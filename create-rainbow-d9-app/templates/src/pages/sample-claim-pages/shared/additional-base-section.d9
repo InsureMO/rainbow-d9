@@ -1,0 +1,23 @@
+## Section::claim.additional.title::data.additional
+
+- collapsible
+
+- Input::claim.additional.hospital-code::hospitalCode
+	- pos: 6
+- Date::claim.additional.admission-date::admissionDate
+- Date::claim.additional.discharge-date::dischargeDate
+- Input::claim.additional.treat-place::placeOfTreatment
+- Input::claim.additional.foreign-hospital::foreignHospital
+- Input::claim.additional.doctor-code::doctorCode
+	- pos: 6
+- Input::claim.additional.unknown-pre-existing-conditions::unknownPreExistingConditions
+- Input::claim.additional.chronic-disease::chronicDisease
+- Dropdown::claim.additional.actual-ward-level::actualWardLevel
+	- options: @ext.codes.actualWardLevel
+	- please: dropdown.placeholder.please-select
+- Dropdown::claim.additional.voluntary-ward-upgrade::voluntaryWardUpgrade
+	- options: @ext.codes.voluntaryWardUpgrade
+	- please: dropdown.placeholder.please-select
+- Dropdown::claim.additional.direct-billing-indicator::directBillingIndicator
+	- options: @ext.codes.directBillingIndicator
+	- please: dropdown.placeholder.please-select

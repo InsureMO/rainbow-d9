@@ -1,4 +1,6 @@
+import {VUtils} from '@rainbow-d9/n1';
 import {Page} from '../../../../services';
+import {saveToSession} from '../../../../utils';
 import {Criteria, ResultItem} from './types';
 
 const baseItem: ResultItem = {
@@ -29,4 +31,9 @@ const askMockData = async (pageNumber: number = 1, pageSize: number = 10) => {
 };
 export const askRegistrationList = async (_criteria: Omit<Criteria, 'keywords'>, pageNumber: number = 1, pageSize: number = 10): Promise<Page<ResultItem>> => {
 	return await askMockData(pageNumber, pageSize);
+};
+export const saveRegistrationData = async (registrationId: string) => {
+	const key = VUtils.generateUniqueId();
+	saveToSession(key, registrationId, 60);
+	return key;
 };

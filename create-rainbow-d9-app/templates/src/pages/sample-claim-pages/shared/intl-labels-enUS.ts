@@ -14,7 +14,10 @@ export const enUSIntlLabels = {
 	acceptance: {
 		menu: {label: 'Acceptance'}, title: 'Acceptance',
 		find: {title: 'Claim - Acceptance - Find'},
-		'claim-entry': {title: 'Claim - Acceptance - Claim Entry', 'case-no': 'Claim Entry of Case No.:'}
+		'claim-entry': {title: 'Claim - Acceptance - Claim Entry', 'case-no': 'Claim Entry of Case No.:'},
+		'policy-acceptance': {
+			title: 'Claim - Acceptance - Policy Acceptance', 'case-no': 'Policy Acceptance of Case No.:'
+		}
 	},
 	evaluation: {
 		menu: {label: 'Evaluation'}, title: 'Evaluation'
@@ -30,7 +33,25 @@ export const enUSIntlLabels = {
 		title: 'Claim Information', type: 'Claim Type', 'notification-date': 'Notification Date',
 		'event-date': 'Event Date', nature: 'Claim Nature', 'incident-code': 'Incident Code',
 		'case-classification': 'Case Classification', 'previous-case-no': 'Previous Case No.',
-		'diagnosis-code': 'Diagnosis Code', details: 'Event Details'
+		'diagnosis-code': 'Diagnosis Code', details: 'Event Details',
+		'type-required': 'Claim type is required.',
+		'notification-date-required': 'Notification date is required.',
+		'event-date-required': 'Event date is required.',
+		'nature-required': 'Claim nature is required.'
+	},
+	additional: {
+		title: 'Additional Information',
+		'hospital-code': 'Hospital Code',
+		'admission-date': 'Admission Date',
+		'discharge-date': 'Discharge Date',
+		'treat-place': 'Place of Treatment',
+		'foreign-hospital': 'Foreign Hospital',
+		'doctor-code': 'Doctor Code',
+		'unknown-pre-existing-conditions': 'Unknown Pre-existing Conditions',
+		'chronic-disease': 'Chronic Disease',
+		'actual-ward-level': 'Actual Ward Level',
+		'voluntary-ward-upgrade': 'Voluntary Ward Upgrade',
+		'direct-billing-indicator': 'Direct Billing Indicator'
 	},
 	reporter: {
 		title: 'Reporter Information', relationship: 'Relationship with Insured', via: 'Report Via',
@@ -39,10 +60,31 @@ export const enUSIntlLabels = {
 		'producer-mobile': 'Producer Mobile No.', 'producer-email': 'Producer Email'
 	},
 	'actions-and-supporting': 'Actions & Supporting:',
+	'claim-issue': {
+		title: 'Claim Issue', type: 'Issue', raised: 'Generated', 'last-updated': 'Last Updated', status: 'Status'
+	},
+	'query-letter': {
+		title: 'Query Letter', 'doc-no': 'Doc. No.', 'doc-name': 'Doc. Name', due: 'Due Date',
+		raised: 'Generated', 'last-updated': 'Last Updated', status: 'Status'
+	},
+	'internal-query': {
+		title: 'Internal Query'
+	},
+	'escalation': {
+		title: 'Escalation'
+	},
+	'investigation': {
+		title: 'Investigation'
+	},
 	action: {
-		images: 'Images', 'doc-checklist': 'Document Checklist', 'medical-bill': 'Medical Bill', history: 'History',
+		image: 'Image', 'doc-checklist': 'Document Checklist', 'medical-bill': 'Medical Bill', history: 'History',
 		'edit-case': 'Edit Case Info', 'accept-policy': 'Accept Policy',
 		'change-insured': 'Change Insured', 'search-reporter': 'Search Reporter',
-		comment: 'Comment'
+		'add-claim-issue': 'Add a Manual Issue',
+		'generate-issues-as-internal-query': 'Generate Internal Query',
+		'generate-issues-as-query-letter': 'Generate Query Letter',
+		reply: 'Reply', reminder: 'Reminder',
+		comment: 'Comment',
+		investigation: 'Investigation', 'escalation': 'Escalation', 'reload-policy': 'Reload Policy'
 	}
 };

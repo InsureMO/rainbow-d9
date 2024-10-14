@@ -1,12 +1,12 @@
-import {ObjectPropValue, VUtils} from '@rainbow-d9/n1';
+import {ObjectPropValue} from '@rainbow-d9/n1';
 import {DropdownOptions, GlobalHandlers} from '@rainbow-d9/n2';
 import {lazy} from 'react';
 import {AppPage, PageRegistrar} from '../../../../global-settings';
-import {DC, PreloadedLazyPageWrapper, PreloadedPageProps, PreloaderFuncOptions} from '../../../standard-widgets';
-import {SharedMarkdown, SharedServices} from '../../shared';
+import {PreloadedLazyPageWrapper, PreloadedPageProps, PreloaderFuncOptions} from '../../../standard-widgets';
+import {Claim, SharedMarkdown, SharedServices} from '../../shared';
 import InitRootModel from './init-root.json';
 import {createClaimRegistrationCase, loadRegistrationData} from './mock-services';
-import {AssistantData, Insured, RootModel} from './types';
+import {AssistantData, RootModel} from './types';
 import {markdown} from './ui-config.d9';
 
 const ClaimRegistrationCreateIndex = PreloadedLazyPageWrapper<AssistantData>(lazy(() => import('./page')), {
@@ -21,7 +21,7 @@ const ClaimRegistrationCreateIndex = PreloadedLazyPageWrapper<AssistantData>(laz
 	/** initialize root model */
 	initRootModel: async (options: PreloaderFuncOptions) => {
 		const {key = ''} = options.pathParams ?? {};
-		const insured: Insured | undefined = loadRegistrationData(key);
+		const insured: Claim.Insured | undefined = loadRegistrationData(key);
 		// clone
 		const rootModel: RootModel = JSON.parse(JSON.stringify(InitRootModel));
 		// create registration case
@@ -32,19 +32,7 @@ const ClaimRegistrationCreateIndex = PreloadedLazyPageWrapper<AssistantData>(laz
 	assistantData: async (options: PreloaderFuncOptions & Pick<PreloadedPageProps, 'initRootModel'>) => {
 		const rootModel = options.initRootModel as unknown as RootModel;
 		return async (globalHandlers: GlobalHandlers) => {
-			const submissionChannelOptions: DropdownOptions = [];
-			const {manualSubmit = false, submissionChannelId} = rootModel.data ?? {};
-			if (!manualSubmit && VUtils.isNotBlank(submissionChannelId)) {
-				try {
-					const {
-						channelId, name
-					} = await DC.with(globalHandlers).use(async () => await SharedServices.askSubmissionChannel(submissionChannelId!)).ask();
-					submissionChannelOptions.push({label: name, value: channelId});
-				} catch (e) {
-					console.groupCollapsed(`Failed to get submission channel by id[${submissionChannelId}].`);
-					console.error(e);
-				}
-			}
+			const submissionChannelOptions: DropdownOptions = await SharedServices.askSubmissionChannelOptions(globalHandlers, rootModel.data);
 			return {submissionChannelOptions};
 		};
 	},
