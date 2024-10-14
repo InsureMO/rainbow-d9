@@ -9,8 +9,8 @@ import {
 	DC
 } from '../../../standard-widgets';
 import {onEnterPressed} from '../../../utils';
-import {askInsuredList, askInsuredListByKeywords, saveRegistrationData} from './mock-services';
 import {wrapResults} from './results-wrapper';
+import {askInsuredList, askInsuredListByKeywords, saveRegistrationData} from './services';
 import {ResultItem, RootModel} from './types';
 
 export type RegisterAction = (data: Omit<ResultItem, 'relatedPolicyNos' | 'ongoingClaimNos'>, globalHandlers: D9PageExternalDefsCreatorOptions) => Promise<void>;

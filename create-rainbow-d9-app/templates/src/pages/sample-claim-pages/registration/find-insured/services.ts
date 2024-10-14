@@ -1,4 +1,5 @@
 import {VUtils} from '@rainbow-d9/n1';
+import {mock} from '../../../../mock-services';
 import {Page} from '../../../../services';
 import {saveToSession} from '../../../../utils';
 import {Criteria, ResultItem} from './types';
@@ -32,12 +33,23 @@ const askMockData = async (pageNumber: number = 1, pageSize: number = 10) => {
 /**
  * this is a mock function
  */
-export const askInsuredListByKeywords = async (_keywords: string, pageNumber: number = 1, pageSize: number = 10): Promise<Page<ResultItem>> => {
+const doAskInsuredListByKeywords = async (_keywords: string, _pageNumber: number = 1, _pageSize: number = 10): Promise<Page<ResultItem>> => {
+	// TODO ask insured list by keywords for claim registration
+	throw new Error('Not implemented');
+};
+const mockDoAskInsuredListByKeywords = async (_keywords: string, pageNumber: number = 1, pageSize: number = 10): Promise<Page<ResultItem>> => {
 	return await askMockData(pageNumber, pageSize);
 };
-export const askInsuredList = async (_criteria: Omit<Criteria, 'keywords'>, pageNumber: number = 1, pageSize: number = 10): Promise<Page<ResultItem>> => {
+export const askInsuredListByKeywords = mock(doAskInsuredListByKeywords).by(mockDoAskInsuredListByKeywords);
+
+const mockDoAskInsuredList = async (_criteria: Omit<Criteria, 'keywords'>, pageNumber: number = 1, pageSize: number = 10): Promise<Page<ResultItem>> => {
 	return await askMockData(pageNumber, pageSize);
 };
+const doAskInsuredList = async (_criteria: Omit<Criteria, 'keywords'>, _pageNumber: number = 1, _pageSize: number = 10): Promise<Page<ResultItem>> => {
+	// TODO ask insured list by criteria for claim registration
+	throw new Error('Not implemented');
+};
+export const askInsuredList = mock(doAskInsuredList).by(mockDoAskInsuredList);
 
 export const saveRegistrationData = async (data: Omit<ResultItem, 'relatedPolicyNos' | 'ongoingClaimNos'>): Promise<string> => {
 	const key = VUtils.generateUniqueId();

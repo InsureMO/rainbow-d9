@@ -1,4 +1,5 @@
 import {VUtils} from '@rainbow-d9/n1';
+import {mock} from '../../../../mock-services';
 import {loadFromSessionAndBurn, saveToSession} from '../../../../utils';
 import {Data} from './types';
 
@@ -8,7 +9,11 @@ export const saveRegistrationData = async (data: Partial<Data>): Promise<string>
 	return key;
 };
 
-const askMockRegistrationData = (): Data => {
+const doLoadRegistrationData = async (_keyOrRegistrationId: string): Promise<Data> => {
+	// TODO load registration data by registrationId
+	throw new Error('Not implemented');
+};
+const mockDoLoadMockRegistrationData = async (_keyOrRegistrationId: string): Promise<Data> => {
 	return {
 		registrationId: `${Math.floor(Math.random() * 1000000000000)}`,
 		caseNo: `${Math.floor(Math.random() * 1000000000000)}`,
@@ -62,16 +67,17 @@ const askMockRegistrationData = (): Data => {
 		}]
 	};
 };
+
 export const loadRegistrationData = async (keyOrRegistrationId: string): Promise<Data> => {
 	const loaded: string | Data | undefined = loadFromSessionAndBurn(keyOrRegistrationId);
 	if (loaded == null) {
 		// not found from session, means given key is registrationId
 		// should load from remote
-		return askMockRegistrationData();
+		return mock(doLoadRegistrationData).by(mockDoLoadMockRegistrationData)(keyOrRegistrationId);
 	} else if (typeof loaded === 'string') {
 		// found a string from session, means loaded is registrationId
 		// should load from remote
-		return askMockRegistrationData();
+		return mock(doLoadRegistrationData).by(mockDoLoadMockRegistrationData)(keyOrRegistrationId);
 	} else {
 		// found a data from session, use it
 		return loaded;

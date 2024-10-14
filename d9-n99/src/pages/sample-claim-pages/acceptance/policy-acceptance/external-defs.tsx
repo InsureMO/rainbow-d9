@@ -4,7 +4,7 @@ import {ButtonClickOptions, GlobalHandlers} from '@rainbow-d9/n2';
 import {MutableRefObject} from 'react';
 import {createDropdownOptionsProvider, D9PageExternalDefsCreatorOptions, validatePage} from '../../../standard-widgets';
 import {Claim} from '../../shared';
-import {saveRegistrationData} from './mock-services';
+import {saveRegistrationData} from './services';
 import {AssistantData, RootModel} from './types';
 
 export const createExternalDefsCreator = (_rootModelRef: MutableRefObject<any>, askAssistantData: (globalHandlers: GlobalHandlers) => Promise<AssistantData>) => {

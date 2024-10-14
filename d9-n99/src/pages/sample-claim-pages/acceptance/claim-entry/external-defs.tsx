@@ -7,7 +7,7 @@ import {
 	doValidatePage
 } from '../../../standard-widgets';
 import {findInsured, FoundInsured} from '../../registration/find-insured/page-as-dialog';
-import {saveRegistrationData} from './mock-services';
+import {saveRegistrationData} from './services';
 import {AssistantData, RootModel} from './types';
 
 export const createExternalDefsCreator = (_rootModelRef: MutableRefObject<any>, askAssistantData: (globalHandlers: GlobalHandlers) => Promise<AssistantData>) => {

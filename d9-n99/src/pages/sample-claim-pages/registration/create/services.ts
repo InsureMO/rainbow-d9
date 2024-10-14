@@ -1,3 +1,4 @@
+import {mock} from '../../../../mock-services';
 import {loadFromSessionAndBurn} from '../../../../utils';
 import {Claim} from '../../shared';
 import {Data} from './types';
@@ -12,7 +13,12 @@ export const loadRegistrationData = (key: string): Claim.Insured | undefined => 
 		return (void 0);
 	}
 };
-export const createClaimRegistrationCase = async (insured?: Claim.Insured): Promise<Data> => {
+
+const doCreateClaimRegistrationCase = async (_insured?: Claim.Insured): Promise<Data> => {
+	// TODO create claim registration by given insured
+	throw new Error('Not implemented');
+};
+const mockDoCreateClaimRegistrationCase = async (insured?: Claim.Insured): Promise<Data> => {
 	return {
 		caseNo: `${Math.floor(Math.random() * 1000000000000)}`,
 		manualSubmit: true,
@@ -21,3 +27,4 @@ export const createClaimRegistrationCase = async (insured?: Claim.Insured): Prom
 		claim: {}, reporter: {notificationMethod: 'email'}
 	};
 };
+export const createClaimRegistrationCase = mock(doCreateClaimRegistrationCase).by(mockDoCreateClaimRegistrationCase);

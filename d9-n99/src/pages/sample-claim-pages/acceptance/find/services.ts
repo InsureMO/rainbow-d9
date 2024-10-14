@@ -1,4 +1,5 @@
 import {VUtils} from '@rainbow-d9/n1';
+import {mock} from '../../../../mock-services';
 import {Page} from '../../../../services';
 import {saveToSession} from '../../../../utils';
 import {Criteria, ResultItem} from './types';
@@ -11,7 +12,11 @@ const baseItem: ResultItem = {
 	insuredName: 'John Doe',
 	status: 'submitted'
 };
-const askMockData = async (pageNumber: number = 1, pageSize: number = 10) => {
+const doAskRegistrationList = async (_criteria: Criteria, _pageNumber: number = 1, _pageSize: number = 10): Promise<Page<ResultItem>> => {
+	// TODO ask registration list by given criteria
+	throw new Error('Not implemented');
+};
+const mockDoAskRegistrationList = async (_criteria: Criteria, pageNumber: number = 1, pageSize: number = 10) => {
 	return new Promise<Page<ResultItem>>(resolve => {
 		setTimeout(() => {
 			resolve({
@@ -29,9 +34,8 @@ const askMockData = async (pageNumber: number = 1, pageSize: number = 10) => {
 		}, 300);
 	});
 };
-export const askRegistrationList = async (_criteria: Omit<Criteria, 'keywords'>, pageNumber: number = 1, pageSize: number = 10): Promise<Page<ResultItem>> => {
-	return await askMockData(pageNumber, pageSize);
-};
+export const askRegistrationList = mock(doAskRegistrationList).by(mockDoAskRegistrationList);
+
 export const saveRegistrationData = async (registrationId: string) => {
 	const key = VUtils.generateUniqueId();
 	saveToSession(key, registrationId, 60);

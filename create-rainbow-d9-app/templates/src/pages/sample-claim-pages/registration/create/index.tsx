@@ -5,7 +5,7 @@ import {AppPage, PageRegistrar} from '../../../../global-settings';
 import {PreloadedLazyPageWrapper, PreloadedPageProps, PreloaderFuncOptions} from '../../../standard-widgets';
 import {Claim, SharedMarkdown, SharedServices} from '../../shared';
 import InitRootModel from './init-root.json';
-import {createClaimRegistrationCase, loadRegistrationData} from './mock-services';
+import {createClaimRegistrationCase, loadRegistrationData} from './services';
 import {AssistantData, RootModel} from './types';
 import {markdown} from './ui-config.d9';
 

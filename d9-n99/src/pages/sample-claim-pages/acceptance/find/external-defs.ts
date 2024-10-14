@@ -8,7 +8,7 @@ import {
 	D9PageExternalDefsCreatorOptions,
 	DC
 } from '../../../standard-widgets';
-import {askRegistrationList, saveRegistrationData} from './mock-services';
+import {askRegistrationList, saveRegistrationData} from './services';
 import {ResultItem, RootModel} from './types';
 
 export const createExternalDefsCreator = (rootModelRef: MutableRefObject<any>): D9PageExternalDefsCreator => {
