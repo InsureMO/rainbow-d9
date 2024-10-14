@@ -58,7 +58,7 @@ export namespace Claim {
 		issueId?: string;
 		/** this is a control property, never submit to server side */
 		selected?: boolean;
-		type?: string;
+		title?: string;
 		generatedAt?: string;
 		generatedBy?: string;
 		lastUpdatedAt?: string;

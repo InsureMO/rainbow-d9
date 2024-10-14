@@ -63,9 +63,7 @@
 		- claim.claim-issue.status: 100
 	- Checkbox::::selected
 		- valueChanged: @ext.claim-issue.row-selected-changed
-	- Dropdown::::type
-		- disabled, data-as-label
-		- options: @ext.codes.claimIssueType
+	- Label::::title
 	- Box::
 		- data-done-at, data-as-table-cell
 		- Dropdown::::generatedBy

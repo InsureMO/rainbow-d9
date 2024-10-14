@@ -57,6 +57,8 @@ export type D9PageExternalDefsCreator = (global: D9PageExternalDefsCreatorOption
 export interface D9PageProps {
 	/** d9 ui configuration markdown */
 	ui: string;
+	/** last chance to manufacture parsed ui */
+	manufactureParsedUI?: (parsed: NodeDef) => NodeDef;
 	/** init root model */
 	initRootModel?: ObjectPropValue;
 	/** deep clone root model when false. default false */
@@ -161,19 +163,29 @@ const D9PageContent = (props: D9PageContentProps) => {
 	</StandardPageWrapper>;
 };
 
-export const D9Page = (props: D9PageProps) => {
-	const {
-		ui, initRootModel = {}, initRootModelAsIs = false, externalDefs,
-		alert: Alert, dialog: Dialog, yesNoDialog: YesNoDialog, tip: Tip, remoteRequest: RemoteRequest
-	} = props;
-
+const useStatePrepare = (props: Pick<D9PageProps, 'ui' | 'manufactureParsedUI' | 'initRootModel' | 'initRootModelAsIs'>): D9PageState => {
+	const {ui, manufactureParsedUI, initRootModel = {}, initRootModelAsIs = false} = props;
 	const [state] = useState<D9PageState>(() => {
+		let {node, success, error} = parseDoc(ui);
+		if (success && manufactureParsedUI != null) {
+			node = manufactureParsedUI(node);
+		}
 		return {
-			$config: parseDoc(ui),
+			$config: {success, error, node},
 			// deep clone it
 			$root: initRootModelAsIs ? initRootModel : JSON.parse(JSON.stringify(initRootModel))
 		};
 	});
+	return state;
+};
+
+export const D9Page = (props: D9PageProps) => {
+	const {
+		externalDefs,
+		alert: Alert, dialog: Dialog, yesNoDialog: YesNoDialog, tip: Tip, remoteRequest: RemoteRequest
+	} = props;
+
+	const state = useStatePrepare(props);
 	const {success, error} = state.$config;
 
 	if (!success) {
@@ -201,16 +213,10 @@ export const D9Page = (props: D9PageProps) => {
 	</PageToRootEventBusProvider>;
 };
 
-export const D9Dialog = (props: Pick<D9PageProps, 'ui' | 'initRootModel' | 'initRootModelAsIs' | 'externalDefs'>) => {
-	const {ui, initRootModel = {}, initRootModelAsIs = false, externalDefs} = props;
+export const D9Dialog = (props: Pick<D9PageProps, 'ui' | 'manufactureParsedUI' | 'initRootModel' | 'initRootModelAsIs' | 'externalDefs'>) => {
+	const {externalDefs} = props;
 
-	const [state] = useState<D9PageState>(() => {
-		return {
-			$config: parseDoc(ui),
-			// deep clone it
-			$root: initRootModelAsIs ? initRootModel : JSON.parse(JSON.stringify(initRootModel))
-		};
-	});
+	const state = useStatePrepare(props);
 	const {success, error} = state.$config;
 
 	if (!success) {

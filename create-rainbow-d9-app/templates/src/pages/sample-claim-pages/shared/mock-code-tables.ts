@@ -45,9 +45,6 @@ registerMockCodeTables({
 		{label: 'Email', value: 'email'},
 		{label: 'SMS', value: 'sms'}
 	],
-	claimIssueType: [
-		{label: 'Missing Document', value: 'miss-doc'}
-	],
 	claimIssueStatus: [
 		{label: 'Open', value: 'open'},
 		{label: 'Closed', value: 'closed'}
