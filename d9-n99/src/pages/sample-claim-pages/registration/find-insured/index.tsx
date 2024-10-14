@@ -9,8 +9,8 @@ const ClaimRegistrationFindInsuredPage: AppPage = {
 	route: '/claim/registration/find-insured',
 	menuItemCode: 'claim-registration',
 	breadcrumb: {
-		title: 'claim-registration.find-insured.title',
-		locations: ['home.title', 'claim.title', 'claim-registration.title']
+		title: 'claim.registration.find-insured.title',
+		locations: ['home.title', 'claim.title', 'claim.registration.title']
 	},
 	renderer: ClaimRegistrationFindInsuredIndex
 };

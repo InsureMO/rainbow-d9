@@ -46,8 +46,8 @@ const ClaimRegistrationCreatePage: AppPage = {
 	code: 'claim-registration-create',
 	route: '/claim/registration/create/:key',
 	breadcrumb: {
-		title: 'claim-registration.create.title',
-		locations: ['home.title', 'claim.title', 'claim-registration.title']
+		title: 'claim.registration.create.title',
+		locations: ['home.title', 'claim.title', 'claim.registration.title']
 	},
 	renderer: ClaimRegistrationCreateIndex
 };

@@ -139,6 +139,7 @@ export const createAppThemeStyles = (): AppThemeStyle => {
 			'page-fix-title-box-font-weight': 'var(--app-page-fix-title-box-font-weight, 400)',
 			'page-fix-title-box-color': 'var(--app-page-fix-title-box-color, var(--d9-font-color))',
 			'page-fix-title-box-spacing': 'var(--app-page-fix-title-box-spacing, 8px)',
+			'page-button-bar-spacing': 'var(--app-page-button-bar-spacing, 8px)',
 			'page-bottom-bar-background-color': `var(--app-page-bottom-bar-background-color, ${variables.pageBottomBarBackground})`,
 			'page-bottom-bar-padding': 'var(--app-page-bottom-bar-padding, 8px 32px)',
 			'page-bottom-bar-z-index': 'var(--app-page-bottom-bar-z-index, 9)',

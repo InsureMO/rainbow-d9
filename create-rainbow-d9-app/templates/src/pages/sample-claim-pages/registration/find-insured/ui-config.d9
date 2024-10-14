@@ -12,7 +12,7 @@
 
 - DecoInput::::keywords
 	- pos: 6
-	- placeholder: claim-registration.criteria.keywords.placeholder
+	- placeholder: claim.registration.criteria.keywords.placeholder
 	- tails: $icons.search
 	- $fc, data-di-eat-tails, data-hide-caption
 	- onKeyUp: @ext.keywords.keyup
@@ -90,8 +90,8 @@
 	- biz.id-type: 120
 	- biz.id-no: 130
 	- biz.dob: 130
-	- claim-registration.results.related-policies: 200
-	- claim-registration.results.ongoing-claims: 200
+	- claim.registration.results.related-policies: 200
+	- claim.registration.results.ongoing-claims: 200
 - Label::::insuredName
 - Dropdown::::gender
 	- data-as-label, disabled
@@ -107,7 +107,7 @@
 	- data-vertical-list
 - RowOperators::
 	- Button::
-		- text: claim-registration.action.register
+		- text: claim.registration.action.register
 		- fill: link
 		- click: @ext.register.click
 		- data-text-row-operator

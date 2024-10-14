@@ -65,6 +65,16 @@ const Container = styled.div.attrs({[DOM_KEY_WIDGET]: 'app-frame'})`
                 margin-left: -1px;
             }
         }
+
+        &[data-as-button-bar] {
+            display: flex;
+            align-items: center;
+            gap: var(--app-page-button-bar-spacing);
+
+            &[data-sparse] {
+                gap: calc(var(--app-page-button-bar-spacing) * 2);
+            }
+        }
     }
 
     div[data-w=d9-section] {

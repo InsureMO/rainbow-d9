@@ -43,6 +43,13 @@ export const createExternalDefsCreator = (_rootModelRef: MutableRefObject<any>, 
 			codes: createDropdownOptionsProvider(globalHandlers, {
 				channelsForClaimRegistration: assistantData.submissionChannelOptions
 			}),
+			ans: {
+				images: {
+					click: async (_options: ButtonClickOptions<BaseModel, PropValue>) => {
+						alert('Images button clicked.');
+					}
+				}
+			},
 			'change-insured': {
 				click: async (options: ButtonClickOptions<BaseModel, PropValue>) => {
 					const onCancelClick = () => {

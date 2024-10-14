@@ -5,35 +5,44 @@
 - data-fix-title
 - pos: 12
 
-- Caption::claim-registration.case-no
+- Caption::claim.case-reg.case-no
 	- !$fc
 - Label::::data.caseNo
 
 ## Section::::data
 
-- Input::claim-registration.reg-no::registrationNo
+- Input::claim.case-reg.reg-no::registrationNo
 	- disabled
-- Dropdown::claim-registration.status::status
+- Dropdown::claim.case-reg.status::status
 	- options: @ext.codes.registrationStatus
 	- please: dropdown.placeholder.unknown
 	- disabled
-- Dropdown::claim-registration.submission-channel::submissionChannelId
+- Dropdown::claim.case-reg.submission-channel::submissionChannelId
 	- data-normal-placeholder
 	- options: @ext.codes.channelsForClaimRegistration
-	- please: claim-registration.manual-register
+	- please: claim.case-reg.manual-register
 	- disabled
 	- pos: 6
+- Box::
+	- data-as-button-bar, data-sparse
+	- pos: 12
+	- Caption::claim.actions-and-supporting
+	- Button::
+		- text: claim.action.images
+		- fill: link
+		- click: @ext.ans.images.click
+		- data-fit-link
 
 ## Section::::data.insured
 
 - label: Box
 	- data-space-grabber
-	- Caption::claim-registration.insured.title
+	- Caption::claim.insured.title
 		- data-as-section-title
 	- Box::
 		- data-space-grabber
 	- Button::
-		- text: claim-registration.action.change-insured
+		- text: claim.action.change-insured
 		- click: @ext.change-insured.click
 		- fill: link
 		- data-fit-link
@@ -56,55 +65,55 @@
 - Input::biz.dob::dob
 	- disabled
 
-## Section::claim-registration.claim.title::data.claim
+## Section::claim.claim.title::data.claim
 
-- MultiDropdown::claim-registration.claim.type::type
+- MultiDropdown::claim.claim.type::type
 	- options: @ext.codes.claimType
 	- please: dropdown.placeholder.please-select
 	- required
 	- pos: 9
 - Box::
-- Date::claim-registration.claim.notification-date::notificationDate
+- Date::claim.claim.notification-date::notificationDate
 	- required
-- Date::claim-registration.claim.event-date::eventDate
+- Date::claim.claim.event-date::eventDate
 	- required
-- Dropdown::claim-registration.claim.nature::nature
+- Dropdown::claim.claim.nature::nature
 	- options: @ext.codes.claimNature
 	- please: dropdown.placeholder.please-select
 	- required
-- Input::claim-registration.claim.incident-code::incidentCode
-- Dropdown::claim-registration.claim.case-classification::caseClassification
+- Input::claim.claim.incident-code::incidentCode
+- Dropdown::claim.claim.case-classification::caseClassification
 	- options: @ext.codes.caseClassification
-- Input::claim-registration.claim.previous-case-no::previousCaseNo
-- Input::claim-registration.claim.diagnosis-code::diagnosisCode
+- Input::claim.claim.previous-case-no::previousCaseNo
+- Input::claim.claim.diagnosis-code::diagnosisCode
 	- pos: 6
-- Textarea::claim-registration.claim.details::details
+- Textarea::claim.claim.details::details
 	- pos: 12
 
-## Section::claim-registration.reporter.title::data.reporter
+## Section::claim.reporter.title::data.reporter
 
 - label: Box
 	- data-space-grabber
-	- Caption::claim-registration.reporter.title
+	- Caption::claim.reporter.title
 		- data-as-section-title
 	- Box::
 		- data-space-grabber
 	- Button::
-		- text: claim-registration.action.search-reporter
+		- text: claim.action.search-reporter
 		- click: @ext.search-reporter.click
 		- fill: link
 		- data-fit-link
 - repaint:
 	- on: data.reporter
 
-- Dropdown::claim-registration.reporter.relationship::relationship
+- Dropdown::claim.reporter.relationship::relationship
 	- options: @ext.codes.relationshipWithInsured
 	- please: dropdown.placeholder.please-select
 	- valueChanged: @ext.relationshipChanged
-- Dropdown::claim-registration.reporter.via::via
+- Dropdown::claim.reporter.via::via
 	- options: @ext.codes.reportVia
 	- please: dropdown.placeholder.please-select
-- Input::claim-registration.reporter.name::name
+- Input::claim.reporter.name::name
 	- disabled:
 		- on: relationship
 		- handle:
@@ -120,7 +129,7 @@
 		  ```ts
 		  return model.relationship === 'self';
 		  ```
-- Dropdown::claim-registration.reporter.type-of-pass::typeOfPass
+- Dropdown::claim.reporter.type-of-pass::typeOfPass
 	- options: @ext.codes.typeOfPass
 	- please: dropdown.placeholder.please-select
 	- disabled:
@@ -148,19 +157,19 @@
 	- pos: 4
 - Input::biz.mobile::mobile
 - Input::biz.email::email
-- Dropdown::claim-registration.reporter.notification-method::notificationMethod
+- Dropdown::claim.reporter.notification-method::notificationMethod
 	- options: @ext.codes.notificationMethod
-- Input::claim-registration.reporter.handling-producer::handlingProducer
+- Input::claim.reporter.handling-producer::handlingProducer
 	- pos: 6
-- Input::claim-registration.reporter.producer-mobile::producerMobile
-- Input::claim-registration.reporter.producer-email::producerEmail
+- Input::claim.reporter.producer-mobile::producerMobile
+- Input::claim.reporter.producer-email::producerEmail
 
 ## ButtonBar::
 
 - data-fix-bottom
 
 - Button::
-	- text: claim-registration.action.comment
+	- text: claim.action.comment
 	- click: @ext.comment.click
 	- ink: info
 - Box::
