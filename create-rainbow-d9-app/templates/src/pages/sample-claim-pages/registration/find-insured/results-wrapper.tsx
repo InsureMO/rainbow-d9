@@ -1,4 +1,5 @@
 import {ButtonFill, UnwrappedCaption} from '@rainbow-d9/n2';
+import {asT} from '../../../../utils';
 import {ResultItem} from './types';
 
 // change the relatedPolicyNos, ongoingClaimNos in item model
@@ -33,6 +34,6 @@ export const wrapResults = (results?: Array<ResultItem>) => {
 		};
 	});
 	results.length = 0;
-	results.push(...wrapped as unknown as Array<ResultItem>);
+	results.push(...asT<Array<ResultItem>>(wrapped));
 	return results;
 };

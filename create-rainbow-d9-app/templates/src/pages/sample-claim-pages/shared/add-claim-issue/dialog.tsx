@@ -1,4 +1,3 @@
-import {ObjectPropValue} from '@rainbow-d9/n1';
 import {
 	ButtonInk,
 	DOM_KEY_WIDGET,
@@ -10,9 +9,9 @@ import {
 import dayjs from 'dayjs';
 import {useRef} from 'react';
 import styled from 'styled-components';
-import {getAuthentication} from '../../../../utils';
+import {asT, getAuthentication} from '../../../../utils';
 import {D9Dialog, LargestDialogStyles, validateDialog} from '../../../standard-widgets';
-import {Claim} from '../../shared';
+import {Claim} from '../index';
 import {markdown} from './ui-config.d9';
 
 export const AddClaimIssueDialog = (props: { data: Claim.ClaimIssue }) => {
@@ -22,7 +21,7 @@ export const AddClaimIssueDialog = (props: { data: Claim.ClaimIssue }) => {
 	const externalDefs = async () => ({});
 
 	return <D9Dialog ui={markdown}
-	                 initRootModel={rootModelRef.current as unknown as ObjectPropValue} initRootModelAsIs={true}
+	                 initRootModel={asT(rootModelRef.current)} initRootModelAsIs={true}
 	                 externalDefs={externalDefs}/>;
 };
 

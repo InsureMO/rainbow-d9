@@ -2,6 +2,7 @@ import {BaseModel, PropValue, RootEventTypes} from '@rainbow-d9/n1';
 import {ButtonClickOptions, PaginationData} from '@rainbow-d9/n2';
 import {MutableRefObject} from 'react';
 import {Page} from '../../../../services';
+import {asT} from '../../../../utils';
 import {
 	createDropdownOptionsProvider,
 	D9PageExternalDefsCreator,
@@ -18,7 +19,7 @@ export const createExternalDefsCreator = (rootModelRef: MutableRefObject<any>): 
 			search: {
 				// click the search button of advanced search section
 				click: async (options: ButtonClickOptions<BaseModel, PropValue>) => {
-					const root = options.root as unknown as RootModel;
+					const root: RootModel = asT(options.root);
 					const criteria = root.criteria;
 					const {
 						data, ...page
@@ -26,13 +27,13 @@ export const createExternalDefsCreator = (rootModelRef: MutableRefObject<any>): 
 					root.results = data;
 					root.page = page;
 					// notify
-					options.global.root!.fire(RootEventTypes.VALUE_CHANGED, '/results', root.results as unknown as PropValue, root.results as unknown as PropValue);
+					options.global.root!.fire(RootEventTypes.VALUE_CHANGED, '/results', asT(root.results), asT(root.results));
 				}
 			},
 			reset: {
 				// click the reset button of advanced search section
 				click: async (options: ButtonClickOptions<BaseModel, PropValue>) => {
-					const model = options.model as unknown as RootModel['criteria'];
+					const model: RootModel['criteria'] = asT(options.model);
 					const old = {...model} as PropValue;
 					delete model.policyNo;
 					delete model.caseNo;
@@ -45,7 +46,7 @@ export const createExternalDefsCreator = (rootModelRef: MutableRefObject<any>): 
 			'work-on': {
 				click: async (options: ButtonClickOptions<BaseModel, PropValue>) => {
 					// capture the data, save to session storage
-					const item = options.model as unknown as ResultItem;
+					const item: ResultItem = asT(options.model);
 					const key = await saveRegistrationData(item.registrationId);
 					globalHandlers.navigate.to(`/claim/acceptance/claim-entry/${key}`);
 				}

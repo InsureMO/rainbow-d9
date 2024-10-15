@@ -8,7 +8,7 @@
 		- data-space-grabber
 	- Button::
 		- text: claim.action.search-reporter
-		- click: @ext.search-reporter.click
+		- click: @ext.reporter.search-reporter.click
 		- fill: link
 		- data-fit-link
 - repaint:
@@ -17,7 +17,7 @@
 - Dropdown::claim.reporter.relationship::relationship
 	- options: @ext.codes.relationshipWithInsured
 	- please: dropdown.placeholder.please-select
-	- valueChanged: @ext.relationshipChanged
+	- valueChanged: @ext.reporter.relationshipChanged
 - Dropdown::claim.reporter.via::via
 	- options: @ext.codes.reportVia
 	- please: dropdown.placeholder.please-select

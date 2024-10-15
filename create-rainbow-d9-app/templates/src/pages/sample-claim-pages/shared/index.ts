@@ -10,5 +10,6 @@ registerPageIntlLabels('claim')
 
 export * from './types';
 export * from './ui-config';
+export * from './ui-actions';
 
 export const SharedServices = Services;

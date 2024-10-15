@@ -1,7 +1,7 @@
-import {ObjectPropValue} from '@rainbow-d9/n1';
 import {DropdownOptions, GlobalHandlers} from '@rainbow-d9/n2';
 import {lazy} from 'react';
 import {AppPage, PageRegistrar} from '../../../../global-settings';
+import {asT} from '../../../../utils';
 import {PreloadedLazyPageWrapper, PreloadedPageProps, PreloaderFuncOptions} from '../../../standard-widgets';
 import {SharedMarkdown, SharedServices} from '../../shared';
 import InitRootModel from './init-root.json';
@@ -27,11 +27,11 @@ const ClaimAcceptanceClaimEntryIndex = PreloadedLazyPageWrapper<AssistantData>(l
 		const rootModel: RootModel = JSON.parse(JSON.stringify(InitRootModel));
 		// create registration case
 		rootModel.data = data;
-		return rootModel as unknown as ObjectPropValue;
+		return asT(rootModel);
 	},
 	/** run after root model initialized, to load submission channel */
 	assistantData: async (options: PreloaderFuncOptions & Pick<PreloadedPageProps, 'initRootModel'>) => {
-		const rootModel = options.initRootModel as unknown as RootModel;
+		const rootModel: RootModel = asT(options.initRootModel);
 		return async (globalHandlers: GlobalHandlers) => {
 			const submissionChannelOptions: DropdownOptions = await SharedServices.askSubmissionChannelOptions(globalHandlers, rootModel.data);
 			return {submissionChannelOptions};

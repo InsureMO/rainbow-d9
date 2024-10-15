@@ -1,4 +1,3 @@
-import {ObjectPropValue} from '@rainbow-d9/n1';
 import {
 	ButtonInk,
 	CalendarUtils,
@@ -12,21 +11,21 @@ import {
 import dayjs from 'dayjs';
 import {useRef} from 'react';
 import styled from 'styled-components';
-import {getAuthentication} from '../../../../utils';
+import {asT, getAuthentication} from '../../../../utils';
 import {D9Dialog, LargestDialogStyles, validateDialog} from '../../../standard-widgets';
-import {Claim} from '../../shared';
+import {Claim} from '../index';
 import {markdown} from './ui-config.d9';
 
-export const AddInvestigationDialog = (props: { data: Claim.Investigation, investigators: DropdownOptions }) => {
-	const {data, investigators} = props;
+export const AddEscalationDialog = (props: { data: Claim.Escalation, escalatedTo: DropdownOptions }) => {
+	const {data, escalatedTo} = props;
 	// build a ref to keep the root model
-	const rootModelRef = useRef<Claim.Investigation>(data);
+	const rootModelRef = useRef<Claim.Escalation>(data);
 	const externalDefs = async () => ({
-		codes: {investigators}
+		codes: {escalatedTo}
 	});
 
 	return <D9Dialog ui={markdown}
-	                 initRootModel={rootModelRef.current as unknown as ObjectPropValue} initRootModelAsIs={true}
+	                 initRootModel={asT(rootModelRef.current)} initRootModelAsIs={true}
 	                 externalDefs={externalDefs}/>;
 };
 
@@ -45,16 +44,16 @@ const LayoutController = styled.div.attrs({[DOM_KEY_WIDGET]: 'dialog-layout-cont
         - var(--d9-dialog-padding-bottom));
     }
 `;
-export const createInvestigation = async (
+export const createEscalation = async (
 	globalHandlers: GlobalHandlers,
-	investigators: DropdownOptions,
-	onCreated: (issue: Claim.Investigation) => Promise<void>): Promise<void> => {
-	const data: Claim.Investigation = {
+	escalatedTo: DropdownOptions,
+	onCreated: (issue: Claim.Escalation) => Promise<void>): Promise<void> => {
+	const data: Claim.Escalation = {
 		// should use the store format here,
 		// but for simplicity, just use the given format to make sure date format is same as mock data
 		// escalatedAt: dayjs().format(CalendarUtils.getDefaultCalendarDatetimeFormat()),
-		submittedAt: dayjs().format('DD/MM/YYYY'),
-		submittedBy: getAuthentication()?.username,
+		escalatedAt: dayjs().format('DD/MM/YYYY'),
+		escalatedBy: getAuthentication()?.username,
 		dueDate: dayjs().add(7, 'd').format(CalendarUtils.getDefaultCalendarDatetimeFormat()),
 		status: 'wait'
 	};
@@ -75,7 +74,7 @@ export const createInvestigation = async (
 	// do change insured
 	globalHandlers.dialog.show(<>
 		<LayoutController/>
-		<AddInvestigationDialog data={data} investigators={investigators}/>
+		<AddEscalationDialog data={data} escalatedTo={escalatedTo}/>
 		<UnwrappedButtonBar>
 			<UnwrappedButton onClick={onConfirmClick}>
 				<IntlLabel keys={['page.common.button.confirm']} value="Confirm"/>

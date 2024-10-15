@@ -1,5 +1,5 @@
-import {ObjectPropValue} from '@rainbow-d9/n1';
 import {useRef} from 'react';
+import {asT} from '../../../../utils';
 import {D9Page} from '../../../standard-widgets';
 import {createExternalDefsCreator} from './external-defs';
 import InitRootModel from './init-root.json';
@@ -12,6 +12,6 @@ export default () => {
 	const externalDefs = createExternalDefsCreator(rootModelRef);
 
 	return <D9Page ui={markdown}
-	               initRootModel={rootModelRef.current as unknown as ObjectPropValue} initRootModelAsIs={true}
+	               initRootModel={asT(rootModelRef.current)} initRootModelAsIs={true}
 	               externalDefs={externalDefs}/>;
 };

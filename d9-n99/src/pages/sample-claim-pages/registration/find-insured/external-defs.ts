@@ -2,6 +2,7 @@ import {BaseModel, PropValue, RootEventTypes, VUtils} from '@rainbow-d9/n1';
 import {ButtonClickOptions, PaginationData} from '@rainbow-d9/n2';
 import {MutableRefObject} from 'react';
 import {Page} from '../../../../services';
+import {asT} from '../../../../utils';
 import {
 	createDropdownOptionsProvider,
 	D9PageExternalDefsCreator,
@@ -15,7 +16,7 @@ import {ResultItem, RootModel} from './types';
 
 export type RegisterAction = (data: Omit<ResultItem, 'relatedPolicyNos' | 'ongoingClaimNos'>, globalHandlers: D9PageExternalDefsCreatorOptions) => Promise<void>;
 
-export const createExternalDefsCreator = (rootModelRef: MutableRefObject<any>, register?: RegisterAction): D9PageExternalDefsCreator => {
+export const createExternalDefsCreator = (rootModelRef: MutableRefObject<RootModel>, register?: RegisterAction): D9PageExternalDefsCreator => {
 	return async (globalHandlers: D9PageExternalDefsCreatorOptions) => {
 		return {
 			codes: createDropdownOptionsProvider(globalHandlers),
@@ -35,13 +36,13 @@ export const createExternalDefsCreator = (rootModelRef: MutableRefObject<any>, r
 					root.resultsCriteria = {keywords};
 					root.resultsUseKeywords = true;
 					// notify
-					globalHandlers.root!.fire(RootEventTypes.VALUE_CHANGED, '/results', root.results as unknown as PropValue, root.results as unknown as PropValue);
+					globalHandlers.root!.fire(RootEventTypes.VALUE_CHANGED, '/results', asT(root.results), asT(root.results));
 				})
 			},
 			advancedSearch: {
 				// advance search link click, to show/hide the advanced search section
 				click: async (options: ButtonClickOptions<BaseModel, PropValue>) => {
-					const root = options.root as unknown as RootModel;
+					const root: RootModel = asT(options.root);
 					const enabled = root.control.advancedSearchEnabled;
 					root.control.advancedSearchEnabled = !enabled;
 					// notify
@@ -51,7 +52,7 @@ export const createExternalDefsCreator = (rootModelRef: MutableRefObject<any>, r
 			search: {
 				// click the search button of advanced search section
 				click: async (options: ButtonClickOptions<BaseModel, PropValue>) => {
-					const root = options.root as unknown as RootModel;
+					const root: RootModel = asT(options.root);
 					const {keywords, ...criteria} = root.criteria;
 					const {
 						data, ...page
@@ -61,13 +62,13 @@ export const createExternalDefsCreator = (rootModelRef: MutableRefObject<any>, r
 					root.resultsCriteria = criteria;
 					root.resultsUseKeywords = false;
 					// notify
-					options.global.root!.fire(RootEventTypes.VALUE_CHANGED, '/results', root.results as unknown as PropValue, root.results as unknown as PropValue);
+					options.global.root!.fire(RootEventTypes.VALUE_CHANGED, '/results', asT(root.results), asT(root.results));
 				}
 			},
 			reset: {
 				// click the reset button of advanced search section
 				click: async (options: ButtonClickOptions<BaseModel, PropValue>) => {
-					const model = options.model as unknown as RootModel['criteria'];
+					const model: RootModel['criteria'] = asT(options.model);
 					const old = {...model} as PropValue;
 					delete model.policyNo;
 					delete model.insuredName;
@@ -81,7 +82,7 @@ export const createExternalDefsCreator = (rootModelRef: MutableRefObject<any>, r
 			register: {
 				click: async (options: ButtonClickOptions<BaseModel, PropValue>) => {
 					// capture the data, save to session storage
-					const item = options.model as unknown as ResultItem;
+					const item: ResultItem = asT(options.model);
 					const {relatedPolicyNos, ongoingClaimNos, ...data} = item;
 					if (register != null) {
 						// use given one
