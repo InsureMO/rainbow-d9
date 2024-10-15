@@ -1,13 +1,19 @@
-import {BaseModel, PropValue, RootEventTypes} from '@rainbow-d9/n1';
+import {ArrayPropValue, BaseModel, PropValue, RootEventTypes} from '@rainbow-d9/n1';
 import {ValueChangedOptions} from '@rainbow-d9/n1/src';
 import {ButtonClickOptions, GlobalHandlers} from '@rainbow-d9/n2';
 import {MutableRefObject} from 'react';
-import {createDropdownOptionsProvider, D9PageExternalDefsCreatorOptions, validatePage} from '../../../standard-widgets';
+import {getAuthentication} from '../../../../utils';
+import {
+	createDropdownOptionsProvider,
+	D9PageExternalDefsCreatorOptions,
+	validatePageWithCallback
+} from '../../../standard-widgets';
 import {Claim} from '../../shared';
+import {createClaimIssue} from '../add-claim-issue';
 import {saveRegistrationData} from './services';
 import {AssistantData, RootModel} from './types';
 
-export const createExternalDefsCreator = (_rootModelRef: MutableRefObject<any>, askAssistantData: (globalHandlers: GlobalHandlers) => Promise<AssistantData>) => {
+export const createExternalDefsCreator = (rootModelRef: MutableRefObject<any>, askAssistantData: (globalHandlers: GlobalHandlers) => Promise<AssistantData>) => {
 	return async (globalHandlers: D9PageExternalDefsCreatorOptions) => {
 		const assistantData = await askAssistantData(globalHandlers);
 
@@ -85,7 +91,24 @@ export const createExternalDefsCreator = (_rootModelRef: MutableRefObject<any>, 
 				},
 				add: {
 					click: async (_options: ButtonClickOptions<BaseModel, PropValue>) => {
-						alert('Add claim issue button clicked.');
+						await createClaimIssue(globalHandlers, async (issue: Claim.ClaimIssue) => {
+							const root = rootModelRef.current as unknown as RootModel;
+							const claimIssues = root.data.claimIssues ?? [];
+							root.data.claimIssues = claimIssues;
+							claimIssues.push(issue);
+							// the tricky thing is that preloaded user options might not include myself.
+							// which means when the created claim issue has been pushed into list
+							// but the table cannot display the generatedBy name correctly.
+							// so the solution is to check and re-fetch the user options and update the user options
+							if (assistantData.userOptions.every(({value}) => value !== issue.generatedBy)) {
+								// lucky, the current account has name
+								assistantData.userOptions.push({
+									value: issue.generatedBy!, label: getAuthentication()?.username ?? ''
+								});
+							}
+							// notify
+							globalHandlers.root!.fire(RootEventTypes.VALUE_CHANGED, '/data.claimIssues', claimIssues as unknown as ArrayPropValue, claimIssues as unknown as ArrayPropValue);
+						});
 					}
 				}
 			},
@@ -174,12 +197,18 @@ export const createExternalDefsCreator = (_rootModelRef: MutableRefObject<any>, 
 					}
 				}
 			},
-			'reload-policy': {},
+			'reload-policy': {
+				click: async (_options: ButtonClickOptions<BaseModel, PropValue>) => {
+					alert('Reload policy button clicked.');
+				}
+			},
 			submit: {
 				click: async (_options: ButtonClickOptions<BaseModel, PropValue>) => {
 					// callback, never reject, therefore no need to catch
-					await validatePage(globalHandlers, async () => {
-						alert('Pass the validation.');
+					await validatePageWithCallback({
+						globalHandlers, passed: async () => {
+							alert('Pass the validation.');
+						}
 					});
 				}
 			}

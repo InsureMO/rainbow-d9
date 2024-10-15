@@ -1,4 +1,4 @@
-# Page::claim-acceptance-claim-entry
+# Page::claim-acceptance-policy-acceptance
 
 - data-fix-bottom-button-bar
 
@@ -57,7 +57,7 @@
 				- repaint:
 					- on: control.claimIssuesAllSelected
 			- width: 48
-		- claim.claim-issue.type: 2fr
+		- claim.claim-issue.headline: 2fr
 		- claim.claim-issue.raised: 1fr
 		- claim.claim-issue.last-updated: 1fr
 		- claim.claim-issue.status: 100

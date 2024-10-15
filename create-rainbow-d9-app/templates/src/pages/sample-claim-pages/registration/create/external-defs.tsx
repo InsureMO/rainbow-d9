@@ -4,8 +4,8 @@ import {MutableRefObject} from 'react';
 import {
 	createDropdownOptionsProvider,
 	D9PageExternalDefsCreatorOptions,
-	doValidatePage,
-	validatePage
+	validatePage,
+	validatePageWithCallback
 } from '../../../standard-widgets';
 import {findInsured, FoundInsured} from '../find-insured/page-as-dialog';
 import {AssistantData, RootModel} from './types';
@@ -78,7 +78,7 @@ export const createExternalDefsCreator = (_rootModelRef: MutableRefObject<any>, 
 				click: async (_options: ButtonClickOptions<BaseModel, PropValue>) => {
 					// try catch
 					try {
-						await doValidatePage(globalHandlers);
+						await validatePage({globalHandlers});
 						alert('Pass the validation.');
 					} catch {
 						// ignore
@@ -88,8 +88,10 @@ export const createExternalDefsCreator = (_rootModelRef: MutableRefObject<any>, 
 			submit: {
 				click: async (_options: ButtonClickOptions<BaseModel, PropValue>) => {
 					// callback, never reject, therefore no need to catch
-					await validatePage(globalHandlers, async () => {
-						alert('Pass the validation.');
+					await validatePageWithCallback({
+						globalHandlers, passed: async () => {
+							alert('Pass the validation.');
+						}
 					});
 				}
 			}

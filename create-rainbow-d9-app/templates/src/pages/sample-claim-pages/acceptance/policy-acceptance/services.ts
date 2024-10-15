@@ -73,11 +73,11 @@ export const loadRegistrationData = async (keyOrRegistrationId: string): Promise
 	if (loaded == null) {
 		// not found from session, means given key is registrationId
 		// should load from remote
-		return mock(doLoadRegistrationData).by(mockDoLoadMockRegistrationData)(keyOrRegistrationId);
+		return await mock(doLoadRegistrationData).by(mockDoLoadMockRegistrationData)(keyOrRegistrationId);
 	} else if (typeof loaded === 'string') {
 		// found a string from session, means loaded is registrationId
 		// should load from remote
-		return mock(doLoadRegistrationData).by(mockDoLoadMockRegistrationData)(keyOrRegistrationId);
+		return await mock(doLoadRegistrationData).by(mockDoLoadMockRegistrationData)(keyOrRegistrationId);
 	} else {
 		// found a data from session, use it
 		return loaded;

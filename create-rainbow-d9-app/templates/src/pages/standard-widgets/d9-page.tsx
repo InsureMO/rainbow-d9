@@ -5,7 +5,8 @@ import {
 	RootEventTypes,
 	StandaloneRoot,
 	useCreateEventBus,
-	useRootEventBus
+	useRootEventBus,
+	VUtils
 } from '@rainbow-d9/n1';
 import {AlertLabel, GlobalHandlers, GlobalRoot, IntlLabel, useGlobalHandlers} from '@rainbow-d9/n2';
 import {parseDoc} from '@rainbow-d9/n3';
@@ -16,13 +17,21 @@ import {D9PageState} from '../../global-settings';
 import {StandardPageWrapper} from './standard-page-wrapper';
 
 enum PageToRootEventBusTypes {
-	TO_ROOT = 'to-root'
+	TO_PAGE_ROOT = 'to-page-root',
+	TO_DIALOG_ROOT = 'to-dialog-root'
+}
+
+export enum RootEventTarget {
+	PAGE = '$to-page', DIALOG = '$to-dialog', BOTH = '$to-both'
 }
 
 interface PageToRootEventBus {
-	on(type: PageToRootEventBusTypes.TO_ROOT, listener: (rootEventTypes: RootEventTypes, ...args: any[]) => void): this;
-	off(type: PageToRootEventBusTypes.TO_ROOT, listener: (rootEventTypes: RootEventTypes, ...args: any[]) => void): this;
-	fire(type: PageToRootEventBusTypes.TO_ROOT, rootEventTypes: RootEventTypes, ...args: any[]): this;
+	on(type: PageToRootEventBusTypes.TO_PAGE_ROOT, listener: (rootEventTypes: RootEventTypes, ...args: any[]) => void): this;
+	off(type: PageToRootEventBusTypes.TO_PAGE_ROOT, listener: (rootEventTypes: RootEventTypes, ...args: any[]) => void): this;
+	fire(type: PageToRootEventBusTypes.TO_PAGE_ROOT, rootEventTypes: RootEventTypes, ...args: any[]): this;
+	on(type: PageToRootEventBusTypes.TO_DIALOG_ROOT, listener: (rootEventTypes: RootEventTypes, ...args: any[]) => void): this;
+	off(type: PageToRootEventBusTypes.TO_DIALOG_ROOT, listener: (rootEventTypes: RootEventTypes, ...args: any[]) => void): this;
+	fire(type: PageToRootEventBusTypes.TO_DIALOG_ROOT, rootEventTypes: RootEventTypes, ...args: any[]): this;
 }
 
 const PageToRootContext = createContext<PageToRootEventBus>({} as PageToRootEventBus);
@@ -45,7 +54,14 @@ export interface D9PageExternalDefsCreatorOptionsNavigator {
 	replace: (to: string) => void;
 }
 
+export type EnhancedD9GlobalHandlers = GlobalHandlers['root'] & {
+	/** to all dialogs when key is not provided */
+	toDialog: (dialogKey?: string) => ({ fire: (type: RootEventTypes, ...args: any[]) => void });
+	toPage: () => ({ fire: (type: RootEventTypes, ...args: any[]) => void });
+}
+
 export interface D9PageExternalDefsCreatorOptions extends GlobalHandlers {
+	root: EnhancedD9GlobalHandlers;
 	navigate: D9PageExternalDefsCreatorOptionsNavigator;
 }
 
@@ -83,7 +99,10 @@ interface D9ExternalDefsInitializerState {
 	defs?: ExternalDefs;
 }
 
-const useD9ExternalDefsInitializer = (create?: D9PageExternalDefsCreator) => {
+const useD9ExternalDefsInitializer = (
+	toRootType: PageToRootEventBusTypes.TO_PAGE_ROOT | PageToRootEventBusTypes.TO_DIALOG_ROOT,
+	create?: D9PageExternalDefsCreator,
+	areaKey?: string) => {
 	// this hook is outside of root event bus, which means the property root undefined
 	// now have to build a bridge to pass root event bus to the external defs creator
 	const globalHandlers = useGlobalHandlers();
@@ -94,21 +113,43 @@ const useD9ExternalDefsInitializer = (create?: D9PageExternalDefsCreator) => {
 	useEffect(() => {
 		if (create != null) {
 			(async () => {
-				try {
-					setState({
-						initialized: true,
-						defs: await create({
-							...globalHandlers,
-							// delegate to root event bus
-							// @ts-ignore
-							root: {fire: (type: RootEventTypes, ...args: any[]) => fire(PageToRootEventBusTypes.TO_ROOT, type, ...args)},
-							// attach navigate functions
-							navigate: {
-								to: (to: string) => navigate(to, {replace: false}),
-								replace: (to: string) => navigate(to, {replace: true})
+				const defs = await create({
+					...globalHandlers,
+					root: {
+						// delegate to root event bus, no return value here
+						// @ts-ignore
+						fire: (type: RootEventTypes, ...args: any[]) => {
+							// no matter what the target is, both page and dialog should receive the event
+							fire(PageToRootEventBusTypes.TO_DIALOG_ROOT, type, ...args);
+							fire(PageToRootEventBusTypes.TO_PAGE_ROOT, type, ...args);
+						},
+						toPage: () => {
+							return {
+								fire: (type: RootEventTypes, ...args: any[]) => {
+									fire(PageToRootEventBusTypes.TO_PAGE_ROOT, type, ...args);
+								}
+							};
+						},
+						toDialog: (dialogKey?: string) => {
+							if (VUtils.isNotBlank(dialogKey) && VUtils.isNotBlank(areaKey) && dialogKey !== areaKey) {
+								// both dialog and area key are provided, but not matched
+								return {fire: VUtils.noop};
 							}
-						})
-					});
+							return {
+								fire: (type: RootEventTypes, ...args: any[]) => {
+									fire(PageToRootEventBusTypes.TO_DIALOG_ROOT, type, ...args, dialogKey);
+								}
+							};
+						}
+					},
+					// attach navigate functions
+					navigate: {
+						to: (to: string) => navigate(to, {replace: false}),
+						replace: (to: string) => navigate(to, {replace: true})
+					}
+				});
+				try {
+					setState({initialized: true, defs});
 				} catch (e) {
 					console.error(e);
 					await globalHandlers.alert.show(<AlertLabel>
@@ -119,7 +160,7 @@ const useD9ExternalDefsInitializer = (create?: D9PageExternalDefsCreator) => {
 		} else {
 			setState({initialized: true});
 		}
-	}, [create]);
+	}, [create, toRootType, areaKey]);
 
 	return state;
 };
@@ -128,37 +169,45 @@ interface D9PageContentProps {
 	pageDefs: NodeDef;
 	rootModel: ObjectPropValue;
 	externalDefs?: D9PageExternalDefsCreator;
+	toRootType: PageToRootEventBusTypes.TO_PAGE_ROOT | PageToRootEventBusTypes.TO_DIALOG_ROOT;
+	areaKey?: string;
 }
 
 /** bridge from page to root */
-const PageToRootEventBridge = () => {
+const PageToRootEventBridge = (props: {
+	handle: PageToRootEventBusTypes.TO_PAGE_ROOT | PageToRootEventBusTypes.TO_DIALOG_ROOT;
+}) => {
 	const {on, off} = usePageToRootEventBus();
 	const {fire} = useRootEventBus();
+	const [handleType] = useState(props.handle);
 	useEffect(() => {
 		// delegate to root event bus
 		const onToRoot = (type: RootEventTypes, ...args: any[]) => {
 			// @ts-ignore
 			fire(type, ...args);
 		};
-		on(PageToRootEventBusTypes.TO_ROOT, onToRoot);
+		// @ts-ignore
+		on(handleType, onToRoot);
 		return () => {
-			off(PageToRootEventBusTypes.TO_ROOT, onToRoot);
+			// @ts-ignore
+			off(handleType, onToRoot);
 		};
-	}, []);
+	}, [on, off, fire, handleType]);
+
 	return <Fragment/>;
 };
 
 const D9PageContent = (props: D9PageContentProps) => {
-	const {pageDefs, rootModel, externalDefs: externalDefsCreate} = props;
+	const {pageDefs, rootModel, externalDefs: externalDefsCreate, toRootType, areaKey} = props;
 
-	const externalDefs = useD9ExternalDefsInitializer(externalDefsCreate);
+	const externalDefs = useD9ExternalDefsInitializer(toRootType, externalDefsCreate, areaKey);
 	if (!externalDefs.initialized) {
 		return null;
 	}
 
 	return <StandardPageWrapper>
 		<StandaloneRoot {...pageDefs} $root={rootModel} externalDefs={externalDefs.defs}>
-			<PageToRootEventBridge/>
+			<PageToRootEventBridge handle={toRootType}/>
 		</StandaloneRoot>
 	</StandardPageWrapper>;
 };
@@ -208,13 +257,25 @@ export const D9Page = (props: D9PageProps) => {
 			{Tip && <Tip/>}
 			{RemoteRequest && <RemoteRequest/>}
 			<I18NAndD9N2Bridge/>
-			<D9PageContent pageDefs={state.$config.node} rootModel={state.$root} externalDefs={externalDefs}/>
+			<D9PageContent pageDefs={state.$config.node} rootModel={state.$root} externalDefs={externalDefs}
+			               toRootType={PageToRootEventBusTypes.TO_PAGE_ROOT}/>
 		</GlobalRoot>
 	</PageToRootEventBusProvider>;
 };
 
-export const D9Dialog = (props: Pick<D9PageProps, 'ui' | 'manufactureParsedUI' | 'initRootModel' | 'initRootModelAsIs' | 'externalDefs'>) => {
-	const {externalDefs} = props;
+type D9DialogProps =
+	Pick<D9PageProps, 'ui' | 'manufactureParsedUI' | 'initRootModel' | 'initRootModelAsIs' | 'externalDefs'>
+	& { dialogKey?: string };
+
+/**
+ * The Dialog and Page share the PageToRootEventBusProvider, and since both Dialog and Page have their own RootEventBusProvider,
+ * when a RootEvent is triggered by GlobalHandlers, both Page and Dialog will receive the event.
+ * In certain scenarios, this is not the desired behavior.
+ * For example, during validation, it is usually only expected that a specific area receives the event.
+ * Particularly when validating a designated Dialog area, it is not anticipated that the Page will receive this event.
+ */
+export const D9Dialog = (props: D9DialogProps) => {
+	const {externalDefs, dialogKey} = props;
 
 	const state = useStatePrepare(props);
 	const {success, error} = state.$config;
@@ -227,5 +288,7 @@ export const D9Dialog = (props: Pick<D9PageProps, 'ui' | 'manufactureParsedUI' |
 		}
 	}
 
-	return <D9PageContent pageDefs={state.$config.node} rootModel={state.$root} externalDefs={externalDefs}/>;
+	return <D9PageContent pageDefs={state.$config.node} rootModel={state.$root} externalDefs={externalDefs}
+	                      toRootType={PageToRootEventBusTypes.TO_DIALOG_ROOT}
+	                      areaKey={dialogKey}/>;
 };

@@ -1,0 +1,9 @@
+# Page::claim-acceptance-policy-acceptance-add-claim-issue
+
+## Section::claim.add-claim-issue.title
+
+- Input::claim.add-claim-issue.headline::title
+	- pos: 12
+	- required
+- Textarea::claim.add-claim-issue.description::description
+	- pos: 12

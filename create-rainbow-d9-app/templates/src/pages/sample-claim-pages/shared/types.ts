@@ -54,71 +54,100 @@ export namespace Claim {
 		producerEmail?: string;
 	}
 
-	export interface ClaimIssue {
-		issueId?: string;
+	export interface Selectable {
 		/** this is a control property, never submit to server side */
 		selected?: boolean;
-		title?: string;
+	}
+
+	export interface WithGenerated {
 		generatedAt?: string;
 		generatedBy?: string;
+		/** this is a display property, never submit to server side */
+		generatedByName?: string;
+	}
+
+	export interface WithLastUpdated {
 		lastUpdatedAt?: string;
 		lastUpdatedBy?: string;
+		/** this is a display property, never submit to server side */
+		lastUpdatedByName?: string;
+	}
+
+	export interface ClaimIssue extends Selectable, WithGenerated, WithLastUpdated {
+		issueId?: string;
+		title?: string;
 		status?: string;
 	}
 
 	export type ClaimIssues = Array<ClaimIssue>;
 
-	export interface QueryLetter {
+	export interface QueryLetter extends WithGenerated, WithLastUpdated {
 		letterId?: string;
 		docNo?: string;
 		docName?: string;
-		generatedAt?: string;
-		generatedBy?: string;
 		dueDate?: string;
-		lastUpdatedAt?: string;
-		lastUpdatedBy?: string;
 		status?: string;
 	}
 
 	export type QueryLetters = Array<QueryLetter>;
 
-	export interface InternalQuery {
+	export interface WithAssignee {
+		assignee?: string;
+		/** this is a display property, never submit to server side */
+		assigneeName?: string;
+		/** this is a display property, never submit to server side */
+		assigneeDepartmentName?: string;
+	}
+
+	export interface InternalQuery extends WithAssignee, WithGenerated, WithLastUpdated {
 		queryId?: string;
 		queryNo?: string;
 		type?: string;
 		title?: string;
-		assignee?: string;
-		generatedAt?: string;
-		generatedBy?: string;
 		dueDate?: string;
-		lastUpdatedAt?: string;
-		lastUpdatedBy?: string;
 		status?: string;
 	}
 
 	export type InternalQueries = Array<InternalQuery>;
 
-	export interface Escalation {
-		escalationId?: string;
+	export interface WithEscalatedTo {
 		escalatedTo?: string;
+		/** this is a display property, never submit to server side */
+		escalatedToName?: string;
+	}
+
+	export interface WithEscalated {
 		escalatedAt?: string;
 		escalatedBy?: string;
+		/** this is a display property, never submit to server side */
+		escalatedByName?: string;
+	}
+
+	export interface Escalation extends WithEscalatedTo, WithEscalated, WithLastUpdated {
+		escalationId?: string;
+		escalatedBy?: string;
 		dueDate?: string;
-		lastUpdatedAt?: string;
-		lastUpdatedBy?: string;
 		status?: string;
 	}
 
 	export type Escalations = Array<Escalation>;
 
-	export interface Investigation {
-		investigationId?: string;
+	export interface WithSubmittedTo {
 		submittedTo?: string;
+		/** this is a display property, never submit to server side */
+		submittedToName?: string;
+	}
+
+	export interface WithSubmitted {
 		submittedAt?: string;
 		submittedBy?: string;
+		/** this is a display property, never submit to server side */
+		submittedByName?: string;
+	}
+
+	export interface Investigation extends WithSubmittedTo, WithSubmitted, WithLastUpdated {
+		investigationId?: string;
 		dueDate?: string;
-		lastUpdatedAt?: string;
-		lastUpdatedBy?: string;
 		status?: string;
 	}
 

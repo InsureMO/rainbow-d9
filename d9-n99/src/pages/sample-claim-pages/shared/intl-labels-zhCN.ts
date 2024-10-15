@@ -61,7 +61,11 @@ export const zhCNIntlLabels = {
 	},
 	'actions-and-supporting': '操作与支持:',
 	'claim-issue': {
-		title: '案件问题', type: '问题', raised: '创建于', 'last-updated': '最后修改于', status: '状态'
+		title: '案件问题', headline: '问题', raised: '创建于', 'last-updated': '最后修改于', status: '状态'
+	},
+	'add-claim-issue': {
+		title: '添加问题', headline: '标题', description: '描述',
+		'generated-at': '创建于', 'generated-by': '创建自'
 	},
 	'query-letter': {
 		title: '问题问卷', 'doc-no': '问卷号码', 'doc-name': '问卷名称', due: '截止日期',

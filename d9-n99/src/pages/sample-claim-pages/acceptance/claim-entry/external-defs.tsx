@@ -1,11 +1,7 @@
 import {BaseModel, PropValue, RootEventTypes, ValueChangedOptions} from '@rainbow-d9/n1';
 import {ButtonClickOptions, GlobalHandlers} from '@rainbow-d9/n2';
 import {MutableRefObject} from 'react';
-import {
-	createDropdownOptionsProvider,
-	D9PageExternalDefsCreatorOptions,
-	doValidatePage
-} from '../../../standard-widgets';
+import {createDropdownOptionsProvider, D9PageExternalDefsCreatorOptions, validatePage} from '../../../standard-widgets';
 import {findInsured, FoundInsured} from '../../registration/find-insured/page-as-dialog';
 import {saveRegistrationData} from './services';
 import {AssistantData, RootModel} from './types';
@@ -93,7 +89,7 @@ export const createExternalDefsCreator = (_rootModelRef: MutableRefObject<any>, 
 				click: async (_options: ButtonClickOptions<BaseModel, PropValue>) => {
 					// try catch
 					try {
-						await doValidatePage(globalHandlers);
+						await validatePage({globalHandlers});
 						alert('Pass the validation.');
 					} catch {
 						// ignore
