@@ -1,0 +1,53 @@
+## Section::claim.query-letter.title
+
+- collapsible
+
+- Table::
+	- property: data.queryLetters
+	- !expandable, !addable, !removable
+	- omitDefaultRowOperators
+	- operatorsColumnWidth: 160
+	- repaint:
+		- on: data.queryLetters
+	- getElementKey: @ext.query-letter.getElementKey
+	- headers:
+		- claim.query-letter.doc-no: 100
+		- claim.query-letter.doc-name: 2fr
+		- claim.query-letter.raised: 1fr
+		- claim.query-letter.due: 120
+		- claim.query-letter.last-updated: 1fr
+		- claim.query-letter.status: 100
+	- Label::::docNo
+	- Label::::docName
+	- Box::
+		- data-done-at, data-as-table-cell
+		- Dropdown::::generatedBy
+			- disabled, data-as-label
+			- options: @ext.codes.users
+		- Label::::generatedAt
+	- Label::::dueDate
+	- Box::
+		- data-done-at, data-as-table-cell
+		- Dropdown::::lastUpdatedBy
+			- disabled, data-as-label
+			- options: @ext.codes.users
+		- Label::::lastUpdatedAt
+	- Dropdown::::status
+		- disabled, data-as-label
+		- options: @ext.codes.queryLetterStatus
+	- RowOperators::
+		- Button::
+			- text: claim.action.reply
+			- fill: link
+			- click: @ext.query-letter.reply.click
+			- data-text-row-operator, data-fit-link
+		- Button::
+			- text: page.common.button.edit
+			- fill: link
+			- click: @ext.query-letter.edit.click
+			- data-text-row-operator, data-fit-link
+		- Button::
+			- text: claim.action.reminder
+			- fill: link
+			- click: @ext.query-letter.reminder.click
+			- data-text-row-operator, data-fit-link

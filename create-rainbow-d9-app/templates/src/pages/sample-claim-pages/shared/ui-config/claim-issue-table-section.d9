@@ -1,0 +1,69 @@
+## Section::claim.claim-issue.title
+
+- collapsible
+
+- Table::
+	- property: data.claimIssues
+	- !expandable, !addable, !removable
+	- omitDefaultRowOperators
+	- operatorsColumnWidth: 140
+	- repaint:
+		- on: data.claimIssues
+	- getElementKey: @ext.claim-issue.getElementKey
+	- headers:
+		- column:
+			- label: Checkbox
+				- property: control.claimIssuesAllSelected
+				- valueChanged: @ext.claim-issue.all-selected-changed
+				- repaint:
+					- on: control.claimIssuesAllSelected
+			- width: 48
+		- claim.claim-issue.headline: 2fr
+		- claim.claim-issue.raised: 1fr
+		- claim.claim-issue.last-updated: 1fr
+		- claim.claim-issue.status: 100
+	- Checkbox::::selected
+		- valueChanged: @ext.claim-issue.row-selected-changed
+	- Label::::title
+	- Box::
+		- data-done-at, data-as-table-cell
+		- Dropdown::::generatedBy
+			- disabled, data-as-label
+			- options: @ext.codes.users
+		- Label::::generatedAt
+	- Box::
+		- data-done-at, data-as-table-cell
+		- Dropdown::::lastUpdatedBy
+			- disabled, data-as-label
+			- options: @ext.codes.users
+		- Label::::lastUpdatedAt
+	- Dropdown::::status
+		- disabled, data-as-label
+		- options: @ext.codes.claimIssueStatus
+	- RowOperators::
+		- Button::
+			- text: page.common.button.close
+			- fill: link
+			- click: @ext.claim-issue.close.click
+			- data-text-row-operator, data-fit-link
+		- Button::
+			- text: page.common.button.delete
+			- fill: link
+			- ink: danger
+			- click: @ext.claim-issue.delete.click
+			- data-text-row-operator, data-fit-link
+
+- ButtonBar::
+	- Button::
+		- text: claim.action.generate-issues-as-internal-query
+		- click: @ext.claim-issue.generate-internal-query.click
+		- fill: plain
+	- Button::
+		- text: claim.action.generate-issues-as-query-letter
+		- click: @ext.claim-issue.generate-query-letter.click
+		- fill: plain
+	- Box::
+		- data-space-grabber
+	- Button::
+		- text: claim.action.add-claim-issue
+		- click: @ext.claim-issue.add.click

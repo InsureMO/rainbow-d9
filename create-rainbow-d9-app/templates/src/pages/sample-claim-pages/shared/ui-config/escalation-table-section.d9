@@ -1,0 +1,54 @@
+## Section::claim.escalation.title
+
+- collapsible
+
+- Table::
+	- property: data.escalations
+	- !expandable, !addable, !removable
+	- omitDefaultRowOperators
+	- operatorsColumnWidth: 120
+	- repaint:
+		- on: data.escalations
+	- getElementKey: @ext.escalation.getElementKey
+	- headers:
+		- claim.escalation.to: 1fr
+		- claim.escalation.raised: 1fr
+		- claim.escalation.due: 120
+		- claim.escalation.last-updated: 1fr
+		- claim.escalation.status: 150
+	- Dropdown::::escalatedTo
+		- disabled, data-as-label
+		- options: @ext.codes.users
+	- Box::
+		- data-done-at, data-as-table-cell
+		- Dropdown::::escalatedBy
+			- disabled, data-as-label
+			- options: @ext.codes.users
+		- Label::::escalatedAt
+	- Label::::dueDate
+		- valueToLabel: `$.df(value)`
+	- Box::
+		- data-done-at, data-as-table-cell
+		- Dropdown::::lastUpdatedBy
+			- disabled, data-as-label
+			- options: @ext.codes.users
+		- Label::::lastUpdatedAt
+	- Dropdown::::status
+		- disabled, data-as-label
+		- options: @ext.codes.escalationStatus
+	- RowOperators::
+		- Button::
+			- text: page.common.button.view
+			- fill: link
+			- click: @ext.escalation.view.click
+			- data-text-row-operator, data-fit-link
+		- Button::
+			- text: claim.action.withdraw
+			- fill: link
+			- click: @ext.escalation.withdraw.click
+			- data-text-row-operator, data-fit-link
+
+- ButtonBar::
+	- Button::
+		- text: claim.action.add-escalation
+		- click: @ext.escalation.add.click

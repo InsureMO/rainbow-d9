@@ -1,0 +1,54 @@
+## Section::claim.investigation.title
+
+- collapsible
+
+- Table::
+	- property: data.investigations
+	- !expandable, !addable, !removable
+	- omitDefaultRowOperators
+	- operatorsColumnWidth: 120
+	- repaint:
+		- on: data.investigations
+	- getElementKey: @ext.investigation.getElementKey
+	- headers:
+		- claim.investigation.to: 1fr
+		- claim.investigation.raised: 1fr
+		- claim.investigation.due: 120
+		- claim.investigation.last-updated: 1fr
+		- claim.investigation.status: 150
+	- Dropdown::::submittedTo
+		- disabled, data-as-label
+		- options: @ext.codes.users
+	- Box::
+		- data-done-at, data-as-table-cell
+		- Dropdown::::submittedBy
+			- disabled, data-as-label
+			- options: @ext.codes.users
+		- Label::::submittedAt
+	- Label::::dueDate
+		- valueToLabel: `$.df(value)`
+	- Box::
+		- data-done-at, data-as-table-cell
+		- Dropdown::::lastUpdatedBy
+			- disabled, data-as-label
+			- options: @ext.codes.users
+		- Label::::lastUpdatedAt
+	- Dropdown::::status
+		- disabled, data-as-label
+		- options: @ext.codes.investigationStatus
+	- RowOperators::
+		- Button::
+			- text: page.common.button.view
+			- fill: link
+			- click: @ext.investigation.view.click
+			- data-text-row-operator, data-fit-link
+		- Button::
+			- text: claim.action.withdraw
+			- fill: link
+			- click: @ext.investigation.withdraw.click
+			- data-text-row-operator, data-fit-link
+
+- ButtonBar::
+	- Button::
+		- text: claim.action.add-investigation
+		- click: @ext.investigation.add.click

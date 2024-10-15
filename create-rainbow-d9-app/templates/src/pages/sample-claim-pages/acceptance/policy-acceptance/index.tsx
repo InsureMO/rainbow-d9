@@ -12,7 +12,12 @@ import {markdown} from './ui-config.d9';
 const ClaimAcceptanceClaimEntryIndex = PreloadedLazyPageWrapper<AssistantData>(lazy(() => import('./page')), {
 	usePathParams: true,
 	ui: async (_options: PreloaderFuncOptions): Promise<string> => {
-		return markdown.replace('- Box::$$registration-base-section', SharedMarkdown.registrationBaseSection);
+		return markdown.replace('- Box::$$registration-base-section', SharedMarkdown.registrationBaseSection)
+			.replace('- Box::$$claim-issue-table-section', SharedMarkdown.claimIssueTableSection)
+			.replace('- Box::$$query-letter-table-section', SharedMarkdown.queryLetterTableSection)
+			.replace('- Box::$$internal-query-table-section', SharedMarkdown.internalQueryTableSection)
+			.replace('- Box::$$escalation-table-section', SharedMarkdown.escalationTableSection)
+			.replace('- Box::$$investigation-table-section', SharedMarkdown.investigationTableSection);
 	},
 	/** initialize root model */
 	initRootModel: async (options: PreloaderFuncOptions) => {

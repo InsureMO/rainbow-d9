@@ -1,0 +1,61 @@
+## Section::claim.internal-query.title
+
+- collapsible
+
+- Table::
+	- property: data.internalQueries
+	- !expandable, !addable, !removable
+	- omitDefaultRowOperators
+	- operatorsColumnWidth: 120
+	- repaint:
+		- on: data.internalQueries
+	- getElementKey: @ext.internal-query.getElementKey
+	- headers:
+		- claim.internal-query.query-no: 100
+		- claim.internal-query.query-type: 150
+		- claim.internal-query.query-title: 2fr
+		- claim.internal-query.assignee: 1fr
+		- claim.internal-query.raised: 1fr
+		- claim.internal-query.due: 120
+		- claim.internal-query.last-updated: 1fr
+		- claim.internal-query.status: 100
+	- Label::::queryNo
+	- Dropdown::::type
+		- disabled, data-as-label
+		- options: @ext.codes.internalQueryType
+	- Label::::title
+	- Box::
+		- data-sb-from-dept, data-as-table-cell
+		- Dropdown::::assignee
+			- disabled, data-as-label
+			- options: @ext.codes.users
+		- Dropdown::::assignee
+			- disabled, data-as-label
+			- options: @ext.codes.userDepartments
+	- Box::
+		- data-done-at, data-as-table-cell
+		- Dropdown::::generatedBy
+			- disabled, data-as-label
+			- options: @ext.codes.users
+		- Label::::generatedAt
+	- Label::::dueDate
+	- Box::
+		- data-done-at, data-as-table-cell
+		- Dropdown::::lastUpdatedBy
+			- disabled, data-as-label
+			- options: @ext.codes.users
+		- Label::::lastUpdatedAt
+	- Dropdown::::status
+		- disabled, data-as-label
+		- options: @ext.codes.internalQueryStatus
+	- RowOperators::
+		- Button::
+			- text: page.common.button.view
+			- fill: link
+			- click: @ext.internal-query.view.click
+			- data-text-row-operator, data-fit-link
+		- Button::
+			- text: claim.action.withdraw
+			- fill: link
+			- click: @ext.internal-query.withdraw.click
+			- data-text-row-operator, data-fit-link

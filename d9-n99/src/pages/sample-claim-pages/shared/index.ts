@@ -1,12 +1,7 @@
 import {registerPageIntlLabels} from '../../../global-settings';
-import {markdown as additionalBaseSection} from './additional-base-section.d9';
-import {markdown as claimBaseSection} from './claim-base-section.d9';
-import {markdown as insuredBaseSection} from './insured-base-section.d9';
 import {enUSIntlLabels} from './intl-labels-enUS';
 import {zhCNIntlLabels} from './intl-labels-zhCN';
 import './mock-code-tables.ts';
-import {markdown as registrationBaseSection} from './registration-base-section.d9';
-import {markdown as reporterBaseSection} from './reporter-base-section.d9';
 import * as Services from './services';
 
 registerPageIntlLabels('claim')
@@ -14,8 +9,6 @@ registerPageIntlLabels('claim')
 	.lang('zh-CN').labels(zhCNIntlLabels);
 
 export * from './types';
-export const SharedMarkdown = {
-	registrationBaseSection, insuredBaseSection, claimBaseSection, additionalBaseSection, reporterBaseSection
-};
+export * from './ui-config';
 
 export const SharedServices = Services;
