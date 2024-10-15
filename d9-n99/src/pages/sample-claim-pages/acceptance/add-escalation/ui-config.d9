@@ -1,0 +1,15 @@
+# Page::claim-acceptance-policy-acceptance-add-escalation
+
+## Section::claim.escalation.add-title
+
+- Dropdown::claim.escalation.to::escalatedTo
+	- options: @ext.codes.escalatedTo
+	- please: dropdown.placeholder.please-select
+	- required
+- Date::claim.escalation.due::dueDate
+	- required
+- Input::claim.escalation.headline::title
+	- pos: 12
+	- required
+- Textarea::claim.escalation.description::description
+	- pos: 12

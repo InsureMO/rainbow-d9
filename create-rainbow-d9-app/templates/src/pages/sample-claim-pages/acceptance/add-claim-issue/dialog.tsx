@@ -13,7 +13,7 @@ import styled from 'styled-components';
 import {getAuthentication} from '../../../../utils';
 import {D9Dialog, LargestDialogStyles, validateDialog} from '../../../standard-widgets';
 import {Claim} from '../../shared';
-import {markdown} from './add-claim-issue.d9';
+import {markdown} from './ui-config.d9';
 
 export const AddClaimIssueDialog = (props: { data: Claim.ClaimIssue }) => {
 	const {data} = props;
@@ -34,7 +34,7 @@ const LayoutController = styled.div.attrs({[DOM_KEY_WIDGET]: 'dialog-layout-cont
     + div[data-w=page-standard-wrapper] > div[data-w=d9-page] textarea[data-w=d9-textarea] {
         height: calc(var(--app-dialog-largest-height)
         - var(--d9-dialog-padding-top)
-        - var(--d9-section-header-height)
+        - var(--d9-section-header-height) - var(--d9-section-body-padding)
         - 86px
         - var(--d9-table-footer-height)
         - var(--d9-input-height) - var(--d9-button-bar-padding-tb) * 2

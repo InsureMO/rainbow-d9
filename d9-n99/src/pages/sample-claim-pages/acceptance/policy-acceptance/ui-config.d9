@@ -240,7 +240,7 @@
 		- claim.escalation.raised: 1fr
 		- claim.escalation.due: 120
 		- claim.escalation.last-updated: 1fr
-		- claim.escalation.status: 100
+		- claim.escalation.status: 150
 	- Dropdown::::escalatedTo
 		- disabled, data-as-label
 		- options: @ext.codes.users
@@ -251,6 +251,7 @@
 			- options: @ext.codes.users
 		- Label::::escalatedAt
 	- Label::::dueDate
+		- valueToLabel: `$.df(value)`
 	- Box::
 		- data-done-at, data-as-table-cell
 		- Dropdown::::lastUpdatedBy
@@ -272,6 +273,11 @@
 			- click: @ext.escalation.withdraw.click
 			- data-text-row-operator, data-fit-link
 
+- ButtonBar::
+	- Button::
+		- text: claim.action.add-escalation
+		- click: @ext.escalation.add.click
+
 ## Section::claim.investigation.title
 
 - collapsible
@@ -289,7 +295,7 @@
 		- claim.investigation.raised: 1fr
 		- claim.investigation.due: 120
 		- claim.investigation.last-updated: 1fr
-		- claim.investigation.status: 100
+		- claim.investigation.status: 150
 	- Dropdown::::submittedTo
 		- disabled, data-as-label
 		- options: @ext.codes.users
@@ -300,6 +306,7 @@
 			- options: @ext.codes.users
 		- Label::::submittedAt
 	- Label::::dueDate
+		- valueToLabel: `$.df(value)`
 	- Box::
 		- data-done-at, data-as-table-cell
 		- Dropdown::::lastUpdatedBy
@@ -321,6 +328,11 @@
 			- click: @ext.investigation.withdraw.click
 			- data-text-row-operator, data-fit-link
 
+- ButtonBar::
+	- Button::
+		- text: claim.action.add-investigation
+		- click: @ext.investigation.add.click
+
 ## ButtonBar::
 
 - data-fix-bottom
@@ -336,14 +348,6 @@
 	- click: @ext.previous.click
 	- fill: plain
 	- ink: waive
-- Button::
-	- text: claim.action.investigation
-	- click: @ext.investigation.click
-	- fill: plain
-- Button::
-	- text: claim.action.escalation
-	- click: @ext.escalation.click
-	- fill: plain
 - Button::
 	- text: claim.action.reload-policy
 	- click: @ext.reload-policy.click

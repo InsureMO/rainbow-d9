@@ -62,20 +62,17 @@ export namespace Claim {
 	export interface WithGenerated {
 		generatedAt?: string;
 		generatedBy?: string;
-		/** this is a display property, never submit to server side */
-		generatedByName?: string;
 	}
 
 	export interface WithLastUpdated {
 		lastUpdatedAt?: string;
 		lastUpdatedBy?: string;
-		/** this is a display property, never submit to server side */
-		lastUpdatedByName?: string;
 	}
 
 	export interface ClaimIssue extends Selectable, WithGenerated, WithLastUpdated {
 		issueId?: string;
 		title?: string;
+		description?: string;
 		status?: string;
 	}
 
@@ -93,10 +90,6 @@ export namespace Claim {
 
 	export interface WithAssignee {
 		assignee?: string;
-		/** this is a display property, never submit to server side */
-		assigneeName?: string;
-		/** this is a display property, never submit to server side */
-		assigneeDepartmentName?: string;
 	}
 
 	export interface InternalQuery extends WithAssignee, WithGenerated, WithLastUpdated {
@@ -112,20 +105,17 @@ export namespace Claim {
 
 	export interface WithEscalatedTo {
 		escalatedTo?: string;
-		/** this is a display property, never submit to server side */
-		escalatedToName?: string;
 	}
 
 	export interface WithEscalated {
 		escalatedAt?: string;
 		escalatedBy?: string;
-		/** this is a display property, never submit to server side */
-		escalatedByName?: string;
 	}
 
 	export interface Escalation extends WithEscalatedTo, WithEscalated, WithLastUpdated {
 		escalationId?: string;
-		escalatedBy?: string;
+		title?: string;
+		description?: string;
 		dueDate?: string;
 		status?: string;
 	}
@@ -134,19 +124,17 @@ export namespace Claim {
 
 	export interface WithSubmittedTo {
 		submittedTo?: string;
-		/** this is a display property, never submit to server side */
-		submittedToName?: string;
 	}
 
 	export interface WithSubmitted {
 		submittedAt?: string;
 		submittedBy?: string;
-		/** this is a display property, never submit to server side */
-		submittedByName?: string;
 	}
 
 	export interface Investigation extends WithSubmittedTo, WithSubmitted, WithLastUpdated {
 		investigationId?: string;
+		title?: string;
+		description?: string;
 		dueDate?: string;
 		status?: string;
 	}

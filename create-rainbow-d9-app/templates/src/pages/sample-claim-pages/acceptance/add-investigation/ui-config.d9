@@ -1,0 +1,15 @@
+# Page::claim-acceptance-policy-acceptance-add-investigation
+
+## Section::claim.investigation.add-title
+
+- Dropdown::claim.investigation.to::submittedTo
+	- options: @ext.codes.investigators
+	- please: dropdown.placeholder.please-select
+	- required
+- Date::claim.investigation.due::dueDate
+	- required
+- Input::claim.investigation.headline::title
+	- pos: 12
+	- required
+- Textarea::claim.investigation.description::description
+	- pos: 12

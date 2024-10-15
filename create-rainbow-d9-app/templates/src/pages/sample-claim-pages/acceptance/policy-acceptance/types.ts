@@ -30,4 +30,6 @@ export interface AssistantData {
 	submissionChannelOptions: DropdownOptions;
 	userOptions: DropdownOptions;
 	userDepartmentOptions: DropdownOptions;
+	escalateToOptions: () => Promise<DropdownOptions>;
+	investigatorOptions: () => Promise<DropdownOptions>;
 }

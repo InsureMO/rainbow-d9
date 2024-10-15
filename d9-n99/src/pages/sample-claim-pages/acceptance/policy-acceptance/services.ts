@@ -1,6 +1,7 @@
 import {VUtils} from '@rainbow-d9/n1';
 import {mock} from '../../../../mock-services';
 import {loadFromSessionAndBurn, saveToSession} from '../../../../utils';
+import {SharedServices} from '../../shared';
 import {Data} from './types';
 
 export const saveRegistrationData = async (data: Partial<Data>): Promise<string> => {
@@ -45,7 +46,7 @@ const mockDoLoadMockRegistrationData = async (_keyOrRegistrationId: string): Pro
 			queryNo: '101',
 			type: 'task',
 			title: 'Please life assured.',
-			assignee: 'Chris',
+			assignee: SharedServices.Users.Chris.userId,
 			generatedAt: '14/10/2024', generatedBy: 'system',
 			dueDate: '24/10/2024',
 			lastUpdatedAt: '14/10/2024', lastUpdatedBy: 'system',
@@ -59,7 +60,7 @@ const mockDoLoadMockRegistrationData = async (_keyOrRegistrationId: string): Pro
 			status: 'wait'
 		}],
 		investigations: [{
-			submittedTo: 'David',
+			submittedTo: SharedServices.Users.David.userId,
 			submittedAt: '14/10/2024', submittedBy: 'system',
 			dueDate: '24/10/2024',
 			lastUpdatedAt: '14/10/2024', lastUpdatedBy: 'system',

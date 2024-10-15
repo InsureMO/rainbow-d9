@@ -61,11 +61,9 @@ export const zhCNIntlLabels = {
 	},
 	'actions-and-supporting': '操作与支持:',
 	'claim-issue': {
-		title: '案件问题', headline: '问题', raised: '创建于', 'last-updated': '最后修改于', status: '状态'
-	},
-	'add-claim-issue': {
-		title: '添加问题', headline: '标题', description: '描述',
-		'generated-at': '创建于', 'generated-by': '创建自'
+		title: '案件问题', headline: '标题', raised: '创建于', 'last-updated': '最后修改于', status: '状态',
+		description: '描述',
+		'add-title': '添加问题'
 	},
 	'query-letter': {
 		title: '问题问卷', 'doc-no': '问卷号码', 'doc-name': '问卷名称', due: '截止日期',
@@ -78,21 +76,27 @@ export const zhCNIntlLabels = {
 	},
 	'escalation': {
 		title: '案件升级', to: '指派至', due: '截止日期',
-		raised: '指派于', 'last-updated': '最后修改于', status: '状态'
+		raised: '指派于', 'last-updated': '最后修改于', status: '状态',
+		headline: '标题', description: '描述',
+		'add-title': '案件升级'
 	},
 	'investigation': {
 		title: '案件调查', to: '提交至', due: '截止日期',
-		raised: '提交于', 'last-updated': '最后修改于', status: '状态'
+		raised: '提交于', 'last-updated': '最后修改于', status: '状态',
+		headline: '标题', description: '描述',
+		'add-title': '案件调查'
 	},
 	action: {
 		image: '影像资料', 'doc-checklist': '书面资料', 'medical-bill': '医疗账单', history: '理赔历史',
 		'edit-case': '编辑报案信息', 'accept-policy': '选择保单',
 		'change-insured': '更改被保人信息', 'search-reporter': '查找报案人信息',
-		'add-claim-issue': '添加问题',
 		'generate-issues-as-internal-query': '产制内部问卷',
 		'generate-issues-as-query-letter': '产制问卷',
+		'add-claim-issue': '添加问题',
+		'add-escalation': '案件升级',
+		'add-investigation': '案件调查',
 		reply: '回复', reminder: '提醒', withdraw: '撤回',
 		comment: '建议',
-		investigation: '案件调查', 'escalation': '案件升级', 'reload-policy': '重新加载保单'
+		'reload-policy': '重新加载保单'
 	}
 };

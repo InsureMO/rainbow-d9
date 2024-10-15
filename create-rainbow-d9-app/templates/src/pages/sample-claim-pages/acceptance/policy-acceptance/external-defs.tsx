@@ -10,6 +10,8 @@ import {
 } from '../../../standard-widgets';
 import {Claim} from '../../shared';
 import {createClaimIssue} from '../add-claim-issue';
+import {createEscalation} from '../add-escalation';
+import {createInvestigation} from '../add-investigation';
 import {saveRegistrationData} from './services';
 import {AssistantData, RootModel} from './types';
 
@@ -101,7 +103,7 @@ export const createExternalDefsCreator = (rootModelRef: MutableRefObject<any>, a
 							// but the table cannot display the generatedBy name correctly.
 							// so the solution is to check and re-fetch the user options and update the user options
 							if (assistantData.userOptions.every(({value}) => value !== issue.generatedBy)) {
-								// lucky, the current account has name
+								// lucky, name can be retrieved from current account
 								assistantData.userOptions.push({
 									value: issue.generatedBy!, label: getAuthentication()?.username ?? ''
 								});
@@ -158,8 +160,32 @@ export const createExternalDefsCreator = (rootModelRef: MutableRefObject<any>, a
 						alert('Escalation withdraw button clicked.');
 					}
 				},
-				click: async (_options: ButtonClickOptions<BaseModel, PropValue>) => {
-					alert('Escalation button clicked.');
+				add: {
+					click: async (_options: ButtonClickOptions<BaseModel, PropValue>) => {
+						const escalatedToOptions = await assistantData.escalateToOptions();
+						await createEscalation(globalHandlers, escalatedToOptions, async (escalation: Claim.Escalation) => {
+							const root = rootModelRef.current as unknown as RootModel;
+							const escalations = root.data.escalations ?? [];
+							root.data.escalations = escalations;
+							escalations.push(escalation);
+							// the tricky thing is that preloaded user options might not include myself.
+							// which means when the created claim issue has been pushed into list
+							// but the table cannot display the generatedBy name correctly.
+							// so the solution is to check and re-fetch the user options and update the user options
+							if (assistantData.userOptions.every(({value}) => value !== escalation.escalatedTo)) {
+								// lucky, name can be retrieved from escalatedToOptions
+								assistantData.userOptions.push(escalatedToOptions.find(({value}) => value === escalation.escalatedTo)!);
+							}
+							if (assistantData.userOptions.every(({value}) => value !== escalation.escalatedBy)) {
+								// lucky, name can be retrieved from current account
+								assistantData.userOptions.push({
+									value: escalation.escalatedBy!, label: getAuthentication()?.username ?? ''
+								});
+							}
+							// notify
+							globalHandlers.root!.fire(RootEventTypes.VALUE_CHANGED, '/data.escalations', escalations as unknown as ArrayPropValue, escalations as unknown as ArrayPropValue);
+						});
+					}
 				}
 			},
 			investigation: {
@@ -175,8 +201,32 @@ export const createExternalDefsCreator = (rootModelRef: MutableRefObject<any>, a
 						alert('Investigation withdraw button clicked.');
 					}
 				},
-				click: async (_options: ButtonClickOptions<BaseModel, PropValue>) => {
-					alert('Investigation button clicked.');
+				add: {
+					click: async (_options: ButtonClickOptions<BaseModel, PropValue>) => {
+						const investigatorOptions = await assistantData.investigatorOptions();
+						await createInvestigation(globalHandlers, investigatorOptions, async (investigation: Claim.Investigation) => {
+							const root = rootModelRef.current as unknown as RootModel;
+							const investigations = root.data.investigations ?? [];
+							root.data.investigations = investigations;
+							investigations.push(investigation);
+							// the tricky thing is that preloaded user options might not include myself.
+							// which means when the created claim issue has been pushed into list
+							// but the table cannot display the generatedBy name correctly.
+							// so the solution is to check and re-fetch the user options and update the user options
+							if (assistantData.userOptions.every(({value}) => value !== investigation.submittedTo)) {
+								// lucky, name can be retrieved from investigatorOptions
+								assistantData.userOptions.push(investigatorOptions.find(({value}) => value === investigation.submittedTo)!);
+							}
+							if (assistantData.userOptions.every(({value}) => value !== investigation.submittedBy)) {
+								// lucky, name can be retrieved from current account
+								assistantData.userOptions.push({
+									value: investigation.submittedBy!, label: getAuthentication()?.username ?? ''
+								});
+							}
+							// notify
+							globalHandlers.root!.fire(RootEventTypes.VALUE_CHANGED, '/data.investigations', investigations as unknown as ArrayPropValue, investigations as unknown as ArrayPropValue);
+						});
+					}
 				}
 			},
 			comment: {

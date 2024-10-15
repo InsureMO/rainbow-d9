@@ -1,5 +1,5 @@
 import {ObjectPropValue} from '@rainbow-d9/n1';
-import {GlobalHandlers} from '@rainbow-d9/n2';
+import {DropdownOptions, GlobalHandlers} from '@rainbow-d9/n2';
 import {lazy} from 'react';
 import {AppPage, PageRegistrar} from '../../../../global-settings';
 import {PreloadedLazyPageWrapper, PreloadedPageProps, PreloaderFuncOptions} from '../../../standard-widgets';
@@ -50,7 +50,23 @@ const ClaimAcceptanceClaimEntryIndex = PreloadedLazyPageWrapper<AssistantData>(l
 					// @ts-ignore
 				].filter<string>(x => x != null))])
 			]);
-			return {submissionChannelOptions, userOptions, userDepartmentOptions};
+			let escalateToOptions: DropdownOptions;
+			let investigatorOptions: DropdownOptions;
+			return {
+				submissionChannelOptions, userOptions, userDepartmentOptions,
+				escalateToOptions: async () => {
+					if (escalateToOptions == null) {
+						escalateToOptions = await SharedServices.askEscalateToOptions(globalHandlers);
+					}
+					return escalateToOptions;
+				},
+				investigatorOptions: async () => {
+					if (investigatorOptions == null) {
+						investigatorOptions = await SharedServices.askInvestigatorOptions(globalHandlers);
+					}
+					return investigatorOptions;
+				}
+			};
 		};
 	},
 	orderBy: [['ui', 'initRootModel'], ['assistantData']]
