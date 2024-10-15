@@ -140,4 +140,43 @@ export namespace Claim {
 	}
 
 	export type Investigations = Array<Investigation>;
+
+	export interface AcceptanceOnPolicyProduct {
+		code?: string;
+		name?: string;
+		acceptable?: boolean;
+		accepted?: boolean;
+		notifiedAmount?: number;
+		sumAssured?: number;
+		insuredName?: string;
+		currentStatus?: string;
+		statusAtEvent?: string;
+		commencementDate?: string;
+		expiryDate?: string;
+		reinsuranceIndicator?: boolean;
+	}
+
+	export interface AcceptanceOnPolicy {
+		policyId?: string;
+		policyNo?: string;
+		accepted?: boolean;
+		freeze?: boolean;
+		policyHolderName?: string;
+		currentStatus?: string;
+		statusAtEvent?: string;
+		currency?: string;
+		bankruptcyInvolved?: boolean;
+		serviceAgentName?: string;
+		serviceAgentMobile?: string;
+		products?: Array<AcceptanceOnPolicyProduct>;
+	}
+
+	export interface AcceptanceDecision {
+		decision?: string;
+		reason?: string;
+		/** ILP */
+		priceEffectiveDate?: string;
+		commentToClient?: string;
+		policies?: Array<AcceptanceOnPolicy>;
+	}
 }

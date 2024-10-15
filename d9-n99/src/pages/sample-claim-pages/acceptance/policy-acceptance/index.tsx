@@ -27,6 +27,7 @@ const ClaimAcceptanceClaimEntryIndex = PreloadedLazyPageWrapper<AssistantData>(l
 		const rootModel: RootModel = JSON.parse(JSON.stringify(InitRootModel));
 		// create registration case
 		rootModel.data = data;
+		rootModel.control = {claimIssuesAllSelected: false, decisionView: '$summary'};
 		return asT(rootModel);
 	},
 	/** run after root model initialized, to load submission channel */
@@ -60,12 +61,14 @@ const ClaimAcceptanceClaimEntryIndex = PreloadedLazyPageWrapper<AssistantData>(l
 			return {
 				submissionChannelOptions, userOptions, userDepartmentOptions,
 				escalateToOptions: async () => {
+					// load once
 					if (escalateToOptions == null) {
 						escalateToOptions = await SharedServices.askEscalateToOptions(globalHandlers);
 					}
 					return escalateToOptions;
 				},
 				investigatorOptions: async () => {
+					// load once
 					if (investigatorOptions == null) {
 						investigatorOptions = await SharedServices.askInvestigatorOptions(globalHandlers);
 					}

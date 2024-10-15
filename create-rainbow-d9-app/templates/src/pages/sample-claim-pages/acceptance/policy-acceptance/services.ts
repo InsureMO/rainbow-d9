@@ -65,7 +65,8 @@ const mockDoLoadMockRegistrationData = async (_keyOrRegistrationId: string): Pro
 			dueDate: '24/10/2024',
 			lastUpdatedAt: '14/10/2024', lastUpdatedBy: 'system',
 			status: 'wait'
-		}]
+		}],
+		decision: {}
 	};
 };
 

@@ -150,6 +150,8 @@ export const createAppThemeStyles = (): AppThemeStyle => {
 			// dialog
 			'dialog-largest-height': 'var(--app-dialog-largest-height, 80vh)',
 			'dialog-largest-width': 'var(--app-dialog-largest-width, 80vw)',
+			// section
+			'2nd-section-header-title-font-size': 'var(--app-2nd-section-header-title-font-size, 16px)',
 			// page, authentication
 			'authentication-min-width': 'var(--page-authentication-min-width, min(60vw, 600px))',
 			'authentication-border': 'var(--page-authentication-border, var(--d9-border))',

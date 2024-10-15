@@ -17,11 +17,13 @@ export interface Data {
 	internalQueries: Claim.InternalQueries;
 	escalations: Claim.Escalations;
 	investigations: Claim.Investigations;
+	decision: Claim.AcceptanceDecision;
 }
 
 export interface RootModel {
 	control: {
 		claimIssuesAllSelected: boolean;
+		decisionView: string;
 	};
 	data: Data;
 }

@@ -115,6 +115,10 @@ const Container = styled.div.attrs({[DOM_KEY_WIDGET]: 'app-frame'})`
         &[data-next-to-banner] {
             margin-top: var(--app-page-next-to-banner-margin);
         }
+
+        &[data-2nd] div[data-w=d9-section-header-title] {
+            font-size: var(--app-2nd-section-header-title-font-size);
+        }
     }
 
     div[data-w=d9-button-bar] {

@@ -86,6 +86,10 @@ export const zhCNIntlLabels = {
 		headline: '标题', description: '描述',
 		'add-title': '案件调查'
 	},
+	'acceptance-decision': {
+		title: '受理决定', 'summary-title': '受理决定批复', decision: '决定', reason: '原因',
+		'price-eff-date': '有效价格日期(ILP)', 'comment-to-client': '对客户的备注'
+	},
 	action: {
 		image: '影像资料', 'doc-checklist': '书面资料', 'medical-bill': '医疗账单', history: '理赔历史',
 		'edit-case': '编辑报案信息', 'accept-policy': '选择保单',

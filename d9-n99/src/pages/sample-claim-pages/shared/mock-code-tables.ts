@@ -67,5 +67,14 @@ registerMockCodeTables({
 	investigationStatus: [
 		{label: 'Waiting for Reply', value: 'wait'},
 		{label: 'Closed', value: 'closed'}
+	],
+	acceptanceDecision: [
+		{label: 'Accept', value: 'accept'},
+		{label: 'Reject', value: 'reject'}
+	],
+	acceptanceReason: [
+		{label: 'Not Covered', value: 'notCovered'},
+		{label: 'Pre-existing Condition', value: 'preExisting'},
+		{label: 'Others', value: 'others'}
 	]
 });

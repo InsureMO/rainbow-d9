@@ -86,6 +86,10 @@ export const enUSIntlLabels = {
 		headline: 'Title', description: 'Description',
 		'add-title': 'Request an Investigation'
 	},
+	'acceptance-decision': {
+		title: 'Acceptance Decision', 'summary-title': 'Decision', decision: 'Decision', reason: 'Reason',
+		'price-eff-date': 'Price Effective Date(ILP)', 'comment-to-client': 'Comments to Client'
+	},
 	action: {
 		image: 'Image', 'doc-checklist': 'Document Checklist', 'medical-bill': 'Medical Bill', history: 'History',
 		'edit-case': 'Edit Case Info', 'accept-policy': 'Accept Policy',

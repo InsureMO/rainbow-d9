@@ -47,6 +47,25 @@
 
 - Box::$$investigation-table-section
 
+## Section::claim.acceptance-decision.title
+
+- collapsible
+
+### Section::claim.acceptance-decision.summary-title::data.decision
+
+- data-2nd
+
+- Dropdown::claim.acceptance-decision.decision::decision
+	- options: @ext.codes.acceptanceDecision
+	- please: dropdown.placeholder.please-select
+	- required
+- Dropdown::claim.acceptance-decision.reason::reason
+	- options: @ext.codes.acceptanceReason
+	- please: dropdown.placeholder.please-select
+- Date::claim.acceptance-decision.price-eff-date::priceEffectiveDate
+- Textarea::claim.acceptance-decision.comment-to-client::commentToClient
+	- pos: 12
+
 ## ButtonBar::
 
 - data-fix-bottom
