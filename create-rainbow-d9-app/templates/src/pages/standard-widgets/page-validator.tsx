@@ -1,4 +1,4 @@
-import {RootEventTypes, ValidatedSet} from '@rainbow-d9/n1';
+import {PPUtils, RootEventTypes, ValidatedSet} from '@rainbow-d9/n1';
 import {AlertLabel, GlobalHandlers, IntlLabel} from '@rainbow-d9/n2';
 import {EnhancedD9GlobalHandlers} from './d9-page';
 
@@ -6,7 +6,9 @@ interface ValidateOptions {
 	globalHandlers: GlobalHandlers;
 	scopes?: Array<string>;
 	passed: () => Promise<void>;
-	failed?: () => Promise<void>;
+	failed?: (focused: boolean, failed: Array<{
+		id: string; element: HTMLElement | undefined; rect: DOMRect | undefined
+	}>) => Promise<void>;
 }
 
 const createValidateHandler = (options: Omit<ValidateOptions, 'scopes'> & { resolve: () => void }) => {
@@ -18,28 +20,39 @@ const createValidateHandler = (options: Omit<ValidateOptions, 'scopes'> & { reso
 				<IntlLabel keys={['validation.input.failed']}
 				           value="The input information is incorrect, please check and try again."/>
 			</AlertLabel>);
-			const sorted = validated.failed
-				.map(fail => fail.path.replace(/\./g, '-'))
-				.map(path => path.startsWith('/') ? path.substring(1) : path)
-				.map(id => document.getElementById(id))
-				.filter(element => element != null)
-				.map(element => {
-					return [element, element!.getBoundingClientRect()] as [HTMLElement, DOMRect];
-				})
-				.sort(([, {top: top1, left: left1}], [, {top: top2, left: left2}]) => {
-					if (top1 - top2 < 0) {
-						return -1;
-					} else if (top1 - top2 > 0) {
-						return 1;
-					} else {
-						return left1 - left2;
-					}
-				});
+			const failedIds = validated.failed
+				.map(fail => PPUtils.asId(fail.path) as string);
+			// .map(id => {
+			// 	console.log(id);
+			// 	return id;
+			// })
+			const sort = (ids: Array<string>) => {
+				return ids.map(id => [id, document.getElementById(id)] as [string, HTMLElement | null])
+					.map(([id, element]) => {
+						return [id, element ?? (void 0), element?.getBoundingClientRect()] as [string, HTMLElement | undefined, DOMRect | undefined];
+					})
+					.sort(([, , {top: top1, left: left1} = {top: 99999, left: 99999}],
+					       [, , {top: top2, left: left2} = {top: 99999, left: 99999}]) => {
+						if (top1 - top2 < 0) {
+							return -1;
+						} else if (top1 - top2 > 0) {
+							return 1;
+						} else {
+							return left1 - left2;
+						}
+					})
+					.map(([id, element, rect]) => {
+						return {id, element, rect};
+					});
+			};
+			const sorted = sort(failedIds);
+			let focused = false;
 			if (sorted.length > 0) {
-				sorted[0][0].focus();
+				focused = true;
+				sorted[0].element?.focus();
 			}
 			if (failed != null) {
-				await failed();
+				await failed(focused, sorted ?? []);
 			}
 		} else {
 			await passed();

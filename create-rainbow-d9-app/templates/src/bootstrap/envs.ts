@@ -45,7 +45,10 @@ dayjs.extend(BuddhistEra);
 		// datetimeFormat: askDateTimeFormat(),
 		useCalendarIcon: true
 	});
-	DropdownUtils.setDropdownDefaults({fixFilter: true});
+	DropdownUtils.setDropdownDefaults({
+		fixFilter: true,
+		findPortalCarrier: () => document.getElementById('app-frame')!
+	});
 	RibsUtils.setRibsDefaults({useSectionStyleIcons: true});
 	// never switch to enabled in production, it is for debug only
 	// switchCollapseFixedThingDebug(true);

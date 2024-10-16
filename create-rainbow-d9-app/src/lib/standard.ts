@@ -99,8 +99,13 @@ export const createPackageJson = (options: StdOptions, directory: string) => {
 	const {name, description} = options;
 	fs.copySync(path.resolve(__dirname, './templates'), directory);
 
+	const readme = [
+		`# ${name} by [@rainbow-d9](https://github.com/InsureMO/rainbow-d9)\n`,
+		`${description}\n`,
+		fs.readFileSync(path.resolve(directory, 'README.md')).toString()
+	].join('\n');
 	// create README.md
-	fs.writeFileSync(path.resolve(directory, 'README.md'), `# ${name}\n\n${description}\n`);
+	fs.writeFileSync(path.resolve(directory, 'README.md'), readme);
 	const packageFile = path.resolve(directory, 'package.json');
 	// parse and modify package.json
 	const json = JSON.parse(fs.readFileSync(packageFile).toString());
