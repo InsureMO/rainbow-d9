@@ -21,6 +21,10 @@ const createValidateHandler = (options: Omit<ValidateOptions, 'scopes'> & { reso
 			const sorted = validated.failed
 				.map(fail => fail.path.replace(/\./g, '-'))
 				.map(path => path.startsWith('/') ? path.substring(1) : path)
+				// .map(id => {
+				// 	console.log(id);
+				// 	return id;
+				// })
 				.map(id => document.getElementById(id))
 				.filter(element => element != null)
 				.map(element => {
