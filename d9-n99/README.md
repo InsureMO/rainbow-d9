@@ -125,3 +125,75 @@ Modify the [custom settings](src/global-settings/i18n/custom-settings.tsx) to bu
 - [Authentication page](src/work-area/unauthenticated/authentication.tsx)
 - [No authentication page](src/work-area/unauthenticated/no-authentication.tsx)
 - [Home page](src/pages/home/page.tsx)
+
+## Sample pages
+
+- Tasks pages:
+	- [Tasks #1](src/pages/sample-tasks-pages/tasks-1): The parameterless constructor page, typically suitable for scenarios where the page
+	  can be loaded without backend data.
+	- [Tasks #2](src/pages/sample-tasks-pages/tasks-2): Parameterized constructor page, typically suitable for scenarios where the page can
+	  only be loaded with backend data intervention.
+- Claim pages:
+	- [Registration](src/pages/sample-claim-pages/registration): A scenario for report a claim.
+	- [Acceptance](src/pages/sample-claim-pages/acceptance): A scenario for preprocessing a claim registration.
+
+## Page structure
+
+Typically, to reduce the load pressure on the homepage, each page is defined as lazy loading. There are two approaches:
+
+- `LazyPageWrapper`: for parameterless scenarios,
+- `PreloadedLazyPageWrapper`: for parameterized scenarios.
+
+### Parameters on lazy loading
+
+The second parameter of `PreloadedLazyPageWrapper` is how to load the page parameters, with two methods:
+
+- Using a Function to load all parameters, the function needs to conform to the following definition:
+  ```ts
+  type PagePropsWholePreloader<AssistantData = any> = () => Promise<PreloadedPageProps<AssistantData>>;
+  ```
+- Load all parameters using a set of definitions, which need to conform to the following definition:
+  ```ts
+  interface PagePropsApartPreloaderFuncs<AssistantData = any> {
+    /** get ui configuration markdown, d9 format */
+    ui?: PreloaderFunc<string>;
+    /** get initial root model */
+    initRootModel?: PreloaderFunc<ObjectPropValue>;
+    /** get assistant data for ui usage, could be anything */
+    assistantData?: PreloaderFunc<PreloadedPageProps<AssistantData>['assistantData']>;
+  }
+
+  interface PagePropsApartPreloader<AssistantData = any> extends PagePropsApartPreloaderFuncs<AssistantData> {
+    /** default false */
+    useLocation?: boolean;
+    /** default false */
+    usePathParams?: boolean;
+    /** default false */
+    useSearchParams?: boolean;
+    /**
+     * order of preloading, default is undefined, means run all pre-loaders parallel.
+     * if defined, it should be an array of arrays, each array contains keys of PagePropsApartPreloaderFuncs,
+     * the order of arrays is the order of preloading,
+     * and previous loaded data will be passed to next step, by key of previous step.
+     * for example:
+     * [['initRootModel'], ['ui', 'assistantData']]
+     * means run initRootModel first, then run ui and assistantData parallel.
+     * return data of initRootModel would be passed to ui and assistantData.
+     */
+    orderBy?: Array<Array<keyof PagePropsApartPreloaderFuncs>>;
+  }
+  ```
+  All preloaded parameters are optional and can be selected as needed. Parameters other than route parameters can be freely defined in order
+  to handle dependency sequences.
+
+### Typical page files structure
+
+- `init-root.json`: Basic root model data definition. Note that this model needs to be cloned to avoid memory data confusion.
+- `ui-config.d9`: [rainbow-d9](https://github.com/InsureMO/rainbow-d9) page definition.
+- `types.ts`: Data model definition used in the page.
+- `services.ts`: Definition of data interaction functions used in the page, including remote interactions, Storage interactions, etc.
+- `external-defs.tsx`: Various programmatic definitions used in the page definition. Typically, these include code tables, user interaction
+  response functions, etc.
+- `page.tsx`: Page entrypoint, which accepts preloaded parameters (if any) and passes them to the D9 standard page component.
+- `index.tsx`: Page lifecycle entrypoint, defining preload logic, as well as menus, breadcrumb navigation, routing, etc.
+
