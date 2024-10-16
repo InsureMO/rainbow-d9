@@ -158,6 +158,8 @@ export const createCssVars = (variables: typeof CssConstants) => {
 		TABLE_CELL_HEIGHT: 'var(--d9-table-cell-height, 32px)',
 		TABLE_CELL_PADDING: 'var(--d9-table-cell-padding, 14px)',
 		TABLE_CELL_BORDER: `var(--d9-table-cell-border, 1px solid var(--d9-border-color, ${variables.BORDER_COLOR}))`,
+		TABLE_CELL_EXPAND_AREA_PADDING: 'var(--d9-table-cell-expand-area-padding, var(--d9-section-body-padding, 8px) var(--d9-table-cell-padding, 14px) 0)',
+		TABLE_CELL_EXPAND_AREA_BORDER: `var(--d9-table-cell-expand-area-border, var(--d9-border, 1px solid var(--d9-border-color, ${variables.BORDER_COLOR})))`,
 		TABLE_FOOTER_HEIGHT: 'var(--d9-table-footer-height, 44px)',
 		TABLE_ODD_ROW_BACKGROUND_COLOR: `var(--d9-table-odd-row-background-color, ${variables.RIB_COLOR})`,
 

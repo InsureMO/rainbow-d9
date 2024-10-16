@@ -3,6 +3,15 @@ import styled from 'styled-components';
 import {CssVars, DOM_ID_WIDGET, DOM_KEY_WIDGET} from '../constants';
 import {toCssSize} from '../utils';
 
+// z-index of table widgets
+// 1: expand area
+// 2: row index cell / body cell stick in left
+// 3: body cell stick in right / row operators
+// 4: header cell
+// 5: header cell stick in left
+// 6: header cell stick in right
+// 7: focus in body cell, focus in expand area
+
 // noinspection CssUnresolvedCustomProperty
 export const ATable = styled.div.attrs(({id}) => {
 	return {
@@ -80,6 +89,7 @@ export const ATableContent = styled.div.attrs<ATableContentOptions>(
     overflow-x: auto;
     overflow-y: auto;
 `;
+// noinspection CssUnresolvedCustomProperty
 export const ATableHeaderCell = styled.div.attrs<{
 	headerHeight?: string | number; isGrabber?: true; stickyOffset: [boolean, Undefinable<string>, Undefinable<string>]
 }>(
@@ -91,9 +101,9 @@ export const ATableHeaderCell = styled.div.attrs<{
 				padding: isGrabber ? 0 : (void 0),
 				left: stickyOffset[1],
 				right: stickyOffset[2],
-				zIndex: VUtils.isNotBlank(stickyOffset[2])
+				'--z-index': VUtils.isNotBlank(stickyOffset[2])
 					? 6
-					: (VUtils.isNotBlank(stickyOffset[1]) ? 5 : (void 0))
+					: (VUtils.isNotBlank(stickyOffset[1]) ? 5 : 4)
 			}
 		};
 	})<{
@@ -113,15 +123,17 @@ export const ATableHeaderCell = styled.div.attrs<{
     font-weight: ${CssVars.TABLE_HEADER_FONT_WEIGHT};
     overflow: hidden;
     white-space: nowrap;
-    z-index: 4;
+    z-index: var(--z-index);
 `;
+// noinspection CssUnresolvedCustomProperty
 export const ATableBodyRowIndexCell = styled.div.attrs<{ rowIndex: number; rowSpan: number }>(
 	({rowIndex, rowSpan}) => {
 		return {
 			[DOM_KEY_WIDGET]: 'd9-table-row-index-cell',
 			style: {
-				backgroundColor: rowIndex % 2 === 1 ? CssVars.TABLE_ODD_ROW_BACKGROUND_COLOR : (void 0),
-				gridRow: rowSpan === 2 ? 'span 2' : (void 0)
+				gridRow: rowSpan === 2 ? 'span 2' : (void 0),
+				'--background-color': rowIndex % 2 === 1 ? CssVars.TABLE_ODD_ROW_BACKGROUND_COLOR : CssVars.BACKGROUND_COLOR,
+				'--z-index': 2
 			}
 		};
 	})<{ rowIndex: number; rowSpan: number }>`
@@ -133,12 +145,12 @@ export const ATableBodyRowIndexCell = styled.div.attrs<{ rowIndex: number; rowSp
     min-height: ${CssVars.TABLE_CELL_HEIGHT};
     padding: 0 ${CssVars.TABLE_CELL_PADDING};
     color: ${CssVars.FONT_COLOR};
-    background-color: ${CssVars.BACKGROUND_COLOR};
+    background-color: var(--background-color);
     font-family: ${CssVars.FONT_FAMILY};
     font-size: 0.8em;
     overflow: hidden;
     white-space: nowrap;
-    z-index: 2;
+    z-index: var(--z-index);
 
     > span {
         display: flex;
@@ -149,6 +161,7 @@ export const ATableBodyRowIndexCell = styled.div.attrs<{ rowIndex: number; rowSp
         opacity: ${CssVars.TABLE_ROW_INDEX_OPACITY};
     }
 `;
+// noinspection CssUnresolvedCustomProperty
 export const ATableBodyCell = styled.div.attrs<{
 	isGrabber?: true; rowIndex: number; stickyOffset: [boolean, Undefinable<string>, Undefinable<string>]
 }>(
@@ -157,13 +170,14 @@ export const ATableBodyCell = styled.div.attrs<{
 			[DOM_KEY_WIDGET]: 'd9-table-row-cell',
 			style: {
 				padding: isGrabber ? 0 : (void 0),
-				backgroundColor: rowIndex % 2 === 1 ? CssVars.TABLE_ODD_ROW_BACKGROUND_COLOR : (void 0),
 				position: stickyOffset[0] ? 'sticky' : (void 0),
 				left: stickyOffset[1],
 				right: stickyOffset[2],
-				zIndex: VUtils.isNotBlank(stickyOffset[2])
+				'--background-color': rowIndex % 2 === 1 ? CssVars.TABLE_ODD_ROW_BACKGROUND_COLOR : CssVars.BACKGROUND_COLOR,
+				'--z-index': VUtils.isNotBlank(stickyOffset[2])
 					? 3
-					: (VUtils.isNotBlank(stickyOffset[1]) ? 2 : (void 0))
+					: (VUtils.isNotBlank(stickyOffset[1]) ? 2 : (void 0)),
+				'--hover-z-index': 7
 			}
 		};
 	})<{ isGrabber?: true; rowIndex: number; stickyOffset: [boolean, Undefinable<string>, Undefinable<string>] }>`
@@ -172,7 +186,8 @@ export const ATableBodyCell = styled.div.attrs<{
     align-items: center;
     min-height: ${CssVars.TABLE_CELL_HEIGHT};
     padding: 0 calc(${CssVars.TABLE_CELL_PADDING});
-    background-color: ${CssVars.BACKGROUND_COLOR};
+    background-color: var(--background-color);
+    z-index: var(--z-index);
 
     &[data-click-to-expand=true] {
         cursor: pointer;
@@ -180,6 +195,10 @@ export const ATableBodyCell = styled.div.attrs<{
         &[data-expanded=true] {
             cursor: default;
         }
+    }
+
+    &:focus-within {
+        z-index: var(--hover-z-index);
     }
 
     > input[data-w=d9-input],
@@ -194,13 +213,15 @@ export const ATableBodyCell = styled.div.attrs<{
         }
     }
 `;
+// noinspection CssUnresolvedCustomProperty
 export const ATableRowOperators = styled.div.attrs<{ rowIndex: number; rowSpan: number }>(
 	({rowIndex, rowSpan}) => {
 		return {
 			[DOM_KEY_WIDGET]: 'd9-table-row-operators',
 			style: {
-				backgroundColor: rowIndex % 2 === 1 ? CssVars.TABLE_ODD_ROW_BACKGROUND_COLOR : (void 0),
-				gridRow: rowSpan === 2 ? 'span 2' : (void 0)
+				gridRow: rowSpan === 2 ? 'span 2' : (void 0),
+				'--background-color': rowIndex % 2 === 1 ? CssVars.TABLE_ODD_ROW_BACKGROUND_COLOR : CssVars.BACKGROUND_COLOR,
+				'--z-index': 3
 			}
 		};
 	}) <{ rowIndex: number; rowSpan: number }>`
@@ -210,9 +231,9 @@ export const ATableRowOperators = styled.div.attrs<{ rowIndex: number; rowSpan: 
     align-items: start;
     justify-content: flex-end;
     right: 0;
-    background-color: ${CssVars.BACKGROUND_COLOR};
+    background-color: var(--background-color);
     padding: 0 calc(${CssVars.TABLE_CELL_PADDING} / 2);
-    z-index: 3;
+    z-index: var(--z-index);
 
     &:empty {
         padding: 0;
@@ -229,25 +250,39 @@ export const ATableRowOperators = styled.div.attrs<{ rowIndex: number; rowSpan: 
         }
     }
 `;
+// noinspection CssUnresolvedCustomProperty
 export const ATableBodyCellExpandArea = styled.div.attrs<{
-	columnsCount: number; expanded: boolean;
+	rowIndex: number; columnsCount: number; expanded: boolean;
 }>(
-	({columnsCount, expanded}) => {
+	({rowIndex, columnsCount, expanded}) => {
 		return {
 			[DOM_KEY_WIDGET]: 'd9-table-row-expand-area',
 			style: {
 				gridColumn: `2 / span ${columnsCount}`,
-				height: expanded ? (void 0) : 0
+				'--background-color': rowIndex % 2 === 1 ? CssVars.TABLE_ODD_ROW_BACKGROUND_COLOR : CssVars.BACKGROUND_COLOR,
+				'--height': expanded ? (void 0) : 0,
+				'--padding': expanded ? CssVars.TABLE_CELL_EXPAND_AREA_PADDING : (void 0),
+				'--border': expanded ? CssVars.TABLE_CELL_EXPAND_AREA_BORDER : (void 0),
+				'--z-index': 1,
+				'--hover-z-index': 7
 			}
 		};
-	}) <{ columnsCount: number; expanded: boolean }>`
+	}) <{ rowIndex: number; columnsCount: number; expanded: boolean }>`
     display: grid;
     position: sticky;
     grid-template-columns: repeat(${CssVars.GRID_COLUMNS}, calc((100% - ${CssVars.GRID_COLUMN_GAP} * (${CssVars.GRID_COLUMNS} - 1)) / ${CssVars.GRID_COLUMNS}));
     grid-column-gap: ${CssVars.GRID_COLUMN_GAP};
     grid-row-gap: ${CssVars.GRID_ROW_GAP};
+    height: var(--height);
+    border-top: var(--border);
+    padding: var(--padding);
+    background-color: var(--background-color);
     overflow: hidden;
-    z-index: 1;
+    z-index: var(--z-index);
+
+    &:focus-within {
+        z-index: var(--hover-z-index);
+    }
 `;
 export const ATableBottomBar = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-table-bottom-bar'})`
     display: flex;

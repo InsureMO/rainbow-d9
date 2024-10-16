@@ -161,9 +161,9 @@ The following are the built-in types of custom events:
 	- `GlobalEventPrefix.COLLAPSE_TABLE_ROW`: collapse a table row, `clipped` should serve as both a table marker and a row marker/index,
 	  joined by a dash `(-)`,
 - Ribs,
-	- `GlobalEventPrefix.EXPAND_RIBS_ELEMENT`: expand a ribs element, `clipped` should serve as both a table marker and a row marker/index,
+	- `GlobalEventPrefix.EXPAND_RIBS_ELEMENT`: expand a ribs element, `clipped` should serve as both a ribs marker and a row marker/index,
 	  joined by a dash `(-)`,
-	- `GlobalEventPrefix.COLLAPSE_RIBS_ELEMENT`: collapse a ribs element, `clipped` should serve as both a table marker and a row
+	- `GlobalEventPrefix.COLLAPSE_RIBS_ELEMENT`: collapse a ribs element, `clipped` should serve as both a ribs marker and a row
 	  marker/index, joined by a dash `(-)`,
 - Tabs,
 	- `GlobalEventPrefix.TAB`: active a tab, `clipped` should be a tab marker,

@@ -27,7 +27,8 @@ const SectionStyleExpander = (props: { expanded: boolean; expand: () => void; co
 	return <Button $wrapped={$wrapped} ink={ButtonInk.PRIMARY} fill={ButtonFill.PLAIN}
 	               leads={[<RibRowExpanderSvg data-expanded={expanded}/>]}
 	               click={expanded ? collapse : expand}
-	               data-w="d9-rib-row-operator"/>;
+	               data-w="d9-rib-row-operator"
+	               data-role={expanded ? 'collapse' : 'expand'}/>;
 };
 
 const ExpandButton = (props: { onClick: () => void }) => {
@@ -38,7 +39,7 @@ const ExpandButton = (props: { onClick: () => void }) => {
 	};
 	return <Button $wrapped={$wrapped} ink={ButtonInk.PRIMARY} fill={ButtonFill.PLAIN} leads={['$icons.expand']}
 	               click={onClick}
-	               data-w="d9-rib-row-operator"/>;
+	               data-w="d9-rib-row-operator" data-role="expand"/>;
 };
 const CollapseButton = (props: { onClick: () => void }) => {
 	const {onClick} = props;
@@ -48,7 +49,7 @@ const CollapseButton = (props: { onClick: () => void }) => {
 	};
 	return <Button $wrapped={$wrapped} ink={ButtonInk.PRIMARY} fill={ButtonFill.PLAIN} leads={['$icons.collapse']}
 	               click={onClick}
-	               data-w="d9-rib-row-operator"/>;
+	               data-w="d9-rib-row-operator" data-role="collapse"/>;
 };
 const RemoveButton = (props: { onClick: () => void }) => {
 	const {onClick} = props;
@@ -58,7 +59,7 @@ const RemoveButton = (props: { onClick: () => void }) => {
 	};
 	return <Button $wrapped={$wrapped} ink={ButtonInk.PRIMARY} fill={ButtonFill.PLAIN} leads={['$icons.remove']}
 	               click={onClick}
-	               data-w="d9-rib-row-operator"/>;
+	               data-w="d9-rib-row-operator" data-role="remove"/>;
 };
 
 export const RibRowOperators = (props: {

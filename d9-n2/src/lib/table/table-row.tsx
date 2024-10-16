@@ -153,23 +153,23 @@ export const TableRow = (props: TableRowProps) => {
 				// put after operators, grab all columns except the index column
 				return [
 					<>{classicCells}</>,
-					<ATableBodyCellExpandArea columnsCount={expandedAreaColumnCount + 1} expanded={expanded}
-					                          ref={expandAreaRef}>
+					<ATableBodyCellExpandArea rowIndex={elementIndex} columnsCount={expandedAreaColumnCount + 1}
+					                          expanded={expanded} ref={expandAreaRef}>
 						{expandCells}
 					</ATableBodyCellExpandArea>, 1, 1];
 			case hideClassicCellsOnExpandable:
 				// replace classic cells, grab all columns, except the index column and operators column
 				return [
-					<ATableBodyCellExpandArea columnsCount={expandedAreaColumnCount} expanded={expanded}
-					                          ref={expandAreaRef}>
+					<ATableBodyCellExpandArea rowIndex={elementIndex} columnsCount={expandedAreaColumnCount}
+					                          expanded={expanded} ref={expandAreaRef}>
 						{expandCells}
 					</ATableBodyCellExpandArea>,
 					null, 1, 1];
 			case !hideClassicCellsOnExpandable:
 				return [
 					<>{classicCells}</>,
-					<ATableBodyCellExpandArea columnsCount={expandedAreaColumnCount + 1} expanded={expanded}
-					                          ref={expandAreaRef}>
+					<ATableBodyCellExpandArea rowIndex={elementIndex} columnsCount={expandedAreaColumnCount + 1}
+					                          expanded={expanded} ref={expandAreaRef}>
 						{expandCells}
 					</ATableBodyCellExpandArea>, 2, 1];
 			default:

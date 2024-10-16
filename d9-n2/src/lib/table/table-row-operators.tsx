@@ -22,7 +22,7 @@ const ExpandButton = (props: { onClick: () => void }) => {
 		$avs: {$disabled: false, $visible: true}
 	};
 	return <Button $wrapped={$wrapped} ink={ButtonInk.PRIMARY} fill={ButtonFill.PLAIN} leads={['$icons.expand']}
-	               click={onClick} data-role="d9-table-row-operator"/>;
+	               click={onClick} data-role="d9-table-row-operator" data-r="expand"/>;
 };
 const CollapseButton = (props: { onClick: () => void }) => {
 	const {onClick} = props;
@@ -31,7 +31,7 @@ const CollapseButton = (props: { onClick: () => void }) => {
 		$avs: {$disabled: false, $visible: true}
 	};
 	return <Button $wrapped={$wrapped} ink={ButtonInk.PRIMARY} fill={ButtonFill.PLAIN} leads={['$icons.collapse']}
-	               click={onClick} data-role="d9-table-row-operator"/>;
+	               click={onClick} data-role="d9-table-row-operator" data-r="collapse"/>;
 };
 const RemoveButton = (props: { onClick: () => void }) => {
 	const {onClick} = props;
@@ -40,7 +40,7 @@ const RemoveButton = (props: { onClick: () => void }) => {
 		$avs: {$disabled: false, $visible: true}
 	};
 	return <Button $wrapped={$wrapped} ink={ButtonInk.PRIMARY} fill={ButtonFill.PLAIN} leads={['$icons.remove']}
-	               click={onClick} data-role="d9-table-row-operator"/>;
+	               click={onClick} data-role="d9-table-row-operator" data-r="remove"/>;
 };
 const CustomButton = (props: {
 	def: TableRowButtonDef;
