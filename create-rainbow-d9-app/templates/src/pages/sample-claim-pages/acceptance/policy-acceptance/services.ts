@@ -66,7 +66,84 @@ const mockDoLoadMockRegistrationData = async (_keyOrRegistrationId: string): Pro
 			lastUpdatedAt: '14/10/2024', lastUpdatedBy: 'system',
 			status: 'wait'
 		}],
-		decision: {}
+		decision: {
+			policies: [
+				{
+					policyNo: 'K000017185',
+					policyHolderName: 'David',
+					currentStatus: 'active',
+					statusAtEvent: 'active',
+					currency: 'CNY',
+					bankruptcyInvolved: false,
+					serviceAgentName: 'Charles',
+					serviceAgentMobile: '12345678',
+					products: [
+						{
+							code: 'GEMA01',
+							name: 'COMPREHENSIVE CARE',
+							acceptable: true,
+							accept: true,
+							notifiedAmount: 300000,
+							sumAssured: 500000,
+							insuredName: 'Joshua',
+							statusAtEvent: 'active',
+							currentStatus: 'active',
+							commencementDate: '01/01/2024',
+							expiryDate: '31/12/2024'
+						}, {
+							code: 'GEMA17',
+							name: 'COMPREHENSIVE ACCIDENT CARE',
+							acceptable: false,
+							accept: false,
+							notifiedAmount: (void 0),
+							sumAssured: 100000,
+							insuredName: 'Joshua',
+							statusAtEvent: 'active',
+							currentStatus: 'active',
+							commencementDate: '01/01/2024',
+							expiryDate: '31/12/2024'
+						}
+					]
+				},
+				{
+					policyNo: 'K000017187',
+					policyHolderName: 'David',
+					currentStatus: 'active',
+					statusAtEvent: 'active',
+					currency: 'HKD',
+					bankruptcyInvolved: false,
+					serviceAgentName: 'River',
+					serviceAgentMobile: '87654321',
+					products: [
+						{
+							code: 'GEMA02',
+							name: 'COMPREHENSIVE CARE',
+							acceptable: true,
+							accept: true,
+							notifiedAmount: 300000,
+							sumAssured: 500000,
+							insuredName: 'Joshua',
+							statusAtEvent: 'active',
+							currentStatus: 'active',
+							commencementDate: '01/01/2024',
+							expiryDate: '31/12/2024'
+						}, {
+							code: 'GEMA18',
+							name: 'COMPREHENSIVE MEDICAL CARE',
+							acceptable: false,
+							accept: false,
+							notifiedAmount: (void 0),
+							sumAssured: 100000,
+							insuredName: 'Joshua',
+							statusAtEvent: 'active',
+							currentStatus: 'active',
+							commencementDate: '01/01/2024',
+							expiryDate: '31/12/2024'
+						}
+					]
+				}
+			]
+		}
 	};
 };
 

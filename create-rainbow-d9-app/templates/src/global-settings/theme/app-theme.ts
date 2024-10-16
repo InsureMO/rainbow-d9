@@ -151,7 +151,13 @@ export const createAppThemeStyles = (): AppThemeStyle => {
 			'dialog-largest-height': 'var(--app-dialog-largest-height, 80vh)',
 			'dialog-largest-width': 'var(--app-dialog-largest-width, 80vw)',
 			// section
+			'section-header-title-font-family': 'var(--app-section-header-title-font-family, "Oswald")',
 			'2nd-section-header-title-font-size': 'var(--app-2nd-section-header-title-font-size, 16px)',
+			// tabs
+			'tab-title-font-family': 'var(--app-tab-title-font-family, "Oswald")',
+			// caption
+			'caption-not-available-font-family': 'var(--app-caption-not-available-font-family, "Oswald")',
+			'caption-not-available-font-size': 'var(--app-caption-not-available-font-size, 12px)',
 			// page, authentication
 			'authentication-min-width': 'var(--page-authentication-min-width, min(60vw, 600px))',
 			'authentication-border': 'var(--page-authentication-border, var(--d9-border))',

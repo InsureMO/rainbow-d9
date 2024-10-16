@@ -13,11 +13,11 @@ const ClaimAcceptanceClaimEntryIndex = PreloadedLazyPageWrapper<AssistantData>(l
 	usePathParams: true,
 	ui: async (_options: PreloaderFuncOptions): Promise<string> => {
 		return markdown.replace('- Box::$$registration-base-section', SharedMarkdown.registrationBaseSection)
-			.replace('- Box::$$claim-issue-table-section', SharedMarkdown.claimIssueTableSection)
-			.replace('- Box::$$query-letter-table-section', SharedMarkdown.queryLetterTableSection)
-			.replace('- Box::$$internal-query-table-section', SharedMarkdown.internalQueryTableSection)
-			.replace('- Box::$$escalation-table-section', SharedMarkdown.escalationTableSection)
-			.replace('- Box::$$investigation-table-section', SharedMarkdown.investigationTableSection);
+			.replace('- Box::$$claim-issue-table-section', SharedMarkdown.claimIssueTableSection.replace('## Section::', '#### Section::'))
+			.replace('- Box::$$query-letter-table-section', SharedMarkdown.queryLetterTableSection.replace('## Section::', '#### Section::'))
+			.replace('- Box::$$internal-query-table-section', SharedMarkdown.internalQueryTableSection.replace('## Section::', '#### Section::'))
+			.replace('- Box::$$escalation-table-section', SharedMarkdown.escalationTableSection.replace('## Section::', '#### Section::'))
+			.replace('- Box::$$investigation-table-section', SharedMarkdown.investigationTableSection.replace('## Section::', '#### Section::'));
 	},
 	/** initialize root model */
 	initRootModel: async (options: PreloaderFuncOptions) => {

@@ -37,6 +37,15 @@
 		- click: @ext.ans.history.click
 		- data-fit-link
 
+## Tabs::
+
+### Tab::claim.claim-issue.title
+
+- badge: Badge
+	- property: data.claimIssues
+	- valueToLabel: `(value?.filter(issue => issue.status !== 'closed')?.length ?? 0) + '/' + (value?.length ?? 0)`
+	- ink: danger
+
 - Box::$$claim-issue-table-section
 
 - Box::$$query-letter-table-section
@@ -47,11 +56,98 @@
 
 - Box::$$investigation-table-section
 
-## Section::claim.acceptance-decision.title
+### Tab::claim.acceptance-decision.title
 
-- collapsible
+#### Ribs::::data.decision.policies
 
-### Section::claim.acceptance-decision.summary-title::data.decision
+- !expandable, !addable, !removable, data-as-section
+- initExpanded: `return true`
+- caption: Box
+	- data-labels
+	- Caption::claim.acceptance-decision.policy-title
+	- Label::::policyNo
+		- data-as-link
+		- click: @ext.decision.policy.view.click
+- Input::claim.acceptance-decision.policy-holder::policyHolderName
+	- disabled
+- Dropdown::claim.acceptance-decision.current-status::currentStatus
+	- disabled
+	- options: @ext.codes.policyStatus
+- Dropdown::claim.acceptance-decision.status-at-event::statusAtEvent
+	- disabled
+	- options: @ext.codes.policyStatus
+- Dropdown::claim.acceptance-decision.currency::currency
+	- disabled
+	- options: @ext.codes.currency
+- Dropdown::claim.acceptance-decision.bankruptcy-involved::bankruptcyInvolved
+	- disabled
+	- options: @ext.codes.yesNo
+- Input::claim.acceptance-decision.service-agent::serviceAgentName
+	- disabled
+- Input::claim.acceptance-decision.service-agent-mobile::serviceAgentMobile
+	- disabled
+- Table::
+	- property: products
+	- expandable, !addable, !removable
+	- fixedLeadColumns: 5
+	- getElementKey: @ext.decision.policy.product.getElementKey
+	- headers:
+		- claim.acceptance-decision.product.name: 1fr
+		- claim.acceptance-decision.product.acceptable: 100
+		- claim.acceptance-decision.product.accept: 100
+		- claim.acceptance-decision.product.notified-amount: 140
+		- claim.acceptance-decision.product.sum-assured: 140
+	- Box::
+		- data-dense-labels
+		- Label::::code
+		- Caption::|
+		- Label::::name
+	- Dropdown::::acceptable
+		- disabled, data-as-label
+		- options: @ext.codes.yesNo
+	- Dropdown::::accept
+		- options: @ext.codes.yesNo
+		- !clearable
+		- data-as-label: `return options.model.acceptable !== true`
+		- disabled:
+			- on: acceptable
+			- handle:
+			  ```ts
+			  return model.acceptable !== true;
+			  ```
+	- Box::
+		- Input::::notifiedAmount
+			- data-in-table-cell-and-box
+			- visible:
+				- on: acceptable
+				- handle:
+				  ```ts
+				  return model.acceptable === true;
+				  ```
+		- Caption::vars.na
+			- data-not-available
+			- visible:
+				- on: acceptable
+				- handle:
+				  ```ts
+				  return model.acceptable !== true;
+				  ```
+	- Label::::sumAssured
+		- valueToLabel: `$.nf2(value)`
+	- Label::claim.acceptance-decision.product.insured-name::insuredName
+	- Dropdown::claim.acceptance-decision.product.status-at-event::statusAtEvent
+		- disabled
+		- options: @ext.codes.policyStatus
+	- Dropdown::claim.acceptance-decision.product.current-status::currentStatus
+		- disabled
+		- options: @ext.codes.policyStatus
+	- Label::claim.acceptance-decision.product.commencement-date::commencementDate
+	- Label::claim.acceptance-decision.product.expiry-date::expiryDate
+	- Dropdown::claim.acceptance-decision.product.reinsurance::reinsurance
+		- disabled
+		- options: @ext.codes.yesNo
+
+#### Section::claim.acceptance-decision.summary-title::data.decision
 
 - data-2nd
 

@@ -2,7 +2,7 @@ import {registerCharts} from '@rainbow-d9/echarts';
 import {MUtils, N1Logger, PPUtils, VUtils} from '@rainbow-d9/n1';
 // import all n2 widgets
 import '@rainbow-d9/n2';
-import {CalendarUtils, DropdownUtils} from '@rainbow-d9/n2';
+import {CalendarUtils, DropdownUtils, RibsUtils} from '@rainbow-d9/n2';
 import {registerN2Widgets, Widget} from '@rainbow-d9/n3';
 import dayjs from 'dayjs';
 import ArraySupport from 'dayjs/plugin/arraySupport';
@@ -46,6 +46,7 @@ dayjs.extend(BuddhistEra);
 		useCalendarIcon: true
 	});
 	DropdownUtils.setDropdownDefaults({fixFilter: true});
+	RibsUtils.setRibsDefaults({useSectionStyleIcons: true});
 	// never switch to enabled in production, it is for debug only
 	// switchCollapseFixedThingDebug(true);
 })();

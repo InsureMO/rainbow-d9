@@ -145,7 +145,7 @@ export namespace Claim {
 		code?: string;
 		name?: string;
 		acceptable?: boolean;
-		accepted?: boolean;
+		accept?: boolean;
 		notifiedAmount?: number;
 		sumAssured?: number;
 		insuredName?: string;

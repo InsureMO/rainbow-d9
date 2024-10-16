@@ -50,6 +50,7 @@ export const intlForAppZhCN = {
 		address1: '地址栏 #1', address2: '地址栏 #2',
 		address3: '地址栏 #3', address4: '地址栏 #4'
 	},
+	vars: {na: 'N/A'},
 	page: {
 		common: {
 			title: {

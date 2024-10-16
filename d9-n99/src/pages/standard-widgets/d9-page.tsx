@@ -21,10 +21,6 @@ enum PageToRootEventBusTypes {
 	TO_DIALOG_ROOT = 'to-dialog-root'
 }
 
-export enum RootEventTarget {
-	PAGE = '$to-page', DIALOG = '$to-dialog', BOTH = '$to-both'
-}
-
 interface PageToRootEventBus {
 	on(type: PageToRootEventBusTypes.TO_PAGE_ROOT, listener: (rootEventTypes: RootEventTypes, ...args: any[]) => void): this;
 	off(type: PageToRootEventBusTypes.TO_PAGE_ROOT, listener: (rootEventTypes: RootEventTypes, ...args: any[]) => void): this;

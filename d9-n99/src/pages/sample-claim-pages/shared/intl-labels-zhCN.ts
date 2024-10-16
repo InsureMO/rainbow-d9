@@ -87,7 +87,19 @@ export const zhCNIntlLabels = {
 		'add-title': '案件调查'
 	},
 	'acceptance-decision': {
-		title: '受理决定', 'summary-title': '受理决定批复', decision: '决定', reason: '原因',
+		title: '受理决定',
+		'policy-title': '保单信息, 保单号:', 'policy-holder': '投保人姓名',
+		'current-status': '当前保单状态', 'status-at-event': '案件日期保单状态',
+		currency: '保单币种', 'bankruptcy-involved': '是否涉及破产',
+		'service-agent': '服务代理人', 'service-agent-mobile': '服务代理人手机号码',
+		product: {
+			name: '产品名称', acceptable: '可理赔?', accept: '理赔?', 'notified-amount': '通知金额',
+			'sum-assured': '保额', 'insured-name': '被保人',
+			'status-at-event': '案件日期产品状态', 'current-status': '当前产品状态',
+			'commencement-date': '生效日', 'expiry-date': '失效日期',
+			reinsurance: '再保?'
+		},
+		'summary-title': '受理决定批复', decision: '决定', reason: '原因',
 		'price-eff-date': '有效价格日期(ILP)', 'comment-to-client': '对客户的备注'
 	},
 	action: {

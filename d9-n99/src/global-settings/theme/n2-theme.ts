@@ -67,7 +67,7 @@ export const createN2ThemeStyles = (): AppThemeStyle => {
 			// override part of N2 theme
 			...CommonOverrideStyles,
 			TABLE_HEADER_BACKGROUND_COLOR: 'var(--d9-table-header-background-color, rgb(242, 245, 246))',
-			TABLE_ODD_ROW_BACKGROUND_COLOR: 'var(--d9-table-odd-row-background-color, rgba(242, 243, 244, 0.7))'
+			TABLE_ODD_ROW_BACKGROUND_COLOR: 'var(--d9-table-odd-row-background-color, rgba(242, 243, 244))'
 		}),
 		dark: createCss({
 			ACTIVE_COLOR: 'var(--d9-active-color, rgb(118,123,132))',
@@ -75,7 +75,7 @@ export const createN2ThemeStyles = (): AppThemeStyle => {
 			// override part of N2 theme
 			...CommonOverrideStyles,
 			TABLE_HEADER_BACKGROUND_COLOR: 'var(--d9-table-header-background-color, rgb(30,30,30))',
-			TABLE_ODD_ROW_BACKGROUND_COLOR: 'var(--d9-table-odd-row-background-color, rgba(35,36,40,0.9))'
+			TABLE_ODD_ROW_BACKGROUND_COLOR: 'var(--d9-table-odd-row-background-color, rgba(35,36,40))'
 		})
 	};
 };

@@ -68,6 +68,22 @@ registerMockCodeTables({
 		{label: 'Waiting for Reply', value: 'wait'},
 		{label: 'Closed', value: 'closed'}
 	],
+	policyStatus: [
+		{label: 'Active', value: 'active'},
+		{label: 'Expired', value: 'expired'},
+		{label: 'Lapsed', value: 'lapsed'},
+		{label: 'Surrendered', value: 'surrendered'}
+	],
+	currency: [
+		{label: 'CNY', value: 'CNY'},
+		{label: 'HKD', value: 'HKD'},
+		{label: 'JPY', value: 'JPY'},
+		{label: 'USD', value: 'USD'}
+	],
+	yesNo: [
+		{label: 'Yes', value: true},
+		{label: 'No', value: false}
+	],
 	acceptanceDecision: [
 		{label: 'Accept', value: 'accept'},
 		{label: 'Reject', value: 'reject'}

@@ -13,6 +13,7 @@ export const intlForAppEnUS = {
 		address1: 'Address line 1', address2: 'Address line 2',
 		address3: 'Address line 3', address4: 'Address line 4'
 	},
+	vars: {na: 'N/A'},
 	page: {
 		common: {
 			title: {

@@ -87,7 +87,19 @@ export const enUSIntlLabels = {
 		'add-title': 'Request an Investigation'
 	},
 	'acceptance-decision': {
-		title: 'Acceptance Decision', 'summary-title': 'Decision', decision: 'Decision', reason: 'Reason',
+		title: 'Acceptance Decision',
+		'policy-title': 'Policy Information of Policy No.', 'policy-holder': 'Policy Holder',
+		'current-status': 'Current Policy Status', 'status-at-event': 'Policy Status at Event Date',
+		currency: 'Policy Currency', 'bankruptcy-involved': 'Bankruptcy Involved',
+		'service-agent': 'Service Agent', 'service-agent-mobile': 'Service Agent Mobile',
+		product: {
+			name: 'Product Name', acceptable: 'Acceptable', accept: 'Accept', 'notified-amount': 'Notified Amount',
+			'sum-assured': 'Sum Assured', 'insured-name': 'Insured Name',
+			'status-at-event': 'Product Status at Event Date', 'current-status': 'Current Product Status',
+			'commencement-date': 'Commencement Date', 'expiry-date': 'Expiry Date',
+			reinsurance: 'Reinsurance'
+		},
+		'summary-title': 'Decision', decision: 'Decision', reason: 'Reason',
 		'price-eff-date': 'Price Effective Date(ILP)', 'comment-to-client': 'Comments to Client'
 	},
 	action: {

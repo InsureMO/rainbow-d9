@@ -1,5 +1,5 @@
 import {BaseModel, PropValue} from '@rainbow-d9/n1';
-import {ButtonClickOptions, GlobalHandlers} from '@rainbow-d9/n2';
+import {ButtonClickOptions, CaptionClickOptions, GlobalHandlers} from '@rainbow-d9/n2';
 import {MutableRefObject} from 'react';
 import {asT} from '../../../../utils';
 import {
@@ -8,6 +8,7 @@ import {
 	validatePageWithCallback
 } from '../../../standard-widgets';
 import {
+	Claim,
 	createActionsAndSupportingActions,
 	createClaimIssueTableSectionActions,
 	createEscalationTableSectionActions,
@@ -33,6 +34,18 @@ export const createExternalDefsCreator = (rootModelRef: MutableRefObject<any>, a
 			'internal-query': createInternalQueryTableSectionActions({globalHandlers, rootModelRef}),
 			escalation: createEscalationTableSectionActions({globalHandlers, rootModelRef, assistantData}),
 			investigation: createInvestigationTableSectionActions({globalHandlers, rootModelRef, assistantData}),
+			decision: {
+				policy: {
+					view: {
+						click: async (options: CaptionClickOptions<BaseModel, PropValue>) => {
+							alert(`Policy[${asT<Claim.AcceptanceOnPolicy>(options.model).policyNo}] link clicked.`);
+						}
+					},
+					product: {
+						getElementKey: (_element: Claim.AcceptanceOnPolicyProduct, index: number) => `item-${index}`
+					}
+				}
+			},
 			comment: {
 				click: async (_options: ButtonClickOptions<BaseModel, PropValue>) => {
 					alert('Comment button clicked.');
