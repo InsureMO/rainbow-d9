@@ -41,6 +41,7 @@
 
 ### Tab::claim.claim-issue.title
 
+- marker: issue-tab
 - badge: Badge
 	- property: data.claimIssues
 	- valueToLabel: `(value?.filter(issue => issue.status !== 'closed')?.length ?? 0) + '/' + (value?.length ?? 0)`
@@ -57,6 +58,8 @@
 - Box::$$investigation-table-section
 
 ### Tab::claim.acceptance-decision.title
+
+- marker: decision-tab
 
 #### Ribs::::data.decision.policies
 

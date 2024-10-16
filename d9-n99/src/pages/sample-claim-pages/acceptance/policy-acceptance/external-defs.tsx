@@ -73,8 +73,21 @@ export const createExternalDefsCreator = (rootModelRef: MutableRefObject<any>, a
 				click: async (_options: ButtonClickOptions<BaseModel, PropValue>) => {
 					// callback, never reject, therefore no need to catch
 					await validatePageWithCallback({
-						globalHandlers, passed: async () => {
+						globalHandlers,
+						passed: async () => {
 							alert('Pass the validation.');
+						},
+						failed: async (_, failed) => {
+							if (failed.length > 0) {
+								// switch tab
+								if (failed[0].id.startsWith('data-decision')) {
+									await globalHandlers.sc('tab', 'decision-tab');
+								} else {
+									await globalHandlers.sc('tab', 'issue-tab');
+								}
+								// focus again, make sure the element scrolls to viewport
+								failed[0].element?.focus();
+							}
 						}
 					});
 				}
