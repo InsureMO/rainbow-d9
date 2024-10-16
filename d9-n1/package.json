@@ -1,6 +1,6 @@
 {
 	"name": "@rainbow-d9/n1",
-	"version": "1.2.4",
+	"version": "1.2.5",
 	"description": "d9 core",
 	"main": "index.cjs.js",
 	"module": "index.js",
