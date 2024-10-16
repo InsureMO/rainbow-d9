@@ -6,7 +6,7 @@ import {WorkArea} from '../work-area';
 import {AppFrameLayoutController} from './layout-controller';
 
 // noinspection CssUnresolvedCustomProperty,CssNoGenericFontName
-const Container = styled.div.attrs({[DOM_KEY_WIDGET]: 'app-frame'})`
+const Container = styled.div.attrs({[DOM_KEY_WIDGET]: 'app-frame', id: 'app-frame'})`
     display: block;
     position: relative;
     min-width: 100vw;
