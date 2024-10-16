@@ -23,7 +23,6 @@ export interface Data {
 export interface RootModel {
 	control: {
 		claimIssuesAllSelected: boolean;
-		decisionView: string;
 	};
 	data: Data;
 }

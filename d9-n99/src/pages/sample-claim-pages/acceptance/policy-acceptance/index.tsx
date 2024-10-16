@@ -4,7 +4,6 @@ import {AppPage, PageRegistrar} from '../../../../global-settings';
 import {asT} from '../../../../utils';
 import {PreloadedLazyPageWrapper, PreloadedPageProps, PreloaderFuncOptions} from '../../../standard-widgets';
 import {SharedMarkdown, SharedServices} from '../../shared';
-import InitRootModel from './init-root.json';
 import {loadRegistrationData} from './services';
 import {AssistantData, RootModel} from './types';
 import {markdown} from './ui-config.d9';
@@ -24,10 +23,21 @@ const ClaimAcceptanceClaimEntryIndex = PreloadedLazyPageWrapper<AssistantData>(l
 		const {keyOrRegistrationId = ''} = options.pathParams ?? {};
 		const data = await loadRegistrationData(keyOrRegistrationId);
 		// clone
-		const rootModel: RootModel = JSON.parse(JSON.stringify(InitRootModel));
-		// create registration case
-		rootModel.data = data;
-		rootModel.control = {claimIssuesAllSelected: false, decisionView: '$summary'};
+		const rootModel: RootModel = {
+			control: {claimIssuesAllSelected: false},
+			data: {
+				...data,
+				claimIssues: data.claimIssues ?? [],
+				queryLetters: data.queryLetters ?? [],
+				internalQueries: data.internalQueries ?? [],
+				escalations: data.escalations ?? [],
+				investigations: data.investigations ?? [],
+				decision: {
+					...data.decision,
+					policies: data.decision?.policies ?? []
+				}
+			}
+		};
 		return asT(rootModel);
 	},
 	/** run after root model initialized, to load submission channel */
