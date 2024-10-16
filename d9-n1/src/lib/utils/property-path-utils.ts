@@ -69,7 +69,9 @@ export const PPUtils: PropertyPathUtilsType = {
 
 		relativeToRoot = PPUtils.legalize(relativeToRoot);
 
-		if (relativeToRoot.startsWith(PROPERTY_PATH_ROOT)) {
+		if (relativeToRoot === PROPERTY_PATH_ROOT) {
+			return PROPERTY_PATH_ROOT + current;
+		} else if (relativeToRoot.startsWith(PROPERTY_PATH_ROOT)) {
 			return PPUtils.concat(relativeToRoot, current);
 		} else {
 			return PROPERTY_PATH_ROOT + PPUtils.concat(relativeToRoot, current);
