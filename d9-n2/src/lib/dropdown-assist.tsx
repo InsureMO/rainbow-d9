@@ -13,6 +13,7 @@ import React, {
 	useRef,
 	useState
 } from 'react';
+import {createPortal} from 'react-dom';
 import styled from 'styled-components';
 import {CssVars, DOM_ID_WIDGET, DOM_KEY_WIDGET} from './constants';
 import {useCollapseFixedThing} from './hooks';
@@ -280,11 +281,16 @@ export const DropdownPopup = forwardRef((props: DropdownPopupProps, ref: Forward
 		...state
 	} = props;
 
-	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-	// @ts-ignore
-	return <DropdownPopupContainer shown={shown} vScroll={vScroll} hScroll={hScroll} {...state} ref={ref}>
-		{children}
-	</DropdownPopupContainer>;
+	if (DropdownDefaults.DEFAULTS.findPortalCarrier == null) {
+		return <DropdownPopupContainer shown={shown} vScroll={vScroll} hScroll={hScroll} {...state} ref={ref}>
+			{children}
+		</DropdownPopupContainer>;
+	} else {
+		return createPortal(<DropdownPopupContainer shown={shown} vScroll={vScroll} hScroll={hScroll} {...state}
+		                                            ref={ref}>
+			{children}
+		</DropdownPopupContainer>, DropdownDefaults.DEFAULTS.findPortalCarrier());
+	}
 });
 
 export const getDropdownPosition = (container: HTMLDivElement) => {
@@ -756,13 +762,25 @@ export const computeDropdownTreePopupHeight = (allOptions: TreeOptionItems<any>,
 	return 2 + CssVars.INPUT_HEIGHT_VALUE * Math.min(allOptionCount + (fixFilterExists ? 1 : 0), 8);
 };
 
-export const DropdownDefaults = {
+interface DropdownDefaultsTypes {
+	DEFAULTS: {
+		FIX_FILTER: boolean;
+		findPortalCarrier?: () => HTMLElement;
+	};
+}
+
+export const DropdownDefaults: DropdownDefaultsTypes = {
 	DEFAULTS: {FIX_FILTER: false}
 };
 export const DropdownUtils = {
 	setDropdownDefaults: (defaults: {
 		fixFilter?: boolean;
+		/**
+		 * carrier must have styles of dropdown widgets
+		 */
+		findPortalCarrier?: () => HTMLElement
 	}) => {
 		DropdownDefaults.DEFAULTS.FIX_FILTER = defaults.fixFilter ?? DropdownDefaults.DEFAULTS.FIX_FILTER;
+		DropdownDefaults.DEFAULTS.findPortalCarrier = defaults.findPortalCarrier;
 	}
 };
