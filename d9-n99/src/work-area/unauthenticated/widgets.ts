@@ -8,7 +8,7 @@ export const Container = styled.div.attrs({[DOM_KEY_WIDGET]: 'page-authenticatio
     grid-template-columns: 1fr auto 1fr;
     grid-template-rows: 5fr auto 10fr;
     width: 100%;
-    height: 100%;
+    height: 100vh;
 
     > div {
         grid-column: 2;
