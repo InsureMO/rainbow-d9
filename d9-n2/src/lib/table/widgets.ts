@@ -179,7 +179,7 @@ export const ATableBodyCell = styled.div.attrs<{
 					? 3
 					: (VUtils.isNotBlank(stickyOffset[1]) ? 2 : (void 0)),
 				// if dropdown popup is rendered in portal, it should be on top of anything, therefore no need to set hover z-index
-				'--hover-z-index': DropdownDefaults.DEFAULTS.findPortalCarrier != null ? 7 : (void 0)
+				'--hover-z-index': DropdownDefaults.DEFAULTS.findPortalCarrier == null ? 7 : (void 0)
 			}
 		};
 	})<{ isGrabber?: true; rowIndex: number; stickyOffset: [boolean, Undefinable<string>, Undefinable<string>] }>`
@@ -267,7 +267,7 @@ export const ATableBodyCellExpandArea = styled.div.attrs<{
 				'--border': expanded ? CssVars.TABLE_CELL_EXPAND_AREA_BORDER : (void 0),
 				'--z-index': 1,
 				// if dropdown popup is rendered in portal, it should be on top of anything, therefore no need to set hover z-index
-				'--hover-z-index': DropdownDefaults.DEFAULTS.findPortalCarrier != null ? 7 : (void 0)
+				'--hover-z-index': DropdownDefaults.DEFAULTS.findPortalCarrier == null ? 7 : (void 0)
 			}
 		};
 	}) <{ rowIndex: number; columnsCount: number; expanded: boolean }>`
