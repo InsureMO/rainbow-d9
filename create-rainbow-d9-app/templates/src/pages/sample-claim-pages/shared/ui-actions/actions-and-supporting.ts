@@ -20,6 +20,11 @@ export const createActionsAndSupportingActions = (_options: {
 				alert('Document checklist button clicked.');
 			}
 		},
+		'edit-case': {
+			click: async (_options: ButtonClickOptions<BaseModel, PropValue>) => {
+				alert('Edit case info button clicked.');
+			}
+		},
 		'medical-bill': {
 			click: async (_options: ButtonClickOptions<BaseModel, PropValue>) => {
 				alert('Medical bill button clicked.');
@@ -28,6 +33,11 @@ export const createActionsAndSupportingActions = (_options: {
 		history: {
 			click: async (_options: ButtonClickOptions<BaseModel, PropValue>) => {
 				alert('History button clicked.');
+			}
+		},
+		'accept-policy': {
+			click: async (_options: ButtonClickOptions<BaseModel, PropValue>) => {
+				alert('Accept policy button clicked.');
 			}
 		}
 	};

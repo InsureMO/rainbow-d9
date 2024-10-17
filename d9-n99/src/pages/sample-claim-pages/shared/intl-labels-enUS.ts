@@ -20,7 +20,7 @@ export const enUSIntlLabels = {
 		}
 	},
 	evaluation: {
-		menu: {label: 'Evaluation'}, title: 'Evaluation'
+		menu: {label: 'Evaluation'}, title: 'Evaluation', 'case-no': 'Evaluation of Case No.:'
 	},
 	reg: {
 		'case-no': 'Case No.', 'reg-no': 'Registration No.',
@@ -101,6 +101,15 @@ export const enUSIntlLabels = {
 		},
 		'summary-title': 'Decision', decision: 'Decision', reason: 'Reason',
 		'price-eff-date': 'Price Effective Date(ILP)', 'comment-to-client': 'Comments to Client'
+	},
+	'claim-workbench': {
+		title: 'Claim Workbench'
+	},
+	'assessment': {
+		title: 'Assessment'
+	},
+	'disbursement-plan': {
+		title: 'Disbursement Plan'
 	},
 	action: {
 		image: 'Image', 'doc-checklist': 'Document Checklist', 'medical-bill': 'Medical Bill', history: 'History',

@@ -44,7 +44,12 @@
 - marker: issue-tab
 - badge: Badge
 	- property: data.claimIssues
-	- valueToLabel: `(value?.filter(issue => issue.status !== 'closed')?.length ?? 0) + '/' + (value?.length ?? 0)`
+	- valueToLabel:
+	  ```ts
+	  const count = value?.length ?? 0;
+	  const opened = value?.filter(issue => issue.status !== 'closed')?.length ?? 0;
+	  return `${opened} / ${count}`;
+	  ```
 	- ink: danger
 
 - Box::$$claim-issue-table-section

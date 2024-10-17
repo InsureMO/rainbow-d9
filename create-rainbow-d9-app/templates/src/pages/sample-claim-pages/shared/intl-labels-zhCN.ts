@@ -16,11 +16,11 @@ export const zhCNIntlLabels = {
 		find: {title: '理赔受理 - 查找案件'},
 		'claim-entry': {title: '理赔受理 - 案件信息录入', 'case-no': '案件信息录入 - 案件号:'},
 		'policy-acceptance': {
-			title: '理赔受理 - 受理处理', 'case-no': '受理处理 - 案件号::'
+			title: '理赔受理 - 受理处理', 'case-no': '受理处理 - 案件号:'
 		}
 	},
 	evaluation: {
-		menu: {label: '理赔评估'}, title: '理赔评估'
+		menu: {label: '理赔评估'}, title: '理赔评估', 'case-no': '理赔评估 - 案件号:'
 	},
 	reg: {
 		'case-no': '报案案件号', 'reg-no': '报案号',
@@ -101,6 +101,15 @@ export const zhCNIntlLabels = {
 		},
 		'summary-title': '受理决定批复', decision: '决定', reason: '原因',
 		'price-eff-date': '有效价格日期(ILP)', 'comment-to-client': '对客户的备注'
+	},
+	'claim-workbench': {
+		title: '理赔工作台'
+	},
+	'assessment': {
+		title: '评估'
+	},
+	'disbursement-plan': {
+		title: '支付计划'
 	},
 	action: {
 		image: '影像资料', 'doc-checklist': '书面资料', 'medical-bill': '医疗账单', history: '理赔历史',

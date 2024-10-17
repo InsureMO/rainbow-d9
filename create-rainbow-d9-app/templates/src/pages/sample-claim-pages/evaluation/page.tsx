@@ -1,27 +1,24 @@
-import {createDropdownOptionsProvider, D9Page, D9PageExternalDefsCreatorOptions} from '../../standard-widgets';
-import InitRootModel from './init-root.json';
-import {markdown} from './ui-config.d9';
+import {NodeDef} from '@rainbow-d9/n1';
+import {useRef} from 'react';
+import {asT} from '../../../utils';
+import {D9Page, PreloadedPageProps} from '../../standard-widgets';
+import {createExternalDefsCreator} from './external-defs';
+import {AssistantData, RootModel} from './types';
 
-type CodesNames = 'taskCategories' | 'taskPriorities';
+export default (props: PreloadedPageProps<AssistantData>) => {
+	const markdown = props.ui!;
+	const initRootModel: RootModel = asT(props.initRootModel);
+	const askAssistantData = props.assistantData!;
 
-export default () => {
-	const externalDefs = async (globalHandlers: D9PageExternalDefsCreatorOptions) => {
-		return {
-			codes: createDropdownOptionsProvider<CodesNames>(globalHandlers, {
-				taskCategories: [
-					{label: 'Policy', value: 'policy'},
-					{label: 'Claim', value: 'claim'}
-				],
-				taskPriorities: [
-					{label: 'High', value: 'high'},
-					{label: 'Medium', value: 'medium'},
-					{label: 'Low', value: 'low'}
-				]
-			})
-		};
+	// build a ref to keep the root model
+	const rootModelRef = useRef<RootModel>(initRootModel);
+	const manufactureParsedUI = (parsed: NodeDef) => {
+		return parsed;
 	};
+	const externalDefs = createExternalDefsCreator(rootModelRef, askAssistantData);
 
 	return <D9Page ui={markdown}
-	               initRootModel={InitRootModel} initRootModelAsIs={false}
+	               manufactureParsedUI={manufactureParsedUI}
+	               initRootModel={asT(rootModelRef.current)} initRootModelAsIs={false}
 	               externalDefs={externalDefs}/>;
 };
