@@ -1,6 +1,7 @@
 import {Undefinable, VUtils} from '@rainbow-d9/n1';
 import styled from 'styled-components';
 import {CssVars, DOM_ID_WIDGET, DOM_KEY_WIDGET} from '../constants';
+import {DropdownDefaults} from '../dropdown-assist';
 import {toCssSize} from '../utils';
 
 // z-index of table widgets
@@ -177,7 +178,8 @@ export const ATableBodyCell = styled.div.attrs<{
 				'--z-index': VUtils.isNotBlank(stickyOffset[2])
 					? 3
 					: (VUtils.isNotBlank(stickyOffset[1]) ? 2 : (void 0)),
-				'--hover-z-index': 7
+				// if dropdown popup is rendered in portal, it should be on top of anything, therefore no need to set hover z-index
+				'--hover-z-index': DropdownDefaults.DEFAULTS.findPortalCarrier != null ? 7 : (void 0)
 			}
 		};
 	})<{ isGrabber?: true; rowIndex: number; stickyOffset: [boolean, Undefinable<string>, Undefinable<string>] }>`
@@ -264,7 +266,8 @@ export const ATableBodyCellExpandArea = styled.div.attrs<{
 				'--padding': expanded ? CssVars.TABLE_CELL_EXPAND_AREA_PADDING : (void 0),
 				'--border': expanded ? CssVars.TABLE_CELL_EXPAND_AREA_BORDER : (void 0),
 				'--z-index': 1,
-				'--hover-z-index': 7
+				// if dropdown popup is rendered in portal, it should be on top of anything, therefore no need to set hover z-index
+				'--hover-z-index': DropdownDefaults.DEFAULTS.findPortalCarrier != null ? 7 : (void 0)
 			}
 		};
 	}) <{ rowIndex: number; columnsCount: number; expanded: boolean }>`
