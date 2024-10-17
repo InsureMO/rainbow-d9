@@ -1008,6 +1008,14 @@ Some examples:
 	- valueToLabel: `value ?? ''`
 ```
 
+Starting from version `v1.2.9`, `valueToLabel` not only supports the above single-line syntax but also complete function bodies.
+Additionally,
+apart from `value` and `$` (an alias for the `formats` parameter), also access other parameters as follows:
+
+- `options.root`: Root model,
+- `options.model`: Current model,
+- `options.global`: Global handlers.
+
 > Because `Caption` is also enhanced by `Form Cell` by default, the behavior of the `label` attribute on `Caption` may seem strange. When
 > not specifying using data from the model value, the same `label` will be displayed twice. Therefore, if you only want to use `Caption` but
 > don't want it to be displayed twice, you should use `Caption::`. This way, the system no longer considers it enhanced by `Form Cell` and
@@ -1389,7 +1397,8 @@ Regarding Alert and Dialog, please refer to the description for `Caption` as it 
 	- The closest container range among ancestors,
 	- The entire range starting from the root node.
 - `click: validate all`, `click: validate:all`: trigger validation, the entire range starting from the root node,
-- `click: validate scope1[, scope2[, scope3...]]`, `click: validate:scope1[; scope2[; scope3...]]`, `click: validate:scope1[ scope2[ scope3...]]`:
+- `click: validate scope1[, scope2[, scope3...]]`, `click: validate:scope1[; scope2[; scope3...]]`,
+  `click: validate:scope1[ scope2[ scope3...]]`:
   trigger validation, limited to the given scopes only. If multiple scopes are triggered simultaneously, use a comma or semicolon or blank
   space as separators. All widgets that match at least one scope will trigger automatic validation.
 

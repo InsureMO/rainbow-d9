@@ -1,10 +1,11 @@
 import {ExternalDefIndicator, NodeDef, NUtils, ReactionMonitor, Undefinable, VUtils} from '@rainbow-d9/n1';
-import {CaptionClick, CaptionDef, CaptionValueToLabel} from '@rainbow-d9/n2';
+import {CaptionClick, CaptionDef} from '@rainbow-d9/n2';
 import {N3Logger} from '../logger';
 import {ParsedListItemAttributePair} from '../semantic';
 import {
 	AttributeValueBuild,
 	createAsyncSnippetBuild,
+	createSnippetBuild,
 	DecorateLeadsBuild,
 	DecorateTailsBuild,
 	MonitorHandlerDetective,
@@ -19,23 +20,31 @@ import {N2WidgetType} from './types';
 
 export const N2CaptionValueToLabelBuild: AttributeValueBuild<Pick<CaptionDef, 'labelOnValue' | 'valueToLabel'>> = {
 	accept: (key: WidgetPropertyName) => key === 'valueToLabel',
-	build: (value: Undefinable<string>): Undefinable<Pick<CaptionDef, 'labelOnValue' | 'valueToLabel'>> => {
-		if (VUtils.isBlank(value)) {
-			// ignored
-			return (void 0);
-		}
+	build: (value: Undefinable<string>, list: ParsedListItemAttributePair): Undefinable<Pick<CaptionDef, 'labelOnValue' | 'valueToLabel'>> => {
 		try {
 			// this is sync function
+			// if given value is single line, add a "return" on front of it
+			// otherwise treat it as a function body
+			// formats is predefined as an alias $ anyway.
 			// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 			// @ts-ignore
-			const func: CaptionValueToLabel = new Function('value', 'formats', 'options', `try {
+			const mightBeFunc = createSnippetBuild<CaptionDef, 'valueToLabel'>('valueToLabel', (parsed: string) => {
+				return new Function('value', 'formats', 'options', `try {
 				const $ = formats;
-				return ${value}
+				${parsed.includes('\n') ? parsed : `return ${parsed};`}
 			} catch (e) {
 				console.error(e);
 				return value == null ? '' : value;
 			}`);
-			return {labelOnValue: true, valueToLabel: func};
+			}).build(value, list);
+			// might be undefined, since external indicator is intercepted by outside
+			if (typeof mightBeFunc === 'function') {
+				return {labelOnValue: true, valueToLabel: mightBeFunc as CaptionDef['valueToLabel']};
+			} else {
+				// undefined
+				// eslint-disable-next-line @typescript-eslint/no-explicit-any
+				return mightBeFunc as any;
+			}
 		} catch (e) {
 			N3Logger.error(e, 'N2CaptionValueToLabelBuild');
 			return (void 0);
