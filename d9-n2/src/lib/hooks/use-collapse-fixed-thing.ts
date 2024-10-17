@@ -26,28 +26,38 @@ export const switchCollapseFixedThingDebug = (enabled = false) => {
 
 export const useCollapseFixedThing = (options: {
 	containerRef: RefObject<HTMLOrSVGElement>;
+	popupRef?: RefObject<HTMLOrSVGElement>;
 	visible?: boolean;
 	hide: () => void;
 	events?: Array<'scroll' | 'focus' | 'click'>
 }) => {
-	const {containerRef, visible = true, hide, events = ['scroll', 'focus', 'click']} = options;
+	const {containerRef, popupRef, visible = true, hide, events = ['scroll', 'focus', 'click']} = options;
 
 	useEffect(() => {
 		if (!visible) {
 			return;
 		}
+		// popup might be rendered in a portal,
+		// therefore any scroll/focus/click event triggered outside of container or popup should hide it
+		// sometimes, there is no popup, only container. in this case, check the event target is not in container
 		const collapse = (event: Event) => {
-			if (containerRef?.current != null && notInMe(containerRef.current, event.target)) {
+			if (containerRef?.current != null && notInMe(containerRef.current, event.target)
+				&& (popupRef?.current == null || notInMe(popupRef.current, event.target))) {
 				hide();
 			}
 		};
 		events.forEach(event => {
 			window.addEventListener(event, collapse, true);
 		});
-		const collapseOnBlur = () => {
+		const collapseOnBlur = (event: FocusEvent) => {
+			// collapse on blur, only when focus element or related target of blur event is not in container or popup
+			// if focus element and related target is not found, ignore this event
+			// sometimes, there is no popup, only container. in this case, check the event target is not in container
 			setTimeout(() => {
-				const node = document.querySelector(':focus');
-				if (node == null || (containerRef?.current != null && notInMe(containerRef.current, node))) {
+				const node = document.querySelector(':focus') ?? event.relatedTarget;
+				if (node != null
+					&& containerRef?.current != null && notInMe(containerRef.current, node)
+					&& (popupRef?.current == null || notInMe(popupRef.current, node))) {
 					hide();
 				}
 			}, 10);
@@ -61,5 +71,5 @@ export const useCollapseFixedThing = (options: {
 			});
 			window.removeEventListener('blur', collapseOnBlur, true);
 		};
-	}, [containerRef, events, visible, hide]);
+	}, [containerRef, popupRef, events, visible, hide]);
 };

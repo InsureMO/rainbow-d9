@@ -426,7 +426,7 @@ export const useDropdownControl = (options: {
 		}
 	}, [popupShown]);
 	useCollapseFixedThing({
-		containerRef,
+		containerRef, popupRef,
 		visible: [DropdownPopupStateActive.ACTIVE, DropdownPopupStateActive.WILL_ACTIVE].includes(popupState.active),
 		hide: () => {
 			setPopupShown(false);

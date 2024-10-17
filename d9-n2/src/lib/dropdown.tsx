@@ -64,6 +64,7 @@ const Option = styled.span.attrs({[DOM_KEY_WIDGET]: 'd9-dropdown-option'})`
     line-height: calc(${CssVars.FONT_SIZE} * 1.4);
     padding: calc(${CssVars.INPUT_HEIGHT} / 8) ${CssVars.INPUT_INDENT};
     min-height: ${CssVars.INPUT_HEIGHT};
+    cursor: pointer;
     //overflow: hidden;
     //white-space: nowrap;
     //text-overflow: ellipsis;

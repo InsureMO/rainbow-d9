@@ -126,6 +126,7 @@ const MultiOption = styled.span.attrs({[DOM_KEY_WIDGET]: 'd9-multi-dropdown-opti
     font-size: ${CssVars.FONT_SIZE};
     line-height: calc(${CssVars.FONT_SIZE} * 1.4);
     min-height: ${CssVars.INPUT_HEIGHT};
+    cursor: pointer;
     //overflow: hidden;
     //white-space: nowrap;
     //text-overflow: ellipsis;
