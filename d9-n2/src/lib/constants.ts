@@ -125,7 +125,7 @@ export const createCssVars = (variables: typeof CssConstants) => {
 		BUTTON_INDENT: 'var(--d9-button-indent, 16px)',
 		BUTTON_ICON_GAP: 'var(--d9-button-icon-gap, 8px)',
 
-		DROPDOWN_Z_INDEX: 'var(--d9-dropdown-z-index, 999)',
+		DROPDOWN_Z_INDEX: 'var(--d9-dropdown-z-index, 99999)',
 
 		// must be number value, used in javascript
 		CALENDAR_POPUP_HEIGHT_VALUE: 290,
@@ -186,7 +186,7 @@ export const createCssVars = (variables: typeof CssConstants) => {
 		DIALOG_HEADER_FONT_SIZE: 'var(--d9-dialog-header-font-size, 1.2em)',
 		DIALOG_BODY_MIN_HEIGHT: 'var(--d9-dialog-body-min-height, 80px)',
 		DIALOG_FOOTER_BUTTON_GAP_SIZE: 'var(--d9-dialog-footer-button-gap-size, 8px)',
-		DIALOG_Z_INDEX: 99989,
+		DIALOG_Z_INDEX: 'var(--d9-dialog-z-index, 96999)',
 
 		ALERT_WIDTH: 'var(--d9-alert-width, 400px)',
 		ALERT_MARGIN_TOP: 'var(--d9-alert-margin-top, 25vh)',
@@ -195,12 +195,12 @@ export const createCssVars = (variables: typeof CssConstants) => {
 		ALERT_MIN_HEIGHT: 'var(--d9-alert-min-height, 60px)',
 		ALERT_MAX_HEIGHT: 'var(--d9-alert-max-height, 30vh)',
 		ALERT_MARGIN_BOTTOM: 'var(--d9-alert-margin-bottom, 32px)',
-		ALERT_Z_INDEX: 99999,
+		ALERT_Z_INDEX: 'var(--d9-alert-z-index, 97999)',
 
 		REMOTE_REQUEST_COLOR: `var(--d9-remote-request-color, ${variables.INFO_COLOR})`,
-		REMOTE_REQUEST_Z_INDEX: 99999,
+		REMOTE_REQUEST_Z_INDEX: 'var(--d9-remote-request-z-index, 98999)',
 
-		TIP_Z_INDEX: 999999,
+		TIP_Z_INDEX: 'var(--d9-tip-z-index, 99999)',
 		TIP_BORDER: `var(--d9-tip-border, 1px solid var(--d9-border-color, ${variables.BORDER_COLOR}))`,
 		TIP_BORDER_RADIUS: 'var(--d9-tip-border-radius, 8px)',
 		TIP_SHADOW: `var(--d9-tip-shadow, 0 0 6px 2px ${color(variables.SHADOW_COLOR).alpha(0.2)})`,
