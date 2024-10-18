@@ -15,7 +15,7 @@ import QuarterOfYear from 'dayjs/plugin/quarterOfYear';
 import RelativeTime from 'dayjs/plugin/relativeTime';
 import UTC from 'dayjs/plugin/utc';
 import WeekOfYear from 'dayjs/plugin/weekOfYear';
-import {defendCSPNoUnsafeEval} from '../utils';
+import {asT, defendCSPNoUnsafeEval} from '../utils';
 
 // datetime functions
 dayjs.extend(WeekOfYear);
@@ -45,7 +45,7 @@ dayjs.extend(BuddhistEra);
 		if (meta == null) {
 			console.error('Failed to defend unsafe eval, csp-nonce meta tag[<meta property="csp-nonce" nonce="VITE_NONCE">] not found, world collapsed.');
 		} else {
-			const nonce = meta.getAttribute('nonce');
+			const nonce = asT<HTMLElement>(meta).nonce || meta.getAttribute('nonce');
 			if (VUtils.isBlank(nonce)) {
 				console.error('Failed to defend unsafe eval, nonce from csp-nonce meta tag[<meta property="csp-nonce">] is blank, world collapsed.');
 			} else {
