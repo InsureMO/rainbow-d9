@@ -45,6 +45,9 @@ dayjs.extend(BuddhistEra);
 		if (meta == null) {
 			console.error('Failed to defend unsafe eval, csp-nonce meta tag[<meta property="csp-nonce" nonce="VITE_NONCE">] not found, world collapsed.');
 		} else {
+			// according to MDN, nonce might be hide from getAttribute,
+			// it can be visited only by property name
+			// https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/nonce
 			const nonce = asT<HTMLElement>(meta).nonce || meta.getAttribute('nonce');
 			if (VUtils.isBlank(nonce)) {
 				console.error('Failed to defend unsafe eval, nonce from csp-nonce meta tag[<meta property="csp-nonce">] is blank, world collapsed.');
