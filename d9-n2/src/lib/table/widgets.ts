@@ -42,7 +42,7 @@ export const ATableNoDataRow = styled.div.attrs<{ columnsCount: number }>(
     position: sticky;
     left: 0;
     align-items: center;
-    min-width: 100%;
+    justify-self: start;
     color: ${CssVars.FONT_COLOR};
     font-family: ${CssVars.TABLE_HEADER_FONT_FAMILY};
     font-size: ${CssVars.FONT_SIZE};
