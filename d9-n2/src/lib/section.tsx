@@ -46,6 +46,10 @@ const ASectionHeader = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-section-header'})
     padding-top: ${CssVars.SECTION_HEADER_OFFSET};
     border-bottom: ${CssVars.SECTION_HEADER_BORDER};
 
+    &[data-expanded=false] {
+        cursor: pointer;
+    }
+
     + div[data-w=d9-section-body] {
         padding: ${CssVars.SECTION_BODY_PADDING} 0;
     }
@@ -164,12 +168,17 @@ export const Section = forwardRef((props: SectionProps, ref: ForwardedRef<HTMLDi
 	const onExpandClicked = () => {
 		setExpanded(!expanded);
 	};
+	const onHeaderClicked = () => {
+		if (!expanded) {
+			setExpanded(true);
+		}
+	};
 
 	return <ASection {...rest} data-disabled={$disabled} data-visible={$visible}
 	                 id={PPUtils.asId(PPUtils.absolute($p2r, props.$pp), props.id)}
 	                 ref={ref}>
 		{title != null
-			? <ASectionHeader>
+			? <ASectionHeader data-expanded={expanded} onClick={onHeaderClicked}>
 				<ASectionTitle>
 					<LabelLike label={title} $wrapped={$wrapped} $validationScopes={props}/>
 				</ASectionTitle>
