@@ -192,6 +192,9 @@ export const enUSIntlLabels = {
 		},
 		queries: {
 			title: 'Internal and External Query'
+		},
+		'comment-history': {
+			title: 'Comment History'
 		}
 	},
 	'assessment': {

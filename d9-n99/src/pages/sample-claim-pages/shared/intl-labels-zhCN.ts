@@ -192,6 +192,9 @@ export const zhCNIntlLabels = {
 		},
 		queries: {
 			title: '内部/外部问卷'
+		},
+		'comment-history': {
+			title: '评论历史'
 		}
 	},
 	'assessment': {

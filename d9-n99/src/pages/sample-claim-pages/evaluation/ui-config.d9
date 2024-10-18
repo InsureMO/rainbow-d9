@@ -371,6 +371,10 @@
 
 - collapsible
 
+#### Section::claim.claim-workbench.comment-history.title
+
+- collapsible
+
 ### Tab::claim.claim-issue.title
 
 - marker: issue-tab
