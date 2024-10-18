@@ -8,8 +8,7 @@ import {
 	VUtils
 } from '@rainbow-d9/n1';
 import {WidgetType} from '../../../semantic';
-import {AsyncFunction} from '../../../utils';
-import {ComplexMonitorableAttributeValue, ReactionTypes, ScriptSnippet} from '../attribute';
+import {buildFunc, ComplexMonitorableAttributeValue, ReactionTypes, ScriptSnippet} from '../attribute';
 import {AttributeMap} from '../types';
 import {
 	MonitorHandler,
@@ -122,10 +121,14 @@ export const createDefaultMonitorHandlerDetective = <V, M extends MonitorOthers<
 			redressedSnippet = snippet;
 		}
 		// this is async function
-		const handle = new AsyncFunction(
-			'root', 'model', 'value', 'pathToRoot', 'propertyPath', 'absolutePath',
-			'changedOn', 'from', 'to',
-			redressedSnippet);
+		const handle = buildFunc(true, redressedSnippet,
+			'root', 'model', 'value', 'pathToRoot', 'propertyPath', 'absolutePath', 'changedOn', 'from', 'to');
+		// new AsyncFunction(
+		// 'root', 'model', 'value', 'pathToRoot', 'propertyPath', 'absolutePath',
+		// 'changedOn', 'from', 'to',
+		// redressedSnippet);
+		// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+		// @ts-ignore
 		handle.$snippet = redressedSnippet;
 		return {
 			$watch: on,

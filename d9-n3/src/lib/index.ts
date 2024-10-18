@@ -1,4 +1,5 @@
 export * from './types';
+export * from './constants';
 export * from './utils';
 export * from './node-types';
 export * from './logger';

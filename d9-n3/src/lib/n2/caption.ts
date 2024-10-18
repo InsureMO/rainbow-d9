@@ -4,6 +4,7 @@ import {N3Logger} from '../logger';
 import {ParsedListItemAttributePair} from '../semantic';
 import {
 	AttributeValueBuild,
+	buildFunc,
 	createAsyncSnippetBuild,
 	createSnippetBuild,
 	DecorateLeadsBuild,
@@ -29,13 +30,13 @@ export const N2CaptionValueToLabelBuild: AttributeValueBuild<Pick<CaptionDef, 'l
 			// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 			// @ts-ignore
 			const mightBeFunc = createSnippetBuild<CaptionDef, 'valueToLabel'>('valueToLabel', (parsed: string) => {
-				return new Function('value', 'formats', 'options', `try {
-				const $ = formats;
-				${parsed.includes('\n') ? parsed : `return ${parsed};`}
-			} catch (e) {
-				console.error(e);
-				return value == null ? '' : value;
-			}`);
+				return buildFunc(false, `try {
+					const $ = formats;
+					${parsed.includes('\n') ? parsed : `return ${parsed};`}
+				} catch (e) {
+					console.error(e);
+					return value == null ? '' : value;
+				}`, 'value', 'formats', 'options');
 			}).build(value, list);
 			// might be undefined, since external indicator is intercepted by outside
 			if (typeof mightBeFunc === 'function') {

@@ -1,4 +1,5 @@
 import {ExternalDefIndicator, NodeDef, Undefinable, VUtils} from '@rainbow-d9/n1';
+import {$d9n3, isUseDynamicFuncsInScriptTag, nonce} from '../../../constants';
 import {ParsedNodeType} from '../../../node-types';
 import {
 	ParsedCode,
@@ -9,7 +10,7 @@ import {
 	ParsedStrong,
 	ParsedText
 } from '../../../semantic';
-import {AsyncFunction} from '../../../utils';
+import {AsyncFunction as AsyncFunc, SyncFunction as SyncFunc} from '../../../utils';
 import {AbstractTranslator} from '../abstract-translator';
 import {AttributeValueBuild, ScriptSnippet, WidgetPropertyName} from './types';
 
@@ -92,6 +93,55 @@ export const createSnippetBuild = <D extends NodeDef | object, P extends keyof D
 	};
 };
 
+const createFuncByScriptTag = (sync = true) => <R>(...args: Array<string>): R => {
+	const renderNode = document.createElement('script');
+	const argNames = args.slice(0, args.length - 1);
+	const body = args[args.length - 1];
+
+	let key = VUtils.generateUniqueId();
+	while ($d9n3.$dynamicFuncs[key] != null) {
+		key = VUtils.generateUniqueId();
+	}
+	renderNode.text = `{
+	window.$d9n3.$dynamicFuncs["${key}"] = () => {
+		const func = ${sync ? '' : 'async'} (${argNames.join(', ')}) => {
+			// console.log('I am created by script tag and is ${sync ? 'sync' : 'async'}.');
+			${body}
+		};
+		func.$finalize = () => {
+			delete window.$d9n3.$dynamicFuncs["${key}"];
+		}
+		return func;
+	}
+	// console.log($d9n3.$dynamicFuncs["${key}"]);
+}
+`;
+	renderNode.setAttribute('nonce', nonce());
+
+	document.head.appendChild(renderNode).parentNode.removeChild(renderNode);
+	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+	// @ts-ignore
+	return $d9n3.$dynamicFuncs[key]();
+};
+
+// eslint-disable-next-line @typescript-eslint/ban-types
+export const buildFunc = <R = Function>(async: boolean, body: string, ...argNames: Array<string>): R => {
+	if (async) {
+		const AsyncFunction = isUseDynamicFuncsInScriptTag() ? createFuncByScriptTag(false) : AsyncFunc;
+		if (argNames == null || argNames.length === 0) {
+			return AsyncFunction(body) as R;
+		} else {
+			return AsyncFunction(...argNames, body) as R;
+		}
+	} else {
+		const SyncFunction = isUseDynamicFuncsInScriptTag() ? createFuncByScriptTag(true) : SyncFunc;
+		if (argNames == null || argNames.length === 0) {
+			return SyncFunction(body) as R;
+		} else {
+			return SyncFunction(...argNames, body) as R;
+		}
+	}
+};
 export type SyncSnippetBuild<D extends NodeDef | object, P extends keyof D> = AttributeValueBuild<D[P] | ExternalDefIndicator>
 export const createSyncSnippetBuild = <D extends NodeDef | object, P extends keyof D>(
 	// eslint-disable-next-line @typescript-eslint/no-inferrable-types
@@ -101,11 +151,7 @@ export const createSyncSnippetBuild = <D extends NodeDef | object, P extends key
 		if (parsed.indexOf('\n') === -1 && avoidFuncWhenSingleLine) {
 			return parsed as D[P];
 		}
-		if (argNames == null || argNames.length === 0) {
-			return new Function(parsed) as D[P];
-		} else {
-			return new Function(...argNames, parsed) as D[P];
-		}
+		return buildFunc(false, parsed, ...argNames);
 	});
 };
 
@@ -118,10 +164,6 @@ export const createAsyncSnippetBuild = <D extends NodeDef | object, P extends ke
 		if (parsed.indexOf('\n') === -1 && avoidFuncWhenSingleLine) {
 			return parsed as D[P];
 		}
-		if (argNames == null || argNames.length === 0) {
-			return new AsyncFunction(parsed) as D[P];
-		} else {
-			return new AsyncFunction(...argNames, parsed) as D[P];
-		}
+		return buildFunc(true, parsed, ...argNames);
 	});
 };
