@@ -1,4 +1,4 @@
-import {NodeDef} from '@rainbow-d9/n1';
+import {MonitorNodeAttributes, NodeDef} from '@rainbow-d9/n1';
 import {DropdownOptions, GlobalHandlers, SectionDef} from '@rainbow-d9/n2';
 import {lazy} from 'react';
 import {AppPage, PageRegistrar} from '../../../global-settings';
@@ -29,10 +29,20 @@ const ClaimEvaluationIndex = PreloadedLazyPageWrapper(lazy(() => import('./page'
 	},
 	manufactureParsedUI: async (_options: PreloaderFuncOptions) => {
 		return (parsed: NodeDef) => {
-			visitParsedUI(parsed, (node) => {
+			visitParsedUI(parsed, (node, ancestors) => {
 				// make claim base section collapsible
 				if (asT<SectionDef>(node).title === 'claim.claim.title' && node.$pp === 'data.claim') {
+					// let claim base section collapsible
 					asT<SectionDef>(node).collapsible = true;
+				} else if (ancestors != null && ancestors.length !== 0) {
+					const parent = ancestors[0];
+					if (asT<SectionDef>(parent).title === 'claim.claim.title' && parent.$pp === 'data.claim') {
+						// let widgets under claim base section disabled
+						node[MonitorNodeAttributes.DISABLED] = true;
+					} else if (asT<SectionDef>(parent).title === 'claim.additional.title' && parent.$pp === 'data.additional') {
+						// let widgets under additional base section disabled
+						node[MonitorNodeAttributes.DISABLED] = true;
+					}
 				}
 			});
 			return parsed;
