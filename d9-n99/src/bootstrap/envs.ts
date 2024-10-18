@@ -3,7 +3,7 @@ import {MUtils, N1Logger, PPUtils, VUtils} from '@rainbow-d9/n1';
 // import all n2 widgets
 import '@rainbow-d9/n2';
 import {CalendarUtils, DropdownUtils, RibsUtils} from '@rainbow-d9/n2';
-import {registerN2Widgets, Widget} from '@rainbow-d9/n3';
+import {registerN2Widgets, useDynamicFuncsInScriptTag, Widget} from '@rainbow-d9/n3';
 import dayjs from 'dayjs';
 import ArraySupport from 'dayjs/plugin/arraySupport';
 import BuddhistEra from 'dayjs/plugin/buddhistEra';
@@ -15,6 +15,7 @@ import QuarterOfYear from 'dayjs/plugin/quarterOfYear';
 import RelativeTime from 'dayjs/plugin/relativeTime';
 import UTC from 'dayjs/plugin/utc';
 import WeekOfYear from 'dayjs/plugin/weekOfYear';
+import {defendCSPNoUnsafeEval} from '../utils';
 
 // datetime functions
 dayjs.extend(WeekOfYear);
@@ -37,6 +38,22 @@ dayjs.extend(BuddhistEra);
 	const widgetsHelper = Widget.createOrGetTranslateHelperSingleton();
 	registerN2Widgets(widgetsHelper);
 	registerCharts(widgetsHelper);
+	if (defendCSPNoUnsafeEval()) {
+		const meta = [...document.head.children]
+			.filter(child => child.tagName === 'META')
+			.find(child => child.getAttribute('property') === 'csp-nonce');
+		if (meta == null) {
+			console.error('Failed to defend unsafe eval, csp-nonce meta tag[<meta property="csp-nonce" nonce="VITE_NONCE">] not found, world collapsed.');
+		} else {
+			const nonce = meta.getAttribute('nonce');
+			if (VUtils.isBlank(nonce)) {
+				console.error('Failed to defend unsafe eval, nonce from csp-nonce meta tag[<meta property="csp-nonce">] is blank, world collapsed.');
+			} else {
+				// n3 create functions by script tag
+				useDynamicFuncsInScriptTag(() => nonce!);
+			}
+		}
+	}
 	// set widgets parameters
 	// calendar
 	CalendarUtils.setCalendarDefaults({
