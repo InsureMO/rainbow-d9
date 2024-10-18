@@ -61,6 +61,7 @@ export interface D9PageExternalDefsCreatorOptions extends GlobalHandlers {
 	navigate: D9PageExternalDefsCreatorOptionsNavigator;
 }
 
+export type D9PageParsedUIManufacture = (parsed: NodeDef) => NodeDef;
 export type D9PageExternalDefsCreator = (global: D9PageExternalDefsCreatorOptions) => Promise<ExternalDefs>;
 
 /**
@@ -70,7 +71,7 @@ export interface D9PageProps {
 	/** d9 ui configuration markdown */
 	ui: string;
 	/** last chance to manufacture parsed ui */
-	manufactureParsedUI?: (parsed: NodeDef) => NodeDef;
+	manufactureParsedUI?: D9PageParsedUIManufacture;
 	/** init root model */
 	initRootModel?: ObjectPropValue;
 	/** deep clone root model when false. default false */

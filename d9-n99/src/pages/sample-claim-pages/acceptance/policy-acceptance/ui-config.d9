@@ -142,7 +142,7 @@
 				  ```
 	- Label::::sumAssured
 		- valueToLabel: `$.nf2(value)`
-	- Label::claim.acceptance-decision.product.insured-name::insuredName
+	- Label::biz.insured-name::insuredName
 	- Dropdown::claim.acceptance-decision.product.status-at-event::statusAtEvent
 		- disabled
 		- options: @ext.codes.policyStatus

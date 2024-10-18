@@ -11,6 +11,7 @@ export interface Data {
 	// insured: Claim.Insured;
 	claim: Claim.Claim;
 	additional: Claim.Additional;
+	lifeAssuredInfo: Claim.LifeAssuredInfo;
 	// reporter: Claim.Reporter;
 	claimIssues: Claim.ClaimIssues;
 	queryLetters: Claim.QueryLetters;

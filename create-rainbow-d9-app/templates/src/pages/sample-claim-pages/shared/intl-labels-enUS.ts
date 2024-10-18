@@ -94,7 +94,7 @@ export const enUSIntlLabels = {
 		'service-agent': 'Service Agent', 'service-agent-mobile': 'Service Agent Mobile',
 		product: {
 			name: 'Product Name', acceptable: 'Acceptable', accept: 'Accept', 'notified-amount': 'Notified Amount',
-			'sum-assured': 'Sum Assured', 'insured-name': 'Insured Name',
+			'sum-assured': 'Sum Assured',
 			'status-at-event': 'Product Status at Event Date', 'current-status': 'Current Product Status',
 			'commencement-date': 'Commencement Date', 'expiry-date': 'Expiry Date',
 			reinsurance: 'Reinsurance'
@@ -103,7 +103,96 @@ export const enUSIntlLabels = {
 		'price-eff-date': 'Price Effective Date(ILP)', 'comment-to-client': 'Comments to Client'
 	},
 	'claim-workbench': {
-		title: 'Claim Workbench'
+		title: 'Claim Workbench',
+		'life-assured-info': {
+			title: 'Life Assured Info', 'age-at-event': 'Age at Event Date',
+			'medical-or-not': {
+				title: 'Medical/Non-Medical Code Information', code: 'Code', 'code-category': 'Code Category',
+				'lia-code-type': 'LIA Code Type', description: 'Medical/Non-Medical Code Description'
+			},
+			'claim-history': {
+				title: 'Claim History',
+				'product-code': 'Product Code', 'product-type': 'Product Type',
+				'claim-type': 'Claim Type', 'event-date': 'Event Date', 'claim-nature': 'Claim Nature',
+				'diagnosis': 'Diagnostic Code', 'claim-status': 'Claim Status',
+				'claim-decision': 'Claim Decision', 'claimable-amount': 'Claimable Amount',
+				'settle-date': 'Settle Date'
+			},
+			'underwriting-history': {
+				title: 'Underwriting History',
+				'product-code': 'Product Code', 'product-type': 'Product Type', 'business-type': 'Business Type',
+				'underwriting-decision': 'UW Decision', 'commencement-date': 'Commencement Date',
+				'policy-status': 'Policy Status', 'premium-status': 'Premium Status',
+				'payment-frequency': 'Payment Frequency', 'sa-unit-level': 'SA / Unit / Level',
+				'annual-premium': 'Annual Premium',
+				'auto-underwriting-indicator': 'Auto UW Indicator'
+			}
+		},
+		policies: {
+			title: 'Policy Basic Information'
+		},
+		policy: {
+			title: 'Policy Information of Policy No.:',
+			'proposal-date': 'Proposal Date', 'issue-date': 'Issue Date',
+			'risk-commencement-date': 'Risk Commencement Date', currency: 'Currency',
+			status: 'Policy Status', 'lapse-date': 'Lapse Date', 'reinstatement-date': 'Reinstatement Date',
+			'installment-premium': 'Installment Premium', 'next-due-date': 'Next Due Date',
+			'outstanding-premium': 'Outstanding Premium', 'policy-frequency': 'Policy Frequency',
+			'policy-loan': 'Policy Loan', 'sales-channel': 'Sales Channel', 'service-agent': 'Service Agent',
+			party: {
+				title: 'Parties',
+				role: 'Party Role', name: 'Customer Name', 'id-type-and-no': 'ID Type / No.',
+				'relation-with-holder': 'Relation with PH', 'annual-income': 'Annual Income',
+				'smoker-status': 'Smoker Status', 'risk-indicator': 'Risk Indicator',
+				'medical-report': 'Medical Report', declaration: 'Declaration'
+			},
+			product: {
+				title: 'Products',
+				'name': 'Product', 'life-assured': 'Life Assured',
+				'risk-commencement-date': 'Risk Commencement Date', status: 'Policy Status',
+				'reinstatement-date': 'Reinstatement Date', 'coverage-period': 'Coverage Period',
+				'payment-period': 'Payment Period', 'sa-unit-level': 'SA / Unit / Level',
+				'installment-premium': 'Installment Premium', 'underwriting-decision': 'Underwriting Decision',
+				'loading': 'Loading', 'agreement': 'Agreement',
+				'lapse-terminate-date': 'Lapse / Terminate Date',
+				'inception-to-event-duration': 'Duration from Inception to Event',
+				'reinstatement-to-event-duration': 'Duration from Reinstatement to Event'
+			},
+			loading: {
+				title: 'Loading',
+				'product-code': 'Product Code', 'product-type': 'Product Type', category: 'Loading Category',
+				'occupation-class': 'Occupation Class', type: 'Loading Type', period: 'Loading Period',
+				'extra-premium': 'Extra Premium'
+			},
+			exclusion: {
+				title: 'Exclusion',
+				'product-code': 'Product Code', 'product-type': 'Product Type', category: 'Loading Category',
+				'occupation-class': 'Occupation Class', type: 'Loading Type', period: 'Loading Period',
+				'extra-premium': 'Extra Premium'
+			},
+			agreement: {
+				title: 'Agreement',
+				'product-code': 'Product Code', 'product-type': 'Product Type', type: 'Agreement Type',
+				'life-assured': 'Life Assured', code: 'Agreement Code', comment: 'Agreement Comment',
+				'review-period': 'Review Period (Month)', content: 'Content'
+			},
+			'risk-related-cs-history': {
+				title: 'Risk Related CS History',
+				'product-code': 'Product Code', 'product-type': 'Product Type', item: 'CS Item',
+				'application-date': 'CS Application Date', status: 'CS Status',
+				'auto-underwriting-indicator': 'Auto UW Indicator', 'underwriting-decision': 'UW Decision',
+				'underwriting-completion-date': 'UW Completion Date', underwriter: 'Underwriter'
+			}
+		},
+		assessment: {
+			title: 'Assessment Information'
+		},
+		'disbursement-plan': {
+			title: 'Disbursement Plan'
+		},
+		queries: {
+			title: 'Internal and External Query'
+		}
 	},
 	'assessment': {
 		title: 'Assessment'

@@ -14,10 +14,34 @@ const mockDoLoadMockRegistrationData = async (_keyOrRegistrationId: string): Pro
 		registrationNo: `R${Math.floor(Math.random() * 1000000000000)}`,
 		manualSubmit: true,
 		status: 'submitted',
-		// insured: {},
 		claim: {},
 		additional: {directBillingIndicator: 'N'},
-		// reporter: {notificationMethod: 'email'},
+		lifeAssuredInfo: {
+			insuredList: [{
+				name: 'Jones Smith', idType: 'passport', idNo: '374893737000112',
+				nationality: 'CHN', gender: 'M', dob: '07/12/2001', occupation: 'accountant', ageAtEvent: 26
+			}],
+			medicalOrNotCodes: [{
+				policyNo: 'K000017185', code: 'AMC-0032', codeCategory: 'Medical', liaCodeType: 'AMC',
+				description: 'Medical Examination'
+			}],
+			claimHistory: [{
+				claimNo: 'MED202300076', policyNo: 'K000017185', productCode: 'WPV6', productType: '',
+				claimType: 'medical', eventDate: '14/10/2024', claimNature: '',
+				diagnosis: '', claimStatus: 'cancelled', claimDecision: 'Approved',
+				claimableAmount: 0, settleDate: '14/10/2024'
+			}],
+			underwritingHistory: [{
+				policyNo: 'K000017185', productCode: 'WPV6', productType: '',
+				businessType: 'nb', underwritingDecision: 'accepted', commencementDate: '14/10/2024',
+				policyStatus: 'inforce', premiumStatus: 'paid', paymentFrequency: 'annual',
+				sumAssured: 499999, unit: 1, level: 0, annualPremium: 423, autoUnderwritingIndicator: false
+			}],
+			policies: [{
+				policyNo: 'K000017185',
+				parties: [], products: []
+			}]
+		},
 		claimIssues: [{
 			title: 'Missing documents', generatedAt: '13/10/2024', generatedBy: 'system',
 			lastUpdatedAt: '13/10/2024', lastUpdatedBy: 'system',

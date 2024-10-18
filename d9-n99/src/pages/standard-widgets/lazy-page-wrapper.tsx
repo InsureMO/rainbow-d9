@@ -4,6 +4,7 @@ import {JSX, LazyExoticComponent, Suspense, useEffect, useState} from 'react';
 import {useLocation, useParams} from 'react-router';
 import {Params, useSearchParams} from 'react-router-dom';
 import styled from 'styled-components';
+import {D9PageParsedUIManufacture} from './d9-page';
 
 // noinspection CssUnresolvedCustomProperty
 const Container = styled.div.attrs({[DOM_KEY_WIDGET]: 'page-lazy-loading'})`
@@ -41,6 +42,8 @@ export interface PreloaderFuncOptions {
 export interface PreloadedPageProps<AssistantData = any> extends PreloaderFuncOptions {
 	/** d9 markdown */
 	ui?: string;
+	/** last chance to manufacture parsed ui */
+	manufactureParsedUI?: D9PageParsedUIManufacture;
 	/** init root model */
 	initRootModel?: ObjectPropValue;
 	/** assistant data for ui usage, could be anything */
@@ -52,6 +55,8 @@ export type PreloaderFunc<T> = (options: PreloaderFuncOptions) => Promise<T>;
 export interface PagePropsApartPreloaderFuncs<AssistantData = any> {
 	/** get ui configuration markdown, d9 format */
 	ui?: PreloaderFunc<string>;
+	/** last chance to manufacture parsed ui */
+	manufactureParsedUI?: PreloaderFunc<D9PageParsedUIManufacture>;
 	/** get initial root model */
 	initRootModel?: PreloaderFunc<ObjectPropValue>;
 	/** get assistant data for ui usage, could be anything */
@@ -134,7 +139,7 @@ export const PreloadedLazyPageWrapper = <AssistantData = any>(
 						}
 						// pass to preload functions
 						const options: PreloaderFuncOptions = {...props};
-						const orderBy: Exclude<PagePropsApartPreloader['orderBy'], undefined> = preloader.orderBy ?? [['ui', 'initRootModel', 'assistantData']];
+						const orderBy: Exclude<PagePropsApartPreloader['orderBy'], undefined> = preloader.orderBy ?? [['ui', 'manufactureParsedUI', 'initRootModel', 'assistantData']];
 						await orderBy.reduce<Promise<PreloaderFuncOptions>>(async (options, keys) => {
 							const thisOptions = await options;
 							await Promise.all(keys.map(async key => {

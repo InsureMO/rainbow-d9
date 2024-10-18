@@ -51,11 +51,348 @@
 
 ### Tab::claim.claim-workbench.title
 
-- marker: claim-workbench
+- marker: workbench-tab
 
 - Box::$$claim-base-section
 
+- Box::$$additional-base-section
+
+#### Section::claim.claim-workbench.life-assured-info.title::data.lifeAssuredInfo
+
+- collapsible
+
+- Table::
+	- property: insuredList
+	- !expandable, !addable, !removable
+	- headers:
+		- biz.insured-name: 1fr
+		- biz.id-type: 100
+		- biz.id-no: 160
+		- biz.nationality: 140
+		- biz.gender: 140
+		- biz.dob: 140
+		- biz.occupation: 140
+		- claim.claim-workbench.life-assured-info.age-at-event: 140
+	- Label::::name
+	- Dropdown::::idType
+		- disabled, data-as-label
+		- options: @ext.codes.idType
+	- Label::::idNo
+	- Dropdown::::nationality
+		- disabled, data-as-label
+		- options: @ext.codes.nationality
+	- Dropdown::::gender
+		- disabled, data-as-label
+		- options: @ext.codes.gender
+	- Label::::dob
+	- Dropdown::::occupation
+		- disabled, data-as-label
+		- options: @ext.codes.occupation
+	- Label::::ageAtEvent
+
+##### Section::claim.claim-workbench.life-assured-info.medical-or-not.title
+
+- collapsible, data-2nd
+
+- Table::
+	- property: medicalOrNotCodes
+	- !expandable, !addable, !removable
+	- headers:
+		- biz.policy-no: 150
+		- claim.claim-workbench.life-assured-info.medical-or-not.code: 100
+		- claim.claim-workbench.life-assured-info.medical-or-not.code-category: 120
+		- claim.claim-workbench.life-assured-info.medical-or-not.lia-code-type: 120
+		- claim.claim-workbench.life-assured-info.medical-or-not.description: 1fr
+	- Label::::policyNo
+	- Label::::code
+	- Label::::codeCategory
+	- Label::::liaCodeType
+	- Label::::description
+
+##### Section::claim.claim-workbench.life-assured-info.claim-history.title
+
+- collapsible, data-2nd
+
+- Table::
+	- property: claimHistory
+	- !expandable, !addable, !removable
+	- fixedLeadColumns: 1
+	- headers:
+		- biz.claim-no: 150
+		- biz.policy-no: 150
+		- claim.claim-workbench.life-assured-info.claim-history.product-code: 120
+		- claim.claim-workbench.life-assured-info.claim-history.product-type: 120
+		- claim.claim-workbench.life-assured-info.claim-history.claim-type: 120
+		- claim.claim-workbench.life-assured-info.claim-history.event-date: 120
+		- claim.claim-workbench.life-assured-info.claim-history.claim-nature: 120
+		- claim.claim-workbench.life-assured-info.claim-history.diagnosis: 120
+		- claim.claim-workbench.life-assured-info.claim-history.claim-status: 120
+		- claim.claim-workbench.life-assured-info.claim-history.claim-decision: 120
+		- claim.claim-workbench.life-assured-info.claim-history.claimable-amount: 120
+		- claim.claim-workbench.life-assured-info.claim-history.settle-date: 120
+	- Label::::claimNo
+	- Label::::policyNo
+	- Label::::productCode
+	- Dropdown::::productType
+		- disabled, data-as-label
+		- options: @ext.codes.productType
+	- Dropdown::::claimType
+		- disabled, data-as-label
+		- options: @ext.codes.claimType
+	- Label::::eventDate
+	- Dropdown::::claimNature
+		- disabled, data-as-label
+		- options: @ext.codes.claimNature
+	- Label::::diagnosis
+	- Dropdown::::claimStatus
+		- disabled, data-as-label
+		- options: @ext.codes.claimStatus
+	- Label::::claimDecision
+	- Label::::claimableAmount
+	- Label::::settleDate
+
+##### Section::claim.claim-workbench.life-assured-info.underwriting-history.title
+
+- collapsible, data-2nd
+
+- Table::
+	- property: underwritingHistory
+	- !expandable, !addable, !removable
+	- fixedLeadColumns: 1
+	- headers:
+		- biz.policy-no: 150
+		- claim.claim-workbench.life-assured-info.underwriting-history.product-code: 120
+		- claim.claim-workbench.life-assured-info.underwriting-history.product-type: 120
+		- claim.claim-workbench.life-assured-info.underwriting-history.business-type: 120
+		- claim.claim-workbench.life-assured-info.underwriting-history.underwriting-decision: 120
+		- claim.claim-workbench.life-assured-info.underwriting-history.commencement-date: 150
+		- claim.claim-workbench.life-assured-info.underwriting-history.policy-status: 120
+		- claim.claim-workbench.life-assured-info.underwriting-history.premium-status: 120
+		- claim.claim-workbench.life-assured-info.underwriting-history.payment-frequency: 150
+		- claim.claim-workbench.life-assured-info.underwriting-history.sa-unit-level: 150
+		- claim.claim-workbench.life-assured-info.underwriting-history.annual-premium: 120
+		- claim.claim-workbench.life-assured-info.underwriting-history.auto-underwriting-indicator: 150
+	- Label::::policyNo
+	- Label::::productCode
+	- Dropdown::::productType
+		- disabled, data-as-label
+		- options: @ext.codes.productType
+	- Dropdown::::businessType
+		- disabled, data-as-label
+		- options: @ext.codes.businessType
+	- Dropdown::::underwritingDecision
+		- disabled, data-as-label
+		- options: @ext.codes.underwritingDecision
+	- Label::::commencementDate
+	- Dropdown::::policyStatus
+		- disabled, data-as-label
+		- options: @ext.codes.policyStatus
+	- Dropdown::::premiumStatus
+		- disabled, data-as-label
+		- options: @ext.codes.premiumStatus
+	- Dropdown::::paymentFrequency
+		- disabled, data-as-label
+		- options: @ext.codes.paymentFrequency
+	- Box::
+		- data-dense-labels, data-slash-joined
+		- Label::::sumAssured
+			- valueToLabel: `$.nf2(value)`
+		- Label::::unit
+		- Label::::level
+	- Label::::annualPremium
+		- valueToLabel: `$.nf2(value)`
+	- Dropdown::::autoUnderwritingIndicator
+		- disabled, data-as-label
+		- options: @ext.codes.yesNo
+
+#### Section::claim.claim-workbench.policies.title
+
+- collapsible
+
+##### Ribs::::data.lifeAssuredInfo.policies
+
+- !expandable, !addable, !removable, data-as-section
+- initExpanded: `return true`
+- caption: Box
+	- data-labels
+	- Caption::claim.claim-workbench.policy.title
+	- Label::::policyNo
+		- data-as-link
+		- click: @ext.decision.policy.view.click
+- Input::claim.claim-workbench.policy.proposal-date::proposalDate
+	- disabled
+- Input::claim.claim-workbench.policy.issue-date::issueDate
+	- disabled
+- Input::claim.claim-workbench.policy.risk-commencement-date::riskCommencementDate
+	- disabled
+- Dropdown::claim.claim-workbench.policy.currency::currency
+	- disabled
+	- options: @ext.codes.currency
+- Dropdown::claim.claim-workbench.policy.status::status
+	- disabled
+	- options: @ext.codes.policyStatus
+- Input::claim.claim-workbench.policy.lapse-date::lapseDate
+	- disabled
+- Input::claim.claim-workbench.policy.reinstatement-date::reinstatementDate
+	- disabled
+- Dropdown::claim.claim-workbench.policy.installment-premium::installmentPremium
+	- disabled
+	- options: @ext.codes.yesNo
+- Input::claim.claim-workbench.policy.next-due-date::nextDueDate
+	- disabled
+- Input::claim.claim-workbench.policy.outstanding-premium::outstandingPremium
+	- disabled
+- Dropdown::claim.claim-workbench.policy.policy-frequency::policyFrequency
+	- disabled
+	- options: @ext.codes.policyFrequency
+- Input::claim.claim-workbench.policy.policy-loan::policyLoan
+	- disabled
+- Dropdown::claim.claim-workbench.policy.sales-channel::salesChannel
+	- disabled
+	- options: @ext.codes.salesChannel
+- Dropdown::claim.claim-workbench.policy.service-agent::serviceAgent
+	- disabled
+	- options: @ext.codes.serviceAgentWithCodePrefix
+- Section::claim.claim-workbench.policy.party.title
+	- data-2nd
+	- Table::
+		- property: parties
+		- !expandable, !addable, !removable
+		- fixedLeadColumns: 2
+		- headers:
+			- claim.claim-workbench.policy.party.role: 120
+			- claim.claim-workbench.policy.party.name: 200
+			- claim.claim-workbench.policy.party.id-type-and-no: 200
+			- biz.dob: 120
+			- biz.gender: 120
+			- claim.claim-workbench.policy.party.relation-with-holder: 120
+			- claim.claim-workbench.policy.party.annual-income: 120
+			- biz.occupation: 120
+			- claim.claim-workbench.policy.party.smoker-status: 120
+			- claim.claim-workbench.policy.party.risk-indicator: 100
+			- claim.claim-workbench.policy.party.medical-report: 120
+			- claim.claim-workbench.policy.party.declaration: 120
+- Section::claim.claim-workbench.policy.product.title
+	- data-2nd
+	- Table::
+		- property: products
+		- !expandable, !addable, !removable
+		- fixedLeadColumns: 2
+		- headers:
+			- claim.claim-workbench.policy.product.name: 120
+			- claim.claim-workbench.policy.product.life-assured: 200
+			- claim.claim-workbench.policy.product.risk-commencement-date: 200
+			- claim.claim-workbench.policy.product.status: 120
+			- claim.claim-workbench.policy.product.reinstatement-date: 150
+			- claim.claim-workbench.policy.product.coverage-period: 120
+			- claim.claim-workbench.policy.product.payment-period: 120
+			- claim.claim-workbench.policy.product.sa-unit-level: 150
+			- claim.claim-workbench.policy.product.installment-premium: 150
+			- claim.claim-workbench.policy.product.underwriting-decision: 150
+			- claim.claim-workbench.policy.product.loading: 80
+			- claim.claim-workbench.policy.product.agreement: 80
+			- claim.claim-workbench.policy.product.lapse-terminate-date: 200
+			- claim.claim-workbench.policy.product.inception-to-event-duration: 250
+			- claim.claim-workbench.policy.product.reinstatement-to-event-duration: 250
+- Section::claim.claim-workbench.policy.loading.title
+	- data-2nd
+	- Table::
+		- property: loadings
+		- !expandable, !addable, !removable
+		- fixedLeadColumns: 3
+		- headers:
+			- biz.policy-no: 120
+			- claim.claim-workbench.policy.loading.product-code: 200
+			- claim.claim-workbench.policy.loading.product-type: 200
+			- claim.claim-workbench.policy.loading.category: 150
+			- claim.claim-workbench.policy.loading.occupation-class: 150
+			- claim.claim-workbench.policy.loading.type: 120
+			- claim.claim-workbench.policy.loading.period: 120
+			- claim.claim-workbench.policy.loading.extra-premium: 150
+- Section::claim.claim-workbench.policy.exclusion.title
+	- data-2nd
+	- Table::
+		- property: exclusions
+		- !expandable, !addable, !removable
+		- fixedLeadColumns: 3
+		- headers:
+			- biz.policy-no: 120
+			- claim.claim-workbench.policy.exclusion.product-code: 200
+			- claim.claim-workbench.policy.exclusion.product-type: 200
+			- claim.claim-workbench.policy.exclusion.category: 150
+			- claim.claim-workbench.policy.exclusion.occupation-class: 150
+			- claim.claim-workbench.policy.exclusion.type: 120
+			- claim.claim-workbench.policy.exclusion.period: 120
+			- claim.claim-workbench.policy.exclusion.extra-premium: 150
+- Section::claim.claim-workbench.policy.agreement.title
+	- data-2nd
+	- Table::
+		- property: agreements
+		- !expandable, !addable, !removable
+		- fixedLeadColumns: 3
+		- headers:
+			- biz.policy-no: 120
+			- claim.claim-workbench.policy.agreement.product-code: 200
+			- claim.claim-workbench.policy.agreement.product-type: 200
+			- claim.claim-workbench.policy.agreement.type: 120
+			- claim.claim-workbench.policy.agreement.life-assured: 200
+			- claim.claim-workbench.policy.agreement.code: 120
+			- claim.claim-workbench.policy.agreement.comment: 200
+			- claim.claim-workbench.policy.agreement.review-period: 200
+			- claim.claim-workbench.policy.agreement.content: 250
+- Section::claim.claim-workbench.policy.risk-related-cs-history.title
+	- data-2nd
+	- Table::
+		- property: riskRelatedCSHistory
+		- !expandable, !addable, !removable
+		- fixedLeadColumns: 4
+		- headers:
+			- biz.cs-no: 120
+			- biz.policy-no: 120
+			- claim.claim-workbench.policy.risk-related-cs-history.product-code: 200
+			- claim.claim-workbench.policy.risk-related-cs-history.product-type: 200
+			- claim.claim-workbench.policy.risk-related-cs-history.item: 200
+			- claim.claim-workbench.policy.risk-related-cs-history.application-date: 200
+			- claim.claim-workbench.policy.risk-related-cs-history.status: 120
+			- claim.claim-workbench.policy.risk-related-cs-history.auto-underwriting-indicator: 150
+			- claim.claim-workbench.policy.risk-related-cs-history.underwriting-decision: 150
+			- claim.claim-workbench.policy.risk-related-cs-history.underwriting-completion-date: 150
+			- claim.claim-workbench.policy.risk-related-cs-history.underwriter: 150
+
+#### Section::claim.claim-workbench.assessment.title
+
+- collapsible
+
+#### Section::claim.claim-workbench.disbursement-plan.title
+
+- collapsible
+
+#### Section::claim.claim-workbench.queries.title
+
+- collapsible
+
 ### Tab::claim.claim-issue.title
+
+- marker: issue-tab
+- badge: Badge
+	- property: data.claimIssues
+	- valueToLabel:
+	  ```ts
+	  const count = value?.length ?? 0;
+	  const opened = value?.filter(issue => issue.status !== 'closed')?.length ?? 0;
+	  return `${opened} / ${count}`;
+	  ```
+	- ink: danger
+
+- Box::$$claim-issue-table-section
+
+- Box::$$query-letter-table-section
+
+- Box::$$internal-query-table-section
+
+- Box::$$escalation-table-section
+
+- Box::$$investigation-table-section
 
 ### Tab::claim.assessment.title
 

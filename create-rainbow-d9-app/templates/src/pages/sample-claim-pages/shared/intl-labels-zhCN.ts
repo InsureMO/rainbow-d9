@@ -94,7 +94,7 @@ export const zhCNIntlLabels = {
 		'service-agent': '服务代理人', 'service-agent-mobile': '服务代理人手机号码',
 		product: {
 			name: '产品名称', acceptable: '可理赔?', accept: '理赔?', 'notified-amount': '通知金额',
-			'sum-assured': '保额', 'insured-name': '被保人',
+			'sum-assured': '保额',
 			'status-at-event': '案件日期产品状态', 'current-status': '当前产品状态',
 			'commencement-date': '生效日', 'expiry-date': '失效日期',
 			reinsurance: '再保?'
@@ -103,7 +103,96 @@ export const zhCNIntlLabels = {
 		'price-eff-date': '有效价格日期(ILP)', 'comment-to-client': '对客户的备注'
 	},
 	'claim-workbench': {
-		title: '理赔工作台'
+		title: '理赔工作台',
+		'life-assured-info': {
+			title: '保险标的', 'age-at-event': '案件发生时年龄',
+			'medical-or-not': {
+				title: '医疗/非医疗代码信息', code: '代码', 'code-category': '代码分类',
+				'lia-code-type': 'LIA代码类型', description: '医疗/非医疗代码描述'
+			},
+			'claim-history': {
+				title: '理赔历史',
+				'product-code': '产品代码', 'product-type': '产品类型',
+				'claim-type': '理赔类型', 'event-date': '案件日期', 'claim-nature': '理赔性质',
+				'diagnosis': '诊断代码', 'claim-status': '理赔状态',
+				'claim-decision': '理赔决定', 'claimable-amount': '索赔金额',
+				'settle-date': '结算日期'
+			},
+			'underwriting-history': {
+				title: '核保历史',
+				'product-code': '产品代码', 'product-type': '产品类型', 'business-type': '业务类型',
+				'underwriting-decision': '核保决定', 'commencement-date': '生效日',
+				'policy-status': '保单状态', 'premium-status': '缴费状态',
+				'payment-frequency': '缴费周期', 'sa-unit-level': '保额/单位/级别',
+				'annual-premium': '年保费',
+				'auto-underwriting-indicator': '是否自动核保?'
+			}
+		},
+		policies: {
+			title: '保单信息'
+		},
+		policy: {
+			title: '保单信息, 保单号:',
+			'proposal-date': '投保日期', 'issue-date': '出单日期',
+			'risk-commencement-date': '责任开始日期', currency: '币种',
+			status: '保单状态', 'lapse-date': '失效日期', 'reinstatement-date': '复效日期',
+			'installment-premium': '保费分期', 'next-due-date': '下次缴费日期',
+			'outstanding-premium': '未缴保费', 'policy-frequency': '缴费频率',
+			'policy-loan': '保单贷款', 'sales-channel': '销售渠道', 'service-agent': '服务代理人',
+			party: {
+				title: '当事人',
+				role: '角色', name: '客户姓名', 'id-type-and-no': '证件类型 / 编号',
+				'relation-with-holder': '与保单持有人的关系', 'annual-income': '年收入’',
+				'smoker-status': '吸烟状况', 'risk-indicator': '风险指标',
+				'medical-report': '医疗报告', declaration: '声明'
+			},
+			product: {
+				title: '产品',
+				name: '产品名称', 'life-assured': '被保险人',
+				'risk-commencement-date': '风险开始日期', status: '保单状态',
+				'reinstatement-date': '恢复日期', 'coverage-period': '保障期限',
+				'payment-period': '缴费期限', 'sa-unit-level': '保额 / 单位 / 级别',
+				'installment-premium': '分期保费', 'underwriting-decision': '核保决定',
+				'loading': '加费', 'agreement': '协议',
+				'lapse-terminate-date': '失效 / 终止日期',
+				'inception-to-event-duration': '从生效到事件的持续时间',
+				'reinstatement-to-event-duration': '从恢复到事件的持续时间'
+			},
+			loading: {
+				title: '加费',
+				'product-code': '产品代码', 'product-type': '产品类型', category: '加费类别',
+				'occupation-class': '职业类别', type: '加费类型', period: '加费期限',
+				'extra-premium': '额外保费'
+			},
+			exclusion: {
+				title: '除外责任',
+				'product-code': '产品代码', 'product-type': '产品类型', category: '加费类别',
+				'occupation-class': '职业类别', type: '加费类型', period: '加费期限',
+				'extra-premium': '额外保费'
+			},
+			agreement: {
+				title: '协议',
+				'product-code': '产品代码', 'product-type': '产品类型', type: '协议类型',
+				'life-assured': '被保险人', code: '协议代码', comment: '协议备注',
+				'review-period': '审核期 (月)', content: '内容'
+			},
+			'risk-related-cs-history': {
+				title: '风险相关客户服务历史',
+				'product-code': '产品代码', 'product-type': '产品类型', item: '客户服务项目',
+				'application-date': '客户服务申请日期', status: '客户服务状态',
+				'auto-underwriting-indicator': '自动核保指示', 'underwriting-decision': '核保决定',
+				'underwriting-completion-date': '核保完成日期', underwriter: '核保人'
+			}
+		},
+		assessment: {
+			title: '评估信息'
+		},
+		'disbursement-plan': {
+			title: '支付计划'
+		},
+		queries: {
+			title: '内部/外部问卷'
+		}
 	},
 	'assessment': {
 		title: '评估'

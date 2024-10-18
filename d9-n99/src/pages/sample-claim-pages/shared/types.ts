@@ -179,4 +179,172 @@ export namespace Claim {
 		commentToClient?: string;
 		policies?: Array<AcceptanceOnPolicy>;
 	}
+
+	export interface LifeAssuredInsured {
+		name?: string;
+		idType?: string;
+		idNo?: string;
+		nationality?: string;
+		gender?: string;
+		dob?: string;
+		occupation?: string;
+		ageAtEvent?: number;
+	}
+
+	export interface LifeAssuredMedicalOrNotCode {
+		policyNo?: string;
+		code?: string;
+		codeCategory?: string;
+		liaCodeType?: string;
+		description?: string;
+	}
+
+	export interface LifeAssuredClaimHistory {
+		claimNo?: string;
+		policyNo?: string;
+		productCode?: string;
+		productType?: string;
+		claimType?: string;
+		eventDate?: string;
+		claimNature?: string;
+		diagnosis?: string;
+		claimStatus?: string;
+		claimDecision?: string;
+		claimableAmount?: number;
+		settleDate?: string;
+	}
+
+	export interface LifeAssuredUnderwritingHistory {
+		policyNo?: string;
+		productCode?: string;
+		productType?: string;
+		businessType?: string;
+		underwritingDecision?: string;
+		commencementDate?: string;
+		policyStatus?: string;
+		premiumStatus?: string;
+		paymentFrequency?: string;
+		sumAssured?: number;
+		unit?: number;
+		level?: number;
+		annualPremium?: number;
+		autoUnderwritingIndicator?: boolean;
+	}
+
+	export interface LifeAssuredPolicyParty {
+		role?: string;
+		name?: string;
+		idType?: string;
+		idNo?: string;
+		dob?: string;
+		gender?: string;
+		relationshipWithPH?: string;
+		annualIncome?: number;
+		occupation?: string;
+		smokerStatus?: string;
+		riskIndicator?: string;
+		medicalReport?: string;
+		declaration?: string;
+	}
+
+	export interface LifeAssuredPolicyProduct {
+		code?: string;
+		name?: string;
+		lifeAssured?: string;
+		riskCommencementDate?: string;
+		status?: string;
+		reinstatementDate?: string;
+		coveragePeriod?: string;
+		paymentPeriod?: string;
+		sumAssured?: number;
+		unit?: number;
+		level?: number;
+		installmentPremium?: number;
+		underwritingDecision?: string;
+		loadings?: boolean;
+		agreement?: boolean;
+		reinsurance?: boolean;
+		durationFromInception?: string;
+		reinstatementDateToEventDate?: string;
+	}
+
+	export interface LifeAssuredPolicyLoading {
+		policyNo?: string;
+		productCode?: string;
+		productType?: string;
+		category?: string;
+		occupationClass?: string;
+		type?: string;
+		period?: string;
+		extraPremium?: number;
+	}
+
+	export interface LifeAssuredPolicyExclusion {
+		policyNo?: string;
+		productCode?: string;
+		productType?: string;
+		category?: string;
+		occupationClass?: string;
+		type?: string;
+		period?: string;
+		extraPremium?: number;
+	}
+
+	export interface LifeAssuredPolicyAgreement {
+		policyNo?: string;
+		productCode?: string;
+		productType?: string;
+		type?: string;
+		lifeAssured?: string;
+		code?: string;
+		comment?: string;
+		reviewPeriodInMonth?: number;
+		content?: string;
+	}
+
+	export interface LifeAssuredPolicyRiskRelatedCSHistory {
+		csNo?: string;
+		policyNo?: string;
+		productCode?: string;
+		productType?: string;
+		item?: string;
+		applicationDate?: string;
+		status?: string;
+		autoUnderwritingIndicator?: boolean;
+		underwritingDecision?: string;
+		underwritingCompletionDate?: string;
+		underwriter?: string;
+	}
+
+	export interface LifeAssuredPolicy {
+		policyNo?: string;
+		proposalDate?: string;
+		issueDate?: string;
+		riskCommencementDate?: string;
+		currency?: string;
+		status?: string;
+		lapseDate?: string;
+		reinstatementDate?: string;
+		installmentPremium?: boolean;
+		nextDueDate?: string;
+		outstandingPremium?: number;
+		policyFrequency?: string;
+		policyLoan?: number;
+		salesChannel?: string;
+		serviceAgent?: string;
+		parties?: Array<LifeAssuredPolicyParty>;
+		products?: Array<LifeAssuredPolicyProduct>;
+		loadings?: Array<LifeAssuredPolicyLoading>;
+		exclusions?: Array<LifeAssuredPolicyExclusion>;
+		agreements?: Array<LifeAssuredPolicyAgreement>;
+		riskRelatedCSHistory?: Array<LifeAssuredPolicyRiskRelatedCSHistory>;
+	}
+
+	export interface LifeAssuredInfo {
+		insuredList?: Array<LifeAssuredInsured>;
+		medicalOrNotCodes?: Array<LifeAssuredMedicalOrNotCode>;
+		claimHistory?: Array<LifeAssuredClaimHistory>;
+		underwritingHistory?: Array<LifeAssuredUnderwritingHistory>;
+		policies?: Array<LifeAssuredPolicy>;
+	}
 }

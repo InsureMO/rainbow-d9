@@ -50,6 +50,7 @@ export const createN2ThemeStyles = (): AppThemeStyle => {
 		SECTION_HEADER_TITLE_FONT_SIZE: 'var(--d9-section-header-title-font-size, 18px)',
 		SECTION_HEADER_TITLE_FONT_WEIGHT: 'var(--d9-section-header-title-font-weight, 400)',
 		SECTION_HEADER_BORDER: 'var(--d9-section-header-border, var(--d9-border))',
+		TABLE_HEADER_FONT_WEIGHT: 'var(--d9-table-header-font-weight, 300)',
 		TABLE_HEADER_BORDER: 'var(--d9-table-header-border, var(--d9-border))',
 		// add definitions for button bar padding, for further usage
 		BUTTON_BAR_PADDING_TB: 'var(--d9-button-bar-padding-tb, 8px)',

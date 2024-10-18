@@ -37,7 +37,8 @@ export const createAppThemeStyles = (): AppThemeStyle => {
 		logoColor3: 'rgb(222, 30, 14)',
 
 		workAreaBackground: 'var(--d9-background-color)',
-		pageBottomBarBackground: 'rgb(241,239,239)'
+		pageBottomBarBackground: 'rgb(241,239,239)',
+		fcCaptionColor: 'rgb(36,36,36)'
 	};
 	const createAppCssVars = (variables: typeof AppCssConstants) => {
 		return {
@@ -156,6 +157,8 @@ export const createAppThemeStyles = (): AppThemeStyle => {
 			// tabs
 			'tab-title-font-family': 'var(--app-tab-title-font-family, "Oswald")',
 			// caption
+			'fc-caption-color': `var(--app-fc-caption-color, ${variables.fcCaptionColor})`,
+			'fc-caption-font-weight': 'var(--app-fc-caption-font-weight, 300)',
 			'caption-not-available-font-family': 'var(--app-caption-not-available-font-family, "Oswald")',
 			'caption-not-available-font-size': 'var(--app-caption-not-available-font-size, 12px)',
 			// page, authentication
@@ -184,7 +187,8 @@ export const createAppThemeStyles = (): AppThemeStyle => {
 		sideMenuHeaderTextUnauthenticatedColor: 'rgb(255, 255, 255)',
 		sideMenuHeaderBottomBorderColor: 'rgb(38, 39, 47)',
 		workAreaBackground: 'rgb(15, 16, 20)',
-		pageBottomBarBackground: 'rgb(31,33,38)'
+		pageBottomBarBackground: 'rgb(31,33,38)',
+		fcCaptionColor: 'rgb(219,219,219)'
 	};
 	return {
 		light: createCss(createAppCssVars(AppCssConstants)),

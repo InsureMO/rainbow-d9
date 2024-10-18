@@ -1,8 +1,14 @@
-import {DropdownOptions, GlobalHandlers} from '@rainbow-d9/n2';
+import {NodeDef} from '@rainbow-d9/n1';
+import {DropdownOptions, GlobalHandlers, SectionDef} from '@rainbow-d9/n2';
 import {lazy} from 'react';
 import {AppPage, PageRegistrar} from '../../../global-settings';
 import {asT} from '../../../utils';
-import {PreloadedLazyPageWrapper, PreloadedPageProps, PreloaderFuncOptions} from '../../standard-widgets';
+import {
+	PreloadedLazyPageWrapper,
+	PreloadedPageProps,
+	PreloaderFuncOptions,
+	visitParsedUI
+} from '../../standard-widgets';
 import {SharedMarkdown, SharedServices} from '../shared';
 import {loadRegistrationData} from './services';
 import {RootModel} from './types';
@@ -11,8 +17,26 @@ import {markdown} from './ui-config.d9';
 const ClaimEvaluationIndex = PreloadedLazyPageWrapper(lazy(() => import('./page')), {
 	usePathParams: true,
 	ui: async (_options: PreloaderFuncOptions): Promise<string> => {
-		return markdown.replace('- Box::$$registration-base-section', SharedMarkdown.registrationBaseSection)
-			.replace('- Box::$$claim-base-section', SharedMarkdown.claimBaseSection.replace('## Section::', '#### Section::'));
+		return markdown
+			.replace('- Box::$$registration-base-section', SharedMarkdown.registrationBaseSection)
+			.replace('- Box::$$claim-base-section', SharedMarkdown.claimBaseSection.replace('## Section::', '#### Section::'))
+			.replace('- Box::$$additional-base-section', SharedMarkdown.additionalBaseSection.replace('## Section::', '#### Section::'))
+			.replace('- Box::$$claim-issue-table-section', SharedMarkdown.claimIssueTableSection.replace('## Section::', '#### Section::'))
+			.replace('- Box::$$query-letter-table-section', SharedMarkdown.queryLetterTableSection.replace('## Section::', '#### Section::'))
+			.replace('- Box::$$internal-query-table-section', SharedMarkdown.internalQueryTableSection.replace('## Section::', '#### Section::'))
+			.replace('- Box::$$escalation-table-section', SharedMarkdown.escalationTableSection.replace('## Section::', '#### Section::'))
+			.replace('- Box::$$investigation-table-section', SharedMarkdown.investigationTableSection.replace('## Section::', '#### Section::'));
+	},
+	manufactureParsedUI: async (_options: PreloaderFuncOptions) => {
+		return (parsed: NodeDef) => {
+			visitParsedUI(parsed, (node) => {
+				// make claim base section collapsible
+				if (asT<SectionDef>(node).title === 'claim.claim.title' && node.$pp === 'data.claim') {
+					asT<SectionDef>(node).collapsible = true;
+				}
+			});
+			return parsed;
+		};
 	},
 	/** initialize root model */
 	initRootModel: async (options: PreloaderFuncOptions) => {
@@ -79,7 +103,7 @@ const ClaimEvaluationIndex = PreloadedLazyPageWrapper(lazy(() => import('./page'
 			};
 		};
 	},
-	orderBy: [['ui', 'initRootModel'], ['assistantData']]
+	orderBy: [['ui', 'initRootModel'], ['assistantData', 'manufactureParsedUI']]
 });
 
 const ClaimEvaluationPage: AppPage = {

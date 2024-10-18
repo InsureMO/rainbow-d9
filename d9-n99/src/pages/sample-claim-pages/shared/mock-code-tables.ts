@@ -70,6 +70,7 @@ registerMockCodeTables({
 	],
 	policyStatus: [
 		{label: 'Active', value: 'active'},
+		{label: 'Inforce', value: 'inforce'},
 		{label: 'Expired', value: 'expired'},
 		{label: 'Lapsed', value: 'lapsed'},
 		{label: 'Surrendered', value: 'surrendered'}
@@ -92,5 +93,23 @@ registerMockCodeTables({
 		{label: 'Not Covered', value: 'notCovered'},
 		{label: 'Pre-existing Condition', value: 'preExisting'},
 		{label: 'Others', value: 'others'}
+	],
+	nationality: [
+		{label: 'Chinese', value: 'CHN'}
+	],
+	occupation: [
+		{label: 'Accountant', value: 'accountant'}
+	],
+	businessType: [
+		{label: 'NB', value: 'nb'},
+		{label: 'CS', value: 'cs'}
+	],
+	underwritingDecision: [
+		{label: 'Accepted', value: 'accepted'},
+		{label: 'Rejected', value: 'rejected'}
+	],
+	paymentFrequency: [
+		{label: 'Annual', value: 'annual'},
+		{label: 'Monthly', value: 'monthly'}
 	]
 });
