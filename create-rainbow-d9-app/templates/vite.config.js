@@ -57,6 +57,7 @@ export default ({mode}) => {
 		preview: {host: true, port: 3399, strictPort: true, open: '/'},
 		server: {host: true, port: 3399, strictPort: true, open: '/'},
 		base: '/n99/',
+		html: {cspNonce: 'VITE_NONCE'},
 		build: {
 			minify: false,
 			// sourcemap: true,
