@@ -104,14 +104,10 @@ const createFuncByScriptTag = (sync = true) => <R>(...args: Array<string>): R =>
 	}
 	renderNode.text = `{
 	window.$d9n3.$dynamicFuncs["${key}"] = () => {
-		const func = ${sync ? '' : 'async'} (${argNames.join(', ')}) => {
+		return ${sync ? '' : 'async'} (${argNames.join(', ')}) => {
 			// console.log('I am created by script tag and is ${sync ? 'sync' : 'async'}.');
 			${body}
 		};
-		func.$finalize = () => {
-			delete window.$d9n3.$dynamicFuncs["${key}"];
-		}
-		return func;
 	}
 	// console.log($d9n3.$dynamicFuncs["${key}"]);
 }
@@ -121,7 +117,9 @@ const createFuncByScriptTag = (sync = true) => <R>(...args: Array<string>): R =>
 	document.head.appendChild(renderNode).parentNode.removeChild(renderNode);
 	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 	// @ts-ignore
-	return $d9n3.$dynamicFuncs[key]();
+	const func = $d9n3.$dynamicFuncs[key]();
+	delete $d9n3.$dynamicFuncs[key];
+	return func;
 };
 
 // eslint-disable-next-line @typescript-eslint/ban-types

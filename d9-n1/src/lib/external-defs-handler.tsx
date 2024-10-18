@@ -3,10 +3,6 @@ import {RootEventBus, useRootEventBus} from './events';
 import {ExternalDefKeys, ExternalDefs, ExternalDefsHandlerOptions} from './types';
 import {MUtils, VUtils} from './utils';
 
-export interface PlainExternalDefIndicator {
-	$keys: ExternalDefKeys;
-}
-
 export class ExternalDefIndicator {
 	private readonly _keys: ExternalDefKeys;
 
