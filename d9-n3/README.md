@@ -873,9 +873,11 @@ Strictly adhere to the heading parsing rules without any additional attribute de
 - Default Wrapped by Form Cell: `false`,
 - Default Grid Column Span: `12`.
 
-| Attribute Name | Type | Description                                   |
-|----------------|------|-----------------------------------------------|
-| label, title   | text | `- Section::Customer`<br/>`- title: Customer` |
+| Attribute Name | Type    | Description                                               |
+|----------------|---------|-----------------------------------------------------------|
+| label, title   | text    | `- Section::Customer`<br/>`- title: Customer`             |
+| collapsible    | boolean | Default `false`.                                          |
+| collapsed      | boolean | Default `false`, only works when `collapsible` is `true`. |
 
 > `label` and `title` attribute follows the `label` default parsing behavior.
 

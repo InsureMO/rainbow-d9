@@ -3,6 +3,7 @@ import React, {ForwardedRef, forwardRef, ReactNode, useEffect, useRef, useState}
 import styled from 'styled-components';
 import {CssVars, DOM_ID_WIDGET, DOM_KEY_WIDGET} from './constants';
 import {GlobalEventPrefix, GlobalEventTypes, useCustomGlobalEvent, useGlobalEventBus} from './global';
+import {notInMe} from './hooks';
 import {ArrowDown} from './icons';
 import {LabelLike} from './label-like';
 import {OmitHTMLProps2, OmitNodeDef} from './types';
@@ -11,6 +12,7 @@ import {OmitHTMLProps2, OmitNodeDef} from './types';
 export type SectionDef = ContainerDef & OmitHTMLProps2<HTMLDivElement, 'title'> & {
 	title?: ReactNode | NodeDef;
 	collapsible?: boolean;
+	collapsed?: boolean;
 	/** use on identify itself when event fired */
 	marker?: string;
 };
@@ -125,14 +127,16 @@ export const Section = forwardRef((props: SectionProps, ref: ForwardedRef<HTMLDi
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	const {
 		$wrapped,
-		title, collapsible, marker,
+		title, collapsible, collapsed = false, marker,
 		children, ...rest
 	} = props;
 	const {$p2r, $avs: {$disabled, $visible}} = $wrapped;
 
-	const {on: onGlobal, off: offGlobal} = useGlobalEventBus();
+	const headerRef = useRef<HTMLDivElement>(null);
 	const firstRound = useRef(true);
-	const [expanded, setExpanded] = useState(true);
+	const {on: onGlobal, off: offGlobal} = useGlobalEventBus();
+	// collapsible is false or collapsed is false, then expanded is true
+	const [expanded, setExpanded] = useState(collapsible !== true || !collapsed);
 	const fireCustomEvent = useCustomGlobalEvent();
 	useEffect(() => {
 		const onCustomEvent = (_: string, prefix: string, clipped: string) => {
@@ -169,8 +173,11 @@ export const Section = forwardRef((props: SectionProps, ref: ForwardedRef<HTMLDi
 		setExpanded(!expanded);
 	};
 	const onHeaderClicked = () => {
-		if (!expanded) {
-			setExpanded(true);
+		if (!expanded && headerRef.current != null) {
+			const focused = document.activeElement;
+			if (focused == null || notInMe(headerRef.current, focused)) {
+				setExpanded(true);
+			}
 		}
 	};
 
@@ -178,7 +185,7 @@ export const Section = forwardRef((props: SectionProps, ref: ForwardedRef<HTMLDi
 	                 id={PPUtils.asId(PPUtils.absolute($p2r, props.$pp), props.id)}
 	                 ref={ref}>
 		{title != null
-			? <ASectionHeader data-expanded={expanded} onClick={onHeaderClicked}>
+			? <ASectionHeader data-expanded={expanded} onClick={onHeaderClicked} ref={headerRef}>
 				<ASectionTitle>
 					<LabelLike label={title} $wrapped={$wrapped} $validationScopes={props}/>
 				</ASectionTitle>

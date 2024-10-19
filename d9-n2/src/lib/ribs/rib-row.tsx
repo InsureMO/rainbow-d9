@@ -1,6 +1,7 @@
 import {EnhancedPropsForArrayElement, ObjectPropValue} from '@rainbow-d9/n1';
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {GlobalEventPrefix, GlobalEventTypes, useGlobalEventBus} from '../global';
+import {notInMe} from '../hooks';
 import {LabelLike} from '../label-like';
 import {RibRowOperators} from './rib-row-operators';
 import {RibsProps} from './types';
@@ -17,6 +18,7 @@ export const RibRow = (props: Omit<RibsProps, '$array'> & { $array: EnhancedProp
 		children
 	} = props;
 
+	const headerRef = useRef<HTMLDivElement>(null);
 	const {on: onGlobal, off: offGlobal} = useGlobalEventBus();
 	const [expanded, setExpanded] = useState(() => {
 		if (initExpanded) {
@@ -48,13 +50,17 @@ export const RibRow = (props: Omit<RibsProps, '$array'> & { $array: EnhancedProp
 	const expand = () => setExpanded(true);
 	const collapse = () => setExpanded(false);
 	const onRowClicked = () => {
-		if (!expanded) {
-			setExpanded(true);
+		if (!expanded && headerRef.current != null) {
+			const focused = document.activeElement;
+			if (focused == null || notInMe(headerRef.current, focused)) {
+				setExpanded(true);
+			}
 		}
 	};
 
 	return <ARibRow>
-		<ARibRowHeader data-expanded={expanded} data-show-row-index={showRowIndex} onClick={onRowClicked}>
+		<ARibRowHeader data-expanded={expanded} data-show-row-index={showRowIndex} onClick={onRowClicked}
+		               ref={headerRef}>
 			<ARibRowIndex># {elementIndex + 1}</ARibRowIndex>
 			<ARibRowHeaderContent>
 				<LabelLike label={caption} $wrapped={$wrapped} $validationScopes={props}/>
