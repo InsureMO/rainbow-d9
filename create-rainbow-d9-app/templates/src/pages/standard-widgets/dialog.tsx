@@ -1,6 +1,7 @@
 import {DOM_KEY_WIDGET} from '@rainbow-d9/n2';
 import {CSSProperties} from 'react';
 import styled from 'styled-components';
+import {isEmptyFCErrorCollapsed} from '../../utils';
 
 export const LargestDialogStyles: CSSProperties = {
 	marginTop: 'calc((100vh - var(--app-dialog-largest-height)) / 2 - 2vh)',
@@ -45,9 +46,9 @@ export const LayoutControllerWithLastTextarea = (props: { rows: number }) => {
 };
 
 // noinspection CssUnresolvedCustomProperty
-const LayoutControllerForCriteriaAndTable = styled.div.attrs<{ criteriaRows: number }>(
+const LayoutControllerForCriteriaAndTable = styled.div.attrs<{ criteriaRows: number; dense: boolean }>(
 	{[DOM_KEY_WIDGET]: 'dialog-layout-controller'}
-)<{ criteriaRows: number }>`
+)<{ criteriaRows: number; dense: boolean }>`
     display: none;
 
     + div[data-w=page-standard-wrapper] {
@@ -61,7 +62,7 @@ const LayoutControllerForCriteriaAndTable = styled.div.attrs<{ criteriaRows: num
             - var(--d9-section-header-height)
             - var(--d9-section-body-padding) * 2
             - var(--d9-input-height) * 2 * ${({criteriaRows}) => criteriaRows}
-            - var(--d9-form-cell-invalid-message-padding) * 2 * ${({criteriaRows}) => criteriaRows}
+            - ${({dense}) => dense ? 'var(--d9-form-cell-invalid-message-padding) * 2' : 'var(--d9-form-cell-invalid-message-height)'} * ${({criteriaRows}) => criteriaRows}
             - var(--d9-button-bar-height)
             - var(--app-page-next-to-search-margin)
             - var(--d9-table-footer-height)
@@ -74,5 +75,5 @@ const LayoutControllerForCriteriaAndTable = styled.div.attrs<{ criteriaRows: num
  * criteria section with title and search button bar, and result table
  */
 export const LayoutControllerWithCriteriaAndTable = (props: { criteriaRows: number }) => {
-	return <LayoutControllerForCriteriaAndTable criteriaRows={props.criteriaRows}/>;
+	return <LayoutControllerForCriteriaAndTable criteriaRows={props.criteriaRows} dense={isEmptyFCErrorCollapsed()}/>;
 };
