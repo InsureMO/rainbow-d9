@@ -2,16 +2,14 @@ import {BaseModel, PropValue, RootEventTypes} from '@rainbow-d9/n1';
 import {
 	ButtonClickOptions,
 	ButtonInk,
-	DOM_KEY_WIDGET,
 	GlobalHandlers,
 	IntlLabel,
 	UnwrappedButton,
 	UnwrappedButtonBar
 } from '@rainbow-d9/n2';
 import {useRef} from 'react';
-import styled from 'styled-components';
 import {asT} from '../../../../utils';
-import {D9Dialog, LargestDialogStyles} from '../../../standard-widgets';
+import {D9Dialog, LargestDialogStyles, LayoutControllerWithCriteriaAndTable} from '../../../standard-widgets';
 import {Claim} from '../../shared';
 import {createExternalDefsCreator, RegisterAction} from './external-defs';
 import InitRootModel from './init-root.json';
@@ -35,21 +33,6 @@ const ClaimRegistrationFindInsuredDialog = (props: { register: RegisterAction })
 	                 externalDefs={externalDefs}/>;
 };
 
-// 178px is height of search section
-// noinspection CssUnresolvedCustomProperty
-const LayoutController = styled.div.attrs({[DOM_KEY_WIDGET]: 'dialog-layout-controller'})`
-    display: none;
-
-    + div[data-w=page-standard-wrapper] > div[data-w=d9-page] > div[data-w=d9-table] > div[data-w=d9-table-content] {
-        max-height: calc(var(--app-dialog-largest-height)
-        - var(--d9-dialog-padding-top)
-        - 178px
-        - var(--app-page-next-to-search-margin)
-        - var(--d9-table-footer-height)
-        - var(--d9-input-height) - var(--d9-button-bar-padding-tb) * 2
-        - var(--d9-dialog-padding-bottom));
-    }
-`;
 type FoundInsured = Parameters<Parameters<typeof ClaimRegistrationFindInsuredDialog>[0]['register']>[0];
 const findInsured = async (globalHandlers: GlobalHandlers, onSelect: (found: FoundInsured) => Promise<void>): Promise<void> => {
 	const onCancelClick = () => {
@@ -61,7 +44,7 @@ const findInsured = async (globalHandlers: GlobalHandlers, onSelect: (found: Fou
 	};
 	// do change insured
 	globalHandlers.dialog.show(<>
-		<LayoutController/>
+		<LayoutControllerWithCriteriaAndTable criteriaRows={1}/>
 		<ClaimRegistrationFindInsuredDialog register={onRegister}/>
 		<UnwrappedButtonBar>
 			<UnwrappedButton ink={ButtonInk.WAIVE} onClick={onCancelClick}>

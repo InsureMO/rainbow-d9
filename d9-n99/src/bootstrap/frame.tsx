@@ -2,15 +2,35 @@ import {DOM_KEY_WIDGET} from '@rainbow-d9/n2';
 import styled from 'styled-components';
 import {Banner} from '../header';
 import {SideMenu} from '../left-side';
+import {isEmptyFCErrorCollapsed} from '../utils';
 import {WorkArea} from '../work-area';
 import {AppFrameLayoutController} from './layout-controller';
 
 // noinspection CssUnresolvedCustomProperty,CssNoGenericFontName
-const Container = styled.div.attrs({[DOM_KEY_WIDGET]: 'app-frame', id: 'app-frame'})`
+const Container = styled.div.attrs({
+	[DOM_KEY_WIDGET]: 'app-frame',
+	id: 'app-frame',
+	'data-collapse-fc-empty-error': isEmptyFCErrorCollapsed()
+})`
     display: block;
     position: relative;
     min-width: 100vw;
     min-height: 100vh;
+
+    &[data-collapse-fc-empty-error=true] {
+        div[data-w=d9-form-cell-invalid-msg]:empty {
+            height: 0;
+            min-height: 0;
+            // padding still exists
+            // padding: 0;
+        }
+
+        div[data-w=d9-button-bar] {
+            &[data-narrow-up-in-search] {
+                margin-top: 0;
+            }
+        }
+    }
 
     div[data-w=d9-page] {
         &[data-fix-bottom-button-bar] {

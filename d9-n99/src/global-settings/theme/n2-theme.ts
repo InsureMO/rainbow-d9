@@ -54,6 +54,7 @@ export const createN2ThemeStyles = (): AppThemeStyle => {
 		TABLE_HEADER_BORDER: 'var(--d9-table-header-border, var(--d9-border))',
 		// add definitions for button bar padding, for further usage
 		BUTTON_BAR_PADDING_TB: 'var(--d9-button-bar-padding-tb, 8px)',
+		BUTTON_BAR_HEIGHT: 'var(--d9-button-bar-height, calc(var(--d9-input-height) + var(--d9-button-bar-padding-tb) * 2))',
 		// add definitions for dialog padding, for further usage
 		DIALOG_PADDING_TOP: 'var(--d9-dialog-padding-top, 32px)',
 		DIALOG_PADDING_LR: 'var(--d9-dialog-padding-lr, 32px)',

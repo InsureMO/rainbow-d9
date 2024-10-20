@@ -1,16 +1,13 @@
-import {
-	ButtonInk,
-	DOM_KEY_WIDGET,
-	GlobalHandlers,
-	IntlLabel,
-	UnwrappedButton,
-	UnwrappedButtonBar
-} from '@rainbow-d9/n2';
+import {ButtonInk, GlobalHandlers, IntlLabel, UnwrappedButton, UnwrappedButtonBar} from '@rainbow-d9/n2';
 import dayjs from 'dayjs';
 import {useRef} from 'react';
-import styled from 'styled-components';
 import {asT, getAuthentication} from '../../../../utils';
-import {D9Dialog, LargestDialogStyles, validateDialog} from '../../../standard-widgets';
+import {
+	D9Dialog,
+	LargestDialogStyles,
+	LayoutControllerWithLastTextarea,
+	validateDialog
+} from '../../../standard-widgets';
 import {Claim} from '../index';
 import {markdown} from './ui-config.d9';
 
@@ -25,21 +22,6 @@ export const AddClaimIssueDialog = (props: { data: Claim.ClaimIssue }) => {
 	                 externalDefs={externalDefs}/>;
 };
 
-// 86px is height of title part
-// noinspection CssUnresolvedCustomProperty
-const LayoutController = styled.div.attrs({[DOM_KEY_WIDGET]: 'dialog-layout-controller'})`
-    display: none;
-
-    + div[data-w=page-standard-wrapper] > div[data-w=d9-page] textarea[data-w=d9-textarea] {
-        height: calc(var(--app-dialog-largest-height)
-        - var(--d9-dialog-padding-top)
-        - var(--d9-section-header-height) - var(--d9-section-body-padding)
-        - 86px
-        - var(--d9-table-footer-height)
-        - var(--d9-input-height) - var(--d9-button-bar-padding-tb) * 2
-        - var(--d9-dialog-padding-bottom));
-    }
-`;
 export const createClaimIssue = async (globalHandlers: GlobalHandlers, onCreated: (issue: Claim.ClaimIssue) => Promise<void>): Promise<void> => {
 	const data: Claim.ClaimIssue = {
 		// should use the store format here,
@@ -63,9 +45,9 @@ export const createClaimIssue = async (globalHandlers: GlobalHandlers, onCreated
 	const onCancelClick = () => {
 		globalHandlers.dialog.hide();
 	};
-	// do change insured
+	// do add claim issue
 	globalHandlers.dialog.show(<>
-		<LayoutController/>
+		<LayoutControllerWithLastTextarea rows={2}/>
 		<AddClaimIssueDialog data={data}/>
 		<UnwrappedButtonBar>
 			<UnwrappedButton onClick={onConfirmClick}>

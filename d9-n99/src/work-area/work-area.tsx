@@ -18,7 +18,6 @@ const Container = styled.div.attrs({[DOM_KEY_WIDGET]: 'app-work-area'})`
     > div[data-w=dialog] > div[data-w=dialog-wrapper] {
         > div[data-w=page-standard-wrapper] {
             padding: 0;
-            min-height: calc(100% - var(--d9-input-height) - var(--d9-button-bar-padding-tb) * 2);
         }
     }
 `;

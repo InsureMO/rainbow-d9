@@ -19,6 +19,8 @@ export const isI18NSwitcherEnabled = () => isI18NEnabled() && import.meta.env.VI
 export const isUserProfileEnabled = () => import.meta.env.VITE_DISABLE_USER_PROFILE !== 'true';
 export const isSideMenuBodyEnabledOnAuthOnly = () => import.meta.env.VITE_SIDE_MENU_BODY_ENABLED_ON_AUTH_ONLY !== 'false';
 export const isBannerSpaceGrabberEnabled = () => import.meta.env.VITE_USE_BANNER_SPACE_GRABBER !== 'false';
+// styles
+export const isEmptyFCErrorCollapsed = () => import.meta.env.VITE_EMPTY_FC_ERROR_COLLAPSED === 'true';
 // routes
 export const getBaseContext = (): string | undefined => import.meta.env.BASE_URL || (void 0);
 export const getHomeRoute = (): string => import.meta.env.VITE_HOME_PAGE || '/home';

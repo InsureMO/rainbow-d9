@@ -133,7 +133,7 @@ export const createAppThemeStyles = (): AppThemeStyle => {
 			'page-padding': 'var(--app-page-padding, var(--app-page-padding-top) var(--app-page-padding-lr) var(--app-page-padding-bottom))',
 			'page-next-to-banner-margin': 'var(--app-page-next-to-banner-margin, 16px)',
 			'page-narrow-up-in-search-margin': 'var(--app-page-narrow-up-in-search-margin, -16px)',
-			'page-next-to-search-margin': 'var(--app-page-next-to-search-margin, 16px)',
+			'page-next-to-search-margin': 'var(--app-page-next-to-search-margin, 8px)',
 			'page-fix-title-box-margin': 'var(--app-page-fix-title-box-margin, -8px 0 0 calc(-1 * var(--app-page-padding-lr)))',
 			'page-fix-title-box-padding': 'var(--app-page-fix-title-box-padding, 8px 0 0 var(--app-page-padding-lr))',
 			'page-fix-title-box-height': 'var(--app-page-fix-title-box-height, 56px)',

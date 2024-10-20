@@ -1,7 +1,6 @@
 import {
 	ButtonInk,
 	CalendarUtils,
-	DOM_KEY_WIDGET,
 	DropdownOptions,
 	GlobalHandlers,
 	IntlLabel,
@@ -10,9 +9,13 @@ import {
 } from '@rainbow-d9/n2';
 import dayjs from 'dayjs';
 import {useRef} from 'react';
-import styled from 'styled-components';
 import {asT, getAuthentication} from '../../../../utils';
-import {D9Dialog, LargestDialogStyles, validateDialog} from '../../../standard-widgets';
+import {
+	D9Dialog,
+	LargestDialogStyles,
+	LayoutControllerWithLastTextarea,
+	validateDialog
+} from '../../../standard-widgets';
 import {Claim} from '../index';
 import {markdown} from './ui-config.d9';
 
@@ -29,21 +32,6 @@ export const AddInvestigationDialog = (props: { data: Claim.Investigation, inves
 	                 externalDefs={externalDefs}/>;
 };
 
-// 172px is height of escalated to and title part
-// noinspection CssUnresolvedCustomProperty
-const LayoutController = styled.div.attrs({[DOM_KEY_WIDGET]: 'dialog-layout-controller'})`
-    display: none;
-
-    + div[data-w=page-standard-wrapper] > div[data-w=d9-page] textarea[data-w=d9-textarea] {
-        height: calc(var(--app-dialog-largest-height)
-        - var(--d9-dialog-padding-top)
-        - var(--d9-section-header-height) - var(--d9-section-body-padding)
-        - 172px
-        - var(--d9-table-footer-height)
-        - var(--d9-input-height) - var(--d9-button-bar-padding-tb) * 2
-        - var(--d9-dialog-padding-bottom));
-    }
-`;
 export const createInvestigation = async (
 	globalHandlers: GlobalHandlers,
 	investigators: DropdownOptions,
@@ -71,9 +59,9 @@ export const createInvestigation = async (
 	const onCancelClick = () => {
 		globalHandlers.dialog.hide();
 	};
-	// do change insured
+	// do add investigation
 	globalHandlers.dialog.show(<>
-		<LayoutController/>
+		<LayoutControllerWithLastTextarea rows={3}/>
 		<AddInvestigationDialog data={data} investigators={investigators}/>
 		<UnwrappedButtonBar>
 			<UnwrappedButton onClick={onConfirmClick}>
