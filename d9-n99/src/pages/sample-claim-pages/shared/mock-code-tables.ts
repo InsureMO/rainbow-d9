@@ -118,5 +118,11 @@ registerMockCodeTables({
 	paymentFrequency: [
 		{label: 'Annual', value: 'annual'},
 		{label: 'Monthly', value: 'monthly'}
+	],
+	paymentMethod: [
+		{label: 'Cash', value: 'cash'}
+	],
+	paymentType: [
+		{label: 'Lumpsum', value: 'lumpsum'}
 	]
 });

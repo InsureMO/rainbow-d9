@@ -209,7 +209,18 @@ export const enUSIntlLabels = {
 			'total-disbursement-amount': 'Total Policy Disbursement Amount:'
 		},
 		'disbursement-plan': {
-			title: 'Disbursement Plan'
+			title: 'Disbursement Plan',
+			policy: {title: 'Policy No.:'},
+			payment: {
+				payee: 'Payee', relationship: 'Relationship',
+				'payment-method': 'Payment Method', 'product-code': 'Product', 'payment-type': 'Type',
+				percentage: 'Percentage', 'disbursement-amount': 'Disbursement Amount',
+				'interest-amount': 'Interest', 'payment-amount-on-payment-currency': 'Payment Amount (Pay Currency)',
+				'payment-amount-on-policy-currency': 'Payment Amount (Policy Currency)',
+				pending: 'Pending'
+			},
+			'total-disbursement-amount': 'Total Policy Disbursement Amount:',
+			'total-adjustment-amount': 'Adjustment Amount:'
 		},
 		'internal-external-query': {
 			title: 'Internal and External Query'

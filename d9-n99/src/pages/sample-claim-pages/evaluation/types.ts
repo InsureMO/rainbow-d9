@@ -20,6 +20,7 @@ export interface Data {
 	investigations: Claim.Investigations;
 	underwritingByClaimList: Claim.UnderwritingByClaimList;
 	assessment: Claim.Assessment;
+	disbursementPlan: Claim.DisbursementPlan;
 }
 
 export interface RootModel {

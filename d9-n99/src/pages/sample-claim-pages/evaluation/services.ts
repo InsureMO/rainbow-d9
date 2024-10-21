@@ -115,6 +115,21 @@ const mockDoLoadMockRegistrationData = async (_keyOrRegistrationId: string): Pro
 					actualPaymentCurrency: 'SGD', actualPaymentAmount: 1000
 				}]
 			}]
+		},
+		disbursementPlan: {
+			policies: [{
+				policyNo: 'K000017187', totalDisbursementCurrency: 'SGD', totalDisbursementAmount: 25000,
+				totalAdjustmentCurrency: 'SGD', totalAdjustmentAmount: 0,
+				paymentPlans: [{
+					payee: 'Jackie Su', relationship: 'spouse', idNo: 'A123456789',
+					paymentMethod: 'cash', productCode: 'GEMA01', paymentType: 'lumpsum',
+					percentage: 50, disbursementAmountCurrency: 'SGD', disbursementAmount: 200000,
+					interestAmountCurrency: 'SGD', interestAmount: 200000,
+					paymentAmountOnPaymentCurrency: 'SGD', paymentAmountOnPayment: 200000,
+					paymentAmountOnPolicyCurrency: 'SGD', paymentAmountOnPolicy: 200000,
+					pending: false
+				}]
+			}]
 		}
 	};
 };

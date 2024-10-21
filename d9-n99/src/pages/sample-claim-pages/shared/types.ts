@@ -398,10 +398,42 @@ export namespace Claim {
 		totalDisbursementCurrency?: string;
 		totalDisbursementAmount?: number;
 		products?: Array<AssessmentPolicyProduct>;
-		adjustmentItems: Array<AssessmentPolicyAdjustmentItem>;
+		adjustmentItems?: Array<AssessmentPolicyAdjustmentItem>;
 	}
 
 	export interface Assessment {
 		policies?: Array<AssessmentPolicy>;
+	}
+
+	export interface DisbursementPlanPolicyPaymentPlan {
+		payee?: string;
+		relationship?: string;
+		idNo?: string;
+		paymentMethod?: string;
+		productCode?: string;
+		paymentType?: string;
+		percentage?: number;
+		disbursementAmountCurrency?: string;
+		disbursementAmount?: number;
+		interestAmountCurrency?: string;
+		interestAmount?: number;
+		paymentAmountOnPaymentCurrency?: string;
+		paymentAmountOnPayment?: number;
+		paymentAmountOnPolicyCurrency?: string;
+		paymentAmountOnPolicy?: number;
+		pending?: boolean;
+	}
+
+	export interface DisbursementPlanPolicy {
+		policyNo?: string;
+		totalDisbursementCurrency?: string;
+		totalDisbursementAmount?: number;
+		totalAdjustmentCurrency?: string;
+		totalAdjustmentAmount?: number;
+		paymentPlans?: Array<DisbursementPlanPolicyPaymentPlan>;
+	}
+
+	export interface DisbursementPlan {
+		policies?: Array<DisbursementPlanPolicy>;
 	}
 }
