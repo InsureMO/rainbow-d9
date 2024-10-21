@@ -85,7 +85,8 @@ registerMockCodeTables({
 		{label: 'CNY', value: 'CNY'},
 		{label: 'HKD', value: 'HKD'},
 		{label: 'JPY', value: 'JPY'},
-		{label: 'USD', value: 'USD'}
+		{label: 'USD', value: 'USD'},
+		{label: 'SGD', value: 'SGD'}
 	],
 	yesNo: [
 		{label: 'Yes', value: true},

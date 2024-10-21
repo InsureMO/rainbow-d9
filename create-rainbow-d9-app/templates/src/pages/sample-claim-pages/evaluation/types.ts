@@ -19,6 +19,7 @@ export interface Data {
 	escalations: Claim.Escalations;
 	investigations: Claim.Investigations;
 	underwritingByClaimList: Claim.UnderwritingByClaimList;
+	assessment: Claim.Assessment;
 }
 
 export interface RootModel {

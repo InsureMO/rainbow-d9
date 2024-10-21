@@ -89,7 +89,33 @@ const mockDoLoadMockRegistrationData = async (_keyOrRegistrationId: string): Pro
 			submittedBy: SharedServices.Users.David.userId, submittedAt: '14/01/2024',
 			repliedBy: SharedServices.Users.Sally.userId, repliedAt: '14/01/2024',
 			status: 'replied'
-		}]
+		}],
+		assessment: {
+			policies: [{
+				policyNo: 'K000017187', totalDisbursementCurrency: 'SGD', totalDisbursementAmount: 24116,
+				products: [
+					{
+						code: 'GEMA01', name: 'COMPREHENSIVE CARE', claimDecision: 'Admit', claimDecisionReason: '',
+						inForce: false, premiumWaive: false, waiveStartDate: '',
+						totalPaymentCurrency: 'SGD', totalPaymentAmount: 24016,
+						items: [{
+							name: 'Death', paymentCurrency: 'SGD', paymentAmount: 200000,
+							actualPaymentCurrency: 'SGD', actualPaymentAmount: 200000
+						}, {
+							name: 'Deductions(-)', paymentCurrency: 'SGD', paymentAmount: 1000,
+							actualPaymentCurrency: 'SGD', actualPaymentAmount: 1000
+						}, {
+							name: 'Reversionary Bonus', paymentCurrency: 'SGD', paymentAmount: 5016,
+							actualPaymentCurrency: 'SGD', actualPaymentAmount: 5016
+						}]
+					}
+				],
+				adjustmentItems: [{
+					name: 'Refund Premium', evaluationPaymentCurrency: 'SGD', evaluationPaymentAmount: 1000,
+					actualPaymentCurrency: 'SGD', actualPaymentAmount: 1000
+				}]
+			}]
+		}
 	};
 };
 

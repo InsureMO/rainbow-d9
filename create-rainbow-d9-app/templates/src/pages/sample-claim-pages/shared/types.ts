@@ -363,4 +363,45 @@ export namespace Claim {
 		underwritingHistory?: Array<LifeAssuredUnderwritingHistory>;
 		policies?: Array<LifeAssuredPolicy>;
 	}
+
+	export interface AssessmentPolicyProductItem {
+		name?: string;
+		paymentCurrency?: string;
+		paymentAmount?: number;
+		actualPaymentCurrency?: string;
+		actualPaymentAmount?: number;
+	}
+
+	export interface AssessmentPolicyProduct {
+		code?: string;
+		name?: string;
+		claimDecision?: string;
+		claimDecisionReason?: string;
+		inForce?: boolean;
+		premiumWaive?: boolean;
+		waiveStartDate?: string;
+		totalPaymentCurrency?: string;
+		totalPaymentAmount?: number;
+		items?: Array<AssessmentPolicyProductItem>;
+	}
+
+	export interface AssessmentPolicyAdjustmentItem {
+		name?: string;
+		evaluationPaymentCurrency?: string;
+		evaluationPaymentAmount?: number;
+		actualPaymentCurrency?: string;
+		actualPaymentAmount?: number;
+	}
+
+	export interface AssessmentPolicy {
+		policyNo?: string;
+		totalDisbursementCurrency?: string;
+		totalDisbursementAmount?: number;
+		products?: Array<AssessmentPolicyProduct>;
+		adjustmentItems: Array<AssessmentPolicyAdjustmentItem>;
+	}
+
+	export interface Assessment {
+		policies?: Array<AssessmentPolicy>;
+	}
 }

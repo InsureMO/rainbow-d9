@@ -190,7 +190,23 @@ export const zhCNIntlLabels = {
 			}
 		},
 		assessment: {
-			title: '评估信息'
+			title: '评估信息',
+			policy: {
+				title: '保单号:',
+				product: {
+					name: '产品',
+					'claim-decision': '理赔决定', 'claim-decision-reason': '理赔决定理由',
+					'in-force': '生效?',
+					'premium-waive': '保费豁免?', 'waive-start-date': '豁免起期',
+					'total-payment-amount': '产品支付总金额',
+					'item-name': '责任 / 调整项', 'item-payment': '申请 / 发生金额',
+					'item-actual-payment': '实际支付金额',
+					'adjustment-item-name': '调整项',
+					'adjustment-item-evaluation-payment': '评估金额',
+					'adjustment-item-actual-payment': '实际支付金额'
+				}
+			},
+			'total-disbursement-amount': '已支付总金额:'
 		},
 		'disbursement-plan': {
 			title: '支付计划'

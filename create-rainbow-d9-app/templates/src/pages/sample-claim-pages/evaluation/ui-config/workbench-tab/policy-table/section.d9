@@ -11,7 +11,7 @@
 	- Caption::claim.claim-workbench.policy.title
 	- Label::::policyNo
 		- data-as-link
-		- click: @ext.decision.policy.view.click
+		- click: @ext.policies.policy.view.click
 - Input::claim.claim-workbench.policy.proposal-date::proposalDate
 	- disabled
 - Input::claim.claim-workbench.policy.issue-date::issueDate

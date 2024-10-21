@@ -35,15 +35,27 @@ export const createExternalDefsCreator = (rootModelRef: MutableRefObject<any>, a
 			escalation: createEscalationTableSectionActions({globalHandlers, rootModelRef, assistantData}),
 			investigation: createInvestigationTableSectionActions({globalHandlers, rootModelRef, assistantData}),
 			'underwriting-by-claim': createUnderwritingByClaimTableSectionActions({globalHandlers, rootModelRef}),
-			decision: {
+			policies: {
 				policy: {
 					view: {
 						click: async (options: CaptionClickOptions<BaseModel, PropValue>) => {
-							alert(`Policy[${asT<Claim.AcceptanceOnPolicy>(options.model).policyNo}] link clicked.`);
+							alert(`Policy[${asT<Claim.LifeAssuredPolicy>(options.model).policyNo}] link clicked.`);
 						}
 					},
 					product: {
-						getElementKey: (_element: Claim.AcceptanceOnPolicyProduct, index: number) => `item-${index}`
+						getElementKey: (_element: Claim.LifeAssuredPolicyProduct, index: number) => `item-${index}`
+					}
+				}
+			},
+			assessment: {
+				policy: {
+					view: {
+						click: async (options: CaptionClickOptions<BaseModel, PropValue>) => {
+							alert(`Policy[${asT<Claim.AssessmentPolicy>(options.model).policyNo}] link clicked.`);
+						}
+					},
+					product: {
+						getElementKey: (_element: Claim.AssessmentPolicyProduct, index: number) => `item-${index}`
 					}
 				}
 			},

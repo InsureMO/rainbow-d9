@@ -252,6 +252,11 @@ const Container = styled.div.attrs({
         &[data-as-label][data-disabled=true] {
             border: 0;
             background-color: transparent;
+            width: unset;
+
+            &[data-omit-padding] {
+                padding: 0;
+            }
 
             &:hover, &:focus-within {
                 box-shadow: none;
@@ -324,6 +329,12 @@ const Container = styled.div.attrs({
             }
         }
 
+        &[data-omit-expand-area-padding] {
+            div[data-w=d9-table-row-expand-area] {
+                padding: 0;
+            }
+        }
+
         //&[data-operators-hover-only] {
         //    div[data-w=d9-table-row-operators] > button {
         //        pointer-events: none;
@@ -367,10 +378,17 @@ const Container = styled.div.attrs({
             }
         }
 
+        div[data-w=d9-table-row-expand-area] {
+            > div[data-w=d9-table] > div[data-w=d9-table-content] {
+                border-bottom: 0;
+            }
+        }
+
         div[data-w=d9-dropdown] {
             &[data-as-label][disabled],
             &[data-as-label][data-disabled=true] {
                 height: var(--d9-input-height);
+                width: unset;
             }
         }
 

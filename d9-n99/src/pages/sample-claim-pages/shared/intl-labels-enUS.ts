@@ -190,7 +190,23 @@ export const enUSIntlLabels = {
 			}
 		},
 		assessment: {
-			title: 'Assessment Information'
+			title: 'Assessment Information',
+			policy: {
+				title: 'Policy No.:',
+				product: {
+					name: 'Product Name',
+					'claim-decision': 'Claim Decision', 'claim-decision-reason': 'Decision Reason',
+					'in-force': 'In Force',
+					'premium-waive': 'Premium Waive', 'waive-start-date': 'Waive Start Date',
+					'total-payment-amount': 'Total Product Payment Amount',
+					'item-name': 'Liability / Adjustment Items', 'item-payment': 'Claimable / Incurred Payment',
+					'item-actual-payment': 'Actual Payment',
+					'adjustment-item-name': 'Policy Adjustment Item',
+					'adjustment-item-evaluation-payment': 'Evaluation Payment',
+					'adjustment-item-actual-payment': 'Actual Payment'
+				}
+			},
+			'total-disbursement-amount': 'Total Policy Disbursement Amount:'
 		},
 		'disbursement-plan': {
 			title: 'Disbursement Plan'

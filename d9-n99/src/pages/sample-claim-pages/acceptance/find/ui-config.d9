@@ -45,7 +45,7 @@
 - Label::::registrationNo
 - Label::::policyNo
 - Dropdown::::status
-	- data-as-label, disabled
+	- disabled, data-as-label
 	- options: @ext.codes.registrationStatus
 - RowOperators::
 	- Button::
