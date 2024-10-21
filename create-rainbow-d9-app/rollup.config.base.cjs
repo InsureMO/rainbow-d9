@@ -31,7 +31,7 @@ exports.buildConfig = (lint) => {
 					{src: '../d9-n99/tsconfig.json', dest: 'templates'},
 					{src: '../d9-n99/vite.config.js', dest: 'templates'},
 					{src: '../d9-n99/README.md', dest: 'templates'}
-				], hook: 'buildEnd'
+				], hook: 'writeBundle'
 			})
 		].filter(x => x != null),
 		external(id) {
