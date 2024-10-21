@@ -209,10 +209,24 @@ export const zhCNIntlLabels = {
 			'total-disbursement-amount': '已支付总金额:'
 		},
 		'disbursement-plan': {
-			title: '支付计划'
+			title: '支付计划',
+			policy: {title: '保单号:'},
+			payment: {
+				payee: '收款人', relationship: '关系',
+				'payment-method': '支付方式', 'product-code': '产品', 'payment-type': '支付类型',
+				percentage: '占比', 'disbursement-amount': '支付金额',
+				'interest-amount': '利益', 'payment-amount-on-payment-currency': '支付金额 (支付币种)',
+				'payment-amount-on-policy-currency': '支付金额 (保单币种)',
+				pending: '待决?'
+			},
+			'total-disbursement-amount': '支付总金额:',
+			'total-adjustment-amount': '调整总金额:'
 		},
 		'internal-external-query': {
-			title: '内部/外部问卷'
+			title: '内部/外部问卷', task: '任务', 'query-type': '问卷类型',
+			'sub-type': '子类型', status: '状态', raised: '提交于',
+			'submission-content': '提交内容', replied: '回复于',
+			'reply-comment': '回复内容'
 		},
 		'comment-history': {
 			title: '评论历史'

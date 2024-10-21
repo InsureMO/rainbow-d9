@@ -12,7 +12,7 @@
 		- claim.claim-workbench.internal-external-query.sub-type: 240
 		- claim.claim-workbench.internal-external-query.status: 120
 		- biz.policy-no: 120
-		- claim.claim-workbench.internal-external-query.generated: 150
+		- claim.claim-workbench.internal-external-query.raised: 150
 		- claim.claim-workbench.internal-external-query.submission-content: 300
 		- claim.claim-workbench.internal-external-query.replied: 150
 		- claim.claim-workbench.internal-external-query.reply-comment: 300
