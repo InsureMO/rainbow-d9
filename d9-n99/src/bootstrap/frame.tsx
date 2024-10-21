@@ -523,9 +523,16 @@ const Container = styled.div.attrs({
                         }
                     }
 
-                    > *:nth-child(3) {
+                    > span[data-w=d9-caption]:nth-child(3) {
                         grid-row: 1;
                         grid-column: 2;
+                        min-height: var(--app-timeline-message-min-height);
+                        height: unset;
+                        line-height: var(--app-timeline-message-line-height);
+                        padding: calc((var(--app-timeline-message-min-height) - var(--app-timeline-message-line-height)) / 2);
+                        white-space: normal;
+                        overflow: auto;
+                        text-overflow: unset;
                     }
                 }
             }

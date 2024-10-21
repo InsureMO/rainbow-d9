@@ -139,7 +139,7 @@ const mockDoLoadMockEvaluationData = async (_keyOrRegistrationId: string): Promi
 		}],
 		commentHistory: [{
 			stage: 'Acceptance', commentedBy: SharedServices.Users.Alexie.userId, commentedAt: '14/10/2024 16:57:35',
-			comment: 'There is outstanding premium for this policy.'
+			comment: 'There is outstanding premium for this policy. A very long comment, a very long comment, a very long comment, a very long comment, a very long comment, a very long comment, a very long comment, a very long comment, a very long comment, a very long comment, a very long comment, a very long comment, a very long comment, a very long comment, a very long comment, a very long comment, a very long comment, a very long comment.'
 		}, {
 			stage: 'Evaluation', commentedBy: SharedServices.Users.Sally.userId, commentedAt: '14/10/2024 16:57:35',
 			comment: 'Claim natue is illness, refuse accidental rider.'

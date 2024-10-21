@@ -152,6 +152,8 @@ export const createAppThemeStyles = (): AppThemeStyle => {
 			'timeline-icon-size': 'var(--app-timeline-icon-size, 32px)',
 			'timeline-icon-border': 'var(--app-timeline-icon-border, 1px dashed var(--d9-border-color))',
 			'timeline-icon-color': 'var(--app-timeline-icon-color, var(--d9-primary-color))',
+			'timeline-message-min-height': 'var(--app-timeline-message-min-height, var(--d9-input-height))',
+			'timeline-message-line-height': 'var(--app-timeline-message-line-height, calc(var(--d9-input-height) / 4 * 3))',
 			// dialog
 			'dialog-largest-height': 'var(--app-dialog-largest-height, 80vh)',
 			'dialog-largest-width': 'var(--app-dialog-largest-width, 80vw)',
