@@ -1,0 +1,28 @@
+- Table::
+	- property: insuredList
+	- !expandable, !addable, !removable
+	- headers:
+		- biz.insured-name: 1fr
+		- biz.id-type: 100
+		- biz.id-no: 160
+		- biz.nationality: 140
+		- biz.gender: 140
+		- biz.dob: 140
+		- biz.occupation: 140
+		- claim.claim-workbench.life-assured-info.age-at-event: 140
+	- Label::::name
+	- Dropdown::::idType
+		- disabled, data-as-label
+		- options: @ext.codes.idType
+	- Label::::idNo
+	- Dropdown::::nationality
+		- disabled, data-as-label
+		- options: @ext.codes.nationality
+	- Dropdown::::gender
+		- disabled, data-as-label
+		- options: @ext.codes.gender
+	- Label::::dob
+	- Dropdown::::occupation
+		- disabled, data-as-label
+		- options: @ext.codes.occupation
+	- Label::::ageAtEvent

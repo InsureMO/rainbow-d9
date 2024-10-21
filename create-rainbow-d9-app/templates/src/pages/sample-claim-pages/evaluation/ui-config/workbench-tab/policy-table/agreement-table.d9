@@ -1,0 +1,16 @@
+- Section::claim.claim-workbench.policy.agreement.title
+	- data-2nd
+	- Table::
+		- property: agreements
+		- !expandable, !addable, !removable
+		- fixedLeadColumns: 3
+		- headers:
+			- biz.policy-no: 120
+			- claim.claim-workbench.policy.agreement.product-code: 200
+			- claim.claim-workbench.policy.agreement.product-type: 200
+			- claim.claim-workbench.policy.agreement.type: 120
+			- claim.claim-workbench.policy.agreement.life-assured: 200
+			- claim.claim-workbench.policy.agreement.code: 120
+			- claim.claim-workbench.policy.agreement.comment: 200
+			- claim.claim-workbench.policy.agreement.review-period: 200
+			- claim.claim-workbench.policy.agreement.content: 250

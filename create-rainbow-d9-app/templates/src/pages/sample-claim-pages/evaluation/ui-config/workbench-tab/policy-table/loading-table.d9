@@ -1,0 +1,15 @@
+- Section::claim.claim-workbench.policy.loading.title
+	- data-2nd
+	- Table::
+		- property: loadings
+		- !expandable, !addable, !removable
+		- fixedLeadColumns: 3
+		- headers:
+			- biz.policy-no: 120
+			- claim.claim-workbench.policy.loading.product-code: 200
+			- claim.claim-workbench.policy.loading.product-type: 200
+			- claim.claim-workbench.policy.loading.category: 150
+			- claim.claim-workbench.policy.loading.occupation-class: 150
+			- claim.claim-workbench.policy.loading.type: 120
+			- claim.claim-workbench.policy.loading.period: 120
+			- claim.claim-workbench.policy.loading.extra-premium: 150

@@ -1,0 +1,27 @@
+### Tab::claim.claim-workbench.title
+
+- marker: workbench-tab
+
+- Box::$$claim-base-section
+
+- Box::$$additional-base-section
+
+- Box::$$life-assured-section
+
+- Box::$$policy-section
+
+#### Section::claim.claim-workbench.assessment.title
+
+- collapsible
+
+#### Section::claim.claim-workbench.disbursement-plan.title
+
+- collapsible
+
+#### Section::claim.claim-workbench.queries.title
+
+- collapsible
+
+#### Section::claim.claim-workbench.comment-history.title
+
+- collapsible

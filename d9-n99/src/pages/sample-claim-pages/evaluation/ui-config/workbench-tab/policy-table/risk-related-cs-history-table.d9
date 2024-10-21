@@ -1,0 +1,18 @@
+- Section::claim.claim-workbench.policy.risk-related-cs-history.title
+	- data-2nd
+	- Table::
+		- property: riskRelatedCSHistory
+		- !expandable, !addable, !removable
+		- fixedLeadColumns: 4
+		- headers:
+			- biz.cs-no: 120
+			- biz.policy-no: 120
+			- claim.claim-workbench.policy.risk-related-cs-history.product-code: 200
+			- claim.claim-workbench.policy.risk-related-cs-history.product-type: 200
+			- claim.claim-workbench.policy.risk-related-cs-history.item: 200
+			- claim.claim-workbench.policy.risk-related-cs-history.application-date: 200
+			- claim.claim-workbench.policy.risk-related-cs-history.status: 120
+			- claim.claim-workbench.policy.risk-related-cs-history.auto-underwriting-indicator: 150
+			- claim.claim-workbench.policy.risk-related-cs-history.underwriting-decision: 150
+			- claim.claim-workbench.policy.risk-related-cs-history.underwriting-completion-date: 150
+			- claim.claim-workbench.policy.risk-related-cs-history.underwriter: 150
