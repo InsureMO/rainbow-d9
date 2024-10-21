@@ -223,7 +223,10 @@ export const enUSIntlLabels = {
 			'total-adjustment-amount': 'Adjustment Amount:'
 		},
 		'internal-external-query': {
-			title: 'Internal and External Query'
+			title: 'Internal and External Query', task: 'Task', 'query-type': 'Query Type',
+			'sub-type': 'Sub Type', status: 'Status', generated: 'Generated',
+			'submission-content': 'Submission Content', replied: 'Replied',
+			'reply-comment': 'Reply Comments'
 		},
 		'comment-history': {
 			title: 'Comment History'

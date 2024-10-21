@@ -52,7 +52,16 @@ const ClaimEvaluationIndex = PreloadedLazyPageWrapper(lazy(() => import('./page'
 				internalQueries: data.internalQueries ?? [],
 				escalations: data.escalations ?? [],
 				investigations: data.investigations ?? [],
-				underwritingByClaimList: data.underwritingByClaimList ?? []
+				underwritingByClaimList: data.underwritingByClaimList ?? [],
+				assessment: {
+					...data.assessment,
+					policies: data.assessment?.policies ?? []
+				},
+				disbursementPlan: {
+					...data.disbursementPlan,
+					policies: data.disbursementPlan?.policies ?? []
+				},
+				internalExternalQueries: data.internalExternalQueries ?? []
 			}
 		};
 		return asT(rootModel);
@@ -81,7 +90,9 @@ const ClaimEvaluationIndex = PreloadedLazyPageWrapper(lazy(() => import('./page'
 					...rootModel.data.investigations.map(investigation => investigation.submittedBy),
 					...rootModel.data.investigations.map(investigation => investigation.lastUpdatedBy),
 					...rootModel.data.underwritingByClaimList.map(underwriting => underwriting.submittedBy),
-					...rootModel.data.underwritingByClaimList.map(underwriting => underwriting.repliedBy)
+					...rootModel.data.underwritingByClaimList.map(underwriting => underwriting.repliedBy),
+					...rootModel.data.internalExternalQueries.map(query => query.generatedBy),
+					...rootModel.data.internalExternalQueries.map(query => query.repliedBy)
 					// @ts-ignore
 				].filter<string>(x => x != null))])
 			]);

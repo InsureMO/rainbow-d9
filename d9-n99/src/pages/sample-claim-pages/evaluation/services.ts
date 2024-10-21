@@ -130,7 +130,13 @@ const mockDoLoadMockRegistrationData = async (_keyOrRegistrationId: string): Pro
 					pending: false
 				}]
 			}]
-		}
+		},
+		internalExternalQueries: [{
+			task: 'Acceptance', queryType: 'Query Letter', subType: 'Follow up with customer', status: 'Replied',
+			policyNo: 'K000017187', generatedBy: SharedServices.Users.Sally.userId, generatedAt: '14/10/2024',
+			submissionContent: '', repliedBy: SharedServices.Users.Alexie.userId, repliedAt: '14/10/2024',
+			replyComment: ''
+		}]
 	};
 };
 

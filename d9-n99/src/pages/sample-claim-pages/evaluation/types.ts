@@ -21,6 +21,7 @@ export interface Data {
 	underwritingByClaimList: Claim.UnderwritingByClaimList;
 	assessment: Claim.Assessment;
 	disbursementPlan: Claim.DisbursementPlan;
+	internalExternalQueries: Claim.InternalExternalQueries;
 }
 
 export interface RootModel {

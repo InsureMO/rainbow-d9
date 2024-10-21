@@ -436,4 +436,20 @@ export namespace Claim {
 	export interface DisbursementPlan {
 		policies?: Array<DisbursementPlanPolicy>;
 	}
+
+	export interface InternalExternalQuery {
+		task?: string;
+		queryType?: string;
+		subType?: string;
+		status?: string;
+		policyNo?: string;
+		generatedBy?: string;
+		generatedAt?: string;
+		submissionContent?: string;
+		repliedBy?: string;
+		repliedAt?: string;
+		replyComment?: string;
+	}
+
+	export type InternalExternalQueries = Array<InternalExternalQuery>;
 }
