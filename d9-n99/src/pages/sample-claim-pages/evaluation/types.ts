@@ -18,6 +18,7 @@ export interface Data {
 	internalQueries: Claim.InternalQueries;
 	escalations: Claim.Escalations;
 	investigations: Claim.Investigations;
+	underwritingByClaimList: Claim.UnderwritingByClaimList;
 }
 
 export interface RootModel {

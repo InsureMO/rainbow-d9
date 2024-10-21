@@ -14,7 +14,8 @@ import {
 	createEscalationTableSectionActions,
 	createInternalQueryTableSectionActions,
 	createInvestigationTableSectionActions,
-	createQueryLetterTableSectionActions
+	createQueryLetterTableSectionActions,
+	createUnderwritingByClaimTableSectionActions
 } from '../shared';
 import {AssistantData} from './types';
 
@@ -33,6 +34,7 @@ export const createExternalDefsCreator = (rootModelRef: MutableRefObject<any>, a
 			'internal-query': createInternalQueryTableSectionActions({globalHandlers, rootModelRef}),
 			escalation: createEscalationTableSectionActions({globalHandlers, rootModelRef, assistantData}),
 			investigation: createInvestigationTableSectionActions({globalHandlers, rootModelRef, assistantData}),
+			'underwriting-by-claim': createUnderwritingByClaimTableSectionActions({globalHandlers, rootModelRef}),
 			decision: {
 				policy: {
 					view: {

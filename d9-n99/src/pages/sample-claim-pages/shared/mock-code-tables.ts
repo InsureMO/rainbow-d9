@@ -68,6 +68,12 @@ registerMockCodeTables({
 		{label: 'Waiting for Reply', value: 'wait'},
 		{label: 'Closed', value: 'closed'}
 	],
+	underwritingType: [
+		{label: 'Claim', value: 'claim'}
+	],
+	underwritingByClaimStatus: [
+		{label: 'Replied', value: 'replied'}
+	],
 	policyStatus: [
 		{label: 'Active', value: 'active'},
 		{label: 'Inforce', value: 'inforce'},

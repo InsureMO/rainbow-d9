@@ -8,9 +8,10 @@ import {markdown as investigationTableSection} from './investigation-table-secti
 import {markdown as queryLetterTableSection} from './query-letter-table-section.d9';
 import {markdown as registrationBaseSection} from './registration-base-section.d9';
 import {markdown as reporterBaseSection} from './reporter-base-section.d9';
+import {markdown as underwritingByClaimTableSection} from './underwriting-by-claim-table-section.d9';
 
 export const SharedMarkdown = {
 	registrationBaseSection, insuredBaseSection, claimBaseSection, additionalBaseSection, reporterBaseSection,
 	claimIssueTableSection, queryLetterTableSection, internalQueryTableSection,
-	escalationTableSection, investigationTableSection
+	escalationTableSection, investigationTableSection, underwritingByClaimTableSection
 };

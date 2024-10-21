@@ -1,0 +1,24 @@
+### Tab::claim.claim-issue.title
+
+- marker: issue-tab
+- badge: Badge
+	- property: data.claimIssues
+	- valueToLabel:
+	  ```ts
+	  const count = value?.length ?? 0;
+	  const opened = value?.filter(issue => issue.status !== 'closed')?.length ?? 0;
+	  return `${opened} / ${count}`;
+	  ```
+	- ink: danger
+
+- Box::$$claim-issue-table-section
+
+- Box::$$query-letter-table-section
+
+- Box::$$internal-query-table-section
+
+- Box::$$escalation-table-section
+
+- Box::$$investigation-table-section
+
+- Box::$$underwriting-table-section

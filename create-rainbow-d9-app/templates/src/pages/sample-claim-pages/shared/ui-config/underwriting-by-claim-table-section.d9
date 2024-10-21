@@ -1,0 +1,51 @@
+## Section::claim.underwriting-by-claim.title
+
+- collapsible
+
+- Table::
+	- property: data.underwritingByClaimList
+	- !expandable, !addable, !removable
+	- omitDefaultRowOperators
+	- operatorsColumnWidth: 80
+	- repaint:
+		- on: data.underwritingByClaimList
+	- getElementKey: @ext.underwriting-by-claim.getElementKey
+	- headers:
+		- claim.underwriting-by-claim.type: 150
+		- claim.underwriting-by-claim.case-no: 150
+		- biz.policy-no: 150
+		- claim.underwriting-by-claim.application-date: 120
+		- claim.underwriting-by-claim.raised: 1fr
+		- claim.underwriting-by-claim.due: 120
+		- claim.underwriting-by-claim.replied: 1fr
+		- claim.underwriting-by-claim.status: 100
+	- Dropdown::::type
+		- disabled, data-as-label
+		- options: @ext.codes.underwritingType
+	- Label::::caseNo
+	- Label::::policyNo
+	- Label::::applicationDate
+		- valueToLabel: `$.df(value)`
+	- Box::
+		- data-done-at, data-as-table-cell
+		- Dropdown::::submittedBy
+			- disabled, data-as-label
+			- options: @ext.codes.users
+		- Label::::submittedAt
+	- Label::::dueDate
+		- valueToLabel: `$.df(value)`
+	- Box::
+		- data-done-at, data-as-table-cell
+		- Dropdown::::repliedBy
+			- disabled, data-as-label
+			- options: @ext.codes.users
+		- Label::::repliedAt
+	- Dropdown::::status
+		- disabled, data-as-label
+		- options: @ext.codes.underwritingByClaimStatus
+	- RowOperators::
+		- Button::
+			- text: page.common.button.view
+			- fill: link
+			- click: @ext.underwriting-by-claim.view.click
+			- data-text-row-operator, data-fit-link

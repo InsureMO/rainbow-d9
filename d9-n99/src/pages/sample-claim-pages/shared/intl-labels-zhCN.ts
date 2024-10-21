@@ -23,7 +23,7 @@ export const zhCNIntlLabels = {
 		menu: {label: '理赔评估'}, title: '理赔评估', 'case-no': '理赔评估 - 案件号:'
 	},
 	reg: {
-		'case-no': '报案案件号', 'reg-no': '报案号',
+		'case-no': '案件号', 'reg-no': '报案号',
 		'submission-channel': '报案渠道',
 		'manual-register': '手工记录',
 		status: '处理状态'
@@ -74,17 +74,22 @@ export const zhCNIntlLabels = {
 		assignee: '已指派', due: '截止日期',
 		raised: '创建于', 'last-updated': '最后修改于', status: '状态'
 	},
-	'escalation': {
+	escalation: {
 		title: '案件升级', to: '指派至', due: '截止日期',
 		raised: '指派于', 'last-updated': '最后修改于', status: '状态',
 		headline: '标题', description: '描述',
 		'add-title': '案件升级'
 	},
-	'investigation': {
+	investigation: {
 		title: '案件调查', to: '提交至', due: '截止日期',
 		raised: '提交于', 'last-updated': '最后修改于', status: '状态',
 		headline: '标题', description: '描述',
 		'add-title': '案件调查'
+	},
+	'underwriting-by-claim': {
+		title: '核保', type: '核保类型', 'case-no': '案件号',
+		'application-date': '申请日期', raised: '提交于',
+		due: '截止日期', replied: '回复于', status: '状态'
 	},
 	'acceptance-decision': {
 		title: '受理决定',

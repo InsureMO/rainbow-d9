@@ -82,6 +82,13 @@ const mockDoLoadMockRegistrationData = async (_keyOrRegistrationId: string): Pro
 			dueDate: '24/10/2024',
 			lastUpdatedAt: '14/10/2024', lastUpdatedBy: 'system',
 			status: 'wait'
+		}],
+		underwritingByClaimList: [{
+			type: 'claim', caseNo: '9827765630001', policyNo: 'K000017187',
+			applicationDate: '14/01/2024', dueDate: '14/01/2024',
+			submittedBy: SharedServices.Users.David.userId, submittedAt: '14/01/2024',
+			repliedBy: SharedServices.Users.Sally.userId, repliedAt: '14/01/2024',
+			status: 'replied'
 		}]
 	};
 };

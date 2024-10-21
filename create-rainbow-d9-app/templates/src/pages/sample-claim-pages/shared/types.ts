@@ -141,6 +141,22 @@ export namespace Claim {
 
 	export type Investigations = Array<Investigation>;
 
+	export interface WithReplied {
+		repliedAt?: string;
+		repliedBy?: string;
+	}
+
+	export interface UnderwritingByClaim extends WithSubmitted, WithReplied {
+		type?: string;
+		caseNo?: string;
+		policyNo?: string;
+		applicationDate?: string;
+		dueDate?: string;
+		status?: string;
+	}
+
+	export type UnderwritingByClaimList = Array<UnderwritingByClaim>;
+
 	export interface AcceptanceOnPolicyProduct {
 		code?: string;
 		name?: string;

@@ -74,17 +74,22 @@ export const enUSIntlLabels = {
 		assignee: 'Assignee', due: 'Due Date',
 		raised: 'Generated', 'last-updated': 'Last Updated', status: 'Status'
 	},
-	'escalation': {
+	escalation: {
 		title: 'Escalation', to: 'Escalated To', due: 'Due Date',
 		raised: 'Escalated', 'last-updated': 'Last Updated', status: 'Status',
 		headline: 'Title', description: 'Description',
 		'add-title': 'Raise an Escalation'
 	},
-	'investigation': {
+	investigation: {
 		title: 'Investigation', to: 'Submitted To', due: 'Due Date',
 		raised: 'Submitted', 'last-updated': 'Last Updated', status: 'Status',
 		headline: 'Title', description: 'Description',
 		'add-title': 'Request an Investigation'
+	},
+	'underwriting-by-claim': {
+		title: 'Underwriting', type: 'Underwriting Type', 'case-no': 'Case No.',
+		'application-date': 'Application Date', raised: 'Submitted',
+		due: 'Due Date', replied: 'Replied', status: 'Status'
 	},
 	'acceptance-decision': {
 		title: 'Acceptance Decision',

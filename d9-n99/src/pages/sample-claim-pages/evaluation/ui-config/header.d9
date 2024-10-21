@@ -1,0 +1,44 @@
+## Box::
+
+- data-fix-title
+- pos: 12
+
+- Caption::claim.evaluation.case-no
+	- !$fc
+- Label::::data.caseNo
+
+- Box::$$registration-base-section
+- Box::
+	- data-as-button-bar, data-sparse
+	- pos: 12
+	- Caption::claim.actions-and-supporting
+	- Button::
+		- text: claim.action.image
+		- fill: link
+		- click: @ext.ans.image.click
+		- data-fit-link
+	- Button::
+		- text: claim.action.doc-checklist
+		- fill: link
+		- click: @ext.ans.doc-checklist.click
+		- data-fit-link
+	- Button::
+		- text: claim.action.edit-case
+		- fill: link
+		- click: @ext.ans.edit-case.click
+		- data-fit-link
+	- Button::
+		- text: claim.action.medical-bill
+		- fill: link
+		- click: @ext.ans.medical-bill.click
+		- data-fit-link
+	- Button::
+		- text: claim.action.history
+		- fill: link
+		- click: @ext.ans.history.click
+		- data-fit-link
+	- Button::
+		- text: claim.action.accept-policy
+		- fill: link
+		- click: @ext.ans.accept-policy.click
+		- data-fit-link

@@ -9,24 +9,14 @@ import {
 	PreloaderFuncOptions,
 	visitParsedUI
 } from '../../standard-widgets';
-import {SharedMarkdown, SharedServices} from '../shared';
+import {SharedServices} from '../shared';
 import {loadRegistrationData} from './services';
 import {RootModel} from './types';
-import {markdown} from './ui-config.d9';
+import {createMarkdown} from './ui-config';
 
 const ClaimEvaluationIndex = PreloadedLazyPageWrapper(lazy(() => import('./page')), {
 	usePathParams: true,
-	ui: async (_options: PreloaderFuncOptions): Promise<string> => {
-		return markdown
-			.replace('- Box::$$registration-base-section', SharedMarkdown.registrationBaseSection)
-			.replace('- Box::$$claim-base-section', SharedMarkdown.claimBaseSection.replace('## Section::', '#### Section::'))
-			.replace('- Box::$$additional-base-section', SharedMarkdown.additionalBaseSection.replace('## Section::', '#### Section::'))
-			.replace('- Box::$$claim-issue-table-section', SharedMarkdown.claimIssueTableSection.replace('## Section::', '#### Section::'))
-			.replace('- Box::$$query-letter-table-section', SharedMarkdown.queryLetterTableSection.replace('## Section::', '#### Section::'))
-			.replace('- Box::$$internal-query-table-section', SharedMarkdown.internalQueryTableSection.replace('## Section::', '#### Section::'))
-			.replace('- Box::$$escalation-table-section', SharedMarkdown.escalationTableSection.replace('## Section::', '#### Section::'))
-			.replace('- Box::$$investigation-table-section', SharedMarkdown.investigationTableSection.replace('## Section::', '#### Section::'));
-	},
+	ui: async (_options: PreloaderFuncOptions): Promise<string> => createMarkdown(),
 	manufactureParsedUI: async (_options: PreloaderFuncOptions) => {
 		return (parsed: NodeDef) => {
 			visitParsedUI(parsed, (node, ancestors) => {
@@ -61,7 +51,8 @@ const ClaimEvaluationIndex = PreloadedLazyPageWrapper(lazy(() => import('./page'
 				queryLetters: data.queryLetters ?? [],
 				internalQueries: data.internalQueries ?? [],
 				escalations: data.escalations ?? [],
-				investigations: data.investigations ?? []
+				investigations: data.investigations ?? [],
+				underwritingByClaimList: data.underwritingByClaimList ?? []
 			}
 		};
 		return asT(rootModel);
@@ -88,7 +79,9 @@ const ClaimEvaluationIndex = PreloadedLazyPageWrapper(lazy(() => import('./page'
 					...rootModel.data.escalations.map(escalation => escalation.lastUpdatedBy),
 					...rootModel.data.investigations.map(investigation => investigation.submittedTo),
 					...rootModel.data.investigations.map(investigation => investigation.submittedBy),
-					...rootModel.data.investigations.map(investigation => investigation.lastUpdatedBy)
+					...rootModel.data.investigations.map(investigation => investigation.lastUpdatedBy),
+					...rootModel.data.underwritingByClaimList.map(underwriting => underwriting.submittedBy),
+					...rootModel.data.underwritingByClaimList.map(underwriting => underwriting.repliedBy)
 					// @ts-ignore
 				].filter<string>(x => x != null))])
 			]);
