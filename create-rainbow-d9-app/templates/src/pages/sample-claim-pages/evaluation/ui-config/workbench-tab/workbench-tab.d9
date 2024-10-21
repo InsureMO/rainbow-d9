@@ -10,18 +10,10 @@
 
 - Box::$$policy-section
 
-#### Section::claim.claim-workbench.assessment.title
+- Box::$$assessment-section
 
-- collapsible
+- Box::$$disbursement-plan-section
 
-#### Section::claim.claim-workbench.disbursement-plan.title
+- Box::$$internal-external-query-table
 
-- collapsible
-
-#### Section::claim.claim-workbench.queries.title
-
-- collapsible
-
-#### Section::claim.claim-workbench.comment-history.title
-
-- collapsible
+- Box::$$comment-history-timeline

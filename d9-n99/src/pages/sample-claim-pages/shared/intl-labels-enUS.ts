@@ -195,7 +195,7 @@ export const enUSIntlLabels = {
 		'disbursement-plan': {
 			title: 'Disbursement Plan'
 		},
-		queries: {
+		'internal-external-query': {
 			title: 'Internal and External Query'
 		},
 		'comment-history': {

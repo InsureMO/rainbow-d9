@@ -195,7 +195,7 @@ export const zhCNIntlLabels = {
 		'disbursement-plan': {
 			title: '支付计划'
 		},
-		queries: {
+		'internal-external-query': {
 			title: '内部/外部问卷'
 		},
 		'comment-history': {

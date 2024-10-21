@@ -14,5 +14,4 @@ export const createPolicyTable = () => {
 		.replace('- Box::$$exclusion-table', exclusionTable)
 		.replace('- Box::$$agreement-table', agreementTable)
 		.replace('- Box::$$risk-related-cs-history-table', riskRelatedCSHistoryTable);
-
 };
