@@ -452,4 +452,13 @@ export namespace Claim {
 	}
 
 	export type InternalExternalQueries = Array<InternalExternalQuery>;
+
+	export interface CommentHistory {
+		stage?: string;
+		commentedBy?: string;
+		commentedAt?: string;
+		comment?: string;
+	}
+
+	export type CommentHistoryList = Array<CommentHistory>
 }

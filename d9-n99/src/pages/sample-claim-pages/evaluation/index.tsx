@@ -61,7 +61,8 @@ const ClaimEvaluationIndex = PreloadedLazyPageWrapper(lazy(() => import('./page'
 					...data.disbursementPlan,
 					policies: data.disbursementPlan?.policies ?? []
 				},
-				internalExternalQueries: data.internalExternalQueries ?? []
+				internalExternalQueries: data.internalExternalQueries ?? [],
+				commentHistory: data.commentHistory ?? []
 			}
 		};
 		return asT(rootModel);
@@ -92,7 +93,8 @@ const ClaimEvaluationIndex = PreloadedLazyPageWrapper(lazy(() => import('./page'
 					...rootModel.data.underwritingByClaimList.map(underwriting => underwriting.submittedBy),
 					...rootModel.data.underwritingByClaimList.map(underwriting => underwriting.repliedBy),
 					...rootModel.data.internalExternalQueries.map(query => query.generatedBy),
-					...rootModel.data.internalExternalQueries.map(query => query.repliedBy)
+					...rootModel.data.internalExternalQueries.map(query => query.repliedBy),
+					...rootModel.data.commentHistory.map(comment => comment.commentedBy)
 					// @ts-ignore
 				].filter<string>(x => x != null))])
 			]);

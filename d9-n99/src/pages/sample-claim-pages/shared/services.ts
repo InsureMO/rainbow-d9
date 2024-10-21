@@ -8,7 +8,7 @@ export const Users = {
 	John: {name: 'John', userId: '10001', depart: 'POS'},
 	Sally: {name: 'Sally', userId: '10002', depart: 'POS'},
 	Bill: {name: 'Bill', userId: '20000', depart: 'POS'},
-	Alexie: {name: 'Alexie', userId: '20001', depart: 'POS'},
+	Alexie: {name: 'Alexie', userId: '20001', depart: 'Head Office'},
 	Chris: {name: 'Chris', userId: '30001', depart: 'POS'}
 };
 

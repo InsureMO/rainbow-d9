@@ -136,6 +136,13 @@ const mockDoLoadMockEvaluationData = async (_keyOrRegistrationId: string): Promi
 			policyNo: 'K000017187', generatedBy: SharedServices.Users.Sally.userId, generatedAt: '14/10/2024',
 			submissionContent: '', repliedBy: SharedServices.Users.Alexie.userId, repliedAt: '14/10/2024',
 			replyComment: ''
+		}],
+		commentHistory: [{
+			stage: 'Acceptance', commentedBy: SharedServices.Users.Alexie.userId, commentedAt: '14/10/2024 16:57:35',
+			comment: 'There is outstanding premium for this policy.'
+		}, {
+			stage: 'Evaluation', commentedBy: SharedServices.Users.Sally.userId, commentedAt: '14/10/2024 16:57:35',
+			comment: 'Claim natue is illness, refuse accidental rider.'
 		}]
 	};
 };

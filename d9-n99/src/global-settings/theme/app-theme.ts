@@ -148,6 +148,10 @@ export const createAppThemeStyles = (): AppThemeStyle => {
 			'page-bottom-bar-padding': 'var(--app-page-bottom-bar-padding, 8px 32px)',
 			'page-bottom-bar-height': 'var(--app-page-bottom-bar-height, 48px)',
 			'page-bottom-bar-z-index': 'var(--app-page-bottom-bar-z-index, 9)',
+			// timeline row
+			'timeline-icon-size': 'var(--app-timeline-icon-size, 32px)',
+			'timeline-icon-border': 'var(--app-timeline-icon-border, 1px dashed var(--d9-border-color))',
+			'timeline-icon-color': 'var(--app-timeline-icon-color, var(--d9-primary-color))',
 			// dialog
 			'dialog-largest-height': 'var(--app-dialog-largest-height, 80vh)',
 			'dialog-largest-width': 'var(--app-dialog-largest-width, 80vw)',

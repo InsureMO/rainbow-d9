@@ -22,6 +22,7 @@ export interface Data {
 	assessment: Claim.Assessment;
 	disbursementPlan: Claim.DisbursementPlan;
 	internalExternalQueries: Claim.InternalExternalQueries;
+	commentHistory: Claim.CommentHistoryList;
 }
 
 export interface RootModel {
