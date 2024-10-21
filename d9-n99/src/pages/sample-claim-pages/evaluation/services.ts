@@ -3,11 +3,11 @@ import {loadFromSessionAndBurn} from '../../../utils';
 import {SharedServices} from '../shared';
 import {Data} from './types';
 
-const doLoadRegistrationData = async (_keyOrRegistrationId: string): Promise<Data> => {
-	// TODO load registration data by registrationId
+const doLoadEvaluationData = async (_keyOrEvaluationId: string): Promise<Data> => {
+	// TODO load evaluation data by evaluationId
 	throw new Error('Not implemented');
 };
-const mockDoLoadMockRegistrationData = async (_keyOrRegistrationId: string): Promise<Data> => {
+const mockDoLoadMockEvaluationData = async (_keyOrRegistrationId: string): Promise<Data> => {
 	return {
 		registrationId: `${Math.floor(Math.random() * 1000000000000)}`,
 		caseNo: `${Math.floor(Math.random() * 1000000000000)}`,
@@ -140,16 +140,16 @@ const mockDoLoadMockRegistrationData = async (_keyOrRegistrationId: string): Pro
 	};
 };
 
-export const loadRegistrationData = async (keyOrRegistrationId: string): Promise<Data> => {
-	const loaded: string | Data | undefined = loadFromSessionAndBurn(keyOrRegistrationId);
+export const loadEvaluationData = async (keyOrEvaluationId: string): Promise<Data> => {
+	const loaded: string | Data | undefined = loadFromSessionAndBurn(keyOrEvaluationId);
 	if (loaded == null) {
 		// not found from session, means given key is registrationId
 		// should load from remote
-		return await mock(doLoadRegistrationData).by(mockDoLoadMockRegistrationData)(keyOrRegistrationId);
+		return await mock(doLoadEvaluationData).by(mockDoLoadMockEvaluationData)(keyOrEvaluationId);
 	} else if (typeof loaded === 'string') {
 		// found a string from session, means loaded is registrationId
 		// should load from remote
-		return await mock(doLoadRegistrationData).by(mockDoLoadMockRegistrationData)(keyOrRegistrationId);
+		return await mock(doLoadEvaluationData).by(mockDoLoadMockEvaluationData)(keyOrEvaluationId);
 	} else {
 		// found a data from session, use it
 		return loaded;

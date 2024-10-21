@@ -10,7 +10,7 @@ import {
 	visitParsedUI
 } from '../../standard-widgets';
 import {SharedServices} from '../shared';
-import {loadRegistrationData} from './services';
+import {loadEvaluationData} from './services';
 import {RootModel} from './types';
 import {createMarkdown} from './ui-config';
 
@@ -40,8 +40,8 @@ const ClaimEvaluationIndex = PreloadedLazyPageWrapper(lazy(() => import('./page'
 	},
 	/** initialize root model */
 	initRootModel: async (options: PreloaderFuncOptions) => {
-		const {keyOrRegistrationId = ''} = options.pathParams ?? {};
-		const data = await loadRegistrationData(keyOrRegistrationId);
+		const {keyOrEvaluationId = ''} = options.pathParams ?? {};
+		const data = await loadEvaluationData(keyOrEvaluationId);
 		// clone
 		const rootModel: RootModel = {
 			control: {claimIssuesAllSelected: false},
@@ -122,7 +122,7 @@ const ClaimEvaluationIndex = PreloadedLazyPageWrapper(lazy(() => import('./page'
 
 const ClaimEvaluationPage: AppPage = {
 	code: 'claim-evaluation',
-	route: '/claim/evaluation/:keyOrRegistrationId',
+	route: '/claim/evaluation/:keyOrEvaluationId',
 	menuItemCode: 'claim-evaluation',
 	breadcrumb: {
 		title: 'claim.evaluation.title',
