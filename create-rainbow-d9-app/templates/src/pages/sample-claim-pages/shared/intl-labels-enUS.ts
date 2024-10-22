@@ -236,7 +236,25 @@ export const enUSIntlLabels = {
 		title: 'Assessment'
 	},
 	'disbursement-plan': {
-		title: 'Disbursement Plan'
+		title: 'Disbursement Plan',
+		summary: {
+			title: 'Disbursement Plan Summary', 'total-disbursement-amount': 'Total Disbursement Amount:'
+		},
+		policy: {
+			'total-disbursement-amount': 'Total Disbursement Amount',
+			'allocated-disbursement-amount': 'Allocated Disbursement Amount',
+			'total-adjusted-payment': 'Total Adjusted Payment', currency: 'Policy Currency',
+			product: {name: 'Product', 'disbursement-amount': 'Product Disbursement Amount'}
+		},
+		'benefit-amount-allocation': {
+			title: 'Benefit Amount Allocation', payee: 'Payee',
+			'disbursement-method': 'Disbursement Method', 'product-code': 'Product', 'payment-type': 'Type',
+			percentage: 'Percentage', 'disbursement-amount': 'Disbursement Amount',
+			'interest-amount': 'Interest', 'payment-amount-on-payment-currency': 'Payment Amount (Pay Currency)',
+			'payment-amount-on-policy-currency': 'Payment Amount (Policy Currency)',
+			pending: 'Pending'
+		},
+		'add-lump-sum': 'Add Lump-sum', 'add-installment': 'Add Installment'
 	},
 	action: {
 		image: 'Image', 'doc-checklist': 'Document Checklist', 'medical-bill': 'Medical Bill', history: 'History',

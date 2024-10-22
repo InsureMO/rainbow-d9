@@ -44,7 +44,7 @@ const ClaimEvaluationIndex = PreloadedLazyPageWrapper(lazy(() => import('./page'
 		const data = await loadEvaluationData(keyOrEvaluationId);
 		// clone
 		const rootModel: RootModel = {
-			control: {claimIssuesAllSelected: false},
+			control: {claimIssuesAllSelected: false, activeTab: 'workbench-tab'},
 			data: {
 				...data,
 				claimIssues: data.claimIssues ?? [],

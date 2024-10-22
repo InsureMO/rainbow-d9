@@ -117,9 +117,17 @@ const mockDoLoadMockEvaluationData = async (_keyOrRegistrationId: string): Promi
 			}]
 		},
 		disbursementPlan: {
+			totalDisbursementCurrency: 'SGD', totalDisbursementAmount: 25000,
 			policies: [{
-				policyNo: 'K000017187', totalDisbursementCurrency: 'SGD', totalDisbursementAmount: 25000,
+				policyNo: 'K000017187', policyCurrency: 'SGD',
+				totalDisbursementCurrency: 'SGD', totalDisbursementAmount: 25000,
+				allocatedDisbursementCurrency: 'SGD', allocatedDisbursementAmount: 0,
 				totalAdjustmentCurrency: 'SGD', totalAdjustmentAmount: 0,
+				products: [{
+					code: 'GEM0170', disbursementAmountCurrency: 'SGD', disbursementAmount: 20000
+				}, {
+					code: 'GEMA17', disbursementAmountCurrency: 'SGD', disbursementAmount: 5000
+				}],
 				paymentPlans: [{
 					payee: 'Jackie Su', relationship: 'spouse', idNo: 'A123456789',
 					paymentMethod: 'cash', productCode: 'GEMA01', paymentType: 'lumpsum',
@@ -129,6 +137,15 @@ const mockDoLoadMockEvaluationData = async (_keyOrRegistrationId: string): Promi
 					paymentAmountOnPolicyCurrency: 'SGD', paymentAmountOnPolicy: 200000,
 					pending: false
 				}]
+			}],
+			benefitAmountAllocations: [{
+				payee: 'Jackie Su', relationship: 'spouse', idNo: 'A123456789',
+				paymentMethod: 'cash', policyNo: 'K000017187', productCode: 'GEMA01', paymentType: 'lumpsum',
+				percentage: 50, disbursementAmountCurrency: 'SGD', disbursementAmount: 200000,
+				interestAmountCurrency: 'SGD', interestAmount: 200000,
+				paymentAmountOnPaymentCurrency: 'SGD', paymentAmountOnPayment: 200000,
+				paymentAmountOnPolicyCurrency: 'SGD', paymentAmountOnPolicy: 200000,
+				pending: false
 			}]
 		},
 		internalExternalQueries: [{

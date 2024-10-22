@@ -1,1 +1,7 @@
 ### Tab::claim.disbursement-plan.title
+
+- marker: disbursement-plan-tab
+
+- Box:$$summary-table
+
+- Box:$$benefit-amount-allocation-table

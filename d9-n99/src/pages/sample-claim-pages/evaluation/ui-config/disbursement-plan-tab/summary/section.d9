@@ -1,0 +1,42 @@
+#### Section::
+
+- collapsible
+
+- title: Box
+	- data-dense-labels, data-as-section-title
+	- Caption::claim.disbursement-plan.summary.title
+	- Caption::(
+	- Caption::claim.disbursement-plan.summary.total-disbursement-amount
+	- Dropdown::::data.disbursementPlan.totalDisbursementCurrency
+		- disabled, data-as-label, data-omit-padding
+		- options: @ext.codes.currency
+	- Label::::data.disbursementPlan.totalDisbursementAmount
+		- valueToLabel: `$.nf2(value)`
+	- Caption::)
+- Table::
+	- property: data.disbursementPlan.policies
+	- expandable, !addable, !removable, data-omit-expand-area-padding
+	- headers:
+		- biz.policy-no: 200
+		- claim.disbursement-plan.policy.total-disbursement-amount: 200
+		- claim.disbursement-plan.policy.allocated-disbursement-amount: 250
+		- claim.disbursement-plan.policy.total-adjusted-payment: 200
+		- claim.disbursement-plan.policy.currency: 150
+	- Label::::policyNo
+	- Label::::totalDisbursementAmount
+		- valueToLabel: `$.nf2(value)`
+	- Label::::allocatedDisbursementAmount
+		- valueToLabel: `$.nf2(value)`
+	- Label::::totalAdjustmentAmount
+		- valueToLabel: `$.nf2(value)`
+	- Dropdown::::policyCurrency
+		- disabled, data-as-label
+		- options: @ext.codes.currency
+	- Table::::products
+		- !expandable, !addable, !removable
+		- headers:
+			- claim.disbursement-plan.policy.product.name: 200
+			- claim.disbursement-plan.policy.product.disbursement-amount: 250
+		- Label::::code
+		- Label::::disbursementAmount
+			- valueToLabel: `$.nf2(value)`

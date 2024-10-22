@@ -1,10 +1,11 @@
-import {BaseModel, PropValue} from '@rainbow-d9/n1';
+import {BaseModel, PropValue, RootEventTypes} from '@rainbow-d9/n1';
 import {ButtonClickOptions, CaptionClickOptions, GlobalHandlers} from '@rainbow-d9/n2';
 import {MutableRefObject} from 'react';
 import {asT} from '../../../utils';
 import {
 	createDropdownOptionsProvider,
 	D9PageExternalDefsCreatorOptions,
+	ExternalDefsWithGlobalCustomEventListeners,
 	validatePageWithCallback
 } from '../../standard-widgets';
 import {
@@ -17,13 +18,21 @@ import {
 	createQueryLetterTableSectionActions,
 	createUnderwritingByClaimTableSectionActions
 } from '../shared';
-import {AssistantData} from './types';
+import {AssistantData, RootModel} from './types';
 
-export const createExternalDefsCreator = (rootModelRef: MutableRefObject<any>, askAssistantData: (globalHandlers: GlobalHandlers) => Promise<AssistantData>) => {
-	return async (globalHandlers: D9PageExternalDefsCreatorOptions) => {
+export const createExternalDefsCreator = (rootModelRef: MutableRefObject<RootModel>, askAssistantData: (globalHandlers: GlobalHandlers) => Promise<AssistantData>) => {
+	return async (globalHandlers: D9PageExternalDefsCreatorOptions): Promise<ExternalDefsWithGlobalCustomEventListeners> => {
 		const assistantData = await askAssistantData(globalHandlers);
 
 		return {
+			$GlobalCustomEventListeners: {
+				onTabChanged: ({marker}) => {
+					console.log(marker);
+					// @ts-ignore
+					rootModelRef.current.control.activeTab = marker;
+					globalHandlers.root.fire(RootEventTypes.VALUE_CHANGED, '/control.activeTab', marker, marker);
+				}
+			},
 			codes: createDropdownOptionsProvider(globalHandlers, {
 				channelsForClaimRegistration: assistantData.submissionChannelOptions,
 				users: assistantData.userOptions, userDepartments: assistantData.userDepartmentOptions
@@ -59,6 +68,18 @@ export const createExternalDefsCreator = (rootModelRef: MutableRefObject<any>, a
 					}
 				}
 			},
+			'disbursement-plan': {
+				'add-lump-sum': {
+					click: async (_options: CaptionClickOptions<BaseModel, PropValue>) => {
+						alert('Add lump-sum button clicked.');
+					}
+				},
+				'add-installment': {
+					click: async (_options: CaptionClickOptions<BaseModel, PropValue>) => {
+						alert('Add installment button clicked.');
+					}
+				}
+			},
 			comment: {
 				click: async (_options: ButtonClickOptions<BaseModel, PropValue>) => {
 					alert('Comment button clicked.');
@@ -79,14 +100,6 @@ export const createExternalDefsCreator = (rootModelRef: MutableRefObject<any>, a
 						},
 						failed: async (_, failed) => {
 							if (failed.length > 0) {
-								// switch tab
-								if (failed[0].id.startsWith('data-decision')) {
-									await globalHandlers.sc('tab', 'decision-tab');
-								} else {
-									await globalHandlers.sc('tab', 'issue-tab');
-								}
-								// focus again, make sure the element scrolls to viewport
-								failed[0].element?.focus();
 							}
 						}
 					});

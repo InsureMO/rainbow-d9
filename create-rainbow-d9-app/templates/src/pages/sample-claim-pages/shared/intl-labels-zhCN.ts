@@ -236,7 +236,25 @@ export const zhCNIntlLabels = {
 		title: '评估'
 	},
 	'disbursement-plan': {
-		title: '支付计划'
+		title: '支付计划',
+		summary: {
+			title: '支付计划汇总', 'total-disbursement-amount': '总支付金额:'
+		},
+		policy: {
+			'total-disbursement-amount': '总支付金额',
+			'allocated-disbursement-amount': '已分配支付金额',
+			'total-adjusted-payment': '总调整支付金额', currency: '保单币种',
+			product: {name: '产品', 'disbursement-amount': '产品支付金额'}
+		},
+		'benefit-amount-allocation': {
+			title: '受益金额分配', payee: '收款人',
+			'disbursement-method': '支付方式', 'product-code': '产品', 'payment-type': '支付类型',
+			percentage: '占比', 'disbursement-amount': '支付金额',
+			'interest-amount': '利益', 'payment-amount-on-payment-currency': '支付金额 (支付币种)',
+			'payment-amount-on-policy-currency': '支付金额 (保单币种)',
+			pending: '待决?'
+		},
+		'add-lump-sum': '添加全款支付', 'add-installment': '添加分期支付'
 	},
 	action: {
 		image: '影像资料', 'doc-checklist': '书面资料', 'medical-bill': '医疗账单', history: '理赔历史',

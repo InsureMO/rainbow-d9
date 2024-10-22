@@ -192,4 +192,3 @@
 - Button::
 	- text: page.common.button.submit
 	- click: @ext.submit.click
-

@@ -1,19 +1,32 @@
 import {
+	BaseModel,
 	ExternalDefs,
 	NodeDef,
 	ObjectPropValue,
+	PropValue,
 	RootEventTypes,
 	StandaloneRoot,
 	useCreateEventBus,
 	useRootEventBus,
 	VUtils
 } from '@rainbow-d9/n1';
-import {AlertLabel, GlobalHandlers, GlobalRoot, IntlLabel, useGlobalHandlers} from '@rainbow-d9/n2';
+import {
+	AlertLabel,
+	GlobalEventPrefix,
+	GlobalEventTypes,
+	GlobalHandlers,
+	GlobalRoot,
+	IntlLabel,
+	ModelCarrier,
+	useGlobalEventBus,
+	useGlobalHandlers
+} from '@rainbow-d9/n2';
 import {parseDoc} from '@rainbow-d9/n3';
 import {createContext, Fragment, JSX, ReactNode, useContext, useEffect, useState} from 'react';
 import {useNavigate} from 'react-router-dom';
 import {I18NAndD9N2Bridge} from '../../bootstrap';
 import {D9PageState} from '../../global-settings';
+import {asT} from '../../utils';
 import {StandardPageWrapper} from './standard-page-wrapper';
 
 enum PageToRootEventBusTypes {
@@ -45,6 +58,65 @@ export const PageToRootEventBusProvider = (props: { children?: ReactNode }) => {
 
 export const usePageToRootEventBus = () => useContext(PageToRootContext);
 
+type Models<R extends BaseModel = BaseModel, M extends PropValue = PropValue> = ModelCarrier<R, M>;
+type ModelsWithValue<R extends BaseModel = BaseModel, M extends PropValue = PropValue, V extends PropValue = PropValue> =
+	Models<R, M>
+	& { value: V };
+
+type GlobalCustomEvent<M> = {
+	marker?: string;
+	models?: M;
+	global: GlobalHandlers;
+}
+
+export interface GlobalCustomEventListeners {
+	onSectionExpanded?: (event: GlobalCustomEvent<Models>) => void;
+	onSectionCollapsed?: (event: GlobalCustomEvent<Models>) => void;
+	onTabChanged?: (event: GlobalCustomEvent<Models>) => void;
+	onWizardStepChanged?: (event: GlobalCustomEvent<Models>) => void;
+	onTreeNodeClicked?: (event: GlobalCustomEvent<ModelsWithValue>) => void;
+	onTreeNodeDoubleClicked?: (event: GlobalCustomEvent<ModelsWithValue>) => void;
+	onTreeNodeContextMenu?: (event: GlobalCustomEvent<ModelsWithValue>) => void;
+}
+
+export const PageGlobalCustomEventBridge = (props: GlobalCustomEventListeners) => {
+	const {on, off} = useGlobalEventBus();
+	const globalHandlers = useGlobalHandlers();
+
+	useEffect(() => {
+		const onCustomEvent = (_key: string, prefix: string, clipped: string, models?: Models) => {
+			switch (prefix) {
+				case GlobalEventPrefix.SECTION_EXPANDED:
+					props.onSectionExpanded?.({marker: clipped, models, global: globalHandlers});
+					break;
+				case GlobalEventPrefix.SECTION_COLLAPSED:
+					props.onSectionCollapsed?.({marker: clipped, models, global: globalHandlers});
+					break;
+				case GlobalEventPrefix.TAB_CHANGED:
+					props.onTabChanged?.({marker: clipped, models, global: globalHandlers});
+					break;
+				case GlobalEventPrefix.WIZARD_STEP_CHANGED:
+					props.onWizardStepChanged?.({marker: clipped, models, global: globalHandlers});
+					break;
+				case GlobalEventPrefix.TREE_NODE_CLICKED:
+					props.onTreeNodeClicked?.({marker: clipped, models: asT(models), global: globalHandlers});
+					break;
+				case GlobalEventPrefix.TREE_NODE_DOUBLE_CLICKED:
+					props.onTreeNodeDoubleClicked?.({marker: clipped, models: asT(models), global: globalHandlers});
+					break;
+				case GlobalEventPrefix.TREE_NODE_CONTEXT_MENU:
+					props.onTreeNodeContextMenu?.({marker: clipped, models: asT(models), global: globalHandlers});
+					break;
+			}
+		};
+		on(GlobalEventTypes.CUSTOM_EVENT, onCustomEvent);
+		return () => {
+			off(GlobalEventTypes.CUSTOM_EVENT, onCustomEvent);
+		};
+	}, [on, off, props.onSectionExpanded]);
+	return <Fragment/>;
+};
+
 export interface D9PageExternalDefsCreatorOptionsNavigator {
 	to: (to: string) => void;
 	replace: (to: string) => void;
@@ -62,7 +134,12 @@ export interface D9PageExternalDefsCreatorOptions extends GlobalHandlers {
 }
 
 export type D9PageParsedUIManufacture = (parsed: NodeDef) => NodeDef;
-export type D9PageExternalDefsCreator = (global: D9PageExternalDefsCreatorOptions) => Promise<ExternalDefs>;
+
+export interface ExternalDefsWithGlobalCustomEventListeners extends ExternalDefs {
+	$GlobalCustomEventListeners?: GlobalCustomEventListeners;
+}
+
+export type D9PageExternalDefsCreator = (global: D9PageExternalDefsCreatorOptions) => Promise<ExternalDefsWithGlobalCustomEventListeners>;
 
 /**
  * when the global widget is replaced by given, make sure the given widget handles the corresponding global events.
@@ -93,7 +170,7 @@ export interface D9PageProps {
 
 interface D9ExternalDefsInitializerState {
 	initialized: boolean;
-	defs?: ExternalDefs;
+	defs?: ExternalDefsWithGlobalCustomEventListeners;
 }
 
 const useD9ExternalDefsInitializer = (
@@ -204,6 +281,7 @@ const D9PageContent = (props: D9PageContentProps) => {
 
 	return <StandardPageWrapper>
 		<StandaloneRoot {...pageDefs} $root={rootModel} externalDefs={externalDefs.defs}>
+			<PageGlobalCustomEventBridge {...(externalDefs.defs?.$GlobalCustomEventListeners ?? {})}/>
 			<PageToRootEventBridge handle={toRootType}/>
 		</StandaloneRoot>
 	</StandardPageWrapper>;

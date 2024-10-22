@@ -28,6 +28,7 @@ export interface Data {
 export interface RootModel {
 	control: {
 		claimIssuesAllSelected: boolean;
+		activeTab?: 'issue-tab' | 'workbench-tab' | 'assessment-tab' | 'disbursement-plan-tab';
 	};
 	data: Data;
 }

@@ -16,6 +16,6 @@ export default (props: PreloadedPageProps<AssistantData>) => {
 
 	return <D9Page ui={markdown}
 	               manufactureParsedUI={manufactureParsedUI}
-	               initRootModel={asT(rootModelRef.current)} initRootModelAsIs={false}
+	               initRootModel={asT(rootModelRef.current)} initRootModelAsIs={true}
 	               externalDefs={externalDefs}/>;
 };

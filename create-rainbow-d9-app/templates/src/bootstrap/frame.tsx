@@ -144,6 +144,23 @@ const Container = styled.div.attrs({
                 margin-right: 4px;
             }
         }
+
+        &[data-as-section-title] {
+            &[data-2nd] {
+                > span[data-w=d9-caption],
+                > div[data-w=d9-dropdown] > span[data-w=d9-dropdown-label] {
+                    font-size: var(--app-2nd-section-header-title-font-size);
+                }
+            }
+
+            > span[data-w=d9-caption],
+            > div[data-w=d9-dropdown] > span[data-w=d9-dropdown-label] {
+                font-family: var(--app-section-header-title-font-family);
+                font-size: var(--d9-section-header-title-font-size);
+                font-weight: var(--d9-section-header-title-font-weight);
+                color: var(--d9-caption-font-color);
+            }
+        }
     }
 
     div[data-w=d9-section] {

@@ -1,0 +1,62 @@
+#### Section::claim.disbursement-plan.benefit-amount-allocation.title
+
+- collapsible
+
+- Table::
+	- property: data.disbursementPlan.benefitAmountAllocations
+	- !expandable, !addable, !removable
+	- fixedLeadColumns: 1
+	- headers:
+		- claim.disbursement-plan.benefit-amount-allocation.payee: 300
+		- claim.disbursement-plan.benefit-amount-allocation.disbursement-method: 160
+		- biz.policy-no: 150
+		- claim.disbursement-plan.benefit-amount-allocation.product-code: 120
+		- claim.disbursement-plan.benefit-amount-allocation.payment-type: 120
+		- claim.disbursement-plan.benefit-amount-allocation.percentage: 120
+		- claim.disbursement-plan.benefit-amount-allocation.disbursement-amount: 160
+		- claim.disbursement-plan.benefit-amount-allocation.interest-amount: 150
+		- claim.disbursement-plan.benefit-amount-allocation.payment-amount-on-payment-currency: 220
+		- claim.disbursement-plan.benefit-amount-allocation.payment-amount-on-policy-currency: 240
+		- claim.disbursement-plan.benefit-amount-allocation.pending: 100
+	- Label::::payee
+	- Dropdown::::paymentMethod
+		- disabled, data-as-label
+		- options: @ext.codes.paymentMethod
+	- Label::::policyNo
+	- Label::::productCode
+	- Dropdown::::paymentType
+		- disabled, data-as-label
+		- options: @ext.codes.paymentType
+	- Label::::percentage
+		- valueToLabel: `VUtils.isBlank(value) ? '' : value + '%'`
+	- Box::
+		- data-dense-labels
+		- Dropdown::::disbursementAmountCurrency
+			- disabled, data-as-label, data-omit-padding
+			- options: @ext.codes.currency
+		- Label::::disbursementAmount
+			- valueToLabel: `$.nf2(value)`
+	- Box::
+		- data-dense-labels
+		- Dropdown::::interestAmountCurrency
+			- disabled, data-as-label, data-omit-padding
+			- options: @ext.codes.currency
+		- Label::::interestAmount
+			- valueToLabel: `$.nf2(value)`
+	- Box::
+		- data-dense-labels
+		- Dropdown::::paymentAmountOnPaymentCurrency
+			- disabled, data-as-label, data-omit-padding
+			- options: @ext.codes.currency
+		- Label::::paymentAmountOnPayment
+			- valueToLabel: `$.nf2(value)`
+	- Box::
+		- data-dense-labels
+		- Dropdown::::paymentAmountOnPolicyCurrency
+			- disabled, data-as-label, data-omit-padding
+			- options: @ext.codes.currency
+		- Label::::paymentAmountOnPolicy
+			- valueToLabel: `$.nf2(value)`
+	- Dropdown::::pending
+		- disabled, data-as-label
+		- options: @ext.codes.yesNo

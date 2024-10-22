@@ -405,6 +405,13 @@ export namespace Claim {
 		policies?: Array<AssessmentPolicy>;
 	}
 
+	export interface DisbursementPlanPolicyProduct {
+		code?: string;
+		name?: string;
+		disbursementAmountCurrency?: string;
+		disbursementAmount?: number;
+	}
+
 	export interface DisbursementPlanPolicyPaymentPlan {
 		payee?: string;
 		relationship?: string;
@@ -426,15 +433,42 @@ export namespace Claim {
 
 	export interface DisbursementPlanPolicy {
 		policyNo?: string;
+		policyCurrency?: string;
 		totalDisbursementCurrency?: string;
 		totalDisbursementAmount?: number;
+		allocatedDisbursementCurrency?: string;
+		allocatedDisbursementAmount?: number;
 		totalAdjustmentCurrency?: string;
 		totalAdjustmentAmount?: number;
+		products?: Array<DisbursementPlanPolicyProduct>;
 		paymentPlans?: Array<DisbursementPlanPolicyPaymentPlan>;
 	}
 
+	export interface DisbursementPlanBenefitAmountAllocation {
+		payee?: string;
+		relationship?: string;
+		idNo?: string;
+		paymentMethod?: string;
+		policyNo?: string;
+		productCode?: string;
+		paymentType?: string;
+		percentage?: number;
+		disbursementAmountCurrency?: string;
+		disbursementAmount?: number;
+		interestAmountCurrency?: string;
+		interestAmount?: number;
+		paymentAmountOnPaymentCurrency?: string;
+		paymentAmountOnPayment?: number;
+		paymentAmountOnPolicyCurrency?: string;
+		paymentAmountOnPolicy?: number;
+		pending?: boolean;
+	}
+
 	export interface DisbursementPlan {
+		totalDisbursementCurrency?: string;
+		totalDisbursementAmount?: number;
 		policies?: Array<DisbursementPlanPolicy>;
+		benefitAmountAllocations?: Array<DisbursementPlanBenefitAmountAllocation>;
 	}
 
 	export interface InternalExternalQuery {
