@@ -1,3 +1,8 @@
+import {intlForBizZhCN} from './zh-CN/biz-zh-CN';
+import {intlForCommonZhCN} from './zh-CN/common-zh-CN';
+import {intlForPageZhCN} from './zh-CN/page-zh-CN';
+import {intlForValidationZhCN} from './zh-CN/validation-zh-CN';
+
 export const intlForN2ZhCN = {
 	// d9 n2
 	alert: {confirm: '确认'},
@@ -40,51 +45,10 @@ export const intlForAppZhCN = {
 	menus: {
 		preferences: '使用偏好', language: '语言', theme: '颜色主题'
 	},
-	dropdown: {
-		placeholder: {'please-select': '请选择...', all: '所有...', any: '任何...', unknown: '未知'}
-	},
-	biz: {
-		'policy-no': '保单号', 'cs-no': '保单变更号', 'claim-no': '理赔号',
-		'insured-name': '被保人姓名', 'id-type': '证件类型', 'id-no': '证件号码', gender: '性别', dob: '出生日期',
-		nationality: '国籍', occupation: '职业',
-		postcode: '邮政编码', mobile: '手机号码', email: '电子邮箱',
-		address1: '地址栏 #1', address2: '地址栏 #2',
-		address3: '地址栏 #3', address4: '地址栏 #4'
-	},
-	vars: {na: 'N/A'},
-	page: {
-		common: {
-			title: {
-				search: '查询', fuzzy: '模糊查询', advanced: '高级查询'
-			},
-			button: {
-				'show-advanced-search': '使用高级查询', 'hide-advanced-search': '隐藏高级查询',
-				search: '开始查找', 'reset-criteria': '重置条件',
-				save: '暂存', submit: '提交', confirm: '确认',
-				discard: '放弃', cancel: '取消', delete: '删除',
-				edit: '编辑', view: '查看', close: '关闭',
-				next: '下一步', previous: '上一步', back: '回退',
-				'work-on': '继续'
-			}
-		},
-		authentication: {
-			title: '欢迎',
-			username: {placeholder: '用户名', required: '请填写用户名.'},
-			pwd: {placeholder: '密码', required: '请填写密码.'},
-			'username-pwd': {required: '请填写用户名和密码.'},
-			code2fa: {placeholder: '验证码', required: '请填写验证码.'},
-			failed: '认证失败, 请检查用户名和密码是否正确.',
-			failed2fa: '认证失败, 请检查验证码是否正确.',
-			'no-auth-enabled': '未启用登录页, 修改/src/work-area/unauthenticated/no-authentication.tsx实现自定义SSO.'
-		},
-		lazy: '正在加载页面, 请稍候...',
-		home: '首页, 修改/src/work-area/home/index.tsx实现自定义渲染行为.'
-	},
-	validation: {
-		input: {
-			failed: '输入信息有误, 请检查后再操作.'
-		}
-	},
+	...intlForCommonZhCN,
+	...intlForBizZhCN,
+	...intlForPageZhCN,
+	...intlForValidationZhCN,
 	actions: {
 		logout: {
 			label: '退出系统',
