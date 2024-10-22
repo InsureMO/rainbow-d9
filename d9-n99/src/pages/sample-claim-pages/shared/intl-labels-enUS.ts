@@ -307,6 +307,8 @@ export const enUSIntlLabels = redressByCutPrefix({
 	'claim.disbursement-plan.benefit-amount-allocation.payment-amount-on-payment-currency': 'Payment Amount (Pay Currency)',
 	'claim.disbursement-plan.benefit-amount-allocation.payment-amount-on-policy-currency': 'Payment Amount (Policy Currency)',
 	'claim.disbursement-plan.benefit-amount-allocation.pending': 'Pending',
+	'claim.disbursement-plan.add-lump-sum': 'Add Lump Sum',
+	'claim.disbursement-plan.add-installment': 'Add Installment',
 	// biz properties
 	'claim.props.policy-no': 'Policy No.',
 	'claim.props.cs-no': 'CS No.',
