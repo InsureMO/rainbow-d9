@@ -52,15 +52,15 @@
 - repaint:
 	- on: criteria
 
-- Input::biz.policy-no::policyNo
-- Input::biz.insured-name::insuredName
-- Box::biz.id-no
+- Input::claim.props.policy-no::policyNo
+- Input::claim.props.insured-name::insuredName
+- Box::claim.props.id-no
 	- data-type-input-box
 	- Dropdown::::idType
 		- options: @ext.codes.idType
 		- please: dropdown.placeholder.any
 	- Input::::idNo
-- Dropdown::biz.gender::gender
+- Dropdown::claim.props.gender::gender
 	- options: @ext.codes.gender
 	- please: dropdown.placeholder.any
 - ButtonBar::
@@ -85,11 +85,11 @@
 - getElementKey: @ext.getElementKey
 
 - headers:
-	- biz.insured-name: 1fr
-	- biz.gender: 80
-	- biz.id-type: 120
-	- biz.id-no: 130
-	- biz.dob: 130
+	- claim.props.insured-name: 1fr
+	- claim.props.gender: 80
+	- claim.props.id-type: 120
+	- claim.props.id-no: 130
+	- claim.props.dob: 130
 	- claim.registration.results.related-policies: 200
 	- claim.registration.results.ongoing-claims: 200
 - Label::::insuredName

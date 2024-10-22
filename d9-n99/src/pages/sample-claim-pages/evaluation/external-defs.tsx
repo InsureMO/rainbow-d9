@@ -27,7 +27,6 @@ export const createExternalDefsCreator = (rootModelRef: MutableRefObject<RootMod
 		return {
 			$GlobalCustomEventListeners: {
 				onTabChanged: ({marker}) => {
-					console.log(marker);
 					// @ts-ignore
 					rootModelRef.current.control.activeTab = marker;
 					globalHandlers.root.fire(RootEventTypes.VALUE_CHANGED, '/control.activeTab', marker, marker);

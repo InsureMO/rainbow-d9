@@ -13,7 +13,7 @@
 	- headers:
 		- claim.underwriting-by-claim.type: 150
 		- claim.underwriting-by-claim.case-no: 150
-		- biz.policy-no: 150
+		- claim.props.policy-no: 150
 		- claim.underwriting-by-claim.application-date: 120
 		- claim.underwriting-by-claim.raised: 1fr
 		- claim.underwriting-by-claim.due: 120

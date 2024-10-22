@@ -11,10 +11,10 @@
 - repaint:
 	- on: criteria
 
-- Input::biz.policy-no::policyNo
+- Input::claim.props.policy-no::policyNo
 - Input::claim.reg.case-no::caseNo
 - Input::claim.reg.reg-no::registrationNo
-- Input::biz.insured-name::insuredName
+- Input::claim.props.insured-name::insuredName
 - ButtonBar::
 	- data-narrow-up-in-search
 	- Button::
@@ -39,7 +39,7 @@
 - headers:
 	- claim.reg.case-no: 150
 	- claim.reg.reg-no: 150
-	- biz.policy-no: 150
+	- claim.props.policy-no: 150
 	- claim.reg.status: 1fr
 - Label::::caseNo
 - Label::::registrationNo

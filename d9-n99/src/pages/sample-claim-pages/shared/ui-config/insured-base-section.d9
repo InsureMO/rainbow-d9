@@ -14,9 +14,9 @@
 - repaint:
 	- on: data.insured
 
-- Input::biz.insured-name::name
+- Input::claim.props.insured-name::name
 	- disabled
-- Box::biz.id-no
+- Box::claim.props.id-no
 	- data-type-input-box
 	- Dropdown::::idType
 		- disabled
@@ -24,8 +24,8 @@
 		- please: dropdown.placeholder.unknown
 	- Input::::idNo
 		- disabled
-- Dropdown::biz.gender::gender
+- Dropdown::claim.props.gender::gender
 	- disabled
 	- options: @ext.codes.gender
-- Input::biz.dob::dob
+- Input::claim.props.dob::dob
 	- disabled

@@ -17,7 +17,7 @@
 	- property: data.disbursementPlan.policies
 	- expandable, !addable, !removable, data-omit-expand-area-padding
 	- headers:
-		- biz.policy-no: 200
+		- claim.props.policy-no: 200
 		- claim.disbursement-plan.policy.total-disbursement-amount: 200
 		- claim.disbursement-plan.policy.allocated-disbursement-amount: 250
 		- claim.disbursement-plan.policy.total-adjusted-payment: 200

@@ -5,8 +5,8 @@
 		- !expandable, !addable, !removable
 		- fixedLeadColumns: 4
 		- headers:
-			- biz.cs-no: 120
-			- biz.policy-no: 120
+			- claim.props.cs-no: 120
+			- claim.props.policy-no: 120
 			- claim.claim-workbench.policy.risk-related-cs-history.product-code: 200
 			- claim.claim-workbench.policy.risk-related-cs-history.product-type: 200
 			- claim.claim-workbench.policy.risk-related-cs-history.item: 200

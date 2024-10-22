@@ -7,8 +7,8 @@
 	- !expandable, !addable, !removable
 	- fixedLeadColumns: 1
 	- headers:
-		- biz.claim-no: 150
-		- biz.policy-no: 150
+		- claim.props.claim-no: 150
+		- claim.props.policy-no: 150
 		- claim.claim-workbench.life-assured-info.claim-history.product-code: 120
 		- claim.claim-workbench.life-assured-info.claim-history.product-type: 120
 		- claim.claim-workbench.life-assured-info.claim-history.claim-type: 120

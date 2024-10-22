@@ -33,7 +33,7 @@
 	- headers:
 		- claim.claim-workbench.disbursement-plan.payment.payee: 300
 		- claim.claim-workbench.disbursement-plan.payment.relationship: 150
-		- biz.id-no: 150
+		- claim.props.id-no: 150
 		- claim.claim-workbench.disbursement-plan.payment.payment-method: 120
 		- claim.claim-workbench.disbursement-plan.payment.product-code: 120
 		- claim.claim-workbench.disbursement-plan.payment.payment-type: 120

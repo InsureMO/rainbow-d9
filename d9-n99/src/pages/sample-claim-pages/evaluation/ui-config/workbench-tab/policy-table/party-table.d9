@@ -8,11 +8,11 @@
 			- claim.claim-workbench.policy.party.role: 120
 			- claim.claim-workbench.policy.party.name: 200
 			- claim.claim-workbench.policy.party.id-type-and-no: 200
-			- biz.dob: 120
-			- biz.gender: 120
+			- claim.props.dob: 120
+			- claim.props.gender: 120
 			- claim.claim-workbench.policy.party.relation-with-holder: 120
 			- claim.claim-workbench.policy.party.annual-income: 120
-			- biz.occupation: 120
+			- claim.props.occupation: 120
 			- claim.claim-workbench.policy.party.smoker-status: 120
 			- claim.claim-workbench.policy.party.risk-indicator: 100
 			- claim.claim-workbench.policy.party.medical-report: 120

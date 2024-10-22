@@ -9,7 +9,7 @@
 	- headers:
 		- claim.disbursement-plan.benefit-amount-allocation.payee: 300
 		- claim.disbursement-plan.benefit-amount-allocation.disbursement-method: 160
-		- biz.policy-no: 150
+		- claim.props.policy-no: 150
 		- claim.disbursement-plan.benefit-amount-allocation.product-code: 120
 		- claim.disbursement-plan.benefit-amount-allocation.payment-type: 120
 		- claim.disbursement-plan.benefit-amount-allocation.percentage: 120

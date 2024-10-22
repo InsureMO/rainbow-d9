@@ -29,7 +29,7 @@
 		  return model.relationship === 'self';
 		  ```
 - Box::
-- Dropdown::biz.id-type::idType
+- Dropdown::claim.props.id-type::idType
 	- options: @ext.codes.idType
 	- disabled:
 		- on: relationship
@@ -46,7 +46,7 @@
 		  ```ts
 		  return model.relationship === 'self' || model.idType !== 'passport';
 		  ```
-- Input::biz.id-no::idNo
+- Input::claim.props.id-no::idNo
 	- disabled:
 		- on: relationship
 		- handle:
@@ -54,17 +54,17 @@
 		  return model.relationship === 'self';
 		  ```
 - Box::
-- Input::biz.address1::address1
+- Input::claim.props.address1::address1
 	- pos: 9
-- Input::biz.postcode::postcode
-- Input::biz.address2::address2
+- Input::claim.props.postcode::postcode
+- Input::claim.props.address2::address2
 	- pos: 4
-- Input::biz.address3::address3
+- Input::claim.props.address3::address3
 	- pos: 4
-- Input::biz.address4::address4
+- Input::claim.props.address4::address4
 	- pos: 4
-- Input::biz.mobile::mobile
-- Input::biz.email::email
+- Input::claim.props.mobile::mobile
+- Input::claim.props.email::email
 - Dropdown::claim.reporter.notification-method::notificationMethod
 	- options: @ext.codes.notificationMethod
 - Input::claim.reporter.handling-producer::handlingProducer

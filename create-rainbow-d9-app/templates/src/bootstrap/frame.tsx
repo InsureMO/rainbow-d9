@@ -546,7 +546,7 @@ const Container = styled.div.attrs({
                         min-height: var(--app-timeline-message-min-height);
                         height: unset;
                         line-height: var(--app-timeline-message-line-height);
-                        padding: calc((var(--app-timeline-message-min-height) - var(--app-timeline-message-line-height)) / 2);
+                        padding: calc((var(--app-timeline-message-min-height) - var(--app-timeline-message-line-height)) / 2) 0;
                         white-space: normal;
                         overflow: auto;
                         text-overflow: unset;

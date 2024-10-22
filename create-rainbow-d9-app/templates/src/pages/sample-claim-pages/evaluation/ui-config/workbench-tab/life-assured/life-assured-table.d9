@@ -2,13 +2,13 @@
 	- property: insuredList
 	- !expandable, !addable, !removable
 	- headers:
-		- biz.insured-name: 1fr
-		- biz.id-type: 100
-		- biz.id-no: 160
-		- biz.nationality: 140
-		- biz.gender: 140
-		- biz.dob: 140
-		- biz.occupation: 140
+		- claim.props.insured-name: 1fr
+		- claim.props.id-type: 100
+		- claim.props.id-no: 160
+		- claim.props.nationality: 140
+		- claim.props.gender: 140
+		- claim.props.dob: 140
+		- claim.props.occupation: 140
 		- claim.claim-workbench.life-assured-info.age-at-event: 140
 	- Label::::name
 	- Dropdown::::idType

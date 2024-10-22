@@ -24,7 +24,6 @@
 		- on: control.activeTab
 		- handle:
 		  ```ts
-		  console.log(model.control.activeTab);
 		  return model.control.activeTab === 'disbursement-plan-tab';
 		  ```
 - Button::

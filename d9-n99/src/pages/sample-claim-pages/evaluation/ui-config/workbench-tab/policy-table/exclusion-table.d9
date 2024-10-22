@@ -5,7 +5,7 @@
 		- !expandable, !addable, !removable
 		- fixedLeadColumns: 3
 		- headers:
-			- biz.policy-no: 120
+			- claim.props.policy-no: 120
 			- claim.claim-workbench.policy.exclusion.product-code: 200
 			- claim.claim-workbench.policy.exclusion.product-type: 200
 			- claim.claim-workbench.policy.exclusion.category: 150
