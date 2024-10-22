@@ -1,0 +1,77 @@
+##### Section::
+
+- collapsible
+- title: Box
+	- data-dense-labels, data-as-section-title
+	- Caption::claim.assessment.payment-summary.title
+	- Caption::(
+	- Caption::claim.assessment.payment-summary.total-disbursement-amount
+	- Dropdown::::totalDisbursementCurrency
+		- disabled, data-as-label, data-omit-padding
+		- options: @ext.codes.currency
+	- Label::::totalDisbursementAmount
+		- valueToLabel: `$.nf2(value)`
+	- Caption::)
+- Table::
+	- property: products
+	- !expandable, !addable, !removable
+	- fixedLeadColumns: 2
+	- headers:
+		- claim.assessment.product.name: 300
+		- claim.assessment.product.life-assured: 300
+		- claim.assessment.product.claim-decision: 150
+		- claim.assessment.product.claim-decision-reason: 150
+		- claim.assessment.product.in-force: 80
+		- claim.assessment.product.premium-waive: 120
+		- claim.assessment.product.waive-start-date: 120
+		- claim.assessment.product.total-payment-amount: 220
+	- Box::
+		- data-dense-labels
+		- Label::::code
+		- Caption::|
+		- Label::::name
+	- Label::::lifeAssured
+	- Label::::claimDecision
+	- Label::::claimDecisionReason
+	- Dropdown::::inForce
+		- disabled, data-as-label
+		- options: @ext.codes.yesNo
+	- Dropdown::::premiumWaive
+		- disabled, data-as-label
+		- options: @ext.codes.yesNo
+	- Label::::waiveStartDate
+	- Box::
+		- data-dense-labels
+		- Dropdown::::totalPaymentCurrency
+			- disabled, data-as-label, data-omit-padding
+			- options: @ext.codes.currency
+		- Label::::totalPaymentAmount
+			- valueToLabel: `$.nf2(value)`
+- Table::
+	- property: adjustmentItems
+	- !addable, !removable,
+	- headers:
+		- claim.assessment.adjustment-item.name: 300
+		- claim.assessment.adjustment-item.premium-collect-to: 160
+		- claim.assessment.adjustment-item.evaluation-payment: 220
+		- claim.assessment.adjustment-item.actual-payment: 220
+		- claim.assessment.adjustment-item.remark: 400
+	- Label::::name
+	- Date::::premiumCollectTo
+	- Box::
+		- data-type-input-box
+		- Dropdown::::evaluationPaymentCurrency
+			- options: @ext.codes.currency
+			- data-in-table-cell-and-box
+			- !clearable
+		- Input::::evaluationPaymentAmount
+			- data-in-table-cell-and-box
+	- Box::
+		- data-type-input-box
+		- Dropdown::::actualPaymentCurrency
+			- options: @ext.codes.currency
+			- data-in-table-cell-and-box
+			- !clearable
+		- Input::::actualPaymentAmount
+			- data-in-table-cell-and-box
+	- Input::::remark

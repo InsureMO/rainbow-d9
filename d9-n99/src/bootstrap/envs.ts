@@ -15,7 +15,7 @@ import QuarterOfYear from 'dayjs/plugin/quarterOfYear';
 import RelativeTime from 'dayjs/plugin/relativeTime';
 import UTC from 'dayjs/plugin/utc';
 import WeekOfYear from 'dayjs/plugin/weekOfYear';
-import {asT, defendCSPNoUnsafeEval} from '../utils';
+import {askDateFormat, askStoreDateTimeFormat, askTimeFormat, asT, defendCSPNoUnsafeEval} from '../utils';
 
 // datetime functions
 dayjs.extend(WeekOfYear);
@@ -60,9 +60,9 @@ dayjs.extend(BuddhistEra);
 	// set widgets parameters
 	// calendar
 	CalendarUtils.setCalendarDefaults({
-		dateFormat: 'DD/MM/YYYY',
-		// timeFormat: askDisplayTimeFormat(),
-		// datetimeFormat: askDateTimeFormat(),
+		dateFormat: askDateFormat(),
+		timeFormat: askTimeFormat(),
+		datetimeFormat: askStoreDateTimeFormat(),
 		useCalendarIcon: true
 	});
 	DropdownUtils.setDropdownDefaults({

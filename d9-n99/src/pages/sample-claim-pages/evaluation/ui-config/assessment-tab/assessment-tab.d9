@@ -1,3 +1,36 @@
 ### Tab::claim.assessment.title
 
 - marker: assessment-tab
+
+#### Ribs::::data.assessment.policies
+
+- !expandable, !addable, !removable, data-as-section
+- initExpanded: `return true`
+- caption: Box
+	- data-labels
+	- Caption::claim.assessment.policy.title
+	- Label::::policyNo
+		- data-as-link
+		- click: @ext.assessment.policy.view.click
+- Dropdown::claim.assessment.policy.current-status::status
+	- disabled
+	- options: @ext.codes.policyStatus
+	- pos: 2
+- Input::claim.assessment.policy.inception-date::inceptionDate
+	- disabled
+	- pos: 2
+- Input::claim.assessment.policy.last-reinstatement-date::lastReinstatementDate
+	- disabled
+	- pos: 2
+- Dropdown::claim.assessment.policy.premium-frequency::premiumFrequency
+	- disabled
+	- options: @ext.codes.premiumFrequency
+	- pos: 2
+- Input::claim.assessment.policy.anniversary-date::anniversaryDate
+	- disabled
+	- pos: 2
+- Dropdown::claim.assessment.policy.status-at-event::statusAtEvent
+	- disabled
+	- options: @ext.codes.policyStatus
+	- pos: 2
+- Box::$$policy-payment-summary-section

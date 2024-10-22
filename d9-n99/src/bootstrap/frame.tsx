@@ -391,11 +391,23 @@ const Container = styled.div.attrs({
             > div[data-w=d9-box] {
                 width: 100%;
 
+                &[data-type-input-box] {
+                    > div[data-w=d9-dropdown][data-in-table-cell-and-box]:first-child {
+                        width: auto;
+                        margin-right: 0;
+                    }
+
+                    > input[data-w=d9-input][data-in-table-cell-and-box]:last-child {
+                        flex-grow: 1;
+                        margin-left: 0;
+                    }
+                }
+
                 > input[data-w=d9-input],
                 > div[data-w=d9-dropdown],
                 > div[data-w=d9-calendar] {
                     &[data-in-table-cell-and-box] {
-                        width: calc(100% + calc(var(--d9-input-indent) * 2));
+                        width: calc(100% + var(--d9-input-indent) * 2);
                         height: calc(var(--d9-table-cell-height) - 6px);
                         margin: 0 calc(var(--d9-input-indent) * -1);
 

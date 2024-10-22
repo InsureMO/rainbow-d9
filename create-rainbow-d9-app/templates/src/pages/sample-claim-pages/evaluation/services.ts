@@ -93,6 +93,8 @@ const mockDoLoadMockEvaluationData = async (_keyOrRegistrationId: string): Promi
 		assessment: {
 			policies: [{
 				policyNo: 'K000017187', totalDisbursementCurrency: 'SGD', totalDisbursementAmount: 24116,
+				status: 'inforce', inceptionDate: '14/10/2024', lastReinstatementDate: '14/10/2024',
+				premiumFrequency: '', anniversaryDate: '14/10/2024', statusAtEvent: 'inforce',
 				products: [
 					{
 						code: 'GEMA01', name: 'COMPREHENSIVE CARE', claimDecision: 'Admit', claimDecisionReason: '',
@@ -112,7 +114,8 @@ const mockDoLoadMockEvaluationData = async (_keyOrRegistrationId: string): Promi
 				],
 				adjustmentItems: [{
 					name: 'Refund Premium', evaluationPaymentCurrency: 'SGD', evaluationPaymentAmount: 1000,
-					actualPaymentCurrency: 'SGD', actualPaymentAmount: 1000
+					actualPaymentCurrency: 'SGD', actualPaymentAmount: 1000, remark: '',
+					premiumCollectTo: '14/10/2024 00:00:00'
 				}]
 			}]
 		},

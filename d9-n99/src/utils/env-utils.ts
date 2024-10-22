@@ -29,6 +29,9 @@ export const getUnauthenticatedRoute = (): string => import.meta.env.VITE_UNAUTH
 export const isAuthenticationEnabled = () => import.meta.env.VITE_AUTHENTICATION_ENABLED !== 'false';
 export const isAuthentication2FAEnabled = () => isAuthenticationEnabled() && import.meta.env.VITE_AUTHENTICATION_2FA_ENABLED === 'true';
 // data, remote
+export const askStoreDateTimeFormat = () => import.meta.env.VITE_STORE_DATE_TIME_FORMAT || 'DD/MM/YYYY HH:mm:ss';
+export const askDateFormat = () => import.meta.env.VITE_DATE_FORMAT || 'DD/MM/YYYY';
+export const askTimeFormat = () => import.meta.env.VITE_TIME_FORMAT || 'HH:mm:ss';
 export const isForceServiceUrlPrefix = () => import.meta.env.VITE_FORCE_SERVICE_URL_PREFIX === 'true';
 export const getServiceUrlPrefix = () => import.meta.env.VITE_SERVICE_URL_PREFIX || '/';
 export const getServiceUrlContext = () => import.meta.env.VITE_SERVICE_CONTEXT || '/';

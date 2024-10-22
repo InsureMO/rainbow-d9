@@ -387,14 +387,22 @@ export namespace Claim {
 
 	export interface AssessmentPolicyAdjustmentItem {
 		name?: string;
+		premiumCollectTo?: string;
 		evaluationPaymentCurrency?: string;
 		evaluationPaymentAmount?: number;
 		actualPaymentCurrency?: string;
 		actualPaymentAmount?: number;
+		remark?: string;
 	}
 
 	export interface AssessmentPolicy {
 		policyNo?: string;
+		status?: string;
+		inceptionDate?: string;
+		lastReinstatementDate?: string;
+		premiumFrequency?: string;
+		anniversaryDate?: string;
+		statusAtEvent?: string;
 		totalDisbursementCurrency?: string;
 		totalDisbursementAmount?: number;
 		products?: Array<AssessmentPolicyProduct>;
