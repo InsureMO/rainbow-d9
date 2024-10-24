@@ -12,5 +12,5 @@
 		- !clearable
 		- required
 	- Input::claim.assessment.product.claim-decision.termination-effective-date::terminationEffectiveDate
-	- Textarea::claim.assessment.product.comment-to-client::commentToClient
+	- Textarea::claim.assessment.product.claim-decision.comment-to-client::commentToClient
 		- pos : 12
