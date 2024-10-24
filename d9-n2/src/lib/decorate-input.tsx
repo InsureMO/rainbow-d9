@@ -48,7 +48,6 @@ const DecorateInputContainer = styled.div.attrs(
 
     > input[data-w=d9-input] {
         flex-grow: 1;
-        min-width: 0;
 
         &:hover, &:focus {
             z-index: 1;

@@ -1,5 +1,5 @@
 import {MonitorNodeAttributes, NodeDef} from '@rainbow-d9/n1';
-import {DropdownOptions, GlobalHandlers, SectionDef} from '@rainbow-d9/n2';
+import {DropdownOptions, GlobalHandlers, IntlLabel, SectionDef} from '@rainbow-d9/n2';
 import {lazy} from 'react';
 import {AppPage, PageRegistrar} from '../../../global-settings';
 import {asT} from '../../../utils';
@@ -9,7 +9,7 @@ import {
 	PreloaderFuncOptions,
 	visitParsedUI
 } from '../../standard-widgets';
-import {SharedServices} from '../shared';
+import {Claim, SharedServices} from '../shared';
 import {loadEvaluationData} from './services';
 import {RootModel} from './types';
 import {createMarkdown} from './ui-config';
@@ -55,7 +55,61 @@ const ClaimEvaluationIndex = PreloadedLazyPageWrapper(lazy(() => import('./page'
 				underwritingByClaimList: data.underwritingByClaimList ?? [],
 				assessment: {
 					...data.assessment,
-					policies: data.assessment?.policies ?? []
+					policies: (data.assessment?.policies ?? []).map(policy => {
+						policy.products = (policy.products ?? []).map(product => {
+							return new Proxy(product, {
+								get(product: Claim.AssessmentPolicyProduct, p: string | symbol, _receiver: any): any {
+									if (p === 'adjustmentItemsWithTotal') {
+										const items = product.adjustmentItems ?? [];
+										return [
+											...items,
+											new Proxy({
+												isTotal: true,
+												name: asT(<IntlLabel keys={['claim.props.total']} value="Total"/>)
+											} as Claim.AssessmentPolicyProductAdjustmentItem, {
+												get(target: Claim.AssessmentPolicyProductAdjustmentItem, p: string, _receiver: any): any {
+													if (['evaluationAmount', 'adjustmentAmount', 'paymentAmount'].includes(p)) {
+														return (product.adjustmentItems ?? []).reduce((acc, item) => {
+															// @ts-ignore
+															return acc + (item[p] ?? 0);
+														}, 0);
+													} else {
+														// @ts-ignore
+														return target[p];
+													}
+												}
+											})
+										];
+									} else if (p === 'liabilityEvaluationsWithTotal') {
+										const items = product.liabilityEvaluations ?? [];
+										return [
+											...items,
+											new Proxy({
+												isTotal: true,
+												name: asT(<IntlLabel keys={['claim.props.total']} value="xxx"/>)
+											} as Claim.AssessmentPolicyProductLiabilityEvaluation, {
+												get(target: Claim.AssessmentPolicyProductLiabilityEvaluation, p: string, _receiver: any): any {
+													if (['advancePayment', 'evaluationPayment', 'claimablePayment', 'actualPayment'].includes(p)) {
+														return (product.liabilityEvaluations ?? []).reduce((acc, item) => {
+															// @ts-ignore
+															return acc + (item[p] ?? 0);
+														}, 0);
+													} else {
+														// @ts-ignore
+														return target[p];
+													}
+												}
+											})
+										];
+									} else {
+										// @ts-ignore
+										return product[p];
+									}
+								}
+							});
+						});
+						return policy;
+					})
 				},
 				disbursementPlan: {
 					...data.disbursementPlan,

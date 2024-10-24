@@ -100,7 +100,7 @@ const mockDoLoadMockEvaluationData = async (_keyOrRegistrationId: string): Promi
 						code: 'GEMA01', name: 'COMPREHENSIVE CARE', claimDecision: 'Admit', claimDecisionReason: '',
 						inForce: false, premiumWaive: false, waiveStartDate: '',
 						totalPaymentCurrency: 'SGD', totalPaymentAmount: 24016,
-						items: [{
+						adjustmentItems: [{
 							name: 'Death', paymentCurrency: 'SGD', paymentAmount: 200000,
 							actualPaymentCurrency: 'SGD', actualPaymentAmount: 200000
 						}, {
@@ -112,6 +112,11 @@ const mockDoLoadMockEvaluationData = async (_keyOrRegistrationId: string): Promi
 						}],
 						adjustmentFactors: [{
 							name: 'Ward Level Adjustment', subName: 'Actual Ward Level', factor: 100
+						}],
+						liabilityEvaluations: [{
+							name: 'Death', parameter: '',
+							advancePayment: 0, evaluationPayment: 0, claimablePayment: 0,
+							actualPayment: 0, remark: ''
 						}]
 					}
 				],

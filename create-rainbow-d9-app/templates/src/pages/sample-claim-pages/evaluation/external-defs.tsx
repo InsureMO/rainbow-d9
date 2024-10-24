@@ -61,9 +61,18 @@ export const createExternalDefsCreator = (rootModelRef: MutableRefObject<RootMod
 						click: async (options: CaptionClickOptions<BaseModel, PropValue>) => {
 							alert(`Policy[${asT<Claim.AssessmentPolicy>(options.model).policyNo}] link clicked.`);
 						}
+					}
+				},
+				'liability-evaluation': {
+					compute: {
+						click: async (_options: ButtonClickOptions<BaseModel, PropValue>) => {
+							alert('Liability evaluation compute button clicked.');
+						}
 					},
-					product: {
-						getElementKey: (_element: Claim.AssessmentPolicyProduct, index: number) => `item-${index}`
+					'auto-select': {
+						click: async (_options: ButtonClickOptions<BaseModel, PropValue>) => {
+							alert('Liability evaluation auto select button clicked.');
+						}
 					}
 				}
 			},

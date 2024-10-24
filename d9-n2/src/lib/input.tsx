@@ -78,6 +78,7 @@ const AnInput = styled.input.attrs<{ autoSelect: boolean }>(
     font-size: ${CssVars.FONT_SIZE};
     color: ${CssVars.FONT_COLOR};
     height: ${CssVars.INPUT_HEIGHT};
+    min-width: 0;
     padding: 0 ${CssVars.INPUT_INDENT};
     background-color: transparent;
     border: ${CssVars.BORDER};

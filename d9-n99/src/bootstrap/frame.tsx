@@ -172,6 +172,12 @@ const Container = styled.div.attrs({
                 color: var(--d9-caption-font-color);
             }
         }
+
+        &[data-one-at-a-time] {
+            > * {
+                flex-grow: 1;
+            }
+        }
     }
 
     div[data-w=d9-section] {

@@ -3,7 +3,7 @@
 - collapsible
 - title: Box
 	- data-dense-labels, data-as-section-title
-	- Caption::claim.assessment.payment-summary.title
+	- Caption::claim.assessment.policy.payment-summary.title
 	- Caption::(
 	- Caption::claim.assessment.payment-summary.total-disbursement-amount
 	- Dropdown::::totalDisbursementCurrency

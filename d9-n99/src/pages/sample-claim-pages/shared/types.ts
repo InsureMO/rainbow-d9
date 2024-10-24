@@ -364,12 +364,17 @@ export namespace Claim {
 		policies?: Array<LifeAssuredPolicy>;
 	}
 
-	export interface AssessmentPolicyProductItem {
+	export interface AssessmentPolicyProductAdjustmentItem {
 		name?: string;
+		evaluationCurrency?: string;
+		evaluationAmount?: number;
+		adjustmentCurrency?: string;
+		adjustmentAmount?: number;
 		paymentCurrency?: string;
 		paymentAmount?: number;
 		actualPaymentCurrency?: string;
 		actualPaymentAmount?: number;
+		remark?: string;
 	}
 
 	export interface AssessmentPolicyProductAdjustmentFactor {
@@ -377,6 +382,19 @@ export namespace Claim {
 		subName?: string;
 		cause?: string;
 		factor?: number;
+	}
+
+	export interface AssessmentPolicyProductLiabilityEvaluation {
+		/** this is a control property, never submit to server side */
+		selected?: boolean;
+		sequence?: number;
+		name?: string;
+		parameter?: string;
+		advancePayment?: number;
+		evaluationPayment?: number;
+		claimablePayment?: number;
+		actualPayment?: number;
+		remark?: string;
 	}
 
 	export interface AssessmentPolicyProduct {
@@ -389,8 +407,9 @@ export namespace Claim {
 		waiveStartDate?: string;
 		totalPaymentCurrency?: string;
 		totalPaymentAmount?: number;
-		items?: Array<AssessmentPolicyProductItem>;
+		adjustmentItems?: Array<AssessmentPolicyProductAdjustmentItem>;
 		adjustmentFactors?: Array<AssessmentPolicyProductAdjustmentFactor>;
+		liabilityEvaluations?: Array<AssessmentPolicyProductLiabilityEvaluation>;
 	}
 
 	export interface AssessmentPolicyAdjustmentItem {
