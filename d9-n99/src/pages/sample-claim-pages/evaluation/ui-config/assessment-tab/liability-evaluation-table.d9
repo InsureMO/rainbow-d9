@@ -1,0 +1,54 @@
+- Section::claim.assessment.product.liability-evaluation.title
+	- collapsible, data-3rd
+	- Table::
+		- property: liabilityEvaluationsWithTotal
+		- !expandable, !addable, !removable
+		- fixedLeadColumns: 3
+		- headers:
+			- column:
+				- width: 60
+			- claim.assessment.product.liability-evaluation.sequence: 120
+			- claim.assessment.product.liability-evaluation.name: 200
+			- claim.assessment.product.liability-evaluation.parameter: 150
+			- claim.assessment.product.liability-evaluation.advance-payment: 150
+			- claim.assessment.product.liability-evaluation.evaluation-payment: 150
+			- claim.assessment.product.liability-evaluation.claimable-payment: 150
+			- claim.assessment.product.liability-evaluation.actual-payment: 150
+			- claim.assessment.product.liability-evaluation.remark: 300
+		- Checkbox::::selected
+			- visible:
+				- on: isTotal
+				- handle: `return model.isTotal !== true;`
+		- Label::::sequence
+		- Label::::name
+		- Label::::parameter
+		- Label::::advancePayment
+			- valueToLabel: `$.nf2(value)`
+		- Label::::evaluationPayment
+			- valueToLabel: `$.nf2(value)`
+		- Label::::claimablePayment
+			- valueToLabel: `$.nf2(value)`
+		- Box::
+			- data-one-at-a-time
+			- Input::::actualPayment
+				- data-in-table-cell-and-box
+				- visible:
+					- on: isTotal
+					- handle: `return model.isTotal !== true;`
+			- Label::::actualPayment
+				- valueToLabel: `$.nf2(value)`
+				- visible:
+					- on: isTotal
+					- handle: `return model.isTotal === true;`
+		- Input::::remark
+			- visible:
+				- on: isTotal
+				- handle: `return model.isTotal !== true;`
+	- ButtonBar::
+		- Button::
+			- text: claim.assessment.product.liability-evaluation.auto-select
+			- click: @ext.assessment.liability-evaluation.auto-select.click
+			- fill: plain
+		- Button::
+			- text: claim.assessment.product.liability-evaluation.compute
+			- click: @ext.assessment.liability-evaluation.compute.click

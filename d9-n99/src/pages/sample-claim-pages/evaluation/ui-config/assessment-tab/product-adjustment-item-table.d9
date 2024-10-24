@@ -1,0 +1,52 @@
+- Section::claim.assessment.product.adjustment-item.title
+	- collapsible, data-3rd
+	- Table::
+		- property: adjustmentItemsWithTotal
+		- !expandable, !addable, !removable
+		- headers:
+			- claim.assessment.product.adjustment-item.name: 300
+			- claim.assessment.product.adjustment-item.evaluation-amount: 200
+			- claim.assessment.product.adjustment-item.adjustment-amount: 150
+			- claim.assessment.product.adjustment-item.payment-amount: 150
+			- claim.assessment.product.adjustment-item.remark: 300
+		- Label::::name
+		- Box::
+			- data-one-at-a-time
+			- Input::::evaluationAmount
+				- data-in-table-cell-and-box
+				- visible:
+					- on: isTotal
+					- handle: `return model.isTotal !== true;`
+			- Label::::evaluationAmount
+				- valueToLabel: `$.nf2(value)`
+				- visible:
+					- on: isTotal
+					- handle: `return model.isTotal === true;`
+		- Box::
+			- data-one-at-a-time
+			- Input::::adjustmentAmount
+				- data-in-table-cell-and-box
+				- visible:
+					- on: isTotal
+					- handle: `return model.isTotal !== true;`
+			- Label::::adjustmentAmount
+				- valueToLabel: `$.nf2(value)`
+				- visible:
+					- on: isTotal
+					- handle: `return model.isTotal === true;`
+		- Box::
+			- data-one-at-a-time
+			- Input::::paymentAmount
+				- data-in-table-cell-and-box
+				- visible:
+					- on: isTotal
+					- handle: `return model.isTotal !== true;`
+			- Label::::paymentAmount
+				- valueToLabel: `$.nf2(value)`
+				- visible:
+					- on: isTotal
+					- handle: `return model.isTotal === true;`
+		- Input::::remark
+			- visible:
+				- on: isTotal
+				- handle: `return model.isTotal !== true;`

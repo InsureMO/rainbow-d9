@@ -1,0 +1,18 @@
+- Section::claim.assessment.product.adjustment-factor.title
+	- collapsible, data-3rd
+	- Table::
+		- property: adjustmentFactors
+		- !expandable, !addable, !removable
+		- headers:
+			- claim.assessment.product.adjustment-factor.name: 300
+			- column:
+				- width:200
+			- claim.assessment.product.adjustment-factor.cause: 300
+			- claim.assessment.product.adjustment-factor.factor: 150
+		- Label::::name
+		- Label::::subName
+		- Dropdown::::cause
+			- options: @ext.codes.adjustmentFactorCause
+			- please: dropdown.placeholder.please-select
+		- DecoInput::::factor
+			- tails: %
