@@ -372,6 +372,13 @@ export namespace Claim {
 		actualPaymentAmount?: number;
 	}
 
+	export interface AssessmentPolicyProductAdjustmentFactor {
+		name?: string;
+		subName?: string;
+		cause?: string;
+		factor?: number;
+	}
+
 	export interface AssessmentPolicyProduct {
 		code?: string;
 		name?: string;
@@ -383,6 +390,7 @@ export namespace Claim {
 		totalPaymentCurrency?: string;
 		totalPaymentAmount?: number;
 		items?: Array<AssessmentPolicyProductItem>;
+		adjustmentFactors?: Array<AssessmentPolicyProductAdjustmentFactor>;
 	}
 
 	export interface AssessmentPolicyAdjustmentItem {

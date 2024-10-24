@@ -1,0 +1,30 @@
+- Section::claim.assessment.adjustment-item.title
+	- collapsible, data-2nd
+	- Table::
+		- property: adjustmentItems
+		- !addable, !removable,
+		- headers:
+			- claim.assessment.adjustment-item.name: 300
+			- claim.assessment.adjustment-item.premium-collect-to: 160
+			- claim.assessment.adjustment-item.evaluation-payment: 220
+			- claim.assessment.adjustment-item.actual-payment: 220
+			- claim.assessment.adjustment-item.remark: 400
+		- Label::::name
+		- Date::::premiumCollectTo
+		- Box::
+			- data-type-input-box
+			- Dropdown::::evaluationPaymentCurrency
+				- options: @ext.codes.currency
+				- data-in-table-cell-and-box
+				- !clearable
+			- Input::::evaluationPaymentAmount
+				- data-in-table-cell-and-box
+		- Box::
+			- data-type-input-box
+			- Dropdown::::actualPaymentCurrency
+				- options: @ext.codes.currency
+				- data-in-table-cell-and-box
+				- !clearable
+			- Input::::actualPaymentAmount
+				- data-in-table-cell-and-box
+		- Input::::remark

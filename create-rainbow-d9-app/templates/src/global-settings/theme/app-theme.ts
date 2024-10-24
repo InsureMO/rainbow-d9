@@ -160,6 +160,7 @@ export const createAppThemeStyles = (): AppThemeStyle => {
 			// section
 			'section-header-title-font-family': 'var(--app-section-header-title-font-family, "Oswald")',
 			'2nd-section-header-title-font-size': 'var(--app-2nd-section-header-title-font-size, 16px)',
+			'3rd-section-header-title-font-size': 'var(--app-3rd-section-header-title-font-size, 14px)',
 			// tabs
 			'tab-title-font-family': 'var(--app-tab-title-font-family, "Oswald")',
 			// caption

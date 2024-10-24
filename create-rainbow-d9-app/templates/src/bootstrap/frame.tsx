@@ -153,6 +153,13 @@ const Container = styled.div.attrs({
                 }
             }
 
+            &[data-3rd] {
+                > span[data-w=d9-caption],
+                > div[data-w=d9-dropdown] > span[data-w=d9-dropdown-label] {
+                    font-size: var(--app-3rd-section-header-title-font-size);
+                }
+            }
+
             > span[data-w=d9-caption],
             > div[data-w=d9-dropdown] > span[data-w=d9-dropdown-label] {
                 font-family: var(--app-section-header-title-font-family);
@@ -174,6 +181,10 @@ const Container = styled.div.attrs({
 
         &[data-2nd] div[data-w=d9-section-header-title] {
             font-size: var(--app-2nd-section-header-title-font-size);
+        }
+
+        &[data-3rd] div[data-w=d9-section-header-title] {
+            font-size: var(--app-3rd-section-header-title-font-size);
         }
     }
 
@@ -251,6 +262,10 @@ const Container = styled.div.attrs({
 
             &[data-2nd] {
                 font-size: var(--app-2nd-section-header-title-font-size);
+            }
+
+            &[data-3rd] {
+                font-size: var(--app-3rd-section-header-title-font-size);
             }
         }
 
@@ -461,36 +476,38 @@ const Container = styled.div.attrs({
             display: none;
         }
 
-        &[data-as-section] > div[data-w=d9-rib-row] > div[data-w=d9-rib-row-header] {
-            padding-left: 0;
-            border-radius: 0;
-            background-color: unset;
-            border-bottom: var(--d9-section-header-border);
+        &[data-as-section] {
+            > div[data-w=d9-rib-row] > div[data-w=d9-rib-row-header] {
+                padding-left: 0;
+                border-radius: 0;
+                background-color: unset;
+                border-bottom: var(--d9-section-header-border);
 
-            > div[data-w=d9-rib-row-operators] {
-                padding-right: 0;
+                > div[data-w=d9-rib-row-operators] {
+                    padding-right: 0;
 
-                > button[data-role=expand], > button[data-role=collapse] {
-                    border-color: transparent;
-                    color: unset;
+                    > button[data-role=expand], > button[data-role=collapse] {
+                        border-color: transparent;
+                        color: unset;
 
-                    &:hover {
-                        box-shadow: var(--d9-primary-hover-shadow);
-                    }
+                        &:hover {
+                            box-shadow: var(--d9-primary-hover-shadow);
+                        }
 
-                    &:focus, &:active {
-                        border-color: var(--d9-primary-color);
-                        background-color: var(--d9-primary-color);
-                        box-shadow: var(--d9-primary-shadow);
-                    }
+                        &:focus, &:active {
+                            border-color: var(--d9-primary-color);
+                            background-color: var(--d9-primary-color);
+                            box-shadow: var(--d9-primary-shadow);
+                        }
 
-                    &:hover, &:focus, &:active {
-                        border-color: var(--d9-primary-color);
-                        background-color: var(--d9-primary-color);
+                        &:hover, &:focus, &:active {
+                            border-color: var(--d9-primary-color);
+                            background-color: var(--d9-primary-color);
 
-                        > span {
-                            color: var(--d9-invert-color);
-                            fill: var(--d9-invert-color);
+                            > span {
+                                color: var(--d9-invert-color);
+                                fill: var(--d9-invert-color);
+                            }
                         }
                     }
                 }

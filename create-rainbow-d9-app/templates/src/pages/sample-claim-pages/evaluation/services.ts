@@ -109,6 +109,9 @@ const mockDoLoadMockEvaluationData = async (_keyOrRegistrationId: string): Promi
 						}, {
 							name: 'Reversionary Bonus', paymentCurrency: 'SGD', paymentAmount: 5016,
 							actualPaymentCurrency: 'SGD', actualPaymentAmount: 5016
+						}],
+						adjustmentFactors: [{
+							name: 'Ward Level Adjustment', subName: 'Actual Ward Level', factor: 100
 						}]
 					}
 				],
