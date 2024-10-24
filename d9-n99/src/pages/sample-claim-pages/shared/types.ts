@@ -397,6 +397,25 @@ export namespace Claim {
 		remark?: string;
 	}
 
+	export interface AssessmentPolicyProductPremiumWaive {
+		name?: string;
+		lifeAssured?: string;
+		waived?: boolean;
+		waiveStartDate?: string;
+		waiveEndDate?: string;
+		waivePremium?: number;
+	}
+
+	export interface AssessmentPolicyProductDecreaseSumAssured {
+		name?: string;
+		lifeAssured?: string;
+		decreased?: boolean;
+		decreasedSumAssured?: number;
+		postSumAssured?: number;
+		effectiveDate?: string;
+		refundedPremium?: number;
+	}
+
 	export interface AssessmentPolicyProduct {
 		code?: string;
 		name?: string;
@@ -407,9 +426,13 @@ export namespace Claim {
 		waiveStartDate?: string;
 		totalPaymentCurrency?: string;
 		totalPaymentAmount?: number;
+		terminationEffectiveDate?: string;
+		commentToClient?: string;
 		adjustmentItems?: Array<AssessmentPolicyProductAdjustmentItem>;
 		adjustmentFactors?: Array<AssessmentPolicyProductAdjustmentFactor>;
 		liabilityEvaluations?: Array<AssessmentPolicyProductLiabilityEvaluation>;
+		premiumWaives?: Array<AssessmentPolicyProductPremiumWaive>;
+		decreaseSumAssureds?: Array<AssessmentPolicyProductDecreaseSumAssured>;
 	}
 
 	export interface AssessmentPolicyAdjustmentItem {

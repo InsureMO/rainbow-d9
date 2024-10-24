@@ -117,6 +117,14 @@ const mockDoLoadMockEvaluationData = async (_keyOrRegistrationId: string): Promi
 							name: 'Death', parameter: '',
 							advancePayment: 0, evaluationPayment: 0, claimablePayment: 0,
 							actualPayment: 0, remark: ''
+						}],
+						premiumWaives: [{
+							name: 'GEM0170', lifeAssured: 'Johnson', waived: true,
+							waiveStartDate: '14/10/2024 00:00:00', waiveEndDate: '14/10/2024 00:00:00', waivePremium: 0
+						}],
+						decreaseSumAssureds: [{
+							name: 'GEM0170', lifeAssured: 'Johnson', decreased: true, decreasedSumAssured: 0,
+							postSumAssured: 0, effectiveDate: '14/10/2024 00:00:00', refundedPremium: 0
 						}]
 					}
 				],

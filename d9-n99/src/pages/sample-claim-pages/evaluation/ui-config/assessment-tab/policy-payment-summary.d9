@@ -5,7 +5,7 @@
 	- data-dense-labels, data-as-section-title
 	- Caption::claim.assessment.policy.payment-summary.title
 	- Caption::(
-	- Caption::claim.assessment.payment-summary.total-disbursement-amount
+	- Caption::claim.assessment.policy.payment-summary.total-disbursement-amount
 	- Dropdown::::totalDisbursementCurrency
 		- disabled, data-as-label, data-omit-padding
 		- options: @ext.codes.currency

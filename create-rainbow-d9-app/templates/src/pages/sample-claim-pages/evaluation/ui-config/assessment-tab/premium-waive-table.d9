@@ -1,0 +1,20 @@
+- Section::claim.assessment.product.premium-waive.title
+	- collapsible, data-3rd
+	- Table::
+		- property: premiumWaives
+		- !expandable, !addable, !removable
+		- headers:
+			- claim.assessment.product.premium-waive.product: 300
+			- claim.assessment.product.premium-waive.life-assured: 300
+			- claim.assessment.product.premium-waive.waived: 150
+			- claim.assessment.product.premium-waive.waive-start-date: 150
+			- claim.assessment.product.premium-waive.waive-end-date: 150
+			- claim.assessment.product.premium-waive.waive-premium: 150
+		- Label::::name
+		- Label::::lifeAssured
+		- Dropdown::::waived
+			- options: @ext.codes.yesNo
+		- Date::::waiveStartDate
+		- Date::::waiveEndDate
+		- Label::::waivePremium
+			- valueToLabel: `$.nf2(value)`

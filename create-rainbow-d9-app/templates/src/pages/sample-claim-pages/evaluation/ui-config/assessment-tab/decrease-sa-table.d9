@@ -1,0 +1,23 @@
+- Section::claim.assessment.product.decrease-sa.title
+	- collapsible, data-3rd
+	- Table::
+		- property: decreaseSumAssureds
+		- !expandable, !addable, !removable
+		- headers:
+			- claim.assessment.product.decrease-sa.product: 300
+			- claim.assessment.product.decrease-sa.life-assured: 300
+			- claim.assessment.product.decrease-sa.decreased: 150
+			- claim.assessment.product.decrease-sa.decreased-sa: 150
+			- claim.assessment.product.decrease-sa.post-sa: 150
+			- claim.assessment.product.decrease-sa.effective-date: 150
+			- claim.assessment.product.decrease-sa.refunded-premium: 150
+		- Label::::name
+		- Label::::lifeAssured
+		- Dropdown::::decreased
+			- options: @ext.codes.yesNo
+		- Input::::decreasedSumAssured
+		- Label::::postSumAssured
+			- valueToLabel: `$.nf2(value)`
+		- Date::::effectiveDate
+		- Label::::refundedPremium
+			- valueToLabel: `$.nf2(value)`
