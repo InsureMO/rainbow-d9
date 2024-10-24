@@ -171,6 +171,8 @@ export enum GlobalEventPrefix {
 	// post action, after something happened
 	SECTION_EXPANDED = 'section-expanded',
 	SECTION_COLLAPSED = 'section-collapsed',
+	RIBS_ELEMENT_EXPANDED = 'ribs-element-expanded',
+	RIBS_ELEMENT_COLLAPSED = 'ribs-element-collapsed',
 	TAB_CHANGED = 'tab-changed',
 	WIZARD_STEP_CHANGED = 'wstep-changed',
 	TREE_NODE_CLICKED = 'tree-node-clicked',

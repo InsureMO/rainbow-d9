@@ -1,6 +1,6 @@
-import {EnhancedPropsForArrayElement, ObjectPropValue} from '@rainbow-d9/n1';
+import {EnhancedPropsForArrayElement, ObjectPropValue, PPUtils, PROPERTY_PATH_ME} from '@rainbow-d9/n1';
 import React, {useEffect, useRef, useState} from 'react';
-import {GlobalEventPrefix, GlobalEventTypes, useGlobalEventBus} from '../global';
+import {GlobalEventPrefix, GlobalEventTypes, useCustomGlobalEvent, useGlobalEventBus} from '../global';
 import {notInMe} from '../hooks';
 import {LabelLike} from '../label-like';
 import {RibRowOperators} from './rib-row-operators';
@@ -20,6 +20,7 @@ export const RibRow = (props: Omit<RibsProps, '$array'> & { $array: EnhancedProp
 
 	const headerRef = useRef<HTMLDivElement>(null);
 	const {on: onGlobal, off: offGlobal} = useGlobalEventBus();
+	const fireCustomEvent = useCustomGlobalEvent();
 	const [expanded, setExpanded] = useState(() => {
 		if (initExpanded) {
 			return initExpanded($wrapped.$model as ObjectPropValue, elementIndex);
@@ -29,7 +30,8 @@ export const RibRow = (props: Omit<RibsProps, '$array'> & { $array: EnhancedProp
 	const rowMarker = getElementKey != null ? getElementKey($wrapped.$model as ObjectPropValue, elementIndex) : (void 0);
 	useEffect(() => {
 		const onCustomEvent = (_: string, prefix: string, clipped: string) => {
-			if (clipped !== `${marker}-${rowMarker ?? elementIndex}`) {
+			if (clipped !== `${marker ?? ''}-${rowMarker ?? elementIndex}`
+				&& clipped !== PPUtils.asId(PPUtils.absolute($wrapped.$p2r, PROPERTY_PATH_ME), (void 0))) {
 				return;
 			}
 			switch (prefix) {
@@ -45,7 +47,13 @@ export const RibRow = (props: Omit<RibsProps, '$array'> & { $array: EnhancedProp
 		return () => {
 			offGlobal && offGlobal(GlobalEventTypes.CUSTOM_EVENT, onCustomEvent);
 		};
-	}, [onGlobal, offGlobal, marker, rowMarker, elementIndex]);
+	}, [onGlobal, offGlobal, marker, rowMarker, elementIndex, $wrapped.$p2r]);
+	useEffect(() => {
+		const prefix = expanded ? GlobalEventPrefix.RIBS_ELEMENT_EXPANDED : GlobalEventPrefix.RIBS_ELEMENT_COLLAPSED;
+		const key = `${prefix}:${marker ?? ''}-${rowMarker ?? elementIndex}`;
+		// noinspection JSIgnoredPromiseFromCall
+		fireCustomEvent(key, prefix, marker ?? '', {root: $wrapped.$root, model: $wrapped.$model});
+	}, [onGlobal, offGlobal, fireCustomEvent, expanded, marker, rowMarker, elementIndex, $wrapped.$root, $wrapped.$model]);
 
 	const expand = () => setExpanded(true);
 	const collapse = () => setExpanded(false);
@@ -58,7 +66,8 @@ export const RibRow = (props: Omit<RibsProps, '$array'> & { $array: EnhancedProp
 		}
 	};
 
-	return <ARibRow>
+	// element id use $p2r directly
+	return <ARibRow id={PPUtils.asId(PPUtils.absolute($wrapped.$p2r, PROPERTY_PATH_ME), (void 0))}>
 		<ARibRowHeader data-expanded={expanded} data-show-row-index={showRowIndex} onClick={onRowClicked}
 		               ref={headerRef}>
 			<ARibRowIndex># {elementIndex + 1}</ARibRowIndex>

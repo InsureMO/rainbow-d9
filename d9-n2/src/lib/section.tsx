@@ -144,7 +144,7 @@ export const Section = forwardRef((props: SectionProps, ref: ForwardedRef<HTMLDi
 				&& prefix !== GlobalEventPrefix.COLLAPSE_SECTION) {
 				return;
 			}
-			if (clipped !== marker) {
+			if (clipped !== marker && clipped !== PPUtils.asId(PPUtils.absolute($p2r, props.$pp), props.id)) {
 				return;
 			}
 			if (prefix === GlobalEventPrefix.EXPAND_SECTION) {
@@ -157,7 +157,7 @@ export const Section = forwardRef((props: SectionProps, ref: ForwardedRef<HTMLDi
 		return () => {
 			offGlobal && offGlobal(GlobalEventTypes.CUSTOM_EVENT, onCustomEvent);
 		};
-	}, [onGlobal, offGlobal, marker]);
+	}, [onGlobal, offGlobal, marker, $p2r, props.$pp, props.id]);
 	useEffect(() => {
 		if (firstRound.current) {
 			firstRound.current = false;
