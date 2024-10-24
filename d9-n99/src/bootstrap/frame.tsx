@@ -322,6 +322,29 @@ const Container = styled.div.attrs({
                 color: var(--d9-font-color);
             }
         }
+
+        &[data-page-navigator] {
+            border-color: var(--d9-primary-color);
+            padding: 0 var(--d9-button-indent);
+
+            &:hover {
+                border-color: var(--d9-primary-color);
+                box-shadow: var(--d9-primary-hover-shadow);
+            }
+
+            &:focus, &:focus-within {
+                border-color: var(--d9-primary-color);
+                box-shadow: var(--d9-primary-shadow);
+            }
+
+            > span[data-w=d9-dropdown-label] {
+                color: var(--d9-primary-color);
+            }
+
+            > span[data-w=d9-dropdown-stick] {
+                display: none;
+            }
+        }
     }
 
     button[data-w=d9-button] {

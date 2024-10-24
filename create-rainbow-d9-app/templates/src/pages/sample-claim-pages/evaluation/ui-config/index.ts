@@ -1,5 +1,6 @@
 import {SharedMarkdown} from '../../shared';
 import {createAssessmentTab} from './assessment-tab';
+import {markdown as bottomBar} from './bottom-bar.d9';
 import {createDisbursementPlanTab} from './disbursement-plan-tab';
 import {markdown as header} from './header.d9';
 import {createIssuesTab} from './issues-tab';
@@ -19,8 +20,13 @@ const createTabs = () => {
 		.replace('- Box::$$disbursement-plan-tab', createDisbursementPlanTab());
 };
 
+const createBottomBar = () => {
+	return bottomBar;
+};
+
 export const createMarkdown = () => {
 	return page
 		.replace('- Box::$$header', createHeader())
-		.replace('- Box::$$tabs', createTabs());
+		.replace('- Box::$$tabs', createTabs())
+		.replace('- Box::$$button-bar', createBottomBar());
 };

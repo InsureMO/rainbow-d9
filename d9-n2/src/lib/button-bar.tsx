@@ -54,8 +54,13 @@ const AButtonBar = styled.div.attrs(
         }
     }
 
-    > button:not(:last-child) {
+    > *:not(:last-child) {
         margin-right: 8px;
+    }
+
+    > div[data-w=d9-input],
+    > div[data-w=d9-dropdown] {
+        width: auto;
     }
 `;
 

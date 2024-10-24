@@ -424,5 +424,6 @@ export const enUSIntlLabels = redressByCutPrefix({
 	'claim.action.reminder': 'Reminder',
 	'claim.action.withdraw': 'Withdraw',
 	'claim.action.comment': 'Comment',
-	'claim.action.reload-policy': 'Reload Policy'
+	'claim.action.reload-policy': 'Reload Policy',
+	'claim.action.page-navigator': 'Navigator in this Page'
 }, 'claim');
