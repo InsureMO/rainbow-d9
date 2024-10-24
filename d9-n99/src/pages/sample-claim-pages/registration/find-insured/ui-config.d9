@@ -75,7 +75,7 @@
 
 ## Table::
 
-- data-next-to-search, data-operators-hover-only, data-fat-row
+- data-next-to-search, data-fat-row
 - property: results
 - !expandable, !addable, !removable
 - omitDefaultRowOperators

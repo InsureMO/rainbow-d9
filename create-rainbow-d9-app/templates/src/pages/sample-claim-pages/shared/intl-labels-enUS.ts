@@ -281,7 +281,7 @@ export const enUSIntlLabels = redressByCutPrefix({
 	'claim.claim-workbench.internal-external-query.query-type': 'Query Type',
 	'claim.claim-workbench.internal-external-query.sub-type': 'Sub Type',
 	'claim.claim-workbench.internal-external-query.status': 'Status',
-	'claim.claim-workbench.internal-external-query.generated': 'Generated',
+	'claim.claim-workbench.internal-external-query.raised': 'Generated',
 	'claim.claim-workbench.internal-external-query.submission-content': 'Submission Content',
 	'claim.claim-workbench.internal-external-query.replied': 'Replied',
 	'claim.claim-workbench.internal-external-query.reply-comment': 'Reply Comments',

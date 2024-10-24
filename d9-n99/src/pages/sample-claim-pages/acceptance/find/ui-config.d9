@@ -27,7 +27,7 @@
 
 ## Table::
 
-- data-next-to-search, data-operators-hover-only
+- data-next-to-search
 - property: results
 - !expandable, !addable, !removable
 - omitDefaultRowOperators

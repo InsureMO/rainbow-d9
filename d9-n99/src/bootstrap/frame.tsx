@@ -1,4 +1,4 @@
-import {DOM_KEY_WIDGET} from '@rainbow-d9/n2';
+import {DOM_KEY_WIDGET, TableUtils} from '@rainbow-d9/n2';
 import styled from 'styled-components';
 import {Banner} from '../header';
 import {SideMenu} from '../left-side';
@@ -101,6 +101,10 @@ const Container = styled.div.attrs({
                 border-bottom-left-radius: 0;
                 border-top-left-radius: 0;
                 margin-left: -1px;
+            }
+
+            > input[data-w=d9-input] {
+                min-width: 0;
             }
         }
 
@@ -379,25 +383,6 @@ const Container = styled.div.attrs({
             }
         }
 
-        //&[data-operators-hover-only] {
-        //    div[data-w=d9-table-row-operators] > button {
-        //        pointer-events: none;
-        //        opacity: 0;
-        //        transition: all var(--d9-transition-duration) var(--d9-transition-timing-function);
-        //    }
-        //
-        //    div[data-w=d9-table-row-operators]:hover > button,
-        //    div[data-w=d9-table-row-cell]:hover ~ div[data-w=d9-table-row-operators] > button {
-        //        pointer-events: auto;
-        //        opacity: 1;
-        //    }
-        //
-        //    div[data-w=d9-table-row-cell]:hover ~ div[data-w=d9-table-row-operators] ~ div[data-w=d9-table-row-operators] > button {
-        //        pointer-events: none;
-        //        opacity: 0;
-        //    }
-        //}
-
         div[data-w=d9-table-row-cell] {
             span[data-w=d9-caption]:not([data-clickable=true]) {
                 color: var(--d9-font-color);
@@ -409,26 +394,22 @@ const Container = styled.div.attrs({
                 &[data-type-input-box] {
                     > div[data-w=d9-dropdown][data-in-table-cell-and-box]:first-child {
                         width: auto;
-                        margin-right: 0;
+                        margin-right: ${TableUtils.isInCellInputBorderOmitted() ? 0 : (void 0)};
                     }
 
                     > input[data-w=d9-input][data-in-table-cell-and-box]:last-child {
                         flex-grow: 1;
-                        margin-left: 0;
                     }
                 }
 
                 > input[data-w=d9-input],
+                > div[data-w=d9-deco-input],
                 > div[data-w=d9-dropdown],
                 > div[data-w=d9-calendar] {
                     &[data-in-table-cell-and-box] {
-                        width: calc(100% + var(--d9-input-indent) * 2);
+                        width: ${TableUtils.isInCellInputBorderOmitted() ? 'calc(100% + var(--d9-input-indent) * 2)' : (void 0)};
                         height: calc(var(--d9-table-cell-height) - 6px);
-                        margin: 0 calc(var(--d9-input-indent) * -1);
-
-                        &:not(&:hover), &:not(&:focus), &:not(&:focus-within) {
-                            border-color: transparent;
-                        }
+                        margin: ${TableUtils.isInCellInputBorderOmitted() ? '0 calc(var(--d9-input-indent) * -1)' : (void 0)};
                     }
                 }
             }
