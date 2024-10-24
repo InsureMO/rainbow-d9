@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import {CssVars, DOM_ID_WIDGET, DOM_KEY_WIDGET} from '../constants';
 import {DropdownDefaults} from '../dropdown-assist';
 import {toCssSize} from '../utils';
+import {isInCellInputBorderOmitted} from './utils';
 
 // z-index of table widgets
 // 1: expand area
@@ -204,14 +205,28 @@ export const ATableBodyCell = styled.div.attrs<{
     }
 
     > input[data-w=d9-input],
+    > div[data-w=d9-deco-input],
     > div[data-w=d9-dropdown],
     > div[data-w=d9-calendar] {
         flex-grow: 1;
         height: calc(${CssVars.TABLE_CELL_HEIGHT} - 6px);
-        margin: 0 calc(${CssVars.INPUT_INDENT} * -1);
+        margin: ${isInCellInputBorderOmitted() ? `0 calc(${CssVars.INPUT_INDENT} * -1)` : (void 0)};
 
         &:not(&:hover), &:not(&:focus), &:not(&:focus-within) {
-            border-color: transparent;
+            border-color: ${isInCellInputBorderOmitted() ? 'transparent' : (void 0)};
+        }
+    }
+
+    > div[data-w=d9-deco-input] {
+        > input[data-w=d9-input] {
+            height: calc(${CssVars.TABLE_CELL_HEIGHT} - 6px);
+        }
+
+        > span[data-w=d9-deco-lead],
+        > span[data-w=d9-deco-tail] {
+            height: calc(${CssVars.TABLE_CELL_HEIGHT} - 6px);
+            min-height: calc(${CssVars.TABLE_CELL_HEIGHT} - 6px);
+
         }
     }
 `;

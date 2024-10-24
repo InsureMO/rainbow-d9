@@ -75,3 +75,16 @@ export const computeColumnsWidth = (props: Omit<TableProps, 'children'>) => {
 		stickyOffsets
 	};
 };
+
+export const DEFAULTS = {
+	OMIT_IN_CELL_INPUT_BORDER: false
+};
+
+export const setTableDefaults = (defaults: {
+	omitInCellInputBorder?: boolean;
+}) => {
+	DEFAULTS.OMIT_IN_CELL_INPUT_BORDER = defaults.omitInCellInputBorder ?? DEFAULTS.OMIT_IN_CELL_INPUT_BORDER;
+};
+
+export const isInCellInputBorderOmitted = (): boolean => DEFAULTS.OMIT_IN_CELL_INPUT_BORDER;
+

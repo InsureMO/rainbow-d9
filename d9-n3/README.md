@@ -1486,13 +1486,20 @@ Some examples:
 > `Ribs` and `RibsView` are array widgets, and the layout of each element can be described using a sublist. It is important to note that the
 > sublist needs to be placed after the attributes list.
 
-### Expand and Collapse Icons
+### Expand and collapse Icons
 
 The expand and collapse icons default uses the rib style. You can change it to use section style icons through global settings,
 see below for more details,
 
 - `setRibsDefaults`: to change default settings,
 - `isUseSectionStyleIcons`: default of stick icon.
+
+### Show row index at header
+
+Rib header default show row index (starts from 1). You can change it to hide through global settings, see below for more details.
+
+- `setRibsDefaults`: to change default settings,
+- `isShowRowIndex`: default of row index visible.
 
 ## Table
 
@@ -1628,6 +1635,16 @@ export interface PaginationData {
 	itemCount: number;
 }
 ```
+
+### Omit input border
+
+When the input widget is in a table cell, should its border not be rendered by default? The default behavior is to render it. This
+behavior applies to Input, Dropdown, Calendar, and Deco Input. When this property is set to true, it will cause the input component to
+render its border only when the mouse hovers over it or when it receives focus. At the same time, due to the alignment effect, the position
+and size of the input component will also change slightly.
+
+- `setTableDefaults`: to change default settings,
+- `isInCellInputBorderOmitted`: default of in-cell inputs border omitted.
 
 ## Tree
 
