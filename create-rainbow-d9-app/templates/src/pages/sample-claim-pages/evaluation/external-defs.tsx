@@ -1,4 +1,5 @@
 import {BaseModel, PropValue, RootEventTypes} from '@rainbow-d9/n1';
+import {ValueChangedOptions} from '@rainbow-d9/n1/src';
 import {ButtonClickOptions, CaptionClickOptions, GlobalHandlers} from '@rainbow-d9/n2';
 import {MutableRefObject} from 'react';
 import {asT} from '../../../utils';
@@ -34,7 +35,8 @@ export const createExternalDefsCreator = (rootModelRef: MutableRefObject<RootMod
 			},
 			codes: createDropdownOptionsProvider(globalHandlers, {
 				channelsForClaimRegistration: assistantData.submissionChannelOptions,
-				users: assistantData.userOptions, userDepartments: assistantData.userDepartmentOptions
+				users: assistantData.userOptions, userDepartments: assistantData.userDepartmentOptions,
+				assessmentTabLocations: assistantData.assessmentTabLocationOptions
 			}),
 			ans: createActionsAndSupportingActions({globalHandlers, rootModelRef}),
 			'claim-issue': createClaimIssueTableSectionActions({globalHandlers, rootModelRef, assistantData}),
@@ -72,6 +74,15 @@ export const createExternalDefsCreator = (rootModelRef: MutableRefObject<RootMod
 					'auto-select': {
 						click: async (_options: ButtonClickOptions<BaseModel, PropValue>) => {
 							alert('Liability evaluation auto select button clicked.');
+						}
+					}
+				},
+				'page-navigator': {
+					'value-changed': async (options: ValueChangedOptions<string>): Promise<void> => {
+						const {newValue} = options;
+						const option = (await assistantData.assessmentTabLocationOptions()).find(option => option.value === newValue);
+						if (option != null) {
+							await (option as any).locate();
 						}
 					}
 				}

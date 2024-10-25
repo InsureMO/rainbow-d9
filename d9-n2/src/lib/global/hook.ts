@@ -198,16 +198,24 @@ export const useCustomGlobalEvent = (): CustomGlobalEventHandler => {
 };
 
 export type SimpleCustomGlobalEventHandler = <R extends BaseModel, M extends PropValue>(
-	prefix: string, clipped: string, models?: ModelCarrier<R, M>) => Promise<void>;
+	prefix: string, clipped: string, models?: ModelCarrier<R, M>, callback?: () => Promise<void>) => Promise<void>;
 
 export const useSimpleCustomGlobalEvent = (): SimpleCustomGlobalEventHandler => {
 	const {fire} = useGlobalEventBus();
 	const [func] = useState(() => {
 		return async <R extends BaseModel, M extends PropValue>(
-			prefix: string, clipped?: string, models?: { root: R; model: M; }): Promise<void> => {
+			prefix: string, clipped?: string, models?: ModelCarrier<R, M>, callback?: () => Promise<void>): Promise<void> => {
 			return new Promise<void>(resolve => {
-				fire && fire(GlobalEventTypes.CUSTOM_EVENT, `${prefix}:${clipped ?? ''}`, prefix, clipped, models);
-				resolve();
+				if (callback == null) {
+					fire && fire(GlobalEventTypes.CUSTOM_EVENT, `${prefix}:${clipped ?? ''}`, prefix, clipped, models);
+					resolve();
+				} else {
+					fire && fire(GlobalEventTypes.CUSTOM_EVENT, `${prefix}:${clipped ?? ''}`, prefix, clipped, models,
+						async (): Promise<void> => {
+							await callback();
+							resolve();
+						});
+				}
 			});
 		};
 	});

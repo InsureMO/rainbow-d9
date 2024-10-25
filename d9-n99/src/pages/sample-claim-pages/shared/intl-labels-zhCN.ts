@@ -425,5 +425,5 @@ export const zhCNIntlLabels = redressByCutPrefix({
 	'claim.action.withdraw': 'Withdraw',
 	'claim.action.comment': 'Comment',
 	'claim.action.reload-policy': 'Reload Policy',
-	'claim.action.page-navigator': 'Navigator in this Page'
+	'claim.action.page-navigator': 'Navigate in this Page'
 }, 'claim');

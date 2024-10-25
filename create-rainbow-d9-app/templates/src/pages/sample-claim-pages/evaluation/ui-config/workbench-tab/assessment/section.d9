@@ -2,7 +2,7 @@
 
 - collapsible
 
-##### Ribs::::data.assessment.policies
+##### Ribs::::data.assessmentForView.policies
 
 - !expandable, !addable, !removable, data-as-section
 - initExpanded: `return true`

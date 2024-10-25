@@ -19,7 +19,7 @@
 	- Box::$$adjustment-factor-table
 	- Box::$$liability-evaluation-table
 	- Box::$$adjustment-item-table
-	- Box::$$decision-section
+	- Box::$$claim-decision-section
 	- Box::$$premium-waive-table
 	- Box::$$decrease-sa-table
 

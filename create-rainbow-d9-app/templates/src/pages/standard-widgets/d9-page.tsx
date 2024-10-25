@@ -77,6 +77,8 @@ export interface GlobalCustomEventListeners {
 	onTreeNodeClicked?: (event: GlobalCustomEvent<ModelsWithValue>) => void;
 	onTreeNodeDoubleClicked?: (event: GlobalCustomEvent<ModelsWithValue>) => void;
 	onTreeNodeContextMenu?: (event: GlobalCustomEvent<ModelsWithValue>) => void;
+	onRibsElementExpanded?: (event: GlobalCustomEvent<Models>) => void;
+	onRibsElementCollapsed?: (event: GlobalCustomEvent<Models>) => void;
 }
 
 export const PageGlobalCustomEventBridge = (props: GlobalCustomEventListeners) => {
@@ -106,6 +108,12 @@ export const PageGlobalCustomEventBridge = (props: GlobalCustomEventListeners) =
 					break;
 				case GlobalEventPrefix.TREE_NODE_CONTEXT_MENU:
 					props.onTreeNodeContextMenu?.({marker: clipped, models: asT(models), global: globalHandlers});
+					break;
+				case GlobalEventPrefix.RIBS_ELEMENT_EXPANDED:
+					props.onRibsElementExpanded?.({marker: clipped, models, global: globalHandlers});
+					break;
+				case GlobalEventPrefix.RIBS_ELEMENT_COLLAPSED:
+					props.onRibsElementCollapsed?.({marker: clipped, models, global: globalHandlers});
 					break;
 			}
 		};

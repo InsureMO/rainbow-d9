@@ -1,5 +1,6 @@
 - Section::claim.assessment.product.adjustment-factor.title
-	- collapsible, data-3rd
+	- collapsible, data-3rd, data-product-adjustment-factors
+	- marker: product-adjustment-factors
 	- Table::
 		- property: adjustmentFactors
 		- !expandable, !addable, !removable

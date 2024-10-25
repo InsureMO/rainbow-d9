@@ -39,4 +39,5 @@ export interface AssistantData {
 	userDepartmentOptions: DropdownOptions;
 	escalateToOptions: () => Promise<DropdownOptions>;
 	investigatorOptions: () => Promise<DropdownOptions>;
+	assessmentTabLocationOptions: () => Promise<DropdownOptions>;
 }

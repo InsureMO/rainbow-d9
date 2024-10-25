@@ -1,5 +1,6 @@
 - Section::claim.assessment.adjustment-item.title
-	- collapsible, data-2nd
+	- collapsible, data-2nd, data-policy-adjustment-items
+	- marker: policy-adjustment-items
 	- Table::
 		- property: adjustmentItems
 		- !addable, !removable,

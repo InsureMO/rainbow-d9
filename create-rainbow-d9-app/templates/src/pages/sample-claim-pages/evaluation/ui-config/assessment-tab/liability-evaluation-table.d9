@@ -1,5 +1,6 @@
 - Section::claim.assessment.product.liability-evaluation.title
-	- collapsible, data-3rd
+	- collapsible, data-3rd, data-product-liability-evaluations
+	- marker: product-liability-evaluations
 	- Table::
 		- property: liabilityEvaluationsWithTotal
 		- !expandable, !addable, !removable

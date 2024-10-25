@@ -1,5 +1,6 @@
 - Section::claim.assessment.product.premium-waive.title
-	- collapsible, data-3rd
+	- collapsible, data-3rd, data-product-premium-waive
+	- marker: product-premium-waive
 	- Table::
 		- property: premiumWaives
 		- !expandable, !addable, !removable

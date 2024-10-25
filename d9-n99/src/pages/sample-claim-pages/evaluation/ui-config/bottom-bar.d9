@@ -4,9 +4,16 @@
 
 - Dropdown::::control.pageNavigateTo
 	- data-page-navigator
-	- options: @ext.codes.inAssessmentPageLocations
+	- options: @ext.codes.assessmentTabLocations
 	- !clearable
 	- please: claim.action.page-navigator
+	- valueChanged: @ext.assessment.page-navigator.value-changed
+	- visible:
+		- on: control.activeTab
+		- handle:
+		  ```ts
+		  return model.control.activeTab === 'assessment-tab';
+		  ```
 - Button::
 	- text: claim.action.comment
 	- click: @ext.comment.click

@@ -1,5 +1,6 @@
 - Section::claim.assessment.product.decrease-sa.title
-	- collapsible, data-3rd
+	- collapsible, data-3rd, data-product-decrease-sa
+	- marker: product-decrease-sa
 	- Table::
 		- property: decreaseSumAssureds
 		- !expandable, !addable, !removable

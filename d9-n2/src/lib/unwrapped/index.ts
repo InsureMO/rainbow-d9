@@ -1,3 +1,4 @@
+import {UnwrappedBox as Box, UnwrappedBoxProps as BoxProps} from './box';
 import {
 	UnwrappedButton as Button,
 	UnwrappedButtonProps as ButtonProps,
@@ -69,6 +70,7 @@ export {
 
 	Button, ButtonProps, Link, LinkProps,
 
+	Box, BoxProps,
 	Section, SectionProps,
 	Pagination, PaginationProps,
 	Tabs, TabsProps,

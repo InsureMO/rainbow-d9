@@ -23,7 +23,12 @@ export const ARibs = styled.div.attrs(({id}) => {
         max-height: ${CssVars.RIB_BUTTON_HEIGHT};
     }
 `;
-export const ARibRow = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-rib-row'})`
+export const ARibRow = styled.div.attrs(({id}) => {
+	return {
+		[DOM_KEY_WIDGET]: 'd9-rib-row',
+		[DOM_ID_WIDGET]: id
+	};
+})`
     display: flex;
     position: relative;
     flex-direction: column;

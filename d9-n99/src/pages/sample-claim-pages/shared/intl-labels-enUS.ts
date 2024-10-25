@@ -406,6 +406,17 @@ export const enUSIntlLabels = redressByCutPrefix({
 	'claim.props.address2': 'Address line 2',
 	'claim.props.address3': 'Address line 3',
 	'claim.props.address4': 'Address line 4',
+	// navigator
+	'claim.nav.policy': 'Policy',
+	'claim.nav.policy-payment-summary': 'Payment Summary',
+	'claim.nav.product': 'Product',
+	'claim.nav.product-adjustment-factors': 'Adjustment Factors',
+	'claim.nav.product-liability-evaluation': 'Liability Evaluation',
+	'claim.nav.product-adjustment': 'Product Adjustment',
+	'claim.nav.product-claim-decision': 'Claim Decision',
+	'claim.nav.product-premium-waive': 'Premium Waive',
+	'claim.nav.product-decrease-sa': 'Decrease SA',
+	'claim.nav.policy-adjustment-items': 'Adjustment Items',
 	// actions
 	'claim.action.image': 'Image',
 	'claim.action.doc-checklist': 'Document Checklist',
@@ -425,5 +436,5 @@ export const enUSIntlLabels = redressByCutPrefix({
 	'claim.action.withdraw': 'Withdraw',
 	'claim.action.comment': 'Comment',
 	'claim.action.reload-policy': 'Reload Policy',
-	'claim.action.page-navigator': 'Navigator in this Page'
+	'claim.action.page-navigator': 'Navigate in this Page'
 }, 'claim');

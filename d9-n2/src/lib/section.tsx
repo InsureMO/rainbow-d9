@@ -6,7 +6,7 @@ import {GlobalEventPrefix, GlobalEventTypes, useCustomGlobalEvent, useGlobalEven
 import {notInMe} from './hooks';
 import {ArrowDown} from './icons';
 import {LabelLike} from './label-like';
-import {OmitHTMLProps2, OmitNodeDef} from './types';
+import {ModelCarrier, OmitHTMLProps2, OmitNodeDef} from './types';
 
 /** Section configuration definition */
 export type SectionDef = ContainerDef & OmitHTMLProps2<HTMLDivElement, 'title'> & {
@@ -134,34 +134,65 @@ export const Section = forwardRef((props: SectionProps, ref: ForwardedRef<HTMLDi
 
 	const headerRef = useRef<HTMLDivElement>(null);
 	const firstRound = useRef(true);
+	const customEventCallbackRef = useRef<{ has: boolean; callback?: () => Promise<void> }>({has: false});
 	const {on: onGlobal, off: offGlobal} = useGlobalEventBus();
 	// collapsible is false or collapsed is false, then expanded is true
 	const [expanded, setExpanded] = useState(collapsible !== true || !collapsed);
 	const fireCustomEvent = useCustomGlobalEvent();
 	useEffect(() => {
-		const onCustomEvent = (_: string, prefix: string, clipped: string) => {
-			if (prefix !== GlobalEventPrefix.EXPAND_SECTION
-				&& prefix !== GlobalEventPrefix.COLLAPSE_SECTION) {
+		const onCustomEvent = (_: string, prefix: string, clipped: string, _models?: ModelCarrier, callback?: () => Promise<void>) => {
+			if (prefix !== GlobalEventPrefix.EXPAND_SECTION && prefix !== GlobalEventPrefix.COLLAPSE_SECTION) {
 				return;
 			}
-			if (clipped !== marker && clipped !== PPUtils.asId(PPUtils.absolute($p2r, props.$pp), props.id)) {
-				return;
+			clipped = clipped || '';
+			// For a piece of data, it may be divided into multiple sections for display, and these sections may hold the same ID.
+			// Therefore, it is not possible to precisely locate a specific section in this case.
+			// In such situations, a prefix can be added, and a match can be made using the format $full:marker+ID.
+			if (clipped.startsWith('$full:')) {
+				if (clipped !== `$full:${marker ?? ''}+${PPUtils.asId(PPUtils.absolute($p2r, props.$pp), props.id)}`) {
+					return;
+				}
+			} else {
+				// still use marker or id to match
+				if (clipped !== marker && clipped !== PPUtils.asId(PPUtils.absolute($p2r, props.$pp), props.id)) {
+					return;
+				}
 			}
 			if (prefix === GlobalEventPrefix.EXPAND_SECTION) {
-				setExpanded(true);
+				if (!expanded) {
+					customEventCallbackRef.current.has = true;
+					customEventCallbackRef.current.callback = callback;
+					setExpanded(true);
+				} else {
+					// noinspection JSIgnoredPromiseFromCall
+					callback?.();
+				}
 			} else {
-				setExpanded(false);
+				if (expanded) {
+					customEventCallbackRef.current.has = true;
+					customEventCallbackRef.current.callback = callback;
+					setExpanded(false);
+				} else {
+					// noinspection JSIgnoredPromiseFromCall
+					callback?.();
+				}
 			}
 		};
 		onGlobal && onGlobal(GlobalEventTypes.CUSTOM_EVENT, onCustomEvent);
 		return () => {
 			offGlobal && offGlobal(GlobalEventTypes.CUSTOM_EVENT, onCustomEvent);
 		};
-	}, [onGlobal, offGlobal, marker, $p2r, props.$pp, props.id]);
+	}, [onGlobal, offGlobal, expanded, marker, $p2r, props.$pp, props.id]);
 	useEffect(() => {
 		if (firstRound.current) {
 			firstRound.current = false;
 			return;
+		}
+		if (customEventCallbackRef.current.has) {
+			customEventCallbackRef.current.has = false;
+			// noinspection JSIgnoredPromiseFromCall
+			customEventCallbackRef.current.callback?.();
+			delete customEventCallbackRef.current.callback;
 		}
 		const prefix = expanded ? GlobalEventPrefix.SECTION_EXPANDED : GlobalEventPrefix.SECTION_COLLAPSED;
 		const key = `${prefix}:${marker ?? ''}`;

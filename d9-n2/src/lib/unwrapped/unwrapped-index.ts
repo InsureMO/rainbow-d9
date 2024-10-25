@@ -1,3 +1,4 @@
+import {UnwrappedBox, UnwrappedBoxProps} from './box';
 import {UnwrappedButton, UnwrappedButtonProps, UnwrappedLink, UnwrappedLinkProps} from './button';
 import {UnwrappedButtonBar, UnwrappedButtonBarProps} from './button-bar';
 import {
@@ -67,6 +68,7 @@ export {
 
 	UnwrappedButton, UnwrappedButtonProps, UnwrappedLink, UnwrappedLinkProps,
 
+	UnwrappedBox, UnwrappedBoxProps,
 	UnwrappedSection, UnwrappedSectionProps,
 	UnwrappedPagination, UnwrappedPaginationProps,
 	UnwrappedTabs, UnwrappedTabsProps,

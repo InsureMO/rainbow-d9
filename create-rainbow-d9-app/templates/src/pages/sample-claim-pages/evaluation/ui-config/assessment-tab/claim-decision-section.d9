@@ -1,5 +1,6 @@
 - Section::claim.assessment.product.claim-decision.title
-	- data-3rd
+	- data-3rd, data-product-claim-decision
+	- marker: product-claim-decision
 	- Dropdown::claim.assessment.product.claim-decision.decision::claimDecision
 		- options: @ext.codes.claimDecision
 		- !clearable

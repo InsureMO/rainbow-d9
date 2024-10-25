@@ -1,6 +1,7 @@
 ##### Section::
 
-- collapsible
+- collapsible, data-policy-payment-summary
+- marker: policy-payment-summary
 - title: Box
 	- data-dense-labels, data-as-section-title
 	- Caption::claim.assessment.policy.payment-summary.title
