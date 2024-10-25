@@ -1,0 +1,26 @@
+#### Section::claim.claim-worksheet.comment-history.title
+
+- collapsible
+
+- Ribs::::data.commentHistory
+	- !expandable, !addable, !removable, data-as-timeline
+	- initExpanded: `return true`
+	- Caption::
+		- data-as-timeline-icon
+		- leads: $icons.timeline-icon
+	- Box::
+		- data-dense-labels
+		- Label::::stage
+			- data-use-font-color, data-bold
+		- Caption::,
+			- data-move-left-a-dense
+		- Dropdown::::commentedBy
+			- disabled, data-as-label, data-omit-padding
+			- options: @ext.codes.users
+		- Dropdown::::commentedBy
+			- disabled, data-as-label, data-omit-padding
+			- options: @ext.codes.userDepartments
+		- Caption::,
+			- data-move-left-a-dense
+		- Label::::commentedAt
+	- Label::::comment

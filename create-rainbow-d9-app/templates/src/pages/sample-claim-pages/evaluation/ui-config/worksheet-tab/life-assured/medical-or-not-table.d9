@@ -1,0 +1,18 @@
+##### Section::claim.claim-worksheet.life-assured-info.medical-or-not.title
+
+- collapsible, data-2nd
+
+- Table::
+	- property: medicalOrNotCodes
+	- !expandable, !addable, !removable
+	- headers:
+		- claim.props.policy-no: 150
+		- claim.claim-worksheet.life-assured-info.medical-or-not.code: 100
+		- claim.claim-worksheet.life-assured-info.medical-or-not.code-category: 120
+		- claim.claim-worksheet.life-assured-info.medical-or-not.lia-code-type: 120
+		- claim.claim-worksheet.life-assured-info.medical-or-not.description: 1fr
+	- Label::::policyNo
+	- Label::::code
+	- Label::::codeCategory
+	- Label::::liaCodeType
+	- Label::::description

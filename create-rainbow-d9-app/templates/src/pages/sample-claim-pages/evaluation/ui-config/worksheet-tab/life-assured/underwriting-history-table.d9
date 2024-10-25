@@ -1,0 +1,53 @@
+##### Section::claim.claim-worksheet.life-assured-info.underwriting-history.title
+
+- collapsible, data-2nd
+
+- Table::
+	- property: underwritingHistory
+	- !expandable, !addable, !removable
+	- fixedLeadColumns: 1
+	- headers:
+		- claim.props.policy-no: 150
+		- claim.claim-worksheet.life-assured-info.underwriting-history.product-code: 120
+		- claim.claim-worksheet.life-assured-info.underwriting-history.product-type: 120
+		- claim.claim-worksheet.life-assured-info.underwriting-history.business-type: 120
+		- claim.claim-worksheet.life-assured-info.underwriting-history.underwriting-decision: 120
+		- claim.claim-worksheet.life-assured-info.underwriting-history.commencement-date: 150
+		- claim.claim-worksheet.life-assured-info.underwriting-history.policy-status: 120
+		- claim.claim-worksheet.life-assured-info.underwriting-history.premium-status: 120
+		- claim.claim-worksheet.life-assured-info.underwriting-history.payment-frequency: 150
+		- claim.claim-worksheet.life-assured-info.underwriting-history.sa-unit-level: 150
+		- claim.claim-worksheet.life-assured-info.underwriting-history.annual-premium: 120
+		- claim.claim-worksheet.life-assured-info.underwriting-history.auto-underwriting-indicator: 150
+	- Label::::policyNo
+	- Label::::productCode
+	- Dropdown::::productType
+		- disabled, data-as-label
+		- options: @ext.codes.productType
+	- Dropdown::::businessType
+		- disabled, data-as-label
+		- options: @ext.codes.businessType
+	- Dropdown::::underwritingDecision
+		- disabled, data-as-label
+		- options: @ext.codes.underwritingDecision
+	- Label::::commencementDate
+	- Dropdown::::policyStatus
+		- disabled, data-as-label
+		- options: @ext.codes.policyStatus
+	- Dropdown::::premiumStatus
+		- disabled, data-as-label
+		- options: @ext.codes.premiumStatus
+	- Dropdown::::paymentFrequency
+		- disabled, data-as-label
+		- options: @ext.codes.paymentFrequency
+	- Box::
+		- data-dense-labels, data-slash-joined
+		- Label::::sumAssured
+			- valueToLabel: `$.nf2(value)`
+		- Label::::unit
+		- Label::::level
+	- Label::::annualPremium
+		- valueToLabel: `$.nf2(value)`
+	- Dropdown::::autoUnderwritingIndicator
+		- disabled, data-as-label
+		- options: @ext.codes.yesNo

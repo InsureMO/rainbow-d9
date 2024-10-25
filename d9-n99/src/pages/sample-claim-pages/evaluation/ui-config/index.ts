@@ -6,7 +6,7 @@ import {markdown as header} from './header.d9';
 import {createIssuesTab} from './issues-tab';
 import {markdown as page} from './page.d9';
 import {markdown as tabs} from './tabs.d9';
-import {createWorkbenchTab} from './workbench-tab';
+import {createWorksheetTab} from './worksheet-tab';
 
 const createHeader = () => {
 	return header.replace('- Box::$$registration-base-section', SharedMarkdown.registrationBaseSection);
@@ -14,7 +14,7 @@ const createHeader = () => {
 
 const createTabs = () => {
 	return tabs
-		.replace('- Box::$$workbench-tab', createWorkbenchTab())
+		.replace('- Box::$$worksheet-tab', createWorksheetTab())
 		.replace('- Box::$$issues-tab', createIssuesTab())
 		.replace('- Box::$$assessment-tab', createAssessmentTab())
 		.replace('- Box::$$disbursement-plan-tab', createDisbursementPlanTab());

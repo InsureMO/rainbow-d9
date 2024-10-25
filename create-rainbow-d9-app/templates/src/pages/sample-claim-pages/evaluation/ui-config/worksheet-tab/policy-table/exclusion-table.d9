@@ -1,0 +1,15 @@
+- Section::claim.claim-worksheet.policy.exclusion.title
+	- data-2nd
+	- Table::
+		- property: exclusions
+		- !expandable, !addable, !removable
+		- fixedLeadColumns: 3
+		- headers:
+			- claim.props.policy-no: 120
+			- claim.claim-worksheet.policy.exclusion.product-code: 200
+			- claim.claim-worksheet.policy.exclusion.product-type: 200
+			- claim.claim-worksheet.policy.exclusion.category: 150
+			- claim.claim-worksheet.policy.exclusion.occupation-class: 150
+			- claim.claim-worksheet.policy.exclusion.type: 120
+			- claim.claim-worksheet.policy.exclusion.period: 120
+			- claim.claim-worksheet.policy.exclusion.extra-premium: 150

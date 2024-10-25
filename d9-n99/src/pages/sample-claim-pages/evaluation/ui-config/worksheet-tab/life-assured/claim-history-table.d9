@@ -1,0 +1,41 @@
+##### Section::claim.claim-worksheet.life-assured-info.claim-history.title
+
+- collapsible, data-2nd
+
+- Table::
+	- property: claimHistory
+	- !expandable, !addable, !removable
+	- fixedLeadColumns: 1
+	- headers:
+		- claim.props.claim-no: 150
+		- claim.props.policy-no: 150
+		- claim.claim-worksheet.life-assured-info.claim-history.product-code: 120
+		- claim.claim-worksheet.life-assured-info.claim-history.product-type: 120
+		- claim.claim-worksheet.life-assured-info.claim-history.claim-type: 120
+		- claim.claim-worksheet.life-assured-info.claim-history.event-date: 120
+		- claim.claim-worksheet.life-assured-info.claim-history.claim-nature: 120
+		- claim.claim-worksheet.life-assured-info.claim-history.diagnosis: 120
+		- claim.claim-worksheet.life-assured-info.claim-history.claim-status: 120
+		- claim.claim-worksheet.life-assured-info.claim-history.claim-decision: 120
+		- claim.claim-worksheet.life-assured-info.claim-history.claimable-amount: 120
+		- claim.claim-worksheet.life-assured-info.claim-history.settle-date: 120
+	- Label::::claimNo
+	- Label::::policyNo
+	- Label::::productCode
+	- Dropdown::::productType
+		- disabled, data-as-label
+		- options: @ext.codes.productType
+	- Dropdown::::claimType
+		- disabled, data-as-label
+		- options: @ext.codes.claimType
+	- Label::::eventDate
+	- Dropdown::::claimNature
+		- disabled, data-as-label
+		- options: @ext.codes.claimNature
+	- Label::::diagnosis
+	- Dropdown::::claimStatus
+		- disabled, data-as-label
+		- options: @ext.codes.claimStatus
+	- Label::::claimDecision
+	- Label::::claimableAmount
+	- Label::::settleDate

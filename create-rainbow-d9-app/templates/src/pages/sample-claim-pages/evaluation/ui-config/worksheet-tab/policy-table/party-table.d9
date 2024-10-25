@@ -1,0 +1,19 @@
+- Section::claim.claim-worksheet.policy.party.title
+	- data-2nd
+	- Table::
+		- property: parties
+		- !expandable, !addable, !removable
+		- fixedLeadColumns: 2
+		- headers:
+			- claim.claim-worksheet.policy.party.role: 120
+			- claim.claim-worksheet.policy.party.name: 200
+			- claim.claim-worksheet.policy.party.id-type-and-no: 200
+			- claim.props.dob: 120
+			- claim.props.gender: 120
+			- claim.claim-worksheet.policy.party.relation-with-holder: 120
+			- claim.claim-worksheet.policy.party.annual-income: 120
+			- claim.props.occupation: 120
+			- claim.claim-worksheet.policy.party.smoker-status: 120
+			- claim.claim-worksheet.policy.party.risk-indicator: 100
+			- claim.claim-worksheet.policy.party.medical-report: 120
+			- claim.claim-worksheet.policy.party.declaration: 120

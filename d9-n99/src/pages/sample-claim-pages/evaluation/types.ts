@@ -28,7 +28,8 @@ export interface Data {
 export interface RootModel {
 	control: {
 		claimIssuesAllSelected: boolean;
-		activeTab?: 'issue-tab' | 'workbench-tab' | 'assessment-tab' | 'disbursement-plan-tab';
+		activeTab?: 'issue-tab' | 'worksheet-tab' | 'assessment-tab' | 'disbursement-plan-tab';
+		pageNavigateTo?: string;
 	};
 	data: Data;
 }

@@ -3,17 +3,38 @@ import {GlobalEventPrefix, GlobalHandlers, internationalize, IntlLabel, Unwrappe
 
 const scrollBehavior: ScrollIntoViewOptions = {behavior: 'smooth', block: 'start'};
 type PageLocationOption = {
-	domId: string; selector: string;
-	prefix: string; i18nKey: string; extLabel?: string;
+	/** dom id of dom node, dom id format of absolute property path, remove the start / , dot changes to -, [index] changes to _index  */
+	domId: string;
+	/** a selector to narrow doc query selector, typically some attribute from dom node. follows css selector format */
+	selector: string;
+	/** order list, or something else */
+	prefix: string;
+	/** of main label */
+	i18nKey: string;
+	/** ext info, might be some number or code or name, etc. */
+	extLabel?: string;
+	/** if dom node is in some section, rib row, set expands to expand them before locate */
 	expands: Array<[GlobalEventPrefix.EXPAND_RIBS_ELEMENT | GlobalEventPrefix.EXPAND_SECTION, string]>;
-	globalHandlers: GlobalHandlers; hasFixedTitle?: boolean;
+	hasFixedTitle?: boolean;
+	globalHandlers: GlobalHandlers;
+	onLocated?: () => Promise<void>
 }
 export const createPageLocationOption = (options: PageLocationOption) => {
-	const {domId, selector, prefix, i18nKey, extLabel, expands, globalHandlers, hasFixedTitle = false} = options;
+	const {
+		domId,
+		selector,
+		prefix,
+		i18nKey,
+		extLabel,
+		expands,
+		globalHandlers,
+		hasFixedTitle = false,
+		onLocated
+	} = options;
 	return {
 		value: `${domId}:${selector}`,
 		label: <UnwrappedBox data-dense-labels>
-			<span>{prefix}.</span>
+			<span>{prefix}</span>
 			<span><IntlLabel keys={[i18nKey]}/></span>
 			{VUtils.isNotBlank(extLabel) ? <span>{extLabel}</span> : (void 0)}
 		</UnwrappedBox>,
@@ -39,6 +60,7 @@ export const createPageLocationOption = (options: PageLocationOption) => {
 					node.style.scrollMarginTop = `calc(${parts.join(' + ')})`;
 				}
 				node.scrollIntoView(scrollBehavior);
+				await onLocated?.();
 			}
 		}
 	};

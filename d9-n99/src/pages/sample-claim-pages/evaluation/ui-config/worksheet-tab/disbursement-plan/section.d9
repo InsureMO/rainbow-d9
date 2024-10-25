@@ -1,0 +1,90 @@
+#### Section::claim.claim-worksheet.disbursement-plan.title
+
+- collapsible
+
+##### Ribs::::data.disbursementPlan.policies
+
+- !expandable, !addable, !removable, data-as-section
+- initExpanded: `return true`
+- caption: Box
+	- data-labels
+	- Caption::claim.claim-worksheet.disbursement-plan.policy.title
+	- Label::::policyNo
+		- data-as-link
+		- click: @ext.disbursement-plan.policy.view.click
+	- Box::
+		- data-space-grabber
+	- Caption::claim.claim-worksheet.disbursement-plan.total-disbursement-amount
+	- Dropdown::::totalDisbursementCurrency
+		- disabled, data-as-label, data-omit-padding
+		- options: @ext.codes.currency
+	- Label::::totalDisbursementAmount
+		- valueToLabel: `$.nf2(value)`
+	- Caption::claim.claim-worksheet.disbursement-plan.total-adjustment-amount
+	- Dropdown::::totalAdjustmentCurrency
+		- disabled, data-as-label, data-omit-padding
+		- options: @ext.codes.currency
+	- Label::::totalAdjustmentAmount
+		- valueToLabel: `$.nf2(value)`
+- Table::
+	- property: paymentPlans
+	- !expandable, !addable, !removable
+	- fixedLeadColumns: 1
+	- headers:
+		- claim.claim-worksheet.disbursement-plan.payment.payee: 300
+		- claim.claim-worksheet.disbursement-plan.payment.relationship: 150
+		- claim.props.id-no: 150
+		- claim.claim-worksheet.disbursement-plan.payment.payment-method: 120
+		- claim.claim-worksheet.disbursement-plan.payment.product-code: 120
+		- claim.claim-worksheet.disbursement-plan.payment.payment-type: 120
+		- claim.claim-worksheet.disbursement-plan.payment.percentage: 120
+		- claim.claim-worksheet.disbursement-plan.payment.disbursement-amount: 160
+		- claim.claim-worksheet.disbursement-plan.payment.interest-amount: 150
+		- claim.claim-worksheet.disbursement-plan.payment.payment-amount-on-payment-currency: 220
+		- claim.claim-worksheet.disbursement-plan.payment.payment-amount-on-policy-currency: 240
+		- claim.claim-worksheet.disbursement-plan.payment.pending: 100
+	- Label::::payee
+	- Dropdown::::relationship
+		- disabled, data-as-label
+		- options: @ext.codes.relationshipWithInsured
+	- Label::::idNo
+	- Dropdown::::paymentMethod
+		- disabled, data-as-label
+		- options: @ext.codes.paymentMethod
+	- Label::::productCode
+	- Dropdown::::paymentType
+		- disabled, data-as-label
+		- options: @ext.codes.paymentType
+	- Label::::percentage
+		- valueToLabel: `VUtils.isBlank(value) ? '' : value + '%'`
+	- Box::
+		- data-dense-labels
+		- Dropdown::::disbursementAmountCurrency
+			- disabled, data-as-label, data-omit-padding
+			- options: @ext.codes.currency
+		- Label::::disbursementAmount
+			- valueToLabel: `$.nf2(value)`
+	- Box::
+		- data-dense-labels
+		- Dropdown::::interestAmountCurrency
+			- disabled, data-as-label, data-omit-padding
+			- options: @ext.codes.currency
+		- Label::::interestAmount
+			- valueToLabel: `$.nf2(value)`
+	- Box::
+		- data-dense-labels
+		- Dropdown::::paymentAmountOnPaymentCurrency
+			- disabled, data-as-label, data-omit-padding
+			- options: @ext.codes.currency
+		- Label::::paymentAmountOnPayment
+			- valueToLabel: `$.nf2(value)`
+	- Box::
+		- data-dense-labels
+		- Dropdown::::paymentAmountOnPolicyCurrency
+			- disabled, data-as-label, data-omit-padding
+			- options: @ext.codes.currency
+		- Label::::paymentAmountOnPolicy
+			- valueToLabel: `$.nf2(value)`
+	- Dropdown::::pending
+		- disabled, data-as-label
+		- options: @ext.codes.yesNo

@@ -1,0 +1,28 @@
+- Table::
+	- property: insuredList
+	- !expandable, !addable, !removable
+	- headers:
+		- claim.props.insured-name: 1fr
+		- claim.props.id-type: 100
+		- claim.props.id-no: 160
+		- claim.props.nationality: 140
+		- claim.props.gender: 140
+		- claim.props.dob: 140
+		- claim.props.occupation: 140
+		- claim.claim-worksheet.life-assured-info.age-at-event: 140
+	- Label::::name
+	- Dropdown::::idType
+		- disabled, data-as-label
+		- options: @ext.codes.idType
+	- Label::::idNo
+	- Dropdown::::nationality
+		- disabled, data-as-label
+		- options: @ext.codes.nationality
+	- Dropdown::::gender
+		- disabled, data-as-label
+		- options: @ext.codes.gender
+	- Label::::dob
+	- Dropdown::::occupation
+		- disabled, data-as-label
+		- options: @ext.codes.occupation
+	- Label::::ageAtEvent

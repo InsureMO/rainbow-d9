@@ -1,4 +1,4 @@
-import {MonitorNodeAttributes, NodeDef} from '@rainbow-d9/n1';
+import {MonitorNodeAttributes, NodeDef, RootEventTypes} from '@rainbow-d9/n1';
 import {DropdownOptions, GlobalEventPrefix, GlobalHandlers, IntlLabel, SectionDef} from '@rainbow-d9/n2';
 import {lazy} from 'react';
 import {AppPage, PageRegistrar} from '../../../global-settings';
@@ -144,7 +144,7 @@ const ClaimEvaluationIndex = PreloadedLazyPageWrapper(lazy(() => import('./page'
 		};
 		// clone
 		const rootModel: RootModel = {
-			control: {claimIssuesAllSelected: false, activeTab: 'workbench-tab'},
+			control: {claimIssuesAllSelected: false, activeTab: 'worksheet-tab'},
 			data: wrapData({
 				...data,
 				claimIssues: data.claimIssues ?? [],
@@ -219,19 +219,23 @@ const ClaimEvaluationIndex = PreloadedLazyPageWrapper(lazy(() => import('./page'
 				assessmentTabLocationOptions: async () => {
 					return (rootModel.data.assessment.policies ?? []).map((policy, policyIndex) => {
 						const policyDomId = `data-assessment-policies_${policyIndex}`;
+						const onLocated = async () => {
+							delete rootModel.control.pageNavigateTo;
+							globalHandlers.root?.fire(RootEventTypes.VALUE_CHANGED, '/control.pageNavigateTo', (void 0), (void 0));
+						};
 						return [
 							createPageLocationOption({
 								domId: policyDomId, selector: '[data-w=d9-rib-row]',
-								prefix: `${policyIndex + 1}`, i18nKey: 'claim.nav.policy', extLabel: policy.policyNo,
+								prefix: `${policyIndex + 1}.`, i18nKey: 'claim.nav.policy', extLabel: policy.policyNo,
 								expands: [[GlobalEventPrefix.EXPAND_RIBS_ELEMENT, policyDomId]],
-								globalHandlers, hasFixedTitle: true
+								globalHandlers, hasFixedTitle: true, onLocated
 							}),
 							...(policy.products ?? []).map((product, productIndex) => {
 								const productDomId = `${policyDomId}-products_${productIndex}`;
 								return [
 									createPageLocationOption({
 										domId: productDomId, selector: '[data-w=d9-rib-row]',
-										prefix: `${policyIndex + 1}.${productIndex + 1}`, i18nKey: 'claim.nav.product',
+										prefix: `${policyIndex + 1}.${productIndex + 1}.`, i18nKey: 'claim.nav.product',
 										extLabel: product.code,
 										expands: [
 											[GlobalEventPrefix.EXPAND_RIBS_ELEMENT, policyDomId],
@@ -239,7 +243,7 @@ const ClaimEvaluationIndex = PreloadedLazyPageWrapper(lazy(() => import('./page'
 											[GlobalEventPrefix.EXPAND_RIBS_ELEMENT, productDomId],
 											[GlobalEventPrefix.EXPAND_SECTION, `$full:product-basic+${productDomId}`]
 										],
-										globalHandlers, hasFixedTitle: true
+										globalHandlers, hasFixedTitle: true, onLocated
 									}),
 									...([
 										['[data-product-adjustment-factors]', 'claim.nav.product-adjustment-factors'],
@@ -251,28 +255,28 @@ const ClaimEvaluationIndex = PreloadedLazyPageWrapper(lazy(() => import('./page'
 									].map(([selector, i18nKey], index) => {
 										return createPageLocationOption({
 											domId: productDomId, selector,
-											prefix: `${policyIndex + 1}.${productIndex + 1}.${index + 1}`,
+											prefix: `${policyIndex + 1}.${productIndex + 1}.${index + 1}.`,
 											i18nKey, expands: [
 												[GlobalEventPrefix.EXPAND_RIBS_ELEMENT, policyDomId],
 												[GlobalEventPrefix.EXPAND_SECTION, `$full:policy-payment-summary+${policyDomId}`],
 												[GlobalEventPrefix.EXPAND_RIBS_ELEMENT, productDomId],
 												[GlobalEventPrefix.EXPAND_SECTION, `$full:${selector.replace(/\[data-(.+)]/, '$1')}+${productDomId}`]
 											],
-											globalHandlers, hasFixedTitle: true
+											globalHandlers, hasFixedTitle: true, onLocated
 										});
 									}))
 								];
 							}).flat(),
 							createPageLocationOption({
 								domId: policyDomId, selector: '[data-policy-adjustment-items]',
-								prefix: `${policyIndex + 1}.${(policy.products ?? []).length + 1}`,
+								prefix: `${policyIndex + 1}.${(policy.products ?? []).length + 1}.`,
 								i18nKey: 'claim.nav.policy-adjustment-items',
 								expands: [
 									[GlobalEventPrefix.EXPAND_RIBS_ELEMENT, policyDomId],
 									[GlobalEventPrefix.EXPAND_SECTION, `$full:policy-payment-summary+${policyDomId}`],
 									[GlobalEventPrefix.EXPAND_SECTION, `$full:policy-adjustment-items+${policyDomId}`]
 								],
-								globalHandlers, hasFixedTitle: true
+								globalHandlers, hasFixedTitle: true, onLocated
 							})
 						];
 					}).flat() as DropdownOptions;

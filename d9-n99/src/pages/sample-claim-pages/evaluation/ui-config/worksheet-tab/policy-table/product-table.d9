@@ -1,0 +1,22 @@
+- Section::claim.claim-worksheet.policy.product.title
+	- data-2nd
+	- Table::
+		- property: products
+		- !expandable, !addable, !removable
+		- fixedLeadColumns: 2
+		- headers:
+			- claim.claim-worksheet.policy.product.name: 120
+			- claim.claim-worksheet.policy.product.life-assured: 200
+			- claim.claim-worksheet.policy.product.risk-commencement-date: 200
+			- claim.claim-worksheet.policy.product.status: 120
+			- claim.claim-worksheet.policy.product.reinstatement-date: 150
+			- claim.claim-worksheet.policy.product.coverage-period: 120
+			- claim.claim-worksheet.policy.product.payment-period: 120
+			- claim.claim-worksheet.policy.product.sa-unit-level: 150
+			- claim.claim-worksheet.policy.product.installment-premium: 150
+			- claim.claim-worksheet.policy.product.underwriting-decision: 150
+			- claim.claim-worksheet.policy.product.loading: 80
+			- claim.claim-worksheet.policy.product.agreement: 80
+			- claim.claim-worksheet.policy.product.lapse-terminate-date: 200
+			- claim.claim-worksheet.policy.product.inception-to-event-duration: 250
+			- claim.claim-worksheet.policy.product.reinstatement-to-event-duration: 250

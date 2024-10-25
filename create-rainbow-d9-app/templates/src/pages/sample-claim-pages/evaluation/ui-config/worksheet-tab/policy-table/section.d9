@@ -1,0 +1,54 @@
+#### Section::claim.claim-worksheet.policies.title
+
+- collapsible
+
+##### Ribs::::data.lifeAssuredInfo.policies
+
+- !expandable, !addable, !removable, data-as-section
+- initExpanded: `return true`
+- caption: Box
+	- data-labels
+	- Caption::claim.claim-worksheet.policy.title
+	- Label::::policyNo
+		- data-as-link
+		- click: @ext.policies.policy.view.click
+- Input::claim.claim-worksheet.policy.proposal-date::proposalDate
+	- disabled
+- Input::claim.claim-worksheet.policy.issue-date::issueDate
+	- disabled
+- Input::claim.claim-worksheet.policy.risk-commencement-date::riskCommencementDate
+	- disabled
+- Dropdown::claim.claim-worksheet.policy.currency::currency
+	- disabled
+	- options: @ext.codes.currency
+- Dropdown::claim.claim-worksheet.policy.status::status
+	- disabled
+	- options: @ext.codes.policyStatus
+- Input::claim.claim-worksheet.policy.lapse-date::lapseDate
+	- disabled
+- Input::claim.claim-worksheet.policy.reinstatement-date::reinstatementDate
+	- disabled
+- Dropdown::claim.claim-worksheet.policy.installment-premium::installmentPremium
+	- disabled
+	- options: @ext.codes.yesNo
+- Input::claim.claim-worksheet.policy.next-due-date::nextDueDate
+	- disabled
+- Input::claim.claim-worksheet.policy.outstanding-premium::outstandingPremium
+	- disabled
+- Dropdown::claim.claim-worksheet.policy.policy-frequency::policyFrequency
+	- disabled
+	- options: @ext.codes.policyFrequency
+- Input::claim.claim-worksheet.policy.policy-loan::policyLoan
+	- disabled
+- Dropdown::claim.claim-worksheet.policy.sales-channel::salesChannel
+	- disabled
+	- options: @ext.codes.salesChannel
+- Dropdown::claim.claim-worksheet.policy.service-agent::serviceAgent
+	- disabled
+	- options: @ext.codes.serviceAgentWithCodePrefix
+- Box::$$party-table
+- Box::$$product-table
+- Box::$$loading-table
+- Box::$$exclusion-table
+- Box::$$agreement-table
+- Box::$$risk-related-cs-history-table

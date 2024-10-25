@@ -1,0 +1,37 @@
+#### Section::claim.claim-worksheet.internal-external-query.title
+
+- collapsible
+
+- Table::
+	- property: data.internalExternalQueries
+	- !expandable, !addable, !removable
+	- fixedLeadColumns: 1
+	- headers:
+		- claim.claim-worksheet.internal-external-query.task: 160
+		- claim.claim-worksheet.internal-external-query.query-type: 160
+		- claim.claim-worksheet.internal-external-query.sub-type: 240
+		- claim.claim-worksheet.internal-external-query.status: 120
+		- claim.props.policy-no: 120
+		- claim.claim-worksheet.internal-external-query.raised: 150
+		- claim.claim-worksheet.internal-external-query.submission-content: 300
+		- claim.claim-worksheet.internal-external-query.replied: 150
+		- claim.claim-worksheet.internal-external-query.reply-comment: 300
+	- Label::::task
+	- Label::::queryType
+	- Label::::subType
+	- Label::::status
+	- Label::::policyNo
+	- Box::
+		- data-done-at, data-as-table-cell
+		- Dropdown::::generatedBy
+			- disabled, data-as-label
+			- options: @ext.codes.users
+		- Label::::generatedAt
+	- Label::::submissionContent
+	- Box::
+		- data-done-at, data-as-table-cell
+		- Dropdown::::repliedBy
+			- disabled, data-as-label
+			- options: @ext.codes.users
+		- Label::::repliedAt
+	- Label::::replyComment

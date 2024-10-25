@@ -1,0 +1,16 @@
+- Section::claim.claim-worksheet.policy.agreement.title
+	- data-2nd
+	- Table::
+		- property: agreements
+		- !expandable, !addable, !removable
+		- fixedLeadColumns: 3
+		- headers:
+			- claim.props.policy-no: 120
+			- claim.claim-worksheet.policy.agreement.product-code: 200
+			- claim.claim-worksheet.policy.agreement.product-type: 200
+			- claim.claim-worksheet.policy.agreement.type: 120
+			- claim.claim-worksheet.policy.agreement.life-assured: 200
+			- claim.claim-worksheet.policy.agreement.code: 120
+			- claim.claim-worksheet.policy.agreement.comment: 200
+			- claim.claim-worksheet.policy.agreement.review-period: 200
+			- claim.claim-worksheet.policy.agreement.content: 250

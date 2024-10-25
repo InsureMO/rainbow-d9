@@ -1,0 +1,15 @@
+- Section::claim.claim-worksheet.policy.loading.title
+	- data-2nd
+	- Table::
+		- property: loadings
+		- !expandable, !addable, !removable
+		- fixedLeadColumns: 3
+		- headers:
+			- claim.props.policy-no: 120
+			- claim.claim-worksheet.policy.loading.product-code: 200
+			- claim.claim-worksheet.policy.loading.product-type: 200
+			- claim.claim-worksheet.policy.loading.category: 150
+			- claim.claim-worksheet.policy.loading.occupation-class: 150
+			- claim.claim-worksheet.policy.loading.type: 120
+			- claim.claim-worksheet.policy.loading.period: 120
+			- claim.claim-worksheet.policy.loading.extra-premium: 150
