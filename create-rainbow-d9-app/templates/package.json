@@ -1,13 +1,13 @@
 {
 	"name": "@rainbow-d9/n99",
-	"version": "1.2.9",
+	"version": "1.2.10",
 	"private": true,
 	"type": "module",
 	"dependencies": {
 		"@babel/plugin-proposal-private-property-in-object": "^7.21.11",
-		"@rainbow-d9/echarts": "1.2.9",
-		"@rainbow-d9/n2": "1.2.9",
-		"@rainbow-d9/n3": "1.2.9",
+		"@rainbow-d9/echarts": "1.2.10",
+		"@rainbow-d9/n2": "1.2.10",
+		"@rainbow-d9/n3": "1.2.10",
 		"@rollup/pluginutils": "^5.1.0",
 		"@testing-library/jest-dom": "^5.17.0",
 		"@testing-library/react": "^13.4.0",
