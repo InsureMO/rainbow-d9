@@ -84,8 +84,8 @@ export const WizardStepTitle = (props: WizardStepTitleProps) => {
 	// active hook must put here, since tab title is rendered before wizard controller
 	// and since the attribute initializer is async, the step title worker is not ensured to be rendered before wizard controller
 	// which leads to miss the active step event from inside
-	const {active, done, reachedIndex} = useWizardStepActive(props.stepIndex, props.marker);
-	useWizardStepContentRefresh(props.stepIndex, props.marker);
+	const {active, done, reachedIndex} = useWizardStepActive(props.stepIndex, props.marker, 'title');
+	useWizardStepContentRefresh(props.stepIndex, props.marker, 'title');
 	const {initialized, $defaultAttributes, $defaultAttributesSet} = useDefaultAttributeValues(props);
 	if (!initialized) {
 		return null;

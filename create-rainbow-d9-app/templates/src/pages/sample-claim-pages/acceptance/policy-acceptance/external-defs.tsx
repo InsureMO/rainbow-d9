@@ -1,5 +1,5 @@
-import {BaseModel, PropValue} from '@rainbow-d9/n1';
-import {ButtonClickOptions, CaptionClickOptions, GlobalHandlers} from '@rainbow-d9/n2';
+import {BaseModel, PropValue, VUtils} from '@rainbow-d9/n1';
+import {ButtonClickOptions, CaptionClickOptions, GlobalEventPrefix, GlobalHandlers} from '@rainbow-d9/n2';
 import {MutableRefObject} from 'react';
 import {asT} from '../../../../utils';
 import {
@@ -81,10 +81,11 @@ export const createExternalDefsCreator = (rootModelRef: MutableRefObject<any>, a
 							if (failed.length > 0) {
 								// switch tab
 								if (failed[0].id.startsWith('data-decision')) {
-									await globalHandlers.sc('tab', 'decision-tab');
+									await globalHandlers.sc(GlobalEventPrefix.TAB, 'decision-tab', (void 0), async () => VUtils.noop());
 								} else {
-									await globalHandlers.sc('tab', 'issue-tab');
+									await globalHandlers.sc(GlobalEventPrefix.TAB, 'issue-tab', (void 0), async () => VUtils.noop());
 								}
+								alert('done');
 								// focus again, make sure the element scrolls to viewport
 								failed[0].element?.focus();
 							}

@@ -7,6 +7,7 @@ import {
 	useGlobalEventBus,
 	useGlobalHandlers
 } from '../global';
+import {ModelCarrier} from '../types';
 import {useTabsEventBus} from './event/tabs-event-bus';
 import {TabsEventTypes} from './event/tabs-event-bus-types';
 import {TabDef, TabsProps} from './types';
@@ -32,7 +33,9 @@ export const TabsController = (props: TabsControllerProps) => {
 	});
 	const fireCustomEvent = useCustomGlobalEvent();
 	useEffect(() => {
-		const activeTab = async (options: { tabIndex: number; def?: TabDef; first: boolean }) => {
+		const activeTab = async (options: {
+			tabIndex: number; def?: TabDef; first: boolean
+		}, callback?: () => Promise<void>) => {
 			const {tabIndex, def, first} = options;
 
 			if (def.data != null) {
@@ -43,10 +46,23 @@ export const TabsController = (props: TabsControllerProps) => {
 					marker: def.marker, firstActive: first,
 					global: globalHandlers
 				});
-				fire(TabsEventTypes.REFRESH_TAB_CONTENT, tabIndex, def?.marker);
+				await new Promise<void>(resolve => {
+					fire(TabsEventTypes.REFRESH_TAB_CONTENT, tabIndex, def?.marker, async (where: 'title' | 'body') => {
+						if (where === 'body') {
+							resolve();
+						}
+					});
+				});
 			}
 			setActiveIndex(tabIndex);
-			fire(TabsEventTypes.ACTIVE_TAB, tabIndex, def?.marker);
+			await new Promise<void>(resolve => {
+				fire(TabsEventTypes.ACTIVE_TAB, tabIndex, def?.marker, async (where: 'title' | 'body') => {
+					if (where === 'body') {
+						await callback?.();
+						resolve();
+					}
+				});
+			});
 			const key = `${GlobalEventPrefix.TAB_CHANGED}:${def?.marker ?? ''}`;
 			// noinspection JSIgnoredPromiseFromCall,ES6MissingAwait
 			fireCustomEvent(key, GlobalEventPrefix.TAB_CHANGED, def?.marker ?? '', {
@@ -55,7 +71,7 @@ export const TabsController = (props: TabsControllerProps) => {
 		};
 		// deal with active tab event from inside
 		// and fire tab changed event when tab changed
-		const createOnTabActive = (first: boolean) => async (index: number, marker: string) => {
+		const createOnTabActive = (first: boolean) => async (index: number, marker: string, onActivated?: () => Promise<void>) => {
 			const activeOne = findActiveOne(contents, index, marker);
 			if (activeOne == null) {
 				// do nothing
@@ -66,9 +82,13 @@ export const TabsController = (props: TabsControllerProps) => {
 				if (first) {
 					// use force since state active index is same as given tab index
 					await activeTab({tabIndex: foundIndex, def: found, first: true});
+				} else {
+					// trigger callback directly
+					// noinspection ES6MissingAwait
+					onActivated?.();
 				}
 			} else {
-				await activeTab({tabIndex: foundIndex, def: found, first: false});
+				await activeTab({tabIndex: foundIndex, def: found, first: false}, onActivated);
 			}
 		};
 		const onFirstTabActive = createOnTabActive(true);
@@ -85,17 +105,18 @@ export const TabsController = (props: TabsControllerProps) => {
 	]);
 	useEffect(() => {
 		// deal with active tab event from outside
-		const onCustomEvent = (_: string, prefix: string, clipped: string) => {
+		// eslint-disable-next-line @typescript-eslint/no-unused-vars
+		const onCustomEvent = (_: string, prefix: string, clipped: string, _models?: ModelCarrier, callback?: () => Promise<void>) => {
 			if (prefix !== GlobalEventPrefix.TAB) {
 				return;
 			}
 			const check = VUtils.isInteger(clipped);
 			if (check.test) {
 				// only one tabs exists, otherwise leads confusion, since every tabs will respond to this event
-				fire(TabsEventTypes.TRY_ACTIVE_TAB, check.value, '');
+				fire(TabsEventTypes.TRY_ACTIVE_TAB, check.value, '', callback);
 			} else {
 				// make sure marker is global unique
-				fire(TabsEventTypes.TRY_ACTIVE_TAB, -1, (clipped ?? '').trim());
+				fire(TabsEventTypes.TRY_ACTIVE_TAB, -1, (clipped ?? '').trim(), callback);
 			}
 		};
 		onGlobal && onGlobal(GlobalEventTypes.CUSTOM_EVENT, onCustomEvent);

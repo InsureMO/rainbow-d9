@@ -17,7 +17,7 @@ export type TabBodyVisibilityControllerProps = Pick<TabBodyProps, 'tabIndex' | '
 
 export const TabBodyVisibilityController = (props: TabBodyVisibilityControllerProps) => {
 	const {tabIndex, marker} = props;
-	const active = useTabActive(tabIndex, marker);
+	const active = useTabActive(tabIndex, marker, 'body');
 
 	return <ATabBodyVisibility data-visible={active}/>;
 };
@@ -28,7 +28,7 @@ export const TabBodyContent = (props: TabBodyProps) => {
 		$root, $model, $p2r
 	} = props;
 
-	useTabContentRefresh(tabIndex, marker);
+	useTabContentRefresh(tabIndex, marker, 'body');
 	const {initialized, def: bodyDef} = useTabBodyInit({$pp, marker, def});
 
 	if (!initialized) {

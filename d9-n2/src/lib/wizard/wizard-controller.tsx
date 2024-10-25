@@ -7,6 +7,7 @@ import {
 	useGlobalEventBus,
 	useGlobalHandlers
 } from '../global';
+import {ModelCarrier} from '../types';
 import {useWizardEventBus} from './event/wizard-event-bus';
 import {WizardEventTypes} from './event/wizard-event-bus-types';
 import {WizardProps, WizardStepDef} from './types';
@@ -35,7 +36,9 @@ export const WizardController = (props: WizardControllerProps) => {
 	const [state, setState] = useState<WizardControllerState>({initialized: false, activeIndex: -1, reachedIndex: -1});
 	const fireCustomEvent = useCustomGlobalEvent();
 	useEffect(() => {
-		const activeStep = async (options: { stepIndex: number, def?: WizardStepDef; first: boolean }) => {
+		const activeStep = async (options: {
+			stepIndex: number, def?: WizardStepDef; first: boolean
+		}, callback?: () => Promise<void>) => {
 			const {stepIndex, def, first} = options;
 			if (def.data != null) {
 				const model = MUtils.getValue($wrapped.$model, PPUtils.concat($pp, def.$pp));
@@ -45,13 +48,26 @@ export const WizardController = (props: WizardControllerProps) => {
 					marker: def.marker, firstActive: first,
 					global: globalHandlers
 				});
-				fire(WizardEventTypes.REFRESH_STEP_CONTENT, stepIndex, def?.marker);
+				await new Promise<void>(resolve => {
+					fire(WizardEventTypes.REFRESH_STEP_CONTENT, stepIndex, def?.marker, async (where: 'title' | 'body') => {
+						if (where === 'body') {
+							resolve();
+						}
+					});
+				});
 			}
 			const reachedIndex = Math.max(stepIndex, state.reachedIndex);
 			setState(state => {
 				return {...state, activeIndex: stepIndex, reachedIndex};
 			});
-			fire(WizardEventTypes.ACTIVE_STEP, stepIndex, def?.marker, reachedIndex);
+			await new Promise<void>(resolve => {
+				fire(WizardEventTypes.ACTIVE_STEP, stepIndex, def?.marker, reachedIndex, async (where: 'title' | 'body' | 'share') => {
+					if (where === 'body') {
+						await callback?.();
+						resolve();
+					}
+				});
+			});
 			const key = `${GlobalEventPrefix.WIZARD_STEP_CHANGED}:${def?.marker ?? ''}`;
 			// noinspection JSIgnoredPromiseFromCall
 			await fireCustomEvent(key, GlobalEventPrefix.WIZARD_STEP_CHANGED, def?.marker ?? '', {
@@ -60,7 +76,7 @@ export const WizardController = (props: WizardControllerProps) => {
 		};
 		// deal with active tab event from inside
 		// and fire tab changed event when tab changed
-		const createOnStepActive = (first: boolean) => async (index: number, marker: string) => {
+		const createOnStepActive = (first: boolean) => async (index: number, marker: string, onActivated?: () => Promise<void>) => {
 			const activeOne = findActiveOne(contents, index, marker);
 			if (activeOne == null) {
 				// do nothing
@@ -71,9 +87,13 @@ export const WizardController = (props: WizardControllerProps) => {
 				if (first) {
 					// use force since state active index is same as given tab index
 					await activeStep({stepIndex: foundIndex, def: found, first: true});
+				} else {
+					// trigger callback directly
+					// noinspection ES6MissingAwait
+					onActivated?.();
 				}
 			} else {
-				await activeStep({stepIndex: foundIndex, def: found, first: false});
+				await activeStep({stepIndex: foundIndex, def: found, first: false}, onActivated);
 			}
 		};
 		const onFirstStepActive = createOnStepActive(true);
@@ -88,17 +108,17 @@ export const WizardController = (props: WizardControllerProps) => {
 		on, off, fire, globalHandlers, fireCustomEvent, state.activeIndex, state.reachedIndex, contents,
 		$pp, $wrapped.$root, $wrapped.$model, $wrapped.$p2r]);
 	useEffect(() => {
-		const onCustomEvent = (_: string, prefix: string, clipped: string) => {
+		const onCustomEvent = (_: string, prefix: string, clipped: string, _models?: ModelCarrier, callback?: () => Promise<void>) => {
 			if (prefix !== GlobalEventPrefix.WIZARD_STEP) {
 				return;
 			}
 			const check = VUtils.isInteger(clipped);
 			if (check.test) {
 				// only one wizard exists, otherwise leads confusion, since every wizard will repsond to this event
-				fire(WizardEventTypes.TRY_ACTIVE_STEP, check.value, '');
+				fire(WizardEventTypes.TRY_ACTIVE_STEP, check.value, '', callback);
 			} else {
 				// make sure marker is global unique
-				fire(WizardEventTypes.TRY_ACTIVE_STEP, -1, (clipped ?? '').trim());
+				fire(WizardEventTypes.TRY_ACTIVE_STEP, -1, (clipped ?? '').trim(), callback);
 			}
 		};
 		onGlobal && onGlobal(GlobalEventTypes.CUSTOM_EVENT, onCustomEvent);

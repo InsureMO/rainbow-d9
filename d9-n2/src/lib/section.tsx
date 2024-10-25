@@ -140,6 +140,22 @@ export const Section = forwardRef((props: SectionProps, ref: ForwardedRef<HTMLDi
 	const [expanded, setExpanded] = useState(collapsible !== true || !collapsed);
 	const fireCustomEvent = useCustomGlobalEvent();
 	useEffect(() => {
+		if (firstRound.current) {
+			firstRound.current = false;
+			return;
+		}
+		if (customEventCallbackRef.current.has) {
+			customEventCallbackRef.current.has = false;
+			// noinspection JSIgnoredPromiseFromCall
+			customEventCallbackRef.current.callback?.();
+			delete customEventCallbackRef.current.callback;
+		}
+		const prefix = expanded ? GlobalEventPrefix.SECTION_EXPANDED : GlobalEventPrefix.SECTION_COLLAPSED;
+		const key = `${prefix}:${marker ?? ''}`;
+		// noinspection JSIgnoredPromiseFromCall
+		fireCustomEvent(key, prefix, marker ?? '', {root: $wrapped.$root, model: $wrapped.$model});
+	}, [onGlobal, offGlobal, fireCustomEvent, expanded, marker, $wrapped.$root, $wrapped.$model]);
+	useEffect(() => {
 		const onCustomEvent = (_: string, prefix: string, clipped: string, _models?: ModelCarrier, callback?: () => Promise<void>) => {
 			if (prefix !== GlobalEventPrefix.EXPAND_SECTION && prefix !== GlobalEventPrefix.COLLAPSE_SECTION) {
 				return;
@@ -183,22 +199,6 @@ export const Section = forwardRef((props: SectionProps, ref: ForwardedRef<HTMLDi
 			offGlobal && offGlobal(GlobalEventTypes.CUSTOM_EVENT, onCustomEvent);
 		};
 	}, [onGlobal, offGlobal, expanded, marker, $p2r, props.$pp, props.id]);
-	useEffect(() => {
-		if (firstRound.current) {
-			firstRound.current = false;
-			return;
-		}
-		if (customEventCallbackRef.current.has) {
-			customEventCallbackRef.current.has = false;
-			// noinspection JSIgnoredPromiseFromCall
-			customEventCallbackRef.current.callback?.();
-			delete customEventCallbackRef.current.callback;
-		}
-		const prefix = expanded ? GlobalEventPrefix.SECTION_EXPANDED : GlobalEventPrefix.SECTION_COLLAPSED;
-		const key = `${prefix}:${marker ?? ''}`;
-		// noinspection JSIgnoredPromiseFromCall
-		fireCustomEvent(key, prefix, marker ?? '', {root: $wrapped.$root, model: $wrapped.$model});
-	}, [onGlobal, offGlobal, fireCustomEvent, expanded, marker, $wrapped.$root, $wrapped.$model]);
 
 	const onExpandClicked = () => {
 		setExpanded(!expanded);

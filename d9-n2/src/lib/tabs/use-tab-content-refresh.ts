@@ -1,14 +1,29 @@
 import {useForceUpdate} from '@rainbow-d9/n1';
-import {useEffect} from 'react';
+import {useEffect, useRef} from 'react';
 import {useTabsEventBus} from './event/tabs-event-bus';
 import {TabsEventTypes} from './event/tabs-event-bus-types';
 
-export const useTabContentRefresh = (tabIndex: number, marker: string) => {
+interface RefreshIndicator {
+	should: boolean;
+	callback?: (where: 'title' | 'body') => Promise<void>;
+}
+
+export const useTabContentRefresh = (tabIndex: number, marker: string, where: 'title' | 'body') => {
 	const {on, off} = useTabsEventBus();
+	const refreshIndicator = useRef<RefreshIndicator>({should: false});
 	const forceUpdate = useForceUpdate();
 	useEffect(() => {
-		const onActiveTab = (givenTabIndex: number, givenMarker: string) => {
+		if (refreshIndicator.current.should) {
+			refreshIndicator.current.should = false;
+			// noinspection JSIgnoredPromiseFromCall
+			refreshIndicator.current.callback?.(where);
+			delete refreshIndicator.current.callback;
+		}
+	}, [refreshIndicator.current.should, where]);
+	useEffect(() => {
+		const onActiveTab = (givenTabIndex: number, givenMarker: string, onRefreshed?: (where: 'title' | 'body') => Promise<void>) => {
 			if (tabIndex === givenTabIndex || marker === givenMarker) {
+				refreshIndicator.current = {should: true, callback: onRefreshed};
 				forceUpdate();
 			}
 		};

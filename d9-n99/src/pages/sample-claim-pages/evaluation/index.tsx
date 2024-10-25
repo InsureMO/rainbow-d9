@@ -27,12 +27,14 @@ const ClaimEvaluationIndex = PreloadedLazyPageWrapper(lazy(() => import('./page'
 					asT<SectionDef>(node).collapsible = true;
 				} else if (ancestors != null && ancestors.length !== 0) {
 					const parent = ancestors[0];
-					if (asT<SectionDef>(parent).title === 'claim.claim.title' && parent.$pp === 'data.claim') {
-						// let widgets under claim base section disabled
+					if ((asT<SectionDef>(parent).title === 'claim.claim.title' && parent.$pp === 'data.claim')
+						|| (asT<SectionDef>(parent).title === 'claim.additional.title' && parent.$pp === 'data.additional')) {
+						// let widgets under claim base section/additional base section disabled
 						node[MonitorNodeAttributes.DISABLED] = true;
-					} else if (asT<SectionDef>(parent).title === 'claim.additional.title' && parent.$pp === 'data.additional') {
-						// let widgets under additional base section disabled
-						node[MonitorNodeAttributes.DISABLED] = true;
+						// remove required and valid
+						// @ts-ignore
+						delete node['data-required'];
+						delete node[MonitorNodeAttributes.VALID];
 					}
 				}
 			});

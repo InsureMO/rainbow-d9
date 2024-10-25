@@ -31,6 +31,18 @@ export const RibRow = (props: Omit<RibsProps, '$array'> & { $array: EnhancedProp
 	});
 	const rowMarker = getElementKey != null ? getElementKey($wrapped.$model as ObjectPropValue, elementIndex) : (void 0);
 	useEffect(() => {
+		if (customEventCallbackRef.current.has) {
+			customEventCallbackRef.current.has = false;
+			// noinspection JSIgnoredPromiseFromCall
+			customEventCallbackRef.current.callback?.();
+			delete customEventCallbackRef.current.callback;
+		}
+		const prefix = expanded ? GlobalEventPrefix.RIBS_ELEMENT_EXPANDED : GlobalEventPrefix.RIBS_ELEMENT_COLLAPSED;
+		const key = `${prefix}:${marker ?? ''}-${rowMarker ?? elementIndex}`;
+		// noinspection JSIgnoredPromiseFromCall
+		fireCustomEvent(key, prefix, marker ?? '', {root: $wrapped.$root, model: $wrapped.$model});
+	}, [onGlobal, offGlobal, fireCustomEvent, expanded, marker, rowMarker, elementIndex, $wrapped.$root, $wrapped.$model]);
+	useEffect(() => {
 		const onCustomEvent = (_: string, prefix: string, clipped: string, _models?: ModelCarrier, callback?: () => Promise<void>) => {
 			if (clipped !== `${marker ?? ''}-${rowMarker ?? elementIndex}`
 				&& clipped !== PPUtils.asId(PPUtils.absolute($wrapped.$p2r, PROPERTY_PATH_ME), (void 0))) {
@@ -64,18 +76,6 @@ export const RibRow = (props: Omit<RibsProps, '$array'> & { $array: EnhancedProp
 			offGlobal && offGlobal(GlobalEventTypes.CUSTOM_EVENT, onCustomEvent);
 		};
 	}, [onGlobal, offGlobal, expanded, marker, rowMarker, elementIndex, $wrapped.$p2r]);
-	useEffect(() => {
-		if (customEventCallbackRef.current.has) {
-			customEventCallbackRef.current.has = false;
-			// noinspection JSIgnoredPromiseFromCall
-			customEventCallbackRef.current.callback?.();
-			delete customEventCallbackRef.current.callback;
-		}
-		const prefix = expanded ? GlobalEventPrefix.RIBS_ELEMENT_EXPANDED : GlobalEventPrefix.RIBS_ELEMENT_COLLAPSED;
-		const key = `${prefix}:${marker ?? ''}-${rowMarker ?? elementIndex}`;
-		// noinspection JSIgnoredPromiseFromCall
-		fireCustomEvent(key, prefix, marker ?? '', {root: $wrapped.$root, model: $wrapped.$model});
-	}, [onGlobal, offGlobal, fireCustomEvent, expanded, marker, rowMarker, elementIndex, $wrapped.$root, $wrapped.$model]);
 
 	const expand = () => setExpanded(true);
 	const collapse = () => setExpanded(false);

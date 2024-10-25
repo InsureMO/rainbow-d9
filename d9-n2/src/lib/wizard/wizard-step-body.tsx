@@ -30,7 +30,7 @@ export type WizardStepBodyVisibilityControllerProps = Pick<WizardStepBodyProps, 
 
 export const WizardStepBodyVisibilityController = (props: WizardStepBodyVisibilityControllerProps) => {
 	const {stepIndex, marker} = props;
-	const {active} = useWizardStepActive(stepIndex, marker);
+	const {active} = useWizardStepActive(stepIndex, marker, 'body');
 
 	return <AWizardStepBodyVisibility data-visible={active}/>;
 };
@@ -42,7 +42,7 @@ export const WizardStepSharedPart = (props: WizardStepSharedPartProps) => {
 		stepIndex, marker, shared,
 		$root, $model, $p2r
 	} = props;
-	const {active} = useWizardStepActive(stepIndex, marker);
+	const {active} = useWizardStepActive(stepIndex, marker, 'share');
 
 	if (shared == null || !active) {
 		return null;
@@ -89,7 +89,7 @@ export const WizardStepBodyContent = (props: WizardStepBodyProps) => {
 	} = props;
 
 	const {fire} = useWizardEventBus();
-	useWizardStepContentRefresh(stepIndex, marker);
+	useWizardStepContentRefresh(stepIndex, marker, 'body');
 	const {initialized, def: bodyDef} = useWizardStepBodyInit({$pp, marker, def});
 	if (!initialized) {
 		computeSharedPosition({shared, omitWalker, sharedAtLead});

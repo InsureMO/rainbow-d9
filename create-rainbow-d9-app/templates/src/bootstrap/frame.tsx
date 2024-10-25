@@ -236,7 +236,7 @@ const Container = styled.div.attrs({
             display: none;
         }
 
-        &[data-required=true]:not([data-hide-asterisk]) > span[data-r=d9-fc-caption]::after {
+        &[data-required=true]:not([data-hide-asterisk]):not([data-disabled=true]) > span[data-r=d9-fc-caption]::after {
             content: '*';
             color: var(--d9-danger-color);
             margin-left: 4px;

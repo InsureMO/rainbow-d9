@@ -1,14 +1,29 @@
 import {useForceUpdate} from '@rainbow-d9/n1';
-import {useEffect} from 'react';
+import {useEffect, useRef} from 'react';
 import {useWizardEventBus} from './event/wizard-event-bus';
 import {WizardEventTypes} from './event/wizard-event-bus-types';
 
-export const useWizardStepContentRefresh = (tabIndex: number, marker: string) => {
+interface RefreshIndicator {
+	should: boolean;
+	callback?: (where: 'title' | 'body') => Promise<void>;
+}
+
+export const useWizardStepContentRefresh = (tabIndex: number, marker: string, where: 'title' | 'body') => {
 	const {on, off} = useWizardEventBus();
+	const refreshIndicator = useRef<RefreshIndicator>({should: false});
 	const forceUpdate = useForceUpdate();
 	useEffect(() => {
-		const onActiveStep = (givenTabIndex: number, givenMarker: string) => {
+		if (refreshIndicator.current.should) {
+			refreshIndicator.current.should = false;
+			// noinspection JSIgnoredPromiseFromCall
+			refreshIndicator.current.callback?.(where);
+			delete refreshIndicator.current.callback;
+		}
+	}, [refreshIndicator.current.should, where]);
+	useEffect(() => {
+		const onActiveStep = (givenTabIndex: number, givenMarker: string, onRefreshed?: (where: 'title' | 'body') => Promise<void>) => {
 			if (tabIndex === givenTabIndex || marker === givenMarker) {
+				refreshIndicator.current = {should: true, callback: onRefreshed};
 				forceUpdate();
 			}
 		};

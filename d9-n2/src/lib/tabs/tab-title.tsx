@@ -65,8 +65,8 @@ export const TabTitle = (props: TabTitleProps) => {
 	// active hook must put here, since tab title is rendered before tab controller
 	// and since the attribute initializer is async, the tab title worker is not ensured to be rendered before tab controller
 	// which leads to miss the active tab event from inside
-	const active = useTabActive(tabIndex, marker);
-	useTabContentRefresh(tabIndex, marker);
+	const active = useTabActive(tabIndex, marker, 'title');
+	useTabContentRefresh(tabIndex, marker, 'title');
 	const {initialized, $defaultAttributes, $defaultAttributesSet} = useDefaultAttributeValues(props);
 	if (!initialized) {
 		return null;
