@@ -15,7 +15,7 @@ import QuarterOfYear from 'dayjs/plugin/quarterOfYear';
 import RelativeTime from 'dayjs/plugin/relativeTime';
 import UTC from 'dayjs/plugin/utc';
 import WeekOfYear from 'dayjs/plugin/weekOfYear';
-import {askDateFormat, askStoreDateTimeFormat, askTimeFormat, asT, defendCSPNoUnsafeEval} from '../utils';
+import {askDateFormat, askStoreDateTimeFormat, askTimeFormat, asT, defendCSPNoUnsafe} from '../utils';
 
 // datetime functions
 dayjs.extend(WeekOfYear);
@@ -38,7 +38,7 @@ dayjs.extend(BuddhistEra);
 	const widgetsHelper = Widget.createOrGetTranslateHelperSingleton();
 	registerN2Widgets(widgetsHelper);
 	registerCharts(widgetsHelper);
-	if (defendCSPNoUnsafeEval()) {
+	if (defendCSPNoUnsafe()) {
 		const meta = [...document.head.children]
 			.filter(child => child.tagName === 'META')
 			.find(child => child.getAttribute('property') === 'csp-nonce');
@@ -54,6 +54,9 @@ dayjs.extend(BuddhistEra);
 			} else {
 				// n3 create functions by script tag
 				useDynamicFuncsInScriptTag(() => nonce!);
+				// it is for styled-components, which will add styles in CSSStyleSheet dynamically
+				// @ts-ignore
+				window.__webpack_nonce__ = nonce;
 			}
 		}
 	}

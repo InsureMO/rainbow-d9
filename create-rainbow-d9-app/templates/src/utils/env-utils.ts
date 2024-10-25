@@ -1,7 +1,7 @@
 export const isDev = () => import.meta.env.DEV;
 // app
 export const getAppName = () => import.meta.env.VITE_APP_TITLE || 'Frontend';
-export const defendCSPNoUnsafeEval = () => import.meta.env.VITE_DEFEND_CSP_NO_UNSAFE_EVAL === 'true';
+export const defendCSPNoUnsafe = () => import.meta.env.VITE_DEFEND_CSP_NO_UNSAFE === 'true';
 // theme
 export const isThemeEnabled = () => import.meta.env.VITE_THEME_ENABLED === 'true';
 export const getDefaultThemeCode = () => import.meta.env.VITE_THEME_DEFAULT_CODE;
