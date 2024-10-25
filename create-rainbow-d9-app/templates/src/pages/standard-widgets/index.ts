@@ -1,5 +1,6 @@
 export * from './data-client';
 export * from './page-validator';
+export * from './page-locator';
 export * from './dropdown-options';
 export * from './parsed-ui-manufacture-visitor';
 

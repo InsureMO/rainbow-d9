@@ -1,5 +1,6 @@
 - Section::claim.assessment.product.title
 	- collapsible, data-3rd
+	- marker: product-basic
 	- Input::claim.assessment.product.life-assured::lifeAssured
 		- disabled
 	- Input::claim.assessment.product.risk-commencement-date::riskCommencementDate
