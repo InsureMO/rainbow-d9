@@ -222,11 +222,13 @@ const Container = styled.div.attrs({
         &[data-fix-bottom] {
             position: fixed;
             bottom: 0;
+            left: 0;
             right: 0;
             background-color: var(--app-page-bottom-bar-background-color);
             padding: var(--app-page-bottom-bar-padding);
             height: var(--app-page-bottom-bar-height);
             border-radius: 0;
+            transition: left var(--d9-transition-duration) var(--d9-transition-timing-function);
             z-index: var(--app-page-bottom-bar-z-index);
         }
     }

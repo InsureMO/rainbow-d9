@@ -1,3 +1,4 @@
+export const isDev = () => import.meta.env.DEV;
 // app
 export const getAppName = () => import.meta.env.VITE_APP_TITLE || 'Frontend';
 export const defendCSPNoUnsafeEval = () => import.meta.env.VITE_DEFEND_CSP_NO_UNSAFE_EVAL === 'true';

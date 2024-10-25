@@ -1,4 +1,5 @@
 import {VUtils} from '@rainbow-d9/n1';
+import {isDev} from '../../utils';
 import {AppPage} from './types';
 
 class Registrar {
@@ -32,7 +33,7 @@ class Registrar {
 
 	private registerByCode(page: AppPage): AppPage {
 		const exists = this.pagesByCode[page.code];
-		if (exists != null) {
+		if (exists != null && isDev()) {
 			console.warn(`Page code[${page.code}] is duplicated, and exists is replaced by given.`, {
 				exists: exists, given: page
 			});
@@ -43,7 +44,7 @@ class Registrar {
 
 	private registerByRoute(page: AppPage): AppPage {
 		const exists = this.pagesByRoute[page.route];
-		if (exists != null) {
+		if (exists != null && isDev()) {
 			console.warn(`Page route[${page.route}] is duplicated, and exists is replaced by given.`, {
 				exists: exists, given: page
 			});
@@ -57,7 +58,7 @@ class Registrar {
 			return page;
 		}
 		const exists = this.pagesByMenuItemCode[page.menuItemCode!];
-		if (exists != null) {
+		if (exists != null && isDev()) {
 			console.warn(`Page menu item code[${page.menuItemCode}] is duplicated, and exists is replaced by given.`, {
 				exists: exists, given: page
 			});

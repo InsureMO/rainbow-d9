@@ -28,7 +28,7 @@ export const useRemoteRequest = (): RemoteRequestHandlers => {
 		const doRemoteRequest = async <R>(request: () => Promise<R>, disableAlert?: boolean): Promise<R> => {
 			return new Promise<R>((resolve, reject) => {
 				if (fire == null) {
-					reject();
+					reject('Global event bus not provided.');
 				} else {
 					// success -> resolve; otherwise -> reject
 					fire && fire(GlobalEventTypes.INVOKE_REMOTE_REQUEST, request, resolve, reject, disableAlert);

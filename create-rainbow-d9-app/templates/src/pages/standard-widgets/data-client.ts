@@ -6,14 +6,16 @@ class Client {
 
 	public use<R>(ask: () => Promise<R>) {
 		return {
-			ask: async (defaultReturn?: () => R): Promise<R> => {
-				if (defaultReturn == null) {
+			ask: async (fallback?: () => R): Promise<R> => {
+				if (fallback == null) {
 					return await this.globalHandlers.remoteRequest.request(ask);
 				} else {
 					const result = await this.globalHandlers.remoteRequest.neverFailRequest(ask);
 					if (result.failed) {
+						console.groupCollapsed('Failed on fire remote request.');
 						console.error(result.error);
-						return defaultReturn();
+						console.groupEnd();
+						return fallback();
 					} else {
 						return result.result!;
 					}

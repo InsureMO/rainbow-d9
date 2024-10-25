@@ -20,12 +20,7 @@ const createValidateHandler = (options: Omit<ValidateOptions, 'scopes'> & { reso
 				<IntlLabel keys={['validation.input.failed']}
 				           value="The input information is incorrect, please check and try again."/>
 			</AlertLabel>);
-			const failedIds = validated.failed
-				.map(fail => PPUtils.asId(fail.path) as string);
-			// .map(id => {
-			// 	console.log(id);
-			// 	return id;
-			// })
+			const failedIds = validated.failed.map(fail => PPUtils.asId(fail.path) as string);
 			const sort = (ids: Array<string>) => {
 				return ids.map(id => [id, document.getElementById(id)] as [string, HTMLElement | null])
 					.map(([id, element]) => {

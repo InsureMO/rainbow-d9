@@ -108,7 +108,9 @@ const request = async <B>(options: {
 			try {
 				data = await response.json();
 			} catch (e) {
+				console.groupCollapsed(`Failed to get json from response of [${url}].`);
 				console.error(e);
+				console.groupEnd();
 				// client side error, should alert current user
 				// eslint-disable-next-line
 				throw {status: 0, message: 'Client error.'};
@@ -125,9 +127,11 @@ const request = async <B>(options: {
 			let data;
 			try {
 				data = await response.json();
-			} catch {
+			} catch (e) {
 				// ignore it
-				console.warn('Failed to parse error from response on json format.');
+				console.groupCollapsed(`Failed to get json from response of [${url}].`);
+				console.error(e);
+				console.groupEnd();
 				// eslint-disable-next-line
 				throw {status: 400, message: 'Client error.'};
 			}
@@ -147,9 +151,11 @@ const request = async <B>(options: {
 			let data;
 			try {
 				data = await response.json();
-			} catch {
+			} catch (e) {
 				// ignore it
-				console.warn('Failed to parse error from response on json format.');
+				console.groupCollapsed(`Failed to get json from response of [${url}].`);
+				console.error(e);
+				console.groupEnd();
 				// eslint-disable-next-line
 				throw {status: 500, message: 'Internal server error.'};
 			}

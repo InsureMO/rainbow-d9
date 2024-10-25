@@ -35,6 +35,7 @@ export const askSubmissionChannelOptions = async (
 		} catch (e) {
 			console.groupCollapsed(`Failed to get submission channel by id[${submissionChannelId}].`);
 			console.error(e);
+			console.groupEnd();
 		}
 	}
 	return submissionChannelOptions;
@@ -76,6 +77,7 @@ export const askUserAndDepartmentOptions = async (
 	} catch (e) {
 		console.groupCollapsed(`Failed to get users by id[${userIds}].`);
 		console.error(e);
+		console.groupEnd();
 	}
 	return {users: userOptions, departments: departmentOptions};
 };
@@ -101,6 +103,7 @@ export const askEscalateToOptions = async (globalHandlers: GlobalHandlers): Prom
 	} catch (e) {
 		console.groupCollapsed(`Failed to get escalation handlers.`);
 		console.error(e);
+		console.groupEnd();
 	}
 	return handlerOptions;
 };
@@ -121,6 +124,7 @@ export const askInvestigatorOptions = async (globalHandlers: GlobalHandlers): Pr
 	} catch (e) {
 		console.groupCollapsed(`Failed to get investigators.`);
 		console.error(e);
+		console.groupEnd();
 	}
 	return investigatorOptions;
 };

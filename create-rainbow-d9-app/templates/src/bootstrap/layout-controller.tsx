@@ -81,7 +81,6 @@ const LayoutController = styled.div.attrs({[DOM_KEY_WIDGET]: 'app-frame-layout-c
 
             div[data-w=d9-button-bar][data-fix-bottom] {
                 left: var(--app-side-menu-fold-width);
-                transition: left var(--d9-transition-duration) var(--d9-transition-timing-function);
             }
         }
     }
@@ -104,7 +103,6 @@ const LayoutController = styled.div.attrs({[DOM_KEY_WIDGET]: 'app-frame-layout-c
 
             div[data-w=d9-button-bar][data-fix-bottom] {
                 left: var(--app-side-menu-width);
-                transition: left var(--d9-transition-duration) var(--d9-transition-timing-function);
             }
         }
     }
