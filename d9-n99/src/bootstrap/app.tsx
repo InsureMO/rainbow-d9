@@ -29,7 +29,6 @@ export const App = () => {
 		console.log('%cpostMessage%c(%c{%ctype%c: %c\'switch-theme-switcher\'%c, %cenabled%c: %cfalse%c}%c);', ...colors);
 		console.log('%c// switch i18n switcher, could be true/false', 'color:gray');
 		console.log('%cpostMessage%c(%c{%ctype%c: %c\'switch-i18n-switcher\'%c, %cenabled%c: %cfalse%c}%c);', ...colors);
-		postMessage({type: 'switch-theme-switcher', enabled: false});
 		console.groupEnd();
 	}, []);
 	return <AppEventBusProvider>
