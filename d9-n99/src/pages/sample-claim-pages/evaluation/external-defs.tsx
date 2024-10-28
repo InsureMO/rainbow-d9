@@ -88,14 +88,29 @@ export const createExternalDefsCreator = (rootModelRef: MutableRefObject<RootMod
 				}
 			},
 			'disbursement-plan': {
+				'remove-payee': {
+					click: async (_options: ButtonClickOptions<BaseModel, PropValue>) => {
+						alert('Remove payee button clicked.');
+					}
+				},
+				'remove-disbursement': {
+					click: async (_options: ButtonClickOptions<BaseModel, PropValue>) => {
+						alert('Remove disbursement button clicked.');
+					}
+				},
 				'add-lump-sum': {
-					click: async (_options: CaptionClickOptions<BaseModel, PropValue>) => {
+					click: async (_options: ButtonClickOptions<BaseModel, PropValue>) => {
 						alert('Add lump-sum button clicked.');
 					}
 				},
 				'add-installment': {
-					click: async (_options: CaptionClickOptions<BaseModel, PropValue>) => {
+					click: async (_options: ButtonClickOptions<BaseModel, PropValue>) => {
 						alert('Add installment button clicked.');
+					}
+				},
+				'add-payee': {
+					click: async (_options: ButtonClickOptions<BaseModel, PropValue>) => {
+						alert('Add payee button clicked.');
 					}
 				}
 			},

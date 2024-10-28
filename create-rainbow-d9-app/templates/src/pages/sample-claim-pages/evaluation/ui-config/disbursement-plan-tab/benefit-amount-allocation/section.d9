@@ -2,61 +2,133 @@
 
 - collapsible
 
-- Table::
+- Ribs::
 	- property: data.disbursementPlan.benefitAmountAllocations
-	- !expandable, !addable, !removable
-	- fixedLeadColumns: 1
-	- headers:
-		- claim.disbursement-plan.benefit-amount-allocation.payee: 300
-		- claim.disbursement-plan.benefit-amount-allocation.disbursement-method: 160
-		- claim.props.policy-no: 150
-		- claim.disbursement-plan.benefit-amount-allocation.product-code: 120
-		- claim.disbursement-plan.benefit-amount-allocation.payment-type: 120
-		- claim.disbursement-plan.benefit-amount-allocation.percentage: 120
-		- claim.disbursement-plan.benefit-amount-allocation.disbursement-amount: 160
-		- claim.disbursement-plan.benefit-amount-allocation.interest-amount: 150
-		- claim.disbursement-plan.benefit-amount-allocation.payment-amount-on-payment-currency: 220
-		- claim.disbursement-plan.benefit-amount-allocation.payment-amount-on-policy-currency: 240
-		- claim.disbursement-plan.benefit-amount-allocation.pending: 100
-	- Label::::payee
-	- Dropdown::::paymentMethod
-		- disabled, data-as-label
-		- options: @ext.codes.paymentMethod
-	- Label::::policyNo
-	- Label::::productCode
-	- Dropdown::::paymentType
-		- disabled, data-as-label
-		- options: @ext.codes.paymentType
-	- Label::::percentage
-		- valueToLabel: `VUtils.isBlank(value) ? '' : value + '%'`
-	- Box::
-		- data-dense-labels
-		- Dropdown::::disbursementAmountCurrency
-			- disabled, data-as-label, data-omit-padding
-			- options: @ext.codes.currency
-		- Label::::disbursementAmount
-			- valueToLabel: `$.nf2(value)`
-	- Box::
-		- data-dense-labels
-		- Dropdown::::interestAmountCurrency
-			- disabled, data-as-label, data-omit-padding
-			- options: @ext.codes.currency
-		- Label::::interestAmount
-			- valueToLabel: `$.nf2(value)`
-	- Box::
-		- data-dense-labels
-		- Dropdown::::paymentAmountOnPaymentCurrency
-			- disabled, data-as-label, data-omit-padding
-			- options: @ext.codes.currency
-		- Label::::paymentAmountOnPayment
-			- valueToLabel: `$.nf2(value)`
-	- Box::
-		- data-dense-labels
-		- Dropdown::::paymentAmountOnPolicyCurrency
-			- disabled, data-as-label, data-omit-padding
-			- options: @ext.codes.currency
-		- Label::::paymentAmountOnPolicy
-			- valueToLabel: `$.nf2(value)`
-	- Dropdown::::pending
-		- disabled, data-as-label
+	- !addable, !removable, data-as-section
+	- initExpanded: `return true`
+	- caption: Box
+		- data-labels
+		- Caption::claim.disbursement-plan.benefit-amount-allocation.payee
+		- Label::::payee
+		- Box::
+			- data-space-grabber
+		- Button::
+			- text: claim.disbursement-plan.remove-payee
+			- click: @ext.disbursement-plan.remove-payee.click
+			- fill: link
+			- data-fit-link
+	- Dropdown::claim.props.gender::gender
+		- options: @ext.codes.gender
+		- disabled
+	- Box::claim.props.id-no
+		- data-type-input-box
+		- Dropdown::::idType
+			- disabled
+			- options: @ext.codes.idType
+		- Input::::idNo
+			- disabled
+	- Input::claim.props.dob::dob
+		- disabled
+	- Dropdown::claim.disbursement-plan.benefit-amount-allocation.relation-with-life-assured::relationship
+		- options: @ext.codes.relationshipWithInsured
+		- please: dropdown.placeholder.please-select
+	- Input::claim.disbursement-plan.benefit-amount-allocation.mobile::mobile
+	- Dropdown::claim.disbursement-plan.benefit-amount-allocation.us-citizen-indicator::usCitizenIndicator
 		- options: @ext.codes.yesNo
+		- please: dropdown.placeholder.please-select
+	- Dropdown::claim.disbursement-plan.benefit-amount-allocation.address::address
+		- options: @ext.codes.address
+		- please: dropdown.placeholder.please-select
+		- !clearable, required
+		- pos: 12
+	- Input::claim.disbursement-plan.benefit-amount-allocation.order::order
+		- disabled
+		- pos: col: 1, cols: 3
+	- DecoInput::claim.disbursement-plan.benefit-amount-allocation.share::share
+		- disabled
+		- tails: %
+	- Dropdown::claim.disbursement-plan.benefit-amount-allocation.bankruptcy::bankruptcyIndicator
+		- options: @ext.codes.yesNo
+		- please: dropdown.placeholder.please-select
+		- disabled
+	- Ribs::::plans
+		- !addable, !removable, data-as-section
+		- initExpanded: `return true`
+		- visible:
+			- on: plans
+			- handle:
+			  ```ts
+			  return (model.plans?.length ?? 0) !== 0;
+			  ```
+		- caption: Box
+			- data-labels
+			- Caption::claim.disbursement-plan.benefit-amount-allocation.disbursement-plan
+			- Dropdown::::disbursementMethod
+				- data-as-label, disabled, data-omit-padding
+				- options: @ext.codes.paymentMethod
+				- repaint:
+					- on: disbursementMethod
+			- Dropdown::::paymentAmountOnPaymentCurrency
+				- data-as-label, disabled, data-omit-padding
+				- options: @ext.codes.currency
+				- repaint:
+					- on: paymentAmountOnPaymentCurrency
+			- Box::
+				- data-space-grabber
+			- Button::
+				- text: claim.disbursement-plan.remove-disbursement
+				- click: @ext.disbursement-plan.remove-disbursement.click
+				- fill: link
+				- data-fit-link
+		- Dropdown::claim.disbursement-plan.benefit-amount-allocation.disbursement-method::disbursementMethod
+			- options: @ext.codes.paymentMethod
+			- please: dropdown.placeholder.please-select
+		- Dropdown::claim.disbursement-plan.benefit-amount-allocation.payment-currency::paymentAmountOnPaymentCurrency
+			- options: @ext.codes.currency
+			- please: dropdown.placeholder.please-select
+		- Input::claim.disbursement-plan.benefit-amount-allocation.forex-rate::forexRate
+			- disabled
+		- Input::claim.disbursement-plan.benefit-amount-allocation.payment-amount::paymentAmount
+		- Ribs::::items
+			- !addable, !removable, data-as-section
+			- initExpanded: `return true`
+			- caption: Box
+				- data-labels
+				- Caption::claim.disbursement-plan.benefit-amount-allocation.allocate-amount.title
+				- Caption::claim.disbursement-plan.benefit-amount-allocation.allocate-amount.policy-no
+				- Label::::policyNo
+				- Caption::claim.disbursement-plan.benefit-amount-allocation.allocate-amount.product-code
+				- Label::::productCode
+				- Caption::claim.disbursement-plan.benefit-amount-allocation.allocate-amount.disbursement-amount
+				- Label::::disbursementAmount
+					- valueToLabel: `$.nf2(value)`
+					- repaint:
+						- on: disbursementAmount
+			- Box::claim.disbursement-plan.benefit-amount-allocation.allocate-amount.balance-amount
+				- data-type-input-box
+				- Dropdown::::policyCurrency
+					- disabled, data-omit-padding
+					- options: @ext.codes.currency
+				- Input::::balanceAmount
+					- disabled
+			- DecoInput::claim.disbursement-plan.benefit-amount-allocation.allocate-amount.balance-percentage::balancePercentage
+				- tails: %
+				- disabled
+			- DecoInput::claim.disbursement-plan.benefit-amount-allocation.allocate-amount.disbursement-percentage::disbursementPercentage
+				- tails: %
+				- pos: col: 1, cols: 3
+			- Input::claim.disbursement-plan.benefit-amount-allocation.allocate-amount.disbursement-amount::disbursementAmount
+			- Input::claim.disbursement-plan.benefit-amount-allocation.allocate-amount.payment-amount::paymentAmount
+			- Dropdown::claim.disbursement-plan.benefit-amount-allocation.allocate-amount.pending::pending
+				- options: @ext.codes.yesNo
+				- please: dropdown.placeholder.please-select
+			- Input::claim.disbursement-plan.benefit-amount-allocation.allocate-amount.document-receive-date::documentReceiveDate
+			- Input::claim.disbursement-plan.benefit-amount-allocation.allocate-amount.estimated-approval-date::estimatedApprovalDate
+			- Input::claim.disbursement-plan.benefit-amount-allocation.allocate-amount.interest-amount::interestAmount
+	- ButtonBar::
+		- Button::
+			- text: claim.disbursement-plan.add-lump-sum
+			- click: @ext.disbursement-plan.add-lump-sum.click
+		- Button::
+			- text: claim.disbursement-plan.add-installment
+			- click: @ext.disbursement-plan.add-installment.click

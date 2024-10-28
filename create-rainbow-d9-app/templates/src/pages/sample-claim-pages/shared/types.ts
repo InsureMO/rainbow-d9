@@ -502,24 +502,44 @@ export namespace Claim {
 		paymentPlans?: Array<DisbursementPlanPolicyPaymentPlan>;
 	}
 
+	export interface DisbursementPlanBenefitAmountAllocationPlanItem {
+		policyNo?: string;
+		productCode?: string;
+		policyCurrency?: string;
+		balanceAmount?: number;
+		balancePercentage?: number;
+		disbursementPercentage?: number;
+		disbursementAmount?: number;
+		documentReceiveDate?: string;
+		estimatedApprovalDate?: string;
+		interestAmount?: number;
+		paymentAmount?: number;
+		pending?: boolean;
+	}
+
+	export interface DisbursementPlanBenefitAmountAllocationPlan {
+		disbursementMethod?: string;
+		paymentType?: string;
+		paymentAmountOnPaymentCurrency?: string;
+		paymentAmountOnPayment?: number;
+		forexRate?: number;
+		items?: Array<DisbursementPlanBenefitAmountAllocationPlanItem>;
+	}
+
 	export interface DisbursementPlanBenefitAmountAllocation {
 		payee?: string;
 		relationship?: string;
+		idType?: string;
 		idNo?: string;
-		paymentMethod?: string;
-		policyNo?: string;
-		productCode?: string;
-		paymentType?: string;
-		percentage?: number;
-		disbursementAmountCurrency?: string;
-		disbursementAmount?: number;
-		interestAmountCurrency?: string;
-		interestAmount?: number;
-		paymentAmountOnPaymentCurrency?: string;
-		paymentAmountOnPayment?: number;
-		paymentAmountOnPolicyCurrency?: string;
-		paymentAmountOnPolicy?: number;
-		pending?: boolean;
+		gender?: string;
+		dob?: string;
+		address?: string;
+		mobile?: string;
+		order?: number;
+		share?: number;
+		usCitizenIndicator?: boolean;
+		bankruptcyIndicator?: boolean;
+		plans?: Array<DisbursementPlanBenefitAmountAllocationPlan>;
 	}
 
 	export interface DisbursementPlan {

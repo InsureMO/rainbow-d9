@@ -158,13 +158,21 @@ const mockDoLoadMockEvaluationData = async (_keyOrRegistrationId: string): Promi
 				}]
 			}],
 			benefitAmountAllocations: [{
-				payee: 'Jackie Su', relationship: 'spouse', idNo: 'A123456789',
-				paymentMethod: 'cash', policyNo: 'K000017187', productCode: 'GEMA01', paymentType: 'lumpsum',
-				percentage: 50, disbursementAmountCurrency: 'SGD', disbursementAmount: 200000,
-				interestAmountCurrency: 'SGD', interestAmount: 200000,
-				paymentAmountOnPaymentCurrency: 'SGD', paymentAmountOnPayment: 200000,
-				paymentAmountOnPolicyCurrency: 'SGD', paymentAmountOnPolicy: 200000,
-				pending: false
+				payee: 'Jackie Su', relationship: 'spouse', idType: 'passport', idNo: 'A123456789',
+				gender: 'F', dob: '14/10/2000', mobile: '1234567890',
+				usCitizenIndicator: true, bankruptcyIndicator: false,
+				order: 1, share: 50,
+				plans: [{
+					disbursementMethod: 'cash', paymentType: 'lumpsum',
+					paymentAmountOnPaymentCurrency: 'SGD', paymentAmountOnPayment: 200000, forexRate: 1,
+					items: [{
+						policyNo: 'K000017187', productCode: 'GEMA01', policyCurrency: 'SGD',
+						balanceAmount: 250000, balancePercentage: 100,
+						disbursementAmount: 200000, disbursementPercentage: 80,
+						paymentAmount: 200000, pending: false,
+						documentReceiveDate: '14/10/2024', estimatedApprovalDate: '14/10/2024', interestAmount: 200000
+					}]
+				}]
 			}]
 		},
 		internalExternalQueries: [{
