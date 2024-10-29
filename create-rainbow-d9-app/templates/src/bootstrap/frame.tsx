@@ -457,6 +457,7 @@ const Container = styled.div.attrs({
             &[data-as-label][data-disabled=true] {
                 height: var(--d9-input-height);
                 width: unset;
+                padding: ${TableUtils.isInCellInputBorderOmitted() ? (void 0) : 0};
             }
         }
 
