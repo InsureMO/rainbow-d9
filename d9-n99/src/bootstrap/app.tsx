@@ -1,6 +1,4 @@
-/**
- * make sure it is first one to be imported, which do initializing things
- */
+// make sure it is first one to be imported, which do initializing things
 import './envs';
 import {useEffect} from 'react';
 import {isDev} from '../utils';
