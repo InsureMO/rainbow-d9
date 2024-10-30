@@ -1,0 +1,32 @@
+{
+	"control": {
+	},
+	"criteria": {
+		"status": "completed"
+	},
+	"results": [
+		{
+			"generateId": 100001,
+			"submittedBy": "John Doe",
+			"submittedAt": "30/10/2024 16:15:41",
+			"status": "completed",
+			"generatedAt": "30/10/2024 16:16:20"
+		},
+		{
+			"generateId": 100000,
+			"submittedBy": "John Doe",
+			"submittedAt": "30/10/2024 15:15:41",
+			"status": "failed",
+			"criteria": {
+				"Accounting Date": "01/07/2024 - 31/07/2024",
+				"Currency": "SGD"
+			}
+		}
+	],
+	"page": {
+		"pageSize": 10,
+		"pageNumber": 1,
+		"itemCount": 2,
+		"pageCount": 1
+	}
+}

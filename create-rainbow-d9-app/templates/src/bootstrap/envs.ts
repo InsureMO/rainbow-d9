@@ -1,3 +1,4 @@
+import './echarts-envs';
 import {registerCharts} from '@rainbow-d9/echarts';
 import {MUtils, N1Logger, PPUtils, VUtils} from '@rainbow-d9/n1';
 // import all n2 widgets

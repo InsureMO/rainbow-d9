@@ -1,0 +1,68 @@
+# Page::report-download
+
+## Section::::criteria
+
+- DropdownTree::Category::reportCode
+	- pos: 6
+	- options: @ext.codes.report
+	- please: Any
+- Dropdown::Submitted By::submittedBy
+	- options: @ext.codes.user
+	- please: Any
+- Dropdown::Generation Status::status
+	- options: @ext.codes.status
+	- please: Any
+- ButtonBar::
+	- data-narrow-up-in-search
+	- Button::
+		- text: Search
+		- click: @ext.search
+
+## Section::Report Generation Requests
+
+## Table::
+
+- property: results
+- !expandable, !addable, !removable, omitDefaultRowOperators, data-fat-row
+- operatorsColumnWidth: 100
+- repaint:
+	- on: results
+- getElementKey: @ext.getElementKey
+- headers:
+	- Generation ID: 120
+	- Submitted By: 200
+	- Submitted At: 200
+	- Status: 120
+	- Generated At: 200
+	- Generation Criteria: 1fr
+- Label::::generateId
+- Label::::submittedBy
+- Label::::submittedAt
+- Dropdown::::status
+	- disabled, data-as-label
+	- options: @ext.codes.status
+- Label::::generatedAt
+- Label::::criteria
+	- data-vertical-list
+	- valueToLabel: @ext.criteriaToLabel
+- RowOperators::
+	- Button::
+		- text: Download
+		- click: @ext.download
+		- fill: link
+		- data-text-row-operator
+		- visible:
+			- on: status
+			- handle: `return model.status === 'completed'`
+	- Button::
+		- text: Retry
+		- click: @ext.retry
+		- fill: link
+		- data-text-row-operator
+		- visible:
+			- on: status
+			- handle: `return model.status === 'failed'`
+- Pagination::::page
+	- freeWalk
+	- maxButtons: 7
+	- valueChanged: @ext.onPageChanged

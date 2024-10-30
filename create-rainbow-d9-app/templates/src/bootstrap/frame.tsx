@@ -287,6 +287,7 @@ const Container = styled.div.attrs({
 
             > span[data-w=d9-caption] {
                 min-height: var(--d9-input-height);
+                align-self: start;
 
                 &:not(:first-child) {
                     margin-top: -8px;
