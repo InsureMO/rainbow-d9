@@ -1,0 +1,42 @@
+# Page::report-download
+
+## Section::Choose Folder or Report::
+
+- DropdownTree::Category or Report::criteria.reportCode
+	- pos: 6
+	- initExpandLevel: 3
+	- options: @ext.codes.report
+	- please: Please select...
+	- valueChanged: @ext.report-code-changed
+- Box::
+	- $fc, data-dense-labels
+	- Button::
+		- text: Edit
+		- click: @ext.edit
+		- disabled:
+			- on: control.allowToEdit
+			- handle:
+			  ```ts
+			  return !model.control.allowToEdit;
+			  ```
+	- Button::
+		- text: Create Sub Folder
+		- click: @ext.create-sub-folder
+		- disabled:
+			- on: control.allowToCreateSubFolder
+			- handle:
+			  ```ts
+			  return !model.control.allowToCreateSubFolder;
+			  ```
+	- Button::
+		- text: Create Report
+		- click: @ext.create-report
+		- disabled:
+			- on: control.allowToCreateReport
+			- handle:
+			  ```ts
+			  return !model.control.allowToCreateReport;
+			  ```
+
+## Section::Maintain Category
+

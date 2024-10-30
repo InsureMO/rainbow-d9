@@ -8,7 +8,7 @@ import InitRootModel from './init-root.json';
 import {AssistantData, RootModel} from './types';
 import {markdown} from './ui-config.d9';
 
-const ReportDownloadIndex = PreloadedLazyPageWrapper<AssistantData>(lazy(() => import('./page')), {
+const ReportMaintainIndex = PreloadedLazyPageWrapper<AssistantData>(lazy(() => import('./page')), {
 	ui: async (_options: PreloaderFuncOptions): Promise<string> => {
 		return markdown;
 	},
@@ -27,23 +27,23 @@ const ReportDownloadIndex = PreloadedLazyPageWrapper<AssistantData>(lazy(() => i
 				{value: 'completed', label: 'Completed'},
 				{value: 'failed', label: 'Failed'}
 			];
-			const reportOptions: DropdownTreeOptions = createReportTreeOptions(MockData.reports());
+			const reportOptions: DropdownTreeOptions = createReportTreeOptions(MockData.reports(), true);
 
 			return {statusOptions, reportOptions};
 		};
 	}
 });
 
-const ReportDownloadPage: AppPage = {
-	code: 'report-download',
-	route: '/report/download',
-	menuItemCode: 'report-download',
+const ReportMaintainPage: AppPage = {
+	code: 'report-maintain',
+	route: '/report/maintain',
+	menuItemCode: 'report-maintain',
 	breadcrumb: {
-		title: 'Download Report',
+		title: 'Maintain',
 		locations: ['home.title', 'Report']
 	},
-	renderer: ReportDownloadIndex
+	renderer: ReportMaintainIndex
 };
 
 // register
-PageRegistrar.register(ReportDownloadPage);
+PageRegistrar.register(ReportMaintainPage);

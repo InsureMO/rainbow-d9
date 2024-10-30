@@ -37,17 +37,21 @@ const asTreeOptionLabel = (icon: ReactNode) => {
 		}
 	};
 };
-export const createReportTreeOptions = (options: DropdownTreeOptions) => {
+export const createReportTreeOptions = (options: DropdownTreeOptions, stackValue: boolean = false) => {
 	const redressOption = (option: DropdownTreeOption, ancestors: Array<DropdownTreeOption> = []) => {
 		if (typeof option.label === 'string') {
 			const label = option.label;
 			option.stringify = () => label;
+		}
+		if (stackValue && ancestors.length !== 0) {
+			option.value = ancestors[ancestors.length - 1].value + '\t' + option.value;
 		}
 		if (option.children != null) {
 			option.label = asTreeOptionLabel(<ReportFolderIcon/>)(option.label, ancestors);
 			option.children.forEach(child => redressOption(child, [...ancestors, option]));
 		} else {
 			option.label = asTreeOptionLabel(<ReportFileIcon/>)(option.label, ancestors);
+			option.value = option.value + '\nreport';
 		}
 	};
 	options.forEach(option => redressOption(option));

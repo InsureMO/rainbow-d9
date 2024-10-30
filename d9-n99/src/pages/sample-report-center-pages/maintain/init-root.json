@@ -1,0 +1,9 @@
+{
+	"control": {
+		"allowToEdit": false,
+		"allowToCreateSubFolder": false,
+		"allowToCreateReport": false
+	},
+	"criteria": {
+	}
+}

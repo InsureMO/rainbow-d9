@@ -3,7 +3,7 @@ import {lazy} from 'react';
 import {AppPage, PageRegistrar} from '../../../global-settings';
 import {asT} from '../../../utils';
 import {PreloadedLazyPageWrapper, PreloadedPageProps, PreloaderFuncOptions} from '../../standard-widgets';
-import {createReportTreeOptions} from '../shared';
+import {createReportTreeOptions, MockData} from '../shared';
 import InitRootModel from './init-root.json';
 import {AssistantData, RootModel} from './types';
 import {markdown} from './ui-config.d9';
@@ -27,27 +27,7 @@ const ReportDownloadIndex = PreloadedLazyPageWrapper<AssistantData>(lazy(() => i
 				{value: 'completed', label: 'Completed'},
 				{value: 'failed', label: 'Failed'}
 			];
-			const reportOptions: DropdownTreeOptions = createReportTreeOptions([
-				{
-					value: 'nb', label: 'New Business', children: []
-				},
-				{value: 'uw', label: 'Underwriting', children: []},
-				{value: 'cs', label: 'Customer Service', children: []},
-				{value: 'claim', label: 'Claim', children: []},
-				{
-					value: 'fn', label: 'Finance', children: [
-						{value: 'tbr', label: 'Trail Balance Report'},
-						{value: 'glr', label: 'General Ledger Report'}
-					]
-				},
-				{
-					value: 'ri', label: 'Reinsurance', children: [
-						{value: 'rpb', label: 'RI Premium Bordereaux'},
-						{value: 'rcb', label: 'RI Claim Bordereaux'}
-					]
-				},
-				{value: 'sc', label: 'Sales Channel', children: []}
-			]);
+			const reportOptions: DropdownTreeOptions = createReportTreeOptions(MockData.reports());
 
 			return {statusOptions, reportOptions};
 		};
@@ -59,7 +39,7 @@ const ReportDownloadPage: AppPage = {
 	route: '/report/download',
 	menuItemCode: 'report-download',
 	breadcrumb: {
-		title: 'Download',
+		title: 'Download Report',
 		locations: ['home.title', 'Report']
 	},
 	renderer: ReportDownloadIndex

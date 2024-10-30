@@ -4,6 +4,7 @@
 
 - DropdownTree::Category or Report::reportCode
 	- pos: 6
+	- initExpandLevel: 3
 	- options: @ext.codes.report
 	- please: Any
 - Dropdown::Submitted By::submittedBy

@@ -4,6 +4,7 @@ import ReportGenerateIcon from '../../assets/report-generate.svg?react';
 import ReportMaintainIcon from '../../assets/report-maintain.svg?react';
 import {AppMenuGroup, AppMenuType, buildMenuItemForRoute, Menus} from '../../global-settings';
 import './download';
+import './maintain';
 
 Menus.register({
 	code: 'report-center', type: AppMenuType.GROUP,
