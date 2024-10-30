@@ -2,7 +2,7 @@
 
 ## Section::::criteria
 
-- DropdownTree::Category::reportCode
+- DropdownTree::Category or Report::reportCode
 	- pos: 6
 	- options: @ext.codes.report
 	- please: Any
