@@ -165,7 +165,7 @@ export const createExternalDefsCreator = (
 				data.criteria!.splice(index, 1);
 				globalHandlers.root.fire(RootEventTypes.VALUE_CHANGED, '/data.criteria', asT(data.criteria), asT(data.criteria));
 			},
-			discard: async (_options: ButtonClickOptions<BaseModel, PropValue>) => {
+			cancel: async (_options: ButtonClickOptions<BaseModel, PropValue>) => {
 				try {
 					await globalHandlers.yesNoDialog.show('Are you sure you want to confirm the abandonment of the modification? All data will be lost.');
 					const root = rootModelRef.current;

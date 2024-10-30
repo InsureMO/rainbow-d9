@@ -6,14 +6,15 @@ registerMockCodeTables({
 		{label: 'No', value: false}
 	]
 });
-const reports = () => {
+const reports = (omitEmptyCategory: boolean = false) => {
 	return [
-		{
-			value: 'nb', label: 'New Business', children: []
-		},
-		{value: 'uw', label: 'Underwriting', children: []},
-		{value: 'cs', label: 'Customer Service', children: []},
-		{value: 'claim', label: 'Claim', children: []},
+		...(!omitEmptyCategory ?
+			[
+				{value: 'nb', label: 'New Business', children: []},
+				{value: 'uw', label: 'Underwriting', children: []},
+				{value: 'cs', label: 'Customer Service', children: []},
+				{value: 'claim', label: 'Claim', children: []}
+			] : []),
 		{
 			value: 'fn', label: 'Finance', children: [
 				{value: 'tbr', label: 'Trail Balance Report'},
@@ -26,15 +27,16 @@ const reports = () => {
 				{value: 'rcb', label: 'RI Claim Bordereaux'}
 			]
 		},
-		{
-			value: 'sc', label: 'Sales Channel', children: [
-				{
-					value: 'asia', label: 'Asia', children: [
-						{value: 'jp', label: 'Japan', children: []}
-					]
-				}
-			]
-		}
+		...(!omitEmptyCategory ?
+			[{
+				value: 'sc', label: 'Sales Channel', children: [
+					{
+						value: 'asia', label: 'Asia', children: [
+							{value: 'jp', label: 'Japan', children: []}
+						]
+					}
+				]
+			}] : [])
 	];
 };
 const statusOfReport = (code: string) => {

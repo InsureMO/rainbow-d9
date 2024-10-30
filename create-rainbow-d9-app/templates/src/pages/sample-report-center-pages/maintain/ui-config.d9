@@ -1,4 +1,4 @@
-# Page::report-download
+# Page::report-maintain
 
 - data-fix-bottom-button-bar
 
@@ -235,8 +235,8 @@
 	  return !!model.control.editing;
 	  ```
 - Button::
-	- text: Discard
-	- click: @ext.discard
+	- text: Cancel
+	- click: @ext.cancel
 	- ink: waive
 	- fill: plain
 - Button::

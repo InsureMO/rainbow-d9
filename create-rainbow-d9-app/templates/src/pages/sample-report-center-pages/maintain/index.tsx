@@ -63,7 +63,7 @@ const ReportMaintainPage: AppPage = {
 	route: '/report/maintain',
 	menuItemCode: 'report-maintain',
 	breadcrumb: {
-		title: 'Maintain',
+		title: 'Maintain Reports',
 		locations: ['home.title', 'Report']
 	},
 	renderer: ReportMaintainIndex
