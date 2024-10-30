@@ -748,14 +748,14 @@ export const DropdownTreeFilterBridge = () => {
 export const computeDropdownTreePopupHeight = (allOptions: TreeOptionItems<any>, filter?: string): number => {
 	const allOptionCount = (() => {
 		// eslint-disable-next-line @typescript-eslint/no-explicit-any
-		const countChildren = (option: TreeOptionItem<any>) => {
-			return (option.children ?? []).reduce((count, option) => {
-				const childrenCount = countChildren(option);
-				return count + 1 + childrenCount;
+		const countMeAndChildren = (option: TreeOptionItem<any>) => {
+			// 1 is self
+			return 1 + (option.children ?? []).reduce((count, option) => {
+				return count + countMeAndChildren(option);
 			}, 0);
 		};
 		return allOptions.reduce((count, option) => {
-			return count + countChildren(option);
+			return count + countMeAndChildren(option);
 		}, 0);
 	})();
 	const fixFilterExists = DropdownDefaults.DEFAULTS.FIX_FILTER && VUtils.isNotBlank(filter);
