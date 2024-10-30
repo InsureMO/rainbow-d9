@@ -11,34 +11,45 @@ const IconTreeNodeLabel = styled(UnwrappedCaption)`
     > span[data-w=d9-deco-lead] {
         margin-left: -9px;
     }
+
+    > span[data-role=ancestor]:not(:last-child) {
+        display: none;
+
+        &:after {
+            content: '/';
+            display: inline-block;
+            position: relative;
+            margin: 0 2px 0 4px;
+        }
+    }
 `;
-const asFolder = (label: string | ReactNode) => {
-	if (typeof label === 'string') {
-		return <IconTreeNodeLabel leads={[<ReportFolderIcon/>]}>{label}</IconTreeNodeLabel>;
-	} else {
-		return label;
-	}
-};
-const asFile = (label: string | ReactNode) => {
-	if (typeof label === 'string') {
-		return <IconTreeNodeLabel leads={[<ReportFileIcon/>]}>{label}</IconTreeNodeLabel>;
-	} else {
-		return label;
-	}
+const asTreeOptionLabel = (icon: ReactNode) => {
+	return (label: string | ReactNode, ancestors: Array<DropdownTreeOption>) => {
+		if (typeof label === 'string') {
+			return <IconTreeNodeLabel leads={[icon]}>
+				{ancestors.map((ancestor, index) => {
+					return <span data-role="ancestor" key={index}>{ancestor.stringify?.(ancestor) ?? (void 0)}</span>;
+				})}
+				<span>{label}</span>
+			</IconTreeNodeLabel>;
+		} else {
+			return label;
+		}
+	};
 };
 export const createReportTreeOptions = (options: DropdownTreeOptions) => {
-	const redressOption = (option: DropdownTreeOption) => {
+	const redressOption = (option: DropdownTreeOption, ancestors: Array<DropdownTreeOption> = []) => {
 		if (typeof option.label === 'string') {
 			const label = option.label;
 			option.stringify = () => label;
 		}
 		if (option.children != null) {
-			option.label = asFolder(option.label);
-			option.children.forEach(redressOption);
+			option.label = asTreeOptionLabel(<ReportFolderIcon/>)(option.label, ancestors);
+			option.children.forEach(child => redressOption(child, [...ancestors, option]));
 		} else {
-			option.label = asFile(option.label);
+			option.label = asTreeOptionLabel(<ReportFileIcon/>)(option.label, ancestors);
 		}
 	};
-	options.forEach(redressOption);
+	options.forEach(option => redressOption(option));
 	return options;
 };
