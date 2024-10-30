@@ -66,6 +66,7 @@ export type DropdownTreeDef =
 	noMatched?: ReactNode;
 	/** some nodes might not be selectable, only for leads child nodes */
 	couldSelect?: (option: DropdownTreeOption) => boolean;
+	initExpandLevel?: number;
 	/** max popup width */
 	maxWidth?: number;
 };
@@ -83,7 +84,7 @@ export const InternalDropdownTree = forwardRef((props: DropdownTreeProps, ref: F
 		// eslint-disable-next-line @typescript-eslint/no-unused-vars
 		options, optionSort, noAvailable, noMatched,
 		$pp, $wrapped: {$onValueChange, $root, $model, $p2r, $avs: {$disabled, $visible}},
-		please = '', clearable = true, couldSelect,
+		please = '', clearable = true, couldSelect, initExpandLevel = 0,
 		tip,
 		...rest
 	} = props;
@@ -229,7 +230,7 @@ export const InternalDropdownTree = forwardRef((props: DropdownTreeProps, ref: F
 					<span>?:</span><span><Search/></span>
 					<input value={filter} onChange={onFilterChanged} onKeyUp={onKeyUp} ref={filterInputRef}/>
 				</OptionFilter>
-				<PopupTree data={treeModel} initExpandLevel={0} disableSearchBox={true}
+				<PopupTree data={treeModel} initExpandLevel={initExpandLevel} disableSearchBox={true}
 				           detective={detective}
 				           height={treeHeight}>
 					<DropdownTreeFilterBridge/>
