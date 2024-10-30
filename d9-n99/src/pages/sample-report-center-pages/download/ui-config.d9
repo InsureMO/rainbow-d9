@@ -16,8 +16,12 @@
 - ButtonBar::
 	- data-narrow-up-in-search
 	- Button::
-		- text: Search
+		- text: Search by Above Criteria
 		- click: @ext.search
+	- Button::
+		- text: Requested by Me Recently
+		- click: @ext.requested-by-me
+		- fill: plain
 
 ## Section::Report Generation Requests
 

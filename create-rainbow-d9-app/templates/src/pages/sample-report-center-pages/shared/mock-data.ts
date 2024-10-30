@@ -1,3 +1,11 @@
+import {registerMockCodeTables} from '../../../mock-services';
+
+registerMockCodeTables({
+	yesNo: [
+		{label: 'Yes', value: true},
+		{label: 'No', value: false}
+	]
+});
 const reports = () => {
 	return [
 		{
@@ -29,4 +37,16 @@ const reports = () => {
 		}
 	];
 };
-export const MockData = {reports};
+const statusOfReport = (code: string) => {
+	switch (code) {
+		case 'glr':
+			return 'disabled';
+		case 'rpb':
+			return 'draft';
+		case 'rcb':
+			return 'submitted';
+		default:
+			return 'enabled';
+	}
+};
+export const MockData = {reports, statusOfReport};

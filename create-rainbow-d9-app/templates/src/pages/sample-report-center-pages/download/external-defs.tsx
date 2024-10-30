@@ -30,6 +30,8 @@ export const createExternalDefsCreator = (
 					return <UnwrappedCaption key={key}>{key}: {value[key]}</UnwrappedCaption>;
 				});
 			},
+			'requested-by-me': async (_options: ButtonClickOptions<BaseModel, PropValue>) => {
+			},
 			search: async (_options: ButtonClickOptions<BaseModel, PropValue>) => {
 			},
 			download: async (_options: ButtonClickOptions<BaseModel, PropValue>) => {

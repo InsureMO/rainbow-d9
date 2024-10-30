@@ -5,6 +5,7 @@ export interface Criteria {
 	category2?: string;
 	category3?: string;
 	reportCode?: string;
+	selected?: string;
 }
 
 export interface ReportCategory {
@@ -16,18 +17,22 @@ export interface ReportCategory {
 }
 
 export interface ReportCriteria {
-	name?: string;
-	type?: 'date' | 'number' | 'string' | 'codes' | 'boolean';
+	fieldName?: string;
+	displayName?: string;
+	dataType?: 'date' | 'number' | 'string' | 'codes' | 'boolean';
 	codesName?: string;
 	required?: boolean;
 }
 
 export interface ReportColumn {
-	type?: 'date' | 'number' | 'string' | 'boolean';
+	selected?: boolean;
+	dataType?: 'date' | 'number' | 'string' | 'boolean';
 	sourceFieldName?: string;
 	targetFieldName?: string;
+	displayName?: string;
 	// could be date format, numeric format, depends on type
 	format?: string;
+	order?: number;
 }
 
 export interface Report {
@@ -36,15 +41,17 @@ export interface Report {
 	type?: 'data' | 'template' | 'external';
 	/** could be triggered manually, in report generate, or somewhere else */
 	allowManuallyTrigger?: boolean;
+	/** could be triggered by cron expression */
+	triggerCronExpression?: string;
 	category1?: string;
 	category2?: string;
 	category3?: string;
-	status?: 'draft' | 'enabled' | 'disabled';
-	sourceType?: 'dataset' | 'topic' | 'external';
-	sourceKey?: string;
+	status?: 'draft' | 'submitted' | 'enabled' | 'disabled';
+	dataSourceCode?: string;
 	criteria?: Array<ReportCriteria>;
-	columns?: Array<ReportColumn>;
+	result?: Array<ReportColumn>;
 	templateId?: string;
+	templateName?: string;
 	/** role or user, joined by comma */
 	grantTo?: string;
 	description?: string;
@@ -55,6 +62,8 @@ export interface RootModel {
 		allowToEdit: boolean;
 		allowToCreateSubFolder: boolean;
 		allowToCreateReport: boolean;
+		editing?: boolean;
+		editType?: 'new-folder' | 'edit-folder' | 'new-report' | 'edit-report'
 	};
 	criteria: Criteria;
 	data?: ReportCategory | Report;
@@ -62,5 +71,9 @@ export interface RootModel {
 
 export interface AssistantData {
 	reportOptions: DropdownTreeOptions;
-	statusOptions: DropdownOptions;
+	reportTypeOptions: DropdownOptions;
+	reportStatusOptions: DropdownOptions;
+	datasourceOptions: DropdownOptions;
+	criteriaDataTypeOptions: DropdownOptions;
+	resultDataTypeOptions: DropdownOptions;
 }

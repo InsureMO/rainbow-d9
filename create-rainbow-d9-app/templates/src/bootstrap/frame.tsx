@@ -351,6 +351,12 @@ const Container = styled.div.attrs({
     }
 
     button[data-w=d9-button] {
+        &[data-fit] {
+            align-self: flex-start;
+            justify-self: flex-start;
+            width: auto;
+        }
+
         &[data-fit-link] {
             padding: 0;
             justify-self: flex-start;

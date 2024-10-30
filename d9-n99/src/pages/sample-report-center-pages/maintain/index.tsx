@@ -21,15 +21,39 @@ const ReportMaintainIndex = PreloadedLazyPageWrapper<AssistantData>(lazy(() => i
 	/** run after root model initialized, to load submission channel */
 	assistantData: async (_options: PreloaderFuncOptions & Pick<PreloadedPageProps, 'initRootModel'>) => {
 		return async (_globalHandlers: GlobalHandlers) => {
-			const statusOptions: DropdownOptions = [
+			const reportTypeOptions: DropdownOptions = [
+				{value: 'data', label: 'Report on Dataset'},
+				{value: 'template', label: 'Report on Template'},
+				{value: 'external', label: 'External Report'}
+			];
+			const reportStatusOptions: DropdownOptions = [
+				{value: 'draft', label: 'Draft'},
 				{value: 'submitted', label: 'Submitted'},
-				{value: 'progress', label: 'In Progress'},
-				{value: 'completed', label: 'Completed'},
-				{value: 'failed', label: 'Failed'}
+				{value: 'enabled', label: 'Enabled'},
+				{value: 'disabled', label: 'Disabled'}
 			];
 			const reportOptions: DropdownTreeOptions = createReportTreeOptions(MockData.reports(), true);
+			const datasourceOptions: DropdownOptions = [
+				{value: 'dm_agent_policy_detail', label: 'Agent Policy Detail'}
+			];
+			const criteriaDataTypeOptions: DropdownOptions = [
+				{value: 'string', label: 'String'},
+				{value: 'number', label: 'Number'},
+				{value: 'boolean', label: 'Boolean'},
+				{value: 'date', label: 'Date'},
+				{value: 'codes', label: 'Code Table'}
+			];
+			const resultDataTypeOptions: DropdownOptions = [
+				{value: 'string', label: 'String'},
+				{value: 'number', label: 'Number'},
+				{value: 'boolean', label: 'Boolean'},
+				{value: 'date', label: 'Date'}
+			];
 
-			return {statusOptions, reportOptions};
+			return {
+				reportOptions, reportTypeOptions, reportStatusOptions,
+				datasourceOptions, criteriaDataTypeOptions, resultDataTypeOptions
+			};
 		};
 	}
 });

@@ -1,42 +1,275 @@
 # Page::report-download
 
+- data-fix-bottom-button-bar
+
 ## Section::Choose Folder or Report::
 
-- DropdownTree::Category or Report::criteria.reportCode
+- DropdownTree::::criteria.selected
 	- pos: 6
 	- initExpandLevel: 3
 	- options: @ext.codes.report
 	- please: Please select...
 	- valueChanged: @ext.report-code-changed
+	- disabled:
+		- on: control.editing
+		- handle:
+		  ```ts
+		  return model.control.editing;
+		  ```
 - Box::
-	- $fc, data-dense-labels
+	- data-dense-labels
 	- Button::
 		- text: Edit
 		- click: @ext.edit
 		- disabled:
-			- on: control.allowToEdit
+			- on: control.allowToEdit, control.editing
 			- handle:
 			  ```ts
-			  return !model.control.allowToEdit;
+			  return !model.control.allowToEdit || model.control.editing;
 			  ```
 	- Button::
 		- text: Create Sub Folder
 		- click: @ext.create-sub-folder
 		- disabled:
-			- on: control.allowToCreateSubFolder
+			- on: control.allowToCreateSubFolder, control.editing
 			- handle:
 			  ```ts
-			  return !model.control.allowToCreateSubFolder;
+			  return !model.control.allowToCreateSubFolder || model.control.editing;
 			  ```
 	- Button::
 		- text: Create Report
 		- click: @ext.create-report
 		- disabled:
-			- on: control.allowToCreateReport
+			- on: control.allowToCreateReport, control.editing
 			- handle:
 			  ```ts
-			  return !model.control.allowToCreateReport;
+			  return !model.control.allowToCreateReport || model.control.editing;
 			  ```
 
-## Section::Maintain Category
+## Section::
 
+- title: Box
+	- data-as-section-title
+	- Label::
+		- valueToLabel:
+		  ```ts
+		  switch (value.control.editType) {
+		    case 'new-folder':
+		      return 'New Folder';
+		    case 'edit-folder':
+		      return 'Edit Folder';
+		  }
+		  ```
+		- repaint:
+			- on: control.editType
+- visible:
+	- on: control.editing, control.editType
+	- handle:
+	  ```ts
+	  return !!model.control.editing && (model.control.editType ?? '').endsWith('-folder');
+	  ```
+
+- Input::Folder Code::data.code
+	- required
+- Input::Folder Name::data.name
+	- required
+- Textarea::Description::data.description
+	- pos: 12
+
+## Section::
+
+- title: Box
+	- data-as-section-title
+	- Label::
+		- valueToLabel:
+		  ```ts
+		  switch (value.control.editType) {
+		    case 'new-report':
+		      return 'New Report';
+		    case 'edit-report':
+		      return 'Edit Report';
+		  }
+		  ```
+		- repaint:
+			- on: control.editType
+- visible:
+	- on: control.editing, control.editType
+	- handle:
+	  ```ts
+	  return !!model.control.editing && (model.control.editType ?? '').endsWith('-report');
+	  ```
+
+- Input::Report Code::data.code
+	- required
+- Input::Report Name::data.name
+	- required
+- Dropdown::Status::data.status
+	- options: @ext.codes.reportStatus
+	- disabled
+- Dropdown::Type::data.type
+	- options: @ext.codes.reportType
+	- !clearable
+	- pos: col: 1, cols: 3
+- Box::Template File
+	- $fc, data-labels
+	- pos: 9
+	- Caption::[
+	- Label::::data.templateName
+	- Caption::]
+	- Button::
+		- text: Upload Template
+		- data-fit-link
+		- fill: link
+		- click: @ext.upload-template
+- Textarea::Description::data.description
+	- pos: 12
+
+### Section::Criteria and Result Settings
+
+- data-2nd
+
+- Dropdown::Data Source::data.dataSourceCode
+	- !clearable
+	- options: @ext.codes.datasource
+	- required
+	- please: Please select...
+- Button::
+	- $fc, data-fit
+	- text: Load Data Source
+	- click: @ext.load-data-source
+	- disabled:
+		- on: data.dataSourceCode
+		- handle:
+		  ```ts
+		  return VUtils.isBlank(model.data?.dataSourceCode);
+		  ```
+- Section::Result Columns
+	- data-3rd
+	- Table::
+		- property: data.result
+		- !expandable, !addable, !removable, omitDefaultRowOperators
+		- operatorsColumnWidth: 140
+		- repaint:
+			- on: data.result
+		- headers:
+			- column:
+				- width: 48
+			- Source Field Name: 200
+			- Target Field Name: 200
+			- Display Name: 300
+			- Data Type: 120
+			- Format: 200
+			- Order: 80
+		- Checkbox::::selected
+		- Input::::sourceFieldName
+			- disabled
+		- Input::::targetFieldName
+		- Input::::displayName
+		- Dropdown::::dataType
+			- options: @ext.codes.resultDataType
+			- !clearable
+		- Input::::format
+		- Input::::order
+		- RowOperators::
+			- Button::
+				- text: Copy to Criteria
+				- click: @ext.copy-to-criteria
+				- fill: link
+				- data-text-row-operator, data-fit-link
+				- visible:
+					- on: /data.criteria
+					- handle:
+					  ```ts
+					  const fieldName = model.sourceFieldName;
+					  return (root.data.criteria ?? []).every(criteria => criteria.fieldName !== fieldName); 
+					  ```
+- Section::Criteria
+	- data-3rd
+	- Table::
+		- property: data.criteria
+		- !expandable, !addable, !removable, omitDefaultRowOperators
+		- operatorsColumnWidth: 100
+		- repaint:
+			- on: data.criteria
+		- headers:
+			- Field Name: 200
+			- Display Name: 300
+			- Data Type: 120
+			- Code Table: 300
+			- Mandatory: 80
+		- Input::::fieldName
+			- disabled
+		- Input::::displayName
+			- required
+		- Dropdown::::dataType
+			- options: @ext.codes.criteriaDataType
+			- !clearable
+		- Input::::codesName
+		- Checkbox::::required
+		- RowOperators::
+			- Button::
+				- text: Remove
+				- click: @ext.remove-from-criteria
+				- fill: link
+				- data-text-row-operator, data-fit-link
+
+### Section::System Settings
+
+- data-2nd
+- Dropdown::Allow Manually Trigger::data.allowManuallyTrigger
+	- options: @ext.codes.yesNo
+	- !clearable
+- Input::Trigger Cron Expression::data.triggerCronExpression
+	- placeholder: e.g. 30 0 * * *, every day at 00:30
+- Textarea::Access Granting.::grantTo
+	- pos: 12
+	- placeholder: e.g. role1, role2, role3, user name1, user name2
+
+## ButtonBar::
+
+- data-fix-bottom
+- visible:
+	- on: control.editing
+	- handle:
+	  ```ts
+	  return !!model.control.editing;
+	  ```
+- Button::
+	- text: Discard
+	- click: @ext.discard
+	- ink: waive
+	- fill: plain
+- Button::
+	- text: Unpublish
+	- click: @ext.unpublish
+	- ink: danger
+	- visible:
+		- on: control.editType, data.status
+		- handle:
+		  ```ts
+		  return model.control.editType === 'edit-report' && model.data.status == 'enabled';
+		  ```
+- Button::
+	- text: Save
+	- click: @ext.save
+- Button::
+	- text: Save and Submit
+	- click: @ext.submit
+- Button::
+	- text: Publish
+	- click: @ext.publish
+	- visible:
+		- on: control.editType, data.status
+		- handle:
+		  ```ts
+		  return model.control.editType === 'edit-report' && model.data.status == 'submitted';
+		  ```
+- Button::
+	- text: Re-publish
+	- click: @ext.publish
+	- visible:
+		- on: control.editType, data.status
+		- handle:
+		  ```ts
+		  return model.control.editType === 'edit-report' && model.data.status == 'disabled';
+		  ```
