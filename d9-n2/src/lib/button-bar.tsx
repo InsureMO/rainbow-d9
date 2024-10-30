@@ -1,4 +1,4 @@
-import {ContainerDef, ContainerWidgetProps, registerWidget} from '@rainbow-d9/n1';
+import {ContainerDef, ContainerWidgetProps, PPUtils, registerWidget} from '@rainbow-d9/n1';
 import React, {ForwardedRef, forwardRef} from 'react';
 import styled from 'styled-components';
 import {CssVars, DOM_ID_WIDGET, DOM_KEY_WIDGET} from './constants';
@@ -54,6 +54,10 @@ const AButtonBar = styled.div.attrs(
         }
     }
 
+    &[data-visible=false] {
+        display: none;
+    }
+
     > *:not(:last-child) {
         margin-right: 8px;
     }
@@ -65,9 +69,12 @@ const AButtonBar = styled.div.attrs(
 `;
 
 export const ButtonBar = forwardRef((props: ButtonBarProps, ref: ForwardedRef<HTMLDivElement>) => {
-	const {alignment = ButtonBarAlignment.RIGHT, children, ...rest} = props;
+	const {alignment = ButtonBarAlignment.RIGHT, $wrapped, children, ...rest} = props;
+	const {$p2r, $avs: {$disabled, $visible}} = $wrapped;
 
-	return <AButtonBar {...rest} data-alignment={alignment} ref={ref}>
+	return <AButtonBar {...rest} data-disabled={$disabled} data-visible={$visible}
+	                   id={PPUtils.asId(PPUtils.absolute($p2r, props.$pp), props.id)}
+	                   data-alignment={alignment} ref={ref}>
 		{children}
 	</AButtonBar>;
 });
