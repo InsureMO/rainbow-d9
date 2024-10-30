@@ -61,4 +61,8 @@ export const APagination = styled.div.attrs(
             transition: border-color ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION}, box-shadow ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION};
         }
     }
+
+    > div[data-page-buttons=false] {
+        display: none;
+    }
 `;

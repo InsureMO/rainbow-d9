@@ -135,6 +135,7 @@ export const Pagination = forwardRef((props: PaginationProps, ref: ForwardedRef<
 	const hasNext = pageNumbers[pageNumbers.length - 1] !== data.pageCount;
 	const format = nfXWithLocale(locale(), 0);
 	const pageCount = format(data.pageCount);
+	const hasItem = data.itemCount > 0;
 	const itemCount = data.itemCount === -1
 		? <IntlLabel keys={['pagination', 'unknownItemCount']} value="???"/>
 		: format(data.itemCount);
@@ -144,7 +145,7 @@ export const Pagination = forwardRef((props: PaginationProps, ref: ForwardedRef<
 	                    ref={ref}>
 		<div data-page-info={true}>
 			<span><IntlLabel keys={['pagination', 'page']} value=""/></span>
-			{freeWalk
+			{(freeWalk && hasItem)
 				? <UnwrappedDropdown value={data.pageNumber} options={buildFreeWalkOptions()}
 				                     clearable={false} data-free-walk={true}
 				                     onValueChange={onFreeWalkChanged}/>
@@ -162,7 +163,7 @@ export const Pagination = forwardRef((props: PaginationProps, ref: ForwardedRef<
 			<span>{itemCount}</span>
 			<span><IntlLabel keys={['pagination', 'items']} value="items."/></span>
 		</div>
-		<div data-page-buttons={true}>
+		<div data-page-buttons={hasItem}>
 			{hasPrevious
 				? <>
 					<UnwrappedButton onClick={onPageClicked(1)} ink={ButtonInk.PRIMARY} fill={ButtonFill.PLAIN}
