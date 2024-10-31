@@ -6,7 +6,7 @@
 	- pos: 6
 	- initExpandLevel: 3
 	- options: @ext.codes.report
-	- please: Any
+	- please: Please select...
 	- couldSelect: @ext.node-could-select
 	- disabled:
 		- on: control.generating
