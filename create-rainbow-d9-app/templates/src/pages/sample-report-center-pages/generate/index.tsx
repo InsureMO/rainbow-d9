@@ -30,6 +30,7 @@ import {AssistantData, Criteria, ReportCriteria, RootModel} from './types';
 import {markdown} from './ui-config.d9';
 
 const ReportGenerateIndex = PreloadedLazyPageWrapper<AssistantData>(lazy(() => import('./page')), (() => {
+	// use IIFE to create a context, which used to store and manufacture the parsed UI
 	let generatingSectionSubNodes: Array<NodeDef> = [];
 	let originalGeneratingSectionSubNodes: Array<NodeDef> = [];
 
@@ -104,7 +105,6 @@ const ReportGenerateIndex = PreloadedLazyPageWrapper<AssistantData>(lazy(() => i
 			return def;
 		});
 	};
-	// use IIFE to create a context, which used to store the root model
 	const createCriteriaProxy = (criteria: Criteria) => {
 		return new Proxy(criteria, {
 			set(target: Criteria, p: string | symbol, newValue: any, receiver: any): boolean {
@@ -149,7 +149,6 @@ const ReportGenerateIndex = PreloadedLazyPageWrapper<AssistantData>(lazy(() => i
 			rootModel.criteria = createCriteriaProxy(rootModel.criteria);
 			return asT(rootModel);
 		},
-		/** run after root model initialized, to load submission channel */
 		assistantData: async (_options: PreloaderFuncOptions) => {
 			return async (_globalHandlers: GlobalHandlers) => {
 				const reportOptions: DropdownTreeOptions = createReportTreeOptions(MockData.reports(true));

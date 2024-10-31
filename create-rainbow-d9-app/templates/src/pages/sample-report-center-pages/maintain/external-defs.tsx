@@ -6,7 +6,7 @@ import {
 	createDropdownOptionsProvider,
 	D9PageExternalDefsCreator,
 	D9PageExternalDefsCreatorOptions,
-	validatePage
+	validatePageWithCallback
 } from '../../standard-widgets';
 import {MockData} from '../shared';
 import {AssistantData, Report, ReportColumn, RootModel} from './types';
@@ -16,6 +16,32 @@ export const createExternalDefsCreator = (
 	return async (globalHandlers: D9PageExternalDefsCreatorOptions) => {
 		const assistantData = await askAssistantData(globalHandlers);
 
+		const createEditDataProxy = (data: RootModel['data']) => {
+			return new Proxy<RootModel['data']>(data, {
+				get(target: RootModel['data'], p: string | symbol, receiver: any): any {
+					const from = [
+						['folderCode', 'code'], ['folderName', 'name'], ['folderDescription', 'description'],
+						['reportCode', 'code'], ['reportName', 'name'], ['reportDescription', 'description']
+					].find(([name]) => name === p)?.[1];
+					if (VUtils.isNotBlank(from)) {
+						return Reflect.get(target, from!, receiver);
+					} else {
+						return Reflect.get(target, p, receiver);
+					}
+				},
+				set(target: RootModel['data'], p: string | symbol, newValue: any, receiver: any): boolean {
+					const to = [
+						['folderCode', 'code'], ['folderName', 'name'], ['folderDescription', 'description'],
+						['reportCode', 'code'], ['reportName', 'name'], ['reportDescription', 'description']
+					].find(([name]) => name === p)?.[1];
+					if (VUtils.isNotBlank(to)) {
+						return Reflect.set(target, to!, newValue, receiver);
+					} else {
+						return Reflect.set(target, p, newValue, receiver);
+					}
+				}
+			});
+		};
 		return {
 			codes: createDropdownOptionsProvider(globalHandlers, {
 				report: assistantData.reportOptions,
@@ -100,16 +126,18 @@ export const createExternalDefsCreator = (
 				root.control.editing = true;
 				if (VUtils.isNotBlank(root.criteria.reportCode)) {
 					root.control.editType = 'edit-report';
-					root.data = {
+					root.data = createEditDataProxy({
 						code: root.criteria.reportCode,
 						type: 'data',
 						status: MockData.statusOfReport(root.criteria.reportCode!),
 						templateName: 'some-template.xlsx',
 						allowManuallyTrigger: false
-					};
+					});
 				} else {
 					root.control.editType = 'edit-folder';
-					root.data = {code: root.criteria.category3 ?? root.criteria.category2 ?? root.criteria.category1};
+					root.data = createEditDataProxy({
+						code: root.criteria.category3 ?? root.criteria.category2 ?? root.criteria.category1
+					});
 				}
 				const {editing, editType} = root.control;
 				globalHandlers.root.fire(RootEventTypes.VALUE_CHANGED, '/control.editType', editType, editType);
@@ -117,7 +145,7 @@ export const createExternalDefsCreator = (
 			},
 			'create-sub-folder': async (_options: ButtonClickOptions<BaseModel, PropValue>) => {
 				const root = rootModelRef.current;
-				root.data = {};
+				root.data = createEditDataProxy({});
 				root.control.editing = true;
 				root.control.editType = 'new-folder';
 				const {editing, editType} = root.control;
@@ -126,7 +154,7 @@ export const createExternalDefsCreator = (
 			},
 			'create-report': async (_options: ButtonClickOptions<BaseModel, PropValue>) => {
 				const root = rootModelRef.current;
-				root.data = {type: 'data', status: 'draft'};
+				root.data = createEditDataProxy({type: 'data', status: 'draft'});
 				root.control.editing = true;
 				root.control.editType = 'new-report';
 				const {editing, editType} = root.control;
@@ -165,6 +193,8 @@ export const createExternalDefsCreator = (
 				try {
 					await globalHandlers.yesNoDialog.show('Are you sure you want to confirm the abandonment of the modification? All data will be lost.');
 					const root = rootModelRef.current;
+					// no need to proxy, it will be replaced when start editing
+					// here is simply keep an object to avoid exception raised when check model data on rendering
 					root.data = {};
 					root.control.editing = false;
 					delete root.control.editType;
@@ -176,8 +206,15 @@ export const createExternalDefsCreator = (
 			save: async (_options: ButtonClickOptions<BaseModel, PropValue>) => {
 				// try catch
 				try {
-					await validatePage({globalHandlers});
-					alert('Pass the validation.');
+					const root = rootModelRef.current;
+					const scope = (root.control.editType ?? '').endsWith('-report') ? 'report' : 'folder';
+					await validatePageWithCallback({
+						globalHandlers, scopes: [scope], passed: async () => {
+							alert('Pass the validation.');
+						}, failed: async (_focused, _failed) => {
+							// console.log(failed);
+						}
+					});
 				} catch {
 					// ignore
 				}

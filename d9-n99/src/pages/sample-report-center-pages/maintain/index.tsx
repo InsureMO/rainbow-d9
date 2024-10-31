@@ -18,7 +18,6 @@ const ReportMaintainIndex = PreloadedLazyPageWrapper<AssistantData>(lazy(() => i
 		const rootModel: RootModel = JSON.parse(JSON.stringify(InitRootModel));
 		return asT(rootModel);
 	},
-	/** run after root model initialized, to load submission channel */
 	assistantData: async (_options: PreloaderFuncOptions & Pick<PreloadedPageProps, 'initRootModel'>) => {
 		return async (_globalHandlers: GlobalHandlers) => {
 			const reportTypeOptions: DropdownOptions = [

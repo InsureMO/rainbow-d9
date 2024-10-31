@@ -48,6 +48,7 @@
 
 ## Section::
 
+- data-folder-data
 - title: Box
 	- data-as-section-title
 	- Label::
@@ -68,16 +69,17 @@
 	  ```ts
 	  return !!model.control.editing && (model.control.editType ?? '').endsWith('-folder');
 	  ```
-
-- Input::Folder Code::data.code
+- validateScopes: folder
+- Input::Folder Code::data.folderCode
 	- required
-- Input::Folder Name::data.name
+- Input::Folder Name::data.folderName
 	- required
-- Textarea::Description::data.description
+- Textarea::Description::data.folderDescription
 	- pos: 12
 
 ## Section::
 
+- data-report-data
 - title: Box
 	- data-as-section-title
 	- Label::
@@ -98,10 +100,10 @@
 	  ```ts
 	  return !!model.control.editing && (model.control.editType ?? '').endsWith('-report');
 	  ```
-
-- Input::Report Code::data.code
+- validateScopes: report
+- Input::Report Code::data.reportCode
 	- required
-- Input::Report Name::data.name
+- Input::Report Name::data.reportName
 	- required
 - Dropdown::Status::data.status
 	- options: @ext.codes.reportStatus
@@ -141,7 +143,7 @@
 		- !clearable
 		- please: Please select...
 	- Input::::data.externalIdentity
-- Textarea::Description::data.description
+- Textarea::Description::data.reportDescription
 	- pos: 12
 
 ### Section::Criteria and Result Settings
@@ -293,3 +295,4 @@
 		  ```ts
 		  return model.control.editType === 'edit-report' && model.data.status == 'disabled';
 		  ```
+
