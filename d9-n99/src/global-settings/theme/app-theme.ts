@@ -38,7 +38,8 @@ export const createAppThemeStyles = (): AppThemeStyle => {
 
 		workAreaBackground: 'var(--d9-background-color)',
 		pageBottomBarBackground: 'rgb(241,239,239)',
-		fcCaptionColor: 'rgb(36,36,36)'
+		fcCaptionColor: 'rgb(36,36,36)',
+		fixBottomBarWaiveButtonColor: 'rgb(120,120,120)'
 	};
 	const createAppCssVars = (variables: typeof AppCssConstants) => {
 		return {
@@ -168,6 +169,8 @@ export const createAppThemeStyles = (): AppThemeStyle => {
 			'fc-caption-font-weight': 'var(--app-fc-caption-font-weight, 300)',
 			'caption-not-available-font-family': 'var(--app-caption-not-available-font-family, "Oswald")',
 			'caption-not-available-font-size': 'var(--app-caption-not-available-font-size, 12px)',
+			// button
+			'fix-bottom-bar-waive-button-color': `var(--app-fix-bottom-bar-waive-button-color, ${variables.fixBottomBarWaiveButtonColor})`,
 			// page, authentication
 			'authentication-min-width': 'var(--page-authentication-min-width, min(60vw, 600px))',
 			'authentication-border': 'var(--page-authentication-border, var(--d9-border))',

@@ -230,6 +230,11 @@ const Container = styled.div.attrs({
             border-radius: 0;
             transition: left var(--d9-transition-duration) var(--d9-transition-timing-function);
             z-index: var(--app-page-bottom-bar-z-index);
+
+            > button[data-w=d9-button][data-ink=waive]:not([disabled]),
+            > button[data-w=d9-button][data-ink=waive]:not([data-disabled=true]) {
+                color: var(--app-fix-bottom-bar-waive-button-color);
+            }
         }
     }
 
