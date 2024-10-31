@@ -20,6 +20,7 @@ const LayoutController = styled.div.attrs({[DOM_KEY_WIDGET]: 'report-download-la
 
 export default (props: PreloadedPageProps<AssistantData>) => {
 	const markdown = props.ui!;
+	const manufacturerParsedUI = props.manufactureParsedUI;
 	const initRootModel: RootModel = asT(props.initRootModel);
 	const askAssistantData = props.assistantData!;
 	// build a ref to keep the root model
@@ -28,7 +29,7 @@ export default (props: PreloadedPageProps<AssistantData>) => {
 
 	return <>
 		<LayoutController/>
-		<D9Page ui={markdown}
+		<D9Page ui={markdown} manufactureParsedUI={manufacturerParsedUI}
 		        initRootModel={asT(rootModelRef.current)} initRootModelAsIs={true}
 		        externalDefs={externalDefs}/>
 	</>;

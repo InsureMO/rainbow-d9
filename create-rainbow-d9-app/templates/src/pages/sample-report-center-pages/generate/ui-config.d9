@@ -1,7 +1,5 @@
 # Page::report-generate
 
-- data-fix-bottom-button-bar
-
 ## Section::::
 
 - DropdownTree::Report::criteria.reportCode
@@ -29,18 +27,19 @@
 
 ## Section::Generating
 
+- data-dynamic
 - visible:
 	- on: control.generating
 	- handle:
 	  ```ts
 	  return !!model.control.generating;
 	  ```
-- Dropdown::File Type::fileType
+- Dropdown::File Type::condition.fileType
+	- place: col: 1, cols: 3
 	- options: @ext.codes.generateFileType
 	- !clearable
 	- please: Please select...
 	- required
-
 - Box::
 	- $fc, data-dense-labels
 	- Button::

@@ -52,6 +52,8 @@ export interface Report {
 	result?: Array<ReportColumn>;
 	templateId?: string;
 	templateName?: string;
+	externalAdapter?: string;
+	externalIdentity?: string;
 	/** role or user, joined by comma */
 	grantTo?: string;
 	description?: string;
@@ -66,13 +68,14 @@ export interface RootModel {
 		editType?: 'new-folder' | 'edit-folder' | 'new-report' | 'edit-report'
 	};
 	criteria: Criteria;
-	data?: ReportCategory | Report;
+	data: {} | ReportCategory | Report;
 }
 
 export interface AssistantData {
 	reportOptions: DropdownTreeOptions;
 	reportTypeOptions: DropdownOptions;
 	reportStatusOptions: DropdownOptions;
+	externalAdapterOptions: DropdownOptions;
 	datasourceOptions: DropdownOptions;
 	criteriaDataTypeOptions: DropdownOptions;
 	resultDataTypeOptions: DropdownOptions;

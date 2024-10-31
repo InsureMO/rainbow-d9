@@ -5,7 +5,8 @@ import {asT} from '../../../utils';
 import {
 	createDropdownOptionsProvider,
 	D9PageExternalDefsCreator,
-	D9PageExternalDefsCreatorOptions
+	D9PageExternalDefsCreatorOptions,
+	validatePage
 } from '../../standard-widgets';
 import {MockData} from '../shared';
 import {AssistantData, Report, ReportColumn, RootModel} from './types';
@@ -20,6 +21,7 @@ export const createExternalDefsCreator = (
 				report: assistantData.reportOptions,
 				reportType: assistantData.reportTypeOptions,
 				reportStatus: assistantData.reportStatusOptions,
+				externalAdapter: assistantData.externalAdapterOptions,
 				datasource: assistantData.datasourceOptions,
 				criteriaDataType: assistantData.criteriaDataTypeOptions,
 				resultDataType: assistantData.resultDataTypeOptions
@@ -100,6 +102,7 @@ export const createExternalDefsCreator = (
 					root.control.editType = 'edit-report';
 					root.data = {
 						code: root.criteria.reportCode,
+						type: 'data',
 						status: MockData.statusOfReport(root.criteria.reportCode!),
 						templateName: 'some-template.xlsx',
 						allowManuallyTrigger: false
@@ -136,14 +139,7 @@ export const createExternalDefsCreator = (
 			'load-data-source': async (_options: ButtonClickOptions<BaseModel, PropValue>) => {
 				const root = rootModelRef.current;
 				const data = asT<Report>(root.data);
-				data.result = [
-					{sourceFieldName: 'issue_date', dataType: 'date'},
-					{sourceFieldName: 'agent_code', dataType: 'string'},
-					{sourceFieldName: 'agent_name', dataType: 'string'},
-					{sourceFieldName: 'agent_status', dataType: 'string'},
-					{sourceFieldName: 'agent_enabled', dataType: 'boolean'},
-					{sourceFieldName: 'amount', dataType: 'number'}
-				];
+				data.result = asT(MockData.askMockReportColumns());
 				globalHandlers.root.fire(RootEventTypes.VALUE_CHANGED, '/data.result', asT(data.result), asT(data.result));
 			},
 			'copy-to-criteria': async (options: ButtonClickOptions<BaseModel, PropValue>) => {
@@ -169,7 +165,7 @@ export const createExternalDefsCreator = (
 				try {
 					await globalHandlers.yesNoDialog.show('Are you sure you want to confirm the abandonment of the modification? All data will be lost.');
 					const root = rootModelRef.current;
-					delete root.data;
+					root.data = {};
 					root.control.editing = false;
 					delete root.control.editType;
 					globalHandlers.root.fire(RootEventTypes.VALUE_CHANGED, '/control.editing', false, false);
@@ -178,7 +174,13 @@ export const createExternalDefsCreator = (
 				}
 			},
 			save: async (_options: ButtonClickOptions<BaseModel, PropValue>) => {
-				await globalHandlers.alert.show('Save button clicked.');
+				// try catch
+				try {
+					await validatePage({globalHandlers});
+					alert('Pass the validation.');
+				} catch {
+					// ignore
+				}
 			},
 			submit: async (_options: ButtonClickOptions<BaseModel, PropValue>) => {
 				await globalHandlers.alert.show('Submit button clicked.');

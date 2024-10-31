@@ -111,8 +111,14 @@
 	- !clearable
 	- pos: col: 1, cols: 3
 - Box::Template File
-	- $fc, data-labels
+	- $fc, data-labels, !holdPositionWhenInvisible
 	- pos: 9
+	- visible:
+		- on: data.type
+		- handle:
+		  ```ts
+		  return model.data.type === 'template';
+		  ```
 	- Caption::[
 	- Label::::data.templateName
 	- Caption::]
@@ -121,6 +127,20 @@
 		- data-fit-link
 		- fill: link
 		- click: @ext.upload-template
+- Box::External Adapter and Identity
+	- $fc, data-type-input-box, !holdPositionWhenInvisible
+	- pos: 6
+	- visible:
+		- on: data.type
+		- handle:
+		  ```ts
+		  return model.data.type === 'external';
+		  ```
+	- Dropdown::::data.externalAdapter
+		- options: @ext.codes.externalAdapter
+		- !clearable
+		- please: Please select...
+	- Input::::data.externalIdentity
 - Textarea::Description::data.description
 	- pos: 12
 
@@ -141,7 +161,7 @@
 		- on: data.dataSourceCode
 		- handle:
 		  ```ts
-		  return VUtils.isBlank(model.data?.dataSourceCode);
+		  return VUtils.isBlank(model.data.dataSourceCode);
 		  ```
 - Section::Result Columns
 	- data-3rd

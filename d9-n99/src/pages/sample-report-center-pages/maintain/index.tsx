@@ -33,6 +33,10 @@ const ReportMaintainIndex = PreloadedLazyPageWrapper<AssistantData>(lazy(() => i
 				{value: 'disabled', label: 'Disabled'}
 			];
 			const reportOptions: DropdownTreeOptions = createReportTreeOptions(MockData.reports(), true);
+			const externalAdapterOptions: DropdownOptions = [
+				{value: 'jasper', label: 'Jasper'},
+				{value: 'crystal', label: 'Crystal Report'}
+			];
 			const datasourceOptions: DropdownOptions = [
 				{value: 'dm_agent_policy_detail', label: 'Agent Policy Detail'}
 			];
@@ -52,6 +56,7 @@ const ReportMaintainIndex = PreloadedLazyPageWrapper<AssistantData>(lazy(() => i
 
 			return {
 				reportOptions, reportTypeOptions, reportStatusOptions,
+				externalAdapterOptions,
 				datasourceOptions, criteriaDataTypeOptions, resultDataTypeOptions
 			};
 		};

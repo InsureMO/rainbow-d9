@@ -8,6 +8,7 @@ import {
 	D9PageExternalDefsCreator,
 	D9PageExternalDefsCreatorOptions
 } from '../../standard-widgets';
+import {MockData} from '../shared';
 import {AssistantData, RootModel} from './types';
 
 export const createExternalDefsCreator = (
@@ -27,12 +28,30 @@ export const createExternalDefsCreator = (
 				// load data
 				const root = rootModelRef.current;
 				root.control.generating = true;
+				const selectedReportCode = (root.criteria.reportCode ?? '').replace('\nreport', '');
+				root.condition = {
+					reportCode: selectedReportCode,
+					fileType: 'csv'
+				};
+				root.criteria.defs = asT(MockData.askReportCriteria(selectedReportCode));
 				const {generating} = root.control;
 				globalHandlers.root.fire(RootEventTypes.VALUE_CHANGED, '/control.generating', generating, generating);
 			},
 			generate: async (_options: ButtonClickOptions<BaseModel, PropValue>) => {
+				await globalHandlers.alert.show('Generate button clicked');
 			},
 			cancel: async (_options: ButtonClickOptions<BaseModel, PropValue>) => {
+				try {
+					await globalHandlers.yesNoDialog.show('Are you sure to cancel the generating?');
+					const root = rootModelRef.current;
+					root.control.generating = false;
+					root.condition = {};
+					delete root.criteria.defs;
+					const {generating} = root.control;
+					globalHandlers.root.fire(RootEventTypes.VALUE_CHANGED, '/control.generating', generating, generating);
+				} finally {
+					globalHandlers.yesNoDialog.hide();
+				}
 			}
 		};
 	};
