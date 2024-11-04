@@ -284,21 +284,24 @@ export interface DropdownPopupProps extends DropdownPopupState, Partial<DeviceTa
 	shown: boolean;
 	vScroll?: boolean;
 	hScroll?: boolean;
+	onKeyDown?: (event: KeyboardEvent<HTMLElement>) => void;
 	children?: ReactNode;
 }
 
 export const DropdownPopup = forwardRef((props: DropdownPopupProps, ref: ForwardedRef<HTMLDivElement>) => {
 	const {
-		shown, vScroll, hScroll, children,
+		shown, vScroll, hScroll, onKeyDown, children,
 		...state
 	} = props;
 
 	if (DropdownDefaults.DEFAULTS.findPortalCarrier == null) {
-		return <DropdownPopupContainer shown={shown} vScroll={vScroll} hScroll={hScroll} {...state} ref={ref}>
+		return <DropdownPopupContainer shown={shown} vScroll={vScroll} hScroll={hScroll}
+		                               {...state} ref={ref}>
 			{children}
 		</DropdownPopupContainer>;
 	} else {
-		return createPortal(<DropdownPopupContainer shown={shown} vScroll={vScroll} hScroll={hScroll} {...state}
+		return createPortal(<DropdownPopupContainer shown={shown} vScroll={vScroll} hScroll={hScroll}
+		                                            onKeyDown={onKeyDown}{...state}
 		                                            ref={ref}>
 			{children}
 		</DropdownPopupContainer>, DropdownDefaults.DEFAULTS.findPortalCarrier());
@@ -461,7 +464,7 @@ export const useExternalFilteringDropdown = (externalFilterHandle?: ExternalFilt
 	const externalFiltering = useRef(false);
 	const forceUpdate = useForceUpdate();
 
-	const filterChanged = (externalFilterHandle === null)
+	const filterChanged = (externalFilterHandle == null)
 		? (void 0)
 		: async (filter: string, timing: 'hide' | 'search'): Promise<void> => {
 			if (timing === 'hide' || VUtils.isBlank(filter)) {
@@ -511,6 +514,7 @@ export const useFilterableDropdownOptions = <V extends any>(props: FilterableDro
 	} = props;
 
 	const filterInputRef = useRef<HTMLInputElement>(null);
+	const compositionRef = useRef<{ ing: boolean; text?: string }>({ing: false});
 	const [filter, setFilter] = useState('');
 	const [functions] = useState(() => {
 		return {
@@ -531,6 +535,7 @@ export const useFilterableDropdownOptions = <V extends any>(props: FilterableDro
 		afterPopupShown: functions.afterPopupShown,
 		afterPopupHide: functions.afterPopupHide
 	});
+	const forceUpdate = useForceUpdate();
 
 	const {askOptions, createAskDisplayOptions} = useOptionItems({...props, noAvailable});
 	const askDisplayOptions = createAskDisplayOptions(() => {
@@ -563,7 +568,8 @@ export const useFilterableDropdownOptions = <V extends any>(props: FilterableDro
 			: remained.map(({option}) => option);
 	});
 	const displayOptions = askDisplayOptions();
-	const fixFilterExists = DropdownDefaults.DEFAULTS.FIX_FILTER && VUtils.isNotBlank(filter);
+	const fixFilterExists = DropdownDefaults.DEFAULTS.FIX_FILTER
+		&& (VUtils.isNotBlank(filter) || (compositionRef.current.ing && VUtils.isNotBlank(compositionRef.current.text)));
 	const popupHeight = 2 + CssVars.INPUT_HEIGHT_VALUE * Math.min(displayOptions.length + (fixFilterExists ? 1 : 0), 8);
 
 	const repaintPopup = () => {
@@ -607,8 +613,14 @@ export const useFilterableDropdownOptions = <V extends any>(props: FilterableDro
 		if ($disabled || filterable === false) {
 			return;
 		}
-		setFilter(event.target.value);
-		filterChanged && (await filterChanged(event.target.value, 'search'));
+		if (compositionRef.current.ing) {
+			// composition ing, sync to composition ref, and force update
+			compositionRef.current = {ing: true, text: event.target.value};
+			forceUpdate();
+		} else {
+			setFilter(event.target.value);
+			filterChanged && (await filterChanged(event.target.value, 'search'));
+		}
 	};
 	const onAnyInputEvent = (event: KeyboardEvent<HTMLElement>) => {
 		if (filterable === false || event.target === filterInputRef.current) {
@@ -621,14 +633,25 @@ export const useFilterableDropdownOptions = <V extends any>(props: FilterableDro
 		filterInputRef.current?.dispatchEvent(new Event('keydown', event));
 		filterInputRef.current?.focus();
 	};
+	const displayValue = compositionRef.current.ing ? compositionRef.current.text : filter;
+	const onCompositionStart = () => {
+		compositionRef.current = {ing: true, text: displayValue};
+	};
+	const onCompositionEnd = async () => {
+		compositionRef.current = {ing: false};
+		setFilter(filterInputRef.current.value);
+		filterChanged && (await filterChanged(filterInputRef.current.value, 'search'));
+	};
 
 	return {
-		filterInputRef, filter, setFilter,
+		filterInputRef, filter: displayValue, setFilter,
+		active: VUtils.isNotBlank(filter) || (compositionRef.current.ing && VUtils.isNotBlank(compositionRef.current.text)),
 		askOptions, askDisplayOptions, displayOptions,
 		containerRef, popupState, setPopupState, popupHeight,
 		popupRef, popupShown, setPopupShown, afterPopupStateChanged: functions,
 		repaintPopup,
-		onClicked, onFocused, onKeyUp, onFilterChanged, onAnyInputEvent
+		onClicked, onFocused, onKeyUp, onFilterChanged, onAnyInputEvent,
+		onCompositionStart, onCompositionEnd
 	};
 };
 

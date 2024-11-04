@@ -154,12 +154,12 @@ export const InternalMultiDropdownTree = forwardRef((props: MultiDropdownTreePro
 	});
 	const {
 		askOptions,
-		filterInputRef, filter, onFilterChanged,
+		filterInputRef, filter, onFilterChanged, active: filterActive,
 		containerRef,
 		popupState,
 		popupRef, popupShown,
 		repaintPopup,
-		onClicked, onFocused, onKeyUp, onAnyInputEvent
+		onClicked, onFocused, onKeyUp, onAnyInputEvent, onCompositionStart, onCompositionEnd
 	} = useFilterableDropdownOptions({...props, takeoverFilter: false, filterChanged});
 	const forceUpdate = useForceUpdate();
 	useDualRefs(containerRef, ref);
@@ -326,11 +326,14 @@ export const InternalMultiDropdownTree = forwardRef((props: MultiDropdownTreePro
 		{isDropdownPopupActive(popupState.active)
 			? <DropdownPopup {...{...popupState, minHeight: popupHeight}}
 			                 shown={popupShown && popupState.active === DropdownPopupStateActive.ACTIVE}
+			                 onKeyDown={onAnyInputEvent}
 			                 {...deviceTags}
 			                 vScroll={true} ref={popupRef}>
-				<OptionFilter {...{...popupState, active: !!filter}} data-w="d9-multi-dropdown-tree-option-filter">
+				<OptionFilter {...{...popupState, active: filterActive}} data-w="d9-multi-dropdown-tree-option-filter">
 					<span>?:</span><span><Search/></span>
-					<input value={filter} onChange={onFilterChanged} onKeyUp={onKeyUp} ref={filterInputRef}/>
+					<input value={filter} onChange={onFilterChanged}
+					       onKeyUp={onKeyUp} onCompositionStart={onCompositionStart} onCompositionEnd={onCompositionEnd}
+					       ref={filterInputRef}/>
 				</OptionFilter>
 				<PopupTree data={treeModel} initExpandLevel={0} disableSearchBox={true}
 				           detective={detective}

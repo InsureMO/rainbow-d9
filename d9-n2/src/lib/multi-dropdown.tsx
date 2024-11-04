@@ -174,12 +174,12 @@ export const MultiDropdown = forwardRef((props: MultiDropdownProps, ref: Forward
 	const {filterChanged: externalFilterChanged, externalFilteringNow} = useExternalFilteringDropdown(filterChanged);
 	const {
 		askOptions, displayOptions,
-		filterInputRef, filter, onFilterChanged,
+		filterInputRef, filter, onFilterChanged, active: filterActive,
 		containerRef,
 		popupState, popupHeight,
 		popupRef, popupShown,
 		repaintPopup,
-		onClicked, onFocused, onKeyUp, onAnyInputEvent
+		onClicked, onFocused, onKeyUp, onAnyInputEvent, onCompositionStart, onCompositionEnd
 	} = useFilterableDropdownOptions({...props, filterChanged: externalFilterChanged});
 	const forceUpdate = useForceUpdate();
 	useDualRefs(containerRef, ref);
@@ -303,9 +303,10 @@ export const MultiDropdown = forwardRef((props: MultiDropdownProps, ref: Forward
 			                 shown={popupShown && popupState.active === DropdownPopupStateActive.ACTIVE}
 			                 {...deviceTags}
 			                 vScroll={true} ref={popupRef}>
-				<OptionFilter {...{...popupState, active: !!filter}} data-w="d9-multi-dropdown-option-filter">
+				<OptionFilter {...{...popupState, active: filterActive}} data-w="d9-multi-dropdown-option-filter">
 					<span>?:</span><span>{externalFilteringNow ? <Spinner/> : <Search/>}</span>
-					<input value={filter} onChange={onFilterChanged} onKeyUp={onKeyUp}
+					<input value={filter} onChange={onFilterChanged}
+					       onKeyUp={onKeyUp} onCompositionStart={onCompositionStart} onCompositionEnd={onCompositionEnd}
 					       ref={filterInputRef}/>
 				</OptionFilter>
 				{displayOptions.map((option, index) => {
