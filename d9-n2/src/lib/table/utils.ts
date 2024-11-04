@@ -90,4 +90,4 @@ export const setTableDefaults = (defaults: {
 };
 
 export const isInCellInputBorderOmitted = (): boolean => DEFAULTS.OMIT_IN_CELL_INPUT_BORDER;
-
+export const isNoneSortFromCycleOmitted = (): boolean => DEFAULTS.OMIT_NONE_SORT_FROM_CYCLE;

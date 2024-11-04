@@ -5,6 +5,7 @@ import {SortAsc, SortDesc, SortNone} from '../icons';
 import {IntlLabel} from '../intl-label';
 import {LabelLike} from '../label-like';
 import {SortedTableColumn, TableColumnSortType, TableProps} from './types';
+import {isNoneSortFromCycleOmitted} from './utils';
 import {ATableHeaderCell} from './widgets';
 
 export interface TableHeaderProps {
@@ -61,7 +62,8 @@ export const TableHeader = (props: TableHeaderProps) => {
 					</span>
 					: null}
 				{(canSort && sortType === TableColumnSortType.DESC)
-					? <span data-role="sort" onClick={sortColumn(header.sortKey, TableColumnSortType.NONE)}>
+					? <span data-role="sort"
+					        onClick={sortColumn(header.sortKey, isNoneSortFromCycleOmitted() ? TableColumnSortType.ASC : TableColumnSortType.NONE)}>
 						<SortDesc/>
 					</span>
 					: null}
