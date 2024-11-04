@@ -74,6 +74,10 @@
 	  // console.log(options.model);
 	  return `Hello, I am dropdown #2, current value is ${options.model.dropdown2}.`;
 	  ```
+- Dropdown::::dropdown3
+	- label: Dropdown #3, filter remotely
+	- options: @ext.dropdown3
+	- filterChanged: @ext.dropdown3FilterChanged
 - MultiDropdown::Multiple Dropdown::multiDropdown
 	- options:
 		- 1: Option #1

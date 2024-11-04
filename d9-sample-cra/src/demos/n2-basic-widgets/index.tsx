@@ -1,5 +1,13 @@
-import {BaseModel, PropValue, StandaloneRoot} from '@rainbow-d9/n1';
-import {CssVars, Global, GlobalEventHandlers, GlobalRoot, ModelCarrier, OptionItems} from '@rainbow-d9/n2';
+import {StandaloneRoot} from '@rainbow-d9/n1';
+import {
+	CssVars,
+	DropdownOptions,
+	Global,
+	GlobalEventHandlers,
+	GlobalRoot,
+	ModelCarrier,
+	OptionItems
+} from '@rainbow-d9/n2';
 import {KeyboardEvent} from 'react';
 import styled from 'styled-components';
 import {CustomEventHandler} from '../custom-event-handler';
@@ -90,6 +98,9 @@ const StyleController = styled.div.attrs({})`
 `;
 export const N2BasicWidgets = () => {
 	const def = useDemoMarkdown(DemoContent);
+	const dropdown3Options = [
+		{value: '100', label: 'John Doe'}
+	];
 	const externalDefs = {
 		deco: {
 			numericFormat: {
@@ -112,7 +123,7 @@ export const N2BasicWidgets = () => {
 				}
 			}
 		},
-		dropdown2: async (_options: ModelCarrier<BaseModel, PropValue> & GlobalEventHandlers): Promise<OptionItems<string>> => {
+		dropdown2: async (_options: ModelCarrier & GlobalEventHandlers): Promise<OptionItems<string>> => {
 			return [
 				{value: '1', label: 'Option #1'},
 				{value: '2', label: 'Option #2'},
@@ -125,6 +136,29 @@ export const N2BasicWidgets = () => {
 				{value: '9', label: 'Option #9'},
 				{value: 'X', label: 'Option #X'}
 			];
+		},
+		dropdown3: async (): Promise<DropdownOptions> => dropdown3Options,
+		dropdown3FilterChanged: async (filter: string) => {
+			const text = filter.trim();
+			if (dropdown3Options.find(option => option.label.startsWith(text.charAt(0).toUpperCase() + text.slice(1) + ' '))) {
+				// already searched
+				return new Promise<void>(resolve => setTimeout(resolve, 50));
+			} else {
+				return new Promise<void>(resolve => {
+					setTimeout(() => {
+						const maxValue = dropdown3Options.reduce((max, option) => {
+							return Math.max(Number(option.value), max);
+						}, 0);
+						dropdown3Options.push(...(new Array(3).fill(1).map((_, index) => {
+							return {
+								value: `${maxValue + 1}`,
+								label: text.charAt(0).toUpperCase() + text.slice(1) + ` Doe #${index + 1}`
+							};
+						})));
+						resolve();
+					}, 500);
+				});
+			}
 		}
 	};
 

@@ -1,4 +1,14 @@
-import {DeviceTags, MBUtils, Undefinable, useCreateEventBus, VUtils} from '@rainbow-d9/n1';
+import {
+	DeviceTags,
+	MBUtils,
+	Undefinable,
+	useCreateEventBus,
+	useForceUpdate,
+	useThrottler,
+	useWrapperEventBus,
+	VUtils,
+	WrapperEventTypes
+} from '@rainbow-d9/n1';
 import React, {
 	ChangeEvent,
 	createContext,
@@ -14,8 +24,9 @@ import React, {
 	useState
 } from 'react';
 import {createPortal} from 'react-dom';
-import styled from 'styled-components';
+import styled, {keyframes} from 'styled-components';
 import {CssVars, DOM_ID_WIDGET, DOM_KEY_WIDGET} from './constants';
+import {GlobalHandlers, useGlobalHandlers} from './global';
 import {useCollapseFixedThing} from './hooks';
 import {CaretDown, Times} from './icons';
 import {internationalize, IntlLabel, toIntlLabel} from './intl-label';
@@ -25,6 +36,7 @@ import {
 	OptionItems,
 	OptionItemSort,
 	OptionItemsProps,
+	REACTION_REFRESH_OPTIONS,
 	TreeOptionItem,
 	TreeOptionItems,
 	useOptionItems
@@ -440,6 +452,47 @@ export const useDropdownControl = (options: {
 	};
 };
 
+export type ExternalFilterHandler = (filter: string, options: { global: GlobalHandlers }) => Promise<void>;
+
+export const useExternalFilteringDropdown = (externalFilterHandle?: ExternalFilterHandler) => {
+	const globalHandlers = useGlobalHandlers();
+	const {fire: fireWrapper} = useWrapperEventBus();
+	const {replace, clear} = useThrottler();
+	const externalFiltering = useRef(false);
+	const forceUpdate = useForceUpdate();
+
+	const filterChanged = (externalFilterHandle === null)
+		? (void 0)
+		: async (filter: string, timing: 'hide' | 'search'): Promise<void> => {
+			if (timing === 'hide' || VUtils.isBlank(filter)) {
+				clear(false);
+				if (externalFiltering.current !== false) {
+					externalFiltering.current = false;
+					forceUpdate();
+				}
+			} else {
+				if (externalFiltering.current !== true) {
+					externalFiltering.current = true;
+					forceUpdate();
+				}
+				replace(async () => {
+					try {
+						if (externalFilterHandle != null) {
+							await externalFilterHandle(filter, {global: globalHandlers});
+							fireWrapper && fireWrapper(WrapperEventTypes.UNHANDLED_REACTION_OCCURRED, REACTION_REFRESH_OPTIONS);
+						}
+					} catch {
+						// ignore error
+					} finally {
+						externalFiltering.current = false;
+						forceUpdate();
+					}
+				}, 300);
+			}
+		};
+	return {filterChanged, externalFilteringNow: externalFiltering.current};
+};
+
 export interface FilterableDropdownOptions<V> extends OptionItemsProps<V> {
 	filterable?: boolean;
 	takeoverFilter?: false;
@@ -579,6 +632,15 @@ export const useFilterableDropdownOptions = <V extends any>(props: FilterableDro
 	};
 };
 
+const SpinnerKeyFrames = keyframes`
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+`;
+
 // noinspection CssUnresolvedCustomProperty
 export const OptionFilter = styled.div.attrs<Omit<DropdownPopupState, 'active'> & { active: boolean }>(
 	({
@@ -687,6 +749,10 @@ export const OptionFilter = styled.div.attrs<Omit<DropdownPopupState, 'active'> 
             height: ${CssVars.FONT_SIZE};
             width: ${CssVars.FONT_SIZE};
         }
+
+        > svg[data-icon=spinner] {
+            animation: 2s linear infinite ${SpinnerKeyFrames};
+        }
     }
 
     > input {
@@ -778,7 +844,7 @@ export const DropdownUtils = {
 		/**
 		 * carrier must have styles of dropdown widgets
 		 */
-		findPortalCarrier?: () => HTMLElement
+		findPortalCarrier?: () => HTMLElement;
 	}) => {
 		DropdownDefaults.DEFAULTS.FIX_FILTER = defaults.fixFilter ?? DropdownDefaults.DEFAULTS.FIX_FILTER;
 		DropdownDefaults.DEFAULTS.findPortalCarrier = defaults.findPortalCarrier;

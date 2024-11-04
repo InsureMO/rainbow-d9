@@ -1,11 +1,12 @@
 import {Nullable, Reaction, Undefinable, VUtils} from '@rainbow-d9/n1';
-import {DropdownOptions, DropdownOptionSort, REACTION_REFRESH_OPTIONS} from '@rainbow-d9/n2';
+import {DropdownDef, DropdownOptions, DropdownOptionSort, REACTION_REFRESH_OPTIONS} from '@rainbow-d9/n2';
 import {ParsedNodeType} from '../node-types';
 import {ParsedList, ParsedListItemAttributePair, SemanticUtils} from '../semantic';
 import {
 	AbstractReactionAttributeBuild,
 	AttributeValueBuild,
 	createDefaultMonitorHandlerDetective,
+	createSyncSnippetBuild,
 	CustomAttributeName,
 	MonitorHandlerDetective,
 	ReactionMonitorAttributeValue,
@@ -64,6 +65,7 @@ export const N2DropdownSortBuild: AttributeValueBuild<DropdownOptionSort> = {
 		}
 	}
 };
+export const N2DropdownFilterChangedBuild = createSyncSnippetBuild<DropdownDef, 'filterChanged'>('filterChanged', ['filter', 'options']);
 
 export interface N2DropdownReactionRefreshOptionsMonitorAttributeValue extends ReactionMonitorAttributeValue {
 	type: 'refreshOptions';
@@ -99,7 +101,7 @@ export class N2DropdownTranslator extends SpecificWidgetTranslator<N2WidgetType.
 
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	public getAttributeValueBuilders(): Array<AttributeValueBuild<any>> {
-		return [N2DropdownOptionsBuild, N2DropdownSortBuild, N2DropdownReactionRefreshOptionsBuild, TipAttachableBuild, ValueChangedBuild];
+		return [N2DropdownOptionsBuild, N2DropdownSortBuild, N2DropdownFilterChangedBuild, N2DropdownReactionRefreshOptionsBuild, TipAttachableBuild, ValueChangedBuild];
 	}
 
 	public getValidationHandlerDetectives(): Array<MonitorHandlerDetective> {

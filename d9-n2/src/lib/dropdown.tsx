@@ -18,10 +18,11 @@ import {
 	DropdownStick,
 	isDropdownPopupActive,
 	OptionFilter,
+	useExternalFilteringDropdown,
 	useFilterableDropdownOptions
 } from './dropdown-assist';
-import {buildTip, TipAttachableWidget, useGlobalHandlers, useTip} from './global';
-import {Search} from './icons';
+import {buildTip, GlobalHandlers, TipAttachableWidget, useGlobalHandlers, useTip} from './global';
+import {Search, Spinner} from './icons';
 import {toIntlLabel} from './intl-label';
 import {
 	NO_AVAILABLE_OPTION_ITEM,
@@ -49,6 +50,8 @@ export type DropdownDef =
 	please?: ReactNode;
 	clearable?: boolean;
 	filterable?: boolean;
+	/** external handler for filter change */
+	filterChanged?: (filter: string, options: { global: GlobalHandlers }) => Promise<void>;
 	/** max popup width */
 	maxWidth?: number;
 };
@@ -83,12 +86,13 @@ export const Dropdown = forwardRef((props: DropdownProps, ref: ForwardedRef<HTML
 		// eslint-disable-next-line @typescript-eslint/no-unused-vars
 		options, optionSort, noAvailable, noMatched,
 		$pp, $wrapped: {$onValueChange, $root, $model, $p2r, $avs: {$disabled, $visible}},
-		please = '', clearable = true,
+		please = '', clearable = true, filterChanged,
 		tip,
 		...rest
 	} = props;
 
 	const globalHandlers = useGlobalHandlers();
+	const {filterChanged: externalFilterChanged, externalFilteringNow} = useExternalFilteringDropdown(filterChanged);
 	const {
 		askOptions, displayOptions,
 		filterInputRef, filter, onFilterChanged,
@@ -96,7 +100,7 @@ export const Dropdown = forwardRef((props: DropdownProps, ref: ForwardedRef<HTML
 		popupState, popupHeight,
 		popupRef, popupShown, setPopupShown, afterPopupStateChanged,
 		onClicked, onFocused, onKeyUp, onAnyInputEvent
-	} = useFilterableDropdownOptions(props);
+	} = useFilterableDropdownOptions({...props, filterChanged: externalFilterChanged});
 	useDualRefs(containerRef, ref);
 	useTip({ref: containerRef, ...buildTip({tip, root: $root, model: $model})});
 	const forceUpdate = useForceUpdate();
@@ -158,7 +162,7 @@ export const Dropdown = forwardRef((props: DropdownProps, ref: ForwardedRef<HTML
 			                 {...deviceTags}
 			                 vScroll={true} ref={popupRef}>
 				<OptionFilter {...{...popupState, active: !!filter}} data-w="d9-dropdown-option-filter">
-					<span>?:</span><span><Search/></span>
+					<span>?:</span><span>{externalFilteringNow ? <Spinner/> : <Search/>}</span>
 					<input value={filter} onChange={onFilterChanged} onKeyUp={onKeyUp}
 					       ref={filterInputRef}/>
 				</OptionFilter>

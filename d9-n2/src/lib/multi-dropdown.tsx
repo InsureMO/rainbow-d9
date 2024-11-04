@@ -20,10 +20,11 @@ import {
 	DropdownStick,
 	isDropdownPopupActive,
 	OptionFilter,
+	useExternalFilteringDropdown,
 	useFilterableDropdownOptions
 } from './dropdown-assist';
-import {buildTip, TipAttachableWidget, useGlobalHandlers, useTip} from './global';
-import {Check, Search, Times} from './icons';
+import {buildTip, GlobalHandlers, TipAttachableWidget, useGlobalHandlers, useTip} from './global';
+import {Check, Search, Spinner, Times} from './icons';
 import {toIntlLabel} from './intl-label';
 import {
 	NO_AVAILABLE_OPTION_ITEM,
@@ -50,6 +51,8 @@ export type MultiDropdownDef =
 	please?: ReactNode;
 	clearable?: boolean;
 	filterable?: boolean;
+	/** external handler for filter change */
+	filterChanged?: (filter: string, options: { global: GlobalHandlers }) => Promise<void>;
 	/** max popup width */
 	maxWidth?: number;
 };
@@ -162,12 +165,13 @@ export const MultiDropdown = forwardRef((props: MultiDropdownProps, ref: Forward
 		// eslint-disable-next-line @typescript-eslint/no-unused-vars
 		options, optionSort, noAvailable, noMatched,
 		$pp, $wrapped: {$onValueChange, $root, $model, $p2r, $avs: {$disabled, $visible}},
-		please = '', clearable = true,
+		please = '', clearable = true, filterChanged,
 		tip,
 		...rest
 	} = props;
 
 	const globalHandlers = useGlobalHandlers();
+	const {filterChanged: externalFilterChanged, externalFilteringNow} = useExternalFilteringDropdown(filterChanged);
 	const {
 		askOptions, displayOptions,
 		filterInputRef, filter, onFilterChanged,
@@ -176,7 +180,7 @@ export const MultiDropdown = forwardRef((props: MultiDropdownProps, ref: Forward
 		popupRef, popupShown,
 		repaintPopup,
 		onClicked, onFocused, onKeyUp, onAnyInputEvent
-	} = useFilterableDropdownOptions(props);
+	} = useFilterableDropdownOptions({...props, filterChanged: externalFilterChanged});
 	const forceUpdate = useForceUpdate();
 	useDualRefs(containerRef, ref);
 	useTip({ref: containerRef, ...buildTip({tip, root: $root, model: $model})});
@@ -300,7 +304,7 @@ export const MultiDropdown = forwardRef((props: MultiDropdownProps, ref: Forward
 			                 {...deviceTags}
 			                 vScroll={true} ref={popupRef}>
 				<OptionFilter {...{...popupState, active: !!filter}} data-w="d9-multi-dropdown-option-filter">
-					<span>?:</span><span><Search/></span>
+					<span>?:</span><span>{externalFilteringNow ? <Spinner/> : <Search/>}</span>
 					<input value={filter} onChange={onFilterChanged} onKeyUp={onKeyUp}
 					       ref={filterInputRef}/>
 				</OptionFilter>
