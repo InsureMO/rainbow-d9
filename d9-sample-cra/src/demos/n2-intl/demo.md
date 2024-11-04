@@ -2,7 +2,9 @@
 
 ## Section::# 8. Internationalization
 
-- Input::Standard Input
+- Input::Standard Input::test0
+	- placeholder: Test1
+- Textarea::Standard Textarea::testTextarea
 	- placeholder: Test1
 - DecoInput::Test1::test1
 	- required

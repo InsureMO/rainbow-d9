@@ -53,7 +53,8 @@ const DecorateInputContainer = styled.div.attrs(
             z-index: 1;
         }
 
-        &:not([value=""]) {
+        &:not([value=""]),
+        &[data-composition-ing=true] {
             + span[data-w=d9-deco-input-placeholder] {
                 color: transparent;
             }
@@ -219,6 +220,16 @@ export const askDecorateAttrs = (props: DecorateInputProps, rest: object) => {
 	return {tags: deviceTags, attrs: decorateAttrs};
 };
 
+const useComposition = () => {
+	const inputRef = useRef<HTMLInputElement>(null);
+	const onCompositionStart = () => {
+		inputRef.current?.setAttribute('data-composition-ing', 'true');
+	};
+	const onCompositionEnd = () => {
+		inputRef.current?.setAttribute('data-composition-ing', 'false');
+	};
+	return {inputRef, onCompositionStart, onCompositionEnd};
+};
 export const DecorateInput = forwardRef((props: DecorateInputProps, ref: ForwardedRef<HTMLDivElement>) => {
 	const {
 		placeholder,
@@ -232,6 +243,7 @@ export const DecorateInput = forwardRef((props: DecorateInputProps, ref: Forward
 	const decorateRef = useRef<HTMLDivElement>(null);
 	useDualRefs(decorateRef, ref);
 	useTip({ref: decorateRef, prefix: 'data-di', ...buildTip({tip: diTip, root: $root, model: $model})});
+	const {inputRef, onCompositionStart, onCompositionEnd} = useComposition();
 
 	const computePlaceholder = () => {
 		if (VUtils.isBlank(placeholder)) {
@@ -248,7 +260,7 @@ export const DecorateInput = forwardRef((props: DecorateInputProps, ref: Forward
 	                 className={className} style={style}
 	                 id={PPUtils.asId(PPUtils.absolute($p2r, props.$pp), props.id)}
 	                 ref={decorateRef}>
-		<Input {...rest}/>
+		<Input {...rest} onCompositionStart={onCompositionStart} onCompositionEnd={onCompositionEnd} ref={inputRef}/>
 	</Decorate>;
 });
 
@@ -268,6 +280,7 @@ export const DecorateNumberInput = forwardRef((props: DecorateNumberInputProps, 
 	const decorateRef = useRef<HTMLDivElement>(null);
 	useDualRefs(decorateRef, ref);
 	useTip({ref: decorateRef, prefix: 'data-di', ...buildTip({tip: diTip, root: $root, model: $model})});
+	const {inputRef, onCompositionStart, onCompositionEnd} = useComposition();
 
 	const [omitPlaceholder, setOmitPlaceholder] = useState(() => {
 		return VUtils.isNotEmpty(MUtils.getValue($model, $pp));
@@ -293,7 +306,8 @@ export const DecorateNumberInput = forwardRef((props: DecorateNumberInputProps, 
 	                 className={className} style={style}
 	                 id={PPUtils.asId(PPUtils.absolute($p2r, props.$pp), props.id)}
 	                 ref={decorateRef}>
-		<NumberInput {...rest}/>
+		<NumberInput {...rest} onCompositionStart={onCompositionStart} onCompositionEnd={onCompositionEnd}
+		             ref={inputRef}/>
 	</Decorate>;
 });
 
@@ -313,13 +327,15 @@ export const DecoratePasswordInput = forwardRef((props: DecoratePasswordInputPro
 	const decorateRef = useRef<HTMLDivElement>(null);
 	useDualRefs(decorateRef, ref);
 	useTip({ref: decorateRef, prefix: 'data-di', ...buildTip({tip: diTip, root: $root, model: $model})});
+	const {inputRef, onCompositionStart, onCompositionEnd} = useComposition();
 
 	return <Decorate {...deviceTags} {...decorateAttrs}
 	                 placeholder={placeholder} leads={leads} tails={tails}
 	                 className={className} style={style}
 	                 id={PPUtils.asId(PPUtils.absolute($p2r, props.$pp), props.id)}
 	                 ref={decorateRef}>
-		<PasswordInput {...rest}/>
+		<PasswordInput {...rest} onCompositionStart={onCompositionStart} onCompositionEnd={onCompositionEnd}
+		               ref={inputRef}/>
 	</Decorate>;
 });
 

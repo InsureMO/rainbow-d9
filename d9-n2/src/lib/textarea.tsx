@@ -1,4 +1,12 @@
-import {MUtils, PPUtils, registerWidget, ValueChangeableNodeDef, VUtils, WidgetProps} from '@rainbow-d9/n1';
+import {
+	MUtils,
+	PPUtils,
+	registerWidget,
+	useForceUpdate,
+	ValueChangeableNodeDef,
+	VUtils,
+	WidgetProps
+} from '@rainbow-d9/n1';
 import React, {ChangeEvent, FocusEvent, ForwardedRef, forwardRef, useRef} from 'react';
 import styled from 'styled-components';
 import {CssVars, DOM_ID_WIDGET, DOM_KEY_WIDGET} from './constants';
@@ -68,6 +76,10 @@ const ATextarea = styled.textarea.attrs<{ autoSelect: boolean }>(
         }
     }
 
+    &::placeholder {
+        color: ${CssVars.PLACEHOLDER_COLOR};
+    }
+
     &:hover {
         border-color: ${CssVars.PRIMARY_COLOR};
         box-shadow: ${CssVars.PRIMARY_HOVER_SHADOW};
@@ -88,11 +100,13 @@ export const Textarea = forwardRef((props: TextareaProps, ref: ForwardedRef<HTML
 
 	const globalHandlers = useGlobalHandlers();
 	const textRef = useRef<HTMLTextAreaElement>(null);
+	const compositionRef = useRef<{ ing: boolean; text?: string }>({ing: false});
 	useDualRefs(textRef, ref);
 	useTip({ref: textRef, ...buildTip({tip, root: $root, model: $model})});
 	useLanguage();
+	const forceUpdate = useForceUpdate();
 
-	let i18nPlaceholder;
+	let i18nPlaceholder: string | undefined;
 	if (VUtils.isBlank(placeholder)) {
 		i18nPlaceholder = (void 0);
 	} else {
@@ -100,16 +114,31 @@ export const Textarea = forwardRef((props: TextareaProps, ref: ForwardedRef<HTML
 	}
 
 	const onChange = async (event: ChangeEvent<HTMLTextAreaElement>) => {
-		const value = event.target.value;
-		await $onValueChange(value, true, {global: globalHandlers});
+		if (compositionRef.current.ing) {
+			// composition ing, sync to composition ref, and force update
+			compositionRef.current = {ing: true, text: event.target.value};
+			forceUpdate();
+		} else {
+			await $onValueChange(event.target.value, true, {global: globalHandlers});
+		}
+	};
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	const displayValue = compositionRef.current.ing ? compositionRef.current.text : ((MUtils.getValue($model, $pp) as any) ?? '');
+	const onCompositionStart = () => {
+		compositionRef.current = {ing: true, text: displayValue};
+	};
+	const onCompositionEnd = async () => {
+		compositionRef.current = {ing: false};
+		await $onValueChange(textRef.current.value, true, {global: globalHandlers});
 	};
 
 	return <ATextarea {...rest} placeholder={i18nPlaceholder} autoSelect={autoSelect}
 	                  disabled={$disabled} data-disabled={$disabled} data-visible={$visible}
-		// eslint-disable-next-line @typescript-eslint/no-explicit-any
-		              value={(MUtils.getValue($model, $pp) as any) ?? ''} onChange={onChange}
-		              id={PPUtils.asId(PPUtils.absolute($p2r, $pp), props.id)}
-		              ref={textRef}/>;
+	                  value={displayValue}
+	                  onChange={onChange}
+	                  onCompositionStart={onCompositionStart} onCompositionEnd={onCompositionEnd}
+	                  id={PPUtils.asId(PPUtils.absolute($p2r, $pp), props.id)}
+	                  ref={textRef}/>;
 });
 
 registerWidget({key: 'Textarea', JSX: Textarea, container: false, array: false});

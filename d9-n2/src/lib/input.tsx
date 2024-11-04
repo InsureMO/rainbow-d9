@@ -4,6 +4,7 @@ import {
 	PropertyPath,
 	PropValue,
 	registerWidget,
+	useForceUpdate,
 	ValueChangeableNodeDef,
 	VUtils,
 	WidgetProps
@@ -18,7 +19,7 @@ import {
 	MaskedRange,
 	MaskedRegExp
 } from 'imask';
-import React, {ChangeEvent, FocusEvent, ForwardedRef, forwardRef, useRef} from 'react';
+import React, {ChangeEvent, CompositionEvent, FocusEvent, ForwardedRef, forwardRef, useRef} from 'react';
 import {useIMask} from 'react-imask';
 import styled from 'styled-components';
 import {CssVars, DOM_ID_WIDGET, DOM_KEY_WIDGET} from './constants';
@@ -154,12 +155,14 @@ const usePlaceholder = (placeholder?: string) => {
 export const InternalInput = forwardRef((props: InputProps, ref: ForwardedRef<HTMLInputElement>) => {
 	const {
 		autoSelect = true, valueToNumber = false, mask,
+		onCompositionStart: compositionStart, onCompositionEnd: compositionEnd,
 		tip,
 		$pp, $wrapped: {$onValueChange, $root, $model, $p2r, $avs: {$disabled, $visible}},
 		...rest
 	} = props;
 
 	const valueRef = useRef({value: MUtils.getValue($model, $pp)});
+	const compositionRef = useRef<{ ing: boolean; text?: string }>({ing: false});
 	const globalHandlers = useGlobalHandlers();
 
 	const onValueChanged = async (value?: string) => {
@@ -202,13 +205,20 @@ export const InternalInput = forwardRef((props: InputProps, ref: ForwardedRef<HT
 	});
 	useDualRefs(inputRef, ref);
 	useTip({ref: inputRef, ...buildTip({tip, root: $root, model: $model})});
+	const forceUpdate = useForceUpdate();
 
 	const onChange = async (event: ChangeEvent<HTMLInputElement>) => {
 		// handle change use mask event
 		if (hasMask) {
 			return;
 		}
-		await onValueChanged(event.target.value);
+		if (compositionRef.current.ing) {
+			// composition ing, sync to composition ref, and force update
+			compositionRef.current = {ing: true, text: event.target.value};
+			forceUpdate();
+		} else {
+			await onValueChanged(event.target.value);
+		}
 	};
 
 	const valueFromModel = MUtils.getValue($model, $pp);
@@ -217,12 +227,30 @@ export const InternalInput = forwardRef((props: InputProps, ref: ForwardedRef<HT
 	} else {
 		valueRef.current.value = valueFromModel;
 	}
-	const displayValue = hasMask ? (void 0) : stringifyInputValue({$model, $pp, value: valueRef.current.value});
+	const displayValue = hasMask
+		// value is no need for mask
+		? (void 0)
+		: (compositionRef.current.ing
+			// use value from composition ref
+			? compositionRef.current.text
+			// use value from value ref
+			: stringifyInputValue({$model, $pp, value: valueRef.current.value}));
+	const onCompositionStart = (event: CompositionEvent<HTMLInputElement>) => {
+		compositionRef.current = {ing: true, text: displayValue};
+		compositionStart && compositionStart(event);
+	};
+	const onCompositionEnd = async (event: CompositionEvent<HTMLInputElement>) => {
+		compositionRef.current = {ing: false};
+		await onValueChanged(inputRef.current.value);
+		compositionEnd && compositionEnd(event);
+	};
 
 	return <AnInput {...rest} autoSelect={autoSelect}
 	                disabled={$disabled} data-disabled={$disabled} data-visible={$visible}
 	                value={displayValue}
 	                onChange={onChange}
+	                onCompositionStart={onCompositionStart}
+	                onCompositionEnd={onCompositionEnd}
 	                id={PPUtils.asId(PPUtils.absolute($p2r, $pp), props.id)}
 	                ref={inputRef}/>;
 });
