@@ -2,6 +2,8 @@
 
 ## Section::# 8. Internationalization
 
+- Input::Standard Input
+	- placeholder: Test1
 - DecoInput::Test1::test1
 	- required
 	- placeholder: Test1

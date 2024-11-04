@@ -1,8 +1,9 @@
-import {MUtils, PPUtils, registerWidget, ValueChangeableNodeDef, WidgetProps} from '@rainbow-d9/n1';
+import {MUtils, PPUtils, registerWidget, ValueChangeableNodeDef, VUtils, WidgetProps} from '@rainbow-d9/n1';
 import React, {ChangeEvent, FocusEvent, ForwardedRef, forwardRef, useRef} from 'react';
 import styled from 'styled-components';
 import {CssVars, DOM_ID_WIDGET, DOM_KEY_WIDGET} from './constants';
 import {buildTip, TipAttachableWidget, useGlobalHandlers, useTip} from './global';
+import {internationalize, useLanguage} from './intl-label';
 import {OmitHTMLProps2, OmitNodeDef} from './types';
 import {useDualRefs} from './utils';
 
@@ -80,7 +81,7 @@ const ATextarea = styled.textarea.attrs<{ autoSelect: boolean }>(
 
 export const Textarea = forwardRef((props: TextareaProps, ref: ForwardedRef<HTMLTextAreaElement>) => {
 	const {
-		autoSelect = true, tip,
+		autoSelect = true, tip, placeholder,
 		$pp, $wrapped: {$onValueChange, $root, $model, $p2r, $avs: {$disabled, $visible}},
 		...rest
 	} = props;
@@ -89,13 +90,21 @@ export const Textarea = forwardRef((props: TextareaProps, ref: ForwardedRef<HTML
 	const textRef = useRef<HTMLTextAreaElement>(null);
 	useDualRefs(textRef, ref);
 	useTip({ref: textRef, ...buildTip({tip, root: $root, model: $model})});
+	useLanguage();
+
+	let i18nPlaceholder;
+	if (VUtils.isBlank(placeholder)) {
+		i18nPlaceholder = (void 0);
+	} else {
+		i18nPlaceholder = internationalize(placeholder, [placeholder]);
+	}
 
 	const onChange = async (event: ChangeEvent<HTMLTextAreaElement>) => {
 		const value = event.target.value;
 		await $onValueChange(value, true, {global: globalHandlers});
 	};
 
-	return <ATextarea {...rest} autoSelect={autoSelect}
+	return <ATextarea {...rest} placeholder={i18nPlaceholder} autoSelect={autoSelect}
 	                  disabled={$disabled} data-disabled={$disabled} data-visible={$visible}
 		// eslint-disable-next-line @typescript-eslint/no-explicit-any
 		              value={(MUtils.getValue($model, $pp) as any) ?? ''} onChange={onChange}

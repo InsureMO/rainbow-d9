@@ -23,7 +23,7 @@ import {useIMask} from 'react-imask';
 import styled from 'styled-components';
 import {CssVars, DOM_ID_WIDGET, DOM_KEY_WIDGET} from './constants';
 import {buildTip, TipAttachableWidget, useGlobalHandlers, useTip} from './global';
-import {useLanguage} from './intl-label';
+import {internationalize, useLanguage} from './intl-label';
 import {OmitHTMLProps2, OmitNodeDef} from './types';
 import {detectNumberFormat, locale, useDualRefs} from './utils';
 
@@ -141,7 +141,17 @@ export const stringifyInputValue = (options: { $model: PropValue; $pp: PropertyP
 	}
 };
 
-export const Input = forwardRef((props: InputProps, ref: ForwardedRef<HTMLInputElement>) => {
+const usePlaceholder = (placeholder?: string) => {
+	useLanguage();
+
+	if (VUtils.isBlank(placeholder)) {
+		return (void 0);
+	} else {
+		return internationalize(placeholder, [placeholder]);
+	}
+};
+
+export const InternalInput = forwardRef((props: InputProps, ref: ForwardedRef<HTMLInputElement>) => {
 	const {
 		autoSelect = true, valueToNumber = false, mask,
 		tip,
@@ -217,6 +227,12 @@ export const Input = forwardRef((props: InputProps, ref: ForwardedRef<HTMLInputE
 	                ref={inputRef}/>;
 });
 
+export const Input = forwardRef((props: InputProps, ref: ForwardedRef<HTMLInputElement>) => {
+	const {placeholder, ...rest} = props;
+	const i18nPlaceholder = usePlaceholder(placeholder);
+	return <InternalInput {...rest} placeholder={i18nPlaceholder} ref={ref}/>;
+});
+
 export type NumberInputFormat = Omit<typeof MaskedNumber.DEFAULTS, 'mask'>;
 
 export type NumberInputDef = Omit<InputDef, 'valueToNumber' | 'mask'> & {
@@ -227,9 +243,9 @@ export type NumberInputDef = Omit<InputDef, 'valueToNumber' | 'mask'> & {
 export type NumberInputProps = OmitNodeDef<NumberInputDef> & WidgetProps;
 
 export const NumberInput = forwardRef((props: NumberInputProps, ref: ForwardedRef<HTMLInputElement>) => {
-	const {format, grouping = false, ...rest} = props;
+	const {placeholder, format, grouping = false, ...rest} = props;
 
-	useLanguage();
+	const i18nPlaceholder = usePlaceholder(placeholder);
 
 	let mask = (void 0);
 	if (VUtils.isNotBlank(format)) {
@@ -246,16 +262,19 @@ export const NumberInput = forwardRef((props: NumberInputProps, ref: ForwardedRe
 	}
 	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 	// @ts-ignore
-	return <Input {...rest} mask={mask} data-number={true} valueToNumber={true} ref={ref}/>;
+	return <InternalInput {...rest} placeholder={i18nPlaceholder} mask={mask} data-number={true} valueToNumber={true}
+	                      ref={ref}/>;
 });
 
 export type PasswordInputDef = Omit<InputDef, 'valueToNumber' | 'mask'>;
 export type PasswordInputProps = OmitNodeDef<PasswordInputDef> & WidgetProps;
 
 export const PasswordInput = forwardRef((props: PasswordInputProps, ref: ForwardedRef<HTMLInputElement>) => {
+	const {placeholder, ...rest} = props;
+	const i18nPlaceholder = usePlaceholder(placeholder);
 	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 	// @ts-ignore
-	return <Input {...props} type="password" valueToNumber={false} ref={ref}/>;
+	return <InternalInput {...rest} placeholder={i18nPlaceholder} type="password" valueToNumber={false} ref={ref}/>;
 });
 
 registerWidget({key: 'Number', JSX: NumberInput, container: false, array: false});

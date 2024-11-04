@@ -83,14 +83,14 @@ export const GlobalStyles: any = createGlobalStyle`
 
         span[data-r=d9-fc-caption] {
             font-size: 12px;
-            font-weight: 300;
-            color: #888;
+            //font-weight: 300;
+            color: #666;
         }
 
         div[data-w=d9-table-header-cell],
         div[data-w=d9-table-row-index-cell],
         div[data-w=d9-table-no-data-row] {
-            color: #888;
+            color: #666;
         }
 
         div[data-w=d9-table-header-cell] {
