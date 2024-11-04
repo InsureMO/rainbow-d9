@@ -1,6 +1,5 @@
 import {BaseModel, PropValue, RootEventTypes} from '@rainbow-d9/n1';
-import {ButtonClickOptions, GlobalHandlers} from '@rainbow-d9/n2';
-import {DropdownTreeOption} from '@rainbow-d9/n2/src';
+import {ButtonClickOptions, DropdownTreeOption, GlobalHandlers} from '@rainbow-d9/n2';
 import {MutableRefObject} from 'react';
 import {asT} from '../../../utils';
 import {
