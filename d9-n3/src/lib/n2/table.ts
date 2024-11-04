@@ -103,7 +103,7 @@ export class N2TableRowOperatorsTranslator extends SpecificWidgetTranslator<N2Wi
 export const N2TableInitExpandedBuild =
 	createSyncSnippetBuild<TableDef, 'initExpanded'>('initExpanded', ['row', 'index']);
 export const N2TableSortBuild =
-	createSyncSnippetBuild<TableDef, 'sort'>('sort', ['row', 'index']);
+	createSyncSnippetBuild<TableDef, 'sort'>('sort', ['by', 'options']);
 
 export class N2TableTranslator extends SpecificArrayWidgetTranslator<N2WidgetType.TABLE> {
 	public getSupportedType(): N2WidgetType.TABLE {

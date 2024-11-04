@@ -1,4 +1,4 @@
-import {Global, InputDef} from '@rainbow-d9/n2';
+import {Global, InputDef, NumberInputDef} from '@rainbow-d9/n2';
 import {
 	AttributeValueBuild,
 	createSyncSnippetBuild,
@@ -28,7 +28,7 @@ const PasswordInputValidators = [
 ];
 const DecorateInputRequiredDetective = wrapMonitorHandlerDetective(ValidatorUtils.DETECT_REQUIRED, (attributes) => attributes['data-di-required'] = true);
 
-export const InputMaskBuild = createSyncSnippetBuild<InputDef, 'mask'>('mask', [], true);
+export const InputMaskBuild = createSyncSnippetBuild<InputDef, 'mask'>('mask', ['types'], true);
 
 export class N2InputTranslator extends SpecificWidgetTranslator<N2WidgetType.INPUT> {
 	public getSupportedType(): N2WidgetType.INPUT {
@@ -49,6 +49,8 @@ export class N2InputTranslator extends SpecificWidgetTranslator<N2WidgetType.INP
 	}
 }
 
+export const NumberInputFormatBuild = createSyncSnippetBuild<NumberInputDef, 'format'>('format', []);
+
 export class N2NumberTranslator extends SpecificWidgetTranslator<N2WidgetType.NUMBER> {
 	public getSupportedType(): N2WidgetType.NUMBER {
 		return N2WidgetType.NUMBER;
@@ -56,7 +58,7 @@ export class N2NumberTranslator extends SpecificWidgetTranslator<N2WidgetType.NU
 
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	public getAttributeValueBuilders(): Array<AttributeValueBuild<any>> {
-		return [TipAttachableBuild, ValueChangedBuild];
+		return [NumberInputFormatBuild, TipAttachableBuild, ValueChangedBuild];
 	}
 
 	public getValidationHandlerDetectives(): Array<MonitorHandlerDetective> {
@@ -117,7 +119,7 @@ export class N2DecorateNumberTranslator extends SpecificWidgetTranslator<N2Widge
 
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	public getAttributeValueBuilders(): Array<AttributeValueBuild<any>> {
-		return [DecorateLeadsBuild, DecorateTailsBuild, TipAttachableBuild, DecorateInputTipAttachableBuild, ValueChangedBuild];
+		return [NumberInputFormatBuild, DecorateLeadsBuild, DecorateTailsBuild, TipAttachableBuild, DecorateInputTipAttachableBuild, ValueChangedBuild];
 	}
 
 	public getValidationHandlerDetectives(): Array<MonitorHandlerDetective> {
