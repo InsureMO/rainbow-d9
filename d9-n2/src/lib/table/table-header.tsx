@@ -9,7 +9,6 @@ import {isNoneSortFromCycleOmitted} from './utils';
 import {ATableHeaderCell} from './widgets';
 
 export interface TableHeaderProps {
-	$pp: string;
 	headers: TableProps['headers'];
 	headerHeight: TableProps['headerHeight'];
 	sort?: TableProps['sort'];

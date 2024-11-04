@@ -112,7 +112,7 @@ export const TableContent = (props: Omit<TableProps, '$array'> & { $array: Enhan
 	})();
 
 	return <ATableContent headerHeight={headerHeight} maxBodyHeight={maxBodyHeight} columnsWidth={columnsWidth}>
-		<TableHeader $pp={$pp} headerHeight={headerHeight} headers={props.headers} sort={props.sort}
+		<TableHeader headerHeight={headerHeight} headers={props.headers} sort={props.sort}
 		             stickyOffsets={stickyOffsets}
 		             tailGrabberAppended={tailGrabberAppended}
 		             $wrapped={$wrapped}/>
