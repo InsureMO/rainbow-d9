@@ -32,10 +32,22 @@ const InternalN2Table = () => {
 	const def = useDemoMarkdown(DemoContent);
 	const {fire} = useBridgeEventBus();
 
+	const initExpandedComputed: Array<number> = [];
 	let originalNestedTables = DemoData.nestedTables;
 	const externalDefs = {
 		table1: {
 			initExpanded: (_: ObjectPropValue, index: number) => {
+				// this function is unstable, depends on table data
+				// in this case, table data is initialized, so use a computed array to store expanded index
+				// if table data is initialized from pagination, on different pages,
+				// the same index will appear multiple times, so only the first occurrence will be expanded.
+				// If you want each occurrence of the same index on every page to be expanded,
+				// you should remove the cache judgment.
+				// Therefore, the implementation of this function depends on the actual display requirements.index
+				if (initExpandedComputed.includes(index)) {
+					return false;
+				}
+				initExpandedComputed.push(index);
 				return index === 1;
 			},
 			sort: async (by: Array<SortedTableColumn>) => {
