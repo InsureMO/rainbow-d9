@@ -1,3 +1,4 @@
+import {useForceUpdate} from '@rainbow-d9/n1';
 import {useEffect, useRef, useState} from 'react';
 import {useWizardEventBus} from './event/wizard-event-bus';
 import {WizardEventTypes} from './event/wizard-event-bus-types';
@@ -17,14 +18,18 @@ export const useWizardStepActive = (stepIndex: number, marker: string, where: 't
 	const {on, off} = useWizardEventBus();
 	const activeCallbackIndicator = useRef<ActiveIndicator>({should: false});
 	const [state, setState] = useState<StepActiveState>({active: false, done: false, reachedIndex: -1});
+	const forceUpdate = useForceUpdate();
 	useEffect(() => {
 		if (activeCallbackIndicator.current.should) {
 			activeCallbackIndicator.current.should = false;
 			// noinspection JSIgnoredPromiseFromCall
 			activeCallbackIndicator.current.callback?.(where);
 			delete activeCallbackIndicator.current.callback;
+			// to update this side effect, since should in dependency is true, and value in ref is false now
+			// but react doesn't know it!
+			forceUpdate();
 		}
-	}, [activeCallbackIndicator.current.should, where]);
+	}, [activeCallbackIndicator.current.should, where, forceUpdate]);
 	useEffect(() => {
 		const onActiveStep = (givenTabIndex: number, givenMarker: string, reachedIndex: number, onActivated?: (where: 'title' | 'body' | 'share') => Promise<void>) => {
 			if (stepIndex === givenTabIndex || marker === givenMarker) {

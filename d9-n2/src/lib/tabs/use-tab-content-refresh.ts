@@ -18,8 +18,11 @@ export const useTabContentRefresh = (tabIndex: number, marker: string, where: 't
 			// noinspection JSIgnoredPromiseFromCall
 			refreshIndicator.current.callback?.(where);
 			delete refreshIndicator.current.callback;
+			// to update this side effect, since should in dependency is true, and value in ref is false now
+			// but react doesn't know it!
+			forceUpdate();
 		}
-	}, [refreshIndicator.current.should, where]);
+	}, [refreshIndicator.current.should, where, forceUpdate]);
 	useEffect(() => {
 		const onActiveTab = (givenTabIndex: number, givenMarker: string, onRefreshed?: (where: 'title' | 'body') => Promise<void>) => {
 			if (tabIndex === givenTabIndex || marker === givenMarker) {
