@@ -9,6 +9,7 @@ import {
 } from '@rainbow-d9/n1';
 import {MouseEvent, ReactNode} from 'react';
 import {ButtonClickOptions, ButtonDef} from '../button';
+import {GlobalHandlers} from '../global';
 import {PaginationDef} from '../pagination';
 import {ModelCarrier, OmitHTMLProps, OmitNodeDef} from '../types';
 
@@ -17,6 +18,8 @@ export interface TableHeaderDef extends Pick<NodeDef, '$key'> {
 	width: number | string;
 	/** index of {@link TableDef#$nodes}, used to render body cell */
 	index: number;
+	/** sortable or not, works when sort func provided */
+	sortKey?: string;
 }
 
 export type TableRowButtonDef = Omit<ButtonDef, 'click'> & {
@@ -34,8 +37,21 @@ export interface TablePaginationValueChangedOptions<R extends BaseModel, M exten
 }
 
 export type TablePaginationDef = Omit<PaginationDef, 'valueChanged'> & {
+	/**
+	 * if this function provided, means all table data are provided by this.
+	 * if not, means pagination in memory
+	 */
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	valueChanged?: <NV extends PropValue>(options: TablePaginationValueChangedOptions<BaseModel, PropValue, NV>, ...args: Array<any>) => void | Promise<void>;
+}
+
+export enum TableColumnSortType {
+	NONE, ASC, DESC
+}
+
+export interface SortedTableColumn {
+	key: string;
+	type: TableColumnSortType;
 }
 
 /** Table configuration definition */
@@ -62,7 +78,8 @@ export type TableDef = Omit<ArrayContainerDef, '$nodes'> & OmitHTMLProps<HTMLDiv
 	/** row operators */
 	rowOperators?: Array<TableRowButtonDef>;
 	pageable?: TablePaginationDef;
-	initExpanded?: <R extends BaseModel>(row: R, index: number) => boolean
+	initExpanded?: <R extends BaseModel>(row: R, index: number) => boolean;
+	sort?: (by: Array<SortedTableColumn>, options: ModelCarrier & { global: GlobalHandlers }) => Promise<void>;
 };
 
 /** Table widget definition, with html attributes */

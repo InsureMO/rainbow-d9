@@ -8,58 +8,44 @@ export enum TableEventTypes {
 	ROW_COLLAPSED = 'row-collapsed',
 	REMOVE_ROW = 'remove-row',
 
+	REMOVE_ALL_EXPANDING_BEFORE_PAGE_CHANGE = 'remove-all-expanding-before-page-change',
 	PAGE_CHANGED = 'page-changed',
 	PAGE_CHANGED_BY_FILTER = 'page-changed-by-filter',
 
-	FILTER_CHANGED = 'filter-changed'
+	FILTER_CHANGED = 'filter-changed',
+
+	SORT_CHANGED = 'sort-changed'
 }
 
 export interface TableEventBus {
 	fire(type: TableEventTypes.EXPAND_ROW, elementIndex: number): this;
-
 	on(type: TableEventTypes.EXPAND_ROW, listener: (elementIndex: number) => void): this;
-
 	off(type: TableEventTypes.EXPAND_ROW, listener: (elementIndex: number) => void): this;
-
 	fire(type: TableEventTypes.ROW_EXPANDED, elementIndex: number): this;
-
 	on(type: TableEventTypes.ROW_EXPANDED, listener: (elementIndex: number) => void): this;
-
 	off(type: TableEventTypes.ROW_EXPANDED, listener: (elementIndex: number) => void): this;
-
 	fire(type: TableEventTypes.COLLAPSE_ROW, elementIndex: number): this;
-
 	on(type: TableEventTypes.COLLAPSE_ROW, listener: (elementIndex: number) => void): this;
-
 	off(type: TableEventTypes.COLLAPSE_ROW, listener: (elementIndex: number) => void): this;
-
 	fire(type: TableEventTypes.ROW_COLLAPSED, elementIndex: number): this;
-
 	on(type: TableEventTypes.ROW_COLLAPSED, listener: (elementIndex: number) => void): this;
-
 	off(type: TableEventTypes.ROW_COLLAPSED, listener: (elementIndex: number) => void): this;
-
 	fire(type: TableEventTypes.REMOVE_ROW, elementIndex: number): this;
-
 	on(type: TableEventTypes.REMOVE_ROW, listener: (elementIndex: number) => void): this;
-
 	off(type: TableEventTypes.REMOVE_ROW, listener: (elementIndex: number) => void): this;
-
+	fire(type: TableEventTypes.REMOVE_ALL_EXPANDING_BEFORE_PAGE_CHANGE): this;
+	on(type: TableEventTypes.REMOVE_ALL_EXPANDING_BEFORE_PAGE_CHANGE, listener: () => void): this;
+	off(type: TableEventTypes.REMOVE_ALL_EXPANDING_BEFORE_PAGE_CHANGE, listener: () => void): this;
 	fire(type: TableEventTypes.PAGE_CHANGED, from: Nullable<PaginationData>, to: PaginationData): this;
-
 	on(type: TableEventTypes.PAGE_CHANGED, listener: (from: Nullable<PaginationData>, to: PaginationData) => void): this;
-
 	off(type: TableEventTypes.PAGE_CHANGED, listener: (from: Nullable<PaginationData>, to: PaginationData) => void): this;
-
 	fire(type: TableEventTypes.PAGE_CHANGED_BY_FILTER, pageable: PaginationData): this;
-
 	on(type: TableEventTypes.PAGE_CHANGED_BY_FILTER, listener: (pageable: PaginationData) => void): this;
-
 	off(type: TableEventTypes.PAGE_CHANGED_BY_FILTER, listener: (pageable: PaginationData) => void): this;
-
 	fire(type: TableEventTypes.FILTER_CHANGED): this;
-
 	on(type: TableEventTypes.FILTER_CHANGED, listener: () => void): this;
-
 	off(type: TableEventTypes.FILTER_CHANGED, listener: () => void): this;
+	fire(type: TableEventTypes.SORT_CHANGED): this;
+	on(type: TableEventTypes.SORT_CHANGED, listener: () => void): this;
+	off(type: TableEventTypes.SORT_CHANGED, listener: () => void): this;
 }

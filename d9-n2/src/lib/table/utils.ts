@@ -77,13 +77,16 @@ export const computeColumnsWidth = (props: Omit<TableProps, 'children'>) => {
 };
 
 export const DEFAULTS = {
-	OMIT_IN_CELL_INPUT_BORDER: false
+	OMIT_IN_CELL_INPUT_BORDER: false,
+	OMIT_NONE_SORT_FROM_CYCLE: true
 };
 
 export const setTableDefaults = (defaults: {
 	omitInCellInputBorder?: boolean;
+	omitNoneSortFromCycle?: boolean;
 }) => {
 	DEFAULTS.OMIT_IN_CELL_INPUT_BORDER = defaults.omitInCellInputBorder ?? DEFAULTS.OMIT_IN_CELL_INPUT_BORDER;
+	DEFAULTS.OMIT_NONE_SORT_FROM_CYCLE = defaults.omitNoneSortFromCycle ?? DEFAULTS.OMIT_NONE_SORT_FROM_CYCLE;
 };
 
 export const isInCellInputBorderOmitted = (): boolean => DEFAULTS.OMIT_IN_CELL_INPUT_BORDER;

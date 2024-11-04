@@ -6,9 +6,8 @@ import {
 	useBridgeEventBus,
 	ValueChangedNotification
 } from '@rainbow-d9/n1';
-import {$d9n2, GlobalRoot, PaginationData} from '@rainbow-d9/n2';
+import {$d9n2, GlobalRoot, PaginationData, SortedTableColumn, TableColumnSortType} from '@rainbow-d9/n2';
 import {nanoid} from 'nanoid';
-import {MutableRefObject, useRef} from 'react';
 import {CustomEventHandler} from '../custom-event-handler';
 import {N2DemoDialogHandler} from '../n2-dialog-handler';
 import {useDemoMarkdown} from '../use-demo-markdown';
@@ -33,20 +32,21 @@ const InternalN2Table = () => {
 	const def = useDemoMarkdown(DemoContent);
 	const {fire} = useBridgeEventBus();
 
-	const tableInitRef: MutableRefObject<Array<number>> = useRef([]);
+	let originalNestedTables = DemoData.nestedTables;
 	const externalDefs = {
 		table1: {
 			initExpanded: (_: ObjectPropValue, index: number) => {
-				if (tableInitRef.current.includes(index)) {
-					return false;
+				return index === 1;
+			},
+			sort: async (by: Array<SortedTableColumn>) => {
+				const [{type}] = by;
+				if (type === TableColumnSortType.ASC) {
+					originalNestedTables = [...DemoData.nestedTables];
+					DemoData.nestedTables = DemoData.nestedTables.sort((a, b) => a.columnA.localeCompare(b.columnA));
+				} else if (type === TableColumnSortType.DESC) {
+					DemoData.nestedTables = DemoData.nestedTables.sort((a, b) => b.columnA.localeCompare(a.columnA));
 				} else {
-					const expanded = index === 1;
-					if (expanded) {
-						tableInitRef.current.push(index);
-						return true;
-					} else {
-						return false;
-					}
+					DemoData.nestedTables = originalNestedTables;
 				}
 			}
 		},

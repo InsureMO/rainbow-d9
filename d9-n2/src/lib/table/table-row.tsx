@@ -107,6 +107,15 @@ export const TableRow = (props: TableRowProps) => {
 			}
 		}
 	}, [expanded]);
+	useEffect(() => {
+		const onRemoveAllExpandingBeforePageChange = () => {
+			setExpanded(false);
+		};
+		on(TableEventTypes.REMOVE_ALL_EXPANDING_BEFORE_PAGE_CHANGE, onRemoveAllExpandingBeforePageChange);
+		return () => {
+			off(TableEventTypes.REMOVE_ALL_EXPANDING_BEFORE_PAGE_CHANGE, onRemoveAllExpandingBeforePageChange);
+		};
+	}, [on, off]);
 
 	const onRowClicked = () => {
 		if (expandable && clickToExpand && !expanded) {
@@ -148,9 +157,11 @@ export const TableRow = (props: TableRowProps) => {
 		switch (true) {
 			case !expandable:
 				// no expand area
+				// noinspection com.intellij.reactbuddy.ArrayToJSXMapInspection
 				return [<>{classicCells}</>, null, 1, 1];
 			case !expanded:
 				// put after operators, grab all columns except the index column
+				// noinspection com.intellij.reactbuddy.ArrayToJSXMapInspection
 				return [
 					<>{classicCells}</>,
 					<ATableBodyCellExpandArea rowIndex={elementIndex} columnsCount={expandedAreaColumnCount + 1}
@@ -159,6 +170,7 @@ export const TableRow = (props: TableRowProps) => {
 					</ATableBodyCellExpandArea>, 1, 1];
 			case hideClassicCellsOnExpandable:
 				// replace classic cells, grab all columns, except the index column and operators column
+				// noinspection com.intellij.reactbuddy.ArrayToJSXMapInspection
 				return [
 					<ATableBodyCellExpandArea rowIndex={elementIndex} columnsCount={expandedAreaColumnCount}
 					                          expanded={expanded} ref={expandAreaRef}>
@@ -166,6 +178,7 @@ export const TableRow = (props: TableRowProps) => {
 					</ATableBodyCellExpandArea>,
 					null, 1, 1];
 			case !hideClassicCellsOnExpandable:
+				// noinspection com.intellij.reactbuddy.ArrayToJSXMapInspection
 				return [
 					<>{classicCells}</>,
 					<ATableBodyCellExpandArea rowIndex={elementIndex} columnsCount={expandedAreaColumnCount + 1}

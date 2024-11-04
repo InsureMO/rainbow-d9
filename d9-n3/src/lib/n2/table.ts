@@ -63,6 +63,8 @@ export const N2TableHeadersBuild: AttributeValueBuild<Array<BuiltTableHeaderDef>
 								} else {
 									attrs.width = value;
 								}
+							} else if (name === 'sortkey') {
+								attrs.sortKey = attributeValue.trim();
 							}
 							return attrs;
 						}, {} as Omit<TableHeaderDef, 'index'>);
@@ -100,6 +102,8 @@ export class N2TableRowOperatorsTranslator extends SpecificWidgetTranslator<N2Wi
 
 export const N2TableInitExpandedBuild =
 	createSyncSnippetBuild<TableDef, 'initExpanded'>('initExpanded', ['row', 'index']);
+export const N2TableSortBuild =
+	createSyncSnippetBuild<TableDef, 'sort'>('sort', ['row', 'index']);
 
 export class N2TableTranslator extends SpecificArrayWidgetTranslator<N2WidgetType.TABLE> {
 	public getSupportedType(): N2WidgetType.TABLE {
@@ -122,7 +126,8 @@ export class N2TableTranslator extends SpecificArrayWidgetTranslator<N2WidgetTyp
 	public getAttributeValueBuilders(): Array<AttributeValueBuild<any>> {
 		return [
 			...super.getAttributeValueBuilders(),
-			N2TableHeadersBuild, N2TableInitExpandedBuild];
+			N2TableHeadersBuild, N2TableInitExpandedBuild, N2TableSortBuild
+		];
 	}
 
 	protected isPendingHeaderLabel(label: BuiltTableHeaderDef['label']): label is PendingTableHeaderLabel {
@@ -151,7 +156,7 @@ export class N2TableTranslator extends SpecificArrayWidgetTranslator<N2WidgetTyp
 					} as PreparsedListItem
 				}, parseOptions);
 				if (success) {
-					return {label: node, width: header.width, index: header.index};
+					return {label: node, width: header.width, index: header.index, sortKey: header.sortKey};
 				} else {
 					return header;
 				}

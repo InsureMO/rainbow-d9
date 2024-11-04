@@ -55,6 +55,7 @@ export const TableBottomBar = (props: Omit<TableProps, '$array'> & { $array: Enh
 		const onPaginationChanged = async (options: {
 			oldValue?: Nullable<PaginationData>; newValue: PaginationData;
 		}) => {
+			fire(TableEventTypes.REMOVE_ALL_EXPANDING_BEFORE_PAGE_CHANGE);
 			fire(TableEventTypes.PAGE_CHANGED, options.oldValue, options.newValue);
 		};
 

@@ -20,12 +20,14 @@
 			- Caption::*::
 				- data-tip-body: return 'I am Column A.'
 		- width: 300
+		- sortKey: columnA
 	- Column B: 300
 	- Column C: 500
 	- Column D: 200
 	- Column E: 200
 	- Column F: 200
 	- Column G: 100
+- sort: @ext.table1.sort
 - Input::::columnA
 - Caption::::
 	- label: Say Hello to World

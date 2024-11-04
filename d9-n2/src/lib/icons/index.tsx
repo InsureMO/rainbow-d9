@@ -22,6 +22,9 @@ import {Plus} from './plus';
 import {IconsRegistrar as Registrar} from './registarar';
 import {Remove} from './remove';
 import {Search} from './search';
+import {SortAsc} from './sort-asc';
+import {SortDesc} from './sort-desc';
+import {SortNone} from './sort-none';
 import {Spinner} from './spinner';
 import {Time} from './time';
 import {Times} from './times';
@@ -33,7 +36,7 @@ export {
 	Back, Date, Time,
 	Check, Times, Remove, Expand, Collapse, Edit, View, Forward, Backward,
 	CaretLeft, CaretRight, CaretDown, ArrowDown, AngleLeft, AngleRight,
-	Spinner, Search, Plus, XMark,
+	Spinner, Search, Plus, XMark, SortAsc, SortDesc, SortNone,
 	Cart,
 
 	Registrar

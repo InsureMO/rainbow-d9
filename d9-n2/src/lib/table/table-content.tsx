@@ -36,13 +36,13 @@ export const TableContent = (props: Omit<TableProps, '$array'> & { $array: Enhan
 			return;
 		}
 
-		const shouldCallExternal = pageable.valueChanged != null;
+		const shouldFirePageableHandle = pageable.valueChanged != null;
 		/**
 		 * return true represents did call external and notify wrapper to repaint.
 		 * return false represents it did nothing
 		 */
-		const callExternal = async (from: Nullable<PaginationData>, to: PaginationData) => {
-			if (shouldCallExternal) {
+		const firePageableHandle = async (from: Nullable<PaginationData>, to: PaginationData) => {
+			if (shouldFirePageableHandle) {
 				await pageable.valueChanged({
 					root: $root, model: $model, $p2r, $pp,
 					absolutePath: PPUtils.absolute($p2r, pageable.$pp),
@@ -58,7 +58,7 @@ export const TableContent = (props: Omit<TableProps, '$array'> & { $array: Enhan
 		};
 		const onPageChanged = async (from: Nullable<PaginationData>, to: PaginationData) => {
 			// call external function to update data, and force update
-			if (!(await callExternal(from, to))) {
+			if (!(await firePageableHandle(from, to))) {
 				// data not changed, force update to filter out items for this page
 				forceUpdate();
 			}
@@ -66,7 +66,7 @@ export const TableContent = (props: Omit<TableProps, '$array'> & { $array: Enhan
 		const onFilterChanged = async () => {
 			const data = MUtils.getValue($model, pageable.$pp) as unknown as PaginationData;
 			// call external function to update data, and force update
-			if (!(await callExternal(data, data))) {
+			if (!(await firePageableHandle(data, data))) {
 				forceUpdate();
 				fire(TableEventTypes.PAGE_CHANGED_BY_FILTER, data);
 			}
@@ -82,10 +82,9 @@ export const TableContent = (props: Omit<TableProps, '$array'> & { $array: Enhan
 	const {columnsWidth, tailGrabberAppended, stickyOffsets} = computeColumnsWidth(props);
 
 	const hasPagination = pageable != null;
-	const isCallExternal = pageable?.valueChanged != null;
 	const shouldFilter = false;
 	const rows = (() => {
-		if (!hasPagination || isCallExternal) {
+		if (!hasPagination || pageable?.valueChanged != null) {
 			// no pagination or all data from external, only one page exists
 			if (shouldFilter) {
 				// TODO FILTER DATA, WILL NOT CHANGE PAGINATION DATA
@@ -113,7 +112,7 @@ export const TableContent = (props: Omit<TableProps, '$array'> & { $array: Enhan
 	})();
 
 	return <ATableContent headerHeight={headerHeight} maxBodyHeight={maxBodyHeight} columnsWidth={columnsWidth}>
-		<TableHeader headerHeight={headerHeight} headers={props.headers}
+		<TableHeader $pp={$pp} headerHeight={headerHeight} headers={props.headers} sort={props.sort}
 		             stickyOffsets={stickyOffsets}
 		             tailGrabberAppended={tailGrabberAppended}
 		             $wrapped={$wrapped}/>

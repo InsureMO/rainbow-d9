@@ -99,10 +99,10 @@ export const ATableHeaderCell = styled.div.attrs<{
 		return {
 			[DOM_KEY_WIDGET]: 'd9-table-header-cell',
 			style: {
-				height: toCssSize(headerHeight),
-				padding: isGrabber ? 0 : (void 0),
-				left: stickyOffset[1],
-				right: stickyOffset[2],
+				'--height': toCssSize(headerHeight),
+				'--padding': isGrabber ? 0 : `0 ${CssVars.TABLE_CELL_PADDING}`,
+				'--left': stickyOffset[1],
+				'--right': stickyOffset[2],
 				'--z-index': VUtils.isNotBlank(stickyOffset[2])
 					? 6
 					: (VUtils.isNotBlank(stickyOffset[1]) ? 5 : 4)
@@ -116,8 +116,11 @@ export const ATableHeaderCell = styled.div.attrs<{
     position: sticky;
     top: 0;
     align-items: center;
+    left: var(--left);
+    right: var(--right);
     min-height: ${CssVars.TABLE_HEADER_HEIGHT};
-    padding: 0 ${CssVars.TABLE_CELL_PADDING};
+    height: var(--height);
+    padding: var(--padding);
     border-bottom: ${CssVars.TABLE_HEADER_BORDER};
     background-color: ${CssVars.TABLE_HEADER_BACKGROUND_COLOR};
     font-family: ${CssVars.TABLE_HEADER_FONT_FAMILY};
@@ -126,6 +129,37 @@ export const ATableHeaderCell = styled.div.attrs<{
     overflow: hidden;
     white-space: nowrap;
     z-index: var(--z-index);
+
+    &:hover > span[data-role=sort] > svg,
+    &:hover > span[data-role=sort] > svg[data-icon=sort-none] {
+        color: ${CssVars.PRIMARY_COLOR};
+        opacity: 1;
+    }
+
+    > span[data-role=sort] {
+        display: flex;
+        position: absolute;
+        align-items: center;
+        justify-content: center;
+        top: calc((var(--height) - ${CssVars.INPUT_HEIGHT}) / 2);
+        right: 0;
+        width: ${CssVars.INPUT_HEIGHT};
+        height: ${CssVars.INPUT_HEIGHT};
+        cursor: pointer;
+        z-index: 1;
+
+
+        > svg {
+            width: calc(${CssVars.INPUT_HEIGHT} * 0.7);
+            height: calc(${CssVars.INPUT_HEIGHT} * 0.7);
+            opacity: 0.5;
+            transition: opacity ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION}, color ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION};
+
+            &[data-icon=sort-none] {
+                opacity: 0;
+            }
+        }
+    }
 `;
 // noinspection CssUnresolvedCustomProperty
 export const ATableBodyRowIndexCell = styled.div.attrs<{ rowIndex: number; rowSpan: number }>(
