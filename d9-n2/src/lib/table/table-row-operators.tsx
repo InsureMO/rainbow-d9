@@ -2,7 +2,6 @@ import {
 	BaseModel,
 	Enhance$WrappedPropsForArrayElement,
 	NUtils,
-	ObjectPropValue,
 	PropValue,
 	VUtils,
 	WrappedAttributes,
@@ -86,26 +85,19 @@ const CustomButton = (props: {
 };
 
 export const TableRowOperators = (props: {
-	expandable?: boolean; removable?: boolean;
+	expandable?: boolean; expanded: boolean; removable?: boolean;
 	rowIndex: number; rowSpan: number;
 	$wrapped: Enhance$WrappedPropsForArrayElement<Omit<TableProps, '$array'>>['$wrapped'];
 	omitDefaultRowOperators?: TableDef['omitDefaultRowOperators']; rowOperators: TableDef['rowOperators'];
-	initExpanded?: TableDef['initExpanded']
 }) => {
 	const {
-		expandable = false, removable = false, rowIndex, rowSpan,
+		expandable = false, expanded: initExpanded = false, removable = false, rowIndex, rowSpan,
 		$wrapped,
-		omitDefaultRowOperators = false, rowOperators,
-		initExpanded
+		omitDefaultRowOperators = false, rowOperators
 	} = props;
 
 	const {on, off, fire} = useTableEventBus();
-	const [expanded, setExpanded] = useState(() => {
-		if (initExpanded) {
-			return initExpanded($wrapped.$model as ObjectPropValue, rowIndex);
-		}
-		return false;
-	});
+	const [expanded, setExpanded] = useState(initExpanded);
 
 	useEffect(() => {
 		const onRowExpanded = (expandedRowIndex: number) => {

@@ -205,11 +205,10 @@ export const TableRow = (props: TableRowProps) => {
 			<span>{elementIndex + computeRowIndexOffset()}</span>
 		</ATableBodyRowIndexCell>
 		{classic}
-		<TableRowOperators expandable={expandable} removable={removable} rowIndex={elementIndex}
+		<TableRowOperators expandable={expandable} expanded={expanded} removable={removable} rowIndex={elementIndex}
 		                   rowSpan={operatorsRowSpan}
 		                   $wrapped={$wrapped}
-		                   omitDefaultRowOperators={omitDefaultRowOperators} rowOperators={rowOperators}
-		                   initExpanded={initExpanded}/>
+		                   omitDefaultRowOperators={omitDefaultRowOperators} rowOperators={rowOperators}/>
 		{expands}
 	</>;
 };
