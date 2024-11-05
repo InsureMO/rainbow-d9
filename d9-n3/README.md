@@ -1216,6 +1216,10 @@ Some examples:
 
 | Attribute Name   | Type     | Description                                                                                                                       |
 |------------------|----------|-----------------------------------------------------------------------------------------------------------------------------------|
+| please           | string   | Placeholder.                                                                                                                      |
+| clearable        | boolean  | Value can be cleared or not.                                                                                                      |
+| filterable       | boolean  | Options can be filter or not.                                                                                                     |
+| filterChanged    | function | Obtain additional matching options when filtering.<br/>Available for `Dropdown` and `MultiDropdown` only.                         |
 | sort, optionSort | text     | `- sort: asc`<br/>`- sort: desc`<br/>Value is case insensitive.                                                                   |
 | options          | various  |                                                                                                                                   |
 | couldSelect      | function | Returns false when given value cannot be chosen, otherwise it can.<br/>Available for `DropdownTree` and `MultiDropdownTree` only. |
@@ -1522,6 +1526,7 @@ Rib header default show row index (starts from 1). You can change it to hide thr
 | omitDefaultRowOperators      | boolean, `remove`, `fold` | `- omitDefaultRowOperators: true`: omit all default row operators,<br/>`- omitDefaultRowOperators: remove`: omit default remove row operator,<br/>`- omitDefaultRowOperators: fold`: omit default fold row operator. |
 | RowOperators                 | various                   |                                                                                                                                                                                                                      |
 | initExpanded                 | function                  |                                                                                                                                                                                                                      |
+| sort                         | function                  | Sorting function, used in conjunction with the sortKeys specified on the headers columns.                                                                                                                            |
 | noElementReminder            | text                      | `- noElementReminder: No Data`                                                                                                                                                                                       |
 | addable                      | boolean                   | `- !addable`<br/>Not available for `RibsView`.                                                                                                                                                                       |
 | addLabel                     | text                      | `- addLabel: Create New One`                                                                                                                                                                                         |
@@ -1565,6 +1570,8 @@ The definition of table column headers is very simple, just look at an example t
 ```
 
 > `column.label` follows the `label` default parsing behavior.
+
+> `column.sortKey` specifies sortable columns; columns not specified are considered non-sortable.
 
 ### Syntax of `omitDefaultRowOperators`, `RowOperators`
 
