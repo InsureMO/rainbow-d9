@@ -20,7 +20,9 @@ export const TableProperties: Array<PlaygroundWidgetProperty> = [
 		name: 'omitDefaultRowOperators',
 		label: 'Boolean, Text.',
 		description: 'True to omit the remove, expand, collapse row operators. Or "remove" to omit remove only, "fold" to omit expand and collapse.'
-	}
+	},
+	{name: 'initExpanded', label: 'Snippet.', description: 'Check row is expanded or not on initializing.'},
+	{name: 'sort', label: 'Snippet.', description: 'Sorting function.'}
 ];
 
 export const TABLE = [

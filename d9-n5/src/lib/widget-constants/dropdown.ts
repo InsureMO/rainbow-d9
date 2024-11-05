@@ -3,6 +3,7 @@ import {PlaygroundIcons} from '../icons';
 import {PlaygroundWidgetGroupKey, PlaygroundWidgetProperty} from '../types';
 import {
 	Clearable,
+	Filterable,
 	OptionItemsProperties,
 	Please,
 	ValidationLength,
@@ -12,7 +13,7 @@ import {
 
 export const DropdownProperties: Array<PlaygroundWidgetProperty> = [
 	...OptionItemsProperties,
-	Please, Clearable,
+	Please, Clearable, Filterable,
 	{name: 'maxWidth', label: 'Number.', description: 'Max popup width, in pixels.'}
 ];
 

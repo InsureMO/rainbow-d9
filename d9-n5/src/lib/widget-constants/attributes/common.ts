@@ -12,6 +12,11 @@ export const InputPlaceholder: PlaygroundWidgetProperty = {
 	label: 'Text. Placeholder when no content.'
 };
 export const Please: PlaygroundWidgetProperty = {name: 'please', label: 'Text. Placeholder.'};
+export const Filterable: PlaygroundWidgetProperty = {
+	name: 'filterable',
+	label: 'Boolean.',
+	description: 'Default true.'
+};
 export const Clearable: PlaygroundWidgetProperty = {name: 'clearable', label: 'Boolean.', description: 'Default true.'};
 export const Click: PlaygroundWidgetProperty = {name: 'click', label: 'Snippet.', description: 'Handle click event.'};
 export const Ink: PlaygroundWidgetProperty = {

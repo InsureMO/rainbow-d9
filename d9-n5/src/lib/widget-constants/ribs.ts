@@ -8,7 +8,9 @@ export const RibsProperties: Array<PlaygroundWidgetProperty> = [
 	{
 		name: 'useSectionStyleIcons', label: 'Boolean.',
 		description: 'Use section style icons for expanding and collapsing.'
-	}
+	},
+	{name: 'showRowIndex', label: 'Boolean.', description: 'Show row index or not.'},
+	{name: 'initExpanded', label: 'Snippet.', description: 'Check row is expanded or not on initializing.'}
 ];
 
 export const RIBS: Array<PlaygroundWidget> = [
