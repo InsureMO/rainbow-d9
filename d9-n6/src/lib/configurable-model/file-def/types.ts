@@ -8,6 +8,7 @@ export interface PipelineFileDefModel extends FileDefModel, Omit<PipelineFileDef
 	type: PipelineFileDef['type'];
 	api: boolean;
 	temporary?: {
+		roles?: Array<string>;
 		headers?: string;
 		pathParams?: string;
 		queryParams?: string;

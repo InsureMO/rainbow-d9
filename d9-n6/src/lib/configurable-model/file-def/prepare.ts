@@ -16,6 +16,7 @@ export const prepare: FileNodeConfigurer['prepare'] = (def: FileDef): Configurab
 		if (VUtils.isNotBlank(pipeline.route)) {
 			// api
 			pipelineModel.api = true;
+			pipelineModel.authorizations = pipeline.authorizations;
 			pipelineModel.route = pipeline.route;
 			pipelineModel.method = pipeline.method;
 			pipelineModel.headers = pipeline.headers;

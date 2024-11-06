@@ -1,3 +1,4 @@
+import {markdown as pipelineAuthorizations} from './authorizations.md';
 import {markdown as pipelineBody} from './body.md';
 import {markdown as pipelineCode} from './code.md';
 import {markdown as pipelineEnabled} from './enabled.md';
@@ -17,7 +18,7 @@ export const docs = {
 	pipeline,
 	pipelineCode, pipelineEnabled, pipelineType,
 	pipelineInitOnly,
-	pipelineRoute, pipelineMethod, pipelineHeaders, pipelinePathParams, pipelineQueryParams,
+	pipelineRoute, pipelineAuthorizations, pipelineMethod, pipelineHeaders, pipelinePathParams, pipelineQueryParams,
 	pipelineBody, pipelineFiles,
 	pipelineExposeFile, pipelineExposeHeaders
 };

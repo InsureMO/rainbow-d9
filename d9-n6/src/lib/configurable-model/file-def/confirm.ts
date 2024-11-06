@@ -51,6 +51,7 @@ export const confirm: FileNodeConfigurer['confirm'] = (model: ConfigurableModel,
 	if (isPipelineDef(def)) {
 		const editedDef = edited as PipelineFileDefModel;
 		if (editedDef.api === true) {
+			def.authorizations = editedDef.authorizations;
 			def.route = editedDef.route;
 			def.method = editedDef.method;
 			def.headers = editedDef.headers;

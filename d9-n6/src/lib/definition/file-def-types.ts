@@ -58,6 +58,7 @@ export interface ApiMultipleNamedFiles extends ApiFileValidator {
 }
 
 export interface ApiPipelineFileDef {
+	authorizations?: string | Array<string>;
 	route: string;
 	method: 'get' | 'post' | 'patch' | 'delete' | 'put';
 	headers?: Array<string> | true;
@@ -76,6 +77,6 @@ export interface ApiPipelineFileDef {
 	exposeFile?: boolean;
 }
 
-export const KeysOfApiPipeline = ['route', 'method', 'headers', 'pathParams', 'queryParams', 'body', 'files', 'exposeHeaders', 'exposeFile'];
+export const KeysOfApiPipeline = ['authorizations', 'route', 'method', 'headers', 'pathParams', 'queryParams', 'body', 'files', 'exposeHeaders', 'exposeFile'];
 export const KeysOfNonApiPipeline = ['initOnly'];
 export const KeysOfPipeline = ['code', 'type', 'enabled', ...KeysOfApiPipeline, ...KeysOfNonApiPipeline, 'steps', '$diagram'];

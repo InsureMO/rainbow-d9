@@ -32,6 +32,7 @@ export const Labels = {
 	PipelineTypeStep: <IntlLabel keys={['o23', 'pipeline', 'step']} value="Step"/>,
 
 	// api attribute labels
+	ApiAuthorizationsLabel: <IntlLabel keys={['o23', 'parameter', 'api-authorizations']} value="Authorizations"/>,
 	ApiRouteLabel: <IntlLabel keys={['o23', 'parameter', 'api-route']} value="Route"/>,
 	ApiRequestLabel: <IntlLabel keys={['o23', 'parameter', 'api-request']} value="Request"/>,
 	ApiMethodLabel: <IntlLabel keys={['o23', 'parameter', 'api-method']} value="Method"/>,
@@ -45,6 +46,10 @@ export const Labels = {
 	ApiExposeFileLabel: <IntlLabel keys={['o23', 'parameter', 'api-expose-file']} value="Expose File"/>,
 	ExecuteOnInitLabel: <IntlLabel keys={['o23', 'parameter', 'execute-on-init']} value="Execute on Initializing"/>,
 	// api attribute configuration labels
+	NoAuth: <IntlLabel keys={['o23', 'parameter', 'no-auth']} value="No Auth"/>,
+	AuthAnonymous: <IntlLabel keys={['o23', 'parameter', 'auth-anonymous']} value="Anonymous"/>,
+	AuthAuthenticated: <IntlLabel keys={['o23', 'parameter', 'auth-authenticated']} value="Authenticated"/>,
+	AuthRoles: <IntlLabel keys={['o23', 'parameter', 'auth-roles']} value="Roles"/>,
 	ParameterNames: <IntlLabel keys={['o23', 'parameter', 'names']} value="Names"/>,
 	BodyFollowHttpMethod: <IntlLabel keys={['o23', 'pipeline', 'body', 'follow-http-method']}
 	                                 value="Follow method default"/>,

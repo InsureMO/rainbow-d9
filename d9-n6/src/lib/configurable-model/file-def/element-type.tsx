@@ -5,6 +5,7 @@ import {ConfigurableElement, ConfigurableElementBadgeMissed, ConfigurableElement
 import {HelpDocs} from '../../help-docs';
 import {Labels} from '../../labels';
 import {CommonElementEditorStyles} from '../common';
+import {elementAuthorizations} from './element-authorizations';
 import {elementInitOnly} from './element-init-only';
 import {elementRequest} from './element-request';
 import {elementResponse} from './element-response';
@@ -54,5 +55,5 @@ export const elementType: ConfigurableElement = {
 		                          clearable={false} style={CommonElementEditorStyles.dropdown}/>;
 	},
 	helpDoc: HelpDocs.pipelineType,
-	children: [elementInitOnly, elementRoute, elementRequest, elementResponse]
+	children: [elementInitOnly, elementRoute, elementAuthorizations, elementRequest, elementResponse]
 };

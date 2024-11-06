@@ -33,6 +33,8 @@ as an API includes all standard HTTP protocol elements:
 	- To facilitate the definition and parsing of data contained in the `route`, you can use `pathParams` for definition. `pathParams` can
 	  be a list of parameters, or you can use `true` to define receiving all valid path parameters. Please note that the definition of path
 	  parameters must conform to the [nestjs](https://docs.nestjs.com/controllers#route-parameters) standard.
+- `authorizations`, a list of authorizations required to access the API. It can remain unset, be anonymous, authenticated only, or be
+  assigned a set of role codes.
 - `method`, supporting `get`, `post`, `put`, `patch`, and `delete`,
 - `headers`, a list of headers that need to be parsed, or `true` to parse all headers,
 - `queryParams`, a list of query parameters that need to be parsed, or `true` to parse all query parameters,

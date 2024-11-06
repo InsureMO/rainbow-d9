@@ -99,7 +99,7 @@ export class YamlDefSaver extends FileDefSerializer {
 		try {
 			const leadIndexes = [
 				'code', 'type', 'init-only', 'enabled',
-				'route', 'method', 'headers', 'path-params', 'query-params', 'body', 'files', 'expose-headers', 'expose-file',
+				'route', 'authorizations', 'method', 'headers', 'path-params', 'query-params', 'body', 'files', 'expose-headers', 'expose-file',
 				'name', 'use', 'from-input',
 				'datasource', 'transaction', 'autonomous',
 				'check', 'routes', 'steps', 'otherwise'
