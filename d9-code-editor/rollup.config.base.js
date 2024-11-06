@@ -59,17 +59,9 @@ export const buildConfig = (lint) => {
 		external: [
 			'typescript',
 			'react', 'react-dom', 'styled-components',
-			'nanoid', 'color', 'js-yaml',
-			'react-markdown', 'remark-gfm',
-			'github-markdown-css/github-markdown.css',
-			'react-syntax-highlighter', 'react-syntax-highlighter/dist/esm/styles/prism',
-			'@projectstorm/geometry',
-			'@projectstorm/react-diagrams-defaults', '@projectstorm/react-diagrams-routing',
-			'@projectstorm/react-canvas-core', '@projectstorm/react-diagrams-core', '@projectstorm/react-diagrams',
-			'dom-to-image',
 			'@codemirror/commands', '@codemirror/lint', '@codemirror/state',
 			'@codemirror/view', '@codemirror/autocomplete', 'codemirror',
-			'@codemirror/language', '@codemirror/lang-javascript', '@codemirror/lang-sql',
+			'@codemirror/language', '@codemirror/lang-javascript',
 			'@rainbow-d9/n1', '@rainbow-d9/n2', '@rainbow-d9/n3', '@rainbow-d9/ts-vfs'
 		]
 	};

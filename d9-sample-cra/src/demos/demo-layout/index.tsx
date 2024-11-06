@@ -1,3 +1,4 @@
+import {CodeEditors, CodeEditorsData, CodeEditorsMarkdown} from '../code-editor';
 import {ECharts, EChartsData, EChartsMarkdown} from '../echarts';
 import {N2ArrayPanel, N2ArrayPanelData, N2ArrayPanelMarkdown} from '../n2-array-panel';
 import {N2BasicWidgets, N2BasicWidgetsData, N2BasicWidgetsMarkdown} from '../n2-basic-widgets';
@@ -35,6 +36,10 @@ export const Demos = [
 	{path: '/n2-intl', label: '8. N2 Internationalization', C: N2Intl, data: N2IntlData, markdown: N2IntlMarkdown},
 	{path: '/n2-tree', label: '9. N2 Tree', C: N2Tree, data: N2TreeData, markdown: N2TreeMarkdown},
 	{path: '/echarts', label: '10. ECharts', C: ECharts, data: EChartsData, markdown: EChartsMarkdown},
+	{
+		path: '/code-editors', label: '11. Code Editors',
+		C: CodeEditors, data: CodeEditorsData, markdown: CodeEditorsMarkdown
+	},
 	{
 		path: '/thai-plan-selection', label: '100. ThaiCloud Plan Selection',
 		C: ThaiPlanSelection, data: ThaiPlanSelectionData, markdown: ThaiPlanSelectionMarkdown

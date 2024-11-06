@@ -5,6 +5,7 @@
 	"type": "module",
 	"dependencies": {
 		"@babel/plugin-proposal-private-property-in-object": "^7.21.11",
+		"@rainbow-d9/code-editor": "1.2.17",
 		"@rainbow-d9/echarts": "1.2.17",
 		"@rainbow-d9/n2": "1.2.17",
 		"@rainbow-d9/n3": "1.2.17",

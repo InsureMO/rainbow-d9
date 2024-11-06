@@ -2845,11 +2845,6 @@
   resolved "https://registry.yarnpkg.com/@ungap/structured-clone/-/structured-clone-1.2.0.tgz#756641adb587851b5ccb3e095daf27ae581c8406"
   integrity sha512-zuVdFrMJiuCDQUMCzQaD6KL28MjnqqN8XnAqiEq9PNm/hCPTSGfrXCOfwj1ow4LFb/tNymJPwsNbVePc1xFqrQ==
 
-"@valtown/codemirror-ts@^2.2.0":
-  version "2.2.0"
-  resolved "https://registry.yarnpkg.com/@valtown/codemirror-ts/-/codemirror-ts-2.2.0.tgz#99b7a386c95cb4a4f93df9c8370845d1d389e49d"
-  integrity sha512-p5PDt/T2rz83w6QoFQj8N0ojgfNIk/48k9u7VoyTyeBMZSz+kSHB00sKOFZ+OjCrUbl3cyGAmn/u+MInIxmfMQ==
-
 "@vitejs/plugin-react@^4.3.1":
   version "4.3.1"
   resolved "https://registry.yarnpkg.com/@vitejs/plugin-react/-/plugin-react-4.3.1.tgz#d0be6594051ded8957df555ff07a991fb618b48e"
