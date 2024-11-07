@@ -39,6 +39,7 @@ exports.buildConfig = (lint) => {
 				'fs', 'path', 'child_process',
 				'chalk', 'fs-extra', 'prompts', 'validate-npm-package-name'
 			].includes(id);
-		}
+		},
+		strictDeprecations: true
 	};
 };

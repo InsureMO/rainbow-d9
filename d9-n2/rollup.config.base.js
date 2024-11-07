@@ -27,6 +27,7 @@ export const buildConfig = (lint) => {
 				defaultHandler(warning);
 			}
 		},
-		external: ['react', 'react-dom', 'styled-components', 'color', 'dayjs', 'imask', 'react-imask', '@rainbow-d9/n1']
+		external: ['react', 'react-dom', 'styled-components', 'color', 'dayjs', 'imask', 'react-imask', '@rainbow-d9/n1'],
+		strictDeprecations: true
 	};
 };

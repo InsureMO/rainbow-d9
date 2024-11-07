@@ -103,7 +103,8 @@ export default ({mode}) => {
 							id.includes('node_modules') ? {name: 'vendor'} : null
 						].filter(found => found != null)[0]?.name;
 					}
-				}
+				},
+				strictDeprecations: true
 			}
 		}
 	})

@@ -30,6 +30,7 @@ export const buildConfig = (lint) => {
 		external: [
 			'react', 'styled-components', 'nanoid', 'color',
 			'@rainbow-d9/n1', '@rainbow-d9/n2', '@rainbow-d9/n3'
-		]
+		],
+		strictDeprecations: true
 	};
 };

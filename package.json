@@ -47,7 +47,7 @@
 		"build-all-ci": "yarn build-ts-vfs-ci && yarn build-n123-ci && yarn build-n5-ci && yarn build-n6-ci && yarn build-code-editor-ci && yarn build-echarts-ci && yarn build-thai-all-ci && yarn build-npx-ci"
 	},
 	"volta": {
-		"node": "22.2.0",
+		"node": "22.11.0",
 		"yarn": "1.22.21"
 	}
 }

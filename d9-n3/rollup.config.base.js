@@ -33,6 +33,7 @@ export const buildConfig = (lint) => {
 			'micromark-extension-frontmatter', 'micromark-extension-gfm-footnote', 'micromark-extension-gfm-strikethrough',
 			'micromark-extension-gfm-table', 'micromark-extension-gfm-task-list-item',
 			'@rainbow-d9/n1', '@rainbow-d9/n2'
-		]
+		],
+		strictDeprecations: true
 	};
 };

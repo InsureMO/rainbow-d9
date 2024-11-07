@@ -58,6 +58,7 @@ export const buildConfig = (lint) => {
 			'react', 'react-dom', 'styled-components',
 			'@codemirror/view', '@codemirror/state', '@codemirror/language', '@codemirror/lint', '@codemirror/autocomplete',
 			'comlink'
-		]
+		],
+		strictDeprecations: true
 	};
 };

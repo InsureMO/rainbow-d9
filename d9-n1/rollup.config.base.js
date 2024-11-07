@@ -26,6 +26,7 @@ export const buildConfig = (lint) => {
 				defaultHandler(warning);
 			}
 		},
-		external: ['react', 'react-dom', 'events', 'nanoid', 'buffer']
+		external: ['react', 'react-dom', 'events', 'nanoid', 'buffer'],
+		strictDeprecations: true
 	};
 };

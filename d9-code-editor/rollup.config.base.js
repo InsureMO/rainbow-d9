@@ -63,6 +63,7 @@ export const buildConfig = (lint) => {
 			'@codemirror/view', '@codemirror/autocomplete', 'codemirror',
 			'@codemirror/language', '@codemirror/lang-javascript',
 			'@rainbow-d9/n1', '@rainbow-d9/n2', '@rainbow-d9/n3', '@rainbow-d9/ts-vfs'
-		]
+		],
+		strictDeprecations: true
 	};
 };
