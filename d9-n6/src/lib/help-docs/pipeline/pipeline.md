@@ -59,6 +59,10 @@ A pipeline always includes at least one step, and its behavior is entirely deter
 A pipeline also has a special property `initOnly`, which if declared as `true`, indicates that this pipeline will only be
 executed when the application starts, and the application will not provide any parameters during execution.
 
+A pipeline can be defined as a scheduled execution, utilizing the `schedule` attribute, following the Cron standard. Scheduled execution and
+initial execution are mutually exclusive; if a pipeline has already been defined for initial execution only, it cannot then be defined for
+scheduled execution.
+
 ## Step set
 
 Step set, as the name suggests, can define a set of steps. They can also define how their built-in steps are executed, typically in the

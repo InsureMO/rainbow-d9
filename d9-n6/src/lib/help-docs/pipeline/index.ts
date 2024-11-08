@@ -12,6 +12,7 @@ import {markdown as pipelinePathParams} from './path-params.md';
 import {markdown as pipeline} from './pipeline.md';
 import {markdown as pipelineQueryParams} from './query-params.md';
 import {markdown as pipelineRoute} from './route.md';
+import {markdown as pipelineSchedule} from './schedule.md';
 import {markdown as pipelineType} from './type.md';
 
 export const docs = {
@@ -20,5 +21,6 @@ export const docs = {
 	pipelineInitOnly,
 	pipelineRoute, pipelineAuthorizations, pipelineMethod, pipelineHeaders, pipelinePathParams, pipelineQueryParams,
 	pipelineBody, pipelineFiles,
-	pipelineExposeFile, pipelineExposeHeaders
+	pipelineExposeFile, pipelineExposeHeaders,
+	pipelineSchedule
 };

@@ -10,6 +10,7 @@ import {elementInitOnly} from './element-init-only';
 import {elementRequest} from './element-request';
 import {elementResponse} from './element-response';
 import {elementRoute} from './element-route';
+import {elementSchedule} from './element-schedule';
 import {ANCHOR_TYPE} from './helper';
 import {FileDefModel, PipelineFileDefModel} from './types';
 
@@ -55,5 +56,5 @@ export const elementType: ConfigurableElement = {
 		                          clearable={false} style={CommonElementEditorStyles.dropdown}/>;
 	},
 	helpDoc: HelpDocs.pipelineType,
-	children: [elementInitOnly, elementRoute, elementAuthorizations, elementRequest, elementResponse]
+	children: [elementInitOnly, elementSchedule, elementRoute, elementAuthorizations, elementRequest, elementResponse]
 };

@@ -45,6 +45,7 @@ export const Labels = {
 	ApiExposeHeadersLabel: <IntlLabel keys={['o23', 'parameter', 'api-expose-headers']} value="Expose Headers"/>,
 	ApiExposeFileLabel: <IntlLabel keys={['o23', 'parameter', 'api-expose-file']} value="Expose File"/>,
 	ExecuteOnInitLabel: <IntlLabel keys={['o23', 'parameter', 'execute-on-init']} value="Execute on Initializing"/>,
+	ScheduleLabel: <IntlLabel keys={['o23', 'parameter', 'schedule']} value="Schedule by CRON"/>,
 	// api attribute configuration labels
 	NoAuth: <IntlLabel keys={['o23', 'parameter', 'no-auth']} value="No Auth"/>,
 	AuthAnonymous: <IntlLabel keys={['o23', 'parameter', 'auth-anonymous']} value="Anonymous"/>,

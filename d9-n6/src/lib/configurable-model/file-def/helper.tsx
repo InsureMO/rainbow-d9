@@ -23,6 +23,8 @@ export const allOrArray = (value?: null | true | Array<string>) => {
 };
 
 export const ANCHOR_TYPE = 'type';
+export const ANCHOR_INIT_ONLY = 'init-only';
+export const ANCHOR_SCHEDULE = 'schedule';
 export const ANCHOR_ROUTE = 'route';
 export const ANCHOR_PATH_PARAMS = 'path-params';
 

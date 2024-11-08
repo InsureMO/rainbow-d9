@@ -64,6 +64,11 @@ export const confirm: FileNodeConfigurer['confirm'] = (model: ConfigurableModel,
 			deleteNonApiAttrs(def);
 		} else {
 			def.initOnly = editedDef.initOnly === true;
+			if (def.initOnly === true || VUtils.isBlank(editedDef.schedule)) {
+				delete def.schedule;
+			} else {
+				def.schedule = (editedDef.schedule || '').trim();
+			}
 			deleteApiAttrs(def);
 		}
 		if (!VUtils.isBlank((def as unknown as PipelineStepUseDef).use)) {

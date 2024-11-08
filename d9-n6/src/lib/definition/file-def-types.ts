@@ -33,7 +33,7 @@ export interface PipelineStepSetsFileDef extends FileDef, PipelineStepUseDef {
 	type: 'step-sets';
 }
 
-export interface PipelineFileDef extends FileDef, ApiPipelineFileDef {
+export interface PipelineFileDef extends FileDef, ApiPipelineFileDef, SchedulePipelineFileDef {
 	type: 'pipeline';
 	initOnly?: boolean;
 	steps: Array<PipelineStepDef>;
@@ -77,6 +77,11 @@ export interface ApiPipelineFileDef {
 	exposeFile?: boolean;
 }
 
+export interface SchedulePipelineFileDef {
+	schedule?: string;
+}
+
 export const KeysOfApiPipeline = ['authorizations', 'route', 'method', 'headers', 'pathParams', 'queryParams', 'body', 'files', 'exposeHeaders', 'exposeFile'];
-export const KeysOfNonApiPipeline = ['initOnly'];
+export const KeysOfSchedulePipeline = ['schedule'];
+export const KeysOfNonApiPipeline = ['initOnly', 'schedule'];
 export const KeysOfPipeline = ['code', 'type', 'enabled', ...KeysOfApiPipeline, ...KeysOfNonApiPipeline, 'steps', '$diagram'];

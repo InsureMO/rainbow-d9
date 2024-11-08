@@ -87,6 +87,9 @@ export const prepare: FileNodeConfigurer['prepare'] = (def: FileDef): Configurab
 		} else {
 			pipelineModel.api = false;
 			pipelineModel.initOnly = pipeline.initOnly;
+			if (pipelineModel.initOnly !== true) {
+				pipelineModel.schedule = pipeline.schedule;
+			}
 		}
 	}
 	return model;
