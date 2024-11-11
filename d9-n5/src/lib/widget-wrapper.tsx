@@ -1,12 +1,12 @@
 import {NodeDef, WidgetProps} from '@rainbow-d9/n1';
-import {DOM_KEY_WIDGET} from '@rainbow-d9/n2';
+import {DOM_KEY_WIDGET, SDP} from '@rainbow-d9/n2';
 import {NodeDefExt} from '@rainbow-d9/n3';
 import React, {ReactNode, useEffect, useRef} from 'react';
 import styled from 'styled-components';
 import {PlaygroundEventTypes, usePlaygroundEventBus} from './playground-event-bus';
 
 export const PLAYGROUND_WIDGET_WRAPPER = 'PWW';
-const WidgetWrapperAnchor = styled.span.attrs({[DOM_KEY_WIDGET]: 'd9-playground-widget-wrapper-anchor'})`
+const WidgetWrapperAnchor = styled.span.attrs<SDP>({[DOM_KEY_WIDGET]: 'd9-playground-widget-wrapper-anchor'})`
     display: none;
 `;
 export const PlaygroundWidgetWrapper = (props: NodeDef & NodeDefExt & WidgetProps & { children: ReactNode }) => {

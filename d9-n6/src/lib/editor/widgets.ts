@@ -1,9 +1,10 @@
-import {CssVars, DOM_KEY_WIDGET, Utils} from '@rainbow-d9/n2';
+import {CssVars, DOM_KEY_WIDGET, SDP, Utils} from '@rainbow-d9/n2';
+import {CSSProperties} from 'react';
 import styled from 'styled-components';
 import {PlaygroundCssVars} from '../widgets';
 
 // noinspection CssUnusedSymbol
-export const EditorWrapper = styled.div.attrs({
+export const EditorWrapper = styled.div.attrs<SDP>({
 	[DOM_KEY_WIDGET]: 'o23-playground-editor', 'data-v-scroll': '', 'data-h-scroll': ''
 })`
     display: block;
@@ -38,7 +39,7 @@ export const EditorWrapper = styled.div.attrs({
     }
 `;
 // noinspection CssUnusedSymbol
-export const BackendCanvasWrapper = styled.div.attrs({[DOM_KEY_WIDGET]: 'o23-playground-backend-canvas'})`
+export const BackendCanvasWrapper = styled.div.attrs<SDP>({[DOM_KEY_WIDGET]: 'o23-playground-backend-canvas'})`
     display: block;
     position: absolute;
     width: 100%;
@@ -70,7 +71,7 @@ export const FrontendCanvasWrapper = styled.div.attrs<{
 			'--canvas-width': Utils.toCssSize(canvasWidth),
 			'--canvas-height': Utils.toCssSize(canvasHeight),
 			'--canvas-zoom': canvasZoom ?? 1
-		}
+		} as CSSProperties
 	};
 })<{ canvasWidth?: number | string; canvasHeight?: number | string; canvasZoom?: number }>`
     display: block;
@@ -86,7 +87,7 @@ export const FrontendCanvasWrapper = styled.div.attrs<{
         height: 100%;
     }
 `;
-export const NodeLocatorNeedle = styled.div.attrs({[DOM_KEY_WIDGET]: 'o23-playground-editor-node-locator'})`
+export const NodeLocatorNeedle = styled.div.attrs<SDP>({[DOM_KEY_WIDGET]: 'o23-playground-editor-node-locator'})`
     display: block;
     position: fixed;
     top: 0;
@@ -101,7 +102,7 @@ export const EditorToolbar = styled.div.attrs<{ columns: number }>(({columns}) =
 		[DOM_KEY_WIDGET]: 'o23-playground-editor-toolbar',
 		style: {
 			'--grid-columns': columns
-		}
+		} as CSSProperties
 	};
 })<{ columns: number }>`
     display: grid;
@@ -143,7 +144,7 @@ export const EditorToolbar = styled.div.attrs<{ columns: number }>(({columns}) =
         grid-column: 1 / span var(--grid-columns);
     }
 `;
-export const EditorToolbarButton = styled.span.attrs({[DOM_KEY_WIDGET]: 'o23-playground-editor-toolbar-button'})`
+export const EditorToolbarButton = styled.span.attrs<SDP>({[DOM_KEY_WIDGET]: 'o23-playground-editor-toolbar-button'})`
     display: flex;
     position: relative;
     align-items: center;
@@ -173,7 +174,7 @@ export const EditorToolbarButton = styled.span.attrs({[DOM_KEY_WIDGET]: 'o23-pla
         }
     }
 `;
-export const EditorToolbarToc = styled.div.attrs({[DOM_KEY_WIDGET]: 'o23-playground-editor-toolbar-toc'})`
+export const EditorToolbarToc = styled.div.attrs<SDP>({[DOM_KEY_WIDGET]: 'o23-playground-editor-toolbar-toc'})`
     display: grid;
     position: relative;
     grid-template-columns: 1fr;
@@ -183,7 +184,7 @@ export const EditorToolbarToc = styled.div.attrs({[DOM_KEY_WIDGET]: 'o23-playgro
     transition: border-color ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION};
     overflow: hidden;
 `;
-export const EditorToolbarTocButton = styled.span.attrs({[DOM_KEY_WIDGET]: 'o23-playground-editor-toolbar-toc-button'})`
+export const EditorToolbarTocButton = styled.span.attrs<SDP>({[DOM_KEY_WIDGET]: 'o23-playground-editor-toolbar-toc-button'})`
     display: flex;
     position: relative;
     align-items: center;
@@ -209,7 +210,7 @@ export const EditorToolbarTocContainer = styled.div.attrs<{ buttons: number }>((
 		'data-h-scroll': '',
 		style: {
 			'--buttons': buttons
-		}
+		} as CSSProperties
 	};
 })<{ buttons: number }>`
     display: flex;
@@ -238,7 +239,7 @@ export const EditorToolbarTocContainer = styled.div.attrs<{ buttons: number }>((
         }
     }
 `;
-export const EditorToolbarTocItem = styled.div.attrs({[DOM_KEY_WIDGET]: 'o23-playground-editor-toolbar-toc-item'})`
+export const EditorToolbarTocItem = styled.div.attrs<SDP>({[DOM_KEY_WIDGET]: 'o23-playground-editor-toolbar-toc-item'})`
     display: flex;
     position: relative;
     align-items: center;
@@ -276,7 +277,7 @@ export const EditorToolbarTocItem = styled.div.attrs({[DOM_KEY_WIDGET]: 'o23-pla
         }
     }
 `;
-export const ParseError = styled.div.attrs({[DOM_KEY_WIDGET]: 'o23-playground-viewer-error'})`
+export const ParseError = styled.div.attrs<SDP>({[DOM_KEY_WIDGET]: 'o23-playground-viewer-error'})`
     display: flex;
     position: relative;
     align-items: center;

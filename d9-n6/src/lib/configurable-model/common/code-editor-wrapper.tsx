@@ -1,10 +1,10 @@
-import {CssVars, DOM_KEY_WIDGET} from '@rainbow-d9/n2';
+import {CssVars, DOM_KEY_WIDGET, SDP} from '@rainbow-d9/n2';
 import React, {ReactNode, useRef, useState} from 'react';
 import styled from 'styled-components';
 import {Max, Min} from '../../icons';
 import {PlaygroundCssVars} from '../../widgets';
 
-export const CodeEditorContainer = styled.div.attrs({[DOM_KEY_WIDGET]: 'o23-playground-code-editor'})`
+export const CodeEditorContainer = styled.div.attrs<SDP>({[DOM_KEY_WIDGET]: 'o23-playground-code-editor'})`
     display: block;
     position: relative;
     width: 100%;
@@ -33,7 +33,7 @@ export const CodeEditorContainer = styled.div.attrs({[DOM_KEY_WIDGET]: 'o23-play
         display: none;
     }
 `;
-export const MaxSwitcher = styled.div.attrs({[DOM_KEY_WIDGET]: 'o23-playground-code-editor-max-switcher'})`
+export const MaxSwitcher = styled.div.attrs<SDP>({[DOM_KEY_WIDGET]: 'o23-playground-code-editor-max-switcher'})`
     display: flex;
     position: absolute;
     align-items: center;

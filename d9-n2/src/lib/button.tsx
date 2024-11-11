@@ -14,6 +14,7 @@ import {CssVars, DOM_ID_WIDGET, DOM_KEY_WIDGET} from './constants';
 import {DecorateWrapperDef, transformDecorators} from './decorate-assist';
 import {buildTip, TipAttachableWidget, useGlobalHandlers, useTip} from './global';
 import {toIntlLabel} from './intl-label';
+import {SDP, WSDP} from './styled-components-styles';
 import {GlobalEventHandlers, ModelCarriedHandler, OmitHTMLProps2, OmitNodeDef, ValidationHandlers} from './types';
 import {useDualRefs} from './utils';
 
@@ -62,9 +63,7 @@ export type ButtonDef =
 export type ButtonProps = OmitNodeDef<ButtonDef> & WidgetProps;
 
 // noinspection CssUnresolvedCustomProperty
-const AButton = styled.button.attrs<{ hasOneLeadOrTail: boolean }>(
-	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-	// @ts-ignore
+const AButton = styled.button.attrs<WSDP<{ hasOneLeadOrTail: boolean }>>(
 	({id, hasOneLeadOrTail, [DOM_KEY_WIDGET]: dataW}) => {
 		return {
 			[DOM_KEY_WIDGET]: dataW ?? 'd9-button',
@@ -448,13 +447,9 @@ const Decorator = styled.span`
         width: calc((${CssVars.FONT_SIZE}) * 1.2);
     }
 `;
-const LeadDecorator = styled(Decorator).attrs({
-	[DOM_KEY_WIDGET]: 'd9-deco-lead'
-})`
+const LeadDecorator = styled(Decorator).attrs<SDP>({[DOM_KEY_WIDGET]: 'd9-deco-lead'})`
 `;
-const TailDecorator = styled(Decorator).attrs({
-	[DOM_KEY_WIDGET]: 'd9-deco-tail'
-})`
+const TailDecorator = styled(Decorator).attrs<SDP>({[DOM_KEY_WIDGET]: 'd9-deco-tail'})`
 `;
 
 export const Button = forwardRef((props: ButtonProps, ref: ForwardedRef<HTMLButtonElement>) => {

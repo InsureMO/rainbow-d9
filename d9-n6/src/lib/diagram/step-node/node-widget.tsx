@@ -1,6 +1,6 @@
 import {DiagramEngine} from '@projectstorm/react-diagrams';
-import {CssVars, DOM_KEY_WIDGET} from '@rainbow-d9/n2';
-import React, {MouseEvent, useEffect, useRef} from 'react';
+import {CssVars, DOM_KEY_WIDGET, SDP} from '@rainbow-d9/n2';
+import React, {CSSProperties, MouseEvent, useEffect, useRef} from 'react';
 import styled from 'styled-components';
 import {
 	findStepDef,
@@ -64,7 +64,7 @@ export const StepNodeHeader = styled(NodeHeader).attrs<{ 'data-use'?: string }>(
 				'--border-radius': PlaygroundCssVars.NODE_BORDER_RADIUS,
 				'--background': PlaygroundCssVars[`NODE_STEP_${(use ?? '').trim().toUpperCase().replace(/-/g, '_')}_TITLE_BACKGROUND`] ?? PlaygroundCssVars.NODE_STEP_TITLE_BACKGROUND,
 				'--padding': PlaygroundCssVars.NODE_TITLE_PADDING
-			}
+			} as CSSProperties
 		};
 	})``;
 export const StepNodeTitle = styled(NodeTitle).attrs({
@@ -121,7 +121,7 @@ export const StepNodeOperators = styled.div.attrs<{ position: 'top' | 'bottom' }
 			style: {
 				'--top': position === 'top' ? `calc(-1 * ${PlaygroundCssVars.NODE_STEP_OPERATORS_HEIGHT})` : '100%',
 				'--align-items': position === 'top' ? 'flex-start' : 'flex-end'
-			}
+			} as CSSProperties
 		};
 	})<{ position: 'top' | 'bottom' }>`
     display: flex;
@@ -140,7 +140,7 @@ export const StepNodeOperators = styled.div.attrs<{ position: 'top' | 'bottom' }
         flex-grow: 1;
     }
 `;
-export const StepNodeOperator = styled.div.attrs({[DOM_KEY_WIDGET]: 'o23-playground-step-node-operator'})`
+export const StepNodeOperator = styled.div.attrs<SDP>({[DOM_KEY_WIDGET]: 'o23-playground-step-node-operator'})`
     display: flex;
     position: relative;
     align-items: center;

@@ -1,5 +1,5 @@
-import {DOM_ID_WIDGET, DOM_KEY_WIDGET} from '@rainbow-d9/n2';
-import React, {useRef} from 'react';
+import {DOM_ID_WIDGET, DOM_KEY_WIDGET, WSDP} from '@rainbow-d9/n2';
+import React, {CSSProperties, useRef} from 'react';
 import styled from 'styled-components';
 import {ChartProps} from '../types';
 import {useDataMerge} from './use-data-merge';
@@ -7,16 +7,14 @@ import {useInitialize} from './use-initialize';
 import {useResize} from './use-resize';
 
 // noinspection CssUnresolvedCustomProperty
-export const AChart = styled.div.attrs<{ chartHeight?: string | number }>(
-	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-	// @ts-ignore
+export const AChart = styled.div.attrs<WSDP<{ chartHeight?: string | number }>>(
 	({id, 'data-w': dataW, chartHeight}) => {
 		return {
 			[DOM_KEY_WIDGET]: dataW ?? 'd9-chart',
 			[DOM_ID_WIDGET]: id,
 			style: {
 				'--chart-height': chartHeight ?? '300px'
-			}
+			} as CSSProperties
 		};
 	})<{ chartHeight?: string | number }>`
     display: block;

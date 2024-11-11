@@ -1,17 +1,17 @@
+import {CSSProperties} from 'react';
 import styled from 'styled-components';
 import {CssVars, DOM_ID_WIDGET, DOM_KEY_WIDGET} from '../constants';
+import {SDP, WSDP} from '../styled-components-styles';
 import {UnwrappedDecorateInput} from '../unwrapped/decorate-input';
 import {toCssSize} from '../utils';
 
 // noinspection CssUnresolvedCustomProperty
-export const ATree = styled.div.attrs<{ height: number | string }>(
-	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-	// @ts-ignore
+export const ATree = styled.div.attrs<WSDP<{ height: number | string }>>(
 	({id, [DOM_KEY_WIDGET]: dataW, height}) => {
 		return {
 			[DOM_KEY_WIDGET]: dataW || 'd9-tree',
 			[DOM_ID_WIDGET]: id,
-			style: {'--height': toCssSize(height)}
+			style: {'--height': toCssSize(height)} as CSSProperties
 		};
 	})<{ height: number | string }>`
     display: flex;
@@ -72,7 +72,7 @@ export const TreeSearchInput = styled(UnwrappedDecorateInput)`
         }
     }
 `;
-export const TreeContentContainer = styled.div.attrs({
+export const TreeContentContainer = styled.div.attrs<SDP>({
 	[DOM_KEY_WIDGET]: 'd9-tree-content-container',
 	'data-v-scroll': '',
 	'data-h-scroll': ''
@@ -86,7 +86,7 @@ export const TreeContentContainer = styled.div.attrs({
     border-bottom-right-radius: ${CssVars.BORDER_RADIUS};
     overflow: auto;
 `;
-export const TreeNodeWrapper = styled.div.attrs<{ level: number }>(
+export const TreeNodeWrapper = styled.div.attrs<WSDP<{ level: number }>>(
 	{[DOM_KEY_WIDGET]: 'd9-tree-node-wrapper'})<{ level: number }>`
     display: flex;
     position: relative;
@@ -125,7 +125,7 @@ const TreeNode = styled.div.attrs<{ level: number }>({})<{ level: number }>`
         border-bottom-left-radius: 4px;
     }
 `;
-export const TreeNodeContainer = styled(TreeNode).attrs({[DOM_KEY_WIDGET]: 'd9-tree-node-container'})`
+export const TreeNodeContainer = styled(TreeNode).attrs<SDP>({[DOM_KEY_WIDGET]: 'd9-tree-node-container'})`
     cursor: pointer;
 
     &[data-expanded=true] {
@@ -145,7 +145,7 @@ export const TreeNodeOperators = styled.div.attrs<{ top: number; right: number }
 		style: {
 			'--top': `${top}px`,
 			'--right': `${right}px`
-		}
+		} as CSSProperties
 	};
 })<{ top: number; right: number }>`
     display: flex;
@@ -224,7 +224,7 @@ export const TreeNodeOperators = styled.div.attrs<{ top: number; right: number }
         }
     }
 `;
-export const TreeNodeContent = styled.span.attrs({[DOM_KEY_WIDGET]: 'd9-tree-node-content'})`
+export const TreeNodeContent = styled.span.attrs<SDP>({[DOM_KEY_WIDGET]: 'd9-tree-node-content'})`
     display: flex;
     position: relative;
     flex-grow: 1;
@@ -241,7 +241,7 @@ export const TreeNodeContent = styled.span.attrs({[DOM_KEY_WIDGET]: 'd9-tree-nod
         opacity: 0.7;
     }
 `;
-export const TreeNodeToggle = styled.span.attrs({[DOM_KEY_WIDGET]: 'd9-tree-node-toggle'})`
+export const TreeNodeToggle = styled.span.attrs<SDP>({[DOM_KEY_WIDGET]: 'd9-tree-node-toggle'})`
     display: inline-block;
     width: 28px;
     height: 28px;
@@ -259,7 +259,7 @@ export const TreeNodeToggle = styled.span.attrs({[DOM_KEY_WIDGET]: 'd9-tree-node
         transition: transform ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION};
     }
 `;
-export const TreeNodeIndex = styled.span.attrs({[DOM_KEY_WIDGET]: 'd9-tree-node-index'})`
+export const TreeNodeIndex = styled.span.attrs<SDP>({[DOM_KEY_WIDGET]: 'd9-tree-node-index'})`
     display: flex;
     position: relative;
     align-items: center;
@@ -271,7 +271,7 @@ export const TreeNodeIndex = styled.span.attrs({[DOM_KEY_WIDGET]: 'd9-tree-node-
         padding-left: 9px;
     }
 `;
-export const TreeNodeLabel = styled.span.attrs({[DOM_KEY_WIDGET]: 'd9-tree-node-label'})`
+export const TreeNodeLabel = styled.span.attrs<SDP>({[DOM_KEY_WIDGET]: 'd9-tree-node-label'})`
     display: flex;
     position: relative;
     align-items: center;
@@ -288,7 +288,7 @@ export const TreeHoverShade = styled.div.attrs<{ top: number; height: number; vi
 			[DOM_KEY_WIDGET]: 'd9-tree-node-hover-shade',
 			style: {
 				'--top': toCssSize(top), '--height': toCssSize(height), '--visible': visible ? 'block' : 'none'
-			}
+			} as CSSProperties
 		};
 	})<{ top: number; height: number; visible: boolean }>`
     display: var(--visible);

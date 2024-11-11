@@ -1,12 +1,14 @@
 import styled from 'styled-components';
 import {CssVars, DOM_ID_WIDGET, DOM_KEY_WIDGET} from '../constants';
+import {SDP} from '../styled-components-styles';
 
 // noinspection CssUnresolvedCustomProperty
 export const ATabs = styled.div.attrs(({id}) => {
 	return {
 		[DOM_KEY_WIDGET]: 'd9-tabs',
 		[DOM_ID_WIDGET]: id
-	};
+		// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	} as any;
 })`
     display: flex;
     position: relative;
@@ -19,7 +21,7 @@ export const ATabs = styled.div.attrs(({id}) => {
     }
 `;
 
-export const TabsHeader = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-tabs-header'})`
+export const TabsHeader = styled.div.attrs<SDP>({[DOM_KEY_WIDGET]: 'd9-tabs-header'})`
     display: flex;
     position: relative;
     flex-wrap: wrap;
@@ -28,7 +30,7 @@ export const TabsHeader = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-tabs-header'})
     padding: calc(${CssVars.TAB_TITLE_PADDING} / 2) 0;
     border-radius: calc(${CssVars.BORDER_RADIUS} * 2);
 `;
-export const ATabTitle = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-tab-title'})`
+export const ATabTitle = styled.div.attrs<SDP>({[DOM_KEY_WIDGET]: 'd9-tab-title'})`
     display: flex;
     position: relative;
     align-items: center;
@@ -83,21 +85,21 @@ export const ATabTitle = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-tab-title'})`
         box-shadow: ${CssVars.HOVER_SHADOW};
     }
 `;
-export const TabsBody = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-tabs-body'})`
+export const TabsBody = styled.div.attrs<SDP>({[DOM_KEY_WIDGET]: 'd9-tabs-body'})`
     display: block;
     position: relative;
     border-top: ${CssVars.BORDER};
     padding: ${CssVars.SECTION_BODY_PADDING} 0;
     margin-top: -1px;
 `;
-export const ATabBodyVisibility = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-tab-body-visibility'})`
+export const ATabBodyVisibility = styled.div.attrs<SDP>({[DOM_KEY_WIDGET]: 'd9-tab-body-visibility'})`
     display: none;
 
     &[data-visible=false] + div[data-w=d9-tab-body] {
         display: none;
     }
 `;
-export const ATabBody = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-tab-body'})`
+export const ATabBody = styled.div.attrs<SDP>({[DOM_KEY_WIDGET]: 'd9-tab-body'})`
     display: block;
     position: relative;
 `;

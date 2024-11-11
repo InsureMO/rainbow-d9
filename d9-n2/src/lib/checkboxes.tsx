@@ -6,6 +6,7 @@ import {CssVars, DOM_ID_WIDGET, DOM_KEY_WIDGET} from './constants';
 import {buildTip, TipAttachableWidget, useGlobalHandlers, useTip} from './global';
 import {IntlLabel, toIntlLabel} from './intl-label';
 import {NO_AVAILABLE_OPTION_ITEM, OptionItem, OptionItemsDef, useOptionItems} from './option-items-assist';
+import {SDP} from './styled-components-styles';
 import {OmitHTMLProps, OmitNodeDef} from './types';
 import {useDualRefs} from './utils';
 
@@ -32,7 +33,8 @@ const ACheckboxes = styled.div.attrs(({id}) => {
 	return {
 		[DOM_KEY_WIDGET]: 'd9-checkboxes',
 		[DOM_ID_WIDGET]: id
-	};
+		// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	} as any;
 })`
     display: flex;
     position: relative;
@@ -106,7 +108,7 @@ const Option = styled.span.attrs<{ columns: number, compact: boolean }>(
         //text-overflow: ellipsis;
     }
 `;
-const Separator = styled.span.attrs({[DOM_KEY_WIDGET]: 'd9-checkboxes-option-separator'})`
+const Separator = styled.span.attrs<SDP>({[DOM_KEY_WIDGET]: 'd9-checkboxes-option-separator'})`
     display: block;
     position: relative;
     height: 0;

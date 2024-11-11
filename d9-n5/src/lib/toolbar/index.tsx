@@ -1,6 +1,6 @@
 import {VUtils, WidgetType} from '@rainbow-d9/n1';
-import {ButtonFill, ButtonInk, CssVars, DOM_KEY_WIDGET, UnwrappedButton} from '@rainbow-d9/n2';
-import React, {MouseEvent, ReactNode, useEffect, useState} from 'react';
+import {ButtonFill, ButtonInk, CssVars, DOM_KEY_WIDGET, SDP, UnwrappedButton} from '@rainbow-d9/n2';
+import React, {CSSProperties, MouseEvent, ReactNode, useEffect, useState} from 'react';
 import styled from 'styled-components';
 import {PlaygroundIcons} from '../icons';
 import {PlaygroundEventTypes, usePlaygroundEventBus} from '../playground-event-bus';
@@ -22,7 +22,7 @@ export const ToolbarWrapper = styled.div.attrs(() => {
 			'--width': '81px',
 			'--primary-width': '41px',
 			'--secondary-width': '40px'
-		}
+		} as CSSProperties
 	};
 })`
     display: grid;
@@ -109,7 +109,7 @@ export const ToolbarWrapper = styled.div.attrs(() => {
         }
     }
 `;
-export const PrimaryToolbar = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-playground-toolbar-primary'})`
+export const PrimaryToolbar = styled.div.attrs<SDP>({[DOM_KEY_WIDGET]: 'd9-playground-toolbar-primary'})`
     display: flex;
     position: relative;
     flex-direction: column;
@@ -127,13 +127,13 @@ export const PrimaryToolbar = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-playground
         opacity: 0.3;
     }
 `;
-export const SecondaryToolbar = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-playground-toolbar-secondary'})`
+export const SecondaryToolbar = styled.div.attrs<SDP>({[DOM_KEY_WIDGET]: 'd9-playground-toolbar-secondary'})`
     display: flex;
     position: relative;
     flex-direction: column;
     padding: 8px 0;
 `;
-export const ToolbarSeparator = styled.span.attrs({[DOM_KEY_WIDGET]: 'd9-playground-toolbar-separator'})`
+export const ToolbarSeparator = styled.span.attrs<SDP>({[DOM_KEY_WIDGET]: 'd9-playground-toolbar-separator'})`
     display: block;
     position: relative;
     margin: 4px 0;
@@ -150,7 +150,7 @@ export const ToolbarSeparator = styled.span.attrs({[DOM_KEY_WIDGET]: 'd9-playgro
         opacity: 0.7;
     }
 `;
-export const ToolbarButtonTooltip = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-playground-toolbar-tooltip'})`
+export const ToolbarButtonTooltip = styled.div.attrs<SDP>({[DOM_KEY_WIDGET]: 'd9-playground-toolbar-tooltip'})`
     display: flex;
     position: relative;
     align-items: center;

@@ -12,6 +12,7 @@ import {
 import React, {
 	ChangeEvent,
 	createContext,
+	CSSProperties,
 	ForwardedRef,
 	forwardRef,
 	Fragment,
@@ -41,6 +42,7 @@ import {
 	TreeOptionItems,
 	useOptionItems
 } from './option-items-assist';
+import {SDP, WSDP} from './styled-components-styles';
 import {TreeEventTypes, useTreeEventBus} from './tree';
 import {toCssSize} from './utils';
 
@@ -59,7 +61,8 @@ export const DropdownContainer = styled.div.attrs<{ active: DropdownPopupStateAc
 			[DOM_ID_WIDGET]: id,
 			'data-active': isDropdownPopupActive(active),
 			'data-at-bottom': !!atBottom
-		};
+			// eslint-disable-next-line @typescript-eslint/no-explicit-any
+		} as any;
 	})<{ active: DropdownPopupStateActive, atBottom: boolean }>`
     display: flex;
     position: relative;
@@ -120,7 +123,7 @@ export const DropdownContainer = styled.div.attrs<{ active: DropdownPopupStateAc
     }
 `;
 
-export const DropdownLabel = styled.span.attrs({[DOM_KEY_WIDGET]: 'd9-dropdown-label'})`
+export const DropdownLabel = styled.span.attrs<SDP>({[DOM_KEY_WIDGET]: 'd9-dropdown-label'})`
     flex-grow: 1;
     display: flex;
     align-items: center;
@@ -154,7 +157,7 @@ export const DropdownStickClear = styled(Times as any).attrs({[DOM_KEY_WIDGET]: 
     transition: all ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION};
 `;
 
-export const DropdownStickContainer = styled.span.attrs({[DOM_KEY_WIDGET]: 'd9-dropdown-stick'})`
+export const DropdownStickContainer = styled.span.attrs<SDP>({[DOM_KEY_WIDGET]: 'd9-dropdown-stick'})`
     display: flex;
     position: relative;
     align-items: center;
@@ -254,7 +257,7 @@ const DropdownPopupContainer = styled.div.attrs<Omit<DropdownPopupProps, 'childr
 				'--max-height': toCssSize(maxHeight),
 				'--overflow-y': vScroll ? 'auto' : 'hidden',
 				'--overflow-x': hScroll ? 'auto' : 'hidden'
-			}
+			} as CSSProperties
 		};
 	})<Omit<DropdownPopupProps, 'children'>>`
     display: block;
@@ -665,10 +668,8 @@ const SpinnerKeyFrames = keyframes`
 `;
 
 // noinspection CssUnresolvedCustomProperty
-export const OptionFilter = styled.div.attrs<Omit<DropdownPopupState, 'active'> & { active: boolean }>(
+export const OptionFilter = styled.div.attrs<WSDP<Omit<DropdownPopupState, 'active'> & { active: boolean }>>(
 	({
-		 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-		 // @ts-ignore
 		 'data-w': widgetKey,
 		 active, atBottom, top, left, height
 	 }) => {
@@ -688,7 +689,7 @@ export const OptionFilter = styled.div.attrs<Omit<DropdownPopupState, 'active'> 
 				'--font-size': fixFilter ? CssVars.FONT_SIZE : `calc(${CssVars.FONT_SIZE} - 2px)`,
 				'--padding': fixFilter ? 0 : `0 ${CssVars.INPUT_INDENT}`,
 				'--border-radius': fixFilter ? 0 : CssVars.BORDER_RADIUS
-			}
+			} as CSSProperties
 		};
 	})<Omit<DropdownPopupState, 'active'> & { active: boolean }>`
     display: flex;

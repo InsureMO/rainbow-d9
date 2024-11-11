@@ -5,6 +5,7 @@ import {CaptionDef} from './caption';
 import {CssVars, DOM_ID_WIDGET, DOM_KEY_WIDGET} from './constants';
 import {toIntlLabel} from './intl-label';
 import {LabelLike} from './label-like';
+import {SDP} from './styled-components-styles';
 import {OmitHTMLProps, OmitNodeDef} from './types';
 
 export interface FormCellAdditive {
@@ -31,7 +32,8 @@ const AFormCell = styled.div.attrs(({id}) => {
 	return {
 		[DOM_KEY_WIDGET]: 'd9-form-cell',
 		[DOM_ID_WIDGET]: id
-	};
+		// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	} as any;
 })`
     display: flex;
     position: relative;
@@ -49,7 +51,7 @@ const AFormCell = styled.div.attrs(({id}) => {
         pointer-events: none;
     }
 `;
-const FormCellInvalidMessage = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-form-cell-invalid-msg'})`
+const FormCellInvalidMessage = styled.div.attrs<SDP>({[DOM_KEY_WIDGET]: 'd9-form-cell-invalid-msg'})`
     display: flex;
     position: relative;
     align-items: center;

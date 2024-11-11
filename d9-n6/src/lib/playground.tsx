@@ -1,6 +1,6 @@
 import {MUtils, NodeAttributeValues, ObjectPropValue, PPUtils, PropValue, VUtils} from '@rainbow-d9/n1';
 import {CssVars, DOM_KEY_WIDGET, useGlobalHandlers} from '@rainbow-d9/n2';
-import React, {useEffect, useRef, useState} from 'react';
+import React, {CSSProperties, useEffect, useRef, useState} from 'react';
 import styled from 'styled-components';
 import {FileDefDeserializer, FileDefSerializer, YamlDefLoader, YamlDefSaver} from './definition';
 import {EditDialog} from './edit-dialog';
@@ -19,7 +19,7 @@ export const PlaygroundWrapper = styled.div.attrs(
 				'--min-height': '500px',
 				'--grid-columns': `1fr`,
 				'--grid-rows': '1fr'
-			}
+			} as CSSProperties
 		};
 	})`
     display: grid;

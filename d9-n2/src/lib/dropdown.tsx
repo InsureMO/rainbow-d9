@@ -32,6 +32,7 @@ import {
 	OptionItemsDef,
 	OptionItemSort
 } from './option-items-assist';
+import {SDP} from './styled-components-styles';
 import {OmitHTMLProps, OmitNodeDef} from './types';
 import {useDualRefs} from './utils';
 
@@ -58,7 +59,7 @@ export type DropdownDef =
 /** widget definition, with html attributes */
 export type DropdownProps = OmitNodeDef<DropdownDef> & WidgetProps;
 
-const Option = styled.span.attrs({[DOM_KEY_WIDGET]: 'd9-dropdown-option'})`
+const Option = styled.span.attrs<SDP>({[DOM_KEY_WIDGET]: 'd9-dropdown-option'})`
     display: flex;
     position: relative;
     align-items: center;

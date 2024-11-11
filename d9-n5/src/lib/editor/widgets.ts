@@ -1,4 +1,4 @@
-import {DOM_KEY_WIDGET, Utils} from '@rainbow-d9/n2';
+import {DOM_KEY_WIDGET, SDP, Utils} from '@rainbow-d9/n2';
 import styled from 'styled-components';
 import {createDisableBadgesForWrapper, createEditorStyles} from './code-mirror-styles';
 
@@ -24,7 +24,7 @@ export const EditorWrapper = styled.div.attrs<{ editorSize?: number }>(
     }
 `;
 // noinspection CssUnusedSymbol
-export const EditorPanel = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-playground-editor-panel'})`
+export const EditorPanel = styled.div.attrs<SDP>({[DOM_KEY_WIDGET]: 'd9-playground-editor-panel'})`
     display: block;
     position: relative;
     width: 100%;

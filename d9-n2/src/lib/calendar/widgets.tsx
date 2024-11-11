@@ -1,8 +1,9 @@
 import styled from 'styled-components';
 import {CssVars, DOM_KEY_WIDGET} from '../constants';
 import {CaretLeft, CaretRight} from '../icons';
+import {SDP} from '../styled-components-styles';
 
-export const PopupContainer = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-calendar-popup-wrapper'})`
+export const PopupContainer = styled.div.attrs<SDP>({[DOM_KEY_WIDGET]: 'd9-calendar-popup-wrapper'})`
     display: flex;
     position: relative;
     flex-direction: column;

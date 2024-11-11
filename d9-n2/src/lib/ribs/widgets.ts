@@ -1,12 +1,14 @@
 import styled from 'styled-components';
 import {CssVars, DOM_ID_WIDGET, DOM_KEY_WIDGET} from '../constants';
+import {SDP} from '../styled-components-styles';
 
 // noinspection CssUnresolvedCustomProperty
 export const ARibs = styled.div.attrs(({id}) => {
 	return {
 		[DOM_KEY_WIDGET]: 'd9-ribs',
 		[DOM_ID_WIDGET]: id
-	};
+		// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	} as any;
 })`
     display: flex;
     position: relative;
@@ -27,14 +29,15 @@ export const ARibRow = styled.div.attrs(({id}) => {
 	return {
 		[DOM_KEY_WIDGET]: 'd9-rib-row',
 		[DOM_ID_WIDGET]: id
-	};
+		// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	} as any;
 })`
     display: flex;
     position: relative;
     flex-direction: column;
     margin-bottom: ${CssVars.RIB_GAP_SIZE};
 `;
-export const ARibRowHeader = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-rib-row-header'})`
+export const ARibRowHeader = styled.div.attrs<SDP>({[DOM_KEY_WIDGET]: 'd9-rib-row-header'})`
     display: grid;
     position: relative;
     align-items: center;
@@ -63,17 +66,17 @@ export const ARibRowHeader = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-rib-row-hea
         }
     }
 `;
-export const ARibRowIndex = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-rib-row-index'})`
+export const ARibRowIndex = styled.div.attrs<SDP>({[DOM_KEY_WIDGET]: 'd9-rib-row-index'})`
     display: flex;
     position: relative;
     font-size: 0.8em;
     font-weight: ${CssVars.FONT_BOLD};
 `;
-export const ARibRowHeaderContent = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-rib-row-header-content'})`
+export const ARibRowHeaderContent = styled.div.attrs<SDP>({[DOM_KEY_WIDGET]: 'd9-rib-row-header-content'})`
     display: block;
     position: relative;
 `;
-export const ARibRowOperators = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-rib-row-operators'})`
+export const ARibRowOperators = styled.div.attrs<SDP>({[DOM_KEY_WIDGET]: 'd9-rib-row-operators'})`
     display: flex;
     position: relative;
     align-items: center;
@@ -110,7 +113,7 @@ export const ARibRowBody = styled.div.attrs<{ expanded: boolean }>(({expanded}) 
     grid-row-gap: ${CssVars.GRID_ROW_GAP};
     padding: ${CssVars.SECTION_BODY_PADDING} 0;
 `;
-export const ARibNoDataRow = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-rib-no-data-row'})`
+export const ARibNoDataRow = styled.div.attrs<SDP>({[DOM_KEY_WIDGET]: 'd9-rib-no-data-row'})`
     display: flex;
     position: relative;
     align-items: center;
@@ -128,7 +131,7 @@ export const ARibNoDataRow = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-rib-no-data
         padding: 0 ${CssVars.TABLE_CELL_PADDING};
     }
 `;
-export const ARibBottomBar = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-rib-bottom-bar'})`
+export const ARibBottomBar = styled.div.attrs<SDP>({[DOM_KEY_WIDGET]: 'd9-rib-bottom-bar'})`
     display: flex;
     position: relative;
     align-items: center;

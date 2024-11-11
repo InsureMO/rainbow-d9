@@ -29,7 +29,8 @@ const ACheckbox = styled.div.attrs(({id}) => {
 	return {
 		[DOM_KEY_WIDGET]: 'd9-checkbox',
 		[DOM_ID_WIDGET]: id
-	};
+		// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	} as any;
 })`
     display: block;
     position: relative;

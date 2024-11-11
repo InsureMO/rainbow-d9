@@ -33,6 +33,7 @@ export * from './lib/multi-dropdown-tree';
 
 export * from './lib/hooks';
 export * from './lib/types';
+export * from './lib/styled-components-styles';
 export * as Utils from './lib/utils';
 
 export * from './lib/unwrapped/unwrapped-index';

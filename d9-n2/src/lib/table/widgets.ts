@@ -1,7 +1,9 @@
 import {Undefinable, VUtils} from '@rainbow-d9/n1';
+import {CSSProperties} from 'react';
 import styled from 'styled-components';
 import {CssVars, DOM_ID_WIDGET, DOM_KEY_WIDGET} from '../constants';
 import {DropdownDefaults} from '../dropdown-assist';
+import {SDP} from '../styled-components-styles';
 import {toCssSize} from '../utils';
 import {isInCellInputBorderOmitted} from './utils';
 
@@ -19,7 +21,8 @@ export const ATable = styled.div.attrs(({id}) => {
 	return {
 		[DOM_KEY_WIDGET]: 'd9-table',
 		[DOM_ID_WIDGET]: id
-	};
+		// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	} as any;
 })`
     display: block;
     position: relative;
@@ -106,7 +109,7 @@ export const ATableHeaderCell = styled.div.attrs<{
 				'--z-index': VUtils.isNotBlank(stickyOffset[2])
 					? 6
 					: (VUtils.isNotBlank(stickyOffset[1]) ? 5 : 4)
-			}
+			} as CSSProperties
 		};
 	})<{
 	headerHeight?: string | number; isGrabber?: true;
@@ -336,7 +339,7 @@ export const ATableBodyCellExpandArea = styled.div.attrs<{
         z-index: var(--hover-z-index);
     }
 `;
-export const ATableBottomBar = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-table-bottom-bar'})`
+export const ATableBottomBar = styled.div.attrs<SDP>({[DOM_KEY_WIDGET]: 'd9-table-bottom-bar'})`
     display: flex;
     position: relative;
     align-items: center;
@@ -347,7 +350,7 @@ export const ATableBottomBar = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-table-bot
         flex-grow: 1;
     }
 `;
-export const ATableBottomBarSeparator = styled.span.attrs({[DOM_KEY_WIDGET]: 'd9-table-bottom-bar-separator'})`
+export const ATableBottomBarSeparator = styled.span.attrs<SDP>({[DOM_KEY_WIDGET]: 'd9-table-bottom-bar-separator'})`
     display: block;
     position: relative;
     margin: 0 12px;

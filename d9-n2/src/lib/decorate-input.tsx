@@ -6,6 +6,7 @@ import {DecorateWrapperDef, transformDecorators} from './decorate-assist';
 import {buildTip, TipAttachableWidget, useTip} from './global';
 import {Input, InputDef, NumberInput, NumberInputDef, PasswordInput, PasswordInputDef} from './input';
 import {toIntlLabel} from './intl-label';
+import {SDP} from './styled-components-styles';
 import {OmitNodeDef} from './types';
 import {useDualRefs} from './utils';
 
@@ -18,7 +19,8 @@ const DecorateInputContainer = styled.div.attrs(
 		return {
 			[DOM_KEY_WIDGET]: 'd9-deco-input',
 			[DOM_ID_WIDGET]: VUtils.isBlank(id) ? (void 0) : id
-		};
+			// eslint-disable-next-line @typescript-eslint/no-explicit-any
+		} as any;
 	})`
     display: flex;
     position: relative;
@@ -95,24 +97,20 @@ const Decorator = styled.span`
         width: calc((${CssVars.FONT_SIZE}) * 1.2);
     }
 `;
-const LeadDecorator = styled(Decorator).attrs({
-	[DOM_KEY_WIDGET]: 'd9-deco-lead'
-})`
+const LeadDecorator = styled(Decorator).attrs<SDP>({[DOM_KEY_WIDGET]: 'd9-deco-lead'})`
     &:first-child {
         border-top-left-radius: ${CssVars.BORDER_RADIUS};
         border-bottom-left-radius: ${CssVars.BORDER_RADIUS};
     }
 `;
-const TailDecorator = styled(Decorator).attrs({
-	[DOM_KEY_WIDGET]: 'd9-deco-tail'
-})`
+const TailDecorator = styled(Decorator).attrs<SDP>({[DOM_KEY_WIDGET]: 'd9-deco-tail'})`
     &:last-child {
         border-top-right-radius: ${CssVars.BORDER_RADIUS};
         border-bottom-right-radius: ${CssVars.BORDER_RADIUS};
     }
 `;
 // noinspection CssUnresolvedCustomProperty
-const Placeholder = styled.span.attrs({[DOM_KEY_WIDGET]: 'd9-deco-input-placeholder'})`
+const Placeholder = styled.span.attrs<SDP>({[DOM_KEY_WIDGET]: 'd9-deco-input-placeholder'})`
     display: block;
     position: absolute;
     top: var(--top, 0);

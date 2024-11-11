@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import {CssVars, DOM_KEY_WIDGET} from '../../constants';
+import {SDP} from '../../styled-components-styles';
 
 export const AlertContainer = styled.div.attrs<{ visible: boolean }>(({visible}) => {
 	return {
@@ -41,7 +42,7 @@ export const AlertDialog = styled.div.attrs<{ visible: boolean }>(({visible}) =>
     transform: scale(0.75);
     transition: all ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION};
 `;
-export const AlertBody = styled.div.attrs({[DOM_KEY_WIDGET]: 'alert-body', 'data-v-scroll': ''})`
+export const AlertBody = styled.div.attrs<SDP>({[DOM_KEY_WIDGET]: 'alert-body', 'data-v-scroll': ''})`
     flex-grow: 1;
     min-height: ${CssVars.ALERT_MIN_HEIGHT};
     max-height: ${CssVars.ALERT_MAX_HEIGHT};
@@ -51,11 +52,11 @@ export const AlertBody = styled.div.attrs({[DOM_KEY_WIDGET]: 'alert-body', 'data
     font-size: ${CssVars.FONT_SIZE};
     color: ${CssVars.CAPTION_FONT_COLOR};
 `;
-export const AlertFooter = styled.div.attrs({[DOM_KEY_WIDGET]: 'alert-footer'})`
+export const AlertFooter = styled.div.attrs<SDP>({[DOM_KEY_WIDGET]: 'alert-footer'})`
     display: flex;
     justify-content: flex-end;
 `;
-export const AlertLabel = styled.span.attrs({[DOM_KEY_WIDGET]: 'alert-label'})`
+export const AlertLabel = styled.span.attrs<SDP>({[DOM_KEY_WIDGET]: 'alert-label'})`
     font-variant: ${CssVars.FONT_VARIANT};
     min-height: ${CssVars.INPUT_HEIGHT};
 `;

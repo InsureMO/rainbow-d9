@@ -1,4 +1,5 @@
-import {CssVars, DOM_KEY_WIDGET, Utils} from '@rainbow-d9/n2';
+import {CssVars, DOM_KEY_WIDGET, SDP, Utils} from '@rainbow-d9/n2';
+import {CSSProperties} from 'react';
 import styled from 'styled-components';
 import {PlaygroundCssVars} from '../widgets';
 
@@ -11,7 +12,7 @@ export const ViewerWrapper = styled.div.attrs<{ minViewerWidth?: number }>(
 			'data-h-scroll': '',
 			style: {
 				'--min-viewer-width': minViewerWidth == null ? '600px' : Utils.toCssSize(minViewerWidth)
-			}
+			} as CSSProperties
 		};
 	})<{ minViewerWidth?: number }>`
     display: block;
@@ -27,7 +28,7 @@ export const ViewerWrapper = styled.div.attrs<{ minViewerWidth?: number }>(
     }
 `;
 
-export const ParseError = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-playground-viewer-error'})`
+export const ParseError = styled.div.attrs<SDP>({[DOM_KEY_WIDGET]: 'd9-playground-viewer-error'})`
     display: flex;
     position: relative;
     align-items: center;
@@ -37,7 +38,7 @@ export const ParseError = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-playground-vie
     font-style: italic;
     font-weight: 500;
 `;
-export const WidgetWrapper = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-playground-widget-wrapper'})`
+export const WidgetWrapper = styled.div.attrs<SDP>({[DOM_KEY_WIDGET]: 'd9-playground-widget-wrapper'})`
     display: block;
     position: absolute;
     top: 0;
@@ -57,7 +58,7 @@ export const WidgetWrapper = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-playground-
         pointer-events: auto;
     }
 `;
-export const WidgetWrapperToolbar = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-playground-widget-wrapper-toolbar'})`
+export const WidgetWrapperToolbar = styled.div.attrs<SDP>({[DOM_KEY_WIDGET]: 'd9-playground-widget-wrapper-toolbar'})`
     display: flex;
     position: fixed;
     left: 0;

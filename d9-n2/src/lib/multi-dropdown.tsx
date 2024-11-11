@@ -33,6 +33,7 @@ import {
 	OptionItems,
 	OptionItemsDef
 } from './option-items-assist';
+import {SDP} from './styled-components-styles';
 import {OmitHTMLProps, OmitNodeDef} from './types';
 import {useDualRefs} from './utils';
 
@@ -120,7 +121,7 @@ const MultiDropdownStick = styled(DropdownStick as any)`
     right: ${CssVars.INPUT_INDENT};
 `;
 
-const MultiOption = styled.span.attrs({[DOM_KEY_WIDGET]: 'd9-multi-dropdown-option'})`
+const MultiOption = styled.span.attrs<SDP>({[DOM_KEY_WIDGET]: 'd9-multi-dropdown-option'})`
     display: flex;
     position: relative;
     align-items: center;

@@ -1,5 +1,5 @@
 import {Nullable} from '@rainbow-d9/n1';
-import {DOM_KEY_WIDGET} from '@rainbow-d9/n2';
+import {DOM_KEY_WIDGET, SDP} from '@rainbow-d9/n2';
 import React, {ReactNode} from 'react';
 import styled from 'styled-components';
 import {PortChecked, PortIncorrect, PortUndefined} from '../../icons';
@@ -54,7 +54,7 @@ export const computePortIconAndBadge = (props: PortProps) => {
 	return {icon, badge};
 };
 
-export const PrePortContainer = styled.div.attrs({[DOM_KEY_WIDGET]: 'o23-playground-pre-port'})`
+export const PrePortContainer = styled.div.attrs<SDP>({[DOM_KEY_WIDGET]: 'o23-playground-pre-port'})`
     display: flex;
     position: relative;
     align-self: end;
@@ -140,7 +140,7 @@ export const PrePort = (props: PortProps) => {
 	</PrePortContainer>;
 };
 
-export const PostPortContainer = styled.div.attrs({[DOM_KEY_WIDGET]: 'o23-playground-post-port'})`
+export const PostPortContainer = styled.div.attrs<SDP>({[DOM_KEY_WIDGET]: 'o23-playground-post-port'})`
     display: flex;
     position: relative;
     align-self: end;

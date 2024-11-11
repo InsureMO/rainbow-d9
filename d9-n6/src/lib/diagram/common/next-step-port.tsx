@@ -1,7 +1,7 @@
 import {GenerateModelEvent} from '@projectstorm/react-canvas-core';
 import {AbstractModelFactory, PortModelAlignment, PortWidget} from '@projectstorm/react-diagrams';
 import {DiagramEngine} from '@projectstorm/react-diagrams-core';
-import {DOM_KEY_WIDGET} from '@rainbow-d9/n2';
+import {DOM_KEY_WIDGET, SDP} from '@rainbow-d9/n2';
 import React from 'react';
 import styled from 'styled-components';
 import {PlaygroundCssVars} from '../../widgets';
@@ -27,7 +27,7 @@ export class NextStepPortFactory extends AbstractModelFactory<NextStepPortModel,
 	}
 }
 
-export const NextStepPortContainer = styled.div.attrs({[DOM_KEY_WIDGET]: 'o23-playground-next-step-port'})`
+export const NextStepPortContainer = styled.div.attrs<SDP>({[DOM_KEY_WIDGET]: 'o23-playground-next-step-port'})`
     display: flex;
     position: absolute;
     left: calc(50% - ${PlaygroundCssVars.NODE_PORT_RADIUS});

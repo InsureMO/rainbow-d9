@@ -16,6 +16,7 @@ import {CssVars, DOM_ID_WIDGET, DOM_KEY_WIDGET} from './constants';
 import {DecorateWrapperDef, transformDecorators} from './decorate-assist';
 import {buildTip, TipAttachableWidget, useGlobalHandlers, useTip} from './global';
 import {LabelLike} from './label-like';
+import {SDP} from './styled-components-styles';
 import {GlobalEventHandlers, ModelCarriedHandler, OmitHTMLProps2, OmitNodeDef, ValidationHandlers} from './types';
 import {df, locale, nf, nf0, nf1, nf2, nf3, nfWithLocale, nfXWithLocale, useDualRefs, wrapNf} from './utils';
 
@@ -227,13 +228,9 @@ const Decorator = styled.span`
         width: calc((${CssVars.FONT_SIZE}) * 1.2);
     }
 `;
-const LeadDecorator = styled(Decorator).attrs({
-	[DOM_KEY_WIDGET]: 'd9-deco-lead'
-})`
+const LeadDecorator = styled(Decorator).attrs<SDP>({[DOM_KEY_WIDGET]: 'd9-deco-lead'})`
 `;
-const TailDecorator = styled(Decorator).attrs({
-	[DOM_KEY_WIDGET]: 'd9-deco-tail'
-})`
+const TailDecorator = styled(Decorator).attrs<SDP>({[DOM_KEY_WIDGET]: 'd9-deco-tail'})`
 `;
 
 export const Caption = forwardRef((props: CaptionProps, ref: ForwardedRef<HTMLSpanElement>) => {

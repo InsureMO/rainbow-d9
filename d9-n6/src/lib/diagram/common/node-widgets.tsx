@@ -1,4 +1,4 @@
-import {CssVars, DOM_KEY_WIDGET, UnwrappedCaption} from '@rainbow-d9/n2';
+import {CssVars, DOM_KEY_WIDGET, SDP, UnwrappedCaption} from '@rainbow-d9/n2';
 import React, {DetailedHTMLProps, ForwardedRef, forwardRef, HTMLAttributes} from 'react';
 import styled from 'styled-components';
 import {PlaygroundCssVars} from '../../widgets';
@@ -39,7 +39,7 @@ export const NodeTitle = styled(UnwrappedCaption)`
     padding: calc((${CssVars.INPUT_HEIGHT} - var(--font-size)) / 2) 0;
 `;
 // noinspection CssUnresolvedCustomProperty
-export const NodeTitleSpreader = styled.span.attrs({[DOM_KEY_WIDGET]: 'o23-playground-node-title-spreader'})`
+export const NodeTitleSpreader = styled.span.attrs<SDP>({[DOM_KEY_WIDGET]: 'o23-playground-node-title-spreader'})`
     display: flex;
     position: relative;
     flex-grow: 1;

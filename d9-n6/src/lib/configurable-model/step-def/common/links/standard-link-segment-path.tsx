@@ -1,4 +1,5 @@
 import {DOM_KEY_WIDGET} from '@rainbow-d9/n2';
+import {CSSProperties} from 'react';
 import styled, {keyframes} from 'styled-components';
 import {PlaygroundCssVars} from '../../../../widgets';
 
@@ -26,7 +27,7 @@ export const StandardLinkSegmentPath = styled.path.attrs<StandardLinkSegmentPath
 				'--selected-stroke-dasharray': selected ? (selectedDasharray || PlaygroundCssVars.LINK_DEFAULT_SELECTED_STROKE_DASHARRAY) : (dasharray || (void 0)),
 				'--selected-animation': selected ? 'running' : 'paused',
 				'--selected-z-index': selected ? 1 : (void 0)
-			}
+			} as CSSProperties
 		};
 	})<StandardLinkSegmentPathProps>`
     fill: none;

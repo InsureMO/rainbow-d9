@@ -4,7 +4,7 @@ import {linter, lintGutter} from '@codemirror/lint';
 import {Compartment, EditorState as CodeMirrorState} from '@codemirror/state';
 import {EditorView, keymap} from '@codemirror/view';
 import {BaseModel} from '@rainbow-d9/n1';
-import {ButtonInk, CssVars, DOM_KEY_WIDGET, toIntlLabel, UnwrappedButton} from '@rainbow-d9/n2';
+import {ButtonInk, CssVars, DOM_KEY_WIDGET, SDP, toIntlLabel, UnwrappedButton} from '@rainbow-d9/n2';
 import {basicSetup} from 'codemirror';
 import React, {ReactNode, useEffect, useRef, useState} from 'react';
 import styled from 'styled-components';
@@ -55,7 +55,7 @@ export const MockJsonDialogWrapper = styled.div.attrs<{ visible: boolean }>(
     transform: scale(0.75);
     transition: all ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION};
 `;
-export const MockJsonDialogBody = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-playground-mock-json-dialog-body'})`
+export const MockJsonDialogBody = styled.div.attrs<SDP>({[DOM_KEY_WIDGET]: 'd9-playground-mock-json-dialog-body'})`
     display: flex;
     position: relative;
     flex-direction: column;
@@ -66,7 +66,7 @@ export const MockJsonDialogBody = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-playgr
     font-size: ${CssVars.FONT_SIZE};
     color: ${CssVars.CAPTION_FONT_COLOR};
 `;
-export const MockJsonViewerWrapper = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-playground-mock-json-viewer-wrapper'})`
+export const MockJsonViewerWrapper = styled.div.attrs<SDP>({[DOM_KEY_WIDGET]: 'd9-playground-mock-json-viewer-wrapper'})`
     display: grid;
     position: relative;
     align-self: stretch;
@@ -77,7 +77,7 @@ export const MockJsonViewerWrapper = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-pla
     overflow: hidden;
 `;
 // noinspection CssUnusedSymbol
-export const MockJsonViewer = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-playground-mock-json-viewer'})`
+export const MockJsonViewer = styled.div.attrs<SDP>({[DOM_KEY_WIDGET]: 'd9-playground-mock-json-viewer'})`
     display: block;
     position: relative;
     width: 100%;
@@ -88,7 +88,7 @@ export const MockJsonViewer = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-playground
         height: 100%;
     }
 `;
-export const MockJsonReason = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-playground-mock-json-dialog-reason'})`
+export const MockJsonReason = styled.div.attrs<SDP>({[DOM_KEY_WIDGET]: 'd9-playground-mock-json-dialog-reason'})`
     display: flex;
     position: relative;
     align-items: center;
@@ -100,7 +100,7 @@ export const MockJsonReason = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-playground
         margin-top: 16px;
     }
 `;
-export const MockJsonDialogFooter = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-playground-mock-json-dialog-footer'})`
+export const MockJsonDialogFooter = styled.div.attrs<SDP>({[DOM_KEY_WIDGET]: 'd9-playground-mock-json-dialog-footer'})`
     display: flex;
     justify-content: flex-end;
 

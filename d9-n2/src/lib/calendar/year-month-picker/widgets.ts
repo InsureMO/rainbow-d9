@@ -1,7 +1,8 @@
 import styled from 'styled-components';
 import {CssVars, DOM_KEY_WIDGET} from '../../constants';
+import {SDP} from '../../styled-components-styles';
 
-export const YearMonthPickerContainer = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-calendar-ym-picker'})`
+export const YearMonthPickerContainer = styled.div.attrs<SDP>({[DOM_KEY_WIDGET]: 'd9-calendar-ym-picker'})`
     display: grid;
     position: relative;
     grid-template-columns: 33% 1fr;
@@ -10,7 +11,7 @@ export const YearMonthPickerContainer = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-
     padding: 0 ${CssVars.CALENDAR_GUTTER_SIZE} ${CssVars.CALENDAR_GUTTER_SIZE};
     cursor: default;
 `;
-export const YearMonthPickerLabel = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-calendar-ym-picker-label'})`
+export const YearMonthPickerLabel = styled.div.attrs<SDP>({[DOM_KEY_WIDGET]: 'd9-calendar-ym-picker-label'})`
     display: flex;
     align-items: center;
     font-variant: ${CssVars.FONT_VARIANT};
@@ -20,7 +21,7 @@ export const YearMonthPickerLabel = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-cale
         margin-left: calc(${CssVars.CALENDAR_GUTTER_SIZE} * 2);
     }
 `;
-export const YearSelector = styled.div.attrs({
+export const YearSelector = styled.div.attrs<SDP>({
 	[DOM_KEY_WIDGET]: 'd9-calendar-ym-picker-year-selector',
 	'data-v-scroll': ''
 })`
@@ -31,7 +32,9 @@ export const YearSelector = styled.div.attrs({
     height: calc(${CssVars.CALENDAR_POPUP_HEIGHT_VALUE}px - ${CssVars.CALENDAR_POPUP_HEADER_HEIGHT} - ${CssVars.INPUT_HEIGHT} * 1.5 - ${CssVars.CALENDAR_GUTTER_SIZE});
     overflow-y: scroll;
 `;
-export const YearSelectorOption = styled.span.attrs({[DOM_KEY_WIDGET]: 'd9-calendar-ym-picker-year-selector-option'})`
+export const YearSelectorOption = styled.span.attrs<SDP>(
+	{[DOM_KEY_WIDGET]: 'd9-calendar-ym-picker-year-selector-option'}
+)`
     display: flex;
     position: relative;
     align-items: center;
@@ -76,13 +79,13 @@ export const YearSelectorOption = styled.span.attrs({[DOM_KEY_WIDGET]: 'd9-calen
         background-color: ${CssVars.HOVER_COLOR};
     }
 `;
-export const MonthSelector = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-calendar-ym-picker-month-selector'})`
+export const MonthSelector = styled.div.attrs<SDP>({[DOM_KEY_WIDGET]: 'd9-calendar-ym-picker-month-selector'})`
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     grid-column-gap: ${CssVars.CALENDAR_GUTTER_SIZE};
     grid-row-gap: ${CssVars.CALENDAR_GUTTER_SIZE};
 `;
-export const MonthSelectorOption = styled.span.attrs({[DOM_KEY_WIDGET]: 'd9-calendar-ym-picker-month-selector-option'})`
+export const MonthSelectorOption = styled.span.attrs<SDP>({[DOM_KEY_WIDGET]: 'd9-calendar-ym-picker-month-selector-option'})`
     display: flex;
     position: relative;
     align-items: center;

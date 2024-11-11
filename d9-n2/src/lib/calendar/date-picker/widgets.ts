@@ -1,18 +1,19 @@
 import styled from 'styled-components';
 import {CssVars, DOM_KEY_WIDGET} from '../../constants';
+import {SDP} from '../../styled-components-styles';
 
-export const DatePickerContainer = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-calendar-date-picker'})`
+export const DatePickerContainer = styled.div.attrs<SDP>({[DOM_KEY_WIDGET]: 'd9-calendar-date-picker'})`
     display: grid;
     grid-template-columns: 1fr auto;
     cursor: default;
 `;
-export const DatePickerShortcut = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-calendar-date-picker-shortcuts'})`
+export const DatePickerShortcut = styled.div.attrs<SDP>({[DOM_KEY_WIDGET]: 'd9-calendar-date-picker-shortcuts'})`
     display: flex;
     flex-direction: column;
     grid-row: span 2;
     border-right: ${CssVars.BORDER};
 `;
-export const DatePickerShortcutButton = styled.span.attrs({[DOM_KEY_WIDGET]: 'd9-calendar-date-picker-shortcut-button'})`
+export const DatePickerShortcutButton = styled.span.attrs<SDP>({[DOM_KEY_WIDGET]: 'd9-calendar-date-picker-shortcut-button'})`
     display: flex;
     align-items: center;
     height: ${CssVars.CALENDAR_DATE_CELL_SIZE};
@@ -27,22 +28,22 @@ export const DatePickerShortcutButton = styled.span.attrs({[DOM_KEY_WIDGET]: 'd9
         background-color: ${CssVars.HOVER_COLOR};
     }
 `;
-export const DatePickerHeader = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-calendar-date-picker-header'})`
+export const DatePickerHeader = styled.div.attrs<SDP>({[DOM_KEY_WIDGET]: 'd9-calendar-date-picker-header'})`
     display: flex;
     align-items: center;
     justify-content: space-between;
     height: ${CssVars.INPUT_HEIGHT};
     padding: 0 ${CssVars.CALENDAR_GUTTER_SIZE};
 `;
-export const DatePickerHeaderYearMonth = styled.span.attrs({[DOM_KEY_WIDGET]: 'd9-calendar-date-picker-header-ym'})`
+export const DatePickerHeaderYearMonth = styled.span.attrs<SDP>({[DOM_KEY_WIDGET]: 'd9-calendar-date-picker-header-ym'})`
     font-weight: ${CssVars.FONT_BOLD};
     font-variant: ${CssVars.FONT_VARIANT};
 `;
-export const DatePickerHeaderOperators = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-calendar-date-picker-header-operators'})`
+export const DatePickerHeaderOperators = styled.div.attrs<SDP>({[DOM_KEY_WIDGET]: 'd9-calendar-date-picker-header-operators'})`
     display: flex;
     align-items: center;
 `;
-const DatePickerHeaderButton = styled.span.attrs({[DOM_KEY_WIDGET]: 'd9-calendar-date-picker-header-button'})`
+const DatePickerHeaderButton = styled.span.attrs<SDP>({[DOM_KEY_WIDGET]: 'd9-calendar-date-picker-header-button'})`
     display: flex;
     align-items: center;
     justify-content: center;
@@ -66,12 +67,12 @@ export const DatePickerHeaderMonthChangeButton = styled(DatePickerHeaderButton)`
     height: 20px;
     width: 24px;
 `;
-export const DatePickerBody = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-calendar-date-picker-body'})`
+export const DatePickerBody = styled.div.attrs<SDP>({[DOM_KEY_WIDGET]: 'd9-calendar-date-picker-body'})`
     display: grid;
     grid-template-columns: repeat(7, minmax(${CssVars.CALENDAR_DATE_CELL_SIZE}, 1fr));
     grid-template-rows: repeat(7, ${CssVars.CALENDAR_DATE_CELL_SIZE});
 `;
-export const DatePickerBodyHeaderCell = styled.span.attrs({[DOM_KEY_WIDGET]: 'd9-calendar-date-picker-body-header-cell'})`
+export const DatePickerBodyHeaderCell = styled.span.attrs<SDP>({[DOM_KEY_WIDGET]: 'd9-calendar-date-picker-body-header-cell'})`
     display: flex;
     align-items: center;
     justify-content: center;
@@ -87,7 +88,7 @@ export const DatePickerBodyHeaderCell = styled.span.attrs({[DOM_KEY_WIDGET]: 'd9
         color: ${CssVars.DANGER_COLOR};
     }
 `;
-export const DatePickerBodyDateCell = styled.span.attrs({[DOM_KEY_WIDGET]: 'd9-calendar-date-picker-body-date-cell'})`
+export const DatePickerBodyDateCell = styled.span.attrs<SDP>({[DOM_KEY_WIDGET]: 'd9-calendar-date-picker-body-date-cell'})`
     display: flex;
     align-items: center;
     justify-content: center;

@@ -1,5 +1,6 @@
-import {CssVars, DOM_ID_WIDGET, DOM_KEY_WIDGET, Utils} from '@rainbow-d9/n2';
+import {CssVars, DOM_ID_WIDGET, DOM_KEY_WIDGET, SDP, Utils, WSDP} from '@rainbow-d9/n2';
 import color from 'color';
+import {CSSProperties} from 'react';
 import styled from 'styled-components';
 
 export const PlanSelectionCssVars = {
@@ -40,12 +41,10 @@ export const PlanSelectionCssVars = {
 };
 
 // noinspection CssUnresolvedCustomProperty
-export const APlanSelection = styled.div.attrs<{
+export const APlanSelection = styled.div.attrs<WSDP<{
 	columnCount: number; computedColumnWidth: string | number; computedLineHeaderWidth: string | number;
 	maxHeight?: string | number
-}>(
-	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-	// @ts-ignore
+}>>(
 	({id, 'data-w': dataW, columnCount, computedColumnWidth, computedLineHeaderWidth, maxHeight}) => {
 		return {
 			[DOM_KEY_WIDGET]: dataW || 'd9-plan-selection',
@@ -55,7 +54,7 @@ export const APlanSelection = styled.div.attrs<{
 			style: {
 				'--grid-template-columns': `${Utils.toCssSize(computedLineHeaderWidth)} repeat(${columnCount}, ${Utils.toCssSize(computedColumnWidth)})`,
 				'--max-height': Utils.toCssSize(maxHeight)
-			}
+			} as CSSProperties
 		};
 	})<{
 	columnCount: number; computedColumnWidth: string | number; computedLineHeaderWidth: string | number;
@@ -74,7 +73,7 @@ export const APlanSelection = styled.div.attrs<{
         display: none;
     }
 `;
-export const PlanSelectionTopLeftCorner = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-plan-selection-top-left-corner'})`
+export const PlanSelectionTopLeftCorner = styled.div.attrs<SDP>({[DOM_KEY_WIDGET]: 'd9-plan-selection-top-left-corner'})`
     display: flex;
     position: sticky;
     flex-direction: column;
@@ -85,7 +84,7 @@ export const PlanSelectionTopLeftCorner = styled.div.attrs({[DOM_KEY_WIDGET]: 'd
     background-color: ${PlanSelectionCssVars.BACKGROUND_COLOR};
     z-index: 3;
 `;
-export const PlanSelectionPagination = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-plan-selection-pagination'})`
+export const PlanSelectionPagination = styled.div.attrs<SDP>({[DOM_KEY_WIDGET]: 'd9-plan-selection-pagination'})`
     display: flex;
     position: relative;
     align-items: center;
@@ -104,7 +103,7 @@ export const PlanSelectionPagination = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-p
         }
     }
 `;
-export const APlanHeader = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-plan-selection-header'})`
+export const APlanHeader = styled.div.attrs<SDP>({[DOM_KEY_WIDGET]: 'd9-plan-selection-header'})`
     display: flex;
     position: sticky;
     flex-direction: column;
@@ -131,7 +130,7 @@ export const APlanHeader = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-plan-selectio
         }
     }
 `;
-export const PlanHeaderTitle = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-plan-selection-header-title'})`
+export const PlanHeaderTitle = styled.div.attrs<SDP>({[DOM_KEY_WIDGET]: 'd9-plan-selection-header-title'})`
     display: flex;
     position: relative;
     align-items: center;
@@ -146,7 +145,7 @@ export const PlanHeaderTitle = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-plan-sele
         min-height: ${CssVars.INPUT_HEIGHT};
     }
 `;
-export const PlanHeaderSubTitle = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-plan-selection-header-sub-title'})`
+export const PlanHeaderSubTitle = styled.div.attrs<SDP>({[DOM_KEY_WIDGET]: 'd9-plan-selection-header-sub-title'})`
     display: flex;
     position: relative;
     flex-direction: column;
@@ -185,7 +184,7 @@ export const PlanHeaderSubTitle = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-plan-s
     }
 `;
 
-export const PlanElementColumnHeader = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-plan-selection-element-header'})`
+export const PlanElementColumnHeader = styled.div.attrs<SDP>({[DOM_KEY_WIDGET]: 'd9-plan-selection-element-header'})`
     display: flex;
     position: sticky;
     left: 0;
@@ -215,7 +214,7 @@ export const PlanElementColumnHeader = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-p
         }
     }
 `;
-export const PlanElementColumnHeaderTitle = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-plan-selection-element-header-title'})`
+export const PlanElementColumnHeaderTitle = styled.div.attrs<SDP>({[DOM_KEY_WIDGET]: 'd9-plan-selection-element-header-title'})`
     display: flex;
     position: relative;
     align-items: center;
@@ -242,7 +241,7 @@ export const PlanElementColumnHeaderTitle = styled.div.attrs({[DOM_KEY_WIDGET]: 
         }
     }
 `;
-export const PlanElementCellContainer = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-plan-selection-element-cell'})`
+export const PlanElementCellContainer = styled.div.attrs<SDP>({[DOM_KEY_WIDGET]: 'd9-plan-selection-element-cell'})`
     display: flex;
     position: relative;
     flex-direction: column;
@@ -393,7 +392,7 @@ export const PlanElementCellContainer = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-
         }
     }
 `;
-export const PlanElementUnitLabel = styled.span.attrs({[DOM_KEY_WIDGET]: 'd9-plan-selection-element-unit'})`
+export const PlanElementUnitLabel = styled.span.attrs<SDP>({[DOM_KEY_WIDGET]: 'd9-plan-selection-element-unit'})`
     display: flex;
     position: relative;
     align-items: center;
@@ -406,7 +405,7 @@ export const PlanElementUnitLabel = styled.span.attrs({[DOM_KEY_WIDGET]: 'd9-pla
         margin-left: ${PlanSelectionCssVars.ELEMENT_VALUE_UNIT_GAP};
     }
 `;
-export const PlanSelectionBottomLeftCorner = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-plan-selection-bottom-left-corner'})`
+export const PlanSelectionBottomLeftCorner = styled.div.attrs<SDP>({[DOM_KEY_WIDGET]: 'd9-plan-selection-bottom-left-corner'})`
     display: block;
     position: sticky;
     bottom: 0;
@@ -417,7 +416,7 @@ export const PlanSelectionBottomLeftCorner = styled.div.attrs({[DOM_KEY_WIDGET]:
     background-color: ${PlanSelectionCssVars.BACKGROUND_COLOR};
     z-index: 3;
 `;
-export const PlanFooter = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-plan-selection-footer'})`
+export const PlanFooter = styled.div.attrs<SDP>({[DOM_KEY_WIDGET]: 'd9-plan-selection-footer'})`
     display: flex;
     position: sticky;
     bottom: 0;
@@ -437,7 +436,7 @@ export const PlanFooter = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-plan-selection
         }
     }
 `;
-export const PlanFooterOperator = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-plan-selection-footer-operator'})`
+export const PlanFooterOperator = styled.div.attrs<SDP>({[DOM_KEY_WIDGET]: 'd9-plan-selection-footer-operator'})`
     display: flex;
     position: relative;
     align-items: center;

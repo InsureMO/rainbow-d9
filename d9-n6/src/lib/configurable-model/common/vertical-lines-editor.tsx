@@ -1,9 +1,9 @@
-import {CssVars, DOM_KEY_WIDGET} from '@rainbow-d9/n2';
+import {CssVars, DOM_KEY_WIDGET, SDP} from '@rainbow-d9/n2';
 import React, {ReactNode} from 'react';
 import styled from 'styled-components';
 import {PlaygroundCssVars} from '../../widgets';
 
-export const VerticalLinesEditorContainer = styled.div.attrs({[DOM_KEY_WIDGET]: 'o23-playground-edit-dialog-specific-element-editor-vertical'})`
+export const VerticalLinesEditorContainer = styled.div.attrs<SDP>({[DOM_KEY_WIDGET]: 'o23-playground-edit-dialog-specific-element-editor-vertical'})`
     display: grid;
     position: relative;
     grid-template-columns: 1fr;

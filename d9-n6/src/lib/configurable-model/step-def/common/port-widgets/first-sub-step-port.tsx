@@ -2,7 +2,7 @@ import {GenerateModelEvent} from '@projectstorm/react-canvas-core';
 import {AbstractModelFactory, PortModelAlignment, PortWidget} from '@projectstorm/react-diagrams';
 import {DiagramEngine} from '@projectstorm/react-diagrams-core';
 import {Undefinable} from '@rainbow-d9/n1';
-import {CssVars, DOM_KEY_WIDGET} from '@rainbow-d9/n2';
+import {CssVars, DOM_KEY_WIDGET, SDP} from '@rainbow-d9/n2';
 import React, {FC, ReactNode} from 'react';
 import styled from 'styled-components';
 import {PipelineStepDef} from '../../../../definition';
@@ -30,7 +30,7 @@ export class FirstSubStepPortFactory extends AbstractModelFactory<FirstSubStepPo
 	}
 }
 
-export const FirstSubStepPortContainer = styled.div.attrs({[DOM_KEY_WIDGET]: 'o23-playground-first-sub-step-port'})`
+export const FirstSubStepPortContainer = styled.div.attrs<SDP>({[DOM_KEY_WIDGET]: 'o23-playground-first-sub-step-port'})`
     display: flex;
     position: absolute;
     top: calc(${CssVars.INPUT_HEIGHT} / 2 - ${PlaygroundCssVars.NODE_PORT_RADIUS});
@@ -57,7 +57,7 @@ export type FirstSubStepPortContainerFC = FC<{ children: ReactNode }>;
  */
 export type FirstSubStepPortContainerFind = (step: PipelineStepDef, parent: PipelineStepDef) => Undefinable<FirstSubStepPortContainerFC>;
 
-export const FirstSubStepPortForRuleCheckContainer = styled.div.attrs({[DOM_KEY_WIDGET]: 'o23-playground-route-test-port'})`
+export const FirstSubStepPortForRuleCheckContainer = styled.div.attrs<SDP>({[DOM_KEY_WIDGET]: 'o23-playground-route-test-port'})`
     display: flex;
     position: absolute;
     align-items: center;
@@ -94,7 +94,7 @@ export const FirstSubStepPortForRouteTest = (props: { children: ReactNode }) => 
 		{children}
 	</FirstSubStepPortForRuleCheckContainer>;
 };
-export const FirstSubStepPortForOtherwiseContainer = styled.div.attrs({[DOM_KEY_WIDGET]: 'o23-playground-otherwise-port'})`
+export const FirstSubStepPortForOtherwiseContainer = styled.div.attrs<SDP>({[DOM_KEY_WIDGET]: 'o23-playground-otherwise-port'})`
     display: flex;
     position: absolute;
     align-items: center;

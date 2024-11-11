@@ -1,12 +1,14 @@
 import styled from 'styled-components';
 import {CssVars, DOM_ID_WIDGET, DOM_KEY_WIDGET} from '../constants';
+import {SDP} from '../styled-components-styles';
 
 // noinspection CssUnresolvedCustomProperty
 export const AWizard = styled.div.attrs(({id}) => {
 	return {
 		[DOM_KEY_WIDGET]: 'd9-wizard',
 		[DOM_ID_WIDGET]: id
-	};
+		// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	} as any;
 })`
     display: flex;
     position: relative;
@@ -19,7 +21,7 @@ export const AWizard = styled.div.attrs(({id}) => {
     }
 `;
 
-export const WizardHeader = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-wizard-header'})`
+export const WizardHeader = styled.div.attrs<SDP>({[DOM_KEY_WIDGET]: 'd9-wizard-header'})`
     display: flex;
     position: relative;
     flex-wrap: wrap;
@@ -31,7 +33,7 @@ export const WizardHeader = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-wizard-heade
         column-gap: calc(${CssVars.WIZARD_STEP_TITLE_PADDING} / 2);
     }
 `;
-export const AWizardStepTitle = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-wizard-step-title'})`
+export const AWizardStepTitle = styled.div.attrs<SDP>({[DOM_KEY_WIDGET]: 'd9-wizard-step-title'})`
     display: flex;
     position: relative;
     flex-grow: 1;
@@ -173,7 +175,7 @@ export const AWizardStepTitle = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-wizard-s
         }
     }
 `;
-export const AWizardStepBalloon = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-wizard-step-balloon'})`
+export const AWizardStepBalloon = styled.div.attrs<SDP>({[DOM_KEY_WIDGET]: 'd9-wizard-step-balloon'})`
     display: flex;
     position: relative;
     align-items: center;
@@ -219,21 +221,21 @@ export const AWizardStepBalloon = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-wizard
         }
     }
 `;
-export const WizardBody = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-wizard-body'})`
+export const WizardBody = styled.div.attrs<SDP>({[DOM_KEY_WIDGET]: 'd9-wizard-body'})`
     display: block;
     position: relative;
     border-top: ${CssVars.BORDER};
     padding: ${CssVars.SECTION_BODY_PADDING} 0;
     margin-top: -1px;
 `;
-export const AWizardStepBodyVisibility = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-tab-body-visibility'})`
+export const AWizardStepBodyVisibility = styled.div.attrs<SDP>({[DOM_KEY_WIDGET]: 'd9-tab-body-visibility'})`
     display: none;
 
     &[data-visible=false] + div[data-w=d9-wizard-step-body] {
         display: none;
     }
 `;
-export const AWizardStepBody = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-wizard-step-body'})`
+export const AWizardStepBody = styled.div.attrs<SDP>({[DOM_KEY_WIDGET]: 'd9-wizard-step-body'})`
     display: grid;
     position: relative;
     grid-template-columns: repeat(${CssVars.GRID_COLUMNS}, calc((100% - ${CssVars.GRID_COLUMN_GAP} * (${CssVars.GRID_COLUMNS} - 1)) / ${CssVars.GRID_COLUMNS}));

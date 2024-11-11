@@ -1,4 +1,5 @@
 import {CssVars, Utils} from '@rainbow-d9/n2';
+import {CSSProperties} from 'react';
 import styled from 'styled-components';
 
 export const CheckAndValueEditor = styled.div.attrs<{ inputWidth: string | number }>(
@@ -6,7 +7,7 @@ export const CheckAndValueEditor = styled.div.attrs<{ inputWidth: string | numbe
 		return {
 			style: {
 				'--input-width': Utils.toCssSize(inputWidth)
-			}
+			} as CSSProperties
 		};
 	})<{ inputWidth: string | number }>`
     > div[data-w=d9-deco-input] {

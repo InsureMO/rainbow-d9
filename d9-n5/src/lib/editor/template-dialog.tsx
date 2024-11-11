@@ -4,7 +4,7 @@ import {markdown, markdownLanguage} from '@codemirror/lang-markdown';
 import {EditorState as CodeMirrorState} from '@codemirror/state';
 import {EditorView, keymap} from '@codemirror/view';
 import {WidgetType} from '@rainbow-d9/n1';
-import {ButtonInk, CssVars, DOM_KEY_WIDGET, toIntlLabel, UnwrappedButton} from '@rainbow-d9/n2';
+import {ButtonInk, CssVars, DOM_KEY_WIDGET, SDP, toIntlLabel, UnwrappedButton} from '@rainbow-d9/n2';
 import {basicSetup} from 'codemirror';
 import React, {ReactNode, useEffect, useRef, useState} from 'react';
 import styled from 'styled-components';
@@ -57,7 +57,7 @@ export const WidgetTemplateDialogWrapper = styled.div.attrs<{ visible: boolean }
     transform: scale(0.75);
     transition: all ${CssVars.TRANSITION_DURATION} ${CssVars.TRANSITION_TIMING_FUNCTION};
 `;
-export const WidgetTemplateDialogBody = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-playground-widget-template-dialog-body'})`
+export const WidgetTemplateDialogBody = styled.div.attrs<SDP>({[DOM_KEY_WIDGET]: 'd9-playground-widget-template-dialog-body'})`
     display: flex;
     position: relative;
     flex-direction: column;
@@ -68,7 +68,7 @@ export const WidgetTemplateDialogBody = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-
     font-size: ${CssVars.FONT_SIZE};
     color: ${CssVars.CAPTION_FONT_COLOR};
 `;
-export const WidgetTemplateViewerWrapper = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-playground-widget-template-viewer-wrapper'})`
+export const WidgetTemplateViewerWrapper = styled.div.attrs<SDP>({[DOM_KEY_WIDGET]: 'd9-playground-widget-template-viewer-wrapper'})`
     display: grid;
     position: relative;
     align-self: stretch;
@@ -79,7 +79,7 @@ export const WidgetTemplateViewerWrapper = styled.div.attrs({[DOM_KEY_WIDGET]: '
     overflow: hidden;
 `;
 // noinspection CssUnusedSymbol
-export const WidgetTemplateViewer = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-playground-widget-template-viewer'})`
+export const WidgetTemplateViewer = styled.div.attrs<SDP>({[DOM_KEY_WIDGET]: 'd9-playground-widget-template-viewer'})`
     display: block;
     position: relative;
     width: 100%;
@@ -88,7 +88,7 @@ export const WidgetTemplateViewer = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-play
 
     ${createEditorStyles({badge: false})}
 `;
-export const WidgetTemplateReason = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-playground-widget-template-dialog-reason'})`
+export const WidgetTemplateReason = styled.div.attrs<SDP>({[DOM_KEY_WIDGET]: 'd9-playground-widget-template-dialog-reason'})`
     display: flex;
     position: relative;
     align-items: center;
@@ -100,7 +100,7 @@ export const WidgetTemplateReason = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-play
         margin-top: 16px;
     }
 `;
-export const WidgetTemplateDialogFooter = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-playground-widget-template-dialog-footer'})`
+export const WidgetTemplateDialogFooter = styled.div.attrs<SDP>({[DOM_KEY_WIDGET]: 'd9-playground-widget-template-dialog-footer'})`
     display: flex;
     justify-content: flex-end;
 

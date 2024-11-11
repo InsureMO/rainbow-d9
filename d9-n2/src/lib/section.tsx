@@ -6,6 +6,7 @@ import {GlobalEventPrefix, GlobalEventTypes, useCustomGlobalEvent, useGlobalEven
 import {notInMe} from './hooks';
 import {ArrowDown} from './icons';
 import {LabelLike} from './label-like';
+import {SDP, WSDP} from './styled-components-styles';
 import {ModelCarrier, OmitHTMLProps2, OmitNodeDef} from './types';
 
 /** Section configuration definition */
@@ -20,14 +21,13 @@ export type SectionDef = ContainerDef & OmitHTMLProps2<HTMLDivElement, 'title'> 
 export type SectionProps = OmitNodeDef<SectionDef> & ContainerWidgetProps;
 
 // noinspection CssUnresolvedCustomProperty
-const ASection = styled.div.attrs(
-	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-	// @ts-ignore
+const ASection = styled.div.attrs<SDP>(
 	({id, [DOM_KEY_WIDGET]: dataW}) => {
 		return {
 			[DOM_KEY_WIDGET]: dataW || 'd9-section',
 			[DOM_ID_WIDGET]: id
-		};
+			// eslint-disable-next-line @typescript-eslint/no-explicit-any
+		} as any;
 	})`
     display: flex;
     position: relative;
@@ -39,7 +39,7 @@ const ASection = styled.div.attrs(
         display: none;
     }
 `;
-const ASectionHeader = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-section-header'})`
+const ASectionHeader = styled.div.attrs<SDP>({[DOM_KEY_WIDGET]: 'd9-section-header'})`
     display: flex;
     position: relative;
     align-items: center;
@@ -56,7 +56,7 @@ const ASectionHeader = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-section-header'})
         padding: ${CssVars.SECTION_BODY_PADDING} 0;
     }
 `;
-const ASectionTitle = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-section-header-title'})`
+const ASectionTitle = styled.div.attrs<SDP>({[DOM_KEY_WIDGET]: 'd9-section-header-title'})`
     display: flex;
     position: relative;
     align-items: center;
@@ -66,7 +66,7 @@ const ASectionTitle = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-section-header-tit
     font-weight: ${CssVars.SECTION_HEADER_FONT_WEIGHT};
     color: ${CssVars.CAPTION_FONT_COLOR};
 `;
-const ASectionExpander = styled.div.attrs<{ expanded: boolean }>(
+const ASectionExpander = styled.div.attrs<WSDP<{ expanded: boolean }>>(
 	{[DOM_KEY_WIDGET]: 'd9-section-header-expander'}
 )<{ expanded: boolean }>`
     display: flex;

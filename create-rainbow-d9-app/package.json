@@ -43,7 +43,7 @@
 		"@rollup/plugin-eslint": "^9.0.3",
 		"@types/events": "^3.0.1",
 		"@types/fs-extra": "^11.0.4",
-		"@types/node": "^18.11.13",
+		"@types/node": "^20.5.3",
 		"@types/prompts": "^2.4.9",
 		"@types/validate-npm-package-name": "^4.0.2",
 		"@typescript-eslint/eslint-plugin": "^5.46.0",

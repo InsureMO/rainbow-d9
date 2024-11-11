@@ -2,6 +2,7 @@ import {ContainerDef, ContainerWidgetProps, registerWidget} from '@rainbow-d9/n1
 import React, {ForwardedRef, forwardRef} from 'react';
 import styled from 'styled-components';
 import {CssVars, DOM_KEY_WIDGET} from './constants';
+import {SDP} from './styled-components-styles';
 import {OmitHTMLProps, OmitNodeDef} from './types';
 
 /** Page configuration definition */
@@ -10,7 +11,7 @@ export type PageDef = ContainerDef & OmitHTMLProps<HTMLDivElement>;
 export type PageProps = OmitNodeDef<PageDef> & ContainerWidgetProps;
 
 // noinspection CssUnresolvedCustomProperty
-const APage = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-page'})`
+const APage = styled.div.attrs<SDP>({[DOM_KEY_WIDGET]: 'd9-page'})`
     display: grid;
     position: relative;
     grid-column: var(--grid-column);

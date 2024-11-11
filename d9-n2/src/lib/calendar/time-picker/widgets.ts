@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import {CssVars, DOM_KEY_WIDGET} from '../../constants';
+import {SDP} from '../../styled-components-styles';
 
 export const TimePickerContainer = styled.div.attrs<{ columns: number }>(({columns}) => {
 	return {
@@ -17,13 +18,13 @@ export const TimePickerContainer = styled.div.attrs<{ columns: number }>(({colum
     padding: 0 ${CssVars.CALENDAR_GUTTER_SIZE} ${CssVars.CALENDAR_GUTTER_SIZE};
     cursor: default;
 `;
-export const TimePickerLabel = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-calendar-time-picker-label'})`
+export const TimePickerLabel = styled.div.attrs<SDP>({[DOM_KEY_WIDGET]: 'd9-calendar-time-picker-label'})`
     display: flex;
     align-items: center;
     font-variant: ${CssVars.FONT_VARIANT};
     font-weight: ${CssVars.FONT_BOLD}
 `;
-export const TimePickerSelector = styled.div.attrs({
+export const TimePickerSelector = styled.div.attrs<SDP>({
 	[DOM_KEY_WIDGET]: 'd9-calendar-time-picker-selector',
 	'data-v-scroll': ''
 })`
@@ -34,7 +35,9 @@ export const TimePickerSelector = styled.div.attrs({
     border: ${CssVars.BORDER};
     overflow-y: scroll;
 `;
-export const TimePickerSelectorOption = styled.span.attrs({[DOM_KEY_WIDGET]: 'd9-calendar-time-picker-selector-option'})`
+export const TimePickerSelectorOption = styled.span.attrs<SDP>(
+	{[DOM_KEY_WIDGET]: 'd9-calendar-time-picker-selector-option'}
+)`
     display: flex;
     position: relative;
     align-items: center;

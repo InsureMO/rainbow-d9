@@ -1,6 +1,7 @@
 import {VUtils} from '@rainbow-d9/n1';
 import styled from 'styled-components';
 import {CssVars, DOM_KEY_WIDGET} from '../../constants';
+import {SDP} from '../../styled-components-styles';
 import {toCssSize} from '../../utils';
 
 // noinspection CssUnresolvedCustomProperty
@@ -47,7 +48,7 @@ export const TipContainer = styled.div.attrs<{
     z-index: ${CssVars.TIP_Z_INDEX};
     overflow: hidden;
 `;
-export const TipHeader = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-tip-header'})`
+export const TipHeader = styled.div.attrs<SDP>({[DOM_KEY_WIDGET]: 'd9-tip-header'})`
     display: flex;
     position: relative;
     align-items: center;
@@ -55,7 +56,7 @@ export const TipHeader = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-tip-header'})`
     min-height: ${CssVars.TIP_HEADER_HEIGHT};
     border-bottom: ${CssVars.TIP_HEADER_BORDER};
 `;
-export const TipTitle = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-tip-header-title'})`
+export const TipTitle = styled.div.attrs<SDP>({[DOM_KEY_WIDGET]: 'd9-tip-header-title'})`
     display: flex;
     position: relative;
     align-items: center;
@@ -66,12 +67,12 @@ export const TipTitle = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-tip-header-title
     color: ${CssVars.CAPTION_FONT_COLOR};
     padding: 0 ${CssVars.TIP_HEADER_PADDING};
 `;
-export const TipBody = styled.div.attrs({[DOM_KEY_WIDGET]: 'd9-tip-body'})`
+export const TipBody = styled.div.attrs<SDP>({[DOM_KEY_WIDGET]: 'd9-tip-body'})`
     display: flex;
     position: relative;
     padding: 0 ${CssVars.TIP_BODY_PADDING};
 `;
-export const TipLabel = styled.span.attrs({[DOM_KEY_WIDGET]: 'd9-tip-label'})`
+export const TipLabel = styled.span.attrs<SDP>({[DOM_KEY_WIDGET]: 'd9-tip-label'})`
     display: flex;
     position: relative;
     align-items: center;
