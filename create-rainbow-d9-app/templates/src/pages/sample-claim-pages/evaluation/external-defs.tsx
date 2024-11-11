@@ -1,13 +1,13 @@
 import {BaseModel, PropValue, RootEventTypes, ValueChangedOptions} from '@rainbow-d9/n1';
 import {ButtonClickOptions, CaptionClickOptions, GlobalHandlers} from '@rainbow-d9/n2';
 import {MutableRefObject} from 'react';
-import {asT} from '../../../utils';
 import {
 	createDropdownOptionsProvider,
 	D9PageExternalDefsCreatorOptions,
 	ExternalDefsWithGlobalCustomEventListeners,
 	validatePageWithCallback
-} from '../../standard-widgets';
+} from '../../../page-widgets';
+import {asT} from '../../../utils';
 import {
 	Claim,
 	createActionsAndSupportingActions,

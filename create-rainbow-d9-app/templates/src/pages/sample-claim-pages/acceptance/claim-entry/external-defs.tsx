@@ -1,8 +1,8 @@
 import {BaseModel, PropValue} from '@rainbow-d9/n1';
 import {ButtonClickOptions, GlobalHandlers} from '@rainbow-d9/n2';
 import {MutableRefObject} from 'react';
+import {createDropdownOptionsProvider, D9PageExternalDefsCreatorOptions, validatePage} from '../../../../page-widgets';
 import {asT} from '../../../../utils';
-import {createDropdownOptionsProvider, D9PageExternalDefsCreatorOptions, validatePage} from '../../../standard-widgets';
 import {createChangeInsuredAction} from '../../registration/find-insured/page-as-dialog';
 import {createActionsAndSupportingActions, createReporterBaseSectionActions} from '../../shared';
 import {saveRegistrationData} from './services';

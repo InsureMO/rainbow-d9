@@ -1,5 +1,5 @@
 import {VUtils} from '@rainbow-d9/n1';
-import {DOM_KEY_WIDGET, toIntlLabel} from '@rainbow-d9/n2';
+import {DOM_KEY_WIDGET, SDP, toIntlLabel} from '@rainbow-d9/n2';
 import {useEffect, useState} from 'react';
 import styled from 'styled-components';
 import {AppEventTypes, BannerBreadcrumb, useAppEventBus, useAuthenticatedChanged} from '../bootstrap';

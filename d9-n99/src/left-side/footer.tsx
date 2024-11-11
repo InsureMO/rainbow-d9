@@ -1,4 +1,4 @@
-import {DOM_KEY_WIDGET, GlobalEventTypes, IntlLabel, UnwrappedButton, useGlobalEventBus} from '@rainbow-d9/n2';
+import {DOM_KEY_WIDGET, GlobalEventTypes, IntlLabel, SDP, UnwrappedButton, useGlobalEventBus} from '@rainbow-d9/n2';
 import styled from 'styled-components';
 import LogoutIcon from '../assets/logout.svg?react';
 import {AppEventTypes, useAppEventBus} from '../bootstrap';

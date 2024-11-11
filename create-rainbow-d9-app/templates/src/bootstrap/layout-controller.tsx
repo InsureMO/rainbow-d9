@@ -1,5 +1,5 @@
 import {useForceUpdate} from '@rainbow-d9/n1';
-import {DOM_KEY_WIDGET} from '@rainbow-d9/n2';
+import {DOM_KEY_WIDGET, SDP} from '@rainbow-d9/n2';
 import {useEffect, useRef} from 'react';
 import styled from 'styled-components';
 import {isAuthenticated} from '../services';
@@ -25,7 +25,7 @@ import {
 import {useAuthenticatedChanged} from './use-authenticated-changed';
 
 // noinspection CssUnresolvedCustomProperty
-const LayoutController = styled.div.attrs({[DOM_KEY_WIDGET]: 'app-frame-layout-controller'})`
+const LayoutController = styled.div.attrs<SDP>({[DOM_KEY_WIDGET]: 'app-frame-layout-controller'})`
     display: none;
     position: relative;
 

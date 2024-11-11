@@ -1,4 +1,4 @@
-import {DOM_KEY_WIDGET} from '@rainbow-d9/n2';
+import {DOM_KEY_WIDGET, SDP} from '@rainbow-d9/n2';
 import {BrowserRouter, Route, Routes} from 'react-router-dom';
 import styled from 'styled-components';
 import {getBaseContext, getUnauthenticatedRoute} from '../utils';

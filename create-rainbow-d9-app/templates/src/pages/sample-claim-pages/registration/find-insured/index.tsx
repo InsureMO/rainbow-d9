@@ -1,6 +1,6 @@
 import {lazy} from 'react';
 import {AppPage, PageRegistrar} from '../../../../global-settings';
-import {LazyPageWrapper} from '../../../standard-widgets';
+import {LazyPageWrapper} from '../../../../page-widgets';
 
 const ClaimRegistrationFindInsuredIndex = LazyPageWrapper(lazy(() => import('./page')));
 

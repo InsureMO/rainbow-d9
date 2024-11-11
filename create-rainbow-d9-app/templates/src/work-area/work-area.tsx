@@ -1,4 +1,4 @@
-import {DOM_KEY_WIDGET} from '@rainbow-d9/n2';
+import {DOM_KEY_WIDGET, SDP} from '@rainbow-d9/n2';
 import {BrowserRouter, Route, Routes} from 'react-router-dom';
 import styled from 'styled-components';
 import {getBaseContext, getUnauthenticatedRoute} from '../utils';
@@ -6,7 +6,7 @@ import {Authenticated} from './authenticated';
 import {Unauthenticated} from './unauthenticated';
 
 // noinspection CssUnresolvedCustomProperty
-const Container = styled.div.attrs({[DOM_KEY_WIDGET]: 'app-work-area'})`
+const Container = styled.div.attrs<SDP>({[DOM_KEY_WIDGET]: 'app-work-area'})`
     display: block;
     position: relative;
     width: 100vw;

@@ -1,13 +1,13 @@
 import {BaseModel, PropValue, RootEventTypes, VUtils} from '@rainbow-d9/n1';
 import {ButtonClickOptions, GlobalHandlers} from '@rainbow-d9/n2';
 import {MutableRefObject} from 'react';
-import {asT} from '../../../utils';
 import {
 	createDropdownOptionsProvider,
 	D9PageExternalDefsCreator,
 	D9PageExternalDefsCreatorOptions,
 	validatePageWithCallback
-} from '../../standard-widgets';
+} from '../../../page-widgets';
+import {asT} from '../../../utils';
 import {MockData} from '../shared';
 import {AssistantData, Report, ReportColumn, RootModel} from './types';
 

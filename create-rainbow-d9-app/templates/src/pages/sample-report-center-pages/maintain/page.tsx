@@ -1,13 +1,13 @@
-import {DOM_KEY_WIDGET} from '@rainbow-d9/n2';
+import {DOM_KEY_WIDGET, SDP} from '@rainbow-d9/n2';
 import {useRef} from 'react';
 import styled from 'styled-components';
+import {D9Page, PreloadedPageProps} from '../../../page-widgets';
 import {asT} from '../../../utils';
-import {D9Page, PreloadedPageProps} from '../../standard-widgets';
 import {createExternalDefsCreator} from './external-defs';
 import {AssistantData, RootModel} from './types';
 
 // noinspection CssUnresolvedCustomProperty
-const LayoutController = styled.div.attrs({[DOM_KEY_WIDGET]: 'report-download-layout-controller'})`
+const LayoutController = styled.div.attrs<SDP>({[DOM_KEY_WIDGET]: 'report-download-layout-controller'})`
     display: none;
     position: relative;
 

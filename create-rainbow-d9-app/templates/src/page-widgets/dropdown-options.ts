@@ -1,5 +1,5 @@
 import {DropdownDef, DropdownOptions, GlobalHandlers} from '@rainbow-d9/n2';
-import {askCodeTableByCode} from '../../services';
+import {askCodeTableByCode} from '../services';
 
 export type StaticDropdownOptionsProvider<Keys extends string = string> = {
 	[key in Keys]: DropdownDef['options'];

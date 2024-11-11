@@ -1,5 +1,5 @@
 import {useForceUpdate} from '@rainbow-d9/n1';
-import {DOM_KEY_WIDGET} from '@rainbow-d9/n2';
+import {DOM_KEY_WIDGET, SDP} from '@rainbow-d9/n2';
 import {useEffect, useRef} from 'react';
 import styled from 'styled-components';
 import {isAuthenticated} from '../services';

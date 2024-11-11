@@ -33,7 +33,7 @@ export const toKind = (code: ThemeCode) => {
 	}
 	const kind = customToKind(code);
 	if (VUtils.isNotBlank(kind)) {
-		return kind;
+		return kind as ThemeKind;
 	}
 	switch (true) {
 		case code.toLowerCase().includes('dark'):

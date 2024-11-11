@@ -5,7 +5,7 @@ import {
 	createDropdownOptionsProvider,
 	D9PageExternalDefsCreator,
 	D9PageExternalDefsCreatorOptions
-} from '../../standard-widgets';
+} from '../../../page-widgets';
 import {AssistantData, ResultItem, RootModel} from './types';
 
 export const createExternalDefsCreator = (

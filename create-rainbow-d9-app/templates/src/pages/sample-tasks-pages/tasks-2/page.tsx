@@ -1,5 +1,5 @@
 import {GlobalHandlers} from '@rainbow-d9/n2';
-import {D9Page, PreloadedPageProps} from '../../standard-widgets';
+import {D9Page, PreloadedPageProps} from '../../../page-widgets';
 import {AssistantData} from './types';
 
 export default (props: PreloadedPageProps<AssistantData>) => {

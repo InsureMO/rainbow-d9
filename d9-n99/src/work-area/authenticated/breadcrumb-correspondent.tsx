@@ -1,6 +1,6 @@
 import {useEffect} from 'react';
 import {AppEventTypes, useAppEventBus} from '../../bootstrap';
-import {AppPage} from '../../pages';
+import {AppPage} from '../../global-settings';
 
 export const BreadcrumbCorrespondent = (props: AppPage) => {
 	const {renderer: Renderer, breadcrumb} = props;

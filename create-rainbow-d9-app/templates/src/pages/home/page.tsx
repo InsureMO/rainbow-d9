@@ -1,9 +1,9 @@
-import {DOM_KEY_WIDGET, GlobalRoot, IntlLabel} from '@rainbow-d9/n2';
+import {DOM_KEY_WIDGET, GlobalRoot, IntlLabel, SDP} from '@rainbow-d9/n2';
 import styled from 'styled-components';
 import {I18NAndD9N2Bridge} from '../../bootstrap';
 
 // noinspection CssUnresolvedCustomProperty
-const Container = styled.div.attrs({[DOM_KEY_WIDGET]: 'page-home'})`
+const Container = styled.div.attrs<SDP>({[DOM_KEY_WIDGET]: 'page-home'})`
     display: grid;
     position: relative;
     grid-template-columns: 1fr auto 1fr;

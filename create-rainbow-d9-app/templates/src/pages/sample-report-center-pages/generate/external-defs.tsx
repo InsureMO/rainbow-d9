@@ -1,12 +1,12 @@
 import {BaseModel, PropValue, RootEventTypes} from '@rainbow-d9/n1';
 import {ButtonClickOptions, DropdownTreeOption, GlobalHandlers} from '@rainbow-d9/n2';
 import {MutableRefObject} from 'react';
-import {asT} from '../../../utils';
 import {
 	createDropdownOptionsProvider,
 	D9PageExternalDefsCreator,
 	D9PageExternalDefsCreatorOptions
-} from '../../standard-widgets';
+} from '../../../page-widgets';
+import {asT} from '../../../utils';
 import {MockData} from '../shared';
 import {AssistantData, RootModel} from './types';
 

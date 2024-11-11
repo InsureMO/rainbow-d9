@@ -1,6 +1,6 @@
 import {useThrottler} from '@rainbow-d9/n1';
-import {DOM_KEY_WIDGET, toIntlLabel} from '@rainbow-d9/n2';
-import {useEffect, useRef, useState} from 'react';
+import {DOM_KEY_WIDGET, SDP, toIntlLabel} from '@rainbow-d9/n2';
+import {CSSProperties, useEffect, useRef, useState} from 'react';
 import styled from 'styled-components';
 import ArrowIcon from '../assets/single-arrow-down.svg?react';
 import {AppEventTypes, useAppEventBus} from '../bootstrap';
@@ -27,7 +27,7 @@ const Label = styled.span.attrs<{ level: number }>(({level}) => {
 		[DOM_KEY_WIDGET]: 'app-side-menu-group-label',
 		style: {
 			'--menu-level': level
-		}
+		} as CSSProperties
 	};
 })<{ level: number }>`
     display: flex;
@@ -108,7 +108,7 @@ const Items = styled.div.attrs<{ height: number }>(({height}) => {
 		[DOM_KEY_WIDGET]: 'app-side-menu-group-items',
 		style: {
 			'--menu-items-height': `${height}px`
-		}
+		} as CSSProperties
 	};
 })<{ height: number }>`
     display: flex;

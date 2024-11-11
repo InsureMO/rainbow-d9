@@ -1,4 +1,4 @@
-import {DOM_KEY_WIDGET, GlobalEventTypes, IntlLabel, UnwrappedButton, useGlobalEventBus} from '@rainbow-d9/n2';
+import {DOM_KEY_WIDGET, GlobalEventTypes, IntlLabel, SDP, UnwrappedButton, useGlobalEventBus} from '@rainbow-d9/n2';
 import styled from 'styled-components';
 import LogoutIcon from '../assets/logout.svg?react';
 import {AppEventTypes, useAppEventBus} from '../bootstrap';
@@ -6,7 +6,7 @@ import {isAuthenticated} from '../services';
 import {clearAuthentication, isAuthenticationEnabled} from '../utils';
 
 // noinspection CssUnresolvedCustomProperty
-const Container = styled.div.attrs({[DOM_KEY_WIDGET]: 'app-side-menu-footer'})`
+const Container = styled.div.attrs<SDP>({[DOM_KEY_WIDGET]: 'app-side-menu-footer'})`
     display: flex;
     position: relative;
     padding: var(--app-side-menu-footer-padding);

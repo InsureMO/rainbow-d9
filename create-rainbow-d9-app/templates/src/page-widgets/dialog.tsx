@@ -1,7 +1,7 @@
-import {DOM_KEY_WIDGET} from '@rainbow-d9/n2';
+import {DOM_KEY_WIDGET, WSDP} from '@rainbow-d9/n2';
 import {CSSProperties} from 'react';
 import styled from 'styled-components';
-import {isEmptyFCErrorCollapsed} from '../../utils';
+import {isEmptyFCErrorCollapsed} from '../utils';
 
 export const LargestDialogStyles: CSSProperties = {
 	marginTop: 'calc((100vh - var(--app-dialog-largest-height)) / 2 - 2vh)',
@@ -12,7 +12,7 @@ export const LargestDialogStyles: CSSProperties = {
 };
 
 // noinspection CssUnresolvedCustomProperty
-const LayoutControllerForLastIsTextarea = styled.div.attrs<{ rows: number }>(
+const LayoutControllerForLastIsTextarea = styled.div.attrs<WSDP<{ rows: number }>>(
 	{[DOM_KEY_WIDGET]: 'dialog-layout-controller'}
 )<{ rows: number }>`
     display: none;
@@ -46,7 +46,7 @@ export const LayoutControllerWithLastTextarea = (props: { rows: number }) => {
 };
 
 // noinspection CssUnresolvedCustomProperty
-const LayoutControllerForCriteriaAndTable = styled.div.attrs<{ criteriaRows: number; dense: boolean }>(
+const LayoutControllerForCriteriaAndTable = styled.div.attrs<WSDP<{ criteriaRows: number; dense: boolean }>>(
 	{[DOM_KEY_WIDGET]: 'dialog-layout-controller'}
 )<{ criteriaRows: number; dense: boolean }>`
     display: none;

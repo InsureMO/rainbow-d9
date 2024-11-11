@@ -22,8 +22,8 @@ import {
 } from '@rainbow-d9/n2';
 import {lazy} from 'react';
 import {AppPage, PageRegistrar} from '../../../global-settings';
+import {createDropdownOptionsProvider, PreloadedLazyPageWrapper, PreloaderFuncOptions} from '../../../page-widgets';
 import {asT} from '../../../utils';
-import {createDropdownOptionsProvider, PreloadedLazyPageWrapper, PreloaderFuncOptions} from '../../standard-widgets';
 import {createReportTreeOptions, MockData} from '../shared';
 import InitRootModel from './init-root.json';
 import {AssistantData, Criteria, ReportCriteria, RootModel} from './types';

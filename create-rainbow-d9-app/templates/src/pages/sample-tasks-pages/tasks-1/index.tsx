@@ -1,6 +1,6 @@
 import {lazy} from 'react';
 import {AppPage, PageRegistrar} from '../../../global-settings';
-import {LazyPageWrapper} from '../../standard-widgets';
+import {LazyPageWrapper} from '../../../page-widgets';
 import './intl-labels';
 
 const Tasks1Index = LazyPageWrapper(lazy(() => import('./page')));

@@ -1,6 +1,6 @@
 import {ContainerDef, NodeDef} from '@rainbow-d9/n1';
 import {TabsDef} from '@rainbow-d9/n2';
-import {asT} from '../../utils';
+import {asT} from '../utils';
 
 const doVisitParsedUI = (node: NodeDef, ancestors: Array<NodeDef>, visit: (node: NodeDef, ancestors: Array<NodeDef>) => void) => {
 	visit(node, ancestors);

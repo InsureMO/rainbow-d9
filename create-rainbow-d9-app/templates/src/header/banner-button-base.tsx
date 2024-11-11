@@ -1,5 +1,5 @@
 import {useCreateEventBus, useThrottler} from '@rainbow-d9/n1';
-import {DOM_KEY_WIDGET} from '@rainbow-d9/n2';
+import {DOM_KEY_WIDGET, SDP} from '@rainbow-d9/n2';
 import {createContext, ReactNode, useContext, useEffect, useState} from 'react';
 import styled from 'styled-components';
 
@@ -17,7 +17,7 @@ interface BannerButtonBaseState {
 }
 
 // noinspection CssUnresolvedCustomProperty
-const Container = styled.div.attrs({'data-type': 'banner-button'})`
+const Container = styled.div.attrs<{ 'data-type'?: string }>({'data-type': 'banner-button'})`
     display: flex;
     position: relative;
     align-items: center;
@@ -137,7 +137,7 @@ export const BannerButtonBase = (props: BannerButtonBaseProps) => {
 };
 
 // noinspection CssUnresolvedCustomProperty
-export const BannerButton = styled.div.attrs({[DOM_KEY_WIDGET]: 'app-banner-button'})`
+export const BannerButton = styled.div.attrs<SDP>({[DOM_KEY_WIDGET]: 'app-banner-button'})`
     display: flex;
     position: relative;
     align-items: center;
@@ -169,7 +169,7 @@ export const BannerButton = styled.div.attrs({[DOM_KEY_WIDGET]: 'app-banner-butt
 `;
 
 // noinspection CssUnresolvedCustomProperty
-const BannerButtonMenuContainer = styled.div.attrs({[DOM_KEY_WIDGET]: 'app-banner-button-menu'})`
+const BannerButtonMenuContainer = styled.div.attrs<SDP>({[DOM_KEY_WIDGET]: 'app-banner-button-menu'})`
     display: flex;
     flex-direction: column;
     min-width: var(--app-banner-menu-min-width);
@@ -199,7 +199,7 @@ interface BannerButtonMenuItemProps {
 }
 
 // noinspection CssUnresolvedCustomProperty
-const BannerButtonMenuItemContainer = styled.div.attrs({[DOM_KEY_WIDGET]: 'app-banner-button-menu-item'})`
+const BannerButtonMenuItemContainer = styled.div.attrs<SDP>({[DOM_KEY_WIDGET]: 'app-banner-button-menu-item'})`
     display: grid;
     position: relative;
     grid-template-columns: var(--app-banner-button-menu-item-icon-size) 1fr;

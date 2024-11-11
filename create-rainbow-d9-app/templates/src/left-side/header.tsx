@@ -1,4 +1,4 @@
-import {DOM_KEY_WIDGET, IntlLabel} from '@rainbow-d9/n2';
+import {DOM_KEY_WIDGET, IntlLabel, SDP} from '@rainbow-d9/n2';
 import {useEffect, useRef, useState} from 'react';
 import styled from 'styled-components';
 import FoldMenu from '../assets/double-arrow-left.svg?react';
@@ -6,7 +6,7 @@ import Logo from '../assets/logo.svg?react';
 import {AppEventTypes, useAppEventBus} from '../bootstrap';
 
 // noinspection CssUnresolvedCustomProperty,CssNoGenericFontName
-const Container = styled.div.attrs({[DOM_KEY_WIDGET]: 'app-side-menu-header'})`
+const Container = styled.div.attrs<SDP>({[DOM_KEY_WIDGET]: 'app-side-menu-header'})`
     display: grid;
     position: relative;
     grid-template-columns: var(--app-side-menu-header-height) 1fr auto;

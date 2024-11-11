@@ -1,14 +1,14 @@
 import {BaseModel, PropValue, RootEventTypes} from '@rainbow-d9/n1';
 import {ButtonClickOptions, PaginationData} from '@rainbow-d9/n2';
 import {MutableRefObject} from 'react';
-import {Page} from '../../../../services';
-import {asT} from '../../../../utils';
 import {
 	createDropdownOptionsProvider,
 	D9PageExternalDefsCreator,
 	D9PageExternalDefsCreatorOptions,
 	DC
-} from '../../../standard-widgets';
+} from '../../../../page-widgets';
+import {Page} from '../../../../services';
+import {asT} from '../../../../utils';
 import {askRegistrationList, saveRegistrationData} from './services';
 import {ResultItem, RootModel} from './types';
 

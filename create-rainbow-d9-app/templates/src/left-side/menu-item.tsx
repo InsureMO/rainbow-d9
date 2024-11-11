@@ -1,4 +1,5 @@
-import {DOM_KEY_WIDGET, toIntlLabel} from '@rainbow-d9/n2';
+import {DOM_KEY_WIDGET, SDP, toIntlLabel} from '@rainbow-d9/n2';
+import {CSSProperties} from 'react';
 import styled from 'styled-components';
 import {useAppEventBus} from '../bootstrap';
 import {AppMenuItem} from '../global-settings';
@@ -8,7 +9,7 @@ interface MenuItemProps extends AppMenuItem {
 	level: number;
 }
 
-const Container = styled.div.attrs({[DOM_KEY_WIDGET]: 'app-side-menu-item'})`
+const Container = styled.div.attrs<SDP>({[DOM_KEY_WIDGET]: 'app-side-menu-item'})`
     display: flex;
     position: relative;
     flex-direction: column;
@@ -19,7 +20,7 @@ const Label = styled.span.attrs<{ level: number }>(({level}) => {
 		[DOM_KEY_WIDGET]: 'app-side-menu-item-label',
 		style: {
 			'--menu-level': level
-		}
+		} as CSSProperties
 	};
 })<{ level: number }>`
     display: flex;
