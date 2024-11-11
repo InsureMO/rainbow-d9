@@ -107,11 +107,11 @@ const defaultCompilerOptions = (): CompilerOptions => {
 		jsx: JsxEmit.None,   // no jsx
 		strict: true,
 		esModuleInterop: true,
-		module: ModuleKind.Node16,   // default use node next
+		module: ModuleKind.NodeNext,   // default use node next
 		suppressOutputPathCheck: true,
 		skipLibCheck: true,
 		skipDefaultLibCheck: true,
-		moduleResolution: ModuleResolutionKind.Node16 // default use node next
+		moduleResolution: ModuleResolutionKind.NodeNext // default use node next
 	};
 };
 // "/DOM.d.ts" => "/lib.dom.d.ts"
