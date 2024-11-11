@@ -1,4 +1,4 @@
-import {createDropdownOptionsProvider, D9Page, D9PageExternalDefsCreatorOptions} from '../../standard-widgets';
+import {createDropdownOptionsProvider, D9Page, D9PageExternalDefsCreatorOptions} from '../../../page-widgets';
 import InitRootModel from './init-root.json';
 import {markdown} from './ui-config.d9';
 

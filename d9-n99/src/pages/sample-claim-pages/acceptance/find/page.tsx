@@ -1,6 +1,6 @@
 import {useRef} from 'react';
+import {D9Page} from '../../../../page-widgets';
 import {asT} from '../../../../utils';
-import {D9Page} from '../../../standard-widgets';
 import {createExternalDefsCreator} from './external-defs';
 import InitRootModel from './init-root.json';
 import {RootModel} from './types';

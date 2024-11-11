@@ -1,8 +1,8 @@
 import {DropdownOptions, GlobalHandlers} from '@rainbow-d9/n2';
 import {lazy} from 'react';
 import {AppPage, PageRegistrar} from '../../../../global-settings';
+import {PreloadedLazyPageWrapper, PreloadedPageProps, PreloaderFuncOptions} from '../../../../page-widgets';
 import {asT} from '../../../../utils';
-import {PreloadedLazyPageWrapper, PreloadedPageProps, PreloaderFuncOptions} from '../../../standard-widgets';
 import {SharedMarkdown, SharedServices} from '../../shared';
 import InitRootModel from './init-root.json';
 import {loadRegistrationData} from './services';

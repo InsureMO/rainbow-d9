@@ -1,13 +1,13 @@
 import {ObjectPropValue} from '@rainbow-d9/n1';
-import {DOM_KEY_WIDGET, GlobalHandlers, IntlLabel} from '@rainbow-d9/n2';
+import {DOM_KEY_WIDGET, GlobalHandlers, IntlLabel, SDP} from '@rainbow-d9/n2';
 import {JSX, LazyExoticComponent, Suspense, useEffect, useState} from 'react';
 import {useLocation, useParams} from 'react-router';
 import {Params, useSearchParams} from 'react-router-dom';
 import styled from 'styled-components';
-import {D9PageParsedUIManufacture} from './d9-page';
+import {D9PageParsedUIManufacture} from './d9-page.tsx';
 
 // noinspection CssUnresolvedCustomProperty
-const Container = styled.div.attrs({[DOM_KEY_WIDGET]: 'page-lazy-loading'})`
+const Container = styled.div.attrs<SDP>({[DOM_KEY_WIDGET]: 'page-lazy-loading'})`
     display: grid;
     position: relative;
     grid-template-columns: 1fr auto 1fr;

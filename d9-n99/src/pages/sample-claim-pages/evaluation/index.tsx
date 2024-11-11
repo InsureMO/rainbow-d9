@@ -2,14 +2,14 @@ import {MonitorNodeAttributes, NodeDef, RootEventTypes} from '@rainbow-d9/n1';
 import {DropdownOptions, GlobalEventPrefix, GlobalHandlers, IntlLabel, SectionDef} from '@rainbow-d9/n2';
 import {lazy} from 'react';
 import {AppPage, PageRegistrar} from '../../../global-settings';
-import {asT} from '../../../utils';
 import {
 	createPageLocationOption,
 	PreloadedLazyPageWrapper,
 	PreloadedPageProps,
 	PreloaderFuncOptions,
 	visitParsedUI
-} from '../../standard-widgets';
+} from '../../../page-widgets';
+import {asT} from '../../../utils';
 import {Claim, SharedServices} from '../shared';
 import {loadEvaluationData} from './services';
 import {Data, RootModel} from './types';

@@ -1,4 +1,4 @@
-import {redressByCutPrefix} from '../../standard-widgets';
+import {redressByCutPrefix} from '../../../page-widgets';
 
 export const enUSIntlLabels = redressByCutPrefix({
 	'claim.title': 'Claim',

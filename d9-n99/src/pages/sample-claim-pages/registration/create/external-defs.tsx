@@ -6,7 +6,7 @@ import {
 	D9PageExternalDefsCreatorOptions,
 	validatePage,
 	validatePageWithCallback
-} from '../../../standard-widgets';
+} from '../../../../page-widgets';
 import {createActionsAndSupportingActions, createReporterBaseSectionActions} from '../../shared';
 import {createChangeInsuredAction} from '../find-insured/page-as-dialog';
 import {AssistantData} from './types';

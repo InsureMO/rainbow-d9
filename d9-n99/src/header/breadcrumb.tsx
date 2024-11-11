@@ -7,7 +7,7 @@ import {isAuthenticated} from '../services';
 import {isBannerBreadcrumbEnabled} from '../utils';
 
 // noinspection CssUnresolvedCustomProperty
-const Container = styled.div.attrs({[DOM_KEY_WIDGET]: 'app-banner-breadcrumb'})`
+const Container = styled.div.attrs<SDP>({[DOM_KEY_WIDGET]: 'app-banner-breadcrumb'})`
     display: flex;
     position: relative;
     flex-direction: column;
@@ -24,7 +24,7 @@ const Container = styled.div.attrs({[DOM_KEY_WIDGET]: 'app-banner-breadcrumb'})`
     }
 `;
 // noinspection CssUnresolvedCustomProperty,CssNoGenericFontName
-const Title = styled.div.attrs({[DOM_KEY_WIDGET]: 'app-banner-breadcrumb-title'})`
+const Title = styled.div.attrs<SDP>({[DOM_KEY_WIDGET]: 'app-banner-breadcrumb-title'})`
     display: flex;
     position: relative;
     align-items: center;
@@ -34,7 +34,7 @@ const Title = styled.div.attrs({[DOM_KEY_WIDGET]: 'app-banner-breadcrumb-title'}
     font-weight: var(--app-banner-breadcrumb-title-font-weight);
     color: var(--app-banner-breadcrumb-title-color);
 `;
-const Locations = styled.div.attrs({[DOM_KEY_WIDGET]: 'app-banner-breadcrumb-locations'})`
+const Locations = styled.div.attrs<SDP>({[DOM_KEY_WIDGET]: 'app-banner-breadcrumb-locations'})`
     display: flex;
     position: relative;
     margin-top: 2px;
@@ -45,7 +45,7 @@ const Locations = styled.div.attrs({[DOM_KEY_WIDGET]: 'app-banner-breadcrumb-loc
     }
 `;
 // noinspection CssUnresolvedCustomProperty,CssNoGenericFontName
-const Location = styled.div.attrs({[DOM_KEY_WIDGET]: 'app-banner-breadcrumb-location'})`
+const Location = styled.div.attrs<SDP>({[DOM_KEY_WIDGET]: 'app-banner-breadcrumb-location'})`
     display: flex;
     position: relative;
     align-items: center;

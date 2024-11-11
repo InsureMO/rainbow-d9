@@ -2,7 +2,7 @@ import {DOM_KEY_WIDGET} from '@rainbow-d9/n2';
 import styled from 'styled-components';
 
 // noinspection CssUnresolvedCustomProperty,CssNoGenericFontName
-export const Container = styled.div.attrs({[DOM_KEY_WIDGET]: 'page-authentication'})`
+export const Container = styled.div.attrs<SDP>({[DOM_KEY_WIDGET]: 'page-authentication'})`
     display: grid;
     position: relative;
     grid-template-columns: 1fr auto 1fr;

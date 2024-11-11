@@ -3,7 +3,7 @@ import {lazy} from 'react';
 import {AppPage, PageRegistrar} from '../../../global-settings';
 import './intl-labels';
 import {registerMockCodeTables} from '../../../mock-services';
-import {createDropdownOptionsProvider, PreloadedLazyPageWrapper} from '../../standard-widgets';
+import {createDropdownOptionsProvider, PreloadedLazyPageWrapper} from '../../../page-widgets';
 import InitRootModel from './init-root.json';
 import {AssistantData, CodesNames} from './types';
 import {markdown} from './ui-config.d9';

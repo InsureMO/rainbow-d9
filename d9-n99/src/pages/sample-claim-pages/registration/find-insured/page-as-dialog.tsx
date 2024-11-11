@@ -8,8 +8,8 @@ import {
 	UnwrappedButtonBar
 } from '@rainbow-d9/n2';
 import {useRef} from 'react';
+import {D9Dialog, LargestDialogStyles, LayoutControllerWithCriteriaAndTable} from '../../../../page-widgets';
 import {asT} from '../../../../utils';
-import {D9Dialog, LargestDialogStyles, LayoutControllerWithCriteriaAndTable} from '../../../standard-widgets';
 import {Claim} from '../../shared';
 import {createExternalDefsCreator, RegisterAction} from './external-defs';
 import InitRootModel from './init-root.json';

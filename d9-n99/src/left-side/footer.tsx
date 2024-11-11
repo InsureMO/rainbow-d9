@@ -6,7 +6,7 @@ import {isAuthenticated} from '../services';
 import {clearAuthentication, isAuthenticationEnabled} from '../utils';
 
 // noinspection CssUnresolvedCustomProperty
-const Container = styled.div.attrs({[DOM_KEY_WIDGET]: 'app-side-menu-footer'})`
+const Container = styled.div.attrs<SDP>({[DOM_KEY_WIDGET]: 'app-side-menu-footer'})`
     display: flex;
     position: relative;
     padding: var(--app-side-menu-footer-padding);

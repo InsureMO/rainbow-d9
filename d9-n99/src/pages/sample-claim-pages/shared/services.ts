@@ -1,7 +1,7 @@
 import {VUtils} from '@rainbow-d9/n1';
 import {DropdownOptions, GlobalHandlers} from '@rainbow-d9/n2';
 import {mock} from '../../../mock-services';
-import {DC} from '../../standard-widgets';
+import {DC} from '../../../page-widgets';
 
 export const Users = {
 	David: {name: 'David', userId: '10000', depart: 'POS'},

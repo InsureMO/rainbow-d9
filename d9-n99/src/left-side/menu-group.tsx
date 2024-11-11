@@ -12,7 +12,7 @@ interface MenuGroupProps extends AppMenuGroup {
 	level: number;
 }
 
-const Container = styled.div.attrs({[DOM_KEY_WIDGET]: 'app-side-menu-group'})`
+const Container = styled.div.attrs<SDP>({[DOM_KEY_WIDGET]: 'app-side-menu-group'})`
     display: flex;
     position: relative;
     flex-direction: column;

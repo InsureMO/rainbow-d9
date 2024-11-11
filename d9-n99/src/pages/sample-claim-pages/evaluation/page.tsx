@@ -1,6 +1,6 @@
 import {useRef} from 'react';
+import {D9Page, PreloadedPageProps} from '../../../page-widgets';
 import {asT} from '../../../utils';
-import {D9Page, PreloadedPageProps} from '../../standard-widgets';
 import {createExternalDefsCreator} from './external-defs';
 import {AssistantData, RootModel} from './types';
 

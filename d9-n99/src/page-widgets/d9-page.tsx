@@ -24,10 +24,10 @@ import {
 import {parseDoc} from '@rainbow-d9/n3';
 import {createContext, Fragment, JSX, ReactNode, useContext, useEffect, useState} from 'react';
 import {useNavigate} from 'react-router-dom';
-import {I18NAndD9N2Bridge} from '../../bootstrap';
-import {D9PageState} from '../../global-settings';
-import {asT} from '../../utils';
-import {StandardPageWrapper} from './standard-page-wrapper';
+import {I18NAndD9N2Bridge} from '../bootstrap';
+import {D9PageState} from '../global-settings';
+import {asT} from '../utils';
+import {StandardPageWrapper} from './standard-page-wrapper.tsx';
 
 enum PageToRootEventBusTypes {
 	TO_PAGE_ROOT = 'to-page-root',
@@ -298,7 +298,9 @@ const D9PageContent = (props: D9PageContentProps) => {
 const useStatePrepare = (props: Pick<D9PageProps, 'ui' | 'manufactureParsedUI' | 'initRootModel' | 'initRootModelAsIs'>): D9PageState => {
 	const {ui, manufactureParsedUI, initRootModel = {}, initRootModelAsIs = false} = props;
 	const [state] = useState<D9PageState>(() => {
+		console.time('parseDoc');
 		let {node, success, error} = parseDoc(ui);
+		console.timeEnd('parseDoc');
 		if (success && manufactureParsedUI != null) {
 			node = manufactureParsedUI(node);
 		}

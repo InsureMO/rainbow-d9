@@ -11,7 +11,7 @@ import {ThemeSwitcher} from './theme-switcher';
 import {UserProfile} from './user-profile';
 
 // noinspection CssUnresolvedCustomProperty
-const Container = styled.div.attrs({[DOM_KEY_WIDGET]: 'app-banner'})`
+const Container = styled.div.attrs<SDP>({[DOM_KEY_WIDGET]: 'app-banner'})`
     display: flex;
     position: fixed;
     top: 0;

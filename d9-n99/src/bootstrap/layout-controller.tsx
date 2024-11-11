@@ -25,7 +25,7 @@ import {
 import {useAuthenticatedChanged} from './use-authenticated-changed';
 
 // noinspection CssUnresolvedCustomProperty
-const LayoutController = styled.div.attrs({[DOM_KEY_WIDGET]: 'app-frame-layout-controller'})`
+const LayoutController = styled.div.attrs<SDP>({[DOM_KEY_WIDGET]: 'app-frame-layout-controller'})`
     display: none;
     position: relative;
 

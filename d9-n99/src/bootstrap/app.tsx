@@ -1,6 +1,8 @@
 // make sure it is first one to be imported, which do initializing things
 import './envs';
+import isPropValid from '@emotion/is-prop-valid';
 import {useEffect} from 'react';
+import {StyleSheetManager} from 'styled-components';
 import {isDev} from '../utils';
 import {AppEventBusProvider} from './app-event-bus';
 import {AppFrame} from './frame';
@@ -29,10 +31,12 @@ export const App = () => {
 		console.log('%cpostMessage%c(%c{%ctype%c: %c\'switch-i18n-switcher\'%c, %cenabled%c: %cfalse%c}%c);', ...colors);
 		console.groupEnd();
 	}, []);
-	return <AppEventBusProvider>
-		<AppGlobalStyles/>
-		<ThemeHandler/>
-		<I18NHandler/>
-		<AppFrame/>
-	</AppEventBusProvider>;
+	return <StyleSheetManager shouldForwardProp={isPropValid}>
+		<AppEventBusProvider>
+			<AppGlobalStyles/>
+			<ThemeHandler/>
+			<I18NHandler/>
+			<AppFrame/>
+		</AppEventBusProvider>
+	</StyleSheetManager>;
 };

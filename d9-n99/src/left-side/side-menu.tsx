@@ -1,4 +1,4 @@
-import {DOM_KEY_WIDGET, GlobalRoot} from '@rainbow-d9/n2';
+import {DOM_KEY_WIDGET, GlobalRoot, SDP} from '@rainbow-d9/n2';
 import {useEffect, useState} from 'react';
 import styled from 'styled-components';
 import {AppEventTypes, I18NAndD9N2Bridge, useAppEventBus, useAuthenticatedChanged} from '../bootstrap';
@@ -9,7 +9,7 @@ import {SideMenuFooter} from './footer';
 import {SideMenuHeader} from './header';
 
 // noinspection CssUnresolvedCustomProperty
-const Container = styled.div.attrs({[DOM_KEY_WIDGET]: 'app-side-menu'})`
+const Container = styled.div.attrs<SDP>({[DOM_KEY_WIDGET]: 'app-side-menu'})`
     display: flex;
     position: fixed;
     flex-direction: column;

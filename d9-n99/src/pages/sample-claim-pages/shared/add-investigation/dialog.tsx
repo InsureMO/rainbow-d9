@@ -9,13 +9,13 @@ import {
 } from '@rainbow-d9/n2';
 import dayjs from 'dayjs';
 import {useRef} from 'react';
-import {asT, getAuthentication} from '../../../../utils';
 import {
 	D9Dialog,
 	LargestDialogStyles,
 	LayoutControllerWithLastTextarea,
 	validateDialog
-} from '../../../standard-widgets';
+} from '../../../../page-widgets';
+import {asT, getAuthentication} from '../../../../utils';
 import {Claim} from '../index';
 import {markdown} from './ui-config.d9';
 

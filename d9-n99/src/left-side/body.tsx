@@ -1,11 +1,15 @@
-import {DOM_KEY_WIDGET} from '@rainbow-d9/n2';
+import {DOM_KEY_WIDGET, SDP} from '@rainbow-d9/n2';
 import styled from 'styled-components';
 import {askMenus, isMenuGroup, isMenuItem} from '../global-settings';
 import {MenuGroup} from './menu-group';
 import {MenuItem} from './menu-item';
 
 // noinspection CssUnresolvedCustomProperty
-const Container = styled.div.attrs({[DOM_KEY_WIDGET]: 'app-side-menu-body', 'data-h-scroll': '', 'data-v-scroll': ''})`
+const Container = styled.div.attrs<SDP>({
+	[DOM_KEY_WIDGET]: 'app-side-menu-body',
+	'data-h-scroll': '',
+	'data-v-scroll': ''
+})`
     display: flex;
     position: relative;
     flex-direction: column;
