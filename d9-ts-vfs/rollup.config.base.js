@@ -55,7 +55,7 @@ export const buildConfig = (lint) => {
 		},
 		external: [
 			'typescript',
-			'react', 'react-dom', 'styled-components',
+			'react', 'react-dom',
 			'@codemirror/view', '@codemirror/state', '@codemirror/language', '@codemirror/lint', '@codemirror/autocomplete',
 			'comlink'
 		],
