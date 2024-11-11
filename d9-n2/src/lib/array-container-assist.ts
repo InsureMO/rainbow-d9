@@ -45,9 +45,13 @@ export const useArrayCouldAddElement = (props: Omit<ArrayContainerDef, '$wt' | '
 			await computeEnablement();
 		};
 
-		on && on(RootEventTypes.VALUE_CHANGED, onValueChanged);
+		if (on != null) {
+			on(RootEventTypes.VALUE_CHANGED, onValueChanged);
+		}
 		return () => {
-			off && off(RootEventTypes.VALUE_CHANGED, onValueChanged);
+			if (off != null) {
+				off(RootEventTypes.VALUE_CHANGED, onValueChanged);
+			}
 		};
 	}, [
 		globalHandlers, on, off,

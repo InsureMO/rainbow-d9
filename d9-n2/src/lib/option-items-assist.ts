@@ -94,10 +94,14 @@ export const useOptionItems = <V>(props: OptionItemsProps<V>) => {
 				setCandidates(candidates => ({initialized: false, options: candidates.options}));
 			};
 			on(WrapperEventTypes.UNHANDLED_REACTION_OCCURRED, onUnhandledReactionOccurred);
-			onGlobal && onGlobal(GlobalEventTypes.LANGUAGE_CHANGED, onLanguageChanged);
+			if (onGlobal != null) {
+				onGlobal(GlobalEventTypes.LANGUAGE_CHANGED, onLanguageChanged);
+			}
 			return () => {
 				off(WrapperEventTypes.UNHANDLED_REACTION_OCCURRED, onUnhandledReactionOccurred);
-				offGlobal && offGlobal(GlobalEventTypes.LANGUAGE_CHANGED, onLanguageChanged);
+				if (offGlobal != null) {
+					offGlobal(GlobalEventTypes.LANGUAGE_CHANGED, onLanguageChanged);
+				}
 			};
 		}
 	}, [on, off, onGlobal, offGlobal]);

@@ -1,6 +1,6 @@
 import {NodeDef, registerWidget} from '@rainbow-d9/n1';
 import {Widget} from '@rainbow-d9/n3';
-import {JSX} from 'react';
+import {FC, JSX} from 'react';
 import {JsEditor, TsEditor} from './code-editor';
 import {CodeEditorDef} from './types';
 
@@ -30,7 +30,7 @@ export interface CodeEditorWidgetTypes {
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-const registerCodeEditor = (widgetHelper: Widget.WidgetHelper, widgetType: string, JSX: (props: any) => JSX.Element) => {
+const registerCodeEditor = (widgetHelper: Widget.WidgetHelper, widgetType: string, JSX: FC<any> | ((props: any) => JSX.Element)) => {
 	registerWidget({key: widgetType, JSX, container: false, array: false});
 	// n3 translator
 	const TranslatorClass = class extends AbstractCodeEditorTranslator {

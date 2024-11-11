@@ -41,7 +41,9 @@ const ATextarea = styled.textarea.attrs<{ autoSelect: boolean }>(
 			[DOM_ID_WIDGET]: id,
 			onFocus: (event: FocusEvent<HTMLTextAreaElement>) => {
 				event.target.select();
-				onFocus && onFocus(event);
+				if (onFocus != null) {
+					onFocus(event);
+				}
 			}
 		};
 	})<{ autoSelect: boolean }>`

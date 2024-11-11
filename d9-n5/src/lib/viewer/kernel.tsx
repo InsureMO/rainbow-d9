@@ -188,9 +188,6 @@ export const ViewerKernel = (props: ViewerProps & { content: string }) => {
 					</WidgetWrapperToolbar>
 				</>
 				: null}
-			{/**
-			 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-			 @ts-ignore */}
 			<ErrorBoundary content={content}>
 				<StandaloneRoot {...def} $root={mockData} externalDefs={enhancedExternalDefs}/>
 			</ErrorBoundary>

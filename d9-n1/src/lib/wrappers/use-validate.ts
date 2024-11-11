@@ -55,11 +55,13 @@ export const useValidate = (options: {
 					// validation result changed
 					setAttributeValues(attributes => ({...attributes, [MonitorNodeAttributes.VALID]: result}));
 				}
-				fire && fire(RootEventTypes.VALIDATED, {
-					root: props.$root, model: props.$model,
-					pathToRoot: props.$p2r, propertyPath: props.$pp, absolutePath, value: to,
-					...result
-				});
+				if (fire != null) {
+					fire(RootEventTypes.VALIDATED, {
+						root: props.$root, model: props.$model,
+						pathToRoot: props.$p2r, propertyPath: props.$pp, absolutePath, value: to,
+						...result
+					});
+				}
 			} else if (attributeValues[MonitorNodeAttributes.VALID]?.valid === false) {
 				// no validation needed, but current status is not valid
 				// reset to valid (delete this attribute)
@@ -68,13 +70,15 @@ export const useValidate = (options: {
 					delete attrs[MonitorNodeAttributes.VALID];
 					return attrs;
 				});
-				fire && fire(RootEventTypes.VALIDATED, {
-					root: props.$root, model: props.$model,
-					pathToRoot: props.$p2r, propertyPath: props.$pp,
-					absolutePath: PPUtils.absolute(props.$p2r, props.$pp),
-					value: to,
-					valid: true
-				});
+				if (fire != null) {
+					fire(RootEventTypes.VALIDATED, {
+						root: props.$root, model: props.$model,
+						pathToRoot: props.$p2r, propertyPath: props.$pp,
+						absolutePath: PPUtils.absolute(props.$p2r, props.$pp),
+						value: to,
+						valid: true
+					});
+				}
 			}
 		};
 		on(WrapperEventTypes.VALIDATE, onValidate);
@@ -107,9 +111,15 @@ export const useValidationRegistration = (options: {
 		}
 		if (attributeValues[MonitorNodeAttributes.DISABLED] === true || attributeValues[MonitorNodeAttributes.VISIBLE] === false) {
 			// is disabled or not visible, validation is no longer relevant
-			fireRoot && fireRoot(RootEventTypes.UNREGISTER_VALIDATABLE, uniqueId);
-			fireContainer && fireContainer(ContainerEventTypes.UNREGISTER_VALIDATABLE, uniqueId);
-			fireArrayElement && fireArrayElement(ArrayElementEventTypes.UNREGISTER_VALIDATABLE, uniqueId);
+			if (fireRoot != null) {
+				fireRoot(RootEventTypes.UNREGISTER_VALIDATABLE, uniqueId);
+			}
+			if (fireContainer != null) {
+				fireContainer(ContainerEventTypes.UNREGISTER_VALIDATABLE, uniqueId);
+			}
+			if (fireArrayElement != null) {
+				fireArrayElement(ArrayElementEventTypes.UNREGISTER_VALIDATABLE, uniqueId);
+			}
 			return;
 		}
 
@@ -141,13 +151,25 @@ export const useValidationRegistration = (options: {
 				}
 			});
 		};
-		fireRoot && fireRoot(RootEventTypes.REGISTER_VALIDATABLE, uniqueId, scopes, validate);
-		fireContainer && fireContainer(ContainerEventTypes.REGISTER_VALIDATABLE, uniqueId, validate);
-		fireArrayElement && fireArrayElement(ArrayElementEventTypes.REGISTER_VALIDATABLE, uniqueId, validate);
+		if (fireRoot != null) {
+			fireRoot(RootEventTypes.REGISTER_VALIDATABLE, uniqueId, scopes, validate);
+		}
+		if (fireContainer != null) {
+			fireContainer(ContainerEventTypes.REGISTER_VALIDATABLE, uniqueId, validate);
+		}
+		if (fireArrayElement != null) {
+			fireArrayElement(ArrayElementEventTypes.REGISTER_VALIDATABLE, uniqueId, validate);
+		}
 		return () => {
-			fireRoot && fireRoot(RootEventTypes.UNREGISTER_VALIDATABLE, uniqueId);
-			fireContainer && fireContainer(ContainerEventTypes.UNREGISTER_VALIDATABLE, uniqueId);
-			fireArrayElement && fireArrayElement(ArrayElementEventTypes.UNREGISTER_VALIDATABLE, uniqueId);
+			if (fireRoot != null) {
+				fireRoot(RootEventTypes.UNREGISTER_VALIDATABLE, uniqueId);
+			}
+			if (fireContainer != null) {
+				fireContainer(ContainerEventTypes.UNREGISTER_VALIDATABLE, uniqueId);
+			}
+			if (fireArrayElement != null) {
+				fireArrayElement(ArrayElementEventTypes.UNREGISTER_VALIDATABLE, uniqueId);
+			}
 		};
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [
@@ -163,7 +185,9 @@ export const useValidationFunctions = (def: NodeDef): ValidationFunctions => {
 
 	const validate = (scopes: Array<NodeValidationScope>): Promise<ValidatedSet> => {
 		return new Promise<ValidatedSet>(resolve => {
-			fireRoot && fireRoot(RootEventTypes.VALIDATE, scopes ?? [], resolve);
+			if (fireRoot != null) {
+				fireRoot(RootEventTypes.VALIDATE, scopes ?? [], resolve);
+			}
 		});
 	};
 

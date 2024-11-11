@@ -66,7 +66,10 @@ export const Toolbar = (props: ToolbarProps) => {
 		switch (true) {
 			case state.zen:
 				wrapper.setAttribute('data-diagram-work-mode', 'zen');
-				document.documentElement.requestFullscreen && document.documentElement.requestFullscreen({navigationUI: 'hide'});
+				if (document.documentElement.requestFullscreen != null) {
+					// noinspection JSIgnoredPromiseFromCall
+					document.documentElement.requestFullscreen({navigationUI: 'hide'});
+				}
 				break;
 			case state.max:
 				wrapper.setAttribute('data-diagram-work-mode', 'max');
@@ -74,7 +77,10 @@ export const Toolbar = (props: ToolbarProps) => {
 			case !state.max:
 				wrapper.removeAttribute('data-diagram-work-mode');
 				if (document.fullscreenElement != null) {
-					document.exitFullscreen && document.exitFullscreen();
+					if (document.exitFullscreen != null) {
+						// noinspection JSIgnoredPromiseFromCall
+						document.exitFullscreen();
+					}
 				}
 				break;
 		}
@@ -151,7 +157,10 @@ export const Toolbar = (props: ToolbarProps) => {
 	const onMinClicked = () => setState(state => ({...state, max: false}));
 	const onZenClicked = () => setState(state => ({...state, zen: true, max: true}));
 	const onWindowClicked = () => {
-		document.exitFullscreen && document.exitFullscreen();
+		if (document.exitFullscreen != null) {
+			// noinspection JSIgnoredPromiseFromCall
+			document.exitFullscreen();
+		}
 		setState(state => ({...state, zen: false, max: false}));
 	};
 	const onFoldAllNodesClicked = () => fire(PlaygroundEventTypes.FOLD_ALL_NODES);

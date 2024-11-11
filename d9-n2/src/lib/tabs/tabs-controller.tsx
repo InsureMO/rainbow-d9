@@ -119,9 +119,13 @@ export const TabsController = (props: TabsControllerProps) => {
 				fire(TabsEventTypes.TRY_ACTIVE_TAB, -1, (clipped ?? '').trim(), callback);
 			}
 		};
-		onGlobal && onGlobal(GlobalEventTypes.CUSTOM_EVENT, onCustomEvent);
+		if (onGlobal != null) {
+			onGlobal(GlobalEventTypes.CUSTOM_EVENT, onCustomEvent);
+		}
 		return () => {
-			offGlobal && offGlobal(GlobalEventTypes.CUSTOM_EVENT, onCustomEvent);
+			if (offGlobal != null) {
+				offGlobal(GlobalEventTypes.CUSTOM_EVENT, onCustomEvent);
+			}
 		};
 	}, [onGlobal, offGlobal, fire]);
 	useEffect(() => {

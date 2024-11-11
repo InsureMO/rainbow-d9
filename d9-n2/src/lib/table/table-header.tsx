@@ -38,7 +38,9 @@ export const TableHeader = (props: TableHeaderProps) => {
 		setSortBy(by);
 		await sort(by, {root: $wrapped.$root, model: $wrapped.$model, global: globalHandlers});
 		// assume data changed by sort function, repaint myself
-		fireWrapper && fireWrapper(WrapperEventTypes.REPAINT);
+		if (fireWrapper != null) {
+			fireWrapper(WrapperEventTypes.REPAINT);
+		}
 	};
 
 	// index column

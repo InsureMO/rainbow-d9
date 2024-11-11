@@ -21,20 +21,26 @@ export const RemoteRequest = (props: RemoteRequestProps) => {
 	const forceUpdate = useForceUpdate();
 	useEffect(() => {
 		const on401 = () => {
-			fire && fire(GlobalEventTypes.SHOW_ALERT, <AlertLabel>Unauthorized.</AlertLabel>, () => {
-				clearAccount();
-				doOn401();
-			});
+			if (fire != null) {
+				fire(GlobalEventTypes.SHOW_ALERT, <AlertLabel>Unauthorized.</AlertLabel>, () => {
+					clearAccount();
+					doOn401();
+				});
+			}
 		};
 		const on403 = () => {
-			fire && fire(GlobalEventTypes.SHOW_ALERT, <AlertLabel>Access denied.</AlertLabel>, () => {
-				doOn403();
-			});
+			if (fire != null) {
+				fire(GlobalEventTypes.SHOW_ALERT, <AlertLabel>Access denied.</AlertLabel>, () => {
+					doOn403();
+				});
+			}
 		};
 		const onOtherError = () => {
-			fire && fire(GlobalEventTypes.SHOW_ALERT, <AlertLabel>
-				Unpredicted error occurred, contact your administrator for more details.
-			</AlertLabel>);
+			if (fire != null) {
+				fire(GlobalEventTypes.SHOW_ALERT, <AlertLabel>
+					Unpredicted error occurred, contact your administrator for more details.
+				</AlertLabel>);
+			}
 		};
 		const onInvokeRemoteRequest = async (
 			// eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -51,8 +57,12 @@ export const RemoteRequest = (props: RemoteRequestProps) => {
 			}
 			try {
 				const data = await request();
-				doOn200 && doOn200();
-				success && success(data);
+				if (doOn200 != null) {
+					doOn200();
+				}
+				if (success != null) {
+					success(data);
+				}
 				// eslint-disable-next-line @typescript-eslint/no-explicit-any
 			} catch (e: any) {
 				N2Logger.error(e, 'RemoteRequest');
@@ -66,7 +76,9 @@ export const RemoteRequest = (props: RemoteRequestProps) => {
 						onOtherError();
 					}
 				}
-				failure && failure(e);
+				if (failure != null) {
+					failure(e);
+				}
 			} finally {
 				count.value = count.value - 1;
 				if (count.value === 0) {

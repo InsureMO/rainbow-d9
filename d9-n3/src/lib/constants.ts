@@ -1,5 +1,5 @@
 export interface $D9N3 {
-	// eslint-disable-next-line @typescript-eslint/ban-types
+	// eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
 	$dynamicFuncs: Record<string, Function>;
 }
 

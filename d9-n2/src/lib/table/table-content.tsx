@@ -50,7 +50,9 @@ export const TableContent = (props: Omit<TableProps, '$array'> & { $array: Enhan
 				}, {global: globalHandlers});
 				// data changed, and react nodes for rows are created in wrapper.
 				// which means refresh itself is helpless, therefore fire a repaint event to wrapper
-				fireWrapper && fireWrapper(WrapperEventTypes.REPAINT);
+				if (fireWrapper != null) {
+					fireWrapper(WrapperEventTypes.REPAINT);
+				}
 				return true;
 			} else {
 				return false;

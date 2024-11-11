@@ -73,6 +73,7 @@ export const NodeBody = styled.div`
     padding: var(--padding);
 `;
 
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type
 export interface NodeWrapperProps extends Omit<DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'ref'> {
 }
 

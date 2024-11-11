@@ -58,6 +58,8 @@ const createTypeOrmBySqlPipelineStepDefs =
 				model.sql = def.sql;
 				model.temporary = model.temporary || {};
 				if (VUtils.isBlank(model.sql) || model.sql === '@ignore') {
+					// don't know why compiler raise it, and add this rule to avoid compilation error anyway
+					// eslint-disable-next-line @typescript-eslint/no-unused-expressions
 					model.temporary.sqlByParams;
 					delete model.sql;
 				}

@@ -476,13 +476,15 @@ export const Button = forwardRef((props: ButtonProps, ref: ForwardedRef<HTMLButt
 		}
 
 		const $mightInArray$wrapped = $wrapped as unknown as Enhance$WrappedPropsForArrayElement<ButtonProps>['$wrapped'];
-		click && await click({
-			root: $root, model: $model,
-			// eslint-disable-next-line  @typescript-eslint/ban-ts-comment
-			// @ts-ignore
-			$arrayHolder: $mightInArray$wrapped.$arrayHolder, $array: $mightInArray$wrapped.$array,
-			validators: $vfs, global: globalHandlers
-		}, event);
+		if (click != null) {
+			await click({
+				root: $root, model: $model,
+				// eslint-disable-next-line  @typescript-eslint/ban-ts-comment
+				// @ts-ignore
+				$arrayHolder: $mightInArray$wrapped.$arrayHolder, $array: $mightInArray$wrapped.$array,
+				validators: $vfs, global: globalHandlers
+			}, event);
+		}
 	};
 
 	const transformedLeads = transformDecorators(leads);

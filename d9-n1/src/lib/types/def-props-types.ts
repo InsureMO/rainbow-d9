@@ -30,9 +30,11 @@ export interface MonitorOthers<NAV extends NodeAttributeValue> {
 	$default?: NAV | NodeAttributeDefaultValueInitializer;
 }
 
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type
 export interface DisablementMonitor extends MonitorOthers<boolean> {
 }
 
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type
 export interface VisibilityMonitor extends MonitorOthers<boolean> {
 }
 
@@ -58,6 +60,7 @@ export enum Reaction {
 	VALUE_CHANGED = 'value-changed'
 }
 
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type
 export interface ReactionMonitor extends Omit<MonitorOthers<Undefinable<Array<Reaction> | Reaction>>, '$default'> {
 }
 

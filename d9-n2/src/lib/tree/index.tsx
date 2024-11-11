@@ -33,9 +33,13 @@ export const InternalTree = forwardRef((props: TreeProps, ref: ForwardedRef<HTML
 			}
 			forceUpdate();
 		};
-		on && on(GlobalEventTypes.CUSTOM_EVENT, onCustomEvent);
+		if (on != null) {
+			on(GlobalEventTypes.CUSTOM_EVENT, onCustomEvent);
+		}
 		return () => {
-			off && off(GlobalEventTypes.CUSTOM_EVENT, onCustomEvent);
+			if (off != null) {
+				off(GlobalEventTypes.CUSTOM_EVENT, onCustomEvent);
+			}
 		};
 	}, [on, off, forceUpdate, marker]);
 	const markers = useMarker();

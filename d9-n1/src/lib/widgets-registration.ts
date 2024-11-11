@@ -1,3 +1,4 @@
+import {FC, JSX} from 'react';
 import {
 	ArrayContainerWidgetProps,
 	ArrayUsedDef,
@@ -13,7 +14,7 @@ import {
  */
 export interface RegisteredWidget<P extends WidgetProps> {
 	/** react node, jsx syntax */
-	JSX: (props: P) => JSX.Element;
+	JSX: FC<P> | ((props: P) => JSX.Element);
 	/** is container or not */
 	container: boolean;
 	/** is array container or not */

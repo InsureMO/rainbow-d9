@@ -122,7 +122,7 @@ const createFuncByScriptTag = (sync = true) => <R>(...args: Array<string>): R =>
 	return func;
 };
 
-// eslint-disable-next-line @typescript-eslint/ban-types
+// eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
 export const buildFunc = <R = Function>(async: boolean, body: string, ...argNames: Array<string>): R => {
 	if (async) {
 		const AsyncFunction = isUseDynamicFuncsInScriptTag() ? createFuncByScriptTag(false) : AsyncFunc;

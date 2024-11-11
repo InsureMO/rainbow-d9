@@ -27,11 +27,11 @@ export const useRemoteRequest = (): RemoteRequestHandlers => {
 	const [functions] = useState(() => {
 		const doRemoteRequest = async <R>(request: () => Promise<R>, disableAlert?: boolean): Promise<R> => {
 			return new Promise<R>((resolve, reject) => {
+				// success -> resolve; otherwise -> reject
 				if (fire == null) {
 					reject('Global event bus not provided.');
 				} else {
-					// success -> resolve; otherwise -> reject
-					fire && fire(GlobalEventTypes.INVOKE_REMOTE_REQUEST, request, resolve, reject, disableAlert);
+					fire(GlobalEventTypes.INVOKE_REMOTE_REQUEST, request, resolve, reject, disableAlert);
 				}
 			});
 		};
@@ -66,12 +66,14 @@ export const useAlert = (): AlertHandlers => {
 					if (fire == null) {
 						resolve();
 					} else {
-						fire && fire(GlobalEventTypes.SHOW_ALERT, content, resolve);
+						fire(GlobalEventTypes.SHOW_ALERT, content, resolve);
 					}
 				});
 			},
 			hide: () => {
-				fire && fire(GlobalEventTypes.HIDE_ALERT);
+				if (fire != null) {
+					fire(GlobalEventTypes.HIDE_ALERT);
+				}
 			}
 		};
 	});
@@ -89,10 +91,14 @@ export const useDialog = (): DialogHandlers => {
 	const [functions] = useState(() => {
 		return {
 			show: (content: ReactNode, wrapperStyle?: CSSProperties) => {
-				fire && fire(GlobalEventTypes.SHOW_DIALOG, content, wrapperStyle);
+				if (fire != null) {
+					fire(GlobalEventTypes.SHOW_DIALOG, content, wrapperStyle);
+				}
 			},
 			hide: () => {
-				fire && fire(GlobalEventTypes.HIDE_DIALOG);
+				if (fire != null) {
+					fire(GlobalEventTypes.HIDE_DIALOG);
+				}
 			}
 		};
 	});
@@ -116,12 +122,14 @@ export const useYesNoDialog = (): YesNoDialogHandlers => {
 					if (fire == null) {
 						reject();
 					} else {
-						fire && fire(GlobalEventTypes.SHOW_YES_NO_DIALOG, content, resolve, reject);
+						fire(GlobalEventTypes.SHOW_YES_NO_DIALOG, content, resolve, reject);
 					}
 				});
 			},
 			hide: () => {
-				fire && fire(GlobalEventTypes.HIDE_DIALOG);
+				if (fire != null) {
+					fire(GlobalEventTypes.HIDE_DIALOG);
+				}
 			}
 		};
 	});
@@ -189,7 +197,9 @@ export const useCustomGlobalEvent = (): CustomGlobalEventHandler => {
 		return async <R extends BaseModel, M extends PropValue>(
 			key: string, prefix: string, clipped?: string, models?: { root: R; model: M; }): Promise<void> => {
 			return new Promise<void>(resolve => {
-				fire && fire(GlobalEventTypes.CUSTOM_EVENT, key, prefix, clipped, models);
+				if (fire != null) {
+					fire(GlobalEventTypes.CUSTOM_EVENT, key, prefix, clipped, models);
+				}
 				resolve();
 			});
 		};
@@ -207,14 +217,18 @@ export const useSimpleCustomGlobalEvent = (): SimpleCustomGlobalEventHandler => 
 			prefix: string, clipped?: string, models?: ModelCarrier<R, M>, callback?: () => Promise<void>): Promise<void> => {
 			return new Promise<void>(resolve => {
 				if (callback == null) {
-					fire && fire(GlobalEventTypes.CUSTOM_EVENT, `${prefix}:${clipped ?? ''}`, prefix, clipped, models);
+					if (fire != null) {
+						fire(GlobalEventTypes.CUSTOM_EVENT, `${prefix}:${clipped ?? ''}`, prefix, clipped, models);
+					}
 					resolve();
 				} else {
-					fire && fire(GlobalEventTypes.CUSTOM_EVENT, `${prefix}:${clipped ?? ''}`, prefix, clipped, models,
-						async (): Promise<void> => {
-							await callback();
-							resolve();
-						});
+					if (fire != null) {
+						fire(GlobalEventTypes.CUSTOM_EVENT, `${prefix}:${clipped ?? ''}`, prefix, clipped, models,
+							async (): Promise<void> => {
+								await callback();
+								resolve();
+							});
+					}
 				}
 			});
 		};

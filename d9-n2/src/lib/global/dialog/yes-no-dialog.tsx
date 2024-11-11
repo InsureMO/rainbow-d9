@@ -32,7 +32,9 @@ export const YesNoDialog = () => {
 
 	useEffect(() => {
 		const show = (question: ReactNode, onYes: () => void, onNo: () => void) => {
-			fire && fire(GlobalEventTypes.SHOW_DIALOG, <YesNoContent question={question} onYes={onYes} onNo={onNo}/>);
+			if (fire != null) {
+				fire(GlobalEventTypes.SHOW_DIALOG, <YesNoContent question={question} onYes={onYes} onNo={onNo}/>);
+			}
 		};
 		on(GlobalEventTypes.SHOW_YES_NO_DIALOG, show);
 		return () => {

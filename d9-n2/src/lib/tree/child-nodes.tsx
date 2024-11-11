@@ -66,7 +66,9 @@ export const ChildTreeNodes = (props: ChildTreeNodesProps) => {
 		const refreshNodeContent = () => {
 			const children = node.$children ?? [];
 			if (children.length === 0) {
-				fire && fire(TreeNodeEventTypes.SWITCH_MY_EXPAND, node.marker, false);
+				if (fire != null) {
+					fire(TreeNodeEventTypes.SWITCH_MY_EXPAND, node.marker, false);
+				}
 			}
 		};
 		// eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -86,7 +88,9 @@ export const ChildTreeNodes = (props: ChildTreeNodesProps) => {
 			});
 		};
 		const scrollToAdded = (childNode?: TreeNodeDef) => {
-			fire && fire(TreeNodeEventTypes.SWITCH_MY_EXPAND, node.marker, true, childNode?.marker);
+			if (fire != null) {
+				fire(TreeNodeEventTypes.SWITCH_MY_EXPAND, node.marker, true, childNode?.marker);
+			}
 		};
 		// eslint-disable-next-line @typescript-eslint/no-unused-vars
 		const onChildAdded = (_marker: string, addedNode?: TreeNodeDef, _placeholder?: boolean) => {
@@ -108,17 +112,21 @@ export const ChildTreeNodes = (props: ChildTreeNodesProps) => {
 			forceUpdate();
 			refreshNodeContent();
 		};
-		on && on(TreeNodeEventTypes.REFRESH_CHILD_NODES, onRefreshChildNodes);
-		on && on(TreeNodeEventTypes.REFRESH_CHILD_NODES_ON_REMOVED, onRefreshChildNodesOnRemoved);
-		on && on(TreeNodeEventTypes.CHILD_ADDED, onChildAdded);
-		on && on(TreeNodeEventTypes.CHILD_PLACEHOLDER_REPLACED, onChildPlaceholderReplaced);
-		on && on(TreeNodeEventTypes.CHILD_PLACEHOLDER_REMOVED, onChildPlaceholderRemoved);
+		if (on != null) {
+			on(TreeNodeEventTypes.REFRESH_CHILD_NODES, onRefreshChildNodes);
+			on(TreeNodeEventTypes.REFRESH_CHILD_NODES_ON_REMOVED, onRefreshChildNodesOnRemoved);
+			on(TreeNodeEventTypes.CHILD_ADDED, onChildAdded);
+			on(TreeNodeEventTypes.CHILD_PLACEHOLDER_REPLACED, onChildPlaceholderReplaced);
+			on(TreeNodeEventTypes.CHILD_PLACEHOLDER_REMOVED, onChildPlaceholderRemoved);
+		}
 		return () => {
-			off && off(TreeNodeEventTypes.REFRESH_CHILD_NODES, onRefreshChildNodes);
-			off && off(TreeNodeEventTypes.REFRESH_CHILD_NODES_ON_REMOVED, onRefreshChildNodesOnRemoved);
-			off && off(TreeNodeEventTypes.CHILD_ADDED, onChildAdded);
-			off && off(TreeNodeEventTypes.CHILD_PLACEHOLDER_REPLACED, onChildPlaceholderReplaced);
-			off && off(TreeNodeEventTypes.CHILD_PLACEHOLDER_REMOVED, onChildPlaceholderRemoved);
+			if (off != null) {
+				off(TreeNodeEventTypes.REFRESH_CHILD_NODES, onRefreshChildNodes);
+				off(TreeNodeEventTypes.REFRESH_CHILD_NODES_ON_REMOVED, onRefreshChildNodesOnRemoved);
+				off(TreeNodeEventTypes.CHILD_ADDED, onChildAdded);
+				off(TreeNodeEventTypes.CHILD_PLACEHOLDER_REPLACED, onChildPlaceholderReplaced);
+				off(TreeNodeEventTypes.CHILD_PLACEHOLDER_REMOVED, onChildPlaceholderRemoved);
+			}
 		};
 	}, [on, off, fire, fireTree, forceUpdate, node, detect, globalHandlers]);
 	useEffect(() => {

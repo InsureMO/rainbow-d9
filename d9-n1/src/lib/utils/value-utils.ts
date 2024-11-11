@@ -42,7 +42,7 @@ export interface ValueUtilsType {
 	readonly isNotPositive: (v?: AnyValue) => TestedNotNumericValue | TestedIsNumericValue;
 	readonly isNegative: (v?: AnyValue) => TestedNotNumericValue | TestedIsNumericValue;
 	readonly isNotNegative: (v?: AnyValue) => TestedNotNumericValue | TestedIsNumericValue;
-	// eslint-disable-next-line @typescript-eslint/ban-types
+	// eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
 	readonly isFunction: (v?: AnyValue) => v is Function;
 	readonly base64Encode: (str: string) => string;
 	readonly base64Decode: (str: string) => string;
@@ -90,7 +90,7 @@ export const VUtils: ValueUtilsType = {
 	isNotPositive: (v?: AnyValue) => VUtils.assertNumber(v, (v: number) => v <= 0),
 	isNegative: (v?: AnyValue) => VUtils.assertNumber(v, (v: number) => v < 0),
 	isNotNegative: (v?: AnyValue) => VUtils.assertNumber(v, (v: number) => v >= 0),
-	// eslint-disable-next-line @typescript-eslint/ban-types
+	// eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
 	isFunction: (v?: AnyValue): v is Function => v != null && (typeof v === 'function'),
 	base64Encode: (str: string): string => Buffer.from(str, 'utf-8').toString('base64'),
 	base64Decode: (str: string): string => Buffer.from(str, 'base64').toString('utf-8'),

@@ -22,6 +22,7 @@ export interface CodeEditorState {
 	themeListener?: Compartment;
 }
 
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type
 export interface JsEditorDef extends CodeEditorDef {
 	// extensionType?: JsEditorExtensionType;
 }

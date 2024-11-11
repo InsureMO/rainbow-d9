@@ -194,9 +194,13 @@ export const Section = forwardRef((props: SectionProps, ref: ForwardedRef<HTMLDi
 				}
 			}
 		};
-		onGlobal && onGlobal(GlobalEventTypes.CUSTOM_EVENT, onCustomEvent);
+		if (onGlobal != null) {
+			onGlobal(GlobalEventTypes.CUSTOM_EVENT, onCustomEvent);
+		}
 		return () => {
-			offGlobal && offGlobal(GlobalEventTypes.CUSTOM_EVENT, onCustomEvent);
+			if (offGlobal != null) {
+				offGlobal(GlobalEventTypes.CUSTOM_EVENT, onCustomEvent);
+			}
 		};
 	}, [onGlobal, offGlobal, expanded, marker, $p2r, props.$pp, props.id]);
 

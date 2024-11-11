@@ -45,11 +45,19 @@ export const useDataMerge = (ref: MutableRefObject<HTMLDivElement>, domInitializ
 			}
 			await refreshChart();
 		};
-		on && on(GlobalEventTypes.CUSTOM_EVENT, onCustomEvent);
-		onRoot && onRoot(RootEventTypes.VALUE_CHANGED, onValueChanged);
+		if (on != null) {
+			on(GlobalEventTypes.CUSTOM_EVENT, onCustomEvent);
+		}
+		if (onRoot != null) {
+			onRoot(RootEventTypes.VALUE_CHANGED, onValueChanged);
+		}
 		return () => {
-			offRoot && offRoot(RootEventTypes.VALUE_CHANGED, onValueChanged);
-			off && off(GlobalEventTypes.CUSTOM_EVENT, onCustomEvent);
+			if (offRoot != null) {
+				offRoot(RootEventTypes.VALUE_CHANGED, onValueChanged);
+			}
+			if (off != null) {
+				off(GlobalEventTypes.CUSTOM_EVENT, onCustomEvent);
+			}
 		};
 	}, [on, off, onRoot, offRoot, domInitialized, ref, $p2r, $pp, $model, options, settings, marker, mergeData]);
 };

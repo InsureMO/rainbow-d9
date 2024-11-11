@@ -67,7 +67,9 @@ const AnInput = styled.input.attrs<{ autoSelect: boolean }>(
 			[DOM_ID_WIDGET]: id,
 			onFocus: (event: FocusEvent<HTMLInputElement>) => {
 				event.target.select();
-				onFocus && onFocus(event);
+				if (onFocus != null) {
+					onFocus(event);
+				}
 			}
 		};
 	})<{ autoSelect: boolean }>`
@@ -237,12 +239,16 @@ export const InternalInput = forwardRef((props: InputProps, ref: ForwardedRef<HT
 			: stringifyInputValue({$model, $pp, value: valueRef.current.value}));
 	const onCompositionStart = (event: CompositionEvent<HTMLInputElement>) => {
 		compositionRef.current = {ing: true, text: displayValue};
-		compositionStart && compositionStart(event);
+		if (compositionStart != null) {
+			compositionStart(event);
+		}
 	};
 	const onCompositionEnd = async (event: CompositionEvent<HTMLInputElement>) => {
 		compositionRef.current = {ing: false};
 		await onValueChanged(inputRef.current.value);
-		compositionEnd && compositionEnd(event);
+		if (compositionEnd != null) {
+			compositionEnd(event);
+		}
 	};
 
 	return <AnInput {...rest} autoSelect={autoSelect}

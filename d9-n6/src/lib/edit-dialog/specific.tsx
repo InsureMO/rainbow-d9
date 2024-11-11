@@ -162,11 +162,15 @@ export const DialogSpecificElement = (props: DialogSpecificElementProps) => {
 	useEffect(() => {
 		const onExpand = () => setVisible(true);
 		const onCollapse = () => setVisible(false);
-		on && on(DialogSpecificElementEventTypes.EXPAND, onExpand);
-		on && on(DialogSpecificElementEventTypes.COLLAPSE, onCollapse);
+		if (on != null) {
+			on(DialogSpecificElementEventTypes.EXPAND, onExpand);
+			on(DialogSpecificElementEventTypes.COLLAPSE, onCollapse);
+		}
 		return () => {
-			off && off(DialogSpecificElementEventTypes.EXPAND, onExpand);
-			off && off(DialogSpecificElementEventTypes.COLLAPSE, onCollapse);
+			if (off != null) {
+				off(DialogSpecificElementEventTypes.EXPAND, onExpand);
+				off(DialogSpecificElementEventTypes.COLLAPSE, onCollapse);
+			}
 		};
 	}, [on, off]);
 	const elementVisible = useElementVisible(element, model);

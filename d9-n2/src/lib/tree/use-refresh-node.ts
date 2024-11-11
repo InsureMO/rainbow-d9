@@ -14,33 +14,51 @@ export const useRefreshTreeNode = (node: TreeNodeDef, $wrapped: TreeProps['$wrap
 			}
 			switch (prefix) {
 				case GlobalEventPrefix.REFRESH_TREE_NODE:
-					fire && fire(TreeNodeEventTypes.REFRESH_NODE, node.marker);
+					if (fire != null) {
+						fire(TreeNodeEventTypes.REFRESH_NODE, node.marker);
+					}
 					break;
 				case GlobalEventPrefix.REFRESH_TREE_CHILD_NODES:
-					fire && fire(TreeNodeEventTypes.REFRESH_CHILD_NODES, node.marker, false);
+					if (fire != null) {
+						fire(TreeNodeEventTypes.REFRESH_CHILD_NODES, node.marker, false);
+					}
 					break;
 				case GlobalEventPrefix.RECALC_TREE_CHILD_NODES:
-					fire && fire(TreeNodeEventTypes.REFRESH_CHILD_NODES, node.marker, true);
+					if (fire != null) {
+						fire(TreeNodeEventTypes.REFRESH_CHILD_NODES, node.marker, true);
+					}
 					break;
 				case GlobalEventPrefix.REFRESH_TREE_NODE_AND_CHILDREN:
-					fire && fire(TreeNodeEventTypes.REFRESH_NODE, node.marker);
-					fire && fire(TreeNodeEventTypes.REFRESH_CHILD_NODES, node.marker, false);
+					if (fire != null) {
+						fire(TreeNodeEventTypes.REFRESH_NODE, node.marker);
+						fire(TreeNodeEventTypes.REFRESH_CHILD_NODES, node.marker, false);
+					}
 					break;
 				case GlobalEventPrefix.RECALC_TREE_NODE_AND_CHILDREN:
-					fire && fire(TreeNodeEventTypes.REFRESH_NODE, node.marker);
-					fire && fire(TreeNodeEventTypes.REFRESH_CHILD_NODES, node.marker, true);
+					if (fire != null) {
+						fire(TreeNodeEventTypes.REFRESH_NODE, node.marker);
+						fire(TreeNodeEventTypes.REFRESH_CHILD_NODES, node.marker, true);
+					}
 					break;
 				case GlobalEventPrefix.EXPAND_TREE_NODE:
-					fire && fire(TreeNodeEventTypes.SWITCH_MY_EXPAND, node.marker, true);
+					if (fire != null) {
+						fire(TreeNodeEventTypes.SWITCH_MY_EXPAND, node.marker, true);
+					}
 					break;
 				case GlobalEventPrefix.COLLAPSE_TREE_NODE:
-					fire && fire(TreeNodeEventTypes.SWITCH_MY_EXPAND, node.marker, false);
+					if (fire != null) {
+						fire(TreeNodeEventTypes.SWITCH_MY_EXPAND, node.marker, false);
+					}
 					break;
 			}
 		};
-		onGlobal && onGlobal(GlobalEventTypes.CUSTOM_EVENT, onCustomEvent);
+		if (onGlobal != null) {
+			onGlobal(GlobalEventTypes.CUSTOM_EVENT, onCustomEvent);
+		}
 		return () => {
-			offGlobal && offGlobal(GlobalEventTypes.CUSTOM_EVENT, onCustomEvent);
+			if (offGlobal != null) {
+				offGlobal(GlobalEventTypes.CUSTOM_EVENT, onCustomEvent);
+			}
 		};
 	}, [onGlobal, offGlobal, fire, node, $wrapped]);
 };

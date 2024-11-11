@@ -31,7 +31,9 @@ export const Alert = () => {
 			document.body.style.overflowY = '';
 			const onHide = alert.onHide;
 			setAlert({visible: false, content: alert.content});
-			onHide && onHide();
+			if (onHide != null) {
+				onHide();
+			}
 		};
 
 		on(GlobalEventTypes.SHOW_ALERT, show);

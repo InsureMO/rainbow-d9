@@ -116,7 +116,9 @@ export const ExternalDefsHandler = (props: {
 		handleExternalDefs(options, reb, ExternalDefMismatchIndicators);
 	} else {
 		handleExternalDefs(options, reb, externalDefs);
-		externalDefs.onDetermined && externalDefs.onDetermined(options);
+		if (externalDefs.onDetermined != null) {
+			externalDefs.onDetermined(options);
+		}
 	}
 
 	return <Fragment/>;

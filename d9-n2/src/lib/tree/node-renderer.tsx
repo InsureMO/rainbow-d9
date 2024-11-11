@@ -42,7 +42,9 @@ const useTreeNodeExpand = (ref: MutableRefObject<HTMLDivElement>, state: Mutable
 				state.current = expanded;
 				forceUpdate();
 				// notify parent in case of the expanding is fired programmatically
-				fire && fire(TreeNodeEventTypes.SWITCH_PARENT_EXPAND, marker, state.current);
+				if (fire != null) {
+					fire(TreeNodeEventTypes.SWITCH_PARENT_EXPAND, marker, state.current);
+				}
 				// if from myself, try to scroll this node and descendants into view
 				if (fromMyself && expanded && ref.current != null) {
 					// the problem is, expand is async, so we need to wait for expanding of all ascendants to finish
@@ -93,11 +95,15 @@ const useTreeNodeExpand = (ref: MutableRefObject<HTMLDivElement>, state: Mutable
 		};
 		const onSwitchMyExpand = onSwitchExpand(true);
 		const onSwitchMyExpandFromChild = onSwitchExpand(false);
-		on && on(TreeNodeEventTypes.SWITCH_MY_EXPAND, onSwitchMyExpand);
-		on && on(TreeNodeEventTypes.SWITCH_MY_EXPAND_FROM_CHILD, onSwitchMyExpandFromChild);
+		if (on != null) {
+			on(TreeNodeEventTypes.SWITCH_MY_EXPAND, onSwitchMyExpand);
+			on(TreeNodeEventTypes.SWITCH_MY_EXPAND_FROM_CHILD, onSwitchMyExpandFromChild);
+		}
 		return () => {
-			off && off(TreeNodeEventTypes.SWITCH_MY_EXPAND, onSwitchMyExpand);
-			off && off(TreeNodeEventTypes.SWITCH_MY_EXPAND_FROM_CHILD, onSwitchMyExpandFromChild);
+			if (off != null) {
+				off(TreeNodeEventTypes.SWITCH_MY_EXPAND, onSwitchMyExpand);
+				off(TreeNodeEventTypes.SWITCH_MY_EXPAND_FROM_CHILD, onSwitchMyExpandFromChild);
+			}
 		};
 	}, [on, off, fire, fireTree, forceUpdate, ref, state]);
 };
@@ -108,18 +114,26 @@ const useTreeNodeCheckedChanged = () => {
 	useEffect(() => {
 		const onSwitchMyChecked = (marker: string, checked: boolean) => {
 			forceUpdate();
-			fire && fire(TreeNodeEventTypes.SWITCH_CHILDREN_CHECKED, marker, checked);
-			fire && fire(TreeNodeEventTypes.SWITCH_PARENT_CHECKED, marker, checked);
+			if (fire != null) {
+				fire(TreeNodeEventTypes.SWITCH_CHILDREN_CHECKED, marker, checked);
+				fire(TreeNodeEventTypes.SWITCH_PARENT_CHECKED, marker, checked);
+			}
 		};
 		const onSwitchMyCheckedFromChild = (marker: string, checked: boolean) => {
 			forceUpdate();
-			fire && fire(TreeNodeEventTypes.SWITCH_PARENT_CHECKED, marker, checked);
+			if (fire != null) {
+				fire(TreeNodeEventTypes.SWITCH_PARENT_CHECKED, marker, checked);
+			}
 		};
-		on && on(TreeNodeEventTypes.SWITCH_MY_CHECKED, onSwitchMyChecked);
-		on && on(TreeNodeEventTypes.SWITCH_MY_CHECKED_FROM_CHILD, onSwitchMyCheckedFromChild);
+		if (on != null) {
+			on(TreeNodeEventTypes.SWITCH_MY_CHECKED, onSwitchMyChecked);
+			on(TreeNodeEventTypes.SWITCH_MY_CHECKED_FROM_CHILD, onSwitchMyCheckedFromChild);
+		}
 		return () => {
-			off && off(TreeNodeEventTypes.SWITCH_MY_CHECKED, onSwitchMyChecked);
-			off && off(TreeNodeEventTypes.SWITCH_MY_CHECKED_FROM_CHILD, onSwitchMyCheckedFromChild);
+			if (off != null) {
+				off(TreeNodeEventTypes.SWITCH_MY_CHECKED, onSwitchMyChecked);
+				off(TreeNodeEventTypes.SWITCH_MY_CHECKED_FROM_CHILD, onSwitchMyCheckedFromChild);
+			}
 		};
 	}, [on, off, fire, forceUpdate]);
 };
@@ -152,9 +166,13 @@ export const TreeNodeRenderer = (props: TreeNodeRendererProps) => {
 		const onRefreshNode = (_marker: string) => {
 			forceUpdate();
 		};
-		on && on(TreeNodeEventTypes.REFRESH_NODE, onRefreshNode);
+		if (on != null) {
+			on(TreeNodeEventTypes.REFRESH_NODE, onRefreshNode);
+		}
 		return () => {
-			off && off(TreeNodeEventTypes.REFRESH_CHILD_NODES, onRefreshNode);
+			if (off != null) {
+				off(TreeNodeEventTypes.REFRESH_CHILD_NODES, onRefreshNode);
+			}
 		};
 	}, [on, off, forceUpdate, node]);
 	useEffect(() => {
@@ -174,52 +192,68 @@ export const TreeNodeRenderer = (props: TreeNodeRendererProps) => {
 		event.stopPropagation();
 		event.preventDefault();
 		// declare myself is switched
-		fire && fire(TreeNodeEventTypes.SWITCH_MY_EXPAND, node.marker, !expanded.current);
+		if (fire != null) {
+			fire(TreeNodeEventTypes.SWITCH_MY_EXPAND, node.marker, !expanded.current);
+		}
 	};
 	const onEntityClicked = (event: MouseEvent<HTMLSpanElement>) => {
 		event.preventDefault();
 		event.stopPropagation();
 
 		// no wait
-		node.click && node.click(node, {global: globalHandlers});
+		if (node.click != null) {
+			// noinspection JSIgnoredPromiseFromCall
+			node.click(node, {global: globalHandlers});
+		}
 
 		const clipped = node.marker;
 		const key = `${GlobalEventPrefix.TREE_NODE_CLICKED}:${clipped}`;
-		// eslint-disable-next-line  @typescript-eslint/ban-ts-comment
-		// @ts-ignore
-		fireGlobal && fireGlobal(GlobalEventTypes.CUSTOM_EVENT, key, GlobalEventPrefix.TREE_NODE_CLICKED, clipped, {
-			root: $wrapped.$root, model: $wrapped.$model, value: node.value
-		});
+		if (fireGlobal != null) {
+			// eslint-disable-next-line  @typescript-eslint/ban-ts-comment
+			// @ts-ignore
+			fireGlobal(GlobalEventTypes.CUSTOM_EVENT, key, GlobalEventPrefix.TREE_NODE_CLICKED, clipped, {
+				root: $wrapped.$root, model: $wrapped.$model, value: node.value
+			});
+		}
 	};
 	const onEntityDoubleClicked = (event: MouseEvent<HTMLSpanElement>) => {
 		event.preventDefault();
 		event.stopPropagation();
 
 		// no wait
-		node.dblClick && node.dblClick(node, {global: globalHandlers});
+		if (node.dblClick != null) {
+			// noinspection JSIgnoredPromiseFromCall
+			node.dblClick(node, {global: globalHandlers});
+		}
 
 		const clipped = node.marker;
 		const key = `${GlobalEventPrefix.TREE_NODE_DOUBLE_CLICKED}:${clipped}`;
-		// eslint-disable-next-line  @typescript-eslint/ban-ts-comment
-		// @ts-ignore
-		fireGlobal && fireGlobal(GlobalEventTypes.CUSTOM_EVENT, key, GlobalEventPrefix.TREE_NODE_DOUBLE_CLICKED, clipped, {
-			root: $wrapped.$root, model: $wrapped.$model, value: node.value
-		});
+		if (fireGlobal != null) {
+			// eslint-disable-next-line  @typescript-eslint/ban-ts-comment
+			// @ts-ignore
+			fireGlobal(GlobalEventTypes.CUSTOM_EVENT, key, GlobalEventPrefix.TREE_NODE_DOUBLE_CLICKED, clipped, {
+				root: $wrapped.$root, model: $wrapped.$model, value: node.value
+			});
+		}
 	};
 	const onEntityContextMenu = (event: MouseEvent<HTMLSpanElement>) => {
 		event.preventDefault();
 		event.stopPropagation();
 
-		// no wait
-		node.contextMenu && node.contextMenu(node, {global: globalHandlers}, event);
+		if (node.contextMenu != null) {
+			// noinspection JSIgnoredPromiseFromCall
+			node.contextMenu(node, {global: globalHandlers}, event);
+		}
 
 		const clipped = node.marker;
 		const key = `${GlobalEventPrefix.TREE_NODE_CONTEXT_MENU}:${clipped}`;
-		// eslint-disable-next-line  @typescript-eslint/ban-ts-comment
-		// @ts-ignore
-		fireGlobal && fireGlobal(GlobalEventTypes.CUSTOM_EVENT, key, GlobalEventPrefix.TREE_NODE_CONTEXT_MENU, clipped, {
-			root: $wrapped.$root, model: $wrapped.$model, value: node.value
-		});
+		if (fireGlobal != null) {
+			// eslint-disable-next-line  @typescript-eslint/ban-ts-comment
+			// @ts-ignore
+			fireGlobal(GlobalEventTypes.CUSTOM_EVENT, key, GlobalEventPrefix.TREE_NODE_CONTEXT_MENU, clipped, {
+				root: $wrapped.$root, model: $wrapped.$model, value: node.value
+			});
+		}
 	};
 	const onMouseEnter = () => {
 		const {
@@ -302,7 +336,9 @@ export const TreeNodeRenderer = (props: TreeNodeRendererProps) => {
 		onCheckValueChanged = async (value: PropValue) => {
 			// call function to set value, should include itself, descendants and ancestors
 			await check(node, value as boolean, TreeNodeCheckedChangeFrom.FROM_SELF, {global: globalHandlers});
-			fire && fire(TreeNodeEventTypes.SWITCH_MY_CHECKED, node.marker, value as boolean);
+			if (fire != null) {
+				fire(TreeNodeEventTypes.SWITCH_MY_CHECKED, node.marker, value as boolean);
+			}
 		};
 	}
 	const addable = (node.addable ?? false) && node.add != null;

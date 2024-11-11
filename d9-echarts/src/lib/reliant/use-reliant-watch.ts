@@ -41,9 +41,13 @@ export const useReliantWatch = (ref: MutableRefObject<HTMLDivElement>, domInitia
 				}
 			}, fetchDefer * 1000);
 		};
-		on && on(WrapperEventTypes.UNHANDLED_REACTION_OCCURRED, onUnhandledReactionOccurred);
+		if (on != null) {
+			on(WrapperEventTypes.UNHANDLED_REACTION_OCCURRED, onUnhandledReactionOccurred);
+		}
 		return () => {
-			off && off(WrapperEventTypes.UNHANDLED_REACTION_OCCURRED, onUnhandledReactionOccurred);
+			if (off != null) {
+				off(WrapperEventTypes.UNHANDLED_REACTION_OCCURRED, onUnhandledReactionOccurred);
+			}
 		};
 	}, [
 		globalHandlers, on, off, replace, clear, domInitialized, ref,

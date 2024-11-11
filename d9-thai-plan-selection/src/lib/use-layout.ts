@@ -106,9 +106,13 @@ export const useLayout = (
 			});
 			layout(loadedDefs, orderedDefs);
 		};
-		onGlobal && onGlobal(GlobalEventTypes.CUSTOM_EVENT, onCustomEvent);
+		if (onGlobal != null) {
+			onGlobal(GlobalEventTypes.CUSTOM_EVENT, onCustomEvent);
+		}
 		return () => {
-			offGlobal && offGlobal(GlobalEventTypes.CUSTOM_EVENT, onCustomEvent);
+			if (offGlobal != null) {
+				offGlobal(GlobalEventTypes.CUSTOM_EVENT, onCustomEvent);
+			}
 		};
 	}, [
 		onGlobal, offGlobal, globalHandlers,

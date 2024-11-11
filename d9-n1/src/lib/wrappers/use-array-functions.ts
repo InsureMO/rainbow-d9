@@ -63,9 +63,11 @@ export const useArrayFunctions = (options: {
 			keys.splice(foundIndex, 1);
 		}
 		// call removed function if there is
-		elementRemoved && await elementRemoved({
-			root: $root, model: $array as ArrayPropValue, element: elementModel, index
-		}, ...args);
+		if (elementRemoved != null) {
+			await elementRemoved({
+				root: $root, model: $array as ArrayPropValue, element: elementModel, index
+			}, ...args);
+		}
 		// force update myself
 		forceUpdate();
 		// notify value changed
@@ -84,11 +86,13 @@ export const useArrayFunctions = (options: {
 		// remove all from keys
 		keys.length = 0;
 		// call removed function if there is
-		elementRemoved && await Promise.all((oldElements || []).map(async elementModel => {
-			return await elementRemoved({
-				root: $root, model: $array as ArrayPropValue, element: elementModel, index: elements.length
-			}, ...args);
-		}));
+		if (elementRemoved != null) {
+			await Promise.all((oldElements || []).map(async elementModel => {
+				return await elementRemoved({
+					root: $root, model: $array as ArrayPropValue, element: elementModel, index: elements.length
+				}, ...args);
+			}));
+		}
 		// force update myself
 		forceUpdate();
 		// notify value changed
@@ -121,9 +125,11 @@ export const useArrayFunctions = (options: {
 		// push into elements
 		elements.push(newElement);
 		// call added function if there is
-		elementAdded && await elementAdded({
-			root: $root, model: $array as ArrayPropValue, element: newElement, index: elements.length - 1
-		}, ...args);
+		if (elementAdded != null) {
+			await elementAdded({
+				root: $root, model: $array as ArrayPropValue, element: newElement, index: elements.length - 1
+			}, ...args);
+		}
 		// if new element is the only one in elements, then elements might be created in rendering
 		// set into model anyway
 		if (elements.length === 1) {

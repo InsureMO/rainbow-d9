@@ -27,9 +27,13 @@ export const useLanguage = () => {
 		const onLanguageChanged = () => {
 			forceUpdate();
 		};
-		on && on(GlobalEventTypes.LANGUAGE_CHANGED, onLanguageChanged);
+		if (on != null) {
+			on(GlobalEventTypes.LANGUAGE_CHANGED, onLanguageChanged);
+		}
 		return () => {
-			off && off(GlobalEventTypes.LANGUAGE_CHANGED, onLanguageChanged);
+			if (off != null) {
+				off(GlobalEventTypes.LANGUAGE_CHANGED, onLanguageChanged);
+			}
 		};
 	}, [on, off, forceUpdate]);
 };

@@ -60,9 +60,6 @@ export const EditorKernel = (props: EditorProps) => {
 		return <>
 			<EditorWrapper data-diagram-locked={stateRef.current.engine.getModel().isLocked()}
 			               ref={wrapperRef}>
-				{/**
-				 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-				 @ts-ignore */}
 				<ErrorBoundary content={content}>
 					<BackendCanvas stateRef={stateRef} postPaintActions={postPaintActions}
 					               assistant={assistant} decorator={decorator}

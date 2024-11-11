@@ -76,7 +76,9 @@ const CustomButton = (props: {
 				collapse();
 				break;
 			default:
-				click && await click({...options, array: $array}, event);
+				if (click != null) {
+					await click({...options, array: $array}, event);
+				}
 				break;
 		}
 	};

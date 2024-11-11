@@ -14,11 +14,17 @@ export const useViewMode = () => {
 		const onMaximize = () => setState(state => ({...state, maximized: true}));
 		const onQuitMaximize = () => setState(state => ({...state, maximized: false}));
 		const onZen = () => {
-			document.documentElement.requestFullscreen && document.documentElement.requestFullscreen({navigationUI: 'hide'});
+			if (document.documentElement.requestFullscreen != null) {
+				// noinspection JSIgnoredPromiseFromCall
+				document.documentElement.requestFullscreen({navigationUI: 'hide'});
+			}
 			setState({zen: true, maximized: true});
 		};
 		const onQuitZen = () => {
-			document.exitFullscreen && document.exitFullscreen();
+			if (document.exitFullscreen != null) {
+				// noinspection JSIgnoredPromiseFromCall
+				document.exitFullscreen();
+			}
 			setState({zen: false, maximized: false});
 		};
 		const onFullScreenChanged = () => {

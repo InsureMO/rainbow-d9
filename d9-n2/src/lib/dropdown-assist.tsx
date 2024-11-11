@@ -435,7 +435,9 @@ export const useDropdownControl = (options: {
 			} else {
 				setPopupState(state => ({...state, active: DropdownPopupStateActive.ACTIVE}));
 			}
-			afterPopupShown && afterPopupShown();
+			if (afterPopupShown != null) {
+				afterPopupShown();
+			}
 		}
 	}, [popupState.active, afterPopupShown, expectMaxWidth, fixWidth]);
 	useEffect(() => {
@@ -448,7 +450,9 @@ export const useDropdownControl = (options: {
 		visible: [DropdownPopupStateActive.ACTIVE, DropdownPopupStateActive.WILL_ACTIVE].includes(popupState.active),
 		hide: () => {
 			setPopupShown(false);
-			afterPopupHide && afterPopupHide();
+			if (afterPopupHide != null) {
+				afterPopupHide();
+			}
 		}
 	});
 
@@ -485,7 +489,9 @@ export const useExternalFilteringDropdown = (externalFilterHandle?: ExternalFilt
 					try {
 						if (externalFilterHandle != null) {
 							await externalFilterHandle(filter, {global: globalHandlers});
-							fireWrapper && fireWrapper(WrapperEventTypes.UNHANDLED_REACTION_OCCURRED, REACTION_REFRESH_OPTIONS);
+							if (fireWrapper != null) {
+								fireWrapper(WrapperEventTypes.UNHANDLED_REACTION_OCCURRED, REACTION_REFRESH_OPTIONS);
+							}
 						}
 					} catch {
 						// ignore error
@@ -524,7 +530,9 @@ export const useFilterableDropdownOptions = <V extends any>(props: FilterableDro
 			afterPopupShown: () => filterInputRef.current?.focus(),
 			afterPopupHide: () => setTimeout(async () => {
 				setFilter('');
-				filterChanged && (await filterChanged('', 'hide'));
+				if (filterChanged != null) {
+					await filterChanged('', 'hide');
+				}
 			}, 100)
 		};
 	});
@@ -609,7 +617,9 @@ export const useFilterableDropdownOptions = <V extends any>(props: FilterableDro
 		const {key} = event;
 		if (key === 'Escape') {
 			setFilter('');
-			filterChanged && (await filterChanged('', 'search'));
+			if (filterChanged != null) {
+				await filterChanged('', 'search');
+			}
 		}
 	};
 	const onFilterChanged = async (event: ChangeEvent<HTMLInputElement>) => {
@@ -622,7 +632,9 @@ export const useFilterableDropdownOptions = <V extends any>(props: FilterableDro
 			forceUpdate();
 		} else {
 			setFilter(event.target.value);
-			filterChanged && (await filterChanged(event.target.value, 'search'));
+			if (filterChanged != null) {
+				await filterChanged(event.target.value, 'search');
+			}
 		}
 	};
 	const onAnyInputEvent = (event: KeyboardEvent<HTMLElement>) => {
@@ -643,7 +655,9 @@ export const useFilterableDropdownOptions = <V extends any>(props: FilterableDro
 	const onCompositionEnd = async () => {
 		compositionRef.current = {ing: false};
 		setFilter(filterInputRef.current.value);
-		filterChanged && (await filterChanged(filterInputRef.current.value, 'search'));
+		if (filterChanged != null) {
+			await filterChanged(filterInputRef.current.value, 'search');
+		}
 	};
 
 	return {

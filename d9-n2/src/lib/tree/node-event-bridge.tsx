@@ -35,13 +35,17 @@ export const TreeNodeEventBridge = (props: TreeNodeEventBridgeProps) => {
 		const onNodeRemoved = (_marker: string, removedNode: TreeNodeDef) => {
 			nodeRemoved(removedNode);
 		};
-		on && on(TreeNodeEventTypes.SWITCH_PARENT_EXPAND, onExpandParent);
-		on && on(TreeNodeEventTypes.SWITCH_PARENT_CHECKED, onNodeCheckedChanged);
-		on && on(TreeNodeEventTypes.NODE_REMOVED, onNodeRemoved);
+		if (on != null) {
+			on(TreeNodeEventTypes.SWITCH_PARENT_EXPAND, onExpandParent);
+			on(TreeNodeEventTypes.SWITCH_PARENT_CHECKED, onNodeCheckedChanged);
+			on(TreeNodeEventTypes.NODE_REMOVED, onNodeRemoved);
+		}
 		return () => {
-			off && off(TreeNodeEventTypes.SWITCH_PARENT_EXPAND, onExpandParent);
-			off && off(TreeNodeEventTypes.SWITCH_PARENT_CHECKED, onNodeCheckedChanged);
-			off && off(TreeNodeEventTypes.NODE_REMOVED, onNodeRemoved);
+			if (off != null) {
+				off(TreeNodeEventTypes.SWITCH_PARENT_EXPAND, onExpandParent);
+				off(TreeNodeEventTypes.SWITCH_PARENT_CHECKED, onNodeCheckedChanged);
+				off(TreeNodeEventTypes.NODE_REMOVED, onNodeRemoved);
+			}
 		};
 	}, [on, off, node, expandParent, nodeCheckedChanged, nodeRemoved]);
 
