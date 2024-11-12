@@ -61,7 +61,7 @@ export const DialogFooter = styled.div.attrs<SDP>({[DOM_KEY_WIDGET]: 'dialog-foo
     justify-content: flex-end;
 
     > button {
-        :not(:last-child) {
+        &:not(:last-child) {
             margin-right: ${CssVars.DIALOG_FOOTER_BUTTON_GAP_SIZE};
         }
     }
