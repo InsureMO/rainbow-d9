@@ -18,6 +18,7 @@ export enum StandardPipelineStepRegisterKey {
 	TYPEORM_BY_SNIPPET = 'typeorm-snippet',
 	TYPEORM_LOAD_ONE_BY_SQL = 'typeorm-load-one',
 	TYPEORM_LOAD_MANY_BY_SQL = 'typeorm-load-many',
+	TYPEORM_LOAD_MANY_BY_SQL_USE_CURSOR = 'typeorm-use-cursor',
 	TYPEORM_SAVE_BY_SQL = 'typeorm-save',
 	TYPEORM_BULK_SAVE_BY_SQL = 'typeorm-bulk-save',
 	TYPEORM_TRANSACTIONAL = 'typeorm-transactional',
@@ -177,6 +178,12 @@ export interface TypeOrmLoadManyBySqlPipelineStepDef extends TypeOrmBySqlPipelin
 
 export interface TypeOrmLoadOneBySqlPipelineStepDef extends TypeOrmBySqlPipelineStepDef {
 	use: StandardPipelineStepRegisterKey.TYPEORM_LOAD_ONE_BY_SQL;
+}
+
+export interface TypeOrmLoadManyBySqlUseCursorPipelineStepDef extends TypeOrmBySqlPipelineStepDef, SetsLikePipelineStepDef {
+	use: StandardPipelineStepRegisterKey.TYPEORM_LOAD_MANY_BY_SQL_USE_CURSOR;
+	fetchSize?: number;
+	streamTo?: string;
 }
 
 export interface TypeOrmTransactionalPipelineStepDef extends TypeOrmPipelineStepDef, SetsLikePipelineStepDef {

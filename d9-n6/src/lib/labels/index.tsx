@@ -102,6 +102,7 @@ export const Labels = {
 	StepUseTypeormBulkSave: 'TypeOrm Bulk Save',
 	StepUseTypeormSave: 'TypeOrm Save',
 	StepUseTypeormLoadMany: 'TypeOrm Load Many',
+	StepUseTypeormUseCursor: 'TypeOrm Load Many Use Cursor',
 	StepUseTypeormLoadOne: 'TypeOrm Load One',
 	StepUseTypeormTransactional: 'TypeOrm Transactional',
 	StepUseRefPipeline: 'Call Pipeline',
@@ -151,6 +152,8 @@ export const Labels = {
 	StepTypeOrmSql: <IntlLabel keys={['o23', 'step', 'typeorm', 'sql']} value="SQL"/>,
 	StepTypeOrmSqlPredefined: <IntlLabel keys={['o23', 'step', 'typeorm', 'sql-predefined']} value="Predefine"/>,
 	StepTypeOrmSqlByParams: <IntlLabel keys={['o23', 'step', 'typeorm', 'sql-by-params']} value="By Params"/>,
+	StepTypeOrmFetchSize: <IntlLabel keys={['o23', 'step', 'typeorm', 'fetch-size']} value="Fetch Size"/>,
+	StepTypeOrmStreamTo: <IntlLabel keys={['o23', 'step', 'typeorm', 'stream-to']} value="Stream To"/>,
 	// ref pipeline
 	StepRefPipelineCode: <IntlLabel keys={['o23', 'step', 'ref-pipeline', 'code']} value="Call Pipeline"/>,
 	// ref step

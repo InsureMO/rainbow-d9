@@ -630,6 +630,10 @@ export const SpecificElementLabel = styled.div.attrs<SDP>({[DOM_KEY_WIDGET]: 'o2
         align-items: center;
         position: relative;
     }
+
+    + input[data-w=d9-input][data-200] {
+
+    }
 `;
 export const SpecificElementBadge = styled.div.attrs<SDP>({[DOM_KEY_WIDGET]: 'o23-playground-edit-dialog-specific-element-badge'})`
     display: flex;
