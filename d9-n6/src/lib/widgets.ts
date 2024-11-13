@@ -327,6 +327,8 @@ export const createPlaygroundCssVars = (variables: typeof PlaygroundCssConstants
 		NODE_STEP_TYPEORM_LOAD_MANY_TITLE_BACKGROUND: `var(--o23-playground-node-step-typeorm-title-background, linear-gradient(135deg, ${variables.NODE_TYPEORM_STEP_COLOR} 0%, ${color(variables.NODE_TYPEORM_STEP_COLOR).alpha(0.7)} 70%, ${color(variables.NODE_TYPEORM_STEP_COLOR).alpha(0.5)} 100%))`,
 		NODE_STEP_TYPEORM_LOAD_ONE_BORDER: `var(--o23-playground-node-step-typeorm-border, 2px solid ${variables.NODE_TYPEORM_STEP_COLOR})`,
 		NODE_STEP_TYPEORM_LOAD_ONE_TITLE_BACKGROUND: `var(--o23-playground-node-step-typeorm-title-background, linear-gradient(135deg, ${variables.NODE_TYPEORM_STEP_COLOR} 0%, ${color(variables.NODE_TYPEORM_STEP_COLOR).alpha(0.7)} 70%, ${color(variables.NODE_TYPEORM_STEP_COLOR).alpha(0.5)} 100%))`,
+		NODE_STEP_TYPEORM_USE_CURSOR_BORDER: `var(--o23-playground-node-step-typeorm-border, 2px solid ${variables.NODE_TYPEORM_STEP_COLOR})`,
+		NODE_STEP_TYPEORM_USE_CURSOR_TITLE_BACKGROUND: `var(--o23-playground-node-step-typeorm-title-background, linear-gradient(135deg, ${variables.NODE_TYPEORM_STEP_COLOR} 0%, ${color(variables.NODE_TYPEORM_STEP_COLOR).alpha(0.7)} 70%, ${color(variables.NODE_TYPEORM_STEP_COLOR).alpha(0.5)} 100%))`,
 		NODE_STEP_TYPEORM_TRANSACTIONAL_BORDER: `var(--o23-playground-node-step-typeorm-border, 2px solid ${variables.NODE_TYPEORM_STEP_COLOR})`,
 		NODE_STEP_TYPEORM_TRANSACTIONAL_TITLE_BACKGROUND: `var(--o23-playground-node-step-typeorm-title-background, linear-gradient(135deg, ${variables.NODE_TYPEORM_STEP_COLOR} 0%, ${color(variables.NODE_TYPEORM_STEP_COLOR).alpha(0.7)} 70%, ${color(variables.NODE_TYPEORM_STEP_COLOR).alpha(0.5)} 100%))`,
 		// snippet
