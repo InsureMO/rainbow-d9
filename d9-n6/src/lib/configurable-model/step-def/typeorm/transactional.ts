@@ -24,7 +24,7 @@ export const TypeOrmTransactionalStepDefs =
 			};
 		})],
 		survivalAfterConfirm: ['and', (_def: TypeOrmTransactionalPipelineStepDef, property: string) => {
-			return switchUse.includes(property);
+			return [switchUse, 'steps', 'steps.*', '$diagram.$foldSubSteps'].includes(property);
 		}],
 		folder: {
 			switch: CommonStepDefs.switchFoldWhenSubNodesExist,
