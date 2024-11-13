@@ -226,6 +226,7 @@ $d9.$d9n2 = $d9.$d9n2 ?? {
 				options: {noAvailable: 'No available options.', noMatched: 'No matched options.'},
 				calendar: {
 					confirm: 'Ok',
+					year: 'Year', month: 'Month',
 					today: 'Today', hour: 'Hour', minute: 'Minute', second: 'Second',
 					yesterday: 'Yesterday',
 					thisWeekEnd: 'This Weekend', prevWeekend: 'Prev Weekend',

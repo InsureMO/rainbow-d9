@@ -10,6 +10,7 @@ export const intlForN2ZhCN = {
 	options: {noAvailable: '没有可选项.', noMatched: '没有匹配项.'},
 	calendar: {
 		confirm: '确认',
+		year: '年', month: '月',
 		today: '今天', hour: '时', minute: '分', second: '秒',
 		yesterday: '昨天',
 		thisWeekEnd: '本周', prevWeekend: '上周',

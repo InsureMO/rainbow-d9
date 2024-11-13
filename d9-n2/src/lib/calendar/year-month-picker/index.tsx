@@ -84,8 +84,12 @@ export const YearMonthPicker = (props: CalendarYearMonthPickerProps) => {
 	const yearFormat = dateFormat.includes('B') ? 'BBBB' : 'YYYY';
 
 	return <YearMonthPickerContainer>
-		<YearMonthPickerLabel>Year</YearMonthPickerLabel>
-		<YearMonthPickerLabel>Month</YearMonthPickerLabel>
+		<YearMonthPickerLabel>
+			<IntlLabel keys={['calendar', 'year']} value="Year"/>
+		</YearMonthPickerLabel>
+		<YearMonthPickerLabel>
+			<IntlLabel keys={['calendar', 'month']} value="Month"/>
+		</YearMonthPickerLabel>
 		<YearSelector ref={yearSelectorRef}>
 			{new Array(200).fill(1).map((_, index) => maxYear - index).map(year => {
 				const valueToPerform = value.clone().year(year);
