@@ -43,6 +43,20 @@ export const tryBoolAndNumOnAttrValue = (value?: string): string | number | bool
 	}
 };
 
+export const tryBoolAndNumOnAttrValueWithPrefix = (value?: string): string | number | boolean | null | undefined => {
+	value = (value || '').trim();
+	if (VUtils.isBlank(value)) {
+		return value;
+	}
+	if (value.startsWith('s:') || value.startsWith('S:')) {
+		return value.substring(2);
+	} else if (value.startsWith('n:') || value.startsWith('N:')) {
+		return tryNumOnAttrValue(value.substring(2));
+	} else {
+		return tryBoolOnAttrValue(value);
+	}
+};
+
 export class AnyAttributeBuild implements AttributeValueBuild<string | number | boolean> {
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	public accept(_key: WidgetPropertyName) {

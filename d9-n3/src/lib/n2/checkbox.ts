@@ -6,7 +6,7 @@ import {
 	MonitorHandlerDetective,
 	SpecificWidgetTranslator,
 	TipAttachableBuild,
-	tryBoolOnAttrValue,
+	tryBoolAndNumOnAttrValueWithPrefix,
 	ValidatorUtils,
 	ValueChangedBuild,
 	WidgetPropertyName
@@ -28,9 +28,9 @@ export const N2CheckboxValuesBuild: AttributeValueBuild<CheckboxPossibleValues> 
 		if (values.length === 0) {
 			return (void 0);
 		} else if (values.length === 1) {
-			return [tryBoolOnAttrValue(values[0]), null];
+			return [tryBoolAndNumOnAttrValueWithPrefix(values[0]), null];
 		} else {
-			return [tryBoolOnAttrValue(values[0]), tryBoolOnAttrValue(values[1])];
+			return [tryBoolAndNumOnAttrValueWithPrefix(values[0]), tryBoolAndNumOnAttrValueWithPrefix(values[1])];
 		}
 	}
 };

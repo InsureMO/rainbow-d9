@@ -1208,6 +1208,10 @@ Some examples:
 > Typically, `values` appear in pairs, but in reality, having only one value is also allowed. However, we generally do not
 > recommend such loose data definition as it can lead to data confusion to some extent.
 
+> The default mapping will translate `True`, `true`, `T`, `t`, `Yes`, `yes`, `Y`, `y` to `true`, and `False`, `false`, `F`, `f`, `No`,
+> `no`, `N`, `n` to `false`. If a string value is required, use the `s:` or `S:` prefix to mark it; for example, `s:Y` will be recognized as
+> the string `Y`, not the default `true`. If a numeric value is needed, use the `n:` or `N:` prefix to mark it.
+
 ## Dropdown, MultiDropdown, DropdownTree (DDT), MultiDropdownTree (MDDT)
 
 - Default Wrapped by Form Cell: `true`,
