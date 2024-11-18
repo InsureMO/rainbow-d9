@@ -1,6 +1,6 @@
 {
 	"name": "@rainbow-d9/code-editor",
-	"version": "1.2.24",
+	"version": "1.2.25",
 	"description": "o23 wysiwyg editor",
 	"main": "index.cjs.js",
 	"module": "index.js",
@@ -22,9 +22,9 @@
 	"author": "Rainbow Team",
 	"dependencies": {
 		"@codemirror/lang-javascript": "^6.2.2",
-		"@rainbow-d9/n2": "1.2.24",
-		"@rainbow-d9/n3": "1.2.24",
-		"@rainbow-d9/ts-vfs": "1.2.24",
+		"@rainbow-d9/n2": "1.2.25",
+		"@rainbow-d9/n3": "1.2.25",
+		"@rainbow-d9/ts-vfs": "1.2.25",
 		"react": "^18.3.1",
 		"react-dom": "^18.3.1",
 		"typescript": "5.6.3"
