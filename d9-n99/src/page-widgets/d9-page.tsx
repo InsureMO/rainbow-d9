@@ -298,9 +298,9 @@ const D9PageContent = (props: D9PageContentProps) => {
 const useStatePrepare = (props: Pick<D9PageProps, 'ui' | 'manufactureParsedUI' | 'initRootModel' | 'initRootModelAsIs'>): D9PageState => {
 	const {ui, manufactureParsedUI, initRootModel = {}, initRootModelAsIs = false} = props;
 	const [state] = useState<D9PageState>(() => {
-		console.time('parseDoc');
+		// console.time('parseDoc');
 		let {node, success, error} = parseDoc(ui);
-		console.timeEnd('parseDoc');
+		// console.timeEnd('parseDoc');
 		if (success && manufactureParsedUI != null) {
 			node = manufactureParsedUI(node);
 		}
