@@ -5,6 +5,7 @@ import {dts as fetchErrorHandle} from './lib.fetch.error.handle.dts';
 import {dts as fetchResponse} from './lib.fetch.response.dts';
 import {dts as httpResponse} from './lib.http.response.dts';
 import {dts as mathjs} from './lib.mathjs.dts';
+import {dts as n19n1} from './lib.n19.n1.dts';
 import {dts as stepErrorHandleAny} from './lib.step.error.handle.any.dts';
 import {dts as stepErrorHandleCatchable} from './lib.step.error.handle.catchable.dts';
 import {dts as stepErrorHandle} from './lib.step.error.handle.dts';
@@ -26,7 +27,7 @@ export const DTS = {
 	/** \$request, must include [stepInterfaces] as well */
 	stepRequest,
 	/** \$helpers, \$ */
-	stepHelpers: `${dayjs}\n${decimaljs}\n${mathjs}\n${stepHelpers}`,
+	stepHelpers: `${dayjs}\n${decimaljs}\n${mathjs}\n${n19n1}\n${stepHelpers}`,
 	/** \$options, must include [stepInterfaces] as well */
 	stepCatchableErrorHandle: `${stepErrorHandle}\n${stepErrorHandleCatchable}`,
 	/** \$options, must include [stepInterfaces] as well */

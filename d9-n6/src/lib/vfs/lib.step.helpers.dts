@@ -37,6 +37,8 @@ declare namespace O23 {
 
 	// @ts-ignore
 	type PipelineStepMathHelper = mathjs.MathJsInstance;
+	// @ts-ignore
+	type PipelineStepDecimalHelper = (value: decimal.Decimal.Value) => decimal.Decimal;
 
 	interface PipelineStepErrorOptions {
 		// exactly same as http status
@@ -73,46 +75,59 @@ declare namespace O23 {
 		content: NodeJSBuffer;
 	}
 
-	interface PipelineStepHelpers {
+	interface IStepHelpersUtils {
+		$nano: (size?: number) => string;
+		$ascii: (size?: number) => string;
+		$errors: {
+			catchable: (options: Omit<PipelineStepErrorOptions, 'status'>) => never;
+			// eslint-disable-next-line @typescript-eslint/no-explicit-any
+			isCatchable: (e: any) => e is CatchableError;
+			exposed: (options: PipelineStepErrorOptions) => never;
+			// eslint-disable-next-line @typescript-eslint/no-explicit-any
+			isExposed: (e: any) => e is ExposedUncatchableError;
+			uncatchable: (options: Omit<PipelineStepErrorOptions, 'status'>) => never;
+			// eslint-disable-next-line @typescript-eslint/no-explicit-any
+			isUncatchable: (e: any) => e is UncatchableError;
+		};
+		/** create a file */
+		$file: (options: PipelineStepFileOptions) => PipelineStepFile;
+		$clearContextData: () => symbol;
+		/** @deprecated */
+		// eslint-disable-next-line @typescript-eslint/no-explicit-any
+		isEmpty: (value: any) => boolean;
+		/** @deprecated */
+		// eslint-disable-next-line @typescript-eslint/no-explicit-any
+		isNotEmpty: (value: any) => boolean;
+		/** @deprecated */
+		// eslint-disable-next-line @typescript-eslint/no-explicit-any
+		isBlank: (value: any) => boolean;
+		/** @deprecated */
+		// eslint-disable-next-line @typescript-eslint/no-explicit-any
+		isNotBlank: (value: any) => boolean;
+		/** @deprecated */
+		// eslint-disable-next-line @typescript-eslint/no-explicit-any
+		trim: (value: any) => string;
+		// @ts-ignore
+		touch: (value: any) => n19n1.IValueOperator;
+		// eslint-disable-next-line @typescript-eslint/no-explicit-any
+		noop: (value: any) => void;
+		// eslint-disable-next-line @typescript-eslint/no-explicit-any
+		asyncNoop: (value: any) => Promise<void>;
+	}
+
+	interface PipelineStepHelpers extends IStepHelpersUtils {
 		$config: Config;
 		$logger: Logger;
 		$date: PipelineStepDateHelper;
 		$math: PipelineStepMathHelper;
-		$nano: (size?: number) => string;
-		$ascii: (size?: number) => string;
+		$decimal: PipelineStepDecimalHelper;
+
 		/** create an exposed uncatchable error*/
 		$error: (options: PipelineStepErrorOptions) => never;
 		$errorCodes: Readonly<Record<string, string>>;
-		$errors: {
-			catchable: (options: Omit<PipelineStepErrorOptions, 'status'>) => never;
-			isCatchable: (e: any) => e is CatchableError;
-			exposed: (options: PipelineStepErrorOptions) => never;
-			isExposed: (e: any) => e is ExposedUncatchableError;
-			uncatchable: (options: Omit<PipelineStepErrorOptions, 'status'>) => never;
-			isUncatchable: (e: any) => e is UncatchableError;
-		};
-		/** Create a file */
-		$file: (options: PipelineStepFileOptions) => PipelineStepFile;
-		/** Create a symbol. When this symbol is used as a return value in a pipeline, it will be marked by the system as not requiring any return. */
-		$clearContextData: () => Symbol;
-		/**
-		 * Check given value is empty or not.
-		 * undefined, null, empty array, empty array likes, empty string, empty Map, empty Set, object with no keys.
-		 */
-		isEmpty: (value: any) => boolean;
-		/** Opposite of isEmpty */
-		isNotEmpty: (value: any) => boolean;
-		/**
-		 * Check given value is blank or not.
-		 * undefined, null, blank string.
-		 */
-		isBlank: (value: any) => boolean;
-		/** Opposite of isNotBlank */
-		isNotBlank: (value: any) => boolean;
-		/**
-		 * Trim given value, only available for undefined, null and string, otherwise raise an UncatchableError.
-		 */
-		trim: (value: any) => string;
+
+		// eslint-disable-next-line @typescript-eslint/no-explicit-any
+		[key: string]: any;
 	}
 }
 

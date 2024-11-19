@@ -1,0 +1,185 @@
+// @ts-nocheck
+declare namespace n19n1 {
+	type ValueActionPassed<V> = {
+		test: true;
+		value: V;
+	};
+	type ValueActionFailed<V> = {
+		test: false;
+		value: V;
+	};
+	type ValueAction<From = any, To = any> = (value?: From) => ValueActionPassed<To> | ValueActionFailed<From>;
+	type RegisteredValueAction = {
+		type: 'func';
+		func: ValueAction;
+	};
+	type RegisteredValueActionWithParams<F = (...args: Array<any>) => ValueAction> = {
+		type: 'param';
+		func: F;
+	};
+	const OBJECT_PROTOTYPE: Object;
+
+	const isLength: (value: any) => boolean;
+	const isArrayLike: (value: any) => boolean;
+	const isPrototype: (value: any) => boolean;
+	const isNull: ValueAction<any, null | undefined>;
+	const isNotNull: ValueAction<any, NonNullable<any>>;
+	const isEmpty: ValueAction;
+	const isNotEmpty: ValueAction;
+	const isBlank: ValueAction<any, null | undefined | string>;
+	const isNotBlank: ValueAction;
+
+	const regexp: (regexp: RegExp) => ValueAction;
+
+	const isDecimal: ValueAction<any, decimal.Decimal>;
+	const isInteger: ValueAction<any, decimal.Decimal>;
+	type DecimalInterval = 'closed' | 'c' | 'open' | 'o' | 'left-open' | 'lo' | 'right-open' | 'ro';
+	type DecimalInRangeOptions = {
+		interval?: decimal.DecimalInterval;
+	} & ({ min: decimal.Decimal.Value; max?: decimal.Decimal.Value; }
+		| { min?: decimal.Decimal.Value; max: decimal.Decimal.Value; });
+	const isInRange: (options: decimal.DecimalInRangeOptions) => ValueAction<any, decimal.Decimal>;
+	const isPositive: ValueAction<any, decimal.Decimal>;
+	const isNotPositive: ValueAction<any, decimal.Decimal>;
+	const isNegative: ValueAction<any, decimal.Decimal>;
+	const isNotNegative: ValueAction<any, decimal.Decimal>;
+	const isZero: ValueAction<any, decimal.Decimal>;
+	const isNotZero: ValueAction<any, decimal.Decimal>;
+	const isGreaterThan: (compare: decimal.Decimal.Value) => ValueAction<any, decimal.Decimal>;
+	const isGreaterThanOrEqual: (compare: decimal.Decimal.Value) => ValueAction<any, decimal.Decimal>;
+	const isLessThan: (compare: decimal.Decimal.Value) => ValueAction<any, decimal.Decimal>;
+	const isLessThanOrEqual: (compare: decimal.Decimal.Value) => ValueAction<any, decimal.Decimal>;
+
+	namespace Internal {
+		const testers: {
+			isNull: RegisteredValueAction;
+			isNotNull: RegisteredValueAction;
+			isEmpty: RegisteredValueAction;
+			isNotEmpty: RegisteredValueAction;
+			isBlank: RegisteredValueAction;
+			isNotBlank: RegisteredValueAction;
+			regexp: RegisteredValueActionWithParams<typeof regexp>;
+			regex: RegisteredValueActionWithParams<typeof regexp>;
+			matches: RegisteredValueActionWithParams<typeof regexp>;
+			isNumber: RegisteredValueAction;
+			isDecimal: RegisteredValueAction;
+			isInteger: RegisteredValueAction;
+			isInt: RegisteredValueAction;
+			isPositive: RegisteredValueAction;
+			isNotPositive: RegisteredValueAction;
+			isNegative: RegisteredValueAction;
+			isNotNegative: RegisteredValueAction;
+			isZero: RegisteredValueAction;
+			isNotZero: RegisteredValueAction;
+			isGreaterThan: RegisteredValueActionWithParams<typeof isGreaterThan>;
+			gt: RegisteredValueActionWithParams<typeof isGreaterThan>;
+			isGreaterThanOrEqual: RegisteredValueActionWithParams<typeof isGreaterThanOrEqual>;
+			gte: RegisteredValueActionWithParams<typeof isGreaterThanOrEqual>;
+			isLessThan: RegisteredValueActionWithParams<typeof isLessThan>;
+			lt: RegisteredValueActionWithParams<typeof isLessThan>;
+			isLessThanOrEqual: RegisteredValueActionWithParams<typeof isLessThanOrEqual>;
+			lte: RegisteredValueActionWithParams<typeof isLessThanOrEqual>;
+			isInRange: RegisteredValueActionWithParams<typeof isInRange>;
+			within: RegisteredValueActionWithParams<typeof isInRange>;
+		};
+	}
+	const AllTesters: Readonly<typeof n19n1.Internal.testers>;
+
+	const trim: ValueAction;
+	type PadOptions = {
+		length: number;
+		char?: string;
+		direction?: 'left' | 'right';
+	};
+	const pad: (options: PadOptions) => ValueAction;
+	const padStart: (options: Omit<PadOptions, 'direction'>) => ValueAction;
+	const padEnd: (options: Omit<PadOptions, 'direction'>) => ValueAction;
+
+	enum Rounding {
+		ROUND_UP = 'up',
+		ROUND_DOWN = 'down',
+		ROUND_CEIL = 'ceil',
+		ROUND_FLOOR = 'floor',
+		ROUND_HALF_UP = 'half-up',
+		ROUND_HALF_DOWN = 'half-down',
+		ROUND_HALF_EVEN = 'half-even',
+		ROUND_HALF_CEIL = 'half-ceil',
+		ROUND_HALF_FLOOR = 'half-floor'
+	}
+
+	const toDecimal: ValueAction<any, decimal.Decimal>;
+	const toNumber: ValueAction<any, number>;
+	const toFixed: (fractionDigits: number, rounding?: Rounding) => ValueAction<any, string>;
+	const roundUp: (fractionDigits: number) => ValueAction<any, decimal.Decimal>;
+	const roundDown: (fractionDigits: number) => ValueAction<any, decimal.Decimal>;
+	const floor: (fractionDigits: number) => ValueAction<any, decimal.Decimal>;
+	const ceil: (fractionDigits: number) => ValueAction<any, decimal.Decimal>;
+	const roundBy: (fractionDigits: number, rounding?: Rounding) => ValueAction<any, decimal.Decimal>;
+
+	namespace Internal {
+		const transformers: {
+			trim: RegisteredValueAction;
+			pad: RegisteredValueActionWithParams<typeof pad>;
+			padStart: RegisteredValueActionWithParams<typeof padStart>;
+			padLeft: RegisteredValueActionWithParams<typeof padStart>;
+			lpad: RegisteredValueActionWithParams<typeof padStart>;
+			padEnd: RegisteredValueActionWithParams<typeof padEnd>;
+			padRight: RegisteredValueActionWithParams<typeof padEnd>;
+			rpad: RegisteredValueActionWithParams<typeof padEnd>;
+			toDecimal: RegisteredValueAction;
+			toNumber: RegisteredValueAction;
+			toFixed0: RegisteredValueAction;
+			toFixed1: RegisteredValueAction;
+			toFixed2: RegisteredValueAction;
+			toFixed3: RegisteredValueAction;
+			toFixed4: RegisteredValueAction;
+			toFixed5: RegisteredValueAction;
+			toFixed6: RegisteredValueAction;
+			toFixed: RegisteredValueActionWithParams<typeof toFixed>;
+			round: RegisteredValueActionWithParams<typeof roundUp>;
+			roundUp: RegisteredValueActionWithParams<typeof roundUp>;
+			roundDown: RegisteredValueActionWithParams<typeof roundDown>;
+			floor: RegisteredValueActionWithParams<typeof floor>;
+			ceil: RegisteredValueActionWithParams<typeof ceil>;
+			roundBy: RegisteredValueActionWithParams<typeof roundBy>;
+		};
+	}
+	const AllTransformers: Readonly<typeof n19n1.Internal.transformers>;
+
+	interface FinalValueRetriever {
+		value: <T>() => T;
+		success: <T>(value: T) => {
+			failure: <V>(value: V) => void;
+		};
+		failure: <V>(value: V) => {
+			success: <T>(value: T) => void;
+		};
+		ok: () => boolean;
+		promise: <T>() => Promise<T>;
+	}
+
+	interface DefaultValueSetter extends FinalValueRetriever {
+		orUseDefault: (defaultValue: any) => FinalValueRetriever;
+		useDefault: (defaultValue: any) => FinalValueRetriever;
+		withDefault: (defaultValue: any) => FinalValueRetriever;
+		orElse: (defaultValue: any) => FinalValueRetriever;
+		else: (defaultValue: any) => FinalValueRetriever;
+	}
+
+	type ActionType<T> = T extends RegisteredValueAction ? (ValueActionsWithDefault & (() => ValueActionsWithDefault)) : T extends RegisteredValueActionWithParams ? ((...args: Parameters<T['func']>) => ValueActionsWithDefault) : never;
+	type ValueActions = {
+		[K in keyof typeof AllTesters]: ActionType<typeof AllTesters[K]>;
+	} & {
+		[K in keyof typeof AllTransformers]: ActionType<typeof AllTransformers[K]>;
+	};
+	type ValueActionsWithDefault = ValueActions & DefaultValueSetter;
+	type IValueOperator = ValueActions;
+
+	interface IValueOperatorBoostrap {
+		of(value: any): IValueOperator;
+		from(value: any): IValueOperator;
+		with(value: any): IValueOperator;
+	}
+
+	const ValueOperator: IValueOperatorBoostrap;
+}
