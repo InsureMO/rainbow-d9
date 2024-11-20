@@ -695,10 +695,10 @@ export const OptionFilter = styled.div.attrs<WSDP<Omit<DropdownPopupState, 'acti
 			style: {
 				'--position': fixFilter ? 'sticky' : 'fixed',
 				'--opacity': fixFilter ? 1 : (active ? 1 : 0),
-				'--top': fixFilter ? 0 : (atBottom ? (top + height - 10) : (void 0)),
+				'--top': fixFilter ? 0 : (atBottom ? toCssSize(top + height - 10) : (void 0)),
 				'--bottom': fixFilter ? (void 0) : (atBottom ? (void 0) : `calc(100vh - ${top}px - 10px)`),
-				'--left': fixFilter ? 0 : (left - 10),
-				'--height': fixFilter ? (active ? CssVars.INPUT_HEIGHT : 0) : `calc(${CssVars.INPUT_HEIGHT} / 5 * 4)`,
+				'--left': fixFilter ? 0 : toCssSize(left - 10),
+				'--height': fixFilter ? (active ? CssVars.INPUT_HEIGHT : 0) : (active ? `calc(${CssVars.INPUT_HEIGHT} / 5 * 4)` : 0),
 				'--width': fixFilter ? '100%' : (void 0),
 				'--font-size': fixFilter ? CssVars.FONT_SIZE : `calc(${CssVars.FONT_SIZE} - 2px)`,
 				'--padding': fixFilter ? 0 : `0 ${CssVars.INPUT_INDENT}`,
