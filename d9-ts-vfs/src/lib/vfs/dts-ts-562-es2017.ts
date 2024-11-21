@@ -1,14 +1,14 @@
 // and all d.ts files are copied from typescript v5.6.2
-import {dts as es2017Date} from './dts-files/lib.es2017.date.dts';
-import {dts as es2017} from './dts-files/lib.es2017.dts';
-import {dts as es2017Full} from './dts-files/lib.es2017.full.dts';
-import {dts as es2017Intl} from './dts-files/lib.es2017.intl.dts';
-import {dts as es2017Object} from './dts-files/lib.es2017.object.dts';
-import {dts as es2017SharedMemory} from './dts-files/lib.es2017.sharedmemory.dts';
-import {dts as es2017String} from './dts-files/lib.es2017.string.dts';
-import {dts as es2017TypedArrays} from './dts-files/lib.es2017.typedarrays.dts';
 import {VFS_TS_562_ES2016_FILES} from './dts-ts-562-es2016';
 import {DtsMap, DtsMapOptions, LibDtsMapOptions} from './types';
+import {dts as es2017} from './typescript/lib/lib.es2017.d.ts?dts';
+import {dts as es2017Date} from './typescript/lib/lib.es2017.date.d.ts?dts';
+import {dts as es2017Full} from './typescript/lib/lib.es2017.full.d.ts?dts';
+import {dts as es2017Intl} from './typescript/lib/lib.es2017.intl.d.ts?dts';
+import {dts as es2017Object} from './typescript/lib/lib.es2017.object.d.ts?dts';
+import {dts as es2017SharedMemory} from './typescript/lib/lib.es2017.sharedmemory.d.ts?dts';
+import {dts as es2017String} from './typescript/lib/lib.es2017.string.d.ts?dts';
+import {dts as es2017TypedArrays} from './typescript/lib/lib.es2017.typedarrays.d.ts?dts';
 import {createDTSMap, createDTSMapWithDOMLtEs2018} from './utils';
 
 export const VFS_TS_562_ES2017_FILES = (options: LibDtsMapOptions): Record<string, string> => {

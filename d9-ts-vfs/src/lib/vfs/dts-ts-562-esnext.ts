@@ -1,18 +1,18 @@
 // and all d.ts files are copied from typescript v5.6.2
-import {dts as esnextArray} from './dts-files/lib.esnext.array.dts';
-import {dts as esnextCollection} from './dts-files/lib.esnext.collection.dts';
-import {dts as esnextDecorators} from './dts-files/lib.esnext.decorators.dts';
-import {dts as esnextDisposable} from './dts-files/lib.esnext.disposable.dts';
-import {dts as esnext} from './dts-files/lib.esnext.dts';
-import {dts as esnextFull} from './dts-files/lib.esnext.full.dts';
-import {dts as esnextIntl} from './dts-files/lib.esnext.intl.dts';
-import {dts as esnextIterator} from './dts-files/lib.esnext.iterator.dts';
-import {dts as esnextObject} from './dts-files/lib.esnext.object.dts';
-import {dts as esnextPromise} from './dts-files/lib.esnext.promise.dts';
-import {dts as esnextRegexp} from './dts-files/lib.esnext.regexp.dts';
-import {dts as esnextString} from './dts-files/lib.esnext.string.dts';
 import {VFS_TS_562_ES2023_FILES} from './dts-ts-562-es2023';
 import {DtsMap, DtsMapOptions, LibDtsMapOptions} from './types';
+import {dts as esnextArray} from './typescript/lib/lib.esnext.array.d.ts?dts';
+import {dts as esnextCollection} from './typescript/lib/lib.esnext.collection.d.ts?dts';
+import {dts as esnext} from './typescript/lib/lib.esnext.d.ts?dts';
+import {dts as esnextDecorators} from './typescript/lib/lib.esnext.decorators.d.ts?dts';
+import {dts as esnextDisposable} from './typescript/lib/lib.esnext.disposable.d.ts?dts';
+import {dts as esnextFull} from './typescript/lib/lib.esnext.full.d.ts?dts';
+import {dts as esnextIntl} from './typescript/lib/lib.esnext.intl.d.ts?dts';
+import {dts as esnextIterator} from './typescript/lib/lib.esnext.iterator.d.ts?dts';
+import {dts as esnextObject} from './typescript/lib/lib.esnext.object.d.ts?dts';
+import {dts as esnextPromise} from './typescript/lib/lib.esnext.promise.d.ts?dts';
+import {dts as esnextRegexp} from './typescript/lib/lib.esnext.regexp.d.ts?dts';
+import {dts as esnextString} from './typescript/lib/lib.esnext.string.d.ts?dts';
 import {createDTSMap, createDTSMapWithDOMGteEs2018} from './utils';
 
 export const VFS_TS_562_ESNEXT_FILES = (options: LibDtsMapOptions): Record<string, string> => {

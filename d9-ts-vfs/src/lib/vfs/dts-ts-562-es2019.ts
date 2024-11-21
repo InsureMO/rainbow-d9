@@ -1,13 +1,13 @@
 // and all d.ts files are copied from typescript v5.6.2
-import {dts as es2019Array} from './dts-files/lib.es2019.array.dts';
-import {dts as es2019} from './dts-files/lib.es2019.dts';
-import {dts as es2019Full} from './dts-files/lib.es2019.full.dts';
-import {dts as es2019Intl} from './dts-files/lib.es2019.intl.dts';
-import {dts as es2019Object} from './dts-files/lib.es2019.object.dts';
-import {dts as es2019String} from './dts-files/lib.es2019.string.dts';
-import {dts as es2019Symbol} from './dts-files/lib.es2019.symbol.dts';
 import {VFS_TS_562_ES2018_FILES} from './dts-ts-562-es2018';
 import {DtsMap, DtsMapOptions, LibDtsMapOptions} from './types';
+import {dts as es2019Array} from './typescript/lib/lib.es2019.array.d.ts?dts';
+import {dts as es2019} from './typescript/lib/lib.es2019.d.ts?dts';
+import {dts as es2019Full} from './typescript/lib/lib.es2019.full.d.ts?dts';
+import {dts as es2019Intl} from './typescript/lib/lib.es2019.intl.d.ts?dts';
+import {dts as es2019Object} from './typescript/lib/lib.es2019.object.d.ts?dts';
+import {dts as es2019String} from './typescript/lib/lib.es2019.string.d.ts?dts';
+import {dts as es2019Symbol} from './typescript/lib/lib.es2019.symbol.d.ts?dts';
 import {createDTSMap, createDTSMapWithDOMGteEs2018} from './utils';
 
 export const VFS_TS_562_ES2019_FILES = (options: LibDtsMapOptions): Record<string, string> => {

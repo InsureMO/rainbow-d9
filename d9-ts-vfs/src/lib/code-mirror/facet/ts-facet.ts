@@ -5,7 +5,6 @@ import {VirtualTypeScriptEnvironment} from '../../vfs';
 export interface TsFacetData {
 	path: string;
 	env: VirtualTypeScriptEnvironment;
-
 }
 
 /**

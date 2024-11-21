@@ -1,12 +1,12 @@
 // and all d.ts files are copied from typescript v5.6.2
-import {dts as es2021} from './dts-files/lib.es2021.dts';
-import {dts as es2021Full} from './dts-files/lib.es2021.full.dts';
-import {dts as es2021Intl} from './dts-files/lib.es2021.intl.dts';
-import {dts as es2021Promise} from './dts-files/lib.es2021.promise.dts';
-import {dts as es2021String} from './dts-files/lib.es2021.string.dts';
-import {dts as es2021WeakRef} from './dts-files/lib.es2021.weakref.dts';
 import {VFS_TS_562_ES2020_FILES} from './dts-ts-562-es2020';
 import {DtsMap, DtsMapOptions, LibDtsMapOptions} from './types';
+import {dts as es2021} from './typescript/lib/lib.es2021.d.ts?dts';
+import {dts as es2021Full} from './typescript/lib/lib.es2021.full.d.ts?dts';
+import {dts as es2021Intl} from './typescript/lib/lib.es2021.intl.d.ts?dts';
+import {dts as es2021Promise} from './typescript/lib/lib.es2021.promise.d.ts?dts';
+import {dts as es2021String} from './typescript/lib/lib.es2021.string.d.ts?dts';
+import {dts as es2021WeakRef} from './typescript/lib/lib.es2021.weakref.d.ts?dts';
 import {createDTSMap, createDTSMapWithDOMGteEs2018} from './utils';
 
 export const VFS_TS_562_ES2021_FILES = (options: LibDtsMapOptions): Record<string, string> => {

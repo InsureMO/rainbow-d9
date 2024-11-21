@@ -1,16 +1,16 @@
 // and all d.ts files are copied from typescript v5.6.2
-import {dts as es2020Bigint} from './dts-files/lib.es2020.bigint.dts';
-import {dts as es2020Date} from './dts-files/lib.es2020.date.dts';
-import {dts as es2020} from './dts-files/lib.es2020.dts';
-import {dts as es2020Full} from './dts-files/lib.es2020.full.dts';
-import {dts as es2020Intl} from './dts-files/lib.es2020.intl.dts';
-import {dts as es2020Number} from './dts-files/lib.es2020.number.dts';
-import {dts as es2020Promise} from './dts-files/lib.es2020.promise.dts';
-import {dts as es2020SharedMemory} from './dts-files/lib.es2020.sharedmemory.dts';
-import {dts as es2020String} from './dts-files/lib.es2020.string.dts';
-import {dts as es2020SymbolWellKnown} from './dts-files/lib.es2020.symbol.wellknown.dts';
 import {VFS_TS_562_ES2019_FILES} from './dts-ts-562-es2019';
 import {DtsMap, DtsMapOptions, LibDtsMapOptions} from './types';
+import {dts as es2020Bigint} from './typescript/lib/lib.es2020.bigint.d.ts?dts';
+import {dts as es2020} from './typescript/lib/lib.es2020.d.ts?dts';
+import {dts as es2020Date} from './typescript/lib/lib.es2020.date.d.ts?dts';
+import {dts as es2020Full} from './typescript/lib/lib.es2020.full.d.ts?dts';
+import {dts as es2020Intl} from './typescript/lib/lib.es2020.intl.d.ts?dts';
+import {dts as es2020Number} from './typescript/lib/lib.es2020.number.d.ts?dts';
+import {dts as es2020Promise} from './typescript/lib/lib.es2020.promise.d.ts?dts';
+import {dts as es2020SharedMemory} from './typescript/lib/lib.es2020.sharedmemory.d.ts?dts';
+import {dts as es2020String} from './typescript/lib/lib.es2020.string.d.ts?dts';
+import {dts as es2020SymbolWellKnown} from './typescript/lib/lib.es2020.symbol.wellknown.d.ts?dts';
 import {createDTSMap, createDTSMapWithDOMGteEs2018} from './utils';
 
 export const VFS_TS_562_ES2020_FILES = (options: LibDtsMapOptions): Record<string, string> => {

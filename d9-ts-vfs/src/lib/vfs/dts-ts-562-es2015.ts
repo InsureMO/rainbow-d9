@@ -1,17 +1,17 @@
 // and all d.ts files are copied from typescript v5.6.2
-import {dts as es2015Collection} from './dts-files/lib.es2015.collection.dts';
-import {dts as es2015Core} from './dts-files/lib.es2015.core.dts';
-import {dts as es2015} from './dts-files/lib.es2015.dts';
-import {dts as es2015Generator} from './dts-files/lib.es2015.generator.dts';
-import {dts as es2015Iterable} from './dts-files/lib.es2015.iterable.dts';
-import {dts as es2015Promise} from './dts-files/lib.es2015.promise.dts';
-import {dts as es2015Proxy} from './dts-files/lib.es2015.proxy.dts';
-import {dts as es2015Reflect} from './dts-files/lib.es2015.reflect.dts';
-import {dts as es2015Symbol} from './dts-files/lib.es2015.symbol.dts';
-import {dts as es2015SymbolWellKnown} from './dts-files/lib.es2015.symbol.wellknown.dts';
-import {dts as es6} from './dts-files/lib.es6.dts';
 import {VFS_TS_562_ES5_FILES} from './dts-ts-562-es5';
 import {DtsMap, DtsMapOptions, LibDtsMapOptions} from './types';
+import {dts as es2015Collection} from './typescript/lib/lib.es2015.collection.d.ts?dts';
+import {dts as es2015Core} from './typescript/lib/lib.es2015.core.d.ts?dts';
+import {dts as es2015} from './typescript/lib/lib.es2015.d.ts?dts';
+import {dts as es2015Generator} from './typescript/lib/lib.es2015.generator.d.ts?dts';
+import {dts as es2015Iterable} from './typescript/lib/lib.es2015.iterable.d.ts?dts';
+import {dts as es2015Promise} from './typescript/lib/lib.es2015.promise.d.ts?dts';
+import {dts as es2015Proxy} from './typescript/lib/lib.es2015.proxy.d.ts?dts';
+import {dts as es2015Reflect} from './typescript/lib/lib.es2015.reflect.d.ts?dts';
+import {dts as es2015Symbol} from './typescript/lib/lib.es2015.symbol.d.ts?dts';
+import {dts as es2015SymbolWellKnown} from './typescript/lib/lib.es2015.symbol.wellknown.d.ts?dts';
+import {dts as es6} from './typescript/lib/lib.es6.d.ts?dts';
 import {createDTSMap, createDTSMapWithDOMLtEs2018} from './utils';
 
 export const VFS_TS_562_ES2015_FILES = (options: LibDtsMapOptions): Record<string, string> => {

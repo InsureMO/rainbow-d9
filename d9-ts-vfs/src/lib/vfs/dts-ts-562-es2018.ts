@@ -1,13 +1,13 @@
 // and all d.ts files are copied from typescript v5.6.2
-import {dts as es2018AsyncGenerator} from './dts-files/lib.es2018.asyncgenerator.dts';
-import {dts as es2018AsyncIterable} from './dts-files/lib.es2018.asynciterable.dts';
-import {dts as es2018} from './dts-files/lib.es2018.dts';
-import {dts as es2018Full} from './dts-files/lib.es2018.full.dts';
-import {dts as es2018Intl} from './dts-files/lib.es2018.intl.dts';
-import {dts as es2018Promise} from './dts-files/lib.es2018.promise.dts';
-import {dts as es2018Regexp} from './dts-files/lib.es2018.regexp.dts';
 import {VFS_TS_562_ES2017_FILES} from './dts-ts-562-es2017';
 import {DtsMap, DtsMapOptions, LibDtsMapOptions} from './types';
+import {dts as es2018AsyncGenerator} from './typescript/lib/lib.es2018.asyncgenerator.d.ts?dts';
+import {dts as es2018AsyncIterable} from './typescript/lib/lib.es2018.asynciterable.d.ts?dts';
+import {dts as es2018} from './typescript/lib/lib.es2018.d.ts?dts';
+import {dts as es2018Full} from './typescript/lib/lib.es2018.full.d.ts?dts';
+import {dts as es2018Intl} from './typescript/lib/lib.es2018.intl.d.ts?dts';
+import {dts as es2018Promise} from './typescript/lib/lib.es2018.promise.d.ts?dts';
+import {dts as es2018Regexp} from './typescript/lib/lib.es2018.regexp.d.ts?dts';
 import {createDTSMap, createDTSMapWithDOMGteEs2018} from './utils';
 
 export const VFS_TS_562_ES2018_FILES = (options: LibDtsMapOptions): Record<string, string> => {

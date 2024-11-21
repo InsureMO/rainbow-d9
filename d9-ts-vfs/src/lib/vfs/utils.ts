@@ -1,8 +1,8 @@
-import {dts as domAsyncIterable} from './dts-files/lib.dom.asynciterable.dts';
-import {dts as dom, dts as domIterable} from './dts-files/lib.dom.dts';
-import {dts as scriptHost} from './dts-files/lib.scripthost.dts';
-import {dts as webWorkerImportScripts} from './dts-files/lib.webworker.importscripts.dts';
 import {DtsFileContent, DtsFileKey, DtsMap} from './types';
+import {dts as domAsyncIterable} from './typescript/lib/lib.dom.asynciterable.d.ts?dts';
+import {dts as dom, dts as domIterable} from './typescript/lib/lib.dom.d.ts?dts';
+import {dts as scriptHost} from './typescript/lib/lib.scripthost.d.ts?dts';
+import {dts as webWorkerImportScripts} from './typescript/lib/lib.webworker.importscripts.d.ts?dts';
 
 export const createDTSMap = (files: Record<string, string>): DtsMap => {
 	const map = new Map<DtsFileKey, DtsFileContent>();
