@@ -1,2 +1,2 @@
 // @ts-ignore
-declare var $request: O23.PipelineStepData;
+declare const $request: O23.PipelineStepData;

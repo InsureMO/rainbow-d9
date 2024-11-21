@@ -1,1 +1,1 @@
-declare var $factor: any;
+declare const $factor: any;

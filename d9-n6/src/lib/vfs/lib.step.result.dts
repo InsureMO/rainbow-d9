@@ -1,1 +1,1 @@
-declare var $result: any;
+declare const $result: any;

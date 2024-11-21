@@ -32,13 +32,19 @@ declare namespace O23 {
 		 */
 		now(): DateTime;
 		// @ts-ignore
-		dayjs(): dayjs.DayjsFn;
+		get dayjs(): ((date?: dayjs.ConfigType) => dayjs.Dayjs)
+			// @ts-ignore
+			& ((date?: dayjs.ConfigType, format?: dayjs.OptionType, strict?: boolean) => dayjs.Dayjs)
+			// @ts-ignore
+			& ((date?: dayjs.ConfigType, format?: dayjs.OptionType, locale?: string, strict?: boolean) => dayjs.Dayjs)
+			// @ts-ignore
+			& { isDayjs: (d: any) => d is dayjs.Dayjs; unix: (t: number) => dayjs.Dayjs };
 	}
 
 	// @ts-ignore
-	type PipelineStepMathHelper = mathjs.MathJsInstance;
+	type PipelineStepMathHelper = MathJsInstance;
 	// @ts-ignore
-	type PipelineStepDecimalHelper = (value: decimal.Decimal.Value) => decimal.Decimal;
+	type PipelineStepDecimalHelper = (value: Decimal.Value) => Decimal;
 
 	interface PipelineStepErrorOptions {
 		// exactly same as http status
@@ -131,6 +137,5 @@ declare namespace O23 {
 	}
 }
 
-declare var $helpers: O23.PipelineStepHelpers;
-declare var $: O23.PipelineStepHelpers;
-
+declare const $helpers: O23.PipelineStepHelpers;
+declare const $: O23.PipelineStepHelpers;

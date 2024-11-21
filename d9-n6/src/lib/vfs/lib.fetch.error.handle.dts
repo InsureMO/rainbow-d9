@@ -12,4 +12,4 @@ declare namespace O23 {
 	}
 }
 
-declare var $options: O23.HttpErrorHandleOptions;
+declare const $options: O23.HttpErrorHandleOptions;

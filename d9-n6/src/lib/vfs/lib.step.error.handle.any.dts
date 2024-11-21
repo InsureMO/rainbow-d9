@@ -1,2 +1,2 @@
 // @ts-ignore
-declare var $options: O23.ErrorHandleOptions<any, any>;
+declare const $options: O23.ErrorHandleOptions<any, any>;

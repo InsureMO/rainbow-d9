@@ -1,2 +1,2 @@
 // @ts-ignore
-declare var $options: O23.ErrorHandleOptions<any, any, O23.UncatchableError>;
+declare const $options: O23.ErrorHandleOptions<any, any, O23.UncatchableError>;

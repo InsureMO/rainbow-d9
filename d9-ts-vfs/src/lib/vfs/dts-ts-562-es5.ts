@@ -40,7 +40,7 @@ export const VFS_TS_562_ES5_FILES = (options: LibDtsMapOptions): Record<string, 
 			}
 		})(),
 		...(Object.keys(extendNamedDtsContents).reduce((map, key) => {
-			map[`/external.${key}.d.ts`] = extendNamedDtsContents[key];
+			map[`/lib.external.${key}.d.ts`] = extendNamedDtsContents[key];
 			return map;
 		}, {})),
 		...(options.full ? {'/lib.d.ts': lib} : {})

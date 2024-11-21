@@ -81,52 +81,52 @@ const createExtensionByType = (extensionType: JsEditorExtensionType = JsEditorEx
 			case JsEditorExtensionType.HTTP_REQUEST_HEADERS_GENERATE:
 			case JsEditorExtensionType.HTTP_REQUEST_BODY_GENERATE:
 				return createCodeMirrorExtensions({
-					extend: () => [DTS.stepInterfaces, DTS.stepFactor, DTS.stepRequest, DTS.stepHelpers].join('\n'),
+					extend: () => [DTS.stepFactor, DTS.stepRequest, DTS.stepHelpers],
 					diagnosticCodesToIgnore: [DiagnosticCodes.C1118, DiagnosticCodes.C1375]
 				});
 			case JsEditorExtensionType.TO_OUTPUT:
 				return createCodeMirrorExtensions({
-					extend: () => [DTS.stepInterfaces, DTS.stepResult, DTS.stepRequest, DTS.stepHelpers].join('\n'),
+					extend: () => [DTS.stepResult, DTS.stepRequest, DTS.stepHelpers],
 					diagnosticCodesToIgnore: [DiagnosticCodes.C1118, DiagnosticCodes.C1375]
 				});
 			case JsEditorExtensionType.CATCHABLE_ERROR_HANDLE:
 				return createCodeMirrorExtensions({
-					extend: () => [DTS.stepInterfaces, DTS.stepCatchableErrorHandle, DTS.stepHelpers].join('\n'),
+					extend: () => [DTS.stepCatchableErrorHandle, DTS.stepHelpers],
 					diagnosticCodesToIgnore: [DiagnosticCodes.C1118, DiagnosticCodes.C1375]
 				});
 			case JsEditorExtensionType.UNCATCHABLE_ERROR_HANDLE:
 				return createCodeMirrorExtensions({
-					extend: () => [DTS.stepInterfaces, DTS.stepUncatchableErrorHandle, DTS.stepHelpers].join('\n'),
+					extend: () => [DTS.stepUncatchableErrorHandle, DTS.stepHelpers],
 					diagnosticCodesToIgnore: [DiagnosticCodes.C1118, DiagnosticCodes.C1375]
 				});
 			case JsEditorExtensionType.EXPOSED_ERROR_HANDLE:
 				return createCodeMirrorExtensions({
-					extend: () => [DTS.stepInterfaces, DTS.stepExposedErrorHandle, DTS.stepHelpers].join('\n'),
+					extend: () => [DTS.stepExposedErrorHandle, DTS.stepHelpers],
 					diagnosticCodesToIgnore: [DiagnosticCodes.C1118, DiagnosticCodes.C1375]
 				});
 			case JsEditorExtensionType.ANY_ERROR_HANDLE:
 				return createCodeMirrorExtensions({
-					extend: () => [DTS.stepInterfaces, DTS.stepAnyErrorHandle, DTS.stepHelpers].join('\n'),
+					extend: () => [DTS.stepAnyErrorHandle, DTS.stepHelpers],
 					diagnosticCodesToIgnore: [DiagnosticCodes.C1118, DiagnosticCodes.C1375]
 				});
 			case JsEditorExtensionType.TYPEORM_SNIPPET:
 				return createCodeMirrorExtensions({
-					extend: () => [DTS.typeormRunner, DTS.stepInterfaces, DTS.stepFactor, DTS.stepRequest, DTS.stepHelpers].join('\n'),
+					extend: () => [DTS.typeormRunner, DTS.stepFactor, DTS.stepRequest, DTS.stepHelpers],
 					diagnosticCodesToIgnore: [DiagnosticCodes.C1118, DiagnosticCodes.C1375]
 				});
 			case JsEditorExtensionType.HTTP_URL_GENERATE:
 				return createCodeMirrorExtensions({
-					extend: () => [DTS.fetchEndpointUrl, DTS.stepInterfaces, DTS.stepFactor, DTS.stepRequest, DTS.stepHelpers].join('\n'),
+					extend: () => [DTS.fetchEndpointUrl, DTS.stepFactor, DTS.stepRequest, DTS.stepHelpers],
 					diagnosticCodesToIgnore: [DiagnosticCodes.C1118, DiagnosticCodes.C1375]
 				});
 			case JsEditorExtensionType.HTTP_RESPONSE_GENERATE:
 				return createCodeMirrorExtensions({
-					extend: () => [DTS.httpResponse, DTS.fetchResponse, DTS.stepInterfaces, DTS.stepFactor, DTS.stepRequest, DTS.stepHelpers].join('\n'),
+					extend: () => [DTS.fetchResponse, DTS.stepFactor, DTS.stepRequest, DTS.stepHelpers],
 					diagnosticCodesToIgnore: [DiagnosticCodes.C1118, DiagnosticCodes.C1375]
 				});
 			case JsEditorExtensionType.HTTP_ERROR_HANDLE:
 				return createCodeMirrorExtensions({
-					extend: () => [DTS.httpResponse, DTS.stepInterfaces, DTS.fetchErrorHandle, DTS.stepHelpers].join('\n'),
+					extend: () => [DTS.fetchErrorHandle, DTS.stepHelpers],
 					diagnosticCodesToIgnore: [DiagnosticCodes.C1118, DiagnosticCodes.C1375]
 				});
 			case JsEditorExtensionType.NONE:

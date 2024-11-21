@@ -1,1 +1,1 @@
-declare var $endpointUrl: string;
+declare const $endpointUrl: string;
