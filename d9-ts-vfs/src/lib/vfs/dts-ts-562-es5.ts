@@ -7,18 +7,43 @@ import {dts as es5} from './typescript/lib/lib.es5.d.ts?dts';
 import {createDTSMap, createEs5DTSMapWithDOM} from './utils';
 
 export const VFS_TS_562_ES5_FILES = (options: LibDtsMapOptions): Record<string, string> => {
+	const extendDtsContents = options.extend?.();
+	const extendNonameDtsContents: Array<string> = [];
+	const extendNamedDtsContents: Record<string, string> = {};
+	if (extendDtsContents == null) {
+		// do nothing
+	} else if (Array.isArray(extendDtsContents)) {
+		extendDtsContents.forEach((content) => {
+			if (typeof content === 'string') {
+				extendNonameDtsContents.push(content);
+			} else {
+				Object.keys(content).forEach((key) => {
+					extendNamedDtsContents[key] = content[key];
+				});
+			}
+		});
+	} else if (typeof extendDtsContents === 'string') {
+		extendNonameDtsContents.push(extendDtsContents);
+	} else {
+		Object.keys(extendDtsContents).forEach((key) => {
+			extendNamedDtsContents[key] = extendDtsContents[key];
+		});
+	}
 	return {
 		'/lib.decorators.d.ts': decorators,
 		'/lib.decorators.legacy.d.ts': decoratorsLegacy,
-		...(options.full ? {'/lib.d.ts': lib} : {}),
 		'/lib.es5.d.ts': (() => {
-			const extendDts = options.extend?.();
-			if (extendDts == null || extendDts.trim().length === 0) {
+			if (extendNonameDtsContents.length === 0) {
 				return es5;
 			} else {
-				return `${es5}\n${extendDts}`;
+				return `${es5}\n${extendNonameDtsContents.join('\n')}`;
 			}
-		})()
+		})(),
+		...(Object.keys(extendNamedDtsContents).reduce((map, key) => {
+			map[`/external.${key}.d.ts`] = extendNamedDtsContents[key];
+			return map;
+		}, {})),
+		...(options.full ? {'/lib.d.ts': lib} : {})
 	};
 };
 /**

@@ -40,7 +40,9 @@ export const createCodeMirrorJavascriptExtensions = (options: CreateCodeMirrorJa
 
 		const system = createSystem(files);
 		const compilerOpts = fixedCompilerOptions ?? {};
-		const env = createVirtualTypeScriptEnvironment(system, [], compilerOpts);
+		// extract external d.ts files from system
+		const rootFiles = Array.from(files.keys()).filter(key => key.startsWith('/external.'));
+		const env = createVirtualTypeScriptEnvironment(system, rootFiles, compilerOpts);
 		const path = 'index.ts';
 
 		return [

@@ -15,7 +15,7 @@ export const buildConfig = (lint) => {
 			const include = (void 0);
 			const exclude = (void 0);
 			const filter = createFilter(include, exclude);
-			const __dirname = path.dirname(fileURLToPath(import.meta.url))
+			const __dirname = path.dirname(fileURLToPath(import.meta.url));
 			return {
 				name,
 				enforce: 'pre',
