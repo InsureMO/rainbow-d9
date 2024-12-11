@@ -31,7 +31,7 @@
 		"dom-to-image": "^2.6.0",
 		"github-markdown-css": "^5.5.0",
 		"js-yaml": "^4.1.0",
-		"nanoid": "^4.0.0",
+		"nanoid": "^5.0.9",
 		"react": "^18.3.1",
 		"react-dom": "^18.3.1",
 		"react-markdown": "9.0.1",
