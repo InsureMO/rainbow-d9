@@ -1,4 +1,5 @@
-import {DeviceDetective} from '@rainbow-d9/n1';
+import {UnwrappedTsEditor} from '@rainbow-d9/code-editor/src';
+import {DeviceDetective, useForceUpdate, VUtils} from '@rainbow-d9/n1';
 import {ButtonFill, ButtonInk, UnwrappedButton} from '@rainbow-d9/n2';
 import {Fragment, useState} from 'react';
 import {
@@ -23,6 +24,7 @@ export const DemoIndex = () => {
 	const [pathname, setPathname] = useState(localStorage.getItem('PATH') || '/n2-basic-widgets');
 
 	const [activeSource, setActiveSource] = useState<ActiveSource>(ActiveSource.NONE);
+	const forceUpdate = useForceUpdate();
 
 	const onMenuClicked = (pathname: string) => () => {
 		localStorage.setItem('PATH', pathname);
@@ -31,6 +33,7 @@ export const DemoIndex = () => {
 	const onHideAllClicked = () => setActiveSource(ActiveSource.NONE);
 	const onMarkdownClicked = () => setActiveSource(ActiveSource.MARKDOWN);
 	const onJsonClicked = () => setActiveSource(ActiveSource.JSON);
+	const onJsonDataRefreshClicked = () => forceUpdate();
 
 	const route = {[pathname]: true};
 
@@ -64,12 +67,22 @@ export const DemoIndex = () => {
 				                 fill={activeSource === ActiveSource.JSON ? ButtonFill.FILL : ButtonFill.PLAIN}>
 					JSON
 				</UnwrappedButton>
+				<UnwrappedButton onClick={onJsonDataRefreshClicked}
+				                 ink={ButtonInk.INFO}
+				                 disabled={activeSource !== ActiveSource.JSON}
+				                 fill={ButtonFill.PLAIN}>
+					Refresh Data
+				</UnwrappedButton>
 			</DemoSourceHeader>
 			{activeSource === ActiveSource.NONE
 				? null
-				: <DemoSourceBody data-v-scroll="" data-h-scroll="">
+				: <DemoSourceBody data-v-scroll="" data-h-scroll=""
+				                  data-avoid-padding={activeSource === ActiveSource.JSON}>
 					{activeSource === ActiveSource.MARKDOWN ? <MarkdownContainer contents={markdown}/> : null}
-					{activeSource === ActiveSource.JSON ? <MarkdownContainer contents={json}/> : null}
+					{activeSource === ActiveSource.JSON
+						? <UnwrappedTsEditor value={'const data = ' + JSON.stringify(json, null, '\t')}
+						                     onValueChange={VUtils.noop}/>
+						: null}
 				</DemoSourceBody>}
 		</DemoSource>
 	</DemoContainer>;

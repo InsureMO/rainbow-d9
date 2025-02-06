@@ -1,6 +1,7 @@
 import {CssVars} from '@rainbow-d9/n2';
 import styled from 'styled-components';
 
+// @ts-ignore
 export const DemoContainer = styled.div.attrs({'data-w': 'd9-demo-container'})`
     display: grid;
     position: relative;
@@ -12,6 +13,7 @@ export const DemoContainer = styled.div.attrs({'data-w': 'd9-demo-container'})`
     }
 `;
 export const DemoMenus = styled.div.attrs({
+	// @ts-ignore
 	'data-w': 'd9-demo-menus',
 	'data-v-scroll': '',
 	'data-h-scroll': ''
@@ -84,6 +86,7 @@ export const DemoMenu = styled.div`
         text-decoration: underline;
     }
 `;
+// @ts-ignore
 export const DemoPlayground = styled.div.attrs({'data-w': 'd9-demo-playground'})`
     display: block;
     position: relative;
@@ -91,6 +94,7 @@ export const DemoPlayground = styled.div.attrs({'data-w': 'd9-demo-playground'})
     padding: 0 calc(${CssVars.SECTION_BODY_PADDING} * 2);
     min-height: 50vh;
 `;
+// @ts-ignore
 export const DemoSource = styled.div.attrs({'data-w': 'd9-demo-source'})`
     display: flex;
     position: relative;
@@ -101,6 +105,7 @@ export const DemoSource = styled.div.attrs({'data-w': 'd9-demo-source'})`
     border-top-width: 2px;
     overflow: hidden;
 `;
+// @ts-ignore
 export const DemoSourceHeader = styled.div.attrs({'data-w': 'd9-demo-source-header'})`
     display: flex;
     position: relative;
@@ -113,6 +118,7 @@ export const DemoSourceHeader = styled.div.attrs({'data-w': 'd9-demo-source-head
         margin-left: 8px;
     }
 `;
+// @ts-ignore
 export const DemoSourceBody = styled.div.attrs({'data-w': 'd9-demo-source-body'})`
     display: flex;
     position: relative;
@@ -120,6 +126,18 @@ export const DemoSourceBody = styled.div.attrs({'data-w': 'd9-demo-source-body'}
     row-gap: 16px;
     overflow: auto;
     padding: calc(${CssVars.SECTION_BODY_PADDING} * 2);
+
+    &[data-avoid-padding=true] {
+        padding: 0;
+
+        > div {
+            height: 100%;
+            min-height: 100%;
+            max-height: 100%;
+            border-radius: 0;
+            border: 0;
+        }
+    }
 
     > div[data-w=d9-section] > div[data-w=d9-section-body] {
         display: flex;
