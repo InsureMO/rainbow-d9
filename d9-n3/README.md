@@ -1262,6 +1262,36 @@ still refreshed using the definition of `options`. Therefore, if the `options` d
 there will be no changes. In addition, since refreshing the options may result in the originally selected value becoming invalid, `clearMe`
 can be used in combination to handle this situation.
 
+```markdown
+- Dropdown::Options::value
+	- options: @ext.codes.options
+	- refreshOptions:
+		- on: anotherValue
+```
+
+To enable `refreshOptions`, should define `@ext.codes.options` as a function. Here is an example:
+
+```ts
+// put this as external defs
+const ext = {
+	codes: {
+		options: async ({model}) => {
+			const options = [
+				{label: 'Option #1', value: '1', anotherValue: 1},
+				{label: 'Option #2', value: '2', anotherValue: 2},
+				{label: 'Option #3', value: '3', anotherValue: 1}
+			];
+			if (`${model.anotherValue ?? ''}`.trim().length === 0) {
+				// all options are avaiable when another value is empty
+				return options;
+			} else {
+				return options.filter(option => option.anotherValue == model.anotherValue);
+			}
+		}
+	}
+}
+```
+
 ### Search
 
 All dropdowns provide default option search functionality and offer two styles, which can be set using `setDropdownDefaults`.
