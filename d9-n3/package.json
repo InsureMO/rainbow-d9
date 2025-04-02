@@ -1,6 +1,6 @@
 {
 	"name": "@rainbow-d9/n3",
-	"version": "1.2.27",
+	"version": "1.2.28",
 	"description": "d9 markdown",
 	"main": "index.cjs.js",
 	"module": "index.js",
@@ -25,7 +25,7 @@
 	},
 	"author": "Rainbow Team",
 	"dependencies": {
-		"@rainbow-d9/n1": "1.2.27",
+		"@rainbow-d9/n1": "1.2.28",
 		"remark-frontmatter": "^5.0.0",
 		"remark-gfm": "^4.0.0",
 		"remark-parse": "^11.0.0"
@@ -35,7 +35,7 @@
 		"@babel/preset-env": "^7.20.2",
 		"@babel/preset-react": "^7.18.6",
 		"@babel/preset-typescript": "^7.18.6",
-		"@rainbow-d9/n2": "1.2.27",
+		"@rainbow-d9/n2": "1.2.28",
 		"@rollup/plugin-babel": "^6.0.4",
 		"@rollup/plugin-eslint": "^9.0.3",
 		"@types/node": "^20.5.3",
