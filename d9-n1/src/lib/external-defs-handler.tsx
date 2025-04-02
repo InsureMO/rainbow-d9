@@ -36,7 +36,7 @@ export const handleExternalDefs = (options: any, reb: RootEventBus, externalDefs
 		// do nothing
 		return options;
 	}
-	if (typeof options === 'function' && options.$indicators == null) {
+	if (typeof options === 'function' && !(options instanceof ExternalDefIndicator) && options.$indicators == null) {
 		return options;
 	}
 	if (options instanceof ExternalDefIndicator) {
