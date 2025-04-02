@@ -58,10 +58,7 @@ export abstract class AbstractMonitorBuild {
 	protected buildHandleDelegators(monitors: Array<Partial<MonitorOthers<NodeAttributeValue>>>): Array<[Function, Function]> {
 		return monitors.map(monitor => {
 			const {$handle, $default} = monitor;
-			return [
-				$handle instanceof ExternalDefIndicator ? (void 0) : $handle,
-				$default instanceof ExternalDefIndicator ? (void 0) : $default
-			];
+			return [$handle, $default];
 		});
 	}
 

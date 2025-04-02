@@ -32,8 +32,11 @@ export class ExternalDefCreator {
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const handleExternalDefs = (options: any, reb: RootEventBus, externalDefs: ExternalDefs): any => {
-	if (options == null || VUtils.isPrimitive(options) || typeof options === 'function' || isValidElement(options)) {
+	if (options == null || VUtils.isPrimitive(options) || isValidElement(options)) {
 		// do nothing
+		return options;
+	}
+	if (typeof options === 'function' && options.$indicators == null) {
 		return options;
 	}
 	if (options instanceof ExternalDefIndicator) {

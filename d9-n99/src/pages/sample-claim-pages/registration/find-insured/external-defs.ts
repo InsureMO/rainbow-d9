@@ -50,6 +50,12 @@ export const createExternalDefsCreator = (rootModelRef: MutableRefObject<RootMod
 				}
 			},
 			search: {
+				visible: {
+					handle: async ({root}: { root: RootModel }) => {
+						// noinspection PointlessBooleanExpressionJS
+						return root.control.advancedSearchEnabled === true;
+					}
+				},
 				// click the search button of advanced search section
 				click: async (options: ButtonClickOptions<BaseModel, PropValue>) => {
 					const root: RootModel = asT(options.root);

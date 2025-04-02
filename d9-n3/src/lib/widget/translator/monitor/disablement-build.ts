@@ -58,7 +58,7 @@ export class DisablementBuild extends AbstractMonitorBuild {
 
 		// eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
 		const createHandle = (delegators: Array<[Function, Function]>) => {
-			return async <R extends BaseModel, M extends PropValue, V extends PropValue, FV extends PropValue, TV extends PropValue>(options: NodeAttributeValueHandleOptions<R, M, V, FV, TV>): Promise<boolean> => {
+			const func = async <R extends BaseModel, M extends PropValue, V extends PropValue, FV extends PropValue, TV extends PropValue>(options: NodeAttributeValueHandleOptions<R, M, V, FV, TV>): Promise<boolean> => {
 				return await monitors.reduce(async (result, {$handle}, index) => {
 					const ret = await result;
 					// once a handler returns true, the result will be true
@@ -67,16 +67,18 @@ export class DisablementBuild extends AbstractMonitorBuild {
 					}
 					if ($handle instanceof ExternalDefIndicator) {
 						// it is replaced by the external def in runtime
-						return await delegators[index][0](options) ?? false;
+						return await func.$indicators[index][0](options) ?? false;
 					} else {
 						return await $handle(options) ?? false;
 					}
 				}, Promise.resolve(false));
 			};
+			func.$indicators = delegators;
+			return func;
 		};
 		// eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
 		const createDefaultHandle = (delegators: Array<[Function, Function]>) => {
-			return async <R extends BaseModel, M extends PropValue, V extends PropValue>(options: NodeAttributeValueInitializerOptions<R, M, V>): Promise<boolean> => {
+			const func = async <R extends BaseModel, M extends PropValue, V extends PropValue>(options: NodeAttributeValueInitializerOptions<R, M, V>): Promise<boolean> => {
 				return await monitors.reduce(async (result, {$default}, index) => {
 					try {
 						const ret = await result;
@@ -89,7 +91,7 @@ export class DisablementBuild extends AbstractMonitorBuild {
 						}
 						if ($default instanceof ExternalDefIndicator) {
 							// it is replaced by the external def in runtime
-							return await delegators[index][1](options) ?? false;
+							return await func.$indicators[index][1](options) ?? false;
 						} else {
 							return await $default(options) ?? false;
 						}
@@ -99,6 +101,8 @@ export class DisablementBuild extends AbstractMonitorBuild {
 					}
 				}, Promise.resolve(false));
 			};
+			func.$indicators = delegators;
+			return func;
 		};
 
 		const delegators = this.buildHandleDelegators(monitors);

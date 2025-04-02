@@ -45,10 +45,7 @@
 
 - visible:
 	- on: control.advancedSearchEnabled
-	- handle:
-	  ```ts
-	  return model.control.advancedSearchEnabled === true;
-	  ```
+	- handle: @ext.search.visible.handle
 - repaint:
 	- on: criteria
 

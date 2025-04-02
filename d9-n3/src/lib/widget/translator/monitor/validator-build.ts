@@ -284,7 +284,7 @@ export class ValidatorBuild extends AbstractMonitorBuild {
 
 		// eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
 		const createHandle = (delegators: Array<[Function, Function]>) => {
-			return async <R extends BaseModel, M extends PropValue, V extends PropValue, FV extends PropValue, TV extends PropValue>(options: NodeAttributeValueHandleOptions<R, M, V, FV, TV>): Promise<ValidationResult> => {
+			const func = async <R extends BaseModel, M extends PropValue, V extends PropValue, FV extends PropValue, TV extends PropValue>(options: NodeAttributeValueHandleOptions<R, M, V, FV, TV>): Promise<ValidationResult> => {
 				// call each handle, no matter what it watches
 				return await monitors.reduce(async (result, {$handle}, index) => {
 					const ret = await result;
@@ -295,7 +295,7 @@ export class ValidatorBuild extends AbstractMonitorBuild {
 					if ($handle != null) {
 						if ($handle instanceof ExternalDefIndicator) {
 							// it is replaced by the external def in runtime
-							return await delegators[index][0](options) ?? result;
+							return await func.$indicators[index][0](options) ?? result;
 						} else {
 							return await $handle(options) ?? result;
 						}
@@ -304,6 +304,8 @@ export class ValidatorBuild extends AbstractMonitorBuild {
 					}
 				}, Promise.resolve({valid: true} as ValidationResult));
 			};
+			func.$indicators = delegators;
+			return func;
 		};
 
 		attributes[MonitorNodeAttributes.VALID] = {

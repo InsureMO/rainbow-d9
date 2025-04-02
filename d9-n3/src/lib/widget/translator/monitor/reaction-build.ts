@@ -76,7 +76,7 @@ export class ReactionBuild extends AbstractMonitorBuild {
 
 		// eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
 		const createHandle = (delegators: Array<[Function, Function]>) => {
-			return async <R extends BaseModel, M extends PropValue, V extends PropValue, FV extends PropValue, TV extends PropValue>(options: NodeAttributeValueHandleOptions<R, M, V, FV, TV>): Promise<Undefinable<Array<Reaction> | Reaction>> => {
+			const func = async <R extends BaseModel, M extends PropValue, V extends PropValue, FV extends PropValue, TV extends PropValue>(options: NodeAttributeValueHandleOptions<R, M, V, FV, TV>): Promise<Undefinable<Array<Reaction> | Reaction>> => {
 				const {changedOn} = options;
 				const results = await Promise.all(monitors
 					.filter(({$watch}) => {
@@ -95,7 +95,7 @@ export class ReactionBuild extends AbstractMonitorBuild {
 						let ret: any;
 						if ($handle instanceof ExternalDefIndicator) {
 							// it is replaced by the external def in runtime
-							ret = await delegators[index][0](options);
+							ret = await func.$indicators[index][0](options);
 						} else {
 							ret = await $handle(options);
 						}
@@ -108,6 +108,8 @@ export class ReactionBuild extends AbstractMonitorBuild {
 					return results.flat(1);
 				}
 			};
+			func.$indicators = delegators;
+			return func;
 		};
 
 		attributes[MonitorNodeAttributes.REACTION] = {
