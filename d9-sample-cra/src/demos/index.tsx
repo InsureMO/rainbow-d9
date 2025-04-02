@@ -1,4 +1,4 @@
-import {UnwrappedTsEditor} from '@rainbow-d9/code-editor/src';
+import {UnwrappedTsEditor} from '@rainbow-d9/code-editor';
 import {DeviceDetective, useForceUpdate, VUtils} from '@rainbow-d9/n1';
 import {ButtonFill, ButtonInk, UnwrappedButton} from '@rainbow-d9/n2';
 import {Fragment, useState} from 'react';
