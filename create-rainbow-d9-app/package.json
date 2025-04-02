@@ -1,6 +1,6 @@
 {
 	"name": "create-rainbow-d9-app",
-	"version": "1.2.28",
+	"version": "1.2.29",
 	"description": "Create rainbow d9 application.",
 	"bin": {
 		"create-rainbow-d9-app": "./index.js"
