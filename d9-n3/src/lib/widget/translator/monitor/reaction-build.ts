@@ -1,5 +1,6 @@
 import {
 	BaseModel,
+	ExternalDefIndicator,
 	MonitorNodeAttributes,
 	MonitorOthers,
 	NodeAttributeValue,
@@ -72,10 +73,10 @@ export class ReactionBuild extends AbstractMonitorBuild {
 		monitors: Array<Partial<MonitorOthers<NodeAttributeValue>>>, watches: Array<string>,
 		attributes: AttributeMap): AttributeMap {
 		// combine all handlers to one
-		attributes[MonitorNodeAttributes.REACTION] = {
-			$watch: watches,
-			$handle: async <R extends BaseModel, M extends PropValue, V extends PropValue, FV extends PropValue, TV extends PropValue>
-			(options: NodeAttributeValueHandleOptions<R, M, V, FV, TV>): Promise<Undefinable<Array<Reaction> | Reaction>> => {
+
+		// eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
+		const createHandle = (delegators: Array<[Function, Function]>) => {
+			return async <R extends BaseModel, M extends PropValue, V extends PropValue, FV extends PropValue, TV extends PropValue>(options: NodeAttributeValueHandleOptions<R, M, V, FV, TV>): Promise<Undefinable<Array<Reaction> | Reaction>> => {
 				const {changedOn} = options;
 				const results = await Promise.all(monitors
 					.filter(({$watch}) => {
@@ -89,9 +90,15 @@ export class ReactionBuild extends AbstractMonitorBuild {
 						});
 						return should;
 					})
-					.map(async ({$handle}) => {
-						// noinspection UnnecessaryLocalVariableJS
-						const ret = await $handle(options);
+					.map(async ({$handle}, index) => {
+						// eslint-disable-next-line @typescript-eslint/no-explicit-any
+						let ret: any;
+						if ($handle instanceof ExternalDefIndicator) {
+							// it is replaced by the external def in runtime
+							ret = await delegators[index][0](options);
+						} else {
+							ret = await $handle(options);
+						}
 						return ret;
 					})
 					.filter(async result => VUtils.isNotBlank(await result)));
@@ -100,7 +107,12 @@ export class ReactionBuild extends AbstractMonitorBuild {
 				} else {
 					return results.flat(1);
 				}
-			}
+			};
+		};
+
+		attributes[MonitorNodeAttributes.REACTION] = {
+			$watch: watches,
+			$handle: createHandle(this.buildHandleDelegators(monitors))
 		};
 		return attributes;
 	}

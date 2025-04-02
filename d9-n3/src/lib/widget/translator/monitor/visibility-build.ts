@@ -1,5 +1,6 @@
 import {
 	BaseModel,
+	ExternalDefIndicator,
 	MonitorNodeAttributes,
 	MonitorOthers,
 	NodeAttributeValueHandleOptions,
@@ -53,36 +54,58 @@ export class VisibilityBuild extends AbstractMonitorBuild {
 	protected doCombine(
 		monitors: Array<Partial<MonitorOthers<boolean>>>, watches: Array<string>,
 		attributes: AttributeMap): AttributeMap {
-		attributes[MonitorNodeAttributes.VISIBLE] = {
-			$watch: watches,
-			$handle: async <R extends BaseModel, M extends PropValue, V extends PropValue, FV extends PropValue, TV extends PropValue>
-			(options: NodeAttributeValueHandleOptions<R, M, V, FV, TV>): Promise<boolean> => {
-				return await monitors.reduce(async (result, {$handle}) => {
+		// combine all handlers to one
+
+		// eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
+		const createHandle = (delegators: Array<[Function, Function]>) => {
+			return async <R extends BaseModel, M extends PropValue, V extends PropValue, FV extends PropValue, TV extends PropValue>(options: NodeAttributeValueHandleOptions<R, M, V, FV, TV>): Promise<boolean> => {
+				return await monitors.reduce(async (result, {$handle}, index) => {
 					const ret = await result;
 					// once a handler returns false, the result will be false
 					if (!ret) {
 						return ret;
 					}
-					return await $handle(options) ?? true;
+					if ($handle instanceof ExternalDefIndicator) {
+						// it is replaced by the external def in runtime
+						return await delegators[index][0](options) ?? true;
+					} else {
+						return await $handle(options) ?? true;
+					}
 				}, Promise.resolve(true));
-			},
-			$default: async <R extends BaseModel, M extends PropValue, V extends PropValue>
-			(options: NodeAttributeValueInitializerOptions<R, M, V>): Promise<boolean> => {
-				return await monitors.reduce(async (result, {$handle}) => {
+			};
+		};
+		// eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
+		const createDefaultHandle = (delegators: Array<[Function, Function]>) => {
+			return async <R extends BaseModel, M extends PropValue, V extends PropValue>(options: NodeAttributeValueInitializerOptions<R, M, V>): Promise<boolean> => {
+				return await monitors.reduce(async (result, {$default}, index) => {
 					try {
 						const ret = await result;
 						// once a handler returns false, the result will be false
 						if (!ret) {
 							return ret;
 						}
-						// eslint-disable-next-line @typescript-eslint/no-explicit-any
-						return await $handle(options as NodeAttributeValueHandleOptions<R, M, V, any, any>) ?? true;
+						if (typeof $default === 'boolean') {
+							return $default;
+						}
+						if ($default instanceof ExternalDefIndicator) {
+							// it is replaced by the external def in runtime
+							return await delegators[index][1](options) ?? false;
+						} else {
+							return await $default(options) ?? true;
+						}
 					} catch (e) {
 						N3Logger.error(e, 'VisibleMonitorDefaultValueCompute');
 						return true;
 					}
 				}, Promise.resolve(true));
-			}
+			};
+		};
+
+		const delegators = this.buildHandleDelegators(monitors);
+		attributes[MonitorNodeAttributes.VISIBLE] = {
+			$watch: watches,
+			$handle: createHandle(delegators),
+			$default: createDefaultHandle(delegators)
 		};
 		return attributes;
 	}

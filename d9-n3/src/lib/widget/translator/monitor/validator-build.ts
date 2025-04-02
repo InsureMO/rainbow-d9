@@ -1,5 +1,6 @@
 import {
 	BaseModel,
+	ExternalDefIndicator,
 	MonitorNodeAttributes,
 	MonitorOthers,
 	NodeAttributeValue,
@@ -279,26 +280,35 @@ export class ValidatorBuild extends AbstractMonitorBuild {
 	protected doCombine(
 		monitors: Array<Partial<MonitorOthers<NodeAttributeValue>>>, watches: Array<string>,
 		attributes: AttributeMap): AttributeMap {
-
 		// combine all handlers to one
-		attributes[MonitorNodeAttributes.VALID] = {
-			$watch: watches.length === 0 ? (void 0) : watches,
-			$handle: async <R extends BaseModel, M extends PropValue, V extends PropValue, FV extends PropValue, TV extends PropValue>
-			(options: NodeAttributeValueHandleOptions<R, M, V, FV, TV>): Promise<ValidationResult> => {
+
+		// eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
+		const createHandle = (delegators: Array<[Function, Function]>) => {
+			return async <R extends BaseModel, M extends PropValue, V extends PropValue, FV extends PropValue, TV extends PropValue>(options: NodeAttributeValueHandleOptions<R, M, V, FV, TV>): Promise<ValidationResult> => {
 				// call each handle, no matter what it watches
-				return await monitors.reduce(async (result, {$handle}) => {
+				return await monitors.reduce(async (result, {$handle}, index) => {
 					const ret = await result;
 					// once invalid detected, the result will be invalid
 					if (!ret.valid) {
 						return ret;
 					}
 					if ($handle != null) {
-						return await $handle(options) ?? result;
+						if ($handle instanceof ExternalDefIndicator) {
+							// it is replaced by the external def in runtime
+							return await delegators[index][0](options) ?? result;
+						} else {
+							return await $handle(options) ?? result;
+						}
 					} else {
 						return result;
 					}
 				}, Promise.resolve({valid: true} as ValidationResult));
-			}
+			};
+		};
+
+		attributes[MonitorNodeAttributes.VALID] = {
+			$watch: watches.length === 0 ? (void 0) : watches,
+			$handle: createHandle(this.buildHandleDelegators(monitors))
 		};
 		return attributes;
 	}

@@ -54,6 +54,17 @@ export abstract class AbstractMonitorBuild {
 		return false;
 	}
 
+	// eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
+	protected buildHandleDelegators(monitors: Array<Partial<MonitorOthers<NodeAttributeValue>>>): Array<[Function, Function]> {
+		return monitors.map(monitor => {
+			const {$handle, $default} = monitor;
+			return [
+				$handle instanceof ExternalDefIndicator ? (void 0) : $handle,
+				$default instanceof ExternalDefIndicator ? (void 0) : $default
+			];
+		});
+	}
+
 	protected abstract doCombine(
 		monitors: Array<Partial<MonitorOthers<NodeAttributeValue>>>, watches: Array<string>,
 		attributes: AttributeMap): AttributeMap;
