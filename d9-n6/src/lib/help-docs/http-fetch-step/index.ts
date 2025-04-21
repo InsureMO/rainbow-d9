@@ -8,17 +8,20 @@ import {markdown as stepHttpGenerateHeaders} from './generate-headers.md';
 import {markdown as getStep} from './get-step.md';
 import {markdown as httpStep} from './http-step.md';
 import {markdown as stepHttpMethod} from './method.md';
+import {markdown as stepHttpOmittedTransparentHeaderNames} from './omitted-transparent-header-names.md';
 import {markdown as postStep} from './post-step.md';
 import {markdown as stepHttpReadResponse} from './read-response.md';
 import {markdown as stepHttpResponseErrorHandles} from './response-error-handles.md';
 import {markdown as stepHttpSystem} from './system.md';
 import {markdown as stepHttpTimeout} from './timeout.md';
+import {markdown as stepHttpTransparentHeaderNames} from './transparent-header-names.md';
 
 export const docs = (() => {
 	const httpDocs = mergeStepDocs(httpStep, false);
 	return {
 		// variables
 		stepHttpSystem, stepHttpEndpoint, stepHttpDecorateUrl, stepHttpMethod, stepHttpTimeout,
+		stepHttpTransparentHeaderNames, stepHttpOmittedTransparentHeaderNames,
 		stepHttpGenerateHeaders, stepHttpBodyUsed, stepHttpGenerateBody,
 		stepHttpReadResponse, stepHttpResponseErrorHandles,
 		// steps

@@ -7,6 +7,8 @@ export interface HttpStepDefModel extends CommonStepDefModel {
 	decorateUrl?: string;
 	method?: string;
 	timeout?: number;
+	transparentHeaderNames?: string | Array<string>;
+	omittedTransparentHeaderNames?: string | Array<string>;
 	generateHeaders?: string;
 	bodyUsed?: boolean;
 	generateBody?: string;

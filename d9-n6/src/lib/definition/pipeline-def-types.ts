@@ -89,6 +89,8 @@ export interface HttpPipelineStepDef extends AllInPipelineStepDef {
 	decorateUrl?: string;
 	method?: string;
 	timeout?: number;
+	transparentHeaderNames?: string | Array<string>;
+	omittedTransparentHeaderNames?: string | Array<string>;
 	generateHeaders?: string;
 	bodyUsed?: boolean;
 	generateBody?: string;

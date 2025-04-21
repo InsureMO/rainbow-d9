@@ -37,6 +37,8 @@ const createHttpStepDefs = <F extends HttpPipelineStepDef, M extends HttpStepDef
 			model.temporary.decorateUrlAsIs = VUtils.isBlank(def.fromInput);
 			model.method = def.method;
 			model.timeout = def.timeout;
+			model.transparentHeaderNames = def.transparentHeaderNames;
+			model.omittedTransparentHeaderNames = def.omittedTransparentHeaderNames;
 			model.generateHeaders = def.generateHeaders;
 			model.temporary.generateHeadersAsIs = VUtils.isBlank(def.generateHeaders);
 			model.bodyUsed = def.bodyUsed;
@@ -79,6 +81,7 @@ ${indent}return await handle();
 		switchUse: ['replace', (model: M, originalUse: PipelineStepDef['use']): ConfigurableModel => {
 			CommonStepDefs.switchUse(model, [
 				'system', 'endpoint', 'decorateUrl', 'method', 'timeout',
+				'transparentHeaderNames', 'omittedTransparentHeaderNames',
 				'generateHeaders', 'bodyUsed', 'generateBody',
 				'readResponse', 'responseErrorHandles'
 			], originalUse);
@@ -105,6 +108,8 @@ ${indent}return await handle();
 				}
 				def.method = model.method;
 				def.timeout = VUtils.asUndefinedWhenBlank(model.timeout);
+				def.transparentHeaderNames = VUtils.asUndefinedWhenBlank(model.transparentHeaderNames);
+				def.omittedTransparentHeaderNames = VUtils.asUndefinedWhenBlank(model.omittedTransparentHeaderNames);
 				if (model.temporary?.generateHeadersAsIs) {
 					delete def.generateHeaders;
 				} else {
@@ -130,6 +135,7 @@ ${indent}return await handle();
 		survivalAfterConfirm: ['and', (_def: HttpPipelineStepDef, property: string) => {
 			return [
 				'system', 'endpoint', 'decorateUrl', 'method', 'timeout',
+				'transparentHeaderNames', 'omittedTransparentHeaderNames',
 				'generateHeaders', 'bodyUsed', 'generateBody',
 				'readResponse', 'responseErrorHandles'
 			].includes(property);

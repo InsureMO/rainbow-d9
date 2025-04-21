@@ -139,6 +139,10 @@ export const Labels = {
 	StepHttpDecorateUrl: <IntlLabel keys={['o23', 'step', 'http', 'decorate-url']} value="Decorate URL"/>,
 	StepHttpMethod: <IntlLabel keys={['o23', 'step', 'http', 'method']} value="HTTP Method"/>,
 	StepHttpTimeout: <IntlLabel keys={['o23', 'step', 'http', 'timeout']} value="Timeout (in Seconds)"/>,
+	StepHttpTransparentHeaderNames: <IntlLabel keys={['o23', 'step', 'http', 'transparent-header-names']}
+	                                           value="Transparent Header Names"/>,
+	StepHttpOmittedTransparentHeaderNames: <IntlLabel keys={['o23', 'step', 'http', 'omitted-transparent-header-names']}
+	                                                  value="Omitted Transparent Header Names"/>,
 	StepHttpGenerateHeaders: <IntlLabel keys={['o23', 'step', 'http', 'generate-headers']} value="Generate Headers"/>,
 	StepHttpBodyUsed: <IntlLabel keys={['o23', 'step', 'http', 'body-used']} value="Use Body"/>,
 	StepHttpGenerateBody: <IntlLabel keys={['o23', 'step', 'http', 'generate-body']} value="Generate Body"/>,
