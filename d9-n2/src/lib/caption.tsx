@@ -21,6 +21,7 @@ import {GlobalEventHandlers, ModelCarriedHandler, OmitHTMLProps2, OmitNodeDef, V
 import {df, locale, nf, nf0, nf1, nf2, nf3, nfWithLocale, nfXWithLocale, useDualRefs, wrapNf} from './utils';
 
 export interface CaptionValueToLabelFormats {
+	df: typeof df;
 	nf: (fractionDigits: number, grouping?: boolean) => Intl.NumberFormat;
 	nf0: (value?: number) => string;
 	nf1: (value?: number) => string;
