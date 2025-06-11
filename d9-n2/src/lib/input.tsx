@@ -191,18 +191,12 @@ export const InternalInput = forwardRef((props: InputProps, ref: ForwardedRef<HT
 	const maskOptions = hasMask ? (typeof mask === 'function' ? mask(InputMaskTypes) : {
 		mask, lazy: false
 	}) : (void 0);
-	const maskValueInitializedRef = useRef(false);
+	// const maskValueInitializedRef = useRef(false);
 	const {ref: inputRef} = useIMask<HTMLInputElement>(maskOptions, {
+		defaultUnmaskedValue: `${valueRef.current.value ?? ''}`,
 		onAccept: (_, mask) => {
-			if (maskValueInitializedRef.current) {
-				// initialized, sync value from mask
-				// noinspection JSIgnoredPromiseFromCall
-				onValueChanged(mask.unmaskedValue);
-			} else {
-				// first round, sync value to mask
-				mask.unmaskedValue = `${valueRef.current.value ?? ''}`;
-				maskValueInitializedRef.current = true;
-			}
+			// noinspection JSIgnoredPromiseFromCall
+			onValueChanged(mask.unmaskedValue);
 		}
 	});
 	useDualRefs(inputRef, ref);
