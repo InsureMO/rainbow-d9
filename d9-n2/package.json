@@ -24,10 +24,10 @@
 		"@rainbow-d9/n1": "1.2.29",
 		"color": "^4.2.3",
 		"dayjs": "^1.11.13",
-		"imask": "^7.5.0",
+		"imask": "7.5.0",
 		"react": "^18.3.1",
 		"react-dom": "^18.3.1",
-		"react-imask": "^7.5.0",
+		"react-imask": "7.5.0",
 		"styled-components": "^6.1.13"
 	},
 	"devDependencies": {
