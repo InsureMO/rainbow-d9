@@ -19,7 +19,7 @@ import {
 	MaskedRange,
 	MaskedRegExp
 } from 'imask';
-import React, {ChangeEvent, CompositionEvent, FocusEvent, ForwardedRef, forwardRef, useRef} from 'react';
+import React, {ChangeEvent, CompositionEvent, FocusEvent, ForwardedRef, forwardRef, useEffect, useRef} from 'react';
 import {useIMask} from 'react-imask';
 import styled from 'styled-components';
 import {CssVars, DOM_ID_WIDGET, DOM_KEY_WIDGET} from './constants';
@@ -164,6 +164,7 @@ export const InternalInput = forwardRef((props: InputProps, ref: ForwardedRef<HT
 	} = props;
 
 	const valueRef = useRef({value: MUtils.getValue($model, $pp)});
+	const needRefreshMaskRef = useRef(false);
 	const compositionRef = useRef<{ ing: boolean; text?: string }>({ing: false});
 	const globalHandlers = useGlobalHandlers();
 
@@ -185,19 +186,26 @@ export const InternalInput = forwardRef((props: InputProps, ref: ForwardedRef<HT
 				await $onValueChange(value, true, {global: globalHandlers});
 			}
 		}
-		// console.log(valueRef.current.value, MUtils.getValue($model, $pp));
 	};
 	const hasMask = VUtils.isNotBlank(mask);
 	const maskOptions = hasMask ? (typeof mask === 'function' ? mask(InputMaskTypes) : {
 		mask, lazy: false
 	}) : (void 0);
-	// const maskValueInitializedRef = useRef(false);
-	const {ref: inputRef} = useIMask<HTMLInputElement>(maskOptions, {
+	const {ref: inputRef, setUnmaskedValue} = useIMask<HTMLInputElement>(maskOptions, {
 		defaultUnmaskedValue: `${valueRef.current.value ?? ''}`,
 		onAccept: (_, mask) => {
 			// noinspection JSIgnoredPromiseFromCall
 			onValueChanged(mask.unmaskedValue);
 		}
+	});
+	// every time
+	useEffect(() => {
+		if (!hasMask || needRefreshMaskRef.current === false) {
+			return;
+		}
+
+		needRefreshMaskRef.current = false;
+		setUnmaskedValue(`${valueRef.current.value ?? ''}`);
 	});
 	useDualRefs(inputRef, ref);
 	useTip({ref: inputRef, ...buildTip({tip, root: $root, model: $model})});
@@ -222,6 +230,7 @@ export const InternalInput = forwardRef((props: InputProps, ref: ForwardedRef<HT
 		// do nothing
 	} else {
 		valueRef.current.value = valueFromModel;
+		needRefreshMaskRef.current = true;
 	}
 	const displayValue = hasMask
 		// value is no need for mask
