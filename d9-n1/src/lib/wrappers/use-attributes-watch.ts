@@ -15,6 +15,9 @@ import {buildWatches} from './utils';
 
 const shouldUpdateAttribute = (values: Partial<NodeAttributeValues>, attributeValues: NodeAttributeValues) => {
 	switch (true) {
+		case VUtils.isNotBlank(values[MonitorNodeAttributes.REACTION]):
+			// reaction needs to be proceeded
+			return true;
 		case (values[MonitorNodeAttributes.DISABLED] != null && values[MonitorNodeAttributes.DISABLED] != (attributeValues[MonitorNodeAttributes.DISABLED] ?? false)):
 			// disablement changed
 			return true;
@@ -38,9 +41,6 @@ const shouldUpdateAttribute = (values: Partial<NodeAttributeValues>, attributeVa
 			// valid flags are same, and failed reason in two rounds are same
 			return false;
 		}
-		case VUtils.isNotBlank(values[MonitorNodeAttributes.REACTION]):
-			// reaction needs to be proceeded
-			return true;
 	}
 	return false;
 };

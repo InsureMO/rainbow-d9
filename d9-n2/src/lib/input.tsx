@@ -230,7 +230,10 @@ export const InternalInput = forwardRef((props: InputProps, ref: ForwardedRef<HT
 		// do nothing
 	} else {
 		valueRef.current.value = valueFromModel;
-		needRefreshMaskRef.current = true;
+		// never trigger refresh mask is there is no mask defined
+		if (hasMask) {
+			needRefreshMaskRef.current = true;
+		}
 	}
 	const displayValue = hasMask
 		// value is no need for mask
