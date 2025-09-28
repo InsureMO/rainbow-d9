@@ -28,6 +28,18 @@ import {internationalize, useLanguage} from './intl-label';
 import {OmitHTMLProps2, OmitNodeDef} from './types';
 import {detectNumberFormat, locale, useDualRefs} from './utils';
 
+const DEFAULTS = {
+	AUTO_SELECT_ALL: true
+};
+
+export const InputConstants: { readonly DEFAULTS: typeof DEFAULTS } = {DEFAULTS};
+
+export const setInputDefaults = (defaults: {
+	autoSelectAll?: boolean;
+}) => {
+	DEFAULTS.AUTO_SELECT_ALL = defaults.autoSelectAll ?? DEFAULTS.AUTO_SELECT_ALL;
+};
+
 export const InputMaskTypes = {
 	number: MaskedNumber,
 	date: MaskedDate,
@@ -66,7 +78,10 @@ const AnInput = styled.input.attrs<{ autoSelect: boolean }>(
 			[DOM_KEY_WIDGET]: 'd9-input',
 			[DOM_ID_WIDGET]: id,
 			onFocus: (event: FocusEvent<HTMLInputElement>) => {
-				event.target.select();
+				if (DEFAULTS.AUTO_SELECT_ALL !== false) {
+					event.target.select();
+				}
+
 				if (onFocus != null) {
 					onFocus(event);
 				}

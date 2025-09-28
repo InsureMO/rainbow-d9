@@ -11,6 +11,7 @@ import React, {ChangeEvent, FocusEvent, ForwardedRef, forwardRef, useRef} from '
 import styled from 'styled-components';
 import {CssVars, DOM_ID_WIDGET, DOM_KEY_WIDGET} from './constants';
 import {buildTip, TipAttachableWidget, useGlobalHandlers, useTip} from './global';
+import {InputConstants} from './input';
 import {internationalize, useLanguage} from './intl-label';
 import {OmitHTMLProps2, OmitNodeDef} from './types';
 import {useDualRefs} from './utils';
@@ -40,7 +41,9 @@ const ATextarea = styled.textarea.attrs<{ autoSelect: boolean }>(
 			[DOM_KEY_WIDGET]: 'd9-textarea',
 			[DOM_ID_WIDGET]: id,
 			onFocus: (event: FocusEvent<HTMLTextAreaElement>) => {
-				event.target.select();
+				if (InputConstants.DEFAULTS.AUTO_SELECT_ALL !== false) {
+					event.target.select();
+				}
 				if (onFocus != null) {
 					onFocus(event);
 				}
