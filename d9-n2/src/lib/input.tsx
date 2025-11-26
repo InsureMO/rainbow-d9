@@ -206,7 +206,7 @@ export const InternalInput = forwardRef((props: InputProps, ref: ForwardedRef<HT
 	const maskOptions = hasMask ? (typeof mask === 'function' ? mask(InputMaskTypes) : {
 		mask, lazy: false
 	}) : (void 0);
-	const {ref: inputRef, setUnmaskedValue} = useIMask<HTMLInputElement>(maskOptions, {
+	const {ref: inputRef, setUnmaskedValue, setTypedValue} = useIMask<HTMLInputElement>(maskOptions, {
 		defaultUnmaskedValue: `${valueRef.current.value ?? ''}`,
 		onAccept: (_, mask) => {
 			// noinspection JSIgnoredPromiseFromCall
@@ -220,7 +220,16 @@ export const InternalInput = forwardRef((props: InputProps, ref: ForwardedRef<HT
 		}
 
 		needRefreshMaskRef.current = false;
-		setUnmaskedValue(`${valueRef.current.value ?? ''}`);
+		const value = `${valueRef.current.value ?? ''}`;
+		if (value.length === 0) {
+			// setUnmaskedValue is not working for empty value (aka clear input)
+			// setValue is not working too,
+			// have to use setTypedValue, and given value must be empty string,
+			// cannot be null, which will lead to exception
+			setTypedValue('');
+		} else {
+			setUnmaskedValue(value);
+		}
 	});
 	useDualRefs(inputRef, ref);
 	useTip({ref: inputRef, ...buildTip({tip, root: $root, model: $model})});
