@@ -319,7 +319,7 @@ export const getDropdownPosition = (container: HTMLDivElement) => {
 export const isPopupAtBottom = (top: number, height: number, askPopupHeight: () => number) => {
 	const popupHeight = askPopupHeight();
 	switch (true) {
-		case top + height + popupHeight + 2 < window.innerHeight:
+		case top + height + popupHeight + DropdownDefaults.DEFAULTS.GAP_TO_BOTTOM < window.innerHeight:
 			return true;
 		case top - popupHeight - 2 >= 0:
 			return false;
@@ -869,22 +869,25 @@ export const computeDropdownTreePopupHeight = (allOptions: TreeOptionItems<any>,
 interface DropdownDefaultsTypes {
 	DEFAULTS: {
 		FIX_FILTER: boolean;
+		GAP_TO_BOTTOM: number;
 		findPortalCarrier?: () => HTMLElement;
 	};
 }
 
 export const DropdownDefaults: DropdownDefaultsTypes = {
-	DEFAULTS: {FIX_FILTER: false}
+	DEFAULTS: {GAP_TO_BOTTOM: 2, FIX_FILTER: false}
 };
 export const DropdownUtils = {
 	setDropdownDefaults: (defaults: {
 		fixFilter?: boolean;
+		gapToBottom?: number;
 		/**
 		 * carrier must have styles of dropdown widgets
 		 */
 		findPortalCarrier?: () => HTMLElement;
 	}) => {
 		DropdownDefaults.DEFAULTS.FIX_FILTER = defaults.fixFilter ?? DropdownDefaults.DEFAULTS.FIX_FILTER;
+		DropdownDefaults.DEFAULTS.GAP_TO_BOTTOM = defaults.gapToBottom ?? DropdownDefaults.DEFAULTS.GAP_TO_BOTTOM;
 		DropdownDefaults.DEFAULTS.findPortalCarrier = defaults.findPortalCarrier;
 	}
 };
