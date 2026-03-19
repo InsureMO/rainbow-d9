@@ -73,6 +73,10 @@ const MultiDropdownTreeContainer = styled(DropdownContainer)`
     height: unset;
     min-height: ${CssVars.INPUT_HEIGHT};
     padding-right: calc(${CssVars.INPUT_HEIGHT} - ${CssVars.INPUT_INDENT} + 4px);
+
+    &[data-dual-sticks=true] {
+        padding-right: calc(${CssVars.INPUT_HEIGHT} * 7 / 4 - ${CssVars.INPUT_INDENT} + 4px);
+    }
 `;
 
 const MultiDropdownTreeLabel = styled(DropdownLabel)`
@@ -125,7 +129,17 @@ const MultiDropdownTreeLabel = styled(DropdownLabel)`
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const MultiDropdownTreeStick = styled(DropdownStick as any)`
     position: absolute;
-    right: ${CssVars.INPUT_INDENT};
+    right: calc(${CssVars.INPUT_INDENT});
+
+    &[data-fix=true] {
+        &[data-stick-index="1"] {
+            right: calc(${CssVars.INPUT_HEIGHT} * 3 / 4 + ${CssVars.INPUT_INDENT});
+        }
+
+        &[data-stick-index="2"] {
+            right: calc(${CssVars.INPUT_INDENT});
+        }
+    }
 `;
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -310,6 +324,7 @@ export const InternalMultiDropdownTree = forwardRef((props: MultiDropdownTreePro
 	                                   data-w="d9-multi-dropdown-tree"
 	                                   data-disabled={$disabled} data-visible={$visible}
 	                                   data-clearable={clearable}
+	                                   data-dual-sticks={selected && clearable && (DropdownDefaults.DEFAULTS.FIX_MULTI_DROPDOWN_TREE_STICK ?? DropdownDefaults.DEFAULTS.FIX_STICK)}
 	                                   onFocus={onFocused} onClick={onClicked} onKeyDown={onAnyInputEvent}
 	                                   id={PPUtils.asId(PPUtils.absolute($p2r, $pp), props.id)}
 	                                   ref={containerRef}>
@@ -322,7 +337,8 @@ export const InternalMultiDropdownTree = forwardRef((props: MultiDropdownTreePro
 		})}
 		<DropdownLabel data-please={true}>{toIntlLabel(please)}</DropdownLabel>
 		<MultiDropdownTreeStick valueAssigned={selected} clearable={clearable} clear={onClearClicked}
-		                        disabled={$disabled}/>
+		                        disabled={$disabled}
+		                        fix={DropdownDefaults.DEFAULTS.FIX_MULTI_DROPDOWN_TREE_STICK}/>
 		{isDropdownPopupActive(popupState.active)
 			? <DropdownPopup {...{...popupState, minHeight: popupHeight}}
 			                 shown={popupShown && popupState.active === DropdownPopupStateActive.ACTIVE}

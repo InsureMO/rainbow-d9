@@ -6,6 +6,7 @@ import {CssVars, DOM_KEY_WIDGET} from '../constants';
 import {DropdownOptionValue} from '../dropdown';
 import {
 	DropdownContainer,
+	DropdownDefaults,
 	DropdownLabel,
 	DropdownPopupStateActive,
 	DropdownStick,
@@ -209,7 +210,8 @@ export const Picker = forwardRef((props: CalendarProps, ref: ForwardedRef<HTMLDi
 		<CalendarValueHolder initValue={initValueForPopup}/>
 		<DropdownLabel data-please={!valueAssigned}>{label}</DropdownLabel>
 		<DropdownStick valueAssigned={valueAssigned} clearable={clearable} clear={onClearClicked}
-		               disabled={$disabled} icon={useCalendarIcon ? <DropdownStickCalendar/> : (void 0)}/>
+		               disabled={$disabled} icon={useCalendarIcon ? <DropdownStickCalendar/> : (void 0)}
+		               fix={DropdownDefaults.DEFAULTS.FIX_CALENDAR_STICK}/>
 		{isDropdownPopupActive(popupState.active)
 			? <CalendarPopup $root={$root} $model={$model} initValue={initValueForPopup}
 			                 popupRef={popupRef} popupState={popupState} popupShown={popupShown}

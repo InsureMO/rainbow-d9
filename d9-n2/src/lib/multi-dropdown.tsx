@@ -14,6 +14,7 @@ import styled from 'styled-components';
 import {CssVars, DOM_KEY_WIDGET} from './constants';
 import {
 	DropdownContainer,
+	DropdownDefaults,
 	DropdownLabel,
 	DropdownPopup,
 	DropdownPopupStateActive,
@@ -66,6 +67,10 @@ const MultiDropdownContainer = styled(DropdownContainer)`
     height: unset;
     min-height: ${CssVars.INPUT_HEIGHT};
     padding-right: calc(${CssVars.INPUT_HEIGHT} - ${CssVars.INPUT_INDENT} + 4px);
+
+    &[data-dual-sticks=true] {
+        padding-right: calc(${CssVars.INPUT_HEIGHT} * 7 / 4 - ${CssVars.INPUT_INDENT} + 4px);
+    }
 `;
 
 const MultiDropdownLabel = styled(DropdownLabel)`
@@ -118,7 +123,17 @@ const MultiDropdownLabel = styled(DropdownLabel)`
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const MultiDropdownStick = styled(DropdownStick as any)`
     position: absolute;
-    right: ${CssVars.INPUT_INDENT};
+    right: calc(${CssVars.INPUT_INDENT});
+
+    &[data-fix=true] {
+        &[data-stick-index="1"] {
+            right: calc(${CssVars.INPUT_HEIGHT} * 3 / 4 + ${CssVars.INPUT_INDENT});
+        }
+
+        &[data-stick-index="2"] {
+            right: calc(${CssVars.INPUT_INDENT});
+        }
+    }
 `;
 
 const MultiOption = styled.span.attrs<SDP>({[DOM_KEY_WIDGET]: 'd9-multi-dropdown-option'})`
@@ -273,7 +288,7 @@ export const MultiDropdown = forwardRef((props: MultiDropdownProps, ref: Forward
 	};
 
 	const values = currentValuesToArray();
-	const selected = values != null;
+	const selected = values != null && values.length !== 0;
 	const optionsAsMap = (askOptions() as MultiDropdownOptions)
 		.reduce((map, option) => {
 			map[`${option.value}`] = option;
@@ -287,6 +302,7 @@ export const MultiDropdown = forwardRef((props: MultiDropdownProps, ref: Forward
 	                               data-w="d9-multi-dropdown"
 	                               data-disabled={$disabled} data-visible={$visible}
 	                               data-clearable={clearable}
+	                               data-dual-sticks={selected && clearable && (DropdownDefaults.DEFAULTS.FIX_MULTI_DROPDOWN_STICK ?? DropdownDefaults.DEFAULTS.FIX_STICK)}
 	                               onFocus={onFocused} onClick={onClicked} onKeyDown={onAnyInputEvent}
 	                               id={PPUtils.asId(PPUtils.absolute($p2r, $pp), props.id)}
 	                               ref={containerRef}>
@@ -298,7 +314,8 @@ export const MultiDropdown = forwardRef((props: MultiDropdownProps, ref: Forward
 			</MultiDropdownLabel>;
 		})}
 		<DropdownLabel data-please={true}>{toIntlLabel(please)}</DropdownLabel>
-		<MultiDropdownStick valueAssigned={selected} clearable={clearable} clear={onClearClicked} disabled={$disabled}/>
+		<MultiDropdownStick valueAssigned={selected} clearable={clearable} clear={onClearClicked} disabled={$disabled}
+		                    fix={DropdownDefaults.DEFAULTS.FIX_MULTI_DROPDOWN_STICK}/>
 		{isDropdownPopupActive(popupState.active)
 			? <DropdownPopup {...{...popupState, minHeight: popupHeight}}
 			                 shown={popupShown && popupState.active === DropdownPopupStateActive.ACTIVE}

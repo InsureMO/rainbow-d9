@@ -177,6 +177,14 @@ export const DropdownStickContainer = styled.span.attrs<SDP>({[DOM_KEY_WIDGET]: 
         }
     }
 
+    &[data-fix=true] {
+        opacity: 0.8;
+
+        &[data-view-on-hover-only=true] {
+            opacity: 0;
+        }
+    }
+
     &[data-disabled=true] {
         display: none;
     }
@@ -199,23 +207,56 @@ export const DropdownStick = (props: {
 	clear: (event: MouseEvent<HTMLSpanElement>) => void;
 	disabled: boolean;
 	icon?: ReactNode;
+	fix?: boolean;
 }) => {
-	const {valueAssigned, clearable, clear, disabled, icon, ...rest} = props;
+	const {valueAssigned, clearable, clear, disabled, icon, fix = DropdownDefaults.DEFAULTS.FIX_STICK, ...rest} = props;
 
 	const onClearClicked = (event: MouseEvent<HTMLSpanElement>) => {
 		clear(event);
 	};
 
-	if (valueAssigned && clearable) {
-		// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-		// @ts-ignore
-		return <DropdownStickContainer data-clear={true} data-disabled={disabled} onClick={onClearClicked} {...rest}>
-			<DropdownStickClear/>
-		</DropdownStickContainer>;
+	if (valueAssigned) {
+		if (clearable) {
+			if (!fix) {
+				// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+				// @ts-ignore
+				return <DropdownStickContainer data-clear={true} data-disabled={disabled}
+				                               data-fix={false}
+				                               onClick={onClearClicked} {...rest}>
+					<DropdownStickClear/>
+				</DropdownStickContainer>;
+			} else {
+				// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+				// @ts-ignore
+				return <>
+					<DropdownStickContainer data-clear={true} data-disabled={disabled}
+					                        data-fix={true}
+					                        data-stick-index={1}
+					                        data-view-on-hover-only={!DropdownDefaults.DEFAULTS.FIX_CLEAR_STICK}
+					                        onClick={onClearClicked} {...rest}>
+						<DropdownStickClear/>
+					</DropdownStickContainer>
+					<DropdownStickContainer data-disabled={disabled}
+					                        data-fix={true}
+					                        data-stick-index={2}
+					                        {...rest}>
+						{icon == null ? <DropdownStickCaret/> : icon}
+					</DropdownStickContainer>
+				</>;
+			}
+		} else {
+			// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+			// @ts-ignore
+			return <DropdownStickContainer data-disabled={disabled}
+			                               data-fix={fix}
+			                               {...rest}>
+				{icon == null ? <DropdownStickCaret/> : icon}
+			</DropdownStickContainer>;
+		}
 	} else {
 		// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 		// @ts-ignore
-		return <DropdownStickContainer data-disabled={disabled} {...rest}>
+		return <DropdownStickContainer data-disabled={disabled} data-fix={fix} {...rest}>
 			{icon == null ? <DropdownStickCaret/> : icon}
 		</DropdownStickContainer>;
 	}
@@ -869,17 +910,36 @@ export const computeDropdownTreePopupHeight = (allOptions: TreeOptionItems<any>,
 interface DropdownDefaultsTypes {
 	DEFAULTS: {
 		FIX_FILTER: boolean;
+		FIX_STICK: boolean;
+		FIX_CLEAR_STICK: boolean;
+		FIX_DROPDOWN_STICK?: boolean;
+		FIX_MULTI_DROPDOWN_STICK?: boolean;
+		FIX_DROPDOWN_TREE_STICK?: boolean;
+		FIX_MULTI_DROPDOWN_TREE_STICK?: boolean;
+		FIX_CALENDAR_STICK?: boolean;
 		GAP_TO_BOTTOM: number;
 		findPortalCarrier?: () => HTMLElement;
 	};
 }
 
 export const DropdownDefaults: DropdownDefaultsTypes = {
-	DEFAULTS: {GAP_TO_BOTTOM: 2, FIX_FILTER: false}
+	DEFAULTS: {
+		GAP_TO_BOTTOM: 2,
+		FIX_FILTER: false,
+		FIX_STICK: false,
+		FIX_CLEAR_STICK: false
+	}
 };
 export const DropdownUtils = {
 	setDropdownDefaults: (defaults: {
 		fixFilter?: boolean;
+		fixStick?: boolean;
+		fixClearStick?: boolean;
+		fixDropdownStick?: boolean;
+		fixMultiDropdownStick?: boolean;
+		fixDropdownTreeStick?: boolean;
+		fixMultiDropdownTreeStick?: boolean;
+		fixCalendarStick?: boolean;
 		gapToBottom?: number;
 		/**
 		 * carrier must have styles of dropdown widgets
@@ -887,6 +947,13 @@ export const DropdownUtils = {
 		findPortalCarrier?: () => HTMLElement;
 	}) => {
 		DropdownDefaults.DEFAULTS.FIX_FILTER = defaults.fixFilter ?? DropdownDefaults.DEFAULTS.FIX_FILTER;
+		DropdownDefaults.DEFAULTS.FIX_STICK = defaults.fixStick ?? DropdownDefaults.DEFAULTS.FIX_STICK;
+		DropdownDefaults.DEFAULTS.FIX_CLEAR_STICK = defaults.fixClearStick ?? DropdownDefaults.DEFAULTS.FIX_CLEAR_STICK;
+		DropdownDefaults.DEFAULTS.FIX_DROPDOWN_STICK = defaults.fixDropdownStick ?? DropdownDefaults.DEFAULTS.FIX_DROPDOWN_STICK;
+		DropdownDefaults.DEFAULTS.FIX_MULTI_DROPDOWN_STICK = defaults.fixMultiDropdownStick ?? DropdownDefaults.DEFAULTS.FIX_MULTI_DROPDOWN_STICK;
+		DropdownDefaults.DEFAULTS.FIX_DROPDOWN_TREE_STICK = defaults.fixDropdownTreeStick ?? DropdownDefaults.DEFAULTS.FIX_DROPDOWN_TREE_STICK;
+		DropdownDefaults.DEFAULTS.FIX_MULTI_DROPDOWN_TREE_STICK = defaults.fixMultiDropdownTreeStick ?? DropdownDefaults.DEFAULTS.FIX_MULTI_DROPDOWN_TREE_STICK;
+		DropdownDefaults.DEFAULTS.FIX_CALENDAR_STICK = defaults.fixCalendarStick ?? DropdownDefaults.DEFAULTS.FIX_CALENDAR_STICK;
 		DropdownDefaults.DEFAULTS.GAP_TO_BOTTOM = defaults.gapToBottom ?? DropdownDefaults.DEFAULTS.GAP_TO_BOTTOM;
 		DropdownDefaults.DEFAULTS.findPortalCarrier = defaults.findPortalCarrier;
 	}

@@ -220,7 +220,8 @@ export const InternalDropdownTree = forwardRef((props: DropdownTreeProps, ref: F
 	                          id={PPUtils.asId(PPUtils.absolute($p2r, $pp), props.id)}
 	                          ref={containerRef}>
 		<DropdownLabel data-please={!selected}>{toIntlLabel(label)}</DropdownLabel>
-		<DropdownStick valueAssigned={selected} clearable={clearable} clear={onClearClicked} disabled={$disabled}/>
+		<DropdownStick valueAssigned={selected} clearable={clearable} clear={onClearClicked} disabled={$disabled}
+		               fix={DropdownDefaults.DEFAULTS.FIX_DROPDOWN_TREE_STICK}/>
 		{isDropdownPopupActive(popupState.active)
 			? <DropdownPopup {...{...popupState, minHeight: popupHeight}}
 			                 shown={popupShown && popupState.active === DropdownPopupStateActive.ACTIVE}

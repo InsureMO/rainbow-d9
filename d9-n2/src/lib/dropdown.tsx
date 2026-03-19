@@ -12,6 +12,7 @@ import styled from 'styled-components';
 import {CssVars, DOM_KEY_WIDGET} from './constants';
 import {
 	DropdownContainer,
+	DropdownDefaults,
 	DropdownLabel,
 	DropdownPopup,
 	DropdownPopupStateActive,
@@ -156,7 +157,8 @@ export const Dropdown = forwardRef((props: DropdownProps, ref: ForwardedRef<HTML
 	                          id={PPUtils.asId(PPUtils.absolute($p2r, $pp), props.id)}
 	                          ref={containerRef}>
 		<DropdownLabel data-please={!selected}>{toIntlLabel(label)}</DropdownLabel>
-		<DropdownStick valueAssigned={selected} clearable={clearable} clear={onClearClicked} disabled={$disabled}/>
+		<DropdownStick valueAssigned={selected} clearable={clearable} clear={onClearClicked} disabled={$disabled}
+		               fix={DropdownDefaults.DEFAULTS.FIX_DROPDOWN_STICK}/>
 		{isDropdownPopupActive(popupState.active)
 			? <DropdownPopup {...{...popupState, minHeight: popupHeight}}
 			                 shown={popupShown && popupState.active === DropdownPopupStateActive.ACTIVE}
