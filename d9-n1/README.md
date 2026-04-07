@@ -14,8 +14,21 @@
 
 # d9-n1
 
-It is the No.1 project of group `d9`.  
-This project is higher-order widgets for ui configuration, which describe the interfaces, behaviours of underlay widgets.
+**Core framework for the rainbow-d9 low-code UI library**
+
+It is the foundational No.1 project of group `d9`, providing the core runtime for building configuration-driven user interfaces. This
+project defines the standard interfaces, widget lifecycle, event system, and rendering behaviors that all underlying d9 widgets follow.
+
+## ✨ Key Features
+
+- 🎨 **Configuration-Driven Rendering**: Render complete UI pages from pure JSON configuration
+- 🧩 **Standardized Widget System**: Three core widget types (Basic/Container/Array) with consistent APIs
+- ⚡ **Performance Optimized**: Event-driven architecture minimizes unnecessary re-renders
+- 📱 **Responsive Design**: Built-in mobile/desktop adaptive rendering support
+- 🚌 **Decoupled Communication**: Hierarchical event bus system for widget-to-widget communication
+- 🔌 **Extensible**: Simple widget registration system, no inheritance required
+- 🛠️ **Rich Utilities**: Built-in helpers for model manipulation, property paths, validation, and more
+- 🔒 **Type-Safe**: Full TypeScript support with comprehensive type definitions
 
 # Idea
 
@@ -25,10 +38,71 @@ This project is higher-order widgets for ui configuration, which describe the in
 
 ```bash
 yarn add @rainbow-d9/n1
+# or
+npm install @rainbow-d9/n1
 ```
 
 > If you develop based on the `d9` widget library or the `d9` Markdown configuration method, you can skip the above steps as this library
 > will be installed along with the relevant libraries when you install them.
+
+# 🚀 Quick Start
+
+1. **Import required dependencies**
+
+```typescript jsx
+import {StandaloneRoot, NodeDef, registerWidget} from '@rainbow-d9/n1';
+import React, {useState, useEffect} from 'react';
+```
+
+2. **Register your widgets** (or use pre-built widgets from `@rainbow-d9/n2`)
+
+```typescript jsx
+// Example: Register a simple input widget
+const InputWidget = (props: any) => {
+	const {$model, $pp, onChange} = props;
+	return <input
+		value={$model[$pp]}
+		onChange={(e) => onChange(e.target.value)}
+	/>;
+};
+
+registerWidget({
+	key: 'Input',
+	JSX: InputWidget,
+	container: false,
+	array: false
+});
+```
+
+3. **Define your page configuration**
+
+```typescript
+const pageDef: NodeDef = {
+	"$wt": "Page", // Your container widget type
+	"$nodes": [
+		{
+			"$wt": "Input",
+			"label": "Username",
+			"$pp": "username"
+		},
+		{
+			"$wt": "Input",
+			"label": "Email",
+			"$pp": "email"
+		}
+	]
+};
+```
+
+4. **Render the page**
+
+```typescript jsx
+const App = () => {
+	const [data, setData] = useState({username: '', email: ''});
+
+	return <StandaloneRoot $root={data} {...pageDef} />;
+};
+```
 
 # Development Guide
 
@@ -532,3 +606,38 @@ N1Logger.enableLevel('debug');
 // disable a specific level, relevant and less important levels will be disabled.
 N1Logger.enableLevel('info');
 ```
+
+# ❓ Troubleshooting
+
+## Common Issues
+
+### Widget not rendering
+
+- Check if the widget type is correctly registered with `registerWidget()`
+- Verify the `$wt` property in your configuration matches the registered widget key
+- Check browser console for registration warnings
+- Ensure the widget's `container` and `array` flags are set correctly during registration
+
+### Event listeners not triggering
+
+- Verify the property paths in `$watch` are correct (absolute paths start with `/`)
+- Ensure the event bus you're subscribing to is in the correct scope (root/wrapper/container/array element)
+- Check if the component is properly wrapped in the corresponding EventBusProvider
+
+### Data not updating
+
+- Make sure you're using the provided `useSetValue` or `useValueChanged` hooks to modify model data
+- Verify the property path (`$pp`) is correctly pointing to the data field
+- Check if there are any validation errors preventing value updates
+
+### Performance issues
+
+- Avoid using complex calculations in `$handle` functions - move heavy logic to web workers or precompute
+- Use specific property paths in `$watch` instead of watching entire objects
+- Enable debug logging to identify frequent re-renders or event broadcasts
+
+## Getting Help
+
+- Check the [main rainbow-d9 repository](https://github.com/InsureMO/rainbow-d9) for more documentation and examples
+- Browse existing issues to see if your problem has already been reported
+- Create a new issue with a minimal reproduction case for bugs or feature requests
