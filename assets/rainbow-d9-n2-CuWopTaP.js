@@ -1,9 +1,9 @@
 var __defProp = Object.defineProperty;
 var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
 var __publicField = (obj, key, value) => __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
-import { a as color, M as MaskedNumber, e as MaskedDate, g as MaskedFunction, j as MaskedPattern, k as MaskedRange, p as MaskedRegExp, q as MaskedDynamic } from "./vendor-Dao8RdOh.js";
-import { R as React, r as reactExports, d as dt, m as mt, u as useIMask, a as reactDomExports, Y as Ye } from "./react-base-Dgl4joh_.js";
-import { c as createLogger, V as VUtils, P as PPUtils, r as registerWidget, a as useThrottler, u as useRootEventBus, M as MUtils, N as NUtils, d as Wrapper, e as useForceUpdate, f as MBUtils, b as useWrapperEventBus, W as WrapperEventTypes, g as useCreateEventBus, h as PROPERTY_PATH_ME, i as useDefaultAttributeValues, j as useAttributesWatch, R as RootEventTypes } from "./rainbow-d9-n1-DhU-cPBx.js";
+import { a as color, M as MaskedNumber, e as MaskedDate, g as MaskedFunction, j as MaskedPattern, k as MaskedRange, p as MaskedRegExp, q as MaskedDynamic } from "./vendor-BrY3NbHx.js";
+import { R as React, r as reactExports, d as dt, m as mt, u as useIMask, a as reactDomExports, Y as Ye } from "./react-base-bAX-d0-s.js";
+import { c as createLogger, V as VUtils, P as PPUtils, r as registerWidget, a as useThrottler, u as useRootEventBus, M as MUtils, N as NUtils, d as Wrapper, e as useForceUpdate, f as MBUtils, b as useWrapperEventBus, W as WrapperEventTypes, g as useCreateEventBus, h as PROPERTY_PATH_ME, i as useDefaultAttributeValues, j as useAttributesWatch, R as RootEventTypes } from "./rainbow-d9-n1-DUcPslYi.js";
 import { d as dayjs } from "./dayjs-C5jHoS1j.js";
 const DOM_KEY_WIDGET = "data-w";
 const DOM_ID_WIDGET = "data-wid";
@@ -2802,12 +2802,13 @@ const usePlaceholder = (placeholder) => {
   }
 };
 const InternalInput = reactExports.forwardRef((props, ref) => {
-  const { autoSelect = true, valueToNumber = false, mask, onCompositionStart: compositionStart, onCompositionEnd: compositionEnd, tip, $pp, $wrapped: { $onValueChange, $root, $model, $p2r, $avs: { $disabled, $visible } }, ...rest } = props;
+  const { autoSelect = true, valueToNumber = false, onBeforeChangePersist, mask, onCompositionStart: compositionStart, onCompositionEnd: compositionEnd, tip, $pp, $wrapped: { $onValueChange, $root, $model, $p2r, $avs: { $disabled, $visible } }, ...rest } = props;
   const valueRef = reactExports.useRef({ value: MUtils.getValue($model, $pp) });
   const needRefreshMaskRef = reactExports.useRef(false);
   const compositionRef = reactExports.useRef({ ing: false });
   const globalHandlers = useGlobalHandlers();
   const onValueChanged = async (value) => {
+    value = onBeforeChangePersist == null ? value : onBeforeChangePersist(value);
     if (`${valueRef.current.value ?? ""}` !== `${value ?? ""}`) {
       valueRef.current.value = value;
       if (valueToNumber && !value.includes(" ")) {

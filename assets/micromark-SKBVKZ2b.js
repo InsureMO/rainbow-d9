@@ -1,4 +1,4 @@
-import { d as decodeNamedCharacterReference, f as formatter } from "./vendor-Dao8RdOh.js";
+import { d as decodeNamedCharacterReference, f as formatter } from "./vendor-BrY3NbHx.js";
 function splice(list2, start, remove, items) {
   const end = list2.length;
   let chunkStart = 0;
