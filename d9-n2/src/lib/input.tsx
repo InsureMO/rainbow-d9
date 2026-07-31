@@ -59,6 +59,7 @@ export type InputDef =
 	& {
 	autoSelect?: boolean;
 	valueToNumber?: boolean;
+	onBeforeChangePersist?: (value?: string) => string | null | undefined;
 	mask?: string | ((types: typeof InputMaskTypes) => FactoryOpts);
 };
 /** widget definition, with html attributes */
@@ -171,7 +172,7 @@ const usePlaceholder = (placeholder?: string) => {
 
 export const InternalInput = forwardRef((props: InputProps, ref: ForwardedRef<HTMLInputElement>) => {
 	const {
-		autoSelect = true, valueToNumber = false, mask,
+		autoSelect = true, valueToNumber = false, onBeforeChangePersist, mask,
 		onCompositionStart: compositionStart, onCompositionEnd: compositionEnd,
 		tip,
 		$pp, $wrapped: {$onValueChange, $root, $model, $p2r, $avs: {$disabled, $visible}},
@@ -184,6 +185,7 @@ export const InternalInput = forwardRef((props: InputProps, ref: ForwardedRef<HT
 	const globalHandlers = useGlobalHandlers();
 
 	const onValueChanged = async (value?: string) => {
+		value = onBeforeChangePersist == null ? value : onBeforeChangePersist(value);
 		if (`${valueRef.current.value ?? ''}` !== `${value ?? ''}`) {
 			// fresh to ref
 			valueRef.current.value = value;
