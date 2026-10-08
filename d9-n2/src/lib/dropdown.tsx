@@ -50,6 +50,7 @@ export type DropdownDef =
 	& OptionItemsDef<DropdownOptionValue>
 	& {
 	please?: ReactNode;
+	selectedLabel?: (option: OptionItem<DropdownOptionValue>) => ReactNode;
 	clearable?: boolean;
 	filterable?: boolean;
 	/** external handler for filter change */
@@ -88,7 +89,7 @@ export const Dropdown = forwardRef((props: DropdownProps, ref: ForwardedRef<HTML
 		// eslint-disable-next-line @typescript-eslint/no-unused-vars
 		options, optionSort, noAvailable, noMatched,
 		$pp, $wrapped: {$onValueChange, $root, $model, $p2r, $avs: {$disabled, $visible}},
-		please = '', clearable = true, filterChanged,
+		please = '', selectedLabel, clearable = true, filterChanged,
 		tip,
 		...rest
 	} = props;
@@ -141,10 +142,26 @@ export const Dropdown = forwardRef((props: DropdownProps, ref: ForwardedRef<HTML
 
 	const value = MUtils.getValue($model, $pp) as DropdownOptionValue;
 	const selected = value != null;
-	const label = (value == null
-			? please
-			: ((askOptions() as DropdownOptions).find(option => option.value == value)?.label ?? please))
-		|| '';
+	let label: ReactNode;
+	if (value == null) {
+		label = please;
+	} else {
+		const selectedOption = (askOptions() as DropdownOptions).find(option => option.value == value);
+		if (selectedOption == null) {
+			label = please;
+		} else {
+			if (selectedLabel != null) {
+				label = selectedLabel(selectedOption);
+			} else {
+				label = selectedOption.label;
+			}
+		}
+	}
+	label = label ?? '';
+	// const label = (value == null
+	// 		? please
+	// 		: ((askOptions() as DropdownOptions).find(option => option.value == value)?.label ?? please))
+	// 	|| '';
 	const deviceTags = MBUtils.pickDeviceTags(props);
 
 	return <DropdownContainer active={popupState.active} atBottom={popupState.atBottom}

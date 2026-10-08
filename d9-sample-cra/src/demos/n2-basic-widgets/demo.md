@@ -69,6 +69,7 @@
 - Dropdown::::dropdown2
 	- label: Dropdown #2
 	- options: @ext.dropdown2
+	- selectedLabel: @ext.dropdown2SelectedLabel
 	- data-tip-body:
 	  ```javascript
 	  // console.log(options.model);

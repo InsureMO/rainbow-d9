@@ -6,6 +6,7 @@ import {
 	GlobalEventHandlers,
 	GlobalRoot,
 	ModelCarrier,
+	OptionItem,
 	OptionItems
 } from '@rainbow-d9/n2';
 import {KeyboardEvent} from 'react';
@@ -136,6 +137,9 @@ export const N2BasicWidgets = () => {
 				{value: '9', label: 'Option #9'},
 				{value: 'X', label: 'Option #X'}
 			];
+		},
+		dropdown2SelectedLabel: (option: OptionItem<string>) => {
+			return `${option.value}. ${option.label}`;
 		},
 		dropdown3: async (): Promise<DropdownOptions> => dropdown3Options,
 		dropdown3FilterChanged: async (filter: string) => {
