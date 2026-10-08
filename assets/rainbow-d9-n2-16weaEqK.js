@@ -1,9 +1,9 @@
 var __defProp = Object.defineProperty;
 var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
 var __publicField = (obj, key, value) => __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
-import { a as color, M as MaskedNumber, e as MaskedDate, g as MaskedFunction, j as MaskedPattern, k as MaskedRange, p as MaskedRegExp, q as MaskedDynamic } from "./vendor-BrY3NbHx.js";
-import { R as React, r as reactExports, d as dt, m as mt, u as useIMask, a as reactDomExports, Y as Ye } from "./react-base-bAX-d0-s.js";
-import { c as createLogger, V as VUtils, P as PPUtils, r as registerWidget, a as useThrottler, u as useRootEventBus, M as MUtils, N as NUtils, d as Wrapper, e as useForceUpdate, f as MBUtils, b as useWrapperEventBus, W as WrapperEventTypes, g as useCreateEventBus, h as PROPERTY_PATH_ME, i as useDefaultAttributeValues, j as useAttributesWatch, R as RootEventTypes } from "./rainbow-d9-n1-DUcPslYi.js";
+import { a as color, M as MaskedNumber, e as MaskedDate, g as MaskedFunction, j as MaskedPattern, k as MaskedRange, p as MaskedRegExp, q as MaskedDynamic } from "./vendor-D1PJGmWc.js";
+import { R as React, r as reactExports, d as dt, m as mt, u as useIMask, a as reactDomExports, Y as Ye } from "./react-base-DBk5zidj.js";
+import { c as createLogger, V as VUtils, P as PPUtils, r as registerWidget, a as useThrottler, u as useRootEventBus, M as MUtils, N as NUtils, d as Wrapper, e as useForceUpdate, f as MBUtils, b as useWrapperEventBus, W as WrapperEventTypes, g as useCreateEventBus, h as PROPERTY_PATH_ME, i as useDefaultAttributeValues, j as useAttributesWatch, R as RootEventTypes } from "./rainbow-d9-n1-BxRq5Jvs.js";
 import { d as dayjs } from "./dayjs-C5jHoS1j.js";
 const DOM_KEY_WIDGET = "data-w";
 const DOM_ID_WIDGET = "data-wid";
@@ -5167,8 +5167,7 @@ const Option$2 = dt.span.attrs({ [DOM_KEY_WIDGET]: "d9-dropdown-option" })`
     }
 `;
 const Dropdown = reactExports.forwardRef((props, ref) => {
-  var _a;
-  const { options, optionSort, noAvailable, noMatched, $pp, $wrapped: { $onValueChange, $root, $model, $p2r, $avs: { $disabled, $visible } }, please = "", clearable = true, filterChanged, tip, ...rest } = props;
+  const { options, optionSort, noAvailable, noMatched, $pp, $wrapped: { $onValueChange, $root, $model, $p2r, $avs: { $disabled, $visible } }, please = "", selectedLabel, clearable = true, filterChanged, tip, ...rest } = props;
   const globalHandlers = useGlobalHandlers();
   const { filterChanged: externalFilterChanged, externalFilteringNow } = useExternalFilteringDropdown(filterChanged);
   const { askOptions, displayOptions, filterInputRef, filter, onFilterChanged, active: filterActive, containerRef, popupState, popupHeight, popupRef, popupShown, setPopupShown, afterPopupStateChanged, onClicked, onFocused, onKeyUp, onAnyInputEvent, onCompositionStart, onCompositionEnd } = useFilterableDropdownOptions({ ...props, filterChanged: externalFilterChanged });
@@ -5187,8 +5186,8 @@ const Dropdown = reactExports.forwardRef((props, ref) => {
       afterPopupStateChanged.afterPopupHide();
     }
     setTimeout(() => {
-      var _a2;
-      return (_a2 = containerRef.current) == null ? void 0 : _a2.focus();
+      var _a;
+      return (_a = containerRef.current) == null ? void 0 : _a.focus();
     }, 30);
   };
   const onClearClicked = async (event) => {
@@ -5209,7 +5208,22 @@ const Dropdown = reactExports.forwardRef((props, ref) => {
   };
   const value = MUtils.getValue($model, $pp);
   const selected = value != null;
-  const label = (value == null ? please : ((_a = askOptions().find((option) => option.value == value)) == null ? void 0 : _a.label) ?? please) || "";
+  let label;
+  if (value == null) {
+    label = please;
+  } else {
+    const selectedOption = askOptions().find((option) => option.value == value);
+    if (selectedOption == null) {
+      label = please;
+    } else {
+      if (selectedLabel != null) {
+        label = selectedLabel(selectedOption);
+      } else {
+        label = selectedOption.label;
+      }
+    }
+  }
+  label = label ?? "";
   const deviceTags = MBUtils.pickDeviceTags(props);
   return React.createElement(
     DropdownContainer,
